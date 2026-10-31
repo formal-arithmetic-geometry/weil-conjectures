@@ -6,7 +6,12 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRestrictionOfHomEq
-public import WeilConjectures.TraceFormula.SupportedRestrictionRational
+public import WeilConjectures.TraceFormula.SupportedRestrictionE
+public import WeilConjectures.PoincareDuality.Biduality.EtaleReductionDualizing
+public import WeilConjectures.AlgebraicGeometry.OverPullbackFiniteType
+public import WeilConjectures.NumberTheory.Padics.IntegersNoetherian
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Defs
+public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.FunctorCategory
 
 /-!
 

@@ -20,13 +20,18 @@ homomorphism of Galois extensions over `l` such that `L₁` is relatively closed
 subextensions of `Ωᵢ/Lᵢ` are invertible. For `C` such that `Lεᵢ^*` of `C` (resp. of `Lf^* C`) is
 bounded below of étale origin, if the change of Galois layers `α_{τ'}` is invertible, so is the
 change of trait `α_τ` (SGA 4½, [Th. finitude], proof of 3.7, 3.8)
-(`NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_galoisLayerMap_of_plusEtaleOrigin`).
+(`NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_galoisLayerMap_of_plusEtaleOrigin_generic`).
 
 This combines `NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_galoisLayerMap` with the
 projectors onto the Galois invariants
 (`NearbyCyclesModel.exists_retraction_pullbackExchange_galoisLayerHom_of_plusEtaleOrigin_projector`)
 for the family `σ ↦ (σ|_{Ω₁}, σ)` of `Aut(Ω₂/L₂)`, whose restrictions to every finite Galois
 subextension of `Ω₁/L₁` are surjective (`AlgEquiv.exists_restrictNormalHomAlong_eq`).
+
+Compared with
+`NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_galoisLayerMap_of_plusEtaleOrigin`
+(`WeilConjectures.SixFunctors.NearbyCycles.GaloisTraitChangeTorsion`), the étale-origin hypotheses
+are only asked on the generic fibres, which is the form available in the slice step.
 -/
 
 @[expose] public section
@@ -56,7 +61,7 @@ Galois subextensions of `Ωᵢ/Lᵢ` are invertible. Let `τ : N₂ ⟶ N₁` be
 `Spec l`, `ω : Ω₁ ⟶ Ω₂` a homomorphism of Galois extensions over `l` with `L₁` relatively closed in
 `L₂` inside `Ω₂`, and `C` such that `Lε₁^* C` and `Lε₂^* Lf^* C` are bounded below of étale origin.
 If the change of Galois layers `α_{τ'}` is invertible, so is the change of trait `α_τ`. -/
-theorem Hom.isIso_pullbackExchange_app_of_galoisLayerMap_of_plusEtaleOrigin
+theorem Hom.isIso_pullbackExchange_app_of_galoisLayerMap_of_plusEtaleOrigin_generic
     (T₀ : Type) [TopologicalSpace T₀] [CommRing T₀] [IsTopologicalRing T₀] [DiscreteTopology T₀]
     [Finite T₀] [IsGalois L₁ Ω₁] [IsGalois L₂ Ω₂] (τ : N₂.Hom N₁ f f')
     (hτ : τ.generic ≫ h₁ = h₂ ≫ Spec.map (CommRingCat.ofHom l))

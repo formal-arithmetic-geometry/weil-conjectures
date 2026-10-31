@@ -90,7 +90,6 @@ def RingedToposMorphism.ringData
   ring_add := f.ring_add
   ring_mul := f.ring_mul
 
-
 namespace RingedToposMorphism.RingData
 
 variable {C D : Type u} [SmallCategory C] [SmallCategory D]
@@ -243,3 +242,34 @@ structure Modules (d : RingedToposMorphism.RingData A B) where
 
 end RingedToposMorphism.RingData
 end CategoryTheory
+
+namespace CategoryTheory.RingedToposMorphism.RingData
+
+section
+
+open CategoryTheory CategoryTheory.Limits
+variable {C D : Type u} [SmallCategory C] [SmallCategory D]
+  {J : GrothendieckTopology C} {K : GrothendieckTopology D}
+  {A : Sheaf J RingCat.{u}} {B : Sheaf K RingCat.{u}}
+variable (g : RingedToposMorphism.RingData A B)
+
+/-- Assemble geometric ring data and its induced module direct image. -/
+def withModules (d : RingedToposMorphism.RingData A B) (m : d.Modules) :
+    RingedToposMorphism A B where
+  inverse := d.inverse
+  direct := d.direct
+  adj := d.adj
+  leftExact := d.leftExact
+  ringMap := d.ringMap
+  ring_zero := d.ring_zero
+  ring_one := d.ring_one
+  ring_add := d.ring_add
+  ring_mul := d.ring_mul
+  modules := m.modules
+  additive := m.additive
+  underlying := m.underlying
+  module_linear := m.module_linear
+
+end
+
+end CategoryTheory.RingedToposMorphism.RingData

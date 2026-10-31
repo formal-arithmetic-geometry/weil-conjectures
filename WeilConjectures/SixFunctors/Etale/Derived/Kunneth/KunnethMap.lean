@@ -17,6 +17,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionUnit
 public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 public import WeilConjectures.SixFunctors.Etale.Derived.Invertible
 public import WeilConjectures.SixFunctors.Etale.Derived.Hom
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.CohomologicalDimension
 import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 import WeilConjectures.AlgebraicGeometry.Sites.ModulePointFunctions
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel

@@ -8,7 +8,27 @@ module
 public import WeilConjectures.SixFunctors.BaseChange.Etale
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
-public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
+public import WeilConjectures.AlgebraicGeometry.ChowLemma.Graph
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBaseChange
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Forget
+public import WeilConjectures.AlgebraicGeometry.Sites.UpperStarSections
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationLocal
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
+public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
+public import WeilConjectures.SixFunctors.Finite.Stalk
+public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+public import WeilConjectures.Mathlib.Topology.Sober
+public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
+public import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.SmallAffineZariski
+public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Comp
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Field
 
 /-!
 # Étale base change for the derived pushforward

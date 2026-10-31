@@ -71,8 +71,8 @@ docstring. No blueprint node states the finiteness theorem: the blueprint uses i
 in the proofs of `sk-prop-tf-nearby-duality-foundation` ("bounded constructible by the finiteness
 theorem for nearby cycles") and `det-sp-constant-family-vanishing` ("an exact functor with
 bounded constructible values"). The reductions also use the proper exchange (blueprint
-`det-sp-nearby-cycles-exchanges` (2), `sorry`ed in
-`WeilConjectures.TraceFormula.Specialization.NearbyProperExchange`).
+`det-sp-nearby-cycles-exchanges` (2),
+`NearbyCyclesModel.Hom.isIso_pushforwardExchange_app_of_isProper_geometric`).
 
 -/
 
@@ -278,7 +278,7 @@ theorem boundedConstructible_geometricNearbyCycles_obj_of_isAffine
   obtain ⟨q, g, _, _, _, hj, hi⟩ := hM.exists_isPullback
   obtain ⟨n, c, hc, _⟩ := exists_isClosedImmersion_affineSpace_of_isAffine q
   exact boundedConstructible_geometricNearbyCycles_obj_of_closedEmbedding
-    (N := affineSpaceModel k' n) (isTraitModel_affineSpaceModel n) (traitStdHom _ hj hi c hc)
+    (N := affineSpaceModel k' n) hM (isTraitModel_affineSpaceModel n) (traitStdHom _ hj hi c hc)
     rfl (isPullback_traitStdHom_generic _ hj hi c hc) (isPullback_traitStdHom_special _ hi c hc)
     (fun hB' ↦ boundedConstructible_nearbyCycles_affineSpace_obj n hB') hB
 
