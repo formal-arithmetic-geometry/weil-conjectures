@@ -40,12 +40,13 @@ The following steps are stated and `sorry`ed:
 
 - `ProEtale.CondensedRing.isIntegralSmoothOrientation_integralOpenImmersionOrientation`: the
   reductions of the integral canonical identification are the finite orientations of the diagonal
-  argument. This needs the finite statement for the open immersion (for `j` the diagonal is an
-  isomorphism, and the orientation `Etale.dualizingComplexTwistShiftIso` of
-  `Rj^! Λ ≅ Λ(0)[0]` is the canonical `Rj^! Λ ≅ j^* Λ ≅ Λ`), and the comparison of the canonical
-  reduction isomorphism `etaleReductionUpperShriekIso` (built from the compactification chosen by
-  Nagata's theorem) with `etaleReductionUpperShriekIsoOfIsOpenImmersion` (built from the trivial
-  compactification).
+  argument. This needs the finite statement for the open immersion
+  (`Etale.dualizingComplexTwistShiftIso_of_isOpenImmersion`, also `sorry`ed: the orientation
+  `Rj^! Λ ≅ Λ(0)[0]` of the diagonal argument is the canonical `Rj^! Λ ≅ j^* Λ ≅ Λ`), the
+  compatibility of the reduction comparisons with the unit isomorphisms, and the comparison of
+  the canonical reduction isomorphism `etaleReductionUpperShriekIso` (built from the
+  compactification chosen by Nagata's theorem) with
+  `etaleReductionUpperShriekIsoOfIsOpenImmersion` (built from the trivial compactification).
 - `ProEtale.CondensedRing.extendScalarsIntegralOrientation_integralOpenImmersionOrientation`: the
   extension of scalars to `ℚ̄_ℓ` of the integral identification is the `ℚ̄_ℓ` one, i.e. the
   coefficient comparison `integersToPadicAlgClUpperShriekUnitIso` is compatible with
@@ -72,6 +73,16 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
+
+/-- The integral Tate twist `𝒪_{E,X}(0)`, placed in degree `0`, is the unit of `Dᵇc(X)⟦𝒪_E⟧`:
+`𝒪_{E,X}(0)` is the unit `𝒪_{E,X}` by definition. -/
+noncomputable def integralTateTwistBoundedConstructibleZeroIso
+    [NeZero (ℓ : k)] (E : PadicAlgCl.FiniteIntermediateField ℓ) :
+    integralTateTwistBoundedConstructible ℓ E.1 X.hom 0 ≅ 𝟙_ _ :=
+  (ObjectProperty.fullyFaithfulι _).preimageIso
+    (X := integralTateTwistBoundedConstructible ℓ E.1 X.hom 0) (Y := 𝟙_ _)
+    (DerivedCategory.singleFunctorObjUnitIso (Mod (Sheaf (ProEt.topology X.left) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X.left)))
 
 section OpenImmersion
 
@@ -108,13 +119,11 @@ noncomputable def integralOpenImmersionOrientation :
     (shiftFunctor (Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧) (2 * ((0 : ℕ) : ℤ))).obj
         (integralTateTwistBoundedConstructible ℓ E.1 X.hom 0) ⟶
       (PadicIntegersRingObj.boundedConstructibleUpperShriek ℓ E.1 j).obj (𝟙_ _) :=
-  (ObjectProperty.fullyFaithfulι _).preimage
-    (((shiftFunctorZero' _ (2 * ((0 : ℕ) : ℤ)) (by simp)).app _).hom ≫
-      (DerivedCategory.singleFunctorObjUnitIso _).hom ≫
-      (ObjectProperty.ι _).map
-        ((Functor.Monoidal.εIso
-          (boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E.1) ℓ j)).hom ≫
-        ((boundedConstructibleUpperShriekIsoUpperStar_padicIntegers ℓ E.1 j).app _).inv))
+  ((shiftFunctorZero' _ (2 * ((0 : ℕ) : ℤ)) (by simp)).app _).hom ≫
+    (integralTateTwistBoundedConstructibleZeroIso ℓ (X := X) E).hom ≫
+    (Functor.Monoidal.εIso
+      (boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E.1) ℓ j)).hom ≫
+    ((boundedConstructibleUpperShriekIsoUpperStar_padicIntegers ℓ E.1 j).app _).inv
 
 /-- The reductions of the integral canonical orientation of an open immersion are the canonical
 finite orientations of the diagonal argument. -/

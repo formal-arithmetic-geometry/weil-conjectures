@@ -230,39 +230,6 @@ variable {C : Type u₁} [Category.{u + 1} C] [Abelian C] [IsGrothendieckAbelian
   (F : C ⥤ D) [F.Additive] [F.PreservesKFlatQuasiIso] [F.PreservesFlat] [F.IsLeftAdjoint]
   [F.Monoidal]
 
-omit [F.Additive] [F.PreservesKFlatQuasiIso] [F.PreservesFlat] [F.IsLeftAdjoint] [F.Monoidal] in
-/-- TEST -/
-noncomputable abbrev testTargetTensor : DerivedCategory D ⥤ DerivedCategory D ⥤ DerivedCategory D :=
-  curriedTensor _
-
-omit [F.Additive] [F.PreservesKFlatQuasiIso] [F.PreservesFlat] [F.IsLeftAdjoint] [F.Monoidal] in
-/-- TEST -/
-noncomputable abbrev testCommShift (K : DerivedCategory C) :
-    ((curriedTensor (DerivedCategory C)).obj K).CommShift ℤ := inferInstance
-
-omit [F.Additive] [F.PreservesKFlatQuasiIso] [F.PreservesFlat] [F.IsLeftAdjoint] [F.Monoidal] in
-/-- TEST -/
-noncomputable abbrev testHasShift : HasShift (DerivedCategory C) ℤ := inferInstance
-
-omit [F.Monoidal] [F.IsLeftAdjoint] [F.PreservesFlat] in
-/-- TEST -/
-abbrev testCounitProp [F.leftDerivedFunctor.CommShift ℤ] : Prop :=
-  NatTrans.CommShift F.leftDerivedFunctorCounit ℤ
-
-/-- TEST -/
-noncomputable abbrev testCompCommShift' (K : DerivedCategory C) [F.leftDerivedFunctor.CommShift ℤ] :
-    (F.leftDerivedFunctor ⋙ (curriedTensor (DerivedCategory D)).obj (F.leftDerivedFunctor.obj K)).CommShift ℤ :=
-  inferInstance
-
-/-- TEST -/
-noncomputable abbrev testCompCommShift (K : DerivedCategory C) [F.leftDerivedFunctor.CommShift ℤ] :
-    ((curriedTensor (DerivedCategory C)).obj K ⋙ F.leftDerivedFunctor).CommShift ℤ := inferInstance
-
-omit [F.Additive] [F.PreservesKFlatQuasiIso] [F.PreservesFlat] [F.IsLeftAdjoint] [F.Monoidal] in
-/-- TEST -/
-noncomputable abbrev testSourceTensor : DerivedCategory C ⥤ DerivedCategory C ⥤ DerivedCategory C :=
-  curriedTensor _
-
 /-- The tensor comparison `LF(K ⊗ᴸ -) ⟶ LF K ⊗ᴸ LF(-)` for a fixed `K`. -/
 noncomputable abbrev leftDerivedTensorComparisonApp (K : DerivedCategory C) :
     (curriedTensor (DerivedCategory C)).obj K ⋙ F.leftDerivedFunctor ⟶
@@ -361,10 +328,6 @@ instance commShift_leftDerivedTensorComparisonFlipApp (M : DerivedCategory C) :
   obtain ⟨P, hP, ⟨e⟩⟩ := F.exists_kFlatKFlatMap_iso M
   have := F.commShift_leftDerivedTensorComparisonFlipApp_Qh_obj P hP
   exact F.commShift_leftDerivedTensorComparisonFlipApp_of_iso e.symm
-
-/-- TEST -/
-abbrev testAppProp (K : DerivedCategory C) : Prop :=
-  NatTrans.CommShift (F.leftDerivedTensorComparisonApp K) ℤ
 
 end CategoryTheory.Functor
 

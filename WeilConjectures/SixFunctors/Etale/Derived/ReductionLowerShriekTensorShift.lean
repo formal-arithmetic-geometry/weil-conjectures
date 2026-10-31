@@ -10,33 +10,28 @@ public import WeilConjectures.SixFunctors.Etale.Derived.ReductionHom
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
 
 /-!
-# The tensor comparison of the derived extension of scalars commutes with shifts
+# The counit of the derived extension of scalars commutes with shifts
 
 Let `Ψ = - ⊗ᴸ_Λ Λ'` be the derived extension of scalars along a surjective ring morphism with
 principal kernel (`AlgebraicGeometry.Etale.derivedExtendScalars`), with the commutation with the
 shifts induced, as a left adjoint, by the one of the restriction of scalars. Its counit
 `Qh ⋙ Ψ ⟶ K(Λ' ⊗_Λ -) ⋙ Qh` commutes with the shifts
-(`AlgebraicGeometry.Etale.commShift_derivedExtendScalarsCounit`), hence so does its tensor
-comparison `Ψ(K ⊗ᴸ M) ⟶ Ψ K ⊗ᴸ Ψ M` in each variable
-(`AlgebraicGeometry.Etale.derivedExtendScalars_tensorComparison_shift_left`,
-`AlgebraicGeometry.Etale.derivedExtendScalars_tensorComparison_shift_right`).
+(`AlgebraicGeometry.Etale.commShift_derivedExtendScalarsCounit`). By
+`CategoryTheory.Functor.commShift_leftDerivedTensorComparisonApp`, this is what is needed for the
+tensor comparison `Ψ(K ⊗ᴸ M) ⟶ Ψ K ⊗ᴸ Ψ M` to commute with the shifts.
 -/
 
 @[expose] public section
 
 universe u
 
-open CategoryTheory Limits MonoidalCategory
+open CategoryTheory
 
 -- the instances used in the definition of the derived tensor product of étale sheaves
 attribute [local instance high] SymmetricCategory.toBraidedCategory
 attribute [local instance 20000] AlgebraicGeometry.Etale.sheafBraidedCategory
 
-open scoped CategoryTheory.Functor
-
 namespace AlgebraicGeometry.Etale
-
-open Scheme
 
 variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] {ρ : Λ →+* Λ'} {a : Λ}
   (hρ : Function.Surjective ρ) (ha : RingHom.ker ρ = Ideal.span {a}) (X : Scheme.{u})
@@ -49,52 +44,4 @@ instance commShift_derivedExtendScalarsCounit :
   (Sheaf.extendScalarsAdjunction X.smallEtaleTopology
     ρ).commShift_leftDerivedFunctorCounit_of_adjunction
 
-/-- The tensor comparison `Ψ(K ⊗ᴸ -) ⟶ Ψ K ⊗ᴸ Ψ(-)`, in the presentation of the left derived
-functor of the extension of scalars. -/
-noncomputable abbrev derivedExtendScalarsTensorComparisonAppAux
-    (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    type_of% (haveI := preservesKFlatQuasiIso_extendScalars hρ ha X
-      (Sheaf.extendScalars X.smallEtaleTopology ρ).leftDerivedTensorComparisonApp K) :=
-  haveI := preservesKFlatQuasiIso_extendScalars hρ ha X
-  (Sheaf.extendScalars X.smallEtaleTopology ρ).leftDerivedTensorComparisonApp K
-
-/-- The tensor comparison `Ψ(K ⊗ᴸ -) ⟶ Ψ K ⊗ᴸ Ψ(-)` of the derived extension of scalars, for a
-fixed `K`. -/
-noncomputable abbrev derivedExtendScalarsTensorComparisonApp
-    (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    (derivedTensor (ModuleCat.{u + 1} Λ) X).obj K ⋙ derivedExtendScalars hρ ha X ⟶
-      derivedExtendScalars hρ ha X ⋙
-        (derivedTensor (ModuleCat.{u + 1} Λ') X).obj ((derivedExtendScalars hρ ha X).obj K) :=
-  derivedExtendScalarsTensorComparisonAppAux hρ ha X K
-
-/-- The tensor comparison `Ψ(- ⊗ᴸ M) ⟶ Ψ(-) ⊗ᴸ Ψ M` of the derived extension of scalars, for a
-fixed `M`. -/
-noncomputable abbrev derivedExtendScalarsTensorComparisonFlipApp
-    (M : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    (derivedTensor (ModuleCat.{u + 1} Λ) X).flip.obj M ⋙ derivedExtendScalars hρ ha X ⟶
-      derivedExtendScalars hρ ha X ⋙
-        (derivedTensor (ModuleCat.{u + 1} Λ') X).flip.obj ((derivedExtendScalars hρ ha X).obj M) :=
-  have := preservesKFlatQuasiIso_extendScalars hρ ha X
-  (Sheaf.extendScalars X.smallEtaleTopology ρ).leftDerivedTensorComparisonFlipApp M
-
-set_option maxHeartbeats 2000000 in
-lemma testAux (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    have := preservesKFlatQuasiIso_extendScalars hρ ha X
-    letI : (Sheaf.extendScalars X.smallEtaleTopology ρ).leftDerivedFunctor.CommShift ℤ :=
-      inferInstanceAs ((derivedExtendScalars hρ ha X).CommShift ℤ)
-    NatTrans.CommShift (derivedExtendScalarsTensorComparisonAppAux hρ ha X K) ℤ := by
-  have := preservesKFlatQuasiIso_extendScalars hρ ha X
-  letI : (Sheaf.extendScalars X.smallEtaleTopology ρ).leftDerivedFunctor.CommShift ℤ :=
-    inferInstanceAs ((derivedExtendScalars hρ ha X).CommShift ℤ)
-  have : NatTrans.CommShift (Sheaf.extendScalars X.smallEtaleTopology ρ).leftDerivedFunctorCounit
-      ℤ := commShift_derivedExtendScalarsCounit hρ ha X
-  exact (Sheaf.extendScalars X.smallEtaleTopology ρ).commShift_leftDerivedTensorComparisonApp K
-set_option maxHeartbeats 40000 in
-example (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    have := preservesKFlatQuasiIso_extendScalars hρ ha X
-    letI : (Sheaf.extendScalars X.smallEtaleTopology ρ).leftDerivedFunctor.CommShift ℤ :=
-      inferInstanceAs ((derivedExtendScalars hρ ha X).CommShift ℤ)
-    NatTrans.CommShift (derivedExtendScalarsTensorComparisonAppAux hρ ha X K) ℤ ↔
-      NatTrans.CommShift (derivedExtendScalarsTensorComparisonApp hρ ha X K) ℤ :=
-  Iff.rfl
 end AlgebraicGeometry.Etale

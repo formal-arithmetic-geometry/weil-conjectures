@@ -10,6 +10,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionUpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition
 public import WeilConjectures.SmoothPurity.OrientationCanonical
+public import WeilConjectures.SmoothPurity.OrientationOpenImmersion
 public import WeilConjectures.SmoothPurity.TateTwistBoundedConstructible
 
 /-!
@@ -59,11 +60,12 @@ trace map `Tr_f : Rf_! ℚ̄_ℓ,X(d)[2d] ⟶ ℚ̄_ℓ,Y` of SGA 4, Exposé XVI
 and the counit of `Rf_! ⊣ Rf^!`. The purity isomorphism
 `AlgebraicGeometry.ProEtale.CondensedRing.smoothPurityIso` is *defined* from it, as the inverse
 of its adjoint `ℚ̄_ℓ,X(d)[2d] ⟶ Rf^! ℚ̄_ℓ,Y` for `Rf_! ⊣ Rf^!`
-(`AlgebraicGeometry.ProEtale.CondensedRing.smoothPurityMap`, equal to `γ_f`). The following
-properties of the trace are `sorry`ed:
+(`AlgebraicGeometry.ProEtale.CondensedRing.smoothPurityMap`, equal to `γ_f`). Smooth purity
+proper, `AlgebraicGeometry.ProEtale.CondensedRing.isIso_smoothPurityMap` (the adjoint of the
+trace is an isomorphism), is `sorry`ed. The following normalizations are deduced from the
+description of the orientation along open immersions
+(`WeilConjectures.SmoothPurity.OrientationOpenImmersion`, whose integral steps are `sorry`ed):
 
-- `AlgebraicGeometry.ProEtale.CondensedRing.isIso_smoothPurityMap`: smooth purity proper, the
-  adjoint of the trace is an isomorphism;
 - `AlgebraicGeometry.ProEtale.CondensedRing.smoothPurityIso_zero_of_isOpenImmersion`: in
   relative dimension zero, for an open immersion `j`, the purity isomorphism is the canonical
   identification `Rj^! ℚ̄_ℓ ≅ j^* ℚ̄_ℓ ≅ ℚ̄_ℓ`
@@ -217,8 +219,18 @@ theorem smoothPurityIso_zero_of_isOpenImmersion (j : X ⟶ Y) [IsOpenImmersion j
     smoothPurityIso ℓ j 0 =
       (ObjectProperty.ι _).mapIso (boundedConstructibleUpperShriekUnitIso_padicAlgCl ℓ j) ≪≫
         (tateTwistDerivedZeroIso ℓ X.left).symm ≪≫
-        ((shiftFunctorZero' _ (2 * ((0 : ℕ) : ℤ)) (by simp)).app _).symm :=
-  sorry
+        ((shiftFunctorZero' _ (2 * ((0 : ℕ) : ℤ)) (by simp)).app _).symm := by
+  have := neZero_natCast_of_ringChar_ne ℓ (k := k)
+  have h : smoothPurityMap ℓ j 0 = openImmersionOrientation ℓ j := by
+    rw [smoothPurityMap_eq_smoothOrientation, smoothOrientation,
+      dif_pos (inferInstance : SmoothOfRelativeDimension 0 j.left),
+      smoothOrientationOfSmooth_eq_openImmersionOrientation]
+  ext
+  rw [← cancel_epi ((ObjectProperty.ι _).map (smoothPurityMap ℓ j 0))]
+  refine ((ObjectProperty.ι _).mapIso (asIso (smoothPurityMap ℓ j 0))).hom_inv_id.trans ?_
+  rw [h, ι_map_openImmersionOrientation]
+  simp
+  rfl
 
 /-- Blueprint `sk-prop-sp-composition`, case of an open immersion: **compatibility of purity
 with composition with an open immersion**: for `f` smooth of pure relative dimension `d` and an
@@ -233,8 +245,18 @@ theorem smoothPurityIso_comp_openImmersion {Z : Over (Spec (.of k))} [LocallyOfF
           ((boundedConstructibleUpperShriekComp_padicAlgCl ℓ f j).app _ ≪≫
             (boundedConstructibleUpperShriek ℓ f).mapIso
               (boundedConstructibleUpperShriekUnitIso_padicAlgCl ℓ j)) ≪≫
-        smoothPurityIso ℓ f d :=
-  sorry
+        smoothPurityIso ℓ f d := by
+  have := neZero_natCast_of_ringChar_ne ℓ (k := k)
+  have h : smoothPurityMap ℓ (f ≫ j) d =
+      compOpenImmersionOrientation ℓ f j d (smoothPurityMap ℓ f d) := by
+    rw [smoothPurityMap_eq_smoothOrientation, smoothPurityMap_eq_smoothOrientation,
+      smoothOrientation, dif_pos ‹_›, smoothOrientation, dif_pos ‹_›,
+      smoothOrientationOfSmooth_comp_openImmersion]
+  ext
+  rw [← cancel_epi ((ObjectProperty.ι _).map (smoothPurityMap ℓ (f ≫ j) d))]
+  refine ((ObjectProperty.ι _).mapIso (asIso (smoothPurityMap ℓ (f ≫ j) d))).hom_inv_id.trans ?_
+  rw [h, compOpenImmersionOrientation, smoothPurityIso]
+  simp
 
 end Purity
 

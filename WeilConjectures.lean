@@ -14070,6 +14070,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.ReductionHom
 public import WeilConjectures.SixFunctors.Etale.Derived.ReductionLowerShriekFormal
 public import WeilConjectures.SixFunctors.Etale.Derived.ReductionLowerShriekIso
 public import WeilConjectures.SixFunctors.Etale.Derived.ReductionLowerShriekProper
+public import WeilConjectures.SixFunctors.Etale.Derived.ReductionLowerShriekShift
+public import WeilConjectures.SixFunctors.Etale.Derived.ReductionLowerShriekTensorShift
 public import WeilConjectures.SixFunctors.Etale.Derived.ReductionSingle
 public import WeilConjectures.SixFunctors.Etale.Derived.RefinementLowerShriekBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.RefinementLowerShriekProjection
@@ -15580,6 +15582,7 @@ public import WeilConjectures.SmoothPurity.OrientationCanonical
 public import WeilConjectures.SmoothPurity.OrientationFinite
 public import WeilConjectures.SmoothPurity.OrientationOfDiagonalClass
 public import WeilConjectures.SmoothPurity.OrientationOpenImmersion
+public import WeilConjectures.SmoothPurity.OrientationOpenImmersionEtale
 public import WeilConjectures.SmoothPurity.OrientationTransition
 public import WeilConjectures.SmoothPurity.OrientationTransitionEtale
 public import WeilConjectures.SmoothPurity.OrientationTransitionFrame
