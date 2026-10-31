@@ -121,9 +121,7 @@ is the projection `(N_{L'})_Ω ⟶ N_{L'}` on generic fibres. -/
 lemma galoisLayerTower_generic_comp_galoisLayerRestrict_generic :
     (N.galoisLayerTower h Ω L').generic ≫ (N.galoisLayerRestrict h Ω L').generic =
       ((N.galoisLayer h L').galoisLayerHom (pullback.snd _ _) Ω).generic := by
-  refine pullback.hom_ext ?_ ?_
-  · simp [galoisLayerTower]
-  · simp [galoisLayerTower, pullback.condition]
+  refine pullback.hom_ext ?_ ?_ <;> simp [galoisLayerTower]
 
 /-- The identification `(N_{L'})_Ω ≅ N_Ω` is equivariant for `Gal(Ω/L') ⊆ Gal(Ω/L)` on generic
 fibres. -/
