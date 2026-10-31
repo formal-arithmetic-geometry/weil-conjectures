@@ -93,4 +93,40 @@ lemma map_comp_map_app_comp_map_eq {A₁ A₂ B₁ B₂ : Type*} [Category A₁]
   rw [Functor.map_comp, Category.assoc, reassoc_of% hc, ← R₂.map_comp, hν, R₂.map_comp,
     reassoc_of% hU]
 
+/-- The naturality of a transformation `α : F ⋙ G ⟶ H ⋙ K`, with the composites unfolded and a
+morphism postcomposed. -/
+lemma NatTrans.map_map_comp_app_comp {A B C D : Type*} [Category A] [Category B] [Category C]
+    [Category D] {F : A ⥤ B} {G : B ⥤ C} {H : A ⥤ D} {K : D ⥤ C} (α : F ⋙ G ⟶ H ⋙ K)
+    {X Y : A} (f : X ⟶ Y) {Z : C} (h : K.obj (H.obj Y) ⟶ Z) :
+    G.map (F.map f) ≫ α.app Y ≫ h = α.app X ≫ K.map (H.map f) ≫ h := by
+  have := α.naturality f
+  simp only [Functor.comp_obj, Functor.comp_map] at this
+  rw [reassoc_of% this]
+
+/-- The naturality of a transformation `α : F ⋙ G ⟶ H ⋙ K`, under a functor `L`, with the
+composites unfolded and a morphism postcomposed. -/
+lemma NatTrans.map_map_map_comp_map_app_comp {A B C D E : Type*} [Category A] [Category B]
+    [Category C] [Category D] [Category E] {F : A ⥤ B} {G : B ⥤ C} {H : A ⥤ D} {K : D ⥤ C}
+    (L : C ⥤ E) (α : F ⋙ G ⟶ H ⋙ K) {X Y : A} (f : X ⟶ Y) {Z : E}
+    (h : L.obj (K.obj (H.obj Y)) ⟶ Z) :
+    L.map (G.map (F.map f)) ≫ L.map (α.app Y) ≫ h =
+      L.map (α.app X) ≫ L.map (K.map (H.map f)) ≫ h := by
+  rw [← L.map_comp_assoc, ← L.map_comp_assoc]
+  have := α.naturality f
+  simp only [Functor.comp_obj, Functor.comp_map] at this
+  rw [this]
+
+/-- Rewriting a composite `f ≫ g = f' ≫ g'` under two functors, with a morphism postcomposed. -/
+lemma Functor.map_map_comp_map_map_comp_eq {A B C : Type*} [Category A] [Category B]
+    [Category C] (M : A ⥤ B) (L : B ⥤ C) {X Y Y' Z : A} {f : X ⟶ Y} {g : Y ⟶ Z} {f' : X ⟶ Y'}
+    {g' : Y' ⟶ Z} (h : f ≫ g = f' ≫ g') {W : C} (k : L.obj (M.obj Z) ⟶ W) :
+    L.map (M.map f) ≫ L.map (M.map g) ≫ k = L.map (M.map f') ≫ L.map (M.map g') ≫ k := by
+  rw [← L.map_comp_assoc, ← M.map_comp, h, M.map_comp, L.map_comp_assoc]
+
+/-- An isomorphism followed by its inverse, under two functors, with a morphism postcomposed. -/
+lemma Functor.map_map_inv_comp_map_map_hom_comp {A B C : Type*} [Category A] [Category B]
+    [Category C] (M : A ⥤ B) (L : B ⥤ C) {X Y : A} (e : X ≅ Y) {W : C} (k : L.obj (M.obj Y) ⟶ W) :
+    L.map (M.map e.inv) ≫ L.map (M.map e.hom) ≫ k = k := by
+  rw [← L.map_comp_assoc, ← M.map_comp, e.inv_hom_id, M.map_id, L.map_id, Category.id_comp]
+
 end CategoryTheory

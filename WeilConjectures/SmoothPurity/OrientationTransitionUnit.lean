@@ -9,6 +9,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationR
 public import WeilConjectures.PoincareDuality.Biduality.EtaleReductionDualizingUnit
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReadingReduction
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReadingReductionUnit
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReadingReductionMate
 
 /-!
 # The reduction `𝒪_E ⧸ ℓⁿ⁺¹ ⟶ 𝒪_E ⧸ ℓⁿ` and the units
@@ -57,8 +58,13 @@ theorem map_readingUnitIso_hom_comp_constantComplexIso :
     letI := (Mod.extendScalars (integersModPowTransition Y.left ℓ E n)).leftDerivedFunctorMonoidal
     (integersModPowDerivedExtendScalars ℓ E n Y.left).map
         ((R(ν_*(Y.left)[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E (n + 1))])).map
-          (finiteCoefficientDerivedEquivalenceUnitIso Y.left
-            (PadicAlgCl.integersModPow ℓ E (n + 1))).hom ≫
+          ((finiteCoefficientDerivedEquivalenceUnitIso Y.left
+            (PadicAlgCl.integersModPow ℓ E (n + 1))).hom :
+            (finiteCoefficientDerivedEquivalence Y.left
+              (PadicAlgCl.integersModPow ℓ E (n + 1))).functor.obj (𝟙_ (DerivedCategory
+                (Mod (Sheaf (ProEt.topology Y.left) Ab.{u + 1})
+                  (condensedRingObj (Profinite.integersModPowRingObj ℓ E (n + 1)) Y.left)))) ⟶
+              𝟙_ _) ≫
           (rightDerivedComparisonLowerStarUnitIso Y.left
             (integersModPowCoeff.{u} ℓ E (n + 1))).hom) ≫
       (Etale.derivedExtendScalarsConstantComplexIso
@@ -67,35 +73,69 @@ theorem map_readingUnitIso_hom_comp_constantComplexIso :
     (derivedExtendScalarsComparisonLowerStarMap (integersModPowCoeffTransition_surjective ℓ E n)
         (ker_integersModPowCoeffTransition ℓ E n) Y.left).app
         ((finiteCoefficientDerivedEquivalence Y.left
-          (PadicAlgCl.integersModPow ℓ E (n + 1))).functor.obj (𝟙_ _)) ≫
+          (PadicAlgCl.integersModPow ℓ E (n + 1))).functor.obj (𝟙_ (DerivedCategory
+                (Mod (Sheaf (ProEt.topology Y.left) Ab.{u + 1})
+                  (condensedRingObj (Profinite.integersModPowRingObj ℓ E (n + 1)) Y.left))))) ≫
       (R(ν_*(Y.left)[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)])).map
         ((finiteCoefficientDerivedEquivalenceExtendScalarsIso Y.left
             (PadicAlgCl.integersModPowTransition_surjective ℓ E n)
-            (ker_integersModPowCoeffTransition ℓ E n)).hom.app (𝟙_ _) ≫
+            (ker_integersModPowCoeffTransition ℓ E n)).hom.app (𝟙_ (DerivedCategory
+                (Mod (Sheaf (ProEt.topology Y.left) Ab.{u + 1})
+                  (condensedRingObj (Profinite.integersModPowRingObj ℓ E (n + 1)) Y.left)))) ≫
           (finiteCoefficientDerivedEquivalence Y.left
             (PadicAlgCl.integersModPow ℓ E n)).functor.map
             (η (Mod.extendScalars (integersModPowTransition Y.left ℓ E n)).leftDerivedFunctor) ≫
-          (finiteCoefficientDerivedEquivalenceUnitIso Y.left
-            (PadicAlgCl.integersModPow ℓ E n)).hom) ≫
+          ((finiteCoefficientDerivedEquivalenceUnitIso Y.left
+            (PadicAlgCl.integersModPow ℓ E n)).hom :
+            (finiteCoefficientDerivedEquivalence Y.left
+              (PadicAlgCl.integersModPow ℓ E n)).functor.obj (𝟙_ (DerivedCategory
+                (Mod (Sheaf (ProEt.topology Y.left) Ab.{u + 1})
+                  (condensedRingObj (Profinite.integersModPowRingObj ℓ E n) Y.left)))) ⟶
+              𝟙_ _)) ≫
       (rightDerivedComparisonLowerStarUnitIso Y.left (integersModPowCoeff.{u} ℓ E n)).hom := by
   sorry
 
+/-- The condensed constituent `red_m 𝒪 ≅ 𝟙` of the identification `red_Y 𝒪 ≅ Λ`
+(`etaleReductionUnitIso`): the compatibility of the bounded constructible reduction with the
+inclusion, followed by the unit comparison of the monoidal derived extension of scalars. -/
+noncomputable def integersModPowReductionUnitIso (m : ℕ) :
+    ((boundedConstructibleIntegersModPowReduction Y.left ℓ E m).obj (𝟙_ _)).obj ≅
+      𝟙_ (DerivedCategory (Mod (Sheaf (ProEt.topology Y.left) Ab.{u + 1})
+        (condensedRingObj (Profinite.integersModPowRingObj ℓ E m) Y.left))) :=
+  letI := Mod.extendScalarsMonoidal (integersModPowReduction Y.left ℓ E m)
+  letI := (Mod.extendScalars (integersModPowReduction Y.left ℓ E m)).leftDerivedFunctorMonoidal
+  (boundedConstructibleIntegersModPowReductionCompatibility Y.left ℓ E m).app (𝟙_ _) ≪≫
+    (Functor.Monoidal.εIso _).symm
+
+/-- `etaleReductionUnitIso`, unfolded through `integersModPowReductionUnitIso`. -/
+lemma etaleReductionUnitIso_hom_eq (m : ℕ) :
+    (etaleReductionUnitIso ℓ E m Y).hom =
+      (R(ν_*(Y.left)[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E m)])).map
+        ((finiteCoefficientDerivedEquivalence Y.left (PadicAlgCl.integersModPow ℓ E m)).functor.map
+            (integersModPowReductionUnitIso ℓ E Y m).hom ≫
+          ((finiteCoefficientDerivedEquivalenceUnitIso Y.left
+            (PadicAlgCl.integersModPow ℓ E m)).hom :
+            (finiteCoefficientDerivedEquivalence Y.left
+              (PadicAlgCl.integersModPow ℓ E m)).functor.obj (𝟙_ (DerivedCategory
+                (Mod (Sheaf (ProEt.topology Y.left) Ab.{u + 1})
+                  (condensedRingObj (Profinite.integersModPowRingObj ℓ E m) Y.left)))) ⟶
+              𝟙_ _)) ≫
+        (rightDerivedComparisonLowerStarUnitIso Y.left (integersModPowCoeff.{u} ℓ E m)).hom :=
+  rfl
+
 set_option maxHeartbeats 1000000 in
 -- the monoidal structures of the derived functors on sheaf categories are slow to unfold
-/-- Blueprint `det-sp-purity-coefficient-change`: change of coefficients in purity.
-
-**The reduction `β` is compatible with the units**: through `β : Ψ(red_{n+1} 𝒪) ≅ red_n 𝒪`, the
-derived extension of scalars `Ψ` of the identification `red_Y 𝒪 ≅ Λ` modulo `ℓⁿ⁺¹`
-(`etaleReductionUnitIso`), followed by `Ψ Λ ≅ Λ'`
-(`Etale.derivedExtendScalarsConstantComplexIso`), is the identification modulo `ℓⁿ`. -/
-theorem map_etaleReductionUnitIso_hom_comp_constantComplexIso :
-    (integersModPowDerivedExtendScalars ℓ E n Y.left).map
-          (etaleReductionUnitIso ℓ E (n + 1) Y).hom ≫
-        (Etale.derivedExtendScalarsConstantComplexIso
-          (integersModPowCoeffTransition_surjective ℓ E n)
-          (ker_integersModPowCoeffTransition ℓ E n) Y.left).hom =
-      (etaleReductionExtendScalarsIsoApp ℓ E n Y (𝟙_ _)).hom ≫
-        (etaleReductionUnitIso ℓ E n Y).hom := by
+/-- The condensed transition `(𝒪_E ⧸ ℓⁿ) ⊗ᴸ red_{n+1} K ≅ red_n K` at the unit, through the
+identifications `red_m 𝒪 ≅ 𝟙`, is the unit comparison of the derived extension of scalars along
+`𝒪_E ⧸ ℓⁿ⁺¹ ⟶ 𝒪_E ⧸ ℓⁿ` (`map_ε_comp_derivedExtendScalarsCompIso_inv_app_comp_η`). -/
+lemma boundedConstructibleIntegersModPowReductionTransitionIso_hom_app_unit :
+    letI := Mod.extendScalarsMonoidal (integersModPowTransition Y.left ℓ E n)
+    letI := (Mod.extendScalars (integersModPowTransition Y.left ℓ E n)).leftDerivedFunctorMonoidal
+    (boundedConstructibleIntegersModPowReductionTransitionIso ℓ E n Y.left).hom.app (𝟙_ _) =
+      (Mod.extendScalars (integersModPowTransition Y.left ℓ E n)).leftDerivedFunctor.map
+          (integersModPowReductionUnitIso ℓ E Y (n + 1)).hom ≫
+        η (Mod.extendScalars (integersModPowTransition Y.left ℓ E n)).leftDerivedFunctor ≫
+          (integersModPowReductionUnitIso ℓ E Y n).inv := by
   -- the condensed part: the transitivity isomorphism preserves the units
   have hc := map_ε_comp_derivedExtendScalarsCompIso_inv_app_comp_η
     (integersModPowReduction Y.left ℓ E (n + 1)) (integersModPowTransition Y.left ℓ E n)
@@ -128,21 +168,38 @@ theorem map_etaleReductionUnitIso_hom_comp_constantComplexIso :
       (Mod.extendScalars (integersModPowTransition Y.left ℓ E n)).leftDerivedFunctor.map
           (η ((boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E)
             Y.left)).ι ⋙ (Mod.extendScalars (integersModPowReduction Y.left ℓ E (n + 1))).leftDerivedFunctor)) ≫
-        η (Mod.extendScalars (integersModPowTransition Y.left ℓ E n)).leftDerivedFunctor =
-      (Mod.derivedExtendScalarsCompIso _ _ _
-          (integersModPowReduction_comp_integersModPowTransition Y.left ℓ E n)).inv.app
-          ((boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E)
-            Y.left)).ι.obj (𝟙_ _)) ≫
-        η ((boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E)
-            Y.left)).ι ⋙ (Mod.extendScalars (integersModPowReduction Y.left ℓ E n)).leftDerivedFunctor) := by
-    have hn := (Mod.derivedExtendScalarsCompIso _ _ _
-      (integersModPowReduction_comp_integersModPowTransition Y.left ℓ E n)).inv.naturality
-      (η (boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) Y.left)).ι)
-    simp only [Functor.comp_obj, Functor.comp_map] at hn
-    simp only [Functor.OplaxMonoidal.comp_η, Functor.map_comp, Category.assoc]
-    rw [← reassoc_of% hn]
-    congr 1
-    exact K₀
-  sorry
+  rw [boundedConstructibleIntegersModPowReductionTransitionIso_hom_app]
+  simp only [integersModPowReductionUnitIso, Iso.trans_hom, Iso.trans_inv, Iso.symm_hom,
+    Iso.symm_inv, Functor.Monoidal.εIso_inv, Functor.Monoidal.εIso_hom, Iso.app_hom, Iso.app_inv,
+    Functor.map_comp, Category.assoc]
+  rw [reassoc_of% K₁, Functor.Monoidal.η_ε_assoc]
+
+set_option maxHeartbeats 1000000 in
+-- the monoidal structures of the derived functors on sheaf categories are slow to unfold
+/-- Blueprint `det-sp-purity-coefficient-change`: change of coefficients in purity.
+
+**The reduction `β` is compatible with the units**: through `β : Ψ(red_{n+1} 𝒪) ≅ red_n 𝒪`, the
+derived extension of scalars `Ψ` of the identification `red_Y 𝒪 ≅ Λ` modulo `ℓⁿ⁺¹`
+(`etaleReductionUnitIso`), followed by `Ψ Λ ≅ Λ'`
+(`Etale.derivedExtendScalarsConstantComplexIso`), is the identification modulo `ℓⁿ`. -/
+theorem map_etaleReductionUnitIso_hom_comp_constantComplexIso :
+    (integersModPowDerivedExtendScalars ℓ E n Y.left).map
+          (etaleReductionUnitIso ℓ E (n + 1) Y).hom ≫
+        (Etale.derivedExtendScalarsConstantComplexIso
+          (integersModPowCoeffTransition_surjective ℓ E n)
+          (ker_integersModPowCoeffTransition ℓ E n) Y.left).hom =
+      (etaleReductionExtendScalarsIsoApp ℓ E n Y (𝟙_ _)).hom ≫
+        (etaleReductionUnitIso ℓ E n Y).hom := by
+  have hr := map_readingUnitIso_hom_comp_constantComplexIso ℓ E n Y
+  simp only [Functor.map_comp, Category.assoc] at hr
+  rw [etaleReductionUnitIso_hom_eq, etaleReductionUnitIso_hom_eq,
+    etaleReductionExtendScalarsIsoApp_hom, finiteEtaleReadingExtendScalarsMap_app]
+  simp only [Functor.comp_map]
+  rw [boundedConstructibleIntegersModPowReductionTransitionIso_hom_app_unit]
+  simp only [Functor.map_comp, Category.assoc]
+  refine (congrArg (fun t ↦ _ ≫ t) hr).trans ?_
+  conv_rhs => rhs; rhs; rhs; rhs; rw [Functor.map_map_inv_comp_map_map_hom_comp]
+  conv_rhs => rhs; rw [← NatTrans.map_map_map_comp_map_app_comp]
+  conv_rhs => rw [← NatTrans.map_map_comp_app_comp]
 
 end AlgebraicGeometry.ProEtale.CondensedRing

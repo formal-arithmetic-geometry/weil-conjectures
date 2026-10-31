@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReduction
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReductionMonoidalPullback
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReductionUnit
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineCohomologyGysin
 public import WeilConjectures.SixFunctors.Etale.Derived.LocalizationIntegral
 public import WeilConjectures.EtaleCohomology.TateTwist.ReductionTateTwistOne
@@ -85,7 +85,8 @@ lemma derivedExtendScalarsConstantComplexIso_hom_pullback
       (derivedExtendScalarsPullbackIso hρ ha e).hom.app _ ≫
         (L((e)^*[ModuleCat.{u + 1} Λ'])).map (derivedExtendScalarsConstantComplexIso hρ ha X).hom ≫
           (leftDerivedUpperStarConstantComplexIso Λ' e).hom := by
-  sorry
+  rw [derivedExtendScalarsPullbackIso_hom, derivedExtendScalarsPullbackMap_eq]
+  exact (derivedExtendScalarsPullbackOfCounit_app_unit_comp_η hρ ha e).symm
 
 /-- The identification `Ψ Λ_X ≅ Λ'_X` is the adjoint of the change of coefficients
 `Λ_X ⟶ Res Λ'_X` of the constant complexes
