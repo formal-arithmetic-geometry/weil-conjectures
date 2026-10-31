@@ -909,6 +909,10 @@ section GeneratorFormula
 
 universe w v v'
 
+-- Upstream made these instances local (InternalSectionTensorComparison, SheafTensor).
+attribute [local instance] Sheaf.monoidalCategory Sheaf.symmetricCategory
+attribute [local instance] sfbSheafTensor_monoidalPreadditive sfbSheafTensor_hasWeakSheafify
+
 private theorem pullTensor_sectionTmul_eq {C : Type v} [Category.{v'} C]
     (J : GrothendieckTopology C) [UnivLE.{max v v', w}]
     [HasSheafify J AddCommGrpCat.{w}] [(J.W (A := AddCommGrpCat.{w})).IsMonoidal]

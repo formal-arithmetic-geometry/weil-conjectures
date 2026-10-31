@@ -392,7 +392,7 @@ noncomputable def smallModel_strictLocalUnderivedMateSections {X S : Scheme.{v}}
         Sheaf.Γ (pullback f (Scheme.strictHenselizationStructuralMap s)).smallEtaleTopology
           AddCommGrpCat.{v + 1} :=
   Functor.whiskerLeft (lowerStar AddCommGrpCat.{v + 1} f)
-      (strictLocalSectionRestrictionNat s i) ≫
+      (smallModel_strictLocalSectionRestrictionNat s i) ≫
     (Functor.associator _ _ _).inv ≫
     Functor.whiskerRight
       (baseChangeMap AddCommGrpCat.{v + 1}
@@ -452,7 +452,7 @@ theorem smallModel_strictLocalUnderivedMateSections_eq {X S : Scheme.{v}} (f : X
   simp only [smallModel_strictLocalUnderivedMateSections, NatTrans.comp_app,
     Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Functor.associator_inv_app, Functor.associator_hom_app, Category.id_comp]
-  unfold strictLocalSectionRestrictionNat
+  unfold smallModel_strictLocalSectionRestrictionNat
   dsimp only [Functor.comp_obj]
   unfold PointedEtaleSectionCone.restriction
   have hterminal : IsTerminal.isTerminalOfObj

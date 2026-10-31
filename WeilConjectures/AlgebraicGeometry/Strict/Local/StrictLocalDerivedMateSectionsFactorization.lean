@@ -66,7 +66,7 @@ theorem smallModel_strictLocalComplexSectionRestriction_derivedMate {X S : Schem
     ∀ i : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s),
     let M := ((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj
     let L := ((lowerStar AddCommGrpCat.{v + 1} f).mapHomologicalComplex (.up ℤ)).obj M
-    strictLocalComplexSectionRestriction s
+    smallModel_strictLocalComplexSectionRestriction s
       ((rightDerivedLowerStarPlus AddCommGrpCat.{v + 1} f).obj K) L
       (smallModel_sourceInjectiveDirectImageIso f K J q) n i ≫
         ((Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology
@@ -96,7 +96,7 @@ theorem smallModel_strictLocalComplexSectionRestriction_derivedMate {X S : Schem
     let L := ((lowerStar AddCommGrpCat.{v + 1} f).mapHomologicalComplex (.up ℤ)).obj M
     let G := Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology
       AddCommGrpCat.{v + 1}
-    let a := (NatTrans.mapHomologicalComplex (strictLocalSectionRestrictionNat s i)
+    let a := (NatTrans.mapHomologicalComplex (smallModel_strictLocalSectionRestrictionNat s i)
       (.up ℤ)).app L
     let b := Functor.whiskerRight
         (baseChangeMap AddCommGrpCat.{v + 1}
@@ -121,7 +121,7 @@ theorem smallModel_strictLocalComplexSectionRestriction_derivedMate {X S : Schem
       (A.obj L)
     have hcore := smallModel_strictLocalDerivedExchange_globalSections f s K n J q
     have hh := congrArg (fun z ↦ e ≫ H.map (DerivedCategory.Q.map a) ≫ z) hcore
-    unfold strictLocalComplexSectionRestriction
+    unfold smallModel_strictLocalComplexSectionRestriction
     dsimp only
     calc
       _ = e ≫ H.map (DerivedCategory.Q.map a) ≫

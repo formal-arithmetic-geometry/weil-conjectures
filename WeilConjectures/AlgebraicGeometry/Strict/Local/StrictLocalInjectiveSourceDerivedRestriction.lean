@@ -130,7 +130,7 @@ theorem smallModel_strictLocalInjectiveSourceIso_derivedRestriction {X S : Schem
     erw [hm]
     have h := (smallModel_injectiveSections_strictLocal_comparison f s K n Q J q).2.2 i
     rw [h]
-    delta sourceLocalizedSectionsIso smallModel_strictLocalInjectiveSourceIso
+    delta smallModel_sourceLocalizedSectionsIso smallModel_strictLocalInjectiveSourceIso
     simp only [Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom, Category.assoc]
     rfl
 

@@ -145,7 +145,6 @@ def completedRlimProjection (T : Scheme.{t})
       (reductionTowerEvaluation T (reductionModuleRing T R) n)).hom
 
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
-attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- The first Roos arrow is the product of the actual derived limit projections.
 Source: blueprint Rlim functoriality and derived inverse limit; Stacks 07KC and 08TC
 (blueprint: prop-weil-pbc-rlim-functoriality). -/

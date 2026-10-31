@@ -74,7 +74,75 @@ theorem smallModel_strictHenselizationSectionRestriction_naturality {S : Scheme.
   erw [ht]
   rfl
 
+/-- Evaluation of localized Hom classes as cohomology of the complex of sections, in the
+small coordinate-ring colimit model.
+Source: Stacks Project, Tag 03Q8, computation by an injective complex.
+(blueprint: lem-weil-pbc-strict-local-localized-hom-germ). -/
+@[irreducible] noncomputable def smallModel_sourceLocalizedSectionsIso {S : Scheme.{v}}
+    (K : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))
+    (L : CochainComplex (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ)
+    [L.IsKInjective] (r : K.obj ≅ DerivedCategory.Q.obj L) (n : ℤ) (W : S.Etale) :
+    (strictLocalCohomologyPresheaf K n).obj (op W) ≅
+      (HomologicalComplex.homologyFunctor AddCommGrpCat.{v + 1} (.up ℤ) n).obj
+        ((((sheafSections S.smallEtaleTopology AddCommGrpCat.{v + 1}).obj
+          (op W)).mapHomologicalComplex (.up ℤ)).obj L) :=
+  smallModel_sourcePlusHomIso ((strictLocalFreeSheaf S.smallEtaleTopology).obj W) K L r n ≪≫
+    (smallModel_sourceClassDerivedHomIso
+      ((strictLocalFreeSheaf S.smallEtaleTopology).obj W) L n).symm ≪≫
+    (leftHomologyData
+      ((CochainComplex.singleFunctor _ 0).obj
+        ((strictLocalFreeSheaf S.smallEtaleTopology).obj W)) L n).homologyIso.symm ≪≫
+    (HomologicalComplex.homologyFunctor AddCommGrpCat.{v + 1} (.up ℤ) n).mapIso
+      (smallModel_sourceFreeSectionsComplexIso W L)
+
+/-- The natural transformation of pointed neighbourhood section restriction, in the small
+coordinate-ring colimit model.
+Source: Stacks Project, Tag 03Q9, the canonical restriction construction.
+(blueprint: lem-weil-pbc-strict-local-localized-hom-germ). -/
+@[irreducible] noncomputable def smallModel_strictLocalSectionRestrictionNat {S : Scheme.{v}}
+    {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
+    (i : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)) :
+    (sheafSections S.smallEtaleTopology AddCommGrpCat.{v + 1}).obj
+        (op ((strictLocalNeighbourhoods s).obj i)) ⟶
+      upperStar AddCommGrpCat.{v + 1} (Scheme.strictHenselizationStructuralMap s) ⋙
+        Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology
+          AddCommGrpCat.{v + 1} where
+  app F := (strictLocalSectionCone s).restriction F i
+  naturality {_ _} b := smallModel_strictHenselizationSectionRestriction_naturality s i b
+
 set_option backward.isDefEq.respectTransparency false in
+/-- The restriction on the complex of sections, transported to strict-local homology, in the
+small coordinate-ring colimit model.
+Source: Stacks Project, Tag 03Q9, restriction of the complex to the strict local scheme.
+(blueprint: lem-weil-pbc-strict-local-localized-hom-germ). -/
+@[irreducible] noncomputable def smallModel_strictLocalComplexSectionRestriction
+    {S : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
+    (K : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))
+    (L : CochainComplex (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ)
+    (r : K.obj ≅ DerivedCategory.Q.obj L) (n : ℤ)
+    (i : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)) :
+    (HomologicalComplex.homologyFunctor AddCommGrpCat.{v + 1} (.up ℤ) n).obj
+        ((((sheafSections S.smallEtaleTopology AddCommGrpCat.{v + 1}).obj
+          (op ((strictLocalNeighbourhoods s).obj i))).mapHomologicalComplex (.up ℤ)).obj L) ⟶
+      (Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology
+        AddCommGrpCat.{v + 1}).obj
+        ((DerivedCategory.Plus.homologyFunctor _ n).obj
+          ((upperStar AddCommGrpCat.{v + 1}
+            (Scheme.strictHenselizationStructuralMap s)).mapDerivedCategoryPlus.obj K)) := by
+  let U := upperStar AddCommGrpCat.{v + 1} (Scheme.strictHenselizationStructuralMap s)
+  let G := Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology
+    AddCommGrpCat.{v + 1}
+  have := strictHenselizationScheme_globalSections_preservesFiniteColimits s
+  let C := (U.mapHomologicalComplex (.up ℤ)).obj L
+  let a := (NatTrans.mapHomologicalComplex (smallModel_strictLocalSectionRestrictionNat s i)
+    (.up ℤ)).app L
+  exact (DerivedCategory.homologyFunctorFactors AddCommGrpCat.{v + 1} n).inv.app _ ≫
+    (DerivedCategory.homologyFunctor AddCommGrpCat.{v + 1} n).map
+      (DerivedCategory.Q.map a ≫ G.mapDerivedCategoryFactors.inv.app C ≫
+        G.mapDerivedCategory.map
+          (U.mapDerivedCategoryFactors.inv.app L ≫ U.mapDerivedCategory.map r.inv)) ≫
+    (G.mapDerivedCategoryHomologyFunctorIso n).inv.app (U.mapDerivedCategory.obj K.obj)
+
 set_option backward.isDefEq.respectTransparency false in
 private theorem sourceLeg_eq_sectionRestriction {S : Scheme.{v}}
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
@@ -121,20 +189,20 @@ theorem smallModel_sourceLocalizedSectionsIso_germ {S : Scheme.{v}}
     [L.IsKInjective] (r : K.obj ≅ DerivedCategory.Q.obj L) (n : ℤ)
     (i : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)) :
     (smallModel_strictLocalCohomologySourceLegs s K n).app (op i) =
-      (sourceLocalizedSectionsIso K L r n ((strictLocalNeighbourhoods s).obj i)).hom ≫
-        strictLocalComplexSectionRestriction s K L r n i := by
+      (smallModel_sourceLocalizedSectionsIso K L r n ((strictLocalNeighbourhoods s).obj i)).hom ≫
+        smallModel_strictLocalComplexSectionRestriction s K L r n i := by
   rw [sourceLeg_eq_sectionRestriction]
   ext β
   let W := (strictLocalNeighbourhoods s).obj i
   let A := (strictLocalFreeSheaf S.smallEtaleTopology).obj W
   let e := smallModel_sourcePlusHomIso A K L r n ≪≫ (smallModel_sourceClassDerivedHomIso A L n).symm
   have heval (c : CohomologyClass ((CochainComplex.singleFunctor _ 0).obj A) L n) :
-      (sourceLocalizedSectionsIso K L r n W).hom (e.inv c) =
+      (smallModel_sourceLocalizedSectionsIso K L r n W).hom (e.inv c) =
         ((HomologicalComplex.homologyFunctor AddCommGrpCat.{v + 1} (.up ℤ) n).map
           (smallModel_sourceFreeSectionsComplexIso W L).hom)
           ((leftHomologyData ((CochainComplex.singleFunctor _ 0).obj A) L n).homologyIso.inv
             c) := by
-    unfold sourceLocalizedSectionsIso
+    unfold smallModel_sourceLocalizedSectionsIso
     change (e ≪≫ (leftHomologyData ((CochainComplex.singleFunctor _ 0).obj A)
       L n).homologyIso.symm ≪≫
       (HomologicalComplex.homologyFunctor AddCommGrpCat.{v + 1} (.up ℤ) n).mapIso
@@ -149,8 +217,8 @@ theorem smallModel_sourceLocalizedSectionsIso_germ {S : Scheme.{v}}
   obtain ⟨z, rfl⟩ := CohomologyClass.mk_surjective c
   obtain ⟨f, hf, rfl⟩ := Cocycle.fromSingleMk_surjective z n (zero_add n) (n + 1) rfl
   subst β
-  change _ = (strictLocalComplexSectionRestriction s K L r n i)
-    ((sourceLocalizedSectionsIso K L r n W).hom (e.inv _))
+  change _ = (smallModel_strictLocalComplexSectionRestriction s K L r n i)
+    ((smallModel_sourceLocalizedSectionsIso K L r n W).hom (e.inv _))
   rw [heval]
   change ((Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology
     AddCommGrpCat.{v + 1}).map
@@ -166,9 +234,10 @@ theorem smallModel_sourceLocalizedSectionsIso_germ {S : Scheme.{v}}
               (Cocycle.fromSingleMk f (zero_add n) (n + 1) rfl hf)))))) = _
   erw [smallModel_sourceLocalizedCocycleHomology K L r n W f hf]
   have h := smallModel_sourceCocycleExactRestriction s K L r n W
-    (strictLocalSectionRestrictionNat s i) f hf
+    (smallModel_strictLocalSectionRestrictionNat s i) f hf
   dsimp only at h
-  simp only [strictLocalSectionRestrictionNat, strictLocalComplexSectionRestriction] at h ⊢
+  simp only [smallModel_strictLocalSectionRestrictionNat,
+    smallModel_strictLocalComplexSectionRestriction] at h ⊢
   exact h.symm
 
 end AlgebraicGeometry.Etale

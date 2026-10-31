@@ -80,6 +80,15 @@ section EvaluationHelpers
 
 -- Cache the existence of sheafification in the private calculations. Repeatedly
 -- searching for it reconstructs the same essentially-small-site instance.
+private theorem etaleWeakSheafifyCache
+    (X : AlgebraicGeometry.Scheme.{u}) (B : Type (u + 1)) [CommRing B] :
+    HasWeakSheafify X.smallEtaleTopology (ModuleCat.{u + 1} B) := inferInstance
+
+private theorem proetWeakSheafifyCache
+    (X : AlgebraicGeometry.Scheme.{u}) (B : Type (u + 1)) [CommRing B] :
+    HasWeakSheafify (AlgebraicGeometry.Scheme.ProEt.topology X)
+      (ModuleCat.{u + 1} B) := inferInstance
+
 private theorem etaleOverWeakSheafifyCache
     (X : AlgebraicGeometry.Scheme.{u}) (V : X.Etale)
     (B : Type (u + 1)) [CommRing B] :
@@ -91,6 +100,7 @@ private theorem proetOverWeakSheafifyCache
     HasWeakSheafify ((AlgebraicGeometry.Scheme.ProEt.topology X).over V)
       (ModuleCat.{u + 1} B) := inferInstance
 
+attribute [local instance] etaleWeakSheafifyCache proetWeakSheafifyCache
   etaleOverWeakSheafifyCache proetOverWeakSheafifyCache
 
 namespace CategoryTheory

@@ -71,7 +71,7 @@ theorem smallModel_strictLocalComplexSectionRestriction_mate {X S : Scheme.{v}}
     ∀ i : SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s),
     let M := ((InjectiveObject.ι _).mapHomologicalComplex (.up ℤ)).obj J.obj
     let L := ((lowerStar AddCommGrpCat.{v + 1} f).mapHomologicalComplex (.up ℤ)).obj M
-    strictLocalComplexSectionRestriction s
+    smallModel_strictLocalComplexSectionRestriction s
       ((rightDerivedLowerStarPlus AddCommGrpCat.{v + 1} f).obj K) L
       (smallModel_sourceInjectiveDirectImageIso f K J q) n i ≫
         ((Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology

@@ -250,5 +250,8 @@ instance isTriangulated_boundedConstructible_padicIntegers :
     (IsConstructibleModuleObject
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)) at hext
   exact isTriangulated_boundedConstructible_of_serre _
+    (fun M N f hM hN ↦ ⟨ObjectProperty.prop_kernel _ f hM hN,
+      ObjectProperty.prop_cokernel _ f hM hN⟩)
+    (fun S hS h₁ h₃ ↦ ObjectProperty.prop_X₂_of_shortExact _ hS h₁ h₃)
 
 end AlgebraicGeometry.ProEtale

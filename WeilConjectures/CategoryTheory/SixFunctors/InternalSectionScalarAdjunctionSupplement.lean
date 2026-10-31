@@ -82,6 +82,9 @@ set_option backward.isDefEq.respectTransparency false
 universe u c v w
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 open scoped TensorProduct ChangeOfRings
+-- Upstream made these instances local (InternalSectionTensorComparison, SheafTensor).
+attribute [local instance] Sheaf.monoidalCategory Sheaf.symmetricCategory
+attribute [local instance] sfbSheafTensor_monoidalPreadditive sfbSheafTensor_hasWeakSheafify
 attribute [instance] SheafOfModules.ScalarDerivedPair.extension_additive
 
 namespace CategoryTheory.InternalAbelianSheafModule
