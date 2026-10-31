@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethFormula
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethRational
+public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethSliceIntegralStep
 public import WeilConjectures.Tactic.ExactModProofs
 
 /-!
@@ -42,12 +43,30 @@ def IntegralKunnethFormula (k' : Type u) [Field k'] (n : ℕ) : Prop :=
 variable {ℓ} {k' : Type u} [Field k'] [IsSepClosed k'] [Fact (ringChar k').Prime]
   [Fact (ringChar k' ≠ ℓ)]
 
-/-- WIP: the `𝒪_E` generic-slicing step from the integral Künneth formula over `Spec K⟦t⟧`. -/
+/-- **The generic-slicing step with `𝒪_E`-coefficients** (blueprint
+`sk-prop-tf-nearby-external-kunneth`, "Finite support"): if Gabber's Künneth formula with
+`𝒪_E`-coefficients holds in chart dimension `n` over the trait `Spec K⟦t⟧`, `K = k'(x)^alg`, so
+does the generic-slicing step over `Spec k'⟦t⟧`. The induction hypothesis applies to the
+geometric slice of the product (`NearbyCyclesModel.sliceFst`, `NearbyCyclesModel.sliceSnd`), and
+`NearbyCyclesModel.isIso_map_kunnethMap_of_isIso_sliceFst_padicIntegers` concludes. -/
 theorem sliceKunnethFormula_padicIntegers {n : ℕ}
     (hIH : IntegralKunnethFormula ℓ (traitSliceField k') n)
     (E : PadicAlgCl.FiniteIntermediateField ℓ) :
-    SliceKunnethFormula (Profinite.padicIntegersRingObj ℓ E.1) k' n :=
-  sorry
+    SliceKunnethFormula (Profinite.padicIntegersRingObj ℓ E.1) k' n := by
+  refine ⟨fun {X Y Z X' Y' Z' M N P f₁ f₁' f₂ f₂'} φ₁ φ₂ {qM gM qN gN} hM hN hpb hP hgen hX hY hZ
+    {b} hb {m₁ m₂} hle h₁ h₂ {eM} heM {eN} heN {A B} hA hB ↦ ?_⟩
+  refine isIso_map_kunnethMap_of_isIso_sliceFst_padicIntegers E hM hN hpb hP hgen hb hA hB ?_
+  have hP'' := IsTraitModelOver.baseChange hP (φ₁.total ≫ b) (comp_coordinate_fst hb)
+    (traitSlice (traitSliceCoord k')) (traitSlice_over (traitSliceCoord k'))
+  exact hIH E (sliceFst hM hP hb) (sliceSnd hN hpb hP hgen hb)
+    (IsTraitModelOver.baseChange hM b hb _ (traitSlice_over (traitSliceCoord k')))
+    (IsTraitModelOver.baseChange hN qN (Category.comp_id qN) _ (Category.comp_id _))
+    (isPullback_baseChange_product hpb b hb _ (traitSlice_over (traitSliceCoord k')))
+    (by convert hP'' using 1 <;> simp) (by simp) hle h₁
+    (h₂.of_isPullback (IsPullback.of_hasPullback qN (traitMap k' (traitSliceField k'))))
+    (eM := pullback.fst _ _ ≫ eM) (by simp [← heM]) (eN := pullback.fst _ _ ≫ eN)
+    (by simp [← heN]) hA hB
+
 
 /-- WIP: the `ℚ̄_ℓ` generic-slicing step from the `𝒪_E` ones (integral models). -/
 theorem sliceKunnethFormula_padicAlgCl {n : ℕ}

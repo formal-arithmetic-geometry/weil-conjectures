@@ -284,6 +284,7 @@ restriction of the product to `V ×_S W`); conclude by
 `ProEtale.CondensedRing.exists_finset_isZero_of_forall_exists_coordinates`.
 -/
 theorem exists_finite_isIso_upperStar_map_kunnethMap_of_boundedConstructible
+    [TopologicalSpace.NoetherianSpace X] [TopologicalSpace.NoetherianSpace Y]
     [TopologicalSpace.NoetherianSpace Z]
     (hM : M.IsTraitModelOver qM gM) (hN : N.IsTraitModelOver qN gN)
     (hpb : IsPullback φ₁.total φ₂.total qM qN)
@@ -428,6 +429,7 @@ theorem exists_finite_isIso_upperStar_map_kunnethMap_of_boundedConstructible
         have hlt : Nat.card {j : ιV // j ≠ a} < Nat.card ιV :=
           Finite.card_subtype_lt (x := a) (by simp)
         exact (hslice (by omega)).isIso ψ₁ ψ₂ hMV hNW hpbU hPU hgenU inferInstance
+          inferInstance inferInstance
           (b := cV ≫ AffineSpace.reindex (fun _ ↦ a) (trait k')) (by simp [hcV])
           (by omega) (Scheme.Hom.LocallyEmbedsInAffineSpace.of_isImmersion c' hc')
           (hm'.restrict W) heMV heNW hA' hB'

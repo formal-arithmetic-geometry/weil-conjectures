@@ -141,7 +141,8 @@ structure SliceKunnethFormula (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u
     M.IsTraitModelOver qM gM → N.IsTraitModelOver qN gN →
     IsPullback φ₁.total φ₂.total qM qN →
     ∀ (hP : P.IsTraitModelOver (φ₁.total ≫ qM) (φ₁.generic ≫ gM)),
-    φ₂.generic ≫ gN = φ₁.generic ≫ gM → TopologicalSpace.NoetherianSpace Z →
+    φ₂.generic ≫ gN = φ₁.generic ≫ gM → TopologicalSpace.NoetherianSpace X →
+    TopologicalSpace.NoetherianSpace Y → TopologicalSpace.NoetherianSpace Z →
     ∀ {b : M.total ⟶ 𝔸(ULift.{u} (Fin 1); trait k')}
       (hb : b ≫ 𝔸(ULift.{u} (Fin 1); trait k') ↘ trait k' = qM) {m₁ m₂ : ℕ}, m₁ + m₂ ≤ n →
     (pullback.snd b (traitSlice (traitSliceCoord k'))).LocallyEmbedsInAffineSpace m₁ →
@@ -176,7 +177,8 @@ include hM hN hpb hP hgen in
 `NearbyCyclesModel.SliceKunnethFormula` for a coordinate `b` of `N`. It is the slicing step for
 the product with the two factors exchanged, by the symmetry of the Künneth map
 (`NearbyCyclesModel.isIso_map_kunnethMap_iff_swap`). -/
-theorem isIso_map_kunnethMap_baseChangeSpecialMap_snd [TopologicalSpace.NoetherianSpace Z]
+theorem isIso_map_kunnethMap_baseChangeSpecialMap_snd [TopologicalSpace.NoetherianSpace X]
+    [TopologicalSpace.NoetherianSpace Y] [TopologicalSpace.NoetherianSpace Z]
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     {n : ℕ} (hslice : SliceKunnethFormula Λ k' n) {m₁ m₂ : ℕ} (hle : m₁ + m₂ ≤ n)
     (h₁ : qM.LocallyEmbedsInAffineSpace m₁)
@@ -194,7 +196,8 @@ theorem isIso_map_kunnethMap_baseChangeSpecialMap_snd [TopologicalSpace.Noetheri
   have hP' : P.IsTraitModelOver (φ₂.total ≫ qN) (φ₂.generic ≫ gN) := by
     rw [← hpb.w, hgen]
     exact hP
-  have h := hslice.isIso φ₂ φ₁ hN hM hpb.flip hP' hgen.symm inferInstance hb (m₁ := m₂) (m₂ := m₁) (by omega)
+  have h := hslice.isIso φ₂ φ₁ hN hM hpb.flip hP' hgen.symm inferInstance inferInstance
+    inferInstance hb (m₁ := m₂) (m₂ := m₁) (by omega)
     h₂ h₁ heN heM hB hA
   have e : baseChangeSpecialMap hP' (φ₂.total ≫ b) (comp_coordinate_fst hb)
       (traitSlice (traitSliceCoord k')) (traitSlice_over (traitSliceCoord k')) =

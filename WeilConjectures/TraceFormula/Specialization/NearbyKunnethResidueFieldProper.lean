@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.NearbyCycles.KunnethCoefficientChangeResidue
+public import WeilConjectures.SixFunctors.NearbyCycles.KunnethCoefficientChangeResidueIff
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ClosedPointsDetection
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethGlobalTorsion
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethSlicePoints
@@ -93,6 +93,10 @@ theorem isIso_kunnethMap_residueField_of_isProper [IsNoetherian X] [IsNoetherian
         (Profinite.padicIntegersRingObjToResidueField ℓ E.1) X)).leftDerivedFunctor.obj A₀)
       ((Mod.extendScalars (coefficientMap
         (Profinite.padicIntegersRingObjToResidueField ℓ E.1) Y)).leftDerivedFunctor.obj B₀)) := by
+  have : TopologicalSpace.NoetherianSpace X := inferInstance
+  have : TopologicalSpace.NoetherianSpace Y := inferInstance
+  have ha : A₀.IsGE hA₀.1.1.choose := hA₀.1.1.choose_spec
+  have ha' : B₀.IsGE hB₀.1.1.choose := hB₀.1.1.choose_spec
   have : LocallyOfFiniteType Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i
     hP.locallyOfFiniteType
   have : QuasiCompact M.j := MorphismProperty.of_isPullback hM.isPullback_j.flip inferInstance
@@ -105,10 +109,10 @@ theorem isIso_kunnethMap_residueField_of_isProper [IsNoetherian X] [IsNoetherian
   have hAe := plusEtaleOrigin_extendScalars_residueField_of_boundedConstructible E hA₀
   have hBe := plusEtaleOrigin_extendScalars_residueField_of_boundedConstructible E hB₀
   -- bounds below of `A₀`, `B₀` and of their external product
-  obtain ⟨a, ha⟩ := hA₀.1.1
-  obtain ⟨b, hb⟩ := hB₀.1.1
-  have : A₀.IsGE (min a b) := DerivedCategory.TStructure.t.isGE_of_ge A₀ _ _ (min_le_left a b)
-  have : B₀.IsGE (min a b) := DerivedCategory.TStructure.t.isGE_of_ge B₀ _ _ (min_le_right a b)
+  have : A₀.IsGE (min hA₀.1.1.choose hB₀.1.1.choose) :=
+    DerivedCategory.TStructure.t.isGE_of_ge A₀ _ _ (min_le_left _ _)
+  have : B₀.IsGE (min hA₀.1.1.choose hB₀.1.1.choose) :=
+    DerivedCategory.TStructure.t.isGE_of_ge B₀ _ _ (min_le_right _ _)
   have hAB : boundedConstructible (condensedRingObj 𝒪 Z)
       (L((f₁)^*⟦𝒪⟧).obj A₀ ⊗ L((f₂)^*⟦𝒪⟧).obj B₀) :=
     boundedConstructible_tensorObj
@@ -116,14 +120,27 @@ theorem isIso_kunnethMap_residueField_of_isProper [IsNoetherian X] [IsNoetherian
       (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ f₁ A₀ hA₀)
       (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ f₂ B₀ hB₀)
   obtain ⟨c, hc⟩ := hAB.1.1
-  refine isIso_of_isIso_leftDerivedUpperStar_map_of_not_isClosed
-    (T := PadicAlgCl.integersResidueField ℓ E.1) Z'.hom _
-    (plusEtaleOrigin_kunnethMap_source hT hAe hBe) (plusEtaleOrigin_kunnethMap_target hT hAe hBe)
-    (fun z hz ↦ ?_) (isIso_lowerStar_kunnethMap_residueField ℓ E hM hN hpb hP hgen
-      (boundedConstructible_derivedExtendScalars_residueField X ℓ E.1 A₀ hA₀)
-      (boundedConstructible_derivedExtendScalars_residueField Y ℓ E.1 B₀ hB₀))
-  obtain ⟨W, h, w, hw, hiso⟩ := exists_isIso_map_kunnethMap_of_not_isClosed 𝒪 hM hN hpb hP hgen hm
-    hm' hslice heM heN hA₀ hB₀ z hz
-  exact ⟨W, h, w, hw, (isIso_map_map_kunnethMap_iff_residueField ℓ E φ₁ φ₂ h A₀ B₀ (min a b)
-    c).1 (Functor.map_isIso _ _)⟩
+  -- the pullback of the Künneth map to a non-closed point is invertible by generic slicing
+  have hpt : ∀ z : Z'.left, ¬ IsClosed ({z} : Set Z'.left) → ∃ (W : Scheme.{u}) (h : W ⟶ Z'.left)
+      (w : W), h w = z ∧ IsIso ((L((h)^*⟦𝔽⟧)).map (kunnethMap 𝔽 φ₁ φ₂
+        ((Mod.extendScalars (coefficientMap
+          (Profinite.padicIntegersRingObjToResidueField ℓ E.1) X)).leftDerivedFunctor.obj A₀)
+        ((Mod.extendScalars (coefficientMap
+          (Profinite.padicIntegersRingObjToResidueField ℓ E.1) Y)).leftDerivedFunctor.obj
+            B₀))) := fun z hz ↦ by
+    have key := exists_isIso_map_kunnethMap_of_not_isClosed 𝒪 (M := M) (N := N) (P := P)
+      (φ₁ := φ₁) (φ₂ := φ₂) (A := A₀) (B := B₀) hM hN hpb hP hgen hm hm' hslice heM heN hA₀ hB₀ z hz
+    refine key.imp fun W ↦ Exists.imp fun h ↦ Exists.imp fun w hw ↦ ⟨hw.1, ?_⟩
+    have := hw.2
+    exact (isIso_map_map_kunnethMap_iff_residueField ℓ E φ₁ φ₂ h A₀ B₀
+      (min hA₀.1.1.choose hB₀.1.1.choose) c).1 (Functor.map_isIso _ _)
+  -- its global sections are invertible
+  have hΓ := isIso_lowerStar_kunnethMap_residueField ℓ E hM hN hpb hP hgen
+    (boundedConstructible_derivedExtendScalars_residueField X ℓ E.1 A₀ hA₀)
+    (boundedConstructible_derivedExtendScalars_residueField Y ℓ E.1 B₀ hB₀)
+  have hs := plusEtaleOrigin_kunnethMap_source _ (M := M) (N := N) (f₁' := f₁') (f₂' := f₂')
+    hT hAe hBe
+  have ht := plusEtaleOrigin_kunnethMap_target _ (P := P) (f₁ := f₁) (f₂ := f₂) hT hAe hBe
+  exact isIso_of_isIso_leftDerivedUpperStar_map_of_not_isClosed _ Z'.hom _ hs ht hpt hΓ
+
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel

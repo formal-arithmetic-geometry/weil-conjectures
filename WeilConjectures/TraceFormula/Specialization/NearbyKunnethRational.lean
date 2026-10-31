@@ -56,7 +56,8 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k'] [IsSepClosed k']
 models `M`, `N` of finite type along proper structure morphisms whose total spaces locally embed
 into `𝔸ᵐ_S`, `𝔸^{m'}_S`, if the generic-slicing step holds in chart dimension `m + m' - 1`, the
 Künneth map `Π_{A,B}` is an isomorphism for bounded constructible `A`, `B`. -/
-theorem isIso_kunnethMap_padicAlgCl_of_isProper [TopologicalSpace.NoetherianSpace Z]
+theorem isIso_kunnethMap_padicAlgCl_of_isProper [TopologicalSpace.NoetherianSpace X]
+    [TopologicalSpace.NoetherianSpace Y] [TopologicalSpace.NoetherianSpace Z]
     (hM : M.IsTraitModelOver qM gM)
     (hN : N.IsTraitModelOver qN gN) (hpb : IsPullback φ₁.total φ₂.total qM qN)
     (hP : P.IsTraitModelOver (φ₁.total ≫ qM) (φ₁.generic ≫ gM))
