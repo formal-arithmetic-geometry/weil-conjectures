@@ -259,6 +259,10 @@ attribute [local implicit_reducible] tensorMonoidal
   KFlatTotalTensorModel.tensor KFlatTotalTensorModel.monoidal
   CategoryTheory.Functor.mapHomologicalComplex CochainComplex.singleFunctors
 
+omit
+  [HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology W) AddCommGrpCat.{max u (t + 1)}]
+  [(AlgebraicGeometry.Scheme.ProEt.topology W).WEqualsLocallyBijective
+    AddCommGrpCat.{max u (t + 1)}] in
 private theorem single_tensor_inv (M : TensorModules l E W)
     (P : CochainComplex (TensorModules l E W) ℤ) (i : ℤ) :
     (CochainComplex.mapBifunctorSingle₂Iso
@@ -280,6 +284,10 @@ private theorem single_tensor_inv (M : TensorModules l E W)
   simp
   rfl
 
+omit
+  [HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology W) AddCommGrpCat.{max u (t + 1)}]
+  [(AlgebraicGeometry.Scheme.ProEt.topology W).WEqualsLocallyBijective
+    AddCommGrpCat.{max u (t + 1)}] in
 private theorem single_tensor_second_naturality
     {M N : TensorModules l E W} (f : M ⟶ N)
     (P : CochainComplex (TensorModules l E W) ℤ) (i : ℤ) :
@@ -483,7 +491,10 @@ private theorem ordinary_augmentation_apply (n : ℕ)
       IntegralOnSlice.generator l E W none n (P.X i) U 1 x :=
   (IntegralOnSlice.augmentation_existsUnique l E W none).exists.choose_spec P n i U x
 
-omit [EssentiallySmall.{max u (t + 1)} W.ProEt] in
+omit [EssentiallySmall.{max u (t + 1)} W.ProEt]
+  [HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology W) AddCommGrpCat.{max u (t + 1)}]
+  [(AlgebraicGeometry.Scheme.ProEt.topology W).WEqualsLocallyBijective
+    AddCommGrpCat.{max u (t + 1)}] in
 private theorem targetTower_map_step (n : ℕ)
     (P : CochainComplex (TensorModules l E W) ℤ) :
     (targetTower l E W P).map (homOfLE n.le_succ).op =

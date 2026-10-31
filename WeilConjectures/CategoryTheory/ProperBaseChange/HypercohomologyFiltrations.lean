@@ -128,12 +128,6 @@ private theorem inverse_square {V W V' W' : A} (a : V ⟶ W) (b : V' ⟶ W')
   rw [← Category.assoc, ← h]
   simp
 
-omit [HasDerivedCategory A] in
-set_option backward.isDefEq.respectTransparency false in
-omit [Abelian A] [HasDerivedCategory A] in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 /- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
 returned as a stage-3 repair item.
 set_option backward.isDefEq.respectTransparency false in

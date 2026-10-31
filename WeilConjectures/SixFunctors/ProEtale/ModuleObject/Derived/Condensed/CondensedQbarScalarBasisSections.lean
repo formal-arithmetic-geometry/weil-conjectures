@@ -132,7 +132,7 @@ private lemma copowerTensorIso_hom {I : Type v} (M : Mod C R) [HasCoproduct (fun
   rw [← Functor.map_comp]
   rfl
 
-omit [Abelian.HasFunctorialFlatResolution C] in
+omit [Abelian.HasFunctorialFlatResolution C] [MonoidalPreadditive C] in
 private lemma isIso_copowerAdjUnitDesc {I : Type v} (M : Mod C R) [HasCoproduct (fun _ : I ↦ M)]
     (e : (∐ fun _ : I ↦ regular R) ≅ (comap φ).obj (regular S)) :
     IsIso (Sigma.desc (f := fun _ : I ↦ M) fun i : I ↦

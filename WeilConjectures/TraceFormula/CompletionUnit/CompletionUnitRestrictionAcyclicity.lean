@@ -35,7 +35,8 @@ private abbrev limitComplex :=
     scalarReductionSource l E W).mapHomologicalComplex (.up ℤ)
 
 -- The coefficient-site identifications below follow the private construction in
--- WeilConjectures.SmoothPurity.SequenceKInjectiveComparison.SequenceKInjectiveComparisonShifts, specialized to the present tower.
+-- WeilConjectures.SmoothPurity.SequenceKInjectiveComparison.SequenceKInjectiveComparisonShifts,
+-- specialized to the present tower.
 private def coefficientCone :
     (Functor.const ℕᵒᵖ).obj (completedIntegralCommRingSheafUnrestricted l E W) ⟶
       coefficientSequenceCommRingSystem l E W :=

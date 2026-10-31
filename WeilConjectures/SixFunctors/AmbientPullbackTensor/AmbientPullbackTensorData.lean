@@ -216,7 +216,6 @@ Source: Stacks 03CB and Categories 0B65
 def CompositionLaws (K : Scheme.{t}) (s : Option ℕ) : Prop :=
   (∀ {W X Y Z : Scheme.{t}} (w : W ⟶ X) (f : X ⟶ Y) (g : Y ⟶ Z)
       (aW : W ⟶ K) (aX : X ⟶ K) (aY : Y ⟶ K) (aZ : Z ⟶ K)
-
       [LocallyOfFiniteType aW] [QuasiCompact aW] [LocallyOfFiniteType aX]
       [QuasiCompact aX]
       [LocallyOfFiniteType aY] [QuasiCompact aY]
@@ -246,7 +245,6 @@ def CompositionLaws (K : Scheme.{t}) (s : Option ℕ) : Prop :=
         eqToHom (congrArg (fun a ↦ (pull ell E a s).obj M) (Category.id_comp f))) ∧
   (∀ {W X Y Z : Scheme.{t}} (w : W ⟶ X) (f : X ⟶ Y) (g : Y ⟶ Z)
       (aW : W ⟶ K) (aX : X ⟶ K) (aY : Y ⟶ K) (aZ : Z ⟶ K)
-
       [LocallyOfFiniteType aW] [QuasiCompact aW] [LocallyOfFiniteType aX]
       [QuasiCompact aX]
       [LocallyOfFiniteType aY] [QuasiCompact aY]

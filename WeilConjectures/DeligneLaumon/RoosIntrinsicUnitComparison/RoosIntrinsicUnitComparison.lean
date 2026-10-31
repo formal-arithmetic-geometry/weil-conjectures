@@ -219,7 +219,10 @@ private theorem levelUnit_compatible (P : CochainComplex (Modules l E W) ℤ) (n
   erw [CochainComplex.mappingCone.inr_desc]
   exact Category.id_comp _
 
-omit [EssentiallySmall.{max u (t + 1)} W.ProEt] in
+omit [EssentiallySmall.{max u (t + 1)} W.ProEt]
+  [HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology W) AddCommGrpCat.{max u (t + 1)}]
+  [(AlgebraicGeometry.Scheme.ProEt.topology W).WEqualsLocallyBijective
+    AddCommGrpCat.{max u (t + 1)}] in
 private theorem levelUnit_comparison (P : CochainComplex (Modules l E W) ℤ) (n : ℕ) :
     levelUnit l E W P n ≫ (comparison l E W P).app (op n) =
       quotientUnit l E W P n := by
@@ -241,7 +244,10 @@ private theorem levelUnit_comparison (P : CochainComplex (Modules l E W) ℤ) (n
   dsimp only [quotientComparison]
   erw [cokernel.π_desc]
 
-omit [EssentiallySmall.{max u (t + 1)} W.ProEt] in
+omit [EssentiallySmall.{max u (t + 1)} W.ProEt]
+  [HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology W) AddCommGrpCat.{max u (t + 1)}]
+  [(AlgebraicGeometry.Scheme.ProEt.topology W).WEqualsLocallyBijective
+    AddCommGrpCat.{max u (t + 1)}] in
 private theorem quotientUnit_compatible (P : CochainComplex (Modules l E W) ℤ) (n : ℕ) :
     quotientUnit l E W P (n + 1) ≫
         (quotientTower l E W P).asFunctor.map (homOfLE n.le_succ).op =
