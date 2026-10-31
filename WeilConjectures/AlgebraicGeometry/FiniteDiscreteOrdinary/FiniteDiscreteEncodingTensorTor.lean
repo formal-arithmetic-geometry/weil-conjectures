@@ -102,6 +102,8 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary
 
+attribute [local instance] Sheaf.monoidalCategory Sheaf.symmetricCategory
+
 -- Match the ambient braiding used to construct the coefficient ring and relative tensor.
 attribute [local instance 20000] sheafBraidedCategory
 -- Use the closedness API without unfolding its large adjoint construction.
@@ -154,6 +156,9 @@ private theorem section_monoidal
   obtain ⟨_, t, z, _, _, hn, ha, hl, hr, _⟩ :=
     InternalAbelianSheafModule.internal_section_tensor_comparison J R
   exact monoidal_of_comparison _ t z hn ha hl hr
+
+private instance ordinary_derived (T : Scheme.{u}) : HasDerivedCategory (Ordinary A T) :=
+  HasDerivedCategory.standard _
 
 set_option backward.isDefEq.respectTransparency false in
 private theorem ordinary_monoidal (T : Scheme.{u}) (e : Encoding A T) :

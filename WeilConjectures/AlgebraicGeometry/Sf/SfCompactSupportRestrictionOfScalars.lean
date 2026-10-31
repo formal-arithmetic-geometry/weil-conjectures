@@ -32,6 +32,17 @@ variable {A B C : Type u} [CommRing A] [CommRing B] [CommRing C]
   [Finite A] [Finite B] [Finite C]
 
 omit [Finite A] [Finite B] [Finite C] in
+/-- The sectionwise coefficient compositor is the identity on sections. -/
+private theorem restriction_comp_apply (T : Scheme.{u})
+    (φ : A →+* B) (ψ : B →+* C)
+    (M : proEtaleRingModules T (proEtaleConstantRing T C)) (V : T.ProEtᵒᵖ)
+    (x : M.val.obj V) :
+    ((sfCoefficientRestrictionComp T φ ψ).hom.app M).val.app V x = x :=
+  (pbcRestrictComp_exists _ _ _
+    ((constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).map_comp _ _).symm).exists.choose_spec
+      M V x
+
+omit [Finite A] [Finite B] [Finite C] in
 /-- Cancel the sectionwise coefficient compositor against its inverse. -/
 private theorem restrictionComp_inv_apply (T : Scheme.{u})
     (φ : A →+* B) (ψ : B →+* C)

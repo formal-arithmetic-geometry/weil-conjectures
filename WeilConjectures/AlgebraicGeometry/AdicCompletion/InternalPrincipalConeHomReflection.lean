@@ -234,6 +234,7 @@ private theorem reflection_transport
     rw [Category.assoc, ← Category.assoc η', hg]
     simp only [Category.assoc, Iso.hom_inv_id_assoc, Iso.hom_inv_id, Category.comp_id]
 
+attribute [local instance] Sheaf.monoidalCategory Sheaf.braidedCategory in
 private theorem internal_scalar_apply
     {C : Type v} [Category.{w} C] (J : GrothendieckTopology C)
     [UnivLE.{max v w, u}] [HasSheafify J AddCommGrpCat.{u}]

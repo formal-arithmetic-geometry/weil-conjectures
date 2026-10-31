@@ -91,6 +91,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 open CategoryTheory.MonoidalCategory
 open scoped TensorProduct
 
+attribute [local instance] Sheaf.monoidalCategory Sheaf.symmetricCategory
 attribute [local instance 2000] sheafMonoidalCategory sheafBraidedCategory
 
 section TensorComparison

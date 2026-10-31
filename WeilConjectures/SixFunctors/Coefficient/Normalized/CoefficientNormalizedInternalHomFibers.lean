@@ -375,7 +375,7 @@ end EvaluationAdjoint
 
 private theorem coefficientEvaluation_rightAdjoint (n : ℕ) :
     (coefficientSequenceDerivedEvaluation l E W n).IsRightAdjoint := by
-  exact evaluation_isRightAdjoint (Scheme.ProEt.topology W)
+  exact evaluation_isRightAdjoint.{t, t + 1, u} (Scheme.ProEt.topology W)
     (integralCoefficientCommRingSheaf l E W)
     (coefficientSequenceCommRingTransition l E W) n
 

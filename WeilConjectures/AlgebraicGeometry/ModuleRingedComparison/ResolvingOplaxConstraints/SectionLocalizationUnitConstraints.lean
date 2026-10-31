@@ -215,6 +215,14 @@ private theorem transportTensorMap (E : C ≌ D) {X X' Y Y' : D}
     (TensorFunctorTransport.tensorFunctor E).map (Prod.mkHom f g) = f ⊗ₘ g := rfl
 end ComparisonStructure
 
+/-- Retaining the data fields gives exactly the original termwise functor.
+Source: Stacks 07A4 (blueprint: def-pd-section-cochain-tensor-comparison).
+Proof: both functors have identical object and morphism maps; their laws are proofs. -/
+private theorem retainedCochainFunctor_eq
+    {C D : Type*} [Category* C] [Category* D] [HasZeroMorphisms C] [HasZeroMorphisms D]
+    (F : C ⥤ D) [F.PreservesZeroMorphisms] :
+    retainedCochainFunctor F = F.mapHomologicalComplex (.up ℤ) := rfl
+
 omit [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)] in
 private theorem internalLocalizationUnit (T : Scheme.{u}) :
     Functor.LaxMonoidal.ε (DerivedCategory.Q (C := internalModules Λ T)) = 𝟙 _ := by

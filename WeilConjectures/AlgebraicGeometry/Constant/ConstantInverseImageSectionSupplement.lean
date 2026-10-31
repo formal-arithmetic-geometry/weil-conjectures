@@ -64,7 +64,7 @@ theorem transportedConstantSection_quotient
   have hq (V : Cᵒᵖ) : (quotient JC A I 0).hom.app V
       ((constantSection (J := JC) a).val V) = 0 := by
     have hn := congrArg (fun f ↦ (f.app V).hom a)
-      (toSheafify_naturality JC ((Functor.const Cᵒᵖ).map
+      (toSheafify_naturality (D := CommRingCat.{u}) JC ((Functor.const Cᵒᵖ).map
         (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (0 + 1))))))
     change (toSheafify JC ((Functor.const Cᵒᵖ).obj
         (CommRingCat.of (A ⧸ I ^ (0 + 1))))).app V

@@ -255,7 +255,7 @@ private theorem constant_exact (T : Scheme.{u}) (A : Type (u + 1)) [CommRing A] 
     PreservesFiniteLimits (adicLisseConstantModules T A) ∧
       PreservesFiniteColimits (adicLisseConstantModules T A) := by
   let P : ModuleCat.{u + 1} A ⥤
-      PresheafOfModules.{u + 1} ((Functor.const T.ProEtᵒᵖ).obj (RingCat.of A)) :=
+      _root_.PresheafOfModules.{u + 1} ((Functor.const T.ProEtᵒᵖ).obj (RingCat.of A)) :=
     siteConstantModulePresheaf (C := Discrete (ULift.{u + 1} Unit)) A ⋙
       PresheafOfModules.pushforward₀
         ((Functor.const T.ProEt).obj (Discrete.mk (ULift.up ())))
@@ -288,7 +288,7 @@ private noncomputable def constantChange_unit (T : Scheme.{u})
     (c : adicLisseConstantRing T A ⟶ S) :
     (completedAdicChange T c).obj ((adicLisseConstantModules T A).obj (ModuleCat.of A A)) ≅
       SheafOfModules.unit ((adicLisseForget T).obj S) := by
-  let P : PresheafOfModules.{u + 1}
+  let P : _root_.PresheafOfModules.{u + 1}
       ((Functor.const T.ProEtᵒᵖ).obj (RingCat.of A)) :=
     (siteConstantModulePresheaf (C := Discrete (ULift.{u + 1} Unit)) A ⋙
       PresheafOfModules.pushforward₀
@@ -611,7 +611,7 @@ theorem finiteReduction_exists (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
   let M := (adicLisseConstantModules T A).obj (ModuleCat.of A Q)
   let N := (SheafOfModules.restrictScalars ((adicLisseForget T).map c)).obj
     (finiteResidue T I hf n)
-  let P : PresheafOfModules.{u + 1}
+  let P : _root_.PresheafOfModules.{u + 1}
       ((Functor.const T.ProEtᵒᵖ).obj (RingCat.of A)) :=
     (siteConstantModulePresheaf (C := Discrete (ULift.{u + 1} Unit)) A ⋙
     PresheafOfModules.pushforward₀
