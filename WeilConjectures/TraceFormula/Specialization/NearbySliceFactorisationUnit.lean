@@ -6,14 +6,15 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.Specialization.NearbySliceFactorisation
-public import WeilConjectures.TraceFormula.Specialization.NearbySliceInvariantsUnit
+public import WeilConjectures.TraceFormula.Specialization.NearbySliceInvariants
 
 /-!
 
 # The slice exchange from the Galois part of the change of geometric generic fibre
 
-If the change of geometric generic fibre `g = φ.toCart.generic` of a morphism of models factors as
-`g = r₁ ≫ q ≫ r₂` with `r₁`, `r₂` universal homeomorphisms, the pullback exchange of `φ.toCart`
+If the change of geometric generic fibre `g = φ.toCartesian.generic` of a morphism of models
+factors as
+`g = r₁ ≫ q ≫ r₂` with `r₁`, `r₂` universal homeomorphisms, the pullback exchange of `φ.toCartesian`
 is a split monomorphism at `C` as soon as the unit of `Lq^* ⊣ Rq_*` is a split monomorphism at
 `Lr₂^* Lε'^* C` (`NearbyCyclesModel.Hom.isSplitMono_toCart_pullbackExchange_app_of_factor₃`).
 
@@ -39,40 +40,7 @@ open Scheme
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
-/-- **Split units up to universal homeomorphisms on both sides**: for `g = r₁ ≫ q ≫ r₂` with `r₁`
-and `r₂` universal homeomorphisms, the unit of `Lg^* ⊣ Rg_*` is a split monomorphism at `G` as
-soon as the unit of `Lq^* ⊣ Rq_*` is a split monomorphism at `Lr₂^* G`. -/
-theorem isSplitMono_derivedUpperStarLowerStarAdjunction_unit_app_comp₃ {X Z₁ Z₂ Y : Scheme.{u}}
-    (r₁ : X ⟶ Z₁) (q : Z₁ ⟶ Z₂) (r₂ : Z₂ ⟶ Y) [IsUniversalHomeomorphism r₁]
-    [IsUniversalHomeomorphism r₂]
-    (G : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
-      (condensedRingObj Λ Y)))
-    (hq : IsSplitMono ((derivedUpperStarLowerStarAdjunction Λ q).unit.app
-      ((L((r₂)^*⟦Λ⟧)).obj G))) :
-    IsSplitMono ((derivedUpperStarLowerStarAdjunction Λ (r₁ ≫ q ≫ r₂)).unit.app G) := by
-  have := isSplitMono_derivedUpperStarLowerStarAdjunction_unit_app_comp Λ q r₂ G
-  exact isSplitMono_derivedUpperStarLowerStarAdjunction_unit_app_comp Λ r₁ (q ≫ r₂) G
-
 namespace NearbyCyclesModel
-
-/-- **The change of geometric generic fibre up to universal homeomorphisms on both sides**: if
-`g = φ.toCart.generic` factors as `g = r₁ ≫ q ≫ r₂` with `r₁`, `r₂` universal homeomorphisms
-and the unit of `Lq^* ⊣ Rq_*` is a split monomorphism at `Lr₂^* Lε'^* C`, then the pullback
-exchange of `φ.toCart` is a split monomorphism at `C`. -/
-theorem Hom.isSplitMono_toCart_pullbackExchange_app_of_factor₃ {X X' Y Y' : Scheme.{u}}
-    {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'} {f : X ⟶ Y} {f' : X' ⟶ Y'}
-    (φ : M.Hom N f f')
-    (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
-      (condensedRingObj Λ Y)))
-    {Z₁ Z₂ : Scheme.{u}} (r₁ : M.generic ⟶ Z₁) (q : Z₁ ⟶ Z₂) (r₂ : Z₂ ⟶ φ.cartModel.generic)
-    [IsUniversalHomeomorphism r₁] [IsUniversalHomeomorphism r₂]
-    (h : r₁ ≫ q ≫ r₂ = φ.toCart.generic)
-    (hq : IsSplitMono ((derivedUpperStarLowerStarAdjunction Λ q).unit.app
-      ((L((r₂)^*⟦Λ⟧)).obj ((L((φ.cartModel.ε)^*⟦Λ⟧)).obj C)))) :
-    IsSplitMono ((φ.toCart.pullbackExchange Λ).app C) := by
-  refine φ.isSplitMono_toCart_pullbackExchange_app_of_isSplitMono_unit Λ C ?_
-  rw [← h]
-  exact isSplitMono_derivedUpperStarLowerStarAdjunction_unit_app_comp₃ Λ r₁ q r₂ _ hq
 
 variable {k' : Type u} [Field k'] [IsSepClosed k']
 
@@ -87,8 +55,8 @@ theorem isSplitMono_toCart_pullbackExchange_app_affineSpaceSliceHom_of_galois (n
     (hq : IsSplitMono ((derivedUpperStarLowerStarAdjunction Λ
       (affineSpaceSliceGaloisMap k' n i)).unit.app
         ((L((affineSpaceSliceThickening k' n i)^*⟦Λ⟧)).obj
-          ((L(((affineSpaceSliceHom k' n i).cartModel.ε)^*⟦Λ⟧)).obj C)))) :
-    IsSplitMono (((affineSpaceSliceHom k' n i).toCart.pullbackExchange Λ).app C) :=
+          ((L(((affineSpaceSliceHom k' n i).cartesianModel.ε)^*⟦Λ⟧)).obj C)))) :
+    IsSplitMono (((affineSpaceSliceHom k' n i).toCartesian.pullbackExchange Λ).app C) :=
   Hom.isSplitMono_toCart_pullbackExchange_app_of_factor₃ Λ _ C _ _ _
     (affineSpaceSliceHom_toCart_generic_factor n i) hq
 
@@ -109,12 +77,12 @@ theorem isSplitMono_pullbackExchange_app_affineSpaceSliceHom_of_galois (n : ℕ)
     {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology (affineSpaceModel k' (n + 1)).total)
       Ab.{u + 1}) (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
         (affineSpaceModel k' (n + 1)).total))}
-    (hfrom : IsIso (((affineSpaceSliceHom k' n i).fromCart.pullbackExchange
+    (hfrom : IsIso (((affineSpaceSliceHom k' n i).fromCartesian.pullbackExchange
       (Profinite.padicAlgClRingObj ℓ)).app B))
     (hq : IsSplitMono ((derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ)
       (affineSpaceSliceGaloisMap k' n i)).unit.app
         ((L((affineSpaceSliceThickening k' n i)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj
-          ((L(((affineSpaceSliceHom k' n i).cartModel.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj
+          ((L(((affineSpaceSliceHom k' n i).cartesianModel.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj
             B)))) :
     IsSplitMono (((affineSpaceSliceHom k' n i).pullbackExchange
       (Profinite.padicAlgClRingObj ℓ)).app B) := by

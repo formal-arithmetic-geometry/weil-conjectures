@@ -19,6 +19,7 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethSlice
 public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModelAut
 public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModelHom
 public import WeilConjectures.TraceFormula.Specialization.TraitSliceInvariants
+public import WeilConjectures.TraceFormula.Specialization.TraitChangeInvariance
 
 /-!
 
@@ -43,7 +44,7 @@ if the Künneth map of the geometric slice is an isomorphism, so is the restrict
 `Π_{A,B}` is a retract of the Künneth map of the geometric slice
 (`NearbyCyclesModel.isIso_map_kunnethMap_of_isTensorRetract`), given the two facts on traits:
 the invariance of nearby cycles under change of trait
-(`NearbyCyclesModel.isIso_pullbackExchange_baseChangeHom_traitMap`, unfinished) and the
+(`NearbyCyclesModel.isIso_pullbackExchange_baseChangeHom_traitMap_of_generic`) and the
 generic-slicing identification with invariants
 (`NearbyCyclesModel.exists_sum_autAction_pullbackExchange_sliceFst`, from the unfinished
 `NearbyCyclesModel.exists_subgroup_pullbackExchange_sliceTraitChangeHom`); the projection
@@ -297,7 +298,8 @@ pro-`p` kernel `P'` of the map of inertia groups
 `Π'` is the projection formula for invariants (blueprint `det-nearby-kunneth-invariants`): `Π'` is
 equivariant (`NearbyCyclesModel.kunnethMap_autAction`) and `P'` acts trivially on the nearby
 cycles of the change of trait of `N` (`NearbyCyclesModel.Hom.autAction_eq_id_of_isIso`, by the
-invariance under change of trait `NearbyCyclesModel.isIso_pullbackExchange_baseChangeHom_traitMap`),
+invariance under change of trait
+`NearbyCyclesModel.isIso_pullbackExchange_baseChangeHom_traitMap_of_generic`),
 see `NearbyCyclesModel.isTensorRetract_of_average`. -/
 theorem isTensorRetract_map_kunnethMap_comp_pullbackExchange_sliceFst
     {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -323,7 +325,7 @@ theorem isTensorRetract_map_kunnethMap_comp_pullbackExchange_sliceFst
       A B) := by
   obtain ⟨n, τ, hn, rM, rP, hrM, havgM, hrP, havgP⟩ :=
     exists_sum_autAction_pullbackExchange_sliceFst hM hP hb hA hB
-  have hN' := isIso_pullbackExchange_baseChangeHom_traitMap hN
+  have hN' := isIso_pullbackExchange_baseChangeHom_traitMap_of_generic hN
     (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ N.ε B hB)
   refine isTensorRetract_of_average (Profinite.padicAlgClRingObj ℓ) φ₁ φ₂
     (sliceFst hM hP hb) (sliceSnd hN hpb hP hgen hb)
@@ -364,7 +366,7 @@ the Künneth map of the slice (`NearbyCyclesModel.isIso_map_kunnethMap_of_isTens
 the generic-slicing identification
 (`NearbyCyclesModel.isTensorRetract_map_kunnethMap_comp_pullbackExchange_sliceFst`) and the
 invariance of nearby cycles under change of trait
-(`NearbyCyclesModel.isIso_pullbackExchange_baseChangeHom_traitMap`). -/
+(`NearbyCyclesModel.isIso_pullbackExchange_baseChangeHom_traitMap_of_generic`). -/
 theorem isIso_map_kunnethMap_of_isIso_sliceFst
     {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))}
@@ -383,7 +385,7 @@ theorem isIso_map_kunnethMap_of_isIso_sliceFst
       (L((𝟙 Y)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B)) :=
     isIso_kunnethMap_of_iso _ _ _ ((leftDerivedUpperStarId _ X).app A)
       ((leftDerivedUpperStarId _ Y).app B) h
-  have hN' := isIso_pullbackExchange_baseChangeHom_traitMap hN
+  have hN' := isIso_pullbackExchange_baseChangeHom_traitMap_of_generic hN
     (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ N.ε B hB)
   have hT :=
     isTensorRetract_map_kunnethMap_comp_pullbackExchange_sliceFst hM hN hpb hP hgen hb hA hB

@@ -15,6 +15,8 @@ epimorphism. If moreover `b` is a split epimorphism and `a` is an isomorphism, t
 isomorphism. If `p ≫ i = b ≫ s` is an epi–mono factorisation with `s ≫ b = 𝟙`, then `i ≫ b` is
 an isomorphism (`CategoryTheory.isIso_comp_of_fac`). A morphism with an inverse up to
 isomorphisms on both sides is an isomorphism (`CategoryTheory.isIso_of_isIso_comp_of_isIso_comp`).
+A natural transformation that is a split monomorphism at an object is one at every isomorphic
+object (`CategoryTheory.NatTrans.isSplitMono_app_of_iso`).
 -/
 
 @[expose] public section
@@ -61,5 +63,13 @@ lemma isIso_of_isIso_comp_of_isIso_comp {P Q : C} (a : P ⟶ Q) (b : Q ⟶ P) (h
     IsIso.hom_inv_id]⟩
   have : IsSplitEpi a := IsSplitEpi.mk' ⟨inv (b ≫ a) ≫ b, by rw [Category.assoc, IsIso.inv_hom_id]⟩
   exact isIso_of_epi_of_isSplitMono a
+
+/-- A natural transformation that is a split monomorphism at `Y` is one at any `X ≅ Y`. -/
+lemma NatTrans.isSplitMono_app_of_iso {D : Type*} [Category D] {F G : C ⥤ D} (α : F ⟶ G)
+    {X Y : C} (e : X ≅ Y) (h : IsSplitMono (α.app Y)) : IsSplitMono (α.app X) := by
+  have hX : α.app X = F.map e.hom ≫ α.app Y ≫ G.map e.inv := by
+    rw [α.naturality_assoc, ← G.map_comp, e.hom_inv_id, G.map_id, Category.comp_id]
+  rw [hX]
+  infer_instance
 
 end CategoryTheory
