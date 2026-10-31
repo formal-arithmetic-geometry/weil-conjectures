@@ -18,8 +18,9 @@ public import WeilConjectures.TraceFormula.PurityTensorMapDualizable
 
 Let `f : X ⟶ Y` be a morphism of separated `k`-schemes of finite type, with projections
 `p₁, p₂ : X ×_Y X ⟶ X` and diagonal `Δ : X ⟶ X ×_Y X`. This file carries out, on the bounded
-constructible derived categories `Dᵇc(-)⟦ℚ̲̄_ℓ⟧`, the formal part of the diagonal construction of the
-identification `ω_f = Rf^! ℚ̄_ℓ ≅ ℚ̄_ℓ,X(d)[2d]` (blueprint `thm-pur-diagonal-dualizing-object`):
+constructible derived categories `Dᵇc(-)⟦ℚ̲̄_ℓ⟧`, the formal part of the diagonal construction of
+the identification `ω_f = Rf^! ℚ̄_ℓ ≅ ℚ̄_ℓ,X(d)[2d]`
+(blueprint `thm-pur-diagonal-dualizing-object`):
 
 1. `Lp₂^* ω_f ⟶ ω_{p₁}` is the exceptional base change map at the unit
    (`ProEtale.CondensedRing.diagonalBaseChangeMap`, blueprint `lem-pur-diagonal-base-change`);
@@ -140,7 +141,8 @@ noncomputable def dualizingComplexTateTwistIsoOfDiagonal (d : ℕ)
     (hbc : IsIso (diagonalBaseChangeMap ℓ f))
     (hK : IsIso (upperShriekUnitTensorMap ℓ (pullback.diagonal f)
       ((boundedConstructibleUpperShriek ℓ (pullback.fst f f)).obj (𝟙_ _)))) :
-    (boundedConstructibleUpperShriek ℓ f).obj (𝟙_ _) ≅ boundedConstructibleTateTwist ℓ X d (2 * d) :=
+    (boundedConstructibleUpperShriek ℓ f).obj (𝟙_ _) ≅
+      boundedConstructibleTateTwist ℓ X d (2 * d) :=
   (upperStarDiagonalPullbackSndIso ℓ f _).symm ≪≫
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
       (pullback.diagonal f)).mapIso (@asIso _ _ _ _ _ hbc) ≪≫

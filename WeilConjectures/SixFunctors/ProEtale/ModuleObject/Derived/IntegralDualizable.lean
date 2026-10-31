@@ -16,7 +16,8 @@ public import WeilConjectures.TraceFormula.PointDualizable
 /-!
 # Dualizable bounded constructible `𝒪_E`-complexes
 
-The integral analogues of `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocallyFreeDualizable`
+The integral analogues of
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocallyFreeDualizable`
 and `WeilConjectures.TraceFormula.DualizableShift`: in `Dᵇc(X)⟦𝒪_E⟧`, a locally free module object
 placed in degree `0` is dualizable
 (`ProEtale.CondensedRing.isDualizable_singleFunctor_of_isLocallyFree_padicIntegers`), and so are
@@ -75,6 +76,7 @@ noncomputable def boundedConstructibleShiftTensorShiftIso_padicIntegers
       DerivedCategory.shiftTensorShiftIso _ (ι.obj A) (ι.obj B) a b ≪≫
       ((ι.commShiftIso (a + b)).app (A ⊗ B)).symm)
 
+omit [Fact (ringChar k).Prime] [IsSeparated X.hom] in
 /-- The shifts `𝟙⟦n⟧` of the unit of `Dᵇc(X)⟦𝒪_E⟧` are dualizable. -/
 theorem isDualizable_shift_unit_padicIntegers (n : ℤ) :
     IsDualizable ((shiftFunctor (Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) n).obj
@@ -89,6 +91,7 @@ theorem isDualizable_shift_unit_padicIntegers (n : ℤ) :
   exact isDualizable_of_tensorIso (e n (-n) (add_neg_cancel n)) (e (-n) n (neg_add_cancel n))
 
 variable {ℓ E X} in
+omit [Fact (ringChar k).Prime] [IsSeparated X.hom] in
 /-- The shifts of a dualizable object of `Dᵇc(X)⟦𝒪_E⟧` are dualizable. -/
 theorem IsDualizable.shift_padicIntegers {L : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧}
     (hL : IsDualizable L) (n : ℤ) :
