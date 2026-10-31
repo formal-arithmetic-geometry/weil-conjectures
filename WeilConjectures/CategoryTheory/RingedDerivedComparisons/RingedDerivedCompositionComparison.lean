@@ -417,10 +417,6 @@ private theorem unit_of_tensor
     Functor.OplaxMonoidal.η F ▷ F.obj (𝟙_ C)
   simpa only [← tensorHom_id] using hright.symm
 
-set_option maxHeartbeats 800000 in
 -- The two complex adjunctions and their derived counterparts have different presentation wrappers.
-open CategoryTheory.MonoidalCategory in
-set_option maxHeartbeats 800000 in
 -- Resolve the source and compare both composite adjunctions without unfolding their constructions.
-open CategoryTheory.MonoidalCategory in
 end CategoryTheory.RingedDerivedComparisons

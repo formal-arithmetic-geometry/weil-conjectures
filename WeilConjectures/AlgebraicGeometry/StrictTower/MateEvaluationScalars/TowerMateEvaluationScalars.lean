@@ -261,7 +261,6 @@ variable {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
   [PreservesFiniteLimits L] [PreservesFiniteColimits L]
   [PreservesFiniteLimits R] [PreservesFiniteColimits R]
 
-omit [PreservesFiniteLimits R] [PreservesFiniteColimits R] in
 end ExactEvaluation
 
 section ExactScalarDescent

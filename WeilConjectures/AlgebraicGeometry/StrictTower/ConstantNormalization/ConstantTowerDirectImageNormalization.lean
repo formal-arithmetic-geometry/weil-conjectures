@@ -610,11 +610,6 @@ private theorem reductionComparison_on_complexes
     obtain ⟨E, hE, hImage, rfl⟩ := hZ
     exact hτ' E hE
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-omit [Abelian C] [HasDerivedCategory C] [Abelian D] [HasDerivedCategory D]
-  [Abelian T] [HasDerivedCategory T] [Abelian U] [HasDerivedCategory U] in
 end ReductionComparison
 
 set_option backward.isDefEq.respectTransparency false in

@@ -302,8 +302,6 @@ private noncomputable def finiteTensorAdjunction :
     apply PresheafOfModules.hom_ext
     intro W
     rfl
-set_option backward.isDefEq.respectTransparency false in
-omit [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] in
 end
 
 end AlgebraicGeometry.ProEtale

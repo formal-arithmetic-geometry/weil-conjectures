@@ -254,7 +254,6 @@ variable {SY SX : Type u} [SmallCategory SY] [SmallCategory SX]
 
 attribute [local irreducible] mateIsoEquiv restrictHomEquiv
 
-include ha in
 end
 end TransportedHom
 
@@ -273,7 +272,6 @@ variable {SY SX : Type u} [SmallCategory SY] [SmallCategory SX]
     IB.ringUnderlying.hom = IA.ringUnderlying.hom ≫
       (sheafCompose JX (CategoryTheory.forget CommRingCat)).map aX)
 
-include V adj ha in
 end
 
 set_option backward.isDefEq.respectTransparency false

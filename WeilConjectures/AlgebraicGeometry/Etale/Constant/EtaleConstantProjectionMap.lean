@@ -130,5 +130,4 @@ noncomputable def derivedConstantGlobalSectionsAdjunction (X : Scheme.{u}) :
       rightDerivedGlobalSections A X :=
   (constantSheafΓAdj X.smallEtaleTopology A).derivedAdjunction
 
-omit [HasSmallSiteSheafify A] in
 end AlgebraicGeometry.Etale

@@ -226,5 +226,4 @@ private noncomputable def homBifunctor :
     dsimp
     rw [homComplexMap_comp H]
     simp
-omit [HasProducts D] [H.Additive] [∀ a, (H.obj a).Additive] in
 end CategoryTheory

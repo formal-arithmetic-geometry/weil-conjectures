@@ -336,7 +336,6 @@ variable {E : Type u} {H : Type v} [Category.{vA} E] [Category.{vB} H]
     [Abelian E] [Abelian H] [HasCountableProducts E] [HasCountableProducts H]
     (F : E ⥤ H) [F.Additive]
 
-omit [HasCountableProducts H] in
 end ScalarAugmentation
 
 set_option backward.isDefEq.respectTransparency false in

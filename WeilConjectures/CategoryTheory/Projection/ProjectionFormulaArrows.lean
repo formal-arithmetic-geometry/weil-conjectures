@@ -524,7 +524,6 @@ variable {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
       (ComplexShape.up ℤ) (ComplexShape.up ℤ) (ComplexShape.up ℤ)) ⋙ DerivedCategory.Q ≅
         ((PR.ι ⋙ DerivedCategory.Q).prod (PR.ι ⋙ DerivedCategory.Q)) ⋙ TR)
 
-include hPR in
 end SheafOfModules
 
 namespace SheafOfModules

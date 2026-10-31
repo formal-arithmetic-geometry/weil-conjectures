@@ -36,11 +36,8 @@ variable (T : ℕᵒᵖ ⥤ A) (C : A)
   (a : ℕ) (hf : ∀ n : ℕ, T.map (homOfLE (Nat.le_add_right n a)).op =
     v.app (op (n + a)) ≫ u.app (op n))
 
-include v huv a hf in
 variable [HasProduct (fun n : ℕ ↦ T.obj (op n))] [HasProduct (fun _ : ℕ ↦ C)]
 
-include u v huv a hf in
-include u v huv a hf in
 end ProconstantRoos
 namespace ProconstantComplex
 variable {A : Type u} [Category.{v} A] [Abelian A] [HasCountableProducts A]
@@ -53,8 +50,6 @@ variable (D : ℕᵒᵖ ⥤ CochainComplex A ℤ) (L : CochainComplex A ℤ)
     (D.map (homOfLE (Nat.le_add_right n N)).op).f p =
       (β p).app (op (n + N)) ≫ (w.app (op n)).f p)
 
-include β hβ N hN in
-include β hβ N hN in
 end ProconstantComplex
 
 universe t

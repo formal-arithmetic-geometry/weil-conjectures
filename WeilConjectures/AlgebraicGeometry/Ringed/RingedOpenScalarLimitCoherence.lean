@@ -430,8 +430,6 @@ private theorem equations_derived (he : CbcAdjunctionCompatible e d adjS adjR) :
   rw [cbcDerivedSquare_symm, cbcDerivedSquare_symm] at hd
   exact equations_of_inverseMate _ _ _ _ hd
 
-omit [HasDerivedCategory.{wA} A] [HasDerivedCategory.{wA} B]
-    [HasDerivedCategory.{wA} C] [HasDerivedCategory.{wA} D] in
 end EquationCalculus
 
 section
@@ -632,7 +630,6 @@ private theorem comparison_normalized
   rw [← DerivedCategory.Q.map_comp, comparison_inclusion F a b c X,
     DerivedCategory.Q.map_comp]
 
-omit [IsGrothendieckAbelian.{v} (ℕᵒᵖ ⥤ A)] in
 end Normalization
 end CoherenceHelpers
 set_option backward.isDefEq.respectTransparency true
@@ -680,7 +677,6 @@ instance cbcAbLocallyBijective (T : Scheme.{u}) :
 variable {T : Scheme.{u}} (U : T.ProEt)
   {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : R ⟶ S)
 
-open Classical in
 variable [HasDerivedCategory.{wA} (ringedSiteModules.{u + 1} ((proEtaleModuleCoefficients R).over
   U))]
   [HasDerivedCategory.{wA} (ℕᵒᵖ ⥤ ringedSiteModules.{u + 1} ((proEtaleModuleCoefficients R).over

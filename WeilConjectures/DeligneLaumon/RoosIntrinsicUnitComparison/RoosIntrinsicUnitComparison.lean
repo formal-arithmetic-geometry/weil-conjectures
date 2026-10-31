@@ -258,11 +258,9 @@ private theorem quotientUnit_compatible (P : CochainComplex (Modules l E W) ℤ)
 
 end UnitCompatibility
 
-omit [EssentiallySmall.{max u (t + 1)} W.ProEt] in
 section RoosTowerComparisonAPI
 attribute [local irreducible] roosF DerivedCategory DerivedCategory.Q
 
-omit [EssentiallySmall.{max u (t + 1)} W.ProEt] in
 end RoosTowerComparisonAPI
 
 private def quotientAugmentation (P : CochainComplex (Modules l E W) ℤ) :
@@ -313,7 +311,6 @@ private def ordinaryAugmentation :
       (ℕᵒᵖ ⥤ CochainComplex (ComparisonModules l E W) ℤ)) ⟶ ordinaryTower l E W :=
   IntegralOnSlice.augmentation l E W none
 
-omit [EssentiallySmall.{max u (t + 1)} W.ProEt] in
 end OrdinaryWrapperAPI
 
 section ScalarRoosComparison
@@ -324,7 +321,6 @@ attribute [local irreducible] CochainComplex.mappingCone roosF
 
 end ScalarRoosComparison
 
-omit [EssentiallySmall.{max u (t + 1)} W.ProEt] in
 end
 
 omit [EssentiallySmall.{max u (t + 1)} W.ProEt]
@@ -363,10 +359,6 @@ attribute [local irreducible] IntegralOnSlice.completion
 section QuotientDescentAPI
 attribute [local irreducible] roosF DerivedCategory DerivedCategory.Q
 
-omit [EssentiallySmall.{max u (t + 1)} W.ProEt]
-  [HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology W) AddCommGrpCat.{max u (t + 1)}]
-  [(AlgebraicGeometry.Scheme.ProEt.topology W).WEqualsLocallyBijective
-    AddCommGrpCat.{max u (t + 1)}] in
 end QuotientDescentAPI
 
 end ConcreteInstances

@@ -568,9 +568,6 @@ private def coefficientIso :
     eqToIso ((flatConstantExtensionModel J A φ).obj_eq (SheafOfModules.unit (R J A))) ≪≫
       scalarUnitIso J A φ
 
-omit [EssentiallySmall.{max u v} C]
-  [HasDerivedCategory.{wO} (SheafOfModules.{max u v}
-    (SheafOfModules.derivedChangeRingIndependentCoefficients J O))] in
 end FlatConstantUnitProof
 
 set_option backward.isDefEq.respectTransparency false in

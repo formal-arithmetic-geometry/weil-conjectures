@@ -296,13 +296,6 @@ theorem clopenLocalizedSquarePlus_factorization (σ : G ⋙ L' ⟶ L ⋙ G')
 
 end Plus
 
-omit [HasDerivedCategory C₁] [HasDerivedCategory C₂]
-  [HasDerivedCategory C₃] [HasDerivedCategory C₄]
-  [HasKInjectiveResolutions C₁] [HasKInjectiveResolutions C₃]
-  [PreservesFiniteLimits L] [PreservesFiniteColimits L]
-  [PreservesFiniteLimits L'] [PreservesFiniteColimits L']
-  [PreservesFiniteLimits G] [PreservesFiniteColimits G]
-  [PreservesFiniteLimits G'] [PreservesFiniteColimits G'] in
 section Ambient
 variable [EnoughInjectives C₁] [EnoughInjectives C₃]
 

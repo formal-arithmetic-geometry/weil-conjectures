@@ -143,9 +143,6 @@ section Underived
 variable (A : Type*) [Category.{u + 1} A] [Abelian A]
   [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A]
 
-omit [HasSmallSiteSheafify A] in
-set_option backward.isDefEq.respectTransparency false in
-omit [HasSmallSiteSheafify A] in
 end Underived
 
 variable (Λ : Type (u + 1)) [CommRing Λ]

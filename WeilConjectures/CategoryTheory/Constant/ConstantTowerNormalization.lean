@@ -261,7 +261,6 @@ variable {A : Type uA} [Category.{vA} A] [Abelian A]
   [HasDerivedCategory.{wTA} (ℕᵒᵖ ⥤ A)] [HasDerivedCategory.{wTB} (ℕᵒᵖ ⥤ B)]
   (E : A ⥤ B) [E.Additive]
 
-omit [HasDerivedCategory.{wB} B] in
 end Identifications
 
 end CategoryTheory.Functor

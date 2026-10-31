@@ -339,7 +339,6 @@ variable {A : Type*} [Category* A] [Abelian A] [HasDerivedCategory A]
           ((HomologicalComplex.single A (.up ℤ) 0).obj X)) =
     DerivedCategory.Q.map ((a.mapHomologicalComplex (.up ℤ)).unit.app
       ((HomologicalComplex.single A (.up ℤ) 0).obj X)))
-include E a ε b hb hε hu in
 end DerivedSingle
 
 section ShiftedComposition
@@ -354,7 +353,6 @@ variable {A B : Type*} [Category* A] [Category* B]
   {X Y : A} {H : B} (f : X ⟶ Y⟦(1 : ℤ)⟧)
   (a : L.obj Y ⟶ H⟦(1 : ℤ)⟧) (k : Y ⟶ R.obj (H⟦(1 : ℤ)⟧))
   (ha : ad.unit.app Y ≫ R.map a = k)
-include ha in
 end ShiftedAdjunct
 
 namespace SheafOfModules

@@ -1747,15 +1747,6 @@ private theorem extension_hom_ext
     (g.f n).val.app V (E.section H n V s x)
   rw [extension_section_smul E H n V s x, map_smul, map_smul, hfg]
 
-attribute [local irreducible] homComplex homComplexπ tensorObj in
-attribute [local irreducible] homComplex homComplexπ tensorObj in
-attribute [local irreducible] homComplex homComplexπ tensorObj in
-attribute [local irreducible] homComplex homComplexπ tensorObj in
-attribute [local irreducible] homComplex homComplexπ tensorObj in
-attribute [local irreducible] homMap homComplex homComplexπ tensorObj in
-attribute [local irreducible] homMap homComplex homComplexπ tensorObj in
-attribute [local irreducible] homMap homComplex homComplexπ tensorObj in
-attribute [local irreducible] homMap homComplex homComplexπ tensorObj in
 end SheafOfModules.StrictScalarHom
 
 #print axioms SheafOfModules.StrictScalarHom.exists_scalarHomChainIdentification

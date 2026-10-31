@@ -794,8 +794,6 @@ private theorem restrictionPullback_unit
       (((proEtaleRingModuleAdjunction f SV SU cS).unit.app N).val.app W z)
   exact (he.symm.trans hz).symm
 
-open AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization in
-open AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization in
 end TowerPullTransition
 
 section GenericComparisonPredicate

@@ -75,17 +75,10 @@ include hY hX in
 local instance : MonoidalCategory Y.modules := SheafOfModules.monoidalCategory Y.A
 local instance : MonoidalCategory X.modules := SheafOfModules.monoidalCategory X.A
 
-set_option maxHeartbeats 1600000 in
 -- Normalize the dependent ringed-site representative comparison equations.
-include hY hX in
-set_option maxHeartbeats 800000 in
 -- Normalize the dependent ringed-site representative comparison equations.
-set_option maxHeartbeats 1200000 in
 -- Normalize the dependent ringed-site representative comparison equations.
-include hY hX in
-set_option maxHeartbeats 1000000 in
 -- Normalize the dependent ringed-site representative comparison equations.
-include hY hX in
 end Representatives
 
 -- Normalize the dependent ringed-site representative comparison equations.

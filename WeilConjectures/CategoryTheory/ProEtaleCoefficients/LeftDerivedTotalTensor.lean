@@ -58,7 +58,4 @@ attribute [local instance] hasTensorFour hasGoodTensorLeft hasGoodTensorRight
 omit hExactIntColimits hFlatResolution [HasDerivedCategory C] [HasDerivedCategory D] in
 attribute [local instance] preservesKFlatQuasiIso
 
-set_option linter.unusedSectionVars false in
-include hCountable hIntColimits hExactIntColimits hTensorLeft hTensorRight hFlatResolution hF in
-include hCountable hIntColimits hExactIntColimits hTensorLeft hTensorRight hFlatResolution hF in
 end CategoryTheory.Functor

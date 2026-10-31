@@ -791,16 +791,12 @@ omit [IsAlgClosed k] in
 attribute [local irreducible] completedScalarChangeData
   completedIntegralCoefficientSheafUnrestricted
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-omit [IsAlgClosed k] in
 section AbstractAssociator
 
 universe v w r
 variable {C : Type v} [Category.{w} C] {J : GrothendieckTopology C}
   [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
 
-open SheafOfModules.SuccessiveDerivedQuotient in
 end AbstractAssociator
 
 variable (M : Type u) [Field M] [Algebra ℚ_[l] M] [FiniteDimensional ℚ_[l] M]

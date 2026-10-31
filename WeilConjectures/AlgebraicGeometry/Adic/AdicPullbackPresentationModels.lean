@@ -285,8 +285,6 @@ variable
   [hT : T.IsLeftDerivedFunctor τ
     (HomotopyCategory.quasiIso (pbcTowers Y (pbcAdicCompletion Y d)) (.up ℤ))]
 
-omit hL hT in
-include hL hT in
 end NormalizedPair
 
 end AlgebraicGeometry.Scheme

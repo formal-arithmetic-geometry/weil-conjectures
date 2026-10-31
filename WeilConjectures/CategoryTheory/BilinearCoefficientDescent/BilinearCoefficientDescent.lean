@@ -976,7 +976,6 @@ attribute [local irreducible] descend descendTransformation
 attribute [local irreducible] productSystem projectionLeft projectionRight diagonal diagonalFF
   pairedObject pairedIso pairing
 
-omit [IsDirectedOrder I] in
 section InputLeft
 
 variable
@@ -991,8 +990,6 @@ variable
             ((F.β h).hom.app X, 𝟙 _)))
     (join : I → I → I) (left : ∀ i j, i ≤ join i j) (right : ∀ i j, j ≤ join i j)
 
-include cU in
-include cU in
 end InputLeft
 
 section InputRight
@@ -1009,8 +1006,6 @@ variable
             (𝟙 _, (F.β h).hom.app Y)))
     (join : I → I → I) (left : ∀ i j, i ≤ join i j) (right : ∀ i j, j ≤ join i j)
 
-include cU in
-include cU in
 end InputRight
 
 end CommonStage

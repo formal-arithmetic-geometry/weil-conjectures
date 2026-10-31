@@ -118,7 +118,6 @@ set_option allowUnsafeReducibility true in
 attribute [local irreducible] derivedTensor
 attribute [local irreducible] siteDerivedTensorIndependentCoefficients representativeIso
 
-omit [HasDerivedCategory (Modules R)] in
 section GenericCollapse
 
 variable {M : Type*} [Category* M] [Preadditive M] [HasZeroObject M]

@@ -144,5 +144,4 @@ private def finiteReductionAdjunction
     (pbcDerivedRestrictComp (d.projection T n)
       (pbcLevelConstantComparison T d n).inv (cbcFiniteProjection d T n) rfl)
 
-open ProEtale.StrictTower in
 end AlgebraicGeometry.Scheme

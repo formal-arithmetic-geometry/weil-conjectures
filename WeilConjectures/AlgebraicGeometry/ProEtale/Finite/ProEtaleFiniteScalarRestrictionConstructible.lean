@@ -46,9 +46,6 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   (a₀ : R₀ ⟶ S₀) (a : R ⟶ S) (comm : α ≫ a.hom = a₀ ≫ β)
   (P : _root_.PresheafOfModules.{t} S₀)
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-include comm in
 end
 
 set_option backward.isDefEq.respectTransparency false in

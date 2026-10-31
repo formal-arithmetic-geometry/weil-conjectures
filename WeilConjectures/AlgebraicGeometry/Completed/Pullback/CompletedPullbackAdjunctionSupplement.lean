@@ -568,5 +568,4 @@ private theorem complete_adjunction
   rw [Adjunction.mkOfHomEquiv_homEquiv]
   exact hE M N (ObjectProperty.homMk f)
 
-open SheafOfModules SheafOfModules.GeometricConstruction in
 end CategoryTheory.ConstantCompletion

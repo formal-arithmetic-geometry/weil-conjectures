@@ -909,11 +909,4 @@ private abbrev reduction (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (c : Cone B
   conditions := ⟨reductionTransition_normalized B c A, D.conditions.1,
     D.conditions.2.1, D.conditions.2.2.1, D.conditions.2.2.2⟩
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-attribute [local semireducible] strictTransportFunctor in
 end SheafOfModules.QuotientIsoTransport

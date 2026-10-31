@@ -72,9 +72,6 @@ variable
     (a : F.obj (U.obj X) ⟶ Y) (b : Y ⟶ Y'),
     e X Y' hY' (a ≫ b) = e X Y hY a ≫ R.map b)
 
-include el in
-include er in
-include el in
 end CategoryTheory
 
 end HomDescent

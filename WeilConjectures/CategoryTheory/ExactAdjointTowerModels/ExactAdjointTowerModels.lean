@@ -494,5 +494,4 @@ private theorem inclusion_sign : ExactProductsRoos.comparison ≫ signIso.hom =
       ← HomologicalComplex.comp_f, ordinaryIso_components]
     rfl
 
-omit [HasDerivedCategory A] [HasLimitsOfShape ℕᵒᵖ A] [HasCountableProducts A] in
 end CategoryTheory.ExactAdjointTowerModels

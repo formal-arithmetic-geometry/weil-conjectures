@@ -635,7 +635,4 @@ private instance quotientLocallyBijectiveCommRing :
       (CategoryTheory.forget CommRingCat.{r}) := preservesFilteredColimitsOfSize_shrink _
   exact GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall J
 
-omit [EssentiallySmall.{r} C]
-  [J.WEqualsLocallyBijective AddCommGrpCat.{r}] [HasSheafify J AddCommGrpCat.{r}]
-  [HasSheafify J CommRingCat.{r}] in
 end SheafOfModules
