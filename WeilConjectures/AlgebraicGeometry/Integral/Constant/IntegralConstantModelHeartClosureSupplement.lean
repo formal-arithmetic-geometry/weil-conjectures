@@ -226,7 +226,7 @@ variable {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D]
   [MonoidalPreadditive C] [MonoidalPreadditive D]
   {R : C} {S : D} [MonObj R] [MonObj S]
   [PreservesFiniteColimits (tensorLeft R)] [PreservesFiniteColimits (tensorLeft S)]
-private lemma fp_map (F : Mod C R ⥤ Mod D S) [F.Additive]
+private lemma fp_map_of_finiteFree (F : Mod C R ⥤ Mod D S) [F.Additive]
     [PreservesFiniteColimits F]
     (e : ∀ n : ℕ, F.obj (Mod.finiteFree R n) ≅ Mod.finiteFree S n)
     {M : Mod C R} (hM : Mod.IsFinitelyPresented R M) :
@@ -244,7 +244,7 @@ omit [IsCommMonObj Λ] [IsCommMonObj Λ'] in
 private lemma fp_point {P : Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) Λ'}
     (hP : Mod.IsFinitelyPresented Λ' P) :
     Mod.IsFinitelyPresented Λ ((Mod.comap φ).obj P) := by
-  apply fp_map (Mod.comap φ) _ hP
+  apply fp_map_of_finiteFree (Mod.comap φ) _ hP
   intro n
   exact (Mod.comap φ).mapBiproduct (fun _ : Fin n ↦ Mod.regular Λ') ≪≫
     biproduct.mapIso (fun _ ↦ by simpa using Mod.regularIsoOfIsIso (inv φ))

@@ -83,6 +83,10 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ZetaWeil.Profin
 Source: Hemo--Richarz--Scholbach, (3.1)--(3.2), Remark 3.2; Stacks 06YY and 07A4.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
@@ -160,9 +164,6 @@ private theorem restrictIso_kflat
           (restrictedUnitIso e).symm ≪≫
         (SheafOfModules.siteSheafTensorRightIso R _).symm) hu
   exact (SheafOfModules.isKFlat_restrictScalars_of_flat e.hom hflat K hK).1
-
-  InternalAbelianSheafModule.sectionModuleEquivalence
-  SheafOfModules.canonicalDerivedChangeOfRingsModel
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 

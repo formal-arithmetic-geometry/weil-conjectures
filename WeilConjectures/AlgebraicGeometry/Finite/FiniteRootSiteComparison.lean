@@ -374,7 +374,7 @@ private theorem rootComparison_unit (T : Scheme.{u}) (m : ℕ) (hm : 0 < m)
             (proEtaleUnitsSheaf T)) := by
     rw [rootComparison_inclusion, Adjunction.homEquiv_naturality_left]
     unfold ProEtale.cartierUnitsComparison
-    rw [Equiv.apply_symm_apply]
+    erw [Equiv.apply_symm_apply]
   have hu := congrArg (fun g ↦ g.hom.app U z) h
   rw [Adjunction.homEquiv_unit] at hu
   have hn := congrArg (fun g ↦ g
@@ -603,8 +603,7 @@ private theorem sigmaMap_isIso (A : Type (u + 1)) [CommRing A] (m : ℕ) (hm : 0
   funext g
   apply ((ProEtale.comparisonAdjunction (ModuleCat.{u + 1} A) T).homEquiv _ _).injective
   apply (etaleLineHomEquiv T m A hA _).injective
-  simp only [e, Equiv.trans_apply, Equiv.apply_symm_apply, Iso.homCongr_apply,
-    Iso.symm_inv, Iso.refl_hom, Category.comp_id]
+  simp only [e, Equiv.trans_apply, Equiv.apply_symm_apply]
   exact (sigmaMap_comp A m hm hA T hT P g).trans
     ((etaleLineHomEquiv T m A hA
       ((ProEtale.comparisonLowerStar (ModuleCat.{u + 1} A) T).obj P)).apply_symm_apply _).symm
@@ -893,7 +892,7 @@ private theorem rootComparison_adjunct (T : Scheme.{u}) (m : ℕ) (hm : 0 < m)
             (proEtaleUnitsSheaf T)) := by
   rw [rootComparison_inclusion, Adjunction.homEquiv_naturality_left]
   unfold ProEtale.cartierUnitsComparison
-  rw [Equiv.apply_symm_apply]
+  erw [Equiv.apply_symm_apply]
 
 private theorem rootDirectImage_inclusion {T T' : Scheme.{u}} (v : T' ⟶ T)
     (m : ℕ) (W : T.ProEtᵒᵖ) (z : (proEtaleRootsOfUnitySheaf T m).obj.obj W) :
@@ -1124,7 +1123,8 @@ private theorem rootComparison_square (A : Type (u + 1)) [CommRing A]
   rw [composite_transpose, composite_transpose]
   rw [Adjunction.homEquiv_naturality_left, Adjunction.homEquiv_naturality_left]
   unfold proEtaleRootsOfUnityInverseImageMap
-  rw [Equiv.apply_symm_apply, Adjunction.homEquiv_naturality_right,
+  erw [Equiv.apply_symm_apply]
+  rw [Adjunction.homEquiv_naturality_right,
     Adjunction.homEquiv_naturality_right]
   ext U z
   change (proEtaleRootsOfUnityDirectImageMap v m).hom.app ((toProEt T).op.obj U)

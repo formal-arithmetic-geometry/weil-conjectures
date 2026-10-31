@@ -158,7 +158,10 @@ universe v w z
 variable {C : Type w} [Category.{z} C] (J : GrothendieckTopology C)
   [UnivLE.{max w z, v}] [HasSheafify J Ab.{v}]
   [(J.W (A := Ab.{v})).IsMonoidal]
-  (R : Sheaf J Ab.{v}) [MonObj R] [IsCommMonObj R]
+
+attribute [local instance] Sheaf.monoidalCategory Sheaf.symmetricCategory
+
+variable (R : Sheaf J Ab.{v}) [MonObj R] [IsCommMonObj R]
 
 private theorem genericInternalTensor_leftUnitor (M : Mod (Sheaf J Ab.{v}) R)
     (U : Cᵒᵖ) (r : (InternalAbelianSheafModule.sectionRingSheaf J R).obj.obj U)

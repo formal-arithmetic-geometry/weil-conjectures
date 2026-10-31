@@ -181,6 +181,9 @@ private instance sectionEvaluation_preservesZero (p : ℕ) :
       (CategoryTheory.evaluation _ _).obj ⦋p⦌).PreservesZeroMorphisms where
   map_zero := by intros; rfl
 
+-- The universe-polymorphic `hasSheafify_of_essentiallySmall` gets stuck on the universe of
+-- `AddCommGrpCat.{max u v (t + 1)}`; Mathlib's concrete-category instance applies instead.
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 private theorem sectionsEvaluation_preservesHomology (R : Sheaf (topology X) RingCat.{u})
     (p : ℕ)
     (hweak : (topology X).IsWeaklyContractible.{max u v (t + 1)} (W _⦋p⦌).left) :

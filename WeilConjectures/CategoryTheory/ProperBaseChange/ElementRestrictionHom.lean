@@ -75,6 +75,9 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 
 /-! # Auxiliary ringed presentation comparisons -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 
 set_option autoImplicit false
@@ -599,6 +602,14 @@ private theorem derivedHomRestriction
   exact ⟨(Localization.fullyFaithfulWhiskeringLeft (QR.op.prod QR) W _).preimageIso
     (left ≪≫ asIso α ≪≫ (asIso β).symm ≪≫ right.symm)⟩
 
+private instance projectionFaithful
+    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
+    (A : Sheaf J (Type u)) : (elementProjection A).Faithful where
+  map_injective {X Y} f g h := by
+    apply Quiver.Hom.unop_inj
+    apply Subtype.ext
+    exact congrArg Quiver.Hom.op h
+
 private abbrev fibreSheaf
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     {A B : Sheaf J (Type u)} (b : B ⟶ A) : Sheaf (elementTopology A) (Type u) where
@@ -617,6 +628,70 @@ private def flattenElements
     (B.obj.elementsMk Y.unop.1.unop.unop.1 Y.unop.2.val)
     (B.obj.elementsMk X.unop.1.unop.unop.1 X.unop.2.val)
     f.unop.val.unop.unop.val (congrArg Subtype.val f.unop.property)).op
+
+private instance flattenElementsFaithful
+    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
+    {A B : Sheaf J (Type u)} (b : B ⟶ A) : (flattenElements b).Faithful where
+  map_injective {X Y} f g h := by
+    apply Quiver.Hom.unop_inj
+    apply Subtype.ext
+    apply Quiver.Hom.unop_inj
+    apply Quiver.Hom.unop_inj
+    apply Subtype.ext
+    exact congrArg (fun k ↦ k.unop.val) h
+
+set_option backward.isDefEq.respectTransparency false in
+private instance flattenElementsFull
+    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
+    {A B : Sheaf J (Type u)} (b : B ⟶ A) : (flattenElements b).Full where
+  map_surjective {X Y} f := by
+    have hA : A.obj.map f.unop.val Y.unop.1.unop.unop.2 =
+        X.unop.1.unop.unop.2 := by
+      rw [← Y.unop.2.property]
+      change A.obj.map f.unop.val (b.hom.app _ Y.unop.2.val) = _
+      rw [← NatTrans.naturality_apply]
+      change b.hom.app _ (B.obj.map f.unop.val Y.unop.2.val) = _
+      have hf : B.obj.map f.unop.val Y.unop.2.val = X.unop.2.val := f.unop.property
+      rw [hf]
+      exact X.unop.2.property
+    let g : X.unop.1.unop ⟶ Y.unop.1.unop :=
+      (CategoryOfElements.homMk (F := A.obj) _ _ f.unop.val hA).op
+    refine ⟨(CategoryOfElements.homMk Y.unop X.unop g.op ?_).op, ?_⟩
+    · apply Subtype.ext
+      exact f.unop.property
+    · rfl
+
+private instance flattenElementsEssSurj
+    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
+    {A B : Sheaf J (Type u)} (b : B ⟶ A) : (flattenElements b).EssSurj where
+  mem_essImage Y := by
+    let X := op (op (A.obj.elementsMk Y.unop.1 (b.hom.app _ Y.unop.2)))
+    exact ⟨op ((fibreSheaf b).obj.elementsMk X ⟨Y.unop.2, rfl⟩), ⟨Iso.refl _⟩⟩
+
+private instance flattenElementsEquivalence
+    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
+    {A B : Sheaf J (Type u)} (b : B ⟶ A) : (flattenElements b).IsEquivalence := {}
+
+private theorem element_cover_iff
+    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
+    (A : Sheaf J (Type u)) {X : A.obj.Elementsᵒᵖ} (S : Sieve X) :
+    S ∈ elementTopology A X ↔
+      S.functorPushforward (elementProjection A) ∈ J ((elementProjection A).obj X) := by
+  constructor
+  · exact (CoverPreserving.of_isContinuous (elementProjection A) _ _).cover_preserve
+  · intro h
+    rw [(element_site_descent A).1]
+    exact (elementProjection A).mem_restrictedTopology_of_functorPushforward_mem h
+
+private instance flattenElementsDense
+    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
+    {A B : Sheaf J (Type u)} (b : B ⟶ A) :
+    (flattenElements b).IsDenseSubsite (elementTopology (fibreSheaf b))
+      (elementTopology B) where
+  functorPushforward_mem_iff {X S} := by
+    rw [element_cover_iff, element_cover_iff, element_cover_iff]
+    rw [← Sieve.functorPushforward_comp, ← Sieve.functorPushforward_comp]
+    rfl
 
 private theorem bijective_of_pointwise_heq {α β : Type u} (h : α = β)
     (f : α → β) (hf : ∀ x, HEq (f x) x) : Function.Bijective f := by
@@ -720,7 +795,6 @@ private theorem flattenRestrictionEquivalence
     (K := elementTopology (fibreSheaf b)) (flattenElements b) (presentationElementRing R B)
   exact ⟨T.modules, ⟨Functor.isoWhiskerLeft F q.symm ≪≫ h⟩⟩
 
--- The nested functor comparisons require additional elaboration heartbeats.
 private def representableElements
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (U : C) :
     Over U ⥤ ((presheafToSheaf J (Type u)).obj (yoneda.obj U)).obj.Elementsᵒᵖ where
@@ -729,6 +803,68 @@ private def representableElements
   map f := (CategoryOfElements.homMk _ _ f.left.op (by
     rw [← NatTrans.naturality_apply]
     exact congrArg ((toSheafify J (yoneda.obj U)).app _) (Over.w f))).op
+
+private instance representableElementsFaithful
+    {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (U : C) :
+    (representableElements J U).Faithful where
+  map_injective {X Y} f g h := by
+    ext
+    exact congrArg (fun k ↦ k.unop.val.unop) h
+
+private theorem representableElements_cover_iff
+    {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (U : C)
+    {X : Over U} (S : Sieve X) :
+    S.functorPushforward (representableElements J U) ∈
+        elementTopology ((presheafToSheaf J (Type u)).obj (yoneda.obj U)) _ ↔
+      S ∈ J.over U X := by
+  rw [element_cover_iff, ← Sieve.functorPushforward_comp, J.mem_over_iff]
+  rfl
+
+private instance representableElementsCoverDense
+    {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (U : C) :
+    (representableElements J U).IsCoverDense
+      (elementTopology ((presheafToSheaf J (Type u)).obj (yoneda.obj U))) where
+  is_cover X := by
+    rw [element_cover_iff]
+    let η := toSheafify J (yoneda.obj U)
+    apply J.superset_covering _ (Presheaf.imageSieve_mem J η X.unop.2)
+    intro V f hf
+    obtain ⟨a, ha⟩ := hf
+    let Y := Over.mk a
+    let g : (representableElements J U).obj Y ⟶ X :=
+      (CategoryOfElements.homMk _ _ f.op ha.symm).op
+    exact ⟨_, g, 𝟙 _, Presieve.in_coverByImage _ g, by simp [g, representableElements,
+      elementProjection, opOpEquivalence]⟩
+
+set_option backward.isDefEq.respectTransparency false in
+private instance representableElementsLocallyFull
+    {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (U : C) :
+    (representableElements J U).IsLocallyFull
+      (elementTopology ((presheafToSheaf J (Type u)).obj (yoneda.obj U))) where
+  functorPushforward_imageSieve_mem {X Y} f := by
+    rw [representableElements_cover_iff, J.mem_over_iff]
+    let η := toSheafify J (yoneda.obj U)
+    have he : η.app (op X.left) (f.unop.val.unop ≫ Y.hom) = η.app (op X.left) X.hom := by
+      change η.app _ ((yoneda.obj U).map f.unop.val Y.hom) = _
+      rw [NatTrans.naturality_apply]
+      exact f.unop.property
+    apply J.superset_covering _ (Presheaf.equalizerSieve_mem J η _ _ he)
+    intro V k hk
+    change k ≫ (f.unop.val.unop ≫ Y.hom) = k ≫ X.hom at hk
+    rw [Sieve.overEquiv_iff]
+    let l : Over.mk (k ≫ X.hom) ⟶ Y := Over.homMk (k ≫ f.unop.val.unop)
+      (by change (k ≫ f.unop.val.unop) ≫ Y.hom = k ≫ X.hom
+          simpa only [Category.assoc] using hk)
+    refine ⟨l, ?_⟩
+    apply Quiver.Hom.unop_inj
+    apply Subtype.ext
+    rfl
+
+private instance representableElementsDense
+    {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (U : C) :
+    (representableElements J U).IsDenseSubsite (J.over U)
+      (elementTopology ((presheafToSheaf J (Type u)).obj (yoneda.obj U))) where
+  functorPushforward_mem_iff := representableElements_cover_iff J U _
 
 private def inverseHomComparison
     {A B : Type*} [Category A] [Category B] (E : A ≌ B)

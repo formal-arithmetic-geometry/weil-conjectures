@@ -15,6 +15,7 @@ import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationLocal
 import WeilConjectures.Mathlib.RingTheory.Henselian
 import WeilConjectures.AlgebraicGeometry.PointedEtaleSectionCone.PointedEtaleSectionConeStalkIso
 import WeilConjectures.AlgebraicGeometry.StrictHenselizationFunctoriality
+import WeilConjectures.AlgebraicGeometry.StrictHenselizationRingResidue
 import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
 import Mathlib.AlgebraicGeometry.ResidueField
 import Mathlib.FieldTheory.IsSepClosed
@@ -206,7 +207,7 @@ theorem exists_strictLocalConstantComparison
     let : Algebra (X.residueField (x (IsLocalRing.closedPoint Ω))) Ω :=
       (Scheme.descResidueField (Scheme.stalkClosedPointTo x)).hom.toAlgebra
     obtain ⟨hlocal, hstrict, _, _, σ, ⟨hpoint, hbase⟩, _⟩ :=
-      strictHenselizationResidue x rfl
+      strictHenselizationRingResidue x rfl
     let := hlocal
     let y := Spec.map (CommRingCat.ofHom
       (((IntermediateField.val

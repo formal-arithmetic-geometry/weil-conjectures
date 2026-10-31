@@ -38,7 +38,17 @@ theorem integralLocalization_cocone_map_isIso (ℓ : ℕ)
     (hd : IsColimit (F.mapCocone (d.whisker
       (ULift.orderIso : ULift.{y} ℕ ≃o ℕ).equivalence.functor))) :
     IsIso (F.map g) := by
-  have hleg := integralLocalization_coconeLegs ℓ c d g hzero
+  -- Upstream's leg lemma is stated for `Mod.smulSequence`; transport along the identity.
+  let α : Mod.smulSequence K ℓ ⟶ integralLocalizationSequence ℓ K :=
+    NatTrans.ofSequence (fun _ ↦ 𝟙 K) (fun n ↦ by
+      simp only [integralLocalizationSequence, Functor.ofSequence_map_homOfLE_succ,
+        Nat.add_sub_cancel_left, pow_one]
+      exact (Category.comp_id _).trans (Category.id_comp _).symm)
+  have : IsIso (ℓ • 𝟙 ((Cocone.precompose α).obj d).pt) := ‹IsIso (ℓ • 𝟙 d.pt)›
+  have hleg : ∀ n, c.ι.app n ≫ g = d.ι.app n := fun n ↦ by
+    have h := integralLocalization_coconeLegs ℓ ((Cocone.precompose α).obj c)
+      ((Cocone.precompose α).obj d) g (by simpa [α] using hzero) n
+    simpa [α] using h
   let h : F.mapCocone (c.whisker
       (ULift.orderIso : ULift.{y} ℕ ≃o ℕ).equivalence.functor) ⟶
       F.mapCocone (d.whisker

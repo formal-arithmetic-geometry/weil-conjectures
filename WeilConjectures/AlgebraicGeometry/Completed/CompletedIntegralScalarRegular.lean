@@ -102,6 +102,7 @@ theorem completedIntegralScalar_regular
           ((Functor.const T.ProEtᵒᵖ).obj
             (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionIntegers l E))))).app U
               (ULift.up (Padic.coefficientExtensionUniformizer l E)))) ^ m * x) := by
+  have : LocallySmall.{max u (t + 1)} T.ProEt := locallySmall_max.{max u (t + 1), t, t + 1}
   let J := Scheme.ProEt.topology T
   let O := Padic.coefficientExtensionIntegers l E
   let π := Padic.coefficientExtensionUniformizer l E

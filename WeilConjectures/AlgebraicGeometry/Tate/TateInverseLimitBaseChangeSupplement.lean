@@ -274,30 +274,6 @@ private instance (T : Scheme.{u}) (R : Type u) [CommRing R] :
     Presheaf.IsLocallySurjective (ProEt.topology T) (constantUnit T R) :=
   adicLisseConstantUnit_locallySurjective T (ULift.{u + 1, u} R)
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-by
-  let f : (Functor.const T.ProEtᵒᵖ).obj
-      (CommRingCat.of (ULift.{u + 1, u} R)) ⟶
-      (Functor.const T.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1, u} Q)) :=
-    (Functor.const T.ProEtᵒᵖ).map
-      (CommRingCat.ofHom ((ULift.ringEquiv : ULift.{u + 1, u} Q ≃+* Q).symm.toRingHom.comp
-        (q.comp (ULift.ringEquiv : ULift.{u + 1, u} R ≃+* R).toRingHom)))
-  exact (congrArg (fun t ↦ Functor.whiskerRight t
-    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}))
-      (toSheafify_naturality (ProEt.topology T) f)).symm
-
-
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-
 attribute [local irreducible] tensorHomEquiv tensorPresheafHomEquiv tensorToRestriction
 
 private theorem tateConstantMap_comp (T : Scheme.{u})
@@ -352,15 +328,5 @@ private theorem reductionUnit_apply {T : Scheme.{u}} {R Q A : Type u}
   exact tensorUnit_apply a G U _
 
 attribute [local irreducible] reductionUnit
-
-
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-
-attribute [local irreducible] exchangeModuleComposition
-
 
 end AlgebraicGeometry.Scheme

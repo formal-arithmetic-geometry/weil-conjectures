@@ -61,7 +61,8 @@ private theorem constantQuotient_surjective (l : ℕ) [Fact l.Prime] (E : Type u
     (n : ℕ) (U : T.ProEtᵒᵖ) :
     Function.Surjective
       ((WeilConjectures.integralConstantQuotientOfUniverses l E T n).hom.app U) := by
-  apply constRing_surj
+  have : LocallySmall.{max u (t + 1)} T.ProEt := locallySmall_max.{max u (t + 1), t, t + 1}
+  apply constRing_surj.{max u (t + 1), t + 1, t}
   intro b
   obtain ⟨a, ha⟩ := Ideal.Quotient.mk_surjective b.down
   refine ⟨ULift.up a, ?_⟩

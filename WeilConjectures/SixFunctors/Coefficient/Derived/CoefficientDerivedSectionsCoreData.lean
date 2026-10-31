@@ -29,6 +29,7 @@ import all WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafific
 import all WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
 import all WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 import Mathlib.CategoryTheory.Preadditive.Yoneda.Limits
+import WeilConjectures.SixFunctors.CoefficientSectionsCoreComparison.NormalizedSectionsLimitComparison
 
 /-! Transported data for the normalized coefficient-sections core.
 Source: Stacks 03CZ, 079P, 08JA, 0D6E and 0941.
@@ -83,7 +84,7 @@ private theorem totalSectionsLimitExists :
         (completedIntegralCommRingSheafUnrestricted l E W)).1
   let : PreservesLimits F := CategoryTheory.preservesLimits_preadditiveCoyoneda_obj _
   let : PreservesLimitsOfSize.{0, 0} F := preservesLimitsOfSize_shrink F
-  exact sectionsLimitComparison F
+  exact ⟨(CoefficientSectionsCoreComparison.comparison_exists F).choose⟩
 
 /-- The scalar, finite-evaluation and total-limit data before their two equations.
 Source: Stacks 03CZ, 079P, 08JA, 0D6E and 0941; transport through the coefficient
@@ -123,8 +124,8 @@ theorem coefficientDerivedSectionsCoreData
   obtain ⟨D⟩ := scalarSectionsCoherenceExists l E W
   let F := coefficientOrdinarySections.{u, t+1, t} (Scheme.ProEt.topology W)
     (completedIntegralCommRingSheafUnrestricted l E W)
-  let P := standardSectionsPair F
-  let T := standardSectionsPair (coefficientTowerSections l E W)
+  let P := CoefficientSectionsCoreComparison.standardPair F
+  let T := CoefficientSectionsCoreComparison.standardPair (coefficientTowerSections l E W)
   have enough (K : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ) :
       ∃ (I : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ) (a : K ⟶ I),
         I.IsKInjective ∧ QuasiIso a := by

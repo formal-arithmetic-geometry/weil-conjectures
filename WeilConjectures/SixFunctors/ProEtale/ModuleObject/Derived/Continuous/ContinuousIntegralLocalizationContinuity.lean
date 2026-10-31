@@ -412,6 +412,21 @@ theorem integralLocalization_push_homology_isColimit {X Y : Scheme.{u}} (f : X �
         (condensedRingObj (integralCoeff ℓ E) Y)) := inferInstance
   obtain ⟨m⟩ := exists_integralLocalization_complex_model ℓ E X K hK
   unfold integralLocalizationLiftedCocone
+  -- Upstream's localization cocone lives over `Mod.smulSequence`; the lifted cocone
+  -- precomposes it with an identity-component isomorphism, which preserves colimits.
+  let β : (ULift.orderIso : ULift.{u + 1} ℕ ≃o ℕ).equivalence.functor ⋙
+      integralLocalizationSequence ℓ K ⟶
+      (ULift.orderIso : ULift.{u + 1} ℕ ≃o ℕ).equivalence.functor ⋙ Mod.smulSequence K ℓ :=
+    Functor.whiskerLeft _ (NatTrans.ofSequence (fun _ ↦ 𝟙 K) (fun n ↦ by
+      simp only [integralLocalizationSequence, Functor.ofSequence_map_homOfLE_succ,
+        Nat.add_sub_cancel_left, pow_one]
+      exact (Category.comp_id _).trans (Category.id_comp _).symm))
+  have : ∀ i, IsIso (β.app i) := fun _ ↦ by
+    change IsIso (𝟙 _)
+    infer_instance
+  have : IsIso β := NatIso.isIso_of_isIso_app β
+  refine Nonempty.map (fun h ↦ IsColimit.ofIsoColimit ((IsColimit.precomposeHomEquiv
+    (Functor.isoWhiskerRight (asIso β) _) _).symm h) (Functor.mapCoconePrecompose _).symm) ?_
   apply localizationCocone_isColimit_of_model ℓ K _ m
   intro C a hC
   have : HasColimitsOfShape (ULift.{u + 1} ℕ)
