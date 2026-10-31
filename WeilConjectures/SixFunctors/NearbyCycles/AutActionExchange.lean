@@ -18,7 +18,7 @@ Then the exchanges of `τ` intertwine the actions of `s` and `s'` on nearby cycl
 (`NearbyCyclesModel.Hom.autAction`):
 
 * `α_τ(C) ≫ ρ(s)(Lf^* C) = Lf'^*(ρ(s')(C)) ≫ α_τ(C)` for the pullback exchange
-  (`NearbyCyclesModel.Hom.pullbackExchange_app_comp_autAction`);
+  (`NearbyCyclesModel.Hom.pullbackExchange_app_comp_autAction_of_comm`);
 * `χ_τ(E) ≫ Rf'_*(ρ(s)(E)) = ρ(s')(Rf_* E) ≫ χ_τ(E)` for the pushforward exchange
   (`NearbyCyclesModel.Hom.pushforwardExchange_app_comp_map_autAction`).
 
@@ -168,8 +168,8 @@ lemma pullbackExchange_app_of_comp_right (s' : N.Hom N (𝟙 Y) (𝟙 Y')) (τ �
 
 /-- **The pullback exchange intertwines the actions of self-maps**: if `s ≫ τ = τ ≫ s'` on total
 spaces and geometric generic fibres, then `α_τ(C) ≫ ρ(s)(Lf^* C) = Lf'^*(ρ(s')(C)) ≫ α_τ(C)`. -/
-lemma pullbackExchange_app_comp_autAction (τ : M.Hom N f f') (s : M.Hom M (𝟙 X) (𝟙 X'))
-    (s' : N.Hom N (𝟙 Y) (𝟙 Y')) (htot : s.total ≫ τ.total = τ.total ≫ s'.total)
+lemma pullbackExchange_app_comp_autAction_of_comm (τ : M.Hom N f f')
+    (s : M.Hom M (𝟙 X) (𝟙 X')) (s' : N.Hom N (𝟙 Y) (𝟙 Y')) (htot : s.total ≫ τ.total = τ.total ≫ s'.total)
     (hgen : s.generic ≫ τ.generic = τ.generic ≫ s'.generic)
     (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
       (condensedRingObj Λ Y))) :
@@ -200,7 +200,7 @@ lemma pushforwardExchange_app_comp_map_autAction (τ : M.Hom N f f') (s : M.Hom 
     (fun E ↦ (τ.pushforwardExchange Λ).app E) (τ.map_pushforwardExchange_app_comp_counit_app Λ)
     (s.autAction Λ)
     (s.autAction_naturality Λ) (s'.autAction Λ)
-    (τ.pullbackExchange_app_comp_autAction Λ s s' htot hgen) E
+    (τ.pullbackExchange_app_comp_autAction_of_comm Λ s s' htot hgen) E
 
 /-- The diagram chase behind `NearbyCyclesModel.Hom.unit_comp_autAction`. -/
 private lemma unit_comp_autAction_aux {D D' : Type*} [Category D] [Category D'] (Ψ : D ⥤ D')

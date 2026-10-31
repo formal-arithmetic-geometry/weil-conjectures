@@ -29,7 +29,7 @@ The proof follows the uniqueness of the dualizing maps:
   (`NearbyCyclesModel.NearbyDualizingDataOfGenericBase.autAction_comp_θ_of_isProper`);
 * in general, `ψ` extends to a proper model containing `M` as an open sub-model, and the pullback
   exchange `α_j` intertwines the two actions
-  (`NearbyCyclesModel.Hom.pullbackExchange_app_comp_autAction`).
+  (`NearbyCyclesModel.Hom.pullbackExchange_app_comp_autAction_of_comm`).
 
 -/
 
@@ -185,7 +185,7 @@ private lemma pullbackExchange_comp_autAction_aux (φ : M.Hom N f.left f'.left)
   rfl
 
 /-- **The bounded constructible pullback exchange intertwines the actions of self-maps**
-(`NearbyCyclesModel.Hom.pullbackExchange_app_comp_autAction`). -/
+(`NearbyCyclesModel.Hom.pullbackExchange_app_comp_autAction_of_comm`). -/
 lemma Hom.boundedConstructiblePullbackExchange_app_comp_autAction
     (φ : M.Hom N f.left f'.left)
     (hM : M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
@@ -200,7 +200,8 @@ lemma Hom.boundedConstructiblePullbackExchange_app_comp_autAction
           ((s'.boundedConstructibleAutAction hN).app K) ≫
         (φ.boundedConstructiblePullbackExchange ℓ hM hN).app K :=
   pullbackExchange_comp_autAction_aux ℓ φ hM hN _ _
-    (φ.pullbackExchange_app_comp_autAction (Profinite.padicAlgClRingObj ℓ) s s' htot hgen)
+    (φ.pullbackExchange_app_comp_autAction_of_comm (Profinite.padicAlgClRingObj ℓ) s s' htot
+      hgen)
     _ (fun K ↦ by rw [Hom.boundedConstructibleAutAction_app, ObjectProperty.homMk_hom])
     _ (fun K ↦ by rw [Hom.boundedConstructibleAutAction_app, ObjectProperty.homMk_hom]) K
 
