@@ -102,6 +102,38 @@ noncomputable def derivedReductionSmoothOrientation (n : ℕ) :
           ((PadicIntegersRingObj.boundedConstructibleUpperShriek ℓ E.1 f).obj (𝟙_ _))) :=
   derivedReductionMap ℓ E.1 n X.left (integersModPowReductionSmoothOrientation ℓ E f d n)
 
+/-- The isomorphisms `β : Ψ(red_{n+1} -) ≅ red_n -` (`etaleReductionExtendScalarsIsoApp`) commute
+with the shifts, through the commutation isomorphisms of the reductions and of the étale readings
+with the shifts used in `finiteEtaleReadingSmoothOrientation`. -/
+lemma map_reductionShift_comp_etaleReductionExtendScalarsIsoApp (n : ℕ)
+    (K : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧) (q : ℤ) :
+    (integersModPowDerivedExtendScalars ℓ E.1 n X.left).map
+        ((finiteEtaleReading ℓ E.1 (n + 1) X).map
+          (boundedConstructibleIntegersModPowReductionShiftIso ℓ E.1 (n + 1) X.left K q).hom ≫
+        ((finiteEtaleReading ℓ E.1 (n + 1) X).commShiftIso q).hom.app _) ≫
+      ((integersModPowDerivedExtendScalars ℓ E.1 n X.left).commShiftIso q).hom.app _ ≫
+        (etaleReductionExtendScalarsIsoApp ℓ E.1 n X K).hom⟦q⟧' =
+    (etaleReductionExtendScalarsIsoApp ℓ E.1 n X ((shiftFunctor _ q).obj K)).hom ≫
+      (finiteEtaleReading ℓ E.1 n X).map
+          (boundedConstructibleIntegersModPowReductionShiftIso ℓ E.1 n X.left K q).hom ≫
+        ((finiteEtaleReading ℓ E.1 n X).commShiftIso q).hom.app _ := by
+  sorry
+
+/-- Blueprint `det-sp-purity-coefficient-change`: change of coefficients in purity
+
+**The canonical finite orientations `θₙ : red_n(𝒪(d))[2d] ≅ red_n(Rf^! 𝒪)` are compatible with the
+reduction of coefficients**: `Ψ θₙ₊₂` is `θₙ₊₁` through `β` and the commutation of `Ψ` with the
+shift. -/
+theorem map_etaleReductionSmoothOrientationIso_hom_comp (n : ℕ) :
+    (integersModPowDerivedExtendScalars ℓ E.1 (n + 1) X.left).map
+        (etaleReductionSmoothOrientationIso ℓ E f d (n + 1 + 1)).hom ≫
+      (etaleReductionExtendScalarsIsoApp ℓ E.1 (n + 1) X _).hom =
+    ((integersModPowDerivedExtendScalars ℓ E.1 (n + 1) X.left).commShiftIso (2 * d : ℤ)).hom.app _ ≫
+      (etaleReductionExtendScalarsIsoApp ℓ E.1 (n + 1) X _).hom⟦(2 * d : ℤ)⟧' ≫
+        (etaleReductionSmoothOrientationIso ℓ E f d (n + 1)).hom := by
+  sorry
+
+set_option maxHeartbeats 1600000 in
 /-- Blueprint `det-sp-purity-coefficient-change`: change of coefficients in purity
 
 **The canonical finite orientations are compatible with the reduction of coefficients, on the
@@ -115,7 +147,17 @@ theorem map_finiteEtaleReadingSmoothOrientation_comp (n : ℕ) :
       (etaleReductionExtendScalarsIsoApp ℓ E.1 (n + 1) X _).hom =
     (etaleReductionExtendScalarsIsoApp ℓ E.1 (n + 1) X _).hom ≫
       finiteEtaleReadingSmoothOrientation ℓ E f d (n + 1) := by
-  sorry
+  have h1 := map_etaleReductionSmoothOrientationIso_hom_comp ℓ E f d n
+  have h := map_reductionShift_comp_etaleReductionExtendScalarsIsoApp ℓ E (n + 1)
+    (integralTateTwistBoundedConstructible ℓ E.1 X.hom d) (2 * d : ℤ)
+  simp only [finiteEtaleReadingSmoothOrientation, Functor.map_comp, Category.assoc]
+  -- rewrite at explicit positions: a goal-wide `rw` tries to unify the pattern with every
+  -- composite and unfolds the heavy definitions
+  conv_lhs => rhs; rhs; rw [h1]
+  conv_lhs => rw [← Functor.map_comp_assoc]
+  exact (Eq.trans (by with_reducible_and_instances rfl)
+    (((reassoc_of% h) (etaleReductionSmoothOrientationIso ℓ E f d (n + 1)).hom).trans
+      (by with_reducible_and_instances rfl)))
 
 set_option maxHeartbeats 1600000 in
 /-- Blueprint `det-sp-purity-coefficient-change`: change of coefficients in purity

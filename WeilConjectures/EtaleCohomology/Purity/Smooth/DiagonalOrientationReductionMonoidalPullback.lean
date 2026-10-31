@@ -65,6 +65,37 @@ open Scheme
 variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] {ρ : Λ →+* Λ'} {a : Λ}
   (hρ : Function.Surjective ρ) (ha : RingHom.ker ρ = Ideal.span {a})
 
+section Monoidal
+
+variable (X : Scheme.{u})
+
+/-- The derived extension of scalars of the unit, `Ψ Λ_X ≅ Λ'_X`: the unit comparison of the
+monoidal structure `CategoryTheory.Functor.leftDerivedFunctorMonoidal` of the left derived
+functor of the strong monoidal extension of scalars of étale sheaves. -/
+noncomputable def derivedExtendScalarsUnitIso :
+    (derivedExtendScalars hρ ha X).obj (𝟙_ _) ≅ 𝟙_ _ :=
+  haveI := preservesKFlatQuasiIso_extendScalars hρ ha X
+  letI := (Sheaf.extendScalars X.smallEtaleTopology ρ).leftDerivedFunctorMonoidal
+  (Functor.Monoidal.εIso (Sheaf.extendScalars X.smallEtaleTopology ρ).leftDerivedFunctor).symm
+
+lemma derivedExtendScalarsUnitIso_hom :
+    haveI := preservesKFlatQuasiIso_extendScalars hρ ha X
+    letI := (Sheaf.extendScalars X.smallEtaleTopology ρ).leftDerivedFunctorMonoidal
+    (derivedExtendScalarsUnitIso hρ ha X).hom =
+      Functor.OplaxMonoidal.η (Sheaf.extendScalars X.smallEtaleTopology ρ).leftDerivedFunctor :=
+  rfl
+
+lemma testδ (K M : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    haveI := preservesKFlatQuasiIso_extendScalars hρ ha X
+    letI := (Sheaf.extendScalars X.smallEtaleTopology ρ).leftDerivedFunctorMonoidal
+    Functor.OplaxMonoidal.δ (Sheaf.extendScalars X.smallEtaleTopology ρ).leftDerivedFunctor K M =
+      (((Sheaf.extendScalars X.smallEtaleTopology ρ).leftDerivedTensorComparison.app K).app M) :=
+  have := preservesKFlatQuasiIso_extendScalars hρ ha X
+  Functor.leftDerivedFunctorMonoidal_δ _ K M
+
+end Monoidal
+
+
 section Counit
 
 variable (X : Scheme.{u})
@@ -227,20 +258,11 @@ theorem derivedExtendScalarsPullbackMap_eq :
 
 end PullbackCounit
 
-/-- The comonoidal structure of `Ψ` is the tensor comparison of the left derived functor. -/
-lemma derivedExtendScalarsMonoidal_δ (X : Scheme.{u})
-    (K M : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    letI := derivedExtendScalarsMonoidal hρ ha X
-    haveI := preservesKFlatQuasiIso_extendScalars hρ ha X
-    Functor.OplaxMonoidal.δ (derivedExtendScalars hρ ha X) K M =
-      (((Sheaf.extendScalars X.smallEtaleTopology ρ).leftDerivedTensorComparison.app K).app M) :=
-  rfl
-
 section Tensor
 
 variable {U X : Scheme.{u}} (e : U ⟶ X)
 
-open Functor.OplaxMonoidal in
+
 /-- **The commutation of `Ψ` with the derived pullback is compatible with the tensor
 comparisons**: for `K, M ∈ D(X_ét, Λ)`, the square
 ```
@@ -252,20 +274,22 @@ comparisons**: for `K, M ∈ D(X_ét, Λ)`, the square
 commutes. Through the counits, the commutation is the underived commutation
 `F_X ⋙ e^* ≅ e^* ⋙ F_U` (`AlgebraicGeometry.Etale.derivedExtendScalarsPullbackMap_eq`), which is
 monoidal (`AlgebraicGeometry.Etale.isMonoidal_extendScalarsUpperStarIso_hom`). -/
-theorem derivedExtendScalarsPullbackMap_app_tensor_comp_δ
+theorem derivedExtendScalarsPullbackIsoOfCounit_hom_app_tensor_comp
     (K M : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    letI := derivedExtendScalarsMonoidal hρ ha X
-    letI := derivedExtendScalarsMonoidal hρ ha U
-    (derivedExtendScalarsPullbackMap hρ ha e).app (K ⊗ M) ≫
-        L((e)^*[ModuleCat.{u + 1} Λ']).map (δ (derivedExtendScalars hρ ha X) K M) ≫
-          ((leftDerivedUpperStarTensorComparison _ e).app _).app _ =
-      (derivedExtendScalars hρ ha U).map
-          (((leftDerivedUpperStarTensorComparison _ e).app K).app M) ≫
-        δ (derivedExtendScalars hρ ha U) _ _ ≫
-          ((derivedExtendScalarsPullbackMap hρ ha e).app K ⊗ₘ
-            (derivedExtendScalarsPullbackMap hρ ha e).app M) := by
-  let := derivedExtendScalarsMonoidal hρ ha X
-  let := derivedExtendScalarsMonoidal hρ ha U
+    haveI := preservesKFlatQuasiIso_extendScalars hρ ha X
+    haveI := preservesKFlatQuasiIso_extendScalars hρ ha U
+    (derivedExtendScalarsPullbackIsoOfCounit hρ ha e).hom.app (K ⊗ M) ≫
+        L((e)^*[ModuleCat.{u + 1} Λ']).map
+          (((Sheaf.extendScalars X.smallEtaleTopology ρ).leftDerivedTensorComparison.app K).app M) ≫
+          ((((e)^*[ModuleCat.{u + 1} Λ']).leftDerivedTensorComparison.app
+            ((Sheaf.extendScalars X.smallEtaleTopology ρ).leftDerivedFunctor.obj K)).app
+            ((Sheaf.extendScalars X.smallEtaleTopology ρ).leftDerivedFunctor.obj M)) =
+      (Sheaf.extendScalars U.smallEtaleTopology ρ).leftDerivedFunctor.map
+          ((((e)^*[ModuleCat.{u + 1} Λ]).leftDerivedTensorComparison.app K).app M) ≫
+        ((Sheaf.extendScalars U.smallEtaleTopology ρ).leftDerivedTensorComparison.app
+          (L((e)^*[ModuleCat.{u + 1} Λ]).obj K)).app (L((e)^*[ModuleCat.{u + 1} Λ]).obj M) ≫
+          ((derivedExtendScalarsPullbackIsoOfCounit hρ ha e).hom.app K ⊗ₘ
+            (derivedExtendScalarsPullbackIsoOfCounit hρ ha e).hom.app M) := by
   have := preservesKFlatQuasiIso_extendScalars hρ ha X
   have := preservesKFlatQuasiIso_extendScalars hρ ha U
   have := isMonoidal_extendScalarsUpperStarIso_hom ρ e
@@ -327,13 +351,11 @@ theorem derivedExtendScalarsPullbackMap_app_tensor_comp_δ
     (Sheaf.extendScalars X.smallEtaleTopology ρ) ((e)^*[ModuleCat.{u + 1} Λ'])
     (extendScalarsUpperStarIso ρ e) (derivedExtendScalarsPullbackIsoOfCounit hρ ha e).symm γ.hom
     hα hγ K M
-  rw [derivedExtendScalarsPullbackMap_eq]
   have h' := h =≫ ((derivedExtendScalarsPullbackIsoOfCounit hρ ha e).hom.app K ⊗ₘ
     (derivedExtendScalarsPullbackIsoOfCounit hρ ha e).hom.app M)
   simp only [Iso.symm_hom, Iso.symm_inv, Category.assoc, MonoidalCategory.tensorHom_comp_tensorHom,
     Iso.inv_hom_id_app] at h'
   erw [MonoidalCategory.id_tensorHom_id, Category.comp_id] at h'
-  rw [derivedExtendScalarsMonoidal_δ, derivedExtendScalarsMonoidal_δ]
   exact h'.symm
 
 end Tensor

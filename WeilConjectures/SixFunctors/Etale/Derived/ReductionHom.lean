@@ -9,7 +9,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.DerivedBaseChange
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ReductionExtendScalars
 public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MonoidalKFlat
-public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MonoidalStructure
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.Hom
@@ -123,28 +122,6 @@ instance : (derivedExtendScalars hφ ha X).IsLeftDerivedFunctor (derivedExtendSc
   inferInstanceAs (Functor.IsLeftDerivedFunctor
     (Sheaf.extendScalars X.smallEtaleTopology φ).leftDerivedFunctor
     (Sheaf.extendScalars X.smallEtaleTopology φ).leftDerivedFunctorCounit _)
-
-/-- The derived extension of scalars is monoidal: the monoidal structure
-`CategoryTheory.Functor.leftDerivedFunctorMonoidal` of the left derived functor of the strong
-monoidal extension of scalars of étale sheaves, whose comonoidal structure is the tensor
-comparison `CategoryTheory.Functor.leftDerivedTensorComparison`. -/
-@[instance_reducible]
-noncomputable def derivedExtendScalarsMonoidal : (derivedExtendScalars hφ ha X).Monoidal :=
-  have := preservesKFlatQuasiIso_extendScalars hφ ha X
-  (Sheaf.extendScalars X.smallEtaleTopology φ).leftDerivedFunctorMonoidal
-
-/-- The derived extension of scalars of the unit, `Ψ Λ_X ≅ Λ'_X`: the unit comparison of the
-monoidal structure `AlgebraicGeometry.Etale.derivedExtendScalarsMonoidal`. -/
-noncomputable def derivedExtendScalarsUnitIso :
-    (derivedExtendScalars hφ ha X).obj (𝟙_ _) ≅ 𝟙_ _ :=
-  letI := derivedExtendScalarsMonoidal hφ ha X
-  (Functor.Monoidal.εIso (derivedExtendScalars hφ ha X)).symm
-
-lemma derivedExtendScalarsUnitIso_hom :
-    letI := derivedExtendScalarsMonoidal hφ ha X
-    (derivedExtendScalarsUnitIso hφ ha X).hom =
-      Functor.OplaxMonoidal.η (derivedExtendScalars hφ ha X) :=
-  rfl
 
 /-- The derived extension of scalars is left adjoint to the derived restriction of scalars. -/
 noncomputable def derivedExtendScalarsAdjunction :

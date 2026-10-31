@@ -229,30 +229,4 @@ noncomputable def derivedRestrictScalarsCompComparisonUpperStarIso :
       D(ν^*(X)[ModuleCat.{u + 1} Λ']) ⋙ Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X) φ :=
   Functor.mapDerivedCategorySquareIso (asIso (restrictScalarsCompComparisonUpperStar φ X))
 
-variable [IsNoetherianRing Λ] {φ} (hφ : Function.Surjective φ) {a : Λ}
-  (ha : RingHom.ker φ = Ideal.span {a})
-
-/-- **The commutation of `ν^*` with the derived extension of scalars is the mate of the
-commutation of `ν^*` with the restriction of scalars**, under the adjunctions `Ψ ⊣ Res`. -/
-theorem comparisonUpperStarDerivedExtendScalarsIso_hom_eq :
-    (comparisonUpperStarDerivedExtendScalarsIso hφ ha X).hom =
-      ((mateEquiv (Etale.derivedExtendScalarsAdjunction hφ ha X)
-        (ProEtale.derivedExtendScalarsAdjunction hφ ha X)).symm
-          (derivedRestrictScalarsCompComparisonUpperStarIso φ X).hom).natTrans := by
-  have := Etale.preservesKFlatQuasiIso_extendScalars hφ ha X
-  have := ProEtale.preservesKFlatQuasiIso_extendScalars hφ ha X
-  refine (Etale.derivedExtendScalars hφ ha X ⋙ D(ν^*(X)[ModuleCat.{u + 1} Λ'])).leftDerived_ext
-    (derivedExtendScalarsComparisonUpperStarCounit hφ ha X)
-    (HomotopyCategory.quasiIso _ (ComplexShape.up ℤ)) _ _ _ ?_
-  have hχ := Functor.leftDerivedNatTrans_fac _ _
-    (comparisonUpperStarDerivedExtendScalarsCounit hφ ha X)
-    (derivedExtendScalarsComparisonUpperStarCounit hφ ha X)
-    (HomotopyCategory.quasiIso _ (ComplexShape.up ℤ)) (𝟙 _)
-  refine (hχ.trans (Category.comp_id _)).trans ?_
-  ext X
-  obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective X
-  apply ((ProEtale.derivedExtendScalarsAdjunction hφ ha X).homEquiv _ _).injective
-  trace_state
-  sorry
-
 end AlgebraicGeometry.ProEtale
