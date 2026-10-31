@@ -16708,6 +16708,7 @@ public import WeilConjectures.DeligneLaumon.Reduction.RelativeLineStratification
 public import WeilConjectures.DeligneLaumon.Reduction.TraceReality
 public import WeilConjectures.DeligneLaumon.Reduction.Weights
 public import WeilConjectures.DeligneLaumon.RoosIntrinsicUnitComparison.RoosIntrinsicUnitComparison
+public import WeilConjectures.DeligneLaumon.ScalarInverseImageIndependent
 public import WeilConjectures.DeligneLaumon.SfScalarExtensionComposition
 public import WeilConjectures.DeligneLaumon.SfWeilSheafComplex
 public import WeilConjectures.DeligneLaumon.WeilCompactSupportCohomology
