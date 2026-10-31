@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Group.MinimalAxioms
 public import WeilConjectures.Mathlib.GroupTheory.Index
 public import WeilConjectures.SixFunctors.NearbyCycles.AutActionComp
 public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModelAut
