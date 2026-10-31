@@ -10991,6 +10991,7 @@ public import WeilConjectures.FieldTheory.FrobeniusClosedBasisSubfield
 public import WeilConjectures.FieldTheory.Galois.CrossedProduct
 public import WeilConjectures.FieldTheory.Galois.FiniteGaloisIntermediateField
 public import WeilConjectures.FieldTheory.Galois.NormalFixedField
+public import WeilConjectures.FieldTheory.Galois.PowSurjective
 public import WeilConjectures.FieldTheory.GaloisAutomorphismExtension
 public import WeilConjectures.FieldTheory.GaloisInvariantVectorsSpan
 public import WeilConjectures.FieldTheory.GaloisMatrixCocycleDescent
@@ -16060,6 +16061,7 @@ public import WeilConjectures.TraceFormula.Specialization.FiniteSupportInduction
 public import WeilConjectures.TraceFormula.Specialization.FixedLocusExchange
 public import WeilConjectures.TraceFormula.Specialization.FixedSquareClosedExchange
 public import WeilConjectures.TraceFormula.Specialization.GenericAutModEll
+public import WeilConjectures.TraceFormula.Specialization.GenericAutPow
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorAffineLine
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorBaseFieldChange
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorConstantCase
@@ -16216,6 +16218,7 @@ public import WeilConjectures.TraceFormula.Specialization.ThickOriginRestrictedU
 public import WeilConjectures.TraceFormula.Specialization.Trait
 public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModel
 public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModelAut
+public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModelAutGalois
 public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModelAutGroup
 public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModelHom
 public import WeilConjectures.TraceFormula.Specialization.TraitChangeFinite
