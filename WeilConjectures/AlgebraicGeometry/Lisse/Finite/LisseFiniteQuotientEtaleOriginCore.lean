@@ -381,8 +381,10 @@ theorem lisse_finite_quotient_etale_origin_core
       (DerivedCategory.homologyFunctor _ q).mapIso eL
   have hLl (q : ℤ) : IsFiniteLocallyConstantSheaf
       ((DerivedCategory.homologyFunctor _ q).obj L) :=
-    ProEtale.isFiniteLocallyConstantSheaf_of_comparison_finite_models B _
-      (ProEtale.isFiniteLocallyConstant_of_iso (hLH q).symm (hP q))
+    ProEtale.isFiniteLocallyConstantSheaf_of_comparison_finite_models B _ (by
+      obtain ⟨ι, W, g, hW, hM⟩ := ProEtale.isFiniteLocallyConstant_of_iso (hLH q).symm (hP q)
+      exact ⟨ι, W, g, hW, fun i ↦
+        let ⟨M, _, e⟩ := hM i; ⟨M, Module.finite_of_finite B, e⟩⟩)
   have hLz (q : ℤ) (hq : IsZero ((DerivedCategory.homologyFunctor _ q).obj K)) :
       IsZero ((DerivedCategory.homologyFunctor _ q).obj L) :=
     F.isZero_homologyFunctor_of_isZero_homologyFunctor_mapDerivedCategory_obj
