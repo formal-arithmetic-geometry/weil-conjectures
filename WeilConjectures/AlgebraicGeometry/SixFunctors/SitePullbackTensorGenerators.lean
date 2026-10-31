@@ -474,14 +474,15 @@ private theorem normalizedAdjunction
     (hc : (sheafCompose J (CategoryTheory.forget CommRingCat.{r})).map c =
       I.ringUnderlying.inv ≫ (adj.homEquiv (rset B) (rset A)).symm
         ((sheafCompose K (CategoryTheory.forget CommRingCat.{r})).map φ)) :
-    ∃ am : I.modules ⋙ tensorFunctor.{c, v, r} c ⊣
+    ∃ am : I.modules ⋙ SemilinearSections.tensorFunctor.{c, v, r} c ⊣
       SheafOfModules.pushforward.{r} (F := F) (J := K) (K := J)
       (R := base A) (S := base B)
       ((sheafCompose K (forget₂ CommRingCat.{r} RingCat.{r})).map φ), ∀ M H a,
       (mset B).map (am.homEquiv M H a) =
         adj.homEquiv _ _ (I.moduleUnderlying.inv.app M ≫
           SheafOfModules.CochainTensorComparison.scalarInsertion B A RI L I c
-            (I.modules ⋙ tensorFunctor.{c, v, r} c) (fun _ ↦ rfl) M ≫ (mset A).map a) := by
+            (I.modules ⋙ SemilinearSections.tensorFunctor.{c, v, r} c) (fun _ ↦ rfl) M ≫
+              (mset A).map a) := by
   let V := F.sheafPushforwardContinuous (Type (r)) K J
   let P := SheafOfModules.pushforward.{r} (F := F) (J := K) (K := J)
       (R := base A) (S := base B)
@@ -545,8 +546,9 @@ private theorem normalizedAdjunction
     (forget₂ CommRingCat.{r} RingCat.{r})).map c)
   let eP : P ⋙ mset B ≅ restriction ⋙ mset RI ⋙ V :=
     NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun _ ↦ by rfl)
-  obtain ⟨am, ham⟩ := restrictedAdjunction I.modules restriction (tensorFunctor.{c, v, r} c)
-    (tensorAdjunction.{c, v, r} c) P (mset B) (mset RI) L V adj eI eP B' (by
+  obtain ⟨am, ham⟩ := restrictedAdjunction I.modules restriction
+    (SemilinearSections.tensorFunctor.{c, v, r} c)
+    (SemilinearSections.tensorAdjunction.{c, v, r} c) P (mset B) (mset RI) L V adj eI eP B' (by
       intro M H a
       change (mset B).map (B' M H a) ≫ (𝟙 _) = _
       exact (Category.comp_id _).trans (hB M H a))
@@ -557,14 +559,14 @@ private theorem normalizedAdjunction
   simp only [Category.comp_id] at h
   have hq : CategoryTheory.CochainPullback.insertion c (I.modules.obj M) =
       SheafOfModules.CochainTensorComparison.scalarInsertion B A RI L I c
-        (I.modules ⋙ tensorFunctor.{c, v, r} c) (fun _ ↦ rfl) M := by
+        (I.modules ⋙ SemilinearSections.tensorFunctor.{c, v, r} c) (fun _ ↦ rfl) M := by
     ext U x
     exact ((Classical.choose_spec
       (CategoryTheory.CochainPullback.extensionAdjunction_existsUnique c)).1
         (I.modules.obj M) U x)
   have hm := CategoryTheory.CochainPullback.extensionHomEquiv_formula c
     (I.modules.obj M) H a
-  change (mset RI).map ((tensorAdjunction.{c, v, r} c).homEquiv _ _ a) =
+  change (mset RI).map ((SemilinearSections.tensorAdjunction.{c, v, r} c).homEquiv _ _ a) =
     CategoryTheory.CochainPullback.insertion c (I.modules.obj M) ≫ (mset A).map a at hm
   rw [hq] at hm
   exact h.trans
@@ -774,7 +776,7 @@ private theorem abstractNormalizedAdjunction
             adj.homEquiv _ _ (I.moduleUnderlying.inv.app M ≫
               SheafOfModules.CochainTensorComparison.scalarInsertion B A RI L I c
                 F₀ hobj M ≫ (mset A).map a) := by
-  refine ⟨I.modules ⋙ tensorFunctor.{c, v, r} c, fun _ ↦ rfl, ?_, ?_⟩
+  refine ⟨I.modules ⋙ SemilinearSections.tensorFunctor.{c, v, r} c, fun _ ↦ rfl, ?_, ?_⟩
   · intros
     rfl
   · exact normalizedAdjunction.{c, v, r} F L adj A B φ RI I c hc

@@ -291,10 +291,12 @@ private theorem clopenFinite_preservesTor
   let : HasDerivedCategory (SheafOfModules.{max u (t + 1)}
       ((integralCoefficientSheaf l E U.toScheme 0).over V)) := HasDerivedCategory.standard _
   let : HasDerivedCategory (ringedSiteModules.{max u (t + 1)}
-      ((sheafCompose (K.over W) (forget₂ CommRingCat RingCat)).obj (R.over W))) :=
+      ((sheafCompose (K.over W)
+        (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj (R.over W))) :=
     HasDerivedCategory.standard _
   let : HasDerivedCategory (ringedSiteModules.{max u (t + 1)}
-      ((sheafCompose (J.over V) (forget₂ CommRingCat RingCat)).obj (S.over V))) :=
+      ((sheafCompose (J.over V)
+        (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj (S.over V))) :=
     HasDerivedCategory.standard _
   let G := SheafOfModules.overFunctor.{max u (t + 1)}
     (integralCoefficientSheaf l E T 0) W
@@ -376,7 +378,7 @@ theorem sf_clopen_preserves_residue_tor
       ((integralCoefficientSheaf l E U.toScheme 0).over V)) := HasDerivedCategory.standard _
   let : HasDerivedCategory (ringedSiteModules.{max u (t + 1)}
       ((sheafCompose ((Scheme.ProEt.topology U.toScheme).over V)
-        (forget₂ CommRingCat RingCat)).obj
+        (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj
           ((integralCoefficientCommRingSheaf l E U.toScheme 0).over V))) :=
     HasDerivedCategory.standard _
   exact torAmplitude_iso ((integralCoefficientCommRingSheaf l E U.toScheme 0).over V)

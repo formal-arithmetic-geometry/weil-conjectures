@@ -415,19 +415,23 @@ private theorem internalModel_on_object [Finite A] [DiscreteTopology A]
       W.hom W.prop).app _ ≪≫ r.symm ≪≫ S.functor.mapIso em ≪≫ c
 
 omit [TopologicalSpace A] [IsTopologicalRing A] in
-private theorem localModel_iff_finiteLocal (T : Scheme.{u})
+private theorem localModel_iff_finiteLocal [Finite A] (T : Scheme.{u})
     (F : Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1} A))) :
     ordinaryLocalModel A T F ↔ IsFiniteLocallyConstant (ULift.{u + 1} A) F := by
   constructor
   · rintro ⟨C, hC⟩
     let D : Scheme.Cover.{u + 1} Scheme.proetalePrecoverage T :=
       C.reindex Equiv.ulift.{u + 1, u}
-    exact ⟨D.I₀, D.X, D.f, D.mem₀, fun i ↦ hC i.down⟩
+    refine ⟨D.I₀, D.X, D.f, D.mem₀, fun i ↦ ?_⟩
+    obtain ⟨P, _, e⟩ := hC i.down
+    exact ⟨P, Module.Finite.of_finite, e⟩
   · rintro ⟨I, W, f, hf, h⟩
     let C : Scheme.Cover.{u + 1} Scheme.proetalePrecoverage T := ⟨⟨I, W, f⟩, hf⟩
     have : Precoverage.Small.{u} Scheme.proetalePrecoverage :=
       inferInstanceAs (Precoverage.Small.{u} (Scheme.propQCPrecoverage @WeaklyEtale))
-    exact ⟨C.restrictIndexOfSmall.{u}, fun i ↦ h (Precoverage.ZeroHypercover.Small.restrictFun C i)⟩
+    refine ⟨C.restrictIndexOfSmall.{u}, fun i ↦ ?_⟩
+    obtain ⟨P, _, e⟩ := h (Precoverage.ZeroHypercover.Small.restrictFun C i)
+    exact ⟨P, Module.finite_of_finite (ULift.{u + 1} A), e⟩
 
 private theorem localCondition_iff [Finite A] [DiscreteTopology A]
     (T : Scheme.{u}) (e : Encoding A T) (M : Internal A T) :

@@ -78,7 +78,7 @@ private theorem etaleBC_iff (A : Type u) [CommRing A] [Finite A]
     · exact (DerivedCategory.isGE_iff K a).mp ha i (lt_of_lt_of_le hi (min_le_left _ _))
     · exact (DerivedCategory.isLE_iff K b).mp hb i (lt_of_le_of_lt (le_max_right _ _) hi)
 
-private theorem ordinary_constructible_iff (A : Type u) [CommRing A]
+private theorem ordinary_constructible_iff (A : Type u) [CommRing A] [Finite A]
     (T : Scheme.{u}) [CompactSpace T] [QuasiSeparatedSpace T]
     (M : Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1} A))) :
     ordinaryConstructible A T M ↔ IsConstructible (ULift.{u + 1} A) M := by
@@ -94,14 +94,16 @@ private theorem ordinary_constructible_iff (A : Type u) [CommRing A]
       by
         convert C.mem₀ using 1
         exact le_antisymm (fun _ _ ⟨i⟩ ↦ ⟨i.down⟩)
-          (fun _ _ ⟨i⟩ ↦ ⟨(ULift.up i : ULift.{u + 1} C.I₀)⟩), fun i ↦ hC i.down⟩
+          (fun _ _ ⟨i⟩ ↦ ⟨(ULift.up i : ULift.{u + 1} C.I₀)⟩), fun i ↦
+          let ⟨P, _, e⟩ := hC i.down; ⟨P, Module.Finite.of_finite, e⟩⟩
   · rintro ⟨I, W, g, hg, h⟩
     let C : Scheme.Cover.{u + 1} Scheme.proetalePrecoverage (S.domain a) :=
       ⟨⟨I, W, g⟩, hg⟩
     have : Precoverage.Small.{u} Scheme.proetalePrecoverage :=
       inferInstanceAs (Precoverage.Small.{u} (Scheme.propQCPrecoverage @WeaklyEtale))
-    exact ⟨C.restrictIndexOfSmall.{u}, fun i ↦
-      h (Precoverage.ZeroHypercover.Small.restrictFun.{u} C i)⟩
+    refine ⟨C.restrictIndexOfSmall.{u}, fun i ↦ ?_⟩
+    obtain ⟨P, _, e⟩ := h (Precoverage.ZeroHypercover.Small.restrictFun.{u} C i)
+    exact ⟨P, Module.finite_of_finite (ULift.{u + 1} A), e⟩
 
 private theorem ordinaryBC_iff (A : Type u) [CommRing A] [Finite A]
     (T : Scheme.{u}) [CompactSpace T] [QuasiSeparatedSpace T]
