@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.Specialization.GenericSliceTraitSepClosed
+public import WeilConjectures.TraceFormula.Specialization.GenericSliceTraitSepClosedOfResidue
 public import WeilConjectures.TraceFormula.Specialization.SliceTraitResidue
 public import WeilConjectures.TraceFormula.Specialization.GenericSliceTraitExists
 
