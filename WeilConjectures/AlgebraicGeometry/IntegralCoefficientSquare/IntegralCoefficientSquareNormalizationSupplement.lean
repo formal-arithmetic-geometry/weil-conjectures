@@ -156,6 +156,7 @@ import WeilConjectures.CategoryTheory.Abelian.Flat.PreservesFlat
 import WeilConjectures.CategoryTheory.DerivedCategory.KFlatAcyclic
 import WeilConjectures.CategoryTheory.ModuleObjects.ChangeOfScalarsSquare
 import WeilConjectures.CategoryTheory.ModuleObjects.SixFunctors.ExtensionIsoQuotientFormula
+public import WeilConjectures.AlgebraicGeometry.Picard.KFlatRingedToposPullback
 
 /-! # Normalized constant-to-integral coefficient pullback
 
@@ -227,7 +228,9 @@ def underlyingIso (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     ((CondensedRing.upperStar Λ g).obj M).X ≅
       (upperStar Ab.{u + 1} g).obj M.X :=
   (Mod.forget (condensedRingObj Λ X)).mapIso
-    ((cartesianCoefficientPullbackIso Λ g).app M)
+    ((Functor.isoWhiskerLeft
+      ((upperStar Ab.{u + 1} g).mapMod (condensedRingObj Λ Y))
+      (Mod.extendScalarsIsoComapInv (condensedPullbackHom Λ g))).app M)
 
 /-- Both generator formulas fixing the underlying Cartesian scalar-extension isomorphism.
 The first sends r tensor h to alpha inverse(r)h; the second sends h to 1 tensor h.
