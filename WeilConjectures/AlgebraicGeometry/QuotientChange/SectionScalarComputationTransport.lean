@@ -99,6 +99,8 @@ attribute [local irreducible] CategoryTheory.Functor.leftDerivedFunctor
 
 attribute [local irreducible] sectionTensorRightLocalization
 
+-- Upstream made the sheaf tensor instances local.
+attribute [local instance] Sheaf.monoidalCategory Sheaf.symmetricCategory in
 private theorem internalGenerator_hom_ext
     {C : Type v} [Category.{w} C] (J : GrothendieckTopology C)
     [UnivLE.{max v w, u}] [HasSheafify J AddCommGrpCat.{u}]

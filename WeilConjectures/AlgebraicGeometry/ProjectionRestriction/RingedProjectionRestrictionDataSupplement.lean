@@ -60,7 +60,8 @@ projection arrow is selected from an unconstrained existence statement.
 * `ProjectionRestriction.Local`: canonical slice comparisons and their normalizations.
 
 The assembly theorem `ringedProjectionRestriction` is in
-`WeilConjectures.AlgebraicGeometry.Ringed.RingedProjectionRestriction`. This module contains its unchanged data
+`WeilConjectures.AlgebraicGeometry.Ringed.RingedProjectionRestriction`.
+This module contains its unchanged data
 interfaces so the construction lemmas can be imported without a cycle.
 -/
 

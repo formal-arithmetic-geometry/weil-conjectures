@@ -182,13 +182,11 @@ structure CompletedConstantReductionTower (X : Scheme.{u})
     (((eqToHom (level F (n + 1)).symm ≫ (functor.obj F).map
         (homOfLE (Nat.le_succ n)).op ≫ eqToHom (level F n)).f i).val.app U)
       (completedConstantGenerator X _
-
         ((ModuleCat.extendScalars.{u + 1, u + 1, u + 1}
           (AdicCompletion.evalₐ I (n + 2)).toRingHom).obj
           (F.X i))
         U (p ⊗ₜ[(AdicCompletion I A), (AdicCompletion.evalₐ I (n + 2)).toRingHom] x)) =
       completedConstantGenerator X _
-
         ((ModuleCat.extendScalars.{u + 1, u + 1, u + 1}
           (AdicCompletion.evalₐ I (n + 1)).toRingHom).obj
           (F.X i))

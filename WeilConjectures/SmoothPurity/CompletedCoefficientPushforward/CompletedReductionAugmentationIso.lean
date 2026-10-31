@@ -204,6 +204,8 @@ private theorem complete_roosUnit (W : Scheme.{t})
   rw [← hc, ← Category.assoc]
   exact IsIso.comp_isIso' hu c.isIso_hom
 
+set_option maxHeartbeats 1000000 in
+-- The derived Roos comparison maps unfold large localized categories.
 /-- Completeness makes the specified chain-level reduction augmentation invertible
 in any normalized total derived inverse-limit model.
 
@@ -235,7 +237,8 @@ theorem reductionAugmentation_isIso (p : ℕ) [Fact p.Prime] (hlp : l ≠ p)
     (P : CochainComplex (Mod W (R l E W)) ℤ)
     (hP : CochainComplex.IsKFlatIndependentCoefficients
       (R := completedIntegralCommRingSheafUnrestricted l E W) P)
-    (hflat : ∀ i : ℤ, @SheafOfModules.IsFlatOnSite W.ProEt inferInstance (ProEt.topology W)
+    (hflat : ∀ i : ℤ, @SheafOfModules.IsFlatOnSite.{t + 1, t, max u (t + 1), max u (t + 1)}
+      W.ProEt inferInstance (ProEt.topology W)
       inferInstance (integralCoefficientAbLocallyBijective.{t, u} W)
       (integralCoefficientAbSheafify.{t, u} W).isRightAdjoint
       (completedIntegralCommRingSheafUnrestricted l E W) (P.X i))

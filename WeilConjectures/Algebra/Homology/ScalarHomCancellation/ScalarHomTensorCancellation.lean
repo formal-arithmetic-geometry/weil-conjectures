@@ -187,7 +187,7 @@ private noncomputable def cancellationRestrictSheafifyIso
     exact isIso_of_reflects_iso _ (toSheaf A)
   exact asIso (cancellationRestrictSheafifyHom α P)
 
-omit [EssentiallySmall.{r} C] in
+omit [EssentiallySmall.{r} C] [J.HasSheafCompose (forget₂ CommRingCat RingCat)] in
 private theorem cancellationRestrictSheafifyIso_naturality
     {A B : Sheaf J RingCat.{r}} (α : A ⟶ B)
     {P Q : PresheafOfModules.{r} B.obj} (f : P ⟶ Q) :

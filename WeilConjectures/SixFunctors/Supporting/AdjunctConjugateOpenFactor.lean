@@ -13,7 +13,8 @@ Source: Stacks Project, Tag 07A7, abstract mate normalization
 (blueprint: lem-sf-adjunct-conjugate-open-factor).
 
 The existing categorical argument is extracted from
-`WeilConjectures.AlgebraicGeometry.SemilinearProperOpen.SemilinearProperOpenMatePasting` so it is a public interface
+`WeilConjectures.AlgebraicGeometry.SemilinearProperOpen.SemilinearProperOpenMatePasting`
+so it is a public interface
 independent of the geometric realization.
 -/
 

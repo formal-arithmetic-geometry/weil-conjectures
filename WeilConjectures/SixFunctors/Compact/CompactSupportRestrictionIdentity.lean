@@ -97,13 +97,13 @@ private theorem direct_image_identity {Z Y : Scheme.{u}} (g : Z ⟶ Y)
     change ((sfOpenCoefficientRestrictionId Y A).hom.app (F.obj M)).val.app V t =
       (F.map ((sfOpenCoefficientRestrictionId Z A).hom.app M)).val.app V
         ((c.hom.app M).val.app V t)
-    rw [AlgebraicGeometry.Scheme.coefficient_id_apply]
+    rw [AlgebraicGeometry.Scheme.coefficientRestrictionId_apply]
     have hn := (proEtaleCoefficientDirectImageComparison_existsUnique g
       (RingHom.id A)).choose_spec.1 M V t
     change (c.hom.app M).val.app V t = t at hn
     rw [hn]
     change t = ((sfOpenCoefficientRestrictionId Z A).hom.app M).val.app _ t
-    exact (AlgebraicGeometry.Scheme.coefficient_id_apply Z A M _ t).symm
+    exact (AlgebraicGeometry.Scheme.coefficientRestrictionId_apply Z A M _ t).symm
   have h := CategoryTheory.ExactDerivedSquare.normalized_naturality
     F F x y (𝟭 _) (𝟭 _) x.mapDerivedCategory (𝟭 _) y.mapDerivedCategory (𝟭 _)
     x.mapDerivedCategoryFactors (Iso.refl _) y.mapDerivedCategoryFactors (Iso.refl _)

@@ -215,6 +215,338 @@ private theorem ordinaryOpenExtension_exists {U X : Scheme.{u}} (j : U ⟶ X)
     colimits := PreservesColimitsOfSize.preservesFiniteColimits L
   }⟩
 
+/- The adopted module-adjunction API equates the site hom universe and coefficient
+universe. Here the site has objects in Type (u+1), homs in Type u, and coefficients
+in Type (u+1). The following private helpers prove the same adjunction by its
+sectionwise universal property at these universes; no public interface changes. -/
+namespace GeneralizedRinged
+
+open MonoidalCategory
+open SheafOfModules.GeometricConstruction
+open scoped ChangeOfRings
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+set_option backward.defeqAttrib.useBackward true
+set_option synthInstance.maxSize 4096
+set_option maxErrors 20
+
+section
+variable {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]
+  {J : GrothendieckTopology C} {K : GrothendieckTopology D}
+  (F : D ⥤ C) [F.IsContinuous K J]
+  (L : Sheaf K (Type (u + 1)) ⥤ Sheaf J (Type (u + 1)))
+  (adj : L ⊣ F.sheafPushforwardContinuous (Type (u + 1)) K J)
+
+private def directPair {X Y : Sheaf J (Type (u + 1))} {T : Sheaf K (Type (u + 1))}
+    (x : T ⟶ (F.sheafPushforwardContinuous (Type (u + 1)) K J).obj X)
+    (y : T ⟶ (F.sheafPushforwardContinuous (Type (u + 1)) K J).obj Y) :
+    T ⟶ (F.sheafPushforwardContinuous (Type (u + 1)) K J).obj (X ⊗ Y) :=
+  ⟨{ app U := ↾(fun t ↦ (x.hom.app U t, y.hom.app U t))
+     naturality := by
+       intro U V f
+       ext t
+       change (x.hom.app V (T.obj.map f t), y.hom.app V (T.obj.map f t)) =
+         (X.obj.map (F.op.map f) (x.hom.app U t),
+           Y.obj.map (F.op.map f) (y.hom.app U t))
+       exact Prod.ext (CategoryTheory.congr_fun (x.hom.naturality f) t)
+         (CategoryTheory.congr_fun (y.hom.naturality f) t) }⟩
+
+private theorem transpose_pair {X Y : Sheaf J (Type (u + 1))} {T : Sheaf K (Type (u + 1))}
+    (x : T ⟶ (F.sheafPushforwardContinuous (Type (u + 1)) K J).obj X)
+    (y : T ⟶ (F.sheafPushforwardContinuous (Type (u + 1)) K J).obj Y) :
+    (adj.homEquiv T (X ⊗ Y)).symm (directPair F x y) =
+      CartesianMonoidalCategory.lift ((adj.homEquiv T X).symm x)
+        ((adj.homEquiv T Y).symm y) := by
+  apply CartesianMonoidalCategory.hom_ext
+  · rw [CartesianMonoidalCategory.lift_fst, ← adj.homEquiv_naturality_right_symm]
+    rfl
+  · rw [CartesianMonoidalCategory.lift_snd, ← adj.homEquiv_naturality_right_symm]
+    rfl
+
+private theorem transpose_binary
+    {X Y Z : Sheaf J (Type (u + 1))} {T : Sheaf K (Type (u + 1))} (op : X ⊗ Y ⟶ Z)
+    (x : T ⟶ (F.sheafPushforwardContinuous (Type (u + 1)) K J).obj X)
+    (y : T ⟶ (F.sheafPushforwardContinuous (Type (u + 1)) K J).obj Y)
+    (z : T ⟶ (F.sheafPushforwardContinuous (Type (u + 1)) K J).obj Z)
+    (hz : ∀ U t, z.hom.app U t = op.hom.app (F.op.obj U)
+      (x.hom.app U t, y.hom.app U t)) :
+    ∀ U t, ((adj.homEquiv T Z).symm z).hom.app U t =
+      op.hom.app U (((adj.homEquiv T X).symm x).hom.app U t,
+        ((adj.homEquiv T Y).symm y).hom.app U t) := by
+  have he : z = directPair F x y ≫
+      (F.sheafPushforwardContinuous (Type (u + 1)) K J).map op := by
+    ext U t
+    exact hz U t
+  rw [he, adj.homEquiv_naturality_right_symm, transpose_pair F L adj]
+  intro U t
+  rfl
+
+private theorem transpose_constant
+    {X : Sheaf J (Type (u + 1))} {T : Sheaf K (Type (u + 1))}
+    (op : 𝟙_ (Sheaf J (Type (u + 1))) ⟶ X)
+    (z : T ⟶ (F.sheafPushforwardContinuous (Type (u + 1)) K J).obj X)
+    (hz : ∀ U t, z.hom.app U t = op.hom.app (F.op.obj U) PUnit.unit) :
+    ∀ U t, ((adj.homEquiv T X).symm z).hom.app U t = op.hom.app U PUnit.unit := by
+  let w : T ⟶ (F.sheafPushforwardContinuous (Type (u + 1)) K J).obj (𝟙_ _) :=
+    ⟨{ app U := ↾(fun _ ↦ PUnit.unit) }⟩
+  have he : z = w ≫ (F.sheafPushforwardContinuous (Type (u + 1)) K J).map op := by
+    ext U t
+    exact hz U t
+  rw [he, adj.homEquiv_naturality_right_symm]
+  intro U t
+  change op.hom.app U _ = _
+  congr 1
+
+private theorem siteStructuralMap_exists
+    [PreservesFiniteLimits L]
+    (R : Sheaf J CommRingCat.{u + 1}) (S : Sheaf K CommRingCat.{u + 1})
+    (φ : S ⟶ (F.sheafPushforwardContinuous CommRingCat.{u + 1} K J).obj R)
+    (RI : Sheaf J CommRingCat.{u + 1}) (I : AlgebraicInverseImage L S RI) :
+    ∃ c : RI ⟶ R, (sheafCompose J (CategoryTheory.forget CommRingCat.{u + 1})).map c =
+      I.ringUnderlying.inv ≫ (adj.homEquiv (rset S) (rset R)).symm
+        ((sheafCompose K (CategoryTheory.forget CommRingCat.{u + 1})).map φ) := by
+  let φs : rset S ⟶ (F.sheafPushforwardContinuous (Type (u + 1)) K J).obj (rset R) :=
+    (sheafCompose K (CategoryTheory.forget CommRingCat.{u + 1})).map φ
+  let g := (adj.homEquiv (rset S) (rset R)).symm φs
+  refine SheafOfModules.CochainCompositeConstruction.structuralMap L S R RI I g ?_ ?_ ?_
+  · intro T x y z hz U t
+    change T ⟶ rset S at x y z
+    change ((L.map z) ≫ g).hom.app U t =
+      @Add.add (R.obj.obj U) inferInstance
+        (((L.map x) ≫ g).hom.app U t) (((L.map y) ≫ g).hom.app U t)
+    dsimp only [g]
+    rw [← adj.homEquiv_naturality_left_symm,
+      ← adj.homEquiv_naturality_left_symm, ← adj.homEquiv_naturality_left_symm]
+    apply transpose_binary F L adj (SheafOfModules.GeometricConstruction.ringAdd R)
+      (x ≫ φs) (y ≫ φs) (z ≫ φs) _ U t
+    intro V x'
+    change (φ.hom.app V).hom (z.hom.app V x') =
+      (φ.hom.app V).hom (x.hom.app V x') + (φ.hom.app V).hom (y.hom.app V x')
+    have h : (show S.obj.obj V from z.hom.app V x') =
+        (show S.obj.obj V from x.hom.app V x') + (show S.obj.obj V from y.hom.app V x') :=
+      hz V x'
+    exact (congrArg (φ.hom.app V).hom h).trans ((φ.hom.app V).hom.map_add _ _)
+  · intro T x y z hz U t
+    change T ⟶ rset S at x y z
+    change ((L.map z) ≫ g).hom.app U t =
+      @Mul.mul (R.obj.obj U) inferInstance
+        (((L.map x) ≫ g).hom.app U t) (((L.map y) ≫ g).hom.app U t)
+    dsimp only [g]
+    rw [← adj.homEquiv_naturality_left_symm,
+      ← adj.homEquiv_naturality_left_symm, ← adj.homEquiv_naturality_left_symm]
+    apply transpose_binary F L adj (SheafOfModules.GeometricConstruction.ringMul R)
+      (x ≫ φs) (y ≫ φs) (z ≫ φs) _ U t
+    intro V x'
+    change (φ.hom.app V).hom (z.hom.app V x') =
+      (φ.hom.app V).hom (x.hom.app V x') * (φ.hom.app V).hom (y.hom.app V x')
+    have h : (show S.obj.obj V from z.hom.app V x') =
+        (show S.obj.obj V from x.hom.app V x') * (show S.obj.obj V from y.hom.app V x') :=
+      hz V x'
+    exact (congrArg (φ.hom.app V).hom h).trans ((φ.hom.app V).hom.map_mul _ _)
+  · intro T z hz U t
+    change T ⟶ rset S at z
+    change ((L.map z) ≫ g).hom.app U t = (1 : R.obj.obj U)
+    dsimp only [g]
+    rw [← adj.homEquiv_naturality_left_symm]
+    apply transpose_constant F L adj (ringOne R) (z ≫ φs) _ U t
+    intro V x
+    change (φ.hom.app V).hom (z.hom.app V x) = 1
+    have h : (show S.obj.obj V from z.hom.app V x) = 1 := hz V x
+    exact (congrArg (φ.hom.app V).hom h).trans (φ.hom.app V).hom.map_one
+
+end
+private noncomputable abbrev tensorFunctor
+    {D : Type (u + 1)} [Category.{u} D] {K : GrothendieckTopology D}
+    {A S : Sheaf K CommRingCat.{u + 1}} (c : A ⟶ S) :=
+  CategoryTheory.CochainPullback.extensionFunctor (J := K) (A := A) (B := S) c
+
+private noncomputable abbrev tensorAdjunction
+    {D : Type (u + 1)} [Category.{u} D] {K : GrothendieckTopology D}
+    {A S : Sheaf K CommRingCat.{u + 1}} (c : A ⟶ S) :=
+  CategoryTheory.CochainPullback.extensionAdjunction (J := K) (A := A) (B := S) c
+
+open SheafOfModules.GeometricConstruction
+private theorem pushforward_operations
+    {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]
+    {J : GrothendieckTopology C} {K : GrothendieckTopology D}
+    (F : D ⥤ C) [F.IsContinuous K J]
+    (A : Sheaf J CommRingCat.{u + 1}) (B : Sheaf K CommRingCat.{u + 1})
+    (φ : B ⟶ (F.sheafPushforwardContinuous CommRingCat.{u + 1} K J).obj A)
+    (H : Mod A) :
+    let V := F.sheafPushforwardContinuous (Type (u + 1)) K J
+    let P := SheafOfModules.pushforward.{u + 1} (F := F)
+      ((sheafCompose K (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map φ)
+    let X := (mset A).obj H
+    V.map (CategoryTheory.CochainPullback.moduleAddMap A H) =
+      prodComparison V X X ≫ CategoryTheory.CochainPullback.moduleAddMap B (P.obj H) := by
+  dsimp only
+  let V := F.sheafPushforwardContinuous (Type (u + 1)) K J
+  let X := (mset A).obj H
+  ext U p
+  let : Add (X.obj.obj (F.op.obj U)) :=
+    (inferInstance : Add (H.val.obj (F.op.obj U)))
+  let : Add ((V.obj X).obj.obj U) :=
+    (inferInstance : Add (H.val.obj (F.op.obj U)))
+  have hf := congrArg (fun f ↦ f.hom.app U p) (prodComparison_fst V X X)
+  have hs := congrArg (fun f ↦ f.hom.app U p) (prodComparison_snd V X X)
+  change (prod.fst : X ⨯ X ⟶ X).hom.app (F.op.obj U) p +
+      (prod.snd : X ⨯ X ⟶ X).hom.app (F.op.obj U) p =
+    (prod.fst : V.obj X ⨯ V.obj X ⟶ V.obj X).hom.app U
+      ((prodComparison V X X).hom.app U p) +
+    (prod.snd : V.obj X ⨯ V.obj X ⟶ V.obj X).hom.app U
+      ((prodComparison V X X).hom.app U p)
+  exact congrArg₂ (fun x y ↦ x + y) hf.symm hs.symm
+
+private theorem pushforward_action
+    {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]
+    {J : GrothendieckTopology C} {K : GrothendieckTopology D}
+    (F : D ⥤ C) [F.IsContinuous K J]
+    (A : Sheaf J CommRingCat.{u + 1}) (B : Sheaf K CommRingCat.{u + 1})
+    (φ : B ⟶ (F.sheafPushforwardContinuous CommRingCat.{u + 1} K J).obj A)
+    (H : Mod A) :
+    let V := F.sheafPushforwardContinuous (Type (u + 1)) K J
+    let P := SheafOfModules.pushforward.{u + 1} (F := F)
+      ((sheafCompose K (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map φ)
+    let φs : rset B ⟶ V.obj (rset A) :=
+    (sheafCompose K (CategoryTheory.forget CommRingCat.{u + 1})).map φ
+    let X := (mset A).obj H
+    CategoryTheory.CochainPullback.moduleSMulMap B (P.obj H) =
+      prod.map φs (𝟙 _) ≫ inv (prodComparison V (rset A) X) ≫
+        V.map (CategoryTheory.CochainPullback.moduleSMulMap A H) := by
+  dsimp only
+  let V := F.sheafPushforwardContinuous (Type (u + 1)) K J
+  let X := (mset A).obj H
+  let φs : rset B ⟶ V.obj (rset A) :=
+    (sheafCompose K (CategoryTheory.forget CommRingCat.{u + 1})).map φ
+  have : PreservesLimits V := by dsimp only [V]; infer_instance
+  ext U p
+  let q := (prod.map φs (𝟙 _) ≫ inv (prodComparison V (rset A) X)).hom.app U p
+  have hf := congrArg (fun f ↦ f.hom.app U p)
+    (show prod.map φs (𝟙 _) ≫ inv (prodComparison V (rset A) X) ≫
+        V.map prod.fst = prod.fst ≫ φs by
+      rw [inv_prodComparison_map_fst, prod.map_fst])
+  have hs := congrArg (fun f ↦ f.hom.app U p)
+    (show prod.map φs (𝟙 _) ≫ inv (prodComparison V (rset A) X) ≫
+        V.map prod.snd = prod.snd by
+      rw [inv_prodComparison_map_snd, prod.map_snd, Category.comp_id])
+  let smul : A.obj.obj (F.op.obj U) → H.val.obj (F.op.obj U) →
+      H.val.obj (F.op.obj U) := fun a x ↦ a • x
+  change smul ((φ.hom.app U).hom
+      ((prod.fst : rset B ⨯ V.obj X ⟶ rset B).hom.app U p))
+      ((prod.snd : rset B ⨯ V.obj X ⟶ V.obj X).hom.app U p) =
+    smul ((prod.fst : rset A ⨯ X ⟶ rset A).hom.app (F.op.obj U) q)
+      ((prod.snd : rset A ⨯ X ⟶ X).hom.app (F.op.obj U) q)
+  exact congrArg₂ smul hf.symm hs.symm
+
+set_option maxHeartbeats 600000 in
+-- Elaborate the sectionwise adjunction and its transported coefficient identities.
+-- Restricting the adjunction to linear maps elaborates several large sheaf diagrams.
+private theorem supplied_adjunction
+    {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]
+    {J : GrothendieckTopology C} {K : GrothendieckTopology D}
+    (F : D ⥤ C) [F.IsContinuous K J]
+    (L : Sheaf K (Type (u + 1)) ⥤ Sheaf J (Type (u + 1)))
+    (adj : L ⊣ F.sheafPushforwardContinuous (Type (u + 1)) K J)
+    [PreservesFiniteLimits L]
+    (A : Sheaf J CommRingCat.{u + 1}) (B : Sheaf K CommRingCat.{u + 1})
+    (φ : B ⟶ (F.sheafPushforwardContinuous CommRingCat.{u + 1} K J).obj A)
+    (RI : Sheaf J CommRingCat.{u + 1}) (I : AlgebraicInverseImage L B RI)
+    (c : RI ⟶ A)
+    (hc : (sheafCompose J (CategoryTheory.forget CommRingCat.{u + 1})).map c =
+      I.ringUnderlying.inv ≫ (adj.homEquiv (rset B) (rset A)).symm
+        ((sheafCompose K (CategoryTheory.forget CommRingCat.{u + 1})).map φ)) :
+    Nonempty (I.modules ⋙ tensorFunctor c ⊣
+      SheafOfModules.pushforward.{u + 1} (F := F) (J := K) (K := J)
+      (R := base A) (S := base B)
+      ((sheafCompose K (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map φ)) := by
+  let V := F.sheafPushforwardContinuous (Type (u + 1)) K J
+  let P := SheafOfModules.pushforward.{u + 1} (F := F) (J := K) (K := J)
+      (R := base A) (S := base B)
+    ((sheafCompose K (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map φ)
+  let φs : rset B ⟶ V.obj (rset A) :=
+    (sheafCompose K (CategoryTheory.forget CommRingCat.{u + 1})).map φ
+  have : PreservesLimits V := adj.rightAdjoint_preservesLimits
+  let eI := I.moduleUnderlying
+  obtain ⟨L₀, hobj₀, hmap₀, V₀, ⟨a₀⟩, hAdd₀⟩ :=
+    CategoryTheory.CochainPullback.ringedPullbackPresentation_exists
+      (R := B) (S := A) L V adj RI I c
+  let p : CategoryTheory.CochainPullback.RingedPullback.{u + 1, u + 1, u, u + 1, u}
+      (J := K) (K := J) B A := {
+    uInv := L, uPush := V, adj := adj, finiteLimits := inferInstance,
+    RI := RI, I := I, coefficient := c, L := L₀, hobj := hobj₀, hmap := hmap₀,
+    V := V₀, moduleAdj := a₀, additive := hAdd₀ }
+  have hp : CategoryTheory.CochainPullback.structureMap p =
+      (adj.homEquiv _ _).symm φs := by
+    change I.ringUnderlying.hom ≫ _ = _
+    rw [hc]
+    simp only [Iso.hom_inv_id_assoc]
+    rfl
+  have hEquiv (M : Mod B) (H : Mod A) :
+      ∃ E : (I.modules.obj M ⟶ (restrictScalars ((sheafCompose J
+          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map c)).obj H) ≃ (M ⟶ P.obj H),
+        ∀ a, (mset B).map (E a) =
+          adj.homEquiv _ _ (eI.inv.app M ≫ (mset RI).map a) := by
+    have ha : CategoryTheory.CochainPullback.moduleAddMap B (P.obj H) ≫ (𝟙 _) =
+        prod.map (𝟙 _) (𝟙 _) ≫ inv (prodComparison V _ _) ≫
+          V.map (CategoryTheory.CochainPullback.moduleAddMap A H) := by
+      simp only [Category.comp_id, prod.map_id_id, Category.id_comp]
+      apply (cancel_epi (prodComparison V ((mset A).obj H) ((mset A).obj H))).mp
+      simpa only [IsIso.hom_inv_id_assoc] using (pushforward_operations F A B φ H).symm
+    have hs : CategoryTheory.CochainPullback.moduleSMulMap B (P.obj H) =
+        prod.map φs (𝟙 _) ≫ inv (prodComparison V (rset A) ((mset A).obj H)) ≫
+          V.map (CategoryTheory.CochainPullback.moduleSMulMap A H) :=
+      pushforward_action F A B φ H
+    have hg : adj.homEquiv _ _ (CategoryTheory.CochainPullback.structureMap p) = φs := by
+      rw [hp, Equiv.apply_symm_apply]
+    rw [← hg] at hs
+    obtain ⟨E, hE⟩ := CategoryTheory.CochainPullback.linearMate_exists p H (P.obj H)
+      (Iso.refl _) ha (by
+        simp only [Iso.refl_hom, Category.comp_id]
+        convert hs using 1 <;> rfl) M
+    exact ⟨E, fun a ↦ by simpa only [Iso.refl_hom, Category.comp_id] using hE a⟩
+  choose B' hB using hEquiv
+  have hBL {M N} (a : M ⟶ N) H b :
+      B' M H (I.modules.map a ≫ b) = a ≫ B' N H b := by
+    apply (mset B).map_injective
+    rw [hB, (mset B).map_comp, hB, (mset RI).map_comp]
+    have hn : eI.inv.app M ≫ (mset RI).map (I.modules.map a) =
+        L.map ((mset B).map a) ≫ eI.inv.app N := (eI.inv.naturality a).symm
+    rw [← Category.assoc, hn, Category.assoc, adj.homEquiv_naturality_left]
+  have hBR M {H H'} a (b : H ⟶ H') :
+      B' M H' (a ≫ (restrictScalars ((sheafCompose J
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map c)).map b) =
+        B' M H a ≫ P.map b := by
+    apply (mset B).map_injective
+    rw [hB, (mset B).map_comp, hB, (mset RI).map_comp]
+    change adj.homEquiv _ _ (eI.inv.app M ≫
+      ((mset RI).map a ≫ (mset A).map b)) =
+        adj.homEquiv _ _ (eI.inv.app M ≫ (mset RI).map a) ≫ V.map ((mset A).map b)
+    rw [← Category.assoc, adj.homEquiv_naturality_right]
+  let T := I.modules ⋙ tensorFunctor c
+  let E' : ∀ M H, (T.obj M ⟶ H) ≃ (M ⟶ P.obj H) :=
+    fun M H ↦ ((tensorAdjunction c).homEquiv (I.modules.obj M) H).trans (B' M H)
+  have hEL {M N} (a : M ⟶ N) H (b : T.obj N ⟶ H) :
+      E' M H (T.map a ≫ b) = a ≫ E' N H b := by
+    dsimp only [E', Equiv.trans_apply, T, Functor.comp_map]
+    change B' M H ((tensorAdjunction c).homEquiv (I.modules.obj M) H
+      ((tensorFunctor c).map (I.modules.map a) ≫ b)) = _
+    rw [(tensorAdjunction c).homEquiv_naturality_left, hBL]
+    rfl
+  exact ⟨Adjunction.mkOfHomEquiv {
+    homEquiv := E'
+    homEquiv_naturality_left_symm := by
+      intro M N H a b
+      apply (E' M H).injective
+      rw [Equiv.apply_symm_apply, hEL, Equiv.apply_symm_apply]
+    homEquiv_naturality_right := by
+      intro M H H' a b
+      dsimp only [E', Equiv.trans_apply]
+      change B' M H' ((tensorAdjunction c).homEquiv (I.modules.obj M) H' (a ≫ b)) = _
+      rw [(tensorAdjunction c).homEquiv_naturality_right]
+      exact hBR M ((tensorAdjunction c).homEquiv (I.modules.obj M) H a) b }⟩
+
+end GeneralizedRinged
+
 open CategoryTheory.Functor MonoidalCategory
 
 set_option backward.isDefEq.respectTransparency false in

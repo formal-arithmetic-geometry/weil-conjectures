@@ -206,6 +206,9 @@ right derived functor by their underlying maps and universal comparisons. In par
 no preservation or adjunction on complete objects is an assumption.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 
 set_option autoImplicit false
@@ -355,8 +358,9 @@ private theorem supplied_module_adjunction
   rw [Adjunction.mkOfHomEquiv_homEquiv]
   change (underlying B).map (B' M H
     ((tensorAdjunction c).homEquiv (I.modules.obj M) H k)) ≫ eP.hom.app H = _
-  rw [hB, tensorAdjunction_underlying]
-  rfl
+  rw [hB]
+  exact congrArg (f.adj.homEquiv _ _)
+    (congrArg (eI.inv.app M ≫ ·) (tensorAdjunction_underlying c (I.modules.obj M) H k))
 
 open SheafOfModules SheafOfModules.GeometricConstruction in
 set_option backward.defeqAttrib.useBackward true in

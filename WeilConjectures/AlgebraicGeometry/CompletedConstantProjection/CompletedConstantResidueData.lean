@@ -59,8 +59,8 @@ theorem generator_smul (X : Scheme.{u}) (B : Type (u + 1)) [CommRing B]
     (N : ModuleCat.{u + 1} B) (U : X.ProEtᵒᵖ) (b : B) (x : N) :
     completedConstantGenerator X B N U (b • x) =
       (adicLisseConstantUnit X B).app U b • completedConstantGenerator X B N U x := by
-  exact (((PresheafOfModules.sheafificationAdjunction (adicLisseConstantUnit X B)).unit.app
-    ((raw X B).obj N)).app U).hom.map_smul b x
+  exact (((PresheafOfModules.sheafificationAdjunction.{u + 1}
+    (adicLisseConstantUnit X B)).unit.app ((raw X B).obj N)).app U).hom.map_smul b x
 
 def constantMap (X : Scheme.{u})
     {B D : Type (u + 1)} [CommRing B] [CommRing D] (f : B →+* D)

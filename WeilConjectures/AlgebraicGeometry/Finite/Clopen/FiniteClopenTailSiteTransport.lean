@@ -30,7 +30,8 @@ namespace AlgebraicGeometry.ProEtale
 open CategoryTheory.Functor
 
 -- These mate-transport calculations are the ordinary-sheaf part of the proof in
--- WeilConjectures.AlgebraicGeometry.Comparison.ComparisonOpenTensorCoherence, with no tensor or derived functors.
+-- WeilConjectures.AlgebraicGeometry.Comparison.ComparisonOpenTensorCoherence,
+-- with no tensor or derived functors.
 private lemma conj_transport {C D : Type*} [Category* C] [Category* D]
     {L₁ L₂ : C ⥤ D} {R₁ R₂ R₁' R₂' : D ⥤ C}
     (a : L₁ ⊣ R₁) (b : L₂ ⊣ R₂) (e : R₁ ≅ R₁') (f : R₂ ≅ R₂')

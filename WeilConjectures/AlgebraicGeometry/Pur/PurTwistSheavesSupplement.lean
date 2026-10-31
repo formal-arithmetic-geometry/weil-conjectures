@@ -34,7 +34,8 @@ The natural-number level `n` means positive exponent `n + 1` throughout.
 * `purTwistIntegralOne` and `purTwistIntegralModule`: the prescribed integral tensor line.
 * `purTwistFiniteOne`: its prescribed ordinary finite-coefficient tensor reduction.
 The coefficient rings and their comparison are reexported from
-`WeilConjectures.AlgebraicGeometry.Pur.PurTwistCoefficientRingsSupplement`. Local freeness and derived completeness
+`WeilConjectures.AlgebraicGeometry.Pur.PurTwistCoefficientRingsSupplement`.
+Local freeness and derived completeness
 are proved in `WeilConjectures.AlgebraicGeometry.Pur.PurTwistSheafLocallyFree`.
 -/
 

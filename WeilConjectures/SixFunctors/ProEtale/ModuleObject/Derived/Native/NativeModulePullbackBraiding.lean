@@ -11,7 +11,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.M
 
 Source: the balanced coequalizer calculation of the ordinary pullback tensorator;
 Stacks 03EL. The private calculations are the ordinary braiding helpers of
-`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Trace.TraceBaseChangeFirst`, specialized below to its native tensorator.
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Trace.TraceBaseChangeFirst`,
+specialized below to its native tensorator.
 (blueprint: lem-sfb-native-module-pullback-braiding). -/
 
 @[expose] public noncomputable section

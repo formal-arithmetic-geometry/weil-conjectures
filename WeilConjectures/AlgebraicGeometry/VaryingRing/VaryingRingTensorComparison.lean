@@ -111,6 +111,9 @@ Source: Stacks Project, Tags 03EL, 0B56, 06YS, 06YU and 07A4.
 (blueprint: lem-pur-varying-ring-tensor-comparison).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option backward.defeqAttrib.useBackward true
@@ -192,6 +195,8 @@ attribute [local irreducible] SheafOfModules.monoidalCategory
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
+set_option maxHeartbeats 400000 in
+-- The existential packaging of the normalized adjunction unfolds large site-module terms.
 /-- The linear adjunction to the supplied sectionwise pushforward, retaining the
 underlying set-sheaf hom equivalence. The scalar insertion is the image of `1 ⊗ m`.
 This is the module adjunction construction of Stacks 03D7 with its normalization
@@ -210,14 +215,15 @@ private theorem normalizedAdjunction
     (hc : (sheafCompose J (CategoryTheory.forget CommRingCat.{u + 1})).map c =
       I.ringUnderlying.inv ≫ (adj.homEquiv (rset B) (rset A)).symm
         ((sheafCompose K (CategoryTheory.forget CommRingCat.{u + 1})).map φ)) :
-    ∃ am : I.modules ⋙ tensorFunctor c ⊣
+    ∃ am : I.modules ⋙ OpenTensorNormalization.GeneralizedRinged.tensorFunctor c ⊣
       SheafOfModules.pushforward.{u + 1} (F := F) (J := K) (K := J)
       (R := base A) (S := base B)
       ((sheafCompose K (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map φ), ∀ M H a,
       (mset B).map (am.homEquiv M H a) =
         adj.homEquiv _ _ (I.moduleUnderlying.inv.app M ≫
           SheafOfModules.CochainTensorComparison.scalarInsertion B A RI L I c
-            (I.modules ⋙ tensorFunctor c) (fun _ ↦ rfl) M ≫ (mset A).map a) := by
+            (I.modules ⋙ OpenTensorNormalization.GeneralizedRinged.tensorFunctor c)
+            (fun _ ↦ rfl) M ≫ (mset A).map a) := by
   let V := F.sheafPushforwardContinuous (Type (u + 1)) K J
   let P := SheafOfModules.pushforward.{u + 1} (F := F) (J := K) (K := J)
       (R := base A) (S := base B)
@@ -281,8 +287,10 @@ private theorem normalizedAdjunction
     (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map c)
   let eP : P ⋙ mset B ≅ restriction ⋙ mset RI ⋙ V :=
     NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun _ ↦ by rfl)
-  obtain ⟨am, ham⟩ := restrictedAdjunction I.modules restriction (tensorFunctor c)
-    (tensorAdjunction c) P (mset B) (mset RI) L V adj eI eP B' (by
+  obtain ⟨am, ham⟩ := restrictedAdjunction I.modules restriction
+    (OpenTensorNormalization.GeneralizedRinged.tensorFunctor c)
+    (OpenTensorNormalization.GeneralizedRinged.tensorAdjunction c) P (mset B) (mset RI) L V
+    adj eI eP B' (by
       intro M H a
       change (mset B).map (B' M H a) ≫ (𝟙 _) = _
       exact (Category.comp_id _).trans (hB M H a))
@@ -293,14 +301,16 @@ private theorem normalizedAdjunction
   simp only [Category.comp_id] at h
   have hq : CategoryTheory.CochainPullback.insertion c (I.modules.obj M) =
       SheafOfModules.CochainTensorComparison.scalarInsertion B A RI L I c
-        (I.modules ⋙ tensorFunctor c) (fun _ ↦ rfl) M := by
+        (I.modules ⋙ OpenTensorNormalization.GeneralizedRinged.tensorFunctor c)
+        (fun _ ↦ rfl) M := by
     ext U x
     exact ((Classical.choose_spec
       (CategoryTheory.CochainPullback.extensionAdjunction_existsUnique c)).1
         (I.modules.obj M) U x)
   have hm := CategoryTheory.CochainPullback.extensionHomEquiv_formula c
     (I.modules.obj M) H a
-  change (mset RI).map ((tensorAdjunction c).homEquiv _ _ a) =
+  change (mset RI).map
+      ((OpenTensorNormalization.GeneralizedRinged.tensorAdjunction c).homEquiv _ _ a) =
     CategoryTheory.CochainPullback.insertion c (I.modules.obj M) ≫ (mset A).map a at hm
   rw [hq] at hm
   exact h.trans

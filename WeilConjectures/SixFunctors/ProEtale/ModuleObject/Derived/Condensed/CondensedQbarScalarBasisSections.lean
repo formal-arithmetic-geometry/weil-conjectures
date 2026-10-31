@@ -114,7 +114,8 @@ private noncomputable def copowerTensorIso {I : Type v} (M : Mod C R) [HasCoprod
     (asIso (sigmaComparison (tensorRight M) (fun _ : I ↦ regular R))) ≪≫
     (tensorRight M).mapIso e
 
-omit [Abelian.HasFunctorialFlatResolution C] [IsCommMonObj S] in
+omit [Abelian.HasFunctorialFlatResolution C] [IsCommMonObj S]
+  [MonoidalPreadditive C] in
 private lemma copowerTensorIso_hom {I : Type v} (M : Mod C R) [HasCoproduct (fun _ : I ↦ M)]
     (e : (∐ fun _ : I ↦ regular R) ≅ (comap φ).obj (regular S)) :
     (copowerTensorIso φ M e).hom =

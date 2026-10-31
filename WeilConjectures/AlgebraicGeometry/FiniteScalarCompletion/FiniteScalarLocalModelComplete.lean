@@ -146,7 +146,6 @@ set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 set_option synthInstance.maxSize 4096
 
-attribute [-instance] CategoryTheory.Sheaf.monoidalCategory
 attribute [local irreducible] CategoryTheory.Sheaf.monoidalCategory
 
 universe u

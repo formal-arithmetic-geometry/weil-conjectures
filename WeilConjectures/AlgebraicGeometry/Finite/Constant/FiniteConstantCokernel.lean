@@ -46,6 +46,7 @@ private lemma constant_finite_etale (X : Scheme.{u})
     exact ((ModuleCat.isFinitelyGenerated_iff M).2 this).of_iso
       ((pointSmallEtale s).sheafFiberConstantSheafIso M).symm⟩
 
+omit [Finite Λ] in
 /-- A cokernel between constant finite module sheaves is finite locally constant.
 Source: Bhatt--Scholze, Lemma 5.4.1; the constant-sheaf morphism and cokernel
 argument in blueprint lemma-constructible-hom-constant-locally.

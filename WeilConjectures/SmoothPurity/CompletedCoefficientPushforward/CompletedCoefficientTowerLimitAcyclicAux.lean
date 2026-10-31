@@ -192,20 +192,25 @@ private instance pushTowerZeroForTransport {X Y : Scheme.{t}} (f : X ⟶ Y)
 private theorem towerLimit_push_acyclic_comm {X Y : Scheme.{t}} (f : X ⟶ Y)
     (A₀ : Sheaf (ProEt.topology X) CommRingCat.{max u (t + 1)})
     (B₀ : Sheaf (ProEt.topology Y) CommRingCat.{max u (t + 1)})
-    (c : (sheafCompose (ProEt.topology Y) (forget₂ CommRingCat RingCat)).obj B₀ ⟶
+    (c : (sheafCompose (ProEt.topology Y)
+        (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj B₀ ⟶
       (ringPush.{t, u} f).obj
-        ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat RingCat)).obj A₀))
+        ((sheafCompose (ProEt.topology X)
+            (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj A₀))
     (I : CochainComplex (ℕᵒᵖ ⥤ Mod X
-      ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat RingCat)).obj A₀)) ℤ)
+      ((sheafCompose (ProEt.topology X)
+          (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj A₀)) ℤ)
     (hI : I.IsKInjective)
     (T : CochainComplex (ℕᵒᵖ ⥤ Mod Y
-      ((sheafCompose (ProEt.topology Y) (forget₂ CommRingCat RingCat)).obj B₀)) ℤ)
+      ((sheafCompose (ProEt.topology Y)
+          (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj B₀)) ℤ)
     (hT : T.IsKInjective)
     (j : ((((Functor.whiskeringRight ℕᵒᵖ _ _).obj (push f c)).mapHomologicalComplex
       (.up ℤ)).obj I) ⟶ T) [QuasiIso j] :
     QuasiIso (((lim :
       (ℕᵒᵖ ⥤ Mod Y ((sheafCompose (ProEt.topology Y)
-        (forget₂ CommRingCat RingCat)).obj B₀)) ⥤ _).mapHomologicalComplex (.up ℤ)).map j) := by
+        (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj B₀)) ⥤
+          _).mapHomologicalComplex (.up ℤ)).map j) := by
   let eX := smallSiteEquiv.{t, u} X
   let eY := smallSiteEquiv.{t, u} Y
   let J := smallTopology.{t, u} X
@@ -221,7 +226,7 @@ private theorem towerLimit_push_acyclic_comm {X Y : Scheme.{t}} (f : X ⟶ Y)
     B₀
   let V := sheafCompose K (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})
   let cs : V.obj AY ⟶ (F.sheafPushforwardContinuous RingCat.{max u (t + 1)} K J).obj
-      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj AX) :=
+      ((sheafCompose J (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj AX) :=
     smallStructuralMap f c
   let cs' : AY ⟶ (F.sheafPushforwardContinuous CommRingCat.{max u (t + 1)} K J).obj AX :=
     V.preimage (X := AY)
@@ -231,12 +236,15 @@ private theorem towerLimit_push_acyclic_comm {X Y : Scheme.{t}} (f : X ⟶ Y)
     exact Functor.map_preimage V (X := AY)
       (Y := (F.sheafPushforwardContinuous CommRingCat.{max u (t + 1)} K J).obj AX) cs
   let EX := smallModulesModel X
-    ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat RingCat)).obj A₀)
+    ((sheafCompose (ProEt.topology X)
+        (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj A₀)
   let EY := smallModulesModel Y
-    ((sheafCompose (ProEt.topology Y) (forget₂ CommRingCat RingCat)).obj B₀)
+    ((sheafCompose (ProEt.topology Y)
+        (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj B₀)
   have : (SheafOfModules.pushforward.{max u (t + 1)} cs).Additive := ⟨by intros; rfl⟩
   have : (lim : (ℕᵒᵖ ⥤ Mod Y
-      ((sheafCompose (ProEt.topology Y) (forget₂ CommRingCat RingCat)).obj B₀)) ⥤ _).Additive :=
+      ((sheafCompose (ProEt.topology Y)
+          (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj B₀)) ⥤ _).Additive :=
     Functor.additive_of_preserves_binary_products _
   have : (lim : (ℕᵒᵖ ⥤ SheafOfModules.{max u (t + 1)} (V.obj AY)) ⥤ _).Additive :=
     Functor.additive_of_preserves_binary_products _

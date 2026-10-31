@@ -65,12 +65,6 @@ variable {X Y : Site.{u, w}} (e : RingedTensorEdge Y.corner X.corner)
     rX.representative.hom.app (⟨P, hP⟩, ⟨Q, hQ⟩) =
       (X.model.iso X.J X.A X.closed P Q hP.1 hQ.1).hom)
 
-set_option maxHeartbeats 800000 in
--- Normalize the dependent ringed-site representative comparison equations.
-include hY hX in
-include rY rX hY hX in
-set_option maxHeartbeats 800000 in
--- Normalize the dependent ringed-site representative comparison equations.
 include hY hX in
 local instance : MonoidalCategory Y.modules := SheafOfModules.monoidalCategory Y.A
 local instance : MonoidalCategory X.modules := SheafOfModules.monoidalCategory X.A

@@ -123,7 +123,7 @@ private theorem dimension_one_finite_coefficients
   apply constructibleHomology_rightDerivedLowerStar_constantSheaf_zmod f _ _ _ q
   intro p _ hp j
   have hunit (s : S) : IsUnit (p : S.presheaf.stalk s) := by
-    letI := CharP.addOrderOf_one R
+    let := CharP.addOrderOf_one R
     have h1 := hR 1 s
     rw [← ringChar.eq R (addOrderOf (1 : R))] at h1
     exact isUnit_of_dvd_unit (Nat.cast_dvd_cast hp) h1

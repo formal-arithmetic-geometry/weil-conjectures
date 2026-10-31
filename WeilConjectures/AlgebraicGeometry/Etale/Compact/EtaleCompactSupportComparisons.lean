@@ -88,8 +88,7 @@ theorem etaleCompactSupport_refinementComparison_eq
   have sq : IsPullback (𝟙 X) f f (𝟙 Y) :=
     IsPullback.of_horiz_isIso ⟨by simp⟩
   have h := (compactSupportFiniteTorsion Λ sq c).2 d r K
-  simp only [compactSupportProperOpenRefinementMap,
-    derivedPlusFormalism_pfComp'_inv] at h
+  simp only [compactSupportProperOpenRefinementMap] at h
   rw [derivedPlusFormalism_shriekIso] at h
   rw [rightDerivedLowerShriekOfCompactificationPlusRefinementIso_eq,
     rightDerivedLowerShriekOfCompactificationPlusIso_symm,

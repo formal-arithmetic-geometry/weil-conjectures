@@ -51,19 +51,6 @@ continuous-functions presentation, including its quotient maps. Tensors and deri
 categories are ordinary and uncompleted. Natural numbers index positive exponents n+1.
 -/
 
-/- The completed-coefficient abbreviations carry extensionally identical sheafification
-proofs that Lean stores under different auxiliary names. A single conversion beneath
-`Functor.map` unfolds localization before reconciling them. This bounded tactic proves
-that conversion by congruence and proof irrelevance; its output is kernel checked.
-Only the listed item abbreviations may be unfolded. -/
-local syntax (name := perfectProjectionExact) "perfect_projection_exact " term : tactic
-
-meta section
-open Lean Meta Elab Tactic
-termination_by fuel
-end
-
-open Lean Meta Elab Tactic in
 @[expose] public noncomputable section
 
 set_option Elab.async true

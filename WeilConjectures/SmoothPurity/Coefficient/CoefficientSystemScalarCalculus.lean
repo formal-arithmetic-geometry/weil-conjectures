@@ -246,7 +246,8 @@ Source: Stacks Project, Cohomology on Sites, Tags 06YS, 0A95 and 0941;
 Injectives, Tag 079P (blueprint: lem-coef-derived-system-evaluation-calculus).
 
 This is the unchanged scalar foundation previously declared in
-`WeilConjectures.SmoothPurity.Supporting.CoefDerivedSystemEvaluationCalculus`, which publicly re-exports it.
+`WeilConjectures.SmoothPurity.Supporting.CoefDerivedSystemEvaluationCalculus`,
+which publicly re-exports it.
 It contains the ordinary tower sections and limit projections, scalar adjunction
 and quotient comparison, finite reduction representative, and uniquely normalized
 scalar tensor comparison. The module split follows profiling and local unfolding

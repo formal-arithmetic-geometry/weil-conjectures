@@ -386,7 +386,6 @@ private theorem finiteScalar_exact (a b j : ℕ) (hj : j + 1 = a + b)
     refine ⟨p z', ?_⟩
     change p (s ^ a) * p z' = p y
     rw [← map_mul, ← hy]
-
   · rintro ⟨y, rfl⟩
     change p (s ^ b) * (p (s ^ a) * y) = 0
     rw [← mul_assoc, ← map_mul, ← pow_add, Nat.add_comm b a, ← hj]

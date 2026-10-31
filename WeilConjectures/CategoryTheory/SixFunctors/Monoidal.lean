@@ -313,7 +313,8 @@ local instance hasTensorFourShortcut (Z : Scheme.{u})
 /-! ### Derived categories -/
 
 /-- Pullback of module objects preserves flat objects. This is the upstream instance
-`preservesFlat_upperStar` of `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalLeftDerived`
+`preservesFlat_upperStar` of
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalLeftDerived`
 under the name used by this library. The comparison
 `leftDerivedUpperStarTensor_eq_leftDerivedTensorComparison` is likewise upstream's, from the same
 module (our copy of it was removed on 2026-10-30, since a module importing both failed). -/

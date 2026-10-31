@@ -75,7 +75,8 @@ namespace AlgebraicGeometry.ProEtale
 `ℤ_ℓ`, `ℚ_ℓ`, finite subextensions of `ℚ_ℓ` in its fixed algebraic closure, their valuation
 rings, and the finite-subextension-valued algebraic closure `padicAlgClRingObj`
 (sk-def-sfb-qlbar-condensed); the ring of all continuous maps to the algebraic closure is
-not admissible. Isomorphisms are in monoid objects of condensed abelian groups, hence preserve both the additive and ring
+not admissible. Isomorphisms are in monoid objects of condensed abelian groups,
+hence preserve both the additive and ring
 structures. Finite rings can be represented in `Type 0` without restricting their
 isomorphism classes. Source: blueprint sk-def-localizing-closure, coefficient convention
 (blueprint: sk-def-localizing-closure). -/

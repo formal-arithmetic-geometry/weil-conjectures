@@ -78,7 +78,7 @@ import Mathlib.CategoryTheory.Sites.LocallySurjective
 import Mathlib.CategoryTheory.Monoidal.Mon
 import all WeilConjectures.AlgebraicGeometry.Continuous.ContinuousCoefficientCompletionSupplement
 import WeilConjectures.AlgebraicGeometry.CompactAdicContinuousIdentification
-import WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinary.FiniteDiscreteOrdinaryEncodingSupplement
+import all WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinary.FiniteDiscreteOrdinaryEncodingSupplement
 import WeilConjectures.AlgebraicGeometry.Adic.AdicLisseModuleSupplement
 import WeilConjectures.AlgebraicGeometry.ContinuousCoefficientCommRing
 import WeilConjectures.AlgebraicGeometry.ContinuousCoefficientUniverse
@@ -353,10 +353,14 @@ private theorem scalar_assertions (T : Scheme.{u}) [IsNoetherianRing A]
       (Scheme.ProEt.topology T).overPullback Ab.{u + 1} U)
     infer_instance
   have : PreservesFiniteLimits (SheafOfModules.overFunctor.{u + 1} O U) :=
-    preservesFiniteLimits_of_reflects_of_preserves _ (SheafOfModules.toSheaf (O.over U))
+    preservesFiniteLimits_of_reflects_of_preserves _
+      (SheafOfModules.toSheaf.{u + 1} (O.over U))
   have hll : PreservesFiniteLimits (localizedModel A T U) := by
     dsimp [localizedModel]
     infer_instance
+  have : PreservesFiniteColimits (SheafOfModules.overFunctor.{u + 1} O U) :=
+    SheafOfModules.localizedSystemRestrictionColimits.{u + 1, u, u + 1}
+      (InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u} (Scheme.ProEt.topology T) R) U
   have hcc : PreservesFiniteColimits (localizedModel A T U) := by
     dsimp [localizedModel]
     infer_instance
@@ -488,6 +492,7 @@ private theorem localized_flatness_of_extension (T : Scheme.{u})
   intro U
   exact flat_over T _ _ hf U
 
+attribute [local instance] Sheaf.monoidalCategory Sheaf.symmetricCategory in
 private def constantSectionRingMapAux
     {C : Type*} [Category C] (J : GrothendieckTopology C)
     [UnivLE.{_, u + 1}] [HasSheafify J Ab.{u + 1}]
@@ -909,7 +914,11 @@ theorem admissible_scalar_realization_exact (ℓ : ℕ) [Fact ℓ.Prime] (T : Sc
         (Padic.coefficientExtensionIntegers ℓ E))
       rw [htop]
       exact hd.2.1
-    have : T2Space (Padic.coefficientExtensionIntegers ℓ E) := inferInstance
+    have : T2Space (Padic.coefficientExtensionIntegers ℓ E) := by
+      change @T2Space _ (inferInstance : TopologicalSpace
+        (Padic.coefficientExtensionIntegers ℓ E))
+      rw [htop]
+      exact hd.2.2.1
     apply compact_adic_continuous_identification _ π hπ₀
     · intro n
       rw [← heq]

@@ -131,6 +131,8 @@ private theorem restrictionEvaluation_quasiIso {X : Scheme.{t}}
   let a' := b.map a
   let resB := SheafOfModules.overFunctor.{max u (t + 1)} BR U
   let resC := SheafOfModules.overFunctor.{max u (t + 1)} CR U
+  have : resB.Additive := localizedSystemRestrictionAdditive.{t + 1, t, max u (t + 1)} B U
+  have : resC.Additive := localizedSystemRestrictionAdditive.{t + 1, t, max u (t + 1)} C U
   let : Abelian (Mod X BR) := modAbelian.{t, u} X BR
   let : Abelian (Mod X CR) := modAbelian.{t, u} X CR
   let : Abelian (SheafOfModules.{max u (t + 1)} (BR.over U)) := inferInstance

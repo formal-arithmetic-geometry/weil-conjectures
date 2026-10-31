@@ -209,6 +209,7 @@ def UnitCondition (T : Scheme.{u}) : Prop :=
 
 attribute [local irreducible] CategoryTheory.tensorDescentPair localizedTotalComparison
 
+omit [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)] in
 private theorem resolving_iff (T : Scheme.{u})
     (P : CochainComplex (internalModules Λ T) ℤ) :
     internalResolving Λ T P ↔ sectionResolving Λ T ((complexes Λ T).obj P) := by
