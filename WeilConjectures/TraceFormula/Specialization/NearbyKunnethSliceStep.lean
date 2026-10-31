@@ -18,6 +18,7 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethClosure
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethSlice
 public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModelAut
 public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModelHom
+public import WeilConjectures.TraceFormula.Specialization.TraitChangeInvariance
 
 /-!
 
@@ -145,6 +146,7 @@ noncomputable abbrev sliceSnd :=
 
 variable [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
 
+omit [Fact (ringChar k').Prime] in
 /-- **Invariance of nearby cycles under change of trait** (SGA 4½, [Th. finitude], §3.7; blueprint
 `sk-prop-tf-nearby-external-kunneth`, "Facts about traits", first fact): for a model `N` of finite
 type over the strictly henselian trait `S = Spec k'⟦t⟧` and the change of trait
@@ -152,41 +154,18 @@ type over the strictly henselian trait `S = Spec k'⟦t⟧` and the change of tr
 nearby cycles of the base change `N'' = N ×_S Spec K⟦t⟧` (`NearbyCyclesModel.baseChange`) is an
 isomorphism for bounded constructible `B`.
 
-Unfinished: this is Deligne's theorem, not a formal consequence of base change.
-* The base change morphism `Lt^* Rj_* ⟶ Rj''_* Lg^*` of the square of geometric generic fibres is
-  not invertible on all of `N''`, so
-  `NearbyCyclesModel.Hom.isIso_pullbackExchange_of_isIso_baseChangeMap` cannot be used. At a
-  geometric point of the generic fibre of `N''` over a point `x̄` of `N_η`, the stalks are the
-  induced modules `C(G_η, F_x̄)` and `C(G_η', F_x̄)` of locally constant functions on the absolute
-  Galois groups of `η = k'((t))` and `η' = K((t))`, and the map is restriction along
-  `G_η' ⟶ G_η`. Its kernel `P = Gal(Ω_K / Ω·K((t)))` is a nontrivial pro-`p` group:
-  `y^p - y = x / t` is an Artin–Schreier extension of `K((t))` that is not defined over
-  `k'((t))`. So only the restriction to the special fibre is invertible.
-* On the special fibre, the map factors through `Ψ_N B ⟶ (Ψ_{N''} B)^P ⟶ Ψ_{N''} B`. The first
-  map is base change of `Rj_*` along `𝒴 ×_S Spec K⟦t⟧ ⟶ 𝒴` followed by Hochschild–Serre for the
-  `P`-torsor `Spec Ω_K ⟶ Spec Ω·K((t))`. The map `k'⟦t⟧ ⟶ K⟦t⟧` is not weakly étale, and it is not
-  regular when `k'` is imperfect. The second map says that `P` acts trivially on `Ψ_{N''} B`, which
-  is the content of Deligne's theorem. Its proof runs the dévissage of his finiteness theorem
-  (SGA 4½, [Th. finitude], Thm. 3.2), whose lisse generic case is still `sorry` here
-  (`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_lisse_generic_core`).
-  It needs generic base change (SGA 4½, [Th. finitude], Thm. 1.9) and the reduction to relative
-  curves. None of these is formalised for pro-étale `ℚ̄_ℓ`-sheaves, and neither is smooth base
-  change for nearby cycles
-  (`ProEtale.CondensedRing.isIso_pullbackExchange_deformationModel_app_of_smooth`).
-* Reducing to the generic-slicing identification for `𝒴 ×_S 𝔸¹_S ⟶ 𝔸¹_S` (whose slice is `N''`)
-  only identifies `Lσ^* Ψ_N B` with the `P`-invariants of `Ψ_{N''} B`, not with `Ψ_{N''} B`.
-
-The statement does not assume that `ε` factors through the total space. Reducing `ℤ_ℓ`-lattices
-modulo `ℓ^n`, each level descends to a finite extension of `η`. The normalisation of `S` in that
-extension, base changed to `Spec K⟦t⟧`, is a strictly henselian trait up to a universal
-homeomorphism, so Deligne's theorem applies at each level. -/
+It is a case of
+`NearbyCyclesModel.isIso_pullbackExchange_baseChangeHom_traitMap_of_generic`, i.e. of the invariance
+under change of strictly henselian trait
+`NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_isPullback_trait`. -/
 theorem isIso_pullbackExchange_baseChangeHom_traitMap
     {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y))}
     (hB : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y) B) :
     IsIso (((baseChangeHom hN qN (Category.comp_id qN) (traitMap k' (traitSliceField k'))
       (Category.comp_id _)).pullbackExchange (Profinite.padicAlgClRingObj ℓ)).app B) :=
-  sorry
+  isIso_pullbackExchange_baseChangeHom_traitMap_of_generic hN
+    (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ B hB)
 
 set_option maxHeartbeats 800000 in
 -- the statement involves the nearby cycles of the slice of the product

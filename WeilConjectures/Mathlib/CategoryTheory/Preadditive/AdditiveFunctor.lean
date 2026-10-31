@@ -15,6 +15,8 @@ sum of copies of another object. The quasi-inverse of an additive equivalence is
 (`CategoryTheory.Functor.additive_inv`). For an additive functor `G`, the image of a morphism
 out of a finite biproduct is an isomorphism if and only if the morphism out of the biproduct of
 the images is one (`CategoryTheory.Functor.isIso_map_biproductDesc`).
+An additive functor carries an identity between sums of composites to the corresponding identity
+between their images (`CategoryTheory.Functor.sum_const_map_comp_map_eq_sum`).
 -/
 
 @[expose] public section
@@ -126,5 +128,16 @@ lemma isIso_map_biproductDesc :
       (G.mapBiproduct f).inv ≫ G.map (biproduct.desc g) :=
     biproduct.hom_ext' _ _ fun j ↦ by simp [← G.map_comp]
   rw [h, isIso_comp_left_iff]
+
+end CategoryTheory.Functor
+
+namespace CategoryTheory.Functor
+
+/-- The image under an additive functor of an identity `∑ _a, i ≫ E = ∑ a, i ≫ U a`. -/
+lemma sum_const_map_comp_map_eq_sum {C D : Type*} [Category C] [Preadditive C] [Category D]
+    [Preadditive D] (F : C ⥤ D) [F.Additive] {P Q R : C} {κ : Type*} [Fintype κ] (i : P ⟶ Q)
+    (E : Q ⟶ R) (U : κ → (Q ⟶ R)) (h : ∑ _a : κ, i ≫ E = ∑ a, i ≫ U a) :
+    ∑ _a : κ, F.map i ≫ F.map E = ∑ a, F.map i ≫ F.map (U a) := by
+  simp only [← F.map_comp, ← F.map_sum, h]
 
 end CategoryTheory.Functor
