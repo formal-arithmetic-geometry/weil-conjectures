@@ -7,20 +7,11 @@ module
 
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import WeilConjectures.AlgebraicGeometry.Curve.TorsionCohomologicalDimension
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Curve
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Line
-public import WeilConjectures.AlgebraicGeometry.Sites.EtaleZariskiComparison
-public import WeilConjectures.AlgebraicGeometry.Sites.LerayVanishing
-public import WeilConjectures.AlgebraicGeometry.Sites.PointCohomology
-public import WeilConjectures.AlgebraicGeometry.Sites.TorsionSheaf
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CompExact
 public import WeilConjectures.SixFunctors.BaseChange.DerivedForget
-public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Vertical
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine
-public import WeilConjectures.SixFunctors.Etale.LowerShriek.Comparison
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
-public import WeilConjectures.SixFunctors.Finite.Exact
 public import WeilConjectures.SixFunctors.OpenClosed.Exact
+import WeilConjectures.AlgebraicGeometry.Sites.PointConstantSheaf
 
 /-!
 # Higher direct images on the projective line

@@ -42,14 +42,18 @@ twists need not be recorded.
 
 ## Sorried data
 
-The trace map `Tr_f : Rf_! ℚ̄_ℓ,X(d)[2d] ⟶ ℚ̄_ℓ,Y` of SGA 4, Exposé XVIII
-(`AlgebraicGeometry.ProEtale.CondensedRing.smoothTrace`) is a `@[no_expose]` definition with
-value `sorry`: its construction (by reduction to relative curves and the cycle class of the
-diagonal) is not formalized. The purity isomorphism
+The orientation `γ_f : ℚ̄_ℓ,X(d)[2d] ⟶ Rf^! ℚ̄_ℓ,Y`
+(`AlgebraicGeometry.ProEtale.CondensedRing.smoothOrientation`, blueprint `sk-thm-purity-transport`,
+used in `def-pur-smooth-trace`)
+is a `@[no_expose]` definition with value `sorry`: its construction (the finite orientations
+transported through the integral tower, normalized by integration on the affine line) is not
+formalized. The trace map `Tr_f : Rf_! ℚ̄_ℓ,X(d)[2d] ⟶ ℚ̄_ℓ,Y` of SGA 4, Exposé XVIII
+(`AlgebraicGeometry.ProEtale.CondensedRing.smoothTrace`) is the blueprint composite of `Rf_! γ_f`
+and the counit of `Rf_! ⊣ Rf^!`. The purity isomorphism
 `AlgebraicGeometry.ProEtale.CondensedRing.smoothPurityIso` is *defined* from it, as the inverse
 of its adjoint `ℚ̄_ℓ,X(d)[2d] ⟶ Rf^! ℚ̄_ℓ,Y` for `Rf_! ⊣ Rf^!`
-(`AlgebraicGeometry.ProEtale.CondensedRing.smoothPurityMap`). The following properties of the
-trace are `sorry`ed:
+(`AlgebraicGeometry.ProEtale.CondensedRing.smoothPurityMap`, equal to `γ_f`). The following
+properties of the trace are `sorry`ed:
 
 - `AlgebraicGeometry.ProEtale.CondensedRing.isIso_smoothPurityMap`: smooth purity proper, the
   adjoint of the trace is an isomorphism;
@@ -120,15 +124,42 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (f : X ⟶ Y) (d : ℕ) [SmoothOfRelativeDimension d f.left]
 
-/-- Blueprint `sk-def-sp-trace`: the **trace map** `Tr_f : Rf_! ℚ̄_ℓ,X(d)[2d] ⟶ ℚ̄_ℓ,Y` of a
-morphism `f` smooth of pure relative dimension `d` (SGA 4, Exposé XVIII, Théorème 2.9). Its
-construction is not formalized: see the module docstring for the properties that are assumed. -/
+/-- Blueprint `sk-thm-purity-transport` (`γ_{f,ℚ̄_ℓ}(ℚ̄_ℓ,Y)`, used in `def-pur-smooth-trace`): the
+**orientation** `ℚ̄_ℓ,X(d)[2d] ⟶ Rf^! ℚ̄_ℓ,Y` of a morphism `f` smooth of pure relative dimension
+`d`, the purity isomorphism normalized by integration on the affine line (the canonical
+orientation of `𝔸¹_Y ⟶ Y`). Its construction (from the finite orientations through the integral
+tower and scalar extension) is not formalized; it is the datum the smooth trace is built from.
+The signature does not carry `[SmoothOfRelativeDimension d f.left]` because the (sorried) value
+does not use it; the datum is meaningful only for `f` smooth of pure relative dimension `d`. -/
+@[no_expose]
+noncomputable def smoothOrientation :
+    boundedConstructibleTateTwist ℓ X d (2 * d) ⟶
+      (boundedConstructibleUpperShriek ℓ f).obj
+        (𝟙_ (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) :=
+  sorry
+
+/-- Blueprint `def-pur-smooth-trace` (`sk-def-sp-trace`): the **trace map**
+`Tr_f : Rf_! ℚ̄_ℓ,X(d)[2d] ⟶ ℚ̄_ℓ,Y` of a morphism `f` smooth of pure relative dimension `d`
+(SGA 4, Exposé XVIII, Théorème 2.9): the composite
+`Rf_! ℚ̄_ℓ,X(d)[2d] ⟶ Rf_! Rf^! ℚ̄_ℓ,Y ⟶ ℚ̄_ℓ,Y` of `Rf_!` of the orientation `γ_f`
+(`smoothOrientation`) and the counit `Tr_f` of `Rf_! ⊣ Rf^!`. -/
 @[no_expose]
 noncomputable def smoothTrace :
     (boundedConstructibleLowerShriek ℓ f).obj
       (boundedConstructibleTateTwist ℓ X d (2 * d)) ⟶
       𝟙_ (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :=
-  sorry
+  (boundedConstructibleLowerShriek ℓ f).map (smoothOrientation ℓ f d) ≫
+    (boundedConstructibleUpperShriekAdjunction ℓ f).counit.app _
+
+omit [SmoothOfRelativeDimension d f.left] in
+/-- The smooth trace is the counit transpose of the orientation: `Tr^sm_f = Tr_f ∘ Rf_!(γ_f)`.
+Source: def-pur-smooth-trace. -/
+theorem smoothTrace_eq :
+    smoothTrace ℓ f d =
+      (boundedConstructibleLowerShriek ℓ f).map (smoothOrientation ℓ f d) ≫
+        (boundedConstructibleUpperShriekAdjunction ℓ f).counit.app _ := by
+  unfold smoothTrace
+  rfl
 
 /-- The **purity map** `ℚ̄_ℓ,X(d)[2d] ⟶ Rf^! ℚ̄_ℓ,Y`: the adjoint of the trace `Tr_f` for
 `Rf_! ⊣ Rf^!`. -/
@@ -137,6 +168,18 @@ noncomputable def smoothPurityMap :
       (boundedConstructibleUpperShriek ℓ f).obj
         (𝟙_ (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) :=
   (boundedConstructibleUpperShriekAdjunction ℓ f).homEquiv _ _ (smoothTrace ℓ f d)
+
+omit [SmoothOfRelativeDimension d f.left] in
+/-- The purity map is the orientation: the adjunct of `Tr_f ∘ Rf_!(γ_f)` is `γ_f`.
+Source: def-pur-smooth-trace (the purity map is recovered from the smooth trace). -/
+theorem smoothPurityMap_eq_smoothOrientation :
+    smoothPurityMap ℓ f d = smoothOrientation ℓ f d := by
+  change (boundedConstructibleUpperShriekAdjunction ℓ f).homEquiv _ _ (smoothTrace ℓ f d) = _
+  rw [smoothTrace_eq]
+  exact (congrArg ((boundedConstructibleUpperShriekAdjunction ℓ f).homEquiv _ _)
+    ((boundedConstructibleUpperShriekAdjunction ℓ f).homEquiv_counit _ _
+      (smoothOrientation ℓ f d))).symm.trans
+    (((boundedConstructibleUpperShriekAdjunction ℓ f).homEquiv _ _).apply_symm_apply _)
 
 -- The smoothness hypothesis is a binder of the instance: an `instance` drops unused
 -- instance-implicit section variables, even under `include`. The elaborated signature has it

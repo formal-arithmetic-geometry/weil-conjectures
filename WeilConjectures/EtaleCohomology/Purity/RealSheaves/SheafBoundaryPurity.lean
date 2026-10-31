@@ -60,7 +60,7 @@ its pullback along an open immersion `φ`: the stalk of `φ^* F` at a closed poi
 theorem HasWeightsAtMost.upperStar_of_isOpenImmersion {ι : PadicAlgCl l →+* ℂ} {X Y : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))] (φ : X ⟶ Y)
     [IsOpenImmersion φ] [φ.IsOver (Spec (CommRingCat.of k₀))] {F : WeilSheaf k₀ l Y} {w : ℝ}
-    (hF : F.HasWeightsAtMost ι w) : ((upperStar φ).obj F).HasWeightsAtMost ι w := by
+    (hF : F.HasWeightsAtMost ι w) : ((WeilSheaf.upperStar φ).obj F).HasWeightsAtMost ι w := by
   intro z α hα
   have hdeg := degreeOver_eq_of_isOpenImmersion (k₀ := k₀) φ z.1
   obtain ⟨e⟩ := nonempty_equiv_stalk_upperStar φ F z

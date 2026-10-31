@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructible
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleClosedPushforward
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ClosedImmersion
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleLisseDevissage
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Localizing
 public import WeilConjectures.TraceFormula.Specialization.NearbyProperExchange
@@ -155,7 +155,7 @@ lemma isZero_nearbyCycles_affineSpace_of_isZero (n : ℕ) {D : Scheme.{u}}
 
 variable [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
 
-omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
+omit [IsSepClosed k'] [Fact (ringChar k').Prime] in
 /-- **Reduction along a closed embedding**: let `φ : M.geometric ⟶ N.geometric` be a morphism of
 the geometric models of two models of finite type over the trait, whose morphism of total spaces
 `t` is a closed immersion and whose squares of geometric generic fibres and of special fibres are
@@ -166,7 +166,7 @@ of `Rt_{s*}` and the proper exchange
 bounded constructible. -/
 theorem boundedConstructible_geometricNearbyCycles_obj_of_closedEmbedding {Y : Scheme.{u}}
     {Y' : Over (Spec (.of k'))} {M : NearbyCyclesModel X X'.left}
-    {N : NearbyCyclesModel Y Y'.left} (hN : N.IsTraitModel)
+    {N : NearbyCyclesModel Y Y'.left} (hM : M.IsTraitModel) (hN : N.IsTraitModel)
     {t : M.total ⟶ N.total} {f' : X'.left ⟶ Y'.left} (φ : M.geometric.Hom N.geometric t f')
     (ht : φ.total = t) [IsClosedImmersion t] (hj : IsPullback φ.generic M.j N.j t)
     (hi : IsPullback M.i f' t N.i)
@@ -184,7 +184,7 @@ theorem boundedConstructible_geometricNearbyCycles_obj_of_closedEmbedding {Y : S
   have : IsClosedImmersion f' := MorphismProperty.of_isPullback (P := @IsClosedImmersion) hi ‹_›
   have : IsProper t := inferInstance
   have : IsIso ((φ.pushforwardExchange (Profinite.padicAlgClRingObj ℓ)).app B) :=
-    Hom.isIso_pushforwardExchange_app_of_isProper_geometric φ ht hj hi B hB
+    Hom.isIso_pushforwardExchange_app_of_isProper_geometric φ hM hN ht hj hi B hB
   have h₁ : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y'.left)
       ((N.geometric.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).obj
         ((R((t)_*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj B)) :=
@@ -244,7 +244,7 @@ lemma boundedConstructible_lisseExtension (n : ℕ) (D : Scheme.{u})
   exact boundedConstructible_rightDerivedLowerStar_of_isClosedImmersion _ c
     (boundedConstructible_lisseExtension_closed n D c W E c' L hL)
 
-omit [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
+omit [Fact (ringChar k').Prime] in
 /-- **Deligne's finiteness theorem for nearby cycles on `𝔸⁰_S`**: the geometric nearby cycles of
 the standard model of `𝔸⁰_S` preserve bounded constructible complexes. The structure map
 `q : 𝔸⁰_S ⟶ S` is an isomorphism, hence a closed embedding with cartesian squares of fibres into
@@ -269,13 +269,13 @@ theorem boundedConstructible_nearbyCycles_affineSpaceModel_zero
       comm_i := pullback.condition.symm
       comm_ε := pullback.condition.symm }
   exact boundedConstructible_geometricNearbyCycles_obj_of_closedEmbedding
-    (Y' := Over.mk (𝟙 (Spec (.of k')))) (N := traitSelfModel k') (isTraitModel_traitSelfModel k')
-    φ rfl
+    (Y' := Over.mk (𝟙 (Spec (.of k')))) (N := traitSelfModel k') (isTraitModel_affineSpaceModel 0)
+    (isTraitModel_traitSelfModel k') φ rfl
     (IsPullback.of_hasPullback q (traitGenericPoint k')).flip
     (IsPullback.of_hasPullback q (traitClosedPoint k'))
     (fun hB' ↦ preservesBoundedConstructible_traitSelfModel k' _ hB') hB
 
-omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
+omit [IsSepClosed k'] [Fact (ringChar k').Prime] in
 /-- **Nearby cycles of a complex supported away from the special fibre vanish**: if the closed
 subscheme `c : D ⟶ 𝔸ⁿ_S` misses the special fibre `𝔸ⁿ_s`, then `Ψ (Rc_* K) = 0` for every bounded
 constructible `K` on `D`. By the proper exchange, `Ψ_{𝔸ⁿ} (Rc_* K) ≅ Rc_{s*} Ψ_D K`, and the
@@ -300,14 +300,15 @@ lemma isZero_nearbyCycles_affineSpace_of_disjoint (n : ℕ) {D : Scheme.{u}}
       ⟨(traitStdSpecialHom q hi c rfl).base x, ?_⟩⟩
     exact congrArg (fun g ↦ g.base x) φ.comm_i
   have : IsIso ((φ.pushforwardExchange (Profinite.padicAlgClRingObj ℓ)).app K) :=
-    Hom.isIso_pushforwardExchange_app_of_isProper_geometric φ rfl
+    Hom.isIso_pushforwardExchange_app_of_isProper_geometric φ (isTraitModel_traitStdModel _)
+      (isTraitModel_affineSpaceModel n) rfl
       (isPullback_traitStdHom_generic q hj hi c rfl) (isPullback_traitStdHom_special q hi c rfl)
       K hK
   refine IsZero.of_iso ?_ (asIso ((φ.pushforwardExchange (Profinite.padicAlgClRingObj ℓ)).app K))
   exact (R((traitStdSpecialHom q hi c rfl)_*⟦Profinite.padicAlgClRingObj ℓ⟧)).map_isZero
     (isZero_derivedCategory_of_isEmpty' _ _)
 
-omit [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
+omit [Fact (ringChar k').Prime] in
 /-- **Nearby cycles of a complex supported on a closed subscheme embedded in the trait**: if the
 closed subscheme `c : D ⟶ 𝔸ⁿ_S` maps by a closed immersion to the trait `S` (for instance the
 closure of an `S`-integral point of the generic fibre), then `Ψ (Rc_* K)` is bounded constructible
@@ -342,11 +343,12 @@ theorem boundedConstructible_nearbyCycles_affineSpace_of_isClosedImmersion_comp 
       K) :=
     boundedConstructible_geometricNearbyCycles_obj_of_closedEmbedding
       (Y' := Over.mk (𝟙 (Spec (.of k')))) (N := traitSelfModel k')
-      (isTraitModel_traitSelfModel k') ψ rfl hj.flip hi
+      (isTraitModel_traitStdModel _) (isTraitModel_traitSelfModel k') ψ rfl hj.flip hi
       (fun hB' ↦ preservesBoundedConstructible_traitSelfModel k' _ hB') hK
   let φ := traitStdHom q hj hi c rfl
   have : IsIso ((φ.pushforwardExchange (Profinite.padicAlgClRingObj ℓ)).app K) :=
-    Hom.isIso_pushforwardExchange_app_of_isProper_geometric φ rfl
+    Hom.isIso_pushforwardExchange_app_of_isProper_geometric φ (isTraitModel_traitStdModel _)
+      (isTraitModel_affineSpaceModel n) rfl
       (isPullback_traitStdHom_generic q hj hi c rfl) (isPullback_traitStdHom_special q hi c rfl)
       K hK
   have := isNoetherian_of_isTraitModel (isTraitModel_affineSpaceModel (k' := k') n)

@@ -94,7 +94,7 @@ theorem exists_equivalence_isLisse_tensor_of_lisseMonodromy
     (fun X ↦ fundamentalRep M D X.obj X.property)
     (fun X ↦ fundamentalRep_isContinuousOn D X.obj X.property hM)
     (fun {X Y : LisseWeilSheaf K l C} (f : X ⟶ Y) ↦ stalkMap f.hom X.property Y.property)
-    (fun X ↦ stalkMap_id X) (fun f g ↦ stalkMap_comp f g)
+    (fun X ↦ stalkMap_id X.property) (fun f g ↦ stalkMap_comp f.hom g.hom _ _ _)
     (fun {X Y : LisseWeilSheaf K l C} (f : X ⟶ Y) w v ↦ stalkMap_fundamentalRep D f.hom _ _ w v)
     (fun f f' h ↦ stalkMap_injective M hM f f' h)
     (fun φ hφ ↦ exists_stalkMap_eq D hM φ hφ)

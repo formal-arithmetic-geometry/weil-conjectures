@@ -6,9 +6,11 @@ Authors: Claude
 module
 
 public import WeilConjectures.Compactification.BaseChange
+public import WeilConjectures.Compactification.QuasiCompact
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.CohomologicalSmoothness
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpace
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpacePurity
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Deformation
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionThomFrames
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 
@@ -180,35 +182,39 @@ whose exponent is invertible on `X`,
 canonically, compatibly with base change and additively in the twist under composition of
 smooth morphisms.
 
-This is also blueprint `thm-pur-diagonal-dualizing-object`. The proof is the blueprint's
-diagonal argument. Let `W = X ×_Y X` and `Δ : X ⟶ W` the diagonal, a closed section of the
-smooth projection `p₁`.
+This is also blueprint `thm-pur-diagonal-dualizing-object`. The proof is the diagonal argument.
+Let `W = X ×_Y X` and `Δ : X ⟶ W` the diagonal, a closed section of the smooth projection
+`p₁`.
 1. `𝒞(p₁, Δ) ≅ ω_f` by smooth base change
-   (`AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_diagonal`).
-2. The deformation to the normal cone of `Δ` (`sk-thm-dnc`,
-   `AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_normalCone`) identifies `𝒞(p₁, Δ)`
-   with the section invariant of its normal bundle, a rank-`d` vector bundle.
-3. That section invariant is `Λ_X(d)[2d]` by affine-space purity
-   (`AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_affineSpace`), which needs `X` of
-   finite type over the field.
+   (`AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_diagonal`); `f` is quasi-compact,
+   being compactifiable over the locally noetherian `Y`
+   (`AlgebraicGeometry.HasCompactification.quasiCompact_of_locallyOfFiniteType`).
+2. `𝒞(p₁, Δ) ≅ Λ_X(d)[2d]`, the section invariant of a section of a smooth morphism
+   (`AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_twistShift_of_section`). Near the
+   diagonal there are étale coordinates `x₁, …, x_d` of `W` over `X` cutting out `Δ`; the
+   classes `∂κ(x₁) ∪ ⋯ ∪ ∂κ(x_d)` of these frames are restrictions of the Thom class of the zero
+   section of `𝔸^d`, invertible over a base of finite type over the field, and they glue to a
+   fundamental class of `Δ` with `RΔ^! (Λ_W(d)[2d]) ≅ Λ_X`. The co-projection formula and
+   `RΔ^! ω_{p₁} ≅ R(Δ ≫ p₁)^! Λ_X = Λ_X` turn this into `𝒞(p₁, Δ) ≅ Λ_X(d)[2d]`.
 
-The normal bundle of `Δ` is the relative tangent bundle `T_{X/Y}`, which is étale-locally
-trivial of rank `d` (`sk-lem-diag-reg`), so that step 3 is affine-space purity étale-locally.
-Mathlib has neither vector bundles nor `T_{X/Y}`, and the normal cone datum
-`AlgebraicGeometry.Scheme.Hom.NormalConeData` is not yet tied to the immersion, so the proof is
-left as a TODO. -/
+Step 2 replaces the blueprint's deformation to the normal cone of `Δ` (`sk-thm-dnc`,
+`AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_normalCone`) followed by vector-bundle
+purity for its normal bundle: the fundamental class of `Δ` is glued directly from the
+coordinate frames, as for regular immersions (`sk-thm-regular`), whose frame classes agree on
+overlaps by frame independence. -/
 theorem nonempty_iso_dualizingComplex_twistShift [HasTateTwist.IsNormalized Λ]
     {k : Type u} [Field k]
     (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY] :
     Nonempty (dualizingComplex Λ f ≅
-      (twistShift Λ X d).obj (constantComplex Λ X)) :=
-  -- TODO: step 2 needs a deformation to the normal cone of `Δ` whose normal cone datum is the
-  -- normal bundle `T_{X/Y}` (`nonempty_iso_sectionInvariant_normalCone`), and step 3
-  -- vector-bundle purity for it. `NormalConeData` does not yet tie the datum to the immersion,
-  -- and the existence of a deformation datum (`nonempty_deformationToNormalConeData`) is false
-  -- for an arbitrary one, so the proof waits for the normal bundle
-  -- (`prove2/sk-thm-smooth-purity-2`).
-  sorry
+      (twistShift Λ X d).obj (constantComplex Λ X)) := by
+  have : QuasiSeparatedSpace Y := quasiSeparatedSpace_of_quasiSeparated aY
+  have : QuasiCompact f := HasCompactification.quasiCompact_of_locallyOfFiniteType f aY
+  have := SmoothOfRelativeDimension.smooth d f
+  have : HasInvertibleExponent Λ (pullback f f) := .of_hom (pullback.fst f f)
+  obtain ⟨e₁⟩ := nonempty_iso_sectionInvariant_diagonal Λ (d := d) f
+  obtain ⟨e₂⟩ := nonempty_iso_sectionInvariant_twistShift_of_section Λ d (pullback.fst f f)
+    (pullback.diagonal f) (pullback.diagonal_fst f) (f ≫ aY)
+  exact ⟨e₁.symm ≪≫ e₂⟩
 
 /-! ### The smooth purity map -/
 

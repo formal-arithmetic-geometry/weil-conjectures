@@ -36,18 +36,19 @@ namespace AlgebraicGeometry.ProEtale
 
 open Scheme CondensedRing PadicAlgCl
 
-variable (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ) {X Y : Scheme.{u}} (f : X ⟶ Y)
+variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
+  [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 /-- The derived pullbacks commute with the equivalences `D(G)` between derived categories of
 module objects over `𝔽_E` and of pro-étale sheaves of `𝔽_E`-modules:
 `Lf^* ⋙ D(G_X) ≅ D(G_Y) ⋙ Lf^*`, induced by `residueFieldModuleSheafUpperStarIso`. -/
 noncomputable def residueFieldDerivedUpperStarIso :
-    L((f)^*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)⟧) ⋙
+    L((f)^*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)⟧) ⋙
         (residueFieldModuleSheaf X ℓ E).mapDerivedCategory ≅
       (residueFieldModuleSheaf Y ℓ E).mapDerivedCategory ⋙
         L((f)^*[ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)]) :=
   Functor.isoWhiskerRight (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory
-    (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)) f) _ ≪≫
+    (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)) f) _ ≪≫
     (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
     Functor.mapDerivedCategoryNatIso (residueFieldModuleSheafUpperStarIso ℓ E f) ≪≫
     Functor.mapDerivedCategoryCompIso _ _ ≪≫
@@ -57,12 +58,12 @@ noncomputable def residueFieldDerivedUpperStarIso :
 of the inverse of `residueFieldDerivedUpperStarIso` along the derived adjunctions
 `Lf^* ⊣ Rf_*`. -/
 noncomputable def residueFieldDerivedPushHom :
-    R((f)_*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)⟧) ⋙
+    R((f)_*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)⟧) ⋙
         (residueFieldModuleSheaf Y ℓ E).mapDerivedCategory ⟶
       (residueFieldModuleSheaf X ℓ E).mapDerivedCategory ⋙
         R((f)_*[ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)]) :=
   (mateEquiv (CondensedRing.derivedUpperStarLowerStarAdjunction
-    (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)) f)
+    (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)) f)
     (ProEtale.derivedUpperStarLowerStarAdjunction _ f)
     (residueFieldDerivedUpperStarIso ℓ E f).inv).natTrans
 

@@ -5,10 +5,6 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructibleUnitIdentity
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ClopenLowerShriek
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.BaseChangeOpen
-public import WeilConjectures.TraceFormula.Dualizing
 public import WeilConjectures.TraceFormula.Specialization.CompactificationRouteCoherence
 
 /-!

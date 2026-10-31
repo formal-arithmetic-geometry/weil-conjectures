@@ -7,13 +7,13 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.AlgebraicGeometry.BaseChangeDimension
-public import WeilConjectures.AlgebraicGeometry.FieldExtensionLimit
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 public import WeilConjectures.Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageVanishingTorsion
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.Derived.SepClosedCohomology
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.TransitionMono
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.CohomologicalDimensionDefs
+import Mathlib.Condensed.Discrete.Characterization
 
 /-!
 # Cohomological dimension of étale sheaves of `Λ`-modules
@@ -49,31 +49,6 @@ open Scheme
 namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
-
-section Defs
-
-variable (X : Scheme.{u})
-
-/-- Blueprint `def-kun-cd` (for sheaves of `Λ`-modules): the scheme `X` has *finite
-cohomological dimension* for sheaves of `Λ`-modules if there is a `d` with `H^q(X, F) = 0` for
-every étale sheaf `F` of `Λ`-modules and every `q > d`. For a torsion ring `Λ` every such sheaf
-is a torsion abelian sheaf, so this follows from finiteness of the torsion étale cohomological
-dimension `cd(X)` of the blueprint. -/
-def HasFiniteCohomologicalDimension : Prop :=
-  ∃ d : ℤ, ∀ (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ), d < q →
-    IsZero ((cohomology (ModuleCat.{u + 1} Λ) X q).obj
-      ((DerivedCategory.singleFunctor _ 0).obj F))
-
-variable {X} in
-/-- Blueprint `def-kun-cd` (for morphisms, and sheaves of `Λ`-modules): the morphism `f` has
-*finite cohomological dimension* for sheaves of `Λ`-modules if there is a `d` with
-`R^q f_* F = 0` for every étale sheaf `F` of `Λ`-modules and every `q > d`. -/
-def HasFiniteCohomologicalDimensionMorphism {Y : Scheme.{u}} (f : X ⟶ Y) : Prop :=
-  ∃ d : ℤ, ∀ (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ), d < q →
-    IsZero ((DerivedCategory.homologyFunctor _ q).obj
-      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj ((DerivedCategory.singleFunctor _ 0).obj F)))
-
-end Defs
 
 /-- A quasi-compact scheme locally of finite type over a field has finite dimension. -/
 lemma exists_topologicalKrullDim_le_of_locallyOfFiniteType {K : Type u} [Field K]

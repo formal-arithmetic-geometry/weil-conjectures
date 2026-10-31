@@ -10,11 +10,10 @@ public import Mathlib.RingTheory.PowerSeries.Expand
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LFunction
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Operations
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafRepresentation
-public import WeilConjectures.Evaluation
 public import WeilConjectures.Mathlib.Analysis.Analytic.ConvergenceRadius
-public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Derivative
-public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Inverse
 public import WeilConjectures.WeilSheaf.Curve
+import WeilConjectures.WeilSheaf.CurveTopCohomology
+import Mathlib.Algebra.Order.Star.Real
 
 /-!
 # The ingredients of the Rankin–Selberg bound

@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.DeligneLaumon.AffineLine.ArtinSchreierDual
 public import WeilConjectures.DeligneLaumon.AffineLine.FourierAmplitude
-public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedField
+public import WeilConjectures.CategoryTheory.ModuleObjects.Abelian
 
 /-!
 # The inverse transform of a punctual sheaf, geometrically
@@ -214,13 +214,14 @@ theorem exists_iso_carrier_lowerStar_tensorObj_fourierKernel_inv
     set b := affineLine.coordOfPoint
       (t k ≫ (Z ↘ Spec (CommRingCat.of k₀)).geometricFiberProj ≫ i)
     have hcomp : (σ k ≫ Scheme.Hom.geometricFiberMap i' (comp_over i' _)) ≫
-        Scheme.Hom.geometricFiberMap (affinePlane.mul k₀) (comp_over (affinePlane.mul k₀) _) =
+        Scheme.Hom.geometricFiberMap (affineSpacePair.pairing PUnit.{u + 1} k₀)
+          (comp_over (affineSpacePair.pairing PUnit.{u + 1} k₀) _) =
           affineLine.geometricSMul k₀ b := by
       rw [Category.assoc, ← Scheme.Hom.geometricFiberMap_comp]
-      exact hmul
+      simpa only [affineSpacePair.pairing_punit] using hmul
     let ig := Scheme.Hom.geometricFiberMap i' (comp_over i' (Spec (CommRingCat.of k₀)))
-    let mg := Scheme.Hom.geometricFiberMap (affinePlane.mul k₀)
-      (comp_over (affinePlane.mul k₀) (Spec (CommRingCat.of k₀)))
+    let mg := Scheme.Hom.geometricFiberMap (affineSpacePair.pairing PUnit.{u + 1} k₀)
+      (comp_over (affineSpacePair.pairing PUnit.{u + 1} k₀) (Spec (CommRingCat.of k₀)))
     let A := (artinSchreier ψ⁻¹ 1).obj.carrier
     let Lc := (ig)^*ᵃ[l].obj ((mg)^*ᵃ[l].obj A)
     let eL : (σ k)^*ᵃ[l].obj Lc ≅ (affineLine.geometricSMul k₀ b)^*ᵃ[l].obj A :=
@@ -322,13 +323,14 @@ theorem exists_epi_carrier_lowerStar_tensorObj_fourierKernel_inv
     set b := affineLine.coordOfPoint
       (t k ≫ (Z ↘ Spec (CommRingCat.of k₀)).geometricFiberProj ≫ i)
     have hcomp : (σ k ≫ Scheme.Hom.geometricFiberMap i' (comp_over i' _)) ≫
-        Scheme.Hom.geometricFiberMap (affinePlane.mul k₀) (comp_over (affinePlane.mul k₀) _) =
+        Scheme.Hom.geometricFiberMap (affineSpacePair.pairing PUnit.{u + 1} k₀)
+          (comp_over (affineSpacePair.pairing PUnit.{u + 1} k₀) _) =
           affineLine.geometricSMul k₀ b := by
       rw [Category.assoc, ← Scheme.Hom.geometricFiberMap_comp]
-      exact hmul
+      simpa only [affineSpacePair.pairing_punit] using hmul
     let ig := Scheme.Hom.geometricFiberMap i' (comp_over i' (Spec (CommRingCat.of k₀)))
-    let mg := Scheme.Hom.geometricFiberMap (affinePlane.mul k₀)
-      (comp_over (affinePlane.mul k₀) (Spec (CommRingCat.of k₀)))
+    let mg := Scheme.Hom.geometricFiberMap (affineSpacePair.pairing PUnit.{u + 1} k₀)
+      (comp_over (affineSpacePair.pairing PUnit.{u + 1} k₀) (Spec (CommRingCat.of k₀)))
     let A := (artinSchreier ψ⁻¹ 1).obj.carrier
     let Lc := (ig)^*ᵃ[l].obj ((mg)^*ᵃ[l].obj A)
     let eL : (σ k)^*ᵃ[l].obj Lc ≅ (affineLine.geometricSMul k₀ b)^*ᵃ[l].obj A :=

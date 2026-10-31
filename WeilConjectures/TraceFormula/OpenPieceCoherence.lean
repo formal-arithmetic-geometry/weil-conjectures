@@ -5,10 +5,10 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionUpperShriek
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekBaseChange
-public import WeilConjectures.TraceFormula.CompactCohomology
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.BaseChangeOpen
+public import WeilConjectures.TraceFormula.CompactPullback
+public import WeilConjectures.WeilObject.BoundedConstructible.UpperLowerStar
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionUpperShriek
 
 /-!
 

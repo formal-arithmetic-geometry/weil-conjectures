@@ -5,8 +5,8 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeStalk
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeUnitMate
+public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChange
 
 /-!
 # Derived adjunctions and exact restriction functors

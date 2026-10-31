@@ -7,12 +7,14 @@ module
 
 public import WeilConjectures.Algebra.Homology.DerivedCategory.PerfectTowerQuotient
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.NormalizedTowerLimit
-public import WeilConjectures.EtaleCohomology.PoincareDuality.PointPerfect
+public import WeilConjectures.EtaleCohomology.PoincareDuality.CompactSupportPerfect
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarRestrictScalars
-public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CompactSupport
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.AdicRealization
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar
+public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedField
+public import WeilConjectures.NumberTheory.Padics.Extension
 
 /-!
 # Normalized adic systems and the realization of their compact cohomology and stalks

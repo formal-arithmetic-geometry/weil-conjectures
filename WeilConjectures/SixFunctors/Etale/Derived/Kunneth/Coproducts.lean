@@ -7,13 +7,52 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.ProjectiveSingleCoyoneda
 public import WeilConjectures.CategoryTheory.DerivedCategory.FiniteCohomologicalDimension
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.LiftToFinset
-public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.CohomologicalDimensionDefs
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Locality
+public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
+public import WeilConjectures.ConstructibleSheaf.GenericConstancy
+public import WeilConjectures.AlgebraicGeometry.Sites.ArtinVanishing.Support
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.GeometricFiber
+public import WeilConjectures.PointCount
+public import WeilConjectures.SixFunctors.BaseChange.RestrictScalars
+public import WeilConjectures.AlgebraicGeometry.AffineSpace.Line
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
+public import WeilConjectures.Blowup.Proper
+public import WeilConjectures.Compactification.Affine
+public import WeilConjectures.AlgebraicGeometry.AbsoluteFrobenius
+public import WeilConjectures.CategoryTheory.Sites.ModuleCohomologyExt
+public import WeilConjectures.SixFunctors.OpenClosed.Supported
+public import WeilConjectures.SixFunctors.OpenClosed.Exact
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Line
+public import WeilConjectures.AlgebraicGeometry.Regular
+public import WeilConjectures.Mathlib.CategoryTheory.Whiskering
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Integral
+public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Functor
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Stalk
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.FullyFaithful
+public import WeilConjectures.AlgebraicGeometry.BaseChangeDimension
+public import WeilConjectures.Algebra.Homology.KInjectiveResolution
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Separated
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.CohomologicalDimension
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
+public import WeilConjectures.AlgebraicGeometry.FieldBaseChangeDimension
+public import WeilConjectures.Compactification.BaseChange
+public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Defs
+public import WeilConjectures.AlgebraicGeometry.FiniteOverField
+public import WeilConjectures.Blowup.Complement
+public import WeilConjectures.Blowup.Principalization
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
+public import WeilConjectures.ConstructibleSheaf.OpenClosed
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMapDelta
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.SymmetricProduct
+public import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero
+public import WeilConjectures.AlgebraicGeometry.HigherDirectImageTransitions
+public import WeilConjectures.SixFunctors.Integral.Exact
+public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FilteredColimit
+public import WeilConjectures.SixFunctors.Etale.Derived.SepClosedCohomology
 
 /-!
 # Direct sums and finite cohomological dimension

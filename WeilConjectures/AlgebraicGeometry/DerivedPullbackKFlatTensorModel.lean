@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 public import WeilConjectures.AlgebraicGeometry.DerivedPullback
 public import Mathlib.CategoryTheory.Monoidal.Multifunctor
 import WeilConjectures.Algebra.Homology.KFlatPullback
+import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
 
 /-! # Tensor comparison on K-flat representatives
 

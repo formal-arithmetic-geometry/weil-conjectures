@@ -60,6 +60,7 @@ with `exact_mod_proofs`, which identifies these proofs by casts.
 
 @[expose] public section
 
+
 universe u
 
 open CategoryTheory Limits MonoidalCategory
@@ -89,6 +90,14 @@ noncomputable def traitGenericModel :
   j := traitGenericPoint k'
   i := traitClosedPoint k'
   ε := 𝟙 _
+
+/-- The trait is a model of finite type over itself as a model of its geometric generic point. -/
+theorem isTraitModel_traitGenericModel :
+    (traitGenericModel k').IsTraitModel (X' := Over.mk (𝟙 (Spec (.of k')))) := by
+  have : IsIso (Over.mk (𝟙 (Spec (.of k')))).hom := inferInstanceAs (IsIso (𝟙 _))
+  exact ⟨⟨𝟙 _, 𝟙 _, inferInstance, inferInstance, inferInstance,
+    IsPullback.of_vert_isIso ⟨by simp [traitGenericModel]⟩,
+    IsPullback.of_vert_isIso ⟨by simp [traitGenericModel]⟩⟩⟩
 
 variable {k'}
 
@@ -196,11 +205,13 @@ end Product
 
 section Exchange
 
-variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k'] {X : Scheme.{u}}
+variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k'] [Fact (ringChar k' ≠ ℓ)] {X : Scheme.{u}}
   {X' : Over (Spec (.of k'))}
   {M : NearbyCyclesModel X X'.left} {q : M.total ⟶ trait k'}
   {g : M.generic ⟶ Spec (.of (traitGenericField k'))}
 
+set_option maxHeartbeats 1000000 in
+-- the pushforward exchange of the model of the geometric generic fibre is slow to unify
 /-- **The proper exchange for the structure morphism** (blueprint
 `det-sp-nearby-cycles-exchanges` (2), for the proper morphism `f = q : 𝒳 ⟶ S` to the trait; SGA 7
 XIII (2.1.7.1)): for a model `M` of finite type over the henselian trait `Spec k'⟦t⟧` along a
@@ -228,8 +239,10 @@ theorem IsTraitModelOver.isIso_pushforwardExchange_toTraitGeneric_app
   have : IsProper g := MorphismProperty.of_isPullback h.isPullback_j ‹IsProper q›
   have : IsIso (traitGenericModel k').ε :=
     inferInstanceAs (IsIso (𝟙 (Spec (.of (traitGenericField k')))))
-  exact h.toTraitGeneric.isIso_pushforwardExchange_app_of_isProper h.isPullback_i
-    (IsPullback.of_horiz_isIso ⟨rfl⟩)
+  exact h.toTraitGeneric.isIso_pushforwardExchange_app_of_isProper
+    (traitGenericPoint k' ≫ traitToBase k' k') ⟨_, ⟨h.isTraitModel.exists_isPullback⟩⟩
+    ⟨𝟙 _, isTraitModel_traitGenericModel k'⟩
+    h.isPullback_i (IsPullback.of_horiz_isIso ⟨rfl⟩)
     (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ M.j C₀ hC₀)
 
 end Exchange
@@ -269,6 +282,8 @@ lemma nonempty_upperStar_obj_iso_comp {W T V : Scheme.{u}} {a : W ⟶ T} {b : T 
 variable {X Y Z X' Y' Z' : Scheme.{u}} {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'}
   {P : NearbyCyclesModel Z Z'} {f₁ : Z ⟶ X} {f₁' : Z' ⟶ X'} {f₂ : Z ⟶ Y} {f₂' : Z' ⟶ Y'}
 
+set_option maxHeartbeats 400000 in
+-- the monoidal structure of the derived categories of module objects is slow to unify
 /-- If the identifications `ε` of `M` and `N` factor through the total spaces, the external
 product `Lφ₁^* Lε_M^* A ⊗ Lφ₂^* Lε_N^* B` on the geometric generic fibre of `P` is the pullback
 `Lj_P^* C₀` of a bounded constructible complex `C₀` on the total space of `P`, provided bounded
@@ -520,10 +535,14 @@ theorem isIso_lowerStar_kunnethMap (hM : M.IsTraitModelOver qM gM)
         boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) P.total) D →
           boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) P.total)
             (C ⊗ D) := by
-    have : (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
-        P.total)).IsMonoidal := isMonoidal_boundedConstructible
-      (X := Over.mk ((φ₁.total ≫ qM) ≫ traitToBase k' k')) (ℓ := ℓ)
-    exact fun C D hC hD ↦ CategoryTheory.ObjectProperty.prop_tensor hC hD
+    have := hP.locallyOfFiniteType
+    have := hP.quasiCompact
+    have : IsLocallyNoetherian P.total := LocallyOfFiniteType.isLocallyNoetherian (φ₁.total ≫ qM)
+    have : CompactSpace P.total := QuasiCompact.compactSpace_of_compactSpace (φ₁.total ≫ qM)
+    have : IsNoetherian P.total := {}
+    exact fun C D hC hD ↦
+      boundedConstructible_tensorObj
+        (tensorHypotheses_padicAlgClRingObj ℓ).lisseTensorHypotheses hC hD
   refine isIso_lowerStar_kunnethMap_of_isIso (Profinite.padicAlgClRingObj ℓ) hM hN hpb hP
     hgen A B ?_ ?_ ?_ ?_ ?_ hT
   -- the proper exchanges

@@ -5,10 +5,25 @@ Authors: Nailin Guan
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleExtendScalars
 public import WeilConjectures.CategoryTheory.FilteredTwoColimit
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.DerivedExtendScalars
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.PadicAlgClFaithful
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimitEssSurj
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimitHomSurj
 
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
+import WeilConjectures.AlgebraicGeometry.SplitCoefficientDerivedFaithful
+import WeilConjectures.AlgebraicGeometry.CondensedDerivedTensorComparison
+import all WeilConjectures.AlgebraicGeometry.CondensedFiniteModelProofAPI
+import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
+import WeilConjectures.CategoryTheory.HomColimitExtension
+import WeilConjectures.CategoryTheory.DirectedTriangulatedImage
+import WeilConjectures.AlgebraicGeometry.BoundedConstructibleDevissage
+import WeilConjectures.AlgebraicGeometry.CondensedFinitePresentationDescent
+import WeilConjectures.AlgebraicGeometry.CondensedSheafExtContinuity
+import WeilConjectures.AlgebraicGeometry.CondensedCoefficientComplexPresentation
 /-!
 
 # The bounded constructible `ℚ̄_ℓ`-complexes as the 2-colimit over the finite subextensions
@@ -23,8 +38,8 @@ derived extensions of scalars
 ```
 T^X_{E,F} = F_X ⊗ᴸ_{E_X} - ,   T^X_{E,Ω} = ℚ̄_ℓ,X ⊗ᴸ_{E_X} -
 ```
-of `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility` are
-*assumed* to preserve bounded constructibility
+of `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.DerivedExtendScalars` are
+shown to preserve bounded constructibility
 (`ProEtale.boundedConstructible_derivedExtendScalarsSubfield_obj`,
 `ProEtale.boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj`), and hence restrict to
 functors
@@ -60,30 +75,27 @@ are *not* formal consequences of the identification `ℚ̄_ℓ,X ≃ colim_E E_X
 categories; see the module docstring of `WeilConjectures.CategoryTheory.FilteredTwoColimit` for
 the ordinary-category model of the 2-colimit that they describe.
 
-## Sorried input
+## Proofs
 
 * `ProEtale.boundedConstructible_derivedExtendScalarsSubfield_obj` and
-  `ProEtale.boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj`: extension of scalars
-  along `E_X ⟶ F_X` and `E_X ⟶ ℚ̄_ℓ,X` preserves bounded constructible complexes. The extension
-  of scalars is exact
-  (`ProEtale.CondensedRing.preservesFiniteLimits_extendScalars_padicSubfieldRingObjMap`), so it
-  is computed termwise and preserves boundedness, and it sends a locally finitely
-  presented module on a stratum to a locally finitely presented one, the presentation being
-  tensored up.
-* **(Obj)** `ProEtale.constructibleCocone_essSurjObj`: constructible descent. A bounded
-  constructible `ℚ̄_ℓ,X`-complex has finitely many constructible cohomology sheaves; each is
-  locally, on the strata of a stratification, finitely presented, and a finite presentation
-  involves finitely many sections of `ℚ̄_ℓ,X`, which are defined over a finite subextension since
-  `ℚ̄_ℓ,X = colim_E E_X` (`ProEtale.isColimitPadicAlgClRingObjCocone`). A finite Postnikov
-  induction on the length of the complex then descends the complex itself, the gluing data being
-  morphisms which descend by (Hom).
-* **(Hom)** `ProEtale.constructibleCocone_homSurj` and `ProEtale.constructibleCocone_homInj`:
-  continuity of the derived hom. For a bounded constructible first argument `K_E` and a
-  bounded below second argument, `Hom_{D(Mod_{ℚ̄_ℓ,X})}(T_{E,Ω} K_E, T_{E,Ω} L_E)` is the filtered
-  colimit over `H ⊇ E` of the `Hom_{D(Mod_{H_X})}(T_{E,H} K_E, T_{E,H} L_E)`: `K_E` is a finite
-  extension of shifts of locally finitely presented modules, for which the derived hom into a
-  filtered colimit of uniformly bounded below complexes is the filtered colimit of the derived
-  homs, and `ℚ̄_ℓ,X = colim_H H_X`.
+  `ProEtale.boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj`: the extension of scalars
+  is exact, so it commutes with the cohomology sheaves, and it preserves constructibility
+  (`ProEtale.boundedConstructible_leftDerivedExtendScalars_obj`).
+* **(Obj)** `ProEtale.constructibleCocone_essSurjObj`: the complexes that descend to some `E` form a
+  triangulated subcategory (the cone step uses (Hom)); it contains every constructible module in
+  degree `0`, by finite presentation of constructible `ℚ̄_ℓ,X`-modules and descent of their
+  presentations; the dévissage of a bounded constructible complex into its cohomology sheaves
+  (`ProEtale.prop_of_boundedConstructibleModule`) concludes.
+* **(Hom)** `ProEtale.constructibleCocone_homSurj`: `ℚ̄_ℓ,X ⊗ Y = colim_H H_X ⊗ Y`, and `Hom`
+  out of a bounded constructible complex commutes with this filtered colimit (dévissage to
+  constructible modules, which are finitely presented, `ProEtale.condensed_sheaf_ext_continuity`);
+  `ProEtale.constructibleCocone_homInj`: the extension of scalars to `ℚ̄_ℓ` is faithful, `E_X` being
+  an `E_X`-linear direct summand of `ℚ̄_ℓ,X` (`ProEtale.faithful_derivedExtendScalarsToPadicAlgCl`).
+
+These proofs do not use the lemmas `ProEtale.exists_iso_derivedExtendScalarsToPadicAlgCl_obj` and
+`ProEtale.exists_derivedExtendScalarsToPadicAlgCl_map_eq` (which rest on the sorried blueprint nodes
+`det-cor-coefficient-heart-ii-generation` and `sk-lem-constructible-ext-continuity` (1) of other
+subsections).
 
 This is the input needed to transport base change theorems from finite to `ℚ̄_ℓ`-coefficients:
 by (Obj) every constructible `K` is `T^X_{E,Ω} K_E`, and the compatibility of the base change
@@ -109,43 +121,6 @@ open Scheme PadicAlgCl
 
 variable (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
 
-/-! ### The derived extensions of scalars and their transitivity -/
-
-section ExtendScalars
-
-/-- The derived extension of scalars `T^X_{E,F} = F_X ⊗ᴸ_{E_X} - : D(Mod_{E_X}) ⥤ D(Mod_{F_X})`
-along the inclusion of finite subextensions `E ≤ F`. -/
-noncomputable abbrev derivedExtendScalarsSubfield {E F : FiniteIntermediateField ℓ} (h : E ≤ F) :
-    DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)) ⥤
-      DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ F)) :=
-  L(Mod.extendScalars (padicSubfieldRingObjMap X ℓ h))
-
-/-- The derived extension of scalars
-`T^X_{E,Ω} = ℚ̄_ℓ,X ⊗ᴸ_{E_X} - : D(Mod_{E_X}) ⥤ D(Mod_{ℚ̄_ℓ,X})` along the inclusion of a finite
-subextension `E` into `ℚ̄_ℓ`. -/
-noncomputable abbrev derivedExtendScalarsToPadicAlgCl (E : FiniteIntermediateField ℓ) :
-    DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)) ⥤
-      DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicAlgClRingObj X ℓ)) :=
-  L(Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ E))
-
-/-- Transitivity of the derived extension of scalars: `T^X_{E,F} ⋙ T^X_{F,Ω} ≅ T^X_{E,Ω}` for
-`E ≤ F`. The extensions of scalars being exact, the composite of their derived functors is the
-derived functor of the composite, which is the extension of scalars along the composite
-inclusion `E_X ⟶ F_X ⟶ ℚ̄_ℓ,X = E_X ⟶ ℚ̄_ℓ,X`. -/
-noncomputable def derivedExtendScalarsCompIso {E F : FiniteIntermediateField ℓ} (h : E ≤ F) :
-    derivedExtendScalarsSubfield X ℓ h ⋙ derivedExtendScalarsToPadicAlgCl X ℓ F ≅
-      derivedExtendScalarsToPadicAlgCl X ℓ E :=
-  haveI : PreservesFiniteLimits (Mod.extendScalars (padicSubfieldRingObjMap X ℓ h ≫
-      padicSubfieldRingObjToPadicAlgCl X ℓ F)) :=
-    preservesFiniteLimits_of_natIso
-      (Mod.extendScalarsIsoOfEq (padicSubfieldRingObjMap_comp_toPadicAlgCl X ℓ h)).symm
-  (Functor.leftDerivedFunctorCompIso _ _).symm ≪≫
-    Functor.leftDerivedFunctorNatIso _
-      ((Mod.extendScalarsComp _ _).symm ≪≫
-        Mod.extendScalarsIsoOfEq (padicSubfieldRingObjMap_comp_toPadicAlgCl X ℓ h))
-
-end ExtendScalars
-
 /-! ### The bounded constructible categories and the functors between them -/
 
 section Constructible
@@ -168,7 +143,7 @@ lemma boundedConstructible_derivedExtendScalarsSubfield_obj {E F : FiniteInterme
     (h : E ≤ F) (K : Dᵇc(X)⟦Profinite.continuousMapRingObj E⟧) :
     boundedConstructible (padicSubfieldRingObj X ℓ F)
       ((derivedExtendScalarsSubfield X ℓ h).obj K.obj) :=
-  sorry
+  ProEtale.boundedConstructible_leftDerivedExtendScalars_obj _ _ _ K.obj K.property
 
 /-- Extension of scalars along `E_X ⟶ ℚ̄_ℓ,X` preserves bounded constructible complexes.
 See the module docstring. -/
@@ -176,7 +151,7 @@ lemma boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj (E : FiniteInter
     (K : Dᵇc(X)⟦Profinite.continuousMapRingObj E⟧) :
     boundedConstructible (padicAlgClRingObj X ℓ)
       ((derivedExtendScalarsToPadicAlgCl X ℓ E).obj K.obj) :=
-  sorry
+  ProEtale.boundedConstructible_leftDerivedExtendScalars_obj _ _ _ K.obj K.property
 
 /-- The extension of scalars `T^X_{E,F} : C_E(X) ⥤ C_F(X)` on bounded constructible complexes,
 for finite subextensions `E ≤ F`. -/
@@ -225,30 +200,344 @@ noncomputable def constructibleCocone :
 
 end Constructible
 
+end AlgebraicGeometry.ProEtale
+
+/-! ### (Obj) and (Hom)-surjectivity by dévissage -/
+
+section
+
+set_option maxSynthPendingDepth 0
+
+attribute [local instance 2000] CategoryTheory.Sheaf.instHasColimitsOfSize
+  CategoryTheory.Sheaf.instHasColimitsOfShape CategoryTheory.Sheaf.instHasFiniteColimits
+  CategoryTheory.Sheaf.hasLimitsOfSize CategoryTheory.Sheaf.instHasFiniteLimits
+
+attribute [local instance 2000] CategoryTheory.Mod.monoidalCategory
+  AlgebraicGeometry.ProEtale.sheafMonoidalCategory
+
+attribute [local instance 2000] CategoryTheory.Mod.monoidalClosed
+  CategoryTheory.Mod.hasFunctorialFlatResolution
+  AlgebraicGeometry.ProEtale.sheafMonoidalClosed
+  AlgebraicGeometry.ProEtale.hasFunctorialFlatResolution_sheaf
+
+attribute [local irreducible] AlgebraicGeometry.ProEtale.upperStarFromPoint
+  AlgebraicGeometry.ProEtale.upperStarFromPointComp
+  AlgebraicGeometry.ProEtale.monoidal_upperStarFromPoint
+  AlgebraicGeometry.ProEtale.monoidal_pointUpperStar
+  AlgebraicGeometry.ProEtale.oplaxMonoidal_pointUpperStar
+
+set_option backward.isDefEq.respectTransparency false
+
+open ZeroObject
+
+attribute [local instance 100]
+  CategoryTheory.Limits.PreservesColimitsOfShape.preservesColimit
+  CategoryTheory.Limits.PreservesColimitsOfSize.preservesColimitsOfShape
+
+section ExactDerived
+universe v₁ v₂ u₁ u₂
+variable {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D]
+  [Abelian C] [Abelian D] [MonoidalCategory C] [MonoidalPreadditive C]
+  [hClosed : MonoidalClosed C] [BraidedCategory C] [HasColimitsOfSize.{v₁, v₁} C]
+  [HasExactColimitsOfShape ℤ C] [HasFunctorialFlatResolution C]
+  [HasDerivedCategory C] [HasDerivedCategory D]
+private noncomputable def exactDerivedIso (F : C ⥤ D) [F.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F] :
+    F.leftDerivedFunctor ≅ F.mapDerivedCategory :=
+  F.leftDerivedFunctorIsoMapDerivedCategory
+private noncomputable def singleExactDerivedIso (F : C ⥤ D) [F.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F] :
+    DerivedCategory.singleFunctor C 0 ⋙ F.leftDerivedFunctor ≅
+      F ⋙ DerivedCategory.singleFunctor D 0 :=
+  F.singleFunctorCompLeftDerivedFunctorIso
+@[instance_reducible]
+private noncomputable def exactDerivedShift (F : C ⥤ D) [F.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F] :
+    F.leftDerivedFunctor.CommShift ℤ :=
+  Functor.CommShift.ofIso (exactDerivedIso F).symm ℤ
+private theorem exactDerivedTriangulated (F : C ⥤ D) [F.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F] :
+    letI := exactDerivedShift F
+    F.leftDerivedFunctor.IsTriangulated := by
+  let _ := exactDerivedShift F
+  have := Functor.CommShift.ofIso_compatibility (exactDerivedIso F).symm ℤ
+  exact Functor.isTriangulated_of_iso (exactDerivedIso F).symm
+end ExactDerived
+
+namespace AlgebraicGeometry.ProEtale
+open Scheme PadicAlgCl
+section TwoColimit
+
+variable (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
+variable [TopologicalSpace.NoetherianSpace X]
+
+attribute [local irreducible] CategoryTheory.Functor.leftDerivedFunctorIsoMapDerivedCategory
+  CategoryTheory.Functor.CommShift.ofIso CategoryTheory.Functor.leftDerivedFunctor
+  CategoryTheory.Functor.mapDerivedCategory
+
+set_option backward.isDefEq.respectTransparency false
+
+@[instance_reducible, local instance]
+private noncomputable def algClCommShift (E : FiniteIntermediateField ℓ) :
+    (derivedExtendScalarsToPadicAlgCl X ℓ E).CommShift ℤ :=
+  exactDerivedShift
+    (C := Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E))
+    (D := Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicAlgClRingObj X ℓ))
+    (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ E))
+
+omit [TopologicalSpace.NoetherianSpace X] in
+@[local instance]
+private lemma algClTriangulated (E : FiniteIntermediateField ℓ) :
+    (derivedExtendScalarsToPadicAlgCl X ℓ E).IsTriangulated :=
+  exactDerivedTriangulated
+    (C := Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E))
+    (D := Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicAlgClRingObj X ℓ))
+    (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ E))
+
+set_option backward.isDefEq.respectTransparency true
+
+attribute [local irreducible] finiteCoefficientDerivedHomEquiv
+  finiteCoefficientDerivedAlgClHomEquiv finiteCoefficientDerivedRestriction
+  finiteCoefficientDerivedFromAlgCl finiteCoefficientDerivedAdjunction
+  finiteCoefficientDerivedAlgClAdjunction algClCommShift
+
+omit [TopologicalSpace.NoetherianSpace X] in
+private lemma bounded_factors_cocone
+    (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    {J : Type (u + 1)} [SmallCategory J] [IsFiltered J]
+    (N : J ⥤ CochainComplex
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) ℤ)
+    (c : Cocone N) (hc : IsColimit c)
+    (hsingle : ∀ M, IsConstructibleModuleObject R M → ∀ n : ℤ,
+      IsIso (colimit.desc _
+        ((DerivedCategory.Q ⋙ shiftFunctor _ n ⋙
+          preadditiveCoyoneda.obj
+            (Opposite.op ((DerivedCategory.singleFunctor _ 0).obj M))).mapCocone
+          (colimit.cocone N))))
+    (K : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R))
+    (hK : boundedConstructible R K) :
+    ∀ f : K ⟶ DerivedCategory.Q.obj c.pt,
+      ∃ (i : J) (g : K ⟶ DerivedCategory.Q.obj (N.obj i)),
+        f = g ≫ DerivedCategory.Q.map (c.ι.app i) := by
+  let : HasColimit N := ⟨⟨c, hc⟩⟩
+  let D := N ⋙ DerivedCategory.Q
+  let d := DerivedCategory.Q.mapCocone (colimit.cocone N)
+  let P := homColimitProperty D d
+  have hP : ∀ M, IsConstructibleModuleObject R M →
+      P ((DerivedCategory.singleFunctor _ 0).obj M) := by
+    intro M hM
+    exact hsingle M hM
+  have h : P K := prop_of_boundedConstructibleModule P hP hK
+  exact CategoryTheory.factors_of_colimit_cocone N DerivedCategory.Q c hc K
+    (CategoryTheory.factors_iso _ ((shiftFunctorZero _ ℤ).app K)
+      (CategoryTheory.shiftFactors_of_hom_colimit N DerivedCategory.Q K h 0))
+
+attribute [local irreducible] derivedExtendScalarsCompIso
+
+set_option backward.isDefEq.respectTransparency true in
+omit [TopologicalSpace.NoetherianSpace X] in
+private lemma tensorComp_hom {E F : FiniteIntermediateField ℓ} (h : E ≤ F)
+    (K : PadicSubfieldConstructible X ℓ E) :
+    ((constructibleToPadicAlgClCompIso X ℓ h).hom.app K).hom =
+      (derivedExtendScalarsCompIso X ℓ h).hom.app K.obj := by
+  change (boundedConstructible (padicAlgClRingObj X ℓ)).ι.map _ = _
+  unfold constructibleToPadicAlgClCompIso
+  rw [Functor.fullyFaithfulCancelRight_hom_app, Functor.map_preimage]
+  exact Category.id_comp _
+
+set_option backward.isDefEq.respectTransparency true in
+omit [TopologicalSpace.NoetherianSpace X] in
+private lemma tensorComp_inv {E F : FiniteIntermediateField ℓ} (h : E ≤ F)
+    (K : PadicSubfieldConstructible X ℓ E) :
+    ((constructibleToPadicAlgClCompIso X ℓ h).inv.app K).hom =
+      (derivedExtendScalarsCompIso X ℓ h).inv.app K.obj := by
+  change (boundedConstructible (padicAlgClRingObj X ℓ)).ι.map _ = _
+  unfold constructibleToPadicAlgClCompIso
+  rw [Functor.fullyFaithfulCancelRight_inv_app, Functor.map_preimage]
+  exact Category.comp_id _
+
+omit [TopologicalSpace.NoetherianSpace X] in
+private lemma toAlgCl_map_hom {E : FiniteIntermediateField ℓ}
+    {K L : PadicSubfieldConstructible X ℓ E} (g : K ⟶ L) :
+    ((constructibleToPadicAlgCl X ℓ E).map g).hom =
+      (derivedExtendScalarsToPadicAlgCl X ℓ E).map g.hom := rfl
+
+set_option backward.isDefEq.respectTransparency true in
+/-- **(Hom), surjectivity**: every morphism `T^X_{E,Ω} K_E ⟶ T^X_{F,Ω} L_F` between extensions of
+scalars of bounded constructible complexes is the extension of scalars of a morphism
+`T^X_{E,H} K_E ⟶ T^X_{F,H} L_F` for some finite subextension `H ⊇ E, F`. See the module
+docstring. -/
+theorem constructibleCocone_homSurj : (constructibleCocone X ℓ).HomSurj := by
+  intro E F K L f
+  let G := IsFiltered.max E F
+  let I := AsSmall.{u + 1} (Under G)
+  let H : I ⥤ FiniteIntermediateField ℓ :=
+    (AsSmall.equiv (C := Under G)).inverse ⋙ Under.forget G
+  let : H.Final :=
+    Functor.final_equivalence_comp (AsSmall.equiv (C := Under G)).inverse (Under.forget G)
+  have he (i : I) : E ≤ H.obj i :=
+    le_trans (leOfHom (IsFiltered.leftToMax E F)) (leOfHom (ULift.down i).hom)
+  have hf (i : I) : F ≤ H.obj i :=
+    le_trans (leOfHom (IsFiltered.rightToMax E F)) (leOfHom (ULift.down i).hom)
+  have pres := exists_condensed_coefficient_complex_presentation
+    X ℓ E F L.obj L.property.1.1 H he hf
+  rcases pres with ⟨N, pres⟩
+  rcases pres with ⟨c, hc, hN, pres⟩
+  rcases hc with ⟨hc⟩
+  rcases pres with ⟨eΩ, ei, hcomp⟩
+  let adj := finiteCoefficientDerivedAlgClHomEquiv X ℓ E K.obj
+    ((derivedExtendScalarsToPadicAlgCl X ℓ F).obj L.obj)
+  have hfactor : ∀ f : K.obj ⟶ DerivedCategory.Q.obj c.pt,
+      ∃ (i : I) (g : K.obj ⟶ DerivedCategory.Q.obj (N.obj i)),
+        f = g ≫ DerivedCategory.Q.map (c.ι.app i) :=
+    bounded_factors_cocone X (padicSubfieldRingObj X ℓ E) N c hc
+    (fun M hM n ↦ isIso_constructible_condensed_sheaf_hom_colimit X ℓ E M hM N hN n)
+    K.obj K.property
+  have ff : {a : K.obj ⟶ DerivedCategory.Q.obj c.pt // a = adj f.hom ≫ eΩ.inv} :=
+    ⟨_, rfl⟩
+  have hres : ∃ (i : I) (g : K.obj ⟶ DerivedCategory.Q.obj (N.obj i)),
+      ff.val = g ≫ DerivedCategory.Q.map (c.ι.app i) := hfactor ff.val
+  obtain ⟨i, g, hg⟩ := hres
+  let g' : (derivedExtendScalarsSubfield X ℓ (he i)).obj K.obj ⟶
+      (derivedExtendScalarsSubfield X ℓ (hf i)).obj L.obj :=
+    (finiteCoefficientDerivedHomEquiv X ℓ (he i) K.obj _).symm
+    (g ≫ (ei i).hom)
+  refine ⟨H.obj i, he i, hf i, ObjectProperty.homMk g', ?_⟩
+  apply (boundedConstructible (padicAlgClRingObj X ℓ)).ι.map_injective
+  change f.hom = _
+  simp only [constructibleCocone, ObjectProperty.ι_map,
+    ObjectProperty.FullSubcategory.comp_hom, tensorComp_inv, tensorComp_hom,
+    toAlgCl_map_hom, ObjectProperty.homMk]
+  apply adj.injective
+  have hh' : adj f.hom = (g ≫ DerivedCategory.Q.map (c.ι.app i)) ≫ eΩ.hom :=
+    eΩ.comp_inv_eq.mp (ff.property.symm.trans hg)
+  exact hh'.trans ((Category.assoc _ _ _).trans (hcomp i K.obj g).symm)
+
+private noncomputable def ambientCocone :
+    CategoryCocone (fun E : FiniteIntermediateField ℓ ↦ PadicSubfieldConstructible X ℓ E)
+      (DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
+        (padicAlgClRingObj X ℓ))) where
+  T h := constructibleExtendScalars X ℓ h
+  Φ E := (boundedConstructible (padicSubfieldRingObj X ℓ E)).ι ⋙
+    derivedExtendScalarsToPadicAlgCl X ℓ E
+  iso h := (Functor.associator (constructibleExtendScalars X ℓ h)
+    (constructibleToPadicAlgCl X ℓ _) (boundedConstructible (padicAlgClRingObj X ℓ)).ι).symm ≪≫
+    Functor.isoWhiskerRight (constructibleToPadicAlgClCompIso X ℓ h)
+      (boundedConstructible (padicAlgClRingObj X ℓ)).ι
+
+set_option backward.isDefEq.respectTransparency true in
+@[instance_reducible]
+private noncomputable def ambientCommShift (E : FiniteIntermediateField ℓ) :
+    ((ambientCocone X ℓ).Φ E).CommShift ℤ :=
+  @Functor.CommShift.comp _ _ _ _ _ _
+    (boundedConstructible (padicSubfieldRingObj X ℓ E)).ι
+    (derivedExtendScalarsToPadicAlgCl X ℓ E) ℤ _ _ _ _
+    (inferInstance) (algClCommShift X ℓ E)
+
+set_option backward.isDefEq.respectTransparency true in
+private lemma ambientTriangulated (E : FiniteIntermediateField ℓ) :
+    letI := ambientCommShift X ℓ E
+    ((ambientCocone X ℓ).Φ E).IsTriangulated := by
+  let _ := ambientCommShift X ℓ E
+  have htri : (derivedExtendScalarsToPadicAlgCl X ℓ E).IsTriangulated :=
+    algClTriangulated X ℓ E
+  exact inferInstanceAs (((boundedConstructible (padicSubfieldRingObj X ℓ E)).ι ⋙
+    derivedExtendScalarsToPadicAlgCl X ℓ E).IsTriangulated)
+
+set_option backward.isDefEq.respectTransparency true in
+private lemma ambientHomSurj : (ambientCocone X ℓ).HomSurj := by
+  intro i j K L f
+  have hdesc : ∃ (k : FiniteIntermediateField ℓ) (hi : i ≤ k) (hj : j ≤ k)
+      (g : (constructibleExtendScalars X ℓ hi).obj K ⟶
+        (constructibleExtendScalars X ℓ hj).obj L),
+      ObjectProperty.homMk f =
+        (constructibleToPadicAlgClCompIso X ℓ hi).inv.app K ≫
+          (constructibleToPadicAlgCl X ℓ k).map g ≫
+            (constructibleToPadicAlgClCompIso X ℓ hj).hom.app L :=
+    constructibleCocone_homSurj X ℓ i j K L (ObjectProperty.homMk f)
+  obtain ⟨k, hi, hj, g, hg⟩ := hdesc
+  refine ⟨k, hi, hj, g, ?_⟩
+  change f =
+    (((constructibleToPadicAlgClCompIso X ℓ hi).inv.app K).hom ≫ 𝟙 _) ≫
+      (derivedExtendScalarsToPadicAlgCl X ℓ k).map g.hom ≫
+        (𝟙 _ ≫ ((constructibleToPadicAlgClCompIso X ℓ hj).hom.app L).hom)
+  simpa only [Category.comp_id, Category.id_comp, constructibleCocone, ambientCocone,
+    constructibleToPadicAlgCl, ObjectProperty.lift, ObjectProperty.homMk,
+    Functor.comp_obj, Functor.comp_map, ObjectProperty.ι_obj, ObjectProperty.ι_map,
+    ObjectProperty.FullSubcategory.comp_hom, toAlgCl_map_hom] using congrArg (·.hom) hg
+
+set_option backward.isDefEq.respectTransparency false in
+private lemma single_model (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+    (padicAlgClRingObj X ℓ)) (hM : IsConstructibleModuleObject (padicAlgClRingObj X ℓ) M) :
+    ∃ E, ((ambientCocone X ℓ).Φ E).essImage ((DerivedCategory.singleFunctor _ 0).obj M) := by
+  obtain ⟨E, M_E, hE, ⟨e⟩⟩ := exists_constructible_finiteCoefficient_model X ℓ M hM
+  refine ⟨E, ⟨(DerivedCategory.singleFunctor _ 0).obj M_E,
+    CondensedRing.boundedConstructible_singleFunctor_obj_of_isConstructibleModuleObject _ 0 hE⟩,
+    ⟨?_⟩⟩
+  let F := Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ E)
+  have es : (derivedExtendScalarsToPadicAlgCl X ℓ E).obj
+        ((DerivedCategory.singleFunctor _ 0).obj M_E) ≅
+      (DerivedCategory.singleFunctor _ 0).obj (F.obj M_E) :=
+    (singleExactDerivedIso
+      (C := Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E))
+      (D := Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicAlgClRingObj X ℓ)) F).app M_E
+  exact es ≪≫ (DerivedCategory.singleFunctor _ 0).mapIso e
+
+set_option backward.isDefEq.respectTransparency true in
+/-- **(Obj)** (blueprint `lem-sfb-constructible-cocone-obj`): every bounded constructible
+`ℚ̄_ℓ,X`-complex is isomorphic to the extension of
+scalars `T^X_{E,Ω} K_E` of a bounded constructible `E_X`-complex `K_E` for some finite
+subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`. See the module docstring. -/
+theorem constructibleCocone_essSurjObj : (constructibleCocone X ℓ).EssSurjObj := by
+  intro K
+  let commShift : ∀ E, ((ambientCocone X ℓ).Φ E).CommShift ℤ := ambientCommShift X ℓ
+  have triangulated : ∀ E, ((ambientCocone X ℓ).Φ E).IsTriangulated :=
+    ambientTriangulated X ℓ
+  let P : ObjectProperty (DerivedCategory
+      (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicAlgClRingObj X ℓ))) :=
+    fun Y ↦ ∃ E, ((ambientCocone X ℓ).Φ E).essImage Y
+  have : P.IsTriangulated :=
+    CategoryCocone.isTriangulated_exists_essImage _ (ambientHomSurj X ℓ)
+  have : P.IsClosedUnderIsomorphisms :=
+    ⟨fun e ⟨E, hE⟩ ↦ ⟨E, ((ambientCocone X ℓ).Φ E).essImage.prop_of_iso e hE⟩⟩
+  have hP : ∀ M, IsConstructibleModuleObject (padicAlgClRingObj X ℓ) M →
+      P ((DerivedCategory.singleFunctor _ 0).obj M) := single_model X ℓ
+  obtain ⟨E, K_E, ⟨e⟩⟩ := prop_of_boundedConstructibleModule P hP K.property
+  exact ⟨E, K_E, ⟨(boundedConstructible (padicAlgClRingObj X ℓ)).ι.preimageIso e⟩⟩
+
+end TwoColimit
+
+end AlgebraicGeometry.ProEtale
+
+end
+
+namespace AlgebraicGeometry.ProEtale
+
+open Scheme PadicAlgCl
+
+variable (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
+
 /-! ### `ℚ̄_ℓ` is a 2-colimit -/
 
 section TwoColimit
 
 variable [TopologicalSpace.NoetherianSpace X]
 
-/-- **(Obj)**: every bounded constructible `ℚ̄_ℓ,X`-complex is isomorphic to the extension of
-scalars `T^X_{E,Ω} K_E` of a bounded constructible `E_X`-complex `K_E` for some finite
-subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`. See the module docstring. -/
-theorem constructibleCocone_essSurjObj : (constructibleCocone X ℓ).EssSurjObj :=
-  sorry
-
-/-- **(Hom), surjectivity**: every morphism `T^X_{E,Ω} K_E ⟶ T^X_{F,Ω} L_F` between extensions of
-scalars of bounded constructible complexes is the extension of scalars of a morphism
-`T^X_{E,H} K_E ⟶ T^X_{F,H} L_F` for some finite subextension `H ⊇ E, F`. See the module
-docstring. -/
-theorem constructibleCocone_homSurj : (constructibleCocone X ℓ).HomSurj :=
-  sorry
-
+omit [TopologicalSpace.NoetherianSpace X] in
 /-- **(Hom), injectivity**: two morphisms of bounded constructible `H_X`-complexes with the same
 extension of scalars to `ℚ̄_ℓ,X` have the same extension of scalars to `H'_X` for some finite
 subextension `H' ⊇ H`. See the module docstring. -/
 theorem constructibleCocone_homInj : (constructibleCocone X ℓ).HomInj :=
-  sorry
+  fun k _ _ g g' h ↦ by
+    have hΦ {K L : PadicSubfieldConstructible X ℓ k} (g : K ⟶ L) :
+        (((constructibleCocone X ℓ).Φ k).map g).hom =
+        (derivedExtendScalarsToPadicAlgCl X ℓ k).map g.hom := rfl
+    have h' := congrArg InducedCategory.Hom.hom h
+    rw [hΦ, hΦ] at h'
+    rw [InducedCategory.hom_ext
+      ((derivedExtendScalarsToPadicAlgCl X ℓ k).map_injective h')]
+    exact ⟨k, le_rfl, rfl⟩
 
 /-- **`ℚ̄_ℓ` is a 2-colimit**: the bounded constructible derived category `D^b_cons(X, ℚ̄_ℓ)`
 of `ℚ̄_ℓ,X`-modules, with the extensions of scalars from the bounded constructible derived

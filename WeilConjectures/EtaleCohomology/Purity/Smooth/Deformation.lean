@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.DeformationToNormalCone
 public import WeilConjectures.ConstructibleSheaf.Monoidal
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLine
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpace
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpacePurity
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.CohomologicalSmoothness
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 public import WeilConjectures.SixFunctors.Etale.Derived.Concentrated
@@ -174,6 +174,7 @@ theorem nonempty_iso_leftDerivedUpperStar_sectionInvariant {X Y X' Y' : Scheme.{
       (rightDerivedUpperShriek Λ f').mapIso
         (leftDerivedUpperStarConstantComplexIso Λ g))⟩
 
+omit [HasTateTwist Λ] in
 /-- *Section invariants through an étale chart.* Let `g' : X ⟶ T` be compactifiable, `j : W ⟶ X`
 a quasi-compact open immersion and `c : W ⟶ 𝔸^d_T` a quasi-compact étale map over `T`, with
 `j ≫ g' = c ≫ π`, and let `σ : T ⟶ W` be a section carried by `c` to the zero section. If
