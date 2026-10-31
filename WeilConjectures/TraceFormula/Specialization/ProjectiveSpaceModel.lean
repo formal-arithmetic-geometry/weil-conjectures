@@ -8,6 +8,7 @@ module
 public import WeilConjectures.TraceFormula.Specialization.AffineSpaceSliceModel
 public import WeilConjectures.TraceFormula.Specialization.AffineSpaceSliceCartesian
 public import WeilConjectures.Compactification.AffineCharts
+public import WeilConjectures.SixFunctors.NearbyCycles.TraitChangeInduction.BasicCharts
 public import WeilConjectures.SixFunctors.NearbyCycles.TraitChangeInduction.Coordinates
 
 /-!
@@ -81,17 +82,6 @@ noncomputable def projectiveSpaceChartHom (n : ℕ) (a : Option (ULift.{u} (Fin 
     (AffineSpace.toRelativeProjectiveSpaceChart (trait k') a)
     (AffineSpace.toRelativeProjectiveSpaceChart_over (trait k') a)
 
-/-- A point whose image under an open immersion into a Jacobson scheme is not closed is not
-closed. -/
-lemma _root_.AlgebraicGeometry.Scheme.Hom.not_isClosed_singleton_of_isOpenImmersion
-    {Y X : Scheme.{u}} (f : Y ⟶ X) [IsOpenImmersion f] [JacobsonSpace X] {y : Y}
-    (hy : ¬ IsClosed ({f y} : Set X)) : ¬ IsClosed ({y} : Set Y) := by
-  intro h
-  refine hy (isClosed_singleton_of_isLocallyClosed_singleton ?_)
-  rw [← Set.image_singleton]
-  exact h.isLocallyClosed.image f.isOpenEmbedding.isInducing
-    f.isOpenEmbedding.isOpen_range.isLocallyClosed
-
 /-- **The charts and the coordinate generic slices reach the non-closed points**: every
 non-closed point of the special fibre `ℙⁿ⁺¹_{k'}` is the image of a point of the special fibre
 `𝔸ⁿ_K` of a coordinate generic slice under `eₐ,ₛ ∘ hᵢ,ₛ`, for some chart `a` and coordinate `i`. -/
@@ -128,7 +118,7 @@ theorem exists_projectiveSpaceChartSpecial_affineSpaceSliceSpecialFibre_eq (n : 
       (pullback.snd (projectiveSpaceStructure k' (n + 1)) (traitClosedPoint k'))
   have hy : ¬ IsClosed ({y} : Set _) := by
     rw [← hyx] at hx
-    exact (projectiveSpaceChartSpecial k' (n + 1) a).not_isClosed_singleton_of_isOpenImmersion hx
+    exact not_isClosed_singleton_of_isOpenImmersion (projectiveSpaceChartSpecial k' (n + 1) a) hx
   -- A coordinate sending `y` to the generic point of `𝔸¹_{k'}`.
   have hA := AffineSpace.isPullback_map (n := ULift.{u} (Fin (n + 1))) (traitClosedPoint k')
   obtain ⟨i, hi⟩ := AffineSpace.exists_isGenericPoint_reindex_of_not_isClosed hA.isoPullback.inv hy
