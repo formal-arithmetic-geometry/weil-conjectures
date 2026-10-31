@@ -196,7 +196,7 @@ def completedReductionFiniteTensor (n : ℕ)
     (m : ((proEtaleModuleInverseImage g
       (reductionCoefficient Y d n)).obj M).val.obj U) :
     ((completedReductionFiniteModules g d n).obj M).val.obj U :=
-  ((PresheafOfModules.sheafificationAdjunction
+  ((PresheafOfModules.sheafificationAdjunction.{u + 1}
     (𝟙 ((adicLisseForget X).obj (reductionCoefficient X d n)).obj)).unit.app
       (SheafOfModules.changeOfRingsPresheaf.{u, u + 1, u + 1} (completedFiniteCoefficientMap g d n)
         ((proEtaleModuleInverseImage g (reductionCoefficient Y d n)).obj M))).app U
@@ -331,7 +331,7 @@ variable (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
 private def ringTensor (M : pbcModules Y R) (U : X.ProEtᵒᵖ) (s : S.obj.obj U)
     (m : ((proEtaleModuleInverseImage g R).obj M).val.obj U) :
     ((proEtaleRingModulePullback g R S c).obj M).val.obj U :=
-  ((PresheafOfModules.sheafificationAdjunction
+  ((PresheafOfModules.sheafificationAdjunction.{u + 1}
     (𝟙 ((adicLisseForget X).obj S).obj)).unit.app
       (SheafOfModules.changeOfRingsPresheaf.{u, u + 1, u + 1} c.hom
         ((proEtaleModuleInverseImage g R).obj M))).app U
@@ -341,7 +341,7 @@ private theorem ringTensor_smul (M : pbcModules Y R) (U : X.ProEtᵒᵖ)
     (s : S.obj.obj U)
     (m : ((proEtaleModuleInverseImage g R).obj M).val.obj U) :
     ringTensor g R S c M U s m = s • ringTensor g R S c M U 1 m := by
-  let eta := ((PresheafOfModules.sheafificationAdjunction
+  let eta := ((PresheafOfModules.sheafificationAdjunction.{u + 1}
     (𝟙 ((adicLisseForget X).obj S).obj)).unit.app
       (SheafOfModules.changeOfRingsPresheaf.{u, u + 1, u + 1} c.hom
         ((proEtaleModuleInverseImage g R).obj M))).app U
@@ -382,7 +382,7 @@ private theorem ringTensor_restrict (M : pbcModules Y R) {U V : X.ProEtᵒᵖ}
     ((proEtaleRingModulePullback g R S c).obj M).val.map i
         (ringTensor g R S c M U 1 m) =
       ringTensor g R S c M V 1 (((proEtaleModuleInverseImage g R).obj M).val.map i m) := by
-  let eta := (PresheafOfModules.sheafificationAdjunction
+  let eta := (PresheafOfModules.sheafificationAdjunction.{u + 1}
     (𝟙 ((adicLisseForget X).obj S).obj)).unit.app
       (SheafOfModules.changeOfRingsPresheaf.{u, u + 1, u + 1} c.hom
         ((proEtaleModuleInverseImage g R).obj M))
@@ -1369,19 +1369,19 @@ private theorem ringTensor_map {M N : pbcModules Y R} (a : M ⟶ N)
       naturality := SheafOfModules.changeOfRingsHom_naturality c.hom _
         ((proEtaleModuleInverseImage g R).map a) }
   have hn := congrArg (fun t ↦ t.app U (b ⊗ₜ[_, (c.hom.hom.app U).hom] m))
-    ((PresheafOfModules.sheafificationAdjunction
+    ((PresheafOfModules.sheafificationAdjunction.{u + 1}
       (𝟙 ((adicLisseForget X).obj S).obj)).unit.naturality pre)
   change
-    ((PresheafOfModules.sheafificationAdjunction
+    ((PresheafOfModules.sheafificationAdjunction.{u + 1}
       (𝟙 ((adicLisseForget X).obj S).obj)).unit.app
         (SheafOfModules.changeOfRingsPresheaf.{u, u + 1, u + 1} c.hom
           ((proEtaleModuleInverseImage g R).obj N))).app U
             ((ModuleCat.extendScalars (c.hom.hom.app U).hom).map
               (((proEtaleModuleInverseImage g R).map a).val.app U)
               (b ⊗ₜ[_, (c.hom.hom.app U).hom] m)) =
-      ((PresheafOfModules.sheafification
+      ((PresheafOfModules.sheafification.{u + 1}
         (𝟙 ((adicLisseForget X).obj S).obj)).map pre).val.app U
-          (((PresheafOfModules.sheafificationAdjunction
+          (((PresheafOfModules.sheafificationAdjunction.{u + 1}
             (𝟙 ((adicLisseForget X).obj S).obj)).unit.app
               (SheafOfModules.changeOfRingsPresheaf.{u, u + 1, u + 1} c.hom
                 ((proEtaleModuleInverseImage g R).obj M))).app U

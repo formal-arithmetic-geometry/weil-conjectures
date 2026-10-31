@@ -297,7 +297,7 @@ private theorem relativeFinite_iff {X Y : Scheme.{u}} (g : Y ⟶ X)
     exact ⟨M, hM, (hm V M).mpr he⟩
 
 set_option backward.isDefEq.respectTransparency false in
-private theorem fixedFiniteModels_iff (Y : Scheme.{u}) (A : Type (u + 1)) [CommRing A]
+private theorem fixedFiniteModels_iff (Y : Scheme.{u}) (A : Type (u + 1)) [CommRing A] [Finite A]
     (F : Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} A)) :
     FixedFiniteModels Y A F ↔ ProEtale.IsFiniteLocallyConstant A F := by
   constructor
@@ -323,14 +323,18 @@ private theorem fixedFiniteModels_iff (Y : Scheme.{u}) (A : Type (u + 1)) [CommR
       let r : E.functor.obj (F.over (U i)) ≅
           (localizationRestriction (ModuleCat.{u + 1} A) (U i).hom (U i).prop).obj F :=
         ObjectProperty.isoMk _ (NatIso.ofComponents (fun _ ↦ Iso.refl _))
-      exact ⟨M, hM, ⟨(upperStarIsoLocalizationRestriction
+      exact ⟨M, Module.Finite.of_finite, ⟨(upperStarIsoLocalizationRestriction
         (ModuleCat.{u + 1} A) (U i).hom (U i).prop).app F ≪≫ r.symm ≪≫
           E.functor.mapIso e ≪≫
             ((ProEt.sliceEquiv Y (U i)).constantSheafSheafCongrIso
               ((ProEt.topology Y).over (U i)) (ProEt.topology (U i).left)
                 (ModuleCat.{u + 1} A) (Over.mkIdTerminal (X := U i))).app M⟩⟩
   · intro h
-    obtain ⟨ι, U, f, hf, he⟩ := ProEtale.finiteModels_over A F h
+    obtain ⟨ι, U, f, hf, he⟩ := ProEtale.finiteModels_over A F (by
+      obtain ⟨ι, W, g, hg, hW⟩ := h
+      exact ⟨ι, W, g, hg, fun i ↦ by
+        obtain ⟨M, hM, e⟩ := hW i
+        exact ⟨M, Module.finite_of_finite A, e⟩⟩)
     let S : Sieve (⊤_ Y.ProEt) :=
       { arrows := fun V _ ↦ ∃ M : ModuleCat.{u + 1} A, Finite M ∧
           Nonempty (F.over V ≅

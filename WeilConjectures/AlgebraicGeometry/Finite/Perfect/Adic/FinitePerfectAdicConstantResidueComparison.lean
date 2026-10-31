@@ -55,6 +55,10 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 Source: Stacks Project, Tags 093J and 093M.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
@@ -269,11 +273,12 @@ private theorem scalarResidueMap_isIso
       (SheafOfModules.toSheaf.{t + 1} (adicLisseRing X Q)) := by
     constructor
     intro K _
-    exact ((moduleSheaves_colimits_forgetful (adicLisseRing X Q)).2.2.2.2.2 K).2.1
+    exact ((moduleSheaves_colimits_forgetful.{_, _, _, t + 1} (adicLisseRing X Q)).2.2.2.2.2 K).2.1
   have : PreservesColimitsOfSize.{t + 1, t + 1} T := by
     constructor
     intro K _
-    exact ((moduleSheaves_colimits_forgetful ((adicLisseForget X).obj S)).2.2.2.2.2 K).2.1
+    exact ((moduleSheaves_colimits_forgetful.{_, _, _, t + 1}
+      ((adicLisseForget X).obj S)).2.2.2.2.2 K).2.1
   have : ReflectsColimitsOfSize.{t + 1, t + 1} T :=
     reflectsColimits_of_reflectsIsomorphisms
   have : PreservesColimitsOfSize.{t + 1, t + 1} (P ⋙ T) :=

@@ -143,9 +143,9 @@ theorem finitePerfectAdicOrdinaryScalarTarget_exact
   have := (finitePerfectAdicConstant_exact X A).2.2
   have := (finitePerfectAdicScalarModelExtension_exact X d).1
   have := (finitePerfectAdicScalarModelExtension_exact X d).2
-  have := (ringedOverFunctor_exactGeneral (completedAdicRing X d) W).1
-  have := (ringedOverFunctor_exactGeneral (completedAdicRing X d) W).2.1
-  have := (ringedOverFunctor_exactGeneral (completedAdicRing X d) W).2.2
+  have := (ringedOverFunctor_exactGeneral.{_, _, _, t + 1} (completedAdicRing X d) W).1
+  have := (ringedOverFunctor_exactGeneral.{_, _, _, t + 1} (completedAdicRing X d) W).2.1
+  have := (ringedOverFunctor_exactGeneral.{_, _, _, t + 1} (completedAdicRing X d) W).2.2
   unfold finitePerfectAdicOrdinaryScalarTarget finitePerfectAdicScalarModelOrdinary
   exact ⟨inferInstance, inferInstance, inferInstance⟩
 

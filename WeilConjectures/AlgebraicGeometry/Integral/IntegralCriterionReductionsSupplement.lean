@@ -244,6 +244,10 @@ sk-prop-integral-criterion/sk-prop-integral-criterion-reductions.md
 (blueprint: det-prop-integral-criterion-reductions).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 
 set_option autoImplicit false
@@ -331,6 +335,7 @@ private theorem integralPointMon_eq (l : ℕ) [Fact l.Prime]
     Mon.mk ((sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj R)
   exact congrArg F hs
 
+attribute [local instance] Sheaf.monoidalCategory in
 private theorem ringPresheafMon_eq
     {C : Type*} [Category C] (J : GrothendieckTopology C)
     [HasWeakSheafify J Ab.{u + 1}] [(J.W (A := Ab.{u + 1})).IsMonoidal]
@@ -564,12 +569,17 @@ private theorem reductionAbLocallyBijective (X : Scheme.{u}) :
     (Scheme.ProEt.topology X).WEqualsLocallyBijective Ab.{u + 1} :=
   WeilConjectures.integralCoefficientAbLocallyBijective.{u, u} X
 
+private theorem reductionRingSheafify (X : Scheme.{u}) :
+    HasSheafify (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
+  letI : EssentiallySmall.{u + 1} X.ProEt := essentiallySmallSelf.{0, u, u + 1} _
+  hasSheafifyEssentiallySmallSite _ _
+
 private theorem reductionSiteSmall (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.ProEt :=
   essentiallySmallSelf.{0, u, u + 1} _
 
 attribute [local instance] reductionSiteSmall
 
-attribute [local instance] reductionAbSheafify reductionAbLocallyBijective reductionRingSheafify
+attribute [local instance] reductionAbSheafify reductionAbLocallyBijective
 
 attribute [local instance] WeilConjectures.scalarReductionExtensionAdditive
   WeilConjectures.scalarReductionRestrictionLimits

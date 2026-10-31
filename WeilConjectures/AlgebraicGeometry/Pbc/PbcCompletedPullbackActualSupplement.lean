@@ -372,6 +372,8 @@ construction gives IsRightDerivedFunctor. -/
   dsimp [pbcActualDerivedPush, pbcActualPushUnit]
   infer_instance
 
+-- `moduleBinaryBiproducts` has a free universe and leaves a stuck universe constraint here.
+attribute [-instance] CategoryTheory.SignedDoubleHomCone.moduleBinaryBiproducts in
 /-- The resolving left derived pair remains universal after the indicated direct image.
 Source: Stacks Tag 099N (blueprint: lem-weil-pbc-ringed-topoi-module-adjunction).
 Proof: the K-flat resolving construction is pointwise and hence absolute.
