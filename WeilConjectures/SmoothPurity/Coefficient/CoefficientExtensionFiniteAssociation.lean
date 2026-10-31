@@ -177,7 +177,7 @@ theorem coefficientExtensionFiniteAssociation_exists :
       (((integralScalarQuotientSheafMap l E L ι W n).hom.app U) z * b) •
         integralScalarTensorSection l E L ι W n M U 1 x := by
     unfold integralScalarTensorSection
-    rw [tensorSection_smul (f := integralScalarRho l E L ι W n)]
+    rw [tensorSection_smul.{t + 1, t, max u (t + 1)} (f := integralScalarRho l E L ι W n)]
     exact (((integralScalarReductionIso l E L ι W n).inv.app M).val.app U).hom.map_smul _ _
   rw [hmul, ← hu']
   rw [scalarSection_eq_unit]

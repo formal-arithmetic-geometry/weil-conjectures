@@ -77,7 +77,6 @@ attribute [local irreducible] Functor.mapDerivedCategory completedReductionCoeff
 attribute [local irreducible] HasDerivedCategory.standard SheafOfModules.monoidalCategory
   Functor.leftAdjoint
 attribute [local irreducible] pbcComplexCounit pbcExtensionCounit
-  pbcDerivedExtensionExistence
 
 /-- Exact scalar restriction inherits the existing termwise derived shift comparison.
 Source: Stacks Tag 03DA, blueprint order 1429
@@ -1396,7 +1395,7 @@ private theorem finite_lisse_descent {X : Scheme.{u}} (A : Type (u + 1)) [CommRi
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 private theorem local_finite {X Y : Scheme.{u}} (g : X ⟶ Y)
-    (A : Type (u + 1)) [CommRing A]
+    (A : Type (u + 1)) [CommRing A] [Finite A]
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
     (c : adicLisseConstantRing Y A ⟶ R)
     (K : DerivedCategory (pbcModules Y R)) (q : ℤ)
