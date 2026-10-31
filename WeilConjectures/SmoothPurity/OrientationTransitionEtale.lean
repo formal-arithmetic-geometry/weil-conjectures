@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SmoothPurity.OrientationTransitionSquares
+public import WeilConjectures.SmoothPurity.OrientationTransitionTateSquare
 
 /-!
 # The finite orientations under the reduction of coefficients, on the étale site

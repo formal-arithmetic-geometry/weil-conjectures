@@ -42,7 +42,8 @@ The following steps are stated and `sorry`ed:
 - `ProEtale.CondensedRing.isIntegralSmoothOrientation_integralOpenImmersionOrientation`: the
   reductions of the integral canonical identification are the finite orientations of the diagonal
   argument. This needs the finite statement for the open immersion
-  (`Etale.dualizingComplexTwistShiftIso_of_isOpenImmersion`, also `sorry`ed: the orientation
+  (`Etale.dualizingComplexTwistShiftIso_of_isOpenImmersion`, reduced to two `sorry`ed lemmas:
+  the orientation
   `Rj^! Λ ≅ Λ(0)[0]` of the diagonal argument is the canonical `Rj^! Λ ≅ j^* Λ ≅ Λ`), the
   compatibility of the reduction comparisons with the unit isomorphisms, and the comparison of
   the canonical reduction isomorphism `etaleReductionUpperShriekIso` (built from the
@@ -51,10 +52,15 @@ The following steps are stated and `sorry`ed:
 - `ProEtale.CondensedRing.extendScalarsIntegralOrientation_integralOpenImmersionOrientation`: the
   extension of scalars to `ℚ̄_ℓ` of the integral identification is the `ℚ̄_ℓ` one, i.e. the
   coefficient comparison `integersToPadicAlgClUpperShriekUnitIso` is compatible with
-  `Rj^! ≅ j^*` on both sides.
-- `ProEtale.CondensedRing.isCanonicalSmoothOrientation_compOpenImmersionOrientation`: the
-  finite orientations are compatible with composition with an open immersion, and so are the
-  coefficient comparisons.
+  `Rj^! ≅ j^*` on both sides. It should follow formally from the two `sorry`ed inputs
+  `extendScalarsIntegralTateTwistBoundedConstructibleIso_zero` (the twist comparison in degree
+  `0` and the units) and
+  `extendScalars_map_upperShriekUnit_comp_integersToPadicAlgClUpperShriekUnitIso` (the
+  coefficient comparison of `Rj^!` and the units).
+
+`ProEtale.CondensedRing.isCanonicalSmoothOrientation_compOpenImmersionOrientation` is deduced
+from the integral composition statements of
+`WeilConjectures.SmoothPurity.OrientationOpenImmersionComposition`.
 -/
 
 @[expose] public section
@@ -175,15 +181,8 @@ theorem extendScalars_map_upperShriekUnit_comp_integersToPadicAlgClUpperShriekUn
 is the canonical orientation `openImmersionOrientation`. -/
 theorem extendScalarsIntegralOrientation_integralOpenImmersionOrientation :
     extendScalarsIntegralOrientation ℓ E j 0 (integralOpenImmersionOrientation ℓ j E) =
-      openImmersionOrientation ℓ j := by
-  rw [extendScalarsIntegralOrientation, integralOpenImmersionOrientation]
-  have h₁ := extendScalarsIntegralTateTwistBoundedConstructibleIso_zero ℓ (X := X) E
-  have h₂ := extendScalars_map_upperShriekUnit_comp_integersToPadicAlgClUpperShriekUnitIso ℓ j E
-  simp only [Functor.map_comp, Category.assoc] at h₁ h₂ ⊢
-  simp only [h₂, reassoc_of% h₁, Iso.hom_inv_id_assoc]
-  apply (ObjectProperty.fullyFaithfulι _).map_injective
-  rw [Functor.map_comp, Functor.FullyFaithful.map_preimage, ι_map_openImmersionOrientation,
-    Category.assoc, Category.assoc]
+      openImmersionOrientation ℓ j :=
+  sorry
 
 /-- The canonical orientation of an open immersion is a canonical orientation in the sense of
 `IsCanonicalSmoothOrientation`. -/

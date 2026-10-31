@@ -18,12 +18,18 @@ orientation `Rj^! Λ_X ≅ Λ_U(0)[0]` of the diagonal argument
 (`AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso`, blueprint
 `thm-pur-diagonal-dualizing-object`) is expected to be the canonical identification
 `Rj^! Λ_X ≅ j^* Λ_X ≅ Λ_U ≅ Λ_U(0)[0]`
-(`AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso_of_isOpenImmersion`, `sorry`ed): for `j`
+(`AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso_of_isOpenImmersion`): for `j`
 the diagonal `U ⟶ U ×_X U` is an isomorphism, the base change map of the dualizing complexes is
 the canonical one, and the fundamental class of an isomorphism in codimension `0` is `1`
 (the class restricting to the trivial frame classes). This is the finite step of
 `ProEtale.CondensedRing.isIntegralSmoothOrientation_integralOpenImmersionOrientation`
 (blueprint `det-sp-trace-basic`, part 3: for étale `f` the orientation is the identity).
+
+The statement is deduced from two `sorry`ed inputs:
+`AlgebraicGeometry.Etale.sectionInvariantTwistShiftIsoOfSection_of_isOpenImmersion` (the
+fundamental class of a section in codimension `0` is `1`) and
+`AlgebraicGeometry.Etale.sectionInvariantDiagonalIso_of_isOpenImmersion` (the base change of the
+dualizing complex of an open immersion is the canonical one).
 -/
 
 @[expose] public section
