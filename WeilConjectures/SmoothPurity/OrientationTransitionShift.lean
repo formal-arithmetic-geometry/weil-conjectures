@@ -14,7 +14,7 @@ public import WeilConjectures.SmoothPurity.OrientationTransitionReading
 The isomorphisms `β : Ψ(red_{n+1} K) ≅ red_n K` of the étale readings of the reductions
 modulo `ℓⁿ⁺¹` and `ℓⁿ` of a bounded constructible `𝒪_E`-complex `K`
 (`ProEtale.CondensedRing.etaleReductionExtendScalarsIsoApp`) commute with the shifts
-(`ProEtale.CondensedRing.etaleReductionExtendScalarsIsoApp_shift`), for the commutations of the
+(`ProEtale.CondensedRing.map_reductionShift_comp_etaleReductionExtendScalarsIsoApp`), for the commutations of the
 reductions with the shifts (`ProEtale.CondensedRing.boundedConstructibleIntegersModPowReductionShiftIso`),
 of the étale readings with the shifts and of `Ψ = - ⊗ᴸ_{𝒪_E ⧸ ℓⁿ⁺¹} 𝒪_E ⧸ ℓⁿ` with the shifts.
 -/
@@ -65,7 +65,9 @@ lemma finiteEtaleReadingExtendScalarsMap'_eq :
     finiteEtaleReadingExtendScalarsMap' ℓ E n X = finiteEtaleReadingExtendScalarsMap ℓ E n X := by
   ext M
   simp [finiteEtaleReadingExtendScalarsMap', finiteEtaleReadingExtendScalarsMap]
+  exact Category.id_comp _
 
+set_option synthInstance.maxHeartbeats 400000 in
 instance commShift_finiteEtaleReadingExtendScalarsMap' :
     NatTrans.CommShift (finiteEtaleReadingExtendScalarsMap' ℓ E n X) ℤ := by
   dsimp only [finiteEtaleReadingExtendScalarsMap']
@@ -98,14 +100,12 @@ lemma boundedConstructibleIntegersModPowReduction_commShiftIso_app
       boundedConstructibleIntegersModPowReductionShiftIso ℓ E m X K q := by
   apply Iso.ext
   apply (ObjectProperty.fullyFaithfulι _).map_injective
-  have h := NatTrans.shift_app_comm
-    (boundedConstructibleIntegersModPowReductionCompatibility X ℓ E m).hom q K
-  simp only [Functor.commShiftIso_comp_hom_app] at h
+  have h : ((boundedConstructibleIntegersModPowReduction X ℓ E m).commShiftIso q) =
+      Functor.CommShift.OfComp.iso (boundedConstructibleIntegersModPowReductionCompatibility X ℓ E m)
+        q := rfl
   rw [boundedConstructibleIntegersModPowReductionShiftIso, Functor.FullyFaithful.preimageIso_hom,
-    Functor.FullyFaithful.map_preimage]
-  simp only [Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Iso.symm_hom, Iso.app_inv]
-  rw [← reassoc_of% h]
-  simp
+    Functor.FullyFaithful.map_preimage, h, Iso.app_hom, Functor.CommShift.OfComp.map_iso_hom_app]
+  simp [Functor.commShiftIso_comp_hom_app]
 
 lemma boundedConstructibleIntegersModPowReduction_commShiftIso_hom_app
     (K : Dᵇc(X)⟦Profinite.padicIntegersRingObj ℓ E⟧) (q : ℤ) :
@@ -141,6 +141,7 @@ noncomputable def etaleReductionExtendScalarsMap' :
         R(ν_*(X.left)[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)])) ≫
     (Functor.associator _ _ _).hom
 
+set_option synthInstance.maxHeartbeats 400000 in
 instance commShift_etaleReductionExtendScalarsMap' :
     NatTrans.CommShift (etaleReductionExtendScalarsMap' ℓ E n X) ℤ := by
   dsimp only [etaleReductionExtendScalarsMap']
@@ -155,7 +156,7 @@ lemma etaleReductionExtendScalarsMap'_app (K : Dᵇc(X.left)⟦Profinite.padicIn
 `β : Ψ(red_{n+1} K) ≅ red_n K` commute with the shifts**: through the commutations of the
 reductions with the shifts (`boundedConstructibleIntegersModPowReductionShiftIso`), of the étale
 readings and of `Ψ` with the shifts, `β` at `K⟦q⟧` is `β` at `K` shifted by `q`. -/
-theorem etaleReductionExtendScalarsIsoApp_shift
+theorem map_reductionShift_comp_etaleReductionExtendScalarsIsoApp
     (K : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) (q : ℤ) :
     (integersModPowDerivedExtendScalars ℓ E n X.left).map
         ((finiteEtaleReading ℓ E (n + 1) X).map
@@ -174,7 +175,7 @@ theorem etaleReductionExtendScalarsIsoApp_shift
   have h := NatTrans.shift_app_comm (etaleReductionExtendScalarsMap' ℓ E n X) q K
   simp only [Functor.commShiftIso_comp_hom_app, boundedConstructibleIntegersModPowReduction_commShiftIso_hom_app,
     etaleReductionExtendScalarsMap'_app] at h
-  simpa [Functor.map_comp, Category.assoc] using h.symm
+  simpa [Functor.map_comp, Category.assoc] using h
 
 end Reading
 

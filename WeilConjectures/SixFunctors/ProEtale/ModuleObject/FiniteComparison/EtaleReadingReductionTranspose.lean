@@ -43,6 +43,7 @@ variable (X : Scheme.{u}) {T T' : Type} [TopologicalSpace T] [CommRing T] [IsTop
   [DiscreteTopology T'] [Finite T'] {ρ : T →+* T'} (hρ : Function.Surjective ρ)
   {a : ULift.{u + 1} T} (ha : RingHom.ker ρ.ulift = Ideal.span {a})
 
+set_option maxHeartbeats 800000 in
 /-- **The compatibility of the extensions of scalars with the finite-coefficient comparison, in
 restriction form**: the transpose under `Ψ ⊣ Res` of `Ψ(Φ N) ≅ Φ'((𝒪') ⊗ᴸ N)` is `Φ` of the
 unit `N ⟶ Res((𝒪') ⊗ᴸ N)` of the condensed extension of scalars, followed by the commutation of
@@ -78,8 +79,36 @@ lemma unit_app_comp_map_finiteCoefficientDerivedEquivalenceExtendScalarsIso_hom_
   simp only [Adjunction.comp_unit_app, Equivalence.toAdjunction_unit, Functor.comp_map,
     Category.assoc] at h'
   erw [h']
-  trace_state
-  sorry
+  have n1 := Φ.unitIso.hom.naturality ((Mod.derivedExtendMapDerivedCategoryAdjunction ψ).unit.app N ≫
+    (Mod.comap ψ).mapDerivedCategory.map
+      (Φ'.unitIso.hom.app ((Mod.extendScalars ψ).leftDerivedFunctor.obj N)))
+  have n2 := i.hom.naturality (Φ'.unitIso.hom.app ((Mod.extendScalars ψ).leftDerivedFunctor.obj N))
+  have t := Φ'.functor_unit_comp ((Mod.extendScalars ψ).leftDerivedFunctor.obj N)
+  dsimp only [Functor.comp_map, Functor.id_map, Functor.comp_obj, Functor.id_obj] at n1 n2
+  simp only [Iso.isoCompInverse_hom_app, Iso.trans_hom, NatTrans.comp_app,
+    Functor.associator_hom_app, Functor.associator_inv_app, Functor.isoWhiskerLeft_hom,
+    Functor.whiskerLeft_app, Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
+    Functor.leftUnitor_hom_app, Iso.symm_hom, Category.id_comp, Category.comp_id, Functor.map_comp,
+    Category.assoc]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp, CategoryTheory.Functor.map_id,
+    Category.comp_id]
+  have key : Φ.functor.map ((Mod.comap ψ).mapDerivedCategory.map
+      (Φ'.unitIso.hom.app ((Mod.extendScalars ψ).leftDerivedFunctor.obj N))) ≫
+        i.hom.app (Φ'.inverse.obj (Φ'.functor.obj ((Mod.extendScalars ψ).leftDerivedFunctor.obj N))) ≫
+        (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X) ρ.ulift).map
+          (Φ'.counitIso.hom.app (Φ'.functor.obj ((Mod.extendScalars ψ).leftDerivedFunctor.obj N))) =
+      i.hom.app ((Mod.extendScalars ψ).leftDerivedFunctor.obj N) := by
+    rw [reassoc_of% n2, ← Functor.map_comp]
+    erw [t, CategoryTheory.Functor.map_id, Category.comp_id]
+  rw [← Category.assoc, ← Category.assoc]
+  erw [n1]
+  rw [Category.assoc]
+  refine congrArg (Φ.unitIso.hom.app N ≫ ·) ?_
+  simp only [← Functor.map_comp]
+  congr 1
+  rw [Functor.map_comp, Category.assoc]
+  exact congrArg (Φ.functor.map ((Mod.derivedExtendMapDerivedCategoryAdjunction ψ).unit.app N) ≫ ·)
+    key
 
 end ExtendScalars
 end AlgebraicGeometry.ProEtale

@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Shift.IdIso
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReadingReduction
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReductionUpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReadingReductionShift
 
 /-!
@@ -44,9 +45,16 @@ shifts. -/
 instance commShift_finiteCoefficientDerivedEquivalence :
     (finiteCoefficientDerivedEquivalence X T).CommShift ℤ :=
   Equivalence.CommShift.mk' _ ℤ (by
-    dsimp only [finiteCoefficientDerivedEquivalence, Equivalence.mapDerivedCategory,
-      Equivalence.mk]
-    infer_instance)
+    have : NatTrans.CommShift (Equivalence.adjointifyη
+        ((Functor.mapDerivedCategoryIdIso _).symm ≪≫
+          Functor.mapDerivedCategoryNatIso (finiteCoefficientModEquivalence X T).unitIso ≪≫
+          Functor.mapDerivedCategoryCompIso _ _)
+        ((Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+          Functor.mapDerivedCategoryNatIso (finiteCoefficientModEquivalence X T).counitIso ≪≫
+          Functor.mapDerivedCategoryIdIso _)).hom ℤ := by
+      dsimp only [Equivalence.adjointifyη, Trans.trans]
+      infer_instance
+    exact this)
 
 end Equivalence
 

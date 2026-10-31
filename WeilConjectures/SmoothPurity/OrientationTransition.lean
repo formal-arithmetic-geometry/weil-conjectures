@@ -119,6 +119,84 @@ lemma map_reductionShift_comp_etaleReductionExtendScalarsIsoApp (n : ℕ)
         ((finiteEtaleReading ℓ E.1 n X).commShiftIso q).hom.app _ := by
   sorry
 
+/-- A formal pasting: if `F` carries `S₂`, `D₂` and `V₂` to `S₁`, `D₁` and `V₁` through `t`, `ω`
+and `w`, then it carries `S₂ ≫ D₂⁻¹ ≫ V₂⁻¹` to `S₁ ≫ D₁⁻¹ ≫ V₁⁻¹`. -/
+lemma Functor.map_comp_inv_comp_inv_comp_eq {C D : Type*} [Category C] [Category D] (F : C ⥤ D)
+    {a b c e : C} {b' c' e' p q : D} (S₂ : a ⟶ b) (D₂ : c ≅ b) (V₂ : e ≅ c)
+    (w : F.obj e ⟶ e') (p₁ : F.obj a ⟶ p) (p₂ : p ⟶ q) (S₁ : q ⟶ b') (D₁ : c' ≅ b')
+    (V₁ : e' ≅ c') (t : F.obj b ⟶ b') (ω : F.obj c ⟶ c') [IsIso ω]
+    (hT : F.map S₂ ≫ t = p₁ ≫ p₂ ≫ S₁) (hD : F.map D₂.hom ≫ t = ω ≫ D₁.hom)
+    (hW : F.map V₂.hom ≫ ω = w ≫ V₁.hom) :
+    F.map (S₂ ≫ D₂.inv ≫ V₂.inv) ≫ w = p₁ ≫ p₂ ≫ S₁ ≫ D₁.inv ≫ V₁.inv := by
+  have hD' : F.map D₂.inv = t ≫ D₁.inv ≫ inv ω := by
+    rw [← cancel_epi (F.map D₂.hom), ← F.map_comp, D₂.hom_inv_id, F.map_id, reassoc_of% hD,
+      D₁.hom_inv_id_assoc, IsIso.hom_inv_id]
+  have hW' : F.map V₂.inv ≫ w = ω ≫ V₁.inv := by
+    rw [← cancel_epi (F.map V₂.hom), ← F.map_comp_assoc, V₂.hom_inv_id, F.map_id,
+      Category.id_comp, reassoc_of% hW, V₁.hom_inv_id, Category.comp_id]
+  simp only [F.map_comp, Category.assoc, hW', hD', IsIso.inv_hom_id_assoc, reassoc_of% hT]
+
+/-- **The compatibility of the finite orientations with the reduction, from its three
+constituents.** Write `θₘ` for the canonical finite orientation
+(`etaleReductionSmoothOrientationIso`), built from the reduction of the Tate twist, the diagonal
+orientation `Dₘ : ω_f ≅ Λ_X(d)[2d]` (`Etale.dualizingComplexTwistShiftIso`) and the reduction of
+`Rf^! 𝒪` (`etaleReductionUpperShriekIso`, `etaleReductionUnitIso`). Given identifications
+`tsc : Ψ(Λ_X(d)[2d]) ≅ Λ'_X(d)[2d]` and `vω : Ψ ω_f ⟶ ω'_f` such that the three constituents
+are compatible with `β` (`hT`, `hW`) and `Ψ D_{n+2}` is `D_{n+1}` (`hD`), `Ψ θ_{n+2}` is
+`θ_{n+1}` through `β`. -/
+theorem map_etaleReductionSmoothOrientationIso_hom_comp_of (n : ℕ)
+    [HasCompactification f.left]
+    [HasInvertibleExponent (integersModPowCoeff.{u} ℓ E.1 (n + 1 + 1)) X.left]
+    [HasInvertibleExponent (integersModPowCoeff.{u} ℓ E.1 (n + 1 + 1)) Y.left]
+    [HasInvertibleExponent (integersModPowCoeff.{u} ℓ E.1 (n + 1)) X.left]
+    [HasInvertibleExponent (integersModPowCoeff.{u} ℓ E.1 (n + 1)) Y.left]
+    (tsc : (integersModPowDerivedExtendScalars ℓ E.1 (n + 1) X.left).obj
+        ((Etale.twistShift (integersModPowCoeff.{u} ℓ E.1 (n + 1 + 1)) X.left d).obj
+          (Etale.constantComplex _ X.left)) ≅
+      (Etale.twistShift (integersModPowCoeff.{u} ℓ E.1 (n + 1)) X.left d).obj
+          (Etale.constantComplex _ X.left))
+    (vω : (integersModPowDerivedExtendScalars ℓ E.1 (n + 1) X.left).obj
+        (Etale.dualizingComplex (integersModPowCoeff.{u} ℓ E.1 (n + 1 + 1)) f.left) ⟶
+      Etale.dualizingComplex (integersModPowCoeff.{u} ℓ E.1 (n + 1)) f.left) [IsIso vω]
+    (hT : (integersModPowDerivedExtendScalars ℓ E.1 (n + 1) X.left).map
+          ((shiftFunctor _ (2 * d : ℤ)).map
+            (etaleReductionIntegralTateTwistIso ℓ E.1 (n + 1 + 1) X d ≪≫ (λ_ _).symm).hom) ≫
+        tsc.hom =
+      ((integersModPowDerivedExtendScalars ℓ E.1 (n + 1) X.left).commShiftIso
+          (2 * d : ℤ)).hom.app _ ≫
+        (etaleReductionExtendScalarsIsoApp ℓ E.1 (n + 1) X _).hom⟦(2 * d : ℤ)⟧' ≫
+          (shiftFunctor _ (2 * d : ℤ)).map
+            (etaleReductionIntegralTateTwistIso ℓ E.1 (n + 1) X d ≪≫ (λ_ _).symm).hom)
+    (hD : (integersModPowDerivedExtendScalars ℓ E.1 (n + 1) X.left).map
+          (Etale.dualizingComplexTwistShiftIso (integersModPowCoeff.{u} ℓ E.1 (n + 1 + 1))
+            f.left d Y.hom).hom ≫ tsc.hom =
+      vω ≫ (Etale.dualizingComplexTwistShiftIso (integersModPowCoeff.{u} ℓ E.1 (n + 1))
+            f.left d Y.hom).hom)
+    (hW : (integersModPowDerivedExtendScalars ℓ E.1 (n + 1) X.left).map
+          ((etaleReductionUpperShriekIso ℓ E.1 (n + 1 + 1) f).app (𝟙_ _) ≪≫
+            (Etale.rightDerivedUpperShriek (integersModPowCoeff.{u} ℓ E.1 (n + 1 + 1))
+              f.left).mapIso (etaleReductionUnitIso ℓ E.1 (n + 1 + 1) Y)).hom ≫ vω =
+      (etaleReductionExtendScalarsIsoApp ℓ E.1 (n + 1) X _).hom ≫
+        ((etaleReductionUpperShriekIso ℓ E.1 (n + 1) f).app (𝟙_ _) ≪≫
+          (Etale.rightDerivedUpperShriek (integersModPowCoeff.{u} ℓ E.1 (n + 1))
+            f.left).mapIso (etaleReductionUnitIso ℓ E.1 (n + 1) Y)).hom) :
+    (integersModPowDerivedExtendScalars ℓ E.1 (n + 1) X.left).map
+        (etaleReductionSmoothOrientationIso ℓ E f d (n + 1 + 1)).hom ≫
+      (etaleReductionExtendScalarsIsoApp ℓ E.1 (n + 1) X _).hom =
+    ((integersModPowDerivedExtendScalars ℓ E.1 (n + 1) X.left).commShiftIso (2 * d : ℤ)).hom.app _ ≫
+      (etaleReductionExtendScalarsIsoApp ℓ E.1 (n + 1) X _).hom⟦(2 * d : ℤ)⟧' ≫
+        (etaleReductionSmoothOrientationIso ℓ E f d (n + 1)).hom := by
+  exact Functor.map_comp_inv_comp_inv_comp_eq _ _
+    (Etale.dualizingComplexTwistShiftIso (integersModPowCoeff.{u} ℓ E.1 (n + 1 + 1)) f.left d
+      Y.hom)
+    ((etaleReductionUpperShriekIso ℓ E.1 (n + 1 + 1) f).app (𝟙_ _) ≪≫
+      (Etale.rightDerivedUpperShriek (integersModPowCoeff.{u} ℓ E.1 (n + 1 + 1))
+        f.left).mapIso (etaleReductionUnitIso ℓ E.1 (n + 1 + 1) Y)) _ _ _ _
+    (Etale.dualizingComplexTwistShiftIso (integersModPowCoeff.{u} ℓ E.1 (n + 1)) f.left d Y.hom)
+    ((etaleReductionUpperShriekIso ℓ E.1 (n + 1) f).app (𝟙_ _) ≪≫
+      (Etale.rightDerivedUpperShriek (integersModPowCoeff.{u} ℓ E.1 (n + 1))
+        f.left).mapIso (etaleReductionUnitIso ℓ E.1 (n + 1) Y)) tsc.hom vω hT hD hW
+
 /-- Blueprint `det-sp-purity-coefficient-change`: change of coefficients in purity
 
 **The canonical finite orientations `θₙ : red_n(𝒪(d))[2d] ≅ red_n(Rf^! 𝒪)` are compatible with the

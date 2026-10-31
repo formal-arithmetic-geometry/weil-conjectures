@@ -6,6 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReductionKummer
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReductionSupports
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationCoefficientsFrame
 public import WeilConjectures.SixFunctors.Etale.Derived.LocalizationBaseChange
 
 /-!
