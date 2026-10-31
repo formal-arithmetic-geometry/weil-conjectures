@@ -159,9 +159,17 @@ lemma isTensorRetract_of_sum [Preadditive C] [MonoidalPreadditive C] {U V V' S�
   exact Finset.sum_congr rfl fun i _ ↦ he i
 
 omit [MonoidalCategory C] in
-/-- Conjugating an average by an isomorphism: if `n • (r ≫ α) = ∑ act i` and
-`act i ≫ m = m ≫ act' i`
-with `mi ≫ m = 𝟙`, then `n • ((mi ≫ r) ≫ α ≫ m) = ∑ act' i`. -/
+/-- **Conjugating an average along a split epimorphism**: let `mi : W' ⟶ W` be a section of
+`m : W ⟶ W'` and let the squares
+```
+  W ---m---> W'
+  |          |
+ act i     act' i
+  v          v
+  W ---m---> W'
+```
+commute. If `n • (r ≫ α) = ∑ act i` for maps `r : W ⟶ V`, `α : V ⟶ W`, then the conjugate
+`(mi ≫ r) ≫ α ≫ m` satisfies `n • ((mi ≫ r) ≫ α ≫ m) = ∑ act' i`. -/
 lemma nsmul_comp_comp_eq_sum [Preadditive C] {W W' V : C} (m : W ⟶ W') (mi : W' ⟶ W)
     (hmi : mi ≫ m = 𝟙 W') (r : W ⟶ V) (α : V ⟶ W) {ι : Type*} (s : Finset ι) (n : ℕ)
     (act : ι → (W ⟶ W)) (act' : ι → (W' ⟶ W')) (havg : n • (r ≫ α) = ∑ i ∈ s, act i)
@@ -172,8 +180,16 @@ lemma nsmul_comp_comp_eq_sum [Preadditive C] {W W' V : C} (m : W ⟶ W') (mi : W
   refine Finset.sum_congr rfl fun i _ ↦ ?_
   rw [hnat, reassoc_of% hmi]
 
-/-- Variant of `CategoryTheory.isTensorRetract_of_sum` where the right vertical map is a composite
-`a₀ ≫ m` with `m` invertible, and the averaging identity is given for `a₀`. -/
+/-- Variant of `CategoryTheory.isTensorRetract_of_sum` for a square
+```
+  U --δ--> S₁ ⊗ S₂ --u₁ ⊗ u₂--> T₁ ⊗ T₂
+  |                                |
+  x                                π
+  v                                v
+  V --a₀--> V₀ --------m---------> V'
+```
+whose bottom map is a composite `a₀ ≫ m` with `m` invertible: the averaging identity is given for
+the retraction `ρ₀` of `a₀` and endomorphisms `e₀ i` of `V₀` carried by `m` to the `e i`. -/
 lemma isTensorRetract_of_sum' [Preadditive C] [MonoidalPreadditive C]
     {U V V₀ V' S₁ S₂ T₁ T₂ : C} {x : U ⟶ V} {a₀ : V ⟶ V₀} {m : V₀ ⟶ V'} [IsIso m]
     {δ : U ⟶ S₁ ⊗ S₂} {u₁ : S₁ ⟶ T₁} {u₂ : S₂ ⟶ T₂} {π : T₁ ⊗ T₂ ⟶ V'}
