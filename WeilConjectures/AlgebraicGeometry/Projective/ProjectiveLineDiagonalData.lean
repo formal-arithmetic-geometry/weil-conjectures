@@ -1,0 +1,640 @@
+/-
+Copyright (c) 2026 Bin Wu. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Bin Wu
+-/
+module
+
+public import WeilConjectures.AlgebraicGeometry.Projective.ProjectiveLineTraceSupplement
+public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1DiagonalComponents
+public import WeilConjectures.AlgebraicGeometry.ProjectiveLineDiagonalMaps
+public import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinarySupportedCartierKummerSupplement
+public import WeilConjectures.AlgebraicGeometry.Etale.EtaleSinglePullbackComparisonsSupplement
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteCoefficientRecords
+public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Arrows
+public import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinaryFiniteP1KummerSupplement
+public import WeilConjectures.AlgebraicGeometry.Relative.RelativeKummerExchangeGeneratorsSupplement
+public import WeilConjectures.AlgebraicGeometry.EtaleFiniteTwistPullback
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.AlgebraicGeometry.Scheme
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateSheaf
+public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateTwist
+public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
+public import Mathlib.Algebra.Module.ZMod
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
+public import Mathlib.CategoryTheory.Sites.Monoidal
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import WeilConjectures.AlgebraicGeometry.EtaleConstantRingModuleEquivalence
+public import WeilConjectures.CategoryTheory.RingedSiteModules
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
+public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.SmoothPurity.Ringed.RingedTopoiDerivedTensorPullback
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.TensorShiftIso
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
+public import WeilConjectures.AlgebraicGeometry.EtaleFiniteTwistPullbackBase
+public import WeilConjectures.ConstructibleSheaf.Defs
+public import WeilConjectures.EtaleCohomology.TateTwist.Sheaf
+public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateLinePullback
+public import WeilConjectures.EtaleCohomology.TateTwist.RootsOfUnityPullback
+public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateTensorFamily
+public import WeilConjectures.CategoryTheory.NormalizedSignedTensorPowers
+public import WeilConjectures.CategoryTheory.Monoidal.IntTensorFamily
+public import Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import WeilConjectures.CategoryTheory.IntTensorFamilyIso
+public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
+public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateLocalLine
+public import WeilConjectures.AlgebraicGeometry.Sites.SmallEtaleRepresentablePresheafSheaf
+public import WeilConjectures.ConstructibleSheaf.Pullback
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.LocallyTrivialInverse
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.MonoidalComp
+public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Unit
+public import WeilConjectures.AlgebraicGeometry.EtaleFiniteTwistPullbackRest
+public import Mathlib.CategoryTheory.Abelian.Refinements
+public import Mathlib.Algebra.Homology.ShortComplex.Exact
+public import WeilConjectures.AlgebraicGeometry.ProperProjectionFormula
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
+public import WeilConjectures.CategoryTheory.Monoidal.EtaleDerivedTensorSymmetrySupplement
+public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.Topology.Defs.Filter
+public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
+public import WeilConjectures.AlgebraicGeometry.ExactUnboundedExchange
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
+public import WeilConjectures.SixFunctors.BaseChange.Square
+public import WeilConjectures.SixFunctors.Etale.Derived.Shift
+public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive
+public import WeilConjectures.AlgebraicGeometry.ProjectiveLineDiagonalAlphaUnits
+public import WeilConjectures.AlgebraicGeometry.FiniteP1DiagonalPicard
+public import WeilConjectures.AlgebraicGeometry.P1DiagonalLocalIdeal
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfInvertible
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LinearCombination
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Canonical
+public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
+public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
+public import WeilConjectures.AlgebraicGeometry.Modules.FieldBaseChange
+public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteChernPullback
+public import WeilConjectures.AlgebraicGeometry.FiniteP1ChernMapBaseChange
+public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteClassArbitraryBase
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerBoundaryComparison
+public import WeilConjectures.AlgebraicGeometry.EtaleModuleInjectiveForgetAcyclic
+public import WeilConjectures.CategoryTheory.Sites.SheafCohomologyRightDerived
+public import WeilConjectures.AlgebraicGeometry.Sites.GmPicardPullback
+public import WeilConjectures.CategoryTheory.Abelian.Ext.MapExactFunctorConj
+public import WeilConjectures.AlgebraicGeometry.SupportedDerivedUnitForget
+public import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinarySupportedKummerSystemSupplement
+public import WeilConjectures.ConstructibleSheaf.FinitePushforward.ConstantUnit
+public import WeilConjectures.CategoryTheory.DerivedSingleUnitExact
+public import WeilConjectures.CategoryTheory.DerivedSingleUnit
+public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
+public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteFirstChern
+public import WeilConjectures.AlgebraicGeometry.OrdinarySupportedChernNormalization
+public import WeilConjectures.AlgebraicGeometry.SupportedKummerChernRealization
+public import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinarySupportedKummerBoundarySupplement
+public import WeilConjectures.CategoryTheory.Sites.Torsor
+public import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
+public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteConstantUnitComp
+public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteUnitPullbackHom
+public import WeilConjectures.ConstructibleSheaf.UpperStarConstantSheafComp
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarAdjunctionCompat
+public import WeilConjectures.SixFunctors.Etale.Derived.LeftDerivedUpperStarSingle
+public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
+import WeilConjectures.CategoryTheory.RingedToposDerivedPushforwardComposition
+import WeilConjectures.CategoryTheory.Ringed.RingedToposMorphismSupplement
+import WeilConjectures.CategoryTheory.RingedSiteModules
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+import Mathlib.Algebra.Homology.DerivedCategory.Basic
+import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
+import Mathlib.CategoryTheory.Functor.Derived.RightDerived
+import WeilConjectures.SmoothPurity.Ringed.RingedSiteKInjectiveResolutionsSupplement
+import WeilConjectures.Mathlib.Algebra.Homology.GrothendieckAbelian
+import Mathlib.CategoryTheory.Localization.DerivabilityStructure.Derives
+import WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
+import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
+import Mathlib.Algebra.Homology.DerivedCategory.Fractions
+import WeilConjectures.Algebra.Homology.KFlatResolution
+import WeilConjectures.CategoryTheory.RingedToposKFlatPullback
+import WeilConjectures.CategoryTheory.AlgebraicInverseImage
+import Mathlib.Algebra.Category.ModuleCat.Sheaf
+import Mathlib.Algebra.Category.Ring.Limits
+import Mathlib.Algebra.Category.Grp.Limits
+import Mathlib.CategoryTheory.Sites.Whiskering
+import Mathlib.CategoryTheory.Sites.Equivalence
+import WeilConjectures.CategoryTheory.GeometricModuleConstruction
+import WeilConjectures.CategoryTheory.RingedToposRingData
+import WeilConjectures.CategoryTheory.AdjunctionRingOperations
+import Mathlib.CategoryTheory.Monoidal.Cartesian.Basic
+import Mathlib.CategoryTheory.Adjunction.Basic
+import Mathlib.CategoryTheory.Sites.CartesianMonoidal
+import Mathlib.CategoryTheory.Monoidal.CommGrp_
+import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod
+import WeilConjectures.CategoryTheory.GeometricModuleTransport
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
+import Mathlib.CategoryTheory.Adjunction.Limits
+import WeilConjectures.CategoryTheory.GeometricRingTransport
+import Mathlib.CategoryTheory.Sites.Limits
+import WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresRingCore
+import WeilConjectures.CategoryTheory.SheafRingObjectReconstruction
+import WeilConjectures.CategoryTheory.Adjunction.FiniteProductRingFunctor
+import WeilConjectures.Algebra.Homology.Module.ModulePullbackPushforwardAdjunctionSupplement
+import WeilConjectures.AlgebraicGeometry.KFlatRingedToposPullback
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
+import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
+import Mathlib.Algebra.Category.Grp.FilteredColimits
+import Mathlib.Algebra.Homology.BifunctorShift
+import Mathlib.Algebra.Homology.QuasiIso
+import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
+import Mathlib.CategoryTheory.Limits.EssentiallySmall
+import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+import Mathlib.CategoryTheory.Limits.ExactFunctor
+import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
+import Mathlib.Algebra.Homology.HomologicalComplex
+import Mathlib.Algebra.Homology.Additive
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RingedToposFlatPullback
+import WeilConjectures.CategoryTheory.AlgebraicInverseImageOfUniverses
+import Mathlib.CategoryTheory.Types.Basic
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatAlgebraicInverseImageOfUniverses
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatEquationalCriterionOfUniverses
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatLocalRelationsOfUniverses
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUniverses
+import WeilConjectures.CategoryTheory.Sites.WeakSheafifyAddCommGrpLeftExact
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Submodule
+import Mathlib.LinearAlgebra.TensorProduct.Vanishing
+import Mathlib.RingTheory.TensorProduct.DirectLimitFG
+import Mathlib.LinearAlgebra.TensorProduct.Finiteness
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
+import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
+import WeilConjectures.CategoryTheory.Sites.InverseImageLocalFamilies
+import Mathlib.CategoryTheory.Sites.Sheaf
+import Mathlib.CategoryTheory.Sites.LocallyBijective
+import Mathlib.CategoryTheory.Limits.Types.Pullbacks
+import Mathlib.CategoryTheory.Functor.EpiMono
+import Mathlib.CategoryTheory.Limits.Types.Equalizers
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Equalizers
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ScalarTensorComparisonOfUniverses
+import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
+import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
+import Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
+import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+import WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
+import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
+import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+import WeilConjectures.Algebra.Homology.RingedToposAdaptedFlatResolution
+import WeilConjectures.Algebra.Homology.RingedToposPullbackFilteredColimits
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Mathlib.CategoryTheory.Sites.PreservesSheafification
+import Mathlib.CategoryTheory.Limits.Preserves.Limits
+import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
+import Mathlib.RingTheory.Flat.CategoryTheory
+import Mathlib.CategoryTheory.ObjectProperty.ColimitsOfShape
+import Mathlib.Algebra.Homology.Embedding.CochainComplex
+import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
+import Mathlib.Algebra.Category.Grp.AB
+import WeilConjectures.Algebra.Homology.RingedToposAcyclicKFlatPullback
+import WeilConjectures.Algebra.Homology.BoundedFlatIndependentCoefficients
+import Mathlib.CategoryTheory.Monoidal.Preadditive
+import WeilConjectures.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Mathlib.CategoryTheory.Monoidal.Closed.Basic
+import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
+import WeilConjectures.AlgebraicGeometry.RingedTopoiDerivedPullback
+import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
+import WeilConjectures.SmoothPurity.Supporting.ChangeOfRingsKFlatQuasiIsoSupplement
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import Mathlib.CategoryTheory.Sites.EpiMono
+import Mathlib.CategoryTheory.Adjunction.Additive
+import Mathlib.Algebra.Category.Grp.EpiMono
+import Mathlib.Algebra.Category.Grp.Abelian
+import Mathlib.CategoryTheory.Sites.Abelian
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
+import WeilConjectures.AlgebraicGeometry.Geometric.GeometricFiberFinite
+import WeilConjectures.AlgebraicGeometry.ExactUnboundedExchange
+import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
+import WeilConjectures.SixFunctors.BaseChange.Square
+import WeilConjectures.AlgebraicGeometry.EffectiveCartier
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
+import Mathlib.AlgebraicGeometry.Morphisms.Proper
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Adjunction
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Data
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Arrows
+import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinaryFiniteP1KummerSupplement
+import WeilConjectures.AlgebraicGeometry.Relative.RelativeKummerExchangeGeneratorsSupplement
+import WeilConjectures.AlgebraicGeometry.Etale.EtaleSinglePullbackComparisonsSupplement
+import WeilConjectures.AlgebraicGeometry.EtaleFiniteTwistPullback
+import Mathlib.AlgebraicGeometry.Sites.Etale
+import Mathlib.AlgebraicGeometry.Scheme
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateSheaf
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateTwist
+import WeilConjectures.AlgebraicGeometry.Sites.Kummer
+import Mathlib.Algebra.Module.ZMod
+import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
+import Mathlib.CategoryTheory.Sites.Monoidal
+import WeilConjectures.AlgebraicGeometry.EtaleConstantRingModuleEquivalence
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
+import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+import WeilConjectures.AlgebraicGeometry.DerivedCategories
+import WeilConjectures.SmoothPurity.Ringed.RingedTopoiDerivedTensorPullback
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.TensorShiftIso
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
+import WeilConjectures.AlgebraicGeometry.EtaleFiniteTwistPullbackBase
+import WeilConjectures.ConstructibleSheaf.Defs
+import WeilConjectures.EtaleCohomology.TateTwist.Sheaf
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateLinePullback
+import WeilConjectures.EtaleCohomology.TateTwist.RootsOfUnityPullback
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateTensorFamily
+import WeilConjectures.CategoryTheory.NormalizedSignedTensorPowers
+import WeilConjectures.CategoryTheory.Monoidal.IntTensorFamily
+import WeilConjectures.CategoryTheory.IntTensorFamilyIso
+import Mathlib.CategoryTheory.Monoidal.Braided.Basic
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateLocalLine
+import WeilConjectures.AlgebraicGeometry.Sites.SmallEtaleRepresentablePresheafSheaf
+import WeilConjectures.ConstructibleSheaf.Pullback
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.LocallyTrivialInverse
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.MonoidalComp
+import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Unit
+import WeilConjectures.AlgebraicGeometry.EtaleFiniteTwistPullbackRest
+import Mathlib.CategoryTheory.Abelian.Refinements
+import Mathlib.Algebra.Homology.ShortComplex.Exact
+import WeilConjectures.AlgebraicGeometry.ProperProjectionFormula
+import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
+import WeilConjectures.CategoryTheory.Monoidal.EtaleDerivedTensorSymmetrySupplement
+import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
+import Mathlib.AlgebraicGeometry.Noetherian
+import Mathlib.Topology.Defs.Filter
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.SixFunctors.Etale.Derived.Tensor
+import WeilConjectures.SixFunctors.Etale.Derived.Shift
+import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1KummerMaps
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1ExchangeIso
+import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
+import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteAdjunctScalarFaithfulness
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteClassScalarFaithfulness
+import Mathlib.Algebra.Homology.DerivedCategory.Ext.Linear
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Linear
+import WeilConjectures.AlgebraicGeometry.FiniteP1TwistedUnitBaseChange
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteTwistTransportUniqueness
+import Mathlib.CategoryTheory.Adjunction.Whiskering
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.SingleFunctor
+import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
+import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarAdjunctionCompat
+import WeilConjectures.AlgebraicGeometry.FiniteP1ChernAdjunctBaseChange
+import WeilConjectures.AlgebraicGeometry.FiniteP1ChernMapBaseChange
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteClassArbitraryBase
+import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerBoundaryComparison
+import WeilConjectures.AlgebraicGeometry.EtaleModuleInjectiveForgetAcyclic
+import WeilConjectures.CategoryTheory.Sites.SheafCohomologyRightDerived
+import WeilConjectures.AlgebraicGeometry.Sites.GmPicardPullback
+import WeilConjectures.CategoryTheory.Abelian.Ext.MapExactFunctorConj
+import WeilConjectures.AlgebraicGeometry.SupportedDerivedUnitForget
+import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinarySupportedKummerSystemSupplement
+import WeilConjectures.ConstructibleSheaf.FinitePushforward.ConstantUnit
+import WeilConjectures.CategoryTheory.DerivedSingleUnitExact
+import WeilConjectures.CategoryTheory.DerivedSingleUnit
+import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
+import WeilConjectures.AlgebraicGeometry.FiniteP1ChernAdjunctMate
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteUnitPullbackComp
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteUnitPullbackHom
+import WeilConjectures.SixFunctors.Etale.Derived.LeftDerivedUpperStarSingle
+import WeilConjectures.ConstructibleSheaf.UpperStarConstantSheafComp
+import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
+import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerAffineLine
+import WeilConjectures.AlgebraicGeometry.ProjectiveLineGenusZero
+import WeilConjectures.AlgebraicGeometry.Curve
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+import WeilConjectures.Topology.RingedSpaceModuleCohomology
+import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveLine
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineSmooth
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Line
+import WeilConjectures.Algebra.Homology.DerivedCategory.SingleHomology
+import WeilConjectures.AlgebraicGeometry.Curve.RootsOfUnityTop
+import WeilConjectures.AlgebraicGeometry.Curve.Estimate
+import WeilConjectures.AlgebraicGeometry.ProjectiveLineTateCoefficientGenerator
+import WeilConjectures.AlgebraicGeometry.ProjectiveLineConstantCoefficientGenerator
+import WeilConjectures.AlgebraicGeometry.Curve.AffineLineKummer
+import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerClassGenerator
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteGeometricPointHomology
+import WeilConjectures.SixFunctors.Etale.Derived.AlgClosedField
+import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.KunnethMap
+import WeilConjectures.CategoryTheory.DerivedCategory.HomSingleProjective
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteFibreHomologyComparison
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1FibreHomologyCard
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1DiagonalUnit
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteTraceCounit
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1DiagonalTriangles
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1DiagonalIntegral
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1DiagonalComponents
+import WeilConjectures.AlgebraicGeometry.ProjectiveLineDiagonalMaps
+import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinarySupportedCartierKummerSupplement
+import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteCoefficientRecords
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive
+import WeilConjectures.AlgebraicGeometry.ProjectiveLineDiagonalAlphaUnits
+import WeilConjectures.AlgebraicGeometry.FiniteP1DiagonalPicard
+import WeilConjectures.AlgebraicGeometry.P1DiagonalLocalIdeal
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfInvertible
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LinearCombination
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Canonical
+import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
+import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
+import WeilConjectures.AlgebraicGeometry.Modules.FieldBaseChange
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteChernPullback
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteFirstChern
+import WeilConjectures.AlgebraicGeometry.OrdinarySupportedChernNormalization
+import WeilConjectures.AlgebraicGeometry.SupportedKummerChernRealization
+import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinarySupportedKummerBoundarySupplement
+import WeilConjectures.CategoryTheory.Sites.Torsor
+import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteConstantUnitComp
+import WeilConjectures.AlgebraicGeometry.ProjectiveLineDiagonalCartier
+import Mathlib.AlgebraicGeometry.Pullbacks
+import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.EffectiveCartier
+import WeilConjectures.AlgebraicGeometry.Morphisms.RegularImmersion
+import WeilConjectures.AlgebraicGeometry.EtaleSectionUnitNormalization
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
+import WeilConjectures.AlgebraicGeometry.EtaleDiagonalSectionCoherence
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
+import WeilConjectures.CategoryTheory.SectionConjugateComparison
+import WeilConjectures.CategoryTheory.Adjunction.SmoothPurity.SectionProjectionUnitSupplement
+import Mathlib.Logic.Small.Defs
+import WeilConjectures.AlgebraicGeometry.EtaleTensorTraceBaseChange
+import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionBaseChange
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Braided
+import WeilConjectures.AlgebraicGeometry.EtaleCanonicalTensorComparison
+import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategorySymmetric
+import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Reduction
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionMonoidal
+import WeilConjectures.AlgebraicGeometry.EtaleDiagonalCoefficientTriangles
+import WeilConjectures.AlgebraicGeometry.Etale.EtaleSupportedDiagonalUnitSupplement
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteSingleUnitNormalization
+import WeilConjectures.AlgebraicGeometry.EtaleDiagonalTriangles
+import WeilConjectures.AlgebraicGeometry.EtaleProperSectionContraction
+import WeilConjectures.AlgebraicGeometry.EtaleOrderedProjectionComparison
+import WeilConjectures.CategoryTheory.AdjunctionUnitTransport
+import WeilConjectures.AlgebraicGeometry.EtaleDiagonalSectionIntegral
+import WeilConjectures.AlgebraicGeometry.EtaleCoordinateTraceContractions
+import WeilConjectures.AlgebraicGeometry.EtaleCoordinateTraceData
+import WeilConjectures.ConstructibleSheaf.LisseRankOne
+import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
+import WeilConjectures.AlgebraicGeometry.Base.BaseChangeMapAbelianAndSets
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
+import Mathlib.GroupTheory.Torsion
+import WeilConjectures.AlgebraicGeometry.ProperUnboundedBaseChangeModN
+import WeilConjectures.AlgebraicGeometry.TorsionAssembly
+import WeilConjectures.SixFunctors.BaseChange.Derived
+import WeilConjectures.AlgebraicGeometry.TorsionEtaleSheaf
+import WeilConjectures.AlgebraicGeometry.TorsionSheafCharacterizations
+import WeilConjectures.SixFunctors.BaseChange.DerivedForget
+import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.AbTorsionSheaf
+import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine
+import WeilConjectures.SixFunctors.Etale.Derived.DirectImageVanishingTorsion
+import WeilConjectures.SixFunctors.BaseChange.DerivedUnboundedFac
+import WeilConjectures.AlgebraicGeometry.ProperUnboundedBaseChangeForgetful
+import Mathlib.Data.ZMod.Basic
+import WeilConjectures.AlgebraicGeometry.UnboundedCoefficientForgetfulAux
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.DerivedBaseChange
+import WeilConjectures.AlgebraicGeometry.UnboundedAbelianExchangeComparison
+import WeilConjectures.AlgebraicGeometry.ChosenCartesianSquare
+import WeilConjectures.Algebra.Homology.Curve.KInjectiveResolutions
+import WeilConjectures.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
+import WeilConjectures.AlgebraicGeometry.ModuleAbelianKInjectiveDirectImageAcyclic
+import WeilConjectures.AlgebraicGeometry.EtaleModuleAbelianRingedPresentation
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+import Mathlib.CategoryTheory.Category.ULift
+import WeilConjectures.AlgebraicGeometry.ModuleSheafConstantRingEquivalence
+import WeilConjectures.CategoryTheory.ContinuousRingedToposModuleDirectImage
+import WeilConjectures.CategoryTheory.ProperBaseChange.RestrictionRingedToposModuleDirectImageSupplement
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+import WeilConjectures.AlgebraicGeometry.ModuleAbelianUnderivedExchange
+import WeilConjectures.AlgebraicGeometry.ProperTorsionProjectionFormula
+import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
+import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ProperProjectionFormula
+import WeilConjectures.AlgebraicGeometry.EtaleCoordinateKunnethFactorization
+import WeilConjectures.AlgebraicGeometry.EtaleCoordinateKunnethFactorizationTranspose
+import WeilConjectures.AlgebraicGeometry.EtaleCoordinateKunnethRouteEquality
+import WeilConjectures.AlgebraicGeometry.EtaleCoordinateKunnethLeftRoute
+import WeilConjectures.AlgebraicGeometry.EtaleCoordinateKunnethLeftRoutePrecomp
+import WeilConjectures.AlgebraicGeometry.EtaleKunnethSymmetricFactorization
+import WeilConjectures.AlgebraicGeometry.ProperSupportedKunnethRoute
+import WeilConjectures.EtaleCohomology.Purity.Smooth.TraceDiagonal.Basic
+import WeilConjectures.AlgebraicGeometry.EtaleKunnethTensorSymmetry
+import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ProperFactor.KunnethMapAgrees
+import WeilConjectures.AlgebraicGeometry.EtaleCoordinateKunnethRightRoute
+import WeilConjectures.AlgebraicGeometry.EtaleProjectionTraceNormalization
+import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionUnit
+import WeilConjectures.AlgebraicGeometry.EtaleEvenLineSelfSymmetry
+import WeilConjectures.AlgebraicGeometry.EtaleEvenShiftCanonicalSelfSymmetry
+import Mathlib.Tactic.SuppressCompilation
+import WeilConjectures.AlgebraicGeometry.EtaleLineFlatBraiding
+import WeilConjectures.ConstructibleSheaf.InternalHom
+import WeilConjectures.AlgebraicGeometry.EtaleSecondCoordinateContraction
+import WeilConjectures.AlgebraicGeometry.EtaleTraceBaseChangeEvaluation
+import WeilConjectures.AlgebraicGeometry.EtaleProjectionTraceTensorInterchange
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteCounitCoefficient
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteTraceEvaluationNormalization
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteDiagonalTraceCoordinates
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteDiagonalChartExchange
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteDiagonalChartExchangeAux
+import WeilConjectures.AlgebraicGeometry.EtaleChartExchangePasting
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompCoherence
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteTwistComposition
+import WeilConjectures.CategoryTheory.ShiftedCompositeComparison
+import Mathlib.CategoryTheory.Shift.CommShift
+import Mathlib.Algebra.Ring.Int.Defs
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChangeShift
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteUnitPullbackNormalization
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteConstantUnitSquare
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteUnitPullbackComparison
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteConstantPullbackHom
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteTraceBaseChange
+import WeilConjectures.AlgebraicGeometry.EtaleExactExchangeComparison
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteTraceScalarSquare
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteTraceCounitComparisons
+import WeilConjectures.AlgebraicGeometry.FiniteTwistDerivedEvaluationPullback
+import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinaryFiniteP1DecompositionMapsSupplement
+import WeilConjectures.AlgebraicGeometry.FiniteTwistShiftedPairingPullback
+import WeilConjectures.AlgebraicGeometry.EtaleSingleFunctorMonoidalCompatibility
+import WeilConjectures.SixFunctors.Etale.Derived.Invertible
+import WeilConjectures.AlgebraicGeometry.Etale.EtaleFlatSingleTensorCompatibilityDataSupplement
+import WeilConjectures.AlgebraicGeometry.EtaleSingleTensoratorNaturality
+import WeilConjectures.AlgebraicGeometry.EtaleSingleTensoratorAssociativity
+import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Functor
+import WeilConjectures.AlgebraicGeometry.EtaleSingleCochainMonoidal
+import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfSize
+import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
+import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
+import WeilConjectures.AlgebraicGeometry.EtaleSingleTensoratorSymmetry
+import WeilConjectures.AlgebraicGeometry.EtaleSingleTensoratorFactorization
+import WeilConjectures.AlgebraicGeometry.EtaleSingleTensoratorPullback
+import WeilConjectures.AlgebraicGeometry.EtaleSingleHomotopyTensorPullback
+import WeilConjectures.CategoryTheory.Monoidal.Instances.HomotopyCategory
+import WeilConjectures.Algebra.Homology.HomotopyCategory.MapMonoidal
+import WeilConjectures.AlgebraicGeometry.EtaleSinglePullbackCounit
+import WeilConjectures.AlgebraicGeometry.EtaleSingleTensoratorHomotopyFactorization
+import WeilConjectures.CategoryTheory.FlatPairingAssociativityAssembly
+import Mathlib.CategoryTheory.Monoidal.Functor
+import WeilConjectures.CategoryTheory.FlatPairingPullbackAssembly
+import WeilConjectures.AlgebraicGeometry.DerivedPairingOppositeShiftsPullback
+import WeilConjectures.AlgebraicGeometry.FiniteTwistDegreeZeroEvaluationPullback
+import WeilConjectures.AlgebraicGeometry.FiniteTwistDegreeZeroEvaluationPairing
+import WeilConjectures.AlgebraicGeometry.FiniteTwistFlatEvaluationPullback
+import WeilConjectures.AlgebraicGeometry.FlatSinglePairingSymmetricPullback
+import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorSymmetry
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteDerivedRightUnitPullback
+import WeilConjectures.AlgebraicGeometry.FiniteTwistShiftedFactorComparisons
+import WeilConjectures.AlgebraicGeometry.FiniteShiftedLineSquare
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Basic
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteDiagonalFirstCoordinateExchange
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteDiagonalSecondCoordinateExchange
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1DiagonalBaseChange
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteClassComparison
+import Mathlib.AlgebraicGeometry.Morphisms.Finite
+import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
+import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Standard.ProjectiveSpaceStandardCharts
+import WeilConjectures.SixFunctors.Finite.Exact
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import Mathlib.CategoryTheory.Sites.Point.Basic
+import Mathlib.CategoryTheory.Sites.Point.Skyscraper
+import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+
+/-!
+# Canonical maps for the projective-line diagonal
+
+Source: blueprint sec-smooth-purity/sk-prop-sf-cbc/lem-amb-p1-diagonal-integrals.md
+(blueprint: lem-amb-p1-diagonal-integrals).
+
+The Boolean indices false and true designate the first and second projection.
+The chart and trace below use canonical pullback and derived-adjunction comparisons.
+The supported class is specified by the recorded, uniquely determining Kummer boundary.
+-/
+
+@[expose] public noncomputable section
+
+set_option autoImplicit false
+
+universe u
+
+open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits
+
+namespace AlgebraicGeometry.Etale
+
+/-- The projective-line trace along either projection. Transport along its canonical
+chart uses the chart's inverse-image/direct-image unit, direct-image composition,
+the normalized shifted twist comparison, and the recorded projective-line trace.
+Source: blueprint lem-amb-p1-diagonal-integrals, the maps t_{p_a}
+(blueprint: lem-amb-p1-diagonal-integrals). -/
+def projectiveLineDiagonalTrace (N : ℕ) (hN : 0 < N)
+    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
+    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (a : Bool) :
+    ordinaryFiniteP1DiagonalTarget A N hA S a ⟶
+      ordinaryFiniteUnit A (ProjectiveLine S) :=
+  letI : IsLocallyNoetherian (ProjectiveLine S) :=
+    LocallyOfFiniteType.isLocallyNoetherian (ProjectiveLine S ↘ S)
+  letI : CompactSpace (ProjectiveLine S) :=
+    QuasiCompact.compactSpace_of_compactSpace (ProjectiveLine S ↘ S)
+  letI : IsNoetherian (ProjectiveLine S) := ⟨⟩
+  let e := (projectiveLineDiagonalChart S a).val
+  let p := projectiveLineDiagonalProjection S a
+  let r := ProjectiveLine (ProjectiveLine S) ↘ ProjectiveLine S
+  let L := (ordinaryFiniteLine A N hA
+    (pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)))⟦(2 : ℤ)⟧
+  (ordinaryFinitePushforward A p).map
+      ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) e.hom).unit.app L) ≫
+    (rightDerivedLowerStarComp (ModuleCat.{u + 1} A) e.hom p).hom.app
+      ((ordinaryFinitePullback A e.hom).obj L) ≫
+    (rightDerivedLowerStarCongr (ModuleCat.{u + 1} A)
+      (projectiveLineDiagonalChart S a).property).hom.app
+        ((ordinaryFinitePullback A e.hom).obj L) ≫
+    (ordinaryFinitePushforward A r).map
+      (ordinaryFiniteShiftedLinePullback A N hA (projectiveLineTraceTransport N hN A hA)
+        e.hom (by
+          simpa using hS.map
+            ((pullback.fst (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)) ≫
+              (ProjectiveLine S ↘ S)).appTop.hom)).hom ≫
+    projectiveLineTrace N hN A hA (ProjectiveLine S)
+      (by simpa using hS.map (ProjectiveLine S ↘ S).appTop.hom)
+
+/-- Transport direct image along a product projection to the standard projective line.
+This is exactly the prefix of `projectiveLineDiagonalTrace`, before its trace factor.
+Source: blueprint lem-amb-p1-diagonal-integrals, proof step 1
+(blueprint: def-amb-p1-diagonal-data). -/
+def projectiveLineDiagonalChartPushforward (N : ℕ) (hN : 0 < N)
+    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
+    (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤))) (a : Bool) :
+    ordinaryFiniteP1DiagonalTarget A N hA S a ⟶
+      (ordinaryFinitePushforward A (ProjectiveLine (ProjectiveLine S) ↘ ProjectiveLine S)).obj
+        ((ordinaryFiniteLine A N hA (ProjectiveLine (ProjectiveLine S)))⟦(2 : ℤ)⟧) :=
+  let e := (projectiveLineDiagonalChart S a).val
+  let p := projectiveLineDiagonalProjection S a
+  let r := ProjectiveLine (ProjectiveLine S) ↘ ProjectiveLine S
+  let L := (ordinaryFiniteLine A N hA
+    (pullback (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)))⟦(2 : ℤ)⟧
+  (ordinaryFinitePushforward A p).map
+      ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) e.hom).unit.app L) ≫
+    (rightDerivedLowerStarComp (ModuleCat.{u + 1} A) e.hom p).hom.app
+      ((ordinaryFinitePullback A e.hom).obj L) ≫
+    (rightDerivedLowerStarCongr (ModuleCat.{u + 1} A)
+      (projectiveLineDiagonalChart S a).property).hom.app
+        ((ordinaryFinitePullback A e.hom).obj L) ≫
+    (ordinaryFinitePushforward A r).map
+      (ordinaryFiniteShiftedLinePullback A N hA (projectiveLineTraceTransport N hN A hA)
+        e.hom (by
+          simpa using hS.map
+            ((pullback.fst (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)) ≫
+              (ProjectiveLine S ↘ S)).appTop.hom)).hom
+
+/-- The diagonal trace is the chart pushforward followed by the projective-line trace.
+Source: blueprint lem-amb-p1-diagonal-integrals, the maps t_{p_a}
+(blueprint: def-amb-p1-diagonal-data).
+Proof: unfold both definitions; the two composites agree up to associativity. -/
+theorem projectiveLineDiagonalTrace_eq (N : ℕ) (hN : 0 < N)
+    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
+    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (a : Bool) :
+    letI : IsLocallyNoetherian (ProjectiveLine S) :=
+      LocallyOfFiniteType.isLocallyNoetherian (ProjectiveLine S ↘ S)
+    letI : CompactSpace (ProjectiveLine S) :=
+      QuasiCompact.compactSpace_of_compactSpace (ProjectiveLine S ↘ S)
+    letI : IsNoetherian (ProjectiveLine S) := ⟨⟩
+    projectiveLineDiagonalTrace N hN A hA S hS a =
+      projectiveLineDiagonalChartPushforward N hN A hA S hS a ≫
+        projectiveLineTrace N hN A hA (ProjectiveLine S)
+          (by simpa using hS.map (ProjectiveLine S ↘ S).appTop.hom) := by
+  simp only [projectiveLineDiagonalTrace, projectiveLineDiagonalChartPushforward,
+    Category.assoc]
+
+end AlgebraicGeometry.Etale
