@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.Specialization.NearbyFinitenessTorsionModels
-public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ConstructibleHomFinite
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ConstructibleExtFinite
 public import WeilConjectures.SixFunctors.NearbyCycles.AutActionComp
 
 /-!
@@ -107,6 +107,45 @@ theorem exists_finiteIndex_homology_map_eq_id (K : DerivedCategory C) (a b : ℤ
 
 end DerivedCategory
 
+namespace CategoryTheory
+
+variable {C : Type*} [Category C]
+
+/-- **A group acting on an object with finitely many endomorphisms acts through a finite
+quotient**: for an action `act : G → End X` (`act 1 = 𝟙`, `act (g * h) = act h ≫ act g`) on an object
+with finitely many endomorphisms, a subgroup of finite index acts as the identity. -/
+theorem exists_finiteIndex_eq_id_of_finite_end (X : C) [Finite (X ⟶ X)] {G : Type*} [Group G]
+    (act : G → (X ⟶ X)) (h₁ : act 1 = 𝟙 X) (hmul : ∀ g h, act (g * h) = act h ≫ act g) :
+    ∃ V : Subgroup G, V.FiniteIndex ∧ ∀ g ∈ V, act g = 𝟙 X := by
+  let V : Subgroup G :=
+    { carrier := {g | act g = 𝟙 X}
+      one_mem' := h₁
+      mul_mem' := fun {g h} hg hh ↦ by
+        change act (g * h) = 𝟙 X
+        rw [hmul, hg, hh, Category.comp_id]
+      inv_mem' := fun {g} hg ↦ by
+        have := hmul g g⁻¹
+        rw [mul_inv_cancel, h₁, hg, Category.comp_id] at this
+        exact this.symm }
+  refine ⟨V, ?_, fun g hg ↦ hg⟩
+  have key (g g' : G) : g⁻¹ * g' ∈ V ↔ act g = act g' := by
+    refine ⟨fun h ↦ ?_, fun h ↦ ?_⟩
+    · have e₁ : act g' = act (g * (g⁻¹ * g')) := by rw [mul_inv_cancel_left]
+      rw [hmul, show act (g⁻¹ * g') = 𝟙 X from h, Category.id_comp] at e₁
+      exact e₁.symm
+    · change act (g⁻¹ * g') = 𝟙 X
+      rw [hmul, ← h, ← hmul, inv_mul_cancel, h₁]
+  have : Finite (G ⧸ V) := by
+    let φ : G ⧸ V → (X ⟶ X) :=
+      _root_.Quotient.lift act fun g g' (hgg' : _) ↦ (key g g').1 (QuotientGroup.leftRel_apply.1 hgg')
+    refine Finite.of_injective φ fun x y hxy ↦ ?_
+    induction x using QuotientGroup.induction_on
+    induction y using QuotientGroup.induction_on
+    exact QuotientGroup.eq.2 ((key _ _).2 hxy)
+  exact Subgroup.finiteIndex_of_finite_quotient
+
+end CategoryTheory
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
@@ -144,6 +183,28 @@ theorem finite_homology_hom_of_boundedConstructible {k : Type u} [Field k] [IsSe
   have := Etale.finite_hom_of_isConstructibleSheaf p F F
   exact Finite.of_equiv _ ((Functor.FullyFaithful.ofFullyFaithful (ν^*(X)[A])).homEquiv.trans
     (Φ.symm.fullyFaithfulFunctor.homEquiv.trans (i.homCongr i).symm))
+
+/-- **Morphisms between bounded constructible complexes with finite condensed coefficients form a
+finite set**, over a separated scheme of finite type over a separably closed field: the complexes
+are of étale origin, `ν^*` is fully faithful on bounded below complexes, and morphisms between
+bounded constructible étale complexes form a finite set
+(`AlgebraicGeometry.Etale.finite_hom_of_boundedConstructible`). -/
+theorem finite_hom_of_boundedConstructible_of_finite {k : Type u} [Field k] [IsSepClosed k]
+    [HasInvertibleExponent (ULift.{u + 1} T) (Spec (.of k))] {X : Scheme.{u}}
+    (p : X ⟶ Spec (.of k)) [LocallyOfFiniteType p] [QuasiCompact p] [IsSeparated p]
+    {K L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (Profinite.continuousMapRingObj T) X))}
+    (hK : boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj T) X) K)
+    (hL : boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj T) X) L) :
+    Finite (K ⟶ L) := by
+  let A := ModuleCat.{u + 1} (ULift.{u + 1} T)
+  obtain ⟨E, hE, ⟨e⟩⟩ := isEtaleOrigin_of_isConstructible T hK
+  obtain ⟨E', hE', ⟨e'⟩⟩ := isEtaleOrigin_of_isConstructible T hL
+  have := Etale.finite_hom_of_boundedConstructible p hE hE'
+  let Φ := finiteCoefficientDerivedEquivalence X T
+  exact Finite.of_equiv _ ((Equiv.ofBijective _
+    (bijective_comparisonUpperStar_mapDerivedCategory_map E E' hE'.1.1)).trans
+      ((e.homCongr e').trans (Φ.fullyFaithfulFunctor.homEquiv.symm)))
 
 namespace NearbyCyclesModel
 
@@ -187,3 +248,41 @@ theorem exists_finiteIndex_homology_autAction_eq_id_of_finite
 end NearbyCyclesModel
 
 end AlgebraicGeometry.ProEtale.CondensedRing
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
+
+open Scheme
+
+variable (T : Type) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] [DiscreteTopology T]
+  [Finite T] {k' : Type u} [Field k'] [IsSepClosed k']
+  [HasInvertibleExponent (ULift.{u + 1} T) (Spec (.of k'))] {p : ℕ} [Fact p.Prime]
+  {X : Scheme.{u}} {X' : Over (Spec (.of k'))}
+
+/-- **Group actions on nearby cycles with finite coefficients factor through finite quotients, in
+the derived category**: in the situation of
+`NearbyCyclesModel.exists_finiteIndex_homology_autAction_eq_id_of_finite`, a subgroup of finite
+index of `G` acts as the identity on the complex `Ψ C` itself, the endomorphisms of the bounded
+constructible complex `Ψ C` forming a finite set
+(`ProEtale.CondensedRing.finite_hom_of_boundedConstructible_of_finite`). -/
+theorem exists_finiteIndex_autAction_eq_id_of_finite
+    (hp : ∀ m : ℕ, (m : k') = 0 → p ∣ m) (hpT : IsUnit (p : T))
+    (M : NearbyCyclesModel X X'.left) (hM : M.IsTraitModel)
+    {C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology M.total) Ab.{u + 1})
+      (condensedRingObj (Profinite.continuousMapRingObj T) M.total))}
+    (hC : boundedConstructible _ C) {G : Type*} [Group G]
+    (σ : G → M.geometric.Hom M.geometric (𝟙 M.total) (𝟙 X'.left))
+    (h₁t : (σ 1).total = 𝟙 _) (h₁g : (σ 1).generic = 𝟙 _)
+    (hmt : ∀ g h, (σ g).total ≫ (σ h).total = (σ (g * h)).total)
+    (hmg : ∀ g h, (σ g).generic ≫ (σ h).generic = (σ (g * h)).generic) :
+    ∃ V : Subgroup G, V.FiniteIndex ∧ ∀ g ∈ V,
+      (σ g).autAction (Profinite.continuousMapRingObj T) C = 𝟙 _ := by
+  obtain ⟨qM, -, _, _, _, -, hi⟩ := hM.exists_isPullback
+  have : LocallyOfFiniteType X'.hom := MorphismProperty.of_isPullback hi ‹_›
+  have : QuasiCompact X'.hom := MorphismProperty.of_isPullback hi ‹_›
+  have : IsSeparated X'.hom := MorphismProperty.of_isPullback hi ‹_›
+  have hΨ := boundedConstructible_geometricNearbyCycles_obj_of_finite T hp hpT M hM hC
+  have := finite_hom_of_boundedConstructible_of_finite T X'.hom hΨ hΨ
+  exact exists_finiteIndex_eq_id_of_finite_end _ _ ((σ 1).autAction_of_eq_id _ h₁t h₁g C)
+    (fun g h ↦ (σ g).autAction_comp_of_eq _ (σ h) (σ (g * h)) (hmt g h) (hmg g h) C)
+
+end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
