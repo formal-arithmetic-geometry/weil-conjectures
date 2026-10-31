@@ -485,7 +485,7 @@ private def complexMonoidalStruct :
     MonoidalCategoryStruct (CochainComplex (RingedTensorModules.{c, v, u} J R) ℤ) :=
   (complexMonoidal.{c, v, u} J R).toMonoidalCategoryStruct
 
-attribute [local instance 10000] complexMonoidalStruct derivedMonoidalStruct
+attribute [local instance 10000] complexMonoidalStruct
 
 @[no_expose]
 private def chainLeftUnitor

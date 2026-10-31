@@ -136,7 +136,6 @@ private theorem whiskering_fullyFaithful_iso
   obtain ⟨ff⟩ := h
   exact ⟨ff.ofIso ((Functor.whiskeringLeft A B D).mapIso e)⟩
 
-attribute [local irreducible] uncurry_comparison
 
 attribute [-instance] CategoryTheory.hasSheafCompose_of_preservesMulticospan
 
@@ -279,7 +278,6 @@ omit [HasDerivedCategory.{wR} (Modules.{uC, vC, r} R)] in
   fun P ↦ P.IsKFlatIndependentCoefficients ∧
     ∀ n, IsFlatOnSite (J := J) (R := R) (P.X n)
 
-attribute [local irreducible] resolvingTensorIso
 
 omit [HasDerivedCategory.{wR} (Modules.{uC, vC, r} R)] in
 private theorem exists_resolving

@@ -21,6 +21,10 @@ product projections. They specify the ordinary slice adjunctions and precisely
 the nu/theta portion of the scalar-Hom comparison, without its evaluation square.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 
 set_option autoImplicit false
@@ -70,7 +74,7 @@ private def normalizedAdjunction {R S : Sheaf J CommRingCat.{max c v u}} {φ : R
 
 attribute [local irreducible] normalizedAdjunction extensionIso
 
-attribute [local irreducible] normalizedFor ordinaryExtension canonicalExtension
+attribute [local irreducible] ordinaryExtension canonicalExtension
 
 universe a b d e r
 
@@ -336,6 +340,6 @@ variable [∀ W : C, (J.over W).HasSheafCompose
   [∀ W : C, (J.over W).WEqualsLocallyBijective AddCommGrpCat.{max c v u}]
   [∀ W : C, HasWeakSheafify (J.over W) AddCommGrpCat.{max c v u}]
 
-attribute [local semireducible] normalizedFor ordinaryExtension canonicalExtension
+attribute [local semireducible] ordinaryExtension canonicalExtension
 
 end SheafOfModules.StrictScalarHom

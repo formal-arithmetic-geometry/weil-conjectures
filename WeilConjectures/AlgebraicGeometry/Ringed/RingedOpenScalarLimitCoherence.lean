@@ -696,7 +696,7 @@ attribute [local irreducible] Functor.mapDerivedCategoryNatIso Functor.mapDerive
 
 attribute [-instance] WeilConjectures.integralCoefficientAbSheafify
   WeilConjectures.integralCoefficientAbLocallyBijective
-attribute [local instance] cbcAbSheafify cbcAbLocallyBijective
+attribute [local instance] cbcAbLocallyBijective
 private theorem ambient_exact (T : Scheme.{u})
     (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) :
     HasExactLimitsOfShape (Discrete ℕ) (ringedSiteModules.{u + 1}
@@ -710,8 +710,7 @@ private theorem ambient_exact (T : Scheme.{u})
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-attribute [local irreducible] cbcDerivedTowerSquare cbcDerivedTowerAdjunction
-  Functor.mapDerivedCategory Functor.mapDerivedCategoryFactors
-  Functor.mapHomologicalComplex NatIso.mapHomologicalComplex
+attribute [local irreducible] cbcDerivedTowerSquare Functor.mapDerivedCategory
+  Functor.mapDerivedCategoryFactors Functor.mapHomologicalComplex NatIso.mapHomologicalComplex
 
 end AlgebraicGeometry.Scheme

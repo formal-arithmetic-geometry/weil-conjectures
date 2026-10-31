@@ -850,7 +850,6 @@ set_option backward.isDefEq.respectTransparency false
 @[no_expose] private abbrev RingedSiteComplex := CochainComplex (SheafOfModules.{max c v r}
   ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) ℤ
 
-attribute [local irreducible] ringedSiteBidualComponent ringedSiteBidualDegree
 
 end OrdinaryBidualComponents
 

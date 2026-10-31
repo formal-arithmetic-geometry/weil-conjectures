@@ -339,7 +339,6 @@ def DerivedComparisonData
 
 section DerivedComparisonProof
 
-attribute [local instance] complexTensorStructMemo derivedTensorStructMemo
 
 set_option backward.isDefEq.respectTransparency true
 open CategoryTheory.Category CategoryTheory.Functor CategoryTheory.Functor.LaxMonoidal

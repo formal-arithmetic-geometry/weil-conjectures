@@ -12,6 +12,10 @@ import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 
 Source: Stacks, Homology, Tags 0A5J and 012Z. -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
@@ -29,7 +33,6 @@ attribute [local irreducible] SheafOfModules.monoidalCategory
 namespace TotalAssembly
 universe a b x y
 
-attribute [local instance 20000] tensorHasMapBifunctor
 
 section GenericTotal
 variable {D : Type a} [Category.{x} D] [Preadditive D] [MonoidalCategory D]
