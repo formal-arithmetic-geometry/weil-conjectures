@@ -9,6 +9,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationC
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReductionCanonicalIso
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReductionKummer
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReductionKummerBoundary
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReductionMonoidalChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReductionTateTwist
 public import WeilConjectures.SixFunctors.Etale.Derived.ReductionLowerShriekIso
 
@@ -75,7 +76,10 @@ theorem reductionTateTwistShiftData_mapSupportedClass_cupWithSupportsTateObject
           (reductionTateTwistShiftData hρ ha k hk)).mapSupportedClass i₂
           ((reductionSupportedCoefficientChange hρ ha
             (reductionTateTwistShiftData hρ ha k hk)).tateShiftIso U m') β) :=
-  sorry
+  (reductionMonoidalSupportedCoefficientChange hρ ha
+    (reductionTateTwistShiftData hρ ha k hk)).mapSupportedClass_cupWithSupportsTateObject i₁ i₂ i h
+    (reductionMonoidalSupportedCoefficientChange_constantComplexDiagonal hρ ha k hk U) m m'
+    (reductionMonoidalSupportedCoefficientChange_shiftTateObjectAddIso hρ ha k hk U m m') α β
 
 /-- Blueprint `det-sp-purity-coefficient-change`: change of coefficients in purity
 
@@ -119,6 +123,7 @@ theorem reductionTateTwistShiftData_preservesSectionInvariantIso {V B : Scheme.{
     [IsClosedImmersion s] :
     (reductionSupportedCoefficientChange hρ ha
       (reductionTateTwistShiftData hρ ha k hk)).PreservesSectionInvariantIso s :=
-  sorry
+  (reductionMonoidalSupportedCoefficientChange hρ ha
+    (reductionTateTwistShiftData hρ ha k hk)).preservesSectionInvariantIso s
 
 end AlgebraicGeometry.Etale
