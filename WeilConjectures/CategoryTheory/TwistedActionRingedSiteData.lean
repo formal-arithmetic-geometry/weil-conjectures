@@ -12,6 +12,9 @@ public import WeilConjectures.CategoryTheory.RingedToposMorphism
 public import WeilConjectures.CategoryTheory.SiteCoveringAxioms
 public import WeilConjectures.CategoryTheory.RingedSiteModules
 
+public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
+public import Mathlib.CategoryTheory.Limits.Creates
+public import Mathlib.CategoryTheory.Sites.Equivalence
 /-! # The ringed site of a site automorphism
 
 Source: Stacks, Sites, Tag 00W0 is motivation for the agent-formulated twisted
@@ -56,5 +59,21 @@ variable {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (s : C ≌ C) [s.functor.IsContinuous J J] [s.inverse.IsContinuous J J]
     (R : Sheaf J CommRingCat.{u})
     (a : (s.inverse.sheafPushforwardContinuous CommRingCat.{u} J J).obj R ≅ R)
+
+end CategoryTheory.TwistedActionRingedSite
+
+namespace CategoryTheory.TwistedActionRingedSite
+
+section
+
+set_option autoImplicit false
+open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
+
+/-- The recorded sheaf tensor, with its coefficient argument resolved once.
+Source: Stacks 03EK (blueprint: lem-sf-twisted-action-ringed-site). -/
+noncomputable abbrev tensorObj {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
+    {R : Sheaf J CommRingCat.{u}} (M N : Modules R) : Modules R := M ⊗ N
+
+end
 
 end CategoryTheory.TwistedActionRingedSite

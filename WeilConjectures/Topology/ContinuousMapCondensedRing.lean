@@ -122,3 +122,43 @@ noncomputable def continuousMapRingObjOfUniverseMonObj (T : Type v) [Topological
     (continuousMapRingSheafOfUniverse T)
 
 end Profinite
+
+namespace Profinite
+
+section
+
+open CategoryTheory Opposite
+open scoped CategoryTheory.MonoidalClosed
+
+/-- The canonical ring object is commutative when the topological ring is commutative.
+Source: blueprint `def-sfb-continuous-map-condensed-ring.md`, final clause
+(blueprint: def-sfb-continuous-map-condensed-ring).
+
+Proof: for sections a,b, evaluation at every point gives a(s)b(s)=b(s)a(s).
+Their lifted section rings are therefore commutative. Apply the commutative case of
+`sk-def-sfb-ring-object`, specifically `Sheaf.isCommMonObj_sheafCompose_obj`, to the
+continuous-map sheaf. Its counit-transport construction is exactly the monoid structure
+`continuousMapRingObjOfUniverseMonObj`; the tensor and braiding are the canonical
+sheafified tensor over the integers supplied by `sk-def-sfb-sheaf-tensor`. -/
+theorem isCommMonObj_continuousMapRingObjOfUniverse (T : Type v) [TopologicalSpace T]
+    [CommRing T] [IsTopologicalRing T] :
+    @IsCommMonObj
+      (Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{max u v + 1}) _
+      (sfbSheafTensorStructure (A := AddCommGrpCat.{max u v + 1})
+        (coherentTopology Profinite.{u})).monoidal
+      (sfbSheafTensorStructure (A := AddCommGrpCat.{max u v + 1})
+        (coherentTopology Profinite.{u})).symmetric.toBraidedCategory
+      (continuousMapRingObjOfUniverse T) (continuousMapRingObjOfUniverseMonObj T) := by
+  let h := presheaf_enrichedHoms_exist
+    (C := Profinite.{u}) (A := AddCommGrpCat.{max u v + 1})
+  let : ∀ (F G : Profinite.{u}ᵒᵖ ⥤ AddCommGrpCat.{max u v + 1}),
+    Enriched.FunctorCategory.HasEnrichedHom AddCommGrpCat.{max u v + 1} F G := h.1
+  let : ∀ (F G : Profinite.{u}ᵒᵖ ⥤ AddCommGrpCat.{max u v + 1}),
+    Enriched.FunctorCategory.HasFunctorEnrichedHom AddCommGrpCat.{max u v + 1} F G := h.2
+  exact Sheaf.isCommMonObj_sheafCompose_obj (coherentTopology Profinite.{u})
+    (continuousMapRingSheafOfUniverse T)
+    fun S (a b : ULift.{max u v + 1} C(S.unop, T)) ↦ mul_comm a b
+
+end
+
+end Profinite

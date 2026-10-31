@@ -45,33 +45,6 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
 
 open Scheme
 
-/-- **Averages along a composite with invertible second exchange, over the identity of `X`**:
-`NearbyCyclesModel.exists_retraction_pullbackExchange_of_comp_of_isIso` for morphisms of models of
-`X` over `𝟙 X`, with the conclusion transported from `L(𝟙 X)^* C` to `C`. If the pullback exchange
-of `ψ` is invertible at `C` and that of `χ` (with the components of `ρ ≫ ψ`) is split at `C` with
-average the sum of the actions of the `σ i`, then so is that of `ρ`. -/
-theorem exists_retraction_pullbackExchange_of_comp_of_isIso_of_id
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    {X S₀ S₁ S₂ : Scheme.{u}} {M₀ : NearbyCyclesModel X S₀} {M₁ : NearbyCyclesModel X S₁}
-    {M₂ : NearbyCyclesModel X S₂} {f' : S₀ ⟶ S₁} {g' : S₁ ⟶ S₂} {fg' : S₀ ⟶ S₂}
-    (ρ : M₀.Hom M₁ (𝟙 X) f') (ψ : M₁.Hom M₂ (𝟙 X) g') (χ : M₀.Hom M₂ (𝟙 X) fg')
-    (h' : f' ≫ g' = fg') (htot : ρ.total ≫ ψ.total = χ.total)
-    (hgen : ρ.generic ≫ ψ.generic = χ.generic)
-    (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj Λ X))) (hψi : IsIso ((ψ.pullbackExchange Λ).app C)) {ι : Type*}
-    (s : Finset ι) (σ : ι → M₀.Hom M₀ (𝟙 X) (𝟙 S₀)) (n : ℕ)
-    (hχ : ∃ r, (χ.pullbackExchange Λ).app C ≫ r = 𝟙 _ ∧
-      n • (r ≫ (χ.pullbackExchange Λ).app C) =
-        ∑ i ∈ s, (σ i).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj C)) :
-    ∃ r', (ρ.pullbackExchange Λ).app C ≫ r' = 𝟙 _ ∧
-      n • (r' ≫ (ρ.pullbackExchange Λ).app C) =
-        ∑ i ∈ s, (σ i).autAction Λ (L((𝟙 X)^*⟦Λ⟧).obj C) := by
-  have h := exists_retraction_pullbackExchange_of_comp_of_isIso Λ ρ ψ χ (Category.comp_id _) h'
-    htot hgen C hψi s σ n hχ
-  -- the transport is stated along an isomorphism with target `C`, not `(𝟭 _).obj C`
-  let e : L((𝟙 X)^*⟦Λ⟧).obj C ≅ C := (leftDerivedUpperStarId Λ X).app C
-  exact exists_retraction_pullbackExchange_app_of_isIso Λ ρ s σ e.hom n h
-
 attribute [local instance] traitGenericFieldAlgebra
 
 variable {k' : Type u} [Field k'] {K : Type u} [Field K] [Algebra k' K] {X : Scheme.{u}}
@@ -87,8 +60,12 @@ set_option maxHeartbeats 8000000 in
 /-- **The exchange of the slice of the change of trait is the inclusion of the invariants, given
 the cartesian step**: the analogue of
 `NearbyCyclesModel.exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian` for the
-exchange `α_θ`, deduced from it through the invertible exchange of the change of trait
-(`NearbyCyclesModel.exists_retraction_pullbackExchange_of_comp_of_isIso_of_id`). -/
+exchange `α_θ`, deduced from it through the invertible exchange of the change of trait.
+
+The average is transported along that exchange
+(`NearbyCyclesModel.exists_retraction_pullbackExchange_of_comp_of_isIso`, then
+`NearbyCyclesModel.exists_retraction_pullbackExchange_app_of_isIso`), combined in
+`NearbyCyclesModel.exists_retraction_pullbackExchange_of_comp_of_isIso_id`. -/
 theorem exists_subgroup_pullbackExchange_sliceTraitChangeHom_of_isIso_cartesian [IsAlgClosed K]
     {C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))}
@@ -117,21 +94,21 @@ theorem exists_subgroup_pullbackExchange_sliceTraitChangeHom_of_isIso_cartesian 
         ∑ σ : GenericAut k' K ⧸ V,
           (baseChangeAut hM b hb (traitSlice x) (traitSlice_over x) σ.out).autAction
             (Profinite.padicAlgClRingObj ℓ) (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C) := by
-  obtain ⟨V, hV₀, hV, hχ⟩ := exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian hM
-    b hb (traitSlice x) (traitSlice_over x) hC hB eB hM1
-  refine ⟨V, hV₀, hV, ?_⟩
-  have hψ := isIso_pullbackExchange_baseChangeHom_traitMap_of_generic (ℓ := ℓ) (K := K) hM hC
-  -- the hypotheses and the conclusion agree with those of the abstract lemma up to proofs
-  have key := exists_retraction_pullbackExchange_of_comp_of_isIso_of_id
-    (Profinite.padicAlgClRingObj ℓ) (geometricSliceTraitChangeHom hM x hb)
+  have key := exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian
+    hM b hb (traitSlice x) (traitSlice_over x) hC hB eB hM1
+  have hψ := isIso_pullbackExchange_baseChangeHom_traitMap_of_generic (ℓ := ℓ) (K := K) hM
+    (A := C) hC
+  have t := exists_subgroup_pullbackExchange_of_comp_of_isIso_id (Profinite.padicAlgClRingObj ℓ)
+    (X := X) (M₀ := baseChange hM b hb (traitSlice x) (traitSlice_over x))
+    (M₁ := baseChange hM q (Category.comp_id q) (traitMap k' K) (Category.comp_id _)) (M₂ := M)
+    (geometricSliceTraitChangeHom hM x hb)
     (baseChangeHom hM q (Category.comp_id q) (traitMap k' K) (Category.comp_id _))
     (baseChangeHom hM b hb (traitSlice x) (traitSlice_over x))
     (geometricSliceTraitChangeHom_special_comp hM x hb)
     (geometricSliceTraitChangeHom_total_comp hM x hb)
-    (geometricSliceTraitChangeHom_generic_comp hM x hb) C (by exact_mod_proofs hψ) Finset.univ
-    (fun σ : GenericAut k' K ⧸ V ↦ baseChangeAut hM b hb (traitSlice x) (traitSlice_over x) σ.out)
-    _ (by exact_mod_proofs hχ)
-  exact_mod_proofs key
+    (geometricSliceTraitChangeHom_generic_comp hM x hb) C (by exact_mod_proofs hψ)
+    (baseChangeAut hM b hb (traitSlice x) (traitSlice_over x)) (by exact_mod_proofs key)
+  exact_mod_proofs t
 
 variable [Fact (ringChar k').Prime]
 
@@ -193,10 +170,12 @@ set_option maxHeartbeats 8000000 in
 over `S = Spec k'⟦t⟧` with a coordinate `b`, a subgroup `V` of finite index of the pro-`p` kernel
 `P'` acts trivially on the nearby cycles `Ψ_{M''} A` of the geometric slice, and the slicing
 exchange `α : Lσ^* Ψ_M A ⟶ Ψ_{M''} A` is a split monomorphism whose idempotent is `1 / [P' : V]`
-times the sum of the actions of representatives of `P' ⧸ V`. This is
-`NearbyCyclesModel.exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian` for the
-slice `Spec k'⟦u⟧⟦t⟧ ⟶ 𝔸¹_S`, whose cartesian step is invertible by
-`NearbyCyclesModel.isIso_pullbackExchange_traitSliceGaloisModelHom`. -/
+times the sum of the actions of representatives of `P' ⧸ V`. It is the composite of the exchange
+of the change of trait, invertible by
+`NearbyCyclesModel.isIso_pullbackExchange_baseChangeHom_traitMap_of_generic`, and of the
+inclusion of the `P'`-invariants
+`NearbyCyclesModel.exists_subgroup_pullbackExchange_sliceTraitChangeHom`
+(`NearbyCyclesModel.exists_retraction_pullbackExchange_of_comp`). -/
 theorem exists_subgroup_pullbackExchange_baseChangeHom_traitSlice
     {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))}
