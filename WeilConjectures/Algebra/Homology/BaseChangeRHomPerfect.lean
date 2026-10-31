@@ -1,0 +1,89 @@
+/-
+Copyright (c) 2026 Bin Wu. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Bin Wu
+-/
+module
+
+public import WeilConjectures.Algebra.Homology.PerfectRHomBaseChangeMap
+import WeilConjectures.Algebra.Homology.PerfectRingHomKFlat
+import WeilConjectures.Algebra.Homology.PerfectRingHomScalarExtension
+
+/-! # RHom base change for a perfect complex
+
+Source: Stacks Project, more-algebra.tex, Lemma 0A6A, lemma-base-change-RHom, clause (1)
+(blueprint: lem-pc-base-change-rhom-perfect).
+-/
+
+@[expose] public section
+
+universe u₁ w₁
+
+open CategoryTheory CategoryTheory.Limits Opposite
+
+namespace CategoryTheory
+
+/-- For a morphism of commutative rings, the canonical derived Hom base-change map out of
+any perfect complex is an isomorphism. Perfectness of `E` is the bounded representative
+`m.source` with finite projective terms (evaluated at the unique object of the shared
+one-object site) and `m.sourceIso`; `K` is arbitrary. The statement holds for every
+extension data `d` and every such model `m`, both of which exist
+(`ringRHomBaseChangeData_exists`, `perfectRHomBaseChangeModel_exists`).
+
+Source: Stacks Project, more-algebra.tex, Lemma 0A6A, lemma-base-change-RHom, clause (1),
+and equation-base-change-RHom (blueprint: lem-pc-base-change-rhom-perfect).
+
+Proof (the node's four steps):
+1. Let `P = m.source`, the bounded finite-projective representative of `E`, and
+   `Q = m.target`, the K-flat representative of `K` (lem-pc-kflat-resolution,
+   def-pc-kflat-complex).
+   Bounded-above projective complexes are K-projective
+   (lem-sc-bounded-above-projective-kprojective), so the Hom map induced by the K-injective
+   replacement of `Q` is a quasi-isomorphism. Thus `Hom(P,Q)` represents the shared
+   `derivedInternalHom` (def-pur-derived-internal-hom).
+2. In each degree the product defining `Hom(P,Q)` is finite. For a finite projective
+   `P^i`, the canonical map `B ⊗ Hom(P^i,Q^j) → Hom(B ⊗ P^i,B ⊗ Q^j)` is an isomorphism:
+   first check finite free modules, then pass to direct summands. These maps commute
+   with differentials and give the chain isomorphism specified by `homMap_pure`.
+3. The Hom complex is K-flat: it is `Tot(P^∨ ⊗ Q)`, with `P^∨` bounded finite projective.
+   For any acyclic `F`, `Tot(F ⊗ P^∨)` is acyclic
+   (lem-pc-module-bounded-flat-kflat); tensor with the K-flat `Q` and use associativity
+   (def-pc-kflat-complex). Hence the derived scalar-extension counit on `Hom(P,Q)` is
+   invertible (lem-pur-derived-change-of-rings).
+4. The same counit computes scalar extension on `P` and `Q`. The extended `P` remains
+   bounded finite projective, so the first step over `B` identifies the target RHom.
+   The map `f ↦ 1 ⊗ f`, extended `B`-linearly, is exactly `b ⊗ f ↦ (c ⊗ x ↦ bc ⊗ f(x))`.
+   Consequently the composite in `perfectRHomBaseChangeMap` is the source's canonical
+   map, and every factor of that composite is invertible by steps 1–3. -/
+theorem baseChangeRHomPerfect
+    {A B : Type u₁} [CommRing A] [CommRing B] {φ : A →+* B}
+    [HasDerivedCategory.{w₁} (RingSiteModules A)]
+    [HasDerivedCategory.{w₁} (RingSiteModules B)]
+    (d : RingRHomBaseChangeData φ) (E K : DerivedCategory (RingSiteModules A))
+    (m : PerfectRHomBaseChangeModel d E K) :
+    IsIso (perfectRHomBaseChangeMap d m) := by
+  have hHom := perfectRingHom_isKFlat m.source m.target m.bounded m.projective
+    m.finite m.target_kFlat
+  have := perfectRingHom_scalarExtension_isIso d m.source m.target m.bounded
+    m.projective m.finite
+  have := d.counit_kFlat _ hHom
+  have : IsIso (ringDerivedExtensionCounit d
+      (homComplex (R := CochainComplex.onePointRingSheaf A) m.source m.target)) := by
+    let := d.additive
+    unfold ringDerivedExtensionCounit
+    infer_instance
+  have := m.source_counit
+  have := m.target_counit
+  have : IsIso (m.sourceIso.op.hom, m.targetIso.symm.hom) :=
+    (isIso_prod_iff _ _).2 ⟨inferInstance, inferInstance⟩
+  let eP := d.derived.mapIso m.sourceIso.symm ≪≫
+    asIso (ringDerivedExtensionCounit d m.source)
+  let eQ := d.derived.mapIso m.targetIso.symm ≪≫
+    asIso (ringDerivedExtensionCounit d m.target)
+  have : IsIso (eP.op.hom, eQ.symm.hom) :=
+    (isIso_prod_iff _ _).2 ⟨inferInstance, inferInstance⟩
+  unfold perfectRHomBaseChangeMap
+  dsimp only
+  infer_instance
+
+end CategoryTheory

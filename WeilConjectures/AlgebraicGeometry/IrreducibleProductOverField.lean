@@ -1,0 +1,40 @@
+/-
+Copyright (c) 2026 Bin Wu. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Bin Wu
+-/
+module
+
+public import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
+public import Mathlib.AlgebraicGeometry.Pullbacks
+import WeilConjectures.AlgebraicGeometry.ProductIrreducibleComponentsBijection
+
+/-!
+# Product of geometrically irreducible schemes over a field
+
+Source: literature/stacks-project/varieties.tex, Tag 038F
+(blueprint: lem-sc-irreducible-product-over-field).
+-/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory CategoryTheory.Limits
+
+namespace AlgebraicGeometry
+
+/-- The fibre product over a field of two geometrically irreducible schemes is irreducible.
+
+Source: Stacks Project, Tag 038F (blueprint: lem-sc-irreducible-product-over-field).
+The proof applies the component bijection, uses geometric irreducibility of the second factor,
+and uses the component-cover lemma to conclude that the unique component is the whole product. -/
+theorem irreducibleSpace_pullback_of_geometricallyIrreducible
+    (K : Type u) [Field K] (U V : Scheme.{u})
+    [U.Over (Spec (.of K))] [V.Over (Spec (.of K))]
+    [GeometricallyIrreducible (U ↘ Spec (.of K))]
+    [GeometricallyIrreducible (V ↘ Spec (.of K))] :
+    IrreducibleSpace (pullback (C := Scheme) (U ↘ Spec (.of K)) (V ↘ Spec (.of K))) := by
+  sorry
+
+end AlgebraicGeometry

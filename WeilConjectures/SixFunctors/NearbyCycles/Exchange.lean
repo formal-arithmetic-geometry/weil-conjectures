@@ -278,6 +278,17 @@ end Abstract
 
 section Unit
 
+/- The cached instances of `Derived.Localizing` (the scoped ones of
+`Sheaf.SixFunctors.ModCondensedCachedInstances` are not opened here) give `L((f)^*⟦Λ⟧)` instance
+arguments differing from those of
+`leftDerivedUpperStarComp` and `derivedUpperStarLowerStarAdjunction` (elaborated before them);
+unifying the two unfolds the derived functors. They are erased here. -/
+attribute [-instance] hasTensorFour_modCondensed
+  hasGoodTensor₁₂Tensor_modCondensed hasGoodTensorTensor₂₃_modCondensed
+  hasColimitsOfShapeInt_modCondensed hasExactColimitsOfShapeInt_modCondensed
+  hasCountableCoproducts_modCondensed preservesColimitsOfShapeInt_tensorLeft_modCondensed
+  preservesColimitsOfShapeInt_tensorRight_modCondensed hasFunctorialFlatResolution_modCondensed
+
 variable {X Y X' Y' : Scheme.{u}}
 
 /-- The transport `L(a)^* = L(b)^*` along an equality `a = b` is, at the unit, the composite of
@@ -397,6 +408,15 @@ noncomputable def pushforwardExchange :
   (mateEquiv (derivedUpperStarLowerStarAdjunction Λ f)
     (derivedUpperStarLowerStarAdjunction Λ f') (φ.pullbackExchange Λ)).natTrans
 
+section GenericInstances
+
+-- see `section Unit`
+attribute [-instance] hasTensorFour_modCondensed
+  hasGoodTensor₁₂Tensor_modCondensed hasGoodTensorTensor₂₃_modCondensed
+  hasColimitsOfShapeInt_modCondensed hasExactColimitsOfShapeInt_modCondensed
+  hasCountableCoproducts_modCondensed preservesColimitsOfShapeInt_tensorLeft_modCondensed
+  preservesColimitsOfShapeInt_tensorRight_modCondensed hasFunctorialFlatResolution_modCondensed
+
 /-- The pushforward exchange is the mate of the pullback exchange: compatibility with the units
 of `Lf^* ⊣ Rf_*` and `Lf'^* ⊣ Rf'_*`. -/
 lemma map_unit_app_comp_pushforwardExchange_app
@@ -409,6 +429,8 @@ lemma map_unit_app_comp_pushforwardExchange_app
   unit_mateEquiv_aux (derivedUpperStarLowerStarAdjunction Λ f)
     (derivedUpperStarLowerStarAdjunction Λ f') (φ.pullbackExchange Λ) (φ.pushforwardExchange Λ)
     rfl K
+
+end GenericInstances
 
 /-- The pushforward exchange is the mate of the pullback exchange: compatibility with the counits
 of `Lf^* ⊣ Rf_*` and `Lf'^* ⊣ Rf'_*`. -/
