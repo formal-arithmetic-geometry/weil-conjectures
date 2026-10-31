@@ -255,14 +255,18 @@ section ConstantComplex
 `Ψ Λ_X ≅ Λ'_X`: the counit `η` of the oplax monoidal structure of the left derived functor of the
 strong monoidal extension of scalars
 (`CategoryTheory.Functor.isIso_leftDerivedFunctorOplaxMonoidal_η`). -/
+noncomputable def derivedExtendScalarsConstantComplexEtaIso (X : Scheme.{u}) :
+    (derivedExtendScalars hρ ha X).obj (constantComplex Λ X) ≅ constantComplex Λ' X :=
+  haveI := preservesKFlatQuasiIso_extendScalars hρ ha X
+  letI := (Sheaf.extendScalars X.smallEtaleTopology ρ).leftDerivedFunctorOplaxMonoidal
+  haveI := (Sheaf.extendScalars X.smallEtaleTopology ρ).isIso_leftDerivedFunctorOplaxMonoidal_η
+  asIso (Functor.OplaxMonoidal.η (Sheaf.extendScalars X.smallEtaleTopology ρ).leftDerivedFunctor)
+
+/-- `Ψ Λ_X ≅ Λ'_X` exists (`derivedExtendScalarsConstantComplexEtaIso`). -/
 lemma nonempty_derivedExtendScalars_obj_constantComplex_iso (X : Scheme.{u}) :
     Nonempty ((derivedExtendScalars hρ ha X).obj (constantComplex Λ X) ≅
-      constantComplex Λ' X) := by
-  have := preservesKFlatQuasiIso_extendScalars hρ ha X
-  let := (Sheaf.extendScalars X.smallEtaleTopology ρ).leftDerivedFunctorOplaxMonoidal
-  have := (Sheaf.extendScalars X.smallEtaleTopology ρ).isIso_leftDerivedFunctorOplaxMonoidal_η
-  exact ⟨asIso (Functor.OplaxMonoidal.η
-    (Sheaf.extendScalars X.smallEtaleTopology ρ).leftDerivedFunctor)⟩
+      constantComplex Λ' X) :=
+  ⟨derivedExtendScalarsConstantComplexEtaIso hρ ha X⟩
 
 variable {S : Scheme.{u}} (c : (derivedExtendScalars hρ ha S).obj (constantComplex Λ S) ≅
   constantComplex Λ' S)
