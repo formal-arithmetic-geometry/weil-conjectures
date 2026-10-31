@@ -13912,6 +13912,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.OpenImmersion.Se
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.OpenImmersionBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Ordinary
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.OrdinaryCompactSupport
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.OrdinaryFactors
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.OrdinaryProper
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.PerfectDual
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ProperFactor.ExchangeCompat
@@ -14354,6 +14355,7 @@ public import WeilConjectures.SixFunctors.NearbyCycles.KunnethAverage
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethBraided
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethCoinvariant
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethEquivariant
+public import WeilConjectures.SixFunctors.NearbyCycles.KunnethGaloisLayer
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethGeneric
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethLocal
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethProper
@@ -15187,6 +15189,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImme
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekInterchange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekLocalizing
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OrdinaryKunnethCriterion
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.PadicAlgClNsmulCancel
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.PointImageVanishing
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProFiniteEtaleTrace
@@ -15194,6 +15197,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Projecti
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaField
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaPadicAlgCl
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaPadicIntegers
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaResidueFieldEtale
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionMapExtendScalars
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionMapShift
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarAmplitude
@@ -15280,6 +15284,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleOrigin.Constructible.Regular
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleOriginComplex
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleOriginReadingProof
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleOriginTensor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleOriginUpperStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReading
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReadingUpperShriek
@@ -15292,6 +15297,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReductionProper
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReductionTensor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReductionUpperShriek
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.FieldBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.IntegralReductionUpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.LowerStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.LowerStarBoundedConstructible
@@ -15852,6 +15858,7 @@ public import WeilConjectures.TraceFormula.OrdinaryKunnethIntegral
 public import WeilConjectures.TraceFormula.OrdinaryKunnethOpen
 public import WeilConjectures.TraceFormula.OrdinaryKunnethProjection
 public import WeilConjectures.TraceFormula.OrdinaryKunnethReduction
+public import WeilConjectures.TraceFormula.OrdinaryKunnethResidueField
 public import WeilConjectures.TraceFormula.PieceAdditivity
 public import WeilConjectures.TraceFormula.PieceVanishing
 public import WeilConjectures.TraceFormula.PointComplement
@@ -16041,9 +16048,12 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethClosure
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethFiniteSupport
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethFormula
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethGlobal
+public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethGlobalTorsion
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethIntegral
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethProper
+public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethRational
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethSlice
+public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethSlicePoints
 public import WeilConjectures.TraceFormula.Specialization.NearbyOpenExchange
 public import WeilConjectures.TraceFormula.Specialization.NearbyProperExchange
 public import WeilConjectures.TraceFormula.Specialization.NearbySliceFactorisation
@@ -16131,6 +16141,7 @@ public import WeilConjectures.TraceFormula.Specialization.TraitModelRefinement
 public import WeilConjectures.TraceFormula.Specialization.TraitModelRestrict
 public import WeilConjectures.TraceFormula.Specialization.TraitNearbyFiniteness
 public import WeilConjectures.TraceFormula.Specialization.TraitNearbyMonoidal
+public import WeilConjectures.TraceFormula.Specialization.TraitNearbyMonoidalTorsion
 public import WeilConjectures.TraceFormula.Specialization.TraitProduct
 public import WeilConjectures.TraceFormula.Specialization.TraitProductRestrict
 public import WeilConjectures.TraceFormula.Specialization.TraitSlice
