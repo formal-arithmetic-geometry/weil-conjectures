@@ -118,5 +118,4 @@ Source: Stacks, Tags 06YS and 06YU
 abbrev resolving : ObjectProperty (Homotopy R) :=
   (site_derived_tensor_descent_independentCoefficients.{u, v, r, w, 0, 0} J R).choose
 
-set_option linter.unusedVariables false in
 end SheafOfModules.FixedTensorLocalization

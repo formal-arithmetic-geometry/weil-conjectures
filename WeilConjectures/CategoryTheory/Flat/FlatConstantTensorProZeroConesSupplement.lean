@@ -131,7 +131,6 @@ attribute [local instance] Functor.preservesZeroMorphisms_of_additive
 namespace CategoryTheory
 
 set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 private lemma proZero_of_towerIso
     {B : Type a} [Category.{b} B] [Abelian B] [HasDerivedCategory.{d} B]
     {X Y : ℕᵒᵖ ⥤ CochainComplex B ℤ} (e : X ≅ Y)
@@ -146,7 +145,6 @@ private lemma proZero_of_towerIso
   rw [← DerivedCategory.Q.map_comp, ← e.hom.naturality,
     DerivedCategory.Q.map_comp, hm, zero_comp, comp_zero]
 
-set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency false in
 private lemma coneComparison_fst
     {B : Type a} [Category.{b} B] [Abelian B]
@@ -289,7 +287,6 @@ private lemma localizedZero_map
   rw [← hn, hz, comp_zero]
 
 set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 private lemma proZero_derivedEvaluation
     {B : Type a} [Category.{b} B] [Abelian B]
     [HasDerivedCategory.{d} B] [HasDerivedCategory.{d} (ℕᵒᵖ ⥤ B)]
@@ -398,7 +395,6 @@ attribute [local instance] flatConstantExtensionAdditive
 
 attribute [local irreducible] flatConstantExtensionModel
 
-set_option backward.isDefEq.respectTransparency false in
 namespace FlatConstantUnitProof
 
 set_option backward.isDefEq.respectTransparency false
@@ -569,9 +565,6 @@ private def coefficientIso :
     eqToIso ((flatConstantExtensionModel J A φ).obj_eq (SheafOfModules.unit (R J A))) ≪≫
       scalarUnitIso J A φ
 
-omit [EssentiallySmall.{max u v} C]
-  [HasDerivedCategory.{wO} (SheafOfModules.{max u v}
-    (SheafOfModules.derivedChangeRingIndependentCoefficients J O))] in
 end FlatConstantUnitProof
 
 set_option backward.isDefEq.respectTransparency false in

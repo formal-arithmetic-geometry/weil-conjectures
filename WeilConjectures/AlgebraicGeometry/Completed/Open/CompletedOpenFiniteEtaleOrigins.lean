@@ -28,7 +28,6 @@ universe t
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
-open ProEtale.StrictTower in
 private theorem finiteComparison_eq
     {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     (T : Scheme.{t}) (n : ℕ) :
@@ -144,5 +143,4 @@ private def finiteReductionAdjunction
     (pbcDerivedRestrictComp (d.projection T n)
       (pbcLevelConstantComparison T d n).inv (cbcFiniteProjection d T n) rfl)
 
-open ProEtale.StrictTower in
 end AlgebraicGeometry.Scheme

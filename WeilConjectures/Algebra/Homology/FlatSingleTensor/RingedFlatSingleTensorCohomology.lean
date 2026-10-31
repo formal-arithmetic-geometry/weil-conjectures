@@ -97,6 +97,10 @@ The derived-object comparison is included before its cohomology comparisons. All
 and representative comparisons are the published site-derived-tensor constructions.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 
 set_option autoImplicit false
@@ -118,8 +122,6 @@ set_option allowUnsafeReducibility true in
 attribute [local irreducible] derivedTensor
 attribute [local irreducible] siteDerivedTensorIndependentCoefficients representativeIso
 
-omit [HasDerivedCategory (Modules R)] in
-omit [HasDerivedCategory (Modules R)] in
 section GenericCollapse
 
 variable {M : Type*} [Category* M] [Preadditive M] [HasZeroObject M]
@@ -138,22 +140,14 @@ set_option backward.defeqAttrib.useBackward true in
   erw [HomologicalComplex.ι_mapBifunctorFlipIso_inv_assoc]
   simp [CochainComplex.mapBifunctorSingle₁XIso, HomologicalComplex.singleObjXSelf]
 
-set_option backward.isDefEq.respectTransparency false in
 end GenericCollapse
 
-omit [HasDerivedCategory (Modules R)] in
 omit [HasDerivedCategory (Modules R)] in
 set_option backward.isDefEq.respectTransparency false in
 omit [HasDerivedCategory (Modules R)] in
 set_option backward.isDefEq.respectTransparency false in
 set_option allowUnsafeReducibility true in
 attribute [local irreducible] totalTensor ordinaryTensor
-attribute [local irreducible] cohomologyComparison
 
-set_option backward.isDefEq.respectTransparency false in
-omit [HasDerivedCategory (Modules R)] in
-set_option backward.isDefEq.respectTransparency false in
-attribute [local irreducible] derivedCohomologyIso localizedComparison cohomologyNatIso
 
-set_option backward.isDefEq.respectTransparency false in
 end SheafOfModules.FlatSingleTensor

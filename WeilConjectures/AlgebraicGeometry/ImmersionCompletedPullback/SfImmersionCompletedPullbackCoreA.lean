@@ -396,8 +396,6 @@ def completedProjection
     ((pbcIntegralDatum l E).pull f).map
       ((completedReductionEvaluation X (pbcIntegralDatum l E) n).app K)
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
 private theorem ordinary_transport_eq :
     cbcDatumOrdinaryTransport (pbcIntegralDatum l E) f = derivedIso l E f := by
   symm

@@ -38,9 +38,6 @@ section PresheafEncoding
 
 variable {C : Type u} [Category.{v} C] (R : Type w) [Ring R]
 
-local instance evaluationMonoidal (U : C) : ((evaluation C Ab.{w}).obj U).Monoidal :=
-  Functor.CoreMonoidal.toMonoidal { εIso := Iso.refl _, μIso _ _ := Iso.refl _ }
-
 end PresheafEncoding
 
 section ModuleLocalization

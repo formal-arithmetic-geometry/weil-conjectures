@@ -53,8 +53,6 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{r} C]
   (f : RingedPullback.{r, uC, vC, uD, vD} R S)
   (k : Comparison.{r, uC, vC, uD, vD} (J := J) (K := K) (R := R) (S := S) f)
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end CategoryTheory.CochainPullback
 
 -- Restore Mathlib's original instance for importing modules.

@@ -57,11 +57,4 @@ private theorem homObjMap_zero_source
   change ((φ.app W).hom) (0) = 0
   exact map_zero _
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency true in
 end CategoryTheory

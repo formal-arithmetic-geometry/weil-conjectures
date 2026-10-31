@@ -280,8 +280,6 @@ private theorem comparison_normalization (a : Corner LA etaA) (b : Corner LB eta
   erw [Iso.inv_hom_id_app_assoc]
   rw [← c.descent]
 
-omit [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ A)]
-  [HasDerivedCategory.{w'} B] [HasDerivedCategory.{w'} (ℕᵒᵖ ⥤ B)] in
 private theorem path_descent
     {D : Type u3} [Category.{v3} D] [Abelian D]
     [HasCountableProducts D] [HasLimitsOfShape ℕᵒᵖ D]
@@ -579,10 +577,6 @@ private theorem tower_square_factors (e : F ⋙ G ≅ H ⋙ K)
     ((Functor.whiskeringRight ℕᵒᵖ A2 A3).obj K)
     ((Functor.whiskeringRight ℕᵒᵖ A0 A3).mapIso e) X
 
-omit [HasDerivedCategory.{w0} A0] [HasDerivedCategory.{w0} (ℕᵒᵖ ⥤ A0)]
-  [HasDerivedCategory.{w1} A1] [HasDerivedCategory.{w1} (ℕᵒᵖ ⥤ A1)]
-  [HasDerivedCategory.{w2} A2] [HasDerivedCategory.{w2} (ℕᵒᵖ ⥤ A2)]
-  [HasDerivedCategory.{w3} A3] [HasDerivedCategory.{w3} (ℕᵒᵖ ⥤ A3)] in
 private theorem derived_square
     (a0 : Corner L0 eta0) (a1 : Corner L1 eta1)
     (a2 : Corner L2 eta2) (a3 : Corner L3 eta3)

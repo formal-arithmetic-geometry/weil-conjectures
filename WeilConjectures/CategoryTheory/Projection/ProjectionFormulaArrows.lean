@@ -524,19 +524,11 @@ variable {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
       (ComplexShape.up ℤ) (ComplexShape.up ℤ) (ComplexShape.up ℤ)) ⋙ DerivedCategory.Q ≅
         ((PR.ι ⋙ DerivedCategory.Q).prod (PR.ι ⋙ DerivedCategory.Q)) ⋙ TR)
 
-include hPR in
-set_option backward.isDefEq.respectTransparency true in
-set_option synthInstance.maxSize 2048 in
-set_option synthInstance.maxSize 2048 in
-set_option backward.isDefEq.respectTransparency false in
-set_option linter.unusedSectionVars false in
 end SheafOfModules
 
 namespace SheafOfModules
 
 set_option backward.isDefEq.respectTransparency false
 
-set_option synthInstance.maxSize 2048 in
-set_option maxHeartbeats 800000 in
 -- The definition keeps all ordinary and derived representative identifications explicit.
 end SheafOfModules

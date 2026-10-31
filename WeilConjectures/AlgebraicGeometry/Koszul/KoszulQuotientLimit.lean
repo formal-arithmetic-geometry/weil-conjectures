@@ -35,7 +35,6 @@ section Cone
 universe u v
 variable {C : Type u} [Category.{v} C] [Preadditive C] [HasBinaryBiproducts C]
 variable {P Q : CochainComplex C ℤ} (s : P ⟶ P) (t : Q ⟶ Q)
-set_option backward.isDefEq.respectTransparency false in
 private lemma cocone_ext {A : CochainComplex C ℤ} (s : P ⟶ P)
     (a b : A ⟶ mappingCocone s)
     (h₁ : a ≫ mappingCocone.fst s = b ≫ mappingCocone.fst s)
@@ -129,11 +128,7 @@ private lemma koszulSheafUnitZero_isIso (X : Scheme.{t}) (Λ : Type t) [CommRing
 
 set_option backward.isDefEq.respectTransparency true
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 1600000 in
 -- The statement elaborates several explicit product and cone constructions.
-set_option linter.unusedVariables false in
 -- The existing signature names an unused proof binder in its zero-summand clause.
 end
 

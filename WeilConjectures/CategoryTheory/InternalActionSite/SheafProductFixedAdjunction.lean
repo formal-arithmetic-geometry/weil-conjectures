@@ -250,14 +250,4 @@ private noncomputable def fixedAdjunction (P : Cᵒᵖ ⥤ GrpCat.{u}) :
   untranspose A M a := rfl
   transpose_add A M a b := by ext X x; rfl
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option linter.unusedVariables false in
 end CategoryTheory.InternalActionSite

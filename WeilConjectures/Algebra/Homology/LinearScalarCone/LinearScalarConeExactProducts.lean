@@ -269,7 +269,6 @@ private theorem interchange_comm (s : R) {K L : CochainComplex A ℤ}
     · simp only [Category.assoc, differential_second_assoc ((cochain s).map f) q,
         scalar_map_first s f (q + 1),
         scalar_d_first s L q,
-
          interchange_second_first,
          Preadditive.comp_neg,
         Preadditive.comp_add, Preadditive.add_comp]
@@ -281,7 +280,6 @@ private theorem interchange_comm (s : R) {K L : CochainComplex A ℤ}
     · simp only [Category.assoc, differential_second_assoc ((cochain s).map f) q,
         scalar_map_second s f (q + 1),
         scalar_d_second s L q,
-
          interchange_second_first,
          interchange_second_second,
          Preadditive.comp_add, Preadditive.add_comp,

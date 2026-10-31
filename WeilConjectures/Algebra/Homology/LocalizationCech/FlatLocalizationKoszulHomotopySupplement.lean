@@ -99,7 +99,6 @@ private theorem sectionScalarNat_unit
       rw [pow_succ]
       ring
 
-set_option backward.isDefEq.respectTransparency false in
 private theorem span_pow_le_of_generator_powers
     {S : Type*} [CommRing S] {ι : Type*} (s : Finset ι) (f : ι → S)
     (e : ℕ) (A : Ideal S) (h : ∀ j ∈ s, f j ^ e ∈ A) :

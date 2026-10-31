@@ -294,7 +294,6 @@ set_option backward.isDefEq.respectTransparency true
 attribute [local irreducible] changeOfRingsOfUniverses scalarExtensionSection
   siteSheafTensorTmul siteSheafTensorRight siteSheafTensorSecondMap
 
-attribute [local irreducible] scalarExtensionDualIso
 
 attribute [local irreducible] scalarExtensionTowerForward scalarExtensionTowerReverse
 
