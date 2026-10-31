@@ -32,7 +32,11 @@ This file proves its formal part, for a general strictly henselian slice `Spec K
 * granted the finiteness of the action and that the average lands in the image of `α_θ`, the
   averaging gives the retraction
   (`NearbyCyclesModel.exists_retraction_pullbackExchange_geometricSliceTraitChangeHom_of_image`,
-  from `CategoryTheory.exists_retraction_card_smul_eq_sum`).
+  from `CategoryTheory.exists_retraction_card_smul_eq_sum`);
+* hence the conclusion of `NearbyCyclesModel.exists_subgroup_pullbackExchange_sliceTraitChangeHom`
+  follows from the finiteness of the action of `P'` on `Ψ_{M''} C` and a retraction `s` of
+  `α_θ` with `s ≫ α_θ` fixing the average
+  (`NearbyCyclesModel.exists_subgroup_pullbackExchange_sliceTraitChangeHom_of_image`).
 
 -/
 
@@ -125,5 +129,66 @@ theorem exists_retraction_pullbackExchange_geometricSliceTraitChangeHom_of_image
   exact exists_retraction_card_smul_eq_sum (PadicAlgCl ℓ) _ s hs Finset.univ Finset.univ_nonempty
     _ (fun σ _ ↦ pullbackExchange_geometricSliceTraitChangeHom_comp_autAction hM x hb hC σ.out)
     himg
+
+end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
+
+open Scheme
+
+variable {k' : Type u} [Field k'] {X : Scheme.{u}}
+  {X' : Over (Spec (.of k'))} {M : NearbyCyclesModel X X'.left} {q : M.total ⟶ trait k'}
+  {g : M.generic ⟶ Spec (.of (traitGenericField k'))} (hM : M.IsTraitModelOver q g)
+  {b : M.total ⟶ 𝔸(ULift.{u} (Fin 1); trait k')}
+  (hb : b ≫ 𝔸(ULift.{u} (Fin 1); trait k') ↘ trait k' = q)
+
+variable [IsSepClosed k'] {ℓ : ℕ} [Fact ℓ.Prime] [Fact (ringChar k' ≠ ℓ)]
+
+set_option maxHeartbeats 1600000 in
+-- elaborating the actions of `P' ⧸ V` on the concrete slice trait `Spec k'⟦u⟧⟦t⟧` is slow
+/-- **The invariants from the finiteness of the action and the image of the average**: the
+conclusion of `NearbyCyclesModel.exists_subgroup_pullbackExchange_sliceTraitChangeHom` follows
+from a subgroup `V` of finite index of `P'` acting trivially on `Ψ_{M''} C` together with a
+retraction `s` of `α_θ` such that `s ≫ α_θ` fixes the sum of the actions of representatives of
+`P' ⧸ V`. -/
+theorem exists_subgroup_pullbackExchange_sliceTraitChangeHom_of_image
+    {C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))}
+    (hC : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) M.generic)
+      (L((M.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C))
+    (h : ∃ (V : Subgroup (GenericAut k' (traitSliceField k')))
+      (_ : Fintype (GenericAut k' (traitSliceField k') ⧸ V)),
+      (∀ σ ∈ V, (baseChangeAut hM b hb (traitSlice (traitSliceCoord k'))
+          (traitSlice_over _) σ).autAction (Profinite.padicAlgClRingObj ℓ)
+            (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C) = 𝟙 _) ∧
+      ∃ s, ((geometricSliceTraitChangeHom hM (traitSliceCoord k') hb).pullbackExchange
+          (Profinite.padicAlgClRingObj ℓ)).app C ≫ s = 𝟙 _ ∧
+        (∑ σ : GenericAut k' (traitSliceField k') ⧸ V,
+          (baseChangeAut hM b hb (traitSlice (traitSliceCoord k')) (traitSlice_over _)
+            σ.out).autAction (Profinite.padicAlgClRingObj ℓ)
+              (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C)) ≫
+          s ≫ ((geometricSliceTraitChangeHom hM (traitSliceCoord k') hb).pullbackExchange
+            (Profinite.padicAlgClRingObj ℓ)).app C =
+        ∑ σ : GenericAut k' (traitSliceField k') ⧸ V,
+          (baseChangeAut hM b hb (traitSlice (traitSliceCoord k')) (traitSlice_over _)
+            σ.out).autAction (Profinite.padicAlgClRingObj ℓ)
+              (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C)) :
+    ∃ (V : Subgroup (GenericAut k' (traitSliceField k')))
+      (_ : Fintype (GenericAut k' (traitSliceField k') ⧸ V)),
+      (∀ σ ∈ V, (baseChangeAut hM b hb (traitSlice (traitSliceCoord k'))
+          (traitSlice_over _) σ).autAction (Profinite.padicAlgClRingObj ℓ)
+            (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C) = 𝟙 _) ∧
+      ∃ r, ((geometricSliceTraitChangeHom hM (traitSliceCoord k') hb).pullbackExchange
+          (Profinite.padicAlgClRingObj ℓ)).app C ≫ r = 𝟙 _ ∧
+        Fintype.card (GenericAut k' (traitSliceField k') ⧸ V) •
+          (r ≫ ((geometricSliceTraitChangeHom hM (traitSliceCoord k') hb).pullbackExchange
+          (Profinite.padicAlgClRingObj ℓ)).app C) =
+        ∑ σ : GenericAut k' (traitSliceField k') ⧸ V,
+          (baseChangeAut hM b hb (traitSlice (traitSliceCoord k')) (traitSlice_over _)
+            σ.out).autAction (Profinite.padicAlgClRingObj ℓ)
+              (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj C) := by
+  obtain ⟨V, hV₀, hV, s, hs, himg⟩ := h
+  exact ⟨V, hV₀, hV,
+    exists_retraction_pullbackExchange_geometricSliceTraitChangeHom_of_image hM _ hb hC V s hs himg⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
