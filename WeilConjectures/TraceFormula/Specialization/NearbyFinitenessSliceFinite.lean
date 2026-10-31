@@ -26,7 +26,7 @@ slice (`NearbyCyclesModel.affineSpaceSliceHom`) is a split monomorphism
 (`NearbyCyclesModel.isSplitMono_pullbackExchange_app_affineSpaceSliceHom`), the slice factors
 through a generic slice trait `S'` (`AlgebraicGeometry.nonempty_genericSliceTrait`): the change of
 trait `Spec K⟦t⟧ ⟶ S'` has invertible exchange by Th. finitude 3.7 with finite coefficients
-(`NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_isPullback_trait_finite`), and the slice
+(`ProEtale.CondensedRing.isIso_pullbackExchange_app_of_isPullback_trait_finite`), and the slice
 over `S' ⟶ S` has split exchange: weakly étale base change, then the averaging (M2) with finite
 coefficients
 (`NearbyCyclesModel.isSplitMono_pullbackExchange_app_toCartesian_genericSliceTraitHom_of_finite`).
@@ -94,9 +94,6 @@ theorem isIso_pullbackExchange_app_genericSliceTraitChangeHom_of_finite
   have hNj : IsPullback (genericSliceTraitModel D n i).j (pullback.snd _ _)
       (genericSliceTraitStructure D n i) (Spec.map (CommRingCat.ofHom D.a)) :=
     IsPullback.of_hasPullback _ _
-  have hNi : IsPullback (genericSliceTraitModel D n i).i (pullback.snd _ _)
-      (genericSliceTraitStructure D n i) (Spec.map (CommRingCat.ofHom D.b)) :=
-    IsPullback.of_hasPullback _ _
   have hMj : IsPullback (affineSpaceModel (traitSliceField k') n).geometric.j (pullback.snd _ _)
       (𝔸(ULift.{u} (Fin n); trait (traitSliceField k')) ↘ trait (traitSliceField k'))
       (Spec.map (CommRingCat.ofHom
@@ -112,13 +109,13 @@ theorem isIso_pullbackExchange_app_genericSliceTraitChangeHom_of_finite
       pullback.snd _ _ ≫ Spec.map (CommRingCat.ofHom D.ωK) := pullback.lift_snd _ _ _
   have hp' (m : ℕ) (hm : (m : IsLocalRing.ResidueField D.R) = 0) : p ∣ m :=
     hp m (D.natCast_eq_zero_of_residueField m hm)
-  have h := Hom.isIso_pullbackExchange_app_of_isPullback_trait_finite (ι := D.ι) (a₁ := D.a)
-    (a₂ := algebraMap _ _) (c := D.ωK) (b₁ := D.b) (b₂ := PowerSeries.constantCoeff)
-    D.injective_ι D.maximalIdeal_eq_map_ι D.injective_a
+  have h := isIso_pullbackExchange_app_of_isPullback_trait_finite T (ι := D.ι) (a₁ := D.a)
+    (a₂ := algebraMap _ _) (c := D.ωK) (b₂ := PowerSeries.constantCoeff)
+    D.injective_ι D.maximalIdeal_eq_map_ι p hp' hpT D.injective_a
     (algebraMap_traitGenericField_injective _) D.isAlgebraic_a
     (isAlgebraic_traitGenericField _) D.ωK_comp_a
-    PowerSeries.ker_coeff_eq_max_ideal T p hp' hpT (genericSliceTraitChangeHom D n i)
-    (genericSliceTraitStructure D n i) _ hNj _ hNi _ _ hMj _ hMi hφ hgen _
+    PowerSeries.ker_coeff_eq_max_ideal (genericSliceTraitChangeHom D n i)
+    (genericSliceTraitStructure D n i) _ hNj _ _ hMj _ hMi hφ hgen _
     (by exact_mod_proofs hC')
   exact_mod_proofs h
 
