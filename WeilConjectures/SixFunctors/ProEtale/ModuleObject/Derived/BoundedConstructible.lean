@@ -54,7 +54,6 @@ through the object `c.overObj` and the morphisms `c.overI` and `c.overG` of
 | functor | restriction |
 | --- | --- |
 | `Lf^* = L((f)^*⟦Λ⟧)` | `boundedConstructibleUpperStar` |
-| `Rf_* = R((f)_*⟦Λ⟧)` | `boundedConstructibleLowerStar` (`ℓ`-adic `Λ`) |
 | `j_! = D((j)_!open⟦Λ⟧)`, `j` an open immersion | `boundedConstructibleOpenImmersionLowerShriek` |
 | `- ⊗ᴸ -` | `boundedConstructibleTensor` (`ℓ`-adic `Λ`) |
 | `RHom(-, -)` | `boundedConstructibleHom` (`ℓ`-adic `Λ`) |
@@ -71,6 +70,12 @@ The restricted pullback `Lf^*` is strong monoidal, with the comparison isomorphi
 strong monoidal derived pullback `ProEtale.CondensedRing.monoidal_leftDerivedUpperStar`
 (`monoidal_boundedConstructibleUpperStar`, by `ObjectProperty.monoidalLift`).
 
+The derived pushforward `Rf_* = R((f)_*⟦Λ⟧)` (`boundedConstructibleLowerStar`, `ℓ`-adic `Λ`),
+the adjunction `Lf^* ⊣ Rf_*` and the derived lower shriek are in
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleLowerStar`: that
+`Rf_*` preserves bounded constructible complexes is proved from the finiteness of the direct image
+of a constructible sheaf, whose proof imports
+`WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization`, an importer of this file.
 The derived lower shriek is not a restriction: it is assembled on bounded constructible
 complexes out of the functors above. For a compactification `c = (X ⟶[i] Z ⟶[p] Y)` of `f`,
 `Rf_!^c := i_! ⋙ Rp_*` (`boundedConstructibleLowerShriekOfCompactification`), and `Rf_!` is
@@ -80,8 +85,9 @@ complexes out of the functors above. For a compactification `c = (X ⟶[i] Z ⟶
 (`boundedConstructibleLowerShriekOfCompactificationCompatibility`,
 `boundedConstructibleLowerShriekCompatibility`).
 
-The adjunctions `Lf^* ⊣ Rf_*` and `j_! ⊣ j^*` restrict along the fully faithful inclusions
-(`Adjunction.restrictFullyFaithful`), and so does the composition isomorphism
+The adjunctions `Lf^* ⊣ Rf_*` (in `BoundedConstructibleLowerStar`) and `j_! ⊣ j^*` restrict
+along the fully faithful inclusions (`Adjunction.restrictFullyFaithful`), and so does the
+composition isomorphism
 `L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*` (`boundedConstructibleUpperStarComp`). Its conjugates under these
 adjunctions are the composition isomorphisms `Rf_* ⋙ Rg_* ≅ R(f ≫ g)_*`
 (`boundedConstructibleLowerStarComp`) and `(j ≫ j')_! ≅ j_! ⋙ j'_!` for open immersions
@@ -136,6 +142,9 @@ coefficient rings separately, with the same declaration names:
 The pullback and the extension by zero are stated once, for a general `Λ`.
 
 -/
+
+-- The `privateModule` linter alone takes about 20 s on this file.
+set_option linter.privateModule false
 
 @[expose] public section
 
@@ -286,7 +295,6 @@ end LowerStar
 
 namespace ContinuousMapRingObj
 
-
 section LowerStar
 
 include ℓ k
@@ -370,7 +378,6 @@ end ContinuousMapRingObj
 /-! #### The coefficient ring `𝒪̲_E`, `E ⊆ ℚ̄_ℓ` a finite extension of `ℚ_ℓ` -/
 
 namespace PadicIntegersRingObj
-
 
 section LowerStar
 
@@ -542,231 +549,19 @@ noncomputable def boundedConstructibleOpenImmersionLowerShriekComp {V : Over (Sp
 
 end OpenImmersion
 
-/-! ### The derived lower shriek -/
+/-! ### The compactification chosen by Nagata's theorem -/
 
 /-- The compactification of the underlying morphism of schemes `f.left` of a morphism `f` of
 separated `k`-schemes of finite type chosen by Nagata's theorem
 (`AlgebraicGeometry.HasCompactification.of_over`): the compactification
 `HasCompactification.compactification f.left` for the instance it provides. It is the
-compactification defining `boundedConstructibleLowerShriek`. -/
+compactification defining `boundedConstructibleLowerShriek`
+(`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleLowerStar`). -/
 noncomputable abbrev compactificationOverField {k : Type u} [Field k] {X Y : Over (Spec (.of k))}
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [QuasiCompact Y.hom]
     [IsSeparated Y.hom] (f : X ⟶ Y) : Compactification f.left :=
   haveI := HasCompactification.of_over f
   HasCompactification.compactification f.left
-
-section Shriek
-
-include ℓ k
-
-variable {X Y : Over (Spec (.of k))}
-  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
-  [QuasiCompact Y.hom] [IsSeparated Y.hom]
-
-section OfCompactification
-
-variable {f : X ⟶ Y} (c : Compactification f.left)
-
-/-- The lower shriek `Rf_!^c = i_! ⋙ Rp_* : Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y)⟦ℚ̲̄_ℓ⟧` on bounded
-constructible complexes attached to a compactification `c = (X.left ⟶[i] Z ⟶[p] Y.left)` of
-`f.left`: the extension by zero along the open immersion `i` followed by the
-derived pushforward along the proper morphism `p`, both on bounded constructible complexes, for `i`
-and `p` the morphisms `c.overI` and `c.overG` of `Over (Spec (.of k))`. -/
-noncomputable def boundedConstructibleLowerShriekOfCompactification :
-    Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤ Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
-  boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ c.overI ⋙
-    boundedConstructibleLowerStar ℓ c.overG
-
-/-- `Rf_!^c` on bounded constructible complexes is the restriction of the derived lower shriek
-`Rf_!(c)⟦ℚ̲̄_ℓ⟧` on the ambient derived categories. -/
-noncomputable def boundedConstructibleLowerShriekOfCompactificationCompatibility :
-    boundedConstructibleLowerShriekOfCompactification ℓ c ⋙ (boundedConstructible _).ι ≅
-      (boundedConstructible _).ι ⋙ Rf_!(c)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
-  Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft _ (boundedConstructibleLowerStarCompatibility ℓ c.overG) ≪≫
-    (Functor.associator _ _ _).symm ≪≫
-    Functor.isoWhiskerRight
-      (boundedConstructibleOpenImmersionLowerShriekCompatibility (Profinite.padicAlgClRingObj ℓ) ℓ
-        c.overI) _ ≪≫
-    Functor.associator _ _ _
-
-end OfCompactification
-
-variable (f : X ⟶ Y)
-
-/-- The derived lower shriek `Rf_! : Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y)⟦ℚ̲̄_ℓ⟧` on bounded constructible
-complexes: the functor `boundedConstructibleLowerShriekOfCompactification`
-attached to the compactification `compactificationOverField f` chosen by Nagata's theorem. -/
-noncomputable def boundedConstructibleLowerShriek :
-    Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤ Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
-  boundedConstructibleLowerShriekOfCompactification ℓ (compactificationOverField f)
-
-/-- The defining equation of `boundedConstructibleLowerShriek` (`ℚ̄_ℓ`-coefficient). -/
-lemma boundedConstructibleLowerShriek_eq :
-    boundedConstructibleLowerShriek ℓ f =
-      boundedConstructibleLowerShriekOfCompactification ℓ (compactificationOverField f) :=
-  rfl
-
-/-- The derived lower shriek on bounded constructible complexes is the restriction of the
-derived lower shriek `R(f)_!⟦ℚ̲̄_ℓ⟧` on the ambient derived categories. -/
-noncomputable def boundedConstructibleLowerShriekCompatibility :
-    haveI := HasCompactification.of_over f
-    boundedConstructibleLowerShriek ℓ f ⋙ (boundedConstructible _).ι ≅
-      (boundedConstructible _).ι ⋙ R(f.left)_!⟦Profinite.padicAlgClRingObj ℓ⟧ :=
-  boundedConstructibleLowerShriekOfCompactificationCompatibility ℓ
-    (compactificationOverField f)
-
-end Shriek
-
-/-! #### The coefficient ring `E̲`, `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ` -/
-
-namespace ContinuousMapRingObj
-
-
-section Shriek
-
-include ℓ k
-
-variable (E : PadicAlgCl.FiniteIntermediateField ℓ)
-
-variable {X Y : Over (Spec (.of k))}
-  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
-  [QuasiCompact Y.hom] [IsSeparated Y.hom]
-
-section OfCompactification
-
-variable {f : X ⟶ Y} (c : Compactification f.left)
-
-/-- The lower shriek `Rf_!^c = i_! ⋙ Rp_* : Dᵇc(X)⟦E̲⟧ ⥤ Dᵇc(Y)⟦E̲⟧` on bounded
-constructible complexes attached to a compactification `c = (X.left ⟶[i] Z ⟶[p] Y.left)` of
-`f.left`: the extension by zero along the open immersion `i` followed by the
-derived pushforward along the proper morphism `p`, both on bounded constructible complexes, for `i`
-and `p` the morphisms `c.overI` and `c.overG` of `Over (Spec (.of k))`. -/
-noncomputable def boundedConstructibleLowerShriekOfCompactification :
-    Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧ ⥤ Dᵇc(Y.left)⟦Profinite.continuousMapRingObj E⟧ :=
-  boundedConstructibleOpenImmersionLowerShriek (Profinite.continuousMapRingObj E) ℓ c.overI ⋙
-    boundedConstructibleLowerStar ℓ E c.overG
-
-/-- `Rf_!^c` on bounded constructible complexes is the restriction of the derived lower shriek
-`Rf_!(c)⟦E̲⟧` on the ambient derived categories. -/
-noncomputable def boundedConstructibleLowerShriekOfCompactificationCompatibility :
-    boundedConstructibleLowerShriekOfCompactification ℓ E c ⋙ (boundedConstructible _).ι ≅
-      (boundedConstructible _).ι ⋙ Rf_!(c)⟦Profinite.continuousMapRingObj E⟧ :=
-  Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft _ (boundedConstructibleLowerStarCompatibility ℓ E c.overG) ≪≫
-    (Functor.associator _ _ _).symm ≪≫
-    Functor.isoWhiskerRight
-      (boundedConstructibleOpenImmersionLowerShriekCompatibility (Profinite.continuousMapRingObj E)
-        ℓ
-        c.overI) _ ≪≫
-    Functor.associator _ _ _
-
-end OfCompactification
-
-variable (f : X ⟶ Y)
-
-/-- The derived lower shriek `Rf_! : Dᵇc(X)⟦E̲⟧ ⥤ Dᵇc(Y)⟦E̲⟧` on bounded constructible
-complexes: the functor `boundedConstructibleLowerShriekOfCompactification`
-attached to the compactification `compactificationOverField f` chosen by Nagata's theorem. -/
-noncomputable def boundedConstructibleLowerShriek :
-    Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧ ⥤ Dᵇc(Y.left)⟦Profinite.continuousMapRingObj E⟧ :=
-  boundedConstructibleLowerShriekOfCompactification ℓ E (compactificationOverField f)
-
-/-- The defining equation of `boundedConstructibleLowerShriek` (`E`-coefficient). -/
-lemma boundedConstructibleLowerShriek_eq :
-    boundedConstructibleLowerShriek ℓ E f =
-      boundedConstructibleLowerShriekOfCompactification ℓ E (compactificationOverField f) :=
-  rfl
-
-/-- The derived lower shriek on bounded constructible complexes is the restriction of the
-derived lower shriek `R(f)_!⟦E̲⟧` on the ambient derived categories. -/
-noncomputable def boundedConstructibleLowerShriekCompatibility :
-    haveI := HasCompactification.of_over f
-    boundedConstructibleLowerShriek ℓ E f ⋙ (boundedConstructible _).ι ≅
-      (boundedConstructible _).ι ⋙ R(f.left)_!⟦Profinite.continuousMapRingObj E⟧ :=
-  boundedConstructibleLowerShriekOfCompactificationCompatibility ℓ E
-    (compactificationOverField f)
-
-end Shriek
-
-end ContinuousMapRingObj
-
-/-! #### The coefficient ring `𝒪̲_E`, `E ⊆ ℚ̄_ℓ` a finite extension of `ℚ_ℓ` -/
-
-namespace PadicIntegersRingObj
-
-
-section Shriek
-
-include ℓ k
-
-variable (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
-  [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
-
-variable {X Y : Over (Spec (.of k))}
-  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
-  [QuasiCompact Y.hom] [IsSeparated Y.hom]
-
-section OfCompactification
-
-variable {f : X ⟶ Y} (c : Compactification f.left)
-
-/-- The lower shriek `Rf_!^c = i_! ⋙ Rp_* : Dᵇc(X)⟦𝒪̲_E⟧ ⥤ Dᵇc(Y)⟦𝒪̲_E⟧` on bounded
-constructible complexes attached to a compactification `c = (X.left ⟶[i] Z ⟶[p] Y.left)` of
-`f.left`: the extension by zero along the open immersion `i` followed by the
-derived pushforward along the proper morphism `p`, both on bounded constructible complexes, for `i`
-and `p` the morphisms `c.overI` and `c.overG` of `Over (Spec (.of k))`. -/
-noncomputable def boundedConstructibleLowerShriekOfCompactification :
-    Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧ ⥤ Dᵇc(Y.left)⟦Profinite.padicIntegersRingObj ℓ
-      E⟧ :=
-  boundedConstructibleOpenImmersionLowerShriek (Profinite.padicIntegersRingObj ℓ E) ℓ c.overI ⋙
-    boundedConstructibleLowerStar ℓ E c.overG
-
-/-- `Rf_!^c` on bounded constructible complexes is the restriction of the derived lower shriek
-`Rf_!(c)⟦𝒪̲_E⟧` on the ambient derived categories. -/
-noncomputable def boundedConstructibleLowerShriekOfCompactificationCompatibility :
-    boundedConstructibleLowerShriekOfCompactification ℓ E c ⋙ (boundedConstructible _).ι ≅
-      (boundedConstructible _).ι ⋙ Rf_!(c)⟦Profinite.padicIntegersRingObj ℓ E⟧ :=
-  Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft _ (boundedConstructibleLowerStarCompatibility ℓ E c.overG) ≪≫
-    (Functor.associator _ _ _).symm ≪≫
-    Functor.isoWhiskerRight
-      (boundedConstructibleOpenImmersionLowerShriekCompatibility
-        (Profinite.padicIntegersRingObj ℓ E) ℓ
-        c.overI) _ ≪≫
-    Functor.associator _ _ _
-
-end OfCompactification
-
-variable (f : X ⟶ Y)
-
-/-- The derived lower shriek `Rf_! : Dᵇc(X)⟦𝒪̲_E⟧ ⥤ Dᵇc(Y)⟦𝒪̲_E⟧` on bounded constructible
-complexes: the functor `boundedConstructibleLowerShriekOfCompactification`
-attached to the compactification `compactificationOverField f` chosen by Nagata's theorem. -/
-noncomputable def boundedConstructibleLowerShriek :
-    Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧ ⥤ Dᵇc(Y.left)⟦Profinite.padicIntegersRingObj ℓ
-      E⟧ :=
-  boundedConstructibleLowerShriekOfCompactification ℓ E (compactificationOverField f)
-
-/-- The defining equation of `boundedConstructibleLowerShriek` (`𝒪_E`-coefficient). -/
-lemma boundedConstructibleLowerShriek_eq :
-    boundedConstructibleLowerShriek ℓ E f =
-      boundedConstructibleLowerShriekOfCompactification ℓ E (compactificationOverField f) :=
-  rfl
-
-/-- The derived lower shriek on bounded constructible complexes is the restriction of the
-derived lower shriek `R(f)_!⟦𝒪̲_E⟧` on the ambient derived categories. -/
-noncomputable def boundedConstructibleLowerShriekCompatibility :
-    haveI := HasCompactification.of_over f
-    boundedConstructibleLowerShriek ℓ E f ⋙ (boundedConstructible _).ι ≅
-      (boundedConstructible _).ι ⋙ R(f.left)_!⟦Profinite.padicIntegersRingObj ℓ E⟧ :=
-  boundedConstructibleLowerShriekOfCompactificationCompatibility ℓ E
-    (compactificationOverField f)
-
-end Shriek
-
-end PadicIntegersRingObj
-
 
 /-! ### The derived tensor product and the derived hom -/
 
@@ -828,15 +623,6 @@ noncomputable def boundedConstructibleTensor :
       Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
   curriedTensor _
 
-/-- The derived hom `RHom(-, -) : Dᵇc(X)⟦ℚ̲̄_ℓ⟧ᵒᵖ ⥤ Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(X)⟦ℚ̲̄_ℓ⟧` on bounded
-constructible complexes: the internal hom of the monoidal closed structure on
-the full subcategory `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` (`ObjectProperty.fullMonoidalClosedSubcategory`), the
-restriction of `RHom(X)⟦ℚ̲̄_ℓ⟧` in both variables. -/
-noncomputable def boundedConstructibleHom :
-    (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)ᵒᵖ ⥤ Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤
-      Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
-  MonoidalClosed.internalHom
-
 variable {X}
 
 /-- For a fixed `K ∈ Dᵇc(X)⟦ℚ̲̄_ℓ⟧`, the restricted functor `K ⊗ᴸ -` is compatible with the
@@ -848,37 +634,11 @@ noncomputable def boundedConstructibleTensorObjCompatibility
   NatIso.ofComponents (fun _ ↦ Iso.refl _) fun g ↦ by
     simp [boundedConstructibleTensor, derivedTensor]
 
-/-- For a fixed `K ∈ Dᵇc(X)⟦ℚ̲̄_ℓ⟧`, the restricted functor `RHom(K, -)` is compatible with the
-inclusions. -/
-noncomputable def boundedConstructibleHomObjCompatibility
-    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleHom ℓ X).obj (op K) ⋙ (boundedConstructible _).ι ≅
-      (boundedConstructible _).ι ⋙ (RHom(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧).obj (op K.obj) :=
-  NatIso.ofComponents (fun _ ↦ Iso.refl _) fun g ↦ by
-    simp only [Iso.refl_hom, Category.comp_id, Category.id_comp]
-    rfl
-
-/-- The adjunction with a parameter `- ⊗ᴸ - ⊣₂ RHom(-, -)` on bounded constructible complexes:
-the tensor-hom adjunction of the monoidal closed structure on `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`.
--/
-noncomputable def boundedConstructibleTensorHomAdjunction₂ :
-    boundedConstructibleTensor ℓ X ⊣₂ boundedConstructibleHom ℓ X :=
-  MonoidalClosed.internalHomAdjunction₂
-
-/-- For a fixed `K ∈ Dᵇc(X)⟦ℚ̲̄_ℓ⟧`, the adjunction `K ⊗ᴸ - ⊣ RHom(K, -)` on bounded constructible
-complexes: the tensor-hom adjunction `ihom.adjunction K` of the monoidal closed
-structure on `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`. -/
-noncomputable def boundedConstructibleTensorHomAdjunction
-    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (boundedConstructibleTensor ℓ X).obj K ⊣ (boundedConstructibleHom ℓ X).obj (op K) :=
-  (boundedConstructibleTensorHomAdjunction₂ ℓ).adj K
-
 end TensorHom
 
 /-! #### The coefficient ring `E̲`, `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ` -/
 
 namespace ContinuousMapRingObj
-
 
 section TensorHom
 
@@ -939,16 +699,6 @@ noncomputable def boundedConstructibleTensor :
       Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧ :=
   curriedTensor _
 
-/-- The derived hom `RHom(-, -) : Dᵇc(X)⟦E̲⟧ᵒᵖ ⥤ Dᵇc(X)⟦E̲⟧ ⥤ Dᵇc(X)⟦E̲⟧` on bounded
-constructible complexes: the internal hom of the monoidal closed structure on the
-full subcategory `Dᵇc(X)⟦E̲⟧` (`ObjectProperty.fullMonoidalClosedSubcategory`), the restriction
-of `RHom(X)⟦E̲⟧` in both variables. -/
-noncomputable def boundedConstructibleHom :
-    (Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧)ᵒᵖ ⥤
-      Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧ ⥤
-        Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧ :=
-  MonoidalClosed.internalHom
-
 variable {X}
 
 /-- For a fixed `K ∈ Dᵇc(X)⟦E̲⟧`, the restricted functor `K ⊗ᴸ -` is compatible with the
@@ -960,31 +710,6 @@ noncomputable def boundedConstructibleTensorObjCompatibility
   NatIso.ofComponents (fun _ ↦ Iso.refl _) fun g ↦ by
     simp [boundedConstructibleTensor, derivedTensor]
 
-/-- For a fixed `K ∈ Dᵇc(X)⟦E̲⟧`, the restricted functor `RHom(K, -)` is compatible with the
-inclusions. -/
-noncomputable def boundedConstructibleHomObjCompatibility
-    (K : Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧) :
-    (boundedConstructibleHom ℓ E X).obj (op K) ⋙ (boundedConstructible _).ι ≅
-      (boundedConstructible _).ι ⋙ (RHom(X.left)⟦Profinite.continuousMapRingObj E⟧).obj
-        (op K.obj) :=
-  NatIso.ofComponents (fun _ ↦ Iso.refl _) fun g ↦ by
-    simp only [Iso.refl_hom, Category.comp_id, Category.id_comp]
-    rfl
-
-/-- The adjunction with a parameter `- ⊗ᴸ - ⊣₂ RHom(-, -)` on bounded constructible complexes:
-the tensor-hom adjunction of the monoidal closed structure on `Dᵇc(X)⟦E̲⟧`. -/
-noncomputable def boundedConstructibleTensorHomAdjunction₂ :
-    boundedConstructibleTensor ℓ E X ⊣₂ boundedConstructibleHom ℓ E X :=
-  MonoidalClosed.internalHomAdjunction₂
-
-/-- For a fixed `K ∈ Dᵇc(X)⟦E̲⟧`, the adjunction `K ⊗ᴸ - ⊣ RHom(K, -)` on bounded constructible
-complexes: the tensor-hom adjunction `ihom.adjunction K` of the monoidal closed
-structure on `Dᵇc(X)⟦E̲⟧`. -/
-noncomputable def boundedConstructibleTensorHomAdjunction
-    (K : Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧) :
-    (boundedConstructibleTensor ℓ E X).obj K ⊣ (boundedConstructibleHom ℓ E X).obj (op K) :=
-  (boundedConstructibleTensorHomAdjunction₂ ℓ E).adj K
-
 end TensorHom
 
 end ContinuousMapRingObj
@@ -992,7 +717,6 @@ end ContinuousMapRingObj
 /-! #### The coefficient ring `𝒪̲_E`, `E ⊆ ℚ̄_ℓ` a finite extension of `ℚ_ℓ` -/
 
 namespace PadicIntegersRingObj
-
 
 section TensorHom
 
@@ -1053,16 +777,6 @@ noncomputable def boundedConstructibleTensor :
       Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧ :=
   curriedTensor _
 
-/-- The derived hom `RHom(-, -) : Dᵇc(X)⟦𝒪̲_E⟧ᵒᵖ ⥤ Dᵇc(X)⟦𝒪̲_E⟧ ⥤ Dᵇc(X)⟦𝒪̲_E⟧` on bounded
-constructible complexes: the internal hom of the monoidal closed structure on
-the full subcategory `Dᵇc(X)⟦𝒪̲_E⟧` (`ObjectProperty.fullMonoidalClosedSubcategory`), the
-restriction of `RHom(X)⟦𝒪̲_E⟧` in both variables. -/
-noncomputable def boundedConstructibleHom :
-    (Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧)ᵒᵖ ⥤ Dᵇc(X.left)⟦Profinite.padicIntegersRingObj
-      ℓ E⟧ ⥤
-      Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧ :=
-  MonoidalClosed.internalHom
-
 variable {X}
 
 /-- For a fixed `K ∈ Dᵇc(X)⟦𝒪̲_E⟧`, the restricted functor `K ⊗ᴸ -` is compatible with the
@@ -1073,32 +787,6 @@ noncomputable def boundedConstructibleTensorObjCompatibility
       (boundedConstructible _).ι ⋙ (-⊗ᴸ-(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧).obj K.obj :=
   NatIso.ofComponents (fun _ ↦ Iso.refl _) fun g ↦ by
     simp [boundedConstructibleTensor, derivedTensor]
-
-/-- For a fixed `K ∈ Dᵇc(X)⟦𝒪̲_E⟧`, the restricted functor `RHom(K, -)` is compatible with the
-inclusions. -/
-noncomputable def boundedConstructibleHomObjCompatibility
-    (K : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) :
-    (boundedConstructibleHom ℓ E X).obj (op K) ⋙ (boundedConstructible _).ι ≅
-      (boundedConstructible _).ι ⋙ (RHom(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧).obj
-        (op K.obj) :=
-  NatIso.ofComponents (fun _ ↦ Iso.refl _) fun g ↦ by
-    simp only [Iso.refl_hom, Category.comp_id, Category.id_comp]
-    rfl
-
-/-- The adjunction with a parameter `- ⊗ᴸ - ⊣₂ RHom(-, -)` on bounded constructible complexes:
-the tensor-hom adjunction of the monoidal closed structure on `Dᵇc(X)⟦𝒪̲_E⟧`.
--/
-noncomputable def boundedConstructibleTensorHomAdjunction₂ :
-    boundedConstructibleTensor ℓ E X ⊣₂ boundedConstructibleHom ℓ E X :=
-  MonoidalClosed.internalHomAdjunction₂
-
-/-- For a fixed `K ∈ Dᵇc(X)⟦𝒪̲_E⟧`, the adjunction `K ⊗ᴸ - ⊣ RHom(K, -)` on bounded constructible
-complexes: the tensor-hom adjunction `ihom.adjunction K` of the monoidal closed
-structure on `Dᵇc(X)⟦𝒪̲_E⟧`. -/
-noncomputable def boundedConstructibleTensorHomAdjunction
-    (K : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) :
-    (boundedConstructibleTensor ℓ E X).obj K ⊣ (boundedConstructibleHom ℓ E X).obj (op K) :=
-  (boundedConstructibleTensorHomAdjunction₂ ℓ E).adj K
 
 end TensorHom
 
@@ -1126,7 +814,6 @@ end MonoidalUpperStar
 
 namespace ContinuousMapRingObj
 
-
 section MonoidalUpperStar
 
 include ℓ k
@@ -1152,7 +839,6 @@ end ContinuousMapRingObj
 /-! #### The coefficient ring `𝒪̲_E`, `E ⊆ ℚ̄_ℓ` a finite extension of `ℚ_ℓ` -/
 
 namespace PadicIntegersRingObj
-
 
 section MonoidalUpperStar
 

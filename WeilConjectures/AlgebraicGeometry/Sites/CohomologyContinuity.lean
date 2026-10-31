@@ -108,6 +108,9 @@ theorem isZero_rightDerived_sectionsFunctor_upperStar_of_isLimit {S : Scheme.{u}
     exact (hstage j).eq_of_src _ _
   exact hlimit.of_iso e.symm
 
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
 /-- Blueprint `lemma-weil-pbc-etale-cohomology-continuity`: Etale cohomology continuity, in the
 form of an elementwise colimit statement for the pullback maps.
 
@@ -137,88 +140,33 @@ theorem cohomologyMap_isColimit_of_isLimit {S : Scheme.{u}}
       Etale.cohomologyMap (c.π.app i).left _ q y = 0 →
         ∃ (j : I) (g : j ⟶ i), Etale.cohomologyMap (D.map g).left _ q y = 0 := by
   classical
-  let D' := D ⋙ Over.forget S
-  let π : D' ⟶ (Functor.const I).obj S :=
-    { app := fun i ↦ (D.obj i).hom
-      naturality := fun i j f ↦ by simp [D'] }
-  have hπ {j k : I} (f : j ⟶ k) : π.app j = D'.map f ≫ π.app k := (Over.w (D.map f)).symm
-  have ht (j : I) : c.pt.hom = ((Over.forget S).mapCone c).π.app j ≫ π.app j :=
-    (Over.w (c.π.app j)).symm
-  have : PreservesFilteredColimitsOfSize.{u, u} (forget AddCommGrpCat.{u + 1}) :=
-    preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
-  have (i : I) : CompactSpace (D'.obj i) := inferInstanceAs (CompactSpace (D.obj i).left)
-  have (i : I) : QuasiSeparatedSpace (D'.obj i) :=
-    inferInstanceAs (QuasiSeparatedSpace (D.obj i).left)
-  have {i j : I} (g : i ⟶ j) : IsAffineHom (D'.map g) :=
-    inferInstanceAs (IsAffineHom (D.map g).left)
-  have laws := cohomologyTriangleMap_laws S F q
-  let H : Iᵒᵖ ⥤ AddCommGrpCat.{u + 1} :=
-    { obj := fun j ↦ AddCommGrpCat.of
-        (Sheaf.H (((π.app j.unop)^*[AddCommGrpCat.{u + 1}]).obj F) q)
-      map := fun f ↦ AddCommGrpCat.ofHom
-        (cohomologyTriangleMap (D'.map f.unop) (π.app _) (π.app _) (hπ f.unop) F q)
-      map_id := by
-        intro j
-        dsimp
-        simp only [D'.map_id]
-        exact (congrArg AddCommGrpCat.ofHom
-          (laws.1 (D'.obj j.unop) (π.app j.unop))).trans AddCommGrpCat.ofHom_id
-      map_comp := by
-        intro j k l f g
-        dsimp
-        simp only [D'.map_comp]
-        exact (congrArg AddCommGrpCat.ofHom
-          (laws.2 (D'.obj l.unop) (D'.obj k.unop) (D'.obj j.unop)
-            (D'.map g.unop) (D'.map f.unop) (π.app j.unop) (π.app k.unop)
-            (π.app l.unop) (hπ f.unop) (hπ g.unop))).trans
-              (AddCommGrpCat.ofHom_comp _ _) }
-  let B : Cocone H :=
-    { pt := AddCommGrpCat.of (Sheaf.H (((c.pt.hom)^*[AddCommGrpCat.{u + 1}]).obj F) q)
-      ι :=
-        { app := fun j ↦ AddCommGrpCat.ofHom
-            (cohomologyTriangleMap (c.π.app j.unop).left (π.app j.unop) c.pt.hom
-              (ht j.unop) F q)
-          naturality := by
-            intro j k f
-            dsimp
-            simp only [Category.comp_id]
-            have h := laws.2 c.pt.left (D'.obj k.unop) (D'.obj j.unop)
-              (c.π.app k.unop).left (D'.map f.unop) (π.app j.unop) (π.app k.unop)
-              c.pt.hom (hπ f.unop) (ht k.unop)
-            simp only [D', Functor.comp_map, Over.forget_map, ← Over.comp_left,
-              c.w f.unop] at h
-            exact (AddCommGrpCat.ofHom_comp _ _).symm.trans
-              (congrArg AddCommGrpCat.ofHom h).symm } }
-  obtain ⟨hB⟩ := nonempty_isColimit_cofiltered_fixed_base_cohomology
-    D' π ((Over.forget S).mapCone c) hc c.pt.hom ht F q H (fun j ↦ Iso.refl _)
-    (fun j k f ↦ by simp [H]) B (Iso.refl _) (fun j ↦ by simp [B])
-  -- `cohomologyTriangleMap` followed by the inverse-image comparison is `cohomologyMap`
-  have key {X Y : Scheme.{u}} (f : X ⟶ Y) (a : Y ⟶ S) (b : X ⟶ S) (h : b = f ≫ a)
-      (y : Sheaf.H (((a)^*[AddCommGrpCat.{u + 1}]).obj F) q) :
-      Sheaf.H.map ((upperStarComp AddCommGrpCat.{u + 1} f a b h).hom.app F) q
-        (cohomologyTriangleMap f a b h F q y) = cohomologyMap f _ q y := by
-    unfold cohomologyTriangleMap
-    rw [AddMonoidHom.comp_apply, ← Sheaf.H.map_comp_apply]
-    simp
-  refine ⟨fun x ↦ ?_, fun i y hy ↦ ?_⟩
-  · obtain ⟨i, y, hy⟩ := Concrete.isColimit_exists_rep H hB x
-    refine ⟨i.unop, y, ?_⟩
-    rw [← key]
-    exact congrArg _ hy
-  · have h0 : B.ι.app (op i) y = B.ι.app (op i) 0 := by
-      rw [map_zero]
-      change cohomologyTriangleMap (c.π.app i).left (π.app i) c.pt.hom (ht i) F q y = 0
-      have := congrArg (Sheaf.H.map ((upperStarComp AddCommGrpCat.{u + 1} (c.π.app i).left
-        (π.app i) c.pt.hom (ht i)).inv.app F) q)
-        ((key (c.π.app i).left (π.app i) c.pt.hom (ht i) y).trans hy)
-      rw [← Sheaf.H.map_comp_apply, map_zero] at this
-      simpa using this
-    obtain ⟨k, f, g, hfg⟩ := Concrete.isColimit_exists_of_rep_eq H hB y 0 h0
-    refine ⟨k.unop, f.unop, ?_⟩
-    rw [map_zero] at hfg
-    rw [← key (D.map f.unop).left (D.obj i).hom (D.obj k.unop).hom (hπ f.unop) y]
-    change Sheaf.H.map _ q (H.map f y) = 0
-    rw [hfg, map_zero]
+  refine ⟨exists_cohomologyMap_preimage_of_isLimit F D c hc q, ?_⟩
+  intro i y hy
+  let E : Over i ⥤ Scheme.{u} := Over.forget i ⋙ D ⋙ Over.forget S
+  let : ∀ a : Over i, CompactSpace (E.obj a) :=
+    fun a ↦ inferInstanceAs (CompactSpace (D.obj a.left).left)
+  let : ∀ a : Over i, QuasiSeparatedSpace (E.obj a) :=
+    fun a ↦ inferInstanceAs (QuasiSeparatedSpace (D.obj a.left).left)
+  let : ∀ {a b : Over i} (g : a ⟶ b), IsAffineHom (E.map g) :=
+    fun g ↦ inferInstanceAs (IsAffineHom (D.map g.left).left)
+  let π : E ⟶ (Functor.const (Over i)).obj (D.obj i).left :=
+    { app := fun a ↦ (D.map a.hom).left
+      naturality := fun a b g ↦ by
+        change (D.map g.left).left ≫ (D.map b.hom).left = (D.map a.hom).left ≫ 𝟙 _
+        rw [Category.comp_id, ← Over.comp_left, ← D.map_comp, g.w] }
+  let c' := ((Over.forget S).mapCone c).whisker (Over.forget i)
+  have hc' : IsLimit c' :=
+    (Functor.Initial.isLimitWhiskerEquiv _ ((Over.forget S).mapCone c)).symm hc
+  let G := (Etale.upperStar AddCommGrpCat.{u + 1} (D.obj i).hom).obj F
+  have hz : cohomologyMap (c'.π.app (Over.mk (𝟙 i)) ≫
+      π.app (Over.mk (𝟙 i))) G q y = 0 := by
+    change cohomologyMap ((c.π.app i).left ≫ (D.map (𝟙 i)).left) G q y = 0
+    have hm : (c.π.app i).left ≫ (D.map (𝟙 i)).left = (c.π.app i).left := by
+      rw [D.map_id, Over.id_left, Category.comp_id]
+    rw [hm]
+    exact hy
+  obtain ⟨j, hj⟩ := finiteStageKilling E π c' hc' G q y (Over.mk (𝟙 i)) hz
+  exact ⟨j.left, j.hom, hj⟩
 
 /-- Blueprint `lemma-weil-pbc-etale-cohomology-continuity`: Etale cohomology continuity, vanishing
 form for abelian sheaves.

@@ -18,6 +18,9 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.InjectiveAcyclic
 
+import WeilConjectures.AlgebraicGeometry.Affine.Comparison.AffineComparisonInjectiveDerivedVanishing
+import WeilConjectures.SixFunctors.ProEtale.Comparison.UpperStar
+
 /-!
 # Acyclicity for pro-étale direct images on the affine pro-étale basis
 

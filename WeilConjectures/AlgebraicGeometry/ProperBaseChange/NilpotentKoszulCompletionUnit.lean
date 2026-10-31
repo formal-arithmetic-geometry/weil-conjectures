@@ -1,0 +1,68 @@
+/-
+Copyright (c) 2026 Bin Wu. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Bin Wu
+-/
+module
+
+public import WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicKoszulCompletion
+import WeilConjectures.AlgebraicGeometry.ProperBaseChange.NilpotentKoszulGradedTower
+import all WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicKoszulCompletion
+import WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimit
+import all WeilConjectures.Algebra.Homology.KernelShiftedMappingCone
+import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Tower
+import WeilConjectures.CategoryTheory.Limits.TowerTransitionEndomorphism
+import Mathlib.Algebra.Ring.GeomSum
+
+/-! # Koszul completion at nilpotent generators
+
+Source: literature/blueprint/main-20261015/blueprint/sec-proper-base-change/
+sk-thm-properbasechange/lemma-weil-pbc-adic-completion-reduction.proof.md,
+proof sentences four through seven (order 1328).
+(blueprint: lem-weil-pbc-nilpotent-koszul-completion-unit).
+-/
+
+@[expose] public section
+set_option autoImplicit false
+universe u v
+open CategoryTheory CategoryTheory.Limits Opposite
+open scoped BigOperators
+namespace ProconstantRoos
+variable {A : Type u} [Category.{v} A] [Preadditive A]
+variable (T : ℕᵒᵖ ⥤ A) (C : A)
+  (u : (Functor.const ℕᵒᵖ).obj C ⟶ T)
+  (v : T ⟶ (Functor.const ℕᵒᵖ).obj C)
+  (huv : ∀ n : ℕ, u.app (op n) ≫ v.app (op n) = 𝟙 C)
+  (a : ℕ) (hf : ∀ n : ℕ, T.map (homOfLE (Nat.le_add_right n a)).op =
+    v.app (op (n + a)) ≫ u.app (op n))
+
+include v huv a hf in
+variable [HasProduct (fun n : ℕ ↦ T.obj (op n))] [HasProduct (fun _ : ℕ ↦ C)]
+
+include u v huv a hf in
+include u v huv a hf in
+end ProconstantRoos
+namespace ProconstantComplex
+variable {A : Type u} [Category.{v} A] [Abelian A] [HasCountableProducts A]
+variable (D : ℕᵒᵖ ⥤ CochainComplex A ℤ) (L : CochainComplex A ℤ)
+  (w : (Functor.const ℕᵒᵖ).obj L ⟶ D)
+  (β : ∀ p : ℤ, (D ⋙ HomologicalComplex.eval A (.up ℤ) p) ⟶
+    (Functor.const ℕᵒᵖ).obj (L.X p))
+  (hβ : ∀ n p, (w.app (op n)).f p ≫ (β p).app (op n) = 𝟙 (L.X p))
+  (N : ℕ) (hN : ∀ n p,
+    (D.map (homOfLE (Nat.le_add_right n N)).op).f p =
+      (β p).app (op (n + N)) ≫ (w.app (op n)).f p)
+
+include β hβ N hN in
+include β hβ N hN in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+end ProconstantComplex
+
+universe t
+open CategoryTheory CategoryTheory.Limits Opposite
+namespace AlgebraicGeometry.Scheme
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+end AlgebraicGeometry.Scheme

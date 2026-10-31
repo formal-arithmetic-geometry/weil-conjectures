@@ -121,6 +121,9 @@ open Scheme
 
 open scoped CondensedRing
 
+attribute [local irreducible] upperStarFromPoint Mod.extendScalars
+  CategoryTheory.Functor.leftDerivedFunctor CategoryTheory.Functor.mapDerivedCategory
+
 variable (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
 
 /-! ### The inclusion `𝒪_{E,X} ⟶ E_X` -/
