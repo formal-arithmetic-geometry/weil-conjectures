@@ -34,6 +34,10 @@ functorial K-injective resolutions. The remaining private helpers transport the
 existing exact-products comparison to the positive-difference convention.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option Elab.async false

@@ -23,6 +23,10 @@ fix the completed map uniquely. Its restriction comparison specializes the exist
 ordinary-adjunction and flat-term K-flat normalization, without new choices.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false

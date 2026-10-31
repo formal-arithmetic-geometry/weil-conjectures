@@ -68,6 +68,10 @@ is supplied as an arbitrary parameter.
 - `directImageScalarExchange` is the equality of the two specified composites.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 
 set_option autoImplicit false

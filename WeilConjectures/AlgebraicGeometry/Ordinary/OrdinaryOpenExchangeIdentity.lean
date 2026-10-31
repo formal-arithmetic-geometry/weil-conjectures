@@ -16,6 +16,10 @@ Source: Stacks Project, Tags 03DI, 07A7 and 099N; the identity part of
 proof step 7 of `thm-cbc-complete-proetale`.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
