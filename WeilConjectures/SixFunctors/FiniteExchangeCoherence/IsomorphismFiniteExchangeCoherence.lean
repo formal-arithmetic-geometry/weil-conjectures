@@ -30,6 +30,12 @@ import all WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerCompositionP
 import all WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerProperOpenCalculus
 import WeilConjectures.AlgebraicGeometry.StrictTower.SingleLevelFiniteProperOpenTransport
 import all WeilConjectures.AlgebraicGeometry.StrictTower.FiniteConstantCoefficientTransport
+public import WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicFiniteTorsionConstructibility
+public import WeilConjectures.AlgebraicGeometry.StrictTower.ProperOpenAlphaBaseChangeModules
+public import WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerOrdinaryProperOpenArrows
+public import WeilConjectures.CategoryTheory.Derived.DerivedExactSquareComposition
+public import WeilConjectures.SixFunctors.Integral.IntegralOperationsPreserveConstructible
+public import WeilConjectures.SmoothPurity.Supporting.BasicOperationReductionAndEvaluation
 
 /-! # Finite semilinear compactification exchange coherence
 
@@ -160,6 +166,915 @@ private theorem ordinaryComp_id_right (B : Type (u + 1)) [CommRing B]
     (modulePullback B (𝟙 X)) (moduleGComp B j (𝟙 X)) (moduleGId B X)
     (eqToIso (congrArg (modulePullback B) (Category.comp_id j)))
     (moduleGComp_id_right B j)).trans (derived_eqToIso _ _)
+
+private def ordinaryAdjFixed {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    ordinaryG B f ⊣ ordinaryR B f := ordinaryAdj B f
+
+private def ordinaryGammaFixed {V W S T : Scheme.{u}}
+    (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
+    [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]
+    [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i) :
+    ordinaryR B r ⋙ ordinaryJ B i ⟶ ordinaryJ B k ⋙ ordinaryR B p :=
+  MateEvaluationScalars.singleDerivedGamma B k r p i h
+
+private theorem ordinaryBeta_localization {U' U X' X : Scheme.{u}}
+    (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
+    [IsOpenImmersion j] [IsOpenImmersion j'] (sq : IsPullback a j' j g) :
+    ordinaryBeta B a j' j g sq =
+      Functor.mapDerivedCategorySquareIso (openBetaModule B a j' j g sq.w sq) := by
+  apply Iso.ext
+  simp only [ordinaryBeta, openBetaModule, Functor.mapDerivedCategorySquareIso,
+    Functor.mapDerivedCategoryNatIso_symm, Iso.trans_hom, Iso.trans_inv,
+    Iso.symm_hom, Iso.symm_inv, Category.assoc]
+
+private theorem ordinaryOpenComp {V U X V₁ U₁ X₁ : Scheme.{u}}
+    (k : V ⟶ U) (j : U ⟶ X) (k₁ : V₁ ⟶ U₁) (j₁ : U₁ ⟶ X₁)
+    (a : U₁ ⟶ U) (b : V₁ ⟶ V) (g : X₁ ⟶ X)
+    [IsOpenImmersion k] [IsOpenImmersion j]
+    [IsOpenImmersion k₁] [IsOpenImmersion j₁]
+    (sk : IsPullback b k₁ k a) (sj : IsPullback a j₁ j g)
+    (s : IsPullback b (k₁ ≫ j₁) (k ≫ j) g)
+    (M : DerivedCategory (Modules B V)) :
+    (ordinaryG B g).map ((openComp B k j).inv.app M) ≫
+        (ordinaryBeta B a j₁ j g sj).hom.app ((ordinaryJ B k).obj M) ≫
+        (ordinaryJ B j₁).map ((ordinaryBeta B b k₁ k a sk).hom.app M) =
+      (ordinaryBeta B b (k₁ ≫ j₁) (k ≫ j) g s).hom.app M ≫
+        (openComp B k₁ j₁).inv.app ((ordinaryG B b).obj M) := by
+  rw [ordinaryBeta_localization, ordinaryBeta_localization, ordinaryBeta_localization]
+  have h := Functor.exactSquare_comp_forward
+    (moduleJ B k) (moduleJ B j) (moduleJ B (k ≫ j))
+    (moduleJ B k₁) (moduleJ B j₁) (moduleJ B (k₁ ≫ j₁))
+    (modulePullback B b) (modulePullback B a) (modulePullback B g)
+    (openBetaModule B b k₁ k a sk.w sk) (openBetaModule B a j₁ j g sj.w sj)
+    (openBetaModule B b (k₁ ≫ j₁) (k ≫ j) g s.w s)
+    (openBetaModuleJComp B k j).symm (openBetaModuleJComp B k₁ j₁).symm
+    (fun N ↦ by
+      apply (cancel_mono ((openBetaModuleJComp B k₁ j₁).hom.app
+        ((modulePullback B b).obj N))).1
+      simpa [Iso.symm_hom, Category.assoc, Iso.inv_hom_id_app] using
+        openBetaModuleOpenComp B k j k₁ j₁ a b g sk.w sj.w s.w sk sj s N) M
+  simpa only [openComp, Iso.trans_inv, Iso.symm_inv,
+    Functor.mapDerivedCategoryNatIso_symm, Iso.trans_hom, Iso.symm_hom,
+    NatTrans.comp_app] using h
+
+private theorem ordinaryAlphaCube {V W S T V₁ W₁ S₁ T₁ : Scheme.{u}}
+    (k : V ⟶ W) (i : S ⟶ T) (r : V ⟶ S) (p : W ⟶ T)
+    (k₁ : V₁ ⟶ W₁) (i₁ : S₁ ⟶ T₁) (r₁ : V₁ ⟶ S₁) (p₁ : W₁ ⟶ T₁)
+    (a : W₁ ⟶ W) (b : T₁ ⟶ T) (c : S₁ ⟶ S) (d : V₁ ⟶ V)
+    [IsOpenImmersion k] [IsOpenImmersion i]
+    [IsOpenImmersion k₁] [IsOpenImmersion i₁]
+    [QuasiCompact k] [QuasiCompact i] [QuasiCompact k₁] [QuasiCompact i₁]
+    [IsProper r] [IsProper p] [IsProper r₁] [IsProper p₁]
+    (h : k ≫ p = r ≫ i) (h₁ : k₁ ≫ p₁ = r₁ ≫ i₁)
+    (sk : IsPullback d k₁ k a) (si : IsPullback c i₁ i b)
+    (sp : IsPullback a p₁ p b) (sr : IsPullback d r₁ r c)
+    (N : DerivedCategory (Modules B S)) :
+    (ordinarySquare B a p₁ p b sp.w).hom.app ((ordinaryJ B i).obj N) ≫
+        (ordinaryG B a).map ((MateEvaluationScalars.singleDerivedAlpha B k r p i h).app N) ≫
+        (ordinaryBeta B d k₁ k a sk).hom.app ((ordinaryG B r).obj N) ≫
+        (ordinaryJ B k₁).map ((ordinarySquare B d r₁ r c sr.w).inv.app N) =
+      (ordinaryG B p₁).map ((ordinaryBeta B c i₁ i b si).hom.app N) ≫
+        (MateEvaluationScalars.singleDerivedAlpha B k₁ r₁ p₁ i₁ h₁).app
+          ((ordinaryG B c).obj N) := by
+  have hc := MateEvaluationScalars.exactSquare_scalar
+    (modulePullback B c) (modulePullback B d)
+    (modulePullback B b) (modulePullback B a)
+    (moduleSquareG B d r₁ r c sr.w).symm (openBetaModule B c i₁ i b si.w si)
+    (openBetaModule B d k₁ k a sk.w sk) (moduleSquareG B a p₁ p b sp.w).symm
+    (singleAlpha B k r p i h) (singleAlpha B k₁ r₁ p₁ i₁ h₁)
+    (fun M ↦ by
+      apply (cancel_epi ((moduleSquareG B a p₁ p b sp.w).hom.app
+        ((moduleJ B i).obj M))).1
+      simpa only [Iso.symm_hom, Category.assoc, Iso.hom_inv_id_app_assoc] using
+        singleAlpha_baseChange B k i r p k₁ i₁ r₁ p₁ a b c d
+          h h₁ sk.w si.w sp.w sr.w sk si sp sr M) N
+  rw [ordinaryBeta_localization, ordinaryBeta_localization]
+  simp only [Functor.square_symm_hom] at hc
+  change (ordinaryG B a).map
+      ((MateEvaluationScalars.singleDerivedAlpha B k r p i h).app N) ≫
+      (Functor.mapDerivedCategorySquareIso (openBetaModule B d k₁ k a sk.w sk)).hom.app
+        ((ordinaryG B r).obj N) ≫
+      (ordinaryJ B k₁).map ((ordinarySquare B d r₁ r c sr.w).inv.app N) =
+    (ordinarySquare B a p₁ p b sp.w).inv.app ((ordinaryJ B i).obj N) ≫
+      (ordinaryG B p₁).map
+        ((Functor.mapDerivedCategorySquareIso (openBetaModule B c i₁ i b si.w si)).hom.app N) ≫
+      (MateEvaluationScalars.singleDerivedAlpha B k₁ r₁ p₁ i₁ h₁).app
+        ((ordinaryG B c).obj N) at hc
+  have hh := congrArg (fun t ↦ (ordinarySquare B a p₁ p b sp.w).hom.app
+    ((ordinaryJ B i).obj N) ≫ t) hc
+  simpa only [Category.assoc, Iso.hom_inv_id_app_assoc] using hh
+
+private theorem mate_whiskerTop_only
+    {A C D E : Type*} [Category* A] [Category* C] [Category* D] [Category* E]
+    {L₁ : A ⥤ C} {R₁ : C ⥤ A} {L₂ : D ⥤ E} {R₂ : E ⥤ D}
+    {G G' : A ⥤ D} {H : C ⥤ E} (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂)
+    (α : TwoSquare G L₁ L₂ H) (σ : G' ⟶ G) :
+    mateEquiv a₁ a₂ (α.whiskerTop σ) =
+      (mateEquiv a₁ a₂ α).whiskerRight σ := by
+  have h₁ : (α.whiskerTop σ).whiskerBottom (𝟙 H) = α.whiskerTop σ := by
+    ext N
+    simp only [TwoSquare.whiskerBottom_app, NatTrans.id_app, Category.comp_id]
+  have h₂ : ((mateEquiv a₁ a₂ α).whiskerRight σ).whiskerLeft (𝟙 H) =
+      (mateEquiv a₁ a₂ α).whiskerRight σ := by
+    ext N
+    simp only [TwoSquare.whiskerLeft_app, NatTrans.id_app]
+    rw [R₂.map_id, Category.comp_id]
+  simpa only [h₁, h₂] using mateEquiv_whiskerTop_whiskerBottom a₁ a₂ α σ (𝟙 H)
+
+private theorem ordinaryGamma_mate {V W S T : Scheme.{u}}
+    (k : V ⟶ W) (i : S ⟶ T) (r : V ⟶ S) (p : W ⟶ T)
+    [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]
+    [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i) :
+    ordinaryGammaFixed B k r p i h =
+      (mateEquiv (ordinaryAdjFixed B r) (ordinaryAdjFixed B p)
+        (TwoSquare.mk (ordinaryJ B i) (ordinaryG B r) (ordinaryG B p) (ordinaryJ B k)
+          (MateEvaluationScalars.singleDerivedAlpha B k r p i h))).natTrans := by
+  unfold ordinaryGammaFixed ordinaryAdjFixed
+  rfl
+
+private theorem ordinaryE_mate {V W S T : Scheme.{u}}
+    (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
+    (h : k ≫ p = r ≫ i) :
+    ordinaryE B k r p i h =
+      (mateEquiv (ordinaryAdjFixed B p) (ordinaryAdjFixed B r)
+        (TwoSquare.mk (ordinaryG B i) (ordinaryG B p) (ordinaryG B r) (ordinaryG B k)
+          (ordinarySquare B k r p i h).hom)).natTrans := by
+  unfold ordinaryAdjFixed
+  rfl
+
+private theorem ordinaryGammaCube {V W S T V₁ W₁ S₁ T₁ : Scheme.{u}}
+    (k : V ⟶ W) (i : S ⟶ T) (r : V ⟶ S) (p : W ⟶ T)
+    (k₁ : V₁ ⟶ W₁) (i₁ : S₁ ⟶ T₁) (r₁ : V₁ ⟶ S₁) (p₁ : W₁ ⟶ T₁)
+    (a : W₁ ⟶ W) (b : T₁ ⟶ T) (c : S₁ ⟶ S) (d : V₁ ⟶ V)
+    [IsOpenImmersion k] [IsOpenImmersion i]
+    [IsOpenImmersion k₁] [IsOpenImmersion i₁]
+    [QuasiCompact k] [QuasiCompact i] [QuasiCompact k₁] [QuasiCompact i₁]
+    [IsProper r] [IsProper p] [IsProper r₁] [IsProper p₁]
+    (h : k ≫ p = r ≫ i) (h₁ : k₁ ≫ p₁ = r₁ ≫ i₁)
+    (_wk : d ≫ k = k₁ ≫ a) (_wi : c ≫ i = i₁ ≫ b)
+    (_wp : a ≫ p = p₁ ≫ b) (_wr : d ≫ r = r₁ ≫ c)
+    (sk : IsPullback d k₁ k a) (si : IsPullback c i₁ i b)
+    (sp : IsPullback a p₁ p b) (sr : IsPullback d r₁ r c)
+    (M : DerivedCategory (Modules B V)) :
+    (ordinaryG B b).map ((ordinaryGammaFixed B k r p i h).app M) ≫
+        (ordinaryE B a p₁ p b sp.w).app ((ordinaryJ B k).obj M) ≫
+        (ordinaryR B p₁).map ((ordinaryBeta B d k₁ k a sk).hom.app M) =
+      (ordinaryBeta B c i₁ i b si).hom.app ((ordinaryR B r).obj M) ≫
+        (ordinaryJ B i₁).map ((ordinaryE B d r₁ r c sr.w).app M) ≫
+        (ordinaryGammaFixed B k₁ r₁ p₁ i₁ h₁).app
+          ((ordinaryG B d).obj M) := by
+  let α : TwoSquare (ordinaryJ B i) (ordinaryG B r) (ordinaryG B p) (ordinaryJ B k) :=
+    TwoSquare.mk _ _ _ _ (MateEvaluationScalars.singleDerivedAlpha B k r p i h)
+  let α₁ : TwoSquare (ordinaryJ B i₁) (ordinaryG B r₁)
+      (ordinaryG B p₁) (ordinaryJ B k₁) :=
+    TwoSquare.mk _ _ _ _ (MateEvaluationScalars.singleDerivedAlpha B k₁ r₁ p₁ i₁ h₁)
+  let δp := TwoSquare.mk _ _ _ _ (ordinarySquare B a p₁ p b sp.w).hom
+  let δr := TwoSquare.mk _ _ _ _ (ordinarySquare B d r₁ r c sr.w).hom
+  have hs : (α.hComp δp).whiskerBottom (ordinaryBeta B d k₁ k a sk).hom =
+      (δr.hComp α₁).whiskerTop (ordinaryBeta B c i₁ i b si).hom := by
+    ext N
+    dsimp [α, α₁, δp, δr, TwoSquare.whiskerBottom, TwoSquare.whiskerTop,
+      TwoSquare.hComp]
+    simp only [TwoSquare.mk, TwoSquare.natTrans, Category.id_comp, Category.comp_id]
+    apply (cancel_mono
+      ((ordinaryJ B k₁).map ((ordinarySquare B d r₁ r c sr.w).inv.app N))).1
+    simpa [Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app] using
+      ordinaryAlphaCube B k i r p k₁ i₁ r₁ p₁ a b c d h h₁ sk si sp sr N
+  have hm := congrArg (fun σ ↦ (mateEquiv (ordinaryAdjFixed B r)
+    (ordinaryAdjFixed B p₁) σ).app M) hs
+  rw [mateEquiv_whiskerBottom,
+    mateEquiv_vcomp (ordinaryAdjFixed B r) (ordinaryAdjFixed B p)
+      (ordinaryAdjFixed B p₁)] at hm
+  have ht : mateEquiv (ordinaryAdjFixed B r) (ordinaryAdjFixed B p₁)
+      ((δr.hComp α₁).whiskerTop (ordinaryBeta B c i₁ i b si).hom) =
+      (mateEquiv (ordinaryAdjFixed B r) (ordinaryAdjFixed B p₁) (δr.hComp α₁)).whiskerRight
+        (ordinaryBeta B c i₁ i b si).hom := by
+    exact mate_whiskerTop_only (ordinaryAdjFixed B r) (ordinaryAdjFixed B p₁)
+      (δr.hComp α₁) (ordinaryBeta B c i₁ i b si).hom
+  rw [ht, mateEquiv_vcomp (ordinaryAdjFixed B r) (ordinaryAdjFixed B r₁)
+    (ordinaryAdjFixed B p₁)] at hm
+  simpa only [TwoSquare.whiskerLeft_app, TwoSquare.whiskerRight_app,
+    TwoSquare.vComp_app, α, α₁, δp, δr, ordinaryGamma_mate, ordinaryE_mate,
+    TwoSquare.mk, TwoSquare.natTrans, Category.assoc] using hm
+
+private def ordinaryPushNamed {X Y Z : Scheme.{u}}
+    (f : X ⟶ Y) (g : Y ⟶ Z) (h : X ⟶ Z) (w : f ≫ g = h) :
+    ordinaryR B f ⋙ ordinaryR B g ≅ ordinaryR B h :=
+  pushComp B f g ≪≫ eqToIso (congrArg (ordinaryR B) w)
+
+private theorem ordinaryPushNamed_refl {X Y Z : Scheme.{u}}
+    (f : X ⟶ Y) (g : Y ⟶ Z) :
+    ordinaryPushNamed B f g (f ≫ g) rfl = pushComp B f g := by
+  change pushComp B f g ≪≫ Iso.refl _ = pushComp B f g
+  exact Iso.trans_refl _
+
+private theorem map_natIso_solve
+    {C D E : Type*} [Category* C] [Category* D] [Category* E]
+    (F : D ⥤ E) {G H : C ⥤ D} (e : G ≅ H) (M : C) {Z : E}
+    (x : F.obj (H.obj M) ⟶ Z) (y : F.obj (G.obj M) ⟶ Z)
+    (h : F.map (e.hom.app M) ≫ x = y) : x = F.map (e.inv.app M) ≫ y := by
+  calc
+    x = 𝟙 _ ≫ x := (Category.id_comp x).symm
+    _ = (F.map (e.inv.app M) ≫ F.map (e.hom.app M)) ≫ x := by
+      rw [← F.map_comp, Iso.inv_hom_id_app, F.map_id]
+    _ = F.map (e.inv.app M) ≫ y := by rw [Category.assoc, h]
+
+private theorem cancel_pasting_square {D : Type*} [Category D] {P Q R T : D}
+    (a : P ⟶ Q) (b : P ⟶ R) (x : Q ⟶ T) (y : R ⟶ T)
+    [IsIso a] [IsIso y] (h : a ≫ x = b ≫ y) : x ≫ inv y = inv a ≫ b := by
+  rw [IsIso.eq_inv_comp, ← Category.assoc, h, Category.assoc,
+    IsIso.hom_inv_id, Category.comp_id]
+
+private theorem mate_vertical_hom
+    {C₀ C₁ C₂ D₀ D₁ D₂ : Type*}
+    [Category C₀] [Category C₁] [Category C₂]
+    [Category D₀] [Category D₁] [Category D₂]
+    {Lf : C₁ ⥤ C₀} {Rf : C₀ ⥤ C₁} {Lg : C₂ ⥤ C₁} {Rg : C₁ ⥤ C₂}
+    {Lh : C₂ ⥤ C₀} {Rh : C₀ ⥤ C₂}
+    {Lf' : D₁ ⥤ D₀} {Rf' : D₀ ⥤ D₁} {Lg' : D₂ ⥤ D₁} {Rg' : D₁ ⥤ D₂}
+    {Lh' : D₂ ⥤ D₀} {Rh' : D₀ ⥤ D₂}
+    {La : C₀ ⥤ D₀} {Lb : C₁ ⥤ D₁} {Lc : C₂ ⥤ D₂}
+    (af : Lf ⊣ Rf) (ag : Lg ⊣ Rg) (ah : Lh ⊣ Rh)
+    (af' : Lf' ⊣ Rf') (ag' : Lg' ⊣ Rg') (ah' : Lh' ⊣ Rh')
+    (κ : Lh ≅ Lg ⋙ Lf) (κ' : Lh' ≅ Lg' ⋙ Lf')
+    (δf : TwoSquare Lb Lf Lf' La) (δg : TwoSquare Lc Lg Lg' Lb)
+    (δh : TwoSquare Lc Lh Lh' La)
+    (hs : (δg.vComp δf).whiskerLeft κ.inv = δh.whiskerRight κ'.inv) (M : C₀) :
+    Lc.map ((conjugateIsoEquiv (ag.comp af) ah κ).hom.app M) ≫
+        (mateEquiv ah ah' δh).natTrans.app M =
+      (mateEquiv ag ag' δg).natTrans.app (Rf.obj M) ≫
+        Rg'.map ((mateEquiv af af' δf).natTrans.app M) ≫
+        (conjugateIsoEquiv (ag'.comp af') ah' κ').hom.app (La.obj M) := by
+  have hh := mateEquiv_whiskerTop_conjugateEquiv ah (ag.comp af) ah'
+    (ag'.comp af') κ.inv κ'.inv δh (δg.vComp δf) hs
+  rw [mateEquiv_hcomp] at hh
+  have hm := NatTrans.congr_app hh M
+  simp only [TwoSquare.whiskerTop_app, TwoSquare.whiskerBottom_app,
+    TwoSquare.hComp_app] at hm
+  rw [← conjugateIsoEquiv_apply_inv, ← conjugateIsoEquiv_apply_inv] at hm
+  have hp := cancel_pasting_square _ _ _ _ hm
+  simpa only [← Functor.map_inv, NatIso.inv_inv_app, Category.assoc] using hp.symm
+
+private theorem ordinarySquare_flip {V W S T : Scheme.{u}}
+    (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
+    (h : k ≫ p = r ≫ i) :
+    ordinarySquare B r k i p h.symm = (ordinarySquare B k r p i h).symm := by
+  apply Iso.ext
+  unfold ordinarySquare
+  rw [moduleSquare_flip]
+  exact Functor.square_symm_hom _
+
+private theorem ordinaryPushFixed {X Y Z : Scheme.{u}}
+    (f : X ⟶ Y) (g : Y ⟶ Z) :
+    conjugateIsoEquiv ((ordinaryAdjFixed B g).comp (ordinaryAdjFixed B f))
+        (ordinaryAdjFixed B (f ≫ g)) (ordinaryGComp B f g) = pushComp B f g := by
+  unfold ordinaryAdjFixed pushComp
+  rfl
+
+private theorem ordinarySquare_vertical {U' U W' W Z' Z : Scheme.{u}}
+    (t : U' ⟶ U) (a : W' ⟶ W) (b : Z' ⟶ Z)
+    (l₁ : U' ⟶ W') (r₁ : U ⟶ W) (l₂ : W' ⟶ Z') (r₂ : W ⟶ Z)
+    (w₁ : t ≫ r₁ = l₁ ≫ a) (w₂ : a ≫ r₂ = l₂ ≫ b)
+    (w : t ≫ (r₁ ≫ r₂) = (l₁ ≫ l₂) ≫ b) :
+    (TwoSquare.vComp
+      (TwoSquare.mk (ordinaryG B b) (ordinaryG B r₂) (ordinaryG B l₂)
+        (ordinaryG B a) (ordinarySquare B a l₂ r₂ b w₂).hom)
+      (TwoSquare.mk (ordinaryG B a) (ordinaryG B r₁) (ordinaryG B l₁)
+        (ordinaryG B t) (ordinarySquare B t l₁ r₁ a w₁).hom)).whiskerLeft
+        (ordinaryGComp B r₁ r₂).inv =
+      (TwoSquare.mk (ordinaryG B b) (ordinaryG B (r₁ ≫ r₂))
+        (ordinaryG B (l₁ ≫ l₂)) (ordinaryG B t)
+        (ordinarySquare B t (l₁ ≫ l₂) (r₁ ≫ r₂) b w).hom).whiskerRight
+          (ordinaryGComp B l₁ l₂).inv := by
+  ext N
+  have hh := ordinarySquare_pasting_inv B b a t r₂ r₁ l₂ l₁
+    w₂.symm w₁.symm w.symm N
+  rw [ordinarySquare_flip B a l₂ r₂ b w₂,
+    ordinarySquare_flip B t l₁ r₁ a w₁,
+    ordinarySquare_flip B t (l₁ ≫ l₂) (r₁ ≫ r₂) b w] at hh
+  simp only [Iso.symm_inv] at hh
+  have hp := cancel_pasting_square _ _ _ _ hh
+  simpa only [TwoSquare.whiskerLeft_app, TwoSquare.whiskerRight_app,
+    TwoSquare.vComp_app, ← Functor.map_inv, NatIso.inv_hom_app, Category.assoc] using hp
+
+private theorem ordinaryProperPasting_hom {U' U W' W Z' Z : Scheme.{u}}
+    (t : U' ⟶ U) (a : W' ⟶ W) (b : Z' ⟶ Z)
+    (l₁ : U' ⟶ W') (r₁ : U ⟶ W) (l₂ : W' ⟶ Z') (r₂ : W ⟶ Z)
+    (l : U' ⟶ Z') (r : U ⟶ Z)
+    (w₁ : t ≫ r₁ = l₁ ≫ a) (w₂ : a ≫ r₂ = l₂ ≫ b)
+    (hl : l₁ ≫ l₂ = l) (hr : r₁ ≫ r₂ = r) (w : t ≫ r = l ≫ b)
+    (M : DerivedCategory (Modules B U)) :
+    (ordinaryG B b).map ((ordinaryPushNamed B r₁ r₂ r hr).hom.app M) ≫
+        (ordinaryE B t l r b w).app M =
+      (ordinaryE B a l₂ r₂ b w₂).app ((ordinaryR B r₁).obj M) ≫
+        (ordinaryR B l₂).map ((ordinaryE B t l₁ r₁ a w₁).app M) ≫
+        (ordinaryPushNamed B l₁ l₂ l hl).hom.app ((ordinaryG B t).obj M) := by
+  subst l r
+  rw [ordinaryPushNamed_refl, ordinaryPushNamed_refl]
+  have hv := mate_vertical_hom
+    (ordinaryAdjFixed B r₁) (ordinaryAdjFixed B r₂) (ordinaryAdjFixed B (r₁ ≫ r₂))
+    (ordinaryAdjFixed B l₁) (ordinaryAdjFixed B l₂) (ordinaryAdjFixed B (l₁ ≫ l₂))
+    (ordinaryGComp B r₁ r₂) (ordinaryGComp B l₁ l₂)
+    (TwoSquare.mk _ _ _ _ (ordinarySquare B t l₁ r₁ a w₁).hom)
+    (TwoSquare.mk _ _ _ _ (ordinarySquare B a l₂ r₂ b w₂).hom)
+    (TwoSquare.mk _ _ _ _ (ordinarySquare B t (l₁ ≫ l₂) (r₁ ≫ r₂) b w).hom)
+    (ordinarySquare_vertical B t a b l₁ r₁ l₂ r₂ w₁ w₂ w) M
+  simpa only [ordinaryPushFixed, ← ordinaryE_mate] using hv
+
+private theorem ordinaryProperPasting {U' U W' W Z' Z : Scheme.{u}}
+    (t : U' ⟶ U) (a : W' ⟶ W) (b : Z' ⟶ Z)
+    (l₁ : U' ⟶ W') (r₁ : U ⟶ W) (l₂ : W' ⟶ Z') (r₂ : W ⟶ Z)
+    (l : U' ⟶ Z') (r : U ⟶ Z)
+    (w₁ : t ≫ r₁ = l₁ ≫ a) (w₂ : a ≫ r₂ = l₂ ≫ b)
+    (hl : l₁ ≫ l₂ = l) (hr : r₁ ≫ r₂ = r) (w : t ≫ r = l ≫ b)
+    (M : DerivedCategory (Modules B U)) :
+    (ordinaryE B t l r b w).app M =
+      (ordinaryG B b).map ((ordinaryPushNamed B r₁ r₂ r hr).inv.app M) ≫
+        (ordinaryE B a l₂ r₂ b w₂).app ((ordinaryR B r₁).obj M) ≫
+        (ordinaryR B l₂).map ((ordinaryE B t l₁ r₁ a w₁).app M) ≫
+        (ordinaryPushNamed B l₁ l₂ l hl).hom.app ((ordinaryG B t).obj M) := by
+  exact map_natIso_solve (ordinaryG B b) (ordinaryPushNamed B r₁ r₂ r hr) M _ _
+    (ordinaryProperPasting_hom B t a b l₁ r₁ l₂ r₂ l r w₁ w₂ hl hr w M)
+
+private def ordinaryOpenNamed {X Y Z : Scheme.{u}}
+    (f : X ⟶ Y) (g : Y ⟶ Z) (h : X ⟶ Z)
+    [IsOpenImmersion f] [IsOpenImmersion g] [IsOpenImmersion h]
+    (w : f ≫ g = h) : ordinaryJ B f ⋙ ordinaryJ B g ≅ ordinaryJ B h :=
+  openComp B f g ≪≫ Functor.mapDerivedCategoryNatIso (singleJCongr B w)
+
+private theorem ordinaryOpenNamed_refl {X Y Z : Scheme.{u}}
+    (f : X ⟶ Y) (g : Y ⟶ Z) [IsOpenImmersion f] [IsOpenImmersion g] :
+    ordinaryOpenNamed B f g (f ≫ g) rfl = openComp B f g := by
+  apply Iso.ext
+  have he : singleJCongr B (rfl : f ≫ g = f ≫ g) = Iso.refl _ := by
+    apply Iso.ext
+    exact singleJCongr_refl B _
+  simp only [ordinaryOpenNamed, he, Iso.trans_hom,
+    Functor.mapDerivedCategoryNatIso_refl, Category.comp_id]
+
+private theorem ordinaryOpenComp_forward {V U X V₁ U₁ X₁ : Scheme.{u}}
+    (k : V ⟶ U) (j : U ⟶ X) (k₁ : V₁ ⟶ U₁) (j₁ : U₁ ⟶ X₁)
+    (a : U₁ ⟶ U) (b : V₁ ⟶ V) (g : X₁ ⟶ X)
+    [IsOpenImmersion k] [IsOpenImmersion j]
+    [IsOpenImmersion k₁] [IsOpenImmersion j₁]
+    (sk : IsPullback b k₁ k a) (sj : IsPullback a j₁ j g)
+    (sq : IsPullback b (k₁ ≫ j₁) (k ≫ j) g)
+    (M : DerivedCategory (Modules B V)) :
+    (ordinaryG B g).map ((openComp B k j).inv.app M) ≫
+        (ordinaryBeta B a j₁ j g sj).hom.app ((ordinaryJ B k).obj M) ≫
+        (ordinaryJ B j₁).map ((ordinaryBeta B b k₁ k a sk).hom.app M) ≫
+        (openComp B k₁ j₁).hom.app ((ordinaryG B b).obj M) =
+      (ordinaryBeta B b (k₁ ≫ j₁) (k ≫ j) g sq).hom.app M := by
+  have hh := congrArg (fun t ↦ t ≫ (openComp B k₁ j₁).hom.app
+    ((ordinaryG B b).obj M)) (ordinaryOpenComp B k j k₁ j₁ a b g sk sj sq M)
+  simp only [Category.assoc, Iso.inv_hom_id_app] at hh
+  exact hh.trans (Category.comp_id _)
+
+private def ordinaryBetaNamed {U' U X' X : Scheme.{u}}
+    (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)
+    [IsOpenImmersion j] [IsOpenImmersion j'] (_w : a ≫ j = j' ≫ g)
+    (sq : IsPullback a j' j g) :
+    ordinaryJ B j ⋙ ordinaryG B g ≅ ordinaryG B a ⋙ ordinaryJ B j' :=
+  ordinaryBeta B a j' j g sq
+
+private theorem ordinaryOpenNamed_cube {V U X V₁ U₁ X₁ : Scheme.{u}}
+    (k : V ⟶ U) (j : U ⟶ X) (k₁ : V₁ ⟶ U₁) (j₁ : U₁ ⟶ X₁)
+    (a : U₁ ⟶ U) (b : V₁ ⟶ V) (g : X₁ ⟶ X)
+    [IsOpenImmersion k] [IsOpenImmersion j]
+    [IsOpenImmersion k₁] [IsOpenImmersion j₁]
+    (wk : b ≫ k = k₁ ≫ a) (wj : a ≫ j = j₁ ≫ g)
+    (w : b ≫ (k ≫ j) = (k₁ ≫ j₁) ≫ g)
+    (sk : IsPullback b k₁ k a) (sj : IsPullback a j₁ j g)
+    (sq : IsPullback b (k₁ ≫ j₁) (k ≫ j) g)
+    (M : DerivedCategory (Modules B V)) :
+    (ordinaryG B g).map ((ordinaryOpenNamed B k j (k ≫ j) rfl).inv.app M) ≫
+        (ordinaryBetaNamed B a j₁ j g wj sj).hom.app ((ordinaryJ B k).obj M) ≫
+        (ordinaryJ B j₁).map ((ordinaryBetaNamed B b k₁ k a wk sk).hom.app M) ≫
+        (ordinaryOpenNamed B k₁ j₁ (k₁ ≫ j₁) rfl).hom.app ((ordinaryG B b).obj M) =
+      (ordinaryBetaNamed B b (k₁ ≫ j₁) (k ≫ j) g w sq).hom.app M := by
+  rw [ordinaryOpenNamed_refl, ordinaryOpenNamed_refl]
+  exact ordinaryOpenComp_forward B k j k₁ j₁ a b g sk sj sq M
+
+private theorem comp_naturality {C D E : Type v}
+    [Category.{w} C] [Category.{w} D] [Category.{w} E]
+    (F : C ⥤ D) (G : D ⥤ E) (H : C ⥤ E) (α : F ⋙ G ⟶ H)
+    {M N : C} (f : M ⟶ N) :
+    G.map (F.map f) ≫ α.app N = α.app M ≫ H.map f :=
+  α.naturality f
+
+private theorem ordinaryPushNamed_naturality {X Y Z : Scheme.{u}}
+    (f : X ⟶ Y) (g : Y ⟶ Z) (h : X ⟶ Z) (w : f ≫ g = h)
+    (M N : DerivedCategory (Modules B X)) (a : M ⟶ N) :
+    (ordinaryR B g).map ((ordinaryR B f).map a) ≫
+        (ordinaryPushNamed B f g h w).hom.app N =
+      (ordinaryPushNamed B f g h w).hom.app M ≫ (ordinaryR B h).map a := by
+  subst h
+  rw [ordinaryPushNamed_refl]
+  exact comp_naturality (ordinaryR B f) (ordinaryR B g) (ordinaryR B (f ≫ g))
+    (pushComp B f g).hom a
+
+private theorem ordinaryE_naturality {V W S T : Scheme.{u}}
+    (t : V ⟶ W) (l : V ⟶ S) (r : W ⟶ T) (b : S ⟶ T)
+    (w : t ≫ r = l ≫ b) (M N : DerivedCategory (Modules B W)) (a : M ⟶ N) :
+    (ordinaryG B b).map ((ordinaryR B r).map a) ≫ (ordinaryE B t l r b w).app N =
+      (ordinaryE B t l r b w).app M ≫ (ordinaryR B l).map ((ordinaryG B t).map a) :=
+  comp_naturality (ordinaryR B r) (ordinaryG B b)
+    (ordinaryG B t ⋙ ordinaryR B l) (ordinaryE B t l r b w) a
+
+private theorem ordinaryGamma_naturality {V W S T : Scheme.{u}}
+    (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
+    [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]
+    [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i)
+    (M N : DerivedCategory (Modules B V)) (a : M ⟶ N) :
+    (ordinaryJ B i).map ((ordinaryR B r).map a) ≫
+        (ordinaryGammaFixed B k r p i h).app N =
+      (ordinaryGammaFixed B k r p i h).app M ≫
+        (ordinaryR B p).map ((ordinaryJ B k).map a) :=
+  comp_naturality (ordinaryR B r) (ordinaryJ B i)
+    (ordinaryJ B k ⋙ ordinaryR B p) (ordinaryGammaFixed B k r p i h) a
+
+-- The final calculation is a word equation in one category.
+
+private theorem wordPasting {C : Type v} [Category.{w} C]
+    {X₀ X₁ X₂ X₃ X₄ X₅ U V F S W H L R G I I' : C}
+    {a : X₀ ⟶ X₁} {b : X₁ ⟶ X₂} {c : X₂ ⟶ X₃}
+    {d : X₃ ⟶ X₄} {e : X₄ ⟶ X₅} {c' : X₃ ⟶ X₂}
+    {p : X₂ ⟶ U} {q : U ⟶ V} {r : V ⟶ X₄}
+    {f : X₀ ⟶ F} {s : F ⟶ S} {t : S ⟶ U}
+    {q₀ : S ⟶ W} {t₀ : W ⟶ V} {β : W ⟶ H}
+    {j : H ⟶ L} {k : L ⟶ R} {l : R ⟶ X₅} {e₂ : V ⟶ R}
+    {g : F ⟶ G} {h : G ⟶ I} {i : I ⟶ H}
+    {h₀ : I ⟶ I'} {γ : I' ⟶ L}
+    (hd : d = c' ≫ p ≫ q ≫ r) (hc : c ≫ c' = 𝟙 _)
+    (h₁ : a ≫ b ≫ p = f ≫ s ≫ t) (h₂ : e₂ ≫ l = r ≫ e)
+    (h₃ : t ≫ q = q₀ ≫ t₀) (hA : t₀ ≫ e₂ = β ≫ j ≫ k)
+    (h₄ : h₀ ≫ γ = i ≫ j) (hC : s ≫ q₀ ≫ β = g ≫ h ≫ i) :
+    a ≫ b ≫ c ≫ d ≫ e = f ≫ g ≫ h ≫ h₀ ≫ γ ≫ k ≫ l := by
+  rw [hd]
+  simp only [Category.assoc]
+  rw [reassoc_of% hc, reassoc_of% h₁, ← h₂, reassoc_of% h₃,
+    reassoc_of% hA, reassoc_of% h₄, reassoc_of% hC]
+
+-- Assemble transformations with variable functors before specializing to derived functors.
+
+private def diagramComposition
+    {C₀ C₁ C₂ C₃ C₄ C₅ : Type v}
+    [Category.{w} C₀] [Category.{w} C₁] [Category.{w} C₂]
+    [Category.{w} C₃] [Category.{w} C₄] [Category.{w} C₅]
+    (j₁ : C₀ ⥤ C₁) (r₁ : C₁ ⥤ C₂) (j₂ : C₂ ⥤ C₃) (r₂ : C₃ ⥤ C₅)
+    (q : C₁ ⥤ C₄) (p : C₄ ⥤ C₃) (j : C₀ ⥤ C₄) (r : C₄ ⥤ C₅)
+    (Γ : r₁ ⋙ j₂ ⟶ q ⋙ p) (o : j₁ ⋙ q ⟶ j) (π : p ⋙ r₂ ⟶ r) :
+    (j₁ ⋙ r₁) ⋙ (j₂ ⋙ r₂) ⟶ j ⋙ r :=
+  Functor.whiskerLeft j₁ (Functor.whiskerRight Γ r₂) ≫
+    Functor.whiskerRight o (p ⋙ r₂) ≫ Functor.whiskerLeft j π
+
+private def diagramExchange
+    {C₀ C₁ C₂ C₀' C₁' C₂' : Type v}
+    [Category.{w} C₀] [Category.{w} C₁] [Category.{w} C₂]
+    [Category.{w} C₀'] [Category.{w} C₁'] [Category.{w} C₂']
+    (j : C₀ ⥤ C₁) (r : C₁ ⥤ C₂) (j' : C₀' ⥤ C₁') (r' : C₁' ⥤ C₂')
+    (X : C₀ ⥤ C₀') (S : C₁ ⥤ C₁') (G : C₂ ⥤ C₂')
+    (ε : r ⋙ G ⟶ S ⋙ r') (β : j ⋙ S ⟶ X ⋙ j') :
+    (j ⋙ r) ⋙ G ⟶ X ⋙ (j' ⋙ r') :=
+  Functor.whiskerLeft j ε ≫ Functor.whiskerRight β r'
+
+private theorem diagramAssembly
+    {C₀ C₁ C₂ C₃ C₄ C₅ C₀' C₁' C₂' C₃' C₄' C₅' : Type v}
+    [Category.{w} C₀] [Category.{w} C₁] [Category.{w} C₂]
+    [Category.{w} C₃] [Category.{w} C₄] [Category.{w} C₅]
+    [Category.{w} C₀'] [Category.{w} C₁'] [Category.{w} C₂']
+    [Category.{w} C₃'] [Category.{w} C₄'] [Category.{w} C₅']
+    (j₁ : C₀ ⥤ C₁) (r₁ : C₁ ⥤ C₂) (j₂ : C₂ ⥤ C₃) (r₂ : C₃ ⥤ C₅)
+    (q : C₁ ⥤ C₄) (p : C₄ ⥤ C₃) (j : C₀ ⥤ C₄) (r : C₄ ⥤ C₅)
+    (j₁' : C₀' ⥤ C₁') (r₁' : C₁' ⥤ C₂') (j₂' : C₂' ⥤ C₃') (r₂' : C₃' ⥤ C₅')
+    (q' : C₁' ⥤ C₄') (p' : C₄' ⥤ C₃') (j' : C₀' ⥤ C₄') (r' : C₄' ⥤ C₅')
+    (X : C₀ ⥤ C₀') (D : C₁ ⥤ C₁') (Y : C₂ ⥤ C₂')
+    (T : C₃ ⥤ C₃') (S : C₄ ⥤ C₄') (G : C₅ ⥤ C₅')
+    (Γ : r₁ ⋙ j₂ ⟶ q ⋙ p) (o : j₁ ⋙ q ⟶ j) (π : p ⋙ r₂ ⟶ r)
+    (Γ' : r₁' ⋙ j₂' ⟶ q' ⋙ p') (o' : j₁' ⋙ q' ⟶ j') (π' : p' ⋙ r₂' ⟶ r')
+    (ε₁ : r₁ ⋙ Y ⟶ D ⋙ r₁') (ε₂ : r₂ ⋙ G ⟶ T ⋙ r₂') (ε : r ⋙ G ⟶ S ⋙ r')
+    (β₁ : j₁ ⋙ D ⟶ X ⋙ j₁') (β₂ : j₂ ⋙ T ⟶ Y ⋙ j₂') (β : j ⋙ S ⟶ X ⋙ j')
+    (hword : ∀ M : C₀,
+    G.map
+        (r₂.map (Γ.app (j₁.obj M))) ≫
+      G.map
+          (r₂.map (p.map (o.app M))) ≫
+        G.map (π.app (j.obj M)) ≫
+          ε.app (j.obj M) ≫
+            r'.map (β.app M) =
+    ε₂.app
+        (j₂.obj (r₁.obj (j₁.obj M))) ≫
+      r₂'.map
+          (β₂.app (r₁.obj (j₁.obj M))) ≫
+        r₂'.map
+            (j₂'.map (ε₁.app (j₁.obj M))) ≫
+          r₂'.map
+              (j₂'.map
+                (r₁'.map (β₁.app M))) ≫
+            r₂'.map
+                (Γ'.app
+                  (j₁'.obj (X.obj M))) ≫
+              r₂'.map
+                  (p'.map
+                    (o'.app (X.obj M))) ≫
+                π'.app
+                  (j'.obj (X.obj M))) :
+    Functor.whiskerRight (diagramComposition j₁ r₁ j₂ r₂ q p j r Γ o π) G ≫
+        diagramExchange j r j' r' X S G ε β =
+      Functor.whiskerLeft (j₁ ⋙ r₁) (diagramExchange j₂ r₂ j₂' r₂' Y T G ε₂ β₂) ≫
+        Functor.whiskerRight (diagramExchange j₁ r₁ j₁' r₁' X D Y ε₁ β₁) (j₂' ⋙ r₂') ≫
+        Functor.whiskerLeft X (diagramComposition j₁' r₁' j₂' r₂' q' p' j' r' Γ' o' π') := by
+  ext M
+  simpa only [diagramComposition, diagramExchange, NatTrans.comp_app,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.comp_obj, Functor.comp_map,
+    Functor.map_comp, Category.assoc] using hword M
+
+private def ordinaryCompactFunctor {X Y : Scheme.{u}} {f : X ⟶ Y}
+    (c : Compactification f) :
+    DerivedCategory (Modules B X) ⥤ DerivedCategory (Modules B Y) :=
+  ordinaryJ B c.i ⋙ ordinaryR B c.g
+
+private def ordinaryCompositionNamed {X Y Z : Scheme.{u}} {f : X ⟶ Y} {h : Y ⟶ Z}
+    (T : Compactification.Triangle f h)
+    [QuasiCompact T.cf.i] [QuasiCompact T.cg.i] [QuasiCompact T.q] :
+    ordinaryCompactFunctor B T.cf ⋙ ordinaryCompactFunctor B T.cg ⟶
+      ordinaryCompactFunctor B T.cfg :=
+  diagramComposition (ordinaryJ B T.cf.i) (ordinaryR B T.cf.g)
+    (ordinaryJ B T.cg.i) (ordinaryR B T.cg.g) (ordinaryJ B T.q) (ordinaryR B T.p)
+    (ordinaryJ B T.cfg.i) (ordinaryR B T.cfg.g)
+    (ordinaryGammaFixed B T.q T.cf.g T.p T.cg.i T.isPullback.w.symm)
+    (ordinaryOpenNamed B T.cf.i T.q T.cfg.i T.i_q).hom
+    (ordinaryPushNamed B T.p T.cg.g T.cfg.g T.p_g).hom
+
+private def ordinaryExchangeNamed {X Y X' Y' : Scheme.{u}}
+    {f : X ⟶ Y} {f' : X' ⟶ Y'}
+    (c : Compactification f) (c' : Compactification f')
+    (x : X' ⟶ X) (y : Y' ⟶ Y) (s : c'.Z ⟶ c.Z)
+    (_wi : x ≫ c.i = c'.i ≫ s) (wp : s ≫ c.g = c'.g ≫ y)
+    (si : IsPullback x c'.i c.i s) :
+    ordinaryCompactFunctor B c ⋙ ordinaryG B y ⟶
+      ordinaryG B x ⋙ ordinaryCompactFunctor B c' :=
+  diagramExchange (ordinaryJ B c.i) (ordinaryR B c.g)
+    (ordinaryJ B c'.i) (ordinaryR B c'.g) (ordinaryG B x) (ordinaryG B s) (ordinaryG B y)
+    (ordinaryE B s c'.g c.g y wp) (ordinaryBeta B x c'.i c.i s si).hom
+
+-- Keep the normalized component equations separate from the final diagram calculation.
+
+private theorem triangleOpen {X Y Z X' Y' Z' : Scheme.{u}}
+    {f : X ⟶ Y} {h : Y ⟶ Z} {f' : X' ⟶ Y'} {h' : Y' ⟶ Z'}
+    (T : Compactification.Triangle f h) (T' : Compactification.Triangle f' h')
+    [QuasiCompact T.cf.i] [QuasiCompact T.cg.i] [QuasiCompact T.q]
+    [QuasiCompact T'.cf.i] [QuasiCompact T'.cg.i] [QuasiCompact T'.q]
+    (x : X' ⟶ X) (y : Y' ⟶ Y) (g : Z' ⟶ Z)
+    (A : CompositionBaseChange T T' x y g) (M : DerivedCategory (Modules B X)) :
+    (ordinaryG B A.s).map
+      ((ordinaryOpenNamed B T.cf.i T.q T.cfg.i T.i_q).hom.app M) ≫
+      (ordinaryBetaNamed B x T'.cfg.i T.cfg.i A.s A.cfg_i.w A.cfg_i).hom.app M =
+    (ordinaryBetaNamed B A.d T'.q T.q A.s A.b.w A.b).hom.app ((ordinaryJ B T.cf.i).obj M) ≫
+      (ordinaryJ B T'.q).map
+        ((ordinaryBetaNamed B x T'.cf.i T.cf.i A.d A.cf_i.w A.cf_i).hom.app M) ≫
+      (ordinaryOpenNamed B T'.cf.i T'.q T'.cfg.i T'.i_q).hom.app
+        ((ordinaryG B x).obj M) := by
+  have transport (i : X ⟶ T.cfg.Z) (i' : X' ⟶ T'.cfg.Z)
+      [IsOpenImmersion i] [IsOpenImmersion i']
+      (hi : T.cf.i ≫ T.q = i) (hi' : T'.cf.i ≫ T'.q = i')
+      (sq : IsPullback x i' i A.s) :
+      (ordinaryG B A.s).map ((ordinaryOpenNamed B T.cf.i T.q i hi).hom.app M) ≫
+          (ordinaryBetaNamed B x i' i A.s sq.w sq).hom.app M =
+        (ordinaryBetaNamed B A.d T'.q T.q A.s A.b.w A.b).hom.app ((ordinaryJ B T.cf.i).obj M) ≫
+          (ordinaryJ B T'.q).map
+            ((ordinaryBetaNamed B x T'.cf.i T.cf.i A.d A.cf_i.w A.cf_i).hom.app M) ≫
+          (ordinaryOpenNamed B T'.cf.i T'.q i' hi').hom.app ((ordinaryG B x).obj M) := by
+    subst i
+    subst i'
+    have hb := ordinaryOpenNamed_cube B T.cf.i T.q T'.cf.i T'.q A.d x A.s
+      A.cf_i.w A.b.w sq.w A.cf_i A.b sq M
+    apply (cancel_epi ((ordinaryG B A.s).map
+      ((ordinaryOpenNamed B T.cf.i T.q (T.cf.i ≫ T.q) rfl).inv.app M))).1
+    simp only [← Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app]
+    rw [(ordinaryG B A.s).map_id, Category.id_comp]
+    simpa only [Category.assoc] using hb.symm
+  exact transport T.cfg.i T'.cfg.i T.i_q T'.i_q A.cfg_i
+
+private theorem triangleNaturalTwo {X Y Z X' Y' Z' : Scheme.{u}}
+    {f : X ⟶ Y} {h : Y ⟶ Z} {f' : X' ⟶ Y'} {h' : Y' ⟶ Z'}
+    (T : Compactification.Triangle f h) (T' : Compactification.Triangle f' h')
+    [QuasiCompact T.cf.i] [QuasiCompact T.cg.i] [QuasiCompact T.q]
+    [QuasiCompact T'.cf.i] [QuasiCompact T'.cg.i] [QuasiCompact T'.q]
+    (x : X' ⟶ X) (y : Y' ⟶ Y) (g : Z' ⟶ Z)
+    (A : CompositionBaseChange T T' x y g) (M : DerivedCategory (Modules B X)) :
+    (ordinaryR B T'.cg.g).map ((ordinaryR B T'.p).map
+      ((ordinaryBetaNamed B x T'.cfg.i T.cfg.i A.s A.cfg_i.w A.cfg_i).hom.app M)) ≫
+      (ordinaryPushNamed B T'.p T'.cg.g T'.cfg.g T'.p_g).hom.app
+        ((ordinaryJ B T'.cfg.i).obj ((ordinaryG B x).obj M)) =
+    (ordinaryPushNamed B T'.p T'.cg.g T'.cfg.g T'.p_g).hom.app
+      ((ordinaryG B A.s).obj ((ordinaryJ B T.cfg.i).obj M)) ≫
+      (ordinaryR B T'.cfg.g).map
+        ((ordinaryBetaNamed B x T'.cfg.i T.cfg.i A.s A.cfg_i.w A.cfg_i).hom.app M) := by
+  exact ordinaryPushNamed_naturality B T'.p T'.cg.g T'.cfg.g T'.p_g
+    ((ordinaryG B A.s).obj ((ordinaryJ B T.cfg.i).obj M))
+    ((ordinaryJ B T'.cfg.i).obj ((ordinaryG B x).obj M))
+    ((ordinaryBetaNamed B x T'.cfg.i T.cfg.i A.s A.cfg_i.w A.cfg_i).hom.app M)
+
+private theorem triangleCancel {X Y Z X' Y' Z' : Scheme.{u}}
+    {f : X ⟶ Y} {h : Y ⟶ Z} {f' : X' ⟶ Y'} {h' : Y' ⟶ Z'}
+    (T : Compactification.Triangle f h) (T' : Compactification.Triangle f' h')
+    [QuasiCompact T.cf.i] [QuasiCompact T.cg.i] [QuasiCompact T.q]
+    [QuasiCompact T'.cf.i] [QuasiCompact T'.cg.i] [QuasiCompact T'.q]
+    (x : X' ⟶ X) (y : Y' ⟶ Y) (g : Z' ⟶ Z)
+    (_A : CompositionBaseChange T T' x y g) (M : DerivedCategory (Modules B X)) :
+    (ordinaryG B g).map ((ordinaryPushNamed B T.p T.cg.g T.cfg.g T.p_g).hom.app
+      ((ordinaryJ B T.cfg.i).obj M)) ≫
+      (ordinaryG B g).map ((ordinaryPushNamed B T.p T.cg.g T.cfg.g T.p_g).inv.app
+        ((ordinaryJ B T.cfg.i).obj M)) = 𝟙 _ := by
+  rw [← Functor.map_comp, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id]
+
+private theorem triangleProper {X Y Z X' Y' Z' : Scheme.{u}}
+    {f : X ⟶ Y} {h : Y ⟶ Z} {f' : X' ⟶ Y'} {h' : Y' ⟶ Z'}
+    (T : Compactification.Triangle f h) (T' : Compactification.Triangle f' h')
+    [QuasiCompact T.cf.i] [QuasiCompact T.cg.i] [QuasiCompact T.q]
+    [QuasiCompact T'.cf.i] [QuasiCompact T'.cg.i] [QuasiCompact T'.q]
+    (x : X' ⟶ X) (y : Y' ⟶ Y) (g : Z' ⟶ Z)
+    (A : CompositionBaseChange T T' x y g) (M : DerivedCategory (Modules B X)) :
+  (ordinaryE B A.s T'.cfg.g T.cfg.g g A.cfg_g.w).app ((ordinaryJ B T.cfg.i).obj M) =
+    (ordinaryG B g).map ((ordinaryPushNamed B T.p T.cg.g T.cfg.g T.p_g).inv.app ((ordinaryJ B
+      T.cfg.i).obj M)) ≫
+      (ordinaryE B A.t T'.cg.g T.cg.g g A.cg_g.w).app ((ordinaryR B T.p).obj ((ordinaryJ B
+      T.cfg.i).obj M)) ≫
+        (ordinaryR B T'.cg.g).map ((ordinaryE B A.s T'.p T.p A.t A.p.w).app ((ordinaryJ B
+      T.cfg.i).obj M)) ≫
+          (ordinaryPushNamed B T'.p T'.cg.g T'.cfg.g T'.p_g).hom.app ((ordinaryG B A.s).obj
+      ((ordinaryJ B T.cfg.i).obj M)) := by
+  exact ordinaryProperPasting B A.s A.t g T'.p T.p T'.cg.g T.cg.g T'.cfg.g T.cfg.g
+    A.p.w A.cg_g.w T'.p_g T.p_g A.cfg_g.w ((ordinaryJ B T.cfg.i).obj M)
+
+private theorem triangleNaturalOne {X Y Z X' Y' Z' : Scheme.{u}}
+    {f : X ⟶ Y} {h : Y ⟶ Z} {f' : X' ⟶ Y'} {h' : Y' ⟶ Z'}
+    (T : Compactification.Triangle f h) (T' : Compactification.Triangle f' h')
+    [QuasiCompact T.cf.i] [QuasiCompact T.cg.i] [QuasiCompact T.q]
+    [QuasiCompact T'.cf.i] [QuasiCompact T'.cg.i] [QuasiCompact T'.q]
+    (x : X' ⟶ X) (y : Y' ⟶ Y) (g : Z' ⟶ Z)
+    (A : CompositionBaseChange T T' x y g) (M : DerivedCategory (Modules B X)) :
+  (ordinaryG B g).map
+        ((ordinaryR B T.cg.g).map ((ordinaryGammaFixed B T.q T.cf.g T.p T.cg.i
+      T.isPullback.w.symm).app ((ordinaryJ B T.cf.i).obj M))) ≫
+      (ordinaryG B g).map
+          ((ordinaryR B T.cg.g).map ((ordinaryR B T.p).map ((ordinaryOpenNamed B T.cf.i T.q
+      T.cfg.i T.i_q).hom.app M))) ≫
+        (ordinaryE B A.t T'.cg.g T.cg.g g A.cg_g.w).app ((ordinaryR B T.p).obj ((ordinaryJ B
+      T.cfg.i).obj M)) =
+    (ordinaryE B A.t T'.cg.g T.cg.g g A.cg_g.w).app
+        ((ordinaryJ B T.cg.i).obj ((ordinaryR B T.cf.g).obj ((ordinaryJ B T.cf.i).obj M))) ≫
+      (ordinaryR B T'.cg.g).map
+          ((ordinaryG B A.t).map ((ordinaryGammaFixed B T.q T.cf.g T.p T.cg.i
+      T.isPullback.w.symm).app ((ordinaryJ B T.cf.i).obj M))) ≫
+        (ordinaryR B T'.cg.g).map
+          ((ordinaryG B A.t).map ((ordinaryR B T.p).map ((ordinaryOpenNamed B T.cf.i T.q T.cfg.i
+      T.i_q).hom.app M))) := by
+  have hn₁ := ordinaryE_naturality B A.t T'.cg.g T.cg.g g A.cg_g.w
+    _ _ ((ordinaryGammaFixed B T.q T.cf.g T.p T.cg.i
+      T.isPullback.w.symm).app ((ordinaryJ B T.cf.i).obj M) ≫
+      (ordinaryR B T.p).map ((ordinaryOpenNamed B T.cf.i T.q T.cfg.i T.i_q).hom.app M))
+  simpa only [Functor.comp_obj, Functor.comp_map, Functor.map_comp,
+    Category.assoc, ordinaryBetaNamed] using hn₁
+
+private theorem triangleNaturalThree {X Y Z X' Y' Z' : Scheme.{u}}
+    {f : X ⟶ Y} {h : Y ⟶ Z} {f' : X' ⟶ Y'} {h' : Y' ⟶ Z'}
+    (T : Compactification.Triangle f h) (T' : Compactification.Triangle f' h')
+    [QuasiCompact T.cf.i] [QuasiCompact T.cg.i] [QuasiCompact T.q]
+    [QuasiCompact T'.cf.i] [QuasiCompact T'.cg.i] [QuasiCompact T'.q]
+    (x : X' ⟶ X) (y : Y' ⟶ Y) (g : Z' ⟶ Z)
+    (A : CompositionBaseChange T T' x y g) (M : DerivedCategory (Modules B X)) :
+  (ordinaryR B T'.cg.g).map
+        ((ordinaryG B A.t).map ((ordinaryR B T.p).map ((ordinaryOpenNamed B T.cf.i T.q T.cfg.i
+      T.i_q).hom.app M))) ≫
+      (ordinaryR B T'.cg.g).map ((ordinaryE B A.s T'.p T.p A.t A.p.w).app ((ordinaryJ B
+      T.cfg.i).obj M)) =
+    (ordinaryR B T'.cg.g).map
+        ((ordinaryE B A.s T'.p T.p A.t A.p.w).app ((ordinaryJ B T.q).obj ((ordinaryJ B T.cf.i).obj
+      M))) ≫
+      (ordinaryR B T'.cg.g).map
+        ((ordinaryR B T'.p).map ((ordinaryG B A.s).map ((ordinaryOpenNamed B T.cf.i T.q T.cfg.i
+      T.i_q).hom.app M))) := by
+  have hn₃ := congrArg (ordinaryR B T'.cg.g).map
+    (ordinaryE_naturality B A.s T'.p T.p A.t A.p.w _ _
+      ((ordinaryOpenNamed B T.cf.i T.q T.cfg.i T.i_q).hom.app M))
+  simpa only [Functor.comp_obj, Functor.comp_map, Functor.map_comp,
+    Category.assoc, ordinaryBetaNamed] using hn₃
+
+private theorem triangleNaturalFour {X Y Z X' Y' Z' : Scheme.{u}}
+    {f : X ⟶ Y} {h : Y ⟶ Z} {f' : X' ⟶ Y'} {h' : Y' ⟶ Z'}
+    (T : Compactification.Triangle f h) (T' : Compactification.Triangle f' h')
+    [QuasiCompact T.cf.i] [QuasiCompact T.cg.i] [QuasiCompact T.q]
+    [QuasiCompact T'.cf.i] [QuasiCompact T'.cg.i] [QuasiCompact T'.q]
+    (x : X' ⟶ X) (y : Y' ⟶ Y) (g : Z' ⟶ Z)
+    (A : CompositionBaseChange T T' x y g) (M : DerivedCategory (Modules B X)) :
+  (ordinaryR B T'.cg.g).map
+        ((ordinaryJ B T'.cg.i).map ((ordinaryR B T'.cf.g).map ((ordinaryBeta B x T'.cf.i T.cf.i
+      A.d A.cf_i).hom.app M))) ≫
+      (ordinaryR B T'.cg.g).map
+        ((ordinaryGammaFixed B T'.q T'.cf.g T'.p T'.cg.i T'.isPullback.w.symm).app ((ordinaryJ B
+      T'.cf.i).obj ((ordinaryG B x).obj M))) =
+    (ordinaryR B T'.cg.g).map
+        ((ordinaryGammaFixed B T'.q T'.cf.g T'.p T'.cg.i T'.isPullback.w.symm).app ((ordinaryG B
+      A.d).obj ((ordinaryJ B T.cf.i).obj M))) ≫
+      (ordinaryR B T'.cg.g).map
+        ((ordinaryR B T'.p).map ((ordinaryJ B T'.q).map ((ordinaryBeta B x T'.cf.i T.cf.i A.d
+      A.cf_i).hom.app M))) := by
+  have hn₄ := congrArg (ordinaryR B T'.cg.g).map
+    (ordinaryGamma_naturality B T'.q T'.cf.g T'.p T'.cg.i
+      T'.isPullback.w.symm _ _
+      ((ordinaryBetaNamed B x T'.cf.i T.cf.i A.d A.cf_i.w A.cf_i).hom.app M))
+  simpa only [Functor.comp_obj, Functor.comp_map, Functor.map_comp,
+    Category.assoc, ordinaryBetaNamed] using hn₄
+
+private theorem triangleMappedOpen {X Y Z X' Y' Z' : Scheme.{u}}
+    {f : X ⟶ Y} {h : Y ⟶ Z} {f' : X' ⟶ Y'} {h' : Y' ⟶ Z'}
+    (T : Compactification.Triangle f h) (T' : Compactification.Triangle f' h')
+    [QuasiCompact T.cf.i] [QuasiCompact T.cg.i] [QuasiCompact T.q]
+    [QuasiCompact T'.cf.i] [QuasiCompact T'.cg.i] [QuasiCompact T'.q]
+    (x : X' ⟶ X) (y : Y' ⟶ Y) (g : Z' ⟶ Z)
+    (A : CompositionBaseChange T T' x y g) (M : DerivedCategory (Modules B X)) :
+  (ordinaryR B T'.cg.g).map
+        ((ordinaryR B T'.p).map ((ordinaryG B A.s).map ((ordinaryOpenNamed B T.cf.i T.q T.cfg.i
+      T.i_q).hom.app M))) ≫
+      (ordinaryR B T'.cg.g).map ((ordinaryR B T'.p).map ((ordinaryBeta B x T'.cfg.i T.cfg.i A.s
+      A.cfg_i).hom.app M)) =
+    (ordinaryR B T'.cg.g).map
+        ((ordinaryR B T'.p).map ((ordinaryBeta B A.d T'.q T.q A.s A.b).hom.app ((ordinaryJ B
+      T.cf.i).obj M))) ≫
+      (ordinaryR B T'.cg.g).map
+          ((ordinaryR B T'.p).map ((ordinaryJ B T'.q).map ((ordinaryBeta B x T'.cf.i T.cf.i A.d
+      A.cf_i).hom.app M))) ≫
+        (ordinaryR B T'.cg.g).map
+          ((ordinaryR B T'.p).map ((ordinaryOpenNamed B T'.cf.i T'.q T'.cfg.i T'.i_q).hom.app
+      ((ordinaryG B x).obj M))) := by
+  have hA := triangleOpen B T T' x y g A M
+  have hA' := congrArg (fun a ↦ (ordinaryR B T'.cg.g).map ((ordinaryR B T'.p).map a)) hA
+  simpa only [Functor.comp_obj, Functor.comp_map, Functor.map_comp,
+    Category.assoc, ordinaryBetaNamed] using hA'
+
+private theorem triangleMappedCube {X Y Z X' Y' Z' : Scheme.{u}}
+    {f : X ⟶ Y} {h : Y ⟶ Z} {f' : X' ⟶ Y'} {h' : Y' ⟶ Z'}
+    (T : Compactification.Triangle f h) (T' : Compactification.Triangle f' h')
+    [QuasiCompact T.cf.i] [QuasiCompact T.cg.i] [QuasiCompact T.q]
+    [QuasiCompact T'.cf.i] [QuasiCompact T'.cg.i] [QuasiCompact T'.q]
+    (x : X' ⟶ X) (y : Y' ⟶ Y) (g : Z' ⟶ Z)
+    (A : CompositionBaseChange T T' x y g) (M : DerivedCategory (Modules B X)) :
+  (ordinaryR B T'.cg.g).map
+        ((ordinaryG B A.t).map ((ordinaryGammaFixed B T.q T.cf.g T.p T.cg.i
+      T.isPullback.w.symm).app ((ordinaryJ B T.cf.i).obj M))) ≫
+      (ordinaryR B T'.cg.g).map
+          ((ordinaryE B A.s T'.p T.p A.t A.p.w).app ((ordinaryJ B T.q).obj ((ordinaryJ B
+      T.cf.i).obj M))) ≫
+        (ordinaryR B T'.cg.g).map
+          ((ordinaryR B T'.p).map ((ordinaryBeta B A.d T'.q T.q A.s A.b).hom.app ((ordinaryJ B
+      T.cf.i).obj M))) =
+    (ordinaryR B T'.cg.g).map
+        ((ordinaryBeta B y T'.cg.i T.cg.i A.t A.cg_i).hom.app ((ordinaryR B T.cf.g).obj
+      ((ordinaryJ B T.cf.i).obj M))) ≫
+      (ordinaryR B T'.cg.g).map
+          ((ordinaryJ B T'.cg.i).map ((ordinaryE B A.d T'.cf.g T.cf.g y A.cf_g.w).app ((ordinaryJ
+      B T.cf.i).obj M))) ≫
+        (ordinaryR B T'.cg.g).map
+          ((ordinaryGammaFixed B T'.q T'.cf.g T'.p T'.cg.i T'.isPullback.w.symm).app ((ordinaryG B
+      A.d).obj ((ordinaryJ B T.cf.i).obj M))) := by
+  have hC := ordinaryGammaCube B
+    T.q T.cg.i T.cf.g T.p T'.q T'.cg.i T'.cf.g T'.p
+    A.s A.t y A.d T.isPullback.w.symm T'.isPullback.w.symm
+    A.b.w A.cg_i.w A.p.w A.cf_g.w A.b A.cg_i A.p A.cf_g ((ordinaryJ B T.cf.i).obj M)
+  have hC' := congrArg (ordinaryR B T'.cg.g).map hC
+  simpa only [Functor.comp_obj, Functor.comp_map, Functor.map_comp,
+    Category.assoc, ordinaryBetaNamed] using hC'
+
+private theorem triangleWord {X Y Z X' Y' Z' : Scheme.{u}}
+    {f : X ⟶ Y} {h : Y ⟶ Z} {f' : X' ⟶ Y'} {h' : Y' ⟶ Z'}
+    (T : Compactification.Triangle f h) (T' : Compactification.Triangle f' h')
+    [QuasiCompact T.cf.i] [QuasiCompact T.cg.i] [QuasiCompact T.q]
+    [QuasiCompact T'.cf.i] [QuasiCompact T'.cg.i] [QuasiCompact T'.q]
+    (x : X' ⟶ X) (y : Y' ⟶ Y) (g : Z' ⟶ Z)
+    (A : CompositionBaseChange T T' x y g) (M : DerivedCategory (Modules B X)) :
+    (ordinaryG B g).map
+        ((ordinaryR B T.cg.g).map ((ordinaryGammaFixed B T.q T.cf.g T.p T.cg.i
+      T.isPullback.w.symm).app ((ordinaryJ B T.cf.i).obj M))) ≫
+      (ordinaryG B g).map
+          ((ordinaryR B T.cg.g).map ((ordinaryR B T.p).map ((ordinaryOpenNamed B T.cf.i T.q
+      T.cfg.i T.i_q).hom.app M))) ≫
+        (ordinaryG B g).map ((ordinaryPushNamed B T.p T.cg.g T.cfg.g T.p_g).hom.app ((ordinaryJ B
+      T.cfg.i).obj M)) ≫
+          (ordinaryE B A.s T'.cfg.g T.cfg.g g A.cfg_g.w).app ((ordinaryJ B T.cfg.i).obj M) ≫
+            (ordinaryR B T'.cfg.g).map ((ordinaryBeta B x T'.cfg.i T.cfg.i A.s A.cfg_i).hom.app M) =
+    (ordinaryE B A.t T'.cg.g T.cg.g g A.cg_g.w).app
+        ((ordinaryJ B T.cg.i).obj ((ordinaryR B T.cf.g).obj ((ordinaryJ B T.cf.i).obj M))) ≫
+      (ordinaryR B T'.cg.g).map
+          ((ordinaryBeta B y T'.cg.i T.cg.i A.t A.cg_i).hom.app ((ordinaryR B T.cf.g).obj
+      ((ordinaryJ B T.cf.i).obj M))) ≫
+        (ordinaryR B T'.cg.g).map
+            ((ordinaryJ B T'.cg.i).map ((ordinaryE B A.d T'.cf.g T.cf.g y A.cf_g.w).app
+      ((ordinaryJ B T.cf.i).obj M))) ≫
+          (ordinaryR B T'.cg.g).map
+              ((ordinaryJ B T'.cg.i).map
+                ((ordinaryR B T'.cf.g).map ((ordinaryBeta B x T'.cf.i T.cf.i A.d A.cf_i).hom.app
+      M))) ≫
+            (ordinaryR B T'.cg.g).map
+                ((ordinaryGammaFixed B T'.q T'.cf.g T'.p T'.cg.i T'.isPullback.w.symm).app
+                  ((ordinaryJ B T'.cf.i).obj ((ordinaryG B x).obj M))) ≫
+              (ordinaryR B T'.cg.g).map
+                  ((ordinaryR B T'.p).map
+                    ((ordinaryOpenNamed B T'.cf.i T'.q T'.cfg.i T'.i_q).hom.app ((ordinaryG B
+      x).obj M))) ≫
+                (ordinaryPushNamed B T'.p T'.cg.g T'.cfg.g T'.p_g).hom.app
+                  ((ordinaryJ B T'.cfg.i).obj ((ordinaryG B x).obj M)) := by
+  have hv := triangleProper B T T' x y g A M
+  have hcancel := triangleCancel B T T' x y g A M
+  have hn₁ := triangleNaturalOne B T T' x y g A M
+  have hn₃ := triangleNaturalThree B T T' x y g A M
+  have hn₄ := triangleNaturalFour B T T' x y g A M
+  have hA' := triangleMappedOpen B T T' x y g A M
+  have hC' := triangleMappedCube B T T' x y g A M
+  have hn₂ := triangleNaturalTwo B T T' x y g A M
+  simp only [ordinaryBetaNamed] at hn₂
+  exact wordPasting (C := DerivedCategory (Modules B Z'))
+    hv hcancel hn₁ hn₂ hn₃ hA' hn₄ hC'
+
+private theorem ordinaryDirectPasting {X Y Z X' Y' Z' : Scheme.{u}}
+    {f : X ⟶ Y} {h : Y ⟶ Z} {f' : X' ⟶ Y'} {h' : Y' ⟶ Z'}
+    (T : Compactification.Triangle f h) (T' : Compactification.Triangle f' h')
+    [QuasiCompact T.cf.i] [QuasiCompact T.cg.i] [QuasiCompact T.q]
+    [QuasiCompact T'.cf.i] [QuasiCompact T'.cg.i] [QuasiCompact T'.q]
+    (x : X' ⟶ X) (y : Y' ⟶ Y) (g : Z' ⟶ Z)
+    (A : CompositionBaseChange T T' x y g) :
+    Functor.whiskerRight (ordinaryCompositionNamed B T) (ordinaryG B g) ≫
+        ordinaryExchangeNamed B T.cfg T'.cfg x g A.s A.cfg_i.w A.cfg_g.w A.cfg_i =
+      Functor.whiskerLeft (ordinaryCompactFunctor B T.cf)
+          (ordinaryExchangeNamed B T.cg T'.cg y g A.t A.cg_i.w A.cg_g.w A.cg_i) ≫
+        Functor.whiskerRight
+          (ordinaryExchangeNamed B T.cf T'.cf x y A.d A.cf_i.w A.cf_g.w A.cf_i)
+          (ordinaryCompactFunctor B T'.cg) ≫
+        Functor.whiskerLeft (ordinaryG B x) (ordinaryCompositionNamed B T') := by
+  dsimp only [ordinaryCompositionNamed, ordinaryExchangeNamed, ordinaryCompactFunctor]
+  exact diagramAssembly
+    (ordinaryJ B T.cf.i) (ordinaryR B T.cf.g) (ordinaryJ B T.cg.i) (ordinaryR B T.cg.g)
+    (ordinaryJ B T.q) (ordinaryR B T.p) (ordinaryJ B T.cfg.i) (ordinaryR B T.cfg.g)
+    (ordinaryJ B T'.cf.i) (ordinaryR B T'.cf.g) (ordinaryJ B T'.cg.i) (ordinaryR B T'.cg.g)
+    (ordinaryJ B T'.q) (ordinaryR B T'.p) (ordinaryJ B T'.cfg.i) (ordinaryR B T'.cfg.g)
+    (ordinaryG B x) (ordinaryG B A.d) (ordinaryG B y)
+    (ordinaryG B A.t) (ordinaryG B A.s) (ordinaryG B g)
+    (ordinaryGammaFixed B T.q T.cf.g T.p T.cg.i T.isPullback.w.symm)
+    (ordinaryOpenNamed B T.cf.i T.q T.cfg.i T.i_q).hom
+    (ordinaryPushNamed B T.p T.cg.g T.cfg.g T.p_g).hom
+    (ordinaryGammaFixed B T'.q T'.cf.g T'.p T'.cg.i T'.isPullback.w.symm)
+    (ordinaryOpenNamed B T'.cf.i T'.q T'.cfg.i T'.i_q).hom
+    (ordinaryPushNamed B T'.p T'.cg.g T'.cfg.g T'.p_g).hom
+    (ordinaryE B A.d T'.cf.g T.cf.g y A.cf_g.w)
+    (ordinaryE B A.t T'.cg.g T.cg.g g A.cg_g.w)
+    (ordinaryE B A.s T'.cfg.g T.cfg.g g A.cfg_g.w)
+    (ordinaryBeta B x T'.cf.i T.cf.i A.d A.cf_i).hom
+    (ordinaryBeta B y T'.cg.i T.cg.i A.t A.cg_i).hom
+    (ordinaryBeta B x T'.cfg.i T.cfg.i A.s A.cfg_i).hom
+    (triangleWord B T T' x y g A)
+
+private theorem ordinaryCompositionNamed_eq {X Y Z : Scheme.{u}}
+    {f : X ⟶ Y} {h : Y ⟶ Z} (T : Compactification.Triangle f h)
+    [QuasiCompact T.cf.i] [QuasiCompact T.cg.i] [QuasiCompact T.q] :
+    ordinaryCompositionNamed B T = composition B T := by
+  dsimp only [ordinaryCompositionNamed, ordinaryCompactFunctor, diagramComposition, composition]
+  unfold ordinaryOpenNamed ordinaryPushNamed ordinaryGammaFixed
+  rfl
+
+private theorem ordinaryExchangeNamed_eq {X₀ X₁ Y₀ Y₁ : Scheme.{u}}
+    {f₀ : X₀ ⟶ Y₀} {f₁ : X₁ ⟶ Y₁}
+    (c₀ : Compactification f₀) (c₁ : Compactification f₁)
+    (a : Y₁ ⟶ Y₀) (x₀ : X₁ ⟶ X₀) (z : c₁.Z ⟶ c₀.Z)
+    (sp : IsPullback z c₁.g c₀.g a) (sj : IsPullback x₀ c₁.i c₀.i z) :
+    ordinaryExchangeNamed B c₀ c₁ x₀ a z sj.w sp.w sj =
+      ordinaryH B c₀ c₁ a x₀ z sp sj := by
+  dsimp only [ordinaryExchangeNamed, ordinaryCompactFunctor, diagramExchange]
+  ext M
+  simp only [ordinaryH, ordinaryE, NatTrans.comp_app,
+    Functor.whiskerLeft, Functor.whiskerRight,
+    Functor.associator_hom_app, Functor.associator_inv_app,
+    Category.id_comp, Category.comp_id]
+
+private theorem ordinaryVertical {X Y Z X' Y' Z' : Scheme.{u}}
+    {f : X ⟶ Y} {h : Y ⟶ Z} {f' : X' ⟶ Y'} {h' : Y' ⟶ Z'}
+    (T : Compactification.Triangle f h) (T' : Compactification.Triangle f' h')
+    [QuasiCompact T.cf.i] [QuasiCompact T.cg.i] [QuasiCompact T.q]
+    [QuasiCompact T'.cf.i] [QuasiCompact T'.cg.i] [QuasiCompact T'.q]
+    (x : X' ⟶ X) (y : Y' ⟶ Y) (g : Z' ⟶ Z)
+    (A : CompositionBaseChange T T' x y g) :
+    Functor.whiskerRight (composition B T) (ordinaryG B g) ≫
+        ordinaryH B T.cfg T'.cfg g x A.s A.cfg_g A.cfg_i =
+      Functor.whiskerLeft (ordinaryJ B T.cf.i ⋙ ordinaryR B T.cf.g)
+          (ordinaryH B T.cg T'.cg g y A.t A.cg_g A.cg_i) ≫
+        Functor.whiskerRight (ordinaryH B T.cf T'.cf y x A.d A.cf_g A.cf_i)
+          (ordinaryJ B T'.cg.i ⋙ ordinaryR B T'.cg.g) ≫
+        Functor.whiskerLeft (ordinaryG B x) (composition B T') := by
+  rw [← ordinaryCompositionNamed_eq B T, ← ordinaryCompositionNamed_eq B T',
+    ← ordinaryExchangeNamed_eq B T.cfg T'.cfg g x A.s A.cfg_g A.cfg_i,
+    ← ordinaryExchangeNamed_eq B T.cg T'.cg g y A.t A.cg_g A.cg_i,
+    ← ordinaryExchangeNamed_eq B T.cf T'.cf y x A.d A.cf_g A.cf_i]
+  exact ordinaryDirectPasting B T T' x y g A
 
 private theorem ordinarySquare_identity (B : Type (u + 1)) [CommRing B]
     {U X : Scheme.{u}} (j : U ⟶ X)
@@ -335,12 +1250,12 @@ theorem horizontal {X' X'' Y' Y'' : Scheme.{u}}
 /-- Vertical pasting is an equality of the ordinary constituent transformations.
 Source: Stacks 0F7J; blueprint constituent assembly
 (blueprint: lem-pur-isomorphism-finite-exchange-coherence).
-Proof: use normalizedProperOpenCalculus base-change for the central square of T,
-whiskered by the outer proper image and inner open extension. Mate-pasting combines
-proper exchanges, and open-beta-normalization combines the open comparisons.
-This gives compositionPastingCoherence before evaluation. Evaluate on constant
-strict towers: tower-mate-evaluation-scalars preserves the specified adjunctions,
-clopen projector, mates and compositors. No faithfulness of evaluation is used. -/
+Proof: localize the module clopen base-change cube and the normalized open
+composition identity. Take proper-adjunction mates of the cube. Paste the proper
+exchanges using the coherent ordinary pullback compositors. Expand the two
+compactification composites, cancel the proper compositor and its inverse, and
+use naturality together with these two localized identities. This proves the
+equality directly in the ordinary derived categories, before any evaluation. -/
 theorem vertical {Z X' Y' Z' : Scheme.{u}} {h : Y ⟶ Z}
     {f' : X' ⟶ Y'} {h' : Y' ⟶ Z'}
     [Z.Over (Spec (.of P.field.k))]
@@ -374,7 +1289,7 @@ theorem vertical {Z X' Y' Z' : Scheme.{u}} {h : Y ⟶ Z}
           (ordinaryH P.Coefficient T.cf T'.cf y x A.d A.cf_g A.cf_i)
           (ordinaryJ P.Coefficient T'.cg.i ⋙ ordinaryR P.Coefficient T'.cg.g) ≫
         Functor.whiskerLeft (ordinaryG P.Coefficient x) (composition P.Coefficient T') := by
-  sorry
+  exact ordinaryVertical P.Coefficient T T' x y g A
 
 end Geometry
 private theorem leftUniq_hom_of_conjugate

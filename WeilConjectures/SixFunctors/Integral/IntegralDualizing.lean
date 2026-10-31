@@ -90,11 +90,11 @@ theorem prop_coef_integral_dualizing
                 (SheafOfModules.unit
                   (completedIntegralCoefficientSheafUnrestricted l E (Spec (.of D.k)))))) := by
   obtain ⟨T, e, he, p, δ, htriangle⟩ := integralDualizing_roos_model D l hl E X
+  let _products : HasCountableProducts (completedIntegralDerivedCategory l E X D hl) :=
+    integralOperationsDerivedCountableProducts l E X
   obtain ⟨A, hpresentation⟩ :=
     integralDualizing_exceptional_presentation D l hl E X T e he
   let ω := A.right.obj A.unit
-  let : HasCountableProducts (completedIntegralDerivedCategory l E X D hl) :=
-    integralOperationsDerivedCountableProducts l E X
   obtain ⟨q, ε, htriangleω, hred, hcoherent⟩ := hpresentation
   have hlimit : Nonempty (ω.obj ≅ (integralDualizingLimit l E X).obj T.tower) := by
     let U := CategoryTheory.Pretriangulated.Triangle.mk q

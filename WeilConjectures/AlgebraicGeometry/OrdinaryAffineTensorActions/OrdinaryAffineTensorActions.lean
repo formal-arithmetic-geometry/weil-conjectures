@@ -134,5 +134,45 @@ def action (S : Scheme.{u}) (H : DerivedCategoryModule A S) (d : ℕ) :
     (coefficient A S H)
     (fun e ↦ lineActionNat A (affineTraceTower S e) ((pull A S e).obj H)) d
 
+/-- The tensor strength of the projective-line right functor.
+Source: strong inverse-image tensor comparison and associativity
+(blueprint: def-pur-ordinary-affine-tensor-actions). -/
+def properStrength (N : ℕ) (hA : (N : A) = 0) (S : Scheme.{u})
+    (H K : DerivedCategoryModule A S) :
+    ((ordinaryFiniteTensor A (ProjectiveLine S)).obj
+      ((ordinaryFinitePullback A (ProjectiveLine S ↘ S)).obj H)).obj
+        ((ordinaryFiniteP1Right A N hA S).obj K) ≅
+      (ordinaryFiniteP1Right A N hA S).obj (((ordinaryFiniteTensor A S).obj H).obj K) :=
+  (derivedTensorAssociator (ModuleCat.{u + 1} A) (ProjectiveLine S) _ _ _).symm ≪≫
+    ordinaryFiniteTensorRightMapIso A (ProjectiveLine S)
+      (ordinaryFiniteTensorPullback A (ProjectiveLine S ↘ S) H K).symm (Iso.refl _)
+
+/-- The tensor strength of the open/projective right functor of one coordinate.
+Source: affine trace proof, right-functor reassociation
+(blueprint: def-pur-ordinary-affine-tensor-actions). -/
+def lineStrength (N : ℕ) (hA : (N : A) = 0) (S : Scheme.{u})
+    (H K : DerivedCategoryModule A S) :
+    ((ordinaryFiniteTensor A (AffineSpace PUnit.{u + 1} S)).obj
+      ((linePull A S).obj H)).obj ((affineTraceLineRight A N hA S).obj K) ≅
+      (affineTraceLineRight A N hA S).obj (((ordinaryFiniteTensor A S).obj H).obj K) :=
+  (ordinaryFiniteTensorPullback A (ProjectiveLine.affineChart S)
+      ((ordinaryFinitePullback A (ProjectiveLine S ↘ S)).obj H)
+      ((ordinaryFiniteP1Right A N hA S).obj K)).symm ≪≫
+    (ordinaryFinitePullback A (ProjectiveLine.affineChart S)).mapIso
+      (properStrength A N hA S H K)
+
+/-- Paste the specified line strengths, retaining their coordinate order.
+Source: affine trace proof, iterated right-functor tensor comparison
+(blueprint: def-pur-ordinary-affine-tensor-actions). -/
+def strength (N : ℕ) (hA : (N : A) = 0) (S : Scheme.{u})
+    (H : DerivedCategoryModule A S) (d : ℕ) (K : DerivedCategoryModule A S) :
+    (coefficient A S H d).obj ((affineTraceRight A N hA S d).obj K) ≅
+      (affineTraceRight A N hA S d).obj ((coefficient A S H 0).obj K) :=
+  affineTraceRightExchangeTower
+    (fun e ↦ affineTraceLineRight A N hA (affineTraceTower S e))
+    (fun e ↦ affineTraceLineRight A N hA (affineTraceTower S e))
+    (coefficient A S H)
+    (fun e M ↦ lineStrength A N hA (affineTraceTower S e) ((pull A S e).obj H) M) d K
+
 end OrdinaryAffineTensorActions
 end AlgebraicGeometry.Etale

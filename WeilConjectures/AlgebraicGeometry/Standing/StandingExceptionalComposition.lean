@@ -64,6 +64,83 @@ def standingExceptionalHomEquiv (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     (((Etale.rightDerivedUpperShriekAdjunction Λ f).homEquiv K' (RνY.obj L)).trans
       (pullback.trans e.homFromEquiv))))
 
+/-- Successive standing Hom transpose through g and then f.
+Source: definition of c in the composition section
+(blueprint: pur9-def-upper-shriek-composition). -/
+def standingCompositeHomTranspose (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    [HasCompactification f] [HasCompactification g] [CompactSpace Y] [CompactSpace Z]
+    {M : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
+    (hM : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X M)
+    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Z) (ModuleCat.{u + 1} Λ))}
+    (hK : _root_.DerivedCategory.TStructure.t.plus K)
+    (a : (rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) g).obj
+      ((rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f).obj M) ⟶ K) :
+    M ⟶ (rightDerivedUpperShriek Λ f).obj ((rightDerivedUpperShriek Λ g).obj K) :=
+  ((standingExceptionalHomEquiv Λ g (hM.rightDerivedLowerShriek_obj f) hK).trans
+    (standingExceptionalHomEquiv Λ f hM (plus_rightDerivedUpperShriek_obj g hK))) a
+
+/-- Extend an isomorphism component by zero outside its full object domain.
+Source: the domain conventions for the composition mate
+(blueprint: pur9-def-upper-shriek-composition). -/
+def standingExtendIsoComponent {C E : Type*} [Category C] [Category E] [HasZeroMorphisms E]
+    (P : ObjectProperty C) (F G : C ⥤ E) (α : P.ι ⋙ F ≅ P.ι ⋙ G)
+    (M : C) : F.obj M ⟶ G.obj M :=
+  open Classical in
+  if hM : P M then α.hom.app ⟨M, hM⟩ else 0
+
+/-- The standing counit, extended by zero off the bounded-below domain.
+Source: inverse standing Hom image of the identity
+(blueprint: pur9-def-upper-shriek-composition). -/
+def standingExceptionalCounit (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] [CompactSpace Y]
+    (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))) :
+    (rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f).obj
+      ((rightDerivedUpperShriek Λ f).obj K) ⟶ K :=
+  open Classical in
+  if hK : _root_.DerivedCategory.TStructure.t.plus K then
+    (standingExceptionalHomEquiv Λ f
+      (plusEtaleOrigin_rightDerivedUpperShriek_obj f hK) hK).symm (𝟙 _)
+  else 0
+
+/-- The specified compact-support compositor, with explicit zero extension.
+Source: canonical origin composition
+(blueprint: pur9-def-upper-shriek-composition). -/
+def standingCompactSupportCompositor (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    [QuasiCompact f] [QuasiCompact g]
+    (M : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))) :
+    (rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) g).obj
+      ((rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f).obj M) ⟶
+        (rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) (f ≫ g)).obj M :=
+  standingExtendIsoComponent
+    (C := _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)))
+    (E := _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Z) (ModuleCat.{u + 1} Λ)))
+    (DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X)
+    (rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f ⋙
+      rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) g)
+    (rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) (f ≫ g))
+    (originCompositionAmbient Λ f g) M
+
+/-- The standing exceptional composition mate, extended by zero off its domain.
+Source: successive transpose of compositor followed by the counit
+(blueprint: pur9-def-upper-shriek-composition). -/
+def standingExceptionalCompositionAmbient (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    [QuasiCompact f] [QuasiCompact g] [CompactSpace Y] [CompactSpace Z]
+    (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Z) (ModuleCat.{u + 1} Λ))) :
+    (rightDerivedUpperShriek Λ (f ≫ g)).obj K ⟶
+      (rightDerivedUpperShriek Λ f).obj ((rightDerivedUpperShriek Λ g).obj K) :=
+  open Classical in
+  if hK : _root_.DerivedCategory.TStructure.t.plus K then
+    standingCompositeHomTranspose Λ f g
+      (plusEtaleOrigin_rightDerivedUpperShriek_obj (f ≫ g) hK) hK
+      (standingCompactSupportCompositor Λ f g ((rightDerivedUpperShriek Λ (f ≫ g)).obj K) ≫
+        standingExceptionalCounit Λ (f ≫ g) K)
+  else 0
+
 /-- The morphism c_{g,f,L} for the finite-level standing choices. The counit for gf
 is its standing Hom bijection applied inversely to the identity. Apply alpha at
 K=(gf)^!L, compose with that counit, transpose first through g and then through f.
@@ -99,15 +176,7 @@ def standingExceptionalComposition (P : WeilConjectures.PurityFiniteSetting.{u})
     (Y ↘ Spec (.of P.field.k))
   letI : CompactSpace S := QuasiCompact.compactSpace_of_compactSpace
     (S ↘ Spec (.of P.field.k))
-  let A := ModuleCat.{u + 1} P.Coefficient
-  fun (L : DerivedCategoryBoundedConstructible A S) ↦
-    let hL := L.property.plusEtaleOrigin.plus
-    let K := (rightDerivedUpperShriek P.Coefficient (f ≫ g)).obj L.obj
-    let hK := plusEtaleOrigin_rightDerivedUpperShriek_obj (f ≫ g) hL
-    let counit := (standingExceptionalHomEquiv P.Coefficient (f ≫ g) hK hL).symm (𝟙 K)
-    let alpha := (originCompositionAmbient P.Coefficient f g).hom.app ⟨K, hK⟩
-    ((standingExceptionalHomEquiv P.Coefficient g (hK.rightDerivedLowerShriek_obj f) hL).trans
-      (standingExceptionalHomEquiv P.Coefficient f hK
-        (plus_rightDerivedUpperShriek_obj g hL))) (alpha ≫ counit)
+  fun (L : DerivedCategoryBoundedConstructible (ModuleCat.{u + 1} P.Coefficient) S) ↦
+    standingExceptionalCompositionAmbient P.Coefficient f g L.obj
 
 end AlgebraicGeometry.ProEtale

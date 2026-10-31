@@ -36,3 +36,41 @@ attribute [local implicit_reducible] sourceWitness rightDerivedLowerShriek
 set_option maxHeartbeats 1600000 in
 -- The comparison contains concrete derived source and compact-support functors.
 end AlgebraicGeometry.ProEtale.AffineOrderedIntegration
+
+namespace AlgebraicGeometry.ProEtale.AffineOrderedIntegration
+
+/-- The geometric standing evaluation is the normalized ordinary line counit.
+Source: projection-purity agreement, final paragraph, and the coordinate-line
+counit tensor formula.
+(blueprint: lem-pur-affine-ordered-standing-line-counit).
+
+Proof: precompose with compact support of lineWitness.iso.hom, an isomorphism.
+standingEvaluation_source_counit expresses the geometric side through the fixed
+origin and chart comparisons, ordinary source coordinates and the original line
+counit. rankOne_source_coordinates identifies its prefix with compact support of
+the witness followed by lineEvaluationCoordinates. Postcompose that equality with
+comparison of orderedCounitStep at zero and eK.hom. Functoriality and associativity
+identify it with the reverse of the precomposed goal. Cancel the isomorphism. -/
+theorem standingLine_counit_coordinates
+    (P : WeilConjectures.PurityFiniteSetting.{u})
+    (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of P.field.k))
+    [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY]
+    (K : Plus (AffineLinePurity.Ring P) Y)
+    (Ke : Etale.DerivedCategoryModule (AffineLinePurity.Ring P) Y)
+    (hKe : etaleFiniteTor (AffineLinePurity.Ring P) Y Ke)
+    (eK : (comparison (AffineLinePurity.Ring P) Y).obj Ke ≅ K.obj) :
+    AffineLineEvaluation.standingEvaluation P Y aY K.obj Ke hKe eK =
+      normalizedLineEvaluation P Y aY K Ke hKe eK := by
+  let : IsNoetherian Y := tower_noetherian P Y aY 0
+  apply (cancel_epi ((AffineLineEvaluation.support P aY
+    (AffineSpace PUnit.{u + 1} Y ↘ Y)).map
+      (AffineLineEvaluation.lineWitness P Y K.obj Ke hKe eK).iso.hom)).mp
+  rw [standingEvaluation_source_counit]
+  have hs := rankOne_source_coordinates P Y aY K Ke hKe eK
+  dsimp only at hs
+  simp only [normalizedLineEvaluation, Functor.map_comp, Category.assoc]
+  rw [reassoc_of% hs]
+  simp only [Functor.map_comp, Category.assoc]
+  rfl
+
+end AlgebraicGeometry.ProEtale.AffineOrderedIntegration

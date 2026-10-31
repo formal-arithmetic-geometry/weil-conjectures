@@ -117,3 +117,26 @@ attribute [local irreducible] isoComposite
 set_option maxHeartbeats 800000 in
 -- Explicit transposition and localization need this heartbeat budget.
 end WeilConjectures.FinitePullbackStrictTower
+
+namespace WeilConjectures.FinitePullbackStrictTower
+
+private def isoComposite
+    {A : Type*} [Category* A] {W X Y Z : A}
+    (i : W ≅ X) (z : X ⟶ Y) (h : Z ⟶ Y) (hz : IsIso z) (hh : IsIso h) : W ≅ Z :=
+  i ≪≫ (@asIso _ _ _ _ z hz) ≪≫ (@asIso _ _ _ _ h hh).symm
+
+private def comparisonIso
+    (R : FiniteReductionTower.ResolvingModel l E g)
+    (θ : FinitePullbackStrictTowerData.koszuls l E Y ⋙
+      FinitePullbackStrictTowerData.diagramPull l E g ≅
+        FinitePullbackStrictTowerData.G l E g ⋙ FinitePullbackStrictTowerData.koszuls l E X)
+    (lambda : FinitePullbackStrictTowerData.G l E g ⋙
+      FinitePullbackStrictTowerData.reductions l E X ≅ FinitePullbackStrictTowerData.finite l E g)
+    (hIso : ∀ P, integralOperationsGoodComplex l E Y P →
+      IsIso (comparisonZQ l E g θ lambda P))
+    (P : CochainComplex (Modules l E Y) ℤ)
+    (hP : integralOperationsGoodComplex l E Y P) :=
+  isoComposite (R.chi P hP) (comparisonZQ l E g θ lambda P) (R.B.counit.app P)
+    (hIso P hP) (R.B.computes P hP)
+
+end WeilConjectures.FinitePullbackStrictTower

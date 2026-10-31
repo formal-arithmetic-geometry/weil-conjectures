@@ -510,6 +510,21 @@ def smoothPurityTensorShiftGeneric (C : Type uC) [Category.{v} C] [Abelian C]
     ((curriedTensor (_root_.DerivedCategory C)).obj M).mapIso
       ((shiftFunctorCompIsoId _ (-r) r (neg_add_cancel r)).app T)
 
+/-- Identification of the published derived tensor with its canonical monoidal
+presentation, as functors rather than by repeated reduction of instance data.
+Source: blueprint def-weil-derived-tensor (blueprint: def-pur-smooth-purity-map).
+Proof: unfold ProEtale.derivedTensor. Its definition is precisely curriedTensor
+for the K-flat derived monoidal structure. Both sides use the existing sheaf
+monoidal structure and its derived localization, so the identity is reflexive.
+This postpones only the proof of an interface identity, with no map data chosen. -/
+theorem smoothPurityTensorPresentation (C : Type uC) [Category.{u + 1} C] [Abelian C]
+    [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]
+    [SymmetricCategory C] [MonoidalClosed C] [Abelian.HasFunctorialFlatResolution C]
+    (X : Scheme.{u}) :
+    ProEtale.derivedTensor C X =
+      curriedTensor (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) C)) := by
+  rfl
+
 /-- The canonical shift comparison in the published tensor presentation is uniquely
 specified by equality, across the two interface types, to the existing K-flat shift.
 Source: blueprint def-pur-smooth-purity-map, tau
