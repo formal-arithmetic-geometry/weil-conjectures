@@ -1,0 +1,575 @@
+/-
+Copyright (c) 2026 Bin Wu. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Bin Wu
+-/
+module
+
+public import WeilConjectures.AlgebraicGeometry.SemilinearSystemModels
+public import WeilConjectures.SixFunctors.Coefficient.CoefficientRingedSequenceSiteSupplement
+public import WeilConjectures.SixFunctors.CoefficientClosedStructure.CoefficientRingedTensorHomModelSupplement
+public import WeilConjectures.Algebra.Homology.KFlatResolutionIndependentCoefficients
+public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
+public import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
+public import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
+public import WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.Algebra.Homology.BifunctorShift
+public import Mathlib.Algebra.Homology.QuasiIso
+public import Mathlib.CategoryTheory.Sites.Equivalence
+public import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
+public import Mathlib.CategoryTheory.Limits.EssentiallySmall
+public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
+public import Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import Mathlib.CategoryTheory.Limits.ExactFunctor
+public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
+public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
+public import Mathlib.Algebra.Category.Grp.AB
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
+public import Mathlib.RingTheory.Flat.CategoryTheory
+public import WeilConjectures.AlgebraicGeometry.CoefficientHomRepresentativeEvaluation
+public import WeilConjectures.Algebra.Homology.DerivedInternalHomOfUniverses
+public import WeilConjectures.Algebra.Homology.DerivedInternalHom
+public import WeilConjectures.SixFunctors.Etale.Derived.Hom
+public import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
+public import Mathlib.Algebra.Category.Ring.Limits
+public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
+public import Mathlib.CategoryTheory.Yoneda
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
+public import Mathlib.CategoryTheory.Generator.Basic
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
+public import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMapOfUniverses
+public import WeilConjectures.Algebra.Homology.HomComplex
+public import WeilConjectures.Algebra.Homology.HomComplexSectionsQuasiIsoOfUniverses
+public import WeilConjectures.CategoryTheory.R.RGammaDerivedLimitSupplement
+public import Mathlib.Algebra.Category.Grp.Abelian
+public import WeilConjectures.Algebra.Homology.HomComplexSectionsDerivedNaturalityOfUniverses
+public import WeilConjectures.Algebra.Homology.RhomIntoKInjectiveLocal
+public import WeilConjectures.Algebra.Homology.KInjectiveRestrictLocalizedOfUniverses
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+public import WeilConjectures.Algebra.Homology.LocalizedRestrictionAdjunctionOfUniverses
+public import WeilConjectures.Algebra.Homology.LocalizedRestrictionExtensionExistsOfUniverses
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+public import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
+public import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
+public import Mathlib.CategoryTheory.Adjunction.Additive
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+public import Mathlib.Algebra.Homology.DerivedCategory.KInjective
+public import WeilConjectures.Algebra.Homology.HomComplexSectionsHomotopyNaturalityOfUniverses
+public import WeilConjectures.Algebra.Homology.HomComplexProjections
+public import WeilConjectures.Algebra.Homology.HomComplexSectionsCanonicalComparisonOfUniverses
+public import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexShift
+public import WeilConjectures.Algebra.Homology.HomComplexSectionsCochainsOfUniverses
+public import WeilConjectures.Algebra.Homology.HomComplexSectionsCochainsCommOfUniverses
+public import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexCohomology
+public import Mathlib.Algebra.Category.Grp.EpiMono
+public import WeilConjectures.Algebra.Homology.LocalizedModuleRestrictionQuasiIsoOfUniverses
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
+public import WeilConjectures.Algebra.Homology.QuasiIsoOfSectionsOfUniverses
+public import Mathlib.CategoryTheory.Sites.Abelian
+public import Mathlib.Algebra.Homology.Functor
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
+public import WeilConjectures.Algebra.Homology.HomComplexComponents
+public import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMap
+public import WeilConjectures.Algebra.Homology.HomTensorDegreewiseEquation
+public import WeilConjectures.Algebra.Homology.DerivedChangeOfRingsCochainModel
+public import WeilConjectures.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
+public import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
+public import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
+public import WeilConjectures.FromJoel.Algebra.Homology.ShortComplex.HomologicalComplex
+public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+public import WeilConjectures.CategoryTheory.RingedSiteModules
+public import Mathlib.CategoryTheory.Limits.Final
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
+public import Mathlib.Algebra.Homology.HomologicalComplex
+public import Mathlib.CategoryTheory.Sites.CoverPreserving
+public import WeilConjectures.Algebra.Homology.SixFunctors.OrdinaryDerivedChangeOfRings
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+public import WeilConjectures.Algebra.Homology.Site.SiteTensorFunctorialitySupplement
+public import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUniverses
+public import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
+public import WeilConjectures.CategoryTheory.SiteCoveringAxioms
+public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+import all WeilConjectures.Algebra.Homology.SequenceProjection.SequenceProjectionDerivedAdjunction
+import WeilConjectures.Algebra.Homology.System.SystemEvaluationTopos
+import all WeilConjectures.CategoryTheory.Constant.ConstantTowerNormalization
+import WeilConjectures.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
+import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
+import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
+import WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
+import Mathlib.Algebra.Category.Grp.FilteredColimits
+import Mathlib.Algebra.Homology.BifunctorShift
+import Mathlib.Algebra.Homology.QuasiIso
+import Mathlib.CategoryTheory.Sites.Equivalence
+import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
+import Mathlib.CategoryTheory.Limits.EssentiallySmall
+import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
+import Mathlib.CategoryTheory.Monoidal.Closed.Basic
+import Mathlib.CategoryTheory.Limits.ExactFunctor
+import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
+import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
+import Mathlib.Algebra.Category.Grp.AB
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
+import Mathlib.RingTheory.Flat.CategoryTheory
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Mathlib.CategoryTheory.Localization.Predicate
+
+/-! # Descent of strict coefficient tensor complexes
+
+Source: Stacks Project, sites-cohomology.tex, Tags 0G7D, 06YS, 06YY;
+blueprint, normalized towers, reduction construction
+(blueprint: lem-sp-strict-coefficient-tensor-descent).
+
+Index zero denotes the paper's coefficient indexed by one. The target is the
+ordinary derived category of module sheaves on the existing ringed sequence site.
+-/
+
+@[expose] public noncomputable section
+set_option autoImplicit false
+set_option synthInstance.maxSize 4096
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
+
+universe c v r
+open CategoryTheory CategoryTheory.Limits Opposite
+attribute [local instance 20000] hasSheafCompose_of_preservesLimitsOfSize
+
+namespace WeilConjectures.SemilinearSections.StrictCoefficientTensor
+
+variable {C : Type c} [Category.{v} C] [EssentiallySmall.{r} C]
+  (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{r})
+  (S : ℕ → Sheaf J CommRingCat.{r}) (q : ∀ n : ℕ, S (n + 1) ⟶ S n)
+  (a : ∀ n : ℕ, R ⟶ S n)
+
+/-- The resolving class is K-flat complexes with flat terms.
+Source: Stacks 06YS, 0G7D (blueprint: lem-sp-strict-coefficient-tensor-descent). -/
+def Resolving (P : CochainComplex (Mod.{c, v, r} J R) ℤ) : Prop :=
+  CochainComplex.IsKFlatIndependentCoefficients (R := R) P ∧
+    ∀ i : ℤ, SheafOfModules.IsFlatOnSite.{c, v, r, r} (J := J) (R := R) (P.X i)
+
+/-- The existing scalar-extension model at the fixed ordinary localization universes.
+Source: Stacks 06YY (blueprint: lem-sp-strict-coefficient-tensor-descent). -/
+abbrev Scalar {T : Sheaf J CommRingCat.{r}} (b : R ⟶ T) :=
+  @SheafOfModules.DerivedChangeOfRingsCochainModel.{c, v, r,
+    max c v (r + 1), max c v (r + 1)} C _ (siteSmall.{c, v, r}) J _
+      (locallyBijective.{c, v, r} J) (abelianSheafify.{c, v, r} J) R T b
+      (hasDerived.{c, v, r} J R) (hasDerived.{c, v, r} J T)
+
+/-- A pure scalar-extension section, in the actual ordinary extension functor.
+The target coefficient acts on the first tensor factor; symmetry gives the
+paper's notation x tensor c.
+Source: Stacks 03EK, 06YY (blueprint: lem-sp-strict-coefficient-tensor-descent). -/
+def pure {T : Sheaf J CommRingCat.{r}} (b : R ⟶ T)
+    (d : Scalar J R b)
+    (M : Mod.{c, v, r} J R) (U : Cᵒᵖ) (x : M.val.obj U) (s : T.obj.obj U) :
+    (d.E.obj M).val.obj U :=
+  @SMul.smul ((ring J T).obj.obj U) _ inferInstance s
+    ((eqToHom (d.obj_eq M).symm).val.app U (extensionUnit b M U x))
+
+set_option genSizeOf false in
+set_option genSizeOfSpec false in
+set_option genInjectivity false in
+set_option genCtorIdx false in
+/-- The full normalized descent datum, including strict transitions before localization.
+All ordinary extensions are fixed by the dependency's sheafified-tensor formulas.
+The universal comparison and its uniqueness fix descent, rather than selecting
+unrelated level objects or a functor by a mere existence assertion.
+Source: Stacks 0G7D, 06YS, 06YY and the blueprint reduction construction
+(blueprint: lem-sp-strict-coefficient-tensor-descent). -/
+structure Descent where
+  /-- Each level uses the recorded ordinary and derived change of rings. -/
+  scalar : ∀ n : ℕ, Scalar J R (a n)
+  /-- Ordinary strict tensor systems; applying this termwise gives F(P). -/
+  ordinary : Mod.{c, v, r} J R ⥤ Systems.{c, v, r} J S q
+  [additive : ordinary.Additive]
+  /-- Its levels are the actual sheafified scalar extensions. -/
+  level : ∀ n : ℕ, ordinary ⋙ evaluation.{c, v, r} J S q n ≅ (scalar n).E
+  /-- Every transition, including composite indices, has the coefficient formula. -/
+  transition_pure : ∀ (M : Mod.{c, v, r} J R) (m n : ℕ) (h : n ≤ m)
+    (U : Cᵒᵖ) (x : M.val.obj U) (s : (S m).obj.obj U),
+    ((res (coefficientMap J S q h)).map ((level n).hom.app M)).val.app U
+      (((transition J S q h).app (ordinary.obj M)).val.app U
+        (((level m).inv.app M).val.app U (pure J R (a m) (scalar m) M U x s))) =
+      pure J R (a n) (scalar n) M U x ((coefficientMap J S q h).hom.app U s)
+  /-- The underived complex functor inverts quasi-isomorphisms on the resolving class. -/
+  preserves : ∀ {P P' : CochainComplex (Mod.{c, v, r} J R) ℤ} (f : P ⟶ P'),
+    Resolving J R P → Resolving J R P' → QuasiIso f →
+      QuasiIso ((ordinary.mapHomologicalComplex (.up ℤ)).map f)
+  /-- Descent lands in the ordinary derived category of entire strict systems. -/
+  T : D.{c, v, r} J R ⥤ DS.{c, v, r} J S q
+  /-- A natural comparison, before restricting to K-flat complexes. -/
+  ε : DerivedCategory.Q ⋙ T ⟶ ordinary.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q
+  /-- Everywhere-defined left derivation. -/
+  pointwise : (ordinary.mapHomologicalComplex (.up ℤ) ⋙
+    DerivedCategory.Q).HasPointwiseLeftDerivedFunctor
+      (HomologicalComplex.quasiIso (Mod.{c, v, r} J R) (.up ℤ))
+  universal : T.IsLeftDerivedFunctor ε
+    (HomologicalComplex.quasiIso (Mod.{c, v, r} J R) (.up ℤ))
+  /-- Exactness in the triangulated sense. -/
+  triangulated : ∃ (_ : T.CommShift ℤ), T.IsTriangulated
+  computes : ∀ P : CochainComplex (Mod.{c, v, r} J R) ℤ,
+    Resolving J R P → IsIso (ε.app P)
+  /-- Exact evaluation identifies this descent with derived scalar extension. -/
+  evaluation : ∀ n : ℕ, T ⋙ e.{c, v, r} J S q n ≅ (scalar n).T
+  /-- The evaluation comparison respects the two actual computation counits. -/
+  evaluation_normalized : ∀ (P : CochainComplex (Mod.{c, v, r} J R) ℤ)
+    (_hP : Resolving J R P) (n : ℕ),
+    (e J S q n).map (ε.app P) ≫
+        (Functor.mapDerivedCategoryFactors (SemilinearSections.evaluation J S q n)).hom.app
+          ((ordinary.mapHomologicalComplex (.up ℤ)).obj P) ≫
+        DerivedCategory.Q.map ((NatIso.mapHomologicalComplex (level n) (.up ℤ)).hom.app P) =
+      (evaluation n).hom.app (DerivedCategory.Q.obj P) ≫ (scalar n).ε.app P
+  /-- Uniqueness with respect to the resolving-class normalization itself. -/
+  unique : ∀ (T' : D.{c, v, r} J R ⥤ DS.{c, v, r} J S q)
+    (ε' : DerivedCategory.Q ⋙ T' ⟶
+      ordinary.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q),
+    (∀ P : CochainComplex (Mod.{c, v, r} J R) ℤ,
+      Resolving J R P → IsIso (ε'.app P)) →
+    ∃! α : T ≅ T', ∀ P : CochainComplex (Mod.{c, v, r} J R) ℤ,
+      Resolving J R P → α.hom.app (DerivedCategory.Q.obj P) ≫ ε'.app P = ε.app P
+
+private instance coefficientCompose :
+    J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r}) := by
+  infer_instance
+
+attribute [local instance 21000] coefficientCompose
+
+private theorem resolvingResolution (K : CochainComplex (Mod.{c, v, r} J R) ℤ) :
+    ∃ (P : CochainComplex (Mod.{c, v, r} J R) ℤ) (s : P ⟶ K),
+      Resolving J R P ∧ QuasiIso s := by
+  obtain ⟨P, s, hk, hf, hs, _⟩ :=
+    CochainComplex.exists_isKFlatResolutionIndependentCoefficients (R := R) K
+  exact ⟨P, s, ⟨hk, fun i ↦ (exactFunctor _ _).prop_of_iso
+    (SheafOfModules.siteSheafTensorRightIso R (P.X i)).symm (hf i)⟩, hs⟩
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+private theorem derivedPair
+    {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B]
+    [HasDerivedCategory A] [HasDerivedCategory B]
+    (E : A ⥤ B) [E.Additive] (p : CochainComplex A ℤ → Prop)
+    (res : ∀ K, ∃ (P : CochainComplex A ℤ) (s : P ⟶ K), p P ∧ QuasiIso s)
+    (hinv : ∀ {P Q : CochainComplex A ℤ} (s : P ⟶ Q),
+      p P → p Q → QuasiIso s → QuasiIso ((E.mapHomologicalComplex (.up ℤ)).map s)) :
+    ∃ (T : DerivedCategory A ⥤ DerivedCategory B)
+      (β : DerivedCategory.Q ⋙ T ⟶ E.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q),
+      T.IsLeftDerivedFunctor β (HomologicalComplex.quasiIso A (.up ℤ)) ∧
+      (E.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q).HasPointwiseLeftDerivedFunctor
+        (HomologicalComplex.quasiIso A (.up ℤ)) ∧
+      (∃ (_ : T.CommShift ℤ), T.IsTriangulated) ∧
+      ∀ K, p K → IsIso (β.app K) := by
+  classical
+  let q := HomotopyCategory.quotient A (.up ℤ)
+  let F := E.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh (C := B)
+  let P : Set (HomotopyCategory A (.up ℤ)) := fun X ↦
+    ∃ K : CochainComplex A ℤ, p K ∧ q.obj K = X
+  have hres : ∀ X : HomotopyCategory A (.up ℤ),
+      ∃ (Y : HomotopyCategory A (.up ℤ)) (s : Y ⟶ X),
+        Y ∈ P ∧ HomotopyCategory.quasiIso A (.up ℤ) s := by
+    intro X
+    obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective X
+    obtain ⟨L, s, hL, hs⟩ := res K
+    exact ⟨q.obj L, q.map s, ⟨L, hL, rfl⟩,
+      (HomotopyCategory.quotient_map_mem_quasiIso_iff s).2 hs⟩
+  have hmap : ∀ (X Y : HomotopyCategory A (.up ℤ)) (s : X ⟶ Y),
+      X ∈ P → Y ∈ P → HomotopyCategory.quasiIso A (.up ℤ) s → IsIso (F.map s) := by
+    rintro X Y s ⟨K, hK, rfl⟩ ⟨N, hN, rfl⟩ hs
+    obtain ⟨s, rfl⟩ := q.map_surjective s
+    have hs := hinv s hK hN ((HomotopyCategory.quotient_map_mem_quasiIso_iff s).1 hs)
+    change IsIso (DerivedCategory.Qh.map
+      ((HomotopyCategory.quotient B (.up ℤ)).map
+        ((E.mapHomologicalComplex (.up ℤ)).map s)))
+    exact Localization.inverts DerivedCategory.Qh (HomotopyCategory.quasiIso B (.up ℤ)) _
+      ((HomotopyCategory.quotient_map_mem_quasiIso_iff _).2 hs)
+  obtain ⟨hpw, T, ε, hu, ht, hc⟩ :=
+    Functor.leftDerived_from_resolvingClass A (DerivedCategory B) F P hres hmap
+  let : F.HasPointwiseLeftDerivedFunctor (HomotopyCategory.quasiIso A (.up ℤ)) := hpw
+  let : T.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso A (.up ℤ)) := hu
+  let α := (Functor.associator q DerivedCategory.Qh T).hom ≫ Functor.whiskerLeft q ε
+  have hα := pointwise_precomp_full q DerivedCategory.Qh F T ε
+    (Functor.isPointwiseRightKanExtensionOfHasPointwiseLeftDerivedFunctor T ε
+      (HomotopyCategory.quasiIso A (.up ℤ)))
+  let i := DerivedCategory.quotientCompQhIso A
+  let j : q ⋙ F ≅ E.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q :=
+    (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (E.mapHomotopyCategoryFactors (.up ℤ)) _ ≪≫
+      Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft _ (DerivedCategory.quotientCompQhIso B)
+  let β := Functor.whiskerRight i.inv T ≫ α ≫ j.hom
+  have hβ := pointwise_change_iso T i j α hα
+  refine ⟨T, β, ⟨hβ.isRightKanExtension⟩, ?_, ht, ?_⟩
+  · intro X
+    exact (Functor.hasPointwiseLeftDerivedFunctorAt_iff _ DerivedCategory.Q
+      (HomologicalComplex.quasiIso A (.up ℤ)) X).2
+        ((hβ _).hasPointwiseRightKanExtensionAt)
+  · intro K hK
+    have := hc (q.obj K) ⟨K, hK, rfl⟩
+    dsimp [β, α]
+    infer_instance
+
+private def algebraSequence
+    (ha : ∀ n : ℕ, a (n + 1) ≫ q n = a n) :
+    (Functor.const ℕᵒᵖ).obj R ⟶ rings J S q :=
+  NatTrans.ofOpSequence (fun n ↦ a n) (by
+    intro n
+    change 𝟙 R ≫ a n = a (n + 1) ≫ _
+    simpa only [Category.id_comp, rings,
+      Functor.ofOpSequence_map_homOfLE_succ] using (ha n).symm)
+
+private def ordinaryTensor
+    (ha : ∀ n : ℕ, a (n + 1) ≫ q n = a n) :
+    Mod.{c, v, r} J R ⥤ Systems.{c, v, r} J S q :=
+  SheafOfModules.SequenceProjection.extension R (rings J S q) (algebraSequence J R S q a ha) ⋙
+    (SheafOfModules.strictSystemSequenceEquivalence (rings J S q)).functor
+
+private instance ordinaryTensor_additive
+    (ha : ∀ n : ℕ, a (n + 1) ≫ q n = a n) :
+    (ordinaryTensor J R S q a ha).Additive where
+  map_add := by
+    intro M N f g
+    let F := SheafOfModules.SequenceProjection.extension R (rings J S q)
+      (algebraSequence J R S q a ha)
+    let G := (SheafOfModules.strictSystemSequenceEquivalence (rings J S q)).functor
+    have hF := @Functor.map_add _ _ _ _ _ _ F
+      (SheafOfModules.SequenceProjection.extension_additive R (rings J S q)
+        (algebraSequence J R S q a ha)) M N f g
+    have hG := @Functor.map_add _ _ _ _ _ _ G
+      (SheafOfModules.strictSystemToSequenceAdditive (rings J S q))
+      (F.obj M) (F.obj N) (F.map f) (F.map g)
+    exact (congrArg G.map hF).trans hG
+
+attribute [local irreducible] ordinaryTensor
+
+private def scalarModel
+    (ha : ∀ n : ℕ, a (n + 1) ≫ q n = a n) (n : ℕ) : Scalar J R (a n) :=
+  (SheafOfModules.SequenceProjection.scalar R (rings J S q)
+    (algebraSequence J R S q a ha) n).model
+
+private theorem evaluationRingMap (n : ℕ) :
+    eqToHom (evaluation_ring J S q n).symm =
+      SheafOfModules.systemSequenceVerticalRingMap (rings J S q) n := by
+  ext U x
+  simp only [ObjectProperty.eqToHom_hom, eqToHom_app]
+  rfl
+
+private def sequenceLevelIso
+    (M : SheafOfModules.StrictRingSystem.{c, v, r} (rings J S q)) (n : ℕ) :
+    (evaluation J S q n).obj
+      ((SheafOfModules.strictSystemSequenceEquivalence (rings J S q)).functor.obj M) ≅
+        M.level n :=
+  (SheafOfModules.pushforwardCongr (evaluationRingMap J S q n)).app
+      ((SheafOfModules.strictSystemSequenceEquivalence (rings J S q)).functor.obj M) ≪≫
+    (SheafOfModules.strictSystemSequenceUnitLevel (rings J S q) M n).symm
+
+private def ordinaryLevel
+    (ha : ∀ n : ℕ, a (n + 1) ≫ q n = a n) (n : ℕ) :
+    ordinaryTensor J R S q a ha ⋙ evaluation J S q n ≅ (scalarModel J R S q a ha n).E := by
+  unfold ordinaryTensor
+  exact NatIso.ofComponents
+    (fun M ↦ sequenceLevelIso J S q
+      ((SheafOfModules.SequenceProjection.extension R (rings J S q)
+        (algebraSequence J R S q a ha)).obj M) n)
+    (by intros; ext U x; rfl)
+
+
+private theorem sequenceTransition
+    (M : SheafOfModules.StrictRingSystem.{c, v, r} (rings J S q))
+    {m n : ℕ} (h : n ≤ m) (U : Cᵒᵖ) (x : (M.level m).val.obj U) :
+    ((res (coefficientMap J S q h)).map (sequenceLevelIso J S q M n).hom).val.app U
+      (((transition J S q h).app
+        ((SheafOfModules.strictSystemSequenceEquivalence (rings J S q)).functor.obj M)).val.app U
+          ((sequenceLevelIso J S q M m).inv.val.app U x)) =
+      (M.transition h).val.app U x := by
+  have hh := (transition_exists J S q h).exists.choose_spec
+    ((SheafOfModules.strictSystemSequenceEquivalence (rings J S q)).functor.obj M) U
+  have he := congrFun (eq_of_heq hh) ((sequenceLevelIso J S q M m).inv.val.app U x)
+  change (sequenceLevelIso J S q M n).hom.val.app U _ = _
+  refine (congrArg ((sequenceLevelIso J S q M n).hom.val.app U) he).trans ?_
+  change (M.level n).val.map (𝟙 U) ((M.transition h).val.app U x) = _
+  rw [PresheafOfModules.map_id]
+  rfl
+
+
+attribute [local irreducible] sequenceLevelIso
+
+private theorem equivalencePreserves
+    {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B]
+    (e : A ≌ B) [e.functor.Additive]
+    {P Q : CochainComplex A ℤ} (f : P ⟶ Q) (hf : QuasiIso f) :
+    QuasiIso ((e.functor.mapHomologicalComplex (.up ℤ)).map f) := by
+  let : QuasiIso f := hf
+  let : e.functor.IsEquivalence := e.isEquivalence_functor
+  infer_instance
+
+private theorem ordinaryPreserves
+    (ha : ∀ n : ℕ, a (n + 1) ≫ q n = a n)
+    {P Q : CochainComplex (Mod.{c, v, r} J R) ℤ} (f : P ⟶ Q)
+    (hP : Resolving J R P) (hQ : Resolving J R Q) (hf : QuasiIso f) :
+    QuasiIso (((ordinaryTensor J R S q a ha).mapHomologicalComplex (.up ℤ)).map f) := by
+  have hg := SheafOfModules.SequenceProjection.extension_preserves R (rings J S q)
+    (algebraSequence J R S q a ha) f hP.1 hQ.1 hf
+  let : (SheafOfModules.strictSystemSequenceEquivalence (rings J S q)).functor.Additive :=
+    SheafOfModules.strictSystemToSequenceAdditive (rings J S q)
+  unfold ordinaryTensor
+  exact equivalencePreserves (SheafOfModules.strictSystemSequenceEquivalence (rings J S q))
+    (((SheafOfModules.SequenceProjection.extension R (rings J S q)
+      (algebraSequence J R S q a ha)).mapHomologicalComplex (.up ℤ)).map f) hg
+
+
+
+
+private theorem ordinaryTransition
+    (ha : ∀ n : ℕ, a (n + 1) ≫ q n = a n) : ∀ (M : Mod.{c, v, r} J R) (m n : ℕ) (h : n ≤ m)
+      (U : Cᵒᵖ) (x : M.val.obj U) (s : (S m).obj.obj U),
+      ((res (coefficientMap J S q h)).map ((ordinaryLevel J R S q a ha n).hom.app M)).val.app U
+        (((transition J S q h).app ((ordinaryTensor J R S q a ha).obj M)).val.app U
+          (((ordinaryLevel J R S q a ha m).inv.app M).val.app U
+            (pure J R (a m) (scalarModel J R S q a ha m) M U x s))) =
+        pure J R (a n) (scalarModel J R S q a ha n) M U x
+          ((coefficientMap J S q h).hom.app U s) := by
+  intro M m n h U x s
+  unfold ordinaryTensor
+  exact (sequenceTransition J S q
+    ((SheafOfModules.SequenceProjection.extension R (rings J S q)
+      (algebraSequence J R S q a ha)).obj M) h U
+      (SheafOfModules.systemModelTmul
+        (SheafOfModules.SequenceProjection.scalar R (rings J S q)
+          (algebraSequence J R S q a ha) m).model M U s x)).trans
+    (SheafOfModules.SequenceProjection.transition_tmul R (rings J S q)
+      (algebraSequence J R S q a ha) M h U s x)
+
+
+attribute [local irreducible] ordinaryLevel scalarModel
+
+private theorem descentOfOrdinary
+    (d : ∀ n : ℕ, Scalar J R (a n))
+    (E : Mod.{c, v, r} J R ⥤ Systems.{c, v, r} J S q) [E.Additive]
+    (l : ∀ n : ℕ, E ⋙ evaluation J S q n ≅ (d n).E)
+    (ht : ∀ (M : Mod.{c, v, r} J R) (m n : ℕ) (h : n ≤ m)
+      (U : Cᵒᵖ) (x : M.val.obj U) (s : (S m).obj.obj U),
+      ((res (coefficientMap J S q h)).map ((l n).hom.app M)).val.app U
+        (((transition J S q h).app (E.obj M)).val.app U
+          (((l m).inv.app M).val.app U (pure J R (a m) (d m) M U x s))) =
+        pure J R (a n) (d n) M U x ((coefficientMap J S q h).hom.app U s))
+    (hinv : ∀ {P Q : CochainComplex (Mod.{c, v, r} J R) ℤ} (f : P ⟶ Q),
+      Resolving J R P → Resolving J R Q → QuasiIso f →
+        QuasiIso ((E.mapHomologicalComplex (.up ℤ)).map f)) :
+    Nonempty (Descent J R S q a) := by
+  classical
+  obtain ⟨T, ε, hu, hpw, htri, hc⟩ := derivedPair E (Resolving J R)
+    (resolvingResolution J R) hinv
+  have ev (n : ℕ) : ∃ b : T ⋙ e J S q n ≅ (d n).T,
+      ∀ (P : CochainComplex (Mod.{c, v, r} J R) ℤ) (_hP : Resolving J R P),
+        (e J S q n).map (ε.app P) ≫
+            (Functor.mapDerivedCategoryFactors (SemilinearSections.evaluation J S q n)).hom.app
+              ((E.mapHomologicalComplex (.up ℤ)).obj P) ≫
+            DerivedCategory.Q.map ((NatIso.mapHomologicalComplex (l n) (.up ℤ)).hom.app P) =
+          b.hom.app (DerivedCategory.Q.obj P) ≫ (d n).ε.app P := by
+    let H := (d n).E.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q
+    let t : E.mapHomologicalComplex (.up ℤ) ⋙
+        (SemilinearSections.evaluation J S q n).mapHomologicalComplex (.up ℤ) ⋙
+          DerivedCategory.Q ≅ H :=
+      Functor.isoWhiskerRight (Functor.mapHomologicalComplexCompIso (l n) (.up ℤ))
+        DerivedCategory.Q
+    let η : DerivedCategory.Q ⋙ (T ⋙ e J S q n) ⟶ H :=
+      Functor.whiskerRight ε (e J S q n) ≫
+        Functor.whiskerLeft (E.mapHomologicalComplex (.up ℤ))
+          (Functor.mapDerivedCategoryFactors (SemilinearSections.evaluation J S q n)).hom ≫
+        t.hom
+    have hη (P : CochainComplex (Mod.{c, v, r} J R) ℤ) (hP : Resolving J R P) :
+        IsIso (η.app P) := by
+      have := hc P hP
+      dsimp only [η, NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
+      infer_instance
+    obtain ⟨b, hb, _⟩ := comparison_from_resolutions (Resolving J R)
+      (resolvingResolution J R) (T ⋙ e J S q n) (d n).T H η (d n).ε hη
+        (fun P hP ↦ (d n).computes P hP.1)
+    exact ⟨b, fun P hP ↦ (hb P hP).symm⟩
+  choose b hb using ev
+  refine ⟨{ scalar := d
+            ordinary := E
+            additive := inferInstance
+            level := l
+            transition_pure := ht
+            preserves := hinv
+            T := T
+            ε := ε
+            pointwise := hpw
+            universal := hu
+            triangulated := htri
+            computes := hc
+            evaluation := b
+            evaluation_normalized := fun P hP n ↦ hb n P hP
+            unique := ?_ }⟩
+  intro T' ε' hc'
+  exact comparison_from_resolutions (Resolving J R) (resolvingResolution J R)
+    T T' _ ε ε' hc hc'
+
+
+/-- Strict coefficient tensor descends through K-flat localization.
+Source: Stacks 0G7D, 06YS, 06YT, 06YY and the blueprint reduction construction
+(blueprint: lem-sp-strict-coefficient-tensor-descent).
+
+Proof:
+1. Restriction of scalars leaves abelian sheaves unchanged. Kernels and cokernels
+   of strict systems are componentwise, as are finite biproducts and coimage/image
+   comparisons. Thus systems are abelian, evaluations are exact and jointly detect
+   quasi-isomorphisms.
+2. Set F(P)_n = P tensor_R S_n. The balanced relation is preserved by q_n since
+   q_n is R-linear. Its transition is id tensor q_n; the differentials, chain maps
+   and chain homotopies tensor with id. All identities hold before localization.
+3. Tensor distributes over the finite biproducts of a cone and respects its signed
+   differential and projection. Hence the homotopy functor followed by localization
+   is exact, with no exactness assumption on ordinary scalar extension.
+4. Derived change of rings, clause (1), implies invariance under quasi-isomorphisms
+   between K-flat complexes at every level. Joint detection gives invariance in
+   the category of strict-system complexes.
+5. Resolve every unbounded complex by a K-flat complex with flat terms (06YS).
+   Apply leftDerived_from_resolvingClass to obtain the everywhere-defined exact
+   functor and its comparison, invertible on this class.
+6. Quasi-isomorphisms have a right calculus of fractions. The resolving class has
+   enough denominators, so rightFractionDenseSubcategory identifies its localization
+   with D(R). The localization universal property gives the unique comparison
+   compatible with normalization. A roof P <-s- U -t-> P' acts as G(s) inverse
+   followed by G(t). This proves naturality for roofs, independence of representatives
+   and compatibility with a third representative, without functorial resolutions.
+7. Exact evaluation descends to ordinary derived categories. On resolving models
+   its comparison with derived scalar extension is the ordinary level comparison
+   conjugated by the two computation counits. Localization extends it uniquely.
+8. The strict transition is a natural transformation of exact evaluations with
+   restriction of scalars. Localizing it gives the underlying derived transition.
+   On each model it sends x tensor c to x tensor q_n(c). Composite indices use
+   the actual composites of these restrictions, including the identity composite;
+   naturality persists for inverse denominators and hence for all derived roofs.
+No coefficient map is assumed flat or surjective, and no bound is used. -/
+theorem strictCoefficientTensorDescent
+    (ha : ∀ n : ℕ, a (n + 1) ≫ q n = a n) :
+    Nonempty (Descent J R S q a) :=
+  descentOfOrdinary J R S q a (scalarModel J R S q a ha)
+    (ordinaryTensor J R S q a ha) (ordinaryLevel J R S q a ha)
+    (ordinaryTransition J R S q a ha) (ordinaryPreserves J R S q a ha)
+
+end WeilConjectures.SemilinearSections.StrictCoefficientTensor

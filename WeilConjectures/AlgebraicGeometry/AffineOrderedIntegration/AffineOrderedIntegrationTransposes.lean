@@ -1,0 +1,1180 @@
+/-
+Copyright (c) 2026 Bin Wu. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Bin Wu
+-/
+module
+
+public import WeilConjectures.AlgebraicGeometry.AffineOrderedIntegration.AffineOrderedIntegrationData
+public import WeilConjectures.AlgebraicGeometry.AffineOrderedIntegration.AffineOrderedCounitData
+import WeilConjectures.AlgebraicGeometry.AffineOrderedIntegration.AffineOrderedCounitZero
+import WeilConjectures.AlgebraicGeometry.AffineOrderedIntegration.AffineOrderedCounitSuccessor
+import WeilConjectures.AlgebraicGeometry.AffineOrderedIntegration.AffineOrderedIntegrationSuccessor
+import WeilConjectures.AlgebraicGeometry.AffineSpacePurity.AffineLineComparisonNaturality
+import WeilConjectures.AlgebraicGeometry.CoordinateLine.CoordinateLineAdjunction
+import all WeilConjectures.AlgebraicGeometry.AffineZeroPurity.CoordinateSectionArrows
+
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.PurityFiniteSetting
+public import WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorHom
+public import WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicCoefficientTwistsUnrestricted
+public import WeilConjectures.AlgebraicGeometry.Sf.SfIntrinsicCompactSupport
+public import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.ConstructibleExceptionalAdjunctionCoefficients
+public import WeilConjectures.AlgebraicGeometry.Vector.VectorBundleIntegration
+public import WeilConjectures.AlgebraicGeometry.VectorIntegrationSite.VectorIntegrationSiteComparison
+public import WeilConjectures.CategoryTheory.SuppliedExchangeProjection.ExchangeProjectionSuppliedDomains
+public import WeilConjectures.SmoothPurity.Finite.FiniteTorAmplitudeSites
+public import WeilConjectures.AlgebraicGeometry.Affine.Space.AffineSpaceTopTrace
+public import WeilConjectures.AlgebraicGeometry.Canonical.CanonicalOriginCompactSupportComposition
+public import WeilConjectures.AlgebraicGeometry.AffineSpacePurity.AffineSpacePurityComparison
+public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteTraceCounit
+public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Data
+public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Arrows
+public import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinaryFiniteP1KummerSupplement
+public import WeilConjectures.AlgebraicGeometry.Relative.RelativeKummerExchangeGeneratorsSupplement
+public import WeilConjectures.AlgebraicGeometry.Etale.EtaleSinglePullbackComparisonsSupplement
+public import WeilConjectures.AlgebraicGeometry.EtaleFiniteTwistPullback
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.AlgebraicGeometry.Scheme
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateSheaf
+public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateTwist
+public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
+public import Mathlib.Algebra.Module.ZMod
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
+public import Mathlib.CategoryTheory.Sites.Monoidal
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import WeilConjectures.AlgebraicGeometry.EtaleConstantRingModuleEquivalence
+public import WeilConjectures.CategoryTheory.RingedSiteModules
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
+public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.SmoothPurity.Ringed.RingedTopoiDerivedTensorPullback
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.TensorShiftIso
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
+public import WeilConjectures.AlgebraicGeometry.EtaleFiniteTwistPullbackBase
+public import WeilConjectures.ConstructibleSheaf.Defs
+public import WeilConjectures.EtaleCohomology.TateTwist.Sheaf
+public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateLinePullback
+public import WeilConjectures.EtaleCohomology.TateTwist.RootsOfUnityPullback
+public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateTensorFamily
+public import WeilConjectures.CategoryTheory.NormalizedSignedTensorPowers
+public import WeilConjectures.CategoryTheory.Monoidal.IntTensorFamily
+public import Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import WeilConjectures.CategoryTheory.IntTensorFamilyIso
+public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
+public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateLocalLine
+public import WeilConjectures.AlgebraicGeometry.Sites.SmallEtaleRepresentablePresheafSheaf
+public import WeilConjectures.ConstructibleSheaf.Pullback
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.LocallyTrivialInverse
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.MonoidalComp
+public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Unit
+public import WeilConjectures.AlgebraicGeometry.EtaleFiniteTwistPullbackRest
+public import Mathlib.CategoryTheory.Abelian.Refinements
+public import Mathlib.Algebra.Homology.ShortComplex.Exact
+public import WeilConjectures.AlgebraicGeometry.ProperProjectionFormula
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
+public import WeilConjectures.CategoryTheory.Monoidal.EtaleDerivedTensorSymmetrySupplement
+public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.Topology.Defs.Filter
+public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
+public import WeilConjectures.AlgebraicGeometry.ExactUnboundedExchange
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
+public import WeilConjectures.SixFunctors.BaseChange.Square
+public import WeilConjectures.SixFunctors.Etale.Derived.Shift
+public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
+public import WeilConjectures.AlgebraicGeometry.Projective.ProjectiveLineTraceSupplement
+public import WeilConjectures.AlgebraicGeometry.SmoothPurity.ShriekTensorCompositionSupplement
+import WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedEtaleCompactSupportComparisonsSupplement
+import WeilConjectures.AlgebraicGeometry.EtaleFiniteTwistPullback
+import Mathlib.AlgebraicGeometry.Sites.Etale
+import Mathlib.AlgebraicGeometry.Scheme
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateSheaf
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateTwist
+import WeilConjectures.AlgebraicGeometry.Sites.Kummer
+import Mathlib.Algebra.Module.ZMod
+import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
+import Mathlib.CategoryTheory.Sites.Monoidal
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import WeilConjectures.AlgebraicGeometry.EtaleConstantRingModuleEquivalence
+import WeilConjectures.CategoryTheory.RingedSiteModules
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
+import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+import WeilConjectures.AlgebraicGeometry.DerivedCategories
+import WeilConjectures.SmoothPurity.Ringed.RingedTopoiDerivedTensorPullback
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.TensorShiftIso
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
+import WeilConjectures.AlgebraicGeometry.EtaleFiniteTwistPullbackBase
+import WeilConjectures.ConstructibleSheaf.Defs
+import WeilConjectures.EtaleCohomology.TateTwist.Sheaf
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateLinePullback
+import WeilConjectures.EtaleCohomology.TateTwist.RootsOfUnityPullback
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateTensorFamily
+import WeilConjectures.CategoryTheory.NormalizedSignedTensorPowers
+import WeilConjectures.CategoryTheory.Monoidal.IntTensorFamily
+import Mathlib.CategoryTheory.Monoidal.Closed.Basic
+import WeilConjectures.CategoryTheory.IntTensorFamilyIso
+import Mathlib.CategoryTheory.Monoidal.Braided.Basic
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateLocalLine
+import WeilConjectures.AlgebraicGeometry.Sites.SmallEtaleRepresentablePresheafSheaf
+import WeilConjectures.ConstructibleSheaf.Pullback
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.LocallyTrivialInverse
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.MonoidalComp
+import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Unit
+import WeilConjectures.AlgebraicGeometry.EtaleFiniteTwistPullbackRest
+import Mathlib.CategoryTheory.Abelian.Refinements
+import Mathlib.Algebra.Homology.ShortComplex.Exact
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Adjunction
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Data
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Arrows
+import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinaryFiniteP1KummerSupplement
+import WeilConjectures.AlgebraicGeometry.Relative.RelativeKummerExchangeGeneratorsSupplement
+import WeilConjectures.AlgebraicGeometry.Etale.EtaleSinglePullbackComparisonsSupplement
+import WeilConjectures.AlgebraicGeometry.ProperProjectionFormula
+import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
+import WeilConjectures.CategoryTheory.Monoidal.EtaleDerivedTensorSymmetrySupplement
+import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
+import Mathlib.AlgebraicGeometry.Morphisms.Proper
+import Mathlib.AlgebraicGeometry.Noetherian
+import Mathlib.Topology.Defs.Filter
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.SixFunctors.Etale.Derived.Tensor
+import WeilConjectures.AlgebraicGeometry.ExactUnboundedExchange
+import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
+import WeilConjectures.SixFunctors.BaseChange.Square
+import WeilConjectures.SixFunctors.Etale.Derived.Shift
+import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1KummerMaps
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1ExchangeIso
+import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
+import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteAdjunctScalarFaithfulness
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteClassScalarFaithfulness
+import Mathlib.Algebra.Homology.DerivedCategory.Ext.Linear
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Linear
+import WeilConjectures.AlgebraicGeometry.FiniteP1TwistedUnitBaseChange
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteTwistTransportUniqueness
+import Mathlib.CategoryTheory.Adjunction.Whiskering
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.SingleFunctor
+import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
+import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarAdjunctionCompat
+import WeilConjectures.AlgebraicGeometry.FiniteP1ChernAdjunctBaseChange
+import WeilConjectures.AlgebraicGeometry.FiniteP1ChernMapBaseChange
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteClassArbitraryBase
+import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerBoundaryComparison
+import WeilConjectures.AlgebraicGeometry.EtaleModuleInjectiveForgetAcyclic
+import WeilConjectures.CategoryTheory.Sites.SheafCohomologyRightDerived
+import WeilConjectures.AlgebraicGeometry.Sites.GmPicardPullback
+import WeilConjectures.CategoryTheory.Abelian.Ext.MapExactFunctorConj
+import WeilConjectures.AlgebraicGeometry.SupportedDerivedUnitForget
+import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinarySupportedKummerSystemSupplement
+import WeilConjectures.ConstructibleSheaf.FinitePushforward.ConstantUnit
+import WeilConjectures.CategoryTheory.DerivedSingleUnitExact
+import WeilConjectures.CategoryTheory.DerivedSingleUnit
+import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
+import WeilConjectures.AlgebraicGeometry.FiniteP1ChernAdjunctMate
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteUnitPullbackComp
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteUnitPullbackHom
+import WeilConjectures.SixFunctors.Etale.Derived.LeftDerivedUpperStarSingle
+import WeilConjectures.ConstructibleSheaf.UpperStarConstantSheafComp
+import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
+import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerAffineLine
+import WeilConjectures.AlgebraicGeometry.ProjectiveLineGenusZero
+import WeilConjectures.AlgebraicGeometry.Curve
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+import WeilConjectures.Topology.RingedSpaceModuleCohomology
+import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveLine
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineSmooth
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Line
+import WeilConjectures.Algebra.Homology.DerivedCategory.SingleHomology
+import WeilConjectures.AlgebraicGeometry.Curve.RootsOfUnityTop
+import WeilConjectures.AlgebraicGeometry.Curve.Estimate
+import WeilConjectures.AlgebraicGeometry.ProjectiveLineTateCoefficientGenerator
+import WeilConjectures.AlgebraicGeometry.ProjectiveLineConstantCoefficientGenerator
+import WeilConjectures.AlgebraicGeometry.Curve.AffineLineKummer
+import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerClassGenerator
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteGeometricPointHomology
+import WeilConjectures.SixFunctors.Etale.Derived.AlgClosedField
+import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.KunnethMap
+import WeilConjectures.CategoryTheory.DerivedCategory.HomSingleProjective
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteFibreHomologyComparison
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1FibreHomologyCard
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1DiagonalUnit
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteTraceCounit
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1DiagonalTriangles
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1DiagonalIntegral
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1DiagonalComponents
+import WeilConjectures.AlgebraicGeometry.ProjectiveLineDiagonalMaps
+import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinarySupportedCartierKummerSupplement
+import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteCoefficientRecords
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive
+import WeilConjectures.AlgebraicGeometry.ProjectiveLineDiagonalAlphaUnits
+import WeilConjectures.AlgebraicGeometry.FiniteP1DiagonalPicard
+import WeilConjectures.AlgebraicGeometry.P1DiagonalLocalIdeal
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfInvertible
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LinearCombination
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Canonical
+import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
+import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
+import WeilConjectures.AlgebraicGeometry.Modules.FieldBaseChange
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteChernPullback
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteFirstChern
+import WeilConjectures.AlgebraicGeometry.OrdinarySupportedChernNormalization
+import WeilConjectures.AlgebraicGeometry.SupportedKummerChernRealization
+import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinarySupportedKummerBoundarySupplement
+import WeilConjectures.CategoryTheory.Sites.Torsor
+import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteConstantUnitComp
+import WeilConjectures.AlgebraicGeometry.ProjectiveLineDiagonalCartier
+import Mathlib.AlgebraicGeometry.Pullbacks
+import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.EffectiveCartier
+import WeilConjectures.AlgebraicGeometry.Morphisms.RegularImmersion
+import WeilConjectures.AlgebraicGeometry.EtaleSectionUnitNormalization
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
+import WeilConjectures.AlgebraicGeometry.EtaleDiagonalSectionCoherence
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
+import WeilConjectures.CategoryTheory.SectionConjugateComparison
+import WeilConjectures.CategoryTheory.Adjunction.SmoothPurity.SectionProjectionUnitSupplement
+import Mathlib.Logic.Small.Defs
+import WeilConjectures.AlgebraicGeometry.EtaleTensorTraceBaseChange
+import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionBaseChange
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Braided
+import WeilConjectures.AlgebraicGeometry.EtaleCanonicalTensorComparison
+import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategorySymmetric
+import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Reduction
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionMonoidal
+import WeilConjectures.AlgebraicGeometry.EtaleDiagonalCoefficientTriangles
+import WeilConjectures.AlgebraicGeometry.Etale.EtaleSupportedDiagonalUnitSupplement
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteSingleUnitNormalization
+import WeilConjectures.AlgebraicGeometry.EtaleDiagonalTriangles
+import WeilConjectures.AlgebraicGeometry.EtaleProperSectionContraction
+import WeilConjectures.AlgebraicGeometry.EtaleOrderedProjectionComparison
+import WeilConjectures.CategoryTheory.AdjunctionUnitTransport
+import Mathlib.CategoryTheory.Adjunction.Basic
+import WeilConjectures.AlgebraicGeometry.EtaleDiagonalSectionIntegral
+import WeilConjectures.AlgebraicGeometry.EtaleCoordinateTraceContractions
+import WeilConjectures.AlgebraicGeometry.EtaleCoordinateTraceData
+import WeilConjectures.ConstructibleSheaf.LisseRankOne
+import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
+import WeilConjectures.AlgebraicGeometry.Base.BaseChangeMapAbelianAndSets
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
+import Mathlib.GroupTheory.Torsion
+import WeilConjectures.AlgebraicGeometry.ProperUnboundedBaseChangeModN
+import WeilConjectures.AlgebraicGeometry.TorsionAssembly
+import WeilConjectures.SixFunctors.BaseChange.Derived
+import WeilConjectures.AlgebraicGeometry.TorsionEtaleSheaf
+import WeilConjectures.AlgebraicGeometry.TorsionSheafCharacterizations
+import WeilConjectures.SixFunctors.BaseChange.DerivedForget
+import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.AbTorsionSheaf
+import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine
+import WeilConjectures.SixFunctors.Etale.Derived.DirectImageVanishingTorsion
+import WeilConjectures.SixFunctors.BaseChange.DerivedUnboundedFac
+import WeilConjectures.AlgebraicGeometry.ProperUnboundedBaseChangeForgetful
+import Mathlib.Data.ZMod.Basic
+import WeilConjectures.AlgebraicGeometry.UnboundedCoefficientForgetfulAux
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.DerivedBaseChange
+import WeilConjectures.AlgebraicGeometry.UnboundedAbelianExchangeComparison
+import WeilConjectures.AlgebraicGeometry.ChosenCartesianSquare
+import WeilConjectures.Algebra.Homology.Curve.KInjectiveResolutions
+import WeilConjectures.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
+import WeilConjectures.AlgebraicGeometry.ModuleAbelianKInjectiveDirectImageAcyclic
+import WeilConjectures.AlgebraicGeometry.EtaleModuleAbelianRingedPresentation
+import WeilConjectures.CategoryTheory.Ringed.RingedToposMorphismSupplement
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+import Mathlib.CategoryTheory.Category.ULift
+import Mathlib.CategoryTheory.Sites.CartesianMonoidal
+import Mathlib.CategoryTheory.Sites.Equivalence
+import WeilConjectures.AlgebraicGeometry.ModuleSheafConstantRingEquivalence
+import WeilConjectures.CategoryTheory.ContinuousRingedToposModuleDirectImage
+import WeilConjectures.CategoryTheory.GeometricModuleConstruction
+import Mathlib.Algebra.Category.Ring.Limits
+import WeilConjectures.CategoryTheory.RingedToposRingData
+import WeilConjectures.CategoryTheory.AdjunctionRingOperations
+import Mathlib.CategoryTheory.Monoidal.Cartesian.Basic
+import Mathlib.CategoryTheory.Monoidal.CommGrp_
+import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod
+import WeilConjectures.CategoryTheory.ProperBaseChange.RestrictionRingedToposModuleDirectImageSupplement
+import WeilConjectures.CategoryTheory.RingedToposDerivedPushforwardComposition
+import Mathlib.Algebra.Homology.DerivedCategory.Basic
+import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
+import Mathlib.CategoryTheory.Functor.Derived.RightDerived
+import WeilConjectures.SmoothPurity.Ringed.RingedSiteKInjectiveResolutionsSupplement
+import WeilConjectures.Mathlib.Algebra.Homology.GrothendieckAbelian
+import Mathlib.CategoryTheory.Localization.DerivabilityStructure.Derives
+import WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
+import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
+import Mathlib.Algebra.Homology.DerivedCategory.Fractions
+import WeilConjectures.Algebra.Homology.KFlatResolution
+import WeilConjectures.CategoryTheory.RingedToposKFlatPullback
+import WeilConjectures.CategoryTheory.AlgebraicInverseImage
+import Mathlib.Algebra.Category.ModuleCat.Sheaf
+import Mathlib.Algebra.Category.Grp.Limits
+import Mathlib.CategoryTheory.Sites.Whiskering
+import WeilConjectures.CategoryTheory.GeometricModuleTransport
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
+import Mathlib.CategoryTheory.Adjunction.Limits
+import WeilConjectures.CategoryTheory.GeometricRingTransport
+import Mathlib.CategoryTheory.Sites.Limits
+import WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresRingCore
+import WeilConjectures.CategoryTheory.SheafRingObjectReconstruction
+import WeilConjectures.CategoryTheory.Adjunction.FiniteProductRingFunctor
+import WeilConjectures.Algebra.Homology.Module.ModulePullbackPushforwardAdjunctionSupplement
+import WeilConjectures.AlgebraicGeometry.KFlatRingedToposPullback
+import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
+import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
+import Mathlib.Algebra.Category.Grp.FilteredColimits
+import Mathlib.Algebra.Homology.BifunctorShift
+import Mathlib.Algebra.Homology.QuasiIso
+import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
+import Mathlib.CategoryTheory.Limits.EssentiallySmall
+import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+import Mathlib.CategoryTheory.Limits.ExactFunctor
+import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
+import Mathlib.Algebra.Homology.HomologicalComplex
+import Mathlib.Algebra.Homology.Additive
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RingedToposFlatPullback
+import WeilConjectures.CategoryTheory.AlgebraicInverseImageOfUniverses
+import Mathlib.CategoryTheory.Types.Basic
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatAlgebraicInverseImageOfUniverses
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatEquationalCriterionOfUniverses
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatLocalRelationsOfUniverses
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUniverses
+import WeilConjectures.CategoryTheory.Sites.WeakSheafifyAddCommGrpLeftExact
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Submodule
+import Mathlib.LinearAlgebra.TensorProduct.Vanishing
+import Mathlib.RingTheory.TensorProduct.DirectLimitFG
+import Mathlib.LinearAlgebra.TensorProduct.Finiteness
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
+import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
+import WeilConjectures.CategoryTheory.Sites.InverseImageLocalFamilies
+import Mathlib.CategoryTheory.Sites.Sheaf
+import Mathlib.CategoryTheory.Sites.LocallyBijective
+import Mathlib.CategoryTheory.Limits.Types.Pullbacks
+import Mathlib.CategoryTheory.Functor.EpiMono
+import Mathlib.CategoryTheory.Limits.Types.Equalizers
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Equalizers
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ScalarTensorComparisonOfUniverses
+import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
+import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
+import Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
+import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+import WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
+import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
+import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+import WeilConjectures.Algebra.Homology.RingedToposAdaptedFlatResolution
+import WeilConjectures.Algebra.Homology.RingedToposPullbackFilteredColimits
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Mathlib.CategoryTheory.Sites.PreservesSheafification
+import Mathlib.CategoryTheory.Limits.Preserves.Limits
+import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
+import Mathlib.RingTheory.Flat.CategoryTheory
+import Mathlib.CategoryTheory.ObjectProperty.ColimitsOfShape
+import Mathlib.Algebra.Homology.Embedding.CochainComplex
+import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
+import Mathlib.Algebra.Category.Grp.AB
+import WeilConjectures.Algebra.Homology.RingedToposAcyclicKFlatPullback
+import WeilConjectures.Algebra.Homology.BoundedFlatIndependentCoefficients
+import Mathlib.CategoryTheory.Monoidal.Preadditive
+import WeilConjectures.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
+import WeilConjectures.AlgebraicGeometry.RingedTopoiDerivedPullback
+import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
+import WeilConjectures.SmoothPurity.Supporting.ChangeOfRingsKFlatQuasiIsoSupplement
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import Mathlib.CategoryTheory.Sites.EpiMono
+import Mathlib.CategoryTheory.Adjunction.Additive
+import Mathlib.Algebra.Category.Grp.EpiMono
+import Mathlib.Algebra.Category.Grp.Abelian
+import Mathlib.CategoryTheory.Sites.Abelian
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+import WeilConjectures.AlgebraicGeometry.ModuleAbelianUnderivedExchange
+import WeilConjectures.AlgebraicGeometry.ProperTorsionProjectionFormula
+import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
+import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ProperProjectionFormula
+import WeilConjectures.AlgebraicGeometry.EtaleCoordinateKunnethFactorization
+import WeilConjectures.AlgebraicGeometry.EtaleCoordinateKunnethFactorizationTranspose
+import WeilConjectures.AlgebraicGeometry.EtaleCoordinateKunnethRouteEquality
+import WeilConjectures.AlgebraicGeometry.EtaleCoordinateKunnethLeftRoute
+import WeilConjectures.AlgebraicGeometry.EtaleCoordinateKunnethLeftRoutePrecomp
+import WeilConjectures.AlgebraicGeometry.EtaleKunnethSymmetricFactorization
+import WeilConjectures.AlgebraicGeometry.ProperSupportedKunnethRoute
+import WeilConjectures.EtaleCohomology.Purity.Smooth.TraceDiagonal.Basic
+import WeilConjectures.AlgebraicGeometry.EtaleKunnethTensorSymmetry
+import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ProperFactor.KunnethMapAgrees
+import WeilConjectures.AlgebraicGeometry.EtaleCoordinateKunnethRightRoute
+import WeilConjectures.AlgebraicGeometry.EtaleProjectionTraceNormalization
+import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionUnit
+import WeilConjectures.AlgebraicGeometry.EtaleEvenLineSelfSymmetry
+import WeilConjectures.AlgebraicGeometry.EtaleEvenShiftCanonicalSelfSymmetry
+import Mathlib.Tactic.SuppressCompilation
+import WeilConjectures.AlgebraicGeometry.EtaleLineFlatBraiding
+import WeilConjectures.ConstructibleSheaf.InternalHom
+import WeilConjectures.AlgebraicGeometry.EtaleSecondCoordinateContraction
+import WeilConjectures.AlgebraicGeometry.EtaleTraceBaseChangeEvaluation
+import WeilConjectures.AlgebraicGeometry.EtaleProjectionTraceTensorInterchange
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteCounitCoefficient
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteTraceEvaluationNormalization
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteDiagonalTraceCoordinates
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteDiagonalChartExchange
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteDiagonalChartExchangeAux
+import WeilConjectures.AlgebraicGeometry.EtaleChartExchangePasting
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompCoherence
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteTwistComposition
+import WeilConjectures.CategoryTheory.ShiftedCompositeComparison
+import Mathlib.CategoryTheory.Shift.CommShift
+import Mathlib.Algebra.Ring.Int.Defs
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChangeShift
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteUnitPullbackNormalization
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteConstantUnitSquare
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteUnitPullbackComparison
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteConstantPullbackHom
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteTraceBaseChange
+import WeilConjectures.AlgebraicGeometry.EtaleExactExchangeComparison
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteTraceScalarSquare
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteTraceCounitComparisons
+import WeilConjectures.AlgebraicGeometry.FiniteTwistDerivedEvaluationPullback
+import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinaryFiniteP1DecompositionMapsSupplement
+import WeilConjectures.AlgebraicGeometry.FiniteTwistShiftedPairingPullback
+import WeilConjectures.AlgebraicGeometry.EtaleSingleFunctorMonoidalCompatibility
+import WeilConjectures.SixFunctors.Etale.Derived.Invertible
+import WeilConjectures.AlgebraicGeometry.Etale.EtaleFlatSingleTensorCompatibilityDataSupplement
+import WeilConjectures.AlgebraicGeometry.EtaleSingleTensoratorNaturality
+import WeilConjectures.AlgebraicGeometry.EtaleSingleTensoratorAssociativity
+import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Functor
+import WeilConjectures.AlgebraicGeometry.EtaleSingleCochainMonoidal
+import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfSize
+import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
+import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
+import WeilConjectures.AlgebraicGeometry.EtaleSingleTensoratorSymmetry
+import WeilConjectures.AlgebraicGeometry.EtaleSingleTensoratorFactorization
+import WeilConjectures.AlgebraicGeometry.EtaleSingleTensoratorPullback
+import WeilConjectures.AlgebraicGeometry.EtaleSingleHomotopyTensorPullback
+import WeilConjectures.CategoryTheory.Monoidal.Instances.HomotopyCategory
+import WeilConjectures.Algebra.Homology.HomotopyCategory.MapMonoidal
+import WeilConjectures.AlgebraicGeometry.EtaleSinglePullbackCounit
+import WeilConjectures.AlgebraicGeometry.EtaleSingleTensoratorHomotopyFactorization
+import WeilConjectures.CategoryTheory.FlatPairingAssociativityAssembly
+import Mathlib.CategoryTheory.Monoidal.Functor
+import WeilConjectures.CategoryTheory.FlatPairingPullbackAssembly
+import WeilConjectures.AlgebraicGeometry.DerivedPairingOppositeShiftsPullback
+import WeilConjectures.AlgebraicGeometry.FiniteTwistDegreeZeroEvaluationPullback
+import WeilConjectures.AlgebraicGeometry.FiniteTwistDegreeZeroEvaluationPairing
+import WeilConjectures.AlgebraicGeometry.FiniteTwistFlatEvaluationPullback
+import WeilConjectures.AlgebraicGeometry.FlatSinglePairingSymmetricPullback
+import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorSymmetry
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteDerivedRightUnitPullback
+import WeilConjectures.AlgebraicGeometry.FiniteTwistShiftedFactorComparisons
+import WeilConjectures.AlgebraicGeometry.FiniteShiftedLineSquare
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Basic
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteDiagonalFirstCoordinateExchange
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteDiagonalSecondCoordinateExchange
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1DiagonalBaseChange
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteClassComparison
+public import WeilConjectures.AlgebraicGeometry.Compact.CompactSupportSiteCoherence
+public import WeilConjectures.AlgebraicGeometry.Finite.FiniteProjectionActionLaws
+import all WeilConjectures.AlgebraicGeometry.Finite.FiniteProjectionActionLaws
+import all WeilConjectures.AlgebraicGeometry.Compact.CompactSupportSiteCoherence
+import all WeilConjectures.AlgebraicGeometry.SmoothPurity.ShriekTensorCompositionSupplement
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleTwistLine
+import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
+import WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion
+
+@[expose] public section
+set_option autoImplicit false
+
+/-! # Ordered affine integration transposes
+
+Source: main-20261015, sec-smooth-purity/sk-thm-smooth-purity,
+lem-pur-projection-purity-agreement.proof.md, final paragraph
+(blueprint: lem-pur-affine-ordered-integration-transposes).
+- Canonical affine integration is transported from the ordered ordinary counit.
+- Its coefficient transpose is compared with the recorded affine-space recursion.
+-/
+
+noncomputable section
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
+set_option synthInstance.maxSize 2048
+universe u v
+open CategoryTheory CategoryTheory.Limits MonoidalCategory AlgebraicGeometry
+open scoped CategoryTheory.Functor
+namespace AlgebraicGeometry.ProEtale.AffineOrderedIntegration
+open AffineSpacePurity AffineLinePurity VectorIntegrationSite
+
+set_option linter.auxLemma false in
+attribute [local instance 100000] Etale.DerivedCategoryModule._proof_1
+  Etale.DerivedCategoryModule._proof_2
+  AffineSpacePurity.C._proof_1 AffineSpacePurity.C._proof_2
+
+attribute [local instance high] SymmetricCategory.toBraidedCategory
+attribute [local instance 20000] Etale.sheafBraidedCategory
+
+attribute [local irreducible] HasDerivedCategory.ofIsGrothendieckAbelian
+  Scheme.finiteEtaleTateLine DerivedCategory.TStructure.t
+  Functor.leftDerivedFunctor Functor.mapDerivedCategory DerivedCategory.singleFunctors
+
+attribute [local irreducible] projectionMapOfCompactification
+attribute [local semireducible] AffineLinePurity.proSourceObject
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
+/-- The ordinary counit equals inverse projection followed by coefficient integration.
+The equation is precomposed with the canonical projection, so it uses no arbitrary inverse.
+Source: displayed ordered-counit formula
+(blueprint: lem-pur-affine-ordered-integration-transposes).
+Proof: for one line compose the normalized projective adjunction with the open adjunction.
+The open counit tensor-action identity rewrites its trace as the restricted projective
+trace. Induct using the canonical projection-composition and compactification action laws;
+lem-pur-composite-integration-counit identifies the composite counit. At the unit this is
+exactly ordinaryTraceRaw. The normalized Tate source is ordinarySourceIso. Rank zero is
+the identity adjunction. The argument uses only an annihilating invertible exponent, so
+it imposes no divisibility or flatness condition on the finite coefficient quotient. -/
+theorem ordinary_counit_formula (P : WeilConjectures.PurityFiniteSetting.{u})
+    (Y : Scheme.{u}) [IsNoetherian Y] (aY : Y ⟶ Spec (.of P.field.k))
+    (K : Etale.DerivedCategoryModule (AffineLinePurity.Ring P) Y)
+    (hK : etaleFiniteTor (AffineLinePurity.Ring P) Y K) (d : ℕ) :
+    OrdinaryCounitEquation (AffineLinePurity.Ring P) (affineTraceProjection Y d)
+      (Etale.affineLinearBaseCoefficient (AffineLinePurity.Ring P) (exponent P) (annihilates P)
+        (affineTraceTower Y d) d) K _ (ordinarySourceIso P Y aY K d)
+      (ordinaryCounit P Y aY K hK d) (ordinaryTraceRaw P Y aY d) := by
+  induction d generalizing K with
+  | zero => exact ordinary_counit_zero P Y aY K hK
+  | succ d ih => exact ordinary_counit_successor P Y aY d (fun K hK ↦ ih K hK) K hK
+
+/-- The coordinate bundle as the existing free module sheaf, with its standard basis.
+Source: the trivial rank-d bundle
+(blueprint: lem-pur-affine-ordered-integration-transposes). -/
+abbrev coordinateModule (Y : Scheme.{u}) (d : ℕ) : Y.Modules :=
+  SheafOfModules.free (R := Y.ringCatSheaf) (ULift.{u} (Fin d))
+
+/-- Trace, inverse projections, counits, and exceptional transposes use the specified
+site comparisons, specialized to the coordinate bundle at the actual positive level.
+Source: lem-pur-vector-integration-site-comparison and the site-comparison clause
+(blueprint: lem-pur-affine-ordered-integration-transposes).
+Proof: specialize finiteTypeSiteComparison to the free rank-d sheaf and zero-based level
+P.level-1. This is the same positive quotient used by AffineLinePurity.Ring P. The predicate
+  contains
+the projective trace, open-counit restriction, inverse projection, integration and bounded
+Hom-transpose squares with their actual comparison units. It quantifies over all
+annihilating exponents, so no divisibility hypothesis is introduced. -/
+theorem coordinate_site_comparison (P : WeilConjectures.PurityFiniteSetting.{u})
+    (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of P.field.k))
+    [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY] (d : ℕ) :
+    FiniteTypeSiteCompatibility P (P.level - 1) Y aY d (coordinateModule Y d) := by
+  exact finiteTypeSiteComparison P (P.level - 1) Y aY d (coordinateModule Y d)
+
+/-- The frame prefix whose final map is the explicit ordered trace on the coordinate
+coefficient A_X(d)[2d]. All preceding arrows are the canonical compact-support exchange
+and normalized finite Tate pullback, with no independent orientation.
+Source: trivial-frame integration formula
+(blueprint: lem-pur-affine-ordered-integration-transposes). -/
+def framedTraceFixed (A : Type (u + 1)) [CommRing A] [Finite A]
+    (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
+    (t : Etale.OrdinaryFiniteTwistTransport A N hA)
+    (D : ∀ (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (N : Γ(T, ⊤))),
+      Etale.OrdinaryFiniteP1Datum A N hA t T hT)
+    (Y : Scheme.{u}) [IsNoetherian Y] (hY : IsUnit (N : Γ(Y, ⊤))) (d : ℕ)
+    (e : VectorBundleZeroSection.Trivialization Y d (coordinateModule Y d) ⊤) :=
+  Etale.vectorIntegrationLocalTrace N hN A hA t D Y hY d (coordinateModule Y d) ⊤ e
+
+/-- The ordered counit trace is exactly the specified vector integration in every
+linear frame of the trivial coordinate bundle, including dimension zero.
+Source: def-amb-vector-integration, its local normalization
+(blueprint: lem-pur-affine-ordered-integration-transposes).
+Proof: apply VectorIntegrationNormalization to the entire-base frame. Its local map
+is exchange, vectorIntegrationChartCoefficient, inverse tower comparison, and the ordered
+counit. Insert coefficientComparison followed by its inverse. Naturality of compact
+support cancels these maps, leaving exactly framedTrace. Every finite quotient and
+empty base is covered by the same normalization; no generator of a Tate line is chosen. -/
+theorem trivial_frame_integration (P : WeilConjectures.PurityFiniteSetting.{u})
+    (Y : Scheme.{u}) [IsNoetherian Y] (aY : Y ⟶ Spec (.of P.field.k)) (d : ℕ)
+    (e : VectorBundleZeroSection.Trivialization Y d (coordinateModule Y d) ⊤) :
+    (Etale.ordinaryFinitePullback (AffineLinePurity.Ring P) (⊤ : Y.Opens).ι).map
+        (Etale.vectorBundleIntegration (exponent P)
+          (pow_pos (Fact.out : P.coefficients.l.Prime).pos _) (AffineLinePurity.Ring P)
+            (annihilates P)
+          Y (exponentUnit P Y aY) d (coordinateModule Y d)) ≫
+      (Etale.ordinaryFiniteUnitPullback (AffineLinePurity.Ring P) (⊤ : Y.Opens).ι).hom =
+        framedTraceFixed (AffineLinePurity.Ring P) (exponent P)
+          (pow_pos (Fact.out : P.coefficients.l.Prime).pos _) (annihilates P)
+          (transport P) (projectiveDatum P) Y (exponentUnit P Y aY) d e := by
+  exact (Etale.existsUnique_vectorIntegrationGluing (exponent P)
+    (pow_pos (Fact.out : P.coefficients.l.Prime).pos _) (AffineLinePurity.Ring P)
+    (annihilates P) Y (exponentUnit P Y aY) d (coordinateModule Y d)).2.exists.choose_spec.2
+      (transport P) (projectiveDatum P) ⊤ e
+
+/-- Coefficient-first standing canonical projection, with its compactification explicit.
+Source: def-exchange-projection, two canonical tensor symmetries
+(blueprint: lem-pur-affine-ordered-integration-transposes). -/
+def standingProjection (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
+    (M : C A X) (H : C A Y) :
+    ((tensor A Y).obj H).obj ((rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).obj M) ⟶
+      (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).obj
+        (((tensor A X).obj ((inverseImage A f).obj H)).obj M) :=
+  projection (ModuleCat.{u + 1} A) (HasCompactification.compactification f) M H
+
+/-- The pro-etale projection-composition equation with the actual origin compositor.
+Its only domain witnesses are those needed to evaluate that given compositor.
+Source: displayed PF equation
+(blueprint: lem-pur-affine-ordered-integration-transposes). -/
+def ProProjectionCompositionEquation (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X T Y : Scheme.{u}} (f : X ⟶ T) (g : T ⟶ Y)
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    [QuasiCompact f] [QuasiCompact g]
+    (M : C A X) (H : C A Y)
+    (hM : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} A) X M)
+    (hT : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} A) X
+      (((tensor A X).obj ((inverseImage A f).obj ((inverseImage A g).obj H))).obj M)) :
+    Prop :=
+  standingProjection A g ((rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).obj M) H ≫
+    (rightDerivedLowerShriek (ModuleCat.{u + 1} A) g).map
+      (standingProjection A f M ((inverseImage A g).obj H)) ≫
+    (originCompositionAmbient A f g).hom.app ⟨_, hT⟩ =
+  ((tensor A Y).obj H).map ((originCompositionAmbient A f g).hom.app ⟨M, hM⟩) ≫
+    standingProjection A (f ≫ g) M H ≫
+    (rightDerivedLowerShriek (ModuleCat.{u + 1} A) (f ≫ g)).map
+      (((tensor A X).map ((inverseImageComp A f g).hom.app H)).app M)
+
+/-- The composition equation for every source on its actual witnessed domain.
+Source: the projection composition display
+(blueprint: lem-pur-affine-ordered-integration-transposes). -/
+def ProProjectionCompositionLaw (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X T Y : Scheme.{u}} (f : X ⟶ T) (g : T ⟶ Y)
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    [QuasiCompact f] [QuasiCompact g] : Prop :=
+  ∀ (M : C A X) (H : C A Y)
+    (hM : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} A) X M)
+    (hT : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} A) X
+      (((tensor A X).obj ((inverseImage A f).obj ((inverseImage A g).obj H))).obj M)),
+    ProProjectionCompositionEquation A f g M H hM hT
+
+/-- Coordinate-domain specialization with compactifiability supplied by geometry.
+Source: displayed PF composition equation
+(blueprint: lem-pur-affine-ordered-integration-transposes). -/
+def CoordinateProjectionComposition (P : WeilConjectures.PurityFiniteSetting.{u})
+    (Y : Scheme.{u}) (d : ℕ) : Prop :=
+  letI : HasCompactification (iteratedAffineLineProj Y d) := (projection_geometry Y d).2
+  letI : HasCompactification (iteratedAffineLineProj Y (d + 1)) :=
+    (projection_geometry Y (d + 1)).2
+  letI : HasCompactification (lastProjection Y d ≫ iteratedAffineLineProj Y d) :=
+    HasCompactification.of_eq (f := iteratedAffineLineProj Y (d + 1))
+      (iteratedAffineLineProj_succ Y d)
+  ProProjectionCompositionLaw (AffineLinePurity.Ring P) (lastProjection Y d)
+    (iteratedAffineLineProj Y d)
+
+/-- The displayed projection formula composition on the witnessed coordinate domain.
+Source: actual compositor and projection composition clauses
+(blueprint: lem-pur-affine-ordered-integration-transposes).
+Proof: choose bounded ordinary antecedents for the two witnessed sources. The ordinary
+projection-composition law holds for the last line and tower projection. The canonical
+proper and open site comparisons transport each projection map, while the compositor
+square identifies the transported compositor with originCompositionAmbient. Full
+faithfulness on bounded ordinary targets reflects equality. Changing the witnesses does
+not change the ambient arrows, because the compositor is descended on the full origin
+subcategory. Reassociate and insert the canonical tensor symmetries. -/
+theorem pro_coordinate_projection_composition (P : WeilConjectures.PurityFiniteSetting.{u})
+    (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of P.field.k))
+    [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY] (d : ℕ) :
+    CoordinateProjectionComposition P Y d := by
+  sorry
+
+/-- The displayed composition law for the ordinary canonical projection maps.
+Source: the PF composition display, retaining the exact inverse-image compositor
+(blueprint: lem-pur-affine-ordered-integration-transposes). -/
+def OrdinaryProjectionCompositionEquation (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X T Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian T] [IsNoetherian Y]
+    (f : X ⟶ T) (g : T ⟶ Y)
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g]
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    (M : Etale.DerivedCategoryModule A X) (H : Etale.DerivedCategoryModule A Y) : Prop :=
+  (Etale.compactSupportProjectionMap A g
+      ((Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).obj M) H ≫
+    (Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} A) g).map
+      (Etale.compactSupportProjectionMap A f M
+        ((Etale.upperStar (ModuleCat.{u + 1} A) g).mapDerivedCategory.obj H)) ≫
+    (Etale.unboundedEtaleLowerShriekCompIso A f g).hom.app
+      (((Etale.derivedTensor (ModuleCat.{u + 1} A) X).obj
+        ((Etale.upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategory.obj
+          ((Etale.upperStar (ModuleCat.{u + 1} A) g).mapDerivedCategory.obj H))).obj M)) =
+  (((Etale.derivedTensor (ModuleCat.{u + 1} A) Y).obj H).map
+      ((Etale.unboundedEtaleLowerShriekCompIso A f g).hom.app M) ≫
+    Etale.compactSupportProjectionMap A (f ≫ g) M H ≫
+    (Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} A) (f ≫ g)).map
+      (((Etale.derivedTensor (ModuleCat.{u + 1} A) X).map
+        ((Etale.unboundedEtaleUpperStarCompIso A f g).hom.app H)).app M))
+
+/-- The site-compositor square for the actual normalized compactification maps.
+The proMap contains originCompositionAmbient, through its specified etale model.
+Source: the actual alpha_m clause and compact-support site-coherence square
+(blueprint: lem-pur-affine-ordered-integration-transposes). -/
+def CompositionSiteEquation (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X T Y : Scheme.{u}} {f : X ⟶ T} {g : T ⟶ Y} [QuasiCompact f] [QuasiCompact g]
+    (c : Compactification f) (b : Compactification g) (e : Compactification (f ≫ g))
+    (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) : Prop :=
+  (coherenceBoundedSiteFunctor A Y).map
+      (coherenceCompositionData A c b e L).etaleIso.hom ≫
+        (coherenceBoundaryComponent A e L).hom =
+    (coherenceCompositionSource A c b L).hom ≫
+      (coherenceCompositionData A c b e L).proMap
+
+section
+
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
+attribute [local instance 20000] ProEtale.sheafBraidedCategory
+
+/-- The literal pro-etale compactification tensor-action equation before specializing
+its coefficient category. Keeping that category as a parameter shares the canonical
+derived tensor and inverse-image structures across all occurrences of the equation.
+Source: compactification tensor-action identity
+(blueprint: lem-pur-affine-ordered-integration-transposes). -/
+def ProTensorActionEquationForCategory
+    (A : Type v) [Category.{u + 1} A] [Abelian A]
+    [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
+    [SymmetricCategory A] [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
+    [UpperStarPreservesFlat A]
+    {X Y : Scheme.{u}}
+    (f : X ⟶ Y)
+    (c : Compactification f)
+    (M : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))
+    (N₁ N₂ : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) : Prop :=
+    (projectionActionAssociator A Y
+      ((rightDerivedLowerShriekOfCompactification A c).obj M) N₁
+      N₂).hom ≫
+      (((projectionMapOfCompactification A c).app M).app
+        (((derivedTensor A Y).obj N₁).obj N₂)) ≫
+      (rightDerivedLowerShriekOfCompactification A c).map
+        (((derivedTensor A X).obj M).map
+            (leftDerivedUpperStarTensorIso A f N₁ N₂).hom ≫
+          (projectionActionAssociator A X M (L((f)^*[A]).obj N₁) (L((f)^*[A]).obj N₂)).inv) =
+    ((derivedTensor A Y).map (((projectionMapOfCompactification
+      A c).app M).app N₁)).app N₂ ≫
+      (((projectionMapOfCompactification A c).app (((derivedTensor
+        A X).obj M).obj (L((f)^*[A]).obj N₁))).app N₂)
+
+private theorem coordinate_pro_action
+    (A : Type v) [Category.{u + 1} A] [Abelian A]
+    [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
+    [SymmetricCategory A] [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
+    [UpperStarPreservesFlat A]
+    {X Y : Scheme.{u}}
+    (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f]
+      [QuasiCompact f]
+    (c : Compactification f)
+    (M : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))
+    (N₁ N₂ : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A)) :
+    ProTensorActionEquationForCategory A f c M N₁ N₂ := by
+  exact ProEtale.genericProjectionAction_compactification A f c M N₁ N₂
+
+/-- The literal ordinary etale compactification tensor-action equation before specializing
+its coefficient category. Keeping that category as a parameter shares the canonical
+derived tensor and inverse-image structures across all occurrences of the equation.
+Source: compactification tensor-action identity
+(blueprint: lem-pur-affine-ordered-integration-transposes). -/
+def OrdinaryTensorActionEquationForCategory
+    (A : Type v) [Category.{u + 1} A] [Abelian A]
+    [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
+    [SymmetricCategory A] [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
+    [Etale.UpperStarPreservesFlat A]
+    {FC : A → A → Type*} {CC : A → Type (u + 1)}
+    [∀ (P Q : A), FunLike (FC P Q) (CC P) (CC Q)] [ConcreteCategory.{u + 1} A FC]
+    [(CategoryTheory.forget A).ReflectsIsomorphisms]
+    [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
+    [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
+    {X Y : Scheme.{u}}
+    (f : X ⟶ Y)
+    (c : Compactification f)
+    (M : DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (N₁ N₂ : DerivedCategory (Sheaf Y.smallEtaleTopology A)) : Prop :=
+    (Etale.derivedTensorAssociator A Y
+      ((Etale.rightDerivedLowerShriekOfCompactification A c).obj M) N₁
+      N₂).hom ≫
+      (((Etale.projectionMapOfCompactification A c).app M).app
+        (((Etale.derivedTensor A Y).obj N₁).obj N₂)) ≫
+      (Etale.rightDerivedLowerShriekOfCompactification A c).map
+        (((Etale.derivedTensor A X).obj M).map
+            (Etale.leftDerivedUpperStarTensorIso A f N₁ N₂).hom ≫
+          (Etale.derivedTensorAssociator A X M
+            ((Etale.upperStar A f).leftDerivedFunctor.obj N₁)
+            ((Etale.upperStar A f).leftDerivedFunctor.obj N₂)).inv) =
+    ((Etale.derivedTensor A Y).map (((Etale.projectionMapOfCompactification
+      A c).app M).app N₁)).app N₂ ≫
+      (((Etale.projectionMapOfCompactification A c).app (((Etale.derivedTensor
+        A X).obj M).obj ((Etale.upperStar A f).leftDerivedFunctor.obj N₁))).app N₂)
+
+private theorem coordinate_ordinary_action
+    (A : Type v) [Category.{u + 1} A] [Abelian A]
+    [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
+    [SymmetricCategory A] [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
+    [Etale.UpperStarPreservesFlat A]
+    {FC : A → A → Type*} {CC : A → Type (u + 1)}
+    [∀ (P Q : A), FunLike (FC P Q) (CC P) (CC Q)] [ConcreteCategory.{u + 1} A FC]
+    [(CategoryTheory.forget A).ReflectsIsomorphisms]
+    [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
+    [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
+    {X Y : Scheme.{u}}
+    (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f]
+      [QuasiCompact f]
+    (c : Compactification f)
+    (M : DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (N₁ N₂ : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    OrdinaryTensorActionEquationForCategory A f c M N₁ N₂ := by
+  exact Etale.genericProjectionAction_compactification A f c M N₁ N₂
+
+/-- Compactification tensor-action with its literal canonical associators.
+Source: compactification tensor-action identity
+(blueprint: lem-pur-affine-ordered-integration-transposes). -/
+def ProTensorActionEquation (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) (c : Compactification f)
+    (M : C A X) (N₁ N₂ : C A Y) : Prop :=
+  letI : IsNoetherianRing A := isNoetherian_of_finite A A
+  ProTensorActionEquationForCategory (ModuleCat.{u + 1} A) f c M N₁ N₂
+
+/-- The same tensor-action equation before the change of site.
+Source: ordinary compactification tensor-action identity
+(blueprint: lem-pur-affine-ordered-integration-transposes). -/
+def OrdinaryTensorActionEquation (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) (c : Compactification f)
+    (M : Etale.DerivedCategoryModule A X) (N₁ N₂ : Etale.DerivedCategoryModule A Y) : Prop :=
+  letI : IsNoetherianRing A := isNoetherian_of_finite A A
+  OrdinaryTensorActionEquationForCategory (ModuleCat.{u + 1} A) f c M N₁ N₂
+
+end
+
+/-- The coordinate specialization of the compositor, projection and action assertions.
+Quantification over compactification presentations includes the ordered product of P1's;
+all maps are the normalized proper/open maps, with no isomorphism chosen as a parameter.
+Source: the first two displayed coherence assertions
+(blueprint: lem-pur-affine-ordered-integration-transposes). -/
+def CoordinateCoherence (P : WeilConjectures.PurityFiniteSetting.{u}) (Y : Scheme.{u})
+    (aY : Y ⟶ Spec (.of P.field.k))
+    [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY] (d : ℕ) : Prop :=
+  letI : IsNoetherian Y := tower_noetherian P Y aY 0
+  letI : IsNoetherian (iteratedAffineLine Y d) := tower_noetherian P Y aY d
+  letI : IsNoetherian (iteratedAffineLine Y (d + 1)) := tower_noetherian P Y aY (d + 1)
+  letI : IsNoetherian (AffineSpace PUnit.{u + 1} (iteratedAffineLine Y d)) :=
+    isNoetherian_of_locallyOfFiniteType
+      (AffineSpace PUnit.{u + 1} (iteratedAffineLine Y d) ↘ iteratedAffineLine Y d)
+  letI := (projection_geometry Y d).1
+  letI := (projection_geometry Y d).2
+  (∀ (c : Compactification (lastProjection Y d))
+      (b : Compactification (iteratedAffineLineProj Y d))
+      (e : Compactification (lastProjection Y d ≫ iteratedAffineLineProj Y d))
+      (L : DerivedCategory.Plus (Sheaf (iteratedAffineLine Y (d + 1)).smallEtaleTopology
+        (ModuleCat.{u + 1} (AffineLinePurity.Ring P)))), CompositionSiteEquation
+          (AffineLinePurity.Ring P) c b e L) ∧
+  (∀ (M : Etale.DerivedCategoryModule (AffineLinePurity.Ring P) (iteratedAffineLine Y (d + 1)))
+      (H : Etale.DerivedCategoryModule (AffineLinePurity.Ring P) Y),
+    OrdinaryProjectionCompositionEquation (AffineLinePurity.Ring P) (lastProjection Y d)
+      (iteratedAffineLineProj Y d) M H) ∧
+  (∀ (c : Compactification (iteratedAffineLineProj Y d))
+      (M : C (AffineLinePurity.Ring P) (iteratedAffineLine Y d)) (N₁ N₂ : D P Y),
+    ProTensorActionEquation (AffineLinePurity.Ring P) (iteratedAffineLineProj Y d) c M N₁ N₂) ∧
+  (∀ (c : Compactification (iteratedAffineLineProj Y d))
+      (M : Etale.DerivedCategoryModule (AffineLinePurity.Ring P) (iteratedAffineLine Y d))
+      (N₁ N₂ : Etale.DerivedCategoryModule (AffineLinePurity.Ring P) Y),
+    OrdinaryTensorActionEquation (AffineLinePurity.Ring P) (iteratedAffineLineProj Y d) c M N₁ N₂)
+
+section
+
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
+
+section
+
+attribute [local irreducible] Etale.compactSupportProjectionMap
+  Etale.unboundedEtaleLowerShriekCompIso Etale.unboundedEtaleUpperStarCompIso
+  Etale.derivedTensor Etale.rightDerivedLowerShriek Etale.upperStar
+
+private theorem coordinate_ordinary_projection (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X T Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian T] [IsNoetherian Y]
+    (f : X ⟶ T) (g : T ⟶ Y)
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g]
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    (M : Etale.DerivedCategoryModule A X) (H : Etale.DerivedCategoryModule A Y) :
+    OrdinaryProjectionCompositionEquation A f g M H := by
+  exact Etale.compactSupportProjectionMap_comp_forward A f g M H
+
+end
+
+section
+
+attribute [local irreducible] coherenceCompositionDataOfChoice coherenceBoundaryComponent
+  coherenceCompositionSource coherenceEtaleFunctor coherenceProEtaleFunctor coherenceSiteFunctor
+  coherenceBoundedSiteFunctor
+
+set_option linter.style.haveILetI false in
+private theorem coordinate_site_square (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X T Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian T] [IsNoetherian Y]
+    {f : X ⟶ T} {g : T ⟶ Y}
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g]
+    (c : Compactification f) (b : Compactification g) (e : Compactification (f ≫ g))
+    (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) :
+    CompositionSiteEquation A c b e L := by
+  letI := c.hasCompactification
+  letI := b.hasCompactification
+  letI := e.hasCompactification
+  exact composition_data_coherent A c b e L
+
+end
+
+/-- The coordinate compactification compositor, projection and tensor-action coherences.
+Source: the actual-alpha and projection displays
+(blueprint: lem-pur-affine-ordered-integration-transposes).
+Proof: apply compact-support site coherence to the last line and the preceding tower
+projection, with the supplied compactifications. Its proMap contains the specified
+origin compositor, so this identifies the actual alpha, rather than a bare isomorphism.
+Apply compactSupportProjectionMap_comp on the ordinary site. The finite projection-action
+laws give both tensor-action equations, retaining their literal associators and pullback
+comparisons. The required Noetherian hypotheses follow from finite type over P.field.k.
+The last projection and the preceding tower projection have the separated finite-type
+compactification structures supplied by projection_geometry. All compactifications in
+the statement are arbitrary, including the ordered product presentation. -/
+theorem coordinate_coherence (P : WeilConjectures.PurityFiniteSetting.{u})
+    (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of P.field.k))
+    [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY] (d : ℕ) :
+    CoordinateCoherence P Y aY d := by
+  let : IsNoetherian Y := tower_noetherian P Y aY 0
+  let : IsNoetherian (iteratedAffineLine Y d) := tower_noetherian P Y aY d
+  let : IsNoetherian (iteratedAffineLine Y (d + 1)) := tower_noetherian P Y aY (d + 1)
+  let : IsNoetherian (AffineSpace PUnit.{u + 1} (iteratedAffineLine Y d)) :=
+    isNoetherian_of_locallyOfFiniteType
+      (AffineSpace PUnit.{u + 1} (iteratedAffineLine Y d) ↘ iteratedAffineLine Y d)
+  let := (projection_geometry Y d).1
+  let := (projection_geometry Y d).2
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · intro c b e L
+    exact coordinate_site_square (AffineLinePurity.Ring P) c b e L
+  · intro M H
+    exact coordinate_ordinary_projection (AffineLinePurity.Ring P)
+      (lastProjection Y d) (iteratedAffineLineProj Y d) M H
+  · intro c M N₁ N₂
+    let : IsNoetherianRing (AffineLinePurity.Ring P) :=
+      isNoetherian_of_finite _ _
+    exact coordinate_pro_action (ModuleCat.{u + 1} (AffineLinePurity.Ring P))
+      (iteratedAffineLineProj Y d) c M N₁ N₂
+  · intro c M N₁ N₂
+    let : IsNoetherianRing (AffineLinePurity.Ring P) :=
+      isNoetherian_of_finite _ _
+    exact coordinate_ordinary_action (ModuleCat.{u + 1} (AffineLinePurity.Ring P))
+      (iteratedAffineLineProj Y d) c M N₁ N₂
+
+end
+
+attribute [local implicit_reducible] iteratedAffineLine iteratedAffineLineProj
+attribute [local semireducible] orderedSource exceptional lineSource twistAction
+attribute [local implicit_reducible] orderedSource exceptional lineSource twistAction
+
+private theorem integrationTranspose_zero (P : WeilConjectures.PurityFiniteSetting.{u})
+    (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of P.field.k))
+    [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY]
+    (K : Plus (AffineLinePurity.Ring P) Y)
+    (Ke : Etale.DerivedCategoryModule (AffineLinePurity.Ring P) Y)
+    (hKe : etaleFiniteTor (AffineLinePurity.Ring P) Y Ke)
+    (eK : (comparison (AffineLinePurity.Ring P) Y).obj Ke ≅ K.obj) :
+    HEq (integrationTranspose P Y aY K Ke hKe eK 0) (𝟙 K.obj) := by
+  unfold integrationTranspose
+  exact (integrationTranspose_existsUnique P Y aY K Ke hKe eK 0).exists.choose_spec
+
+private theorem lineComparison_isIso (P : WeilConjectures.PurityFiniteSetting.{u})
+    (T : Scheme.{u}) (aT : T ⟶ Spec (.of P.field.k))
+    [LocallyOfFiniteType aT] [QuasiCompact aT] [IsSeparated aT]
+    (K : Plus (AffineLinePurity.Ring P) T)
+    (Ke : Etale.DerivedCategoryModule (AffineLinePurity.Ring P) T)
+    (hKe : etaleFiniteTor (AffineLinePurity.Ring P) T Ke)
+    (eK : (comparison (AffineLinePurity.Ring P) T).obj Ke ≅ K.obj) :
+    IsIso (lineComparison P T aT K Ke hKe eK) := by
+  let : IsNoetherian T := isNoetherian_of_locallyOfFiniteType aT
+  obtain ⟨hT, _, h⟩ :=
+    (CoordinateLine.coordinateLineAdjunction P T aT).2.2.2.2.2.1 P.level (annihilates P)
+  have := (h K Ke hKe eK).2
+  unfold lineComparison
+  infer_instance
+
+private theorem exceptionalComposite_isIso (P : WeilConjectures.PurityFiniteSetting.{u})
+    (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of P.field.k))
+    [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY]
+    (K : Plus (AffineLinePurity.Ring P) Y) (d : ℕ) :
+    IsIso (exceptionalComposite P Y aY K d) := by
+  have he : HEq (exceptionalComposite P Y aY K d)
+      (exceptionalCompositeRaw P Y aY K d).2.2 := by
+    unfold exceptionalComposite
+    exact (exceptionalComposite_existsUnique P Y aY K d).exists.choose_spec
+  cases d with
+  | zero =>
+    have he' : exceptionalComposite P Y aY K 0 =
+        (exceptionalCompositeRaw P Y aY K 0).2.2 := by
+      unfold exceptional
+      exact eq_of_heq he
+    rw [he']
+    let : HasCompactification (lastProjection Y 0 ≫ 𝟙 (iteratedAffineLine Y 0)) :=
+      HasCompactification.of_eq (f := lastProjection Y 0) (Category.comp_id _).symm
+    change IsIso ((rightDerivedUpperShriekCongr
+      (AffineLinePurity.Ring P)
+      (Category.comp_id (lastProjection Y 0)).symm).hom.app K.obj)
+    exact NatIso.hom_app_isIso _ _
+  | succ d =>
+    let : HasCompactification (iteratedAffineLineProj Y (d + 1)) :=
+      (projection_geometry Y (d + 1)).2
+    let : HasCompactification (iteratedAffineLineProj Y (d + 2)) :=
+      (projection_geometry Y (d + 2)).2
+    let : HasCompactification
+        (lastProjection Y (d + 1) ≫ iteratedAffineLineProj Y (d + 1)) :=
+      HasCompactification.of_eq (f := iteratedAffineLineProj Y (d + 2))
+        (iteratedAffineLineProj_succ Y (d + 1))
+    let : IsNoetherian Y := tower_noetherian P Y aY 0
+    let : IsNoetherian (iteratedAffineLine Y (d + 1)) := tower_noetherian P Y aY (d + 1)
+    unfold exceptional at he ⊢
+    rw [eq_of_heq he]
+    exact AffineZeroPurity.compositionInverse_isIso (AffineLinePurity.Ring P)
+      (lastProjection Y (d + 1)) (iteratedAffineLineProj Y (d + 1)) K
+
+/-- Ordered affine integration transposes equal the recorded ordered affine comparisons.
+The exceptional conjugate is the one built from originCompositionAmbient, and its inverse
+is exactly exceptionalComposite. The recursion and naturality are evaluated at Rp_d!K.
+Source: main-20261015, projection-purity-agreement proof, final paragraph
+(blueprint: lem-pur-affine-ordered-integration-transposes).
+
+Proof:
+1. Work first on ordinary etale sites at exponent ell^(level+1), which annihilates A
+without any ramification divisibility restriction. Finite type makes all coordinate
+and projective compactification spaces Noetherian. The normalized proper/open tower
+comparison is transported to the actual originCompositionAmbient by
+lem-pur-compact-support-site-coherence, with the retained bounded-below witnesses.
+2. Apply lem-amb-shriek-tensor-composition and lem-sf-composition-projection-mate to the
+last coordinate and preceding projection. They give the displayed PF composition
+identity. The compactification tensor-action identity is clause 3 of
+lem-pur-finite-projection-action-laws. The ordinary projections are invertible by
+lem-sf-etale-ambient-adjoint-projection; invert only those projections or their bounded
+constructible compared components.
+3. Compose the normalized projective-line adjunction with the open adjunction.
+The open tensor/counit action law and naturality of proper projection rewrite its
+counit as (1_H tensor I_S) Pi. Here I_S is precisely restriction of the projective trace
+by the open counit. The finite Tate pullback comparison identifies its coefficient.
+This works at every positive finite level, without flatness over the Kummer ring.
+4. Induct on the coordinates. At zero the adjunction and trace are identities. Apply
+lem-pur-composite-integration-counit to the induction hypothesis and the line formula.
+Tate additivity and the even shifts identify the new coefficient. The trace at A is
+exactly the ordered counit of lem-amb-affine-space-top-trace, hence the specified vector
+integration in its trivial frame.
+5. Use lem-pur-vector-integration-site-comparison and
+lem-pur-finite-site-counit-projection-transport to carry the trace, projection,
+counit and exceptional transpose equations to the pro-etale site. Their comparison
+squares preserve the actual adjunctions and reflect equality independently of origin.
+6. The existing coordinate-line adjunction makes each exceptional line comparison
+invertible. The exceptional compositor is invertible by the proved relative-Hom
+composition argument, with the identity normalization at zero. Pullback finite-Tor
+preservation and tensor finite-Tor preservation supply the retained origins.
+7. Apply lem-pur-integration-transpose-composition. Its trace contraction is Step 4;
+its projection composition is Step 2. Transport its right mate using Step 5. This gives
+the successor formula with the exact c_d and I_d of def-pur-affine-space-comparison.
+Induction identifies P with that definition's Gamma and proves invertibility from
+the line and compositor isomorphisms.
+8. Extract arbitrary-arrow line naturality from dimension-one ordered naturality by
+cancelling its source and exceptional normalization isomorphisms. Apply this to P
+to obtain the stated square at the actual
+exceptional target. Every source shift is 2 or 2d, so the block permutation sign is +1.
+The identity adjunction handles rank zero. Zero coefficients K and empty bases have
+only the corresponding zero arrows, and none of the constructions excludes them. -/
+theorem ordered_integration_transposes (P : WeilConjectures.PurityFiniteSetting.{u})
+    (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of P.field.k))
+    [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY]
+    (K : Plus (AffineLinePurity.Ring P) Y) (Ke : Etale.DerivedCategoryModule
+      (AffineLinePurity.Ring P) Y)
+    (hKe : etaleFiniteTor (AffineLinePurity.Ring P) Y Ke)
+    (eK : (comparison (AffineLinePurity.Ring P) Y).obj Ke ≅ K.obj) :
+    (∀ d : ℕ, integrationTranspose P Y aY K Ke hKe eK d =
+      affineSpacePurityComparison P Y aY K Ke hKe eK d) ∧
+    (∀ d : ℕ, IsIso (integrationTranspose P Y aY K Ke hKe eK d)) ∧
+    (∀ d : ℕ, IsIso (exceptionalComposite P Y aY K d)) ∧
+    (∀ d : ℕ, integrationTranspose P Y aY K Ke hKe eK (d + 1) =
+      (sourceReassociation P Y aY K.obj d).hom ≫
+        (lineSource P (iteratedAffineLine Y d)).map
+          (integrationTranspose P Y aY K Ke hKe eK d) ≫
+        exceptionalLine P Y aY K Ke hKe eK d ≫ exceptionalComposite P Y aY K d) ∧
+    (∀ d : ℕ,
+      (lineSource P (iteratedAffineLine Y d)).map
+          (integrationTranspose P Y aY K Ke hKe eK d) ≫
+        exceptionalLine P Y aY K Ke hKe eK d =
+      sourceLine P Y aY K Ke hKe eK d ≫
+        (rightDerivedUpperShriek (AffineLinePurity.Ring P) (lastProjection Y d)).map
+          (integrationTranspose P Y aY K Ke hKe eK d)) ∧
+    HEq (integrationTranspose P Y aY K Ke hKe eK 0) (𝟙 K.obj) := by
+  have hzero := integrationTranspose_zero P Y aY K Ke hKe eK
+  have hsucc := integrationTranspose_successor P Y aY K Ke hKe eK
+  have hcomp := exceptionalComposite_isIso P Y aY K
+  have hline (d : ℕ) : IsIso (exceptionalLine P Y aY K Ke hKe eK d) := by
+    let : LocallyOfFiniteType (towerBase aY d) := (tower_geometry aY d).1
+    let : QuasiCompact (towerBase aY d) := (tower_geometry aY d).2.1
+    let : IsSeparated (towerBase aY d) := (tower_geometry aY d).2.2
+    exact lineComparison_isIso P (iteratedAffineLine Y d) (towerBase aY d)
+      ⟨_, (stage_applicability P Y aY K Ke hKe eK d).1⟩
+      (stageEtale P Y K.obj Ke d) (stage_applicability P Y aY K Ke hKe eK d).2
+      (stageComparison P Y K.obj Ke eK d)
+  refine ⟨?_, ?_, hcomp, hsucc, ?_, hzero⟩
+  · intro d
+    induction d with
+    | zero =>
+      unfold affineSpacePurityComparison orderedRec comparisonZero
+      unfold ComparisonHom orderedSource exceptional
+      exact eq_of_heq hzero
+    | succ d ih =>
+      rw [hsucc d, ih]
+      rfl
+  · intro d
+    induction d with
+    | zero =>
+      have hz : integrationTranspose P Y aY K Ke hKe eK 0 = 𝟙 K.obj :=
+        eq_of_heq hzero
+      rw [hz]
+      exact IsIso.id K.obj
+    | succ d ih =>
+      rw [hsucc d]
+      have := hcomp d
+      have := hline d
+      infer_instance
+  · intro d
+    let : LocallyOfFiniteType (towerBase aY d) := (tower_geometry aY d).1
+    let : QuasiCompact (towerBase aY d) := (tower_geometry aY d).2.1
+    let : IsSeparated (towerBase aY d) := (tower_geometry aY d).2.2
+    exact lineComparison_natural P (iteratedAffineLine Y d) (towerBase aY d)
+      ⟨_, (source_applicability P Y aY K Ke hKe eK d).1⟩ (sourceEtale P Y Ke d)
+      (source_applicability P Y aY K Ke hKe eK d).2 (sourceRealization P Y K.obj Ke eK d)
+      ⟨_, (stage_applicability P Y aY K Ke hKe eK d).1⟩ (stageEtale P Y K.obj Ke d)
+      (stage_applicability P Y aY K Ke hKe eK d).2 (stageComparison P Y K.obj Ke eK d)
+      (integrationTranspose P Y aY K Ke hKe eK d)
+
+end AlgebraicGeometry.ProEtale.AffineOrderedIntegration
