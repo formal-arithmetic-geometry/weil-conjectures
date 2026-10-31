@@ -339,9 +339,7 @@ private theorem swapSheafIso_tmul {B S : Sheaf J CommRingCat.{r}} (φ : B ⟶ S)
   rw [swapPresheafIso_tmul] at ht
   exact ht
 
-attribute [local irreducible] coefficientApp
 
-attribute [local irreducible] coefficientSheafMap
 
 end RestrictedTensorProof
 

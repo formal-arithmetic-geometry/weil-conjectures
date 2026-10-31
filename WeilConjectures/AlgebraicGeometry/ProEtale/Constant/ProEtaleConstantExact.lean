@@ -134,7 +134,6 @@ noncomputable def finiteCoefficientModulePullback :
   finiteCoefficientModuleInverseImage f Λ ⋙
     SheafOfModules.restrictScalars (inv (finiteCoefficientInverseImageMap f Λ))
 
-attribute [instance] finiteCoefficientModulePullback_additive
 
 section
 open Opposite
