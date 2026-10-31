@@ -60,6 +60,79 @@ private theorem ordinary_restriction_natural (l : ℕ) [Fact l.Prime]
   rw [h, Category.assoc]
   rfl
 
+private theorem projection {A B : Type a} [Category.{b} A] [Category.{b} B]
+    [Preadditive A] [Preadditive B] [HasCountableCoproducts A] [HasCountableCoproducts B]
+    (E : A ⥤ B) [E.Additive] [PreservesColimitsOfSize.{0, 0} E]
+    (R : B ⥤ A) [R.PreservesZeroMorphisms]
+    (H : A ⥤ A ⥤ A) (H' : B ⥤ B ⥤ B)
+    [H.PreservesZeroMorphisms] [∀ M, (H.obj M).PreservesZeroMorphisms]
+    [H'.PreservesZeroMorphisms] [∀ M, (H'.obj M).PreservesZeroMorphisms]
+    (g : E.prod (𝟭 _) ⋙ Functor.uncurry.obj H' ≅
+      (𝟭 _).prod R ⋙ Functor.uncurry.obj H ⋙ E) :
+    Nonempty ((E.mapHomologicalComplex (.up ℤ)).prod (𝟭 _) ⋙
+        Functor.uncurry.obj H'.map₂CochainComplex ≅
+      (𝟭 _).prod (R.mapHomologicalComplex (.up ℤ)) ⋙
+        Functor.uncurry.obj H.map₂CochainComplex ⋙ E.mapHomologicalComplex (.up ℤ)) := by
+  let τ : (Functor.postcompose₂.obj E).obj
+      (H ⋙ (Functor.whiskeringLeft B A A).obj R) ≅
+      (((Functor.whiskeringLeft₂ _).obj E).obj (𝟭 _)).obj H' :=
+    SheafOfModules.bifunctorIsoOfComponents _ _ (fun M N ↦ g.symm.app (M, N)) (by
+      intro M M' N N' a b
+      change E.map ((H.map a).app (R.obj N)) ≫ E.map ((H.obj M').map (R.map b)) ≫
+          (g.symm.app (M', N')).hom = (g.symm.app (M, N)).hom ≫
+          (H'.map (E.map a)).app N ≫ (H'.obj (E.obj M')).map b
+      simpa only [Functor.comp_map, Functor.comp_obj, Functor.prod_obj, Iso.app_hom,
+        Functor.uncurry_obj_map, Functor.prod_map,
+        Functor.id_map, Functor.id_obj, Functor.map_comp, Iso.symm_hom, Iso.app_inv,
+        Category.assoc] using
+          g.inv.naturality (Prod.mkHom a b))
+  let := SheafOfModules.precompose_preservesZero H R
+  let (M : A) := SheafOfModules.precompose_obj_preservesZero H R M
+  let (P : CochainComplex A ℤ) (T : CochainComplex B ℤ) :=
+    SheafOfModules.precompose_hasTotal H R P T
+  let gg : (𝟭 (CochainComplex A ℤ)).prod (R.mapHomologicalComplex (.up ℤ)) ⋙
+      Functor.uncurry.obj H.map₂CochainComplex ⋙ E.mapHomologicalComplex (.up ℤ) ≅
+      (E.mapHomologicalComplex (.up ℤ)).prod (𝟭 (CochainComplex B ℤ)) ⋙
+        Functor.uncurry.obj H'.map₂CochainComplex :=
+    NatIso.ofComponents
+      (fun PQ ↦ SheafOfModules.comparisonPrecomposeIso E R H H' τ PQ.1 PQ.2)
+      (by
+        intro PQ PQ' fg
+        simpa only [Functor.comp_map, Functor.comp_obj, Functor.prod_obj,
+          Functor.uncurry_obj_map, Functor.prod_map, Functor.id_map, Functor.id_obj] using
+          SheafOfModules.comparisonPrecomposeIso_map₂_natural E R H H' τ fg.1 fg.2)
+  exact ⟨gg.symm⟩
+
+private theorem restriction {A B : Type a} [Category.{b} A] [Category.{b} B]
+    [Preadditive A] [Preadditive B] [HasCountableCoproducts A] [HasCountableCoproducts B]
+    (R : A ⥤ B) [R.Additive] [PreservesColimitsOfSize.{0, 0} R]
+    (H : A ⥤ A ⥤ A) (H' : B ⥤ B ⥤ B)
+    [H.PreservesZeroMorphisms] [∀ M, (H.obj M).PreservesZeroMorphisms]
+    [H'.PreservesZeroMorphisms] [∀ M, (H'.obj M).PreservesZeroMorphisms]
+    (r : Functor.uncurry.obj H ⋙ R ≅ R.prod R ⋙ Functor.uncurry.obj H') :
+    Nonempty (Functor.uncurry.obj H.map₂CochainComplex ⋙
+        R.mapHomologicalComplex (.up ℤ) ≅
+      (R.mapHomologicalComplex (.up ℤ)).prod (R.mapHomologicalComplex (.up ℤ)) ⋙
+        Functor.uncurry.obj H'.map₂CochainComplex) := by
+  let τ : (Functor.postcompose₂.obj R).obj H ≅
+      (((Functor.whiskeringLeft₂ _).obj R).obj R).obj H' :=
+    SheafOfModules.bifunctorIsoOfComponents _ _ (fun M N ↦ r.app (M, N)) (by
+      intro M M' N N' a b
+      change R.map ((H.map a).app N) ≫ R.map ((H.obj M').map b) ≫
+          (r.app (M', N')).hom = (r.app (M, N)).hom ≫
+          (H'.map (R.map a)).app (R.obj N) ≫ (H'.obj (R.obj M')).map (R.map b)
+      simpa only [Functor.comp_map, Functor.comp_obj, Functor.prod_obj, Iso.app_hom,
+        Functor.uncurry_obj_map, Functor.prod_map,
+        Functor.map_comp, Category.assoc] using r.hom.naturality (Prod.mkHom a b))
+  exact ⟨NatIso.ofComponents
+    (fun PQ ↦ asIso (HomologicalComplex.mapBifunctorComparison τ.hom (.up ℤ) PQ.1 PQ.2))
+    (by
+      intro PQ PQ' fg
+      simpa only [Functor.comp_map, Functor.comp_obj, Functor.prod_obj, Iso.app_hom,
+        Functor.uncurry_obj_map, Functor.prod_map,
+        SheafOfModules.map₂_map_eq, asIso_hom] using
+        HomologicalComplex.mapBifunctorComparison_naturality τ.hom (.up ℤ) fg.1 fg.2)⟩
+
 namespace NativeOpenChainProof
 
 end NativeOpenChainProof
@@ -303,5 +376,26 @@ private def sheafRestrictionIso (s : NativeOpenTensorData k₀ l j) :
   sheafRestrictionIso_abstract k₀ l j (upperStar k₀ l j)
     (ProEtale.adicUpperStarGeometricFiberMapCompFrobeniusIso l j (comp_over j _))
     (upperStar_eq_transport k₀ l j) s.sheafRestriction s.restriction_forget
+
+private theorem sheafProjectionIso (s : NativeOpenTensorData k₀ l j) :
+    Nonempty (nativeOpenSheafLeft k₀ l j ≅ nativeOpenSheafRight k₀ l j) := by
+  obtain ⟨_, _, ⟨g⟩, _⟩ := native_open_sheaf_projection_tensor k₀ l j s.adj
+    s.unit_forget s.counit_forget s.sheafRestriction s.restriction_forget
+  exact ⟨g⟩
+
+/-- Natural sheaf restriction and projection comparisons before totalization.
+
+Source: Stacks 03EL and 0E8I.
+(blueprint: new-sf-native-open-tensor-sheaf-comparisons).
+
+Proof: normalization identifies the restriction components after faithful forgetting.
+The ordinary tensor pullback comparison is natural in both variables. The inverse
+mates identity identifies its second-variable map with nativeTensorMap. Assemble
+these components, then use the existing normalized sheaf projection theorem. -/
+theorem native_open_tensor_sheaf_comparisons (s : NativeOpenTensorData k₀ l j) :
+    Nonempty (nativeOpenSheafTensor k₀ l Z ⋙ upperStar k₀ l j ≅
+      (upperStar k₀ l j).prod (upperStar k₀ l j) ⋙ nativeOpenSheafTensor k₀ l U) ∧
+      Nonempty (nativeOpenSheafLeft k₀ l j ≅ nativeOpenSheafRight k₀ l j) :=
+  ⟨⟨sheafRestrictionIso k₀ l j s⟩, sheafProjectionIso k₀ l j s⟩
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
