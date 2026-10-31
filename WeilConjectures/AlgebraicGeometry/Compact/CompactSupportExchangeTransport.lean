@@ -396,6 +396,7 @@ private theorem compactComparison_hom (Λ : Type (u + 1)) [CommRing Λ] [Finite 
   simp only [Functor.comp_map] at hn
   simpa only [Functor.mapDerivedCategoryPlusCompatibility,
     fixedComparisonDirectImageMatePlus, asIso_hom, Functor.comp_obj,
+    rightDerivedLowerStarComparisonPlusBaseChange,
     ObjectProperty.ι_obj, Category.assoc, he,
     CategoryTheory.Functor.map_id, Category.comp_id, Category.id_comp] using
     congrArg (fun t ↦ DerivedCategory.Plus.ι.map

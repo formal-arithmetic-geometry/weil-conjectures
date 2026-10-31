@@ -71,9 +71,7 @@ namespace AlgebraicGeometry.Etale
 private local instance (priority := 3000) additiveSelfForget :
     HasForget₂ AddCommGrpCat.{u + 1} AddCommGrpCat.{u + 1} := ⟨𝟭 _, rfl⟩
 
-attribute [local instance] additiveSelfForget_additive
 
-attribute [local instance] additiveSelfForget_additive additiveSelfForget_homology
 
 private local instance (priority := 3000) integralWeakSheafify (T : Scheme.{u}) :
     HasWeakSheafify T.smallEtaleTopology AddCommGrpCat.{u + 1} := inferInstance
@@ -366,18 +364,6 @@ private lemma integerSectionEquiv_restrict (T : Scheme.{u})
   rw [hn'] at h
   exact h
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-    simpa only [hki] using he
-  exact heq.symm.trans hh
-
-attribute [local irreducible] relativeExtensionComparison
-
 /-- Canonical closed exchange on integral coefficients, with the constant comparison.
 Source: Stacks Tag 0A45, closed base change
 (blueprint: lem-pur-relative-extension-cohomology-normalization). -/
@@ -558,6 +544,5 @@ private theorem openSectionPullback_isIso {T T' : Scheme.{u}}
   rw [← he]
   infer_instance
 
-attribute [local irreducible] relativeExtensionEnlargeComplex
 
 end AlgebraicGeometry.Etale

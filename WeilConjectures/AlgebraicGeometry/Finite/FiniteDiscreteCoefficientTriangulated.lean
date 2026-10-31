@@ -208,8 +208,10 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteDi
 
 # Bounded constructible module objects over `T̲` and `O̲` form triangulated subcategories
 
-This file is the counterpart, for the two coefficient rings of
-`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UnitBallRingObj.FiniteDiscreteCoefficient`, of the instances
+This file is the counterpart, for the two coefficient rings of the module
+`FiniteDiscreteCoefficient`
+in `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UnitBallRingObj`,
+of the instances
 `ProEtale.isTriangulated_boundedConstructible_padicIntegersRingObj`,
 `ProEtale.isTriangulated_boundedConstructible_continuousMapRingObj` and
 `ProEtale.isTriangulated_boundedConstructible_padicAlgClRingObj` of
@@ -251,7 +253,7 @@ instance isTriangulated_boundedConstructible_finiteDiscreteRingObj
       (condensedRingObj (Profinite.continuousMapRingObj.{u} T) X)).IsTriangulated := by
   obtain ⟨hc, he⟩ := constructible_cokernels_extensions X
     (condensedRingObj (Profinite.continuousMapRingObj T) X)
-  exact triangulated_of_serre X _
+  exact isTriangulated_boundedConstructible_of_serre _
     (fun M N f hM hN ↦ ⟨finiteDiscrete_constructible_kernel T X M N f hM hN,
       ObjectProperty.prop_cokernel _ f hM hN⟩)
     (fun S hS h₁ h₃ ↦ ObjectProperty.prop_X₂_of_shortExact _ hS h₁ h₃)
@@ -275,7 +277,7 @@ instance isTriangulated_boundedConstructible_unitBallRingObj
     simpa only [NNReal.coe_one, coe_nnnorm] using
       (NNReal.coe_le_coe : (‖x‖₊ : ℝ) ≤ ((1 : NNReal) : ℝ) ↔ ‖x‖₊ ≤ 1)
   obtain ⟨hker, hcok, hext⟩ := integralConstructible_serre ℓ E X
-  exact triangulated_of_serre X _
+  exact isTriangulated_boundedConstructible_of_serre _
     (fun M N f hM hN ↦ ⟨ObjectProperty.prop_kernel _ f hM hN,
       ObjectProperty.prop_cokernel _ f hM hN⟩)
     (fun S hS h₁ h₃ ↦ ObjectProperty.prop_X₂_of_shortExact _ hS h₁ h₃)

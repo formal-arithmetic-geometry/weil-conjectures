@@ -152,6 +152,10 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option backward.defeqAttrib.useBackward true
 
+-- Upstream's `Mono (f.app k)` instance searches for pullbacks of étale sheaves through
+-- `ModuleCat.instHasLimitsOfSize`, which leaves universe constraints stuck.
+attribute [-instance] CategoryTheory.instMonoAppOfFunctor
+
 private theorem derived_base_change_unit
     {B B' C C' : Type*} [Category* B] [Category* B'] [Category* C] [Category* C']
     [Abelian B] [Abelian B'] [Abelian C] [Abelian C']

@@ -57,15 +57,6 @@ noncomputable def exactEtaleSumExchangeSquare
     (f : U ⟶ X) [Etale f] (g : X' ⟶ X) :=
   TwoSquare.mk _ _ _ _ (exactEtaleSumExchange A f g).hom
 
-section HomotopyNormalization
-attribute [local instance 2000] Abelian.toPreadditive
-
-by
-  unfold normalizationLocalizationDesc
-  exact congr_app ((Localization.fullyFaithfulWhiskeringLeft L W E).map_preimage τ) K
-
-end HomotopyNormalization
-
 /-- Regard a proper refinement as a compactification of the coarser open immersion.
 Source: SGA 4 XVII 6.2.11
 (blueprint: def-asd-compact-support-graph-comparison). -/
