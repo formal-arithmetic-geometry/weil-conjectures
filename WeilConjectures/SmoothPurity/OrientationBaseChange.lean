@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SmoothPurity.Defs
+public import WeilConjectures.SmoothPurity.UpperShriekBaseChangeReduction
 public import WeilConjectures.TraceFormula.PurityTensorMap
 
 /-!
@@ -104,5 +105,27 @@ theorem smoothOrientation_baseChange_of_isIso (sq : IsPullback g' f' f g) (d : �
   refine ⟨@asIso _ _ _ _ _ h₂ ≪≫ (@asIso _ _ _ _ _ h₁).symm, ?_⟩
   simp only [Iso.trans_hom, Iso.symm_hom, asIso_hom, asIso_inv, Category.assoc,
     IsIso.inv_hom_id, Category.comp_id]
+
+
+/-- **Base change of the orientation, given the compatibility of the reduction modulo `ℓ` with
+proper base change**: the orientations `γ_f` and `γ_{f'}` are isomorphisms
+(`isIso_smoothOrientation`), the exceptional base change map at the unit is an isomorphism by
+smooth base change (`isIso_upperShriekBaseChange_of_smooth_of_etaleReductionProperCompatibleAll`)
+and `Lg^* ℚ̄_ℓ,Y ≅ ℚ̄_ℓ,Y'`, so `smoothOrientation_baseChange_of_isIso` applies. -/
+theorem smoothOrientation_baseChange_of_etaleReductionProperBaseChangeCompatibleAll
+    (hcompat : EtaleReductionProperBaseChangeCompatibleAll ℓ k) (sq : IsPullback g' f' f g)
+    (d : ℕ) [SmoothOfRelativeDimension d f.left] [SmoothOfRelativeDimension d f'.left] :
+    ∃ τ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g').obj
+        (boundedConstructibleTateTwist ℓ X d (2 * d)) ≅
+          boundedConstructibleTateTwist ℓ X' d (2 * d),
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g').map
+          (smoothOrientation ℓ f d) ≫ upperShriekBaseChange ℓ sq (𝟙_ _) ≫
+          (boundedConstructibleUpperShriek ℓ f').map
+            (η (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g)) =
+        τ.hom ≫ smoothOrientation ℓ f' d := by
+  have := SmoothOfRelativeDimension.smooth d f.left
+  have := isIso_upperShriekBaseChange_of_smooth_of_etaleReductionProperCompatibleAll ℓ hcompat sq
+    (𝟙_ _)
+  exact smoothOrientation_baseChange_of_isIso ℓ sq d inferInstance inferInstance
 
 end AlgebraicGeometry.ProEtale.CondensedRing
