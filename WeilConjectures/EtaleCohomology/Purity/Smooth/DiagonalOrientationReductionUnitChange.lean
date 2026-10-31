@@ -159,7 +159,8 @@ lemma extendScalarsHomotopyUnitMap_eq :
         ((HomologicalComplex.single _ (.up ℤ) 0).map (extendScalarsUnitMap ρ X) ≫
           (HomologicalComplex.singleMapHomologicalComplex
             (Sheaf.restrictScalars X.smallEtaleTopology ρ) (.up ℤ) 0).inv.app (𝟙_ _)) := by
-  rw [extendScalarsHomotopyUnitMap_eq_unit_comp, mapHomotopyCategory_extendScalarsAdjunction_unit_app_unit,
+  rw [extendScalarsHomotopyUnitMap_eq_unit_comp,
+    mapHomotopyCategory_extendScalarsAdjunction_unit_app_unit,
     mapHomotopyCategory_map_η_extendScalars, ← Functor.map_comp,
     mapHomologicalComplex_unit_app_unit_comp_map_η_extendScalars]
 

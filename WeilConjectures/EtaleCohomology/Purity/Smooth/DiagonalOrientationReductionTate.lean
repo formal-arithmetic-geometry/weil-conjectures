@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.IntTensorFamilyIso
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReductionKummerBoundary
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReductionSupports
 
 /-!
 # The Tate data of the reduction of coefficients
@@ -114,8 +114,16 @@ theorem reductionTateShiftIso_pullback
       (derivedExtendScalarsPullbackIso hρ ha e).hom.app _ ≫
         (L((e)^*[ModuleCat.{u + 1} Λ'])).map (reductionTateShiftIso hρ ha σ X m).hom ≫
           (leftDerivedUpperStarTateShiftIso Λ' e m).hom := by
-  have : NatTrans.CommShift (derivedExtendScalarsPullbackIso hρ ha e).hom ℤ :=
-    inferInstanceAs (NatTrans.CommShift (derivedExtendScalarsPullbackMap hρ ha e) ℤ)
+  have : NatTrans.CommShift (leftDerivedUpperStarIsoMapDerivedCategory
+      (ModuleCat.{u + 1} Λ') e).inv ℤ := NatTrans.CommShift.of_iso_inv _ ℤ
+  have : NatTrans.CommShift (leftDerivedUpperStarRestrictScalarsIso ρ e).hom ℤ := by
+    dsimp only [leftDerivedUpperStarRestrictScalarsIso, Iso.trans_hom, Iso.symm_hom,
+      Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom]
+    infer_instance
+  have : NatTrans.CommShift (derivedExtendScalarsPullbackIso hρ ha e).hom ℤ := by
+    dsimp only [derivedExtendScalarsPullbackIso, asIso_hom, derivedExtendScalarsPullbackMap,
+      mateEquiv, Equiv.coe_fn_symm_mk, TwoSquare.natTrans, TwoSquare.mk]
+    infer_instance
   have hc := NatTrans.shift_app_comm (derivedExtendScalarsPullbackIso hρ ha e).hom (2 * m)
     (tateObject Λ X m)
   rw [Functor.commShiftIso_comp_hom_app, Functor.commShiftIso_comp_hom_app] at hc
