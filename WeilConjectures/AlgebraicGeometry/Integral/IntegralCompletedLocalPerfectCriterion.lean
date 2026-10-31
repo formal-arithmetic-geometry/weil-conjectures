@@ -28,6 +28,9 @@ set_option synthInstance.maxSize 4096
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
+
+-- `surjectiveTower_wEqualsLocallyBijective` leaves its coefficient universe free
+attribute [-instance] AlgebraicGeometry.ProEtale.surjectiveTower_wEqualsLocallyBijective
 open ProEtale
 
 private def terminalIdentity (X : Scheme.{u}) : IsTerminal (ProEt.mk (𝟙 X)) :=
