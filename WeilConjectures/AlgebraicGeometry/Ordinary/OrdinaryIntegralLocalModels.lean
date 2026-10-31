@@ -21,6 +21,9 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 namespace AlgebraicGeometry.Scheme
 
+-- `surjectiveTower_wEqualsLocallyBijective` leaves its coefficient universe free
+attribute [-instance] AlgebraicGeometry.ProEtale.surjectiveTower_wEqualsLocallyBijective
+
 private theorem datumChartEquivalence {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) {S : Scheme.{u}} (U : S.ProEt) :
     ∃ e : DerivedCategory (pbcModules U.left (pbcAdicCompletion U.left d)) ≌

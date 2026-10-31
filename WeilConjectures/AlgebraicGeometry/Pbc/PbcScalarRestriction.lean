@@ -31,6 +31,9 @@ attribute [-instance] WeilConjectures.integralOperationsSiteSmall
 attribute [-instance] WeilConjectures.integralOperationsCommHasDerivedCategory
 attribute [local irreducible] AlgebraicGeometry.Scheme.pbcRationalCoefficientEquiv
 namespace AlgebraicGeometry.Scheme
+
+-- `SignedDoubleHomCone.moduleBinaryBiproducts` leaves its universe free
+attribute [-instance] CategoryTheory.SignedDoubleHomCone.moduleBinaryBiproducts
 section ConditionalRestriction
 variable {X Y : Scheme.{u}} {A : Type (u + 1)} [CommRing A]
 variable (d : AdicCoefficientDatum A) (H : PbcCompletedDerived X d ⥤ PbcCompletedDerived Y d)
