@@ -8,6 +8,7 @@ module
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReduction
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineCohomologyGysin
 public import WeilConjectures.SixFunctors.Etale.Derived.LocalizationIntegral
+public import WeilConjectures.EtaleCohomology.TateTwist.ReductionTateTwistOne
 
 /-!
 # The reduction of coefficients as a change of coefficients with supports
@@ -60,13 +61,19 @@ variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] {ρ : Λ →+* Λ'
 
 section ConstantComplex
 
-/-- **The derived extension of scalars of the constant complex**, `Ψ Λ_X ≅ Λ'_X`: the
-identification on the terminal scheme, pulled back along `X ⟶ ⊤_`. -/
+/-- **The derived extension of scalars of the constant complex**, `Ψ Λ_X ≅ Λ'_X`: the unit
+comparison `η` of the monoidal structure of `Ψ`
+(`AlgebraicGeometry.Etale.derivedExtendScalarsUnitIso`). -/
 noncomputable def derivedExtendScalarsConstantComplexIso (X : Scheme.{u}) :
     (derivedExtendScalars hρ ha X).obj (constantComplex Λ X) ≅ constantComplex Λ' X :=
-  derivedExtendScalarsConstantComplexIsoOfPullback hρ ha
-    (nonempty_derivedExtendScalars_obj_constantComplex_iso hρ ha (⊤_ Scheme.{u})).some
-    (terminal.from X)
+  derivedExtendScalarsUnitIso hρ ha X
+
+/-- `Ψ Λ_X ≅ Λ'_X` is the unit comparison of the monoidal structure of `Ψ`. -/
+lemma derivedExtendScalarsConstantComplexIso_hom (X : Scheme.{u}) :
+    letI := derivedExtendScalarsMonoidal hρ ha X
+    (derivedExtendScalarsConstantComplexIso hρ ha X).hom =
+      Functor.OplaxMonoidal.η (derivedExtendScalars hρ ha X) :=
+  rfl
 
 /-- The identifications `Ψ Λ_X ≅ Λ'_X` are compatible with the derived pullbacks. -/
 lemma derivedExtendScalarsConstantComplexIso_hom_pullback
@@ -75,9 +82,18 @@ lemma derivedExtendScalarsConstantComplexIso_hom_pullback
         (derivedExtendScalarsConstantComplexIso hρ ha U).hom =
       (derivedExtendScalarsPullbackIso hρ ha e).hom.app _ ≫
         (L((e)^*[ModuleCat.{u + 1} Λ'])).map (derivedExtendScalarsConstantComplexIso hρ ha X).hom ≫
-          (leftDerivedUpperStarConstantComplexIso Λ' e).hom :=
-  derivedExtendScalarsConstantComplexIsoOfPullback_hom_pullback hρ ha _
-    e _ _ (terminal.hom_ext _ _)
+          (leftDerivedUpperStarConstantComplexIso Λ' e).hom := by
+  sorry
+
+/-- The identification `Ψ Λ_X ≅ Λ'_X` is the adjoint of the change of coefficients
+`Λ_X ⟶ Res Λ'_X` of the constant complexes
+(`AlgebraicGeometry.Etale.constantComplexChangeMap`). -/
+lemma derivedExtendScalarsConstantComplexIso_hom_eq (X : Scheme.{u})
+    [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ' X] :
+    (derivedExtendScalarsConstantComplexIso hρ ha X).hom =
+      ((derivedExtendScalarsAdjunction hρ ha X).homEquiv _ _).symm
+        (constantComplexChangeMap ρ X) := by
+  sorry
 
 end ConstantComplex
 
