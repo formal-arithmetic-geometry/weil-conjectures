@@ -351,6 +351,12 @@ private theorem extensionPresheafHomEquiv_naturality_left_symm
     rfl
   | add x y hx hy => simpa only [map_add] using congrArg₂ (· + ·) hx hy
 
+-- Fix the coefficient universe of the locally bijective criterion; the generic instance
+-- leaves a universe metavariable for the essential smallness of the site.
+private instance extensionAbWEqualsLocallyBijective {C : Type (u + 1)} [Category.{u} C]
+    (J : GrothendieckTopology C) : J.WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
+  @SheafOfModules.wEqualsLocallyBijective_coefficientUniverse C _ (essentiallySmallSelf.{0} C) J
+
 set_option backward.isDefEq.respectTransparency false in
 private noncomputable def extensionSheafAdjunction
     {C : Type (u + 1)} [Category.{u} C] {J : GrothendieckTopology C}

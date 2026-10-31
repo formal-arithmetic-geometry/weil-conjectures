@@ -47,8 +47,7 @@ private theorem coefficientIntegers_complete (l : ℕ) [Fact l.Prime] (E : Type 
       (coefficientExtensionIntegers l E) := by
   let R := coefficientExtensionIntegers l E
   let J := coefficientExtensionMaximalIdeal l E
-  have h := (extension_integers_dvr l E (coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  have h := (coefficientExtensionIntegers_dvr l E).choose_spec
   have hR : ∀ x : E, x ∈ R ↔ coefficientExtensionAbsoluteValue l E x ≤ 1 := h.1
   let : IsLocalRing R := h.2.2.2.1
   let : IsDiscreteValuationRing R := h.2.2.2.2.2.2.2.1
@@ -219,8 +218,7 @@ theorem adicLimit_finite_modules (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     · ext x
       rw [LinearMap.mem_ker, ← he x, ← e.map_zero, e.injective.eq_iff]
       exact Submodule.Quotient.mk_eq_zero _
-  have h := (extension_integers_dvr l E (coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  have h := (coefficientExtensionIntegers_dvr l E).choose_spec
   have hIJ : I = coefficientExtensionMaximalIdeal l E :=
     h.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
   let : IsAdicComplete I R := hIJ.symm ▸ coefficientIntegers_complete l E
@@ -285,8 +283,7 @@ theorem finite_module_adic_complete_and_hom (l : ℕ) [Fact l.Prime] (E : Type u
             (Submodule.factorPow I M (Nat.le_succ (n + 1)))) →
         ∃! f : M →ₗ[R] N, ∀ n : ℕ, f.reduceModIdeal (I ^ (n + 1)) = g n)) := by
   intro R I J
-  have h := (extension_integers_dvr l E (coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  have h := (coefficientExtensionIntegers_dvr l E).choose_spec
   let : IsDiscreteValuationRing R := h.2.2.2.2.2.2.2.1
   have hIJ : I = J := h.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
   let : IsAdicComplete J R := coefficientIntegers_complete l E

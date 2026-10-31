@@ -130,12 +130,12 @@ private abbrev ring (X : Scheme.{t}) (A : CommRingCat.{max r (t + 1)}) :=
 private theorem modelRingPresentation {X Y : Scheme.{t}} (f : X ⟶ Y)
     (A : CommRingCat.{max r (t + 1)}) :
     ∃ p : SheafPullbackUnitPresentation (F := Base.{t,r} f)
-      ((sheafCompose (Top Y) (CategoryTheory.forget RingCat.{max r (t + 1)})).obj
+      ((sheafCompose (Top.{t,r} Y) (CategoryTheory.forget RingCat.{max r (t + 1)})).obj
         ((modelEquivalence Y RingCat.{max r (t + 1)}).inverse.obj (ring Y A)))
-      ((sheafCompose (Top X) (CategoryTheory.forget RingCat.{max r (t + 1)})).obj
+      ((sheafCompose (Top.{t,r} X) (CategoryTheory.forget RingCat.{max r (t + 1)})).obj
         ((modelEquivalence X RingCat.{max r (t + 1)}).inverse.obj (ring X A))),
-      p.unit = (sheafCompose (Top Y) (CategoryTheory.forget RingCat.{max r (t + 1)})).map
-        (coefficientProEtaleModelRingMap f A) := by
+      p.unit = (sheafCompose (Top.{t,r} Y) (CategoryTheory.forget RingCat.{max r (t + 1)})).map
+        (coefficientProEtaleModelRingMap.{t,r} f A) := by
   let F := Base.{t,r} f
   let J := Top.{t,r} Y
   let K := Top.{t,r} X
@@ -151,8 +151,8 @@ private theorem modelRingPresentation {X Y : Scheme.{t}} (f : X ⟶ Y)
   let U := CategoryTheory.forget CommRingCat.{max r (t + 1)}
   let ec := (sheafCompose K U).mapIso (asIso c).symm
   let e := ec ≪≫ (sheafPullbackForgetIso J K F U).app S
-  let unit := (sheafCompose (Top Y) (CategoryTheory.forget RingCat.{max r (t + 1)})).map
-    (coefficientProEtaleModelRingMap f A)
+  let unit := (sheafCompose (Top.{t,r} Y) (CategoryTheory.forget RingCat.{max r (t + 1)})).map
+    (coefficientProEtaleModelRingMap.{t,r} f A)
   refine ⟨⟨unit, e, ?_⟩, rfl⟩
   intro V x
   have hc := (adj.homEquiv _ _).apply_symm_apply (modelCommRingMap f A)
@@ -191,17 +191,17 @@ private def moduleEquivalence (X : Scheme.{t})
 private theorem modelPullback_exact {X Y : Scheme.{t}} (f : X ⟶ Y)
     (A : CommRingCat.{max r (t + 1)}) :
     PreservesFiniteLimits (SheafOfModules.pullback.{max r (t + 1)}
-      (coefficientProEtaleModelRingMap f A)) ∧
+      (coefficientProEtaleModelRingMap.{t,r} f A)) ∧
     PreservesFiniteColimits (SheafOfModules.pullback.{max r (t + 1)}
-      (coefficientProEtaleModelRingMap f A)) := by
+      (coefficientProEtaleModelRingMap.{t,r} f A)) := by
   have : PreservesFiniteLimits (Base.{t,r} f) := by
     dsimp [Base, coefficientProEtaleModelBaseChange]
     infer_instance
   have : RepresentablyFlat (Base.{t,r} f) := flat_of_preservesFiniteLimits _
   obtain ⟨p, hp⟩ := modelRingPresentation f A
   obtain ⟨e, _⟩ := SheafOfModules.inverseImage_underlying_of_ring_presentation
-    (coefficientProEtaleModelRingMap f A) p hp
-  let M := SheafOfModules.pullback.{max r (t + 1)} (coefficientProEtaleModelRingMap f A)
+    (coefficientProEtaleModelRingMap.{t,r} f A) p hp
+  let M := SheafOfModules.pullback.{max r (t + 1)} (coefficientProEtaleModelRingMap.{t,r} f A)
   let U := SheafOfModules.toSheaf.{max r (t + 1)}
     ((modelEquivalence X RingCat.{max r (t + 1)}).inverse.obj (ring X A))
   have (Z : Scheme.{t}) : HasSheafify (Top.{t,r} Z) AddCommGrpCat.{max r (t + 1)} :=
@@ -239,15 +239,15 @@ theorem coefficientProEtaleModulePullback_exact {X Y : Scheme.{t}} (f : X ⟶ Y)
       PreservesFiniteColimits (coefficientProEtaleModulePullback.{t,r} f A) := by
   let EY := moduleEquivalence.{t,r} Y (ring Y A)
   let EX := moduleEquivalence.{t,r} X (ring X A)
-  let M := SheafOfModules.pullback.{max r (t + 1)} (coefficientProEtaleModelRingMap f A)
+  let M := SheafOfModules.pullback.{max r (t + 1)} (coefficientProEtaleModelRingMap.{t,r} f A)
   have hm := modelPullback_exact f A
   have : PreservesFiniteLimits M := hm.1
   have : PreservesFiniteColimits M := hm.2
   let adj := (EY.symm.toAdjunction.comp
-    (SheafOfModules.pullbackPushforwardAdjunction (coefficientProEtaleModelRingMap f A))).comp
+    (SheafOfModules.pullbackPushforwardAdjunction (coefficientProEtaleModelRingMap.{t,r} f A))).comp
       EX.toAdjunction
   let eR : EX.inverse ⋙ SheafOfModules.pushforward.{max r (t + 1)}
-      (coefficientProEtaleModelRingMap f A) ⋙ EY.functor ≅
+      (coefficientProEtaleModelRingMap.{t,r} f A) ⋙ EY.functor ≅
         coefficientProEtaleModuleDirectImage.{t,r} f A := by
     refine NatIso.ofComponents (fun N ↦ ?_) ?_
     · exact (SheafOfModules.fullyFaithfulForget _).preimageIso

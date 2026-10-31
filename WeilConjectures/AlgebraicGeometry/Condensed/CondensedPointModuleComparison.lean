@@ -97,19 +97,4 @@ theorem condensedPointModule_additive
     preservesBinaryBiproducts_of_preservesBinaryCoproducts _
   exact Functor.additive_of_preservesBinaryBiproducts _
 
-/- The final equation carries definitionally equal preadditive structures in the proof
-arguments of the composite functor's additivity instance. Unstructured conversion unfolds
-localization and sheaf inverse images before reconciling them. As in PerfectProjectionFormula,
-construct the conversion by congruence and proof irrelevance. The result is kernel checked. -/
-local syntax (name := pointStructuralExact) "point_structural_exact " term : tactic
-
-meta section
-open Lean Meta Elab Tactic
-termination_by fuel
-end
-
-open Lean Meta Elab Tactic in
-attribute [local irreducible] CondensedRing.upperStarFromPointMod CondensedRing.upperStar
-  upperStarFromPoint upperStar Functor.mapMod Functor.mapHomologicalComplex
-
 end AlgebraicGeometry.ProEtale

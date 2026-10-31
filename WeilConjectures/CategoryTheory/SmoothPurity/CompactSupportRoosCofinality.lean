@@ -53,6 +53,9 @@ selection and block maps are the canonical constructions from Tags 0H9K and
 0941.  The proofs use these constructions before passing to the derived category.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 set_option autoImplicit false
@@ -178,8 +181,6 @@ private theorem augment_coordinates (X : CochainComplex (ℕᵒᵖ ⥤ D) ℤ)
   rw [← roos_coordinates]
   exact roosAugment_χ γ hγ p
 
-attribute [local irreducible] augment in
-attribute [local irreducible] strictRoosComplex strictRoosCoordinates in
 private theorem square_comp {X Y Z W : CochainComplex (ℕᵒᵖ ⥤ D) ℤ}
     (hZW : Z = W)
     (a b : strictRoosProduct X ⟶ strictRoosProduct Y)
@@ -336,9 +337,5 @@ variable {E : Type u} {H : Type v} [Category.{vA} E] [Category.{vB} H]
     (F : E ⥤ H) [F.Additive]
 
 end ScalarAugmentation
-
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-  SheafOfModules.changeOfRingsOfUniverses SheafOfModules.changeOfRingsHomOfUniverses
 
 end CategoryTheory

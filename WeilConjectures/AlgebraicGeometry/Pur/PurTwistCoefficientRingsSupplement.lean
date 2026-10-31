@@ -163,9 +163,7 @@ Corestrict the field inclusion. Injectivity of the subring inclusion gives uniqu
 theorem purTwistIntegersMap_existsUnique :
     ∃! i : ℤ_[l] →+* Padic.coefficientExtensionIntegers l E,
       ∀ z : ℤ_[l], (i z : E) = algebraMap ℚ_[l] E (z : ℚ_[l]) := by
-  have hO := (Padic.extension_integers_dvr l E
-    (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec.1
+  have hO := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec.1
   let i : ℤ_[l] →+* Padic.coefficientExtensionIntegers l E :=
     ((algebraMap ℚ_[l] E).comp (algebraMap ℤ_[l] ℚ_[l])).codRestrict _ (by
       intro z
@@ -322,9 +320,7 @@ theorem purTwistCompletedScalarMap_existsUnique :
       WeilConjectures.completedIntegralCommRingSheafUnrestricted l E S,
       IsPurTwistCompletedScalarMap S l E a := by
   classical
-  have h := (Padic.extension_integers_dvr l E
-    (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  have h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   have hm : (l : Padic.coefficientExtensionIntegers l E) ∈
       Padic.coefficientExtensionMaximalIdeal l E := by
     apply (h.2.1 _).2

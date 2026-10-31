@@ -110,6 +110,10 @@ A sheaf of rings is a monoid object in abelian sheaves, and its module sheaves a
 is the existing `Functor.mapMod` applied to the monoidal sheaf inverse image.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 
 set_option autoImplicit false
@@ -119,47 +123,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 open scoped CategoryTheory.Obj
 
-namespace AlgebraicGeometry.Scheme.AffineProEt
-
-end AlgebraicGeometry.Scheme.AffineProEt
-
 namespace AlgebraicGeometry.Scheme
-
-namespace AffineProEt
-
-set_option backward.isDefEq.respectTransparency false in
-private theorem isIso_precomposition_toSheafify {S T : Scheme.{u}}
-    (v : S.AffineProEt ⥤ T.AffineProEt) {r : T.AffineProEt ⥤ S.AffineProEt}
-    (adj : v ⊣ r) [(topology S).Subcanonical]
-    (hcov : ∀ (V : S.AffineProEt) (R : Presieve V), R ∈ precoverage V →
-      R.map v ∈ precoverage (v.obj V))
-    (H : Sheaf (topology T) AddCommGrpCat.{u + 1}) (V : S.AffineProEt)
-    (hV : ∀ (P Q : Sheaf (topology S) (Type (u + 1))) (φ : P ⟶ Q),
-      Epi φ → Function.Surjective (φ.hom.app (op V))) :
-    IsIso ((toSheafify (topology S) (v.op ⋙ H.obj)).app (op V)) := by
-  let H₀ := (sheafCompose (topology T) (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj H
-  have hbij : Function.Bijective
-      ((toSheafify (topology S) (v.op ⋙ H₀.obj)).app (op V)) := by
-    exact ⟨precomposition_unit_injective v hcov H₀ V,
-      precomposition_unit_surjective v adj H₀ V hV⟩
-  let e := sheafifyComposeIso (topology S)
-    (CategoryTheory.forget AddCommGrpCat.{u + 1}) (v.op ⋙ H.obj)
-  have hfac := congrArg (fun φ ↦ φ.app (op V))
-    (sheafComposeIso_hom_fac (topology S)
-      (CategoryTheory.forget AddCommGrpCat.{u + 1}) (v.op ⋙ H.obj))
-  have : IsIso ((toSheafify (topology S) (v.op ⋙ H₀.obj)).app (op V)) :=
-    (isIso_iff_bijective _).mpr hbij
-  apply (ConcreteCategory.isIso_iff_bijective _).2
-  change Function.Bijective (ConcreteCategory.hom
-    ((Functor.whiskerRight (toSheafify (topology S) (v.op ⋙ H.obj))
-      (CategoryTheory.forget AddCommGrpCat.{u + 1})).app (op V)))
-  have he := congrArg ConcreteCategory.hom hfac
-  have hc : Function.Bijective (ConcreteCategory.hom
-      (e.hom.app (op V))) := (isIso_iff_bijective _).mp inferInstance
-  rw [← he]
-  exact hc.comp hbij
-
-end AffineProEt
 
 section Localization
 universe u'
@@ -169,6 +133,22 @@ variable (A : Type u') [Category.{u + 1} A]
 variable {U' U Z' Z : Scheme.{u}} {g' : U' ⟶ U} {j' : U' ⟶ Z'} {j : U ⟶ Z} {g'' : Z' ⟶ Z}
 
 variable [WeaklyEtale j] [WeaklyEtale j']
+
+private instance localPullbackMapContinuous :
+    (MorphismProperty.Over.pullback @WeaklyEtale ⊤ g' ⋙
+    MorphismProperty.Over.map ⊤ (inferInstance : @WeaklyEtale _ _ j')).IsContinuous
+      (Scheme.ProEt.topology U) (Scheme.ProEt.topology Z') :=
+  have := Scheme.ProEt.isContinuous_overPullback g'
+  have := Scheme.ProEt.isContinuous_overMap (inferInstance : @WeaklyEtale _ _ j')
+  Functor.isContinuous_comp _ _ _ (Scheme.ProEt.topology U') _
+
+private instance localMapPullbackContinuous :
+    (MorphismProperty.Over.map ⊤ (inferInstance : @WeaklyEtale _ _ j) ⋙
+    MorphismProperty.Over.pullback @WeaklyEtale ⊤ g'').IsContinuous
+      (Scheme.ProEt.topology U) (Scheme.ProEt.topology Z') :=
+  have := Scheme.ProEt.isContinuous_overPullback g''
+  have := Scheme.ProEt.isContinuous_overMap (inferInstance : @WeaklyEtale _ _ j)
+  Functor.isContinuous_comp _ _ _ (Scheme.ProEt.topology Z) _
 
 /-- The base change map `g''_* ⋙ j^* ⟶ j'^* ⋙ g'_*` on pro-étale sheaves, with the pullbacks
 along the weakly étale morphisms `j` and `j'` computed as restrictions along the localization

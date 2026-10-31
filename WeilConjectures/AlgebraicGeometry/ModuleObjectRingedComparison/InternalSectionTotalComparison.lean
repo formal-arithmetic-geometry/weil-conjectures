@@ -300,8 +300,7 @@ attribute [local instance 30000] sectionComparisonBraiding
 
 variable (R : Sheaf J AddCommGrpCat.{u + 1}) [MonObj R] [hcomm : IsCommMonObj R]
 
-omit [HasSheafify J AddCommGrpCat.{u + 1}]
-  [J.WEqualsLocallyBijective AddCommGrpCat.{u + 1}] in
+omit [J.WEqualsLocallyBijective AddCommGrpCat.{u + 1}] in
 /-- Commutativity for the direct canonical braiding on abelian sheaves.
 Source: Stacks 03EK (blueprint: def-sfb-internal-section-total-comparison).
 Proof: its braiding agrees with the parent of the canonical symmetric structure,

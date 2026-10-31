@@ -72,12 +72,10 @@ theorem coefficientExtension_localization_uniformizer (l : ℕ) [Fact l.Prime]
           (∀ (e : E) (z : M ⊗[coefficientExtensionIntegers l E]
               Localization.Away (coefficientExtensionUniformizer l E)),
             F (s.toSMul.smul e z) = t.toSMul.smul e (F z)) := by
-  let abv := coefficientExtensionAbsoluteValue l E
-  let H := extension_integers_dvr l E abv
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))
-  let O := H.choose
-  let HM := H.choose_spec.choose
-  let HS := H.choose_spec.choose_spec
+  let H := coefficientExtensionIntegers_dvr l E
+  let O := coefficientExtensionIntegers l E
+  let HM := H.choose
+  let HS := H.choose_spec
   rcases HS with ⟨hO, hm, hu, hlocal, hmax, hmax_unique, hfrac, hdvr,
     hpid, hm0, hprime, hfinite, hr, hgen, hassoc, hexists⟩
   let π : O := hgen.choose

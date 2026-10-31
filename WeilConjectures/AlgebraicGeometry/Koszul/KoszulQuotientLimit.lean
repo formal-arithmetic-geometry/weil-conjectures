@@ -16,6 +16,9 @@ Source: Weil conjectures blueprint, proper base change, order 1259
 (blueprint: lemma-weil-pbc-koszul-quotient-limit).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 universe t
@@ -118,13 +121,14 @@ private lemma koszulSheafUnitZero_isIso (X : Scheme.{t}) (Λ : Type t) [CommRing
     (r : ℕ) (f : Fin r → Λ) (n : ℕ) :
     IsIso (koszulSheafUnitZero X Λ r f n) := by
   let : IsIso (koszulConstantOne X Λ) := koszulConstantOne_isIso X Λ
-  let : IsIso (ModuleCat.ofHom (exteriorPower.zeroEquiv (ULift.{t + 1} Λ)
-      (Fin r →₀ ULift.{t + 1} Λ)).symm.toLinearMap) := by
-    change IsIso (exteriorPower.zeroEquiv (ULift.{t + 1} Λ)
-      (Fin r →₀ ULift.{t + 1} Λ)).symm.toModuleIso.hom
-    infer_instance
-  dsimp only [koszulSheafUnitZero]
-  infer_instance
+  have e : koszulSheafUnitZero X Λ r f n = koszulConstantOne X Λ ≫
+      ((koszulConstantFunctor X Λ).mapIso (exteriorPower.zeroEquiv (ULift.{t + 1} Λ)
+        (Fin r →₀ ULift.{t + 1} Λ)).symm.toModuleIso).hom ≫
+      ((koszulConstantFunctor X Λ).mapIso ((ExteriorAlgebra.koszulComplex (ULift.{t + 1} Λ) r
+        (fun k ↦ ULift.up (f k ^ (n + 1)))).extendXIso
+          ComplexShape.embeddingDownNat (i := 0) rfl)).inv := rfl
+  rw [e]
+  exact IsIso.comp_isIso' this (IsIso.comp_isIso' (Iso.isIso_hom _) (Iso.isIso_inv _))
 
 set_option backward.isDefEq.respectTransparency true
 

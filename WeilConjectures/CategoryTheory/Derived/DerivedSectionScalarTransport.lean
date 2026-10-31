@@ -94,6 +94,7 @@ set_option backward.isDefEq.respectTransparency false
 universe u c v w
 open CategoryTheory CategoryTheory.Limits
 attribute [local instance] SheafOfModules.ScalarDerivedPair.extension_additive
+  Sheaf.monoidalCategory Sheaf.symmetricCategory
 
 namespace CategoryTheory.InternalAbelianSheafModule
 

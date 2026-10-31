@@ -26,6 +26,9 @@ Source: Stacks Project, Algebraization, Tag 099I
 (blueprint: lem-weil-pbc-restricted-coefficient-hom-complex).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 set_option autoImplicit false
@@ -300,60 +303,4 @@ private theorem genericUncurriedComplexComparison
     rw [r.map_id, Category.id_comp]
   simpa only [hc] using hp
 
-section NormalizedComparison
-variable [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
-
-private theorem complexHomProjection_isLimit
-    (L M : CochainComplex (SheafOfModules.{u}
-      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ) (n : ℤ) :
-    Nonempty (IsLimit (Fan.mk ((((homComplexFunctor (R := R)).obj (op L)).obj M).X n)
-      (fun p : ℤ ↦ complexHomProjection L M n p (p + n) rfl))) :=
-  ⟨homComplexIsLimit L M n⟩
-
-private theorem complexHomProjection_d
-    (L M : CochainComplex (SheafOfModules.{u}
-      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ)
-    (n m p q q' p' : ℤ) (hnm : n + 1 = m)
-    (h : p + m = q) (h' : p + n = q') (h'' : p' + n = q) :
-    (((homComplexFunctor (R := R)).obj (op L)).obj M).d n m ≫
-        complexHomProjection L M m p q h =
-      complexHomProjection L M n p q' h' ≫
-        (Functor.uncurry.obj (homFunctor R)).map
-          (X := (op (L.X p), M.X q')) (Y := (op (L.X p), M.X q))
-          ((𝟙 _).op, M.d q' q) - n.negOnePow •
-      (complexHomProjection L M n p' q h'' ≫
-        (Functor.uncurry.obj (homFunctor R)).map
-          (X := (op (L.X p'), M.X q)) (Y := (op (L.X p), M.X q))
-          ((L.d p p').op, 𝟙 _)) := by
-  refine (homComplex_d_π L M n m p q q' p' hnm h h' h'').trans ?_
-  exact congrArg₂
-    (fun (f : homObj (R := R) (L.X p) (M.X q') ⟶ homObj (R := R) (L.X p) (M.X q))
-        (g : homObj (R := R) (L.X p') (M.X q) ⟶ homObj (R := R) (L.X p) (M.X q)) ↦
-      homComplexπ L M n p q' h' ≫ f -
-        n.negOnePow • (homComplexπ L M n p' q h'' ≫ g))
-    (comparisonHomMap (𝟙 (L.X p)) (M.d q' q)).symm
-    (comparisonHomMap (L.d p p') (𝟙 (M.X q))).symm
-
-private theorem complexHomProjection_map
-    {L L' M M' : CochainComplex (SheafOfModules.{u}
-      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ}
-    (f : L' ⟶ L) (g : M ⟶ M') (n p q : ℤ) (h : p + n = q) :
-    ((((homComplexFunctor (R := R)).map f.op).app M) ≫
-        ((homComplexFunctor (R := R)).obj (op L')).map g).f n ≫
-          complexHomProjection L' M' n p q h =
-      complexHomProjection L M n p q h ≫ (Functor.uncurry.obj (homFunctor R)).map
-        (X := (op (L.X p), M.X q)) (Y := (op (L'.X p), M'.X q))
-        ((f.f p).op, g.f q) := by
-  refine (homComplexFunctor_map_f_π f g n p q h).trans ?_
-  exact congrArg
-    (fun k : homObj (R := R) (L.X p) (M.X q) ⟶ homObj (R := R) (L'.X p) (M'.X q) ↦
-      homComplexπ L M n p q h ≫ k)
-    (comparisonHomMap (f.f p) (g.f q)).symm
-
-attribute [irreducible] complexHomProjection
-
--- Checking the concrete Hom-component types needs this heartbeat budget.
-end NormalizedComparison
-
--- The coefficient-action interface and its normalized comparison have dependent object types.
 end SheafOfModules

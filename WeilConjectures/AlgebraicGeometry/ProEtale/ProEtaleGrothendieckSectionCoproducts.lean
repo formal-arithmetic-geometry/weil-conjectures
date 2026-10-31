@@ -34,6 +34,9 @@ import Mathlib.Algebra.Homology.HomologicalComplexLimits
 
 /-! # Coproducts of Grothendieck-valued pro-etale sheaf sections on qcqs objects -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 universe u' u
@@ -47,8 +50,132 @@ set_option backward.isDefEq.respectTransparency false
 
 attribute [local instance] Over.ConstructProducts.over_finiteProducts_of_finiteWidePullbacks
 
+private theorem finite_affine_cover_refinement (X : Scheme.{u}) (W : X.ProEt)
+    [CompactSpace W.left] [QuasiSeparatedSpace W.left] (S : Sieve W) (hS : S ∈ topology X W) :
+    ∃ (I : Type (u + 1)) (_ : Finite I) (V : I → X.ProEt) (f : ∀ i, V i ⟶ W),
+      Sieve.ofArrows V f ∈ topology X W ∧ (∀ i, S (f i)) ∧ (∀ i, IsAffine (V i).left) := by
+  classical
+  have : (precoverage X).IsStableUnderComposition := by
+    dsimp [precoverage]
+    infer_instance
+  have : (precoverage X).HasIsos := by dsimp [precoverage]; infer_instance
+  have : (precoverage X).IsStableUnderBaseChange := by
+    dsimp [precoverage]
+    infer_instance
+  obtain ⟨T, hT, hTS⟩ :=
+    (precoverage X).mem_toGrothendieck_iff_of_isStableUnderComposition.mp hS
+  let E := T.preZeroHypercover
+  let F := ProEt.forget X ⋙ Over.forget X
+  let E' := E.map F
+  have hE' : E'.presieve₀ ∈ Scheme.proetalePrecoverage W.left := by
+    have he : E'.presieve₀ = Presieve.map F T := by
+      dsimp only [E']
+      rw [PreZeroHypercover.presieve₀_map]
+      exact congrArg (Presieve.map F) T.presieve₀_preZeroHypercover
+    rw [he]
+    exact hT
+  let U : W.left.Cover (Scheme.precoverage @WeaklyEtale) := ⟨E', hE'.2⟩
+  let : QuasiCompactCover U.toPreZeroHypercover :=
+    Scheme.presieve₀_mem_qcPrecoverage_iff.mp hE'.1
+  obtain ⟨A, r, hfin, _⟩ := QuasiCompactCover.exists_hom U
+  let := hfin
+  have : Finite A.cover.I₀ := hfin
+  have (i : A.cover.I₀) : QuasiCompact (A.cover.f i) := by
+    apply quasiCompact_of_compactSpace
+  have : QuasiCompactCover A.cover.toPreZeroHypercover := QuasiCompactCover.of_finite
+  have (i : A.I₀) : WeaklyEtale (A.f i) := A.cover.map_prop i
+  let V : A.I₀ → X.ProEt := fun i ↦ ProEt.mk (A.f i ≫ W.hom)
+  let f : ∀ i, V i ⟶ W := fun i ↦ MorphismProperty.Over.homMk (A.f i) (by rfl)
+  refine ⟨A.I₀, hfin, V, f, ?_, ?_, ?_⟩
+  · apply Precoverage.generate_mem_toGrothendieck
+    change Presieve.map F (Presieve.ofArrows V f) ∈ Scheme.proetalePrecoverage W.left
+    rw [Presieve.map_ofArrows]
+    change A.cover.presieve₀ ∈ Scheme.proetalePrecoverage W.left
+    exact ⟨Scheme.presieve₀_mem_qcPrecoverage_iff.mpr inferInstance, A.cover.mem₀⟩
+  · intro i
+    let e := r.s₀ i
+    let g : V i ⟶ E.X e := MorphismProperty.Over.homMk (r.h₀ i) (by
+      change r.h₀ i ≫ (E.X e).hom = A.f i ≫ W.hom
+      have he : r.h₀ i ≫ (E.f e).left = A.f i := r.w₀ i
+      rw [← he, Category.assoc]
+      congr 1
+      simp)
+    have hg : g ≫ E.f e = f i := by
+      apply (ProEt.forget X).map_injective
+      apply Over.OverMorphism.ext
+      exact r.w₀ i
+    rw [← hg]
+    exact S.downward_closed (hTS _ _ e.2) g
+  · intro i
+    change IsAffine (Spec (A.X i))
+    infer_instance
+
+private instance qcqs_full (X : Scheme.{u}) : (qcqsInclusion X).Full :=
+  inferInstanceAs (qcqsObjects X).ι.Full
+
+private instance qcqs_faithful (X : Scheme.{u}) : (qcqsInclusion X).Faithful :=
+  inferInstanceAs (qcqsObjects X).ι.Faithful
+
 private def qcqsTopology (X : Scheme.{u}) : GrothendieckTopology (Qcqs X) :=
   (qcqsInclusion X).restrictedTopology (topology X)
+
+private instance qcqs_coverDense (X : Scheme.{u}) :
+    (qcqsInclusion X).IsCoverDense (topology X) where
+  is_cover V := by
+    let C := V.left.affineOpenCover
+    let U (i : C.I₀) : X.ProEt := ProEt.mk (C.f i ≫ V.hom)
+    have (i : C.I₀) : IsAffine (U i).left := by
+      change IsAffine (Spec (C.X i))
+      infer_instance
+    let f (i : C.I₀) : U i ⟶ V := MorphismProperty.Over.homMk (C.f i)
+    have hcover : Sieve.ofArrows U f ∈ topology X V := by
+      apply Precoverage.generate_mem_toGrothendieck
+      change (Presieve.ofArrows U f).map (ProEt.forget X ⋙ Over.forget X) ∈
+        proetalePrecoverage V.left
+      rw [Presieve.map_ofArrows]
+      exact (zariskiPrecoverage_le_propQCPrecoverage (P := @WeaklyEtale)) _
+        C.openCover.mem₀
+    apply (topology X).superset_covering _ hcover
+    rw [Sieve.ofArrows, Sieve.generate_le_iff, Presieve.ofArrows_le_iff]
+    intro i
+    let T : Qcqs X := ⟨U i, inferInstance, inferInstance⟩
+    exact Presieve.in_coverByImage (qcqsInclusion X) (Y := T) (f i)
+
+private instance qcqs_finiteHypercovers (X : Scheme.{u}) :
+    (qcqsTopology X).finiteOneHypercover.{u, u + 1, u + 1}.IsGenerating where
+  le {T} S hS := by
+    obtain ⟨hp, P, hP, hlim, hscheme, hmap, hslice, hfinite, hadjoin⟩ := qcqs_site_limits X
+    let : HasPullbacks (Qcqs X) := hp
+    have hS' : S.functorPushforward (qcqsInclusion X) ∈ topology X T.obj :=
+      Functor.mem_restrictedTopology_iff.mp hS
+    let : CompactSpace T.obj.left := T.property.1
+    let : QuasiSeparatedSpace T.obj.left := T.property.2
+    obtain ⟨I, hI, V, f, hcov, hf, haff⟩ :=
+      finite_affine_cover_refinement X T.obj _ hS'
+    let : Finite I := hI
+    let W (i : I) : Qcqs X :=
+      have : IsAffine (V i).left := haff i
+      ⟨V i, inferInstance, inferInstance⟩
+    let g (i : I) : W i ⟶ T := (qcqsInclusion X).preimage (f i)
+    have hg (i : I) : S (g i) := by
+      apply (Sieve.mem_functorPushforward_iff_of_full_of_faithful
+        (qcqsInclusion X) S (g i)).1
+      simpa [g] using hf i
+    have hcover : Sieve.ofArrows W g ∈ qcqsTopology X T := by
+      apply Functor.mem_restrictedTopology_iff.mpr
+      rw [Sieve.functorPushforward_ofArrows]
+      simp only [g, Functor.map_preimage]
+      simpa only [W, qcqsInclusion, ObjectProperty.ι_obj] using hcov
+    let E₀ : PreZeroHypercover T := { I₀ := I, X := W, f := g }
+    let : E₀.Finite := ⟨hI⟩
+    let E : (qcqsTopology X).OneHypercover T :=
+      .mk' E₀.toPreOneHypercover hcover (by simp)
+    refine ⟨E, ?_, ?_⟩
+    · change E₀.toPreOneHypercover.Finite
+      infer_instance
+    · rw [PreZeroHypercover.sieve₀, Sieve.ofArrows, Sieve.generate_le_iff,
+        Presieve.ofArrows_le_iff]
+      exact hg
 
 /-- Sections on a qcqs pro-etale object commute with coproducts with coefficients in
 any Grothendieck abelian category. Source: Stacks Project, Tag 0738 and the qcqs

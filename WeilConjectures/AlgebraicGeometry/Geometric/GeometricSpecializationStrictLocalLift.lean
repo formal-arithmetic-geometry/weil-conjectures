@@ -30,6 +30,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
 import WeilConjectures.RingTheory.StrictHenselizationTriples
 import WeilConjectures.AlgebraicGeometry.EtalePointedMapRigidity
 import WeilConjectures.AlgebraicGeometry.StrictHenselizationMapExists
+import WeilConjectures.AlgebraicGeometry.Strict.Henselization.StrictHenselizationClosedFiberComparison
 import WeilConjectures.RingTheory.ProEtale.IndWeaklyEtale
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 import Mathlib.AlgebraicGeometry.PullbackCarrier
@@ -82,10 +83,21 @@ theorem exists_geometricPoint_strictHenselization_lift
   classical
   let : Algebra (S.residueField (barS (IsLocalRing.closedPoint Ωs))) Ωs :=
     (descResidueField (stalkClosedPointTo barS)).hom.toAlgebra
-  obtain ⟨hlocal, -, hclosed, -⟩ := strictHenselizationResidue barS rfl
+  obtain ⟨hlocal', -, hclosed', -⟩ := strictHenselizationResidue barS rfl
+  obtain ⟨hlocal, -⟩ := strictHenselizationLocalStructure barS
   let := hlocal
+  let := hlocal'
   let H := strictHenselizationRing barS
   let p := strictHenselizationStructuralMap barS
+  have hclosed : p (IsLocalRing.closedPoint H) = barS (IsLocalRing.closedPoint Ωs) := by
+    have h2 : (Spec.map (smallStrictHenselizationColimitIso barS).inv ≫
+        strictLocalizationToBase barS) (IsLocalRing.closedPoint H) =
+          barS (IsLocalRing.closedPoint Ωs) := by
+      rw [Scheme.Hom.comp_apply]
+      erw [@Spec_closedPoint _ _ hlocal' hlocal (smallStrictHenselizationColimitIso barS).inv
+        inferInstance]
+      exact hclosed'
+    rwa [smallStrictHenselizationColimitIso_toBase barS] at h2
   have hpclosed : p (IsLocalRing.closedPoint H) = s := hclosed.trans hbarS
   obtain ⟨R, i, hi, hs, -⟩ :=
     exists_affine_mem_range_and_range_subset (x := s) (U := ⊤) (by trivial)

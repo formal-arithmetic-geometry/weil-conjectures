@@ -244,7 +244,7 @@ private theorem scalar_tensor_ext
       g.val.app W (ts B _ _ W (ins A B c M W m) (ins A B c N W n))) : f = g := by
   apply CochainScalarConstruction.scalar_tensor_ext c M N H
   intro W m n
-  simpa only [ts, ins, ← pure_eq] using h W m n
+  exact h W m n
 
 private theorem ts_cast
     (M N : SheafOfModules.{u} (𝓡 A))

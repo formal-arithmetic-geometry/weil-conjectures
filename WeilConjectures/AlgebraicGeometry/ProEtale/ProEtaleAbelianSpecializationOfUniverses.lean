@@ -102,6 +102,11 @@ private noncomputable abbrev localizationRestrictionLowerStarAdjunction
     _root_.trivial).sheafPushforwardContinuous
       (ProEt.topology X) (ProEt.topology Y) (E := D)
 
+private instance abSmallColimits :
+    HasColimitsOfSize.{t + 1, t + 1} AddCommGrpCat.{max u (t + 1)} :=
+  hasColimitsOfSizeShrink.{t + 1, t + 1, max u (t + 1), max u (t + 1)} _
+
+-- A section of a surjective affine cover is obtained by lifting the Yoneda identity.
 private theorem split_affine_proetale_cover {X : Scheme.{t}} (V W : X.ProEt)
     [IsAffine V.left] [IsAffine W.left]
     (hV : ∀ (P Q : Sheaf (ProEt.topology X) (Type (max u (t + 1)))) (φ : P ⟶ Q),
@@ -569,6 +574,12 @@ private theorem isIso_precomposition_toSheafify {S T : Scheme.{t}}
       ((toSheafify (topology S) (v.op ⋙ H₀.obj)).app (op V)) :=
     ⟨precomposition_unit_injective v hcov H₀ V,
       precomposition_unit_surjective v adj H₀ V hV⟩
+  have : PreservesFilteredColimitsOfSize.{t + 1, t + 1}
+      (CategoryTheory.forget AddCommGrpCat.{max u (t + 1)}) :=
+    preservesFilteredColimitsOfSize_shrink.{t + 1, max u (t + 1), t + 1, max u (t + 1)} _
+  have : (topology S).PreservesSheafification
+      (CategoryTheory.forget AddCommGrpCat.{max u (t + 1)}) :=
+    GrothendieckTopology.instPreservesSheafification _ _
   let e := sheafifyComposeIso (topology S)
     (CategoryTheory.forget AddCommGrpCat.{max u (t + 1)}) (v.op ⋙ H.obj)
   have hfac := congrArg (fun φ ↦ φ.app (op V))

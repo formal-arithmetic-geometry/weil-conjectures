@@ -186,9 +186,7 @@ Source: `Padic.extension_integers_dvr`, proof step 1
 private theorem uniformizer_ne_zero (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] :
     Padic.coefficientExtensionUniformizer l E ≠ 0 := by
-  let h := (Padic.extension_integers_dvr l E
-    (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  let h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   have hm : Padic.coefficientExtensionMaximalIdeal l E ≠ ⊥ :=
     h.2.2.2.2.2.2.2.2.2.1
   have hgen : Ideal.span ({Padic.coefficientExtensionUniformizer l E} :

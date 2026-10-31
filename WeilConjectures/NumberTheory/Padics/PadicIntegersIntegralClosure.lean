@@ -90,10 +90,8 @@ theorem padic_integers_integralClosure
   let O := coefficientExtensionIntegers l E
   let T := coefficientExtensionIntegers l F
   let : Algebra O F := (i.toRingHom.comp O.subtype).toAlgebra
-  have hE := (extension_integers_dvr l E (coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
-  have hF := (extension_integers_dvr l F (coefficientExtensionAbsoluteValue l F)
-    (spectralNorm_extends (K := ℚ_[l]) (L := F))).choose_spec.choose_spec
+  have hE := (coefficientExtensionIntegers_dvr l E).choose_spec
+  have hF := (coefficientExtensionIntegers_dvr l F).choose_spec
   have hmemE (a : E) : a ∈ O ↔ spectralNorm ℚ_[l] E a ≤ 1 := hE.1 a
   have hmemF (a : F) : a ∈ T ↔ spectralNorm ℚ_[l] F a ≤ 1 := hF.1 a
   have hmap (a : E) : spectralNorm ℚ_[l] F (i a) = spectralNorm ℚ_[l] E a := by

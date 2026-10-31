@@ -334,8 +334,7 @@ private theorem coefficientTower_map (i j : ℕ) (hij : i ≤ j) :
 private theorem uniformizer_ne_zero : Padic.coefficientExtensionUniformizer l E ≠ 0 := by
   let A := Padic.coefficientExtensionIntegers l E
   let π := Padic.coefficientExtensionUniformizer l E
-  have h := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  have h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   let : IsDiscreteValuationRing A := h.2.2.2.2.2.2.2.1
   have hgen : Ideal.span ({π} : Set A) = Padic.coefficientExtensionMaximalIdeal l E :=
     h.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
@@ -382,14 +381,14 @@ theorem completedIntegralProjection_divisible
   let J := Scheme.ProEt.topology T
   let A := Padic.coefficientExtensionIntegers l E
   let π := Padic.coefficientExtensionUniformizer l E
-  let F : Type u ⥤ Type (max u (t + 1)) := uliftFunctor.{t + 1} ⋙ ct J U
+  let F : Type u ⥤ Type (max u (t + 1)) := uliftFunctor.{t + 1} ⋙ ct.{max u (t + 1)} J U
   have hF : PreservesFiniteLimits F := by
     dsimp [F, ct]
     infer_instance
   let B (k : ℕ) := CommRingCat.of (ULift.{t + 1} (A ⧸ Ideal.span {π} ^ (k + 1)))
   let p (k : ℕ) := (limit.π (integralCoefficientSheafSystem l E T) (op k)).hom.app U
   let xx (k : ℕ) : F.obj (A ⧸ Ideal.span {π} ^ (k + 1)) :=
-    (ce J (B k)).inv.app U (p k x)
+    (ce.{max u (t + 1)} J (B k)).inv.app U (p k x)
   have hxx (i j : ℕ) (hij : i ≤ j) :
       F.map (TypeCat.ofHom (Ideal.Quotient.factorPow (Ideal.span {π})
         (Nat.add_le_add_right hij 1))) (xx j) = xx i := by
