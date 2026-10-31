@@ -10587,6 +10587,7 @@ public import WeilConjectures.ConstructibleSheaf.ModuleConstantOfSetPullback
 public import WeilConjectures.ConstructibleSheaf.Monoidal
 public import WeilConjectures.ConstructibleSheaf.MonoidalParts
 public import WeilConjectures.ConstructibleSheaf.Noetherian
+public import WeilConjectures.ConstructibleSheaf.NoetherianObject
 public import WeilConjectures.ConstructibleSheaf.NormalGenericConstant
 public import WeilConjectures.ConstructibleSheaf.NormalOpenLowerStar
 public import WeilConjectures.ConstructibleSheaf.OfForget
