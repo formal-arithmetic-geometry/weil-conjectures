@@ -18,7 +18,8 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethClosure
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethSlice
 public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModelAut
 public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModelHom
-public import WeilConjectures.TraceFormula.Specialization.TraitSliceInvariants
+public import WeilConjectures.TraceFormula.Specialization.TraitSliceInvariantsProof
+public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethGlobal
 public import WeilConjectures.TraceFormula.Specialization.TraitChangeInvariance
 
 /-!
@@ -171,7 +172,15 @@ theorem exists_sum_autAction_pullbackExchange_sliceFst
     (hA : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X) A)
     {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y))}
-    (hB : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y) B) :
+    (hB : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y) B)
+    {eM : M.total ⟶ X} (heM : M.j ≫ eM = M.ε)
+    {BP : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology P.total) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) P.total))}
+    (hBP : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) P.total) BP)
+    (eBP : L((P.j)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj BP ≅
+      L((P.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj
+        (L((f₁)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A ⊗
+          L((f₂)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B)) :
     ∃ (n : ℕ) (τ : Fin n → GenericAut k' (traitSliceField k')), n ≠ 0 ∧
     ∃ (rM : (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧) ⋙
           (baseChange hM b hb (traitSlice (traitSliceCoord k'))
@@ -237,11 +246,13 @@ theorem exists_sum_autAction_pullbackExchange_sliceFst
         (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ P.ε _
           (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ f₂ B hB)))
   generalize hC : L((f₁)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A ⊗
-    L((f₂)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B = C at hPg ⊢
+    L((f₂)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B = C at hPg eBP ⊢
   have hDM := exists_subgroup_pullbackExchange_baseChangeHom_traitSlice (ℓ := ℓ) hM hb (A := A)
     (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ M.ε A hA)
+    (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ eM A hA)
+    ((leftDerivedUpperStarCompOfEq (Profinite.padicAlgClRingObj ℓ) heM).app A).symm
   have hDP := exists_subgroup_pullbackExchange_baseChangeHom_traitSlice (ℓ := ℓ) hP
-    (comp_coordinate_fst hb) (A := C) hPg
+    (comp_coordinate_fst hb) (A := C) hPg hBP eBP
   obtain ⟨VM, _, htM, rM, hrM, havgM⟩ := hDM
   obtain ⟨VP, _, htP, rP, hrP, havgP⟩ := hDP
   have : VM.FiniteIndex := Subgroup.finiteIndex_of_finite_quotient
@@ -284,7 +295,7 @@ theorem exists_sum_autAction_pullbackExchange_sliceFst
       (by exact_mod_proofs havgP)
     exact hP'
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 3200000 in
 -- the square of the Künneth maps of the slice is a large term
 include hM hN hpb hP hgen hb in
 /-- **The generic-slicing identification of the Künneth map** (blueprint
@@ -313,7 +324,8 @@ theorem isTensorRetract_map_kunnethMap_comp_pullbackExchange_sliceFst
     (hA : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X) A)
     {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y))}
-    (hB : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y) B) :
+    (hB : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y) B)
+    {eM : M.total ⟶ X} (heM : M.j ≫ eM = M.ε) {eN : N.total ⟶ Y} (heN : N.j ≫ eN = N.ε) :
     IsTensorRetract (map_kunnethMap_comp_pullbackExchange (Profinite.padicAlgClRingObj ℓ) φ₁ φ₂
       (sliceFst hM hP hb) (sliceSnd hN hpb hP hgen hb)
       (baseChangeHom hM b hb (traitSlice (traitSliceCoord k'))
@@ -329,8 +341,28 @@ theorem isTensorRetract_map_kunnethMap_comp_pullbackExchange_sliceFst
       (by simp : f₁ ≫ 𝟙 X = 𝟙 Z ≫ f₁) (Hom.baseChangeSpecial_comp hM hP _ _ _ _ φ₁ _ _ _)
       (by simp : f₂ ≫ 𝟙 Y = 𝟙 Z ≫ f₂) (Hom.baseChangeSpecial_comp hN hP _ _ _ _ φ₂ _ _ _)
       A B) := by
+  have htensor : ∀ C D : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology P.total) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) P.total)),
+      boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) P.total) C →
+        boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) P.total) D →
+          boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) P.total)
+            (C ⊗ D) := by
+    have := hP.locallyOfFiniteType
+    have := hP.quasiCompact
+    have : IsLocallyNoetherian P.total := LocallyOfFiniteType.isLocallyNoetherian (φ₁.total ≫ qM)
+    have : CompactSpace P.total := QuasiCompact.compactSpace_of_compactSpace (φ₁.total ≫ qM)
+    have : IsNoetherian P.total := {}
+    exact fun C D hC hD ↦
+      boundedConstructible_tensorObj (tensorHypotheses_padicAlgClRingObj ℓ).lisseTensorHypotheses
+        hC hD
+  obtain ⟨C₀, hC₀, ⟨e⟩⟩ := exists_boundedConstructible_tensor_iso (Profinite.padicAlgClRingObj ℓ)
+    φ₁ φ₂ heM heN hA hB htensor
   obtain ⟨n, τ, hn, rM, rP, hrM, havgM, hrP, havgP⟩ :=
-    exists_sum_autAction_pullbackExchange_sliceFst hM hP hb hA hB
+    exists_sum_autAction_pullbackExchange_sliceFst hM hP hb hA hB heM hC₀
+      ((Functor.Monoidal.μIso L((P.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧) _ _).symm ≪≫
+        (((pullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) φ₁.commSq_ε).app A).symm ⊗ᵢ
+          ((pullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) φ₂.commSq_ε).app B).symm) ≪≫
+            e).symm
   have hN' := isIso_pullbackExchange_baseChangeHom_traitMap_of_generic
     (K := traitSliceField k') hN
     (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ N.ε B hB)
@@ -381,6 +413,7 @@ theorem isIso_map_kunnethMap_of_isIso_sliceFst
     {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y))}
     (hB : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y) B)
+    {eM : M.total ⟶ X} (heM : M.j ≫ eM = M.ε) {eN : N.total ⟶ Y} (heN : N.j ≫ eN = N.ε)
     (h : IsIso (kunnethMap (Profinite.padicAlgClRingObj ℓ) (sliceFst hM hP hb)
       (sliceSnd hN hpb hP hgen hb) A B)) :
     IsIso (L((baseChangeSpecialMap hP (φ₁.total ≫ b) (comp_coordinate_fst hb)
@@ -396,7 +429,8 @@ theorem isIso_map_kunnethMap_of_isIso_sliceFst
     (K := traitSliceField k') hN
     (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ N.ε B hB)
   have hT :=
-    isTensorRetract_map_kunnethMap_comp_pullbackExchange_sliceFst hM hN hpb hP hgen hb hA hB
+    isTensorRetract_map_kunnethMap_comp_pullbackExchange_sliceFst hM hN hpb hP hgen hb hA hB heM
+      heN
   exact isIso_map_kunnethMap_of_isTensorRetract (Profinite.padicAlgClRingObj ℓ) φ₁ φ₂
     (sliceFst hM hP hb) (sliceSnd hN hpb hP hgen hb)
     (baseChangeHom hM b hb (traitSlice (traitSliceCoord k'))
@@ -435,7 +469,7 @@ theorem isIso_map_kunnethMap_baseChangeSpecialMap_fst {n : ℕ}
         (traitSlice (traitSliceCoord k')) (traitSlice_over (traitSliceCoord k')))^*⟦
           Profinite.padicAlgClRingObj ℓ⟧).map
       (kunnethMap (Profinite.padicAlgClRingObj ℓ) φ₁ φ₂ A B)) := by
-  refine isIso_map_kunnethMap_of_isIso_sliceFst hM hN hpb hP hgen hb hA hB ?_
+  refine isIso_map_kunnethMap_of_isIso_sliceFst hM hN hpb hP hgen hb hA hB heM heN ?_
   have hP'' := IsTraitModelOver.baseChange hP (φ₁.total ≫ b) (comp_coordinate_fst hb)
     (traitSlice (traitSliceCoord k')) (traitSlice_over (traitSliceCoord k'))
   refine hIH (sliceFst hM hP hb) (sliceSnd hN hpb hP hgen hb)
