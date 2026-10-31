@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModelAutGroup
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorShift
-public import WeilConjectures.SixFunctors.NearbyCycles.ActionTrivialModEll
+public import WeilConjectures.CategoryTheory.Preadditive.ActionTrivialModEll
 public import WeilConjectures.Mathlib.Topology.Algebra.Group.PowSurjective
 
 /-!
@@ -15,11 +15,14 @@ public import WeilConjectures.Mathlib.Topology.Algebra.Group.PowSurjective
 # Generic automorphisms acting trivially modulo `ℓ`
 
 Let `M''` be a base change model of a trait model `M` and `P'` the group of generic automorphisms
-(`NearbyCyclesModel.GenericAut`) acting on `Ψ_{M''}` (`NearbyCyclesModel.baseChangeAut`). For a
-complex `A` killed by `ℓ ^ m` (e.g. with `𝒪_E / ℓ ^ m`-coefficients) and its reduction
-`A ⟶ Z` modulo `ℓ`, the cone of `ℓ • 𝟙 A`: if every element of `P'` is an `ℓ ^ m`-th power (`P'`
-is pro-`p`, `p ≠ ℓ`, `exists_pow_eq_of_forall_nhds_one`), then a normal subgroup `V` of finite
-index of `P'` acting trivially on `Ψ_{M''} Z` acts trivially on `Ψ_{M''} A`
+(`NearbyCyclesModel.GenericAut`) acting on `Ψ_{M''}` (`NearbyCyclesModel.baseChangeAut`). Let
+`A ⟶ Z` be the reduction of a complex `A` modulo `ℓ`, the cone of `ℓ • 𝟙 A`, and suppose every
+element of `P'` is an `ℓ ^ m`-th power for every `m` (`P'` is pro-`p`, `p ≠ ℓ`,
+`NearbyCyclesModel.GenericAut.exists_pow_ell_pow_eq`). Then a normal subgroup `V` of finite index
+of `P'` acting trivially on `Ψ_{M''} Z` acts trivially on `Ψ_{M''} A`, provided no nonzero
+endomorphism of `Ψ_{M''} A` is divisible by every power of `ℓ`, e.g. with `𝒪_E`-coefficients
+(`NearbyCyclesModel.autAction_baseChangeAut_eq_id_of_distinguished_of_separated`). This holds
+in particular for `A` killed by `ℓ ^ m`, e.g. with `𝒪_E / ℓ ^ m`-coefficients
 (`NearbyCyclesModel.autAction_baseChangeAut_eq_id_of_distinguished`).
 
 This is the step of the finiteness of the action of `P'` on `ℚ̄_ℓ`-nearby cycles (SGA 4½,
@@ -67,40 +70,66 @@ lemma baseChangeAutActionHom_apply
     baseChangeAutActionHom hM b hb v hv Λ A σ = (baseChangeAut hM b hb v hv σ).autAction Λ A :=
   rfl
 
-/-- **Generic automorphisms trivial modulo `ℓ` are trivial**: let `A` be killed by `ℓ ^ m`,
-`A --ℓ--> A ⟶ Z ⟶ A⟦1⟧` a distinguished triangle, and suppose every generic automorphism is an
-`ℓ ^ m`-th power. Then every element of a normal subgroup `V` of finite index acting trivially on
-`Ψ_{M''} Z` acts trivially on `Ψ_{M''} A`. -/
-theorem autAction_baseChangeAut_eq_id_of_distinguished {ℓ m : ℕ}
+/-- **Generic automorphisms trivial modulo `ℓ` are trivial, integral case**: let `A` be such that
+no nonzero endomorphism of `Ψ_{M''} A` is divisible by every power of `ℓ` (e.g. with
+`𝒪_E`-coefficients), and suppose every generic automorphism is an `ℓ ^ m`-th power for every `m`.
+Let `V` be a normal subgroup of finite index acting trivially on `Ψ_{M''} Z`, for a distinguished
+triangle
+```
+      ℓ        π        δ
+  A ────▶ A ────▶ Z ────▶ A⟦1⟧
+```
+By naturality of the action, every `σ ∈ V` makes the square
+```
+             σ
+  Ψ A ─────────▶ Ψ A
+   │              │
+   │ Ψ π          │ Ψ π
+   ▼              ▼
+  Ψ Z ─────────▶ Ψ Z
+         σ = id
+```
+commute, so `σ` acts trivially on `Ψ_{M''} A` (`End.eq_one_of_distinguished_of_separated`). -/
+theorem autAction_baseChangeAut_eq_id_of_distinguished_of_separated {ℓ : ℕ}
     {A Z : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X))} (π : A ⟶ Z) (δ : Z ⟶ A⟦(1 : ℤ)⟧)
-    (hT : Triangle.mk (ℓ • 𝟙 A) π δ ∈ distTriang _) (hℓ : (ℓ ^ m) • 𝟙 A = 0)
-    (hdiv : ∀ σ : GenericAut k' K, ∃ τ, τ ^ ℓ ^ m = σ) (V : Subgroup (GenericAut k' K))
+    (hT : Triangle.mk (ℓ • 𝟙 A) π δ ∈ distTriang _)
+    (hsep : ∀ f : End (((baseChange hM b hb v hv).nearbyCycles Λ).obj A),
+      (∀ m : ℕ, ∃ g : End (((baseChange hM b hb v hv).nearbyCycles Λ).obj A),
+        f = (ℓ ^ m) • g) → f = 0)
+    (hdiv : ∀ (m : ℕ) (σ : GenericAut k' K), ∃ τ, τ ^ ℓ ^ m = σ) (V : Subgroup (GenericAut k' K))
     [V.Normal] [V.FiniteIndex]
     (hV : ∀ σ ∈ V, (baseChangeAut hM b hb v hv σ).autAction Λ Z = 𝟙 _) {σ : GenericAut k' K}
     (hσ : σ ∈ V) : (baseChangeAut hM b hb v hv σ).autAction Λ A = 𝟙 _ := by
   let Ψ := (baseChange hM b hb v hv).nearbyCycles Λ
-  have hT' := Ψ.map_distinguished _ hT
+  have hdivV : ∀ (m : ℕ) (τ : V), ∃ τ' : V, τ' ^ ℓ ^ m = τ := fun m τ ↦ by
+    obtain ⟨τ', hτ', h⟩ := V.exists_mem_pow_eq_of_forall_exists_pow (hdiv m) τ.2
+    exact ⟨⟨τ', hτ'⟩, Subtype.ext (by rwa [Subgroup.coe_pow])⟩
+  have hT' : Triangle.mk (Ψ.map (ℓ • 𝟙 A)) (Ψ.map π) _ ∈ distTriang _ := Ψ.map_distinguished _ hT
+  have key := End.eq_one_of_distinguished_of_separated (Ψ.map π) _ hT'
+    (by simp) hsep
+    ((baseChangeAutActionHom hM b hb v hv Λ A).comp V.subtype)
+    (fun τ ↦ (Hom.autAction_naturality _ _ π).trans
+      (by rw [Subgroup.coe_subtype, hV _ τ.2, Category.comp_id])) hdivV ⟨σ, hσ⟩
+  rwa [MonoidHom.comp_apply, baseChangeAutActionHom_apply, End.one_def] at key
+
+/-- **Generic automorphisms trivial modulo `ℓ` are trivial, torsion case**: the same as
+`autAction_baseChangeAut_eq_id_of_distinguished_of_separated` for `A` killed by `ℓ ^ m`, for
+which no nonzero endomorphism of `Ψ_{M''} A` is divisible by `ℓ ^ m`. -/
+theorem autAction_baseChangeAut_eq_id_of_distinguished {ℓ m : ℕ}
+    {A Z : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))} (π : A ⟶ Z) (δ : Z ⟶ A⟦(1 : ℤ)⟧)
+    (hT : Triangle.mk (ℓ • 𝟙 A) π δ ∈ distTriang _) (hℓ : (ℓ ^ m) • 𝟙 A = 0)
+    (hdiv : ∀ (m : ℕ) (σ : GenericAut k' K), ∃ τ, τ ^ ℓ ^ m = σ) (V : Subgroup (GenericAut k' K))
+    [V.Normal] [V.FiniteIndex]
+    (hV : ∀ σ ∈ V, (baseChangeAut hM b hb v hv σ).autAction Λ Z = 𝟙 _) {σ : GenericAut k' K}
+    (hσ : σ ∈ V) : (baseChangeAut hM b hb v hv σ).autAction Λ A = 𝟙 _ := by
+  let Ψ := (baseChange hM b hb v hv).nearbyCycles Λ
   have hℓ' : (ℓ ^ m) • 𝟙 (Ψ.obj A) = 0 := by
     rw [← Ψ.map_id, ← Functor.map_nsmul, hℓ, Functor.map_zero]
-  let ρ := (baseChangeAutActionHom hM b hb v hv Λ A).comp V.subtype
-  have hρ : ∀ τ : V, ρ τ ≫ Ψ.map π = Ψ.map π := fun τ ↦
-    (Hom.autAction_naturality _ _ π).trans
-      (by rw [Subgroup.coe_subtype, hV _ τ.2, Category.comp_id])
-  have hπ : ∀ f : End (Ψ.obj A), f ≫ Ψ.map π = 0 → ∃ g : End (Ψ.obj A), f = ℓ • g := by
-    intro f hf
-    obtain ⟨g, hg⟩ := Triangle.coyoneda_exact₂ _ hT' f hf
-    let g' : Ψ.obj A ⟶ Ψ.obj A := g
-    have hg' : f = g' ≫ Ψ.map (ℓ • 𝟙 A) := hg
-    rw [Functor.map_nsmul, CategoryTheory.Functor.map_id, Preadditive.comp_nsmul,
-      Category.comp_id] at hg'
-    exact ⟨g', hg'⟩
-  have hdivV : ∀ τ : V, ∃ τ' : V, τ' ^ ℓ ^ m = τ := fun τ ↦ by
-    obtain ⟨τ', hτ', h⟩ := V.exists_mem_pow_eq_of_forall_exists_pow hdiv τ.2
-    exact ⟨⟨τ', hτ'⟩, Subtype.ext (by rw [Subgroup.coe_pow]; exact h)⟩
-  have key := @CategoryTheory.MonoidHom.eq_one_of_comp_eq_of_forall_exists_pow _ _ _ (Ψ.obj A)
-    (Ψ.obj Z) (Ψ.map π) ℓ m hℓ' hπ V _ ρ hρ hdivV ⟨σ, hσ⟩
-  rw [MonoidHom.comp_apply, baseChangeAutActionHom_apply, End.one_def] at key
-  exact key
+  refine autAction_baseChangeAut_eq_id_of_distinguished_of_separated hM b hb v hv Λ π δ hT
+    (fun f hf ↦ ?_) hdiv V hV hσ
+  obtain ⟨g, rfl⟩ := hf m
+  rw [← Category.id_comp g, ← Preadditive.nsmul_comp, hℓ', zero_comp]
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel

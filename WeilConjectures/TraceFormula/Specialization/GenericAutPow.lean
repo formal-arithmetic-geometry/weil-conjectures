@@ -7,27 +7,33 @@ module
 
 public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModelAutGalois
 public import WeilConjectures.TraceFormula.Specialization.TraitSliceGaloisTameSylow
-public import WeilConjectures.FieldTheory.Galois.PowSurjective
+public import WeilConjectures.Mathlib.FieldTheory.Galois.Profinite
+public import WeilConjectures.Mathlib.FieldTheory.PurelyInseparable.Basic
 
 /-!
 
 # The pro-`p` kernel `P'` is divisible by integers prime to `p`
 
 Let `F = k'((t))`, `F_K = K((t))` with `K` algebraically closed, `Ω_K = F_K^alg`,
-`L' = F_K·F^sep ⊆ Ω_K` (`AlgebraicGeometry.traitGenericSepCompositum`) and `S = L'^sep ⊆ Ω_K`.
-Every finite Galois extension of `L'` has `p`-power degree
-(`AlgebraicGeometry.isPGroup_traitGenericSepCompositum_of_dvd`), so every element of
-`Gal(S / L')` is an `n`-th power for `p ∤ n`
-(`AlgebraicGeometry.exists_pow_eq_separableClosure_traitGenericSepCompositum`).
+`L' = F_K·F^sep ⊆ Ω_K` (`AlgebraicGeometry.traitGenericSepCompositum`) and `L'^sep ⊆ Ω_K` the
+separable closure of `L'` in `Ω_K`.
 
 The group `P'` of generic automorphisms (`NearbyCyclesModel.GenericAut`), the automorphisms of
-`Ω_K` over `F_K` fixing the image of `Ω = F^alg`, maps bijectively onto `Gal(S / L')`: an
-automorphism of `Ω_K` is determined by its restriction to `S`, as `Ω_K / S` is purely
-inseparable, and every automorphism of `S` over `L'` extends to `Ω_K` and then fixes `Ω`, which is
-purely inseparable over `F^sep`. Hence every generic automorphism is an `n`-th power for `p ∤ n`
-(`NearbyCyclesModel.GenericAut.exists_pow_eq`). This is the divisibility of `P'` by powers of
-`ℓ ≠ p` used for the finiteness of its action on `ℚ̄_ℓ`-nearby cycles (SGA 4½, [Th. finitude],
-§3.7; `NearbyCyclesModel.autAction_baseChangeAut_eq_id_of_distinguished`).
+`Ω_K` over `F_K` fixing the image of `Ω = F^alg`, is the absolute Galois group of `L'`
+(`NearbyCyclesModel.GenericAut.mulEquivGal`):
+
+* `P'` is the automorphism group of `Ω_K / L'`
+  (`NearbyCyclesModel.GenericAut.mulEquivAlgEquiv`): an automorphism of `Ω_K` over `L'` fixes
+  `Ω`, which is purely inseparable over `F^sep`;
+* restriction `Aut(Ω_K / L') → Gal(L'^sep / L')` is bijective, as `Ω_K / L'^sep` is purely
+  inseparable (`separableClosure.autMulEquiv`).
+
+Every finite Galois extension of `L'` has `p`-power degree
+(`AlgebraicGeometry.isPGroup_traitGenericSepCompositum_of_dvd`), so every element of `P'` is an
+`n`-th power for `n` invertible in `k'` (`NearbyCyclesModel.GenericAut.exists_pow_eq`). This is
+the divisibility of `P'` by powers of `ℓ ≠ p` used for the finiteness of its action on
+`ℚ̄_ℓ`-nearby cycles (SGA 4½, [Th. finitude], §3.7;
+`NearbyCyclesModel.autAction_baseChangeAut_eq_id_of_distinguished_of_separated`).
 
 -/
 
@@ -39,23 +45,39 @@ open IntermediateField
 
 namespace AlgebraicGeometry
 
-variable {k' : Type u} [Field k'] {K : Type u} [Field K] [Algebra k' K] [IsAlgClosed K]
+variable {k' : Type u} [Field k'] {K : Type u} [Field K] [Algebra k' K]
 
-/-- **`n`-th roots in `Gal(L'^sep / L')`**: every element of the Galois group of the separable
-closure of `L' = F_K·F^sep` in `Ω_K` is an `n`-th power, for `n` prime to the characteristic
-exponent `p`. -/
-theorem exists_pow_eq_separableClosure_traitGenericSepCompositum {p : ℕ} (hp : p.Prime)
-    (hpk : ∀ n : ℕ, (n : k') = 0 → p ∣ n) {n : ℕ} (hn : ¬ p ∣ n)
-    (σ : Gal(separableClosure (traitGenericSepCompositum k' K) (traitGenericField K) /
-      traitGenericSepCompositum k' K)) : ∃ τ, τ ^ n = σ := by
+/-- `Ω_K` is normal over `L' = F_K·F^sep`. -/
+instance : Normal (traitGenericSepCompositum k' K) (traitGenericField K) :=
+  Normal.tower_top_of_normal (FractionRing (PowerSeries K)) _ _
+
+/-- **The finite Galois extensions of `L'` have degree prime to `n`**, for `n` invertible in
+`k'`: their degree is a power of the characteristic of `k'`, and is `1` in characteristic `0`. -/
+theorem coprime_finrank_traitGenericSepCompositum [IsAlgClosed K] {n : ℕ} (hn : (n : k') ≠ 0)
+    (M : IntermediateField (traitGenericSepCompositum k' K) (traitGenericField K))
+    [FiniteDimensional (traitGenericSepCompositum k' K) M]
+    [IsGalois (traitGenericSepCompositum k' K) M] :
+    (Module.finrank (traitGenericSepCompositum k' K) M).Coprime n := by
+  -- a prime `p` with `p ∤ n` such that `M` has `p`-power degree: the characteristic of `k'` if it
+  -- is positive, and any prime `p > n` in characteristic `0`
+  obtain ⟨p, hp, hpk, hpn⟩ : ∃ p : ℕ, p.Prime ∧ (∀ m : ℕ, (m : k') = 0 → p ∣ m) ∧ ¬ p ∣ n := by
+    rcases CharP.char_is_prime_or_zero k' (ringChar k') with h | h
+    · exact ⟨ringChar k', h, fun m hm ↦ (ringChar.spec k' m).1 hm,
+        fun hd ↦ hn ((ringChar.spec k' n).2 hd)⟩
+    · have hn₀ : n ≠ 0 := by
+        rintro rfl
+        exact hn Nat.cast_zero
+      obtain ⟨p, hnp, hp⟩ := Nat.exists_infinite_primes (n + 1)
+      refine ⟨p, hp, fun m hm ↦ ?_, fun hd ↦ ?_⟩
+      · have hm₀ := (ringChar.spec k' m).1 hm
+        rw [h, zero_dvd_iff] at hm₀
+        exact hm₀ ▸ dvd_zero p
+      · have := Nat.le_of_dvd (Nat.pos_of_ne_zero hn₀) hd
+        omega
   have := Fact.mk hp
-  have : Normal (FractionRing (PowerSeries K)) (traitGenericField K) := inferInstance
-  have : Normal (traitGenericSepCompositum k' K) (traitGenericField K) :=
-    Normal.tower_top_of_normal (FractionRing (PowerSeries K)) _ _
-  refine IsGalois.exists_pow_eq_separableClosure (fun M _ _ ↦ ?_) σ
   obtain ⟨k, hk⟩ := IsPGroup.iff_card.mp (isPGroup_traitGenericSepCompositum_of_dvd hp hpk M)
   rw [← IsGalois.card_aut_eq_finrank, hk]
-  exact Nat.Coprime.pow_left _ ((Nat.Prime.coprime_iff_not_dvd hp).2 hn)
+  exact Nat.Coprime.pow_left _ ((Nat.Prime.coprime_iff_not_dvd hp).2 hpn)
 
 end AlgebraicGeometry
 
@@ -76,66 +98,68 @@ lemma toAlgEquiv_apply_of_mem_traitGenericSepCompositum (σ : GenericAut k' K)
   | inv x _ hx => rw [map_inv₀, hx]
   | mul x y _ _ hx hy => rw [map_mul, hx, hy]
 
-/-- `n`-th powers of the restrictions of scalars of an automorphism. -/
-lemma _root_.AlgEquiv.restrictScalars_pow_apply {R A B : Type*} [CommSemiring R] [CommSemiring A]
-    [Semiring B] [Algebra R A] [Algebra A B] [Algebra R B] [IsScalarTower R A B] (f : B ≃ₐ[A] B)
-    (n : ℕ) (z : B) : ((f.restrictScalars R) ^ n) z = (f ^ n) z := by
-  induction n with
-  | zero => rfl
-  | succ n ih => rw [pow_succ', pow_succ', AlgEquiv.mul_apply, AlgEquiv.mul_apply, ih]; rfl
+/-- Automorphisms of `Ω_K` over `L' = F_K·F^sep` fix the image of `Ω`: the two embeddings
+`Ω → Ω_K` agree on `F^sep`, over which `Ω` is purely inseparable. -/
+lemma algEquiv_traitGenericFieldMap
+    (e : traitGenericField K ≃ₐ[traitGenericSepCompositum k' K] traitGenericField K)
+    (y : traitGenericField k') : e (traitGenericFieldMap k' K y) = traitGenericFieldMap k' K y := by
+  let S := separableClosure (FractionRing (PowerSeries k')) (traitGenericField k')
+  have h : ((e : traitGenericField K →+* traitGenericField K).comp
+      (traitGenericFieldMap k' K)).comp (algebraMap S (traitGenericField k')) =
+      (traitGenericFieldMap k' K).comp (algebraMap S (traitGenericField k')) := by
+    ext s
+    exact e.commutes ⟨_, subset_adjoin _ _ ⟨s, s.2, rfl⟩⟩
+  exact RingHom.congr_fun
+    (IsPurelyInseparable.injective_comp_algebraMap S (traitGenericField k') _ h) y
+
+/-- A generic automorphism as an automorphism of `Ω_K` over `L' = F_K·F^sep`. -/
+noncomputable def toAlgEquivTraitGenericSepCompositum (σ : GenericAut k' K) :
+    traitGenericField K ≃ₐ[traitGenericSepCompositum k' K] traitGenericField K where
+  toRingEquiv := (toAlgEquiv σ).toRingEquiv
+  commutes' x := toAlgEquiv_apply_of_mem_traitGenericSepCompositum σ x.2
+
+@[simp]
+lemma toAlgEquivTraitGenericSepCompositum_apply (σ : GenericAut k' K)
+    (x : traitGenericField K) : toAlgEquivTraitGenericSepCompositum σ x = toAlgEquiv σ x :=
+  rfl
+
+/-- **`P'` is the automorphism group of `Ω_K` over `L' = F_K·F^sep`.** -/
+noncomputable def mulEquivAlgEquiv : GenericAut k' K ≃*
+    (traitGenericField K ≃ₐ[traitGenericSepCompositum k' K] traitGenericField K) where
+  toFun := toAlgEquivTraitGenericSepCompositum
+  invFun e := ofAlgEquiv (e.restrictScalars (FractionRing (PowerSeries K)))
+    (algEquiv_traitGenericFieldMap e)
+  left_inv σ := toAlgEquiv_injective <| AlgEquiv.ext fun x ↦ by
+    rw [toAlgEquiv_ofAlgEquiv, AlgEquiv.restrictScalars_apply,
+      toAlgEquivTraitGenericSepCompositum_apply]
+  right_inv e := AlgEquiv.ext fun x ↦ by
+    rw [toAlgEquivTraitGenericSepCompositum_apply, toAlgEquiv_ofAlgEquiv,
+      AlgEquiv.restrictScalars_apply]
+  map_mul' σ τ := AlgEquiv.ext fun x ↦ by
+    rw [AlgEquiv.mul_apply, toAlgEquivTraitGenericSepCompositum_apply,
+      toAlgEquivTraitGenericSepCompositum_apply, toAlgEquivTraitGenericSepCompositum_apply,
+      map_mul, AlgEquiv.mul_apply]
+
+/-- **`P'` is the absolute Galois group of `L' = F_K·F^sep`**: restriction to the separable
+closure `L'^sep` of `L'` in `Ω_K` identifies `P'` with `Gal(L'^sep / L')`. -/
+noncomputable def mulEquivGal : GenericAut k' K ≃*
+    Gal(separableClosure (traitGenericSepCompositum k' K) (traitGenericField K) /
+      traitGenericSepCompositum k' K) :=
+  mulEquivAlgEquiv.trans (separableClosure.autMulEquiv _ _)
 
 variable [IsAlgClosed K]
 
 /-- **The pro-`p` kernel `P'` is divisible by integers prime to `p`**: every generic
-automorphism is an `n`-th power for `n` prime to the characteristic exponent `p`. -/
-theorem exists_pow_eq {p : ℕ} (hp : p.Prime) (hpk : ∀ n : ℕ, (n : k') = 0 → p ∣ n) {n : ℕ}
-    (hn : ¬ p ∣ n) (σ : GenericAut k' K) : ∃ τ, τ ^ n = σ := by
-  let L' := traitGenericSepCompositum k' K
-  have : Normal (FractionRing (PowerSeries K)) (traitGenericField K) := inferInstance
-  have : Normal L' (traitGenericField K) :=
-    Normal.tower_top_of_normal (FractionRing (PowerSeries K)) _ _
-  have : Algebra.IsAlgebraic L' (traitGenericField K) :=
-    Algebra.IsAlgebraic.tower_top (K := FractionRing (PowerSeries K)) L'
-  let S := separableClosure L' (traitGenericField K)
-  let e : traitGenericField K ≃ₐ[L'] traitGenericField K :=
-    { toRingEquiv := (toAlgEquiv σ).toRingEquiv
-      commutes' := fun x ↦ toAlgEquiv_apply_of_mem_traitGenericSepCompositum σ x.2 }
-  obtain ⟨h, hh⟩ := exists_pow_eq_separableClosure_traitGenericSepCompositum hp hpk hn
-    (e.restrictNormal S)
-  let h' : traitGenericField K ≃ₐ[L'] traitGenericField K := h.liftNormal _
-  have hres : (h' ^ n).restrictNormal S = e.restrictNormal S := by
-    have h₁ : AlgEquiv.restrictNormalHom S (h' ^ n) = (AlgEquiv.restrictNormalHom S h') ^ n :=
-      map_pow _ _ _
-    have h₂ : AlgEquiv.restrictNormalHom S h' = h := h.restrict_liftNormal (traitGenericField K)
-    exact h₁.trans (by rw [h₂, hh])
-  have hh' : h' ^ n = e := by
-    refine AlgEquiv.ext_of_isPurelyInseparable S (fun s hs ↦ ?_)
-    have h₁ := AlgEquiv.restrictNormal_commutes (h' ^ n) S ⟨s, hs⟩
-    have h₂ := AlgEquiv.restrictNormal_commutes e S ⟨s, hs⟩
-    rw [hres] at h₁
-    exact h₁.symm.trans h₂
-  let q := ringExpChar (traitGenericField K)
-  have : ExpChar (traitGenericField k') q :=
-    (traitGenericFieldMap k' K).expChar (traitGenericFieldMap k' K).injective q
-  have : ExpChar (separableClosure (FractionRing (PowerSeries k')) (traitGenericField k')) q :=
-    (algebraMap _ (traitGenericField k')).expChar Subtype.val_injective q
-  have hfix : ∀ y, (h'.restrictScalars (FractionRing (PowerSeries K)))
-      (traitGenericFieldMap k' K y) = traitGenericFieldMap k' K y := by
-    intro y
-    obtain ⟨m, s, hs⟩ := IsPurelyInseparable.pow_mem
-      (separableClosure (FractionRing (PowerSeries k')) (traitGenericField k')) q y
-    have hmem : traitGenericFieldMap k' K (y ^ q ^ m) ∈ L' := by
-      rw [← hs]
-      exact subset_adjoin _ _ ⟨s, s.2, rfl⟩
-    have h₁ : h' (traitGenericFieldMap k' K (y ^ q ^ m)) =
-        traitGenericFieldMap k' K (y ^ q ^ m) :=
-      h'.commutes ⟨_, hmem⟩
-    rw [map_pow, map_pow] at h₁
-    exact iterateFrobenius_inj (traitGenericField K) q m h₁
-  refine ⟨ofAlgEquiv _ hfix, toAlgEquiv_injective ?_⟩
-  rw [map_pow, toAlgEquiv_ofAlgEquiv]
-  refine AlgEquiv.ext fun z ↦ ?_
-  rw [AlgEquiv.restrictScalars_pow_apply, hh']
-  rfl
+automorphism is an `n`-th power for `n` invertible in `k'`. -/
+theorem exists_pow_eq {n : ℕ} (hn : (n : k') ≠ 0) (σ : GenericAut k' K) : ∃ τ, τ ^ n = σ := by
+  obtain ⟨τ, hτ⟩ := IsGalois.exists_pow_eq_separableClosure (F := traitGenericSepCompositum k' K)
+    (E := traitGenericField K) (fun M _ _ ↦ coprime_finrank_traitGenericSepCompositum hn M)
+    (mulEquivGal σ)
+  exact ⟨mulEquivGal.symm τ, by rw [← map_pow, hτ, MulEquiv.symm_apply_apply]⟩
+
+/-- Every generic automorphism is an `ℓ ^ m`-th power, for `ℓ` invertible in `k'`. -/
+theorem exists_pow_ell_pow_eq {ℓ : ℕ} (hℓ : (ℓ : k') ≠ 0) (m : ℕ) (σ : GenericAut k' K) :
+    ∃ τ, τ ^ ℓ ^ m = σ :=
+  exists_pow_eq (by simpa using pow_ne_zero m hℓ) σ
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel.GenericAut

@@ -187,3 +187,33 @@ theorem isPurelyInseparable_iff_exists_algebraMap_eq_pow :
   isPurelyInseparable_iff_pow_mem F q
 
 end PowMem
+
+section SeparableClosure
+
+variable (F E : Type*) [Field F] [Field E] [Algebra F E] [Normal F E]
+
+/-- In a normal extension `E / F`, restriction to the separable closure `F^sep` of `F` in `E` is
+a bijection `Aut(E / F) → Gal(F^sep / F)`: automorphisms of `F^sep` extend to `E` as `E / F` is
+normal, and uniquely as `E / F^sep` is purely inseparable. -/
+theorem separableClosure.restrictNormalHom_bijective :
+    Function.Bijective (AlgEquiv.restrictNormalHom (F := F) (K₁ := E) (separableClosure F E)) := by
+  refine ⟨fun a b h ↦ ?_, AlgEquiv.restrictNormalHom_surjective E⟩
+  have hab : (a : E →+* E).comp (algebraMap (separableClosure F E) E) =
+      (b : E →+* E).comp (algebraMap (separableClosure F E) E) := by
+    ext s
+    simpa [AlgEquiv.restrictNormalHom_apply] using congrArg Subtype.val (AlgEquiv.congr_fun h s)
+  exact AlgEquiv.ext <| RingHom.congr_fun <|
+    IsPurelyInseparable.injective_comp_algebraMap (separableClosure F E) E E hab
+
+/-- In a normal extension `E / F`, the automorphism group of `E / F` is the Galois group of the
+separable closure `F^sep` of `F` in `E`, by restriction. -/
+noncomputable def separableClosure.autMulEquiv :
+    (E ≃ₐ[F] E) ≃* Gal(separableClosure F E / F) :=
+  MulEquiv.ofBijective _ (separableClosure.restrictNormalHom_bijective F E)
+
+@[simp]
+lemma separableClosure.autMulEquiv_apply_coe (σ : E ≃ₐ[F] E) (x : separableClosure F E) :
+    (separableClosure.autMulEquiv F E σ x : E) = σ x :=
+  AlgEquiv.restrictNormalHom_apply _ σ x
+
+end SeparableClosure
