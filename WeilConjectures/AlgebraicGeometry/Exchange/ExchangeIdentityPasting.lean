@@ -1,0 +1,143 @@
+/-
+Copyright (c) 2026 Bin Wu. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Bin Wu
+-/
+module
+
+public import WeilConjectures.AlgebraicGeometry.Derived.DerivedDirectImageComposition
+public import WeilConjectures.SixFunctors.BaseChange.Derived
+import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Identity
+import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Horizontal
+import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Vertical
+
+/-! # Identity and pasting equations for exchange
+
+Source: Stacks Project, Remarks 07A7, 0E46, 0E47 and Lemma 0D6E;
+blueprint node order 1044 (blueprint: lem-weil-pbc-exchange-identity-pasting).
+-/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
+
+namespace AlgebraicGeometry.Etale
+
+private lemma derivedDirectImageComposition_inv_eq
+    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (e : Y ⟶ Z) :
+    (derivedDirectImageComposition e f).inv =
+      (Functor.rightDerivedFunctorPlusCompIso' (f)_*[AddCommGrpCat.{u + 1}]
+        (e)_*[AddCommGrpCat.{u + 1}]
+        (lowerStarComp AddCommGrpCat.{u + 1} f e)).hom := by
+  change conjugateEquiv
+      ((upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} e).derivedPlus.comp
+        (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).derivedPlus)
+      (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} (f ≫ e)).derivedPlus
+      (upperStarCompDerivedPlus AddCommGrpCat.{u + 1} f e (f ≫ e) rfl).hom = _
+  apply conjugateEquiv_eq_of_unit
+  intro K
+  simp only [Adjunction.comp_unit_app, Functor.comp_obj]
+  simpa only [Category.assoc] using
+    (derivedPlus_unit_comp_upperStarCompDerivedPlus (AddCommGrpCat.{u + 1}) f e
+      (f ≫ e) rfl K).symm
+
+private lemma derivedDirectImageComposition_hom_eq
+    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (e : Y ⟶ Z) :
+    (derivedDirectImageComposition e f).hom =
+      (Functor.rightDerivedFunctorPlusCompIso' (f)_*[AddCommGrpCat.{u + 1}]
+        (e)_*[AddCommGrpCat.{u + 1}]
+        (lowerStarComp AddCommGrpCat.{u + 1} f e)).inv := by
+  symm
+  apply (cancel_epi ((Functor.rightDerivedFunctorPlusCompIso'
+    (f)_*[AddCommGrpCat.{u + 1}] (e)_*[AddCommGrpCat.{u + 1}]
+    (lowerStarComp AddCommGrpCat.{u + 1} f e)).hom)).1
+  rw [Iso.hom_inv_id, ← derivedDirectImageComposition_inv_eq f e,
+    (derivedDirectImageComposition e f).inv_hom_id]
+  rfl
+
+/-- Identity, horizontal-pasting, and vertical-pasting laws for the derived exchange map.
+
+Source: Stacks Project, Remarks 07A7, 0E46, 0E47 and Lemma 0D6E
+(blueprint: lem-weil-pbc-exchange-identity-pasting).
+
+Proof, following the four steps of the node:
+1. The source identification baseChange_eq_derivedBaseChangeMapPlus identifies
+   derivedBaseChangeMapPlus with the mate of def-weil-pbc-derived-exchange.
+   Thus exchange is the mate of the derived square
+   comparison for the adjunctions of prop-weil-pbc-derived-inverse-image-adjunction.
+2. For the identity square, lem-weil-pbc-derived-square-iso-pasting expresses the
+   comparison using the identity isomorphisms of
+   lem-weil-pbc-derived-inverse-image-composition. Apply lem-weil-pbc-mate-whisker
+   and the identity conjugate law of lem-weil-pbc-mate-pasting to obtain exchange
+   as the identity of Rf_* conjugated by these identity isomorphisms.
+3. For horizontal pasting, lem-weil-pbc-cartesian-square-pasting gives the outer
+   pullback. Its comparison is the pasted comparison conjugated by cD, by
+   lem-weil-pbc-derived-square-iso-pasting. Apply lem-weil-pbc-mate-pasting (1)
+   and lem-weil-pbc-mate-whisker to obtain the two exchanges conjugated by cD.
+4. For vertical pasting, the same pullback-pasting and square-comparison laws
+   give a square for composite adjunctions. Apply lem-weil-pbc-mate-pasting (2)
+   to obtain its mate, the pasted exchanges. Change the two adjunctions using
+   lem-weil-pbc-mate-pasting (3); the conjugates of cD are precisely the
+   comparisons dD of def-weil-pbc-derived-direct-image-composition. Conjugation
+   preserves inverses (def-weil-pbc-adjunction-conjugate), giving the equation.
+-/
+theorem derivedExchange_identity_pasting :
+    let A := AddCommGrpCat.{u + 1}
+    (∀ {X Y : Scheme.{u}} (f : X ⟶ Y),
+      derivedBaseChangeMapPlus A (IsPullback.id_horiz f).toCommSq =
+        Functor.whiskerLeft (f)_*[A].rightDerivedFunctorPlus
+            (upperStarIdDerivedPlus A Y).hom ≫
+          (Functor.rightUnitor _).hom ≫ (Functor.leftUnitor _).inv ≫
+          Functor.whiskerRight (upperStarIdDerivedPlus A X).inv
+            (f)_*[A].rightDerivedFunctorPlus)
+    ∧ (∀ {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
+        {f : X ⟶ Y} {g : Y' ⟶ Y}
+        (sq₁ : IsPullback g' f' f g)
+        {Y'' X'' : Scheme.{u}} {h : Y'' ⟶ Y'} {h' : X'' ⟶ X'}
+        {f'' : X'' ⟶ Y''}
+        (sq₂ : IsPullback h' f'' f' h),
+      derivedBaseChangeMapPlus A (sq₂.paste_horiz sq₁).toCommSq =
+        Functor.whiskerLeft (f)_*[A].rightDerivedFunctorPlus
+            (upperStarCompDerivedPlus A h g).hom ≫
+          (Functor.associator _ _ _).inv ≫
+          Functor.whiskerRight (derivedBaseChangeMapPlus A sq₁.toCommSq)
+            (h)^*[A].mapDerivedCategoryPlus ≫
+          (Functor.associator _ _ _).hom ≫
+          Functor.whiskerLeft (g')^*[A].mapDerivedCategoryPlus
+            (derivedBaseChangeMapPlus A sq₂.toCommSq) ≫
+          (Functor.associator _ _ _).inv ≫
+          Functor.whiskerRight (upperStarCompDerivedPlus A h' g').inv
+            (f'')_*[A].rightDerivedFunctorPlus)
+    ∧ (∀ {X' X Y' Y Z' Z : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
+        {f : X ⟶ Y} {g : Y' ⟶ Y} {e' : Y' ⟶ Z'} {e : Y ⟶ Z}
+        {k : Z' ⟶ Z}
+        (sq₁ : IsPullback g' f' f g) (sq₂ : IsPullback g e' e k),
+      derivedBaseChangeMapPlus A (sq₁.paste_vert sq₂).toCommSq =
+        Functor.whiskerRight
+            (derivedDirectImageComposition e f).hom (k)^*[A].mapDerivedCategoryPlus ≫
+          (Functor.associator _ _ _).hom ≫
+          Functor.whiskerLeft (f)_*[A].rightDerivedFunctorPlus
+            (derivedBaseChangeMapPlus A sq₂.toCommSq) ≫
+          (Functor.associator _ _ _).inv ≫
+          Functor.whiskerRight (derivedBaseChangeMapPlus A sq₁.toCommSq)
+            (e')_*[A].rightDerivedFunctorPlus ≫
+          (Functor.associator _ _ _).hom ≫
+          Functor.whiskerLeft (g')^*[A].mapDerivedCategoryPlus
+            (derivedDirectImageComposition e' f').inv) := by
+  dsimp
+  refine ⟨?_, ?_, ?_⟩
+  · intro X Y f
+    exact Etale.derivedBaseChangeMapPlus_id (AddCommGrpCat.{u + 1}) f
+      (IsPullback.id_horiz f).toCommSq
+  · intro X' X Y' Y g' f' f g sq₁ Y'' X'' h h' f'' sq₂
+    exact Etale.derivedBaseChangeMapPlus_paste_horiz (AddCommGrpCat.{u + 1})
+      sq₁.toCommSq sq₂.toCommSq (sq₂.paste_horiz sq₁).toCommSq
+  · intro X' X Y' Y Z' Z g' f' f g e' e k sq₁ sq₂
+    simpa only [derivedDirectImageComposition_hom_eq, derivedDirectImageComposition_inv_eq,
+      rightDerivedLowerStarPlus] using
+      (Etale.derivedBaseChangeMapPlus_paste_vert (AddCommGrpCat.{u + 1})
+        sq₁.toCommSq sq₂.toCommSq (sq₁.paste_vert sq₂).toCommSq)
+
+end AlgebraicGeometry.Etale
