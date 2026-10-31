@@ -33,6 +33,7 @@ open WeilConjectures
 
 private theorem fixed_finite_restrict {X : Scheme.{u}}
     (A B : Type (u + 1)) [CommRing A] [CommRing B] (r : A →+* B)
+    (hr : Function.Surjective r)
     (F : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} B))
     (h : ProEtale.IsFiniteLocallyConstant B F) :
     ProEtale.IsFiniteLocallyConstant A ((Sheaf.restrictScalars _ r).obj F) := by
@@ -41,7 +42,18 @@ private theorem fixed_finite_restrict {X : Scheme.{u}}
   obtain ⟨I, W, g, hg, h⟩ := h
   refine ⟨I, W, g, hg, fun i ↦ ?_⟩
   obtain ⟨M, hM, ⟨e⟩⟩ := h i
-  exact ⟨(ModuleCat.restrictScalars.{u + 1} r).obj M, hM,
+  have hM' : Module.Finite A ((ModuleCat.restrictScalars.{u + 1} r).obj M) := by
+    obtain ⟨s, hs⟩ := hM.fg_top
+    refine ⟨⟨s, Submodule.eq_top_iff'.2 fun x ↦ ?_⟩⟩
+    have hx : x ∈ Submodule.span B (s : Set M) := hs ▸ Submodule.mem_top
+    induction hx using Submodule.span_induction with
+    | mem y hy => exact Submodule.subset_span hy
+    | zero => exact zero_mem _
+    | add y z _ _ hy hz => exact add_mem hy hz
+    | smul b y _ hy =>
+      obtain ⟨a, rfl⟩ := hr b
+      exact Submodule.smul_mem _ a hy
+  exact ⟨(ModuleCat.restrictScalars.{u + 1} r).obj M, hM',
     ⟨(ProEtale.upperStarRestrictScalarsIso.{u} r (g i)).app F ≪≫
       (sheafCompose (ProEt.topology (W i))
         (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} r)).mapIso e ≪≫
@@ -50,6 +62,7 @@ private theorem fixed_finite_restrict {X : Scheme.{u}}
 
 private theorem fixed_constructible_restrict {X : Scheme.{u}}
     (A B : Type (u + 1)) [CommRing A] [CommRing B] (r : A →+* B)
+    (hr : Function.Surjective r)
     (F : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} B))
     (h : ProEtale.IsConstructible B F) :
     ProEtale.IsConstructible A ((Sheaf.restrictScalars _ r).obj F) := by
@@ -57,7 +70,7 @@ private theorem fixed_constructible_restrict {X : Scheme.{u}}
   refine ⟨S, fun i ↦ ?_⟩
   exact ProEtale.isFiniteLocallyConstant_of_iso
     ((ProEtale.upperStarRestrictScalarsIso r (S.immersion i)).app F).symm
-    (fixed_finite_restrict A B r _ (h i))
+    (fixed_finite_restrict A B r hr _ (h i))
 
 private theorem fixed_constructible_restrict_iff {X : Scheme.{u}}
     (A B : Type (u + 1)) [CommRing A] [CommRing B] (r : A ≃+* B)
@@ -66,14 +79,14 @@ private theorem fixed_constructible_restrict_iff {X : Scheme.{u}}
       ProEtale.IsConstructible B F := by
   constructor
   · intro h
-    have h' := fixed_constructible_restrict B A r.symm.toRingHom _ h
+    have h' := fixed_constructible_restrict B A r.symm.toRingHom r.symm.surjective _ h
     let e : (Sheaf.restrictScalars _ r.toRingHom ⋙
         Sheaf.restrictScalars _ r.symm.toRingHom).obj F ≅ F :=
       (fullyFaithfulSheafToPresheaf (ProEt.topology X) _).preimageIso
         (Functor.isoWhiskerLeft F.obj
           ((ModuleCat.restrictScalarsEquivalenceOfRingEquiv r).unitIso.symm))
     exact ProEtale.isConstructible_of_iso e h'
-  · exact fixed_constructible_restrict A B r.toRingHom F
+  · exact fixed_constructible_restrict A B r.toRingHom r.surjective F
 
 private def constantRestrictionEncoding (T : Scheme.{u})
     (A B : Type (u + 1)) [CommRing A] [CommRing B] (r : A →+* B) :

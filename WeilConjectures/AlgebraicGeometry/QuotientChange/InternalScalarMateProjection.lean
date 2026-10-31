@@ -404,6 +404,8 @@ attribute [local irreducible] ModuleRingedComparison.derivedFunctor
   ModuleRingedComparison.tensor ModuleRingedComparison.tensorComparison
   ModuleRingedComparison.derivedPullback ModuleRingedComparison.derivedPushforward
 
+set_option maxHeartbeats 400000 in
+-- The final `exact congrArg` unifies large derived-category composites (whnf).
 private theorem projection_section_transport (a : Λ ⟶ Λ') [IsMonHom a]
     {X Y : Scheme.{u}} (f : X ⟶ Y) (K : DerivedCategory (Modules Λ X)) :
     (ModuleRingedComparison.derivedEquivalence Λ Y).functor.map (scalarProjection a f K) ≫

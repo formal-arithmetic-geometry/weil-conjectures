@@ -664,7 +664,21 @@ private abbrev coefficientEquivalence {C : Type v} [Category.{w} C] {J : Grothen
     (restrictCancelIso e.inv e.hom e.inv_hom_id).symm
     (restrictCancelIso e.hom e.inv e.hom_inv_id)
 
-attribute [local irreducible] restrictionOverIso
+private noncomputable def restrictionOverIso
+    {C : Type v} [Category.{w} C] {J : GrothendieckTopology C}
+    {R S : Sheaf J RingCat.{u + 1}} (α : R ⟶ S) (U : C) :
+    SheafOfModules.restrictScalars α ⋙ SheafOfModules.overFunctor R U ≅
+    SheafOfModules.overFunctor S U ⋙
+      SheafOfModules.restrictScalars ((J.overPullback RingCat.{u + 1} U).map α) := by
+  refine NatIso.ofComponents (fun M ↦ (SheafOfModules.fullyFaithfulForget _).preimageIso
+    (PresheafOfModules.isoMk (fun _ ↦ Iso.refl _) ?_)) ?_
+  · intros
+    ext x
+    rfl
+  · intros
+    ext V x
+    rfl
+
 
 private abbrev nativeSieveFiniteLisse := NormalizedNativeSieveFiniteLisse
 
@@ -694,7 +708,7 @@ private theorem native_over_iso_of_fixed
         nativeOverRestrictionIso Z D U G)⟩
 
 private theorem nativeSieveFiniteLisse_of_fixed
-    (Z : Scheme.{u}) (D : Type (u + 1)) [CommRing D]
+    (Z : Scheme.{u}) (D : Type (u + 1)) [CommRing D] [Finite D]
     (F : pbcModules Z (adicLisseConstantRing Z D))
     (h : ProEtale.IsFiniteLocallyConstant D ((wideConstantModuleRestriction Z D).obj F)) :
     nativeSieveFiniteLisse Z D F := by
@@ -718,7 +732,7 @@ private theorem nativeSieveFiniteLisse_of_fixed
   have he (i : I) : ∃ M : ModuleCat.{u + 1} D, Finite M ∧
       Nonempty (F.over (U i) ≅ ((adicLisseConstantModules Z D).obj M).over (U i)) := by
     obtain ⟨M, hM, ⟨e⟩⟩ := hmodels i
-    refine ⟨M, hM, ?_⟩
+    refine ⟨M, Module.finite_of_finite D, ?_⟩
     have : (ProEt.sliceEquiv Z (U i)).inverse.IsDenseSubsite
         (ProEt.topology (U i).left) ((ProEt.topology Z).over (U i)) :=
       ProEt.sliceDense Z (U i)

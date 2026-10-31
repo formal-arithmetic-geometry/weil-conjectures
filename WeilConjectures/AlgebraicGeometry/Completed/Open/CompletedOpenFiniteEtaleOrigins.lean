@@ -19,6 +19,9 @@ import all WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientDatumSupplement
 Source: blueprint thm-cbc-complete-proetale, proof step 2; Stacks 03DI, 09AF and 0GL1.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
@@ -119,6 +122,25 @@ private def restrictionEquivalence (c : R ≅ S) :
 
 end RestrictionEquivalence
 
+private theorem finiteRes_additive
+    {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
+    (T : Scheme.{t}) (n : ℕ) : (cbcFiniteRes d T n).Additive := by
+  change (pbcRestrict (cbcFiniteProjection d T n)).Additive
+  infer_instance
+
+private theorem finiteRes_limits
+    {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
+    (T : Scheme.{t}) (n : ℕ) : PreservesFiniteLimits (cbcFiniteRes d T n) := by
+  change PreservesFiniteLimits (pbcRestrict (cbcFiniteProjection d T n))
+  infer_instance
+
+private theorem finiteRes_colimits
+    {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
+    (T : Scheme.{t}) (n : ℕ) : PreservesFiniteColimits (cbcFiniteRes d T n) := by
+  change PreservesFiniteColimits (pbcRestrict (cbcFiniteProjection d T n))
+  infer_instance
+
+attribute [local instance] finiteRes_additive finiteRes_limits finiteRes_colimits
 
 private def finiteReductionAdjunction
     {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)

@@ -222,6 +222,29 @@ private theorem realization_adjunction (T : Scheme.{u})
   rw [Adjunction.mapHomotopyCategory_counit_app_quotient]
   congr 1
 
+/-- The mate of the forward realization restriction comparison is the inverse realization
+restriction comparison. -/
+private theorem forward_realization_mate
+    {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
+    (T : Scheme.{u}) (φ : A →+* B) :
+    mateEquiv (sfIntrinsicModuleEquivalence T B).toAdjunction
+        (sfIntrinsicModuleEquivalence T A).toAdjunction
+        (TwoSquare.mk _ _ _ _ (sfRealizationRestriction T φ).inv) =
+      TwoSquare.mk _ _ _ _ (sfInverseRealizationRestriction T φ).inv := by
+  ext M : 1
+  simp only [sfInverseRealizationRestriction, mateEquiv_apply,
+    Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app,
+    Functor.isoWhiskerRight_inv, Functor.isoWhiskerLeft_inv,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    Functor.leftUnitor_hom_app, Functor.rightUnitor_inv_app,
+    Functor.associator_hom_app, Functor.associator_inv_app,
+    Category.id_comp,
+    Category.assoc]
+  dsimp only [Equivalence.symm, Equivalence.toAdjunction, Equivalence.unit,
+    Equivalence.counit, TwoSquare.mk, TwoSquare.natTrans, Functor.comp_obj, Functor.comp_map]
+  simp only [Category.id_comp]
+  all_goals rfl
+
 private theorem inverse_realization_unit
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (T : Scheme.{u}) (φ : A →+* B)
@@ -236,7 +259,7 @@ private theorem inverse_realization_unit
   have h := unit_mateEquiv (sfIntrinsicModuleEquivalence T B).toAdjunction
     (sfIntrinsicModuleEquivalence T A).toAdjunction
     (TwoSquare.mk _ _ _ _ (sfRealizationRestriction T φ).inv) M
-  rw [AlgebraicGeometry.Scheme.forward_realization_mate] at h
+  rw [forward_realization_mate] at h
   exact h
 
 private theorem inverse_realization_inverse_unit

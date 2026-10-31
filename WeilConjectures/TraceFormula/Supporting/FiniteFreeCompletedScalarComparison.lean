@@ -1429,7 +1429,8 @@ theorem finiteFreeCompletedScalarComparison :
   have hf : ∃ d : ℕ, Nonempty
       ((SheafOfModules.restrictScalars
         ((sheafCompose (AlgebraicGeometry.Scheme.ProEt.topology Y)
-          (forget₂ CommRingCat RingCat)).map (completedCoefficientMap l E L ι Y))).obj
+          (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).map
+            (completedCoefficientMap l E L ι Y))).obj
             (SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l L Y)) ≅
         ∐ (fun _ : Fin d ↦
           SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l E Y))) := by

@@ -181,9 +181,8 @@ theorem coefficientExtensionQuotient_naturality (n : ℕ) :
   rw [← Functor.map_comp, ← Functor.map_comp]
   rw [← forgetComm.map_comp]
   apply congrArg (fun z ↦ forgetComm.map z)
-  rw [← (constantSheaf (Scheme.ProEt.topology W) CommRingCat).map_comp]
-  congr 1
-  exact quotientRing_transition l E L ι n
+  rw [quotientRing_transition l E L ι n]
+  exact Functor.map_comp _ _ _
 
 /-- The dependency's canonical semilinear scalar-extension data for the actual
 quotient inclusions; no replacement functor or arbitrary coefficient map is used.

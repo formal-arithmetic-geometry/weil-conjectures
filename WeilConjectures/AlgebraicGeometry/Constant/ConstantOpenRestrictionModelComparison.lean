@@ -66,6 +66,9 @@ lem-sf-constant-semilinear-generator-comparison.
 (blueprint: lem-sf-constant-open-restriction-model-comparison).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
@@ -75,6 +78,12 @@ open AlgebraicGeometry.ProEtale.VaryingRing
 namespace AlgebraicGeometry.Scheme
 
 attribute [local instance] openMapContinuous
+
+private instance constantDirectRightAdjoint {V T : Scheme.{u}} (f : V ⟶ T)
+    (A : Type u) [CommRing A] : (proEtaleConstantModuleDirectImage f A).IsRightAdjoint := by
+  unfold proEtaleConstantModuleDirectImage
+  exact largePush_isRightAdjoint (ProEt.topology T) (ProEt.topology V)
+    (proEtaleBaseChange f) _ _ _
 
 private def modelConstantMap {V T : Scheme.{u}} (f : V ⟶ T)
     (A : Type u) [CommRing A] :

@@ -84,7 +84,7 @@ private noncomputable def residueRestrictionPullbackIso
 
 private theorem finiteLisse_restrict
     {X : AlgebraicGeometry.Scheme.{u}} {A B : Type (u + 1)}
-    [CommRing A] [CommRing B] (f : A →+* B)
+    [CommRing A] [CommRing B] [Finite B] (f : A →+* B)
     (M : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} B))
     (hM : AlgebraicGeometry.ProEtale.IsFiniteLocallyConstant B M) :
     AlgebraicGeometry.ProEtale.IsFiniteLocallyConstant A
@@ -96,14 +96,16 @@ private theorem finiteLisse_restrict
   refine ⟨I, W, g, hg, fun i ↦ ?_⟩
   obtain ⟨N, hN, ⟨e⟩⟩ := h i
   let R := sheafCompose (ProEt.topology (W i)) (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} f)
-  exact ⟨(ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} f).obj N, hN,
+  have : Finite N := Module.finite_of_finite B
+  exact ⟨(ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} f).obj N,
+    @Module.Finite.of_finite _ _ _ _ _ (inferInstanceAs (Finite N)),
     ⟨(residueRestrictionPullbackIso f (g i)).app M ≪≫
       R.mapIso e ≪≫ (constantCommuteCompose (ProEt.topology (W i))
         (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} f)).app N⟩⟩
 
 private theorem fixedConstructible_restrict
     (X : AlgebraicGeometry.Scheme.{u}) {A B : Type (u + 1)}
-    [CommRing A] [CommRing B] (f : A →+* B)
+    [CommRing A] [CommRing B] [Finite B] (f : A →+* B)
     (M : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} B))
     (hM : AlgebraicGeometry.ProEtale.IsConstructible B M) :
     AlgebraicGeometry.ProEtale.IsConstructible A

@@ -148,12 +148,12 @@ attribute [-instance] WeilConjectures.integralReductionSiteEssentiallySmall
 private def chartRestrictionIso (X : Scheme.{t})
     (R : Sheaf (ProEt.topology X) RingCat.{t + 1}) (U : X.ProEt)
     (K : DerivedCategory (SheafOfModules.{t + 1} R)) :
-    (ringedDerivedRestrictionGeneral R U).obj K ≅
-      ringedSiteDerivedRestrictionOfUniverses R U K := by
+    (ringedDerivedRestrictionGeneral.{_, _, _, t + 1} R U).obj K ≅
+      ringedSiteDerivedRestrictionOfUniverses.{_, _, _, t + 1} R U K := by
   let F := SheafOfModules.overFunctor.{t + 1} R U
-  have := (ringedOverFunctor_exactGeneral R U).1
-  have := (ringedOverFunctor_exactGeneral R U).2.1
-  have := (ringedOverFunctor_exactGeneral R U).2.2
+  have := (ringedOverFunctor_exactGeneral.{_, _, _, t + 1} R U).1
+  have := (ringedOverFunctor_exactGeneral.{_, _, _, t + 1} R U).2.1
+  have := (ringedOverFunctor_exactGeneral.{_, _, _, t + 1} R U).2.2
   exact F.mapDerivedCategory.mapIso (DerivedCategory.Q.objObjPreimageIso K).symm ≪≫
     F.mapDerivedCategoryFactors.app (DerivedCategory.Q.objPreimage K)
 
@@ -162,12 +162,12 @@ attribute [-instance] WeilConjectures.integralReductionSiteEssentiallySmall
 private theorem chartScalarIso (X : Scheme.{t})
     {R S : Sheaf (ProEt.topology X) CommRingCat.{t + 1}} (φ : R ⟶ S)
     (U : X.ProEt) (K L : DerivedCategory (proEtaleRingModules X R))
-    (e : (ringedDerivedRestrictionGeneral ((adicLisseForget X).obj R) U).obj K ≅
-      (ringedDerivedRestrictionGeneral ((adicLisseForget X).obj R) U).obj L) :
+    (e : (ringedDerivedRestrictionGeneral.{_, _, _, t + 1} ((adicLisseForget X).obj R) U).obj K ≅
+      (ringedDerivedRestrictionGeneral.{_, _, _, t + 1} ((adicLisseForget X).obj R) U).obj L) :
     Nonempty
-      ((ringedDerivedRestrictionGeneral ((adicLisseForget X).obj S) U).obj
+      ((ringedDerivedRestrictionGeneral.{_, _, _, t + 1} ((adicLisseForget X).obj S) U).obj
           ((completedAdicDerivedChange X φ).obj K) ≅
-        (ringedDerivedRestrictionGeneral ((adicLisseForget X).obj S) U).obj
+        (ringedDerivedRestrictionGeneral.{_, _, _, t + 1} ((adicLisseForget X).obj S) U).obj
           ((completedAdicDerivedChange X φ).obj L)) := by
   let J := ProEt.topology X
   let : EssentiallySmall.{t + 1} X.ProEt := essentiallySmallSelf.{0, t, t + 1} _
@@ -175,12 +175,12 @@ private theorem chartScalarIso (X : Scheme.{t})
   let S₀ := (adicLisseForget X).obj S
   let F := SheafOfModules.overFunctor.{t + 1} R₀ U
   let G := SheafOfModules.overFunctor.{t + 1} S₀ U
-  have := (ringedOverFunctor_exactGeneral R₀ U).1
-  have := (ringedOverFunctor_exactGeneral R₀ U).2.1
-  have := (ringedOverFunctor_exactGeneral R₀ U).2.2
-  have := (ringedOverFunctor_exactGeneral S₀ U).1
-  have := (ringedOverFunctor_exactGeneral S₀ U).2.1
-  have := (ringedOverFunctor_exactGeneral S₀ U).2.2
+  have := (ringedOverFunctor_exactGeneral.{_, _, _, t + 1} R₀ U).1
+  have := (ringedOverFunctor_exactGeneral.{_, _, _, t + 1} R₀ U).2.1
+  have := (ringedOverFunctor_exactGeneral.{_, _, _, t + 1} R₀ U).2.2
+  have := (ringedOverFunctor_exactGeneral.{_, _, _, t + 1} S₀ U).1
+  have := (ringedOverFunctor_exactGeneral.{_, _, _, t + 1} S₀ U).2.1
+  have := (ringedOverFunctor_exactGeneral.{_, _, _, t + 1} S₀ U).2.2
   let ψ := (J.overPullback CommRingCat.{t + 1} U).map φ
   obtain ⟨T, hobj, hmap, hadd, _, _, DT, ε, _, _, hT⟩ :=
     SheafOfModules.derivedChangeOfRingsIndependentCoefficients.{t + 2, t + 1, t + 1, t}
@@ -235,17 +235,18 @@ private theorem reflectConstantIso (X : Scheme.{t}) (B : Type t) [CommRing B]
     (R : Sheaf (ProEt.topology X) CommRingCat.{t + 1})
     (φ : adicConstantRing X B ⟶ R) (hφ : IsIso φ) (W : X.Etale) (w : W.left)
     (K L : DerivedCategory (ModuleCat.{t} B))
-    (e : (ringedDerivedRestrictionGeneral ((adicLisseForget X).obj R)
+    (e : (ringedDerivedRestrictionGeneral.{_, _, _, t + 1} ((adicLisseForget X).obj R)
         ((toProEt X).obj W)).obj
           ((completedAdicDerivedChange X φ).obj
             ((finitePerfectAdicDerivedConstant X B).obj K)) ≅
-      (ringedDerivedRestrictionGeneral ((adicLisseForget X).obj R)
+      (ringedDerivedRestrictionGeneral.{_, _, _, t + 1} ((adicLisseForget X).obj R)
         ((toProEt X).obj W)).obj
           ((completedAdicDerivedChange X φ).obj
             ((finitePerfectAdicDerivedConstant X B).obj L))) : Nonempty (K ≅ L) := by
   have := koszulConstantFunctor_preservesZero X B
   let F := finitePerfectAdicDerivedConstant X B ⋙ completedAdicDerivedChange X φ
-  let G := ringedDerivedRestrictionGeneral ((adicLisseForget X).obj R) ((toProEt X).obj W)
+  let G := ringedDerivedRestrictionGeneral.{_, _, _, t + 1} ((adicLisseForget X).obj R)
+    ((toProEt X).obj W)
   let P := DerivedCategory.Q.objPreimage K
   let Q := DerivedCategory.Q.objPreimage L
   let a := DerivedCategory.Q.objObjPreimageIso K
@@ -316,8 +317,8 @@ theorem finitePerfectAdic_constant_models_reduction
   let q := Ideal.Quotient.factorPowSucc d.ideal (n + 1)
   let ψ := completedAdicQuotientCommMap X d (n + 1) n (Nat.le_succ n)
   let U := (toProEt X).obj W
-  let G := ringedDerivedRestrictionGeneral (completedAdicFiniteRing X d n) U
-  let G' := ringedDerivedRestrictionGeneral (completedAdicFiniteRing X d (n + 1)) U
+  let G := ringedDerivedRestrictionGeneral.{_, _, _, t + 1} (completedAdicFiniteRing X d n) U
+  let G' := ringedDerivedRestrictionGeneral.{_, _, _, t + 1} (completedAdicFiniteRing X d (n + 1)) U
   let C' := (finitePerfectAdicDerivedConstant X _).obj E'
   let C := (finitePerfectAdicDerivedConstant X _).obj E
   let N := (ConstantScalarRealization.moduleDerivedExtension q).obj E'
