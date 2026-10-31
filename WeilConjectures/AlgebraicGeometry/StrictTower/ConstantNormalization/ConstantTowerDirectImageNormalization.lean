@@ -499,7 +499,6 @@ variable {C : Type a₁} [Category.{b₁} C] [Abelian C] [HasDerivedCategory.{c�
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 attribute [local irreducible] Functor.mapDerivedCategory
 
-set_option backward.isDefEq.respectTransparency false in
 end ExactTriangle
 
 section ReductionComparison
@@ -611,13 +610,6 @@ private theorem reductionComparison_on_complexes
     obtain ⟨E, hE, hImage, rfl⟩ := hZ
     exact hτ' E hE
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-omit [Abelian C] [HasDerivedCategory C] [Abelian D] [HasDerivedCategory D]
-  [Abelian T] [HasDerivedCategory T] [Abelian U] [HasDerivedCategory U] in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 end ReductionComparison
 
 set_option backward.isDefEq.respectTransparency false in
@@ -645,8 +637,6 @@ private theorem mates_naturality
   simp only [Category.assoc]
   rfl
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 private theorem unit_hom_ext {B C : Type*} [Category B] [Category C]
     {L : B ⥤ C} {R : C ⥤ B} (a : L ⊣ R) {M : B} {N : C}
     {f g : L.obj M ⟶ N}
@@ -875,7 +865,6 @@ def deltaEval (X : Scheme.{u}) (n : ℕ) : delta A X ⋙ ev A X n ≅ 𝟭 _ :=
       Functor.mapDerivedCategoryIdIso _
 
 set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 private theorem chi_mate {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (chi A f).hom = (mateEquiv
       (proEtaleRingDerivedAdjunction f (coefficients A Y) (coefficients A X)
@@ -888,9 +877,6 @@ private theorem chi_mate {X Y : Scheme.{u}} (f : X ⟶ Y) :
     a (a.whiskerRight ℕᵒᵖ) (Functor.compConstIso ℕᵒᵖ (modulePullback A f)).symm
     (Functor.compConstIso ℕᵒᵖ (moduleDirectImage A f)) (const_mate _ _ a)
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 private theorem scalar_obj (X : Scheme.{u})
     {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}} (φ : R ⟶ S)
     (M : reductionModules X R) :
@@ -1612,7 +1598,6 @@ Source: Stacks 07A4 (blueprint: lem-sf-cbc-constant-tower-direct-image-normaliza
 def ordinaryReductionPull {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   (ordinaryReductionPull_existsUnique I f).exists.choose
 
-set_option backward.isDefEq.respectTransparency false in
 private theorem reductionCounit_isIso (X : Scheme.{u})
     (P : CochainComplex (Modules A X) ℤ)
     (hP : CochainComplex.IsKFlatIndependentCoefficients (R := coefficients A X) P) :
@@ -1666,8 +1651,6 @@ section
 attribute [local irreducible] modulePullback reductionModule reduction reductionCounit
   reductionModel augmentation
   ordinaryAugmentation ordinaryReductionPull reductionPull
-set_option backward.isDefEq.respectTransparency false in
 end
 
-set_option backward.isDefEq.respectTransparency false in
 end AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization

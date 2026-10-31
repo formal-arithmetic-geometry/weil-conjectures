@@ -26,5 +26,4 @@ private theorem tensorSection_eq {X : Scheme.{u}}
       AlgebraicGeometry.ProEtaleTensorComparison.pure F G V s t := by
   rfl
 
-set_option backward.isDefEq.respectTransparency false in
 end AlgebraicGeometry.Scheme

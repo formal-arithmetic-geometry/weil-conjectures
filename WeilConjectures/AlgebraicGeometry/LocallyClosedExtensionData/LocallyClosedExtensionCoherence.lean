@@ -152,10 +152,6 @@ private noncomputable def exactAdjunction
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 private theorem derived_postcompose
     {C D B : Type*} [Category C] [Category D] [Category B]
     [Abelian C] [Abelian D] [Abelian B]
@@ -312,14 +308,6 @@ private theorem identity_factors {C : Type*} [Category C] [Abelian C]
 
 namespace LocallyClosedExtensionData
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 private noncomputable def derivedRestriction (E : LocallyClosedExtensionData.{u})
     {S X : LocallyClosedCoefficients.{u}} (a : LocallyClosedCoefficientImmersion S X) :
     E.derived a ⋙ a.pull.mapDerivedCategory ≅ 𝟭 _ :=
@@ -382,10 +370,6 @@ private theorem gammaTermwise (E : LocallyClosedExtensionData.{u})
   erw [Category.id_comp] at h
   exact h
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 private theorem derived_associative (E : LocallyClosedExtensionData.{u}) (hE : E.Coherent)

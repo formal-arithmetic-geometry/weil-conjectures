@@ -758,8 +758,5 @@ variable {E : Type uE} [Category.{vE} E] [EssentiallySmall.{w} E]
 
 attribute [local irreducible] ringImage algebraicImage
 
-omit [H.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})] in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
 -- Prevent accidental unfolding of the transported ring structures during elaboration.
 end SheafOfModules.CochainCompositeConstruction

@@ -452,9 +452,6 @@ private theorem unitIso_hom (M : SheafOfModules.{max s h u} (sourceRing J S)) :
   unfold unitIso
   rfl
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-omit hreflect in
 @[irreducible] private noncomputable def homUnit
     (F G : SheafOfModules.{max s h u} (sourceRing J S)) :
     SheafOfModules.homObj (R := S) F G ≅
@@ -505,7 +502,6 @@ private theorem comparisonIso_hom (F G : SheafOfModules.{max s h u} (sourceRing 
   unfold comparisonIso
   rfl
 
-omit hreflect in
 private theorem comparisonIso_section (F G : SheafOfModules.{max s h u} (sourceRing J S))
     (V W : C) (a : W ⟶ V)
     (φ : (SheafOfModules.homObj (R := S) F G).val.obj (op V))

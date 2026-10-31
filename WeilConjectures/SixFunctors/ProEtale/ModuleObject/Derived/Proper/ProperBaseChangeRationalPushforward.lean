@@ -47,6 +47,10 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunct
 
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.LocalizedDirectImageComparison
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperBaseChange.Compatibility
+public import WeilConjectures.CategoryTheory.SmoothBaseChange.CohomologyInWeakSerreSubcategory
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Bounded.BoundedConstructiblePushforwardRestriction
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushIntegralDerivedIso
 
 /-!
 # Proper direct image with rational condensed coefficients: coefficient comparisons
@@ -188,11 +192,11 @@ include k in
 Source: blueprint rational proper direct image, clause 1
 (blueprint: det-thm-sfb-proper-base-change-rational).
 
-Proof: properness supplies the qcqs hypotheses of `lem-sfb-localized-direct-image-comparison`,
-`localizedDirectImageComparison_isIso`, which applies to every bounded-below integral complex.
-Unfold `localizedDirectImageComparison`, the proposition name and `rationalizationPushHom`:
-both are the same `derivedPushHom` component of the coefficient inclusion O_E -> E, with
-flatness proofs that agree by proof irrelevance. No comparison map is chosen.
+Proof: properness supplies the qcqs hypotheses of the source-library realization of
+`lem-sfb-localized-direct-image-comparison`. Extract a lower bound N from boundedness below
+and install K.IsGE N. Unfold the proposition name and `rationalizationPushHom`, then apply
+`isIso_derivedPushHom_app_padicIntegers_of_isGE` to the canonical `derivedPushHom` component
+of the coefficient inclusion O_E -> E. Flatness proofs agree by proof irrelevance.
 -/
 theorem isIso_rationalizationPushHom_boundedBelow
     (E : PadicAlgCl.FiniteIntermediateField ℓ)
@@ -200,10 +204,10 @@ theorem isIso_rationalizationPushHom_boundedBelow
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X.left)))
     (_hK : DerivedCategory.TStructure.t.plus K) :
     IsIsoRationalizationPushHomApp ℓ E p.left K := by
-  have h := localizedDirectImageComparison_isIso ℓ E p.left K _hK
-  unfold localizedDirectImageComparison at h
+  obtain ⟨N, hN⟩ := _hK
+  let : K.IsGE N := hN
   unfold IsIsoRationalizationPushHomApp rationalizationPushHom
-  exact h
+  exact isIso_derivedPushHom_app_padicIntegers_of_isGE ℓ E p.left K N
 
 include k in
 include k in

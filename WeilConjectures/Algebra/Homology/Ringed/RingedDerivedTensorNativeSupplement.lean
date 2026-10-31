@@ -171,7 +171,6 @@ variable {A : Type*} [Category* A] [Abelian A] [HasColimitsOfSize.{0, 0} A]
   [∀ (X Y Z : GradedObject ℤ A), GradedObject.HasGoodTensorTensor₂₃ X Y Z]
 
 omit [HasColimitsOfSize.{0, 0} A] [SymmetricCategory A] in
-omit [HasColimitsOfSize.{0, 0} A] [SymmetricCategory A] in
 /-- The native derived localization has an invertible unit comparison. -/
 theorem localization_isIso_ε [HasDerivedCategory.{w} A]
     [DerivedCategory.Qh.HasDerivedMonoidalCategory (HomotopyCategory.quasiIso A (.up ℤ))] :
@@ -200,27 +199,8 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   [J.WEqualsLocallyBijective AddCommGrpCat.{max c v u}]
   (R : Sheaf J CommRingCat.{max c v u})
 
-local instance moduleMonoidal : MonoidalCategory (Modules.{c, v, u} J R) :=
-  SheafOfModules.cochainModulesMonoidal R
-local instance moduleSymmetric : SymmetricCategory (Modules.{c, v, u} J R) :=
-  SheafOfModules.cochainModulesSymmetric R
-local instance modulePreadditive : MonoidalPreadditive (Modules.{c, v, u} J R) :=
-  SheafOfModules.cochainModulesPreadditive R
-local instance moduleClosed : MonoidalClosed (Modules.{c, v, u} J R) :=
-  (SheafOfModules.nonempty_monoidalClosed_independentCoefficients (R := R)).some
-local instance moduleGrothendieck : IsGrothendieckAbelian.{max c v u} (Modules.{c, v, u} J R) :=
-  (SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses.{c, v, u}
-    J R).1
-local instance moduleFlat : Abelian.HasFunctorialFlatResolution (Modules.{c, v, u} J R) :=
-  SheafOfModules.hasFunctorialFlatResolution_kfi R
-local instance countableColimits : HasColimitsOfSize.{0, 0} (Modules.{c, v, u} J R) :=
-  hasColimitsOfSizeShrink.{0, 0, max c v u, max c v u} (Modules.{c, v, u} J R)
-local instance tensorLeftColimits (M : Modules.{c, v, u} J R) :
-    PreservesColimitsOfSize.{0, 0} (tensorLeft M) :=
-  SheafOfModules.cochainTensorLeftPreservesColimits R M
-local instance tensorRightColimits (M : Modules.{c, v, u} J R) :
-    PreservesColimitsOfSize.{0, 0} (tensorRight M) :=
-  SheafOfModules.cochainTensorRightPreservesColimits R M
+attribute [local instance] moduleMonoidal moduleSymmetric modulePreadditive moduleClosed
+  moduleGrothendieck moduleFlat countableColimits tensorLeftColimits tensorRightColimits
 
 variable [HasDerivedCategory.{w} (Modules.{c, v, u} J R)]
 

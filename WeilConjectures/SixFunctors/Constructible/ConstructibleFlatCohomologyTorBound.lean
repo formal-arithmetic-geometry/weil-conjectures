@@ -109,8 +109,6 @@ attribute [local instance] SheafOfModules.isMonoidal_W_independentCoefficients
   SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients
   SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients
 
-set_option maxRecDepth 2048 in
-set_option maxRecDepth 2048 in
 private lemma residueIdealMaximal
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] :

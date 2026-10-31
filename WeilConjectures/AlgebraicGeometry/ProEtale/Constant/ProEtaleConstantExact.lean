@@ -134,7 +134,6 @@ noncomputable def finiteCoefficientModulePullback :
   finiteCoefficientModuleInverseImage f Λ ⋙
     SheafOfModules.restrictScalars (inv (finiteCoefficientInverseImageMap f Λ))
 
-attribute [instance] finiteCoefficientModulePullback_additive
 
 section
 open Opposite
@@ -143,8 +142,6 @@ open Scheme
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option backward.defeqAttrib.useBackward true
-set_option backward.defeqAttrib.useBackward false in
-set_option backward.defeqAttrib.useBackward false in
 end
 
 end AlgebraicGeometry.ProEtale
@@ -304,10 +301,6 @@ private noncomputable def finiteTensorAdjunction :
     apply PresheafOfModules.hom_ext
     intro W
     rfl
-set_option backward.isDefEq.respectTransparency false in
-omit [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 end
 
 end AlgebraicGeometry.ProEtale

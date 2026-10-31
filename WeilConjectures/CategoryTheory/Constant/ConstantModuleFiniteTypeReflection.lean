@@ -83,6 +83,5 @@ private lemma local_span
   rw [hi]
   rfl
 
-set_option maxHeartbeats 2000000 in
 -- Elaborating slice restriction and the module-sheafification unit needs this budget.
 end CategoryTheory

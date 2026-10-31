@@ -341,10 +341,6 @@ def mate {AY : Type u₁} {BY : Type u₂} {AX : Type u₃} {BX : Type u₄}
   ((mateEquiv dY dX).symm (TwoSquare.mk _ _ _ _ a)).natTrans
 
 set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 private noncomputable def moduleComparison
     {C D : Type u} [Category.{u} C] [Category.{u} D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}
@@ -412,12 +408,7 @@ variable {C D : Type u} [Category.{u} C] [Category.{u} D]
       (inverseRing IB).hom = (inverseRing IA).hom ≫
         (sheafCompose K (CategoryTheory.forget CommRingCat.{u} ⋙ uliftFunctor.{u, u})).map φX)
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.defeqAttrib.useBackward true in
-set_option maxHeartbeats 800000 in
 -- Compare the two scalar-restriction presentations and their underlying graph operations.
-include ring_compat in
 variable [HasSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
   [HasSheafify K AddCommGrpCat.{u}] [K.WEqualsLocallyBijective AddCommGrpCat.{u}]
   [HasDerivedCategory.{w} (Modules AY)] [HasDerivedCategory.{w} (Modules BY)]
@@ -456,13 +447,7 @@ attribute [local irreducible] pure RingedTensor.pure
   CategoryTheory.Functor.mapDerivedCategory
   CategoryTheory.Functor.mapDerivedCategoryFactors
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 800000 in
 -- Compare the tensor presentation and the mate through their section transport formulas.
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 800000 in
 -- Normalize four exact functors and their cochain comparison isomorphisms.
 end
 
@@ -470,7 +455,6 @@ end
 attribute [local irreducible] CategoryTheory.Functor.mapDerivedCategory
   CategoryTheory.Functor.mapDerivedCategoryFactors DerivedCategory.Q DerivedCategory.Qh
 
-set_option backward.isDefEq.respectTransparency false in
 section Composition
 
 variable {CZ CY CX : Type u}
@@ -527,8 +511,6 @@ variable {CZ CY CX : Type u}
   [PreservesFiniteLimits (restriction φY)] [PreservesFiniteColimits (restriction φY)]
   [PreservesFiniteLimits (restriction φX)] [PreservesFiniteColimits (restriction φX)]
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end Composition
 
 section Identity
@@ -548,7 +530,6 @@ variable {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
   [PreservesFiniteLimits (inverseModules IB)] [PreservesFiniteColimits (inverseModules IB)]
   [PreservesFiniteLimits (restriction φ)] [PreservesFiniteColimits (restriction φ)]
 
-set_option linter.flexible false in
 end Identity
 
 end SheafOfModules.ScalarPullback

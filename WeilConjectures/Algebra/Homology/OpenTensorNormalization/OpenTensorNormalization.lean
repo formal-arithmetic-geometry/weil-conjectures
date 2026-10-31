@@ -73,7 +73,6 @@ open AlgebraicGeometry AlgebraicGeometry.Scheme
 open AlgebraicGeometry.Scheme.ProjectionRestriction
 namespace SheafOfModules.OpenTensorNormalization
 
-set_option backward.isDefEq.respectTransparency false in
 private theorem ordinaryUnit_isIso {m : Mode} {U X : Scheme.{u}}
     {j : U ⟶ X} [IsOpenImmersion j] {R : Sheaf (topology m X) CommRingCat.{u + 1}}
     (o : OpenExtension m j R) (M : Mod (restrictRing m j R)) :
@@ -85,15 +84,6 @@ private theorem ordinaryUnit_isIso {m : Mode} {U X : Scheme.{u}}
   rw [h]
   infer_instance
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 end SheafOfModules.OpenTensorNormalization
 
 namespace SheafOfModules

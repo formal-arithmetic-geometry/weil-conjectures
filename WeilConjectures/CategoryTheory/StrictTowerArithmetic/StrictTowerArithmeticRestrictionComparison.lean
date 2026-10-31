@@ -130,16 +130,4 @@ private lemma comparison_isIso (e : ℕ) (he : 1 ≤ e)
     exact (isIso_comp_right_iff _ ((derivedRestriction A e ⋙ RF).map (Q.map j))).1 this
   exact (NatTrans.isIso_app_iff_of_iso f (Q.objObjPreimageIso Z)).1 this
 
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
-omit [HasLimitsOfShape ℕᵒᵖ A] [HasDerivedCategory A]
-  [HasDerivedCategory (ℕᵒᵖ ⥤ A)] in
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
-omit [HasLimitsOfShape ℕᵒᵖ A] [HasDerivedCategory A] in
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
-omit [HasDerivedCategory A] [HasDerivedCategory (ℕᵒᵖ ⥤ A)] in
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
 end CategoryTheory.StrictTowerArithmetic

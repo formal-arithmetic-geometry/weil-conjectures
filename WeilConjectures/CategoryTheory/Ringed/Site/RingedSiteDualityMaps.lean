@@ -852,16 +852,6 @@ set_option backward.isDefEq.respectTransparency false
 
 attribute [local irreducible] ringedSiteBidualComponent ringedSiteBidualDegree
 
-omit [HasSheafify J AddCommGrpCat.{max c v r}]
-    [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}]
-    [HasDerivedCategory.{w} (SheafOfModules.{max c v r}
-      ((sheafCompose J (forget₂ CommRingCat.{max c v r}
-        RingCat.{max c v r})).obj R))] in
-omit [HasSheafify J AddCommGrpCat.{max c v r}]
-    [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}]
-    [HasDerivedCategory.{w} (SheafOfModules.{max c v r}
-      ((sheafCompose J (forget₂ CommRingCat.{max c v r}
-        RingCat.{max c v r})).obj R))] in
 end OrdinaryBidualComponents
 
 /-- The ordinary signed evaluation chain map is uniquely determined by its section formula.

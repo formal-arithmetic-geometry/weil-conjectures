@@ -121,8 +121,6 @@ variable {B : Type u} [Category.{v} B] [Abelian B]
 
 variable [HasLimitsOfShape ℕᵒᵖ B]
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 variable [HasDerivedCategory.{w} B]
 
 private theorem comparison_quasiIso (I : CochainComplex (ℕᵒᵖ ⥤ B) ℤ)
