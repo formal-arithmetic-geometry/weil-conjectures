@@ -78,11 +78,11 @@ theorem closedFibre_derivedUnit_zero_stalk_comparison
     {Ξ : Type u} [Field Ξ] [IsAlgClosed Ξ]
     (z : Spec (.of Ξ) ⟶
       pullback (pullback.snd f (Scheme.strictHenselizationStructuralMap s))
-        (Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationPointEvaluation s)))) :
+        (Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationRingPointEvaluation s)))) :
     let p := pullback.fst f (Scheme.strictHenselizationStructuralMap s)
     let f' := pullback.snd f (Scheme.strictHenselizationStructuralMap s)
     let i := pullback.fst f' (Spec.map (CommRingCat.ofHom
-      (Scheme.strictHenselizationPointEvaluation s)))
+      (Scheme.strictHenselizationRingPointEvaluation s)))
     let h := pullback.fst f' t
     let x := (z ≫ i) ≫ p
     let K := (DerivedCategory.Plus.singleFunctor _ 0).obj
@@ -110,7 +110,7 @@ theorem closedFibre_derivedUnit_zero_stalk_comparison
   let p := pullback.fst f (Scheme.strictHenselizationStructuralMap s)
   let f' := pullback.snd f (Scheme.strictHenselizationStructuralMap s)
   let i := pullback.fst f' (Spec.map (CommRingCat.ofHom
-    (Scheme.strictHenselizationPointEvaluation s)))
+    (Scheme.strictHenselizationRingPointEvaluation s)))
   let h := pullback.fst f' t
   let M := (upperStar AddCommGrpCat.{u + 1} p).obj G
   let K := (DerivedCategory.Plus.singleFunctor _ 0).obj M

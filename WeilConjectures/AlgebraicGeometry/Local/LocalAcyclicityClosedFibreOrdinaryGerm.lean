@@ -33,6 +33,7 @@ import WeilConjectures.AlgebraicGeometry.StrictHenselizationMapExists
 import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 import WeilConjectures.AlgebraicGeometry.StrictlyHenselianSectionsStalk
 import WeilConjectures.SixFunctors.BaseChange.GlobalSections
+import WeilConjectures.AlgebraicGeometry.StrictHenselizationRingResidue
 import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
 /-! # The unit map on closed-fibre stalks
@@ -72,7 +73,7 @@ private theorem restriction_isIso {S : Scheme.{u}}
   let : Algebra (S.residueField (s (IsLocalRing.closedPoint Ω))) Ω :=
     (Scheme.descResidueField (Scheme.stalkClosedPointTo s)).hom.toAlgebra
   obtain ⟨hlocal, hstrict, _, _, σ, ⟨hpoint, hbase⟩, _⟩ :=
-    strictHenselizationResidue s rfl
+    strictHenselizationRingResidue s rfl
   let := hlocal
   let y := Spec.map (CommRingCat.ofHom
     (((IntermediateField.val
@@ -262,11 +263,11 @@ theorem closedFibre_unit_stalk_comparison
     {Ξ : Type u} [Field Ξ] [IsAlgClosed Ξ]
     (z : Spec (.of Ξ) ⟶
       pullback (pullback.snd f (Scheme.strictHenselizationStructuralMap s))
-        (Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationPointEvaluation s)))) :
+        (Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationRingPointEvaluation s)))) :
     let p := pullback.fst f (Scheme.strictHenselizationStructuralMap s)
     let f' := pullback.snd f (Scheme.strictHenselizationStructuralMap s)
     let i := pullback.fst f' (Spec.map (CommRingCat.ofHom
-      (Scheme.strictHenselizationPointEvaluation s)))
+      (Scheme.strictHenselizationRingPointEvaluation s)))
     let h := pullback.fst f' t
     let x := (z ≫ i) ≫ p
     let K := (upperStar AddCommGrpCat.{u + 1} p).obj G
@@ -291,7 +292,7 @@ theorem closedFibre_unit_stalk_comparison
   let p := pullback.fst f (Scheme.strictHenselizationStructuralMap s)
   let f' := pullback.snd f (Scheme.strictHenselizationStructuralMap s)
   let i := pullback.fst f' (Spec.map (CommRingCat.ofHom
-    (Scheme.strictHenselizationPointEvaluation s)))
+    (Scheme.strictHenselizationRingPointEvaluation s)))
   let h := pullback.fst f' t
   let x' := z ≫ i
   let x := x' ≫ p
@@ -307,15 +308,15 @@ theorem closedFibre_unit_stalk_comparison
     exact MorphismProperty.IsStableUnderBaseChange.of_isPullback
       (P := @IsAffineHom) (IsPullback.of_hasPullback f' t).flip ht
   have hclosed : x' ≫ f' = (z ≫ pullback.snd f'
-      (Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationPointEvaluation s)))) ≫
-        Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationPointEvaluation s)) := by
+      (Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationRingPointEvaluation s)))) ≫
+        Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationRingPointEvaluation s)) := by
     simpa only [x', i, Category.assoc] using! congrArg (fun a ↦ z ≫ a)
       (pullback.condition (f := f') (g := Spec.map (CommRingCat.ofHom
-        (Scheme.strictHenselizationPointEvaluation s))))
+        (Scheme.strictHenselizationRingPointEvaluation s))))
   have hc := localAcyclicity_strict_fibre_comparison f s p f'
     (IsPullback.of_hasPullback f (Scheme.strictHenselizationStructuralMap s)) x'
     (z ≫ pullback.snd f' (Spec.map (CommRingCat.ofHom
-      (Scheme.strictHenselizationPointEvaluation s)))) hclosed t
+      (Scheme.strictHenselizationRingPointEvaluation s)))) hclosed t
   have hq := hc.1
   let e := Classical.choose hc.2
   let E := Classical.choose (Classical.choose_spec hc.2)

@@ -30,7 +30,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import WeilConjectures.AlgebraicGeometry.Exchange.ExchangeStrictLocalCohomologyStalk
-import WeilConjectures.AlgebraicGeometry.Strict.Henselization.StrictHenselizationCanonicalMap
+public import WeilConjectures.AlgebraicGeometry.Strict.Henselization.StrictHenselizationCanonicalMap
 
 /-! # Testing exchange on strict-local cohomology
 
@@ -85,8 +85,8 @@ theorem isIso_exchange_iff_strictLocalCohomology
           ((DerivedCategory.Plus.singleFunctor _ 0).obj F))) ↔
     ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X)
       (a : Scheme.strictHenselizationRing (x ≫ f) ⟶ Scheme.strictHenselizationRing x)
-      (_ : Scheme.strictHenselizationPointEvaluation (x ≫ f) =
-        (Scheme.strictHenselizationPointEvaluation x).comp a.hom)
+      (_ : Scheme.strictHenselizationRingPointEvaluation (x ≫ f) =
+        (Scheme.strictHenselizationRingPointEvaluation x).comp a.hom)
       (ha : Spec.map a ≫ Scheme.strictHenselizationStructuralMap (x ≫ f) =
         Scheme.strictHenselizationStructuralMap x ≫ f),
       Function.Bijective (cohomologyMap
@@ -115,14 +115,14 @@ theorem isIso_exchange_iff_strictLocalCohomology
     have ha : Spec.map a ≫ Scheme.strictHenselizationStructuralMap (x ≫ f) =
         Scheme.strictHenselizationStructuralMap x ≫ f := by
       simpa only [a, Spec.map_preimage] using hm.1
-    have he : Scheme.strictHenselizationPointEvaluation (x ≫ f) =
-        (Scheme.strictHenselizationPointEvaluation x).comp a.hom := by
+    have he : Scheme.strictHenselizationRingPointEvaluation (x ≫ f) =
+        (Scheme.strictHenselizationRingPointEvaluation x).comp a.hom := by
       apply RingHom.ext
       intro r
       have hh : Spec.map (CommRingCat.ofHom
-          ((Scheme.strictHenselizationPointEvaluation x).comp a.hom)) =
+          ((Scheme.strictHenselizationRingPointEvaluation x).comp a.hom)) =
           Spec.map (CommRingCat.ofHom
-            (Scheme.strictHenselizationPointEvaluation (x ≫ f))) := by
+            (Scheme.strictHenselizationRingPointEvaluation (x ≫ f))) := by
         simp only [CommRingCat.ofHom_comp, Spec.map_comp]
         have ham : Spec.map (CommRingCat.ofHom a.hom) = m := by
           change Spec.map a = m

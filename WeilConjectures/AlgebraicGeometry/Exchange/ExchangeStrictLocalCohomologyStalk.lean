@@ -24,6 +24,7 @@ public import WeilConjectures.RingTheory.StrictHenselizationTriples
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 import WeilConjectures.AlgebraicGeometry.Strict.Henselization.StrictHenselizationClosedFiberComparison
 import WeilConjectures.AlgebraicGeometry.Strict.Henselization.StrictHenselizationClosedLift
+public import WeilConjectures.AlgebraicGeometry.Strict.Henselization.StrictHenselizationCanonicalMap
 
 /-! # Local strict-henselian stalk criterion for exchange
 
@@ -46,12 +47,15 @@ set_option backward.isDefEq.respectTransparency.types false in
 private theorem evaluation_local
     {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) [IsLocalRing (Scheme.strictHenselizationRing y)] :
-    IsLocalHom (Scheme.strictHenselizationPointEvaluation y) := by
+    IsLocalHom (Scheme.strictHenselizationRingPointEvaluation y) := by
   let : Algebra (Y.residueField (y (IsLocalRing.closedPoint Ω))) Ω :=
     (Scheme.descResidueField (Scheme.stalkClosedPointTo y)).hom.toAlgebra
-  let ψ := Scheme.strictHenselizationPointEvaluationToSep y rfl
+  let e := Scheme.smallStrictHenselizationColimitIso y
+  let ψ : Scheme.strictHenselizationRing y →+* _ :=
+    (Scheme.strictHenselizationPointEvaluationToSep y rfl).comp e.hom.hom
   have : IsLocalHom ψ := IsLocalHom.of_surjective ψ
-    (Scheme.strictHenselizationPointEvaluationToSep_surjective y rfl)
+    ((Scheme.strictHenselizationPointEvaluationToSep_surjective y rfl).comp
+      e.commRingCatIsoToRingEquiv.surjective)
   let ι : separableClosure (Y.residueField (y (IsLocalRing.closedPoint Ω))) Ω →+* Ω :=
     (IntermediateField.val _).toRingHom
   have : IsLocalHom ι := inferInstance
@@ -115,8 +119,8 @@ theorem isIso_exchange_stalk_iff_strictLocalCohomology
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (x : Spec (.of Ω) ⟶ X)
     (a : Scheme.strictHenselizationRing (x ≫ f) ⟶ Scheme.strictHenselizationRing x)
-    (heval : Scheme.strictHenselizationPointEvaluation (x ≫ f) =
-      (Scheme.strictHenselizationPointEvaluation x).comp a.hom)
+    (heval : Scheme.strictHenselizationRingPointEvaluation (x ≫ f) =
+      (Scheme.strictHenselizationRingPointEvaluation x).comp a.hom)
     (ha : Spec.map a ≫ Scheme.strictHenselizationStructuralMap (x ≫ f) =
       Scheme.strictHenselizationStructuralMap x ≫ f) :
     IsIso ((Scheme.pointSmallEtale x).sheafFiber.map α) ↔
@@ -138,10 +142,10 @@ theorem isIso_exchange_stalk_iff_strictLocalCohomology
   have := hsB
   have := evaluation_local (x ≫ f)
   have := evaluation_local x
-  have : IsLocalHom ((Scheme.strictHenselizationPointEvaluation x).comp a.hom) :=
+  have : IsLocalHom ((Scheme.strictHenselizationRingPointEvaluation x).comp a.hom) :=
     heval ▸ evaluation_local (x ≫ f)
   have : IsLocalHom a.hom :=
-    isLocalHom_of_comp a.hom (Scheme.strictHenselizationPointEvaluation x)
+    isLocalHom_of_comp a.hom (Scheme.strictHenselizationRingPointEvaluation x)
   let jA := Scheme.strictHenselizationStructuralMap (x ≫ f)
   let jB := Scheme.strictHenselizationStructuralMap x
   let eA : Spec (Scheme.strictHenselizationRing (x ≫ f)) ≅
@@ -154,9 +158,9 @@ theorem isIso_exchange_stalk_iff_strictLocalCohomology
   have heB : eB.hom ≫ Scheme.strictLocalizationToBase x = jB :=
     Scheme.smallStrictHenselizationColimitIso_toBase x
   let ρA := Spec.map (CommRingCat.ofHom
-    (IsLocalRing.ResidueField.lift (Scheme.strictHenselizationPointEvaluation (x ≫ f))))
+    (IsLocalRing.ResidueField.lift (Scheme.strictHenselizationRingPointEvaluation (x ≫ f))))
   let ρB := Spec.map (CommRingCat.ofHom
-    (IsLocalRing.ResidueField.lift (Scheme.strictHenselizationPointEvaluation x)))
+    (IsLocalRing.ResidueField.lift (Scheme.strictHenselizationRingPointEvaluation x)))
   have hρA : ρA ≫ Spec.map (CommRingCat.ofHom
       (IsLocalRing.residue (Scheme.strictHenselizationRing (x ≫ f)))) ≫
       eA.hom ≫ Scheme.strictLocalizationToBase (x ≫ f) = x ≫ f := by

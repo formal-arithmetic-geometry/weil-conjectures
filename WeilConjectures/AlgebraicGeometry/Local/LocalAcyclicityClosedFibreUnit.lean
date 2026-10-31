@@ -86,7 +86,7 @@ theorem isIso_closedFibre_derivedUnit_of_isLocallyAcyclicRelative
         (upperStar AddCommGrpCat.{u + 1}
           (pullback.fst (pullback.snd f (Scheme.strictHenselizationStructuralMap s))
             (Spec.map (CommRingCat.ofHom
-              (Scheme.strictHenselizationPointEvaluation s)))))).map
+              (Scheme.strictHenselizationRingPointEvaluation s)))))).map
         ((Adjunction.derivedPlus
           (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1}
             (pullback.fst (pullback.snd f (Scheme.strictHenselizationStructuralMap s)) t))).unit.app
@@ -96,7 +96,7 @@ theorem isIso_closedFibre_derivedUnit_of_isLocallyAcyclicRelative
   let p := pullback.fst f (Scheme.strictHenselizationStructuralMap s)
   let f' := pullback.snd f (Scheme.strictHenselizationStructuralMap s)
   let i := pullback.fst f' (Spec.map (CommRingCat.ofHom
-    (Scheme.strictHenselizationPointEvaluation s)))
+    (Scheme.strictHenselizationRingPointEvaluation s)))
   let h := pullback.fst f' t
   let G' := (upperStar AddCommGrpCat.{u + 1} p).obj G
   let K := (DerivedCategory.Plus.singleFunctor _ 0).obj G'

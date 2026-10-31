@@ -10,6 +10,7 @@ import WeilConjectures.AlgebraicGeometry.StrictHenselizationPointEvaluationPoint
 import WeilConjectures.AlgebraicGeometry.StrictHenselizationPointEvaluation
 import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
+public import WeilConjectures.AlgebraicGeometry.Strict.Henselization.StrictHenselizationCanonicalMap
 
 /-! # Specialization to the distinguished closed lift
 
@@ -141,10 +142,10 @@ theorem Etale.etaleStalkSpecialization_closed
     (s : Spec (.of Ω) ⟶ S)
     (F : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}) :
     etaleStalkSpecialization s
-        (Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation s))) F ≫
+        (Spec.map (CommRingCat.ofHom (strictHenselizationRingPointEvaluation s))) F ≫
       eqToHom (congrArg (fun p ↦ (pointSmallEtale p).sheafFiber.obj F)
         (strictHenselizationClosedLift_over s)) = 𝟙 _ := by
-  let y := Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation s))
+  let y := Spec.map (CommRingCat.ofHom (strictHenselizationRingPointEvaluation s))
   let N := (equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse ⋙
     strictHenselizationAffineInclusion s ⋙ ObjectProperty.ι
       (fun n : (pointSmallEtale s).fiber.Elements ↦ IsAffine n.1.left)
@@ -166,7 +167,7 @@ theorem Etale.etaleStalkSpecialization_closed
     change ((equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse.obj
       j.unop).2.left = _
     simpa only [y, Scheme.isoSpec_Spec_inv] using
-      (strictHenselizationPointEvaluation_pointed s j.unop).symm
+      (strictHenselizationRingPointEvaluation_pointed s j.unop).symm
   change (pointSmallEtale s).toPresheafFiber U w F.obj ≫ _ = _
   rw [← Category.assoc]
   erw [strictLocal_germ s y F j.unop v hv]
@@ -200,11 +201,11 @@ theorem Etale.derivedEtaleStalkSpecialization_closed
     (s : Spec (.of Ω) ⟶ S)
     (K : _root_.DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1})) :
     (derivedEtaleStalkSpecialization s
-        (Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation s)))).app K =
+        (Spec.map (CommRingCat.ofHom (strictHenselizationRingPointEvaluation s)))).app K =
       eqToHom (congrArg (fun p : Spec (.of Ω) ⟶ S ↦
         (pointSmallEtale p).sheafFiber.mapDerivedCategoryPlus.obj K)
           (strictHenselizationClosedLift_over s).symm) := by
-  let y := Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation s))
+  let y := Spec.map (CommRingCat.ofHom (strictHenselizationRingPointEvaluation s))
   let F := fun p : Spec (.of Ω) ⟶ S ↦
     (pointSmallEtale p).sheafFiber (A := AddCommGrpCat.{u + 1})
   let h := (strictHenselizationClosedLift_over s).symm

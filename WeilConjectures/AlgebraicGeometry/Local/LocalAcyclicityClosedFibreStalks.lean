@@ -71,11 +71,11 @@ theorem closedFibre_derivedUnit_target_stalks
     {Ξ : Type u} [Field Ξ] [IsAlgClosed Ξ]
     (z : Spec (.of Ξ) ⟶
       pullback (pullback.snd f (Scheme.strictHenselizationStructuralMap s))
-        (Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationPointEvaluation s)))) :
+        (Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationRingPointEvaluation s)))) :
     let p := pullback.fst f (Scheme.strictHenselizationStructuralMap s)
     let f' := pullback.snd f (Scheme.strictHenselizationStructuralMap s)
     let i := pullback.fst f' (Spec.map (CommRingCat.ofHom
-      (Scheme.strictHenselizationPointEvaluation s)))
+      (Scheme.strictHenselizationRingPointEvaluation s)))
     let h := pullback.fst f' t
     let x := (z ≫ i) ≫ p
     ∃ e : Scheme.strictHenselizationScheme s ≅ Scheme.strictHenselizationScheme (x ≫ f),
@@ -97,7 +97,7 @@ theorem closedFibre_derivedUnit_target_stalks
   let p := pullback.fst f (Scheme.strictHenselizationStructuralMap s)
   let f' := pullback.snd f (Scheme.strictHenselizationStructuralMap s)
   let i := pullback.fst f' (Spec.map (CommRingCat.ofHom
-    (Scheme.strictHenselizationPointEvaluation s)))
+    (Scheme.strictHenselizationRingPointEvaluation s)))
   let h := pullback.fst f' t
   let x' := z ≫ i
   let x := x' ≫ p
@@ -107,15 +107,15 @@ theorem closedFibre_derivedUnit_target_stalks
   have ht : IsAffineHom t := inferInstance
   have hh : IsAffineHom h := MorphismProperty.pullback_fst f' t ht
   have hclosed : x' ≫ f' = (z ≫ pullback.snd f'
-      (Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationPointEvaluation s)))) ≫
-        Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationPointEvaluation s)) := by
+      (Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationRingPointEvaluation s)))) ≫
+        Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationRingPointEvaluation s)) := by
     simpa only [x', i, Category.assoc] using congrArg (fun a ↦ z ≫ a)
       (pullback.condition (f := f') (g := Spec.map (CommRingCat.ofHom
-        (Scheme.strictHenselizationPointEvaluation s))))
+        (Scheme.strictHenselizationRingPointEvaluation s))))
   obtain ⟨_, e, E, _, hE⟩ := localAcyclicity_strict_fibre_comparison f s p f'
     (IsPullback.of_hasPullback f (Scheme.strictHenselizationStructuralMap s)) x'
     (z ≫ pullback.snd f' (Spec.map (CommRingCat.ofHom
-      (Scheme.strictHenselizationPointEvaluation s)))) hclosed t
+      (Scheme.strictHenselizationRingPointEvaluation s)))) hclosed t
   refine ⟨e, fun q ↦ ?_⟩
   let G' := (upperStar AddCommGrpCat.{u + 1} p).obj G
   let F := (upperStar AddCommGrpCat.{u + 1} h).obj G'
