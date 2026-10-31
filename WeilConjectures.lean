@@ -16253,6 +16253,7 @@ public import WeilConjectures.TraceFormula.Specialization.TraitPowMap
 public import WeilConjectures.TraceFormula.Specialization.TraitProduct
 public import WeilConjectures.TraceFormula.Specialization.TraitProductRestrict
 public import WeilConjectures.TraceFormula.Specialization.TraitSlice
+public import WeilConjectures.TraceFormula.Specialization.TraitSliceGaloisClosure
 public import WeilConjectures.TraceFormula.Specialization.TraitSliceGaloisCompositum
 public import WeilConjectures.TraceFormula.Specialization.TraitSliceGaloisField
 public import WeilConjectures.TraceFormula.Specialization.TraitSliceGaloisHensel
