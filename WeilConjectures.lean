@@ -16190,6 +16190,7 @@ public import WeilConjectures.TraceFormula.Specialization.ResidueConstantCase
 public import WeilConjectures.TraceFormula.Specialization.ResidueConstantSmoothExchange
 public import WeilConjectures.TraceFormula.Specialization.ResidueConstantThickOrigin
 public import WeilConjectures.TraceFormula.Specialization.SliceBaseModel
+public import WeilConjectures.TraceFormula.Specialization.SliceNearbyCyclesFiniteQuotient
 public import WeilConjectures.TraceFormula.Specialization.SliceSupport
 public import WeilConjectures.TraceFormula.Specialization.SliceTrait
 public import WeilConjectures.TraceFormula.Specialization.SliceTraitAlgebraic
