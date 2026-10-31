@@ -1,0 +1,140 @@
+/-
+Copyright (c) 2026 Bin Wu. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Bin Wu
+-/
+module
+
+public import WeilConjectures.AlgebraicGeometry.Modules.Ext
+public import WeilConjectures.AlgebraicGeometry.Modules.HomTensor
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorHomAdjunction
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import WeilConjectures.AlgebraicGeometry.ExtEvaluation
+import WeilConjectures.AlgebraicGeometry.Modules.FiniteLocallyFreeTensorExact
+import WeilConjectures.CategoryTheory.RightDerivedExactComposite
+import WeilConjectures.AlgebraicGeometry.PQFCohomologySupplement
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+import WeilConjectures.CategoryTheory.RingedSiteModules
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+import WeilConjectures.AlgebraicGeometry.PQFCohomology
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctorialitySupplement
+import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
+import WeilConjectures.Algebra.Homology.KFlatSupplement
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
+import Mathlib.Algebra.Category.Grp.FilteredColimits
+import Mathlib.Algebra.Homology.BifunctorShift
+import Mathlib.Algebra.Homology.QuasiIso
+import Mathlib.CategoryTheory.Sites.Equivalence
+import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
+import Mathlib.CategoryTheory.Limits.EssentiallySmall
+import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUniverses
+import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
+
+/-!
+# The canonical locally free Ext comparison
+
+Source: Weil conjectures blueprint, `lem-sc-ext-locally-free`, proof
+(blueprint: lem-sc-ext-locally-free).
+
+That `dualTensorHom F G` is an isomorphism for a finite locally free `F` is the upstream
+instance `AlgebraicGeometry.Scheme.Modules.isIso_dualTensorHom_of_isFiniteLocallyFree`
+(`WeilConjectures.AlgebraicGeometry.Modules.HomTensor.LocallyFree`), used below.
+-/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
+open scoped AlgebraicGeometry.Scheme.Modules
+
+namespace AlgebraicGeometry.Scheme.Modules
+
+noncomputable section
+
+/-- The additive functor `G ↦ Hom(F,G)` followed by forgetting module structure.
+Source: blueprint `lem-sc-ext-locally-free`, proof, first sentence
+(blueprint: lem-sc-ext-locally-free). -/
+def locallyFreeHomAbelianFunctor {X : Scheme.{u}} (F : X.Modules) :
+    X.Modules ⥤ Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u} :=
+  (SheafOfModules.homFunctor X.sheaf).obj (op F) ⋙
+    SheafOfModules.toSheaf X.ringCatSheaf
+
+/-- Internal Hom in a finite locally free first argument is additive and exact.
+Source: blueprint `lem-sc-ext-locally-free`, proof, evaluation and exactness sentences.
+Proof: lem-sc-ext-evaluation identifies Hom(F,-) with Fᵛ tensor -. The dual is finite
+locally free with the same local ranks, so lem-sc-ext-tensor-exact applies. Forgetting
+module structure is exact since kernels and cokernels are formed in abelian sheaves.
+(blueprint: lem-sc-ext-locally-free). -/
+theorem locallyFreeHomAbelianFunctor_exact {X : Scheme.{u}} (F : X.Modules)
+    [F.IsFiniteLocallyFree] :
+    (locallyFreeHomAbelianFunctor F).Additive ∧
+      PreservesFiniteLimits (locallyFreeHomAbelianFunctor F) ∧
+      PreservesFiniteColimits (locallyFreeHomAbelianFunctor F) := sorry
+
+/-- The canonical comparison sends an extension through the exact internal Hom functor,
+then precomposes with the identity section, and applies inverse evaluation.
+Source: blueprint `lem-sc-ext-locally-free`, proof
+(blueprint: lem-sc-ext-locally-free). -/
+def locallyFreeExtComparison {X : Scheme.{u}} [HasExt.{u} X.Modules]
+    (F G : X.Modules) [F.IsFiniteLocallyFree] (i : ℕ) : Ext F G i →+ (Fᵛ ⊗ G).H i :=
+  letI : (locallyFreeHomAbelianFunctor F).Additive :=
+    (locallyFreeHomAbelianFunctor_exact F).1
+  letI : PreservesFiniteLimits (locallyFreeHomAbelianFunctor F) :=
+    (locallyFreeHomAbelianFunctor_exact F).2.1
+  letI : PreservesFiniteColimits (locallyFreeHomAbelianFunctor F) :=
+    (locallyFreeHomAbelianFunctor_exact F).2.2
+  let η := (H.zeroLinearEquiv (homObj F F)).symm
+    (((SheafOfModules.homObjSectionsEquiv F F).symm (𝟙 F)).val (op ⊤))
+  (H.map (inv (dualTensorHom F G)) i).comp
+    ((η.precomp ((locallyFreeHomAbelianFunctor F).obj G) (Nat.zero_add i)).comp
+      ((locallyFreeHomAbelianFunctor F).mapExtAddHom F G i))
+
+/-- The canonical comparison is bijective.
+Source: blueprint `lem-sc-ext-locally-free`, proof.
+Proof: evaluation and the global-sections description of sheaf Hom identify Hom(F,-)
+with Gamma composed with Fᵛ tensor -. This tensor functor is exact. The tensor-Hom
+adjunction makes it preserve injectives (lem-sp-right-adjoint-preserves-injectives),
+which are Gamma-acyclic. Scheme modules have enough injectives. The derived-composite
+comparison therefore gives the claimed isomorphism, and the Ext identification via
+injective resolutions agrees with the displayed map. For F = O, evaluation and the
+unit tensor isomorphism give Ext(O,G) = H(G).
+(blueprint: lem-sc-ext-locally-free). -/
+theorem bijective_locallyFreeExtComparison {X : Scheme.{u}} [HasExt.{u} X.Modules]
+    (F G : X.Modules) [F.IsFiniteLocallyFree] (i : ℕ) :
+    Function.Bijective (locallyFreeExtComparison F G i) := sorry
+
+/-- The canonical additive isomorphism of Ext with cohomology of the dual tensor.
+Source: blueprint `lem-sc-ext-locally-free`, statement and proof
+(blueprint: lem-sc-ext-locally-free). -/
+def locallyFreeExtAddEquivH {X : Scheme.{u}} [HasExt.{u} X.Modules]
+    (F G : X.Modules) [F.IsFiniteLocallyFree] (i : ℕ) : Ext F G i ≃+ (Fᵛ ⊗ G).H i :=
+  AddEquiv.ofBijective (locallyFreeExtComparison F G i)
+    (bijective_locallyFreeExtComparison F G i)
+
+
+/-- For the structure sheaf as first argument, the canonical Ext comparison has target
+`H^i(X,G)`, by the evaluation identification of the dual of the tensor unit with the unit.
+Source: blueprint `lem-sc-ext-locally-free`, final clause
+(blueprint: lem-sc-ext-locally-free). -/
+def locallyFreeUnitExtAddEquivH {X : Scheme.{u}} [HasExt.{u} X.Modules]
+    (G : X.Modules) (i : ℕ) : Ext (SheafOfModules.unit X.ringCatSheaf) G i ≃+ G.H i :=
+  let O : X.Modules := 𝟙_ X.Modules
+  letI : O.IsInvertible := isInvertible_tensorUnit (X := X)
+  letI : O.IsFiniteLocallyFree := SheafOfModules.IsInvertible.isFiniteLocallyFree O
+    (h := IsInvertible.sheafOfModules_isInvertible O)
+  (locallyFreeExtAddEquivH O G i).trans
+    (H.mapLinearEquiv
+      (whiskerRightIso ((λ_ Oᵛ).symm ≪≫ asIso (dualEvaluation O)) G ≪≫ λ_ G) i).toAddEquiv
+
+end
+
+end AlgebraicGeometry.Scheme.Modules
