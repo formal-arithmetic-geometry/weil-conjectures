@@ -41,7 +41,6 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
-
 namespace NearbyCyclesModel
 
 /-- If `k ≫ g' = L₀ f ≫ k` for an epimorphism `k` and `f = 𝟙`, then `g' = 𝟙`. -/
@@ -94,7 +93,8 @@ lemma exists_retraction_of_averaging_conj {E : Type*} [Category E] [Preadditive 
 /-- `NearbyCyclesModel.exists_retraction_of_averaging_conj` in the shape of the composition law
 `NearbyCyclesModel.Hom.pullbackExchange_comp_app_of_eq` for the factorization of the projection
 `χ : M'' ⟶ M` through `κ : M'' ⟶ M_b` and `ψ : M_b ⟶ M` (`hx`): if the exchange `αψ` of `ψ` is
-split with `n` times its idempotent `∑ f i`, the exchange `ακ` of `κ` is invertible and
+split with `n_V • (r ≫ αψ) = s_V` and `∑ f i = m • s_V` (`n = m n_V`, the counting of cosets of
+nested subgroups), the exchange `ακ` of `κ` is invertible and
 intertwines `f i` with `g' i`, then the exchange `αχ` of `χ` is split with `n` times its
 idempotent `∑ g i`, for natural endomorphisms `g`, `g'` of `Ψ_{M''}`. -/
 lemma exists_retraction_of_averaging_comp {DX DM DT D₂ : Type*} [Category DX] [Category DM]
@@ -122,16 +122,12 @@ lemma exists_retraction_of_averaging_comp {DX DM DT D₂ : Type*} [Category DX] 
 section LiftExchange
 
 variable {ℓ : ℕ} [Fact ℓ.Prime] {k₁ k₁' k₂ k₂' : Type u} [Field k₁] [Field k₁'] [Field k₂]
-  [Field k₂'] [Fact (ringChar k₁ ≠ ℓ)] [Fact (ringChar k₁' ≠ ℓ)] [Fact (ringChar k₂ ≠ ℓ)]
-  [Fact (ringChar k₂' ≠ ℓ)]
-  {X : Over (Spec (.of k₁))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
-  {X' : Over (Spec (.of k₁'))} [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
-  {Y : Over (Spec (.of k₂))} [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
-  {Y' : Over (Spec (.of k₂'))} [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom]
-  {M : NearbyCyclesModel X.left X'.left} {N : NearbyCyclesModel Y.left Y'.left}
-  {j : Y.left ⟶ X.left} {j' : Y'.left ⟶ X'.left}
+  [Field k₂'] {X : Over (Spec (.of k₁))} {X' : Over (Spec (.of k₁'))} {Y : Over (Spec (.of k₂))}
+  {Y' : Over (Spec (.of k₂'))} {M : NearbyCyclesModel X.left X'.left}
+  {N : NearbyCyclesModel Y.left Y'.left} {j : Y.left ⟶ X.left} {j' : Y'.left ⟶ X'.left}
 
-set_option maxHeartbeats 1600000 in
+set_option maxHeartbeats 800000 in
+-- each derived pullback `L(f)^*` in the statement costs seconds of instance search
 /-- **Averaging splittings on bounded constructible complexes**: let `β` be the restriction
 `NearbyCyclesModel.liftExchange` of an exchange `α : Ψ_M ⋙ Lj'^* ⟶ Lj^* ⋙ Ψ_N` to bounded
 constructible complexes, and `ρ σ` the restrictions of the actions of self-maps `ψ σ` of `N`
@@ -167,7 +163,8 @@ private lemma exists_retraction_liftExchange_of_averaging
           (L((j)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A.obj))
     (htriv : ∀ σ ∈ U, (ψ σ).autAction (Profinite.padicAlgClRingObj ℓ)
         (L((j)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A.obj) = 𝟙 _)
-    {r : (L((j)^*⟦Profinite.padicAlgClRingObj ℓ⟧) ⋙ N.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).obj
+    {r : (L((j)^*⟦Profinite.padicAlgClRingObj ℓ⟧) ⋙
+        N.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).obj
         A.obj ⟶ (M.nearbyCycles (Profinite.padicAlgClRingObj ℓ) ⋙
           L((j')^*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj A.obj}
     (hr : α.app A.obj ≫ r = 𝟙 _)
@@ -214,7 +211,9 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] [IsSepClosed k'] [Fact (ringChar k').Prime
   (h : M.IsTraitModelOfGenericBase X₁ ι q g) {b : M.total ⟶ 𝔸(ULift.{u} (Fin 1); trait k')}
   (hb : b ≫ 𝔸(ULift.{u} (Fin 1); trait k') ↘ trait k' = q)
 
-set_option maxHeartbeats 1600000 in
+
+set_option maxHeartbeats 800000 in
+-- each derived pullback `L(f)^*` in the statement costs seconds of instance search
 /-- **The slice exchange is an averaging summand** (ambient derived categories): for a bounded
 constructible `A` on `X₁`, there is a subgroup `V` of finite index of the pro-`p` kernel `P'`
 acting trivially on `Ψ_{M''} (c^* A)`, and for every subgroup `U ≤ V` of finite index, the
@@ -333,27 +332,13 @@ private theorem exists_subgroup_genericSliceHom_pullbackExchange
 
 end Ambient
 
-variable (ℓ : ℕ) [Fact ℓ.Prime] [Fact (ringChar F).Prime] [Fact (ringChar F ≠ ℓ)]
-  [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
-  [LocallyOfFiniteType X₁.hom] [QuasiCompact X₁.hom] [IsSeparated X₁.hom]
-  [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom]
+variable (ℓ : ℕ) [Fact ℓ.Prime] [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
   [Fact (ringChar (traitSliceField k')).Prime] [Fact (ringChar (traitSliceField k') ≠ ℓ)]
-  [Fact (ringChar (FractionRing (PowerSeries (traitSliceField k')))).Prime]
-  [Fact (ringChar (FractionRing (PowerSeries (traitSliceField k'))) ≠ ℓ)]
   (h : M.IsTraitModelOfGenericBase X₁ ι q g) {b : M.total ⟶ 𝔸(ULift.{u} (Fin 1); trait k')}
   (hb : b ≫ 𝔸(ULift.{u} (Fin 1); trait k') ↘ trait k' = q)
-  [LocallyOfFiniteType (genericSliceBase (traitSliceCoord k') hb).hom]
-  [QuasiCompact (genericSliceBase (traitSliceCoord k') hb).hom]
-  [IsSeparated (genericSliceBase (traitSliceCoord k') hb).hom]
-  [LocallyOfFiniteType (baseChangeSpecial b (traitSlice (traitSliceCoord k'))).hom]
-  [QuasiCompact (baseChangeSpecial b (traitSlice (traitSliceCoord k'))).hom]
-  [IsSeparated (baseChangeSpecial b (traitSlice (traitSliceCoord k'))).hom]
 
-set_option maxHeartbeats 1600000 in
-omit [Fact (ringChar F).Prime] [IsSeparated X₁.hom] [IsSeparated X'.hom]
-  [Fact (ringChar (FractionRing (PowerSeries (traitSliceField k')))).Prime]
-  [IsSeparated (genericSliceBase (traitSliceCoord k') hb).hom]
-  [IsSeparated (baseChangeSpecial b (traitSlice (traitSliceCoord k'))).hom] in
+set_option maxHeartbeats 800000 in
+-- each derived pullback `L(f)^*` in the statement costs seconds of instance search
 /-- **The slice exchange is an averaging summand** (bounded constructible complexes): for a bounded
 constructible `A` on `X₁` there is a subgroup `V` of finite index of the pro-`p` kernel `P'` such
 that for every normal subgroup `U ≤ V` of finite index, the slice exchange
@@ -401,14 +386,11 @@ private theorem exists_subgroup_genericSliceExchange
     (fun σ τ ↦ autAction_genericSliceAut_mul (traitSliceCoord k') hb _ σ τ _)
     (fun σ hσ ↦ htriv σ (hUV hσ)) hr hravg
 
--- `Dᵇc` is monoidal through `ObjectProperty.fullMonoidalSubcategory` in the users of this statement.
+-- `Dᵇc` is monoidal through `ObjectProperty.fullMonoidalSubcategory` in the users of the
+-- following statement.
 attribute [-instance] monoidalCategory_boundedConstructible
   ObjectProperty.instMonoidalCategoryStructFullSubcategory
 
-omit [Fact (ringChar F).Prime] [IsSeparated X₁.hom] [IsSeparated X'.hom]
-  [Fact (ringChar (FractionRing (PowerSeries (traitSliceField k')))).Prime]
-  [IsSeparated (genericSliceBase (traitSliceCoord k') hb).hom]
-  [IsSeparated (baseChangeSpecial b (traitSlice (traitSliceCoord k'))).hom] in
 /-- **The slice exchange is an averaging summand at a finite level** (blueprint
 `det-tf-nearby-duality-slice`, the generic-slicing identification `g_s^* Ψ_M ≃ (Ψ_{M''} c^*)^P`,
 with `det-tf-invariants-duality`; SGA 4½, [Th. finitude], §3). For two bounded constructible
