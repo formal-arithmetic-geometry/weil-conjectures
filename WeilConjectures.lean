@@ -10909,6 +10909,7 @@ public import WeilConjectures.EtaleCohomology.TateTwist.AffineLineDescentClauses
 public import WeilConjectures.EtaleCohomology.TateTwist.AffineLineDescentKummer
 public import WeilConjectures.EtaleCohomology.TateTwist.Basic
 public import WeilConjectures.EtaleCohomology.TateTwist.Cohomology
+public import WeilConjectures.EtaleCohomology.TateTwist.FiniteEndomorphisms
 public import WeilConjectures.EtaleCohomology.TateTwist.FiniteKummerLevel
 public import WeilConjectures.EtaleCohomology.TateTwist.FiniteKummerLevelBaseChange
 public import WeilConjectures.EtaleCohomology.TateTwist.FrobeniusNormalization
@@ -15077,6 +15078,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IndConst
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntegralConstantComplex
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntegralConstantDerived
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntegralConstantRegularEnd
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntegralDualizable
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntegralLisseDerived
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntegralLisseDerivedAux
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntegralLisseHypotheses
@@ -15175,6 +15177,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.Homology
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.IntegersPowShift
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.IntegralCriterion
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.LiftIsomorphisms
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.LiftMorphisms
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.LocallyFinitelyGenerated
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.ReductionHomology
@@ -15418,13 +15421,21 @@ public import WeilConjectures.SixFunctors.ProperOrderedProjectionExchange
 public import WeilConjectures.SixFunctors.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.UpperLowerStar.Monoidal
 public import WeilConjectures.SmoothPurity.Defs
+public import WeilConjectures.SmoothPurity.DiagonalOrientationQbar
+public import WeilConjectures.SmoothPurity.IntegralDualizingComplexIso
+public import WeilConjectures.SmoothPurity.IntegralTateTwistExtendScalars
 public import WeilConjectures.SmoothPurity.OrientationBaseChange
+public import WeilConjectures.SmoothPurity.OrientationCanonical
+public import WeilConjectures.SmoothPurity.OrientationOfDiagonalClass
+public import WeilConjectures.SmoothPurity.TateTwistBoundedConstructible
+public import WeilConjectures.SmoothPurity.TateTwistDualizable
 public import WeilConjectures.SmoothPurity.TateTwistPullback
 public import WeilConjectures.SmoothPurity.TraceBaseChange
 public import WeilConjectures.SmoothPurity.UpperShriekBaseChangePasting
 public import WeilConjectures.SmoothPurity.UpperShriekBaseChangeReduction
 public import WeilConjectures.SmoothPurity.UpperShriekOpenVanishing
 public import WeilConjectures.SmoothPurity.UpperShriekSmoothBaseChange
+public import WeilConjectures.SmoothPurity.UpperShriekUnitDualizable
 public import WeilConjectures.SpecialValues
 public import WeilConjectures.Statement
 public import WeilConjectures.Tactic.ExactByKernel
@@ -15724,6 +15735,7 @@ public import WeilConjectures.TraceFormula.CurvePiecesAdditivity
 public import WeilConjectures.TraceFormula.CurveSupportedPairing
 public import WeilConjectures.TraceFormula.DualizableShift
 public import WeilConjectures.TraceFormula.Dualizing
+public import WeilConjectures.TraceFormula.DualizingSmooth
 public import WeilConjectures.TraceFormula.ExceptionalKunnethFunctoriality
 public import WeilConjectures.TraceFormula.ExceptionalKunnethRestriction
 public import WeilConjectures.TraceFormula.ExternalProductCoefficients
@@ -15821,6 +15833,7 @@ public import WeilConjectures.TraceFormula.PurityDevissage
 public import WeilConjectures.TraceFormula.PurityOrientation
 public import WeilConjectures.TraceFormula.PurityOrientationPure
 public import WeilConjectures.TraceFormula.PurityTensorMap
+public import WeilConjectures.TraceFormula.PurityTensorMapDualizable
 public import WeilConjectures.TraceFormula.PurityTensorMapShift
 public import WeilConjectures.TraceFormula.PushforwardFamily
 public import WeilConjectures.TraceFormula.RationalModel

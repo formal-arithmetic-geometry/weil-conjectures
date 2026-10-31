@@ -9,6 +9,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Basic
 public import WeilConjectures.EtaleCohomology.TateTwist.FiniteEndomorphisms
 public import WeilConjectures.EtaleCohomology.TateTwist.Normalized
+public import WeilConjectures.Mathlib.Topology.NoetherianSpace
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.LiftIsomorphisms
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReductionConservative
@@ -112,11 +113,11 @@ lemma nonempty_shift_etaleReduction_integralTateTwist_iso_upperShriek :
         (etaleReductionUnitIso ℓ E n Y)).symm⟩
 
 /-- **The integral relative dualizing complex of a smooth morphism is a shifted Tate twist**:
-`Rf^! 𝒪_{E,Y} ≅ 𝒪_{E,X}(d)[2d]` for `f` smooth of pure relative dimension `d` with connected
-source (so that the étale Tate twists `Λ_X(d)`, `Λ = 𝒪_E ⧸ ℓⁿ`, have finitely many endomorphisms,
-`Etale.finite_endomorphisms_tateObject`). The isomorphism is not
-canonical (König's lemma). -/
-theorem nonempty_iso_integralTateTwist_upperShriekUnit [ConnectedSpace X.left] :
+`Rf^! 𝒪_{E,Y} ≅ 𝒪_{E,X}(d)[2d]` for `f` smooth of pure relative dimension `d` (the source is
+noetherian, so it has finitely many connected components and the étale Tate twists `Λ_X(d)`,
+`Λ = 𝒪_E ⧸ ℓⁿ`, have finitely many endomorphisms, `Etale.finite_endomorphisms_tateObject`). The
+isomorphism is not canonical (König's lemma). -/
+theorem nonempty_iso_integralTateTwist_upperShriekUnit :
     Nonempty ((shiftFunctor (Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) (2 * d : ℤ)).obj
         (integralTateTwistBoundedConstructible ℓ E X.hom d) ≅
       (PadicIntegersRingObj.boundedConstructibleUpperShriek ℓ E f).obj (𝟙_ _)) := by
