@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.AffineSpaceClosedPoints
 public import WeilConjectures.AlgebraicGeometry.QuasiFiniteClosedPoints
-public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethSliceStep
+public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethFormula
 public import WeilConjectures.TraceFormula.Specialization.TraitProductRestrict
 import WeilConjectures.TraceFormula.Specialization.SliceSupport
 import WeilConjectures.AlgebraicGeometry.StrictHenselizationLimitDimension
@@ -267,6 +267,7 @@ lemma isTraitModelOver_restrictOpen_productOpen
 
 set_option maxHeartbeats 1600000 in
 -- the triangle of the Künneth map has large terms
+omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
 /-- **The finite-support step of Gabber's Künneth formula** (blueprint
 `sk-prop-tf-nearby-external-kunneth`, "Finite support"; Illusie, *Autour du théorème de monodromie
 locale*, proof of Thm. 4.7): for the product `P` over the strictly henselian trait of models `M`,
@@ -289,7 +290,7 @@ theorem exists_finite_isIso_upperStar_map_kunnethMap_of_boundedConstructible
     (hP : P.IsTraitModelOver (φ₁.total ≫ qM) (φ₁.generic ≫ gM))
     (hgen : φ₂.generic ≫ gN = φ₁.generic ≫ gM) {m m' : ℕ}
     (hm : qM.LocallyEmbedsInAffineSpace m) (hm' : qN.LocallyEmbedsInAffineSpace m')
-    (hIH : 0 < m + m' → KunnethFormula ℓ (traitSliceField k') (m + m' - 1))
+    (hslice : 0 < m + m' → SliceKunnethFormula (Profinite.padicAlgClRingObj ℓ) k' (m + m' - 1))
     {eM : M.total ⟶ X} (heM : M.j ≫ eM = M.ε) {eN : N.total ⟶ Y} (heN : N.j ≫ eN = N.ε)
     {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))}
@@ -426,17 +427,17 @@ theorem exists_finite_isIso_upperStar_map_kunnethMap_of_boundedConstructible
           (traitSlice (traitSliceCoord k'))
         have hlt : Nat.card {j : ιV // j ≠ a} < Nat.card ιV :=
           Finite.card_subtype_lt (x := a) (by simp)
-        exact isIso_map_kunnethMap_baseChangeSpecialMap_fst hMV hNW hpbU hPU hgenU
+        exact (hslice (by omega)).isIso ψ₁ ψ₂ hMV hNW hpbU hPU hgenU
           (b := cV ≫ AffineSpace.reindex (fun _ ↦ a) (trait k')) (by simp [hcV])
-          (hIH (by omega)) (by omega) (Scheme.Hom.LocallyEmbedsInAffineSpace.of_isImmersion c' hc')
+          (by omega) (Scheme.Hom.LocallyEmbedsInAffineSpace.of_isImmersion c' hc')
           (hm'.restrict W) heMV heNW hA' hB'
       · obtain ⟨c', hc'i, hc'⟩ := exists_isImmersion_pullback_reindex cW a
           (traitSlice (traitSliceCoord k'))
         have hlt : Nat.card {j : ιW // j ≠ a} < Nat.card ιW :=
           Finite.card_subtype_lt (x := a) (by simp)
         exact isIso_map_kunnethMap_baseChangeSpecialMap_snd hMV hNW hpbU hPU hgenU
-          (b := cW ≫ AffineSpace.reindex (fun _ ↦ a) (trait k')) (by simp [hcW])
-          (hIH (by omega)) (by omega) (hm.restrict V)
+          (b := cW ≫ AffineSpace.reindex (fun _ ↦ a) (trait k')) (by simp [hcW]) _
+          (hslice (by omega)) (by omega) (hm.restrict V)
           (Scheme.Hom.LocallyEmbedsInAffineSpace.of_isImmersion c' hc') heMV heNW hA' hB'
     rw [← isIso_map_map_kunnethMap_iff_of_isKunnethRestriction _ hR] at hslice
     let r' : (P.restrictSpecialFibre U).left ⟶ Z'.left := (P.i ⁻¹ᵁ U).ι

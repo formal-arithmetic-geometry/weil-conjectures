@@ -169,7 +169,8 @@ theorem isIso_map_kunnethMap_of_coinvariant (φ₁ : P.Hom M f₁ f₁') (φ₂ 
       ((N.nearbyCycles Λ).obj B) ≫ L((e₂')^*⟦Λ⟧).map ((ρN.pullbackExchange Λ).app B)) :=
     inferInstance
   refine isIso_of_tensor_coinvariant (fun q ↦ DerivedCategory.homologyFunctor _ q)
-    (fun g hg ↦ (DerivedCategory.isIso_iff _ g).2 hg) (x := L((r')^*⟦Λ⟧).map (kunnethMap Λ φ₁ φ₂ A B))
+    (fun g hg ↦ (DerivedCategory.isIso_iff _ g).2 hg)
+    (x := L((r')^*⟦Λ⟧).map (kunnethMap Λ φ₁ φ₂ A B))
     hsq (L((e₁')^*⟦Λ⟧).map rM ≫
       (pullbackSquareComparison Λ (⟨hs₁⟩ : CommSq e₁' r' r₁' f₁')).inv.app _) rP ?_ hrP
     (fun i ↦ L((e₁')^*⟦Λ⟧).map ((σM i).autAction Λ (L((r₁)^*⟦Λ⟧).obj A)))

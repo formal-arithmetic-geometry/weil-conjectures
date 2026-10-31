@@ -14352,6 +14352,7 @@ public import WeilConjectures.SixFunctors.NearbyCycles.HomComp
 public import WeilConjectures.SixFunctors.NearbyCycles.Kunneth
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethAverage
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethBraided
+public import WeilConjectures.SixFunctors.NearbyCycles.KunnethCoinvariant
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethEquivariant
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethGeneric
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethLocal
@@ -16038,10 +16039,11 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyFinitenessSpread
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunneth
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethClosure
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethFiniteSupport
+public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethFormula
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethGlobal
+public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethIntegral
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethProper
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethSlice
-public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethSliceStep
 public import WeilConjectures.TraceFormula.Specialization.NearbyOpenExchange
 public import WeilConjectures.TraceFormula.Specialization.NearbyProperExchange
 public import WeilConjectures.TraceFormula.Specialization.NearbySliceFactorisation
@@ -16141,7 +16143,6 @@ public import WeilConjectures.TraceFormula.Specialization.TraitSliceGaloisTame
 public import WeilConjectures.TraceFormula.Specialization.TraitSliceGaloisTameSylow
 public import WeilConjectures.TraceFormula.Specialization.TraitSliceGaloisTensor
 public import WeilConjectures.TraceFormula.Specialization.TraitSliceGeneric
-public import WeilConjectures.TraceFormula.Specialization.TraitSliceInvariants
 public import WeilConjectures.TraceFormula.Specialization.TraitSpecializationFaithful
 public import WeilConjectures.TraceFormula.Specialization.TraitTensorCompositum
 public import WeilConjectures.TraceFormula.Specialization.UniversalKernel
