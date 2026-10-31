@@ -418,6 +418,21 @@ Source: Stacks 099M (blueprint: lem-sp-completion-mate-comparison). -/
 abbrev Site.modules (T : Site.{u}) (A : Type u) [CommRing A] :=
   ConstantCompletion.Mod (T.ring A)
 
+/-- The legacy acyclic-tensor K-flatness is upstream's tensor K-flatness. -/
+private theorem Site.isAcyclicTensorKFlat_iff {T : Site.{u}} {A : Type u} [CommRing A]
+    (K : CochainComplex (T.modules A) ℤ) : K.IsAcyclicTensorKFlat ↔ K.IsKFlatTensor := by
+  unfold CochainComplex.IsAcyclicTensorKFlat
+  rfl
+
+/-- Flat-term K-flat resolutions, stated with the legacy K-flatness predicate. -/
+private theorem Site.flat_kFlat_resolution (T : Site.{u}) (A : Type u) [CommRing A]
+    (X : CochainComplex (T.modules A) ℤ) :
+    ∃ (K : CochainComplex (T.modules A) ℤ) (f : K ⟶ X),
+      (K.IsAcyclicTensorKFlat ∧ ∀ q : ℤ, (K.X q).IsFlat) ∧ QuasiIso f := by
+  obtain ⟨K, f, ⟨hK, hq⟩, hf⟩ :=
+    ConstantCompletion.module_flat_kFlat_resolution (J := T.topology) X
+  exact ⟨K, f, ⟨(Site.isAcyclicTensorKFlat_iff K).2 hK, hq⟩, hf⟩
+
 /-- Unbounded derived module sheaves, using the standard localization universe.
 Source: Stacks 099M (blueprint: lem-sp-completion-mate-comparison). -/
 abbrev Site.derived (T : Site.{u}) (A : Type u) [CommRing A] :=
@@ -1675,16 +1690,16 @@ theorem Morphism.reductionPullIso_existsUnique {V U : Site.{u}} (f : Morphism V 
     (f.moduleReductionPullComplexIso A I)
     (f.modulePull A).mapDerivedCategoryFactors.hom
     (ConstantCompletion.quotientPresentation U.topology A I false).comparison
-    P (ConstantCompletion.module_flat_kFlat_resolution (J := V.topology))
+    P (V.flat_kFlat_resolution A)
     (fun K hK ↦ (ConstantCompletion.quotientPresentation V.topology A I false
-      ).laws.2.1 K hK.1 hK.2)
+      ).laws.2.1 K ((Site.isAcyclicTensorKFlat_iff K).1 hK.1) hK.2)
     (fun K _ ↦ by infer_instance)
     (fun K _ ↦ by infer_instance)
     (fun K hK ↦ by
       have h := ConstantCompletion.pull_flat_kFlat f.algebra f.direct f.adjunction
         (ConstantCompletion.constantMap f.algebra A) K hK.1 hK.2
       exact (ConstantCompletion.quotientPresentation U.topology A I false
-        ).laws.2.1 _ h.1 h.2)
+        ).laws.2.1 _ ((Site.isAcyclicTensorKFlat_iff _).1 h.1) h.2)
   exact ⟨e, fun K hk hf ↦ he K ⟨hk, hf⟩,
     fun e' he' ↦ hu e' (fun K hK ↦ he' K hK.1 hK.2)⟩
 
@@ -1971,7 +1986,8 @@ theorem Site.finiteModuleAdjunction_existsUnique (T : Site.{u}) (A : Type u)
     intro M N a
     change (ConstantCompletion.underlying (T.ring A)).map
       ((SheafOfModules.tensorAdjunction c).homEquiv M N a) = _
-    rw [SheafOfModules.tensorAdjunction_underlying, hunit]
+    rw [Adjunction.homEquiv_unit, Functor.map_comp, hunit]
+    rfl
   refine ⟨adj, hn, ?_⟩
   intro adj' hn'
   apply Adjunction.ext
@@ -2083,9 +2099,10 @@ theorem Site.finiteAdjunction_existsUnique (T : Site.{u}) (A : Type u)
       ((Functor.associator _ _ _).inv ≫
         Functor.whiskerRight α (T.finiteRestriction A I n)) W := by
     apply resolving_left_universal _ _ P
-      (ConstantCompletion.module_flat_kFlat_resolution (J := T.topology))
+      (T.flat_kFlat_resolution A)
     intro X hX
-    have : IsIso (α.app X) := (ConstantCompletion.derivedExtension c).computation X hX.1
+    have : IsIso (α.app X) := (ConstantCompletion.derivedExtension c).computation X
+      ((Site.isAcyclicTensorKFlat_iff X).1 hX.1)
     dsimp only [NatTrans.comp_app, Functor.associator_inv_app,
       Functor.whiskerRight_app]
     infer_instance
@@ -2104,9 +2121,10 @@ theorem Site.finiteAdjunction_existsUnique (T : Site.{u}) (A : Type u)
   intro ad' hn'
   apply Adjunction.ext
   apply ConstantCompletion.resolving_nat_ext P
-    (ConstantCompletion.module_flat_kFlat_resolution (J := T.topology))
+    (T.flat_kFlat_resolution A)
   intro X hX
-  have : IsIso (α.app X) := (ConstantCompletion.derivedExtension c).computation X hX.1
+  have : IsIso (α.app X) := (ConstantCompletion.derivedExtension c).computation X
+      ((Site.isAcyclicTensorKFlat_iff X).1 hX.1)
   apply (cancel_mono ((T.finiteRestriction A I n).map (α.app X))).1
   exact (hn' X hX.1).trans (hn X hX.1).symm
 
@@ -2162,11 +2180,12 @@ theorem Site.finiteEvaluationIso_existsUnique (T : Site.{u}) (A : Type u)
     (T.evaluateModule A n).mapDerivedCategoryFactors.hom
     (ConstantCompletion.quotientEvaluationComplexIso T.topology A I n)
     (ConstantCompletion.extendComparison c) (ConstantCompletion.resFactors c)
-    P (ConstantCompletion.module_flat_kFlat_resolution (J := T.topology))
+    P (T.flat_kFlat_resolution A)
     (fun K hK ↦ (ConstantCompletion.quotientPresentation T.topology A I false
-      ).laws.2.1 K hK.1 hK.2)
+      ).laws.2.1 K ((Site.isAcyclicTensorKFlat_iff K).1 hK.1) hK.2)
     (fun K _ ↦ by infer_instance)
-    (fun K hK ↦ (ConstantCompletion.derivedExtension c).computation K hK.1)
+    (fun K hK ↦ (ConstantCompletion.derivedExtension c).computation K
+      ((Site.isAcyclicTensorKFlat_iff K).1 hK.1))
   exact ⟨e, fun K hk hf ↦ he K ⟨hk, hf⟩,
     fun e' he' ↦ hu e' (fun K hK ↦ he' K hK.1 hK.2)⟩
 
@@ -2232,12 +2251,14 @@ theorem Morphism.finitePullIso_existsUnique {V U : Site.{u}} (f : Morphism V U)
       (ConstantCompletion.ordinaryFinitePull f.algebra f.direct f.adjunction A I n))
     (ConstantCompletion.extendComparison c)
     (f.modulePull (quotientRing A I n)).mapDerivedCategoryFactors.hom
-    P (ConstantCompletion.module_flat_kFlat_resolution (J := V.topology))
+    P (V.flat_kFlat_resolution A)
     (fun K _ ↦ by infer_instance)
     (fun K hK ↦ (ConstantCompletion.derivedExtension c').computation _
-      (ConstantCompletion.pull_flat_kFlat f.algebra f.direct f.adjunction
-        (ConstantCompletion.constantMap f.algebra A) K hK.1 hK.2).1)
-    (fun K hK ↦ (ConstantCompletion.derivedExtension c).computation K hK.1)
+      ((Site.isAcyclicTensorKFlat_iff _).1
+        (ConstantCompletion.pull_flat_kFlat f.algebra f.direct f.adjunction
+          (ConstantCompletion.constantMap f.algebra A) K hK.1 hK.2).1))
+    (fun K hK ↦ (ConstantCompletion.derivedExtension c).computation K
+      ((Site.isAcyclicTensorKFlat_iff K).1 hK.1))
     (fun K _ ↦ by infer_instance)
   exact ⟨e, fun K hk hf ↦ he K ⟨hk, hf⟩,
     fun e' he' ↦ hu e' (fun K hK ↦ he' K hK.1 hK.2)⟩
