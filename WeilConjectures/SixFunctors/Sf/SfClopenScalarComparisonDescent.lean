@@ -168,7 +168,8 @@ private theorem sfClopenRestrictionKFlat
   change CochainComplex.IsKFlatIndependentCoefficients
     (R := completedIntegralCommRingSheafUnrestricted l E U.toScheme)
     (((SheafOfModules.restrictScalars ((sheafCompose (ProEt.topology U.toScheme)
-      (forget₂ CommRingCat RingCat)).map c.hom)).mapHomologicalComplex (.up ℤ)).obj Q) at ht
+      (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).map
+        c.hom)).mapHomologicalComplex (.up ℤ)).obj Q) at ht
   rw [hc] at ht
   exact ht
 

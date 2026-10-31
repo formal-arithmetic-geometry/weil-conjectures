@@ -519,8 +519,9 @@ structure ComparisonData extends DiagramComparisonData l E f where
     (P : CochainComplex (Mod X (R l E X)) ℤ),
     CochainComplex.IsKFlatIndependentCoefficients
       (R := completedIntegralCommRingSheafUnrestricted l E X) P →
-    (∀ i : ℤ, @SheafOfModules.IsFlatOnSite X.ProEt inferInstance (ProEt.topology X)
-      inferInstance (integralCoefficientAbLocallyBijective.{t, u} X)
+    (∀ i : ℤ, @SheafOfModules.IsFlatOnSite.{t + 1, t, max u (t + 1), max u (t + 1)} X.ProEt
+      inferInstance (ProEt.topology X) inferInstance
+      (integralCoefficientAbLocallyBijective.{t, u} X)
       (integralCoefficientAbSheafify.{t, u} X).isRightAdjoint
       (completedIntegralCommRingSheafUnrestricted l E X) (P.X i)) →
     ∀ (r : DerivedCategory.Q.obj P ≅ K)

@@ -414,7 +414,7 @@ private theorem smallF_tensor :
     Nonempty (tensor (Sheaf J (ModuleCat.{s} B)) ⋙ smallF J B ≅
       (smallF J B).prod (smallF J B) ⋙ tensor (SheafOfModules.{s} (smallR J B))) := by
   let E := constantModulePresheaf J B
-  let S := PresheafOfModules.sheafification (R := smallR J B) (smallScalar J B)
+  let S := PresheafOfModules.sheafification.{s} (R := smallR J B) (smallScalar J B)
   let U := sheafToPresheaf J (ModuleCat.{s} B)
   let L := presheafToSheaf J (ModuleCat.{s} B)
   let F := smallF J B
@@ -671,8 +671,11 @@ private theorem finiteLocal_fixedModels (X : Scheme.{u}) (A : Type u)
   let F' := (proEtaleModuleRestriction X A).obj F
   constructor
   · intro h U
+    obtain ⟨I₀, W₀, g₀, hg₀, h₀⟩ := (finiteLocal_iff.{u} X A F).mpr h
     obtain ⟨I, V, g, hg, he⟩ := ProEtale.finiteModels_over B F'
-      ((finiteLocal_iff.{u} X A F).mpr h)
+      ⟨I₀, W₀, g₀, hg₀, fun i ↦ by
+        obtain ⟨M, hM, e⟩ := h₀ i
+        exact ⟨M, Module.finite_of_finite B, e⟩⟩
     let a : U ⟶ ProEt.mk (𝟙 X) :=
       MorphismProperty.Over.homMk U.hom (Category.comp_id _)
     let W (i : I) := pullback a (g i)
@@ -726,7 +729,7 @@ private theorem finiteLocal_fixedModels (X : Scheme.{u}) (A : Type u)
     let c := ((ProEt.sliceEquiv X (U i)).constantSheafSheafCongrIso
       (J.over (U i)) (ProEt.topology (U i).left)
       (ModuleCat.{u + 1} B) (Over.mkIdTerminal (X := U i))).app M
-    exact ⟨M, Module.finite_of_finite B, ⟨
+    exact ⟨M, hM, ⟨
       (ProEtale.upperStarIsoLocalizationRestriction
         (ModuleCat.{u + 1} B) (U i).hom (U i).prop).app F' ≪≫
       r.symm ≪≫ S.functor.mapIso e ≪≫ c⟩⟩

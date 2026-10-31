@@ -162,10 +162,6 @@ local instance (priority := 30000) pointFiniteReductionDataDerived (n : ℕ) :
     HasDerivedCategory.{u + 2} (pointFiniteReductionSheaves k l E n) :=
   HasDerivedCategory.standard _
 
-set_option linter.defProp false in
-
-attribute [instance] PointFiniteReductionSheafModel.additive
-
 
 variable [IsAlgClosed k]
 

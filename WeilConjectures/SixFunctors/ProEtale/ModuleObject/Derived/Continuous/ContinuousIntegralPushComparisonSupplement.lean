@@ -31,6 +31,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Continuous.Cont
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Continuous.ContinuousIntegralLocalizationHomology
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Continuous.ContinuousIntegralLocalizationMate
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
+import WeilConjectures.AlgebraicGeometry.ContinuousIntegralPushComparison
 
 /-! # Integral localization commutes with bounded qcqs derived pushforward -/
 
@@ -41,42 +42,6 @@ open CategoryTheory Limits
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
-
-private theorem mate_unit_comap
-    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
-    {LX : A ⥤ B} {UX : B ⥤ A} {LY : C ⥤ D} {UY : D ⥤ C}
-    (adjX : LX ⊣ UX) (adjY : LY ⊣ UY) {G : A ⥤ C} {H : B ⥤ D}
-    (κ : H ⋙ UY ≅ UX ⋙ G) (K : A) :
-    adjY.unit.app (G.obj K) ≫
-        (UY.map ((Adjunction.pushHomOfComapIso adjX adjY κ).app K) ≫
-          κ.hom.app (LX.obj K)) = G.map (adjX.unit.app K) := by
-  have h := unit_mateEquiv_symm adjX adjY (TwoSquare.mk _ _ _ _ κ.inv) K
-  change G.map (adjX.unit.app K) ≫ κ.inv.app (LX.obj K) =
-    adjY.unit.app (G.obj K) ≫
-      UY.map ((Adjunction.pushHomOfComapIso adjX adjY κ).app K) at h
-  have hh := congrArg (fun z ↦ z ≫ κ.hom.app (LX.obj K)) h.symm
-  simp only [Category.assoc, Iso.inv_hom_id_app] at hh
-  exact hh.trans (Category.comp_id (G.map (adjX.unit.app K)))
-
-private theorem localization_comparison_zero (ℓ : ℕ)
-    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
-    [Preadditive A] [Preadditive B] [Preadditive C] [Preadditive D]
-    {LX : A ⥤ B} {UX : B ⥤ A} {LY : C ⥤ D} {UY : D ⥤ C}
-    [UX.Additive] [UY.Additive] (adjX : LX ⊣ UX) (adjY : LY ⊣ UY)
-    (G : A ⥤ C) [G.Additive] (K : A)
-    [IsIso (ℓ • 𝟙 (LX.obj K))] [IsIso (ℓ • 𝟙 (LY.obj (G.obj K)))]
-    (g : UY.obj (LY.obj (G.obj K)) ⟶ G.obj (UX.obj (LX.obj K)))
-    (hg : adjY.unit.app (G.obj K) ≫ g = G.map (adjX.unit.app K)) :
-    (scalarLocalizationUnitCocone ℓ adjY (G.obj K)).ι.app 0 ≫ g =
-      ((Cocone.precompose (integralLocalizationSequenceMapIso ℓ G K).inv).obj
-        (G.mapCocone (scalarLocalizationUnitCocone ℓ adjX K))).ι.app 0 := by
-  simp only [scalarLocalizationUnitCocone, Functor.comp_obj, Functor.const_obj_obj,
-    NatTrans.ofSequence_app, pow_zero, End.one_def, CategoryTheory.Functor.map_id,
-    Category.comp_id, integralLocalizationSequenceMapIso, asIso_inv, Cocone.precompose_obj_pt,
-    Functor.mapCocone_pt, Cocone.precompose_obj_ι, NatTrans.comp_app, NatIso.isIso_inv_app,
-    IsIso.inv_id, Functor.mapCocone_ι_app]
-  change adjY.unit.app (G.obj K) ≫ g = 𝟙 _ ≫ G.map (adjX.unit.app K)
-  exact hg.trans (Category.id_comp (G.map (adjX.unit.app K))).symm
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
@@ -144,8 +109,20 @@ theorem integralScalarPushHom_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
       (lowerStar (integralCoeff ℓ E) f) K' n hq).of_iso
         ((DerivedCategory.homologyFunctor _ q).mapIso
           ((lowerStar (integralCoeff ℓ E) f).rightDerivedFunctorPlusCompatibility.app K')).symm
-  let cX := integralLocalizationCocone ℓ E X K.obj
-  let cY := integralLocalizationCocone ℓ E Y (G.obj K.obj)
+  -- Upstream's localization cocones live over `Mod.smulSequence`; precompose them with the
+  -- identity-component comparison from `integralLocalizationSequence`.
+  let ιX : integralLocalizationSequence ℓ K.obj ⟶ Mod.smulSequence K.obj ℓ :=
+    NatTrans.ofSequence (fun _ ↦ 𝟙 _) (fun n ↦ by
+      simp only [integralLocalizationSequence, Functor.ofSequence_map_homOfLE_succ,
+        Nat.add_sub_cancel_left, pow_one]
+      exact (Category.comp_id _).trans (Category.id_comp _).symm)
+  let ιY : integralLocalizationSequence ℓ (G.obj K.obj) ⟶ Mod.smulSequence (G.obj K.obj) ℓ :=
+    NatTrans.ofSequence (fun _ ↦ 𝟙 _) (fun n ↦ by
+      simp only [integralLocalizationSequence, Functor.ofSequence_map_homOfLE_succ,
+        Nat.add_sub_cancel_left, pow_one]
+      exact (Category.comp_id _).trans (Category.id_comp _).symm)
+  let cX := (Cocone.precompose ιX).obj (integralLocalizationCocone ℓ E X K.obj)
+  let cY := (Cocone.precompose ιY).obj (integralLocalizationCocone ℓ E Y (G.obj K.obj))
   let σ := integralLocalizationSequenceMapIso ℓ G K.obj
   let d := (Cocone.precompose σ.inv).obj (G.mapCocone cX)
   let g : cY.pt ⟶ d.pt := U.map β ≫ κ.hom.app (LX.obj K.obj)
@@ -158,8 +135,14 @@ theorem integralScalarPushHom_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
   have := derived_nsmul_isIso ℓ E Y
     ((Mod.extendScalars (coefficientMap a Y)).leftDerivedFunctor.obj (G.obj K.obj))
   have hzero : cY.ι.app 0 ≫ g = d.ι.app 0 := by
-    exact localization_comparison_zero ℓ adjX adjY G K.obj g
+    have h := localization_comparison_zero ℓ adjX adjY G K.obj g
       (mate_unit_comap adjX adjY κ K.obj)
+    simp only [Cocone.precompose_obj_ι, NatTrans.comp_app, Functor.mapCocone_ι_app,
+      Mod.smulSequenceCompIso, NatIso.ofComponents_inv_app, Iso.refl_inv] at h
+    simp only [cY, d, cX, σ, ιX, ιY, Cocone.precompose_obj_ι, NatTrans.comp_app,
+      Functor.mapCocone_ι_app, NatTrans.ofSequence_app, Category.id_comp,
+      integralLocalizationSequenceMapIso, asIso_inv, NatIso.isIso_inv_app, IsIso.inv_id]
+    exact h
   have hU : U.ReflectsIsomorphisms := by
     let V := Mod.comap (D := Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (coefficientMap a Y)
     have : V.ReflectsIsomorphisms := by
