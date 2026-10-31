@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.TraceFormula.Specialization.SmoothBaseChangePadicAlgCl
 public import WeilConjectures.TraceFormula.Specialization.NearbySmoothExchangeLocal
+public import WeilConjectures.TraceFormula.Specialization.ResidueConstantSmoothExchange
 public import WeilConjectures.TraceFormula.Specialization.TraitChangeTrait
 public import WeilConjectures.TraceFormula.Specialization.TraitModelOfGenericBase
 public import WeilConjectures.TraceFormula.Specialization.TraitModelProperExchange
@@ -95,18 +96,6 @@ end NearbyCyclesModel
 /-! ### Smooth base change for the geometric generic point of the trait -/
 
 variable {ℓ : ℕ} [Fact ℓ.Prime] (k' : Type u) [Field k'] [Fact (ringChar k' ≠ ℓ)]
-
-/-- The prime `ℓ` is invertible on the trait `S = Spec k'⟦t⟧` when it differs from the
-characteristic of `k'`. -/
-lemma isUnit_natCast_trait [Fact (ringChar k').Prime] : IsUnit (ℓ : Γ(trait k', ⊤)) := by
-  have hℓk : IsUnit (ℓ : k') := by
-    refine IsUnit.mk0 _ fun h ↦ (Fact.out : ringChar k' ≠ ℓ) ?_
-    exact (Nat.prime_dvd_prime_iff_eq (Fact.out : (ringChar k').Prime) Fact.out).1
-      ((ringChar.spec k' ℓ).1 h)
-  simpa using (hℓk.map (PowerSeries.C (R := k'))).map
-    (ΓSpecIso (.of (PowerSeries k'))).inv.hom
-
-/-! ### The specialization unit of a smooth model over the trait -/
 
 namespace NearbyCyclesModel
 
