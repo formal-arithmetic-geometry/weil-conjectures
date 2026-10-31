@@ -424,7 +424,8 @@ instance isIso_boundedConstructiblePullbackExchangeOfMap_projectiveLineSliceHom_
     exact h
   exact isIso_of_fully_faithful (ObjectProperty.ι _) _
 
-omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
+omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
+  [Fact (ringChar K).Prime] in
 /-- **The identification `u_P`**: `c_P^* ω_{ℙ¹_η} ≅ ω_{Frac K⟦t⟧} ⊗ ℚ̄_ℓ(0)[2]`, by smooth purity
 `ω_{ℙ¹_η} ≅ ℚ̄_ℓ(1)[2]` and `ω_{Frac K⟦t⟧} ≅ ℚ̄_ℓ`, the pullback of the Tate twists
 (`ProEtale.upperStarTateTwistDerivedIso`) and the triviality of

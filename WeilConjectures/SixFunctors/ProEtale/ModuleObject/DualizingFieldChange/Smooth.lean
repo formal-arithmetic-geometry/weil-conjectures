@@ -107,13 +107,6 @@ theorem isIso_dualizingComplexBaseChange_of_isClosedImmersion_of_tateTwistIso
   isIso_dualizingComplexBaseChange_of_iso ℓ e sqX
     (nonempty_iso_dualizingComplex_of_isClosedImmersion ℓ d hP sq eT).some
 
-omit [Fact ℓ.Prime] [Fact (ringChar L).Prime] [Fact (ringChar L ≠ ℓ)] in
-/-- `ℓ` is nonzero in a field of characteristic `p ≠ ℓ`. -/
-lemma neZero_natCast_of_ringChar_ne [Fact ℓ.Prime] : NeZero (ℓ : F) :=
-  ⟨fun h ↦ (Fact.out : ringChar F ≠ ℓ)
-    ((Nat.prime_dvd_prime_iff_eq (Fact.out : (ringChar F).Prime) Fact.out).1
-      ((ringChar.spec F ℓ).1 h))⟩
-
 /-- **The pullback of the shifted Tate twists across fields**: for `P` over `F` and `P'` over `L`,
 quasi-compact and quasi-separated, and any `πP : P' ⟶ P`,
 `πP^* ℚ̄_ℓ(d)[n] ≅ ℚ̄_ℓ(d)[n]` on bounded constructible complexes

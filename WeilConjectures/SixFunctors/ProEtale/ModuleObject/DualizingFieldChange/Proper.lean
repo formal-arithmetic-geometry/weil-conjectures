@@ -479,13 +479,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {F L : Type u} [Field F] [Field L] [Algebr
   [Fact (ringChar F).Prime] [Fact (ringChar F ≠ ℓ)] [Fact (ringChar L).Prime]
   [Fact (ringChar L ≠ ℓ)]
 
-omit [Fact ℓ.Prime] [Fact (ringChar L).Prime] [Fact (ringChar L ≠ ℓ)] in
-/-- `ℓ` is nonzero in a field of characteristic `p ≠ ℓ`. -/
-private lemma neZero_natCast_of_ringChar_ne' [Fact ℓ.Prime] : NeZero (ℓ : F) :=
-  ⟨fun h ↦ (Fact.out : ringChar F ≠ ℓ)
-    ((Nat.prime_dvd_prime_iff_eq (Fact.out : (ringChar F).Prime) Fact.out).1
-      ((ringChar.spec F ℓ).1 h))⟩
-
 /-- The pullback of the shifted Tate twists across fields,
 `πP^* ℚ̄_ℓ(d)[n] ≅ ℚ̄_ℓ(d)[n]` (as
 `ProEtale.CondensedRing.boundedConstructibleUpperStarOfMapTateTwistIso`). -/
@@ -496,7 +489,7 @@ private noncomputable def upperStarOfMapTateTwistIso {P : Over (Spec (.of F))}
     (boundedConstructibleUpperStarOfMap ℓ (X := P) (Y := P') πP).obj
         (boundedConstructibleTateTwist ℓ P d n) ≅
       boundedConstructibleTateTwist ℓ P' d n :=
-  have : NeZero (ℓ : F) := neZero_natCast_of_ringChar_ne' ℓ
+  have : NeZero (ℓ : F) := CondensedRing.neZero_natCast_of_ringChar_ne ℓ
   have := QuasiCompact.compactSpace_of_compactSpace P.hom
   have := QuasiCompact.compactSpace_of_compactSpace P'.hom
   have := quasiSeparatedSpace_of_quasiSeparated P.hom
