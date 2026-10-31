@@ -143,6 +143,16 @@ private def preUnit {R S : Sheaf J CommRingCat.{r}} (q : R ⟶ S) (M : Mod R) :
       ((PresheafOfModules.sheafificationAdjunction (𝟙 (ring S).obj)).unit.app
         (changeOfRingsPresheaf q M))
 
+private instance preUnit_injective {R S : Sheaf J CommRingCat.{r}}
+    (q : R ⟶ S) (M : Mod R) : PresheafOfModules.IsLocallyInjective J (preUnit q M) := by
+  change Presheaf.IsLocallyInjective J (CategoryTheory.toSheafify J _)
+  infer_instance
+
+private instance preUnit_surjective {R S : Sheaf J CommRingCat.{r}}
+    (q : R ⟶ S) (M : Mod R) : PresheafOfModules.IsLocallySurjective J (preUnit q M) := by
+  change Presheaf.IsLocallySurjective J (CategoryTheory.toSheafify J _)
+  infer_instance
+
 private def lift {R S : Sheaf J CommRingCat.{r}} (q : R ⟶ S) (M N : Mod R)
     (a : pre q M ⟶ N.val) : reductionObj q M ⟶ N :=
   ⟨(PresheafOfModules.homEquivOfIsLocallyBijective (preUnit q M) N.isSheaf).symm a⟩
@@ -272,7 +282,6 @@ private def oneTensor {R S : Sheaf J CommRingCat.{r}} (q : R ⟶ S) (M : Mod R) 
 private def ordinaryUnit {R S : Sheaf J CommRingCat.{r}} (q : R ⟶ S) (M : Mod R) :
     M ⟶ reductionObj q M := ⟨oneTensor q M ≫ preUnit q M⟩
 
-omit [EssentiallySmall.{r} C] in
 private theorem transition_natural {R S S' : Sheaf J CommRingCat.{r}}
     (q : R ⟶ S) (q' : R ⟶ S') (t : S' ⟶ S) (h : q' ≫ t = q)
     {M N : Mod R} (f : M ⟶ N) :

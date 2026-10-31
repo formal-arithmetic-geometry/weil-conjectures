@@ -772,6 +772,76 @@ private theorem fixed_projection_eq (K : C) (N : D) :
   simpa only [Equiv.symm_apply_apply, Adjunction.homEquiv_counit, Functor.id_obj] using
     ((a.leftCoefficientProjectionMap_coherence).2.1 K N).symm
 
+private theorem first_transpose
+    {A B C : Type*} [Category A] [Category B] [Category C]
+    {F : A ⥤ B} {R : B ⥤ A} {H : B ⥤ C} {S : C ⥤ B}
+    (adj : F ⊣ R) (adj' : H ⊣ S)
+    (T : A × A ⥤ A) (U : B × B ⥤ B) (V : C × C ⥤ C)
+    (t : T ⋙ F ⟶ (F.prod F) ⋙ U) (h : U ⋙ H ⟶ (H.prod H) ⋙ V)
+    (M N : B) (Z : C) (ex : F.obj (R.obj M) ⟶ S.obj Z) :
+    ((adj.comp adj').homEquiv _ _).symm
+      (adj.homEquiv _ _ (t.app (R.obj M, R.obj N) ≫
+          U.map (Prod.mkHom (𝟙 _) (adj.counit.app N))) ≫
+        R.map (U.map (Prod.mkHom ex (𝟙 N)) ≫
+          adj'.homEquiv _ _ (h.app (S.obj Z, N) ≫
+            V.map (Prod.mkHom (adj'.counit.app Z) (𝟙 _))))) =
+      H.map (t.app (R.obj M, R.obj N)) ≫
+        h.app (F.obj (R.obj M), F.obj (R.obj N)) ≫
+        V.map (Prod.mkHom (H.map ex ≫ adj'.counit.app Z)
+          (H.map (adj.counit.app N))) := by
+  rw [Adjunction.comp_homEquiv]
+  dsimp only [Functor.id_obj, Functor.comp_obj, Functor.prod_obj]
+  rw [Equiv.symm_trans_apply]
+  erw [adj.homEquiv_naturality_right_symm,
+    Equiv.symm_apply_apply]
+  erw [adj'.homEquiv_naturality_left_symm, adj'.homEquiv_naturality_left_symm,
+    Equiv.symm_apply_apply]
+  simp only [Functor.map_comp, Category.assoc]
+  have hn := h.naturality
+    (Prod.mkHom (𝟙 (F.obj (R.obj M))) (adj.counit.app N))
+  have he := h.naturality (Prod.mkHom ex (𝟙 N))
+  dsimp only [Functor.comp_map, Functor.prod_map] at hn he
+  rw [reassoc_of% he, reassoc_of% hn]
+  simp only [← V.map_comp]
+  congr 2
+  congr 1
+  ext <;> simp
+
+private theorem second_transpose
+    {A B C : Type*} [Category A] [Category B] [Category C]
+    {F : A ⥤ B} {R : B ⥤ A} {H : B ⥤ C} {S : C ⥤ B}
+    (adj : F ⊣ R) (adj' : H ⊣ S)
+    (T : A × A ⥤ A) (U : B × B ⥤ B) (V : C × C ⥤ C)
+    (t : T ⋙ F ⟶ (F.prod F) ⋙ U) (h : U ⋙ H ⟶ (H.prod H) ⋙ V)
+    (M N : B) (Z : C) (ex : F.obj (R.obj N) ⟶ S.obj Z) :
+    ((adj.comp adj').homEquiv _ _).symm
+      (adj.homEquiv _ _ (t.app (R.obj M, R.obj N) ≫
+          U.map (Prod.mkHom (adj.counit.app M) (𝟙 _))) ≫
+        R.map (U.map (Prod.mkHom (𝟙 M) ex) ≫
+          adj'.homEquiv _ _ (h.app (M, S.obj Z) ≫
+            V.map (Prod.mkHom (𝟙 _) (adj'.counit.app Z))))) =
+      H.map (t.app (R.obj M, R.obj N)) ≫
+        h.app (F.obj (R.obj M), F.obj (R.obj N)) ≫
+        V.map (Prod.mkHom (H.map (adj.counit.app M))
+          (H.map ex ≫ adj'.counit.app Z)) := by
+  rw [Adjunction.comp_homEquiv]
+  dsimp only [Functor.id_obj, Functor.comp_obj, Functor.prod_obj]
+  rw [Equiv.symm_trans_apply]
+  erw [adj.homEquiv_naturality_right_symm,
+    Equiv.symm_apply_apply]
+  erw [adj'.homEquiv_naturality_left_symm, adj'.homEquiv_naturality_left_symm,
+    Equiv.symm_apply_apply]
+  simp only [Functor.map_comp, Category.assoc]
+  have hn := h.naturality
+    (Prod.mkHom (adj.counit.app M) (𝟙 (F.obj (R.obj N))))
+  have he := h.naturality (Prod.mkHom (𝟙 M) ex)
+  dsimp only [Functor.comp_map, Functor.prod_map] at hn he
+  rw [reassoc_of% he, reassoc_of% hn]
+  simp only [← V.map_comp]
+  congr 2
+  congr 1
+  ext <;> simp
+
 end Symmetry
 
 set_option backward.isDefEq.respectTransparency false in
@@ -790,6 +860,61 @@ private theorem conjugate_transpose
   rw [Functor.map_comp, Category.assoc, conjugateEquiv_counit]
   rw [← Category.assoc, theta.inv.naturality f]
   simp only [Category.assoc, Adjunction.homEquiv_counit]
+
+private theorem kunneth_factorization
+    {C D V : Type*} [Category C] [Category D] [Category V]
+    {F : C ⥤ D} {P : D ⥤ C} {U₁ U₂ : D ⥤ V} {Q₁ Q₂ : V ⥤ D}
+    (a : F ⊣ P) (a₁ : U₁ ⊣ Q₁) (a₂ : U₂ ⊣ Q₂)
+    (T : C × C ⥤ C) (U : D × D ⥤ D) (R : V × V ⥤ V)
+    (d : T ⋙ F ⟶ (F.prod F) ⋙ U)
+    (d₁ : U ⋙ U₁ ⟶ (U₁.prod U₁) ⋙ R)
+    (d₂ : U ⋙ U₂ ⟶ (U₂.prod U₂) ⋙ R)
+    (s : F ⋙ U₂ ≅ F ⋙ U₁)
+    (hs : ∀ K L : C,
+      s.hom.app (T.obj (K, L)) ≫ U₁.map (d.app (K, L)) ≫
+          d₁.app (F.obj K, F.obj L) =
+        U₂.map (d.app (K, L)) ≫ d₂.app (F.obj K, F.obj L) ≫
+          R.map (Prod.mkHom (s.hom.app K) (s.hom.app L)))
+    (M N : D) :
+    a.homEquiv _ _ (d.app (P.obj M, P.obj N) ≫
+        U.map (Prod.mkHom (𝟙 _) (a.counit.app N))) ≫
+      P.map (U.map (Prod.mkHom (traceAbstractMate a a₂ s |>.app M) (𝟙 N)) ≫
+        a₂.homEquiv _ _ (d₂.app (Q₂.obj (U₁.obj M), N) ≫
+          R.map (Prod.mkHom (a₂.counit.app (U₁.obj M)) (𝟙 _)))) ≫
+      (conjugateIsoEquiv (a.comp a₂) (a.comp a₁) s.symm).hom.app
+        (R.obj (U₁.obj M, U₂.obj N)) =
+    a.homEquiv _ _ (d.app (P.obj M, P.obj N) ≫
+        U.map (Prod.mkHom (a.counit.app M) (𝟙 _))) ≫
+      P.map (U.map (Prod.mkHom (𝟙 M) (traceAbstractMate a a₁ s.symm |>.app N)) ≫
+        a₁.homEquiv _ _ (d₁.app (M, Q₁.obj (U₂.obj N)) ≫
+          R.map (Prod.mkHom (𝟙 _) (a₁.counit.app (U₂.obj N))))) := by
+  have hex := mateEquiv_counit a a₂ (TwoSquare.mk _ _ _ _ s.hom) M
+  have hbar := mateEquiv_counit a a₁ (TwoSquare.mk _ _ _ _ s.inv) N
+  change U₂.map ((traceAbstractMate a a₂ s).app M) ≫ a₂.counit.app (U₁.obj M) =
+    s.hom.app (P.obj M) ≫ U₁.map (a.counit.app M) at hex
+  change U₁.map ((traceAbstractMate a a₁ s.symm).app N) ≫ a₁.counit.app (U₂.obj N) =
+    s.inv.app (P.obj N) ≫ U₂.map (a.counit.app N) at hbar
+  have hF := first_transpose a a₂ T U R d d₂ M N (U₁.obj M)
+    ((traceAbstractMate a a₂ s).app M)
+  rw [hex] at hF
+  have hG := second_transpose a a₁ T U R d d₁ M N (U₂.obj N)
+    ((traceAbstractMate a a₁ s.symm).app N)
+  rw [hbar] at hG
+  apply ((a.comp a₁).homEquiv _ _).symm.injective
+  have hc : (conjugateIsoEquiv (a.comp a₂) (a.comp a₁) s.symm).hom =
+      (conjugateIsoEquiv (a.comp a₁) (a.comp a₂) s).inv := rfl
+  rw [hc, ← Category.assoc]
+  erw [conjugate_transpose (a.comp a₁) (a.comp a₂) s]
+  dsimp only [Functor.comp_obj, Functor.id_obj, Prod.fst, Prod.snd] at hF hG ⊢
+  erw [hF, hG]
+  apply (cancel_epi (s.hom.app (T.obj (P.obj M, P.obj N)))).1
+  simp only [← Category.assoc, Iso.hom_inv_id_app, Category.id_comp]
+  simp only [Category.assoc]
+  rw [reassoc_of% (hs (P.obj M) (P.obj N))]
+  simp only [← R.map_comp]
+  congr 2
+  congr 1
+  ext <;> simp
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Canonical tensor comparisons for three fixed functors, with their tensor structures

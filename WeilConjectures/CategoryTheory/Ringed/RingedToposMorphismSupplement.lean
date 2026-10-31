@@ -41,6 +41,5 @@ universe uC vC uD vD
 
 namespace CategoryTheory
 
-attribute [instance] RingedToposMorphismOnSites.additive
 
 end CategoryTheory

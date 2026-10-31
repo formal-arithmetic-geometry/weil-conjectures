@@ -60,8 +60,6 @@ set_option backward.defeqAttrib.useBackward true
 
 -- Adjoining a contractible summand makes a resolution monomorphic without changing
 -- its homotopy type. No degreewise injectivity or enough-injectives assumption is used.
-omit [HasDerivedCategory A] in
-omit [HasDerivedCategory A] in
 private theorem normalizedCounit
     (F : B ⥤ A) (G : A ⥤ B) [F.Additive] [G.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F] (adj : F ⊣ G)

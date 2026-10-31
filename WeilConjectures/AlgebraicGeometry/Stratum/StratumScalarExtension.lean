@@ -304,6 +304,5 @@ variable {T S : Scheme.{u}} (i : S ⟶ T) (A B : Type u)
 end
 end ScalarComparison
 
-set_option maxHeartbeats 600000 in
 -- The composite adjunction and dependent module transports require extra elaboration steps.
 end AlgebraicGeometry.Scheme

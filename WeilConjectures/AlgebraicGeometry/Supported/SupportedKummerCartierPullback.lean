@@ -99,10 +99,4 @@ private theorem exists_tensor_ideal_iso (h : T' ⟶ T)
   erw [← (Modules.picardTensorComparison h).hom.naturality_assoc]
   rw [tensor_unit_comparison]
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible

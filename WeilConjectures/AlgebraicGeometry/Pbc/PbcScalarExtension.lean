@@ -80,10 +80,6 @@ section
 attribute [local irreducible] pbcActualCompletedPull pbcActualCompletion
   reductionDerivedChange completedAdicDerivedChange
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end
 
 end AmbientOperations

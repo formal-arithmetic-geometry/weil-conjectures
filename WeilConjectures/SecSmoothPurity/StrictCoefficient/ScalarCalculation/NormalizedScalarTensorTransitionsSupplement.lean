@@ -212,6 +212,4 @@ private theorem tensor_hom_ext {A : Sheaf J CommRingCat.{w}}
 
 attribute [local irreducible] totalPure ringedComparisonPure extensionTmul
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
 end CategoryTheory.CochainPullback.StrictCoefficient.ScalarCalculation

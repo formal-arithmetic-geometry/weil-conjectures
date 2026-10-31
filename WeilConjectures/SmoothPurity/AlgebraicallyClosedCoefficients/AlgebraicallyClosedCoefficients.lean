@@ -797,7 +797,6 @@ noncomputable def shiftRepresentative (n : ℤ) (A B : Pair D l hl Ω Y)
     (shiftFunctor (Stage D l hl Ω Y L) n).map f ≫
     ((stageTransition D l hl Ω Y B.stage L hB).commShiftIso n).inv.app B.obj
 
-set_option linter.unusedVariables false in
 /-- The stagewise shift with the representative formula of shift_exists.
 Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients). -/
 noncomputable instance hasShift : HasShift (Pair D l hl Ω Y) ℤ :=

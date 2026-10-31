@@ -569,8 +569,9 @@ theorem rational_p1_line_exchange_assembly
     unfold firstLineComparisonForTrace
     unfold PullEndpointSquare at he ⊢
     coefficient_finish he)
-  unfold LineExchangeSquare finiteSecondTraceExchange closureSecondTraceExchange
-  unfold PullArrowSquare at h ⊢
-  coefficient_finish h
+  unfold LineExchangeSquare at ⊢
+  simp only [finiteSecondTraceExchange, closureSecondTraceExchange,
+    coefficient, line] at h ⊢
+  exact h
 
 end AlgebraicGeometry.ProEtale.RationalP1

@@ -339,7 +339,6 @@ variable {A : Type*} [Category* A] [Abelian A] [HasDerivedCategory A]
           ((HomologicalComplex.single A (.up ℤ) 0).obj X)) =
     DerivedCategory.Q.map ((a.mapHomologicalComplex (.up ℤ)).unit.app
       ((HomologicalComplex.single A (.up ℤ) 0).obj X)))
-include E a ε b hb hε hu in
 end DerivedSingle
 
 section ShiftedComposition
@@ -354,7 +353,6 @@ variable {A B : Type*} [Category* A] [Category* B]
   {X Y : A} {H : B} (f : X ⟶ Y⟦(1 : ℤ)⟧)
   (a : L.obj Y ⟶ H⟦(1 : ℤ)⟧) (k : Y ⟶ R.obj (H⟦(1 : ℤ)⟧))
   (ha : ad.unit.app Y ≫ R.map a = k)
-include ha in
 end ShiftedAdjunct
 
 namespace SheafOfModules
@@ -1210,7 +1208,6 @@ private theorem multiplication_complex_shortExact (n : ℕ) [NeZero n]
     { exact := ShortComplex.exact_of_g_is_cokernel _ hc }
   convert! hs using 1
 
-set_option backward.isDefEq.respectTransparency true in
 end PresentationConstruction
 
 variable [HasDerivedCategory.{wZ} (Integral J)]
@@ -1238,9 +1235,6 @@ private theorem multiplication_triangle [NeZero n] (A : Integral J) :
 set_option backward.isDefEq.respectTransparency true in
 attribute [local irreducible] identifications
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency true in
 section InverseImage
 
 variable {C' : Type u'} [Category.{v'} C'] [EssentiallySmall.{r} C']
@@ -1254,7 +1248,6 @@ variable {C' : Type u'} [Category.{v'} C'] [EssentiallySmall.{r} C']
   [UZ.Additive] [PreservesFiniteLimits UZ] [PreservesFiniteColimits UZ]
   [UR.Additive] [PreservesFiniteLimits UR] [PreservesFiniteColimits UR]
 
-set_option linter.unusedVariables false in
 end InverseImage
 
 end DivisibleReduction

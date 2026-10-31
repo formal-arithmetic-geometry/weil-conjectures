@@ -373,7 +373,4 @@ def wfSiteDerivedTensor {C : Type u} [Category.{v} C] (J : GrothendieckTopology 
       ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)) :=
   (wf_site_derived_tensor_descent.{u, v, w, 0, 0} J R).choose_spec.2.2.1.choose_spec.2.choose
 
-set_option backward.isDefEq.respectTransparency false in
-open MonoidalCategory in
-set_option backward.isDefEq.respectTransparency false in
 end SheafOfModules

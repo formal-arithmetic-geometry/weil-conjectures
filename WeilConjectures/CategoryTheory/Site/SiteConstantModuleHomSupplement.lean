@@ -46,7 +46,6 @@ namespace CategoryTheory
 variable {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
   (Λ : Type (max u v)) [CommRing Λ]
 
-set_option backward.isDefEq.respectTransparency false in
 private lemma homUnit_naturality {M N : ModuleCat.{max u v} Λ} (f : M ⟶ N)
     (U : Cᵒᵖ) (x : M) :
     ((constantModuleHomFunctor J Λ).map f).val.app U

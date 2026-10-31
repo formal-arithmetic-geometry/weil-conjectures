@@ -40,7 +40,6 @@ theorem transport_square {F : ℤ → ℤ → C} {G : ℤ → ℤ → B}
     Φ.map (eqToHom (congrArg₂ F hp hq)) ≫ t p' q' =
       t p q ≫ eqToHom (congrArg₂ G hp hq) := by
   subst p'; subst q'; simp
-omit [Φ.Additive] [PreservesFiniteLimits Φ] [PreservesFiniteColimits Φ] in
 end Naturality
 
 end CategoryTheory.BigradedExactCouple

@@ -96,7 +96,6 @@ private noncomputable def towerPrelevel (n : ℕ) :
     ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).map (p n)).hom
 
 set_option backward.isDefEq.respectTransparency.types true in
-attribute [local irreducible] coefficientSheafificationComparison
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

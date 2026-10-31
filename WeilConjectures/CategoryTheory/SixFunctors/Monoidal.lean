@@ -236,7 +236,6 @@ variable [hR : (derivedTensorLeftDerived F).IsLeftDerivedFunctor₂
   F.homotopyTensorLeftDerivedCounit
   (HomotopyCategory.quasiIso _ (.up ℤ)) (HomotopyCategory.quasiIso _ (.up ℤ))]
 
-omit hR in
 end CategoryTheory.Functor
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing

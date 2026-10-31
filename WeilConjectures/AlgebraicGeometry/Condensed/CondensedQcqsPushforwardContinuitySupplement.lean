@@ -273,20 +273,9 @@ private theorem comparison_isIso_of_bounded_model
     exact hk
   exact IsIso.of_isIso_comp_right _ (e c.pt hc).hom
 
-set_option synthInstance.maxHeartbeats 100000 in
 -- Colimit inference for the internal module category needs a larger search budget.
-set_option synthInstance.maxSize 4096 in
-set_option backward.isDefEq.respectTransparency false in
-set_option synthInstance.maxHeartbeats 100000 in
 -- Colimit inference for the internal module category needs a larger search budget.
-set_option synthInstance.maxSize 4096 in
-set_option synthInstance.maxHeartbeats 100000 in
 -- Needed for colimit inference in the internal module category.
-set_option synthInstance.maxSize 4096 in
-set_option synthInstance.maxHeartbeats 100000 in
 -- Colimit inference for the internal module category needs a larger search budget.
-set_option synthInstance.maxSize 4096 in
-set_option synthInstance.maxHeartbeats 100000 in
 -- Needed for colimit inference in the internal module category.
-set_option synthInstance.maxSize 4096 in
 end AlgebraicGeometry.ProEtale

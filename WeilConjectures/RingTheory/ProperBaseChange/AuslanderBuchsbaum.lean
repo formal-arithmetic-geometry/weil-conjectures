@@ -105,6 +105,4 @@ private theorem depth_free_ge {R : Type u} [CommRing R] [IsLocalRing R]
       exact (RingTheory.Sequence.isWeaklyRegular_map_algebraMap_iff
         (ι → R) (ι → R) rs).mp (hr.1.of_flat (S := ι → R))
 
-open Classical in
-open Classical in
 end IsLocalRing

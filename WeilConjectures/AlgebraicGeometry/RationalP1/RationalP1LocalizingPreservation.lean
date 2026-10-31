@@ -29,6 +29,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleCoefficients.LocalizingClosureE
 import Mathlib.Algebra.CharP.Invertible
 import all WeilConjectures.AlgebraicGeometry.RationalP1.RationalP1LineFromPreservation
 import WeilConjectures.AlgebraicGeometry.RationalP1.RationalP1PositiveLineConstructible
+public import WeilConjectures.AlgebraicGeometry.IntegralCtfEqualsBc
 
 /-! # Rational projective-line localizing preservation
 
@@ -228,7 +229,9 @@ private theorem coefficient_closure_eq
     localizingClosureProEtale (coefficient l c).X Z =
       CategoryTheory.localizingClosure
         (constantModelBoundedConstructible (coefficient l c).X Z) := by
-  apply (localizingClosure_ctf_equals_bc l Z (coefficient l c).X ?_).1.2.2.2.1
+  unfold localizingClosureProEtale
+  congr 1
+  apply (integral_ctf_equals_bc l Z (coefficient l c) ?_).2.2.2
   cases c with
   | none => exact Or.inr (Or.inr (Or.inr ⟨Iso.refl _⟩))
   | some E => exact Or.inr (Or.inr (Or.inl ⟨E, Or.inr ⟨Iso.refl _⟩⟩))

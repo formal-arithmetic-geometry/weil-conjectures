@@ -259,8 +259,6 @@ private theorem tensorUnit_apply {T : Scheme.{u}} {R A : Type u}
 
 attribute [local irreducible] tensorUnit
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 private def constantUnit (T : Scheme.{u}) (R : Type u) [CommRing R] :
     (Functor.const T.ProEtᵒᵖ).obj (RingCat.of (ULift.{u + 1, u} R)) ⟶
       ((sheafCompose (ProEt.topology T)
@@ -305,8 +303,6 @@ attribute [local irreducible] tateTensorMap
 
 attribute [local irreducible] tensorHomEquiv tensorPresheafHomEquiv tensorToRestriction
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 private theorem tateConstantMap_comp (T : Scheme.{u})
     {R Q A : Type u} [CommRing R] [CommRing Q] [CommRing A]
     (q : R →+* Q) (a : Q →+* A) :
