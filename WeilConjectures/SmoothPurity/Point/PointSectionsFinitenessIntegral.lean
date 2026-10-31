@@ -65,9 +65,7 @@ theorem point_sections_finiteness_integral (D : FiniteFieldDatum.{u})
   let I : Ideal R := Ideal.span {ULift.up (Padic.coefficientExtensionUniformizer l E)}
   let M := DerivedCategory.Q.obj
     (((pointIntegralSections l E D.k).mapHomologicalComplex (.up ℤ)).obj C)
-  have hdvr := (Padic.extension_integers_dvr l E
-    (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  have hdvr := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   letI : IsDiscreteValuationRing O := hdvr.2.2.2.2.2.2.2.1
   letI : IsNoetherianRing R := isNoetherianRing_of_ringEquiv O ULift.ringEquiv.symm
   have hO : Function.Bijective (AdicCompletion.of J O) :=

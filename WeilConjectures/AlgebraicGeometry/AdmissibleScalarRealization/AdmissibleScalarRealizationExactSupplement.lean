@@ -880,9 +880,7 @@ theorem admissible_scalar_realization_exact (ℓ : ℕ) [Fact ℓ.Prime] (T : Sc
   · intro E _ _ _
     let := (Padic.coefficientExtensionAbsoluteValue ℓ E).toNormedField
     have : IsPrincipalIdealRing (Padic.coefficientExtensionIntegers ℓ E) := by
-      have h := (Padic.extension_integers_dvr ℓ E
-        (Padic.coefficientExtensionAbsoluteValue ℓ E)
-        (spectralNorm_extends (K := ℚ_[ℓ]) (L := E))).choose_spec.choose_spec
+      have h := (Padic.coefficientExtensionIntegers_dvr ℓ E).choose_spec
       exact h.2.2.2.2.2.2.2.2.1
     refine ⟨⟨pid_scalar_assertions _ T, ?_⟩, pid_scalar_assertions _ T⟩
     intro π hπ
@@ -895,16 +893,12 @@ theorem admissible_scalar_realization_exact (ℓ : ℕ) [Fact ℓ.Prime] (T : Sc
       intro hzero
       have hmax := hπ
       rw [hzero, Ideal.span_singleton_zero] at hmax
-      have h := (Padic.extension_integers_dvr ℓ E
-        (Padic.coefficientExtensionAbsoluteValue ℓ E)
-        (spectralNorm_extends (K := ℚ_[ℓ]) (L := E))).choose_spec.choose_spec
+      have h := (Padic.coefficientExtensionIntegers_dvr ℓ E).choose_spec
       exact h.2.2.2.2.2.2.2.2.2.1 hmax.symm
     have hgen : Ideal.span ({Padic.coefficientExtensionUniformizer ℓ E} :
         Set (Padic.coefficientExtensionIntegers ℓ E)) =
         Padic.coefficientExtensionMaximalIdeal ℓ E := by
-      have h := (Padic.extension_integers_dvr ℓ E
-        (Padic.coefficientExtensionAbsoluteValue ℓ E)
-        (spectralNorm_extends (K := ℚ_[ℓ]) (L := E))).choose_spec.choose_spec
+      have h := (Padic.coefficientExtensionIntegers_dvr ℓ E).choose_spec
       exact h.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
     have heq (n : ℕ) : Padic.coefficientExtensionIdeal ℓ E n =
         Ideal.span ({π} : Set (Padic.coefficientExtensionIntegers ℓ E)) ^ n := by

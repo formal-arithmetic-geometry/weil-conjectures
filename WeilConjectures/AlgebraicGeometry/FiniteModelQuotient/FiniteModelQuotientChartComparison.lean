@@ -105,9 +105,7 @@ private theorem model_exact (T : Scheme.{u}) :
       (FiniteConstantModel.modelFunctor (A l E) T).Additive := by
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   have hpid : IsPrincipalIdealRing (A l E) := by
-    have h := (Padic.extension_integers_dvr l E
-      (Padic.coefficientExtensionAbsoluteValue l E)
-      (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
+    have h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
     exact h.2.2.2.2.2.2.2.2.1
   have := hpid
   apply FiniteConstantModel.modelFunctor_exact (A l E) T

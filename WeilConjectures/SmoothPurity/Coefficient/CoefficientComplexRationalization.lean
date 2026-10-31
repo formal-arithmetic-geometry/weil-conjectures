@@ -96,8 +96,7 @@ private theorem coefficientIntegerFlat {S : Type u} [CommRing S] [IsDomain S]
     f.Flat := by
   let : Algebra (Padic.coefficientExtensionIntegers l E) S := f.toAlgebra
   let : IsDiscreteValuationRing (Padic.coefficientExtensionIntegers l E) :=
-    (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-      (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec.2.2.2.2.2.2.2.1
+    (Padic.coefficientExtensionIntegers_dvr l E).choose_spec.2.2.2.2.2.2.2.1
   let : Module.IsTorsionFree (Padic.coefficientExtensionIntegers l E) S :=
     Module.isTorsionFree_iff_algebraMap_injective.mpr hf
   exact inferInstanceAs (Module.Flat (Padic.coefficientExtensionIntegers l E) S)

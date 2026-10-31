@@ -930,8 +930,7 @@ private theorem finiteCoefficient_ne_zero
   let O := Padic.coefficientExtensionIntegers l E
   let m := Padic.coefficientExtensionMaximalIdeal l E
   let π := Padic.coefficientExtensionUniformizer l E
-  have h := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  have h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   let : IsLocalRing O := h.2.2.2.1
   let : IsDiscreteValuationRing O := h.2.2.2.2.2.2.2.1
   have hπ : Ideal.span ({π} : Set O) = m :=

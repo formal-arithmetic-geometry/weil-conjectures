@@ -148,9 +148,7 @@ private theorem scalar_resolution (P : ModuleCat.{u + 1} (A l E))
       Function.Surjective w.hom := by
   have := hP
   have : IsPrincipalIdealRing (A l E) := by
-    have h := (Padic.extension_integers_dvr l E
-      (Padic.coefficientExtensionAbsoluteValue l E)
-      (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
+    have h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
     exact h.2.2.2.2.2.2.2.2.1
   obtain ⟨a, b, f, w, hi, he, hs⟩ := FiniteConstantModel.scalar_resolution (A l E) P
   obtain ⟨v, hv⟩ := integral_matrix l E a b f

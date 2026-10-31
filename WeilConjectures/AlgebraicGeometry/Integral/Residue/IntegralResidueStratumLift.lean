@@ -173,8 +173,7 @@ theorem integralResidueStratum_lift
   obtain ⟨c⟩ := integralResidueCoefficientModel_exists l E d hd S
   have hJ : Ideal.span {Padic.coefficientExtensionUniformizer l E} =
       Padic.coefficientExtensionMaximalIdeal l E := by
-    have h := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-      (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+    have h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
     exact h.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
   have : IsAdicComplete d.ideal (Padic.coefficientExtensionIntegers l E) := by
     rw [hd, hJ]

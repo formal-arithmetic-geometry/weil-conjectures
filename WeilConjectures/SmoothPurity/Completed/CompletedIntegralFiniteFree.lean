@@ -213,12 +213,8 @@ private theorem integral_ramification :
         (Padic.coefficientExtensionUniformizer l E) =
           (a : Padic.coefficientExtensionIntegers l L) *
             Padic.coefficientExtensionUniformizer l L ^ e := by
-  have hE := (Padic.extension_integers_dvr l E
-    (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
-  have hL := (Padic.extension_integers_dvr l L
-    (Padic.coefficientExtensionAbsoluteValue l L)
-    (spectralNorm_extends (K := ℚ_[l]) (L := L))).choose_spec.choose_spec
+  have hE := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
+  have hL := (Padic.coefficientExtensionIntegers_dvr l L).choose_spec
   let : IsLocalRing (Padic.coefficientExtensionIntegers l E) := hE.2.2.2.1
   let : IsLocalRing (Padic.coefficientExtensionIntegers l L) := hL.2.2.2.1
   let : IsDiscreteValuationRing (Padic.coefficientExtensionIntegers l E) :=

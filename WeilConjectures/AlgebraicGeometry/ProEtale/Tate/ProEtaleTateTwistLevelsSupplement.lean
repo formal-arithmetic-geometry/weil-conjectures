@@ -186,9 +186,7 @@ theorem spIntegers_eq (E : PadicAlgCl.FiniteIntermediateField ℓ) :
           norm_algebraMap'] }
   have hmem (x : E.1) : x ∈ Padic.coefficientExtensionIntegers ℓ E.1 ↔
       (Padic.coefficientExtensionAbsoluteValue ℓ E.1) x ≤ 1 :=
-    (Padic.extension_integers_dvr ℓ E.1
-      (Padic.coefficientExtensionAbsoluteValue ℓ E.1)
-      (spectralNorm_extends (K := Padic ℓ) (L := E.1))).choose_spec.choose_spec.1 x
+    (Padic.coefficientExtensionIntegers_dvr ℓ E.1).choose_spec.1 x
   apply Subring.ext
   intro x
   rw [hmem x]

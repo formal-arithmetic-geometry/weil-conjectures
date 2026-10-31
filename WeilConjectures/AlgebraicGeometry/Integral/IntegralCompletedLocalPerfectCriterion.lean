@@ -230,8 +230,7 @@ private theorem perfect_intrinsicComplete (T : Scheme.{u}) [IsNoetherian T]
 private theorem integralIdeal_maximal (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
     (pbcIntegralDatum l E).ideal.IsMaximal := by
-  let h := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  let h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   have hm : (Padic.coefficientExtensionMaximalIdeal l E).IsMaximal := h.2.2.2.2.1
   have hπ : Ideal.span {Padic.coefficientExtensionUniformizer l E} =
       Padic.coefficientExtensionMaximalIdeal l E := h.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec

@@ -51,9 +51,7 @@ theorem purTwistIntegralBasis (l : ℕ) [Fact l.Prime]
       algebraMap ℚ_[l] E (z : ℚ_[l]) :=
     (purTwistIntegersMap_existsUnique l E).exists.choose_spec z
   let : IsScalarTower ℤ_[l] O E := IsScalarTower.of_algebraMap_eq fun z ↦ (hmap z).symm
-  have hO := (Padic.extension_integers_dvr l E
-    (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  have hO := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   have : IsFractionRing O E := hO.2.2.2.2.2.2.1
   have : IsPrincipalIdealRing O := hO.2.2.2.2.2.2.2.2.1
   have : IsIntegrallyClosedIn O E :=

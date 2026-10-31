@@ -64,10 +64,7 @@ the n-th power puts l^n in (varpi)^n. Its quotient image and its ULift are zero.
 No divisibility condition on n is needed. -/
 theorem diagonalExponent_annihilates (P : PurityFiniteSetting.{u}) :
     (P.diagonalExponent : P.Coefficient) = 0 := by
-  have h := (Padic.extension_integers_dvr P.coefficients.l P.extension
-    (Padic.coefficientExtensionAbsoluteValue P.coefficients.l P.extension)
-    (spectralNorm_extends (K := Padic P.coefficients.l)
-      (L := P.extension))).choose_spec.choose_spec
+  have h := (Padic.coefficientExtensionIntegers_dvr P.coefficients.l P.extension).choose_spec
   have hmem : (P.coefficients.l : Padic.coefficientExtensionIntegers
       P.coefficients.l P.extension) ∈
       Padic.coefficientExtensionMaximalIdeal P.coefficients.l P.extension := by

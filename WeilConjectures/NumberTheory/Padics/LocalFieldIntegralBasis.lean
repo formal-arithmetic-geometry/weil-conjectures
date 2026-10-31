@@ -82,8 +82,7 @@ theorem exists_integral_basis
   -- The integral-closure bridge lets Mathlib supply finiteness, freeness, and rank.
   let A := coefficientExtensionIntegers l E
   have hmap (z : A) : algebraMap A E z = (z : E) := rfl
-  have h := (extension_integers_dvr l E (coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  have h := (coefficientExtensionIntegers_dvr l E).choose_spec
   have : IsFractionRing A E := h.2.2.2.2.2.2.1
   have : IsPrincipalIdealRing A := h.2.2.2.2.2.2.2.2.1
   have : CharZero E := charZero_of_injective_algebraMap (algebraMap (Padic l) E).injective

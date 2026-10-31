@@ -803,8 +803,7 @@ private theorem coefficientExtensionRing_one_natCast_self
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
     (l : Padic.coefficientExtensionRing l E 1) = 0 := by
-  have h := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  have h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   have hg : Ideal.span ({Padic.coefficientExtensionUniformizer l E} :
       Set (Padic.coefficientExtensionIntegers l E)) =
       Padic.coefficientExtensionMaximalIdeal l E :=
@@ -840,9 +839,7 @@ private theorem proper_integralModel_bounded
   let A := Padic.coefficientExtensionRing l E 1
   let : (Padic.coefficientExtensionIdeal l E 1).IsMaximal :=
     by
-      have h := (Padic.extension_integers_dvr l E
-        (Padic.coefficientExtensionAbsoluteValue l E)
-        (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+      have h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
       have hm : (Padic.coefficientExtensionMaximalIdeal l E).IsMaximal := h.2.2.2.2.1
       have hg : Ideal.span ({Padic.coefficientExtensionUniformizer l E} :
           Set (Padic.coefficientExtensionIntegers l E)) =
@@ -1029,9 +1026,7 @@ private theorem integerModel_comparison
     (NormedAlgebra.norm_eq_spectralNorm ℚ_[l] (L := F) x).symm
   have hm (x : F) : x ∈ Padic.coefficientExtensionIntegers l F ↔
       x.down ∈ continuousIntegers l E := by
-    have h := (Padic.extension_integers_dvr l F
-      (Padic.coefficientExtensionAbsoluteValue l F)
-      (spectralNorm_extends (K := ℚ_[l]) (L := F))).choose_spec.choose_spec.1 x
+    have h := (Padic.coefficientExtensionIntegers_dvr l F).choose_spec.1 x
     change x ∈ Padic.coefficientExtensionIntegers l F ↔
       Padic.coefficientExtensionAbsoluteValue l F x ≤ 1 at h
     change _ ↔ ‖x.down‖₊ ≤ 1

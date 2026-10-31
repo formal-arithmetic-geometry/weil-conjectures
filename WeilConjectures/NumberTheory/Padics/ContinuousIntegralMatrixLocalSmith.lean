@@ -109,8 +109,7 @@ theorem continuous_integral_matrix_local_smith
   classical
   let A := coefficientExtensionIntegers l E
   let : TopologicalSpace A := (coefficientExtensionMaximalIdeal l E).adicTopology
-  have hcoeff := (extension_integers_dvr l E (coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  have hcoeff := (coefficientExtensionIntegers_dvr l E).choose_spec
   let : IsLocalRing A := hcoeff.2.2.2.1
   let : IsDiscreteValuationRing A := hcoeff.2.2.2.2.2.2.2.1
   have hmax : IsLocalRing.maximalIdeal A = coefficientExtensionMaximalIdeal l E :=

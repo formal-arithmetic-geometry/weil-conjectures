@@ -406,9 +406,7 @@ private theorem dvrOpenModel_exists {U X : Scheme.{u}} (j : U ⟶ X)
 
 private theorem openDvrUniformizer_ne_zero :
     Padic.coefficientExtensionUniformizer l E ≠ 0 := by
-  have h := (Padic.extension_integers_dvr l E
-    (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  have h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   have hm : Padic.coefficientExtensionMaximalIdeal l E ≠ ⊥ :=
     h.2.2.2.2.2.2.2.2.2.1
   have hgen : Ideal.span ({Padic.coefficientExtensionUniformizer l E} :

@@ -481,9 +481,7 @@ theorem finite_constant_model_two_term_free_resolution
         (Mod.finiteFree (condensedRingObj (rationalCoefficients l E) T)) P true) := by
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   have hpid : IsPrincipalIdealRing (Padic.coefficientExtensionIntegers l E) := by
-    have h := (Padic.extension_integers_dvr l E
-      (Padic.coefficientExtensionAbsoluteValue l E)
-      (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+    have h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
     exact h.2.2.2.2.2.2.2.2.1
   have hexact (A : Type u) [CommRing A] [IsDomain A] [IsPrincipalIdealRing A]
       [TopologicalSpace A] [IsTopologicalRing A] :

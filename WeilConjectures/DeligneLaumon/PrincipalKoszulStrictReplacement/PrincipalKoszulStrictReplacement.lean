@@ -418,9 +418,7 @@ theorem coefficient_datum :
           (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1))) := by
   let A := Padic.coefficientExtensionIntegers l E
   let t := Padic.coefficientExtensionUniformizer l E
-  have hd := (Padic.extension_integers_dvr l E
-    (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  have hd := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   have : IsPrincipalIdealRing A := hd.2.2.2.2.2.2.2.2.1
   have hf (n : ℕ) : Finite (A ⧸ Ideal.span {t} ^ (n + 1)) :=
     Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_le_succ (Nat.zero_le n))

@@ -48,10 +48,8 @@ private theorem ramification_exists :
   let t := Padic.coefficientExtensionUniformizer l E
   let v := Padic.coefficientExtensionUniformizer l L
   let f := integralScalarIntegerInclusion l E L ι
-  have hE := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
-  have hL := (Padic.extension_integers_dvr l L (Padic.coefficientExtensionAbsoluteValue l L)
-    (spectralNorm_extends (K := ℚ_[l]) (L := L))).choose_spec.choose_spec
+  have hE := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
+  have hL := (Padic.coefficientExtensionIntegers_dvr l L).choose_spec
   have : IsLocalRing R := hE.2.2.2.1
   have : IsLocalRing S := hL.2.2.2.1
   have : IsDiscreteValuationRing R := hE.2.2.2.2.2.2.2.1

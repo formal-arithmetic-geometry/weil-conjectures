@@ -54,8 +54,7 @@ theorem integral_point_complex_homology
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   let A := Padic.coefficientExtensionIntegers l E
   have : IsPrincipalIdealRing A :=
-    (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-      (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec.2.2.2.2.2.2.2.2.1
+    (Padic.coefficientExtensionIntegers_dvr l E).choose_spec.2.2.2.2.2.2.2.2.1
   exact integral_scalar_complex_homology A P hf q
 
 end AlgebraicGeometry.ProEtale

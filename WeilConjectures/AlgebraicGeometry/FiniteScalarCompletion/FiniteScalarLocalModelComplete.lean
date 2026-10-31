@@ -570,9 +570,7 @@ private theorem local_complete_of_free
   obtain ⟨hprod, ⟨c⟩⟩ := hrestrict (𝒰.f i) hmem
   obtain ⟨m, n, q, ⟨e⟩⟩ := h𝒰 i
   let : IsPrincipalIdealRing (Padic.coefficientExtensionIntegers l E) := by
-    have h := (Padic.extension_integers_dvr l E
-      (Padic.coefficientExtensionAbsoluteValue l E)
-      (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
+    have h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
     exact h.2.2.2.2.2.2.2.2.1
   have : Module.Finite (Padic.coefficientExtensionIntegers l E)
       (sfbScalarPresentationModule (Padic.coefficientExtensionIntegers l E) m n q) := by

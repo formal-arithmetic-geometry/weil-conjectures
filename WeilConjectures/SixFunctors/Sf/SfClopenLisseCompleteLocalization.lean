@@ -31,8 +31,7 @@ private theorem residue_ideal_maximal
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] :
     (Padic.coefficientExtensionIdeal l E 1).IsMaximal := by
-  have h := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  have h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   have hm : (Padic.coefficientExtensionMaximalIdeal l E).IsMaximal := h.2.2.2.2.1
   have hgen : Ideal.span ({Padic.coefficientExtensionUniformizer l E} :
       Set (Padic.coefficientExtensionIntegers l E)) =

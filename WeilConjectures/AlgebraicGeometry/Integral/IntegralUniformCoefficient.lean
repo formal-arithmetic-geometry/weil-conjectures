@@ -55,9 +55,7 @@ theorem pbcPadicCoefficientFacts (l : ℕ) [Fact l.Prime]
       (∀ n : ℕ, Finite (Padic.coefficientExtensionRing l E (n + 1))) ∧
       (∀ n : ℕ, 1 ≤ n → adicQuotientPerfect (Padic.coefficientExtensionIntegers l E)
         (Ideal.span {Padic.coefficientExtensionUniformizer l E}) n) := by
-  have h := (Padic.extension_integers_dvr l E
-    (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  have h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   have hpid : IsPrincipalIdealRing (Padic.coefficientExtensionIntegers l E) :=
     h.2.2.2.2.2.2.2.2.1
   have hfinite (n : ℕ) : Finite (Padic.coefficientExtensionRing l E (n + 1)) :=

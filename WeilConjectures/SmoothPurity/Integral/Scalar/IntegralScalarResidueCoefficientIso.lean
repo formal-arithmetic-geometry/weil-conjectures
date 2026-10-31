@@ -33,9 +33,7 @@ Source: Serre, Local Fields, Chapter I, section 1.
 (blueprint: lem-sf-integral-scalar-residue-coefficient-iso). -/
 @[reducible] noncomputable instance integralScalarResidueField :
     Field (Padic.coefficientExtensionRing l E 1) := by
-  have h := (Padic.extension_integers_dvr l E
-    (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
+  have h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   have hgen : Ideal.span {Padic.coefficientExtensionUniformizer l E} =
       Padic.coefficientExtensionMaximalIdeal l E :=
     h.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
@@ -317,9 +315,7 @@ theorem integralScalarResidueCoefficientIso (n : ℕ)
       (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l L (n + 1)))
   let q : B →+* k := RingHom.ulift.{u + 1, u + 1}
     (integralScalarResidueRingProjection l L n)
-  have h := (Padic.extension_integers_dvr l L
-    (Padic.coefficientExtensionAbsoluteValue l L)
-    (spectralNorm_extends (K := Padic l) (L := L))).choose_spec.choose_spec
+  have h := (Padic.coefficientExtensionIntegers_dvr l L).choose_spec
   have hgen : Ideal.span {x} = Padic.coefficientExtensionMaximalIdeal l L :=
     h.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
   have hx : x ≠ 0 := by

@@ -232,12 +232,8 @@ Apply this characterization to hx and to ι x. -/
 theorem integralScalar_integer_mem (x : E)
     (hx : x ∈ Padic.coefficientExtensionIntegers l E) :
     ι x ∈ Padic.coefficientExtensionIntegers l L := by
-  have hE := (Padic.extension_integers_dvr l E
-    (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec.1 x
-  have hL := (Padic.extension_integers_dvr l L
-    (Padic.coefficientExtensionAbsoluteValue l L)
-    (spectralNorm_extends (K := ℚ_[l]) (L := L))).choose_spec.choose_spec.1 (ι x)
+  have hE := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec.1 x
+  have hL := (Padic.coefficientExtensionIntegers_dvr l L).choose_spec.1 (ι x)
   apply hL.mpr
   rw [integralScalar_absoluteValue l E L ι x]
   exact hE.mp hx
@@ -262,12 +258,8 @@ theorem integralScalar_quotient_kernel (n : ℕ)
     (hx : x ∈ Padic.coefficientExtensionIdeal l E (n + 1)) :
     (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l L (n + 1)))
       (integralScalarIntegerInclusion l E L ι x) = 0 := by
-  have hE := (Padic.extension_integers_dvr l E
-    (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
-  have hL := (Padic.extension_integers_dvr l L
-    (Padic.coefficientExtensionAbsoluteValue l L)
-    (spectralNorm_extends (K := ℚ_[l]) (L := L))).choose_spec.choose_spec
+  have hE := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
+  have hL := (Padic.coefficientExtensionIntegers_dvr l L).choose_spec
   have hgenE : Ideal.span {Padic.coefficientExtensionUniformizer l E} =
       Padic.coefficientExtensionMaximalIdeal l E :=
     hE.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec

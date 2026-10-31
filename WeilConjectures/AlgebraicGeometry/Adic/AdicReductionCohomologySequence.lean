@@ -50,8 +50,7 @@ private theorem uniformizer_ne_zero (l : ℕ) [Fact l.Prime]
     [FiniteDimensional (Padic l) E] : Padic.coefficientExtensionUniformizer l E ≠ 0 := by
   let A := Padic.coefficientExtensionIntegers l E
   let π := Padic.coefficientExtensionUniformizer l E
-  have h := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  have h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   let : IsDiscreteValuationRing A := h.2.2.2.2.2.2.2.1
   have hgen : Ideal.span ({π} : Set A) = Padic.coefficientExtensionMaximalIdeal l E :=
     h.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec

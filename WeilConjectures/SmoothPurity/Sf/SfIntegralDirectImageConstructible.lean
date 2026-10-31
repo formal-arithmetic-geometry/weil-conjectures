@@ -89,8 +89,7 @@ private theorem support_iso
 private theorem coefficient_killed (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ) :
     ((l ^ n : ℕ) : ULift.{u + 1} (Padic.coefficientExtensionRing l E n)) = 0 := by
-  have h := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
+  have h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   have habv : Padic.coefficientExtensionAbsoluteValue l E (l : E) < 1 := by
     calc
       Padic.coefficientExtensionAbsoluteValue l E (l : E) = ‖(l : Padic l)‖ := by
