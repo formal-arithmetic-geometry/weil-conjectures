@@ -545,7 +545,9 @@ theorem finiteTypeDirectImage_single_constructible
   have : IsNoetherian Y.left := isNoetherian_of_locallyOfFiniteType Y.hom
   exact finite_qbar_of_finite ℓ f.left
     (fun E M ↦ finite_continuous_of_integral ℓ E f.left (finite_normed_integral ℓ f E)
-      M.obj M.property) _ (ProEtale.single_bounded_constructible X.left _ F hF)
+      M.obj M.property) _
+    (ProEtale.CondensedRing.boundedConstructible_singleFunctor_obj_of_isConstructibleModuleObject
+      _ 0 hF)
 
 /-- All higher direct images of a constructible sheaf of `E̲`-modules, `E` a finite normed
 extension of `ℚ_ℓ`, are constructible (the rational case of
@@ -566,7 +568,8 @@ theorem ContinuousMapRingObj.finiteTypeDirectImage_single_constructible
   have : IsNoetherian X.left := isNoetherian_of_locallyOfFiniteType X.hom
   have : IsNoetherian Y.left := isNoetherian_of_locallyOfFiniteType Y.hom
   exact finite_continuous_of_integral ℓ E f.left (finite_normed_integral ℓ f E) _
-    (ProEtale.single_bounded_constructible X.left _ F hF)
+    (ProEtale.CondensedRing.boundedConstructible_singleFunctor_obj_of_isConstructibleModuleObject
+      _ 0 hF)
 
 /-- All higher direct images of a constructible sheaf of `𝒪̲_E`-modules, `E ⊆ ℚ̄_ℓ` a finite
 subextension of `ℚ_ℓ`, are constructible (the integral case of
@@ -590,7 +593,8 @@ theorem PadicIntegersRingObj.finiteTypeDirectImage_single_constructible
   obtain ⟨e⟩ := ProEtale.integralCoefficientIso.{u} ℓ E
   exact finite_integral_of_iso ℓ (ULift.{u} E) _
     (e.symm ≪≫ integerLatticeIso ℓ (ULift.{u} E)) f _
-    (ProEtale.single_bounded_constructible X.left _ F hF)
+    (ProEtale.CondensedRing.boundedConstructible_singleFunctor_obj_of_isConstructibleModuleObject
+      _ 0 hF)
 
 /-- All higher direct images of a constructible sheaf of `O̲`-modules, `O` the closed unit ball of
 a finite normed extension `E` of `ℚ_ℓ`, are constructible (the integral case of
@@ -618,7 +622,8 @@ theorem UnitBallRingObj.finiteTypeDirectImage_single_constructible
   let : FiniteDimensional ℚ_[ℓ] (ULift.{u} E) :=
     (ULift.moduleEquiv (R := ℚ_[ℓ]) (M := E)).symm.finiteDimensional
   exact finite_integral_of_iso ℓ (ULift.{u} E) _ (integerNormedIso ℓ E) f _
-    (ProEtale.single_bounded_constructible X.left _ F hF)
+    (ProEtale.CondensedRing.boundedConstructible_singleFunctor_obj_of_isConstructibleModuleObject
+      _ 0 hF)
 
 /-- All higher direct images of a constructible sheaf of `T̲`-modules, `T` a finite discrete ring
 in which `ℓ` is nilpotent, are constructible: identify the sheaf with its etale constructible
@@ -638,7 +643,9 @@ theorem FiniteDiscreteRingObj.finiteTypeDirectImage_single_constructible
           ((DerivedCategory.singleFunctor _ 0).obj F))) := by
   classical
   obtain ⟨n, hn⟩ := hT.out
-  exact finite_torsion ℓ f T n hn _ (ProEtale.single_bounded_constructible X.left _ F hF)
+  exact finite_torsion ℓ f T n hn _
+    (ProEtale.CondensedRing.boundedConstructible_singleFunctor_obj_of_isConstructibleModuleObject
+      _ 0 hF)
 
 end SingleConstructible
 

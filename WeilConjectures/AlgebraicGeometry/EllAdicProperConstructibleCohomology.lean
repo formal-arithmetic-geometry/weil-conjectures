@@ -419,11 +419,7 @@ private theorem integerModel_comparison
     (NormedAlgebra.norm_eq_spectralNorm ℚ_[l] (L := F) x).symm
   have hm (x : F) : x ∈ Padic.coefficientExtensionIntegers l F ↔
       x.down ∈ continuousIntegers l E := by
-    have h := (Padic.extension_integers_dvr l F
-      (Padic.coefficientExtensionAbsoluteValue l F)
-      (spectralNorm_extends (K := ℚ_[l]) (L := F))).choose_spec.choose_spec.1 x
-    change x ∈ Padic.coefficientExtensionIntegers l F ↔
-      Padic.coefficientExtensionAbsoluteValue l F x ≤ 1 at h
+    have h := Padic.mem_coefficientExtensionIntegers l F x
     change _ ↔ ‖x.down‖₊ ≤ 1
     rw [h]
     change spectralNorm ℚ_[l] F x ≤ 1 ↔ _

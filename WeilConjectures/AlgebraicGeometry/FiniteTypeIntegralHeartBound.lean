@@ -206,9 +206,7 @@ private theorem integral_image
         (DerivedNakayama.integerRing ℓ E) f.left).obj K)) ≫
       (AdicCompletion.derivedReduction ℓ E X.left 0).map (adj.counit.app K))
   have : IsIso c := hmate
-  have h := (Padic.extension_integers_dvr ℓ E
-    (Padic.coefficientExtensionAbsoluteValue ℓ E)
-    (spectralNorm_extends (K := Padic ℓ) (L := E))).choose_spec.choose_spec
+  have h := (Padic.coefficientExtensionIntegers_dvr ℓ E).choose_spec
   have hgen : Ideal.span {Padic.coefficientExtensionUniformizer ℓ E} =
       Padic.coefficientExtensionMaximalIdeal ℓ E :=
     h.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
@@ -281,14 +279,8 @@ private theorem coefficient_lift_memIntegers (ℓ : ℕ) [Fact ℓ.Prime] (F : T
     [Algebra (Padic ℓ) F] [FiniteDimensional (Padic ℓ) F] (x : ULift.{u} F) :
     x ∈ Padic.coefficientExtensionIntegers ℓ (ULift.{u} F) ↔
       x.down ∈ Padic.coefficientExtensionIntegers ℓ F := by
-  have h₁ := (Padic.extension_integers_dvr ℓ (ULift.{u} F)
-    (Padic.coefficientExtensionAbsoluteValue ℓ (ULift.{u} F))
-    (spectralNorm_extends (K := Padic ℓ) (L := ULift.{u} F))).choose_spec.choose_spec.1 x
-  have h₂ := (Padic.extension_integers_dvr ℓ F
-    (Padic.coefficientExtensionAbsoluteValue ℓ F)
-    (spectralNorm_extends (K := Padic ℓ) (L := F))).choose_spec.choose_spec.1 x.down
-  rw [coefficient_lift_absoluteValue] at h₁
-  exact h₁.trans h₂.symm
+  rw [Padic.mem_coefficientExtensionIntegers, Padic.mem_coefficientExtensionIntegers,
+    coefficient_lift_absoluteValue]
 
 attribute [local irreducible] Padic.coefficientExtensionIntegers
 

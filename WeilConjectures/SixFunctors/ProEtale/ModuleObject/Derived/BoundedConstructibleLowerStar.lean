@@ -44,8 +44,9 @@ for `Rf_*`, for each of the three `ℓ`-adic coefficient rings `ℚ̲̄_ℓ`, `E
 By dévissage (`AlgebraicGeometry.ProEtale.prop_of_boundedConstructibleModule`) it suffices that
 `Rf_*` carries a constructible sheaf `F` in degree `0` to a bounded constructible complex: it lies
 in degrees `≥ 0`, it is bounded above
-(`WeilConjectures.AlgebraicGeometry.FiniteTypeDirectImageSingleBound`), and its cohomology sheaves are
-constructible (`WeilConjectures.AlgebraicGeometry.FiniteTypeDirectImageSingleConstructible`).
+(`WeilConjectures.AlgebraicGeometry.FiniteTypeDirectImageSingleBound`), and its cohomology
+sheaves are constructible
+(`WeilConjectures.AlgebraicGeometry.FiniteTypeDirectImageSingleConstructible`).
 
 ## Why a separate file
 
