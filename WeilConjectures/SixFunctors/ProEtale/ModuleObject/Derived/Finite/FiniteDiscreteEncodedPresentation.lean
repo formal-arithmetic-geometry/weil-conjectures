@@ -167,18 +167,18 @@ local instance : HasWeakSheafify (coherentTopology Profinite.{u}) Ab.{u + 1} :=
   HasSheafify.isRightAdjoint
 local instance : ((coherentTopology Profinite.{u}).W (A := Ab.{u + 1})).IsMonoidal :=
   GrothendieckTopology.W.monoidal (J := coherentTopology Profinite.{u}) (A := Ab.{u + 1})
-noncomputable local instance :
+noncomputable local instance encodedPresentationCondensedMonoidal :
     MonoidalCategory (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) :=
   Sheaf.monoidalCategory (coherentTopology Profinite.{u}) Ab.{u + 1}
 
-local instance (T : AlgebraicGeometry.Scheme.{u}) :
+local instance encodedPresentationHasWeakSheafify (T : AlgebraicGeometry.Scheme.{u}) :
     HasWeakSheafify (AlgebraicGeometry.Scheme.ProEt.topology T) Ab.{u + 1} :=
   HasSheafify.isRightAdjoint
-local instance (T : AlgebraicGeometry.Scheme.{u}) :
+local instance encodedPresentationWIsMonoidal (T : AlgebraicGeometry.Scheme.{u}) :
     ((AlgebraicGeometry.Scheme.ProEt.topology T).W (A := Ab.{u + 1})).IsMonoidal :=
   GrothendieckTopology.W.monoidal (J := AlgebraicGeometry.Scheme.ProEt.topology T)
     (A := Ab.{u + 1})
-noncomputable local instance (T : AlgebraicGeometry.Scheme.{u}) :
+noncomputable local instance encodedPresentationMonoidal (T : AlgebraicGeometry.Scheme.{u}) :
     MonoidalCategory (Sheaf (AlgebraicGeometry.Scheme.ProEt.topology T) Ab.{u + 1}) :=
   Sheaf.monoidalCategory (AlgebraicGeometry.Scheme.ProEt.topology T) Ab.{u + 1}
 
