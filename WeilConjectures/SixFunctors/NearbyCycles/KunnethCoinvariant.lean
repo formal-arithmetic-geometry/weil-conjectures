@@ -49,6 +49,7 @@ namespace CategoryTheory
 
 variable {C : Type*} [Category C] [Preadditive C] [MonoidalCategory C] [MonoidalPreadditive C]
 
+omit [Preadditive C] [MonoidalPreadditive C] in
 /-- **Matching invariant summands across a tensor product.** Consider a square
 ```
   U --δ--> S₁ ⊗ S₂ --u₁ ⊗ u₂--> T₁ ⊗ T₂
