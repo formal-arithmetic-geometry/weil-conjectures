@@ -29,3 +29,33 @@ variable (S : SystemScalarAssignment (J := J)) (T : SystemTensorCoherence S)
   (A : SystemScalarModel (singletonSequenceRingMap a))
 
 end SheafOfModules
+
+namespace SheafOfModules
+
+/-- The specified derived conjugate is represented by the ordinary singleton
+coefficient comparison, with the actual universal comparison maps.
+Source: Stacks, Derived Categories, lemmas pre-derived-adjoint-functors (0FND) and
+derived-adjoint-functors (09T5), and Cohomology on Sites, 0D6D; the singleton
+calculation is the argument in the parent node, Steps 7--8.
+(blueprint: lem-pur-system-singleton-scalar-representative)
+
+Proof: transport the normalized singleton transpose through the exact sequence
+ equivalence and its derived compositor. Compose this transpose with the normalized
+scalar transpose, on each side of the evaluation/restriction square. On complexes,
+the ordinary uniqueness map transposes to the target composite unit in each degree.
+The right square is identity on sections and its derived square is its canonical
+exact-functor localization, so inverse factorization maps satisfy the same square.
+Apply normalizedAdjunction_composition to the two pairs of adjunctions and then
+normalizedAdjunction_uniqueness to these compatible right comparisons. Its conclusion
+is exactly the displayed equality after identifying the componentwise cochain map
+of the ordinary uniqueness isomorphism. This argument uses arbitrary complexes:
+K-flatness is needed only to invert the two universal comparison maps. -/
+theorem singletonScalarDerivedIso_rep (n : ℕ)
+    (P : CochainComplex (systemLevel B n) ℤ) :
+      (singletonScalarDerivedIso S T a A n).hom.app (DerivedCategory.Q.obj P) ≫
+          singletonScalarTargetComparison S T a n P =
+        singletonScalarSourceComparison S T a A n P ≫ DerivedCategory.Q.map
+          ((NatIso.mapHomologicalComplex (singletonScalarOrdinaryIso S T a A n)
+            (.up ℤ)).hom.app P) := by sorry
+
+end SheafOfModules
