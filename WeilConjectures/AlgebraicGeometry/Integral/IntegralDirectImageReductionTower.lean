@@ -550,9 +550,8 @@ attribute [-instance] AdicCompletion.ringMonoidalObject
   AdicCompletion.finiteRingMonoidalObject AdicCompletion.ringCommutative
   AdicCompletion.finiteRingCommutative AdicCompletion.modulesDerived
   AdicCompletion.finiteModulesDerived
-attribute [-instance] pointReductionMon pointTransitionMon integralComm finiteComm
-  integralCommSym finiteCommSym CondensedRing.scalarSixRing_comm
-  CondensedRing.scalarSixMap_isMonHom
+attribute [-instance] pointReductionMon pointTransitionMon finiteComm integralCommSym
+  finiteCommSym CondensedRing.scalarSixRing_comm CondensedRing.scalarSixMap_isMonHom
 
 /-- The existing integral coefficient commutativity for the symmetric sheaf braiding.
 Source: coefficient scalar adjunctions

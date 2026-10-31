@@ -88,7 +88,6 @@ private def derivedPullbackScalarIso {X Y : Scheme.{u}} (f : X ⟶ Y)
   exact (Functor.mapDerivedCategoryCompIso F G).symm ≪≫
     Functor.mapDerivedCategoryNatIso ei
 
-attribute [local irreducible] derivedPullbackScalarIso
 
 /-- Derived pullback, after scalar normalization, is the raw inverse image.
 Source: Stacks Tags 03D3 and 03D8, inverse image adjunction and composition.

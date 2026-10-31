@@ -172,7 +172,6 @@ import WeilConjectures.AlgebraicGeometry.Completed.Koszul.CompletedKoszulConstan
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
-attribute [-instance] CategoryTheory.sfbSheafTensor_hasWeakSheafify
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor Opposite
 open scoped ChangeOfRings

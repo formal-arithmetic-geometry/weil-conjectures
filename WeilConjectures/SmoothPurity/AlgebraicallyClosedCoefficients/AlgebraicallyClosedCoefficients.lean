@@ -701,10 +701,6 @@ private theorem homGroup_eq_native (A B : Pair D l hl Ω Y) :
 
 attribute [-instance] StageSystem.PairCategory.instAddHom
   StageSystem.PairCategory.instAddCommGroupHom StageSystem.PairCategory.preadditive in
-attribute [-instance] StageSystem.PairCategory.instAddHom
-  StageSystem.PairCategory.instAddCommGroupHom StageSystem.PairCategory.preadditive in
-attribute [-instance] StageSystem.PairCategory.instAddHom
-  StageSystem.PairCategory.instAddCommGroupHom StageSystem.PairCategory.preadditive in
 /-- The fixed composition is additive in each variable.
 Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients).
 Proof: represent the three maps at a common compositum. Colimit structure maps are
