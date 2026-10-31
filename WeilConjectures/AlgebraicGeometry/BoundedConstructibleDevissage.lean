@@ -24,6 +24,15 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 
+/-- Boundedness and constructible homology are invariant under isomorphism. -/
+instance isClosedUnderIsomorphisms_boundedConstructibleModule
+    {X : Scheme.{u}} (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+    [MonObj R] [IsCommMonObj R] :
+    (boundedConstructible R).IsClosedUnderIsomorphisms where
+  of_iso e h := ⟨DerivedCategory.TStructure.t.bounded.prop_of_iso e h.1,
+    fun n ↦ _root_.constructible_of_iso (R := R)
+      ((homologyFunctor _ n).mapIso e) (h.2 n)⟩
+
 /-- A bounded complex with constructible homology sheaves lies in every triangulated
 subcategory of the derived module-object category, closed under isomorphisms, containing
 the constructible sheaves placed in degree `0`. This is the generic derived-category
