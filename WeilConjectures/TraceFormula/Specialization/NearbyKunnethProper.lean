@@ -36,13 +36,10 @@ sections vanishes (blueprint `det-nearby-kunneth-finite-support`; for `ℚ̄_ℓ
 `ProEtale.CondensedRing.isZero_of_isZero_upperStar_finsetComplOpens`).
 
 The finite-support step is proved in chart dimension `n` (charts `V ⟶ 𝔸ᵐ_S` with `m` summed over
-the two factors, `AlgebraicGeometry.Scheme.Hom.LocallyEmbedsInAffineSpace`), given Gabber's
-Künneth formula in chart dimension `n - 1` over the trait `Spec K⟦t⟧` of the generic slices
-(`NearbyCyclesModel.KunnethFormula`); its only unfinished inputs are the invariance of nearby
-cycles under change of trait (`NearbyCyclesModel.isIso_pullbackExchange_baseChangeHom_traitMap`)
-and the generic-slicing identification with invariants
-(`NearbyCyclesModel.exists_sum_autAction_pullbackExchange_sliceFst`), see
-`WeilConjectures.TraceFormula.Specialization.NearbyKunnethSliceStep`.
+the two factors, `AlgebraicGeometry.Scheme.Hom.LocallyEmbedsInAffineSpace`), given the
+generic-slicing step in chart dimension `n - 1` (`NearbyCyclesModel.SliceKunnethFormula`), which
+is deduced from the Künneth formula over the trait `Spec K⟦t⟧` of the generic slices in
+`WeilConjectures.TraceFormula.Specialization.NearbyKunnethIntegral`.
 
 The reduction to proper models in chart dimension `n` (`NearbyCyclesModel.ProperKunnethFormula`)
 is proved: locality on the special fibre reduces to products of charts
@@ -154,8 +151,8 @@ lemma boundedConstructible_kunnethMap_target (qP : P.total ⟶ trait k')
 locale*, proof of Thm. 4.7): for the product `P` over the strictly henselian trait of models `M`,
 `N` of finite type and bounded constructible `A`, `B`, the Künneth map `Π_{A,B}` is an
 isomorphism away from finitely many closed points of the special fibre `X_s × Y_s`, given that the
-total spaces locally embed into `𝔸ᵐ_S`, `𝔸^{m'}_S` and that the Künneth formula holds in chart
-dimension `m + m' - 1` over the trait of the generic slices.
+total spaces locally embed into `𝔸ᵐ_S`, `𝔸^{m'}_S` and that the generic-slicing step holds in
+chart dimension `m + m' - 1` (`NearbyCyclesModel.SliceKunnethFormula`).
 
 The source and target of `Π_{A,B}` are bounded constructible by Deligne's finiteness theorem
 (`NearbyCyclesModel.preservesBoundedConstructible_of_isTraitModel`,
@@ -163,7 +160,7 @@ The source and target of `Π_{A,B}` are bounded constructible by Deligne's finit
 `NearbyCyclesModel.exists_finite_isIso_upperStar_map_kunnethMap_of_boundedConstructible`: around
 every point, the coordinates of local charts of the total spaces detect closed points of the
 special fibre, and the cone of `Π_{A,B}` vanishes over the generic point of each coordinate line
-by generic slicing (`NearbyCyclesModel.isIso_map_kunnethMap_baseChangeSpecialMap_fst`). -/
+by generic slicing (`NearbyCyclesModel.SliceKunnethFormula`). -/
 theorem exists_finite_isIso_upperStar_map_kunnethMap (hM : M.IsTraitModelOver qM gM)
     (hN : N.IsTraitModelOver qN gN) (hpb : IsPullback φ₁.total φ₂.total qM qN)
     (hP : P.IsTraitModelOver (φ₁.total ≫ qM) (φ₁.generic ≫ gM))

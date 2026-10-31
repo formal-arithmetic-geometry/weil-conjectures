@@ -22,9 +22,8 @@ for bounded constructible `A`, `B`. This file proves that `C` is supported on fi
 points of the special fibre `X_s × Y_s`
 (`NearbyCyclesModel.exists_finite_isIso_upperStar_map_kunnethMap_of_boundedConstructible`), given
 that its source and target are bounded constructible, that the total spaces locally embed into
-`𝔸ᵐ_S`, `𝔸^{m'}_S`, and that the Künneth formula holds in chart dimension `m + m' - 1` over the
-trait of the generic slices: by the generic-slicing step
-(`NearbyCyclesModel.isIso_map_kunnethMap_baseChangeSpecialMap_fst`, blueprint
+`𝔸ᵐ_S`, `𝔸^{m'}_S`, and that the generic-slicing step holds in chart dimension `m + m' - 1`:
+by the generic-slicing step (`NearbyCyclesModel.SliceKunnethFormula`, blueprint
 `sk-prop-tf-nearby-external-kunneth`, "Finite support"), `C` vanishes on the special fibre
 `(𝒵 ×_{𝔸¹_S} Spec K⟦t⟧)_s` of the generic slice of every chart coordinate.
 
@@ -273,14 +272,14 @@ omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
 locale*, proof of Thm. 4.7): for the product `P` over the strictly henselian trait of models `M`,
 `N` of finite type and bounded constructible `A`, `B` such that the source and the target of the
 Künneth map `Π_{A,B}` are bounded constructible, and whose total spaces locally embed into `𝔸ᵐ_S`,
-`𝔸^{m'}_S`, if the Künneth formula holds in chart dimension `m + m' - 1` over the trait of the
-generic slices, then `Π_{A,B}` is an isomorphism away from finitely many closed points of the
-special fibre `X_s × Y_s`.
+`𝔸^{m'}_S`, if the generic-slicing step holds in chart dimension `m + m' - 1`
+(`NearbyCyclesModel.SliceKunnethFormula`), then `Π_{A,B}` is an isomorphism away from finitely
+many closed points of the special fibre `X_s × Y_s`.
 
 Around every point, the coordinates of charts `V ⟶ 𝔸(ι_V; S)`, `W ⟶ 𝔸(ι_W; S)` of the total
 spaces detect closed points of the special fibre of `V ×_S W`, and the cone of
 `Π_{A,B}` vanishes over the generic point of each coordinate line
-(`NearbyCyclesModel.isIso_map_kunnethMap_baseChangeSpecialMap_fst` and its mirror, for the
+(`NearbyCyclesModel.SliceKunnethFormula` and its mirror, for the
 restriction of the product to `V ×_S W`); conclude by
 `ProEtale.CondensedRing.exists_finset_isZero_of_forall_exists_coordinates`.
 -/
