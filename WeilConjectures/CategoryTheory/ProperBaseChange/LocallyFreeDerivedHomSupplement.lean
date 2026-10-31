@@ -512,7 +512,6 @@ private instance abstract_resolution_unit_quasiIso
     QuasiIso ((locallyFreeResolutionUnit).app K) := by
   exact (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} A K).2
 
-set_option maxHeartbeats 800000 in
 -- The cycle and naturality identities elaborate several derived Hom groups.
 end AbstractModel
 
@@ -529,7 +528,6 @@ attribute [local instance 100000] proofMonoidal
 
 attribute [local instance 100000] proofClosed
 
-set_option backward.isDefEq.respectTransparency true in
 section
 
 variable [HasDerivedCategory.{w} (ringedSiteModules.{u}

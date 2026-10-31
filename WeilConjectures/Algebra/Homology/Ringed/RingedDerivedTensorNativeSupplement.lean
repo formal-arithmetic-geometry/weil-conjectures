@@ -171,7 +171,6 @@ variable {A : Type*} [Category* A] [Abelian A] [HasColimitsOfSize.{0, 0} A]
   [∀ (X Y Z : GradedObject ℤ A), GradedObject.HasGoodTensorTensor₂₃ X Y Z]
 
 omit [HasColimitsOfSize.{0, 0} A] [SymmetricCategory A] in
-omit [HasColimitsOfSize.{0, 0} A] [SymmetricCategory A] in
 /-- The native derived localization has an invertible unit comparison. -/
 theorem localization_isIso_ε [HasDerivedCategory.{w} A]
     [DerivedCategory.Qh.HasDerivedMonoidalCategory (HomotopyCategory.quasiIso A (.up ℤ))] :

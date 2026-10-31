@@ -786,6 +786,4 @@ def kappa (d : Comparison l E j) :
   Functor.whiskerRight (IntegralOnSlice.completionUnit l E X none)
     (derivedRestriction l E j) ≫ d.derived.hom
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
 end WeilConjectures.OpenCompletedRestriction

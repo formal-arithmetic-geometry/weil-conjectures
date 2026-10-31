@@ -87,7 +87,5 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 omit [IsNoetherian T] dim inv in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end ScalarShift
 end AlgebraicGeometry.Scheme

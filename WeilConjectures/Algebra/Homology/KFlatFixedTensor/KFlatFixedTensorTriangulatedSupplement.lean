@@ -873,7 +873,6 @@ private theorem resolvingProperty_shift : (resolvingProperty R).IsStableUnderShi
   · intro i
     exact h.2 (i + n)
 
-set_option linter.unusedVariables false in
 end LocalTensorDefinitions
 
 -- Preserve the original abbreviation interface for importing modules.

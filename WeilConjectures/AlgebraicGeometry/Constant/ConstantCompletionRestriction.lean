@@ -638,5 +638,4 @@ theorem completion_restriction [IsNoetherianRing A] :
     (completionUnit J A I true) (completionUnit J A I false)
     (koszulUnit J A I KB) (koszulUnit J A I KR) eR eB heR heB gamma hg
 
-set_option backward.isDefEq.respectTransparency false in
 end CategoryTheory.ConstantCompletion

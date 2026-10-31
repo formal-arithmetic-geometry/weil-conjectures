@@ -1210,7 +1210,6 @@ private theorem multiplication_complex_shortExact (n : ℕ) [NeZero n]
     { exact := ShortComplex.exact_of_g_is_cokernel _ hc }
   convert! hs using 1
 
-set_option backward.isDefEq.respectTransparency true in
 end PresentationConstruction
 
 variable [HasDerivedCategory.{wZ} (Integral J)]
@@ -1238,9 +1237,6 @@ private theorem multiplication_triangle [NeZero n] (A : Integral J) :
 set_option backward.isDefEq.respectTransparency true in
 attribute [local irreducible] identifications
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency true in
 section InverseImage
 
 variable {C' : Type u'} [Category.{v'} C'] [EssentiallySmall.{r} C']
@@ -1254,7 +1250,6 @@ variable {C' : Type u'} [Category.{v'} C'] [EssentiallySmall.{r} C']
   [UZ.Additive] [PreservesFiniteLimits UZ] [PreservesFiniteColimits UZ]
   [UR.Additive] [PreservesFiniteLimits UR] [PreservesFiniteColimits UR]
 
-set_option linter.unusedVariables false in
 end InverseImage
 
 end DivisibleReduction

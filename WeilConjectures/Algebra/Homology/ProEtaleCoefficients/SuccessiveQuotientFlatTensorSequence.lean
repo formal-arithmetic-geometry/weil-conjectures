@@ -628,10 +628,6 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
 
 omit [EssentiallySmall.{r} C]
   [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
-  [J.WEqualsLocallyBijective AddCommGrpCat.{r}] [HasSheafify J AddCommGrpCat.{r}]
-  [HasSheafify J CommRingCat.{r}] in
-omit [EssentiallySmall.{r} C]
-  [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
   [J.WEqualsLocallyBijective AddCommGrpCat.{r}] [HasSheafify J AddCommGrpCat.{r}] in
 private instance quotientLocallyBijectiveCommRing :
     J.WEqualsLocallyBijective CommRingCat.{r} := by

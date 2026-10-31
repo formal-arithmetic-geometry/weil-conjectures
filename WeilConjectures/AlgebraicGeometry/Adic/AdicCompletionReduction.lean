@@ -46,6 +46,4 @@ noncomputable def adicCompletionEvaluation (X : Scheme.{t}) {Λ : Type t} [CommR
 
 set_option linter.style.haveILetI false in
 set_option linter.style.haveILetI false
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end AlgebraicGeometry.Scheme

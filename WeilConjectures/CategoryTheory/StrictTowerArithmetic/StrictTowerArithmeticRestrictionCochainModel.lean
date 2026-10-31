@@ -207,7 +207,4 @@ private lemma cocone_ext
   · simpa only [Category.assoc] using hf
   · simpa only [Category.assoc] using hs
 
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end CategoryTheory.StrictTowerArithmetic

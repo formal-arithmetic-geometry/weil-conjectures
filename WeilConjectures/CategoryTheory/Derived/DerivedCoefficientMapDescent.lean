@@ -129,6 +129,4 @@ private theorem kan_precomp_quotient
   exact ⟨⟨IsTerminal.ofIso
     (IsTerminal.isTerminalObj P _ (F.isUniversalOfIsRightKanExtension α)) e⟩⟩
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end CategoryTheory.Functor

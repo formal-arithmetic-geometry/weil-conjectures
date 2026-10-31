@@ -582,6 +582,5 @@ private theorem flatOnSite_of_iso (X : Scheme.{u})
       (SheafOfModules.siteSheafTensorRightIso R N).symm
   exact (exactFunctor _ _).prop_of_iso k hM
 
-set_option maxHeartbeats 1000000 in
 -- Bundled sheaf and scalar-restriction conversions require extra elaboration.
 end AlgebraicGeometry.Scheme

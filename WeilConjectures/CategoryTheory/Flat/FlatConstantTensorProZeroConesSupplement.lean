@@ -398,7 +398,6 @@ attribute [local instance] flatConstantExtensionAdditive
 
 attribute [local irreducible] flatConstantExtensionModel
 
-set_option backward.isDefEq.respectTransparency false in
 namespace FlatConstantUnitProof
 
 set_option backward.isDefEq.respectTransparency false

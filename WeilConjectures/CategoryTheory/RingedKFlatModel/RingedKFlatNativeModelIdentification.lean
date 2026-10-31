@@ -821,5 +821,4 @@ private theorem comparison_constraints
     fun X ↦ congr_app hleft X, fun X ↦ congr_app hright X⟩
 
 -- Preserve the recorded signature, whose second K-flat proof fixes the allowed model pairs.
-set_option linter.unusedVariables false in
 end CategoryTheory.RingedKFlatModel

@@ -140,6 +140,4 @@ omit [HasLimitsOfShape ℕᵒᵖ A] [HasDerivedCategory A] in
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 omit [HasDerivedCategory A] [HasDerivedCategory (ℕᵒᵖ ⥤ A)] in
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
 end CategoryTheory.StrictTowerArithmetic

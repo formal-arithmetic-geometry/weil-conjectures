@@ -499,7 +499,6 @@ variable {C : Type a₁} [Category.{b₁} C] [Abelian C] [HasDerivedCategory.{c�
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 attribute [local irreducible] Functor.mapDerivedCategory
 
-set_option backward.isDefEq.respectTransparency false in
 end ExactTriangle
 
 section ReductionComparison
@@ -616,8 +615,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency false in
 omit [Abelian C] [HasDerivedCategory C] [Abelian D] [HasDerivedCategory D]
   [Abelian T] [HasDerivedCategory T] [Abelian U] [HasDerivedCategory U] in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 end ReductionComparison
 
 set_option backward.isDefEq.respectTransparency false in
@@ -1666,8 +1663,6 @@ section
 attribute [local irreducible] modulePullback reductionModule reduction reductionCounit
   reductionModel augmentation
   ordinaryAugmentation ordinaryReductionPull reductionPull
-set_option backward.isDefEq.respectTransparency false in
 end
 
-set_option backward.isDefEq.respectTransparency false in
 end AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization

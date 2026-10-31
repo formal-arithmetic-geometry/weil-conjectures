@@ -128,6 +128,4 @@ private theorem canonicalPresentation {A : Type u} [CommRing A]
       (R := CochainComplex.onePointRingSheaf A)).choose_spec.2.1
       P Q n m p q q' p' hnm hpq hq' hp'
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency false in
 end CategoryTheory

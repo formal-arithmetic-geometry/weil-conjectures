@@ -886,7 +886,6 @@ section
 attribute [local irreducible] sourceStep targetStep sourceResC targetResC betaC
   sourceRes targetRes openRes pullRes pushRes beta openResMap Scheme.proEtaleRingModulePullback
 
-set_option backward.isDefEq.respectTransparency false in
 end
 
 section
@@ -894,7 +893,6 @@ section
 attribute [local irreducible] ambientSourceStep ambientTargetStep ambientRes sourceStep targetStep
   sourceResC targetResC betaC sourceRes targetRes openRes pullRes Scheme.proEtaleRingModulePullback
 
-set_option backward.isDefEq.respectTransparency false in
 end
 
 end AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars

@@ -259,7 +259,6 @@ variable (c : A ⟶ B)
   (((PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 B).obj)).unit.app
     (changeOfRingsPresheaf.{u, u, u} c M)).app W
       ((1 : B.obj.obj W) ⊗ₜ[A.obj.obj W, (c.hom.app W).hom] m))
-set_option maxHeartbeats 600000 in
 -- Expand the two scalar extensions through the sheafification adjunction.
 end TensorSections
 

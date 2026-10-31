@@ -98,6 +98,5 @@ private theorem restriction_transport {S X : LocallyClosedCoefficients.{u}}
   cases h
   simp
 
-set_option maxHeartbeats 2000000 in
 -- Instantiating the categorical argument requires reduction of concrete module functors.
 end AlgebraicGeometry.Scheme

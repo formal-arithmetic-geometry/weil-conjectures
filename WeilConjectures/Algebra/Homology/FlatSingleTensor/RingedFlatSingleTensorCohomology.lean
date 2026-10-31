@@ -119,7 +119,6 @@ attribute [local irreducible] derivedTensor
 attribute [local irreducible] siteDerivedTensorIndependentCoefficients representativeIso
 
 omit [HasDerivedCategory (Modules R)] in
-omit [HasDerivedCategory (Modules R)] in
 section GenericCollapse
 
 variable {M : Type*} [Category* M] [Preadditive M] [HasZeroObject M]
@@ -138,10 +137,8 @@ set_option backward.defeqAttrib.useBackward true in
   erw [HomologicalComplex.ι_mapBifunctorFlipIso_inv_assoc]
   simp [CochainComplex.mapBifunctorSingle₁XIso, HomologicalComplex.singleObjXSelf]
 
-set_option backward.isDefEq.respectTransparency false in
 end GenericCollapse
 
-omit [HasDerivedCategory (Modules R)] in
 omit [HasDerivedCategory (Modules R)] in
 set_option backward.isDefEq.respectTransparency false in
 omit [HasDerivedCategory (Modules R)] in
@@ -155,5 +152,4 @@ omit [HasDerivedCategory (Modules R)] in
 set_option backward.isDefEq.respectTransparency false in
 attribute [local irreducible] derivedCohomologyIso localizedComparison cohomologyNatIso
 
-set_option backward.isDefEq.respectTransparency false in
 end SheafOfModules.FlatSingleTensor

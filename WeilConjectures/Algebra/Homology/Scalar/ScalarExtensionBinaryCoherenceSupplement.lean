@@ -200,8 +200,6 @@ theorem scalarExtension_tensor_hom_ext {R S : Sheaf J CommRingCat.{u}} (Î± : R â
 
 omit [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
   [HasWeakSheafify J AddCommGrpCat.{u}] in
-omit [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
-  [HasWeakSheafify J AddCommGrpCat.{u}] in
 /-- scalarTensorTmul_add_first for the normalized binary comparison.
 Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-binary-coherence).
 Proof: tensor generation and the sheafification adjunction reduce the assertion to the

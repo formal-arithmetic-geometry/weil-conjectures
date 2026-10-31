@@ -173,11 +173,9 @@ private theorem ordinary_square
 
 -- The normalization fields have an abstract categorical API. Keeping the diagram
 -- chase at this level avoids repeatedly unfolding the sheaf and chosen-limit data.
-set_option maxHeartbeats 700000 in
 -- The normalization chase retains arbitrary localization universes and all unit factors.
 variable {C D : Type u} [SmallCategory C] [SmallCategory D]
   {K : GrothendieckTopology C} {H : GrothendieckTopology D}
 
-set_option maxHeartbeats 700000 in
 -- Elaborate the comparison interfaces and the two scalar-restriction adjunctions.
 end CategoryTheory.FlatScalarTowerLimit

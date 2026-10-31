@@ -414,7 +414,6 @@ section
 -- The unit of this monoidal structure is definitionally the ring module.
 attribute [local semireducible] monoidalCategory
 
-set_option maxHeartbeats 50000 in
 -- Keep the monoidal unit behind the cochain unitor API.
 end
 
@@ -433,9 +432,7 @@ attribute [local semireducible] monoidalCategory
 -- The formal mate assembly needs extra elaboration for the large normalized interface.
 attribute [local irreducible] MateProjectionStructureData
 
-set_option maxHeartbeats 1500000 in
 -- Normalize the two-variable localization interfaces and transport all exact structures.
-set_option maxHeartbeats 500000 in
 -- Elaboration must compare the large two-variable localization interfaces.
 end
 

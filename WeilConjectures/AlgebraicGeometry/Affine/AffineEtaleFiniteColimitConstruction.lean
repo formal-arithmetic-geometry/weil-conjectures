@@ -62,7 +62,6 @@ include hdelta hgamma in
 include hdelta hgamma in
 include hdelta hgamma in
 include hdelta hgamma in
-omit [Nonempty I] [IsDirected I (· ≤ ·)] in
 omit [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] in
 include hdelta hgamma in
 end PresentationPairs

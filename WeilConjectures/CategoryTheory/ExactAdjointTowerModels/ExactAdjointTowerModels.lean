@@ -342,12 +342,6 @@ private def limitIso (G : A ⥤ B) [G.Additive]
     exact (preservesLimitNatIso (G.mapHomologicalComplex (.up ℤ))).hom.naturality
       (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map f))
 
-omit [HasDerivedCategory A] [HasDerivedCategory B]
-  [HasLimitsOfShape ℕᵒᵖ A] [HasDerivedCategory (ℕᵒᵖ ⥤ A)]
-  [HasLimitsOfShape ℕᵒᵖ B] [HasDerivedCategory (ℕᵒᵖ ⥤ B)] in
-omit [HasLimitsOfShape ℕᵒᵖ A] [HasCountableProducts A]
-  [HasDerivedCategory (ℕᵒᵖ ⥤ A)] [HasLimitsOfShape ℕᵒᵖ B]
-  [HasCountableProducts B] [HasDerivedCategory (ℕᵒᵖ ⥤ B)] in
 omit [HasLimitsOfShape ℕᵒᵖ A] [HasDerivedCategory (ℕᵒᵖ ⥤ A)] in
 private def signCone (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) :
     CochainComplex.mappingCone (-roosU X) ≅ CochainComplex.mappingCone (roosU X) where

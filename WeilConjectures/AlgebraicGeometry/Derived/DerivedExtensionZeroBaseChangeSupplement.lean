@@ -163,5 +163,4 @@ noncomputable def extensionZeroCompDerivedPlusIso
     Functor.mapDerivedCategoryPlusNatIso
       (openImmersionLowerShriekComp (ModuleCat.{u + 1} Λ) k j).symm
 
-set_option backward.isDefEq.respectTransparency false in
 end AlgebraicGeometry.Etale

@@ -272,5 +272,4 @@ private theorem compositionComparison
   rw [h]
   simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
 
-set_option backward.isDefEq.respectTransparency false in
 end CategoryTheory

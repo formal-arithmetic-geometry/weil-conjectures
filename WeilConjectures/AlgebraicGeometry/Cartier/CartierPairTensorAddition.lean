@@ -194,10 +194,6 @@ private lemma divisor_section_evaluation {D X : Scheme.{u}} (i : D ⟶ X) :
   have he := congrArg (fun z ↦ (z.val (op U)).app (op (Over.mk (𝟙 U))) x) hs
   exact he
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 section
 attribute [local irreducible] supportedDivisorSection Scheme.Modules.dualEvaluation
   Scheme.IdealSheafData.toModules
@@ -267,8 +263,6 @@ private theorem pair_restrict {T : Scheme.{u}} {W V : T.Opens} (h : W ≤ V)
 section
 attribute [local irreducible] cartierPairFrameTorsor cartierPairFrameVal
 
-set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 400000 in
 -- Explicit frame and pseudofunctor comparisons require additional elaboration.
 end
 

@@ -174,5 +174,4 @@ attribute [local irreducible] ringedPullback ringedComparison
   CategoryTheory.ConstantScalarRestriction.fixedMonoidal
   CategoryTheory.ConstantScalarRestriction.restrictionBraided
 
-set_option linter.unusedVariables false in
 end CategoryTheory.ConstantModuleDerivedProjection

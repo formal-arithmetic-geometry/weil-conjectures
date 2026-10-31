@@ -85,15 +85,6 @@ private theorem ordinaryUnit_isIso {m : Mode} {U X : Scheme.{u}}
   rw [h]
   infer_instance
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 end SheafOfModules.OpenTensorNormalization
 
 namespace SheafOfModules

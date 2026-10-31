@@ -116,15 +116,11 @@ private noncomputable def Comparison.ki {X : BigradedExactCouple C s}
   cyclesIso Φ _ _ (e.φ p q) (e.φ (p + 2 + s) (q - 1 - s)) (e.hd p q)
 
 omit [PreservesFiniteColimits Φ] in
-omit [Φ.Additive] [PreservesFiniteLimits Φ] [PreservesFiniteColimits Φ] in
-omit [PreservesFiniteColimits Φ] in
 private noncomputable def Comparison.ei {X : BigradedExactCouple C s}
     {Y : BigradedExactCouple B s} (e : Comparison Φ X Y) (p q : ℤ) :
     Φ.obj (X.derivedE p q) ≅ Y.derivedE p q :=
   quotientIso Φ _ _ (e.φ (p - s - 2) (q + s + 1)) (e.ki p q) (e.lift_comm p q)
 
-omit [Φ.Additive] in
-omit [Φ.Additive] in
 omit [PreservesFiniteColimits Φ] in
 private noncomputable def Comparison.next {X : BigradedExactCouple C s}
     {Y : BigradedExactCouple B s} (e : Comparison Φ X Y) :

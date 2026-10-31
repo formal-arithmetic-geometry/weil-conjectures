@@ -1215,7 +1215,5 @@ set_option backward.isDefEq.respectTransparency.types false in
 attribute [local irreducible] derivedMate derivedAlpha alpha
   resolutionArrow transposeArrow
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end ClopenMateNormalization
 end AlgebraicGeometry.Etale

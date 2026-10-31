@@ -38,7 +38,5 @@ attribute [local instance 2000] Limits.instHasColimitOfHasColimitsOfShape
 set_option backward.isDefEq.respectTransparency true
 set_option synthInstance.maxSize 4096
 set_option linter.unusedVariables false
-set_option maxHeartbeats 3000000 in
 -- The counit calculation keeps the signed total-complex representatives explicit.
-set_option synthInstance.maxHeartbeats 100000 in
 end SheafOfModules

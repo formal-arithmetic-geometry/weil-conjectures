@@ -456,13 +456,7 @@ attribute [local irreducible] pure RingedTensor.pure
   CategoryTheory.Functor.mapDerivedCategory
   CategoryTheory.Functor.mapDerivedCategoryFactors
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 800000 in
 -- Compare the tensor presentation and the mate through their section transport formulas.
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 800000 in
 -- Normalize four exact functors and their cochain comparison isomorphisms.
 end
 
@@ -470,7 +464,6 @@ end
 attribute [local irreducible] CategoryTheory.Functor.mapDerivedCategory
   CategoryTheory.Functor.mapDerivedCategoryFactors DerivedCategory.Q DerivedCategory.Qh
 
-set_option backward.isDefEq.respectTransparency false in
 section Composition
 
 variable {CZ CY CX : Type u}
@@ -527,8 +520,6 @@ variable {CZ CY CX : Type u}
   [PreservesFiniteLimits (restriction φY)] [PreservesFiniteColimits (restriction φY)]
   [PreservesFiniteLimits (restriction φX)] [PreservesFiniteColimits (restriction φX)]
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end Composition
 
 section Identity
@@ -548,7 +539,6 @@ variable {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
   [PreservesFiniteLimits (inverseModules IB)] [PreservesFiniteColimits (inverseModules IB)]
   [PreservesFiniteLimits (restriction φ)] [PreservesFiniteColimits (restriction φ)]
 
-set_option linter.flexible false in
 end Identity
 
 end SheafOfModules.ScalarPullback

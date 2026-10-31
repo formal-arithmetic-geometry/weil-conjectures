@@ -654,12 +654,6 @@ private theorem identity_normalization
   (Category.id_comp f).trans (h.trans
     ((congrArg (fun a ↦ g ≫ a) (Q.map_id P)).trans (Category.comp_id g)).symm)
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency true in
 end
 
 -- Inline these canonical instances to avoid repeated dependent instance reduction.

@@ -264,6 +264,5 @@ def scalarComposite {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
   N.derived ((rings.{t, u} j).map a) ((rings.{t, u} j).map b) ≪≫
     eqToIso (congrArg (fun f ↦ (p f).derived) ((rings.{t, u} j).map_comp a b).symm)
 
-set_option maxHeartbeats 800000 in
 -- The normalized comparison types carry several dependent localization instances.
 end AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor

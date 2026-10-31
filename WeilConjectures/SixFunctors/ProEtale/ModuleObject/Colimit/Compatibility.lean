@@ -903,7 +903,6 @@ private theorem coefficientDerivedCoproducts (Λ : Sheaf
     HasColimitsOfShape.of_small.{u + 1, u + 1} C (Discrete J)
   exact CategoryTheory.derived_hasCoproducts
 
-set_option maxHeartbeats 400000 in
 -- The comparison elaborates derived adjunctions in several internal module categories.
 /-! ### (Push) and (Shriek) -/
 

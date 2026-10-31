@@ -907,10 +907,6 @@ noncomputable def pointDerivedTensorRationalization :
 
 set_option backward.isDefEq.respectTransparency true
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 section Constructible
 
 variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
@@ -1087,7 +1083,6 @@ private theorem pointRationalSectionsNatural
 attribute [local irreducible] pointSectionsScalarExtensionIso pointIntegralScalarAssoc
   pointIntegralScalarUnit pointRationalSectionsScalarExtensionIso
 
-set_option linter.all false in
 end Constructible
 
 end WeilConjectures

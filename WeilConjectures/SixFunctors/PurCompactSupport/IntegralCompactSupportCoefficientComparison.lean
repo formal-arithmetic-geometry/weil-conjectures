@@ -1370,10 +1370,6 @@ attribute [local irreducible] ordinaryIntegralModulePull ordinaryIntegralModuleA
   proEtaleRingModulePullback proEtaleRingModuleAdjunction
   HasProEtaleTorAmplitude
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
 section Refinements
 
 variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
@@ -1396,8 +1392,6 @@ def finiteTorIntegralInclusion (W : Scheme.{u}) :
   obj M := ⟨M.obj, M.property.1⟩
   map v := ObjectProperty.homMk v.hom
 
-set_option linter.unusedSectionVars false in
-set_option linter.unusedVariables false in
 end Refinements
 
 end WeilConjectures.PurCompactSupport

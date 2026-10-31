@@ -495,6 +495,4 @@ noncomputable def RingedTensorEdge.projection
       B.tensor.map (CategoryTheory.Prod.mkHom (e.derivedAdjunction.counit.app E)
         (𝟙 (e.left.obj Q))))
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end SheafOfModules

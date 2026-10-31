@@ -45,8 +45,4 @@ private theorem derived_transport
   cases e
   exact Functor.mapDerivedCategoryNatIso_refl
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end AlgebraicGeometry.Scheme

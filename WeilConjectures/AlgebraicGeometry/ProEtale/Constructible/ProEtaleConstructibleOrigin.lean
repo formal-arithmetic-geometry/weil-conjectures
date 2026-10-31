@@ -118,5 +118,4 @@ private theorem fixedDerivedOrigin (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     exact (hz q (hq.imp (fun h ↦ lt_of_lt_of_le h (min_le_left _ _)) id)).of_iso
       ((DerivedCategory.homologyFunctor _ q).mapIso e')
 
-set_option backward.isDefEq.respectTransparency false in
 end AlgebraicGeometry.ProEtale

@@ -156,7 +156,6 @@ private lemma cast_square {C : Type*} [Category C] {A A' B B' : C}
   subst hB
   cases h
   simp
-set_option backward.isDefEq.respectTransparency false in
 end AlgebraicGeometry.ProEtale.CondensedRing
 
 namespace AlgebraicGeometry.ProEtale

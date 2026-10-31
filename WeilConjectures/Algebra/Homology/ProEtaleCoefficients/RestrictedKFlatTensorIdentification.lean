@@ -374,6 +374,4 @@ private noncomputable def ordinarySwapIso {φ : B ⟶ S}
 variable [HasDerivedCategory.{wT} (ringedSiteModules.{r}
   (derivedChangeRingIndependentCoefficients J T))]
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end SheafOfModules

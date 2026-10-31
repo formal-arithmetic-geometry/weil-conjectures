@@ -676,8 +676,4 @@ noncomputable def adicTransitionComplex (X : Scheme.{t}) {Λ : Type t} [CommRing
       (adicChange X (Ideal.Quotient.mk (I ^ (a : ℕ))) P) :=
   Classical.choose (adicTransitionComplex_exists X I P b a hab)
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 end AlgebraicGeometry.Scheme

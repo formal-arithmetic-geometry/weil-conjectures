@@ -92,6 +92,4 @@ private theorem constantDirect_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
     (toSheafify_naturality (ProEt.topology X)
       ((Functor.const X.ProEtᵒᵖ).map a)))
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 end AlgebraicGeometry.Scheme

@@ -395,7 +395,6 @@ private theorem factor_restriction
   rw [← hring]
   exact (factorArrow O (O.over U) V s t h).hom.w.symm
 
-set_option backward.isDefEq.respectTransparency false in
 end UnitPowerRestriction
 
 set_option backward.isDefEq.respectTransparency false in

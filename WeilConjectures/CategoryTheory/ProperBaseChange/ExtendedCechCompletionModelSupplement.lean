@@ -383,6 +383,4 @@ private theorem unit_isIso_of_complete_universal
     simp only [← Category.assoc, hr, Category.id_comp, Category.comp_id]
   exact ⟨⟨r, hr, hs⟩⟩
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end CategoryTheory

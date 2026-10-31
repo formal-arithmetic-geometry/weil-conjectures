@@ -578,8 +578,6 @@ variable {A : Type uA} {B : Type uB} {A' : Type uA'} {B' : Type uB'}
   [PreservesFiniteLimits g] [PreservesFiniteColimits g]
   [PreservesFiniteLimits h] [PreservesFiniteColimits h]
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end EvaluationCube
 
 end CategoryTheory.UnboundedExactTower

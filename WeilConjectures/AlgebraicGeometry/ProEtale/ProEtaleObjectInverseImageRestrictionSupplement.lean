@@ -262,6 +262,4 @@ private theorem coefficient_restriction_unit {X : Scheme.{u}} (W : X.ProEt)
         W.hom W.prop trivial).unit.app U.unop).op
   simpa [proEtaleConstantRing, constantSheaf, proEtaleBaseChange] using h.symm
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end AlgebraicGeometry.Scheme

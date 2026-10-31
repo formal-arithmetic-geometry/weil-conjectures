@@ -143,8 +143,6 @@ open Scheme
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option backward.defeqAttrib.useBackward true
-set_option backward.defeqAttrib.useBackward false in
-set_option backward.defeqAttrib.useBackward false in
 end
 
 end AlgebraicGeometry.ProEtale
@@ -306,8 +304,6 @@ private noncomputable def finiteTensorAdjunction :
     rfl
 set_option backward.isDefEq.respectTransparency false in
 omit [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 end
 
 end AlgebraicGeometry.ProEtale

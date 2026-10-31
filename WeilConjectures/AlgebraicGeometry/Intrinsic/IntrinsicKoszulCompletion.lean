@@ -251,11 +251,4 @@ def koszulSheafUnitZero (r : ℕ) (f : Fin r → Λ) (m : ℕ) :
         (fun k ↦ ULift.up (f k ^ (m + 1)))).extendXIso
           ComplexShape.embeddingDownNat (i := 0) rfl).inv
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
 end AlgebraicGeometry.Scheme

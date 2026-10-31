@@ -130,10 +130,7 @@ private theorem scalarComplexCounit_app
           ((F.mapHomologicalComplex (.up ℤ)).obj P) := by
   rfl
 
-set_option maxHeartbeats 400000 in
 -- Explicit counit normalizations compare several concrete derived functors.
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 variable (G : Type u) [Field G] [Algebra ℚ_[l] G] [FiniteDimensional ℚ_[l] G]
     (j : F →ₐ[ℚ_[l]] G)
 

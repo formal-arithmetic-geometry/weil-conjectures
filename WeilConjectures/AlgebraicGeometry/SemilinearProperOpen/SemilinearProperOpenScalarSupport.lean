@@ -472,16 +472,8 @@ def rhoR {X Y : Scheme.{u}} (f : X ⟶ Y) :
     R C τ f ⋙ rho C τ B φ hφ Y ⟶ rho C τ B φ hφ X ⋙ StrictTower.R B f :=
   mateEquiv (adj C τ f) (StrictTower.adj B f) (rhoP C τ B φ hφ f).inv
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
 section ScalarOpenComparison
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
 end ScalarOpenComparison
 
 end ScalarRestriction

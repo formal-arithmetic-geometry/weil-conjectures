@@ -201,7 +201,6 @@ private def EvaluationNormalization
 namespace CochainComplex
 
 -- Resolve the entire tower functorially, so its transition maps remain strict.
-set_option synthInstance.maxSize 1024 in
 end CochainComplex
 
 namespace AlgebraicGeometry.Scheme

@@ -309,8 +309,6 @@ theorem pbc_levelwise_truncation_cohomology (M : AdicTower T d) (m : ℤ) :
       simp only [Functor.id_map, Category.assoc]
       rw [truncGE_restriction_unit]
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 section ReductionTowerPresentation
 
 -- Compare the completed-coefficient aliases without expanding the chosen limit cone.
@@ -1684,12 +1682,6 @@ end IntegralCoefficients
 
 open AlgebraicGeometry.ProEtale
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
 section OriginNormalizationProof
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false

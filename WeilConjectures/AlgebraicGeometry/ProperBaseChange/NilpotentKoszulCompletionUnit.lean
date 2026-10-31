@@ -55,14 +55,10 @@ variable (D : ℕᵒᵖ ⥤ CochainComplex A ℤ) (L : CochainComplex A ℤ)
 
 include β hβ N hN in
 include β hβ N hN in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end ProconstantComplex
 
 universe t
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end AlgebraicGeometry.Scheme

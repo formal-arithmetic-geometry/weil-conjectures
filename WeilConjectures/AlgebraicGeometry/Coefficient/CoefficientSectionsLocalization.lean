@@ -299,8 +299,6 @@ private noncomputable def regularExtensionIso
   have : IsIso q := isIso_of_reflects_iso q (Mod.comap φ)
   exact asIso q
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 section RegularPullback
 
 variable {C D : Type*} [Category C] [Category D]
@@ -318,8 +316,4 @@ private noncomputable def regularPullbackIso :
 
 end RegularPullback
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end AlgebraicGeometry.ProEtale

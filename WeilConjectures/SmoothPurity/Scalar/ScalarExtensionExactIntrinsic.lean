@@ -75,5 +75,4 @@ namespace WeilConjectures
 
 attribute [local irreducible] sfRationalTriangulationDatum
 
-set_option linter.unusedVariables false in
 end WeilConjectures

@@ -375,5 +375,4 @@ def wfSiteDerivedTensor {C : Type u} [Category.{v} C] (J : GrothendieckTopology 
 
 set_option backward.isDefEq.respectTransparency false in
 open MonoidalCategory in
-set_option backward.isDefEq.respectTransparency false in
 end SheafOfModules

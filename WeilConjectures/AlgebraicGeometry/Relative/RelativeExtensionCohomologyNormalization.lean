@@ -562,8 +562,4 @@ private theorem openSectionPullback_isIso {T T' : Scheme.{u}}
 
 attribute [local irreducible] relativeExtensionEnlargeComplex
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end AlgebraicGeometry.Etale

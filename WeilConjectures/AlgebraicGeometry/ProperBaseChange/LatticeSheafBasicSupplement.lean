@@ -123,7 +123,6 @@ theorem isSheaf_latticeCoefficientPresheaf (X : Scheme.{u}) (T : Type u)
   exact (isSheaf_fpqcTopology_continuousMapPresheaf T).of_le
     Scheme.proetaleTopology_le_fpqcTopology
 
-set_option backward.isDefEq.respectTransparency false in
 section LatticePairImages
 
 set_option backward.isDefEq.respectTransparency false

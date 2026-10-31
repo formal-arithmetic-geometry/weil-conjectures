@@ -233,17 +233,8 @@ private theorem sectionBicomplex_zero
   · exact (HomologicalComplex.eval _ _ p).map_isZero
       ((hypercoverAbelianRows X R U W).map_isZero (E.isZero_of_isStrictlyGE N q hq))
 
-set_option maxHeartbeats 800000 in
 -- Comparing section-column maps unfolds the section and extension functor compositions.
-set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 800000 in
 -- The comparison expands the evaluation, single-complex and section functors.
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 800000 in
 -- Transporting the site unfolds pushforward, restriction of scalars and extension functors.
-set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 800000 in
 -- The unit comparisons expand the resolution and localization functor compositions.
-set_option backward.isDefEq.respectTransparency false in
 end AlgebraicGeometry.Scheme.ProEt

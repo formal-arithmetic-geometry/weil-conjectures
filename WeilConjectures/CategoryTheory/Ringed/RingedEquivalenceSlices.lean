@@ -675,5 +675,4 @@ private def moduleSquare
 attribute [irreducible] moduleSquare
 
 -- The original existential binders h and k are retained verbatim.
-set_option linter.unusedVariables false in
 end CategoryTheory

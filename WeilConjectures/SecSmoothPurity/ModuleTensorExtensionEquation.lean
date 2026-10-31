@@ -180,6 +180,5 @@ private theorem insertion_naturality {A B : Sheaf J CommRingCat.{w}} (c : A ⟶ 
   ext U x
   exact congrArg (fun z ↦ z.val.app U x) ((extensionAdjunction c).unit.naturality a)
 
-set_option maxHeartbeats 80000 in
 -- Control conversions through scalar-extension and sheafification presentations.
 end CategoryTheory.CochainPullback

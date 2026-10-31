@@ -80,6 +80,4 @@ noncomputable def moduleSectionPresheaf : X.ProEtᵒᵖ ⥤ ModuleCat.{u + 1} (U
 
 end Modules
 
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.defeqAttrib.useBackward true in
 end AlgebraicGeometry.ProEtale

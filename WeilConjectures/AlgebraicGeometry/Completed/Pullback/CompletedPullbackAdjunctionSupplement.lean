@@ -569,8 +569,4 @@ private theorem complete_adjunction
   exact hE M N (ObjectProperty.homMk f)
 
 open SheafOfModules SheafOfModules.GeometricConstruction in
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency.types false in
 end CategoryTheory.ConstantCompletion

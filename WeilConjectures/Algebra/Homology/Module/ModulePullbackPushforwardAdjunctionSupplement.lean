@@ -252,6 +252,5 @@ private theorem tensorAdjunction_underlying
   rw [Adjunction.homEquiv_unit, Functor.map_comp]
   rfl
 
-set_option maxHeartbeats 800000 in
 -- Elaborate the expanded ring, module, tensor and Hom identifications in one declaration.
 end SheafOfModules

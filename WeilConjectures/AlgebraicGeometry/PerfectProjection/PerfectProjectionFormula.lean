@@ -904,7 +904,6 @@ theorem tower_compatibility (n m : ℕ) (h : n ≤ m) :
   have := (reductionMap_isIso d f aY aX K n).2
   exact inverse_square _ _ _ _ hf
 
-set_option linter.flexible false in
 variable {n : ℕ} (r : Resolution d (X := X) (Y := Y) K n)
 
 attribute [local irreducible] proEtaleOrdinaryTensorPullback
@@ -935,16 +934,12 @@ def Resolution.targetModel :=
         aX K (quotient d Y n) r.injective r.isKInjective r.representsK
         r.coefficient r.representsQuotient r.package r.bounded
 
-set_option linter.flexible false in
 section TotalizationProof
 
 attribute [local irreducible] proEtaleRingModulePullback proEtaleRingModuleDirectImage
   proEtaleRingModuleAdjunction proEtaleRingDerivedPullbackFactors
 
 -- Avoid repeated inspection of the large representative tactic contexts.
-set_option linter.flexible false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end TotalizationProof
 
 set_option backward.isDefEq.respectTransparency false in
@@ -994,23 +989,11 @@ private theorem coefficients_comp {Z : Scheme.{u}} (g : Y ⟶ Z) :
 
 -- The explicit intermediate objects preserve the native projection-square statement.
 -- Keeping its functor compositions visible avoids evaluating derived functor objects.
-set_option cleanup.letToHave true in
-set_option linter.flexible false in
 section QuotientComposition
 
 attribute [local irreducible] proEtaleRingModulePullback proEtaleRingModuleAdjunction
   proEtaleRingCompositeCoefficients proEtaleRingDerivedPullbackFactors
 
-set_option linter.flexible false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option linter.flexible false in
-set_option cleanup.letToHave true in
-set_option linter.flexible false in
-set_option cleanup.letToHave true in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option linter.flexible false in
 end QuotientComposition
 
 section BaseChange
@@ -1054,11 +1037,6 @@ attribute [local irreducible] proEtaleProjectionFormulaMate proEtaleAmbientRinge
   proEtaleCanonicalTensorComparison
 
 -- Avoid repeated inspection of the large native-operation tactic contexts.
-set_option linter.flexible false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option cleanup.letToHave true in
 end BaseChange
 
-set_option linter.flexible false in
 end AlgebraicGeometry.Scheme.PerfectProjection
