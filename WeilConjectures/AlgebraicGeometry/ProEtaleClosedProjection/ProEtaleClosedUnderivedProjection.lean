@@ -332,6 +332,4 @@ private theorem projection_isIso {X Z : Scheme.{u}} (i : Z ⟶ X)
   rw [Adjunction.homEquiv_unit]
   infer_instance
 
-attribute [local irreducible] extensionTensorIso
-
 end AlgebraicGeometry.ProEtaleClosedProjection
