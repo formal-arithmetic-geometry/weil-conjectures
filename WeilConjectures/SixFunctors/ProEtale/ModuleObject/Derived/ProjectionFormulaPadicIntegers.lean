@@ -14,6 +14,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ReductionConstru
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ReductionNakayama
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ResidueFieldDerivedMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ResidueFieldTransportSection
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleLowerStar
 
 /-!
 # The projection formula for bounded constructible `𝒪_E`-complexes
