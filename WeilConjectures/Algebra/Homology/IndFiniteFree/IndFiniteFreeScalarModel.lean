@@ -98,6 +98,8 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseRightDerived
 import Mathlib.CategoryTheory.Localization.Predicate
 import Mathlib.CategoryTheory.Monoidal.Limits.Preserves
+public import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
+public import WeilConjectures.SmoothPurity.SheafRingCoefficientOrdinaryAdjunction
 
 /-! # The unbounded scalar model of an ind-finite-free algebra sheaf
 
@@ -544,6 +546,30 @@ private noncomputable def restrictionComposition
         (γ.hom.app V).hom (congrArg (fun f ↦ (f.hom.app V).hom) hγ)
         (M.val.obj V)).symm) (by intros; ext x; rfl)))
     (by intros; ext V x; rfl)
+
+private noncomputable def coefficientMap
+    {T : Sheaf J CommRingCat.{r}} {ψ : S ⟶ T} {γ : R ⟶ T}
+    (hγ : γ = φ ≫ ψ)
+    (m : DerivedChangeOfRingsCochainModel.{u, v, r, wR, wS} φ)
+    [HasDerivedCategory.{wT} (Modules T)]
+    (m' : DerivedChangeOfRingsCochainModel.{u, v, r, wR, wT} γ)
+    (adj : m.E ⊣ restriction φ) (adj' : m'.E ⊣ restriction γ) :
+    m.E ⟶ m'.E ⋙ restriction ψ where
+  app M := (adj.homEquiv _ _).symm
+    (adj'.unit.app M ≫ (restrictionComposition ψ γ hγ).inv.app (m'.E.obj M))
+  naturality {M N} f := by
+    apply (adj.homEquiv _ _).injective
+    rw [adj.homEquiv_naturality_left, adj.homEquiv_naturality_right,
+      Equiv.apply_symm_apply, Equiv.apply_symm_apply]
+    change (f ≫ adj'.unit.app N) ≫ (restrictionComposition ψ γ hγ).inv.app _ =
+      (adj'.unit.app M ≫ (restrictionComposition ψ γ hγ).inv.app _) ≫
+        (restriction ψ ⋙ restriction φ).map (m'.E.map f)
+    have hn := adj'.unit.naturality f
+    change f ≫ adj'.unit.app N =
+      adj'.unit.app M ≫ (restriction γ).map (m'.E.map f) at hn
+    rw [hn, Category.assoc]
+    rw [(restrictionComposition ψ γ hγ).inv.naturality]
+    rfl
 
 private noncomputable def ordinaryIso
     (m : DerivedChangeOfRingsCochainModel.{u, v, r, wR, wS} φ) (M : Modules R) :
