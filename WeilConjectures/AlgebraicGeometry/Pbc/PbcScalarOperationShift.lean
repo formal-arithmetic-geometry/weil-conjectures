@@ -257,6 +257,8 @@ private theorem scalarOrdinaryPull_shift :
     (pbcScalarCoefficientMap l E F i Y) (pbcScalarCoefficientMap l E F i X)
     (pbcScalarCoefficientStructureSquare l E F i g)
 
+-- `moduleBinaryBiproducts` has a free universe and leaves a stuck universe constraint here.
+attribute [-instance] CategoryTheory.SignedDoubleHomCone.moduleBinaryBiproducts in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 private theorem scalarActualAdjunction_shift

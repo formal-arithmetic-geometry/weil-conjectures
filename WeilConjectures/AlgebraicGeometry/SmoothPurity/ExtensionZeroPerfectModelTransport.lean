@@ -23,6 +23,9 @@ Source: Bhatt--Scholze, Lemma 6.1.12(1) and Proposition 6.6.11
 (blueprint: lem-cbc-extension-zero-perfect-model-transport).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 universe u
@@ -91,7 +94,7 @@ private def constantAdj (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A]
     (T : X.ProEt) (hT : IsTerminal T) :
     adicLisseConstantModules X A ⊣ constantGlobal X A T :=
   (constantPFAdj X A T hT).comp
-    (PresheafOfModules.sheafificationAdjunction (adicLisseConstantUnit X A))
+    (PresheafOfModules.sheafificationAdjunction.{u + 1} (adicLisseConstantUnit X A))
 
 end AlgebraicGeometry.Scheme
 
@@ -287,7 +290,7 @@ private def sliceDerivedIso {X : Scheme.{u}}
     (K : DerivedCategory (pbcModules X R)) :
     (SheafOfModules.localizedSystemRestriction.{u + 1, u, u + 1}
       R V).mapDerivedCategory.obj K ≅
-      ringedSiteDerivedRestrictionOfUniverses
+      ringedSiteDerivedRestrictionOfUniverses.{u + 1, u, u + 1, u + 1, u + 2, u + 2}
         ((adicLisseForget X).obj R) V K :=
   ((SheafOfModules.localizedSystemRestriction.{u + 1, u, u + 1}
     R V).mapDerivedCategory.mapIso (DerivedCategory.Q.objObjPreimageIso K)).symm ≪≫
