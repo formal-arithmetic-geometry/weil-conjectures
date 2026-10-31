@@ -142,6 +142,39 @@ private theorem coefficientTopology :
         spectralNorm_neg (Algebra.IsAlgebraic.isAlgebraic _)])
   exact congrArg (fun m ↦ m.toUniformSpace.toTopologicalSpace) h
 
+theorem quotientDiscrete (n : ℕ) :
+    letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
+    DiscreteTopology (Padic.coefficientExtensionRing l E n) := by
+  let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
+  cases n with
+  | zero =>
+    have : Subsingleton (Padic.coefficientExtensionRing l E 0) := by
+      apply Ideal.Quotient.subsingleton_iff.mpr
+      simp [Padic.coefficientExtensionIdeal]
+    exact Subsingleton.discreteTopology
+  | succ n =>
+    have htop := coefficientTopology l E
+    have hb : ∀ x : Padic.coefficientExtensionIntegers l E,
+        (nhds x).HasBasis (fun _ : ℕ ↦ True) (fun n ↦
+          {y | Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1)) y =
+            Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1)) x}) := by
+      have h := Padic.coefficientExtension_integers_coset_basis l E
+      change ∀ x, Filter.HasBasis
+        (@nhds _ (TopologicalSpace.induced Subtype.val
+          (spectralNorm.normedField (Padic l) E).toUniformSpace.toTopologicalSpace) x) _ _ at h
+      rw [htop] at h
+      exact h
+    have hq : IsLocallyConstant
+        (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1))) := by
+      apply (IsLocallyConstant.iff_eventually_eq _).mpr
+      intro x
+      exact (hb x).mem_of_mem (i := n) trivial
+    apply discreteTopology_iff_isOpen_singleton.mpr
+    intro y
+    obtain ⟨x, rfl⟩ := Ideal.Quotient.mk_surjective y
+    rw [← isQuotientMap_quot_mk.isOpen_preimage]
+    exact hq.isOpen_fiber _
+
 private theorem quotientDiscrete (n : ℕ) :
     letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
     DiscreteTopology (Padic.coefficientExtensionRing l E n) := by
