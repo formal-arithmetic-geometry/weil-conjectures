@@ -63,7 +63,6 @@ abbrev completedCoproductLocallyBijective (X : Scheme.{u}) :
 
 attribute [local instance 6000] completedCoproductLocallyBijective
 
-attribute [local instance 6000] completedCoproductSheafify
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})

@@ -633,7 +633,6 @@ private noncomputable def fixedConstantPullbackIso
 
 attribute [local irreducible] fixedConstantPullbackIso
 
-attribute [local irreducible] inverseImageConstantModuleIso
 
 private def restrictCancelIso {C : Type v} [Category.{w} C] {J : GrothendieckTopology C}
     {R S : Sheaf J RingCat.{u + 1}} (α : R ⟶ S) (β : S ⟶ R)

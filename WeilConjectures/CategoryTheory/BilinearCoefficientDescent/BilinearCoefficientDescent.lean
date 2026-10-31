@@ -395,7 +395,7 @@ private theorem id_heq {E : Type*} [Category E] {X Y : E} (h : X = Y) :
   subst Y
   rfl
 
-attribute [local irreducible] raw rawTransformation
+attribute [local irreducible] raw
 
 omit [Linear R D] in
 private theorem extendedHom_tmul {S' : Type u₃} [CommRing S'] [Linear S' D]
@@ -431,7 +431,6 @@ end RawWhiskering
 
 attribute [local implicit_reducible] StageSystem.Morphism.functor StageSystem.ι
 
-attribute [local implicit_reducible] rawNat
 
 section CommonStage
 
@@ -946,7 +945,7 @@ private theorem descend_eq (U : Family S S₂ T) (join : I → I → I)
     (descend_spec U join left right)
     (explicitDescent_spec U join left right)
 
-attribute [local irreducible] descend descendTransformation
+attribute [local irreducible] descend
 
 @[no_expose] private def pairingComparison (j k : I → I → I)
     (jl : ∀ a b, a ≤ j a b) (jr : ∀ a b, b ≤ j a b)
@@ -1101,8 +1100,7 @@ private theorem rationalComparison_naturality
         exact rationalComparison_naturality T semiT U hU h
           X.1.obj Y.1.obj X.2.obj Y.2.obj f.1 f.2)
 
-attribute [local irreducible] rationalSystem rationalUnits
-  Units HasUnitComparison
+attribute [local irreducible] Units HasUnitComparison
 
 end RationalSystems
 
@@ -1127,7 +1125,6 @@ theorem Integers_eq (E : Padic.FiniteCoefficientFields l Ω) :
     Integers l Ω E = Padic.coefficientExtensionIntegers l E.val := by
   exact Eq.trans rfl rfl
 
-attribute [local implicit_reducible] integersCommRing
 
 attribute [local implicit_reducible] integersAlgebra
 
@@ -1146,7 +1143,7 @@ Source: blueprint coefficient definitions
   ⟨(Padic.coefficientExtensionUniformizer l E.val : E.val), uniformizer_mem l Ω E⟩
 
 set_option linter.unusedSectionVars false in
-attribute [local irreducible] Padic.finiteCoefficientCompositum uniformizer integerInclusion
+attribute [local irreducible] Padic.finiteCoefficientCompositum uniformizer
 
 /-- The chosen output field is exactly the compositum, including the base-field case.
 Source: common-stage formula (blueprint: lem-pur-bilinear-comparison-coefficient-descent).

@@ -300,7 +300,7 @@ def topCellReducedMap (r : ℕ) (b : ℤ)
       (topCellIntegralFree.{u} l E X r) ⟶ M) :=
   e.inv ≫ (scalarReductionDerivedExtension.{u, u} l E X 0).map f
 
-attribute [local instance 6000] topCellAbLocallyBijective topCellAbSheafify
+attribute [local instance 6000] topCellAbLocallyBijective
 attribute [local instance] scalarReductionExtensionAdditive
 
 private def topCellFreeProductIso (R : Sheaf (ProEt.topology X) RingCat.{u + 1})

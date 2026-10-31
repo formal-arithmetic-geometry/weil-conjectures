@@ -938,8 +938,7 @@ private theorem gradedGoodTensor23 [MonoidalClosed D]
 
 end TensorExistence
 
-attribute [local instance] gradedTensorExists gradedTensorFourExists
-  gradedGoodTensor12 gradedGoodTensor23
+attribute [local instance] gradedGoodTensor12 gradedGoodTensor23
 
 section SingleTensor
 universe uK vK wK
@@ -948,7 +947,6 @@ variable {D : Type uK} [Category.{vK} D] [Abelian D] [MonoidalCategory D]
   [IsGrothendieckAbelian.{vK} D] [hFlatResolution : Abelian.HasFunctorialFlatResolution D]
   [HasDerivedCategory.{wK} D]
 
-attribute [local instance] singleDerivedMonoidalExists
 
 attribute [local irreducible] Functor.LaxMonoidal.μ
 
@@ -993,7 +991,6 @@ private noncomputable def singleTensorIsoComp (F G H : D)
 
 end SingleTensor
 
-attribute [local instance] singleDerivedMonoidalExists
 
 attribute [local irreducible] singleTensorHom singleTensorIsoComp
 

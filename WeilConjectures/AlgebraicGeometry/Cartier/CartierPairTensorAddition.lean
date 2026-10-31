@@ -199,7 +199,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency false in
-attribute [irreducible] pairFrameMk
 
 set_option backward.isDefEq.respectTransparency false in
 set_option maxHeartbeats 400000 in
@@ -334,7 +333,7 @@ private lemma pole_boundary_eq_relative {D T : Scheme.{u}} (i : D ⟶ T)
     exact hfτ
 
 section
-attribute [local irreducible] cartierPairFrameTorsor cartierPairFrameVal cartierPairTensorFrames
+attribute [local irreducible] cartierPairFrameTorsor cartierPairFrameVal
 
 end
 

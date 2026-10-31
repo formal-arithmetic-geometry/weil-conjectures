@@ -160,8 +160,6 @@ section PrivateComparisons
 set_option backward.isDefEq.respectTransparency false
 attribute [local instance] Abelian.hasFiniteBiproducts
 
-attribute [local instance 1050] nat_products
-attribute [local instance 1100] cochain_nat_products
 
 set_option backward.isDefEq.respectTransparency false in
 omit [HasLimitsOfShape ℕᵒᵖ A] [HasDerivedCategory A]
@@ -352,8 +350,6 @@ section PrivateTriangles
 set_option backward.isDefEq.respectTransparency false
 attribute [local instance] Abelian.hasFiniteBiproducts
 
-attribute [local instance 1050] nat_products
-attribute [local instance 1100] cochain_nat_products
 
 private theorem projection_unit (L : LimitData.{w} A) (T : RoosTriangleData L)
     (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) :
@@ -393,8 +389,6 @@ section PrivateSquares
 set_option backward.isDefEq.respectTransparency false
 attribute [local instance] Abelian.hasFiniteBiproducts
 
-attribute [local instance 1050] nat_products
-attribute [local instance 1100] cochain_nat_products
 
 omit [HasCountableProducts A] [HasCountableProducts B] in
 @[reassoc]

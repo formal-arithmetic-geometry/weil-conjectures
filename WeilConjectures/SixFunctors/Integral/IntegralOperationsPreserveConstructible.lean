@@ -109,7 +109,6 @@ def integralTensorFiniteComparison (W : AlgebraicGeometry.Scheme.{u})
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
-attribute [local instance 4000] integralOperationsLocalSiteSmall
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

@@ -119,7 +119,6 @@ private def restrictionEquivalence (c : R ≅ S) :
 
 end RestrictionEquivalence
 
-attribute [local instance] finiteRes_additive finiteRes_limits finiteRes_colimits
 
 private def finiteReductionAdjunction
     {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)

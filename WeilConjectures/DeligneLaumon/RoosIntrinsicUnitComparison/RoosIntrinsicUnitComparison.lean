@@ -293,8 +293,7 @@ variable {C : Type c} [Category.{v} C] [EssentiallySmall.{r} C]
 
 end RingedRoos
 
-attribute [local irreducible] assembledRoosIso targetTower
-  IntegralOnSlice.tower IntegralOnSlice.augmentation
+attribute [local irreducible] targetTower IntegralOnSlice.tower IntegralOnSlice.augmentation
 
 section OrdinaryWrapperAPI
 attribute [local semireducible] targetTower
@@ -362,12 +361,11 @@ end ConcreteInstances
 attribute [local implicit_reducible] koszulTowerComplex koszulTowerComplexMap
   roosF roosConeFunctor CochainComplex.mappingCocone fiber quotientAugmentation
 attribute [local irreducible] CochainComplex.mappingCone roosχ
-attribute [local irreducible] signedFiberIso sourceTower targetTower tensorWith
-  sourceTowerMap targetTowerMap comparison levelUnit quotientUnit tensorUnit
+attribute [local irreducible] sourceTower targetTower tensorWith sourceTowerMap targetTowerMap
+  comparison levelUnit quotientUnit tensorUnit
 
 attribute [local irreducible] roosF
-attribute [local irreducible] roosAugment roosLift negativeRoosAugment limit
-  DerivedCategory DerivedCategory.Q
+attribute [local irreducible] roosAugment roosLift limit DerivedCategory DerivedCategory.Q
 
 -- Checking all strict coordinates and natural comparison squares needs extra heartbeats.
 end Helpers

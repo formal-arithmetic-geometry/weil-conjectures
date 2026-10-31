@@ -25,7 +25,6 @@ abbrev normalizedDVRRoosFiniteReductionLocal1 :
     HasDerivedCategory (completedIntegralModuleSheaves l E X D hl) :=
   HasDerivedCategory.standard _
 attribute [local instance] normalizedDVRRoosFiniteReductionLocal1
-attribute [local instance 4000] normalizedDVRRoosFiniteReductionLocal2
 /-- Canonical abelian sheafification, registered only in this file. -/
 abbrev normalizedDVRRoosFiniteReductionLocal3 :
     HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology X)

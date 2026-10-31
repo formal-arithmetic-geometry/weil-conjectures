@@ -751,7 +751,6 @@ private theorem e_chain {A B C : Type (u + 1)} [CommRing A] [CommRing B] [CommRi
 end AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.ProEtale
-attribute [local instance] proEtaleSmall
 
 private theorem underived_mate
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)

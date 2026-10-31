@@ -105,8 +105,7 @@ theorem completedCommRingLimits (T : Scheme.{u}) :
     HasLimitsOfSize.{u + 1, u + 1} (Sheaf (ProEt.topology T) CommRingCat.{u + 1}) :=
   inferInstance
 
-attribute [local instance 3000] completedCommRingWeakSheafify completedRingWeakSheafify
-  completedCommRingLimits
+attribute [local instance 3000] completedCommRingWeakSheafify completedCommRingLimits
 
 variable {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 

@@ -293,13 +293,11 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-attribute [local irreducible] directScalarIso tensorPullbackHomEquiv
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-attribute [local irreducible] tateTensorMap
 
 attribute [local irreducible] tensorHomEquiv tensorPresheafHomEquiv tensorToRestriction
 
@@ -356,18 +354,14 @@ private theorem reductionUnit_apply {T : Scheme.{u}} {R Q A : Type u}
 
 attribute [local irreducible] reductionUnit
 
-attribute [local irreducible] tateReduction
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-attribute [local irreducible] quotientPullbackHomEquiv
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-attribute [local irreducible] tatePullbackId
 
 attribute [local irreducible] exchangeModuleComposition
 
-attribute [local irreducible] tatePullbackComp
 
 end AlgebraicGeometry.Scheme

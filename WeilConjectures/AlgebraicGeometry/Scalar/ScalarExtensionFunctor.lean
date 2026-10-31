@@ -694,17 +694,14 @@ def scalarExtensionFunctorLineIso
         (proEtaleRingExtension (proEtaleConstantRingMap (T := T) f)) (.up ℤ) 0).app L)
 
 section TateComparisonProof
-attribute [local instance] scalarTateSmall
 
 open scoped ChangeOfRings in
 open scoped ChangeOfRings in
-attribute [local irreducible] scalarExtension_composite
 
 -- Keep the tensor and dual APIs abstract during elaboration.
 set_option backward.isDefEq.respectTransparency true
 
 section SignedComparisonEvaluation
-attribute [local irreducible] scalarExtension_positiveComparison
 
 end SignedComparisonEvaluation
 
@@ -712,9 +709,7 @@ end TateComparisonProof
 
 section TateExponentProof
 set_option backward.isDefEq.respectTransparency true
-attribute [local instance] scalarTateExponentSmall
 
-attribute [local irreducible] scalarExtensionTateMaps scalarExtensionTateLevelIso
 
 end TateExponentProof
 

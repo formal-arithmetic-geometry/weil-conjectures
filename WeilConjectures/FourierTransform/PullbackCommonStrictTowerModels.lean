@@ -182,9 +182,8 @@ def fdCommonStrictGenerator {U T : Scheme.{u}} (h : U ⟶ T)
     (reductionTensorSection T (completedReductionProjection T (pbcIntegralDatum l E) n)
       ((fdCoefficientTransport l E T).obj (P.X i)) (op V) 1 x)
 
-attribute [local irreducible] fdCommonStrictTower fdCommonDerivedTower
-  fdCommonFrameworkEnd fdCommonFrameworkProjection fdCommonFrameworkShiftedProjection
-  fdCommonStrictGenerator integralDetailedTransport
+attribute [local irreducible] fdCommonStrictTower fdCommonFrameworkEnd fdCommonFrameworkProjection
+  fdCommonFrameworkShiftedProjection fdCommonStrictGenerator integralDetailedTransport
   integralDerivedPullback integralOperationsPullbackComplexFunctor
   integralOperationsPullbackTowerFunctor fdCoefficientTransport
 

@@ -670,8 +670,7 @@ variable {C : Type*} [Category.{u + 1} C] [Abelian C]
 private abbrev cachedComplexMonoidal : MonoidalCategory (CochainComplex C ℤ) := inferInstance
 private abbrev cachedDerivedMonoidal : MonoidalCategory (DerivedCategory C) := inferInstance
 end CachedGenericStructures
-attribute [local instance 2000] cachedComplexMonoidal cachedHomotopyMonoidal
-  cachedDerivedMonoidal
+attribute [local instance 2000] cachedComplexMonoidal cachedDerivedMonoidal
 
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true

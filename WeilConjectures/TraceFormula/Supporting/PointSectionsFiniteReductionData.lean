@@ -163,11 +163,9 @@ local instance (priority := 30000) pointFiniteReductionDataDerived (n : ℕ) :
   HasDerivedCategory.standard _
 
 set_option linter.defProp false in
-attribute [local irreducible] pointFiniteReductionSheafExistence
 
 attribute [instance] PointFiniteReductionSheafModel.additive
 
-attribute [local irreducible] pointFiniteReductionSheafModel
 
 variable [IsAlgClosed k]
 

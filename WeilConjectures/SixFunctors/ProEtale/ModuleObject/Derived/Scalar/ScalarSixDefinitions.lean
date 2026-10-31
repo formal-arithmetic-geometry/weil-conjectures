@@ -524,10 +524,8 @@ def ScalarSixImmersionOpenValue (E : LocallyClosedExtensionData.{u}) (D : E.Deri
         (beta a j).hom.app M ≫
           (scalarSixOpenIso E G O Λ' j).hom.app ((scalarSixChange a S.left).obj M)
 
-attribute [local irreducible] ScalarSixImmersionNormalization
-  ScalarSixImmersionComposition ScalarSixImmersionOpenValue
+attribute [local irreducible] ScalarSixImmersionComposition ScalarSixImmersionOpenValue
 
-attribute [local irreducible] ScalarSixClosedNormalization ScalarSixImmersionTower
 
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false

@@ -80,7 +80,6 @@ abbrev finiteSystemEvaluation (X : Scheme.{u}) (n : ℕ) :
     (fun n ↦ CommRingCat.of (ULift.{u + 1, u} (A n)))
     (fun n ↦ CommRingCat.ofHom ((τ n).hom.ulift)) X n
 
-attribute [instance] finiteSystemBaseChange_continuous
 
 /-- Sectionwise direct image with its specified constant-section scalar action.
 Source: Stacks 03D3, 0941 (blueprint: lem-pod-finite-system-pullback-coherence). -/
@@ -90,7 +89,6 @@ abbrev finiteSystemPushforward {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (fun n ↦ CommRingCat.of (ULift.{u + 1, u} (A n)))
     (fun n ↦ CommRingCat.ofHom ((τ n).hom.ulift)) f
 
-attribute [instance] finiteSystemPushforward_isRightAdjoint
 
 /-- The universal left adjoint of the explicit sectionwise system direct image.
 Its universal property determines it up to the unique adjunction-compatible iso.

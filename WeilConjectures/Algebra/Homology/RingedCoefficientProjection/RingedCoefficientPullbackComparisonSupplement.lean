@@ -513,7 +513,6 @@ private def ordinaryComparison [PreservesFiniteLimits uInv]
   have := ordinaryBackward_isIso g nY nX a
   exact (asIso (ordinaryBackward g nY nX a)).symm
 
-attribute [local irreducible] leftFlatComputation rightFlatComputation
 
 end SheafOfModules.RingedCoefficientProjection
 

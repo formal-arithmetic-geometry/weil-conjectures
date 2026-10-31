@@ -253,7 +253,6 @@ attribute [local instance 30000] SheafOfModules.hasSheafify_coefficientUniverse
 
 attribute [local irreducible] sfCbcOpenExtension
 
-attribute [local irreducible] sfCbcDerivedRestrictExtensionIso
 
 attribute [local irreducible] adicReductionHomEquiv
 
@@ -263,12 +262,9 @@ attribute [local irreducible] adicDerivedRestrictFactors
 
 attribute [local irreducible] adicReductionDerivedUnit
 
-attribute [local irreducible] sfCbcFiniteCompletedHom sfCbcFiniteTensorHom
 
-attribute [local irreducible] sfCbcEvaluateFactors
 
 set_option backward.isDefEq.respectTransparency true in
-attribute [local irreducible] sfCbcFiniteModelFactors
 
 attribute [local instance 1000] SheafOfModules.hasSheafify_coefficientUniverse
   SheafOfModules.wEqualsLocallyBijective_coefficientUniverse

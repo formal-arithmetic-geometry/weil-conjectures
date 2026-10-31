@@ -310,6 +310,5 @@ def PbcProperIntegralModelMatching (l : ℕ) [Fact l.Prime]
 
 attribute [local irreducible] PbcProperIntegralModelMatching
 
-attribute [local irreducible] PbcProperIntegralCompletionMatching
 
 end WeilConjectures

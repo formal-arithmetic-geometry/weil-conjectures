@@ -544,7 +544,6 @@ set_option maxHeartbeats 1000000 in
 -- Bundled sheaf and scalar-restriction conversions require extra elaboration.
 set_option maxHeartbeats 1000000 in
 -- Bundled sheaf and scalar-restriction conversions require extra elaboration.
-attribute [local irreducible] liftComparisonIso
 
 private def isoOfOpSequence {D : Type*} [Category* D] {F G : ℕᵒᵖ ⥤ D}
     (e : ∀ n : ℕ, F.obj (op n) ≅ G.obj (op n))

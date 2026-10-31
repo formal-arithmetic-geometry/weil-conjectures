@@ -58,7 +58,6 @@ noncomputable abbrev OriginModules :=
   ringedSiteModules.{u + 1} (originCoefficientRing T B)
 
 set_option linter.unusedSectionVars false in
-attribute [instance] isIso_originConstantRingComparison
 
 /-- The recorded canonical inverse image on module sheaves.
 Source: blueprint, site comparison (blueprint: lem-sf-proetale-constructible-origin). -/

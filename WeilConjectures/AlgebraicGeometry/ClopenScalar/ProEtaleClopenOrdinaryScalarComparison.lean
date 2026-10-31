@@ -256,7 +256,6 @@ end OrdinaryRestriction
 attribute [local irreducible] changeOfRings changeOfRingsHom changeOfRingsPresheaf
   SheafOfModules.pushforward PresheafOfModules.pushforward
 
-attribute [local irreducible] presentedBackComparison
 
 attribute [local semireducible] SheafOfModules.pushforward PresheafOfModules.pushforward
 

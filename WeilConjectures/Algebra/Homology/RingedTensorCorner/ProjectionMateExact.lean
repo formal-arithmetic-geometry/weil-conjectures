@@ -246,7 +246,6 @@ def MateCanonicalShiftData
           (CochainComplex.mapBifunctor P Q F) ≫
         (shiftFunctor D n).map ((r P Q hP hQ).hom))
 
-attribute [local irreducible] RingedTensorModel.mateRepresentative
 
 attribute [-instance] cochainModulesMonoidal cochainModulesSymmetric
 
@@ -427,7 +426,6 @@ set_option maxHeartbeats 50000 in
 attribute [local semireducible] monoidalCategory
 
 -- The formal mate assembly needs extra elaboration for the large normalized interface.
-attribute [local irreducible] MateProjectionStructureData
 
 -- Normalize the two-variable localization interfaces and transport all exact structures.
 -- Elaboration must compare the large two-variable localization interfaces.

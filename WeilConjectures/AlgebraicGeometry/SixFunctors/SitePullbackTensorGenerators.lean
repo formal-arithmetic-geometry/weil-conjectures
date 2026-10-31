@@ -132,7 +132,6 @@ open AlgebraicGeometry.ProEtale.VaryingRing
 
 variable [UnivLE.{max c v, r}]
 
-attribute [local instance 2000] ringSheafCompose
 
 omit [UnivLE.{max c v, r}] in
 private theorem additiveSheafification {C : Type c} [Category.{v} C]
@@ -172,7 +171,6 @@ private theorem setSheafFiniteLimits {C : Type c} [Category.{v} C]
 
 attribute [local instance 2000] setSheafFiniteLimits
 
-attribute [local instance 2000] setSheafFiniteProducts
 
 omit [UnivLE.{max c v, r}] in
 private theorem setSheafProducts {C : Type c} [Category.{v} C]
@@ -972,8 +970,8 @@ private theorem geometricPresentation
   clear_value I RI a L
   exact ⟨L, a, inferInstance, RI, ⟨I⟩⟩
 
-attribute [-instance] setSheafProducts setSheafFiniteProducts setSheafFiniteLimits
-attribute [-instance] ringSheafCompose additiveSheafification
+attribute [-instance] setSheafProducts setSheafFiniteLimits
+attribute [-instance] additiveSheafification
 attribute [-instance] additiveWeakSheafification additiveLocallyBijective setSheafification
 
 set_option backward.isDefEq.respectTransparency false in

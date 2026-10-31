@@ -239,15 +239,6 @@ abbrev adicDatumModulesAbelian (U : Scheme.{t})
 attribute [local instance 40000] adicDatumModulesAbelian
 attribute [local instance 30000] proEtaleRingModules_hasDerivedCategory
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-attribute [instance] adicDatumOrdinaryTower_additive
 
 section Balancing
 variable {R S B : Sheaf (ProEt.topology T) CommRingCat.{t + 1}}

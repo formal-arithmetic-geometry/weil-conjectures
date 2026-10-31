@@ -98,9 +98,8 @@ private noncomputable def cochainRepresentativeWhiskering
   exact ff.ofIso ((Functor.whiskeringLeft _ _ E).mapIso
     (Functor.isoWhiskerLeft P.ι (DerivedCategory.quotientCompQhIso A)))
 
-attribute [local irreducible] computation computationNat
-  SheafOfModules.monoidalCategory HasDerivedCategory.standard
-  Functor.mapDerivedCategory Functor.mapDerivedCategoryFactors
+attribute [local irreducible] computation SheafOfModules.monoidalCategory
+  HasDerivedCategory.standard Functor.mapDerivedCategory Functor.mapDerivedCategoryFactors
 
 private theorem descendComparison
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]

@@ -125,7 +125,6 @@ private theorem insertion_isIso (d : GeometricData J K A) (M : Modules J A) :
   rw [h]
   exact ⟨⟨e.hom, e.inv_hom_id, e.hom_inv_id⟩⟩
 
-attribute [local irreducible] fixedInsertion
 
 set_option backward.isDefEq.respectTransparency false in
 private theorem fixedPure_map {M M' N N' : Fixed J A}
@@ -168,8 +167,7 @@ private theorem fixedPure_map {M M' N N' : Fixed J A}
 
 -- Transport through a monoidal equivalence, retaining an explicit tensor formula.
 set_option backward.isDefEq.respectTransparency false in
-attribute [local irreducible] ringedPullback ringedComparison
-  CategoryTheory.ConstantScalarRestriction.fixedMonoidal
+attribute [local irreducible] CategoryTheory.ConstantScalarRestriction.fixedMonoidal
   CategoryTheory.ConstantScalarRestriction.restrictionBraided
 
 end CategoryTheory.ConstantModuleDerivedProjection

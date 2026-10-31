@@ -78,7 +78,6 @@ noncomputable instance rationalOrdinaryScalarCommShift :
     (rationalOrdinaryScalarExtension D l hl E Y L ι).CommShift ℤ :=
   (rationalOrdinaryScalarCommShift_existsUnique D l hl E Y L ι).exists.choose
 
-attribute [instance] rationalOrdinaryScalar_exact rationalOrdinaryScalar_additive
 
 /-- The published completed functor carries the unique shift comparison making its
 normalized comparison with ordinary tensor commute with every integer shift.

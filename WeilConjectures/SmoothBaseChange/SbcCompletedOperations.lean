@@ -1191,7 +1191,6 @@ private theorem sbcSuccessiveUnit_universal {Z : Scheme.{u}} (v : Z ⟶ U)
         sbcCompletionUnit l E v ((sbcPull l E q).obj K).obj ≫ a := funext hb
   exact hb' ▸ b.bijective
 
-attribute [local irreducible] sbcOrdinaryComp
 
 /-- Canonical quotient-linear reduction of an ambient completed complex.
 Source: blueprint order 1442 (blueprint: lem-sbc-completed-operations-linear-natural-exchange). -/
@@ -1739,7 +1738,7 @@ def sbcExchange : sbcPush l E g ⋙ sbcPull l E f ⟶ sbcPull l E e ⋙ sbcPush 
   app K := sbcExchangeApp l E sq K
   naturality {_K _K'} a := sbcExchange_naturality l E sq a
 
-attribute [local irreducible] sbcOrdinaryTheta sbcFiniteTheta sbcTheta sbcAdjunction
+attribute [local irreducible] sbcOrdinaryTheta sbcTheta sbcAdjunction
   proEtaleRingDerivedAdjunction Functor.mapDerivedCategory Functor.rightDerivedFunctor
   completedAdicDerivedChange proEtaleRingModulePullback proEtaleAmbientRingedPullbackComparison
 

@@ -251,7 +251,6 @@ variable (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L
 
 attribute [local irreducible] integralScalarReduction
 
-attribute [local irreducible] quotientAssociation
 
 private theorem sequenceExact_iff (W : Scheme.{t})
     (s : ShortComplex (coefficientSequenceModules l E W)) :

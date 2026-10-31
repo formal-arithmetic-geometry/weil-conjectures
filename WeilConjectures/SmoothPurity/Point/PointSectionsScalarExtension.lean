@@ -1072,8 +1072,8 @@ private theorem pointRationalSectionsNatural
     ((pointDerivedTensorRationalization l E L ι).hom.naturality
       ((pointCompletedDerivedSections D.k l E).map f))
 
-attribute [local irreducible] pointSectionsScalarExtensionIso pointIntegralScalarAssoc
-  pointIntegralScalarUnit pointRationalSectionsScalarExtensionIso
+attribute [local irreducible] pointSectionsScalarExtensionIso pointIntegralScalarUnit
+  pointRationalSectionsScalarExtensionIso
 
 end Constructible
 

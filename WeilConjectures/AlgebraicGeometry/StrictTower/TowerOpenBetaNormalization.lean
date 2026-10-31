@@ -564,9 +564,9 @@ section FiniteComparisonProof
 set_option backward.defeqAttrib.useBackward true
 set_option backward.isDefEq.respectTransparency true
 
-attribute [local irreducible] C openBetaFinitePull openBetaFiniteOpen
-  Scheme.proEtaleRingModuleAdjunction Scheme.proEtaleRingModulePullback
-  upperStar upperStarLowerStarAdjunction upperStarComp upperStarCompIso upperStarCongr
+attribute [local irreducible] C Scheme.proEtaleRingModuleAdjunction
+  Scheme.proEtaleRingModulePullback upperStar upperStarLowerStarAdjunction upperStarComp
+  upperStarCompIso upperStarCongr
 
 private lemma finiteMateSquare
     {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]

@@ -81,8 +81,7 @@ private theorem schemeLeft : ∀ (X : Modules A T),
 private theorem schemeRight : ∀ (X : Modules A T),
     PreservesColimitsOfShape ℤ ((curriedTensor (Modules A T)).flip.obj X) := inferInstance
 end CachedInstances
-attribute [local instance] pointFour pointGood12 pointGood23 pointLeft pointRight
-  schemeFour schemeGood12 schemeGood23 schemeLeft schemeRight
+attribute [local instance] schemeFour schemeGood12 schemeGood23 schemeLeft schemeRight
 
 variable (R : Profinite.CondensedRing.{u}) [IsCommMonObj R.X]
 
@@ -126,7 +125,6 @@ def scalarTensor (K L : DerivedCategory (PointModules R)) :
   letI := (Mod.extendScalars φ).leftDerivedFunctorMonoidal
   Functor.Monoidal.μIso (extendPoint R S φ) K L
 
-attribute [local irreducible] freeScalarMap freeGeneratorScalar
 
 omit [IsCommMonObj S.X] in
 set_option backward.defeqAttrib.useBackward false

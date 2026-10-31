@@ -165,7 +165,6 @@ private theorem composition_heq
   cases hg
   rfl
 
-attribute [local irreducible] native_rho native_iso
 
 end NormalizedComparison
 

@@ -198,8 +198,7 @@ private def nativeRoundTrip : 𝟭 (adicDatumModules T (intrinsicPresentationDat
 attribute [local irreducible] pbcCompletedComparison intrinsicPresentationRoundTrip
   nativeRoundTrip reconstructionRestrictId
 
-attribute [local irreducible] nativeReductionComparison nativeRestrictionSquare
-  comparisonChangeAdjunction
+attribute [local irreducible] comparisonChangeAdjunction
 
 attribute [local irreducible] adicDatumOrdinaryAdjunction pbcScalarAdjunction
 
@@ -248,7 +247,7 @@ private theorem actualFiberToStrict
   exact ((completedReductionModuleUnit_exists D T).exists.choose_spec (C.X q) n U x).trans
     (reconstructionUnit_section T (pbcAdicProjection T D n) (C.X q) U x).symm
 
-attribute [local irreducible] nativeStrictLevel productTransport nativeQuotientUnit
+attribute [local irreducible] productTransport
 
 end Presentation
 

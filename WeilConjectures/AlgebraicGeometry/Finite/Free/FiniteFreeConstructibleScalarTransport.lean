@@ -290,6 +290,6 @@ private def integralAdj {A : Type (u + 1)} [CommRing A]
     (adicDatumOrdinaryAdjunction X (adicDatumScalar X pd))).comp e.toAdjunction
   exact adj
 
-attribute [local irreducible] balanceIso finiteFreeConstantTensor pbcTensorSection
+attribute [local irreducible] pbcTensorSection
 
 end AlgebraicGeometry.Scheme
