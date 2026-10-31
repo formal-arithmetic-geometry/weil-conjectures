@@ -86,7 +86,7 @@ import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 import Mathlib.Algebra.Category.Ring.Limits
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
-import WeilConjectures.AlgebraicGeometry.InternalModuleAbEquivalence
+import all WeilConjectures.AlgebraicGeometry.InternalModuleAbEquivalence
 import WeilConjectures.CategoryTheory.RingObjects.Ab
 import Mathlib.CategoryTheory.Monoidal.Mod
 import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod

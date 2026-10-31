@@ -143,16 +143,43 @@ noncomputable def hypercoverAbelianRows (X : Scheme.{t})
     AlgebraicTopology.alternatingCofaceMapComplex _ ⋙
     ComplexShape.embeddingUpNat.extendFunctor _
 
+/-- Additivity needed to apply the alternating section rows to a coefficient complex.
+Source: Stacks Project, Tag 09A2, construction of the total complex; step 1 of the
+node's proof (blueprint: det-pe-hypercover-complex).
+Proof: a coefficient morphism acts by its section map in every degree. Addition of
+module-sheaf morphisms, of abelian presheaf morphisms and of complex morphisms is
+componentwise. Alternating cofaces do not change these components, and extension
+by zero has zero components in the additional degrees. Thus each component of the
+image of a sum is the sum of its images. -/
+theorem hypercoverAbelianRows_additive (X : Scheme.{t})
+    (R : Sheaf (topology X) RingCat.{u}) (U : X.ProEt)
+    (W : SimplicialObject (Over U)) :
+    (hypercoverAbelianRows.{t, u, v} X R U W).Additive := by
+  let : (hypercoverAbelianSections.{t, u, v} X R U W).Additive :=
+    { map_add := by intros; rfl }
+  let : (AlgebraicTopology.alternatingCofaceMapComplex
+      AddCommGrpCat.{max u v (t + 1)}).Additive := { map_add := by intros; rfl }
+  unfold hypercoverAbelianRows
+  infer_instance
+
 attribute [instance] hypercoverAbelianRows_additive
 
 variable (X : Scheme.{t}) (R : Sheaf (topology X) RingCat.{u})
   (U : X.ProEt) (W : SimplicialObject (Over U))
 
--- The total augmentation expands the section, extension and total functors.
+private instance hypercoverAbelianSections_additive :
+    (hypercoverAbelianSections.{t, u, v} X R U W).Additive where
+  map_add := by intros; rfl
+
 private instance sectionEvaluation_additive (p : ℕ) :
     (hypercoverAbelianSections X R U W ⋙ (CategoryTheory.evaluation _ _).obj ⦋p⦌).Additive where
   map_add {_I _J} {f g} := congr_app
     ((hypercoverAbelianSections X R U W).map_add (f := f) (g := g)) ⦋p⦌
+
+private instance sectionEvaluation_preservesZero (p : ℕ) :
+    (hypercoverAbelianSections.{t, u, v} X R U W ⋙
+      (CategoryTheory.evaluation _ _).obj ⦋p⦌).PreservesZeroMorphisms where
+  map_zero := by intros; rfl
 
 private theorem sectionsEvaluation_preservesHomology (R : Sheaf (topology X) RingCat.{u})
     (p : ℕ)

@@ -202,8 +202,6 @@ def blockDerivedComparison (square : RX ⋙ GD ≅ G ⋙ RY) :
     Functor.rightDerivedFunctorNatIso square ≪≫
     Functor.rightDerivedFunctorCompMapDerivedCategoryIso G RY
 
-attribute [local irreducible] blockComplexComparison
-
 private theorem homotopyCompInv
     {A : Type*} {B : Type*} {D : Type*}
     [Category A] [Category B] [Category D]
@@ -309,8 +307,6 @@ variable {X : Type u₁} {Y : Type u₂} {Xp : Type u₃} {Yp : Type u₄}
   [UX.Additive] [UY.Additive] [G.Additive] [Gp.Additive]
   [PreservesFiniteLimits UX] [PreservesFiniteColimits UX]
   [PreservesFiniteLimits UY] [PreservesFiniteColimits UY]
-
-attribute [local irreducible] blockCoefficientComparison
 
 end CoefficientComparison
 section Canonical

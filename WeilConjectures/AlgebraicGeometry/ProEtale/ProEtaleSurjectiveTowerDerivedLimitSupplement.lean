@@ -68,6 +68,8 @@ universe t u w v v'
 
 open CategoryTheory CategoryTheory.Limits Opposite
 
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
+
 namespace AlgebraicGeometry.ProEtale
 
 /-- Weak contractibility is unchanged by enlarging the universe of sections.

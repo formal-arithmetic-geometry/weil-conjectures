@@ -439,7 +439,6 @@ def sliceTotalTensor (P Q : CochainComplex (SliceInternal Λ X U) ℤ) :
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency false in
-attribute [local irreducible] sliceOrdinaryTensorIso
 
 /-- Termwise sections before changing the presentation of the restricted section ring.
 Source: Stacks 03DH, 06YL (blueprint: def-sfb-internal-slice-derived-hom-comparison). -/

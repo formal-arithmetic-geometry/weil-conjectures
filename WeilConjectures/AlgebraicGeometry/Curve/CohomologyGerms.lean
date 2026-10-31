@@ -28,6 +28,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
 import WeilConjectures.RingTheory.StrictHenselizationTriples
 import WeilConjectures.AlgebraicGeometry.EtalePointedMapRigidity
 import WeilConjectures.AlgebraicGeometry.StrictHenselizationMapExists
+import WeilConjectures.AlgebraicGeometry.StrictHenselizationRingResidue
 import WeilConjectures.AlgebraicGeometry.StrictlyHenselianSectionsStalk
 
 /-! # Cohomology germs on the small coordinate-ring colimit model
@@ -77,7 +78,7 @@ no arbitrary witness or sheafification isomorphism supplies its data. -/
     let : Algebra (S.residueField (s (IsLocalRing.closedPoint Ω))) Ω :=
       (Scheme.descResidueField (Scheme.stalkClosedPointTo s)).hom.toAlgebra
     obtain ⟨hlocal, hstrict, _, _, σ, ⟨hpoint, hbase⟩, _⟩ :=
-      strictHenselizationResidue s rfl
+      strictHenselizationRingResidue s rfl
     let := hlocal
     let y := Spec.map (CommRingCat.ofHom
       (((IntermediateField.val

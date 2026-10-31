@@ -143,7 +143,7 @@ theorem proEtale_isZero_of_stratum_cover (X : Scheme.{u})
     (S.immersion a).isEmbedding.noetherianSpace
   have : ∀ a : Fin S.n, QuasiCompact (S.immersion a) := fun a ↦ inferInstance
   rw [IsZero.iff_id_eq_zero]
-  apply AlgebraicGeometry.ProEtale.abDetectMaps S.immersion
+  apply AlgebraicGeometry.ProEtale.eq_zero_of_forall_upperStar_map_eq_zero_addCommGrp S.immersion
   · intro x
     obtain ⟨a, ha⟩ := Set.mem_iUnion.mp (S.iUnion_stratum_eq_univ.symm ▸ Set.mem_univ x)
     exact ⟨a, (S.range_immersion a).symm ▸ ha⟩

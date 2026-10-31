@@ -117,7 +117,6 @@ open Profinite.CondensedAction.InternalBar
 
 namespace Profinite.CondensedAction
 
-attribute [instance] ProductInvariants.additive
 
 variable (A : CategoryTheory.CondensedBar.Ring.{u})
 

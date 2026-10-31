@@ -81,6 +81,7 @@ theorem proEtaleClosedAbelianProductsOfUniverses
       fun _ ↦ hasColimitsOfShape_of_essentiallySmall.{max u (t + 1)} _ _
     infer_instance
   let : HasSheafify (ProEt.topology Z) RingCat.{max u (t + 1)} :=
+    letI : EssentiallySmall.{max u (t + 1)} Z.ProEt := essentiallySmallSelf _
     hasSheafifyEssentiallySmallSite _ _
   let L : Sheaf (ProEt.topology X) RingCat.{max u (t + 1)} ⥤
       Sheaf (ProEt.topology Z) RingCat.{max u (t + 1)} :=

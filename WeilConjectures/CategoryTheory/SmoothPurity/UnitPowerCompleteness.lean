@@ -118,6 +118,10 @@ Thus its sections include locally divisible sections, without requiring a global
 The comparison uses the actual two-term complexes and their augmentation-induced units.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 
 set_option autoImplicit false
@@ -134,7 +138,6 @@ namespace CategoryTheory
 
 -- Cache this site-independent proof instead of repeating the general limit-preservation
 -- instance search at every occurrence of the underlying ring sheaf.
-attribute [local instance] unitPower_hasSheafCompose
 
 private abbrev sectionValue
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}

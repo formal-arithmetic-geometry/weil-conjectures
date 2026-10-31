@@ -105,32 +105,9 @@ attribute [local irreducible] upperStarFromPoint
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-local instance ringMonoidalObject (X : Scheme.{u}) : MonObj (ring l E X) :=
-  inferInstance
-local instance ringCommutative (X : Scheme.{u}) : IsCommMonObj (ring l E X) :=
-  inferInstance
-local instance finiteRingMonoidalObject (X : Scheme.{u}) (n : ℕ) :
-    MonObj (finiteRing l E X n) := inferInstance
-local instance finiteRingCommutative (X : Scheme.{u}) (n : ℕ) :
-    IsCommMonObj (finiteRing l E X n) := inferInstance
-local instance modulesMonoidal (X : Scheme.{u}) : MonoidalCategory (Modules l E X) :=
-  inferInstance
-local instance modulesSymmetric (X : Scheme.{u}) : SymmetricCategory (Modules l E X) :=
-  inferInstance
-local instance modulesClosed (X : Scheme.{u}) : MonoidalClosed (Modules l E X) :=
-  inferInstance
-local instance modulesMonoidalPreadditive (X : Scheme.{u}) :
-    MonoidalPreadditive (Modules l E X) := inferInstance
-local instance finiteModulesDerived (X : Scheme.{u}) (n : ℕ) :
-    HasDerivedCategory
-      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (finiteRing l E X n)) :=
-  inferInstance
-local instance modulesDerived (X : Scheme.{u}) : HasDerivedCategory (Modules l E X) :=
-  inferInstance
-local instance modulesProducts (X : Scheme.{u}) : HasCountableProducts (Modules l E X) :=
-  inferInstance
-local instance complexProducts (X : Scheme.{u}) :
-    HasCountableProducts (CochainComplex (Modules l E X) ℤ) := inferInstance
+attribute [local instance] ringMonoidalObject ringCommutative finiteRingMonoidalObject
+  finiteRingCommutative modulesMonoidal modulesSymmetric modulesClosed modulesMonoidalPreadditive
+  finiteModulesDerived modulesDerived modulesProducts complexProducts
 
 private theorem restricted_linear {C : Type*} [Category C] [MonoidalCategory C]
     {R S T : C} [MonObj S] [MonObj T] (q : R ⟶ S) (r : R ⟶ T)

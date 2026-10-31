@@ -362,7 +362,6 @@ private theorem completedSequenceNaturality
     exact ih
 
 namespace CondensedRing
-attribute [local irreducible] localizationCoconeIsColimit
 attribute [local irreducible] pointUpperStarLowerStarAdjunction
   ProEtale.upperStarLowerStarAdjunction
 open CategoryTheory.MonoidalCategory CategoryTheory.MonObj
@@ -433,7 +432,6 @@ private theorem completedSchemeCoefficientIsoIsMonHom (X : Scheme.{u})
   exact Functor.map.instIsMonHom (F := upperStarFromPoint X) _ _
     (pointCoefficientIso R).hom
 
-attribute [local irreducible] schemeCoefficientIso pointCoefficientIso
 
 private theorem completedUpperStarLeftAdjoint (X : Scheme.{u}) :
     (upperStarFromPoint X).IsLeftAdjoint := by

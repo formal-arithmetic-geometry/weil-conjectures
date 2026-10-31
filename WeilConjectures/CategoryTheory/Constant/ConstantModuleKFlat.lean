@@ -162,6 +162,17 @@ theorem isKFlat_constantModule
   have hk := F.kFlat_map_of_flat_terms P hp
     (fun i ↦ (ModuleCat.flat_iff_flat _).2 (hf i))
   intro Z hZ
+  -- Supply the graded tensor instances explicitly; the monoidal structure on complexes is
+  -- otherwise not found by instance search here.
+  have : ∀ X Y : GradedObject ℤ A, X.HasTensor Y := inferInstance
+  have : ∀ X₂ : A, PreservesColimit (Functor.empty.{0} A) ((curriedTensor A).flip.obj X₂) :=
+    inferInstance
+  have : ∀ X₁ X₂ X₃ X₄ : GradedObject ℤ A, GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄ :=
+    inferInstance
+  have : ∀ X₁ X₂ X₃ : GradedObject ℤ A, GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃ :=
+    inferInstance
+  have : ∀ X₁ X₂ X₃ : GradedObject ℤ A, GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃ :=
+    inferInstance
   let T := MonoidalCategory.tensorRight ((F.mapHomologicalComplex (.up ℤ)).obj P)
   have hz : QuasiIso (0 : (0 : CochainComplex A ℤ) ⟶ Z) := by
     rw [quasiIso_iff]
