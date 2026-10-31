@@ -8,6 +8,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitude
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
 
+public import Mathlib.AlgebraicGeometry.AffineScheme
 /-!
 # Constructibility with finite constant scalar models
 
@@ -82,5 +83,26 @@ Source: blueprint sk-def-sfb-constructible, final paragraph
 (blueprint: sk-def-sfb-constructible). -/
 abbrev ConstantModelBoundedConstructible (X : Scheme.{u}) :=
   (constantModelBoundedConstructible Λ X).FullSubcategory
+
+end AlgebraicGeometry.ProEtale
+
+namespace AlgebraicGeometry.ProEtale
+
+section
+
+set_option autoImplicit false
+open CategoryTheory CategoryTheory.Limits
+open scoped CategoryTheory.Obj
+variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+  [MonObj Λ] [IsCommMonObj Λ]
+
+/-- The bounded constructible objects of finite Tor amplitude, as a full subcategory.
+Source: blueprint sk-def-sfb-constructible, final paragraph
+(blueprint: sk-def-sfb-constructible). -/
+abbrev ConstantModelConstructibleFiniteTor (X : Scheme.{u}) :=
+  (constantModelBoundedConstructible Λ X ⊓ fun K ↦
+    DerivedCategory.finiteTorAmplitude _ K).FullSubcategory
+
+end
 
 end AlgebraicGeometry.ProEtale

@@ -57,3 +57,25 @@ abbrev integralLocalizationLiftedSequence {C : Type v} [Category.{w} C] [Preaddi
   (ULift.orderIso : ULift.{x} ℕ ≃o ℕ).equivalence.functor ⋙ Mod.smulSequence K ℓ
 
 end AlgebraicGeometry.ProEtale.CondensedRing
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+section
+
+open CategoryTheory Limits MonoidalCategory MonObj
+open scoped CategoryTheory.Obj CategoryTheory.Functor
+variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
+
+/-- Reindex the unit telescope along the order equivalence with the lifted natural numbers.
+Source: Bhatt--Scholze, Lemma 6.8.2, localization telescope.
+(blueprint: def-weil-pbc-integral-localization-telescope). -/
+noncomputable def integralLocalizationLiftedCocone (X : Scheme.{u})
+    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (integralCoeff ℓ E) X))) :
+    Cocone (integralLocalizationLiftedSequence.{_, _, x} ℓ K) :=
+  (integralLocalizationCocone ℓ E X K).whisker
+    (ULift.orderIso : ULift.{x} ℕ ≃o ℕ).equivalence.functor
+
+end
+
+end AlgebraicGeometry.ProEtale.CondensedRing
