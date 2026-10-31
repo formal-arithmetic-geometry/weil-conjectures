@@ -76,6 +76,8 @@ open CategoryTheory Limits
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
+set_option maxHeartbeats 1600000 in
+-- The cocone comparisons below unify large derived module categories.
 /-- The specified scalar-extension/pushforward mate is invertible on integral bounded
 constructible complexes for a qcqs map.
 Source: Hemo--Richarz--Scholbach, Lemma 5.3(1), and Bhatt--Scholze, Lemma 6.8.2.
@@ -140,7 +142,7 @@ theorem integralScalarPushHom_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
           ((lowerStar (integralCoeff ℓ E) f).rightDerivedFunctorPlusCompatibility.app K')).symm
   let cX := integralLocalizationCocone ℓ E X K.obj
   let cY := integralLocalizationCocone ℓ E Y (G.obj K.obj)
-  let σ := integralLocalizationSequenceMapIso ℓ G K.obj
+  let σ := Mod.smulSequenceCompIso G K.obj ℓ
   let d := (Cocone.precompose σ.inv).obj (G.mapCocone cX)
   let g : cY.pt ⟶ d.pt := U.map β ≫ κ.hom.app (LX.obj K.obj)
   have : IsIso (ℓ • 𝟙 d.pt) := by
@@ -188,14 +190,14 @@ theorem integralScalarPushHom_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
       apply hd.ofIsoColimit
       exact Cocone.ext (Iso.refl _) (by
         intro n
-        simp only [Functor.comp_obj, integralLocalizationSequenceMapIso,
-          Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom, asIso_hom, asIso_inv,
+        simp only [Functor.comp_obj, Mod.smulSequenceCompIso, NatIso.ofComponents_hom_app,
+          Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
           Cocone.precompose_obj_pt, Functor.mapCocone_pt, Cocone.whisker_pt,
           Functor.mapCocone_ι_app, Functor.comp_map, Iso.refl_hom, Category.comp_id,
           Cocone.precompose_obj_ι, NatTrans.comp_app, Functor.const_obj_obj,
-          Functor.whiskerRight_app, Functor.whiskerLeft_app, NatTrans.ofSequence_app,
+          Functor.whiskerRight_app, Functor.whiskerLeft_app,
           CategoryTheory.Functor.map_id, Cocone.whisker_ι, Functor.whiskerLeft_comp,
-          NatIso.isIso_inv_app, IsIso.inv_id, Functor.map_comp, e, σ, d]
+          Functor.map_comp, e, σ, d]
         change H.map (G.map (cX.ι.app n.down)) =
           𝟙 _ ≫ H.map (𝟙 _) ≫ H.map (G.map (cX.ι.app n.down))
         rw [H.map_id, Category.id_comp, Category.id_comp])

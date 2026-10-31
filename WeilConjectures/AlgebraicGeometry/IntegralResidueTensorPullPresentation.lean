@@ -22,8 +22,6 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 
 local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
 
-attribute [local instance 20000] CategoryTheory.tensorPresentationMonoidal
-
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 attribute [local instance 20000] sheafBraidedCategory

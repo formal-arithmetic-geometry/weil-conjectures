@@ -27,7 +27,7 @@ zeroth leg. This gives a morphism between the two colimit cocones; uniqueness of
 colimits makes its vertex map invertible. -/
 theorem integralLocalization_cocone_map_isIso (ℓ : ℕ)
     {C : Type u} [Category.{v} C] [Preadditive C]
-    {K : C} (c d : Cocone (integralLocalizationSequence ℓ K))
+    {K : C} (c d : Cocone (Mod.smulSequence K ℓ))
     [IsIso (ℓ • 𝟙 d.pt)] (g : c.pt ⟶ d.pt)
     (hzero : c.ι.app 0 ≫ g = d.ι.app 0)
     {B : Type w} [Category.{x} B] (F : C ⥤ B)

@@ -137,6 +137,15 @@ def sliceEquivalence : SliceInternal Λ X U ≌ SheafOfModules.{u + 1}
     (sectionModuleEquivalence.{u + 1, u + 1, u} ((Scheme.ProEt.topology X).over U)
       (sliceRingObject Λ X U))
 
+/-- The local section equivalence is additive, including equality transport.
+Source: Stacks 00YV, 03DH (auxiliary; not a blueprint node).
+Proof: every equivalence of these preadditive categories preserves binary products
+and zero morphisms, hence addition. This applies directly to the transported
+equivalence, without unfolding its equality transport. -/
+@[instance] theorem sliceEquivalence_additive :
+    (sliceEquivalence Λ X U).functor.Additive := by
+  exact Functor.additive_of_preserves_binary_products _
+
 attribute [local irreducible] sliceEquivalence
 
 /-- Sectionwise modules over the literally restricted section ring.
@@ -165,7 +174,6 @@ def sliceLocalizationIso :
       sliceComplexForward Λ X U ⋙ DerivedCategory.Q :=
   (sliceEquivalence Λ X U).functor.mapDerivedCategoryFactors
 
-set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency false
 
 /-- Fixed existence of the graded tensor coproducts on the actual slice.
@@ -221,19 +229,6 @@ instance sliceTotalExists (P Q : CochainComplex (SliceInternal Λ X U) ℤ) :
     P.HasMapBifunctor Q (curriedTensor (SliceInternal Λ X U)) :=
   comparison_internalTotalExists ((Scheme.ProEt.topology X).over U) (sliceRingObject Λ X U) P Q
 
-set_option backward.isDefEq.respectTransparency false in
-/-- Ordinary local tensor comparison with the dependency's pure-tensor normalization.
-Its target uses the reconstructed presentation of the restricted section ring.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
-def sliceOrdinaryTensorIso (M N : SliceInternal Λ X U) :=
-  ordinaryTensorIsoForSite ((Scheme.ProEt.topology X).over U) (sliceRingObject Λ X U) M N
-
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-attribute [local irreducible] sliceOrdinaryTensorIso
-
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency false
 
 attribute [local irreducible] sliceComplexForward

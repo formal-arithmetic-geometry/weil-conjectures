@@ -4,6 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
+public import WeilConjectures.AlgebraicGeometry.ProEtaleDerivedPullbackComposition
+public import WeilConjectures.AlgebraicGeometry.ProEtaleOperations
+public import WeilConjectures.AlgebraicGeometry.ProfiniteCoefficientInverseImage
 public import WeilConjectures.AlgebraicGeometry.StrictTowerOperations
 
 /-!
@@ -55,6 +58,34 @@ structure LocallyClosedCoefficientImmersion (S X : LocallyClosedCoefficients.{u}
 attribute [instance] LocallyClosedCoefficientImmersion.immersion
 
 namespace LocallyClosedCoefficientImmersion
+
+/-- Identity with the actual identity inverse-image comparison.
+Source: Stacks, Tag 09A5 (auxiliary; not a blueprint node). -/
+def identity (X : LocallyClosedCoefficients.{u}) : LocallyClosedCoefficientImmersion X X where
+  hom := 𝟙 X.scheme
+  immersion := inferInstance
+  coefficient := (proEtaleRingInverseImageId X.scheme).app X.ring
+
+/-- Composition with the actual composition of inverse-image coefficient identifications.
+Source: Stacks, Tags 02V0 and 03D8
+(auxiliary; not a blueprint node). -/
+def comp {S X T : LocallyClosedCoefficients.{u}}
+    (a : LocallyClosedCoefficientImmersion S X) (b : LocallyClosedCoefficientImmersion T S) :
+    LocallyClosedCoefficientImmersion T X where
+  hom := b.hom ≫ a.hom
+  immersion := inferInstance
+  coefficient := proEtaleRingCompositeCoefficients b.hom a.hom X.ring S.ring T.ring
+    a.coefficient b.coefficient
+
+/-- Exact inverse image with the specified inverse-image coefficients.
+Source: Stacks, Tag 03D2 (auxiliary; not a blueprint node). -/
+abbrev pull {S X : LocallyClosedCoefficients.{u}} (a : LocallyClosedCoefficientImmersion S X) :=
+  proEtaleRingModulePullback a.hom X.ring S.ring a.coefficient
+
+/-- Actual direct image with action through the coefficient adjunction unit.
+Source: Stacks, Tag 03D3 (auxiliary; not a blueprint node). -/
+abbrev push {S X : LocallyClosedCoefficients.{u}} (a : LocallyClosedCoefficientImmersion S X) :=
+  proEtaleRingModuleDirectImage a.hom X.ring S.ring a.coefficient
 
 end LocallyClosedCoefficientImmersion
 

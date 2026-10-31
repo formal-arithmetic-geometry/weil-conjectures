@@ -699,6 +699,25 @@ noncomputable def upperComparison {X Y : Scheme.{u}} (f : X ⟶ Y) :
       (equivalence Λ Y).functor ⋙ upperStar Λ f :=
   (upperComparison_existsUnique Λ f).exists.choose
 
+/-- For an open immersion, sectionwise restriction admits extension by zero.
+Source: blueprint module-lower-shriek, Extension by zero clause
+(blueprint: lem-sfb-internal-module-operations-transport).
+Proof: Step 5. Conjugate the given internal open-extension adjunction by the fixed
+E equivalences, and identify its right adjoint using upperComparison. This supplies
+the sectionwise left adjoint, characterized uniquely by its extension-by-zero universal
+property. The same underlying abelian extension by zero carries the transported action. -/
+@[instance]
+theorem upperStar_isRightAdjoint {U T : Scheme.{u}} (j : U ⟶ T)
+    [IsOpenImmersion j] : (upperStar Λ j).IsRightAdjoint := by
+  have : (CondensedRing.upperStar Λ j).IsRightAdjoint :=
+    (CondensedRing.openImmersionLowerShriekUpperStarAdjunction Λ j).isRightAdjoint
+  have : (CondensedRing.upperStar Λ j ⋙ (equivalence Λ U).functor).IsRightAdjoint :=
+    inferInstance
+  have : ((equivalence Λ T).functor ⋙ upperStar Λ j).IsRightAdjoint :=
+    Functor.isRightAdjoint_of_iso (upperComparison Λ j)
+  exact (Functor.isRightAdjoint_comp_iff_right
+    (equivalence Λ T).functor (upperStar Λ j)).mp inferInstance
+
 /-- Sectionwise extension by zero, the canonical left adjoint of restriction.
 Source: blueprint module-lower-shriek, Extension by zero clause
 (blueprint: lem-sfb-internal-module-operations-transport). -/

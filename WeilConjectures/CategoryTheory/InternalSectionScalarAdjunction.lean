@@ -189,6 +189,10 @@ attribute [local instance] sfbSheafTensor_monoidalPreadditive sfbSheafTensor_has
 
 open SheafOfModules
 
+set_option maxHeartbeats 800000 in
+-- Comparing the homotopy and complex factorization APIs needs additional elaboration.
+omit [HasDerivedCategory (scalarInternalModules J R)]
+  [HasDerivedCategory (scalarInternalModules J S)] in
 private theorem sectionPair_exists :
     Nonempty (SheafOfModules.ScalarDerivedPair (sectionScalarMap J a)) := by
   classical
@@ -273,6 +277,8 @@ private noncomputable def scalarExtensionIso
     (scalarRestrictionIso.{u, c, v} (C := C) J a)
   exact (asIso α).symm
 
+omit [HasDerivedCategory (scalarInternalModules J R)]
+  [HasDerivedCategory (scalarInternalModules J S)] in
 private theorem scalarExtension_unit
     (s : SheafOfModules.ScalarDerivedPair (sectionScalarMap.{u, c, v} J a))
     (M : scalarInternalModules J R) :
@@ -285,6 +291,8 @@ private theorem scalarExtension_unit
   unit_mateEquiv_symm (Mod.extendRestrictAdjunction a) s.ordinaryAdjunction
     (TwoSquare.mk _ _ _ _ (scalarRestrictionIso.{u, c, v} (C := C) J a).hom) M
 
+omit [HasDerivedCategory (scalarInternalModules J R)]
+  [HasDerivedCategory (scalarInternalModules J S)] in
 private theorem scalarExtension_homEquiv
     (s : SheafOfModules.ScalarDerivedPair (sectionScalarMap.{u, c, v} J a))
     (M : scalarInternalModules J R) (N : scalarInternalModules J S)
@@ -305,6 +313,8 @@ private theorem scalarExtension_homEquiv
   rw [← Category.assoc, scalarExtension_unit J a s M]
   simp only [Functor.map_comp, Category.assoc]
 
+omit [HasDerivedCategory (scalarInternalModules J R)]
+  [HasDerivedCategory (scalarInternalModules J S)] in
 private theorem scalarExtension_unit_image
     (s : SheafOfModules.ScalarDerivedPair (sectionScalarMap.{u, c, v} J a))
     (M : scalarInternalModules J R) (U : Cᵒᵖ) (m : M.X.obj.obj U) :
@@ -319,6 +329,10 @@ private theorem scalarExtension_unit_image
   simp only [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app] at h
   exact congrArg (fun f ↦ f.val.app U m) h
 
+omit [HasDerivedCategory (scalarInternalModules J R)]
+  [HasDerivedCategory (scalarInternalModules J S)]
+  [HasDerivedCategory (SheafOfModules.scalarModules J (sectionRingSheaf J R))]
+  [HasDerivedCategory (SheafOfModules.scalarModules J (sectionRingSheaf J S))] in
 private theorem internalScalarGenerator_eq_smul
     (M : scalarInternalModules J R) (U : Cᵒᵖ)
     (s : S.obj.obj U) (m : M.X.obj.obj U) :
@@ -345,6 +359,8 @@ private theorem internalScalarGenerator_eq_smul
   rw [h] at hh
   exact hh.symm
 
+omit [HasDerivedCategory (scalarInternalModules J R)]
+  [HasDerivedCategory (scalarInternalModules J S)] in
 private theorem scalarExtension_generator
     (s : SheafOfModules.ScalarDerivedPair (sectionScalarMap J a))
     (M : scalarInternalModules J R) (U : Cᵒᵖ) (t : S.obj.obj U) (m : M.X.obj.obj U) :
