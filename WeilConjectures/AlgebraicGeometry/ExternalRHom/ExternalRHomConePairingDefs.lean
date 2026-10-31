@@ -401,7 +401,6 @@ Source: Stacks 0A8X (blueprint: def-pur-external-rhom-pairing-interface). -/
 noncomputable abbrev constantComplex (X : Scheme.{u}) :=
   (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)).mapHomologicalComplex (.up ℤ)
 
-attribute [local instance] constantComplexOplax
 
 /-- The ordinary source of a global chain evaluation, using the native total tensor.
 Source: Stacks 0A8X and 0A90 (blueprint: def-pur-external-rhom-pairing-interface). -/
@@ -522,7 +521,6 @@ Source: Stacks 0G7E (blueprint: def-pur-external-rhom-pairing-interface). -/
 noncomputable abbrev pullComplex {X P : Scheme.{u}} (a : P ⟶ X) :=
   (upperStar (ModuleCat.{u + 1} A) a).mapHomologicalComplex (.up ℤ)
 
-attribute [local instance] pullComplexMonoidal
 
 /-- The source coefficient complex on P in the chain normalization.
 Source: Stacks 0A90 (blueprint: def-pur-external-rhom-pairing-interface). -/

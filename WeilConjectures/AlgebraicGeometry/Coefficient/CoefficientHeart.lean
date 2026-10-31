@@ -323,12 +323,12 @@ private theorem heartLisse_closed_square {Y S W T : Scheme.{u}}
     (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))
     (hM : IsLisseCoefficientModule Λ ((CondensedRing.upperStar Λ b).obj M)) :
     IsLisseCoefficientModule Λ ((CondensedRing.upperStar Λ a).obj M) := by
-  have h := CondensedRing.locFree_pullback Λ r _ hM
+  have h := IsLocallyFree.upperStar Λ r ((isLocallyFree_iff _).2 hM)
   let e := ((CondensedRing.upperStarComp Λ t a).app M).symm ≪≫
     eqToIso (congrArg (fun f ↦ (CondensedRing.upperStar Λ f).obj M) hsq) ≪≫
     (CondensedRing.upperStarComp Λ r b).app M
   exact (coefficientHeart_curve_lisse_descent.{u, u} Λ t _).1.mpr
-    (CondensedRing.locFree_iso e h)
+    ((isLocallyFree_iff _).1 (h.of_iso e.symm))
 
 /-- Lissity descends across the closed side of a commuting pullback square. -/
 private theorem heartLisse_closed_square_coefficient
@@ -359,15 +359,15 @@ private theorem heartLissePullback_comp {Y Z T : Scheme.{u}} (f : T ⟶ Z) (g : 
     heartLissePullback Λ (f ≫ g) M →
       heartLissePullback Λ f ((CondensedRing.upperStar Λ g).obj M) := by
   intro h
-  exact CondensedRing.locFree_iso ((CondensedRing.upperStarComp Λ f g).app M).symm h
+  exact (isLocallyFree_iff _).1
+    (((isLocallyFree_iff _).2 h).of_iso ((CondensedRing.upperStarComp Λ f g).app M))
 
 private theorem heartLissePullback_cover {Y Z : Scheme.{u}} (g : Z ⟶ Y)
     (C : Scheme.Cover.{u} Scheme.proetalePrecoverage Z)
     (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))
     (h : ∀ c, heartLissePullback Λ (C.f c ≫ g) M) : heartLissePullback Λ g M := by
-  apply CondensedRing.locFree_of_cover _ C
-  intro c
-  exact heartLissePullback_comp Λ (C.f c) g M (h c)
+  exact (isLocallyFree_iff _).1 (CondensedRing.locFree_of_cover _ C fun c ↦
+    (isLocallyFree_iff _).2 (heartLissePullback_comp Λ (C.f c) g M (h c)))
 
 attribute [local irreducible] heartLissePullback
 
@@ -529,7 +529,8 @@ theorem coefficientHeart (ℓ : ℕ) [Fact ℓ.Prime]
           Mon.mk (Profinite.padicIntegersRingObj ℓ E.1)) ∨
         Nonempty (Mon.mk (coefficientHeartRingObj L) ≅
         Mon.mk (Profinite.continuousMapRingObj E.1))) ∨
-      Nonempty (Mon.mk (coefficientHeartRingObj L) ≅ Mon.mk (Profinite.padicAlgClRingObj ℓ)) := by
+      Nonempty (Mon.mk (coefficientHeartRingObj L) ≅
+        Mon.mk (Profinite.padicAlgClRingObj ℓ)) := by
     rcases hL with ⟨E, hE, hL⟩ | hL
     · refine Or.inr (Or.inr (Or.inl ⟨⟨E, hE⟩, Or.inr ⟨?_⟩⟩))
       exact eqToIso (congrArg (fun R ↦ Mon.mk (coefficientHeartRingObj R)) hL)
@@ -622,7 +623,8 @@ theorem coefficientHeart (ℓ : ℕ) [Fact ℓ.Prime]
       rw [(hW ⟨C, hC⟩).2.1 x hx]
       exact hgeneric ⟨C, hC⟩
     have hZ : ∃ Z : Scheme.{u}, ∃ i : Z ⟶ X,
-        IsClosedImmersion i ∧ IsReduced Z ∧ Set.range i = ((⨆ C, W C : X.Opens) : Set X)ᶜ := by
+        IsClosedImmersion i ∧ IsReduced Z ∧
+          Set.range i = ((⨆ C, W C : X.Opens) : Set X)ᶜ := by
       exact ⟨heartComplement (⨆ C, W C), heartComplementι (⨆ C, W C),
         inferInstance, inferInstance, heartComplement_range _⟩
     obtain ⟨Z, i, hiClosed, hiReduced, hi⟩ := hZ

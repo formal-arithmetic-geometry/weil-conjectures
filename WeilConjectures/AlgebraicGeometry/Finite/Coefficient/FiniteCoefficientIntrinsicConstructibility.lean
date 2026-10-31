@@ -264,7 +264,7 @@ private theorem finiteModels_of_sieve
   let c := ((ProEt.sliceEquiv X (U i)).constantSheafSheafCongrIso
     ((ProEt.topology X).over (U i)) (ProEt.topology (U i).left)
     (ModuleCat.{u + 1} B) (Over.mkIdTerminal (X := U i))).app M
-  exact ⟨M, hM, ⟨(ProEtale.upperStarIsoLocalizationRestriction
+  exact ⟨M, Module.Finite.of_finite, ⟨(ProEtale.upperStarIsoLocalizationRestriction
     (ModuleCat.{u + 1} B) (U i).hom (U i).prop).app F ≪≫
       r.symm ≪≫ E.functor.mapIso e ≪≫ c⟩⟩
 

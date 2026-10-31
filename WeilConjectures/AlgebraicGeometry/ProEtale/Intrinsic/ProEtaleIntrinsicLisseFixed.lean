@@ -132,6 +132,9 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
 
 /-! # Finite lisse sheaves in the two constant-coefficient presentations -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 set_option autoImplicit false
 universe u
@@ -300,16 +303,20 @@ private theorem finiteLocal_iff (T : Scheme.{u}) (B : Type u) [CommRing B] [Fini
         ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ T),
           Finite (proEtaleGeometricModuleStalk x (proEtaleConstantRing T B) F) := by
   constructor
-  · intro h
-    have hl := ProEtale.finiteModels_over (ULift.{u + 1, u} B) _ h
+  · rintro ⟨ι, W, g, hg, hM⟩
+    have hl := ProEtale.finiteModels_over (ULift.{u + 1, u} B) _ ⟨ι, W, g, hg, fun i ↦
+      (hM i).imp fun _ ⟨_, e⟩ ↦ ⟨Module.finite_of_finite (ULift.{u + 1, u} B), e⟩⟩
     refine ⟨(localConstancy_iff T B F).mpr ?_, fun Ω _ _ x ↦ ?_⟩
     · obtain ⟨I, U, f, hf, he⟩ := hl
       exact ⟨I, U, f, hf, fun i ↦ ⟨(he i).choose, (he i).choose_spec.2⟩⟩
     · exact (finite_stalk_iff T B F Ω x).mpr
-        (ProEtale.finite_geometricStalk_of_finite_models (ULift.{u + 1, u} B) _ h Ω x)
+        (ProEtale.finite_geometricStalk_of_finite_models (ULift.{u + 1, u} B) _
+          ⟨ι, W, g, hg, fun i ↦ (hM i).imp fun _ ⟨_, e⟩ ↦
+            ⟨Module.finite_of_finite (ULift.{u + 1, u} B), e⟩⟩ Ω x)
   · rintro ⟨hl, hs⟩
-    exact finite_models_of_fixed_lisse T (ULift.{u + 1, u} B) _
+    obtain ⟨ι, W, g, hg, hM⟩ := finite_models_of_fixed_lisse T (ULift.{u + 1, u} B) _
       ⟨(localConstancy_iff T B F).mp hl,
         fun Ω _ _ x ↦ (finite_stalk_iff T B F Ω x).mp (hs Ω x)⟩
+    exact ⟨ι, W, g, hg, fun i ↦ (hM i).imp fun _ ⟨_, e⟩ ↦ ⟨Module.Finite.of_finite, e⟩⟩
 
 end AlgebraicGeometry.Scheme
