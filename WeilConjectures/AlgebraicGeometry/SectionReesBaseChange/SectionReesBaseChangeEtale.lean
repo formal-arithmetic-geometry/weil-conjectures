@@ -1,0 +1,512 @@
+/-
+Copyright (c) 2026 Bin Wu. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Bin Wu
+-/
+module
+
+public import WeilConjectures.AlgebraicGeometry.DeformationSpace.BaseChange
+public import WeilConjectures.AlgebraicGeometry.DeformationSpace.ReesBaseChange
+public import WeilConjectures.AlgebraicGeometry.ClosedImmersionConormalFunctorial
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+public import WeilConjectures.AlgebraicGeometry.ConormalGradedAlgebra.ConormalGradedAlgebra
+public import WeilConjectures.AlgebraicGeometry.FiniteSmoothPurity.ReesConeNormalization
+public import WeilConjectures.AlgebraicGeometry.VectorBundleZeroSection.VectorBundleZeroSection
+public import WeilConjectures.AlgebraicGeometry.SmoothPurity.CompactifiableOverField
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.AffineSpace
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+import WeilConjectures.AlgebraicGeometry.ClosedImmersionConormalFlatBaseChange
+import WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeStalkFinrank
+import WeilConjectures.AlgebraicGeometry.StalkFiniteFree
+import WeilConjectures.Algebra.Homology.ModuleStalkExact
+import WeilConjectures.AlgebraicGeometry.SectionReesNoetherianGeometry.SectionReesNoetherianGeometry
+import WeilConjectures.AlgebraicGeometry.SmoothSectionCentredCoordinates.SmoothSectionCentredCoordinates
+import Mathlib.LinearAlgebra.FiniteDimensional.Basic
+
+/-! # Functoriality of the extended-Rees deformation of a smooth section
+
+Source: blueprint main-20261015, sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md,
+Local construction, explicit base-change maps and etale maps of pairs
+(blueprint: lem-trf-section-rees-base-change-etale).
+
+The deformation, augmentation, punctured chart and two fibres are the existing
+extended-Rees constructions. All maps below are fixed coefficientwise on every affine
+restriction, including the quotient by t. Pushout assertions encode the displayed
+canonical tensor-product isomorphisms, without a flatness hypothesis on the base map.
+-/
+
+@[expose] public noncomputable section
+set_option autoImplicit false
+set_option relaxedAutoImplicit false
+universe u
+open CategoryTheory CategoryTheory.Limits Opposite
+open AlgebraicGeometry.Scheme.AffineZariskiSite
+namespace AlgebraicGeometry.SectionReesBaseChange
+
+/-- The canonical conormal comparison already characterized by its adjunction and
+representative formulas. Source: sk-thm-dnc, Local construction; Stacks 01R4
+(blueprint: lem-trf-section-rees-base-change-etale). -/
+def conormalMap {V V' S S' : Scheme.{u}} (s : S ⟶ V) (s' : S' ⟶ V')
+    [IsClosedImmersion s] [IsClosedImmersion s'] (h : V' ⟶ V) (b : S' ⟶ S)
+    (w : s' ≫ h = b ≫ s) :
+    (Scheme.Modules.tensorPullback b).obj
+        ((Scheme.Modules.tensorPullback s).obj s.ker.toModules) ⟶
+      (Scheme.Modules.tensorPullback s').obj s'.ker.toModules :=
+  Classical.choose ((Classical.choose_spec
+    (Scheme.Modules.closedImmersion_conormal_functorial s' s h b w).2).2)
+
+/-- The coefficientwise canonical map of Rees spaces for a commuting square of centres.
+Source: sk-thm-dnc, Local construction, t and b/t
+(blueprint: lem-trf-section-rees-base-change-etale). -/
+def pairMap {V V' S S' : Scheme.{u}} (s : S ⟶ V) (s' : S' ⟶ V')
+    [IsClosedImmersion s] [IsClosedImmersion s'] (h : V' ⟶ V) (b : S' ⟶ S)
+    (w : s' ≫ h = b ≫ s) : s'.ker.deformationSpace ⟶ s.ker.deformationSpace :=
+  Scheme.IdealSheafData.deformationSpaceMap h s.ker s'.ker fun {U' U} hU ↦
+    (s.ker.ideal_map_appLE_le_ideal_comap h ⟨U.1, U.2⟩ ⟨U'.1, U'.2⟩ hU).trans
+      (Scheme.IdealSheafData.le_def.mp
+        (Scheme.Modules.closedImmersion_conormal_functorial s' s h b w).1 ⟨U'.1, U'.2⟩)
+
+/-- The affine coefficientwise comparison on the zero fibre, obtained by quotienting
+the existing extended-Rees map by t. Source: sk-thm-dnc, Local construction; Stacks 0632
+(blueprint: lem-trf-section-rees-base-change-etale). -/
+def zeroAlgebraMap {R R' : Type u} [CommRing R] [CommRing R']
+    (I : Ideal R) (J : Ideal R') (a : R →+* R') (ha : I.map a ≤ J) :
+    I.extendedReesAlgebra ⧸ Ideal.span {I.extendedReesAlgebraT} →+*
+      J.extendedReesAlgebra ⧸ Ideal.span {J.extendedReesAlgebraT} :=
+  Ideal.quotientMap _ (I.extendedReesAlgebraMap a J ha)
+    (Ideal.map_le_iff_le_comap.mp (by
+      rw [Ideal.map_span, Set.image_singleton, Ideal.extendedReesAlgebraMap_T]))
+
+/-- Compatibility with the augmented pair and both fibre identifications. The zero
+and punctured maps are specified on EVERY affine restriction by their coefficient maps.
+In particular the zero map is the associated-graded map, hence its degree-one map is
+the canonical conormal comparison, rather than an arbitrary normal-bundle isomorphism.
+Source: sk-thm-dnc, Local construction, restriction and homogeneous-class formulas
+(blueprint: lem-trf-section-rees-base-change-etale). -/
+def Compatible {V V' S S' : Scheme.{u}} (g : V ⟶ S) (g' : V' ⟶ S')
+    (s : S ⟶ V) (s' : S' ⟶ V') [IsClosedImmersion s] [IsClosedImmersion s']
+    (h : V' ⟶ V) (b : S' ⟶ S)
+    (φ : s'.ker.deformationSpace ⟶ s.ker.deformationSpace) : Prop :=
+  φ ≫ Scheme.Hom.deformationSpaceProj g s =
+      Scheme.Hom.deformationSpaceProj g' s' ≫ AffineSpace.map (ULift.{u} (Fin 1)) b ∧
+  s'.deformationSpaceSection ≫ φ =
+      AffineSpace.map (ULift.{u} (Fin 1)) b ≫ s.deformationSpaceSection ∧
+  Scheme.Hom.deformationSpaceOneFibre g' s' ≫ φ =
+      h ≫ Scheme.Hom.deformationSpaceOneFibre g s ∧
+  ∃ (ν : s'.ker.normalCone ⟶ s.ker.normalCone) (l : V'.laurentSpec ⟶ V.laurentSpec),
+    (∀ (U' : V'.AffineZariskiSite) (U : V.AffineZariskiSite)
+      (hU : U'.1 ≤ h ⁻¹ᵁ U.1),
+      ∃ ha : (s.ker.siteIdeal U).map (h.appLE U.1 U'.1 hU).hom ≤ s'.ker.siteIdeal U',
+        colimit.ι (relativeGluingData s'.ker.coequifibered_toReesPresheaf).functor U' ≫ φ =
+          Spec.map (CommRingCat.ofHom ((s.ker.siteIdeal U).extendedReesAlgebraMap
+            (h.appLE U.1 U'.1 hU).hom (s'.ker.siteIdeal U') ha)) ≫
+              colimit.ι (relativeGluingData s.ker.coequifibered_toReesPresheaf).functor U) ∧
+    ν ≫ s.ker.normalConeToDeformationSpace = s'.ker.normalConeToDeformationSpace ≫ φ ∧
+    ν ≫ Scheme.Hom.normalConeProj g s = Scheme.Hom.normalConeProj g' s' ≫ b ∧
+    s'.normalConeZeroSection ≫ ν = b ≫ s.normalConeZeroSection ∧
+    l ≫ s.ker.laurentSpecToDeformationSpace = s'.ker.laurentSpecToDeformationSpace ≫ φ ∧
+    (∀ (U' : V'.AffineZariskiSite) (U : V.AffineZariskiSite)
+      (hU : U'.1 ≤ h ⁻¹ᵁ U.1),
+      ∃ ha : (s.ker.siteIdeal U).map (h.appLE U.1 U'.1 hU).hom ≤ s'.ker.siteIdeal U',
+        colimit.ι (relativeGluingData s'.ker.coequifibered_toNormalConePresheaf).functor U' ≫ ν =
+          Spec.map (CommRingCat.ofHom (zeroAlgebraMap (s.ker.siteIdeal U)
+            (s'.ker.siteIdeal U') (h.appLE U.1 U'.1 hU).hom ha)) ≫
+              colimit.ι (relativeGluingData s.ker.coequifibered_toNormalConePresheaf).functor U) ∧
+    (∀ (U' : V'.AffineZariskiSite) (U : V.AffineZariskiSite)
+      (hU : U'.1 ≤ h ⁻¹ᵁ U.1),
+      colimit.ι (relativeGluingData V'.coequifibered_toLaurentPresheaf).functor U' ≫ l =
+        Spec.map (CommRingCat.ofHom
+          (LaurentPolynomial.mapRingHom (h.appLE U.1 U'.1 hU).hom)) ≫
+            colimit.ι (relativeGluingData V.coequifibered_toLaurentPresheaf).functor U)
+
+private def laurentPairData {X X' : Scheme.{u}} (h : X' ⟶ X) :
+    PullbackData h X.toLaurentPresheaf X'.toLaurentPresheaf where
+  map hU := CommRingCat.laurentFunctor.map (h.appLE _ _ hU)
+  map_naturality i' i h₁ h₂ := by
+    have he := congrArg (CommRingCat.laurentFunctor.map)
+      (h.affineStructurePresheaf_map_appLE i' i h₁ h₂)
+    rw [Functor.map_comp, Functor.map_comp] at he
+    exact he
+  app_comp_map hU := (CommRingCat.laurentC.naturality _).symm
+
+private theorem laurentPairData_toRees {X X' : Scheme.{u}} (h : X' ⟶ X)
+    (I : X.IdealSheafData) (J : X'.IdealSheafData)
+    (hJ : ∀ ⦃U' : X'.AffineZariskiSite⦄ ⦃U : X.AffineZariskiSite⦄
+      (hU : U'.1 ≤ h ⁻¹ᵁ U.1),
+      (I.siteIdeal U).map (h.appLE U.1 U'.1 hU).hom ≤ J.siteIdeal U') :
+    (laurentPairData h).comparison _ _ ≫ I.laurentSpecToDeformationSpace =
+      J.laurentSpecToDeformationSpace ≫
+        Scheme.IdealSheafData.deformationSpaceMap h I J hJ := by
+  exact PullbackData.comparison_comp_relativeGluingMap _ _ _ _ _ _ _ _
+    (fun hU ↦ by ext x; rfl)
+
+private theorem laurentPairData_toPolynomial {X X' : Scheme.{u}} (h : X' ⟶ X) :
+    (laurentPairData h).comparison _ _ ≫ X.laurentSpecToPolynomialSpec =
+      X'.laurentSpecToPolynomialSpec ≫ Scheme.polynomialSpecMap h := by
+  exact PullbackData.comparison_comp_relativeGluingMap _ _ _ _ _ _ _ _
+    (fun hU ↦ (CommRingCat.polynomialToLaurent.naturality _).symm)
+
+private def oneLaurent {V S : Scheme.{u}} (g : V ⟶ S) : V ⟶ V.laurentSpec :=
+  pullback.lift (𝟙 V) (g ≫ Scheme.Hom.oneSectionToPuncturedLine S) (by
+    rw [Category.assoc, Scheme.Hom.oneSectionToPuncturedLine_ι_over,
+      Category.id_comp, Category.comp_id]) ≫
+        (Scheme.Hom.isPullback_laurentSpec g).isoPullback.inv
+
+private theorem oneLaurent_toPolynomial {V S : Scheme.{u}} (g : V ⟶ S) :
+    oneLaurent g ≫ V.laurentSpecToPolynomialSpec =
+      AffineSpace.oneSection (ULift.{u} (Fin 1)) V ≫ inv V.polynomialSpecToAffineSpace := by
+  apply (Scheme.Hom.isPullback_polynomialSpecProj g).hom_ext
+  · simp only [oneLaurent, Category.assoc,
+      IsPullback.isoPullback_inv_fst, pullback.lift_fst]
+    rw [← Scheme.polynomialSpecToAffineSpace_over,
+      IsIso.inv_hom_id_assoc, AffineSpace.oneSection_comp_over]
+  · rw [Category.assoc, (Scheme.Hom.isPullback_laurentSpecToPuncturedLine g).w]
+    simp only [oneLaurent, Category.assoc, IsPullback.isoPullback_inv_snd_assoc,
+      pullback.lift_snd_assoc, Scheme.Hom.oneSectionToPuncturedLine_ι,
+      IsIso.inv_hom_id_assoc, AffineSpace.oneSection_comp_map]
+
+private theorem oneLaurent_naturality {V V' S S' : Scheme.{u}}
+    (g : V ⟶ S) (g' : V' ⟶ S') (h : V' ⟶ V) :
+    oneLaurent g' ≫ (laurentPairData h).comparison _ _ = h ≫ oneLaurent g := by
+  apply (cancel_mono V.laurentSpecToPolynomialSpec).mp
+  calc
+    (oneLaurent g' ≫ (laurentPairData h).comparison _ _) ≫
+        V.laurentSpecToPolynomialSpec =
+      (oneLaurent g' ≫ V'.laurentSpecToPolynomialSpec) ≫ Scheme.polynomialSpecMap h := by
+        rw [Category.assoc, laurentPairData_toPolynomial, ← Category.assoc]
+    _ = (AffineSpace.oneSection (ULift.{u} (Fin 1)) V' ≫
+        inv V'.polynomialSpecToAffineSpace) ≫ Scheme.polynomialSpecMap h := by
+          rw [oneLaurent_toPolynomial]
+    _ = h ≫ (AffineSpace.oneSection (ULift.{u} (Fin 1)) V ≫
+        inv V.polynomialSpecToAffineSpace) := by
+      apply (cancel_mono V.polynomialSpecToAffineSpace).mp
+      simp only [Category.assoc, Category.comp_id, IsIso.inv_hom_id,
+        Scheme.polynomialSpecMap_polynomialSpecToAffineSpace,
+        IsIso.inv_hom_id_assoc, AffineSpace.oneSection_comp_map]
+    _ = (h ≫ oneLaurent g) ≫ V.laurentSpecToPolynomialSpec := by
+      rw [Category.assoc, oneLaurent_toPolynomial]
+
+private theorem pairMap_oneFibre {V V' S S' : Scheme.{u}}
+    (g : V ⟶ S) (g' : V' ⟶ S') (s : S ⟶ V) (s' : S' ⟶ V')
+    [IsClosedImmersion s] [IsClosedImmersion s'] (h : V' ⟶ V) (b : S' ⟶ S)
+    (w : s' ≫ h = b ≫ s) :
+    Scheme.Hom.deformationSpaceOneFibre g' s' ≫ pairMap s s' h b w =
+      h ≫ Scheme.Hom.deformationSpaceOneFibre g s := by
+  change (oneLaurent g' ≫ s'.ker.laurentSpecToDeformationSpace) ≫
+    Scheme.IdealSheafData.deformationSpaceMap h s.ker s'.ker _ =
+      h ≫ (oneLaurent g ≫ s.ker.laurentSpecToDeformationSpace)
+  rw [Category.assoc, ← laurentPairData_toRees, ← Category.assoc,
+    oneLaurent_naturality, Category.assoc]
+
+private def quotientPairData {X X' : Scheme.{u}} {h : X' ⟶ X}
+    {F : X.AffineZariskiSiteᵒᵖ ⥤ CommRingCat.{u}}
+    {F' : X'.AffineZariskiSiteᵒᵖ ⥤ CommRingCat.{u}}
+    {α : X.affineStructurePresheaf ⟶ F} {α' : X'.affineStructurePresheaf ⟶ F'}
+    (D : PullbackData h α α')
+    (K : ∀ U, Ideal (F.obj U))
+    (hK : ∀ ⦃U W⦄ (i : U ⟶ W), (K U).map (F.map i).hom = K W)
+    (K' : ∀ U, Ideal (F'.obj U))
+    (hK' : ∀ ⦃U W⦄ (i : U ⟶ W), (K' U).map (F'.map i).hom = K' W)
+    (hD : ∀ ⦃U' : X'.AffineZariskiSite⦄ ⦃U : X.AffineZariskiSite⦄
+      (hU : U'.1 ≤ h ⁻¹ᵁ U.1), (K (op U)).map (D.map hU).hom ≤ K' (op U')) :
+    PullbackData h (α ≫ Scheme.toQuotientPresheaf K hK)
+      (α' ≫ Scheme.toQuotientPresheaf K' hK') where
+  map hU := CommRingCat.ofHom (Ideal.quotientMap _ (D.map hU).hom
+    (Ideal.map_le_iff_le_comap.mp (hD hU)))
+  map_naturality i' i h₁ h₂ := by
+    apply CommRingCat.hom_ext
+    apply Ideal.Quotient.ringHom_ext
+    apply RingHom.ext
+    intro x
+    exact congrArg (Ideal.Quotient.mk _)
+      (ConcreteCategory.congr_hom (D.map_naturality i' i h₁ h₂) x)
+  app_comp_map hU := by
+    ext x
+    exact congrArg (Ideal.Quotient.mk _)
+      (ConcreteCategory.congr_hom (D.app_comp_map hU) x)
+
+private def zeroPairData {X X' : Scheme.{u}} (h : X' ⟶ X)
+    (I : X.IdealSheafData) (J : X'.IdealSheafData)
+    (hJ : ∀ ⦃U' : X'.AffineZariskiSite⦄ ⦃U : X.AffineZariskiSite⦄
+      (hU : U'.1 ≤ h ⁻¹ᵁ U.1),
+      (I.siteIdeal U).map (h.appLE U.1 U'.1 hU).hom ≤ J.siteIdeal U') :
+    PullbackData h (I.toReesPresheaf ≫
+      Scheme.toQuotientPresheaf I.tIdeal I.map_tIdeal)
+      (J.toReesPresheaf ≫ Scheme.toQuotientPresheaf J.tIdeal J.map_tIdeal) :=
+  quotientPairData (Scheme.IdealSheafData.extendedReesPullbackData h I J hJ)
+    I.tIdeal I.map_tIdeal J.tIdeal J.map_tIdeal fun {U' U} hU ↦ by
+      change (Ideal.span {(I.siteIdeal U).extendedReesAlgebraT}).map
+        ((I.siteIdeal U).extendedReesAlgebraMap (h.appLE U.1 U'.1 hU).hom
+          (J.siteIdeal U') (hJ hU)) ≤
+        Ideal.span {(J.siteIdeal U').extendedReesAlgebraT}
+      rw [Ideal.map_span, Set.image_singleton, Ideal.extendedReesAlgebraMap_T]
+
+private theorem zeroPairData_toRees {X X' : Scheme.{u}} (h : X' ⟶ X)
+    (I : X.IdealSheafData) (J : X'.IdealSheafData)
+    (hJ : ∀ ⦃U' : X'.AffineZariskiSite⦄ ⦃U : X.AffineZariskiSite⦄
+      (hU : U'.1 ≤ h ⁻¹ᵁ U.1),
+      (I.siteIdeal U).map (h.appLE U.1 U'.1 hU).hom ≤ J.siteIdeal U') :
+    (zeroPairData h I J hJ).comparison _ _ ≫ I.normalConeToDeformationSpace =
+      J.normalConeToDeformationSpace ≫
+        Scheme.IdealSheafData.deformationSpaceMap h I J hJ := by
+  exact PullbackData.comparison_comp_relativeGluingMap _ _ _ _ _ _ _ _
+    (fun hU ↦ by ext x; rfl)
+
+private theorem zeroPairData_isPullback {X X' : Scheme.{u}} (h : X' ⟶ X)
+    (I : X.IdealSheafData) (J : X'.IdealSheafData)
+    (hJ : ∀ ⦃U' : X'.AffineZariskiSite⦄ ⦃U : X.AffineZariskiSite⦄
+      (hU : U'.1 ≤ h ⁻¹ᵁ U.1),
+      (I.siteIdeal U).map (h.appLE U.1 U'.1 hU).hom ≤ J.siteIdeal U')
+    (hcov : ∀ x : X', ∃ (U' : X'.AffineZariskiSite) (U : X.AffineZariskiSite)
+      (hU : U'.1 ≤ h ⁻¹ᵁ U.1), x ∈ U'.1 ∧
+      IsPushout (h.appLE U.1 U'.1 hU) (I.toReesPresheaf.app (op U))
+        (J.toReesPresheaf.app (op U'))
+        ((Scheme.IdealSheafData.extendedReesPullbackData h I J hJ).map hU)) :
+    IsPullback ((zeroPairData h I J hJ).comparison _ _)
+      (relativeGluingData J.coequifibered_toNormalConePresheaf).toBase
+      (relativeGluingData I.coequifibered_toNormalConePresheaf).toBase h := by
+  apply (zeroPairData h I J hJ).isPullback_comparison
+    I.coequifibered_toNormalConePresheaf J.coequifibered_toNormalConePresheaf
+  intro x
+  obtain ⟨U', U, hU, hx, H⟩ := hcov x
+  let r := (Scheme.IdealSheafData.extendedReesPullbackData h I J hJ).map hU
+  have e : (I.tIdeal (op U)).map r.hom = J.tIdeal (op U') := by
+    rw [Ideal.map_span, Set.image_singleton]
+    exact congrArg (fun t ↦ Ideal.span {t})
+      (Ideal.extendedReesAlgebraMap_T _ _ (hJ hU))
+  have Hq : IsPushout r (CommRingCat.ofHom (Ideal.Quotient.mk (I.tIdeal (op U))))
+      (CommRingCat.ofHom (Ideal.Quotient.mk (J.tIdeal (op U'))))
+      (CommRingCat.ofHom (zeroAlgebraMap (I.siteIdeal U) (J.siteIdeal U')
+        (h.appLE U.1 U'.1 hU).hom (hJ hU))) := by
+    refine (CommRingCat.isPushout_quotient r (I.tIdeal (op U))).flip.of_iso
+      (Iso.refl _) (Iso.refl _) (Iso.refl _)
+      (Ideal.quotEquivOfEq e).toCommRingCatIso ?_ ?_ ?_ ?_
+    · simp
+    · simp
+    · ext a; rfl
+    · ext a; rfl
+  exact ⟨U', U, hU, hx, H.paste_vert Hq⟩
+
+private theorem rees_flat_pushout {R R' : Type u} [CommRing R] [CommRing R']
+    (I : Ideal R) (J : Ideal R') (a : R →+* R') (ha : a.Flat)
+    (hJ : I.map a = J) :
+    IsPushout (CommRingCat.ofHom a) (CommRingCat.ofHom (algebraMap R I.extendedReesAlgebra))
+      (CommRingCat.ofHom (algebraMap R' J.extendedReesAlgebra))
+      (CommRingCat.ofHom (I.extendedReesAlgebraMap a J hJ.le)) := by
+  subst J
+  exact Ideal.isPushout_extendedReesAlgebraMap_of_flat a ha I
+
+private theorem pairMap_section {V V' S S' : Scheme.{u}}
+    (s : S ⟶ V) (s' : S' ⟶ V') [IsClosedImmersion s] [IsClosedImmersion s']
+    (h : V' ⟶ V) (b : S' ⟶ S) (w : s' ≫ h = b ≫ s) :
+    s'.deformationSpaceSection ≫ pairMap s s' h b w =
+      AffineSpace.map (ULift.{u} (Fin 1)) b ≫ s.deformationSpaceSection := by
+  let hJ : ∀ ⦃U' : V'.AffineZariskiSite⦄ ⦃U : V.AffineZariskiSite⦄
+      (hU : U'.1 ≤ h ⁻¹ᵁ U.1),
+      (s.ker.siteIdeal U).map (h.appLE U.1 U'.1 hU).hom ≤ s'.ker.siteIdeal U' :=
+    fun {U' U} hU ↦
+    (s.ker.ideal_map_appLE_le_ideal_comap h ⟨U.1, U.2⟩ ⟨U'.1, U'.2⟩ hU).trans
+      (Scheme.IdealSheafData.le_def.mp
+        (Scheme.Modules.closedImmersion_conormal_functorial s' s h b w).1 ⟨U'.1, U'.2⟩)
+  have hsection : s'.affineSpaceToQuotientPolynomialSpec ≫
+      (Scheme.IdealSheafData.quotientPolynomialPullbackData h s.ker s'.ker hJ).comparison _ _ =
+      AffineSpace.map (ULift.{u} (Fin 1)) b ≫ s.affineSpaceToQuotientPolynomialSpec := by
+    rw [← cancel_mono (relativeGluingMap V.coequifibered_toPolynomialPresheaf
+      s.ker.coequifibered_toQuotientPolynomialAlgebra s.ker.polynomialToQuotientPolynomial),
+      Category.assoc, PullbackData.comparison_comp_relativeGluingMap
+        (H := V.coequifibered_toPolynomialPresheaf)
+        (H' := V'.coequifibered_toPolynomialPresheaf) _ _ _ _ _ _
+       (Scheme.IdealSheafData.polynomialToQuotientPolynomial_comp_quotientPolynomialPullbackData_map
+          _ _ _ _),
+      Scheme.Hom.affineSpaceToQuotientPolynomialSpec_toPolynomialSpec_assoc, Category.assoc,
+      Scheme.Hom.affineSpaceToQuotientPolynomialSpec_toPolynomialSpec,
+      ← Scheme.polynomialSpecMap,
+      (IsIso.eq_comp_inv _).mpr (Scheme.polynomialSpecMap_polynomialSpecToAffineSpace h)]
+    simp only [Category.assoc, IsIso.inv_hom_id_assoc, ← AffineSpace.map_comp_assoc, w]
+  change s'.deformationSpaceSection ≫
+    Scheme.IdealSheafData.deformationSpaceMap h s.ker s'.ker hJ = _
+  rw [Scheme.Hom.deformationSpaceSection, Scheme.Hom.deformationSpaceSection, Category.assoc,
+    Scheme.IdealSheafData.deformationSpaceMap,
+    ← PullbackData.comparison_comp_relativeGluingMap
+      (HG := s.ker.coequifibered_toQuotientPolynomialAlgebra) _ _ _ _ _ _ _
+      (Scheme.IdealSheafData.reesToQuotientPolynomial_comp_quotientPolynomialPullbackData_map
+        _ _ _ _), ← Category.assoc, hsection, Category.assoc]
+
+private theorem pairMap_compatible {V V' S S' : Scheme.{u}}
+    (g : V ⟶ S) (g' : V' ⟶ S') (s : S ⟶ V) (s' : S' ⟶ V')
+    [IsClosedImmersion s] [IsClosedImmersion s'] (h : V' ⟶ V) (b : S' ⟶ S)
+    (w : s' ≫ h = b ≫ s) (over : h ≫ g = g' ≫ b) :
+    Compatible g g' s s' h b (pairMap s s' h b w) := by
+  let hJ : ∀ ⦃U' : V'.AffineZariskiSite⦄ ⦃U : V.AffineZariskiSite⦄
+      (hU : U'.1 ≤ h ⁻¹ᵁ U.1),
+      (s.ker.siteIdeal U).map (h.appLE U.1 U'.1 hU).hom ≤ s'.ker.siteIdeal U' :=
+    fun {U' U} hU ↦
+      (s.ker.ideal_map_appLE_le_ideal_comap h ⟨U.1, U.2⟩ ⟨U'.1, U'.2⟩ hU).trans
+        (Scheme.IdealSheafData.le_def.mp
+          (Scheme.Modules.closedImmersion_conormal_functorial s' s h b w).1 ⟨U'.1, U'.2⟩)
+  let D := zeroPairData h s.ker s'.ker hJ
+  let ν := D.comparison s.ker.coequifibered_toNormalConePresheaf
+    s'.ker.coequifibered_toNormalConePresheaf
+  have hν : ν ≫ s.ker.normalConeToDeformationSpace =
+      s'.ker.normalConeToDeformationSpace ≫ pairMap s s' h b w :=
+    zeroPairData_toRees h s.ker s'.ker hJ
+  have hπ : ν ≫ Scheme.Hom.normalConeProj g s =
+      Scheme.Hom.normalConeProj g' s' ≫ b := by
+    change ν ≫ ((relativeGluingData s.ker.coequifibered_toNormalConePresheaf).toBase ≫ g) = _
+    rw [← Category.assoc, PullbackData.comparison_toBase, Category.assoc, over]
+    simp only [Scheme.Hom.normalConeProj, Category.assoc]
+  refine ⟨Scheme.IdealSheafData.deformationSpaceMap_proj h s.ker s'.ker hJ g g' b over,
+    pairMap_section s s' h b w, pairMap_oneFibre g g' s s' h b w,
+    ν, (laurentPairData h).comparison _ _, ?_, hν, hπ, ?_,
+    laurentPairData_toRees h s.ker s'.ker hJ, ?_, ?_⟩
+  · intro U' U hU
+    exact ⟨hJ hU, PullbackData.ι_comparison _ _ _ hU⟩
+  · have : IsClosedImmersion s.ker.normalConeToDeformationSpace :=
+      MorphismProperty.of_isPullback (P := @IsClosedImmersion)
+        (Scheme.Hom.isPullback_normalConeToDeformationSpace g s).flip inferInstance
+    apply (cancel_mono s.ker.normalConeToDeformationSpace).mp
+    rw [Category.assoc, hν,
+      ← Category.assoc, Scheme.Hom.normalConeZeroSection_comp_normalConeToDeformationSpace,
+      Category.assoc, pairMap_section,
+      ← Category.assoc, AffineSpace.zeroSection_comp_map]
+    simp only [Category.assoc,
+      Scheme.Hom.normalConeZeroSection_comp_normalConeToDeformationSpace]
+  · intro U' U hU
+    exact ⟨hJ hU, PullbackData.ι_comparison _ _ _ hU⟩
+  · intro U' U hU
+    exact PullbackData.ι_comparison _ _ _ hU
+
+/-- Etale maps of pairs with Cartesian centres give the canonical pullback of the Rees
+space, preserve augmentation and both fibres, and induce the linear normal-bundle
+isomorphism. Source: sk-thm-dnc, Local construction, etale maps of pairs
+(blueprint: lem-trf-section-rees-base-change-etale).
+Proof: Cartesian centres identify the new kernel ideal with the pulled-back ideal.
+Etaleness makes every affine coefficient map flat; the upstream flat Rees pushout gives
+the deformation pullback and hence its etaleness. Generic coefficientwise compatibility
+gives the augmentation, zero and one formulas. Flat Cartesian conormal base change gives
+the conormal isomorphism. Quotienting the chart pushouts by t gives a normal-cone
+pullback over the ambient schemes; cancelling the Cartesian centre square makes the
+normal comparison a pullback of the identity of S, hence an isomorphism. -/
+theorem etale {V V₁ S : Scheme.{u}} [IsNoetherian S]
+    (d : ℕ) (g : V ⟶ S) [SmoothOfRelativeDimension d g] [IsSeparated g]
+    [LocallyOfFiniteType g] [QuasiCompact g] (s : S ⟶ V) [IsClosedImmersion s]
+    (hs : s ≫ g = 𝟙 S) (h : V₁ ⟶ V) [Etale h] [IsSeparated h]
+    [LocallyOfFiniteType h] [QuasiCompact h] (s₁ : S ⟶ V₁) [IsClosedImmersion s₁]
+    (hs₁ : s₁ ≫ (h ≫ g) = 𝟙 S) (w : s₁ ≫ h = (𝟙 S) ≫ s)
+    (centres : IsPullback s₁ (𝟙 S) h s) :
+    IsPullback (pairMap s s₁ h (𝟙 S) w) s₁.ker.deformationSpaceProj
+      s.ker.deformationSpaceProj h ∧
+    Etale (pairMap s s₁ h (𝟙 S) w) ∧
+    Compatible g (h ≫ g) s s₁ h (𝟙 S) (pairMap s s₁ h (𝟙 S) w) ∧
+    IsIso (conormalMap s s₁ h (𝟙 S) w) ∧
+    ∃ ν : s₁.ker.normalCone ⟶ s.ker.normalCone,
+      ν ≫ s.ker.normalConeToDeformationSpace =
+        s₁.ker.normalConeToDeformationSpace ≫ pairMap s s₁ h (𝟙 S) w ∧ IsIso ν := by
+  let hJ : ∀ ⦃U' : V₁.AffineZariskiSite⦄ ⦃U : V.AffineZariskiSite⦄
+      (hU : U'.1 ≤ h ⁻¹ᵁ U.1),
+      (s.ker.siteIdeal U).map (h.appLE U.1 U'.1 hU).hom ≤ s₁.ker.siteIdeal U' :=
+    fun {U' U} hU ↦
+      (s.ker.ideal_map_appLE_le_ideal_comap h ⟨U.1, U.2⟩ ⟨U'.1, U'.2⟩ hU).trans
+        (Scheme.IdealSheafData.le_def.mp
+          (Scheme.Modules.closedImmersion_conormal_functorial s₁ s h (𝟙 S) w).1 ⟨U'.1, U'.2⟩)
+  let D := Scheme.IdealSheafData.extendedReesPullbackData h s.ker s₁.ker hJ
+  have hideal : s₁.ker = s.ker.comap h := by
+    rw [← centres.isoPullback_hom_fst, Scheme.Hom.ker_comp_of_isIso,
+      Scheme.IdealSheafData.ker_fst_of_isClosedImmersion]
+  have hcov : ∀ x : V₁, ∃ (U' : V₁.AffineZariskiSite) (U : V.AffineZariskiSite)
+      (hU : U'.1 ≤ h ⁻¹ᵁ U.1), x ∈ U'.1 ∧
+      IsPushout (h.appLE U.1 U'.1 hU) (s.ker.toReesPresheaf.app (op U))
+        (s₁.ker.toReesPresheaf.app (op U')) (D.map hU) := by
+    intro x
+    obtain ⟨q, hx⟩ := Pairs.exists_mem h x
+    refine ⟨q.1.1, q.1.2, q.2, hx, ?_⟩
+    have e : (s.ker.siteIdeal q.1.2).map (h.appLE _ _ q.2).hom =
+        s₁.ker.siteIdeal q.1.1 := by
+      rw [hideal]
+      exact (Scheme.IdealSheafData.ideal_comap_appLE s.ker h
+        ⟨q.1.2.1, q.1.2.2⟩ ⟨q.1.1.1, q.1.1.2⟩ q.2).symm
+    exact rees_flat_pushout _ _ _ (h.flat_appLE q.1.2.2 q.1.1.2 q.2) e
+  have hp : IsPullback (pairMap s s₁ h (𝟙 S) w) s₁.ker.deformationSpaceProj
+      s.ker.deformationSpaceProj h :=
+    D.isPullback_comparison s.ker.coequifibered_toReesPresheaf
+      s₁.ker.coequifibered_toReesPresheaf hcov
+  have hc := pairMap_compatible g (h ≫ g) s s₁ h (𝟙 S) w (by simp)
+  obtain ⟨ν, _, _, hν, hπ, _⟩ := hc.2.2.2
+  have : IsClosedImmersion s.ker.normalConeToDeformationSpace :=
+    MorphismProperty.of_isPullback (P := @IsClosedImmersion)
+      (Scheme.Hom.isPullback_normalConeToDeformationSpace g s).flip inferInstance
+  have hνeq : ν = (zeroPairData h s.ker s₁.ker hJ).comparison _ _ := by
+    apply (cancel_mono s.ker.normalConeToDeformationSpace).mp
+    exact hν.trans (zeroPairData_toRees h s.ker s₁.ker hJ).symm
+  have hn := zeroPairData_isPullback h s.ker s₁.ker hJ hcov
+  rw [← hνeq] at hn
+  have hb : Scheme.Hom.normalConeProj g s ≫ s =
+      (relativeGluingData s.ker.coequifibered_toNormalConePresheaf).toBase := by
+    rw [← Scheme.Hom.purityNormalProjection_eq s g hs]
+    exact IsClosedImmersion.lift_fac _ _ _
+  have hb₁ : Scheme.Hom.normalConeProj (h ≫ g) s₁ ≫ s₁ =
+      (relativeGluingData s₁.ker.coequifibered_toNormalConePresheaf).toBase := by
+    rw [← Scheme.Hom.purityNormalProjection_eq s₁ (h ≫ g) hs₁]
+    exact IsClosedImmersion.lift_fac _ _ _
+  rw [← hb, ← hb₁] at hn
+  have hnormal := IsPullback.of_bot hn hπ centres.flip
+  refine ⟨hp, MorphismProperty.of_isPullback (P := @Etale) hp.flip inferInstance, hc,
+    (Scheme.Modules.closedImmersion_conormal_flat_base_change s₁ s h (𝟙 S) w
+      centres.isLimit _ rfl).2 inferInstance, ν, hν, ?_⟩
+  exact hnormal.isIso_fst_of_isIso
+
+/-- Identification of the same normal cone with the symmetric-algebra bundle, including
+its normalized representative map and its zero section. This makes explicit the bundle
+used in both functoriality assertions: their zero-fibre comparison on every chart sends
+[a/t] to [h-sharp(a)/t], hence is the linear map of these bundles induced by conormalMap.
+Source: sk-thm-dnc, Local construction; Stacks 0632--0633
+(blueprint: lem-trf-section-rees-base-change-etale).
+Proof: Centred coordinates give the conormal rank and invertibility of the canonical
+symmetric comparison. Take the existing normalized Rees-cone comparison and the
+isomorphism induced by the symmetric-algebra anti-equivalence. Their composite is the
+coneToBundle map specified by section geometry, which supplies its projection and
+zero-section identities. -/
+theorem normal_bundle {V S : Scheme.{u}} [IsNoetherian S]
+    (d : ℕ) (g : V ⟶ S) [SmoothOfRelativeDimension d g] [IsSeparated g]
+    [LocallyOfFiniteType g] [QuasiCompact g] (s : S ⟶ V) [IsClosedImmersion s]
+    (hs : s ≫ g = 𝟙 S) :
+    ∃ (_ : (ConormalGradedAlgebra.piece s 1).IsFiniteLocallyFreeOfRank d)
+      (_ : IsIso (ConormalGradedAlgebra.symmetricComparison s))
+      (q : s.ker.normalCone ≅ PurityNormalBundle.normalCone s)
+      (e : PurityNormalBundle.normalCone s ≅
+        VectorBundleZeroSection.scheme S d (ConormalGradedAlgebra.piece s 1)),
+      Etale.FiniteSmoothPurity.ReesConeNormalized s q ∧
+      e = (Over.forget S).mapIso
+        ((ObjectProperty.ι (fun Y : Over S ↦ IsAffineHom Y.hom)).mapIso
+          (((VectorBundleZeroSection.antiEquivalence S).inverse.mapIso
+            (ObjectProperty.isoMk _
+              (asIso (ConormalGradedAlgebra.symmetricComparison s)))).unop)) ∧
+      (q ≪≫ e).hom ≫ VectorBundleZeroSection.π S d (ConormalGradedAlgebra.piece s 1) =
+        Scheme.Hom.normalConeProj g s ∧
+      s.normalConeZeroSection ≫ (q ≪≫ e).hom =
+        VectorBundleZeroSection.zero S d (ConormalGradedAlgebra.piece s 1) := by
+  obtain ⟨_, _, hE, hSym⟩ :=
+    SmoothSectionCentredCoordinates.exists_centred_coordinates d g s hs
+  let := hE
+  let := hSym
+  let q := Etale.FiniteSmoothPurity.reesConeComparison s
+  let e : PurityNormalBundle.normalCone s ≅
+      VectorBundleZeroSection.scheme S d (ConormalGradedAlgebra.piece s 1) :=
+    (Over.forget S).mapIso
+      ((ObjectProperty.ι (fun Y : Over S ↦ IsAffineHom Y.hom)).mapIso
+        (((VectorBundleZeroSection.antiEquivalence S).inverse.mapIso
+          (ObjectProperty.isoMk _
+            (asIso (ConormalGradedAlgebra.symmetricComparison s)))).unop))
+  obtain ⟨_, e', he', hπ, hz, _⟩ := SectionReesNoetherianGeometry.geometry d g s hs
+  have he : (q ≪≫ e).hom = e'.hom := by
+    rw [he']
+    rfl
+  exact ⟨hE, hSym, q, e, Etale.FiniteSmoothPurity.reesConeComparison_spec s, rfl,
+    he ▸ hπ, he ▸ hz⟩
+
+end AlgebraicGeometry.SectionReesBaseChange

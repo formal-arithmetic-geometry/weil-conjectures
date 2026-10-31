@@ -1,0 +1,197 @@
+/-
+Copyright (c) 2026 Bin Wu. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Bin Wu
+-/
+module
+
+public import WeilConjectures.AlgebraicGeometry.SpCoordinateAdjunction.SmoothPurityCoordinateTensorComparisons
+public import WeilConjectures.AlgebraicGeometry.SpChartAdmissibility.SmoothPurityTowerChartAdmissibility
+public import WeilConjectures.AlgebraicGeometry.SpTowerP1.SmoothPurityTowerP1Adjunction
+public import WeilConjectures.AlgebraicGeometry.SpTowerCalculus.CoefficientTowerShriekCalculus
+public import WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicCoefficientTwistsUnrestricted
+public import WeilConjectures.AlgebraicGeometry.Affine.Trace.AffineTraceTower
+import WeilConjectures.SmoothPurity.PurityFiniteSetting.Kummer.PurityFiniteKummerLevel
+import WeilConjectures.Algebra.Homology.CanonicalTensorPullbackOfUniverses.RingedTopoiCanonicalTensorPullbackOfUniverses
+import WeilConjectures.AlgebraicGeometry.SmoothPurity.AmbTateRootProjectionReduction
+import WeilConjectures.AlgebraicGeometry.Finite.FiniteRootSiteComparison
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleTwistLine
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateTwist
+import WeilConjectures.AlgebraicGeometry.Sites.Kummer
+import Mathlib.Algebra.Module.ZMod
+import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
+import Mathlib.CategoryTheory.Sites.Monoidal
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import WeilConjectures.AlgebraicGeometry.EtaleConstantRingModuleEquivalence
+import WeilConjectures.CategoryTheory.RingedSiteModules
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+import WeilConjectures.ConstructibleSheaf.Defs
+import WeilConjectures.EtaleCohomology.TateTwist.Sheaf
+import WeilConjectures.ConstructibleSheaf.Pullback
+import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
+import WeilConjectures.AlgebraicGeometry.SmoothPurity.RootTowerFiniteTensor
+
+/-! # Ordered coordinate adjunctions on ordinary derived towers
+
+Source: blueprint latest, sec-smooth-purity/sk-prop-sp-tower-geometric,
+`sk-prop-sp-tower-geometric-gluing.proof.md`, Local pairs and Levels
+(blueprint: def-sp-coordinate-right-comparisons).
+
+All levels n denote exponent n+1. The full subcategories below have uniform bounds,
+without normalization. Every arrow belongs to an ordinary derived tower category.
+-/
+
+@[expose] public noncomputable section
+set_option autoImplicit false
+set_option genSizeOfSpec false
+set_option genCtorIdx false
+set_option genSizeOf false
+set_option genInjectivity false
+set_option synthInstance.maxSize 4096
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
+
+universe u v v' w w' z z'
+open CategoryTheory CategoryTheory.Limits Opposite
+open AlgebraicGeometry AlgebraicGeometry.Scheme WeilConjectures
+
+namespace AlgebraicGeometry.ProEtale.SpCoordinateAdjunction
+
+variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+  [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+
+/-- The original coordinate realization of a right-functor comparison.
+Source: Local pairs, cancellation of the common realization
+(blueprint: def-sp-coordinate-right-comparisons). -/
+def composeRight (b : SpTowerShriek.Base l E)
+    (q : SpTowerCalculus.Coordinates l E b) {X T Y : Scheme.{u}}
+    (G : SpTowerShriek.D l E Y ⥤ SpTowerShriek.D l E T)
+    (H : SpTowerShriek.D l E T ⥤ SpTowerShriek.D l E X)
+    (R : SpTowerShriek.D l E Y ⥤ SpTowerShriek.D l E X) (a : G ⋙ H ≅ R) :=
+  SpTowerCalculus.composeTransport l E b q G H ≪≫ transportedIso l E b q a
+
+/-- The identity on each pullback section, followed by the specified tensor
+comparison, identifies an iterated right factor with its chart normal form.
+Source: Local pairs, successive pulled-back Tate factors
+(blueprint: def-sp-coordinate-right-comparisons). -/
+structure PullTwist (b : SpTowerShriek.Base l E)
+    (o : SpTowerShriek.Operations l E b) {X T Y : Scheme.{u}}
+    (e : X ⟶ T) (p : T ⟶ Y) (wT : SpChartAdmissibility.Twists l E T)
+    (wX : SpChartAdmissibility.Twists l E X) (d : ℕ) where
+  ordinary : (o.geometry e).pull.obj (wT.tower d) ≅ wX.tower d
+  comparison : projectionRight l E b o p wT d ⋙
+    SpTowerShriek.pull l E b (o.geometry e) ≅ chartRight l E b o e p wX d
+  normalization : ∀ K : SpTowerShriek.D l E Y,
+    comparison.app K =
+      ((SpTowerShriek.pull l E b (o.geometry e)).commShiftIso (2 * (d : ℤ))).app
+        ((SpTowerShriek.tensor l E b T).obj
+          ((SpTowerShriek.pull l E b (o.geometry p)).obj K, line l E wT d)) ≪≫
+      (shiftFunctor _ (2 * (d : ℤ))).mapIso
+        (((o.geometry e).tensorPullback.app
+          ((SpTowerShriek.pull l E b (o.geometry p)).obj K, line l E wT d)) ≪≫
+          (SpTowerShriek.tensor l E b X).mapIso (Iso.prod (Iso.refl _)
+            (((o.geometry e).pull.mapDerivedCategorySingleFunctor 0).app
+              (wT.tower d) ≪≫
+                (DerivedCategory.singleFunctor (SpTowerShriek.S l E X) 0).mapIso ordinary)))
+
+/-- Evaluate the ordinary adjunct of a line pullback in the specified finite-line
+coordinates. This definition uses the actual ordinary adjunction, before deriving.
+Source: strict Tate pullback (blueprint: def-sp-coordinate-right-comparisons). -/
+def pullSection {b : SpTowerShriek.Base l E} {o : SpTowerShriek.Operations l E b}
+    {X T Y : Scheme.{u}} {e : X ⟶ T} {p : T ⟶ Y}
+    {wT : SpChartAdmissibility.Twists l E T} {wX : SpChartAdmissibility.Twists l E X}
+    {d : ℕ} (a : PullTwist l E b o e p wT wX d) (n : ℕ) (U : T.ProEtᵒᵖ)
+    (x : (spEllTwistLine l E T n d).val.obj U) :=
+  ((proEtaleConstantRingPushforward (SpTowerShriek.R l E n) e).map
+    (wX.level n d).hom).val.app U
+      (SpTowerClasses.adjointSection l E (o.geometry e) a.ordinary.hom n U
+        ((wT.level n d).inv.val.app U x))
+
+/-- The specified right evaluation component for the whole chart. It uses only
+realization, exact pullback, normalized tensor evaluation and the ordinary shift.
+Source: Levels (blueprint: def-sp-coordinate-right-comparisons). -/
+def rightEvaluation (b : SpTowerShriek.Base l E) (o : SpTowerShriek.Operations l E b)
+    (q : SpTowerCalculus.Coordinates l E b) {U T Y : Scheme.{u}}
+    (e : U ⟶ T) (p : T ⟶ Y) (w : SpChartAdmissibility.Twists l E U) (d n : ℕ)
+    (K : spDerivedCoefficientTowers l E Y (q.abelian Y)) :=
+  (SpTowerCalculus.levelComparison l E b q U n).inv.app
+    ((originalChartRight l E b o q e p w d).obj K) ≫
+  (SpTowerShriek.Ev l E U n).map
+    (rightRealization l E b q (chartRight l E b o e p w d) K).hom ≫
+  ((SpTowerShriek.Ev l E U n).commShiftIso (2 * (d : ℤ))).hom.app
+    ((SpTowerShriek.tensor l E b U).obj
+      ((SpTowerShriek.pull l E b (o.geometry e)).obj
+        ((SpTowerShriek.pull l E b (o.geometry p)).obj
+          ((SpTowerCalculus.realization l E b Y (q.abelian Y)).functor.obj K)), line l E w d)) ≫
+  (shiftFunctor _ (2 * (d : ℤ))).map
+    (((b.calculus U).tensorEvaluation n).hom.app
+      ((SpTowerShriek.pull l E b (o.geometry e)).obj
+        ((SpTowerShriek.pull l E b (o.geometry p)).obj
+          ((SpTowerCalculus.realization l E b Y (q.abelian Y)).functor.obj K)), line l E w d) ≫
+      ((b.calculus U).levelClosed n).tensor.map
+        (Prod.mkHom
+          (((o.geometry e).pullEvaluation n).hom.app _ ≫
+            (proEtaleConstantRingDerivedPullback (SpTowerShriek.R l E n) e).map
+              (((o.geometry p).pullEvaluation n).hom.app _ ≫
+                (proEtaleConstantRingDerivedPullback (SpTowerShriek.R l E n) p).map
+                  ((SpTowerCalculus.levelComparison l E b q Y n).hom.app K))) (𝟙 _)))
+
+/-- The analogous specified right evaluation for a projection, with one pullback.
+Source: Levels (blueprint: def-sp-coordinate-right-comparisons). -/
+def projectionEvaluation (b : SpTowerShriek.Base l E)
+    (o : SpTowerShriek.Operations l E b) (q : SpTowerCalculus.Coordinates l E b)
+    {T Y : Scheme.{u}} (p : T ⟶ Y) (w : SpChartAdmissibility.Twists l E T) (d n : ℕ)
+    (K : spDerivedCoefficientTowers l E Y (q.abelian Y)) :=
+  (SpTowerCalculus.levelComparison l E b q T n).inv.app
+    ((originalProjectionRight l E b o q p w d).obj K) ≫
+  (SpTowerShriek.Ev l E T n).map
+    (rightRealization l E b q (projectionRight l E b o p w d) K).hom ≫
+  ((SpTowerShriek.Ev l E T n).commShiftIso (2 * (d : ℤ))).hom.app
+    ((SpTowerShriek.tensor l E b T).obj
+      ((SpTowerShriek.pull l E b (o.geometry p)).obj
+        ((SpTowerCalculus.realization l E b Y (q.abelian Y)).functor.obj K), line l E w d)) ≫
+  (shiftFunctor _ (2 * (d : ℤ))).map
+    (((b.calculus T).tensorEvaluation n).hom.app
+      ((SpTowerShriek.pull l E b (o.geometry p)).obj
+        ((SpTowerCalculus.realization l E b Y (q.abelian Y)).functor.obj K), line l E w d) ≫
+      ((b.calculus T).levelClosed n).tensor.map
+        (Prod.mkHom
+          (((o.geometry p).pullEvaluation n).hom.app _ ≫
+            (proEtaleConstantRingDerivedPullback (SpTowerShriek.R l E n) p).map
+              ((SpTowerCalculus.levelComparison l E b q Y n).hom.app K)) (𝟙 _)))
+
+/-- The zero-coordinate right-functor identification uses only the normalized
+ordinary identity pullback, coefficient unit and shift zero.
+Source: d=0 (blueprint: def-sp-coordinate-right-comparisons). -/
+structure ZeroComparison (b : SpTowerShriek.Base l E) (o : SpTowerShriek.Operations l E b)
+    (Y : Scheme.{u}) (w : SpChartAdmissibility.Twists l E Y) where
+  tensor : SpTowerP1.TensorData l E b Y
+  ordinaryIdentity : (o.geometry (𝟙 Y)).pull ≅ 𝟭 (SpTowerShriek.S l E Y)
+  identity_normalized : ∀ (n : ℕ) (M : SpTowerShriek.S l E Y),
+    (SpTowerShriek.ev l E Y n).map (ordinaryIdentity.hom.app M) =
+      ((o.geometry (𝟙 Y)).ordinaryPullEvaluation n).hom.app M ≫
+        (proEtaleStalkIdentityPullback (SpTowerShriek.R l E n) Y).hom.app
+          ((SpTowerShriek.ev l E Y n).obj M)
+  ordinaryUnit : w.tower 0 ≅ SpTowerClasses.coefficient Y (SpTowerClasses.Arings l E Y)
+  unit_normalized : ∀ (n : ℕ) (V : Y.ProEtᵒᵖ)
+    (x : ((SpTowerShriek.ev l E Y n).obj (w.tower 0)).val.obj V),
+    HEq (((SpTowerShriek.ev l E Y n).map ordinaryUnit.hom).val.app V x)
+      ((w.level n 0).hom.val.app V x)
+
+/-- The canonical zero-dimensional component, from its normalized ordinary data.
+Source: d=0 (blueprint: def-sp-coordinate-right-comparisons). -/
+def ZeroComparison.component {b : SpTowerShriek.Base l E}
+    {o : SpTowerShriek.Operations l E b} {Y : Scheme.{u}}
+    {w : SpChartAdmissibility.Twists l E Y} (a : ZeroComparison l E b o Y w)
+    (K : SpTowerShriek.D l E Y) :
+    (projectionRight l E b o (𝟙 Y) w 0).obj K ≅ K :=
+  (shiftFunctorZero _ ℤ).app _ ≪≫
+    (SpTowerShriek.tensor l E b Y).mapIso
+      (Iso.prod
+        (((Functor.mapDerivedCategoryNatIso a.ordinaryIdentity) ≪≫
+          Functor.mapDerivedCategoryIdIso _).app K)
+        ((DerivedCategory.singleFunctor _ 0).mapIso a.ordinaryUnit)) ≪≫
+    a.tensor.rightUnit l E K
+
+end AlgebraicGeometry.ProEtale.SpCoordinateAdjunction

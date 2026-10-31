@@ -13,6 +13,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
 public import WeilConjectures.SixFunctors.Etale.Derived.ReductionHom
 
+import WeilConjectures.AlgebraicGeometry.Integral.Finite.IntegralFiniteHomEstimate
+
 /-!
 # Integral coefficients: internal hom, exceptional adjoint and normalized towers
 
@@ -50,6 +52,12 @@ The comparison maps of the blueprint are only asserted to exist, as in
 -/
 
 @[expose] public section
+
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+attribute [local irreducible] _root_.DerivedCategory.monoidalClosed
+attribute [local irreducible] CategoryTheory.Functor.mapDerivedCategory
+attribute [local irreducible] CategoryTheory.Functor.mapDerivedCategoryFactors
 
 universe u
 
@@ -265,6 +273,7 @@ variable [IsDomain Λ] [IsNoetherianRing Λ] [IsAdicComplete I Λ] [Finite (Λ �
   {ϖ : Λ} (hϖ : ϖ ∈ nonZeroDivisors Λ) (hI : I = Ideal.span {ϖ})
   {k : Type u} [Field k] [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))]
 
+set_option linter.unusedSectionVars false in
 include hϖ hI in
 /-- Blueprint `cor-coef-integral-internal-hom`: Integral constructible internal Hom.
 
@@ -300,6 +309,32 @@ theorem boundedConstructibleIntegral_derivedHom {X : Scheme.{u}} (aX : X ⟶ Spe
             (((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).obj L)) :=
   ⟨⟨derivedComplete_derivedHom I hϖ hI hL.1, sorry⟩,
     fun n _ _ _ _ hη hη' ↦ nonempty_iso_reductionModIdeal_derivedHom I hϖ hI n hη hη', sorry⟩
+
+by
+  obtain ⟨a₀, b₀, hKab⟩ := hK.2
+  obtain ⟨c₀, e₀, hLce⟩ := hL.2
+  have estimate (d : ℕ) (hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞))
+      (a b c e : ℤ)
+      (hKt : ∀ n : ℕ, DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b
+        ((reductionModIdeal Λ X (I ^ (n + 1))).obj K))
+      (hLt : ∀ n : ℕ, DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X c e
+        ((reductionModIdeal Λ X (I ^ (n + 1))).obj L)) (n : ℕ) :
+      DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X
+          ((reductionModIdeal Λ X (I ^ (n + 1))).obj
+            (((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).obj L)) ∧
+        DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X
+          (c - b - 2 * (d : ℤ)) (e - a + 2 * (d : ℤ))
+          ((reductionModIdeal Λ X (I ^ (n + 1))).obj
+            (((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).obj L)) := by
+    exact integralFiniteHomEstimate I hϖ hI aX n
+      (hKab n).1 (hLce n).1 d hd a b c e (hKt n) (hLt n)
+  obtain ⟨d, hd⟩ := exists_topologicalKrullDim_le aX
+  refine ⟨⟨derivedComplete_derivedHom I hϖ hI hL.1,
+    c₀ - b₀ - 2 * (d : ℤ), e₀ - a₀ + 2 * (d : ℤ),
+    fun n ↦ estimate d hd a₀ b₀ c₀ e₀ (fun m ↦ (hKab m).2) (fun m ↦ (hLce m).2) n⟩,
+    fun n _ _ _ _ hη hη' ↦ nonempty_iso_reductionModIdeal_derivedHom I hϖ hI n hη hη', ?_⟩
+  intro d hd a b c e hKt hLt n
+  exact (estimate d hd a b c e hKt hLt n).2
 
 end Constructible
 
