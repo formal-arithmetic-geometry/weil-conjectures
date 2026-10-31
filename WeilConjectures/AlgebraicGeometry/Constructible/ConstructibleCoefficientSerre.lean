@@ -373,7 +373,7 @@ private def fixedFiniteSieve
         G.pushforwardOverMapIso g⟩⟩
 
 private theorem fixedFiniteSieve_iff
-    {X : Scheme.{u}} (A : Type (u + 1)) [CommRing A]
+    {X : Scheme.{u}} (A : Type (u + 1)) [CommRing A] [Finite A]
     (F : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} A)) :
     fixedFiniteSieve A F (⊤_ X.ProEt) ∈ ProEt.topology X (⊤_ X.ProEt) ↔
       IsFiniteLocallyConstant A F := by
@@ -412,11 +412,16 @@ private theorem fixedFiniteSieve_iff
     let c := ((ProEt.sliceEquiv X (U i)).constantSheafSheafCongrIso
       ((ProEt.topology X).over (U i)) (ProEt.topology (U i).left)
       D (Over.mkIdTerminal (X := U i))).app M
-    exact ⟨M, hM, ⟨(upperStarIsoLocalizationRestriction D (U i).hom (U i).prop).app F ≪≫
-      r.symm ≪≫ E.functor.mapIso (e ≪≫
-        ((ProEt.topology X).overPullbackConstantSheafIso D (U i)).app M) ≪≫ c⟩⟩
+    exact ⟨M, Module.Finite.of_finite,
+      ⟨(upperStarIsoLocalizationRestriction D (U i).hom (U i).prop).app F ≪≫
+        r.symm ≪≫ E.functor.mapIso (e ≪≫
+          ((ProEt.topology X).overPullbackConstantSheafIso D (U i)).app M) ≪≫ c⟩⟩
   · intro h
-    obtain ⟨I, U, f, hf, he⟩ := finiteModels_over A F h
+    obtain ⟨I, U, f, hf, he⟩ := finiteModels_over A F (by
+      obtain ⟨ι, W, g, hg, h⟩ := h
+      refine ⟨ι, W, g, hg, fun i ↦ ?_⟩
+      obtain ⟨M, hM, e⟩ := h i
+      exact ⟨M, Module.finite_of_finite A, e⟩)
     apply (ProEt.topology X).superset_covering
       ((Sieve.generate_le_iff _ _).mpr ?_) (Precoverage.generate_mem_toGrothendieck hf)
     rintro V g ⟨i⟩
@@ -425,7 +430,7 @@ private theorem fixedFiniteSieve_iff
       (((ProEt.topology X).overPullbackConstantSheafIso (ModuleCat.{u + 1} A) (U i)).app M).symm⟩⟩
 
 private theorem relative_finite_iff
-    {X Y : Scheme.{u}} (f : X ⟶ Y) (A : Type (u + 1)) [CommRing A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) (A : Type (u + 1)) [CommRing A] [Finite A]
     (F : pbcModules X ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj
       (adicLisseConstantRing Y A))) :
     IsRelativelyFiniteLisseModule f A F ↔

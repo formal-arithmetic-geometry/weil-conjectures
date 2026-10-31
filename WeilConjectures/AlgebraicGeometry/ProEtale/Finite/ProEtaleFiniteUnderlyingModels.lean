@@ -56,8 +56,11 @@ theorem proEtale_finiteUnderlyingModels_of_locallyConstant
   let R := ULift.{u + 1, u} A
   let J := ProEt.topology X
   let F' := (proEtaleModuleRestriction X A).obj F
-  obtain ⟨I, V, g, hg, he⟩ := ProEtale.finiteModels_over R F'
-    ((finiteLocal_iff X A F).mpr ⟨hl, hs⟩)
+  obtain ⟨I, V, g, hg, he⟩ := ProEtale.finiteModels_over R F' (by
+    obtain ⟨ι, W, g, hg, h⟩ := (finiteLocal_iff X A F).mpr ⟨hl, hs⟩
+    refine ⟨ι, W, g, hg, fun i ↦ ?_⟩
+    obtain ⟨M, hM, e⟩ := h i
+    exact ⟨M, Module.finite_of_finite R, e⟩)
   intro U
   let a : U ⟶ ProEt.mk (𝟙 X) :=
     MorphismProperty.Over.homMk U.hom (Category.comp_id _)

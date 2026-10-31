@@ -145,12 +145,13 @@ private noncomputable def sectionsLimIso :
       limMap_π, limit.lift_π_assoc]
     rfl)
 
+open SheafOfModules in
 /-- Restricted K-injective complexes compute derived global sections over the completed ring.
 Source: Stacks 0D6E, through `coefficientRestrictionSections_quasiIso`. -/
 private theorem restrictedSectionsUnit_isIso (n : ℕ)
     (I : CochainComplex (scalarReductionTarget l E W n) ℤ) (hI : I.IsKInjective) :
     letI : IsGrothendieckAbelian.{max u (t+1)} (scalarReductionSource l E W) :=
-      (SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses.{t+1, t, u}
+      (grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses.{t+1, t, u}
         (Scheme.ProEt.topology W) (completedIntegralCommRingSheafUnrestricted l E W)).1
     IsIso ((coefficientOrdinarySections.{u, t+1, t} (Scheme.ProEt.topology W)
         (completedIntegralCommRingSheafUnrestricted l E W)).rightDerivedFunctorUnitQ
@@ -235,32 +236,32 @@ private theorem scalarSectionsDerived (n : ℕ) :
   let B := CoefficientSectionsCoreComparison.standardPair Γn
   have := A.universal
   have := B.universal
+  let τ₀ : T ⋙ Γc ≅ Γn := ordinaryScalarSectionsIso l E W n
   let τ := Functor.isoWhiskerRight
-    (NatIso.mapHomologicalComplex (ordinaryScalarSectionsIso l E W n) (.up ℤ)) DerivedCategory.Q
+    (NatIso.mapHomologicalComplex τ₀ (.up ℤ)) DerivedCategory.Q
   let κ := Functor.rightDerivedNatIso _ _ A.unit B.unit
     (HomologicalComplex.quasiIso (scalarReductionTarget l E W n) (.up ℤ)) τ
   refine ⟨κ, fun I ↦ ?_⟩
   have h := Functor.rightDerivedNatTrans_app _ _ A.unit B.unit
     (HomologicalComplex.quasiIso (scalarReductionTarget l E W n) (.up ℤ)) τ.hom I
   unfold CoefficientComparisonEquation
-  simpa only [Category.assoc] using h
+  exact (Category.assoc _ _ _).symm.trans h
+
 open SheafOfModules in
 private theorem scalarSectionsCoherenceExists :
     Nonempty (CoefficientDerivedSystemScalarCoherence l E W) := by
-  classical
-  choose s hs using scalarSectionsComparison l E W
+  choose s hs using scalarSectionsDerived l E W
   let D : CoefficientDerivedSystemScalarData l E W :=
     { scalarSections := s
-      ordinaryScalarSections := fun n ↦ ordinaryRestrictionIso.{t+1, t, u}
-        (Scheme.ProEt.topology W) (completedIntegralCommRingProjectionUnrestricted l E W n) }
+      ordinaryScalarSections := ordinaryScalarSectionsIso l E W }
   refine ⟨{ toCoefficientDerivedSystemScalarData := D
             ordinaryScalarSections_formula := ?_
             scalarSections_model := ?_ }⟩
-  · intro n M f V b
-    let : EssentiallySmall.{max u (t+1)} W.ProEt := essentiallySmallSelf _
-    exact ordinaryRestrictionIso_formula.{t+1, t, u} (Scheme.ProEt.topology W)
-      (completedIntegralCommRingProjectionUnrestricted l E W n) M f V b
-  · intro n I
+  · unfold CoefficientOrdinaryScalarSectionsFormula
+    intro n M f V b
+    rfl
+  · unfold CoefficientScalarSectionsModel
+    intro n I
     exact hs n I
 
 open SheafOfModules in
