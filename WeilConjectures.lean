@@ -15582,6 +15582,7 @@ public import WeilConjectures.SmoothPurity.OrientationCanonical
 public import WeilConjectures.SmoothPurity.OrientationFinite
 public import WeilConjectures.SmoothPurity.OrientationOfDiagonalClass
 public import WeilConjectures.SmoothPurity.OrientationOpenImmersion
+public import WeilConjectures.SmoothPurity.OrientationOpenImmersionComposition
 public import WeilConjectures.SmoothPurity.OrientationOpenImmersionEtale
 public import WeilConjectures.SmoothPurity.OrientationTransition
 public import WeilConjectures.SmoothPurity.OrientationTransitionEtale
@@ -15589,6 +15590,7 @@ public import WeilConjectures.SmoothPurity.OrientationTransitionFrame
 public import WeilConjectures.SmoothPurity.OrientationTransitionReading
 public import WeilConjectures.SmoothPurity.OrientationTransitionShift
 public import WeilConjectures.SmoothPurity.OrientationTransitionSquares
+public import WeilConjectures.SmoothPurity.OrientationTransitionTate
 public import WeilConjectures.SmoothPurity.OrientationTransitionUnit
 public import WeilConjectures.SmoothPurity.OrientationTransitionUpperShriek
 public import WeilConjectures.SmoothPurity.OrientationUnique

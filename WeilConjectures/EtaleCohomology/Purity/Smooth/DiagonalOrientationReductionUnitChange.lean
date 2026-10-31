@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReductionUnitPullback
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReductionUnitChangeConstant
 public import WeilConjectures.EtaleCohomology.TateTwist.KummerClassCoefficientChange
 
 /-!
@@ -194,7 +195,7 @@ lemma extendScalarsConstantZModIso_inv_comp_extendScalarsChangeMap_app :
         (Sheaf.restrictScalars X.smallEtaleTopology ρ).map
           (extendScalarsConstantZModIso (Λ := Λ') X (n := 0) (by simp)).hom =
       extendScalarsUnitMap ρ X := by
-  sorry
+  exact extendScalarsConstantZModIso_inv_comp_changeMap_app_comp ρ X
 
 /-- The identification `Λ_X ≅ (Λ ⊗ ℤ)[0]` pulled back from `Spec ℤ[1/n]` is the direct one. -/
 lemma constantComplexIsoSingleFunctorExtendScalarsInt_eq_ofUnit (Γ : Type (u + 1)) [CommRing Γ]

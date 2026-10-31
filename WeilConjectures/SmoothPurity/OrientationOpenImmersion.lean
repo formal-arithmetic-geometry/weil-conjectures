@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionUpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReductionOpenImmersion
+public import WeilConjectures.SmoothPurity.OrientationOpenImmersionComposition
 public import WeilConjectures.SmoothPurity.OrientationUnique
 
 /-!
@@ -131,12 +132,58 @@ theorem isIntegralSmoothOrientation_integralOpenImmersionOrientation :
     IsIntegralSmoothOrientation ℓ E j 0 (integralOpenImmersionOrientation ℓ j E) :=
   sorry
 
+/-- The unit comparison `𝟙 ≅ T 𝟙` of the extension of scalars `T` along `𝒪_E ⟶ E ⟶ ℚ̄_ℓ`, for
+the monoidal functors `boundedConstructibleExtendScalars` and `constructibleToPadicAlgCl`. -/
+noncomputable def integersToPadicAlgClUnitIso (T : Over (Spec (.of k))) [LocallyOfFiniteType T.hom]
+    [QuasiCompact T.hom] [IsSeparated T.hom] :
+    𝟙_ (Dᵇc(T.left)⟦Profinite.padicAlgClRingObj ℓ⟧) ≅
+      (boundedConstructibleExtendScalars T.left ℓ E ⋙ constructibleToPadicAlgCl T.left ℓ E).obj
+        (𝟙_ _) :=
+  Functor.Monoidal.εIso (constructibleToPadicAlgCl T.left ℓ E) ≪≫
+    (constructibleToPadicAlgCl T.left ℓ E).mapIso
+      (Functor.Monoidal.εIso (boundedConstructibleExtendScalars T.left ℓ E))
+
+/-- In degree `0`, the comparison `T(𝒪_{E,X}(0)[0]) ≅ ℚ̄_ℓ,X(0)[0]`
+(`extendScalarsIntegralTateTwistBoundedConstructibleIso`) is compatible with the identifications
+of both sides with the units `𝒪_{E,X}` and `ℚ̄_ℓ,X` and with the unit comparison of `T`. -/
+theorem extendScalarsIntegralTateTwistBoundedConstructibleIso_zero :
+    (extendScalarsIntegralTateTwistBoundedConstructibleIso ℓ E X 0 (2 * (0 : ℕ))).inv ≫
+      (boundedConstructibleExtendScalars X.left ℓ E ⋙ constructibleToPadicAlgCl X.left ℓ E).map
+        (((shiftFunctorZero' _ (2 * ((0 : ℕ) : ℤ)) (by simp)).app _).hom ≫
+          (integralTateTwistBoundedConstructibleZeroIso ℓ (X := X) E).hom) =
+    (ObjectProperty.fullyFaithfulι _).preimage
+        (((shiftFunctorZero' _ (2 * ((0 : ℕ) : ℤ)) (by simp)).app _).hom ≫
+          (tateTwistDerivedZeroIso ℓ X.left).hom) ≫
+      (integersToPadicAlgClUnitIso ℓ E X).hom :=
+  sorry
+
+/-- The coefficient comparison `T(Rj^! 𝒪_{E,Y}) ≅ Rj^! ℚ̄_ℓ,Y`
+(`integersToPadicAlgClUpperShriekUnitIso`) of an open immersion `j` is compatible with the
+identifications `Rj^! 𝒪_{E,Y} ≅ j^* 𝒪_{E,Y} ≅ 𝒪_{E,X}` and `Rj^! ℚ̄_ℓ,Y ≅ ℚ̄_ℓ,X`
+(`boundedConstructibleUpperShriekUnitIso_padicAlgCl`) and with the unit comparison of `T`. -/
+theorem extendScalars_map_upperShriekUnit_comp_integersToPadicAlgClUpperShriekUnitIso :
+    (boundedConstructibleExtendScalars X.left ℓ E ⋙ constructibleToPadicAlgCl X.left ℓ E).map
+        ((Functor.Monoidal.εIso
+          (boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E.1) ℓ j)).hom ≫
+          ((boundedConstructibleUpperShriekIsoUpperStar_padicIntegers ℓ E.1 j).app _).inv) ≫
+      (integersToPadicAlgClUpperShriekUnitIso ℓ E j).hom =
+    (integersToPadicAlgClUnitIso ℓ E X).inv ≫
+      (boundedConstructibleUpperShriekUnitIso_padicAlgCl ℓ j).inv :=
+  sorry
+
 /-- The extension of scalars to `ℚ̄_ℓ` of the integral canonical orientation of an open immersion
 is the canonical orientation `openImmersionOrientation`. -/
 theorem extendScalarsIntegralOrientation_integralOpenImmersionOrientation :
     extendScalarsIntegralOrientation ℓ E j 0 (integralOpenImmersionOrientation ℓ j E) =
-      openImmersionOrientation ℓ j :=
-  sorry
+      openImmersionOrientation ℓ j := by
+  rw [extendScalarsIntegralOrientation, integralOpenImmersionOrientation]
+  have h₁ := extendScalarsIntegralTateTwistBoundedConstructibleIso_zero ℓ (X := X) E
+  have h₂ := extendScalars_map_upperShriekUnit_comp_integersToPadicAlgClUpperShriekUnitIso ℓ j E
+  simp only [Functor.map_comp, Category.assoc] at h₁ h₂ ⊢
+  simp only [h₂, reassoc_of% h₁, Iso.hom_inv_id_assoc]
+  apply (ObjectProperty.fullyFaithfulι _).map_injective
+  rw [Functor.map_comp, Functor.FullyFaithful.map_preimage, ι_map_openImmersionOrientation,
+    Category.assoc, Category.assoc]
 
 /-- The canonical orientation of an open immersion is a canonical orientation in the sense of
 `IsCanonicalSmoothOrientation`. -/
@@ -182,7 +229,10 @@ induced by the canonical orientation of `f` is a canonical orientation. -/
 theorem isCanonicalSmoothOrientation_compOpenImmersionOrientation :
     IsCanonicalSmoothOrientation ℓ (f ≫ j) d
       (compOpenImmersionOrientation ℓ f j d (smoothOrientationOfSmooth ℓ f d)) :=
-  sorry
+  ⟨integralCompOpenImmersionOrientation ℓ _ f j d (integralSmoothOrientation ℓ f d),
+    isIntegralSmoothOrientation_integralCompOpenImmersionOrientation ℓ _ f j d _
+      (isIntegralSmoothOrientation_integralSmoothOrientation ℓ f d),
+    extendScalarsIntegralOrientation_integralCompOpenImmersionOrientation ℓ _ f j d _⟩
 
 /-- Blueprint `sk-prop-sp-composition`, case of an open immersion: **the orientation of `f ≫ j`
 is that of `f` followed by `Rf^! ℚ̄_ℓ ≅ Rf^! Rj^! ℚ̄_ℓ ≅ R(f ≫ j)^! ℚ̄_ℓ`**. -/
