@@ -339,7 +339,6 @@ end ScalarAugmentation
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency false in
-attribute [local irreducible] compactRoosScalarFunctor
   SheafOfModules.changeOfRingsOfUniverses SheafOfModules.changeOfRingsHomOfUniverses
 
 end CategoryTheory
