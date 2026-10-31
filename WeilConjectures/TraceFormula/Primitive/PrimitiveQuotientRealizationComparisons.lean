@@ -175,6 +175,12 @@ import WeilConjectures.Algebra.Homology.KFlatTensorPreservesQuasiIsoIndependentC
 import WeilConjectures.CategoryTheory.Principal.PrincipalKoszulQuotientTowersSupplement
 import WeilConjectures.TraceFormula.Primitive.PrimitiveQuotientPullbackModelExistence
 import WeilConjectures.TraceFormula.Primitive.PrimitiveQuotientScalarModelExistence
+public import Mathlib.Algebra.Homology.DerivedCategory.KInjective
+public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Products
+public import WeilConjectures.ProperBaseChange.FlatAlgebraicInverseImageOfUniverses
+public import WeilConjectures.ProperBaseChange.RingedToposPullbackFilteredColimits
+public import WeilConjectures.SmoothPurity.SheafRingCoefficientOrdinaryAdjunction
 
 /-! # Primitive realization on simultaneous quotient complexes
 
@@ -206,6 +212,87 @@ variable {C : Type a} [Category.{b} C] {J : GrothendieckTopology C}
 
 private abbrev Mod (R : Sheaf J CommRingCat.{r}) :=
   SheafOfModules.{r} (SheafOfModules.derivedChangeRingIndependentCoefficients J R)
+
+private structure Ordinary {R S : Sheaf J CommRingCat.{r}} (φ : R ⟶ S) where
+  E : Mod R ⥤ Mod S
+  obj_eq : ∀ M, E.obj M = SheafOfModules.changeOfRings φ M
+  map_eq : ∀ {M N} (f : M ⟶ N), E.map f =
+    eqToHom (obj_eq M) ≫ SheafOfModules.changeOfRingsHom φ M f ≫ eqToHom (obj_eq N).symm
+  [additive : E.Additive]
+
+private def tmul {φ : R ⟶ S} (A : Ordinary φ) (P : Mod R) (U : Cᵒᵖ)
+    (s : S.obj.obj U) (x : P.val.obj U) : (A.E.obj P).val.obj U :=
+  (eqToHom (A.obj_eq P).symm).val.app U
+    ((toSheafify J (SheafOfModules.changeOfRingsPresheaf φ P).presheaf).app U
+      (s ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] x))
+
+private theorem adj_exists {φ : R ⟶ S} (A : Ordinary φ) :
+    ∃ adj : A.E ⊣ SheafOfModules.restrictScalars
+      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).map φ),
+      ∀ P U (x : P.val.obj U), (adj.unit.app P).val.app U x = tmul A P U 1 x := by
+  obtain ⟨_, _, h⟩ := SheafOfModules.sheafRingCoefficientOrdinaryAdjunction φ
+  obtain ⟨adj, hadj⟩ := h A.E A.obj_eq A.map_eq
+  refine ⟨adj, ?_⟩
+  intro P U x
+  have ht := hadj P (A.E.obj P) (eqToHom (A.obj_eq P).symm) U x
+  simp only [eqToHom_trans, eqToHom_refl, Adjunction.homEquiv_id] at ht
+  exact ht
+
+private def adj {φ : R ⟶ S} (A : Ordinary φ) := (adj_exists A).choose
+
+private theorem adj_unit {φ : R ⟶ S} (A : Ordinary φ) (P : Mod R)
+    (U : Cᵒᵖ) (x : P.val.obj U) :
+    ((adj A).unit.app P).val.app U x = tmul A P U 1 x :=
+  (adj_exists A).choose_spec P U x
+
+private theorem tmul_smul {φ : R ⟶ S} (A : Ordinary φ) (P : Mod R)
+    (U : Cᵒᵖ) (s : S.obj.obj U) (x : P.val.obj U) :
+    tmul A P U s x = s • tmul A P U 1 x := by
+  let η := (PresheafOfModules.sheafificationAdjunction.{r}
+    (𝟙 (SheafOfModules.derivedChangeRingIndependentCoefficients J S).obj)).unit.app
+      (SheafOfModules.changeOfRingsPresheaf φ P)
+  change (eqToHom (A.obj_eq P).symm).val.app U
+      (η.app U (s ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] x)) =
+    s • (eqToHom (A.obj_eq P).symm).val.app U
+      (η.app U ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] x))
+  rw [← ((eqToHom (A.obj_eq P).symm).val.app U).hom.map_smul,
+    ← (η.app U).hom.map_smul]
+  congr 2
+  change (s ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] x) =
+    (s * 1) ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] x
+  rw [mul_one]
+
+private theorem transpose {φ : R ⟶ S} (A : Ordinary φ)
+    (P : Mod R) (N : Mod S) (f : A.E.obj P ⟶ N)
+    (U : Cᵒᵖ) (s : S.obj.obj U) (x : P.val.obj U) :
+    f.val.app U (tmul A P U s x) =
+      s • (show N.val.obj U from ((adj A).homEquiv P N f).val.app U x) := by
+  rw [tmul_smul, ← adj_unit]
+  rw [Adjunction.homEquiv_unit]
+  exact (f.val.app U).hom.map_smul s _
+
+private theorem hom_ext {φ : R ⟶ S} (A : Ordinary φ)
+    (P : Mod R) (N : Mod S) (f g : A.E.obj P ⟶ N)
+    (h : ∀ U x, f.val.app U (tmul A P U 1 x) =
+      g.val.app U (tmul A P U 1 x)) : f = g := by
+  apply ((adj A).homEquiv P N).injective
+  ext U x
+  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
+  change f.val.app U (((adj A).unit.app P).val.app U x) =
+    g.val.app U (((adj A).unit.app P).val.app U x)
+  rw [adj_unit]
+  exact h U x
+
+private def comp {φ : R ⟶ S} {ψ : S ⟶ T} {γ : R ⟶ T}
+    (hγ : γ = φ ≫ ψ) (A : Ordinary φ) (B : Ordinary ψ) (D : Ordinary γ) :
+    A.E ⋙ B.E ≅ D.E :=
+  Adjunction.leftAdjointUniq
+    (((adj A).comp (adj B)).ofNatIsoRight
+      (SheafOfModules.systemScalarRestrictionComposition φ ψ γ hγ)) (adj D)
+
+private def unit {φ : R ⟶ R} (hφ : φ = 𝟙 R) (A : Ordinary φ) : A.E ≅ 𝟭 (Mod R) :=
+  Adjunction.leftAdjointUniq
+    ((adj A).ofNatIsoRight (SheafOfModules.systemScalarRestrictionUnit φ hφ)) Adjunction.id
 
 attribute [local instance] Ordinary.additive
 

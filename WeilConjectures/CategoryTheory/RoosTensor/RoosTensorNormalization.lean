@@ -107,10 +107,8 @@ private theorem comparison_inclusion (K : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) 
       exact limit.post_π K.asFunctor (complexF F) (op n)
     exact congrArg (fun z ↦ z.f (p + 1)) hl.symm
 
-omit [HasCountableProducts A] in
 variable [PreservesLimitsOfShape ℕᵒᵖ F]
 
-omit [HasCountableProducts A] [HasCountableProducts B] in
 end Limits
 
 section Coordinates

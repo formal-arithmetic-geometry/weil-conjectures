@@ -31,6 +31,11 @@ attribute [local irreducible] siteCoefficientTensorAdj coefficientQuotientSheaf
 set_option synthInstance.maxSize 4096
 set_option backward.defeqAttrib.useBackward true
 
+private abbrev sets (T : Scheme.{u}) (R : Sheaf T.smallEtaleTopology CommRingCat.{u + 1}) :=
+  SheafOfModules.toSheaf.{u + 1}
+    ((sheafCompose T.smallEtaleTopology (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R) ⋙
+    sheafCompose T.smallEtaleTopology (forget AddCommGrpCat.{u + 1})
+
 private def insert {T : Scheme.{u}}
     {R S : Sheaf T.smallEtaleTopology CommRingCat.{u + 1}} (a : R ⟶ S)
     (M : SheafOfModules.{u + 1}

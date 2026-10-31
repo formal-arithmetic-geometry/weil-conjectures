@@ -47,4 +47,37 @@ def ordinaryOrderedRightCoordinates
       (affineTraceProjection Y d)).app Ke) (Iso.refl _) ≪≫
     (ordinarySourceIso P Y aY Ke d).symm
 
+/-- Every ordinary ordered right-adjoint source has constructible finite Tor amplitude.
+This transports the proved tensor-source applicability through the specified source
+isomorphism, retaining the exact-versus-derived pullback comparison.
+Source: projection-purity agreement, final paragraph, admissibility of every line input.
+(blueprint: lem-pur-affine-ordered-right-finite-tor).
+
+Proof: transport source_applicability along affineTower_projection_eq to the ordinary
+coordinate tower. The exact-to-derived tensor comparison followed by the inverse of
+ordinarySourceIso identifies that tensor source with the actual ordered right source.
+The constructible finite-Tor object property is invariant under this isomorphism. -/
+theorem orderedRight_finiteTor
+    (P : WeilConjectures.PurityFiniteSetting.{u})
+    (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of P.field.k))
+    [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY]
+    (K : Plus (AffineLinePurity.Ring P) Y)
+    (Ke : Etale.DerivedCategoryModule (AffineLinePurity.Ring P) Y)
+    (hKe : etaleFiniteTor (AffineLinePurity.Ring P) Y Ke)
+    (eK : (comparison (AffineLinePurity.Ring P) Y).obj Ke ≅ K.obj) (d : ℕ) :
+    etaleFiniteTor (AffineLinePurity.Ring P) (affineTraceTower Y d)
+      ((Etale.affineTraceRight (AffineLinePurity.Ring P) (exponent P)
+        (annihilates P) Y d).obj Ke) := by
+  let A := AffineLinePurity.Ring P
+  let W := fun X : Scheme.{u} ↦
+    Etale.affineLinearBaseCoefficient A (exponent P) (annihilates P) X d
+  let Q := fun q : Σ X : Scheme.{u}, X ⟶ Y ↦
+    etaleFiniteTor A q.1 (ordinarySourceObject A q.2 (W q.1) Ke)
+  have hraw : Q ⟨affineTraceTower Y d, affineTraceProjection Y d⟩ :=
+    (congrArg Q (affineTower_projection_eq Y d)).mpr
+      (source_applicability P Y aY K Ke hKe eK d).2
+  exact (Etale.DerivedCategory.constructibleFiniteTor
+    (ModuleCat.{u + 1} A) (affineTraceTower Y d)).prop_of_iso
+      (ordinaryOrderedRightCoordinates P Y aY Ke d) hraw
+
 end AlgebraicGeometry.ProEtale.AffineOrderedIntegration

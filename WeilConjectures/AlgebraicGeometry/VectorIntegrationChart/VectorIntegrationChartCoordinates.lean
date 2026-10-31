@@ -12,6 +12,8 @@ public import WeilConjectures.AlgebraicGeometry.AffineSpacePurity.AffineSpacePur
 import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
 import WeilConjectures.ConstructibleSheaf.SpecializationCriterion
+public import WeilConjectures.AlgebraicGeometry.CanonicalExceptional.CanonicalStandingExceptional
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.Projection.ProjectionPurityAgreement
 
 /-! # Vector integration in a linear chart
 
@@ -150,11 +152,12 @@ def ordinaryTarget (P : WeilConjectures.PurityFiniteSetting.{u}) (T : Scheme.{u}
   (Etale.rightDerivedUpperShriek (Ring P)
     (iteratedAffineLineProj T d)).obj (Etale.ordinaryFiniteUnit (Ring P) T)
 
-/-- Exceptional target coordinates: comparison-unit rho in positive dimension,
-and the canonical exceptional identity in dimension zero.
+/-- Exceptional target coordinates: the counit-preserving comparison followed by
+comparison-unit rho in positive dimension, and the canonical identity at zero.
 Source: exceptional and identity conventions of the chart equation
 (blueprint: def-pur-vector-chart-comparison-coordinates). -/
-def orderedTargetIso (P : WeilConjectures.PurityFiniteSetting.{u}) (T : Scheme.{u}) :
+def orderedTargetIso (P : WeilConjectures.PurityFiniteSetting.{u}) (T : Scheme.{u})
+    [CompactSpace T] :
     (d : ℕ) →
     (exceptional P T d).obj (unit (Ring P) T) ≅
     (comparison (Ring P) (iteratedAffineLine T d)).obj
@@ -164,13 +167,16 @@ def orderedTargetIso (P : WeilConjectures.PurityFiniteSetting.{u}) (T : Scheme.{
     exact (comparison (Ring P) T).mapIso
       (((Etale.rightDerivedUpperShriekIsoOfIso (Ring P)
         (Iso.refl T)) ≪≫ Etale.leftDerivedUpperStarId
-          (ModuleCat.{u + 1} (Ring P)) T).app _).symm
+          (ModuleCat.{u + 1} (Ring P)) T).app
+            (Etale.ordinaryFiniteUnit (Ring P) T)).symm
   | d + 1 => by
     letI := (projection_geometry T (d + 1)).2
     letI := isIso_derivedComparisonAdjunction_unit_app (ModuleCat.{u + 1} (Ring P)) T
       (Etale.ordinaryFiniteUnit (Ring P) T) (unit_properties P T).1
     unfold exceptional
-    exact (comparison (Ring P) _).mapIso
+    exact (CanonicalExceptional.comparisonIso (iteratedAffineLineProj T (d + 1))
+      (unit (Ring P) T) (unitPlus P T).property).symm ≪≫
+      (comparison (Ring P) _).mapIso
       ((Etale.rightDerivedUpperShriek (Ring P)
         (iteratedAffineLineProj T (d + 1))).mapIso
         (asIso ((derivedComparisonAdjunction (ModuleCat.{u + 1} (Ring P)) T).unit.app

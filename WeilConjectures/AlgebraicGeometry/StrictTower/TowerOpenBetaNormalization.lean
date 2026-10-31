@@ -343,11 +343,6 @@ private theorem beta_id_open {U X : Scheme.{u}} (p : U ⟶ X)
 attribute [local semireducible] G R J adj jAdj gComp gId alpha
 set_option backward.isDefEq.respectTransparency true
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
 /-- Apply the sheaf comparison termwise to the strict inverse system, with its
 transition maps retained. Source: Stacks, Tag 09AE
 (blueprint: lem-cbc-tower-open-beta-normalization). -/
@@ -559,6 +554,115 @@ private theorem moduleInv_mate {U' U X' X : Scheme.{u}}
   intro M
   symm
   exact ((moduleJAdj B j').homEquiv _ _).apply_symm_apply _
+
+private theorem moduleJComp_conjugate {U V X : Scheme.{u}} (k : U ⟶ V) (j : V ⟶ X)
+    [IsOpenImmersion k] [IsOpenImmersion j] :
+    conjugateEquiv (moduleJAdj B (k ≫ j)) ((moduleJAdj B k).comp (moduleJAdj B j))
+      (openBetaModuleJComp B k j).hom = (moduleGComp B k j).hom := by
+  simp [openBetaModuleJComp, Adjunction.leftAdjointCompIso, conjugateIsoEquiv]
+
+private theorem moduleInv_open_comp {V U X V₁ U₁ X₁ : Scheme.{u}}
+    (k : V ⟶ U) (j : U ⟶ X) (k₁ : V₁ ⟶ U₁) (j₁ : U₁ ⟶ X₁)
+    (a : U₁ ⟶ U) (b : V₁ ⟶ V) (g : X₁ ⟶ X)
+    [IsOpenImmersion k] [IsOpenImmersion j]
+    [IsOpenImmersion k₁] [IsOpenImmersion j₁]
+    (wk : b ≫ k = k₁ ≫ a) (wj : a ≫ j = j₁ ≫ g)
+    (w : b ≫ (k ≫ j) = (k₁ ≫ j₁) ≫ g)
+    (hp : ∀ N : Modules B X,
+      (modulePullback B b).map ((moduleGComp B k j).hom.app N) ≫
+        (moduleSquareG B b k₁ k a wk).inv.app ((modulePullback B j).obj N) ≫
+        (modulePullback B k₁).map ((moduleSquareG B a j₁ j g wj).inv.app N) =
+      (moduleSquareG B b (k₁ ≫ j₁) (k ≫ j) g w).inv.app N ≫
+        (moduleGComp B k₁ j₁).hom.app ((modulePullback B g).obj N)) :
+    singleBetaInv B b (k₁ ≫ j₁) (k ≫ j) g w =
+      (((TwoSquare.mk _ _ _ _ (singleBetaInv B b k₁ k a wk)).vComp
+        (TwoSquare.mk _ _ _ _ (singleBetaInv B a j₁ j g wj))).whiskerLeft
+          (openBetaModuleJComp B k j).hom).whiskerRight (openBetaModuleJComp B k₁ j₁).inv := by
+  apply (mateEquiv (moduleJAdj B (k ≫ j)) (moduleJAdj B (k₁ ≫ j₁))).injective
+  rw [moduleInv_mate, mateEquiv_conjugateEquiv_vcomp _
+    ((moduleJAdj B k₁).comp (moduleJAdj B j₁)),
+    conjugateEquiv_mateEquiv_vcomp _ ((moduleJAdj B k).comp (moduleJAdj B j)),
+    mateEquiv_hcomp, moduleInv_mate, moduleInv_mate, moduleJComp_conjugate]
+  rw [show conjugateEquiv ((moduleJAdj B k₁).comp (moduleJAdj B j₁)) (moduleJAdj B (k₁ ≫ j₁))
+    (openBetaModuleJComp B k₁ j₁).inv = (moduleGComp B k₁ j₁).inv from
+      Adjunction.conjugateEquiv_leftAdjointCompIso_inv _ _ _ _]
+  apply TwoSquare.ext
+  intro N
+  dsimp only [TwoSquare.whiskerBottom, TwoSquare.whiskerTop,
+    TwoSquare.hComp, TwoSquare.mk, TwoSquare.natTrans]
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app, Functor.associator_hom_app,
+    Functor.associator_inv_app, Category.id_comp, Category.comp_id]
+  set_option backward.isDefEq.respectTransparency false in
+    change _ = ((modulePullback B b).map ((moduleGComp B k j).hom.app N) ≫
+    ((moduleSquareG B b k₁ k a wk).inv.app ((modulePullback B j).obj N) ≫
+      (modulePullback B k₁).map ((moduleSquareG B a j₁ j g wj).inv.app N))) ≫
+        (moduleGComp B k₁ j₁).inv.app ((modulePullback B g).obj N)
+  rw [hp N]
+  simp only [Category.assoc, Iso.hom_inv_id_app]
+  exact (Category.comp_id _).symm
+
+/-- Open composition before evaluation.
+Source: Stacks, Tags 04J0, 09AE and 0B65
+(blueprint: lem-cbc-tower-open-beta-normalization).
+Proof: Restriction to successive opens is the same sectionwise restriction. Paste
+these restriction comparisons and take successive open mates using the composite
+open adjunction. The normalized open compositor is its conjugate. Invert the
+resulting inverse-beta equation, the same equation remains valid on sheaves. -/
+theorem openBetaModuleOpenComp {V U X V₁ U₁ X₁ : Scheme.{u}}
+    (k : V ⟶ U) (j : U ⟶ X) (k₁ : V₁ ⟶ U₁) (j₁ : U₁ ⟶ X₁)
+    (a : U₁ ⟶ U) (b : V₁ ⟶ V) (g : X₁ ⟶ X)
+    [IsOpenImmersion k] [IsOpenImmersion j]
+    [IsOpenImmersion k₁] [IsOpenImmersion j₁]
+    (wk : b ≫ k = k₁ ≫ a) (wj : a ≫ j = j₁ ≫ g)
+    (w : b ≫ (k ≫ j) = (k₁ ≫ j₁) ≫ g)
+    (sk : IsPullback b k₁ k a) (sj : IsPullback a j₁ j g)
+    (s : IsPullback b (k₁ ≫ j₁) (k ≫ j) g) (M : Modules B V) :
+    (modulePullback B g).map ((openBetaModuleJComp B k j).inv.app M) ≫
+        (openBetaModule B a j₁ j g wj sj).hom.app ((moduleJ B k).obj M) ≫
+        (moduleJ B j₁).map ((openBetaModule B b k₁ k a wk sk).hom.app M) ≫
+        (openBetaModuleJComp B k₁ j₁).hom.app ((modulePullback B b).obj M) =
+      (openBetaModule B b (k₁ ≫ j₁) (k ≫ j) g w s).hom.app M := by
+  have hp (N : Modules B X) :
+      (modulePullback B b).map ((moduleGComp B k j).hom.app N) ≫
+        (moduleSquareG B b k₁ k a wk).inv.app ((modulePullback B j).obj N) ≫
+        (modulePullback B k₁).map ((moduleSquareG B a j₁ j g wj).inv.app N) =
+      (moduleSquareG B b (k₁ ≫ j₁) (k ≫ j) g w).inv.app N ≫
+        (moduleGComp B k₁ j₁).hom.app ((modulePullback B g).obj N) := by
+    have hh := moduleSquare_pasting_inv B g a b j k j₁ k₁
+      wj.symm wk.symm w.symm N
+    rw [moduleSquare_flip B a j₁ j g wj, moduleSquare_flip B b k₁ k a wk,
+      moduleSquare_flip B b (k₁ ≫ j₁) (k ≫ j) g w] at hh
+    simp only [Iso.symm_inv] at hh
+    apply (cancel_epi ((moduleSquareG B b (k₁ ≫ j₁) (k ≫ j) g w).hom.app N)).1
+    rw [← Category.assoc, ← hh]
+    simp only [Category.assoc, Iso.hom_inv_id_app_assoc,
+      ← Functor.map_comp, Iso.hom_inv_id_app]
+    erw [(modulePullback B k₁).map_id, Category.comp_id]
+  have hi := congr_app (moduleInv_open_comp B k j k₁ j₁ a b g wk wj w hp) M
+  dsimp only [TwoSquare.whiskerLeft, TwoSquare.whiskerRight, TwoSquare.vComp,
+    TwoSquare.mk, TwoSquare.natTrans] at hi
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.associator_hom_app, Functor.associator_inv_app,
+    Category.id_comp, Category.comp_id] at hi
+  let e := openBetaModule B b (k₁ ≫ j₁) (k ≫ j) g w s
+  let e₁ := openBetaModule B b k₁ k a wk sk
+  let e₂ := openBetaModule B a j₁ j g wj sj
+  change _ = e.hom.app M
+  apply (cancel_epi (e.inv.app M)).1
+  change (singleBetaInv B b (k₁ ≫ j₁) (k ≫ j) g w).app M ≫ _ = _
+  rw [hi]
+  simp only [Category.assoc]
+  change (openBetaModuleJComp B k₁ j₁).inv.app _ ≫ (moduleJ B j₁).map (e₁.inv.app M) ≫
+    e₂.inv.app ((moduleJ B k).obj M) ≫
+      (modulePullback B g).map ((openBetaModuleJComp B k j).hom.app M) ≫
+      (modulePullback B g).map ((openBetaModuleJComp B k j).inv.app M) ≫ e₂.hom.app _ ≫
+        (moduleJ B j₁).map (e₁.hom.app M) ≫ (openBetaModuleJComp B k₁ j₁).hom.app _ = _
+  simp only [← Functor.map_comp_assoc, Iso.hom_inv_id_app, Iso.inv_hom_id_app]
+  erw [(modulePullback B g).map_id, Category.id_comp, Iso.inv_hom_id_app_assoc]
+  rw [← Functor.map_comp_assoc, Iso.inv_hom_id_app]
+  erw [(moduleJ B j₁).map_id, Category.id_comp, Iso.inv_hom_id_app]
+  rfl
 
 section Finite
 

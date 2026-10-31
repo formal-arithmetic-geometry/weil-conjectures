@@ -508,8 +508,5 @@ private theorem derivedCoefficientHomFunctor
   let fF := Localization.fac (I ⋙ G ⋙ QB) hinv QR
   exact ⟨F, ⟨fF⟩⟩
 
-set_option maxHeartbeats 800000 in
 -- The localization comparison involves three resolutions and several whiskered isomorphisms.
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end CategoryTheory

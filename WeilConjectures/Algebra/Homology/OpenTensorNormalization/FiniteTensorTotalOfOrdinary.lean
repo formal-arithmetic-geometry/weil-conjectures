@@ -48,12 +48,6 @@ private theorem tensorMap_factor
       HomologicalComplex.mapBifunctorMap f g (curriedTensor D) (.up ℤ) := by
   simp [HomologicalComplex.mapBifunctorMap, ← HomologicalComplex₂.total.map_comp]
 
-include he in
-include he in
-omit [Preadditive D] [Preadditive E] [MonoidalPreadditive D] [MonoidalPreadditive E]
-  [HasCoproducts.{0} D] [HasCoproducts.{0} E]
-  [L.Additive] [PreservesColimitsOfSize.{0, 0} L] in
-include he in
 end GenericTotal
 
 end TotalAssembly

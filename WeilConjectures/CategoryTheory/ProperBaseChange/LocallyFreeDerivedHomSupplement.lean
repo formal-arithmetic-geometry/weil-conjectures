@@ -228,9 +228,6 @@ private theorem abstract_dualTensorMap_identity
   exact MonoidalCategory.id_tensorHom _ f
 
 set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 private theorem abstract_evaluate_eq_uncurry
     (P N : A)
     (z : 𝟙_ A ⟶ (genericDualTensor P).obj N) :
@@ -442,7 +439,6 @@ private theorem abstract_singleHomologyEquiv_naturality
 
 variable [HasDerivedCategory.{w} A] [IsGrothendieckAbelian.{u} A]
 
-omit [HasDerivedCategory.{w} (A)] in
 private noncomputable def abstract_kInjectiveQuotientEquiv
     {A : Type*} [Category A] [Abelian A] [HasDerivedCategory A]
     (P K : CochainComplex A ℤ) [K.IsKInjective] :
@@ -466,10 +462,7 @@ private theorem abstract_kInjectiveQuotientEquiv_map
   erw [(DerivedCategory.quotientCompQhIso A).hom.naturality f]
   simp
 
-set_option synthInstance.maxHeartbeats 100000 in
 -- Infer addition on the localized Hom group without exhausting the instance budget.
-set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 800000 in
 -- The cycle and naturality identities elaborate several derived Hom groups.
 private theorem abstract_kInjectiveQuotientEquiv_naturality
     {A : Type*} [Category A] [Abelian A] [HasDerivedCategory A]
@@ -486,12 +479,8 @@ private theorem abstract_kInjectiveQuotientEquiv_naturality
   rw [← Functor.map_comp, ← Functor.map_comp, abstract_kInjectiveQuotientEquiv_map,
     abstract_kInjectiveQuotientEquiv_map, Functor.map_comp, Functor.map_comp]
 
-set_option maxHeartbeats 800000 in
 -- The cycle and naturality identities elaborate several derived Hom groups.
-set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 800000 in
 -- The cycle and naturality identities elaborate several derived Hom groups.
-set_option backward.isDefEq.respectTransparency false in
 private noncomputable def locallyFreeResolution :
     CochainComplex (A) ℤ ⥤
     CochainComplex (A) ℤ := by
@@ -512,7 +501,6 @@ private instance abstract_resolution_unit_quasiIso
     QuasiIso ((locallyFreeResolutionUnit).app K) := by
   exact (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} A K).2
 
-set_option maxHeartbeats 800000 in
 -- The cycle and naturality identities elaborate several derived Hom groups.
 end AbstractModel
 
@@ -529,7 +517,6 @@ attribute [local instance 100000] proofMonoidal
 
 attribute [local instance 100000] proofClosed
 
-set_option backward.isDefEq.respectTransparency true in
 section
 
 variable [HasDerivedCategory.{w} (ringedSiteModules.{u}

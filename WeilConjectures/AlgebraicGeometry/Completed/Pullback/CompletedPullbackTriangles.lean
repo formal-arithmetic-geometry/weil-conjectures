@@ -121,5 +121,4 @@ private theorem complete_tri (Y : AlgebraicGeometry.Scheme.{u})
     have hb := (ObjectProperty.isLocal_adj_unit_app adj X) L ⟨⟨L, hL⟩, rfl⟩
     exact hb
 
-set_option linter.unusedVariables false in
 end AlgebraicGeometry.Scheme

@@ -132,8 +132,6 @@ namespace PresheafOfModules
 variable {C : Type (u + 1)} [Category.{u} C] {R : Cᵒᵖ ⥤ CommRingCat.{u + 1}}
   (M P : PresheafOfModules.{u + 1} (R ⋙ forget₂ _ _))
 
-variable {M P} in
-variable {M P} in
 end PresheafOfModules
 
 namespace SheafOfModules
@@ -150,13 +148,11 @@ section
 variable {U : C}
 end
 
-variable {U : C} in
 section
 variable [J.WEqualsLocallyBijective AddCommGrpCat.{u + 1}]
 
 open CategoryTheory.RingedSiteBoundedEvaluation
 
-omit [J.WEqualsLocallyBijective AddCommGrpCat.{u + 1}] in
 end
 
 end SheafOfModules
@@ -538,7 +534,6 @@ set_option hygiene false in
 local notation "𝓡" => (sheafCompose J
   (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R
 
-open SheafOfModules in
 end SiteHomComplex_ff
 
 attribute [local irreducible] DerivedCategory.homologyFunctor SheafOfModules.homFunctor

@@ -6,6 +6,10 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SmoothPurity.PurityFiniteSetting.Positive.FinitePositiveRootCharts
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.FiniteTensorFirstSheafChartReductionFrameExistence
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.FiniteTensorFirstSheafChartReductionRestrictionUnit
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.FiniteTensorFirstSheafChartReductionSection
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.FiniteTensorFirstSheafChartReductionUnit
 
 /-! Local unit-frame calculation for the compatible first-root chart. -/
 
@@ -52,6 +56,18 @@ theorem finiteTensorFirstSheafChart_reduction_unit_frame
         Functor.LaxMonoidal.ε
           (sfFixedRestriction T (P.finiteReductionRingHom m hm hmn))).hom.app
             (Opposite.op V) x₁ := by
-  sorry
+  obtain ⟨bB, hbB⟩ :=
+    finiteTensorFirstSheafChart_reduction_frame_exists P m hm hmn T c hc V b
+  have hy := finiteTensorFirstSheafChart_reduction_section_coordinate
+    P m hm hmn T c V b bB x₁ hx₁ hbB
+  change ((P.finiteReductionSetting m hm).finiteTensorFirstSheafChart T η hη).hom.hom.app
+      (Opposite.op V) ((P.finiteTensorFixedLineMap m hm hmn T c 1).hom.app
+        (Opposite.op V) x₁) =
+    (Functor.LaxMonoidal.ε (sfFixedRestriction T
+      (P.finiteReductionRingHom m hm hmn))).hom.app (Opposite.op V)
+      ((P.finiteTensorFirstSheafChart T ζ hζ).hom.hom.app (Opposite.op V) x₁)
+  rw [he₁, finiteTensorFirstSheafChart_reduction_restriction_unit P m hm hmn T V]
+  exact finiteTensorFirstSheafChart_reduction_unit_on_coordinate P m hm hmn T c hc ζ hζ η hη
+    hroot V bB x₁ hy he₁
 
 end WeilConjectures.PurityFiniteSetting

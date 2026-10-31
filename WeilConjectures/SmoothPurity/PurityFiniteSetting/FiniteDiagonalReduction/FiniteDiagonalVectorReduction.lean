@@ -6,6 +6,9 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SmoothPurity.PurityFiniteSetting.FiniteDiagonalReduction.FiniteDiagonalReductionComparisons
+public import WeilConjectures.AlgebraicGeometry.FiniteSmoothPurity.FiniteBundleSectionAdjointScalar
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.FiniteDiagonalReduction.FiniteDiagonalPresentationTransport
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.FiniteDiagonalReduction.FiniteDiagonalRootComparison
 
 /-! # Coefficient reduction of the normal-bundle vector factor
 
@@ -31,16 +34,13 @@ variable [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY]
 
 /-- Source: blueprint/latest, thm-pur-finite-reduction-of-purity proof Steps 3--4;
 parent node proof Step 8.
-Proof: construct the coefficient-line comparison from the root-power map, its
-scalar-unit adjunct, and the rank-one root generators. Ordinary tensor balancing
-identifies its tensor powers. Reduction of the ordered affine integration adjunct
-follows from the supported product square and exceptional transpose compatibility.
-It holds for each trivialization of the normal bundle and glues, since the
-integration adjunct is intrinsic. Invert that isomorphism and restrict it to the
-normal zero section. The site-comparison counit equation identifies the transported
-map with normalSectionMap and the tensor-power target with proTwistMap. This proves
-the displayed square for the prescribed vectorFactor, including rank zero and
-arbitrary ramification; quotient flatness is never used.
+Proof: `N = ℓ^n` is invertible on the k-scheme `X`, so the root comparison
+`finiteDiagonalRootComparison` gives normalized coefficient-line data `e`. The
+finite bundle-section scalar square `finiteBundleSectionAdjoint_scalar`, applied to
+the diagonal conormal bundle at exponents `N` and `M = ℓ^m`, gives the ordinary
+equation, and `finiteDiagonalPresentationTransport` transports it through the
+pro-etale presentations to the displayed square, including rank zero and arbitrary
+ramification; quotient flatness is never used.
 (blueprint: lem-pur-finite-diagonal-vector-reduction). -/
 theorem diagonalVectorReduction :
     ∃ e : CoefficientLineComparison (quotient P m hm hmn)
@@ -50,7 +50,28 @@ theorem diagonalVectorReduction :
       (proScalar (quotient P m hm hmn) X).map (vectorFactor P d f aY).hom ≫
         proTwistMap d e =
       normalSectionMap P m hm hmn d f aY ≫
-        (vectorFactor (P.finiteReductionSetting m hm) d f aY).hom := by sorry
+        (vectorFactor (P.finiteReductionSetting m hm) d f aY).hom := by
+  let Q := P.finiteReductionSetting m hm
+  letI := P.noetherian (f ≫ aY)
+  letI := (chartDiagonalNormalBundle d f).1
+  obtain ⟨e⟩ := finiteDiagonalRootComparison P m hm hmn (P.diagonalExponent_isUnit (f ≫ aY))
+  refine ⟨e, ?_⟩
+  have hN : 0 < P.diagonalExponent := by
+    dsimp only [PurityFiniteSetting.diagonalExponent]
+    exact pow_pos P.coefficients.prime.out.pos P.level
+  have hM : 0 < Q.diagonalExponent := by
+    dsimp only [Q, PurityFiniteSetting.diagonalExponent]
+    exact pow_pos Q.coefficients.prime.out.pos Q.level
+  have hMN : Q.diagonalExponent ∣ P.diagonalExponent := by
+    dsimp only [Q, PurityFiniteSetting.diagonalExponent]
+    exact pow_dvd_pow P.coefficients.l hmn
+  have hcore := finiteBundleSectionAdjoint_scalar
+    (quotient P m hm hmn) P.diagonalExponent Q.diagonalExponent hN hM hMN
+    P.diagonalExponent_annihilates Q.diagonalExponent_annihilates X d
+    (ConormalGradedAlgebra.piece (pullback.diagonal f) 1)
+    (P.diagonalExponent_isUnit (f ≫ aY))
+    (Q.diagonalExponent_isUnit (f ≫ aY)) e
+  exact (finiteDiagonalPresentationTransport P m hm hmn d f aY e) hcore
 
 end Diagonal
 end WeilConjectures.PurityFiniteSetting.FiniteDiagonalReduction

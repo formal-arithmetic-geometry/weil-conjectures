@@ -208,6 +208,16 @@ import all Mathlib.Logic.Small.Defs
 import all WeilConjectures.Compactification.Defs
 import WeilConjectures.AlgebraicGeometry.Modules.AffineHom
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
+public import Mathlib.LinearAlgebra.TensorProduct.Basis
+public import Mathlib.RingTheory.Etale.Kaehler
+public import Mathlib.RingTheory.Kaehler.Polynomial
+public import WeilConjectures.AlgebraicGeometry.Modules.DifferentialsSections
+public import WeilConjectures.AlgebraicGeometry.Modules.FreeComplexExact
+public import WeilConjectures.AlgebraicGeometry.RelativeDifferentialsAffineSections
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
+public import WeilConjectures.RingTheory.SmoothPurity.ReesAssociatedGradedChart
+public import WeilConjectures.SmoothPurity.OrdinaryFiniteTwistTransportUniqueness
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.Projection.ProjectionPurityAgreement
 
 /-! # Normalized diagonal/DNC assemblies on affine coordinate charts
 
@@ -691,6 +701,136 @@ theorem chartOrientation_open_baseChange (P : PurityFiniteSetting.{u})
         (P.chartOrdinaryOrientation d h (v ≫ aY)).hom := by
   sorry
 
+/-- The actual diagonal normal cone is the symmetric total space of the diagonal
+conormal module, including the empty regular sequence when d=0. Thus it is the
+relative tangent bundle, rather than a separately chosen rank-d bundle.
+Source: chart proof, Step 2 (blueprint: lem-pur-diagonal-dnc-chart-normalization).
+
+Proof: apply centred smooth-section coordinates to the first projection and its
+diagonal. The coordinate ideal is a regular sequence of length d, including
+length zero. Its degree-one classes give the conormal frame and its homogeneous
+monomials identify Sym(I/I^2) with the associated graded algebra. Relative Spec
+of this canonical comparison, composed with the homogeneous-normalized Rees
+comparison, identifies the actual normal cone and preserves augmentation. -/
+theorem chartDiagonalNormalBundle {U V : Scheme.{u}} [IsNoetherian U]
+    (d : ℕ) (h : U ⟶ V) [IsSeparated h] [SmoothOfRelativeDimension d h]
+    [QuasiCompact h] :
+    (ConormalGradedAlgebra.piece (pullback.diagonal h) 1).IsFiniteLocallyFreeOfRank d ∧
+      IsIso (ConormalGradedAlgebra.symmetricComparison (pullback.diagonal h)) := by
+  have := SmoothOfRelativeDimension.smooth d h
+  have H := SmoothSectionCentredCoordinates.exists_centred_coordinates d
+    (pullback.fst h h) (pullback.diagonal h) (pullback.diagonal_fst h)
+  exact H.2.2
+
+/-- The constant ordinary coefficient complex is constructible of Tor amplitude
+[0,0]. Source: the coefficient-unit input in chart proof, Step 4
+(blueprint: lem-pur-diagonal-dnc-chart-normalization).
+
+Proof: the constant sheaf A is locally free of rank one. Its degree-zero complex
+is bounded constructible and tensoring with it is the identity, giving [0,0]. -/
+theorem chartCoefficientUnit_finiteTor (P : PurityFiniteSetting.{u}) (Y : Scheme.{u}) :
+    Etale.DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} P.Coefficient) Y
+      (Etale.ordinaryFiniteUnit P.Coefficient Y) := by
+  exact (Etale.DerivedCategory.constructibleFiniteTor _ Y).prop_of_iso
+    (smoothPurityUnitIso P.Coefficient Y).symm
+    (Etale.constructibleFiniteTor_unit P.Coefficient)
+
+/-- Pullback of the compared coefficient unit, with the canonical monoidal map.
+Source: chart proof, Step 4 (blueprint: lem-pur-diagonal-dnc-chart-normalization). -/
+def chartUnitPullback (P : PurityFiniteSetting.{u}) {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    (P.smoothPurityPullback f).obj
+      ((ProEtale.comparisonUpperStar
+        (ModuleCat.{u + 1} P.Coefficient) Y).mapDerivedCategory.obj
+          (Etale.ordinaryFiniteUnit P.Coefficient Y)) ≅
+      𝟙_ (_root_.DerivedCategory
+        (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} P.Coefficient))) :=
+  let unitPullback (A : Type (u + 1)) [CommRing A] [Finite A]
+      {S T : Scheme.{u}} (g : S ⟶ T) :
+      (ProEtale.upperStar (ModuleCat.{u + 1} A) g).mapDerivedCategory.obj
+        ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) T).mapDerivedCategory.obj
+          (Etale.ordinaryFiniteUnit A T)) ≅
+        𝟙_ (_root_.DerivedCategory
+          (Sheaf (Scheme.ProEt.topology S) (ModuleCat.{u + 1} A))) :=
+    (ProEtale.upperStar (ModuleCat.{u + 1} A) g).mapDerivedCategory.mapIso
+        (projectionUnitRaw A T) ≪≫
+      (ProEtale.leftDerivedUpperStarIsoMapDerivedCategory
+        (ModuleCat.{u + 1} A) g).symm.app _ ≪≫
+      ProEtale.leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} A) g
+  unitPullback P.Coefficient f
+
+/-- Shift cancellation followed by the specified unit comparison and left unitor.
+Source: projection-purity-agreement unit normalization
+(blueprint: lem-pur-diagonal-dnc-chart-normalization). -/
+def chartProjectionUnitSourceGeneric (C : Type v) [Category.{w} C] [Abelian C]
+    [IsGrothendieckAbelian.{w} C] [HasDerivedCategory.{w} C]
+    [MonoidalCategory C] [MonoidalClosed C] [MonoidalPreadditive C] [BraidedCategory C]
+    [Abelian.HasFunctorialFlatResolution C]
+    [_root_.DerivedCategory.Qh.HasDerivedMonoidalCategory
+      (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))]
+    (r : ℤ) (M T : _root_.DerivedCategory C)
+    (e : M ≅ 𝟙_ (_root_.DerivedCategory C)) :=
+  smoothPurityTensorShiftGeneric C r M T ≪≫
+    ((curriedTensor (_root_.DerivedCategory C)).mapIso e).app T ≪≫ (λ_ T)
+
+/-- The actual shift, tensor-unit and pullback-unit composite, retaining its
+computed endpoints. Source: projection-purity-agreement, coefficient-unit case
+(blueprint: lem-pur-diagonal-dnc-chart-normalization). -/
+def chartProjectionUnitSourceRaw (P : PurityFiniteSetting.{u}) (Y : Scheme.{u}) (d : ℕ) :
+    Σ M N : ProEtale.AffineSpacePurity.C P.Coefficient (iteratedAffineLine Y d), M ≅ N :=
+  ⟨_, _, chartProjectionUnitSourceGeneric
+      (Sheaf (Scheme.ProEt.topology (iteratedAffineLine Y d))
+        (ModuleCat.{u + 1} P.Coefficient)) (2 * (d : ℤ)) _
+      (P.diagonalTwist (iteratedAffineLine Y d) d)
+      (P.chartUnitPullback (iteratedAffineLineProj Y d))⟩
+
+/-- The canonical source composite has the recorded cached endpoints, uniquely
+as its actual raw map. Source: projection-purity-agreement unit normalization
+(blueprint: lem-pur-diagonal-dnc-chart-normalization).
+
+Proof: rewrite the cached tensor by smoothPurityTensorPresentation. Its
+second-variable shift comparison is exactly smoothPurityTensorShiftGeneric.
+The remaining factors are the same pullback-unit comparison and left unitor.
+Thus the raw endpoints are the displayed ones; transport gives reflexive HEq.
+Two proposed transports have the same raw isomorphism, giving uniqueness. -/
+theorem chartProjectionUnitSource_existsUnique (P : PurityFiniteSetting.{u})
+    (Y : Scheme.{u}) (d : ℕ) :
+    ∃! e : projectionSmoothSource P Y
+      ((ProEtale.comparisonUpperStar
+        (ModuleCat.{u + 1} P.Coefficient) Y).mapDerivedCategory.obj
+          (Etale.ordinaryFiniteUnit P.Coefficient Y)) d ≅
+      P.diagonalTwist (iteratedAffineLine Y d) d,
+      HEq e (P.chartProjectionUnitSourceRaw Y d).2.2 := by
+  have ht := smoothPurityTensorPresentation (ModuleCat.{u + 1} P.Coefficient)
+    (iteratedAffineLine Y d)
+  have hs : projectionSmoothSource P Y
+      ((ProEtale.comparisonUpperStar
+        (ModuleCat.{u + 1} P.Coefficient) Y).mapDerivedCategory.obj
+          (Etale.ordinaryFiniteUnit P.Coefficient Y)) d =
+      (P.chartProjectionUnitSourceRaw Y d).1 := by
+    unfold projectionSmoothSource smoothPurityTensor
+    rw [ht]
+    rfl
+  have hn : P.diagonalTwist (iteratedAffineLine Y d) d =
+      (P.chartProjectionUnitSourceRaw Y d).2.1 := rfl
+  generalize P.chartProjectionUnitSourceRaw Y d = raw at hs hn ⊢
+  obtain ⟨A, B, e⟩ := raw
+  dsimp only at hs hn ⊢
+  cases hs
+  cases hn
+  exact ⟨e, HEq.rfl, fun _ he ↦ eq_of_heq he⟩
+
+/-- Cancel only the published pullback, tensor-unit and even-shift coordinates
+at A. The raw-map equality determines the isomorphism uniquely and involves
+no purity arrow. Source: projection-purity-agreement normalization
+(blueprint: lem-pur-diagonal-dnc-chart-normalization). -/
+def chartProjectionUnitSource (P : PurityFiniteSetting.{u}) (Y : Scheme.{u}) (d : ℕ) :
+    projectionSmoothSource P Y
+      ((ProEtale.comparisonUpperStar
+        (ModuleCat.{u + 1} P.Coefficient) Y).mapDerivedCategory.obj
+          (Etale.ordinaryFiniteUnit P.Coefficient Y)) d ≅
+      P.diagonalTwist (iteratedAffineLine Y d) d :=
+  (P.chartProjectionUnitSource_existsUnique Y d).exists.choose
+
 attribute [local irreducible] chartUnitPullback projectionUnitRaw
 attribute [local irreducible] Sheaf.monoidalCategory
   _root_.DerivedCategory.monoidalCategoryOfMonoidalClosedBraidedCategory
@@ -721,6 +861,240 @@ def chartDiagonalDualizingStanding (P : PurityFiniteSetting.{u}) {X Y : Scheme.{
           (HasCompactification.compactification f))).rightAdjointUniq
         (Etale.rightDerivedUpperShriekOfCompactificationAdjunction P.Coefficient
           (HasCompactification.compactification f))).app _)
+
+/-- The recorded ordered affine comparison at A, in diagonal dualizing coordinates.
+Positive level n+1 enumerates every allowed stage for every finite extension E.
+Only the published root-power, unit, shift and exceptional-identity transports
+are applied to affineSpacePurityComparison.
+Source: chart proof, Step 4; projection-purity-agreement
+(blueprint: lem-pur-diagonal-dnc-chart-normalization). -/
+def chartGamma (F : FiniteFieldDatum.{u}) (C : F.CoefficientDatum)
+    (E : IntermediateField (Padic C.l) C.Qbar) [FiniteDimensional (Padic C.l) E]
+    (n : ℕ) (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of F.k))
+    [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY] (d : ℕ) :
+    letI := (ProEtale.AffineSpacePurity.projection_geometry Y d).2
+    (projectionSetting F C E n).diagonalTwist (iteratedAffineLine Y d) d ⟶
+      (projectionSetting F C E n).diagonalDualizing (iteratedAffineLineProj Y d) :=
+  let P := projectionSetting F C E n
+  letI := (ProEtale.AffineSpacePurity.projection_geometry Y d).2
+  (P.chartProjectionUnitSource Y d).inv ≫
+    projectionAffineInPresentation F C E n Y aY
+      ⟨(ProEtale.comparisonUpperStar
+          (ModuleCat.{u + 1} P.Coefficient) Y).mapDerivedCategory.obj
+            (Etale.ordinaryFiniteUnit P.Coefficient Y),
+        (ProEtale.DerivedCategory.plusEtaleOrigin_mapDerivedCategory_obj
+          (P.diagonalUnitPlus Y)).plus⟩
+      (Etale.ordinaryFiniteUnit P.Coefficient Y)
+      (P.chartCoefficientUnit_finiteTor Y) (Iso.refl _) d ≫
+    (P.chartDiagonalDualizingStanding (iteratedAffineLineProj Y d)).inv
+
+/-- The ordered map is the inverse specified orientation, at all positive stages.
+Source: chart proof, Step 4; projection-purity-agreement at A_Y
+(blueprint: lem-pur-diagonal-dnc-chart-normalization).
+
+Proof: apply projection_purity_agreement to the coefficient unit. Its finite Tor
+interval is [0,0]. The smooth-purity tensor map at the unit is the inverse
+diagonal orientation, by the adjunction triangle after cancelling the canonical
+unit, even-shift and Tate tensor coordinates. These are precisely the maps in
+chartProjectionUnitSource and projectionAffineInPresentation. Rank zero uses
+the published exceptional-identity comparison and ordered comparisonZero. -/
+theorem chartGamma_eq_inverseOrientation
+    (F : FiniteFieldDatum.{u}) (C : F.CoefficientDatum)
+    (E : IntermediateField (Padic C.l) C.Qbar) [FiniteDimensional (Padic C.l) E]
+    (n : ℕ) (Y : Scheme.{u}) [IsAffine Y] (aY : Y ⟶ Spec (.of F.k))
+    [LocallyOfFiniteType aY] [QuasiCompact aY] (d : ℕ) :
+    letI := projection_smooth Y d
+    HEq (chartGamma F C E n Y aY d)
+      ((projectionSetting F C E n).diagonalDualizingObject d
+        (iteratedAffineLineProj Y d) aY).inv := by
+  let P := projectionSetting F C E n
+  let := P.noetherian aY
+  let := (ProEtale.AffineSpacePurity.projection_geometry Y d).1
+  let := (ProEtale.AffineSpacePurity.projection_geometry Y d).2
+  let := projection_smooth Y d
+  let K := (ProEtale.comparisonUpperStar
+    (ModuleCat.{u + 1} P.Coefficient) Y).mapDerivedCategory.obj
+      (Etale.ordinaryFiniteUnit P.Coefficient Y)
+  have hu := (P.chartProjectionUnitSource_existsUnique Y d).exists.choose_spec
+  have hu' : P.chartProjectionUnitSource Y d =
+      P.smoothPurityReassociation (iteratedAffineLine Y d) d
+          ((P.smoothPurityPullback (iteratedAffineLineProj Y d)).obj K) ≪≫
+        ((curriedTensor (_root_.DerivedCategory
+          (Sheaf (Scheme.ProEt.topology (iteratedAffineLine Y d))
+            (ModuleCat.{u + 1} P.Coefficient)))).mapIso
+          (P.chartUnitPullback (iteratedAffineLineProj Y d))).app
+            (P.diagonalTwist (iteratedAffineLine Y d) d) ≪≫
+              λ_ (P.diagonalTwist (iteratedAffineLine Y d) d) := by
+    dsimp only [chartProjectionUnitSource]
+    rw [eq_of_heq hu]
+    change (P.chartProjectionUnitSourceRaw Y d).2.2 = _
+    dsimp only [chartProjectionUnitSourceRaw, chartProjectionUnitSourceGeneric,
+      smoothPurityReassociation, smoothPurityTensorShift, smoothPurityTensorShiftCoefficients]
+    congr 2
+    apply eq_of_heq
+    apply HEq.symm
+    exact (@existsUnique_smoothPurityTensorShift (ModuleCat.{u + 1} P.Coefficient)
+      (ModuleCat.moduleCategory P.Coefficient)
+      (ModuleCat.abelian (R := P.Coefficient)) _ _ _ _ _ _
+      (iteratedAffineLine Y d) (2 * (d : ℤ))
+      ((P.smoothPurityPullback (iteratedAffineLineProj Y d)).obj K)
+      (P.diagonalTwist (iteratedAffineLine Y d) d)).exists.choose_spec
+  apply heq_of_eq
+  change (P.chartProjectionUnitSource Y d).inv ≫ _ = _
+  rw [hu']
+  have h := projection_unit_presentation_normalization F C E n Y aY d
+    (P.chartCoefficientUnit_finiteTor Y)
+  dsimp only at h
+  convert! (Category.assoc _ _ _).symm.trans ((Iso.comp_inv_eq _).2 h) using 1
+
+/-- Ordered affine space is smooth of its coordinate dimension.
+Source: chart proof, Step 1 (blueprint: lem-pur-diagonal-dnc-chart-normalization).
+
+Proof: transport projection_smooth through the coordinate-preserving isomorphism
+between the two ordered affine towers. It is the identity at zero; at a
+successor both towers adjoin the same final polynomial variable. -/
+theorem chartTraceProjection_smooth (B : Scheme.{u}) (r : ℕ) :
+    SmoothOfRelativeDimension r (affineTraceProjection B r) := by
+  induction r with
+  | zero =>
+      change SmoothOfRelativeDimension 0 (𝟙 B)
+      infer_instance
+  | succ r ih =>
+      have : SmoothOfRelativeDimension 1
+          (AffineSpace PUnit.{u + 1} (affineTraceTower B r) ↘ affineTraceTower B r) := by
+        simpa only [Nat.card_unique] using
+          (AffineSpace.smoothOfRelativeDimension_over PUnit.{u + 1} (affineTraceTower B r))
+      have := smoothOfRelativeDimension_comp
+        (AffineSpace PUnit.{u + 1} (affineTraceTower B r) ↘ affineTraceTower B r)
+        (affineTraceProjection B r) (n := 1) (m := r)
+      simpa only [affineTraceTower, affineTraceProjection, Nat.add_comm] using this
+
+private theorem chartProjectionOrientation_inv (P : PurityFiniteSetting.{u})
+    (B : Scheme.{u}) [IsAffine B] (aB : B ⟶ Spec (.of P.field.k))
+    [LocallyOfFiniteType aB] [QuasiCompact aB] (r : ℕ)
+    (t : Etale.OrdinaryFiniteTwistTransport P.Coefficient P.diagonalExponent
+      P.diagonalExponent_annihilates)
+    (D : ∀ (T : Scheme.{u}) [IsNoetherian T]
+      (hT : IsUnit (P.diagonalExponent : Γ(T, ⊤))),
+      Etale.OrdinaryFiniteP1Datum P.Coefficient P.diagonalExponent
+        P.diagonalExponent_annihilates t T hT) :
+    let := P.noetherian aB
+    let := chartTraceProjection_smooth B r
+    (P.chartOrdinaryOrientation r (affineTraceProjection B r) aB).inv =
+      P.diagonalAffineMate t D B (P.diagonalExponent_isUnit aB) r := by
+  let := P.noetherian aB
+  let := affineTraceNoetherian B r
+  let := chartTraceProjection_smooth B r
+  let := Dnc.compactifiable P (affineTraceProjection B r) aB
+  let N := Etale.canonicalEtaleCompactSupportNormalization P.Coefficient
+  have hn := (P.chartOrdinaryOrientation_spec r (affineTraceProjection B r) aB).1
+    t D N (affineTraceTower B r) (𝟙 _) (𝟙 _) rfl
+  simp only [diagonalDualizingCongr, eqToIso_refl, Iso.refl_hom,
+    Category.comp_id, Iso.hom_inv_id_assoc] at hn
+  have he := (cancel_mono
+    (P.diagonalEtaleLocality N (𝟙 _) (affineTraceProjection B r)).hom).mp hn
+  let e := Etale.leftDerivedUpperStarId
+    (ModuleCat.{u + 1} P.Coefficient) (affineTraceTower B r)
+  let : (Etale.ordinaryFinitePullback P.Coefficient
+      (𝟙 (affineTraceTower B r))).Faithful := Functor.Faithful.of_iso e.symm
+  exact Functor.map_injective _ he
+
+/-- The ordinary counit mate and the ordered pro-etale affine comparison have
+identical maps after the canonical coefficient transport. The two recursive
+coordinate towers have the same ordered polynomial coordinates.
+Source: chart proof, Step 4 (blueprint: lem-pur-diagonal-dnc-chart-normalization).
+
+Proof: both traces are the ordered iteration of the normalized P1 trace and the
+open counit. The affine-line Kummer normalization identifies their first factors.
+Induct on dimension using compact-support composition and adjunction pasting.
+The root-power comparison is projectionRootTransition and is identity on pure
+root tensors on a primitive-root cover; hence it introduces no scalar. Compare
+exceptional units by diagonalDualizingComparison. Zero is the identity adjunct. -/
+theorem chartGamma_counit_normalization
+    (F : FiniteFieldDatum.{u}) (C : F.CoefficientDatum)
+    (E : IntermediateField (Padic C.l) C.Qbar) [FiniteDimensional (Padic C.l) E]
+    (n : ℕ) (Y : Scheme.{u}) [IsAffine Y] (aY : Y ⟶ Spec (.of F.k))
+    [LocallyOfFiniteType aY] [QuasiCompact aY] (d : ℕ)
+    (t : Etale.OrdinaryFiniteTwistTransport (projectionSetting F C E n).Coefficient
+      (projectionSetting F C E n).diagonalExponent
+      (projectionSetting F C E n).diagonalExponent_annihilates)
+    (D : ∀ (T : Scheme.{u}) [IsNoetherian T]
+      (hT : IsUnit ((projectionSetting F C E n).diagonalExponent : Γ(T, ⊤))),
+      Etale.OrdinaryFiniteP1Datum (projectionSetting F C E n).Coefficient
+        (projectionSetting F C E n).diagonalExponent
+        (projectionSetting F C E n).diagonalExponent_annihilates t T hT) :
+    letI := (projectionSetting F C E n).noetherian aY
+    HEq
+      ((ProEtale.comparisonUpperStar
+        (ModuleCat.{u + 1} (projectionSetting F C E n).Coefficient)
+          (affineTraceTower Y d)).mapDerivedCategory.map
+            ((projectionSetting F C E n).diagonalAffineMate t D Y
+              ((projectionSetting F C E n).diagonalExponent_isUnit aY) d) ≫
+        ((projectionSetting F C E n).diagonalDualizingComparison
+          (affineTraceProjection Y d)).inv)
+      (chartGamma F C E n Y aY d) := by
+  let P := projectionSetting F C E n
+  let := P.noetherian aY
+  let := affineTraceNoetherian Y d
+  let := chartTraceProjection_smooth Y d
+  let := projection_smooth Y d
+  let := Dnc.compactifiable P (affineTraceProjection Y d) aY
+  have h := (P.chartOrdinaryOrientation_spec d (affineTraceProjection Y d) aY).2
+  have hm := P.chartProjectionOrientation_inv Y aY d t D
+  have hθ :
+      (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient)
+        (affineTraceTower Y d)).mapDerivedCategory.map
+          (P.diagonalAffineMate t D Y (P.diagonalExponent_isUnit aY) d) ≫
+        (P.diagonalDualizingComparison (affineTraceProjection Y d)).inv =
+      (P.diagonalDualizingObject d (affineTraceProjection Y d) aY).inv := by
+    rw [h]
+    simp only [Iso.trans_inv, Functor.mapIso_inv]
+    rw [hm]
+  rw [hθ]
+  have ht (r : ℕ) : (⟨affineTraceTower Y r, affineTraceProjection Y r⟩ :
+      Σ T : Scheme.{u}, T ⟶ Y) = ⟨iteratedAffineLine Y r, iteratedAffineLineProj Y r⟩ := by
+    induction r with
+    | zero => rfl
+    | succ d ih =>
+      exact congrArg (fun q : Σ T : Scheme.{u}, T ⟶ Y ↦
+        (⟨AffineSpace PUnit.{u + 1} q.1,
+          (AffineSpace PUnit.{u + 1} q.1 ↘ q.1) ≫ q.2⟩ : Σ T : Scheme.{u}, T ⟶ Y)) ih
+  have transport {X X' : Scheme.{u}} (f : X ⟶ Y) (f' : X' ⟶ Y)
+      [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+      [SmoothOfRelativeDimension d f]
+      [IsSeparated f'] [LocallyOfFiniteType f'] [QuasiCompact f']
+      [SmoothOfRelativeDimension d f']
+      (he : (⟨X, f⟩ : Σ T : Scheme.{u}, T ⟶ Y) = ⟨X', f'⟩) :
+      HEq (P.diagonalDualizingObject d f aY).inv
+        (P.diagonalDualizingObject d f' aY).inv := by
+    cases he
+    rfl
+  exact (transport _ _ (ht d)).trans
+    (chartGamma_eq_inverseOrientation F C E n Y aY d).symm
+
+/-- The affine counit mate is invertible at every finite coefficient stage.
+Source: chart proof, Step 4; projection-purity-agreement
+(blueprint: lem-pur-diagonal-dnc-chart-normalization).
+
+Proof: chartGamma_counit_normalization identifies the realization of this mate
+with the existing ordered comparison at the unit. Projection-purity-agreement
+identifies that map with inverse smooth orientation. Finite site comparison
+reflects isomorphisms on the bounded-below etale objects, giving the assertion. -/
+theorem chartAffineMate_isIso (P : PurityFiniteSetting.{u})
+    (B : Scheme.{u}) [IsAffine B] (aB : B ⟶ Spec (.of P.field.k))
+    [LocallyOfFiniteType aB] [QuasiCompact aB] (r : ℕ)
+    (t : Etale.OrdinaryFiniteTwistTransport P.Coefficient P.diagonalExponent
+      P.diagonalExponent_annihilates)
+    (D : ∀ (T : Scheme.{u}) [IsNoetherian T]
+      (hT : IsUnit (P.diagonalExponent : Γ(T, ⊤))),
+      Etale.OrdinaryFiniteP1Datum P.Coefficient P.diagonalExponent
+        P.diagonalExponent_annihilates t T hT) :
+    letI := P.noetherian aB
+    IsIso (P.diagonalAffineMate t D B (P.diagonalExponent_isUnit aB) r) := by
+  let := P.noetherian aB
+  let := chartTraceProjection_smooth B r
+  rw [← chartProjectionOrientation_inv P B aB r t D]
+  infer_instance
 
 set_option synthInstance.maxSize 2048 in
 attribute [local semireducible] chartUnitPullback Sheaf.monoidalCategory

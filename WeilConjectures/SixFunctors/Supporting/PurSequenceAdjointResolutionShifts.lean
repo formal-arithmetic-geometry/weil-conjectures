@@ -162,6 +162,11 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 import Mathlib.CategoryTheory.Yoneda
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 import Mathlib.CategoryTheory.Generator.Basic
+public import WeilConjectures.SmoothPurity.Pur.PurReductionLimitShiftAdjunction
+public import WeilConjectures.SmoothPurity.Pur.PurSequenceOrdinaryFactorization
+public import WeilConjectures.SmoothPurity.PurSequenceDerivedNormalization
+public import WeilConjectures.SmoothPurity.PurSequenceReductionCounitResolutionShift
+public import WeilConjectures.SmoothPurity.PurSequenceReductionCounitShift
 
 /-! # Resolution-normalized sequence-site adjoints
 
@@ -398,6 +403,172 @@ theorem purSequenceAdjointResolutionShifts
     (hS : CoefficientDerivedSystemCoherence l E W S) :
     ∃ A : PurSequenceResolutionData l E W S,
       Nonempty (PurSequenceAdjointShifts l E W S A.ordinary A.derived) := by
-  sorry
+  classical
+  obtain ⟨O, ⟨H⟩⟩ := purSequenceOrdinaryFactorization l E W
+  obtain ⟨A⟩ := purSequenceDerivedNormalization l E W F hl S hS O H
+  let D : PurSequenceResolutionData l E W S := ⟨O, H, A⟩
+  obtain ⟨R⟩ := purReductionLimitShiftAdjunction l E W S hS
+  letI : S.reduction.CommShift ℤ := R.reduction_shift
+  letI : (coefficientSequenceLimit l E W).CommShift ℤ := R.limit_shift
+  let ε := Functor.whiskerLeft DerivedCategory.Q D.derived.left.inv ≫ D.derived.ε
+  have hε : D.derived.ε =
+      Functor.whiskerLeft DerivedCategory.Q D.derived.left.hom ≫ ε := by
+    ext Q
+    simp [ε]
+  letI := D.derived.left_derived
+  have hεuniv : S.reduction.IsLeftDerivedFunctor ε
+      (HomologicalComplex.quasiIso (scalarReductionSource l E W) (.up ℤ)) := by
+    exact (Functor.isLeftDerivedFunctor_iff_of_iso
+      (LF := D.derived.L) (LF' := S.reduction) (α' := ε)
+      (e := D.derived.left)
+      (W := HomologicalComplex.quasiIso (scalarReductionSource l E W) (.up ℤ))
+      (comm := hε.symm)).1 D.derived.left_derived
+  let K : PurSequenceKFlatComparison l E W S D.ordinary := {
+    L := D.derived.L
+    ε := D.derived.ε
+    universal := D.derived.left_derived
+    α := D.derived.left
+    reductionCounit := ε
+    comparison := hε
+    reductionUniversal := hεuniv
+    representative := by
+      intro Q hQ hflat
+      obtain ⟨e, he, hp⟩ := D.derived.left_model Q hQ hflat
+      refine ⟨e, ?_, hp⟩
+      apply (cancel_epi (D.derived.left.hom.app (DerivedCategory.Q.obj Q))).1
+      simpa [ε] using he
+    unique := by
+      intro β hb
+      apply Iso.ext
+      apply Functor.leftDerived_ext S.reduction ε
+        (HomologicalComplex.quasiIso (scalarReductionSource l E W) (.up ℤ)) D.derived.L
+      simpa [hε] using hb.symm }
+  have hres := fun (Q : CochainComplex (scalarReductionSource l E W) ℤ) (r : ℤ)
+      (hQ : CochainComplex.IsKFlatIndependentCoefficients
+        (J := Scheme.ProEt.topology W)
+        (R := completedIntegralCommRingSheafUnrestricted l E W) Q)
+      (flatQ : ∀ i : ℤ, SheafOfModules.IsFlatOnSite
+        (J := Scheme.ProEt.topology W)
+        (R := completedIntegralCommRingSheafUnrestricted l E W) (Q.X i)) ↦
+    purSequenceReductionCounitResolutionShift l E W S R D.ordinary K Q r hQ flatQ
+  have hred : NatTrans.CommShift K.reductionCounit ℤ := by
+    simpa using purSequenceReductionCounitShift l E W S R D.ordinary K hres
+  letI := hred
+  let leftShift : D.derived.L.CommShift ℤ :=
+    Functor.CommShift.ofIso D.derived.left.symm ℤ
+  letI := leftShift
+  have hleftiso : NatTrans.CommShift D.derived.left.hom ℤ := by
+    letI := Functor.CommShift.ofIso_compatibility D.derived.left.symm ℤ
+    exact NatTrans.CommShift.of_iso_inv D.derived.left.symm ℤ
+  letI := hleftiso
+  have heps : NatTrans.CommShift D.derived.ε ℤ := by
+    rw [hε]
+    infer_instance
+  haveI := heps
+  let hleft : PurSequenceLeftShiftModels l E W S D.ordinary D.derived := {
+    left_shift := leftShift
+    reduction_shift := R.reduction_shift
+    finite_shift := R.finite_reduction_shift
+    left_comparison := by
+      intro P r
+      simpa [purSequenceShiftIso] using NatTrans.shift_app_comm D.derived.left.hom r P
+    left_resolution := by
+      intro Q r
+      simpa only [purSequenceShiftIso, Functor.commShiftIso_comp_hom_app, Category.assoc] using
+        NatTrans.shift_app_comm D.derived.ε r Q
+    left_terms := by
+      intros
+      rfl
+    finite_resolution := by
+      intro n Q r hQ hQr
+      simpa [purSequenceShiftIso] using R.finite_shift_model n Q r hQ hQr
+    finite_evaluation := by
+      intro n P r
+      letI := R.finite_reduction_shift n
+      letI := R.reduction_shift_evaluation n
+      simpa only [purSequenceShiftIso, Functor.commShiftIso_comp_hom_app, Category.assoc] using
+        (NatTrans.shift_app_comm (S.reductionEvaluation n).hom r P).symm
+  }
+  let rightShift : D.derived.R.CommShift ℤ :=
+    Functor.CommShift.ofIso D.derived.right.symm ℤ
+  letI := rightShift
+  have hrightiso : NatTrans.CommShift D.derived.right.hom ℤ := by
+    letI := Functor.CommShift.ofIso_compatibility D.derived.right.symm ℤ
+    exact NatTrans.CommShift.of_iso_inv D.derived.right.symm ℤ
+  letI := hrightiso
+  let hright : PurSequenceRightShiftModels l E W S D.ordinary D.derived := {
+    right_shift := rightShift
+    limit_shift := R.limit_shift
+    right_comparison := by
+      intro N r
+      simpa [purSequenceShiftIso] using NatTrans.shift_app_comm D.derived.right.hom r N
+    shifted_quasiIso := by
+      intro N J j _ r
+      unfold purSequenceShiftedReplacement
+      apply quasiIso_comp
+    right_resolution := by
+      intro N J j hJ hj r hShift
+      letI : (J⟦r⟧).IsKInjective :=
+        (CochainComplex.isKInjective_shift_iff J r).mpr inferInstance
+      letI : QuasiIso (purSequenceShiftedReplacement l E W N J j r) := by
+        unfold purSequenceShiftedReplacement
+        apply quasiIso_comp
+      letI : QuasiIso (purCoefficientShiftedResolution l E W N J j r) := by
+        unfold purCoefficientShiftedResolution
+        apply quasiIso_comp
+      have hm (N : CochainComplex (coefficientSequenceModules l E W) ℤ)
+          (J : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ)
+          (j : ((coefficientSequenceRestriction l E W).mapHomologicalComplex (.up ℤ)).obj N ⟶ J)
+          [J.IsKInjective] [QuasiIso j] :
+          D.derived.model N J j = purCoefficientLimitModel l E W N J j := by
+        apply eq_of_heq
+        simpa only [purCoefficientLimitModel, SequenceKInjectiveComparison.comparisonIso,
+          purSequenceTowerLimitModel, coefficientConstantTowerLimit, Functor.mapIso_trans,
+          Iso.trans_assoc] using D.derived.model_eq N J j
+      rw [hm, hm]
+      simpa only [purCoefficientShiftedResolution, purSequenceShiftedReplacement,
+        purSequenceShiftIso] using R.limit_shift_resolution N J j r
+    shifted_degree := by
+      intro N J j r i
+      unfold purSequenceShiftedReplacement
+      simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_commShiftIso_hom_app_f,
+        Functor.mapHomologicalComplex_map_f]
+      congr 1
+  }
+  have hunit : ∀ r : ℤ,
+      purSequenceUnitShiftCompatibility D.derived.adjunction hleft.left_shift
+        hright.right_shift r := by
+    intro r P
+    have hu := R.unit_shift r P
+    have hd := D.derived.unit P
+    have hd' := D.derived.unit (P⟦r⟧)
+    have hl := NatTrans.shift_app_comm D.derived.left.hom r P
+    have hr := NatTrans.shift_app_comm D.derived.right.hom r (S.reduction.obj P)
+    dsimp [purSequenceUnitShiftCompatibility, purSequenceShiftIso] at hu ⊢
+    rw [← hd, ← hd'] at hu
+    simp only [Functor.map_comp, Category.assoc] at hu
+    apply (cancel_mono ((D.derived.R.map (D.derived.left.hom.app P))⟦r⟧' ≫
+      (D.derived.right.hom.app (S.reduction.obj P))⟦r⟧')).1
+    simp only [purSequenceShiftIso, Category.assoc]
+    rw [← D.derived.R.commShiftIso_hom_naturality_assoc]
+    rw [← D.derived.R.map_comp_assoc, hl, D.derived.R.map_comp]
+    rw [hr]
+    have hb := D.derived.right.hom.naturality ((S.reduction.commShiftIso r).hom.app P)
+    dsimp only [Functor.comp_obj, Functor.comp_map] at hb
+    simp only [Category.assoc]
+    rw [reassoc_of% hb]
+    exact hu
+  have hcounit : ∀ r : ℤ,
+      purSequenceCounitShiftCompatibility D.derived.adjunction hleft.left_shift
+        hright.right_shift r := by
+    intro r
+    exact Adjunction.CommShift.compatibilityCounit_of_compatibilityUnit
+      D.derived.adjunction _ _ (hunit r)
+  exact ⟨D, ⟨{
+    left := hleft
+    right := hright
+    adjoint_unit := hunit
+    adjoint_counit := hcounit
+  }⟩⟩
 
 end WeilConjectures

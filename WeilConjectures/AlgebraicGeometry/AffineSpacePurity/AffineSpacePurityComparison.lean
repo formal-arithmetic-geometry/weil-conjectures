@@ -149,6 +149,12 @@ public import WeilConjectures.AlgebraicGeometry.Support.SupportComparisonPullbac
 public import WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorIso
 public import WeilConjectures.AlgebraicGeometry.AffineLinePurity.AffineLinePurityComparison
 public import WeilConjectures.AlgebraicGeometry.SfAffineChartPresentation.PurityAffineChartBounds
+public import WeilConjectures.Algebra.Homology.CanonicalTensorPullbackOfUniverses.RingedTopoiCanonicalTensorPullbackOfUniverses
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Finite.ProEtaleFiniteModuleIntrinsicComparison
+public import WeilConjectures.AlgebraicGeometry.SpecifiedExceptionalStandingIso
+public import WeilConjectures.ProperBaseChange.RingedTopoiDerivedPullback
+public import WeilConjectures.SmoothPurity.EtaleFiniteTwistPullbackRest
+public import WeilConjectures.SmoothPurity.FiniteEtaleTateLinePullback
 
 /-! # The ordered affine-space purity comparison
 
@@ -663,7 +669,9 @@ def lineExceptionalIso (A : Type (u + 1)) [CommRing A] [Finite A] (T : Scheme.{u
       ((comparisonLowerStar (ModuleCat.{u + 1} A) T).rightDerivedFunctor.obj K))
 
 /-- The recorded affine-line comparison in the literal source-functor coordinates and
-standing exceptional coordinates. Only canonical compactification transport is applied.
+standing exceptional coordinates. The relative representing-object comparison includes
+both the compactification change and the site-comparison normalization, so evaluation
+by the standing counit is the canonical chart evaluation.
 Source: gamma_(q_r,-) in the recursive display
 (blueprint: def-pur-affine-space-comparison). -/
 @[irreducible]
@@ -677,9 +685,10 @@ def lineComparison (P : WeilConjectures.PurityFiniteSetting.{u}) (T : Scheme.{u}
     (lineSource P T).obj K.obj ⟶
       (rightDerivedUpperShriek (Ring P)
         (AffineSpace PUnit.{u + 1} T ↘ T)).obj K.obj :=
+  letI : IsNoetherian T := isNoetherian_of_locallyOfFiniteType aT
   eqToHom (lineSource_obj_eq P T K.obj) ≫
     AffineLinePurity.affineLinePurityComparison P T P.level (annihilates P) aT K Ke hKe eK ≫
-    (lineExceptionalIso (Ring P) T K.obj).hom
+    (specifiedExceptionalStandingIso (Ring P) (affineTraceLineCompactification T) K).hom
 
 /-- Ordinary antecedent at every coordinate stage, with the given antecedent at zero.
 Source: origin witnesses in the recursion (blueprint: def-pur-affine-space-comparison). -/

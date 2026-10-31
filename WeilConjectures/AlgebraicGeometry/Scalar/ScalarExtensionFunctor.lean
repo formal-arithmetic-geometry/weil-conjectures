@@ -708,9 +708,6 @@ attribute [local irreducible] scalarExtension_positiveComparison
 
 end SignedComparisonEvaluation
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 end TateComparisonProof
 
 section TateExponentProof
@@ -788,5 +785,4 @@ set_option backward.isDefEq.respectTransparency false in
 attribute [local irreducible] scalarExtensionFunctorCounit
   completedAdicChangeData
 
-set_option backward.isDefEq.respectTransparency false in
 end AlgebraicGeometry.ProEtale

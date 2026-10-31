@@ -315,8 +315,6 @@ private theorem tensorTransport_app
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 private theorem sp_projection_square
     (C : Type*) [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C]
@@ -379,8 +377,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 attribute [local irreducible] MonoidalCategory.curriedTensor
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 
 -- Specialize the projection square without unfolding K-flat resolutions.
 end AlgebraicGeometry.ProEtale

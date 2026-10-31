@@ -87,7 +87,6 @@ private noncomputable def moduleExtension (J : GrothendieckTopology C) (Λ : Typ
     [Presheaf.IsLocallyInjective J α] [Presheaf.IsLocallySurjective J α] :=
   moduleEmbedding J Λ ⋙ PresheafOfModules.sheafification.{u} α
 
-set_option backward.isDefEq.respectTransparency false in
 private noncomputable instance moduleEmbeddingUnitIsIso
     (J : GrothendieckTopology C) (Λ : Type u) [CommRing Λ]
     (R : Sheaf J RingCat.{u})
@@ -220,8 +219,6 @@ private theorem constantExtensionUnit_isIso
     α] at hw
   exact hw
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 private noncomputable def moduleRestrictionCounit
     (J : GrothendieckTopology C) (Λ : Type u) [CommRing Λ]
     (R : Sheaf J RingCat.{u})

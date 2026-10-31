@@ -178,6 +178,9 @@ import Mathlib.CategoryTheory.Adjunction.Whiskering
 import WeilConjectures.AlgebraicGeometry.Vector.VectorIntegrationRankZeroLocal
 import WeilConjectures.SixFunctors.Etale.Derived.Exchange
 import WeilConjectures.SixFunctors.OpenClosed.Conservative
+public import WeilConjectures.AlgebraicGeometry.Vector.VectorIntegrationIdentityUnit
+public import WeilConjectures.AlgebraicGeometry.Vector.VectorIntegrationSwapChartPrefix
+public import WeilConjectures.SmoothPurity.OrdinaryFiniteTwistTransportUniqueness
 
 /-! # Geometric descent and ordered multiplication of vector integration
 
@@ -431,6 +434,61 @@ def vectorTraceSumTransport (A : Type (u + 1)) [CommRing A] (N : ℕ) (hA : (N :
     (vectorTraceH S r s F G)
     (by simpa only [Category.comp_id] using
       (VectorTraceGeometry.sumIso_isPullback S r s F G).w.symm)).symm.app _
+
+/-- Every trace source is concentrated in degree zero, and its actual trace is invertible.
+Source: blueprint paragraph 2 (blueprint: lem-pur-vector-trace-geometric-descent).
+Proof: on every frame open, exchange identifies the source and trace with the affine
+space source and trace. Affine top trace is an isomorphism to A[0]. Exact restriction
+commutes with cohomology; jointly surjective restriction detects both vanishing and
+isomorphisms. This applies to all ranks, the zero ring, and the empty scheme. -/
+theorem vectorBundleIntegration_concentration_and_isIso (N : ℕ) (hN : 0 < N)
+    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
+    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (r : ℕ)
+    (F : S.Modules) [F.IsFiniteLocallyFreeOfRank r] :
+    (∀ q : ℤ, q ≠ 0 → IsZero ((_root_.DerivedCategory.homologyFunctor _ q).obj
+      (vectorIntegrationSource A N hA S r F))) ∧
+    IsIso (vectorBundleIntegration N hN A hA S hS r F) := by
+  refine ⟨vectorIntegration_cohomology_zero N hN A hA S hS r F, ?_⟩
+  classical
+  obtain ⟨t, D, htD, htrace⟩ := exists_affineSpaceTopTrace N hN A hA
+  obtain ⟨I, V, hV, e⟩ :=
+    Scheme.Modules.IsFiniteLocallyFreeOfRank.exists_restrict_iso_free F (r := r)
+  have hn : VectorIntegrationNormalization N hN A hA S hS r F
+      (vectorBundleIntegration N hN A hA S hS r F) := by
+    unfold vectorBundleIntegration vectorIntegrationGluing
+    exact (existsUnique_vectorIntegrationGluing N hN A hA S hS r F).2.exists.choose_spec.2
+  let := (vectorIntegration_geometry S r F).1
+  let := (vectorIntegration_geometry S r F).2.1
+  apply derived_isIso_of_cover A (fun i : I ↦ (V i).ι)
+    (φ := vectorBundleIntegration N hN A hA S hS r F) ?_
+  · intro i
+    let : TopologicalSpace.NoetherianSpace (V i).toScheme :=
+      (V i).ι.isOpenEmbedding.isInducing.noetherianSpace
+    let : IsNoetherian (V i).toScheme :=
+      { toIsLocallyNoetherian := inferInstance
+        isCompact_univ := TopologicalSpace.NoetherianSpace.isCompact _ }
+    let hi := affineTracePullbackInvertible N (V i).ι hS
+    let := (htrace (V i).toScheme hi r).2.2.1
+    have hl : IsIso (vectorIntegrationLocalTrace N hN A hA t D S hS r F
+        (V i) (e i).some) := by
+      dsimp only [vectorIntegrationLocalTrace]
+      have hex := isIso_rightDerivedLowerShriekBaseChangeMap A
+        (vectorIntegrationChart_isPullback S r F (V i) (e i).some)
+      have hexa := @NatIso.isIso_app_of_isIso _ _ _ _ _ _ _ hex
+        (vectorIntegrationCoefficient A N hA S r F)
+      apply IsIso.comp_isIso' hexa
+      apply IsIso.comp_isIso' (by infer_instance)
+      apply IsIso.comp_isIso' (by infer_instance)
+      infer_instance
+    have heq := hn t D (V i) (e i).some
+    rw [← heq] at hl
+    apply (NatIso.isIso_map_iff
+      (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) (V i).ι) _).1
+    exact (isIso_comp_right_iff _ (ordinaryFiniteUnitPullback A (V i).ι).hom).1 hl
+  · intro x
+    obtain ⟨i, hi⟩ := TopologicalSpace.Opens.mem_iSup.mp
+      (hV.ge (Set.mem_univ x) : x ∈ ⨆ i, V i)
+    exact ⟨i, ⟨x, hi⟩, rfl⟩
 
 attribute [instance] vectorTrace_projection_isIso
 attribute [local instance 2000] compact_projection_isIso

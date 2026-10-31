@@ -244,7 +244,6 @@ variable {A : Type a} [Category.{b} A] [Abelian A] [HasDerivedCategory A]
   (hzero : ∀ (M N : ∀ i, B i), G.map (fun i ↦ (0 : M i ⟶ N i)) = 0)
   (η : 𝟭 A ≅ Functor.pi' r ⋙ G) (ε : G ⋙ Functor.pi' r ≅ 𝟭 _)
 
-include G hzero η ε in
 end DerivedPi
 
 end AlgebraicGeometry.Scheme.ProEt.FiniteClopenTensor

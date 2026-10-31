@@ -657,6 +657,31 @@ private theorem finiteReduction_counit_bijective (Q : PurityFiniteSetting.{u})
   simpa only [E, H, compositionExceptional, Functor.comp_obj, smoothExceptionalCounit,
     dif_pos hK', Category.assoc] using ht
 
+/-- The reduced exceptional counit is bijective on morphisms from a finite-Tor
+constructible source.  This is the public wrapper around the comparison theorem
+used by cancellation arguments in later finite-reduction modules.
+Source: blueprint Step 1, lem-coef-finite-exceptional
+(blueprint: def-pur-finite-reduction-comparisons).
+Proof: apply the private bounded-model proof of the same statement.  Its two
+constructibility hypotheses are exactly the hypotheses of this wrapper, so no
+additional choice of presentation is exposed by the public API. -/
+theorem finiteReduction_counit_bijective_public (Q : PurityFiniteSetting.{u})
+    {X Y : Scheme.{u}} [X.Over (Spec (.of Q.field.k))]
+    [Y.Over (Spec (.of Q.field.k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of Q.field.k))]
+    [QuasiCompact (X ↘ Spec (.of Q.field.k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of Q.field.k))]
+    [QuasiCompact (Y ↘ Spec (.of Q.field.k))]
+    (f : X ⟶ Y) [f.IsOver (Spec (.of Q.field.k))]
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    (L : Scheme.proEtaleDerivedCategory X Q.Ring)
+    (hL : finiteTorConstructible Q.coefficients.l Q.extension Q.level Q.level_pos X L)
+    (K : Scheme.proEtaleDerivedCategory Y Q.Ring)
+    (hK : finiteTorConstructible Q.coefficients.l Q.extension Q.level Q.level_pos Y K) :
+    Function.Bijective (fun b : L ⟶ (Q.compositionExceptional f).obj K ↦
+      (Q.smoothCompactSupport f).map b ≫ Q.smoothExceptionalCounit f K) := by
+  exact finiteReduction_counit_bijective Q f L hL K hK
+
 /-- The exceptional coefficient comparison is uniquely determined by the counit
 and the already specified compact-support coefficient comparison.
 Source: blueprint Step 1, lem-coef-finite-exceptional
