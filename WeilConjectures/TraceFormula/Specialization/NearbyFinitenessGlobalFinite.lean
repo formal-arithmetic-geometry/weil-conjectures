@@ -20,9 +20,10 @@ invertible in `k'`, and `q : P ⟶ S` proper, with special fibre `p : P_s ⟶ Sp
 bounded constructible complex `B` of `T̲`-modules on `P`:
 
 * the cohomology `Rp_* Ψ_P B` of the geometric nearby cycles of the standard model of `P` is
-  bounded constructible
-  (`NearbyCyclesModel.boundedConstructible_lowerStar_nearbyCycles_traitStdModel_of_isProper_of_finite`):
-  by the proper exchange (`NearbyCyclesModel.Hom.isIso_pushforwardExchange_app_of_isProper_finiteCoefficient`)
+  bounded constructible; this is
+  `boundedConstructible_lowerStar_nearbyCycles_traitStdModel_of_isProper_of_finite`:
+  by the proper exchange
+  (`NearbyCyclesModel.Hom.isIso_pushforwardExchange_app_of_isProper_finiteCoefficient`)
   it is `Ψ_S (Rq_* B)`, where `Rq_* B` is bounded constructible
   (`ProEtale.CondensedRing.boundedConstructible_rightDerivedLowerStar_obj_of_isProper_of_finite`)
   and so are the nearby cycles of the trait
@@ -31,7 +32,7 @@ bounded constructible complex `B` of `T̲`-modules on `P`:
   `hᵢ : Wᵢ ⟶ P_s` from Noetherian schemes, whose images contain the non-closed points, are
   (`NearbyCyclesModel.boundedConstructible_nearbyCycles_traitStdModel_of_finite`), by Deligne's
   criterion at closed points
-  (`ProEtale.CondensedRing.boundedConstructible_of_leftDerivedUpperStar_of_rightDerivedLowerStar_of_isProper`).
+  `CondensedRing.boundedConstructible_of_leftDerivedUpperStar_of_rightDerivedLowerStar_of_isProper`.
 
 This is the global step of Deligne's proof (SGA 4½, [Th. finitude], proof of 3.2).
 

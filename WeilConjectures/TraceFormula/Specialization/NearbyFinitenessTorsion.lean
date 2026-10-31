@@ -57,7 +57,8 @@ variable (T : Type) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] [Dis
 over `Spec K⟦t⟧` (`K = k'(x)^alg`) of `𝔸ⁿ_{K⟦t⟧}` preserve bounded constructible complexes, then the
 restrictions `Lhᵢ,ₛ^* Ψ C` of the nearby cycles of bounded constructible complexes `C` on `𝔸ⁿ⁺¹_S`
 to the coordinate generic slices are bounded constructible: they are retracts of the nearby cycles
-of `Lhᵢ^* C` (`NearbyCyclesModel.isSplitMono_pullbackExchange_app_affineSpaceSliceHom_of_finite`). -/
+of `Lhᵢ^* C`
+(`NearbyCyclesModel.isSplitMono_pullbackExchange_app_affineSpaceSliceHom_of_finite`). -/
 theorem boundedConstructible_upperStar_nearbyCycles_affineSpaceSlice_of_finite
     {k' : Type u} [Field k'] [IsSepClosed k'] (n : ℕ) (i : Fin (n + 1)) {p : ℕ} [Fact p.Prime]
     (hp : ∀ m : ℕ, (m : k') = 0 → p ∣ m) (hpT : IsUnit (p : T))
@@ -137,7 +138,8 @@ theorem boundedConstructible_upperStar_nearbyCycles_projectiveSpace_of_finite
         (((affineSpaceModel (traitSliceField k') n).geometric.nearbyCycles
           (Profinite.continuousMapRingObj T)).obj C))
     {B : DerivedCategory (Mod (Sheaf
-      (Scheme.ProEt.topology (projectiveSpaceModel k' (n + 1)).total) Ab.{u + 1}) (condensedRingObj (Profinite.continuousMapRingObj T)
+      (Scheme.ProEt.topology (projectiveSpaceModel k' (n + 1)).total) Ab.{u + 1})
+      (condensedRingObj (Profinite.continuousMapRingObj T)
         (projectiveSpaceModel k' (n + 1)).total))}
     (hB : boundedConstructible _ B) :
     boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj T)
@@ -187,7 +189,8 @@ nearby cycles over `Spec K⟦t⟧` (`K = k'(x)^alg`) of `𝔸ⁿ_{K⟦t⟧}` pre
 complexes, then so do the nearby cycles of `ℙⁿ⁺¹_S`: the pullbacks of `Ψ_ℙ B` along the maps
 `eₐ,ₛ ∘ hᵢ,ₛ`, which reach every non-closed point of the special fibre, are bounded constructible
 (`NearbyCyclesModel.boundedConstructible_upperStar_nearbyCycles_projectiveSpace_of_finite`), and
-the global step applies (`NearbyCyclesModel.boundedConstructible_nearbyCycles_traitStdModel_of_finite`). -/
+the global step applies
+(`NearbyCyclesModel.boundedConstructible_nearbyCycles_traitStdModel_of_finite`). -/
 theorem boundedConstructible_nearbyCycles_projectiveSpace_of_finite {k' : Type u} [Field k']
     [IsSepClosed k'] [HasInvertibleExponent (ULift.{u + 1} T) (Spec (.of k'))] (n : ℕ)
     {p : ℕ} [Fact p.Prime] (hp : ∀ m : ℕ, (m : k') = 0 → p ∣ m) (hpT : IsUnit (p : T))
@@ -202,7 +205,8 @@ theorem boundedConstructible_nearbyCycles_projectiveSpace_of_finite {k' : Type u
         (((affineSpaceModel (traitSliceField k') n).geometric.nearbyCycles
           (Profinite.continuousMapRingObj T)).obj C))
     {B : DerivedCategory (Mod (Sheaf
-      (Scheme.ProEt.topology (projectiveSpaceModel k' (n + 1)).total) Ab.{u + 1}) (condensedRingObj (Profinite.continuousMapRingObj T)
+      (Scheme.ProEt.topology (projectiveSpaceModel k' (n + 1)).total) Ab.{u + 1})
+      (condensedRingObj (Profinite.continuousMapRingObj T)
         (projectiveSpaceModel k' (n + 1)).total))}
     (hB : boundedConstructible _ B) :
     boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj T)

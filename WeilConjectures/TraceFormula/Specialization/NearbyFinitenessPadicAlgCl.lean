@@ -51,7 +51,7 @@ namespace NearbyCyclesModel
 variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ] [IsCommMonObj Λ]
   [MonObj Λ'] [IsCommMonObj Λ'] (a : Λ ⟶ Λ') [IsMonHom a]
 
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 600000 in
 -- instance synthesis for the derived extensions of scalars on the three schemes of the model
 /-- **Nearby cycles commute with extension of scalars** along a coefficient change `a : Λ ⟶ Λ'`,
 at a complex `K` at which `Rj_*` commutes with the extension of scalars: then
@@ -129,8 +129,6 @@ theorem boundedConstructible_nearbyCycles_affineSpace_extendScalars_residueField
   exact boundedConstructible_nearbyCycles_affineSpace_obj_of_finite (integersResidueField ℓ E.1)
     n hpk (isUnit_natCast_integersResidueField E.1 hp hpℓ) (by exact_mod_proofs h)
 
-set_option maxHeartbeats 1000000 in
--- the three extensions of scalars and the pushforward comparison at concrete models
 /-- **Deligne's finiteness theorem on `𝔸ⁿ_S` with `𝒪_E`-coefficients**: the nearby cycles of a
 bounded constructible `𝒪_E`-complex `K₀` on `𝔸ⁿ_S` are bounded constructible. They are derived
 complete, and their reduction `𝔽_E ⊗ᴸ Ψ K₀ ≅ Ψ (𝔽_E ⊗ᴸ K₀)` is bounded constructible
@@ -167,13 +165,14 @@ theorem boundedConstructible_nearbyCycles_affineSpace_obj_padicIntegers (n : ℕ
   have hpush := isIso_derivedUpperStarExtendScalarsPushHom_residueField_app ℓ E.1 M.j
     ((L((M.ε)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧)).obj K₀) m
   obtain ⟨e⟩ := nonempty_extendScalars_nearbyCycles_iso
-    (Profinite.padicIntegersRingObjToResidueField ℓ E.1) M K₀ (asIso ((derivedUpperStarExtendScalarsPushHom
+    (Profinite.padicIntegersRingObjToResidueField ℓ E.1) M K₀
+    (asIso ((derivedUpperStarExtendScalarsPushHom
       (Profinite.padicIntegersRingObjToResidueField ℓ E.1) M.j).app _))
   have hred := boundedConstructible_nearbyCycles_affineSpace_extendScalars_residueField n E hK₀
   have h₁ := (boundedConstructible _).prop_of_iso e.symm hred
   exact boundedConstructible_of_derivedCompleteIntegers_of_residueField hcΨ (by exact_mod_proofs h₁)
 
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 400000 in
 -- the extension of scalars and the pushforward comparison at concrete models
 /-- **From `𝒪_E` to `E`**: the nearby cycles of `E ⊗ᴸ_{𝒪_E} K₀`, for a bounded constructible
 `𝒪_E`-complex `K₀` on `𝔸ⁿ_S`, are bounded constructible: they are `E ⊗ᴸ_{𝒪_E} Ψ K₀`. -/
@@ -206,9 +205,9 @@ theorem boundedConstructible_nearbyCycles_affineSpace_obj_padicSubfield (n : ℕ
   have hE := boundedConstructible_derivedExtendScalars_obj _ ℓ E ⟨_, h𝒪⟩
   exact (boundedConstructible _).prop_of_iso e₁ (by exact_mod_proofs hE)
 
-omit [IsSepClosed k'] [Fact (ringChar k' ≠ ℓ)] in
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 400000 in
 -- the extension of scalars and the pushforward comparison at concrete models
+omit [IsSepClosed k'] [Fact (ringChar k' ≠ ℓ)] in
 /-- **From `E` to `ℚ̄_ℓ`**: if the nearby cycles of a bounded below `E`-complex `K₁` on `𝔸ⁿ_S` are
 bounded constructible, so are those of `ℚ̄_ℓ ⊗ᴸ_E K₁`: they are `ℚ̄_ℓ ⊗ᴸ_E Ψ K₁`. -/
 theorem boundedConstructible_nearbyCycles_affineSpace_obj_padicAlgCl_of_padicSubfield (n : ℕ)
@@ -249,7 +248,8 @@ complexes. A bounded constructible `B` is `ℚ̄_ℓ ⊗ᴸ_E E ⊗ᴸ_{𝒪_E} 
 (`ProEtale.CondensedRing.exists_derivedCompleteIntegers_iso_integralModel`), and the nearby cycles
 commute with the two extensions of scalars
 (`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_obj_padicSubfield`,
-`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_obj_padicAlgCl_of_padicSubfield`). -/
+`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_obj_padicAlgCl_of_padicSubfield`).
+-/
 theorem boundedConstructible_nearbyCycles_affineSpace_obj_of_integral (n : ℕ)
     {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology (affineSpaceModel k' n).total)
       Ab.{u + 1}) (condensedRingObj (Profinite.padicAlgClRingObj ℓ) (affineSpaceModel k' n).total))}
