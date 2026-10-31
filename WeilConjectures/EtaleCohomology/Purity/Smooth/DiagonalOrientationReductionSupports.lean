@@ -71,9 +71,10 @@ noncomputable def derivedExtendScalarsConstantComplexIso (X : Scheme.{u}) :
 
 /-- `Ψ Λ_X ≅ Λ'_X` is the unit comparison of the monoidal structure of `Ψ`. -/
 lemma derivedExtendScalarsConstantComplexIso_hom (X : Scheme.{u}) :
-    letI := derivedExtendScalarsMonoidal hρ ha X
+    haveI := preservesKFlatQuasiIso_extendScalars hρ ha X
+    letI := (Sheaf.extendScalars X.smallEtaleTopology ρ).leftDerivedFunctorMonoidal
     (derivedExtendScalarsConstantComplexIso hρ ha X).hom =
-      Functor.OplaxMonoidal.η (derivedExtendScalars hρ ha X) :=
+      Functor.OplaxMonoidal.η (Sheaf.extendScalars X.smallEtaleTopology ρ).leftDerivedFunctor :=
   rfl
 
 /-- The identifications `Ψ Λ_X ≅ Λ'_X` are compatible with the derived pullbacks. -/

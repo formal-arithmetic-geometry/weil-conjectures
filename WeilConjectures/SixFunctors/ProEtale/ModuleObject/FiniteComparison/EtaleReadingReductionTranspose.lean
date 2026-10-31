@@ -111,6 +111,26 @@ lemma unit_app_comp_map_finiteCoefficientDerivedEquivalenceExtendScalarsIso_hom_
 end ExtendScalars
 end AlgebraicGeometry.ProEtale
 
+/-- An elementary transport of transposes along the functors of the étale reading, used for
+`unit_app_comp_map_etaleReductionExtendScalarsIsoApp_hom`. -/
+lemma _root_.CategoryTheory.Functor.transpose_comp_eq_aux {C₁ C₂ C₃ C₄ C₅ C₆ : Type*} [Category C₁]
+    [Category C₂] [Category C₃] [Category C₄] [Category C₅] [Category C₆] (Re : C₂ ⥤ C₁)
+    (Rν' : C₃ ⥤ C₂) (Rν : C₄ ⥤ C₁) (Rp : C₃ ⥤ C₄) (Φ : C₅ ⥤ C₄) (Φ' : C₆ ⥤ C₃) (Rc : C₆ ⥤ C₅)
+    {p : C₂} {s₁ : C₃} {c₀ : C₅} {c₁ c₂ : C₆}
+    (u : Rν.obj (Φ.obj c₀) ⟶ Re.obj p) (γ : p ⟶ Rν'.obj s₁) (ext : s₁ ⟶ Φ'.obj c₁)
+    (ω : c₁ ⟶ c₂) (ω₁ : Re.obj (Rν'.obj s₁) ⟶ Rν.obj (Rp.obj s₁))
+    (ω₂ : Re.obj (Rν'.obj (Φ'.obj c₂)) ⟶ Rν.obj (Rp.obj (Φ'.obj c₂)))
+    (up : Φ.obj c₀ ⟶ Rp.obj s₁) (η : c₀ ⟶ Rc.obj c₁) (i₁ : Φ.obj (Rc.obj c₁) ⟶ Rp.obj (Φ'.obj c₁))
+    (i₂ : Φ.obj (Rc.obj c₂) ⟶ Rp.obj (Φ'.obj c₂))
+    (hstar : u ≫ Re.map γ ≫ ω₁ = Rν.map up)
+    (hω : Re.map (Rν'.map (ext ≫ Φ'.map ω)) ≫ ω₂ = ω₁ ≫ Rν.map (Rp.map (ext ≫ Φ'.map ω)))
+    (hExt : up ≫ Rp.map ext = Φ.map η ≫ i₁)
+    (hi : Φ.map (Rc.map ω) ≫ i₂ = i₁ ≫ Rp.map (Φ'.map ω)) :
+    u ≫ Re.map ((γ ≫ Rν'.map ext) ≫ Rν'.map (Φ'.map ω)) ≫ ω₂ =
+      Rν.map (Φ.map (η ≫ Rc.map ω) ≫ i₂) := by
+  rw [Category.assoc, ← Rν'.map_comp, Re.map_comp, Category.assoc, hω, reassoc_of% hstar,
+    ← Rν.map_comp, Rp.map_comp, reassoc_of% hExt, ← hi, Φ.map_comp, Category.assoc]
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
@@ -120,6 +140,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgC
   {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
   (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
+set_option maxHeartbeats 800000 in
 /-- Blueprint `det-sp-purity-coefficient-change` (restriction form of `β`). **The transpose of
 `β : Ψ(ρ(red_{n+1} K)) ≅ ρ(red_n K)` under `Ψ ⊣ Res`**, followed by the base change map
 `Res Rν_* ⟶ Rν_* Res`, is `Rν_*` of `Φ` of the condensed transition
@@ -168,13 +189,15 @@ theorem unit_app_comp_map_etaleReductionExtendScalarsIsoApp_hom
     (PadicAlgCl.integersModPowTransition ℓ E n)).hom.naturality
       ((boundedConstructibleIntegersModPowReductionTransitionIso ℓ E n X.left).hom.app K)
   dsimp only [Functor.comp_map, Functor.comp_obj] at hω hi
-  rw [etaleReductionExtendScalarsIsoApp_hom, finiteEtaleReadingExtendScalarsMap_app,
-    Functor.map_comp, Functor.map_comp, Category.assoc, Category.assoc]
-  erw [← Functor.map_comp_assoc (Sheaf.derivedRestrictScalars X.left.smallEtaleTopology
-    (integersModPowCoeffTransition ℓ E n)), ← Functor.map_comp, hω, reassoc_of% hstar,
-    ← Functor.map_comp, Functor.map_comp, reassoc_of% hExt, hi]
-  simp only [Functor.map_comp, Category.assoc]
-  trace_state
-  sorry
+  rw [etaleReductionExtendScalarsIsoApp_hom, finiteEtaleReadingExtendScalarsMap_app]
+  exact CategoryTheory.Functor.transpose_comp_eq_aux
+    (Sheaf.derivedRestrictScalars X.left.smallEtaleTopology (integersModPowCoeffTransition ℓ E n))
+    (R(ν_*(X.left)[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)]))
+    (R(ν_*(X.left)[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E (n + 1))]))
+    (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X.left) (integersModPowCoeffTransition ℓ E n))
+    (finiteCoefficientDerivedEquivalence X.left (PadicAlgCl.integersModPow ℓ E (n + 1))).functor
+    (finiteCoefficientDerivedEquivalence X.left (PadicAlgCl.integersModPow ℓ E n)).functor
+    (Mod.comap (integersModPowTransition X.left ℓ E n)).mapDerivedCategory
+    _ _ _ _ _ _ _ _ _ _ hstar hω hExt hi
 
 end AlgebraicGeometry.ProEtale.CondensedRing

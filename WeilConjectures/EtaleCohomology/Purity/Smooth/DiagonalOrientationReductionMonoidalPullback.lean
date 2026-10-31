@@ -28,7 +28,6 @@ comparisons (`AlgebraicGeometry.Etale.derivedExtendScalarsPullbackMap_app_unit_c
 
 @[expose] public section
 
-set_option linter.mathlibStandardSet false
 
 
 universe u
