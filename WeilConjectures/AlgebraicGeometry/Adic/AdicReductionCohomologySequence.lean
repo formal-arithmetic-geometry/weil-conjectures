@@ -29,6 +29,8 @@ import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrFactorizationUniq
 import WeilConjectures.Mathlib.RingTheory.OrderOfVanishing.Noetherian
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
+set_option linter.privateModule false
+
 /-! # The cohomology sequence for a completed DVR quotient
 
 Source: blueprint integral truncations, hypothesis paragraph, and the quotient-resolution
@@ -95,7 +97,7 @@ private abbrev constantPresheaves (T : Scheme.{u}) (A : Type (u + 1)) [CommRing 
 private def constantGenerator (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
     (M : ModuleCat.{u + 1} A) (U : T.ProEtᵒᵖ) (x : M) :
     ((adicLisseConstantModules T A).obj M).val.obj U :=
-  ((PresheafOfModules.sheafificationAdjunction
+  ((PresheafOfModules.sheafificationAdjunction.{u + 1}
     (adicLisseConstantUnit T A)).unit.app ((constantPresheaves T A).obj M)).app U x
 
 private theorem constantGenerator_naturality (T : Scheme.{u})
@@ -104,7 +106,8 @@ private theorem constantGenerator_naturality (T : Scheme.{u})
     ((adicLisseConstantModules T A).map g).val.app U (constantGenerator T M U x) =
       constantGenerator T N U (g x) := by
   exact (congrArg (fun k ↦ k.app U x)
-    ((PresheafOfModules.sheafificationAdjunction (adicLisseConstantUnit T A)).unit.naturality
+    ((PresheafOfModules.sheafificationAdjunction.{u + 1}
+      (adicLisseConstantUnit T A)).unit.naturality
       ((constantPresheaves T A).map g))).symm
 
 open scoped ChangeOfRings in

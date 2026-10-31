@@ -541,6 +541,8 @@ import WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSupple
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteDiscreteConstructibleEncoding
 import WeilConjectures.AlgebraicGeometry.Finite.Constant.FiniteConstantLocalModel
 
+set_option linter.privateModule false
+
 /-! # Coefficient presentation of the finite comparison predicates
 
 Source: blueprint finite comparison, coefficient paragraph, and Stacks Tags 03CY,
@@ -751,12 +753,14 @@ private theorem pro_localFinite_iff
     let c := ((ProEt.sliceEquiv X (U i)).constantSheafSheafCongrIso
       ((ProEt.topology X).over (U i)) (ProEt.topology (U i).left)
       D (Over.mkIdTerminal (X := U i))).app M
-    exact ⟨M, (Module.finite_iff_finite (R := A)).mp hM,
+    exact ⟨M, hM,
       ⟨(upperStarIsoLocalizationRestriction D (U i).hom (U i).prop).app F ≪≫
         r.symm ≪≫ E.functor.mapIso (e ≪≫
           ((ProEt.topology X).overPullbackConstantSheafIso D (U i)).app M) ≪≫ c⟩⟩
   · intro h
-    obtain ⟨I, U, f, hf, he⟩ := finiteModels_over A F h
+    obtain ⟨ι, W, g, hg, hh⟩ := h
+    obtain ⟨I, U, f, hf, he⟩ := finiteModels_over A F ⟨ι, W, g, hg, fun i ↦
+      (hh i).imp fun M hM ↦ ⟨(Module.finite_iff_finite (R := A)).mp hM.1, hM.2⟩⟩
     apply (ProEt.topology X).superset_covering
       ((Sieve.generate_le_iff _ _).mpr ?_) (Precoverage.generate_mem_toGrothendieck hf)
     rintro V g ⟨i⟩
@@ -781,10 +785,11 @@ private theorem pro_localFinite_small_cover
     let : Precoverage.Small.{u} Scheme.proetalePrecoverage := by
       change Precoverage.Small.{u} (Scheme.propQCPrecoverage @WeaklyEtale)
       infer_instance
-    exact ⟨C.restrictIndexOfSmall.{u}, fun i ↦ hm _⟩
+    exact ⟨C.restrictIndexOfSmall.{u}, fun i ↦
+      (hm _).imp fun M hM ↦ ⟨(Module.finite_iff_finite (R := A)).mp hM.1, hM.2⟩⟩
   · rintro ⟨C, hm⟩
     refine ⟨ULift.{u + 1} C.I₀, fun i ↦ C.X i.down, fun i ↦ C.f i.down, ?_,
-      fun i ↦ hm i.down⟩
+      fun i ↦ (hm i.down).imp fun M hM ↦ ⟨(Module.finite_iff_finite (R := A)).mpr hM.1, hM.2⟩⟩
     convert C.mem₀ using 1
     funext U f
     apply propext
@@ -820,6 +825,160 @@ private local instance etaleRealization_monoidal (X : Scheme.{u}) (A : Type (u +
 private local instance proRealization_monoidal (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A] :
     (finiteComparisonProEtaleModelRealization X A).Monoidal :=
   inferInstanceAs (coefficientModelFixedScalars _ A ⋙ (proSites X A).functor).Monoidal
+
+-- Constant internal module helpers from the SHEAF support file (lost in the port).
+private theorem monoidal_action_comparison
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    [MonoidalCategory C] [MonoidalCategory D] [MonoidalCategory E]
+    (P : C ⥤ D) (F : D ⥤ E) (S : C ⥤ E)
+    [P.LaxMonoidal] [F.LaxMonoidal] [S.LaxMonoidal]
+    (τ : S ≅ P ⋙ F) [NatTrans.IsMonoidal τ.inv]
+    (R N : C) (act : R ⊗ N ⟶ N) :
+    (Functor.LaxMonoidal.μ F (P.obj R) (P.obj N) ≫
+        F.map (Functor.LaxMonoidal.μ P R N ≫ P.map act)) ≫ τ.inv.app N =
+      F.obj (P.obj R) ◁ τ.inv.app N ≫ τ.inv.app R ▷ S.obj N ≫
+        Functor.LaxMonoidal.μ S R N ≫ S.map act := by
+  have h₁ := τ.inv.naturality act
+  have h₂ := NatTrans.IsMonoidal.tensor (τ := τ.inv) R N
+  rw [Functor.LaxMonoidal.comp_μ] at h₂
+  rw [whisker_exchange_assoc, ← tensorHom_def_assoc, ← reassoc_of% h₂,
+    ← h₁, F.map_comp, Category.assoc, Category.assoc]
+  rfl
+
+private theorem ordinary_presentation (R : Type w) [CommRing R] [IsNoetherianRing R]
+    (P : ModuleCat.{w} R) [Module.Finite R P] :
+    ∃ n m : ℕ, ∃ g : ModuleCat.of R (Fin m → R) ⟶ ModuleCat.of R (Fin n → R),
+      Nonempty (P ≅ cokernel g) := by
+  let := Module.finitePresentation_of_finite R P
+  obtain ⟨n, m, f, g, hf, hgf⟩ := Module.FinitePresentation.exists_fin' R P
+  exact ⟨n, m, ModuleCat.ofHom g,
+    ⟨(ModuleCat.isColimitCokernelCofork (ModuleCat.ofHom g) (ModuleCat.ofHom f)
+      hgf hf).coconePointUniqueUpToIso (colimit.isColimit (parallelPair (ModuleCat.ofHom g) 0))⟩⟩
+
+private theorem internal_constant_fp {C : Type c} [Category.{h} C]
+    (J : GrothendieckTopology C) (R : Type (max c h)) [CommRing R] [IsNoetherianRing R]
+    [HasSheafify J Ab.{max c h}] [(J.W (A := Ab.{max c h})).IsMonoidal]
+    [HasLimitsOfSize.{h, c} (ModuleCat.{max c h} R)]
+    [HasSheafify J (ModuleCat.{max c h} R)]
+    (P : ModuleCat.{max c h} R) [Module.Finite R P] :
+    ∃ M : Mod (Sheaf J Ab.{max c h}) (Sheaf.sheafifyRingPresheaf J
+        ((Functor.const Cᵒᵖ).obj (RingCat.of R))),
+      Mod.IsFinitelyPresented _ M ∧
+        Nonempty ((ConstantInternalModuleSheafEncoding.sheafEncoding J R
+          (internalToModule R) rfl).obj M ≅ (constantSheaf J (ModuleCat.{max c h} R)).obj P) := by
+  let H := ConstantInternalModuleSheafEncoding.sheafEncoding J R (internalToModule R) rfl
+  let S := constantSheaf J (ModuleCat.{max c h} R)
+  let rr : (internalToModule R).obj (Mod.regular (AddCommGrpCat.of R)) ≅ ModuleCat.of R R :=
+    ModuleCat.isoMk (Iso.refl _) (fun r ↦ by ext x; rfl)
+  let e (n : ℕ) : H.obj (Mod.finiteFree _ n) ≅ S.obj (ModuleCat.of R (Fin n → R)) :=
+    ConstantInternalModuleSheafEncoding.encFiniteFreeIso J R (internalToModule R) rfl n ≪≫
+      S.mapIso (biproduct.mapIso (fun _ ↦ rr) ≪≫ ModuleCat.biproductIsoPi _)
+  obtain ⟨n, m, g, ⟨eg⟩⟩ := ordinary_presentation R P
+  let ff := Functor.FullyFaithful.ofFullyFaithful H
+  let g' := ff.preimage ((e m).hom ≫ S.map g ≫ (e n).inv)
+  let eH : H.obj (cokernel g') ≅ S.obj P :=
+    PreservesCokernel.iso H g' ≪≫
+      cokernel.mapIso _ _ (e m) (e n) (by simp [g', ff]) ≪≫
+      (PreservesCokernel.iso S g).symm ≪≫ S.mapIso eg.symm
+  let M := H.objPreimage (S.obj P)
+  exact ⟨M, ⟨n, m, g', ⟨ff.preimageIso (H.objObjPreimageIso _ ≪≫ eH.symm)⟩⟩,
+    ⟨H.objObjPreimageIso _⟩⟩
+
+private def internalConstantPresheafFunctor
+    {C : Type c} [Category.{h} C] (R : Type w) [CommRing R] :
+    Mod Ab.{w} (AddCommGrpCat.of R) ⥤
+      Mod (Cᵒᵖ ⥤ Ab.{w}) (ConstantInternalModuleSheafEncoding.A (C := Cᵒᵖ) R) where
+  obj N :=
+    { X := (Functor.const Cᵒᵖ).obj N.X
+      mod := ModObj.mk' _
+        { app := fun _ ↦ Mod.act (A := AddCommGrpCat.of R) N.X
+          naturality := fun _ ↦ by simp }
+        (by
+          apply NatTrans.ext
+          funext U
+          exact ModObj.one_smul_self (AddCommGrpCat.of R) N.X)
+        (by
+          apply NatTrans.ext
+          funext U
+          exact ModObj.mul_smul_self (AddCommGrpCat.of R) N.X) }
+  map f := Mod.homMk ((Functor.const Cᵒᵖ).map f.hom) (by
+    apply NatTrans.ext
+    funext U
+    exact Mod.act_hom f)
+  map_id N := by ext U; rfl
+  map_comp f g := by ext U; rfl
+
+private theorem internalConstantPresheaf_action
+    {C : Type c} [Category.{h} C] (R : Type w) [CommRing R]
+    (N : Mod Ab.{w} (AddCommGrpCat.of R)) :
+    Functor.LaxMonoidal.μ (Functor.const Cᵒᵖ) (AddCommGrpCat.of R) N.X ≫
+      (Functor.const Cᵒᵖ).map (Mod.act N.X) =
+        Mod.act ((internalConstantPresheafFunctor (C := C) R).obj N).X := by
+  ext U
+  rfl
+
+private def internalConstantFunctor
+    {C : Type c} [Category.{h} C] (J : GrothendieckTopology C)
+    [HasSheafify J Ab.{w}] [(J.W (A := Ab.{w})).IsMonoidal]
+    (R : Type w) [CommRing R] :
+    Mod Ab.{w} (AddCommGrpCat.of R) ⥤
+      Mod (Sheaf J Ab.{w}) ((presheafToSheaf J Ab.{w}).obj
+        (ConstantInternalModuleSheafEncoding.A (C := Cᵒᵖ) R)) :=
+  internalConstantPresheafFunctor R ⋙
+    (presheafToSheaf J Ab.{w}).mapMod (ConstantInternalModuleSheafEncoding.A (C := Cᵒᵖ) R)
+
+@[irreducible] private def internalConstantEncoding
+    {C : Type c} [Category.{h} C] (J : GrothendieckTopology C)
+    [HasSheafify J Ab.{w}] [(J.W (A := Ab.{w})).IsMonoidal]
+    (R : Type w) [CommRing R]
+    [J.HasSheafCompose (forget₂ (ModuleCat.{w} R) Ab.{w})]
+    [HasLimitsOfSize.{h, c} (ModuleCat.{w} R)]
+    [PreservesLimitsOfSize.{h, c} (forget₂ (ModuleCat.{w} R) Ab.{w})]
+    [ReflectsLimitsOfSize.{h, c} (forget₂ (ModuleCat.{w} R) Ab.{w})]
+    [HasSheafify J (ModuleCat.{w} R)] :
+    internalConstantFunctor J R ⋙
+      ConstantInternalModuleSheafEncoding.sheafEncoding J R (internalToModule R) rfl ≅
+        internalToModule R ⋙ constantSheaf J (ModuleCat.{w} R) := by
+  let P := ConstantInternalModuleSheafEncoding.modulePresheafEncoding (C := C) R
+    (internalToModule R)
+  let T := internalConstantPresheafFunctor (C := C) R
+  let i : T ⋙ P ≅ internalToModule R ⋙ Functor.const Cᵒᵖ := by
+    refine NatIso.ofComponents (fun M ↦ NatIso.ofComponents (fun U ↦ ?_) ?_) ?_
+    · exact ModuleCat.isoMk (Iso.refl _) (fun r ↦ by ext m; rfl)
+    · intro U V f
+      ext m
+      rfl
+    · intro M N f
+      ext U m
+      rfl
+  let S := (presheafToSheaf J Ab.{w}).mapMod
+    (ConstantInternalModuleSheafEncoding.A (C := Cᵒᵖ) R)
+  let H := ConstantInternalModuleSheafEncoding.sheafEncoding J R (internalToModule R) rfl
+  change (T ⋙ S) ⋙ H ≅ _
+  exact Functor.associator T S H ≪≫
+    Functor.isoWhiskerLeft T
+      (ConstantInternalModuleSheafEncoding.encSheafifyIso J R (internalToModule R) rfl) ≪≫
+    (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight i _ ≪≫
+    Functor.associator _ _ _
+
+private theorem internalConstantAction
+    {C : Type c} [Category.{h} C] (J : GrothendieckTopology C)
+    [HasSheafify J Ab.{w}] [(J.W (A := Ab.{w})).IsMonoidal]
+    (R : Type w) [CommRing R] (N : Mod Ab.{w} (AddCommGrpCat.of R)) :
+    @Mod.act _ _ _ _ _ ((internalConstantFunctor J R).obj N).X
+      ((internalConstantFunctor J R).obj N).mod =
+      Functor.LaxMonoidal.μ (constantSheaf J Ab.{w}) (AddCommGrpCat.of R) N.X ≫
+        (constantSheaf J Ab.{w}).map (Mod.act N.X) := by
+  simp only [internalConstantFunctor, Functor.comp_obj, Functor.act_mapMod_obj]
+  dsimp only [constantSheaf]
+  erw [Functor.LaxMonoidal.comp_μ]
+  rw [Category.assoc]
+  dsimp only [Functor.comp_map]
+  erw [← Functor.map_comp]
+  exact congrArg (fun k ↦ Functor.LaxMonoidal.μ (presheafToSheaf J Ab.{w})
+    (ConstantInternalModuleSheafEncoding.A (C := Cᵒᵖ) R)
+    ((Functor.const Cᵒᵖ).obj N.X) ≫ (presheafToSheaf J Ab.{w}).map k)
+      (internalConstantPresheaf_action (C := C) R N).symm
 
 variable (B : Type) [CommRing B] [TopologicalSpace B] [IsTopologicalRing B]
   [DiscreteTopology B] [Finite B]

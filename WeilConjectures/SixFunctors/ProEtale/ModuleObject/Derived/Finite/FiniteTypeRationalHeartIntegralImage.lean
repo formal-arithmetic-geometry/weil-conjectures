@@ -613,9 +613,9 @@ theorem finiteTypeRationalHeart_integralImage
         · exact _root_.constructible_of_iso
             ((DerivedCategory.singleFunctorCompHomologyFunctorIso _ 0).app N).symm hN
         · rcases lt_or_gt_of_ne hi with hi | hi
-          · exact ProEtale.constructible_of_isZero _ _
+          · exact ProEtale.isConstructibleModuleObject_of_isZero _
               (DerivedCategory.isZero_of_isGE _ 0 i hi)
-          · exact ProEtale.constructible_of_isZero _ _
+          · exact ProEtale.isConstructibleModuleObject_of_isZero _
               (DerivedCategory.isZero_of_isLE _ 0 i hi)⟩
   let eK : (integralScalarExtension ℓ E X.left).obj K.obj ≅
       (DerivedCategory.singleFunctor _ 0).obj F :=

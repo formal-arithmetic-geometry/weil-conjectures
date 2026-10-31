@@ -218,10 +218,20 @@ private theorem intrinsic_of_ordinary_stratified (B : Type u) [CommRing B] [Fini
   have h : ProEtale.IsConstructible (ULift.{u + 1} B) F :=
     ⟨S, fun i ↦ (FiniteDiscreteOrdinary.localModel_iff_finiteLocal B _ _).mp (hS i)⟩
   obtain ⟨S, hn, hS⟩ := Scheme.positive_stratification V (ULift.{u + 1} B) F h
+  have hS' (i : Fin S.n) : ∃ (ι : Type (u + 1)) (W : ι → Scheme.{u})
+      (g : ∀ j, W j ⟶ S.domain i), Presieve.ofArrows W g ∈ Scheme.proetalePrecoverage _ ∧
+        ∀ j, ∃ M : ModuleCat.{u + 1} (ULift.{u + 1} B), Finite M ∧
+          Nonempty (((g j)^*[ModuleCat.{u + 1} (ULift.{u + 1} B)]).obj
+              ((S.immersion i)^*[ModuleCat.{u + 1} (ULift.{u + 1} B)].obj F) ≅
+            (constantSheaf (Scheme.ProEt.topology (W j)) _).obj M) := by
+    obtain ⟨ι, W, g, hg, h⟩ := hS i
+    refine ⟨ι, W, g, hg, fun j ↦ ?_⟩
+    obtain ⟨M, hM, e⟩ := h j
+    exact ⟨M, Module.finite_of_finite (ULift.{u + 1} B), e⟩
   refine ⟨S, hn, S.isConstructible_stratum, fun i ↦ ⟨?_, ?_⟩⟩
-  · obtain ⟨I, U, f, hf, he⟩ := finiteModels_over (ULift.{u + 1} B) _ (hS i)
+  · obtain ⟨I, U, f, hf, he⟩ := finiteModels_over (ULift.{u + 1} B) _ (hS' i)
     exact ⟨I, U, f, hf, fun j ↦ ⟨(he j).choose, (he j).choose_spec.2⟩⟩
-  · exact finite_geometricStalk_of_finite_models (ULift.{u + 1} B) _ (hS i)
+  · exact finite_geometricStalk_of_finite_models (ULift.{u + 1} B) _ (hS' i)
 
 set_option backward.isDefEq.respectTransparency true in
 private theorem exact_comparison
@@ -239,6 +249,23 @@ private theorem exact_comparison
     (G.mapDerivedCategoryHomologyFunctorIso q).app (F.mapDerivedCategory.obj K) ≪≫
     (DerivedCategory.homologyFunctor _ q).mapIso (G.mapDerivedCategory.mapIso
       (hL.app K).symm)⟩
+
+private instance quotient_upper_star_additive (n : ℕ) {V T : Scheme.{u}}
+    (f : T ⟶ V) : (quotientUpperStar l E n f).Additive := by
+  let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
+  exact CondensedRing.upperStar_additive (FiniteDiscreteOrdinary.coefficient (R l E n)) f
+
+private instance quotient_upper_star_limits (n : ℕ) {V T : Scheme.{u}}
+    (f : T ⟶ V) : PreservesFiniteLimits (quotientUpperStar l E n f) := by
+  let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
+  exact CondensedRing.preservesFiniteLimits_upperStar
+    (FiniteDiscreteOrdinary.coefficient (R l E n)) f
+
+private instance quotient_upper_star_colimits (n : ℕ) {V T : Scheme.{u}}
+    (f : T ⟶ V) : PreservesFiniteColimits (quotientUpperStar l E n f) := by
+  let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
+  exact CondensedRing.preservesFiniteColimits_upperStar
+    (FiniteDiscreteOrdinary.coefficient (R l E n)) f
 
 private instance fixed_encoding_additive (n : ℕ) (T : Scheme.{u})
     (e : Encoding l E n T) : (fixedEncoding l E n T e).functor.Additive := by
