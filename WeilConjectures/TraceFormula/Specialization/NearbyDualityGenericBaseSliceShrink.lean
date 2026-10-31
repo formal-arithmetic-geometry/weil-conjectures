@@ -63,6 +63,10 @@ open CategoryTheory Limits MonoidalCategory MonoidalClosed
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
 
+-- `IsSepClosed k'` gives a second instance path to the Henselian property of `k'` inside
+-- `FractionRing (PowerSeries k')`, making terms elaborated with and without it expensive to unify.
+attribute [-instance] AlgebraicGeometry.Scheme.isStrictlyHenselianLocalRing_of_isSepClosed
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme

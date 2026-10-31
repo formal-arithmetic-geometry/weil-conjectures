@@ -9,6 +9,7 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyDuality
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBaseFiniteSupport
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBaseProper
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBaseSlice
+public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBaseSliceImmersion
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingGenericBaseExistence
 public import WeilConjectures.TraceFormula.Specialization.TraitModelOfGenericBaseDenseCompactification
 
@@ -168,7 +169,7 @@ theorem isIso_nearbyDualityMapOfGenericBase_of_measure
   refine isIso_nearbyDualityMapOfGenericBase_of_openSubmodel ℓ D h hMc j j' φ hφ hq hg K ?_
   refine hMc.isIso_nearbyDualityMap_of_isProper_of_finset ℓ D hgen _ ?_
   refine exists_finset_isIso_upperStar_nearbyDualityMapOfGenericBase ℓ D hMc
-    (fun V _ b hb L ↦ ?_) _
+    (fun V _ ιV _ cV _ hcV b hb L ↦ ?_) _
   have hR := hMc.restrictOpen V
   have hRM := hR.isTraitModelOver
   have := hRM.locallyOfFiniteType_genericSliceBase (traitSliceCoord k') hb
@@ -178,7 +179,10 @@ theorem isIso_nearbyDualityMapOfGenericBase_of_measure
   have := hRM.quasiCompact_baseChangeSpecial_traitSlice (traitSliceCoord k') hb
   have := hRM.isSeparated_baseChangeSpecial_traitSlice (traitSliceCoord k') hb
   refine isIso_map_sliceSpecialMap_nearbyDualityMapOfGenericBase ℓ D
-    (Classical.choice (nonempty_nearbyDualizingDataOfGenericBase _ ℓ)) hR hb (fun L' ↦ ?_) L
+    (Classical.choice (nonempty_nearbyDualizingDataOfGenericBase _ ℓ)) hR hb
+    (hMc.exists_iso_map_θ_eq_twist_restrictOpen_of_immersion ℓ V hb D
+      (Classical.choice (nonempty_nearbyDualizingDataOfGenericBase _ ℓ)) hgen cV hcV)
+    (fun L' ↦ ?_) L
   rcases hμs hR hb with hlt | hempty
   · exact IH _ (by omega) _ _ rfl L'
   · exact isIso_nearbyDualityMapOfGenericBase_of_isEmpty ℓ _ _ L'

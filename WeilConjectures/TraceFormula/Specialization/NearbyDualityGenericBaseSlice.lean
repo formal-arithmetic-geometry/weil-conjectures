@@ -25,7 +25,8 @@ whose special fibre is the special fibre `𝒳''_s` of the slice (`NearbyCyclesM
 This file proves the **slice compatibility of nearby duality**
 (`NearbyCyclesModel.isIso_map_sliceSpecialMap_nearbyDualityMapOfGenericBase`, blueprint
 `det-tf-nearby-duality-slice` (2) with `det-tf-invariants-duality`): if nearby duality holds for
-the generic slice model, then the pullback of `δ_{M,L}` to `𝒳''_s` is an isomorphism. This is the
+the generic slice model and the twist equation holds, then the pullback of `δ_{M,L}` to `𝒳''_s`
+is an isomorphism. This is the
 `hslice` hypothesis of the finite-support step
 `NearbyCyclesModel.exists_finset_isIso_upperStar_nearbyDualityMapOfGenericBase`.
 
@@ -132,8 +133,9 @@ coordinate of its total space, and `M''` the generic slice model of `b`
 (`NearbyCyclesModel.genericSliceModel`, along `σ : Spec K⟦t⟧ ⟶ 𝔸¹_S`, `K = k'(x)^alg`), a trait
 model over the generic base `(Frac K⟦t⟧, X₂)`. If the duality maps `δ_{M'',L'}` of the slice
 model (with the dualizing maps of a family `D_K` over the trait `Spec K⟦t⟧`) are isomorphisms for
-every `L'`, then the pullback of `δ_{M,L}` to the special fibre `𝒳''_s` of the slice along
-`𝒳''_s ⟶ X'` is an isomorphism for every `L`.
+every `L'`, and the dualizing maps satisfy the twist equation
+(`NearbyCyclesModel.IsTraitModelOfGenericBase.TwistEquation`), then the pullback of `δ_{M,L}` to
+the special fibre `𝒳''_s` of the slice along `𝒳''_s ⟶ X'` is an isomorphism for every `L`.
 
 Proof. By the invariance of nearby cycles under change of trait and the
 inertia action on nearby cycles (SGA 4½, [Th. finitude], §3), the pullback of `Ψ_M` to `𝒳''_s` is
@@ -141,9 +143,8 @@ the `P`-invariants of `Ψ_{M''}` of the pullback of the coefficients, `P` the pr
 map of inertia groups of the strict localisation of `𝔸¹_S` at the generic point of its special
 fibre. The pullback of the dualizing complex of `X'` to `𝒳''_s` is the dualizing complex twisted
 by `ℚ̄_ℓ(1)[2]` (blueprint `det-pd-generic-dualizing-twist`), and the dualizing maps `θ` are
-compatible with slicing (blueprint `det-tf-nearby-duality-slice`, via a closed embedding of the
-total space into `𝔸^r_S`, smooth purity and the maps `β_i`), so that the pullback of `δ_{M,L}` is
-identified with the `P`-invariants of `δ_{M'',L'}(1)[2]`. The `P`-invariants are a direct
+compatible with slicing (blueprint `det-tf-nearby-duality-slice`; this is the hypothesis `H`), so that the
+pullback of `δ_{M,L}` is identified with the `P`-invariants of `δ_{M'',L'}(1)[2]`. The `P`-invariants are a direct
 summand cut out by an averaging idempotent (`P` is pro-`p` and `p ≠ ℓ`), and the restriction of an
 isomorphism to the two averaging summands is an isomorphism
 (`CategoryTheory.isIso_comp_comp_map_op_of_averaging`). The formal part is
@@ -169,6 +170,7 @@ theorem isIso_map_sliceSpecialMap_nearbyDualityMapOfGenericBase
     [LocallyOfFiniteType (baseChangeSpecial b (traitSlice (traitSliceCoord k'))).hom]
     [QuasiCompact (baseChangeSpecial b (traitSlice (traitSliceCoord k'))).hom]
     [IsSeparated (baseChangeSpecial b (traitSlice (traitSliceCoord k'))).hom]
+    (H : h.TwistEquation ℓ hb D DK)
     (hslice : ∀ L' : Dᵇc((genericSliceBase (traitSliceCoord k') hb).left)⟦
         Profinite.padicAlgClRingObj ℓ⟧,
       IsIso (nearbyDualityMapOfGenericBase ℓ DK
@@ -177,7 +179,7 @@ theorem isIso_map_sliceSpecialMap_nearbyDualityMapOfGenericBase
     (L : Dᵇc(X₁.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsIso (L((sliceSpecialMap (traitSliceCoord k') h.isTraitModelOver hb)^*⟦
         Profinite.padicAlgClRingObj ℓ⟧).map (nearbyDualityMapOfGenericBase ℓ D h L).hom) := by
-  obtain ⟨θ, hθ, htw, hfix⟩ := h.exists_genericSliceDualizingMap ℓ hb D DK
+  obtain ⟨θ, hθ, htw, hfix⟩ := h.exists_genericSliceDualizingMap ℓ hb D DK H
   obtain ⟨Γ, _, _, ψ, hψ, hn, hr⟩ :=
     h.exists_averaging_genericSliceExchange ℓ hb ((ihom L).obj (dualizingComplex ℓ X₁)) L
   obtain ⟨r₁, h₁, hρ₁, -⟩ := hr _ (Or.inl rfl)

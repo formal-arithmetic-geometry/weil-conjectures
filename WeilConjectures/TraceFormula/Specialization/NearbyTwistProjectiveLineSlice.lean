@@ -88,6 +88,11 @@ open Scheme ProjectiveSpace
 attribute [-instance] monoidalCategory_boundedConstructible
   ObjectProperty.instMonoidalCategoryStructFullSubcategory
 
+-- A field is henselian via `Field.henselian`; the separably closed instance gives a second,
+-- non-syntactically equal path to `IsDomain (PowerSeries k')`, hence to the field structure on
+-- `FractionRing (PowerSeries k')`, whose unification unfolds `ProjectiveSpace`.
+attribute [-instance] AlgebraicGeometry.Scheme.isStrictlyHenselianLocalRing_of_isSepClosed
+
 namespace NearbyCyclesModel
 
 section Slice
