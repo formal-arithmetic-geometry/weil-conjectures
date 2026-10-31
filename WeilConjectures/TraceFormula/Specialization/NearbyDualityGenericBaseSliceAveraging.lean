@@ -7,7 +7,8 @@ module
 
 public import WeilConjectures.TraceFormula.Specialization.GaloisLayerStabilizationAssembly
 public import WeilConjectures.TraceFormula.Specialization.GenericSliceModelAut
-public import WeilConjectures.TraceFormula.Specialization.TraitSliceInvariants
+public import WeilConjectures.TraceFormula.Specialization.TraitModelOfGenericBaseExtension
+public import WeilConjectures.TraceFormula.Specialization.TraitSliceInvariantsProof
 
 /-!
 
@@ -248,7 +249,8 @@ private theorem exists_subgroup_genericSliceHom_pullbackExchange
   have hM := h.isTraitModelOver
   have hD := exists_subgroup_pullbackExchange_baseChangeHom_traitSlice (ℓ := ℓ)
     hM hb (A := A)
-  have hD2 := hD hA'
+  obtain ⟨B, hB, ⟨eB⟩⟩ := h.exists_extension_total (Profinite.padicAlgClRingObj ℓ) hA
+  have hD2 := hD hA' hB eB
   obtain ⟨V, hV, htriv, rB, hrB, havgB⟩ := hD2
   have hc := h.genericSliceModel_ε_comp_genericSliceBaseMap (traitSliceCoord k') hb
   have hκ := fun σ ↦ pullbackExchange_genericSliceToBaseChange_app_comp_autAction
