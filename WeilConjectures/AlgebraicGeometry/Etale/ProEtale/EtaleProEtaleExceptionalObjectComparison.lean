@@ -100,6 +100,15 @@ private theorem fixed_constructible_iff
       Scheme.IsLocallyConstantProEtaleFixedModuleSheaf T A F ∧
         ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ T),
           Finite (Scheme.proEtaleGeometricFixedModuleStalk x A F) := by
+    replace hF : ∃ (ι : Type (u + 1)) (W : ι → Scheme.{u}) (g : ∀ i, W i ⟶ T),
+        Presieve.ofArrows W g ∈ Scheme.proetalePrecoverage T ∧
+          ∀ i, ∃ M : ModuleCat.{u + 1} A, Finite M ∧
+            Nonempty (((g i)^*[ModuleCat.{u + 1} A]).obj F ≅
+              (constantSheaf (Scheme.ProEt.topology (W i)) (ModuleCat.{u + 1} A)).obj M) := by
+      obtain ⟨ι, W, g, hg, h⟩ := hF
+      refine ⟨ι, W, g, hg, fun i ↦ ?_⟩
+      obtain ⟨M, hM, e⟩ := h i
+      exact ⟨M, Module.finite_of_finite A, e⟩
     obtain ⟨I, U, f, hf, he⟩ := finiteModels_over A F hF
     refine ⟨⟨I, U, f, hf, fun i ↦ ?_⟩,
       fun Ω _ _ x ↦ finite_geometricStalk_of_finite_models A F hF Ω x⟩
@@ -107,7 +116,11 @@ private theorem fixed_constructible_iff
     exact ⟨M, hM⟩
   constructor
   · rintro ⟨S, _, _, hS⟩
-    exact ⟨S, fun i ↦ Scheme.finite_models_of_fixed_lisse (S.domain i) A _ (hS i)⟩
+    refine ⟨S, fun i ↦ ?_⟩
+    obtain ⟨ι, W, g, hg, h⟩ := Scheme.finite_models_of_fixed_lisse (S.domain i) A _ (hS i)
+    refine ⟨ι, W, g, hg, fun j ↦ ?_⟩
+    obtain ⟨M, _, e⟩ := h j
+    exact ⟨M, Module.Finite.of_finite, e⟩
   · rintro ⟨S, hS⟩
     by_cases hn : 0 < S.n
     · exact ⟨S, hn, S.isConstructible_stratum, fun i ↦ hlocal _ _ (hS i)⟩

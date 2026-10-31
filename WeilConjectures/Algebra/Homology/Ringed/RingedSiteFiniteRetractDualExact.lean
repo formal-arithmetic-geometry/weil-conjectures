@@ -716,7 +716,7 @@ open FiniteRetractProof
 attribute [local irreducible] finiteRetractCoordinate finiteRetractVector finiteRetractCovector
 
 -- The public statement uses the library's original instances.
-attribute [-instance] proofHasSheafCompose proofAbelian proofHomContraAdditive
+attribute [-instance] proofAbelian proofHomContraAdditive
   proofHasFiniteBiproducts proofSectionModule proofHomPreservesZero
 
 /-- Internal duality, dual bases, biduality, and exact internal Hom for a finite-free retract.

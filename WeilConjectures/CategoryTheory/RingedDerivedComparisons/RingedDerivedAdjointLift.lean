@@ -144,7 +144,4 @@ namespace CategoryTheory.RingedDerivedComparisons
 
 attribute [local irreducible] SheafOfModules.monoidalCategory RingedTensor.tensorFunctor
 
-attribute [instance] AdjointLift.right_additive
-
--- Comparing the supplied scalar presentation and derived adjunction uses dependent instances.
 end CategoryTheory.RingedDerivedComparisons
