@@ -203,6 +203,7 @@ theorem isIso_pullbackExchange_coordinateSliceToGaloisLayer
     (coordinateSliceTraitModel b D) hM₀ (coordinateSliceToGaloisLayer hM b hb D) HEq.rfl
     HEq.rfl C
 
+omit [IsSepClosed k'] in
 /-- The first components of the purely inseparable part `r₁`: `r₁ ≫ q ≫ r₂` is the change of
 generic fibres of the cartesian model. -/
 @[reassoc]
@@ -221,6 +222,7 @@ lemma coordinateSliceToGaloisLayer_generic_fst_fst :
     hM.isPullback_j.w (coordinateSliceTraitHom_total_comp hM b hb D) pullback.condition
     (IsPullback.lift_snd _ _ _ _)
 
+omit [IsSepClosed k'] in
 /-- The component of `r₁` in `Spec L`. -/
 @[reassoc]
 lemma coordinateSliceToGaloisLayer_generic_fst_snd :
@@ -237,6 +239,7 @@ lemma coordinateSliceToGaloisLayer_generic_fst_snd :
         traitTensorCompositumGalois D.R (traitGenericField k') D.Ω :=
   (pullback.lift_fst_assoc _ _ _ _).trans (pullback.lift_snd _ _ _)
 
+omit [IsSepClosed k'] in
 /-- The component of `r₁` in `Spec L^sep`. -/
 @[reassoc]
 lemma coordinateSliceToGaloisLayer_generic_snd :
@@ -248,6 +251,7 @@ lemma coordinateSliceToGaloisLayer_generic_snd :
       pullback.snd _ _ ≫ traitTensorSepPoint D.R (traitGenericField k') D.Ω :=
   pullback.lift_snd _ _ _
 
+omit [IsSepClosed k'] in
 /-- The composite `M_{S'} ⟶ M₁^{L^sep} ⟶ M₁ ⟶ M` of `ρ`, the projection of the Galois layer and
 `ψ` is the slice `σ`, on generic fibres. -/
 lemma coordinateSliceToGaloisLayer_generic_comp_galoisModelHom_generic :

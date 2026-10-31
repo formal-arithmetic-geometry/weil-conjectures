@@ -83,6 +83,32 @@ theorem isIso_map_map_kunnethMap_iff_of_isIso_pullbackExchange (φ₁ : P.Hom M 
   simp only [Functor.map_comp] at h'
   exact isIso_iff_of_comp_eq h'
 
+set_option maxHeartbeats 800000 in
+-- the Künneth maps of the two product configurations are large terms
+/-- `NearbyCyclesModel.isIso_map_map_kunnethMap_iff_of_isIso_pullbackExchange` with the pullback
+exchange of `ρ_P` invertible as a natural transformation. -/
+theorem isIso_map_map_kunnethMap_iff_of_isIso_pullbackExchange' (φ₁ : P.Hom M f₁ f₁')
+    (φ₂ : P.Hom N f₂ f₂') (φ₁U : PU.Hom MU e₁ e₁') (φ₂U : PU.Hom NU e₂ e₂') (ρM : MU.Hom M r₁ r₁')
+    (ρN : NU.Hom N r₂ r₂') (ρP : PU.Hom P r r')
+    (htot₁ : φ₁U.total ≫ ρM.total = ρP.total ≫ φ₁.total)
+    (hgen₁ : φ₁U.generic ≫ ρM.generic = ρP.generic ≫ φ₁.generic)
+    (htot₂ : φ₂U.total ≫ ρN.total = ρP.total ≫ φ₂.total)
+    (hgen₂ : φ₂U.generic ≫ ρN.generic = ρP.generic ≫ φ₂.generic)
+    (hb₁ : e₁ ≫ r₁ = r ≫ f₁) (hs₁ : e₁' ≫ r₁' = r' ≫ f₁') (hb₂ : e₂ ≫ r₂ = r ≫ f₂)
+    (hs₂ : e₂' ≫ r₂' = r' ≫ f₂')
+    (A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)))
+    (B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj Λ Y)))
+    (hM : IsIso ((ρM.pullbackExchange Λ).app A)) (hN : IsIso ((ρN.pullbackExchange Λ).app B))
+    (hP : IsIso (ρP.pullbackExchange Λ)) {T : Type*} [Category T]
+    (F : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology ZU') Ab.{u + 1})
+      (condensedRingObj Λ ZU')) ⥤ T) :
+    IsIso (F.map (L((r')^*⟦Λ⟧).map (kunnethMap Λ φ₁ φ₂ A B))) ↔
+      IsIso (F.map (kunnethMap Λ φ₁U φ₂U (L((r₁)^*⟦Λ⟧).obj A) (L((r₂)^*⟦Λ⟧).obj B))) :=
+  isIso_map_map_kunnethMap_iff_of_isIso_pullbackExchange Λ φ₁ φ₂ φ₁U φ₂U ρM ρN ρP htot₁ hgen₁
+    htot₂ hgen₂ hb₁ hs₁ hb₂ hs₂ A B hM hN inferInstance F
+
 end Square
 
 section TraitChange

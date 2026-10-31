@@ -50,7 +50,7 @@ open Scheme GenericSliceTrait
 attribute [local instance] GenericSliceTrait.algebraR GenericSliceTrait.algebraΩ
   GenericSliceTrait.algebraBaseΩ GenericSliceTrait.algebraRΩ
 
-variable {k' : Type u} [Field k'] [IsSepClosed k'] {X Z : Scheme.{u}} {X' Z' : Over (Spec (.of k'))}
+variable {k' : Type u} [Field k'] {X Z : Scheme.{u}} {X' Z' : Over (Spec (.of k'))}
   {M : NearbyCyclesModel X X'.left} {P : NearbyCyclesModel Z Z'.left} {f₁ : Z ⟶ X}
   {f₁' : Z'.left ⟶ X'.left} (φ₁ : P.Hom M f₁ f₁') {q : M.total ⟶ trait k'}
   {g : M.generic ⟶ Spec (.of (traitGenericField k'))} (hM : M.IsTraitModelOver q g)
@@ -231,7 +231,7 @@ lemma coordinateSliceTraitMapGeneric_comp_toGaloisLayer_generic :
           coordinateSliceCartesianGenericMap_snd, Hom.toCartesian_generic,
           pullback.lift_snd_assoc, pullback.lift_snd]
         exact (coordinateSliceTraitMap φ₁ b D).comm_j
-    · simp only [Category.assoc, coordinateSliceToGaloisLayer_generic_fst_snd_assoc,
+    · simp only [Category.assoc,
         galoisLayerMap_generic, galoisLayerGenericMap_fst_assoc, coordinateSliceGaloisMap_generic,
         coordinateSliceGaloisGenericMap_snd, coordinateSliceToGaloisLayer_generic_fst_snd]
       simp [coordinateSliceTraitMapGeneric]

@@ -33,7 +33,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
 
 open Scheme
 
-variable {k' : Type u} [Field k'] [IsSepClosed k'] {X Y Z : Scheme.{u}}
+variable {k' : Type u} [Field k'] {X Y Z : Scheme.{u}}
   {X' Y' Z' : Over (Spec (.of k'))} {M : NearbyCyclesModel X X'.left}
   {N : NearbyCyclesModel Y Y'.left} {P : NearbyCyclesModel Z Z'.left} {f₁ : Z ⟶ X}
   {f₁' : Z'.left ⟶ X'.left} {f₂ : Z ⟶ Y} {f₂' : Z'.left ⟶ Y'.left} {φ₁ : P.Hom M f₁ f₁'}
@@ -59,13 +59,15 @@ lemma sliceFst_generic_comp_coordinateSliceTraitChangeGeneric :
       coordinateSliceTraitChangeGeneric (φ₁.total ≫ b) D ≫
         coordinateSliceTraitMapGeneric φ₁ b D := by
   apply pullback.hom_ext
-  · apply pullback.hom_ext <;> simp [coordinateSliceTraitChangeGeneric, coordinateSliceTraitChangeTotal]
+  · apply pullback.hom_ext <;>
+      simp [coordinateSliceTraitChangeGeneric, coordinateSliceTraitChangeTotal]
   · simp [coordinateSliceTraitChangeGeneric]
 
 /-- The first projections commute with the changes of trait on special fibres. -/
 lemma sliceFst_special_comp_coordinateSliceTraitChangeSpecial :
     φ₁.baseChangeSpecial (bP := φ₁.total ≫ b) (bM := b) (vP := traitSlice (traitSliceCoord k'))
-        (vM := traitSlice (traitSliceCoord k')) (𝟙 _) (Category.comp_id _) (Category.comp_id _) ≫ coordinateSliceTraitChangeSpecial b D =
+        (vM := traitSlice (traitSliceCoord k')) (𝟙 _) (Category.comp_id _) (Category.comp_id _) ≫
+        coordinateSliceTraitChangeSpecial b D =
       coordinateSliceTraitChangeSpecial (φ₁.total ≫ b) D ≫
         coordinateSliceTraitMapSpecial φ₁ b D := by
   apply pullback.hom_ext
