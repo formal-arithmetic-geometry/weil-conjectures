@@ -87,7 +87,6 @@ abbrev sfbSectionCoefficient (B : Sheaf J CommRingCat.{w}) : Sheaf J AddCommGrpC
   (sheafCompose J (forget₂ RingCat.{w} AddCommGrpCat.{w})).obj
     ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj B)
 
-attribute [local instance] underlyingModule
 
 variable {B : Sheaf J CommRingCat.{w}}
 

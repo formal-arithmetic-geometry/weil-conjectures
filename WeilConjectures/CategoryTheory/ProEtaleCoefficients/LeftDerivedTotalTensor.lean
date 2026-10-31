@@ -49,13 +49,7 @@ variable {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
   [HasDerivedCategory.{wC} C] [HasDerivedCategory.{wD} D]
   (F : C ⥤ D) [F.Additive] [hF : F.PreservesTotalTensorKFlatQuasiIso]
 
-omit hExactIntColimits hTensorLeft hFlatResolution [HasDerivedCategory C] in
-attribute [local instance] preservesCountableTensorLeft preservesCountableTensorRight
 
-omit hExactIntColimits hTensorRight hFlatResolution [HasDerivedCategory C] in
-attribute [local instance] hasTensorFour hasGoodTensorLeft hasGoodTensorRight
 
-omit hExactIntColimits hFlatResolution [HasDerivedCategory C] [HasDerivedCategory D] in
-attribute [local instance] preservesKFlatQuasiIso
 
 end CategoryTheory.Functor

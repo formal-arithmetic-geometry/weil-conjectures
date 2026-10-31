@@ -71,7 +71,6 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 
 namespace ModuleCat
 
-attribute [instance] OrdinaryDerivedChangeOfRings.monoidal
 
 -- A full, essentially surjective functor is initial: every comma object maps
 -- to a fixed lift of the target, giving a zigzag between any two objects.

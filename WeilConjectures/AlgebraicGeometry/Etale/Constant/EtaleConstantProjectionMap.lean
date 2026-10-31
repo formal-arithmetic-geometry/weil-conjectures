@@ -120,7 +120,6 @@ variable (A : Type uA) [Category.{u + 1} A] [Abelian A]
   [Abelian.HasFunctorialFlatResolution A]
 
 omit [HasSmallSiteSheafify A] [Abelian.HasFunctorialFlatResolution A] in
-attribute [local instance 50000] constantProjectionSheafMonoidalPreadditive
 
 /-- The unbounded adjunction of derived constant sheaves and derived global sections.
 Source: Stacks Tag 07A6 (blueprint: def-kun-constant-projection-morphism).

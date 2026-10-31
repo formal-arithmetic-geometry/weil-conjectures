@@ -32,6 +32,10 @@ endomorphisms, and the original geometric adjunction unit. Comparisons have a
 normalization equation and uniqueness; arbitrary unrelated functors are never compared.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 
 set_option autoImplicit false

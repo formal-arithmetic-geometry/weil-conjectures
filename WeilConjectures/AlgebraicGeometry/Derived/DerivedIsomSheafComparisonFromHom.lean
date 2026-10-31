@@ -15,6 +15,9 @@ Source: Stacks Project, Tag 00WJ, exactness of set sheafification, applied to in
 (blueprint: lem-weil-pbc-derived-isom-comparison-from-hom)
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite

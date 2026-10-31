@@ -183,7 +183,7 @@ private theorem coefficientLocallyBijective
     {C : Type u} [SmallCategory C] (K : GrothendieckTopology C) :
     K.WEqualsLocallyBijective AddCommGrpCat.{u} := inferInstance
 
-attribute [local instance] coefficientRingCompose coefficientAddCompose coefficientSheafify
+attribute [local instance] coefficientSheafify
   coefficientLocallyBijective
 
 private noncomputable def linearOperation
