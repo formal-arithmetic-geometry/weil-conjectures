@@ -126,14 +126,6 @@ noncomputable def relativeForgetH1 (T : Scheme.{u}) (W : T.Opens)
           (relativeForgetComplex T (Scheme.Etale.mk W.ι) I.cocomplex) 1 x))
 
 set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-open CochainComplex.HomComplex in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-open CochainComplex.HomComplex in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 private lemma fiberMap_comp
     {A B A' B' A'' B'' : CochainComplex AddCommGrpCat.{u + 1} ℤ}
     (r : A ⟶ B) (r' : A' ⟶ B') (r'' : A'' ⟶ B'')
@@ -146,7 +138,6 @@ private lemma fiberMap_comp
   rw [← Functor.map_comp, ← HomologicalComplex.homotopyCofiber.mapArrowHom_comp]
   congr 2
 
-set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency false in
 private lemma sectionMap_comp (T : Scheme.{u}) (U : T.Etale)
     {I J K : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ}
@@ -345,7 +336,6 @@ private lemma coneMap_fst
       HomologicalComplex.homotopyCofiber.mapArrowHom,
       HomologicalComplex.homotopyCofiber.inrCompHomotopy_hom r' _ (i + 1) i rfl]
 
-set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency false in
 private lemma resolutionTransfer_comp_square {T T' : Scheme.{u}} (h : T' ⟶ T)
     {I J : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ}

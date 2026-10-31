@@ -62,10 +62,6 @@ private theorem derivedNatIso_symm {F G : C ⥤ D} [F.Additive] [G.Additive]
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.defeqAttrib.useBackward true in
 private theorem derivedId_fac (L : C ⥤ C) [L.Additive]
     [PreservesFiniteLimits L] [PreservesFiniteColimits L]
     (e : L ≅ 𝟭 C) (K : HomotopyCategory.Plus C) :
@@ -143,9 +139,6 @@ section Underived
 variable (A : Type*) [Category.{u + 1} A] [Abelian A]
   [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A]
 
-omit [HasSmallSiteSheafify A] in
-set_option backward.isDefEq.respectTransparency false in
-omit [HasSmallSiteSheafify A] in
 end Underived
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
@@ -163,5 +156,4 @@ noncomputable def extensionZeroCompDerivedPlusIso
     Functor.mapDerivedCategoryPlusNatIso
       (openImmersionLowerShriekComp (ModuleCat.{u + 1} Λ) k j).symm
 
-set_option backward.isDefEq.respectTransparency false in
 end AlgebraicGeometry.Etale

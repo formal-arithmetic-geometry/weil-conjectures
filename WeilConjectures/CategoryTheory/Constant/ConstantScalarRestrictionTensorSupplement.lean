@@ -367,7 +367,6 @@ private theorem nativeTensorIso (P Q : CochainComplex D ℤ)
     (μ DerivedCategory.Qh _ _ ≫ DerivedCategory.Qh.map _) ≫ _)
   infer_instance
 
-omit [HasDerivedCategory D] in
 end DerivedComparisonProof
 
 variable {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
@@ -957,7 +956,6 @@ private def ordinaryMonoidal : (restriction J B).Monoidal := by
   exact monoidalKeepingLax (restriction J B)
 
 end OrdinaryProof
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 variable [HasDerivedCategory.{wR} (Modules J B)] [HasDerivedCategory.{wB} (Fixed J B)]
 
 /-- The induced equivalence of ordinary unbounded derived categories.

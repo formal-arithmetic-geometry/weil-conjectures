@@ -1289,14 +1289,6 @@ private theorem derivedSquare_exists {m : Mode} (d : Input.{u} m) (t : SiteSquar
     Functor.whiskerLeft_app, Functor.whiskerRight_app,
     Category.assoc] using heq
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 universe u₁ v₁ u₂ v₂ u₃ v₃ u₄ v₄
 
 set_option backward.isDefEq.respectTransparency false in
@@ -1382,9 +1374,6 @@ private theorem exactTensorTotalIso_hom_app
 section
 attribute [local irreducible] SheafOfModules.monoidalCategory
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-set_option backward.isDefEq.respectTransparency false in
 end
 
 end SheafOfModules.OpenTensorNormalization

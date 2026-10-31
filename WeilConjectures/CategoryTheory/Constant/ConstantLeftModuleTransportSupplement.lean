@@ -85,7 +85,6 @@ private def normalizedRingComparison :
   (constantComparison J K L R adj).app Λ ≪≫
     ((constantCommuteCompose K (forget RingCat.{u})).app (RingCat.of Λ)).symm
 
-omit [HasWeakSheafify J RingCat.{u}] in
 private theorem coeff_unit (T : Cᵒᵖ) (r : Λ) :
     ((constantCommuteCompose J (forget RingCat.{u})).inv.app (RingCat.of Λ)).hom.app T
       ((toSheafify J ((Functor.const Cᵒᵖ).obj Λ)).app T r) =

@@ -36,11 +36,8 @@ variable (T : ℕᵒᵖ ⥤ A) (C : A)
   (a : ℕ) (hf : ∀ n : ℕ, T.map (homOfLE (Nat.le_add_right n a)).op =
     v.app (op (n + a)) ≫ u.app (op n))
 
-include v huv a hf in
 variable [HasProduct (fun n : ℕ ↦ T.obj (op n))] [HasProduct (fun _ : ℕ ↦ C)]
 
-include u v huv a hf in
-include u v huv a hf in
 end ProconstantRoos
 namespace ProconstantComplex
 variable {A : Type u} [Category.{v} A] [Abelian A] [HasCountableProducts A]
@@ -53,16 +50,32 @@ variable (D : ℕᵒᵖ ⥤ CochainComplex A ℤ) (L : CochainComplex A ℤ)
     (D.map (homOfLE (Nat.le_add_right n N)).op).f p =
       (β p).app (op (n + N)) ≫ (w.app (op n)).f p)
 
-include β hβ N hN in
-include β hβ N hN in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end ProconstantComplex
 
 universe t
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end AlgebraicGeometry.Scheme
+
+namespace ProconstantRoos
+
+private noncomputable def isLimit : IsLimit (Cone.mk C u) := by
+  refine ⟨fun s ↦ s.π.app (op 0) ≫ v.app (op 0), ?_, ?_⟩
+  · intro s j
+    obtain ⟨n⟩ := j
+    have hsn := s.w (homOfLE (Nat.le_add_right n a)).op
+    have hsv := s.w (homOfLE (Nat.zero_le (n + a))).op
+    have hv := v.naturality (homOfLE (Nat.zero_le (n + a))).op
+    dsimp only [Functor.const_obj_obj, Functor.const_obj_map] at hv
+    rw [Category.comp_id] at hv
+    change (s.π.app (op 0) ≫ v.app (op 0)) ≫ u.app (op n) = s.π.app (op n)
+    rw [← hsv]
+    simp only [Category.assoc]
+    rw [reassoc_of% hv, ← hf n, hsn]
+  · intro s m hm
+    have h := hm (op 0)
+    change m ≫ u.app (op 0) = s.π.app (op 0) at h
+    rw [← h, Category.assoc, huv, Category.comp_id]
+
+end ProconstantRoos

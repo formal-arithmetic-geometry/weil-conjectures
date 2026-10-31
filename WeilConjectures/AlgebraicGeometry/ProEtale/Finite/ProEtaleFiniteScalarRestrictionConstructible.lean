@@ -46,12 +46,8 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   (a₀ : R₀ ⟶ S₀) (a : R ⟶ S) (comm : α ≫ a.hom = a₀ ≫ β)
   (P : _root_.PresheafOfModules.{t} S₀)
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-include comm in
 end
 
-set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency false in
 private theorem constantDirect_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
     {A B : CommRingCat.{u + 1}} (a : A ⟶ B) :
@@ -92,6 +88,4 @@ private theorem constantDirect_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
     (toSheafify_naturality (ProEt.topology X)
       ((Functor.const X.ProEtᵒᵖ).map a)))
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 end AlgebraicGeometry.Scheme

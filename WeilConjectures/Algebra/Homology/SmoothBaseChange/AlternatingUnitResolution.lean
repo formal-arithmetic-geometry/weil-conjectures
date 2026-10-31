@@ -63,7 +63,6 @@ variable {A : Type u} [Category.{v} A] [HasZeroMorphisms A] [HasZeroObject A]
 
 variable [HasCokernels A]
 
-set_option backward.isDefEq.respectTransparency false in
 end CochainComplex
 
 namespace SheafOfModules

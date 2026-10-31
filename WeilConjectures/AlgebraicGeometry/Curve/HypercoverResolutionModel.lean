@@ -224,8 +224,6 @@ lemma bottomInclusion_naturality (U : FiniteSplitEtaleHypercover X)
   simp only [Functor.map_comp, HomologicalComplex.comp_f, Category.assoc] at hh
   convert hh using 1 <;> rfl
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 noncomputable def derivedSingleIso (q : ℕ) :
     DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)) 0 ⋙
         Etale.cohomology (ModuleCat.{u + 1} R) X (q : ℤ) ≅
@@ -262,7 +260,6 @@ instance (U : FiniteSplitEtaleHypercover X)
     [QuasiIso (resolutionAugmentation R U I.cocomplex)] (q : ℕ) :
     IsIso (totalComparisonAt R U I q) := by dsimp [totalComparisonAt]; infer_instance
 
-set_option backward.isDefEq.respectTransparency false in
 noncomputable def comparisonAt (U : FiniteSplitEtaleHypercover X)
     {F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)} (I : InjectiveResolution F)
     [QuasiIso (resolutionAugmentation R U I.cocomplex)] (q : ℕ) :

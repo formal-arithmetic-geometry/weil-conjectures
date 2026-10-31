@@ -39,6 +39,14 @@ public import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
 public import Mathlib.CategoryTheory.Limits.EssentiallySmall
 public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
+public import WeilConjectures.Algebra.Homology.HomotopyCategory.DerivabilityStructure
+public import WeilConjectures.AlgebraicGeometry.ModuleRingedComparison.ResolvingOplaxConstraints.SectionOrdinaryMonoidalConstraints
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
+public import WeilConjectures.CategoryTheory.ProEtaleCoefficients.PreservesTotalTensorKFlatQuasiIsoSupplement
+public import WeilConjectures.FromJoel.Algebra.Homology.Bifunctor
+public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
+public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 /-! # Module-object and ringed-topos derived comparison
 
 Source: Stacks Project, Sites, Tag 00YV; Modules on Sites, Tags 03EK, 03EL,
@@ -224,6 +232,80 @@ private theorem projection_comparison_of_squares
 private theorem third_conjunct {P Q R S : Prop} (h : P ∧ Q ∧ R ∧ S) : R :=
   h.2.2.1
 
+private theorem tensor_natural_braiding.{v, w, t}
+    {C : Type v} [Category.{w} C] (J : GrothendieckTopology C)
+    [UnivLE.{max v w, t}] [HasSheafify J AddCommGrpCat.{t}]
+    [(J.W (A := AddCommGrpCat.{t})).IsMonoidal]
+    (R : Sheaf J AddCommGrpCat.{t}) [MonObj R] [IsCommMonObj R] :
+    ∃ e : ∀ M N : Mod (Sheaf J AddCommGrpCat.{t}) R,
+      (InternalAbelianSheafModule.sectionModuleEquivalence J R).functor.obj (M ⊗ N) ≅
+        (InternalAbelianSheafModule.sectionModuleEquivalence J R).functor.obj M ⊗
+          (InternalAbelianSheafModule.sectionModuleEquivalence J R).functor.obj N,
+    (∀ (M N : Mod (Sheaf J AddCommGrpCat.{t}) R) (U : Cᵒᵖ)
+        (x : M.X.obj.obj U) (y : N.X.obj.obj U),
+      ((e M N).hom.val.app U) (InternalAbelianSheafModule.comparison_internalTmul J R M N U x y) =
+        InternalAbelianSheafModule.comparison_sectionTmul J R
+          ((InternalAbelianSheafModule.sectionModuleEquivalence J R).functor.obj M)
+          ((InternalAbelianSheafModule.sectionModuleEquivalence J R).functor.obj N) U x y) ∧
+    (∀ (M M' N N' : Mod (Sheaf J AddCommGrpCat.{t}) R) (f : M ⟶ M') (g : N ⟶ N'),
+      (InternalAbelianSheafModule.sectionModuleEquivalence J R).functor.map (f ⊗ₘ g) ≫
+        (e M' N').hom = (e M N).hom ≫
+          ((InternalAbelianSheafModule.sectionModuleEquivalence J R).functor.map f ⊗ₘ
+            (InternalAbelianSheafModule.sectionModuleEquivalence J R).functor.map g)) ∧
+    (∀ M N : Mod (Sheaf J AddCommGrpCat.{t}) R,
+      (e M N).hom ≫ (β_ _ _).hom =
+        (InternalAbelianSheafModule.sectionModuleEquivalence J R).functor.map (β_ M N).hom ≫
+          (e N M).hom) := by
+  refine Exists.elim (InternalAbelianSheafModule.internal_section_tensor_comparison J R).2
+    (fun e he ↦ ?_)
+  refine Exists.elim he (fun e₀ hs ↦ ?_)
+  exact ⟨e, hs.1, hs.2.2.1, hs.2.2.2.2.2.2.1⟩
+
+private theorem ordinary_assoc_unit (X : Scheme.{u}) :
+    (∀ M N P : internalModules Λ X,
+      (ordinaryTensorComparison Λ X (M ⊗ N) P).hom ≫
+          (ordinaryTensorComparison Λ X M N).hom ▷ (equivalence Λ X).functor.obj P ≫
+          (α_ _ _ _).hom =
+        (equivalence Λ X).functor.map (α_ M N P).hom ≫
+          (ordinaryTensorComparison Λ X M (N ⊗ P)).hom ≫
+          (equivalence Λ X).functor.obj M ◁ (ordinaryTensorComparison Λ X N P).hom) ∧
+    (∀ M : internalModules Λ X,
+      (ordinaryTensorComparison Λ X (𝟙_ _) M).hom ≫
+          (ordinaryUnitComparison Λ X).hom ▷ (equivalence Λ X).functor.obj M ≫
+          (λ_ _).hom = (equivalence Λ X).functor.map (λ_ M).hom) ∧
+    (∀ M : internalModules Λ X,
+      (ordinaryTensorComparison Λ X M (𝟙_ _)).hom ≫
+          (equivalence Λ X).functor.obj M ◁ (ordinaryUnitComparison Λ X).hom ≫
+          (ρ_ _).hom = (equivalence Λ X).functor.map (ρ_ M).hom) := by
+  exact ResolvingOplaxConstraints.section_ordinary_monoidal_constraints Λ X
+
+private theorem ordinary_natural_braiding (X : Scheme.{u}) :
+    (∀ (M M' N N' : internalModules Λ X) (f : M ⟶ M') (g : N ⟶ N'),
+      (equivalence Λ X).functor.map (f ⊗ₘ g) ≫
+          (ordinaryTensorComparison Λ X M' N').hom =
+        (ordinaryTensorComparison Λ X M N).hom ≫
+          ((equivalence Λ X).functor.map f ⊗ₘ (equivalence Λ X).functor.map g)) ∧
+    (∀ M N : internalModules Λ X,
+      (ordinaryTensorComparison Λ X M N).hom ≫ (β_ _ _).hom =
+        (equivalence Λ X).functor.map (β_ M N).hom ≫
+          (ordinaryTensorComparison Λ X N M).hom) := by
+  refine Exists.elim (tensor_natural_braiding
+    (Scheme.ProEt.topology X) (condensedRingObj Λ X)) (fun e hs ↦ ?_)
+  have hpure := hs.1
+  have hnat := hs.2.1
+  have hbraid := hs.2.2
+  have he (M N : internalModules Λ X) : e M N = ordinaryTensorComparison Λ X M N := by
+    apply (ordinaryTensorComparison_existsUnique Λ X M N).unique (hpure M N)
+    unfold ordinaryTensorComparison
+    exact (ordinaryTensorComparison_existsUnique Λ X M N).exists.choose_spec
+  constructor
+  · intro M M' N N' f g
+    have h := hnat M M' N N' f g
+    simpa only [← he M' N', ← he M N] using h
+  · intro M N
+    have h := hbraid M N
+    simpa only [← he M N, ← he N M] using h
+
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
@@ -260,27 +342,9 @@ theorem ordinary_monoidal (X : Scheme.{u}) :
       (ordinaryTensorComparison Λ X M N).hom ≫ (β_ _ _).hom =
         (equivalence Λ X).functor.map (β_ M N).hom ≫
           (ordinaryTensorComparison Λ X N M).hom) := by
-  have h := InternalAbelianSheafModule.internal_section_tensor_comparison.{u + 1, u + 1, u}
-    (Scheme.ProEt.topology X) (condensedRingObj Λ X)
-  refine Exists.elim h.2 (fun e h₁ ↦ ?_)
-  refine Exists.elim h₁ (fun e₀ hs ↦ ?_)
-  have he : e = ordinaryTensorComparison Λ X := by
-    funext M N
-    exact (ordinaryTensorComparison_existsUnique Λ X M N).unique (hs.1 M N)
-      (ordinaryTensorComparison_existsUnique Λ X M N).exists.choose_spec
-  have he₀ : e₀ = ordinaryUnitComparison Λ X :=
-    (ordinaryUnitComparison_existsUnique Λ X).unique hs.2.1
-      (ordinaryUnitComparison_existsUnique Λ X).exists.choose_spec
-  have hc := And.intro hs.2.2.1 (And.intro hs.2.2.2.1
-    (And.intro hs.2.2.2.2.1 (And.intro hs.2.2.2.2.2.1 hs.2.2.2.2.2.2.1)))
-  simp only [← he, ← he₀, equivalence] at hc ⊢
-  -- The kernel checks this existing proof directly; elaborator conversion unfolds the
-  -- large sheaf associator a second time and exceeds the single-file compilation limit.
-  run_tac Lean.Elab.Tactic.withMainContext do
-    let some hd := (← Lean.getLCtx).findFromUserName? `hc
-      | Lean.throwError "missing coherence proof"
-    (← Lean.Elab.Tactic.getMainGoal).assign hd.toExpr
-    Lean.Elab.Tactic.replaceMainGoal []
+  have hc := ordinary_assoc_unit Λ X
+  have hnb := ordinary_natural_braiding Λ X
+  exact ⟨hnb.1, hc.1, hc.2.1, hc.2.2, hnb.2⟩
 
 variable [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)]
 
@@ -365,7 +429,6 @@ theorem projection_comparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     (tensorPullComparison Λ f) (delta_comparison Λ f)
     ((sectionDerivedPushpullNormalization Λ f).2.2.2.2.2.2.2.2.1) K L
 
-set_option maxHeartbeats 800000 in
 -- Comparing the two localized mate squares elaborates the section-module constraints.
 /-- The ringed adjoint-of-unit open projection arrow, using inverse canonical delta.
 Source: Stacks 03DJ and 0B56
@@ -379,7 +442,6 @@ def openProjection {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
         (𝟙 ((derivedPullback Λ j).obj L))) ≫
       (tensorPullComparison Λ j).inv.app ((derivedExtension Λ j).obj K, L))
 
-set_option maxHeartbeats 1600000 in
 -- The curried tensor and derived adjunction interfaces have large instance arguments.
 /-- Pullback composition is identified with the canonical ringed pasting comparison.
 Source: Stacks 03D7 and 07A6

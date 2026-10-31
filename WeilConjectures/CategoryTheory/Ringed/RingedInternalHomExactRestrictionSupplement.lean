@@ -185,5 +185,4 @@ set_option maxHeartbeats 400000 in
 set_option backward.isDefEq.respectTransparency true in
 attribute [local irreducible] derivedInternalHom homComplexFunctor
 
-set_option linter.style.haveILetI false in
 end CategoryTheory

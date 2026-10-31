@@ -39,8 +39,6 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 
 namespace CategoryTheory.Functor
 
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
 variable {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
   [Abelian C] [Abelian D] [MonoidalCategory C] [MonoidalPreadditive C]
   [hCountable : HasCountableCoproducts C] [hIntColimits : HasColimitsOfShape ℤ C]
@@ -51,19 +49,13 @@ variable {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
   [HasDerivedCategory.{wC} C] [HasDerivedCategory.{wD} D]
   (F : C ⥤ D) [F.Additive] [hF : F.PreservesTotalTensorKFlatQuasiIso]
 
-omit hExactIntColimits hTensorRight hFlatResolution [HasDerivedCategory C] in
 omit hExactIntColimits hTensorLeft hFlatResolution [HasDerivedCategory C] in
 attribute [local instance] preservesCountableTensorLeft preservesCountableTensorRight
 
-omit hExactIntColimits hTensorRight hFlatResolution [HasDerivedCategory C] in
-omit hExactIntColimits hTensorLeft hFlatResolution [HasDerivedCategory C] in
 omit hExactIntColimits hTensorRight hFlatResolution [HasDerivedCategory C] in
 attribute [local instance] hasTensorFour hasGoodTensorLeft hasGoodTensorRight
 
 omit hExactIntColimits hFlatResolution [HasDerivedCategory C] [HasDerivedCategory D] in
 attribute [local instance] preservesKFlatQuasiIso
 
-set_option linter.unusedSectionVars false in
-include hCountable hIntColimits hExactIntColimits hTensorLeft hTensorRight hFlatResolution hF in
-include hCountable hIntColimits hExactIntColimits hTensorLeft hTensorRight hFlatResolution hF in
 end CategoryTheory.Functor

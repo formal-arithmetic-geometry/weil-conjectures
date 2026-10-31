@@ -112,12 +112,6 @@ private noncomputable abbrev sectionRing {X : Scheme.{u}}
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 private lemma graph_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (T : Z.ProEt) (a : Y ⟶ T.left) (ha : a ≫ T.hom = g) :
     sfbSectionGraph (f ≫ g) T (f ≫ a) (by rw [Category.assoc, ha]) ≫
@@ -193,8 +187,6 @@ private lemma sectionMap_restrict
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 private lemma objectSectionMap_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (F : Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
     (G : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
@@ -266,8 +258,6 @@ private lemma sectionMap_naturality
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 private noncomputable def regularExtensionIso
     {C : Type*} [Category C] [MonoidalCategory C] [BraidedCategory C]
     [MonoidalClosed C] [HasEqualizers C] [HasCoequalizers C]
@@ -299,8 +289,6 @@ private noncomputable def regularExtensionIso
   have : IsIso q := isIso_of_reflects_iso q (Mod.comap φ)
   exact asIso q
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 section RegularPullback
 
 variable {C D : Type*} [Category C] [Category D]
@@ -318,8 +306,4 @@ private noncomputable def regularPullbackIso :
 
 end RegularPullback
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end AlgebraicGeometry.ProEtale

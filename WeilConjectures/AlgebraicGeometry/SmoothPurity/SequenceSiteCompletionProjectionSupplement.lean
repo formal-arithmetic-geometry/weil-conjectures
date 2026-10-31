@@ -479,10 +479,6 @@ private theorem seqRestrictionObjEq (b : Cone (rings.{c, v, r} J B τ))
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 private instance seqRestriction_additive (b : Cone (rings.{c, v, r} J B τ)) :
     (seqRestriction J B τ b).Additive where
   map_add := by

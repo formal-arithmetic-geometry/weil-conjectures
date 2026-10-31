@@ -1359,6 +1359,11 @@ noncomputable def WeilComplex.tensorLisse (G : WeilSheaf k₀ l X) (hG : G.IsLis
     WeilComplex k₀ l X ⥤ WeilComplex k₀ l X :=
   WeilComplex.ihomLisse (G.dual hG) hG.dual
 
+/-- The affine plane `𝔸¹ ×_{k₀} 𝔸¹` over `k₀`, with its two projections and the multiplication
+map to the affine line. -/
+noncomputable def affinePlane : Scheme.{u} :=
+  pullback (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) (affineLine k₀ ↘ Spec (CommRingCat.of k₀))
+
 instance (G : WeilSheaf k₀ l X) (hG : G.IsLisse) : (WeilComplex.tensorLisse G hG).Additive := by
   unfold WeilComplex.tensorLisse
   infer_instance

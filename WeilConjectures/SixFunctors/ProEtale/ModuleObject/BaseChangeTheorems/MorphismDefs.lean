@@ -333,6 +333,22 @@ noncomputable def boundedConstructibleBaseChange (sq : CommSq g' f' f g) :
     (boundedConstructibleBaseChangeSquareStep ℓ E sq).hom ≫
       boundedConstructibleBaseChangeCounitStep ℓ E f f' g'
 
+/-- The base-change morphism `BC_sq` is the canonical adjunct presentation
+`Adjunction.squareExchange` of the pullback comparison `θ_sq` (`E`-coefficient). -/
+theorem boundedConstructibleBaseChange_eq_squareExchange (sq : CommSq g' f' f g) :
+    boundedConstructibleBaseChange ℓ E sq =
+      Adjunction.squareExchange
+        (boundedConstructibleUpperStarLowerStarAdjunction ℓ E f)
+        (boundedConstructibleUpperStarLowerStarAdjunction ℓ E f')
+        (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ g)
+        (boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ g')
+        (boundedConstructiblePullbackSquareComparison (Profinite.continuousMapRingObj E) ℓ sq) :=
+  (show boundedConstructibleBaseChange ℓ E sq =
+      boundedConstructibleBaseChangeUnitStep ℓ E f g f' ≫
+        (boundedConstructibleBaseChangeSquareStep ℓ E sq).hom ≫
+          boundedConstructibleBaseChangeCounitStep ℓ E f f' g' by rfl).trans
+    (Adjunction.squareExchange_eq_unit_square_counit _ _ _ _ _).symm
+
 variable {f g f' g'} in
 /-- The base-change morphism `BC_sq` is the exchange morphism
 `CategoryTheory.Adjunction.exchangeRight` of the pullback comparison `θ_sq` under the

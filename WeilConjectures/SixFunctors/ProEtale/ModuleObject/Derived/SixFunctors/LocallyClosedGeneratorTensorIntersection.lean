@@ -324,8 +324,6 @@ end FiniteFreeTensor
 attribute [local irreducible] upperStar upperStarComp upperStarCongr
   Mod.monoidalCategoryStruct
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 private theorem immersion_noetherian {S X : Scheme.{u}}
     [IsLocallyNoetherian X] [CompactSpace X] (a : S ⟶ X) [IsImmersion a] :
     IsLocallyNoetherian S ∧ CompactSpace S := by
@@ -492,8 +490,6 @@ private theorem moduleClosedSupportedUnit
     ((Mod.forget _).map_isZero hj).of_iso (upperStarObjXIso Λ j N).symm
   exact moduleUnitOfAbelian Λ i N ((ProEtale.abelian_closed_support i j hij).2 N.X hzero)
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 private instance generatorExtension_additive
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {S X : Scheme.{u}} {a : S ⟶ X}
@@ -654,8 +650,6 @@ universe uA uB vA vB
 variable {C : Type uA} {D : Type uB} [Category.{vA} C] [Category.{vB} D]
   [MonoidalCategory C] [MonoidalCategory D]
 
-omit [MonoidalCategory C] [MonoidalCategory D] in
-omit [MonoidalCategory C] [MonoidalCategory D] in
 private noncomputable def tensorRestrictionIso (F : C ⥤ D) [F.Monoidal]
     {P Q : C} {L M : D} (e : F.obj P ≅ L) (e' : F.obj Q ≅ M) :
     F.obj (P ⊗ Q) ≅ L ⊗ M :=
@@ -861,8 +855,6 @@ private noncomputable def restrictionAlong
   exact (upperStarComp Λ r a).app _ ≪≫
     (upperStar Λ r).mapIso ((asIso (generatorRestriction Λ A)).app L)
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 section RestrictionNaturality
 universe uNat vNat
 variable {C D E : Type uNat} [Category.{vNat} C] [Category.{vNat} D]
@@ -870,8 +862,6 @@ variable {C D E : Type uNat} [Category.{vNat} C] [Category.{vNat} D]
 
 end RestrictionNaturality
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 private noncomputable def intersectionRestrictionIso
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {S T X : Scheme.{u}}
@@ -888,12 +878,8 @@ private noncomputable def intersectionRestrictionIso
     ((upperStarCongr Λ (pullback.condition (f := a) (g := b))).app
       ((generatorExtension Λ B).obj M) ≪≫ restrictionAlong Λ B (pullback.snd a b) M)
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 private theorem ordinaryComparison_exists
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {S T X : Scheme.{u}}
@@ -935,10 +921,6 @@ private noncomputable def ordinaryComparison
 
 attribute [local irreducible] ordinaryComparison
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 section TensorExistence
 universe uE vE
 variable {D : Type uE} [Category.{vE} D] [MonoidalCategory D]
@@ -968,7 +950,6 @@ variable {D : Type uK} [Category.{vK} D] [Abelian D] [MonoidalCategory D]
 
 attribute [local instance] singleDerivedMonoidalExists
 
-omit [Abelian.HasFunctorialFlatResolution D] [HasDerivedCategory D] in
 omit [Abelian.HasFunctorialFlatResolution D] [HasDerivedCategory D] in
 attribute [local irreducible] Functor.LaxMonoidal.μ
 
@@ -1061,8 +1042,6 @@ universe vD wD
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 private theorem derivedTensor_eq_curriedTensor
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) :
@@ -1072,8 +1051,6 @@ private theorem derivedTensor_eq_curriedTensor
   unfold derivedTensor
   rfl
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 section TensorComparisonNaturality
 universe uTC₁ vTC₁ uTC₂ vTC₂ uTC₃ vTC₃ uTC₄ vTC₄ uTC₅ vTC₅
 variable {A₀ : Type uTC₁} [Category.{vTC₁} A₀]
@@ -1118,29 +1095,16 @@ private noncomputable def tensorComparisonNatIso
 
 end TensorComparisonNaturality
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 section
 
-set_option maxSynthPendingDepth 16 in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types false in
 section ActualTensorAssembly
 variable {A₀ B₀ C₀ D₀ E₀ : Type*} [Category* A₀] [Category* B₀]
   [Category* C₀] [Category* D₀] [Category* E₀]
 
 end ActualTensorAssembly
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end
 
 end GeneratorTensorProof
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end AlgebraicGeometry.ProEtale.CondensedRing

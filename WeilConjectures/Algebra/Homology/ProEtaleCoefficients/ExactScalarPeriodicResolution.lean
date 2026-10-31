@@ -93,7 +93,6 @@ variable [HasCokernels A]
 
 end Construction
 
-set_option backward.isDefEq.respectTransparency false in
 end CochainComplex
 
 namespace SheafOfModules

@@ -395,11 +395,8 @@ private theorem factor_restriction
   rw [← hring]
   exact (factorArrow O (O.over U) V s t h).hom.w.symm
 
-set_option backward.isDefEq.respectTransparency false in
 end UnitPowerRestriction
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 private theorem complete_of_iso
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J CommRingCat.{u})

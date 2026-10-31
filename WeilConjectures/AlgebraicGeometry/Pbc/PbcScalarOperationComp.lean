@@ -42,7 +42,6 @@ variable {X Y : Scheme.{u}} (g : X ⟶ Y)
 
 variable {Z : Scheme.{u}} (h : Z ⟶ X)
 
-set_option maxHeartbeats 2000000 in
 -- Comparing the concrete ringed module functors needs a larger elaboration budget.
 private theorem scalarCompositeCounit
     {H₀ H₁ H₂ K₀ K₁ K₂ A₀ A₁ A₂ B₀ B₁ B₂ : Type*}
@@ -130,10 +129,7 @@ private theorem scalarComplexCounit_app
           ((F.mapHomologicalComplex (.up ℤ)).obj P) := by
   rfl
 
-set_option maxHeartbeats 400000 in
 -- Explicit counit normalizations compare several concrete derived functors.
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 variable (G : Type u) [Field G] [Algebra ℚ_[l] G] [FiniteDimensional ℚ_[l] G]
     (j : F →ₐ[ℚ_[l]] G)
 
