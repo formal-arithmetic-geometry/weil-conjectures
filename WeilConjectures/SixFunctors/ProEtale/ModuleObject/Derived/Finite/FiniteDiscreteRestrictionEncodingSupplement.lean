@@ -23,16 +23,17 @@ open scoped CategoryTheory.Obj
 private local instance restrictionEncodingEssentiallySmall :
     EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
 
-local instance (T : AlgebraicGeometry.Scheme.{u}) :
+local instance restrictionEncodingSupplementWIsMonoidal (T : AlgebraicGeometry.Scheme.{u}) :
     ((AlgebraicGeometry.Scheme.ProEt.topology T).W (A := Ab.{u + 1})).IsMonoidal :=
   GrothendieckTopology.W.monoidal (J := AlgebraicGeometry.Scheme.ProEt.topology T)
     (A := Ab.{u + 1})
 
-local instance (T : AlgebraicGeometry.Scheme.{u}) :
+local instance restrictionEncodingSupplementHasWeakSheafify (T : AlgebraicGeometry.Scheme.{u}) :
     HasWeakSheafify (AlgebraicGeometry.Scheme.ProEt.topology T) Ab.{u + 1} :=
   HasSheafify.isRightAdjoint
 
-noncomputable local instance (T : AlgebraicGeometry.Scheme.{u}) :
+noncomputable local instance restrictionEncodingSupplementMonoidal
+    (T : AlgebraicGeometry.Scheme.{u}) :
     MonoidalCategory (Sheaf (AlgebraicGeometry.Scheme.ProEt.topology T) Ab.{u + 1}) :=
   Sheaf.monoidalCategory (AlgebraicGeometry.Scheme.ProEt.topology T) Ab.{u + 1}
 
