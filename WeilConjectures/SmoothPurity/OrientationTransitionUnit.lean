@@ -46,6 +46,59 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 
 /-- Blueprint `det-sp-purity-coefficient-change`: change of coefficients in purity.
 
+**The comparisons of `ν^*` and of `Φ` with `Ψ` preserve the units, on the pro-étale site**:
+`Ψ` of the identifications `Φ(𝟙) ≅ 𝟙 ≅ ν^* 𝟙` modulo `ℓⁿ⁺¹`
+(`finiteCoefficientDerivedEquivalenceUnitIso`,
+`DerivedCategory.mapDerivedCategoryComparisonUpperStarUnitIso`), followed by the commutation
+`Ψ ν^* ≅ ν^* Ψ` (`ProEtale.comparisonUpperStarDerivedExtendScalarsIso`) and `ν^*(Ψ Λ ≅ Λ')`, is the
+compatibility of `Φ` with the extensions of scalars
+(`ProEtale.finiteCoefficientDerivedEquivalenceExtendScalarsIso`), followed by the unit comparison
+of the condensed extension of scalars and the identifications modulo `ℓⁿ`. -/
+theorem map_unitIso_hom_comp_comparisonUpperStarDerivedExtendScalarsIso_hom :
+    letI := Mod.extendScalarsMonoidal (integersModPowTransition Y.left ℓ E n)
+    letI := (Mod.extendScalars (integersModPowTransition Y.left ℓ E n)).leftDerivedFunctorMonoidal
+    (derivedExtendScalars (integersModPowCoeffTransition_surjective ℓ E n)
+        (ker_integersModPowCoeffTransition ℓ E n) Y.left).map
+        ((finiteCoefficientDerivedEquivalenceUnitIso Y.left
+          (PadicAlgCl.integersModPow ℓ E (n + 1))).hom :
+          (finiteCoefficientDerivedEquivalence Y.left
+            (PadicAlgCl.integersModPow ℓ E (n + 1))).functor.obj (𝟙_ (DerivedCategory
+              (Mod (Sheaf (ProEt.topology Y.left) Ab.{u + 1})
+                (condensedRingObj (Profinite.integersModPowRingObj ℓ E (n + 1)) Y.left)))) ⟶
+            𝟙_ _) ≫
+      (derivedExtendScalars (integersModPowCoeffTransition_surjective ℓ E n)
+        (ker_integersModPowCoeffTransition ℓ E n) Y.left).map
+        (DerivedCategory.mapDerivedCategoryComparisonUpperStarUnitIso
+          (integersModPowCoeff.{u} ℓ E (n + 1)) Y.left).inv ≫
+      (comparisonUpperStarDerivedExtendScalarsIso (integersModPowCoeffTransition_surjective ℓ E n)
+        (ker_integersModPowCoeffTransition ℓ E n) Y.left).hom.app (𝟙_ _) ≫
+      D(ν^*(Y.left)[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)]).map
+        (Etale.derivedExtendScalarsConstantComplexIso
+          (integersModPowCoeffTransition_surjective ℓ E n)
+          (ker_integersModPowCoeffTransition ℓ E n) Y.left).hom =
+    (finiteCoefficientDerivedEquivalenceExtendScalarsIso Y.left
+        (PadicAlgCl.integersModPowTransition_surjective ℓ E n)
+        (ker_integersModPowCoeffTransition ℓ E n)).hom.app (𝟙_ (DerivedCategory
+          (Mod (Sheaf (ProEt.topology Y.left) Ab.{u + 1})
+            (condensedRingObj (Profinite.integersModPowRingObj ℓ E (n + 1)) Y.left)))) ≫
+      (finiteCoefficientDerivedEquivalence Y.left
+        (PadicAlgCl.integersModPow ℓ E n)).functor.map
+        (η (Mod.extendScalars (integersModPowTransition Y.left ℓ E n)).leftDerivedFunctor) ≫
+      ((finiteCoefficientDerivedEquivalenceUnitIso Y.left
+        (PadicAlgCl.integersModPow ℓ E n)).hom :
+        (finiteCoefficientDerivedEquivalence Y.left
+          (PadicAlgCl.integersModPow ℓ E n)).functor.obj (𝟙_ (DerivedCategory
+            (Mod (Sheaf (ProEt.topology Y.left) Ab.{u + 1})
+              (condensedRingObj (Profinite.integersModPowRingObj ℓ E n) Y.left)))) ⟶
+          𝟙_ _) ≫
+      (DerivedCategory.mapDerivedCategoryComparisonUpperStarUnitIso
+        (integersModPowCoeff.{u} ℓ E n) Y.left).inv := by
+  sorry
+
+set_option maxHeartbeats 1000000 in
+-- the monoidal structures of the derived functors on sheaf categories are slow to unfold
+/-- Blueprint `det-sp-purity-coefficient-change`: change of coefficients in purity.
+
 **The comparisons of the étale reading with `Ψ` preserve the units**: the derived extension of
 scalars `Ψ` of the identification `Rν_* Φ(𝟙) ≅ 𝟙` modulo `ℓⁿ⁺¹`
 (`finiteCoefficientDerivedEquivalenceUnitIso`, `rightDerivedComparisonLowerStarUnitIso`), followed
@@ -93,7 +146,52 @@ theorem map_readingUnitIso_hom_comp_constantComplexIso :
                   (condensedRingObj (Profinite.integersModPowRingObj ℓ E n) Y.left)))) ⟶
               𝟙_ _)) ≫
       (rightDerivedComparisonLowerStarUnitIso Y.left (integersModPowCoeff.{u} ℓ E n)).hom := by
-  sorry
+  have hP := map_unitIso_hom_comp_comparisonUpperStarDerivedExtendScalarsIso_hom ℓ E n Y
+  have := isIso_derivedComparisonAdjunction_unit_app
+    (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E (n + 1))) Y.left (𝟙_ _)
+    ⟨0, _root_.DerivedCategory.TStructure.t.isGE_of_iso
+      (_root_.DerivedCategory.singleFunctorObjUnitIso _) 0⟩
+  have := isIso_derivedComparisonAdjunction_unit_app
+    (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) Y.left (𝟙_ _)
+    ⟨0, _root_.DerivedCategory.TStructure.t.isGE_of_iso
+      (_root_.DerivedCategory.singleFunctorObjUnitIso _) 0⟩
+  -- the unit of `ν^* ⊣ Rν_*` and the base change map
+  have hu := map_unit_app_comp_derivedExtendScalarsComparisonLowerStarMap_app
+    (integersModPowCoeffTransition_surjective ℓ E n) (ker_integersModPowCoeffTransition ℓ E n)
+    Y.left (𝟙_ _)
+  have h₁ : (integersModPowDerivedExtendScalars ℓ E n Y.left).map
+        (CategoryTheory.inv ((derivedComparisonAdjunction
+          (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E (n + 1))) Y.left).unit.app (𝟙_ _))) ≫
+        (derivedComparisonAdjunction
+          (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) Y.left).unit.app
+          ((integersModPowDerivedExtendScalars ℓ E n Y.left).obj (𝟙_ _)) =
+      (derivedExtendScalarsComparisonLowerStarMap (integersModPowCoeffTransition_surjective ℓ E n)
+        (ker_integersModPowCoeffTransition ℓ E n) Y.left).app
+        (D(ν^*(Y.left)[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E (n + 1))]).obj (𝟙_ _)) ≫
+      R(ν_*(Y.left)[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)]).map
+        ((comparisonUpperStarDerivedExtendScalarsIso
+          (integersModPowCoeffTransition_surjective ℓ E n)
+          (ker_integersModPowCoeffTransition ℓ E n) Y.left).hom.app (𝟙_ _)) := by
+    rw [Functor.map_inv, IsIso.inv_comp_eq, reassoc_of% hu, ← Functor.map_comp,
+      Iso.inv_hom_id_app]
+    erw [CategoryTheory.Functor.map_id, Category.comp_id]
+  have hn := (derivedComparisonAdjunction
+    (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) Y.left).unit.naturality
+      (Etale.derivedExtendScalarsConstantComplexIso
+        (integersModPowCoeffTransition_surjective ℓ E n)
+        (ker_integersModPowCoeffTransition ℓ E n) Y.left).hom
+  simp only [Functor.id_obj, Functor.id_map, Functor.comp_obj, Functor.comp_map] at hn
+  have hPR := congrArg (R(ν_*(Y.left)[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)])).map hP
+  simp only [Functor.map_comp] at hPR
+  simp only [rightDerivedComparisonLowerStarUnitIso, Iso.trans_hom, Functor.mapIso_hom,
+    Iso.symm_hom, asIso_inv, Functor.map_comp, Category.assoc]
+  rw [← cancel_mono ((derivedComparisonAdjunction
+    (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) Y.left).unit.app (𝟙_ _))]
+  simp only [Category.assoc, IsIso.inv_hom_id, Category.comp_id]
+  erw [hn]
+  erw [reassoc_of% h₁]
+  rw [NatTrans.map_map_comp_app_comp, NatTrans.map_map_comp_app_comp]
+  congr 1
 
 /-- The condensed constituent `red_m 𝒪 ≅ 𝟙` of the identification `red_Y 𝒪 ≅ Λ`
 (`etaleReductionUnitIso`): the compatibility of the bounded constructible reduction with the

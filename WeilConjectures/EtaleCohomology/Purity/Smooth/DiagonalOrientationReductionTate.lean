@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.IntTensorFamilyIso
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReductionSupports
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReductionKummerBoundary
 
 /-!
 # The Tate data of the reduction of coefficients
@@ -114,7 +114,16 @@ theorem reductionTateShiftIso_pullback
       (derivedExtendScalarsPullbackIso hρ ha e).hom.app _ ≫
         (L((e)^*[ModuleCat.{u + 1} Λ'])).map (reductionTateShiftIso hρ ha σ X m).hom ≫
           (leftDerivedUpperStarTateShiftIso Λ' e m).hom := by
-  sorry
+  have : NatTrans.CommShift (derivedExtendScalarsPullbackIso hρ ha e).hom ℤ :=
+    inferInstanceAs (NatTrans.CommShift (derivedExtendScalarsPullbackMap hρ ha e) ℤ)
+  have hc := NatTrans.shift_app_comm (derivedExtendScalarsPullbackIso hρ ha e).hom (2 * m)
+    (tateObject Λ X m)
+  rw [Functor.commShiftIso_comp_hom_app, Functor.commShiftIso_comp_hom_app] at hc
+  simp only [reductionTateShiftIso, leftDerivedUpperStarTateShiftIso, Iso.trans_hom, Iso.app_hom,
+    Functor.mapIso_hom, CategoryTheory.Functor.map_comp, Category.assoc,
+    Functor.commShiftIso_hom_naturality_assoc]
+  rw [← reassoc_of% hc]
+  simp only [← CategoryTheory.Functor.map_comp, hσ]
 
 /-- Blueprint `det-sp-purity-coefficient-change`: change of coefficients in purity
 
