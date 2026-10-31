@@ -18755,6 +18755,7 @@ public import WeilConjectures.RingTheory.FiberRing
 public import WeilConjectures.RingTheory.FibreDimensionLocalizedBound
 public import WeilConjectures.RingTheory.FibreDimensionNeighborhood
 public import WeilConjectures.RingTheory.FibreLocalRingNaturalIso
+public import WeilConjectures.RingTheory.FibreLocalization.FibreCotangentLocalizationGenerators
 public import WeilConjectures.RingTheory.FibrePrimesResidueFields
 public import WeilConjectures.RingTheory.FibreRingNoetherian
 public import WeilConjectures.RingTheory.FieldCohenPowerSeriesFormallySmooth
@@ -25625,6 +25626,7 @@ public import WeilConjectures.TraceFormula.Integral.IntegralScalarOrdinaryModelC
 public import WeilConjectures.TraceFormula.Integral.IntegralTowerInverseImageUnit
 public import WeilConjectures.TraceFormula.IntegralPointThickening
 public import WeilConjectures.TraceFormula.InverseSystemSitePoint
+public import WeilConjectures.TraceFormula.InverseSystemSitePoint2
 public import WeilConjectures.TraceFormula.Isomorphism.IsomorphismDerivedPullbackComparisonNormalization
 public import WeilConjectures.TraceFormula.Isomorphism.IsomorphismMultiplicationConeDescent
 public import WeilConjectures.TraceFormula.Isomorphism.IsomorphismQuotientRoosComparison
@@ -25650,6 +25652,7 @@ public import WeilConjectures.TraceFormula.ModelExtension
 public import WeilConjectures.TraceFormula.ModelLineTower
 public import WeilConjectures.TraceFormula.ModelOpenClosed
 public import WeilConjectures.TraceFormula.ModelProjectiveImmersion
+public import WeilConjectures.TraceFormula.ModuleDirectedColimitFinitePresentation
 public import WeilConjectures.TraceFormula.OpenClosedTriangle
 public import WeilConjectures.TraceFormula.OpenCover
 public import WeilConjectures.TraceFormula.OpenPieceCoherence
@@ -25670,6 +25673,9 @@ public import WeilConjectures.TraceFormula.OrdinaryKunnethIntegral
 public import WeilConjectures.TraceFormula.OrdinaryKunnethOpen
 public import WeilConjectures.TraceFormula.OrdinaryKunnethProjection
 public import WeilConjectures.TraceFormula.OrdinaryKunnethReduction
+public import WeilConjectures.TraceFormula.OrdinaryQuotientPullbackTowerConstruction
+public import WeilConjectures.TraceFormula.OrdinaryQuotientPullbackTowerLevels
+public import WeilConjectures.TraceFormula.OrdinaryQuotientScalarTowerLevels
 public import WeilConjectures.TraceFormula.PieceAdditivity
 public import WeilConjectures.TraceFormula.PieceVanishing
 public import WeilConjectures.TraceFormula.PointComplement

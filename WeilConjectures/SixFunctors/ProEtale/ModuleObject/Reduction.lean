@@ -15,6 +15,7 @@ public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Constructible
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension
+public import WeilConjectures.CategoryTheory.Sites.TraceFormula.ZModModuleLift
 
 /-!
 
@@ -53,6 +54,17 @@ noncomputable def padicIntegersRingObjToResidueField :
   (sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
     (continuousMapRingSheafMap (integersResidue ℓ E) (continuous_integersResidue ℓ E))
 
+/-- Multiplication by `ℓ` is zero on the condensed ring `𝔽̲_E`. -/
+lemma zsmul_id_continuousMapRingObj_integersResidueField :
+    (ℓ : ℤ) • 𝟙 (continuousMapRingObj.{u} (integersResidueField ℓ E)) = 0 := by
+  ext S x
+  obtain ⟨x⟩ := x
+  change ULift.up ((ℓ : ℤ) • x) = ULift.up 0
+  congr 1
+  ext s
+  change (ℓ : ℤ) • x s = 0
+  rw [natCast_zsmul, nsmul_eq_mul, natCast_eq_zero_integersResidueField, zero_mul]
+
 instance : IsMonHom (padicIntegersRingObjToResidueField.{u} ℓ E) :=
   letI := normedFieldOfAlgebra ℓ E
   inferInstanceAs (IsMonHom
@@ -77,6 +89,37 @@ along `p_X` of the residue map `𝒪̲_E ⟶ 𝔽̲_E` of condensed rings. -/
 noncomputable abbrev padicIntegersToResidueField :
     condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X ⟶ residueFieldRingObj X ℓ E :=
   coefficientMap (Profinite.padicIntegersRingObjToResidueField ℓ E) X
+
+/-- Multiplication by `ℓ` is zero on the coefficient ring object `𝔽_{E,X}`. -/
+lemma zsmul_id_residueFieldRingObj : (ℓ : ℤ) • 𝟙 (residueFieldRingObj X ℓ E) = 0 := by
+  have : (upperStarFromPoint X).IsLeftAdjoint :=
+    (pointUpperStarLowerStarAdjunction.comp
+      (ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ X))).isLeftAdjoint
+  have := Functor.preservesZeroMorphisms_of_isLeftAdjoint (upperStarFromPoint X)
+  have : PreservesBinaryBiproducts (upperStarFromPoint X) :=
+    preservesBinaryBiproducts_of_preservesBinaryCoproducts _
+  have := Functor.additive_of_preservesBinaryBiproducts (upperStarFromPoint X)
+  rw [← (upperStarFromPoint X).map_id, ← Functor.map_zsmul,
+    Profinite.zsmul_id_continuousMapRingObj_integersResidueField, Functor.map_zero]
+
+/-- Every module object over `𝔽_{E,X}` is killed by `ℓ`. -/
+lemma zsmul_id_eq_zero_of_residueField
+    (M : Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (residueFieldRingObj X ℓ E)) :
+    (ℓ : ℤ) • 𝟙 M.X = 0 := by
+  have h1 : η[residueFieldRingObj X ℓ E] ▷ M.X ≫
+      ModObj.smul (M := residueFieldRingObj X ℓ E) (X := M.X) = (λ_ M.X).hom := by
+    simpa using ModObj.one_smul (M := residueFieldRingObj X ℓ E) M.X
+  have h2 : (ℓ : ℤ) • η[residueFieldRingObj X ℓ E] = 0 := by
+    rw [← Category.comp_id η[residueFieldRingObj X ℓ E], ← Preadditive.comp_zsmul,
+      zsmul_id_residueFieldRingObj, Limits.comp_zero]
+  have h3 : ((ℓ : ℤ) • η[residueFieldRingObj X ℓ E]) ▷ M.X =
+      (ℓ : ℤ) • (η[residueFieldRingObj X ℓ E] ▷ M.X) :=
+    (tensorRight M.X).map_zsmul
+  rw [h2, MonoidalPreadditive.zero_whiskerRight] at h3
+  have h4 : (ℓ : ℤ) • (λ_ M.X).hom = 0 := by
+    rw [← h1, ← Preadditive.zsmul_comp]
+    exact (congrArg (· ≫ _) h3.symm).trans Limits.zero_comp
+  rw [← Iso.inv_hom_id (λ_ M.X), ← Preadditive.comp_zsmul, h4, Limits.comp_zero]
 
 /-- The residue field `𝔽_E`, lifted to the universe `u + 1` of the coefficient rings of pro-étale
 sheaves of modules on `u`-schemes. -/
