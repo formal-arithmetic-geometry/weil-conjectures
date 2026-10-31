@@ -1,0 +1,57 @@
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
+module
+
+public import WeilConjectures.SixFunctors.Etale.Derived.ClosedPoints.Support
+public import WeilConjectures.ConstructibleSheaf.KernelCokernel
+public import WeilConjectures.ConstructibleSheaf.Noetherian
+
+/-!
+# Sheaves supported at closed points with finitely many global sections
+
+Let `K` be a separably closed field, `X` a Noetherian scheme locally of finite type over `K`,
+`Λ` a finite ring and `Q` an étale sheaf of `Λ`-modules on `X` whose stalks vanish at the
+non-closed points. If `Γ(X, Q)` is finite, then `Q` is constructible
+(`AlgebraicGeometry.Etale.isConstructibleSheaf_of_isZero_sheafFiber_of_finite`): `Q` is globally
+generated (`AlgebraicGeometry.Etale.isGloballyGenerated_of_isZero_sheafFiber`), hence a quotient
+of the finite sum `⊕_{s ∈ Γ(X, Q)} Λ_X` of constant sheaves, and quotients of constructible
+sheaves on a Noetherian scheme are constructible.
+
+This is the step of Deligne's proof of the finiteness of nearby cycles (SGA 4½, [Th. finitude],
+proof of 3.2) controlling the part of a sheaf supported at closed points by its global sections.
+-/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory Limits Opposite
+
+namespace AlgebraicGeometry
+
+open Scheme
+
+namespace Etale
+
+variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
+
+/-- **A sheaf supported at closed points with finite global sections is constructible.** Let `X`
+be a Noetherian scheme locally of finite type over a separably closed field and `Q` an étale sheaf
+of modules over a finite ring whose stalks at the non-closed points vanish. If `Γ(X, Q)` is
+finite, then `Q` is constructible: being globally generated, it is a quotient of a finite sum of
+constant sheaves. -/
+theorem isConstructibleSheaf_of_isZero_sheafFiber_of_finite {K : Type u} [Field K]
+    [IsSepClosed K] {X : Scheme.{u}} [IsNoetherian X] (p : X ⟶ Spec (.of K))
+    [LocallyOfFiniteType p] (Q : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    (hQ : ∀ x ∉ closedPoints X,
+      IsZero ((pointSmallEtale (X.algClosurePoint x)).sheafFiber.obj Q))
+    (hΓ : Finite (Q.obj.obj (op (etaleTerminal X)))) :
+    IsConstructibleSheaf Q :=
+  sorry
+
+end Etale
+
+end AlgebraicGeometry
