@@ -14063,6 +14063,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.RationalStage
 public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
 public import WeilConjectures.SixFunctors.Etale.Derived.ReductionHom
 public import WeilConjectures.SixFunctors.Etale.Derived.ReductionLowerShriekFormal
+public import WeilConjectures.SixFunctors.Etale.Derived.ReductionLowerShriekIso
 public import WeilConjectures.SixFunctors.Etale.Derived.ReductionLowerShriekProper
 public import WeilConjectures.SixFunctors.Etale.Derived.ReductionSingle
 public import WeilConjectures.SixFunctors.Etale.Derived.RefinementLowerShriekBaseChange
