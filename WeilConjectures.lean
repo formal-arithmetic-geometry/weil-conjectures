@@ -13740,6 +13740,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CompactSuppor
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CompactSupportBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CompactSupportTorsion
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ConstructibleDirectImage
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ConstructibleHomFinite
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CurveModel
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CurveOpenDirectImage
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne
