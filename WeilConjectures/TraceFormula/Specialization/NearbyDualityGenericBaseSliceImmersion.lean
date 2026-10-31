@@ -42,7 +42,7 @@ instance instFactRingCharFractionRingMvPolynomialNe (σ : Type u) (K : Type u) [
 
 namespace ProEtale.CondensedRing
 
-open Scheme
+open Scheme ProjectiveLine
 
 attribute [-instance] monoidalCategory_boundedConstructible
   ObjectProperty.instMonoidalCategoryStructFullSubcategory
@@ -84,9 +84,8 @@ lemma isProper_pullback_snd_traitSlice_of_compactified [IsProper qN]
   have : IsProper (bc.total ≫ (ProjectiveLine (trait k') ↘ trait k')) := hqN ▸ inferInstance
   have : IsProper bc.total := IsProper.of_comp bc.total (ProjectiveLine (trait k') ↘ trait k')
   exact MorphismProperty.of_isPullback (P := @IsProper)
-    (isPullback_genericSlice_projectiveLineSlice (traitSliceCoord k') bc hU hbWχ).flip
+    (isPullback_genericSlice_projectiveLineSlice (traitSliceCoord k') bc hU hbWχ)
     inferInstance
-
 
 variable [LocallyOfFiniteType (N.restrictSpecialFibre U).hom]
   [QuasiCompact (N.restrictSpecialFibre U).hom] [IsSeparated (N.restrictSpecialFibre U).hom]
@@ -99,77 +98,19 @@ variable [LocallyOfFiniteType (N.restrictSpecialFibre U).hom]
   [IsSeparated (baseChangeSpecial bW (traitSlice (traitSliceCoord k'))).hom]
   [IsProper (CondensedRing.toPoint (baseChangeSpecial bW (traitSlice (traitSliceCoord k')))).left]
 
-/-- **The twist equation of a compactified model along the slice of `W = b̄⁻¹(𝔸¹_S)`**: for a
-proper trait model `N` over `(η, X̄₁, 𝟙)` with full geometric generic fibre, a proper morphism of
-models `b̄ : N ⟶ ℙ¹_S` whose maps of fibres are projective (`b̄₁ = i₁ ≫ p₁`, `b̄₂ = i₂ ≫ p₂`),
-and the coordinate `b_W` of `W = b̄⁻¹(𝔸¹_S)`, the twist equation holds for `θ_N` along the
-composite `W'' ⟶ W ⟶ N` of the slice projection and the inclusion
-(`NearbyCyclesModel.exists_twist_of_slice_of_composition_law` for `P = ℙ¹_S`, whose own twist
-equation is `NearbyCyclesModel.exists_twist_projectiveLineSlice`). -/
-theorem exists_twist_genericSliceCompHom (D : NearbyDualizingDataOfGenericBase k' ℓ)
-    (DK : NearbyDualizingDataOfGenericBase (traitSliceField k') ℓ)
-    (hN : N.IsTraitModelOfGenericBase Xc (𝟙 _) qN gN) [IsProper qN]
-    (hNgen : IsPullback N.ε gN Xc.hom (traitGenericPointToSpec k' ≫ 𝟙 _)) {d : ℕ}
-    [IsClosedImmersion i₁.left] [IsProper p₁.left] [SmoothOfRelativeDimension d p₁.left]
-    [IsClosedImmersion i₂.left] [IsProper p₂.left] [SmoothOfRelativeDimension d p₂.left]
-    (hqN : qN = bc.total ≫ (ProjectiveLine (trait k') ↘ trait k'))
-    (hgN : gN = bc.generic ≫
-      (ProjectiveLine (Spec (.of (traitGenericField k'))) ↘ Spec (.of (traitGenericField k'))))
-    (hU : U = bc.total ⁻¹ᵁ (coordChart (trait k')).opensRange)
-    (hbWχ : bW ≫ coordChart (trait k') = U.ι ≫ bc.total)
-    [IsProper (pullback.snd bW (traitSlice (traitSliceCoord k')))]
-    [IsProper (genericSliceBaseToPoint (traitSliceCoord k') hbW).left]
-    [IsProper (baseChangeSpecialToPoint (b := bW) (traitSliceCoord k')).left] :
-    ∃ (u : (IsTraitModelOfGenericBase.genericSliceUpperStarComp ℓ (hN.restrictOpen U) hbW
-          (𝟙 Xc)).obj (dualizingComplex ℓ Xc) ≅
-        dualizingComplex ℓ (genericSliceBase (traitSliceCoord k') hbW) ⊗
-          boundedConstructibleTateTwist ℓ (genericSliceBase (traitSliceCoord k') hbW) 0 2)
-      (v : (IsTraitModelOfGenericBase.sliceSpecialUpperStarComp ℓ (hN.restrictOpen U) hbW
-          (N.restrictSpecialFibreι U)).obj (dualizingComplex ℓ Xc') ≅
-        dualizingComplex ℓ (baseChangeSpecial bW (traitSlice (traitSliceCoord k'))) ⊗
-          boundedConstructibleTateTwist ℓ
-            (baseChangeSpecial bW (traitSlice (traitSliceCoord k'))) 0 2),
-      (IsTraitModelOfGenericBase.sliceSpecialUpperStarComp ℓ (hN.restrictOpen U) hbW
-          (N.restrictSpecialFibreι U)).map (D.θ hN) ≫ v.hom =
-        (IsTraitModelOfGenericBase.genericSliceExchangeComp ℓ (hN.restrictOpen U) hbW hN (𝟙 Xc)
-            (N.restrictSpecialFibreι U) (N.restrictOpenHom U)).app (dualizingComplex ℓ Xc) ≫
-          (IsTraitModelOfGenericBase.genericSliceNearbyCycles (traitSliceCoord k') ℓ
-            (hN.restrictOpen U) hbW).map u.hom ≫
-          (IsTraitModelOfGenericBase.genericSliceTwistIso ℓ (hN.restrictOpen U) hbW _).hom ≫
-          DK.θ (isTraitModelOfGenericBase_genericSliceModel (traitSliceCoord k') hbW
-            (hN.restrictOpen U).isTraitModelOver) ▷ _ := by
-  have hx := transcendental_traitSliceCoord k'
-  have : IsProper (i₁ ≫ p₁).left := inferInstanceAs (IsProper (i₁.left ≫ p₁.left))
-  have : IsProper (i₂ ≫ p₂).left := inferInstanceAs (IsProper (i₂.left ≫ p₂.left))
-  have hbsq := isPullback_genericSliceCompHom_generic (hN := hN) (traitSliceCoord k') bc hbW hU
-    hbWχ hqN hNgen
-  have hssq := isPullback_genericSliceCompHom_special (hN := hN) (traitSliceCoord k') bc hbW hU
-    hbWχ hqN
-  have := isIso_upperShriekBaseChangeOfMap_projectiveLineGenericSlice ℓ hx i₁ p₁ hbsq
-  have := isIso_upperShriekBaseChangeOfMap_projectiveLineSpecialSlice ℓ hx i₂ p₂ hssq
-  have HP := exists_twist_projectiveLineSlice (ℓ := ℓ) (traitSliceCoord k') D DK
-  obtain ⟨u, v, huv⟩ := exists_twist_of_slice_of_composition_law D DK hN
-    hNgen (isTraitModelOfGenericBase_projectiveLineModel k')
-    (isPullback_projectiveLineModel_ε k')
-    (isTraitModelOfGenericBase_genericSliceModel (traitSliceCoord k') hbW
-      (hN.restrictOpen U).isTraitModelOver)
-    (isPullback_genericSliceModel_ε (traitSliceCoord k') hbW (hN.restrictOpen U).isTraitModelOver)
-    (isTraitModelOfGenericBase_sliceTraitModel (traitSliceField k'))
-    (isPullback_sliceTraitModel_ε (traitSliceField k')) (i₁ ≫ p₁) (i₂ ≫ p₂) bc hqN hgN
-    (genericSliceBaseToPoint (traitSliceCoord k') hbW)
-    (baseChangeSpecialToPoint (b := bW) (traitSliceCoord k'))
-    (genericSliceTraitHom (traitSliceCoord k') hbW) (Category.comp_id _).symm
-    (Category.comp_id _).symm (genericSliceCompHom (traitSliceCoord k') hN hbW)
-    (projectiveLineSliceHom (traitSliceCoord k'))
-    (genericSliceCompHom_total_comp (traitSliceCoord k') bc hbW hbWχ)
-    (genericSliceCompHom_generic_comp (traitSliceCoord k') bc hbW hbWχ hgN) hbsq hssq HP
-  exact ⟨u, v, huv⟩
+/-- **The twist equation for `W = b̄⁻¹(𝔸¹_S)`**: let `N` be a proper trait model over `(η, X̄₁, 𝟙)`
+with full geometric generic fibre and `b̄ : N ⟶ ℙ¹_S` a proper morphism of models whose maps of
+fibres are projective (`b̄₁ = i₁ ≫ p₁`, `b̄₂ = i₂ ≫ p₂`, closed immersions followed by smooth
+proper morphisms). Then the twist equation
+(`NearbyCyclesModel.IsTraitModelOfGenericBase.TwistEquation`) holds for the open sub-model
+`W = N|_U`, `U = b̄⁻¹(𝔸¹_S)`, and its coordinate `b_W`.
 
-
-/-- **The twist equation for `W = b̄⁻¹(𝔸¹_S)`**: in the situation of
-`NearbyCyclesModel.exists_twist_genericSliceCompHom`, the twist equation of
-`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_iso_map_θ_eq_twist_of_openSubmodel_comp`
-holds for the open sub-model `W = N|_U` and its coordinate `b_W`. -/
+By `NearbyCyclesModel.IsTraitModelOfGenericBase.exists_iso_map_θ_eq_twist_of_openSubmodel_comp`
+it suffices to prove the twist equation of `θ_N` along `W'' ⟶ W ⟶ N`. That is
+`NearbyCyclesModel.exists_twist_of_slice_of_composition_law` for `b̄` and the slice of
+`P = ℙ¹_S`, whose own twist equation is `NearbyCyclesModel.exists_twist_projectiveLineSlice`; the
+base change maps `γ` of `Rb̄^!` along the slices of `ℙ¹_S` are invertible since `b̄₁`, `b̄₂` are
+projective (`NearbyCyclesModel.isIso_upperShriekBaseChangeOfMap_projectiveLineGenericSlice`). -/
 theorem exists_twist_restrictOpen_of_compactified (D : NearbyDualizingDataOfGenericBase k' ℓ)
     (DK : NearbyDualizingDataOfGenericBase (traitSliceField k') ℓ)
     (hN : N.IsTraitModelOfGenericBase Xc (𝟙 _) qN gN) [IsProper qN]
@@ -184,31 +125,75 @@ theorem exists_twist_restrictOpen_of_compactified (D : NearbyDualizingDataOfGene
     [IsProper (pullback.snd bW (traitSlice (traitSliceCoord k')))]
     [IsProper (genericSliceBaseToPoint (traitSliceCoord k') hbW).left]
     [IsProper (baseChangeSpecialToPoint (b := bW) (traitSliceCoord k')).left] :
-    ∃ (u : (IsTraitModelOfGenericBase.genericSliceUpperStar (traitSliceCoord k') ℓ
-          (hN.restrictOpen U) hbW).obj (dualizingComplex ℓ Xc) ≅
-        dualizingComplex ℓ (genericSliceBase (traitSliceCoord k') hbW) ⊗
-          boundedConstructibleTateTwist ℓ (genericSliceBase (traitSliceCoord k') hbW) 0 2)
-      (v : (IsTraitModelOfGenericBase.sliceSpecialUpperStar (traitSliceCoord k') ℓ
-          (hN.restrictOpen U) hbW).obj (dualizingComplex ℓ (N.restrictSpecialFibre U)) ≅
-        dualizingComplex ℓ (baseChangeSpecial bW (traitSlice (traitSliceCoord k'))) ⊗
-          boundedConstructibleTateTwist ℓ
-            (baseChangeSpecial bW (traitSlice (traitSliceCoord k'))) 0 2),
-      (IsTraitModelOfGenericBase.sliceSpecialUpperStar (traitSliceCoord k') ℓ
-          (hN.restrictOpen U) hbW).map (D.θ (hN.restrictOpen U)) ≫ v.hom =
-        (IsTraitModelOfGenericBase.genericSliceExchange (traitSliceCoord k') ℓ
-            (hN.restrictOpen U) hbW).app (dualizingComplex ℓ Xc) ≫
-          (IsTraitModelOfGenericBase.genericSliceNearbyCycles (traitSliceCoord k') ℓ
-            (hN.restrictOpen U) hbW).map u.hom ≫
-          (IsTraitModelOfGenericBase.genericSliceTwistIso ℓ (hN.restrictOpen U) hbW _).hom ≫
-          DK.θ (isTraitModelOfGenericBase_genericSliceModel (traitSliceCoord k') hbW
-            (hN.restrictOpen U).isTraitModelOver) ▷ _ := by
+    (hN.restrictOpen U).TwistEquation ℓ hbW D DK := by
   have : IsOpenImmersion (Over.Hom.left (𝟙 Xc)) := inferInstanceAs (IsOpenImmersion (𝟙 _))
   have : IsOpenImmersion (N.restrictOpenHom U).total := inferInstanceAs (IsOpenImmersion U.ι)
-  exact IsTraitModelOfGenericBase.exists_iso_map_θ_eq_twist_of_openSubmodel_comp ℓ
+  refine IsTraitModelOfGenericBase.exists_iso_map_θ_eq_twist_of_openSubmodel_comp ℓ
     (hN.restrictOpen U) hbW hN (𝟙 Xc) (N.restrictSpecialFibreι U) (N.restrictOpenHom U) D DK
-    (isPullback_morphismRestrict N.j U).flip rfl rfl
-    (exists_twist_genericSliceCompHom bc hbW D DK hN hNgen hqN hgN hU hbWχ)
-
+    (isPullback_morphismRestrict N.j U).flip rfl rfl ?_
+  -- the twist equation of `θ_N` along `W'' ⟶ W ⟶ N`, from that of `ℙ¹_S` along its slice
+  have hx := transcendental_traitSliceCoord k'
+  have : IsProper (i₁ ≫ p₁).left := inferInstanceAs (IsProper (i₁.left ≫ p₁.left))
+  have : IsProper (i₂ ≫ p₂).left := inferInstanceAs (IsProper (i₂.left ≫ p₂.left))
+  have hbsq := isPullback_genericSliceCompHom_generic (hN := hN) (traitSliceCoord k') bc hbW hU
+    hbWχ hqN hNgen
+  have hssq := isPullback_genericSliceCompHom_special (hN := hN) (traitSliceCoord k') bc hbW hU
+    hbWχ hqN
+  have := isIso_upperShriekBaseChangeOfMap_projectiveLineGenericSlice ℓ hx (d := d) i₁ p₁ hbsq
+  have := isIso_upperShriekBaseChangeOfMap_projectiveLineSpecialSlice ℓ hx (d := d) i₂ p₂
+    (Z' := baseChangeSpecial bW (traitSlice (traitSliceCoord k')))
+    (f' := baseChangeSpecialToPoint (b := bW) (traitSliceCoord k')) hssq
+  have : IsProper (𝟙 (trait (traitSliceField k'))) := inferInstanceAs (IsProper (𝟙 _))
+  have HP := exists_twist_projectiveLineSlice (ℓ := ℓ) (traitSliceCoord k') D DK
+  have hM'' := isTraitModelOfGenericBase_genericSliceModel (traitSliceCoord k') hbW
+    (hN.restrictOpen U).isTraitModelOver
+  have hM''gen := isPullback_genericSliceModel_ε (traitSliceCoord k') hbW
+    (hN.restrictOpen U).isTraitModelOver
+  have key := exists_twist_of_slice_of_composition_law (F := FractionRing (PowerSeries k'))
+    (K := traitSliceField k')
+    (X₁ := Xc) (X' := Xc') (Z₁ := overProjectiveLine (point (FractionRing (PowerSeries k'))))
+    (Z' := overProjectiveLine (point k')) (X₂ := genericSliceBase (traitSliceCoord k') hbW)
+    (X'' := baseChangeSpecial bW (traitSlice (traitSliceCoord k')))
+    (Z'' := point (traitSliceField k'))
+    (M := N) (P := projectiveLineModel k') (M'' := genericSliceModel (traitSliceCoord k') hbW)
+    D DK (by exact hN)
+    (by exact hNgen) (by exact isTraitModelOfGenericBase_projectiveLineModel k')
+    (by exact isPullback_projectiveLineModel_ε k')
+    (by exact hM'')
+    (by exact hM''gen)
+    (by exact isTraitModelOfGenericBase_sliceTraitModel (traitSliceField k'))
+    (by exact isPullback_sliceTraitModel_ε (traitSliceField k')) (i₁ ≫ p₁) (i₂ ≫ p₂) (by exact bc)
+    (by exact hqN) (by exact hgN)
+    (genericSliceBaseToPoint (traitSliceCoord k') hbW)
+    (baseChangeSpecialToPoint (b := bW) (traitSliceCoord k'))
+    (by exact genericSliceTraitHom (traitSliceCoord k') hbW) (by exact (Category.comp_id _).symm)
+    (by exact (Category.comp_id _).symm) (by exact genericSliceCompHom (traitSliceCoord k') hN hbW)
+    (by exact projectiveLineSliceHom (traitSliceCoord k'))
+    (by exact genericSliceCompHom_total_comp (traitSliceCoord k') bc hbW hbWχ)
+    (by exact genericSliceCompHom_generic_comp (traitSliceCoord k') bc hbW hbWχ hgN) (by exact hbsq)
+    (by exact hssq) (by
+      have h1 := D.isIso_θ_projectiveLineModel
+      have h2 := DK.isIso_θ_sliceTraitModel
+      have : Smooth (ProjectiveLine (trait k') ↘ trait k') := SmoothOfRelativeDimension.smooth 1 _
+      have : IsIso ((projectiveLineModel k').unit (Profinite.padicAlgClRingObj ℓ)) :=
+        (isTraitModelOfGenericBase_projectiveLineModel k').isTraitModelOver.isIso_unit_of_smooth
+      have : IsIso ((sliceTraitModel (traitSliceField k')).unit (Profinite.padicAlgClRingObj ℓ)) := by
+        have h : UpperStarInvertsLowerStarUnit (Profinite.padicAlgClRingObj ℓ)
+            (traitGenericPoint (traitSliceField k')) (traitClosedPoint (traitSliceField k')) :=
+          ⟨isIso_upperStar_traitClosedPoint_map_unit_app _ _,
+            isZero_upperStar_traitClosedPoint_obj_rightDerived _ _⟩
+        exact (sliceTraitModel _).isIso_unit_of_upperStarInvertsLowerStarUnit _ h
+      have hsd := nonempty_shiftDecomposition_dualizingComplex_projectiveLine (ℓ := ℓ) (k' := k')
+      obtain ⟨uP⟩ := nonempty_upperStarOfMap_projectiveLineGenericSlice_dualizingComplex_iso
+        (ℓ := ℓ) (k' := k') (traitSliceCoord k')
+      refine @exists_twist_of_isIso' _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ ?_ _ ?_ _ ?_ _ ?_
+      · with_reducible exact h1
+      · rw [← ObjectProperty.isIso_hom_iff, Hom.boundedConstructiblePullbackExchangeOfMap_app_hom]
+        exact Hom.isIso_pullbackExchange_app_of_shiftDecomposition _ _ hsd
+      · with_reducible exact h2
+      · with_reducible exact uP)
+  obtain ⟨u, v, huv⟩ := key
+  exact ⟨u, v, by transport_exact huv⟩
 
 end Compactified
 
@@ -250,24 +235,7 @@ theorem exists_twist_of_isImmersion (D : NearbyDualizingDataOfGenericBase k' ℓ
       genericFibreInclusion M q g h.isTraitModelOver.isPullback_j.w ≫ w ≫ pullback.fst _ _ = M.ε)
     {n : Type u} [Finite n] {d : ℕ} (hn : Nat.card n = d + 1) (e : M.total ⟶ ℙ(n; trait k'))
     [IsImmersion e] (he : e ≫ ℙ(n; trait k') ↘ trait k' = q) :
-    ∃ (u : (IsTraitModelOfGenericBase.genericSliceUpperStar (traitSliceCoord k') ℓ h hb).obj
-          (dualizingComplex ℓ X₁) ≅
-        dualizingComplex ℓ (genericSliceBase (traitSliceCoord k') hb) ⊗
-          boundedConstructibleTateTwist ℓ (genericSliceBase (traitSliceCoord k') hb) 0 2)
-      (v : (IsTraitModelOfGenericBase.sliceSpecialUpperStar (traitSliceCoord k') ℓ h hb).obj
-          (dualizingComplex ℓ X') ≅
-        dualizingComplex ℓ (baseChangeSpecial b (traitSlice (traitSliceCoord k'))) ⊗
-          boundedConstructibleTateTwist ℓ (baseChangeSpecial b (traitSlice (traitSliceCoord k')))
-            0 2),
-      (IsTraitModelOfGenericBase.sliceSpecialUpperStar (traitSliceCoord k') ℓ h hb).map
-          (D.θ h) ≫ v.hom =
-        (IsTraitModelOfGenericBase.genericSliceExchange (traitSliceCoord k') ℓ h hb).app
-            (dualizingComplex ℓ X₁) ≫
-          (IsTraitModelOfGenericBase.genericSliceNearbyCycles (traitSliceCoord k') ℓ h hb).map
-            u.hom ≫
-          (IsTraitModelOfGenericBase.genericSliceTwistIso ℓ h hb _).hom ≫
-          DK.θ (isTraitModelOfGenericBase_genericSliceModel (traitSliceCoord k') hb
-            h.isTraitModelOver) ▷ _ := by
+    h.TwistEquation ℓ hb D DK := by
   obtain ⟨Xc, _, _, _, _, Xc', _, _, _, _, N, qN, gN, hN, _, hNgen, b₁, _, b₂, _, bc, hqN, hgN, U,
     hU, _, _, _, _, bW, hbW, hbWχ, j, _, j', _, φ, _, Y₁, _, _, _, i₁, p₁, Y₂, _, _, _, i₂, p₂,
     hφ, hq, hg, hbb, ⟨_, _, _, rfl⟩, ⟨_, _, _, rfl⟩⟩ :=
@@ -284,7 +252,7 @@ theorem exists_twist_of_isImmersion (D : NearbyDualizingDataOfGenericBase k' ℓ
   have : IsProper (baseChangeSpecialToPoint (b := bW) (traitSliceCoord k')).left :=
     MorphismProperty.of_isPullback (P := @IsProper) hssq inferInstance
   have : IsProper (pullback.snd bW (traitSlice (traitSliceCoord k'))) :=
-    isProper_pullback_snd_traitSlice_of_compactified bc hbW hU hbWχ hqN
+    isProper_pullback_snd_traitSlice_of_compactified bc hU hbWχ hqN
   have h₁ : IsProper (genericSliceBase (traitSliceCoord k') hbW).hom :=
     inferInstanceAs (IsProper (genericSliceBaseToPoint (traitSliceCoord k') hbW).left)
   have h₂ : IsProper (baseChangeSpecial bW (traitSlice (traitSliceCoord k'))).hom :=
@@ -294,12 +262,12 @@ theorem exists_twist_of_isImmersion (D : NearbyDualizingDataOfGenericBase k' ℓ
   have : IsProper (CondensedRing.toPoint
       (baseChangeSpecial bW (traitSlice (traitSliceCoord k')))).left := by
     rw [toPoint_left]; exact h₂
-  have HW := exists_twist_restrictOpen_of_compactified bc hbW D DK hN hNgen hqN hgN hU hbWχ
+  have HW := exists_twist_restrictOpen_of_compactified bc hbW D DK hN hNgen (d := d) hqN hgN hU
+    hbWχ
   exact IsTraitModelOfGenericBase.exists_iso_map_θ_eq_twist_of_openSubmodel ℓ h hb
     (hN.restrictOpen U) hbW D DK j j' φ hφ hq hg hbb HW
 
 end QuasiProjective
-
 
 namespace IsTraitModelOfGenericBase
 
@@ -353,12 +321,18 @@ theorem exists_iso_map_θ_eq_twist_restrictOpen_of_immersion
   have := hR.isSeparated
   have hT := isTraitModelOfGenericBase_traitFibreModel (V.ι ≫ qc)
   have hTM := hT.isTraitModelOver
-  have := hTM.locallyOfFiniteType_genericSliceBase (traitSliceCoord k') hb
-  have := hTM.quasiCompact_genericSliceBase (traitSliceCoord k') hb
-  have := hTM.isSeparated_genericSliceBase (traitSliceCoord k') hb
-  have := hTM.locallyOfFiniteType_baseChangeSpecial_traitSlice (traitSliceCoord k') hb
-  have := hTM.quasiCompact_baseChangeSpecial_traitSlice (traitSliceCoord k') hb
-  have := hTM.isSeparated_baseChangeSpecial_traitSlice (traitSliceCoord k') hb
+  have := hTM.locallyOfFiniteType_genericSliceBase (M := traitFibreModel (T := (Mc.restrictOpen V).total) (V.ι ≫ qc))
+    (traitSliceCoord k') hb
+  have := hTM.quasiCompact_genericSliceBase (M := traitFibreModel (T := (Mc.restrictOpen V).total) (V.ι ≫ qc))
+    (traitSliceCoord k') hb
+  have := hTM.isSeparated_genericSliceBase (M := traitFibreModel (T := (Mc.restrictOpen V).total) (V.ι ≫ qc))
+    (traitSliceCoord k') hb
+  have := hTM.locallyOfFiniteType_baseChangeSpecial_traitSlice (M := traitFibreModel (T := (Mc.restrictOpen V).total) (V.ι ≫ qc))
+    (traitSliceCoord k') hb
+  have := hTM.quasiCompact_baseChangeSpecial_traitSlice (M := traitFibreModel (T := (Mc.restrictOpen V).total) (V.ι ≫ qc))
+    (traitSliceCoord k') hb
+  have := hTM.isSeparated_baseChangeSpecial_traitSlice (M := traitFibreModel (T := (Mc.restrictOpen V).total) (V.ι ≫ qc))
+    (traitSliceCoord k') hb
   -- the generic standard model of `V` is quasi-projective over the trait
   classical
   have hn : Nat.card (Option ιV) = Nat.card ιV + 1 := by

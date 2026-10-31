@@ -95,6 +95,13 @@ attribute [-instance] AlgebraicGeometry.Scheme.isStrictlyHenselianLocalRing_of_i
 
 namespace NearbyCyclesModel
 
+/-- The slice trait `Spec K⟦t⟧` as a trait model of the point `Spec Frac K⟦t⟧` over the generic
+base `(Frac K⟦t⟧, 𝟙)`. -/
+noncomputable abbrev sliceTraitModel (K : Type u) [Field K] :
+    NearbyCyclesModel (point (FractionRing (PowerSeries K))).left (point K).left :=
+  traitModelOfGenericBase (FractionRing (PowerSeries K))
+    (𝟙 (Spec (.of (FractionRing (PowerSeries K)))))
+
 section Slice
 
 variable {k' K : Type u} [Field k'] [Field K] [Algebra k' K] (x : K)
@@ -225,11 +232,10 @@ lemma projectiveLineSpecialSlice_eq :
 
 /-- **The slice of the projective line as a morphism of models** `s_P : P'' ⟶ ℙ¹_S`: from the
 slice trait `Spec K⟦t⟧`, as a model of the point `Spec Frac K⟦t⟧` over the generic base
-(`ProEtale.CondensedRing.traitModelOfGenericBase`), to the projective line over the trait, over
+(`NearbyCyclesModel.sliceTraitModel`), to the projective line over the trait, over
 the slices `c_P` and `p_P` of the generic and special fibres. -/
 noncomputable def projectiveLineSliceHom :
-    (traitModelOfGenericBase (FractionRing (PowerSeries K))
-        (𝟙 (Spec (.of (FractionRing (PowerSeries K)))))).Hom
+    (sliceTraitModel K).Hom
       (projectiveLineModel k') (projectiveLineGenericSlice x) (projectiveLineSpecialSlice x) where
   total := projectiveLineSlice x
   generic := projectiveLineGeometricSlice x
@@ -276,13 +282,6 @@ theorem nonempty_tateTwistDerived_one_iso_zero {K : Type u} [Field K] [IsSepClos
   exact ⟨(DerivedCategory.singleFunctor _ 0).mapIso e₂ ≪≫ (tateTwistDerivedZeroIso ℓ X).symm⟩
 
 variable (K : Type u) [Field K]
-
-/-- The slice trait `Spec K⟦t⟧` as a trait model of the point `Spec Frac K⟦t⟧` over the generic
-base `(Frac K⟦t⟧, 𝟙)`. -/
-noncomputable abbrev sliceTraitModel :
-    NearbyCyclesModel (point (FractionRing (PowerSeries K))).left (point K).left :=
-  traitModelOfGenericBase (FractionRing (PowerSeries K))
-    (𝟙 (Spec (.of (FractionRing (PowerSeries K)))))
 
 /-- The slice trait is a trait model of the point `Spec Frac K⟦t⟧` over the generic base
 `(Frac K⟦t⟧, 𝟙)`. -/
