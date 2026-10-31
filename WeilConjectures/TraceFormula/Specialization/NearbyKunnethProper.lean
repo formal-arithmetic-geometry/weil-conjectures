@@ -161,7 +161,8 @@ The source and target of `Π_{A,B}` are bounded constructible by Deligne's finit
 every point, the coordinates of local charts of the total spaces detect closed points of the
 special fibre, and the cone of `Π_{A,B}` vanishes over the generic point of each coordinate line
 by generic slicing (`NearbyCyclesModel.SliceKunnethFormula`). -/
-theorem exists_finite_isIso_upperStar_map_kunnethMap (hM : M.IsTraitModelOver qM gM)
+theorem exists_finite_isIso_upperStar_map_kunnethMap [TopologicalSpace.NoetherianSpace Z]
+    (hM : M.IsTraitModelOver qM gM)
     (hN : N.IsTraitModelOver qN gN) (hpb : IsPullback φ₁.total φ₂.total qM qN)
     (hP : P.IsTraitModelOver (φ₁.total ≫ qM) (φ₁.generic ≫ gM))
     (hgen : φ₂.generic ≫ gN = φ₁.generic ≫ gM) {m m' : ℕ}
@@ -204,7 +205,8 @@ sections (`NearbyCyclesModel.isIso_lowerStar_kunnethMap`, given that the Künnet
 at the cohomology of the geometric generic fibres is invertible), and is supported on finitely
 many closed points (`NearbyCyclesModel.exists_finite_isIso_upperStar_map_kunnethMap`); hence it
 vanishes (the hypothesis `hdetect`, blueprint `det-nearby-kunneth-finite-support`). -/
-theorem isIso_kunnethMap_of_isProper (hM : M.IsTraitModelOver qM gM)
+theorem isIso_kunnethMap_of_isProper [TopologicalSpace.NoetherianSpace Z]
+    (hM : M.IsTraitModelOver qM gM)
     (hN : N.IsTraitModelOver qN gN) (hpb : IsPullback φ₁.total φ₂.total qM qN)
     (hP : P.IsTraitModelOver (φ₁.total ≫ qM) (φ₁.generic ≫ gM))
     (hgen : φ₂.generic ≫ gN = φ₁.generic ≫ gM) [IsProper qM] [IsProper qN]
