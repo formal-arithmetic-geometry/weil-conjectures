@@ -1,0 +1,80 @@
+/-
+Copyright (c) 2026 Bin Wu. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Bin Wu
+-/
+module
+
+public import WeilConjectures.AlgebraicGeometry.Galois.GaloisAdicDataFromFinite
+import WeilConjectures.AlgebraicGeometry.Galois.GaloisAdicRationalProperties
+import WeilConjectures.AlgebraicGeometry.Galois.GaloisAdicDataFromFinite
+import Mathlib.LinearAlgebra.TensorProduct.Tower
+
+/-! # Tensor and unit comparisons for algebraic l-adic sheaves -/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory CategoryTheory.Limits CategoryTheory.PreGaloisCategory
+open AlgebraicGeometry Opposite
+open scoped TensorProduct MonoidalCategory
+
+namespace AlgebraicGeometry.Scheme
+
+private def scalarRep
+    (E L : Type (u + 1)) [Field E] [Field L] [Algebra E L]
+    {G : Type u} [Group G] (X : Rep.{u + 1} E G) : Rep.{u + 1} L G :=
+  Rep.of ((Module.End.baseChangeHom E L X.V).toMonoidHom.comp X.ρ)
+
+private def scalarTowerIso
+    (E L Q : Type (u + 1)) [Field E] [Field L] [Field Q]
+    [Algebra E L] [Algebra E Q] [Algebra L Q] [IsScalarTower E L Q]
+    {G : Type u} [Group G] (X : Rep.{u + 1} E G) :
+    scalarRep L Q (scalarRep E L X) ≅ scalarRep E Q X := by
+  let e := TensorProduct.AlgebraTensorModule.cancelBaseChange E L Q Q X.V
+  exact Rep.mkIso
+    { toLinearEquiv := e
+      isIntertwining' := fun g ↦ by
+        apply TensorProduct.AlgebraTensorModule.ext
+        intro a v
+        induction v using TensorProduct.induction_on with
+        | zero => simp only [TensorProduct.tmul_zero, map_zero]
+        | add x z hx hz => simp only [TensorProduct.tmul_add, map_add, hx, hz]
+        | tmul b x =>
+          change e (a ⊗ₜ[L] (b ⊗ₜ[E] X.ρ g x)) =
+            (LinearMap.baseChange Q (X.ρ g)) (e (a ⊗ₜ[L] (b ⊗ₜ[E] x)))
+          simp only [e, TensorProduct.AlgebraTensorModule.cancelBaseChange_tmul,
+            LinearMap.baseChange_tmul] }
+
+private noncomputable def scalarTensorIso
+    (E Q : Type (u + 1)) [Field E] [Field Q] [Algebra E Q]
+    {G : Type u} [Group G] (X Y : Rep.{u + 1} E G) :
+    scalarRep E Q X ⊗ scalarRep E Q Y ≅ scalarRep E Q (X ⊗ Y) := by
+  let e := (TensorProduct.AlgebraTensorModule.distribBaseChange E Q X.V Y.V).symm
+  exact Rep.mkIso
+    { toLinearEquiv := e
+      isIntertwining' := fun g ↦ by
+        apply TensorProduct.AlgebraTensorModule.ext
+        intro v w
+        induction v using TensorProduct.induction_on generalizing w with
+        | zero => simp only [map_zero, TensorProduct.zero_tmul]
+        | add x z hx hz => simp only [map_add, TensorProduct.add_tmul, hx, hz]
+        | tmul a x =>
+          induction w using TensorProduct.induction_on with
+          | zero => simp only [map_zero, TensorProduct.tmul_zero]
+          | add y z hy hz => simp only [map_add, TensorProduct.tmul_add, hy, hz]
+          | tmul b y =>
+            change e ((a ⊗ₜ[E] X.ρ g x) ⊗ₜ[Q] (b ⊗ₜ[E] Y.ρ g y)) =
+              (LinearMap.baseChange Q ((X.ρ.tprod Y.ρ) g))
+                (e ((a ⊗ₜ[E] x) ⊗ₜ[Q] (b ⊗ₜ[E] y)))
+            simp only [e, TensorProduct.AlgebraTensorModule.distribBaseChange_symm_tmul,
+              LinearMap.baseChange_tmul, Representation.tprod_apply, TensorProduct.map_tmul] }
+
+set_option maxHeartbeats 8000000 in
+-- The construction witness has large dependent fibre types.
+set_option maxHeartbeats 8000000 in
+-- The colimit witness contains dependent scalar-extension fibre objects.
+set_option maxHeartbeats 8000000 in
+-- Coefficient models and their tensor objects carry large dependent category transports.
+end AlgebraicGeometry.Scheme

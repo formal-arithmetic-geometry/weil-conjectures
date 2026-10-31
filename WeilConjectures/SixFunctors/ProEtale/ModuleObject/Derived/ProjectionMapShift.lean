@@ -9,6 +9,15 @@ public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapShift
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.ShiftComparison
 public import WeilConjectures.CategoryTheory.Monoidal.KFlatEquivalence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Localizing
+public import WeilConjectures.SixFunctors.Supporting.ModCondensedCachedInstances
+public import WeilConjectures.Algebra.Homology.HomotopyCategory.MapMonoidal
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Monoidal
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Unit
+public import WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.MonoidalModule
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 
 /-!
 # The projection map of module objects commutes with the shifts
@@ -44,6 +53,8 @@ Every object is isomorphic to such a `Qh A`, since `p^*` preserves K-flat comple
 -/
 
 @[expose] public section
+
+open scoped AlgebraicGeometry.ProEtale.CondensedRing.CachedModInstances
 
 universe u
 
@@ -81,7 +92,6 @@ lemma commShift_leftDerivedUpperStarTensor_app_Qh_obj (A : 𝐊(Y))
   DerivedCategory.commShift_of_tensorLeft_fac (p)^*⟦Λ⟧ L((p)^*⟦Λ⟧)
     (p)^*⟦Λ⟧.leftDerivedFunctorCounit A hA hpA _ (fun M ↦
       leftDerivedUpperStarTensor_app_app_fac Λ p A M)
-
 
 /-! ### Reduction to K-flat objects -/
 

@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.Monoidal.DerivedCompAux
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalComp
+public import WeilConjectures.SixFunctors.Supporting.ModCondensedCachedInstances
 
 @[expose] public section
 
@@ -15,6 +16,7 @@ universe u
 open CategoryTheory Limits MonoidalCategory DerivedCategory Functor.LaxMonoidal
 
 open scoped CategoryTheory.Obj
+open scoped AlgebraicGeometry.ProEtale.CondensedRing.CachedModInstances
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
