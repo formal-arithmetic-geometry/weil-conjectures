@@ -453,7 +453,7 @@ over the generic base `(F, X₁, ι)`, `c : 𝒳_η ⟶ X₁` a map through whic
 that the dualizing map of `M` is that of its shrunk model `M♭` over `(η, 𝒳_η, 𝟙)`
 (`NearbyCyclesModel.IsTraitModelOfGenericBase.shrink`) up to the shrinking exchange and an
 identification `Φ : c^* ω_{X₁} ≅ ω_{𝒳_η}`: `θ_M = α ≫ Ψ_{M♭}(Φ) ≫ θ_{M♭}`. Then the twist
-equation of `NearbyCyclesModel.IsTraitModelOfGenericBase.exists_iso_map_θ_eq_twist` for `M♭`
+equation of `NearbyCyclesModel.IsTraitModelOfGenericBase.TwistEquation` for `M♭`
 implies it for `M`, with `u = E ≪≫ c♭^*(Φ) ≪≫ u♭` (`NearbyCyclesModel.exists_twist_of_rebase`). -/
 theorem exists_iso_map_θ_eq_twist_of_shrink (D : NearbyDualizingDataOfGenericBase k' ℓ)
     (DK : NearbyDualizingDataOfGenericBase (traitSliceField k') ℓ)
@@ -931,7 +931,7 @@ theorem exists_θ_eq_shrink_restrictOpen (D : NearbyDualizingDataOfGenericBase k
 model**: let `M_c` be a proper trait model over the generic base `(F, X_c, ι)` with proper `X_c`,
 `X_c'` and full generic fibre, `V` an open of its total space with quasi-compact inclusion and
 `b : V ⟶ 𝔸¹_S` a coordinate. Then the twist equation of
-`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_iso_map_θ_eq_twist` for the generic standard
+`NearbyCyclesModel.IsTraitModelOfGenericBase.TwistEquation` for the generic standard
 model `NearbyCyclesModel.traitFibreModel (V ⟶ S)` (a model over `(η, V_η, 𝟙)` whose base is its
 own generic fibre) implies it for the restriction `M_c|_V` over `(F, X_c, ι)`.
 

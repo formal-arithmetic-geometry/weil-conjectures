@@ -14,7 +14,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldCh
 # The twist equation of the generic slice and re-basing
 
 Inputs for deducing the twist equation of the generic slice
-(`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_iso_map_θ_eq_twist`) for a trait model `M`
+(`NearbyCyclesModel.IsTraitModelOfGenericBase.TwistEquation`) for a trait model `M`
 over the generic base `(F, X₁, ι)` from the same equation for its re-based model `M'` over
 `(η, X₁,η, 𝟙)` (`NearbyCyclesModel.IsTraitModelOfGenericBase.isTraitModelOfGenericBase_rebase`).
 The generic slices of `M` and `M'` are the same model `M''` over the same base `X₂`.
@@ -89,7 +89,7 @@ lemma rebase_exchange_aux {DX DXη DS Ds D₂ : Type*} [Category DX] [Category D
   rw [key, hc, hsx, P.map_comp, Category.assoc]
 
 /-- **The twist equation and re-basing**, abstractly (the algebra behind deducing
-`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_iso_map_θ_eq_twist` from the re-based
+`NearbyCyclesModel.IsTraitModelOfGenericBase.TwistEquation` from the re-based
 model): if `θ = ρ ≫ Ψ'(φ) ≫ θ'` with `φ` invertible, `α ≫ Ψ(E) = P(ρ) ≫ α'` and the twist
 equation holds for `θ'` and `α'`, then it holds for `θ` and `α`, with `u = E ≪≫ C'(φ) ≪≫ u'`
 and the same `v`. -/

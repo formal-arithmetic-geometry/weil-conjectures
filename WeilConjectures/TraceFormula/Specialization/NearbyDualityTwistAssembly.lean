@@ -12,7 +12,7 @@ public import Mathlib.CategoryTheory.Monoidal.Category
 # The twist equation of the generic slice from the composition law
 
 The algebra behind deducing the twist equation of the generic slice
-(`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_iso_map_θ_eq_twist`)
+(`NearbyCyclesModel.IsTraitModelOfGenericBase.TwistEquation`)
 `p^* θ_M ≫ v = α ≫ Ψ_{M''}(u) ≫ κ ≫ θ_{M''} ▷ T`
 for a model `M` with a proper coordinate `b : M ⟶ ℙ¹_S` from the same equation for `ℙ¹_S`, in
 abstract categories.
@@ -58,7 +58,7 @@ lemma exists_twist_of_isIso {DX DS D₂ Ds : Type*} [Category DX] [Category DS] 
   simp
 
 /-- **The twist equation for invertible dualizing maps**, in the shape of
-`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_iso_map_θ_eq_twist`: if `θ`, `α.app ω` and
+`NearbyCyclesModel.IsTraitModelOfGenericBase.TwistEquation`: if `θ`, `α.app ω` and
 `θ''` are isomorphisms and `κ` is an isomorphism, then for any `u : C(ω) ≅ ω₂ ⊗ T₂` there is `v`
 with `P(θ) ≫ v = α ≫ Ψ(u) ≫ κ ≫ θ'' ▷ T`. -/
 lemma exists_twist_of_isIso' {DX DS D₂ Ds : Type*} [Category DX] [Category DS] [Category D₂]
@@ -73,7 +73,7 @@ lemma exists_twist_of_isIso' {DX DS D₂ Ds : Type*} [Category DX] [Category DS]
   exact ⟨u, v, h⟩
 
 /-- **The twist equation and the composition law**, abstractly (the algebra behind deducing
-`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_iso_map_θ_eq_twist` for a model `M` with a
+`NearbyCyclesModel.IsTraitModelOfGenericBase.TwistEquation` for a model `M` with a
 proper coordinate `b : M ⟶ ℙ¹_S` from the same equation for `ℙ¹_S`).
 
 Notation: `ΨM`, `ΨP` are the nearby cycles of `M` and `ℙ¹_S`, `Ψ`, `ΨP''` those of their slices;

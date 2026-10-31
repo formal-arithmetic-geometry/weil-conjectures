@@ -14,7 +14,7 @@ public import WeilConjectures.Tactic.TransportExact
 
 For a proper trait model `M` over the generic base `(F, X₁, ι)` with proper `X₁` and full generic
 fibre, the twist equation of the generic slice
-(`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_iso_map_θ_eq_twist`) for `M` follows from the
+(`NearbyCyclesModel.IsTraitModelOfGenericBase.TwistEquation`) for `M` follows from the
 same equation for the re-based model `M'` over `(η, X₁,η, 𝟙)`
 (`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_iso_map_θ_eq_twist_of_rebase`).
 
@@ -304,7 +304,7 @@ attribute [-instance] monoidalCategory_boundedConstructible
 
 /-- **The twist equation of the generic slice and re-basing**: for a proper trait model `M` over
 the generic base `(F, X₁, ι)` with proper `X₁` and full generic fibre, the twist equation of
-`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_iso_map_θ_eq_twist` for `M` follows from the
+`NearbyCyclesModel.IsTraitModelOfGenericBase.TwistEquation` for `M` follows from the
 same equation for the re-based model over `(η, X₁,η, 𝟙)`
 (`NearbyCyclesModel.IsTraitModelOfGenericBase.isTraitModelOfGenericBase_rebase`), with
 `u = E ≪≫ c'^*(φ) ≪≫ u'` (`NearbyCyclesModel.exists_twist_of_rebase`). -/

@@ -21,7 +21,7 @@ the composite `s = s_M ≫ φ` of the slice projection and `φ`, over `c ≫ j` 
 (`NearbyCyclesModel.IsTraitModelOfGenericBase.genericSliceExchangeComp`).
 
 The twist equation of the generic slice of `M`
-(`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_iso_map_θ_eq_twist`) follows from the
+(`NearbyCyclesModel.IsTraitModelOfGenericBase.TwistEquation`) follows from the
 *twist equation of `M_c` along `s`*:
 `(p ≫ j')^* θ_{M_c} ≫ v = α_c ≫ Ψ_{M''}(u) ≫ κ ≫ θ_{M''} ▷ T`
 (`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_iso_map_θ_eq_twist_of_openSubmodel_comp`).
@@ -229,7 +229,7 @@ and `φ`, that is
 `(p ≫ j')^* θ_{M_c} ≫ v = α_c ≫ Ψ_{M''}(u) ≫ κ ≫ θ_{M''} ▷ T`
 for the exchange `α_c` of that composite
 (`NearbyCyclesModel.IsTraitModelOfGenericBase.genericSliceExchangeComp`), then the twist
-equation of `NearbyCyclesModel.IsTraitModelOfGenericBase.exists_iso_map_θ_eq_twist` holds for
+equation of `NearbyCyclesModel.IsTraitModelOfGenericBase.TwistEquation` holds for
 `M`. Unlike `NearbyCyclesModel.IsTraitModelOfGenericBase.exists_iso_map_θ_eq_twist_of_openSubmodel`,
 `M_c` needs no coordinate. -/
 theorem exists_iso_map_θ_eq_twist_of_openSubmodel_comp (D : NearbyDualizingDataOfGenericBase k' ℓ)

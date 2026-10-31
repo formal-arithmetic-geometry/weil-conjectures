@@ -12,7 +12,7 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBa
 # The twist equation of the generic slice and open sub-models
 
 The twist equation of the generic slice
-(`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_iso_map_θ_eq_twist`) passes from a trait
+(`NearbyCyclesModel.IsTraitModelOfGenericBase.TwistEquation`) passes from a trait
 model `M_c` over a generic base to its open sub-models `M`, for a coordinate `b = φ ≫ b_c` of `M`
 restricted from `M_c`
 (`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_iso_map_θ_eq_twist_of_openSubmodel`). Every
@@ -899,7 +899,7 @@ of a trait model `M_c` over the generic base, through open immersions `j : X₁ 
 `j' : X' ⟶ X'_c` and `φ : M ⟶ M_c` (as produced by
 `NearbyCyclesModel.IsTraitModelOfGenericBase.exists_isProper_openSubmodel`), and let the
 coordinate `b` of `M` be the restriction `φ ≫ b_c` of a coordinate `b_c` of `M_c`. Then the twist
-equation of `NearbyCyclesModel.IsTraitModelOfGenericBase.exists_iso_map_θ_eq_twist` for `M_c`
+equation of `NearbyCyclesModel.IsTraitModelOfGenericBase.TwistEquation` for `M_c`
 implies it for `M`.
 
 The generic slice of `M` is the open sub-model of that of `M_c` over the open immersions
