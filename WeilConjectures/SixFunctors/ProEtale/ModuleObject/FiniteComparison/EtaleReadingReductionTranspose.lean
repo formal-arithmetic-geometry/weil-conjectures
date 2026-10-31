@@ -102,13 +102,11 @@ lemma unit_app_comp_map_finiteCoefficientDerivedEquivalenceExtendScalarsIso_hom_
     erw [t, CategoryTheory.Functor.map_id, Category.comp_id]
   rw [← Category.assoc, ← Category.assoc]
   erw [n1]
-  rw [Category.assoc]
-  refine congrArg (Φ.unitIso.hom.app N ≫ ·) ?_
-  simp only [← Functor.map_comp]
-  congr 1
-  rw [Functor.map_comp, Category.assoc]
-  exact congrArg (Φ.functor.map ((Mod.derivedExtendMapDerivedCategoryAdjunction ψ).unit.app N) ≫ ·)
-    key
+  have key₂ := congrArg Φ.inverse.map key
+  simp only [Functor.map_comp] at key₂
+  simp only [Functor.map_comp, Category.assoc]
+  exact congrArg (fun g ↦ Φ.unitIso.hom.app N ≫ Φ.inverse.map (Φ.functor.map
+    ((Mod.derivedExtendMapDerivedCategoryAdjunction ψ).unit.app N)) ≫ g) key₂
 
 end ExtendScalars
 end AlgebraicGeometry.ProEtale
@@ -170,7 +168,12 @@ theorem unit_app_comp_map_etaleReductionExtendScalarsIsoApp_hom
     (PadicAlgCl.integersModPowTransition ℓ E n)).hom.naturality
       ((boundedConstructibleIntegersModPowReductionTransitionIso ℓ E n X.left).hom.app K)
   dsimp only [Functor.comp_map, Functor.comp_obj] at hω hi
-  rw [etaleReductionExtendScalarsIsoApp_hom, finiteEtaleReadingExtendScalarsMap_app]
+  rw [etaleReductionExtendScalarsIsoApp_hom, finiteEtaleReadingExtendScalarsMap_app,
+    Functor.map_comp, Functor.map_comp, Category.assoc, Category.assoc]
+  erw [← Functor.map_comp_assoc (Sheaf.derivedRestrictScalars X.left.smallEtaleTopology
+    (integersModPowCoeffTransition ℓ E n)), ← Functor.map_comp, hω, reassoc_of% hstar,
+    ← Functor.map_comp, Functor.map_comp, reassoc_of% hExt, hi]
+  simp only [Functor.map_comp, Category.assoc]
   trace_state
   sorry
 

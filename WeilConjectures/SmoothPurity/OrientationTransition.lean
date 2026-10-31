@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.LiftMorphisms
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleOriginReadingProof
-public import WeilConjectures.SmoothPurity.OrientationTransitionReading
+public import WeilConjectures.SmoothPurity.OrientationTransitionShift
 
 /-!
 # The canonical finite orientations are compatible with the reductions
@@ -101,23 +101,6 @@ noncomputable def derivedReductionSmoothOrientation (n : ℕ) :
         ((boundedConstructible _).ι.obj
           ((PadicIntegersRingObj.boundedConstructibleUpperShriek ℓ E.1 f).obj (𝟙_ _))) :=
   derivedReductionMap ℓ E.1 n X.left (integersModPowReductionSmoothOrientation ℓ E f d n)
-
-/-- The isomorphisms `β : Ψ(red_{n+1} -) ≅ red_n -` (`etaleReductionExtendScalarsIsoApp`) commute
-with the shifts, through the commutation isomorphisms of the reductions and of the étale readings
-with the shifts used in `finiteEtaleReadingSmoothOrientation`. -/
-lemma map_reductionShift_comp_etaleReductionExtendScalarsIsoApp (n : ℕ)
-    (K : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧) (q : ℤ) :
-    (integersModPowDerivedExtendScalars ℓ E.1 n X.left).map
-        ((finiteEtaleReading ℓ E.1 (n + 1) X).map
-          (boundedConstructibleIntegersModPowReductionShiftIso ℓ E.1 (n + 1) X.left K q).hom ≫
-        ((finiteEtaleReading ℓ E.1 (n + 1) X).commShiftIso q).hom.app _) ≫
-      ((integersModPowDerivedExtendScalars ℓ E.1 n X.left).commShiftIso q).hom.app _ ≫
-        (etaleReductionExtendScalarsIsoApp ℓ E.1 n X K).hom⟦q⟧' =
-    (etaleReductionExtendScalarsIsoApp ℓ E.1 n X ((shiftFunctor _ q).obj K)).hom ≫
-      (finiteEtaleReading ℓ E.1 n X).map
-          (boundedConstructibleIntegersModPowReductionShiftIso ℓ E.1 n X.left K q).hom ≫
-        ((finiteEtaleReading ℓ E.1 n X).commShiftIso q).hom.app _ := by
-  sorry
 
 /-- A formal pasting: if `F` carries `S₂`, `D₂` and `V₂` to `S₁`, `D₁` and `V₁` through `t`, `ω`
 and `w`, then it carries `S₂ ≫ D₂⁻¹ ≫ V₂⁻¹` to `S₁ ≫ D₁⁻¹ ≫ V₁⁻¹`. -/
@@ -226,7 +209,7 @@ theorem map_finiteEtaleReadingSmoothOrientation_comp (n : ℕ) :
     (etaleReductionExtendScalarsIsoApp ℓ E.1 (n + 1) X _).hom ≫
       finiteEtaleReadingSmoothOrientation ℓ E f d (n + 1) := by
   have h1 := map_etaleReductionSmoothOrientationIso_hom_comp ℓ E f d n
-  have h := map_reductionShift_comp_etaleReductionExtendScalarsIsoApp ℓ E (n + 1)
+  have h := map_reductionShift_comp_etaleReductionExtendScalarsIsoApp ℓ E.1 (n + 1) X
     (integralTateTwistBoundedConstructible ℓ E.1 X.hom d) (2 * d : ℤ)
   simp only [finiteEtaleReadingSmoothOrientation, Functor.map_comp, Category.assoc]
   -- rewrite at explicit positions: a goal-wide `rw` tries to unify the pattern with every

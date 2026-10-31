@@ -12,6 +12,17 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LocalizationBaseChange
 
 /-!
 # The reduction of coefficients and the localization boundaries
+
+Let `Ψ = - ⊗ᴸ_Λ Λ'` be the derived extension of scalars along a surjection `ρ : Λ →+* Λ'` of
+finite rings with principal kernel. This file shows that `Ψ` commutes with the boundary of the
+supported localization triangle `Ri_! Ri^! L ⟶ L ⟶ Rj_* Lj^* L ⟶ [1]`
+(`AlgebraicGeometry.Etale.map_supportedLocalizationBoundary_comp`), hence with the localization
+boundaries on classes `H¹(U_f, Λ(1)) ⟶ H²_{V(f)}(U, Λ(1))`
+(`AlgebraicGeometry.Etale.reductionSupportedCoefficientChange_mapSupportedClass_localizationBoundaryClass`,
+the hypothesis `hδ` of `MonoidalSupportedCoefficientChange.preservesKummerBoundaries`, blueprint
+`det-sp-purity-coefficient-change`), given identifications `σ X : Ψ Λ_X(1) ≅ Λ'_X(1)` compatible
+with restriction and with the Tate data. Along the way, the comparisons of `Ψ` with `Le^*` and
+`Rj_*` are shown to commute with the shifts.
 -/
 
 @[expose] public section
@@ -352,12 +363,14 @@ theorem derivedExtendScalars_map_localizationBoundaryClass
   simp only [reassoc_of% hn, reassoc_of% h₁', reassoc_of% hν', reassoc_of% h₂']
 
 omit [HasInvertibleExponent Λ U] [HasInvertibleExponent Λ' U] in
+/-- The functor of `reductionSupportedCoefficientChange` is the derived extension of scalars. -/
 lemma reductionSupportedCoefficientChange_functor
     (τ : DerivedExtendScalarsTateShiftData Λ Λ' hρ ha) (X : Scheme.{u}) :
     (reductionSupportedCoefficientChange hρ ha τ).functor X = derivedExtendScalars hρ ha X :=
   rfl
 
 omit [HasInvertibleExponent Λ U] [HasInvertibleExponent Λ' U] in
+/-- The identification of the constant complexes of `reductionSupportedCoefficientChange`. -/
 lemma reductionSupportedCoefficientChange_constantComplexIso
     (τ : DerivedExtendScalarsTateShiftData Λ Λ' hρ ha) (X : Scheme.{u}) :
     (reductionSupportedCoefficientChange hρ ha τ).constantComplexIso X =

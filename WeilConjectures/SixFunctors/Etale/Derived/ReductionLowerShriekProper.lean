@@ -81,6 +81,18 @@ noncomputable def derivedRestrictScalarsLowerStarComparison :
     (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) g)
     (leftDerivedUpperStarRestrictScalarsIso ρ g).hom).natTrans
 
+/-- The comparison of `Res` with `Rg_*` is the inverse of the commutation
+`AlgebraicGeometry.Etale.derivedRestrictScalarsCompRightDerivedLowerStarIso` when `g` has bounded
+cohomological dimension, hence an isomorphism. -/
+lemma isIso_derivedRestrictScalarsLowerStarComparison (d : ℕ)
+    (hd : ∀ (F : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ), d < q →
+      IsZero ((((g)_*[ModuleCat.{u + 1} Λ]).rightDerived q).obj F)) :
+    IsIso (derivedRestrictScalarsLowerStarComparison g (ρ := ρ)) := by
+  have h := mateEquiv_derivedUpperStarLowerStarAdjunction_leftDerivedUpperStarRestrictScalarsIso
+    ρ g d hd
+  rw [derivedRestrictScalarsLowerStarComparison, h]
+  infer_instance
+
 /-- The transpose along `Lg^* ⊣ Rg_*` of `Res Ψ (ε_M) ∘ (Lg^* Res Ψ ≅ Res Ψ Lg^*)` is
 `Res β_g` followed by the comparison of `Res` with `Rg_*`. -/
 lemma homEquiv_comp_map_counit_eq (M : 𝐃(Z, Λ)) :

@@ -9,7 +9,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MonoidalOfIso
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReduction
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReductionMonoidalSheaf
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.NonFlatPullFacGeneric
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.CounitFac
 
 /-!
 # The commutation of the reduction of coefficients with the derived pullback is monoidal
@@ -27,6 +27,9 @@ comparisons (`AlgebraicGeometry.Etale.derivedExtendScalarsPullbackMap_app_unit_c
 -/
 
 @[expose] public section
+
+set_option linter.mathlibStandardSet false
+
 
 universe u
 

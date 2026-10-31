@@ -10840,6 +10840,8 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationC
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReduction
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReductionCanonical
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReductionCanonicalIso
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReductionKummer
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReductionKummerBoundary
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReductionOrientation
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReductionSupports
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReductionUpperShriek
@@ -14054,6 +14056,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.RationalOperations
 public import WeilConjectures.SixFunctors.Etale.Derived.RationalStage
 public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
 public import WeilConjectures.SixFunctors.Etale.Derived.ReductionHom
+public import WeilConjectures.SixFunctors.Etale.Derived.ReductionLowerShriekFormal
+public import WeilConjectures.SixFunctors.Etale.Derived.ReductionLowerShriekProper
 public import WeilConjectures.SixFunctors.Etale.Derived.ReductionSingle
 public import WeilConjectures.SixFunctors.Etale.Derived.RefinementLowerShriekBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.RefinementLowerShriekProjection
