@@ -11,6 +11,12 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.AlgebraicGeometry.BertiniAux
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius
+import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+import Mathlib.AlgebraicGeometry.Morphisms.Etale
+import Mathlib.AlgebraicGeometry.Morphisms.Finite
+import Mathlib.FieldTheory.IsAlgClosed.Basic
+import WeilConjectures.DeligneLaumon.FiniteFieldDatum.FiniteFieldClosedSubschemeDescent
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 
 /-!
 # Curves through prescribed points preserving a finite étale cover
