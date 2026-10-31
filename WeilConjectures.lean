@@ -10881,6 +10881,9 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineTraceB
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RankOneLocal
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Rational
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Reduction
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.ReductionTateShiftData
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.ReductionTateTwist
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.ReductionTateTwistIntegersModPow
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersion
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionBaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionFrame
@@ -10899,6 +10902,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.SupportedClassMapRes
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SupportedCup
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SupportedTatePureLocal
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SupportedTensor
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.TensorInverseZPowMap
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ThomClass
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ThomClassAffineSpace
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ThomClassCup
