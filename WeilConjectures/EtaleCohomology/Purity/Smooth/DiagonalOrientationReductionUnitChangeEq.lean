@@ -10,23 +10,17 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationR
 /-!
 # The change of coefficients of the constant complexes through the unit sheaves
 
-We write the change of coefficients `Λ_X ⟶ Res Λ'_X` of the constant complexes
-(`AlgebraicGeometry.Etale.constantComplexChangeMap`) through the identifications of the units of
-the derived categories with the unit sheaves placed in degree zero
-(`AlgebraicGeometry.Etale.constantComplexChangeMap_eq`).
+We relate the change of coefficients `Λ_X ⟶ Res Λ'_X` of the constant complexes
+(`AlgebraicGeometry.Etale.constantComplexChangeMap`) to the direct identifications
+`Λ_X ≅ (Λ ⊗ ℤ)[0]` (`AlgebraicGeometry.Etale.constantComplexChangeMap_eq_ofUnit`).
 
-This file keeps the default instances (those of the definition of
-`AlgebraicGeometry.Etale.constantComplexChangeMap`): with the braidings used for the derived
-tensor products, the kernel check of `constantComplexChangeMap_eq` needs several gigabytes.
+The proof is split into several lemmas, as the kernel checks each of them only slowly.
 -/
 
 @[expose] public section
 
 universe u
 
-set_option profiler true
-set_option linter.unusedSectionVars false
-set_option linter.upstreamableDecl false
 
 open CategoryTheory Limits MonoidalCategory
 
@@ -80,26 +74,5 @@ lemma constantComplexIsoSingleFunctorExtendScalarsIntOfUnit_inv [HasInvertibleEx
           (extendScalarsConstantZModIso (Λ := Λ) X (n := 0) (by simp)).hom ≫
         (singleFunctorObjUnitIso (ModuleCat.{u + 1} Λ) X).hom :=
   rfl
-
-/-- The change of coefficients of the constant complexes
-(`AlgebraicGeometry.Etale.constantComplexChangeMap`) through the identifications of the units
-of the derived categories with the unit sheaves placed in degree zero. -/
-lemma constantComplexChangeMap_eq [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ' X] :
-    constantComplexChangeMap ρ X =
-      (singleFunctorObjUnitIso (ModuleCat.{u + 1} Λ) X).inv ≫
-        (DerivedCategory.singleFunctor _ 0).map
-          ((extendScalarsConstantZModIso (Λ := Λ) X (n := 0) (by simp)).inv ≫
-            (extendScalarsChangeMap ρ X).app X.constantSheafInt ≫
-            (Sheaf.restrictScalars X.smallEtaleTopology ρ).map
-              (extendScalarsConstantZModIso (Λ := Λ') X (n := 0) (by simp)).hom) ≫
-        ((Sheaf.restrictScalars X.smallEtaleTopology ρ).mapDerivedCategorySingleFunctor 0).inv.app
-          (𝟙_ _) ≫
-        (Sheaf.derivedRestrictScalars X.smallEtaleTopology ρ).map
-          (singleFunctorObjUnitIso (ModuleCat.{u + 1} Λ') X).hom := by
-  rw [constantComplexChangeMap_eq_ofUnit, constantComplexIsoSingleFunctorExtendScalarsIntOfUnit_hom,
-    constantComplexIsoSingleFunctorExtendScalarsIntOfUnit_inv]
-  simp only [Functor.map_comp, Category.assoc]
-  rw [reassoc_of% (map_extendScalarsConstantZModIso_hom_comp_mapDerivedCategorySingleFunctor_inv_app
-    ρ X)]
 
 end AlgebraicGeometry.Etale

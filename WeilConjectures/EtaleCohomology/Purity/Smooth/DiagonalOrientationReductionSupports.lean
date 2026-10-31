@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReduction
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReductionUnitPullback
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReductionUnitChangeMap
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineCohomologyGysin
 public import WeilConjectures.SixFunctors.Etale.Derived.LocalizationIntegral
 public import WeilConjectures.EtaleCohomology.TateTwist.ReductionTateTwistOne
@@ -96,7 +96,7 @@ lemma derivedExtendScalarsConstantComplexIso_hom_eq (X : Scheme.{u})
     (derivedExtendScalarsConstantComplexIso hρ ha X).hom =
       ((derivedExtendScalarsAdjunction hρ ha X).homEquiv _ _).symm
         (constantComplexChangeMap ρ X) := by
-  sorry
+  exact derivedExtendScalarsUnitIso_hom_eq_homEquiv_symm_constantComplexChangeMap hρ ha X
 
 end ConstantComplex
 

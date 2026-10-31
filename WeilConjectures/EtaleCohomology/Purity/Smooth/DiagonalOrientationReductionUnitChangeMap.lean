@@ -5,14 +5,14 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReductionUnitChangeEq
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReductionUnitChangeSingle
 
 /-!
 # The unit comparison of the reduction of coefficients is the change of coefficients
 
 The unit comparison `Ψ Λ_X ≅ Λ'_X` of the derived extension of scalars is the adjoint of the
 change of coefficients `Λ_X ⟶ Res Λ'_X` of the constant complexes
-(`AlgebraicGeometry.Etale.derivedExtendScalarsUnitIso_hom_eq_homEquiv_symm_constantComplexChangeMap`):
+(`derivedExtendScalarsUnitIso_hom_eq_homEquiv_symm_constantComplexChangeMap`):
 the latter is, on homotopy categories, the unit map `𝟙 ⟶ Res 𝟙`
 (`AlgebraicGeometry.Etale.constantComplexChangeMap_comp_mapDerivedCategoryFactorsh`).
 -/
@@ -21,8 +21,6 @@ the latter is, on homotopy categories, the unit map `𝟙 ⟶ Res 𝟙`
 
 universe u
 
-set_option profiler true
-set_option linter.unusedVariables false
 
 open CategoryTheory Limits MonoidalCategory
 
