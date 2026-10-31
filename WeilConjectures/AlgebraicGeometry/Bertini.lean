@@ -11,6 +11,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.AlgebraicGeometry.BertiniAux
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius
+import WeilConjectures.AlgebraicGeometry.BertiniFiniteCoverDimensionCut
+import WeilConjectures.AlgebraicGeometry.FiniteFieldClosedSubschemeDescent
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 
 /-!
 # Curves through prescribed points preserving a finite étale cover
@@ -50,6 +53,89 @@ universe u
 open CategoryTheory Limits TensorProduct
 
 namespace AlgebraicGeometry.Scheme.Hom
+
+private theorem exists_curve_of_dimension_cut {k : Type u} [Field k] [IsAlgClosed k]
+    (d : ℕ) (hd : 1 ≤ d) {X : Scheme.{u}} (f : X ⟶ Spec (.of k))
+    [IsAffine X] [ConnectedSpace X] [SmoothOfRelativeDimension d f]
+    {T : Scheme.{u}} (π : T ⟶ X) [IsFinite π] [Etale π] [ConnectedSpace T]
+    (S : Finset (Spec (.of k) ⟶ X)) (hS : S.Nonempty)
+    (hS' : ∀ s ∈ S, s ≫ f = 𝟙 _) :
+    ∃ (C : Scheme.{u}) (i : C ⟶ X), IsClosedImmersion i ∧ IsAffine C ∧
+      SmoothOfRelativeDimension 1 (i ≫ f) ∧ ConnectedSpace C ∧
+      (∀ s ∈ S, ∃ c, c ≫ i = s) ∧ ConnectedSpace ↑(pullback π i) := by
+  classical
+  induction d using Nat.strong_induction_on generalizing X T with
+  | h d ih =>
+    by_cases hdim : d = 1
+    · subst d
+      refine ⟨X, 𝟙 X, inferInstance, inferInstance, ?_, inferInstance, ?_, ?_⟩
+      · simpa only [Category.id_comp] using
+          (inferInstance : SmoothOfRelativeDimension 1 f)
+      · intro s hs
+        exact ⟨s, Category.comp_id _⟩
+      · exact (asIso (pullback.fst π (𝟙 X))).hom.homeomorph.connectedSpace_iff.mpr
+          inferInstance
+    · have hd2 : 2 ≤ d := by omega
+      obtain ⟨Y, j, hj, hY, hsm, hconn, hpoints, hcover⟩ :=
+        AlgebraicGeometry.exists_smooth_finiteCover_dimension_cut f hd2 π S hS hS'
+      have := hj
+      have := hY
+      have := hsm
+      have := hconn
+      have := hcover
+      let t : S → (Spec (.of k) ⟶ Y) := fun s ↦ (hpoints s.val s.property).choose
+      have ht (s : S) : t s ≫ j = s.val := (hpoints s.val s.property).choose_spec
+      let R := S.attach.image t
+      have hR : R.Nonempty := hS.attach.image t
+      have hR' : ∀ r ∈ R, r ≫ (j ≫ f) = 𝟙 _ := by
+        intro r hr
+        obtain ⟨s, _, rfl⟩ := Finset.mem_image.mp hr
+        rw [← Category.assoc, ht]
+        exact hS' s.val s.property
+      obtain ⟨C, i, hi, hC, hCsm, hCconn, hCpoints, hCcover⟩ :=
+        ih (d - 1) (by omega) (by omega) (j ≫ f) (pullback.snd π j) R hR hR'
+      have := hi
+      refine ⟨C, i ≫ j, inferInstance, hC, ?_, hCconn, ?_, ?_⟩
+      · simpa only [Category.assoc] using hCsm
+      · intro s hs
+        obtain ⟨c, hc⟩ := hCpoints (t ⟨s, hs⟩)
+          (Finset.mem_image.mpr ⟨⟨s, hs⟩, Finset.mem_attach _ _, rfl⟩)
+        exact ⟨c, by rw [← Category.assoc, hc, ht]⟩
+      · exact (pullbackLeftPullbackSndIso π j i).hom.homeomorph.connectedSpace_iff.mp
+          hCcover
+
+private theorem exists_frobenius_stable_closed_subscheme
+    {k₀ : Type u} [Field k₀] [Finite k₀] {X₀ : Scheme.{u}}
+    (f : X₀ ⟶ Spec (.of k₀)) [LocallyOfFiniteType f] [QuasiCompact f]
+    (C : Scheme.{u}) (i : C ⟶ f.geometricFiber) [IsClosedImmersion i] :
+    ∃ m : ℕ, 0 < m ∧ ∃ φ : C ≅ C,
+      φ.hom ≫ i = i ≫ (f.geometricGaloisFrobenius ^ m).hom := by
+  classical
+  let _ := Fintype.ofFinite k₀
+  obtain ⟨p, hp, a, hprime, hcard⟩ := FiniteField.card' k₀
+  let D : WeilConjectures.FiniteFieldDatum.{u} :=
+    { p := p
+      a := a
+      q := Fintype.card k₀
+      prime := hprime
+      exponent_pos := a.pos
+      cardinality_eq := hcard
+      k₀ := k₀
+      card_base := Nat.card_eq_fintype_card
+      k := AlgebraicClosure k₀ }
+  have : LocallyOfFiniteType (Over.mk f).hom :=
+    inferInstanceAs (LocallyOfFiniteType f)
+  have : QuasiCompact (Over.mk f).hom := inferInstanceAs (QuasiCompact f)
+  obtain ⟨m, hm, Cₘ, iₘ, _, _, φ, hφ⟩ :=
+    D.exists_closed_subscheme_finiteField_descent (Over.mk f) C i
+  have hF : D.geometricFrobenius (Over.mk f) = f.geometricGaloisFrobenius := by
+    apply Iso.ext
+    apply f.geometricFiber_hom_ext
+    · rw [f.geometricGaloisFrobenius_hom_comp_geometricFiberProj]
+      exact (D.galoisMap_projections f _).1
+    · rw [f.geometricGaloisFrobenius_hom_comp_geometricFiberToAlgebraicClosure]
+      exact (D.galoisMap_projections f _).2
+  exact ⟨m, hm, φ, by simpa only [hF] using hφ⟩
 
 /-- **Curves through prescribed points preserving a finite cover**
 (blueprint: `lem-zl-bertini-finite-cover-curve`). Let `f : X₀ ⟶ Spec k₀` be a smooth
