@@ -314,6 +314,12 @@ private noncomputable def derivedRestriction (E : LocallyClosedExtensionData.{u}
   (Functor.mapDerivedCategoryCompNatIso (E.restriction a)) ≪≫
     Functor.mapDerivedCategoryIdIso _
 
+private noncomputable def derivedGamma (E : LocallyClosedExtensionData.{u})
+    {S X T : LocallyClosedCoefficients.{u}} (a : LocallyClosedCoefficientImmersion S X)
+    (b : LocallyClosedCoefficientImmersion T S) :
+    E.derived b ⋙ E.derived a ≅ E.derived (a.comp b) :=
+  Functor.mapDerivedCategoryCompNatIso (E.gamma a b)
+
 private noncomputable def derivedIdentity (E : LocallyClosedExtensionData.{u})
     (X : LocallyClosedCoefficients.{u}) : E.derived (.identity X) ≅ 𝟭 _ :=
   Functor.mapDerivedCategoryNatIso (E.identity X) ≪≫ Functor.mapDerivedCategoryIdIso _

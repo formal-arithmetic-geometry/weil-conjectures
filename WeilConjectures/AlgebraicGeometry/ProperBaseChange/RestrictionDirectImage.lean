@@ -36,6 +36,5 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.ProEtale
 
-attribute [instance] finiteCoefficientBoundedConstructible_isTriangulated
 
 end AlgebraicGeometry.ProEtale

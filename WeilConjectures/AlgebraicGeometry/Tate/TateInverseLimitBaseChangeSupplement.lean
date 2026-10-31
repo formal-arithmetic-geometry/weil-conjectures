@@ -287,7 +287,6 @@ by
     (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}))
       (toSheafify_naturality (ProEt.topology T) f)).symm
 
-attribute [local irreducible] restrictHomEquiv
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

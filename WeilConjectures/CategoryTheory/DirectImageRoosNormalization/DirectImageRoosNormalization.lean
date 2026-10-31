@@ -201,6 +201,52 @@ private def roosSignComponent (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) :
       (fun j : ℤ ↦ ⟨j - 1, sub_add_cancel j 1⟩)
       (Arrow.isoMk (Iso.refl _) (-(Iso.refl _)) (by simp)))
 
+omit [HasLimitsOfShape ℕᵒᵖ A] [HasDerivedCategory A] [HasDerivedCategory (ℕᵒᵖ ⥤ A)]
+  [HasCountableProducts (DerivedCategory A)] in
+private theorem roosF_map_arrow {X Y : CochainComplex (ℕᵒᵖ ⥤ A) ℤ}
+    (f : X ⟶ Y) :
+    roosF.map f =
+      (HomologicalComplex.homotopyCofiber.mapArrowHom _ _
+        (fun j : ℤ ↦ ⟨j - 1, sub_add_cancel j 1⟩)
+        (Arrow.homMk (roosPmap f) (roosPmap f) (roosU_natural f).symm))⟦(-1 : ℤ)⟧' := by
+  rw [coneArrowMap_eq]
+  rfl
+
+private def roosSign :
+    Iso (C := CochainComplex (ℕᵒᵖ ⥤ A) ℤ ⥤ CochainComplex A ℤ)
+      ExactProductsRoos.fibre roosF :=
+  NatIso.ofComponents (fun X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ ↦ roosSignComponent X) (by
+    intro X Y f
+    let H : ∀ j : ℤ, ∃ i, (ComplexShape.up ℤ).Rel i j :=
+      fun j ↦ ⟨j - 1, sub_add_cancel j 1⟩
+    let a (Z : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) :
+        Arrow.mk (-roosU Z) ≅ Arrow.mk (roosU Z) :=
+      Arrow.isoMk (Iso.refl _) (-(Iso.refl _)) (by simp)
+    let β : Arrow.mk (roosU X) ⟶ Arrow.mk (roosU Y) :=
+      Arrow.homMk (roosPmap f) (roosPmap f) (roosU_natural f).symm
+    have h : ExactProductsRoos.arrowMap f ≫ (a Y).hom = (a X).hom ≫ β := by
+      apply Arrow.hom_ext <;> simp [a, β, ExactProductsRoos.arrowMap,
+        Arrow.isoMk, roosPmap, ExactProductsRoos.product]
+    rw [roosF_map_arrow]
+    unfold roosSignComponent
+    change (shiftFunctor (CochainComplex A ℤ) (-1 : ℤ)).map
+        (HomologicalComplex.homotopyCofiber.mapArrowHom _ _ H
+          (ExactProductsRoos.arrowMap f)) ≫
+        (shiftFunctor (CochainComplex A ℤ) (-1 : ℤ)).map
+          (HomologicalComplex.homotopyCofiber.mapArrowHom _ _ H (a Y).hom) =
+      (shiftFunctor (CochainComplex A ℤ) (-1 : ℤ)).map
+        (HomologicalComplex.homotopyCofiber.mapArrowHom _ _ H (a X).hom) ≫
+        (shiftFunctor (CochainComplex A ℤ) (-1 : ℤ)).map
+          (HomologicalComplex.homotopyCofiber.mapArrowHom _ _ H β)
+    rw [← Functor.map_comp, ← Functor.map_comp]
+    apply congrArg ((shiftFunctor (CochainComplex A ℤ) (-1 : ℤ)).map)
+    exact (HomologicalComplex.homotopyCofiber.mapArrowHom_comp
+      (-roosU X) (-roosU Y) (roosU Y) H (ExactProductsRoos.arrowMap f) (a Y).hom).symm.trans
+      ((congrArg (HomologicalComplex.homotopyCofiber.mapArrowHom
+        (-roosU X) (roosU Y) H) h).trans
+        (HomologicalComplex.homotopyCofiber.mapArrowHom_comp
+          (-roosU X) (roosU X) (roosU Y) H (a X).hom β)))
+
 set_option backward.isDefEq.respectTransparency false in
 omit [HasDerivedCategory A] [HasDerivedCategory (ℕᵒᵖ ⥤ A)]
   [HasCountableProducts (DerivedCategory A)] in
@@ -272,6 +318,27 @@ private def roosProjection : roosF ⟶ ExactProductsRoos.product (B := A) where
     intro n
     simpa only [roosEval, roosPmap, Category.assoc, Pi.map_π] using
       roosEval_natural f n
+
+private def roosBoundary :
+    ExactProductsRoos.product (B := A) ⟶ roosF ⋙ shiftFunctor _ (1 : ℤ) where
+  app X := (CochainComplex.mappingCocone.triangle (roosU X)).mor₃
+  naturality X Y f := by
+    dsimp only [CochainComplex.mappingCocone.triangle,
+      CochainComplex.mappingCone.triangle, Triangle.mk, Functor.comp_map]
+    simp only [Category.assoc]
+    let e := shiftFunctorCompIsoId (CochainComplex A ℤ) (-1 : ℤ) 1 (by omega)
+    change roosPmap f ≫ CochainComplex.mappingCone.inr (roosU Y) ≫
+        e.inv.app (CochainComplex.mappingCone (roosU Y)) =
+      CochainComplex.mappingCone.inr (roosU X) ≫
+        e.inv.app (CochainComplex.mappingCone (roosU X)) ≫
+        (roosF.map f)⟦(1 : ℤ)⟧'
+    rw [← Category.assoc,
+      show roosPmap f ≫ CochainComplex.mappingCone.inr (roosU Y) =
+        CochainComplex.mappingCone.inr (roosU X) ≫ roosConeFunctor.map f from
+          (CochainComplex.mappingCone.triangleMap (roosU X) (roosU Y)
+            (roosPmap f) (roosPmap f) (roosU_natural f)).comm₂.symm, Category.assoc]
+    congr 1
+    exact e.inv.naturality (roosConeFunctor.map f)
 
 set_option backward.defeqAttrib.useBackward true in
 omit [HasCountableProducts (DerivedCategory A)] in

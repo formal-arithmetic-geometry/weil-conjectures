@@ -1126,7 +1126,6 @@ theorem Integers_eq (E : Padic.FiniteCoefficientFields l Ω) :
   exact Eq.trans rfl rfl
 
 
-attribute [local implicit_reducible] integersAlgebra
 
 /-- The recorded uniformizer belongs to the named integer subring.
 Source: the coefficient uniformizer definition and `Integers_eq`
