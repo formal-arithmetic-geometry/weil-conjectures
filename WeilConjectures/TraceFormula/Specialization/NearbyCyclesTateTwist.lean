@@ -44,6 +44,8 @@ to the lax tensor map precomposed with the specialization map of the Tate twist.
 
 universe u
 
+set_option linter.unusedSectionVars false
+
 open CategoryTheory MonoidalCategory
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
@@ -268,8 +270,6 @@ noncomputable def tateTwistSpecializationMap
           (shiftFunctor _ n).mapIso (eε ≪≫ ej.symm) ≪≫
           ((L((M.j)^*⟦Profinite.padicAlgClRingObj ℓ⟧).commShiftIso n).app _).symm))
 
-omit [Fact (Nat.Prime (ringChar k))] [Fact (Nat.Prime (ringChar k'))] [IsSeparated X.hom]
-  [IsSeparated X'.hom] in
 /-- **Nearby cycles commute with Tate twists**: if `ℚ̄_ℓ,𝒳(d)` is dualizable on the total space
 (`ProEtale.CondensedRing.isDualizable_tateTwistDerived`) and compatible with the pullbacks along
 `ε`, `j` and `i`, the lax tensor map `μ : Ψ A ⊗ Ψ (ℚ̄_ℓ,X(d)[n]) ⟶ Ψ (A ⊗ ℚ̄_ℓ,X(d)[n])`,
