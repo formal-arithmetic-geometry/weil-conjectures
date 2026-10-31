@@ -14347,6 +14347,7 @@ public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Composition
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.ModuleTraceAdjustment
 public import WeilConjectures.SixFunctors.NearbyCycles.ActionTrivialModEll
+public import WeilConjectures.SixFunctors.NearbyCycles.ActionTrivialModEllSeparated
 public import WeilConjectures.SixFunctors.NearbyCycles.AutAction
 public import WeilConjectures.SixFunctors.NearbyCycles.AutActionComp
 public import WeilConjectures.SixFunctors.NearbyCycles.AutActionTrivial
@@ -16061,6 +16062,7 @@ public import WeilConjectures.TraceFormula.Specialization.FiniteSupportInduction
 public import WeilConjectures.TraceFormula.Specialization.FixedLocusExchange
 public import WeilConjectures.TraceFormula.Specialization.FixedSquareClosedExchange
 public import WeilConjectures.TraceFormula.Specialization.GenericAutModEll
+public import WeilConjectures.TraceFormula.Specialization.GenericAutModEllPow
 public import WeilConjectures.TraceFormula.Specialization.GenericAutPow
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorAffineLine
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorBaseFieldChange
