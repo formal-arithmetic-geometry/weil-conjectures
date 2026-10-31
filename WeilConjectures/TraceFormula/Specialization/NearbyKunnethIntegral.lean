@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethFormula
+public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethIntegralProper
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethRational
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethRationalSlice
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethSliceIntegralStep
@@ -15,9 +16,17 @@ public import WeilConjectures.Tactic.ExactModProofs
 
 # Gabber's Künneth formula with integral coefficients: the induction
 
-WIP skeleton: the integral induction of PR #1795 (see the PR description). The statements
-`sliceKunnethFormula_padicIntegers`, `sliceKunnethFormula_padicAlgCl` and
-`isIso_kunnethMap_padicIntegers_of_isProper` are being proved in sibling files.
+Gabber's Künneth formula with `𝒪_E`-coefficients (blueprint `sk-prop-tf-nearby-external-kunneth`)
+holds in every chart dimension (`NearbyCyclesModel.integralKunnethFormula`). The proof is by
+induction on the chart dimension, simultaneously for all separably closed fields `k'`:
+
+* the generic-slicing step with `𝒪_E`-coefficients over `Spec k'⟦t⟧` follows from the induction
+  hypothesis over `Spec K⟦t⟧`, `K = k'(x)^alg`
+  (`NearbyCyclesModel.sliceKunnethFormula_padicIntegers`);
+* the reduction to proper models (`NearbyCyclesModel.isIso_kunnethMap_of_properKunnethFormula`)
+  and the proper case (`NearbyCyclesModel.isIso_kunnethMap_padicIntegers_of_isProper`) conclude,
+  with the `ℚ̄_ℓ` slices obtained from the `𝒪_E` ones
+  (`NearbyCyclesModel.sliceKunnethFormula_padicAlgCl`).
 
 -/
 
@@ -69,33 +78,6 @@ theorem sliceKunnethFormula_padicIntegers {n : ℕ}
     (by simp [← heN]) hA hB
 
 
-variable {X Y Z : Scheme.{u}} {X' Y' Z' : Over (Spec (.of k'))}
-  {M : NearbyCyclesModel X X'.left} {N : NearbyCyclesModel Y Y'.left}
-  {P : NearbyCyclesModel Z Z'.left} {f₁ : Z ⟶ X} {f₁' : Z'.left ⟶ X'.left} {f₂ : Z ⟶ Y}
-  {f₂' : Z'.left ⟶ Y'.left} {φ₁ : P.Hom M f₁ f₁'} {φ₂ : P.Hom N f₂ f₂'}
-  {qM : M.total ⟶ trait k'} {gM : M.generic ⟶ Spec (.of (traitGenericField k'))}
-  {qN : N.total ⟶ trait k'} {gN : N.generic ⟶ Spec (.of (traitGenericField k'))}
-
-/-- WIP: the integral Künneth formula for proper models, given the generic-slicing steps. -/
-theorem isIso_kunnethMap_padicIntegers_of_isProper [IsNoetherian X] [IsNoetherian Y]
-    [TopologicalSpace.NoetherianSpace Z] (hM : M.IsTraitModelOver qM gM)
-    (hN : N.IsTraitModelOver qN gN) (hpb : IsPullback φ₁.total φ₂.total qM qN)
-    (hP : P.IsTraitModelOver (φ₁.total ≫ qM) (φ₁.generic ≫ gM))
-    (hgen : φ₂.generic ≫ gN = φ₁.generic ≫ gM) [IsProper qM] [IsProper qN]
-    {m m' : ℕ} (hm : qM.LocallyEmbedsInAffineSpace m) (hm' : qN.LocallyEmbedsInAffineSpace m')
-    (hslice : 0 < m + m' → ∀ E : PadicAlgCl.FiniteIntermediateField ℓ,
-      SliceKunnethFormula (Profinite.padicIntegersRingObj ℓ E.1) k' (m + m' - 1))
-    {eM : M.total ⟶ X} (heM : M.j ≫ eM = M.ε) {eN : N.total ⟶ Y} (heN : N.j ≫ eN = N.ε)
-    (E : PadicAlgCl.FiniteIntermediateField ℓ)
-    {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))}
-    (hA : boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X) A)
-    {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) Y))}
-    (hB : boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) Y) B) :
-    IsIso (kunnethMap (Profinite.padicIntegersRingObj ℓ E.1) φ₁ φ₂ A B) :=
-  sorry
-
 variable (ℓ) in
 omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
 /-- **Gabber's Künneth formula with `𝒪_E`-coefficients in every chart dimension**, by induction
@@ -132,6 +114,7 @@ theorem integralKunnethFormula (n : ℕ) :
   have := hX
   have := hY
   have := hZ
-  exact isIso_kunnethMap_padicIntegers_of_isProper hM hN hpb hP hgen h₁ h₂ hslice heM heN E hA hB
+  exact isIso_kunnethMap_padicIntegers_of_isProper hM hN hpb hP hgen h₁ h₂ hslice
+    (fun hpos ↦ sliceKunnethFormula_padicAlgCl (hslice hpos)) heM heN E hA hB
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
