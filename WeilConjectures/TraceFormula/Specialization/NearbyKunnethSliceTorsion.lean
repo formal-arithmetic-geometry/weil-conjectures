@@ -9,6 +9,9 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethSliceTors
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethSliceTorsionSpecial
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethSliceTorsionExchange
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisInvariantsCoinvariantTensor
+public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethSliceTorsionGaloisStep
+public import WeilConjectures.TraceFormula.Specialization.GenericSliceTraitExists
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaPadicAlgCl
 
 /-!
 
@@ -29,14 +32,8 @@ steps:
    `WeilConjectures.TraceFormula.Specialization.NearbyKunnethSliceTorsionProduct`);
 3. transport to the special fibre map `τ_s ≫ σ_s` of the slice of `P`.
 
-## Unfinished
-
-Steps 2 and 3 are not yet assembled: the instantiation of
-`NearbyCyclesModel.isIso_map_kunnethMap_of_galoisSlice` at the concrete models elaborates, but its
-hypotheses, produced by lemmas stated for a general coefficient ring, differ from its statement by
-instance paths (`Precoherent Profinite` proofs, `Field.toCommRing` against `Field.toDivisionRing`),
-and the kernel check of the closing `exact_by_kernel` does not finish in reasonable time. The main
-theorem is therefore `sorry`ed.
+Step 2 is `NearbyCyclesModel.isIso_map_kunnethMap_toGeneric_of_isIso_coordinateSliceTrait` of
+`WeilConjectures.TraceFormula.Specialization.NearbyKunnethSliceTorsionGaloisStep`.
 
 -/
 
@@ -161,6 +158,8 @@ private theorem isIso_kunnethMap_coordinateSliceTrait_of_isIso_sliceFst
     ((leftDerivedUpperStarCompOfEq 𝔽 (p := (baseChangeHom hN qN (Category.comp_id qN)
       (traitMap k' (traitSliceField k')) (Category.comp_id _)).generic) (q := N.ε) rfl).app B).symm
     h₀
+set_option maxHeartbeats 1000000 in
+-- the statement and the transport along `τ_s ≫ σ_s` involve large derived pullbacks
 /-- **The generic-slicing step modulo `ϖ`** (blueprint `sk-prop-tf-nearby-external-kunneth`,
 identification (2) and projection formula (3), coefficients `𝔽_E`): if the Künneth map of the
 geometric slice of the product along a coordinate `b` of `M` is invertible, so is the pullback of
@@ -179,7 +178,29 @@ theorem isIso_map_kunnethMap_of_isIso_sliceFst_residueField (hM : M.IsTraitModel
     (h : IsIso (kunnethMap 𝔽 (sliceFst hM hP hb) (sliceSnd hN hpb hP hgen hb) A B)) :
     IsIso (L((baseChangeSpecialMap hP (φ₁.total ≫ b) (comp_coordinate_fst hb)
         (traitSlice (traitSliceCoord k')) (traitSlice_over (traitSliceCoord k')))^*⟦𝔽⟧).map
-      (kunnethMap 𝔽 φ₁ φ₂ A B)) :=
-  sorry
+      (kunnethMap 𝔽 φ₁ φ₂ A B)) := by
+  refine (nonempty_genericSliceTrait k').elim fun D ↦ ?_
+  have hA' := plusEtaleOrigin_of_boundedConstructible_residueField E hA
+  have hB' := plusEtaleOrigin_of_boundedConstructible_residueField E hB
+  refine (exists_isGE_of_boundedConstructible hB).elim fun a ha ↦ ?_
+  -- step 1: from the geometric slice to the slice over `S'`
+  have hS := isIso_kunnethMap_coordinateSliceTrait_of_isIso_sliceFst E hM hN hpb hP hgen hb D
+    hA' hB' h
+  -- step 2: descent along the Galois layer of `S' ⟶ S`
+  have h₂ := isIso_map_kunnethMap_toGeneric_of_isIso_coordinateSliceTrait E hM hP hb D hA' hB' a
+    ha hS
+  -- step 3: transport to `τ_s ≫ σ_s`
+  have h₃ := (isIso_map_kunnethMap_iff_toGeneric 𝔽 φ₁ φ₂ A B
+    (L((𝟙 _ ≫ coordinateSliceTraitSpecial hP (φ₁.total ≫ b) (comp_coordinate_fst (φ₁ := φ₁) hb)
+      D)^*⟦𝔽⟧))).2 h₂
+  have e : coordinateSliceTraitChangeSpecial (φ₁.total ≫ b) D ≫ 𝟙 _ ≫
+      coordinateSliceTraitSpecial hP (φ₁.total ≫ b) (comp_coordinate_fst hb) D =
+        baseChangeSpecialMap hP (φ₁.total ≫ b) (comp_coordinate_fst hb)
+          (traitSlice (traitSliceCoord k')) (traitSlice_over (traitSliceCoord k')) := by
+    rw [Category.id_comp]
+    exact coordinateSliceTraitChangeSpecial_comp hP (φ₁.total ≫ b) (comp_coordinate_fst hb) D
+  have := h₃
+  exact (NatIso.isIso_map_iff (leftDerivedUpperStarCompOfEq 𝔽 e) _).2
+    (Functor.map_isIso (L((coordinateSliceTraitChangeSpecial (φ₁.total ≫ b) D)^*⟦𝔽⟧)) _)
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
