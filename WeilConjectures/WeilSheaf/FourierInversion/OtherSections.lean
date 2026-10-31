@@ -10,6 +10,8 @@ public import WeilConjectures.WeilSheaf.Localization
 public import WeilConjectures.WeilSheaf.LowerShriekOperations
 public import WeilConjectures.WeilSheaf.TateTwist
 import WeilConjectures.WeilSheaf.ProjectionFormulaLisse.LowerShriek
+import WeilConjectures.WeilSheaf.Projective.ProjectiveLineDecomposition
+import WeilConjectures.WeilSheaf.SmoothPurity.AffineChartLocalization
 
 /-!
 # Fourier inversion: inputs from other sections
@@ -32,6 +34,35 @@ namespace AlgebraicGeometry
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
 section OtherSections
+
+open Pretriangulated
+
+private theorem isIso_triangle_first_coordinate
+    {C : Type*} [Category C] [Preadditive C] [HasZeroObject C]
+    [HasShift C ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive]
+    [Pretriangulated C] [HasBinaryBiproducts C]
+    {A B D E : C} (f : A ⟶ B) (g : B ⟶ E) (w : E ⟶ A⟦(1 : ℤ)⟧)
+    (hT : Triangle.mk f g w ∈ distTriang C) (p : B ⟶ D)
+    [IsIso (biprod.lift p g)] : IsIso (f ≫ p) := by
+  let T := Triangle.mk f g w
+  have hg : g = biprod.lift p g ≫ biprod.snd := by simp
+  have : Epi g := by rw [hg]; infer_instance
+  have hw : w = 0 := Triangle.mor₃_eq_zero_of_epi₂ T hT (show Epi g from inferInstance)
+  let φ : T ⟶ binaryBiproductTriangle D E :=
+    { hom₁ := f ≫ p
+      hom₂ := biprod.lift p g
+      hom₃ := 𝟙 E
+      comm₁ := by
+        apply biprod.hom_ext
+        · simp [T]
+        · simpa [T] using comp_distTriang_mor_zero₁₂ T hT
+      comm₂ := by
+        change g ≫ 𝟙 E = biprod.lift p g ≫ biprod.snd
+        simp only [Category.comp_id, biprod.lift_snd]
+      comm₃ := by simp [T, hw] }
+  exact isIso₁_of_isIso₂₃ φ hT (binaryBiproductTriangle_distinguished D E)
+    (show IsIso (biprod.lift p g) from inferInstance)
+    (show IsIso (𝟙 E) from inferInstance)
 
 /-- Blueprint `prop-weil-operations`: Six operations on Weil complexes (the projection
 formula). For a separated quasi-compact morphism `f : X ⟶ Y` locally of finite type of
@@ -99,8 +130,19 @@ theorem WeilComplex.nonempty_iso_upperStar_comp_derivedLowerShriek_of_isPullback
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))] :
     Nonempty (WeilComplex.upperStar π ⋙ WeilComplex.derivedLowerShriek k₀ l π ≅
-      WeilComplex.tateTwist k₀ l X (-1) ⋙ shiftFunctor _ (-2 : ℤ)) :=
-  sorry
+      WeilComplex.tateTwist k₀ l X (-1) ⋙ shiftFunctor _ (-2 : ℤ)) := by
+  obtain ⟨p, hp⟩ := WeilComplex.exists_projectiveLine_trace_decomposition
+    (k₀ := k₀) (l := l) X
+  obtain ⟨α, hα⟩ := WeilComplex.exists_affineChart_localization
+    (k₀ := k₀) (l := l) π s hπ
+  let τ := α ≫ p
+  have : ∀ K, IsIso (τ.app K) := by
+    intro K
+    obtain ⟨w, hw⟩ := hα K
+    have := hp K
+    exact isIso_triangle_first_coordinate (α.app K) _ w hw (p.app K)
+  have : IsIso τ := NatIso.isIso_of_isIso_app τ
+  exact ⟨asIso τ⟩
 
 end OtherSections
 
