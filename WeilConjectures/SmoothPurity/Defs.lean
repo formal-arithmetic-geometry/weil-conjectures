@@ -61,11 +61,12 @@ trace map `Tr_f : Rf_! ℚ̄_ℓ,X(d)[2d] ⟶ ℚ̄_ℓ,Y` of SGA 4, Exposé XVI
 and the counit of `Rf_! ⊣ Rf^!`. The purity isomorphism
 `AlgebraicGeometry.ProEtale.CondensedRing.smoothPurityIso` is *defined* from it, as the inverse
 of its adjoint `ℚ̄_ℓ,X(d)[2d] ⟶ Rf^! ℚ̄_ℓ,Y` for `Rf_! ⊣ Rf^!`
-(`AlgebraicGeometry.ProEtale.CondensedRing.smoothPurityMap`, equal to `γ_f`). The following
-properties of the trace are `sorry`ed:
+(`AlgebraicGeometry.ProEtale.CondensedRing.smoothPurityMap`, equal to `γ_f`), which is an
+isomorphism (`AlgebraicGeometry.ProEtale.CondensedRing.isIso_smoothPurityMap`, smooth purity
+proper). The following normalizations of the trace, owed by the purity statement
+(`sk-thm-purity-transport`) and composition (`sk-prop-sp-composition`) subsections, are `sorry`ed;
+they hold for the canonical orientation, whose existence is not formalized:
 
-- `AlgebraicGeometry.ProEtale.CondensedRing.isIso_smoothPurityMap`: smooth purity proper, the
-  adjoint of the trace is an isomorphism;
 - `AlgebraicGeometry.ProEtale.CondensedRing.smoothPurityIso_zero_of_isOpenImmersion`: in
   relative dimension zero, for an open immersion `j`, the purity isomorphism is the canonical
   identification `Rj^! ℚ̄_ℓ ≅ j^* ℚ̄_ℓ ≅ ℚ̄_ℓ`
