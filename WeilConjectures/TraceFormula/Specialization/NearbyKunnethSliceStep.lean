@@ -11,13 +11,14 @@ public import WeilConjectures.SixFunctors.NearbyCycles.AutActionTrivial
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethAverage
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethEquivariant
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethRetract
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.PadicAlgClRational
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.PadicAlgClNsmulCancel
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 public import WeilConjectures.Tactic.ExactModProofs
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethClosure
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethSlice
 public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModelAut
 public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModelHom
+public import WeilConjectures.TraceFormula.Specialization.TraitSliceInvariants
 public import WeilConjectures.TraceFormula.Specialization.TraitChangeInvariance
 
 /-!
@@ -43,9 +44,10 @@ if the Künneth map of the geometric slice is an isomorphism, so is the restrict
 `Π_{A,B}` is a retract of the Künneth map of the geometric slice
 (`NearbyCyclesModel.isIso_map_kunnethMap_of_isTensorRetract`), given the two facts on traits:
 the invariance of nearby cycles under change of trait
-(`NearbyCyclesModel.isIso_pullbackExchange_baseChangeHom_traitMap`, unfinished) and the
+(`NearbyCyclesModel.isIso_pullbackExchange_baseChangeHom_traitMap_of_generic`) and the
 generic-slicing identification with invariants
-(`NearbyCyclesModel.exists_sum_autAction_pullbackExchange_sliceFst`, unfinished); the projection
+(`NearbyCyclesModel.exists_sum_autAction_pullbackExchange_sliceFst`, from the unfinished
+`NearbyCyclesModel.exists_subgroup_pullbackExchange_sliceTraitChangeHom`); the projection
 formula for invariants makes the retractions compatible with the Künneth maps
 (`NearbyCyclesModel.isTensorRetract_map_kunnethMap_comp_pullbackExchange_sliceFst`).
 Since the slice of a local chart `V ⟶ 𝔸ᵐ_S` along one of its coordinates is a local chart of
@@ -146,29 +148,9 @@ noncomputable abbrev sliceSnd :=
 
 variable [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
 
-omit [Fact (ringChar k').Prime] in
-/-- **Invariance of nearby cycles under change of trait** (SGA 4½, [Th. finitude], §3.7; blueprint
-`sk-prop-tf-nearby-external-kunneth`, "Facts about traits", first fact): for a model `N` of finite
-type over the strictly henselian trait `S = Spec k'⟦t⟧` and the change of trait
-`Spec K⟦t⟧ ⟶ S` (`K = k'(x)^alg`), the pullback exchange `α : Lσ^* Ψ_N B ⟶ Ψ_{N''} B` to the
-nearby cycles of the base change `N'' = N ×_S Spec K⟦t⟧` (`NearbyCyclesModel.baseChange`) is an
-isomorphism for bounded constructible `B`.
-
-It is a case of
-`NearbyCyclesModel.isIso_pullbackExchange_baseChangeHom_traitMap_of_generic`, i.e. of the invariance
-under change of strictly henselian trait
-`NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_isPullback_trait`. -/
-theorem isIso_pullbackExchange_baseChangeHom_traitMap
-    {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y))}
-    (hB : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y) B) :
-    IsIso (((baseChangeHom hN qN (Category.comp_id qN) (traitMap k' (traitSliceField k'))
-      (Category.comp_id _)).pullbackExchange (Profinite.padicAlgClRingObj ℓ)).app B) :=
-  isIso_pullbackExchange_baseChangeHom_traitMap_of_generic hN
-    (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ B hB)
-
-set_option maxHeartbeats 800000 in
--- the statement involves the nearby cycles of the slice of the product
+set_option maxHeartbeats 2000000 in
+-- the statement and the averages over the product involve the nearby cycles of the slice of the
+-- product
 include hM hP hb in
 /-- **The generic-slicing identification of nearby cycles with invariants** (blueprint
 `sk-prop-tf-nearby-external-kunneth`, "Facts about traits", identification (2); SGA 4½,
@@ -179,11 +161,10 @@ automorphisms of the geometric generic point `Spec Ω_K` over `Spec Ω`
 `α_M : Lσ^* Ψ_M A ⟶ Ψ_{M''} A` of `M` and `α_P` of the product `P` are the inclusions of the
 `P'`-invariants: the action factors through a finite quotient of order `n` (a power of `p`), with
 representatives `τ i`, and `α_M`, `α_P` are split monomorphisms whose idempotents are `1/n` times
-the sums of the actions of the `τ i`.
-
-Unfinished: neither base change of `Rj_*` along the slice (which is not weakly étale) nor the
-continuity of the action of `P'` on `ℓ`-adic nearby cycles is formalised for pro-étale
-`ℚ̄_ℓ`-sheaves. -/
+the sums of the actions of the `τ i`. This is
+`NearbyCyclesModel.exists_subgroup_pullbackExchange_baseChangeHom_traitSlice` for `M` and for `P`,
+over the intersection of the two subgroups of finite index acting trivially
+(`NearbyCyclesModel.sum_autAction_baseChangeAut_eq_relIndex_nsmul`). -/
 theorem exists_sum_autAction_pullbackExchange_sliceFst
     {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))}
@@ -234,8 +215,74 @@ theorem exists_sum_autAction_pullbackExchange_sliceFst
           (traitSlice (traitSliceCoord k')) (traitSlice_over (traitSliceCoord k')) (τ i)).autAction
             (Profinite.padicAlgClRingObj ℓ) (L((𝟙 Z)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj
               (L((f₁)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A ⊗
-                L((f₂)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B)) :=
-  sorry
+                L((f₂)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B)) := by
+  have hPg : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) P.generic)
+      (L((P.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj
+        (L((f₁)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A ⊗
+          L((f₂)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B)) := by
+    have := hP.locallyOfFiniteType
+    have := hP.quasiCompact
+    have : LocallyOfFiniteType (Over.mk (φ₁.generic ≫ gM)).hom :=
+      MorphismProperty.of_isPullback hP.isPullback_j ‹_›
+    have : QuasiCompact (Over.mk (φ₁.generic ≫ gM)).hom :=
+      MorphismProperty.of_isPullback hP.isPullback_j ‹_›
+    have : (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
+        P.generic)).IsMonoidal :=
+      isMonoidal_boundedConstructible (X := Over.mk (φ₁.generic ≫ gM)) (ℓ := ℓ)
+    exact (boundedConstructible _).prop_of_iso
+      (Functor.Monoidal.μIso L((P.ε)^*⟦Profinite.padicAlgClRingObj ℓ⟧) _ _)
+      (ObjectProperty.prop_tensor
+        (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ P.ε _
+          (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ f₁ A hA))
+        (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ P.ε _
+          (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ f₂ B hB)))
+  generalize hC : L((f₁)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A ⊗
+    L((f₂)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B = C at hPg ⊢
+  have hDM := exists_subgroup_pullbackExchange_baseChangeHom_traitSlice (ℓ := ℓ) hM hb (A := A)
+    (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ M.ε A hA)
+  have hDP := exists_subgroup_pullbackExchange_baseChangeHom_traitSlice (ℓ := ℓ) hP
+    (comp_coordinate_fst hb) (A := C) hPg
+  obtain ⟨VM, _, htM, rM, hrM, havgM⟩ := hDM
+  obtain ⟨VP, _, htP, rP, hrP, havgP⟩ := hDP
+  have : VM.FiniteIndex := Subgroup.finiteIndex_of_finite_quotient
+  have : VP.FiniteIndex := Subgroup.finiteIndex_of_finite_quotient
+  let := Subgroup.fintypeQuotientOfFiniteIndex (H := VM ⊓ VP)
+  have htP' : ∀ τ ∈ VP, (baseChangeAut hP (φ₁.total ≫ b) (comp_coordinate_fst hb)
+      (traitSlice (traitSliceCoord k')) (traitSlice_over _) τ).autAction
+        (Profinite.padicAlgClRingObj ℓ) (L((𝟙 Z)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj
+          (C)) = 𝟙 _ :=
+    fun τ hτ ↦ by exact_mod_proofs htP τ hτ
+  refine ⟨Fintype.card (GenericAut k' (traitSliceField k') ⧸ VM ⊓ VP),
+    fun i ↦ ((Fintype.equivFin (GenericAut k' (traitSliceField k') ⧸ VM ⊓ VP)).symm i).out,
+    Fintype.card_ne_zero, rM, rP, ?_, ?_, ?_, ?_⟩
+  · exact_mod_proofs hrM
+  · beta_reduce
+    exact card_nsmul_eq_sum_fin_of_le_comp_obj L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧)
+      ((baseChange hM b hb (traitSlice (traitSliceCoord k')) (traitSlice_over _)).nearbyCycles
+        (Profinite.padicAlgClRingObj ℓ)) A (inf_le_left : VM ⊓ VP ≤ VM)
+      (fun σ ↦ (baseChangeAut hM b hb (traitSlice (traitSliceCoord k')) (traitSlice_over _)
+        σ).autAction (Profinite.padicAlgClRingObj ℓ)
+          (L((𝟙 X)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj A))
+      (fun σ τ hτ ↦ by rw [autAction_baseChangeAut_mul, htM τ hτ, Category.id_comp])
+      (rM ≫ ((baseChangeHom hM b hb (traitSlice (traitSliceCoord k'))
+        (traitSlice_over _)).pullbackExchange (Profinite.padicAlgClRingObj ℓ)).app A)
+      (by exact_mod_proofs havgM)
+  · exact_mod_proofs hrP
+  · beta_reduce
+    have hP' := card_nsmul_eq_sum_fin_of_le_comp_obj L((𝟙 Z)^*⟦Profinite.padicAlgClRingObj ℓ⟧)
+      ((baseChange hP (φ₁.total ≫ b) (comp_coordinate_fst hb) (traitSlice (traitSliceCoord k'))
+        (traitSlice_over _)).nearbyCycles (Profinite.padicAlgClRingObj ℓ))
+      (C) (inf_le_right : VM ⊓ VP ≤ VP)
+      (fun σ ↦ (baseChangeAut hP (φ₁.total ≫ b) (comp_coordinate_fst hb)
+        (traitSlice (traitSliceCoord k')) (traitSlice_over _) σ).autAction
+          (Profinite.padicAlgClRingObj ℓ) (L((𝟙 Z)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj
+            (C)))
+      (fun σ τ hτ ↦ by rw [autAction_baseChangeAut_mul, htP' τ hτ, Category.id_comp])
+      (rP ≫ ((baseChangeHom hP (φ₁.total ≫ b) (comp_coordinate_fst hb)
+        (traitSlice (traitSliceCoord k')) (traitSlice_over _)).pullbackExchange
+          (Profinite.padicAlgClRingObj ℓ)).app (C))
+      (by exact_mod_proofs havgP)
+    exact hP'
 
 set_option maxHeartbeats 800000 in
 -- the square of the Künneth maps of the slice is a large term
@@ -257,7 +304,8 @@ pro-`p` kernel `P'` of the map of inertia groups
 `Π'` is the projection formula for invariants (blueprint `det-nearby-kunneth-invariants`): `Π'` is
 equivariant (`NearbyCyclesModel.kunnethMap_autAction`) and `P'` acts trivially on the nearby
 cycles of the change of trait of `N` (`NearbyCyclesModel.Hom.autAction_eq_id_of_isIso`, by the
-invariance under change of trait `NearbyCyclesModel.isIso_pullbackExchange_baseChangeHom_traitMap`),
+invariance under change of trait
+`NearbyCyclesModel.isIso_pullbackExchange_baseChangeHom_traitMap_of_generic`),
 see `NearbyCyclesModel.isTensorRetract_of_average`. -/
 theorem isTensorRetract_map_kunnethMap_comp_pullbackExchange_sliceFst
     {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -283,7 +331,9 @@ theorem isTensorRetract_map_kunnethMap_comp_pullbackExchange_sliceFst
       A B) := by
   obtain ⟨n, τ, hn, rM, rP, hrM, havgM, hrP, havgP⟩ :=
     exists_sum_autAction_pullbackExchange_sliceFst hM hP hb hA hB
-  have hN' := isIso_pullbackExchange_baseChangeHom_traitMap hN hB
+  have hN' := isIso_pullbackExchange_baseChangeHom_traitMap_of_generic
+    (K := traitSliceField k') hN
+    (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ N.ε B hB)
   refine isTensorRetract_of_average (Profinite.padicAlgClRingObj ℓ) φ₁ φ₂
     (sliceFst hM hP hb) (sliceSnd hN hpb hP hgen hb)
     (baseChangeHom hM b hb (traitSlice (traitSliceCoord k'))
@@ -323,7 +373,7 @@ the Künneth map of the slice (`NearbyCyclesModel.isIso_map_kunnethMap_of_isTens
 the generic-slicing identification
 (`NearbyCyclesModel.isTensorRetract_map_kunnethMap_comp_pullbackExchange_sliceFst`) and the
 invariance of nearby cycles under change of trait
-(`NearbyCyclesModel.isIso_pullbackExchange_baseChangeHom_traitMap`). -/
+(`NearbyCyclesModel.isIso_pullbackExchange_baseChangeHom_traitMap_of_generic`). -/
 theorem isIso_map_kunnethMap_of_isIso_sliceFst
     {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))}
@@ -342,7 +392,9 @@ theorem isIso_map_kunnethMap_of_isIso_sliceFst
       (L((𝟙 Y)^*⟦Profinite.padicAlgClRingObj ℓ⟧).obj B)) :=
     isIso_kunnethMap_of_iso _ _ _ ((leftDerivedUpperStarId _ X).app A)
       ((leftDerivedUpperStarId _ Y).app B) h
-  have hN' := isIso_pullbackExchange_baseChangeHom_traitMap hN hB
+  have hN' := isIso_pullbackExchange_baseChangeHom_traitMap_of_generic
+    (K := traitSliceField k') hN
+    (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ N.ε B hB)
   have hT :=
     isTensorRetract_map_kunnethMap_comp_pullbackExchange_sliceFst hM hN hpb hP hgen hb hA hB
   exact isIso_map_kunnethMap_of_isTensorRetract (Profinite.padicAlgClRingObj ℓ) φ₁ φ₂

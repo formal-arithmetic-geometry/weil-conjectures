@@ -16,15 +16,11 @@ uniformizer `ϖ` of `𝒪_E`). The actions `r_P` on complexes of `R`-modules are
 a natural endomorphism `r_K : K ⟶ K` of the identity of `D(Mod_R(C))`
 (`CategoryTheory.Mod.derivedRegularEndSMul`).
 
-* `CategoryTheory.Mod.distinguished_derivedRegularEndSMul_derivedExtendScalars`: if
+* `CategoryTheory.Mod.exists_distinguished_derivedRegularEndSMul_derivedExtendScalars`: if
   `0 ⟶ R --r--> R --φ--> S ⟶ 0` is short exact, there is a distinguished triangle
   `K --r_K--> K ⟶ S ⊗ᴸ_R K ⟶ K[1]` whose first morphism is the action of `r`;
 * `CategoryTheory.Mod.isIso_derivedRegularEndSMul_of_isZero_derivedExtendScalars`: so `r` acts
-  invertibly on `K` as soon as `S ⊗ᴸ_R K = 0`;
-* `CategoryTheory.Mod.IsDerivedRegularEndComplete`: `K` is derived `r`-complete if it is right
-  orthogonal to all shifts of the complexes on which `r` acts invertibly;
-* `CategoryTheory.Mod.isZero_obj₃_of_isDerivedRegularEndComplete`: the cone of a morphism between
-  derived `r`-complete complexes on which `r` acts invertibly vanishes.
+  invertibly on `K` as soon as `S ⊗ᴸ_R K = 0`.
 -/
 
 @[expose] public section
@@ -86,7 +82,11 @@ variable {r} [Abelian.HasFunctorialFlatResolution C]
 `0 ⟶ R --r--> R --φ--> S ⟶ 0` is short exact, then for every `K ∈ D(Mod_R(C))` there is a
 distinguished triangle `K --r_K--> K ⟶ S ⊗ᴸ_R K ⟶ K[1]`, the first map being the action of `r` on
 the derived category, and the derived extension of scalars `S ⊗ᴸ_R K` being regarded as a complex
-of `R`-modules. -/
+of `R`-modules:
+```
+K --r_K--> K --g--> S ⊗ᴸ_R K --h--> K[1]
+```
+-/
 theorem exists_distinguished_derivedRegularEndSMul_derivedExtendScalars (w : r.hom ≫ φ = 0)
     (hφ : (ShortComplex.mk _ _ w).ShortExact) (K : DerivedCategory (Mod C R)) :
     ∃ (g : K ⟶ (comap φ).mapDerivedCategory.obj ((extendScalars φ).leftDerivedFunctor.obj K))
@@ -132,33 +132,5 @@ theorem isIso_derivedRegularEndSMul_of_isZero_derivedExtendScalars (w : r.hom �
     IsIso ((derivedRegularEndSMul r).app K) := by
   obtain ⟨g, h, hT⟩ := exists_distinguished_derivedRegularEndSMul_derivedExtendScalars w hφ K
   exact (Triangle.isZero₃_iff_isIso₁ _ hT).1 ((comap φ).mapDerivedCategory.map_isZero hK)
-
-omit [IsCommMonObj S] [IsMonHom φ] [Abelian.HasFunctorialFlatResolution C]
-
-variable (r) in
-/-- `K ∈ D(Mod_R(C))` is **derived `r`-complete** if every morphism `L ⟶ K[n]` from a complex `L`
-on which `r` acts invertibly vanishes, i.e. `K` is right orthogonal to the `R[1/r]`-modules
-(equivalently `RHom(R[1/r], K) = 0`). -/
-def IsDerivedRegularEndComplete (K : DerivedCategory (Mod C R)) : Prop :=
-  ∀ (L : DerivedCategory (Mod C R)), IsIso ((derivedRegularEndSMul r).app L) →
-    ∀ (n : ℤ) (f : L ⟶ K⟦n⟧), f = 0
-
-/-- **Derived Nakayama for derived complete complexes**: in a distinguished triangle
-`K₁ ⟶ K₂ ⟶ K₃ ⟶ K₁[1]` with `K₁` and `K₂` derived `r`-complete, if `r` acts invertibly on `K₃`
-then `K₃ = 0`. Indeed `𝟙_{K₃}` composed with `K₃ ⟶ K₁[1]` vanishes, so it factors through `K₂`,
-and every morphism `K₃ ⟶ K₂` vanishes. -/
-theorem isZero_obj₃_of_isDerivedRegularEndComplete {T : Triangle (DerivedCategory (Mod C R))}
-    (hT : T ∈ distTriang _) (h₁ : IsDerivedRegularEndComplete r T.obj₁)
-    (h₂ : IsDerivedRegularEndComplete r T.obj₂)
-    (h₃ : IsIso ((derivedRegularEndSMul r).app T.obj₃)) :
-    IsZero T.obj₃ := by
-  rw [IsZero.iff_id_eq_zero]
-  obtain ⟨g, hg⟩ := Triangle.coyoneda_exact₃ T hT (𝟙 T.obj₃) (by
-    rw [Category.id_comp]
-    exact h₁ _ h₃ 1 _)
-  have hg₀ : g = 0 := by
-    have := h₂ _ h₃ 0 (g ≫ (shiftFunctorZero _ ℤ).inv.app _)
-    rwa [Preadditive.IsIso.comp_right_eq_zero] at this
-  rw [hg, hg₀, zero_comp]
 
 end CategoryTheory.Mod
