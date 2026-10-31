@@ -1,0 +1,1515 @@
+/-
+Copyright (c) 2026 Bin Wu. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Bin Wu
+-/
+module
+
+public import WeilConjectures.AlgebraicGeometry.ExceptionalInverseImageExistence
+public import WeilConjectures.SixFunctors.ScalarSixCompactSupport
+public import WeilConjectures.SixFunctors.ListedCoefficientCtf
+public import WeilConjectures.AlgebraicGeometry.MateOpenRestrictionMaps
+public import WeilConjectures.Compactification.BaseChange
+public import Mathlib.CategoryTheory.Adjunction.Restrict
+public import Mathlib.CategoryTheory.Adjunction.Mates
+
+import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+import Mathlib.AlgebraicGeometry.Morphisms.Proper
+import WeilConjectures.AlgebraicGeometry.FiniteComparisonLocalizing
+import WeilConjectures.AlgebraicGeometry.FiniteTorConstructibleEtaleGeneration
+import WeilConjectures.AlgebraicGeometry.FormalClosedSupportDerived
+import WeilConjectures.AlgebraicGeometry.DiagonalTowerCoefficients
+import WeilConjectures.AlgebraicGeometry.DiagonalTowerLimit
+import WeilConjectures.AlgebraicGeometry.DiagonalTowerTrace
+import WeilConjectures.AlgebraicGeometry.RationalP1Triangle
+import WeilConjectures.AlgebraicGeometry.RationalP1UnitCounit
+import WeilConjectures.SixFunctors.ScalarSixCtf
+import WeilConjectures.SixFunctors.ListedCoefficientPresentationTransport
+import WeilConjectures.SixFunctors.ScalarSixDirectImage
+import WeilConjectures.SixFunctors.ScalarSixPullback
+import WeilConjectures.AlgebraicGeometry.MateOpenRestriction
+import WeilConjectures.AlgebraicGeometry.ProEtaleOpenClosedSequenceRingSheaf
+import WeilConjectures.SixFunctors.CtfStabilityDirectImages
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Adjunction
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Data
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Arrows
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1KummerSupplement
+import WeilConjectures.AlgebraicGeometry.RelativeKummerExchangeGeneratorsSupplement
+import WeilConjectures.AlgebraicGeometry.EtaleSinglePullbackComparisonsSupplement
+import WeilConjectures.AlgebraicGeometry.EtaleFiniteTwistPullback
+import Mathlib.AlgebraicGeometry.Sites.Etale
+import Mathlib.AlgebraicGeometry.Scheme
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateSheaf
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateTwist
+import WeilConjectures.AlgebraicGeometry.Sites.Kummer
+import Mathlib.Algebra.Module.ZMod
+import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
+import Mathlib.CategoryTheory.Sites.Monoidal
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import WeilConjectures.AlgebraicGeometry.EtaleConstantRingModuleEquivalence
+import WeilConjectures.CategoryTheory.RingedSiteModules
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
+import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+import WeilConjectures.AlgebraicGeometry.DerivedCategories
+import WeilConjectures.AlgebraicGeometry.RingedTopoiDerivedTensorPullback
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.TensorShiftIso
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
+import WeilConjectures.AlgebraicGeometry.EtaleFiniteTwistPullbackBase
+import WeilConjectures.ConstructibleSheaf.Defs
+import WeilConjectures.EtaleCohomology.TateTwist.Sheaf
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateLinePullback
+import WeilConjectures.EtaleCohomology.TateTwist.RootsOfUnityPullback
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateTensorFamily
+import WeilConjectures.CategoryTheory.NormalizedSignedTensorPowers
+import WeilConjectures.CategoryTheory.Monoidal.IntTensorFamily
+import Mathlib.CategoryTheory.Monoidal.Closed.Basic
+import WeilConjectures.CategoryTheory.IntTensorFamilyIso
+import Mathlib.CategoryTheory.Monoidal.Braided.Basic
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateLocalLine
+import WeilConjectures.AlgebraicGeometry.Sites.SmallEtaleRepresentablePresheafSheaf
+import WeilConjectures.ConstructibleSheaf.Pullback
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.LocallyTrivialInverse
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.MonoidalComp
+import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Unit
+import WeilConjectures.AlgebraicGeometry.EtaleFiniteTwistPullbackRest
+import Mathlib.CategoryTheory.Abelian.Refinements
+import Mathlib.Algebra.Homology.ShortComplex.Exact
+import WeilConjectures.AlgebraicGeometry.ProperProjectionFormula
+import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
+import WeilConjectures.AlgebraicGeometry.EtaleDerivedTensorSymmetrySupplement
+import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
+import Mathlib.AlgebraicGeometry.Noetherian
+import Mathlib.Topology.Defs.Filter
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.SixFunctors.Etale.Derived.Tensor
+import WeilConjectures.AlgebraicGeometry.ExactUnboundedExchange
+import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
+import WeilConjectures.SixFunctors.BaseChange.Square
+import WeilConjectures.SixFunctors.Etale.Derived.Shift
+import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1KummerMaps
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1ExchangeIso
+import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
+import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteAdjunctScalarFaithfulness
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteClassScalarFaithfulness
+import Mathlib.Algebra.Homology.DerivedCategory.Ext.Linear
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Linear
+import WeilConjectures.AlgebraicGeometry.FiniteP1TwistedUnitBaseChange
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteTwistTransportUniqueness
+import Mathlib.CategoryTheory.Adjunction.Whiskering
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.SingleFunctor
+import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
+import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarAdjunctionCompat
+import WeilConjectures.AlgebraicGeometry.FiniteP1ChernAdjunctBaseChange
+import WeilConjectures.AlgebraicGeometry.FiniteP1ChernMapBaseChange
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteClassArbitraryBase
+import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerBoundaryComparison
+import WeilConjectures.AlgebraicGeometry.EtaleModuleInjectiveForgetAcyclic
+import WeilConjectures.CategoryTheory.Sites.SheafCohomologyRightDerived
+import WeilConjectures.AlgebraicGeometry.Sites.GmPicardPullback
+import WeilConjectures.CategoryTheory.Abelian.Ext.MapExactFunctorConj
+import WeilConjectures.AlgebraicGeometry.SupportedDerivedUnitForget
+import WeilConjectures.AlgebraicGeometry.OrdinarySupportedKummerSystemSupplement
+import WeilConjectures.ConstructibleSheaf.FinitePushforward.ConstantUnit
+import WeilConjectures.CategoryTheory.DerivedSingleUnitExact
+import WeilConjectures.CategoryTheory.DerivedSingleUnit
+import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
+import WeilConjectures.AlgebraicGeometry.FiniteP1ChernAdjunctMate
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteUnitPullbackComp
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteUnitPullbackHom
+import WeilConjectures.SixFunctors.Etale.Derived.LeftDerivedUpperStarSingle
+import WeilConjectures.ConstructibleSheaf.UpperStarConstantSheafComp
+import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
+import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerAffineLine
+import WeilConjectures.AlgebraicGeometry.ProjectiveLineGenusZero
+import WeilConjectures.AlgebraicGeometry.Curve
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+import WeilConjectures.Topology.RingedSpaceModuleCohomology
+import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveLine
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineSmooth
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Line
+import WeilConjectures.Algebra.Homology.DerivedCategory.SingleHomology
+import WeilConjectures.AlgebraicGeometry.Curve.RootsOfUnityTop
+import WeilConjectures.AlgebraicGeometry.Curve.Estimate
+import WeilConjectures.AlgebraicGeometry.ProjectiveLineTateCoefficientGenerator
+import WeilConjectures.AlgebraicGeometry.ProjectiveLineConstantCoefficientGenerator
+import WeilConjectures.AlgebraicGeometry.Curve.AffineLineKummer
+import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerClassGenerator
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteGeometricPointHomology
+import WeilConjectures.SixFunctors.Etale.Derived.AlgClosedField
+import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.KunnethMap
+import WeilConjectures.CategoryTheory.DerivedCategory.HomSingleProjective
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteFibreHomologyComparison
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1FibreHomologyCard
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1DiagonalUnit
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteTraceCounit
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1DiagonalTriangles
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1DiagonalIntegral
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1DiagonalComponents
+import WeilConjectures.AlgebraicGeometry.ProjectiveLineDiagonalMaps
+import WeilConjectures.AlgebraicGeometry.OrdinarySupportedCartierKummerSupplement
+import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteCoefficientRecords
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive
+import WeilConjectures.AlgebraicGeometry.ProjectiveLineDiagonalAlphaUnits
+import WeilConjectures.AlgebraicGeometry.FiniteP1DiagonalPicard
+import WeilConjectures.AlgebraicGeometry.P1DiagonalLocalIdeal
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfInvertible
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LinearCombination
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Canonical
+import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
+import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
+import WeilConjectures.AlgebraicGeometry.Modules.FieldBaseChange
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteChernPullback
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteFirstChern
+import WeilConjectures.AlgebraicGeometry.OrdinarySupportedChernNormalization
+import WeilConjectures.AlgebraicGeometry.SupportedKummerChernRealization
+import WeilConjectures.AlgebraicGeometry.OrdinarySupportedKummerBoundarySupplement
+import WeilConjectures.CategoryTheory.Sites.Torsor
+import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteConstantUnitComp
+import WeilConjectures.AlgebraicGeometry.ProjectiveLineDiagonalCartier
+import Mathlib.AlgebraicGeometry.Pullbacks
+import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.EffectiveCartier
+import WeilConjectures.AlgebraicGeometry.Morphisms.RegularImmersion
+import WeilConjectures.AlgebraicGeometry.EtaleSectionUnitNormalization
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
+import WeilConjectures.AlgebraicGeometry.EtaleDiagonalSectionCoherence
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
+import WeilConjectures.CategoryTheory.SectionConjugateComparison
+import WeilConjectures.CategoryTheory.SectionProjectionUnitSupplement
+import Mathlib.Logic.Small.Defs
+import WeilConjectures.AlgebraicGeometry.EtaleTensorTraceBaseChange
+import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionBaseChange
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Braided
+import WeilConjectures.AlgebraicGeometry.EtaleCanonicalTensorComparison
+import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategorySymmetric
+import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Reduction
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionMonoidal
+import WeilConjectures.AlgebraicGeometry.EtaleDiagonalCoefficientTriangles
+import WeilConjectures.AlgebraicGeometry.EtaleSupportedDiagonalUnitSupplement
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteSingleUnitNormalization
+import WeilConjectures.AlgebraicGeometry.EtaleDiagonalTriangles
+import WeilConjectures.AlgebraicGeometry.EtaleProperSectionContraction
+import WeilConjectures.AlgebraicGeometry.EtaleOrderedProjectionComparison
+import WeilConjectures.CategoryTheory.AdjunctionUnitTransport
+import Mathlib.CategoryTheory.Adjunction.Basic
+import WeilConjectures.AlgebraicGeometry.EtaleDiagonalSectionIntegral
+import WeilConjectures.AlgebraicGeometry.EtaleCoordinateTraceContractions
+import WeilConjectures.AlgebraicGeometry.EtaleCoordinateTraceData
+import WeilConjectures.ConstructibleSheaf.LisseRankOne
+import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
+import WeilConjectures.AlgebraicGeometry.BaseChangeMapAbelianAndSets
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
+import Mathlib.GroupTheory.Torsion
+import WeilConjectures.AlgebraicGeometry.ProperUnboundedBaseChangeModN
+import WeilConjectures.AlgebraicGeometry.TorsionAssembly
+import WeilConjectures.SixFunctors.BaseChange.Derived
+import WeilConjectures.AlgebraicGeometry.TorsionEtaleSheaf
+import WeilConjectures.AlgebraicGeometry.TorsionSheafCharacterizations
+import WeilConjectures.SixFunctors.BaseChange.DerivedForget
+import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.AbTorsionSheaf
+import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine
+import WeilConjectures.SixFunctors.Etale.Derived.DirectImageVanishingTorsion
+import WeilConjectures.SixFunctors.BaseChange.DerivedUnboundedFac
+import WeilConjectures.AlgebraicGeometry.ProperUnboundedBaseChangeForgetful
+import Mathlib.Data.ZMod.Basic
+import WeilConjectures.AlgebraicGeometry.UnboundedCoefficientForgetfulAux
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.DerivedBaseChange
+import WeilConjectures.AlgebraicGeometry.UnboundedAbelianExchangeComparison
+import WeilConjectures.AlgebraicGeometry.ChosenCartesianSquare
+import WeilConjectures.AlgebraicGeometry.KInjectiveResolutions
+import WeilConjectures.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
+import WeilConjectures.AlgebraicGeometry.ModuleAbelianKInjectiveDirectImageAcyclic
+import WeilConjectures.AlgebraicGeometry.EtaleModuleAbelianRingedPresentation
+import WeilConjectures.CategoryTheory.RingedToposMorphismSupplement
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+import Mathlib.CategoryTheory.Category.ULift
+import Mathlib.CategoryTheory.Sites.CartesianMonoidal
+import Mathlib.CategoryTheory.Sites.Equivalence
+import WeilConjectures.AlgebraicGeometry.ModuleSheafConstantRingEquivalence
+import WeilConjectures.CategoryTheory.ContinuousRingedToposModuleDirectImage
+import WeilConjectures.CategoryTheory.GeometricModuleConstruction
+import Mathlib.Algebra.Category.Ring.Limits
+import WeilConjectures.CategoryTheory.RingedToposRingData
+import WeilConjectures.CategoryTheory.AdjunctionRingOperations
+import Mathlib.CategoryTheory.Monoidal.Cartesian.Basic
+import Mathlib.CategoryTheory.Monoidal.CommGrp_
+import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod
+import WeilConjectures.CategoryTheory.RestrictionRingedToposModuleDirectImageSupplement
+import WeilConjectures.CategoryTheory.RingedToposDerivedPushforwardComposition
+import Mathlib.Algebra.Homology.DerivedCategory.Basic
+import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
+import Mathlib.CategoryTheory.Functor.Derived.RightDerived
+import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutionsSupplement
+import WeilConjectures.Mathlib.Algebra.Homology.GrothendieckAbelian
+import Mathlib.CategoryTheory.Localization.DerivabilityStructure.Derives
+import WeilConjectures.Algebra.Homology.KFlatSupplement
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
+import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
+import Mathlib.Algebra.Homology.DerivedCategory.Fractions
+import WeilConjectures.Algebra.Homology.KFlatResolution
+import WeilConjectures.CategoryTheory.RingedToposKFlatPullback
+import WeilConjectures.CategoryTheory.AlgebraicInverseImage
+import Mathlib.Algebra.Category.ModuleCat.Sheaf
+import Mathlib.Algebra.Category.Grp.Limits
+import Mathlib.CategoryTheory.Sites.Whiskering
+import WeilConjectures.CategoryTheory.GeometricModuleTransport
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
+import Mathlib.CategoryTheory.Adjunction.Limits
+import WeilConjectures.CategoryTheory.GeometricRingTransport
+import Mathlib.CategoryTheory.Sites.Limits
+import WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresRingCore
+import WeilConjectures.CategoryTheory.SheafRingObjectReconstruction
+import WeilConjectures.CategoryTheory.Adjunction.FiniteProductRingFunctor
+import WeilConjectures.CategoryTheory.ModulePullbackPushforwardAdjunctionSupplement
+import WeilConjectures.AlgebraicGeometry.KFlatRingedToposPullback
+import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
+import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
+import Mathlib.Algebra.Category.Grp.FilteredColimits
+import Mathlib.Algebra.Homology.BifunctorShift
+import Mathlib.Algebra.Homology.QuasiIso
+import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
+import Mathlib.CategoryTheory.Limits.EssentiallySmall
+import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+import Mathlib.CategoryTheory.Limits.ExactFunctor
+import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
+import Mathlib.Algebra.Homology.HomologicalComplex
+import Mathlib.Algebra.Homology.Additive
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RingedToposFlatPullback
+import WeilConjectures.CategoryTheory.AlgebraicInverseImageOfUniverses
+import Mathlib.CategoryTheory.Types.Basic
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatAlgebraicInverseImageOfUniverses
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatEquationalCriterionOfUniverses
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatLocalRelationsOfUniverses
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUniverses
+import WeilConjectures.CategoryTheory.Sites.WeakSheafifyAddCommGrpLeftExact
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Submodule
+import Mathlib.LinearAlgebra.TensorProduct.Vanishing
+import Mathlib.RingTheory.TensorProduct.DirectLimitFG
+import Mathlib.LinearAlgebra.TensorProduct.Finiteness
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
+import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
+import WeilConjectures.CategoryTheory.Sites.InverseImageLocalFamilies
+import Mathlib.CategoryTheory.Sites.Sheaf
+import Mathlib.CategoryTheory.Sites.LocallyBijective
+import Mathlib.CategoryTheory.Limits.Types.Pullbacks
+import Mathlib.CategoryTheory.Functor.EpiMono
+import Mathlib.CategoryTheory.Limits.Types.Equalizers
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Equalizers
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ScalarTensorComparisonOfUniverses
+import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
+import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
+import Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
+import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+import WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
+import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
+import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+import WeilConjectures.Algebra.Homology.RingedToposAdaptedFlatResolution
+import WeilConjectures.Algebra.Homology.RingedToposPullbackFilteredColimits
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Mathlib.CategoryTheory.Sites.PreservesSheafification
+import Mathlib.CategoryTheory.Limits.Preserves.Limits
+import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
+import Mathlib.RingTheory.Flat.CategoryTheory
+import Mathlib.CategoryTheory.ObjectProperty.ColimitsOfShape
+import Mathlib.Algebra.Homology.Embedding.CochainComplex
+import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
+import Mathlib.Algebra.Category.Grp.AB
+import WeilConjectures.Algebra.Homology.RingedToposAcyclicKFlatPullback
+import WeilConjectures.Algebra.Homology.BoundedFlatIndependentCoefficients
+import Mathlib.CategoryTheory.Monoidal.Preadditive
+import WeilConjectures.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
+import WeilConjectures.AlgebraicGeometry.RingedTopoiDerivedPullback
+import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
+import WeilConjectures.Algebra.Homology.ChangeOfRingsKFlatQuasiIsoSupplement
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import Mathlib.CategoryTheory.Sites.EpiMono
+import Mathlib.CategoryTheory.Adjunction.Additive
+import Mathlib.Algebra.Category.Grp.EpiMono
+import Mathlib.Algebra.Category.Grp.Abelian
+import Mathlib.CategoryTheory.Sites.Abelian
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+import WeilConjectures.AlgebraicGeometry.ModuleAbelianUnderivedExchange
+import WeilConjectures.AlgebraicGeometry.ProperTorsionProjectionFormula
+import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
+import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ProperProjectionFormula
+import WeilConjectures.AlgebraicGeometry.EtaleCoordinateKunnethFactorization
+import WeilConjectures.AlgebraicGeometry.EtaleCoordinateKunnethFactorizationTranspose
+import WeilConjectures.AlgebraicGeometry.EtaleCoordinateKunnethRouteEquality
+import WeilConjectures.AlgebraicGeometry.EtaleCoordinateKunnethLeftRoute
+import WeilConjectures.AlgebraicGeometry.EtaleCoordinateKunnethLeftRoutePrecomp
+import WeilConjectures.AlgebraicGeometry.EtaleKunnethSymmetricFactorization
+import WeilConjectures.AlgebraicGeometry.ProperSupportedKunnethRoute
+import WeilConjectures.EtaleCohomology.Purity.Smooth.TraceDiagonal.Basic
+import WeilConjectures.AlgebraicGeometry.EtaleKunnethTensorSymmetry
+import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ProperFactor.KunnethMapAgrees
+import WeilConjectures.AlgebraicGeometry.EtaleCoordinateKunnethRightRoute
+import WeilConjectures.AlgebraicGeometry.EtaleProjectionTraceNormalization
+import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionUnit
+import WeilConjectures.AlgebraicGeometry.EtaleEvenLineSelfSymmetry
+import WeilConjectures.AlgebraicGeometry.EtaleEvenShiftCanonicalSelfSymmetry
+import Mathlib.Tactic.SuppressCompilation
+import WeilConjectures.AlgebraicGeometry.EtaleLineFlatBraiding
+import WeilConjectures.ConstructibleSheaf.InternalHom
+import WeilConjectures.AlgebraicGeometry.EtaleSecondCoordinateContraction
+import WeilConjectures.AlgebraicGeometry.EtaleTraceBaseChangeEvaluation
+import WeilConjectures.AlgebraicGeometry.EtaleProjectionTraceTensorInterchange
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteCounitCoefficient
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteTraceEvaluationNormalization
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteDiagonalTraceCoordinates
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteDiagonalChartExchange
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteDiagonalChartExchangeAux
+import WeilConjectures.AlgebraicGeometry.EtaleChartExchangePasting
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompCoherence
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteTwistComposition
+import WeilConjectures.CategoryTheory.ShiftedCompositeComparison
+import Mathlib.CategoryTheory.Shift.CommShift
+import Mathlib.Algebra.Ring.Int.Defs
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChangeShift
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteUnitPullbackNormalization
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteConstantUnitSquare
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteUnitPullbackComparison
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteConstantPullbackHom
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteTraceBaseChange
+import WeilConjectures.AlgebraicGeometry.EtaleExactExchangeComparison
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteTraceScalarSquare
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteTraceCounitComparisons
+import WeilConjectures.AlgebraicGeometry.FiniteTwistDerivedEvaluationPullback
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1DecompositionMapsSupplement
+import WeilConjectures.AlgebraicGeometry.FiniteTwistShiftedPairingPullback
+import WeilConjectures.AlgebraicGeometry.EtaleSingleFunctorMonoidalCompatibility
+import WeilConjectures.SixFunctors.Etale.Derived.Invertible
+import WeilConjectures.AlgebraicGeometry.EtaleFlatSingleTensorCompatibilityDataSupplement
+import WeilConjectures.AlgebraicGeometry.EtaleSingleTensoratorNaturality
+import WeilConjectures.AlgebraicGeometry.EtaleSingleTensoratorAssociativity
+import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Functor
+import WeilConjectures.AlgebraicGeometry.EtaleSingleCochainMonoidal
+import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfSize
+import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
+import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
+import WeilConjectures.AlgebraicGeometry.EtaleSingleTensoratorSymmetry
+import WeilConjectures.AlgebraicGeometry.EtaleSingleTensoratorFactorization
+import WeilConjectures.AlgebraicGeometry.EtaleSingleTensoratorPullback
+import WeilConjectures.AlgebraicGeometry.EtaleSingleHomotopyTensorPullback
+import WeilConjectures.CategoryTheory.Monoidal.Instances.HomotopyCategory
+import WeilConjectures.Algebra.Homology.HomotopyCategory.MapMonoidal
+import WeilConjectures.AlgebraicGeometry.EtaleSinglePullbackCounit
+import WeilConjectures.AlgebraicGeometry.EtaleSingleTensoratorHomotopyFactorization
+import WeilConjectures.CategoryTheory.FlatPairingAssociativityAssembly
+import Mathlib.CategoryTheory.Monoidal.Functor
+import WeilConjectures.CategoryTheory.FlatPairingPullbackAssembly
+import WeilConjectures.AlgebraicGeometry.DerivedPairingOppositeShiftsPullback
+import WeilConjectures.AlgebraicGeometry.FiniteTwistDegreeZeroEvaluationPullback
+import WeilConjectures.AlgebraicGeometry.FiniteTwistDegreeZeroEvaluationPairing
+import WeilConjectures.AlgebraicGeometry.FiniteTwistFlatEvaluationPullback
+import WeilConjectures.AlgebraicGeometry.FlatSinglePairingSymmetricPullback
+import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorSymmetry
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteDerivedRightUnitPullback
+import WeilConjectures.AlgebraicGeometry.FiniteTwistShiftedFactorComparisons
+import WeilConjectures.AlgebraicGeometry.FiniteShiftedLineSquare
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Basic
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteDiagonalFirstCoordinateExchange
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteDiagonalSecondCoordinateExchange
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1DiagonalBaseChange
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteClassComparison
+import WeilConjectures.AlgebraicGeometry.CondensedOpenClosedRecollement
+import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TriangleShift
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHomology
+import WeilConjectures.AlgebraicGeometry.ProEtaleAbelianClosedSupport
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
+import WeilConjectures.AlgebraicGeometry.ProEtaleAbelianClosedCounit
+import WeilConjectures.Mathlib.AlgebraicGeometry.Cover.QuasiCompact
+import WeilConjectures.Mathlib.CategoryTheory.Sites.Pullback
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
+import WeilConjectures.Algebra.Homology.FunctorialBoundedInjectiveResolution
+import Mathlib.Algebra.Homology.CochainComplexPlus
+import Mathlib.Data.Int.Interval
+import WeilConjectures.FromJoel.Algebra.Homology.BicomplexRows
+import WeilConjectures.CategoryTheory.DoubleComplexBoundedBelowTotal
+import Mathlib.Algebra.Homology.TotalComplex
+import Mathlib.CategoryTheory.Abelian.Basic
+import WeilConjectures.Algebra.Homology.FunctorialObjectResolution
+import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+import Mathlib.Algebra.Homology.SingleHomology
+import WeilConjectures.AlgebraicGeometry.ProfinitePointPullback
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import WeilConjectures.AlgebraicGeometry.ProEtaleInverseImage
+import WeilConjectures.AlgebraicGeometry.ProEtaleDerivedCategory
+import Mathlib.AlgebraicGeometry.Sites.Proetale
+import Mathlib.CategoryTheory.Sites.ConstantSheaf
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous
+import WeilConjectures.CategoryTheory.SiteInverseImageTensor
+import WeilConjectures.CategoryTheory.Adjunction.LiftsGroupRingObjects
+import Mathlib.CategoryTheory.Monoidal.Ring
+import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
+import WeilConjectures.CategoryTheory.Monoidal.Conjugate
+import WeilConjectures.CategoryTheory.Sites.MonObj
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
+import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryAdjunctionShift
+import WeilConjectures.CategoryTheory.Triangulated.Recollement
+import Mathlib.Algebra.Category.Grp.Zero
+import Mathlib.Algebra.Category.Ring.Basic
+import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Mathlib.AlgebraicGeometry.Morphisms.Etale
+import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+import Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
+import Mathlib.AlgebraicGeometry.OpenImmersion
+import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
+import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+import Mathlib.CategoryTheory.Adjunction.Triple
+import Mathlib.CategoryTheory.EffectiveEpi.Comp
+import Mathlib.CategoryTheory.Extensive
+import Mathlib.CategoryTheory.GradedObject.Bifunctor
+import Mathlib.CategoryTheory.GradedObject.Monoidal
+import Mathlib.CategoryTheory.GradedObject.Trifunctor
+import Mathlib.CategoryTheory.Limits.FunctorCategory.EpiMono
+import Mathlib.CategoryTheory.Limits.Preserves.Filtered
+import Mathlib.CategoryTheory.Limits.Shapes.Countable
+import Mathlib.CategoryTheory.Limits.Shapes.Multiequalizer
+import Mathlib.CategoryTheory.Monad.Adjunction
+import Mathlib.CategoryTheory.Monoidal.Action.Basic
+import Mathlib.CategoryTheory.Monoidal.CommMon_
+import Mathlib.CategoryTheory.Monoidal.Limits.Preserves
+import Mathlib.CategoryTheory.Monoidal.Mod
+import Mathlib.CategoryTheory.Monoidal.Mon
+import Mathlib.CategoryTheory.MorphismProperty.Comma
+import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
+import Mathlib.CategoryTheory.Sites.Coherent.Basic
+import Mathlib.CategoryTheory.Sites.Coherent.Comparison
+import Mathlib.CategoryTheory.Sites.ConcreteSheafification
+import Mathlib.CategoryTheory.Sites.Grothendieck
+import Mathlib.Combinatorics.Quiver.ReflQuiver
+import Mathlib.Data.Int.ConditionallyCompleteOrder
+import Mathlib.Geometry.RingedSpace.LocallyRingedSpace
+import Mathlib.Geometry.RingedSpace.PresheafedSpace
+import Mathlib.Geometry.RingedSpace.SheafedSpace
+import Mathlib.Topology.Category.CompHausLike.Basic
+import Mathlib.Topology.Category.CompHausLike.Limits
+import Mathlib.Topology.Category.Profinite.Basic
+import Mathlib.Topology.Category.Profinite.EffectiveEpi
+import Mathlib.Topology.Category.Profinite.Limits
+import Mathlib.Topology.Category.TopCat.Basic
+import Mathlib.Topology.Connected.TotallyDisconnected
+import Mathlib.Topology.ContinuousMap.Defs
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
+import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
+import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
+import WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
+import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
+import WeilConjectures.CategoryTheory.ModuleObjects.Monoidal
+import WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormula
+import WeilConjectures.CategoryTheory.ModuleObjects.Symmetric
+import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
+import WeilConjectures.CategoryTheory.Monoidal.Mod.Limits
+import WeilConjectures.CategoryTheory.RingObjects.Ab
+import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
+import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Braided.Basic
+import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
+import WeilConjectures.Mathlib.CategoryTheory.Sites.Sheaf
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionLowerShriek
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal
+import WeilConjectures.AlgebraicGeometry.ProjectionMateExact
+import WeilConjectures.AlgebraicGeometry.RingedTopoiCanonicalTensorPullbackOfUniverses
+import WeilConjectures.AlgebraicGeometry.GeoCartierCycleClass
+import WeilConjectures.AlgebraicGeometry.IntegralOpenImageProperFormulas
+
+/-! # Scalar comparison for exceptional inverse image
+
+Source: blueprint latest, sec-six-functors-basics/sk-prop-scalar-six/
+det-prop-scalar-six-exceptional.md and its companion proof.
+(blueprint: det-prop-scalar-six-exceptional).
+
+The exceptional functors below are restrictions of right adjoints on Loc(Dctf).
+The coefficient comparison is the mate of the inverse of the recorded proper/open
+compact-support comparison. Composition uses beta for an actual composite compactification,
+transported through
+the counit-normalized right-adjoint identification of its compact-support compositor.
+-/
+
+@[expose] public noncomputable section
+set_option autoImplicit false
+set_option relaxedAutoImplicit false
+set_option synthInstance.maxSize 4096
+
+universe u
+open CategoryTheory CategoryTheory.Limits
+open scoped CategoryTheory.Obj CategoryTheory.Functor CategoryTheory.TwoSquare
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+/-- The full inclusion Dctf into its recorded localizing closure, using the defining
+intersection, with the same objects and maps. Source: blueprint sk-thm-existence (1),
+used in the definition of beta (blueprint: det-prop-scalar-six-exceptional). -/
+def scalarExceptionalInclusion (Λ : ScalarSixRing.{u}) (X : Scheme.{u}) :
+    ConstantModelConstructibleFiniteTor Λ.X X ⥤
+      (localizingClosureProEtale Λ.X X).FullSubcategory :=
+  ObjectProperty.ιOfLE (fun K hK _P _hP hP ↦ hP K hK)
+
+/-- Parameters for any of the right adjoints in sk-thm-existence, together with its
+restriction to Dctf. The preservation fields certify membership only. In particular
+G is a right adjoint on Loc(Dctf), not on the entire ambient derived category.
+Source: blueprint sk-thm-existence (2)--(4)
+(blueprint: det-prop-scalar-six-exceptional). -/
+structure ScalarExceptionalAdjoint (Λ : ScalarSixRing.{u})
+    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) where
+  localizing : ∀ K, localizingClosureProEtale Λ.X X K →
+    localizingClosureProEtale Λ.X Y
+      ((rightDerivedLowerShriekOfCompactification Λ.X c).obj K)
+  right : (localizingClosureProEtale Λ.X Y).FullSubcategory ⥤
+    (localizingClosureProEtale Λ.X X).FullSubcategory
+  adjunction : localizingLowerShriek Λ.X c localizing ⊣ right
+  lower_preserves : ∀ K : ConstantModelConstructibleFiniteTor Λ.X X,
+    (constantModelBoundedConstructible Λ.X Y ⊓ DerivedCategory.finiteTorAmplitude _)
+      ((rightDerivedLowerShriekOfCompactification Λ.X c).obj K.obj)
+  right_preserves : ∀ K : ConstantModelConstructibleFiniteTor Λ.X Y,
+    (constantModelBoundedConstructible Λ.X X ⊓ DerivedCategory.finiteTorAmplitude _)
+      (right.obj ((scalarExceptionalInclusion Λ Y).obj K)).obj
+
+/-- The same compactification functor restricted to Dctf.
+Source: blueprint definition of beta (blueprint: det-prop-scalar-six-exceptional). -/
+def ScalarExceptionalAdjoint.lower {Λ : ScalarSixRing.{u}} {X Y : Scheme.{u}}
+    {f : X ⟶ Y} {c : Compactification f} (R : ScalarExceptionalAdjoint Λ c) :
+    ConstantModelConstructibleFiniteTor Λ.X X ⥤ ConstantModelConstructibleFiniteTor Λ.X Y :=
+  (constantModelBoundedConstructible Λ.X Y ⊓ DerivedCategory.finiteTorAmplitude _).lift
+    ((constantModelBoundedConstructible Λ.X X ⊓ DerivedCategory.finiteTorAmplitude _).ι ⋙
+      rightDerivedLowerShriekOfCompactification Λ.X c) R.lower_preserves
+
+/-- The restriction of the given localizing right adjoint, with unchanged maps.
+Source: blueprint definition of beta (blueprint: det-prop-scalar-six-exceptional). -/
+def ScalarExceptionalAdjoint.upper {Λ : ScalarSixRing.{u}} {X Y : Scheme.{u}}
+    {f : X ⟶ Y} {c : Compactification f} (R : ScalarExceptionalAdjoint Λ c) :
+    ConstantModelConstructibleFiniteTor Λ.X Y ⥤ ConstantModelConstructibleFiniteTor Λ.X X :=
+  (constantModelBoundedConstructible Λ.X X ⊓ DerivedCategory.finiteTorAmplitude _).lift
+    (scalarExceptionalInclusion Λ Y ⋙ R.right ⋙ (localizingClosureProEtale Λ.X X).ι)
+    R.right_preserves
+
+/-- Restriction of the given adjunction along the two full inclusions; its unit and
+counit are those of the localizing adjunction. Source: blueprint sk-thm-existence (4)
+(blueprint: det-prop-scalar-six-exceptional). -/
+def ScalarExceptionalAdjoint.restrictedAdjunction {Λ : ScalarSixRing.{u}}
+    {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification f}
+    (R : ScalarExceptionalAdjoint Λ c) : R.lower ⊣ R.upper :=
+  R.adjunction.restrictFullyFaithful
+    (iC := scalarExceptionalInclusion Λ X) (iD := scalarExceptionalInclusion Λ Y)
+    (ObjectProperty.fullyFaithfulιOfLE (fun K hK _P _hP hP ↦ hP K hK))
+    (ObjectProperty.fullyFaithfulιOfLE (fun K hK _P _hP hP ↦ hP K hK))
+    (Iso.refl _) (Iso.refl _)
+
+/-- The ambient counit of the restricted adjunction, with its actual localizing
+normalization. Source: blueprint displayed epsilon
+(blueprint: det-prop-scalar-six-exceptional). -/
+def ScalarExceptionalAdjoint.counit {Γ : ScalarSixRing.{u}} {A B : Scheme.{u}}
+    {q : A ⟶ B} {d : Compactification q} (T : ScalarExceptionalAdjoint Γ d)
+    (K : ConstantModelConstructibleFiniteTor Γ.X B) :=
+  (T.restrictedAdjunction.counit.app K).hom
+
+/-- The composite compactification in clause (3) of scalarSixCompactSupport: its open
+part is c.i followed by the boundary open part, and its proper part is the boundary
+proper part followed by d.g. Transport changes only the equation of factorization.
+Source: blueprint compact-support proof, Composition
+(blueprint: det-prop-scalar-six-exceptional). -/
+def scalarExceptionalCompositeCompactification
+    {A B C : Scheme.{u}} {p : A ⟶ B} {q : B ⟶ C}
+    (c : Compactification p) (d : Compactification q)
+    (r : Compactification.BoundaryCompactification (c.g ≫ d.i)) :
+    Compactification (p ≫ q) :=
+  ((r.obj.obj.precomp c.i).postcomp d.g).copy
+    (by simpa only [Category.assoc] using congrArg₂ (fun x y ↦ x ≫ y) c.comm d.comm)
+
+/-- Restrict the actual inverse-image functor to Dctf using a membership certificate.
+Source: blueprint open-restriction clause
+(blueprint: det-prop-scalar-six-exceptional). -/
+def scalarExceptionalPull {Γ : ScalarSixRing.{u}} {A B : Scheme.{u}} (j : A ⟶ B)
+    (h : ∀ K : ConstantModelConstructibleFiniteTor Γ.X B,
+      (constantModelBoundedConstructible Γ.X A ⊓ DerivedCategory.finiteTorAmplitude _)
+        ((scalarSixPull Γ j).obj K.obj)) :
+    ConstantModelConstructibleFiniteTor Γ.X B ⥤ ConstantModelConstructibleFiniteTor Γ.X A :=
+  (constantModelBoundedConstructible Γ.X A ⊓ DerivedCategory.finiteTorAmplitude _).lift
+    ((constantModelBoundedConstructible Γ.X B ⊓ DerivedCategory.finiteTorAmplitude _).ι ⋙
+      scalarSixPull Γ j) h
+
+/-- The two proof certificates needed to restrict the canonical scalar mate.
+Both fields are propositions about the actual derived scalar functor and the actual
+compact-support map; neither field chooses a functor or a comparison morphism.
+Source: blueprint definition of beta, using scalar preservation and compact-support
+invertibility (blueprint: det-prop-scalar-six-exceptional). -/
+structure ScalarExceptionalCertificates (k : Type u) [Field k]
+    {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ') : Prop where
+  preserves : ∀ (X : Over (Spec (.of k)))
+    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+    (K : ConstantModelConstructibleFiniteTor Λ.X X.left),
+    (constantModelBoundedConstructible Λ'.X X.left ⊓ DerivedCategory.finiteTorAmplitude _)
+      ((scalarSixChange a X.left).obj K.obj)
+  compact : ∀ {X Y : Over (Spec (.of k))}
+    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+    (f : X ⟶ Y) (c : Compactification f.left)
+    (K : ConstantModelConstructibleFiniteTor Λ.X X.left),
+    IsIso ((scalarCompactSupportMap a c.i c.g).app K.obj)
+
+namespace ScalarExceptionalCertificates
+
+variable (k : Type u) [Field k] {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ')
+  (H : ScalarExceptionalCertificates k a)
+
+/-- The actual ordinary derived coefficient functor restricted to Dctf. The membership
+proof is the preservation certificate; no flatness is assumed.
+Source: blueprint definition of beta (blueprint: det-prop-scalar-six-exceptional). -/
+def scalarExceptionalChange
+    (preserves : ∀ (X : Over (Spec (.of k)))
+      [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+      (K : ConstantModelConstructibleFiniteTor Λ.X X.left),
+      (constantModelBoundedConstructible Λ'.X X.left ⊓ DerivedCategory.finiteTorAmplitude _)
+        ((scalarSixChange a X.left).obj K.obj)) (X : Over (Spec (.of k)))
+    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] :
+    ConstantModelConstructibleFiniteTor Λ.X X.left ⥤
+      ConstantModelConstructibleFiniteTor Λ'.X X.left :=
+  (constantModelBoundedConstructible Λ'.X X.left ⊓ DerivedCategory.finiteTorAmplitude _).lift
+    ((constantModelBoundedConstructible Λ.X X.left ⊓ DerivedCategory.finiteTorAmplitude _).ι ⋙
+      scalarSixChange a X.left)
+    (fun K ↦ preserves X K)
+
+variable {X Y : Over (Spec (.of k))}
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+  {f : X ⟶ Y} (c : Compactification f.left)
+  (R : ScalarExceptionalAdjoint Λ c) (S : ScalarExceptionalAdjoint Λ' c)
+
+/-- The compact-support scalar isomorphism on Dctf, formed from the recorded map,
+not from a freely chosen isomorphism between its endpoints.
+Source: blueprint gamma in the definition of beta
+(blueprint: det-prop-scalar-six-exceptional). -/
+def scalarExceptionalGamma :
+    R.lower ⋙ scalarExceptionalChange k a H.preserves Y ≅
+      scalarExceptionalChange k a H.preserves X ⋙ S.lower :=
+  NatIso.ofComponents
+    (fun K ↦ ObjectProperty.isoMk _
+      (@asIso _ _ _ _ ((scalarCompactSupportMap a c.i c.g).app K.obj)
+        (H.compact f c K)))
+    (fun b ↦ ObjectProperty.hom_ext _
+      ((scalarCompactSupportMap a c.i c.g).naturality b.hom))
+
+/-- The prescribed beta: transpose the inverse compact-support comparison followed
+by the scalar extension of the given counit. This is exactly the mates formula,
+so no arbitrary comparison is introduced.
+Source: blueprint displayed transpose (blueprint: det-prop-scalar-six-exceptional). -/
+def scalarExceptionalBeta :
+    R.upper ⋙ scalarExceptionalChange k a H.preserves X ⟶
+      scalarExceptionalChange k a H.preserves Y ⋙ S.upper :=
+  (mateEquiv R.restrictedAdjunction S.restrictedAdjunction
+    (TwoSquare.mk _ _ _ _ (scalarExceptionalGamma k a H c R S).inv)).natTrans
+
+
+-- Keep ordinary derived-category presentations opaque during endpoint unification.
+attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
+  HasDerivedCategory.ofHasKInjectiveResolutions HasDerivedCategory.standard
+  compositionInterchangeIsNormalized
+
+set_option maxHeartbeats 2000000 in
+-- Compare the three derived adjunction presentations without expanding their localizations.
+/-- Geometric composition for beta of an actual compactification of g after f.
+The two right-adjoint identifications are pinned by counits through the normalized
+compact-support model compositor. Thus the left side is the independently defined
+beta of the composite, not a mate of a pasted coefficient square.
+Source: blueprint composition clause and compact-support proof, Composition
+(blueprint: det-prop-scalar-six-exceptional). -/
+def ScalarExceptionalComposition : Prop :=
+  ∀ (Z : Over (Spec (.of k)))
+    [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]
+    (g : Y ⟶ Z) (d : Compactification g.left)
+    (r : Compactification.BoundaryCompactification (c.g ≫ d.i))
+    [IsSchemeTheoreticallyDominant r.obj.obj.i]
+    (T : ScalarExceptionalAdjoint Λ d) (T' : ScalarExceptionalAdjoint Λ' d)
+    (U : ScalarExceptionalAdjoint Λ (scalarExceptionalCompositeCompactification c d r))
+    (U' : ScalarExceptionalAdjoint Λ' (scalarExceptionalCompositeCompactification c d r))
+    (m : ∀ A : DerivedCategory (ModuleRingedComparison.internalModules Λ.X X.left),
+      (openImmersionLowerShriek Λ.X d.i).mapDerivedCategory.obj
+          ((RootCoordinateFace.lower Λ.X c.g).obj
+            ((openImmersionLowerShriek Λ.X c.i).mapDerivedCategory.obj A)) ⟶
+        (RootCoordinateFace.lower Λ.X r.obj.obj.g).obj
+          ((openImmersionLowerShriek Λ.X r.obj.obj.i).mapDerivedCategory.obj
+            ((openImmersionLowerShriek Λ.X c.i).mapDerivedCategory.obj A)))
+    (m' : ∀ A : DerivedCategory (ModuleRingedComparison.internalModules Λ'.X X.left),
+      (openImmersionLowerShriek Λ'.X d.i).mapDerivedCategory.obj
+          ((RootCoordinateFace.lower Λ'.X c.g).obj
+            ((openImmersionLowerShriek Λ'.X c.i).mapDerivedCategory.obj A)) ⟶
+        (RootCoordinateFace.lower Λ'.X r.obj.obj.g).obj
+          ((openImmersionLowerShriek Λ'.X r.obj.obj.i).mapDerivedCategory.obj
+            ((openImmersionLowerShriek Λ'.X c.i).mapDerivedCategory.obj A)))
+    (_hm : ∀ A : DerivedCategory (ModuleRingedComparison.internalModules Λ.X X.left),
+      compositionInterchangeIsNormalized Λ.X c.g d.i r
+      ((openImmersionLowerShriek Λ.X c.i).mapDerivedCategory.obj A) (m A))
+    (_hm' : ∀ A : DerivedCategory (ModuleRingedComparison.internalModules Λ'.X X.left),
+      compositionInterchangeIsNormalized Λ'.X c.g d.i r
+      ((openImmersionLowerShriek Λ'.X c.i).mapDerivedCategory.obj A) (m' A)),
+    ∃ (ψ : U.upper ≅ T.upper ⋙ R.upper) (ψ' : U'.upper ≅ T'.upper ⋙ S.upper),
+      (∀ K : ConstantModelConstructibleFiniteTor Λ.X Z.left,
+        (rightDerivedLowerShriekOfCompactification Λ.X d).map
+          ((rightDerivedLowerShriekOfCompactification Λ.X c).map
+              (ψ.hom.app K).hom ≫ R.counit (T.upper.obj K)) ≫ T.counit K =
+        scalarCompactSupportModelComp Λ c d r (U.upper.obj K).obj (m (U.upper.obj K).obj) ≫
+          U.counit K) ∧
+      (∀ K : ConstantModelConstructibleFiniteTor Λ'.X Z.left,
+        (rightDerivedLowerShriekOfCompactification Λ'.X d).map
+          ((rightDerivedLowerShriekOfCompactification Λ'.X c).map
+              (ψ'.hom.app K).hom ≫ S.counit (T'.upper.obj K)) ≫ T'.counit K =
+        scalarCompactSupportModelComp Λ' c d r (U'.upper.obj K).obj (m' (U'.upper.obj K).obj) ≫
+          U'.counit K) ∧
+      ∀ K : ConstantModelConstructibleFiniteTor Λ.X Z.left,
+        (scalarExceptionalBeta k a H (X := X) (Y := Z) (f := f ≫ g)
+            (scalarExceptionalCompositeCompactification c d r) U U').app K ≫
+            ψ'.hom.app ((scalarExceptionalChange k a H.preserves Z).obj K) =
+          (scalarExceptionalChange k a H.preserves X).map (ψ.hom.app K) ≫
+            (scalarExceptionalBeta k a H c R S).app (T.upper.obj K) ≫
+              S.upper.map ((scalarExceptionalBeta k a H d T T').app K)
+
+/-- Source-open restriction compatibility, with the two restriction identifications
+normalized by the source compositor and the actual exceptional counits. The equation
+is in the ambient full category, hence equally in Dctf.
+Source: blueprint proof, Definition and formal properties
+(blueprint: det-prop-scalar-six-exceptional). -/
+def ScalarExceptionalSourceRestriction : Prop :=
+  ∀ (U : Over (Spec (.of k)))
+    [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom]
+    (j : U ⟶ X) [IsOpenImmersion j.left]
+    (T : ScalarExceptionalAdjoint Λ (c.precomp j.left))
+    (T' : ScalarExceptionalAdjoint Λ' (c.precomp j.left)),
+    ∃ (e : T.upper ⋙
+          (constantModelBoundedConstructible Λ.X U.left ⊓
+            DerivedCategory.finiteTorAmplitude _).ι ≅
+        R.upper ⋙ (constantModelBoundedConstructible Λ.X X.left ⊓
+          DerivedCategory.finiteTorAmplitude _).ι ⋙ scalarSixPull Λ j.left)
+      (e' : T'.upper ⋙
+          (constantModelBoundedConstructible Λ'.X U.left ⊓
+            DerivedCategory.finiteTorAmplitude _).ι ≅
+        S.upper ⋙ (constantModelBoundedConstructible Λ'.X X.left ⊓
+          DerivedCategory.finiteTorAmplitude _).ι ⋙ scalarSixPull Λ' j.left),
+      (∀ K, (rightDerivedLowerShriekOfCompactification Λ.X c).map
+          ((openImmersionLowerShriek Λ.X j.left).mapDerivedCategory.map (e.hom.app K) ≫
+            (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ.X j.left).counit.app
+              (R.upper.obj K).obj) ≫ R.counit K =
+        (mateOpenSourceLowerShriek Λ.X c j.left).hom.app (T.upper.obj K).obj ≫ T.counit K) ∧
+      (∀ K, (rightDerivedLowerShriekOfCompactification Λ'.X c).map
+          ((openImmersionLowerShriek Λ'.X j.left).mapDerivedCategory.map (e'.hom.app K) ≫
+            (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ'.X j.left).counit.app
+              (S.upper.obj K).obj) ≫ S.counit K =
+        (mateOpenSourceLowerShriek Λ'.X c j.left).hom.app (T'.upper.obj K).obj ≫ T'.counit K) ∧
+      ∀ K, (scalarSixChange a U.left).map (e.hom.app K) ≫
+          (scalarSixPullHom a j.left).app (R.upper.obj K).obj ≫
+          (scalarSixPull Λ' j.left).map
+            ((scalarExceptionalBeta k a H c R S).app K).hom =
+        ((scalarExceptionalBeta k a H (X := U) (Y := Y) (f := j ≫ f)
+            (c.precomp j.left) T T').app K).hom ≫
+          e'.hom.app ((scalarExceptionalChange k a H.preserves Y).obj K)
+
+/-- Target-open restriction compatibility. The comparison e is fixed by the actual
+open base-change mate and the counit, so the scalar square concerns the canonical maps.
+Source: blueprint proof, Definition and formal properties
+(blueprint: det-prop-scalar-six-exceptional). -/
+def ScalarExceptionalTargetRestriction : Prop :=
+  ∀ (U V : Over (Spec (.of k)))
+    [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom]
+    [LocallyOfFiniteType V.hom] [QuasiCompact V.hom] [IsSeparated V.hom]
+    (j : U ⟶ X) (q : U ⟶ V) (v : V ⟶ Y)
+    [IsOpenImmersion j.left] [IsOpenImmersion v.left]
+    (sq : IsPullback j.left q.left f.left v.left)
+    (T : ScalarExceptionalAdjoint Λ (c.ofIsPullback sq))
+    (T' : ScalarExceptionalAdjoint Λ' (c.ofIsPullback sq)),
+    ∃ (h : ∀ K : ConstantModelConstructibleFiniteTor Λ.X Y.left,
+        (constantModelBoundedConstructible Λ.X V.left ⊓ DerivedCategory.finiteTorAmplitude _)
+          ((scalarSixPull Λ v.left).obj K.obj))
+      (h' : ∀ K : ConstantModelConstructibleFiniteTor Λ'.X Y.left,
+        (constantModelBoundedConstructible Λ'.X V.left ⊓ DerivedCategory.finiteTorAmplitude _)
+          ((scalarSixPull Λ' v.left).obj K.obj))
+      (e : R.upper ⋙ (constantModelBoundedConstructible Λ.X X.left ⊓
+            DerivedCategory.finiteTorAmplitude _).ι ⋙ scalarSixPull Λ j.left ≅
+        scalarExceptionalPull v.left h ⋙ T.upper ⋙
+          (constantModelBoundedConstructible Λ.X U.left ⊓ DerivedCategory.finiteTorAmplitude _).ι)
+      (e' : S.upper ⋙ (constantModelBoundedConstructible Λ'.X X.left ⊓
+            DerivedCategory.finiteTorAmplitude _).ι ⋙ scalarSixPull Λ' j.left ≅
+        scalarExceptionalPull v.left h' ⋙ T'.upper ⋙
+          (constantModelBoundedConstructible Λ'.X U.left ⊓
+            DerivedCategory.finiteTorAmplitude _).ι),
+      (∀ K, mateOpenTargetLowerShriek Λ.X sq c
+          ((scalarSixPull Λ j.left).obj (R.upper.obj K).obj) ≫
+          (rightDerivedLowerShriekOfCompactification Λ.X (c.ofIsPullback sq)).map
+            (e.hom.app K) ≫ T.counit ((scalarExceptionalPull v.left h).obj K) =
+        (scalarSixPull Λ v.left).map
+          ((rightDerivedLowerShriekOfCompactification Λ.X c).map
+            ((derivedOpenImmersionLowerShriekUpperStarAdjunction Λ.X j.left).counit.app
+              (R.upper.obj K).obj) ≫ R.counit K)) ∧
+      (∀ K, mateOpenTargetLowerShriek Λ'.X sq c
+          ((scalarSixPull Λ' j.left).obj (S.upper.obj K).obj) ≫
+          (rightDerivedLowerShriekOfCompactification Λ'.X (c.ofIsPullback sq)).map
+            (e'.hom.app K) ≫ T'.counit ((scalarExceptionalPull v.left h').obj K) =
+        (scalarSixPull Λ' v.left).map
+          ((rightDerivedLowerShriekOfCompactification Λ'.X c).map
+            ((derivedOpenImmersionLowerShriekUpperStarAdjunction Λ'.X j.left).counit.app
+              (S.upper.obj K).obj) ≫ S.counit K)) ∧
+      ∀ K, ∃ t : (scalarExceptionalChange k a H.preserves V).obj
+            ((scalarExceptionalPull v.left h).obj K) ⟶
+          (scalarExceptionalPull v.left h').obj ((scalarExceptionalChange k a H.preserves Y).obj K),
+        t.hom = (scalarSixPullHom a v.left).app K.obj ∧
+        (scalarSixChange a U.left).map (e.hom.app K) ≫
+            ((scalarExceptionalBeta k a H (c.ofIsPullback sq) T T').app
+              ((scalarExceptionalPull v.left h).obj K)).hom ≫ (T'.upper.map t).hom =
+          (scalarSixPullHom a j.left).app (R.upper.obj K).obj ≫
+            (scalarSixPull Λ' j.left).map
+              ((scalarExceptionalBeta k a H c R S).app K).hom ≫
+            e'.hom.app ((scalarExceptionalChange k a H.preserves Y).obj K)
+
+/-- For an open immersion the comparison is precisely the ordinary pullback scalar
+identification, under the uniquely counit-normalized identification f! = f*.
+Source: blueprint final clause (blueprint: det-prop-scalar-six-exceptional). -/
+def ScalarExceptionalOpenValue : Prop :=
+  ∀ [IsOpenImmersion f.left]
+    (R : ScalarExceptionalAdjoint Λ (Compactification.ofIsOpenImmersion f.left))
+    (S : ScalarExceptionalAdjoint Λ' (Compactification.ofIsOpenImmersion f.left)),
+    ∃ (e : R.upper ⋙ (constantModelBoundedConstructible Λ.X X.left ⊓
+          DerivedCategory.finiteTorAmplitude _).ι ≅
+        (constantModelBoundedConstructible Λ.X Y.left ⊓
+          DerivedCategory.finiteTorAmplitude _).ι ⋙ scalarSixPull Λ f.left)
+      (e' : S.upper ⋙ (constantModelBoundedConstructible Λ'.X X.left ⊓
+          DerivedCategory.finiteTorAmplitude _).ι ≅
+        (constantModelBoundedConstructible Λ'.X Y.left ⊓
+          DerivedCategory.finiteTorAmplitude _).ι ⋙ scalarSixPull Λ' f.left),
+      (∀ K, (scalarSixChange a X.left).map (e.hom.app K) ≫
+          (scalarSixPullHom a f.left).app K.obj =
+        ((scalarExceptionalBeta k a H
+            (Compactification.ofIsOpenImmersion f.left) R S).app K).hom ≫
+          e'.hom.app ((scalarExceptionalChange k a H.preserves Y).obj K)) ∧
+      (∀ K, (openImmersionLowerShriek Λ.X f.left).mapDerivedCategory.map (e.hom.app K) ≫
+          (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ.X f.left).counit.app K.obj =
+        (mateOpenTrivialLowerShriek Λ.X f.left).inv.app (R.upper.obj K).obj ≫
+          R.counit K) ∧
+      (∀ K, (openImmersionLowerShriek Λ'.X f.left).mapDerivedCategory.map (e'.hom.app K) ≫
+          (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ'.X f.left).counit.app K.obj =
+        (mateOpenTrivialLowerShriek Λ'.X f.left).inv.app (S.upper.obj K).obj ≫
+          S.counit K)
+
+end ScalarExceptionalCertificates
+
+attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
+  HasDerivedCategory.ofHasKInjectiveResolutions HasDerivedCategory.standard
+  compositionInterchangeIsNormalized
+
+variable (ell : ℕ) [Fact ell.Prime] (k : Type u) [Field k]
+  [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ell)]
+  (hcd : AlgebraicGeometry.ProEtale.BaseFieldFiniteCD ell k)
+  {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ') (ha : ListedCoefficientMap ell a)
+
+/-- Preservation and invertibility certificates for the original listed-map interface.
+Source: listedCoefficientCtf and scalarSixCompactSupport
+(blueprint: det-prop-scalar-six-exceptional). -/
+theorem scalarExceptionalCertificates (ell : ℕ) [Fact ell.Prime] (k : Type u) [Field k]
+    [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ell)]
+    (hcd : AlgebraicGeometry.ProEtale.BaseFieldFiniteCD ell k)
+    {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ') (ha : ListedCoefficientMap ell a) :
+    ScalarExceptionalCertificates k a where
+  preserves X _ _ _ K := (listedCoefficientCtf ell a ha).2.2 k X K.obj K.property
+  compact f c K := ((scalarSixCompactSupport ell k hcd a ha f).1 c K).1
+
+/-- The actual ordinary derived coefficient functor restricted to Dctf. The membership
+proof is exactly the published listed-coefficient theorem; no flatness is assumed.
+Source: blueprint definition of beta (blueprint: det-prop-scalar-six-exceptional). -/
+def scalarExceptionalChange (X : Over (Spec (.of k)))
+    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] :
+    ConstantModelConstructibleFiniteTor Λ.X X.left ⥤
+      ConstantModelConstructibleFiniteTor Λ'.X X.left :=
+  ScalarExceptionalCertificates.scalarExceptionalChange k a
+    (fun X _ _ _ K ↦ (listedCoefficientCtf ell a ha).2.2 k X K.obj K.property) X
+
+
+variable {X Y : Over (Spec (.of k))}
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+  {f : X ⟶ Y} (c : Compactification f.left)
+  (R : ScalarExceptionalAdjoint Λ c) (S : ScalarExceptionalAdjoint Λ' c)
+
+/-- The compact-support scalar isomorphism on Dctf, formed from the recorded map,
+not from a freely chosen isomorphism between its endpoints.
+Source: blueprint gamma in the definition of beta
+(blueprint: det-prop-scalar-six-exceptional). -/
+def scalarExceptionalGamma :
+    R.lower ⋙ scalarExceptionalChange ell k a ha Y ≅
+      scalarExceptionalChange ell k a ha X ⋙ S.lower :=
+  ScalarExceptionalCertificates.scalarExceptionalGamma k a
+    (scalarExceptionalCertificates ell k hcd a ha) c R S
+
+
+/-- The prescribed beta: transpose the inverse compact-support comparison followed
+by the scalar extension of the given counit. This is exactly the mates formula,
+so no arbitrary comparison is introduced.
+Source: blueprint displayed transpose (blueprint: det-prop-scalar-six-exceptional). -/
+def scalarExceptionalBeta :
+    R.upper ⋙ scalarExceptionalChange ell k a ha X ⟶
+      scalarExceptionalChange ell k a ha Y ⋙ S.upper :=
+  ScalarExceptionalCertificates.scalarExceptionalBeta k a
+    (scalarExceptionalCertificates ell k hcd a ha) c R S
+
+
+set_option maxHeartbeats 2000000 in
+-- Compare the three derived adjunction presentations without expanding their localizations.
+/-- Geometric composition for beta of an actual compactification of g after f.
+The two right-adjoint identifications are pinned by counits through the normalized
+compact-support model compositor. Thus the left side is the independently defined
+beta of the composite, not a mate of a pasted coefficient square.
+Source: blueprint composition clause and compact-support proof, Composition
+(blueprint: det-prop-scalar-six-exceptional). -/
+def ScalarExceptionalComposition : Prop :=
+  ScalarExceptionalCertificates.ScalarExceptionalComposition k a
+    (scalarExceptionalCertificates ell k hcd a ha) c R S
+
+
+/-- Source-open restriction compatibility, with the two restriction identifications
+normalized by the source compositor and the actual exceptional counits. The equation
+is in the ambient full category, hence equally in Dctf.
+Source: blueprint proof, Definition and formal properties
+(blueprint: det-prop-scalar-six-exceptional). -/
+def ScalarExceptionalSourceRestriction : Prop :=
+  ScalarExceptionalCertificates.ScalarExceptionalSourceRestriction k a
+    (scalarExceptionalCertificates ell k hcd a ha) c R S
+
+
+/-- Target-open restriction compatibility. The comparison e is fixed by the actual
+open base-change mate and the counit, so the scalar square concerns the canonical maps.
+Source: blueprint proof, Definition and formal properties
+(blueprint: det-prop-scalar-six-exceptional). -/
+def ScalarExceptionalTargetRestriction : Prop :=
+  ScalarExceptionalCertificates.ScalarExceptionalTargetRestriction k a
+    (scalarExceptionalCertificates ell k hcd a ha) c R S
+
+
+/-- For an open immersion the comparison is precisely the ordinary pullback scalar
+identification, under the uniquely counit-normalized identification f! = f*.
+Source: blueprint final clause (blueprint: det-prop-scalar-six-exceptional). -/
+def ScalarExceptionalOpenValue : Prop :=
+  ScalarExceptionalCertificates.ScalarExceptionalOpenValue k a
+    (scalarExceptionalCertificates ell k hcd a ha) (f := f)
+
+
+
+end AlgebraicGeometry.ProEtale.CondensedRing
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing.ScalarMaps
+
+variable (ell : ℕ) [Fact ell.Prime] (k : Type u) [Field k]
+  [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ell)]
+  (hcd : AlgebraicGeometry.ProEtale.BaseFieldFiniteCD ell k)
+  {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ') (ha : ListedScalarChange ell a)
+
+/-- Preservation and invertibility certificates for successive listed scalar changes.
+Source: listedScalarChangeCtf and scalarSixCompactSupportForScalarMaps
+(blueprint: det-prop-scalar-six-exceptional). -/
+theorem scalarExceptionalCertificates (ell : ℕ) [Fact ell.Prime] (k : Type u) [Field k]
+    [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ell)]
+    (hcd : AlgebraicGeometry.ProEtale.BaseFieldFiniteCD ell k)
+    {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ') (ha : ListedScalarChange ell a) :
+    ScalarExceptionalCertificates k a where
+  preserves X _ _ _ K := listedScalarChangeCtf ell k ha X K
+  compact f c K := ((scalarSixCompactSupportForScalarMaps ell k hcd a ha f).1 c K).1
+
+/-- The actual ordinary derived coefficient functor restricted to Dctf. The membership
+proof uses scalarSixCtf and the canonical unit/tower isomorphisms; no flatness is assumed.
+Source: blueprint definition of beta (blueprint: det-prop-scalar-six-exceptional). -/
+def scalarExceptionalChange (X : Over (Spec (.of k)))
+    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] :
+    ConstantModelConstructibleFiniteTor Λ.X X.left ⥤
+      ConstantModelConstructibleFiniteTor Λ'.X X.left :=
+  ScalarExceptionalCertificates.scalarExceptionalChange k a
+    (fun X _ _ _ K ↦ listedScalarChangeCtf ell k ha X K) X
+
+
+variable {X Y : Over (Spec (.of k))}
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+  {f : X ⟶ Y} (c : Compactification f.left)
+  (R : ScalarExceptionalAdjoint Λ c) (S : ScalarExceptionalAdjoint Λ' c)
+
+/-- The compact-support scalar isomorphism on Dctf, formed from the recorded map,
+not from a freely chosen isomorphism between its endpoints.
+Source: blueprint gamma in the definition of beta
+(blueprint: det-prop-scalar-six-exceptional). -/
+def scalarExceptionalGamma :
+    R.lower ⋙ scalarExceptionalChange ell k a ha Y ≅
+      scalarExceptionalChange ell k a ha X ⋙ S.lower :=
+  ScalarExceptionalCertificates.scalarExceptionalGamma k a
+    (scalarExceptionalCertificates ell k hcd a ha) c R S
+
+
+/-- The prescribed beta: transpose the inverse compact-support comparison followed
+by the scalar extension of the given counit. This is exactly the mates formula,
+so no arbitrary comparison is introduced.
+Source: blueprint displayed transpose (blueprint: det-prop-scalar-six-exceptional). -/
+def scalarExceptionalBeta :
+    R.upper ⋙ scalarExceptionalChange ell k a ha X ⟶
+      scalarExceptionalChange ell k a ha Y ⋙ S.upper :=
+  ScalarExceptionalCertificates.scalarExceptionalBeta k a
+    (scalarExceptionalCertificates ell k hcd a ha) c R S
+
+
+
+set_option maxHeartbeats 2000000 in
+-- Compare the three derived adjunction presentations without expanding their localizations.
+/-- Geometric composition for beta of an actual compactification of g after f.
+The two right-adjoint identifications are pinned by counits through the normalized
+compact-support model compositor. Thus the left side is the independently defined
+beta of the composite, not a mate of a pasted coefficient square.
+Source: blueprint composition clause and compact-support proof, Composition
+(blueprint: det-prop-scalar-six-exceptional). -/
+def ScalarExceptionalComposition : Prop :=
+  ScalarExceptionalCertificates.ScalarExceptionalComposition k a
+    (scalarExceptionalCertificates ell k hcd a ha) c R S
+
+
+/-- Source-open restriction compatibility, with the two restriction identifications
+normalized by the source compositor and the actual exceptional counits. The equation
+is in the ambient full category, hence equally in Dctf.
+Source: blueprint proof, Definition and formal properties
+(blueprint: det-prop-scalar-six-exceptional). -/
+def ScalarExceptionalSourceRestriction : Prop :=
+  ScalarExceptionalCertificates.ScalarExceptionalSourceRestriction k a
+    (scalarExceptionalCertificates ell k hcd a ha) c R S
+
+
+/-- Target-open restriction compatibility. The comparison e is fixed by the actual
+open base-change mate and the counit, so the scalar square concerns the canonical maps.
+Source: blueprint proof, Definition and formal properties
+(blueprint: det-prop-scalar-six-exceptional). -/
+def ScalarExceptionalTargetRestriction : Prop :=
+  ScalarExceptionalCertificates.ScalarExceptionalTargetRestriction k a
+    (scalarExceptionalCertificates ell k hcd a ha) c R S
+
+
+/-- For an open immersion the comparison is precisely the ordinary pullback scalar
+identification, under the uniquely counit-normalized identification f! = f*.
+Source: blueprint final clause (blueprint: det-prop-scalar-six-exceptional). -/
+def ScalarExceptionalOpenValue : Prop :=
+  ScalarExceptionalCertificates.ScalarExceptionalOpenValue k a
+    (scalarExceptionalCertificates ell k hcd a ha) (f := f)
+
+
+/-- The prescribed coefficient mate is invertible in Dctf, with composition,
+source-open and target-open restriction compatibility and the open pullback value.
+The functor parameters are precisely the localizing right adjoints and the preservation
+certificates of sk-thm-existence. The chosen compactification is unrestricted.
+The composite-adjunction expression uses the compact-support composition comparison
+of det-prop-scalar-six-compact-support to identify the comparison for the composite.
+
+Source: blueprint latest, det-prop-scalar-six-exceptional, all clauses
+(blueprint: det-prop-scalar-six-exceptional).
+
+Proof (the eight steps of the accepted DAG split):
+1. *Definition and formal properties.* By [sk-thm-existence] (4), $f^!K\in\Dctf(X,\Lambda)$, so
+the comparison $\gamma^!_{f,f^!K}$ is defined and invertible, and
+$(f^!K)_{\Lambda'}\in\Dctf(X,\Lambda')$ by [det-prop-scalar-six-ctf]. Thus the displayed
+transpose defines a morphism in $\Dctf(X,\Lambda')$. For composable $X\xrightarrow
+fY\xrightarrow gZ$, [def-weil-pbc-composite-adjunction] identifies the counit of the composite
+with the composite of counits; the composition compatibility of $\gamma^!$ in
+[det-prop-scalar-six-compact-support] then gives, by the defining transpose,
+$\beta_{gf,K}=f^!(\beta_{g,K})\circ\beta_{f,g^!K}$. For an open immersion $u$,
+[det-sf-mate-open-restriction] gives $u^!=u^*$ and [det-prop-scalar-six-pullback] identifies
+scalar extension with pullback; hence the transpose of the scalar-extended open counit is the
+pullback identification, for an open $u:U\hookrightarrow X$, the composition equation applied to
+$fu$, with this open identification for $u$, identifies $u^*\beta_{f,K}$ with $\beta_{fu,K}$.
+For a target open $v:V\hookrightarrow Y$ and $u:X_V\hookrightarrow X$, the open-restriction
+identification is obtained from
+$\operatorname{Hom}(u_!C,f^!K)=\operatorname{Hom}(Rf_!u_!C,K)=\operatorname{Hom}(v_!Rf_{V,!}C,K)=\
+operatorname{Hom}(Rf_{V,!}C,v^*K)$.
+Apply scalar extension to these bijections. The open-extension comparisons and the composition
+comparison for $\gamma^!$ identify their counit composites, so transposition identifies
+$u^*\beta_{f,K}$ with $\beta_{f_V,v^*K}$ as well.
+2. *Closed supports and the chosen right adjoint.* Let $i:Z\hookrightarrow Y$ be closed and
+$j:V\hookrightarrow Y$ its open complement. The field $k$ is Noetherian (its only ideals are
+$0,k$), so $Y$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Its open subsets are
+quasi-compact: the finite unions of any open cover have a maximal member by the ascending-chain
+condition on opens. Also $Y$ is quasi-separated by
+[lem-weil-pbc-locally-noetherian-quasi-separated]. Thus $Y$ is qcqs and $j$ is quasi-compact, as
+required below. The closed immersion is proper by [lem-weil-pbc-closed-immersion-proper] (a);
+its compactification with identity open part gives $Ri_!=i_*$. Because $K$ is bounded, apply the
+bounded-below condensed-ring recollement [lem-weil-pbc-condensed-open-closed-recollement] and
+put $H=Ri^!K$ for its ambient right adjoint. Its statement gives the distinguished triangle
+$i_*H\to K\to Rj_*j^*K\to i_*H[1]$ with first arrow explicitly the counit. The bounded-below
+restriction of the derived sections-with-support adjunction in
+[det-lem-formal-closed-support-derived] (1) identifies $H$ with $R\underline\Gamma_ZK$; thus
+this is the closed-support construction, with the normalization of its first arrow supplied by
+the recollement statement. By [det-thm-sf-ctf-stability-direct-images] (1),(3), $j^*K$ and
+$Rj_*j^*K$ are constructible of finite Tor amplitude; the fibre $i_*H$ is too, since boundedness
+and constructibility and finite Tor amplitude are preserved in triangles. By
+[det-sf-open-closed-sequence-ring-sheaf] (2), $i_*$ is exact and $i^*i_*\simeq\mathrm{id}$ on
+module sheaves; these identities hold termwise on complexes, with $i^*$ exact because the
+coefficient sheaves are pulled back. Thus $H\simeq i^*i_*H\in\Dctf(Z,\Lambda)$ by the pullback
+assertion of [det-thm-sf-ctf-stability-direct-images]. For $C\in\Loc(\Dctf(Z,\Lambda))$ the two
+adjunctions give
+$\operatorname{Hom}(C,H)\simeq\operatorname{Hom}(i_*C,K)\simeq\operatorname{Hom}(C,i^!K)$, with
+$i^!$ as in [sk-thm-existence]. These natural bijections identify $H$ with $i^!K$ and identify
+the first arrow of the triangle with its counit. All objects used are in the full localizing
+subcategories, so this identification uses the restricted adjunction, not an assertion that the
+ambient support right adjoint preserves the entire localizing category.
+3. *Closed-immersion comparison, including the connecting square.* Derived tensor is exact in
+each variable by [lem-weil-pbc-ringed-projection-mate-exact], so scalar extension is exact.
+Apply this exact derived scalar functor to the triangle of step 2 and compare it with the
+triangle for $K_{\Lambda'}$. On the middle terms take $b=\mathrm{id}_{K_{\Lambda'}}$; on the
+third terms take $c=\gamma_{j,j^*K}$ followed by the pullback comparison. This $c$ is an
+isomorphism by [det-prop-scalar-six-direct-image] (1) and [det-prop-scalar-six-pullback] (1).
+Its square with the units $K\to Rj_*j^*K$ commutes by [det-prop-scalar-six-direct-image] (2).
+Rotate the two distinguished triangles so this is their first square, apply TR3, and rotate back
+([def-weil-triangulated-category]); obtain a map $a$ on their first terms making all three
+squares commute. Identify its source with $i_*((i^!K)_{\Lambda'})$ by
+[det-prop-scalar-six-pullback] (2). Full faithfulness from
+[det-sf-open-closed-sequence-ring-sheaf] (2) gives $a=i_*\alpha$ for a unique
+$\alpha:(i^!K)_{\Lambda'}\to i^!(K_{\Lambda'})$. Its first square says
+$\epsilon_{K_{\Lambda'}}\circ i_*\alpha=(\epsilon_K)_{\Lambda'}\circ(\gamma^!_{i,i^!K})^{-1}$:
+for a closed immersion the compactification has identity open part, so $\gamma^!_i$ is the
+closed-pushforward scalar comparison ([det-prop-scalar-six-compact-support],
+[det-prop-scalar-six-pullback] (2)). The adjunction bijection therefore gives
+$\alpha=\beta_{i,K}$. Now [lem-sf-triangle-morphism-iso] applied to $(a,b,c)$ makes
+$a=i_*\beta_{i,K}$ invertible; applying $i^*$ and $i^*i_*\simeq\mathrm{id}$ makes $\beta_{i,K}$
+invertible. This argument constructs the connecting square by TR3, rather than inferring it from
+two commuting squares.
+4. *Projective-line adjunctions at each coefficient stage.* Write $P=\mathbf P^1_Y$, $q:P\to Y$,
+$W=P\times_YP$, with projections $p_1,p_2$ and diagonal $\Delta$. For a finite admissible ring
+$A$, choose $N=\ell^r$ killing $A$; $N$ is invertible on the standing schemes and $Y$ is
+Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since it is finite type over the
+Noetherian field $k$. [lem-asd-ordinary-finite-p1-adjunction] gives $Rq_*\dashv
+G_A=q^*(-)(1)[2]$ on the ordinary etale derived categories, with counit $\epsilon_K=(1_K\otimes
+t_A)\circ\pi^{-1}$, where $t_A$ is the projection of the Kummer decomposition.
+[det-ctf-finite-comparison-whole] and [det-ctf-finite-comparison-localizing] carry this
+adjunction to the pro-etale localizing categories, compatibly with $Rq_*$ and pullback. The
+tensor identification is the canonical pullback tensor isomorphism of
+[lem-weil-pbc-ringed-topoi-derived-tensor-pullback], so the counit retains precisely this
+formula. For $\Lambda=E,\Qlb$, [det-prop-p1-adjunction-rational-unit-counit] and
+[det-prop-p1-adjunction-rational-triangle] give the diagonal unit, this same trace counit, and
+their triangle identities. For $\Lambda=\mathcal O_E$ (including $\Zl$), use the class and trace
+of [det-prop-diagonal-tower-trace] and [det-prop-diagonal-tower-coefficients] and the proper
+base-change and projection isomorphisms of [sk-thm-sf-pf-adic]. Define $\eta_M$ by
+$M=Rp_{2*}\Delta_*M\to Rp_{2*}(p_1^*M(1)[2])\simeq q^*Rq_*M(1)[2]$, with arrow
+$Rp_{2*}(1_M\otimes\delta_\Lambda)$, and define $\epsilon_K=(1_K\otimes
+t_\Lambda)\circ\pi^{-1}$. Substitution of these formulas, followed by the projection and proper
+base-change identifications, gives
+$$\epsilon_{Rq_*M}\,Rq_*\eta_M=Rq_*\bigl(1_M\otimes(t_{p_1}\,Rp_{1*}\delta_\Lambda)\bigr)=1_{Rq_*M
+},\qquad
+G_\Lambda\epsilon_K\,\eta_{G_\Lambda K}=1_{G_\Lambda
+K}\otimes(t_{p_2}\,Rp_{2*}\delta_\Lambda)=1_{G_\Lambda K}.$$ Here both inner composites are
+identities by the two integration identities in the cited tower statements. Thus these formulas
+are an adjunction over $\mathcal O_E$ as well. In each case $G_\Lambda$ preserves $\Dctf$:
+pullback does so by [det-thm-sf-ctf-stability-direct-images] (1), and twist by the locally free
+rank-one Kummer line and shift preserve boundedness, constructibility and finite Tor amplitude.
+Hence these adjunctions restrict to $\Dctf$. The projection $q$ is proper by
+[lemma-nagata-projective-space-base-change-proper]. In each case $Rq_!=Rq_*$ by the proper
+compactification in [sk-thm-existence], and uniqueness of the restricted right adjoint
+identifies $q^!$ with $G_\Lambda$ and its counit with $\epsilon$. No rational-coefficient
+result is being applied with integral coefficients.
+5. *Coefficient comparison for the projective-line trace.* For finite $A\to B$, choose one
+$\ell^r$ killing both rings. The Cartier coefficient compatibility [sk-lem-geo-cartier]
+identifies the scalar extension of the Kummer class $h_A=c_1(\mathcal O_P(1))$ with $h_B$. The
+unit compatibility of [det-prop-scalar-six-direct-image] (2) identifies the other component of
+the decomposition $b_A:A_Y(1)[2]\oplus A_Y\xrightarrow{\sim}Rq_*A_P(1)[2]$ of
+[lem-asd-ordinary-finite-p1-adjunction]. Hence $\gamma_q\circ(b_A)_B=b_B$, under pullback and
+twist identifications. Since scalar extension preserves finite direct sums and inverse
+isomorphisms, $t_B\circ\gamma_q=(t_A)_B$ for $t_A=\operatorname{pr}_2b_A^{-1}$; flatness of
+$A\to B$ is unnecessary. Over $\Zl$ and $\mathcal O_E$, the trace reductions are the finite
+traces by [det-prop-diagonal-tower-trace] (1) and [det-prop-diagonal-tower-coefficients] (1);
+the corresponding diagonal reductions follow from [det-prop-diagonal-tower-limit] (3) and the
+coefficient statement. For $\mathcal O_E\to\mathcal O_F$, both traces and classes are extensions
+of those over $\Zl$, so transitivity of scalar extension ([det-prop-scalar-six-pullback] (3))
+identifies their extensions. For $\mathcal O_E\to E$, $E\to F$ and $E\to\Qlb$, they are the
+scalar extensions stated in [det-prop-diagonal-tower-coefficients] (2); transitivity gives the
+finite-extension compatibility too. Finally every listed $\mathcal O_E\to A$ factors as
+$\mathcal O_E\to\mathcal O_E/\pi_E^r\to A$, since $A$ is killed by a power of $\pi_E$. Use the
+recorded reduction compatibility for the first map and the just-proved arbitrary finite-ring
+compatibility for the second. This proves $t_{\Lambda'}\circ\gamma_q=(t_\Lambda)_{\Lambda'}$ for
+every elementary listed map, and then for composites by transitivity. In particular no assertion
+that tensoring by an arbitrary finite ring commutes with an unqualified inverse limit is needed.
+6. *The canonical projective-line comparison.* Let $T$ denote scalar extension and
+$\tau_K:T(G_\Lambda K)\xrightarrow{\sim}G_{\Lambda'}(TK)$ the pullback-and-twist identification;
+pullback compatibility is [det-prop-scalar-six-pullback] (1), and twist compatibility follows by
+extending the rank-one roots-of-unity line used in the preceding Kummer and tower constructions.
+For the counits of step 4 the trace identity of step 5 and the canonical projection maps give
+$$\epsilon^{\Lambda'}_{TK}\circ Rq_*(\tau_K)\circ\gamma_{q,G_\Lambda K}=T(\epsilon^\Lambda_K).$$
+To check the projection-map part of this equality, use its definition as the transpose of
+$q^*(K\otimes Rq_*L)\simeq q^*K\otimes q^*Rq_*L\xrightarrow{1\otimes\epsilon_L}q^*K\otimes L$.
+Scalar extension carries this to the same expression over $\Lambda'$: its tensor identification
+is [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] applied to coefficient change, and its
+counit comparison is [det-prop-scalar-six-direct-image] (2). Equality of these transposes gives
+the projection square; composing with $1\otimes t$ gives the displayed equation. This equation
+says exactly that $\tau_K$ is the transpose defining $\beta_{q,K}$, since $\gamma_q^!=\gamma_q$
+for proper $q$ ([det-prop-scalar-six-compact-support]). The adjunction bijection identifies
+$\beta_{q,K}$ with $\tau_K$, so it is an isomorphism.
+7. *Affine space, including dimension zero.* The projection $\mathbf A^1_Y\to Y$ is $q\circ u$
+with $u:\mathbf A^1_Y\hookrightarrow\mathbf P^1_Y$ open, so step 1 and step 6 give its
+invertible comparison. For $n=0$ the projection is the identity: its counit and compact-support
+comparison are identities, hence so is $\beta$. Inductively write the projection of $\mathbf
+A^n_Y=\mathbf A^1_{\mathbf A^{n-1}_Y}$ as its affine-line projection followed by the projection
+of $\mathbf A^{n-1}_Y$. The composition identity of step 1 expresses its $\beta$ as a composite
+of two isomorphisms (functors preserve inverses). This proves the assertion for every $n\geq0$.
+8. *General morphisms and the affine factorization.* Step 1 and [det-sf-mate-open-restriction]
+(3) reduce to a finite affine open cover of $X$. If $X=\operatorname{Spec}B$ is affine of finite
+type over $k$, choose algebra generators $b_1,\ldots,b_n$; the surjection $k[t_1,\ldots,t_n]\to
+B$, $t_a\mapsto b_a$, defines a closed immersion $\iota:X\hookrightarrow\mathbf A^n_k$
+([def-weil-finite-type-morphism], [def-weil-closed-immersion]). The graph $\Gamma_f:X\to
+X\times_kY$ is the pullback of the closed diagonal $Y\to Y\times_kY$ along
+$(x,y)\mapsto(f(x),y)$, since $Y$ is separated ([def-weil-proper-morphism]). The map $(\iota,f)$
+factors as $\Gamma_f$ followed by $\iota\times1_Y:X\times_kY\to\mathbf A^n_k\times_kY$. Both are
+closed immersions: on affine charts pullback of a surjection $R\to R/I$ is $R'\to R'/IR'$, and
+compositions of surjections are surjective. Thus the affine description of
+[def-weil-closed-immersion] verifies the graph argument and its composition directly. Now $f$ is
+this closed immersion followed by $\mathbf A^n_Y\to Y$; steps 3 and 7 and the composition
+identity prove its comparison invertible. Local detection finishes the proof on $X$. If $X$ is
+empty there are no local checks and the derived category is zero, so the assertion remains
+valid.
+-/
+theorem scalarSixExceptional :
+    (∀ K : ConstantModelConstructibleFiniteTor Λ.X Y.left,
+      IsIso ((scalarExceptionalBeta ell k (hcd := hcd) a ha c R S).app K)) ∧
+    ScalarExceptionalComposition ell k (hcd := hcd) a ha c R S ∧
+    ScalarExceptionalSourceRestriction ell k (hcd := hcd) a ha c R S ∧
+    ScalarExceptionalTargetRestriction ell k (hcd := hcd) a ha c R S ∧
+    ScalarExceptionalOpenValue ell k (hcd := hcd) a ha (f := f) := by
+  sorry
+
+
+end AlgebraicGeometry.ProEtale.CondensedRing.ScalarMaps
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+variable (ell : ℕ) [Fact ell.Prime] (k : Type u) [Field k]
+  [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ell)]
+  (hcd : AlgebraicGeometry.ProEtale.BaseFieldFiniteCD ell k)
+  {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ') (ha : ListedCoefficientMap ell a)
+  {X Y : Over (Spec (.of k))}
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+  {f : X ⟶ Y} (c : Compactification f.left)
+  (R : ScalarExceptionalAdjoint Λ c) (S : ScalarExceptionalAdjoint Λ' c)
+
+/-- The prescribed coefficient mate is invertible in Dctf, with composition,
+source-open and target-open restriction compatibility and the open pullback value.
+The functor parameters are precisely the localizing right adjoints and the preservation
+certificates of sk-thm-existence. The chosen compactification is unrestricted.
+The composite-adjunction expression uses the compact-support composition comparison
+of det-prop-scalar-six-compact-support to identify the comparison for the composite.
+
+Source: blueprint latest, det-prop-scalar-six-exceptional, all clauses
+(blueprint: det-prop-scalar-six-exceptional).
+
+Proof (the eight steps of the accepted DAG split):
+1. *Definition and formal properties.* By [sk-thm-existence] (4), $f^!K\in\Dctf(X,\Lambda)$, so
+the comparison $\gamma^!_{f,f^!K}$ is defined and invertible, and
+$(f^!K)_{\Lambda'}\in\Dctf(X,\Lambda')$ by [det-prop-scalar-six-ctf]. Thus the displayed
+transpose defines a morphism in $\Dctf(X,\Lambda')$. For composable $X\xrightarrow
+fY\xrightarrow gZ$, [def-weil-pbc-composite-adjunction] identifies the counit of the composite
+with the composite of counits; the composition compatibility of $\gamma^!$ in
+[det-prop-scalar-six-compact-support] then gives, by the defining transpose,
+$\beta_{gf,K}=f^!(\beta_{g,K})\circ\beta_{f,g^!K}$. For an open immersion $u$,
+[det-sf-mate-open-restriction] gives $u^!=u^*$ and [det-prop-scalar-six-pullback] identifies
+scalar extension with pullback; hence the transpose of the scalar-extended open counit is the
+pullback identification, for an open $u:U\hookrightarrow X$, the composition equation applied to
+$fu$, with this open identification for $u$, identifies $u^*\beta_{f,K}$ with $\beta_{fu,K}$.
+For a target open $v:V\hookrightarrow Y$ and $u:X_V\hookrightarrow X$, the open-restriction
+identification is obtained from
+$\operatorname{Hom}(u_!C,f^!K)=\operatorname{Hom}(Rf_!u_!C,K)=\operatorname{Hom}(v_!Rf_{V,!}C,K)=\
+operatorname{Hom}(Rf_{V,!}C,v^*K)$.
+Apply scalar extension to these bijections. The open-extension comparisons and the composition
+comparison for $\gamma^!$ identify their counit composites, so transposition identifies
+$u^*\beta_{f,K}$ with $\beta_{f_V,v^*K}$ as well.
+2. *Closed supports and the chosen right adjoint.* Let $i:Z\hookrightarrow Y$ be closed and
+$j:V\hookrightarrow Y$ its open complement. The field $k$ is Noetherian (its only ideals are
+$0,k$), so $Y$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Its open subsets are
+quasi-compact: the finite unions of any open cover have a maximal member by the ascending-chain
+condition on opens. Also $Y$ is quasi-separated by
+[lem-weil-pbc-locally-noetherian-quasi-separated]. Thus $Y$ is qcqs and $j$ is quasi-compact, as
+required below. The closed immersion is proper by [lem-weil-pbc-closed-immersion-proper] (a);
+its compactification with identity open part gives $Ri_!=i_*$. Because $K$ is bounded, apply the
+bounded-below condensed-ring recollement [lem-weil-pbc-condensed-open-closed-recollement] and
+put $H=Ri^!K$ for its ambient right adjoint. Its statement gives the distinguished triangle
+$i_*H\to K\to Rj_*j^*K\to i_*H[1]$ with first arrow explicitly the counit. The bounded-below
+restriction of the derived sections-with-support adjunction in
+[det-lem-formal-closed-support-derived] (1) identifies $H$ with $R\underline\Gamma_ZK$; thus
+this is the closed-support construction, with the normalization of its first arrow supplied by
+the recollement statement. By [det-thm-sf-ctf-stability-direct-images] (1),(3), $j^*K$ and
+$Rj_*j^*K$ are constructible of finite Tor amplitude; the fibre $i_*H$ is too, since boundedness
+and constructibility and finite Tor amplitude are preserved in triangles. By
+[det-sf-open-closed-sequence-ring-sheaf] (2), $i_*$ is exact and $i^*i_*\simeq\mathrm{id}$ on
+module sheaves; these identities hold termwise on complexes, with $i^*$ exact because the
+coefficient sheaves are pulled back. Thus $H\simeq i^*i_*H\in\Dctf(Z,\Lambda)$ by the pullback
+assertion of [det-thm-sf-ctf-stability-direct-images]. For $C\in\Loc(\Dctf(Z,\Lambda))$ the two
+adjunctions give
+$\operatorname{Hom}(C,H)\simeq\operatorname{Hom}(i_*C,K)\simeq\operatorname{Hom}(C,i^!K)$, with
+$i^!$ as in [sk-thm-existence]. These natural bijections identify $H$ with $i^!K$ and identify
+the first arrow of the triangle with its counit. All objects used are in the full localizing
+subcategories, so this identification uses the restricted adjunction, not an assertion that the
+ambient support right adjoint preserves the entire localizing category.
+3. *Closed-immersion comparison, including the connecting square.* Derived tensor is exact in
+each variable by [lem-weil-pbc-ringed-projection-mate-exact], so scalar extension is exact.
+Apply this exact derived scalar functor to the triangle of step 2 and compare it with the
+triangle for $K_{\Lambda'}$. On the middle terms take $b=\mathrm{id}_{K_{\Lambda'}}$; on the
+third terms take $c=\gamma_{j,j^*K}$ followed by the pullback comparison. This $c$ is an
+isomorphism by [det-prop-scalar-six-direct-image] (1) and [det-prop-scalar-six-pullback] (1).
+Its square with the units $K\to Rj_*j^*K$ commutes by [det-prop-scalar-six-direct-image] (2).
+Rotate the two distinguished triangles so this is their first square, apply TR3, and rotate back
+([def-weil-triangulated-category]); obtain a map $a$ on their first terms making all three
+squares commute. Identify its source with $i_*((i^!K)_{\Lambda'})$ by
+[det-prop-scalar-six-pullback] (2). Full faithfulness from
+[det-sf-open-closed-sequence-ring-sheaf] (2) gives $a=i_*\alpha$ for a unique
+$\alpha:(i^!K)_{\Lambda'}\to i^!(K_{\Lambda'})$. Its first square says
+$\epsilon_{K_{\Lambda'}}\circ i_*\alpha=(\epsilon_K)_{\Lambda'}\circ(\gamma^!_{i,i^!K})^{-1}$:
+for a closed immersion the compactification has identity open part, so $\gamma^!_i$ is the
+closed-pushforward scalar comparison ([det-prop-scalar-six-compact-support],
+[det-prop-scalar-six-pullback] (2)). The adjunction bijection therefore gives
+$\alpha=\beta_{i,K}$. Now [lem-sf-triangle-morphism-iso] applied to $(a,b,c)$ makes
+$a=i_*\beta_{i,K}$ invertible; applying $i^*$ and $i^*i_*\simeq\mathrm{id}$ makes $\beta_{i,K}$
+invertible. This argument constructs the connecting square by TR3, rather than inferring it from
+two commuting squares.
+4. *Projective-line adjunctions at each coefficient stage.* Write $P=\mathbf P^1_Y$, $q:P\to Y$,
+$W=P\times_YP$, with projections $p_1,p_2$ and diagonal $\Delta$. For a finite admissible ring
+$A$, choose $N=\ell^r$ killing $A$; $N$ is invertible on the standing schemes and $Y$ is
+Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since it is finite type over the
+Noetherian field $k$. [lem-asd-ordinary-finite-p1-adjunction] gives $Rq_*\dashv
+G_A=q^*(-)(1)[2]$ on the ordinary etale derived categories, with counit $\epsilon_K=(1_K\otimes
+t_A)\circ\pi^{-1}$, where $t_A$ is the projection of the Kummer decomposition.
+[det-ctf-finite-comparison-whole] and [det-ctf-finite-comparison-localizing] carry this
+adjunction to the pro-etale localizing categories, compatibly with $Rq_*$ and pullback. The
+tensor identification is the canonical pullback tensor isomorphism of
+[lem-weil-pbc-ringed-topoi-derived-tensor-pullback], so the counit retains precisely this
+formula. For $\Lambda=E,\Qlb$, [det-prop-p1-adjunction-rational-unit-counit] and
+[det-prop-p1-adjunction-rational-triangle] give the diagonal unit, this same trace counit, and
+their triangle identities. For $\Lambda=\mathcal O_E$ (including $\Zl$), use the class and trace
+of [det-prop-diagonal-tower-trace] and [det-prop-diagonal-tower-coefficients] and the proper
+base-change and projection isomorphisms of [sk-thm-sf-pf-adic]. Define $\eta_M$ by
+$M=Rp_{2*}\Delta_*M\to Rp_{2*}(p_1^*M(1)[2])\simeq q^*Rq_*M(1)[2]$, with arrow
+$Rp_{2*}(1_M\otimes\delta_\Lambda)$, and define $\epsilon_K=(1_K\otimes
+t_\Lambda)\circ\pi^{-1}$. Substitution of these formulas, followed by the projection and proper
+base-change identifications, gives
+$$\epsilon_{Rq_*M}\,Rq_*\eta_M=Rq_*\bigl(1_M\otimes(t_{p_1}\,Rp_{1*}\delta_\Lambda)\bigr)=1_{Rq_*M
+},\qquad
+G_\Lambda\epsilon_K\,\eta_{G_\Lambda K}=1_{G_\Lambda
+K}\otimes(t_{p_2}\,Rp_{2*}\delta_\Lambda)=1_{G_\Lambda K}.$$ Here both inner composites are
+identities by the two integration identities in the cited tower statements. Thus these formulas
+are an adjunction over $\mathcal O_E$ as well. In each case $G_\Lambda$ preserves $\Dctf$:
+pullback does so by [det-thm-sf-ctf-stability-direct-images] (1), and twist by the locally free
+rank-one Kummer line and shift preserve boundedness, constructibility and finite Tor amplitude.
+Hence these adjunctions restrict to $\Dctf$. The projection $q$ is proper by
+[lemma-nagata-projective-space-base-change-proper]. In each case $Rq_!=Rq_*$ by the proper
+compactification in [sk-thm-existence], and uniqueness of the restricted right adjoint
+identifies $q^!$ with $G_\Lambda$ and its counit with $\epsilon$. No rational-coefficient
+theorem is being applied with integral coefficients.
+5. *Coefficient comparison for the projective-line trace.* For finite $A\to B$, choose one
+$\ell^r$ killing both rings. The Cartier coefficient compatibility [sk-lem-geo-cartier]
+identifies the scalar extension of the Kummer class $h_A=c_1(\mathcal O_P(1))$ with $h_B$. The
+unit compatibility of [det-prop-scalar-six-direct-image] (2) identifies the other component of
+the decomposition $b_A:A_Y(1)[2]\oplus A_Y\xrightarrow{\sim}Rq_*A_P(1)[2]$ of
+[lem-asd-ordinary-finite-p1-adjunction]. Hence $\gamma_q\circ(b_A)_B=b_B$, under pullback and
+twist identifications. Since scalar extension preserves finite direct sums and inverse
+isomorphisms, $t_B\circ\gamma_q=(t_A)_B$ for $t_A=\operatorname{pr}_2b_A^{-1}$; flatness of
+$A\to B$ is unnecessary. Over $\Zl$ and $\mathcal O_E$, the trace reductions are the finite
+traces by [det-prop-diagonal-tower-trace] (1) and [det-prop-diagonal-tower-coefficients] (1);
+the corresponding diagonal reductions follow from [det-prop-diagonal-tower-limit] (3) and the
+coefficient statement. For $\mathcal O_E\to\mathcal O_F$, both traces and classes are extensions
+of those over $\Zl$, so transitivity of scalar extension ([det-prop-scalar-six-pullback] (3))
+identifies their extensions. For $\mathcal O_E\to E$, $E\to F$ and $E\to\Qlb$, they are the
+scalar extensions stated in [det-prop-diagonal-tower-coefficients] (2); transitivity gives the
+finite-extension compatibility too. Finally every listed $\mathcal O_E\to A$ factors as
+$\mathcal O_E\to\mathcal O_E/\pi_E^r\to A$, since $A$ is killed by a power of $\pi_E$. Use the
+recorded reduction compatibility for the first map and the just-proved arbitrary finite-ring
+compatibility for the second. This proves $t_{\Lambda'}\circ\gamma_q=(t_\Lambda)_{\Lambda'}$ for
+every elementary listed map, and then for composites by transitivity. In particular no assertion
+that tensoring by an arbitrary finite ring commutes with an unqualified inverse limit is needed.
+6. *The canonical projective-line comparison.* Let $T$ denote scalar extension and
+$\tau_K:T(G_\Lambda K)\xrightarrow{\sim}G_{\Lambda'}(TK)$ the pullback-and-twist identification;
+pullback compatibility is [det-prop-scalar-six-pullback] (1), and twist compatibility follows by
+extending the rank-one roots-of-unity line used in the preceding Kummer and tower constructions.
+For the counits of step 4 the trace identity of step 5 and the canonical projection maps give
+$$\epsilon^{\Lambda'}_{TK}\circ Rq_*(\tau_K)\circ\gamma_{q,G_\Lambda K}=T(\epsilon^\Lambda_K).$$
+To check the projection-map part of this equality, use its definition as the transpose of
+$q^*(K\otimes Rq_*L)\simeq q^*K\otimes q^*Rq_*L\xrightarrow{1\otimes\epsilon_L}q^*K\otimes L$.
+Scalar extension carries this to the same expression over $\Lambda'$: its tensor identification
+is [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] applied to coefficient change, and its
+counit comparison is [det-prop-scalar-six-direct-image] (2). Equality of these transposes gives
+the projection square; composing with $1\otimes t$ gives the displayed equation. This equation
+says exactly that $\tau_K$ is the transpose defining $\beta_{q,K}$, since $\gamma_q^!=\gamma_q$
+for proper $q$ ([det-prop-scalar-six-compact-support]). The adjunction bijection identifies
+$\beta_{q,K}$ with $\tau_K$, so it is an isomorphism.
+7. *Affine space, including dimension zero.* The projection $\mathbf A^1_Y\to Y$ is $q\circ u$
+with $u:\mathbf A^1_Y\hookrightarrow\mathbf P^1_Y$ open, so step 1 and step 6 give its
+invertible comparison. For $n=0$ the projection is the identity: its counit and compact-support
+comparison are identities, hence so is $\beta$. Inductively write the projection of $\mathbf
+A^n_Y=\mathbf A^1_{\mathbf A^{n-1}_Y}$ as its affine-line projection followed by the projection
+of $\mathbf A^{n-1}_Y$. The composition identity of step 1 expresses its $\beta$ as a composite
+of two isomorphisms (functors preserve inverses). This proves the assertion for every $n\geq0$.
+8. *General morphisms and the affine factorization.* Step 1 and [det-sf-mate-open-restriction]
+(3) reduce to a finite affine open cover of $X$. If $X=\operatorname{Spec}B$ is affine of finite
+type over $k$, choose algebra generators $b_1,\ldots,b_n$; the surjection $k[t_1,\ldots,t_n]\to
+B$, $t_a\mapsto b_a$, defines a closed immersion $\iota:X\hookrightarrow\mathbf A^n_k$
+([def-weil-finite-type-morphism], [def-weil-closed-immersion]). The graph $\Gamma_f:X\to
+X\times_kY$ is the pullback of the closed diagonal $Y\to Y\times_kY$ along
+$(x,y)\mapsto(f(x),y)$, since $Y$ is separated ([def-weil-proper-morphism]). The map $(\iota,f)$
+factors as $\Gamma_f$ followed by $\iota\times1_Y:X\times_kY\to\mathbf A^n_k\times_kY$. Both are
+closed immersions: on affine charts pullback of a surjection $R\to R/I$ is $R'\to R'/IR'$, and
+compositions of surjections are surjective. Thus the affine description of
+[def-weil-closed-immersion] verifies the graph argument and its composition directly. Now $f$ is
+this closed immersion followed by $\mathbf A^n_Y\to Y$; steps 3 and 7 and the composition
+identity prove its comparison invertible. Local detection finishes the proof on $X$. If $X$ is
+empty there are no local checks and the derived category is zero, so the assertion remains
+valid.
+-/
+theorem scalarSixExceptional :
+    (∀ K : ConstantModelConstructibleFiniteTor Λ.X Y.left,
+      IsIso ((scalarExceptionalBeta ell k (hcd := hcd) a ha c R S).app K)) ∧
+    ScalarExceptionalComposition ell k (hcd := hcd) a ha c R S ∧
+    ScalarExceptionalSourceRestriction ell k (hcd := hcd) a ha c R S ∧
+    ScalarExceptionalTargetRestriction ell k (hcd := hcd) a ha c R S ∧
+    ScalarExceptionalOpenValue ell k (hcd := hcd) a ha (f := f) := by
+  obtain ⟨hfin, hint, hfield, hloc, hclosure, hintfin⟩ :=
+    listedCoefficientPresentationTransport ell
+  have hscalar {Γ Γ' : ScalarSixRing.{u}} (b : Γ ⟶ Γ')
+      (hb : ListedCoefficientMap ell b) : ListedScalarChange ell b := by
+    induction hb with
+    | finite A B hA hB φ b hb => exact .ofListed (hfin A B hA hB φ b hb)
+    | integers E F h b hb => exact .ofListed (hint E F h b hb)
+    | fields E F h b hb => exact .ofListed (hfield E F h b hb)
+    | localization E b hb => exact .ofListed (hloc E b hb)
+    | algebraicClosure E b hb => exact .ofListed (hclosure E b hb)
+    | integralFinite E A hA b hb => exact .ofListed (hintfin E A hA b hb)
+    | algebraicClosureIdentity =>
+      exact .identity _ ((listedCoefficientCtf ell _ .algebraicClosureIdentity).1)
+    | comp b d hb hd ihb ihd => exact .comp b d ihb ihd
+  exact ScalarMaps.scalarSixExceptional ell k hcd a (hscalar a ha) c R S
+
+
+end AlgebraicGeometry.ProEtale.CondensedRing

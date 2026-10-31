@@ -1,0 +1,777 @@
+/-
+Copyright (c) 2026 Bin Wu. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Bin Wu
+-/
+module
+
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
+import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
+import WeilConjectures.CategoryTheory.ModuleObjects.Free
+import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension
+public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
+public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+import WeilConjectures.AlgebraicGeometry.ContinuousCoefficientCommRing
+import WeilConjectures.AlgebraicGeometry.ContinuousCoefficientUniverse
+import Mathlib.Topology.Category.Profinite.EffectiveEpi
+import WeilConjectures.CategoryTheory.RingObjects.ContinuousMap
+import Mathlib.Condensed.TopComparison
+public import WeilConjectures.AlgebraicGeometry.FormalClosedSupport
+import WeilConjectures.Topology.ProfiniteCondensedRing
+import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+import WeilConjectures.CategoryTheory.RingedSiteModules
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+import Mathlib.Algebra.Homology.DerivedCategory.Basic
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
+import WeilConjectures.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctorialitySupplement
+import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
+import WeilConjectures.Algebra.Homology.KFlatSupplement
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
+import Mathlib.Algebra.Category.Grp.FilteredColimits
+import Mathlib.Algebra.Homology.BifunctorShift
+import Mathlib.Algebra.Homology.QuasiIso
+import Mathlib.CategoryTheory.Sites.Equivalence
+import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
+import Mathlib.CategoryTheory.Limits.EssentiallySmall
+import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUniverses
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
+import Mathlib.AlgebraicGeometry.Scheme
+import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+import Mathlib.AlgebraicGeometry.OpenImmersion
+import Mathlib.AlgebraicGeometry.Sites.Proetale
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import WeilConjectures.Algebra.Homology.BoundedBelowInjectiveResolutionMono
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
+import all WeilConjectures.UpstreamExtra.WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
+import WeilConjectures.CategoryTheory.InternalAbelianSheafModuleEquivalence
+import Mathlib.Algebra.Category.ModuleCat.Sheaf
+import Mathlib.Algebra.Category.Ring.Limits
+import Mathlib.CategoryTheory.Monoidal.Internal.FunctorCategory
+import WeilConjectures.CategoryTheory.RingObjects.Ab
+import WeilConjectures.CategoryTheory.Sites.MonObj
+import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
+import WeilConjectures.AlgebraicGeometry.ProEtaleProductsExact
+import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
+import WeilConjectures.AlgebraicGeometry.ProEtaleSectionsLimitsColimits
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
+import Mathlib.AlgebraicGeometry.AffineScheme
+import Mathlib.CategoryTheory.Sites.Sheaf
+import WeilConjectures.CategoryTheory.Sites.WeaklyContractible
+import Mathlib.CategoryTheory.Limits.HasLimits
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits
+import Mathlib.CategoryTheory.Sites.PreservesSheafification
+import WeilConjectures.AlgebraicGeometry.ProEtaleWeaklyContractibleEvaluationColimitsSupplement
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import WeilConjectures.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
+import WeilConjectures.CategoryTheory.Sites.RGammaDerivedLimitSupplement
+import Mathlib.Algebra.Category.Grp.AB
+import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
+import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
+import Mathlib.LinearAlgebra.Finsupp.LinearCombination
+import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Coseparator
+import WeilConjectures.AlgebraicGeometry.ProEtale.SectionsConservative
+import WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
+import WeilConjectures.AlgebraicGeometry.WContractibleAffineCover
+import WeilConjectures.AlgebraicGeometry.ProEtaleDerivedCategory
+import Mathlib.CategoryTheory.Sites.ConstantSheaf
+import WeilConjectures.RingTheory.ProEtale.WContractible
+import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
+import Mathlib.RingTheory.RingHom.FaithfullyFlat
+import WeilConjectures.RingTheory.IndPrincipalZariski
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+import Mathlib.Algebra.Category.ModuleCat.AB
+import Mathlib.CategoryTheory.Limits.Preserves.Limits
+import WeilConjectures.CategoryTheory.DerivedCategory.Products
+import WeilConjectures.AlgebraicGeometry.ProEtaleImmersionLimitPreservation
+import WeilConjectures.AlgebraicGeometry.ProEtaleInverseImage
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous
+import WeilConjectures.CategoryTheory.SiteInverseImageTensor
+import WeilConjectures.CategoryTheory.Adjunction.LiftsGroupRingObjects
+import Mathlib.CategoryTheory.Monoidal.CommGrp_
+import Mathlib.CategoryTheory.Monoidal.Ring
+import Mathlib.CategoryTheory.Adjunction.Limits
+import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
+import Mathlib.AlgebraicGeometry.Morphisms.Immersion
+import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+import Mathlib.CategoryTheory.Sites.Limits
+import WeilConjectures.AlgebraicGeometry.ProEtale.AffineClosedInverseImageLeftAdjoint
+import WeilConjectures.AlgebraicGeometry.IndEtaleBasisWeaklyContractibleCover
+import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
+import WeilConjectures.CategoryTheory.Sites.LowerShriekCoveringGenerators
+import Mathlib.CategoryTheory.Limits.Preserves.Finite
+import WeilConjectures.CategoryTheory.Sites.LowerShriekCorepresentability
+import Mathlib.CategoryTheory.Adjunction.PartialAdjoint
+import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+import WeilConjectures.CategoryTheory.Sites.CoveringRepresentableCoequalizer
+import Mathlib.CategoryTheory.Sites.LeftExact
+import Mathlib.CategoryTheory.Limits.Shapes.Equalizers
+import Mathlib.CategoryTheory.Yoneda
+import Mathlib.CategoryTheory.Sites.RegularEpi
+import Mathlib.CategoryTheory.Limits.Shapes.KernelPair
+import WeilConjectures.AlgebraicGeometry.ProEtale.AffineClosedInverseImageEvaluation
+import WeilConjectures.AlgebraicGeometry.ProEtale.AffineClosedSiteFunctorProperties
+import Mathlib.CategoryTheory.Sites.Sheafification
+import WeilConjectures.CategoryTheory.InverseMateEquivalence
+import WeilConjectures.AlgebraicGeometry.ProEtale.Replete
+import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Products
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Iso
+import WeilConjectures.AlgebraicGeometry.ProEtaleOperationsSupplement
+import WeilConjectures.AlgebraicGeometry.ProEtaleInverseImageLimitsZariskiLocal
+import Mathlib.CategoryTheory.Functor.ReflectsIso.Limits
+import WeilConjectures.Mathlib.CategoryTheory.Sites.Sheaf
+import WeilConjectures.Mathlib.CategoryTheory.NatIso
+import WeilConjectures.AlgebraicGeometry.ProEtaleModuleInverseImageComparison
+import Mathlib.Algebra.Category.Ring.FilteredColimits
+import WeilConjectures.AlgebraicGeometry.ProEtaleModuleInverseImageUnderlying
+import WeilConjectures.AlgebraicGeometry.ProEtaleModelRingPresentation
+import WeilConjectures.CategoryTheory.SheafPullbackUnitPresentation
+import Mathlib.CategoryTheory.Sites.Pullback
+import Mathlib.CategoryTheory.Sites.CartesianMonoidal
+import WeilConjectures.CategoryTheory.SheafPullbackForgetComparison
+import WeilConjectures.CategoryTheory.ModuleInverseImageAdjunction
+import WeilConjectures.CategoryTheory.ModuleInverseImageAction
+import WeilConjectures.CategoryTheory.ModuleInverseImageActionOfPresentations
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModuleAdjunction
+import WeilConjectures.AlgebraicGeometry.ProEtaleModuleInverseImageScalarGraph
+import WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresAbelian
+import all WeilConjectures.AlgebraicGeometry.CondensedFiniteFreeTensorExact
+import all WeilConjectures.CategoryTheory.Monoidal.Mod.Tensor
+import all WeilConjectures.AlgebraicGeometry.CondensedFiniteFreeInternalHomColimits
+import all WeilConjectures.CategoryTheory.Monoidal.Mod.TensorRegular
+import all WeilConjectures.CategoryTheory.Monoidal.Mod.InternalHom
+import all WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
+import all WeilConjectures.Mathlib.CategoryTheory.Monoidal.Braided.Reflection
+import all WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.FunctorCategory.Basic
+import all WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
+import all WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal
+import WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimit
+import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
+/-!
+# Closed support, truncation and sequential derived limits
+
+Source: blueprint main-20261015, sec-six-functors-basics,
+`sk-lem-formal-closed-support-ii`, and Stacks Tags 09AA and 08TC
+(blueprint: sk-lem-formal-closed-support-ii).
+
+The assertion predicate records left t-exactness and the image of every Roos triangle,
+using an isomorphism normalized by the product projections. It makes no choice of cones.
+-/
+
+@[expose] public noncomputable section
+
+set_option backward.defeqAttrib.useBackward true
+set_option synthInstance.maxSize 4096
+set_option autoImplicit false
+set_option relaxedAutoImplicit false
+universe u vA vB uA uB wA wB
+
+
+open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
+open scoped CategoryTheory.Obj
+
+attribute [local irreducible] Mod.monoidalClosed
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+/-- The two conclusions of the closed-support lemma for one of its three functors.
+The product isomorphism is the canonical comparison, specified by all projections;
+the boundary uses its inverse and the functor's shift comparison.
+Source: blueprint sk-lem-formal-closed-support-ii, final Roos-triangle convention;
+Stacks Tag 08TC (blueprint: sk-lem-formal-closed-support-ii). -/
+def ClosedSupportIIAssertions
+    {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B]
+    [Abelian A] [Abelian B] [HasDerivedCategory.{wA} A] [HasDerivedCategory.{wB} B]
+    (F : DerivedCategory A ⥤ DerivedCategory B) [F.CommShift ℤ] : Prop :=
+  (∀ K : DerivedCategory A, DerivedCategory.TStructure.t.ge 0 K →
+    DerivedCategory.TStructure.t.ge 0 (F.obj K)) ∧
+  (∀ (K : ℕ → DerivedCategory A) [HasProduct K]
+      [HasProduct (fun n ↦ F.obj (K n))],
+    ∃ e : F.obj (∏ᶜ K) ≅ ∏ᶜ (fun n ↦ F.obj (K n)),
+      (∀ n : ℕ, e.hom ≫ Pi.π _ n = F.map (Pi.π K n)) ∧
+      ∀ (t : ∀ n : ℕ, K (n + 1) ⟶ K n)
+        (H : DerivedCategory A) (p : H ⟶ ∏ᶜ K) (δ : ∏ᶜ K ⟶ H⟦(1 : ℤ)⟧),
+        IsDerivedLimitTriangle t H p δ →
+          IsDerivedLimitTriangle (fun n ↦ F.map (t n)) (F.obj H)
+            (F.map p ≫ e.hom)
+            (e.inv ≫ F.map δ ≫ (F.commShiftIso (1 : ℤ)).hom.app H))
+
+/-- The canonical tensor shift comparison, specialized to the recorded derived-tensor wrapper.
+Source: blueprint sk-lem-formal-closed-support-ii, derived tensor clause
+(blueprint: sk-lem-formal-closed-support-ii). This reuses the existing comparison induced
+from K-flat representatives; it does not choose a new shift structure. -/
+instance formalClosedSupportIITensor_commShift
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] (S : Scheme.{u})
+    (K : DerivedCategory (FormalSupportModules Λ S)) :
+    ((derivedTensor Λ S).obj K).CommShift ℤ :=
+  DerivedCategory.commShiftTensorLeft (FormalSupportModules Λ S) K
+
+/-- Computing a total right derived functor on a bounded-below injective resolution
+shows that it preserves the nonnegative aisle. Source: Stacks Tags 013K and 070J;
+blueprint sk-lem-formal-closed-support-ii, proof Step 2.
+(blueprint: sk-lem-formal-closed-support-ii). -/
+private theorem rightDerived_preserves_ge
+    {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B]
+    [Abelian A] [Abelian B] [HasDerivedCategory.{wA} A] [HasDerivedCategory.{wB} B]
+    [EnoughInjectives A] [Abelian.HasKInjectiveResolutions A]
+    (F : A ⥤ B) [F.Additive] (K : DerivedCategory A)
+    (hK : DerivedCategory.TStructure.t.ge 0 K) :
+    DerivedCategory.TStructure.t.ge 0 (F.rightDerivedFunctor.obj K) := by
+  obtain ⟨P, e, hP⟩ := hK
+  obtain ⟨I, α, hI, hinj, _, hα⟩ :=
+    CochainComplex.exists_mono_quasiIso_injective_boundedBelow A 0 P
+      (fun n hn ↦ P.isZero_of_isStrictlyGE 0 n hn)
+  have : I.IsStrictlyGE 0 := (CochainComplex.isStrictlyGE_iff I 0).2 hI
+  have (n : ℤ) : Injective (I.X n) := hinj n
+  have : I.IsKInjective := CochainComplex.isKInjective_of_injective I 0
+  let FI := (F.mapHomologicalComplex (.up ℤ)).obj I
+  let e' : F.rightDerivedFunctor.obj K ≅ DerivedCategory.Q.obj FI :=
+    F.rightDerivedFunctor.mapIso (e ≪≫ asIso (DerivedCategory.Q.map α)) ≪≫
+      F.rightDerivedFunctorObjQIso I
+  exact ⟨FI, e', inferInstance⟩
+
+/-- A triangulated additive functor transports the Roos triangle along any product
+comparison satisfying the projection equations. The equation for `1 - shift` follows
+by composing with every projection. Source: Stacks Tag 08TC, the Roos-triangle
+argument in blueprint sk-lem-formal-closed-support-ii.
+(blueprint: sk-lem-formal-closed-support-ii). -/
+private theorem map_roosTriangle
+    {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B]
+    [Abelian A] [Abelian B] [HasDerivedCategory.{wA} A] [HasDerivedCategory.{wB} B]
+    (F : DerivedCategory A ⥤ DerivedCategory B) [F.CommShift ℤ]
+    [F.Additive] [F.IsTriangulated]
+    (K : ℕ → DerivedCategory A) [HasProduct K]
+    [HasProduct (fun n ↦ F.obj (K n))]
+    (e : F.obj (∏ᶜ K) ≅ ∏ᶜ (fun n ↦ F.obj (K n)))
+    (he : ∀ n : ℕ, e.hom ≫ Pi.π _ n = F.map (Pi.π K n))
+    (t : ∀ n : ℕ, K (n + 1) ⟶ K n)
+    (H : DerivedCategory A) (p : H ⟶ ∏ᶜ K) (δ : ∏ᶜ K ⟶ H⟦(1 : ℤ)⟧)
+    (h : IsDerivedLimitTriangle t H p δ) :
+    IsDerivedLimitTriangle (fun n ↦ F.map (t n)) (F.obj H)
+      (F.map p ≫ e.hom)
+      (e.inv ≫ F.map δ ≫ (F.commShiftIso (1 : ℤ)).hom.app H) := by
+  have hc : F.map (towerTransitionEndomorphism t) ≫ e.hom =
+      e.hom ≫ towerTransitionEndomorphism (fun n ↦ F.map (t n)) := by
+    apply Pi.hom_ext
+    intro n
+    simp only [Category.assoc, he, towerTransitionEndomorphism, Functor.map_sub,
+      Preadditive.sub_comp, Preadditive.comp_sub, Category.comp_id,
+      towerProductShift, Pi.lift_π]
+    rw [← Category.assoc, he]
+    simp only [← F.map_comp, Pi.lift_π, Category.id_comp]
+  apply Pretriangulated.isomorphic_distinguished _ (F.map_distinguished _ h)
+  refine Pretriangulated.Triangle.isoMk _ _ (Iso.refl _) e.symm e.symm ?_ ?_ ?_
+  · change (F.map p ≫ e.hom) ≫ e.inv = 𝟙 _ ≫ F.map p
+    simp
+  · change towerTransitionEndomorphism (fun n ↦ F.map (t n)) ≫ e.inv =
+      e.inv ≫ F.map (towerTransitionEndomorphism t)
+    apply (cancel_epi e.hom).1
+    rw [← Category.assoc, ← hc]
+    simp
+  · change (e.inv ≫ F.map δ ≫ (F.commShiftIso (1 : ℤ)).hom.app H) ≫
+      (shiftFunctor _ (1 : ℤ)).map (𝟙 _) =
+        e.inv ≫ (F.map δ ≫ (F.commShiftIso (1 : ℤ)).hom.app H)
+    simp
+
+/-- Left t-exactness and countable-product preservation imply the normalized
+closed-support assertions, by transporting every Roos triangle. Source: Stacks Tag 08TC;
+blueprint sk-lem-formal-closed-support-ii, proof Step 8.
+(blueprint: sk-lem-formal-closed-support-ii). -/
+private theorem closedSupportIIAssertions_of_products
+    {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B]
+    [Abelian A] [Abelian B] [HasDerivedCategory.{wA} A] [HasDerivedCategory.{wB} B]
+    (F : DerivedCategory A ⥤ DerivedCategory B) [F.CommShift ℤ]
+    [F.Additive] [F.IsTriangulated] [PreservesLimitsOfShape (Discrete ℕ) F]
+    (hge : ∀ K : DerivedCategory A, DerivedCategory.TStructure.t.ge 0 K →
+      DerivedCategory.TStructure.t.ge 0 (F.obj K)) :
+    ClosedSupportIIAssertions F := by
+  refine ⟨hge, ?_⟩
+  intro K _ _
+  let e : F.obj (∏ᶜ K) ≅ ∏ᶜ (fun n ↦ F.obj (K n)) := asIso (piComparison F K)
+  have he (n : ℕ) : e.hom ≫ Pi.π _ n = F.map (Pi.π K n) :=
+    piComparison_comp_π F K n
+  exact ⟨e, he, fun t H p δ h ↦ map_roosTriangle F K e he t H p δ h⟩
+
+/-- The derived-tensor comparison clause of the closed-support theorem.
+The comparison is obtained from the tensor counit on the K-flat single complex L[0].
+Source: blueprint sk-lem-formal-closed-support-ii.
+(blueprint: sk-lem-formal-closed-support-ii)
+-/
+private theorem formalClosedSupportIITensorComparison
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] (ℓ : ℕ) [Fact ℓ.Prime]
+    (_hΛ :
+      (∃ (A : Type u) (_ : CommRing A) (_ : Finite A) (_ : TopologicalSpace A)
+          (_ : DiscreteTopology A) (_ : IsTopologicalRing A),
+        (∃ n : ℕ, (ℓ ^ n : A) = 0) ∧
+          Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousCoefficientRingObj A))) ∨
+      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℤ_[ℓ])) ∨
+      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℚ_[ℓ])) ∨
+      (∃ E : PadicAlgCl.FiniteIntermediateField ℓ,
+        Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicIntegersRingObj ℓ E.1)) ∨
+        Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E))) ∨
+      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ℓ)))
+    {X Z V S : Scheme.{u}} (i : Z ⟶ X) (j : V ⟶ X) (a : S ⟶ Z)
+    [IsClosedImmersion i] [IsOpenImmersion j] [IsOpenImmersion a]
+    (_hij : Set.range i = (Set.range j)ᶜ)
+    (L : FormalSupportModules Λ S)
+    (_hL : ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage S, ∀ s : C.I₀,
+      Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (C.f s)).obj (condensedRingObj Λ S))
+        (((ProEtale.upperStar Ab.{u + 1} (C.f s)).mapMod (condensedRingObj Λ S)).obj L)) :
+    Exists fun [_h : PreservesFiniteLimits (MonoidalCategory.tensorLeft L)] ↦
+      Nonempty (((derivedTensor Λ S).obj
+        ((DerivedCategory.singleFunctor (FormalSupportModules Λ S) 0).obj L)) ≅
+          (MonoidalCategory.tensorLeft L).mapDerivedCategory) := by
+  have h0 := ProEtale.condensed_locally_free_tensor_preservesFiniteLimits
+    (condensedRingObj Λ S) L _hL
+  have hr : PreservesFiniteLimits (MonoidalCategory.tensorRight L) :=
+    preservesFiniteLimits_of_natIso (Mod.relativeTensorRightIso L)
+  have hL : PreservesFiniteLimits (MonoidalCategory.tensorLeft L) :=
+    preservesFiniteLimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight L).symm
+  refine ⟨hL, ?_⟩
+  let C := FormalSupportModules Λ S
+  let q := HomotopyCategory.quotient C (.up ℤ)
+  let P := (HomologicalComplex.single C (.up ℤ) 0).obj L
+  have hf : ObjectProperty.flat L :=
+    ⟨⟨hL, inferInstanceAs (PreservesFiniteColimits (MonoidalCategory.tensorLeft L))⟩,
+      ⟨hr, inferInstanceAs (PreservesFiniteColimits (MonoidalCategory.tensorRight L))⟩⟩
+  have hP : (HomotopyCategory.quasiIso C (.up ℤ)).kFlat (q.obj P) :=
+    (HomotopyCategory.kFlat_quotient_obj_iff P).2
+      ((CochainComplex.kFlat_single_obj_iff_flat L 0).2 hf)
+  have : IsIso (DerivedCategory.tensorLeftCounit (q.obj P)) :=
+    DerivedCategory.isIso_tensorLeftCounit (q.obj P) hP
+  let e : (DerivedCategory.singleFunctor C 0).obj L ≅
+      DerivedCategory.Qh.obj (q.obj P) :=
+    (DerivedCategory.singleFunctorIsoCompQ C 0).app L ≪≫
+      (DerivedCategory.quotientCompQhIso C).symm.app P
+  let d : q ⋙ MonoidalCategory.tensorLeft (q.obj P) ≅ MonoidalCategory.tensorLeft P ⋙ q :=
+    Functor.Monoidal.commTensorLeft q P
+  let c : DerivedCategory.Q ⋙
+      MonoidalCategory.tensorLeft ((DerivedCategory.singleFunctor C 0).obj L) ≅
+        DerivedCategory.Q ⋙ (MonoidalCategory.tensorLeft L).mapDerivedCategory :=
+    Functor.isoWhiskerLeft DerivedCategory.Q ((curriedTensor _).mapIso e) ≪≫
+      Functor.isoWhiskerRight (DerivedCategory.quotientCompQhIso C).symm _ ≪≫
+      Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft q (asIso (DerivedCategory.tensorLeftCounit (q.obj P))) ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight d DerivedCategory.Qh ≪≫
+      Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft (MonoidalCategory.tensorLeft P)
+        (DerivedCategory.quotientCompQhIso C) ≪≫
+      Functor.isoWhiskerRight
+        (CochainComplex.map₂HomologicalComplexObjSingleIso (curriedTensor C) L)
+        DerivedCategory.Q ≪≫
+      (MonoidalCategory.tensorLeft L).mapDerivedCategoryFactors.symm
+  exact ⟨(Localization.fullyFaithfulWhiskeringLeft DerivedCategory.Q
+    (HomologicalComplex.quasiIso C (.up ℤ)) _).preimageIso c⟩
+
+open CategoryTheory.InternalAbelianSheafModule
+
+private theorem formalSupportProductsExact
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) :
+    HasExactLimitsOfShape (Discrete ℕ) (FormalSupportModules Λ X) := by
+  let E := sectionModuleEquivalence.{u + 1, u + 1, u} (Scheme.ProEt.topology X)
+    (condensedRingObj Λ X)
+  have h : HasExactLimitsOfShape (Discrete ℕ)
+      (SheafOfModules.{u + 1} ((sheafCompose (Scheme.ProEt.topology X)
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (sectionRingSheaf.{u + 1, u + 1, u}
+          (Scheme.ProEt.topology X) (condensedRingObj Λ X)))) :=
+    Scheme.ProEt.products_exact.{u, u, 0} X
+    ((sheafCompose (Scheme.ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+      (sectionRingSheaf.{u + 1, u + 1, u} (Scheme.ProEt.topology X)
+        (condensedRingObj Λ X))) ℕ
+  exact HasExactLimitsOfShape.of_codomain_equivalence (Discrete ℕ) E.symm
+
+private theorem exactDerived_preservesProducts
+    {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B]
+    [Abelian A] [Abelian B] [HasDerivedCategory.{wA} A] [HasDerivedCategory.{wB} B]
+    [Abelian.HasKInjectiveResolutions A] [Abelian.HasKInjectiveResolutions B]
+    [HasLimitsOfShape (Discrete ℕ) A] [HasLimitsOfShape (Discrete ℕ) B]
+    [HasExactLimitsOfShape (Discrete ℕ) A] [HasExactLimitsOfShape (Discrete ℕ) B]
+    (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesLimitsOfShape (Discrete ℕ) F] :
+    PreservesLimitsOfShape (Discrete ℕ) F.mapDerivedCategory := by
+  classical
+  have : PreservesLimitsOfShape (Discrete ℕ)
+      (DerivedCategory.Q ⋙ F.mapDerivedCategory) :=
+    preservesLimitsOfShape_of_natIso F.mapDerivedCategoryFactors.symm
+  have h (K : ℕ → DerivedCategory A) :
+      PreservesLimit (Discrete.functor K) F.mapDerivedCategory := by
+    let I := fun n ↦ DerivedCategory.Q.objPreimage (K n)
+    let e : Discrete.functor I ⋙ DerivedCategory.Q ≅ Discrete.functor K :=
+      Discrete.natIso (fun n ↦ DerivedCategory.Q.objObjPreimageIso (K n.as))
+    have : PreservesLimit (Discrete.functor I ⋙ DerivedCategory.Q)
+        F.mapDerivedCategory :=
+      preservesLimit_of_preserves_limit_cone
+        (isLimitOfPreserves DerivedCategory.Q (limit.isLimit (Discrete.functor I)))
+        (isLimitOfPreserves (DerivedCategory.Q ⋙ F.mapDerivedCategory)
+          (limit.isLimit (Discrete.functor I)))
+    exact preservesLimit_of_iso_diagram F.mapDerivedCategory e
+  exact preservesLimitsOfShape_of_discrete _
+
+private theorem rightDerived_preservesProducts
+    {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B]
+    [Abelian A] [Abelian B] [HasDerivedCategory.{wA} A] [HasDerivedCategory.{wB} B]
+    [Abelian.HasKInjectiveResolutions A] [Abelian.HasKInjectiveResolutions B]
+    [HasLimitsOfShape (Discrete ℕ) A] [HasLimitsOfShape (Discrete ℕ) B]
+    [HasExactLimitsOfShape (Discrete ℕ) B]
+    (F : A ⥤ B) [F.Additive] [PreservesLimitsOfShape (Discrete ℕ) F] :
+    PreservesLimitsOfShape (Discrete ℕ) F.rightDerivedFunctor := by
+  classical
+  let G := F.mapHomologicalComplex (ComplexShape.up ℤ)
+  let q := HomotopyCategory.quotient A (ComplexShape.up ℤ)
+  let a : G ⋙ DerivedCategory.Q ≅
+      q ⋙ (F.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh) :=
+    Functor.isoWhiskerLeft G (DerivedCategory.quotientCompQhIso B).symm ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (F.mapHomotopyCategoryFactors _).symm DerivedCategory.Qh ≪≫
+      Functor.associator _ _ _
+  let β : G ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ F.rightDerivedFunctor :=
+    a.hom ≫ Functor.whiskerLeft q F.rightDerivedFunctorUnit ≫
+      (Functor.associator _ _ _).inv ≫
+      (Functor.isoWhiskerRight (DerivedCategory.quotientCompQhIso A)
+        F.rightDerivedFunctor).hom
+  have hβ (I : CochainComplex A ℤ) [I.IsKInjective] : IsIso (β.app I) := by
+    dsimp [β, a]
+    infer_instance
+  have hfamily (K : ℕ → DerivedCategory A) :
+      PreservesLimit (Discrete.functor K) F.rightDerivedFunctor := by
+    have hex (n : ℕ) := DerivedCategory.exists_iso_Q_obj_of_isKInjective (K n)
+    choose I hI he using hex
+    let e (n : ℕ) := (Classical.choice (he n)).symm
+    have : ∀ n, (I n).IsKInjective := hI
+    let P := limit.cone (Discrete.functor I)
+    have : P.pt.IsKInjective :=
+      CochainComplex.isKInjective_of_isLimitFan (limit.isLimit (Discrete.functor I))
+    have hPL : IsLimit (DerivedCategory.Q.mapCone P) :=
+      (Fan.isLimitMapConeEquiv DerivedCategory.Q I P).symm
+        (DerivedCategory.isLimitFanMkQObjOfIsKInjective
+          (limit.isLimit (Discrete.functor I)))
+    have hFPL := isLimitOfPreserves DerivedCategory.Q
+      (isLimitOfPreserves G (limit.isLimit (Discrete.functor I)))
+    let α : Discrete.functor I ⋙ DerivedCategory.Q ≅ Discrete.functor K :=
+      Discrete.natIso (fun n ↦ e n.as)
+    let c := (Cone.postcompose α.hom).obj (DerivedCategory.Q.mapCone P)
+    have hc : IsLimit c := (IsLimit.postcomposeHomEquiv α _).symm hPL
+    apply preservesLimit_of_preserves_limit_cone hc
+    let αβ : (Discrete.functor I ⋙ G) ⋙ DerivedCategory.Q ≅
+        (Discrete.functor I ⋙ DerivedCategory.Q) ⋙ F.rightDerivedFunctor :=
+      Discrete.natIso (fun n ↦ asIso (β.app (I n.as)))
+    have hmap : IsLimit (F.rightDerivedFunctor.mapCone (DerivedCategory.Q.mapCone P)) :=
+      (IsLimit.equivOfNatIsoOfIso αβ
+        (DerivedCategory.Q.mapCone (G.mapCone P))
+        (F.rightDerivedFunctor.mapCone (DerivedCategory.Q.mapCone P))
+        (Cone.ext (asIso (β.app P.pt)) (fun n ↦ by
+          simpa [αβ] using β.naturality (P.π.app n)))).1 hFPL
+    exact (IsLimit.equivOfNatIsoOfIso (Functor.isoWhiskerRight α F.rightDerivedFunctor)
+      (F.rightDerivedFunctor.mapCone (DerivedCategory.Q.mapCone P))
+      (F.rightDerivedFunctor.mapCone c)
+      (Cone.ext (Iso.refl _) (fun n ↦ by simp [c]))).1 hmap
+  exact preservesLimitsOfShape_of_discrete _
+
+private theorem mapMod_preservesProducts
+    {X Y : Scheme.{u}} (f : Y ⟶ X)
+    (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R]
+    [PreservesLimitsOfShape (Discrete ℕ) (ProEtale.upperStar Ab.{u + 1} f)] :
+    PreservesLimitsOfShape (Discrete ℕ) ((ProEtale.upperStar Ab.{u + 1} f).mapMod R) := by
+  let G := ProEtale.upperStar Ab.{u + 1} f
+  let V : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (G.obj R) ⥤
+      Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1} := Mod.forget (G.obj R)
+  have : PreservesLimitsOfShape (Discrete ℕ) (G.mapMod R ⋙ V) :=
+    inferInstanceAs (PreservesLimitsOfShape (Discrete ℕ) (Mod.forget R ⋙ G))
+  have : ReflectsLimitsOfShape (Discrete ℕ) V :=
+    reflectsLimitsOfShape_of_reflectsIsomorphisms
+  exact preservesLimitsOfShape_of_reflects_of_preserves (G.mapMod R) V
+
+private theorem immersion_supportPullback_preservesProducts
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : Y ⟶ X)
+    [IsImmersion f] :
+    PreservesLimitsOfShape (Discrete ℕ) (formalSupportPullback Λ f) := by
+  have := (Scheme.proEtale_immersion_inverseImage_preservesLimits f).2.1
+  have := preservesSmallestLimits_of_preservesLimits
+    (Scheme.proEtaleSheafInverseImage f Ab.{u + 1})
+  have : PreservesLimitsOfShape (Discrete ℕ) (ProEtale.upperStar Ab.{u + 1} f) :=
+    preservesLimitsOfShape_of_natIso
+      ((Scheme.proEtaleSheafAdjunction f Ab.{u + 1}).leftAdjointUniq
+        (ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} f))
+  have := mapMod_preservesProducts f (condensedRingObj Λ X)
+  exact inferInstanceAs (PreservesLimitsOfShape (Discrete ℕ)
+    (_ ⋙ (Mod.comapEquivalenceOfIsIso (condensedPullbackHom Λ f)).inverse))
+
+private theorem supportKernel_preservesProducts
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {V X : Scheme.{u}} (j : V ⟶ X)
+    [IsOpenImmersion j] :
+    PreservesLimitsOfShape (Discrete ℕ) (formalSupportKernel Λ j) := by
+  have := immersion_supportPullback_preservesProducts Λ j
+  let η := (formalSupportPullbackAdjunction Λ j).unit
+  let T := formalSupportPullback Λ j ⋙ lowerStar Λ j
+  have : PreservesLimitsOfShape (Discrete ℕ) T := inferInstance
+  have h (K : ℕ → FormalSupportModules Λ X) :
+      PreservesLimit (Discrete.functor K) (formalSupportKernel Λ j) := by
+    apply preservesLimit_of_preserves_limit_cone (productIsProduct K)
+    let c := (formalSupportKernel Λ j).mapCone (limit.cone (Discrete.functor K))
+    let f (s : Cone (Discrete.functor K ⋙ formalSupportKernel Λ j)) :
+        s.pt ⟶ ∏ᶜ K :=
+      Pi.lift (fun n ↦ s.π.app ⟨n⟩ ≫ kernel.ι (η.app (K n)))
+    have hf (s : Cone (Discrete.functor K ⋙ formalSupportKernel Λ j)) :
+        f s ≫ η.app (∏ᶜ K) = 0 := by
+      apply (isLimitOfPreserves T (productIsProduct K)).hom_ext
+      intro n
+      change (f s ≫ η.app (∏ᶜ K)) ≫ T.map (Pi.π K n.as) = _
+      rw [Category.assoc, ← η.naturality]
+      simp [f, Category.assoc]
+    refine { lift := fun s ↦ kernel.lift _ (f s) (hf s), fac := ?_, uniq := ?_ }
+    · intro s n
+      apply (cancel_mono (kernel.ι (η.app (K n.as)))).1
+      simp [formalSupportKernel, f, Category.assoc, kernel.map, η]
+    · intro s m hm
+      apply (cancel_mono (kernel.ι (η.app (∏ᶜ K)))).1
+      apply Pi.hom_ext
+      intro n
+      have hn := congrArg (fun z ↦ z ≫ kernel.ι (η.app (K n))) (hm ⟨n⟩)
+      simpa [formalSupportKernel, f, Category.assoc, kernel.map, η] using hn
+  exact preservesLimitsOfShape_of_discrete _
+
+private theorem finiteFreeTensor_preservesProducts
+    {X : Scheme.{u}} (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+    [MonObj R] [IsCommMonObj R]
+    {M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R} {n : ℕ}
+    (e : M ≅ ⨁ fun _ : Fin n ↦ Mod.regular R) :
+    PreservesLimitsOfShape (Discrete ℕ) (Mod.tensorLeft M) := by
+  let H := Functor.const (Discrete (Fin n)) ⋙
+    (lim : (Discrete (Fin n) ⥤ Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) ⥤ _)
+  let L := Functor.const (Discrete (Fin n)) ⋙
+    (colim : (Discrete (Fin n) ⥤ Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) ⥤ _)
+  let d : Mod.ihom M ≅ H :=
+    (Mod.ihomMapIso e).symm ≪≫ Mod.ihomFreePowerIso n
+  let adj : L ⊣ H := (constLimAdj).comp (colimConstAdj)
+  let t : Mod.tensorLeft M ≅ L :=
+    (Mod.ihomAdjunction M).leftAdjointUniq (adj.ofNatIsoRight d.symm)
+  have : PreservesLimitsOfShape (Discrete ℕ)
+      (colim : (Discrete (Fin n) ⥤ Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) ⥤ _) :=
+    preservesLimitsOfShape_of_natIso HasBiproductsOfShape.colimIsoLim.symm
+  have : PreservesLimitsOfShape (Discrete ℕ) L := inferInstance
+  exact preservesLimitsOfShape_of_natIso t.symm
+
+private theorem locallyFreeTensor_preservesProducts
+    {X : Scheme.{u}} (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+    [MonObj R] [IsCommMonObj R]
+    (L : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R)
+    (hL : ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,
+      Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (C.f s)).obj R)
+        (((ProEtale.upperStar Ab.{u + 1} (C.f s)).mapMod R).obj L)) :
+    PreservesLimitsOfShape (Discrete ℕ) (MonoidalCategory.tensorLeft L) := by
+  obtain ⟨C, hC⟩ := hL
+  have (s : C.I₀) : WeaklyEtale (C.f s) :=
+    Scheme.proetalePrecoverage_le_precoverage_weaklyEtale _ C.mem₀ (.mk s)
+  have h : PreservesLimitsOfShape (Discrete ℕ) (Mod.tensorLeft L) := by
+    refine ⟨fun {D} ↦ ?_⟩
+    have h : IsIso (limit.lift _ ((Mod.tensorLeft L).mapCone (limit.cone D))) := by
+      apply ProEtale.isIso_mapMod_of_cover C R
+      intro s
+      have : PreservesLimitsOfShape (Discrete ℕ)
+          (ProEtale.localizationRestriction Ab.{u + 1} (C.f s) inferInstance) :=
+        inferInstanceAs (PreservesLimitsOfShape (Discrete ℕ)
+          (Functor.sheafPushforwardContinuous
+            (MorphismProperty.Over.map ⊤ (show WeaklyEtale (C.f s) from inferInstance))
+            Ab.{u + 1} _ _))
+      have : PreservesLimitsOfShape (Discrete ℕ)
+          (ProEtale.upperStar Ab.{u + 1} (C.f s)) :=
+        preservesLimitsOfShape_of_natIso
+          (ProEtale.upperStarIsoLocalizationRestriction Ab.{u + 1} (C.f s) inferInstance).symm
+      let F := (ProEtale.upperStar Ab.{u + 1} (C.f s)).mapMod R
+      have : PreservesLimitsOfShape (Discrete ℕ) F := mapMod_preservesProducts _ _
+      obtain ⟨n, ⟨e⟩⟩ := hC s
+      have : PreservesLimitsOfShape (Discrete ℕ) (Mod.tensorLeft (F.obj L)) :=
+        finiteFreeTensor_preservesProducts _ e
+      have : PreservesLimit D (Mod.tensorLeft L ⋙ F) :=
+        preservesLimit_of_natIso D (ProEtale.pullTensorIso (C.f s) R L).symm
+      exact isIso_map_lift_of_preserves D (Mod.tensorLeft L) F
+    obtain ⟨hc⟩ := (limit.isLimit _).nonempty_isLimit_iff_isIso_lift.2 h
+    exact preservesLimit_of_preserves_limit_cone (limit.isLimit D) hc
+  have hr : PreservesLimitsOfShape (Discrete ℕ) (MonoidalCategory.tensorRight L) :=
+    preservesLimitsOfShape_of_natIso (Mod.relativeTensorRightIso L)
+  exact preservesLimitsOfShape_of_natIso (BraidedCategory.tensorLeftIsoTensorRight L).symm
+
+/-- Countable-product preservation for closed support, its open restriction, and
+finite locally free tensor. This isolates only the product calculation: left t-exactness,
+the derived-tensor comparison, and transport of Roos triangles are proved separately.
+
+Source: blueprint main-20261015, sk-lem-formal-closed-support-ii, proof Steps 1, 3,
+4, 6 and 7; Stacks Tags 09AA and 0BK6.
+(blueprint: sk-lem-formal-closed-support-ii).
+
+Proof:
+1. Immersion inverse images commute with products by Tag 09AA and open slice
+restriction. Direct image is a right adjoint. The kernel of the open unit commutes
+with products by the kernel universal property. Thus the underived support functor
+commutes with countable products.
+2. Resolve every entry of a countable family by a K-injective complex. Their product
+is K-injective by Tag 0BK6. Applying the support functor to that product and using
+Step 1 gives the same complex as the product of the images. The derived product
+comparison is therefore an isomorphism. Exact open restriction commutes with
+termwise products, giving the second clause.
+3. On the pro-etale cover trivializing L, tensor is a finite direct sum, including
+rank zero. Its product comparison is the finite coordinate-reindexing isomorphism.
+Restriction commutes with products and tensor; the local inverses glue to the inverse
+of the global comparison. Exact tensor is its own derived functor, as proved by
+formalClosedSupportIITensorComparison, and products are represented termwise.
+This gives the third clause. These comparisons use the actual product projections,
+so they prove preservation of products independently of any chosen representatives.
+-/
+private theorem formalClosedSupportIICore
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] (ℓ : ℕ) [Fact ℓ.Prime]
+    (_hΛ :
+      (∃ (A : Type u) (_ : CommRing A) (_ : Finite A) (_ : TopologicalSpace A)
+          (_ : DiscreteTopology A) (_ : IsTopologicalRing A),
+        (∃ n : ℕ, (ℓ ^ n : A) = 0) ∧
+          Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousCoefficientRingObj A))) ∨
+      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℤ_[ℓ])) ∨
+      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℚ_[ℓ])) ∨
+      (∃ E : PadicAlgCl.FiniteIntermediateField ℓ,
+        Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicIntegersRingObj ℓ E.1)) ∨
+        Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E))) ∨
+      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ℓ)))
+    {X Z V S : Scheme.{u}} (i : Z ⟶ X) (j : V ⟶ X) (a : S ⟶ Z)
+    [IsClosedImmersion i] [IsOpenImmersion j] [IsOpenImmersion a]
+    (_hij : Set.range i = (Set.range j)ᶜ)
+    (L : FormalSupportModules Λ S)
+    (_hL : ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage S, ∀ s : C.I₀,
+      Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (C.f s)).obj (condensedRingObj Λ S))
+        (((ProEtale.upperStar Ab.{u + 1} (C.f s)).mapMod (condensedRingObj Λ S)).obj L)) :
+    PreservesLimitsOfShape (Discrete ℕ) (formalClosedSupport Λ i j).rightDerivedFunctor ∧
+    PreservesLimitsOfShape (Discrete ℕ)
+      ((formalClosedSupport Λ i j).rightDerivedFunctor ⋙
+        (upperStar Λ a).mapDerivedCategory) ∧
+    PreservesLimitsOfShape (Discrete ℕ) ((derivedTensor Λ S).obj
+      ((DerivedCategory.singleFunctor (FormalSupportModules Λ S) 0).obj L)) := by
+  have hX := formalSupportProductsExact Λ X
+  have hZ := formalSupportProductsExact Λ Z
+  have hS := formalSupportProductsExact Λ S
+  have hk := supportKernel_preservesProducts Λ j
+  have hi := immersion_supportPullback_preservesProducts Λ i
+  have hG : PreservesLimitsOfShape (Discrete ℕ) (formalClosedSupport Λ i j) :=
+    inferInstanceAs (PreservesLimitsOfShape (Discrete ℕ)
+      (formalSupportKernel Λ j ⋙ formalSupportPullback Λ i))
+  have hR := rightDerived_preservesProducts (formalClosedSupport Λ i j)
+  have ha := immersion_supportPullback_preservesProducts Λ a
+  let e : upperStar Λ a ≅ formalSupportPullback Λ a :=
+    (upperStarLowerStarAdjunction Λ a).leftAdjointUniq
+      (formalSupportPullbackAdjunction Λ a)
+  have ha' : PreservesLimitsOfShape (Discrete ℕ) (upperStar Λ a) :=
+    preservesLimitsOfShape_of_natIso e.symm
+  have hDa := exactDerived_preservesProducts (upperStar Λ a)
+  have hT := locallyFreeTensor_preservesProducts (condensedRingObj Λ S) L _hL
+  obtain ⟨hfinite, ⟨d⟩⟩ :=
+    formalClosedSupportIITensorComparison Λ ℓ _hΛ i j a _hij L _hL
+  have hDT := exactDerived_preservesProducts (MonoidalCategory.tensorLeft L)
+  exact ⟨hR, inferInstance, preservesLimitsOfShape_of_natIso d.symm⟩
+
+/-- The closed support functor, its open restriction, and finite locally free tensor
+are left t-exact and take Roos triangles to Roos triangles for the image tower.
+The coefficient disjunction uses finite-subextension-valued sections for Qbar.
+The last comparison identifies derived tensor with ordinary termwise tensor.
+
+Source: blueprint main-20261015, sk-lem-formal-closed-support-ii, all clauses;
+Stacks Tags 09AA, 013K, 070J, 079P, 0BK6, 07KC and 08TC
+(blueprint: sk-lem-formal-closed-support-ii).
+
+Proof plan:
+1. Cartesian coefficients identify module pullback with exact inverse image.
+   The immersion limit-preservation theorem gives countable products for i*, j*, u*.
+   The module adjunction makes j_* preserve limits. Kernels commute with products
+   and finite limits, so G = i* ker(id -> j_*j*) is additive and left exact.
+2. Module categories are Grothendieck abelian. Degreewise-injective K-injective
+   resolutions give enough injectives. Resolve a nonnegative representative by a
+   bounded-below injective complex; it is K-injective (Tags 013K and 070J).
+   Applying G retains the lower bound, proving left t-exactness of RG.
+3. Products of K-injectives are K-injective (Tag 0BK6). Compute RG on their product;
+   the underived product comparison identifies it with the product of G(I_n).
+   Derived products on the closed site are represented termwise (det-pe-products-derived).
+4. Open restriction is exact and preserves products. Its termwise derived functor
+   commutes with cohomology, so the same conclusions hold after u*.
+5. Finite locally free tensor preserves finite limits by the condensed finite-free
+   tensor theorem, and colimits by tensor-Hom adjunction. Thus it is exact and its
+   termwise functor commutes with cohomology. L[0] is K-flat. The derived-tensor
+   descent theorem identifies L[0] tensor^L - naturally with termwise tensor.
+6. On a trivializing pro-etale cover, the tensor/product comparison is the finite
+   coordinate-reindexing isomorphism, including rank zero. Restriction commutes with
+   products and tensor (localized-site tensor restriction); the local inverses glue.
+7. Termwise derived products and step 6 give countable-product preservation for tensor.
+   Additive right derivation and exact termwise descent give triangulated functors.
+8. For a tower with shift s, normalize the product comparison phi by projections.
+   The product universal property gives phi F(s) = s' phi, hence the same identity
+   for 1-s. Apply F to the Roos triangle and transport its product vertices by phi.
+   This is precisely the image tower's Roos triangle. No canonical comparison
+   between arbitrary cones is asserted.
+-/
+theorem formalClosedSupportII
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (ℓ : ℕ) [Fact ℓ.Prime]
+    (_hΛ :
+      (∃ (A : Type u) (_ : CommRing A) (_ : Finite A) (_ : TopologicalSpace A)
+        (_ : DiscreteTopology A) (_ : IsTopologicalRing A),
+        (∃ n : ℕ, (ℓ ^ n : A) = 0) ∧
+          Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousCoefficientRingObj A))) ∨
+      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℤ_[ℓ])) ∨
+      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℚ_[ℓ])) ∨
+      (∃ E : PadicAlgCl.FiniteIntermediateField ℓ,
+        Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicIntegersRingObj ℓ E.1)) ∨
+        Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E))) ∨
+      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ℓ)))
+    {X Z V S : Scheme.{u}} (i : Z ⟶ X) (j : V ⟶ X) (a : S ⟶ Z)
+    [IsClosedImmersion i] [IsOpenImmersion j] [IsOpenImmersion a]
+    (_hij : Set.range i = (Set.range j)ᶜ)
+    (L : FormalSupportModules Λ S)
+    (_hL : ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage S,
+      ∀ s : C.I₀,
+        Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (C.f s)).obj
+          (condensedRingObj Λ S))
+          (((ProEtale.upperStar Ab.{u + 1} (C.f s)).mapMod
+            (condensedRingObj Λ S)).obj L)) :
+    ClosedSupportIIAssertions (formalClosedSupport Λ i j).rightDerivedFunctor ∧
+    ClosedSupportIIAssertions
+      ((formalClosedSupport Λ i j).rightDerivedFunctor ⋙ (upperStar Λ a).mapDerivedCategory) ∧
+    ClosedSupportIIAssertions
+      ((derivedTensor Λ S).obj
+        ((DerivedCategory.singleFunctor (FormalSupportModules Λ S) 0).obj L)) ∧
+    ∃ (_h : PreservesFiniteLimits (MonoidalCategory.tensorLeft L)),
+      Nonempty (((derivedTensor Λ S).obj
+        ((DerivedCategory.singleFunctor (FormalSupportModules Λ S) 0).obj L)) ≅
+        (MonoidalCategory.tensorLeft L).mapDerivedCategory) := by
+  obtain ⟨hP, hPa, hPL⟩ := formalClosedSupportIICore Λ ℓ _hΛ i j a _hij L _hL
+  obtain ⟨hfinite, ⟨e⟩⟩ :=
+    formalClosedSupportIITensorComparison Λ ℓ _hΛ i j a _hij L _hL
+  refine ⟨closedSupportIIAssertions_of_products _ (fun K hK ↦
+    rightDerived_preserves_ge _ K hK), ?_, ?_, hfinite, ⟨e⟩⟩
+  · apply closedSupportIIAssertions_of_products
+    intro K hK
+    have : ((formalClosedSupport Λ i j).rightDerivedFunctor.obj K).IsGE 0 :=
+      ⟨rightDerived_preserves_ge _ K hK⟩
+    exact ((upperStar Λ a).isGE_mapDerivedCategory_obj _ 0).ge
+  · have : ((derivedTensor Λ S).obj
+      ((DerivedCategory.singleFunctor (FormalSupportModules Λ S) 0).obj L)).IsTriangulated :=
+      DerivedCategory.isTriangulated_tensorLeft _ _
+    apply closedSupportIIAssertions_of_products
+    intro K hK
+    have : K.IsGE 0 := ⟨hK⟩
+    have ht := (MonoidalCategory.tensorLeft L).isGE_mapDerivedCategory_obj K 0
+    exact (DerivedCategory.TStructure.t.ge 0).prop_of_iso (e.app K).symm ht.ge
+
+end AlgebraicGeometry.ProEtale.CondensedRing
