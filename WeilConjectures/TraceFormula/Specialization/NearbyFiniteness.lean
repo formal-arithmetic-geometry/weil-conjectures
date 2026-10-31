@@ -100,6 +100,7 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k'] {X : Scheme.{u}}
 
 variable [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
 
+omit [Fact (ringChar k').Prime] in
 /-- **Deligne's finiteness theorem for the extension by zero of a lisse sheaf on a locally closed
 subscheme of the generic fibre of `𝔸ⁿ⁺¹_S`, given the slices** (SGA 4½, [Th. finitude], proof of
 Thm. 3.2): over the strictly henselian trait `S = Spec k'⟦t⟧`, let `v : E ⟶ 𝔸ⁿ⁺¹_S` be a locally
@@ -201,6 +202,7 @@ theorem boundedConstructible_nearbyCycles_affineSpace_of_lisse_generic (n : ℕ)
         (c ⁻¹ᵁ affineSpaceGenericOpen k' n).ι (by rwa [Scheme.Opens.range_ι,
           Scheme.Opens.range_ι]) _))
 
+omit [Fact (ringChar k').Prime] in
 /-- **Deligne's finiteness theorem on `𝔸ⁿ⁺¹_S`, given the slices** (SGA 4½, [Th. finitude], proof
 of Thm. 3.2): if the restrictions `Lhᵢ,ₛ^* Ψ B` of the nearby cycles to the coordinate generic
 slices of the special fibre are bounded constructible for all bounded constructible `B`, then the

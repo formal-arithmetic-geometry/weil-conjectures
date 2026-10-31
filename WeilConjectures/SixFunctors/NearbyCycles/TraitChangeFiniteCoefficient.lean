@@ -15,13 +15,14 @@ public import WeilConjectures.Tactic.ExactModProofs
 The pullback exchange form of Deligne's theorem (SGA 4½, [Th. finitude], Prop. 3.7) with
 coefficients a finite discrete ring `T` in which the residual characteristic is invertible
 (`NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_isPullback_trait_finite`): for a change of
-strictly henselian traits as in `NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_isPullback_trait`
+strictly henselian traits as in
+`NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_isPullback_trait`
 the pullback exchange `α : Lf'^* Ψ_N K ⟶ Ψ_M (Lf^* K)` is invertible at every `K` whose
 restriction to the geometric generic fibre of `N` is bounded below of étale origin. It is
 `NearbyCyclesModel.traitChangeInvariance` after replacing the special fibre of `N` by its fibre
 over the residue field of the target trait, which does not change the base change morphism of
 `Rj_*` on the special fibre of `M`
-(`NearbyCyclesModel.Hom.isIso_map_exchangeRight_app_of_isIso_pullbackExchange_toGenericWithSpecial`).
+(`Hom.isIso_map_exchangeRight_app_of_isIso_pullbackExchange_toGenericWithSpecial`).
 
 -/
 
@@ -104,9 +105,11 @@ theorem isIso_pullbackExchange_app_of_isPullback_trait_finite [IsLocalHom ι]
     (pullback.snd _ _) (IsPullback.of_hasPullback _ _) q₂ g₂ hMj p₂ hMi hφ hgen
     (pullback.lift_snd _ _ _) _ hK
   have hg := isIso_pullbackExchange_app_of_isIso_pullbackExchange_toGenericWithSpecial
-    (Profinite.continuousMapRingObj T) φ (pullback.fst q₁ (Spec.map (CommRingCat.ofHom (b₂.comp ι))))
+    (Profinite.continuousMapRingObj T) φ
+    (pullback.fst q₁ (Spec.map (CommRingCat.ofHom (b₂.comp ι))))
     (pullback.lift (M.i ≫ φ.total) p₂ hw) (pullback.lift_fst _ _ _) K
-  have h2 : IsIso (((φ.toGenericWithSpecial (pullback.fst q₁ (Spec.map (CommRingCat.ofHom (b₂.comp ι))))
+  have h2 : IsIso (((φ.toGenericWithSpecial
+      (pullback.fst q₁ (Spec.map (CommRingCat.ofHom (b₂.comp ι))))
       (pullback.lift (M.i ≫ φ.total) p₂ hw) (pullback.lift_fst _ _ _)).toGeneric.pullbackExchange
         (Profinite.continuousMapRingObj T)).app
       ((L((N.ε)^*⟦Profinite.continuousMapRingObj T⟧)).obj K)) := h

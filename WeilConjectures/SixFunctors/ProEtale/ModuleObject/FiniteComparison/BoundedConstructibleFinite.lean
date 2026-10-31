@@ -62,7 +62,8 @@ instance isTriangulated_boundedConstructible_of_finite :
     ext K
     exact boundedConstructible_iff_of_finite T K
   rw [h]
-  have : (DerivedCategory.boundedConstructible (ModuleCat.{u + 1} (ULift.{u + 1} T)) X).IsTriangulated :=
+  have : (DerivedCategory.boundedConstructible (ModuleCat.{u + 1} (ULift.{u + 1} T))
+      X).IsTriangulated :=
     ProEtale.DerivedCategory.isTriangulated_boundedConstructible (Λ := ULift.{u + 1} T) X
   infer_instance
 
