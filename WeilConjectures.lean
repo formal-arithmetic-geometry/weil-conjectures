@@ -10883,6 +10883,13 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineTraceB
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RankOneLocal
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Rational
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Reduction
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.ReductionKummerClass
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.ReductionKummerDelta
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.ReductionKummerTranspose
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.ReductionMonoidal
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.ReductionTateShiftData
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.ReductionTateTwist
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.ReductionTateTwistIntegersModPow
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersion
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionBaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionFrame
@@ -10901,6 +10908,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.SupportedClassMapRes
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SupportedCup
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SupportedTatePureLocal
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SupportedTensor
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.TensorInverseZPowMap
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ThomClass
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ThomClassAffineSpace
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ThomClassCup
@@ -15561,6 +15569,7 @@ public import WeilConjectures.SmoothPurity.IntegralTateTwistExtendScalars
 public import WeilConjectures.SmoothPurity.OrientationBaseChange
 public import WeilConjectures.SmoothPurity.OrientationCanonical
 public import WeilConjectures.SmoothPurity.OrientationOfDiagonalClass
+public import WeilConjectures.SmoothPurity.SmoothImageFactor
 public import WeilConjectures.SmoothPurity.TateTwistBoundedConstructible
 public import WeilConjectures.SmoothPurity.TateTwistDualizable
 public import WeilConjectures.SmoothPurity.TateTwistPullback
@@ -15570,6 +15579,7 @@ public import WeilConjectures.SmoothPurity.UpperShriekBaseChangeReduction
 public import WeilConjectures.SmoothPurity.UpperShriekOpenVanishing
 public import WeilConjectures.SmoothPurity.UpperShriekSmoothBaseChange
 public import WeilConjectures.SmoothPurity.UpperShriekUnitDualizable
+public import WeilConjectures.SmoothPurity.UpperShriekUnitOpenImmersionComp
 public import WeilConjectures.SpecialValues
 public import WeilConjectures.Statement
 public import WeilConjectures.Tactic.ExactByKernel
