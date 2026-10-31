@@ -423,6 +423,8 @@ noncomputable def zeroTwistIso
     (leftDerivedUpperStarTateTwistDerivedZeroIso M.j ℓ)
     (leftDerivedUpperStarTateTwistDerivedZeroIso M.i ℓ) n A
 
+omit [Fact (Nat.Prime (ringChar k))] [Fact (Nat.Prime (ringChar k'))] [IsSeparated X.hom]
+  [IsSeparated X'.hom] in
 /-- The inverse of `κ_A` is the lax tensor map precomposed with `Ψ A ◁ σ`. -/
 lemma zeroTwistIso_inv (hP : M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
     (q : M.total ⟶ trait k') (n : ℤ) (A : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :

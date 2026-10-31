@@ -589,7 +589,7 @@ set_option maxHeartbeats 1000000 in
 -- the motive checks of the rewrites in the proof take a few seconds each
 omit [Fact (Nat.Prime (ringChar kX))] [Fact (Nat.Prime (ringChar kX'))]
   [Fact (Nat.Prime (ringChar kY))] [Fact (Nat.Prime (ringChar kY'))] [IsSeparated X.hom]
-  [IsSeparated X'.hom] in
+  [IsSeparated X'.hom] [IsSeparated Y.hom] [IsSeparated Y'.hom] in
 /-- **The pullback exchange and the specialization maps of `ℚ̄_ℓ(0)[n]`** on bounded
 constructible complexes
 (`NearbyCyclesModel.Hom.pullbackExchange_ambientZeroTwistSpecializationMap`),
