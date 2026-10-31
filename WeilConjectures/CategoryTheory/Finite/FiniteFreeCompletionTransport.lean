@@ -309,6 +309,9 @@ normalization, and balanced tensor composition. Binary composition iterates to a
 tower. No basis is part of the comparison data.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 set_option autoImplicit false

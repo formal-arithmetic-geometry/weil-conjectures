@@ -85,6 +85,9 @@ Source: Stacks Project, algebraization.tex, Lemma 099A and Definition 0999
 (blueprint: lem-sf-ringed-rhom-derived-complete).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 set_option autoImplicit false

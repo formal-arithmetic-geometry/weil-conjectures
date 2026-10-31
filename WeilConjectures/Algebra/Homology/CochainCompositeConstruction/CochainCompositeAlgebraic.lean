@@ -36,6 +36,9 @@ Finite-product transport constructs the ring and module structures. The graph
 laws of the two coefficient maps construct the composite coefficient morphism.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 universe u v w
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory

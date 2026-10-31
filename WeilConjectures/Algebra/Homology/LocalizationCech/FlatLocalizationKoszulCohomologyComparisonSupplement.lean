@@ -38,6 +38,9 @@ Source: Stacks Project, Tags 099H, 0GLY and 05E9
 (blueprint: lem-weil-pbc-flat-localization-koszul-cohomology-comparison).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 set_option autoImplicit false

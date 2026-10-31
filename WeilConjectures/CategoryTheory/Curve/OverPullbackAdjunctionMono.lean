@@ -21,6 +21,9 @@ The presheaf hom-equivalence and injectivity arguments adapt the private helpers
 then gives the result without the precoverage or pullback assumptions of those modules.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 universe u

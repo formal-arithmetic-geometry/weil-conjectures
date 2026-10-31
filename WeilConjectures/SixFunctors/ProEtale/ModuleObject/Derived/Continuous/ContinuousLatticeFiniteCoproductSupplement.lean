@@ -160,6 +160,9 @@ Source: Stacks Project, Tag 04TR, sheaf gluing; Bhatt--Scholze, Lemma 6.8.13.
 (blueprint: lem-weil-pbc-continuous-lattice-finite-coproduct)
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 universe u

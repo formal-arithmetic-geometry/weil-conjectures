@@ -91,6 +91,10 @@ The finite coefficient index zero denotes exponent one. Vanishing is vanishing o
 module sheaves on the actual localized site, with arbitrary test module sheaves.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false

@@ -13,6 +13,9 @@ Source: Stacks Project, Tag 06XU, functoriality of the class construction.
 (blueprint: lem-coef-yoneda-class-naturality)
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 universe u v w

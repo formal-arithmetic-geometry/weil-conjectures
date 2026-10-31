@@ -12,6 +12,10 @@ import all WeilConjectures.CategoryTheory.Constant.ConstantScalarRestrictionTens
 
 Source: Stacks, Modules on Sites, Tag 03EK. -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 universe u

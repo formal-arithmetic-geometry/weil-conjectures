@@ -68,6 +68,10 @@ Scalar tensor comparisons commute with arbitrary semilinear squares. Their
 forward maps insert one and their inverse maps multiply the scalar coefficients.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 set_option Elab.async false
 @[expose] public noncomputable section
 set_option autoImplicit false

@@ -18,6 +18,10 @@ Source: Stacks Project, Tags 015F and 05RU.
 (blueprint: lem-pur-exact-finite-product-derived-equivalence)
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 open CategoryTheory CategoryTheory.Limits

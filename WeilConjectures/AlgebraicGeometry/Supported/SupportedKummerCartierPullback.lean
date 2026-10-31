@@ -16,6 +16,9 @@ Source: Stacks Project, Tag 0C4U, lemma-pullback-effective-Cartier-divisors
 (blueprint: lem-asd-supported-kummer-cartier-pullback).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 set_option autoImplicit false

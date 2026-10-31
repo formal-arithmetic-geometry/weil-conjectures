@@ -46,6 +46,10 @@ import WeilConjectures.AlgebraicGeometry.ClopenScalar.ProEtaleClopenScalarIdenti
 Source: Stacks Project, Tags 06YY and 0D6D.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096

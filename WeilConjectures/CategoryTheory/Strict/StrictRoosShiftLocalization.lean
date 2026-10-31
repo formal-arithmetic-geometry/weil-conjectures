@@ -32,6 +32,9 @@ represents positive index `n+1`. The localization categories, their universes an
 localization functors are arbitrary prescribed choices.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 set_option autoImplicit false

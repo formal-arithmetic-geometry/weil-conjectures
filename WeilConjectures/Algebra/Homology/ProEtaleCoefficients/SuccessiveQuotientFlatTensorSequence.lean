@@ -66,6 +66,10 @@ Source: blueprint main-20261015, integral criterion reductions, second paragraph
 Stacks Project, Modules on Sites, Tags 03DA, 03EK, 03ER.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false

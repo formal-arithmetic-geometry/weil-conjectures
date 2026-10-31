@@ -37,6 +37,9 @@ sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md, first two sen
 (blueprint: lem-sfb-condensed-subfield-basis).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 universe u

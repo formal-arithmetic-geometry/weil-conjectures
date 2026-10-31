@@ -25,6 +25,9 @@ Tag 09AH, `lemma-ses-associated-to-open`
 (blueprint: lem-exc-proetale-closed-essential-image).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 set_option autoImplicit false

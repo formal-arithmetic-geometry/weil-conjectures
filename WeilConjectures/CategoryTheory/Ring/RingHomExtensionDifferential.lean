@@ -14,6 +14,9 @@ sites-cohomology.tex, section-hom-complexes (Tag 0A8X).
 (blueprint: lem-pc-ring-hom-extension-differential)
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 set_option backward.isDefEq.respectTransparency true

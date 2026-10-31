@@ -36,6 +36,9 @@ The predicates below spell out the algebraic clauses using the recorded presenta
 they do not choose new ring or module structures.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 universe uC vC uD vD uE vE w s

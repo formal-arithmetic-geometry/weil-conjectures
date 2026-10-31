@@ -29,6 +29,10 @@ Source: Stacks Project, Modules on Sites, Tag 093N, assertion (1)
 (blueprint: lem-sfb-constant-module-finite-type-reflection).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 
 set_option autoImplicit false

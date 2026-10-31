@@ -42,6 +42,9 @@ import all Mathlib.Algebra.Category.Ring.Limits
 import all WeilConjectures.CategoryTheory.ModuleInverseImageActionOfPresentations
 import all WeilConjectures.AlgebraicGeometry.EtaleInverseImageModuleAdjunction
 /-! The normalized scalar-extension comparison. -/
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false

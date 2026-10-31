@@ -48,6 +48,9 @@ The construction is stated existentially, with explicit underlying-sheaf and
 operation identifications. No module adjunction or module functor is assumed.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 universe u

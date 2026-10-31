@@ -134,6 +134,9 @@ representatives. Restriction uses Mathlib's slice functors and their induced fun
 on unbounded derived categories. The opposite triangulated structure reverses shifts.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 set_option autoImplicit false

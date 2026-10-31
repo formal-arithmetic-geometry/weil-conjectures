@@ -35,6 +35,9 @@ Source: Stacks Project, Modules on Sites, Tags 03ER(3), 08FC and 03DA
 (blueprint: lem-sfb-flat-constant-module-scalar-mono).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 set_option autoImplicit false

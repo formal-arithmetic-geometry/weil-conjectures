@@ -50,6 +50,10 @@ The auxiliary maps below merely spell out the canonical localization identificat
 Strict towers are indexed by `ℕᵒᵖ`, with level `n` representing the paper's level `n + 1`.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 
 set_option autoImplicit false

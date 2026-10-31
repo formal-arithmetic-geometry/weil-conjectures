@@ -15,6 +15,9 @@ sites-cohomology.tex, Tag 07A4.
 (blueprint: lem-pur-module-tensor-coefficient-equations)
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 universe w uC vC uD vD uE vE u v u' v'

@@ -19,6 +19,10 @@ Source: Stacks Tag 0941, product-cone comparison and ordinary-limit inclusion.
 (blueprint: lem-pur-roos-tensor-normalization).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option Elab.async false

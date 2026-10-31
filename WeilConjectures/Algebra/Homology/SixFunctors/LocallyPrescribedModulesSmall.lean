@@ -25,6 +25,9 @@ Essentially small paragraph of the current blueprint's Brown hypotheses proof
 (blueprint: lem-sfb-locally-prescribed-modules-small).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 universe u

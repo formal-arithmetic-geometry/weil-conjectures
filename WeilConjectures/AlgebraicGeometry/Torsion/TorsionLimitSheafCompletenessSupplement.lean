@@ -196,6 +196,10 @@ canonical equivalence. Local completeness is the existing slice internal-Hom def
 The extended ideal is constructed as the kernel of the constant quotient map.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 
 set_option autoImplicit false

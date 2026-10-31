@@ -24,6 +24,9 @@ agent-formulated categorical input
 (blueprint: lem-sfb-sheaf-action-grothendieck-inflation).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 set_option autoImplicit false

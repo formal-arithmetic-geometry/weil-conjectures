@@ -71,6 +71,10 @@ Stacks Project, Tags 03DI, 03DJ, 03EL, 06YQ and 07A4
 (blueprint: lemma-weil-pbc-projection-formula-open-piece).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 
 set_option autoImplicit false

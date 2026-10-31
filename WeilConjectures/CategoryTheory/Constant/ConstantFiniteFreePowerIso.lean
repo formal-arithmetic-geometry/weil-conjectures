@@ -22,6 +22,9 @@ Source: Stacks 03EK and the finite-dual-basis calculation in step 6 of
 `lem-pur-compact-support-roos-cofinality`.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 set_option autoImplicit false

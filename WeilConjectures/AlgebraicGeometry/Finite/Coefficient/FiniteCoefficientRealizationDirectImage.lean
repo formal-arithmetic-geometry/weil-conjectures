@@ -14,6 +14,9 @@ and the definition of pushforward (sites-modules.tex).
 (blueprint: lem-weil-pbc-finite-coefficient-realization-direct-image)
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 set_option autoImplicit false
 universe u

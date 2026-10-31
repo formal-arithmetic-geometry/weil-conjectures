@@ -22,6 +22,9 @@ import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
 Source: Stacks Project, Tags 0941 and 0H9K.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 set_option autoImplicit false
 universe a b w uC vC r

@@ -155,6 +155,9 @@ Stacks Project, Tag 09AG, supplies only the degree-zero specialization vanishing
 in the proof, rather than the full derived support assertion stated here.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 set_option autoImplicit false

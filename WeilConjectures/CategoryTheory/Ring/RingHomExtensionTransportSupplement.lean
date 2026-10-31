@@ -18,6 +18,9 @@ Lemma 0A6A; the one-point-site realization used in the parent statement.
 (blueprint: lem-pc-ring-hom-extension-transport)
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 universe u

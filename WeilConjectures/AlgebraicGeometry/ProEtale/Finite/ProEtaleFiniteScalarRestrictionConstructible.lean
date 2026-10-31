@@ -26,6 +26,9 @@ The intrinsic constant-ring module category and its existing exact restriction f
 are used throughout. The witness statements retain each original local trivialization cover.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 set_option autoImplicit false

@@ -36,6 +36,9 @@ sheafification unit. The theorem applies to an arbitrary site object, with no
 monomorphism or finiteness hypothesis.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 set_option autoImplicit false

@@ -28,6 +28,9 @@ Source: Stacks Project, Cohomology on Sites, Tag 08JI.
 (blueprint: lem-weil-pbc-ringed-site-bounded-free-rhom-quasi-iso).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 universe u

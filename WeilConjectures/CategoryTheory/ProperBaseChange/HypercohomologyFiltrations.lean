@@ -31,6 +31,9 @@ below applies cohomology to their images of the canonical truncation triangles.
 The index of `pageCouple` is the actual page minus two.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 set_option synthInstance.maxSize 2048

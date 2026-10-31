@@ -52,6 +52,10 @@ Source: Hemo--Richarz--Scholbach, (3.1)--(3.2), Remark 3.2;
 Stacks Project, Modules on Sites, Tags 03CY, 03DH and 03EK.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096

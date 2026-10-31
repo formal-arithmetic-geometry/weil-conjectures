@@ -18,6 +18,10 @@ Source: Stacks Project, More on Étale Cohomology, Tag 0GKF, and the unbounded
 totalization expansion of lem-pur-etale-sum-tensor-totalization.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 256

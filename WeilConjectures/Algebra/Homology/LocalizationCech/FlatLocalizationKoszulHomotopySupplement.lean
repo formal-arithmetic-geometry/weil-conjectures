@@ -15,6 +15,9 @@ Source: Stacks Project, Tags 0626, 0663, 0913 and 099H
 (blueprint: lem-weil-pbc-localization-koszul-contractions).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 set_option autoImplicit false

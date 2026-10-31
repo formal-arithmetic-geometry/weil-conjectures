@@ -48,6 +48,9 @@ specified Kan-extension/sheafification adjunction, and both forgetful and intege
 comparisons use the coprojection-normalized restriction comparisons.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 set_option autoImplicit false

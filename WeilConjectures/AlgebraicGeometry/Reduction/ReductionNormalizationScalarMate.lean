@@ -70,6 +70,10 @@ import WeilConjectures.CategoryTheory.Exact.ExactRestrictionCompositionSupplemen
 Source: Stacks Project, Tags 03EL and 06YY.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048

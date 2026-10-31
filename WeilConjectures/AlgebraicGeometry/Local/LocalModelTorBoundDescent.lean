@@ -59,6 +59,9 @@ Module objects are identified with sectionwise module sheaves by the existing
 amplitude use the internal-module encoding of the recorded Tor-amplitude dependency.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 set_option autoImplicit false

@@ -60,6 +60,9 @@ universe u
 
 set_option autoImplicit false
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 private theorem evaluation_higherDirectImage

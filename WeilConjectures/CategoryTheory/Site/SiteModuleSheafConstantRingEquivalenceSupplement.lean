@@ -31,6 +31,9 @@ Tag 03FD; encoding construction used by Tag 094G
 (blueprint: lem-weil-pbc-site-module-sheaf-constant-ring-equivalence).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 universe u

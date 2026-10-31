@@ -66,6 +66,10 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUn
 (blueprint: lem-sf-finite-tensor-restriction-coherence)
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 universe u

@@ -53,6 +53,10 @@ Source: Stacks Tags 06XN, 06YT and 06YU.
 (blueprint: lem-weil-pbc-completed-constant-derived-tensor-tower).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048

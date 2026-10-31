@@ -77,6 +77,10 @@ public import WeilConjectures.AlgebraicGeometry.CoefficientTorFlatModel
 Source: Stacks Project, Tags 08G0 and 08G1.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 1024

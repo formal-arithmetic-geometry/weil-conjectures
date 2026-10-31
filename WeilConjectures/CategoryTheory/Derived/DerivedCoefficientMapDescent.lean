@@ -19,6 +19,9 @@ Source: Stacks Project, Tags 06XN, 05SU and 06YY.
 (blueprint: lem-sbc-derived-coefficient-map-descent)
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 set_option autoImplicit false
 universe u v u' v' w w'

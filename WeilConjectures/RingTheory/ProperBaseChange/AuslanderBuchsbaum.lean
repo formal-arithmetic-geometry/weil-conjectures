@@ -31,6 +31,9 @@ Source: Stacks Project, Algebra, Tag 090V, proposition-Auslander-Buchsbaum
 (blueprint: lem-weil-pbc-auslander-buchsbaum).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 universe u v

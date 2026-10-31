@@ -33,6 +33,10 @@ The constructions are kept separately so their coefficient-presentation lemmas c
 used by the localizing proof without a cyclic import.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false

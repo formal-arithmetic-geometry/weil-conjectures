@@ -48,6 +48,9 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleModuleInverseImageUnitCompariso
 
 /-! Comparison constructions for inverse image along a scheme isomorphism. -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency true

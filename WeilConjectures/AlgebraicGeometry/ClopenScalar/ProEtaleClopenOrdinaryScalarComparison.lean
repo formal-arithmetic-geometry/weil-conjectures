@@ -14,6 +14,10 @@ import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 Source: Stacks Project, sites-modules.tex, Tags 03EL, 03CY and 03DH.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option linter.unusedTactic false

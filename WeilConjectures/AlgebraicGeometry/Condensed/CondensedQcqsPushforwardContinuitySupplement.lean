@@ -159,6 +159,9 @@ Source: Hemo--Richarz--Scholbach, Constructible sheaves, Lemma 5.3(1)
 (blueprint: lem-weil-pbc-condensed-qcqs-pushforward-continuity).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 universe u v w x y z

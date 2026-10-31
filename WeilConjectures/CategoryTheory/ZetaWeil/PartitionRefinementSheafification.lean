@@ -22,6 +22,9 @@ Source: Stacks Project, Pro-étale Topology, Tag 0F63,
 Sites, Tags 00WB, 00WK and 00WH (blueprint: lem-zl-partition-refinement-sheafification).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 universe u v w

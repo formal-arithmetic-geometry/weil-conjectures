@@ -15,6 +15,9 @@ import WeilConjectures.Algebra.Homology.KernelShiftedMappingCone
 Source: Stacks Project, Tags 0941, 070M and 0H9K.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 set_option autoImplicit false

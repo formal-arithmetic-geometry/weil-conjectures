@@ -60,6 +60,9 @@ Source: Banerjee, arXiv:1004.1491, §1.1.4, front/back formula; Stacks, Tag 0FKU
 No Godement construction or resolution property enters the argument.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 universe v
 set_option autoImplicit false

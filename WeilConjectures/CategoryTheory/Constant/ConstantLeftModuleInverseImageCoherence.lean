@@ -20,6 +20,10 @@ Source: Stacks Project, Sites, Tags 00YV and 00XZ (blueprint:
 lem-pe-constant-left-module-inverse-image).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 universe u w

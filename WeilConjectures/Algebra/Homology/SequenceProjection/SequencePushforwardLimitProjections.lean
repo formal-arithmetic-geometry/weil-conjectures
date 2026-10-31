@@ -179,6 +179,10 @@ The initial existential data are exactly the normalized presentation provided by
 `derivedAdjunction`. Index `n` denotes positive level `n+1`.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048

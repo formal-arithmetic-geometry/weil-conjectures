@@ -15,6 +15,10 @@ Source: Stacks Tags 06YY, 07A4 and 09B1, coefficient-reduction refinement
 (blueprint: lem-weil-pbc-normalized-origin-comparison-coherence).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 universe u

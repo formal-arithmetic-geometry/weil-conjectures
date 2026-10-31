@@ -16,6 +16,9 @@ Source: proper base change blueprint, order 1328, proof sentences three through 
 (blueprint: lem-weil-pbc-nilpotent-koszul-graded-tower).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 set_option autoImplicit false
 universe t

@@ -33,6 +33,9 @@ Sections are sheaf morphisms out of that same sheaf, equivalently their value on
 All comparisons below are the canonical single, constant, shift and adjunction comparisons.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 universe u u'

@@ -135,6 +135,9 @@ Source: Stacks Project, Modules on Sites, and Bhatt--Scholze, Section 6.8.
 (blueprint: def-weil-pbc-continuous-coefficient-module-encoding)
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 universe u

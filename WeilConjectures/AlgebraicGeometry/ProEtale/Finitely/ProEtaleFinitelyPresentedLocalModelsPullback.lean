@@ -31,6 +31,9 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Glo
 Source: Stacks Project, Tags 09AJ and 093U.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false

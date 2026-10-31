@@ -74,6 +74,9 @@ Source: Stacks Project, Tags 0FKR and 0FKU, extended by the coordinate argument 
 (blueprint: new-module-cup-godement-fmap-models).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 universe v
 set_option autoImplicit false

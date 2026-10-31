@@ -14,6 +14,10 @@ Source: Stacks Project, Cohomology on Sites, Tags 0D6D, 0G7E and 07A6
 (blueprint: lem-pur-coefficient-scalar-units).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option genInjectivity false

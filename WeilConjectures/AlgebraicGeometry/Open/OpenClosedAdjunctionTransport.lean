@@ -8,6 +8,10 @@ public import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 public import Mathlib.CategoryTheory.Adjunction.Unique
 public import Mathlib.Algebra.Homology.ExactSequence
 /-! # Transport of localization across equivalent coefficient presentations -/
+
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 open CategoryTheory CategoryTheory.Functor CategoryTheory.Limits

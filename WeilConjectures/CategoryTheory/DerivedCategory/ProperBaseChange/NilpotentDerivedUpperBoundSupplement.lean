@@ -44,6 +44,9 @@ exactly the object formula, morphism formula and universal property supplied by
 `SheafOfModules.derivedChangeOfRings`; no choice of a particular model is required.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 universe u w

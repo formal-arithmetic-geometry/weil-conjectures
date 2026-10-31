@@ -19,6 +19,9 @@ The statement below spells out exactly the class-restricted vanishing and natura
 relative Hom bijections. It imposes no ambient exceptional datum.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 set_option autoImplicit false
 universe u

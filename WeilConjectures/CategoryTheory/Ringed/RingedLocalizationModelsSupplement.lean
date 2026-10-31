@@ -68,6 +68,10 @@ Algebraization of Formal Spaces, Tag 0996
 (blueprint: lem-weil-pbc-ringed-localization-rhom-calculus).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 
 set_option autoImplicit false

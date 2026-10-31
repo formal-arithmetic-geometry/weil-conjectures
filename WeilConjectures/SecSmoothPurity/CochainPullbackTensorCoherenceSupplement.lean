@@ -26,6 +26,9 @@ homological-complex constructions. Coefficient arrows are characterized on
 scalar-extension generators, and composition uses the adjunction conjugate.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 universe w uC vC uD vD uE vE uA vA

@@ -20,6 +20,10 @@ comparison transports arbitrary generalized inverse-image sections, and its
 inverse contracts the coefficient through the recorded ring square.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
