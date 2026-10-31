@@ -259,11 +259,8 @@ attribute [local irreducible] monoidalCategory siteDerivedTensorIndependentCoeff
   KFlatFixedTensor.representativeIso HomologicalComplex₂.total
   MorphismProperty.Q'
 
-set_option maxHeartbeats 20000 in
 -- Diagnose conversion without expanding the tensor definitions.
-set_option maxHeartbeats 50000 in
 -- Elaboration must compare the large two-variable localization interfaces.
-set_option maxHeartbeats 50000 in
 -- Elaboration must compare the large two-variable localization interfaces.
 private def mateCurryIso {C D E : Type*} [Category* C] [Category* D] [Category* E]
     {F G : C × D ⥤ E} (z : F ≅ G) : Functor.curryObj F ≅ Functor.curryObj G :=
@@ -414,7 +411,6 @@ section
 -- The unit of this monoidal structure is definitionally the ring module.
 attribute [local semireducible] monoidalCategory
 
-set_option maxHeartbeats 50000 in
 -- Keep the monoidal unit behind the cochain unitor API.
 end
 
@@ -433,9 +429,7 @@ attribute [local semireducible] monoidalCategory
 -- The formal mate assembly needs extra elaboration for the large normalized interface.
 attribute [local irreducible] MateProjectionStructureData
 
-set_option maxHeartbeats 1500000 in
 -- Normalize the two-variable localization interfaces and transport all exact structures.
-set_option maxHeartbeats 500000 in
 -- Elaboration must compare the large two-variable localization interfaces.
 end
 

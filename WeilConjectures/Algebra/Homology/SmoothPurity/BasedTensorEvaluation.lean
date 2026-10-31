@@ -303,7 +303,6 @@ private theorem power_exact (D : Type*) [Category D] [Abelian D] (d : ℕ) :
   exact ⟨preservesFiniteLimits_of_natIso e, preservesFiniteColimits_of_natIso e'⟩
 
 omit [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasSheafify J AddCommGrpCat.{u}] in
-omit [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasSheafify J AddCommGrpCat.{u}] in
 private theorem restriction_limits (α : R ⟶ S) :
     PreservesFiniteLimits (restrictScalars.{u}
       ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).map α)) := by
@@ -329,8 +328,5 @@ private theorem restriction_colimits (α : R ⟶ S) :
     inferInstanceAs (PreservesFiniteColimits (toSheaf.{u} B))
   exact preservesFiniteColimits_of_reflects_of_preserves _ (toSheaf A)
 
-set_option linter.unusedVariables false in
-set_option maxHeartbeats 200000 in
 -- The long conjunction repeatedly elaborates sectionwise products and scalar restrictions.
-set_option synthInstance.maxHeartbeats 80000 in
 end SheafOfModules

@@ -161,6 +161,21 @@ noncomputable def siteComparisonTensorIso
     (fun M ↦ (Functor.Monoidal.μIso F.mapDerivedCategory K M).symm)
     (fun f ↦ (Functor.OplaxMonoidal.δ_natural_right F.mapDerivedCategory K f).symm)
 
+/-- Component formula for the canonical derived tensor comparison.
+Source: Stacks Tags 03EL, 08J7 (blueprint: def-sf-evaluation-hom-site-comparison). -/
+theorem siteComparisonTensorIso_hom_app
+    (A : Type (u + 2)) [Category.{u + 1} A] [Abelian A]
+    [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A]
+    [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+    [Abelian.HasFunctorialFlatResolution A]
+    (X : Scheme.{u}) [(comparisonUpperStar A X).PreservesFlat]
+    (K M : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    let := siteComparisonDerivedMonoidal A X
+    (siteComparisonTensorIso A X K).hom.app M =
+      Functor.OplaxMonoidal.δ (comparisonUpperStar A X).mapDerivedCategory K M := by
+  unfold siteComparisonTensorIso
+  rfl
+
 /-- The specified comparison is the transpose of pullback of evaluation, using the
 canonical tensor comparison. It is defined on all ambient complexes; invertibility
 requires hypotheses and is a separate assertion.
@@ -182,5 +197,28 @@ noncomputable def siteComparisonEvaluationHom
   let F := (comparisonUpperStar A X).mapDerivedCategory
   let : F.Monoidal := siteComparisonDerivedMonoidal A X
   (Functor.LaxMonoidal.ihomComparison F K).natTrans.app M
+
+/-- The canonical comparison is exactly the transpose of pulled-back evaluation.
+The monoidal tensorator is the inverse of `siteComparisonTensorIso`, so this is its
+original evaluation specification. Source: Stacks Tag 03EO
+(blueprint: def-sf-evaluation-hom-site-comparison). -/
+theorem siteComparisonEvaluationHom_eq_curry
+    (A : Type (u + 2)) [Category.{u + 1} A] [Abelian A]
+    [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A]
+    [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+    [Abelian.HasFunctorialFlatResolution A]
+    (X : Scheme.{u}) [(comparisonUpperStar A X).PreservesFlat]
+    (K M : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    let F := (comparisonUpperStar A X).mapDerivedCategory
+    let : F.Monoidal := siteComparisonDerivedMonoidal A X
+    siteComparisonEvaluationHom A X K M =
+      MonoidalClosed.curry ((siteComparisonTensorIso A X K).inv.app ((ihom K).obj M) ≫
+        F.map ((ihom.ev K).app M)) := by
+  let F := (comparisonUpperStar A X).mapDerivedCategory
+  let : F.Monoidal := siteComparisonDerivedMonoidal A X
+  unfold siteComparisonEvaluationHom
+  rw [Functor.LaxMonoidal.ihomComparison_app_eq_curry F K M]
+  unfold siteComparisonTensorIso
+  rfl
 
 end AlgebraicGeometry.ProEtale

@@ -18,6 +18,9 @@ Their naturality, and the naturality of the resulting degree-two boundary, are f
 consequences of the exact right-adjoint square and its shift-compatible derived mate.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 set_option autoImplicit false
@@ -270,7 +273,6 @@ variable {A B A' B' : Type*} [Category* A] [Category* B] [Category* A'] [Categor
   (hF : G.map aF.hom ≫ sQ = θ.hom.app X₃ ≫ L'.map t₃ ≫ aF'.hom)
   (hB : aB.map G ≫ sH⟦(1 : ℤ)⟧' = θ.hom.app X₁ ≫ L'.map t₁ ≫ aB')
   (hδ : δ.map F ≫ t₁⟦(1 : ℤ)⟧' = t₃ ≫ δ')
-include hF hB hδ in
 end
 
 section NormalizedBoundaries
@@ -329,5 +331,4 @@ variable {A B A' B' : Type*} [Category* A] [Category* B] [Category* A'] [Categor
   (hi : i' ≫ f.hom.τ₁ = R'.map h.hom ≫ ρ.inv.app H ≫ F.map i)
   (hp : f.hom.τ₃ ≫ F.map p = p' ≫ R'.map q.hom ≫ ρ.inv.app Q)
 
-include hθ huF huF' huB huB' hi hp in
 end NormalizedBoundaries

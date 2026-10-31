@@ -21,11 +21,11 @@ namespace WeilConjectures.ExceptionalIntegralScalar
 open ConstructibleExceptionalCoefficients
 
 /--
-The strict-system transport calculation supplies the support identity for the
-transported functor.  This is the support component isolated from the full
+The strict-system transport construction supplies the support identity for the
+explicitly normalized functor.  This is the support component isolated from the full
 system-law package.  The construction transports the proper/open support
 comparison through the chosen reconstruction equivalences and then retains its
-functor equality on the prescribed full subcategories.
+functor equality for the explicit lift on the prescribed full subcategories.
 Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24,
 5.26 (blueprint: lem-sf-exceptional-ring-transport-core-system-support-law).
 -/
@@ -42,22 +42,12 @@ theorem exists_exceptional_transport_core_system_support_law
     (left : ∀ s : RingStage.{u} l,
       LeftRealization.{u} l Ω c s (operation s))
     (d : TransportCoreData l Ω D hl c operation left) :
+    let d' := d.normalizeCanonicalSupport l Ω D hl c operation left
     Nonempty (∀ E : FieldStage.{u} l,
-      d.F E ⋙ (sequenceProperty l E Y).ι =
+      d'.F E ⋙ (sequenceProperty l E Y).ι =
         (sequenceProperty l E X).ι ⋙
-          IntegralSystemRealization.Operations.shriek l E.carrier (d.operations E) c.i ⋙
-            IntegralSystemRealization.Operations.push l E.carrier (d.operations E) c.g) := by
-  refine ⟨fun E => ?_⟩
-  refine CategoryTheory.Functor.ext
-    (F := d.F E ⋙ (sequenceProperty l E Y).ι)
-    (G := (sequenceProperty l E X).ι ⋙
-      IntegralSystemRealization.Operations.shriek l E.carrier (d.operations E) c.i ⋙
-        IntegralSystemRealization.Operations.push l E.carrier (d.operations E) c.g) ?_ ?_
-  · intro K
-    exact exceptional_transport_core_system_support_obj
-      l Ω D hl f c operation left d E K
-  · intro K K' u
-    exact exceptional_transport_core_system_support_map
-      l Ω D hl f c operation left d E u
+          IntegralSystemRealization.Operations.shriek l E.carrier (d'.operations E) c.i ⋙
+            IntegralSystemRealization.Operations.push l E.carrier (d'.operations E) c.g) := by
+  exact ⟨fun E ↦ d.normalizeCanonicalSupport_support l Ω D hl c operation left E⟩
 
 end WeilConjectures.ExceptionalIntegralScalar

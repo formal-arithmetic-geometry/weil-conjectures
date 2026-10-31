@@ -295,6 +295,5 @@ private theorem towerComparison_existsLimitIso
 
 end Helpers
 
-set_option maxHeartbeats 1200000 in
 -- Repeated tower localizations and composite-unit equations require extra elaboration steps.
 end CategoryTheory

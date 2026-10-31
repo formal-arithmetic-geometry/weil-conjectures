@@ -209,7 +209,6 @@ variable
   [hlim : PreservesFiniteLimits (contractibleModuleEvaluation.{c, v, r} J R U)]
   [hfin : PreservesFiniteColimits (contractibleModuleEvaluation.{c, v, r} J R U)]
 
-omit hlim hfin in
 end CategoryTheory
 
 namespace AlgebraicGeometry

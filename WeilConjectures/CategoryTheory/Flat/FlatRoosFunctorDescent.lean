@@ -243,6 +243,5 @@ private theorem projection_transport
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
-set_option maxHeartbeats 800000 in
 -- The normalization and product-localization proof has many dependent categorical expressions.
 end CategoryTheory

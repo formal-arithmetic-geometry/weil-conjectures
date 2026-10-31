@@ -6,6 +6,9 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SmoothPurity.PurityFiniteSetting.Reduction.FiniteReductionTensorFactors
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.FiniteReductionThetaFactorCounit
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.FiniteReductionThetaFactorMate
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.FiniteReductionThetaFactorSourceCtf
 
 /-! # Coefficient reduction of the tensor adjunction factor
 
@@ -65,7 +68,16 @@ theorem finiteReduction_thetaFactor (d : ℕ) [SmoothOfRelativeDimension d f]
         P.finiteReductionExceptionalComparison m hm hmn f d K hK =
       P.finiteReductionTensorOmegaComparison m hm hmn f K ≫
         (P.finiteReductionSetting m hm).finitePurityTheta f
-          ((P.finiteReduction m hm hmn Y).obj K) J' e' := by sorry
+          ((P.finiteReduction m hm hmn Y).obj K) J' e' := by
+  refine finiteReduction_thetaFactor_counit P m hm hmn f d K hK
+    (hS := P.finiteReduction_preserves_ctf m hm hmn X _
+      (finiteReduction_thetaFactor_source_ctf (P := P) f d K hK))
+    (a := (P.finiteReduction m hm hmn X).map (P.finitePurityTheta f K J e) ≫
+      P.finiteReductionExceptionalComparison m hm hmn f d K hK)
+    (b := P.finiteReductionTensorOmegaComparison m hm hmn f K ≫
+      (P.finiteReductionSetting m hm).finitePurityTheta f
+        ((P.finiteReduction m hm hmn Y).obj K) J' e') ?_
+  exact finiteReduction_thetaFactor_mate P m hm hmn f d K hK J e J' e'
 
 end Morphism
 end WeilConjectures.PurityFiniteSetting

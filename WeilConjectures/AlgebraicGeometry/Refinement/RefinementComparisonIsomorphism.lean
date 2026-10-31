@@ -218,7 +218,6 @@ omit [Finite A] in
 theorem properTransportDirectImageCongr_rfl {X Y : Scheme.{u}} (f : X ⟶ Y) :
     properTransportDirectImageCongr A (rfl : f = f) = Iso.refl _ := rfl
 
-omit [Finite A] in
 /-- The actual refinement arrow on bounded-below comparison inputs: the direct-image
 compositor followed by the proper image of the inverse specified proper/open arrow.
 It is meaningful for every refinement, including noncartesian refinements.

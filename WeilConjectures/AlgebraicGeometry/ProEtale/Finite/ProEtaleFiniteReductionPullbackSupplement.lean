@@ -117,12 +117,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 attribute [local irreducible] pointUpperStarLowerStarAdjunction
 
 set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
 private theorem constantCommute_unit {C D B : Type*} [Category* C] [Category* D]
     [Category* B] (J : GrothendieckTopology C) (U : D ⥤ B)
     [HasWeakSheafify J D] [HasWeakSheafify J B]
@@ -169,8 +163,6 @@ private theorem constantRingAb_unit (X : Scheme.{u}) (A : CommRingCat.{u + 1})
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 private noncomputable def finiteRepresentation (X : Scheme.{u})
     (a : sfbFiniteConstantSets X ≅ sfbFiniteRepresentables X)
     (R : Type u) [CommRing R] [Finite R] :
@@ -181,10 +173,4 @@ private noncomputable def finiteRepresentation (X : Scheme.{u})
     ((constantCommuteCompose (Scheme.ProEt.topology X) (forget CommRingCat.{u + 1})).app
       (CommRingCat.of (ULift.{u + 1} R))) ≪≫ a.app (FintypeCat.of R)
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end AlgebraicGeometry.ProEtale

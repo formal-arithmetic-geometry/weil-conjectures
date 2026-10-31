@@ -9,6 +9,7 @@ public import WeilConjectures.SmoothPurity.PurityFiniteSetting.Projection.Projec
 public import WeilConjectures.AlgebraicGeometry.AffineOrderedIntegration.AffineOrderedIntegrationData
 public import WeilConjectures.SmoothPurity.PurityFiniteSetting.SmoothPurityMap
 public import WeilConjectures.AlgebraicGeometry.VectorIntegrationSite.FiniteSiteCoordinates
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.Tensor.SmoothPurityTensorMateComparison
 
 /-! # Ordinary coefficient coordinates for the projection tensor calculation
 
@@ -84,5 +85,51 @@ def projectionCoefficientRootIso
   let P := projectionSetting F C E n
   (baseExponentComparison C.l E n T (AffineLinePurity.primeUnit P T aT)
     n (n + 1) (Nat.le_succ n) P.diagonalExponent_annihilates (annihilates P) d).symm
+
+/-- The ordinary coefficient source, reached from smooth shift coordinates by
+root transition and the specified tensor/pullback comparison.
+Source: canonical reassociations and even shifts in projection purity agreement.
+(blueprint: def-pur-projection-tensor-ordinary-data) -/
+def projectionTensorOrdinarySourceIso
+    (F : FiniteFieldDatum.{u}) (C : F.CoefficientDatum)
+    (E : IntermediateField (Padic C.l) C.Qbar) [FiniteDimensional (Padic C.l) E]
+    (n : ℕ) (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of F.k))
+    (K : ProEtale.AffineSpacePurity.C (projectionSetting F C E n).Coefficient Y)
+    (H : Etale.DerivedCategoryModule (projectionSetting F C E n).Coefficient Y)
+    (e : (comparison (projectionSetting F C E n).Coefficient Y).obj H ≅ K) (d : ℕ) :=
+  let P := projectionSetting F C E n
+  letI := (projection_geometry Y d).2
+  let X := iteratedAffineLine Y d
+  let p := iteratedAffineLineProj Y d
+  let M := (P.smoothPurityPullback p).obj K
+  P.smoothPurityReassociation X d M ≪≫
+    ((smoothPurityTensor P.Coefficient X).obj M).mapIso
+      ((comparison P.Coefficient X).mapIso
+        (projectionCoefficientRootIso F C E n X (towerBase aY d) d)) ≪≫
+    P.smoothPurityCoefficientComparison p K H e
+      (ProEtale.AffineOrderedIntegration.etaleCoefficient P Y d)
+
+/-- The prescribed ordered source realization with its ordinary tensor source
+written explicitly. This only unfolds the protected ordinarySourceObject alias;
+it introduces no new comparison or choice.
+Source: the source realization of ordered affine integration.
+(blueprint: def-pur-projection-tensor-ordinary-data) -/
+def projectionOrdinarySourceRealization
+    (F : FiniteFieldDatum.{u}) (C : F.CoefficientDatum)
+    (E : IntermediateField (Padic C.l) C.Qbar) [FiniteDimensional (Padic C.l) E]
+    (n : ℕ) (Y : Scheme.{u})
+    (K : ProEtale.AffineSpacePurity.C (projectionSetting F C E n).Coefficient Y)
+    (H : Etale.DerivedCategoryModule (projectionSetting F C E n).Coefficient Y)
+    (e : (comparison (projectionSetting F C E n).Coefficient Y).obj H ≅ K) (d : ℕ) :
+    let P := projectionSetting F C E n
+    (comparison P.Coefficient (iteratedAffineLine Y d)).obj
+      (((Etale.ordinaryFiniteTensor P.Coefficient (iteratedAffineLine Y d)).obj
+        ((Etale.ordinaryFinitePullback P.Coefficient (iteratedAffineLineProj Y d)).obj H)).obj
+          (ProEtale.AffineOrderedIntegration.etaleCoefficient P Y d)) ≅
+      (ProEtale.AffineSpacePurity.orderedSource P Y d).obj K := by
+  intro P
+  let r := ProEtale.AffineOrderedIntegration.sourceRealization P Y K H e d
+  unfold AffineLinePurity.ordinarySourceObject at r
+  exact r
 
 end WeilConjectures.PurityFiniteSetting

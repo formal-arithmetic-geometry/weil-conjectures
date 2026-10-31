@@ -8,6 +8,9 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleBraided
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleStratum
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ConstructibleSheafBidualityIntegral
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ConstructibleSheafBidualityScalarComparison
 
 /-! # Geometric Verdier biduality for constructible sheaves
 
@@ -35,48 +38,20 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k]
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   [LocallyOfFiniteType S.hom] [QuasiCompact S.hom] [IsSeparated S.hom]
 
-/-- The geometric sheaf case of Verdier biduality for condensed algebraic-closure
-coefficients. The hypothesis that S maps isomorphically to Spec k excludes a singular
-relative base. The sheaf need not be lisse or locally free on the whole scheme.
+/-- Geometric Verdier biduality for a constructible sheaf.
 
-Source: Bhatt--Scholze, Lemmas 6.7.13, 6.7.18--6.7.20 and Proposition 6.8.14;
-blueprint sk-prop-sf-biduality-general, coefficient-duality paragraph.
-(blueprint: lem-pd-constructible-sheaf-biduality)
+Source: Bhatt--Scholze, Lemma 6.7.20 and Proposition 6.8.14; latest blueprint
+`sec-six-functors-basics/sk-thm-sf-ctf-stability/det-prop-sf-biduality-general.proof.md`.
 
-Proof: a scheme of finite type over a field is excellent. Use the dimension
-function normalized by the structure morphism. Bhatt--Scholze 6.7.18 identifies
-finite-coefficient exceptional pullbacks with reductions of the integral
-exceptional pullback constructed in 6.7.19. On Spec k the normalized dualizing
-object is the coefficient unit. Thus the normalized dualizing object on X is
-the exceptional pullback of this unit, with its specified adjunction evaluation.
-
-First work over the integer ring O_E of a finite extension E/Q_l. The coherent
-finite dualizing objects form the potential dualizing system of 6.7.20. Its
-derived limit Omega has the stated finite reductions. For a constructible
-integral complex L, 6.7.13 identifies the reduction of RHom(L,Omega) with the
-finite-coefficient internal Hom, compatibly with evaluation. Apply this twice.
-Finite-coefficient Verdier biduality makes every reduction of the canonical
-double-dual map invertible. Its cone is derived complete and has zero reductions;
-derived Nakayama, or the derived-limit triangle, makes that cone zero. This is
-the proof of 6.7.20, including the actual transpose of evaluation.
-
-For the sheaf M in the statement, Proposition 6.8.14 and its proof by finite
-stratification and integral lattices give a finite extension E and an integral
-constructible complex whose rationalized scalar extension represents M[0].
-The internal-Hom and exceptional-pullback coefficient comparisons of 6.7.13,
-6.7.18 and 6.8.15 identify its rational and algebraic-closure dualizing objects
-with the exceptional pullbacks of the corresponding coefficient units. They
-preserve evaluations: uncurrying either comparison gives scalar extension of
-the original evaluation. Consequently the scalar extension of the integral
-biduality isomorphism is exactly the displayed canonical map. Uniqueness of
-right adjoints identifies the coefficient-passage exceptional pullback with
-the chosen boundedConstructibleUpperShriek, preserving its counit, so no
-choice of an unrelated dualizing object enters the assertion. If needed these
-comparisons may be checked after etale localization and passage to a geometric
-base field, where finite-stage geometric biduality applies, and descended by
-conservativity. The empty scheme and rank-zero sheaf give zero objects on both
-sides. Finally the isomorphism S -> Spec k and composition of exceptional
-adjunctions identify the displayed target with this normalized dualizing object. -/
+Proof: `X` is noetherian, so `M[0]` is a bounded constructible `ℚ̄_ℓ`-complex and has an
+integral model: a finite subextension `E`, a bounded constructible `𝒪_E`-complex `L` and an
+isomorphism `e : F L ≅ M[0]`, where `F` is rationalization followed by extension to `ℚ̄_ℓ`
+(`exists_padicAlgCl_iso_integralModel`). Integral biduality makes the integral evaluation
+transpose `δ_L` invertible (`isIso_biduality_integral_constructible`). The scalar comparison
+writes the `ℚ̄_ℓ` evaluation transpose of `F L` as `F δ_L` followed by an isomorphism
+(`integral_qbar_biduality_comparison`), so it is invertible. Naturality of the evaluation
+transpose along `e` transfers this to `M[0]`.
+(blueprint: lem-pd-constructible-sheaf-biduality) -/
 theorem isIso_biduality_constructible_sheaf [IsIso S.hom] (a : X ⟶ S)
     (M : Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left))
@@ -84,6 +59,25 @@ theorem isIso_biduality_constructible_sheaf [IsIso S.hom] (a : X ⟶ S)
     IsIso (toIhomIhom
       ((boundedConstructibleUpperShriek ℓ a).obj (𝟙_ _)).obj
       ((DerivedCategory.singleFunctor _ 0).obj M)) := by
-  sorry
+  have _ : IsLocallyNoetherian X.left :=
+    LocallyOfFiniteType.isLocallyNoetherian X.hom
+  have _ : CompactSpace X.left :=
+    QuasiCompact.compactSpace_of_compactSpace X.hom
+  have _ : IsNoetherian X.left := ⟨⟩
+  let K : PadicAlgClConstructible X.left ℓ :=
+    ⟨(DerivedCategory.singleFunctor _ 0).obj M,
+      boundedConstructible_singleFunctor_zero_obj _ M hM⟩
+  obtain ⟨E, L, ⟨e⟩⟩ := exists_padicAlgCl_iso_integralModel X.left ℓ K
+  let F := (Mod.extendScalars (padicIntegersToPadicSubfield X.left ℓ E)).leftDerivedFunctor ⋙
+    derivedExtendScalarsToPadicAlgCl X.left ℓ E
+  let W := ((PadicIntegersRingObj.boundedConstructibleUpperShriek ℓ E.1 a).obj (𝟙_ _)).obj
+  let W' := ((boundedConstructibleUpperShriek ℓ a).obj (𝟙_ _)).obj
+  have hδ : IsIso (toIhomIhom W L.obj) := isIso_biduality_integral_constructible ℓ a E L
+  obtain ⟨c, hc⟩ := integral_qbar_biduality_comparison ℓ a E L
+  have hF : IsIso (toIhomIhom W' (F.obj L.obj)) := by
+    rw [hc]
+    infer_instance
+  exact (NatTrans.isIso_app_iff_of_iso (toIhomIhomNatTrans W')
+    ((boundedConstructible _).ι.mapIso e)).1 hF
 
 end AlgebraicGeometry.ProEtale.CondensedRing

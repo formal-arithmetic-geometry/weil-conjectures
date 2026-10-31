@@ -8,6 +8,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntegralRestriction.IntegralNormalizedFamily
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntegralRestriction.IntegralKernelFirstAmbientFormula
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntegralRestriction.IntegralKernelFirstTransport
+public import WeilConjectures.AlgebraicGeometry.RationalP1.SectionEvaluationCongruence
 /-! # Split integral diagonal contraction -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -62,6 +63,40 @@ theorem integralKernel_first_contraction
   intro M
   obtain ⟨u, v, hu, hv, htransport⟩ := integralKernel_first_transport
     ℓ E k Y hq hr family _href a _hnorm M
-  have hambient := integralKernel_first_ambient_formula ℓ E k Y family M.obj u v hu hv
+  have hambient := integralKernel_first_ambient_formula
+    ℓ E k Y family _href M.obj M.property u v
+      (by
+        set_option backward.isDefEq.respectTransparency true in
+          set_option backward.isDefEq.respectTransparency.types true in
+            run_tac withMainContext do
+              let goal ← getMainGoal
+              let target ← goal.getType
+              let val := (← getLocalDeclFromUserName `hu).toExpr
+              Term.synthesizeSyntheticMVarsNoPostponing
+              let val ← instantiateMVars val
+              let actual ← inferType val
+              unless actual.isAppOf ``RationalP1.UnitComponentNormalized &&
+                  target.isAppOf ``RationalP1.UnitComponentNormalized do
+                throwError "expected a normalized unit component"
+              let xs := actual.getAppArgs
+              let ys := target.getAppArgs
+              let endpoint := xs[xs.size - 4]!
+              let endpoint' := ys[ys.size - 4]!
+              unless endpoint.isAppOfArity ``Eq.mp 4 do
+                throwError "expected the canonical endpoint cast, got {endpoint}"
+              let es := endpoint.getAppArgs
+              let hcast ← mkAppM ``cast_heq #[es[2]!, es[3]!]
+              let (hraw, _) ← (RationalP1.coefficientHEq es[3]! endpoint').run {}
+              let he ← mkAppM ``HEq.trans #[hcast, hraw]
+              let (h, _) ← (RationalP1.coefficientHEq actual target).run
+                { proofs := #[(endpoint, endpoint', he)] }
+              let result ← mkAppM ``Eq.mp #[← mkEqOfHEq h, val]
+              goal.assign result
+              replaceMainGoal [])
+      (by
+        set_option backward.isDefEq.respectTransparency true in
+          set_option backward.isDefEq.respectTransparency.types true in
+            section_evaluation_exact hv)
   exact htransport.trans hambient
+
 end AlgebraicGeometry.ProEtale.CondensedRing.IntegralRestriction

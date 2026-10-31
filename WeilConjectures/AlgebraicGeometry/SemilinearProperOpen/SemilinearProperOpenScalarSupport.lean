@@ -414,8 +414,6 @@ private theorem restriction_pull_mate_normalization
   subst F
   exact restriction_pull_mate_normalization_canonical C τ B φ hφ D G f e he
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
 /-- The ordinary inverse-image scalar comparison is the transpose of the uniquely
 section-normalized direct-image comparison. Source: the ring-sheaf change adjunction
 (blueprint: lem-sf-semilinear-proper-open-mate-pasting). -/
@@ -472,16 +470,8 @@ def rhoR {X Y : Scheme.{u}} (f : X ⟶ Y) :
     R C τ f ⋙ rho C τ B φ hφ Y ⟶ rho C τ B φ hφ X ⋙ StrictTower.R B f :=
   mateEquiv (adj C τ f) (StrictTower.adj B f) (rhoP C τ B φ hφ f).inv
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
 section ScalarOpenComparison
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
 end ScalarOpenComparison
 
 end ScalarRestriction

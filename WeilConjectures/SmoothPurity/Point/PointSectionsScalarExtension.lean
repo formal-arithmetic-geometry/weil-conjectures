@@ -791,24 +791,17 @@ omit [IsAlgClosed k] in
 attribute [local irreducible] completedScalarChangeData
   completedIntegralCoefficientSheafUnrestricted
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-omit [IsAlgClosed k] in
 section AbstractAssociator
 
 universe v w r
 variable {C : Type v} [Category.{w} C] {J : GrothendieckTopology C}
   [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
 
-open SheafOfModules.SuccessiveDerivedQuotient in
 end AbstractAssociator
 
 variable (M : Type u) [Field M] [Algebra ℚ_[l] M] [FiniteDimensional ℚ_[l] M]
   (κ : L →ₐ[ℚ_[l]] M)
 
-omit [IsAlgClosed k] in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 /-- Fraction-field extension on coefficient modules.
 Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension). -/
 noncomputable abbrev pointModuleRationalization :=
@@ -907,10 +900,6 @@ noncomputable def pointDerivedTensorRationalization :
 
 set_option backward.isDefEq.respectTransparency true
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 section Constructible
 
 variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
@@ -1087,7 +1076,6 @@ private theorem pointRationalSectionsNatural
 attribute [local irreducible] pointSectionsScalarExtensionIso pointIntegralScalarAssoc
   pointIntegralScalarUnit pointRationalSectionsScalarExtensionIso
 
-set_option linter.all false in
 end Constructible
 
 end WeilConjectures

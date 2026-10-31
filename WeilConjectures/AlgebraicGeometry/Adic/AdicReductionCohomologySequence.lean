@@ -161,7 +161,6 @@ private theorem completed_map_tensor_one (T : Scheme.{u})
   exact (congrArg (fun y ↦ ((completedAdicChange T φ).map g).val.app U y) hM.symm).trans
     (h.symm.trans hN)
 
-set_option backward.isDefEq.respectTransparency false in
 private theorem exact_transport
     {C : Type*} [Category C] [Abelian C]
     {X Y Z X' Y' Z' : C} (a : X ⟶ Y) (b : Y ⟶ Z)
