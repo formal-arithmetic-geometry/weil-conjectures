@@ -245,6 +245,7 @@ private theorem fourModels_composite
 
 set_option maxHeartbeats 600000 in
 -- The four representative model equations involve four independent module categories.
+include ho in
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 private theorem fourModels_inverse_on_representatives
     (P Q : CochainComplex (Mod.{c, v, max c v r} J₀ R₀) ℤ)
@@ -339,6 +340,7 @@ private theorem fourModels_inverse_on_representatives
   simp only [← DerivedCategory.Q.map_comp, ← Category.assoc]
   erw [← hc]
 
+include ho in
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 private theorem fourModels_square
     (M N : D.{c, v, max c v r} J₀ R₀) :

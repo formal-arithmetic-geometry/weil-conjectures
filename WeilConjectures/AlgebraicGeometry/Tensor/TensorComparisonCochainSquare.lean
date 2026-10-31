@@ -165,6 +165,7 @@ variable {C₀ C₁ C₂ C₃ : Type c}
     θ.hom.app (ordinaryTensor.{c, v, r} J₀ R₀ M N) ≫
       I.map (tH.ordinary M N).hom ≫ (tI.ordinary (H.obj M) (H.obj N)).hom)
 
+include ho in
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- Compatibility of four ordinary tensor comparisons implies compatibility of
 these comparisons on total tensor cochain complexes.
