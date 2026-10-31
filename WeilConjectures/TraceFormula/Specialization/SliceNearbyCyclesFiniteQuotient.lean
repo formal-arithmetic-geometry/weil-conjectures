@@ -5,7 +5,8 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.Specialization.GenericAutModEllPow
+public import WeilConjectures.TraceFormula.Specialization.GenericAutModEll
+public import WeilConjectures.TraceFormula.Specialization.GenericAutPow
 public import WeilConjectures.TraceFormula.Specialization.NearbyFinitenessInertia
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.Separated
 
@@ -89,12 +90,12 @@ theorem exists_normal_finiteIndex_autAction_baseChangeAut_eq_id
   exact ⟨V.normalCore, inferInstance, inferInstance,
     fun σ hσ ↦ hVt σ (V.normalCore_le hσ)⟩
 
-/-- **(A) integrally**: for `K` algebraically closed and `ℓ ≠ char k'`, if `Ψ_{M''} A` is derived
-complete with `𝒪_E`-coefficients and the groups `Hom(Ψ A⟦1⟧, Res_n (red_n Ψ A))` are finite, a
-normal subgroup of finite index of `P'` acting trivially on `Ψ_{M''}` of the reduction
-`A --ℓ--> A ⟶ Z` modulo `ℓ` acts trivially on `Ψ_{M''} A`. -/
+/-- **(A) integrally**: for `K` algebraically closed and `ℓ` invertible in `k'`, if `Ψ_{M''} A`
+is derived complete with `𝒪_E`-coefficients and the groups `Hom(Ψ A⟦1⟧, Res_n (red_n Ψ A))` are
+finite, a normal subgroup of finite index of `P'` acting trivially on `Ψ_{M''}` of the
+reduction `A --ℓ--> A ⟶ Z` modulo `ℓ` acts trivially on `Ψ_{M''} A`. -/
 theorem autAction_baseChangeAut_eq_id_of_derivedComplete [IsAlgClosed K] {ℓ : ℕ} [Fact ℓ.Prime]
-    (hℓk : ringChar k' ≠ ℓ) {E : Type} [Field E] [Algebra E (PadicAlgCl ℓ)]
+    (hℓ : (ℓ : k') ≠ 0) {E : Type} [Field E] [Algebra E (PadicAlgCl ℓ)]
     {A Z : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))} (π : A ⟶ Z)
     (δ : Z ⟶ A⟦(1 : ℤ)⟧) (hT : Triangle.mk (ℓ • 𝟙 A) π δ ∈ distTriang _)
@@ -111,9 +112,10 @@ theorem autAction_baseChangeAut_eq_id_of_derivedComplete [IsAlgClosed K] {ℓ : 
     (hV : ∀ σ ∈ V, (baseChangeAut hM b hb v hv σ).autAction
       (Profinite.padicIntegersRingObj ℓ E) Z = 𝟙 _) {σ : GenericAut k' K} (hσ : σ ∈ V) :
     (baseChangeAut hM b hb v hv σ).autAction (Profinite.padicIntegersRingObj ℓ E) A = 𝟙 _ :=
-  autAction_baseChangeAut_eq_id_of_distinguished_of_separated hM b hb v hv _ (Fact.out) hℓk π δ hT
+  autAction_baseChangeAut_eq_id_of_distinguished_of_separated hM b hb v hv _ π δ hT
     (fun f hf ↦ ProEtale.eq_zero_of_forall_exists_eq_pow_zsmul hc fun m ↦ by
       obtain ⟨g, hg⟩ := hf m
-      exact ⟨g, by rw [hg, ← natCast_zsmul, Nat.cast_pow]⟩) V hV hσ
+      exact ⟨g, by rw [hg, ← natCast_zsmul, Nat.cast_pow]⟩)
+    (GenericAut.exists_pow_ell_pow_eq hℓ) V hV hσ
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
