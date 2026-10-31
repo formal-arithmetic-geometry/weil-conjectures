@@ -1,0 +1,24 @@
+/-
+Copyright (c) 2026 Bin Wu. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Bin Wu
+-/
+module
+
+public import WeilConjectures.AlgebraicGeometry.AffineModelCoherentObjectComparisons
+
+/-! # Coherent affine object comparisons
+
+The adopted source library supplies the same localized tilde functors, scalar
+reassociation maps, comparison structures and proved existence theorem. Re-export
+that implementation so the old import path shares the canonical derived pullback.
+
+Source: Stacks Project, Tags 09RE, 06Y1 and 0D5S.
+(blueprint: lem-pc-affine-model-coherent-object-comparisons). -/
+
+/- The re-exported existence theorem constructs stage and cocone comparisons directly.
+Its proof uses the one-model chart cocycle and projection-comparison triangle, without
+the simultaneous affine coordinate comparison family. The source proof and its DAG
+record are delivered together; this compatibility import keeps the public API. -/
+
+@[expose] public section

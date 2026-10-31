@@ -1,0 +1,191 @@
+/-
+Copyright (c) 2026 Bin Wu. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Bin Wu
+-/
+module
+
+public import WeilConjectures.AlgebraicGeometry.EtaleProEtaleExceptionalTransport
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ConstructibleOrigin
+import WeilConjectures.AlgebraicGeometry.ProEtaleFiniteModelLocalConstancy
+import Mathlib.Algebra.Category.ModuleCat.AB
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
+import WeilConjectures.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
+import WeilConjectures.AlgebraicGeometry.ProEtaleDerivedCategory
+import Mathlib.AlgebraicGeometry.Sites.Proetale
+import Mathlib.CategoryTheory.Sites.ConstantSheaf
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+import Mathlib.Algebra.Homology.DerivedCategory.Basic
+import WeilConjectures.CategoryTheory.RingedSiteModules
+import Mathlib.AlgebraicGeometry.OpenImmersion
+import Mathlib.CategoryTheory.Sites.Over
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Pushforward
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+import Mathlib.CategoryTheory.Sites.CoverLifting
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
+import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence
+import WeilConjectures.AlgebraicGeometry.ProEtaleFiniteModelStalks
+import WeilConjectures.AlgebraicGeometry.ProEtaleGeometricStalk
+import Mathlib.Algebra.Category.Ring.Colimits
+import Mathlib.FieldTheory.IsAlgClosed.Basic
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.ColimitFunctor
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
+import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
+import Mathlib.CategoryTheory.Sites.Point.Over
+import Mathlib.CategoryTheory.Functor.TypeValuedFlat
+import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
+import WeilConjectures.AlgebraicGeometry.ProEtaleLisseFiniteModelsFromLisse
+import WeilConjectures.AlgebraicGeometry.ProEtaleFixedModuleLocalConstancy
+import WeilConjectures.AlgebraicGeometry.ProEtaleLocallyConstantSheaf
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
+import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
+import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomComparison
+
+/-! Transfer of the exceptional finite-Tor object predicate to a chosen classical origin.
+(blueprint: lem-sf-proetale-exceptional-origin-transfer)
+
+This helper isolates the constructibility and Tor-interval transport needed before applying
+residue conservativity on the étale site.
+-/
+
+@[expose] public section
+
+set_option autoImplicit false
+
+universe u
+
+open CategoryTheory
+
+namespace AlgebraicGeometry.ProEtale
+
+open Scheme
+
+private theorem empty_finiteLocal (T : Scheme.{u}) [IsEmpty T]
+    (A : Type (u + 1)) [CommRing A]
+    (F : Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A)) :
+    IsFiniteLocallyConstant A F := by
+  refine ⟨ULift.{u + 1} Empty, fun i ↦ i.down.elim,
+    fun i ↦ i.down.elim, ?_, fun i ↦ i.down.elim⟩
+  have he : Presieve.ofArrows (fun i : ULift.{u + 1} Empty ↦ i.down.elim)
+      (fun i ↦ i.down.elim) = (⊥ : Presieve T) := by
+    funext U f
+    apply propext
+    constructor
+    · rintro ⟨i⟩
+      exact i.down.elim
+    · exact False.elim
+  rw [he]
+  exact Scheme.bot_mem_propQCPrecoverage T
+
+private def identityStratification (T : Scheme.{u}) : Scheme.Stratification T where
+  n := 1
+  stratum _ := Set.univ
+  isLocallyClosed_stratum _ := isOpen_univ.isLocallyClosed
+  isConstructible_stratum _ := Topology.IsConstructible.univ
+  iUnion_stratum_eq_univ := by
+    apply Set.eq_univ_of_forall
+    intro x
+    exact Set.mem_iUnion.mpr ⟨0, Set.mem_univ x⟩
+  pairwise_disjoint_stratum i j hij := (hij (Subsingleton.elim _ _)).elim
+  domain _ := T
+  immersion _ := 𝟙 T
+  range_immersion _ := Set.range_id
+
+private theorem fixed_constructible_iff
+    (A : Type (u + 1)) [CommRing A] [Finite A] (T : Scheme.{u})
+    (F : Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A)) :
+    Scheme.IsConstructibleProEtaleFixedModuleSheaf T A F ↔
+      IsConstructible A F := by
+  have hlocal (T : Scheme.{u})
+      (F : Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A))
+      (hF : IsFiniteLocallyConstant A F) :
+      Scheme.IsLocallyConstantProEtaleFixedModuleSheaf T A F ∧
+        ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω]
+          (x : Spec (.of Ω) ⟶ T),
+          Finite (Scheme.proEtaleGeometricFixedModuleStalk x A F) := by
+    obtain ⟨I, U, f, hf, he⟩ := finiteModels_over A F hF
+    refine ⟨⟨I, U, f, hf, fun i ↦ ?_⟩,
+      fun Ω _ _ x ↦ finite_geometricStalk_of_finite_models A F hF Ω x⟩
+    obtain ⟨M, _, hM⟩ := he i
+    exact ⟨M, hM⟩
+  constructor
+  · rintro ⟨S, _, _, hS⟩
+    exact ⟨S, fun i ↦ Scheme.finite_models_of_fixed_lisse
+      (S.domain i) A _ (hS i)⟩
+  · rintro ⟨S, hS⟩
+    by_cases hn : 0 < S.n
+    · exact ⟨S, hn, S.isConstructible_stratum, fun i ↦ hlocal _ _ (hS i)⟩
+    · have hz : S.n = 0 := Nat.eq_zero_of_not_pos hn
+      have hEmpty : IsEmpty T := ⟨fun x ↦ by
+        have hx : x ∈ ⋃ i, S.stratum i :=
+          S.iUnion_stratum_eq_univ.symm ▸ Set.mem_univ x
+        obtain ⟨i, _⟩ := Set.mem_iUnion.mp hx
+        exact Fin.elim0 (hz ▸ i)⟩
+      exact ⟨identityStratification T, Nat.zero_lt_one,
+        (identityStratification T).isConstructible_stratum,
+        fun i ↦ hlocal _ _ (empty_finiteLocal T A _)⟩
+
+private theorem fixed_constructible_intrinsic
+    (A : Type (u + 1)) [CommRing A] [Finite A] (T : Scheme.{u})
+    {K : _root_.DerivedCategory
+      (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A))}
+    (hK : exceptionalTransportProEtaleObjects A T K) :
+    AlgebraicGeometry.ProEtale.DerivedCategory.boundedConstructibleIntrinsic A T K := by
+  refine ⟨hK.1, fun i ↦ (fixed_constructible_iff A T _).mp (hK.2.1 i)⟩
+
+/-- A classical origin of an exceptional pro-étale object can be chosen exceptional on the
+étale site, with its comparison isomorphism retained.
+
+Source: literature/blueprint/latest/blueprint/sec-six-functors/sk-lem-sf-kunneth-star/
+sk-lem-sf-kunneth-star.proof.md, finite-ring constructible origin and Tor transport
+(blueprint: lem-sf-proetale-exceptional-origin-transfer).
+
+Proof: apply finite-ring derived constructible origin to the intrinsic fixed-module data of the
+pro-etale object. Convert fixed-coefficient constructibility to the intrinsic predicate,
+including the empty-scheme case, and reflect the Tor interval through comparison full
+faithfulness. The resulting etale object is exceptional and retains its comparison isomorphism. -/
+theorem exceptional_etale_origin_of_pro_origin
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    (S : Scheme.{u}) [CompactSpace S] [QuasiSeparatedSpace S]
+    {K : _root_.DerivedCategory
+      (Sheaf (Scheme.ProEt.topology S) (ModuleCat.{u + 1} A))}
+    (hK : exceptionalTransportProEtaleObjects A S K)
+    (_hclassical : ∃ E : Etale.DerivedCategoryModule A S,
+      _root_.DerivedCategory.TStructure.t.plus E ∧
+        Nonempty ((comparisonUpperStar (ModuleCat.{u + 1} A) S).mapDerivedCategory.obj E ≅ K)) :
+    ∃ E : Etale.DerivedCategoryModule A S,
+      exceptionalTransportEtaleObjects A S E ∧
+      _root_.DerivedCategory.TStructure.t.plus E ∧
+      Nonempty ((comparisonUpperStar (ModuleCat.{u + 1} A) S).mapDerivedCategory.obj E ≅ K) := by
+  have hbcK : AlgebraicGeometry.ProEtale.DerivedCategory.boundedConstructible
+      (ModuleCat.{u + 1} A) S K :=
+    AlgebraicGeometry.ProEtale.DerivedCategory.boundedConstructible_of_boundedConstructibleIntrinsic
+      (fixed_constructible_intrinsic A S hK)
+  obtain ⟨E, hE, ⟨eK⟩⟩ :=
+    (AlgebraicGeometry.ProEtale.DerivedCategory.boundedConstructible_iff
+      (A := ModuleCat.{u + 1} A) (X := S) K).mp hbcK
+  have hEplus : _root_.DerivedCategory.TStructure.t.plus E := hE.1.1
+  have hEbc : Etale.DerivedCategory.isBoundedConstructible A S E := by
+    refine ⟨fun i ↦ (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mpr
+      (hE.2 i), ?_⟩
+    obtain ⟨⟨a, ha⟩, ⟨b, hb⟩⟩ := hE.1
+    refine ⟨min a b, b, min_le_right _ _, ?_⟩
+    intro i hi
+    rcases hi with hi | hi
+    · exact (_root_.DerivedCategory.isGE_iff E a).mp ha i
+        (lt_of_lt_of_le hi (min_le_left _ _))
+    · exact (_root_.DerivedCategory.isLE_iff E b).mp hb i hi
+  obtain ⟨a, b, hab, htor⟩ := hK.2.2
+  have htorK : DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} A) S a b K := htor
+  have htorE : Etale.DerivedCategory.torAmplitudeIn
+      (ModuleCat.{u + 1} A) S a b E := by
+    apply AlgebraicGeometry.ProEtale.DerivedCategory.torAmplitudeIn_mapDerivedCategory_iff
+      (Λ := A) (a := a) (b := b) (K := E) |>.mp
+    exact (_root_.DerivedCategory.torAmplitudeIn _ a b).prop_of_iso eK.symm htorK
+  exact ⟨E, ⟨hEbc, a, b, hab,
+    Etale.DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn.mpr htorE⟩,
+    hEplus, ⟨eK⟩⟩
+
+end AlgebraicGeometry.ProEtale

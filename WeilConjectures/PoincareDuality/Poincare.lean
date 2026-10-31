@@ -62,6 +62,20 @@ open CategoryTheory MonoidalCategory MonoidalClosed
 
 open scoped CategoryTheory.Obj
 
+private theorem poincareMap_isIso_aux
+    {C D : Type*} [Category C] [Category D] [MonoidalCategory C] [MonoidalCategory D]
+    [MonoidalClosed C] [MonoidalClosed D]
+    {F : D ⥤ C} {G : C ⥤ D} (adj : F ⊣ G)
+    {P : C ⥤ D} {R : D ⥤ C} (adj' : P ⊣ R)
+    (pf : curriedTensorInsertFunctor₁ P ⟶
+      curriedTensorPost P ⋙ (Functor.whiskeringLeft D C D).obj F)
+    {T : C} (pur : R.obj (𝟙_ D) ≅ T)
+    [∀ B, IsIso ((pf.app (𝟙_ C)).app B)] :
+    IsIso (Verdier.poincareMap adj adj' pf pur) := by
+  have := Verdier.isIso_exchange_of_isIso adj adj' pf (𝟙_ C) (𝟙_ D)
+  unfold Verdier.poincareMap
+  infer_instance
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
@@ -129,8 +143,10 @@ theorem uncurry_poincareMap :
 /-- **Poincaré duality**: the Poincaré duality morphism
 `PD_p : Rp_* ℚ̄_ℓ,X(d)[2d] ⟶ RHom(Rp_! ℚ̄_ℓ,X, ℚ̄_ℓ,S)` is an isomorphism, by Verdier duality. -/
 theorem isIso_poincareMap : IsIso (poincareMap ℓ p d) := by
-  have := isIso_verdierExchange ℓ p (𝟙_ _) (𝟙_ _)
-  unfold poincareMap Verdier.poincareMap
-  exact inferInstanceAs (IsIso (_ ≫ verdierExchange ℓ p (𝟙_ _) (𝟙_ _)))
+  exact poincareMap_isIso_aux
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ p)
+    (boundedConstructibleUpperShriekAdjunction ℓ p)
+    (boundedConstructibleExceptionalProjection ℓ p)
+    (boundedConstructibleSmoothPurityIso ℓ p d)
 
 end AlgebraicGeometry.ProEtale.CondensedRing
