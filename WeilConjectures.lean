@@ -11506,7 +11506,6 @@ public import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Adjunction
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Pointwise
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Preserves
-public import WeilConjectures.Mathlib.CategoryTheory.Functor.MapCancelMono
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.ReflectsIso.Exact
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.ReflectsIso.Jointly
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.SquareTransport
@@ -15552,7 +15551,9 @@ public import WeilConjectures.SmoothPurity.IntegralDualizingComplexIso
 public import WeilConjectures.SmoothPurity.IntegralTateTwistExtendScalars
 public import WeilConjectures.SmoothPurity.OrientationBaseChange
 public import WeilConjectures.SmoothPurity.OrientationCanonical
+public import WeilConjectures.SmoothPurity.OrientationFinite
 public import WeilConjectures.SmoothPurity.OrientationOfDiagonalClass
+public import WeilConjectures.SmoothPurity.OrientationTransition
 public import WeilConjectures.SmoothPurity.TateTwistBoundedConstructible
 public import WeilConjectures.SmoothPurity.TateTwistDualizable
 public import WeilConjectures.SmoothPurity.TateTwistPullback

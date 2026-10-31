@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationCoefficients
-public import WeilConjectures.Mathlib.CategoryTheory.Functor.MapCancelMono
+public import WeilConjectures.Mathlib.CategoryTheory.Functor.EpiMono
 
 /-!
 # The section invariant under a monoidal change of coefficients
