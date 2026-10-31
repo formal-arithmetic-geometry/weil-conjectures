@@ -25,6 +25,9 @@ open CategoryTheory CategoryTheory.Limits
 open AlgebraicGeometry.ProEtale
 namespace AlgebraicGeometry.Scheme
 
+-- `surjectiveTower_wEqualsLocallyBijective` leaves its coefficient universe free
+attribute [-instance] AlgebraicGeometry.ProEtale.surjectiveTower_wEqualsLocallyBijective
+
 -- Fix the module size before generic ring-sheaf instance search.
 private theorem sliceBaseAbLocallyBijective (S : Scheme.{u}) :
     (ProEt.topology S).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
