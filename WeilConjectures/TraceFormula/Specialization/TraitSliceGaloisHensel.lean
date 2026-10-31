@@ -9,7 +9,7 @@ public import Mathlib.RingTheory.Henselian
 public import Mathlib.RingTheory.AdicCompletion.Completeness
 public import Mathlib.RingTheory.PowerSeries.Inverse
 public import Mathlib.Tactic.LinearCombination
-public import Mathlib.Algebra.Polynomial.Identities
+public import WeilConjectures.Mathlib.Algebra.Polynomial.Identities
 
 /-!
 
@@ -120,25 +120,6 @@ theorem IsAdicComplete.exists_isRoot_sub_mem {R : Type*} [CommRing R] (I : Ideal
     refine ha.symm.trans (SModEq.rfl.add ?_)
     rw [SModEq.zero, Ideal.neg_mem_iff]
     exact Ideal.mul_mem_right _ _ h₁
-
-/-- **Two roots of a polynomial over a domain are equal or close**: if `a` and `b` are roots of
-`f`, then `a = b` or `a - b` divides `f'(a)`. -/
-theorem Polynomial.eq_or_sub_dvd_derivative_eval_of_isRoot {R : Type*} [CommRing R] [IsDomain R]
-    {f : R[X]} {a b : R} (ha : f.IsRoot a) (hb : f.IsRoot b) :
-    a = b ∨ a - b ∣ f.derivative.eval a := by
-  by_cases hab : a = b
-  · exact Or.inl hab
-  refine Or.inr ?_
-  obtain ⟨k, hk⟩ := Polynomial.binomExpansion f a (b - a)
-  have hk' : (f.derivative.eval a + k * (b - a)) * (b - a) = 0 := by
-    rw [add_sub_cancel] at hk
-    rw [IsRoot.def] at ha hb
-    linear_combination hb - ha - hk
-  have hba : b - a ≠ 0 := sub_ne_zero.mpr (Ne.symm hab)
-  have h0 := (mul_eq_zero.mp hk').resolve_right hba
-  refine ⟨k, ?_⟩
-  linear_combination h0
-
 
 /-- The coefficients of `p(c Y)` are `cʲ pⱼ`. -/
 lemma Polynomial.coeff_comp_C_mul_X {R : Type*} [CommRing R] (p : R[X]) (a : R) (j : ℕ) :

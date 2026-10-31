@@ -11355,6 +11355,8 @@ public import WeilConjectures.Mathlib.Algebra.MvPolynomial.PDeriv
 public import WeilConjectures.Mathlib.Algebra.Order.BigOperators.Group.Multiset
 public import WeilConjectures.Mathlib.Algebra.Polynomial.BigOperators
 public import WeilConjectures.Mathlib.Algebra.Polynomial.FieldDivision
+public import WeilConjectures.Mathlib.Algebra.Polynomial.Identities
+public import WeilConjectures.Mathlib.Algebra.Polynomial.Inductions
 public import WeilConjectures.Mathlib.Algebra.Polynomial.Laurent
 public import WeilConjectures.Mathlib.Algebra.Polynomial.Reverse
 public import WeilConjectures.Mathlib.Algebra.Polynomial.RingDivision
@@ -11851,6 +11853,7 @@ public import WeilConjectures.Mathlib.RingTheory.Localization.Away.Idempotent
 public import WeilConjectures.Mathlib.RingTheory.Localization.Away.Lemmas
 public import WeilConjectures.Mathlib.RingTheory.Localization.BaseChange
 public import WeilConjectures.Mathlib.RingTheory.Localization.Finiteness
+public import WeilConjectures.Mathlib.RingTheory.Localization.FractionRing
 public import WeilConjectures.Mathlib.RingTheory.Localization.Ideal
 public import WeilConjectures.Mathlib.RingTheory.Localization.NormTrace
 public import WeilConjectures.Mathlib.RingTheory.MatrixAlgebra
@@ -13139,6 +13142,7 @@ public import WeilConjectures.RingTheory.PopescuZeroBaseChartRelations
 public import WeilConjectures.RingTheory.PopescuZeroBaseSingleChartPolynomial
 public import WeilConjectures.RingTheory.PopescuZeroBaseSingleChartPresentation
 public import WeilConjectures.RingTheory.PopescuZeroBaseSingleChartUnlocalized
+public import WeilConjectures.RingTheory.PowerSeries.HenselianDVRClosure
 public import WeilConjectures.RingTheory.PowerSeriesAdicEvaluation
 public import WeilConjectures.RingTheory.PowerSeriesCohenFormallySmoothAdic
 public import WeilConjectures.RingTheory.PowerSeriesCombinedIdealCoefficients
@@ -16091,6 +16095,8 @@ public import WeilConjectures.TraceFormula.Specialization.GenericSliceTraitDVR
 public import WeilConjectures.TraceFormula.Specialization.GenericSliceTraitExists
 public import WeilConjectures.TraceFormula.Specialization.GenericSliceTraitGaloisLayer
 public import WeilConjectures.TraceFormula.Specialization.GenericSliceTraitGaloisLayerIntegral
+public import WeilConjectures.TraceFormula.Specialization.GenericSliceTraitSepClosedOfResidue
+public import WeilConjectures.TraceFormula.Specialization.GenericSliceTraitSepClosedStrict
 public import WeilConjectures.TraceFormula.Specialization.GenericSliceTraitUniversal
 public import WeilConjectures.TraceFormula.Specialization.GenericSliceTraitUnramified
 public import WeilConjectures.TraceFormula.Specialization.GenericVanishing
@@ -16252,6 +16258,7 @@ public import WeilConjectures.TraceFormula.Specialization.TraitSliceGaloisField
 public import WeilConjectures.TraceFormula.Specialization.TraitSliceGaloisHensel
 public import WeilConjectures.TraceFormula.Specialization.TraitSliceGaloisMinpoly
 public import WeilConjectures.TraceFormula.Specialization.TraitSliceGaloisSepClosed
+public import WeilConjectures.TraceFormula.Specialization.TraitSliceGaloisSepClosedHenselian
 public import WeilConjectures.TraceFormula.Specialization.TraitSliceGaloisTame
 public import WeilConjectures.TraceFormula.Specialization.TraitSliceGaloisTameSylow
 public import WeilConjectures.TraceFormula.Specialization.TraitSliceGaloisTensor
