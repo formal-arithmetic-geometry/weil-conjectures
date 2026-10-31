@@ -44,6 +44,8 @@ attribute [local irreducible] CategoryTheory.Functor.leftDerivedFunctor
 
 attribute [local irreducible] sectionTensorRightLocalization
 
+attribute [local instance] Sheaf.monoidalCategory Sheaf.symmetricCategory
+
 private theorem internalGenerator_hom_ext
     {C : Type v} [Category.{w} C] (J : GrothendieckTopology C)
     [UnivLE.{max v w, u}] [HasSheafify J AddCommGrpCat.{u}]

@@ -100,6 +100,7 @@ private theorem pushComparison_apply {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 section GenericInternalTensor
 universe v w z
+attribute [local instance] Sheaf.monoidalCategory Sheaf.symmetricCategory
 variable {C : Type w} [Category.{z} C] (J : GrothendieckTopology C)
   [UnivLE.{max w z, v}] [HasSheafify J Ab.{v}]
   [(J.W (A := Ab.{v})).IsMonoidal]

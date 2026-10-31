@@ -25,7 +25,7 @@ open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary
 
-private theorem ordinary_constructible_iff (A : Type u) [CommRing A]
+private theorem ordinary_constructible_iff (A : Type u) [CommRing A] [Finite A]
     (T : Scheme.{u}) [CompactSpace T] [QuasiSeparatedSpace T]
     (M : Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1} A))) :
     ordinaryConstructible A T M ↔ IsConstructible (ULift.{u + 1} A) M := by
@@ -42,13 +42,16 @@ private theorem ordinary_constructible_iff (A : Type u) [CommRing A]
         convert C.mem₀ using 1
         exact le_antisymm (fun _ _ ⟨i⟩ ↦ ⟨i.down⟩)
           (fun _ _ ⟨i⟩ ↦ ⟨(ULift.up i : ULift.{u + 1} C.I₀)⟩),
-      fun i ↦ hC i.down⟩
+      fun i ↦ by
+        obtain ⟨P, _, e⟩ := hC i.down
+        exact ⟨P, Module.Finite.of_finite, e⟩⟩
   · rintro ⟨I, W, g, hg, h⟩
     let C : Scheme.Cover.{u + 1} Scheme.proetalePrecoverage (S.domain a) :=
       ⟨⟨I, W, g⟩, hg⟩
     have : Precoverage.Small.{u} Scheme.proetalePrecoverage :=
       inferInstanceAs (Precoverage.Small.{u} (Scheme.propQCPrecoverage @WeaklyEtale))
-    exact ⟨C.restrictIndexOfSmall.{u}, fun i ↦
-      h (Precoverage.ZeroHypercover.Small.restrictFun.{u} C i)⟩
+    refine ⟨C.restrictIndexOfSmall.{u}, fun i ↦ ?_⟩
+    obtain ⟨P, _, e⟩ := h (Precoverage.ZeroHypercover.Small.restrictFun.{u} C i)
+    exact ⟨P, Module.finite_of_finite (ULift.{u + 1} A), e⟩
 
 end AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary

@@ -35,6 +35,7 @@ attribute [local irreducible] CategoryTheory.Functor.leftDerivedFunctor
 universe u
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 open scoped CategoryTheory.Obj
+attribute [local instance high] GrothendieckTopology.W.monoidal
 namespace AlgebraicGeometry.ProEtale
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]

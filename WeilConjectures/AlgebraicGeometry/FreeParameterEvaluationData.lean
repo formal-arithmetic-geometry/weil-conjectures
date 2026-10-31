@@ -106,6 +106,35 @@ abbrev Modules (X : Scheme.{u}) := ModuleObjectRingedComparison.Internal R.X X
 Source: HRS Section 3 (auxiliary; not a blueprint node). -/
 abbrev pointPull (X : Scheme.{u}) := ProfiniteFreeSlice.pointModulePullback R.X X
 
+omit [IsCommMonObj R.X] in
+/-- The point inverse image on modules is additive and exact.
+Source: Stacks 03D2; HRS Section 3 (auxiliary; not a blueprint node). -/
+theorem pointPull_exact (X : Scheme.{u}) : (pointPull R X).Additive ∧
+    PreservesFiniteLimits (pointPull R X) ∧ PreservesFiniteColimits (pointPull R X) := by
+  have : PreservesFiniteLimits (upperStarFromPoint X) := by
+    unfold upperStarFromPoint pointUpperStar
+    infer_instance
+  have : PreservesColimitsOfSize.{0, 0} pointUpperStar.{u} :=
+    pointUpperStarLowerStarAdjunction.leftAdjoint_preservesColimits
+  have : PreservesFiniteColimits (upperStarFromPoint X) := by
+    unfold upperStarFromPoint
+    infer_instance
+  unfold pointPull ProfiniteFreeSlice.pointModulePullback
+  exact ⟨Functor.additive_of_preserves_binary_products _, inferInstance, inferInstance⟩
+
+/-- Additivity of the point inverse image on modules. -/
+instance pointPull_additive (X : Scheme.{u}) : (pointPull R X).Additive :=
+  (pointPull_exact R X).1
+
+/-- The point inverse image on modules preserves finite limits. -/
+instance pointPull_limits (X : Scheme.{u}) : PreservesFiniteLimits (pointPull R X) :=
+  (pointPull_exact R X).2.1
+
+/-- The point inverse image on modules preserves finite colimits. -/
+instance pointPull_colimits (X : Scheme.{u}) :
+    PreservesFiniteColimits (pointPull R X) :=
+  (pointPull_exact R X).2.2
+
 /-- The ordinary unbounded point inverse image.
 Source: HRS Section 3 (auxiliary; not a blueprint node). -/
 abbrev pointPullD (X : Scheme.{u}) := (pointPull R X).mapDerivedCategory

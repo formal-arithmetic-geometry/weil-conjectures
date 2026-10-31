@@ -126,7 +126,7 @@ theorem internal_integral_residue_criterion
         · exact (DerivedCategory.isLE_iff K b).mp hab.2 q (by
             simp only [Set.mem_Icc] at hq
             omega)
-      have hH (q : ℤ) : DerivedCategory.torAmplitudeIn _ (-1) 0
+      have hH (q : ℤ) : _root_.DerivedCategory.torAmplitudeIn _ (-1) 0
           ((DerivedCategory.singleFunctor _ 0).obj
             ((DerivedCategory.homologyFunctor _ q).obj K)) :=
         torInterval_of_stratified (DerivedNakayama.integerRing l E) (-1) 0

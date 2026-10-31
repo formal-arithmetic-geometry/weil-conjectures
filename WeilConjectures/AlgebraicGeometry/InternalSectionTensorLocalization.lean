@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.InternalSliceDerivedHomComparison
 import all WeilConjectures.Algebra.Homology.RingedDerivedTensorNative
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 import all WeilConjectures.CategoryTheory.ExactMonoidalEquivalenceDerived
 import all WeilConjectures.CategoryTheory.InternalSectionTensorComparison
 
@@ -143,6 +144,7 @@ private local instance (P Q : GradedObject ℤ B) : P.HasTensor Q := inferInstan
 end Abstract
 
 attribute [local instance 1000001] sectionRingHasSheafCompose
+attribute [local instance 2000] HasDerivedCategory.ofIsGrothendieckAbelian
 
 section NormalizationUncurry
 universe u₀ v₀ u₁ v₁ u₂ v₂ u₃ v₃
@@ -319,12 +321,10 @@ open CategoryTheory.InternalAbelianSheafModule
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u})
 
-attribute [local irreducible] complexTensorIso totalComparison ordinaryTensorIso
-  CategoryTheory.InternalAbelianSheafModule.sectionModuleFunctor
+attribute [local irreducible] CategoryTheory.InternalAbelianSheafModule.sectionModuleFunctor
 
-attribute [local implicit_reducible] hom forward localizationIso localizationTensorMap
-  complexForward internalTotalTensor sliceForward sliceComplexForward sliceLocalizationIso
-  sliceLocalizationTensorMap sliceNativeTensor
+attribute [local implicit_reducible] hom complexForward internalTotalTensor sliceForward
+  sliceComplexForward sliceLocalizationIso sliceLocalizationTensorMap sliceNativeTensor
 
 attribute [local irreducible] sliceEquivalence sliceRingObject
 attribute [local instance] ringedMonoidal ringedSymmetric ringedPreadditive

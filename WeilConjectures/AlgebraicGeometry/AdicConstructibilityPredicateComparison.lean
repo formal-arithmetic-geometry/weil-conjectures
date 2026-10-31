@@ -45,7 +45,6 @@ import WeilConjectures.NumberTheory.Padics.IntegersAlgebra
 import WeilConjectures.NumberTheory.Padics.IntegersCosetBasis
 import WeilConjectures.NumberTheory.Padics.IntegersFinite
 import WeilConjectures.Topology.ProfiniteCondensedRing
-import of
 
 set_option linter.privateModule false
 
@@ -136,13 +135,8 @@ private theorem integralCoefficientIso (ℓ : ℕ) [Fact ℓ.Prime]
     exact NormedAlgebra.norm_eq_spectralNorm ℚ_[ℓ] (L := F) (WithAbs.equiv _ x)
   have hmem (x : WithAbs (Padic.coefficientExtensionAbsoluteValue ℓ F)) :
       x ∈ A ↔ e x ∈ PadicAlgCl.integers ℓ E := by
-    have hm := (Padic.extension_integers_dvr ℓ F
-      (Padic.coefficientExtensionAbsoluteValue ℓ F)
-      (spectralNorm_extends (K := ℚ_[ℓ]) (L := F))).choose_spec.choose_spec.1
     change WithAbs.equiv _ x ∈ Padic.coefficientExtensionIntegers ℓ F ↔ _
-    change ∀ y : F, y ∈ Padic.coefficientExtensionIntegers ℓ F ↔
-      Padic.coefficientExtensionAbsoluteValue ℓ F y ≤ 1 at hm
-    rw [hm, PadicAlgCl.mem_integers_iff]
+    rw [Padic.mem_coefficientExtensionIntegers, PadicAlgCl.mem_integers_iff]
     change ‖x‖ ≤ 1 ↔ ‖e x‖₊ ≤ 1
     rw [← he, ← NNReal.coe_le_coe, NNReal.coe_one, coe_nnnorm]
   let ei : A ≃+* PadicAlgCl.integers ℓ E :=

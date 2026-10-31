@@ -268,6 +268,7 @@ attribute [local irreducible] internalPullMonoidal CondensedRing.monoidal_upperS
   CategoryTheory.Functor.leftDerivedFunctor CategoryTheory.Functor.leftDerivedFunctorCounit
   CategoryTheory.Functor.leftDerivedTensorComparison
 
+omit [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ T)] in
 private theorem internal_kFlat (T : Scheme.{u})
     (A : HomotopyCategory (internalModules Λ T) (.up ℤ))
     (hA : KFlatSectionComparison.internalResolving Λ T A.as) :

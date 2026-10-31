@@ -96,7 +96,6 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
 attribute [local instance 20000] sheafBraidedCategory
-attribute [local instance 20000] Functor.tensorModelDerivedMonoidal
-  Functor.tensorModelHomotopyMonoidal
+attribute [local instance 20000] Functor.tensorModelHomotopyMonoidal
 attribute [local irreducible] Functor.leftDerivedFunctor Functor.mapDerivedCategory
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -97,7 +97,6 @@ import WeilConjectures.NumberTheory.Padics.IntegersFinite
 import WeilConjectures.RingTheory.BoundedProjectiveResolutionDimension
 import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.SheafGluing
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ClopenIdempotent
-import of
 
 /-!
 # Integral generators and their finite reductions
@@ -119,11 +118,23 @@ set_option cleanup.letToHave false
 open CategoryTheory CategoryTheory.Limits Opposite
 open AlgebraicGeometry AlgebraicGeometry.ProEtale
 
+universe u
+
+namespace AlgebraicGeometry.ProEtale
+
+/-- Convert a condensed ring sheaf to its existing ring object, then pull back to `X`.
+Source: blueprint comparison with completed coefficients, notation `Λ_X`
+(blueprint: sk-prop-sfb-qlbar-colimit-x). -/
+noncomputable def completedCoefficient (X : Scheme.{u})
+    (R : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1}) :=
+  coefficientRing X
+    (Mon.mk ((sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj R))
+
+end AlgebraicGeometry.ProEtale
+
 namespace WeilConjectures.SixFunctors
 
 open scoped CategoryTheory.Functor
-
-universe u
 
 attribute [local irreducible] upperStarFromPoint upperStarFromPointComp
   monoidal_upperStarFromPoint monoidal_pointUpperStar oplaxMonoidal_pointUpperStar
@@ -144,9 +155,4 @@ noncomputable instance integralModelFiniteCoefficient_isComm (X : Scheme.{u}) (A
     IsCommMonObj (completedCoefficient X (Profinite.continuousMapRingSheaf A)).X := by
   exact Functor.isCommMonObj_obj (F := upperStarFromPoint X)
 
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency true
-
-open scoped CategoryTheory.Obj in
-attribute [-instance] integralModel_coefficientMonObj in
 end WeilConjectures.SixFunctors

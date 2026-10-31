@@ -164,7 +164,8 @@ private theorem singleSquareOfSummands
 
 set_option maxHeartbeats 800000 in
 -- Only the single nonzero right degree is needed in the total comparison.
-omit [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ' T)]
+omit [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ T)]
+  [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ' T)]
   [IsCommMonObj Λ'] in
 private theorem sectionTensorRight_total (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u})
     (P : CochainComplex (Modules Λ T) ℤ) :

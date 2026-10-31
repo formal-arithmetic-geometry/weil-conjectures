@@ -31,6 +31,30 @@ set_option backward.isDefEq.respectTransparency.types false
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
 open scoped CategoryTheory.Obj
+namespace Profinite.CondensedAction.InternalBar
+
+variable (R : Profinite.CondensedRing.{u}) [IsCommMonObj R.X]
+
+/-- The actual free-forgetful adjunction, determining the generator inclusion.
+Source: step 1, the universal property of the free internal module
+(auxiliary; not a blueprint node). -/
+def freeAdjunction : free R ⊣
+    Mod.forget R.X ⋙ sheafCompose (coherentTopology Profinite.{u})
+      (forget AddCommGrpCat.{u + 1}) :=
+  (Sheaf.adjunction (coherentTopology Profinite.{u}) AddCommGrpCat.adj.{u + 1}).comp
+    (Mod.freeForgetAdjunction R.X)
+
+end Profinite.CondensedAction.InternalBar
+
+namespace AlgebraicGeometry.ProEtale.ProfiniteFreeSlice
+
+/-- The representable condensed set of a profinite parameter.
+Source: Stacks 08FI, 08J7; HRS Section 3 (auxiliary; not a blueprint node). -/
+abbrev parameter (P : Profinite.{u}) :=
+  ((coherentTopology Profinite.{u}).uliftYoneda.{u + 1}).obj P
+
+end AlgebraicGeometry.ProEtale.ProfiniteFreeSlice
+
 namespace AlgebraicGeometry.ProEtale.FreeParameterEvaluation
 attribute [local irreducible] Functor.leftDerivedFunctor Functor.rightDerivedFunctor
   Functor.mapDerivedCategory Mod.monoidalCategory Mod.monoidalCategoryStruct
@@ -70,6 +94,30 @@ attribute [local instance] pointFour pointGood12 pointGood23 pointLeft pointRigh
   schemeFour schemeGood12 schemeGood23 schemeLeft schemeRight
 
 variable (R : Profinite.CondensedRing.{u}) [IsCommMonObj R.X]
+
+/-- The recorded free module on h_P.
+Source: Stacks 08J7 (auxiliary; not a blueprint node). -/
+abbrev freeParameter (P : Profinite.{u}) :=
+  (Profinite.CondensedAction.InternalBar.free (Mon.mk R.X)).obj (ProfiniteFreeSlice.parameter P)
+
+/-- The point inverse image preserves finite limits. -/
+instance upperStarFromPoint_limits (X : Scheme.{u}) :
+    PreservesFiniteLimits (upperStarFromPoint X) := by
+  unfold upperStarFromPoint pointUpperStar
+  infer_instance
+
+/-- The point inverse image preserves finite colimits. -/
+instance upperStarFromPoint_colimits (X : Scheme.{u}) :
+    PreservesFiniteColimits (upperStarFromPoint X) := by
+  have : PreservesColimitsOfSize.{0, 0} pointUpperStar.{u} :=
+    pointUpperStarLowerStarAdjunction.leftAdjoint_preservesColimits
+  unfold upperStarFromPoint
+  infer_instance
+
+/-- The point inverse image is additive. -/
+instance upperStarFromPoint_additive (X : Scheme.{u}) :
+    (upperStarFromPoint X).Additive :=
+  Functor.additive_of_preserves_binary_products _
 
 section Scalars
 variable (S : Profinite.CondensedRing.{u}) [IsCommMonObj S.X]
@@ -112,7 +160,7 @@ attribute [local irreducible] DerivedCategory instCategoryDerivedCategory
   CondensedRing.upperStar CondensedRing.derivedComapUpperStarIso
   CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory
 
-attribute [local irreducible] restrictPointPullD projectionAdjunction
+attribute [local irreducible] restrictPointPullD
 
 /-- Canonical scalar/pullback comparison: transpose pullback of the scalar unit
 through the action identification. This definition precedes its isomorphism claim.
