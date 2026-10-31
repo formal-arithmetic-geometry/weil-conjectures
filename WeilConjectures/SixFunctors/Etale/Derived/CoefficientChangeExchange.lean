@@ -105,7 +105,7 @@ end Abstract
 
 section DerivedLift
 
-open Functor
+open _root_.CategoryTheory.Functor
 
 variable {X X' Y Y' Z Z' : Type*} [Category X] [Category X'] [Category Y] [Category Y']
   [Category Z] [Category Z']

@@ -26,9 +26,11 @@ namespace AlgebraicGeometry.ProEtale.InternalCompletionTransport
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u})
 
-local instance : HasDerivedCategory (ConstantCompletion.Mod (ring l E X)) :=
+local instance internalQuotientKoszulUnitComparisonInst1
+    : HasDerivedCategory (ConstantCompletion.Mod (ring l E X)) :=
   HasDerivedCategory.standard _
-local instance : HasDerivedCategory (ℕᵒᵖ ⥤ ConstantCompletion.Mod (ring l E X)) :=
+local instance internalQuotientKoszulUnitComparisonInst2
+    : HasDerivedCategory (ℕᵒᵖ ⥤ ConstantCompletion.Mod (ring l E X)) :=
   HasDerivedCategory.standard _
 
 /-- Comparison of augmented actual quotient Roos complexes with the singleton

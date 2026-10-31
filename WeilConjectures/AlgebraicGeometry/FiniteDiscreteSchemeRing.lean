@@ -33,13 +33,13 @@ attribute [local instance] Sheaf.monoidalCategory
 private noncomputable instance sectionsMonoidal : ((sheafSections J A).obj (op T)).LaxMonoidal :=
   inferInstanceAs (sheafToPresheaf J A ⋙ (evaluation Cᵒᵖ A).obj (op T)).LaxMonoidal
 
-private instance : (constantPresheafAdj A hT).IsMonoidal := by
+private instance finiteDiscreteSchemeRingInst1 : (constantPresheafAdj A hT).IsMonoidal := by
   constructor
   · simp [constantPresheafAdj, Functor.LaxMonoidal.ε, Functor.OplaxMonoidal.η]
   · intro X Y
     simp [constantPresheafAdj, Functor.LaxMonoidal.μ, Functor.OplaxMonoidal.δ]
 
-private instance : (constantSheafAdj J A hT).IsMonoidal := by
+private instance finiteDiscreteSchemeRingInst2 : (constantSheafAdj J A hT).IsMonoidal := by
   unfold constantSheafAdj
   infer_instance
 end
@@ -57,14 +57,14 @@ noncomputable def precomposeEvaluationIso (T : C) :
     (Functor.whiskeringLeft Cᵒᵖ Dᵒᵖ A).obj F.op ⋙ (evaluation Cᵒᵖ A).obj (op T) ≅
       (evaluation Dᵒᵖ A).obj (op (F.obj T)) := Iso.refl _
 
-private instance (T : C) : NatTrans.IsMonoidal
+private instance finiteDiscreteSchemeRingInst3 (T : C) : NatTrans.IsMonoidal
     (precomposeEvaluationIso (A := A) F T).hom where
   unit := by simp [precomposeEvaluationIso,
     Functor.LaxMonoidal.ε]
   tensor P Q := by simp [precomposeEvaluationIso,
     Functor.LaxMonoidal.μ]
 
-private instance {T : C} : NatTrans.IsMonoidal
+private instance finiteDiscreteSchemeRingInst4 {T : C} : NatTrans.IsMonoidal
     (sheafSectionsNatIsoEvaluation J A (X := T)).hom := by
   change NatTrans.IsMonoidal (𝟙 (sheafToPresheaf J A ⋙ (evaluation Cᵒᵖ A).obj (op T)))
   infer_instance
@@ -82,7 +82,7 @@ noncomputable def pushforwardSectionsIso (T : C) :
     Functor.isoWhiskerLeft _ (precomposeEvaluationIso F T) ≪≫
     (sheafSectionsNatIsoEvaluation K A).symm
 
-private instance (T : C) : NatTrans.IsMonoidal
+private instance finiteDiscreteSchemeRingInst5 (T : C) : NatTrans.IsMonoidal
     (pushforwardSectionsIso (A := A) F J K T).hom := by
   dsimp only [pushforwardSectionsIso, Iso.trans_hom, Iso.symm_hom,
     Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom]
@@ -91,7 +91,8 @@ private instance (T : C) : NatTrans.IsMonoidal
 variable [∀ P : Cᵒᵖ ⥤ A, F.op.HasPointwiseLeftKanExtension P]
   [(Functor.sheafPullbackConstruction.sheafPullback F A J K).Monoidal]
 
-local instance : (Functor.sheafPullbackConstruction.sheafPullback F A J K).OplaxMonoidal :=
+local instance finiteDiscreteSchemeRingInst6
+    : (Functor.sheafPullbackConstruction.sheafPullback F A J K).OplaxMonoidal :=
   Functor.Monoidal.toOplaxMonoidal
 
 variable [(Functor.sheafPullbackConstruction.sheafAdjunctionContinuous F A J K).IsMonoidal]
@@ -105,7 +106,7 @@ noncomputable def constantPullbackMonoidalIso {T : C} (hT : IsTerminal T)
       (Functor.sheafPullbackConstruction.sheafAdjunctionContinuous F A J K))
     (constantSheafAdj K A hFT)).symm (pushforwardSectionsIso (A := A) F J K T)
 
-instance {T : C} (hT : IsTerminal T) (hFT : IsTerminal (F.obj T)) :
+instance finiteDiscreteSchemeRingInst7 {T : C} (hT : IsTerminal T) (hFT : IsTerminal (F.obj T)) :
     NatTrans.IsMonoidal (constantPullbackMonoidalIso (A := A) F J K hT hFT).hom := by
   have h1 : (constantSheafAdj J A hT).IsMonoidal := inferInstance
   have h2 : (constantSheafAdj K A hFT).IsMonoidal := inferInstance
@@ -178,7 +179,7 @@ noncomputable def constantPointIso :
     (ProEt.topology specZ.{u}) (terminalIsTerminal (C := Profinite.{u}))
     ((terminalIsTerminal (C := Profinite.{u})).isTerminalObj profiniteToProEt)
 
-instance : NatTrans.IsMonoidal constantPointIso.{u}.hom := by
+instance finiteDiscreteSchemeRingInst8 : NatTrans.IsMonoidal constantPointIso.{u}.hom := by
   unfold constantPointIso
   infer_instance
 
@@ -199,12 +200,12 @@ theorem proEtTerminal_eq (T : Scheme.{u}) :
     proEtTerminal T = MorphismProperty.Over.mk ⊤ (𝟙 T) (by infer_instance) :=
   Classical.choose_spec (proEtTerminal_exists T)
 
-instance (T : Scheme.{u}) : IsIso (proEtTerminal T).hom := by
+instance finiteDiscreteSchemeRingInst9 (T : Scheme.{u}) : IsIso (proEtTerminal T).hom := by
   rw [proEtTerminal_eq]
   change IsIso (𝟙 T)
   infer_instance
 
-instance (T : Scheme.{u}) : IsIso
+instance finiteDiscreteSchemeRingInst10 (T : Scheme.{u}) : IsIso
     ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ (toSpecZ T)).obj
       (proEtTerminal specZ.{u})).hom := by
   rw [proEtTerminal_eq]
@@ -234,7 +235,8 @@ noncomputable def constantSchemeIso (T : Scheme.{u}) :
   Functor.isoWhiskerRight constantPointIso ((toSpecZ T)^*[Ab.{u + 1}]) ≪≫
   Functor.associator _ _ _
 
-instance (T : Scheme.{u}) : NatTrans.IsMonoidal (constantSchemeIso T).hom := by
+instance finiteDiscreteSchemeRingInst11
+    (T : Scheme.{u}) : NatTrans.IsMonoidal (constantSchemeIso T).hom := by
   dsimp only [constantSchemeIso, Iso.trans_hom, Functor.isoWhiskerRight_hom]
   infer_instance
 end AlgebraicGeometry.ProEtale
@@ -277,7 +279,7 @@ theorem finiteDiscreteSchemeRingIso_eq (T : Scheme.{u})
     (upperStarFromPoint T).mapIso eR :=
   Classical.choose_spec (finiteDiscreteSchemeRingIso_exists B T eR)
 
-instance (T : Scheme.{u})
+instance finiteDiscreteSchemeRingInst12 (T : Scheme.{u})
     (eR : Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1}
       (coherentTopology Profinite.{u}) ((Functor.const Profinite.{u}ᵒᵖ).obj
         (RingCat.of (ULift.{u + 1} B))) ≅ Profinite.continuousMapRingObj.{u} B)

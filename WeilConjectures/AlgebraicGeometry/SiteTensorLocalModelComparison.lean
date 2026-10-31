@@ -225,8 +225,10 @@ local notation "V" U => overFunctor.{u} ((sheafCompose J
   (forget₂ CommRingCat.{u} RingCat.{u})).obj ℛ) U
 local notation "cB" => commutativeSiteConstantModuleFunctor J B
 
-noncomputable local instance : MonoidalCategory A := monoidalCategory ℛ
-noncomputable local instance : SymmetricCategory A := symmetricCategory ℛ
+noncomputable local instance siteTensorLocalModelMonoidal :
+    MonoidalCategory A := monoidalCategory ℛ
+noncomputable local instance siteTensorLocalModelSymmetric :
+    SymmetricCategory A := symmetricCategory ℛ
 
 private theorem constant_tensor_iso :
     Nonempty ((Functor.postcompose₂.obj cB).obj (curriedTensor (ModuleCat.{u} B)) ≅

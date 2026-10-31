@@ -6,7 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.DVRStalkLocalEquation
-public import WeilConjectures.TraceFormula.Specialization.GenericDivisorLisseCore
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Immersion
+public import WeilConjectures.TraceFormula.Specialization.GenericDivisorGenericPoint
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorThickOrigin
 
 /-!
@@ -158,23 +159,6 @@ theorem exists_isZero_upperStar_nearbyCycles_lowerShriek_of_smooth (I : X.left.I
 end AlgebraicGeometry.ProEtale.CondensedRing
 
 /-! ### Lisse generators which are constant near `ζ` -/
-
-/-- A surjective immersion into a reduced scheme is an isomorphism: it factors as a closed
-immersion followed by a surjective open immersion. -/
-lemma AlgebraicGeometry.isIso_of_isImmersion_of_surjective {S T : Scheme.{u}} (f : S ⟶ T)
-    [IsImmersion f] [IsReduced T] (hf : Function.Surjective f.base) : IsIso f := by
-  have : IsIso f.coborderRange.ι := by
-    rw [isIso_iff_isOpenImmersion_and_surjective]
-    refine ⟨inferInstance, ⟨fun y ↦ ?_⟩⟩
-    obtain ⟨x, rfl⟩ := hf y
-    exact ⟨f.liftCoborder.base x, by rw [← Scheme.Hom.comp_apply, f.liftCoborder_ι]⟩
-  have : Surjective f.liftCoborder := ⟨fun y ↦ by
-    obtain ⟨x, hx⟩ := hf (f.coborderRange.ι.base y)
-    refine ⟨x, f.coborderRange.ι.isOpenEmbedding.injective ?_⟩
-    rw [← Scheme.Hom.comp_apply, f.liftCoborder_ι, hx]⟩
-  have := isIso_of_isClosedImmersion_of_surjective f.liftCoborder
-  rw [← f.liftCoborder_ι]
-  infer_instance
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 

@@ -523,7 +523,8 @@ section OrdinaryScalar
 universe v
 variable {C : Type v} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J CommRingCat.{v})
-local instance : MonoidalCategory (ConstantCompletion.Mod O) :=
+local instance ordinaryUniformizerScalarComparisonInst1
+    : MonoidalCategory (ConstantCompletion.Mod O) :=
   SheafOfModules.monoidalCategory O
 
 private theorem ordinary_scalar_characterization (M : ConstantCompletion.Mod O)

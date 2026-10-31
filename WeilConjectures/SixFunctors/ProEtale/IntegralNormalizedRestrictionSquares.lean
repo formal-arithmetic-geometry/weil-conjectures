@@ -62,7 +62,8 @@ private theorem constantPullback_unit_all {W : C} (hW : IsTerminal W)
   exact hr
 end ConstantUnit
 
-local instance : EssentiallySmall.{u + 1} X.ProEt := essentiallySmallSelf.{0} _
+local instance integralNormalizedRestrictionSquaresInst1
+    : EssentiallySmall.{u + 1} X.ProEt := essentiallySmallSelf.{0} _
 
 private theorem canonicalAbelianMap_unit
     (B : Type u) [CommRing B] [TopologicalSpace B] [IsTopologicalRing B]

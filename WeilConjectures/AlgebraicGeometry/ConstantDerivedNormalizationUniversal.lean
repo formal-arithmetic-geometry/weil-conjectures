@@ -53,9 +53,11 @@ private theorem ringRestriction_equivalence : (ringRestriction J R).IsEquivalenc
       exact congrArg (fun f ↦ f.hom.app U x) c.hom_inv_id)
   exact e.isEquivalence_functor
 
-private instance : (ringRestriction J R).IsEquivalence := ringRestriction_equivalence J R
+private instance constantDerivedNormalizationUniversalInst1
+    : (ringRestriction J R).IsEquivalence := ringRestriction_equivalence J R
 
-private instance : (constantRingModuleRestriction J R).IsEquivalence := by
+private instance constantDerivedNormalizationUniversalInst2
+    : (constantRingModuleRestriction J R).IsEquivalence := by
   obtain ⟨⟨e, he, _⟩, _⟩ := constant_ring_module_sheaves J R
   rw [← he]
   infer_instance
@@ -63,11 +65,14 @@ private instance : (constantRingModuleRestriction J R).IsEquivalence := by
 private def restriction : realizationModules J R ⥤ Sheaf J (ModuleCat.{max u v} R) :=
   ringRestriction J R ⋙ constantRingModuleRestriction J R
 
-private instance : (restriction J R).IsEquivalence := by unfold restriction; infer_instance
-private instance : (restriction J R).Additive where
+private instance constantDerivedNormalizationUniversalInst3
+    : (restriction J R).IsEquivalence := by unfold restriction; infer_instance
+private instance constantDerivedNormalizationUniversalInst4 : (restriction J R).Additive where
   map_add := by intros; ext U x; rfl
-private instance : PreservesFiniteLimits (restriction J R) := inferInstance
-private instance : PreservesFiniteColimits (restriction J R) := inferInstance
+private instance constantDerivedNormalizationUniversalInst5
+    : PreservesFiniteLimits (restriction J R) := inferInstance
+private instance constantDerivedNormalizationUniversalInst6
+    : PreservesFiniteColimits (restriction J R) := inferInstance
 
 private lemma ringIso_fac : realizationRingUnit J R ≫ (realizationRingIso J R).hom.hom =
     toSheafify J ((Functor.const Cᵒᵖ).obj (RingCat.of R)) := by
@@ -89,9 +94,11 @@ private lemma restriction_smul (M : realizationModules J R) (V : Cᵒᵖ) (r : R
   erw [← h]
   exact congrArg (fun a ↦ a • x) (ConcreteCategory.congr_hom hi _)
 
-private instance : Presheaf.IsLocallyInjective J (realizationRingUnit J R) :=
+private instance constantDerivedNormalizationUniversalInst7
+    : Presheaf.IsLocallyInjective J (realizationRingUnit J R) :=
   (realizationRingUnit_locallyBijective J R).1
-private instance : Presheaf.IsLocallySurjective J (realizationRingUnit J R) :=
+private instance constantDerivedNormalizationUniversalInst8
+    : Presheaf.IsLocallySurjective J (realizationRingUnit J R) :=
   (realizationRingUnit_locallyBijective J R).2
 
 private def constantSeed (M : ModuleCat.{max u v} R) :
@@ -126,21 +133,22 @@ private lemma constantMap_fac (M : ModuleCat.{max u v} R) :
       constantSeed J R M := by
   exact ((sheafificationAdjunction J (ModuleCat.{max u v} R)).homEquiv _ _).apply_symm_apply _
 
-private instance (M : ModuleCat.{max u v} R) :
+private instance constantDerivedNormalizationUniversalInst9 (M : ModuleCat.{max u v} R) :
     Presheaf.IsLocallyInjective J (constantSeed J R M) where
   equalizerSieve_mem x y h :=
     Presheaf.equalizerSieve_mem J
       (toSheafify J ((Functor.const Cᵒᵖ).obj
         ((forget₂ (ModuleCat R) AddCommGrpCat).obj M))) x y h
 
-private instance (M : ModuleCat.{max u v} R) :
+private instance constantDerivedNormalizationUniversalInst10 (M : ModuleCat.{max u v} R) :
     Presheaf.IsLocallySurjective J (constantSeed J R M) where
   imageSieve_mem x :=
     Presheaf.imageSieve_mem J
       (toSheafify J ((Functor.const Cᵒᵖ).obj
         ((forget₂ (ModuleCat R) AddCommGrpCat).obj M))) x
 
-private instance (M : ModuleCat.{max u v} R) : IsIso (constantMap J R M) := by
+private instance constantDerivedNormalizationUniversalInst11
+    (M : ModuleCat.{max u v} R) : IsIso (constantMap J R M) := by
   apply (Sheaf.isLocallyBijective_iff_isIso _).mp
   constructor
   · apply (Presheaf.comp_isLocallyInjective_iff J

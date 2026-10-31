@@ -9,7 +9,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionUpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition
-public import WeilConjectures.TateTwist.ProEtale
+public import WeilConjectures.SmoothPurity.OrientationCanonical
+public import WeilConjectures.SmoothPurity.TateTwistBoundedConstructible
 
 /-!
 
@@ -40,14 +41,22 @@ complex is the tensor unit of `D(Mod_{ℚ̄_ℓ,Y})`, and `ℚ̄_ℓ,X(d)` is th
 `Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ D(Mod_{ℚ̄_ℓ,X})`, which is fully faithful, so that the constructibility of the Tate
 twists need not be recorded.
 
-## Sorried data
+## The orientation and the sorried properties
 
 The orientation `γ_f : ℚ̄_ℓ,X(d)[2d] ⟶ Rf^! ℚ̄_ℓ,Y`
 (`AlgebraicGeometry.ProEtale.CondensedRing.smoothOrientation`, blueprint `sk-thm-purity-transport`,
-used in `def-pur-smooth-trace`)
-is a `@[no_expose]` definition with value `sorry`: its construction (the finite orientations
-transported through the integral tower, normalized by integration on the affine line) is not
-formalized. The trace map `Tr_f : Rf_! ℚ̄_ℓ,X(d)[2d] ⟶ ℚ̄_ℓ,Y` of SGA 4, Exposé XVIII
+used in `def-pur-smooth-trace`) is a `@[no_expose]` definition. It is the canonical orientation
+(`AlgebraicGeometry.ProEtale.CondensedRing.IsCanonicalSmoothOrientation`): the extension of
+scalars to `ℚ̄_ℓ` of the integral morphism `ℤ_ℓ,X(d)[2d] ⟶ Rf^! ℤ_ℓ,Y` lifting the finite
+orientations `Rf^! Λ_Y ≅ Λ_X(d)[2d]`, `Λ = ℤ ⧸ ℓⁿ`, of the diagonal argument
+(`AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso`), when an isomorphism with this property
+is known to exist. The lift always exists mathematically (SGA 4, Exposé XVIII: the finite
+orientations are compatible under change of coefficients, blueprint
+`det-sp-purity-coefficient-change`) and is unique, but its existence is not formalized; when it is
+not available, `γ_f` is a non-canonical isomorphism
+(`AlgebraicGeometry.ProEtale.CondensedRing.nonempty_iso_tateTwist_upperShriekUnit`). In all cases
+`γ_f` is an isomorphism (`AlgebraicGeometry.ProEtale.CondensedRing.isIso_smoothOrientation`). The
+trace map `Tr_f : Rf_! ℚ̄_ℓ,X(d)[2d] ⟶ ℚ̄_ℓ,Y` of SGA 4, Exposé XVIII
 (`AlgebraicGeometry.ProEtale.CondensedRing.smoothTrace`) is the blueprint composite of `Rf_! γ_f`
 and the counit of `Rf_! ⊣ Rf^!`. The purity isomorphism
 `AlgebraicGeometry.ProEtale.CondensedRing.smoothPurityIso` is *defined* from it, as the inverse
@@ -85,36 +94,6 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
-/-! ### Constructibility of the Tate twists -/
-
-section TateTwist
-
-variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
-  [Fact (ringChar k ≠ ℓ)]
-  (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
-
-/-- The shifted Tate twist `ℚ̄_ℓ,X(d)[n]` of a separated `k`-scheme of finite type, on which `ℓ`
-is invertible, is bounded constructible. -/
-lemma boundedConstructible_tateTwistDerived (d n : ℤ) :
-    boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)
-      ((shiftFunctor _ n).obj (tateTwistDerived X.left ℓ d)) :=
-  sorry
-
-/-- The shifted Tate twist `ℚ̄_ℓ,X(d)[n]`, as a bounded constructible complex. -/
-noncomputable def boundedConstructibleTateTwist (d n : ℤ) :
-    Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
-  ⟨(shiftFunctor _ n).obj (tateTwistDerived X.left ℓ d),
-    boundedConstructible_tateTwistDerived ℓ X d n⟩
-
-end TateTwist
-
-/-- The Tate twist `ℚ̄_ℓ,X(0)`, placed in degree `0`, is the unit of `D(Mod_{ℚ̄_ℓ,X})`. -/
-noncomputable def tateTwistDerivedZeroIso (ℓ : ℕ) [Fact ℓ.Prime] (T : Scheme.{u}) :
-    tateTwistDerived T ℓ 0 ≅ 𝟙_ _ :=
-  DerivedCategory.singleFunctorObjUnitIso _
-
-/-! ### Smooth purity -/
-
 section Purity
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
@@ -124,19 +103,41 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (f : X ⟶ Y) (d : ℕ) [SmoothOfRelativeDimension d f.left]
 
+omit [SmoothOfRelativeDimension d f.left] in
 /-- Blueprint `sk-thm-purity-transport` (`γ_{f,ℚ̄_ℓ}(ℚ̄_ℓ,Y)`, used in `def-pur-smooth-trace`): the
 **orientation** `ℚ̄_ℓ,X(d)[2d] ⟶ Rf^! ℚ̄_ℓ,Y` of a morphism `f` smooth of pure relative dimension
-`d`, the purity isomorphism normalized by integration on the affine line (the canonical
-orientation of `𝔸¹_Y ⟶ Y`). Its construction (from the finite orientations through the integral
-tower and scalar extension) is not formalized; it is the datum the smooth trace is built from.
-The signature does not carry `[SmoothOfRelativeDimension d f.left]` because the (sorried) value
-does not use it; the datum is meaningful only for `f` smooth of pure relative dimension `d`. -/
+`d`, the datum the smooth trace is built from. It is `smoothOrientationOfSmooth`: the canonical
+orientation (`IsCanonicalSmoothOrientation`, the extension of scalars of the integral lift of the
+finite orientations `Rf^! Λ_Y ≅ Λ_X(d)[2d]` of the diagonal argument) when an isomorphism with
+this property is known to exist, and otherwise a non-canonical isomorphism
+(`nonempty_iso_tateTwist_upperShriekUnit`). The canonical orientation always exists
+mathematically (SGA 4, Exposé XVIII: the finite orientations are compatible under change of
+coefficients, blueprint `det-sp-purity-coefficient-change`), but the existence of the compatible
+lift is not formalised. It is an isomorphism (`isIso_smoothOrientation`).
+The signature does not carry `[SmoothOfRelativeDimension d f.left]`: for `f` not smooth of pure
+relative dimension `d` the value is `0`, and the datum is meaningful only for `f` smooth of pure
+relative dimension `d`. -/
 @[no_expose]
 noncomputable def smoothOrientation :
     boundedConstructibleTateTwist ℓ X d (2 * d) ⟶
       (boundedConstructibleUpperShriek ℓ f).obj
-        (𝟙_ (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) :=
-  sorry
+        (𝟙_ (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)) := by
+  classical
+  exact if _ : SmoothOfRelativeDimension d f.left then
+    haveI := neZero_natCast_of_ringChar_ne ℓ (k := k)
+    smoothOrientationOfSmooth ℓ f d
+  else 0
+
+-- The smoothness hypothesis is a binder of the instance: an `instance` drops unused
+-- instance-implicit section variables, even under `include`. The elaborated signature has it
+-- once; the linter also counts the section variable in scope.
+set_option linter.overlappingInstances false in
+/-- The orientation of a morphism smooth of pure relative dimension `d` is an isomorphism: both
+the canonical and the non-canonical orientations are (`isIso_smoothOrientationOfSmooth`). -/
+instance isIso_smoothOrientation [SmoothOfRelativeDimension d f.left] :
+    IsIso (smoothOrientation ℓ f d) := by
+  rw [smoothOrientation, dif_pos ‹_›]
+  infer_instance
 
 /-- Blueprint `def-pur-smooth-trace` (`sk-def-sp-trace`): the **trace map**
 `Tr_f : Rf_! ℚ̄_ℓ,X(d)[2d] ⟶ ℚ̄_ℓ,Y` of a morphism `f` smooth of pure relative dimension `d`

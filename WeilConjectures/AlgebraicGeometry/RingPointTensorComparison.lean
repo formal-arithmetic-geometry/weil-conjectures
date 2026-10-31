@@ -180,7 +180,7 @@ private theorem pointTensorMap_unit {A : CommRingCat.{u}} (M : RingSiteModules A
 
 section
 variable (A : CommRingCat.{u})
-local instance : MonoidalCategory (RingSiteModules A) :=
+local instance ringPointTensorComparisonInst1 : MonoidalCategory (RingSiteModules A) :=
   SheafOfModules.monoidalCategory (CochainComplex.onePointRingSheaf A)
 
 /-- Naturality of the evaluated tensor comparison. The two whiskering naturality formulas for the

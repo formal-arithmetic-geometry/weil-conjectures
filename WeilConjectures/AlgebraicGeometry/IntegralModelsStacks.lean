@@ -4,24 +4,42 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
+public import WeilConjectures.AlgebraicGeometry.ConstantModelTorAmplitude
+public import WeilConjectures.AlgebraicGeometry.IntegralConstantModelRealization
 public import WeilConjectures.AlgebraicGeometry.IntegralModelsStacksData
-public import WeilConjectures.SixFunctors.ProEtale.InternalCompletionSectionTransport
-import all WeilConjectures.AlgebraicGeometry.IntegralCohomologicalAdicCriterion
-import WeilConjectures.AlgebraicGeometry.IntegralConstantModelConstructibility
+import all WeilConjectures.AlgebraicGeometry.IntegralConstantModelHeartClosure
+import WeilConjectures.AlgebraicGeometry.IntegralConstantModelCriterion
 import WeilConjectures.AlgebraicGeometry.IntegralModelsCompletionTransport
-import WeilConjectures.AlgebraicGeometry.IntegralModelsResidueTransport
-public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
-public import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.CategoryTheory.ObjectProperty.Equivalence
-public import WeilConjectures.CategoryTheory.ModuleObjects.Abelian
-public import WeilConjectures.CategoryTheory.ModuleObjects.Symmetric
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
-public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
+import WeilConjectures.AlgebraicGeometry.IntegralModelsStacksBasic
+import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Equivalence
+import WeilConjectures.SixFunctors.ProEtale.InternalCompletionStacksComparison
+import WeilConjectures.SixFunctors.ProEtale.InternalResidueStacksComparison
 
-/-! # Integral constructible objects and Stacks adic constructibility
+/-! # Integral models and Stacks adic constructibility
 
-Source: blueprint integral-models-stacks; Stacks Tag 09C1.
+This file proves `det-lem-integral-models-stacks` along the blueprint route: restriction of
+scalars along the map from the constant coefficient ring, the integral constructibility
+criterion `sk-prop-integral-criterion`, part (2) of
+`det-prop-integral-criterion-constant-coefficients` and the pro-étale/étale comparison of
+constructible complexes. The criterion is stated in the internal presentation over
+`DerivedNakayama.integerRing` (`internal_integral_criterion_forward`,
+`internal_integral_criterion_reverse`), where completeness is the Roos condition
+`IsDerivedComplete` and the residue is `AdicCompletion.derivedReduction`.
+
+Here `Dᵇc(X, 𝒪_E)` is `constantModelBoundedConstructible`, the finite-constant-model form of
+`sk-def-sfb-constructible`. For this form the reverse implication of the criterion needs the
+local structure theorem `sk-prop-integral-local-structure`; it is supplied by the adic stratified
+perfect models through `integral_models_stacks_criterion`.
+
+## Main statements
+
+* `internal_integral_criterion_forward`, `internal_integral_criterion_reverse`: the two
+  directions of `sk-prop-integral-criterion`.
+* `integral_models_stacks`: `K ∈ Dᵇc(X, 𝒪_E)` iff `Res K` is Stacks adic constructible
+  (`integral_models_stacks_criterion`), and `Res` restricts to an equivalence of the two full
+  subcategories.
+
+Source: blueprint det-lem-integral-models-stacks; Stacks Tag 09C1.
 -/
 
 @[expose] public noncomputable section
@@ -34,121 +52,149 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.IntegralModelsStacks
 
-/-- An isomorphism of derived objects induces an isomorphism of their transports to the
-small site. Proof: compare both transports with the derived functor of the section-module
-equivalence `smallModules` on localization representatives. Source: Stacks Tag 05RU
+/-- Local derived completeness for the first residue map, transported to the small site:
+the completeness clause of `stacksConstructible`.
+Source: Stacks Tag 09C1 (auxiliary; not a blueprint node). -/
+def stacksComplete (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u}) :
+    ObjectProperty (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (discreteObj (Padic.coefficientExtensionIntegers l E)) X))) :=
+  fun L ↦ ConstantCompletion.IsComplete (smallMap X (residueMap l E X))
+    (smallDerivedObject X _ L)
+
+/-- The complexes over the continuous integers whose restriction to the constant integers is
+complete in the sense of `stacksComplete`.
+Source: blueprint det-lem-integral-models-stacks
 (auxiliary; not a blueprint node). -/
-def smallDerivedIso (X : Scheme.{u})
-    (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
-    {K L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R)}
-    (e : K ≅ L) : smallDerivedObject X R K ≅ smallDerivedObject X R L := by
-  let := HasDerivedCategory.standard (ConstantCompletion.Mod (smallRing X R))
-  let F := smallModules X R
-  have : F.IsEquivalence := InternalCompletionTransport.smallModules_equivalence X R
-  have : F.Additive := ⟨by intros; ext U x; rfl⟩
-  change DerivedCategory.Q.obj
-      ((F.mapHomologicalComplex (.up ℤ)).obj (DerivedCategory.Q.objPreimage K)) ≅
-    DerivedCategory.Q.obj
-      ((F.mapHomologicalComplex (.up ℤ)).obj (DerivedCategory.Q.objPreimage L))
-  exact (F.mapDerivedCategoryFactors.app (DerivedCategory.Q.objPreimage K)).symm ≪≫
-    F.mapDerivedCategory.mapIso ((DerivedCategory.Q.objObjPreimageIso K) ≪≫ e ≪≫
-      (DerivedCategory.Q.objObjPreimageIso L).symm) ≪≫
-    F.mapDerivedCategoryFactors.app (DerivedCategory.Q.objPreimage L)
+def restrictionComplete (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u}) :
+    ObjectProperty (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (integersObj l E) X))) :=
+  fun K ↦ stacksComplete l E X ((restriction l E X).obj K)
 
-/-- Local derived completeness along `q` is invariant under isomorphism. Proof: derived
-restriction and derived internal Hom carry the isomorphism to an isomorphism on every slice.
-Source: Stacks Tag 0999 (auxiliary; not a blueprint node). -/
-theorem isComplete_of_iso
-    {C : Type (u + 1)} [SmallCategory C] {J : GrothendieckTopology C}
-    {O S : Sheaf J CommRingCat.{u + 1}} (q : O ⟶ S)
-    {K L : ConstantCompletion.D O} (e : K ≅ L)
-    (hK : ConstantCompletion.IsComplete q K) : ConstantCompletion.IsComplete q L := by
-  let := HasDerivedCategory.standard (ConstantCompletion.Mod O)
-  let (U : C) := HasDerivedCategory.standard (ConstantCompletion.Mod (O.over U))
-  intro U f hf
-  let H := (Functor.curry.obj (derivedInternalHom (J.over U) (O.over U))).obj
-    (op ((DerivedCategory.singleFunctor _ 0).obj
-      (ringedSectionLocalization (O.over U) (ringedSliceSection O U f))))
-  exact (((ringedDerivedRestriction O U ⋙ H).mapIso e).isZero_iff).mp (hK U f hf)
+/-- Transport along `IntegralConstantModel.pointComparison` from the internal presentation
+over `DerivedNakayama.integerRing` to the continuous integers `integersObj` preserves and
+reflects bounded constant-model constructibility.
+Source: blueprint det-lem-integral-models-stacks (auxiliary; not a blueprint node).
 
-/-- Stacks adic constructibility is invariant under isomorphism. Proof: completeness by
-`isComplete_of_iso` after `smallDerivedIso`, the residue clause by `residueCondition_iso`.
-Source: Stacks Tags 09C1 and 09C2 (auxiliary; not a blueprint node). -/
-theorem stacksConstructible_iso (l : ℕ) [Fact l.Prime]
-    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
-    (X : Scheme.{u}) [IsNoetherian X]
-    {K L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (discreteObj (Padic.coefficientExtensionIntegers l E)) X))}
-    (e : K ≅ L) (hK : stacksConstructible l E X K) : stacksConstructible l E X L := by
-  refine ⟨isComplete_of_iso _ (smallDerivedIso X _ e) hK.1, ?_⟩
-  exact residueCondition_iso l E X e hK.2
+Proof: restriction of scalars along an isomorphism of coefficient rings is an exact
+equivalence, so it preserves and reflects boundedness, commutes with cohomology, and
+`constantModel_comap_iff` transports the finite constant models. -/
+theorem constantModelBoundedConstructible_pointComparison_iff
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u})
+    (K : DerivedCategory (AdicCompletion.Modules l E X)) :
+    constantModelBoundedConstructible (DerivedNakayama.integerRing l E) X K ↔
+      constantModelBoundedConstructible (integersObj l E) X
+        ((Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+          (coefficientMap (IntegralConstantModel.pointComparison l E).inv.hom X)
+          ).mapDerivedCategory.obj K) := by
+  let F := Mod.comap (D := Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+    (coefficientMap (IntegralConstantModel.pointComparison l E).inv.hom X)
+  have hF : F.IsEquivalence := (Mod.comapEquivalenceOfIsIso _).isEquivalence_functor
+  apply and_congr
+  · exact ⟨F.bounded_mapDerivedCategory_obj, F.bounded_of_bounded_mapDerivedCategory_obj⟩
+  · apply forall_congr'
+    intro q
+    have h := constantModel_comap_iff (IntegralConstantModel.pointComparison l E).inv.hom
+      X ((DerivedCategory.homologyFunctor _ q).obj K)
+    have hi' := (constantModelConstructibleFiniteTor_wellDefined (integersObj l E) X).1
+    let := hi'
+    exact h.symm.trans
+      ⟨fun h ↦ ObjectProperty.prop_of_iso _
+        ((F.mapDerivedCategoryHomologyFunctorIso q).app K) h,
+      fun h ↦ ObjectProperty.prop_of_iso _
+        ((F.mapDerivedCategoryHomologyFunctorIso q).app K).symm h⟩
 
-/-- An equivalence `e` of full subcategories `PC ≌ QC` whose functor is identified with `F`
-restricts to an equivalence `P ≌ Q` of smaller full subcategories with the same functor,
-provided `F` matches `P` with `Q` on `PC`. Proof: the restricted functor is fully faithful,
-and every object of `Q` is the image of its `e`-preimage, which satisfies `P`.
-(auxiliary; not a blueprint node). -/
-theorem exists_selected_equivalence
-    {C D : Type*} [Category C] [Category D]
-    (P PC : ObjectProperty C) (Q QC : ObjectProperty D)
-    (F : C ⥤ D) (e : PC.FullSubcategory ≌ QC.FullSubcategory)
-    (α : e.functor ⋙ QC.ι ≅ PC.ι ⋙ F)
-    (hP : P ≤ PC) (hQ : Q ≤ QC)
-    [Q.IsClosedUnderIsomorphisms]
-    (hm : ∀ K, PC K → (P K ↔ Q (F.obj K))) :
-    ∃ d : P.FullSubcategory ≌ Q.FullSubcategory,
-      Nonempty (d.functor ⋙ Q.ι ≅ P.ι ⋙ F) := by
-  let i := ObjectProperty.ιOfLE hP
-  let G := Q.lift (P.ι ⋙ F) (fun K ↦ (hm K.obj (hP _ K.property)).mp K.property)
-  let β : i ⋙ e.functor ⋙ QC.ι ≅ G ⋙ Q.ι := Functor.isoWhiskerLeft i α
-  let h := ((Functor.FullyFaithful.ofFullyFaithful i).comp
-    ((Functor.FullyFaithful.ofFullyFaithful e.functor).comp
-      QC.fullyFaithfulι)).ofIso β
-  let hG := Functor.FullyFaithful.ofCompFaithful h
-  let : G.Full := hG.full
-  let : G.Faithful := hG.faithful
-  have : G.EssSurj := by
-    constructor
-    intro L
-    let L' : QC.FullSubcategory := ⟨L.obj, hQ _ L.property⟩
-    let K := e.inverse.obj L'
-    let γ : F.obj K.obj ≅ L.obj :=
-      (α.app K).symm ≪≫ QC.ι.mapIso (e.counitIso.app L')
-    have hK : P K.obj := (hm K.obj K.property).mpr (Q.prop_of_iso γ.symm L.property)
-    exact ⟨⟨K.obj, hK⟩, ⟨Q.fullyFaithfulι.preimageIso γ⟩⟩
-  let : G.IsEquivalence := {}
-  exact ⟨G.asEquivalence, ⟨Iso.refl _⟩⟩
+/-- Integral constructibility criterion, direction (1) to (2), in the internal presentation:
+a bounded constructible complex over the continuous integers is derived complete, and its
+first derived reduction is bounded constructible of finite Tor amplitude. This is the
+implication (1) ⇒ (2) of `sk-prop-integral-criterion` (Bhatt–Scholze, Proposition 6.8.11),
+together with finite Tor amplitude of the reduction over the residue field, as used in the
+proof of `det-lem-integral-models-stacks`.
+Source: Bhatt–Scholze 6.8.11; Stacks Tag 09C7
+(blueprint: sk-prop-integral-criterion).
+
+Proof: transport `K` to the continuous integers
+(`constantModelBoundedConstructible_pointComparison_iff`),
+apply `integral_models_stacks_criterion`, and read the two clauses of
+`stacksConstructible` back by `internal_completion_stacks_comparison` and
+`internal_residue_stacks_comparison`. -/
+theorem internal_integral_criterion_forward
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+    (X : Scheme.{u}) [IsNoetherian X] (K : DerivedCategory (AdicCompletion.Modules l E X))
+    (hK : constantModelBoundedConstructible (DerivedNakayama.integerRing l E) X K) :
+    IsDerivedComplete l E X K ∧
+      constantModelBoundedConstructible (DerivedNakayama.quotientRing l E 1) X
+        ((AdicCompletion.derivedReduction l E X 0).obj K) ∧
+      _root_.DerivedCategory.finiteTorAmplitude _
+        ((AdicCompletion.derivedReduction l E X 0).obj K) := by
+  have h := (integral_models_stacks_criterion l E X _).mp
+    ((constantModelBoundedConstructible_pointComparison_iff l E X K).mp hK)
+  exact ⟨(internal_completion_stacks_comparison l E X K).mpr h.1,
+    (internal_residue_stacks_comparison l E X K).mp h.2⟩
+
+/-- Integral constructibility criterion, direction (2) to (1), in the internal presentation:
+a derived complete complex whose first derived reduction is bounded constructible is bounded
+constructible over the continuous integers. This is the implication (2) ⇒ (1) of
+`sk-prop-integral-criterion` (Bhatt–Scholze, Proposition 6.8.11); its proof goes through (3) by
+`sk-prop-integral-local-structure`.
+Source: Bhatt–Scholze 6.8.11; Stacks Tag 09C7
+(blueprint: sk-prop-integral-criterion).
+
+Proof: the reduction has finite Tor amplitude, `𝒪_E/ϖ_E` being a field
+(`finiteTorAmplitude_of_constantModelBoundedConstructible_residue`).
+`internal_completion_stacks_comparison` and `internal_residue_stacks_comparison` then show
+that the restriction of the transported complex is Stacks adic constructible; conclude by
+`integral_models_stacks_criterion` and `constantModelBoundedConstructible_pointComparison_iff`. -/
+theorem internal_integral_criterion_reverse
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+    (X : Scheme.{u}) [IsNoetherian X] (K : DerivedCategory (AdicCompletion.Modules l E X))
+    (hc : IsDerivedComplete l E X K)
+    (hr : constantModelBoundedConstructible (DerivedNakayama.quotientRing l E 1) X
+      ((AdicCompletion.derivedReduction l E X 0).obj K)) :
+    constantModelBoundedConstructible (DerivedNakayama.integerRing l E) X K :=
+  (constantModelBoundedConstructible_pointComparison_iff l E X K).mpr
+    ((integral_models_stacks_criterion l E X _).mpr
+      ⟨(internal_completion_stacks_comparison l E X K).mp hc,
+        (internal_residue_stacks_comparison l E X K).mpr
+          ⟨hr, finiteTorAmplitude_of_constantModelBoundedConstructible_residue l E X hr⟩⟩)
+
+/-- Restriction of scalars along the map from the constant integer ring is an equivalence from
+the complexes whose restriction is complete onto the complete complexes, with the inclusion
+functors identified with restriction. This is part (2) of
+`det-prop-integral-criterion-constant-coefficients` (restriction of scalars is an equivalence
+on derived complete objects), transported to the small-site presentation of
+`stacksConstructible`; completeness of `K` is read on its restriction as in part (3).
+Source: Stacks Tags 0999 and 09C1
+(blueprint: det-prop-integral-criterion-constant-coefficients).
+
+Proof: this is `completion_transport`, whose first clause identifies its source property
+with `restrictionComplete` and whose target property is `stacksComplete`. -/
+theorem restriction_complete_equivalence
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u}) [IsNoetherian X] :
+    ∃ e : (restrictionComplete l E X).FullSubcategory ≌ (stacksComplete l E X).FullSubcategory,
+      Nonempty (e.functor ⋙ (stacksComplete l E X).ι ≅
+        (restrictionComplete l E X).ι ⋙ restriction l E X) := by
+  obtain ⟨h, e, α⟩ := completion_transport l E X
+  have hA : (fun K ↦ Scheme.IsSfbAdicComplete X (IntegralConstantCompletion.ideal l E)
+      ((IntegralConstantModel.derived l E X).functor.obj K)) = restrictionComplete l E X :=
+    funext fun K ↦ propext (h K)
+  exact hA ▸ ⟨e, α⟩
 
 /-- Restriction of scalars identifies the bounded constant-model constructible category
 with the Stacks adic constructible category, and reflects membership for every complex.
-Stacks Tag 09C1
+Source: blueprint det-lem-integral-models-stacks; Stacks Tag 09C1
 (blueprint: det-lem-integral-models-stacks).
 
-Proof:
-1. `det-prop-sfb-qlbar-colimit-x-integral-limit` and parts (1),(3) of
-   `det-prop-integral-criterion-constant-coefficients` identify all positive quotients
-   and the relative derived reductions before and after restriction.
-2. `lem-weil-pbc-restriction-local-completeness` identifies local completeness for
-   arbitrary complexes. `lem-weil-pbc-constant-completion-equivalence` identifies local
-   and quotient-tower completeness. Its hypotheses hold since the integers are a DVR
-   (`lem-weil-l-adic-extension-integers-dvr`) and the uniformizer ideal is principal.
-3. Noetherian X is qcqs: apply `lem-sc-affine-noetherian-underlying-space` on a finite
-   affine cover. `sk-thm-pe-constructible-comparison` and
-   `det-pe-finite-tor-comparison-noetherian` identify the residue condition with a bounded
-   constructible etale residue complex of finite Tor amplitude. Tensor with the unit
-   in `sk-def-sfb-derived-tensor-hom` to see that finite Tor amplitude forces boundedness.
-4. `lem-sfb-proetale-tor-local-global` identifies locally finite Tor dimension with a
-   single global interval on this quasi-compact X, testing all modules on every slice.
-5. `lem-sfb-integral-cohomological-adic-criterion` identifies bounded constant-model
-   constructibility with completeness and the etale-origin residue condition. Steps
-   1--4 translate these precisely into stacksConstructible of the restricted complex.
-6. Part (2) of `det-prop-integral-criterion-constant-coefficients` makes restriction an
-   equivalence on complete objects. Step 5 identifies the selected objects. Its
-   restriction is fully faithful with unchanged Hom maps. Every adic constructible L
-   has a complete preimage K, which is bounded constructible by step 5. The displayed
-   natural isomorphism identifies the resulting equivalence's functor with Res.
-   Section-module equivalence and AsSmall precomposition only change presentation.
--/
+Proof: the criterion is `integral_models_stacks_criterion`. Restriction is an equivalence
+from the complexes with complete restriction onto the complete complexes
+(`restriction_complete_equivalence`); bounded constructible complexes have complete
+restriction and Stacks adic constructible complexes are complete, so the equivalence
+restricts to the selected full subcategories with the same functor. -/
 theorem integral_models_stacks (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) [IsNoetherian X] :
@@ -158,46 +204,15 @@ theorem integral_models_stacks (l : ℕ) [Fact l.Prime]
         (stacksConstructible l E X).FullSubcategory,
       Nonempty (e.functor ⋙ (stacksConstructible l E X).ι ≅
         (constantModelBoundedConstructible (integersObj l E) X).ι ⋙ restriction l E X) := by
-  let F := IntegralConstantModel.modulesFunctor l E X
-  have hc (K) : constantModelBoundedConstructible (integersObj l E) X K ↔
-      (DerivedCategory.TStructure.t.bounded ((IntegralConstantModel.derived l E X).functor.obj K) ∧
-        ∀ q : ℤ, Scheme.IsCompletedConstantStratified X
-          (IntegralConstantCompletion.ideal l E)
-          ((DerivedCategory.homologyFunctor _ q).obj
-            ((IntegralConstantModel.derived l E X).functor.obj K))) := by
-    apply and_congr
-    · exact ⟨F.bounded_mapDerivedCategory_obj, F.bounded_of_bounded_mapDerivedCategory_obj⟩
-    · apply forall_congr'
-      intro q
-      let e := (F.mapDerivedCategoryHomologyFunctorIso q).app K
-      exact (IntegralConstantModel.constructible_iff l E X _).trans
-        ⟨fun h ↦ Scheme.completedStratified_of_iso e h,
-          fun h ↦ Scheme.completedStratified_of_iso e.symm h⟩
-  obtain ⟨hcomplete, e, ⟨α⟩⟩ := completion_transport l E X
-  have ha (K) : Scheme.IsSfbAdicConstructible X (IntegralConstantCompletion.ideal l E)
-      ((IntegralConstantModel.derived l E X).functor.obj K) ↔
-        stacksConstructible l E X ((restriction l E X).obj K) := by
-    constructor
-    · intro h
-      exact ⟨(hcomplete K).mp h.1, (residue_transport l E X K h.1).mpr h⟩
-    · intro h
-      exact (residue_transport l E X K ((hcomplete K).mpr h.1)).mp h.2
-  have hm (K) : constantModelBoundedConstructible (integersObj l E) X K ↔
-      stacksConstructible l E X ((restriction l E X).obj K) :=
-    (hc K).trans ((Scheme.integral_cohomological_adic_criterion l E X _).trans
-      (ha K))
+  have hm := integral_models_stacks_criterion l E X
   refine ⟨hm, ?_⟩
-  let P := constantModelBoundedConstructible (integersObj l E) X
-  let PC := fun K ↦ Scheme.IsSfbAdicComplete X (IntegralConstantCompletion.ideal l E)
-    ((IntegralConstantModel.derived l E X).functor.obj K)
-  let Q := stacksConstructible l E X
-  let QC := fun L ↦ ConstantCompletion.IsComplete (smallMap X (residueMap l E X))
-    (smallDerivedObject X _ L)
-  let : Q.IsClosedUnderIsomorphisms := ⟨fun ε h ↦ stacksConstructible_iso l E X ε h⟩
-  refine exists_selected_equivalence P PC Q QC (restriction l E X) e α ?_ ?_ ?_
-  · intro K hK
-    exact ((Scheme.integral_cohomological_adic_criterion l E X _).mp ((hc K).mp hK)).1
-  · exact fun _ h ↦ h.1
-  · exact fun K _ ↦ hm K
+  obtain ⟨e, ⟨α⟩⟩ := restriction_complete_equivalence l E X
+  let : (stacksConstructible l E X).IsClosedUnderIsomorphisms :=
+    ⟨fun ε h ↦ stacksConstructible_iso l E X ε h⟩
+  exact ObjectProperty.exists_equivalence_of_le
+    (constantModelBoundedConstructible (integersObj l E) X)
+    (restrictionComplete l E X) (stacksConstructible l E X) (stacksComplete l E X)
+    (restriction l E X) e α
+    (fun K hK ↦ ((hm K).mp hK).1) (fun _ h ↦ h.1) (fun K _ ↦ hm K)
 
 end AlgebraicGeometry.ProEtale.IntegralModelsStacks

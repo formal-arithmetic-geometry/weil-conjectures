@@ -39,15 +39,17 @@ local notation "𝒜" => SheafOfModules.{u}
 attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmetricCategory
   SheafOfModules.monoidalClosed
 
-private noncomputable instance : MonoidalPreadditive 𝒜 := (SheafOfModules.tensorClosed O).1.some
+private noncomputable instance ringedKoszulFiniteHomTowerInst1
+    : MonoidalPreadditive 𝒜 := (SheafOfModules.tensorClosed O).1.some
 
-private noncomputable instance : IsGrothendieckAbelian.{u} 𝒜 :=
+private noncomputable instance ringedKoszulFiniteHomTowerInst2 : IsGrothendieckAbelian.{u} 𝒜 :=
   SheafOfModules.isGrothendieckAbelian _
 
-private noncomputable instance : HasColimitsOfSize.{0, 0} 𝒜 :=
+private noncomputable instance ringedKoszulFiniteHomTowerInst3 : HasColimitsOfSize.{0, 0} 𝒜 :=
   hasColimitsOfSizeShrink.{0, 0, u, u} 𝒜
 
-private noncomputable instance : MonoidalClosed (ringedSiteComplex O) where
+private noncomputable instance ringedKoszulFiniteHomTowerInst4
+    : MonoidalClosed (ringedSiteComplex O) where
   closed P :=
     { rightAdj := CochainComplex.internalHom P
       adj := CochainComplex.tensorHomAdjunction P }

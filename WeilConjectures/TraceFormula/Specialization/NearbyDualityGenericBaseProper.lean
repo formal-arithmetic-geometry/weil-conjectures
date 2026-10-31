@@ -78,7 +78,8 @@ proper exchange `χ_a : Ψ_S Ra_* K ⟶ Ra'_* Ψ_M K` of the morphism of models
 `NearbyCyclesModel.IsTraitModelOfGenericBase.toPoint` is invertible at every bounded
 constructible `K` (blueprint `det-sp-nearby-cycles-exchanges` (2),
 `NearbyCyclesModel.Hom.isIso_pushforwardExchange_app_of_isProper`). -/
-theorem IsTraitModelOfGenericBase.isIso_pushforwardExchange_app_ambient
+theorem IsTraitModelOfGenericBase.isIso_pushforwardExchange_app_ambient [Fact (ringChar F ≠ ℓ)]
+    [Fact (ringChar k' ≠ ℓ)]
     (h : M.IsTraitModelOfGenericBase X₁ ι q g) [IsProper q]
     [IsProper (CondensedRing.toPoint X₁).left]
     (ε₀ : Spec (.of (traitGenericField k')) ⟶ Spec (.of F)) (hε₀ : g ≫ ε₀ = M.ε ≫ X₁.hom)
@@ -94,7 +95,10 @@ theorem IsTraitModelOfGenericBase.isIso_pushforwardExchange_app_ambient
   have hε : IsPullback M.ε g (CondensedRing.toPoint X₁).left ε₀ := by
     rw [toPoint_left]
     exact hgen
-  exact (h.toPoint ε₀ hε₀).isIso_pushforwardExchange_app_of_isProper hi hε hA
+  have : IsNoetherian (point F).left := inferInstanceAs (IsNoetherian (Spec (.of F)))
+  exact (h.toPoint ε₀ hε₀).isIso_pushforwardExchange_app_of_isProper (point F).hom
+    h.isTraitModelOver.isTraitModel.exists_over (isTraitModel_traitModelOfPoint ε₀).exists_over hi
+    hε hA
 
 /-- **Proper exchange for a proper trait model over a generic base**: if `X₁` is proper over
 `F`, the total space of `M` is proper over the trait and the square of geometric generic fibres

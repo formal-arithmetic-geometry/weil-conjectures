@@ -74,13 +74,15 @@ private abbrev Modules := SheafOfModules.{u}
 attribute [local instance 10000] SheafOfModules.instPreadditive
   HomologicalComplex.instPreadditive
 
-private instance : IsGrothendieckAbelian.{u} (Modules J R) :=
+private instance ringedInternalHomContravariantExactInst1
+    : IsGrothendieckAbelian.{u} (Modules J R) :=
   SheafOfModules.isGrothendieckAbelian _
 
 attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmetricCategory
   SheafOfModules.monoidalClosed
 
-private instance : MonoidalPreadditive (Modules J R) := (SheafOfModules.tensorClosed R).1.some
+private instance ringedInternalHomContravariantExactInst2
+    : MonoidalPreadditive (Modules J R) := (SheafOfModules.tensorClosed R).1.some
 
 private instance internalHom_additive :
     (MonoidalClosed.internalHom (C := Modules J R)).Additive where

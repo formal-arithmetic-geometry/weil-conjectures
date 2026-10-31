@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.Specialization.ThickOrigin
+public import WeilConjectures.TraceFormula.Specialization.ThickOriginPowUnit
 
 /-!
 
@@ -18,12 +19,13 @@ vanishes, and so does `C_{X,Z}(j_! ℚ̄_ℓ)` for the complement `j : X ∖ Z �
 argument of blueprint `det-sp-generic-divisor-constant` once `X` has been shrunk around a generic
 point of the divisor so that `Z = h⁻¹ V(x^m)` for a smooth `h : X ⟶ 𝔸¹`.
 
-## Sorried input
+## The thick origin
 
 `ProEtale.CondensedRing.isZero_specializationDefect_polyAffineThickOrigin_unit_padicAlgCl` is the
-node `det-sp-thick-origin` of the subsection `sk-lem-tf-sp-thick-origin`, for `ℚ̄_ℓ`-coefficients;
-`ThickOrigin.lean` proves it conditionally on the invertibility of the restricted specialization
-unit of the deformation.
+node `det-sp-thick-origin`, for `ℚ̄_ℓ`-coefficients. `ThickOrigin.lean` reduces it to the
+invertibility of the restricted specialization unit of the deformation, which is
+`ProEtale.CondensedRing.isIso_upperStar_zeroSection_unit_polyAffineThickOrigin`
+(`ThickOriginPowUnit.lean`, through the power map `t ↦ t^m` and the proper exchange).
 
 -/
 
@@ -48,8 +50,9 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 `C_{𝔸¹, V(x^m)}(ℚ̄_ℓ)` of the constant complex vanishes. -/
 theorem isZero_specializationDefect_polyAffineThickOrigin_unit_padicAlgCl {m : ℕ} (hm : 0 < m) :
     IsZero (specializationDefect (polyAffine k 1) (polyAffineThickOrigin k m) k'
-      (Profinite.padicAlgClRingObj ℓ) (𝟙_ _)) :=
-  sorry
+      (Profinite.padicAlgClRingObj ℓ) (𝟙_ _)) := by
+  have := isIso_upperStar_zeroSection_unit_polyAffineThickOrigin (ℓ := ℓ) k k' hm.ne'
+  exact isZero_specializationDefect_polyAffineThickOrigin_unit _ k' hm
 
 /-- **Generic vanishing for constant coefficients along a smooth pulled-back thick origin**
 (the argument of blueprint `det-sp-generic-divisor-constant`): for `f : X ⟶ 𝔸¹_k` smooth,

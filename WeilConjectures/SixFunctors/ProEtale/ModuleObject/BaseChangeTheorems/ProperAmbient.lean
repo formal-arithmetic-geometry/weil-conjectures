@@ -19,10 +19,14 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedC
 The proper base change theorem for bounded constructible `ℚ̄_ℓ`-sheaves
 (`ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl`) is stated
 for the base-change morphism of the bounded constructible derived categories `Dᵇc(-)⟦ℚ̲̄_ℓ⟧`. This
-file reads it on the ambient derived categories of module objects: for a cartesian square
-`g' ≫ p = p' ≫ g` of separated `k`-schemes of finite type with `p` proper, the base change map
-`Lg^* Rp_* K ⟶ Rp'_* Lg'^* K` (`ProEtale.CondensedRing.baseChangeMap`) is an isomorphism for every
-bounded constructible `K` (`ProEtale.CondensedRing.isIso_baseChangeMap_app_padicAlgCl_of_isProper`).
+file shows that the base change map `Lg^* Rp_* K ⟶ Rp'_* Lg'^* K`
+(`ProEtale.CondensedRing.baseChangeMap`) of the ambient derived categories of module objects is
+invertible at a bounded constructible `K` as soon as the bounded constructible base-change
+morphism is
+(`ProEtale.CondensedRing.isIso_baseChangeMap_app_of_isIso_boundedConstructibleExchangeRight`).
+Proper base change on the ambient derived categories, over arbitrary noetherian bases over fields,
+is `ProEtale.CondensedRing.isIso_baseChangeMap_app_padicAlgCl_of_isProper`
+(`WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperNoetherianBase`).
 
 The two base-change morphisms are the exchange morphisms of the pullback comparisons, and the
 one on bounded constructible complexes is the restriction of the ambient one
@@ -115,35 +119,5 @@ lemma isIso_baseChangeMap_app_of_isIso_boundedConstructibleExchangeRight
   rw [← key, ObjectProperty.isIso_hom_iff]
   convert hres using 3
   all_goals rfl
-
-include ℓ in
-/-- **Proper base change on the ambient derived categories** (blueprint
-`sk-thm-sfb-proper-base-change`, for `ℚ̄_ℓ`-coefficients): for a cartesian square
-`g' ≫ f = f' ≫ g` of separated `k`-schemes of finite type with `f` proper, the base change map
-`Lg^* Rf_* K ⟶ Rf'_* Lg'^* K` of the ambient derived categories of module objects over `ℚ̲̄_ℓ` is an
-isomorphism for every bounded constructible `K`. The underlying square of schemes
-`q' ≫ p = p' ≫ q` is only required to be equal to the square `g'.left ≫ f.left = f'.left ≫ g.left`
-of the underlying morphisms, so that this applies to the image of `sq` by any functor computing the
-underlying schemes, such as `Over.forget`. -/
-theorem isIso_baseChangeMap_app_padicAlgCl_of_isProper [IsProper f.left]
-    (sq : IsPullback g' f' f g) {S T S' T' : Scheme.{u}} {p : S ⟶ T} {q : T' ⟶ T} {p' : S' ⟶ T'}
-    {q' : S' ⟶ S} (sq' : CommSq q' p' p q) (hS : X.left = S) (hT : Y.left = T)
-    (hS' : X'.left = S') (hT' : Y'.left = T') (hp : HEq f.left p) (hq : HEq g.left q)
-    (hp' : HEq f'.left p') (hq' : HEq g'.left q')
-    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) S)))
-    (hK : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) S) K) :
-    IsIso ((baseChangeMap (Profinite.padicAlgClRingObj ℓ) sq').app K) := by
-  subst hS hT hS' hT'
-  obtain rfl := eq_of_heq hp
-  obtain rfl := eq_of_heq hq
-  obtain rfl := eq_of_heq hp'
-  obtain rfl := eq_of_heq hq'
-  obtain ⟨K, rfl⟩ : ∃ K' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧, K'.obj = K :=
-    ⟨⟨K, hK⟩, rfl⟩
-  have h := isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl ℓ sq
-  rw [boundedConstructibleBaseChange_eq_exchangeRight] at h
-  exact isIso_baseChangeMap_app_of_isIso_boundedConstructibleExchangeRight ℓ sq.toCommSq sq' K
-    (NatIso.isIso_app_of_isIso _ K)
 
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -172,11 +172,11 @@ private def constantUnit (T : Scheme.{u}) (R : Type u) [CommRing R] :
           (proEtaleConstantRing T R)).obj :=
   adicLisseConstantUnit T (ULift.{u + 1, u} R)
 
-private instance (T : Scheme.{u}) (R : Type u) [CommRing R] :
+private instance tateInverseLimitBaseChangeInst1 (T : Scheme.{u}) (R : Type u) [CommRing R] :
     Presheaf.IsLocallyInjective (ProEt.topology T) (constantUnit T R) :=
   adicLisseConstantUnit_locallyInjective T (ULift.{u + 1, u} R)
 
-private instance (T : Scheme.{u}) (R : Type u) [CommRing R] :
+private instance tateInverseLimitBaseChangeInst2 (T : Scheme.{u}) (R : Type u) [CommRing R] :
     Presheaf.IsLocallySurjective (ProEt.topology T) (constantUnit T R) :=
   adicLisseConstantUnit_locallySurjective T (ULift.{u + 1, u} R)
 

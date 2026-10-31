@@ -77,7 +77,8 @@ private noncomputable instance etaleModuleAbelian (Y : Scheme.{u}) (R : Type (u 
     [CommRing R] : Abelian (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R)) :=
   inferInstance
 
-private instance : JointlySurjective etalePrecoverage.{u} :=
+private instance discreteNoetherianConstructibleSerreInst1
+    : JointlySurjective etalePrecoverage.{u} :=
   inferInstanceAs (JointlySurjective (precoverage @Etale))
 
 /-- Lift a finite presentation through an extension and make the finitely many relations

@@ -49,7 +49,7 @@ def quotient (n : ℕ) : ModuleCat.{u} R ⥤ ModuleCat.{u} R where
   map_id M := by ext x; rfl
   map_comp f g := by ext x; rfl
 
-instance (n : ℕ) : (quotient I n).Additive where
+instance adicShortComplexCohomologyMLInst1 (n : ℕ) : (quotient I n).Additive where
   map_add := by
     intro M N f g
     ext x
@@ -247,7 +247,7 @@ def sections (U : C) : ModuleCat.{u} R ⥤ ModuleCat.{u} R :=
   constantSheaf J (ModuleCat.{u} R) ⋙ sheafToPresheaf J (ModuleCat.{u} R) ⋙
     (evaluation Cᵒᵖ (ModuleCat.{u} R)).obj (op U)
 
-instance (U : C) : (sections (R := R) J U).Additive := by
+instance adicShortComplexCohomologyMLInst2 (U : C) : (sections (R := R) J U).Additive := by
   dsimp [sections]
   infer_instance
 

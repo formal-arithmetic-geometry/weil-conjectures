@@ -220,7 +220,7 @@ variable (A : Type u) [Category.{v} A] [Preadditive A]
       simpa only [End.mul_def, unitEndAction_unit] using h }
 -- A private copy fixes the scalar action on each Hom space.
 private def Scalars := End (𝟙_ A)
-private instance : CommRing (Scalars A) := scalarRing A
+private instance derivedNakayamaResolutionInst1 : CommRing (Scalars A) := scalarRing A
 private def centerHom : Scalars A →+* CatCenter A where
   toFun a :=
     { app := fun X ↦ unitEndAction X a
@@ -267,7 +267,8 @@ namespace UnitScalar
 variable {A : Type u} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A]
   [HasDerivedCategory.{v} A] [MonoidalCategory A] [MonoidalClosed A]
   [MonoidalPreadditive A] [BraidedCategory A] [Abelian.HasFunctorialFlatResolution A]
-local instance : HasColimitsOfSize.{0, 0} A := hasColimitsOfSizeShrink A
+local instance derivedNakayamaResolutionInst2
+    : HasColimitsOfSize.{0, 0} A := hasColimitsOfSizeShrink A
 private def scalarNat (r : Scalars A) : 𝟭 (CochainComplex A ℤ) ⟶ 𝟭 _ where
   app C := r • 𝟙 C
   naturality C D f := by simp

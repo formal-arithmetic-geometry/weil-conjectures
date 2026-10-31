@@ -5,10 +5,11 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.Specialization.AffineSpaceSlice
-public import WeilConjectures.TraceFormula.Specialization.NearbyFinitenessCases
-public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethSlice
-public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModel
+public import WeilConjectures.TraceFormula.Specialization.GenericSliceTraitGaloisLayerIntegral
+public import WeilConjectures.TraceFormula.Specialization.GenericSliceTraitExists
+public import WeilConjectures.TraceFormula.Specialization.GenericSliceTraitUnramified
+public import WeilConjectures.TraceFormula.Specialization.NearbyFinitenessPadicAlgCl
+public import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 
@@ -53,18 +54,18 @@ Together with the trait case `n = 0`
 lisse sheaves and the proper-exchange cases, they prove the finiteness theorem by induction on `n`
 (`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_obj`).
 
-## Unfinished
+## Implementation notes
 
-Both steps are `sorry`ed. No blueprint node states them (the blueprint has no node for the
-finiteness of nearby cycles). The slice step needs the Galois action of the inertia group on the
-nearby cycles, Hochschild–Serre for the pro-`p` kernel `P` and the invariance of nearby cycles
-under extensions of strictly henselian traits, none of which exists for pro-étale
-`ℚ̄_ℓ`-sheaves in the repository (the slice exchange
-`NearbyCyclesModel.isIso_pullbackExchange_sliceHom_of_isPullback` only reduces the comparison
-over `S` to base change of `Rj_*` along the slice). The criterion needs that the cohomology
-sheaves of `Ψ B` are ind-constructible, which for torsion coefficients holds for every étale
-sheaf, but has no analogue for pro-étale `ℚ̄_ℓ`-sheaves without passing through `𝒪_E`-lattices
-and their reductions (Bhatt–Scholze, *The pro-étale topology for schemes*, §6.8).
+The slice step is proved from Th. finitude 3.7 and the averaging splitting (M2)
+(`WeilConjectures.TraceFormula.Specialization.GenericSliceTraitGaloisLayerIntegral`). Deligne's
+argument for the criterion needs that the cohomology sheaves of `Ψ B` are ind-constructible,
+which holds for every étale sheaf with torsion coefficients (Stacks 03SA) but has no analogue for
+pro-étale `ℚ̄_ℓ`-sheaves. The criterion is therefore deduced from the finiteness theorem itself,
+which is proved first with the finite coefficients `𝔽_E`, by Deligne's induction with the
+closed-point criterion (`WeilConjectures.TraceFormula.Specialization.NearbyFinitenessTorsion`),
+and then for `ℚ̄_ℓ` through integral models and the integral criterion for derived complete
+`𝒪_E`-complexes (`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_obj_of_integral`,
+Bhatt–Scholze, *The pro-étale topology for schemes*, §6.8).
 
 -/
 
@@ -84,67 +85,106 @@ namespace NearbyCyclesModel
 
 variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k']
 
-variable (k') in
-/-- The coordinate generic slice `hᵢ : 𝔸ⁿ_{K⟦t⟧} ⟶ 𝔸ⁿ⁺¹_S` (`K = k'(x)^alg`,
-`AlgebraicGeometry.affineSpaceSlice`) as a morphism of the total spaces of the standard models. -/
-noncomputable def affineSpaceSliceTotal (n : ℕ) (i : Fin (n + 1)) :
-    (affineSpaceModel (traitSliceField k') n).total ⟶ (affineSpaceModel k' (n + 1)).total :=
-  affineSpaceSlice n i (traitSliceCoord k')
-
-variable (k') in
-/-- The coordinate generic slice of the special fibre `hᵢ,ₛ : 𝔸ⁿ_K ⟶ 𝔸ⁿ⁺¹_{k'}`
-(`AlgebraicGeometry.affineSpaceSliceSpecial`) as a morphism of the special fibres of the standard
-models. -/
-noncomputable def affineSpaceSliceSpecialFibre (n : ℕ) (i : Fin (n + 1)) :
-    (traitStdSpecialFibre (𝔸(ULift.{u} (Fin n); trait (traitSliceField k')) ↘
-      trait (traitSliceField k'))).left ⟶
-      (traitStdSpecialFibre (𝔸(ULift.{u} (Fin (n + 1)); trait k') ↘ trait k')).left :=
-  affineSpaceSliceSpecial n i (traitSliceCoord k')
-
-variable (k') in
-/-- The coordinate generic slice of the geometric generic fibres
-`𝔸ⁿ_{K⟦t⟧} ×_{Spec K⟦t⟧} Spec Ω_K ⟶ 𝔸ⁿ⁺¹_S ×_S Spec Ω`, induced by `hᵢ` and the map
-`Spec Ω_K ⟶ Spec Ω` (`AlgebraicGeometry.traitGenericPointMap`) of the geometric generic points of
-`Spec K⟦t⟧` and `S`, with fields `Ω_K = (Frac K⟦t⟧)^alg` and `Ω = (Frac k'⟦t⟧)^alg`. -/
-noncomputable def affineSpaceSliceGeneric (n : ℕ) (i : Fin (n + 1)) :
-    (affineSpaceModel (traitSliceField k') n).generic ⟶
-      (affineSpaceModel k' (n + 1)).generic :=
-  pullback.lift (pullback.fst _ _ ≫ affineSpaceSliceTotal k' n i)
-    (pullback.snd _ _ ≫ traitGenericPointMap k' (traitSliceField k')) (by
-      rw [Category.assoc, affineSpaceSliceTotal, affineSpaceSlice_over, pullback.condition_assoc,
-        Category.assoc, traitGenericPoint_traitMap])
-
-variable (k') in
-/-- The **morphism of geometric models over the coordinate generic slice** `hᵢ`: from the standard
-model of `𝔸ⁿ_{K⟦t⟧}` over `Spec K⟦t⟧` to the standard model of `𝔸ⁿ⁺¹_S` over `S`, with the slices
-`hᵢ` of the total spaces, `hᵢ,ₛ` of the special fibres, and of the geometric generic fibres. -/
-@[simps]
-noncomputable def affineSpaceSliceHom (n : ℕ) (i : Fin (n + 1)) :
-    (affineSpaceModel (traitSliceField k') n).geometric.Hom
-      (affineSpaceModel k' (n + 1)).geometric (affineSpaceSliceTotal k' n i)
-      (affineSpaceSliceSpecialFibre k' n i) where
-  total := affineSpaceSliceTotal k' n i
-  generic := affineSpaceSliceGeneric k' n i
-  comm_j := pullback.lift_fst _ _ _
-  comm_i := affineSpaceSliceSpecial_fst _ _ _
-  comm_ε := pullback.lift_fst _ _ _
-
 variable [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
+
+omit [IsSepClosed k'] [Fact (ringChar k').Prime] in
+/-- **Change of trait to the generic slice trait** (SGA 4½, [Th. finitude], 3.7): the pullback
+exchange of the change of strictly henselian trait `τ : (𝔸ⁿ_{K⟦t⟧} over Spec K⟦t⟧) ⟶
+(𝔸ⁿ⁺¹_S ×_{𝔸¹_S} S' over S')` is an isomorphism at the pullback of a bounded constructible
+complex `B` on `𝔸ⁿ⁺¹_S`; a case of
+`NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_isPullback_trait`. -/
+theorem isIso_pullbackExchange_app_genericSliceTraitChangeHom (D : GenericSliceTrait k') (n : ℕ)
+    (i : Fin (n + 1))
+    {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology (affineSpaceModel k' (n + 1)).total)
+      Ab.{u + 1}) (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
+        (affineSpaceModel k' (n + 1)).total))}
+    (hB : boundedConstructible _ B) :
+    IsIso (((genericSliceTraitChangeHom D n i).pullbackExchange
+      (Profinite.padicAlgClRingObj ℓ)).app
+        ((L((genericSliceTraitProj D n i)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj B)) := by
+  have : Fact (ringChar D.κ ≠ ℓ) := ⟨D.ringChar_κ ▸ Fact.out⟩
+  have hB' := boundedConstructible_leftDerivedUpperStar_obj_of_scheme _
+    (genericSliceTraitModel D n i).ε _
+    (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _
+      (genericSliceTraitProj D n i) B hB)
+  have hNj : IsPullback (genericSliceTraitModel D n i).j (pullback.snd _ _)
+      (genericSliceTraitStructure D n i) (Spec.map (CommRingCat.ofHom D.a)) :=
+    IsPullback.of_hasPullback _ _
+  have hNi : IsPullback (genericSliceTraitModel D n i).i (pullback.snd _ _)
+      (genericSliceTraitStructure D n i) (Spec.map (CommRingCat.ofHom D.b)) :=
+    IsPullback.of_hasPullback _ _
+  have hMj : IsPullback (affineSpaceModel (traitSliceField k') n).geometric.j (pullback.snd _ _)
+      (𝔸(ULift.{u} (Fin n); trait (traitSliceField k')) ↘ trait (traitSliceField k'))
+      (Spec.map (CommRingCat.ofHom
+        (algebraMap (PowerSeries (traitSliceField k'))
+          (traitGenericField (traitSliceField k'))))) :=
+    IsPullback.of_hasPullback _ _
+  have hMi : IsPullback (affineSpaceModel (traitSliceField k') n).geometric.i (pullback.snd _ _)
+      (𝔸(ULift.{u} (Fin n); trait (traitSliceField k')) ↘ trait (traitSliceField k'))
+      (Spec.map (CommRingCat.ofHom (PowerSeries.constantCoeff (R := traitSliceField k')))) :=
+    IsPullback.of_hasPullback _ _
+  have hφ := isPullback_genericSliceTraitChangeTotal D n i
+  have hgen : (genericSliceTraitChangeHom D n i).generic ≫ pullback.snd _ _ =
+      pullback.snd _ _ ≫ Spec.map (CommRingCat.ofHom D.ωK) := pullback.lift_snd _ _ _
+  exact Hom.isIso_pullbackExchange_app_of_isPullback_trait (ι := D.ι) (a₁ := D.a)
+    (a₂ := algebraMap _ _) (c := D.ωK) (b₁ := D.b) (b₂ := PowerSeries.constantCoeff)
+    D.injective_ι D.maximalIdeal_eq_map_ι D.injective_a
+    (algebraMap_traitGenericField_injective _) D.isAlgebraic_a
+    (isAlgebraic_traitGenericField _) D.ωK_comp_a D.ker_b
+    PowerSeries.ker_coeff_eq_max_ideal (genericSliceTraitChangeHom D n i)
+    (genericSliceTraitStructure D n i) _ hNj _ hNi _ _ hMj _ hMi hφ hgen hB'
+
+/-- **Slicing over the generic slice trait** (SGA 4½, [Th. finitude], Lemme 3.4): the pullback
+exchange of `σ : (𝔸ⁿ⁺¹_S ×_{𝔸¹_S} S' over S') ⟶ (𝔸ⁿ⁺¹_S over S)` is a split monomorphism at a
+bounded constructible complex: its cartesian factor is weakly étale base change, and its change of
+generic fibres is split by averaging over the pro-`p` kernel (M2). -/
+theorem isSplitMono_pullbackExchange_app_genericSliceTraitHom (D : GenericSliceTrait k') (n : ℕ)
+    (i : Fin (n + 1))
+    {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology (affineSpaceModel k' (n + 1)).total)
+      Ab.{u + 1}) (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
+        (affineSpaceModel k' (n + 1)).total))}
+    (hB : boundedConstructible _ B) :
+    IsSplitMono (((genericSliceTraitHom D n i).pullbackExchange
+      (Profinite.padicAlgClRingObj ℓ)).app B) := by
+  have := (genericSliceTraitHom D n i).isIso_pullbackExchange_fromCartesian_of_weaklyEtale
+    (Profinite.padicAlgClRingObj ℓ)
+  have h₂ := isSplitMono_pullbackExchange_app_toCartesian_genericSliceTraitHom D n i hB
+  have h := Hom.isSplitMono_pullbackExchange_app_of_cartesian (genericSliceTraitHom D n i)
+    (Profinite.padicAlgClRingObj ℓ) B inferInstance (by exact_mod_proofs h₂)
+  exact_mod_proofs h
+
 
 /-- **Nearby cycles on the coordinate generic slices** (SGA 4½, [Th. finitude], Lemme 3.3 and
 3.7): for a bounded constructible complex `B` on `𝔸ⁿ⁺¹_S` and a coordinate `i`, the pullback
 exchange `α : Lhᵢ,ₛ^* Ψ B ⟶ Ψ_K (Lhᵢ^* B)` of the morphism of models over the slice
 (`NearbyCyclesModel.affineSpaceSliceHom`) is a split monomorphism: it is the inclusion of the
 invariants of `Ψ_K (Lhᵢ^* B)` under a pro-`p` group `P` (`p ≠ ℓ`), split by averaging over `P`.
-See the module docstring; `sorry`ed. -/
+It is deduced, following Deligne's proof of Lemme 3.3, from the factorization of the slice through
+the strict localization `S'` of `𝔸¹_S` at the generic point of its special fibre
+(`AlgebraicGeometry.nonempty_genericSliceTrait`): the change of trait `Spec K⟦t⟧ ⟶ S'` has
+invertible exchange (`NearbyCyclesModel.isIso_pullbackExchange_app_genericSliceTraitChangeHom`,
+Th. finitude 3.7), and the slice `X ×_{𝔸¹_S} S' ⟶ X` over `S' ⟶ S` has split exchange
+(`NearbyCyclesModel.isSplitMono_pullbackExchange_app_genericSliceTraitHom`, Lemme 3.4). -/
 theorem isSplitMono_pullbackExchange_app_affineSpaceSliceHom (n : ℕ) (i : Fin (n + 1))
     {B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology (affineSpaceModel k' (n + 1)).total)
       Ab.{u + 1}) (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
         (affineSpaceModel k' (n + 1)).total))}
     (hB : boundedConstructible _ B) :
     IsSplitMono (((affineSpaceSliceHom k' n i).pullbackExchange
-      (Profinite.padicAlgClRingObj ℓ)).app B) :=
-  sorry
+      (Profinite.padicAlgClRingObj ℓ)).app B) := by
+  obtain ⟨D⟩ := nonempty_genericSliceTrait k'
+  have h₁ := isIso_pullbackExchange_app_genericSliceTraitChangeHom D n i hB
+  have h₂ := isSplitMono_pullbackExchange_app_genericSliceTraitHom D n i hB
+  have htot : (genericSliceTraitChangeHom D n i).total ≫ (genericSliceTraitHom D n i).total =
+      (affineSpaceSliceHom k' n i).total := genericSliceTraitChangeTotal_comp D n i
+  have hgen : (genericSliceTraitChangeHom D n i).generic ≫ (genericSliceTraitHom D n i).generic =
+      (affineSpaceSliceHom k' n i).generic := genericSliceTraitChangeGeneric_comp D n i
+  have key := Hom.isSplitMono_pullbackExchange_app_of_comp (Profinite.padicAlgClRingObj ℓ)
+    (genericSliceTraitChangeHom D n i) (genericSliceTraitHom D n i) (affineSpaceSliceHom k' n i)
+    (genericSliceTraitChangeTotal_comp D n i) (genericSliceTraitChangeSpecial_comp D n i)
+    htot hgen B
+  have := key (by exact_mod_proofs h₁) (by exact_mod_proofs h₂)
+  exact_mod_proofs this
 
 /-- **Nearby cycles on the coordinate generic slices are retracts**: for a bounded constructible
 complex `B` on `𝔸ⁿ⁺¹_S` and a coordinate `i`, the restriction `Lhᵢ,ₛ^* Ψ B` of its nearby cycles
@@ -168,6 +208,9 @@ theorem nonempty_retract_upperStar_nearbyCycles_affineSpaceSlice (n : ℕ) (i : 
   ⟨⟨_, retraction (((affineSpaceSliceHom k' n i).pullbackExchange
     (Profinite.padicAlgClRingObj ℓ)).app B), IsSplitMono.id _⟩⟩
 
+omit [Fact (ringChar k').Prime] in
+set_option linter.unusedVariables false in
+-- the hypotheses of the core case of the induction are not needed by the proof, see below
 /-- **Deligne's criterion on the coordinate slices, core case** (SGA 4½, [Th. finitude], proof of
 Thm. 3.2): suppose that for every coordinate `i` and every bounded constructible complex `B` on
 `𝔸ⁿ⁺¹_S`, the restriction `Lhᵢ,ₛ^* Ψ B` of the nearby cycles to the geometric generic fibre of the
@@ -175,8 +218,13 @@ Thm. 3.2): suppose that for every coordinate `i` and every bounded constructible
 of the extension by zero `v_! L = Rc_* j_{W!} Rc'_* L` of a lisse sheaf `L` along a locally
 closed immersion `v : E ⟶ 𝔸ⁿ⁺¹_S` into the generic fibre are bounded constructible, in the case
 not covered by the proper exchange: the closed subscheme `D` meets the special fibre and no
-closed subscheme of `D` containing `W` is quasi-finite over `S`. See the module docstring;
-`sorry`ed. -/
+closed subscheme of `D` containing `W` is quasi-finite over `S`.
+
+Since the nearby cycles of `𝔸ⁿ⁺¹_S` preserve bounded constructible complexes
+(`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_obj_of_integral`, deduced from
+the case of finite coefficients), the hypotheses on the slices and on `D`, `W` are not needed:
+`v_! L` is bounded constructible. They are kept so that the statement is the step of Deligne's
+induction in `NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_lisse_generic`. -/
 theorem boundedConstructible_nearbyCycles_affineSpace_lisse_of_slices (n : ℕ)
     (h : ∀ (i : Fin (n + 1))
       (B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology (affineSpaceModel k' (n + 1)).total)
@@ -204,8 +252,12 @@ theorem boundedConstructible_nearbyCycles_affineSpace_lisse_of_slices (n : ℕ)
         ((R((c)_*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj
           (D((W.ι)_!open⟦Profinite.padicAlgClRingObj ℓ⟧).obj
             ((R((c')_*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj
-              ((DerivedCategory.singleFunctor _ 0).obj L))))) :=
-  sorry
+              ((DerivedCategory.singleFunctor _ 0).obj L))))) := by
+  have : IsNoetherian (affineSpaceModel k' (n + 1)).total :=
+    (isTraitModel_affineSpaceModel (k' := k') (n + 1)).isNoetherian_total
+  exact boundedConstructible_nearbyCycles_affineSpace_obj_of_integral (n + 1)
+    (boundedConstructible_rightDerivedLowerStar_of_isClosedImmersion _ c
+      (boundedConstructible_lisseExtension_closed (n + 1) D c W E c' L hL))
 
 end NearbyCyclesModel
 

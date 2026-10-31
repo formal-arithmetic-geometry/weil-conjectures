@@ -14,20 +14,19 @@ import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
 Two of the compatibilities of blueprint `prop-weil-operations` ("composition, base change,
 projection, purity and duality isomorphisms are morphisms of Weil complexes"), for the direct
 image with compact support `Rf₀!` of Weil complexes
-(`AlgebraicGeometry.WeilComplex.derivedLowerShriek`), and the Grothendieck–Lefschetz trace
-formula for Weil complexes (blueprint `det-thm-tf-uniform-formula-weil`). They belong to
-other blueprint sections and are recorded here as inputs of the Fourier trace formula. The two
-compatibilities of `Rf₀!` are deduced from their statements in
-`WeilConjectures.WeilSheaf.LowerShriekFunctoriality` (clauses 3 and 4 of blueprint
-`prop-functor-package`); the trace formula is stated without proof.
+(`AlgebraicGeometry.WeilComplex.derivedLowerShriek`). They belong to another blueprint
+section and are recorded here as inputs of the Fourier trace formula. They are deduced from
+their statements in `WeilConjectures.WeilSheaf.LowerShriekFunctoriality` (clauses 3 and 4 of
+blueprint `prop-functor-package`). The Grothendieck–Lefschetz trace formula used by the Fourier
+trace formula is
+`AlgebraicGeometry.WeilComplex.sum_trace_compactlySupportedCohomology_eq_sum_traceFunction`,
+in `WeilConjectures.ZetaFunction.WeilObjectComparison`.
 
 ## Main statements
 
 - `AlgebraicGeometry.WeilComplex.nonempty_iso_derivedLowerShriek_comp`: `R(gf)₀! ≅ Rg₀! Rf₀!`.
 - `AlgebraicGeometry.WeilComplex.nonempty_iso_derivedLowerShriek_upperStar`: compact-support
   base change `g^* Rf₀! ≅ Rf'₀! g'^*` along a cartesian square.
-- `AlgebraicGeometry.WeilComplex.sum_trace_compactlySupportedCohomology_eq_sum_traceFunction`:
-  the Grothendieck–Lefschetz trace formula.
 -/
 
 @[expose] public section
@@ -91,26 +90,5 @@ theorem nonempty_iso_derivedLowerShriek_upperStar {X Y X' Y' : Scheme.{u}}
     Nonempty (derivedLowerShriek k₀ l f ⋙ upperStar g ≅
       upperStar g' ⋙ derivedLowerShriek k₀ l f') :=
   nonempty_upperStar_derivedLowerShriek_iso h
-
-/-- Blueprint `det-thm-tf-uniform-formula-weil`: the Grothendieck–Lefschetz formula over
-`ℚ̄_ℓ`. For a separated `k₀`-scheme `X₀` of finite type, a Weil complex `K` on `X₀` and
-`m ≥ 1`,
-
-`∑ᵢ (-1)ⁱ Tr(Fᵐ | H_cⁱ(X, K)) = ∑_{y ∈ X₀(𝔽_{qᵐ})} t_K(y)`,
-
-`F` being the geometric Frobenius on compactly supported cohomology
-(`AlgebraicGeometry.WeilComplex.compactlySupportedCohomology`) and `t_K` the trace function
-(`AlgebraicGeometry.WeilComplex.traceFunction`). Only finitely many terms are nonzero on
-either side. -/
-theorem sum_trace_compactlySupportedCohomology_eq_sum_traceFunction {X : Scheme.{u}}
-    [X.Over (Spec (CommRingCat.of k₀))] [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
-    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
-    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
-    (K : WeilComplex k₀ l X) {m : ℕ} (hm : m ≠ 0) :
-    ∑ᶠ i : ℤ, (i.negOnePow : ℤ) • LinearMap.trace (PadicAlgCl l) _
-        ((K.compactlySupportedCohomology i).frobenius.toLinearMap ^ m) =
-      ∑ᶠ y : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ m),
-        K.traceFunction m y :=
-  sorry
 
 end AlgebraicGeometry.WeilComplex
