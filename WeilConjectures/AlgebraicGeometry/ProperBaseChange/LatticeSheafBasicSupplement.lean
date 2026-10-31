@@ -65,21 +65,7 @@ open scoped ChangeOfRings
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- Cache additive sheafification on each slice for the lattice calculations.
-Source: Mathlib, sheafification on small sites.
-(blueprint: lem-weil-pbc-lattice-image-locality).
-Proof: specialize the existing small-site sheafification instance. -/
-local instance latticeWeakSheafifyOver (X : Scheme.{u}) (U : X.ProEt) :
-    HasWeakSheafify ((Scheme.ProEt.topology X).over U) AddCommGrpCat.{u + 1} := by
-  infer_instance
-
-/-- Cache the local bijectivity criterion for additive sheafification on slices.
-Source: Mathlib, sheafification on small sites.
-(blueprint: lem-weil-pbc-lattice-image-locality).
-Proof: specialize the existing small-site local-bijectivity instance. -/
-local instance latticeWEqualsOver (X : Scheme.{u}) (U : X.ProEt) :
-    ((Scheme.ProEt.topology X).over U).WEqualsLocallyBijective AddCommGrpCat.{u + 1} := by
-  infer_instance
+attribute [local instance] latticeWeakSheafifyOver latticeWEqualsOver
 
 /-- The commutative-ring version of the continuous coefficient presheaf, with exactly the
 same sections and precomposition maps as `continuousMapRingPresheaf`.

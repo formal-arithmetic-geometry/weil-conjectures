@@ -452,6 +452,8 @@ private theorem scalarRationalCoefficient (A : Type u) [Field A] [Algebra (Padic
   erw [IsLocalization.ringEquivOfRingEquiv_eq]
   exact (Padic.coefficientExtension_localization_uniformizer l A).2.choose.commutes a.down
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 section
 attribute [-instance] ULift.module
 

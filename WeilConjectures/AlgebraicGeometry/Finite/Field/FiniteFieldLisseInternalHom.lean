@@ -148,6 +148,7 @@ section
 variable {U : C}
 end
 
+variable {U : C} in
 section
 variable [J.WEqualsLocallyBijective AddCommGrpCat.{u + 1}]
 

@@ -618,6 +618,8 @@ attribute [instance] reductionRestriction_preservesZero
 attribute [-instance] restrictionReduction_additive reductionRestriction_additive
   reductionRestriction_preservesZero
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 section
 attribute [local irreducible] dres change
 

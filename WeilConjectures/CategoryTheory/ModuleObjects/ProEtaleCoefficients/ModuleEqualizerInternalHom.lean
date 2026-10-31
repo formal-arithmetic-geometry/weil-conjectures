@@ -23,12 +23,16 @@ blueprint. The existing `ihom'Adjunction` instead uses `Mod.tensorLeft`, the sep
 constructed coequalizer functor computing tensoring on the right.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 universe v u
 
 namespace CategoryTheory.Mod
 
+open MonoidalCategory Limits MonObj in
 section
 
 variable {C : Type u} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C]

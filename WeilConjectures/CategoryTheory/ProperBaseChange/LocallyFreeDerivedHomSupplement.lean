@@ -507,26 +507,20 @@ end AbstractModel
 variable {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
   (R : Sheaf J CommRingCat.{u})
 
-attribute [local instance 100000] locallyFreeHasSheafCompose
 
-attribute [local instance 100000] locallyFreeModuleAbelian
 
-attribute [local instance 100000] locallyFreeModulePreadditive
 
-attribute [local instance 100000] proofMonoidal
 
-attribute [local instance 100000] proofClosed
 
+set_option backward.isDefEq.respectTransparency true in
 section
 
 variable [HasDerivedCategory.{w} (ringedSiteModules.{u}
   ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))]
 
-attribute [local instance 100000] locallyFreeDerivedPreadditive
 
 end
 
-attribute [local instance 100000] locallyFreeDerivedPreadditive
 
 variable [HasDerivedCategory.{w} (ringedSiteModules.{u}
   ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))]
