@@ -286,6 +286,14 @@ lemma noetherianSpace_of_isProper {T : Scheme.{u}} (q : T ⟶ trait k') [IsPrope
   have : IsNoetherian T := ⟨⟩
   infer_instance
 
+omit [IsSepClosed k'] [Fact (ringChar k').Prime] in
+/-- A proper scheme over the trait is noetherian. -/
+lemma isNoetherian_of_isProper {T : Scheme.{u}} (q : T ⟶ trait k') [IsProper q] :
+    IsNoetherian T := by
+  have : IsLocallyNoetherian T := LocallyOfFiniteType.isLocallyNoetherian q
+  have : CompactSpace T := QuasiCompact.compactSpace_of_compactSpace q
+  exact ⟨⟩
+
 variable {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ] [IsCommMonObj Λ]
 
 /-- **Gabber's Künneth formula for proper models in chart dimension `n`** over the trait
@@ -302,7 +310,8 @@ def ProperKunnethFormula (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}
     M.IsTraitModelOver qM gM → N.IsTraitModelOver qN gN →
     IsPullback φ₁.total φ₂.total qM qN →
     P.IsTraitModelOver (φ₁.total ≫ qM) (φ₁.generic ≫ gM) →
-    φ₂.generic ≫ gN = φ₁.generic ≫ gM → IsProper qM → IsProper qN → ∀ {m₁ m₂ : ℕ},
+    φ₂.generic ≫ gN = φ₁.generic ≫ gM → IsProper qM → IsProper qN → IsNoetherian X →
+    IsNoetherian Y → TopologicalSpace.NoetherianSpace Z → ∀ {m₁ m₂ : ℕ},
     m₁ + m₂ ≤ n → qM.LocallyEmbedsInAffineSpace m₁ → qN.LocallyEmbedsInAffineSpace m₂ →
     ∀ {eM : M.total ⟶ X}, M.j ≫ eM = M.ε → ∀ {eN : N.total ⟶ Y}, N.j ≫ eN = N.ε →
     ∀ {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -341,7 +350,19 @@ theorem isIso_kunnethMap_closure_of_properKunnethFormula {n : ℕ}
       inferInstanceAs (QuasiCompact (pullback.fst qcM qcN ≫ qcM)),
       inferInstanceAs (IsSeparated (pullback.fst qcM qcN ≫ qcM)), ?_,
       IsPullback.of_hasPullback _ _⟩
-    (by simp) inferInstance inferInstance hle h₁ h₂ (eM := 𝟙 _) (by simp [geometric])
+    (by simp) inferInstance inferInstance (isNoetherian_of_isProper qcM)
+    (isNoetherian_of_isProper qcN)
+    (by
+      let q := pullback.snd (C := Scheme.{u}) (pullback.fst qcM qcN ≫ qcM) (traitGenericPoint k')
+      have : IsLocallyNoetherian (pullback (C := Scheme.{u}) (pullback.fst qcM qcN ≫ qcM)
+        (traitGenericPoint k')) := LocallyOfFiniteType.isLocallyNoetherian q
+      have : CompactSpace (pullback (C := Scheme.{u}) (pullback.fst qcM qcN ≫ qcM)
+        (traitGenericPoint k')) := QuasiCompact.compactSpace_of_compactSpace q
+      have : IsNoetherian (pullback (C := Scheme.{u}) (pullback.fst qcM qcN ≫ qcM)
+        (traitGenericPoint k')) := ⟨⟩
+      exact (inferInstance : TopologicalSpace.NoetherianSpace (pullback (C := Scheme.{u})
+        (pullback.fst qcM qcN ≫ qcM) (traitGenericPoint k')))) hle h₁ h₂ (eM := 𝟙 _)
+    (by simp [geometric])
     (eN := 𝟙 _) (by simp [geometric]) hA hB
   have e : (closureFst qcM qcN).generic ≫ pullback.snd qcM (traitGenericPoint k') =
       pullback.snd (pullback.fst qcM qcN ≫ qcM) (traitGenericPoint k') := by simp

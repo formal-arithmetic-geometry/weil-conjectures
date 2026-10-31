@@ -64,7 +64,8 @@ variable {X Y Z : Scheme.{u}} {X' Y' Z' : Over (Spec (.of k'))}
   {qN : N.total ⟶ trait k'} {gN : N.generic ⟶ Spec (.of (traitGenericField k'))}
 
 /-- WIP: the integral Künneth formula for proper models, given the generic-slicing steps. -/
-theorem isIso_kunnethMap_padicIntegers_of_isProper (hM : M.IsTraitModelOver qM gM)
+theorem isIso_kunnethMap_padicIntegers_of_isProper [IsNoetherian X] [IsNoetherian Y]
+    [TopologicalSpace.NoetherianSpace Z] (hM : M.IsTraitModelOver qM gM)
     (hN : N.IsTraitModelOver qN gN) (hpb : IsPullback φ₁.total φ₂.total qM qN)
     (hP : P.IsTraitModelOver (φ₁.total ≫ qM) (φ₁.generic ≫ gM))
     (hgen : φ₂.generic ≫ gN = φ₁.generic ≫ gM) [IsProper qM] [IsProper qN]
@@ -99,7 +100,7 @@ theorem integralKunnethFormula (n : ℕ) :
   intro k' _ _ _ _ E X Y Z X' Y' Z' M N P f₁ f₁' f₂ f₂' φ₁ φ₂ qM gM qN gN hM hN hpb hP hgen m₁ m₂
     hle h₁ h₂ eM heM eN heN A B hA hB
   refine isIso_kunnethMap_of_properKunnethFormula (n := n)
-    (fun {X Y Z X' Y' Z' M N P f₁ f₁' f₂ f₂'} φ₁ φ₂ {qM gM qN gN} hM hN hpb hP hgen hqM hqN
+    (fun {X Y Z X' Y' Z' M N P f₁ f₁' f₂ f₂'} φ₁ φ₂ {qM gM qN gN} hM hN hpb hP hgen hqM hqN hX hY hZ
       {m₁ m₂} hle h₁ h₂ {eM} heM {eN} heN {A B} hA hB ↦ ?_) hM hN hpb hP hgen hle h₁ h₂ heM heN
     hA hB
   have hslice : 0 < m₁ + m₂ → ∀ E : PadicAlgCl.FiniteIntermediateField ℓ,
@@ -115,6 +116,9 @@ theorem integralKunnethFormula (n : ℕ) :
       exact h
   have := hqM
   have := hqN
+  have := hX
+  have := hY
+  have := hZ
   exact isIso_kunnethMap_padicIntegers_of_isProper hM hN hpb hP hgen h₁ h₂ hslice heM heN E hA hB
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
