@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.NearbyCycles.AutActionTrivial
+public import WeilConjectures.SixFunctors.NearbyCycles.GaloisLayerMap
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarUnitCoherence
 
 /-!
@@ -18,7 +19,8 @@ Then the exchanges of `τ` intertwine the actions of `s` and `s'` on nearby cycl
 (`NearbyCyclesModel.Hom.autAction`):
 
 * `α_τ(C) ≫ ρ(s)(Lf^* C) = Lf'^*(ρ(s')(C)) ≫ α_τ(C)` for the pullback exchange
-  (`NearbyCyclesModel.Hom.pullbackExchange_app_comp_autAction_of_comm`);
+  (`NearbyCyclesModel.Hom.pullbackExchange_app_comp_autAction_of_comm`, from
+  `WeilConjectures.SixFunctors.NearbyCycles.GaloisLayerMap`);
 * `χ_τ(E) ≫ Rf'_*(ρ(s)(E)) = ρ(s')(Rf_* E) ≫ χ_τ(E)` for the pushforward exchange
   (`NearbyCyclesModel.Hom.pushforwardExchange_app_comp_map_autAction`).
 
@@ -65,17 +67,6 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
-/-- **Right unit law** for the composition isomorphisms transported along `p ≫ 𝟙 Y = pq`. -/
-lemma leftDerivedUpperStarCompOfEq_hom_app_comp_map_leftDerivedUpperStarId
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    {X Y : Scheme.{u}} {p pq : X ⟶ Y} (h : p ≫ 𝟙 Y = pq)
-    (K : DerivedCategory (Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))) :
-    (leftDerivedUpperStarCompOfEq Λ h).hom.app K ≫
-        L((p)^*⟦Λ⟧).map ((leftDerivedUpperStarId Λ Y).hom.app K) =
-      eqToHom (by rw [← h, Category.comp_id]; rfl) := by
-  subst h
-  exact leftDerivedUpperStarComp_id_right_app Λ p K
-
 namespace NearbyCyclesModel
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
@@ -83,107 +74,6 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   {f : X ⟶ Y} {f' : X' ⟶ Y'}
 
 namespace Hom
-
-/-- The diagram chase behind `NearbyCyclesModel.Hom.pullbackExchange_app_of_comp_left`. -/
-private lemma comp_autAction_aux {D : Type*} [Category D] {P Q Q₁ R R₁ R₂ : D}
-    {χ : P ⟶ Q} {c : Q ⟶ Q₁} {i : Q₁ ⟶ Q} {c' j' : P ⟶ R} {i' : R ⟶ P} {τ : P ⟶ R₂}
-    {Lτ : R ⟶ R₁} {j'' : R₂ ⟶ R₁} {a : R₁ ⟶ Q₁} (hc : c ≫ i = 𝟙 Q)
-    (he : χ ≫ c = c' ≫ Lτ ≫ a) (hc' : c' ≫ i' = 𝟙 P) (hij : i' ≫ j' = 𝟙 R)
-    (hnat : τ ≫ j'' = j' ≫ Lτ) :
-    χ = τ ≫ j'' ≫ a ≫ i := by
-  obtain rfl : c' = j' := by
-    rw [← Category.comp_id c', ← hij, ← Category.assoc, hc', Category.id_comp]
-  rw [reassoc_of% hnat, ← reassoc_of% he, hc, Category.comp_id]
-
-/-- The diagram chase behind `NearbyCyclesModel.Hom.pullbackExchange_app_of_comp_right`, for
-functors `ΨN : DY ⥤ DY'`, `ΨM : DX ⥤ DX'`, `Lf`, `Lf'` and `I ≅ 𝟭`, `I' ≅ 𝟭`. -/
-private lemma comp_autAction_aux' {DY DY' DX DX' : Type*} [Category DY] [Category DY']
-    [Category DX] [Category DX'] {ΨN : DY ⥤ DY'} {ΨM : DX ⥤ DX'} {Lf : DY ⥤ DX}
-    {Lf' : DY' ⥤ DX'} {I : DY ⥤ DY} {I' : DY' ⥤ DY'} (eY : I ≅ 𝟭 DY) (eY' : I' ≅ 𝟭 DY')
-    (ατ αχ : ΨN ⋙ Lf' ⟶ Lf ⋙ ΨM) (αs : ΨN ⋙ I' ⟶ I ⋙ ΨN) (c : Lf ≅ I ⋙ Lf)
-    (c' : Lf' ≅ I' ⋙ Lf') (C : DY)
-    (he : αχ.app C ≫ ΨM.map (c.hom.app C) =
-      c'.hom.app (ΨN.obj C) ≫ Lf'.map (αs.app C) ≫ ατ.app (I.obj C))
-    (hc : c.hom.app C ≫ Lf.map (eY.hom.app C) = 𝟙 _)
-    (hc' : c'.hom.app (ΨN.obj C) ≫ Lf'.map (eY'.hom.app (ΨN.obj C)) = 𝟙 _) :
-    αχ.app C = Lf'.map (eY'.inv.app (ΨN.obj C) ≫ αs.app C ≫ ΨN.map (eY.hom.app C)) ≫
-      ατ.app C := by
-  have hc'' : c'.hom.app (ΨN.obj C) = Lf'.map (eY'.inv.app (ΨN.obj C)) := by
-    calc c'.hom.app (ΨN.obj C)
-        = c'.hom.app (ΨN.obj C) ≫ Lf'.map (eY'.hom.app _ ≫ eY'.inv.app _) := by simp
-      _ = (c'.hom.app (ΨN.obj C) ≫ Lf'.map (eY'.hom.app _)) ≫ Lf'.map (eY'.inv.app _) := by
-        rw [Lf'.map_comp, Category.assoc]
-      _ = _ := by rw [hc', Category.id_comp]
-  have hnat := ατ.naturality (eY.hom.app C)
-  dsimp only [Functor.comp_obj, Functor.comp_map, Functor.id_obj] at hnat
-  calc αχ.app C = αχ.app C ≫ ΨM.map (c.hom.app C ≫ Lf.map (eY.hom.app C)) := by
-        rw [hc]
-        simp
-    _ = (αχ.app C ≫ ΨM.map (c.hom.app C)) ≫ ΨM.map (Lf.map (eY.hom.app C)) := by
-        rw [ΨM.map_comp, Category.assoc]
-    _ = _ := by
-        rw [he, hc'', Category.assoc, Category.assoc, ← hnat]
-        simp
-
-/-- The pullback exchange of a morphism of models `χ` which is `s ≫ τ` on total spaces and
-geometric generic fibres, for a self-map `s` over the identities, is `α_τ` followed by the action
-of `s`: `α_χ(C) = α_τ(C) ≫ ρ(s)(Lf^* C)`. -/
-lemma pullbackExchange_app_of_comp_left (s : M.Hom M (𝟙 X) (𝟙 X')) (τ χ : M.Hom N f f')
-    (htot : s.total ≫ τ.total = χ.total) (hgen : s.generic ≫ τ.generic = χ.generic)
-    (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
-      (condensedRingObj Λ Y))) :
-    (χ.pullbackExchange Λ).app C =
-      (τ.pullbackExchange Λ).app C ≫ s.autAction Λ (L((f)^*⟦Λ⟧).obj C) := by
-  have e := s.pullbackExchange_comp_app_of_eq Λ τ χ (Category.id_comp f) (Category.id_comp f')
-    htot hgen C
-  have hc := leftDerivedUpperStarCompOfEq_hom_app_comp_leftDerivedUpperStarId Λ
-    (Category.id_comp f) C
-  have hc' := leftDerivedUpperStarCompOfEq_hom_app_comp_leftDerivedUpperStarId Λ
-    (Category.id_comp f') ((N.nearbyCycles Λ).obj C)
-  rw [eqToHom_refl] at hc hc'
-  have hΨ := congrArg (M.nearbyCycles Λ).map hc
-  rw [(M.nearbyCycles Λ).map_comp, (M.nearbyCycles Λ).map_id] at hΨ
-  exact comp_autAction_aux hΨ e hc' ((leftDerivedUpperStarId Λ X').hom_inv_id_app _)
-    ((leftDerivedUpperStarId Λ X').inv.naturality _)
-
-/-- The pullback exchange of a morphism of models `χ` which is `τ ≫ s'` on total spaces and
-geometric generic fibres, for a self-map `s'` over the identities, is the action of `s'` followed
-by `α_τ`: `α_χ(C) = Lf'^*(ρ(s')(C)) ≫ α_τ(C)`. -/
-lemma pullbackExchange_app_of_comp_right (s' : N.Hom N (𝟙 Y) (𝟙 Y')) (τ χ : M.Hom N f f')
-    (htot : τ.total ≫ s'.total = χ.total) (hgen : τ.generic ≫ s'.generic = χ.generic)
-    (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
-      (condensedRingObj Λ Y))) :
-    (χ.pullbackExchange Λ).app C =
-      L((f')^*⟦Λ⟧).map (s'.autAction Λ C) ≫ (τ.pullbackExchange Λ).app C := by
-  exact comp_autAction_aux' (leftDerivedUpperStarId Λ Y) (leftDerivedUpperStarId Λ Y')
-    (τ.pullbackExchange Λ) (χ.pullbackExchange Λ) (s'.pullbackExchange Λ)
-    (leftDerivedUpperStarCompOfEq Λ (Category.comp_id f))
-    (leftDerivedUpperStarCompOfEq Λ (Category.comp_id f')) C
-    (τ.pullbackExchange_comp_app_of_eq Λ s' χ (Category.comp_id f) (Category.comp_id f') htot
-      hgen C)
-    ((leftDerivedUpperStarCompOfEq_hom_app_comp_map_leftDerivedUpperStarId Λ
-      (Category.comp_id f) C).trans (eqToHom_refl _ _))
-    ((leftDerivedUpperStarCompOfEq_hom_app_comp_map_leftDerivedUpperStarId Λ
-      (Category.comp_id f') _).trans (eqToHom_refl _ _))
-
-/-- **The pullback exchange intertwines the actions of self-maps**: if `s ≫ τ = τ ≫ s'` on total
-spaces and geometric generic fibres, then `α_τ(C) ≫ ρ(s)(Lf^* C) = Lf'^*(ρ(s')(C)) ≫ α_τ(C)`. -/
-lemma pullbackExchange_app_comp_autAction_of_comm (τ : M.Hom N f f')
-    (s : M.Hom M (𝟙 X) (𝟙 X')) (s' : N.Hom N (𝟙 Y) (𝟙 Y'))
-    (htot : s.total ≫ τ.total = τ.total ≫ s'.total)
-    (hgen : s.generic ≫ τ.generic = τ.generic ≫ s'.generic)
-    (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
-      (condensedRingObj Λ Y))) :
-    (τ.pullbackExchange Λ).app C ≫ s.autAction Λ (L((f)^*⟦Λ⟧).obj C) =
-      L((f')^*⟦Λ⟧).map (s'.autAction Λ C) ≫ (τ.pullbackExchange Λ).app C := by
-  let χ : M.Hom N f f' :=
-    { total := τ.total ≫ s'.total
-      generic := τ.generic ≫ s'.generic
-      comm_j := (τ.comp s').comm_j
-      comm_i := by simpa using (τ.comp s').comm_i
-      comm_ε := by simpa using (τ.comp s').comm_ε }
-  rw [← pullbackExchange_app_of_comp_left Λ s τ χ htot hgen,
-    ← pullbackExchange_app_of_comp_right Λ s' τ χ rfl rfl]
 
 /-- **The pushforward exchange intertwines the actions of self-maps**: if `s ≫ τ = τ ≫ s'` on
 total spaces and geometric generic fibres, then `χ_τ(E) ≫ Rf'_*(ρ(s)(E)) = ρ(s')(Rf_* E) ≫ χ_τ(E)`.

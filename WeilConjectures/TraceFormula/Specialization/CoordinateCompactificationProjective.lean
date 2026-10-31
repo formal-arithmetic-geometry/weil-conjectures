@@ -532,10 +532,12 @@ noncomputable def baseChangeSpecialToPoint : baseChangeSpecial b (traitSlice x) 
 
 /-- **The generic slice model over the slice trait** `φ'' : M'' ⟶ P''`: the projection
 `𝒳'' = 𝒳 ×_{𝔸¹_S} Spec K⟦t⟧ ⟶ Spec K⟦t⟧` as a morphism of models from the generic slice model
-(`NearbyCyclesModel.genericSliceModel`) to the slice trait (`NearbyCyclesModel.sliceTraitModel`),
+(`NearbyCyclesModel.genericSliceModel`) to the slice trait
+(`NearbyCyclesModel.sliceTraitPointModel`),
+(`NearbyCyclesModel.sliceTraitPointModel`),
 over the structure morphisms of the base and of the special fibre. -/
-noncomputable def genericSliceTraitHom :
-    (genericSliceModel x hb).Hom (sliceTraitModel K) (genericSliceBaseToPoint x hb).left
+noncomputable def genericSliceToTraitHom :
+    (genericSliceModel x hb).Hom (sliceTraitPointModel K) (genericSliceBaseToPoint x hb).left
       (baseChangeSpecialToPoint (b := b) x).left where
   total := pullback.snd b (traitSlice x)
   generic := pullback.snd _ _
@@ -547,8 +549,8 @@ noncomputable def genericSliceTraitHom :
     rw [Category.assoc, genericSliceFibreIso_hom_over, pullback.lift_snd, Category.comp_id]
 
 @[simp]
-lemma genericSliceTraitHom_total :
-    (genericSliceTraitHom x hb).total = pullback.snd b (traitSlice x) := rfl
+lemma genericSliceToTraitHom_total :
+    (genericSliceToTraitHom x hb).total = pullback.snd b (traitSlice x) := rfl
 
 end TraitHom
 
@@ -631,7 +633,7 @@ noncomputable abbrev genericSliceCompHom :
 `NearbyCyclesModel.exists_twist_of_slice_of_composition_law`). -/
 lemma genericSliceCompHom_total_comp (hbWχ : bW ≫ coordChart (trait k') = U.ι ≫ bc.total) :
     (genericSliceCompHom x hN hbW).total ≫ bc.total =
-      (genericSliceTraitHom x hbW).total ≫ (projectiveLineSliceHom x).total := by
+      (genericSliceToTraitHom x hbW).total ≫ (projectiveLineSliceHom x).total := by
   change (pullback.fst bW (traitSlice x) ≫ U.ι) ≫ bc.total =
     pullback.snd bW (traitSlice x) ≫ projectiveLineSlice x
   rw [Category.assoc, ← hbWχ, pullback.condition_assoc, projectiveLineSlice_eq_coordChart]
@@ -642,29 +644,29 @@ lemma genericSliceCompHom_generic_comp (hbWχ : bW ≫ coordChart (trait k') = U
     (hgN : gN = bc.generic ≫
       (ProjectiveLine (Spec (.of (traitGenericField k'))) ↘ Spec (.of (traitGenericField k')))) :
     (genericSliceCompHom x hN hbW).generic ≫ bc.generic =
-      (genericSliceTraitHom x hbW).generic ≫ (projectiveLineSliceHom x).generic := by
+      (genericSliceToTraitHom x hbW).generic ≫ (projectiveLineSliceHom x).generic := by
   have htot := genericSliceCompHom_total_comp (hN := hN) x bc hbW hbWχ
   have hP := isPullback_map (ULift.{u} (Fin 2)) (traitGenericPoint k')
   refine hP.hom_ext ?_ ?_
   · have h₁ : bc.generic ≫ ProjectiveSpace.map _ (traitGenericPoint k') = N.j ≫ bc.total :=
       bc.comm_j
     have h₂ := (genericSliceCompHom x hN hbW).comm_j
-    have h₃ : (genericSliceTraitHom x hbW).generic ≫ traitGenericPoint K =
-        (genericSliceModel x hbW).j ≫ (genericSliceTraitHom x hbW).total :=
-      (genericSliceTraitHom x hbW).comm_j
+    have h₃ : (genericSliceToTraitHom x hbW).generic ≫ traitGenericPoint K =
+        (genericSliceModel x hbW).j ≫ (genericSliceToTraitHom x hbW).total :=
+      (genericSliceToTraitHom x hbW).comm_j
     have htot' : (genericSliceCompHom x hN hbW).total ≫ bc.total =
-        (genericSliceTraitHom x hbW).total ≫ projectiveLineSlice x := htot
+        (genericSliceToTraitHom x hbW).total ≫ projectiveLineSlice x := htot
     calc _ = (genericSliceCompHom x hN hbW).generic ≫ N.j ≫ bc.total := by
           rw [Category.assoc, h₁]
-      _ = (genericSliceModel x hbW).j ≫ (genericSliceTraitHom x hbW).total ≫
+      _ = (genericSliceModel x hbW).j ≫ (genericSliceToTraitHom x hbW).total ≫
           projectiveLineSlice x := by
           rw [reassoc_of% h₂, htot']
-      _ = (genericSliceTraitHom x hbW).generic ≫ projectiveLineGeometricSlice x ≫
+      _ = (genericSliceToTraitHom x hbW).generic ≫ projectiveLineGeometricSlice x ≫
           ProjectiveSpace.map _ (traitGenericPoint k') := by
           rw [← reassoc_of% h₃, projectiveLineGeometricSlice_map]
       _ = _ := (Category.assoc _ _ _).symm
   · rw [Category.assoc, Category.assoc, ← hgN]
-    change _ = (genericSliceTraitHom x hbW).generic ≫ projectiveLineGeometricSlice x ≫
+    change _ = (genericSliceToTraitHom x hbW).generic ≫ projectiveLineGeometricSlice x ≫
       ProjectiveLine (Spec (.of (traitGenericField k'))) ↘ Spec (.of (traitGenericField k'))
     rw [projectiveLineGeometricSlice_over]
     exact (Category.assoc _ _ _).trans (baseChangeGenericMap_g

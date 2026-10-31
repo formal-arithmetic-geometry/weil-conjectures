@@ -198,29 +198,30 @@ theorem exists_twist_restrictOpen_of_compactified (D : NearbyDualizingDataOfGene
     (by exact isPullback_projectiveLineModel_ε k')
     (by exact hM'')
     (by exact hM''gen)
-    (by exact isTraitModelOfGenericBase_sliceTraitModel (traitSliceField k'))
-    (by exact isPullback_sliceTraitModel_ε (traitSliceField k')) (i₁ ≫ p₁) (i₂ ≫ p₂) (by exact bc)
+    (by exact isTraitModelOfGenericBase_sliceTraitPointModel (traitSliceField k'))
+    (by exact isPullback_sliceTraitPointModel_ε (traitSliceField k')) (i₁ ≫ p₁) (i₂ ≫ p₂)
+    (by exact bc)
     (by exact hqN) (by exact hgN)
     (genericSliceBaseToPoint (traitSliceCoord k') hbW)
     (baseChangeSpecialToPoint (b := bW) (traitSliceCoord k'))
-    (by exact genericSliceTraitHom (traitSliceCoord k') hbW) (by exact (Category.comp_id _).symm)
+    (by exact genericSliceToTraitHom (traitSliceCoord k') hbW) (by exact (Category.comp_id _).symm)
     (by exact (Category.comp_id _).symm) (by exact genericSliceCompHom (traitSliceCoord k') hN hbW)
     (by exact projectiveLineSliceHom (traitSliceCoord k'))
     (by exact genericSliceCompHom_total_comp (traitSliceCoord k') bc hbW hbWχ)
     (by exact genericSliceCompHom_generic_comp (traitSliceCoord k') bc hbW hbWχ hgN) (by exact hbsq)
     (by exact hssq) (by
       have h1 := D.isIso_θ_projectiveLineModel
-      have h2 := DK.isIso_θ_sliceTraitModel
+      have h2 := DK.isIso_θ_sliceTraitPointModel
       have : Smooth (ProjectiveLine (trait k') ↘ trait k') := SmoothOfRelativeDimension.smooth 1 _
       have : IsIso ((projectiveLineModel k').unit (Profinite.padicAlgClRingObj ℓ)) :=
         (isTraitModelOfGenericBase_projectiveLineModel k').isTraitModelOver.isIso_unit_of_smooth
-      have : IsIso ((sliceTraitModel (traitSliceField k')).unit
+      have : IsIso ((sliceTraitPointModel (traitSliceField k')).unit
           (Profinite.padicAlgClRingObj ℓ)) := by
         have h : UpperStarInvertsLowerStarUnit (Profinite.padicAlgClRingObj ℓ)
             (traitGenericPoint (traitSliceField k')) (traitClosedPoint (traitSliceField k')) :=
           ⟨isIso_upperStar_traitClosedPoint_map_unit_app _ _,
             isZero_upperStar_traitClosedPoint_obj_rightDerived _ _⟩
-        exact (sliceTraitModel _).isIso_unit_of_upperStarInvertsLowerStarUnit _ h
+        exact (sliceTraitPointModel _).isIso_unit_of_upperStarInvertsLowerStarUnit _ h
       have hsd := nonempty_shiftDecomposition_dualizingComplex_projectiveLine (ℓ := ℓ) (k' := k')
       obtain ⟨uP⟩ := nonempty_upperStarOfMap_projectiveLineGenericSlice_dualizingComplex_iso
         (ℓ := ℓ) (k' := k') (traitSliceCoord k')

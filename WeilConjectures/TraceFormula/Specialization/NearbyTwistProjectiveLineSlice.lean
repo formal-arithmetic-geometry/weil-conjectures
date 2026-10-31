@@ -26,7 +26,9 @@ Let `S = Spec k'⟦t⟧`, `K` a field extension of `k'` and `x ∈ K`. The gener
 (`NearbyCyclesModel.projectiveLineSlice`). It is a morphism of models `s_P : P'' ⟶ ℙ¹_S`
 (`NearbyCyclesModel.projectiveLineSliceHom`) from the slice trait `P'' = Spec K⟦t⟧`, a trait
 model of the point `Spec Frac K⟦t⟧` over the generic base `(Frac K⟦t⟧, 𝟙)`
-(`NearbyCyclesModel.sliceTraitModel`), to `ℙ¹_S` (`NearbyCyclesModel.projectiveLineModel`), over
+(`NearbyCyclesModel.sliceTraitPointModel`), to `ℙ¹_S`
+(`NearbyCyclesModel.projectiveLineModel`), over
+(`NearbyCyclesModel.projectiveLineModel`), over
 the slices `c_P : Spec Frac K⟦t⟧ ⟶ ℙ¹_η` and `p_P : Spec K ⟶ ℙ¹_{k'}` of the generic and special
 fibres. These are the generic slice `σ_η` and the point `x` of `𝔸¹`, followed by the affine chart
 (`NearbyCyclesModel.projectiveLineGenericSlice_eq`,
@@ -39,7 +41,7 @@ for `P = ℙ¹_S`, and the hypothesis on `P` of that lemma, the *twist equation 
 
 * `θ_{ℙ¹_S}` is invertible
   (`NearbyCyclesModel.NearbyDualizingDataOfGenericBase.isIso_θ_projectiveLineModel`), and so is
-  `θ_{P''}` (`NearbyCyclesModel.NearbyDualizingDataOfGenericBase.isIso_θ_sliceTraitModel`, the
+  `θ_{P''}` (`NearbyCyclesModel.NearbyDualizingDataOfGenericBase.isIso_θ_sliceTraitPointModel`, the
   smooth case in relative dimension `0`);
 * the pullback exchange `α_{s_P}` is invertible at `ω_{ℙ¹_η}`
   (`NearbyCyclesModel.isIso_boundedConstructiblePullbackExchangeOfMap_projectiveLineSliceHom_app`):
@@ -97,7 +99,7 @@ namespace NearbyCyclesModel
 
 /-- The slice trait `Spec K⟦t⟧` as a trait model of the point `Spec Frac K⟦t⟧` over the generic
 base `(Frac K⟦t⟧, 𝟙)`. -/
-noncomputable abbrev sliceTraitModel (K : Type u) [Field K] :
+noncomputable abbrev sliceTraitPointModel (K : Type u) [Field K] :
     NearbyCyclesModel (point (FractionRing (PowerSeries K))).left (point K).left :=
   traitModelOfGenericBase (FractionRing (PowerSeries K))
     (𝟙 (Spec (.of (FractionRing (PowerSeries K)))))
@@ -232,10 +234,10 @@ lemma projectiveLineSpecialSlice_eq :
 
 /-- **The slice of the projective line as a morphism of models** `s_P : P'' ⟶ ℙ¹_S`: from the
 slice trait `Spec K⟦t⟧`, as a model of the point `Spec Frac K⟦t⟧` over the generic base
-(`NearbyCyclesModel.sliceTraitModel`), to the projective line over the trait, over
+(`NearbyCyclesModel.sliceTraitPointModel`), to the projective line over the trait, over
 the slices `c_P` and `p_P` of the generic and special fibres. -/
 noncomputable def projectiveLineSliceHom :
-    (sliceTraitModel K).Hom
+    (sliceTraitPointModel K).Hom
       (projectiveLineModel k') (projectiveLineGenericSlice x) (projectiveLineSpecialSlice x) where
   total := projectiveLineSlice x
   generic := projectiveLineGeometricSlice x
@@ -285,15 +287,15 @@ variable (K : Type u) [Field K]
 
 /-- The slice trait is a trait model of the point `Spec Frac K⟦t⟧` over the generic base
 `(Frac K⟦t⟧, 𝟙)`. -/
-theorem isTraitModelOfGenericBase_sliceTraitModel :
-    (sliceTraitModel K).IsTraitModelOfGenericBase (point (FractionRing (PowerSeries K)))
+theorem isTraitModelOfGenericBase_sliceTraitPointModel :
+    (sliceTraitPointModel K).IsTraitModelOfGenericBase (point (FractionRing (PowerSeries K)))
       (𝟙 (Spec (.of (FractionRing (PowerSeries K))))) (𝟙 (trait K))
       (𝟙 (Spec (.of (traitGenericField K)))) :=
   isTraitModelOfGenericBase_traitModelOfGenericBase _ _
 
 /-- The geometric generic fibre of the slice trait is the full base change of the point. -/
-lemma isPullback_sliceTraitModel_ε :
-    IsPullback (sliceTraitModel K).ε (𝟙 (Spec (.of (traitGenericField K))))
+lemma isPullback_sliceTraitPointModel_ε :
+    IsPullback (sliceTraitPointModel K).ε (𝟙 (Spec (.of (traitGenericField K))))
       (point (FractionRing (PowerSeries K))).hom
       (traitGenericPointToSpec K ≫ 𝟙 (Spec (.of (FractionRing (PowerSeries K))))) := by
   have : IsIso (point (FractionRing (PowerSeries K))).hom := IsIso.id _
@@ -318,16 +320,16 @@ variable {K} {ℓ : ℕ} [Fact ℓ.Prime] [IsSepClosed K] [Fact (ringChar K).Pri
 /-- **The dualizing map of the slice trait is an isomorphism**: the trait is smooth and proper of
 relative dimension `0` over itself, with full geometric generic fibre
 (`NearbyCyclesModel.NearbyDualizingDataOfGenericBase.isIso_θ_of_smooth`). -/
-theorem NearbyDualizingDataOfGenericBase.isIso_θ_sliceTraitModel
+theorem NearbyDualizingDataOfGenericBase.isIso_θ_sliceTraitPointModel
     (DK : NearbyDualizingDataOfGenericBase K ℓ) :
-    IsIso (DK.θ (isTraitModelOfGenericBase_sliceTraitModel K)) :=
+    IsIso (DK.θ (isTraitModelOfGenericBase_sliceTraitPointModel K)) :=
   have : IsProper (𝟙 (trait K)) := inferInstanceAs (IsProper (𝟙 _))
   have : SmoothOfRelativeDimension 0 (𝟙 (trait K)) :=
     HasRingHomProperty.of_isOpenImmersion
       (RingHom.locally_holdsForLocalizationAway
         RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway).containsIdentities
-  DK.isIso_θ_of_smooth (isTraitModelOfGenericBase_sliceTraitModel K) 0
-    (isPullback_sliceTraitModel_ε K)
+  DK.isIso_θ_of_smooth (isTraitModelOfGenericBase_sliceTraitPointModel K) 0
+    (isPullback_sliceTraitPointModel_ε K)
 
 variable {k' : Type u} [Field k'] [Algebra k' K] (x : K) [IsSepClosed k']
   [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
@@ -383,12 +385,12 @@ theorem isIso_pullbackExchange_projectiveLineSliceHom_app :
   have : Smooth (ProjectiveLine (trait k') ↘ trait k') := SmoothOfRelativeDimension.smooth 1 _
   have : IsIso ((projectiveLineModel k').unit (Profinite.padicAlgClRingObj ℓ)) :=
     (isTraitModelOfGenericBase_projectiveLineModel k').isTraitModelOver.isIso_unit_of_smooth
-  have : IsIso ((sliceTraitModel K).unit (Profinite.padicAlgClRingObj ℓ)) := by
+  have : IsIso ((sliceTraitPointModel K).unit (Profinite.padicAlgClRingObj ℓ)) := by
     have h : UpperStarInvertsLowerStarUnit (Profinite.padicAlgClRingObj ℓ) (traitGenericPoint K)
         (traitClosedPoint K) :=
       ⟨isIso_upperStar_traitClosedPoint_map_unit_app _ K,
         isZero_upperStar_traitClosedPoint_obj_rightDerived _ K⟩
-    exact (sliceTraitModel K).isIso_unit_of_upperStarInvertsLowerStarUnit _ h
+    exact (sliceTraitPointModel K).isIso_unit_of_upperStarInvertsLowerStarUnit _ h
   exact Hom.isIso_pullbackExchange_app_of_shiftDecomposition _ _
     nonempty_shiftDecomposition_dualizingComplex_projectiveLine
 
@@ -397,7 +399,8 @@ at the dualizing complex of `ℙ¹_η`
 (`NearbyCyclesModel.isIso_pullbackExchange_projectiveLineSliceHom_app`). -/
 instance isIso_boundedConstructiblePullbackExchangeOfMap_projectiveLineSliceHom_app :
     IsIso (((projectiveLineSliceHom x).boundedConstructiblePullbackExchangeOfMap ℓ
-        ((isTraitModelOfGenericBase_sliceTraitModel K).preservesBoundedConstructible (ℓ := ℓ))
+        ((isTraitModelOfGenericBase_sliceTraitPointModel K).preservesBoundedConstructible
+          (ℓ := ℓ))
         ((isTraitModelOfGenericBase_projectiveLineModel k').preservesBoundedConstructible
           (ℓ := ℓ))).app
         (dualizingComplex ℓ (overProjectiveLine (point (FractionRing (PowerSeries k')))))) := by
@@ -406,12 +409,14 @@ instance isIso_boundedConstructiblePullbackExchangeOfMap_projectiveLineSliceHom_
     (X := overProjectiveLine (point (FractionRing (PowerSeries k'))))
     (X' := overProjectiveLine (point k')) (Y := point (FractionRing (PowerSeries K)))
     (Y' := point K) (projectiveLineSliceHom x)
-    ((isTraitModelOfGenericBase_sliceTraitModel K).preservesBoundedConstructible (ℓ := ℓ))
+    ((isTraitModelOfGenericBase_sliceTraitPointModel K).preservesBoundedConstructible
+      (ℓ := ℓ))
     ((isTraitModelOfGenericBase_projectiveLineModel k').preservesBoundedConstructible (ℓ := ℓ))
     (dualizingComplex ℓ (overProjectiveLine (point (FractionRing (PowerSeries k')))))
   have : IsIso ((ObjectProperty.ι _).map
       (((projectiveLineSliceHom x).boundedConstructiblePullbackExchangeOfMap ℓ
-        ((isTraitModelOfGenericBase_sliceTraitModel K).preservesBoundedConstructible (ℓ := ℓ))
+        ((isTraitModelOfGenericBase_sliceTraitPointModel K).preservesBoundedConstructible
+          (ℓ := ℓ))
         ((isTraitModelOfGenericBase_projectiveLineModel k').preservesBoundedConstructible
           (ℓ := ℓ))).app
         (dualizingComplex ℓ (overProjectiveLine (point (FractionRing (PowerSeries k'))))))) := by
@@ -500,7 +505,7 @@ theorem nonempty_upperStarOfMap_projectiveLineGenericSlice_dualizingComplex_iso 
 `P = ℙ¹_S` of `NearbyCyclesModel.exists_twist_of_slice_of_composition_law`): `θ_{ℙ¹_S}` and
 `θ_{P''}` are invertible
 (`NearbyCyclesModel.NearbyDualizingDataOfGenericBase.isIso_θ_projectiveLineModel`,
-`NearbyCyclesModel.NearbyDualizingDataOfGenericBase.isIso_θ_sliceTraitModel`), so is the
+`NearbyCyclesModel.NearbyDualizingDataOfGenericBase.isIso_θ_sliceTraitPointModel`), so is the
 pullback exchange `α_{s_P}` at the dualizing complex of `ℙ¹_η`
 (`NearbyCyclesModel.isIso_boundedConstructiblePullbackExchangeOfMap_projectiveLineSliceHom_app`),
 and an identification `u_P : c_P^* ω_{ℙ¹_η} ≅ ω ⊗ ℚ̄_ℓ(0)[2]` exists
@@ -522,20 +527,22 @@ theorem exists_twist_projectiveLineSlice (D : NearbyDualizingDataOfGenericBase k
           (projectiveLineSpecialSlice x)).map
           (D.θ (isTraitModelOfGenericBase_projectiveLineModel k')) ≫ vP.hom =
         ((projectiveLineSliceHom x).boundedConstructiblePullbackExchangeOfMap ℓ
-            ((isTraitModelOfGenericBase_sliceTraitModel K).preservesBoundedConstructible (ℓ := ℓ))
+            ((isTraitModelOfGenericBase_sliceTraitPointModel K).preservesBoundedConstructible
+              (ℓ := ℓ))
             ((isTraitModelOfGenericBase_projectiveLineModel k').preservesBoundedConstructible
               (ℓ := ℓ))).app
             (dualizingComplex ℓ (overProjectiveLine (point (FractionRing (PowerSeries k'))))) ≫
           (boundedConstructibleNearbyCycles
-            ((isTraitModelOfGenericBase_sliceTraitModel K).preservesBoundedConstructible
+            ((isTraitModelOfGenericBase_sliceTraitPointModel K).preservesBoundedConstructible
               (ℓ := ℓ))).map uP.hom ≫
-          ((sliceTraitModel K).zeroTwistIso
-            ((isTraitModelOfGenericBase_sliceTraitModel K).preservesBoundedConstructible (ℓ := ℓ))
+          ((sliceTraitPointModel K).zeroTwistIso
+            ((isTraitModelOfGenericBase_sliceTraitPointModel K).preservesBoundedConstructible
+              (ℓ := ℓ))
             (𝟙 (trait K)) 2 (dualizingComplex ℓ (point (FractionRing (PowerSeries K))))).hom ≫
-          DK.θ (isTraitModelOfGenericBase_sliceTraitModel K) ▷
+          DK.θ (isTraitModelOfGenericBase_sliceTraitPointModel K) ▷
             boundedConstructibleTateTwist ℓ (point K) 0 2 := by
   have := D.isIso_θ_projectiveLineModel
-  have := DK.isIso_θ_sliceTraitModel
+  have := DK.isIso_θ_sliceTraitPointModel
   obtain ⟨uP⟩ := nonempty_upperStarOfMap_projectiveLineGenericSlice_dualizingComplex_iso (ℓ := ℓ)
     (k' := k') x
   exact exists_twist_of_isIso' _ _ _ _ uP
