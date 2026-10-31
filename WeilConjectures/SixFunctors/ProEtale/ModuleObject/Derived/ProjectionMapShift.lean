@@ -9,6 +9,8 @@ public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapShift
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.ShiftComparison
 public import WeilConjectures.CategoryTheory.Monoidal.KFlatEquivalence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Localizing
+public import WeilConjectures.SixFunctors.ModCondensedCachedInstances
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionMapShiftFac
 
 /-!
 # The projection map of module objects commutes with the shifts
@@ -44,6 +46,8 @@ Every object is isomorphic to such a `Qh A`, since `p^*` preserves K-flat comple
 -/
 
 @[expose] public section
+
+open scoped AlgebraicGeometry.ProEtale.CondensedRing.CachedModInstances
 
 universe u
 

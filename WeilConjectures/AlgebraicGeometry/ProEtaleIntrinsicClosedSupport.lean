@@ -1,0 +1,102 @@
+/-
+Copyright (c) 2026 Bin Wu. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Bin Wu
+-/
+module
+
+public import WeilConjectures.AlgebraicGeometry.ProEtaleConstantExact
+public import WeilConjectures.AlgebraicGeometry.ProEtaleOperationsCanonicalAdjunctionSupplement
+
+/-! # Closed support over the intrinsic constant coefficient sheaf
+
+Source: Weil blueprint, smooth purity, order 1858; Stacks Project, Tag 09AH
+(blueprint: def-exc-proetale-sections-with-support).
+
+The canonical coefficient map, obtained by applying inverse image to constant sections,
+identifies the pulled-back constant ring with the constant ring on the source. All module
+operations below use that map. No replacement of the small pro-etale site is made.
+-/
+
+@[expose] public section
+
+set_option autoImplicit false
+
+universe u
+
+open CategoryTheory CategoryTheory.Limits
+
+namespace AlgebraicGeometry.Scheme
+
+/-- The canonical constant-ring identification; its data is the recorded structure map.
+Source: Stacks 09A5 (blueprint: def-exc-proetale-sections-with-support). -/
+noncomputable def sfConstantCoefficientIso {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (A : Type u) [CommRing A] [Finite A] :
+    (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj (proEtaleConstantRing Y A) ≅
+      proEtaleConstantRing X A :=
+  letI : TopologicalSpace (ULift.{u + 1, u} A) := ⊥
+  letI : DiscreteTopology (ULift.{u + 1, u} A) := ⟨rfl⟩
+  letI := ProEtale.finiteCoefficientCommRingMap_isIso
+    f (ULift.{u + 1, u} A)
+  asIso (proEtaleCoefficientInverseImageMap f A)
+
+/-- Module inverse image along the canonical constant-ring identification.
+Source: Stacks 03D2 (blueprint: def-exc-proetale-sections-with-support). -/
+noncomputable abbrev sfConstantModulePullback {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (A : Type u) [CommRing A] [Finite A] :=
+  proEtaleRingModulePullback f (proEtaleConstantRing Y A) (proEtaleConstantRing X A)
+    (sfConstantCoefficientIso f A)
+
+/-- Direct image with its constant-section scalar map, adjoint to the canonical coefficient
+identification. Source: Stacks 03D6 (blueprint: def-exc-proetale-sections-with-support). -/
+noncomputable abbrev sfConstantModuleDirectImage {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (A : Type u) [CommRing A] [Finite A] :=
+  proEtaleRingModuleDirectImage f (proEtaleConstantRing Y A) (proEtaleConstantRing X A)
+    (sfConstantCoefficientIso f A)
+
+/-- The canonical inverse/direct-image adjunction over constant coefficients.
+Source: Stacks 03D7 (blueprint: def-exc-proetale-sections-with-support). -/
+noncomputable abbrev sfConstantModuleAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (A : Type u) [CommRing A] [Finite A] :=
+  proEtaleRingModuleAdjunction f (proEtaleConstantRing Y A) (proEtaleConstantRing X A)
+    (sfConstantCoefficientIso f A)
+
+/-- The kernel of the open adjunction unit, with morphisms induced by its naturality.
+Source: Stacks 09AH (blueprint: def-exc-proetale-sections-with-support). -/
+noncomputable def sfIntrinsicSectionsWithSupport {U T : Scheme.{u}} (j : U ⟶ T)
+    (A : Type u) [CommRing A] [Finite A] :
+    proEtaleRingModules T (proEtaleConstantRing T A) ⥤
+      proEtaleRingModules T (proEtaleConstantRing T A) where
+  obj N := kernel ((sfConstantModuleAdjunction j A).unit.app N)
+  map φ := kernel.map _ _ φ
+    ((sfConstantModuleDirectImage j A).map ((sfConstantModulePullback j A).map φ))
+    ((sfConstantModuleAdjunction j A).unit.naturality φ).symm
+  map_id N := equalizer.hom_ext (by simp)
+  map_comp φ ψ := equalizer.hom_ext (by simp)
+
+/-- The kernel construction respects addition of morphisms sectionwise.
+Source: Stacks 09AH (blueprint: def-exc-proetale-sections-with-support). -/
+noncomputable instance sfIntrinsicSectionsWithSupport_additive {U T : Scheme.{u}}
+    (j : U ⟶ T) (A : Type u) [CommRing A] [Finite A] :
+    (sfIntrinsicSectionsWithSupport j A).Additive where
+  map_add := equalizer.hom_ext (by simp [sfIntrinsicSectionsWithSupport])
+
+/-- The closed support functor is the closed inverse image of the kernel of the open unit.
+For a closed i and complementary open j it is i!_0 N = i* ker(N → j* j* N).
+Source: Weil blueprint, order 1858; Stacks 09AH
+(blueprint: def-exc-proetale-sections-with-support). -/
+noncomputable def sfIntrinsicClosedUpperShriek {Z U T : Scheme.{u}}
+    (i : Z ⟶ T) (j : U ⟶ T) (A : Type u) [CommRing A] [Finite A] :
+    proEtaleRingModules T (proEtaleConstantRing T A) ⥤
+      proEtaleRingModules Z (proEtaleConstantRing Z A) :=
+  sfIntrinsicSectionsWithSupport j A ⋙ sfConstantModulePullback i A
+
+/-- Additivity follows from the kernel construction and additive inverse image.
+Source: Stacks 09AH (blueprint: def-exc-proetale-sections-with-support). -/
+noncomputable instance sfIntrinsicClosedUpperShriek_additive {Z U T : Scheme.{u}}
+    (i : Z ⟶ T) (j : U ⟶ T) (A : Type u) [CommRing A] [Finite A] :
+    (sfIntrinsicClosedUpperShriek i j A).Additive :=
+  inferInstanceAs ((sfIntrinsicSectionsWithSupport j A ⋙
+    sfConstantModulePullback i A).Additive)
+
+end AlgebraicGeometry.Scheme

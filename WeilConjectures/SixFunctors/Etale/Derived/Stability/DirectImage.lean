@@ -7,6 +7,12 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImageTorAmplitudeNoetherian
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion
+import WeilConjectures.AlgebraicGeometry.TorsionObjectConstantProjection
+import WeilConjectures.AlgebraicGeometry.Sites.TorsionAbelianDirectImageVanishing
+import WeilConjectures.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageForgetComparison
+import WeilConjectures.CategoryTheory.BoundedHeartAmplitude
+import WeilConjectures.AlgebraicGeometry.EtaleStalkTorTest
+import WeilConjectures.SixFunctors.GeometricStalkTensorConstantSingle
 
 /-!
 # Stability of `Dctf`: direct image and internal hom
@@ -56,6 +62,59 @@ the schemes in sight, and the schemes are of finite type over a field `k`. Neith
 can be dropped: for `Λ = 𝔽_p` on `𝔸¹` over `𝔽̄_p`, `H¹(𝔸¹, 𝔽_p)` is infinite (Artin–Schreier),
 so `Rf_*` of the constant sheaf along `𝔸¹ ⟶ Spec 𝔽̄_p` is not constructible; and over a
 general Noetherian base étale cohomology need not vanish above twice the dimension. -/
+
+private theorem torsion_forget_of_nsmul_id_eq_zero
+    (Λ : Type (u + 1)) [CommRing Λ] {X : Scheme.{u}}
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (N : ℕ) [NeZero N]
+    (hN : N • 𝟙 F = 0) :
+    ((sheafCompose X.smallEtaleTopology
+      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F).IsTorsion := by
+  refine Sheaf.IsTorsion.of_forall_isAddTorsion fun U x ↦ ?_
+  refine isOfFinAddOrder_iff_nsmul_eq_zero.2 ⟨N, Nat.pos_of_ne_zero (NeZero.ne N), ?_⟩
+  let ev := sheafToPresheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ) ⋙
+    (evaluation X.Etaleᵒᵖ (ModuleCat.{u + 1} Λ)).obj U
+  have h := congrArg ev.map hN
+  rw [Functor.map_nsmul, ev.map_id, Functor.map_zero] at h
+  have hx := congrArg (fun g : ev.obj F ⟶ ev.obj F ↦ g x) h
+  simpa using hx
+
+private theorem torsion_heart_direct_image_bound
+    (Λ : Type (u + 1)) [CommRing Λ] {k : Type u} [Field k]
+    {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
+    [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY]
+    (f : X ⟶ Y) (hf : f ≫ aY = aX) (d : ℕ)
+    (hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞))
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    (hF : ((sheafCompose X.smallEtaleTopology
+      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F).IsTorsion)
+    (q : ℤ) (hq : q < 0 ∨ (2 * d : ℤ) < q) :
+    IsZero ((_root_.DerivedCategory.homologyFunctor _ q).obj
+      ((R((f)_*[ModuleCat.{u + 1} Λ])).obj
+        ((_root_.DerivedCategory.singleFunctor _ 0).obj F))) := by
+  rcases hq with hq | hq
+  · have := isGE_rightDerivedLowerStar_obj Λ f
+      ((_root_.DerivedCategory.singleFunctor _ 0).obj F) 0
+    exact (_root_.DerivedCategory.isGE_iff _ 0).1 this q hq
+  · have hn (L : Type u) [Field L] (s : Spec (.of L) ⟶ Spec (.of k))
+        {P : Scheme.{u}} (p₁ : P ⟶ X) (p₂ : P ⟶ Spec (.of L))
+        (hP : IsPullback p₁ p₂ aX s) :
+        topologicalKrullDim P ≤ (d : WithBot ℕ∞) := by
+      rw [IsHomeomorph.topologicalKrullDim_eq _ hP.isoPullback.hom.homeomorph.isHomeomorph]
+      exact (topologicalKrullDim_pullback_le_of_field aX s).trans hd
+    have hz := isZero_torsion_higherDirectImage_of_forall_field_dimension_le
+      aX aY f hf d hn _ hF q hq
+    obtain ⟨e⟩ := nonempty_higherDirectImage_forget_iso Λ f q F
+    have hz' := hz.of_iso e
+    let Φ := sheafCompose Y.smallEtaleTopology
+      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})
+    have hmod : IsZero (higherDirectImage Λ f q F) := by
+      rw [IsZero.iff_id_eq_zero]
+      apply Φ.map_injective
+      simpa using hz'.eq_of_src (Φ.map (𝟙 _)) (Φ.map 0)
+    have hq0 : 0 ≤ q := by omega
+    have heq : (q.toNat : ℤ) = q := Int.toNat_of_nonneg hq0
+    rw [← heq] at hmod ⊢
+    exact hmod.of_iso (homologyRightDerivedLowerStarSingleIsoHigherDirectImage Λ f F _)
 
 section Torsion
 

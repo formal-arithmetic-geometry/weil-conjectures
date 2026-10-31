@@ -1,0 +1,247 @@
+/-
+Copyright (c) 2026 Bin Wu. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Bin Wu
+-/
+module
+
+public import WeilConjectures.AlgebraicGeometry.FiniteRingBundleSectionOrientationData
+import WeilConjectures.AlgebraicGeometry.BundleSectionProjectionUnit
+import WeilConjectures.AlgebraicGeometry.VectorIntegrationFrameAdjoint
+import WeilConjectures.AlgebraicGeometry.SectionPullbackCoefficientNaturality
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteUnitPullbackNormalization
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Arrows
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1KummerSupplement
+import WeilConjectures.AlgebraicGeometry.RelativeKummerExchangeGeneratorsSupplement
+import WeilConjectures.AlgebraicGeometry.EtaleSinglePullbackComparisonsSupplement
+import WeilConjectures.AlgebraicGeometry.EtaleFiniteTwistPullback
+import Mathlib.AlgebraicGeometry.Sites.Etale
+import Mathlib.AlgebraicGeometry.Scheme
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateSheaf
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateTwist
+import WeilConjectures.AlgebraicGeometry.Sites.Kummer
+import Mathlib.Algebra.Module.ZMod
+import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
+import Mathlib.CategoryTheory.Sites.Monoidal
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import WeilConjectures.AlgebraicGeometry.EtaleConstantRingModuleEquivalence
+import WeilConjectures.CategoryTheory.RingedSiteModules
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
+import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+import WeilConjectures.AlgebraicGeometry.DerivedCategories
+import WeilConjectures.AlgebraicGeometry.RingedTopoiDerivedTensorPullback
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.TensorShiftIso
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
+import WeilConjectures.AlgebraicGeometry.EtaleFiniteTwistPullbackBase
+import WeilConjectures.ConstructibleSheaf.Defs
+import WeilConjectures.EtaleCohomology.TateTwist.Sheaf
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateLinePullback
+import WeilConjectures.EtaleCohomology.TateTwist.RootsOfUnityPullback
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateTensorFamily
+import WeilConjectures.CategoryTheory.NormalizedSignedTensorPowers
+import WeilConjectures.CategoryTheory.Monoidal.IntTensorFamily
+import Mathlib.CategoryTheory.Monoidal.Closed.Basic
+import WeilConjectures.CategoryTheory.IntTensorFamilyIso
+import Mathlib.CategoryTheory.Monoidal.Braided.Basic
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateLocalLine
+import WeilConjectures.AlgebraicGeometry.Sites.SmallEtaleRepresentablePresheafSheaf
+import WeilConjectures.ConstructibleSheaf.Pullback
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.LocallyTrivialInverse
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.MonoidalComp
+import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Unit
+import WeilConjectures.AlgebraicGeometry.EtaleFiniteTwistPullbackRest
+import Mathlib.CategoryTheory.Abelian.Refinements
+import Mathlib.Algebra.Homology.ShortComplex.Exact
+import WeilConjectures.AlgebraicGeometry.ProperProjectionFormula
+import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
+import WeilConjectures.AlgebraicGeometry.EtaleDerivedTensorSymmetrySupplement
+import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
+import Mathlib.AlgebraicGeometry.Morphisms.Proper
+import Mathlib.AlgebraicGeometry.Noetherian
+import Mathlib.Topology.Defs.Filter
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.SixFunctors.Etale.Derived.Tensor
+import WeilConjectures.AlgebraicGeometry.ExactUnboundedExchange
+import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
+import WeilConjectures.SixFunctors.BaseChange.Square
+import WeilConjectures.SixFunctors.Etale.Derived.Shift
+import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
+import Mathlib.Logic.Small.Defs
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteConstantUnitSquare
+import WeilConjectures.AlgebraicGeometry.EtaleSectionUnitNormalization
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
+import WeilConjectures.AlgebraicGeometry.ProjectiveLineDiagonalMaps
+import WeilConjectures.AlgebraicGeometry.OrdinarySupportedCartierKummerSupplement
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+import WeilConjectures.AlgebraicGeometry.EtaleDiagonalSectionCoherence
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteTraceCounit
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Data
+import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
+import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarAdjunctionCompat
+import WeilConjectures.CategoryTheory.SectionConjugateComparison
+import WeilConjectures.CategoryTheory.SectionProjectionUnitSupplement
+import WeilConjectures.AlgebraicGeometry.EtaleTensorTraceBaseChange
+import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionBaseChange
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Braided
+import WeilConjectures.AlgebraicGeometry.EtaleCanonicalTensorComparison
+import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategorySymmetric
+import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Reduction
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionMonoidal
+import WeilConjectures.CategoryTheory.DerivedSingleUnit
+import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteUnitPullbackComparison
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteConstantPullbackHom
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteUnitPullbackHom
+
+/-! # Affine normalization of the coefficient-unit purity mate
+
+Source: orientation-charts Step 4, expanded in the parent orientation node.
+-/
+
+@[expose] public section
+set_option autoImplicit false
+universe u
+open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
+namespace AlgebraicGeometry.Etale
+
+attribute [local implicit_reducible] Scheme.Modules
+  ordinaryFiniteSingleFunctor ordinaryFiniteDegreeZero
+
+attribute [local irreducible] VectorBundleZeroSection.scheme VectorBundleZeroSection.π
+  VectorBundleZeroSection.over VectorBundleZeroSection.antiEquivalence
+
+private theorem normalized_adjunct_local
+    {C D : Type*} [Category C] [Category D] [MonoidalCategory D]
+    {F : C ⥤ D} {G : D ⥤ C} (a : F ⊣ G)
+    {X Y : C} (e : X ≅ Y) (c : F.obj Y ⟶ 𝟙_ D)
+    (p : F.obj X ≅ (𝟙_ D) ⊗ F.obj Y)
+    (h : p.inv ≫ F.map e.hom = (λ_ (F.obj Y)).hom) :
+    a.homEquiv _ _ c = e.inv ≫ a.homEquiv _ _
+      (p.hom ≫ (𝟙_ D) ◁ c ≫ (ρ_ (𝟙_ D)).hom) := by
+  rw [← a.homEquiv_naturality_left]
+  apply congrArg (a.homEquiv _ _)
+  have he : F.map e.inv ≫ p.hom = (λ_ (F.obj Y)).inv := by
+    apply (cancel_mono (λ_ (F.obj Y)).hom).1
+    rw [← h]
+    simp only [Category.assoc, Iso.hom_inv_id_assoc]
+    rw [← F.map_comp, e.inv_hom_id, F.map_id]
+    rw [h, Iso.inv_hom_id]
+  rw [← Category.assoc, he]
+  rw [← leftUnitor_inv_naturality_assoc]
+  rw [← unitors_equal, Iso.inv_hom_id, Category.comp_id]
+
+private theorem purity_unit_eq_bundle_adjunct_local (N : ℕ) (hN : 0 < N)
+    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
+    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)
+    (M : S.Modules) [M.IsFiniteLocallyFreeOfRank d]
+    (p : (vectorBundlePurityLower A S d M).obj
+        (vectorBundlePurityTwistedPullback A N hA S d M (ordinaryFiniteUnit A S)) ≅
+      ((derivedTensor (ModuleCat.{u + 1} A) S).obj (ordinaryFiniteUnit A S)).obj
+        (vectorIntegrationSource A N hA S d M))
+    (hp : p.inv = vectorBundlePurityProjectionMap A N hA S d M (ordinaryFiniteUnit A S)) :
+    bundleSectionPurityUnitMap N hN A hA S hS d M p =
+      (vectorBundlePurityAdjunction A S d M).homEquiv
+        (vectorIntegrationCoefficient A N hA S d M) (ordinaryFiniteUnit A S)
+        (vectorBundleIntegration N hN A hA S hS d M) := by
+  let F := vectorBundlePurityLower A S d M
+  let C := vectorIntegrationCoefficient A N hA S d M
+  let e := bundleSectionPurityUnitIso N A hA S d M
+  let l := derivedTensorLeftUnitor (ModuleCat.{u + 1} A) S (F.obj C)
+  have he : p.inv ≫ F.map e.hom = l.hom := by
+    rw [hp]
+    exact bundleSectionProjection_unit N A hA S d M
+  unfold bundleSectionPurityUnitMap
+  exact (normalized_adjunct_local (vectorBundlePurityAdjunction A S d M) e
+    (vectorBundleIntegration N hN A hA S hS d M) p he).symm
+
+/-- The unit purity mate restricts on every affine linear frame to the prescribed
+coordinate-tower adjunct.
+Source: orientation-charts Step 4; parent proof Steps 3--5 and 9--10.
+(blueprint: lem-trf-bundle-section-purity-unit-normalization).
+
+Proof: the coefficient-first projection map at the unit, conjugated by the pullback
+unit and tensor unitors, is the identity. For the proper factor this is the adjunction
+triangle identity; for open extension it is the sheaf tensor-unit equation. The two
+signed symmetries have sign one at the degree-zero coefficient unit. Its inverse,
+specified by hp, therefore turns the displayed unit purity map into the adjunct of
+the actual vector-bundle integration trace. On a frame, transpose through the open
+compact-support exchange. Mate naturality identifies the resulting arrow with the
+adjunct of the restricted trace. Integration normalization identifies that trace with
+the affine coordinate-tower counit, and the section/pullback compositors identify its
+coefficient source with bundleSectionChartCoefficient. Pulling back by the Cartesian
+lift of the zero section gives precisely the defining normalization equation. This
+uses arbitrary frames and the same normalized t,D throughout; their normalization
+uniqueness removes any dependence on those choices. Empty bases and rank zero use
+the same unit and adjunction equations; no nonzero coefficient is required. -/
+theorem bundleSectionPurityUnit_normalization (N : ℕ) (hN : 0 < N)
+    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
+    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)
+    (M : S.Modules) [M.IsFiniteLocallyFreeOfRank d]
+    (p : (vectorBundlePurityLower A S d M).obj
+        (vectorBundlePurityTwistedPullback A N hA S d M (ordinaryFiniteUnit A S)) ≅
+      ((derivedTensor (ModuleCat.{u + 1} A) S).obj (ordinaryFiniteUnit A S)).obj
+        (vectorIntegrationSource A N hA S d M))
+    (hp : p.inv = vectorBundlePurityProjectionMap A N hA S d M (ordinaryFiniteUnit A S))
+    (o : bundleSectionObject A S d M ≅ affineLinearBaseCoefficient A N hA S d)
+    (ho : o.inv = (bundleSectionCoefficientIso A N hA S d M).inv ≫
+      (ordinaryFinitePullback A (VectorBundleZeroSection.zero S d M)).map
+        (bundleSectionPurityUnitMap N hN A hA S hS d M p)) :
+    BundleSectionOrientationNormalization N hN A hA S hS d M o := by
+  change SheafOfModules.{u} S.ringCatSheaf at M
+  intro t D V hV e
+  rw [ho, purity_unit_eq_bundle_adjunct_local N hN A hA S hS d M p hp]
+  have hu (T : Scheme.{u}) :
+      (singleFunctorObjUnitIso (ModuleCat.{u + 1} A) T).hom = 𝟙 _ := by
+    apply (cancel_mono (singleFunctorObjUnitIso (ModuleCat.{u + 1} A) T).inv).mp
+    rw [Iso.hom_inv_id, singleFunctorObjUnitIso_inv]
+    exact (Category.id_comp _).symm
+  have hpull : (ordinaryFiniteUnitPullback A V.ι).hom =
+      (leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} A) V.ι).hom := by
+    have h := ordinaryFiniteUnitPullback_hom_unit A V.ι
+    erw [hu, hu, Category.comp_id, CategoryTheory.Functor.map_id, Category.id_comp] at h
+    exact h
+  have hm := vectorIntegration_frameAdjoint N hN A hA t D S hS d M V e
+  unfold dualizingComplexBaseChangeMap CoordinateCounitArrows.towerAdjoint at hm
+  erw [← hpull, hu, Category.comp_id] at hm
+  have hc := sectionPullback_coefficient_naturality A V.ι
+    (VectorBundleZeroSection.π S d M) (affineTraceProjection V.toScheme d)
+    (vectorIntegrationChart S d M V e) (VectorBundleZeroSection.zero S d M)
+    (bundleSectionChartZero S d M V e) (vectorIntegrationChart_isPullback S d M V e).w
+    ((vectorIntegrationChart_isPullback S d M V e).lift_fst _ _ _)
+    (VectorBundleZeroSection.zero_spec S d M).1
+    ((vectorIntegrationChart_isPullback S d M V e).lift_snd _ _ _)
+    (affineLinearBaseCoefficient A N hA S d)
+    (affineLinearBaseCoefficient A N hA V.toScheme d)
+    (bundleSectionOmega A S d M)
+    ((rightDerivedUpperShriek A (affineTraceProjection V.toScheme d)).obj
+      (ordinaryFiniteUnit A V.toScheme))
+    (vectorIntegrationBaseCoefficientPullback A N hA t V.ι hS d).hom
+    ((vectorBundlePurityAdjunction A S d M).homEquiv _ _
+      (vectorBundleIntegration N hN A hA S hS d M))
+    ((affineLinearCoefficientDescent A N hA t V.toScheme
+        (affineTracePullbackInvertible N V.ι hS) d).inv ≫
+      bundleSectionAffineAdjunct N hN A hA t D V.toScheme
+        (affineTracePullbackInvertible N V.ι hS) d)
+    ((rightDerivedUpperShriekBaseChangeMap A
+        (vectorIntegrationChart_isPullback S d M V e)).app (ordinaryFiniteUnit A S) ≫
+      (rightDerivedUpperShriek A (affineTraceProjection V.toScheme d)).map
+        (ordinaryFiniteUnitPullback A V.ι).hom) ?_
+  · dsimp only [bundleSectionCoefficientIso, bundleSectionChartComparison,
+      bundleSectionComparison, bundleSectionPullbackSquare, bundleSectionChartCoefficient,
+      Iso.trans_inv, Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv,
+      Functor.mapIso_inv, bundleSectionOmega, vectorIntegrationCoefficient,
+      CategoryTheory.Functor.id_obj] at hc ⊢
+    simpa only [Functor.map_comp, Category.assoc] using hc
+  · dsimp only [bundleSectionAffineAdjunct]
+    exact hm
+
+end AlgebraicGeometry.Etale

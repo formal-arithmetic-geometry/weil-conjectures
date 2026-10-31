@@ -248,6 +248,7 @@ lemma isTriangulated_boundedConstructible_of_serre
 
 section Triangulated
 
+open CondensedRing
 open scoped CategoryTheory.Obj
 
 variable (X : Scheme.{u})

@@ -31,6 +31,11 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
+set_option hygiene false in
+/-- The derived category `D(X_proét, Λ) = D(Mod_{Λ_X})` of module objects over `Λ_X`. -/
+local notation "𝔻(" X ")" =>
+  DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
+
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
 section OpenImmersion
@@ -46,7 +51,7 @@ lemma openImmersionProjectionComparison_eq
       (condensedRingObj Λ X))) :
     openImmersionProjectionComparison Λ j M N =
       (((derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ j).projectionMap
-        L((j)^*⟦Λ⟧) (curriedTensor _) (curriedTensor _)
+        L((j)^*⟦Λ⟧) (curriedTensor 𝔻(U)) (curriedTensor 𝔻(X))
         (Functor.LaxMonoidal.μNatTrans L((j)^*⟦Λ⟧))).app M).app N := by
   rw [Adjunction.projectionMap_app_app]
   rfl
@@ -56,14 +61,14 @@ the inverse of the tensor comparison, which does. -/
 instance commShift_μNatTrans_leftDerivedUpperStar_app
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X))) :
-    NatTrans.CommShift (F₁ := L((j)^*⟦Λ⟧) ⋙ (curriedTensor _).obj (L((j)^*⟦Λ⟧).obj K))
-      (F₂ := (curriedTensor _).obj K ⋙ L((j)^*⟦Λ⟧))
+    NatTrans.CommShift (F₁ := L((j)^*⟦Λ⟧) ⋙ (curriedTensor 𝔻(U)).obj (L((j)^*⟦Λ⟧).obj K))
+      (F₂ := (curriedTensor 𝔻(X)).obj K ⋙ L((j)^*⟦Λ⟧))
       ((Functor.LaxMonoidal.μNatTrans L((j)^*⟦Λ⟧)).app K) ℤ := by
   have e : (Functor.LaxMonoidal.μNatTrans L((j)^*⟦Λ⟧)).app K =
       (asIso ((leftDerivedUpperStarTensor Λ j).app K)).inv := by
     ext N
     rw [← cancel_epi (((leftDerivedUpperStarTensor Λ j).app K).app N)]
-    exact (Functor.Monoidal.δ_μ L((j)^*⟦Λ⟧) K N).trans
+    exact (Functor.Monoidal.δ_μ _ K N).trans
       ((asIso ((leftDerivedUpperStarTensor Λ j).app K)).hom_inv_id_app N).symm
   rw [e]
   exact NatTrans.CommShift.of_iso_inv _ ℤ
@@ -73,10 +78,10 @@ variable. -/
 instance commShift_openImmersionProjectionComparison
     (M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})
       (condensedRingObj Λ U))) :
-    NatTrans.CommShift (F₁ := (L((j)^*⟦Λ⟧) ⋙ (curriedTensor _).obj M) ⋙ D((j)_!open⟦Λ⟧))
-      (F₂ := (curriedTensor _).obj (D((j)_!open⟦Λ⟧).obj M))
+    NatTrans.CommShift (F₁ := (_ ⋙ (curriedTensor 𝔻(U)).obj M) ⋙ D((j)_!open⟦Λ⟧))
+      (F₂ := (curriedTensor 𝔻(X)).obj (D((j)_!open⟦Λ⟧).obj M))
       (((derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ j).projectionMap
-        L((j)^*⟦Λ⟧) (curriedTensor _) (curriedTensor _)
+        L((j)^*⟦Λ⟧) (curriedTensor 𝔻(U)) (curriedTensor 𝔻(X))
         (Functor.LaxMonoidal.μNatTrans L((j)^*⟦Λ⟧))).app M) ℤ :=
   have : (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ j).CommShift ℤ :=
     commShift_derivedOpenImmersionLowerShriekUpperStarAdjunction_ofNatIsoRight Λ j
@@ -92,15 +97,11 @@ variable {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
 the shifts. -/
 instance commShift_leftDerivedUpperStarCompactificationIso_inv :
     NatTrans.CommShift (leftDerivedUpperStarCompactificationIso Λ c).inv ℤ := by
-  have h : ∀ (h₁ h₂ : X ⟶ Y) (e : h₁ = h₂),
-      NatTrans.CommShift (eqToIso (congrArg (fun h : X ⟶ Y ↦ L((h)^*⟦Λ⟧)) e)).hom ℤ := by
-    rintro h₁ _ rfl
-    exact inferInstanceAs (NatTrans.CommShift (𝟙 L((h₁)^*⟦Λ⟧)) ℤ)
-  have := h _ _ c.comm
-  have : NatTrans.CommShift (leftDerivedUpperStarCompactificationIso Λ c).hom ℤ := by
-    dsimp only [leftDerivedUpperStarCompactificationIso, Iso.trans_hom]
-    infer_instance
-  exact NatTrans.CommShift.of_iso_inv _ ℤ
+  suffices NatTrans.CommShift (leftDerivedUpperStarCompactificationIso Λ c).hom ℤ from
+    NatTrans.CommShift.of_iso_inv _ ℤ
+  obtain ⟨Z, g, i, rfl, _, _⟩ := c
+  dsimp only [leftDerivedUpperStarCompactificationIso, Iso.trans_hom, eqToIso_refl, Iso.refl_hom]
+  infer_instance
 
 /-- The exceptional projection morphism `PF^!_{f,K,-}` of a compactification, as a natural
 transformation `Rf_! K ⊗ᴸ - ⟶ Rf_! (K ⊗ᴸ Lf^* -)`. -/
@@ -108,8 +109,8 @@ transformation `Rf_! K ⊗ᴸ - ⟶ Rf_! (K ⊗ᴸ Lf^* -)`. -/
 noncomputable def exceptionalProjectionMorphismOfCompactificationNatTrans
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X))) :
-    (curriedTensor _).obj ((Rf_!(c)⟦Λ⟧).obj K) ⟶
-      (L((f)^*⟦Λ⟧) ⋙ (curriedTensor _).obj K) ⋙ Rf_!(c)⟦Λ⟧ where
+    (curriedTensor 𝔻(Y)).obj ((Rf_!(c)⟦Λ⟧).obj K) ⟶
+      (L((f)^*⟦Λ⟧) ⋙ (curriedTensor 𝔻(X)).obj K) ⋙ Rf_!(c)⟦Λ⟧ where
   app B := exceptionalProjectionMorphismOfCompactification Λ c K B
   naturality _ _ h := exceptionalProjectionMorphismOfCompactification_natural_right Λ c K h
 
@@ -123,14 +124,16 @@ instance commShift_exceptionalProjectionMorphismOfCompactificationNatTrans
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X))) :
     NatTrans.CommShift (exceptionalProjectionMorphismOfCompactificationNatTrans Λ c K) ℤ := by
-  let τ₁ : (curriedTensor _).obj (R((c.g)_*⟦Λ⟧).obj (D((c.i)_!open⟦Λ⟧).obj K)) ⟶
-      (L((c.g)^*⟦Λ⟧) ⋙ (curriedTensor _).obj (D((c.i)_!open⟦Λ⟧).obj K)) ⋙ R((c.g)_*⟦Λ⟧) :=
+  -- the functors `L((c.g)^*⟦Λ⟧)` are left to unification: each elaboration of the notation
+  -- re-runs the costly instance searches of the derived tensor product
+  let τ₁: (curriedTensor 𝔻(Y)).obj (R((c.g)_*⟦Λ⟧).obj (D((c.i)_!open⟦Λ⟧).obj K)) ⟶
+      (_ ⋙ (curriedTensor 𝔻(c.Z)).obj (D((c.i)_!open⟦Λ⟧).obj K)) ⋙ R((c.g)_*⟦Λ⟧) :=
     (projectionMap Λ c.g).app (D((c.i)_!open⟦Λ⟧).obj K)
   have : NatTrans.CommShift τ₁ ℤ := commShift_projectionMap_app Λ c.g _
-  let τ₂ : (L((c.i)^*⟦Λ⟧) ⋙ (curriedTensor _).obj K) ⋙ D((c.i)_!open⟦Λ⟧) ⟶
-      (curriedTensor _).obj (D((c.i)_!open⟦Λ⟧).obj K) :=
+  let τ₂ : (L((c.i)^*⟦Λ⟧) ⋙ (curriedTensor 𝔻(X)).obj K) ⋙ D((c.i)_!open⟦Λ⟧) ⟶
+      (curriedTensor 𝔻(c.Z)).obj (D((c.i)_!open⟦Λ⟧).obj K) :=
     ((derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ c.i).projectionMap
-      L((c.i)^*⟦Λ⟧) (curriedTensor _) (curriedTensor _)
+      L((c.i)^*⟦Λ⟧) (curriedTensor 𝔻(X)) (curriedTensor 𝔻(c.Z))
       (Functor.LaxMonoidal.μNatTrans L((c.i)^*⟦Λ⟧))).app K
   have : NatTrans.CommShift τ₂ ℤ := commShift_openImmersionProjectionComparison Λ c.i K
   have : IsIso τ₂ := by
@@ -141,13 +144,13 @@ instance commShift_exceptionalProjectionMorphismOfCompactificationNatTrans
   have : NatTrans.CommShift (inv τ₂) ℤ := NatTrans.CommShift.of_iso_inv (asIso τ₂) ℤ
   let τ₃ := (leftDerivedUpperStarCompactificationIso Λ c).inv
   have e : exceptionalProjectionMorphismOfCompactificationNatTrans Λ c K =
-      τ₁ ≫ Functor.whiskerRight (Functor.whiskerLeft L((c.g)^*⟦Λ⟧) (inv τ₂)) R((c.g)_*⟦Λ⟧) ≫
+      τ₁ ≫ Functor.whiskerRight (Functor.whiskerLeft _ (inv τ₂)) R((c.g)_*⟦Λ⟧) ≫
       (Functor.associator _ _ _).hom ≫
-      Functor.whiskerLeft L((c.g)^*⟦Λ⟧) (Functor.associator _ _ _).hom ≫
+      Functor.whiskerLeft _ (Functor.associator _ _ _).hom ≫
       (Functor.associator _ _ _).inv ≫
       Functor.whiskerRight (Functor.associator _ _ _).inv
         (D((c.i)_!open⟦Λ⟧) ⋙ R((c.g)_*⟦Λ⟧)) ≫
-      Functor.whiskerRight (Functor.whiskerRight τ₃ ((curriedTensor _).obj K))
+      Functor.whiskerRight (Functor.whiskerRight τ₃ ((curriedTensor 𝔻(X)).obj K))
         (D((c.i)_!open⟦Λ⟧) ⋙ R((c.g)_*⟦Λ⟧)) := by
     ext B
     simp only [exceptionalProjectionMorphismOfCompactificationNatTrans_app,
@@ -158,23 +161,6 @@ instance commShift_exceptionalProjectionMorphismOfCompactificationNatTrans
     erw [Category.id_comp, Category.id_comp]
     rfl
   have : NatTrans.CommShift τ₃ ℤ := inferInstance
-  have h1 : NatTrans.CommShift
-    (Functor.whiskerRight (Functor.whiskerLeft L((c.g)^*⟦Λ⟧) (inv τ₂)) R((c.g)_*⟦Λ⟧)) ℤ :=
-    inferInstance
-  have h3 : NatTrans.CommShift (Functor.whiskerRight (Functor.whiskerRight τ₃
-    ((curriedTensor _).obj K)) (D((c.i)_!open⟦Λ⟧) ⋙ R((c.g)_*⟦Λ⟧))) ℤ := inferInstance
-  have a1 : NatTrans.CommShift (Functor.associator L((c.g)^*⟦Λ⟧)
-    ((L((c.i)^*⟦Λ⟧) ⋙ (curriedTensor _).obj K) ⋙ D((c.i)_!open⟦Λ⟧)) R((c.g)_*⟦Λ⟧)).hom ℤ :=
-    inferInstance
-  have a2 : NatTrans.CommShift (Functor.whiskerLeft L((c.g)^*⟦Λ⟧) (Functor.associator
-    (L((c.i)^*⟦Λ⟧) ⋙ (curriedTensor _).obj K) D((c.i)_!open⟦Λ⟧) R((c.g)_*⟦Λ⟧)).hom) ℤ :=
-    inferInstance
-  have a3 : NatTrans.CommShift (Functor.associator L((c.g)^*⟦Λ⟧)
-    (L((c.i)^*⟦Λ⟧) ⋙ (curriedTensor _).obj K) (D((c.i)_!open⟦Λ⟧) ⋙ R((c.g)_*⟦Λ⟧))).inv ℤ :=
-    inferInstance
-  have a4 : NatTrans.CommShift (Functor.whiskerRight (Functor.associator L((c.g)^*⟦Λ⟧)
-    L((c.i)^*⟦Λ⟧) ((curriedTensor _).obj K)).inv (D((c.i)_!open⟦Λ⟧) ⋙ R((c.g)_*⟦Λ⟧))) ℤ :=
-    inferInstance
   rw [e]
   infer_instance
 

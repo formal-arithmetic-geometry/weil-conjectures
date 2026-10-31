@@ -9,6 +9,9 @@ public import WeilConjectures.Compactification.CommonRefinement
 public import WeilConjectures.Compactification.Comp
 public import WeilConjectures.Compactification.Dense
 public import WeilConjectures.Compactification.Over
+import WeilConjectures.Compactification.CommonRefinement
+import WeilConjectures.Compactification.Comp
+import WeilConjectures.Compactification.Dense
 
 /-!
 
@@ -176,6 +179,35 @@ lemma overCompObjIso_hom_overG (c : Compactification f.left) (c' : Compactificat
     (overCompObjIso c c' d).hom ≫ d.overG ≫ c'.overG = (overComp c c' d).overG := by
   ext
   simp [overCompObjIso, overComp]
+
+/-- Transport a cartesian scheme refinement to the category over the base.
+This is the construction of `overRefinementOfRefinement` in `OverRefinement`, reproduced
+privately because that module imports this one. -/
+private theorem nonempty_overRefinement_of_refinement {c c₁ : Compactification f.left}
+    (r : c.Refinement c₁) (h : IsPullback (𝟙 X.left) c.i c₁.i r.hom) :
+    Nonempty (OverRefinement c c₁) := by
+  exact ⟨{
+    hom := Over.homMk r.hom (by simp [overObj, reassoc_of% r.hom_g])
+    hom_overG := Over.OverMorphism.ext r.hom_g
+    isPullback := IsPullback.of_map (Over.forget S) (Over.OverMorphism.ext h.w) h
+    isProper := r.isProper }⟩
+
+/-- The restriction of a dense compactification of a proper map followed by an open
+immersion is an isomorphism. This is the proof of `isIso_restrict_i` in `OverRefinement`,
+which cannot be imported here because it imports this module. -/
+private theorem isIso_restrict_i_of_dense {A B C : Scheme.{u}} {p : A ⟶ B} {j : B ⟶ C}
+    [IsProper p] [IsOpenImmersion j] (d : Compactification (p ≫ j))
+    [IsSchemeTheoreticallyDominant d.i] [QuasiCompact d.i] : IsIso d.restrict.i := by
+  have : IsClosedImmersion d.restrict.i :=
+    d.restrict.isClosedImmersion_openImmersion inferInstance
+  have : QuasiCompact (d.restrict.i ≫ pullback.fst d.g j) := by
+    rw [restrict_i_fst]
+    infer_instance
+  have : IsSchemeTheoreticallyDominant (d.restrict.i ≫ pullback.fst d.g j) := by
+    rw [restrict_i_fst]
+    infer_instance
+  have : IsSchemeTheoreticallyDominant d.restrict.i := .of_comp _ (pullback.fst d.g j)
+  exact IsClosedImmersion.isIso_iff_ker_eq_bot.mpr d.restrict.i.ker_eq_bot
 
 section Existence
 

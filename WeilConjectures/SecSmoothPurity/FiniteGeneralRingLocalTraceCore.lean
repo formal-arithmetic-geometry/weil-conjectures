@@ -1,0 +1,162 @@
+/-
+Copyright (c) 2026 Bin Wu. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Bin Wu
+-/
+module
+
+public import WeilConjectures.SecSmoothPurity.FiniteGeneralRingData
+public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Data
+public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Arrows
+public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1KummerSupplement
+public import WeilConjectures.AlgebraicGeometry.RelativeKummerExchangeGeneratorsSupplement
+public import WeilConjectures.AlgebraicGeometry.EtaleSinglePullbackComparisonsSupplement
+public import WeilConjectures.AlgebraicGeometry.EtaleFiniteTwistPullback
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.AlgebraicGeometry.Scheme
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateSheaf
+public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateTwist
+public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
+public import Mathlib.Algebra.Module.ZMod
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
+public import Mathlib.CategoryTheory.Sites.Monoidal
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import WeilConjectures.AlgebraicGeometry.EtaleConstantRingModuleEquivalence
+public import WeilConjectures.CategoryTheory.RingedSiteModules
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
+public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.AlgebraicGeometry.RingedTopoiDerivedTensorPullback
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.TensorShiftIso
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
+public import WeilConjectures.AlgebraicGeometry.EtaleFiniteTwistPullbackBase
+public import WeilConjectures.ConstructibleSheaf.Defs
+public import WeilConjectures.EtaleCohomology.TateTwist.Sheaf
+public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateLinePullback
+public import WeilConjectures.EtaleCohomology.TateTwist.RootsOfUnityPullback
+public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateTensorFamily
+public import WeilConjectures.CategoryTheory.NormalizedSignedTensorPowers
+public import WeilConjectures.CategoryTheory.Monoidal.IntTensorFamily
+public import Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import WeilConjectures.CategoryTheory.IntTensorFamilyIso
+public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
+public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateLocalLine
+public import WeilConjectures.AlgebraicGeometry.Sites.SmallEtaleRepresentablePresheafSheaf
+public import WeilConjectures.ConstructibleSheaf.Pullback
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.LocallyTrivialInverse
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.MonoidalComp
+public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Unit
+public import WeilConjectures.AlgebraicGeometry.EtaleFiniteTwistPullbackRest
+public import Mathlib.CategoryTheory.Abelian.Refinements
+public import Mathlib.Algebra.Homology.ShortComplex.Exact
+public import WeilConjectures.AlgebraicGeometry.ProperProjectionFormula
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
+public import WeilConjectures.AlgebraicGeometry.EtaleDerivedTensorSymmetrySupplement
+public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.Topology.Defs.Filter
+public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
+public import WeilConjectures.AlgebraicGeometry.ExactUnboundedExchange
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
+public import WeilConjectures.SixFunctors.BaseChange.Square
+public import WeilConjectures.SixFunctors.Etale.Derived.Shift
+public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
+import WeilConjectures.SecSmoothPurity.FiniteGeneralRingLocalTracePrefixHelper
+import WeilConjectures.SecSmoothPurity.FiniteGeneralRingLocalTraceAffineHelper
+
+/-! # Core local trace comparison for finite general-ring integration
+
+Source: general-ring smooth purity, proof (3), Kummer exponent independence.
+(blueprint: lem-sp-general-ring-integration-exponent-local-trace-core).
+-/
+
+@[expose] public noncomputable section
+set_option autoImplicit false
+set_option synthInstance.maxSize 4096
+universe u
+open CategoryTheory CategoryTheory.Limits MonoidalCategory AlgebraicGeometry
+open AlgebraicGeometry.Scheme
+namespace AlgebraicGeometry.ProEtale
+
+/-! The local trace comparison is obtained by pasting a frame-prefix transition
+and an ordered affine-counit transition. -/
+
+private theorem finiteGeneralRingLocalTrace_eq_prefix
+    (N : ℕ) (hNpos : 0 < N) (A : Type (u + 1)) [CommRing A] [Finite A]
+    (hN : (N : A) = 0) (t : Etale.OrdinaryFiniteTwistTransport A N hN)
+    (D : ∀ (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (N : Γ(T, ⊤))),
+      Etale.OrdinaryFiniteP1Datum A N hN t T hT)
+    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤)))
+    (d : ℕ) (F : SheafOfModules.{u} S.ringCatSheaf)
+    [F.IsFiniteLocallyFreeOfRank d] (V : S.Opens)
+    (eV : VectorBundleZeroSection.Trivialization S d F V) :
+    Etale.vectorIntegrationLocalTrace N hNpos A hN t D S hS d F V eV =
+      finiteGeneralRingLocalTracePrefix N hNpos A hN t S hS d F V eV ≫
+        Etale.affineTraceCounit A N hN t D V.toScheme
+          (affineTracePullbackInvertible N V.ι hS) d := by
+  unfold Etale.vectorIntegrationLocalTrace finiteGeneralRingLocalTracePrefix
+  simp only [Category.assoc]
+
+/-- The finite-ring Kummer comparison transports the prescribed local affine trace.
+
+Source: general-ring smooth purity, proof (3), exponent independence, projective-line
+and ordered affine-line trace comparison on one vector-bundle frame.
+(blueprint: lem-sp-general-ring-integration-exponent-local-trace-core).
+
+Proof: compare the two normalized projective-line decompositions using the two clauses
+of `FiniteGeneralRingKummerComparison`; use naturality of the open counit and iterate
+the ordered affine counit in its prescribed coordinate order. The inverse-frame and
+coefficient comparisons are natural, so the resulting coefficient arrow is the
+pullback of `finiteGeneralRingLevelPower`. This is the local calculation before
+inserting the globally normalized vector-bundle integration map.
+-/
+theorem finiteGeneralRingLocalTraceExponent_core
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    (M N : ℕ) (hMpos : 0 < M) (hNpos : 0 < N) (hdiv : N ∣ M)
+    (hM : (M : A) = 0) (hN : (N : A) = 0)
+    (S : Scheme.{u}) [IsNoetherian S]
+    (hS : IsUnit (M : Γ(S, ⊤))) (hS' : IsUnit (N : Γ(S, ⊤)))
+    (d : ℕ) (F : S.Modules) [F.IsFiniteLocallyFreeOfRank d]
+    (q : S.rootsOfUnitySheaf M ⟶ S.rootsOfUnitySheaf N)
+    (b : Scheme.finiteEtaleTateLine S M A hM ≅
+      Scheme.finiteEtaleTateLine S N A hN)
+    (hb : FiniteGeneralRingKummerComparison A M N hM hN S q b)
+    (tN : Etale.OrdinaryFiniteTwistTransport A N hN)
+    (DN : ∀ (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (N : Γ(T, ⊤))),
+      Etale.OrdinaryFiniteP1Datum A N hN tN T hT)
+    (tM : Etale.OrdinaryFiniteTwistTransport A M hM)
+    (DM : ∀ (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (M : Γ(T, ⊤))),
+      Etale.OrdinaryFiniteP1Datum A M hM tM T hT)
+    (V : S.Opens) (eV : VectorBundleZeroSection.Trivialization S d F V) :
+    (Etale.ordinaryFinitePullback A V.ι).map
+        ((Etale.vectorBundlePurityLower A S d F).map
+          ((Etale.ordinaryFinitePullback A (VectorBundleZeroSection.π S d F)).map
+            (finiteGeneralRingLevelPower A M N hM hN S b d).hom)) ≫
+      Etale.vectorIntegrationLocalTrace N hNpos A hN tN DN S hS' d F V eV =
+      Etale.vectorIntegrationLocalTrace M hMpos A hM tM DM S hS d F V eV := by
+  obtain ⟨qV, bV, hbV, hp⟩ :=
+    finiteGeneralRingLocalTraceExponent_prefix A M N hMpos hNpos hdiv hM hN S hS hS'
+      d F q b hb tN DN tM DM V eV
+  have ha := finiteGeneralRingLocalTraceExponent_affine A M N hMpos hNpos hM hN
+    V.toScheme (by simpa using hS.map V.ι.appTop.hom)
+    (by simpa using hS'.map V.ι.appTop.hom) qV bV hbV tN DN tM DM d
+  let cN := Etale.affineTraceCounit A N hN tN DN V.toScheme
+    (affineTracePullbackInvertible N V.ι hS') d
+  let cM := Etale.affineTraceCounit A M hM tM DM V.toScheme
+    (affineTracePullbackInvertible M V.ι hS) d
+  rw [finiteGeneralRingLocalTrace_eq_prefix N hNpos A hN tN DN S hS' d F V eV,
+    finiteGeneralRingLocalTrace_eq_prefix M hMpos A hM tM DM S hS d F V eV]
+  rw [← Category.assoc, hp]
+  simp only [Category.assoc]
+  rw [ha]
+
+end AlgebraicGeometry.ProEtale
