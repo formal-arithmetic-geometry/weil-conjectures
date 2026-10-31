@@ -38,23 +38,6 @@ variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] {ρ : Λ →+* Λ'
   (hρ : Function.Surjective ρ) (ha : RingHom.ker ρ = Ideal.span {a}) {U X : Scheme.{u}}
   (e : U ⟶ X)
 
-variable (Λ) in
-/-- The unit comparison of the derived pullback `Le^*`, through the unit comparisons of the
-localization functors and the counit of `Le^*` at the unit. -/
-lemma leftDerivedUpperStarOplaxMonoidal_η_comp_ε :
-    letI := leftDerivedUpperStarOplaxMonoidal (ModuleCat.{u + 1} Λ) e
-    η L((e)^*[ModuleCat.{u + 1} Λ]) ≫ ε DerivedCategory.Qh =
-      L((e)^*[ModuleCat.{u + 1} Λ]).map (ε DerivedCategory.Qh) ≫
-        ((e)^*[ModuleCat.{u + 1} Λ]).leftDerivedFunctorCounit.app (𝟙_ _) ≫
-          DerivedCategory.Qh.map (η (((e)^*[ModuleCat.{u + 1} Λ]).mapHomotopyCategory (.up ℤ))) := by
-  have := DerivedCategory.isIso_ε_Qh (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-  refine (?_ : (L((e)^*[ModuleCat.{u + 1} Λ]).map (ε DerivedCategory.Qh) ≫
-      ((e)^*[ModuleCat.{u + 1} Λ]).leftDerivedFunctorCounit.app (𝟙_ _) ≫
-        DerivedCategory.Qh.map (η (((e)^*[ModuleCat.{u + 1} Λ]).mapHomotopyCategory (.up ℤ))) ≫
-          CategoryTheory.inv (ε DerivedCategory.Qh)) ≫ ε DerivedCategory.Qh = _)
-  simp only [Category.assoc, IsIso.inv_hom_id, Category.comp_id]
-
-set_option profiler true in
 variable (X) in
 /-- The unit comparison of the derived extension of scalars, through the unit comparisons of the
 localization functors and the counit at the unit (`Functor.leftDerivedFunctorMonoidal_η`). -/
@@ -69,7 +52,6 @@ lemma leftDerivedFunctor_extendScalars_η_comp_ε :
   haveI := preservesKFlatQuasiIso_extendScalars hρ ha X
   Functor.leftDerivedFunctorMonoidal_η _
 
-set_option profiler true in
 /-- `AlgebraicGeometry.Etale.derivedExtendScalarsPullbackOfCounit_app_Qh` at the unit, in terms
 of the counits of the left derived functors. -/
 @[reassoc]
@@ -91,8 +73,10 @@ lemma derivedExtendScalarsPullbackOfCounit_app_Qh_unit :
     Category.assoc] at h
   exact h
 
-set_option profiler true in
-/-- **The commutation of `Ψ` with the derived pullback preserves the units**:
+/-- Blueprint `det-sp-purity-coefficient-change` (the unit compatibility of the commutation of `Ψ`
+with `Le^*`).
+
+**The commutation of `Ψ` with the derived pullback preserves the units**:
 `Ψ_U Le^* Λ_X ⟶ Le^* Ψ_X Λ_X ⟶ Le^* Λ'_X ⟶ Λ'_U` is `Ψ_U Le^* Λ_X ⟶ Ψ_U Λ_U ⟶ Λ'_U`. -/
 lemma derivedExtendScalarsPullbackOfCounit_app_unit_comp_η :
     haveI := preservesKFlatQuasiIso_extendScalars hρ ha X
@@ -110,10 +94,10 @@ lemma derivedExtendScalarsPullbackOfCounit_app_unit_comp_η :
         η (Sheaf.extendScalars U.smallEtaleTopology ρ).leftDerivedFunctor := by
   have := preservesKFlatQuasiIso_extendScalars hρ ha X
   have := preservesKFlatQuasiIso_extendScalars hρ ha U
-  letI := (Sheaf.extendScalars X.smallEtaleTopology ρ).leftDerivedFunctorMonoidal
-  letI := (Sheaf.extendScalars U.smallEtaleTopology ρ).leftDerivedFunctorMonoidal
-  letI := leftDerivedUpperStarOplaxMonoidal (ModuleCat.{u + 1} Λ) e
-  letI := leftDerivedUpperStarOplaxMonoidal (ModuleCat.{u + 1} Λ') e
+  let := (Sheaf.extendScalars X.smallEtaleTopology ρ).leftDerivedFunctorMonoidal
+  let := (Sheaf.extendScalars U.smallEtaleTopology ρ).leftDerivedFunctorMonoidal
+  let := leftDerivedUpperStarOplaxMonoidal (ModuleCat.{u + 1} Λ) e
+  let := leftDerivedUpperStarOplaxMonoidal (ModuleCat.{u + 1} Λ') e
   have := DerivedCategory.isIso_ε_Qh (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ'))
   have hΨX := leftDerivedFunctor_extendScalars_η_comp_ε hρ ha X
   have hΨU := leftDerivedFunctor_extendScalars_η_comp_ε hρ ha U

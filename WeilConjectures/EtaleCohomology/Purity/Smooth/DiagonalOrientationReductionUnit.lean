@@ -16,6 +16,8 @@ of étale sheaves and `e : U ⟶ X` a morphism of schemes. The monoidal commutat
 `F_X ⋙ e^* ≅ e^* ⋙ F_U` (`AlgebraicGeometry.Etale.extendScalarsUpperStarIso`) induces on
 homotopy categories an isomorphism compatible with the unit comparisons
 (`AlgebraicGeometry.Etale.extendScalarsUpperStarHomotopyIso_inv_app_unit_comp_η`).
+We also describe the unit comparison of the derived pullback through the counit
+(`AlgebraicGeometry.Etale.leftDerivedUpperStarOplaxMonoidal_η_comp_ε`).
 
 The instances of the generic lemmas are compared with those of the étale sheaf categories by the
 kernel slowly (about ten seconds per comparison): each instance of a generic lemma is stated as a
@@ -83,10 +85,28 @@ lemma extendScalarsUpperStarHomotopyIso_inv_app_unit_comp_η :
           (η (((e)^*[ModuleCat.{u + 1} Λ]).mapHomotopyCategory (.up ℤ))) ≫
         η ((Sheaf.extendScalars U.smallEtaleTopology ρ).mapHomotopyCategory (.up ℤ)) := by
   simp only [extendScalarsUpperStarHomotopyIso, Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app,
-    Functor.mapHomotopyCategoryCompIso_refl_hom_app, Functor.mapHomotopyCategoryCompIso_refl_inv_app,
+    Functor.mapHomotopyCategoryCompIso_refl_hom_app,
+    Functor.mapHomotopyCategoryCompIso_refl_inv_app,
     Category.id_comp, Category.assoc]
   exact (whisker_eq _ (mapHomotopyCategory_map_η_comp_η_extendScalars_upperStar ρ e)).trans
     ((natTransMapHomotopyCategory_extendScalarsUpperStarIso_inv_app_unit_comp_η ρ e).trans
       (mapHomotopyCategory_map_η_comp_η_upperStar_extendScalars ρ e).symm)
+
+variable (Λ) in
+/-- The unit comparison of the derived pullback `Le^*`, through the unit comparisons of the
+localization functors and the counit of `Le^*` at the unit. -/
+lemma leftDerivedUpperStarOplaxMonoidal_η_comp_ε :
+    letI := leftDerivedUpperStarOplaxMonoidal (ModuleCat.{u + 1} Λ) e
+    η L((e)^*[ModuleCat.{u + 1} Λ]) ≫ ε DerivedCategory.Qh =
+      L((e)^*[ModuleCat.{u + 1} Λ]).map (ε DerivedCategory.Qh) ≫
+        ((e)^*[ModuleCat.{u + 1} Λ]).leftDerivedFunctorCounit.app (𝟙_ _) ≫
+          DerivedCategory.Qh.map
+            (η (((e)^*[ModuleCat.{u + 1} Λ]).mapHomotopyCategory (.up ℤ))) := by
+  have := DerivedCategory.isIso_ε_Qh (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+  refine (?_ : (L((e)^*[ModuleCat.{u + 1} Λ]).map (ε DerivedCategory.Qh) ≫
+      ((e)^*[ModuleCat.{u + 1} Λ]).leftDerivedFunctorCounit.app (𝟙_ _) ≫
+        DerivedCategory.Qh.map (η (((e)^*[ModuleCat.{u + 1} Λ]).mapHomotopyCategory (.up ℤ))) ≫
+          CategoryTheory.inv (ε DerivedCategory.Qh)) ≫ ε DerivedCategory.Qh = _)
+  simp only [Category.assoc, IsIso.inv_hom_id, Category.comp_id]
 
 end AlgebraicGeometry.Etale
