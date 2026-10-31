@@ -119,8 +119,6 @@ variable (A : Type uA) [Category.{u + 1} A] [Abelian A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
 
-omit [HasSmallSiteSheafify A] [Abelian.HasFunctorialFlatResolution A] in
-
 /-- The unbounded adjunction of derived constant sheaves and derived global sections.
 Source: Stacks Tag 07A6 (blueprint: def-kun-constant-projection-morphism).
 Exactness identifies the left derived functor with termwise constant sheaves. -/

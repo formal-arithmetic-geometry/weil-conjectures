@@ -55,8 +55,7 @@ theorem continuousCoefficientLocalization (l : ℕ) [Fact l.Prime] (E : Type u)
   let K := ULift.{u + 1, u} E
   let p := Padic.coefficientExtensionUniformizer l E
   let t : T := ULift.up p
-  have hs := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  have hs := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   rcases hs with ⟨hO, hm, hu, hlocal, hmax, hmax_unique, hfrac, hdvr, hpid, hm0,
     hprime, hfinite, hr, hgen_exists, hassoc, hfactor⟩
   have hO : ∀ x : E, x ∈ A ↔ ‖x‖ ≤ 1 := hO

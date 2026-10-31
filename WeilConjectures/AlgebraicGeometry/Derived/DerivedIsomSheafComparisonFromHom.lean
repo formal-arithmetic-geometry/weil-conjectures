@@ -83,6 +83,8 @@ end CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
 
+attribute [local instance] preservesFiniteLimits_proEtaleSiteComparison
+
 private theorem pairSection_ext {C : Type (u + 1)} [Category.{u} C]
     (J : GrothendieckTopology C) [HasWeakSheafify J (Type (u + 1))]
     (F G : Sheaf J (Type (u + 1))) (U : C) (x y : (F ⨯ G).obj.obj (op U))

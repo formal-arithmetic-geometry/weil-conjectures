@@ -87,6 +87,13 @@ abbrev sfbSectionCoefficient (B : Sheaf J CommRingCat.{w}) : Sheaf J AddCommGrpC
   (sheafCompose J (forget₂ RingCat.{w} AddCommGrpCat.{w})).obj
     ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj B)
 
+/-- The existing pointwise ring object on the coefficient presheaf.
+Source: det-def-sfb-ring-object-sheaf and the sectionwise multiplication in the node
+(blueprint: lem-sfb-section-action-internal). -/
+instance sfbSectionCoefficient_presheafMonObj (B : Sheaf J CommRingCat.{w}) :
+    MonObj (sfbSectionCoefficient J B).obj :=
+  Functor.monObjCompForget₂
+    (B.obj ⋙ forget₂ CommRingCat.{w} RingCat.{w})
 
 variable {B : Sheaf J CommRingCat.{w}}
 

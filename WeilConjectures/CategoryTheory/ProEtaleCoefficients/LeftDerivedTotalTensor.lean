@@ -39,17 +39,4 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 
 namespace CategoryTheory.Functor
 
-variable {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
-  [Abelian C] [Abelian D] [MonoidalCategory C] [MonoidalPreadditive C]
-  [hCountable : HasCountableCoproducts C] [hIntColimits : HasColimitsOfShape ℤ C]
-  [hExactIntColimits : HasExactColimitsOfShape ℤ C]
-  [hTensorLeft : ∀ (X : C), PreservesColimitsOfShape ℤ ((curriedTensor C).obj X)]
-  [hTensorRight : ∀ (X : C), PreservesColimitsOfShape ℤ ((curriedTensor C).flip.obj X)]
-  [hFlatResolution : Abelian.HasFunctorialFlatResolution C]
-  [HasDerivedCategory.{wC} C] [HasDerivedCategory.{wD} D]
-  (F : C ⥤ D) [F.Additive] [hF : F.PreservesTotalTensorKFlatQuasiIso]
-
-
-
-
 end CategoryTheory.Functor

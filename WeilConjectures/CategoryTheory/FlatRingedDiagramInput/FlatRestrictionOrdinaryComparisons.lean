@@ -15,9 +15,6 @@ Source: Stacks Project, Modules on Sites, Tag 03D3.
 (blueprint: lem-weil-pbc-flat-restriction-ordinary-comparisons).
 -/
 
--- After pruning, this module only keeps private declarations.
-set_option linter.privateModule false
-
 @[expose] public section
 set_option autoImplicit false
 universe u
@@ -247,6 +244,26 @@ private theorem paste_naturality
     _ = a₁ ≫ b₁ ≫ h ≫ c₂ := by
       rw [← Category.assoc g, hb, Category.assoc]
     _ = _ := by rw [hc]; simp only [Category.assoc]
+
+section
+
+variable {C D : Type u} [SmallCategory C] [SmallCategory D]
+  {K : GrothendieckTopology C} {H : GrothendieckTopology D}
+  (x : FlatRingedDiagramInput K H) (J : Type u) [SmallCategory J]
+
+/-- The actual termwise restriction of scalars at V.
+Source: Stacks 03D3 (blueprint: def-weil-pbc-flat-ringed-diagram-input). -/
+noncomputable abbrev restrictV : x.diagramsSV J ⥤ x.diagramsRV J :=
+  (Functor.whiskeringRight J _ _).obj (SheafOfModules.restrictScalars.{u}
+    ((sheafCompose K (forget₂ CommRingCat RingCat)).map x.aV))
+
+/-- The actual termwise restriction of scalars at U.
+Source: Stacks 03D3 (blueprint: def-weil-pbc-flat-ringed-diagram-input). -/
+noncomputable abbrev restrictU : x.diagramsSU J ⥤ x.diagramsRU J :=
+  (Functor.whiskeringRight J _ _).obj (SheafOfModules.restrictScalars.{u}
+    ((sheafCompose H (forget₂ CommRingCat RingCat)).map x.aU))
+
+end
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

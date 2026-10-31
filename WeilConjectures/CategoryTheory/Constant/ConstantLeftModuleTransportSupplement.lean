@@ -423,6 +423,20 @@ private def abSheafLiftSetIso : abSheafLift K F ⋙ U K ≅ F :=
       inv_hom_id := by ext T x; rfl })
     (fun g ↦ by ext T x; rfl)
 
+private instance abSheafLiftLimits : PreservesFiniteLimits (abSheafLift K F) where
+  preservesFiniteLimits I _ _ := by
+    have : PreservesLimitsOfShape I (abSheafLift K F ⋙ U K) :=
+      preservesLimitsOfShape_of_natIso (abSheafLiftSetIso K F).symm
+    have : PreservesFiniteLimits (U K ⋙ sheafToPresheaf K (Type u)) := by
+      change PreservesFiniteLimits (sheafToPresheaf K AddCommGrpCat.{u} ⋙
+        (Functor.whiskeringRight Dᵒᵖ AddCommGrpCat.{u} (Type u)).obj
+          (forget AddCommGrpCat.{u}))
+      infer_instance
+    have : PreservesFiniteLimits (U K) :=
+      preservesFiniteLimits_of_reflects_of_preserves _ (sheafToPresheaf K (Type u))
+    have : ReflectsLimitsOfShape I (U K) := reflectsLimitsOfShape_of_reflectsIsomorphisms
+    exact preservesLimitsOfShape_of_reflects_of_preserves (abSheafLift K F) (U K)
+
 private def liftSheafNatTrans
     (P Q : A ⥤ Sheaf K AddCommGrpCat.{u})
     [PreservesFiniteLimits P] [PreservesFiniteLimits Q]
@@ -476,6 +490,17 @@ private theorem liftSheafNatTrans_forget
 
 section AbelianAdjunction
 variable {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
+private instance forgetAbLimits : PreservesFiniteLimits (U J) := by
+  have : PreservesFiniteLimits (U J ⋙ sheafToPresheaf J (Type u)) := by
+    change PreservesFiniteLimits (sheafToPresheaf J AddCommGrpCat.{u} ⋙
+      (Functor.whiskeringRight Cᵒᵖ AddCommGrpCat.{u} (Type u)).obj
+        (forget AddCommGrpCat.{u}))
+    infer_instance
+  exact preservesFiniteLimits_of_reflects_of_preserves _ (sheafToPresheaf J (Type u))
+
+private instance abBiproducts : HasFiniteBiproducts (Sheaf J AddCommGrpCat.{u}) :=
+  .of_hasFiniteProducts
+
 variable (L : Sheaf J (Type u) ⥤ Sheaf K (Type u))
   (R : Sheaf K (Type u) ⥤ Sheaf J (Type u))
   [PreservesFiniteLimits L] [PreservesFiniteLimits R]

@@ -45,6 +45,17 @@ namespace CategoryTheory
 variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
     (J : GrothendieckTopology C)
 
+/-- Abelian sheafification on the essentially small site.
+Source: Stacks 00WH and the sheafification in `sk-def-sfb-sheaf-tensor`
+(blueprint: lem-sfb-regular-scalar-extension-multiplication).
+Proof: replace the site by its small model in the coefficient universe, apply
+`GrothendieckTopology.hasSheafify_of_isGrothendieckAbelian`, and transport back. -/
+instance sfbRegularAb_hasSheafify : HasSheafify J AddCommGrpCat.{w} := by
+  have : HasSheafify ((equivSmallModel.{w} C).inverse.inducedTopology J)
+      AddCommGrpCat.{w} :=
+    GrothendieckTopology.hasSheafify_of_isGrothendieckAbelian _ _
+  exact hasSheafifyEssentiallySmallSite J AddCommGrpCat.{w}
+
 /-- The specified sheafified tensor, specialized to abelian sheaves.
 Source: blueprint `sk-def-sfb-sheaf-tensor`, as used in the regular-module specialization
 (blueprint: lem-sfb-regular-scalar-extension-multiplication). -/

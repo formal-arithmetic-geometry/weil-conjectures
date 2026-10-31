@@ -223,6 +223,9 @@ private abbrev stageSystem (A : Diagram.{w, u, v} I) : StageSystem A.C where
   assoc := A.a
   cocycle := A.pentagon
 
+private instance stage_additive (A : Diagram.{w, u, v} I) (i j : I) (h : i ≤ j) :
+    ((stageSystem A).T h).Additive := A.additive h
+
 private abbrev stageObj {A : Diagram.{w, u, v} I} (X : Pair A) :
     (stageSystem A).PairCategory := ⟨X.1, X.2⟩
 
@@ -265,6 +268,12 @@ private noncomputable abbrev pairStructure (A : Diagram.{w, u, v} I) [IsDirected
 
 set_option allowUnsafeReducibility true in
 attribute [local reducible] PairStructure.Obj Pair
+
+private noncomputable instance canonicalCategory (A : Diagram.{w, u, v} I)
+    [IsDirectedOrder I] : Category.{max w v} (Pair A) := pairCategory (pairStructure A)
+
+private noncomputable instance canonicalPreadditive (A : Diagram.{w, u, v} I)
+    [IsDirectedOrder I] : Preadditive (Pair A) := pairPreadditive (pairStructure A)
 
 private abbrev compareFunctor (A : Diagram.{w, u, v} I) [IsDirectedOrder I] :
     (pairStructure A).Obj ⥤ (stageSystem A).PairCategory where
