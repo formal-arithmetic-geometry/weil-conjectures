@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.TopologicalInvariance
+public import WeilConjectures.SixFunctors.NearbyCycles.CartesianModelUnit
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorFiniteCover
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorFiniteTransfer
 
@@ -26,8 +26,8 @@ the transfer of the vanishing along the finite morphism `f`
 
 ## Main results
 
-- `ProEtale.CondensedRing.isIso_derivedUpperStarLowerStarAdjunction_unit_of_isUniversalHomeomorphism`:
-  topological invariance for derived pullbacks of module objects.
+- `ProEtale.CondensedRing.nonempty_leftDerivedUpperStar_openImmersionLowerShriek_unit_iso`:
+  pullback of the extension by zero of the unit.
 - `ProEtale.CondensedRing.nearbyCyclesVanishNear_lowerShriek_unit_of_isUniversalHomeomorphism`.
 
 -/
@@ -44,18 +44,6 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
-/-- **Topological invariance for derived pullbacks**: along a universal homeomorphism `r`, the
-derived pullback `Lr^*` of module objects is an equivalence, so the unit of `Lr^* ⊣ Rr_*` is an
-isomorphism. -/
-theorem isIso_derivedUpperStarLowerStarAdjunction_unit_of_isUniversalHomeomorphism
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    {X Y : Scheme.{u}} (r : X ⟶ Y) [IsUniversalHomeomorphism r] :
-    IsIso (derivedUpperStarLowerStarAdjunction Λ r).unit := by
-  have := isEquivalence_upperStar_of_isUniversalHomeomorphism Λ r
-  have : L((r)^*⟦Λ⟧).IsEquivalence :=
-    Functor.isEquivalence_of_iso (Functor.leftDerivedFunctorIsoMapDerivedCategory _).symm
-  exact (derivedUpperStarLowerStarAdjunction Λ r).unit_isIso_of_L_fully_faithful
-
 /-- **Pullback of the extension by zero of the unit**: let `g : X' ⟶ X`, `j : U ⟶ X` an open
 immersion and `j' : U' ⟶ X'` a quasi-compact open immersion with closed complement `i'`, such that
 `j' ≫ g` factors through `j` and `i' ≫ g` avoids `U`. Then `Lg^* j_! Λ ≅ j'_! Λ`: the restriction
@@ -71,7 +59,7 @@ theorem nonempty_leftDerivedUpperStar_openImmersionLowerShriek_unit_iso
   set A := L((g)^*⟦Λ⟧).obj (D((j)_!open⟦Λ⟧).obj (𝟙_ _))
   have hA : IsZero (L((i')^*⟦Λ⟧).obj A) :=
     (isZero_leftDerivedUpperStar_obj_openImmersionLowerShriek_of_disjoint Λ j (i' ≫ g) hi'
-      _).of_iso ((leftDerivedUpperStarComp Λ i' g).app _)
+      _).of_iso ((leftDerivedUpperStarComp Λ i' g).app _).symm
   have := isIso_derivedOpenImmersionLowerShriekUpperStarAdjunction_counit_app Λ j' i' hij' A hA
   have : IsIso (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j).unit :=
     Adjunction.isIso_mapDerivedCategoryAdjunction_unit _
@@ -79,7 +67,8 @@ theorem nonempty_leftDerivedUpperStar_openImmersionLowerShriek_unit_iso
     (leftDerivedUpperStarIsoMapDerivedCategory_of_isOpenImmersion Λ j').symm.app A ≪≫
       ((leftDerivedUpperStarComp Λ j' g).app _).symm ≪≫ eqToIso (by rw [hv]) ≪≫
       (leftDerivedUpperStarComp Λ v j).app _ ≪≫
-      L((v)^*⟦Λ⟧).mapIso ((leftDerivedUpperStarIsoMapDerivedCategory_of_isOpenImmersion Λ j).app _ ≪≫
+      L((v)^*⟦Λ⟧).mapIso
+        ((leftDerivedUpperStarIsoMapDerivedCategory_of_isOpenImmersion Λ j).app _ ≪≫
         (asIso ((derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j).unit.app (𝟙_ _))).symm) ≪≫
       leftDerivedUpperStarUnitIso Λ v
   exact ⟨(asIso ((derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j').counit.app A)).symm ≪≫
@@ -88,21 +77,24 @@ theorem nonempty_leftDerivedUpperStar_openImmersionLowerShriek_unit_iso
 variable (T : Type) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] [DiscreteTopology T]
   [Finite T]
 
-/-- The open complement of `V(f^* I)` is the inverse image of the complement of `V(I)`, so it is
-the base change of the latter along `f`. -/
-lemma isPullback_overRestrictι_compl_comap {k : Type u} [Field k] {X X' : Over (Spec (.of k))}
-    (f : X' ⟶ X) (I : X.left.IdealSheafData) :
-    IsPullback (overRestrictι X' (I.comap f.left).support.compl).left
-      ((X'.left.isoOfEq (by ext1; simp [IdealSheafData.support_comap])).hom ≫
-        f.left ∣_ I.support.compl)
-      f.left (overRestrictι X I.support.compl).left :=
-  (isPullback_morphismRestrict f.left I.support.compl).flip.of_iso
-    (X'.left.isoOfEq (by ext1; simp [IdealSheafData.support_comap])).symm (Iso.refl _)
-    (Iso.refl _) (Iso.refl _) (by simp) (by simp) (by simp) (by simp)
+/-- The complement of `V(f^* I)` is the inverse image of the complement of `V(I)`. -/
+lemma IdealSheafData.support_compl_comap {X X' : Scheme.{u}} (f : X' ⟶ X) (I : X.IdealSheafData) :
+    (I.comap f).support.compl = f ⁻¹ᵁ I.support.compl := by
+  ext1
+  simp [IdealSheafData.support_comap]
+
+/-- The complement of `V(f^* I)` is the base change along `f` of the complement of `V(I)`. -/
+lemma isPullback_ι_support_compl_comap {X X' : Scheme.{u}} (f : X' ⟶ X) (I : X.IdealSheafData) :
+    IsPullback (Scheme.Opens.ι (X := X') (I.comap f).support.compl)
+      ((X'.isoOfEq (IdealSheafData.support_compl_comap f I)).hom ≫ f ∣_ I.support.compl) f
+      (Scheme.Opens.ι (X := X) I.support.compl) :=
+  (isPullback_morphismRestrict f I.support.compl).flip.of_iso
+    (X'.isoOfEq (IdealSheafData.support_compl_comap f I)).symm (Iso.refl _) (Iso.refl _)
+    (Iso.refl _) (by simp) (by simp) (by simp) (by simp)
 
 variable {k : Type u} [Field k] (k' : Type u) [Field k'] [Algebra k k']
-  {X X' : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
-  [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
+  {X X' : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [LocallyOfFiniteType X'.hom]
+  [QuasiCompact X'.hom]
 
 /-- **The constant case along a finite universal homeomorphism**: let `f : X' ⟶ X` be a finite
 universal homeomorphism, `Z = V(I)`, `j : X ∖ Z ⟶ X` and `j' : X' ∖ f⁻¹ Z ⟶ X'`. If
@@ -121,9 +113,9 @@ theorem nearbyCyclesVanishNear_lowerShriek_unit_of_isUniversalHomeomorphism (f :
           Profinite.continuousMapRingObj T⟧)).obj (𝟙_ _)) := by
   have : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
   set j' := (overRestrictι X' (I.comap f.left).support.compl).left
-  set v := (X'.left.isoOfEq (by ext1; simp [IdealSheafData.support_comap])).hom ≫
+  set v := (X'.left.isoOfEq (IdealSheafData.support_compl_comap f.left I)).hom ≫
     f.left ∣_ I.support.compl
-  have hsq := isPullback_overRestrictι_compl_comap f I
+  have hsq := isPullback_ι_support_compl_comap f.left I
   have : IsUniversalHomeomorphism v := by
     have : IsUniversalHomeomorphism (f.left ∣_ I.support.compl) :=
       MorphismProperty.of_isPullback (isPullback_morphismRestrict f.left I.support.compl).flip

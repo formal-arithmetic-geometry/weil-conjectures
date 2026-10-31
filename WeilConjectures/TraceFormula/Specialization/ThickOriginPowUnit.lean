@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UniversalHomeomorphism
-public import WeilConjectures.TraceFormula.Specialization.NearbyProperExchange
+public import WeilConjectures.TraceFormula.Specialization.NearbyProperExchangeNoetherian
 public import WeilConjectures.TraceFormula.Specialization.ThickOriginPowFibre
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ResidueField
 public import WeilConjectures.TraceFormula.Specialization.ThickOriginReducedUnit
@@ -442,7 +442,19 @@ theorem isIso_upperStar_zeroSection_unit_polyAffineThickOrigin (hm : m ≠ 0) :
     (boundedConstructible _).prop_of_iso
       (leftDerivedUpperStarUnitIso _ (𝟙 (polyAffine k 1).left)).symm
       (boundedConstructible _).prop_unit
-  have hχ := (thickOriginPowModelHom k k' hm).isIso_pushforwardExchange_app_of_isProper
+  have hD := isTraitModel_deformationModel (polyAffine k 1) (polyAffineThickOrigin k 1) k'
+  have : IsNoetherian (polyAffine k 1).left :=
+    isNoetherian_of_locallyOfFiniteType (polyAffine k 1).hom
+  have : IsNoetherian (thickOriginPowSourceModel k k' hm).generic := hD.isNoetherian_generic
+  have : IsNoetherian (thickOriginPowSourceModel k k' hm).total := hD.isNoetherian_total
+  have : IsAffineHom (thickOriginPowSourceModel k k' hm).j := hD.isAffineHom_j
+  have : IsClosedImmersion (deformationModel (polyAffine k 1) (polyAffineThickOrigin k m) k').i :=
+    (isTraitModel_deformationModel _ _ k').isClosedImmersion_i
+  have : IsClosedImmersion (thickOriginPowSourceModel k k' hm).i :=
+    MorphismProperty.pullback_snd _ _ inferInstance
+  have hχ :=
+    (thickOriginPowModelHom k k' hm).isIso_pushforwardExchange_app_of_isProper_of_isNoetherian
+    (polyAffine k 1).hom (isTraitModel_deformationModel _ _ k').exists_over
     (isPullback_powModelHom_i k' hm _ _ _ _ _ _ _)
     (isPullback_powModelHom_ε k' hm _ _ _ _ _ _ _ (IdealSheafData.deformationSpacePowMap_proj _))
     hK

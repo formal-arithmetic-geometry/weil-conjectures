@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 public import WeilConjectures.AlgebraicGeometry.NormalizationCover
 public import WeilConjectures.AlgebraicGeometry.NormalScheme
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 
 /-!
 
@@ -62,6 +63,8 @@ theorem Scheme.exists_isNormalScheme_isFinite_of_irreducibleSpace {k : Type u} [
   have hV' : ∀ v : V.toScheme, IsIntegrallyClosed (V.toScheme.presheaf.stalk v) := fun v ↦
     have := hVst v.1 v.2
     IsIntegrallyClosed.of_equiv (V.stalkIso v).commRingCatIsoToRingEquiv.symm
+  have : Nonempty ((TopologicalSpace.Opens.toTopCat X.nilradical.subscheme.toPresheafedSpace).obj
+      V) := hV.to_subtype
   have : IrreducibleSpace V.toScheme :=
     V.isOpenEmbedding.irreducibleSpace
   obtain ⟨-, -, hto, hfin, hint, hst, -⟩ := Scheme.normalization_comp_of_finite_etale

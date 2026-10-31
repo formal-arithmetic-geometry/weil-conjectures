@@ -40,7 +40,7 @@ blueprint assumes `k` algebraically closed. See its docstring for the planned ro
 
 universe u
 
-open CategoryTheory MonoidalCategory
+open CategoryTheory Limits MonoidalCategory
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
 
@@ -123,7 +123,7 @@ theorem nearbyCyclesVanishNear_lowerShriek_unit_residueField_of_isUniversalHomeo
       (IsUniversalHomeomorphism.homeomorph X₀.left.nilradical.subschemeι).symm.surjective.irreducibleSpace
         (IsUniversalHomeomorphism.homeomorph X₀.left.nilradical.subschemeι).symm.continuous
     have : IsDominant W.ι :=
-      Opens.isDominant_ι (W.isOpen.dense (Set.nonempty_of_nonempty_subtype))
+      Opens.isDominant_ι (W.isOpen.dense (Set.nonempty_coe_sort.mp ‹_›))
     have hc : t ≫ f ≫ π = W.ι ≫ X₀.left.nilradical.subschemeι ≫ π := by
       rw [← Category.assoc, htf, Category.assoc]
     have : IsDominant (t ≫ f ≫ π) := by
@@ -132,7 +132,8 @@ theorem nearbyCyclesVanishNear_lowerShriek_unit_residueField_of_isUniversalHomeo
     have : IsDominant (f ≫ π) := IsDominant.of_comp t (f ≫ π)
     have : UniversallyInjective (t ≫ f ≫ π) := by
       rw [hc]
-      infer_instance
+      exact MorphismProperty.comp_mem _ _ _ inferInstance
+        (MorphismProperty.comp_mem _ _ _ inferInstance inferInstance)
     have : IsUniversalHomeomorphism (f ≫ π) :=
       Scheme.Hom.isUniversalHomeomorphism_of_universallyInjective_comp (f ≫ π)
         (fun y ↦ (hY.2 y).2) t
@@ -197,7 +198,7 @@ theorem nearbyCyclesVanishNear_lowerShriek_unit_residueField_of_not_perfectField
   have hI₀ : I.comap π = IdealSheafData.ofIdealTop (Ideal.span {π.appTop h}) := by
     rw [hI, IdealSheafData.comap_ofIdealTop, Ideal.map_span, Set.image_singleton]
   have hh₀ : (X₀.left.basicOpen (π.appTop h) : Set X₀.left).Nonempty := by
-    have hne : X.left.basicOpen h ≠ ⊥ := fun h0 ↦ hh ((Scheme.basicOpen_eq_bot_iff h).1 h0)
+    have hne : X.left.basicOpen h ≠ ⊥ := fun h0 ↦ hh ((basicOpen_eq_bot_iff h).1 h0)
     obtain ⟨x, hx⟩ := (TopologicalSpace.Opens.ne_bot_iff_nonempty _).1 hne
     obtain ⟨y, rfl⟩ := π.surjective x
     refine ⟨y, ?_⟩
@@ -215,8 +216,8 @@ theorem nearbyCyclesVanishNear_lowerShriek_unit_residueField_of_not_perfectField
       ⟨ζ, subset_closure (Set.mem_singleton ζ), e.surjective ζ⟩
     have hs : e ⁻¹' {ζ} = {e.symm ζ} := by
       ext x
-      exact ⟨fun hx ↦ by rw [← Set.mem_singleton_iff.1 hx, e.symm_apply_apply],
-        fun hx ↦ by rw [Set.mem_singleton_iff.1 hx, Set.mem_preimage, e.apply_symm_apply]; rfl⟩
+      simp only [Set.mem_preimage, Set.mem_singleton_iff]
+      exact ⟨fun hx ↦ hx ▸ (e.symm_apply_apply x).symm, fun hx ↦ hx ▸ e.apply_symm_apply ζ⟩
     rwa [e.preimage_closure, hs] at h₁
   sorry
 
