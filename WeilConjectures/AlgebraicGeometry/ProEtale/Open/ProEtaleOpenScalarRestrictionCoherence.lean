@@ -41,8 +41,192 @@ namespace AlgebraicGeometry.Scheme
 variable {A B C : Type u} [CommRing A] [CommRing B] [CommRing C]
   [Finite A] [Finite B] [Finite C]
 
+/-- The normalized realization comparison is the identity on sections.
+Source: Stacks Tag 00YV
+(blueprint: lem-sf-open-extension-scalar-restriction-coherence). -/
+private theorem realization_hom_apply (T : Scheme.{u}) (φ : A →+* B)
+    (M : Sheaf (ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1, u} B)))
+    (V : T.ProEtᵒᵖ) (x : ((sfIntrinsicModuleEquivalence T B).functor.obj M).val.obj V) :
+    ((sfRealizationRestriction T φ).hom.app M).val.app V x = x :=
+  (sfRealizationRestriction_existsUnique T φ).exists.choose_spec M V x
+
+/-- The inverse normalized realization comparison is the identity on sections.
+Source: Stacks Tag 00YV
+(blueprint: lem-sf-open-extension-scalar-restriction-coherence). -/
+private theorem realization_inv_apply (T : Scheme.{u}) (φ : A →+* B)
+    (M : Sheaf (ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1, u} B)))
+    (V : T.ProEtᵒᵖ)
+    (x : ((sfIntrinsicModuleEquivalence T A).functor.obj
+      ((sfFixedRestriction T φ).obj M)).val.obj V) :
+    ((sfRealizationRestriction T φ).inv.app M).val.app V x = x := by
+  have hh := congrArg (fun t ↦ t.val.app V x)
+    ((sfRealizationRestriction T φ).inv_hom_id_app M)
+  simp only [SheafOfModules.comp_val, PresheafOfModules.comp_app,
+    ModuleCat.comp_apply, SheafOfModules.id_val, PresheafOfModules.id_app,
+    ModuleCat.id_apply] at hh
+  rw [← realization_hom_apply T φ M V (((sfRealizationRestriction T φ).inv.app M).val.app V x)]
+  exact hh
+
+omit [Finite A] [Finite B] in
+/-- Restriction to an open commutes strictly with fixed scalar restriction on maps.
+Source: Stacks Tag 03DA
+(blueprint: lem-sf-open-extension-scalar-restriction-coherence). -/
+private theorem restriction_fixed_map {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]
+    (φ : A →+* B) {P Q : Sheaf (ProEt.topology Z) (ModuleCat.{u + 1} (ULift.{u + 1, u} B))}
+    (f : P ⟶ Q) :
+    (ProEtale.openImmersionRestriction (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) j).map
+        ((sfFixedRestriction Z φ).map f) =
+      (sfFixedRestriction X φ).map
+        ((ProEtale.openImmersionRestriction (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) j).map f) := by
+  rfl
+
+omit [Finite A] [Finite B] [Finite C] in
+/-- The scalar compositor is the identity on sections.
+Source: Stacks Tag 03DA
+(blueprint: lem-sf-open-extension-scalar-restriction-coherence). -/
+private theorem coefficientComp_hom_apply (T : Scheme.{u}) (φ : A →+* B) (ψ : B →+* C)
+    (M : proEtaleRingModules T (proEtaleConstantRing T C)) (V : T.ProEtᵒᵖ)
+    (x : M.val.obj V) :
+    ((sfCoefficientRestrictionComp T φ ψ).hom.app M).val.app V x = x :=
+  (pbcRestrictComp_exists _ _ _
+    ((constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).map_comp _ _).symm).exists.choose_spec
+      M V x
+
+/-- Composition law for the inverse normalized realization comparisons.
+Source: Stacks Tags 00YV and 03DA
+(blueprint: lem-sf-open-extension-scalar-restriction-coherence).
+
+Proof: every map is the identity on sections. -/
+private theorem realization_inv_comp (T : Scheme.{u}) (φ : A →+* B) (ψ : B →+* C)
+    (N : Sheaf (ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1, u} C))) :
+    (sfRealizationRestriction T φ).inv.app ((sfFixedRestriction T ψ).obj N) ≫
+      (proEtaleCoefficientRestrictScalars T φ).map
+        ((sfRealizationRestriction T ψ).inv.app N) ≫
+      (sfCoefficientRestrictionComp T φ ψ).hom.app
+        ((sfIntrinsicModuleEquivalence T C).functor.obj N) =
+    (sfRealizationRestriction T (ψ.comp φ)).inv.app N := by
+  ext V x
+  refine (coefficientComp_hom_apply T φ ψ _ V _).trans ?_
+  refine (realization_inv_apply T ψ N V _).trans ?_
+  refine (realization_inv_apply T φ _ V x).trans ?_
+  exact (realization_inv_apply T (ψ.comp φ) N V x).symm
+
 attribute [local irreducible] ProEtale.openImmersionLowerShriekAdjunction
 attribute [local irreducible] sfIntrinsicModuleEquivalence
+
+omit [Finite A] [Finite B] in
+/-- Unit normalization of the fixed-scalar open comparison: after the open
+adjunction unit, its restriction to the open is restriction of scalars of the
+open adjunction unit. Source: Stacks Tags 03DI and 03CY
+(blueprint: lem-sf-open-extension-scalar-restriction-coherence).
+
+Proof: transpose the unit equation of the left-adjoint uniqueness isomorphism along
+the restriction/coextension adjunction; that adjunction commutes with restriction
+to the open, both being computed objectwise. -/
+private theorem fixed_normalized {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]
+    (φ : A →+* B) (N : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1, u} B))) :
+    (ProEtale.openImmersionLowerShriekAdjunction
+        (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) j).unit.app
+        ((sfFixedRestriction X φ).obj N) ≫
+      (ProEtale.openImmersionRestriction (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) j).map
+        ((sfFixedOpenRestriction j φ).hom.app N) =
+    (sfFixedRestriction X φ).map
+      ((ProEtale.openImmersionLowerShriekAdjunction
+        (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) j).unit.app N) := by
+  have h := Adjunction.unit_leftAdjointUniq_hom_app
+    ((Sheaf.restrictCoextendScalarsAdj (ProEt.topology X) φ.ulift).comp
+      (ProEtale.openImmersionLowerShriekAdjunction
+        (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) j))
+    ((ProEtale.openImmersionLowerShriekAdjunction
+      (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) j).comp
+      (Sheaf.restrictCoextendScalarsAdj (ProEt.topology Z) φ.ulift)) N
+  apply ((Sheaf.restrictCoextendScalarsAdj (ProEt.topology X) φ.ulift).homEquiv _ _).injective
+  simp only [Adjunction.homEquiv_unit, Functor.map_comp]
+  simp only [Adjunction.comp_unit_app, Functor.comp_map, Category.assoc] at h
+  erw [h, Adjunction.unit_naturality]
+  rfl
+
+omit [Finite A] [Finite B] [Finite C] in
+/-- Cocycle for the fixed-scalar open comparisons.
+Source: Stacks Tags 03DI and 03DA
+(blueprint: lem-sf-open-extension-scalar-restriction-coherence).
+
+Proof: both sides are determined by their open adjunction transposes, which are
+both restriction of scalars of the open adjunction unit by `fixed_normalized`. -/
+private theorem fixed_open_comp {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]
+    (φ : A →+* B) (ψ : B →+* C)
+    (N : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1, u} C))) :
+    (sfFixedOpenRestriction j (ψ.comp φ)).hom.app N =
+      (sfFixedOpenRestriction j φ).hom.app ((sfFixedRestriction X ψ).obj N) ≫
+        (sfFixedRestriction Z φ).map ((sfFixedOpenRestriction j ψ).hom.app N) := by
+  apply ((ProEtale.openImmersionLowerShriekAdjunction
+    (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) j).homEquiv _ _).injective
+  simp only [Adjunction.homEquiv_unit, Functor.map_comp]
+  erw [fixed_normalized j (ψ.comp φ) N, ← Category.assoc, fixed_normalized j φ]
+  rw [restriction_fixed_map, ← Functor.map_comp, fixed_normalized j ψ N]
+  rfl
+
+/-- Composition law for the normalized realization comparisons.
+Source: Stacks Tags 00YV and 03DA
+(blueprint: lem-sf-open-extension-scalar-restriction-coherence).
+
+Proof: every map is the identity on sections. -/
+private theorem realization_hom_comp (T : Scheme.{u}) (φ : A →+* B) (ψ : B →+* C)
+    (N : Sheaf (ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1, u} C))) :
+    (sfCoefficientRestrictionComp T φ ψ).hom.app
+        ((sfIntrinsicModuleEquivalence T C).functor.obj N) ≫
+      (sfRealizationRestriction T (ψ.comp φ)).hom.app N =
+    (proEtaleCoefficientRestrictScalars T φ).map
+        ((sfRealizationRestriction T ψ).hom.app N) ≫
+      (sfRealizationRestriction T φ).hom.app ((sfFixedRestriction T ψ).obj N) := by
+  have h := realization_inv_comp T φ ψ N
+  rw [← cancel_epi ((sfRealizationRestriction T φ).inv.app ((sfFixedRestriction T ψ).obj N) ≫
+    (proEtaleCoefficientRestrictScalars T φ).map ((sfRealizationRestriction T ψ).inv.app N))]
+  simp only [Category.assoc]
+  rw [reassoc_of% h]
+  simp only [Iso.inv_hom_id_app, ← Functor.map_comp_assoc]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp, Iso.inv_hom_id_app]
+
+/-- The realization of the inverse realization comparison, expressed by the
+realization comparison and the counits of the realization equivalences.
+Source: Stacks Tag 00YV
+(blueprint: lem-sf-open-extension-scalar-restriction-coherence). -/
+private theorem inverseRealization_functor_map (T : Scheme.{u}) (φ : A →+* B)
+    (M : proEtaleRingModules T (proEtaleConstantRing T B)) :
+    (sfIntrinsicModuleEquivalence T A).functor.map
+        ((sfInverseRealizationRestriction T φ).hom.app M) =
+      (sfIntrinsicModuleEquivalence T A).counitIso.hom.app
+          ((proEtaleCoefficientRestrictScalars T φ).obj M) ≫
+        (proEtaleCoefficientRestrictScalars T φ).map
+          ((sfIntrinsicModuleEquivalence T B).counitIso.inv.app M) ≫
+        (sfRealizationRestriction T φ).hom.app
+          ((sfIntrinsicModuleEquivalence T B).inverse.obj M) := by
+  simp only [sfInverseRealizationRestriction, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app,
+    Functor.whiskerLeft_app, Functor.comp_map, Functor.map_comp]
+  rw [← Equivalence.counit_app_functor, ← Category.assoc, ← Functor.map_comp,
+    ← Functor.map_comp, Equivalence.counit_naturality]
+  rfl
+
+/-- Composition law for the inverse realization comparisons.
+Source: Stacks Tags 00YV and 03DA
+(blueprint: lem-sf-open-extension-scalar-restriction-coherence).
+
+Proof: apply the faithful realization functor, express both sides by the realization
+comparisons and counits, and use `realization_hom_comp` and naturality. -/
+private theorem inverse_realization_comp (T : Scheme.{u}) (φ : A →+* B) (ψ : B →+* C)
+    (M : proEtaleRingModules T (proEtaleConstantRing T C)) :
+    (sfIntrinsicModuleEquivalence T A).inverse.map
+        ((sfCoefficientRestrictionComp T φ ψ).hom.app M) ≫
+      (sfInverseRealizationRestriction T (ψ.comp φ)).hom.app M =
+    (sfInverseRealizationRestriction T φ).hom.app
+        ((proEtaleCoefficientRestrictScalars T ψ).obj M) ≫
+      (sfFixedRestriction T φ).map ((sfInverseRealizationRestriction T ψ).hom.app M) := by
+  apply (sfIntrinsicModuleEquivalence T A).functor.map_injective
+  simp only [Functor.map_comp, inverseRealization_functor_map]
+  rw [Equivalence.counit_naturality_assoc]
+  trace_state
+  sorry
 
 /-- The published comparison is the unique comparison inducing identity on the
 extension presheaves, equivalently satisfying the displayed open-unit equation.

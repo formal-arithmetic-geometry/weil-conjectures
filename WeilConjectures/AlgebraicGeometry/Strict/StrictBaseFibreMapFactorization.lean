@@ -59,7 +59,7 @@ theorem strictBaseSheafFiberMap_factorization
           strictBaseSheafFiberMap f G s t =
         a ≫ etaleDerivedRestriction (strictBaseFiberInclusion f s t) _ ∧
       a ≫ etaleDerivedRestriction (strictBaseFiberInclusion f s
-          (Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationPointEvaluation s)))) _ =
+          (Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationRingPointEvaluation s)))) _ =
         closedStrictBaseSheafFiberMap f G s := by
   let a := strictLocalSheafComparison f G s
   have ht (Ω' : Type u) [Field Ω'] [IsAlgClosed Ω']
@@ -107,7 +107,7 @@ theorem strictBaseSheafFiberMap_factorization
     erw [hn]
   refine ⟨a, ht Ω' t, ?_⟩
   have hs := ht Ω
-    (Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationPointEvaluation s)))
+    (Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationRingPointEvaluation s)))
   rw [derivedEtaleStalkSpecialization_closed] at hs
   exact hs.symm
 

@@ -32,9 +32,9 @@ private theorem strictMap_structural
 private theorem strictMap_point
     {X S : Scheme.{u}} (f : X ⟶ S) {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (x : Spec (.of Ω) ⟶ X) :
-    Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationPointEvaluation x)) ≫
+    Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationRingPointEvaluation x)) ≫
         localAcyclicityStrictMap f x =
-      Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationPointEvaluation (x ≫ f))) :=
+      Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationRingPointEvaluation (x ≫ f))) :=
   (existsUnique_localAcyclicityStrictMap f x).choose_spec.1.2
 
 private theorem strict_congr_structural
@@ -49,9 +49,9 @@ private theorem strict_congr_structural
 private theorem strict_congr_point
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     {x y : Spec (.of Ω) ⟶ S} (h : x = y) :
-    Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationPointEvaluation x)) ≫
+    Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationRingPointEvaluation x)) ≫
         eqToHom (congrArg Scheme.strictHenselizationScheme h) =
-      Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationPointEvaluation y)) := by
+      Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationRingPointEvaluation y)) := by
   subst y
   simp
 
@@ -77,7 +77,7 @@ theorem localAcyclicity_strict_fibre_comparison
     {Ξ : Type u} [Field Ξ] [IsAlgClosed Ξ] (x' : Spec (.of Ξ) ⟶ X')
     (a : Spec (.of Ξ) ⟶ Spec (.of Ω))
     (hclosed : x' ≫ f' =
-      a ≫ Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationPointEvaluation s)))
+      a ≫ Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationRingPointEvaluation s)))
     {Ω' : Type u} [Field Ω'] [IsAlgClosed Ω']
     (t : Spec (.of Ω') ⟶ Scheme.strictHenselizationScheme s) :
     IsIso (localAcyclicityStrictMap p x') ∧
@@ -103,9 +103,9 @@ theorem localAcyclicity_strict_fibre_comparison
     dsimp only [b]
     rw [Category.assoc, strict_congr_structural hpoint, strictMap_structural]
   have hbpoint : Spec.map (CommRingCat.ofHom
-        (Scheme.strictHenselizationPointEvaluation (x' ≫ f'))) ≫ b =
+        (Scheme.strictHenselizationRingPointEvaluation (x' ≫ f'))) ≫ b =
       Spec.map (CommRingCat.ofHom
-        (Scheme.strictHenselizationPointEvaluation ((x' ≫ p) ≫ f))) := by
+        (Scheme.strictHenselizationRingPointEvaluation ((x' ≫ p) ≫ f))) := by
     dsimp only [b]
     rw [← Category.assoc, strictMap_point, strict_congr_point hpoint]
   obtain ⟨_, hq, e, _, _, hE⟩ := Scheme.strictBaseClosedPointLocalizations f s p f' hcart

@@ -280,7 +280,7 @@ noncomputable def closedStrictBaseSheafFiberMap
           ((_root_.DerivedCategory.Plus.singleFunctor _ 0).obj G)))
       (Scheme.strictHenselizationClosedLift_over s).symm) ≫
     strictBaseSheafFiberMap f G s
-      (Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationPointEvaluation s)))
+      (Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationRingPointEvaluation s)))
 
 /-- Cospecialization: inverse Leray, restriction to the closed fibre, then inverse closed
 fibre unit. Local acyclicity supplies invertibility of precisely this last unit.
@@ -302,17 +302,17 @@ noncomputable def etaleCospecialization
                 (pullback.fst f (Scheme.strictHenselizationStructuralMap s))).obj G))) ⟶
     (Sheaf.Γ (pullback (strictBaseChangeMap f s)
       (Spec.map (CommRingCat.ofHom
-        (Scheme.strictHenselizationPointEvaluation s)))).smallEtaleTopology
+        (Scheme.strictHenselizationRingPointEvaluation s)))).smallEtaleTopology
           AddCommGrpCat.{u + 1}).rightDerivedFunctorPlus.obj
       ((upperStar AddCommGrpCat.{u + 1} (strictBaseFiberInclusion f s
         (Spec.map (CommRingCat.ofHom
-          (Scheme.strictHenselizationPointEvaluation s))))).mapDerivedCategoryPlus.obj
+          (Scheme.strictHenselizationRingPointEvaluation s))))).mapDerivedCategoryPlus.obj
             ((_root_.DerivedCategory.Plus.singleFunctor _ 0).obj
               ((upperStar AddCommGrpCat.{u + 1}
                 (pullback.fst f (Scheme.strictHenselizationStructuralMap s))).obj G))) := by
   let p := pullback.fst f (Scheme.strictHenselizationStructuralMap s)
   let i := strictBaseFiberInclusion f s
-    (Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationPointEvaluation s)))
+    (Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationRingPointEvaluation s)))
   let h := strictBaseFiberInclusion f s t
   let K := (_root_.DerivedCategory.Plus.singleFunctor _ 0).obj
     ((upperStar AddCommGrpCat.{u + 1} p).obj G)

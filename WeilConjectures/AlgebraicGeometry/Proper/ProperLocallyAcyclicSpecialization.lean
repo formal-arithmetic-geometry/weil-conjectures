@@ -98,7 +98,7 @@ private theorem isIso_closedStrictBaseSheafFiberMap
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) :
     IsIso (closedStrictBaseSheafFiberMap f G s) := by
   have := isIso_strictBaseSheafFiberMap f G hG s
-    (Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationPointEvaluation s)))
+    (Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationRingPointEvaluation s)))
   unfold closedStrictBaseSheafFiberMap
   infer_instance
 
@@ -167,7 +167,7 @@ private theorem torsionHomology_directImage_single
 private theorem local_pointEvaluation
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) [IsLocalRing (Scheme.strictHenselizationRing s)] :
-    IsLocalHom (Scheme.strictHenselizationPointEvaluation s) := by
+    IsLocalHom (Scheme.strictHenselizationRingPointEvaluation s) := by
   let : Algebra (S.residueField (s (IsLocalRing.closedPoint Ω))) Ω :=
     (Scheme.descResidueField (Scheme.stalkClosedPointTo s)).hom.toAlgebra
   let ψ := Scheme.strictHenselizationPointEvaluationToSep s rfl
@@ -175,7 +175,10 @@ private theorem local_pointEvaluation
     (Scheme.strictHenselizationPointEvaluationToSep_surjective s rfl)
   let ι := (IntermediateField.val
     (separableClosure (S.residueField (s (IsLocalRing.closedPoint Ω))) Ω)).toRingHom
-  exact (inferInstance : IsLocalHom (ι.comp ψ))
+  have : IsLocalHom (Scheme.smallStrictHenselizationColimitIso s).hom.hom :=
+    isLocalHom_of_isIso _
+  exact (inferInstance :
+    IsLocalHom ((ι.comp ψ).comp (Scheme.smallStrictHenselizationColimitIso s).hom.hom))
 
 private theorem isIso_cospecialization_of_proper
     {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f]
@@ -191,7 +194,7 @@ private theorem isIso_cospecialization_of_proper
   have := local_pointEvaluation s
   let p := pullback.fst f (Scheme.strictHenselizationStructuralMap s)
   let i := strictBaseFiberInclusion f s
-    (Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationPointEvaluation s)))
+    (Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationRingPointEvaluation s)))
   let h := strictBaseFiberInclusion f s t
   let K := (_root_.DerivedCategory.Plus.singleFunctor _ 0).obj
     ((upperStar AddCommGrpCat.{u + 1} p).obj G)
@@ -211,10 +214,10 @@ private theorem isIso_cospecialization_of_proper
     IsAlgClosed.of_ringEquiv Ω (IsLocalRing.ResidueField Ω)
       (RingEquiv.ofBijective (IsLocalRing.residue Ω)
       ⟨(IsLocalRing.residue Ω).injective, IsLocalRing.residue_surjective⟩)
-  have hr := isIso_strictLocal_restriction (Scheme.strictHenselizationPointEvaluation s)
+  have hr := isIso_strictLocal_restriction (Scheme.strictHenselizationRingPointEvaluation s)
     (strictBaseChangeMap f s)
     (pullback.snd (strictBaseChangeMap f s)
-      (Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationPointEvaluation s))))
+      (Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationRingPointEvaluation s))))
     i (IsPullback.of_hasPullback _ _) K' ht
   have := hr
   have := isIso_closedFibre_derivedUnit_of_isLocallyAcyclicRelative f G hf s t

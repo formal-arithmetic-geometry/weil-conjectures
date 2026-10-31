@@ -187,9 +187,9 @@ private theorem strictMap_structural
 private theorem strictMap_point
     {X S : Scheme.{u}} (f : X ⟶ S) {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (x : Spec (.of Ω) ⟶ X) :
-    Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationPointEvaluation x)) ≫
+    Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationRingPointEvaluation x)) ≫
         localAcyclicityStrictMap f x =
-      Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationPointEvaluation (x ≫ f))) :=
+      Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationRingPointEvaluation (x ≫ f))) :=
   (existsUnique_localAcyclicityStrictMap f x).choose_spec.1.2
 
 private theorem cohomology_pullback_iso
@@ -236,13 +236,13 @@ private theorem smooth_strict_base_constantAcyclic
   let d := localAcyclicityStrictMap f x
   let a := Spec.preimage d
   have ha : Spec.map a = d := Spec.map_preimage d
-  have he : Scheme.strictHenselizationPointEvaluation (x ≫ f) =
-      (Scheme.strictHenselizationPointEvaluation x).comp a.hom := by
+  have he : Scheme.strictHenselizationRingPointEvaluation (x ≫ f) =
+      (Scheme.strictHenselizationRingPointEvaluation x).comp a.hom := by
     have hh : Spec.map (CommRingCat.ofHom
-        ((Scheme.strictHenselizationPointEvaluation x).comp a.hom)) =
-        Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationPointEvaluation (x ≫ f))) := by
+        ((Scheme.strictHenselizationRingPointEvaluation x).comp a.hom)) =
+        Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationRingPointEvaluation (x ≫ f))) := by
       simp only [CommRingCat.ofHom_comp, Spec.map_comp]
-      change Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationPointEvaluation x)) ≫
+      change Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationRingPointEvaluation x)) ≫
         Spec.map a = _
       rw [ha]
       exact strictMap_point f x
@@ -282,9 +282,9 @@ private theorem strict_congr_structural
 private theorem strict_congr_point
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     {x y : Spec (.of Ω) ⟶ S} (h : x = y) :
-    Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationPointEvaluation x)) ≫
+    Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationRingPointEvaluation x)) ≫
         eqToHom (congrArg Scheme.strictHenselizationScheme h) =
-      Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationPointEvaluation y)) := by
+      Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationRingPointEvaluation y)) := by
   subst y
   simp
 
@@ -297,7 +297,7 @@ private theorem strict_base_fibre_constantAcyclic
     {Ξ : Type u} [Field Ξ] [IsAlgClosed Ξ] (x' : Spec (.of Ξ) ⟶ X')
     (a : Spec (.of Ξ) ⟶ Spec (.of Ω))
     (hclosed : x' ≫ f' =
-      a ≫ Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationPointEvaluation s)))
+      a ≫ Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationRingPointEvaluation s)))
     {K : Type u} [Field K] [IsAlgClosed K]
     (t : Spec (.of K) ⟶ Scheme.strictHenselizationScheme ((x' ≫ p) ≫ f))
     (M : AddCommGrpCat.{u + 1}) (n : ℕ) (hn : 0 < n)
@@ -314,8 +314,8 @@ private theorem strict_base_fibre_constantAcyclic
     dsimp only [b]
     rw [Category.assoc, strict_congr_structural hpoint, strictMap_structural]
   have hbpoint : Spec.map (CommRingCat.ofHom
-        (Scheme.strictHenselizationPointEvaluation (x' ≫ f'))) ≫ b =
-      Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationPointEvaluation
+        (Scheme.strictHenselizationRingPointEvaluation (x' ≫ f'))) ≫ b =
+      Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationRingPointEvaluation
         ((x' ≫ p) ≫ f))) := by
     dsimp only [b]
     rw [← Category.assoc, strictMap_point, strict_congr_point hpoint]
@@ -384,11 +384,13 @@ private theorem admissible_isUnit_strict_base
     (Scheme.strictHenselizationPointEvaluationToSep_surjective s rfl)
   let ι := (IntermediateField.val
     (separableClosure (S.residueField (s (IsLocalRing.closedPoint Ω))) Ω)).toRingHom
-  have : IsLocalHom (Scheme.strictHenselizationPointEvaluation s) := by
-    change IsLocalHom (ι.comp ψ)
+  have : IsLocalHom (Scheme.smallStrictHenselizationColimitIso s).hom.hom :=
+    isLocalHom_of_isIso _
+  have : IsLocalHom (Scheme.strictHenselizationRingPointEvaluation s) := by
+    change IsLocalHom ((ι.comp ψ).comp (Scheme.smallStrictHenselizationColimitIso s).hom.hom)
     infer_instance
   have hR : IsUnit (n : R) :=
-    isUnit_of_map_unit (Scheme.strictHenselizationPointEvaluation s) _ (by
+    isUnit_of_map_unit (Scheme.strictHenselizationRingPointEvaluation s) _ (by
       simpa only [map_natCast] using hΩ)
   simpa only [map_natCast] using hR.map (Scheme.ΓSpecIso (.of R)).inv.hom
 
@@ -413,7 +415,7 @@ private theorem smooth_isLocallyAcyclic
   let s := x ≫ f
   let A := Scheme.strictHenselizationScheme s
   let i := Scheme.strictHenselizationStructuralMap s
-  let z := Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationPointEvaluation s))
+  let z := Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationRingPointEvaluation s))
   let p : Limits.pullback f i ⟶ X := Limits.pullback.fst f i
   let f' : Limits.pullback f i ⟶ A := Limits.pullback.snd f i
   let x' : Spec (.of Ω) ⟶ Limits.pullback f i :=

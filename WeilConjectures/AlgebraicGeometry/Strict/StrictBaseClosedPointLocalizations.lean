@@ -26,6 +26,7 @@ public import WeilConjectures.RingTheory.StrictHenselizationTriples
 public import WeilConjectures.AlgebraicGeometry.EtalePointedMapRigidity
 public import WeilConjectures.AlgebraicGeometry.StrictHenselizationMapExists
 public import Mathlib.AlgebraicGeometry.Pullbacks
+public import WeilConjectures.AlgebraicGeometry.Strict.Henselization.StrictHenselizationCanonicalMap
 import WeilConjectures.AlgebraicGeometry.StrictHenselizationLocalStructure
 import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationLocal
@@ -66,7 +67,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 private theorem evaluation_local
     {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) [IsLocalRing (strictHenselizationRing y)] :
-    IsLocalHom (strictHenselizationPointEvaluation y) := by
+    IsLocalHom (strictHenselizationRingPointEvaluation y) := by
   let : Algebra (Y.residueField (y (IsLocalRing.closedPoint Ω))) Ω :=
     (descResidueField (stalkClosedPointTo y)).hom.toAlgebra
   let ψ := strictHenselizationPointEvaluationToSep y rfl
@@ -75,7 +76,8 @@ private theorem evaluation_local
   let ι : separableClosure (Y.residueField (y (IsLocalRing.closedPoint Ω))) Ω →+* Ω :=
     (IntermediateField.val _).toRingHom
   have : IsLocalHom ι := inferInstance
-  change IsLocalHom (ι.comp ψ)
+  have : IsLocalHom (smallStrictHenselizationColimitIso y).hom.hom := isLocalHom_of_isIso _
+  change IsLocalHom ((ι.comp ψ).comp (smallStrictHenselizationColimitIso y).hom.hom)
   infer_instance
 
 set_option backward.isDefEq.respectTransparency false in
@@ -94,7 +96,7 @@ private theorem structural_weaklyEtale
       y (IsLocalRing.closedPoint Ω) := by
     have h := congrArg (fun f : Spec (.of Ω) ⟶ Y ↦ f (IsLocalRing.closedPoint Ω))
       (strictHenselizationClosedLift_over y)
-    have heval : Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation y))
+    have heval : Spec.map (CommRingCat.ofHom (strictHenselizationRingPointEvaluation y))
         (IsLocalRing.closedPoint Ω) =
         IsLocalRing.closedPoint (strictHenselizationRing y) :=
       IsLocalRing.comap_closedPoint _
@@ -142,7 +144,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 private theorem evaluation_closed
     {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) [IsLocalRing (strictHenselizationRing y)] :
-    Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation y))
+    Spec.map (CommRingCat.ofHom (strictHenselizationRingPointEvaluation y))
       (IsLocalRing.closedPoint Ω) =
       IsLocalRing.closedPoint (strictHenselizationRing y) := by
   have := evaluation_local y
@@ -166,8 +168,8 @@ private theorem strict_pointed_weaklyEtale_iso
     {Y Z : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) (z : Spec (.of Ω) ⟶ Z)
     (f : strictHenselizationScheme y ⟶ strictHenselizationScheme z) [WeaklyEtale f]
-    (hpoint : Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation y)) ≫ f =
-      Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation z))) :
+    (hpoint : Spec.map (CommRingCat.ofHom (strictHenselizationRingPointEvaluation y)) ≫ f =
+      Spec.map (CommRingCat.ofHom (strictHenselizationRingPointEvaluation z))) :
     IsIso f := by
   obtain ⟨hy, _⟩ := AlgebraicGeometry.strictHenselizationLocalStructure y
   obtain ⟨hz, hstrict⟩ := AlgebraicGeometry.strictHenselizationLocalStructure z
@@ -179,9 +181,9 @@ private theorem strict_pointed_weaklyEtale_iso
     g (IsLocalRing.closedPoint Ω)) hpoint
   calc
     f (IsLocalRing.closedPoint (strictHenselizationRing y)) =
-        f (Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation y))
+        f (Spec.map (CommRingCat.ofHom (strictHenselizationRingPointEvaluation y))
           (IsLocalRing.closedPoint Ω)) := congrArg f (evaluation_closed y).symm
-    _ = Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation z))
+    _ = Spec.map (CommRingCat.ofHom (strictHenselizationRingPointEvaluation z))
         (IsLocalRing.closedPoint Ω) := h
     _ = _ := evaluation_closed z
 
@@ -224,7 +226,7 @@ Source: Stacks Project, Tags 0GIP (case (2)), 0GJS and 0GJU, first paragraph
 (blueprint: lem-weil-pbc-strict-base-closed-point-localizations).
 
 `hcart` allows any presentation of the specified fibre product. The canonical
-closed-point lift is `Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation s))`.
+closed-point lift is `Spec.map (CommRingCat.ofHom (strictHenselizationRingPointEvaluation s))`.
 The functorial maps `b`, `d`, `q` are specified by their structural equations and their
 compatibility with the canonical geometric-point lifts. By strict-henselization
 functoriality these are precisely the canonical maps, not arbitrary maps over the base.
@@ -260,26 +262,26 @@ theorem strictBaseClosedPointLocalizations
     {Ξ : Type u} [Field Ξ] [IsAlgClosed Ξ] (x' : Spec (.of Ξ) ⟶ X')
     (a : Spec (.of Ξ) ⟶ Spec (.of Ω))
     (hclosed : x' ≫ f' =
-      a ≫ Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation s)))
+      a ≫ Spec.map (CommRingCat.ofHom (strictHenselizationRingPointEvaluation s)))
     (b : strictHenselizationScheme (x' ≫ f') ⟶
       strictHenselizationScheme ((x' ≫ p) ≫ f))
     (hb : b ≫ strictHenselizationStructuralMap ((x' ≫ p) ≫ f) =
       strictHenselizationStructuralMap (x' ≫ f') ≫ strictHenselizationStructuralMap s)
     (hbpoint : Spec.map (CommRingCat.ofHom
-        (strictHenselizationPointEvaluation (x' ≫ f'))) ≫ b =
-      Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation ((x' ≫ p) ≫ f))))
+        (strictHenselizationRingPointEvaluation (x' ≫ f'))) ≫ b =
+      Spec.map (CommRingCat.ofHom (strictHenselizationRingPointEvaluation ((x' ≫ p) ≫ f))))
     (d : strictHenselizationScheme (x' ≫ p) ⟶
       strictHenselizationScheme ((x' ≫ p) ≫ f))
     (hd : d ≫ strictHenselizationStructuralMap ((x' ≫ p) ≫ f) =
       strictHenselizationStructuralMap (x' ≫ p) ≫ f)
     (hdpoint : Spec.map (CommRingCat.ofHom
-        (strictHenselizationPointEvaluation (x' ≫ p))) ≫ d =
-      Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation ((x' ≫ p) ≫ f))))
+        (strictHenselizationRingPointEvaluation (x' ≫ p))) ≫ d =
+      Spec.map (CommRingCat.ofHom (strictHenselizationRingPointEvaluation ((x' ≫ p) ≫ f))))
     (q : strictHenselizationScheme x' ⟶ strictHenselizationScheme (x' ≫ p))
     (hq : q ≫ strictHenselizationStructuralMap (x' ≫ p) =
       strictHenselizationStructuralMap x' ≫ p)
-    (hqpoint : Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation x')) ≫ q =
-      Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation (x' ≫ p)))) :
+    (hqpoint : Spec.map (CommRingCat.ofHom (strictHenselizationRingPointEvaluation x')) ≫ q =
+      Spec.map (CommRingCat.ofHom (strictHenselizationRingPointEvaluation (x' ≫ p)))) :
     IsIso (strictHenselizationStructuralMap (x' ≫ f')) ∧ IsIso q ∧
       ∃ e : strictHenselizationScheme s ≅ strictHenselizationScheme ((x' ≫ p) ≫ f),
         strictHenselizationStructuralMap (x' ≫ f') ≫ e.hom = b ∧
@@ -325,7 +327,7 @@ theorem strictBaseClosedPointLocalizations
     have ha : a (IsLocalRing.closedPoint Ξ) = IsLocalRing.closedPoint Ω :=
       Subsingleton.elim _ _
     have h' : (x' ≫ f') (IsLocalRing.closedPoint Ξ) =
-        Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation s))
+        Spec.map (CommRingCat.ofHom (strictHenselizationRingPointEvaluation s))
           (IsLocalRing.closedPoint Ω) := by
       simpa only [Hom.comp_apply, ha] using! h
     exact h'.trans (evaluation_closed s)
@@ -341,7 +343,7 @@ theorem strictBaseClosedPointLocalizations
   let := hx'
   have := evaluation_local x'
   have hcompat : q ≫ d = (strictHenselizationStructuralMap x' ≫ f') ≫ e.hom := by
-    apply strict_pointed_hom_ext (strictHenselizationPointEvaluation x')
+    apply strict_pointed_hom_ext (strictHenselizationRingPointEvaluation x')
       ((x' ≫ p) ≫ f)
     · simp only [Category.assoc, hd, hebase]
       rw [← Category.assoc q, hq]
@@ -349,10 +351,10 @@ theorem strictBaseClosedPointLocalizations
         congrArg (fun g ↦ strictHenselizationStructuralMap x' ≫ g) hcart.w
     · calc
         _ = Spec.map (CommRingCat.ofHom
-            (strictHenselizationPointEvaluation ((x' ≫ p) ≫ f))) := by
+            (strictHenselizationRingPointEvaluation ((x' ≫ p) ≫ f))) := by
           rw [← Category.assoc, hqpoint, hdpoint]
         _ = Spec.map (CommRingCat.ofHom
-            (strictHenselizationPointEvaluation (x' ≫ f'))) ≫ b := hbpoint.symm
+            (strictHenselizationRingPointEvaluation (x' ≫ f'))) ≫ b := hbpoint.symm
         _ = (x' ≫ f') ≫ e.hom := by
           rw [← he, ← Category.assoc, strictHenselizationClosedLift_over]
         _ = _ := by
