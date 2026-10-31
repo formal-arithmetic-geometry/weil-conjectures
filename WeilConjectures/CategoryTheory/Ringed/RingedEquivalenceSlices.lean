@@ -23,6 +23,10 @@ import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod
 
 /-! # Auxiliary ringed presentation comparisons -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 
 set_option autoImplicit false
@@ -236,9 +240,8 @@ set_option backward.isDefEq.respectTransparency.types false
 set_option backward.defeqAttrib.useBackward true
 
 -- Compatibility of the product comparisons with further restriction.
-attribute [irreducible] sliceComparison sliceFurtherComparison
+attribute [irreducible] sliceComparison
 
-attribute [irreducible] sliceMorphism sliceMorphismComparison sliceMorphismFurtherComparison
 
 -- Recover module inverse images from their specified adjunctions and linearity.
 private abbrev moduleSet {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}

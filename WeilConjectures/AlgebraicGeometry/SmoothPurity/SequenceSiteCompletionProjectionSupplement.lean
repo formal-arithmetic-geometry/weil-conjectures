@@ -249,7 +249,6 @@ structure SequenceSetProjection (b : Cone (rings.{c, v, r} J B τ)) where
         ((directLimit.hom.app F).hom.app U (((π.adj.homEquiv H F) a).hom.app U x))) =
       a.hom.app (op (n, U.unop)) ((inverseUnderlying.inv.app H).app (op (n, U.unop)) x)
 
-attribute [instance] SequenceOrdinaryPullback.extension_additive
 
 attribute [local instance 30000] CategoryTheory.ringedToposRingForgetCompose
   CategoryTheory.ringedToposAbelianForgetCompose CategoryTheory.ringedToposCommRingForgetCompose

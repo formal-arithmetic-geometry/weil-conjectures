@@ -118,6 +118,9 @@ namespace SheafOfModules.CanonicalTensorPullbackOfUniverses
 
 set_option backward.isDefEq.respectTransparency false
 
+-- The essentially-small sheafification instance leaves its universe unconstrained here.
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
+
 universe u v u' v'
 
 private theorem tensorMap_factor

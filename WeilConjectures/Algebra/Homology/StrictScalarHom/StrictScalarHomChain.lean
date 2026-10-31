@@ -1748,5 +1748,3 @@ private theorem extension_hom_ext
   rw [extension_section_smul E H n V s x, map_smul, map_smul, hfg]
 
 end SheafOfModules.StrictScalarHom
-
-#print axioms SheafOfModules.StrictScalarHom.exists_scalarHomChainIdentification

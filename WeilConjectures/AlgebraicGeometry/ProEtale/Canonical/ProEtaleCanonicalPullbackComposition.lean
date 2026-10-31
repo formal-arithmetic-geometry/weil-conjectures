@@ -191,6 +191,13 @@ private theorem normalizedAdjunction_ext
   ext m
   exact (ha M U.unop m).trans (hb M U.unop m).symm
 
+private theorem isAcyclicTensorKFlat_iff {V : Scheme.{u}}
+    {R : Sheaf (ProEt.topology V) CommRingCat.{u + 1}}
+    (K : CochainComplex (proEtaleRingModules V R) ℤ) :
+    K.IsAcyclicTensorKFlat ↔ K.IsKFlatTensor := by
+  unfold CochainComplex.IsAcyclicTensorKFlat
+  rfl
+
 private theorem derivedTransformation_ext
     {V : Scheme.{u}} (R : Sheaf (ProEt.topology V) CommRingCat.{u + 1})
     {E : Type*} [Category E] {F G : DerivedCategory (proEtaleRingModules V R) ⥤ E}
@@ -205,8 +212,8 @@ private theorem derivedTransformation_ext
   obtain ⟨P, p, hP, hflat, hp, _⟩ :=
     CochainComplex.exists_isKFlatResolutionIndependentCoefficients (R := R) K
   have := hp
-  have h' := h P
-    ((CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat P).mp hP)
+  have h' := h P ((isAcyclicTensorKFlat_iff P).mpr
+    ((CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat P).mp hP))
     (fun n ↦ by
       unfold SheafOfModules.IsFlatOnSite
       exact (exactFunctor _ _).prop_of_iso
@@ -290,7 +297,9 @@ theorem proEtaleCanonicalPullbackComposition_existsUnique
   classical
   obtain ⟨adjk, adjh, adjhk, nk, nh, nhk, d, hd, a, ha, b, hb, c, hc⟩ :=
     proEtaleRingDerivedPullbackComposition h k R_V R_W R_Z c_k c_h c_hk hc_hk
-  refine ⟨c, ⟨adjk, adjh, adjhk, nk, nh, nhk, d, hd, a, ha, b, hb, hc⟩, ?_⟩
+  refine ⟨c, ⟨adjk, adjh, adjhk, nk, nh, nhk, d, hd, a, ha, b, hb, fun K hK hflat ↦ ?_⟩, ?_⟩
+  · obtain ⟨h₁, h₂, h₃⟩ := hc K ((isAcyclicTensorKFlat_iff K).mp hK) hflat
+    exact ⟨(isAcyclicTensorKFlat_iff _).mpr h₁, h₂, h₃⟩
   intro c' hc'
   obtain ⟨adjk', adjh', adjhk', nk', nh', nhk', d', hd', a', ha', b', hb', hc'⟩ := hc'
   have ek := normalizedAdjunction_ext k R_V R_W c_k adjk' adjk nk' nk
@@ -322,7 +331,7 @@ theorem proEtaleCanonicalPullbackComposition_existsUnique
   intro K hK hflat
   have e' := (hc' K hK hflat).2.2
   rw [eb] at e'
-  have e := e'.symm.trans ((hc K hK hflat).2.2)
+  have e := e'.symm.trans ((hc K ((isAcyclicTensorKFlat_iff K).mp hK) hflat).2.2)
   apply (cancel_mono
     ((proEtaleRingDerivedPullback h R_W R_Z c_h).map
         ((proEtaleRingDerivedPullbackFactors k R_V R_W c_k).hom.app K) ≫

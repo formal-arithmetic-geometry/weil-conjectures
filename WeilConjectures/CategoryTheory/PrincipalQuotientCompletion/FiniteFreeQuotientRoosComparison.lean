@@ -626,7 +626,6 @@ private theorem balancedTower
   rw [← Category.assoc, ← G.map_comp, hn', hk, ← Category.assoc, hk]
   exact hm'.symm
 
-attribute [local instance] towerComplexProducts
 
 private def arithmeticEmbedding (e : ℕ) (he : 1 ≤ e) : ℕ ↪o ℕ :=
   OrderEmbedding.ofStrictMono (fun n ↦ e * (n + 1) - 1) (by

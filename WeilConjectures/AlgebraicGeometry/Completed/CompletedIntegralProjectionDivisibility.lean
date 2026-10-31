@@ -377,6 +377,8 @@ theorem completedIntegralProjection_divisible
             (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionIntegers l E))))).app U
               (ULift.up (Padic.coefficientExtensionUniformizer l E)))) ^ (n + 1) * y := by
   have hx := _hx
+  -- Pin the size universe used by sheafification instances on the pro-étale site.
+  have : LocallySmall.{max u (t + 1)} T.ProEt := inferInstance
   classical
   let J := Scheme.ProEt.topology T
   let A := Padic.coefficientExtensionIntegers l E
