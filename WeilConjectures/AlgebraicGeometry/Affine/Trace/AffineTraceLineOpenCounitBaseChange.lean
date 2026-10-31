@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Affine.Trace.AffineTraceConstruction
 import WeilConjectures.SixFunctors.Etale.Derived.ClopenTransfer
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionRefinement
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 
 /-!
 # Open counit compatibility for the standard affine-line exchange
