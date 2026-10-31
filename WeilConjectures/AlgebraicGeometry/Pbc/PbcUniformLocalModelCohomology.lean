@@ -109,7 +109,7 @@ private theorem finite_lisse_descent {X : Scheme.{u}} (A : Type (u + 1)) [CommRi
   exact ⟨M, hM, ⟨(upperStarComp (ModuleCat.{u + 1} A) (g i j) (V.f i)).app F ≪≫ e⟩⟩
 
 private theorem local_finite {X Y : Scheme.{u}} (g : X ⟶ Y)
-    (A : Type (u + 1)) [CommRing A]
+    (A : Type (u + 1)) [CommRing A] [Finite A]
     (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
     (c : adicLisseConstantRing Y A ⟶ R)
     (K : DerivedCategory (pbcModules Y R)) (q : ℤ)

@@ -85,14 +85,14 @@ namespace AlgebraicGeometry.Scheme
 private def localRestrictionComparison {T S : Scheme.{u}} (g : S ⟶ T)
     (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) (U : S.ProEt)
     (K : DerivedCategory (pbcModules T R)) :
-    (ringedDerivedRestrictionGeneral
+    (ringedDerivedRestrictionGeneral.{u + 1, u, u + 1, u + 1, u + 2, u + 2}
       ((adicLisseForget S).obj ((adicTowerInverseImage g).obj R)) U).obj
         ((adicTowerPullback g R).obj K) ≅ integralLocalDerived g R U K := by
   let B := (adicLisseForget S).obj ((adicTowerInverseImage g).obj R)
   let F := SheafOfModules.overFunctor.{u + 1} B U
-  have := (ringedOverFunctor_exactGeneral B U).1
-  have := (ringedOverFunctor_exactGeneral B U).2.1
-  have := (ringedOverFunctor_exactGeneral B U).2.2
+  have := (ringedOverFunctor_exactGeneral.{u + 1, u, u + 1, u + 1} B U).1
+  have := (ringedOverFunctor_exactGeneral.{u + 1, u, u + 1, u + 1} B U).2.1
+  have := (ringedOverFunctor_exactGeneral.{u + 1, u, u + 1, u + 1} B U).2.2
   exact F.mapDerivedCategory.mapIso
     (DerivedCategory.Q.objObjPreimageIso ((adicTowerPullback g R).obj K)).symm ≪≫
       F.mapDerivedCategoryFactors.app _
@@ -102,7 +102,7 @@ private def localMapIso {T S : Scheme.{u}} (g : S ⟶ T)
     {K L : DerivedCategory (pbcModules T R)} (e : K ≅ L) :
     integralLocalDerived g R U K ≅ integralLocalDerived g R U L :=
   (localRestrictionComparison g R U K).symm ≪≫
-    (ringedDerivedRestrictionGeneral
+    (ringedDerivedRestrictionGeneral.{u + 1, u, u + 1, u + 1, u + 2, u + 2}
       ((adicLisseForget S).obj ((adicTowerInverseImage g).obj R)) U).mapIso
         ((adicTowerPullback g R).mapIso e) ≪≫ localRestrictionComparison g R U L
 
@@ -113,9 +113,9 @@ private def localHomologyIso {T S : Scheme.{u}} (g : S ⟶ T)
   let B := (adicLisseForget S).obj R'
   let F := proEtaleRingModulePullback g R R' (Iso.refl _)
   let G := SheafOfModules.overFunctor.{u + 1} B U
-  have := (ringedOverFunctor_exactGeneral B U).1
-  have := (ringedOverFunctor_exactGeneral B U).2.1
-  have := (ringedOverFunctor_exactGeneral B U).2.2
+  have := (ringedOverFunctor_exactGeneral.{u + 1, u, u + 1, u + 1} B U).1
+  have := (ringedOverFunctor_exactGeneral.{u + 1, u, u + 1, u + 1} B U).2.1
+  have := (ringedOverFunctor_exactGeneral.{u + 1, u, u + 1, u + 1} B U).2.2
   let θ := (SheafOfModules.exists_scalarExtensionRingIso.{u + 1, u, u + 1, 0}
     (Iso.refl R')).choose
   exact (G.mapIso (θ ((proEtaleModuleInverseImage g R).obj
