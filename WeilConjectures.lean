@@ -10927,6 +10927,7 @@ public import WeilConjectures.EtaleCohomology.TateTwist.FrobeniusScalar
 public import WeilConjectures.EtaleCohomology.TateTwist.KummerClass
 public import WeilConjectures.EtaleCohomology.TateTwist.KummerClass.Basic
 public import WeilConjectures.EtaleCohomology.TateTwist.KummerClass.TwistPullback
+public import WeilConjectures.EtaleCohomology.TateTwist.KummerClassCoefficientChange
 public import WeilConjectures.EtaleCohomology.TateTwist.KummerClassTorsor
 public import WeilConjectures.EtaleCohomology.TateTwist.KummerLevelIndependence
 public import WeilConjectures.EtaleCohomology.TateTwist.Normalized
