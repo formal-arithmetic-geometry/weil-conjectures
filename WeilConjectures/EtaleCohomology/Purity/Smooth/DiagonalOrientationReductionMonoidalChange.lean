@@ -104,6 +104,14 @@ lemma derivedExtendScalars_map_derivedTensorLeftUnitor (M : 𝐃(X, Λ)) :
   (left_unitality_hom (derivedExtendScalars hρ ha X) M).symm
 
 omit hρ ha in
+/-- The symmetry `M ⊗ᴸ N ≅ N ⊗ᴸ M` is the braiding `DerivedCategory.braidedCategory'`. -/
+lemma derivedTensorBraidingIso_hom_eq (Λ : Type (u + 1)) [CommRing Λ] (M N : 𝐃(X, Λ)) :
+    (derivedTensorBraidingIso (ModuleCat.{u + 1} Λ) X M N).hom =
+      letI := DerivedCategory.braidedCategory' (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+      (β_ M N).hom :=
+  rfl
+
+omit hρ ha in
 /-- The extension of scalars of étale sheaves is compatible with the braidings: it is the strong
 monoidal left adjoint of the lax braided restriction of scalars. -/
 lemma sheafExtendScalars_map_braiding_comp_δ
@@ -117,6 +125,43 @@ lemma sheafExtendScalars_map_braiding_comp_δ
     (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} ρ)
   exact Adjunction.map_braiding_comp_δ (Sheaf.extendScalarsAdjunction X.smallEtaleTopology ρ) P Q
 
+/-- The braided structure of the derived extension of scalars `Ψ`, for the derived braidings
+`DerivedCategory.braidedCategory'` (`CategoryTheory.Functor.leftDerivedFunctorBraided`). Its
+monoidal structure is `AlgebraicGeometry.Etale.derivedExtendScalarsMonoidal`
+(`AlgebraicGeometry.Etale.derivedExtendScalarsMonoidal_eq_toMonoidal`). -/
+@[instance_reducible]
+noncomputable def derivedExtendScalarsBraided :
+    letI := derivedExtendScalarsMonoidal hρ ha X
+    letI := DerivedCategory.braidedCategory' (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    letI := DerivedCategory.braidedCategory' (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ'))
+    (derivedExtendScalars hρ ha X).Braided :=
+  haveI := preservesKFlatQuasiIso_extendScalars hρ ha X
+  (Sheaf.extendScalars X.smallEtaleTopology ρ).leftDerivedFunctorBraided
+    (sheafExtendScalars_map_braiding_comp_δ X)
+
+/-- The monoidal structure underlying `AlgebraicGeometry.Etale.derivedExtendScalarsBraided` is
+`AlgebraicGeometry.Etale.derivedExtendScalarsMonoidal`. -/
+lemma derivedExtendScalarsMonoidal_eq_toMonoidal :
+    letI := DerivedCategory.braidedCategory' (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    letI := DerivedCategory.braidedCategory' (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ'))
+    derivedExtendScalarsMonoidal hρ ha X = (derivedExtendScalarsBraided hρ ha X).toMonoidal :=
+  rfl
+
+/-- The comparison `δ` of the braided structure
+`AlgebraicGeometry.Etale.derivedExtendScalarsBraided` is compatible with the braidings. -/
+lemma derivedExtendScalarsBraided_map_braiding_comp_δ (M N : 𝐃(X, Λ)) :
+    letI := DerivedCategory.braidedCategory' (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    letI := DerivedCategory.braidedCategory' (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ'))
+    letI := derivedExtendScalarsBraided hρ ha X
+    (derivedExtendScalars hρ ha X).map (β_ M N).hom ≫ δ (derivedExtendScalars hρ ha X) N M =
+      δ (derivedExtendScalars hρ ha X) M N ≫
+        (β_ ((derivedExtendScalars hρ ha X).obj M) ((derivedExtendScalars hρ ha X).obj N)).hom := by
+  let := DerivedCategory.braidedCategory' (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+  let := DerivedCategory.braidedCategory' (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ'))
+  let := derivedExtendScalarsBraided hρ ha X
+  rw [Functor.map_braiding, Category.assoc, Category.assoc, Functor.Monoidal.μ_δ,
+    Category.comp_id]
+
 /-- The tensor comparison of `Ψ` is compatible with the symmetries. -/
 lemma derivedExtendScalars_map_derivedTensorBraidingIso (M N : 𝐃(X, Λ)) :
     (derivedExtendScalars hρ ha X).map
@@ -124,7 +169,11 @@ lemma derivedExtendScalars_map_derivedTensorBraidingIso (M N : 𝐃(X, Λ)) :
         (derivedExtendScalarsDerivedTensorIso hρ ha X N M).hom =
       (derivedExtendScalarsDerivedTensorIso hρ ha X M N).hom ≫
         (derivedTensorBraidingIso (ModuleCat.{u + 1} Λ') X _ _).hom := by
-  sorry
+  have h := derivedExtendScalarsBraided_map_braiding_comp_δ hρ ha X M N
+  rw [← derivedExtendScalarsMonoidal_eq_toMonoidal] at h
+  rw [derivedTensorBraidingIso_hom_eq, derivedTensorBraidingIso_hom_eq,
+    derivedExtendScalarsDerivedTensorIso_hom, derivedExtendScalarsDerivedTensorIso_hom]
+  exact h
 
 variable {X} in
 /-- The tensor comparison of `Ψ` is natural with respect to tensor products of morphisms. -/

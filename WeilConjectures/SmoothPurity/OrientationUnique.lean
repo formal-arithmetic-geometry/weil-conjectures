@@ -88,10 +88,10 @@ lemma isGE_leftDerivedFunctor_obj_integralTateTwist (n : ℕ) :
       (shiftFunctor _ (2 * d : ℤ)).mapIso (Functor.leftDerivedFunctorSingleFunctorIsoOfFlat _
         (isLocallyFree_integralTateTwistNat ℓ E.1 X.hom d).flat)).symm) _
 
-omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [LocallyOfFiniteType X.hom]
-  [QuasiCompact X.hom] [IsSeparated X.hom] in
 set_option maxHeartbeats 2000000 in
 -- the instances of the t-structure are found up to unfolding the bounded constructible subcategory
+omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [LocallyOfFiniteType X.hom]
+  [QuasiCompact X.hom] [IsSeparated X.hom] in
 /-- The shifted integral Tate twist `𝒪_{E,X}(d)[2d]`, shifted once more, is concentrated in
 degree `-2d - 1`. -/
 lemma isLE_shift_one_integralTateTwist :
