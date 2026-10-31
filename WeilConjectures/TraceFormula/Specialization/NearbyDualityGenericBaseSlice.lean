@@ -143,10 +143,10 @@ the `P`-invariants of `Ψ_{M''}` of the pullback of the coefficients, `P` the pr
 map of inertia groups of the strict localisation of `𝔸¹_S` at the generic point of its special
 fibre. The pullback of the dualizing complex of `X'` to `𝒳''_s` is the dualizing complex twisted
 by `ℚ̄_ℓ(1)[2]` (blueprint `det-pd-generic-dualizing-twist`), and the dualizing maps `θ` are
-compatible with slicing (blueprint `det-tf-nearby-duality-slice`; this is the hypothesis `H`), so that the
-pullback of `δ_{M,L}` is identified with the `P`-invariants of `δ_{M'',L'}(1)[2]`. The `P`-invariants are a direct
-summand cut out by an averaging idempotent (`P` is pro-`p` and `p ≠ ℓ`), and the restriction of an
-isomorphism to the two averaging summands is an isomorphism
+compatible with slicing (blueprint `det-tf-nearby-duality-slice`; this is the hypothesis `H`), so
+that the pullback of `δ_{M,L}` is identified with the `P`-invariants of `δ_{M'',L'}(1)[2]`. The
+`P`-invariants are a direct summand cut out by an averaging idempotent (`P` is pro-`p` and
+`p ≠ ℓ`), and the restriction of an isomorphism to the two averaging summands is an isomorphism
 (`CategoryTheory.isIso_comp_comp_map_op_of_averaging`). The formal part is
 `CategoryTheory.Verdier.isIso_map_nearbyDualityMap_of_averaging_of_eq`; the geometric inputs are
 `NearbyCyclesModel.IsTraitModelOfGenericBase.exists_averaging_genericSliceExchange`,

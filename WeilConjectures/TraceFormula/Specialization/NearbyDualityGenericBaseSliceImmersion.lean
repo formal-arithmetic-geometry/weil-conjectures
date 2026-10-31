@@ -15,6 +15,38 @@ import WeilConjectures.Tactic.TransportExact
 
 # The twist equation for quasi-projective opens
 
+This file proves the twist equation of the generic slice
+(`NearbyCyclesModel.IsTraitModelOfGenericBase.TwistEquation`, blueprint
+`det-tf-nearby-duality-slice`, the twist (1) and "the map `θ`") for the opens used in the
+induction of Gabber's theorem: opens `V` of the total space of a proper trait model `M_c` over
+a generic base which embed into an affine space over the trait `S`
+(`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_iso_map_θ_eq_twist_restrictOpen_of_immersion`).
+
+The proof follows the composition-law route:
+
+* `NearbyCyclesModel.exists_twist_restrictOpen_of_compactified`: for a proper model `N` over
+  `(η, X̄₁, 𝟙)` with a proper morphism `b̄ : N ⟶ ℙ¹_S` whose maps of fibres are projective, the
+  twist equation holds for `W = b̄⁻¹(𝔸¹_S)`. It is the composition law of `θ` along `b̄`
+  (`NearbyCyclesModel.exists_twist_of_slice_of_composition_law`), applied to the slice of `ℙ¹_S`,
+  whose dualizing maps and exchange are invertible, and passed from `N` to its open sub-model `W`.
+* `NearbyCyclesModel.exists_twist_of_isImmersion`: for a model over `(η, X₁, 𝟙)` with full
+  generic fibre whose total space is quasi-projective over `S`, by its projective compactification
+  along the coordinate
+  (`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_projectiveCoordinateCompactification`) and
+  open restriction.
+* `NearbyCyclesModel.IsTraitModelOfGenericBase.exists_iso_map_θ_eq_twist_restrictOpen_of_immersion`:
+  for `M_c|_V`, from its generic standard model `V ⟶ S` (re-basing to `η` and shrinking the base,
+  `TraceFormula.Specialization.NearbyDualityGenericBaseSliceShrink`).
+
+## Implementation notes
+
+The composition law is stated over abstract fields, and the field of fractions `Frac K⟦t⟧` of the
+slice trait carries two ring structures (`OreLocalization.instCommRing` and `Field.toCommRing`).
+The instantiation is therefore done with every argument explicit, the invertibility of the
+exchange of `ℙ¹_S` is re-derived in place from the shift decomposition of `ω_{ℙ¹_η}`, and the
+remaining conversions use `with_reducible exact` and `transport_exact`, so that neither the
+elaborator nor the kernel unfolds the large constructions.
+
 -/
 
 @[expose] public section
@@ -74,6 +106,11 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k'] [IsSepClosed k']
   {bW : (N.restrictOpen U).total ⟶ 𝔸(ULift.{u} (Fin 1); trait k')}
   (hbW : bW ≫ 𝔸(ULift.{u} (Fin 1); trait k') ↘ trait k' = U.ι ≫ qN)
 
+omit [IsSepClosed k'] [Fact (ringChar k').Prime] [LocallyOfFiniteType Xc.hom] [QuasiCompact Xc.hom]
+  [IsSeparated Xc.hom] [IsProper (CondensedRing.toPoint Xc).left] [LocallyOfFiniteType Xc'.hom]
+  [QuasiCompact Xc'.hom] [IsSeparated Xc'.hom] [IsProper (CondensedRing.toPoint Xc').left]
+  [LocallyOfFiniteType Y₁.hom] [QuasiCompact Y₁.hom] [IsSeparated Y₁.hom]
+  [LocallyOfFiniteType Y₂.hom] [QuasiCompact Y₂.hom] [IsSeparated Y₂.hom] [QuasiCompact U.ι] in
 include bc in
 /-- The total space of the generic slice of `W = b̄⁻¹(𝔸¹_S)` is proper over the slice trait. -/
 lemma isProper_pullback_snd_traitSlice_of_compactified [IsProper qN]
@@ -177,7 +214,8 @@ theorem exists_twist_restrictOpen_of_compactified (D : NearbyDualizingDataOfGene
       have : Smooth (ProjectiveLine (trait k') ↘ trait k') := SmoothOfRelativeDimension.smooth 1 _
       have : IsIso ((projectiveLineModel k').unit (Profinite.padicAlgClRingObj ℓ)) :=
         (isTraitModelOfGenericBase_projectiveLineModel k').isTraitModelOver.isIso_unit_of_smooth
-      have : IsIso ((sliceTraitModel (traitSliceField k')).unit (Profinite.padicAlgClRingObj ℓ)) := by
+      have : IsIso ((sliceTraitModel (traitSliceField k')).unit
+          (Profinite.padicAlgClRingObj ℓ)) := by
         have h : UpperStarInvertsLowerStarUnit (Profinite.padicAlgClRingObj ℓ)
             (traitGenericPoint (traitSliceField k')) (traitClosedPoint (traitSliceField k')) :=
           ⟨isIso_upperStar_traitClosedPoint_map_unit_app _ _,
@@ -219,13 +257,13 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k'] [IsSepClosed k']
 `det-tf-nearby-duality-slice`, "the map `θ`"): let `M` be a trait model over the generic base
 `(η, X₁, 𝟙)` with full generic fibre, whose total space is quasi-projective over `S`
 (an immersion `e : 𝒳 ⟶ ℙ(n; S)` over `S`), and `b` a coordinate of `M`. Then the twist equation
-of `NearbyCyclesModel.IsTraitModelOfGenericBase.exists_iso_map_θ_eq_twist_of_openSubmodel` holds
-for `M` and `b`.
+(`NearbyCyclesModel.IsTraitModelOfGenericBase.TwistEquation`) holds for `M` and `b`.
 
 `M` is an open sub-model of `W = b̄⁻¹(𝔸¹_S)` for the projective compactification `b̄ : N ⟶ ℙ¹_S`
 of `b` (`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_projectiveCoordinateCompactification`),
 whose twist equation is `NearbyCyclesModel.exists_twist_restrictOpen_of_compactified`; open
-restriction (`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_iso_map_θ_eq_twist_of_openSubmodel`)
+restriction
+(`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_iso_map_θ_eq_twist_of_openSubmodel`)
 passes it to `M`. -/
 theorem exists_twist_of_isImmersion (D : NearbyDualizingDataOfGenericBase k' ℓ)
     (DK : NearbyDualizingDataOfGenericBase (traitSliceField k') ℓ)
@@ -305,7 +343,7 @@ the twist equation (`NearbyCyclesModel.IsTraitModelOfGenericBase.TwistEquation`)
 
 The twist equation of `M_c|_V` follows from that of its generic standard model `V ⟶ S` over
 `(η, V_η, 𝟙)`
-(`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_iso_map_θ_eq_twist_restrictOpen_of_traitFibreModel`),
+(`IsTraitModelOfGenericBase.exists_iso_map_θ_eq_twist_restrictOpen_of_traitFibreModel`),
 which is quasi-projective over `S` through the standard chart `𝔸(ι_V; S) ⟶ ℙ(Option ι_V; S)`
 (`NearbyCyclesModel.exists_twist_of_isImmersion`). -/
 theorem exists_iso_map_θ_eq_twist_restrictOpen_of_immersion
@@ -321,18 +359,18 @@ theorem exists_iso_map_θ_eq_twist_restrictOpen_of_immersion
   have := hR.isSeparated
   have hT := isTraitModelOfGenericBase_traitFibreModel (V.ι ≫ qc)
   have hTM := hT.isTraitModelOver
-  have := hTM.locallyOfFiniteType_genericSliceBase (M := traitFibreModel (T := (Mc.restrictOpen V).total) (V.ι ≫ qc))
-    (traitSliceCoord k') hb
-  have := hTM.quasiCompact_genericSliceBase (M := traitFibreModel (T := (Mc.restrictOpen V).total) (V.ι ≫ qc))
-    (traitSliceCoord k') hb
-  have := hTM.isSeparated_genericSliceBase (M := traitFibreModel (T := (Mc.restrictOpen V).total) (V.ι ≫ qc))
-    (traitSliceCoord k') hb
-  have := hTM.locallyOfFiniteType_baseChangeSpecial_traitSlice (M := traitFibreModel (T := (Mc.restrictOpen V).total) (V.ι ≫ qc))
-    (traitSliceCoord k') hb
-  have := hTM.quasiCompact_baseChangeSpecial_traitSlice (M := traitFibreModel (T := (Mc.restrictOpen V).total) (V.ι ≫ qc))
-    (traitSliceCoord k') hb
-  have := hTM.isSeparated_baseChangeSpecial_traitSlice (M := traitFibreModel (T := (Mc.restrictOpen V).total) (V.ι ≫ qc))
-    (traitSliceCoord k') hb
+  have := hTM.locallyOfFiniteType_genericSliceBase
+    (M := traitFibreModel (T := (Mc.restrictOpen V).total) (V.ι ≫ qc)) (traitSliceCoord k') hb
+  have := hTM.quasiCompact_genericSliceBase
+    (M := traitFibreModel (T := (Mc.restrictOpen V).total) (V.ι ≫ qc)) (traitSliceCoord k') hb
+  have := hTM.isSeparated_genericSliceBase
+    (M := traitFibreModel (T := (Mc.restrictOpen V).total) (V.ι ≫ qc)) (traitSliceCoord k') hb
+  have := hTM.locallyOfFiniteType_baseChangeSpecial_traitSlice
+    (M := traitFibreModel (T := (Mc.restrictOpen V).total) (V.ι ≫ qc)) (traitSliceCoord k') hb
+  have := hTM.quasiCompact_baseChangeSpecial_traitSlice
+    (M := traitFibreModel (T := (Mc.restrictOpen V).total) (V.ι ≫ qc)) (traitSliceCoord k') hb
+  have := hTM.isSeparated_baseChangeSpecial_traitSlice
+    (M := traitFibreModel (T := (Mc.restrictOpen V).total) (V.ι ≫ qc)) (traitSliceCoord k') hb
   -- the generic standard model of `V` is quasi-projective over the trait
   classical
   have hn : Nat.card (Option ιV) = Nat.card ιV + 1 := by
@@ -341,9 +379,12 @@ theorem exists_iso_map_θ_eq_twist_restrictOpen_of_immersion
   have he : (cV ≫ AffineSpace.toRelativeProjectiveSpace ιV (trait k')) ≫
       ℙ(Option ιV; trait k') ↘ trait k' = V.ι ≫ qc := by
     rw [Category.assoc, AffineSpace.toRelativeProjectiveSpace_over, hcV]
-  exact exists_iso_map_θ_eq_twist_restrictOpen_of_traitFibreModel ℓ hMc V hb D DK hgen
-    (exists_twist_of_isImmersion hb D DK hT (exists_isIso_genericFibre_traitFibreModel _) hn
-      (cV ≫ AffineSpace.toRelativeProjectiveSpace ιV (trait k')) he)
+  have HT := exists_twist_of_isImmersion hb D DK hT (exists_isIso_genericFibre_traitFibreModel _) hn
+    (cV ≫ AffineSpace.toRelativeProjectiveSpace ιV (trait k')) he
+  unfold TwistEquation
+  refine exists_iso_map_θ_eq_twist_restrictOpen_of_traitFibreModel ℓ hMc V hb D DK hgen ?_
+  obtain ⟨u, v, huv⟩ := HT
+  exact ⟨u, v, by transport_exact huv⟩
 
 end IsTraitModelOfGenericBase
 
