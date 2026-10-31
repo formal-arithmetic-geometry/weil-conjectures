@@ -38,7 +38,7 @@ pretriangulated category) gives `Ri^! M ≅ Q₀`.
 
 Pulling the triangle back along `πP`, the first term becomes
 `πP^* Ri_* Q₀ ≅ Ri'_* πZ^* Q₀` (proper base change,
-`ProEtale.CondensedRing.isIso_baseChangeMap_app_of_isProper_padicAlgCl`) and the third term
+`ProEtale.CondensedRing.isIso_baseChangeMap_app_padicAlgCl_of_isProper`) and the third term
 `πP^* Rj_* j^* M ≅ Rj'_* πU^* j^* M` (base change along the field extension,
 `ProEtale.CondensedRing.isIso_baseChangeMap_app_padicAlgCl_of_fieldExtension`), which again
 receives no maps from the shifts of `Ri'_* Q`. The same formal lemma gives
@@ -272,7 +272,10 @@ theorem nonempty_iso_upperShriek_closedImmersion_of_fieldExtension
   let Tr' := (L((πP)^*⟦𝐐⟧)).mapTriangle.obj (Triangle.mk f (adjV.unit.app M.obj) h)
   have hT' : Tr' ∈ distTriang _ := (L((πP)^*⟦𝐐⟧)).map_distinguished _ hT
   have hbcZ : IsIso ((baseChangeMap 𝐐 sq.toCommSq).app Q₀.obj) :=
-    isIso_baseChangeMap_app_of_isProper_padicAlgCl ℓ sq.toCommSq sq Q₀.obj Q₀.property
+    have : IsNoetherian P.left := isNoetherian_of_locallyOfFiniteType P.hom
+    have : IsNoetherian P'.left := isNoetherian_of_locallyOfFiniteType P'.hom
+    isIso_baseChangeMap_app_padicAlgCl_of_isProper ℓ P.hom P'.hom sq.toCommSq sq Q₀.obj
+      Q₀.property
   let Q₀' := (boundedConstructibleUpperStarOfMap ℓ (X := Z) (Y := Z') πZ).obj Q₀
   let e₁' : (boundedConstructible _).ι.obj ((boundedConstructibleLowerStar ℓ i').obj Q₀') ≅
       Tr'.obj₁ :=

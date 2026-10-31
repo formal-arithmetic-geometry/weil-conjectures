@@ -236,6 +236,25 @@ noncomputable def traitPointSpecializationExchange
     ((traitModelOfPointMap ι₀).specialIdExchange_naturality
       (Profinite.padicAlgClRingObj ℓ) f.hom).symm
 
+/-- The unit comparison of the derived pullback on bounded constructible complexes is that of the
+ambient derived categories. -/
+lemma boundedConstructibleUpperStarOfMap_ε_hom {k₁ k₂ : Type u} [Field k₁] [Field k₂]
+    [Fact (ringChar k₁).Prime] [Fact (ringChar k₁ ≠ ℓ)] [Fact (ringChar k₂).Prime]
+    [Fact (ringChar k₂ ≠ ℓ)]
+    {X : Over (Spec (.of k₁))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+    {Y : Over (Spec (.of k₂))} [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+    (g : Y.left ⟶ X.left) :
+    (Functor.LaxMonoidal.ε (boundedConstructibleUpperStarOfMap ℓ (X := X) (Y := Y) g)).hom =
+      Functor.LaxMonoidal.ε L((g)^*⟦Profinite.padicAlgClRingObj ℓ⟧) :=
+  ObjectProperty.monoidalLift_ε_hom _ _
+
+/-- The unit comparison of the derived pullback is the inverse of
+`ProEtale.CondensedRing.leftDerivedUpperStarUnitIso`. -/
+lemma leftDerivedUpperStar_ε {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    Functor.LaxMonoidal.ε L((f)^*⟦Profinite.padicAlgClRingObj ℓ⟧) =
+      (leftDerivedUpperStarUnitIso (Profinite.padicAlgClRingObj ℓ) f).inv :=
+  rfl
+
 /-- The unit law of the exchange `NearbyCyclesModel.traitPointSpecializationExchange`, in an
 abstract category. -/
 private lemma unit_comp_specialIdExchange_aux {C : Type*} [Category C] {u₀ u₁ v₀ w₀ w₁ : C}
@@ -256,6 +275,15 @@ lemma traitPointSpecializationUnit_comp_exchange
           (Functor.LaxMonoidal.ε (boundedConstructibleUpperStarOfMap ℓ (X := point F)
             (Y := point (FractionRing (PowerSeries k'))) ι₀)) := by
   apply ObjectProperty.hom_ext
+  rw [ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.comp_hom]
+  change (traitModelOfPoint _).unit (Profinite.padicAlgClRingObj ℓ) ≫
+      (traitModelOfPointMap ι₀).specialIdExchange (Profinite.padicAlgClRingObj ℓ) (𝟙_ _) =
+    (traitModelOfPoint _).unit (Profinite.padicAlgClRingObj ℓ) ≫
+      ((traitModelOfPoint (traitGenericPointToSpec k')).nearbyCycles
+        (Profinite.padicAlgClRingObj ℓ)).map
+        (Functor.LaxMonoidal.ε (boundedConstructibleUpperStarOfMap ℓ (X := point F)
+          (Y := point (FractionRing (PowerSeries k'))) ι₀)).hom
+  rw [boundedConstructibleUpperStarOfMap_ε_hom, leftDerivedUpperStar_ε]
   have hnat :=
     (leftDerivedUpperStarId (Profinite.padicAlgClRingObj ℓ) (point k').left).inv.naturality
       ((traitModelOfPoint (traitGenericPointToSpec k' ≫ ι₀)).unit (Profinite.padicAlgClRingObj ℓ))
@@ -566,7 +594,7 @@ private lemma pushforwardExchange_app_comp_map_rebaseExchange_app_aux
   apply ObjectProperty.hom_ext
   simp only [ObjectProperty.FullSubcategory.comp_hom, traitPointSpecialization_map_hom,
     ebc, boundedConstructibleLowerStar_map_hom, hx, hw, eρ, hu]
-  cast_proofs hbc
+  exact hbc
 
 /-- **Re-basing and the proper exchanges** on bounded constructible complexes: the proper exchange
 `χ_F` of `M` over `F` followed by the re-basing exchange is the exchange `β` of the trait,

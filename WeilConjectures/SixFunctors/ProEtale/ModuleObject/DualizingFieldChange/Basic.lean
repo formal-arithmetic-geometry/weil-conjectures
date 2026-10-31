@@ -36,7 +36,7 @@ The map is the mate, under the adjunctions `Ra_* ⊣ Ra^!` and `Ra_{L*} ⊣ Ra_L
 the proper base change morphism `BC : πₛ^* Ra_* ⟶ Ra_{L*} π^*` on bounded constructible
 complexes (`ProEtale.CondensedRing.boundedConstructibleBaseChangeOfMap`), evaluated at the unit.
 `BC` is invertible by proper base change over an arbitrary base
-(`ProEtale.CondensedRing.isIso_baseChangeMap_app_of_isProper_padicAlgCl`). The formal part is
+(`ProEtale.CondensedRing.isIso_baseChangeMap_app_padicAlgCl_of_isProper`). The formal part is
 `CategoryTheory.Adjunction.unitBaseChange`.
 
 ## Not treated here
@@ -159,14 +159,17 @@ noncomputable def boundedConstructibleBaseChangeOfMap (sq : CommSq g' f'.left f.
 
 /-- **Proper base change** on bounded constructible complexes, for a cartesian square of schemes
 of finite type over possibly different fields: the restriction of
-`ProEtale.CondensedRing.isIso_baseChangeMap_app_of_isProper_padicAlgCl`. -/
+`ProEtale.CondensedRing.isIso_baseChangeMap_app_padicAlgCl_of_isProper`. -/
 theorem isIso_boundedConstructibleBaseChangeOfMap [IsProper f.left]
     (sq : IsPullback g' f'.left f.left g) :
     IsIso (boundedConstructibleBaseChangeOfMap ℓ sq.toCommSq) := by
   rw [NatTrans.isIso_iff_isIso_app]
   intro K
   rw [← ObjectProperty.isIso_hom_iff]
-  have := isIso_baseChangeMap_app_of_isProper_padicAlgCl ℓ sq.toCommSq sq K.obj K.property
+  have : IsNoetherian Y.left := isNoetherian_of_locallyOfFiniteType Y.hom
+  have : IsNoetherian Y'.left := isNoetherian_of_locallyOfFiniteType Y'.hom
+  have := isIso_baseChangeMap_app_padicAlgCl_of_isProper ℓ Y.hom Y'.hom sq.toCommSq sq K.obj
+    K.property
   unfold boundedConstructibleBaseChangeOfMap boundedConstructibleLowerStar
     boundedConstructibleUpperStarOfMap
   rw [NearbyCyclesModel.liftExchange_app_hom]

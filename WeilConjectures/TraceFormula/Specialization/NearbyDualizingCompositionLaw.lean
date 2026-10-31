@@ -120,10 +120,12 @@ lemma isIso_boundedConstructiblePushforwardExchange :
   have : IsSeparated q := hM.isTraitModelOver.isSeparated
   have : IsProper (φ.total ≫ q) := hq ▸ inferInstance
   have : IsProper φ.total := IsProper.of_comp φ.total q
+  have : IsNoetherian X₁.left := isNoetherian_of_locallyOfFiniteType X₁.hom
   rw [Hom.boundedConstructiblePushforwardExchange_eq_liftExchange]
   exact isIso_liftExchange_of_isIso_app _ _ _ _ _
-    fun K ↦ φ.isIso_pushforwardExchange_app_of_isProper (isPullback_i_of_hom hM hN i₂ φ hq)
-      (isPullback_ε_of_hom i₁ φ hg hMgen hNgen) K.property
+    fun K ↦ φ.isIso_pushforwardExchange_app_of_isProper X₁.hom
+      hN.isTraitModelOver.isTraitModel.exists_over hM.isTraitModelOver.isTraitModel.exists_over
+      (isPullback_i_of_hom hM hN i₂ φ hq) (isPullback_ε_of_hom i₁ φ hg hMgen hNgen) K.property
 
 variable [IsProper i₂.left]
 
