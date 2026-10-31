@@ -13,6 +13,7 @@ public import WeilConjectures.Tactic.TransportExact
 public import WeilConjectures.TraceFormula.Specialization.TraitModelRestrict
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethGeneric
 public import WeilConjectures.Tactic.ExactModProofs
+public meta import Lean.LibrarySuggestions.Basic
 
 /-!
 
@@ -70,11 +71,85 @@ lemma maximalIdeal_powerSeries_eq_map_ι :
   rw [D.maximalIdeal_eq, Ideal.map_map, ι_comp_φ,
     AlgebraicGeometry.maximalIdeal_powerSeries_eq_map k' (traitSliceField k')]
 
+/-- The characteristic of `k'` divides every natural number vanishing in the residue field of a
+generic slice trait. -/
+lemma ringChar_dvd_of_natCast_eq_zero (n : ℕ) (hn : (n : ResidueField D.R) = 0) :
+    ringChar k' ∣ n := by
+  rw [← map_natCast (IsLocalRing.residue D.R), IsLocalRing.residue_eq_zero_iff, ← D.ker_b,
+    RingHom.mem_ker, map_natCast] at hn
+  rw [← D.ringChar_κ]
+  exact ringChar.dvd hn
+
 end GenericSliceTrait
 
 namespace ProEtale.CondensedRing.NearbyCyclesModel
 
 open Scheme
+
+section Abstract
+
+/-- Invertibility of `H` applied to a natural transformation is transported along isomorphisms of
+objects. -/
+lemma _root_.CategoryTheory.NatTrans.isIso_map_app_of_iso {C D E : Type*} [Category C]
+    [Category D] [Category E] {F G : C ⥤ D} (η : F ⟶ G) (H : D ⥤ E) {o o' : C} (e : o ≅ o')
+    (h : IsIso (H.map (η.app o))) : IsIso (H.map (η.app o')) :=
+  (NatTrans.isIso_app_iff_of_iso (Functor.whiskerRight η H) e).1 h
+
+variable (T : Type) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] [DiscreteTopology T]
+  [Finite T]
+  {R₁ R₂ : Type u} [CommRing R₁] [IsDomain R₁] [IsDiscreteValuationRing R₁]
+  [IsStrictlyHenselianLocalRing R₁] [CommRing R₂] [IsDomain R₂] [IsDiscreteValuationRing R₂]
+  [IsStrictlyHenselianLocalRing R₂] {ι : R₁ →+* R₂}
+  {Ω₁ Ω₂ : Type u} [Field Ω₁] [IsAlgClosed Ω₁] [Field Ω₂] [IsAlgClosed Ω₂]
+  {a₁ : R₁ →+* Ω₁} {a₂ : R₂ →+* Ω₂} {c : Ω₁ →+* Ω₂}
+  {κ : Type u} [Field κ] [IsSepClosed κ] {b₂ : R₂ →+* κ}
+  {X X' Y Y' : Scheme.{u}} {M : NearbyCyclesModel X X'} {N : NearbyCyclesModel Y Y'}
+  {f : X ⟶ Y} {f' : X' ⟶ Y'}
+
+/-- **Invariance of nearby cycles under change of strictly henselian trait, finite coefficients
+`T`, on the models of the geometric generic fibres**: in the situation of
+`ProEtale.CondensedRing.isIso_pullbackExchange_app_of_isPullback_trait_finite`, the pullback
+exchange of `φ.toGeneric` is invertible at every complex `K` on the geometric generic fibre of `N`
+which is bounded below of étale origin. -/
+theorem Hom.isIso_pullbackExchange_toGeneric_app_of_isPullback_trait_finite [IsLocalHom ι]
+    (hι : Function.Injective ι) (hun : maximalIdeal R₂ = (maximalIdeal R₁).map ι)
+    (p : ℕ) [Fact p.Prime] (hp : ∀ n : ℕ, (n : ResidueField R₁) = 0 → p ∣ n)
+    (hpT : IsUnit (p : T)) (ha₁ : Function.Injective a₁) (ha₂ : Function.Injective a₂)
+    (halg₁ : letI := a₁.toAlgebra; Algebra.IsAlgebraic R₁ Ω₁)
+    (halg₂ : letI := a₂.toAlgebra; Algebra.IsAlgebraic R₂ Ω₂) (hc : c.comp a₁ = a₂.comp ι)
+    (hb₂ : RingHom.ker b₂ = maximalIdeal R₂)
+    (φ : M.Hom N f f') (q₁ : N.total ⟶ Spec (.of R₁)) [hq₁ : LocallyOfFiniteType q₁]
+    [hq₁' : QuasiCompact q₁] [hq₁'' : IsSeparated q₁] (g₁ : N.generic ⟶ Spec (.of Ω₁))
+    (hNj : IsPullback N.j g₁ q₁ (Spec.map (CommRingCat.ofHom a₁)))
+    (q₂ : M.total ⟶ Spec (.of R₂)) (g₂ : M.generic ⟶ Spec (.of Ω₂))
+    (hMj : IsPullback M.j g₂ q₂ (Spec.map (CommRingCat.ofHom a₂))) (p₂ : X' ⟶ Spec (.of κ))
+    (hMi : IsPullback M.i p₂ q₂ (Spec.map (CommRingCat.ofHom b₂)))
+    (hφ : IsPullback φ.total q₂ q₁ (Spec.map (CommRingCat.ofHom ι)))
+    (hgen : φ.generic ≫ g₁ = g₂ ≫ Spec.map (CommRingCat.ofHom c))
+    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology N.generic) Ab.{u + 1})
+      (condensedRingObj (Profinite.continuousMapRingObj T) N.generic)))
+    (hK : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} (ULift.{u + 1} T)) N.generic
+      ((finiteCoefficientDerivedEquivalence N.generic T).functor.obj K)) :
+    IsIso ((φ.toGeneric.pullbackExchange (Profinite.continuousMapRingObj T)).app K) := by
+  refine (Scheme.Hom.exists_locallyEmbedsInAffineSpace q₁).elim fun m hm ↦ ?_
+  have hw : (M.i ≫ φ.total) ≫ q₁ = p₂ ≫ Spec.map (CommRingCat.ofHom (b₂.comp ι)) := by
+    rw [Category.assoc, hφ.w, reassoc_of% hMi.w, CommRingCat.ofHom_comp, Spec.map_comp]
+  have h := (traitChangeInvariance T m).isIso ι hι hun p hp hpT a₁ a₂ c ha₁
+    ha₂ halg₁ halg₂ hc b₂ hb₂ (φ.toGenericWithSpecial (pullback.fst _ _)
+      (pullback.lift (M.i ≫ φ.total) p₂ hw) (pullback.lift_fst _ _ _)) q₁ inferInstance
+    inferInstance inferInstance hm g₁ hNj (pullback.snd _ _) (IsPullback.of_hasPullback _ _) q₂
+    g₂ hMj p₂ hMi hφ hgen (pullback.lift_snd _ _ _) K hK
+  have h' := Hom.isIso_map_exchangeRight_app_of_isIso_pullbackExchange_toGenericWithSpecial
+    (Profinite.continuousMapRingObj T) φ (pullback.fst _ _) (pullback.lift (M.i ≫ φ.total) p₂ hw)
+    (pullback.lift_fst _ _ _) K (by exact_mod_proofs h)
+  have h₃ := Hom.isIso_pullbackExchange_app_of_isIso_map_exchangeRight_app
+    (Profinite.continuousMapRingObj T) φ.toGeneric K (by
+      refine NatTrans.isIso_map_app_of_iso _ _
+        ((leftDerivedUpperStarId (Profinite.continuousMapRingObj T) N.generic).app K).symm ?_
+      transport_exact h')
+  exact_mod_proofs h₃
+
+end Abstract
 
 variable {k' : Type u} [Field k'] {X : Scheme.{u}} {X' : Over (Spec (.of k'))}
   {M : NearbyCyclesModel X X'.left} {q : M.total ⟶ trait k'}
@@ -172,10 +247,8 @@ noncomputable def traitSliceGenericSliceTraitHom :
   comm_i := traitSliceGenericSliceTraitSpecial_fst b D
   comm_ε := traitSliceGenericSliceTraitGeneric_fst hM b hb D
 
-variable [IsSepClosed k'] [Fact (ringChar k').Prime]
+variable [Fact (ringChar k').Prime]
 
-set_option maxHeartbeats 1600000 in
--- debugging
 /-- **Invariance of the nearby cycles of the slice under the change of trait `T ⟶ S'`**, finite
 coefficients (SGA 4½, [Th. finitude], Prop. 3.7): the pullback exchange of the change of trait
 `τ : M'' ⟶ M'` on the models of the geometric generic fibres is invertible at every complex `K`
@@ -196,57 +269,49 @@ theorem isIso_pullbackExchange_traitSliceGenericSliceTraitHom_finite
   have := hM.locallyOfFiniteType
   have := hM.quasiCompact
   have := hM.isSeparated
-  subst hb
-  have : LocallyOfFiniteType b :=
-    locallyOfFiniteType_of_comp b (𝔸(ULift.{u} (Fin 1); trait k') ↘ trait k')
-  have : QuasiCompact b := QuasiCompact.of_comp b (𝔸(ULift.{u} (Fin 1); trait k') ↘ trait k')
-  have : IsSeparated b := IsSeparated.of_comp b (𝔸(ULift.{u} (Fin 1); trait k') ↘ trait k')
-  have : LocallyOfFiniteType (sliceTraitStructure D.toSliceTrait M b) :=
+  have : LocallyOfFiniteType b := by
+    subst hb
+    exact locallyOfFiniteType_of_comp b (𝔸(ULift.{u} (Fin 1); trait k') ↘ trait k')
+  have : QuasiCompact b := by
+    subst hb
+    exact QuasiCompact.of_comp b (𝔸(ULift.{u} (Fin 1); trait k') ↘ trait k')
+  have : IsSeparated b := by
+    subst hb
+    exact IsSeparated.of_comp b (𝔸(ULift.{u} (Fin 1); trait k') ↘ trait k')
+  have h₁ : LocallyOfFiniteType (sliceTraitStructure D.toSliceTrait M b) :=
     MorphismProperty.of_isPullback (IsPullback.of_hasPullback b D.toAffineLine) inferInstance
-  have : QuasiCompact (sliceTraitStructure D.toSliceTrait M b) :=
+  have h₂ : QuasiCompact (sliceTraitStructure D.toSliceTrait M b) :=
     MorphismProperty.of_isPullback (IsPullback.of_hasPullback b D.toAffineLine) inferInstance
-  have : IsSeparated (sliceTraitStructure D.toSliceTrait M b) :=
+  have h₃ : IsSeparated (sliceTraitStructure D.toSliceTrait M b) :=
     MorphismProperty.of_isPullback (IsPullback.of_hasPullback b D.toAffineLine) inferInstance
-  have hp : (ringChar k').Prime := Fact.out
-  have hres : ∀ n : ℕ, (n : ResidueField D.R) = 0 → ringChar k' ∣ n := fun n hn ↦ by
-    rw [← map_natCast (IsLocalRing.residue D.R), IsLocalRing.residue_eq_zero_iff, ← D.ker_b,
-      RingHom.mem_ker, map_natCast] at hn
-    rw [← D.ringChar_κ]
-    exact ringChar.dvd hn
-  let φ := traitSliceGenericSliceTraitHom hM b rfl D
-  refine (Scheme.Hom.exists_locallyEmbedsInAffineSpace
-    (sliceTraitStructure D.toSliceTrait M b)).elim fun m hm ↦ ?_
-  have hw : (pullback.fst (pullback.snd b (traitSlice (traitSliceCoord k')))
-      (traitClosedPoint (traitSliceField k')) ≫ φ.total) ≫
-        sliceTraitStructure D.toSliceTrait M b =
-      pullback.snd _ _ ≫ Spec.map (CommRingCat.ofHom
-        ((PowerSeries.constantCoeff (R := traitSliceField k')).comp D.ι)) := by
-    rw [Category.assoc, ← (isPullback_traitSliceGenericSliceTraitTotal b D).w,
-      pullback.condition_assoc, traitClosedPoint, CommRingCat.ofHom_comp, Spec.map_comp]
-  have : Fact (ringChar k').Prime := ⟨hp⟩
-  have h := (traitChangeInvariance T₀ m).isIso D.ι D.injective_ι
-    D.maximalIdeal_powerSeries_eq_map_ι (ringChar k') hres hpT D.a
-    (algebraMap (PowerSeries (traitSliceField k')) (traitGenericField (traitSliceField k')))
-    D.ωK D.injective_a (algebraMap_traitGenericField_injective _) D.isAlgebraic_a
-    (isAlgebraic_traitGenericField _) D.ωK_comp_a PowerSeries.constantCoeff
-    PowerSeries.ker_coeff_eq_max_ideal
-    (φ.toGenericWithSpecial (pullback.fst _ _) (pullback.lift
-      (pullback.fst (pullback.snd b (traitSlice (traitSliceCoord k')))
-        (traitClosedPoint (traitSliceField k')) ≫ φ.total) (pullback.snd _ _) hw)
-      (pullback.lift_fst _ _ _))
-    (sliceTraitStructure D.toSliceTrait M b) inferInstance inferInstance inferInstance hm
-    (pullback.snd _ _) (isPullback_sliceTraitModel_j D.toSliceTrait M b)
-    (pullback.snd _ _) (IsPullback.of_hasPullback _ _)
-    (pullback.snd _ _) (pullback.snd _ _) (IsPullback.of_hasPullback _ _)
-    (pullback.snd _ _) (IsPullback.of_hasPullback _ _)
+  have h := Hom.isIso_pullbackExchange_toGeneric_app_of_isPullback_trait_finite T₀
+    (R₁ := D.R) (R₂ := PowerSeries (traitSliceField k')) (ι := D.ι)
+    (Ω₁ := D.Ω) (Ω₂ := traitGenericField (traitSliceField k')) (a₁ := D.a)
+    (a₂ := algebraMap (PowerSeries (traitSliceField k')) (traitGenericField (traitSliceField k')))
+    (c := D.ωK) (κ := traitSliceField k') (b₂ := PowerSeries.constantCoeff)
+    (M := (baseChange hM b hb (traitSlice (traitSliceCoord k')) (traitSlice_over _)).geometric)
+    (N := sliceTraitModel D.toSliceTrait M b) (f := traitSliceGenericSliceTraitTotal b D)
+    (f' := traitSliceGenericSliceTraitSpecial b D) (hq₁ := by exact_mod_proofs h₁)
+    (hq₁' := by exact_mod_proofs h₂) (hq₁'' := by exact_mod_proofs h₃)
+    D.injective_ι D.maximalIdeal_powerSeries_eq_map_ι (ringChar k')
+    D.ringChar_dvd_of_natCast_eq_zero hpT D.injective_a (algebraMap_traitGenericField_injective _)
+    D.isAlgebraic_a (isAlgebraic_traitGenericField _) D.ωK_comp_a
+    PowerSeries.ker_coeff_eq_max_ideal (traitSliceGenericSliceTraitHom hM b hb D)
+    (sliceTraitStructure D.toSliceTrait M b) (pullback.snd _ _)
+    (isPullback_sliceTraitModel_j D.toSliceTrait M b)
+    (pullback.snd b (traitSlice (traitSliceCoord k'))) (pullback.snd _ _)
+    (IsPullback.of_hasPullback _ _) (pullback.snd _ _) (IsPullback.of_hasPullback _ _)
     (isPullback_traitSliceGenericSliceTraitTotal b D)
-    (traitSliceGenericSliceTraitGeneric_snd hM b rfl D) (pullback.lift_snd _ _ _) K (by exact_mod_proofs hK)
-  have h' := Hom.isIso_map_exchangeRight_app_of_isIso_pullbackExchange_toGenericWithSpecial
-    _ φ _ _ _ K h
-  have h₃ := Hom.isIso_pullbackExchange_app_of_isIso_map_exchangeRight_app _ φ.toGeneric K
-    (by transport_exact h')
-  exact_mod_proofs h₃
+    (traitSliceGenericSliceTraitGeneric_snd hM b hb D) K (by exact_mod_proofs hK)
+  exact_mod_proofs h
 
 end ProEtale.CondensedRing.NearbyCyclesModel
 
 end AlgebraicGeometry
+
+-- The library-suggestion symbol frequency index traverses the statements of public theorems
+-- without sharing at export, which takes minutes on the pullback exchanges of these concrete
+-- models; they are excluded from the premise index.
+run_cmd Lean.modifyEnv (fun env => List.foldl Lean.LibrarySuggestions.nameDenyListExt.addEntry env
+  ["isIso_pullbackExchange_toGeneric_app_of_isPullback_trait_finite",
+      "isIso_pullbackExchange_traitSliceGenericSliceTraitHom_finite"])
