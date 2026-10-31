@@ -8,7 +8,7 @@ module
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ReductionExtendScalars
 public import WeilConjectures.CategoryTheory.Monoidal.Conjugate
 public import WeilConjectures.CategoryTheory.Sites.PushforwardMonoidal
-public import WeilConjectures.CategoryTheory.Sites.SheafComposeMonoidal
+public import WeilConjectures.CategoryTheory.Sites.SheafComposePushforwardMonoidal
 public import WeilConjectures.SixFunctors.BaseChange.RestrictScalars
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
 
@@ -36,34 +36,13 @@ open MonoidalCategory Functor.LaxMonoidal
 section SheafCompose
 
 variable {C : Type*} [Category C] (J : GrothendieckTopology C)
-  {A : Type*} [Category A] [MonoidalCategory A] [BraidedCategory A]
-  {B : Type*} [Category B] [MonoidalCategory B] [BraidedCategory B]
+  {A : Type*} [Category A] [MonoidalCategory A]
+  {B : Type*} [Category B] [MonoidalCategory B]
   [(J.W (A := A)).IsMonoidal] [HasWeakSheafify J A]
   [(J.W (A := B)).IsMonoidal] [HasWeakSheafify J B]
   (G : A ⥤ B) [J.HasSheafCompose G] [G.LaxMonoidal]
 
 attribute [local instance] Sheaf.monoidalCategory
-
-/-- The comparison `sheafToPresheafCompWhiskeringRightIsoSheafCompose` is the identity on
-components, by the triangle identity of sheafification. -/
-lemma sheafToPresheafCompWhiskeringRightIsoSheafCompose_hom_app (P : Sheaf J A) :
-    (sheafToPresheafCompWhiskeringRightIsoSheafCompose J G).hom.app P = 𝟙 _ := by
-  simp [sheafToPresheafCompWhiskeringRightIsoSheafCompose,
-    sheafToPresheafCompWhiskeringRightCompPresheafToSheafIso]
-  rfl
-
-/-- The unit of the lax monoidal postcomposition `sheafCompose J G`, read on underlying
-presheaves after the unit of `sheafToPresheaf`, is the postcomposition with `G` of the unit of
-`sheafToPresheaf`. -/
-lemma ε_sheafToPresheaf_comp_map_ε_sheafCompose :
-    ε (sheafToPresheaf J B) ≫ (sheafToPresheaf J B).map (ε (sheafCompose J G)) =
-      ε ((Functor.whiskeringRight _ _ _).obj G) ≫
-        ((Functor.whiskeringRight _ _ _).obj G).map (ε (sheafToPresheaf J A)) := by
-  have h := NatTrans.IsMonoidal.unit
-    (τ := (sheafToPresheafCompWhiskeringRightIsoSheafCompose J G).hom)
-  rw [sheafToPresheafCompWhiskeringRightIsoSheafCompose_hom_app, Functor.LaxMonoidal.comp_ε,
-    Functor.LaxMonoidal.comp_ε] at h
-  simpa using h.symm
 
 /-- The componentwise form of `CategoryTheory.ε_sheafToPresheaf_comp_map_ε_sheafCompose`. -/
 @[reassoc]
@@ -71,22 +50,6 @@ lemma ε_sheafToPresheaf_app_comp_ε_sheafCompose_app (U : Cᵒᵖ) :
     (ε (sheafToPresheaf J B)).app U ≫ (ε (sheafCompose J G)).hom.app U =
       ε G ≫ G.map ((ε (sheafToPresheaf J A)).app U) := by
   simpa using congr_app (ε_sheafToPresheaf_comp_map_ε_sheafCompose J G) U
-
-/-- The tensor map of the lax monoidal postcomposition `sheafCompose J G`, read on underlying
-presheaves after the tensor map of `sheafToPresheaf`, is the postcomposition with `G` of the
-tensor map of `sheafToPresheaf`. -/
-lemma μ_sheafToPresheaf_comp_map_μ_sheafCompose (P Q : Sheaf J A) :
-    μ (sheafToPresheaf J B) ((sheafCompose J G).obj P) ((sheafCompose J G).obj Q) ≫
-        (sheafToPresheaf J B).map (μ (sheafCompose J G) P Q) =
-      μ ((Functor.whiskeringRight _ _ _).obj G) P.obj Q.obj ≫
-        ((Functor.whiskeringRight _ _ _).obj G).map (μ (sheafToPresheaf J A) P Q) := by
-  have h := NatTrans.IsMonoidal.tensor
-    (τ := (sheafToPresheafCompWhiskeringRightIsoSheafCompose J G).hom) P Q
-  rw [sheafToPresheafCompWhiskeringRightIsoSheafCompose_hom_app,
-    sheafToPresheafCompWhiskeringRightIsoSheafCompose_hom_app,
-    sheafToPresheafCompWhiskeringRightIsoSheafCompose_hom_app, Functor.LaxMonoidal.comp_μ,
-    Functor.LaxMonoidal.comp_μ] at h
-  simpa using h.symm
 
 /-- The componentwise form of `CategoryTheory.μ_sheafToPresheaf_comp_map_μ_sheafCompose`. -/
 @[reassoc]
@@ -139,6 +102,22 @@ lemma extendScalarsUpperStarIso_inv :
     (extendScalarsUpperStarIso ρ e).inv = (conjugateEquiv (extendScalarsUpperStarAdjunction ρ e)
       (upperStarExtendScalarsAdjunction ρ e)).symm (lowerStarCompRestrictScalarsIso ρ e).hom :=
   rfl
+
+/-- The commutation `F_X ⋙ e^* ≅ e^* ⋙ F_U` is the mate, along the adjunctions `F ⊣ Res`, of the
+commutation `Res ⋙ e^* ≅ e^* ⋙ Res` (`AlgebraicGeometry.Etale.upperStarRestrictScalarsIso`):
+both come from the identification `e_* ⋙ Res ≅ Res ⋙ e_*`. -/
+lemma mateEquiv_extendScalarsUpperStarIso_inv :
+    mateEquiv (Sheaf.extendScalarsAdjunction X.smallEtaleTopology ρ)
+        (Sheaf.extendScalarsAdjunction U.smallEtaleTopology ρ) (extendScalarsUpperStarIso ρ e).inv =
+      (upperStarRestrictScalarsIso ρ e).hom := by
+  have h := iterated_mateEquiv_conjugateEquiv
+    (Sheaf.extendScalarsAdjunction X.smallEtaleTopology ρ)
+    (Sheaf.extendScalarsAdjunction U.smallEtaleTopology ρ)
+    (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) e)
+    (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ') e) (extendScalarsUpperStarIso ρ e).inv
+  rw [extendScalarsUpperStarIso_inv, Equiv.apply_symm_apply] at h
+  rw [upperStarRestrictScalarsIso, asIso_hom, upperStarRestrictScalars, ← h]
+  exact ((mateEquiv _ _).symm_apply_apply _).symm
 
 section Monoidal
 

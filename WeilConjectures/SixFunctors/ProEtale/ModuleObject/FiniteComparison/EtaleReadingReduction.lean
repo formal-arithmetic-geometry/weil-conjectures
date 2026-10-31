@@ -224,6 +224,36 @@ lemma etaleReductionExtendScalarsIso_hom_app
           ((boundedConstructibleIntegersModPowReductionTransitionIso ℓ E n X.left).hom.app K) :=
   rfl
 
+/-- The component at `K` of `etaleReductionExtendScalarsIso`, between the objects
+`Ψ(ρ(red_{n+1} K))` and `ρ(red_n K)` written with the étale readings `ρ`
+(`finiteEtaleReading`). -/
+noncomputable def etaleReductionExtendScalarsIsoApp
+    (K : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) :
+    (integersModPowDerivedExtendScalars ℓ E n X.left).obj ((finiteEtaleReading ℓ E (n + 1) X).obj
+        ((boundedConstructibleIntegersModPowReduction X.left ℓ E (n + 1)).obj K)) ≅
+      (finiteEtaleReading ℓ E n X).obj ((boundedConstructibleIntegersModPowReduction X.left ℓ E n).obj K) :=
+  have := isIso_finiteEtaleReadingExtendScalarsMap_app ℓ E n X K
+  asIso ((finiteEtaleReadingExtendScalarsMap ℓ E n X).app
+      ((boundedConstructibleIntegersModPowReduction X.left ℓ E (n + 1)).obj K)) ≪≫
+    ((finiteCoefficientDerivedEquivalence X.left (PadicAlgCl.integersModPow ℓ E n)).functor ⋙
+      R(ν_*(X.left)[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)])).mapIso
+      ((boundedConstructibleIntegersModPowReductionTransitionIso ℓ E n X.left).app K)
+
+lemma etaleReductionExtendScalarsIsoApp_hom
+    (K : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) :
+    (etaleReductionExtendScalarsIsoApp ℓ E n X K).hom =
+      (finiteEtaleReadingExtendScalarsMap ℓ E n X).app
+          ((boundedConstructibleIntegersModPowReduction X.left ℓ E (n + 1)).obj K) ≫
+        ((finiteCoefficientDerivedEquivalence X.left (PadicAlgCl.integersModPow ℓ E n)).functor ⋙
+          R(ν_*(X.left)[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)])).map
+          ((boundedConstructibleIntegersModPowReductionTransitionIso ℓ E n X.left).hom.app K) :=
+  rfl
+
+lemma etaleReductionExtendScalarsIso_app
+    (K : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) :
+    (etaleReductionExtendScalarsIso ℓ E n X).app K = etaleReductionExtendScalarsIsoApp ℓ E n X K :=
+  Iso.ext (etaleReductionExtendScalarsIso_hom_app ℓ E n X K)
+
 end Reading
 
 end AlgebraicGeometry.ProEtale.CondensedRing

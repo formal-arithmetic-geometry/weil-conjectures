@@ -260,6 +260,25 @@ lemma _root_.CategoryTheory.Functor.map_shift_comp_shiftFunctorAdd'_inv_app {C D
 
 end Boundary
 
+section Constant
+
+/-- The identifications `Ψ Λ_X ≅ Λ'_X` are compatible with the derived pullbacks, in the form
+used to restrict classes. -/
+@[reassoc]
+lemma leftDerivedUpperStar_map_derivedExtendScalarsConstantComplexIso_inv {U X : Scheme.{u}}
+    (e : U ⟶ X) :
+    (L((e)^*[ModuleCat.{u + 1} Λ'])).map (derivedExtendScalarsConstantComplexIso hρ ha X).inv ≫
+        (derivedExtendScalarsPullbackIso hρ ha e).inv.app _ ≫
+          (derivedExtendScalars hρ ha U).map (leftDerivedUpperStarConstantComplexIso Λ e).hom =
+      (leftDerivedUpperStarConstantComplexIso Λ' e).hom ≫
+        (derivedExtendScalarsConstantComplexIso hρ ha U).inv := by
+  rw [← cancel_mono (derivedExtendScalarsConstantComplexIso hρ ha U).hom, Category.assoc,
+    Category.assoc, derivedExtendScalarsConstantComplexIso_hom_pullback, Iso.inv_hom_id_app_assoc,
+    ← Functor.map_comp_assoc, Iso.inv_hom_id, CategoryTheory.Functor.map_id, Category.id_comp,
+    Category.assoc, Iso.inv_hom_id, Category.comp_id]
+
+end Constant
+
 section Class
 
 attribute [local instance] HasInvertibleExponent.opens
@@ -289,19 +308,141 @@ theorem derivedExtendScalars_map_localizationBoundaryClass
       localizationBoundaryClass Λ' f ((derivedExtendScalarsConstantComplexIso hρ ha _).inv ≫
         (derivedExtendScalars hρ ha _).map α ≫
           ((derivedExtendScalars hρ ha _).commShiftIso (1 : ℤ)).hom.app _ ≫ σV.hom⟦(1 : ℤ)⟧') := by
-  set j := (U.basicOpen f).ι
-  set i := U.zeroLocusSubschemeι {f}
   have hij := range_zeroLocusSubschemeι_singleton f
   have key₁ := Functor.map_shift_comp_shiftFunctorAdd'_inv_app (derivedExtendScalars hρ ha U)
-    (supportedLocalizationBoundary Λ i j hij (tateObject Λ U 1))
-    (derivedExtendScalarsSupportsMap hρ ha i σU)
-  have key₂ := map_supportedLocalizationBoundary_comp hρ ha i j hij _ _ σU
-  have key₃ := map_adjoint_comp_derivedExtendScalarsLowerStarMap hρ ha j (constantComplex Λ U)
-    _ _ ((leftDerivedUpperStarConstantComplexIso Λ j).hom ≫ α ≫
-      (leftDerivedUpperStarTateObjectIso j 1).inv⟦(1 : ℤ)⟧')
-    ((derivedExtendScalarsPullbackIso hρ ha j).hom.app _ ≫ (L((j)^*[ModuleCat.{u + 1} Λ'])).map σU.hom)
-  have hc := derivedExtendScalarsConstantComplexIso_hom_pullback hρ ha j
-  sorry
+    (supportedLocalizationBoundary Λ (U.zeroLocusSubschemeι {f}) (U.basicOpen f).ι hij
+      (tateObject Λ U 1))
+    (derivedExtendScalarsSupportsMap hρ ha (U.zeroLocusSubschemeι {f}) σU)
+  have key₂ := map_supportedLocalizationBoundary_comp hρ ha (U.zeroLocusSubschemeι {f})
+    (U.basicOpen f).ι hij _ _ σU
+  have key₃ := map_adjoint_comp_derivedExtendScalarsLowerStarMap hρ ha (U.basicOpen f).ι
+    (constantComplex Λ U) _ _ ((leftDerivedUpperStarConstantComplexIso Λ (U.basicOpen f).ι).hom ≫
+      α ≫ (leftDerivedUpperStarTateObjectIso (U.basicOpen f).ι 1).inv⟦(1 : ℤ)⟧')
+    ((derivedExtendScalarsPullbackIso hρ ha (U.basicOpen f).ι).hom.app _ ≫
+      (L(((U.basicOpen f).ι)^*[ModuleCat.{u + 1} Λ'])).map σU.hom)
+  -- the restriction to `U_f` of the class
+  have h₁ := leftDerivedUpperStar_map_derivedExtendScalarsConstantComplexIso_inv hρ ha
+    (U.basicOpen f).ι
+  have h₂ : (derivedExtendScalars hρ ha (U.basicOpen f)).map
+        (leftDerivedUpperStarTateObjectIso (Λ := Λ) (U.basicOpen f).ι 1).inv ≫
+      (derivedExtendScalarsPullbackIso hρ ha (U.basicOpen f).ι).hom.app _ ≫
+        (L(((U.basicOpen f).ι)^*[ModuleCat.{u + 1} Λ'])).map σU.hom =
+      σV.hom ≫ (leftDerivedUpperStarTateObjectIso (Λ := Λ') (U.basicOpen f).ι 1).inv := by
+    rw [← cancel_mono (leftDerivedUpperStarTateObjectIso (Λ := Λ') (U.basicOpen f).ι 1).hom,
+      Category.assoc, Category.assoc, ← hσ, ← Functor.map_comp_assoc, Iso.inv_hom_id,
+      CategoryTheory.Functor.map_id, Category.id_comp, Category.assoc, Iso.inv_hom_id,
+      Category.comp_id]
+  have h₂s := (shiftFunctor _ (1 : ℤ)).congr_map h₂
+  rw [localizationBoundaryClass, localizationBoundaryClass, Adjunction.homEquiv_unit,
+    Adjunction.homEquiv_unit]
+  have key₂s := (shiftFunctor _ (1 : ℤ)).congr_map key₂
+  simp only [Functor.map_comp, Category.assoc] at key₁ key₂s key₃ h₂s ⊢
+  rw [key₁, reassoc_of% key₂s, reassoc_of% key₃]
+  have hn := (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ') (U.basicOpen f).ι).unit.naturality
+    (derivedExtendScalarsConstantComplexIso hρ ha U).inv
+  have hν := ((derivedExtendScalars hρ ha (U.basicOpen f)).commShiftIso (1 : ℤ)).hom.naturality
+    (leftDerivedUpperStarTateObjectIso (Λ := Λ) (U.basicOpen f).ι 1).inv
+  have h₁' := (R(((U.basicOpen f).ι)_*[ModuleCat.{u + 1} Λ'])).congr_map h₁
+  have hν' := (R(((U.basicOpen f).ι)_*[ModuleCat.{u + 1} Λ'])).congr_map hν
+  have h₂' := (R(((U.basicOpen f).ι)_*[ModuleCat.{u + 1} Λ'])).congr_map h₂s
+  simp only [Functor.id_map, Functor.comp_map, Functor.id_obj, Functor.comp_obj,
+    Functor.map_comp] at hn h₁' hν' h₂'
+  simp only [reassoc_of% hn, reassoc_of% h₁', reassoc_of% hν', reassoc_of% h₂']
+
+omit [HasInvertibleExponent Λ U] [HasInvertibleExponent Λ' U] in
+lemma reductionSupportedCoefficientChange_functor
+    (τ : DerivedExtendScalarsTateShiftData Λ Λ' hρ ha) (X : Scheme.{u}) :
+    (reductionSupportedCoefficientChange hρ ha τ).functor X = derivedExtendScalars hρ ha X :=
+  rfl
+
+omit [HasInvertibleExponent Λ U] [HasInvertibleExponent Λ' U] in
+lemma reductionSupportedCoefficientChange_constantComplexIso
+    (τ : DerivedExtendScalarsTateShiftData Λ Λ' hρ ha) (X : Scheme.{u}) :
+    (reductionSupportedCoefficientChange hρ ha τ).constantComplexIso X =
+      derivedExtendScalarsConstantComplexIso hρ ha X := by
+  unfold reductionSupportedCoefficientChange
+  rfl
+
+omit [HasInvertibleExponent Λ U] [HasInvertibleExponent Λ' U] in
+/-- The comparison of supports of `AlgebraicGeometry.Etale.reductionSupportedCoefficientChange`
+is `AlgebraicGeometry.Etale.derivedExtendScalarsSupportsMap`: both are characterized by their
+composites with the counit. -/
+lemma reductionSupportedCoefficientChange_supportsMap
+    (τ : DerivedExtendScalarsTateShiftData Λ Λ' hρ ha) {X Z : Scheme.{u}} (i : Z ⟶ X)
+    [IsClosedImmersion i] {L : 𝐃(X, Λ)} {L' : 𝐃(X, Λ')}
+    (σ : (derivedExtendScalars hρ ha X).obj L ≅ L') :
+    (reductionSupportedCoefficientChange hρ ha τ).supportsMap i σ =
+      derivedExtendScalarsSupportsMap hρ ha i σ := by
+  have hd : Disjoint (Set.range i.base) (Set.range i.openComplement.ι.base) := by
+    rw [i.range_eq_compl_range_openComplement_ι]
+    exact disjoint_compl_left
+  have hz : IsZero ((L((i.openComplement.ι)^*[ModuleCat.{u + 1} Λ'])).obj
+      ((derivedExtendScalars hρ ha X).obj ((R(i)_![ModuleCat.{u + 1} Λ]).obj ((R(i)^![Λ]).obj L)))) :=
+    (isZero_leftDerivedUpperStar_obj_rightDerivedLowerShriek_of_disjoint (ModuleCat.{u + 1} Λ')
+      i i.openComplement.ι hd i.openComplement.ι subset_rfl
+      ((derivedExtendScalars hρ ha Z).obj ((R(i)^![Λ]).obj L))).of_iso
+      ((L((i.openComplement.ι)^*[ModuleCat.{u + 1} Λ'])).mapIso
+        ((derivedExtendScalarsLowerShriekIso hρ ha i).app _))
+  exact (existsUnique_comp_counit_of_isZero Λ' i i.openComplement.ι
+    i.range_eq_compl_range_openComplement_ι hz _).unique
+    ((reductionSupportedCoefficientChange hρ ha τ).supportsMap_comp_counit i σ)
+    (derivedExtendScalarsSupportsMap_comp_counit hρ ha i σ)
+
+/-- Blueprint `det-sp-purity-coefficient-change`: change of coefficients in purity
+
+**The reduction of coefficients commutes with the localization boundaries on classes** (the
+hypothesis `hδ` of `MonoidalSupportedCoefficientChange.preservesKummerBoundaries`), for Tate data
+`τ` whose degree-one component is `Ψ(Λ_U(1)[2]) ≅ (Ψ Λ_U(1))[2] ≅ Λ'_U(1)[2]` for identifications
+`σ X : Ψ Λ_X(1) ≅ Λ'_X(1)` compatible with the restriction to `U_f`. -/
+theorem reductionSupportedCoefficientChange_mapSupportedClass_localizationBoundaryClass
+    (τ : DerivedExtendScalarsTateShiftData Λ Λ' hρ ha)
+    (σ : ∀ (X : Scheme.{u}) [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ' X],
+      (derivedExtendScalars hρ ha X).obj (tateObject Λ X 1) ≅ tateObject Λ' X 1)
+    (hτ : (τ.iso U 1).hom = ((derivedExtendScalars hρ ha U).commShiftIso (2 * 1 : ℤ)).hom.app _ ≫
+      (σ U).hom⟦(2 * 1 : ℤ)⟧')
+    (hσ : (derivedExtendScalars hρ ha (U.basicOpen f)).map
+        (leftDerivedUpperStarTateObjectIso (Λ := Λ) (U.basicOpen f).ι 1).hom ≫ (σ _).hom =
+      (derivedExtendScalarsPullbackIso hρ ha (U.basicOpen f).ι).hom.app _ ≫
+        (L(((U.basicOpen f).ι)^*[ModuleCat.{u + 1} Λ'])).map (σ U).hom ≫
+          (leftDerivedUpperStarTateObjectIso (Λ := Λ') (U.basicOpen f).ι 1).hom)
+    (α : constantComplex Λ (U.basicOpen f) ⟶ (tateObject Λ (U.basicOpen f) 1)⟦(1 : ℤ)⟧) :
+    (reductionSupportedCoefficientChange hρ ha τ).mapSupportedClass _
+        ((reductionSupportedCoefficientChange hρ ha τ).tateShiftIso U 1)
+        (shiftSupportedClass Λ _ 2 (localizationBoundaryClass Λ f α)) =
+      shiftSupportedClass Λ' _ 2 (localizationBoundaryClass Λ' f
+        (((reductionSupportedCoefficientChange hρ ha τ).constantComplexIso _).inv ≫
+          ((reductionSupportedCoefficientChange hρ ha τ).functor _).map α ≫
+            (((derivedExtendScalars hρ ha _).commShiftIso (1 : ℤ)).app _ ≪≫
+              (shiftFunctor _ (1 : ℤ)).mapIso (σ _)).hom)) := by
+  have hτ₂ : (reductionSupportedCoefficientChange hρ ha τ).tateShiftIso U 1 =
+      ((derivedExtendScalars hρ ha U).commShiftIso (2 : ℤ)).app _ ≪≫
+        (shiftFunctor _ (2 : ℤ)).mapIso (σ U) := Iso.ext hτ
+  have hs := map_shiftSupports_comp_derivedExtendScalarsSupportsMap hρ ha
+    (U.zeroLocusSubschemeι {f}) (σ U) 2
+  have hb := derivedExtendScalars_map_localizationBoundaryClass hρ ha f (σ U) (σ _) hσ α
+  rw [SupportedCoefficientChange.mapSupportedClass, hτ₂, shiftSupportedClass, shiftSupportedClass,
+    Functor.map_comp]
+  have key : (derivedExtendScalarsConstantComplexIso hρ ha U).inv ≫
+      ((derivedExtendScalars hρ ha U).map (localizationBoundaryClass Λ f α) ≫
+        (derivedExtendScalars hρ ha U).map
+          (((R(U.zeroLocusSubschemeι {f})_![ModuleCat.{u + 1} Λ]).commShiftIso (2 : ℤ)).inv.app _ ≫
+            (R(U.zeroLocusSubschemeι {f})_![ModuleCat.{u + 1} Λ]).map
+              (((R(U.zeroLocusSubschemeι {f})^![Λ]).commShiftIso (2 : ℤ)).inv.app _))) ≫
+        derivedExtendScalarsSupportsMap hρ ha (U.zeroLocusSubschemeι {f})
+          (((derivedExtendScalars hρ ha U).commShiftIso (2 : ℤ)).app (tateObject Λ U 1) ≪≫
+            (shiftFunctor _ (2 : ℤ)).mapIso (σ U)) =
+      localizationBoundaryClass Λ' f ((derivedExtendScalarsConstantComplexIso hρ ha _).inv ≫
+          (derivedExtendScalars hρ ha _).map α ≫
+            ((derivedExtendScalars hρ ha _).commShiftIso (1 : ℤ)).hom.app _ ≫
+              (σ _).hom⟦(1 : ℤ)⟧') ≫
+        ((R(U.zeroLocusSubschemeι {f})_![ModuleCat.{u + 1} Λ']).commShiftIso (2 : ℤ)).inv.app _ ≫
+          (R(U.zeroLocusSubschemeι {f})_![ModuleCat.{u + 1} Λ']).map
+            (((R(U.zeroLocusSubschemeι {f})^![Λ']).commShiftIso (2 : ℤ)).inv.app _) := by
+    rw [Category.assoc, hs, reassoc_of% hb]
+  rw [reductionSupportedCoefficientChange_supportsMap]
+  simp only [reductionSupportedCoefficientChange_constantComplexIso, Iso.trans_hom,
+    Functor.mapIso_hom, Iso.app_hom, reductionSupportedCoefficientChange_functor]
+  convert key using 3
 
 end Class
 

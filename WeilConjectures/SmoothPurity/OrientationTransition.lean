@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.LiftMorphisms
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleOriginReadingProof
-public import WeilConjectures.SmoothPurity.OrientationFinite
+public import WeilConjectures.SmoothPurity.OrientationTransitionReading
 
 /-!
 # The canonical finite orientations are compatible with the reductions
@@ -104,6 +104,22 @@ noncomputable def derivedReductionSmoothOrientation (n : ℕ) :
 
 /-- Blueprint `det-sp-purity-coefficient-change`: change of coefficients in purity
 
+**The canonical finite orientations are compatible with the reduction of coefficients, on the
+étale site**: through the isomorphisms `β : Ψ(red_{n+2} -) ≅ red_{n+1} -`
+(`etaleReductionExtendScalarsIsoApp`), the derived extension of scalars `Ψ` along
+`𝒪_E ⧸ ℓⁿ⁺² ⟶ 𝒪_E ⧸ ℓⁿ⁺¹` of the canonical finite orientation modulo `ℓⁿ⁺²` is the canonical
+finite orientation modulo `ℓⁿ⁺¹`. -/
+theorem map_finiteEtaleReadingSmoothOrientation_comp (n : ℕ) :
+    (integersModPowDerivedExtendScalars ℓ E.1 (n + 1) X.left).map
+        (finiteEtaleReadingSmoothOrientation ℓ E f d (n + 1 + 1)) ≫
+      (etaleReductionExtendScalarsIsoApp ℓ E.1 (n + 1) X _).hom =
+    (etaleReductionExtendScalarsIsoApp ℓ E.1 (n + 1) X _).hom ≫
+      finiteEtaleReadingSmoothOrientation ℓ E f d (n + 1) := by
+  sorry
+
+set_option maxHeartbeats 1600000 in
+/-- Blueprint `det-sp-purity-coefficient-change`: change of coefficients in purity
+
 **The canonical finite orientations are compatible with the reductions**
 `𝒪_E ⧸ ℓⁿ⁺² ⟶ 𝒪_E ⧸ ℓⁿ⁺¹`: the reduction of the canonical finite orientation modulo `ℓⁿ⁺²` is
 the canonical finite orientation modulo `ℓⁿ⁺¹` (SGA 4, Exposé XVIII). -/
@@ -112,8 +128,15 @@ theorem derivedExtendScalarsReduction_derivedReductionSmoothOrientation (n : ℕ
         (integersModPowReduction_comp_integersModPowTransition X.left ℓ E.1 (n + 1))
         (derivedReductionSmoothOrientation ℓ E f d (n + 1 + 1)) =
       derivedReductionSmoothOrientation ℓ E f d (n + 1) := by
-  sorry
+  have h := derivedExtendScalarsReduction_derivedReductionMap_eq_of_comp ℓ E.1 (n + 1) X
+    (integersModPowReductionSmoothOrientation ℓ E f d (n + 1 + 1))
+    (integersModPowReductionSmoothOrientation ℓ E f d (n + 1)) (by
+      rw [finiteEtaleReading_map_integersModPowReductionSmoothOrientation,
+        finiteEtaleReading_map_integersModPowReductionSmoothOrientation]
+      exact map_finiteEtaleReadingSmoothOrientation_comp ℓ E f d n)
+  exact h
 
+set_option maxHeartbeats 1600000 in
 /-- The canonical finite orientations are compatible with the canonical transitions
 `Res_{n+2} (red_{n+2} K) ⟶ Res_{n+1} (red_{n+1} K)`, the hypothesis of
 `ProEtale.exists_derivedReduction_map_eq`. -/
@@ -124,6 +147,12 @@ lemma map_derivedReductionSmoothOrientation_comp_reductionTransition (n : ℕ) :
     reductionTransition E.1 (n + 1) _ ≫
       (Mod.comap (integersModPowReduction X.left ℓ E.1 (n + 1))).mapDerivedCategory.map
         (derivedReductionSmoothOrientation ℓ E f d (n + 1)) := by
-  sorry
+  exact (Mod.map_comp_derivedReductionTransition_app _
+    (integersModPowTransition X.left ℓ E.1 (n + 1)) _
+    (integersModPowReduction_comp_integersModPowTransition X.left ℓ E.1 (n + 1))
+    (derivedReductionSmoothOrientation ℓ E f d (n + 1 + 1))).trans
+    (congrArg (fun x ↦ reductionTransition E.1 (n + 1) _ ≫
+      (Mod.comap (integersModPowReduction X.left ℓ E.1 (n + 1))).mapDerivedCategory.map x)
+      (derivedExtendScalarsReduction_derivedReductionSmoothOrientation ℓ E f d n))
 
 end AlgebraicGeometry.ProEtale.CondensedRing
