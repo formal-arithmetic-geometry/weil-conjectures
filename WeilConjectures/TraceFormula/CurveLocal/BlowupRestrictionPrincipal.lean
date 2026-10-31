@@ -280,7 +280,7 @@ end AlgebraicGeometry
 
 namespace AlgebraicGeometry.Etale
 
-open CategoryTheory Limits Scheme
+open CategoryTheory Limits
 
 variable {k : Type u} [Field k] [IsAlgClosed k] (S : Over (Spec (.of k)))
   [SmoothOfRelativeDimension 2 S.hom] (t : Spec (.of k) ⟶ S.left)
@@ -296,10 +296,10 @@ theorem globalSectionsRestriction_eq_zero_of_eq_basicOpen {ℓ : ℕ} [Fact ℓ.
     (hDB : TangentConesMeetAtOrigin _ (Ideal.span {f}) (Ideal.span {g}))
     (hDH : TangentConesMeetAtOrigin _ (Ideal.span {f}) (Ideal.span {h}))
     {U V : (Spec (.of (Scheme.strictHenselization t))).Opens}
-    (hU : U = specBasicOpen (R := .of _) f)
-    (hV : V = specBasicOpen (R := .of _) (f * h)) (hVU : V ≤ U) {Y : Scheme.{u}} (ψ : Y ⟶ U)
-    (χ : Y ⟶ (puncturedSpec (Scheme.strictHenselization t ⧸ Ideal.span {g})).toScheme)
-    (hχ : χ ≫ (puncturedSpec _).ι ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk _)) =
+    (hU : U = Scheme.specBasicOpen (R := .of _) f)
+    (hV : V = Scheme.specBasicOpen (R := .of _) (f * h)) (hVU : V ≤ U) {Y : Scheme.{u}} (ψ : Y ⟶ U)
+    (χ : Y ⟶ (Scheme.puncturedSpec (Scheme.strictHenselization t ⧸ Ideal.span {g})).toScheme)
+    (hχ : χ ≫ (Scheme.puncturedSpec _).ι ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk _)) =
       ψ ≫ U.ι)
     (E : DerivedCategory (Sheaf V.toScheme.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hE : HasFiniteEllMonodromy ℓ E) :
@@ -308,8 +308,8 @@ theorem globalSectionsRestriction_eq_zero_of_eq_basicOpen {ℓ : ℕ} [Fact ℓ.
         0 := by
   subst hU hV
   obtain rfl : χ ≫ Scheme.puncturedCurveMap (maximalIdeal_le_radical_of_smooth S t ht hDB) = ψ := by
-    rw [← cancel_mono (specBasicOpen (R := .of _) f).ι, Category.assoc, Scheme.puncturedCurveMap,
-      IsOpenImmersion.lift_fac, hχ]
+    rw [← cancel_mono (Scheme.specBasicOpen (R := .of _) f).ι, Category.assoc,
+      Scheme.puncturedCurveMap, IsOpenImmersion.lift_fac, hχ]
   have hc := globalSectionsRestriction_comp
     (Scheme.puncturedCurveMap (maximalIdeal_le_radical_of_smooth S t ht hDB)) χ
     ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ)

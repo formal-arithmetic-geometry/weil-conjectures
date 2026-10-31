@@ -9,6 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 public import WeilConjectures.AlgebraicGeometry.Sites.ProetaleTopologicalInvariance
 
+import WeilConjectures.AlgebraicGeometry.ProEtaleSheafDirectImageTopologicalInvariance
+import WeilConjectures.CategoryTheory.Sites.CompleteValuedSheafEquivalenceLift
+
 /-!
 # Topological invariance of the small pro-étale topos
 
