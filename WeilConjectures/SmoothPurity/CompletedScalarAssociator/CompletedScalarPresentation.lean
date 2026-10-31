@@ -60,6 +60,10 @@ Source: Stacks Tags 06YY and 07A6; blueprint Proof (3).
 This bundles existing scalar functors and counits without choosing a new model.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 set_option Elab.async false
 attribute [local instance 5000] CategoryTheory.HasSheafify.isRightAdjoint

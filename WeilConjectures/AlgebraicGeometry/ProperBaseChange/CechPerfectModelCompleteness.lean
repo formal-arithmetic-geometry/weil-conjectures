@@ -176,6 +176,15 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor Opposite
 open scoped ChangeOfRings
 namespace AlgebraicGeometry.Scheme
+
+-- imported instances such as `strictDvrSiteSmall` and `surjectiveTower_wEqualsLocallyBijective`
+-- leave their coefficient universe free; pin the site smallness to `u + 1` and drop the other
+private instance (priority := 10000) proEtaleSiteSmall (X : Scheme.{u}) :
+    EssentiallySmall.{u + 1} X.ProEt :=
+  essentiallySmallSelf.{u + 1} _
+
+attribute [-instance] AlgebraicGeometry.ProEtale.surjectiveTower_wEqualsLocallyBijective
+
 namespace CechPerfectModel
 
 private local instance standardDerived {C : Type (u + 1)} [SmallCategory C]

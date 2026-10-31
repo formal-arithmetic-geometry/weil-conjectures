@@ -94,6 +94,9 @@ set_option synthInstance.maxSize 4096
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale
 
+-- `surjectiveTower_wEqualsLocallyBijective` leaves its coefficient universe free
+attribute [-instance] AlgebraicGeometry.ProEtale.surjectiveTower_wEqualsLocallyBijective
+
 namespace ContinuousIntegralSlice
 open Scheme
 

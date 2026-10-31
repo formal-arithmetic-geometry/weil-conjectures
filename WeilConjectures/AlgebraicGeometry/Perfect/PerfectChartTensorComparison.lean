@@ -90,6 +90,13 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
+-- `surjectiveTower_wEqualsLocallyBijective` leaves its coefficient universe free; pin it to `u + 1`
+attribute [-instance] AlgebraicGeometry.ProEtale.surjectiveTower_wEqualsLocallyBijective
+
+private instance proEtaleAbLocallyBijective (X : Scheme.{u}) :
+    (ProEt.topology X).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
+  AlgebraicGeometry.ProEtale.surjectiveTower_wEqualsLocallyBijective.{u, 0} X
+
 -- The localization proof uses only that U is weakly etale; no open-immersion
 -- assumption enters the site equivalence or the module-adjunction comparison.
 set_option backward.isDefEq.respectTransparency.types false in

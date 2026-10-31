@@ -26,6 +26,10 @@ The positive quotient exponent is n+1. The finite direct sum is represented by i
 finite product in module sheaves. The basis is prescribed, rather than chosen by the theorem.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 
 set_option autoImplicit false

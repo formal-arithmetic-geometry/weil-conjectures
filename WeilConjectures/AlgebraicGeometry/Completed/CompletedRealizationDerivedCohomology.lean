@@ -32,6 +32,9 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
+-- `surjectiveTower_wEqualsLocallyBijective` leaves its coefficient universe free
+attribute [-instance] AlgebraicGeometry.ProEtale.surjectiveTower_wEqualsLocallyBijective
+
 /-- Localization factorization of the termwise completed realization, with its canonical
 normalization. Source: Stacks Tag 015F, parts (3)--(4)
 (blueprint: lem-weil-pbc-completed-realization-derived-cohomology).

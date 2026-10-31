@@ -17,6 +17,10 @@ The arithmetic construction and factorization of the normalized finite compariso
 Source: Stacks 093M, 03EK, 03EL; Bhatt--Scholze 6.8.2(1).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false

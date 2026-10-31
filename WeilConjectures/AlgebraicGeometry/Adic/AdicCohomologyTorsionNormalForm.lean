@@ -24,6 +24,10 @@ Source: the DVR elementary-divisor calculation in steps 3--5 of
 `lem-weil-pbc-adic-tor-implies-flat-cohomology`.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 
 set_option autoImplicit false
