@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.Specialization.NearbyFiniteness
-public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethProper
+public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethIntegral
 public import WeilConjectures.TraceFormula.Specialization.TraitNearbyMonoidal
 
 /-!
@@ -66,68 +66,16 @@ variable {X Y Z : Scheme.{u}} {X' Y' Z' : Over (Spec (.of k'))} {M : NearbyCycle
 variable (ℓ : ℕ) [Fact ℓ.Prime] [IsSepClosed k'] [Fact (ringChar k').Prime]
   [Fact (ringChar k' ≠ ℓ)]
 
-omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
 /-- **Gabber's Künneth formula in every chart dimension** (Illusie, *Autour du théorème de
-monodromie locale*, Thm. 4.7; blueprint `sk-prop-tf-nearby-external-kunneth`), by induction on the
-chart dimension `n`, simultaneously for all separably closed fields `k'`
-(`NearbyCyclesModel.KunnethFormula`). By the reduction to proper models
-(`NearbyCyclesModel.isIso_kunnethMap_of_properKunnethFormula`), this is
-`NearbyCyclesModel.isIso_kunnethMap_of_isProper`, whose inputs are Deligne's finiteness theorem,
-the monoidality of the nearby cycles of the trait on the cohomology of the geometric generic
-fibres, and, for the generic slices, the Künneth formula in smaller chart dimension over the
-trait `Spec K⟦t⟧`, `K = k'(x)^alg`. -/
-theorem kunnethFormula (n : ℕ) :
-    ∀ (k' : Type u) [Field k'] [IsSepClosed k'] [Fact (ringChar k').Prime]
-      [Fact (ringChar k' ≠ ℓ)], KunnethFormula ℓ k' n := by
-  induction n using Nat.strong_induction_on with
-  | _ n ih =>
-  intro k' _ _ _ _ X Y Z X' Y' Z' M N P f₁ f₁' f₂ f₂' φ₁ φ₂ qM gM qN gN hM hN hpb hP hgen m₁ m₂
-    hle h₁ h₂ eM heM eN heN A B hA hB
-  refine isIso_kunnethMap_of_properKunnethFormula (n := n)
-    (fun {X Y Z X' Y' Z' M N P f₁ f₁' f₂ f₂'} φ₁ φ₂ {qM gM qN gN} hM hN hpb hP hgen hqM hqN
-      {m₁ m₂} hle h₁ h₂ {eM} heM {eN} heN {A B} hA hB ↦ ?_) hM hN hpb hP hgen hle h₁ h₂ heM heN
-    hA hB
-  have hIH : 0 < m₁ + m₂ → KunnethFormula ℓ (traitSliceField k') (m₁ + m₂ - 1) := fun hpos ↦ by
-    have : Fact (ringChar (traitSliceField k')).Prime :=
-      ⟨by rw [ringChar_traitSliceField]; exact Fact.out⟩
-    have : Fact (ringChar (traitSliceField k') ≠ ℓ) :=
-      ⟨by rw [ringChar_traitSliceField]; exact Fact.out⟩
-    have h := ih (m₁ + m₂ - 1) (by omega)
-    exact @h (traitSliceField k') _ _ _ _
-  have := hqM
-  have := hqN
-  have : LocallyOfFiniteType (Over.mk gM).hom := MorphismProperty.of_isPullback
-    hM.isPullback_j hM.locallyOfFiniteType
-  have : QuasiCompact (Over.mk gM).hom := MorphismProperty.of_isPullback hM.isPullback_j
-    hM.quasiCompact
-  have : IsSeparated (Over.mk gM).hom := MorphismProperty.of_isPullback hM.isPullback_j
-    hM.isSeparated
-  have : LocallyOfFiniteType (Over.mk (𝟙 (Spec (.of (traitGenericField k'))))).hom :=
-    inferInstanceAs (LocallyOfFiniteType (𝟙 _))
-  have : QuasiCompact (Over.mk (𝟙 (Spec (.of (traitGenericField k'))))).hom :=
-    inferInstanceAs (QuasiCompact (𝟙 _))
-  have : IsSeparated (Over.mk (𝟙 (Spec (.of (traitGenericField k'))))).hom :=
-    inferInstanceAs (IsSeparated (𝟙 _))
-  have : LocallyOfFiniteType Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i
-    hP.locallyOfFiniteType
-  have : QuasiCompact Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i hP.quasiCompact
-  have : IsSeparated Z'.hom := MorphismProperty.of_isPullback hP.isPullback_i hP.isSeparated
-  have hΨA := preservesBoundedConstructible_of_isTraitModel M hM.isTraitModel ⟨eM, heM⟩ A hA
-  have := hP.locallyOfFiniteType
-  have := hP.quasiCompact
-  have hΨB := preservesBoundedConstructible_of_isTraitModel N hN.isTraitModel ⟨eN, heN⟩ B hB
-  have hpush := boundedConstructible_rightDerivedLowerStar_obj ℓ
-    (Over.homMk (U := Over.mk gM) (V := Over.mk (𝟙 (Spec (.of (traitGenericField k'))))) gM
-      (Category.comp_id _)) ⟨_, boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ M.ε A hA⟩
-  exact isIso_kunnethMap_of_isProper hM hN hpb hP hgen h₁ h₂ hIH heM heN hA hB hΨA hΨB
-    (boundedConstructible_kunnethMap_source hΨA hΨB)
-    (boundedConstructible_kunnethMap_target (φ₁ := φ₁) (φ₂ := φ₂) (φ₁.total ≫ qM)
-      (fun C₀ hC₀ ↦ boundedConstructible_geometricNearbyCycles_obj P hP.isTraitModel hC₀)
-      heM heN hA hB)
-    (isIso_kunnethMap_traitGenericModel_of_shiftDecomposition _ k' _ _
-      (nonempty_shiftDecomposition_of_boundedConstructible ℓ _ hpush))
-    (fun S hS C hC hU hΓ ↦ isZero_of_isZero_upperStar_finsetComplOpens ℓ S hS C hC hU hΓ)
-
+monodromie locale*, Thm. 4.7; blueprint `sk-prop-tf-nearby-external-kunneth`), for every separably
+closed field `k'` (`NearbyCyclesModel.KunnethFormula` with `ℚ̄_ℓ`-coefficients). It is deduced
+from the Künneth formula with `𝒪_E`-coefficients (`NearbyCyclesModel.integralKunnethFormula`)
+through integral models of the coefficients
+(`NearbyCyclesModel.kunnethFormula_padicAlgCl_of_integral`). -/
+theorem kunnethFormula (n : ℕ) (k' : Type u) [Field k'] [IsSepClosed k']
+    [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] :
+    KunnethFormula (Profinite.padicAlgClRingObj ℓ) k' n :=
+  kunnethFormula_padicAlgCl_of_integral (integralKunnethFormula ℓ n k')
 
 /-- **Gabber's Künneth formula for nearby cycles** (Illusie, *Autour du théorème de monodromie
 locale*, Thm. 4.7; SGA 7 XIII; blueprint `sk-prop-tf-nearby-external-kunneth`): for the product
