@@ -127,4 +127,79 @@ noncomputable def properOpenComparison (Λ : Type (u + 1)) [CommRing Λ] [Finite
       ((rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) f).obj
         ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j₁).mapDerivedCategoryPlus.obj K))
 
+/-- The specified restriction isomorphism `θ = c ∘ Rp_*(e) ∘ r` of
+`properOpenIdentification`, for any commutative coefficient ring `Λ`; the finite-coefficient
+`properOpenIdentification` is its specialization (`properOpenIdentification_eq_ofCommRing`).
+Source: blueprint def-weil-pbc-proper-open-comparison
+(blueprint: def-weil-pbc-proper-open-comparison). -/
+noncomputable def properOpenIdentificationOfCommRing (Λ : Type (u + 1)) [CommRing Λ]
+    {T₁ T₂ X : Scheme.{u}} (f : T₁ ⟶ T₂) [IsProper f]
+    (j₁ : X ⟶ T₁) (j₂ : X ⟶ T₂) [IsOpenImmersion j₁] [IsOpenImmersion j₂]
+    (h : j₁ ≫ f = j₂)
+    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    (upperStar (ModuleCat.{u + 1} Λ) j₂).mapDerivedCategoryPlus.obj
+      ((rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) f).obj
+        ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j₁).mapDerivedCategoryPlus.obj K)) ≅
+      K := by
+  let s := properOpenSection f j₁ j₂ h
+  let geom := properOpenSectionGeometry f j₁ j₂ h
+  letI : IsOpenImmersion s := geom.1
+  let sq : ChosenCartesianSquare (pullback.fst f j₂) (pullback.snd f j₂) f j₂ :=
+    { toCommSq := ⟨pullback.condition⟩
+      isoPullback := Iso.refl _
+      hom_fst := Category.id_comp _
+      hom_snd := Category.id_comp _ }
+  letI := isIso_derivedBaseChangeMapPlus_of_openImmersion_of_commRing Λ f j₂
+    (pullback.fst f j₂) (pullback.snd f j₂) sq
+  let r := (asIso (derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq)).app
+    ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j₁).mapDerivedCategoryPlus.obj K)
+  let e := (extensionZeroBaseChangeDerivedPlusIso Λ geom.2.2).app K ≪≫
+    (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) s).mapDerivedCategoryPlus.mapIso
+      ((upperStarIdDerivedPlus (ModuleCat.{u + 1} Λ) X).app K)
+  let c := (clopenSectionDirectImage_of_commRing Λ (pullback.snd f j₂) s geom.2.1
+    (pullback.lift_snd j₁ (𝟙 X) _)).choose.app K
+  exact r ≪≫ (rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ)
+    (pullback.snd f j₂)).mapIso e ≪≫ c
+
+/-- The comparison `α = ε ∘ j₂!(θ⁻¹)` in functional composition order:
+apply extension by zero to the inverse of the specified `θ`, then the descended counit.
+The coefficient ring `Λ` is any commutative ring; `properOpenComparison` is its
+finite-coefficient case (`properOpenComparison_eq_ofCommRing`).
+Source: blueprint def-weil-pbc-proper-open-comparison
+(blueprint: def-weil-pbc-proper-open-comparison). -/
+noncomputable def properOpenComparisonOfCommRing (Λ : Type (u + 1)) [CommRing Λ]
+    {T₁ T₂ X : Scheme.{u}} (f : T₁ ⟶ T₂) [IsProper f]
+    (j₁ : X ⟶ T₁) (j₂ : X ⟶ T₂) [IsOpenImmersion j₁] [IsOpenImmersion j₂]
+    (h : j₁ ≫ f = j₂)
+    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j₂).mapDerivedCategoryPlus.obj K ⟶
+      (rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) f).obj
+        ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j₁).mapDerivedCategoryPlus.obj K) :=
+  (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j₂).mapDerivedCategoryPlus.map
+    (properOpenIdentificationOfCommRing Λ f j₁ j₂ h K).inv ≫
+  (derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus
+    (ModuleCat.{u + 1} Λ) j₂).counit.app
+      ((rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) f).obj
+        ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j₁).mapDerivedCategoryPlus.obj K))
+
+/-- At a finite coefficient ring the finite-coefficient identification is the general one.
+(blueprint: def-weil-pbc-proper-open-comparison). -/
+theorem properOpenIdentification_eq_ofCommRing (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    {T₁ T₂ X : Scheme.{u}} (f : T₁ ⟶ T₂) [IsProper f]
+    (j₁ : X ⟶ T₁) (j₂ : X ⟶ T₂) [IsOpenImmersion j₁] [IsOpenImmersion j₂]
+    (h : j₁ ≫ f = j₂)
+    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    properOpenIdentification Λ f j₁ j₂ h K = properOpenIdentificationOfCommRing Λ f j₁ j₂ h K :=
+  rfl
+
+/-- At a finite coefficient ring the finite-coefficient comparison is the general one.
+(blueprint: def-weil-pbc-proper-open-comparison). -/
+theorem properOpenComparison_eq_ofCommRing (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    {T₁ T₂ X : Scheme.{u}} (f : T₁ ⟶ T₂) [IsProper f]
+    (j₁ : X ⟶ T₁) (j₂ : X ⟶ T₂) [IsOpenImmersion j₁] [IsOpenImmersion j₂]
+    (h : j₁ ≫ f = j₂)
+    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    properOpenComparison Λ f j₁ j₂ h K = properOpenComparisonOfCommRing Λ f j₁ j₂ h K :=
+  rfl
+
 end AlgebraicGeometry.Etale

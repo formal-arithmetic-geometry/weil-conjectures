@@ -202,7 +202,7 @@ private theorem sfClopenScalarRawBack_tensor
     (s : (integralCoefficientCommRingSheaf l E T n).obj.obj
       ((sfClopenSiteInclusion U).op.obj V))
     (x : M.val.obj ((sfClopenSiteInclusion U).op.obj V)) :
-    (((sfClopenScalarRawBack l E T U n A).hom.app M).val.app V)
+    (((sfClopenScalarRawBack.{t, u} l E T U n A).hom.app M).val.app V)
       (systemModelTmul A.model
         ((clopenTensorRestriction.{t, u} U.ι
           (completedIntegralCommRingSheafUnrestricted l E T)).obj M) V s x) =
@@ -248,7 +248,9 @@ theorem sf_clopen_scalar_raw_restriction_comparison
             (completedIntegralCommRingSheafUnrestricted l E T)).obj M) V s x) =
         unrestrictedTowerTensorSection l E T n M ((sfClopenSiteInclusion U).op.obj V)
           s x := by
-  exact ⟨sfClopenScalarRawBack l E T U n A,
-    sfClopenScalarRawBack_tensor l E T U n A⟩
+  let back := sfClopenScalarRawBack.{t, u} l E T U n A
+  refine ⟨back, ?_⟩
+  intro M V s x
+  exact sfClopenScalarRawBack_tensor.{t, u} l E T U n A M V s x
 
 end WeilConjectures
