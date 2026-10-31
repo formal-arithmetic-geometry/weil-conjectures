@@ -15543,6 +15543,7 @@ public import WeilConjectures.SmoothPurity.IntegralTateTwistExtendScalars
 public import WeilConjectures.SmoothPurity.OrientationBaseChange
 public import WeilConjectures.SmoothPurity.OrientationCanonical
 public import WeilConjectures.SmoothPurity.OrientationOfDiagonalClass
+public import WeilConjectures.SmoothPurity.SmoothImageFactor
 public import WeilConjectures.SmoothPurity.TateTwistBoundedConstructible
 public import WeilConjectures.SmoothPurity.TateTwistDualizable
 public import WeilConjectures.SmoothPurity.TateTwistPullback
@@ -15552,6 +15553,7 @@ public import WeilConjectures.SmoothPurity.UpperShriekBaseChangeReduction
 public import WeilConjectures.SmoothPurity.UpperShriekOpenVanishing
 public import WeilConjectures.SmoothPurity.UpperShriekSmoothBaseChange
 public import WeilConjectures.SmoothPurity.UpperShriekUnitDualizable
+public import WeilConjectures.SmoothPurity.UpperShriekUnitOpenImmersionComp
 public import WeilConjectures.SpecialValues
 public import WeilConjectures.Statement
 public import WeilConjectures.Tactic.ExactByKernel
