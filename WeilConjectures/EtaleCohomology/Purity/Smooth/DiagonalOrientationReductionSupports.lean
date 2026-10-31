@@ -65,7 +65,7 @@ identification on the terminal scheme, pulled back along `X ⟶ ⊤_`. -/
 noncomputable def derivedExtendScalarsConstantComplexIso (X : Scheme.{u}) :
     (derivedExtendScalars hρ ha X).obj (constantComplex Λ X) ≅ constantComplex Λ' X :=
   derivedExtendScalarsConstantComplexIsoOfPullback hρ ha
-    (nonempty_derivedExtendScalars_obj_constantComplex_iso hρ ha (⊤_ Scheme.{u})).some
+    (derivedExtendScalarsConstantComplexEtaIso hρ ha (⊤_ Scheme.{u}))
     (terminal.from X)
 
 /-- The identifications `Ψ Λ_X ≅ Λ'_X` are compatible with the derived pullbacks. -/

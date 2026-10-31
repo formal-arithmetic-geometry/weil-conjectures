@@ -10,6 +10,9 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionUpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition
 public import WeilConjectures.TateTwist.ProEtale
+public import WeilConjectures.TateTwist.LocallyFree
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyFreeConstructible
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleStratum
 
 /-!
 
@@ -46,12 +49,21 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [Fact (ringChar k ≠ ℓ)]
   (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
+omit [Fact (ringChar k).Prime] [IsSeparated X.hom] in
 /-- The shifted Tate twist `ℚ̄_ℓ,X(d)[n]` of a separated `k`-scheme of finite type, on which `ℓ`
 is invertible, is bounded constructible. -/
 lemma boundedConstructible_tateTwistDerived (d n : ℤ) :
     boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)
-      ((shiftFunctor _ n).obj (tateTwistDerived X.left ℓ d)) :=
-  sorry
+      ((shiftFunctor _ n).obj (tateTwistDerived X.left ℓ d)) := by
+  have : NeZero (ℓ : k) :=
+    ⟨fun h ↦ (Fact.out : ringChar k ≠ ℓ)
+      (((Fact.out : ℓ.Prime).eq_one_or_self_of_dvd _ ((ringChar.spec k ℓ).1 h)).resolve_left
+        CharP.ringChar_ne_one)⟩
+  have := isNoetherian_of_locallyOfFiniteType X.hom
+  exact ObjectProperty.le_shift
+    (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)) n _
+    (CondensedRing.boundedConstructible_singleFunctor_zero_obj _ _
+      (isLocallyFree_tateTwist ℓ X.hom d).isConstructibleModuleObject)
 
 /-- The shifted Tate twist `ℚ̄_ℓ,X(d)[n]`, as a bounded constructible complex. -/
 noncomputable def boundedConstructibleTateTwist (d n : ℤ) :
