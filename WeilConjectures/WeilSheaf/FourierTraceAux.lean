@@ -146,6 +146,26 @@ lemma ΓSpecIso_hom_appTop_specMap_comp {R S : CommRingCat.{u}} (φ : R ⟶ S) {
   rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, ← CommRingCat.comp_apply,
     Scheme.ΓSpecIso_naturality, CommRingCat.comp_apply]
 
+/-- The identification `𝔸¹(K) ≃ K` is compatible with isomorphisms of the coefficient field. -/
+lemma AffineSpace.fieldPointsEquiv_fieldPointsCongr (σ : K ≃ₐ[k₀] L)
+    (x : (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).fieldPoints K) :
+    AffineSpace.fieldPointsEquiv k₀ L (Scheme.Hom.fieldPointsCongr _ σ x) =
+      σ (AffineSpace.fieldPointsEquiv k₀ K x) :=
+  ΓSpecIso_hom_appTop_specMap_comp _ x.1 _
+
+/-- The coordinate of the product `μ(z) = x y` of the coordinates of a point `z` of the affine
+plane. -/
+lemma affinePlane.ΓSpecIso_hom_appTop_mul (z : Spec (CommRingCat.of L) ⟶ affinePlane k₀) :
+    (Scheme.ΓSpecIso (.of L)).hom.hom
+        ((z ≫ affinePlane.mul k₀).appTop (AffineSpace.coord _ PUnit.unit)) =
+      (Scheme.ΓSpecIso (.of L)).hom.hom
+          ((z ≫ affinePlane.fst k₀).appTop (AffineSpace.coord _ PUnit.unit)) *
+        (Scheme.ΓSpecIso (.of L)).hom.hom
+          ((z ≫ affinePlane.snd k₀).appTop (AffineSpace.coord _ PUnit.unit)) := by
+  rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply, affinePlane.mul,
+    AffineSpace.homOfVector_appTop_coord, map_mul, map_mul, Scheme.Hom.comp_appTop,
+    Scheme.Hom.comp_appTop, CommRingCat.comp_apply, CommRingCat.comp_apply]
+
 variable (ι : Type u) (k₀ : Type u) [Field k₀] {K L : Type u} [Field K] [Field L] [Algebra k₀ K]
   [Algebra k₀ L]
 
@@ -182,6 +202,108 @@ variable {ι : Type u} {k₀ : Type u} [Field k₀] {K : Type u} [Field K] [Alge
 noncomputable def specOver.homOfFieldPoint {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
     (y : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints K) : specOver K ⟶ X :=
   y.1
+
+/-- The fibre product `𝔸² ×_{pr₂, 𝔸¹, y} Spec K` of the second projection of the affine plane
+and a `K`-rational point `y` of the affine line, as a `k₀`-scheme through `Spec K`. -/
+noncomputable def affinePlane.sndFiber
+    (y : (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).fieldPoints K) : Scheme.{u} :=
+  pullback (affinePlane.snd k₀) (specOver.homOfFieldPoint y)
+
+/-- The projection `𝔸² ×_{𝔸¹} Spec K ⟶ 𝔸²`. -/
+noncomputable def affinePlane.sndFiber.fst : affinePlane.sndFiber y ⟶ affinePlane k₀ :=
+  pullback.fst _ _
+
+/-- The projection `𝔸² ×_{𝔸¹} Spec K ⟶ Spec K`, the base change of `pr₂`. -/
+noncomputable def affinePlane.sndFiber.snd : affinePlane.sndFiber y ⟶ specOver K :=
+  pullback.snd _ _
+
+lemma affinePlane.sndFiber.isPullback :
+    IsPullback (affinePlane.sndFiber.fst y) (affinePlane.sndFiber.snd y) (affinePlane.snd k₀)
+      (specOver.homOfFieldPoint y) :=
+  IsPullback.of_hasPullback _ _
+
+lemma affinePlane.sndFiber.over :
+    (affinePlane.sndFiber y ↘ Spec (CommRingCat.of k₀)) =
+      affinePlane.sndFiber.snd y ≫ specOver K ↘ Spec (CommRingCat.of k₀) :=
+  rfl
+
+/-- The morphism `Spec L ⟶ 𝔸² ×_{𝔸¹} Spec K` given by the point `(x, φ(y))` of `𝔸²` over the
+point `φ : Spec L ⟶ Spec K`, for a `k₀`-embedding `φ : K ⟶ L` and `x ∈ L`. -/
+noncomputable def affinePlane.sndFiber.lift {L : Type u} [Field L] [Algebra k₀ L]
+    (φ : K →ₐ[k₀] L) (x : L) : Spec (CommRingCat.of L) ⟶ affinePlane.sndFiber y :=
+  pullback.lift
+    (pullback.lift ((AffineSpace.fieldPointsEquiv k₀ L).symm x).1
+      ((specOver.algHomEquivFieldPoints k₀ K L φ).1 ≫ y.1) (by
+        rw [((AffineSpace.fieldPointsEquiv k₀ L).symm x).2, Category.assoc, y.2]
+        exact (specOver.algHomEquivFieldPoints k₀ K L φ).2.symm))
+    (specOver.algHomEquivFieldPoints k₀ K L φ).1 (pullback.lift_snd _ _ _)
+
+lemma affinePlane.sndFiber.lift_snd :
+    affinePlane.sndFiber.lift φ x ≫ affinePlane.sndFiber.snd y =
+      (specOver.algHomEquivFieldPoints k₀ K L φ).1 :=
+  pullback.lift_snd _ _ _
+
+lemma affinePlane.sndFiber.lift_fst_fst :
+    affinePlane.sndFiber.lift φ x ≫ affinePlane.sndFiber.fst y ≫ affinePlane.fst k₀ =
+      ((AffineSpace.fieldPointsEquiv k₀ L).symm x).1 := by
+  rw [affinePlane.sndFiber.lift, affinePlane.sndFiber.fst, pullback.lift_fst_assoc,
+    affinePlane.fst, pullback.lift_fst]
+
+lemma affinePlane.sndFiber.lift_fst_snd :
+    affinePlane.sndFiber.lift φ x ≫ affinePlane.sndFiber.fst y ≫ affinePlane.snd k₀ =
+      (specOver.algHomEquivFieldPoints k₀ K L φ).1 ≫ y.1 := by
+  rw [affinePlane.sndFiber.lift, affinePlane.sndFiber.fst, pullback.lift_fst_assoc,
+    affinePlane.snd, pullback.lift_snd]
+
+/-- The product of the coordinates of the point `(x, φ(y))` of the affine plane is `x φ(y)`. -/
+lemma affinePlane.sndFiber.ΓSpecIso_hom_appTop_lift_mul :
+    (Scheme.ΓSpecIso (.of L)).hom.hom
+        ((affinePlane.sndFiber.lift φ x ≫ affinePlane.sndFiber.fst y ≫ affinePlane.mul k₀).appTop
+          (AffineSpace.coord _ PUnit.unit)) =
+      x * φ (AffineSpace.fieldPointsEquiv k₀ K y) := by
+  rw [← Category.assoc, affinePlane.ΓSpecIso_hom_appTop_mul, Category.assoc, Category.assoc,
+    affinePlane.sndFiber.lift_fst_fst, affinePlane.sndFiber.lift_fst_snd,
+    specOver.algHomEquivFieldPoints_apply_coe, ΓSpecIso_hom_appTop_specMap_comp,
+    ← AffineSpace.fieldPointsEquiv_apply, Equiv.apply_symm_apply,
+    ← AffineSpace.fieldPointsEquiv_apply]
+  rfl
+
+lemma affinePlane.sndFiber.lift_over :
+    affinePlane.sndFiber.lift φ x ≫ (affinePlane.sndFiber y ↘ Spec (CommRingCat.of k₀)) =
+      Spec.map (CommRingCat.ofHom (algebraMap k₀ L)) := by
+  rw [affinePlane.sndFiber.over, ← Category.assoc, affinePlane.sndFiber.lift_snd]
+  exact (specOver.algHomEquivFieldPoints k₀ K L φ).2
+
+/-- The `L`-rational points of `𝔸² ×_{pr₂, 𝔸¹, y} Spec K` are the pairs `(φ, x)` of a
+`k₀`-embedding `φ : K ⟶ L` and an element `x ∈ L`: the point `(x, φ(y))` of `𝔸²` over the
+point `φ` of `Spec K`. -/
+noncomputable def affinePlane.sndFiber.fieldPointsEquiv (L : Type u) [Field L] [Algebra k₀ L] :
+    (K →ₐ[k₀] L) × L ≃ (affinePlane.sndFiber y ↘ Spec (CommRingCat.of k₀)).fieldPoints L where
+  toFun p := ⟨affinePlane.sndFiber.lift p.1 p.2, affinePlane.sndFiber.lift_over _ _⟩
+  invFun w :=
+    ((specOver.algHomEquivFieldPoints k₀ K L).symm
+        ⟨w.1 ≫ affinePlane.sndFiber.snd y, (Category.assoc _ _ _).trans w.2⟩,
+      AffineSpace.fieldPointsEquiv k₀ L ⟨w.1 ≫ affinePlane.sndFiber.fst y ≫ affinePlane.fst k₀,
+        by simpa only [Category.assoc, comp_over] using w.2⟩)
+  left_inv p := by
+    refine Prod.ext ((Equiv.symm_apply_eq _).2 (Subtype.ext ?_))
+      ((Equiv.eq_symm_apply _).1 (Subtype.ext ?_))
+    · exact affinePlane.sndFiber.lift_snd _ _
+    · exact affinePlane.sndFiber.lift_fst_fst _ _
+  right_inv w := by
+    refine Subtype.ext (pullback.hom_ext (pullback.hom_ext ?_ ?_) ?_)
+    · rw [Category.assoc, Category.assoc]
+      erw [affinePlane.sndFiber.lift_fst_fst]
+      rw [Equiv.symm_apply_apply]
+      rfl
+    · rw [Category.assoc, Category.assoc]
+      erw [affinePlane.sndFiber.lift_fst_snd]
+      rw [Equiv.apply_symm_apply]
+      exact (Category.assoc _ _ _).trans
+        (congrArg (w.1 ≫ ·) (affinePlane.sndFiber.isPullback y).w).symm
+    · erw [affinePlane.sndFiber.lift_snd]
+      rw [Equiv.apply_symm_apply]
+      rfl
 
 instance {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
     (y : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints K) :

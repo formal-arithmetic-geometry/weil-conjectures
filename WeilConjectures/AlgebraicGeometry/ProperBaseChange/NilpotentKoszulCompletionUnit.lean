@@ -57,3 +57,25 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 end AlgebraicGeometry.Scheme
+
+namespace ProconstantRoos
+
+private noncomputable def isLimit : IsLimit (Cone.mk C u) := by
+  refine ⟨fun s ↦ s.π.app (op 0) ≫ v.app (op 0), ?_, ?_⟩
+  · intro s j
+    obtain ⟨n⟩ := j
+    have hsn := s.w (homOfLE (Nat.le_add_right n a)).op
+    have hsv := s.w (homOfLE (Nat.zero_le (n + a))).op
+    have hv := v.naturality (homOfLE (Nat.zero_le (n + a))).op
+    dsimp only [Functor.const_obj_obj, Functor.const_obj_map] at hv
+    rw [Category.comp_id] at hv
+    change (s.π.app (op 0) ≫ v.app (op 0)) ≫ u.app (op n) = s.π.app (op n)
+    rw [← hsv]
+    simp only [Category.assoc]
+    rw [reassoc_of% hv, ← hf n, hsn]
+  · intro s m hm
+    have h := hm (op 0)
+    change m ≫ u.app (op 0) = s.π.app (op 0) at h
+    rw [← h, Category.assoc, huv, Category.comp_id]
+
+end ProconstantRoos
