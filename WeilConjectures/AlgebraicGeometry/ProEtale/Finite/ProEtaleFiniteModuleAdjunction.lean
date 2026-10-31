@@ -32,6 +32,5 @@ namespace AlgebraicGeometry.ProEtale
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) (A : Type (u + 1))
   [Ring A] [Finite A] [TopologicalSpace A] [DiscreteTopology A]
 
-set_option backward.isDefEq.respectTransparency.types false in
 
 end AlgebraicGeometry.ProEtale

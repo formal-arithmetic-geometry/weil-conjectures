@@ -97,6 +97,10 @@ The derived-object comparison is included before its cohomology comparisons. All
 and representative comparisons are the published site-derived-tensor constructions.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 
 set_option autoImplicit false
@@ -145,9 +149,5 @@ set_option backward.isDefEq.respectTransparency false in
 set_option allowUnsafeReducibility true in
 attribute [local irreducible] totalTensor ordinaryTensor
 
-set_option backward.isDefEq.respectTransparency false in
-omit [HasDerivedCategory (Modules R)] in
-set_option backward.isDefEq.respectTransparency false in
-attribute [local irreducible] localizedComparison cohomologyNatIso
 
 end SheafOfModules.FlatSingleTensor

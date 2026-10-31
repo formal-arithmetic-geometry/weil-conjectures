@@ -43,8 +43,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace CategoryTheory.UnboundedExactTower
 
-attribute [instance] ExactMorphism.finiteLimits
-  ExactMorphism.finiteColimits
 
 /-- The existing Grothendieck-category K-injective resolution construction for module
 sheaves. Source: Stacks 079P, 07A5

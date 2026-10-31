@@ -92,7 +92,6 @@ section ProofHelpers
 
 open SheafOfModules.GeometricConstruction
 
-attribute [local instance] towerComposeSets towerComposeModules towerBinaryProduct
 
 private theorem towerAdjunction
     {C D : Type*} [Category* C] [Category* D] (L : C ⥤ D) (R : D ⥤ C)
