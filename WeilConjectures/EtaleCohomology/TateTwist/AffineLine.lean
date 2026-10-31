@@ -10,6 +10,10 @@ public import WeilConjectures.EtaleCohomology.TateTwist.KummerClass
 public import WeilConjectures.EtaleCohomology.TateTwist.AffineLineDescentClauses
 public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageAmplitude
 
+import WeilConjectures.EtaleCohomology.Purity.Smooth.GmRelativeKummer
+import WeilConjectures.SixFunctors.Etale.Derived.BaseChangeCube
+import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Local
+
 /-!
 # The cohomology of `𝔸¹` and `𝔾ₘ` with coefficients in the Tate twist `μₙ ⊗ Λ`
 
@@ -62,12 +66,381 @@ open Scheme
 
 namespace Etale
 
+-- Keep the symmetric braiding and sheaf colimits explicit during instance search.
+attribute [local instance high] SymmetricCategory.toBraidedCategory
+attribute [local instance 2000] CategoryTheory.Sheaf.instHasColimitsOfShape
+
+attribute [local irreducible] upperStar lowerStar CategoryTheory.Functor.leftDerivedFunctor
+  rightDerivedLowerStar derivedUpperStarLowerStarAdjunction
+  CategoryTheory.Functor.rightDerivedFunctor derivedBaseChangeMap derivedSquareUpperStarIso
+  tateTwistObject tateTwistSheaf
+  leftDerivedUpperStarConstantComplexIso leftDerivedUpperStarTateObjectIso
+  rightDerivedLowerStarComp leftDerivedUpperStarComp
+
+attribute [local instance] HasInvertibleExponent.opens
+
+-- An interface for the class map, proved before protecting the constant-object alias.
+private theorem kummer_direct_image_formula (Λ : Type (u + 1)) [CommRing Λ]
+    [NeZero (ringChar Λ)] (B : Scheme.{u}) [HasInvertibleExponent Λ B] :
+    let X := 𝔸(ULift.{u} (Fin 1); B)
+    let p : X ⟶ B := X ↘ B
+    let j := (X.basicOpen (AffineSpace.coord B (ULift.up.{u} (0 : Fin 1)))).ι
+    let Rp := R((p)_*[ModuleCat.{u + 1} Λ])
+    let Rj := R((j)_*[ModuleCat.{u + 1} Λ])
+    kummerClassAffineLineDirectImage Λ B =
+      (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) p).homEquiv _ _
+        ((leftDerivedUpperStarConstantComplexIso Λ p).hom ≫
+          (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).homEquiv _ _
+            ((leftDerivedUpperStarConstantComplexIso Λ j).hom ≫
+              kummerClass Λ (X.basicOpenUnit (AffineSpace.coord B (ULift.up 0))) ≫
+                (leftDerivedUpperStarTateObjectIso (Λ := Λ) j 1).inv⟦(1 : ℤ)⟧')) ≫
+        Rp.map ((Rj.commShiftIso (1 : ℤ)).hom.app _) ≫
+          (Rp.commShiftIso (1 : ℤ)).hom.app _ := by
+  dsimp only
+  simp only [kummerClassAffineLineDirectImage, ShiftedHom.map, kummerClassAdjoint,
+    Adjunction.homEquiv_unit, constantComplex, Functor.map_comp, Category.assoc]
+
+attribute [local irreducible] constantComplex conjugateEquiv Adjunction.comp
+
+-- Naturality and composition of adjoints, with no geometric constructions to unfold.
+private theorem adjoint_composition {C D E : Type*} [Category C] [Category D] [Category E]
+    {F : C ⥤ D} {R : D ⥤ C} {F' : D ⥤ E} {R' : E ⥤ D}
+    {L : C ⥤ E} {S : E ⥤ C} (a : F ⊣ R) (b : F' ⊣ R') (c : L ⊣ S)
+    (e : L ⟶ F ⋙ F') {A : C} {B : D} {N N' : E}
+    (θ : F.obj A ⟶ B) (α : F'.obj B ⟶ N) (v : N ⟶ N') :
+    a.homEquiv _ _ (θ ≫ b.homEquiv _ _ α) ≫ R.map (R'.map v) ≫
+        (conjugateEquiv (a.comp b) c e).app N' =
+      c.homEquiv _ _ (e.app A ≫ F'.map θ ≫ α ≫ v) := by
+  have h : a.homEquiv _ _ (θ ≫ b.homEquiv _ _ α) ≫ R.map (R'.map v) =
+      (a.comp b).homEquiv _ _ (F'.map θ ≫ α ≫ v) := by
+    rw [Adjunction.comp_homEquiv]
+    change a.homEquiv _ _ (θ ≫ b.homEquiv _ _ α) ≫ R.map (R'.map v) =
+      a.homEquiv _ _ (b.homEquiv _ _ (F'.map θ ≫ α ≫ v))
+    rw [← Adjunction.homEquiv_naturality_right]
+    congr 1
+    rw [Adjunction.homEquiv_naturality_left, Adjunction.homEquiv_naturality_right]
+    exact Category.assoc _ _ _
+  rw [← Category.assoc, h, Adjunction.homEquiv_comp_conjugateEquiv_app]
+
+private theorem iso_adjoint_composition {C D E V : Type*}
+    [Category C] [Category D] [Category E] [Category V]
+    {F : C ⥤ D} {R : D ⥤ C} {F' : D ⥤ E} {R' : E ⥤ D}
+    {L : C ⥤ E} {S : E ⥤ C} (a : F ⊣ R) (b : F' ⊣ R') (c : L ⊣ S)
+    (e : L ⟶ F ⋙ F') {A : C} {B : D} {N N' : E}
+    (θ : F.obj A ⟶ B) (α : F'.obj B ⟶ N) (v : N ⟶ N') [IsIso v]
+    [IsIso ((conjugateEquiv (a.comp b) c e).app N')]
+    (H : C ⥤ V)
+    (h : IsIso (H.map (c.homEquiv _ _ (e.app A ≫ F'.map θ ≫ α ≫ v)))) :
+    IsIso (H.map (a.homEquiv _ _ (θ ≫ b.homEquiv _ _ α))) := by
+  have he := congrArg H.map (adjoint_composition a b c e θ α v)
+  simp only [Functor.map_comp] at he
+  rw [← he] at h
+  rw [← Category.assoc, isIso_comp_right_iff, isIso_comp_right_iff] at h
+  exact h
+
+private theorem field_exchange (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    {k : Type u} [Field k] [HasInvertibleExponent Λ (Spec (.of k))]
+    {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [Smooth f] [IsSeparated f] [QuasiCompact f]
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    [IsFiniteLocallyConstantSheaf F] {T XT : Scheme.{u}} [IsNoetherian T]
+    (t : T ⟶ Spec (.of k)) (g : XT ⟶ X) (fT : XT ⟶ T)
+    (sq : IsPullback g fT f t) :
+    IsIso ((derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq).app
+      ((_root_.DerivedCategory.singleFunctor _ 0).obj F)) := by
+  obtain ⟨U, ⟨s, hs⟩, h⟩ := smoothGenericDirectImage Λ (𝟙 (Spec (.of k))) f F
+  have hr : Set.range t ⊆ (U : Set (Spec (.of k))) := by
+    intro x hx
+    rwa [Subsingleton.elim x s]
+  have h' := (hasConstructibleDirectImageBaseChangeOn_iff (𝟙 _) f F U).2 h
+  exact (h' T t hr T XT t (𝟙 T) g fT (by simpa using IsPullback.id_vert t) sq).2
+
+
+private theorem field_exchange_tate (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    [NeZero (ringChar Λ)] {k : Type u} [Field k]
+    [HasInvertibleExponent Λ (Spec (.of k))]
+    {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [Smooth f] [IsSeparated f] [QuasiCompact f]
+    [HasInvertibleExponent Λ X] {T XT : Scheme.{u}} [IsNoetherian T]
+    (t : T ⟶ Spec (.of k)) (g : XT ⟶ X) (fT : XT ⟶ T)
+    (sq : IsPullback g fT f t) :
+    IsIso ((derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq).app
+      (tateObject Λ X 1)) := by
+  have := isFiniteLocallyConstantSheaf_tateTwistSheaf Λ X 1
+  exact (NatTrans.isIso_app_iff_of_iso _ (tateTwistObjectIsoSingleFunctor Λ X 1)).2
+    (field_exchange Λ f (tateTwistSheaf Λ X 1) t g fT sq)
+
+
+
+private theorem etale_exchange (Λ : Type (u + 1)) [CommRing Λ]
+    {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
+    {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : IsPullback g' f' f g) [Etale g]
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (n : ℤ) [K.IsGE n] :
+    IsIso ((derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq).app K) := by
+  let K' : _root_.DerivedCategory.Plus
+      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) := ⟨K, ⟨n, inferInstance⟩⟩
+  have := isIso_derivedBaseChangeMapPlus_of_etale (Λ := Λ) sq
+  exact (isIso_derivedBaseChangeMap_app_ι_obj_iff
+    (ModuleCat.{u + 1} Λ) sq.toCommSq K').2 inferInstance
+
+-- Coherence of the three derived comparison functors is expensive to elaborate.
+private theorem field_exchange_local (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    [NeZero (ringChar Λ)] {k : Type u} [Field k]
+    [HasInvertibleExponent Λ (Spec (.of k))]
+    {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [Smooth f] [IsSeparated f] [QuasiCompact f]
+    [HasInvertibleExponent Λ X] {T XT : Scheme.{u}} [IsLocallyNoetherian T]
+    (t : T ⟶ Spec (.of k)) (g : XT ⟶ X) (fT : XT ⟶ T)
+    (sq : IsPullback g fT f t) :
+    IsIso ((derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq).app
+      (tateObject Λ X 1)) := by
+  let M := tateObject Λ X 1
+  have : M.IsGE 0 := DerivedCategory.TStructure.t.isGE_of_iso
+    (tateTwistObjectIsoSingleFunctor Λ X 1).symm 0
+  refine isIso_of_isIso_leftDerivedUpperStar_map_of_jointlySurjective Λ T.affineCover.f
+    (fun x ↦ ⟨T.affineCover.idx x, T.affineCover.covers x⟩) _ fun i ↦ ?_
+  let v := T.affineCover.f i
+  have : IsNoetherian (T.affineCover.X i) := ⟨⟩
+  let P := pullback fT v
+  let h : P ⟶ XT := pullback.fst fT v
+  let fP : P ⟶ T.affineCover.X i := pullback.snd fT v
+  have sq' : IsPullback h fP fT v := IsPullback.of_hasPullback fT v
+  have h₂ := field_exchange_tate Λ f (v ≫ t) (h ≫ g) fP (sq'.paste_horiz sq)
+  have : HasInvertibleExponent Λ XT := .of_hom g
+  have : ((L((g)^*[ModuleCat.{u + 1} Λ])).obj M).IsGE 0 :=
+    DerivedCategory.TStructure.t.isGE_of_iso
+      (leftDerivedUpperStarTateObjectIso (Λ := Λ) g 1 ≪≫
+        tateTwistObjectIsoSingleFunctor Λ XT 1).symm 0
+  have h₃ := etale_exchange Λ sq' ((L((g)^*[ModuleCat.{u + 1} Λ])).obj M) 0
+  have hp := derivedBaseChangeMap_paste (ModuleCat.{u + 1} Λ) sq.toCommSq sq'.toCommSq
+    (sq'.paste_horiz sq).toCommSq rfl rfl M
+  have hcomp : IsIso
+      ((leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) v t (v ≫ t) rfl).hom.app
+        ((R((f)_*[ModuleCat.{u + 1} Λ])).obj M) ≫
+      (L((v)^*[ModuleCat.{u + 1} Λ])).map
+        ((derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq).app M) ≫
+      (derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq'.toCommSq).app
+        ((L((g)^*[ModuleCat.{u + 1} Λ])).obj M) ≫
+      (R((fP)_*[ModuleCat.{u + 1} Λ])).map
+        ((leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) h g (h ≫ g) rfl).inv.app M)) := by
+    rw [hp]
+    exact h₂
+  rw [isIso_comp_left_iff, ← Category.assoc, isIso_comp_right_iff,
+    isIso_comp_right_iff] at hcomp
+  exact hcomp
+
+
+private theorem field_exchange_cancel (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    [NeZero (ringChar Λ)] {k : Type u} [Field k]
+    [HasInvertibleExponent Λ (Spec (.of k))]
+    {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [Smooth f] [IsSeparated f] [QuasiCompact f]
+    [HasInvertibleExponent Λ X] {T XT T' XT' : Scheme.{u}}
+    [IsLocallyNoetherian T] [IsLocallyNoetherian T'] [HasInvertibleExponent Λ XT]
+    (t : T ⟶ Spec (.of k)) (g : XT ⟶ X) (fT : XT ⟶ T)
+    (sq : IsPullback g fT f t) (v : T' ⟶ T) (h : XT' ⟶ XT) (fT' : XT' ⟶ T')
+    (sq' : IsPullback h fT' fT v) :
+    IsIso ((derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq'.toCommSq).app
+      (tateObject Λ XT 1)) := by
+  let M := tateObject Λ X 1
+  have h₁ := field_exchange_local Λ f t g fT sq
+  have h₂ := field_exchange_local Λ f (v ≫ t) (h ≫ g) fT' (sq'.paste_horiz sq)
+  have hp := derivedBaseChangeMap_paste (ModuleCat.{u + 1} Λ) sq.toCommSq sq'.toCommSq
+    (sq'.paste_horiz sq).toCommSq rfl rfl M
+  have hcomp : IsIso
+      ((leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) v t (v ≫ t) rfl).hom.app
+        ((R((f)_*[ModuleCat.{u + 1} Λ])).obj M) ≫
+      (L((v)^*[ModuleCat.{u + 1} Λ])).map
+        ((derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq).app M) ≫
+      (derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq'.toCommSq).app
+        ((L((g)^*[ModuleCat.{u + 1} Λ])).obj M) ≫
+      (R((fT')_*[ModuleCat.{u + 1} Λ])).map
+        ((leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) h g (h ≫ g) rfl).inv.app M)) := by
+    rw [hp]
+    exact h₂
+  rw [isIso_comp_left_iff, isIso_comp_left_iff,
+    isIso_comp_right_iff] at hcomp
+  exact (NatTrans.isIso_app_iff_of_iso _ (leftDerivedUpperStarTateObjectIso g 1)).1 hcomp
+
+
+
+-- The unit comparison is formed from several derived functors.
+private theorem unit_homology_exchange (Λ : Type (u + 1)) [CommRing Λ]
+    [NeZero (ringChar Λ)] {X' X Y' Y : Scheme.{u}}
+    [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y]
+    [HasInvertibleExponent Λ Y']
+    {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
+    (sq : CommSq g' f' f g)
+    (hex : IsIso ((derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq).app
+      (tateObject Λ X 1))) (n : ℤ) :
+    IsIso ((_root_.DerivedCategory.homologyFunctor _ n).map
+      ((L((g)^*[ModuleCat.{u + 1} Λ])).map
+        ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).unit.app
+          (tateObject Λ Y 1)))) ↔
+    IsIso ((_root_.DerivedCategory.homologyFunctor _ n).map
+      ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f').unit.app
+        (tateObject Λ Y' 1))) := by
+  let H := _root_.DerivedCategory.homologyFunctor
+    (Sheaf Y'.smallEtaleTopology (ModuleCat.{u + 1} Λ)) n
+  let M := tateObject Λ Y 1
+  have hb : IsIso ((derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq).app
+      ((L((f)^*[ModuleCat.{u + 1} Λ])).obj M)) :=
+    (NatTrans.isIso_app_iff_of_iso _ (leftDerivedUpperStarTateObjectIso f 1)).2 hex
+  have hu := congrArg H.map
+    (map_unit_derivedBaseChangeMap_app (ModuleCat.{u + 1} Λ) sq M)
+  simp only [Functor.map_comp] at hu
+  have hi : IsIso (H.map ((L((g)^*[ModuleCat.{u + 1} Λ])).map
+      ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).unit.app M))) ↔
+      IsIso (H.map ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f').unit.app
+        ((L((g)^*[ModuleCat.{u + 1} Λ])).obj M))) := by
+    rw [← isIso_comp_right_iff _ (H.map
+      ((derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq).app
+        ((L((f)^*[ModuleCat.{u + 1} Λ])).obj M))), hu, isIso_comp_right_iff]
+  exact hi.trans (NatTrans.isIso_app_iff_of_iso
+    (Functor.whiskerRight (derivedUpperStarLowerStarAdjunction
+      (ModuleCat.{u + 1} Λ) f').unit H) (leftDerivedUpperStarTateObjectIso g 1))
+
+
+
+-- Compare the adjoint class through the base-change and coefficient isomorphisms.
+private theorem kummer_homology_exchange (Λ : Type (u + 1)) [CommRing Λ]
+    [NeZero (ringChar Λ)] {X' X Y' Y : Scheme.{u}}
+    [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ X']
+    {q : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
+    (sq : CommSq q f' f g) (v : Γ(X, ⊤)ˣ) (v' : Γ(X', ⊤)ˣ)
+    (hv : Units.map q.appTop.hom.toMonoidHom v = v')
+    (hex : IsIso ((derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq).app
+      (tateObject Λ X 1))) :
+    IsIso ((_root_.DerivedCategory.homologyFunctor _ 0).map
+      ((L((g)^*[ModuleCat.{u + 1} Λ])).map
+        ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).homEquiv _ _
+          ((leftDerivedUpperStarConstantComplexIso Λ f).hom ≫ kummerClass Λ v)))) ↔
+    IsIso ((_root_.DerivedCategory.homologyFunctor _ 0).map
+      ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f').homEquiv _ _
+        ((leftDerivedUpperStarConstantComplexIso Λ f').hom ≫ kummerClass Λ v'))) := by
+  let H := _root_.DerivedCategory.homologyFunctor
+    (Sheaf Y'.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0
+  let K := tateObject Λ X 1
+  let BC := derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq
+  let θf := leftDerivedUpperStarConstantComplexIso Λ f
+  let θf' := leftDerivedUpperStarConstantComplexIso Λ f'
+  let θg := leftDerivedUpperStarConstantComplexIso Λ g
+  let θq := leftDerivedUpperStarConstantComplexIso Λ q
+  let κb := (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).homEquiv _ _
+    (θf.hom ≫ kummerClass Λ v)
+  let κb' := (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f').homEquiv _ _
+    (θf'.hom ≫ kummerClass Λ v')
+  let C := ((L((q)^*[ModuleCat.{u + 1} Λ])).commShiftIso (1 : ℤ)).app K ≪≫
+    (shiftFunctor _ (1 : ℤ)).mapIso (leftDerivedUpperStarTateObjectIso q 1)
+  have hnat : (L((q)^*[ModuleCat.{u + 1} Λ])).map (kummerClass Λ v) ≫ C.hom =
+      θq.hom ≫ kummerClass Λ v' := by
+    simpa only [C, Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, hv] using
+      leftDerivedUpperStar_map_kummerClass Λ q v
+  have hR : (L((g)^*[ModuleCat.{u + 1} Λ])).map κb ≫ BC.app (K⟦(1 : ℤ)⟧) ≫
+      (R((f')_*[ModuleCat.{u + 1} Λ])).map C.hom = θg.hom ≫ κb' := by
+    rw [← Category.assoc, derivedBaseChangeMap_app_homEquiv,
+      ← Adjunction.homEquiv_naturality_right, ← Adjunction.homEquiv_naturality_left]
+    congr 1
+    simp only [Functor.map_comp, Category.assoc]
+    rw [hnat]
+    exact (reassoc_of% (derivedSquareUpperStarIso_hom_app_constantComplex Λ sq)) _
+  have hb : IsIso (BC.app (K⟦(1 : ℤ)⟧)) := by
+    rw [NatTrans.app_shift BC (1 : ℤ) K]
+    infer_instance
+  have h := congrArg H.map hR
+  simp only [Functor.map_comp] at h
+  change IsIso (H.map ((L((g)^*[ModuleCat.{u + 1} Λ])).map κb)) ↔ IsIso (H.map κb')
+  rw [← isIso_comp_right_iff _ (H.map (BC.app (K⟦(1 : ℤ)⟧))),
+    ← isIso_comp_right_iff _ (H.map ((R((f')_*[ModuleCat.{u + 1} Λ])).map C.hom)),
+    Category.assoc, h, isIso_comp_left_iff]
+
+
+
+-- First base change the smooth field model, then cancel its comparison map.
+private theorem affine_point_exchange (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    [NeZero (ringChar Λ)] {k Ω : Type u} [Field k] [Field Ω]
+    {B : Scheme.{u}} (aB : B ⟶ Spec (.of k)) [LocallyOfFiniteType aB]
+    [HasInvertibleExponent Λ B] (x : Spec (.of Ω) ⟶ B) :
+    IsIso ((derivedBaseChangeMap (ModuleCat.{u + 1} Λ)
+      (AffineSpace.isPullback_map (n := ULift.{u} (Fin 1)) x).toCommSq).app
+        (tateObject Λ 𝔸(ULift.{u} (Fin 1); B) 1)) := by
+  have : Nonempty B := ⟨x (IsLocalRing.closedPoint Ω)⟩
+  have : HasInvertibleExponent Λ (Spec (.of k)) := .of_hom_of_nonempty aB
+  have : IsLocallyNoetherian B := LocallyOfFiniteType.isLocallyNoetherian aB
+  have : Smooth (𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k)) :=
+    SmoothOfRelativeDimension.smooth (n := Nat.card (ULift.{u} (Fin 1))) _
+  exact field_exchange_cancel Λ (𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k))
+    aB (AffineSpace.map (ULift.{u} (Fin 1)) aB) _ (AffineSpace.isPullback_map aB)
+    x (AffineSpace.map (ULift.{u} (Fin 1)) x) _ (AffineSpace.isPullback_map x)
+
+-- The punctured line is the smooth affine open of the field model.
+private theorem multiplicative_point_exchange (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    [NeZero (ringChar Λ)] {k Ω : Type u} [Field k] [Field Ω]
+    {B : Scheme.{u}} (aB : B ⟶ Spec (.of k)) [LocallyOfFiniteType aB]
+    [HasInvertibleExponent Λ B] (x : Spec (.of Ω) ⟶ B)
+    {G G' : Scheme.{u}} (j : G ⟶ 𝔸(ULift.{u} (Fin 1); B)) [IsOpenImmersion j]
+    (hj : Set.range j.base =
+      (Set.range (AffineSpace.zeroSection (ULift.{u} (Fin 1)) B).base)ᶜ)
+    (j' : G' ⟶ 𝔸(ULift.{u} (Fin 1); Spec (.of Ω))) [IsOpenImmersion j']
+    (hj' : Set.range j'.base =
+      (Set.range (AffineSpace.zeroSection (ULift.{u} (Fin 1)) (Spec (.of Ω))).base)ᶜ)
+    [HasInvertibleExponent Λ G] :
+    IsIso ((derivedBaseChangeMap (ModuleCat.{u + 1} Λ)
+      (AffineSpace.isPullback_complementMap_over x j j' hj hj').toCommSq).app
+        (tateObject Λ G 1)) := by
+  have : Nonempty B := ⟨x (IsLocalRing.closedPoint Ω)⟩
+  have : HasInvertibleExponent Λ (Spec (.of k)) := .of_hom_of_nonempty aB
+  have : IsLocallyNoetherian B := LocallyOfFiniteType.isLocallyNoetherian aB
+  let j₀ := (multiplicativeGroupModel k).ι
+  have hj₀ := range_multiplicativeGroupModel_ι k
+  have : HasInvertibleExponent Λ (multiplicativeGroupModel k) := .of_hom j₀
+  have : Smooth (𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k)) :=
+    SmoothOfRelativeDimension.smooth (n := Nat.card (ULift.{u} (Fin 1))) _
+  have : IsOpenImmersion j₀ := inferInstance
+  exact field_exchange_cancel Λ
+    (j₀ ≫ 𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k))
+    aB (AffineSpace.complementMap aB j₀ j hj₀ hj) _
+    (AffineSpace.isPullback_complementMap_over aB j₀ j hj₀ hj)
+    x (AffineSpace.complementMap x j j' hj hj') _
+    (AffineSpace.isPullback_complementMap_over x j j' hj hj')
+
+
+
+private theorem reflect_homology_iso (Λ : Type (u + 1)) [CommRing Λ]
+    {B : Scheme.{u}} {M N : _root_.DerivedCategory
+      (Sheaf B.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (f : M ⟶ N) (n : ℤ)
+    (h : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ B),
+      IsIso ((_root_.DerivedCategory.homologyFunctor _ n).map
+        ((L((x)^*[ModuleCat.{u + 1} Λ])).map f))) :
+    IsIso ((_root_.DerivedCategory.homologyFunctor _ n).map f) := by
+  refine isIso_of_isIso_upperStar_map_of_jointlySurjective (ModuleCat.{u + 1} Λ)
+    (fun y ↦ B.algClosurePoint y)
+    (fun y ↦ ⟨y, IsLocalRing.closedPoint _, Scheme.algClosurePoint_base _ _ _⟩) _ fun y ↦ ?_
+  exact (NatIso.isIso_map_iff
+    (leftDerivedUpperStarHomologyFunctorIso _ (B.algClosurePoint y) n) f).2 (h _ _)
+
+private theorem reflect_homology_zero (Λ : Type (u + 1)) [CommRing Λ]
+    {B : Scheme.{u}} (M : _root_.DerivedCategory
+      (Sheaf B.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (n : ℤ)
+    (h : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ B),
+      IsZero ((_root_.DerivedCategory.homologyFunctor _ n).obj
+        ((L((x)^*[ModuleCat.{u + 1} Λ])).obj M))) :
+    IsZero ((_root_.DerivedCategory.homologyFunctor _ n).obj M) := by
+  exact isZero_homology_of_jointlySurjective Λ (fun y ↦ B.algClosurePoint y)
+    (fun y ↦ ⟨y, IsLocalRing.closedPoint _, Scheme.algClosurePoint_base _ _ _⟩) M n
+    (fun y ↦ h _ _)
+
+
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [NeZero (ringChar Λ)]
   {k : Type u} [Field k] (B : Scheme.{u}) (aB : B ⟶ Spec (.of k)) [IsSeparated aB]
   [LocallyOfFiniteType aB] [HasInvertibleExponent Λ B]
 
 attribute [local instance] HasInvertibleExponent.opens
 
+
+
+-- The adopted statement retains separatedness, though the comparison proof does not need it.
+set_option linter.unusedSectionVars false in
+set_option maxHeartbeats 600000 in
+-- The proof compares the units and class maps of composite derived adjunctions.
+set_option maxRecDepth 10000 in
 include aB in
 /-- Blueprint `sk-prop-a1-kummer`: The affine line and `𝔾ₘ` with `Λ(1)`-coefficients
 

@@ -1,0 +1,11 @@
+/-
+Copyright (c) 2026 Bin Wu. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Bin Wu
+-/
+module
+
+public import WeilConjectures.AlgebraicGeometry.GradedModuleRelativeSpecRealization
+
+/-! Retired at the upstream sync to slopmaster2 e47efb5a5: the source library now has
+this module's declarations in `WeilConjectures.AlgebraicGeometry.GradedModuleRelativeSpecRealization`; this module re-exports it. -/

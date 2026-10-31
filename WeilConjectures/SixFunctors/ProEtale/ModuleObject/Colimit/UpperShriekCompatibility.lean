@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.ToPadicAlgClCompatibility
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.UpperShriekCompatibilityPush
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.UpperShriekCompatibility
 
 /-!
 
@@ -47,6 +49,11 @@ comparisons (Pull), (Push) and (Shriek) for open immersions are in
   is one, and hence that the exchange for `f^!` is an isomorphism, is proved in
   `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.UpperShriekCompatibilityProper`.
 
+The file is split for compile time: `T_X`, (Pull) and the open immersions are in
+`…Colimit.UpperShriekCompatibilityPull`, (Push) in `…Colimit.UpperShriekCompatibilityPush`, the
+exchange along a compactification in `…Colimit.UpperShriekCompatibilityCompactification`; this
+module imports them and treats the exchange for `f^!` along the chosen compactification.
+
 -/
 
 @[expose] public section
@@ -71,88 +78,6 @@ section Shriek
 variable {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
-
-section OfCompactification
-
-variable {f : X ⟶ Y} (c : Compactification f.left)
-
-/-- **(Shriek)** on bounded constructible complexes along a compactification
-`c = (X ⟶[i] Z ⟶[g] Y)` of `f`, for the inclusion `E ⟶ ℚ̄_ℓ`:
-`Rf_!(c)^E ⋙ T_Y ≅ T_X ⋙ Rf_!(c)^{ℚ̄_ℓ}`, composed of (Shriek) for the open immersion `i` and
-(Push) for the proper `g`. -/
-noncomputable def boundedConstructibleLowerShriekOfCompactificationToPadicAlgClIso :
-    ContinuousMapRingObj.boundedConstructibleLowerShriekOfCompactification ℓ E c ⋙
-        boundedConstructibleToPadicAlgCl Y.left ℓ E ≅
-      boundedConstructibleToPadicAlgCl X.left ℓ E ⋙
-        boundedConstructibleLowerShriekOfCompactification ℓ c :=
-  Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft _ (boundedConstructibleLowerStarToPadicAlgClIso ℓ E c.overG) ≪≫
-    (Functor.associator _ _ _).symm ≪≫
-    Functor.isoWhiskerRight
-      (boundedConstructibleOpenImmersionLowerShriekToPadicAlgClIso ℓ E c.overI) _ ≪≫
-    Functor.associator _ _ _
-
-/-- The exchange `Rg^!_E ⋙ T_Z ⟶ T_Y ⋙ Rg^!_{ℚ̄_ℓ}` for the proper part `g` of a compactification:
-the mate of the inverse of (Push) under the adjunctions `Rg_* ⊣ Rg^!`. -/
-noncomputable def boundedConstructibleProperUpperShriekToPadicAlgCl :
-    (ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E c.overG).rightAdjoint ⋙
-        boundedConstructibleToPadicAlgCl c.overObj.left ℓ E ⟶
-      boundedConstructibleToPadicAlgCl Y.left ℓ E ⋙
-        (boundedConstructibleLowerStar ℓ c.overG).rightAdjoint :=
-  mateEquiv (Adjunction.ofIsLeftAdjoint _) (Adjunction.ofIsLeftAdjoint _)
-    (boundedConstructibleLowerStarToPadicAlgClIso ℓ E c.overG).inv
-
-/-- The exchange `Rf^!(c)_E ⋙ T_X ⟶ T_Y ⋙ Rf^!(c)_{ℚ̄_ℓ}` along a compactification `c`: the mate
-of the inverse of (Shriek) under the adjunctions `Rf_!(c) ⊣ Rf^!(c)`. -/
-noncomputable def boundedConstructibleUpperShriekOfCompactificationToPadicAlgCl :
-    ContinuousMapRingObj.boundedConstructibleUpperShriekOfCompactification ℓ E c ⋙
-        boundedConstructibleToPadicAlgCl X.left ℓ E ⟶
-      boundedConstructibleToPadicAlgCl Y.left ℓ E ⋙
-        boundedConstructibleUpperShriekOfCompactification ℓ c :=
-  mateEquiv
-    (ContinuousMapRingObj.boundedConstructibleUpperShriekOfCompactificationAdjunction ℓ E c)
-    (boundedConstructibleUpperShriekOfCompactificationAdjunction ℓ c)
-    (boundedConstructibleLowerShriekOfCompactificationToPadicAlgClIso ℓ E c).inv
-
-set_option maxHeartbeats 400000 in
--- `mateEquiv_hcomp` is matched against the unfolded adjunction `Rf_!(c) ⊣ Rf^!(c)`.
-/-- The exchange for `f^!` along a compactification `c = (X ⟶[i] Z ⟶[g] Y)` is the horizontal
-composite of the exchange for the proper part `g` and of the exchange for the open immersion `i`:
-the mates of a vertical composite of squares are the horizontal composite of the mates
-(`CategoryTheory.mateEquiv_hcomp`). -/
-lemma boundedConstructibleUpperShriekOfCompactificationToPadicAlgCl_eq :
-    boundedConstructibleUpperShriekOfCompactificationToPadicAlgCl ℓ E c =
-      TwoSquare.hComp (boundedConstructibleProperUpperShriekToPadicAlgCl ℓ E c)
-        (boundedConstructibleOpenImmersionUpperStarToPadicAlgCl ℓ E c.overI) := by
-  have h : (boundedConstructibleLowerShriekOfCompactificationToPadicAlgClIso ℓ E c).inv =
-      TwoSquare.vComp (boundedConstructibleOpenImmersionLowerShriekToPadicAlgClIso ℓ E c.overI).inv
-        (boundedConstructibleLowerStarToPadicAlgClIso ℓ E c.overG).inv := by
-    ext K
-    simp [boundedConstructibleLowerShriekOfCompactificationToPadicAlgClIso, TwoSquare.vComp]
-  unfold boundedConstructibleUpperShriekOfCompactificationToPadicAlgCl
-  rw [h]
-  exact mateEquiv_hcomp
-    (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
-      (Profinite.continuousMapRingObj E) ℓ c.overI)
-    (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
-      (Profinite.padicAlgClRingObj ℓ) ℓ c.overI)
-    (Adjunction.ofIsLeftAdjoint
-      (ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E c.overG))
-    (Adjunction.ofIsLeftAdjoint
-      (boundedConstructibleLowerStar ℓ c.overG))
-    (boundedConstructibleOpenImmersionLowerShriekToPadicAlgClIso ℓ E c.overI).inv
-    (boundedConstructibleLowerStarToPadicAlgClIso ℓ E c.overG).inv
-
-/-- The exchange for `f^!` along a compactification `c` is an isomorphism as soon as the exchange
-for its proper part is one, the exchange for the open immersion being an isomorphism. -/
-lemma isIso_boundedConstructibleUpperShriekOfCompactificationToPadicAlgCl
-    [IsIso (boundedConstructibleProperUpperShriekToPadicAlgCl ℓ E c)] :
-    IsIso (boundedConstructibleUpperShriekOfCompactificationToPadicAlgCl ℓ E c) := by
-  rw [boundedConstructibleUpperShriekOfCompactificationToPadicAlgCl_eq]
-  unfold TwoSquare.hComp
-  infer_instance
-
-end OfCompactification
 
 variable (f : X ⟶ Y)
 

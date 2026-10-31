@@ -8,6 +8,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Limits
 import Mathlib.AlgebraicGeometry.PullbackCarrier
+import WeilConjectures.AlgebraicGeometry.AffineSpace.Fiber
 
 /-!
 # Constant group schemes and their points

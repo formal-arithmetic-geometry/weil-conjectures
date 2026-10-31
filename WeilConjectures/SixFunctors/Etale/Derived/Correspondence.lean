@@ -51,7 +51,7 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
 
-open Scheme
+open _root_.AlgebraicGeometry.Scheme
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 

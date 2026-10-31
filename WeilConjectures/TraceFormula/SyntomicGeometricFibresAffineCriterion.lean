@@ -1,0 +1,159 @@
+/-
+Copyright (c) 2026 Bin Wu. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Bin Wu
+-/
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
+public import Mathlib.RingTheory.RingHom.Flat
+public import Mathlib.RingTheory.FinitePresentation
+public import WeilConjectures.RingTheory.CompleteIntersectionOverField
+import WeilConjectures.RingTheory.LocalCompleteIntersectionFieldChange
+import WeilConjectures.TraceFormula.LciAffineOpenLocality
+
+
+/-! # Affine criterion for syntomic geometric fibres
+
+Source: Stacks Project, Morphisms, Tags 01UC (definition-syntomic),
+01UD (lemma-syntomic-characterize), 01UE (lemma-syntomic-locally-standard-syntomic),
+01UF (lemma-syntomic-flat-fibres), and 01UG (lemma-local-complete-intersection);
+Algebra, Tags 00SL (definition-lci) and 00SJ (lemma-lci-field-change).
+(blueprint: lem-trf-syntomic-geometric-fibres-affine-criterion).
+
+## Main definitions and statement
+
+* `IsLocalCompleteIntersectionOver`: the field-relative scheme predicate in the node.
+* `IsSyntomicAffineChart`: the three coordinate-ring conditions on an affine pair.
+* `syntomic_geometric_fibres_affine_criterion`: equivalence of the geometric-fibre,
+  all-affine-pairs, and chosen-affine-covers conditions.
+-/
+
+@[expose] public section
+set_option autoImplicit false
+
+universe u
+
+open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
+
+namespace AlgebraicGeometry
+
+/-- A scheme over a field whose affine open charts have local-complete-intersection
+coordinate algebras.  The open charts are presented by open immersions from spectra,
+and their maps to the base spectrum are the maps induced by the displayed algebras.
+An empty chart family is allowed. Source: Stacks Project, Morphisms, Tags 01UC
+(definition-syntomic), 01UG (lemma-local-complete-intersection), and Algebra,
+Tag 00S9 (definition-lci-field).
+(blueprint: lem-trf-syntomic-geometric-fibres-affine-criterion) -/
+def IsLocalCompleteIntersectionOver (k : Type u) (Z : Scheme.{u})
+    [Field k] (s : Z ⟶ Spec (.of k)) : Prop :=
+  ∃ (I : Type u) (A : I → CommRingCat.{u})
+    (aA : ∀ i, Algebra k (A i)) (ft : ∀ i, Algebra.FiniteType k (A i))
+    (φ : ∀ i, Spec (A i) ⟶ Z),
+    (∀ i, IsOpenImmersion (φ i)) ∧
+      (∀ i, φ i ≫ s =
+        Spec.map (CommRingCat.ofHom (@algebraMap k (A i) _ _ (aA i)))) ∧
+      (∀ z : Z, ∃ i, ∃ x : Spec (A i), φ i x = z) ∧
+      (∀ i, @Algebra.IsLocalCompleteIntersection k (A i) _ _ (aA i) (ft i))
+
+/-- The three ring conditions on one affine chart.
+Source: Stacks Project, Algebra, Tag 00SL (definition-lci), and Morphisms,
+Tag 01UD (lemma-syntomic-characterize), condition (2). The fibre uses Mathlib's
+`Ideal.Fiber`, with the residue-field factor first; tensor symmetry identifies
+this with the fibre ring in the node.
+(blueprint: lem-trf-syntomic-geometric-fibres-affine-criterion) -/
+def IsSyntomicAffineChart {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (V : Y.Opens) (U : X.Opens) (hUV : U ≤ f ⁻¹ᵁ V) : Prop :=
+  (f.appLE V U hUV).hom.Flat ∧
+    (f.appLE V U hUV).hom.FinitePresentation ∧
+    ∀ (p : PrimeSpectrum Γ(Y, V)),
+      ∃ hft : Algebra.FiniteType (Ideal.ResidueField p.asIdeal)
+          (@Ideal.Fiber (↥(Γ(Y, V))) _ p.asIdeal _ (↥(Γ(X, U))) _
+            ((RingHom.toAlgebra (f.appLE V U hUV).hom).toModule)),
+        @Algebra.IsLocalCompleteIntersection
+          (Ideal.ResidueField p.asIdeal)
+          (@Ideal.Fiber (↥(Γ(Y, V))) _ p.asIdeal _ (↥(Γ(X, U))) _
+            ((RingHom.toAlgebra (f.appLE V U hUV).hom).toModule))
+          _ _ _ hft
+
+/-- Affine-local characterization of flat finitely presented morphisms with
+local-complete-intersection geometric fibres.
+(blueprint: lem-trf-syntomic-geometric-fibres-affine-criterion)
+
+Source: Stacks Project, Morphisms, Tags 01UC--01UG, and Algebra, Tags 00SL and 00SJ.
+The six steps of the node's proof are as follows.
+
+1. For an affine pair `U = Spec B`, `V = Spec A` and `Spec k → V`, pull back `U`
+   along the first projection of the fibre. By
+   `lem-weil-pbc-open-preimage-fibre-product` this is an open subscheme. The
+   universal property `def-pc-fibre-product`, and cancellation through the open
+   immersion `V → Y`, identify it with `U ×[V] Spec k`. By
+   `lem-weil-pbc-fibre-product-affine-spectra` it is `Spec (B ⊗[A] k)` over `k`.
+   Inverse images of covering opens cover, since inverse image preserves unions.
+2. Assume condition (1). For every affine pair, flatness of the coordinate map
+   follows from `lem-weil-pbc-flat-morphism-affine-criterion`, and finite
+   presentation from `lem-weil-pbc-lfp-affine-opens-finite-presentation`.
+   For a prime `p` of `A`, base change of finite presentation by
+   `lem-weil-pbc-finite-presentation-base-change-composition` makes
+   `S = B ⊗[A] κ(p)` finitely presented. It is finitely generated by the images
+   of the variables in a presentation (`def-weil-pbc-finitely-presented-algebra`).
+3. Choose an algebraic closure `Ω` of `κ(p)` (`def-weil-algebraic-closure`).
+   The prime and its residue-field inclusion give a geometric point of `Y`
+   (`def-weil-geometric-point`). Its fibre satisfies the scheme predicate by (1).
+   Step 1 identifies the pulled-back affine open with `Spec (B ⊗[A] Ω)`.
+   Apply `lem-trf-lci-affine-open-locality` to this open. The algebra isomorphism
+   `(B ⊗[A] κ(p)) ⊗[κ(p)] Ω ≃ B ⊗[A] Ω` sends `(b ⊗ t) ⊗ z` to
+   `b ⊗ t*z`, with inverse `b ⊗ z ↦ (b ⊗ 1) ⊗ z`; balanced relations verify
+   the inverse identities. Descent in `lem-weil-pbc-lci-field-change`, using
+   finite type from step 2, gives the complete-intersection condition for `S`.
+   This proves (2).
+4. From (2), take an affine cover of `Y` and an affine cover of each open
+   inverse image (`def-pc-scheme`). Every resulting pair satisfies (2), hence
+   gives (3). An empty inverse image can have an empty cover.
+5. Assume (3). On each affine pair the coordinate flatness gives flatness of
+   its morphism (`lem-weil-pbc-flat-ring-map-iff-flat-affine`). At any point
+   choose such a pair. Restriction to open neighbourhoods preserves the two
+   stalks and their map; this proves flatness of `f` (`def-weil-flat-morphism`).
+   Its finitely presented coordinate map also witnesses finite presentation
+   at that point (`def-sbc-locally-finite-presentation`), proving local finite
+   presentation everywhere.
+6. Fix a geometric point `Spec Ω → Y`, and choose a target cover member
+   containing its image `y`. The map gives `κ(y) → Ω`
+   (`def-weil-geometric-point`), identified with `κ(p) → Ω` on that chart.
+   Every source chart fibre `B ⊗[A] κ(p)` is finite type and a local complete
+   intersection by (3) and `def-weil-pbc-complete-intersection-over-field`.
+   Ascent in `lem-weil-pbc-lci-field-change` and the tensor isomorphism of
+   step 3 give the same properties for `B ⊗[A] Ω`. The first projection of
+   the geometric fibre lands in the chosen inverse image: its composite
+   with `f` equals the second projection followed by the geometric point.
+   Thus the inverse images of the source cover members cover the whole fibre.
+   Step 1 makes these affine charts with the required coordinate algebras.
+   They imply local finite type (`def-weil-finite-type-morphism`) and the
+   stated scheme predicate. Empty fibres allow an empty cover. Together
+   with step 5 this proves (1), closing the cycle of equivalences. -/
+theorem syntomic_geometric_fibres_affine_criterion {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    ((Flat f ∧ LocallyOfFinitePresentation f ∧
+      ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω]
+        (ybar : Spec (.of Ω) ⟶ Y),
+        IsLocalCompleteIntersectionOver Ω (Limits.pullback f ybar)
+          (Limits.pullback.snd f ybar)) ↔ (∀ (V : Y.Opens) (hV : IsAffineOpen V)
+      (U : X.Opens) (hU : IsAffineOpen U) (hUV : U ≤ f ⁻¹ᵁ V),
+      IsSyntomicAffineChart f V U hUV)) ∧
+      ((∀ (V : Y.Opens) (hV : IsAffineOpen V)
+      (U : X.Opens) (hU : IsAffineOpen U) (hUV : U ≤ f ⁻¹ᵁ V),
+      IsSyntomicAffineChart f V U hUV) ↔ (∃ (I : Type u) (V : I → Y.Opens),
+      (∀ i, IsAffineOpen (V i)) ∧
+      (∀ y : Y, ∃ i, y ∈ V i) ∧
+      ∀ i, ∃ (J : Type u) (U : J → X.Opens),
+        (∀ j, IsAffineOpen (U j)) ∧
+        (∀ x : X, x ∈ f ⁻¹ᵁ V i → ∃ j, x ∈ U j) ∧
+        ∀ j, ∃ hUV : U j ≤ f ⁻¹ᵁ V i,
+          IsSyntomicAffineChart f (V i) (U j) hUV)) := by sorry
+
+end AlgebraicGeometry
+
+end

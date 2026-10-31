@@ -119,7 +119,7 @@ end Scheme
 
 namespace Etale
 
-open Scheme
+open _root_.AlgebraicGeometry.Scheme
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [NeZero (ringChar Λ)] {X : Scheme.{u}}
   [HasInvertibleExponent Λ X]

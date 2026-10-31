@@ -1,0 +1,272 @@
+/-
+Copyright (c) 2026 Bin Wu. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Bin Wu
+-/
+module
+
+public import WeilConjectures.AlgebraicGeometry.VectorBundleIntegrationCharts
+public import WeilConjectures.AlgebraicGeometry.VectorPurityDirectSum
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteUnitPullbackNormalization
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Arrows
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1KummerSupplement
+import WeilConjectures.AlgebraicGeometry.RelativeKummerExchangeGeneratorsSupplement
+import WeilConjectures.AlgebraicGeometry.EtaleSinglePullbackComparisonsSupplement
+import WeilConjectures.AlgebraicGeometry.EtaleFiniteTwistPullback
+import Mathlib.AlgebraicGeometry.Sites.Etale
+import Mathlib.AlgebraicGeometry.Scheme
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateSheaf
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateTwist
+import WeilConjectures.AlgebraicGeometry.Sites.Kummer
+import Mathlib.Algebra.Module.ZMod
+import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
+import Mathlib.CategoryTheory.Sites.Monoidal
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import WeilConjectures.AlgebraicGeometry.EtaleConstantRingModuleEquivalence
+import WeilConjectures.CategoryTheory.RingedSiteModules
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
+import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+import WeilConjectures.AlgebraicGeometry.DerivedCategories
+import WeilConjectures.AlgebraicGeometry.RingedTopoiDerivedTensorPullback
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.TensorShiftIso
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
+import WeilConjectures.AlgebraicGeometry.EtaleFiniteTwistPullbackBase
+import WeilConjectures.ConstructibleSheaf.Defs
+import WeilConjectures.EtaleCohomology.TateTwist.Sheaf
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateLinePullback
+import WeilConjectures.EtaleCohomology.TateTwist.RootsOfUnityPullback
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateTensorFamily
+import WeilConjectures.CategoryTheory.NormalizedSignedTensorPowers
+import WeilConjectures.CategoryTheory.Monoidal.IntTensorFamily
+import Mathlib.CategoryTheory.Monoidal.Closed.Basic
+import WeilConjectures.CategoryTheory.IntTensorFamilyIso
+import Mathlib.CategoryTheory.Monoidal.Braided.Basic
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateLocalLine
+import WeilConjectures.AlgebraicGeometry.Sites.SmallEtaleRepresentablePresheafSheaf
+import WeilConjectures.ConstructibleSheaf.Pullback
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.LocallyTrivialInverse
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.MonoidalComp
+import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Unit
+import WeilConjectures.AlgebraicGeometry.EtaleFiniteTwistPullbackRest
+import Mathlib.CategoryTheory.Abelian.Refinements
+import Mathlib.Algebra.Homology.ShortComplex.Exact
+import WeilConjectures.AlgebraicGeometry.ProperProjectionFormula
+import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
+import WeilConjectures.AlgebraicGeometry.EtaleDerivedTensorSymmetrySupplement
+import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
+import Mathlib.AlgebraicGeometry.Morphisms.Proper
+import Mathlib.AlgebraicGeometry.Noetherian
+import Mathlib.Topology.Defs.Filter
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.SixFunctors.Etale.Derived.Tensor
+import WeilConjectures.AlgebraicGeometry.ExactUnboundedExchange
+import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
+import WeilConjectures.SixFunctors.BaseChange.Square
+import WeilConjectures.SixFunctors.Etale.Derived.Shift
+import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
+import Mathlib.Logic.Small.Defs
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteConstantUnitSquare
+import WeilConjectures.AlgebraicGeometry.EtaleSectionUnitNormalization
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
+import WeilConjectures.AlgebraicGeometry.ProjectiveLineDiagonalMaps
+import WeilConjectures.AlgebraicGeometry.OrdinarySupportedCartierKummerSupplement
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+import WeilConjectures.AlgebraicGeometry.EtaleDiagonalSectionCoherence
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteTraceCounit
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Data
+import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
+import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarAdjunctionCompat
+import WeilConjectures.CategoryTheory.SectionConjugateComparison
+import WeilConjectures.CategoryTheory.SectionProjectionUnitSupplement
+import WeilConjectures.AlgebraicGeometry.EtaleTensorTraceBaseChange
+import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionBaseChange
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Braided
+import WeilConjectures.AlgebraicGeometry.EtaleCanonicalTensorComparison
+import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategorySymmetric
+import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Reduction
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionMonoidal
+import WeilConjectures.CategoryTheory.DerivedSingleUnit
+import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteUnitPullbackComparison
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteConstantPullbackHom
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteUnitPullbackHom
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comp
+import all Mathlib.CategoryTheory.Limits.HasLimits
+
+/-! # Pullback of ordered Tate-power addition
+(blueprint: lem-pur-vector-integration-base-coefficient-add).
+-/
+
+@[expose] public noncomputable section
+set_option autoImplicit false
+set_option backward.defeqAttrib.useBackward true
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
+universe u
+open CategoryTheory CategoryTheory.Limits
+namespace AlgebraicGeometry.Etale
+open WeilConjectures.PurityFiniteSetting (purityPowerAdd)
+
+set_option linter.auxLemma false in
+attribute [local instance 100000] DerivedCategoryModule._proof_1 DerivedCategoryModule._proof_2
+attribute [local irreducible] upperStar
+attribute [local implicit_reducible] ordinaryFiniteDegreeZero ordinaryFiniteSingleFunctor
+  derivedTensorRight ordinaryFiniteTensorPullback ordinaryFiniteTensorRightMapIso
+  leftDerivedUpperStarTensorIso affineLinearBaseCoefficient
+
+open MonoidalCategory
+attribute [local instance] Sheaf.monoidalCategory
+attribute [local irreducible] _root_.DerivedCategory.singleFunctors
+  Functor.leftDerivedFunctor
+
+set_option maxHeartbeats 2000000 in
+-- The coherence calculation elaborates large tensor and comparison expressions.
+private theorem tensor_zero {C D : Type*} [Category C] [Category D]
+    [MonoidalCategory C] [MonoidalCategory D] (F : C ⥤ D) [F.OplaxMonoidal]
+    {A I : C} {A' I' : D} (z : I ≅ 𝟙_ C) (z' : I' ≅ 𝟙_ D)
+    (bA : F.obj A ⟶ A') (bI : F.obj I ⟶ I')
+    (h : bI ≫ z'.hom = F.map z.hom ≫ Functor.OplaxMonoidal.η F) :
+    F.map ((ρ_ A).inv ≫ (𝟙 A ⊗ₘ z.inv)) ≫
+        Functor.OplaxMonoidal.δ F A I ≫ (bA ⊗ₘ bI) =
+      bA ≫ (ρ_ A').inv ≫ (𝟙 A' ⊗ₘ z'.inv) := by
+  apply (cancel_mono ((𝟙 A' ⊗ₘ z'.hom) ≫ (ρ_ A').hom)).mp
+  simp only [Category.assoc, tensorHom_comp_tensorHom_assoc, Category.comp_id,
+    Iso.inv_hom_id, tensorHom_id, id_whiskerRight, Category.id_comp]
+  calc
+    _ = F.map (ρ_ A).inv ≫ F.map (𝟙 A ⊗ₘ z.inv) ≫
+        Functor.OplaxMonoidal.δ F A I ≫
+        (bA ⊗ₘ (F.map z.hom ≫ Functor.OplaxMonoidal.η F)) ≫ (ρ_ A').hom := by
+      rw [h]
+      simp only [CategoryTheory.Functor.map_comp, Category.assoc]
+    _ = F.map (ρ_ A).inv ≫ Functor.OplaxMonoidal.δ F A (𝟙_ C) ≫
+        (bA ⊗ₘ Functor.OplaxMonoidal.η F) ≫ (ρ_ A').hom := by
+      rw [← Functor.OplaxMonoidal.δ_natural_assoc]
+      simp only [tensorHom_comp_tensorHom_assoc]
+      rw [CategoryTheory.Functor.map_id, Category.id_comp, ← CategoryTheory.Functor.map_comp_assoc,
+        Iso.inv_hom_id, CategoryTheory.Functor.map_id, Category.id_comp]
+    _ = F.map (ρ_ A).inv ≫ Functor.OplaxMonoidal.δ F A (𝟙_ C) ≫
+        (𝟙 (F.obj A) ⊗ₘ Functor.OplaxMonoidal.η F) ≫
+        (ρ_ (F.obj A)).hom ≫ bA := by
+      rw [← rightUnitor_naturality]
+      simp only [← tensorHom_id, tensorHom_comp_tensorHom_assoc,
+        Category.id_comp, Category.comp_id]
+    _ = bA := by
+      rw [id_tensorHom, Functor.OplaxMonoidal.right_unitality_hom_assoc]
+      rw [← CategoryTheory.Functor.map_comp_assoc, Iso.inv_hom_id,
+        CategoryTheory.Functor.map_id, Category.id_comp]
+
+set_option maxHeartbeats 2000000 in
+-- The coherence calculation elaborates large tensor and comparison expressions.
+private theorem tensor_step {C D : Type*} [Category C] [Category D]
+    [MonoidalCategory C] [MonoidalCategory D] (F : C ⥤ D) [F.OplaxMonoidal]
+    {X A B L : C} {X' A' B' L' : D}
+    (a : X ≅ A ⊗ B) (a' : X' ≅ A' ⊗ B')
+    (bX : F.obj X ⟶ X') (bA : F.obj A ⟶ A')
+    (bB : F.obj B ⟶ B') (bL : F.obj L ⟶ L')
+    (h : F.map a.hom ≫ Functor.OplaxMonoidal.δ F A B ≫ (bA ⊗ₘ bB) = bX ≫ a'.hom) :
+    F.map ((a.hom ⊗ₘ 𝟙 L) ≫ (α_ A B L).hom) ≫
+        Functor.OplaxMonoidal.δ F A (B ⊗ L) ≫
+        (bA ⊗ₘ (Functor.OplaxMonoidal.δ F B L ≫ (bB ⊗ₘ bL))) =
+      Functor.OplaxMonoidal.δ F X L ≫ (bX ⊗ₘ bL) ≫
+        (a'.hom ⊗ₘ 𝟙 L') ≫ (α_ A' B' L').hom := by
+  calc
+    _ = F.map (a.hom ⊗ₘ 𝟙 L) ≫ F.map (α_ A B L).hom ≫
+        Functor.OplaxMonoidal.δ F A (B ⊗ L) ≫
+        (𝟙 (F.obj A) ⊗ₘ Functor.OplaxMonoidal.δ F B L) ≫
+        (bA ⊗ₘ (bB ⊗ₘ bL)) := by
+      simp only [CategoryTheory.Functor.map_comp, Category.assoc, tensorHom_comp_tensorHom,
+        Category.id_comp]
+    _ = F.map (a.hom ⊗ₘ 𝟙 L) ≫ Functor.OplaxMonoidal.δ F (A ⊗ B) L ≫
+        (Functor.OplaxMonoidal.δ F A B ⊗ₘ 𝟙 (F.obj L)) ≫
+        (α_ (F.obj A) (F.obj B) (F.obj L)).hom ≫ (bA ⊗ₘ (bB ⊗ₘ bL)) := by
+      simp only [id_tensorHom, tensorHom_id]
+      rw [← Functor.OplaxMonoidal.associativity_assoc]
+    _ = Functor.OplaxMonoidal.δ F X L ≫
+        (F.map a.hom ⊗ₘ 𝟙 (F.obj L)) ≫
+        (Functor.OplaxMonoidal.δ F A B ⊗ₘ 𝟙 (F.obj L)) ≫
+        ((bA ⊗ₘ bB) ⊗ₘ bL) ≫ (α_ A' B' L').hom := by
+      rw [← Functor.OplaxMonoidal.δ_natural_assoc]
+      simp only [CategoryTheory.Functor.map_id]
+      rw [← associator_naturality]
+    _ = Functor.OplaxMonoidal.δ F X L ≫
+        ((F.map a.hom ≫ Functor.OplaxMonoidal.δ F A B ≫ (bA ⊗ₘ bB)) ⊗ₘ bL) ≫
+        (α_ A' B' L').hom := by
+      simp only [← Category.assoc, tensorHom_comp_tensorHom, Category.id_comp]
+    _ = _ := by
+      rw [h]
+      simp only [← Category.assoc, tensorHom_comp_tensorHom, Category.comp_id]
+
+set_option maxHeartbeats 2000000 in
+-- The coherence calculation elaborates large tensor and comparison expressions.
+/-- Ordered Tate-power addition commutes with normalized pullback.
+Source: vector-bundle purity proof, paragraph 2, ordered coefficient normalization.
+(blueprint: lem-pur-vector-integration-base-coefficient-add).
+
+Proof: Induct on the second power. The zero case follows from the normalized unit comparison
+and the right unit law of the oplax tensor pullback. For a successor, use tensor naturality
+and the oplax associativity law, then the inductive equality in the first two factors.
+The statement includes zero powers, empty schemes and the zero coefficient ring.
+-/
+theorem vectorIntegrationBaseCoefficientPullback_add (A : Type (u + 1)) [CommRing A]
+    (N : ℕ) (hA : (N : A) = 0) (t : Etale.OrdinaryFiniteTwistTransport A N hA)
+    {X Y : Scheme.{u}} (j : X ⟶ Y) (hY : IsUnit (N : Γ(Y, ⊤))) (d e : ℕ) :
+    (Etale.ordinaryFinitePullback A j).mapIso (purityPowerAdd A N hA Y d e) ≪≫
+      Etale.leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} A) j _ _ ≪≫
+      Etale.ordinaryFiniteTensorRightMapIso A X
+        (Etale.vectorIntegrationBaseCoefficientPullback A N hA t j hY d)
+        (Etale.vectorIntegrationBaseCoefficientPullback A N hA t j hY e) =
+    Etale.vectorIntegrationBaseCoefficientPullback A N hA t j hY (d + e) ≪≫
+      purityPowerAdd A N hA X d e := by
+  let F := Etale.ordinaryFinitePullback A j
+  let : F.OplaxMonoidal := Etale.leftDerivedUpperStarOplaxMonoidal (ModuleCat.{u + 1} A) j
+  have tensor_map {K L K' L' : Etale.DerivedCategoryModule A X}
+      (a : K ≅ K') (b : L ≅ L') :
+      (Etale.ordinaryFiniteTensorRightMapIso A X a b).hom = a.hom ⊗ₘ b.hom := by
+    change a.hom ▷ L ≫ K' ◁ b.hom = _
+    rw [MonoidalCategory.tensorHom_def]
+  have hη : Functor.OplaxMonoidal.η F =
+      (Etale.leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} A) j).hom := by
+    exact Etale.leftDerivedUpperStarOplaxMonoidal_η (ModuleCat.{u + 1} A) j
+  have tensor_pull (K L : Etale.DerivedCategoryModule A Y) :
+      (Etale.ordinaryFiniteTensorPullback A j K L).hom =
+        Functor.OplaxMonoidal.δ F K L := by rfl
+  induction e with
+  | zero =>
+    apply Iso.ext
+    have hzero := tensor_zero F
+        (Etale.singleFunctorObjUnitIso (ModuleCat.{u + 1} A) Y)
+        (Etale.singleFunctorObjUnitIso (ModuleCat.{u + 1} A) X)
+        (Etale.vectorIntegrationBaseCoefficientPullback A N hA t j hY d).hom
+        (Etale.ordinaryFiniteUnitPullback A j).hom
+        (by rw [hη]
+            exact Etale.ordinaryFiniteUnitPullback_hom_unit A j)
+    simp only [purityPowerAdd, Iso.trans_hom, Functor.mapIso_hom,
+      tensor_map, Iso.symm_hom,
+      Etale.vectorIntegrationBaseCoefficientPullback, Nat.add_zero] at hzero ⊢
+    convert hzero using 1 <;> rfl
+  | succ e ih =>
+    apply Iso.ext
+    have hh := congrArg Iso.hom ih
+    simp only [Iso.trans_hom, Functor.mapIso_hom, tensor_map] at hh
+    have hstep := tensor_step F (purityPowerAdd A N hA Y d e) (purityPowerAdd A N hA X d e)
+        (Etale.vectorIntegrationBaseCoefficientPullback A N hA t j hY (d + e)).hom
+        (Etale.vectorIntegrationBaseCoefficientPullback A N hA t j hY d).hom
+        (Etale.vectorIntegrationBaseCoefficientPullback A N hA t j hY e).hom
+        (Etale.ordinaryFiniteShiftedLinePullback A N hA t j hY).hom hh
+    simp only [purityPowerAdd, Iso.trans_hom, Functor.mapIso_hom,
+      tensor_map, tensorIso_hom, Iso.refl_hom, Nat.add_succ,
+      Etale.vectorIntegrationBaseCoefficientPullback,
+      tensor_pull, F, Nat.add_zero, Category.assoc] at hstep ⊢
+    convert hstep using 1 <;> rfl
+
+
+end AlgebraicGeometry.Etale

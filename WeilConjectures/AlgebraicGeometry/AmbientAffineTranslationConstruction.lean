@@ -1,0 +1,278 @@
+/-
+Copyright (c) 2026 Bin Wu. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Bin Wu
+-/
+module
+
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
+public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
+public import WeilConjectures.AlgebraicGeometry.AffineTraceTower
+public import WeilConjectures.AlgebraicGeometry.AffineSpaceTopTrace
+public import WeilConjectures.AlgebraicGeometry.EtaleFiniteTwistPullback
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateSheaf
+public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateTwist
+public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
+public import Mathlib.Algebra.Module.ZMod
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
+public import Mathlib.CategoryTheory.Sites.Monoidal
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import WeilConjectures.AlgebraicGeometry.EtaleConstantRingModuleEquivalence
+public import WeilConjectures.CategoryTheory.RingedSiteModules
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
+public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.AlgebraicGeometry.RingedTopoiDerivedTensorPullback
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.TensorShiftIso
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
+public import WeilConjectures.AlgebraicGeometry.EtaleFiniteTwistPullbackBase
+public import WeilConjectures.ConstructibleSheaf.Defs
+public import WeilConjectures.EtaleCohomology.TateTwist.Sheaf
+public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateLinePullback
+public import WeilConjectures.EtaleCohomology.TateTwist.RootsOfUnityPullback
+public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateTensorFamily
+public import WeilConjectures.CategoryTheory.NormalizedSignedTensorPowers
+public import WeilConjectures.CategoryTheory.Monoidal.IntTensorFamily
+public import Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import WeilConjectures.CategoryTheory.IntTensorFamilyIso
+public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
+public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateLocalLine
+public import WeilConjectures.AlgebraicGeometry.Sites.SmallEtaleRepresentablePresheafSheaf
+public import WeilConjectures.ConstructibleSheaf.Pullback
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.LocallyTrivialInverse
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.MonoidalComp
+public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Unit
+public import WeilConjectures.AlgebraicGeometry.EtaleFiniteTwistPullbackRest
+public import Mathlib.CategoryTheory.Abelian.Refinements
+public import Mathlib.Algebra.Homology.ShortComplex.Exact
+public import WeilConjectures.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisonsSupplement
+
+/-!
+# Translation invariance of the affine-space trace
+
+Source: main-20261015, sec-smooth-purity/sk-prop-sp-orientation/
+sk-prop-sp-orientation-vector-bundle.proof.md, Step 1
+(blueprint: lem-trf-ambient-affine-translation-trace).
+
+We use the recorded coordinate-tower presentation of affine space and of its
+shifted Tate complex. All action maps are constructed from the existing
+proper/open exchange and the normalized roots-of-unity pullback comparisons.
+No trace, exchange, or coefficient identification is an arbitrary parameter.
+-/
+
+@[expose] public noncomputable section
+
+set_option autoImplicit false
+
+universe u
+
+open CategoryTheory CategoryTheory.Limits
+open scoped CategoryTheory.Functor
+
+namespace AlgebraicGeometry.Etale
+
+/-- Package the existing affine translation and its opposite as an isomorphism.
+Source: Step 1 (blueprint: lem-trf-ambient-affine-translation-trace). -/
+def ambientAffineTranslationIso (B : Scheme.{u}) (b : PUnit.{u + 1} → Γ(B, ⊤)) :
+    AffineSpace PUnit.{u + 1} B ≅ AffineSpace PUnit.{u + 1} B where
+  hom := AffineSpace.translation b
+  inv := AffineSpace.translation (-b)
+  hom_inv_id := (AffineSpace.translation_add b (-b)).symm.trans
+    (congrArg AffineSpace.translation (add_neg_cancel b) |>.trans AffineSpace.translation_zero)
+  inv_hom_id := (AffineSpace.translation_add (-b) b).symm.trans
+    (congrArg AffineSpace.translation (neg_add_cancel b) |>.trans AffineSpace.translation_zero)
+
+/-- The translation `z ↦ z-a` in the coordinate-tower model. Restrict the vector
+at each step to its first coordinates, translate the last affine line, and apply
+functoriality to the previous stages. This uses the upstream translation.
+Source: Step 1 (blueprint: lem-trf-ambient-affine-translation-trace). -/
+def ambientAffineTranslation (S : Scheme.{u}) :
+    (d : ℕ) → (a : Fin d → Γ(S, ⊤)) → (affineTraceTower S d ≅ affineTraceTower S d)
+  | 0, _ => Iso.refl S
+  | d + 1, a =>
+    ambientAffineTranslationIso (affineTraceTower S d)
+      (fun _ ↦ -(affineTraceProjection S d).appTop (a (Fin.last d))) ≪≫
+      (AffineSpace.functor.obj (Opposite.op PUnit.{u + 1})).mapIso
+        (ambientAffineTranslation S d (fun i ↦ a i.castSucc))
+
+/-- The cartesian square of a coordinate projection under translation. It is
+cartesian because both horizontal morphisms are the explicit translation
+isomorphisms. Its commutativity follows from `translation_over`, `map_over`,
+and the recursive definition; these are equalities of the actual scheme maps.
+Source: Step 1 (blueprint: lem-trf-ambient-affine-translation-trace).
+Proof: the last-coordinate translation is over the preceding tower stage;
+functoriality of affine space makes the other factor lie over the preceding
+translation. Compose these equations and use the isomorphism-square criterion.
+-/
+theorem ambientAffineTranslation_lineSquare (S : Scheme.{u}) (d : ℕ)
+    (a : Fin (d + 1) → Γ(S, ⊤)) :
+    IsPullback (ambientAffineTranslation S (d + 1) a).hom
+      (AffineSpace PUnit.{u + 1} (affineTraceTower S d) ↘ affineTraceTower S d)
+      (AffineSpace PUnit.{u + 1} (affineTraceTower S d) ↘ affineTraceTower S d)
+      (ambientAffineTranslation S d (fun i ↦ a i.castSucc)).hom := by
+  apply IsPullback.of_horiz_isIso
+  constructor
+  change (AffineSpace.translation _ ≫ AffineSpace.map _ _) ≫ _ = _
+  rw [Category.assoc, AffineSpace.map_over, ← Category.assoc,
+    AffineSpace.translation_over]
+
+/-- Expand the recorded affine-line right functor into its ordinary pulled-back
+input and its shifted finite Tate line. This is tensor pullback followed by the
+canonical inverse-image composition and the normalized finite-line comparison.
+Source: Step 1 and sk-prop-an, Step 5(b)
+(blueprint: lem-trf-ambient-affine-translation-trace). -/
+def ambientAffineLineRightExpansion (A : Type (u + 1)) [CommRing A] (N : ℕ)
+    (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
+    (B : Scheme.{u}) (hB : IsUnit (N : Γ(B, ⊤))) (K : DerivedCategoryModule A B) :
+    (affineTraceLineRight A N hA B).obj K ≅
+      (ordinaryFiniteTwistedPullback A (AffineSpace PUnit.{u + 1} B ↘ B)
+        ((ordinaryFiniteLine A N hA (AffineSpace PUnit.{u + 1} B))⟦(2 : ℤ)⟧)).obj K :=
+  ordinaryFiniteTensorPullback A (ProjectiveLine.affineChart B)
+      ((ordinaryFinitePullback A (ProjectiveLine B ↘ B)).obj K)
+      ((ordinaryFiniteLine A N hA (ProjectiveLine B))⟦(2 : ℤ)⟧) ≪≫
+    ordinaryFiniteTensorRightMapIso A (AffineSpace PUnit.{u + 1} B)
+      ((leftDerivedUpperStarComp (ModuleCat.{u + 1} A) (ProjectiveLine.affineChart B)
+        (ProjectiveLine B ↘ B) (AffineSpace PUnit.{u + 1} B ↘ B)
+        (ProjectiveLine.affineChart_over B).symm).symm.app K)
+      (ordinaryFiniteShiftedLinePullback A N hA t (ProjectiveLine.affineChart B)
+        (affineTraceProjectiveInvertible N B hB))
+
+/-- The Tate identification for one coordinate square, constructed from tensor
+pullback, the actual commutative square, and the normalized finite-line transport.
+Source: Step 1 (blueprint: lem-trf-ambient-affine-translation-trace). -/
+def ambientAffineLineRightSquare (A : Type (u + 1)) [CommRing A] (N : ℕ)
+    (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
+    {B B' : Scheme.{u}} (f : B' ⟶ B)
+    (g : AffineSpace PUnit.{u + 1} B' ⟶ AffineSpace PUnit.{u + 1} B)
+    (w : g ≫ (AffineSpace PUnit.{u + 1} B ↘ B) =
+      (AffineSpace PUnit.{u + 1} B' ↘ B') ≫ f)
+    (hB : IsUnit (N : Γ(B, ⊤))) (hB' : IsUnit (N : Γ(B', ⊤)))
+    (K : DerivedCategoryModule A B) :
+    (ordinaryFinitePullback A g).obj ((affineTraceLineRight A N hA B).obj K) ≅
+      (affineTraceLineRight A N hA B').obj ((ordinaryFinitePullback A f).obj K) :=
+  (ordinaryFinitePullback A g).mapIso (ambientAffineLineRightExpansion A N hA t B hB K) ≪≫
+    ordinaryFiniteTwistedPullbackComparison A
+      (AffineSpace PUnit.{u + 1} B ↘ B) (AffineSpace PUnit.{u + 1} B' ↘ B') f g
+      ((ordinaryFiniteLine A N hA (AffineSpace PUnit.{u + 1} B))⟦(2 : ℤ)⟧)
+      ((ordinaryFiniteLine A N hA (AffineSpace PUnit.{u + 1} B'))⟦(2 : ℤ)⟧) K
+      ((leftDerivedUpperStarComp (ModuleCat.{u + 1} A) g
+        (AffineSpace PUnit.{u + 1} B ↘ B)).symm.app K ≪≫
+        (leftDerivedUpperStarComp (ModuleCat.{u + 1} A)
+          (AffineSpace PUnit.{u + 1} B' ↘ B') f _ w).app K)
+      (ordinaryFiniteShiftedLinePullback A N hA t g (affineTraceInvertible N B hB 1)) ≪≫
+    (ambientAffineLineRightExpansion A N hA t B' hB'
+      ((ordinaryFinitePullback A f).obj K)).symm
+
+/-- One explicit pasting step for the normalized Tate identification. The last
+argument is the preceding coordinate identification, not independently chosen data.
+Source: Step 1 (blueprint: lem-trf-ambient-affine-translation-trace). -/
+def ambientAffineTranslationTateStep (A : Type (u + 1)) [CommRing A] (N : ℕ)
+    (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
+    (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)
+    (a : Fin (d + 1) → Γ(S, ⊤))
+    (e : (ordinaryFinitePullback A
+      (ambientAffineTranslation S d (fun i ↦ a i.castSucc)).hom).obj
+        ((affineTraceRight A N hA S d).obj (ordinaryFiniteUnit A S)) ≅
+      (affineTraceRight A N hA S d).obj (ordinaryFiniteUnit A S)) :
+    (ordinaryFinitePullback A (ambientAffineTranslation S (d + 1) a).hom).obj
+        ((affineTraceLineRight A N hA (affineTraceTower S d)).obj
+          ((affineTraceRight A N hA S d).obj (ordinaryFiniteUnit A S))) ≅
+      (affineTraceLineRight A N hA (affineTraceTower S d)).obj
+        ((affineTraceRight A N hA S d).obj (ordinaryFiniteUnit A S)) :=
+  ambientAffineLineRightSquare A N hA t
+      (ambientAffineTranslation S d (fun i ↦ a i.castSucc)).hom
+      (ambientAffineTranslation S (d + 1) a).hom
+      (ambientAffineTranslation_lineSquare S d a).w
+      (affineTraceInvertible N S hS d) (affineTraceInvertible N S hS d)
+      ((affineTraceRight A N hA S d).obj (ordinaryFiniteUnit A S)) ≪≫
+    (affineTraceLineRight A N hA (affineTraceTower S d)).mapIso e
+
+/-- The normalized Tate pullback identification on the coordinate-tower complex
+`A(d)[2d]`, assembled one shifted Tate line at a time. The zero-dimensional
+identification is the constant-sheaf identity comparison.
+Source: Step 1 (blueprint: lem-trf-ambient-affine-translation-trace). -/
+def ambientAffineTranslationTate (A : Type (u + 1)) [CommRing A] (N : ℕ)
+    (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
+    (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤))) :
+    (d : ℕ) → (a : Fin d → Γ(S, ⊤)) →
+    ((ordinaryFinitePullback A (ambientAffineTranslation S d a).hom).obj
+        ((affineTraceRight A N hA S d).obj (ordinaryFiniteUnit A S)) ≅
+      (affineTraceRight A N hA S d).obj (ordinaryFiniteUnit A S))
+  := Nat.rec (motive := fun d ↦ (a : Fin d → Γ(S, ⊤)) →
+      ((ordinaryFinitePullback A (ambientAffineTranslation S d a).hom).obj
+          ((affineTraceRight A N hA S d).obj (ordinaryFiniteUnit A S)) ≅
+        (affineTraceRight A N hA S d).obj (ordinaryFiniteUnit A S)))
+    (fun _ ↦ ordinaryFiniteUnitPullback A (𝟙 S))
+    (fun d r a ↦ ambientAffineTranslationTateStep A N hA t S hS d a
+      (r (fun i ↦ a i.castSucc)))
+
+/-- The canonical line exchange is the recorded proper/open exchange for the
+translation square, followed by the recorded compactification comparison back
+to the standard affine chart. No arbitrary endomorphism is supplied.
+Source: Step 1 (blueprint: lem-trf-ambient-affine-translation-trace). -/
+def ambientAffineTranslationLineExchange (A : Type (u + 1)) [CommRing A] [Finite A]
+    (S : Scheme.{u}) (d : ℕ) (a : Fin (d + 1) → Γ(S, ⊤))
+    (M : DerivedCategoryModule A (affineTraceTower S (d + 1))) :
+    (ordinaryFinitePullback A
+      (ambientAffineTranslation S d (fun i ↦ a i.castSucc)).hom).obj
+        ((affineTraceLineLeft A (affineTraceTower S d)).obj M) ⟶
+      (affineTraceLineLeft A (affineTraceTower S d)).obj
+        ((ordinaryFinitePullback A (ambientAffineTranslation S (d + 1) a).hom).obj M) :=
+  (rightDerivedLowerShriekOfCompactificationBaseChangeMap (ModuleCat.{u + 1} A)
+      (ambientAffineTranslation_lineSquare S d a)
+      (affineTraceLineCompactification (affineTraceTower S d))).app M ≫
+    (rightDerivedLowerShriekOfCompactificationIso A
+      ((affineTraceLineCompactification (affineTraceTower S d)).ofIsPullback
+        (ambientAffineTranslation_lineSquare S d a))
+      (affineTraceLineCompactification (affineTraceTower S d))).hom.app _
+
+/-- The compact-support exchange for translation, pasted along the coordinate
+compactifications. At rank zero insert only the canonical identity inverse-image
+comparison. The unbounded comparison dependency identifies this pasting with
+its compactification-independent exchange, on these bounded-below inputs.
+Source: Step 1 (blueprint: lem-trf-ambient-affine-translation-trace). -/
+def ambientAffineTranslationExchange (A : Type (u + 1)) [CommRing A] [Finite A]
+    (S : Scheme.{u}) : (d : ℕ) → (a : Fin d → Γ(S, ⊤)) →
+    (M : DerivedCategoryModule A (affineTraceTower S d)) →
+    (affineTraceLeft A S d).obj M ⟶
+      (affineTraceLeft A S d).obj
+        ((ordinaryFinitePullback A (ambientAffineTranslation S d a).hom).obj M)
+  | 0, _, M =>
+    (unboundedEtaleUpperStarIdIso A S).inv.app M ≫
+      (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) (𝟙 S)).inv.app M
+  | d + 1, a, M =>
+    ambientAffineTranslationExchange A S d (fun i ↦ a i.castSucc)
+        ((affineTraceLineLeft A (affineTraceTower S d)).obj M) ≫
+      (affineTraceLeft A S d).map (ambientAffineTranslationLineExchange A S d a M)
+
+/-- The normalized twist transport supplied by the trace dependency. Its roots
+inclusion and pure-tensor normalizations determine its maps uniquely; this is
+not a choice of an unnormalized Tate trivialization.
+Source: sk-prop-an and Step 1 (blueprint: lem-trf-ambient-affine-translation-trace). -/
+def ambientAffineTraceTransport (N : ℕ) (hN : 0 < N)
+    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0) :
+    OrdinaryFiniteTwistTransport A N hA :=
+  Classical.choose (exists_affineSpaceTopTrace N hN A hA)
+
+/-- The specified normalized projective-line data used in the coordinate counit.
+The Kummer Chern map, decomposition components, and counit normalization determine
+this data up to the equality of trace maps used here. No free trace is chosen.
+Source: sk-prop-an and Step 1 (blueprint: lem-trf-ambient-affine-translation-trace). -/
+def ambientAffineTraceDatum (N : ℕ) (hN : 0 < N)
+    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0) :
+    ∀ (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (N : Γ(T, ⊤))),
+      OrdinaryFiniteP1Datum A N hA (ambientAffineTraceTransport N hN A hA) T hT :=
+  Classical.choose (Classical.choose_spec (exists_affineSpaceTopTrace N hN A hA))
+
+end AlgebraicGeometry.Etale
