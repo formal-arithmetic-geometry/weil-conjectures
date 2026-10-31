@@ -102,6 +102,7 @@ lemma nonempty_overRestrict_compl (hX : IsNormalScheme X.left) {h : Γ(X.left, �
 set_option maxHeartbeats 1000000 in
 -- The finite `ℓ`-group monodromy of the pulled-back étale model is checked degree by degree on
 -- étale sheaves of `𝔽_E`-modules, whose instance search is slow.
+omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
 /-- **Generic vanishing along a divisor for lisse finite coefficients** (blueprint
 `det-sp-generic-divisor`, lisse case): let `X` be normal, `Z = V(h)`, `ζ` a generic
 point of `Z`, and `K` a complex of `𝔽_E`-module objects on `U = X ∖ Z` corresponding to a bounded

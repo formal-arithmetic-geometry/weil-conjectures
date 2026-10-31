@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.SmoothUniformizer
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorGenericPoint
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism.PurelyInseparable
 public import WeilConjectures.AlgebraicGeometry.NormalizationReduction
+public import WeilConjectures.TraceFormula.Specialization.GenericDivisorBaseFieldChange
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorFiniteGeneric
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorUniversalHomeomorphism
 public import WeilConjectures.TraceFormula.Specialization.ResidueConstantCase
@@ -27,12 +28,13 @@ smooth at `ζ` and some uniformizer defines a smooth morphism to `𝔸¹_k` near
 (`exists_smooth_polyAffine_irreducible_germ`); the constant case with such a chart is
 `nearbyCyclesVanishNear_lowerShriek_unit_residueField_of_uniformizer`.
 
-## Unfinished
-
-The case of an imperfect field `k`,
-`ProEtale.CondensedRing.nearbyCyclesVanishNear_lowerShriek_unit_residueField_of_not_perfectField`,
-is `sorry`ed: there `X` need not be smooth at `ζ` (for instance `X = 𝔸¹_{k(a^{1/p})}`), and the
-blueprint assumes `k` algebraically closed. See its docstring for the planned route.
+Over an imperfect field `X` need not be smooth at `ζ` (for instance `X = 𝔸¹_{k(a^{1/p})}`), and
+the blueprint assumes `k` algebraically closed. We base change to the perfect closure `K₀` of `k`
+inside `K = (k')^alg`: `X ×_k K₀ ⟶ X` is a universal homeomorphism, the normalization of the
+reduction of `X ×_k K₀` is a finite universal homeomorphism onto it, the perfect case applies
+there, and the vanishing descends to `X` by the invariance of nearby cycles under the change of
+trait `Spec K⟦t⟧ ⟶ Spec k'⟦t⟧`
+(`ProEtale.CondensedRing.nearbyCyclesVanishNear_lowerShriek_unit_residueField_of_not_perfectField`).
 
 -/
 
@@ -120,8 +122,8 @@ theorem nearbyCyclesVanishNear_lowerShriek_unit_residueField_of_isUniversalHomeo
   -- `ν` is a universal homeomorphism
   have : IsUniversalHomeomorphism ν.left := by
     have : IrreducibleSpace X₀.left.nilradical.subscheme :=
-      (IsUniversalHomeomorphism.homeomorph X₀.left.nilradical.subschemeι).symm.surjective.irreducibleSpace
-        (IsUniversalHomeomorphism.homeomorph X₀.left.nilradical.subschemeι).symm.continuous
+      let e := IsUniversalHomeomorphism.homeomorph X₀.left.nilradical.subschemeι
+      e.symm.surjective.irreducibleSpace e.symm.continuous
     have : IsDominant W.ι :=
       Opens.isDominant_ι (W.isOpen.dense (Set.nonempty_coe_sort.mp ‹_›))
     have hc : t ≫ f ≫ π = W.ι ≫ X₀.left.nilradical.subschemeι ≫ π := by
@@ -155,6 +157,7 @@ theorem nearbyCyclesVanishNear_lowerShriek_unit_residueField_of_isUniversalHomeo
   exact nearbyCyclesVanishNear_lowerShriek_unit_residueField_of_perfectField k' hX'' hh' hI' ζ'
     hζ'g E
 
+omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
 /-- **The constant case over an imperfect field** (blueprint `det-sp-generic-divisor-constant`,
 which assumes `k` algebraically closed). Let `K` be an algebraic closure of `k'`, purely
 inseparable over `k'`, and `K₀ ⊆ K` the perfect closure of `k`. The base change
@@ -165,7 +168,7 @@ vanishing descends to `X` by the invariance of nearby cycles under change of tra
 (`nearbyCyclesVanishNear_of_overBaseChange`); `Lπ^* j_! 𝔽_E ≅ j₀_! 𝔽_E`
 (`nonempty_leftDerivedUpperStar_openImmersionLowerShriek_unit_iso`). -/
 theorem nearbyCyclesVanishNear_lowerShriek_unit_residueField_of_not_perfectField
-    (hk : ¬ PerfectField k)
+    (_hk : ¬ PerfectField k)
     (hX : IsNormalScheme X.left) {h : Γ(X.left, ⊤)} (hh : h ≠ 0) {I : X.left.IdealSheafData}
     (hI : I = IdealSheafData.ofIdealTop (Ideal.span {h}))
     (ζ : (centre X I).left) (hζ : closure {ζ} ∈ irreducibleComponents (centre X I).left)
@@ -219,8 +222,41 @@ theorem nearbyCyclesVanishNear_lowerShriek_unit_residueField_of_not_perfectField
       simp only [Set.mem_preimage, Set.mem_singleton_iff]
       exact ⟨fun hx ↦ hx ▸ (e.symm_apply_apply x).symm, fun hx ↦ hx ▸ e.apply_symm_apply ζ⟩
     rwa [e.preimage_closure, hs] at h₁
-  sorry
+  -- the constant case on `X₀`
+  have h₀ := nearbyCyclesVanishNear_lowerShriek_unit_residueField_of_isUniversalHomeomorphism
+    (k := K₀) K hX π hh₀ hI₀ (e.symm ζ) hζ₀ E
+  -- `Lπ^* j_! 𝔽_E ≅ j₀_! 𝔽_E`
+  have hi' : Disjoint (Set.range (overRestrictι X I.support.compl).left.base)
+      (Set.range ((I.comap π).subschemeι ≫ π).base) := by
+    refine (isCompl_range_overRestrictι_centreι I).disjoint.mono_right ?_
+    rw [← hπZ.w, Scheme.Hom.comp_base, TopCat.coe_comp]
+    exact Set.range_comp_subset_range _ _
+  obtain ⟨eL⟩ := nonempty_leftDerivedUpperStar_openImmersionLowerShriek_unit_iso
+    (Profinite.continuousMapRingObj (integersResidueField ℓ E.1)) π
+    (overRestrictι X I.support.compl).left (overRestrictι X₀ (I.comap π).support.compl).left
+    ((X₀.left.isoOfEq (IdealSheafData.support_compl_comap π I)).hom ≫ π ∣_ I.support.compl)
+    (isPullback_ι_support_compl_comap π I).w (I.comap π).subschemeι
+    (isCompl_range_overRestrictι_centreι (I.comap π)).symm hi'
+  have h₀' := (nearbyCyclesVanishNear X₀ (I.comap π) K _ (e.symm ζ)).prop_of_iso eL.symm h₀
+  -- descent to `X` along the change of trait
+  have hMo : DerivedCategory.plusEtaleOrigin
+      (ModuleCat.{u + 1} (ULift.{u + 1} (integersResidueField ℓ E.1))) _
+      ((finiteCoefficientDerivedEquivalence _ (integersResidueField ℓ E.1)).functor.obj
+        (𝟙_ (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology
+          (overRestrict X I.support.compl).left) Ab.{u + 1})
+          (condensedRingObj (Profinite.continuousMapRingObj (integersResidueField ℓ E.1)) _))))) :=
+    (isEtaleOrigin_of_isConstructible _ (boundedConstructible_tensorUnit _ _)).plusEtaleOrigin
+  have hjMo := ObjectProperty.prop_of_iso _
+    ((finiteCoefficientDerivedOpenImmersionLowerShriekIso (integersResidueField ℓ E.1)
+      (overRestrictι X I.support.compl).left).app _)
+    (plusEtaleOrigin_mapDerivedCategory_openImmersionLowerShriek
+      (overRestrictι X I.support.compl).left hMo)
+  have hX' := nearbyCyclesVanishNear_of_overBaseChange_residueField (K₀ := K₀) k' K X I E _ hjMo
+    (e.symm ζ) h₀'
+  convert hX' using 2
+  exact (e.apply_symm_apply ζ).symm
 
+omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
 /-- **The constant case of generic vanishing along a divisor, with coefficients `𝔽_E`** (blueprint
 `det-sp-generic-divisor-constant`): `Le^* Ψ_X(j_! 𝔽_E)` vanishes near a generic point `ζ` of the
 divisor `V(h)` of a normal scheme `X`. -/
