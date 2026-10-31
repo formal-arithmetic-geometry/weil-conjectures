@@ -153,7 +153,6 @@ private theorem productElements {A : Type uE} [Category.{vE} A] [HasBinaryProduc
     change (e.hom (e.inv (x, y))).2 = y
     rw [Iso.inv_hom_id_apply]
 
-set_option maxHeartbeats 80000 in
 -- Keep dependent scalar-extension presentations explicit during elaboration.
 private theorem tensorPair_map {A : Sheaf J CommRingCat.{w}}
     {M N M' N' : Modules A} {Z : Sheaf J (Type w)}
@@ -170,7 +169,6 @@ attribute [local irreducible] extensionFunctor
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
-set_option maxHeartbeats 80000 in
 -- Normalize the dependent coefficient sources before rewriting the generator equations.
 private theorem insertion_naturality {A B : Sheaf J CommRingCat.{w}} (c : A ⟶ B)
     {M N : Modules A} (a : M ⟶ N) :

@@ -259,11 +259,8 @@ attribute [local irreducible] monoidalCategory siteDerivedTensorIndependentCoeff
   KFlatFixedTensor.representativeIso HomologicalComplex₂.total
   MorphismProperty.Q'
 
-set_option maxHeartbeats 20000 in
 -- Diagnose conversion without expanding the tensor definitions.
-set_option maxHeartbeats 50000 in
 -- Elaboration must compare the large two-variable localization interfaces.
-set_option maxHeartbeats 50000 in
 -- Elaboration must compare the large two-variable localization interfaces.
 private def mateCurryIso {C D E : Type*} [Category* C] [Category* D] [Category* E]
     {F G : C × D ⥤ E} (z : F ≅ G) : Functor.curryObj F ≅ Functor.curryObj G :=

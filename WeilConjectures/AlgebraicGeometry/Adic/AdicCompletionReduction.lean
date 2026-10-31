@@ -34,7 +34,6 @@ open scoped ChangeOfRings TensorProduct
 
 namespace AlgebraicGeometry.Scheme
 
-set_option linter.style.haveILetI false in
 /-- Evaluation from the specified strict product-cone limit at level n+1.
 Source: order 1260, statement (blueprint: lemma-weil-pbc-adic-completion-reduction). -/
 noncomputable def adicCompletionEvaluation (X : Scheme.{t}) {Λ : Type t} [CommRing Λ]

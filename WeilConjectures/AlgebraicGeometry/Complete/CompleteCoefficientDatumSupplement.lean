@@ -183,7 +183,6 @@ private theorem adicTensorSection_smul (X : Scheme.{t}) {A B : Type t}
   exact (map_smul _ _ _)
 
 set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 private theorem adicTensorHom_ext (X : Scheme.{t}) {A B : Type t}
     [CommRing A] [CommRing B] (φ : A →+* B)
     (M : SheafOfModules.{t + 1} (adicModuleRing X A))

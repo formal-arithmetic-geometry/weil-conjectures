@@ -645,8 +645,6 @@ section
 
 attribute [local instance 40000] siteHasSheafCompose siteHasSheafify siteWEquals siteAbelian
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency true in
 private theorem identity_normalization
     {B D : Type*} [Category B] [Category D] (Q : B ⥤ D)
     {P : B} {X : D} (f g : X ⟶ Q.obj P) (h : f = g) :

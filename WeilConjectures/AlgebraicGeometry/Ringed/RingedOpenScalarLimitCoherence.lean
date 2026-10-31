@@ -444,7 +444,6 @@ section CoherenceHelpers
 universe v w u' v' w' c h r
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
-open RingedOpenScalar in
 private theorem restriction_identity {C : Type c} [Category.{h} C]
     {J : GrothendieckTopology C}
     [HasSheafify J AddCommGrpCat.{max c h r}]

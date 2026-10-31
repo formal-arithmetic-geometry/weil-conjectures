@@ -203,8 +203,6 @@ private def roosSignComponent (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) :
       (fun j : ℤ ↦ ⟨j - 1, sub_add_cancel j 1⟩)
       (Arrow.isoMk (Iso.refl _) (-(Iso.refl _)) (by simp)))
 
-omit [HasLimitsOfShape ℕᵒᵖ A] [HasDerivedCategory A] [HasDerivedCategory (ℕᵒᵖ ⥤ A)]
-  [HasCountableProducts (DerivedCategory A)] in
 set_option backward.isDefEq.respectTransparency false in
 omit [HasDerivedCategory A] [HasDerivedCategory (ℕᵒᵖ ⥤ A)]
   [HasCountableProducts (DerivedCategory A)] in
@@ -277,9 +275,6 @@ private def roosProjection : roosF ⟶ ExactProductsRoos.product (B := A) where
     simpa only [roosEval, roosPmap, Category.assoc, Pi.map_π] using
       roosEval_natural f n
 
-set_option backward.isDefEq.respectTransparency false in
-omit [HasLimitsOfShape ℕᵒᵖ A] [HasDerivedCategory A]
-  [HasDerivedCategory (ℕᵒᵖ ⥤ A)] [HasCountableProducts (DerivedCategory A)] in
 set_option backward.defeqAttrib.useBackward true in
 omit [HasCountableProducts (DerivedCategory A)] in
 private theorem normalizedConeComparison
@@ -301,7 +296,6 @@ private theorem normalizedConeComparison
   rw [← DerivedCategory.Q.map_comp_assoc, hs]
   exact congr_app he X
 
-omit [HasLimitsOfShape ℕᵒᵖ A] [HasDerivedCategory (ℕᵒᵖ ⥤ A)] in
 private def derivedProducts :
     (ℕᵒᵖ ⥤ DerivedCategory.{w} A) ⥤ DerivedCategory.{w} A where
   obj M := ∏ᶜ (fun n : ℕ ↦ M.obj (op n))
@@ -641,18 +635,6 @@ private theorem projection_square {G : A ⥤ B} [G.Additive]
     exact projection_square_on_KInjective d T U I
   exact congr_app h M
 
-omit [HasLimitsOfShape ℕᵒᵖ A] [HasDerivedCategory A] [HasDerivedCategory (ℕᵒᵖ ⥤ A)]
-  [HasLimitsOfShape ℕᵒᵖ B] [HasDerivedCategory B] [HasDerivedCategory (ℕᵒᵖ ⥤ B)]
-  [HasCountableProducts (DerivedCategory A)] [HasCountableProducts (DerivedCategory B)] in
-set_option backward.isDefEq.respectTransparency.types false in
-omit [HasCountableProducts (DerivedCategory A)] [HasCountableProducts (DerivedCategory B)] in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-omit [HasLimitsOfShape ℕᵒᵖ A] [HasDerivedCategory A] [HasDerivedCategory (ℕᵒᵖ ⥤ A)]
-  [HasLimitsOfShape ℕᵒᵖ B] [HasDerivedCategory B] [HasDerivedCategory (ℕᵒᵖ ⥤ B)]
-  [HasCountableProducts (DerivedCategory A)] [HasCountableProducts (DerivedCategory B)] in
-set_option backward.isDefEq.respectTransparency.types false in
-omit [HasCountableProducts A] [HasCountableProducts B] in
 private def canonicalDerivedUnit (G : A ⥤ B) [G.Additive]
     [Abelian.HasKInjectiveResolutions A] :
     G.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶
@@ -748,8 +730,6 @@ private theorem unit_shift {G : A ⥤ B} [G.Additive] (d : DirectImageData G)
   simpa only [Functor.commShiftIso_comp_hom_app, Category.assoc] using
     (NatTrans.shift_app_comm d.unit (1 : ℤ) L).symm
 
-omit [HasCountableProducts A] [HasCountableProducts (DerivedCategory A)] [HasCountableProducts
-  (DerivedCategory B)] [HasCountableProducts B] in
 @[reassoc]
 private theorem boundary_model {L : LimitData.{w} A} (T : RoosTriangleData L)
     (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) :
@@ -759,9 +739,6 @@ private theorem boundary_model {L : LimitData.{w} A} (T : RoosTriangleData L)
           (T.coneComparison.hom.app X)⟦(1 : ℤ)⟧' :=
   T.boundary_model X
 
-omit [HasLimitsOfShape ℕᵒᵖ A] [HasDerivedCategory A] [HasDerivedCategory (ℕᵒᵖ ⥤ A)]
-  [HasLimitsOfShape ℕᵒᵖ B] [HasDerivedCategory (ℕᵒᵖ ⥤ B)] [HasCountableProducts (DerivedCategory
-  A)] [HasCountableProducts (DerivedCategory B)] in
 private theorem tower_grothendieck
     (C₀ : Type*) [Category C₀] [Abelian C₀] [IsGrothendieckAbelian.{g} C₀] :
     IsGrothendieckAbelian.{g} (ℕᵒᵖ ⥤ C₀) := by

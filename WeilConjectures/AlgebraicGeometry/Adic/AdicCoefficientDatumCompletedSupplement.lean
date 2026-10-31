@@ -185,8 +185,6 @@ def adicDatumScalarPair : AdicDatumScalarPair T φ where
   triangulated := (adicDatumScalarDerived_exists T φ).choose_spec.choose_spec.2.1
   computation := (adicDatumScalarDerived_exists T φ).choose_spec.choose_spec.2.2
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 private theorem completedExtension_obj (M : completedConstantModules T R) :
     (reductionChange T φ).obj M = SheafOfModules.changeOfRings φ M :=
   reductionChange_obj_eq T φ M

@@ -35,7 +35,6 @@ section Cone
 universe u v
 variable {C : Type u} [Category.{v} C] [Preadditive C] [HasBinaryBiproducts C]
 variable {P Q : CochainComplex C ℤ} (s : P ⟶ P) (t : Q ⟶ Q)
-set_option backward.isDefEq.respectTransparency false in
 private lemma cocone_ext {A : CochainComplex C ℤ} (s : P ⟶ P)
     (a b : A ⟶ mappingCocone s)
     (h₁ : a ≫ mappingCocone.fst s = b ≫ mappingCocone.fst s)

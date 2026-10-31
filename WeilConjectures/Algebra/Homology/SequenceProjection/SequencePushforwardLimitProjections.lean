@@ -220,8 +220,6 @@ private theorem complexProjection
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 private theorem ordinaryLevel
     (A : Sheaf J CommRingCat.{w}) (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w})
     (α : (Functor.const ℕᵒᵖ).obj A ⟶ B)

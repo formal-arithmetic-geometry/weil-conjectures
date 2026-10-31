@@ -148,7 +148,6 @@ set_option backward.isDefEq.respectTransparency false in
 attribute [local instance] Abelian.hasFiniteBiproducts
 
 set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 private lemma cast_square {C : Type*} [Category C] {A A' B B' : C}
     (hA : A = A') (hB : B = B') {f : A ⟶ B} {g : A' ⟶ B'} (h : HEq f g) :
     f ≫ eqToHom hB = eqToHom hA ≫ g := by

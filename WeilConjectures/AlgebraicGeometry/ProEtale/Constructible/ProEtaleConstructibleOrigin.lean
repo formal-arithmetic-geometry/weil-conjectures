@@ -60,7 +60,6 @@ noncomputable abbrev OriginModules :=
 set_option linter.unusedSectionVars false in
 attribute [instance] isIso_originConstantRingComparison
 
-set_option backward.isDefEq.respectTransparency false in
 /-- The recorded canonical inverse image on module sheaves.
 Source: blueprint, site comparison (blueprint: lem-sf-proetale-constructible-origin). -/
 noncomputable abbrev originComparison :

@@ -414,8 +414,6 @@ private theorem restriction_pull_mate_normalization
   subst F
   exact restriction_pull_mate_normalization_canonical C τ B φ hφ D G f e he
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
 /-- The ordinary inverse-image scalar comparison is the transpose of the uniquely
 section-normalized direct-image comparison. Source: the ring-sheaf change adjunction
 (blueprint: lem-sf-semilinear-proper-open-mate-pasting). -/

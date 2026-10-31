@@ -802,9 +802,6 @@ end AbstractAssociator
 variable (M : Type u) [Field M] [Algebra ℚ_[l] M] [FiniteDimensional ℚ_[l] M]
   (κ : L →ₐ[ℚ_[l]] M)
 
-omit [IsAlgClosed k] in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 /-- Fraction-field extension on coefficient modules.
 Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension). -/
 noncomputable abbrev pointModuleRationalization :=

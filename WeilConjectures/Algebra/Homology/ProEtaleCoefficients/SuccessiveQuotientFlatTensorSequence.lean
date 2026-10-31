@@ -626,9 +626,6 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
   (B : Sheaf J CommRingCat.{r})
   (t : (B.obj ⋙ CategoryTheory.forget CommRingCat.{r}).sections)
 
-omit [EssentiallySmall.{r} C]
-  [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
-  [J.WEqualsLocallyBijective AddCommGrpCat.{r}] [HasSheafify J AddCommGrpCat.{r}] in
 private instance quotientLocallyBijectiveCommRing :
     J.WEqualsLocallyBijective CommRingCat.{r} := by
   let : PreservesFilteredColimitsOfSize.{r, r}

@@ -343,11 +343,6 @@ private theorem beta_id_open {U X : Scheme.{u}} (p : U ⟶ X)
 attribute [local semireducible] G R J adj jAdj gComp gId alpha
 set_option backward.isDefEq.respectTransparency true
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
 /-- Apply the sheaf comparison termwise to the strict inverse system, with its
 transition maps retained. Source: Stacks, Tag 09AE
 (blueprint: lem-cbc-tower-open-beta-normalization). -/

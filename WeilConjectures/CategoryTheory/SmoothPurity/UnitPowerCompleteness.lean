@@ -397,8 +397,6 @@ private theorem factor_restriction
 
 end UnitPowerRestriction
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 private theorem complete_of_iso
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (O : Sheaf J CommRingCat.{u})

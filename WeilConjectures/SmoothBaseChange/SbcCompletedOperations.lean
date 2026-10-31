@@ -1743,11 +1743,6 @@ attribute [local irreducible] sbcOrdinaryTheta sbcFiniteTheta sbcTheta sbcAdjunc
   proEtaleRingDerivedAdjunction Functor.mapDerivedCategory Functor.rightDerivedFunctor
   completedAdicDerivedChange proEtaleRingModulePullback proEtaleAmbientRingedPullbackComparison
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
 private def pushUnderlying (M : PbcComplete l E U) :
     ((sbcPush l E q).obj M).obj ⟶ (sbcAmbientPush l E q).obj M.obj := 𝟙 _
 

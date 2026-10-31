@@ -49,7 +49,6 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
 end
 
 set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 private theorem constantDirect_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
     {A B : CommRingCat.{u + 1}} (a : A ⟶ B) :
     (constantSheaf (ProEt.topology Y) _).map a ≫

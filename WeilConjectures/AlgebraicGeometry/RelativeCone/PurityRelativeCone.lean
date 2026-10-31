@@ -605,10 +605,6 @@ private lemma realization_ι
         (fun m hm ↦ by change (m : ℤ) = Int.negSucc n at hm; omega)).eq_of_src _ _
 
 set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 private lemma realization_natural
     {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]
     (J : GrothendieckTopology C) (K : GrothendieckTopology D)

@@ -65,8 +65,6 @@ theorem scalarExtensionUnitIso_tmul {R S : Sheaf J CommRingCat.{u}} (α : R ⟶ 
     change (α.hom.app U a) * s = _
     exact mul_comm _ _)
 
-omit [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
-  [HasWeakSheafify J AddCommGrpCat.{u}] in
 /-- The unit comparison is the explicit multiplication construction.
 Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-binary-coherence). -/
 noncomputable def ScalarExtensionTensorCore.unitComparison

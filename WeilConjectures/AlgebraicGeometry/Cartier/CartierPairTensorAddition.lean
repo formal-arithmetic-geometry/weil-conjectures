@@ -135,16 +135,6 @@ def cartierPairRestriction {T : Scheme.{u}} {W V : T.Opens} (h : W ≤ V)
       ComplexShape.embeddingUpNat) (cartierPairRestriction_square h I)
 
 set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option maxRecDepth 2000 in
-set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 private lemma dual_evaluation_tmul {X : Scheme.{u}} (A : X.Modules) (U : X.Opens)
     (s : Γ(A, U)) (f : Γ(Aᵛ, U)) :

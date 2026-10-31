@@ -213,7 +213,6 @@ private theorem moduleIsoOfScalars
   exact ⟨asIso a, ha⟩
 
 set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 private theorem compositionComparison
     {C D E : Type u} [SmallCategory C] [SmallCategory D] [SmallCategory E]
     (J : GrothendieckTopology C) (K : GrothendieckTopology D)

@@ -441,7 +441,6 @@ def evaluationFactors (X : Scheme.{u}) (n : ℕ) :=
     ((evaluation ℕᵒᵖ (Modules B X)).obj (op n)) inferInstance inferInstance inferInstance
 
 set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 /-- Evaluation preserves the same alpha, including the specified clopen section projector.
 Source: Stacks 03DI, 03DJ, 07A7 (blueprint: lem-cbc-tower-mate-evaluation-scalars).
 Proof: evaluation commutes termwise with inverse image and extension by zero.

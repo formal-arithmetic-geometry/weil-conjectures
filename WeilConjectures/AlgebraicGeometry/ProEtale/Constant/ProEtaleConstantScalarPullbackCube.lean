@@ -35,8 +35,6 @@ attribute [local irreducible] completedAdicDerivedChange
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 private theorem derived_transport
     {T V : Scheme.{u}} {f g : T ⟶ V} (e : f = g) (A : Type u) [CommRing A] :
     (Functor.mapDerivedCategoryNatIso

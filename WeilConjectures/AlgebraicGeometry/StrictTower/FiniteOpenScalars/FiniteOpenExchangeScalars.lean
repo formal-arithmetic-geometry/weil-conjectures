@@ -464,8 +464,6 @@ def targetResC [Finite B] [Finite C] (a : B →+* C)
       ((modulePullback C gU ⋙ moduleJ C j') ⋙ res a X').mapHomologicalComplex (.up ℤ) :=
   NatIso.mapHomologicalComplex (targetRes a gU j') (.up ℤ)
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 /-- Scalar restriction preserves the inverse-image/direct-image unit and counit.
 Source: Stacks Tags 03D2 and 03CY
 (blueprint: lem-cbc-finite-open-exchange-scalars).

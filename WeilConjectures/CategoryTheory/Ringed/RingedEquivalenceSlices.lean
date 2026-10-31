@@ -190,7 +190,6 @@ private theorem ringData_mul {C D : Type u} [SmallCategory C] [SmallCategory D]
   ext U t
   exact e.ring_mul _ _ _ _ (fun _ _ ↦ rfl) U t
 
-set_option backward.isDefEq.respectTransparency false in
 -- Transport the ring operations through the product/fibre comparison.
 private abbrev restrictSets {C C' : Type u} [SmallCategory C] [SmallCategory C']
     {J : GrothendieckTopology C} {J' : GrothendieckTopology C'}

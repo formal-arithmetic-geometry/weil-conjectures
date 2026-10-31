@@ -148,12 +148,7 @@ attribute [instance] hypercoverAbelianRows_additive
 variable (X : Scheme.{t}) (R : Sheaf (topology X) RingCat.{u})
   (U : X.ProEt) (W : SimplicialObject (Over U))
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 800000 in
 -- The total augmentation expands the section, extension and total functors.
-set_option backward.isDefEq.respectTransparency false in
 private instance sectionEvaluation_additive (p : ℕ) :
     (hypercoverAbelianSections X R U W ⋙ (CategoryTheory.evaluation _ _).obj ⦋p⦌).Additive where
   map_add {_I _J} {f g} := congr_app

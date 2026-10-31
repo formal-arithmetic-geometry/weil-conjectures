@@ -42,7 +42,6 @@ variable {X Y : Scheme.{u}} (g : X ⟶ Y)
 
 variable {Z : Scheme.{u}} (h : Z ⟶ X)
 
-set_option maxHeartbeats 2000000 in
 -- Comparing the concrete ringed module functors needs a larger elaboration budget.
 private theorem scalarCompositeCounit
     {H₀ H₁ H₂ K₀ K₁ K₂ A₀ A₁ A₂ B₀ B₁ B₂ : Type*}

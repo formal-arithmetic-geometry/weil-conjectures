@@ -1556,8 +1556,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 attribute [local semireducible] completedReductionCoefficient in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 /-- Uniform bounded constructibility is preserved under (TC), with the stated sharp
 cohomological windows. The conclusion uses the full common-local-model predicate;
 it does not claim that the original model truncations have finite free terms.

@@ -51,8 +51,6 @@ private theorem kanPostShift
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.defeqAttrib.useBackward true in
 private theorem kan_of_precomp_quotient
     {A : Type u} [Category.{v} A] [Abelian A]
     {D : Type u'} [Category.{v'} D] {H : Type w} [Category.{w'} H]

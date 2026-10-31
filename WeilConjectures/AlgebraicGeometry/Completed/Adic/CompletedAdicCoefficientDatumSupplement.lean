@@ -769,8 +769,6 @@ attribute [local irreducible] SheafOfModules.monoidalCategory
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 private theorem completedOrdinaryRestrictionComparison (T : Scheme.{t})
     {R S : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ S) :
     letI := SheafOfModules.cochainModulesMonoidal R

@@ -47,7 +47,6 @@ set_option maxHeartbeats 2000000 in
 -- Comparing underlying direct images requires reducing several module structures.
 attribute [local irreducible] proEtaleRingModuleDirectImage
 
-set_option maxHeartbeats 2000000 in
 -- The concrete conjugation involves large module functor and adjunction types.
 private theorem restriction_injective
     {C D : Type*} [Category C] [Category D] (F : C ⥤ D) (L : D ⥤ C)

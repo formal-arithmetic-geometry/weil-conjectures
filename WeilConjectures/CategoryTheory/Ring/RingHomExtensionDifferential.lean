@@ -31,7 +31,6 @@ namespace CategoryTheory
 attribute [local irreducible] homComplexFunctor
 
 set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 private theorem pure_linear_ext
     {A B : Type u} [CommRing A] [CommRing B] (φ : A →+* B)
     (F : RingSiteModules A ⥤ RingSiteModules B)
@@ -107,7 +106,6 @@ private noncomputable def fullProjection {A : Type u} [CommRing A]
 set_option backward.isDefEq.respectTransparency false in
 attribute [local irreducible] ringExtensionPure
 
-set_option maxHeartbeats 100000 in
 -- The two tensor inductions and internal-Hom extensionality need this elaboration budget.
 private theorem canonicalPresentation {A : Type u} [CommRing A]
     (P Q : CochainComplex (RingSiteModules A) ℤ) :

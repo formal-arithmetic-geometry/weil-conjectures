@@ -511,7 +511,6 @@ private theorem pairSection_ext [HasWeakSheafify J (Type (u + 1))]
       (ConcreteCategory.congr_hom ht x).trans
         (h₂.trans (ConcreteCategory.congr_hom ht y).symm)
 
-omit [EssentiallySmall.{u + 1} C] in
 private noncomputable def presheafPairSection
     (P Q : Cᵒᵖ ⥤ Type (u + 1)) (U : C)
     (s : P.obj (op U)) (t : Q.obj (op U)) : (P ⨯ Q).obj (op U) :=

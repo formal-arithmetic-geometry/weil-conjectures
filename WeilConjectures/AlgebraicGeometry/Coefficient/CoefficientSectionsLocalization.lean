@@ -112,12 +112,6 @@ private noncomputable abbrev sectionRing {X : Scheme.{u}}
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 private lemma graph_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (T : Z.ProEt) (a : Y ⟶ T.left) (ha : a ≫ T.hom = g) :
     sfbSectionGraph (f ≫ g) T (f ≫ a) (by rw [Category.assoc, ha]) ≫
@@ -193,8 +187,6 @@ private lemma sectionMap_restrict
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 private lemma objectSectionMap_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (F : Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
     (G : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
@@ -264,8 +256,6 @@ private lemma sectionMap_naturality
         (by rw [Category.assoc, Category.id_comp]) (MorphismProperty.Over.w h)
         (Category.comp_id h.left)
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 private noncomputable def regularExtensionIso

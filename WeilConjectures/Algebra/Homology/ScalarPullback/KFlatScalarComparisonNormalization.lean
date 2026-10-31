@@ -341,10 +341,6 @@ def mate {AY : Type u₁} {BY : Type u₂} {AX : Type u₃} {BX : Type u₄}
   ((mateEquiv dY dX).symm (TwoSquare.mk _ _ _ _ a)).natTrans
 
 set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 private noncomputable def moduleComparison
     {C D : Type u} [Category.{u} C] [Category.{u} D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}

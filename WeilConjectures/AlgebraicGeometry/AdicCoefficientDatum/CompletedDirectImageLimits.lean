@@ -824,10 +824,6 @@ def IsCompletedReductionPullbackComparison
 
 attribute [local semireducible] completedReductionCoefficient
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 private theorem reductionFormula_iff
     (τ : completedReductionTower V d ⋙ d.towerPull f ≅
       d.pull f ⋙ completedReductionTower U d) :

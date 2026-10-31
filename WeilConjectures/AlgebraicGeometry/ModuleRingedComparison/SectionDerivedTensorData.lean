@@ -303,7 +303,6 @@ transfers through the fixed section-module equivalence. -/
   have _hderived := ‹∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)›
   infer_instance
 
-set_option linter.unusedSectionVars false in
 /-- Relative tensor commutes with the countable sums defining the internal graded tensor.
 Source: Stacks 03EK and 06YN (blueprint: def-pd-section-derived-tensor-data).
 Proof: a balanced bilinear map from a coproduct is a family of balanced bilinear

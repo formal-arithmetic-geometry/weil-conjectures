@@ -176,8 +176,6 @@ private theorem inverseImageAdjunction_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
     Adjunction.map_restrictFullyFaithful_unit_app]
   simp
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 private theorem coefficientDirect_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
     (A : Type u) [CommRing A] (U : Y.ProEtᵒᵖ) :
     (toSheafify (ProEt.topology Y)

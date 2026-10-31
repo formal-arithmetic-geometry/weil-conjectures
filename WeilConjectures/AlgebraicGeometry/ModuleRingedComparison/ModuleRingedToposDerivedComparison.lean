@@ -365,7 +365,6 @@ theorem projection_comparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     (tensorPullComparison Λ f) (delta_comparison Λ f)
     ((sectionDerivedPushpullNormalization Λ f).2.2.2.2.2.2.2.2.1) K L
 
-set_option maxHeartbeats 800000 in
 -- Comparing the two localized mate squares elaborates the section-module constraints.
 /-- The ringed adjoint-of-unit open projection arrow, using inverse canonical delta.
 Source: Stacks 03DJ and 0B56
@@ -379,7 +378,6 @@ def openProjection {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
         (𝟙 ((derivedPullback Λ j).obj L))) ≫
       (tensorPullComparison Λ j).inv.app ((derivedExtension Λ j).obj K, L))
 
-set_option maxHeartbeats 1600000 in
 -- The curried tensor and derived adjunction interfaces have large instance arguments.
 /-- Pullback composition is identified with the canonical ringed pasting comparison.
 Source: Stacks 03D7 and 07A6

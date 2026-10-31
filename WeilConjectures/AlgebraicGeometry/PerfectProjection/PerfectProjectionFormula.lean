@@ -97,7 +97,6 @@ theorem completedCommRingWeakSheafify (T : Scheme.{u}) :
     HasWeakSheafify (ProEt.topology T) CommRingCat.{u + 1} := inferInstance
 
 set_option linter.flexible false in
-set_option linter.flexible false in
 /-- Cached existing site infrastructure for the completed-coefficient proofs.
 Source: Mathlib sheafification, sheaf limits and homological totalization instances
 (blueprint: lemma-weil-pbc-perfect-projection-formula).
@@ -788,7 +787,6 @@ def quotientMap (T : Scheme.{u}) (n m : ℕ) (h : n ≤ m) :
 set_option linter.flexible false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option linter.flexible false in
 /-- Quotient pullback comparisons commute with every quotient tower map.
 Source: blueprint order 1275, proof steps 5 and 6
 (blueprint: lemma-weil-pbc-perfect-projection-formula).

@@ -757,11 +757,6 @@ Source: Stacks 00XZ, 08TC, 0941
 abbrev Comparison.roos (d : Comparison l E j) := d.toTowerComparison.roos
 
 variable {l E j} in
-variable {l E j} in
-variable {l E j} in
-variable {l E j} in
-variable {l E j} in
-variable {l E j} in
 /-- The original derived comparison isomorphism.
 Source: Stacks 015F, 08TC
 (blueprint: lem-pur-open-completed-restriction-identification). -/

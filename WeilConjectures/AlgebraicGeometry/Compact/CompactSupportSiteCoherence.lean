@@ -908,7 +908,6 @@ private theorem inclusion_comparison_map (X : Scheme.{u})
       (coherenceSiteFunctor A X).map
         (DerivedCategory.Plus.ι.map t) := rfl
 
-omit [Finite A] in
 private theorem refinement_site_square {X Y : Scheme.{u}}
     [IsNoetherian X] [IsNoetherian Y] {f : X ⟶ Y}
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]

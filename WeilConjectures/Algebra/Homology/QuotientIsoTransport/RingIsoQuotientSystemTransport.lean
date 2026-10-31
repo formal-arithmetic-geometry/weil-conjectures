@@ -451,7 +451,6 @@ private def ordinaryScalarSquare {R R' S S' : Sheaf J CommRingCat.{w}}
   normalizedComparison A.ordinaryAdj B.ordinaryAdj (transport e)
     (transport e') (scalarRestrictionSquare a b e e' h)
 
-set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 private theorem ordinaryScalarSquare_inv {R R' S S' : Sheaf J CommRingCat.{w}}
@@ -720,8 +719,6 @@ private def scalarSquare {R R' S S' : Sheaf J CommRingCat.{w}}
     derivedScalarSquare_rep a b e e' h A B,
     derivedScalarSquare_transpose a b e e' h A B⟩
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 private def reductionTransition (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (c : Cone B)
     (A : SystemScalarAssignment (J := J)) (M : Modules c.pt) {m n : ℕ} (h : m ≤ n) :
     (A (c.π.app (op n))).model.E.obj M ⟶
