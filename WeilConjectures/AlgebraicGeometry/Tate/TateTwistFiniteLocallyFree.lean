@@ -22,8 +22,8 @@ Source: `literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-
 sk-def-sp-tate-twist-locally-free.md`, clauses (1)--(3) for finite coefficients
 (blueprint: det-def-sp-tate-twist-locally-free).
 
-The finite part of `WeilConjectures.AlgebraicGeometry.Tate.TateTwistLocallyFree`, in its own module so that the finite
-twists do not depend on the integral, rational and algebraically closed coefficient clauses.
+The finite part of `WeilConjectures.AlgebraicGeometry.Tate.TateTwistLocallyFree`, in its own module
+so that the finite twists do not depend on the integral, rational and algebraically closed coefficient clauses.
 All positive root levels are indexed by `n + 1`.
 
 ## Main definitions

@@ -41,8 +41,8 @@ order 1505; current main-20261015 source: `sec-proetale-coefficients/sk-def-sp-t
 order 1864 (blueprint: def-coefficient-twists-detailed).
 
 The intrinsic rational and common-stage functors are provided by
-`WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicCoefficientTwistsUnrestricted`; this module supplies their
-shared signed lines and ordinary tensor/scalar comparison.
+`WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicCoefficientTwistsUnrestricted`;
+this module supplies their shared signed lines and ordinary tensor/scalar comparison.
 
 ## Main definitions and statements
 
