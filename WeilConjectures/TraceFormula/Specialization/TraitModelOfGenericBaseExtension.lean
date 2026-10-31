@@ -5,7 +5,13 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleUpperStar
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionLowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriekLocalizing
+public import WeilConjectures.SixFunctors.NearbyCycles.HomComp
+public import WeilConjectures.TraceFormula.Specialization.TraitModelRestrict
+public import WeilConjectures.TraceFormula.Specialization.TraitProduct
 public import WeilConjectures.TraceFormula.Specialization.TraitModelOfGenericBase
 
 /-!
@@ -13,9 +19,9 @@ public import WeilConjectures.TraceFormula.Specialization.TraitModelOfGenericBas
 # Extending the coefficients of a trait model over the generic base to its total space
 
 Let `M` be a trait model of `X₁` over the generic base
-(`NearbyCyclesModel.IsTraitModelOfGenericBase`): its generic fibre `𝒳_η` is an open of
-`X₁ ×_F η`, and the identification `ε` of its geometric generic fibre factors through
-`𝒳_η ⟶ X₁`. For a bounded constructible complex `A` on `X₁`, the
+(`NearbyCyclesModel.IsTraitModelOfGenericBase`):
+its generic fibre `𝒳_η` is an open of `X₁ ×_F η`, and the identification `ε` of its geometric
+generic fibre factors through `𝒳_η ⟶ X₁`. For a bounded constructible complex `A` on `X₁`, the
 extension by zero along the open immersion `𝒳_η ⟶ 𝒳` of the pullback of `A` to `𝒳_η` is a
 bounded constructible complex `B` on the total space with `j^* B ≅ ε^* A`
 (`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_extension_total`). This is the form of the
@@ -32,9 +38,37 @@ open CategoryTheory Limits
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
 
-namespace AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
+namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
+
+/-- **Extension by zero of coefficients pulled back to an open**: let `v : U ⟶ T` be an open
+immersion into a noetherian scheme, and `j = s ≫ v`, `ε = s ≫ e` two morphisms factoring through
+`s : G ⟶ U`. For a bounded constructible complex `A` on `X`, the extension by zero
+`B = v_! Le^* A` is bounded constructible on `T` with `Lj^* B ≅ Lε^* A`, as `Lv^* v_! ≅ 𝟭`. -/
+theorem exists_boundedConstructible_leftDerivedUpperStar_obj_iso_of_isOpenImmersion
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    {G U T X : Scheme.{u}} (v : U ⟶ T) [IsOpenImmersion v] [TopologicalSpace.NoetherianSpace T]
+    (s : G ⟶ U) (e : U ⟶ X) {j : G ⟶ T} {ε : G ⟶ X} (hj : s ≫ v = j) (hε : s ≫ e = ε)
+    {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))}
+    (hA : boundedConstructible (condensedRingObj Λ X) A) :
+    ∃ B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
+        (condensedRingObj Λ T)),
+      boundedConstructible (condensedRingObj Λ T) B ∧
+        Nonempty (L((j)^*⟦Λ⟧).obj B ≅ L((ε)^*⟦Λ⟧).obj A) := by
+  have : IsIso (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ v).unit :=
+    Adjunction.isIso_mapDerivedCategoryAdjunction_unit
+      (openImmersionLowerShriekUpperStarAdjunction Λ v)
+  refine ⟨_, boundedConstructible_mapDerivedCategory_openImmersionLowerShriek_obj Λ v _
+    (boundedConstructible_leftDerivedUpperStar_obj_of_scheme Λ e A hA), ⟨?_⟩⟩
+  exact (leftDerivedUpperStarCompOfEq Λ hj).app _ ≪≫
+    (L((s)^*⟦Λ⟧)).mapIso
+      ((leftDerivedUpperStarIsoMapDerivedCategory_of_isOpenImmersion Λ v).app _ ≪≫
+        (asIso ((derivedOpenImmersionLowerShriekUpperStarAdjunction Λ v).unit.app _)).symm) ≪≫
+    ((leftDerivedUpperStarCompOfEq Λ hε).app A).symm
+
+namespace NearbyCyclesModel
 
 variable {F : Type u} [Field F] {k' : Type u} [Field k'] {X₁ : Over (Spec (.of F))}
   {X' : Over (Spec (.of k'))} {ι : Spec (.of (FractionRing (PowerSeries k'))) ⟶ Spec (.of F)}
@@ -55,18 +89,13 @@ theorem IsTraitModelOfGenericBase.exists_extension_total
         (condensedRingObj Λ M.total)),
       boundedConstructible (condensedRingObj Λ M.total) B ∧
         Nonempty (L((M.j)^*⟦Λ⟧).obj B ≅ L((M.ε)^*⟦Λ⟧).obj A) := by
-  have hM := h.isTraitModelOver
   obtain ⟨w, -, -, hw⟩ := h.exists_openImmersion_genericFibre
-  have := hM.isTraitModel.isNoetherian_total
-  let a : pullback q (traitGenericSpec k') ⟶ M.total := pullback.fst _ _
-  let s := genericFibreInclusion M q g hM.isPullback_j.w
-  let e := w ≫ pullback.fst X₁.hom ι
-  have hs : s ≫ a = M.j := genericFibreInclusion_fst _ _ _ _
-  refine ⟨D((a)_!open⟦Λ⟧).obj (L((e)^*⟦Λ⟧).obj A),
-    boundedConstructible_mapDerivedCategory_openImmersionLowerShriek_obj Λ a _
-      (boundedConstructible_leftDerivedUpperStar_obj_of_scheme Λ e A hA), ⟨?_⟩⟩
-  exact (leftDerivedUpperStarCompOfEq Λ hs).app _ ≪≫
-    (L((s)^*⟦Λ⟧)).mapIso (asIso ((derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction'
-      Λ a).unit.app _)).symm ≪≫ ((leftDerivedUpperStarCompOfEq Λ hw).app A).symm
+  have := h.isTraitModelOver.isTraitModel.isNoetherian_total
+  exact exists_boundedConstructible_leftDerivedUpperStar_obj_iso_of_isOpenImmersion Λ
+    (pullback.fst q (traitGenericSpec k'))
+    (genericFibreInclusion M q g h.isTraitModelOver.isPullback_j.w) (w ≫ pullback.fst _ _)
+    (genericFibreInclusion_fst M q g h.isTraitModelOver.isPullback_j.w) hw hA
 
-end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
+end NearbyCyclesModel
+
+end AlgebraicGeometry.ProEtale.CondensedRing

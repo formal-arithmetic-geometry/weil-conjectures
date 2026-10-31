@@ -213,7 +213,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] [IsSepClosed k'] [Fact (ringChar k').Prime
   (hb : b ≫ 𝔸(ULift.{u} (Fin 1); trait k') ↘ trait k' = q)
 
 
-set_option maxHeartbeats 800000 in
+set_option maxHeartbeats 1600000 in
 -- each derived pullback `L(f)^*` in the statement costs seconds of instance search
 /-- **The slice exchange is an averaging summand** (ambient derived categories): for a bounded
 constructible `A` on `X₁`, there is a subgroup `V` of finite index of the pro-`p` kernel `P'`
