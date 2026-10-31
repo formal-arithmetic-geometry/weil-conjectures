@@ -31,9 +31,6 @@ compatibility of each constituent:
 
 @[expose] public section
 
-set_option profiler true
-set_option profiler.threshold 3000
-
 universe u
 
 open CategoryTheory Limits MonoidalCategory
@@ -92,7 +89,17 @@ theorem map_etaleReductionSmoothOrientationIso_hom_comp (n : ℕ) :
       (integersModPowCoeffTransition_surjective ℓ E.1 (n + 1))
       (ker_integersModPowCoeffTransition ℓ E.1 (n + 1)) ℓ
       (ringChar_integersModPowCoeff_succ ℓ E.1 (n + 1))).mapSupportedClass_frameClass F
-  have hL : (integersModPowSupportedCoefficientChange ℓ E n).PreservesSectionInvariantIso
+  -- `hL` and `hD` are stated with the canonical Tate data spelled out rather than with the
+  -- abbreviations `integersModPowTateShiftData` and `integersModPowSupportedCoefficientChange`:
+  -- unifying the two spellings at default transparency is very slow, while `hD` is converted
+  -- to the hypothesis of `map_etaleReductionSmoothOrientationIso_hom_comp_of` at reducible
+  -- transparency
+  have hL : (Etale.reductionSupportedCoefficientChange
+        (integersModPowCoeffTransition_surjective ℓ E.1 (n + 1))
+        (ker_integersModPowCoeffTransition ℓ E.1 (n + 1))
+        (Etale.reductionTateTwistShiftData (integersModPowCoeffTransition_surjective ℓ E.1 (n + 1))
+          (ker_integersModPowCoeffTransition ℓ E.1 (n + 1)) ℓ
+          (ringChar_integersModPowCoeff_succ ℓ E.1 (n + 1)))).PreservesSectionInvariantIso
       (pullback.diagonal f.left) := Etale.reductionTateTwistShiftData_preservesSectionInvariantIso
     (integersModPowCoeffTransition_surjective ℓ E.1 (n + 1))
     (ker_integersModPowCoeffTransition ℓ E.1 (n + 1)) ℓ
@@ -101,6 +108,27 @@ theorem map_etaleReductionSmoothOrientationIso_hom_comp (n : ℕ) :
     (integersModPowCoeffTransition_surjective ℓ E.1 (n + 1))
     (ker_integersModPowCoeffTransition ℓ E.1 (n + 1)) f.left (integersModPowTateShiftData ℓ E n)
     d Y.hom hframe
+  have hD := Etale.map_dualizingComplexTwistShiftIso_reduction_canonical
+      (integersModPowCoeffTransition_surjective ℓ E.1 (n + 1))
+      (ker_integersModPowCoeffTransition ℓ E.1 (n + 1)) f.left
+      (Etale.reductionTateTwistShiftData (integersModPowCoeffTransition_surjective ℓ E.1 (n + 1))
+          (ker_integersModPowCoeffTransition ℓ E.1 (n + 1)) ℓ
+          (ringChar_integersModPowCoeff_succ ℓ E.1 (n + 1)))
+      d Y.hom hframe hL
+  have hD' : (integersModPowDerivedExtendScalars ℓ E.1 (n + 1) X.left).map
+          (Etale.dualizingComplexTwistShiftIso (integersModPowCoeff.{u} ℓ E.1 (n + 1 + 1))
+            f.left d Y.hom).hom ≫
+        ((integersModPowSupportedCoefficientChange ℓ E n).twistShiftConstantComplexIso
+          X.left d).hom =
+      Etale.derivedExtendScalarsDualizingComplexMap
+          (integersModPowCoeffTransition_surjective ℓ E.1 (n + 1))
+          (ker_integersModPowCoeffTransition ℓ E.1 (n + 1)) f.left
+          (Etale.derivedExtendScalarsConstantComplexIso
+            (integersModPowCoeffTransition_surjective ℓ E.1 (n + 1))
+            (ker_integersModPowCoeffTransition ℓ E.1 (n + 1)) Y.left) ≫
+        (Etale.dualizingComplexTwistShiftIso (integersModPowCoeff.{u} ℓ E.1 (n + 1))
+            f.left d Y.hom).hom := by
+    with_reducible exact hD
   exact map_etaleReductionSmoothOrientationIso_hom_comp_of ℓ E f d n
     ((integersModPowSupportedCoefficientChange ℓ E n).twistShiftConstantComplexIso X.left d)
     (Etale.derivedExtendScalarsDualizingComplexMap
@@ -109,11 +137,7 @@ theorem map_etaleReductionSmoothOrientationIso_hom_comp (n : ℕ) :
       (Etale.derivedExtendScalarsConstantComplexIso
         (integersModPowCoeffTransition_surjective ℓ E.1 (n + 1))
         (ker_integersModPowCoeffTransition ℓ E.1 (n + 1)) Y.left))
-    (map_etaleReductionIntegralTateTwistIso_comp ℓ E d n)
-    (Etale.map_dualizingComplexTwistShiftIso_reduction_canonical
-      (integersModPowCoeffTransition_surjective ℓ E.1 (n + 1))
-      (ker_integersModPowCoeffTransition ℓ E.1 (n + 1)) f.left (integersModPowTateShiftData ℓ E n)
-      d Y.hom hframe hL)
+    (map_etaleReductionIntegralTateTwistIso_comp ℓ E d n) hD'
     (map_etaleReductionUpperShriekUnitIso_hom_comp_dualizingComplexMap ℓ E.1 (n + 1) f
       (map_etaleReductionUnitIso_hom_comp_constantComplexIso ℓ E.1 (n + 1) Y))
 

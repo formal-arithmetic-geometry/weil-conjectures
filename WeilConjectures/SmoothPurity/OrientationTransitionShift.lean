@@ -66,7 +66,10 @@ omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
 lemma finiteEtaleReadingExtendScalarsMap'_eq :
     finiteEtaleReadingExtendScalarsMap' ℓ E n X = finiteEtaleReadingExtendScalarsMap ℓ E n X := by
   ext M
-  simp only [Functor.comp_obj, ObjectProperty.ι_obj]
+  simp only [Functor.comp_obj, ObjectProperty.ι_obj, finiteEtaleReadingExtendScalarsMap',
+    Functor.whiskerLeft_twice, Category.assoc, NatTrans.comp_app, Functor.associator_hom_app,
+    Functor.whiskerLeft_app, Functor.associator_inv_app, Functor.whiskerRight_app,
+    Category.comp_id, Category.id_comp, finiteEtaleReadingExtendScalarsMap]
   exact Category.id_comp _
 
 set_option synthInstance.maxHeartbeats 400000 in
@@ -155,12 +158,14 @@ instance commShift_etaleReductionExtendScalarsMap' :
   dsimp only [etaleReductionExtendScalarsMap']
   infer_instance
 
+omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
 lemma etaleReductionExtendScalarsMap'_app (K : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) :
     (etaleReductionExtendScalarsMap' ℓ E n X).app K =
       (etaleReductionExtendScalarsIsoApp ℓ E n X K).hom := by
   rw [etaleReductionExtendScalarsIsoApp_hom, ← finiteEtaleReadingExtendScalarsMap'_eq]
   simp [etaleReductionExtendScalarsMap']
 
+omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
 /-- Blueprint `det-sp-purity-coefficient-change` (shifts). **The isomorphisms
 `β : Ψ(red_{n+1} K) ≅ red_n K` commute with the shifts**: through the commutations of the
 reductions with the shifts (`boundedConstructibleIntegersModPowReductionShiftIso`), of the étale

@@ -145,6 +145,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgC
 
 set_option maxHeartbeats 800000 in
 -- the composites of derived functors between sheaf categories are slow to elaborate
+omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
 /-- Blueprint `det-sp-purity-coefficient-change` (restriction form of `β`). **The transpose of
 `β : Ψ(ρ(red_{n+1} K)) ≅ ρ(red_n K)` under `Ψ ⊣ Res`**, followed by the base change map
 `Res Rν_* ⟶ Rν_* Res`, is `Rν_*` of `Φ` of the condensed transition

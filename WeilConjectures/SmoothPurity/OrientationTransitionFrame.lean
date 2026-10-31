@@ -29,8 +29,6 @@ compatibility of the diagonal orientation with `Ψ`
 
 @[expose] public section
 
-set_option profiler true
-set_option profiler.threshold 3000
 
 universe u
 

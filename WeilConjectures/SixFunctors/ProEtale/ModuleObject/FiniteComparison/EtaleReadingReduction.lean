@@ -258,6 +258,7 @@ lemma etaleReductionExtendScalarsIsoApp_hom
           ((boundedConstructibleIntegersModPowReductionTransitionIso ℓ E n X.left).hom.app K) :=
   rfl
 
+omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
 lemma etaleReductionExtendScalarsIso_app
     (K : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) :
     (etaleReductionExtendScalarsIso ℓ E n X).app K = etaleReductionExtendScalarsIsoApp ℓ E n X K :=

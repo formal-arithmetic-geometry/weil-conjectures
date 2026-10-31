@@ -78,6 +78,7 @@ lemma _root_.CategoryTheory.Functor.comp_comp_map_eq_comp_map_comp_map {C D : Ty
     s ≫ μ₂ ≫ G.map ω₂ = (μ₁ ≫ G.map ω₁) ≫ G.map u := by
   rw [reassoc_of% hnat, ← G.map_comp, ← hA, G.map_comp, Category.assoc]
 
+omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
 /-- Blueprint `det-sp-purity-coefficient-change` (lifting criterion). **The condensed reduction
 of a morphism `t' : red_{n+1} K ⟶ red_{n+1} L` is a given `t : red_n K ⟶ red_n L` as soon as this
 holds on the étale site**: if, through the isomorphisms `β : Ψ(red_{n+1} -) ≅ red_n -`
