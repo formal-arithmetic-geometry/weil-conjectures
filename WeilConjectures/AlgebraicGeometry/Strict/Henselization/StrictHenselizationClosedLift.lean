@@ -30,12 +30,12 @@ Source: Stacks Project, Tag 04HX
 Proof: select a representative affine pointed neighbourhood. The structural map is its
 limit leg followed by its structure morphism. The evaluation cocone, followed by this
 limit leg, is the specified geometric point of that neighbourhood by the colimit cocone
-identity (`strictHenselizationPointEvaluation_pointed`). Its composite with the structure
+identity (`strictHenselizationRingPointEvaluation_pointed`). Its composite with the structure
 morphism is `s` by pointedness. Associativity gives the asserted factorization. -/
 theorem strictHenselizationClosedLift_over
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) :
-    Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation s)) ≫
+    Spec.map (CommRingCat.ofHom (strictHenselizationRingPointEvaluation s)) ≫
       strictHenselizationStructuralMap s = s := by
   have := (strictHenselization_properties s).2.1
   obtain ⟨j⟩ := IsCofiltered.nonempty
@@ -48,7 +48,7 @@ theorem strictHenselizationClosedLift_over
     (congrArg (fun f ↦ f ≫ ((AffineEtale.Spec S).obj
       ((equivSmallModel.{u}
         (strictHenselizationNeighbourhoods s)).inverse.obj j).1).hom)
-      (strictHenselizationPointEvaluation_pointed s j)).trans
+      (strictHenselizationRingPointEvaluation_pointed s j)).trans
         (Over.w ((equivSmallModel.{u}
           (strictHenselizationNeighbourhoods s)).inverse.obj j).2)
 

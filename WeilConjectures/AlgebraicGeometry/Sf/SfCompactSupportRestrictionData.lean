@@ -43,6 +43,92 @@ variable {A B C : Type u} [CommRing A] [CommRing B] [CommRing C]
 noncomputable abbrev sfFixedRestriction (T : Scheme.{u}) (φ : A →+* B) :=
   sheafCompose (ProEt.topology T) (ModuleCat.restrictScalars.{u + 1} φ.ulift)
 
+/-- Realization commutes with restriction of scalars, for a general pair of locally bijective
+constant-scalar maps `α`, `α'` and ring-sheaf map `δ` compatible with `φ`: there is a unique
+natural isomorphism which is the identity on sections. Source: Stacks Tags 00YV and 03DA
+(blueprint: lem-sf-compact-support-restriction-of-scalars).
+Proof: the comparison is adjoint to the sheafification unit, which is linear by the square
+`h`; its underlying abelian sheaf map is the identity, and `SheafOfModules.toSheaf` is
+faithful and reflects isomorphisms. -/
+private theorem realization_restrict_existsUnique {C : Type (u + 1)} [Category.{u} C]
+    (J : GrothendieckTopology C) {Λ Λ' : Type (u + 1)} [Ring Λ] [Ring Λ']
+    (R R' : Sheaf J RingCat.{u + 1})
+    (α : (Functor.const Cᵒᵖ).obj (RingCat.of Λ) ⟶ R.obj)
+    (α' : (Functor.const Cᵒᵖ).obj (RingCat.of Λ') ⟶ R'.obj)
+    (φ : Λ →+* Λ') (δ : R ⟶ R')
+    [Presheaf.IsLocallyInjective J α] [Presheaf.IsLocallySurjective J α]
+    [Presheaf.IsLocallyInjective J α'] [Presheaf.IsLocallySurjective J α']
+    [HasSheafify J AddCommGrpCat.{u + 1}] [J.WEqualsLocallyBijective AddCommGrpCat.{u + 1}]
+    (h : α ≫ δ.hom = (Functor.const Cᵒᵖ).map (RingCat.ofHom φ) ≫ α') :
+    ∃! e : (sheafToPresheaf J (ModuleCat.{u + 1} Λ') ⋙
+          ProEtale.finiteCoefficientModulePresheaf C Λ' ⋙
+          PresheafOfModules.sheafification.{u + 1} α') ⋙
+          SheafOfModules.restrictScalars.{u + 1} δ ≅
+        sheafCompose J (ModuleCat.restrictScalars.{u + 1} φ) ⋙
+          (sheafToPresheaf J (ModuleCat.{u + 1} Λ) ⋙ ProEtale.finiteCoefficientModulePresheaf C Λ ⋙
+            PresheafOfModules.sheafification.{u + 1} α),
+      ∀ (M : Sheaf J (ModuleCat.{u + 1} Λ')) (U : Cᵒᵖ)
+        (x : ((PresheafOfModules.sheafification.{u + 1} α').obj
+          ((ProEtale.finiteCoefficientModulePresheaf C Λ').obj M.obj)).val.obj U),
+        (e.hom.app M).val.app U x = x := by
+  let P' : Sheaf J (ModuleCat.{u + 1} Λ') → _root_.PresheafOfModules.{u + 1}
+      ((Functor.const Cᵒᵖ).obj (RingCat.of Λ')) :=
+    fun M ↦ (ProEtale.finiteCoefficientModulePresheaf C Λ').obj M.obj
+  let g (M : Sheaf J (ModuleCat.{u + 1} Λ')) :
+      (ProEtale.finiteCoefficientModulePresheaf C Λ).obj
+          ((sheafCompose J (ModuleCat.restrictScalars.{u + 1} φ)).obj M).obj ⟶
+        (PresheafOfModules.restrictScalars α).obj ((SheafOfModules.forget _).obj
+          ((SheafOfModules.restrictScalars δ).obj
+            ((PresheafOfModules.sheafification.{u + 1} α').obj (P' M)))) :=
+    PresheafOfModules.homMk (toSheafify J (P' M).presheaf) (by
+      intro U r m
+      have h1 := (((PresheafOfModules.sheafificationAdjunction α').unit.app
+        (P' M)).app U).hom.map_smul (φ r) m
+      have h2 : δ.hom.app U (α.app U r) = α'.app U (φ r) :=
+        ConcreteCategory.congr_hom (congrArg (fun k ↦ k.app U) h) r
+      change _ = (δ.hom.app U (α.app U r) : R'.obj.obj U) •
+        (show ((PresheafOfModules.sheafification.{u + 1} α').obj (P' M)).val.obj U from
+          (toSheafify J (P' M).presheaf).app U m)
+      rw [h2]
+      exact h1)
+  let f (M : Sheaf J (ModuleCat.{u + 1} Λ')) :=
+    (PresheafOfModules.sheafificationHomEquiv α).symm (g M)
+  have hf (M : Sheaf J (ModuleCat.{u + 1} Λ')) :
+      (SheafOfModules.toSheaf _).map (f M) = 𝟙 _ := by
+    rw [PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm]
+    apply ((sheafificationAdjunction J AddCommGrpCat.{u + 1}).homEquiv _ _).injective
+    rw [Equiv.apply_symm_apply]
+    exact ((sheafificationAdjunction J AddCommGrpCat.{u + 1}).homEquiv_id _).symm
+  have hf' (M : Sheaf J (ModuleCat.{u + 1} Λ')) (U : Cᵒᵖ)
+      (y : ((PresheafOfModules.sheafification.{u + 1} α').obj (P' M)).val.obj U) :
+      (f M).val.app U y = y :=
+    congrArg (fun k ↦ k.hom.app U y) (hf M)
+  have : ∀ M, IsIso (f M) := fun M ↦ by
+    rw [← isIso_iff_of_reflects_iso _ (SheafOfModules.toSheaf _), hf M]
+    infer_instance
+  let e₀ : sheafCompose J (ModuleCat.restrictScalars.{u + 1} φ) ⋙
+        (sheafToPresheaf J (ModuleCat.{u + 1} Λ) ⋙ ProEtale.finiteCoefficientModulePresheaf C Λ ⋙
+          PresheafOfModules.sheafification.{u + 1} α) ≅
+      (sheafToPresheaf J (ModuleCat.{u + 1} Λ') ⋙ ProEtale.finiteCoefficientModulePresheaf C Λ' ⋙
+          PresheafOfModules.sheafification.{u + 1} α') ⋙
+        SheafOfModules.restrictScalars.{u + 1} δ :=
+    NatIso.ofComponents (fun M ↦ asIso (f M)) (fun {M N} a ↦ by
+      apply (SheafOfModules.toSheaf _).map_injective
+      simp only [Functor.map_comp, asIso_hom, hf]
+      rfl)
+  have he : ∀ (M : Sheaf J (ModuleCat.{u + 1} Λ')) (U : Cᵒᵖ)
+      (x : ((PresheafOfModules.sheafification.{u + 1} α').obj (P' M)).val.obj U),
+      (e₀.symm.hom.app M).val.app U x = x := fun M U x ↦ by
+    refine (hf' M U ((inv (f M)).val.app U x)).symm.trans ?_
+    change ((inv (f M) ≫ f M).val.app U) x = x
+    rw [IsIso.inv_hom_id]
+    rfl
+  refine ⟨e₀.symm, he, fun e' he' ↦ ?_⟩
+  apply Iso.ext
+  ext M U x
+  exact (he' M U x).trans (he M U x).symm
+
+
 /-- Realization commutes with scalar restriction by the identity on the sheafified
 underlying abelian presheaf. Source: Stacks Tags 00YV and 03DA
 (blueprint: lem-sf-compact-support-restriction-of-scalars).

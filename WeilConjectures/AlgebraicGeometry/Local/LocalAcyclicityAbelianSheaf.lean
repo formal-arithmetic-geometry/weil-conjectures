@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.StrictHenselizationPointEvaluation
 public import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
+public import WeilConjectures.AlgebraicGeometry.Strict.Henselization.StrictHenselizationCanonicalMap
 public import WeilConjectures.AlgebraicGeometry.Strict.Local.StrictLocalSectionCone
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
@@ -63,74 +64,10 @@ theorem existsUnique_localAcyclicityStrictMap
     ∃! h : Scheme.strictHenselizationScheme x ⟶ Scheme.strictHenselizationScheme (x ≫ f),
       h ≫ Scheme.strictHenselizationStructuralMap (x ≫ f) =
         Scheme.strictHenselizationStructuralMap x ≫ f ∧
-      Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationPointEvaluation x)) ≫ h =
-        Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationPointEvaluation (x ≫ f))) := by
-  let := (Scheme.descResidueField (Scheme.stalkClosedPointTo (x ≫ f))).hom.toAlgebra
-  let := (Scheme.descResidueField (Scheme.stalkClosedPointTo x)).hom.toAlgebra
-  obtain ⟨hS, _, _, _, σS, ⟨hσS, _⟩, _⟩ :=
-    strictHenselizationResidue (x ≫ f) rfl
-  let := hS
-  obtain ⟨hX, _, _, _, σX, ⟨hσX, _⟩, _⟩ :=
-    strictHenselizationResidue x rfl
-  let := hX
-  let ψS := (((IntermediateField.val
-    (separableClosure (S.residueField ((x ≫ f) (IsLocalRing.closedPoint Ω))) Ω)).toRingHom.comp
-      σS.toRingHom).comp (IsLocalRing.residue (Scheme.strictHenselizationRing (x ≫ f))))
-  let ψX := (((IntermediateField.val
-    (separableClosure (X.residueField (x (IsLocalRing.closedPoint Ω))) Ω)).toRingHom.comp
-      σX.toRingHom).comp (IsLocalRing.residue (Scheme.strictHenselizationRing x)))
-  have hψS : Spec.map (CommRingCat.ofHom ψS) =
-      Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationPointEvaluation (x ≫ f))) := by
-    obtain ⟨hl⟩ := (Scheme.strictHenselization_properties (x ≫ f)).2.2
-    apply hl.hom_ext
-    intro j
-    apply (cancel_mono (Spec (Opposite.unop ((equivSmallModel.{u}
-      (Scheme.strictHenselizationNeighbourhoods (x ≫ f))).inverse.obj
-        j.unop.unop).1.left)).isoSpec.inv).1
-    exact (hσS j.unop.unop).trans
-      (Scheme.strictHenselizationPointEvaluation_pointed (x ≫ f) j.unop.unop).symm
-  have hψX : Spec.map (CommRingCat.ofHom ψX) =
-      Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationPointEvaluation x)) := by
-    obtain ⟨hl⟩ := (Scheme.strictHenselization_properties x).2.2
-    apply hl.hom_ext
-    intro j
-    apply (cancel_mono (Spec (Opposite.unop ((equivSmallModel.{u}
-      (Scheme.strictHenselizationNeighbourhoods x)).inverse.obj
-        j.unop.unop).1.left)).isoSpec.inv).1
-    exact (hσX j.unop.unop).trans
-      (Scheme.strictHenselizationPointEvaluation_pointed x j.unop.unop).symm
-  obtain ⟨_, h, _, hbase, hres, _, _⟩ :=
-    strictHenselizationFunctoriality f x (x ≫ f) rfl rfl rfl σS σX hσS hσX
-  have hpoint : Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationPointEvaluation x)) ≫
-      Spec.map h =
-        Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationPointEvaluation (x ≫ f))) := by
-    rw [← hψX, ← hψS, ← Spec.map_comp]
-    congr 1
-    exact CommRingCat.hom_ext hres.symm
-  refine ⟨Spec.map h, ⟨hbase, hpoint⟩, ?_⟩
-  rintro h' ⟨h'base, h'point⟩
-  obtain ⟨hl⟩ := (Scheme.strictHenselization_properties (x ≫ f)).2.2
-  apply hl.hom_ext
-  intro j
-  apply (cancel_mono (Spec (Opposite.unop ((equivSmallModel.{u}
-    (Scheme.strictHenselizationNeighbourhoods (x ≫ f))).inverse.obj
-      j.unop.unop).1.left)).isoSpec.inv).1
-  let c := (Scheme.strictHenselizationCone (x ≫ f)).π.app j ≫
-    (Spec (Opposite.unop ((equivSmallModel.{u}
-      (Scheme.strictHenselizationNeighbourhoods (x ≫ f))).inverse.obj
-        j.unop.unop).1.left)).isoSpec.inv
-  let p := ((Scheme.AffineEtale.Spec S).obj ((equivSmallModel.{u}
-    (Scheme.strictHenselizationNeighbourhoods (x ≫ f))).inverse.obj j.unop.unop).1).hom
-  have hc : c ≫ p = Scheme.strictHenselizationStructuralMap (x ≫ f) := by
-    simpa only [c, p, Scheme.isoSpec_Spec_inv] using!
-      ((Scheme.exists_strictHenselizationStructuralMap (x ≫ f)).choose_spec j.unop.unop)
-  change h' ≫ c = Spec.map h ≫ c
-  apply etalePointedMapRigidity ψX p
-  · simpa only [Category.assoc, hc] using h'base.trans hbase.symm
-  · rw [hψX]
-    simpa only [Category.assoc] using!
-      (congrArg (fun q ↦ q ≫ c) h'point).trans
-        (congrArg (fun q ↦ q ≫ c) hpoint).symm
+      Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationRingPointEvaluation x)) ≫ h =
+        Spec.map (CommRingCat.ofHom
+          (Scheme.strictHenselizationRingPointEvaluation (x ≫ f))) :=
+  Scheme.strictHenselizationMap_existsUnique f x
 
 /-- The canonical pointed strict-local map induced by pulling back neighbourhoods.
 Source: Stacks Project, Tag 0GJP, preceding diagram
