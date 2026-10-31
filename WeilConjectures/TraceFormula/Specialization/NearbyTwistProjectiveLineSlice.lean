@@ -9,7 +9,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 public import WeilConjectures.Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
 public import WeilConjectures.TateTwist.TateModuleTrivialization
 public import WeilConjectures.TateTwist.UpperStarExtendScalars
-public import WeilConjectures.TateTwist.UpperStarOne
+public import WeilConjectures.TateTwist.Pullback
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityTwistCompositionSlice
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethFiniteSupport
 public import WeilConjectures.TraceFormula.Specialization.NearbyTwistProjectiveLine
@@ -341,7 +341,7 @@ omit [Algebra k' K] [IsSepClosed K] [Fact (ringChar K).Prime] [Fact (ringChar K 
   [Fact (ringChar (FractionRing (PowerSeries K)) ≠ ℓ)] in
 /-- **The dualizing complex of `ℙ¹_η` is a finite direct sum of shifts of the unit**: by smooth
 purity it is `ℚ̄_ℓ(1)[2]`, the pullback of `ℚ̄_ℓ(1)[2]` along `ℙ¹_η ⟶ Spec k'`
-(`ProEtale.leftDerivedUpperStarTateTwistDerivedIsoOfField`), and every bounded constructible
+(`ProEtale.upperStarTateTwistDerivedIso`), and every bounded constructible
 complex on the separably closed point `Spec k'` is a finite direct sum of shifts of the unit
 (`nonempty_shiftDecomposition_of_boundedConstructible`). -/
 theorem nonempty_shiftDecomposition_dualizingComplex_projectiveLine :
@@ -364,7 +364,7 @@ theorem nonempty_shiftDecomposition_dualizingComplex_projectiveLine :
       (dualizingComplex ℓ (overProjectiveLine (point (FractionRing (PowerSeries k'))))).obj :=
     (L((f)^*⟦Profinite.padicAlgClRingObj ℓ⟧).commShiftIso (2 * ((1 : ℕ) : ℤ))).app _ ≪≫
       (shiftFunctor _ (2 * ((1 : ℕ) : ℤ))).mapIso
-        (ProEtale.leftDerivedUpperStarTateTwistDerivedIsoOfField f (𝟙 _) ℓ _) ≪≫
+        (ProEtale.upperStarTateTwistDerivedIso ℓ f (𝟙 _) _) ≪≫
       (ObjectProperty.ι _).mapIso (asIso (smoothPurityMap ℓ
         (CondensedRing.toPoint (overProjectiveLine (point (FractionRing (PowerSeries k'))))) 1))
   exact ⟨((D₀.map L((f)^*⟦Profinite.padicAlgClRingObj ℓ⟧)).ofIsoSummand
@@ -427,7 +427,7 @@ instance isIso_boundedConstructiblePullbackExchangeOfMap_projectiveLineSliceHom_
 omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
 /-- **The identification `u_P`**: `c_P^* ω_{ℙ¹_η} ≅ ω_{Frac K⟦t⟧} ⊗ ℚ̄_ℓ(0)[2]`, by smooth purity
 `ω_{ℙ¹_η} ≅ ℚ̄_ℓ(1)[2]` and `ω_{Frac K⟦t⟧} ≅ ℚ̄_ℓ`, the pullback of the Tate twists
-(`ProEtale.leftDerivedUpperStarTateTwistDerivedIsoOfField`) and the triviality of
+(`ProEtale.upperStarTateTwistDerivedIso`) and the triviality of
 `ℚ̄_ℓ(1)` over the separably closed field `K`
 (`NearbyCyclesModel.nonempty_tateTwistDerived_one_iso_zero`). -/
 theorem nonempty_upperStarOfMap_projectiveLineGenericSlice_dualizingComplex_iso :
@@ -451,8 +451,6 @@ theorem nonempty_upperStarOfMap_projectiveLineGenericSlice_dualizingComplex_iso 
   have : QuasiSeparatedSpace (ProjectiveLine (Spec (.of (FractionRing (PowerSeries k'))))) :=
     quasiSeparatedSpace_of_quasiSeparated
       (overProjectiveLine (point (FractionRing (PowerSeries k')))).hom
-  have : PreservesLimitsOfShape ℕᵒᵖ (projectiveLineGenericSlice (k' := k') x)^*[Ab.{u + 1}] :=
-    ProEtale.preservesLimitsOfShape_natOp_upperStar (projectiveLineGenericSlice (k' := k') x)
   obtain ⟨eT⟩ := nonempty_tateTwistDerived_one_iso_zero ℓ (K := K)
     (X := (point (FractionRing (PowerSeries K))).left)
     (Spec.map (CommRingCat.ofHom ((algebraMap (PowerSeries K) (FractionRing (PowerSeries K))).comp
@@ -467,9 +465,9 @@ theorem nonempty_upperStarOfMap_projectiveLineGenericSlice_dualizingComplex_iso 
     (L((projectiveLineGenericSlice (k' := k') x)^*⟦Profinite.padicAlgClRingObj ℓ⟧).commShiftIso
         (2 * ((1 : ℕ) : ℤ))).app _ ≪≫
       (shiftFunctor _ (2 * ((1 : ℕ) : ℤ))).mapIso
-        (ProEtale.leftDerivedUpperStarTateTwistDerivedIsoOfField
+        (ProEtale.upperStarTateTwistDerivedIso ℓ
           (projectiveLineGenericSlice (k' := k') x)
-          (overProjectiveLine (point (FractionRing (PowerSeries k')))).hom ℓ ((1 : ℕ) : ℤ) ≪≫ eT)
+          (overProjectiveLine (point (FractionRing (PowerSeries k')))).hom ((1 : ℕ) : ℤ) ≪≫ eT)
   let b : (boundedConstructibleUpperStarOfMap ℓ
         (X := overProjectiveLine (point (FractionRing (PowerSeries k'))))
         (Y := point (FractionRing (PowerSeries K))) (projectiveLineGenericSlice (k' := k') x)).obj

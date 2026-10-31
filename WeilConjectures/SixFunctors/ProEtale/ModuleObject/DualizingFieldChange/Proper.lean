@@ -9,7 +9,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldCh
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.Iso
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ClosedUpperShriekFieldExtension
 public import WeilConjectures.SmoothPurity.Defs
-public import WeilConjectures.TateTwist.UpperStarOne
+public import WeilConjectures.TateTwist.Pullback
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Differentials
 public import WeilConjectures.TraceFormula.PurityBaseChangeRestriction
 public import WeilConjectures.AlgebraicGeometry.ChowLemma
@@ -504,7 +504,7 @@ private noncomputable def upperStarOfMapTateTwistIso {P : Over (Spec (.of F))}
   (ObjectProperty.fullyFaithfulι _).preimageIso
     (((πP)^*⟦Profinite.padicAlgClRingObj ℓ⟧.leftDerivedFunctor.commShiftIso n).app _ ≪≫
       (shiftFunctor _ n).mapIso
-        (ProEtale.leftDerivedUpperStarTateTwistDerivedIsoOfField πP P.hom ℓ d))
+        (ProEtale.upperStarTateTwistDerivedIso ℓ πP P.hom d))
 
 /-- **Base change of dualizing complexes along a field extension, embedded case**: for a proper
 `F`-scheme `X` with a closed immersion into an `F`-scheme `P` smooth of pure relative dimension

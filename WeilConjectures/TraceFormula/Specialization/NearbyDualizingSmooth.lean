@@ -43,7 +43,7 @@ generic bases (`NearbyCyclesModel.NearbyDualizingDataOfGenericBase`) is an isomo
   of smooth purity on both fibres (`ProEtale.CondensedRing.isIso_smoothPurityMap`, an input of
   the smooth purity section), the commutation of nearby cycles with Tate twists
   (`NearbyCyclesModel.nearbyCyclesTateTwistIso`, with the pullbacks of the Tate twists
-  `ProEtale.leftDerivedUpperStarTateTwistDerivedIsoOfField`) and the invertible specialization
+  `ProEtale.upperStarTateTwistDerivedIso`) and the invertible specialization
   unit.
 * **Invertibility**: the endomorphism `ψ⁻¹ ∘ θ_N` of `ω_{X'}` is invertible on global sections,
   hence invertible (`ProEtale.CondensedRing.isIso_of_isIso_lowerStar_map_dualizingComplex`).
@@ -123,7 +123,7 @@ lemma IsTraitModelOfGenericBase.compactSpace_quasiSeparatedSpace
 /-- **Nearby cycles of the Tate twist of a smooth trait model over a generic base**:
 `Ψ_N(ℚ̄_ℓ,X₁(d)[n]) ≅ ℚ̄_ℓ,X'(d)[n]`, the composite of
 `Ψ_N(ℚ̄_ℓ ⊗ ℚ̄_ℓ(d)[n]) ≅ Ψ_N ℚ̄_ℓ ⊗ ℚ̄_ℓ(d)[n]` (`NearbyCyclesModel.nearbyCyclesTateTwistIso`,
-with the pullbacks of the Tate twists `ProEtale.leftDerivedUpperStarTateTwistDerivedIsoOfField`)
+with the pullbacks of the Tate twists `ProEtale.upperStarTateTwistDerivedIso`)
 and of the inverse of the invertible specialization unit `σ_N : ℚ̄_ℓ ⟶ Ψ_N ℚ̄_ℓ`. -/
 noncomputable def IsTraitModelOfGenericBase.nearbyCyclesTateTwistIsoOfSmooth
     (h : M.IsTraitModelOfGenericBase X₁ ι q g) [Smooth q] (d n : ℤ) :
@@ -145,11 +145,11 @@ noncomputable def IsTraitModelOfGenericBase.nearbyCyclesTateTwistIsoOfSmooth
   (boundedConstructibleNearbyCycles _).mapIso (λ_ _).symm ≪≫
     nearbyCyclesTateTwistIso (h.preservesBoundedConstructible (ℓ := ℓ))
       (isDualizable_tateTwistDerived_of_trait ℓ q d)
-      (ProEtale.leftDerivedUpperStarTateTwistDerivedIsoOfField M.ε X₁.hom ℓ d)
-      (ProEtale.leftDerivedUpperStarTateTwistDerivedIsoOfField M.j
-        (q ≫ traitToBase k' k') ℓ d)
-      (ProEtale.leftDerivedUpperStarTateTwistDerivedIsoOfField M.i
-        (q ≫ traitToBase k' k') ℓ d) n (𝟙_ _) ≪≫
+      (ProEtale.upperStarTateTwistDerivedIso ℓ M.ε X₁.hom d)
+      (ProEtale.upperStarTateTwistDerivedIso ℓ M.j
+        (q ≫ traitToBase k' k') d)
+      (ProEtale.upperStarTateTwistDerivedIso ℓ M.i
+        (q ≫ traitToBase k' k') d) n (𝟙_ _) ≪≫
     whiskerRightIso (asIso (boundedConstructibleUnit ℓ
       (h.preservesBoundedConstructible (ℓ := ℓ)))).symm _ ≪≫ λ_ _
 

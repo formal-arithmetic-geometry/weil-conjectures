@@ -5,48 +5,46 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.Abelian.CokernelPowTower
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Equalizers
+public import WeilConjectures.CategoryTheory.Sites.MonoidalUnit
 public import WeilConjectures.Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
-public import WeilConjectures.CategoryTheory.Sites.MonObj
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Conservative
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.SeparableClosureCover
-public import WeilConjectures.TateTwist.RingSectionsUpperStar
+public import WeilConjectures.SixFunctors.ProEtale.SupportCohomologyTrianglePullback
 public import WeilConjectures.TateTwist.RootsOfUnityTrivialization
 
 /-!
 # Pullback of the sheaves of roots of unity along an arbitrary morphism
 
-Let `f : X ⟶ Y` be a morphism of schemes, where `Y` lives over a field `k`, and let `N` be
-invertible in `k`. Then `f^* μ_{N,Y} ≅ μ_{N,X}` for the sheaves of `N`-th roots of unity on the
-pro-étale sites (`AlgebraicGeometry.ProEtale.upperStarRootsOfUnitySheafIsoOfField`), compatibly
-with the power maps `μ_{m N} ⟶ μ_N`
-(`AlgebraicGeometry.ProEtale.upperStar_map_rootsOfUnitySheafPow_comp_isoOfField`). Only weakly étale
-`f` was treated before (`AlgebraicGeometry.ProEtale.upperStarRootsOfUnitySheafIso`).
+Let `g : X ⟶ Y` be a morphism of schemes and `N` a natural number. Pulling back `N`-th roots of
+unity along the projections `V ×_Y X ⟶ V` defines a map `μ_N ⟶ g_* μ_N` of sheaves on
+`Y_proét`, whose adjoint is a comparison map `g^* μ_N ⟶ μ_N` of sheaves on `X_proét`
+(`AlgebraicGeometry.ProEtale.upperStarRootsOfUnitySheafHom`). It is compatible with the power
+maps `μ_{m N} ⟶ μ_N` and with composition of morphisms.
 
-## Proof
+If `Y` lives over a field `k` in which `N` is invertible, the comparison map is an isomorphism
+(`AlgebraicGeometry.ProEtale.isIso_upperStarRootsOfUnitySheafHom`,
+`AlgebraicGeometry.ProEtale.upperStarRootsOfUnitySheafIsoOfInvertible`). This is checked on the
+pro-étale cover `X ×_k Spec kˢᵉᵖ ⟶ X`:
 
-The isomorphism is the comparison map `φ_f : f^* μ_{N,Y} ⟶ μ_{N,X}` of
-`WeilConjectures.TateTwist.RingSectionsUpperStar` for the functor `R ↦ μ_N(R)`, adjoint to
-pulling back roots of unity along the projections `V ×_Y X ⟶ V`. To see that it is invertible:
+* for a weakly étale `g` the pullback is the restriction to the slice site, and the comparison
+  map is the identity of `U ↦ μ_N(Γ(U, 𝒪_U))`
+  (`AlgebraicGeometry.ProEtale.isIso_upperStarRootsOfUnityComparison_of_weaklyEtale`);
+* for a morphism `h : U' ⟶ U` of schemes over a field `K` containing a primitive `N`-th root of
+  unity `ζ`, both `μ_N` are the cokernel `ℤ/N` of `N : ℤ ⟶ ℤ` through `a ↦ ζ ^ a`
+  (`AlgebraicGeometry.ProEtale.isColimitUnitToRootsOfUnitySheaf`), and the comparison map is the
+  identification `h^* ℤ ≅ ℤ` of the units
+  (`AlgebraicGeometry.ProEtale.isIso_upperStarRootsOfUnityComparison_of_field`);
+* the comparison maps are compatible with composition
+  (`AlgebraicGeometry.ProEtale.upperStarRootsOfUnityComparison_comp`), and the base change
+  `X ×_k kˢᵉᵖ ⟶ X` of `g` factors as `X ×_k kˢᵉᵖ ⟶ Y ×_k kˢᵉᵖ ⟶ Y`.
 
-* if `Y` lives over a field `K` containing a primitive `N`-th root of unity `ζ`, then
-  `a ↦ ζ ^ a` exhibits `μ_N` as the cokernel of `N : ℤ ⟶ ℤ` on `Y` and on `X`
-  (`AlgebraicGeometry.ProEtale.isColimitUnitToRootsOfUnitySheaf`), `f^*` is right exact and sends
-  `ℤ` to `ℤ`, and `φ_f` is compatible with these presentations: both composites
-  `ℤ ⟶ f_* μ_{N,X}` send `1` to `ζ`
-  (`AlgebraicGeometry.ProEtale.unitToRootsOfUnitySections_comp_toLowerStar`). Hence `φ_f` is an
-  isomorphism of cokernels
-  (`AlgebraicGeometry.ProEtale.isIso_upperStarRingSectionsSheafHom_of_isPrimitiveRoot`);
-* in general, let `kˢᵉᵖ` be a separable closure of `k`, `Y' = Y ×_k kˢᵉᵖ ⟶ Y` and
-  `X' = X ×_k kˢᵉᵖ ⟶ X` the weakly étale covers and `f' : X' ⟶ Y'` the base change of `f`. Then
-  `φ` is compatible with composition and is invertible for weakly étale maps, so from
-  `X' ⟶ X ⟶ Y = X' ⟶ Y' ⟶ Y` and the previous case for `f'` the pullback of `φ_f` to `X'` is an
-  isomorphism. Pullbacks along pro-étale covers detect isomorphisms
-  (`AlgebraicGeometry.ProEtale.isIso_of_isIso_localizationRestriction`).
-
-## Main definitions
-
-- `AlgebraicGeometry.ProEtale.upperStarRootsOfUnitySheafIsoOfField`: `f^* μ_{N,Y} ≅ μ_{N,X}`.
+The comparison maps are first defined for the sheaf `U ↦ μ_N(Γ(U, 𝒪_U))`
+(`AlgebraicGeometry.ProEtale.rootsOfUnityPresheafSheaf`) and then transported to its
+sheafification `AlgebraicGeometry.ProEtale.rootsOfUnitySheaf` along
+`AlgebraicGeometry.ProEtale.rootsOfUnitySheafIso`.
 -/
 
 @[expose] public section
@@ -55,222 +53,325 @@ universe u
 
 open CategoryTheory Limits Opposite MonoidalCategory Functor.LaxMonoidal Functor.OplaxMonoidal
 
-namespace CategoryTheory.Limits
-
-/-- Let `p : A ⟶ B` be a cokernel of `a : A' ⟶ A` and `q : C₀ ⟶ D` a cokernel of `b : B' ⟶ C₀`,
-and let `e : A ≅ C₀`, `e' : A' ≅ B'` identify `a` with `b`. Then a morphism `φ : B ⟶ D` with
-`p ≫ φ = e.hom ≫ q` is an isomorphism. -/
-lemma isIso_of_isColimit_cokernelCofork {C : Type*} [Category* C] [HasZeroMorphisms C]
-    {A A' B C₀ B' D : C} {a : A' ⟶ A} {p : A ⟶ B} {wp : a ≫ p = 0}
-    (hp : IsColimit (CokernelCofork.ofπ p wp)) {b : B' ⟶ C₀} {q : C₀ ⟶ D} {wq : b ≫ q = 0}
-    (hq : IsColimit (CokernelCofork.ofπ q wq)) (e : A ≅ C₀) (e' : A' ≅ B')
-    (he : a ≫ e.hom = e'.hom ≫ b) (φ : B ⟶ D) (hφ : p ≫ φ = e.hom ≫ q) : IsIso φ := by
-  have hb : b ≫ e.inv ≫ p = 0 := by
-    rw [← cancel_epi e'.hom, ← Category.assoc, ← he]
-    simp [wp]
-  let ψ : D ⟶ B := Cofork.IsColimit.desc hq (e.inv ≫ p) (by simpa using hb)
-  have hψ : q ≫ ψ = e.inv ≫ p := Cofork.IsColimit.π_desc hq
-  refine ⟨ψ, Cofork.IsColimit.hom_ext hp ?_, Cofork.IsColimit.hom_ext hq ?_⟩
-  · simp only [Cofork.π_ofπ]
-    rw [reassoc_of% hφ, hψ, Iso.hom_inv_id_assoc]
-    exact (Category.comp_id _).symm
-  · simp only [Cofork.π_ofπ]
-    rw [reassoc_of% hψ, hφ, Iso.inv_hom_id_assoc]
-    exact (Category.comp_id _).symm
-
-end CategoryTheory.Limits
-
 namespace AlgebraicGeometry.ProEtale
 
 open Scheme
 
-/-! ### `μ_N` as a sheaf of the form `U ↦ F(Γ(U, 𝒪_U))` -/
+variable {X Y Z : Scheme.{u}}
 
-/-- The presheaf `U ↦ μ_N(Γ(U, 𝒪_U))` is a sheaf
-(`AlgebraicGeometry.ProEtale.isSheaf_rootsOfUnityPresheaf`), in the form required by
-`AlgebraicGeometry.ProEtale.ringSectionsSheaf`. -/
-lemma isSheaf_ringSectionsPresheaf_rootsOfUnityFunctor (N : ℕ) (X : Scheme.{u}) :
-    Presheaf.IsSheaf (ProEt.topology X)
-      (ringSectionsPresheaf (CommRingCat.rootsOfUnityFunctor N) X) :=
-  isSheaf_rootsOfUnityPresheaf X N
+/-! ### The comparison map -/
 
-/-- The sheaf `U ↦ μ_N(Γ(U, 𝒪_U))`, isomorphic to `μ_N` by
-`AlgebraicGeometry.ProEtale.rootsOfUnitySheafIso`. -/
-noncomputable abbrev rootsOfUnitySections (X : Scheme.{u}) (N : ℕ) :
+/-- The sheaf `U ↦ μ_N(Γ(U, 𝒪_U))` on `X_proét`, before sheafification
+(`AlgebraicGeometry.ProEtale.isSheaf_rootsOfUnityPresheaf`). -/
+noncomputable abbrev rootsOfUnityPresheafSheaf (X : Scheme.{u}) (N : ℕ) :
     Sheaf (ProEt.topology X) Ab.{u + 1} :=
-  ringSectionsSheaf (isSheaf_ringSectionsPresheaf_rootsOfUnityFunctor N) X
+  ⟨rootsOfUnityPresheaf X N, isSheaf_rootsOfUnityPresheaf X N⟩
+
+/-- The map of presheaves `μ_N(Γ(V, 𝒪_V)) ⟶ μ_N(Γ(V ×_Y X, 𝒪))` on `Y_proét`, pulling back roots
+of unity along the projection `V ×_Y X ⟶ V`. -/
+noncomputable def rootsOfUnityPresheafToPullback (g : X ⟶ Y) (N : ℕ) :
+    rootsOfUnityPresheaf Y N ⟶
+      (MorphismProperty.Over.pullback @WeaklyEtale ⊤ g).op ⋙ rootsOfUnityPresheaf X N where
+  app V := (CommRingCat.rootsOfUnityFunctor N).map (Scheme.Γ.map (pullback.fst V.unop.hom g).op)
+  naturality V W f := by
+    rw [rootsOfUnityPresheaf_map, Functor.comp_map, rootsOfUnityPresheaf_map, ← Functor.map_comp,
+      ← Functor.map_comp, ← Scheme.Γ_map_op, ← Scheme.Γ_map_op, ← Functor.map_comp,
+      ← Functor.map_comp, ← op_comp, ← op_comp]
+    congr 3
+    exact (pullback.lift_fst _ _ _).symm
+
+lemma rootsOfUnityPresheafToPullback_app (g : X ⟶ Y) (N : ℕ) (V : Y.ProEtᵒᵖ) :
+    (rootsOfUnityPresheafToPullback g N).app V =
+      (CommRingCat.rootsOfUnityFunctor N).map (pullback.fst V.unop.hom g).appTop :=
+  rfl
+
+/-- The map `μ_N ⟶ g_* μ_N` of sheaves on `Y_proét`, pulling back roots of unity along the
+projections `V ×_Y X ⟶ V`. -/
+noncomputable def rootsOfUnityToLowerStar (g : X ⟶ Y) (N : ℕ) :
+    rootsOfUnityPresheafSheaf Y N ⟶ (g)_*[Ab.{u + 1}].obj (rootsOfUnityPresheafSheaf X N) :=
+  ObjectProperty.homMk (rootsOfUnityPresheafToPullback g N)
+
+/-- The comparison map `g^* μ_N ⟶ μ_N` of sheaves on `X_proét`: the adjoint of
+`AlgebraicGeometry.ProEtale.rootsOfUnityToLowerStar`. -/
+noncomputable def upperStarRootsOfUnityComparison (g : X ⟶ Y) (N : ℕ) :
+    (g)^*[Ab.{u + 1}].obj (rootsOfUnityPresheafSheaf Y N) ⟶ rootsOfUnityPresheafSheaf X N :=
+  ((upperStarLowerStarAdjunction Ab.{u + 1} g).homEquiv _ _).symm (rootsOfUnityToLowerStar g N)
+
+lemma homEquiv_upperStarRootsOfUnityComparison (g : X ⟶ Y) (N : ℕ) :
+    (upperStarLowerStarAdjunction Ab.{u + 1} g).homEquiv _ _
+      (upperStarRootsOfUnityComparison g N) = rootsOfUnityToLowerStar g N :=
+  Equiv.apply_symm_apply _ _
+
+@[reassoc]
+lemma unit_app_comp_lowerStar_map_upperStarRootsOfUnityComparison (g : X ⟶ Y) (N : ℕ) :
+    (upperStarLowerStarAdjunction Ab.{u + 1} g).unit.app _ ≫
+        (g)_*[Ab.{u + 1}].map (upperStarRootsOfUnityComparison g N) =
+      rootsOfUnityToLowerStar g N := by
+  rw [← homEquiv_upperStarRootsOfUnityComparison, Adjunction.homEquiv_unit]
+
+/-! ### Compatibility with composition and with the power maps -/
+
+/-- The maps `μ_N ⟶ g_* μ_N` are compatible with composition: for `a : X ⟶ Y` and `b : Y ⟶ Z`,
+the map for `a ≫ b` is `μ_N ⟶ b_* μ_N ⟶ b_* a_* μ_N ≅ (a ≫ b)_* μ_N`. -/
+lemma rootsOfUnityToLowerStar_comp (a : X ⟶ Y) (b : Y ⟶ Z) (N : ℕ) :
+    rootsOfUnityToLowerStar b N ≫ (b)_*[Ab.{u + 1}].map (rootsOfUnityToLowerStar a N) ≫
+        (lowerStarComp Ab.{u + 1} a b).hom.app _ =
+      rootsOfUnityToLowerStar (a ≫ b) N := by
+  apply Sheaf.hom_ext
+  ext V : 2
+  rw [ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.comp_hom,
+    NatTrans.comp_app, NatTrans.comp_app, lowerStarComp_hom_app_hom_app, lowerStar_map_hom_app]
+  simp only [rootsOfUnityToLowerStar, ObjectProperty.homMk_hom, rootsOfUnityPresheafToPullback_app,
+    rootsOfUnityPresheaf_map, ← Functor.map_comp, ← Scheme.Hom.comp_appTop]
+  congr 2
+  exact MorphismProperty.Over.pullbackComp_left_fst_fst a b V.unop
+
+/-- The comparison maps `g^* μ_N ⟶ μ_N` are compatible with composition: for `a : X ⟶ Y` and
+`b : Y ⟶ Z`, the comparison map of `a ≫ b` is `(a ≫ b)^* μ_N ≅ a^* b^* μ_N ⟶ a^* μ_N ⟶ μ_N`. -/
+lemma upperStarRootsOfUnityComparison_comp (a : X ⟶ Y) (b : Y ⟶ Z) (N : ℕ) :
+    (upperStarComp Ab.{u + 1} a b).hom.app _ ≫
+        (a)^*[Ab.{u + 1}].map (upperStarRootsOfUnityComparison b N) ≫
+          upperStarRootsOfUnityComparison a N =
+      upperStarRootsOfUnityComparison (a ≫ b) N := by
+  apply ((upperStarLowerStarAdjunction Ab.{u + 1} (a ≫ b)).homEquiv _ _).injective
+  rw [homEquiv_upperStarRootsOfUnityComparison, Adjunction.homEquiv_unit, Functor.map_comp,
+    ← Category.assoc, upperStarComp_hom_app_unit_app, Category.assoc,
+    ← rootsOfUnityToLowerStar_comp, ← NatTrans.naturality, Adjunction.comp_unit_app]
+  have h : (upperStarLowerStarAdjunction Ab.{u + 1} a).unit.app _ ≫
+      (a)_*[Ab.{u + 1}].map ((a)^*[Ab.{u + 1}].map (upperStarRootsOfUnityComparison b N) ≫
+        upperStarRootsOfUnityComparison a N) =
+      upperStarRootsOfUnityComparison b N ≫ rootsOfUnityToLowerStar a N := by
+    rw [Functor.map_comp, ← Functor.comp_map,
+      ← (upperStarLowerStarAdjunction Ab.{u + 1} a).unit.naturality_assoc, Functor.id_map,
+      unit_app_comp_lowerStar_map_upperStarRootsOfUnityComparison]
+  rw [Functor.comp_map, Category.assoc, ← Functor.map_comp_assoc, h, Functor.map_comp_assoc,
+    unit_app_comp_lowerStar_map_upperStarRootsOfUnityComparison_assoc]
+
+lemma rootsOfUnityToLowerStar_pow (g : X ⟶ Y) (N m : ℕ) :
+    ObjectProperty.homMk (rootsOfUnityPresheafPow Y N m) ≫ rootsOfUnityToLowerStar g N =
+      rootsOfUnityToLowerStar g (m * N) ≫
+        (g)_*[Ab.{u + 1}].map (ObjectProperty.homMk (rootsOfUnityPresheafPow X N m)) := by
+  apply Sheaf.hom_ext
+  ext V : 2
+  exact ((CommRingCat.rootsOfUnityPow N m).naturality _).symm
+
+/-- The comparison maps `g^* μ_N ⟶ μ_N` are compatible with the power maps `μ_{m N} ⟶ μ_N`. -/
+@[reassoc]
+lemma upperStar_map_pow_comp_upperStarRootsOfUnityComparison (g : X ⟶ Y) (N m : ℕ) :
+    (g)^*[Ab.{u + 1}].map (ObjectProperty.homMk (rootsOfUnityPresheafPow Y N m)) ≫
+        upperStarRootsOfUnityComparison g N =
+      upperStarRootsOfUnityComparison g (m * N) ≫
+        ObjectProperty.homMk (rootsOfUnityPresheafPow X N m) := by
+  apply ((upperStarLowerStarAdjunction Ab.{u + 1} g).homEquiv _ _).injective
+  rw [Adjunction.homEquiv_naturality_left, Adjunction.homEquiv_naturality_right,
+    homEquiv_upperStarRootsOfUnityComparison, homEquiv_upperStarRootsOfUnityComparison,
+    rootsOfUnityToLowerStar_pow]
+
+/-! ### The weakly étale case -/
+
+/-- For a weakly étale `g`, the adjoint of `μ_N ⟶ g_* μ_N` for the restriction to the slice site
+is the identity of `U ↦ μ_N(Γ(U, 𝒪_U))`. -/
+lemma localizationRestrictionLowerStarAdjunction_homEquiv_symm_rootsOfUnityToLowerStar
+    (g : X ⟶ Y) [hg : WeaklyEtale g] (N : ℕ) :
+    ((localizationRestrictionLowerStarAdjunction Ab.{u + 1} g hg).homEquiv _ _).symm
+      (rootsOfUnityToLowerStar g N) = (localizationRestrictionRootsOfUnityIso g N).hom := by
+  apply Sheaf.hom_ext
+  ext V : 2
+  simp only [localizationRestrictionLowerStarAdjunction, Adjunction.homEquiv_counit,
+    ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
+    Adjunction.sheafPushforwardContinuous_counit_app_hom_app,
+    MorphismProperty.Over.mapPullbackAdj_unit_app]
+  rw [localizationRestriction_map_hom_app]
+  simp only [rootsOfUnityToLowerStar, ObjectProperty.homMk_hom, rootsOfUnityPresheafToPullback_app,
+    rootsOfUnityPresheaf_map, ← Functor.map_comp, ← Scheme.Hom.comp_appTop]
+  erw [Quiver.Hom.unop_op, pullback.lift_fst, Scheme.Hom.id_appTop, CategoryTheory.Functor.map_id]
+  rfl
+
+/-- For a weakly étale `g`, the comparison map `g^* μ_N ⟶ μ_N` is an isomorphism: `g^*` is the
+restriction to the slice site, under which the comparison map is the identity. -/
+theorem isIso_upperStarRootsOfUnityComparison_of_weaklyEtale (g : X ⟶ Y) [hg : WeaklyEtale g]
+    (N : ℕ) : IsIso (upperStarRootsOfUnityComparison g N) := by
+  have h : upperStarRootsOfUnityComparison g N =
+      (upperStarIsoLocalizationRestriction Ab.{u + 1} g hg).hom.app _ ≫
+        ((localizationRestrictionLowerStarAdjunction Ab.{u + 1} g hg).homEquiv _ _).symm
+          (rootsOfUnityToLowerStar g N) := by
+    rw [upperStarRootsOfUnityComparison, Adjunction.homEquiv_counit, Adjunction.homEquiv_counit,
+      upperStarIsoLocalizationRestriction,
+      ← Adjunction.leftAdjointUniq_hom_app_counit _
+        (localizationRestrictionLowerStarAdjunction Ab.{u + 1} g hg),
+      NatTrans.naturality_assoc]
+  rw [h, localizationRestrictionLowerStarAdjunction_homEquiv_symm_rootsOfUnityToLowerStar]
+  infer_instance
 
 /-! ### Over a field containing a primitive root of unity -/
 
-variable {K : Type u} [Field K] {N : ℕ}
+section Field
 
-/-- The map `ℤ ⟶ μ_N`, `a ↦ ζ ^ a`, with values in the sheaf `U ↦ μ_N(Γ(U, 𝒪_U))`. -/
-noncomputable def unitToRootsOfUnitySections {Y : Scheme.{u}} (p : Y ⟶ Spec (.of K)) {ζ : K}
-    (hζ : ζ ^ N = 1) : 𝟙_ (Sheaf (ProEt.topology Y) Ab.{u + 1}) ⟶ rootsOfUnitySections Y N :=
-  unitToRootsOfUnitySheaf p hζ ≫ (rootsOfUnitySheafIso Y N).hom
+variable {K : Type u} [Field K] {U U' : Scheme.{u}}
 
-/-- On the unit presheaf, `AlgebraicGeometry.ProEtale.unitToRootsOfUnitySections` is the map of
-presheaves `a ↦ ζ ^ a`. -/
-lemma ε_comp_unitToRootsOfUnitySections [NeZero N] {Y : Scheme.{u}} (p : Y ⟶ Spec (.of K))
+/-- On underlying presheaves, the map `ℤ ⟶ μ_N`, `a ↦ ζ ^ a`, read after the unit of
+`sheafToPresheaf`, is the map of presheaves `a ↦ ζ ^ a`. -/
+lemma ε_comp_map_unitToRootsOfUnitySheaf_comp_hom (f : U ⟶ Spec (.of K)) {N : ℕ} [NeZero N]
     {ζ : K} (hζ : ζ ^ N = 1) :
-    ε (sheafToPresheaf (ProEt.topology Y) Ab.{u + 1}) ≫
-      (sheafToPresheaf (ProEt.topology Y) Ab.{u + 1}).map (unitToRootsOfUnitySections p hζ) =
-      unitToRootsOfUnityPresheaf p (rootsOfUnity.mkOfPowEq ζ hζ) := by
-  have hε : ε (sheafToPresheaf (ProEt.topology Y) Ab.{u + 1}) =
-      toSheafify (ProEt.topology Y) _ := by
-    rw [← sheafificationAdjunction_unit_app]
-    exact ((sheafificationAdjunction _ _).homEquiv_unit _ _ _).trans (Category.comp_id _)
-  rw [hε, unitToRootsOfUnitySections, unitToRootsOfUnitySheaf_eq]
-  change toSheafify (ProEt.topology Y) (𝟙_ (Y.ProEtᵒᵖ ⥤ Ab.{u + 1})) ≫
-    sheafifyMap (ProEt.topology Y) (unitToRootsOfUnityPresheaf p (rootsOfUnity.mkOfPowEq ζ hζ)) ≫
-      (isoSheafify (ProEt.topology Y) (isSheaf_rootsOfUnityPresheaf Y N)).inv = _
-  rw [← toSheafify_naturality_assoc, ← isoSheafify_hom (hP := isSheaf_rootsOfUnityPresheaf Y N),
-    Iso.hom_inv_id, Category.comp_id]
+    ε (sheafToPresheaf (ProEt.topology U) Ab.{u + 1}) ≫
+      (sheafToPresheaf (ProEt.topology U) Ab.{u + 1}).map
+        (unitToRootsOfUnitySheaf f hζ ≫ (rootsOfUnitySheafIso U N).hom) =
+      unitToRootsOfUnityPresheaf f (rootsOfUnity.mkOfPowEq ζ hζ) := by
+  rw [ε_sheafToPresheaf_eq_toSheafify, unitToRootsOfUnitySheaf_eq, Functor.map_comp]
+  have h := toSheafify_naturality (ProEt.topology U)
+    (unitToRootsOfUnityPresheaf f (rootsOfUnity.mkOfPowEq ζ hζ))
+  have h' : toSheafify (ProEt.topology U) (rootsOfUnityPresheaf U N) ≫
+      (sheafToPresheaf (ProEt.topology U) Ab.{u + 1}).map (rootsOfUnitySheafIso U N).hom = 𝟙 _ :=
+    congrArg (·.hom) (sheafificationIso
+      ⟨rootsOfUnityPresheaf U N, isSheaf_rootsOfUnityPresheaf U N⟩).hom_inv_id
+  erw [← reassoc_of% h, h', Category.comp_id]
 
-/-- The ring maps `K ⟶ Γ(V, 𝒪_V)` are compatible with pulling back along the projection
-`V ×_Y X ⟶ V`. -/
-lemma fieldToSections_comp_appTop_pullbackFst {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (p : Y ⟶ Spec (.of K)) (V : Y.ProEt) :
-    fieldToSections p V ≫ (pullback.fst V.hom f).appTop =
-      fieldToSections (f ≫ p) ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).obj V) := by
-  simp only [fieldToSections, Category.assoc, ← Scheme.Hom.comp_appTop]
-  rw [pullback.condition_assoc]
-  rfl
+/-- The unit comparison `η : h^* ℤ ⟶ ℤ` of the pullback is the adjoint of the unit comparison
+`ε : ℤ ⟶ h_* ℤ` of the pushforward. -/
+lemma homEquiv_η_upperStar (h : U' ⟶ U) :
+    (upperStarLowerStarAdjunction Ab.{u + 1} h).homEquiv _ _ (η (h)^*[Ab.{u + 1}]) =
+      ε (h)_*[Ab.{u + 1}] :=
+  Equiv.apply_symm_apply _ _
 
-/-- The two maps `ℤ ⟶ f_* μ_{N,X}` agree: `a ↦ ζ ^ a` on `Y` followed by pulling back roots of
-unity, and the unit `ℤ ⟶ f_* ℤ` followed by `f_*` of `a ↦ ζ ^ a` on `X`. -/
-lemma unitToRootsOfUnitySections_comp_toLowerStar [NeZero N] {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (p : Y ⟶ Spec (.of K)) {ζ : K} (hζ : ζ ^ N = 1) :
-    unitToRootsOfUnitySections p hζ ≫ toLowerStarRingSectionsSheaf _ f =
-      ε (f)_*[Ab.{u + 1}] ≫ (f)_*[Ab.{u + 1}].map (unitToRootsOfUnitySections (f ≫ p) hζ) := by
-  apply Sheaf.unit_hom_ext
-  rw [Functor.map_comp, Functor.map_comp, ← Category.assoc, ε_comp_unitToRootsOfUnitySections]
+/-- For a morphism `h : U' ⟶ U` of schemes over a field `K` and `ζ ∈ K` with `ζ ^ N = 1`, the
+comparison map `h^* μ_N ⟶ μ_N` corresponds to the identification `h^* ℤ ≅ ℤ` through the maps
+`ℤ ⟶ μ_N`, `a ↦ ζ ^ a`. -/
+lemma upperStar_map_unitToRootsOfUnitySheaf_comp_upperStarRootsOfUnityComparison (h : U' ⟶ U)
+    (fU : U ⟶ Spec (.of K)) (fU' : U' ⟶ Spec (.of K)) (hh : h ≫ fU = fU') {N : ℕ} [NeZero N]
+    {ζ : K} (hζ : ζ ^ N = 1) :
+    (h)^*[Ab.{u + 1}].map (unitToRootsOfUnitySheaf fU hζ ≫ (rootsOfUnitySheafIso U N).hom) ≫
+        upperStarRootsOfUnityComparison h N =
+      η (h)^*[Ab.{u + 1}] ≫ unitToRootsOfUnitySheaf fU' hζ ≫ (rootsOfUnitySheafIso U' N).hom := by
+  apply ((upperStarLowerStarAdjunction Ab.{u + 1} h).homEquiv _ _).injective
+  rw [Adjunction.homEquiv_naturality_left, homEquiv_upperStarRootsOfUnityComparison,
+    Adjunction.homEquiv_naturality_right, homEquiv_η_upperStar]
+  apply Sheaf.hom_ext_of_ε_comp
+  rw [(sheafToPresheaf _ _).map_comp (unitToRootsOfUnitySheaf fU hζ ≫ _), ← Category.assoc,
+    ε_comp_map_unitToRootsOfUnitySheaf_comp_hom, Functor.map_comp, ← Category.assoc]
   ext V : 2
-  have h1 := Functor.ε_sheafToPresheaf_app_comp_ε_sheafPushforwardContinuous_app
-    (MorphismProperty.Over.pullback @WeaklyEtale ⊤ f) Ab.{u + 1} (ProEt.topology Y)
-      (ProEt.topology X) V
-  have h2 := congr_app (ε_comp_unitToRootsOfUnitySections (f ≫ p) hζ)
-    ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).op.obj V)
-  simp only [NatTrans.comp_app]
-  rw [NatTrans.comp_app] at h2
-  erw [reassoc_of% h1, h2]
-  refine (Category.assoc _ _ _).trans (congrArg (unitToRootsOfUnity _ ≫ ·) ?_)
-  refine (Functor.map_comp _ _ _).symm.trans (congrArg _ ?_)
-  exact fieldToSections_comp_appTop_pullbackFst f p V.unop
-
-/-- `φ_f` is compatible with the maps `ℤ ⟶ μ_N`, `a ↦ ζ ^ a`, on `Y` and on `X`, through the
-identification `f^* ℤ ≅ ℤ`. -/
-lemma upperStar_map_unitToRootsOfUnitySections_comp [NeZero N] {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (p : Y ⟶ Spec (.of K)) {ζ : K} (hζ : ζ ^ N = 1) :
-    (f)^*[Ab.{u + 1}].map (unitToRootsOfUnitySections p hζ) ≫
-        upperStarRingSectionsSheafHom (isSheaf_ringSectionsPresheaf_rootsOfUnityFunctor N) f =
-      η (f)^*[Ab.{u + 1}] ≫ unitToRootsOfUnitySections (f ≫ p) hζ := by
-  rw [upperStarRingSectionsSheafHom, ← Adjunction.homEquiv_naturality_left_symm,
-    unitToRootsOfUnitySections_comp_toLowerStar, Adjunction.homEquiv_naturality_right_symm]
+  rw [NatTrans.comp_app, NatTrans.comp_app, NatTrans.comp_app]
+  erw [Functor.ε_sheafToPresheaf_app_comp_ε_sheafPushforwardContinuous_app]
+  have h₁ := congr_app (ε_comp_map_unitToRootsOfUnitySheaf_comp_hom fU' hζ)
+    ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ h).op.obj V)
+  rw [NatTrans.comp_app] at h₁
+  erw [h₁]
+  simp only [unitToRootsOfUnityPresheaf, rootsOfUnityToLowerStar, ObjectProperty.ι_map,
+    ObjectProperty.homMk_hom, rootsOfUnityPresheafToPullback_app, Category.assoc,
+    ← Functor.map_comp]
+  congr 2
+  rw [fieldToSections, fieldToSections, Category.assoc, ← Scheme.Hom.comp_appTop,
+    pullback.condition_assoc, hh]
   rfl
 
-/-- **`φ_f` is an isomorphism over a field containing a primitive `N`-th root of unity**: both
-`f^* μ_{N,Y}` and `μ_{N,X}` are cokernels of `N : ℤ ⟶ ℤ`, compatibly with `φ_f`. -/
-lemma isIso_upperStarRingSectionsSheafHom_of_isPrimitiveRoot [NeZero N] {X Y : Scheme.{u}}
-    (f : X ⟶ Y) (p : Y ⟶ Spec (.of K)) {ζ : K} (hζ : IsPrimitiveRoot ζ N) :
-    IsIso (upperStarRingSectionsSheafHom
-      (isSheaf_ringSectionsPresheaf_rootsOfUnityFunctor N) f) := by
-  let k := (f)^*[Ab.{u + 1}].mapIso (rootsOfUnitySheafIso Y N)
-  let l : rootsOfUnitySheaf X N ≅ rootsOfUnitySections X N := rootsOfUnitySheafIso X N
-  have : IsIso (k.hom ≫ upperStarRingSectionsSheafHom
-      (isSheaf_ringSectionsPresheaf_rootsOfUnityFunctor N) f ≫ l.inv) := by
-    refine isIso_of_isColimit_cokernelCofork (isColimitCoforkMapOfIsColimit'
-        (f)^*[Ab.{u + 1}] _ (isColimitUnitToRootsOfUnitySheaf p hζ))
-      (isColimitUnitToRootsOfUnitySheaf (f ≫ p) hζ) (asIso (η (f)^*[Ab.{u + 1}]))
-      (asIso (η (f)^*[Ab.{u + 1}])) ?_ _ ?_
-    · simp
-    · have h := upperStar_map_unitToRootsOfUnitySections_comp f p hζ.pow_eq_one
-      simp only [unitToRootsOfUnitySections, Functor.map_comp] at h
-      simp only [k, l, Functor.mapIso_hom, asIso_hom, ← Category.assoc, h]
+/-- For a morphism `h : U' ⟶ U` of schemes over a field `K` containing a primitive `N`-th root of
+unity, the comparison map `h^* μ_N ⟶ μ_N` is an isomorphism: both `μ_N` are the cokernel of
+`N : ℤ ⟶ ℤ`, and `h^*` preserves cokernels. -/
+theorem isIso_upperStarRootsOfUnityComparison_of_field (h : U' ⟶ U) (fU : U ⟶ Spec (.of K))
+    (fU' : U' ⟶ Spec (.of K)) (hh : h ≫ fU = fU') {N : ℕ} [NeZero N] {ζ : K}
+    (hζ : IsPrimitiveRoot ζ N) : IsIso (upperStarRootsOfUnityComparison h N) := by
+  have key := upperStar_map_unitToRootsOfUnitySheaf_comp_upperStarRootsOfUnityComparison h fU fU'
+    hh hζ.pow_eq_one
+  have : IsIso ((h)^*[Ab.{u + 1}].map (rootsOfUnitySheafIso U N).hom ≫
+      upperStarRootsOfUnityComparison h N ≫ (rootsOfUnitySheafIso U' N).inv) := by
+    refine Cofork.IsColimit.isIso_of_π_comp_eq
+      (isColimitCoforkMapOfIsColimit' (h)^*[Ab.{u + 1}] _
+        (isColimitUnitToRootsOfUnitySheaf fU hζ))
+      (isColimitCokernelCoforkOfIsoHomComp (asIso (η (h)^*[Ab.{u + 1}])) ?_ _
+        (isColimitUnitToRootsOfUnitySheaf fU' hζ)) _ ?_
+    · rw [Functor.map_zsmul, CategoryTheory.Functor.map_id, Preadditive.zsmul_comp,
+        Preadditive.comp_zsmul, Category.id_comp, Category.comp_id]
+    · simp only [Cofork.π_ofπ, asIso_hom]
+      rw [← Functor.map_comp_assoc, reassoc_of% key]
       simp
-  have : IsIso (upperStarRingSectionsSheafHom
-      (isSheaf_ringSectionsPresheaf_rootsOfUnityFunctor N) f ≫ l.inv) :=
-    IsIso.of_isIso_comp_left k.hom _
-  exact IsIso.of_isIso_comp_right _ l.inv
+  have e : upperStarRootsOfUnityComparison h N =
+      (h)^*[Ab.{u + 1}].map (rootsOfUnitySheafIso U N).inv ≫
+        ((h)^*[Ab.{u + 1}].map (rootsOfUnitySheafIso U N).hom ≫
+          upperStarRootsOfUnityComparison h N ≫ (rootsOfUnitySheafIso U' N).inv) ≫
+        (rootsOfUnitySheafIso U' N).hom := by
+    simp [← Functor.map_comp_assoc]
+  rw [e]
+  infer_instance
 
-/-! ### Over an arbitrary field -/
+end Field
 
-/-- **`φ_f` is an isomorphism over a field `k` in which `N` is invertible**, for an arbitrary
-morphism `f : X ⟶ Y` and `Y` over `k`: after base change to a separable closure of `k`, this is
-the case of a field containing a primitive `N`-th root of unity. -/
-lemma isIso_upperStarRingSectionsSheafHom_rootsOfUnity {k : Type u} [Field k] [NeZero (N : k)]
-    {X Y : Scheme.{u}} (f : X ⟶ Y) (p : Y ⟶ Spec (.of k)) :
-    IsIso (upperStarRingSectionsSheafHom
-      (isSheaf_ringSectionsPresheaf_rootsOfUnityFunctor N) f) := by
-  have : NeZero N := ⟨fun h ↦ NeZero.ne (N : k) (by simp [h])⟩
+/-! ### The general case -/
+
+/-- **The pullback of `μ_N` is `μ_N`** (before sheafification): for `g : X' ⟶ X` with `X` over a
+field `k` in which `N` is invertible, the comparison map `g^* μ_N ⟶ μ_N` is an isomorphism. It is
+checked after the pro-étale cover `X' ×_k Spec kˢᵉᵖ ⟶ X'`, through which `g` factors as
+`X' ×_k kˢᵉᵖ ⟶ X ×_k kˢᵉᵖ ⟶ X`. -/
+theorem isIso_upperStarRootsOfUnityComparison {k : Type u} [Field k] {X X' : Scheme.{u}}
+    (g : X' ⟶ X) (f : X ⟶ Spec (.of k)) (N : ℕ) [NeZero (N : k)] :
+    IsIso (upperStarRootsOfUnityComparison g N) := by
+  have : NeZero N := NeZero.of_neZero_natCast k
   have : NeZero (N : SeparableClosure k) :=
     ‹NeZero (N : k)›.of_injective (algebraMap k (SeparableClosure k)).injective
-  obtain ⟨-, -, ζ, hζ, -⟩ := IsSepClosed.exists_isPrimitiveRoot.{u, u} (SeparableClosure k) N
-  let s := specSepClosureHom k
-  let f' : pullback (f ≫ p) s ⟶ pullback p s :=
-    pullback.map _ _ _ _ f (𝟙 _) (𝟙 _) (by simp) (by simp)
-  have hsq : pullback.fst (f ≫ p) s ≫ f = f' ≫ pullback.fst p s :=
-    (pullback.lift_fst _ _ _).symm
-  have h₁ : IsIso (upperStarRingSectionsSheafHom
-      (isSheaf_ringSectionsPresheaf_rootsOfUnityFunctor N) (pullback.fst (f ≫ p) s ≫ f)) := by
-    rw [hsq, upperStarRingSectionsSheafHom_comp]
-    have := isIso_upperStarRingSectionsSheafHom_of_weaklyEtale
-      (isSheaf_ringSectionsPresheaf_rootsOfUnityFunctor N) (pullback.fst p s)
-    have := isIso_upperStarRingSectionsSheafHom_of_isPrimitiveRoot f' (pullback.snd p s) hζ
+  obtain ⟨ζ, hζ⟩ := HasEnoughRootsOfUnity.exists_primitiveRoot (SeparableClosure k) N
+  let w := pullback.fst f (specSepClosureHom k)
+  let w' := pullback.fst (g ≫ f) (specSepClosureHom k)
+  let a : pullback (g ≫ f) (specSepClosureHom k) ⟶ pullback f (specSepClosureHom k) :=
+    pullback.map _ _ _ _ g (𝟙 _) (𝟙 _) (by simp) (by simp)
+  have ha : a ≫ w = w' ≫ g := pullback.lift_fst _ _ _
+  have := isIso_upperStarRootsOfUnityComparison_of_field a (pullback.snd _ _) (pullback.snd _ _)
+    ((pullback.lift_snd _ _ _).trans (Category.comp_id _)) hζ
+  have := isIso_upperStarRootsOfUnityComparison_of_weaklyEtale w N
+  have := isIso_upperStarRootsOfUnityComparison_of_weaklyEtale w' N
+  have h₁ : IsIso (upperStarRootsOfUnityComparison (w' ≫ g) N) := by
+    rw [← ha, ← upperStarRootsOfUnityComparison_comp]
     infer_instance
-  have h₂ : IsIso ((pullback.fst (f ≫ p) s)^*[Ab.{u + 1}].map
-      (upperStarRingSectionsSheafHom (isSheaf_ringSectionsPresheaf_rootsOfUnityFunctor N) f)) := by
-    rw [upperStarRingSectionsSheafHom_comp] at h₁
-    have := isIso_upperStarRingSectionsSheafHom_of_weaklyEtale
-      (isSheaf_ringSectionsPresheaf_rootsOfUnityFunctor N) (pullback.fst (f ≫ p) s)
-    rwa [isIso_comp_left_iff, isIso_comp_right_iff] at h₁
-  have : ∀ i, WeaklyEtale ((sepClosureCover (f ≫ p)).f i) := fun i ↦
-    Scheme.proetalePrecoverage_le_precoverage_weaklyEtale _ (sepClosureCover _).mem₀ (.mk i)
-  refine isIso_of_isIso_localizationRestriction Ab.{u + 1} _ (sepClosureCover (f ≫ p)).f
-    (sepClosureCover (f ≫ p)).mem₀ fun i ↦ ?_
-  exact (NatIso.isIso_map_iff (upperStarIsoLocalizationRestriction Ab.{u + 1}
-    (pullback.fst (f ≫ p) s) inferInstance) _).1 h₂
+  rw [← upperStarRootsOfUnityComparison_comp, ← Category.assoc] at h₁
+  have h₂ : IsIso ((w')^*[Ab.{u + 1}].map (upperStarRootsOfUnityComparison g N)) := by
+    have := IsIso.of_isIso_comp_right (((upperStarComp Ab.{u + 1} w' g).hom.app _ ≫
+      (w')^*[Ab.{u + 1}].map (upperStarRootsOfUnityComparison g N)))
+      (upperStarRootsOfUnityComparison w' N)
+    exact IsIso.of_isIso_comp_left ((upperStarComp Ab.{u + 1} w' g).hom.app _) _
+  let 𝒰 := sepClosureCover (g ≫ f)
+  have (i : 𝒰.I₀) : WeaklyEtale (𝒰.f i) :=
+    Scheme.proetalePrecoverage_le_precoverage_weaklyEtale _ 𝒰.mem₀ (.mk i)
+  refine isIso_of_isIso_localizationRestriction Ab.{u + 1} _ 𝒰.f 𝒰.mem₀ fun i ↦ ?_
+  exact (NatIso.isIso_map_iff
+    (upperStarIsoLocalizationRestriction Ab.{u + 1} (𝒰.f i) inferInstance) _).1 h₂
 
-variable {k : Type u} [Field k] {X Y : Scheme.{u}}
+/-! ### The sheaves `μ_N` -/
 
-/-- **The pullback of `μ_N` along an arbitrary morphism**: for `f : X ⟶ Y` with `Y` over a field
-`k` in which `N` is invertible, `f^* μ_{N,Y} ≅ μ_{N,X}`. It is induced by pulling back roots of
-unity (`AlgebraicGeometry.ProEtale.upperStarRingSectionsSheafHom`). -/
-noncomputable def upperStarRootsOfUnitySheafIsoOfField (N : ℕ) [NeZero (N : k)] (f : X ⟶ Y)
-    (p : Y ⟶ Spec (.of k)) :
-    (f)^*[Ab.{u + 1}].obj (rootsOfUnitySheaf Y N) ≅ rootsOfUnitySheaf X N :=
-  haveI := isIso_upperStarRingSectionsSheafHom_rootsOfUnity (N := N) f p
-  (f)^*[Ab.{u + 1}].mapIso (rootsOfUnitySheafIso Y N) ≪≫
-    asIso (upperStarRingSectionsSheafHom (isSheaf_ringSectionsPresheaf_rootsOfUnityFunctor N) f) ≪≫
-      (rootsOfUnitySheafIso X N).symm
+/-- The comparison map `g^* μ_N ⟶ μ_N` of the sheaves of `N`-th roots of unity, for an arbitrary
+morphism `g : X ⟶ Y`. -/
+noncomputable def upperStarRootsOfUnitySheafHom (g : X ⟶ Y) (N : ℕ) :
+    (g)^*[Ab.{u + 1}].obj (rootsOfUnitySheaf Y N) ⟶ rootsOfUnitySheaf X N :=
+  (g)^*[Ab.{u + 1}].map (rootsOfUnitySheafIso Y N).hom ≫ upperStarRootsOfUnityComparison g N ≫
+    (rootsOfUnitySheafIso X N).inv
 
-/-- The isomorphism `f^* μ_N ≅ μ_N` is compatible with the power maps `μ_{m N} ⟶ μ_N`. -/
-lemma upperStar_map_rootsOfUnitySheafPow_comp_isoOfField (N m : ℕ) [NeZero (N : k)]
-    [NeZero ((m * N : ℕ) : k)] (f : X ⟶ Y) (p : Y ⟶ Spec (.of k)) :
-    (f)^*[Ab.{u + 1}].map (rootsOfUnitySheafPow Y N m) ≫
-        (upperStarRootsOfUnitySheafIsoOfField N f p).hom =
-      (upperStarRootsOfUnitySheafIsoOfField (m * N) f p).hom ≫ rootsOfUnitySheafPow X N m := by
-  have h := upperStar_map_ringSectionsSheafMap_comp (CommRingCat.rootsOfUnityPow N m)
-    (isSheaf_ringSectionsPresheaf_rootsOfUnityFunctor (m * N))
-    (isSheaf_ringSectionsPresheaf_rootsOfUnityFunctor N) f
-  simp only [upperStarRootsOfUnitySheafIsoOfField, Iso.trans_hom, Functor.mapIso_hom, asIso_hom,
-    Iso.symm_hom, Category.assoc]
-  rw [← Functor.map_comp_assoc, rootsOfUnitySheafPow_comp_rootsOfUnitySheafIso_hom,
-    Functor.map_comp_assoc, rootsOfUnitySheafIso_inv_comp_rootsOfUnitySheafPow]
-  congr 1
-  rw [← Category.assoc, ← Category.assoc]
-  exact congrArg (· ≫ (rootsOfUnitySheafIso X N).inv) h
-
-/-- The isomorphism `f^* μ_N ≅ μ_N` is compatible with the identifications `μ_N = μ_{N'}` for
-`N = N'`. -/
+/-- The comparison maps `g^* μ_N ⟶ μ_N` are compatible with the power maps `μ_{m N} ⟶ μ_N`. -/
 @[reassoc]
-lemma upperStar_map_eqToHom_comp_isoOfField {N N' : ℕ} [NeZero (N : k)] [NeZero (N' : k)]
-    (h : N = N') (f : X ⟶ Y) (p : Y ⟶ Spec (.of k)) :
-    (f)^*[Ab.{u + 1}].map (eqToHom (congrArg (rootsOfUnitySheaf Y) h)) ≫
-        (upperStarRootsOfUnitySheafIsoOfField N' f p).hom =
-      (upperStarRootsOfUnitySheafIsoOfField N f p).hom ≫
-        eqToHom (congrArg (rootsOfUnitySheaf X) h) := by
-  subst h
-  simp
+lemma upperStar_map_rootsOfUnitySheafPow_comp_upperStarRootsOfUnitySheafHom (g : X ⟶ Y)
+    (N m : ℕ) :
+    (g)^*[Ab.{u + 1}].map (rootsOfUnitySheafPow Y N m) ≫ upperStarRootsOfUnitySheafHom g N =
+      upperStarRootsOfUnitySheafHom g (m * N) ≫ rootsOfUnitySheafPow X N m := by
+  rw [upperStarRootsOfUnitySheafHom, upperStarRootsOfUnitySheafHom, ← Functor.map_comp_assoc,
+    rootsOfUnitySheafPow_comp_rootsOfUnitySheafIso_hom, Functor.map_comp_assoc,
+    upperStar_map_pow_comp_upperStarRootsOfUnityComparison_assoc, Category.assoc,
+    Category.assoc, rootsOfUnitySheafIso_inv_comp_rootsOfUnitySheafPow]
+
+/-- **The pullback of `μ_N` is `μ_N`**: for `g : X' ⟶ X` with `X` over a field `k` in which `N`
+is invertible, the comparison map `g^* μ_N ⟶ μ_N` is an isomorphism. -/
+theorem isIso_upperStarRootsOfUnitySheafHom {k : Type u} [Field k] {X X' : Scheme.{u}}
+    (g : X' ⟶ X) (f : X ⟶ Spec (.of k)) (N : ℕ) [NeZero (N : k)] :
+    IsIso (upperStarRootsOfUnitySheafHom g N) := by
+  have := isIso_upperStarRootsOfUnityComparison g f N
+  rw [upperStarRootsOfUnitySheafHom]
+  infer_instance
+
+/-- **The pullback of `μ_N` is `μ_N`**: the isomorphism `g^* μ_N ≅ μ_N` for `g : X' ⟶ X` with
+`X` over a field `k` in which `N` is invertible. -/
+noncomputable def upperStarRootsOfUnitySheafIsoOfInvertible {k : Type u} [Field k]
+    {X X' : Scheme.{u}} (g : X' ⟶ X) (f : X ⟶ Spec (.of k)) (N : ℕ) [NeZero (N : k)] :
+    (g)^*[Ab.{u + 1}].obj (rootsOfUnitySheaf X N) ≅ rootsOfUnitySheaf X' N :=
+  have := isIso_upperStarRootsOfUnitySheafHom g f N
+  asIso (upperStarRootsOfUnitySheafHom g N)
+
+lemma upperStarRootsOfUnitySheafIsoOfInvertible_hom {k : Type u} [Field k] {X X' : Scheme.{u}}
+    (g : X' ⟶ X) (f : X ⟶ Spec (.of k)) (N : ℕ) [NeZero (N : k)] :
+    (upperStarRootsOfUnitySheafIsoOfInvertible g f N).hom = upperStarRootsOfUnitySheafHom g N :=
+  rfl
 
 end AlgebraicGeometry.ProEtale

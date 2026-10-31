@@ -8,7 +8,7 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.Iso
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ClosedUpperShriekFieldExtension
 public import WeilConjectures.SmoothPurity.Defs
-public import WeilConjectures.TateTwist.UpperStarOne
+public import WeilConjectures.TateTwist.Pullback
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Differentials
 
 /-!
@@ -117,7 +117,7 @@ lemma neZero_natCast_of_ringChar_ne [Fact ℓ.Prime] : NeZero (ℓ : F) :=
 /-- **The pullback of the shifted Tate twists across fields**: for `P` over `F` and `P'` over `L`,
 quasi-compact and quasi-separated, and any `πP : P' ⟶ P`,
 `πP^* ℚ̄_ℓ(d)[n] ≅ ℚ̄_ℓ(d)[n]` on bounded constructible complexes
-(`ProEtale.leftDerivedUpperStarTateTwistDerivedIsoOfField`). -/
+(`ProEtale.upperStarTateTwistDerivedIso`). -/
 noncomputable def boundedConstructibleUpperStarOfMapTateTwistIso (πP : P'.left ⟶ P.left)
     (d n : ℤ) :
     (boundedConstructibleUpperStarOfMap ℓ (X := P) (Y := P') πP).obj
@@ -131,7 +131,7 @@ noncomputable def boundedConstructibleUpperStarOfMapTateTwistIso (πP : P'.left 
   (ObjectProperty.fullyFaithfulι _).preimageIso
     (((πP)^*⟦Profinite.padicAlgClRingObj ℓ⟧.leftDerivedFunctor.commShiftIso n).app _ ≪≫
       (shiftFunctor _ n).mapIso
-        (ProEtale.leftDerivedUpperStarTateTwistDerivedIsoOfField πP P.hom ℓ d))
+        (ProEtale.upperStarTateTwistDerivedIso ℓ πP P.hom d))
 
 /-- **Base change of dualizing complexes along a field extension, embedded case**: for a proper
 `F`-scheme `X` with a closed immersion into an `F`-scheme `P` smooth of pure relative dimension
