@@ -129,6 +129,9 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 
 public import WeilConjectures.AlgebraicGeometry.RingedCoefficientProjectionData
+public import WeilConjectures.AlgebraicGeometry.Picard.SuccessiveDerivedQuotientNormalization
+public import WeilConjectures.CategoryTheory.Diagram.DiagramSiteModuleEquivalence
+public import WeilConjectures.CategoryTheory.Diagram.DiagramSiteTopology
 /-!
 # Interfaces for coefficient projection cocycles
 
@@ -198,6 +201,23 @@ Source: Stacks 07A6 (blueprint: def-pur-ringed-coefficient-projection-data). -/
 abbrev Geometry.adjunction (R : Sheaf J CommRingCat.{r}) :=
   (g.ordinaryAdjunction R).mapDerivedCategoryRightDerivedAdjunction
 
+/-- Scalar multiplication is the coefficient-unit identification, on sheaves and
+on K-flat representatives, rather than an arbitrary self-equivalence.
+Source: Stacks 03EL, 0D6D (blueprint: def-pur-ringed-coefficient-projection-data). -/
+structure ScalarUnits {p : Scalars.{c, v, r} J} where
+  ordinary : ∀ R : Sheaf J CommRingCat.{r}, (p (𝟙 R)).ordinary ≅ 𝟭 (Mod J R)
+  multiplication : ∀ (R : Sheaf J CommRingCat.{r}) (M : Mod J R) (U : Cᵒᵖ)
+    (s : R.obj.obj U) (x : M.val.obj U),
+    ((ordinary R).hom.app M).val.app U
+      (_root_.SheafOfModules.SuccessiveDerivedQuotient.sectionTensor (p (𝟙 R)) M U s x) = s • x
+  derived : ∀ R : Sheaf J CommRingCat.{r}, (p (𝟙 R)).derived ≅ 𝟭 (D J R)
+  representative : ∀ (R : Sheaf J CommRingCat.{r}) (P : CochainComplex (Mod J R) ℤ),
+    CochainComplex.IsKFlatIndependentCoefficients (R := R) P →
+    (∀ i : ℤ, IsFlatOnSite (J := J) (R := R) (P.X i)) →
+    (derived R).hom.app (DerivedCategory.Q.obj P) =
+      computation (p (𝟙 R)) P ≫ DerivedCategory.Q.map
+        ((NatTrans.mapHomologicalComplex (ordinary R).hom (.up ℤ)).app P)
+
 variable {pY : Scalars.{c, v, r} J} {pX : Scalars.{c, v, r} K}
   (nY : _root_.SheafOfModules.SuccessiveDerivedQuotient.Normalization.{c, v, r, max c v (r + 1)}
       (J := J) pY)
@@ -214,5 +234,52 @@ def comparison {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S) :
     g.right R ⋙ (pY a).derived ⟶ (pX (g.rings.map a)).derived ⋙ g.right S :=
   (mateEquiv (g.adjunction R) (g.adjunction S)
     (TwoSquare.mk _ _ _ _ (e.derived a).hom)).natTrans
+
+/-- Balanced associativity on X, including the functorial equality of inverse-image
+ring maps. Source: Stacks 0D6D
+(blueprint: def-pur-ringed-coefficient-projection-data). -/
+def targetAssociator {R S T : Sheaf J CommRingCat.{r}} (a : R ⟶ S) (b : S ⟶ T) :
+    (pX (g.rings.map a)).derived ⋙ (pX (g.rings.map b)).derived ≅
+      (pX (g.rings.map (a ≫ b))).derived :=
+  nX.derived (g.rings.map a) (g.rings.map b) ≪≫
+    eqToIso (congrArg (fun f ↦ (pX f).derived) (g.rings.map_comp a b).symm)
+
+/-- The successive comparison with both balanced identifications inserted.
+Source: Stacks 0E47 (blueprint: def-pur-ringed-coefficient-projection-data). -/
+def successive {R S T : Sheaf J CommRingCat.{r}} (a : R ⟶ S) (b : S ⟶ T)
+    (M : D K (g.rings.obj R)) :
+    (pY (a ≫ b)).derived.obj ((g.right R).obj M) ⟶
+      (g.right T).obj ((pX (g.rings.map (a ≫ b))).derived.obj M) :=
+  (nY.derived a b).inv.app ((g.right R).obj M) ≫
+    (pY b).derived.map ((comparison g nY nX e a).app M) ≫
+    (comparison g nY nX e b).app ((pX (g.rings.map a)).derived.obj M) ≫
+    (g.right T).map ((targetAssociator g nX a b).hom.app M)
+
+/-- All equalities are in the changed coefficient category, with arbitrary derived
+inputs. The commuting-square formula is also coefficient-map naturality of the
+family, and explicitly retains the equality of the two composite ring maps.
+Source: Stacks 0E47, 07A7 (blueprint: def-pur-ringed-coefficient-projection-data). -/
+structure Laws (uY : ScalarUnits (p := pY)) (uX : ScalarUnits (p := pX)) : Prop where
+  cocycle : ∀ {R S T : Sheaf J CommRingCat.{r}} (a : R ⟶ S) (b : S ⟶ T)
+    (M : D K (g.rings.obj R)),
+    (nY.derived a b).hom.app ((g.right R).obj M) ≫
+        (comparison g nY nX e (a ≫ b)).app M =
+      (pY b).derived.map ((comparison g nY nX e a).app M) ≫
+        (comparison g nY nX e b).app ((pX (g.rings.map a)).derived.obj M) ≫
+        (g.right T).map ((targetAssociator g nX a b).hom.app M)
+  identity : ∀ (R : Sheaf J CommRingCat.{r}) (M : D K (g.rings.obj R)),
+    (comparison g nY nX e (𝟙 R)).app M ≫
+        (g.right R).map
+          ((eqToIso (congrArg (fun f ↦ (pX f).derived) (g.rings.map_id R)) ≪≫
+            uX.derived (g.rings.obj R)).hom.app M) =
+      (uY.derived R).hom.app ((g.right R).obj M)
+  square : ∀ {R S T V : Sheaf J CommRingCat.{r}}
+    (a : R ⟶ S) (b : S ⟶ V) (a' : R ⟶ T) (b' : T ⟶ V)
+    (h : a ≫ b = a' ≫ b') (M : D K (g.rings.obj R)),
+    successive g nY nX e a b M ≫
+        (g.right V).map (eqToHom
+          (congrArg (fun f ↦ (pX (g.rings.map f)).derived.obj M) h)) =
+      eqToHom (congrArg (fun f ↦ (pY f).derived.obj ((g.right R).obj M)) h) ≫
+        successive g nY nX e a' b' M
 
 end SheafOfModules.RingedCoefficientProjection
