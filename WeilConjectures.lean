@@ -15435,6 +15435,7 @@ public import WeilConjectures.SixFunctors.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.UpperLowerStar.Monoidal
 public import WeilConjectures.SmoothPurity.Defs
 public import WeilConjectures.SmoothPurity.DiagonalOrientationQbar
+public import WeilConjectures.SmoothPurity.EtaleReductionProperBaseChange
 public import WeilConjectures.SmoothPurity.IntegralDualizingComplexIso
 public import WeilConjectures.SmoothPurity.IntegralTateTwistExtendScalars
 public import WeilConjectures.SmoothPurity.OrientationBaseChange
