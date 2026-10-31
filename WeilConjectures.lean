@@ -9269,6 +9269,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.HomologyAmplitude
 public import WeilConjectures.CategoryTheory.DerivedCategory.HomologyColimitTriangle
 public import WeilConjectures.CategoryTheory.DerivedCategory.HomologyCoproducts
 public import WeilConjectures.CategoryTheory.DerivedCategory.HomologyExchange
+public import WeilConjectures.CategoryTheory.DerivedCategory.HomologyTensorColimit
 public import WeilConjectures.CategoryTheory.DerivedCategory.HomotopyColimit
 public import WeilConjectures.CategoryTheory.DerivedCategory.HomotopyLimitExact
 public import WeilConjectures.CategoryTheory.DerivedCategory.HomotopySquareRectification
@@ -14338,6 +14339,7 @@ public import WeilConjectures.SixFunctors.NearbyCycles.GaloisContinuity
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisContinuityNoetherian
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisInvariants
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisInvariantsCoinvariant
+public import WeilConjectures.SixFunctors.NearbyCycles.GaloisInvariantsCoinvariantTensor
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisInvariantsProjector
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisInvariantsTorsion
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisLayer
@@ -15150,6 +15152,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.HomFilte
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.HomFilteredColimitConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.HomFilteredColimitEllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.HomologyCoherence
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.HomologyTensorColimit
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IndConstructibleHeart
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntegralConstantComplex
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntegralConstantDerived
@@ -15258,6 +15261,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.IntegralCriterion
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.LocallyFinitelyGenerated
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.ReductionHomology
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.ReductionRationalConservative
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.ReductionTower
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.RetractionLift
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.Uniformizer
