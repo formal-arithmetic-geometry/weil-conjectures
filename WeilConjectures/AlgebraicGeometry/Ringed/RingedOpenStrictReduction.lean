@@ -390,7 +390,8 @@ private theorem openSection_hom_ext {T : Scheme.{u}} (W : T.ProEt)
       f.val.app (op V) (cbcOpenSection W c M V a x) =
         g.val.app (op V) (cbcOpenSection W c M V a x)) : f = g := by
   classical
-  apply (PresheafOfModules.sheafificationHomEquiv (𝟙 (reductionModuleRing T R).obj)).injective
+  apply (PresheafOfModules.sheafificationHomEquiv.{u + 1}
+    (𝟙 (reductionModuleRing T R).obj)).injective
   ext V z
   induction z using DirectSum.induction_on with
   | zero => simp only [map_zero]
@@ -419,7 +420,7 @@ private theorem openSection_map {T : Scheme.{u}} (W : T.ProEt)
   dsimp only [Functor.comp_map, Functor.id_map, PresheafOfModules.comp_app,
     ModuleCat.comp_apply] at h
   symm at h
-  change ((PresheafOfModules.sheafification (𝟙 _)).map (E.map f')).val.app (op V)
+  change ((PresheafOfModules.sheafification.{u + 1} (𝟙 _)).map (E.map f')).val.app (op V)
       (cbcOpenSection W c M V a x) =
     ((PresheafOfModules.sheafificationAdjunction (𝟙 _)).unit.app (E.obj _)).app (op V)
       ((E.map f').app (op V) (DirectSum.of _ a x)) at h
@@ -631,7 +632,7 @@ private def openRestrictIsoApp (h : CbcOpenRingSquare W cR cB φ ψ)
   letI := CompletedTensorComparisonProof.restrictionSheafificationComparison_isIso
     ((sheafCompose (ProEt.topology T)
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map φ) (openPresheaf W cB M)
-  exact (PresheafOfModules.sheafification (𝟙 (reductionModuleRing T R).obj)).mapIso
+  exact (PresheafOfModules.sheafification.{u + 1} (𝟙 (reductionModuleRing T R).obj)).mapIso
     (openPresheafRestrictIso W cR cB φ ψ h M) ≪≫
   (asIso (CompletedTensorComparisonProof.restrictionSheafificationComparison
     ((sheafCompose (ProEt.topology T)
@@ -650,32 +651,32 @@ private theorem openRestrictIsoApp_section (h : CbcOpenRingSquare W cR cB φ ψ)
   let P := openPresheaf W cR ((reductionRestrict W.left ψ).obj M)
   let Q := openPresheaf W cB M
   let e := openPresheafRestrictIso W cR cB φ ψ h M
-  let adj := PresheafOfModules.sheafificationAdjunction
+  let adj := PresheafOfModules.sheafificationAdjunction.{u + 1}
     (𝟙 (reductionModuleRing T R).obj)
   let cmp := CompletedTensorComparisonProof.restrictionSheafificationComparison α Q
   have hn := congrArg (fun f : P ⟶
       (SheafOfModules.forget _).obj
-        ((PresheafOfModules.sheafification (𝟙 (reductionModuleRing T R).obj)).obj
+        ((PresheafOfModules.sheafification.{u + 1} (𝟙 (reductionModuleRing T R).obj)).obj
           ((PresheafOfModules.restrictScalars α.hom).obj Q)) ↦
         f.app (op V) (DirectSum.of _ a x)) (adj.unit.naturality e.hom)
   have hc := (PresheafOfModules.sheafificationHomEquiv
     (P := (PresheafOfModules.restrictScalars α.hom).obj Q)
     (F := (SheafOfModules.restrictScalars α).obj
-      ((PresheafOfModules.sheafification (𝟙 (reductionModuleRing T B).obj)).obj Q))
+      ((PresheafOfModules.sheafification.{u + 1} (𝟙 (reductionModuleRing T B).obj)).obj Q))
     (𝟙 (reductionModuleRing T R).obj)).apply_symm_apply
       ((PresheafOfModules.restrictScalars α.hom).map
-        ((PresheafOfModules.sheafificationAdjunction
+        ((PresheafOfModules.sheafificationAdjunction.{u + 1}
           (𝟙 (reductionModuleRing T B).obj)).unit.app Q))
   have hc' := congrArg (fun f ↦ f.app (op V) (DirectSum.of _ a x)) hc
   have he := openPresheafRestrictIso_apply W cR cB φ ψ h M (op V)
     (DirectSum.of _ a x)
   change (adj.unit.app _).app (op V) (e.hom.app (op V) (DirectSum.of _ a x)) =
-    ((PresheafOfModules.sheafification (𝟙 (reductionModuleRing T R).obj)).map
+    ((PresheafOfModules.sheafification.{u + 1} (𝟙 (reductionModuleRing T R).obj)).map
       e.hom).val.app (op V) ((adj.unit.app P).app (op V) (DirectSum.of _ a x)) at hn
   change cmp.val.app (op V) ((adj.unit.app _).app (op V) (DirectSum.of _ a x)) =
     cbcOpenSection W cB M V a x at hc'
   change cmp.val.app (op V)
-    (((PresheafOfModules.sheafification (𝟙 (reductionModuleRing T R).obj)).map
+    (((PresheafOfModules.sheafification.{u + 1} (𝟙 (reductionModuleRing T R).obj)).map
       e.hom).val.app (op V) ((adj.unit.app P).app (op V) (DirectSum.of _ a x))) = _
   exact (congrArg (cmp.val.app (op V)) hn.symm).trans
     ((congrArg (fun z ↦ cmp.val.app (op V) ((adj.unit.app _).app (op V) z)) he).trans hc')
@@ -741,7 +742,7 @@ private theorem openSection_smul (M : reductionModules W.left S)
     ((SheafOfModules.pushforward.{u + 1} (F := cbcSliceFunctor T W)
       ((sheafCompose ((ProEt.topology T).over W)
         (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map cR.hom)).obj M)
-  let η := ((PresheafOfModules.sheafificationAdjunction
+  let η := ((PresheafOfModules.sheafificationAdjunction.{u + 1}
     (𝟙 (reductionModuleRing T R).obj)).unit.app E).app (op V)
   change r • η (DirectSum.of _ a x) =
     η (DirectSum.of _ a (cR.hom.hom.app (op (Over.mk a)) r • x))
