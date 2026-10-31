@@ -66,6 +66,5 @@ private def sheafificationFinalIso (k : Type u) [Field k] [IsAlgClosed k]
     AlgebraicGeometry.ProEtale.bijective_toSheafify_app_of_iso (Iso.refl _) P.presheaf
   exact (LinearEquiv.ofBijective φ.hom hφ).toModuleIso
 
-attribute [local irreducible] pointFiniteReductionSheafExistence pointFiniteReductionSheafModel
 
 end WeilConjectures

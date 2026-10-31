@@ -72,8 +72,7 @@ namespace WeilConjectures
 attribute [local irreducible] HasDerivedCategory.standard
   completedIntegralCoefficientSheafUnrestricted
 attribute [-instance] integralOperationsCommHasDerivedCategory
-attribute [-instance] scalarSiteSmall scalarSiteCompose scalarSiteSheafify
-  scalarSiteLocallyBijective
+attribute [-instance] scalarSiteSmall scalarSiteSheafify scalarSiteLocallyBijective
 
 /-- Transport the binary tensor comparison to a specified ordinary scalar functor.
 The section formula also supplies uniqueness by local tensor generation. -/

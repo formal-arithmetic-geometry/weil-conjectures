@@ -50,10 +50,9 @@ set_option backward.isDefEq.respectTransparency.types true
 attribute [local implicit_reducible] value expression IntegralCoherence.value scalarQuotients
 
 attribute [local implicit_reducible] integralScalarExtension integralScalarExtensionOfUniverses
-  integralComparisonDerivedSequenceScalar sfConstructibleIntegralScalarExtension
-  substituteInputs ScalarExtensionTower.tensor coefficientTotalTensor
-  sourceExpression targetExpression constructibleIntegralPullback constructibleIntegralTensor
-  IntegralCoherence.sequenceMonoidal IntegralCoherence.complexMonoidal
+  integralComparisonDerivedSequenceScalar sfConstructibleIntegralScalarExtension substituteInputs
+  ScalarExtensionTower.tensor coefficientTotalTensor sourceExpression targetExpression
+  constructibleIntegralPullback constructibleIntegralTensor IntegralCoherence.complexMonoidal
   SheafOfModules.cochainModulesMonoidal
 
 private theorem cancel_transport {C : Type*} [Category C] {a b c d : C}

@@ -133,7 +133,7 @@ private theorem normalized_pull
   rw [← hw, Equiv.symm_apply_apply]
   exact HEq.rfl
 
-attribute [local irreducible] rhoP rhoJ VaryingRing.scalarB VaryingRing.scalarA
+attribute [local irreducible] rhoP VaryingRing.scalarB VaryingRing.scalarA
 
 attribute [local irreducible] P J StrictTower.G StrictTower.J
   StrictTower.alpha VaryingRing.alpha localized_scalar_iso

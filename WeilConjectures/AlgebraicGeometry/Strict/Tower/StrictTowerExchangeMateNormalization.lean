@@ -769,7 +769,6 @@ def exchangeStrictNatTrans (sq : ChosenCartesianSquare g' f' f g) :
   app K := d.towerV' sq K
   naturality _K _L a := exchangeStrict_naturality d sq a
 
-attribute [local instance] termwisePull_additive
 
 -- Keep the standard tower localization visible when specializing the ringed square.
 attribute [local instance 2000] exchangeTowers_hasDerived

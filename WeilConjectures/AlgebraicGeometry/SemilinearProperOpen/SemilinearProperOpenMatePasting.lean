@@ -571,8 +571,8 @@ universe k₁
 end CoefficientMateAssembly
 
 section ScalarRestriction
-attribute [local irreducible] P R J rhoP rhoJ adj
-  StrictTower.G StrictTower.R StrictTower.J StrictTower.adj StrictTower.alpha
+attribute [local irreducible] P R J rhoP adj StrictTower.G StrictTower.R StrictTower.J
+  StrictTower.adj StrictTower.alpha
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 variable (B : Type (u + 1)) [CommRing B]

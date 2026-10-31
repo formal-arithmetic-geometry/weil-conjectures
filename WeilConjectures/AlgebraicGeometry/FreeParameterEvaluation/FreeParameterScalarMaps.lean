@@ -134,7 +134,7 @@ attribute [local irreducible] DerivedCategory instCategoryDerivedCategory
   CondensedRing.upperStar CondensedRing.derivedComapUpperStarIso
   CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory
 
-attribute [local irreducible] scalarTensor restrictPointPullD projectionAdjunction
+attribute [local irreducible] scalarTensor restrictPointPullD
 
 /-- Canonical scalar/pullback comparison: transpose pullback of the scalar unit
 through the action identification. This definition precedes its isomorphism claim.

@@ -182,9 +182,8 @@ private theorem reflectNormalizedRoos
   rw [← productTransport_π F a n, reassoc_of% hp]
   exact hu n
 
-attribute [local irreducible] reductionChange adicDatumExtension adicDatumExtensionCounit
+attribute [local irreducible] reductionChange
 
-attribute [local irreducible] adicDatumAdjunction
 
 section Presentation
 variable (D : AdicCoefficientDatum A)

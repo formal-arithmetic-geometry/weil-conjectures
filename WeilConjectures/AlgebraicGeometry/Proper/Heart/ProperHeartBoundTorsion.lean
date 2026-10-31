@@ -489,12 +489,10 @@ private theorem scalar_encoded (T : Scheme.{u}) (n : ℕ)
   erw [constant_scalar_section]
   rfl
 
-attribute [local irreducible] ordinaryQuotientRestrictionIso finiteExtensionRestrictionIso
 
 end Origin
 
 open CondensedRing
 
-attribute [local irreducible] localizationSectionsIso directImageSectionsIso
 
 end AlgebraicGeometry.ProEtale

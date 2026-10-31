@@ -254,13 +254,9 @@ attribute [local instance 30000] SheafOfModules.hasSheafify_coefficientUniverse
 attribute [local irreducible] sfCbcOpenExtension
 
 
-attribute [local irreducible] adicReductionHomEquiv
 
-attribute [local irreducible] adicDerivedRestrictFactors
-  adicCompletionEvaluation
-  adicDerivedRestrict
+attribute [local irreducible] adicCompletionEvaluation adicDerivedRestrict
 
-attribute [local irreducible] adicReductionDerivedUnit
 
 
 
