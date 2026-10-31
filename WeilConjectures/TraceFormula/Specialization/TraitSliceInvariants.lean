@@ -113,17 +113,20 @@ acts on the nearby cycles of both (`NearbyCyclesModel.baseChangeAut`), trivially
   representatives of `P' ⧸ V` (Hochschild–Serre for the pro-`p` cover
   `Spec Ω_K ⟶ (Spec K⟦t⟧ ×_S Spec Ω)_red`; `[P' : V]` is a power of `p`, invertible in `ℚ̄_ℓ`).
 
-Unfinished: the finite quotient. With torsion coefficients the invariant projector exists by
-continuity along the finite Galois layers
-(`exists_retraction_pullbackExchange_galoisLayerHom_of_plusEtaleOrigin_projector`),
-and with `ℚ̄_ℓ`-coefficients the exchange of a generic slice trait is a split monomorphism
-(`NearbyCyclesModel.isSplitMono_pullbackExchange_app_toCartesian_genericSliceTraitHom`). Neither
-gives a subgroup `V` of finite index acting trivially on the `ℚ̄_ℓ`-complex `Ψ_{M''} C`, nor that
-the idempotent is the projector onto all the invariants. This needs that the action of `P'` on
-the torsion nearby cycles of `M''` factors through a finite quotient, i.e. Deligne's finiteness
-theorem with torsion coefficients (SGA 4½, [Th. finitude], Thm. 3.2), which is not formalised:
-only the `ℚ̄_ℓ` version exists (`NearbyCyclesModel.boundedConstructible_geometricNearbyCycles_obj`),
-and it does not control the torsion of the integral nearby cycles. -/
+Unfinished. With finite coefficients a subgroup of finite index of `P'` acts trivially on
+`Ψ_{M''} C` (`NearbyCyclesModel.exists_finiteIndex_autAction_baseChangeAut_eq_id_of_finite`,
+from Deligne's finiteness theorem with finite coefficients), and the invariant projector of a
+Galois layer exists by continuity
+(`exists_retraction_pullbackExchange_galoisLayerHom_of_plusEtaleOrigin_projector`). Two steps
+are missing:
+* passing the finite quotient to `ℚ̄_ℓ`-coefficients. This needs an integral model of `C`, the
+  compatibility of the action of `P'` with the change of coefficients `𝒪_E ⟶ 𝔽_E` and
+  `𝒪_E ⟶ ℚ̄_ℓ`, the `ℓ`-divisibility of the pro-`p` group `P'`, and that an endomorphism of the
+  derived complete `Ψ_{M''} K₀` vanishing modulo every `ℓ ^ m` vanishes;
+* that the image of `α_θ` contains all the `P'`-invariants. This needs the invertibility of the
+  exchange of the change of trait from `Spec K⟦t⟧` to the strict localization `S'` of `𝔸¹_S`
+  at the generic point of its special fibre (the separable closedness of `Frac S'` in
+  `K((t))`), and the passage of the torsion projector to `ℚ̄_ℓ`. -/
 theorem exists_subgroup_pullbackExchange_sliceTraitChangeHom
     {C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))}
