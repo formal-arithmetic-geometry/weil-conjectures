@@ -22,7 +22,8 @@ expressed: `Rf^! K ≅ Lf^* K ⊗ ω_f` (`ProEtale.CondensedRing.upperShriekUnit
 records the two properties of `ω_f` (its *orientation*, blueprint `sk-prop-sp-orientation`,
 `sk-prop-cohsm`) which the proof of smooth purity for `ℚ̄_ℓ`-coefficients takes as input:
 
-- `ProEtale.CondensedRing.isDualizable_upperShriek_unit_of_smooth`: `ω_f` is dualizable;
+- `ProEtale.CondensedRing.isDualizable_upperShriek_unit_of_smooth`: `ω_f` is dualizable, proved in
+  `WeilConjectures.SmoothPurity.UpperShriekUnitDualizable` from the integral dualizing complex;
 - `ProEtale.CondensedRing.isIso_upperShriekBaseChange_unit_of_smooth`: the formation of `ω_f`
   commutes with base change.
 
@@ -57,24 +58,6 @@ variable {X Y X' Y' : Over (Spec (.of k))}
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
   [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom]
   [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
-
-/-- **The relative dualizing complex of a smooth morphism is dualizable** (blueprint
-`sk-prop-sp-orientation`, `sk-prop-cohsm`: "`ω_f` is pro-étale locally isomorphic to
-`Λ_X(d)[2d]`"): for `f` smooth, `Rf^! ℚ̄_ℓ` is a dualizable object of `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`. On the open
-and closed subscheme where `f` has relative dimension `d` it is `ℚ̄_ℓ(d)[2d]` by the trace
-(`isIso_smoothPurityMap`), and the Tate twist `ℚ̄_ℓ(d)` is invertible. -/
-theorem isDualizable_upperShriek_unit_of_smooth (f : X ⟶ Y) [Smooth f.left] :
-    IsDualizable ((boundedConstructibleUpperShriek ℓ f).obj
-      (𝟙_ (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧))) := by
-  obtain ⟨ι, _, U, hU, hd⟩ := exists_finite_openCover_smoothOfRelativeDimension f
-  refine isDualizable_of_isIso_ihomUnitTensorToIhom ℓ _
-    (isIso_of_isIso_upperStar_overRestrictι ℓ U hU _ fun i ↦ ?_)
-  obtain ⟨d, hd⟩ := hd i
-  refine isIso_map_ihomUnitTensorToIhom_of_isDualizable ℓ (overRestrictι X (U i)) _ ?_
-  exact (isDualizable_upperShriek_unit_of_smoothOfRelativeDimension ℓ
-    (overRestrictι X (U i) ≫ f) d).of_iso
-      ((boundedConstructibleUpperShriekComp_padicAlgCl ℓ (overRestrictι X (U i)) f).app _ ≪≫
-        (boundedConstructibleUpperShriekIsoUpperStar_padicAlgCl ℓ (overRestrictι X (U i))).app _)
 
 /-- **The formation of the relative dualizing complex of a smooth morphism commutes with base
 change** (blueprint `sk-prop-cohsm`, (G12) at the unit: "it identifies `g'^* ω_f` with `ω_{f'}`";

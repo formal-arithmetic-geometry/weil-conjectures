@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.UnitShift
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Basic
+public import WeilConjectures.EtaleCohomology.TateTwist.FiniteEndomorphisms
 public import WeilConjectures.EtaleCohomology.TateTwist.Normalized
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.LiftIsomorphisms
@@ -111,16 +112,20 @@ lemma nonempty_shift_etaleReduction_integralTateTwist_iso_upperShriek :
         (etaleReductionUnitIso ℓ E n Y)).symm⟩
 
 /-- **The integral relative dualizing complex of a smooth morphism is a shifted Tate twist**:
-`Rf^! 𝒪_{E,Y} ≅ 𝒪_{E,X}(d)[2d]` for `f` smooth of pure relative dimension `d`, given that the
-endomorphisms of the étale Tate twists `Λ_X(d)`, `Λ = 𝒪_E ⧸ ℓⁿ`, are finite. The isomorphism is not
+`Rf^! 𝒪_{E,Y} ≅ 𝒪_{E,X}(d)[2d]` for `f` smooth of pure relative dimension `d` with connected
+source (so that the étale Tate twists `Λ_X(d)`, `Λ = 𝒪_E ⧸ ℓⁿ`, have finitely many endomorphisms,
+`Etale.finite_endomorphisms_tateObject`). The isomorphism is not
 canonical (König's lemma). -/
-theorem nonempty_iso_integralTateTwist_upperShriekUnit
-    (hfin : ∀ n : ℕ, Finite (Etale.tateObject (integersModPowCoeff.{u} ℓ E (n + 1)) X.left d ⟶
-      Etale.tateObject (integersModPowCoeff.{u} ℓ E (n + 1)) X.left d)) :
+theorem nonempty_iso_integralTateTwist_upperShriekUnit [ConnectedSpace X.left] :
     Nonempty ((shiftFunctor (Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) (2 * d : ℤ)).obj
         (integralTateTwistBoundedConstructible ℓ E X.hom d) ≅
       (PadicIntegersRingObj.boundedConstructibleUpperShriek ℓ E f).obj (𝟙_ _)) := by
   have : IsNoetherian X.left := isNoetherian_of_locallyOfFiniteType X.hom
+  have hfin (n : ℕ) : Finite (Etale.tateObject (integersModPowCoeff.{u} ℓ E (n + 1)) X.left d ⟶
+      Etale.tateObject (integersModPowCoeff.{u} ℓ E (n + 1)) X.left d) := by
+    have : HasInvertibleExponent (integersModPowCoeff.{u} ℓ E (n + 1)) X.left :=
+      HasInvertibleExponent.of_hom X.hom
+    exact Etale.finite_endomorphisms_tateObject _ _ d
   let T := integralTateTwistBoundedConstructible ℓ E X.hom d
   let W := (PadicIntegersRingObj.boundedConstructibleUpperShriek ℓ E f).obj (𝟙_ _)
   let ι := (boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X.left)).ι

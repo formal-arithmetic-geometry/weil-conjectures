@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SmoothPurity.Defs
 public import WeilConjectures.SmoothPurity.OrientationBaseChange
 public import WeilConjectures.SmoothPurity.TateTwistDualizable
+public import WeilConjectures.SmoothPurity.UpperShriekUnitDualizable
 public import WeilConjectures.TraceFormula.DualizableShift
 public import WeilConjectures.TraceFormula.PurityTensorMap
 public import WeilConjectures.TateTwist.LocallyFree
@@ -61,16 +62,6 @@ variable {X Y X' Y' : Over (Spec (.of k))}
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
   [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom]
   [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
-
-/-- **The relative dualizing complex of a morphism smooth of pure relative dimension is
-dualizable**: `Rf^! ℚ̄_ℓ ≅ ℚ̄_ℓ(d)[2d]` by the trace (`isIso_smoothPurityMap`), and the Tate twists
-are invertible. -/
-theorem isDualizable_upperShriek_unit_of_smoothOfRelativeDimension (f : X ⟶ Y) (d : ℕ)
-    [SmoothOfRelativeDimension d f.left] :
-    IsDualizable ((boundedConstructibleUpperShriek ℓ f).obj
-      (𝟙_ (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧))) :=
-  (isDualizable_boundedConstructibleTateTwist_shift ℓ d (2 * d)).of_iso
-    (asIso (smoothPurityMap ℓ f d))
 
 variable {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
