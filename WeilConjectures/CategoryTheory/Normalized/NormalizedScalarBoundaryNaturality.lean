@@ -18,6 +18,9 @@ Their naturality, and the naturality of the resulting degree-two boundary, are f
 consequences of the exact right-adjoint square and its shift-compatible derived mate.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 set_option autoImplicit false

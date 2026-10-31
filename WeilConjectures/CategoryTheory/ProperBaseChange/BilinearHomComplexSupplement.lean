@@ -17,6 +17,10 @@ public import WeilConjectures.Algebra.Homology.BilinearHomComplex
 Source: Stacks Project, sites-cohomology.tex, Section 0A8X, and Algebraization, Tag 099I
 (blueprint: lem-weil-pbc-bilinear-hom-complex).
 -/
+
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 universe u v

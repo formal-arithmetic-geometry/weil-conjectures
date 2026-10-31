@@ -21,6 +21,9 @@ Multiplication short exact sequences show that the target universal counit compu
 on the image of a resolving object. No preservation of the resolving class is needed.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 set_option autoImplicit false
