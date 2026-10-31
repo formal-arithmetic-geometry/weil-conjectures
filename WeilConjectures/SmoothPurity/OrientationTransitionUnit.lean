@@ -136,6 +136,7 @@ lemma boundedConstructibleIntegersModPowReductionTransitionIso_hom_app_unit :
           (integersModPowReductionUnitIso ℓ E Y (n + 1)).hom ≫
         η (Mod.extendScalars (integersModPowTransition Y.left ℓ E n)).leftDerivedFunctor ≫
           (integersModPowReductionUnitIso ℓ E Y n).inv := by
+  dsimp only
   -- the condensed part: the transitivity isomorphism preserves the units
   have hc := map_ε_comp_derivedExtendScalarsCompIso_inv_app_comp_η
     (integersModPowReduction Y.left ℓ E (n + 1)) (integersModPowTransition Y.left ℓ E n)
@@ -168,6 +169,20 @@ lemma boundedConstructibleIntegersModPowReductionTransitionIso_hom_app_unit :
       (Mod.extendScalars (integersModPowTransition Y.left ℓ E n)).leftDerivedFunctor.map
           (η ((boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E)
             Y.left)).ι ⋙ (Mod.extendScalars (integersModPowReduction Y.left ℓ E (n + 1))).leftDerivedFunctor)) ≫
+        η (Mod.extendScalars (integersModPowTransition Y.left ℓ E n)).leftDerivedFunctor =
+      (Mod.derivedExtendScalarsCompIso _ _ _
+          (integersModPowReduction_comp_integersModPowTransition Y.left ℓ E n)).inv.app
+          ((boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E)
+            Y.left)).ι.obj (𝟙_ _)) ≫
+        η ((boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E)
+            Y.left)).ι ⋙ (Mod.extendScalars (integersModPowReduction Y.left ℓ E n)).leftDerivedFunctor) := by
+    have hn := (Mod.derivedExtendScalarsCompIso _ _ _
+      (integersModPowReduction_comp_integersModPowTransition Y.left ℓ E n)).inv.naturality
+      (η (boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) Y.left)).ι)
+    simp only [Functor.comp_obj, Functor.comp_map] at hn
+    simp only [Functor.OplaxMonoidal.comp_η, Functor.map_comp, Category.assoc]
+    rw [← reassoc_of% hn]
+    congr 1
   rw [boundedConstructibleIntegersModPowReductionTransitionIso_hom_app]
   simp only [integersModPowReductionUnitIso, Iso.trans_hom, Iso.trans_inv, Iso.symm_hom,
     Iso.symm_inv, Functor.Monoidal.εIso_inv, Functor.Monoidal.εIso_hom, Iso.app_hom, Iso.app_inv,
@@ -199,7 +214,13 @@ theorem map_etaleReductionUnitIso_hom_comp_constantComplexIso :
   simp only [Functor.map_comp, Category.assoc]
   refine (congrArg (fun t ↦ _ ≫ t) hr).trans ?_
   conv_rhs => rhs; rhs; rhs; rhs; rw [Functor.map_map_inv_comp_map_map_hom_comp]
-  conv_rhs => rhs; rw [← NatTrans.map_map_map_comp_map_app_comp]
-  conv_rhs => rw [← NatTrans.map_map_comp_app_comp]
+  conv_rhs => rhs; erw [← NatTrans.map_map_map_comp_map_app_comp
+    (R(ν_*(Y.left)[ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)]))
+    (finiteCoefficientDerivedEquivalenceExtendScalarsIso Y.left
+      (PadicAlgCl.integersModPowTransition_surjective ℓ E n)
+      (ker_integersModPowCoeffTransition ℓ E n)).hom]
+  conv_rhs => erw [← NatTrans.map_map_comp_app_comp
+    (derivedExtendScalarsComparisonLowerStarMap (integersModPowCoeffTransition_surjective ℓ E n)
+      (ker_integersModPowCoeffTransition ℓ E n) Y.left)]
 
 end AlgebraicGeometry.ProEtale.CondensedRing
