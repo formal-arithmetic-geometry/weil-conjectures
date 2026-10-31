@@ -112,8 +112,8 @@ namespace CategoryTheory
 variable {C : Type*} [Category C]
 
 /-- **A group acting on an object with finitely many endomorphisms acts through a finite
-quotient**: for an action `act : G → End X` (`act 1 = 𝟙`, `act (g * h) = act h ≫ act g`) on an object
-with finitely many endomorphisms, a subgroup of finite index acts as the identity. -/
+quotient**: for an action `act : G → End X` (`act 1 = 𝟙`, `act (g * h) = act h ≫ act g`)
+on an object with finitely many endomorphisms, a subgroup of finite index acts as the identity. -/
 theorem exists_finiteIndex_eq_id_of_finite_end (X : C) [Finite (X ⟶ X)] {G : Type*} [Group G]
     (act : G → (X ⟶ X)) (h₁ : act 1 = 𝟙 X) (hmul : ∀ g h, act (g * h) = act h ≫ act g) :
     ∃ V : Subgroup G, V.FiniteIndex ∧ ∀ g ∈ V, act g = 𝟙 X := by
@@ -137,7 +137,8 @@ theorem exists_finiteIndex_eq_id_of_finite_end (X : C) [Finite (X ⟶ X)] {G : T
       rw [hmul, ← h, ← hmul, inv_mul_cancel, h₁]
   have : Finite (G ⧸ V) := by
     let φ : G ⧸ V → (X ⟶ X) :=
-      _root_.Quotient.lift act fun g g' (hgg' : _) ↦ (key g g').1 (QuotientGroup.leftRel_apply.1 hgg')
+      _root_.Quotient.lift act fun g g' (hgg' : _) ↦
+        (key g g').1 (QuotientGroup.leftRel_apply.1 hgg')
     refine Finite.of_injective φ fun x y hxy ↦ ?_
     induction x using QuotientGroup.induction_on
     induction y using QuotientGroup.induction_on
