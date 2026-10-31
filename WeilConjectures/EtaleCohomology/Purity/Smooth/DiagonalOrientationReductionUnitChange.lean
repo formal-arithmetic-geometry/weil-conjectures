@@ -22,6 +22,7 @@ complexes (`AlgebraicGeometry.Etale.derivedExtendScalarsUnitIso_hom_eq_homEquiv_
 
 universe u
 
+
 open CategoryTheory Limits MonoidalCategory
 
 attribute [local instance high] SymmetricCategory.toBraidedCategory
@@ -141,53 +142,6 @@ lemma constantComplexIsoSingleFunctorExtendScalarsInt_eq_ofUnit (Γ : Type (u + 
     constantComplexIsoSingleFunctorExtendScalarsInt X Γ =
       constantComplexIsoSingleFunctorExtendScalarsIntOfUnit X Γ := by
   sorry
-
-
-variable (ρ) in
-/-- The naturality of `Res(-)[0] ≅ (Res -)[0]` with respect to `Λ' ⊗ ℤ ≅ Λ'`, at the unit. -/
-lemma map_extendScalarsConstantZModIso_hom_comp_mapDerivedCategorySingleFunctor_inv_app :
-    (DerivedCategory.singleFunctor _ 0).map ((Sheaf.restrictScalars X.smallEtaleTopology ρ).map
-      (extendScalarsConstantZModIso (Λ := Λ') X (n := 0) (by simp)).hom) ≫
-      ((Sheaf.restrictScalars X.smallEtaleTopology ρ).mapDerivedCategorySingleFunctor 0).inv.app
-        (𝟙_ _) =
-      ((Sheaf.restrictScalars X.smallEtaleTopology ρ).mapDerivedCategorySingleFunctor 0).inv.app
-        _ ≫ (Sheaf.derivedRestrictScalars X.smallEtaleTopology ρ).map
-          ((DerivedCategory.singleFunctor _ 0).map
-            (extendScalarsConstantZModIso (Λ := Λ') X (n := 0) (by simp)).hom) :=
-  ((Sheaf.restrictScalars X.smallEtaleTopology ρ).mapDerivedCategorySingleFunctor
-    0).inv.naturality (extendScalarsConstantZModIso (Λ := Λ') X (n := 0) (by simp)).hom
-set_option profiler true in
-variable (ρ) in
-/-- The change of coefficients `Λ_X ⟶ Res Λ'_X` of the constant complexes
-(`AlgebraicGeometry.Etale.constantComplexChangeMap`) is induced on homotopy categories by the unit
-map `𝟙 ⟶ Res 𝟙`. -/
-lemma constantComplexChangeMap_comp_mapDerivedCategoryFactorsh [HasInvertibleExponent Λ X]
-    [HasInvertibleExponent Λ' X] :
-    constantComplexChangeMap ρ X ≫
-        (Sheaf.derivedRestrictScalars X.smallEtaleTopology ρ).map (ε DerivedCategory.Qh) ≫
-        (Sheaf.restrictScalars X.smallEtaleTopology ρ).mapDerivedCategoryFactorsh.hom.app (𝟙_ _) =
-      ε DerivedCategory.Qh ≫ DerivedCategory.Qh.map (extendScalarsHomotopyUnitMap ρ X) := by
-  have hn := map_extendScalarsConstantZModIso_hom_comp_mapDerivedCategorySingleFunctor_inv_app
-    ρ X
-  rw [extendScalarsHomotopyUnitMap_eq, ← singleFunctorObjUnitIso_inv_comp_map_comp_factorsh,
-    ← extendScalarsConstantZModIso_inv_comp_extendScalarsChangeMap_app]
-  simp only [constantComplexChangeMap, constantComplexIsoSingleFunctorExtendScalarsInt_eq_ofUnit,
-    constantComplexIsoSingleFunctorExtendScalarsIntOfUnit, Iso.trans_hom, Iso.trans_inv,
-    Iso.symm_hom, Iso.symm_inv, Functor.mapIso_hom, Functor.mapIso_inv, Functor.map_comp,
-    Category.assoc]
-  rw [reassoc_of% hn]
-
-/-- Blueprint `det-sp-purity-coefficient-change` (the unit comparison of the reduction).
-
-**The unit comparison `Ψ Λ_X ≅ Λ'_X` is the adjoint of the change of coefficients**
-`Λ_X ⟶ Res Λ'_X` of the constant complexes (`AlgebraicGeometry.Etale.constantComplexChangeMap`). -/
-lemma derivedExtendScalarsUnitIso_hom_eq_homEquiv_symm_constantComplexChangeMap
-    [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ' X] :
-    (derivedExtendScalarsUnitIso hρ ha X).hom =
-      ((derivedExtendScalarsAdjunction hρ ha X).homEquiv _ _).symm
-        (constantComplexChangeMap ρ X) :=
-  derivedExtendScalarsUnitIso_hom_eq_homEquiv_symm hρ ha X _
-    (constantComplexChangeMap_comp_mapDerivedCategoryFactorsh ρ X)
 
 
 end AlgebraicGeometry.Etale

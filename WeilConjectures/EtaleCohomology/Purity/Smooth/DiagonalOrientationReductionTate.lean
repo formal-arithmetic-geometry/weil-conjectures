@@ -31,6 +31,28 @@ open CategoryTheory Limits MonoidalCategory
 
 open scoped CategoryTheory.Functor
 
+namespace CategoryTheory.Functor
+
+variable {C D : Type*} [Category* C] [Category* D] [HasShift C ℤ] [HasShift D ℤ] (F : C ⥤ D)
+  [F.CommShift ℤ]
+
+/-- The commutation of a functor with the shift by `a = 0`, composed with the identifications of
+the shifts by zero with the identity. -/
+lemma map_shiftFunctorZero'_inv_app_comp_commShiftIso_hom_app (a : ℤ) (h : a = 0) {K' K : C} {L : D}
+    (f : K' ⟶ K) (g : F.obj K ⟶ L) :
+    F.map (f ≫ (shiftFunctorZero' C a h).inv.app K) ≫ (F.commShiftIso a).hom.app K ≫
+        (shiftFunctor D a).map g =
+      F.map f ≫ g ≫ (shiftFunctorZero' D a h).inv.app L := by
+  rw [F.commShiftIso_zero' ℤ a h]
+  simp only [CommShift.isoZero', Iso.trans_hom, NatTrans.comp_app, isoWhiskerRight_hom,
+    whiskerRight_app, Iso.symm_hom, isoWhiskerLeft_hom, whiskerLeft_app, leftUnitor_hom_app,
+    rightUnitor_inv_app, Category.id_comp, Category.assoc, map_comp]
+  rw [← map_comp_assoc F ((shiftFunctorZero' C a h).inv.app K), Iso.inv_hom_id_app, map_id,
+    Category.id_comp, ← (shiftFunctorZero' D a h).inv.naturality g, Functor.id_map]
+  simp
+
+end CategoryTheory.Functor
+
 namespace AlgebraicGeometry.Etale
 
 open Scheme
@@ -142,7 +164,17 @@ theorem reductionSupportedCoefficientChange_unit (hσ)
           (reductionTateShiftData hρ ha σ hσ)).constantComplexIso U).hom ≫
         (HasTateTwist.twistObjectZeroIso (Λ := Λ') U).inv ≫
           (shiftFunctorZero' _ (2 * (0 : ℤ)) (by simp)).inv.app _ := by
-  sorry
+  have h₀ : (derivedExtendScalars hρ ha U).map (HasTateTwist.twistObjectZeroIso (Λ := Λ) U).inv ≫
+      (σ U 0).hom =
+        (derivedExtendScalarsConstantComplexIso hρ ha U).hom ≫
+          (HasTateTwist.twistObjectZeroIso (Λ := Λ') U).inv := by
+    rw [← cancel_epi ((derivedExtendScalars hρ ha U).map (HasTateTwist.twistObjectZeroIso U).hom),
+      ← Functor.map_comp_assoc, Iso.hom_inv_id, CategoryTheory.Functor.map_id, Category.id_comp,
+      reassoc_of% (hσ₀ U), Iso.hom_inv_id, Category.comp_id]
+  dsimp only [reductionSupportedCoefficientChange]
+  rw [reductionTateShiftData_iso_hom]
+  exact (Functor.map_shiftFunctorZero'_inv_app_comp_commShiftIso_hom_app _ _ _ _ _).trans
+    ((reassoc_of% h₀) _)
 end Data
 
 end AlgebraicGeometry.Etale
