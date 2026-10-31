@@ -17,9 +17,10 @@ The constructions of this definition node are the published ones, reexported her
 `completedCoefficientMap` (the unique completed map with the prescribed finite residues),
 `completedScalarChangeData`, `completedOrdinaryScalarExtension`,
 `completedScalarTensorSection` and `completedScalarRelativeDegree` from
-`WeilConjectures.TraceFormula.Supporting.FiniteFreeCompletedScalarComparison`, and `integralScalarIntegerInclusion`,
-`integralScalarFiniteConstant` and `integralScalarConstant` from
-`WeilConjectures.SixFunctors.Integral.IntegralScalarExtensionWellDefined`. No construction is redeclared.
+`WeilConjectures.TraceFormula.Supporting.FiniteFreeCompletedScalarComparison`, and
+`integralScalarIntegerInclusion`, `integralScalarFiniteConstant` and `integralScalarConstant` from
+`WeilConjectures.SixFunctors.Integral.IntegralScalarExtensionWellDefined`.
+No construction is redeclared.
 -/
 
 @[expose] public noncomputable section

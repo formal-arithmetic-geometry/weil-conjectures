@@ -212,7 +212,6 @@ def systemScalarData (W : Scheme.{u}) :
     (integralCoefficientCommRingSheaf.{u, u} l E W)
     (coefficientSequenceCommRingTransition.{u, u} l E W)).some.coefficientExtension
       (integralCoefficientCommRingSheaf.{u, u} l F W)
-
     (coefficientSequenceCommRingTransition.{u, u} l F W)
       (integralScalarQuotientSheafMap.{u, u} l E F i W) (scalarQuotients_commute l E F i W)
 
