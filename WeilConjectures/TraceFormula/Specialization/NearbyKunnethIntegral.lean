@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethFormula
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethRational
+public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethRationalSlice
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethSliceIntegralStep
 public import WeilConjectures.Tactic.ExactModProofs
 
@@ -67,13 +68,6 @@ theorem sliceKunnethFormula_padicIntegers {n : ℕ}
     (eM := pullback.fst _ _ ≫ eM) (by simp [← heM]) (eN := pullback.fst _ _ ≫ eN)
     (by simp [← heN]) hA hB
 
-
-/-- WIP: the `ℚ̄_ℓ` generic-slicing step from the `𝒪_E` ones (integral models). -/
-theorem sliceKunnethFormula_padicAlgCl {n : ℕ}
-    (h : ∀ E : PadicAlgCl.FiniteIntermediateField ℓ,
-      SliceKunnethFormula (Profinite.padicIntegersRingObj ℓ E.1) k' n) :
-    SliceKunnethFormula (Profinite.padicAlgClRingObj ℓ) k' n :=
-  sorry
 
 variable {X Y Z : Scheme.{u}} {X' Y' Z' : Over (Spec (.of k'))}
   {M : NearbyCyclesModel X X'.left} {N : NearbyCyclesModel Y Y'.left}
@@ -139,17 +133,5 @@ theorem integralKunnethFormula (n : ℕ) :
   have := hY
   have := hZ
   exact isIso_kunnethMap_padicIntegers_of_isProper hM hN hpb hP hgen h₁ h₂ hslice heM heN E hA hB
-
-end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
-
-namespace AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
-
-variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k']
-
-/-- WIP: the `ℚ̄_ℓ` Künneth formula from the `𝒪_E` ones (integral models and coefficient
-change). -/
-theorem kunnethFormula_padicAlgCl_of_integral {n : ℕ} (h : IntegralKunnethFormula ℓ k' n) :
-    KunnethFormula (Profinite.padicAlgClRingObj ℓ) k' n :=
-  sorry
 
 end AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel
