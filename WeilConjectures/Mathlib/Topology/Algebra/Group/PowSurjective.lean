@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.GroupTheory.OrderOfElement
+public import Mathlib.GroupTheory.Index
 public import Mathlib.Topology.Algebra.Group.Basic
 public import Mathlib.Topology.Separation.Hausdorff
 
@@ -53,3 +54,23 @@ theorem exists_pow_eq_of_forall_nhds_one {G : Type*} [Group G] [TopologicalSpace
   have hmem : σ⁻¹ * y.out ^ n ∈ N := by
     rw [← QuotientGroup.eq, QuotientGroup.mk_pow, hy]
   simpa using hNU hmem
+
+/-- **Roots in normal subgroups of finite index**: if every element of `G` is an `n`-th power,
+then every element of a normal subgroup `N` of finite index is the `n`-th power of an element of
+`N`: `x ↦ x ^ n` is surjective, hence injective, on the finite quotient `G ⧸ N`. -/
+theorem Subgroup.exists_mem_pow_eq_of_forall_exists_pow {G : Type*} [Group G] {n : ℕ}
+    (hdiv : ∀ σ : G, ∃ τ, τ ^ n = σ) (N : Subgroup G) [N.Normal] [N.FiniteIndex] {σ : G}
+    (hσ : σ ∈ N) : ∃ τ ∈ N, τ ^ n = σ := by
+  obtain ⟨τ, rfl⟩ := hdiv σ
+  refine ⟨τ, ?_, rfl⟩
+  have hsurj : Function.Surjective fun x : G ⧸ N ↦ x ^ n := by
+    intro y
+    induction y using QuotientGroup.induction_on with
+    | H y =>
+      obtain ⟨z, rfl⟩ := hdiv y
+      exact ⟨z, by simp⟩
+  have hinj := Finite.injective_iff_surjective.mpr hsurj
+  have h1 : ((τ : G ⧸ N)) ^ n = (1 : G ⧸ N) ^ n := by
+    rw [one_pow, ← QuotientGroup.mk_pow, QuotientGroup.eq_one_iff]
+    exact hσ
+  exact (QuotientGroup.eq_one_iff _).mp (hinj h1)
