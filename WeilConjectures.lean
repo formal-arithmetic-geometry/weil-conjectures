@@ -11273,6 +11273,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughInjectives
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughProjectives
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Finite
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.MapBijective
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.TStructure
@@ -13741,6 +13742,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CompactSuppor
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CompactSupportBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CompactSupportTorsion
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ConstructibleDirectImage
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ConstructibleExtFinite
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ConstructibleHomFinite
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CurveModel
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CurveOpenDirectImage
