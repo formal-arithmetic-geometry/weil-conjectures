@@ -10,6 +10,10 @@ import all WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAd
 
 /-! # Fixed scalar comparisons commute with constant and slice units -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 universe t

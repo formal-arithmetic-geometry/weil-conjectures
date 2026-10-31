@@ -24,6 +24,10 @@ derives the cone, unit and two-resolution formulas from its normalizations.
 Index n denotes the positive exponent n+1. Site and coefficient universes are independent.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 
 set_option autoImplicit false

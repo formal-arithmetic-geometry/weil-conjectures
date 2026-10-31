@@ -38,6 +38,10 @@ Positive quotient levels are indexed by `n : ℕ`, with exponent `n + 1`.
 The comparison is stated on finite-free resolutions of bounded finite complexes.
 Naturality on the category of resolutions includes independence of the resolution.
 -/
+
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 1024

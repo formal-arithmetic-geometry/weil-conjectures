@@ -13,6 +13,9 @@ import WeilConjectures.Algebra.Homology.Ringed.RingedOpenTotalTensorKFlat
 
 /-! Explicit projection comparison for open tensor support -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 set_option autoImplicit false
 universe u

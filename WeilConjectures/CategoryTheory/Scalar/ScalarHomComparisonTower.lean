@@ -107,6 +107,9 @@ node's P tensor Hom. The tensor comparisons are normalized on K-flat complexes.
 Only tensor-tower and identity equations are assumed; Hom maps need not be invertible.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 set_option autoImplicit false

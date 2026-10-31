@@ -25,6 +25,10 @@ Index n denotes the positive quotient exponent n+1. The site and coefficient
 universes remain independent. All categories are ordinary unbounded derived categories.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 
 set_option autoImplicit false

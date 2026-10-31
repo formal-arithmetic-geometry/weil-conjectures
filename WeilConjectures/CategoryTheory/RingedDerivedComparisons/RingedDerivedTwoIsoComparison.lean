@@ -96,6 +96,10 @@ Tags 03D7, 03D8, 03EL, 07A4 and 07A6.
 (blueprint: lem-sfb-ringed-derived-two-iso-comparison).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 
 set_option autoImplicit false

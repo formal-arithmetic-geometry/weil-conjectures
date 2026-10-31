@@ -41,6 +41,10 @@ import all WeilConjectures.AlgebraicGeometry.Completed.CompletedRlimFunctor
 Source: blueprint order 1248; Stacks Tags 091Z and 099M.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048

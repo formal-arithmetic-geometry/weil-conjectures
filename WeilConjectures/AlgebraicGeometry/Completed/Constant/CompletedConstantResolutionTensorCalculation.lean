@@ -119,6 +119,10 @@ Source: Stacks Tags 06YN, 06YT, 06YU and 093M.
 (blueprint: lem-weil-pbc-completed-constant-resolution-tensor-calculation).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 1024

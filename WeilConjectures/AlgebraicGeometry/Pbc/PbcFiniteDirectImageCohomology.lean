@@ -30,6 +30,10 @@ Source: preservation proof, finite-level finiteness step; Stacks Tags 095U, 0GL0
 (blueprint: lem-weil-pbc-finite-direct-image-cohomology).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 universe u

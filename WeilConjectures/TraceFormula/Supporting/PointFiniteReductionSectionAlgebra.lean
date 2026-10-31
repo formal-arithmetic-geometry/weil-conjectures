@@ -29,6 +29,10 @@ Source: Stacks Tags 093J, 03EK and 00HD; steps 2--3 of
 `lem-trf-point-sections-finite-reduction`.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
