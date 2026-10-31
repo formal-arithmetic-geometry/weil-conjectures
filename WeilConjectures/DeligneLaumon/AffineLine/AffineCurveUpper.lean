@@ -5,18 +5,10 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.AffineSpace.Fiber
-public import WeilConjectures.DeligneLaumon.AffineLine.Purity
-public import WeilConjectures.DeligneLaumon.AffineLine.LocalDuality
 public import WeilConjectures.DeligneLaumon.AffineLine.Upper
-public import WeilConjectures.DeligneLaumon.Reduction.CompactSupport
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineInfinityMap
 public import WeilConjectures.DeligneLaumon.Reduction.FiniteMiddleExtension
 public import WeilConjectures.WeilSheaf.FiniteEtaleLisse
-public import WeilConjectures.WeilSheaf.Curve
-public import WeilConjectures.WeilSheaf.LowerStarId
-public import WeilConjectures.WeilSheaf.OpenImmersionRestriction
-public import WeilConjectures.WeilSheaf.UpperStarPointwise
 
 /-!
 # The compact-support upper bound on affine curves

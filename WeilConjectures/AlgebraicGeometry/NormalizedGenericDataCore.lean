@@ -5,16 +5,16 @@ Authors: Bin Wu
 -/
 
 module
+
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.Integral
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparisonExtension
 import WeilConjectures.AlgebraicGeometry.ConstructibleFieldFiniteSeparableConstant
 import WeilConjectures.AlgebraicGeometry.WeilPbcNormalizationInResidueFieldExtension
-import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.ConstructibleSheaf.FinitePushforward
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
+import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+
 @[expose] public section
 universe u
 open CategoryTheory

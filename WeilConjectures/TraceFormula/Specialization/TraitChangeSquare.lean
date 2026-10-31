@@ -46,57 +46,6 @@ variable {X X' X₁ X₁' Z Z' Z₁ Z₁' : Scheme.{u}} {M : NearbyCyclesModel X
   {f₀ : Z ⟶ X} {f₀' : Z' ⟶ X'} {g : X ⟶ X₁} {g' : X' ⟶ X₁'} {k : Z ⟶ Z₁} {k' : Z' ⟶ Z₁'}
   {e : Z₁ ⟶ X₁} {e' : Z₁' ⟶ X₁'}
 
-section General
-
-variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-
-/-- **Invertibility of a pullback exchange through a square of pushforward exchanges**: for a
-commutative square of morphisms of models `φ₀ : P ⟶ M`, `ψ : M ⟶ M₁`, `ψ' : P ⟶ P₁`,
-`φ₁ : P₁ ⟶ M₁`, if the pushforward exchanges of `ψ` and `ψ'`, the base change morphisms of the
-squares of bases and of special fibres and the pullback exchange of `φ₁` are invertible at the
-relevant objects, and `Rk'_*` reflects isomorphisms, then the pullback exchange of `φ₀` is
-invertible at `A`. This is the square law of the pushforward exchanges
-(`NearbyCyclesModel.pushforwardExchange_square_aux`). -/
-theorem Hom.isIso_pullbackExchange_app_of_square (φ₀ : P.Hom M f₀ f₀') (ψ : M.Hom M₁ g g')
-    (ψ' : P.Hom P₁ k k') (φ₁ : P₁.Hom M₁ e e')
-    (htot : φ₀.total ≫ ψ.total = ψ'.total ≫ φ₁.total)
-    (hgen : φ₀.generic ≫ ψ.generic = ψ'.generic ≫ φ₁.generic) (hb : f₀ ≫ g = k ≫ e)
-    (hs : f₀' ≫ g' = k' ≫ e')
-    (A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj Λ X)))
-    (hχ : IsIso ((ψ.pushforwardExchange Λ).app A))
-    (hbc' : IsIso ((baseChangeMap Λ ⟨hs⟩).app ((M.nearbyCycles Λ).obj A)))
-    (hα₁ : IsIso ((φ₁.pullbackExchange Λ).app (R((g)_*⟦Λ⟧).obj A)))
-    (hbc : IsIso ((baseChangeMap Λ ⟨hb⟩).app A))
-    (hχ' : IsIso ((ψ'.pushforwardExchange Λ).app (L((f₀)^*⟦Λ⟧).obj A)))
-    (hR : ∀ {U V : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z') Ab.{u + 1})
-      (condensedRingObj Λ Z'))} (a : U ⟶ V), IsIso (R((k')_*⟦Λ⟧).map a) → IsIso a) :
-    IsIso ((φ₀.pullbackExchange Λ).app A) := by
-  have hSQ := fun C ↦ Hom.pullbackExchange_square Λ φ₀ ψ ψ' φ₁ htot hgen hb hs C
-  have key := pushforwardExchange_square_aux
-    (derivedUpperStarLowerStarAdjunction Λ g) (derivedUpperStarLowerStarAdjunction Λ k)
-    (derivedUpperStarLowerStarAdjunction Λ g') (derivedUpperStarLowerStarAdjunction Λ k')
-    (φ₀.pullbackExchange Λ) (φ₁.pullbackExchange Λ) (ψ.pullbackExchange Λ)
-    (ψ'.pullbackExchange Λ) (ψ.pushforwardExchange Λ) (ψ'.pushforwardExchange Λ)
-    (ψ.map_pushforwardExchange_app_comp_counit_app Λ)
-    (ψ'.map_pushforwardExchange_app_comp_counit_app Λ)
-    (pullbackSquareComparison Λ ⟨hb⟩).hom (pullbackSquareComparison Λ ⟨hs⟩).hom
-    (baseChangeMap Λ ⟨hb⟩) (baseChangeMap Λ ⟨hs⟩)
-    (Adjunction.exchangeRight_app_comp_counit' _ _ _ _ rfl)
-    (Adjunction.exchangeRight_app_comp_counit' _ _ _ _ rfl) hSQ A
-  have hcomp : IsIso (L((e')^*⟦Λ⟧).map ((ψ.pushforwardExchange Λ).app A) ≫
-      (baseChangeMap Λ ⟨hs⟩).app _ ≫ R((k')_*⟦Λ⟧).map ((φ₀.pullbackExchange Λ).app A)) := by
-    rw [key]
-    exact IsIso.comp_isIso' hα₁ (IsIso.comp_isIso' (Functor.map_isIso _ _) hχ')
-  have := hχ
-  have := hbc'
-  have h₁ := IsIso.of_isIso_comp_left (L((e')^*⟦Λ⟧).map ((ψ.pushforwardExchange Λ).app A))
-    ((baseChangeMap Λ ⟨hs⟩).app _ ≫ R((k')_*⟦Λ⟧).map ((φ₀.pullbackExchange Λ).app A))
-  exact hR _ (IsIso.of_isIso_comp_left ((baseChangeMap Λ ⟨hs⟩).app _)
-    (R((k')_*⟦Λ⟧).map ((φ₀.pullbackExchange Λ).app A)))
-
-end General
-
 variable (ℓ : ℕ) [Fact ℓ.Prime]
 
 set_option hygiene false in
@@ -107,9 +56,15 @@ local notation "𝐐" => Profinite.padicAlgClRingObj ℓ
 the base change morphism of the square of bases and the pushforward exchange of `ψ'` invertible by
 proper base change (blueprint `sk-thm-sfb-proper-base-change`) and by the proper exchange
 (blueprint `det-sp-nearby-cycles-exchanges` (2)): it suffices that the square of bases is
-cartesian with `g` proper, that `ψ'` is proper and cartesian on special fibres and identifications,
-and that `A` is bounded constructible. -/
-theorem Hom.isIso_pullbackExchange_app_of_square_of_isProper (φ₀ : P.Hom M f₀ f₀')
+cartesian with `g` proper and with noetherian bases over fields `k₁` and `k₂` in which `ℓ` is
+invertible, that `P` and `P₁` are models of finite type over the trait `Spec k₀⟦t⟧` with `ℓ`
+invertible in `k₀`, that `ψ'` is proper and cartesian on special fibres and identifications, and
+that `A` is bounded constructible. -/
+theorem Hom.isIso_pullbackExchange_app_of_square_of_isProper {k₀ k₁ k₂ : Type u} [Field k₀]
+    [Field k₁] [Field k₂] [Fact (ringChar k₀ ≠ ℓ)] [Fact (ringChar k₁ ≠ ℓ)]
+    [Fact (ringChar k₂ ≠ ℓ)] [IsNoetherian X₁] [IsNoetherian Z₁] (a₁ : X₁ ⟶ Spec (.of k₁))
+    (a₂ : Z₁ ⟶ Spec (.of k₂)) (hP : ∃ a : Z' ⟶ Spec (.of k₀), P.IsTraitModel (X' := Over.mk a))
+    (hP₁ : ∃ a : Z₁' ⟶ Spec (.of k₀), P₁.IsTraitModel (X' := Over.mk a)) (φ₀ : P.Hom M f₀ f₀')
     (ψ : M.Hom M₁ g g') (ψ' : P.Hom P₁ k k') (φ₁ : P₁.Hom M₁ e e')
     (htot : φ₀.total ≫ ψ.total = ψ'.total ≫ φ₁.total)
     (hgen : φ₀.generic ≫ ψ.generic = ψ'.generic ≫ φ₁.generic) (hb : f₀ ≫ g = k ≫ e)
@@ -125,8 +80,9 @@ theorem Hom.isIso_pullbackExchange_app_of_square_of_isProper (φ₀ : P.Hom M f�
     (hR : ∀ {U V : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z') Ab.{u + 1})
       (condensedRingObj 𝐐 Z'))} (a : U ⟶ V), IsIso (R((k')_*⟦𝐐⟧).map a) → IsIso a) :
     IsIso ((φ₀.pullbackExchange 𝐐).app A) := by
-  have hbc := isIso_baseChangeMap_app_of_isProper_padicAlgCl ℓ ⟨hb⟩ hpb A hA
-  have hχ' := ψ'.isIso_pushforwardExchange_app_of_isProper hi' hε'
+  have hbc := isIso_baseChangeMap_app_padicAlgCl_of_isProper ℓ a₁ a₂ ⟨hb⟩ hpb A
+    hA
+  have hχ' := ψ'.isIso_pushforwardExchange_app_of_isProper a₂ hP hP₁ hi' hε'
     (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ f₀ A hA)
   exact_mod_proofs φ₀.isIso_pullbackExchange_app_of_square 𝐐 ψ ψ' φ₁ htot hgen hb hs A
     (by exact_mod_proofs hχ) (by exact_mod_proofs hbc') (by exact_mod_proofs hα₁)

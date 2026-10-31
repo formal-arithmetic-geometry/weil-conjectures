@@ -5,27 +5,22 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
-public import WeilConjectures.AlgebraicGeometry.Sites.PointCohomology
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
-public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConstantSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Coproducts
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.SingleReduction
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.TensorBaseChange
-public import WeilConjectures.CategoryTheory.DerivedCategory.TelescopeFlat
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Equivalence
 public import WeilConjectures.CategoryTheory.Sites.ConstantSheafMonoidal
 public import WeilConjectures.CategoryTheory.DerivedCategory.ModuleCatGeneration
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionShift
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionUnit
-public import WeilConjectures.SixFunctors.Etale.Derived.Shift
 public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 public import WeilConjectures.SixFunctors.Etale.Derived.Invertible
 public import WeilConjectures.SixFunctors.Etale.Derived.Hom
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.CohomologicalDimension
+import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
+import WeilConjectures.AlgebraicGeometry.Sites.ModulePointFunctions
+import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 
 /-!
 # The Künneth map in ordinary étale cohomology

@@ -6,23 +6,18 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyFilteredColimit
-
-
-public import WeilConjectures.AlgebraicGeometry.EtaleDirectedCohomologyColimit
 public import WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomology
-
-
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
-
+public import WeilConjectures.AlgebraicGeometry.Curve
+public import Mathlib.Order.CompletePartialOrder
 import WeilConjectures.AlgebraicGeometry.Curve.ConstructiblePrimeDevissage
 import WeilConjectures.AlgebraicGeometry.Curve.FinitePushforwardModuleAssertions
 import WeilConjectures.AlgebraicGeometry.Curve.NormalizationAssertionsTransfer
 import WeilConjectures.AlgebraicGeometry.Curve.FinitePushforwardOpenQuotientConstant
 import WeilConjectures.AlgebraicGeometry.Curve.ConstructibleApproximationAssertions
 import WeilConjectures.AlgebraicGeometry.Curve.ReductionModuleAssertions
-import WeilConjectures.ConstructibleSheaf.GenericConstancy
 import WeilConjectures.AlgebraicGeometry.Curve.DenseIrreducibleOpens
 import WeilConjectures.AlgebraicGeometry.Curve.DenseOpenPrimeAssertions
 import WeilConjectures.AlgebraicGeometry.Curve.DisjointOpenPrimeAssertions
@@ -32,13 +27,10 @@ import WeilConjectures.AlgebraicGeometry.TorsionSheafCharacterizations
 import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
 import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 import WeilConjectures.AlgebraicGeometry.Sites.TorsionSheaf
-import WeilConjectures.AlgebraicGeometry.EtaleCohomologyFilteredColimit
-import WeilConjectures.AlgebraicGeometry.EtaleDirectedCohomologyColimitExtension
 import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 import WeilConjectures.AlgebraicGeometry.ZeroDimensionalPullbackGlobalSections
 import WeilConjectures.AlgebraicGeometry.ZeroDimensionalBaseChangePoints
 import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero
-import WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomologyExtension
 import WeilConjectures.AlgebraicGeometry.ConstructibleModuleSubobjectNoetherian
 import WeilConjectures.AlgebraicGeometry.PullbackCohomologyLongExactLadder
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
@@ -48,7 +40,6 @@ import WeilConjectures.AlgebraicGeometry.Curve.NormalizationMonoProperties
 import Mathlib.Algebra.Homology.ShortComplex.Ab
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
-import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison
 
 /-!
@@ -104,30 +95,6 @@ namespace AlgebraicGeometry
 open Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
-
-/-! ### Filtered colimits -/
-
-/-- **Étale cohomology commutes with filtered colimits on a qcqs scheme.** Let `X` be
-quasi-compact and quasi-separated and let `c` be a colimit cocone of a filtered diagram `D` of
-abelian étale sheaves on `X`. Then for every `q` the canonical map
-`colim_λ Hᵠ(X, D_λ) ⟶ Hᵠ(X, colim_λ D_λ)` is bijective; this is spelled out elementwise:
-every class on the colimit comes from some `D_λ`, and a class on `D_λ` which dies on the colimit
-already dies on some `D_μ`, `λ ⟶ μ`. The compatibility with the pullback along a field
-extension is the naturality `AlgebraicGeometry.Etale.cohomologyMap_map` of the pullback maps.
-The statement holds for arbitrary (not only torsion) abelian sheaves and small filtered
-categories.
-(blueprint: lemma-weil-pbc-curve-filtered-cohomology)
--/
-@[stacks 03Q6]
-theorem Scheme.H_map_isColimit_of_isFiltered (X : Scheme.{u}) [CompactSpace X]
-    [QuasiSeparatedSpace X] {J : Type w} [Category.{w'} J] [IsFiltered J]
-    {D : J ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} {c : Cocone D}
-    (hc : IsColimit c) (q : ℕ) :
-    (∀ x : Sheaf.H c.pt q, ∃ (j : J) (y : Sheaf.H (D.obj j) q),
-      Sheaf.H.map (c.ι.app j) q y = x) ∧
-    ∀ (j : J) (y : Sheaf.H (D.obj j) q), Sheaf.H.map (c.ι.app j) q y = 0 →
-      ∃ (j' : J) (φ : j ⟶ j'), Sheaf.H.map (D.map φ) q y = 0 :=
-  Scheme.H_map_isColimit_of_isFiltered_of_large X hc q
 
 /-! ### Dévissage -/
 

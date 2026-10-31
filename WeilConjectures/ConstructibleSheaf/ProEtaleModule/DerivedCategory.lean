@@ -53,7 +53,9 @@ extensions (Bhatt–Scholze, Section 6.8): see
 `ProEtale.CondensedRing.integralConstructible_serre` for `𝒪̲_E`, and
 `WeilConjectures.AlgebraicGeometry.CondensedConstructibleSerre` for `E̲` and `ℚ̲̄_ℓ`. The complexes
 whose cohomology sheaves lie in such a class form a triangulated subcategory
-(`DerivedCategory.homologyProperty_isTriangulated`).
+(`DerivedCategory.homologyProperty_isTriangulated`); for any commutative ring object `R` whose
+constructible module objects are closed under kernels, cokernels and extensions this is
+`ProEtale.isTriangulated_boundedConstructible_of_serre`.
 It is false for a general commutative ring object `R`: for `X = Spec k̄` and `R` the constant
 sheaf of the non-coherent ring `k[x₁, x₂, …]/(x₁xᵢ)ᵢ`, the cone of `x₁ : R ⟶ R` has `H⁻¹` the
 constant sheaf of the ideal `(x₂, x₃, …)`, which is not finitely generated. Noetherianity is
@@ -211,33 +213,33 @@ private lemma continuous_lf (ℓ : ℕ) [Fact ℓ.Prime]
   exact locally_free_of_iso (locally_free_comap φ h)
     ((Mod.comapEquivalenceOfIsIso φ).counitIso.app M)
 
+omit [IsCommMonObj R] in
 /-- If the constructible module objects over `R` are closed under kernels, cokernels and
 extensions, the bounded constructible complexes form a triangulated subcategory. -/
-private lemma triangulated_of_serre
-    (X : Scheme.{u}) (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-    [MonObj R] [IsCommMonObj R]
-    (hk : ∀ (M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R)
+lemma isTriangulated_boundedConstructible_of_serre
+    (hk : ∀ (M N : Mod (Sheaf (Scheme.ProEt.topology X) A) R)
       (f : M ⟶ N), IsConstructibleModuleObject R M →
       IsConstructibleModuleObject R N →
       IsConstructibleModuleObject R (kernel f) ∧
       IsConstructibleModuleObject R (cokernel f))
-    (he : ∀ S : ShortComplex (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R),
+    (he : ∀ S : ShortComplex (Mod (Sheaf (Scheme.ProEt.topology X) A) R),
       S.ShortExact → IsConstructibleModuleObject R S.X₁ →
       IsConstructibleModuleObject R S.X₃ → IsConstructibleModuleObject R S.X₂) :
     (boundedConstructible R).IsTriangulated := by
+  have : ObjectProperty.IsClosedUnderIsomorphisms (IsConstructibleModuleObject R) :=
+    ⟨fun e ⟨S, hS⟩ ↦ ⟨S, fun a ↦
+      lfp_of_iso (hS a) (((ProEtale.upperStar A (S.immersion a)).mapMod R).mapIso e)⟩⟩
   let : ObjectProperty.IsClosedUnderKernels (IsConstructibleModuleObject R) :=
     ⟨by
       rintro _ ⟨f, s, hs, hf⟩
-      exact _root_.constructible_of_iso (R := R) (limit.isoLimitCone ⟨s, hs⟩)
+      exact ObjectProperty.prop_of_iso _ (limit.isoLimitCone ⟨s, hs⟩)
         (hk _ _ f hf.1 hf.2).1⟩
   let : ObjectProperty.IsClosedUnderCokernels (IsConstructibleModuleObject R) :=
     ⟨by
       rintro _ ⟨f, s, hs, hf⟩
-      exact _root_.constructible_of_iso (R := R) (colimit.isoColimitCocone ⟨s, hs⟩)
+      exact ObjectProperty.prop_of_iso _ (colimit.isoColimitCocone ⟨s, hs⟩)
         (hk _ _ f hf.1 hf.2).2⟩
   let : ObjectProperty.IsClosedUnderExtensions (IsConstructibleModuleObject R) := ⟨he _⟩
-  have : ObjectProperty.IsClosedUnderIsomorphisms (IsConstructibleModuleObject R) :=
-    ⟨fun e hM ↦ _root_.constructible_of_iso e hM⟩
   have : ObjectProperty.ContainsZero (IsConstructibleModuleObject R) :=
     ⟨0, isZero_zero _, constructible_of_isZero R (isZero_zero _)⟩
   change (DerivedCategory.TStructure.t.bounded ⊓
@@ -278,7 +280,7 @@ instance isTriangulated_boundedConstructible_padicIntegersRingObj
   change ObjectProperty.IsClosedUnderExtensions
     (IsConstructibleModuleObject
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X)) at hext
-  exact triangulated_of_serre X _
+  exact isTriangulated_boundedConstructible_of_serre _
     (fun M N f hM hN ↦ ⟨ObjectProperty.prop_kernel _ f hM hN,
       ObjectProperty.prop_cokernel _ f hM hN⟩)
     (fun S hS h₁ h₃ ↦ ObjectProperty.prop_X₂_of_shortExact _ hS h₁ h₃)
@@ -293,7 +295,7 @@ instance isTriangulated_boundedConstructible_integralCoeff
     (boundedConstructible
       (condensedRingObj (CondensedRing.integralCoeff.{u} ℓ E) X)).IsTriangulated := by
   obtain ⟨hker, hcok, hext⟩ := CondensedRing.integralConstructible_serre ℓ E X
-  exact triangulated_of_serre X _
+  exact isTriangulated_boundedConstructible_of_serre _
     (fun M N f hM hN ↦ ⟨ObjectProperty.prop_kernel _ f hM hN,
       ObjectProperty.prop_cokernel _ f hM hN⟩)
     (fun S hS h₁ h₃ ↦ ObjectProperty.prop_X₂_of_shortExact _ hS h₁ h₃)
@@ -311,7 +313,7 @@ instance isTriangulated_boundedConstructible_continuousMapRingObj
       (condensedRingObj (Profinite.continuousMapRingObj.{u} E) X)).IsTriangulated := by
   obtain ⟨hk, he⟩ := condensed_constructible_serre_of_locally_free freeEpiLocalSplitting
     (Profinite.continuousMapRingObj E) (continuous_lf ℓ E) X
-  exact triangulated_of_serre X _ hk he
+  exact isTriangulated_boundedConstructible_of_serre _ hk he
 
 /-- Blueprint `prop-sfb-bounded-constructible-triangulated`, for `ℚ̲̄_ℓ`: the bounded
 constructible complexes of `ℚ̄_{ℓ,X}`-modules on a topologically noetherian scheme form a
@@ -321,7 +323,7 @@ instance isTriangulated_boundedConstructible_padicAlgClRingObj
     (boundedConstructible
       (condensedRingObj (Profinite.padicAlgClRingObj.{u} ℓ) X)).IsTriangulated := by
   obtain ⟨hk, he⟩ := isConstructibleModuleObject_serre_padicAlgCl X ℓ
-  exact triangulated_of_serre X _ hk he
+  exact isTriangulated_boundedConstructible_of_serre _ hk he
 
 end Triangulated
 

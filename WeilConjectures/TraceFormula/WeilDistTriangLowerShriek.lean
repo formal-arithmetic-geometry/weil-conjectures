@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.TraceFormula.WeilDistTriang
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.Connecting
+public import WeilConjectures.WeilObject.BoundedConstructible.LowerUpperShriek
 
 /-!
 

@@ -7,8 +7,6 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.FrobeniusTwistFixedPoints
 public import WeilConjectures.Mathlib.CategoryTheory.Comma.Over.Basic
-public import WeilConjectures.Mathlib.CategoryTheory.Endomorphism
-public import WeilConjectures.PointCount
 public import WeilConjectures.TraceFormula.WeilTrace
 
 /-!

@@ -8,11 +8,8 @@ module
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import WeilConjectures.CategoryTheory.Sites.CechComplexFunctor
 public import WeilConjectures.Topology.Sheaves.CechComparison
-public import WeilConjectures.Topology.Sheaves.Cech
 public import WeilConjectures.AlgebraicGeometry.Modules.StalkExact
-public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechFlat
-public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
 
 /-!
 # The Čech resolution of a sheaf of modules

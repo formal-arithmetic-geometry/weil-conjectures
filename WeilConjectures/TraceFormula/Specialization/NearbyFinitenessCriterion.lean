@@ -88,8 +88,8 @@ theorem boundedConstructible_lowerStar_nearbyCycles_traitStdModel_of_isProper {T
       comm_ε := pullback.condition.symm }
   have hiso :=
     Hom.isIso_pushforwardExchange_app_of_isProper_geometric (X' := traitStdSpecialFibre q)
-      (Y' := Over.mk (𝟙 (Spec (.of k')))) (M := M) (N := traitSelfModel k') ψ rfl hj.flip hi
-      B hB
+      (Y' := Over.mk (𝟙 (Spec (.of k')))) (M := M) (N := traitSelfModel k') ψ
+      (isTraitModel_traitStdModel _) (isTraitModel_traitSelfModel k') rfl hj.flip hi B hB
   have := (isTraitModel_traitSelfModel k').isNoetherian_total
   have h₁ : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
       (Spec (.of k')))

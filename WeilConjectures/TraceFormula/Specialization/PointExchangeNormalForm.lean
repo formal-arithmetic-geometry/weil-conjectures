@@ -225,7 +225,7 @@ theorem pointCompactSupportExchangeOfSeparated_app_lowerStar_normalForm :
   have hχiso :=
     NearbyCyclesModel.Hom.isIso_boundedConstructiblePushforwardExchange_of_isProper
       (φ := deformationToTraitModelHom B b.left.ker k') hMB hMS
-      (isPullback_deformationSpecialFibre_toPoint B _ k')
+      (isTraitModel_deformationModel B _ k') (isPullback_deformationSpecialFibre_toPoint B _ k')
       (isPullback_deformationModel_ε_toPoint B _ k')
   fo_apply pointExchange_normalForm_aux using _, _, _, _, _, _, _, _, _, hχiso, _, _,
     _, _, _, _, _, _, _, _, _, _, _, hnat, hχa, hF3, _, hG, _, _, _, _, _, _, _, hχg, _, _, _, _,

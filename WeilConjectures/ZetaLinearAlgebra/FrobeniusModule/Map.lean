@@ -18,6 +18,8 @@ passes to Frobenius-stable subspaces and quotients.
 
 ## Main results
 
+- `FrobeniusModule.frobeniusEnd_pow_comp`: an equivariant map commutes with the powers of the
+  Frobenius.
 - `FrobeniusModule.hasEigenvalue_of_injective` and
   `FrobeniusModule.hasEigenvalue_of_surjective`: the transfer of eigenvalues.
 - `FrobeniusModule.IsPureOfWeight.of_injective` and
@@ -35,6 +37,11 @@ namespace FrobeniusModule
 variable {K : Type v} [Field K] {M N : FrobeniusModule.{u, v} K}
   (g : M.carrier →ₗ[K] N.carrier) (hg : ∀ x, g (M.frobenius x) = N.frobenius (g x))
 include hg
+
+/-- A Frobenius-equivariant linear map commutes with the powers of the Frobenius. -/
+theorem frobeniusEnd_pow_comp (m : ℕ) :
+    (N.frobeniusEnd ^ m) ∘ₗ g = g ∘ₗ M.frobeniusEnd ^ m :=
+  Module.End.commute_pow_left_of_commute (LinearMap.ext fun x ↦ (hg x).symm) m
 
 /-- An injective Frobenius-equivariant linear map carries eigenvalues of the Frobenius of its
 source to eigenvalues of the Frobenius of its target. -/

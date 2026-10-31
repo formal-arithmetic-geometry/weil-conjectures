@@ -7,7 +7,6 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImageNaturalComparison
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 public import WeilConjectures.AlgebraicGeometry.HigherDirectImageRawComplexPresentation
 import WeilConjectures.AlgebraicGeometry.RawRestrictedCohomologyNaturalIso
 import WeilConjectures.AlgebraicGeometry.RestrictedAffineComplexSystemNatural

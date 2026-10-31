@@ -36,6 +36,9 @@ adjoints: the iterated mate of `α` is its conjugate, hence an isomorphism.
 - `CategoryTheory.Adjunction.isIso_rightAdjointProjectionMap_of_mateEquiv`: transport of the
   invertibility of the projection map.
 - `CategoryTheory.Adjunction.isIso_mateEquiv_app_of_isIso`: invertibility of the base change map.
+- `CategoryTheory.Adjunction.isIso_app_of_isIso_mateEquiv_of_isIso_biproductDesc`: invertibility
+  of a natural transformation `G ⋙ N_D ⟶ N_C ⋙ G'` with invertible mate, when `R ∘ N` decomposes
+  as a finite biproduct of copies of the identity.
 - `CategoryTheory.Adjunction.isIso_mateEquiv_app_of_isIso_biproductDesc`: invertibility of the
   base change map when `R ∘ N` only decomposes as a finite biproduct of copies of the identity.
 -/
@@ -170,26 +173,21 @@ lemma isIso_mateEquiv_mateEquiv :
 variable [Preadditive C] [Preadditive D] [HasFiniteBiproducts C]
   [G.Additive] [R_D.ReflectsIsomorphisms]
 
-/-- The base change map `β : N_D (G M) ⟶ G' (N_C M)`, the mate of an isomorphism
-`α : N_D ⋙ F' ≅ F ⋙ N_C`, is an isomorphism at `M` in the following situation: `N_C ⊣ R_C` and
-`N_D ⊣ R_D` are adjunctions with `R_D` conservative, and there are finitely many endomorphisms
-`e i` of `N_C M` and `e' i` of `N_D (G M)` compatible with `β`, such that the maps
-`M ⟶ R_C (N_C M)` and `G M ⟶ R_D (N_D (G M))` obtained by composing the units with `R_C (e i)`
-and `R_D (e' i)` exhibit the targets as biproducts of copies of `M` and of `G M`.
-
-This applies to extension of scalars `N` along a finite free ring map, with right adjoint the
-restriction of scalars `R`, and to the multiplications `e i` by the elements of a basis: on each
-summand, `R_D β` is then the iterated mate of `α`, which is invertible. -/
-lemma isIso_mateEquiv_app_of_isIso_biproductDesc {ι : Type} [Finite ι] (M : C)
+/-- A natural transformation `β : G ⋙ N_D ⟶ N_C ⋙ G'` whose mate `R_C ⋙ G ⟶ G' ⋙ R_D` along
+`N_C ⊣ R_C` and `N_D ⊣ R_D` is an isomorphism is itself an isomorphism at `M` in the following
+situation: `R_D` is conservative, and there are finitely many endomorphisms `e i` of `N_C M` and
+`e' i` of `N_D (G M)` compatible with `β`, such that the maps `M ⟶ R_C (N_C M)` and
+`G M ⟶ R_D (N_D (G M))` obtained by composing the units with `R_C (e i)` and `R_D (e' i)` exhibit
+the targets as biproducts of copies of `M` and of `G M`. Indeed, on each summand, `R_D β` is then
+the mate of `β`. -/
+lemma isIso_app_of_isIso_mateEquiv_of_isIso_biproductDesc (β : TwoSquare G N_C N_D G')
+    [IsIso (mateEquiv adj_C adj_D β)] {ι : Type} [Finite ι] (M : C)
     (e : ι → (N_C.obj M ⟶ N_C.obj M)) (e' : ι → (N_D.obj (G.obj M) ⟶ N_D.obj (G.obj M)))
-    (he : ∀ i, e' i ≫ (mateEquiv adj adj' α.hom).app M =
-      (mateEquiv adj adj' α.hom).app M ≫ G'.map (e i))
+    (he : ∀ i, e' i ≫ β.app M = β.app M ≫ G'.map (e i))
     [IsIso (biproduct.desc fun i ↦ adj_C.unit.app M ≫ R_C.map (e i))]
     [IsIso (biproduct.desc fun i ↦ adj_D.unit.app (G.obj M) ≫ R_D.map (e' i))] :
-    IsIso ((mateEquiv adj adj' α.hom).app M) := by
-  set β := mateEquiv adj adj' α.hom
+    IsIso (β.app M) := by
   set β' := mateEquiv adj_C adj_D β
-  have : IsIso β' := isIso_mateEquiv_mateEquiv adj adj' α adj_D adj_C
   have hu := unit_mateEquiv adj_C adj_D β M
   dsimp at hu
   -- the comparison `⨁ G M ⟶ G (⨁ M)` is invertible, `G` being additive
@@ -221,6 +219,27 @@ lemma isIso_mateEquiv_app_of_isIso_biproductDesc {ι : Type} [Finite ι] (M : C)
     exact IsIso.of_isIso_comp_left
       (biproduct.desc fun i ↦ adj_D.unit.app (G.obj M) ≫ R_D.map (e' i)) _
   exact isIso_of_reflects_iso _ R_D
+
+/-- The base change map `β : N_D (G M) ⟶ G' (N_C M)`, the mate of an isomorphism
+`α : N_D ⋙ F' ≅ F ⋙ N_C`, is an isomorphism at `M` in the following situation: `N_C ⊣ R_C` and
+`N_D ⊣ R_D` are adjunctions with `R_D` conservative, and there are finitely many endomorphisms
+`e i` of `N_C M` and `e' i` of `N_D (G M)` compatible with `β`, such that the maps
+`M ⟶ R_C (N_C M)` and `G M ⟶ R_D (N_D (G M))` obtained by composing the units with `R_C (e i)`
+and `R_D (e' i)` exhibit the targets as biproducts of copies of `M` and of `G M`.
+
+This applies to extension of scalars `N` along a finite free ring map, with right adjoint the
+restriction of scalars `R`, and to the multiplications `e i` by the elements of a basis: on each
+summand, `R_D β` is then the iterated mate of `α`, which is invertible
+(`CategoryTheory.Adjunction.isIso_app_of_isIso_mateEquiv_of_isIso_biproductDesc`). -/
+lemma isIso_mateEquiv_app_of_isIso_biproductDesc {ι : Type} [Finite ι] (M : C)
+    (e : ι → (N_C.obj M ⟶ N_C.obj M)) (e' : ι → (N_D.obj (G.obj M) ⟶ N_D.obj (G.obj M)))
+    (he : ∀ i, e' i ≫ (mateEquiv adj adj' α.hom).app M =
+      (mateEquiv adj adj' α.hom).app M ≫ G'.map (e i))
+    [IsIso (biproduct.desc fun i ↦ adj_C.unit.app M ≫ R_C.map (e i))]
+    [IsIso (biproduct.desc fun i ↦ adj_D.unit.app (G.obj M) ≫ R_D.map (e' i))] :
+    IsIso ((mateEquiv adj adj' α.hom).app M) := by
+  have := isIso_mateEquiv_mateEquiv adj adj' α adj_D adj_C
+  exact isIso_app_of_isIso_mateEquiv_of_isIso_biproductDesc adj_D adj_C _ M e e' he
 
 end BaseChange
 

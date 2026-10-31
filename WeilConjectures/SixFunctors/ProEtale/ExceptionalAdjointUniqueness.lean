@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.AmbientCounterexample
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ConstructibleUpperShriek
 
 /-!
 # The ambient exceptional adjoint restricts to the constructible one
