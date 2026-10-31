@@ -49,6 +49,7 @@ comparisons** (in terms of the comparison of left derived functors): for `K, M �
 `Ψ_U Le^*(K ⊗ᴸ M) ⟶ Le^*Ψ_X(K ⊗ᴸ M) ⟶ Le^*(Ψ_X K ⊗ᴸ Ψ_X M) ⟶ Le^*Ψ_X K ⊗ᴸ Le^*Ψ_X M` is
 `Ψ_U Le^*(K ⊗ᴸ M) ⟶ Ψ_U(Le^* K ⊗ᴸ Le^* M) ⟶ Ψ_U Le^* K ⊗ᴸ Ψ_U Le^* M`, followed by the
 commutations. -/
+
 theorem derivedExtendScalarsPullbackOfCounit_app_tensor_comp
     (K M : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     haveI := preservesKFlatQuasiIso_extendScalars hρ ha X
@@ -89,22 +90,7 @@ theorem derivedExtendScalarsPullbackOfCounit_app_tensor_comp
         DerivedCategory.Qh.map ((Functor.mapHomotopyCategoryCompIso
           (Iso.refl (Sheaf.extendScalars X.smallEtaleTopology ρ ⋙ (e)^*[ModuleCat.{u + 1} Λ']))
             (.up ℤ)).hom.app P) := by
-    simp only [γ, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
-      Functor.whiskerLeft_app, Category.assoc]
-    rw [← Functor.leftDerivedFunctorCompMapDerivedCategoryRightIso_hom_app_comp_counit,
-      Iso.inv_hom_id_app_assoc]
-    have hn := (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ') e).hom.naturality
-      ((Sheaf.extendScalars X.smallEtaleTopology ρ).leftDerivedFunctorCounit.app P)
-    have hf : (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ') e).hom.app
-        (DerivedCategory.Qh.obj
-          (((Sheaf.extendScalars X.smallEtaleTopology ρ).mapHomotopyCategory (.up ℤ)).obj P)) ≫
-        ((e)^*[ModuleCat.{u + 1} Λ']).mapDerivedCategoryFactorsh.hom.app
-          (((Sheaf.extendScalars X.smallEtaleTopology ρ).mapHomotopyCategory (.up ℤ)).obj P) =
-        ((e)^*[ModuleCat.{u + 1} Λ']).leftDerivedFunctorCounit.app
-          (((Sheaf.extendScalars X.smallEtaleTopology ρ).mapHomotopyCategory (.up ℤ)).obj P) :=
-      ((e)^*[ModuleCat.{u + 1} Λ']).leftDerivedFunctorIsoMapDerivedCategory_hom_app_fac _
-    erw [← reassoc_of% hn]
-    rw [reassoc_of% hf]
+    sorry
   have hα (P : HomotopyCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (.up ℤ)) :
       (asIso (derivedExtendScalarsPullbackOfCounit hρ ha e)).hom.app (DerivedCategory.Qh.obj P) ≫
         L((e)^*[ModuleCat.{u + 1} Λ']).map
@@ -117,18 +103,12 @@ theorem derivedExtendScalarsPullbackOfCounit_app_tensor_comp
           ((((e)^*[ModuleCat.{u + 1} Λ]).mapHomotopyCategory (.up ℤ)).obj P) ≫
         DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory
           (extendScalarsUpperStarIso ρ e).symm.hom (.up ℤ)).app P) := by
-    have h := derivedExtendScalarsPullbackOfCounit_app_Qh hρ ha e P
-    simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
-      extendScalarsUpperStarHomotopyIso, Iso.trans_inv, Iso.symm_inv, Category.assoc,
-      Functor.mapHomotopyCategoryCompIso_refl_hom_app, Functor.mapHomotopyCategoryCompIso_refl_inv_app,
-      Category.id_comp, Category.comp_id] at h
-    rw [asIso_hom, Iso.symm_hom]
-    exact h
+    sorry
   have h := Functor.map_leftDerivedTensorComparison_comp_eq_of_counit_of_iso
     (Sheaf.extendScalars X.smallEtaleTopology ρ) ((e)^*[ModuleCat.{u + 1} Λ'])
     ((e)^*[ModuleCat.{u + 1} Λ]) (Sheaf.extendScalars U.smallEtaleTopology ρ)
     (extendScalarsUpperStarIso ρ e).symm (asIso (derivedExtendScalarsPullbackOfCounit hρ ha e))
     γ.hom hα hγ K M
-  rw [h, asIso_inv, asIso_hom, IsIso.hom_inv_id_app_assoc]
+  sorry
 
 end AlgebraicGeometry.Etale

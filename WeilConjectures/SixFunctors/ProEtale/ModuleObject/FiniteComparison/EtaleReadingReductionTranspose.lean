@@ -44,6 +44,7 @@ variable (X : Scheme.{u}) {T T' : Type} [TopologicalSpace T] [CommRing T] [IsTop
   {a : ULift.{u + 1} T} (ha : RingHom.ker ρ.ulift = Ideal.span {a})
 
 set_option maxHeartbeats 800000 in
+-- the composites of derived functors between sheaf categories are slow to elaborate
 /-- **The compatibility of the extensions of scalars with the finite-coefficient comparison, in
 restriction form**: the transpose under `Ψ ⊣ Res` of `Ψ(Φ N) ≅ Φ'((𝒪') ⊗ᴸ N)` is `Φ` of the
 unit `N ⟶ Res((𝒪') ⊗ᴸ N)` of the condensed extension of scalars, followed by the commutation of
@@ -141,6 +142,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgC
   (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
 set_option maxHeartbeats 800000 in
+-- the composites of derived functors between sheaf categories are slow to elaborate
 /-- Blueprint `det-sp-purity-coefficient-change` (restriction form of `β`). **The transpose of
 `β : Ψ(ρ(red_{n+1} K)) ≅ ρ(red_n K)` under `Ψ ⊣ Res`**, followed by the base change map
 `Res Rν_* ⟶ Rν_* Res`, is `Rν_*` of `Φ` of the condensed transition
