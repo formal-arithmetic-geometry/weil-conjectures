@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension
 public import WeilConjectures.SixFunctors.Etale.Derived.LisseFieldDual
-public import WeilConjectures.SixFunctors.NearbyCycles.Basic
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ComparisonMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleOrigin
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.Monoidal
@@ -31,9 +30,6 @@ class is stable under the operations entering the Künneth formula for nearby cy
   (`DerivedCategory.torAmplitudeGE_of_isGE_of_forall_flat`).
 * **External products** `Lf₁^* A ⊗ Lf₂^* B`, when `T` is a field
   (`ProEtale.plusEtaleOrigin_finiteCoefficientDerivedEquivalence_tensorObj_leftDerivedUpperStar`).
-* **Nearby cycles** `Ψ = Li^* Rj_* Lε^*` of a model with `j` quasi-compact and quasi-separated
-  (`ProEtale.CondensedRing.NearbyCyclesModel.`
-  `plusEtaleOrigin_finiteCoefficientDerivedEquivalence_nearbyCycles_obj`).
 * **Bounded constructible complexes** are of étale origin
   (`ProEtale.plusEtaleOrigin_finiteCoefficientDerivedEquivalence_of_boundedConstructible`), in
   particular with coefficients `𝔽_E`
@@ -150,28 +146,6 @@ theorem plusEtaleOrigin_of_boundedConstructible_residueField {ℓ : ℕ} [Fact �
       (ModuleCat.{u + 1} (ULift.{u + 1} (integersResidueField ℓ E.1))) X
       ((finiteCoefficientDerivedEquivalence X (integersResidueField ℓ E.1)).functor.obj C) :=
   plusEtaleOrigin_finiteCoefficientDerivedEquivalence_of_boundedConstructible _ hC
-
-namespace NearbyCyclesModel
-
-/-- **Nearby cycles preserve module complexes of étale origin**: for a model `M` whose generic
-inclusion `j` is quasi-compact and quasi-separated, if `Φ A` is bounded below of étale origin, so
-is `Φ (Ψ A)` for `Ψ = Li^* Rj_* Lε^*`: each of the three functors preserves the class
-(`ProEtale.plusEtaleOrigin_finiteCoefficientDerivedEquivalence_leftDerivedUpperStar_obj`,
-`ProEtale.plusEtaleOrigin_finiteCoefficientDerivedEquivalence_rightDerivedLowerStar_obj`). -/
-theorem plusEtaleOrigin_finiteCoefficientDerivedEquivalence_nearbyCycles_obj
-    {X X' : Scheme.{u}} (M : NearbyCyclesModel X X') [QuasiCompact M.j] [QuasiSeparated M.j]
-    {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.continuousMapRingObj T) X))}
-    (hA : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} (ULift.{u + 1} T)) X
-      ((finiteCoefficientDerivedEquivalence X T).functor.obj A)) :
-    DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} (ULift.{u + 1} T)) X'
-      ((finiteCoefficientDerivedEquivalence X' T).functor.obj
-        ((M.nearbyCycles (Profinite.continuousMapRingObj T)).obj A)) :=
-  plusEtaleOrigin_finiteCoefficientDerivedEquivalence_leftDerivedUpperStar_obj T M.i
-    (plusEtaleOrigin_finiteCoefficientDerivedEquivalence_rightDerivedLowerStar_obj T M.j
-      (plusEtaleOrigin_finiteCoefficientDerivedEquivalence_leftDerivedUpperStar_obj T M.ε hA))
-
-end NearbyCyclesModel
 
 end CondensedRing
 

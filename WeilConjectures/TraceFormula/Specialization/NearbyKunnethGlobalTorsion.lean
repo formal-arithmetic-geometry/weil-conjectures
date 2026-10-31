@@ -9,6 +9,7 @@ public import WeilConjectures.SixFunctors.NearbyCycles.ProperExchangeFinite
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethGlobal
 public import WeilConjectures.TraceFormula.OrdinaryKunnethResidueField
 public import WeilConjectures.TraceFormula.Specialization.TraitNearbyMonoidalTorsion
+public import WeilConjectures.TraceFormula.Specialization.GenericDivisorFiniteTransfer
 import WeilConjectures.Tactic.TransportExact
 
 /-!
