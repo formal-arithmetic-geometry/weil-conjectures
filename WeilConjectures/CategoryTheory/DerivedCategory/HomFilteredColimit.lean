@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.CompactOfBoundedExt
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
+public import WeilConjectures.CategoryTheory.Abelian.HomologyFilteredColimit
 
 /-!
 # Morphisms out of an object of `D(C)` commuting with filtered colimits
@@ -561,6 +562,50 @@ lemma diagram {s : DerivedCategory C} (hs : HomCommutesWithFilteredColimits.{w} 
   exact (IsCoyonedaColimit.adjunction_iff
     (shiftEquiv' (DerivedCategory C) (-q) q (by lia)).toAdjunction s c).1
       (isCoyonedaColimit_of_isGE (hs.shift (-q)) (b + q) c a hY hc hH)
+
+/-- `HomCommutesWithFilteredColimits.diagram` for a filtered colimit `K = colim Kⱼ` of cochain
+complexes all of which vanish below a fixed degree `a`, indexed by a small category `J` in `Type`
+(colimits of shape `AsSmall J` being exact in `C`): for `s` bounded above, every morphism
+`s ⟶ K[q]` factors through some `Kⱼ[q]`, and two morphisms `s ⟶ Kⱼ[q]` with the same image in
+`Hom(s, K[q])` agree in some `Hom(s, Kⱼ'[q])`. -/
+lemma cochainComplex {s : DerivedCategory C} (hs : HomCommutesWithFilteredColimits.{w} s)
+    (b : ℤ) [s.IsLE b] {J : Type} [SmallCategory J] [IsFiltered J]
+    [HasColimitsOfShape (AsSmall.{w} J) C] [HasExactColimitsOfShape (AsSmall.{w} J) C]
+    (K : J ⥤ CochainComplex C ℤ) (a : ℤ) (hK : ∀ j, (K.obj j).IsStrictlyGE a) (c : Cocone K)
+    (hc : IsColimit c) (q : ℤ) :
+    (∀ f : s ⟶ (shiftFunctor _ q).obj (Q.obj c.pt),
+      ∃ (j : J) (g : s ⟶ (shiftFunctor _ q).obj (Q.obj (K.obj j))),
+        f = g ≫ (shiftFunctor _ q).map (Q.map (c.ι.app j))) ∧
+    (∀ (j : J) (g g' : s ⟶ (shiftFunctor _ q).obj (Q.obj (K.obj j))),
+      g ≫ (shiftFunctor _ q).map (Q.map (c.ι.app j)) =
+          g' ≫ (shiftFunctor _ q).map (Q.map (c.ι.app j)) →
+        ∃ (j' : J) (t : j ⟶ j'),
+          g ≫ (shiftFunctor _ q).map (Q.map (K.map t)) =
+            g' ≫ (shiftFunctor _ q).map (Q.map (K.map t))) := by
+  have : IsFiltered (AsSmall.{w} J) := IsFiltered.of_equivalence AsSmall.equiv
+  have hc' : IsColimit (c.whisker AsSmall.down) := hc.whiskerEquivalence AsSmall.equiv.symm
+  have hpt : c.pt.IsStrictlyGE a := by
+    rw [CochainComplex.isStrictlyGE_iff]
+    intro i hi
+    exact (isColimitOfPreserves (HomologicalComplex.eval C (ComplexShape.up ℤ) i) hc').isZero_pt
+      (Functor.isZero _ fun j ↦ (K.obj _).isZero_of_isStrictlyGE a i hi)
+  have hH (n : ℤ) : Nonempty (IsColimit ((homologyFunctor C n).mapCocone
+      (Q.mapCocone (c.whisker AsSmall.down)))) :=
+    ⟨(IsColimit.mapCoconeEquiv (homologyFunctorFactors C n).symm
+      (isColimitOfPreserves (HomologicalComplex.homologyFunctor C (ComplexShape.up ℤ) n)
+        hc')).ofIsoColimit (Cocone.ext (Iso.refl _))⟩
+  obtain ⟨h₁, h₂⟩ := hs.diagram b (AsSmall.{w} J) _ (Q.mapCocone (c.whisker AsSmall.down)) a
+    (fun j ↦ by
+      have := hK (AsSmall.down.obj j)
+      exact (inferInstance : (Q.obj (K.obj (AsSmall.down.obj j))).IsGE a))
+    (inferInstance : (Q.obj c.pt).IsGE a) hH q
+  refine ⟨fun f ↦ ?_, fun j g g' h ↦ ?_⟩
+  · obtain ⟨j, g, hg⟩ := h₁ f
+    exact ⟨AsSmall.down.obj j, g, hg⟩
+  · obtain ⟨j', t, ht⟩ := h₂ ⟨j⟩ (g - g') (by rw [sub_comp, sub_eq_zero]; exact h)
+    rw [sub_comp, sub_eq_zero] at ht
+    exact ⟨AsSmall.down.obj j', AsSmall.down.map t, ht⟩
+
 
 variable {C' : Type*} [Category* C'] [Abelian C'] [HasDerivedCategory C']
 
