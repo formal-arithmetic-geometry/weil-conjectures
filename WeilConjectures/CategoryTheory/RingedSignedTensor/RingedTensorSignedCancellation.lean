@@ -41,4 +41,12 @@ theorem nativeClosed_monoidal :
     (nativeClosed.{c, v, r, w} J R).monoidal = RingedDerivedNative.monoidal.{c, v, r, w} J R :=
   (RingedDerivedNative.closedAdjunction.{c, v, r, w} J R).choose_spec.1
 
+/-- The evaluation-preserving comparison with the native tensor.
+(blueprint: lem-sfb-ringed-tensor-signed-cancellation-Y2). -/
+def comparison
+    (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, r, w} J R)) :
+    S.tensor ≅ nativeTensor.{c, v, r, w} J R :=
+  CoefficientClosedStructure.comparison S (nativeClosed.{c, v, r, w} J R) ≪≫
+    eqToIso (congrArg (fun m ↦ @tensor _ _ m) (nativeClosed_monoidal.{c, v, r, w} J R))
+
 end CategoryTheory.RingedSignedTensor

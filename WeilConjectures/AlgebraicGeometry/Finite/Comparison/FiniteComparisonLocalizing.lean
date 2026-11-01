@@ -417,6 +417,24 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import Mathlib.CategoryTheory.Limits.FullSubcategory
 import WeilConjectures.AlgebraicGeometry.Finite.Comparison.FiniteComparisonPresentationSupplement
 import WeilConjectures.AlgebraicGeometry.Finite.Comparison.FiniteComparisonFaithful
+public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+public import WeilConjectures.AlgebraicGeometry.EtaleCechVanishingCriterion
+public import WeilConjectures.AlgebraicGeometry.EtaleSiteCechComplexComparison
+public import WeilConjectures.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
+public import WeilConjectures.AlgebraicGeometry.ModuleSheafConstantRingEquivalence
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Classical.ProEtaleClassicalBounds
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Classical.ProEtaleClassicalDirectImagePreservation
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Replete
+public import WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedDirectImageBoundedBelow
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftComplete
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
+public import WeilConjectures.CategoryTheory.Right.RightDerivedFunctorUpperBound
+public import WeilConjectures.CategoryTheory.Sites.InjectivePresheafModuleCechCocycleLiftMax
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
 /-!
 # Finite coefficient comparison on localizing closures
@@ -554,6 +572,33 @@ private theorem closureEquivalence (S : ObjectProperty C) (T : ObjectProperty D)
     obtain ⟨L, hL, ⟨e⟩⟩ := himage K.obj K.property
     exact ⟨⟨L, hL⟩, ⟨ObjectProperty.isoMk _ e⟩⟩
   exact { }
+
+/-- For the chosen open/proper factorization, the compact-support comparison is exactly
+alpha at j_! K followed by Rp_* of the open comparison. All values are ambient.
+Source: blueprint finite comparison, final paragraph of proof
+(blueprint: det-ctf-finite-comparison-localizing). -/
+def finiteComparisonCompactSupportMap {X P Y : Scheme.{u}} (j : X ⟶ P) (p : P ⟶ Y)
+    [IsOpenImmersion j]
+    (K : Etale.DerivedCategoryModule (ULift.{u + 1} B) X) :=
+  unboundedDirectImageComparisonMap (ULift.{u + 1} B) p
+      ((Etale.openImmersionLowerShriek
+        (ModuleCat.{u + 1} (ULift.{u + 1} B)) j).mapDerivedCategory.obj K) ≫
+    (ProEtale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} B)) p).rightDerivedFunctor.map
+      ((finiteComparisonOpenIso B j).hom.app K)
+
+/-- The canonical open-extension comparison, applied termwise and localized.
+Source: blueprint finite comparison, Operations; Stacks Tag 09AF
+(blueprint: det-ctf-finite-comparison-localizing). -/
+def finiteComparisonOpenIso {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
+    (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1} B)) j).mapDerivedCategory ⋙
+        (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1} B)) X).mapDerivedCategory ≅
+      (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1} B)) U).mapDerivedCategory ⋙
+        (openImmersionLowerShriek (ModuleCat.{u + 1} (ULift.{u + 1} B)) j).mapDerivedCategory :=
+  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    Functor.mapDerivedCategoryNatIso
+      (openImmersionLowerShriekComparisonUpperStarIso
+        (ModuleCat.{u + 1} (ULift.{u + 1} B)) j) ≪≫
+    Functor.mapDerivedCategoryCompIso _ _
 
 end CategoryTheory
 end LocalizingArgument
