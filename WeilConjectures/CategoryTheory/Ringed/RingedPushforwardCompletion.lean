@@ -109,8 +109,4 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.defeqAttrib.useBackward true in
 attribute [-instance] hasSheafCompose_of_preservesMulticospan
   hasSheafComposeEssentiallySmallSite in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 800000 in
--- The expanded image-ideal and reflector interfaces repeat several derived localizations.
 end CategoryTheory

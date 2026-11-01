@@ -163,6 +163,4 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor WeilConjectures
 open SheafOfModules MonoidalCategory
 namespace CategoryTheory
 
-set_option maxHeartbeats 800000 in
--- Representative descent composes the ordinary and derived comparison isomorphisms.
 end CategoryTheory

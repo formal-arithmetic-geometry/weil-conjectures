@@ -203,6 +203,4 @@ open scoped MonoidalCategory
 
 namespace CategoryTheory
 
-set_option maxHeartbeats 1600000 in
--- The image ideal interface elaborates several repeated underlying-sheaf functors.
 end CategoryTheory

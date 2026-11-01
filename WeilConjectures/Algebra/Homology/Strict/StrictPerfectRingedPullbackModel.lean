@@ -217,8 +217,6 @@ open CategoryTheory CategoryTheory.Limits
 open scoped ChangeOfRings
 namespace SheafOfModules
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 section DerivedHelpers
 open MonoidalCategory
 set_option backward.isDefEq.respectTransparency false
@@ -532,8 +530,6 @@ private theorem inverseImage_unit_iso :
   refine ⟨(fullyFaithfulForget _).preimageIso ep.symm, ?_⟩
   rfl
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 variable (uPush : Sheaf JD (Type r) ⥤ Sheaf JC (Type r))
   (adj : uInv ⊣ uPush) [hlim : PreservesFiniteLimits uInv]
   (hmap : ∀ {M N : ringedSiteModules.{r}
@@ -544,13 +540,6 @@ variable (uPush : Sheaf JD (Type r) ⥤ Sheaf JC (Type r))
 
 include adj hmap hlim hadd
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-omit adj hlim hadd in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-omit adj hmap hlim hadd in
-set_option linter.unusedSectionVars false in
 variable [HasDerivedCategory.{w} (ringedSiteModules.{r}
     ((sheafCompose JC (forget₂ CommRingCat.{r} RingCat.{r})).obj R))]
   [HasDerivedCategory.{w} (ringedSiteModules.{r}
@@ -562,6 +551,4 @@ variable [HasDerivedCategory.{w} (ringedSiteModules.{r}
   (epsilon : DerivedCategory.Qh ⋙ LF ⟶
     uStar.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh)
 
-set_option backward.isDefEq.respectTransparency false in
-set_option synthInstance.maxSize 2048 in
 end SheafOfModules

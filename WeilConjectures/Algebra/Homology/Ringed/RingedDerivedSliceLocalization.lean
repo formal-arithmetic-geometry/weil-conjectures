@@ -40,9 +40,4 @@ variable {D C : Type u} [SmallCategory D] [SmallCategory C]
   [HasDerivedCategory.{w} (SheafOfModules.{u}
     ((sheafCompose J (forget₂ CommRingCat RingCat)).obj S))]
 
-set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 800000 in
--- Instantiating the ordinary slice theorem elaborates its full dependent comparison package.
-set_option backward.isDefEq.respectTransparency.types false in
--- The normalization includes both universal transformations and the adjunction equations.
 end SheafOfModules

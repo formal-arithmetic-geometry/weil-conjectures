@@ -335,7 +335,6 @@ private def inverseImageUniverses
     convert h' using 1
     all_goals rfl
 
-open MonoidalCategory in
 namespace LocalizationSequence
 
 set_option linter.unusedSectionVars false

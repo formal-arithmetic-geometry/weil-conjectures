@@ -67,8 +67,4 @@ private noncomputable def sectionEquiv {C : Type u} [SmallCategory C]
   (Iso.homCongr ((representableLiftIso F hrep).app U) (Iso.refl B)).trans
     (((sheafificationAdjunction J (Type u)).homEquiv _ _).trans yonedaEquiv)
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 end CategoryTheory

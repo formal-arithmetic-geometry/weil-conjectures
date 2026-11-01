@@ -157,8 +157,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace SheafOfModules
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 variable {D C : Type u} [SmallCategory D] [SmallCategory C]
   {K : GrothendieckTopology D} {J : GrothendieckTopology C}
   (u : D ⥤ C) [u.IsContinuous K J]
@@ -169,8 +167,4 @@ variable {D C : Type u} [SmallCategory D] [SmallCategory C]
   [HasDerivedCategory.{w} (SheafOfModules.{u}
     ((sheafCompose J (forget₂ CommRingCat RingCat)).obj S))]
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 800000 in
--- Derived comparisons use both complex and homotopy localization presentations.
 end SheafOfModules

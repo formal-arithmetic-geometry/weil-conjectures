@@ -242,8 +242,4 @@ private theorem quasiIso_twoOutOfThree
       simpa only [Functor.map_comp] using hfg n
     exact IsIso.of_isIso_comp_left (H.map f) (H.map g)
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 200000 in
--- The proof uses both complex and homotopy localization presentations.
 end CategoryTheory

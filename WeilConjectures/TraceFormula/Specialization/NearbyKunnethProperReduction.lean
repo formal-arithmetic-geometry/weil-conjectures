@@ -53,8 +53,6 @@ variable {k' : Type u} [Field k'] [IsSepClosed k'] [Fact (ringChar k').Prime]
   {qM : M.total ⟶ trait k'} {gM : M.generic ⟶ Spec (.of (traitGenericField k'))}
   {qN : N.total ⟶ trait k'} {gN : N.generic ⟶ Spec (.of (traitGenericField k'))}
 
-omit [IsSepClosed k'] [Fact (ringChar k').Prime] in
-omit [IsSepClosed k'] [Fact (ringChar k').Prime] in
 omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
 /-- The Künneth formula for products over the trait of proper models with compatible projections
 applies to the product `X̄ ×_S Ȳ` of the standard models of proper schemes over the trait. -/

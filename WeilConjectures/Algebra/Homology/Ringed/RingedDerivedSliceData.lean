@@ -57,5 +57,4 @@ variable [HasDerivedCategory.{w} (SheafOfModules.{u}
   [HasDerivedCategory.{w} (SheafOfModules.{u}
     ((sheafCompose J (forget₂ CommRingCat RingCat)).obj S))]
 
-set_option backward.isDefEq.respectTransparency false in
 end SheafOfModules

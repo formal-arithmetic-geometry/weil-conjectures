@@ -156,7 +156,4 @@ variable {D C : Type u} [SmallCategory D] [SmallCategory C]
   [HasDerivedCategory.{w} (SheafOfModules.{u}
     ((sheafCompose J (forget₂ CommRingCat RingCat)).obj S))]
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency.types false in
 end SheafOfModules

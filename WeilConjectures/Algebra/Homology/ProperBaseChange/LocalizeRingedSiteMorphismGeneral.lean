@@ -43,7 +43,4 @@ variable {D C : Type u} [SmallCategory D] [SmallCategory C]
   {R : Sheaf K CommRingCat.{u}} {S : Sheaf J CommRingCat.{u}}
   (a : R ⟶ (u.sheafPushforwardContinuous CommRingCat.{u} K J).obj S)
 
-set_option linter.unusedVariables false in
-set_option maxHeartbeats 800000 in
--- The statement expands the set, ring and module comparison squares.
 end SheafOfModules

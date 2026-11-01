@@ -68,8 +68,6 @@ private def sliceEquivalence {C : Type u} [SmallCategory C]
 
 open CategoryTheory.MonoidalCategory CategoryTheory.CartesianMonoidalCategory
 
-omit [(Over.post (X := V) f).IsContinuous (K.over V) (J.over (f.obj V))] in
-omit [(Over.post (X := V) f).IsContinuous (K.over V) (J.over (f.obj V))] in
 end CategoryTheory
 namespace CategoryTheory
 variable {D C : Type u} [SmallCategory D] [SmallCategory C]

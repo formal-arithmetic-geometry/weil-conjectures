@@ -257,8 +257,7 @@ structure Comparison where
 
 attribute [local semireducible] scalarSection
 
-omit [HasDerivedCategory.{wR} (Modules R)] [HasDerivedCategory.{wB} (Modules B)] in
-omit [HasDerivedCategory.{wR} (Modules R)] [HasDerivedCategory.{wB} (Modules B)] in
+omit [HasDerivedCategory.{wR} (Modules R)] in
 private theorem flat_representatives (M : DerivedCategory (Modules B)) :
     ∃ P : CochainComplex (Modules B) ℤ,
       CochainComplex.IsKFlatIndependentCoefficients (R := B) P ∧

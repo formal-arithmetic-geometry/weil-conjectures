@@ -189,7 +189,4 @@ variable {C : Type u} [SmallCategory C] {τ : GrothendieckTopology C}
   [HasDerivedCategory.{wA} (ringedSiteModules.{u} R)]
   [HasDerivedCategory.{wB} (ℕᵒᵖ ⥤ ringedSiteModules.{u} R)]
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 end CategoryTheory

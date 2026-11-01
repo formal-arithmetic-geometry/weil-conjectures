@@ -126,10 +126,6 @@ private noncomputable def ringOne.{uC, vC, w} {C : Type uC} [Category.{vC} C]
        ext x
        exact (G.obj.map f).hom.map_one |>.symm }⟩
 
-set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 600000 in
--- Product comparisons and sectionwise operations require repeated functor reduction.
-set_option backward.isDefEq.respectTransparency false in
 variable {D C : Type u} [SmallCategory D] [SmallCategory C]
   {K : GrothendieckTopology D} {J : GrothendieckTopology C}
   (u : D ⥤ C) [u.IsContinuous K J] (V : D)

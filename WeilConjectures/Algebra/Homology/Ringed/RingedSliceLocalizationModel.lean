@@ -90,14 +90,4 @@ variable {D C : Type u} [SmallCategory D] [SmallCategory C]
   {R : Sheaf K CommRingCat.{u}} {S : Sheaf J CommRingCat.{u}}
   (a : R ⟶ (u.sheafPushforwardContinuous CommRingCat.{u} K J).obj S)
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 800000 in
--- Elaborate the dependent colimit cocone comparisons without unfolding their constructions.
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 800000 in
--- Elaborate the single-complex comparison with the explicit scalar-image casts.
-set_option backward.isDefEq.respectTransparency.types false in
 end SheafOfModules
