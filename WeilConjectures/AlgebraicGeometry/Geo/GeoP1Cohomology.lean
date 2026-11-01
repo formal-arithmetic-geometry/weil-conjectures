@@ -242,6 +242,12 @@ import WeilConjectures.CategoryTheory.DerivedCategory.HomSingleProjective
 import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteFibreHomologyComparison
 import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1FibreHomologyCard
 import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteClassComparison
+public import WeilConjectures.ProperBaseChange.RingedTopoiDerivedPullback
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarProjComparison
+public import WeilConjectures.SmoothPurity.EtaleFiniteTwistPullbackRest
+public import WeilConjectures.SmoothPurity.FiniteEtaleTateLinePullback
+public import WeilConjectures.SmoothPurity.FiniteP1ChernMapBaseChange
+public import WeilConjectures.SmoothPurity.OrdinaryFiniteTwistTransportUniqueness
 
 /-!
 # The ordinary pro-etale projective-line decomposition and trace
@@ -464,6 +470,202 @@ def geoP1Trace (A : Type (u + 1)) [CommRing A] (N : ℕ) (hA : (N : A) = 0)
     (geoP1Pushforward A (ProjectiveLine S ↘ S)).obj
       (geoP1Twist A N hA (ProjectiveLine S) 1 2) ⟶ geoP1Unit A S :=
   b.inv ≫ biprod.snd
+
+/-- Exact comparison preserves the ordered binary sum.
+Source: blueprint proof step 3 (blueprint: sk-lem-geo-p1-cohomology). -/
+private theorem geoP1_sumComparison_isIso (A : Type (u + 1)) [CommRing A] (S : Scheme.{u})
+    (K L : Etale.DerivedCategoryModule A S) : IsIso (geoP1SumComparison A S K L) := by
+  have : PreservesBinaryBiproducts (geoP1Comparison A S) :=
+    preservesBinaryBiproducts_of_preservesBiproducts _
+  change IsIso ((geoP1Comparison A S).mapBiprod K L).inv
+  infer_instance
+
+private lemma geoP1_mate_whiskerTop
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    {L₁ : A ⥤ B} {R₁ : B ⥤ A} {L₂ : C ⥤ D} {R₂ : D ⥤ C}
+    (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)
+    {G G' : A ⥤ C} {H : B ⥤ D}
+    (α : TwoSquare G' L₁ L₂ H) (γ : G ⟶ G') (K : B) :
+    (mateEquiv adj₁ adj₂ (α.whiskerTop γ)).app K =
+      γ.app (R₁.obj K) ≫ (mateEquiv adj₁ adj₂ α).app K := by
+  simp [mateEquiv, TwoSquare.whiskerTop]
+
+private lemma geoP1_mate_whiskerBottom
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    {L₁ : A ⥤ B} {R₁ : B ⥤ A} {L₂ : C ⥤ D} {R₂ : D ⥤ C}
+    (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)
+    {G : A ⥤ C} {H H' : B ⥤ D}
+    (α : TwoSquare G L₁ L₂ H) (δ : H ⟶ H') (K : B) :
+    (mateEquiv adj₁ adj₂ (α.whiskerBottom δ)).app K =
+      (mateEquiv adj₁ adj₂ α).app K ≫ R₂.map (δ.app K) := by
+  simp [mateEquiv, TwoSquare.whiskerBottom, ← Functor.map_comp, δ.naturality]
+
+/-- The canonical direct-image comparison mate is invertible on bounded-below objects
+for a quasi-compact quasi-separated morphism: it is the mate of the left-derived
+comparison square, whiskered by the identifications of the left-derived comparison
+with the exact one, and that mate is invertible on D+.
+Source: blueprint proof step 3 (blueprint: sk-lem-geo-p1-cohomology). -/
+private theorem geoP1_pushComparison_isIso (A : Type (u + 1)) [CommRing A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
+    (K : Etale.DerivedCategoryModule A X) (hK : DerivedCategory.TStructure.t.plus K) :
+    IsIso (geoP1PushComparison A f K) := by
+  let α := TwoSquare.mk _ _ _ _
+    (leftDerivedComparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} A) f).hom
+  let eY :=
+    (comparisonUpperStar (ModuleCat.{u + 1} A) Y).leftDerivedFunctorIsoMapDerivedCategory
+  let eX :=
+    (comparisonUpperStar (ModuleCat.{u + 1} A) X).leftDerivedFunctorIsoMapDerivedCategory
+  have hs : (α.whiskerTop eY.inv).whiskerBottom eX.hom =
+      TwoSquare.mk _ _ _ _ (geoP1PullComparison A f).hom := by
+    ext M
+    simp only [α, eY, eX, TwoSquare.mk, TwoSquare.whiskerTop_app, TwoSquare.whiskerBottom_app,
+      leftDerivedComparisonUpperStarCompUpperStarIso, Functor.leftDerivedFunctorCompNatIso,
+      Functor.leftDerivedFunctorCompIso, Functor.leftDerivedFunctorNatIso,
+      geoP1PullComparison, leftDerivedUpperStarIsoMapDerivedCategory,
+      Etale.leftDerivedUpperStarIsoMapDerivedCategory,
+      Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv, NatTrans.comp_app,
+      Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.isoWhiskerLeft_hom,
+      Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_inv,
+      Functor.isoWhiskerRight_inv, Category.assoc, Iso.inv_hom_id_app_assoc]
+    simp only [Iso.inv_hom_id_app, NatTrans.naturality_assoc,
+      ← Functor.map_comp_assoc, CategoryTheory.Functor.map_id, Category.id_comp]
+    erw [Category.comp_id]
+  have hm := isIso_mateEquiv_leftDerivedComparisonUpperStarCompUpperStarIso_app
+    (ModuleCat.{u + 1} A) f K hK
+  have hmate : IsIso ((mateEquiv
+      (Etale.derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)
+      (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)
+      ((α.whiskerTop eY.inv).whiskerBottom eX.hom)).app K) := by
+    rw [geoP1_mate_whiskerBottom, geoP1_mate_whiskerTop]
+    infer_instance
+  rw [hs] at hmate
+  simpa [geoP1PushComparison, mateEquiv, Adjunction.homEquiv_unit, TwoSquare.mk,
+    geoP1Comparison, geoP1Pushforward, Etale.ordinaryFinitePushforward] using hmate
+
+/-- The untwisted decomposition map (7.2) is invertible for a fixed Noetherian base.
+Source: blueprint sk-lem-geo-p1-cohomology, paragraph 2 (node step 3)
+(blueprint: geo-p1-decomposition-isIso-step).
+
+Proof: the normalized datum's decomposition has hom the biproduct of the shifted
+twisted unit and the pushed-forward Chern adjunct (`decomposition_hom`), so that
+biproduct map is invertible; the finite-line cancellation
+`isIso_p1DecompositionMap_of_twisted` makes the ordinary untwisted map invertible.
+The exact comparison preserves binary biproducts and maps isomorphisms to
+isomorphisms, and the canonical direct-image comparison mate is invertible on the
+bounded-below constant object because the projective line is proper, hence qcqs. -/
+theorem geoP1_decomposition_isIso_step
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
+    (S : Scheme.{u}) [IsNoetherian S]
+    (hS : IsUnit (N : Γ(S, ⊤))) :
+    IsIso (geoP1DecompositionMap A N hN hA S hS) := by
+  let d := Etale.projectiveLineTraceDatum N hN A hA S hS
+  have : IsProper (ProjectiveLine S ↘ S) := ProjectiveSpace.instIsProper (ULift.{u} (Fin 2)) S
+  have hb : IsIso (biprod.desc
+      (Etale.ordinaryFiniteP1Unit A N hA (Etale.projectiveLineTraceTransport N hN A hA) S hS)
+      (Etale.ordinaryFiniteP1ChernPushforward A N hA S d.chern)) := by
+    rw [← d.decomposition_hom]
+    infer_instance
+  have := Etale.isIso_p1DecompositionMap_of_twisted A N hN hA
+    (Etale.projectiveLineTraceTransport N hN A hA) S hS d.chern hb
+  have := geoP1_sumComparison_isIso A S (Etale.ordinaryFiniteUnit A S)
+    (Etale.p1DecompositionTwist A N hA S (-1) (-2))
+  have := geoP1_pushComparison_isIso A (ProjectiveLine S ↘ S)
+    (Etale.ordinaryFiniteUnit A _) ⟨0, inferInstance⟩
+  unfold geoP1DecompositionMap
+  infer_instance
+
+/-- The transported ordinary decomposition square is the untwisted base-change
+identity. This is node step 4 for the untwisted summands, one square only.
+Source: blueprint sk-lem-geo-p1-cohomology, paragraph 2 (node step 4)
+(blueprint: geo-p1-untwisted-square-step).
+
+Proof (to be written): restrict the unbounded etale proper exchange to the
+bounded-below exchange (`unboundedEtaleCompactSupport_baseChange`, identity
+compactification of the proper projection) and identify it with the pro-etale
+exchange by `comparison_derivedBaseChangeMap`. Transport the ordinary untwisted
+decomposition square of the normalized datum through the comparison; datum
+uniqueness fixes the ordinary square and the decomposition-maps definition fixes the
+source map; compose with each biproduct injection. -/
+theorem geoP1_untwisted_square_step
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
+    {S' S : Scheme.{u}} [IsNoetherian S'] [IsNoetherian S]
+    (g : S' ⟶ S) (hS : IsUnit (N : Γ(S, ⊤)))
+    (hS' : IsUnit (N : Γ(S', ⊤))) :
+    (geoP1Pullback A g).map (geoP1DecompositionMap A N hN hA S hS) ≫
+        geoP1UnitExchange A g =
+      geoP1SourceMap A N hN hA g hS ≫
+        geoP1DecompositionMap A N hN hA S' hS' := by
+  sorry
+
+/-- The twisted decomposition map (twist of (7.2) by (1)[2]) is invertible for a fixed
+Noetherian base.
+Source: blueprint sk-lem-geo-p1-cohomology, paragraph 2 (node step 3)
+(blueprint: geo-p1-twisted-isIso-step).
+
+Proof: it is the sum comparison (invertible: the exact comparison preserves binary
+biproducts), then the comparison image of the normalized datum's decomposition
+isomorphism, then the canonical direct-image comparison mate on the positive line
+shifted by two, which is bounded below; the mate is invertible there because the
+projective line is proper, hence qcqs. -/
+theorem geoP1_twisted_isIso_step
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
+    (S : Scheme.{u}) [IsNoetherian S]
+    (hS : IsUnit (N : Γ(S, ⊤))) :
+    IsIso (geoP1TwistedMap A N hN hA S hS) := by
+  have : IsProper (ProjectiveLine S ↘ S) := ProjectiveSpace.instIsProper (ULift.{u} (Fin 2)) S
+  have := geoP1_sumComparison_isIso A S
+    (Etale.p1DecompositionTwist A N hA S 1 2) (Etale.ordinaryFiniteUnit A S)
+  have := geoP1_pushComparison_isIso A (ProjectiveLine S ↘ S)
+    ((Etale.ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧)
+    (DerivedCategory.TStructure.t.plus.le_shift (2 : ℤ) _ ⟨0, inferInstance⟩)
+  unfold geoP1TwistedMap
+  infer_instance
+
+/-- The transported shifted-line decomposition square, before projection to the trace.
+Source: blueprint sk-lem-geo-p1-cohomology, paragraph 2 (node step 4)
+(blueprint: geo-p1-twisted-square-step).
+
+Proof (to be written): as for the untwisted square, with the shifted positive line:
+the bounded-below exchange identified with the pro-etale exchange by
+`comparison_derivedBaseChangeMap` transports the ordinary twisted decomposition
+square of the normalized datum (fixed by datum uniqueness, with the roots-normalized
+twist pullback fixed by transport uniqueness); compose with each biproduct
+injection. -/
+theorem geoP1_twisted_square_step
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
+    {S' S : Scheme.{u}} [IsNoetherian S'] [IsNoetherian S]
+    (g : S' ⟶ S) (hS : IsUnit (N : Γ(S, ⊤)))
+    (hS' : IsUnit (N : Γ(S', ⊤))) :
+    (geoP1Pullback A g).map (geoP1TwistedMap A N hN hA S hS) ≫
+        geoP1TwistExchange A N hN hA g hS =
+      biprod.lift
+          ((geoP1Pullback A g).map biprod.fst ≫
+            (geoP1TwistPullback A N hN hA g hS 1 2).hom)
+          ((geoP1Pullback A g).map biprod.snd ≫
+            (geoP1UnitPullback A g).hom) ≫
+        geoP1TwistedMap A N hN hA S' hS' := by
+  sorry
+
+private theorem geoP1_trace_projection_step
+    {C D : Type*} [Category C] [Category D] [HasZeroMorphisms C]
+    [HasZeroMorphisms D] [HasBinaryBiproducts C] [HasBinaryBiproducts D]
+    (F : C ⥤ D) {X Y Z : C} {X' Y' Z' : D}
+    (b : (X ⊞ Y) ≅ Z) (b' : (X' ⊞ Y') ≅ Z')
+    (a : F.obj X ⟶ X') (e : F.obj Y ⟶ Y') (k : F.obj Z ⟶ Z')
+    (h : F.map b.hom ≫ k =
+      biprod.lift (F.map biprod.fst ≫ a) (F.map biprod.snd ≫ e) ≫ b'.hom) :
+    F.map (b.inv ≫ biprod.snd) ≫ e = k ≫ b'.inv ≫ biprod.snd := by
+  apply (cancel_epi (F.map b.hom)).mp
+  rw [← Functor.map_comp_assoc, b.hom_inv_id_assoc]
+  symm
+  calc
+    F.map b.hom ≫ k ≫ b'.inv ≫ biprod.snd =
+        (F.map b.hom ≫ k) ≫ b'.inv ≫ biprod.snd := by rw [Category.assoc]
+    _ = _ := by rw [h, Category.assoc, b'.hom_inv_id_assoc, biprod.lift_snd]
 
 @[irreducible]
 private def normalizedTransport (A : Type (u + 1)) [CommRing A]
