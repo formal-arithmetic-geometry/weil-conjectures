@@ -38,3 +38,59 @@ variable (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
   [hDim : Fact (∃ n : ℕ, topologicalKrullDim X ≤ (n : WithBot ℕ∞))]
 
 end AlgebraicGeometry.Scheme
+
+namespace AlgebraicGeometry.Scheme
+
+/-- The recorded signed root line, transported along the fixed coefficient isomorphism.
+Source: blueprint signed-power definition
+(blueprint: def-coefficient-twists-detailed). -/
+def pbcTateLineSheaf (m : ℤ) : pbcModules X (pbcAdicCompletion X (pbcIntegralDatum l E)) :=
+  (pbcRestrict (purCoefficientIso l E X).hom).obj
+    (coefficientTwistLine X
+      (R := completedIntegralCommRingSheafUnrestricted l E X) (purTwistIntegralModule X l E) m)
+
+/-- Ordinary sheaf tensor by the same line, in the actual PBC module category.
+Source: blueprint tensor-twist definition
+(blueprint: def-coefficient-twists-detailed). -/
+def pbcTateSheafTensor (m : ℤ) :
+    pbcModules X (pbcAdicCompletion X (pbcIntegralDatum l E)) ⥤
+      pbcModules X (pbcAdicCompletion X (pbcIntegralDatum l E)) :=
+  purOrdinaryCoefficientModel l E X ⋙ integralSheafTwist l E X m ⋙
+    pbcRestrict (purCoefficientIso l E X).hom
+
+/-- The actual derived tensor: flatness permits termwise tensor on every complex.
+Source: blueprint tensor-twist definition
+(blueprint: def-coefficient-twists-detailed). -/
+def pbcTateAmbient (m : ℤ) :
+    PbcCompletedDerived X (pbcIntegralDatum l E) ⥤
+      PbcCompletedDerived X (pbcIntegralDatum l E) :=
+  (pbcTateSheafTensor l X E m).mapDerivedCategory
+
+/-- Tensor by the root line preserves the three defining integral conditions.
+Source: blueprint integral tensor-twist definition
+(blueprint: def-coefficient-twists-detailed).
+Proof: locally trivialize the root line on its compatible primitive-root covers.
+Its positive powers, the unit, and its dual powers are invertible lines. Tensor
+is locally the identity, commutes with each finite reduction, and preserves the
+common bounded interval, stratification and normalized etale-origin witnesses.
+It also preserves the completion comparison: a finite projective factor commutes
+with the reduction tower and its derived limit. Descend along these covers and
+transport through the finite-projection-normalized coefficient isomorphism. -/
+theorem pbcTateAmbient_mem [IsNoetherian X]
+    (_hDim : ∃ n : ℕ, topologicalKrullDim X ≤ (n : WithBot ℕ∞))
+    (m : ℤ) (K : PbcBoundedConstructibleComplete X (pbcIntegralDatum l E)) :
+    PbcIsBoundedConstructibleComplete X (pbcIntegralDatum l E)
+      ((pbcTateAmbient l X E m).obj K.obj) := by
+  sorry
+
+/-- Rational tensor by the actual signed line at the specified finite field.
+Source: blueprint rational tensor-twist definition
+(blueprint: def-coefficient-twists-detailed). -/
+def pbcTateRational (F : Padic.FiniteCoefficientFields l Ω) (m : ℤ) :
+    pbcStageCategory l Ω X F ⥤ pbcStageCategory l Ω X F :=
+  pbcConditionalRational (pbcStageDatum.{u} l Ω F)
+    (pbcTateAmbient l X (pbcFiniteField.{u} l Ω F) m)
+    (pbcTateAmbient_mem l X (pbcFiniteField.{u} l Ω F) hDim.out m)
+    (pbcStageUniformizer.{u} l Ω F)
+
+end AlgebraicGeometry.Scheme

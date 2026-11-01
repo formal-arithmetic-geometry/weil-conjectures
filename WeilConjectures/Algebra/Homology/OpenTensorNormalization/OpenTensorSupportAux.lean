@@ -32,6 +32,45 @@ private theorem ordinaryUnit_isIso {m : Mode} {U X : Scheme.{u}}
   rw [h]
   infer_instance
 
+private theorem derivedUnit_isIso {m : Mode} {U X : Scheme.{u}}
+    {j : U ⟶ X} [IsOpenImmersion j] {R : Sheaf (topology m X) CommRingCat.{u + 1}}
+    (o : OpenExtension m j R) (M : Der (restrictRing m j R)) :
+    IsIso ((exactDerivedAdjunction o.adjunction).unit.app M) := by
+  let a := exactDerivedAdjunction o.adjunction
+  have hQ (P : CochainComplex (Mod (restrictRing m j R)) ℤ) :
+      IsIso (a.unit.app (DerivedCategory.Q.obj P)) := by
+    have hP : IsIso ((o.adjunction.mapHomologicalComplex (.up ℤ)).unit.app P) := by
+      have hn : ∀ n : ℤ,
+          IsIso (((o.adjunction.mapHomologicalComplex (.up ℤ)).unit.app P).f n) :=
+        fun n ↦ ordinaryUnit_isIso o (P.X n)
+      exact HomologicalComplex.Hom.isIso_of_components _
+    have hu : a.unit.app (DerivedCategory.Q.obj P) =
+        DerivedCategory.Q.map ((o.adjunction.mapHomologicalComplex (.up ℤ)).unit.app P) ≫
+          (restrict m j R).mapDerivedCategoryFactors.inv.app _ ≫
+            (restrict m j R).mapDerivedCategory.map
+              (o.ordinary.mapDerivedCategoryFactors.inv.app P) := by
+      simp only [a, exactDerivedAdjunction, Adjunction.localization_unit_app]
+      rfl
+    rw [hu]
+    infer_instance
+  exact (NatTrans.isIso_app_iff_of_iso a.unit (DerivedCategory.Q.objObjPreimageIso M)).mp
+    (hQ (DerivedCategory.Q.objPreimage M))
+
+private theorem isIso_of_adjunct
+    {A B : Type*} [Category A] [Category B] {F : A ⥤ B} {G : B ⥤ A}
+    (a : F ⊣ G) [IsIso a.unit] {X : B} {Y : A} (f : F.obj Y ⟶ X)
+    (hf : IsIso (a.homEquiv _ _ f)) (hs : F.essImage X) : IsIso f := by
+  have : F.Full := a.fullyFaithfulLOfIsIsoUnit.full
+  have : F.Faithful := a.fullyFaithfulLOfIsIsoUnit.faithful
+  have : IsIso (a.counit.app X) := a.isIso_counit_app_iff_mem_essImage.mpr hs
+  have := hf
+  have he : f = F.map (a.homEquiv _ _ f) ≫ a.counit.app X := by
+    exact ((a.homEquiv _ _).symm_apply_apply f).symm
+  rw [he]
+  infer_instance
+
+-- Tensor-model descent lets us use a native comparison with only one K-flat input.
+
 private theorem nativeTensorIso_exists
     {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
     {J : GrothendieckTopology C} {R : Sheaf J CommRingCat.{u + 1}}
@@ -82,6 +121,48 @@ private theorem sliceTensor_supported
   obtain ⟨θ⟩ := ringedSlice_extension_tensor.{u + 1, u + 1, u} J R W
   exact Functor.essImage.ofIso (ringedOpenSheafComparison.{u + 1, u, u + 1} R W θ M N)
     ((localizedSystemExtension.{u + 1, u, u + 1} R W).obj_mem_essImage _)
+
+private theorem ordinaryTensor_supported {U X : Scheme.{u}}
+    {j : U ⟶ X} [IsOpenImmersion j]
+    {R : Sheaf (topology .ordinary X) CommRingCat.{u + 1}}
+    (o : OpenExtension .ordinary j R) (M : Mod (restrictRing .ordinary j R))
+    (N : Mod R) : o.ordinary.essImage (((tensor R).obj (o.ordinary.obj M)).obj N) := by
+  have : EssentiallySmall.{u + 1} X.ProEt := essentiallySmallSelf.{0, u, u + 1} _
+  have : EssentiallySmall.{u + 1} U.ProEt := essentiallySmallSelf.{0, u, u + 1} _
+  let W : X.ProEt := ProEt.mk j
+  let A := (sheafCompose (ProEt.topology X)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R
+  let e := ProEt.sliceEquiv X W
+  have : e.inverse.IsDenseSubsite (ProEt.topology U) ((ProEt.topology X).over W) :=
+    ProEt.sliceDense X W
+  let B := (sheafCompose (ProEt.topology U)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (restrictRing .ordinary j R)
+  let c : B ≅ (e.inverse.sheafPushforwardContinuous RingCat.{u + 1}
+      (ProEt.topology U) ((ProEt.topology X).over W)).obj (A.over W) := Iso.refl _
+  obtain ⟨q, hq⟩ := ProEt.module_transport.{u} ((ProEt.topology X).over W)
+    (ProEt.topology U) e (A.over W) B c
+  let E := localizedSystemExtension.{u + 1, u, u + 1} R W
+  let a₀ : E ⊣ overFunctor.{u + 1} A W := localizedSystemAdjunction R W
+  let L := q.inverse ⋙ E
+  let a : L ⊣ restrict .ordinary j R :=
+    (q.symm.toAdjunction.comp a₀).ofNatIsoRight (by
+      apply Functor.fullyFaithfulCancelRight (forget B)
+      change overFunctor.{u + 1} A W ⋙ q.functor ⋙ forget B ≅
+        restrict .ordinary j R ⋙ forget B
+      rw [hq]
+      refine NatIso.ofComponents (fun M ↦ ?_) ?_
+      · exact PresheafOfModules.isoMk (fun V ↦ Iso.refl _) (by intros; rfl)
+      · intro M N f
+        ext V x
+        rfl)
+  let α : L ≅ o.ordinary := a.leftAdjointUniq o.adjunction
+  have hE := sliceTensor_supported R W (q.inverse.obj M) N
+  obtain ⟨P, ⟨β⟩⟩ := hE
+  refine ⟨q.functor.obj P, ⟨?_⟩⟩
+  exact (α.app _).symm ≪≫ E.mapIso (q.unitIso.app P).symm ≪≫ β ≪≫
+    ((tensor R).mapIso (α.app M)).app N
+
+-- Check support using the counit, whose invertibility is detected at each coefficient level.
 
 private theorem systemSliceTensor_supported
     {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
