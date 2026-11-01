@@ -149,6 +149,24 @@ set_option backward.isDefEq.respectTransparency.types false
 universe u w
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace CategoryTheory
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem complete_of_iso
+    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
+    (O : Sheaf J CommRingCat.{u})
+    [HasDerivedCategory.{w} (ringedSiteModules.{u}
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))]
+    [∀ U : C, HasDerivedCategory.{w} (ringedSiteModules.{u}
+      ((sheafCompose (J.over U) (forget₂ CommRingCat RingCat)).obj (O.over U)))]
+    (I : ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))
+    (ι : I ⟶ SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))
+    {N M : ringedSiteDerived O} (e : N ≅ M)
+    (hN : IsLocallyDerivedRingedIdealComplete O I ι N) :
+    IsLocallyDerivedRingedIdealComplete O I ι M := by
+  intro U f hf
+  let H := derivedInternalHom (J.over U) (O.over U)
+  exact (hN U f hf).of_iso
+    (H.mapIso ((Iso.refl _).prod ((ringedDerivedRestriction O U).mapIso e))).symm
 variable {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
   (R : Sheaf J CommRingCat.{u})
 set_option hygiene false in

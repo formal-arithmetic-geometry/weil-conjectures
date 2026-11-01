@@ -105,117 +105,6 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 
 attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmetricCategory
 
-/-- The existing ringed adjunction supplies this compact left-adjoint instance.
-Source: Stacks 03D7 (blueprint: def-pd-proetale-section-module-functors). -/
-instance pullback_isLeftAdjoint {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    (pullback Λ f).IsLeftAdjoint := (adjunction Λ f).isLeftAdjoint
-
-/-- The existing ringed adjunction supplies this compact right-adjoint instance.
-Source: Stacks 03D7 (blueprint: def-pd-proetale-section-module-functors). -/
-instance pushforward_isRightAdjoint {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    (pushforward Λ f).IsRightAdjoint := (adjunction Λ f).isRightAdjoint
-
-/-- Direct image is additive on the unchanged underlying sheaf maps.
-Source: Stacks 03D7 (blueprint: def-pd-proetale-section-module-functors).
-Proof: evaluate addition of maps on each base-changed site object. -/
-@[instance] theorem pushforward_additive {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    (pushforward Λ f).Additive := by
-  exact Functor.additive_of_preserves_binary_products (pushforward Λ f)
-
-/-- The sectionwise pullback is additive.
-Source: Stacks 03D7 (blueprint: def-pd-proetale-section-module-functors).
-Proof: its adjunction identifies it with scalar extension after additive inverse image. -/
-@[instance] theorem pullback_additive {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    (pullback Λ f).Additive := by
-  exact (adjunction Λ f).left_adjoint_additive
-
-/-- The additive pullback preserves zero maps without unfolding its composite construction.
-Source: Stacks 03D7 (blueprint: def-pd-proetale-section-module-functors). -/
-instance (priority := 2000) pullback_preservesZero {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    (pullback Λ f).PreservesZeroMorphisms :=
-  Functor.preservesZeroMorphisms_of_additive (pullback Λ f)
-
-/-- The fixed additive equivalence preserves zero maps.
-Source: Stacks 00YV (blueprint: def-pd-proetale-section-module-functors). -/
-instance (priority := 2000) equivalence_preservesZero (X : Scheme.{u}) :
-    (equivalence Λ X).functor.PreservesZeroMorphisms :=
-  Functor.preservesZeroMorphisms_of_additive (equivalence Λ X).functor
-
-/-- Pullback is exact for pulled-back condensed coefficients: alpha_f is invertible.
-Source: Stacks 03D7 (blueprint: def-pd-proetale-section-module-functors).
-Proof: transport the exact internal upperStar; its coefficient scalar change is an
-isomorphism and inverse image is exact. -/
-@[instance] theorem pullback_preservesFiniteLimits {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    PreservesFiniteLimits (pullback Λ f) := by
-  exact ((InternalModuleOperations.internal_module_operations_transport Λ).2.2.2.1 f).1.mp
-    (inferInstance : PreservesFiniteLimits (CondensedRing.upperStar Λ f))
-
-/-- Pullback preserves finite colimits by its module adjunction.
-Source: Stacks 03D7 (blueprint: def-pd-proetale-section-module-functors).
-Proof: a left adjoint preserves colimits. -/
-@[instance] theorem pullback_preservesFiniteColimits {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    PreservesFiniteColimits (pullback Λ f) := by
-  have := (adjunction Λ f).leftAdjoint_preservesColimits
-  infer_instance
-
-/-- The existing exact-equivalence theorem supplies this compact finite-limit instance.
-Source: Stacks 00YV (blueprint: def-pd-proetale-section-module-functors). -/
-instance equivalence_preservesFiniteLimits (X : Scheme.{u}) :
-    PreservesFiniteLimits (equivalence Λ X).functor :=
-  ((InternalModuleOperations.internal_module_operations_transport Λ).1 X).2.2.1
-
-/-- The existing exact-equivalence theorem supplies this compact finite-colimit instance.
-Source: Stacks 00YV (blueprint: def-pd-proetale-section-module-functors). -/
-instance equivalence_preservesFiniteColimits (X : Scheme.{u}) :
-    PreservesFiniteColimits (equivalence Λ X).functor :=
-  ((InternalModuleOperations.internal_module_operations_transport Λ).1 X).2.2.2.1
-
-/-- The sectionwise equivalence preserves homology.
-Source: Stacks 00YV (blueprint: def-pd-proetale-section-module-functors).
-Proof: unchanged underlying sheaves identify kernels, images and cokernels. -/
-@[instance] theorem equivalence_preservesHomology (X : Scheme.{u}) :
-    (equivalence Λ X).functor.PreservesHomology := by
-  infer_instance
-
-/-- The internal relative tensor preserves zero maps in its first variable.
-Source: Stacks 03EK (blueprint: def-pd-proetale-section-module-functors). -/
-instance (priority := 2000) internalTensor_preservesZero (X : Scheme.{u}) :
-    (curriedTensor (internalModules Λ X)).PreservesZeroMorphisms :=
-  Functor.preservesZeroMorphisms_of_additive (curriedTensor (internalModules Λ X))
-
-/-- The internal relative tensor preserves zero maps in its second variable.
-Source: Stacks 03EK (blueprint: def-pd-proetale-section-module-functors). -/
-instance (priority := 2000) internalTensorObj_preservesZero (X : Scheme.{u})
-    (M : internalModules Λ X) :
-    ((curriedTensor (internalModules Λ X)).obj M).PreservesZeroMorphisms :=
-  Functor.preservesZeroMorphisms_of_additive ((curriedTensor (internalModules Λ X)).obj M)
-
-/-- The sectionwise relative tensor preserves zero maps in its first variable.
-Source: Stacks 03EK (blueprint: def-pd-proetale-section-module-functors). -/
-instance (priority := 2000) sectionTensor_preservesZero (X : Scheme.{u}) :
-    (curriedTensor (modules Λ X)).PreservesZeroMorphisms :=
-  Functor.preservesZeroMorphisms_of_additive (curriedTensor (modules Λ X))
-
-/-- The sectionwise relative tensor preserves zero maps in its second variable.
-Source: Stacks 03EK (blueprint: def-pd-proetale-section-module-functors). -/
-instance (priority := 2000) sectionTensorObj_preservesZero (X : Scheme.{u})
-    (M : modules Λ X) :
-    ((curriedTensor (modules Λ X)).obj M).PreservesZeroMorphisms :=
-  Functor.preservesZeroMorphisms_of_additive ((curriedTensor (modules Λ X)).obj M)
-
-/-- The actual sectionwise pairing on internal direct image specifies its lax structure.
-Source: Stacks 03EK and 03D7
-(blueprint: def-pd-proetale-section-module-functors). -/
-def InternalPushNormalized {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (m : (CondensedRing.lowerStar Λ f).LaxMonoidal) : Prop :=
-  ∀ (M N : internalModules Λ X) (U : Y.ProEtᵒᵖ)
-    (x : ((CondensedRing.lowerStar Λ f).obj M).X.obj.obj U)
-    (y : ((CondensedRing.lowerStar Λ f).obj N).X.obj.obj U),
-    ((m.μ M N).hom.hom.app U)
-        (internalPureTensor Λ Y _ _ U x y) =
-      internalPureTensor Λ X M N
-        ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).op.obj U) x y
-
 private theorem laxMonoidal_ext_mu {C D : Type*} [Category C] [Category D]
     [MonoidalCategory C] [MonoidalCategory D] (F : C ⥤ D)
     (m n : F.LaxMonoidal) (h : ∀ X Y, m.μ X Y = n.μ X Y) : m = n := by
@@ -476,33 +365,6 @@ private theorem canonicalInternalPush_normalized {X Y : Scheme.{u}} (f : X ⟶ Y
     InternalPushNormalized Λ f (canonicalInternalPush Λ f) :=
   normalized_of_projection Λ f (canonical_projection Λ f)
 
-/-- Direct image has the uniquely specified local-pure-tensor lax structure.
-Source: Stacks 03EK and 03D7
-(blueprint: def-pd-proetale-section-module-functors).
-Proof: its sectionwise bilinear pairing is balanced through the adjunct coefficient
-map and restriction-compatible. Sheafify and use the relative-tensor coequalizer.
-The associativity and unit equations hold on pure tensors. Local generation gives
-uniqueness of the tensor maps; the regular-module unit and the unitor law then give
-uniqueness of the unit map as well. -/
-theorem internalPushNormalized_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    ∃! m : (CondensedRing.lowerStar Λ f).LaxMonoidal, InternalPushNormalized Λ f m := by
-  refine ⟨canonicalInternalPush Λ f, canonicalInternalPush_normalized Λ f, ?_⟩
-  intro m hm
-  exact internalPushNormalized_unique Λ f m _ hm (canonicalInternalPush_normalized Λ f)
-
-/-- Choose the uniquely characterized direct-image pairing, not an arbitrary map.
-Source: Stacks 03D7 (blueprint: def-pd-proetale-section-module-functors). -/
-noncomputable instance internalPushLax {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    (CondensedRing.lowerStar Λ f).LaxMonoidal :=
-  (internalPushNormalized_existsUnique Λ f).exists.choose
-
-/-- The actual oplax module pullback is the mate of the specified direct-image pairing.
-Source: Stacks 03D7 and 03EL
-(blueprint: def-pd-proetale-section-module-functors). -/
-noncomputable instance internalPullOplax {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    (CondensedRing.upperStar Λ f).OplaxMonoidal :=
-  (CondensedRing.upperStarLowerStarAdjunction Λ f).leftAdjointOplaxMonoidal
-
 private theorem canonicalInternalPull_eq {X Y : Scheme.{u}} (f : X ⟶ Y) :
     letI := canonicalInternalPush Λ f
     (CondensedRing.upperStarLowerStarAdjunction Λ f).leftAdjointOplaxMonoidal =
@@ -523,76 +385,6 @@ private theorem internalPullOplax_eq_canonical {X Y : Scheme.{u}} (f : X ⟶ Y) 
   rw [internalPushLax_eq_canonical Λ f]
   exact canonicalInternalPull_eq Λ f
 
-/-- The pullback mate tensor component is invertible.
-Source: Stacks 03EL (blueprint: def-pd-proetale-section-module-functors).
-Proof: on extension-of-scalars pure tensors the map sends s tensor (m tensor n)
-to (s tensor m) tensor (1 tensor n). Its inverse multiplies the two scalar factors.
-Both respect balancing and commute with restriction, so sheafify to inverse maps. -/
-@[instance] theorem internalPull_delta_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (M N : internalModules Λ Y) :
-    IsIso (Functor.OplaxMonoidal.δ (CondensedRing.upperStar Λ f) M N) := by
-  rw [internalPullOplax_eq_canonical Λ f]
-  let := CondensedRing.monoidal_upperStar Λ f
-  infer_instance
-
-/-- The unit component of the pullback mate is invertible.
-Source: Stacks 03EL (blueprint: def-pd-proetale-section-module-functors).
-Proof: scalar extension sends the regular module to the regular module; multiplication
-and insertion of 1 are mutually inverse by the unit and balancing relations. -/
-@[instance] theorem internalPull_eta_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    IsIso (Functor.OplaxMonoidal.η (CondensedRing.upperStar Λ f)) := by
-  rw [internalPullOplax_eq_canonical Λ f]
-  let := CondensedRing.monoidal_upperStar Λ f
-  infer_instance
-
-/-- Strong module pullback, retaining the mate oplax maps just constructed.
-Source: Stacks 03EL (blueprint: def-pd-proetale-section-module-functors). -/
-noncomputable instance internalPullMonoidal {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    (CondensedRing.upperStar Λ f).Monoidal :=
-  Functor.Monoidal.ofOplaxMonoidal (CondensedRing.upperStar Λ f)
-
-/-- Pullback preserves flat internal modules.
-Source: Stacks 03EL and 0G7E
-(blueprint: def-pd-proetale-section-module-functors).
-Proof: tensor with a pulled-back flat module is the pullback of tensor before scalar
-extension. Exact inverse image and flatness make its acyclic short-exact test exact. -/
-@[instance] theorem internalPull_preservesFlat {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    (CondensedRing.upperStar Λ f).PreservesFlat := by
-  let G := ProEtale.upperStar Ab.{u + 1} f
-  let R := condensedRingObj Λ Y
-  let ρ := (asIso (condensedPullbackHom Λ f)).inv
-  have h := ProEtale.inverseImageModule_preservesFlat f R (condensedRingObj Λ X) ρ
-  let e : CondensedRing.upperStar Λ f ≅ Mod.mapModComap ρ :=
-    Functor.isoWhiskerLeft (G.mapMod R)
-      (Mod.extendScalarsIsoComapInv (condensedPullbackHom Λ f))
-  exact ⟨fun hM ↦ ObjectProperty.flat.prop_of_iso (e.symm.app _) (h.flat_obj hM)⟩
-
-/-- The regular-unit comparison is uniquely specified by fixing every scalar section.
-Source: Stacks 03EK (blueprint: def-pd-proetale-section-module-functors).
-Proof: the unit clause of internal_section_tensor_comparison supplies the map.
-The scalar identities determine every component, hence the natural isomorphism. -/
-theorem ordinaryUnitComparison_existsUnique (X : Scheme.{u}) :
-    ∃! t : (equivalence Λ X).functor.obj (𝟙_ (internalModules Λ X)) ≅ 𝟙_ (modules Λ X),
-      ∀ (U : X.ProEtᵒᵖ) (r : (condensedRingObj Λ X).obj.obj U), (t.hom.val.app U) r = r := by
-  let J := Scheme.ProEt.topology X
-  let R := condensedRingObj Λ X
-  let e₀ := InternalAbelianSheafModule.comparison_unitIso J R
-  have he₀ := InternalAbelianSheafModule.comparison_unitIso_apply J R
-  refine ⟨e₀, he₀, ?_⟩
-  intro t ht
-  apply Iso.ext
-  apply SheafOfModules.hom_ext
-  apply PresheafOfModules.hom_ext
-  intro U
-  apply ModuleCat.hom_ext
-  exact LinearMap.ext (fun r ↦ (ht U r).trans (he₀ U r).symm)
-
-/-- The normalized tensor unit comparison fixes every section of the regular module.
-Source: Stacks 03EK (blueprint: def-pd-proetale-section-module-functors). -/
-def ordinaryUnitComparison (X : Scheme.{u}) :
-    (equivalence Λ X).functor.obj (𝟙_ (internalModules Λ X)) ≅ 𝟙_ (modules Λ X) :=
-  (ordinaryUnitComparison_existsUnique Λ X).exists.choose
-
 attribute [local irreducible] SheafOfModules.tensorObjIsoSheafification
   PresheafOfModules.sheafificationAdjunction
 
@@ -607,75 +399,12 @@ attribute [local irreducible] Adjunction.leftAdjointOplaxMonoidal
 attribute [local irreducible] canonicalInternalPush CondensedRing.monoidal_upperStar
   Mod.extendScalars CondensedRing.upperStarLowerStarAdjunction
 
-/-- The sectionwise pure-tensor normalization of ringed direct image.
-Source: Stacks 03EK and 03D7
-(blueprint: def-pd-proetale-section-module-functors). -/
-def PushNormalized {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (m : (pushforward Λ f).LaxMonoidal) : Prop :=
-  SheafOfModules.RingedPushforwardPureTensor (InternalModuleOperations.siteMap f)
-    (ring Λ Y) (ring Λ X) (coefficientMap Λ f) m
-
 private theorem existsUnique_of_normalized_pairing {A : Sort*} {P Q : A → Prop}
     (h : ∃ a, P a ∧ Q a ∧ ∀ b, P b → b = a) : ∃! a, P a := by
   obtain ⟨a, ha, _, hu⟩ := h
   exact ⟨a, ha, hu⟩
 
-/-- The ringed direct-image pairing is uniquely specified, including its unit.
-Source: Stacks 03EK and 03D7
-(blueprint: def-pd-proetale-section-module-functors).
-Proof: the sectionwise balanced pairing sheafifies. Coherence is checked on pure
-tensors. The tensor universal property gives uniqueness of the tensorator, and its
-regular-module unit equation forces the coefficient-map unit. -/
-theorem pushNormalized_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    ∃! m : (pushforward Λ f).LaxMonoidal, PushNormalized Λ f m := by
-  exact existsUnique_of_normalized_pairing
-    (SheafOfModules.exists_unique_ringedPushforward_laxMonoidal
-      (InternalModuleOperations.siteMap f) (ring Λ Y) (ring Λ X) (coefficientMap Λ f))
-
-/-- The specified ringed direct-image pairing.
-Source: Stacks 03D7 (blueprint: def-pd-proetale-section-module-functors). -/
-noncomputable instance pushLax {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    (pushforward Λ f).LaxMonoidal :=
-  (pushNormalized_existsUnique Λ f).exists.choose
-
-/-- The specified ordinary ringed pullback comparison, as the mate of direct image.
-Source: Stacks 03EL (blueprint: def-pd-proetale-section-module-functors). -/
-noncomputable instance pullOplax {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    (pullback Λ f).OplaxMonoidal := (adjunction Λ f).leftAdjointOplaxMonoidal
-
 attribute [local irreducible] Mod.inducingFunctorData SheafOfModules.monoidalCategory
-
-/-- The existing pure-tensor comparison is uniquely specified by its local formula.
-Source: Stacks 03EK (blueprint: def-pd-proetale-section-module-functors).
-Proof: use internal_section_tensor_comparison for existence. Local pure tensors
-generate the relative tensor after sheafification; their displayed images
-therefore determine the sheaf-module map and hence the isomorphism uniquely. -/
-theorem ordinaryTensorComparison_existsUnique (X : Scheme.{u})
-    (M N : internalModules Λ X) :
-    ∃! t : (equivalence Λ X).functor.obj (M ⊗ N) ≅
-        (equivalence Λ X).functor.obj M ⊗ (equivalence Λ X).functor.obj N,
-      ∀ (U : X.ProEtᵒᵖ) (x : M.X.obj.obj U) (y : N.X.obj.obj U),
-        (t.hom.val.app U)
-            (internalPureTensor Λ X M N U x y) =
-          sectionPureTensor Λ X
-            ((equivalence Λ X).functor.obj M) ((equivalence Λ X).functor.obj N) U x y := by
-  let J := Scheme.ProEt.topology X
-  let R := condensedRingObj Λ X
-  refine ⟨InternalAbelianSheafModule.comparison_tensorIso J R M N,
-    InternalAbelianSheafModule.comparison_tensorIso_tmul J R M N, ?_⟩
-  intro t ht
-  apply Iso.ext
-  apply InternalAbelianSheafModule.comparison_internalTensor_hom_ext J R M N
-  intro U x y
-  exact (ht U x y).trans
-    (InternalAbelianSheafModule.comparison_tensorIso_tmul J R M N U x y).symm
-
-/-- The existing ordinary tensor comparison, selected by its unique pure-tensor formula.
-Source: Stacks 03EK (blueprint: def-pd-proetale-section-module-functors). -/
-def ordinaryTensorComparison (X : Scheme.{u}) (M N : internalModules Λ X) :
-    (equivalence Λ X).functor.obj (M ⊗ N) ≅
-      (equivalence Λ X).functor.obj M ⊗ (equivalence Λ X).functor.obj N :=
-  (ordinaryTensorComparison_existsUnique Λ X M N).exists.choose
 
 private theorem ordinaryTensorComparison_eq (X : Scheme.{u})
     (M N : internalModules Λ X) :
@@ -1012,58 +741,7 @@ private theorem pullTensor_push_square {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 attribute [local irreducible] InternalAbelianSheafModule.sectionModuleEquivalence
 
-set_option backward.isDefEq.respectTransparency true in
-/-- The ordinary ringed pullback comparison is invertible.
-Source: Stacks 03EL (blueprint: lem-pd-section-pull-delta-isiso).
-Proof: the normalized internal and section direct-image pairings commute with
-section equivalence, since both send a pure tensor to the same base-changed pure
-tensor. Transport their adjuncts using the specified unit comparison. This identifies
-the section tensor mate with the already invertible internal mate, up to the tensor
-and pullback comparison isomorphisms. Naturality along essential-preimage isomorphisms gives
-invertibility for arbitrary section modules. No flatness hypothesis is used. -/
-@[instance] theorem pull_delta_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (M N : modules Λ Y) :
-    IsIso (Functor.OplaxMonoidal.δ (pullback Λ f) M N) := by
-  let : Category.{u} (MorphismProperty.Over @WeaklyEtale ⊤ Y) :=
-    MorphismProperty.Comma.instCategory
-      (𝟭 Scheme.{u}) (Functor.fromPUnit Y) @WeaklyEtale ⊤ ⊤
-  let : Category.{u} (MorphismProperty.Over @WeaklyEtale ⊤ X) :=
-    MorphismProperty.Comma.instCategory
-      (𝟭 Scheme.{u}) (Functor.fromPUnit X) @WeaklyEtale ⊤ ⊤
-  let E := (equivalence Λ Y).functor
-  let F := (equivalence Λ X).functor
-  exact pullTensor_mate_isIso E F
-    (CondensedRing.upperStar Λ f) (CondensedRing.lowerStar Λ f)
-    (CondensedRing.upperStarLowerStarAdjunction Λ f)
-    (pullback Λ f) (pushforward Λ f) (adjunction Λ f)
-    (pushComparison Λ f) (pullComparison Λ f)
-    (ordinaryTensorComparison Λ Y) (ordinaryTensorComparison Λ X)
-    (ordinaryTensorComparison_natural Λ Y)
-    (((InternalModuleOperations.internal_module_operations_transport Λ).2.1 f).2.1)
-    (pullTensor_push_square Λ f) (internalPull_delta_isIso Λ f) M N
-
 end PullTensorProof
-
-/-- The ordinary ringed pullback comparison on the unit is invertible.
-Source: Stacks 03EL (blueprint: def-pd-proetale-section-module-functors).
-Proof: extension of scalars of a regular module is the regular module. -/
-@[instance] theorem pull_eta_isIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    IsIso (Functor.OplaxMonoidal.η (pullback Λ f)) := by
-  let : (InternalModuleOperations.siteMap f).IsContinuous
-      (Scheme.ProEt.topology Y) (Scheme.ProEt.topology X) :=
-    InternalModuleOperations.siteMap_continuous f
-  let : (InternalModuleOperations.siteMap f).Final := inferInstance
-  exact SheafOfModules.normalized_unit_mate_isIso (InternalModuleOperations.siteMap f)
-    (ring Λ Y) (ring Λ X) (coefficientMap Λ f) (adjunction Λ f) (pushLax Λ f)
-    (pushNormalized_existsUnique Λ f).exists.choose_spec
-
-/-- The strong ringed pullback retains the specified oplax mate maps.
-Source: Stacks 03EL (blueprint: def-pd-proetale-section-module-functors). -/
-noncomputable instance pullMonoidal {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    (pullback Λ f).Monoidal := by
-  let hδ := pull_delta_isIso Λ f
-  let hη := pull_eta_isIso Λ f
-  exact Functor.Monoidal.ofOplaxMonoidal (pullback Λ f)
 
 attribute [local irreducible] internalPullMonoidal pullMonoidal
   internalPushLax pushLax internalPullOplax pullOplax
@@ -1139,59 +817,6 @@ attribute [local instance 4000] total_preserves
 set_option backward.isDefEq.respectTransparency true in
 set_option maxHeartbeats 600000 in
 -- The concrete total tensors carry large category and universe instances.
-/-- The total-complex comparison is uniquely determined on each direct-sum summand.
-Source: Stacks 06YN (blueprint: def-pd-proetale-section-module-functors).
-Proof: sum the normalized ordinary comparisons in each degree. Naturality commutes
-with the two differential components, with the same sign (-1)^p. The coproduct
-universal property gives uniqueness; the summed inverses give an inverse chain map. -/
-theorem totalComparison_existsUnique (X : Scheme.{u})
-    (P Q : CochainComplex (internalModules Λ X) ℤ) :
-    let F := (equivalence Λ X).functor
-    let G := F.mapHomologicalComplex (ComplexShape.up ℤ)
-    have : CochainComplex.HasMapBifunctor P Q (curriedTensor (internalModules Λ X)) :=
-      @InternalAbelianSheafModule.comparison_internalTotalExists
-        X.ProEt _ (Scheme.ProEt.topology X) _ _ _ (condensedRingObj Λ X) _
-        (isCommMonObj_condensedRingObj Λ X) P Q
-    have : CochainComplex.HasMapBifunctor (G.obj P) (G.obj Q)
-        (curriedTensor (modules Λ X)) := fun _n ↦
-      ((inferInstance : HasColimitsOfSize.{0, 0}
-        (modules Λ X)).has_colimits_of_shape _).has_colimit _
-    ∃! t : G.obj
-        (CochainComplex.mapBifunctor P Q (curriedTensor _)) ≅
-      CochainComplex.mapBifunctor
-        (G.obj P)
-        (G.obj Q)
-        (curriedTensor _),
-    ∀ (p q n : ℤ) (h : p + q = n),
-      F.map
-          (CochainComplex.ιMapBifunctor P Q (curriedTensor _) p q n h) ≫ t.hom.f n =
-        (ordinaryTensorComparison Λ X (P.X p) (Q.X q)).hom ≫
-          CochainComplex.ιMapBifunctor
-            (G.obj P)
-            (G.obj Q)
-            (curriedTensor _) p q n h := by
-  let F := (equivalence Λ X).functor
-  let G := F.mapHomologicalComplex (ComplexShape.up ℤ)
-  have : CochainComplex.HasMapBifunctor P Q (curriedTensor (internalModules Λ X)) :=
-    @InternalAbelianSheafModule.comparison_internalTotalExists
-      X.ProEt _ (Scheme.ProEt.topology X) _ _ _ (condensedRingObj Λ X) _
-      (isCommMonObj_condensedRingObj Λ X) P Q
-  have : CochainComplex.HasMapBifunctor (G.obj P) (G.obj Q)
-      (curriedTensor (modules Λ X)) := fun _n ↦
-    ((inferInstance : HasColimitsOfSize.{0, 0} (modules Λ X)).has_colimits_of_shape _).has_colimit _
-  have : F.Additive :=
-    @InternalAbelianSheafModule.comparison_additive
-      X.ProEt _ (Scheme.ProEt.topology X) _ _ _ (condensedRingObj Λ X) _
-      (isCommMonObj_condensedRingObj Λ X)
-  exact total_normalization_unique F
-    (ordinaryTensorComparison Λ X) (ordinaryTensorComparison_natural Λ X) P Q
-
-set_option backward.isDefEq.respectTransparency true in
-/-- The uniquely specified direct-sum total-complex comparison.
-Source: Stacks 06YN (blueprint: def-pd-proetale-section-module-functors). -/
-def totalComparison (X : Scheme.{u}) (P Q : CochainComplex (internalModules Λ X) ℤ) :=
-  (totalComparison_existsUnique Λ X P Q).exists.choose
-
 /-- Extension by zero is additive, since all its three specified factors are additive.
 Source: Stacks 03DJ (blueprint: def-pd-proetale-section-module-functors).
 Proof: its underlying maps are extension-by-zero maps of abelian sheaves; addition

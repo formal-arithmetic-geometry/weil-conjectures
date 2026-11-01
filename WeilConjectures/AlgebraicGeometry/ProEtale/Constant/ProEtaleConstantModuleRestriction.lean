@@ -20,6 +20,8 @@ blueprint type decomposition, steps 4 and 8
 
 @[expose] public section
 set_option autoImplicit false
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
+
 universe t u
 open CategoryTheory
 namespace AlgebraicGeometry.Scheme

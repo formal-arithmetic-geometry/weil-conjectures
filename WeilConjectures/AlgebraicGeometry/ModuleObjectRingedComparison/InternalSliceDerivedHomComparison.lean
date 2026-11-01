@@ -228,55 +228,7 @@ private theorem sectionRing_over_eq {C : Type (u + 1)} [Category.{u} C] (J : Gro
     simp only [CommRingCat.comp_apply, cast_ring_apply]
     rfl
 
-/-- Literal restriction of the coefficient ring object, with its induced multiplication.
-Source: Stacks 03DH (blueprint: def-sfb-internal-slice-derived-hom-comparison). -/
-def sliceRingObject :
-    Sheaf ((Scheme.ProEt.topology X).over U) AddCommGrpCat.{u + 1} :=
-  ((Scheme.ProEt.topology X).overPullback AddCommGrpCat.{u + 1} U).obj
-    (condensedRingObj Λ X)
-
-/-- The functor-induced monoid structure, named with instance transparency so
-native constructions can reuse it without unfolding the whole restriction functor.
-Source: Stacks 03DH (blueprint: def-sfb-internal-slice-derived-hom-comparison). -/
-@[instance_reducible] instance sliceRingMonObj : MonObj (sliceRingObject Λ X U) :=
-  ((Scheme.ProEt.topology X).overPullback AddCommGrpCat.{u + 1} U).monObjObj _
-
-/-- Restriction preserves commutativity of the coefficient multiplication.
-Source: Stacks 03DH (blueprint: def-sfb-internal-slice-derived-hom-comparison). -/
-instance sliceRingComm : IsCommMonObj (sliceRingObject Λ X U) :=
-  Functor.isCommMonObj_obj
-    (F := (Scheme.ProEt.topology X).overPullback AddCommGrpCat.{u + 1} U)
-
-/-- Module objects over the restricted ring, on the actual slice site.
-Source: Stacks 03DH (blueprint: def-sfb-internal-slice-derived-hom-comparison). -/
-abbrev SliceInternal := Mod
-  (Sheaf ((Scheme.ProEt.topology X).over U) AddCommGrpCat.{u + 1}) (sliceRingObject Λ X U)
-
-/-- Section rings commute with literal restriction.
-Source: Stacks 03DH (blueprint: def-sfb-internal-slice-derived-hom-comparison).
-Proof: both underlying presheaves send V over U to B(V); their units and products
-are the same sectionwise unit and product. Extensionality of ring structures and
-presheaf natural transformations identifies the two bundled ring sheaves. -/
-theorem sliceSectionRing_eq :
-    sectionRingSheaf.{u + 1, u + 1, u} ((Scheme.ProEt.topology X).over U)
-      (sliceRingObject Λ X U) = (ring Λ X).over U := by
-  delta sliceRingObject sliceRingMonObj
-  exact sectionRing_over_eq (Scheme.ProEt.topology X) U (condensedRingObj Λ X)
-
 attribute [local irreducible] sliceRingMonObj
-
-/-- The actual section-action equivalence for B restricted to U. Equality transport
-changes only the two presentations of its section ring, retaining the functor's data.
-Source: Stacks 00YV, 03DH (blueprint: def-sfb-internal-slice-derived-hom-comparison). -/
-def sliceEquivalence : SliceInternal Λ X U ≌ SheafOfModules.{u + 1}
-    ((sheafCompose ((Scheme.ProEt.topology X).over U)
-      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj ((ring Λ X).over U)) :=
-  Eq.mp (congrArg (fun R ↦ SliceInternal Λ X U ≌ SheafOfModules.{u + 1}
-    ((sheafCompose ((Scheme.ProEt.topology X).over U)
-      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R))
-    (sliceSectionRing_eq Λ X U))
-    (sectionModuleEquivalence.{u + 1, u + 1, u} ((Scheme.ProEt.topology X).over U)
-      (sliceRingObject Λ X U))
 
 private theorem section_equivalence_cast_functor_heq
     {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
@@ -305,48 +257,13 @@ theorem sliceEquivalence_functor_heq :
     (sectionModuleEquivalence.{u + 1, u + 1, u} ((Scheme.ProEt.topology X).over U)
       (sliceRingObject Λ X U))
 
-/-- The local section equivalence is additive, including equality transport.
-Source: Stacks 00YV, 03DH (blueprint: def-sfb-internal-slice-derived-hom-comparison).
-Proof: every equivalence of these preadditive categories preserves binary products
-and zero morphisms, hence addition. This applies directly to the transported
-equivalence, without unfolding its equality transport. -/
-@[instance] theorem sliceEquivalence_additive :
-    (sliceEquivalence Λ X U).functor.Additive := by
-  exact Functor.additive_of_preserves_binary_products _
-
 attribute [local irreducible] sliceEquivalence
-
-/-- Sectionwise modules over the literally restricted section ring.
-Source: Stacks 03DH (blueprint: def-sfb-internal-slice-derived-hom-comparison). -/
-abbrev SliceModules := SheafOfModules.{u + 1}
-  ((sheafCompose ((Scheme.ProEt.topology X).over U)
-    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj ((ring Λ X).over U))
 
 /-- The same exact equivalence on ordinary unbounded derived categories.
 Source: Stacks 05RU (blueprint: def-sfb-internal-slice-derived-hom-comparison). -/
 def sliceDerivedEquivalence :
     DerivedCategory (SliceInternal Λ X U) ≌ DerivedCategory (SliceModules Λ X U) :=
   (sliceEquivalence Λ X U).mapDerivedCategory
-
-/-- The direct derived section functor. Naming it avoids unfolding the equivalence
-and both its coherence isomorphisms when checking representative endpoints.
-Source: Stacks 05RU (blueprint: def-sfb-internal-slice-derived-hom-comparison). -/
-def sliceForward :
-    DerivedCategory (SliceInternal Λ X U) ⥤ DerivedCategory (SliceModules Λ X U) :=
-  (sliceEquivalence Λ X U).functor.mapDerivedCategory
-
-/-- Termwise extension of the fixed local section-action equivalence.
-Source: Stacks 05RU (blueprint: def-sfb-internal-slice-derived-hom-comparison). -/
-def sliceComplexForward :
-    CochainComplex (SliceInternal Λ X U) ℤ ⥤ CochainComplex (SliceModules Λ X U) ℤ :=
-  (sliceEquivalence Λ X U).functor.mapHomologicalComplex (.up ℤ)
-
-/-- The actual localization comparison for the termwise local section functor.
-Source: Stacks 05RU (blueprint: def-sfb-internal-slice-derived-hom-comparison). -/
-def sliceLocalizationIso :
-    DerivedCategory.Q ⋙ sliceForward Λ X U ≅
-      sliceComplexForward Λ X U ⋙ DerivedCategory.Q :=
-  (sliceEquivalence Λ X U).functor.mapDerivedCategoryFactors
 
 /-- Derived module restriction, expressed through the section equivalences. Its
 underlying sections and maps are the literal slice restriction, by their counits.
@@ -367,38 +284,10 @@ Source: Stacks 03EK; native Mod.monoidalCategory
 
 set_option backward.isDefEq.respectTransparency false
 
-/-- Fixed existence of the graded tensor coproducts on the actual slice.
-Source: Stacks 06YL (blueprint: def-sfb-internal-slice-derived-hom-comparison). -/
-theorem sliceGradedTensor (P Q : GradedObject ℤ (SliceInternal Λ X U)) :
-    P.HasTensor Q := inferInstance
-
 attribute [local instance] sliceGradedTensor
-
-/-- Fixed fourfold summand extensionality for the graded slice tensor.
-Source: Stacks 06YL (blueprint: def-sfb-internal-slice-derived-hom-comparison). -/
-theorem sliceGradedTensorFour (P Q R S : GradedObject ℤ (SliceInternal Λ X U)) :
-    GradedObject.HasTensor₄ObjExt P Q R S := inferInstance
-
-/-- Fixed left iterated graded-tensor comparison on the slice.
-Source: Stacks 06YL (blueprint: def-sfb-internal-slice-derived-hom-comparison). -/
-theorem sliceGradedTensorLeft (P Q R : GradedObject ℤ (SliceInternal Λ X U)) :
-    GradedObject.HasGoodTensor₁₂Tensor P Q R := inferInstance
-
-/-- Fixed right iterated graded-tensor comparison on the slice.
-Source: Stacks 06YL (blueprint: def-sfb-internal-slice-derived-hom-comparison). -/
-theorem sliceGradedTensorRight (P Q R : GradedObject ℤ (SliceInternal Λ X U)) :
-    GradedObject.HasGoodTensorTensor₂₃ P Q R := inferInstance
 
 attribute [local instance] sliceGradedTensor sliceGradedTensorFour
   sliceGradedTensorLeft sliceGradedTensorRight
-
-set_option backward.isDefEq.respectTransparency false in
-/-- Fix the existing native total tensor instance once for local cochains.
-Source: Stacks 06YL; native Mod.monoidalCategoryCochainComplex
-(blueprint: def-sfb-internal-slice-derived-hom-comparison). -/
-@[instance_reducible, instance] def sliceCochainMonoidal :
-    MonoidalCategory (CochainComplex (SliceInternal Λ X U) ℤ) :=
-  CategoryTheory.Mod.monoidalCategoryCochainComplex
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Fix the existing native K-flat derived tensor instance once on this slice.
@@ -424,19 +313,6 @@ def sliceNativeHom :
       DerivedCategory (SliceInternal Λ X U) ⥤ DerivedCategory (SliceInternal Λ X U) :=
   Functor.uncurry.obj (MonoidalClosed.internalHom
     (C := DerivedCategory (SliceInternal Λ X U)))
-
-/-- The native K-flat derived relative tensor for the actual restricted monoid.
-Source: Stacks 06YS (blueprint: def-sfb-internal-slice-derived-hom-comparison). -/
-def sliceNativeTensor :
-    DerivedCategory (SliceInternal Λ X U) × DerivedCategory (SliceInternal Λ X U) ⥤
-      DerivedCategory (SliceInternal Λ X U) :=
-  MonoidalCategory.tensor (DerivedCategory (SliceInternal Λ X U))
-
-/-- The native total tensor on local internal complexes.
-Source: Stacks 06YL (blueprint: def-sfb-internal-slice-derived-hom-comparison). -/
-def sliceTotalTensor (P Q : CochainComplex (SliceInternal Λ X U) ℤ) :
-    CochainComplex (SliceInternal Λ X U) ℤ :=
-  (sliceCochainMonoidal Λ X U).tensorObj P Q
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency false in
@@ -545,16 +421,6 @@ theorem sliceTotalComparison_heq (P Q : CochainComplex (SliceInternal Λ X U) �
     HEq (sliceTotalComparison Λ X U P Q) (sliceRawComplexTensorIso Λ X U P Q) := by
   unfold sliceTotalComparison
   exact cast_heq _ _
-
-set_option backward.isDefEq.respectTransparency false in
-/-- The actual lax localization map for the native local tensor.
-Source: Stacks 06YS (blueprint: def-sfb-internal-slice-derived-hom-comparison). -/
-def sliceLocalizationTensorMap (P Q : CochainComplex (SliceInternal Λ X U) ℤ) :
-    (sliceNativeTensor Λ X U).obj
-      ((DerivedCategory.Q (C := SliceInternal Λ X U)).obj P,
-        (DerivedCategory.Q (C := SliceInternal Λ X U)).obj Q) ⟶
-      (DerivedCategory.Q (C := SliceInternal Λ X U)).obj (sliceTotalTensor Λ X U P Q) :=
-  Functor.LaxMonoidal.μ (DerivedCategory.Q (C := SliceInternal Λ X U)) P Q
 
 set_option backward.isDefEq.respectTransparency true
 
