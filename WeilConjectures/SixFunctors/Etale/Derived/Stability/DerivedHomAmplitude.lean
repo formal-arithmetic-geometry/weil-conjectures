@@ -58,8 +58,9 @@ def derivedHomBoundedAmplitude (X : Scheme.{u}) :
         (((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op K)).obj L).IsLE (b + B)
 
 instance (X : Scheme.{u}) : (derivedHomBoundedAmplitude Λ X).IsTriangulated where
-  exists_zero := ⟨0, isZero_zero _, 0, fun _ _ L _ ↦ _root_.DerivedCategory.TStructure.t.isLE_of_isZero
-    (isZero_derivedHom_obj_of_isZero _ (isZero_zero _) L) _⟩
+  exists_zero := ⟨0, isZero_zero _, 0, fun _ _ L _ ↦
+    _root_.DerivedCategory.TStructure.t.isLE_of_isZero
+      (isZero_derivedHom_obj_of_isZero _ (isZero_zero _) L) _⟩
   isStableUnderShiftBy n := ⟨fun K ⟨B, hB⟩ ↦ ⟨B + n, fun a b L hL ↦ by
     have := hB a b L hL
     have : (((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op K) ⋙ shiftFunctor _ (-n)).obj L).IsLE
@@ -212,9 +213,10 @@ lemma derivedHomBoundedAmplitude_rightDerivedLowerStar_rightDerivedLowerShriek
 `RHom(K, -)` raises the upper bound of bounded complexes by a uniform amount: there is `B` such
 that `RHom(K, L)` vanishes above `b + B` whenever `L` has homology in `[a, b]`.
 
-By dévissage (`AlgebraicGeometry.Etale.ctf_generated_by_rightDerivedLowerStar_rightDerivedLowerShriek`)
-it suffices to treat the generators `Rg_* Rj_! P`
-(`AlgebraicGeometry.Etale.derivedHomBoundedAmplitude_rightDerivedLowerStar_rightDerivedLowerShriek`). -/
+By dévissage
+(`AlgebraicGeometry.Etale.ctf_generated_by_rightDerivedLowerStar_rightDerivedLowerShriek`) it
+suffices to treat the generators `Rg_* Rj_! P`
+(`derivedHomBoundedAmplitude_rightDerivedLowerStar_rightDerivedLowerShriek`). -/
 theorem derivedHomBoundedAmplitude_of_constructibleFiniteTor {X : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}

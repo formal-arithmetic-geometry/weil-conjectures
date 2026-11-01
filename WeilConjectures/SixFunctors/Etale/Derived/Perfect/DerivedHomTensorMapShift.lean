@@ -97,4 +97,3 @@ instance isTriangulated_derivedHom_obj
 end Etale.DerivedCategory
 
 end AlgebraicGeometry
-#print axioms AlgebraicGeometry.Etale.DerivedCategory.commShift_derivedHomTensorNatTrans

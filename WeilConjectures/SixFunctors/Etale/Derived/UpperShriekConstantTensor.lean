@@ -31,7 +31,7 @@ projection `p`. The map `θ_p` is invertible by smooth duality
 closed immersion at a constant coefficient is invertible by the closed-support triangle and the
 projection formula for the complementary open immersion with a finitely generated constant
 coefficient (`lem-coef-finite-closed-shriek`,
-`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekTensorMap_constantSingle_of_isClosedImmersion`).
+`isIso_rightDerivedUpperShriekTensorMap_constantSingle_of_isClosedImmersion`).
 -/
 
 @[expose] public section
@@ -141,7 +141,8 @@ variable [HasInvertibleExponent Λ (Spec (.of k))]
 theorem isIso_dualizingComplexTensorMap_constantSingle_of_isAffine {V : Scheme.{u}} [IsAffine V]
     (a : V ⟶ Spec (.of k)) [LocallyOfFiniteType a] [HasCompactification a]
     (N : ModuleCat.{u + 1} Λ) [Module.Finite Λ N] :
-    IsIso (dualizingComplexTensorMap Λ a (constantSingle (ModuleCat.{u + 1} Λ) (Spec (.of k)) N)) := by
+    IsIso (dualizingComplexTensorMap Λ a
+      (constantSingle (ModuleCat.{u + 1} Λ) (Spec (.of k)) N)) := by
   have : IsAffine (Over.mk a).left := ‹IsAffine V›
   have : LocallyOfFiniteType (Over.mk a).hom := ‹LocallyOfFiniteType a›
   obtain ⟨n, ι, hι⟩ := exists_isClosedImmersion_polyAffine (Over.mk a)
@@ -175,7 +176,8 @@ the affine opens of `X`
 theorem isIso_dualizingComplexTensorMap_constantSingle_of_field {X : Scheme.{u}}
     (a : X ⟶ Spec (.of k)) [LocallyOfFiniteType a] [HasCompactification a]
     (N : ModuleCat.{u + 1} Λ) [Module.Finite Λ N] :
-    IsIso (dualizingComplexTensorMap Λ a (constantSingle (ModuleCat.{u + 1} Λ) (Spec (.of k)) N)) := by
+    IsIso (dualizingComplexTensorMap Λ a
+      (constantSingle (ModuleCat.{u + 1} Λ) (Spec (.of k)) N)) := by
   have hV (x : X) : ∃ V : X.Opens, IsAffineOpen V ∧ x ∈ V := by
     obtain ⟨V, hV, hxV, -⟩ := (TopologicalSpace.Opens.isBasis_iff_nbhd.mp X.isBasis_affineOpens)
       (show x ∈ (⊤ : X.Opens) from trivial)
@@ -186,7 +188,8 @@ theorem isIso_dualizingComplexTensorMap_constantSingle_of_field {X : Scheme.{u}}
   have (x : X) : HasCompactification ((V x).ι ≫ a) :=
     ((HasCompactification.compactification a).precomp (V x).ι).hasCompactification
   refine isIso_dualizingComplexTensorMap_of_jointlySurjective Λ (fun x ↦ (V x).ι)
-    (fun x ↦ ⟨x, ⟨x, hxV x⟩, rfl⟩) a (fun x ↦ isIso_dualizingComplexTensorMap_of_isOpenImmersion Λ _)
+    (fun x ↦ ⟨x, ⟨x, hxV x⟩, rfl⟩) a
+    (fun x ↦ isIso_dualizingComplexTensorMap_of_isOpenImmersion Λ _)
     (fun x ↦ DerivedCategory.isInvertible.of_iso (dualizingComplexIsoOfEtale Λ _).symm
       (DerivedCategory.isInvertible_unit Λ _)) _ fun x ↦ ?_
   have : IsAffine (V x).toScheme := hV x
@@ -195,4 +198,3 @@ theorem isIso_dualizingComplexTensorMap_constantSingle_of_field {X : Scheme.{u}}
 end Etale
 
 end AlgebraicGeometry
-#print axioms AlgebraicGeometry.Etale.isIso_dualizingComplexTensorMap_constantSingle_of_field

@@ -67,8 +67,8 @@ lemma isIso_derivedHomTensorNatTrans_app_constantSingle_of_isZero {N : ModuleCat
     (_root_.DerivedCategory.singleFunctor _ 0).map_isZero
       ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).map_isZero hN)
   exact isIso_of_source_target_iso_zero _
-    (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj ((RHom(X)[ModuleCat.{u + 1} Λ].obj (op K)).obj M)).map_isZero
-      h).isoZero
+    (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj
+      ((RHom(X)[ModuleCat.{u + 1} Λ].obj (op K)).obj M)).map_isZero h).isoZero
     (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj M ⋙ RHom(X)[ModuleCat.{u + 1} Λ].obj (op K)).map_isZero
       h).isoZero
 
@@ -131,4 +131,3 @@ theorem isIso_derivedHomTensorMap_constantSingle (aX : X ⟶ Spec (.of k))
 end Etale
 
 end AlgebraicGeometry
-#print axioms AlgebraicGeometry.Etale.isIso_derivedHomTensorMap_constantSingle

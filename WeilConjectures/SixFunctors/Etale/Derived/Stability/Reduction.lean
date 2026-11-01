@@ -339,6 +339,3 @@ theorem nonempty_iso_rightDerivedUpperShriek_verdierDual_and_reductionModIdeal {
 end Etale
 
 end AlgebraicGeometry
-#print axioms AlgebraicGeometry.Etale.constructibleFiniteTor_stability_reductionModIdeal
-#print axioms AlgebraicGeometry.Etale.isIso_derivedHomTensorMap_reductionModIdeal
-#print axioms AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_dualizingComplex
