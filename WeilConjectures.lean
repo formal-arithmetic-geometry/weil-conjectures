@@ -7391,6 +7391,9 @@ public import WeilConjectures.AlgebraicGeometry.GroupScheme.LieCotangentDualResi
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.LieIdentityTangentEquiv
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.LieLocalDimension
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.MixedTranslationCoefficients
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.NativeCondensedModule.NativeCondensedModuleLocalFrobenius
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.NativeL2.CondensedL2Norm
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.NativeL2.L2NativePunctualWeights
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.QuasiProjective
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Reduced
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Separated
@@ -16673,6 +16676,7 @@ public import WeilConjectures.DeligneLaumon.IntegralCompletedComparison.StrictIn
 public import WeilConjectures.DeligneLaumon.IntegralCompositionCoefficientSquare
 public import WeilConjectures.DeligneLaumon.IntegralSupportNormalization.IntegralSupportNormalizationData
 public import WeilConjectures.DeligneLaumon.IsomorphismFieldTransport
+public import WeilConjectures.DeligneLaumon.L2Norm
 public import WeilConjectures.DeligneLaumon.LinearIncidenceIrreducible
 public import WeilConjectures.DeligneLaumon.LocalFrobeniusTrace
 public import WeilConjectures.DeligneLaumon.PointCommonScalarCohomology
@@ -23546,6 +23550,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SmoothPu
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SmoothPurity.RepresentingTraceClassification
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SmoothPurity.SitePerfectComplex
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SquareComparisonCoherence
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.StrictWeilCondensed.TateTwist
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.TopologicalInvariance
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Trace.TraceBaseChangeFirst
