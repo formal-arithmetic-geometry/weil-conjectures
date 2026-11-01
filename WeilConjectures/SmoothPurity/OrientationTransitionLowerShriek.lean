@@ -26,7 +26,9 @@ comparisons `Rf_! ⋙ red_Y ≅ red_X ⋙ Rf_!` of a compactification
 (`etaleReductionLowerShriekIsoOfCompactification`) to the two pieces of the compactification:
 
 * `reductionSquareCompatible_etaleReductionLowerShriekIsoOfIsOpenImmersion`: the open immersion;
-* `reductionSquareCompatible_etaleReductionLowerShriekIso`: the proper morphism;
+* `reductionSquareCompatible_etaleReductionLowerShriekIso`: the proper morphism, by transposing the
+  reduction square for the pullbacks along `p^* ⊣ Rp_!` and `Lp^* ⊣ Rp_*`
+  (`Etale.reductionSquareCompatible_derivedRestrictScalarsCompRightDerivedLowerStarIso`);
 * `reductionSquareCompatible_etaleReductionLowerShriekIsoOfCompactification`: the assembly, by the
   stability under composition (`Etale.ReductionSquareCompatible.comp`) and the compatibility of the
   composition isomorphisms of `R_!` with the restriction of scalars
@@ -40,6 +42,73 @@ universe u
 open CategoryTheory Limits
 
 open scoped CategoryTheory.Obj
+
+namespace AlgebraicGeometry.Etale
+
+open scoped CategoryTheory.Functor
+
+/-- **Compatibility of the pushforward reduction squares with `β`, from the pullback squares**:
+let `γA : Rp_! ⋙ rA_Y ≅ rA_X ⋙ Rp_*` and `γB : Rp_! ⋙ rB_Y ≅ rB_X ⋙ Rp_*` be the mates, under an
+adjunction `G ⊣ F` and `Lp^* ⊣ Rp_*` (over `Λ` and `Λ'`), of squares
+`θ : rA_Y ⋙ Lp^* ⟶ G ⋙ rA_X` and `θ' : rB_Y ⋙ Lp^* ⟶ G ⋙ rB_X`. If `θ` and `θ'` are intertwined
+by the transposes `rA ⟶ rB ⋙ Res` of `β` and the commutation of `Res` with `Lp^*`
+(`leftDerivedUpperStarRestrictScalarsIso`), then `γA` and `γB` are compatible with `β` through
+the commutation of `Res` with `Rp_*` (`derivedRestrictScalarsCompRightDerivedLowerStarIso`). -/
+theorem reductionSquareCompatible_derivedRestrictScalarsCompRightDerivedLowerStarIso
+    {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] (ρ : Λ →+* Λ') {X Y : Scheme.{u}}
+    (p : X ⟶ Y) (d : ℕ)
+    (hd : ∀ (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ), d < q →
+      IsZero ((((p)_*[ModuleCat.{u + 1} Λ]).rightDerived q).obj F))
+    {K₁ K₂ : Type*} [Category K₁] [Category K₂] {F : K₁ ⥤ K₂} {G : K₂ ⥤ K₁} (a : G ⊣ F)
+    {rA₁ : K₁ ⥤ DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    {rA₂ : K₂ ⥤ DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    {rB₁ : K₁ ⥤ DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ'))}
+    {rB₂ : K₂ ⥤ DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ'))}
+    {Ψ₁ : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤
+      DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ'))}
+    {Ψ₂ : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤
+      DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ'))}
+    (adj₁ : Ψ₁ ⊣ Sheaf.derivedRestrictScalars X.smallEtaleTopology ρ)
+    (adj₂ : Ψ₂ ⊣ Sheaf.derivedRestrictScalars Y.smallEtaleTopology ρ)
+    (β₁ : rA₁ ⋙ Ψ₁ ≅ rB₁) (β₂ : rA₂ ⋙ Ψ₂ ≅ rB₂)
+    (θ : TwoSquare rA₂ G L((p)^*[ModuleCat.{u + 1} Λ]) rA₁)
+    (θ' : TwoSquare rB₂ G L((p)^*[ModuleCat.{u + 1} Λ']) rB₁)
+    (γA : F ⋙ rA₂ ≅ rA₁ ⋙ R((p)_*[ModuleCat.{u + 1} Λ]))
+    (γB : F ⋙ rB₂ ≅ rB₁ ⋙ R((p)_*[ModuleCat.{u + 1} Λ']))
+    (h : ∀ M, L((p)^*[ModuleCat.{u + 1} Λ]).map
+        (adj₂.unit.app (rA₂.obj M) ≫
+          (Sheaf.derivedRestrictScalars Y.smallEtaleTopology ρ).map (β₂.hom.app M)) ≫
+        (leftDerivedUpperStarRestrictScalarsIso ρ p).hom.app (rB₂.obj M) ≫
+        (Sheaf.derivedRestrictScalars X.smallEtaleTopology ρ).map (θ'.app M) =
+      θ.app M ≫ adj₁.unit.app (rA₁.obj (G.obj M)) ≫
+        (Sheaf.derivedRestrictScalars X.smallEtaleTopology ρ).map (β₁.hom.app (G.obj M)))
+    (hγA : ∀ N,
+      (mateEquiv a (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) p) θ).app N =
+        γA.hom.app N)
+    (hγB : ∀ N,
+      (mateEquiv a (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ') p) θ').app N =
+        γB.hom.app N) :
+    ReductionSquareCompatible adj₁ adj₂ β₁ β₂
+      (derivedRestrictScalarsCompRightDerivedLowerStarIso ρ p d hd) γA γB := by
+  let T₁ : rA₂ ⟶ rB₂ ⋙ Sheaf.derivedRestrictScalars Y.smallEtaleTopology ρ :=
+    (Functor.rightUnitor _).inv ≫ Functor.whiskerLeft _ adj₂.unit ≫
+      (Functor.associator _ _ _).inv ≫ Functor.whiskerRight β₂.hom _
+  let T₂ : rA₁ ⟶ rB₁ ⋙ Sheaf.derivedRestrictScalars X.smallEtaleTopology ρ :=
+    (Functor.rightUnitor _).inv ≫ Functor.whiskerLeft _ adj₁.unit ≫
+      (Functor.associator _ _ _).inv ≫ Functor.whiskerRight β₁.hom _
+  have hT₁ (M : K₂) : T₁.app M = adj₂.unit.app (rA₂.obj M) ≫
+      (Sheaf.derivedRestrictScalars Y.smallEtaleTopology ρ).map (β₂.hom.app M) := by
+    simp [T₁]
+  have hT₂ (N : K₁) : T₂.app N = adj₁.unit.app (rA₁.obj N) ≫
+      (Sheaf.derivedRestrictScalars X.smallEtaleTopology ρ).map (β₁.hom.app N) := by
+    simp [T₂]
+  refine (reductionSquareCompatible_iff_unit _ _ _ _ _ _ _).2 fun N ↦ ?_
+  have H := app_comp_map_comp_derivedRestrictScalarsCompRightDerivedLowerStarIso_hom_app_eq ρ p d
+    hd a T₁ T₂ θ θ' γA γB (fun M ↦ by rw [hT₁, hT₂]; exact h M) hγA hγB N
+  rw [hT₁, hT₂] at H
+  rw [Category.assoc, H, Category.assoc]
+
+end AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -223,7 +292,16 @@ theorem reductionSquareCompatible_etaleReductionLowerShriekIso_lowerStar
         (Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar _ p.left))
       (etaleReductionLowerShriekIso ℓ E n p ≪≫ Functor.isoWhiskerLeft _
         (Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar _ p.left)) :=
-  sorry
+  have := HasCompactification.of_over p
+  Etale.reductionSquareCompatible_derivedRestrictScalarsCompRightDerivedLowerStarIso _ p.left d hd
+    (boundedConstructibleUpperStarLowerShriekAdjunction_padicIntegers ℓ E p) _ _ _ _
+    (etaleReductionUpperStarIso ℓ E (n + 1) p).inv (etaleReductionUpperStarIso ℓ E n p).inv _ _
+    (fun M ↦ by
+      have h := etaleReductionUpperStarIso_restrictScalars ℓ E n p M
+      rw [etaleReductionTransposeNatTrans_app, etaleReductionTransposeNatTrans_app] at h
+      exact h)
+    (mateEquiv_etaleReductionUpperStarIso_inv ℓ E p (n + 1))
+    (mateEquiv_etaleReductionUpperStarIso_inv ℓ E p n)
 
 
 /-- Blueprint `det-sp-purity-coefficient-change`, the proper piece: for a proper `p`, the canonical
