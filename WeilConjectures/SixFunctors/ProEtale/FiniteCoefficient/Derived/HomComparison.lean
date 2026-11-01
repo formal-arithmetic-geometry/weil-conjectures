@@ -26,6 +26,11 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Generation
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.Supports
 public import WeilConjectures.SixFunctors.Etale.Derived.VerdierBiduality
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ComparisonClosedSupport
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ComparisonDualizable
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomAdjunction
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomTriangulated
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarEtaleOrigin
 
 /-!
 
@@ -167,6 +172,63 @@ theorem torAmplitudeIn_of_mapDerivedCategory_comparisonUpperStar {X : Scheme.{u}
       (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K')) :
     Etale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K' :=
   (torAmplitudeIn_mapDerivedCategory_iff a b K').1 hKt
+
+section EtaleOrigin
+
+open Limits ZeroObject
+
+variable {X : Scheme.{u}}
+  (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+
+omit [Finite Λ] in
+/-- For a fixed étale complex `M`, the étale complexes `K` such that `RHom(ν^* K, ν^* M)` is of
+étale origin form a triangulated subcategory: `ν^*` is triangulated, and `RHom(-, ν^* M)` is
+exact (`AlgebraicGeometry.ProEtale.exists_distTriang_derivedHom_left`) and turns shifts into
+opposite shifts (`AlgebraicGeometry.ProEtale.derivedHomShiftIso`). -/
+lemma isTriangulated_plusEtaleOrigin_derivedHom_mapDerivedCategory :
+    ObjectProperty.IsTriangulated (fun K ↦ plusEtaleOrigin (ModuleCat.{u + 1} Λ) X
+      (((ProEtale.derivedHom (ModuleCat.{u + 1} Λ) X).obj
+        (op (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K))).obj
+          (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj M))) where
+  exists_zero := ⟨0, isZero_zero _, (plusEtaleOrigin _ X).prop_of_isZero
+    (isZero_derivedHom_obj_obj_of_isZero _
+      ((D(ν^*(X)[ModuleCat.{u + 1} Λ])).map_isZero (isZero_zero _)) _)⟩
+  isStableUnderShiftBy n := ⟨fun K hK ↦ (plusEtaleOrigin _ X).prop_of_iso
+    ((((ProEtale.derivedHom _ X).mapIso
+        (((D(ν^*(X)[ModuleCat.{u + 1} Λ])).commShiftIso n).app K).op).app _).symm ≪≫
+      (derivedHomShiftIso _ _ n).app _).symm
+    ((plusEtaleOrigin _ X).le_shift (-n) _ hK)⟩
+  ext₂' T hT h₁ h₃ := ObjectProperty.le_isoClosure _ _ (by
+    obtain ⟨w, hw⟩ := exists_distTriang_derivedHom_left _ (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj M)
+      _ ((D(ν^*(X)[ModuleCat.{u + 1} Λ])).map_distinguished T hT)
+    exact (plusEtaleOrigin _ X).ext_of_isTriangulatedClosed₂ _ hw h₃ h₁)
+
+omit [Finite Λ] in
+/-- For a fixed étale complex `M`, the étale complexes `K` such that `RHom(ν^* K, ν^* M)` is of
+étale origin are stable under retracts. -/
+lemma isStableUnderRetracts_plusEtaleOrigin_derivedHom_mapDerivedCategory :
+    ObjectProperty.IsStableUnderRetracts (fun K ↦ plusEtaleOrigin (ModuleCat.{u + 1} Λ) X
+      (((ProEtale.derivedHom (ModuleCat.{u + 1} Λ) X).obj
+        (op (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K))).obj
+          (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj M))) where
+  of_retract h hK := (plusEtaleOrigin _ X).prop_of_retract
+    (h.op.map ((D(ν^*(X)[ModuleCat.{u + 1} Λ])).op ⋙
+      (ProEtale.derivedHom (ModuleCat.{u + 1} Λ) X).flip.obj
+        (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj M))) hK
+
+omit [Finite Λ] in
+/-- For a fixed étale complex `M`, the property of `K` that `RHom(ν^* K, ν^* M)` is of étale
+origin is closed under isomorphisms. -/
+lemma isClosedUnderIsomorphisms_plusEtaleOrigin_derivedHom_mapDerivedCategory :
+    ObjectProperty.IsClosedUnderIsomorphisms (fun K ↦ plusEtaleOrigin (ModuleCat.{u + 1} Λ) X
+      (((ProEtale.derivedHom (ModuleCat.{u + 1} Λ) X).obj
+        (op (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K))).obj
+          (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj M))) where
+  of_iso e hK := (plusEtaleOrigin _ X).prop_of_iso
+    (((ProEtale.derivedHom (ModuleCat.{u + 1} Λ) X).mapIso
+      ((D(ν^*(X)[ModuleCat.{u + 1} Λ])).mapIso e).op.symm).app _) hK
+
+end EtaleOrigin
 
 /-- The étale-origin step of blueprint `lem-weil-finite-duality-site-comparison`: for `X`
 separated of finite type over an algebraic closure `k` of `𝔽_p`, `K ∈ Dctf(X_ét, Λ)` and
