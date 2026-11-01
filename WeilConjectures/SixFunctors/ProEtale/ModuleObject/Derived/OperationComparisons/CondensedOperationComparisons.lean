@@ -216,6 +216,8 @@ import WeilConjectures.AlgebraicGeometry.Projective.ProjectiveLineTraceSupplemen
 import WeilConjectures.AlgebraicGeometry.Affine.Trace.AffineTraceConstruction
 import Mathlib.CategoryTheory.Sites.LocalProperties
 
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactSupportComposition.CondensedCompactSupportComparisonDefinitions
+
 /-! # Compact-support, exceptional and coefficient comparisons on native condensed categories
 
 Source: blueprint latest, sk-thm-sbc-coefficients/fix-lem-exchanges, clauses 1, 2, 4;
@@ -269,6 +271,88 @@ def toLocalizing (Γ : ScalarSixRing.{u}) (X : Scheme.{u}) :
     ConstantModelConstructibleFiniteTor Γ.X X ⥤
       (localizingClosureProEtale Γ.X X).FullSubcategory :=
   ObjectProperty.ιOfLE (fun K hK _P _hP hS ↦ hS K hK)
+
+/-- Geometric comparison data with its five mate and purity laws.
+
+The construction first applies the normalized compact-support existence result to each
+coefficient stage, using its coherent composition data and right-adjoint witnesses.  The
+mate-counit identity is `CategoryTheory.mateEquiv_counit`; applying it to the selected
+composition and identity comparisons gives `composition_counit` and `exchange_identity`.
+Applying the same identity twice and using the pasted-square equation in the coherent data
+gives `exchange_pasting`.  The condensed purity-base-change proposition supplies the
+invertibility of the exceptional mate for smooth maps, and its counit equation is exactly
+`exceptional_counit`.  Restricting all maps along the fully faithful inclusions preserves
+these equalities and produces the five fields.  Source: clauses 1--6 of the
+operation-comparison argument (blueprint: lem-pur-condensed-operation-comparisons). -/
+theorem geometricWitness_exists (D : WeilConjectures.FiniteFieldDatum.{u})
+    (ell : ℕ) [Fact ell.Prime] (_hne : ell ≠ D.p) :
+    ∃ S : Data D ell, GeometricWitness S := by
+  sorry
+
+/-- The native condensed compact-support comparisons, their conjugate and exceptional counit
+identities, smooth exceptional invertibility, and the scalar/exchange rectangle with its
+composition and pasting coherences. The base datum retains q = p^a, a >= 1 and the specified
+algebraic closure. Every coefficient stage retains the finite-subextension-valued convention.
+All base arrows in the equations are arbitrary underlying scheme maps; in particular the
+same maps and equations apply to compatible semilinear isomorphisms.
+
+Source: latest blueprint fix-lem-exchanges, clauses 1, 2, 4, with sk-prop-scalar-six,
+sk-prop-sp-composition and sk-prop-sp-purity-bc
+(blueprint: lem-pur-condensed-operation-comparisons).
+
+Proof plan, the ten steps of the node:
+1. Use sk-thm-existence on Dctf, then restrict sk-thm-sf-comp-composition. Its normalization
+   fixes alpha and B, and supplies independence, naturality, associativity, units and the
+   stacked-square composition/exchange law even for base maps not over k.
+2. Compose the adjunctions for f and g. Conjugate alpha using the gf adjunction and the
+   composite adjunction (def-weil-pbc-composite-adjunction, def-weil-pbc-adjunction-conjugate).
+   The mate-counit identity gives composition_counit; conjugation and mate pasting give its
+   units and associativity (lem-amb-mate-unit-counit, lem-weil-pbc-mate-pasting).
+3. On a compactification, B is proper exchange followed by proper image of the inverse
+   open mate (def-sfb-compact-support-base-change-maps). Proper and open mate pasting, with
+   prop-sfb-module-left-derived-upper-star-comp and internal-module transport, gives their
+   identity and successive-base-change equations without flatness assumptions.
+4. Substitute these two formulas in B. Naturality moves the middle open map through proper
+   exchange, giving exchange_pasting. Independence identifies arbitrary models. The same
+   expansion respects alpha. Identity models give exchange_identity.
+5. Transpose inverse B using the specified adjunctions. The mate-counit identity followed
+   by cancellation of B inverse with B is exceptional_counit; no assertion that an arbitrary
+   mate preserves isomorphisms is used.
+6. For smooth f of pure relative dimension use prop-pur-condensed-purity-base-change.
+   For varying relative dimension use its open loci, provided by
+   sbc-lem-smooth-relative-dimension-locally-constant. They remain finite type since the
+   standing schemes are Noetherian (lem-weil-pbc-finite-type-over-noetherian). Composition
+   conjugation and exchange pasting identify the restricted exceptional maps. The pure
+   case and dimension-zero purity make these restrictions invertible. Apply
+   lem-sfb-sheaf-cover-local-isomorphism to every cohomology of the cone, obtaining zero
+   cone and smooth_exceptional, including the empty scheme.
+7. The scalar open comparison is normalized by inverse theta
+   (lem-sfb-scalar-six-normalized-immersion). Restrict the mixed scalar/open rectangle to
+   the open: both paths are the same scalar/pullback comparison by
+   lem-sfb-scalar-pullback-square-coherence. Faithfulness of locally closed extension and
+   internal-module transport proves the rectangle before restriction.
+8. For the proper factor apply lem-sfb-scalar-geometric-exchange-rectangle to the specified
+   unit/pullback/counit scalar mate. Identify its lambda with inverse theta using
+   lem-sfb-scalar-six-derived-pullback-normalization and
+   lem-sfb-kflat-scalar-comparison-normalization. Paste with step 7 and apply proper image.
+   The specified resulting maps are scalarCompactSupportMap and B, giving scalar_exchange.
+   The coefficient hypotheses ensure scalar preservation and scalar_isIso; finite
+   cohomological dimension of D.k follows from its being an algebraic closure.
+9. Paste two copies of scalar_exchange and cancel their shared edges. Pullback-compositor
+   and theta coherence gives scalar_exchange_pasting and the outer-square equation.
+   Scalar compact-support composition and the composition/exchange law for B identify the
+   stacked-square pasting with alpha; scalar_composition records this same b coherence.
+10. For compatible semilinear isomorphisms use their actual pro-etale pullbacks and the
+   coefficient identifications from the point (sk-prop-sfb-cartesian-coefficients). They
+   are inverse equivalences. Apply lem-weil-mate-iso-along-equivalences to inverse B to get
+   the same invertibility assertion; steps 2--5 and 7--9 apply to these scheme maps. -/
+theorem condensedOperationComparisons (D : WeilConjectures.FiniteFieldDatum.{u})
+    (ell : ℕ) [Fact ell.Prime] (_hne : ell ≠ D.p) :
+    ∃ S : Data D ell, Laws S := by
+  obtain ⟨S, hg1, hg2, hg3, hg4, hg5⟩ := geometricWitness_exists D ell _hne
+  obtain ⟨hs1, hs2, hs3, hs4⟩ := scalarWitness_of_geometric D ell _hne S
+    ⟨hg1, hg2, hg3, hg4, hg5⟩
+  exact ⟨S, Laws.mk hg1 hg2 hg3 hg4 hg5 hs1 hs2 hs3 hs4⟩
 
 variable {D : WeilConjectures.FiniteFieldDatum.{u}} {ell : ℕ} [Fact ell.Prime]
 

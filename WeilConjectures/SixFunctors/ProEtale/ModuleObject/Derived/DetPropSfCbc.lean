@@ -227,6 +227,133 @@ noncomputable def compactSupportOpenBaseChangeIso
       (leftDerivedUpperStarIsoMapDerivedCategory Λ (pullback.fst f g)).symm
       D(((c.baseChange g).i)_!open⟦Λ⟧)
 
+/-- The proper exchange on the extension-by-zero of a bounded-constructible object.
+The proof reduces the proper mate to finite scalar models, lifts through derived Nakayama, and
+then passes to rational generators.
+Source: `det-prop-sf-cbc`, proper exchange step (blueprint: det-prop-sf-cbc). -/
+theorem condensed_compactSupport_proper_exchange_isIso
+    (ell : ℕ) [Fact ell.Prime]
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ]
+    (hΛ :
+      (∃ E : PadicAlgCl.FiniteIntermediateField ell,
+        Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicIntegersRingObj ell E))) ∨
+      (∃ E : PadicAlgCl.FiniteIntermediateField ell,
+        Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E))) ∨
+      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ell)))
+    {X Y Y' : Scheme.{u}} (f : X ⟶ Y) (g : Y' ⟶ Y)
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    [IsNoetherian X] [IsNoetherian Y]
+    (c : Compactification f) [IsNoetherian c.Z]
+    [QuasiCompact (pullback.snd f g)]
+    (K : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)))
+    (hK : boundedConstructible (condensedRingObj Λ X) K) :
+    IsIso ((detSfProperBaseChangeMap Λ c.g g).app
+      (D((c.i)_!open⟦Λ⟧).obj K)) := by
+  sorry
+
+/-- Extension by zero preserves bounded constructibility on the Noetherian compactification.
+The proof extends each finite locally-presented stratum by zero across the open complement.
+Source: `det-prop-sf-cbc`, constructibility step (blueprint: det-prop-sf-cbc). -/
+theorem condensed_compactSupport_extension_boundedConstructible
+    (ell : ℕ) [Fact ell.Prime]
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ]
+    (hΛ :
+      (∃ E : PadicAlgCl.FiniteIntermediateField ell,
+        Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicIntegersRingObj ell E))) ∨
+      (∃ E : PadicAlgCl.FiniteIntermediateField ell,
+        Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E))) ∨
+      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ell)))
+    {X Y Y' : Scheme.{u}} (f : X ⟶ Y) (g : Y' ⟶ Y)
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    [IsNoetherian X] [IsNoetherian Y]
+    (c : Compactification f) [IsNoetherian c.Z]
+    [QuasiCompact (pullback.snd f g)]
+    (K : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)))
+    (hK : boundedConstructible (condensedRingObj Λ X) K) :
+    boundedConstructible (condensedRingObj Λ c.Z)
+      (D((c.i)_!open⟦Λ⟧).obj K) := by
+  sorry
+
+/-- Proper finiteness sends a bounded-constructible extension-by-zero object to the base.
+This is the Noetherian proper-finiteness part, before arbitrary pullback.
+Source: `det-prop-sf-cbc`, constructibility step (blueprint: det-prop-sf-cbc). -/
+theorem condensed_compactSupport_proper_finiteness
+    (ell : ℕ) [Fact ell.Prime]
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ]
+    (hΛ :
+      (∃ E : PadicAlgCl.FiniteIntermediateField ell,
+        Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicIntegersRingObj ell E))) ∨
+      (∃ E : PadicAlgCl.FiniteIntermediateField ell,
+        Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E))) ∨
+      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ell)))
+    {X Y Y' : Scheme.{u}} (f : X ⟶ Y) (g : Y' ⟶ Y)
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    [IsNoetherian X] [IsNoetherian Y]
+    (c : Compactification f) [IsNoetherian c.Z]
+    (K : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)))
+    (hExt : boundedConstructible (condensedRingObj Λ c.Z)
+      (D((c.i)_!open⟦Λ⟧).obj K)) :
+    boundedConstructible (condensedRingObj Λ Y) ((detSfCompactSupport Λ c).obj K) := by
+  sorry
+
+/-- Pullback along the arbitrary base map preserves the bounded-constructible proper endpoint.
+This is the coefficient pullback argument, separated from proper finiteness.
+Source: `det-prop-sf-cbc`, constructibility step (blueprint: det-prop-sf-cbc). -/
+theorem condensed_compactSupport_pullback_constructible
+    (ell : ℕ) [Fact ell.Prime]
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ]
+    (hΛ :
+      (∃ E : PadicAlgCl.FiniteIntermediateField ell,
+        Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicIntegersRingObj ell E))) ∨
+      (∃ E : PadicAlgCl.FiniteIntermediateField ell,
+        Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E))) ∨
+      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ell)))
+    {X Y Y' : Scheme.{u}} (f : X ⟶ Y) (g : Y' ⟶ Y)
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    [IsNoetherian X] [IsNoetherian Y]
+    (c : Compactification f) [IsNoetherian c.Z]
+    [QuasiCompact (pullback.snd f g)]
+    (M : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)))
+    (hM : boundedConstructible (condensedRingObj Λ Y) M) :
+    boundedConstructible (condensedRingObj Λ Y')
+      ((detSfDerivedPullback Λ g).obj M) := by
+  sorry
+
+/-- The left compact-support endpoint combines extension-by-zero, proper finiteness and pullback.
+Source: `det-prop-sf-cbc`, constructibility step (blueprint: det-prop-sf-cbc). -/
+theorem condensed_compactSupport_left_boundedConstructible
+    (ell : ℕ) [Fact ell.Prime]
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ]
+    (hΛ :
+      (∃ E : PadicAlgCl.FiniteIntermediateField ell,
+        Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicIntegersRingObj ell E))) ∨
+      (∃ E : PadicAlgCl.FiniteIntermediateField ell,
+        Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E))) ∨
+      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ell)))
+    {X Y Y' : Scheme.{u}} (f : X ⟶ Y) (g : Y' ⟶ Y)
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    [IsNoetherian X] [IsNoetherian Y]
+    (c : Compactification f) [IsNoetherian c.Z]
+    [QuasiCompact (pullback.snd f g)]
+    (K : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)))
+    (hK : boundedConstructible (condensedRingObj Λ X) K) :
+    boundedConstructible (condensedRingObj Λ Y')
+      ((detSfCompactSupport Λ c ⋙ detSfDerivedPullback Λ g).obj K) := by
+  have hExt := condensed_compactSupport_extension_boundedConstructible ell Λ hΛ f g c K hK
+  have hProper := condensed_compactSupport_proper_finiteness ell Λ hΛ f g c K hExt
+  exact condensed_compactSupport_pullback_constructible ell Λ hΛ f g c
+    ((detSfCompactSupport Λ c).obj K) hProper
+
 open CategoryTheory.TwoSquare
 
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -26,6 +26,8 @@ import WeilConjectures.AlgebraicGeometry.ClopenLocalization.ProEtaleClopenUnboun
 import WeilConjectures.CategoryTheory.DerivedCategory.AdjunctionMateTranspose
 import WeilConjectures.CategoryTheory.ProperBaseChange.ExchangeMateCube
 import WeilConjectures.CategoryTheory.Adjunction.SixFunctors.CompositionAdjunctionNormalization
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CondensedOpenProper.CondensedOpenProperMateLaws
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CondensedOpenProper.CondensedOpenProperOpenLaws
 
 /-! # Open exchange and proper/open pasting for condensed modules
 
@@ -321,5 +323,43 @@ structure Pasting where
     (B qi).hom.app ((R Λ p).obj K) ≫
       (J Λ i').map ((derivedDirectImageOpenRestriction Λ qp.toCommSq).app K) ≫
       (gamma Λ units q').app ((P Λ aU).obj K)
+
+end AlgebraicGeometry.ProEtale.CondensedRing.CondensedOpenProper
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing.CondensedOpenProper
+
+/-- Open exchange, mixed proper/open pasting and arbitrary-base-change cube coherence.
+Source: latest blueprint sk-thm-sf-comp-composition.proof.md, Canonicity and associativity
+and Base change; Stacks Tags 09AH, 0F7B--0F7F
+(blueprint: lem-zl-condensed-open-proper-pasting).
+
+Proof: `condensedOpenProperOpenLaws` gives the open package (units, normalized open exchange
+`B`, the open compositor laws and the ambient exchange normalization: blueprint steps 1-3,
+new-zl-condensed-open-proper-open-laws). For that package `condensedOpenProperMateLaws`
+gives restriction invertibility, the mixed `gamma` pasting and identity laws and the
+base-change cube (blueprint steps 4-10, new-zl-condensed-open-proper-mate-laws). The
+fields of the two packages are exactly the fields of `Pasting`.
+-/
+theorem condensedOpenProperPasting (_hΛ : IsAdmissibleCoefficient Λ) :
+    Nonempty (Pasting Λ) := by
+  let openData : OpenLaws Λ := Classical.choice (condensedOpenProperOpenLaws Λ _hΛ)
+  let mateData : MateLaws Λ openData :=
+    Classical.choice (condensedOpenProperMateLaws Λ _hΛ openData)
+  refine ⟨{ units := openData.units
+            B := openData.B
+            B_normalized := openData.B_normalized
+            B_id := openData.B_id
+            B_open_id := openData.B_open_id
+            B_vertical := openData.B_vertical
+            B_horizontal := openData.B_horizontal
+            j_assoc := openData.j_assoc
+            j_unit := openData.j_unit
+            exchange_normalized := openData.exchange_normalized
+            restriction_isIso := mateData.restriction_isIso
+            gamma_vertical := mateData.gamma_vertical
+            gamma_horizontal := mateData.gamma_horizontal
+            gamma_vertical_id := mateData.gamma_vertical_id
+            gamma_horizontal_id := mateData.gamma_horizontal_id
+            cube := mateData.cube }⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing.CondensedOpenProper
