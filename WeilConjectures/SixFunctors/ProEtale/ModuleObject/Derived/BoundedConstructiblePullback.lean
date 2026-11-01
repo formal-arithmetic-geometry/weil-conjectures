@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarCoherence
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleLowerStar
 
 /-!
 # Coherence of the derived pullbacks on bounded constructible complexes

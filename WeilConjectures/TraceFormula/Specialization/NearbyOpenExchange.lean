@@ -574,10 +574,11 @@ lemma NearbyCyclesModel.Hom.lowerShriekExchangeOfInv_comp_app_map_comp
     rw [← ObjectProperty.FullSubcategory.comp_hom, Iso.inv_hom_id_app]
     rfl
 
-variable [Algebra k k'] [IsProper (toPoint Z).left] [IsProper (toPoint Z').left]
+variable [IsProper (toPoint Z).left] [IsProper (toPoint Z').left]
   (hN : N.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
   (hM : M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
-  (hS : (traitModel k k').PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
+  {T : NearbyCyclesModel (point k).left (point k').left}
+  (hS : T.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
 
 set_option maxHeartbeats 800000 in
 -- the instantiation and the three identities `H` together exceed the default budget
@@ -594,7 +595,7 @@ first identity is
 `compactificationLowerShriekIso_hom_app_hom_comp_map_openImmersionLowerShriekComp` and
 `compactificationLowerShriekIso_inv_app_comp_hom_app_hom`. -/
 theorem compactSupportExchangeOfCompactification_comp_app
-    (a : P.Hom (traitModel k k') (toPoint Z).left (toPoint Z').left)
+    (a : P.Hom T (toPoint Z).left (toPoint Z').left)
     (ha : IsIsoOn (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
       Z.left)).ι (a.pushforwardExchange (Profinite.padicAlgClRingObj ℓ)))
     (K : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :

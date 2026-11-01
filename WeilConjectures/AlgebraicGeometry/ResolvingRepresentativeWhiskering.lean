@@ -7,6 +7,8 @@ module
 public import Mathlib.CategoryTheory.Localization.CalculusOfFractions
 public import Mathlib.CategoryTheory.Localization.Prod
 
+public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
+public import Mathlib.CategoryTheory.Whiskering
 set_option linter.privateModule false
 
 /-! # Full faithfulness of restriction to resolving representatives -/
@@ -161,5 +163,66 @@ private noncomputable def fullyFaithfulWhiskeringOfFullEssSurj
       a.app (p.objPreimage (p.obj X)) ≫ B.map (p.objObjPreimageIso (p.obj X)).hom = a.app X
     rw [← ha, ← A.map_comp_assoc, Iso.inv_hom_id, A.map_id, Category.id_comp]⟩
   exact Functor.FullyFaithful.ofFullyFaithful L
+
+end CategoryTheory
+
+namespace CategoryTheory
+
+section
+
+set_option autoImplicit false
+open CategoryTheory CategoryTheory.Functor
+
+set_option backward.isDefEq.respectTransparency false in
+/-- Restriction along a quotient followed by localization is fully faithful on two-variable
+functor categories when every homotopy object has a resolving representative.
+Source: Stacks Project, Categories, Tags 04VI--04VK; Cohomology on Sites, Tag 06YS.
+(blueprint: lem-weil-pbc-resolving-representative-whiskering).
+Proof: resolve the extra vertices of Ore squares and equality refinements to restrict
+the right calculus of fractions to the resolving subcategory. The induced localization
+functor is full by refining roofs, faithful by refining common roofs, and essentially
+surjective by resolving objects. Restriction along it is fully faithful, also on its
+product with itself. The full, surjective-on-objects quotient restricts to a full,
+essentially surjective functor of representative categories; precomposition along this
+functor is fully faithful. Compose these two restriction functors. -/
+theorem resolvingRepresentativesFullyFaithfulWhiskering
+    {K : Type u₁} [Category.{v₁} K] {H : Type u₂} [Category.{v₂} H]
+    {D : Type u₃} [Category.{v₃} D] (E : Type u₄) [Category.{v₄} E]
+    (p : K ⥤ H) [p.Full] [p.EssSurj] (hsurj : Function.Surjective p.obj)
+    (W : MorphismProperty H) [W.HasRightCalculusOfFractions]
+    (q : H ⥤ D) [q.IsLocalization W]
+    (P : ObjectProperty K) (S : ObjectProperty H)
+    (hp : ∀ X, P X ↔ S (p.obj X))
+    (hres : ∀ X : H, ∃ (Y : S.FullSubcategory) (s : Y.obj ⟶ X), W s) :
+    Nonempty (((whiskeringLeft (P.FullSubcategory × P.FullSubcategory) (D × D) E).obj
+      ((P.ι ⋙ p ⋙ q).prod (P.ι ⋙ p ⋙ q))).FullyFaithful) := by
+  let f := S.lift (P.ι ⋙ p) (fun X ↦ (hp X.obj).1 X.property)
+  have : f.Full := ⟨by
+    intro X Y g
+    obtain ⟨g, hg⟩ := p.map_surjective g.hom
+    refine ⟨ObjectProperty.homMk g, ?_⟩
+    apply ObjectProperty.hom_ext
+    exact hg⟩
+  have : f.EssSurj := ⟨by
+    intro X
+    obtain ⟨Y, hy⟩ := hsurj X.obj
+    refine ⟨⟨Y, (hp Y).2 (hy.symm ▸ X.property)⟩, ?_⟩
+    exact ⟨ObjectProperty.isoMk S (eqToIso hy)⟩⟩
+  have : (S.ι ⋙ q).IsLocalization (W.inverseImage S.ι) :=
+    restriction_localization W q S hres
+  let ff := Localization.fullyFaithfulWhiskeringLeft
+    ((S.ι ⋙ q).prod (S.ι ⋙ q)) ((W.inverseImage S.ι).prod (W.inverseImage S.ι)) E
+  have : (f.prod f).Full := ⟨by
+    intro X Y g
+    refine ⟨Prod.mkHom (f.preimage g.1) (f.preimage g.2), ?_⟩
+    apply Prod.ext <;> exact f.map_preimage _⟩
+  have : (f.prod f).EssSurj := ⟨by
+    intro X
+    exact ⟨(f.objPreimage X.1, f.objPreimage X.2),
+      ⟨Iso.prod (f.objObjPreimageIso X.1) (f.objObjPreimageIso X.2)⟩⟩⟩
+  let fg := fullyFaithfulWhiskeringOfFullEssSurj (f.prod f) E
+  exact ⟨ff.comp fg⟩
+
+end
 
 end CategoryTheory

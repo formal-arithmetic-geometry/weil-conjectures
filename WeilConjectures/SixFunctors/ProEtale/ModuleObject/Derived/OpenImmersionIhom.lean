@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryBraided
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.IhomUnitTensor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleBraided
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionProjection
 

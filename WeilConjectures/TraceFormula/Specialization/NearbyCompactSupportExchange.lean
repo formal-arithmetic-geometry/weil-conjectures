@@ -194,10 +194,11 @@ theorem NearbyCyclesModel.Hom.lowerShriekExchangeOfInv_comp_pushforwardExchange
 
 section General
 
-variable [Algebra k k'] [IsProper (toPoint X₃).left] [IsProper (toPoint X₁).left]
+variable [IsProper (toPoint X₃).left] [IsProper (toPoint X₁).left]
   [IsProper (toPoint X₃').left] [IsProper (toPoint X₁').left]
   (hN : N.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
-  (hS : (traitModel k k').PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
+  {T : NearbyCyclesModel (point k).left (point k').left}
+  (hS : T.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
 
 /-- **The identifications `E` and `Ra_! ≅ ι_! ⋙ Ra_*` are compatible**: on the underlying
 complexes, the identification `Ra₁_! K ≅ Ra₁_* ι₁! K` followed by `Ra₁_*(E_K)` for
@@ -296,7 +297,7 @@ all the restricted functors written as lifts of the ambient ones and their compa
 the inclusions as `ObjectProperty.liftCompιIso`. -/
 lemma compactSupportExchangeOfCompactification_eq_lift (φ₃ : N.Hom P₃ ι₃.left ι₃'.left)
     [IsIso (φ₃.pullbackExchange (Profinite.padicAlgClRingObj ℓ))]
-    (a₃ : P₃.Hom (traitModel k k') (toPoint X₃).left (toPoint X₃').left)
+    (a₃ : P₃.Hom T (toPoint X₃).left (toPoint X₃').left)
     (ha₃ : IsIsoOn (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
       X₃.left)).ι (a₃.pushforwardExchange (Profinite.padicAlgClRingObj ℓ))) :
     compactSupportExchangeOfCompactification ℓ hN hS (comp_toPoint ι₃) (comp_toPoint ι₃') φ₃ a₃
@@ -305,7 +306,7 @@ lemma compactSupportExchangeOfCompactification_eq_lift (φ₃ : N.Hom P₃ ι₃
         (Sp := (boundedConstructible _).lift ((boundedConstructible _).ι ⋙
           N.nearbyCycles (Profinite.padicAlgClRingObj ℓ)) fun K ↦ hN K.obj K.property)
         (Ts := (boundedConstructible _).lift ((boundedConstructible _).ι ⋙
-          (traitModel k k').nearbyCycles (Profinite.padicAlgClRingObj ℓ))
+          T.nearbyCycles (Profinite.padicAlgClRingObj ℓ))
             fun K ↦ hS K.obj K.property)
         (OLS := (boundedConstructible _).lift ((boundedConstructible _).ι ⋙
           D((ι₃.left)_!open⟦Profinite.padicAlgClRingObj ℓ⟧))
@@ -341,8 +342,8 @@ theorem compactSupportExchangeOfCompactification_eq_of_refinement
     (φ₃ : N.Hom P₃ ι₃.left ι₃'.left) (φ₁ : N.Hom P₁ ι₁.left ι₁'.left)
     [IsIso (φ₃.pullbackExchange (Profinite.padicAlgClRingObj ℓ))]
     [IsIso (φ₁.pullbackExchange (Profinite.padicAlgClRingObj ℓ))]
-    (a₃ : P₃.Hom (traitModel k k') (toPoint X₃).left (toPoint X₃').left)
-    (a₁ : P₁.Hom (traitModel k k') (toPoint X₁).left (toPoint X₁').left)
+    (a₃ : P₃.Hom T (toPoint X₃).left (toPoint X₃').left)
+    (a₁ : P₁.Hom T (toPoint X₁).left (toPoint X₁').left)
     (ha₃ : IsIsoOn (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
       X₃.left)).ι (a₃.pushforwardExchange (Profinite.padicAlgClRingObj ℓ)))
     (ha₁ : IsIsoOn (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)

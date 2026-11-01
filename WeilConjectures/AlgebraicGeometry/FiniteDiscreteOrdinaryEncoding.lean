@@ -505,3 +505,75 @@ theorem encoding_exists [Finite A] [DiscreteTopology A] (T : Scheme.{u}) :
            fixed_functor := hf }⟩
 
 end AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary
+
+namespace AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary
+
+section
+
+set_option autoImplicit false
+set_option synthInstance.maxSize 2048
+set_option backward.isDefEq.respectTransparency false
+open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
+open CategoryTheory.MonObj
+open scoped CategoryTheory.Obj TensorProduct
+variable (A : Type u) [CommRing A] [TopologicalSpace A] [IsTopologicalRing A]
+attribute [local instance] sfbSheafTensor_monoidalPreadditive sfbSheafTensor_hasWeakSheafify
+
+
+/-- Termwise extension to fixed scalar sheaves, using the same intrinsic equivalence.
+Source: blueprint proof steps 3--4, Stacks 015F
+(blueprint: lem-sf-finite-discrete-normalized-encoding). -/
+def Encoding.fixedDerived {T : Scheme.{u}} (e : Encoding A T) :
+    DerivedCategory (Internal A T) ≌
+      DerivedCategory (Sheaf (Scheme.ProEt.topology T)
+        (ModuleCat.{u + 1} (ULift.{u + 1} A))) :=
+  letI : (e.ordinary.trans e.fixed).functor.Additive :=
+    inferInstanceAs (e.ordinary.functor ⋙ e.fixed.functor).Additive
+  letI : (e.ordinary.trans e.fixed).inverse.Additive :=
+    inferInstanceAs (e.fixed.inverse ⋙ e.ordinary.inverse).Additive
+  (e.ordinary.trans e.fixed).mapDerivedCategory
+
+/-- The ordinary finite constant local models: on each member of one pro-etale cover
+there is a constant finite module. Over a finite ring, finite modules are precisely
+finitely presented modules. This is the ordinary side of the source's local-model clause.
+Source: blueprint proof step 9 and sk-def-sfb-constructible, clause 1
+(blueprint: lem-sf-finite-discrete-normalized-encoding). -/
+def ordinaryLocalModel (T : Scheme.{u})
+    (M : Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1} A))) : Prop :=
+  ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage T, ∀ i : C.I₀,
+    ∃ P : ModuleCat.{u + 1} (ULift.{u + 1} A), Finite P ∧
+      Nonempty ((upperStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) (C.f i)).obj M ≅
+        (constantSheaf (Scheme.ProEt.topology (C.X i))
+          (ModuleCat.{u + 1} (ULift.{u + 1} A))).obj P)
+
+/-- The ordinary finite stratification condition in the same scalar presentation.
+Source: sk-def-sfb-constructible, clause 2, and blueprint proof step 9
+(blueprint: lem-sf-finite-discrete-normalized-encoding). -/
+def ordinaryStratified (T : Scheme.{u})
+    (M : Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1} A))) : Prop :=
+  ∃ S : Scheme.Stratification T, ∀ a : Fin S.n,
+    ordinaryLocalModel A (S.domain a)
+      ((upperStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) (S.immersion a)).obj M)
+
+open Classical in
+/-- Qcqs schemes use finite constructible stratifications; otherwise use every affine open.
+Source: sk-def-sfb-constructible, clause 2, and blueprint proof step 9
+(blueprint: lem-sf-finite-discrete-normalized-encoding). -/
+def ordinaryConstructible (T : Scheme.{u})
+    (M : Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1} A))) : Prop :=
+  if CompactSpace T ∧ QuasiSeparatedSpace T then ordinaryStratified A T M
+  else ∀ U : T.Opens, IsAffineOpen U → ordinaryStratified A U.toScheme
+    ((upperStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) U.ι).obj M)
+
+/-- The ordinary bounded constructible predicate in the fixed scalar presentation.
+Source: sk-def-sfb-constructible, final paragraph, and blueprint proof step 9
+(blueprint: lem-sf-finite-discrete-normalized-encoding). -/
+def ordinaryBoundedConstructible (T : Scheme.{u}) :
+    ObjectProperty (DerivedCategory (Sheaf (Scheme.ProEt.topology T)
+      (ModuleCat.{u + 1} (ULift.{u + 1} A)))) :=
+  DerivedCategory.TStructure.t.bounded ⊓ fun K ↦ ∀ n : ℤ,
+    ordinaryConstructible A T ((DerivedCategory.homologyFunctor _ n).obj K)
+
+end
+
+end AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary

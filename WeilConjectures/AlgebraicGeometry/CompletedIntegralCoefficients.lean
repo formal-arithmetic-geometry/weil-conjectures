@@ -9,6 +9,11 @@ public import WeilConjectures.AlgebraicGeometry.FiniteFieldFiber
 public import WeilConjectures.AlgebraicGeometry.ProEtaleDerivedCategory
 public import WeilConjectures.CategoryTheory.RingedSiteModules
 
+public import Mathlib.CategoryTheory.Sites.Limits
+public import Mathlib.CategoryTheory.Sites.Equivalence
+public import Mathlib.Algebra.Category.Ring.Limits
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
+import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 /-!
 # Completed integral coefficient sheaves
 
@@ -190,5 +195,53 @@ noncomputable def completedIntegralCommRingProjectionUnrestricted (n : ℕ) :
           ((limit.π (integralCoefficientSheafSystem l E Y) (op n)).hom.app U).hom
       naturality := fun _U _V f ↦ (forget₂ CommRingCat RingCat).map_injective
         ((limit.π (integralCoefficientSheafSystem l E Y) (op n)).hom.naturality f) }
+
+end WeilConjectures
+
+namespace WeilConjectures
+
+section
+
+open CategoryTheory CategoryTheory.Limits Opposite
+variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+  [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (Y : AlgebraicGeometry.Scheme.{t})
+variable (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
+
+/-- The completed integral coefficient sheaf is the inverse limit in sheaves of rings.
+The global datum and `hl` impose the blueprint's coefficient convention `l ≠ p`.
+Source: blueprint order 1455 (blueprint: def-weil-completed-integral-coefficients). -/
+noncomputable def completedIntegralCoefficientSheaf (D : FiniteFieldDatum.{d})
+    (_hl : l ≠ D.p) :
+    Sheaf (AlgebraicGeometry.Scheme.ProEt.topology Y) RingCat.{max u (t + 1)} :=
+  completedIntegralCoefficientSheafUnrestricted l E Y
+
+/-- The limit projection to exponent `n+1`; no surjectivity theorem is assumed here.
+Source: blueprint order 1455 (blueprint: def-weil-completed-integral-coefficients). -/
+noncomputable def completedIntegralCoefficientProjection (n : ℕ) :
+    completedIntegralCoefficientSheaf l E Y D hl ⟶ integralCoefficientSheaf l E Y n :=
+  limit.π (integralCoefficientSheafSystem l E Y) (op n)
+
+/-- Sheaves of modules over the completed ring sheaf, with Mathlib's abelian structure.
+Source: blueprint order 1455 (blueprint: def-weil-completed-integral-coefficients). -/
+noncomputable abbrev completedIntegralModuleSheaves :=
+  CategoryTheory.ringedSiteModules.{max u (t + 1)}
+    (completedIntegralCoefficientSheaf l E Y D hl)
+
+/-- The localization of cochain complexes of completed-coefficient module sheaves at
+quasi-isomorphisms, using the standard derived-category localization.
+Source: blueprint order 1455 (blueprint: def-weil-completed-integral-coefficients). -/
+noncomputable abbrev completedIntegralDerivedCategory :=
+  @DerivedCategory (completedIntegralModuleSheaves l E Y D hl) _ _
+    (HasDerivedCategory.standard _)
+
+/-- Restriction of scalars along the limit projection at exponent `n+1`.
+Exactness is intentionally a separate theorem.
+Source: blueprint order 1455 (blueprint: def-weil-completed-integral-coefficients). -/
+noncomputable def completedIntegralRestrictScalars (n : ℕ) :
+    SheafOfModules.{max u (t + 1)} (integralCoefficientSheaf l E Y n) ⥤
+      completedIntegralModuleSheaves l E Y D hl :=
+  SheafOfModules.restrictScalars (completedIntegralCoefficientProjection l E Y D hl n)
+
+end
 
 end WeilConjectures

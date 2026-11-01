@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeMate
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.SquareTransport
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleLowerStar
 
 /-!
 

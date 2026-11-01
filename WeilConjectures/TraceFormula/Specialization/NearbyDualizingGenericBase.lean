@@ -26,8 +26,10 @@ A *family of dualizing maps over a generic base*
 every trait model over a generic base, with the trace property for proper models with full
 generic fibre and the open restriction property, as for the dualizing maps of trait models over
 a base field (`NearbyCyclesModel.NearbyDualizingData`). Its existence is the node lemma
-`NearbyCyclesModel.nonempty_nearbyDualizingDataOfGenericBase`. It restricts to a family of
-dualizing maps over every base field `k` of `k'`
+`NearbyCyclesModel.nonempty_nearbyDualizingDataOfGenericBase`, proved downstream in
+`TraceFormula.Specialization.NearbyDualizingGenericBaseExistence` from the compact-support
+exchanges of compactifications. It restricts to a family of dualizing maps
+over every base field `k` of `k'`
 (`NearbyCyclesModel.NearbyDualizingDataOfGenericBase.toNearbyDualizingData`), so that it agrees
 with every such family (`NearbyCyclesModel.NearbyDualizingDataOfGenericBase.θ_eq_θ`).
 
@@ -154,19 +156,6 @@ structure NearbyDualizingDataOfGenericBase where
           (hM.preservesBoundedConstructible (ℓ := ℓ))).app (dualizingComplex ℓ X₁) ≫
         (boundedConstructibleNearbyCycles (hN.preservesBoundedConstructible (ℓ := ℓ))).map
           (dualizingComplexUpperStarIso ℓ j).hom ≫ θ hN
-
-/-- **Existence of the dualizing maps of nearby cycles over generic bases** (blueprint
-`det-nearby-exchange-maps`): the dualizing map `θ_Y = β_{a_Y}(A)` of blueprint
-`det-nearby-exchange-maps` (5) for separated models of finite type over the trait, the
-exceptional adjoint of the compact-support exchange `ν_{a_Y}` (built from a relative
-compactification over the trait), with its characterising properties: for proper models,
-`ν_a = χ_a⁻¹` gives the trace property (`det-nearby-exchange-maps`), and the composition law
-`sk-lem-tf-nearby-mate-coherences` (4) for an open immersion followed by the structure morphism
-gives open restriction. This is the generic-base version of
-`NearbyCyclesModel.nonempty_nearbyDualizingData` (the case of a base field). -/
-theorem nonempty_nearbyDualizingDataOfGenericBase :
-    Nonempty (NearbyDualizingDataOfGenericBase k' ℓ) := by
-  sorry
 
 namespace NearbyDualizingDataOfGenericBase
 

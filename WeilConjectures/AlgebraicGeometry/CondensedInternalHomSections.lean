@@ -8,7 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Tensor
 public import WeilConjectures.AlgebraicGeometry.CondensedQcqsPushforwardContinuity
 public import WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
-import all WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
+import WeilConjectures.CategoryTheory.ModuleObjects.RelativeTensorCoequalizer
 import all WeilConjectures.CategoryTheory.Sites.CohomologyDerivedEvaluation
 import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
 
@@ -18,34 +18,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory MonObj
 open scoped CategoryTheory.Obj
-namespace CategoryTheory.Mod
-
-universe v' u'
-
-variable {C : Type u'} [Category.{v'} C] [Abelian C] [IsGrothendieckAbelian.{v'} C]
-  [MonoidalCategory C] [MonoidalPreadditive C] [SymmetricCategory C] [MonoidalClosed C]
-  {R : C} [MonObj R] [IsCommMonObj R]
-
-/-- The relative tensor product `- ⊗_R N`, built as a coequalizer, agrees with the monoidal
-tensor product of `Mod C R`. -/
-private noncomputable def relativeTensorRightIso (N : Mod C R) :
-    Mod.tensorLeft N ≅ MonoidalCategory.tensorRight N :=
-  NatIso.ofComponents
-    (fun M ↦ by
-      change colimit ((tensorLeftDiagram R N).flip.obj M) ≅ M ⊗ N
-      exact HasColimit.isoOfNatIso
-        (diagramIsoParallelPair ((tensorLeftDiagram R N).flip.obj M)) ≪≫
-        (colimit.isColimit _).coconePointUniqueUpToIso (isColimitRelativeTensorCofork M N)) (by
-    intro M M' f
-    apply colimit.hom_ext
-    intro j
-    simp only [id_eq, Iso.trans_hom, tensorLeft, Functor.comp_map, colim_map, Category.assoc,
-      ι_colimMap_assoc, HasColimit.isoOfNatIso_ι_hom_assoc]
-    cases j <;> apply Mod.hom_ext <;>
-      simp [relativeTensorCofork, relativeTensorπ, tensorObjπ_whiskerRight])
-
-end CategoryTheory.Mod
-
 namespace AlgebraicGeometry.ProEtale
 
 private noncomputable def freeUnitRegularIso
