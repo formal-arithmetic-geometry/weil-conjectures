@@ -6,7 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Geometry.SemilinearGeometryOps
-import all WeilConjectures.CategoryTheory.Derived.DerivedExactSquareComposition
+import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 
 /-! # Compatibility of geometric operation transitions
 

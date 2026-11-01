@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.Ringed.Finite.RingedFiniteFreeHomBaseChangeData
 import WeilConjectures.CategoryTheory.ProperBaseChange.ResolvingRepresentativeWhiskeringSupplement
-import WeilConjectures.CategoryTheory.Tensor.TensorPullbackRepresentativeDescent
+import WeilConjectures.AlgebraicGeometry.TensorPullbackRepresentativeDescent
 import WeilConjectures.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
 import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients

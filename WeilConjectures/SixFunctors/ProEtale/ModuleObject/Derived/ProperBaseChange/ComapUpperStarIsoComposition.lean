@@ -6,7 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperBaseChange.ComapUpperStarIsoMate
+import WeilConjectures.AlgebraicGeometry.ComapUpperStarIsoMate
 
 /-! # Composition of coefficient restriction and ordinary pullback -/
 

@@ -18,7 +18,7 @@ public import Mathlib.Topology.Instances.ZMod
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 import Mathlib.CategoryTheory.Abelian.Projective.Extend
 import all WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinary.FiniteDiscreteOrdinaryEncodingSupplement
-import all WeilConjectures.AlgebraicGeometry.Pullback.PullbackFiniteConstantLocalModel
+import all WeilConjectures.AlgebraicGeometry.PullbackFiniteConstantLocalModel
 import Mathlib.Algebra.Homology.ShortComplex.Ab
 import Mathlib.Algebra.Homology.Double
 public import Mathlib.Order.CompletePartialOrder

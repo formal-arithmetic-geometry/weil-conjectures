@@ -131,7 +131,7 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Tensor.ProEtaleTensorPullbackModels
 import all WeilConjectures.AlgebraicGeometry.ProEtale.Tensor.ProEtaleTensorPullbackModels
 import WeilConjectures.AlgebraicGeometry.ProEtale.Tensor.ProEtaleTensorPullbackDescentData
-import WeilConjectures.CategoryTheory.Tensor.TensorPullbackRepresentativeDescent
+import WeilConjectures.AlgebraicGeometry.TensorPullbackRepresentativeDescent
 import all WeilConjectures.AlgebraicGeometry.ProEtaleTensorComparison.ProEtaleInverseImageTensorComparisonSupplement
 
 /-!

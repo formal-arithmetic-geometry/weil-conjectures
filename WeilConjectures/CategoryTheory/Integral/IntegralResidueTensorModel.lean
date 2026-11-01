@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.Integral.IntegralResidueTensorPresentation
 public import WeilConjectures.CategoryTheory.ModuleObjects.ResidueOrdinary.IntegralResidueOrdinaryMonoidal
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.IntegralResidueDerivedMonoidal
+public import WeilConjectures.AlgebraicGeometry.IntegralResidueDerivedMonoidal
 import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Braided
 
 /-! # A common homotopy-level model for the residue tensor square

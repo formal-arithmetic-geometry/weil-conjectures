@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Finite.Constant.FiniteConstantLocalModel
 public import WeilConjectures.AlgebraicGeometry.FiniteLocallyClosedStratification
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
-public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ProfiniteCondensedRing
+public import WeilConjectures.Topology.ProfiniteCondensedRing
 public import WeilConjectures.AlgebraicGeometry.ConstantModelStratificationTransport
 
 /-!

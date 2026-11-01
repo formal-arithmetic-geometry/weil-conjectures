@@ -73,7 +73,7 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 import WeilConjectures.CategoryTheory.SitePullbackAbelianUnderlying
 import Mathlib.CategoryTheory.Monoidal.Limits.Colimits
 import Mathlib.Topology.Algebra.Ring.Compact
-import all WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteDiscreteCondensedRing
+import all WeilConjectures.AlgebraicGeometry.FiniteDiscreteCondensedRing
 import all WeilConjectures.AlgebraicGeometry.Finite.FiniteDiscreteSchemeRingSupplement
 import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic

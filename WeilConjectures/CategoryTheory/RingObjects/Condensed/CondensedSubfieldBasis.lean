@@ -7,7 +7,7 @@ module
 
 public import Mathlib.NumberTheory.Padics.PadicNumbers
 public import Mathlib.CategoryTheory.Monoidal.Mod
-public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ProfiniteCondensedRing
+public import WeilConjectures.Topology.ProfiniteCondensedRing
 public import WeilConjectures.CategoryTheory.SheafTensor
 public import WeilConjectures.CategoryTheory.SheafTensorStructure
 public import Mathlib.CategoryTheory.Sites.Monoidal

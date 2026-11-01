@@ -6,7 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.ModuleRingedComparison.SectionDerivedRealization
-public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ProfiniteCondensedRing
+public import WeilConjectures.Topology.ProfiniteCondensedRing
 public import Mathlib.Algebra.Homology.Monoidal
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.CategoryTheory.Monoidal.CommMon_
@@ -24,7 +24,7 @@ public import WeilConjectures.Algebra.Homology.CanonicalTensorPullbackOfUniverse
 public import WeilConjectures.Algebra.Homology.RingedTensorCorner.ProjectionMateExact
 
 import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapCompat
-import WeilConjectures.AlgebraicGeometry.ModuleRingedComparison.SectionDerivedTensorNormalization
+import WeilConjectures.AlgebraicGeometry.SectionDerivedTensorNormalization
 
 public import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
 public import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse

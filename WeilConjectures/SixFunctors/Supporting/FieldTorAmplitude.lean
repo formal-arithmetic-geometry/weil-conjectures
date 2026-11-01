@@ -5,7 +5,7 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ProfiniteCondensedRing
+public import WeilConjectures.Topology.ProfiniteCondensedRing
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitude
 public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleTorAmplitude
@@ -13,7 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleTorAmplitude
 import WeilConjectures.AlgebraicGeometry.Adic.AdicConstructibilityPredicateComparison
 import WeilConjectures.AlgebraicGeometry.ProEtaleCoefficients.PadicConstantLocalModelTor
 import WeilConjectures.AlgebraicGeometry.ProEtaleCoefficients.StratifiedTorIntervalDevissage
-import WeilConjectures.AlgebraicGeometry.ProEtaleCoefficients.CohomologyTorInterval
+import WeilConjectures.AlgebraicGeometry.CohomologyTorInterval
 import Mathlib.Algebra.Field.ULift
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses

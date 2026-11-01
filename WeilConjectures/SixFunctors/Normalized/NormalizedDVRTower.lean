@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SmoothPurity.Completed.CompletedIntegralCoefficientsSupplement
 public import WeilConjectures.SmoothPurity.Derived.DerivedScalarExtensionRestrictionAdjunctionSupplement
-public import WeilConjectures.SixFunctors.Supporting.RestrictionOfScalarsExact
+public import WeilConjectures.AlgebraicGeometry.RestrictionOfScalarsExact
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification

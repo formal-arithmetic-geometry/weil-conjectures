@@ -27,7 +27,7 @@ public import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
 public import Mathlib.CategoryTheory.Sites.Equivalence
 import all WeilConjectures.AlgebraicGeometry.Scalar.ScalarInverseImageTowerDiagram
 import Mathlib.CategoryTheory.Preadditive.LeftExact
-import all WeilConjectures.CategoryTheory.Derived.DerivedExactSquareComposition
+import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 import all WeilConjectures.CategoryTheory.FlatRingedDiagramInput.FlatRestrictionOrdinaryComparisons
 import all WeilConjectures.AlgebraicGeometry.RingedTopoiCanonicalTensorPullbackUnitExistence
 import all WeilConjectures.AlgebraicGeometry.RingedTopoiTensorComparisonData

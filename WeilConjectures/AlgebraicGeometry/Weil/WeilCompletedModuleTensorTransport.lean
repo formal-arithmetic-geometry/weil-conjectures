@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Weil.WeilCompletedKoszulSite
 import all WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearDerivedCalculusSupplement
-import all WeilConjectures.Algebra.Homology.Ringed.RingedDirectImagePairingLax
+import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RingedDirectImagePairingLax
 
 /-! # Ordinary tensor comparison for completed coefficient transport
 

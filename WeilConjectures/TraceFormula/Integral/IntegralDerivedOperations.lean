@@ -14,7 +14,7 @@ public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import WeilConjectures.SmoothPurity.Completed.CompletedIntegralCoefficientsSupplement
-public import WeilConjectures.SixFunctors.Supporting.RestrictionOfScalarsExact
+public import WeilConjectures.AlgebraicGeometry.RestrictionOfScalarsExact
 public import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
 public import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
 public import WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement

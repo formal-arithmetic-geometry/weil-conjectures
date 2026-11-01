@@ -75,7 +75,7 @@ import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
 import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 import Mathlib.CategoryTheory.Localization.CalculusOfFractions
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
-import WeilConjectures.CategoryTheory.Tensor.TensorPullbackRepresentativeDescent
+import WeilConjectures.AlgebraicGeometry.TensorPullbackRepresentativeDescent
 import all WeilConjectures.Algebra.Homology.CanonicalTensorPullbackOfUniverses.RingedTopoiCanonicalTensorPullbackOfUniverses
 import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 

@@ -232,7 +232,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.AlgebraicGeometry.ProEtale.AffineClosedSiteFunctorProperties
 public import WeilConjectures.AlgebraicGeometry.ProEtaleAbelianClosedSupport
-public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleAbelianClosedCounit
+public import WeilConjectures.AlgebraicGeometry.ProEtaleAbelianClosedCounit
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Cover.QuasiCompact
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Pullback
 public import WeilConjectures.AlgebraicGeometry.CondensedSurjectiveClosedLocalPresentation
@@ -361,7 +361,7 @@ public import Mathlib.CategoryTheory.Sites.Adjunction
 public import Mathlib.Algebra.Category.Grp.Adjunctions
 public import WeilConjectures.AlgebraicGeometry.IntegralLfpFiniteQuotientCharts
 public import WeilConjectures.AlgebraicGeometry.IntegralLfpLocalTorsionCharts
-public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteDiscreteCondensedRing
+public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteCondensedRing
 public import WeilConjectures.AlgebraicGeometry.Finite.FiniteDiscreteSchemeRingSupplement
 public import WeilConjectures.CategoryTheory.SheafPullbackForgetComparison
 public import Mathlib.CategoryTheory.Sites.Pullback

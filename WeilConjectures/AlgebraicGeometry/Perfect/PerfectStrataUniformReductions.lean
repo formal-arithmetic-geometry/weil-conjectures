@@ -61,7 +61,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModuleAdjunction
 import WeilConjectures.AlgebraicGeometry.ProEtaleModuleInverseImageScalarGraph
 import all WeilConjectures.AlgebraicGeometry.ProEtaleAbelianClosedSupport
 import all Mathlib.Algebra.Category.Grp.AB
-import all WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleAbelianClosedCounit
+import all WeilConjectures.AlgebraicGeometry.ProEtaleAbelianClosedCounit
 import all WeilConjectures.Mathlib.AlgebraicGeometry.Cover.QuasiCompact
 import all WeilConjectures.Mathlib.CategoryTheory.Sites.Pullback
 import all WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs

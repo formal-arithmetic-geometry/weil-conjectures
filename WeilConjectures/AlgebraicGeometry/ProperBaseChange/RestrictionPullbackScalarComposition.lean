@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.FourCornersSupplement
 import all WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChangeAdjunctionSupplement
-import all WeilConjectures.CategoryTheory.Derived.DerivedExactSquareComposition
+import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 
 /-! # Coherence of restriction and pullback for successive coefficient maps
 

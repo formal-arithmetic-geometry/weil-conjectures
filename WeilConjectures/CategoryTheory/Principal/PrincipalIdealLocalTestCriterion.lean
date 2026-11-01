@@ -58,7 +58,7 @@ public import WeilConjectures.CategoryTheory.Ringed.RingedInternalHomExactRestri
 public import Mathlib.Algebra.Homology.Double
 public import Mathlib.CategoryTheory.Endomorphism
 public import WeilConjectures.CategoryTheory.Ringed.RingedPrincipalLocalTests
-import WeilConjectures.CategoryTheory.SmoothPurity.UnitPowerCompleteness
+import WeilConjectures.CategoryTheory.UnitPowerCompleteness
 import WeilConjectures.Algebra.Homology.Site.SitePerfectModelRestrictionSupplement
 import WeilConjectures.CategoryTheory.Principal.PrincipalKoszulQuotientTowersSupplement
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification

@@ -6,7 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.CondensedAction.InternalBar.CondensedInternalBarData
-public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ProfiniteCondensedRing
+public import WeilConjectures.Topology.ProfiniteCondensedRing
 public import WeilConjectures.CategoryTheory.ModuleObjects.Monoidal
 public import Mathlib.CategoryTheory.Sites.Limits
 public import Mathlib.Data.Fin.Tuple.Basic

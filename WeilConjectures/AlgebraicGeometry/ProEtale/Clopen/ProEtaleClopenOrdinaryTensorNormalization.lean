@@ -6,7 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.ClopenData.ProEtaleClopenTotalTensorKFlatDetectionData
-import WeilConjectures.Algebra.Homology.Ringed.RingedDirectImagePairingLax
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RingedDirectImagePairingLax
 import Mathlib.CategoryTheory.Sites.PreservesLocallyBijective
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.PushforwardZeroMonoidal
 

@@ -266,7 +266,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 import Mathlib.CategoryTheory.Triangulated.Subcategory
 import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Functor
-import all WeilConjectures.CategoryTheory.SmoothPurity.UnitPowerCompleteness
+import all WeilConjectures.CategoryTheory.UnitPowerCompleteness
 import WeilConjectures.CategoryTheory.Ringed.Finite.RingedFiniteFreeHomBaseChangeCoordinates
 import WeilConjectures.CategoryTheory.Ringed.Finite.RingedFiniteFreeHomBaseChangeTensor
 import WeilConjectures.CategoryTheory.Ringed.RingedDerivedClosedSymmetricMonoidal

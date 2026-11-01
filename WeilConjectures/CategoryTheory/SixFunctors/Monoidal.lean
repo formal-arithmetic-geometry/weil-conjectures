@@ -7,14 +7,14 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalLeftDerived
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.IntegralResidueDerivedMonoidal
+public import WeilConjectures.AlgebraicGeometry.IntegralResidueDerivedMonoidal
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.OplaxMonoidal
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.MonoidalModule
 public import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
-public import WeilConjectures.AlgebraicGeometry.ProperBaseChange.InverseImageModuleFlat
+public import WeilConjectures.AlgebraicGeometry.InverseImageModuleFlat
 
 /-! Declarations of ours moved from
 `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal`

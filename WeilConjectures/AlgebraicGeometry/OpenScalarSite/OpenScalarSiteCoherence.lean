@@ -59,7 +59,7 @@ public import WeilConjectures.Algebra.Homology.CanonicalTensorPullbackOfUniverse
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Comp
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 public import Mathlib.CategoryTheory.Adjunction.CompositionIso
-import WeilConjectures.CategoryTheory.Derived.DerivedExactSquareComposition
+import WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 import WeilConjectures.Algebra.Homology.BoundedFlatIndependentCoefficients
 import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
 import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse

@@ -183,7 +183,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Projective
 import Mathlib.CategoryTheory.Sites.Subcanonical
 import WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
 import Mathlib.CategoryTheory.Sites.LocallySurjective
-public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ProfiniteCondensedRing
+public import WeilConjectures.Topology.ProfiniteCondensedRing
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 public import Mathlib.CategoryTheory.Monoidal.Mod
 public import WeilConjectures.CategoryTheory.Right.RightDerivedFunctorOfQuasiIsoResolutions
@@ -243,7 +243,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 public import WeilConjectures.Algebra.Homology.QuasiIsoOfSectionsOfUniverses
 public import Mathlib.CategoryTheory.Sites.Abelian
 public import Mathlib.Algebra.Homology.Functor
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedPullbackTensorComparison
+public import WeilConjectures.AlgebraicGeometry.CondensedPullbackTensorComparison
 public import WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Monoidal

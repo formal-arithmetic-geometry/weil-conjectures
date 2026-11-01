@@ -6,7 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.Algebra.Homology.System.SystemScalarModel
-import WeilConjectures.CategoryTheory.Cochain.CochainHomotopyComparison
+import WeilConjectures.CategoryTheory.DerivedCategory.CochainHomotopyComparison
 import WeilConjectures.CategoryTheory.DerivedCategory.CochainAdjunctionCompatibility
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction

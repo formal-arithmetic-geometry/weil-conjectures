@@ -12,7 +12,7 @@ import WeilConjectures.AlgebraicGeometry.StrictTower.FiniteCoefficientClopenAlph
 import all WeilConjectures.AlgebraicGeometry.Finite.Clopen.FiniteClopenMateSiteTransport
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBaseChangeNaturality
 import all WeilConjectures.CategoryTheory.RightDerivedPlusCube
-import all WeilConjectures.AlgebraicGeometry.Fixed.FixedComparisonDirectImageMate
+import all WeilConjectures.AlgebraicGeometry.FixedComparisonDirectImageMate
 import all WeilConjectures.AlgebraicGeometry.ClopenMateNormalization.EtaleClopenMateNormalization
 
 /-! # Finite coefficient transport of the single-level proper/open mate

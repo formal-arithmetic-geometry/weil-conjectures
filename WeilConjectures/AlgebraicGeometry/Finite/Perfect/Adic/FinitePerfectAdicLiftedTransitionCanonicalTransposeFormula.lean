@@ -18,7 +18,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.KFlatAcyclic
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 import all WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicConstantScalarExtension
 import all WeilConjectures.CategoryTheory.ConstantScalarRealization.ConstantRealizationDerivedScalarExtensionSupplement
-import all WeilConjectures.CategoryTheory.Derived.DerivedExactSquareComposition
+import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 import WeilConjectures.Algebra.Homology.Coefficient.CoefficientLiftKFlatResolution
 
 /-! # Formula for the canonical transpose of the lifted transition

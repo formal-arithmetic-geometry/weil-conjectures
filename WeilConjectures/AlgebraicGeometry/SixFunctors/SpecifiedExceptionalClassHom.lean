@@ -5,7 +5,7 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Fixed.FixedComparisonDirectImageMate
+public import WeilConjectures.AlgebraicGeometry.FixedComparisonDirectImageMate
 public import WeilConjectures.AlgebraicGeometry.Finite.Comparison.FiniteComparisonClassAdjunction
 public import WeilConjectures.SixFunctors.ProEtale.FullCohomologicalDimension
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ConstructibleUpperShriek

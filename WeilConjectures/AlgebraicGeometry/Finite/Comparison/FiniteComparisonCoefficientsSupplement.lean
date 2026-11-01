@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.SixFunctors.LocalizingClosure
 public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
-public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteDiscreteCondensedRing
+public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteCondensedRing
 public import WeilConjectures.AlgebraicGeometry.Finite.FiniteDiscreteSchemeRingSupplement
 public import WeilConjectures.CategoryTheory.InternalAbelianSheafModuleEquivalence
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf

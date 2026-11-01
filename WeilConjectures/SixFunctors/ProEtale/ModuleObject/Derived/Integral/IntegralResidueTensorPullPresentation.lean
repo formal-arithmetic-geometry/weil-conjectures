@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.Integral.IntegralResidueTensorPresentation
 public import WeilConjectures.CategoryTheory.ModuleObjects.ResidueOrdinary.IntegralResidueOrdinaryMonoidal
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.IntegralResidueOrdinaryTensorSquare
+public import WeilConjectures.AlgebraicGeometry.IntegralResidueOrdinaryTensorSquare
 public import WeilConjectures.CategoryTheory.Integral.IntegralResidueTensorModel
 
 /-! # Ordinary pullback data and the derived residue tensor square

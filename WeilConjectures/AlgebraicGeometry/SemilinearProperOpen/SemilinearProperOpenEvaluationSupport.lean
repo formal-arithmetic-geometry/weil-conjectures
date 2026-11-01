@@ -16,7 +16,7 @@ import all WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
 import all WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingProperOpenArrows
 import WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingProperOpenPasting
 import all WeilConjectures.AlgebraicGeometry.StrictTower.ConstantNormalization.ConstantTowerDirectImageNormalization
-import all WeilConjectures.CategoryTheory.Derived.DerivedExactSquareComposition
+import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 import WeilConjectures.CategoryTheory.Exact.ExactLocalizationInverseMate
 
 /-! # Existing evaluation constructions for semilinear proper/open mates

@@ -5,8 +5,8 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.QuotientChange.InternalScalarPullbackNormalization
-import WeilConjectures.AlgebraicGeometry.QuotientChange.SectionPullNormalizationTransport
+public import WeilConjectures.AlgebraicGeometry.InternalScalarPullbackNormalization
+import WeilConjectures.AlgebraicGeometry.SectionPullNormalizationTransport
 
 /-! # Simultaneous normalized scalar section comparisons
 

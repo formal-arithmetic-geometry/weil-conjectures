@@ -89,7 +89,7 @@ import all WeilConjectures.SixFunctors.SequenceModuleEvaluation.SequenceModulePu
 import all WeilConjectures.AlgebraicGeometry.System.SystemOrdinaryTensorReduction
 import WeilConjectures.CategoryTheory.ProperBaseChange.ResolvingRepresentativeWhiskeringSupplement
 import all WeilConjectures.Algebra.Homology.CanonicalRingedTensorComparison.RingedTopoiCanonicalTensorPullbackSupplement
-import WeilConjectures.CategoryTheory.Tensor.TensorPullbackRepresentativeDescent
+import WeilConjectures.AlgebraicGeometry.TensorPullbackRepresentativeDescent
 
 /-! # Evaluation of the K-flat tensor model
 

@@ -26,7 +26,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import all WeilConjectures.AlgebraicGeometry.ProEtaleAbelianClosedSupport
 import all WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 import all Mathlib.Algebra.Category.Grp.AB
-import all WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleAbelianClosedCounit
+import all WeilConjectures.AlgebraicGeometry.ProEtaleAbelianClosedCounit
 import all WeilConjectures.Mathlib.AlgebraicGeometry.Cover.QuasiCompact
 import all WeilConjectures.Mathlib.CategoryTheory.Sites.Pullback
 import all WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs

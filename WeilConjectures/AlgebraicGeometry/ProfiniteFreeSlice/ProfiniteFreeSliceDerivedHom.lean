@@ -6,7 +6,7 @@ Authors: Bin Wu
 module
 
 public import Mathlib.AlgebraicGeometry.Sites.Proetale
-public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ProfiniteCondensedRing
+public import WeilConjectures.Topology.ProfiniteCondensedRing
 public import WeilConjectures.AlgebraicGeometry.ProfinitePointPullback
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
@@ -40,7 +40,7 @@ public import WeilConjectures.CategoryTheory.Sites.MonObj
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 public import Mathlib.CategoryTheory.Monoidal.Mod
 public import WeilConjectures.CategoryTheory.Right.RightDerivedFunctorOfQuasiIsoResolutions
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedModuleDerivedPushpull
+public import WeilConjectures.AlgebraicGeometry.CondensedModuleDerivedPushpull
 public import WeilConjectures.Algebra.Homology.DerivedInternalHomOfUniverses
 public import WeilConjectures.Algebra.Homology.DerivedInternalHom
 public import WeilConjectures.SixFunctors.Etale.Derived.Hom

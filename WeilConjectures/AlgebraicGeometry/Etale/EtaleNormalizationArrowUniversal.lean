@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Etale.EtaleUniversalNormalizatio
 import all WeilConjectures.AlgebraicGeometry.Source.SourceIsomorphismNormalizedPresheafEvaluation
 import WeilConjectures.CategoryTheory.Constant.ConstantDerivedNormalizationUniversalSupplement
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
-import all WeilConjectures.CategoryTheory.Derived.DerivedExactSquareComposition
+import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 
 /-! # Sourcewise universality for constant normalization arrows
 

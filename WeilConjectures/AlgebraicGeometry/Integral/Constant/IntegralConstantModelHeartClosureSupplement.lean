@@ -11,7 +11,7 @@ public import Mathlib.NumberTheory.Padics.PadicNumbers
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
-import WeilConjectures.AlgebraicGeometry.Integral.IntegralLfpConstantModelComparison
+import WeilConjectures.AlgebraicGeometry.IntegralLfpConstantModelComparison
 import WeilConjectures.AlgebraicGeometry.IntegralConstructibleSerre
 import Mathlib.CategoryTheory.ObjectProperty.Kernels
 import Mathlib.CategoryTheory.ObjectProperty.Extensions

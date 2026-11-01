@@ -9,7 +9,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.F
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 import WeilConjectures.CategoryTheory.Sites.PushforwardMonoidal
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteDiscreteCoefficientSections
+import WeilConjectures.AlgebraicGeometry.FiniteDiscreteCoefficientSections
 
 /-! # Restriction compatibility of the fixed coefficient encoding -/
 

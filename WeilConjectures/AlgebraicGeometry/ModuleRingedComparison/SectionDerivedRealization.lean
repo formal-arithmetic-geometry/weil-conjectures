@@ -90,7 +90,7 @@ import all WeilConjectures.CategoryTheory.InternalSectionModuleFlat
 import all WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
 import all Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
-import WeilConjectures.CategoryTheory.Tensor.TensorPullbackRepresentativeDescent
+import WeilConjectures.AlgebraicGeometry.TensorPullbackRepresentativeDescent
 import WeilConjectures.CategoryTheory.ProperBaseChange.ResolvingRepresentativeWhiskeringSupplement
 /-! # Canonical derived section-module realization
 

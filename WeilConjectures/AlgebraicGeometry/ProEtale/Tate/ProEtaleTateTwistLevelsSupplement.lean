@@ -124,7 +124,7 @@ public import Mathlib.CategoryTheory.Localization.CalculusOfFractions
 public import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 import WeilConjectures.AlgebraicGeometry.Constant.ConstantZModScalarTensor
-import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteDiscreteCondensedRing
+import WeilConjectures.AlgebraicGeometry.FiniteDiscreteCondensedRing
 import WeilConjectures.AlgebraicGeometry.Finite.FiniteDiscreteSchemeRingSupplement
 import WeilConjectures.NumberTheory.Padics.IntegersModPow
 public import WeilConjectures.AlgebraicGeometry.ProEtaleTateTwistLevels

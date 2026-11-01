@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingClopenArrowFactors
 import all WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerProperOpenArrows
 import WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOrdinaryClopenEvaluation
-import all WeilConjectures.CategoryTheory.Derived.DerivedExactSquareComposition
+import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 
 /-!
 # Coefficient realization of cartesian open base change

@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Intrinsic.ProEtaleIntri
 public import WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicFiniteTorsionConstructibility
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriekBaseChangeMate
-import WeilConjectures.CategoryTheory.Derived.DerivedExactSquareComposition
+import WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictScalars
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.FullyFaithful
 

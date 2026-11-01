@@ -9,7 +9,7 @@ public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.OpenTenso
 import Mathlib.CategoryTheory.ObjectProperty.Equivalence
 import Mathlib.CategoryTheory.Monoidal.Preadditive
 import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
-import WeilConjectures.CategoryTheory.Tensor.TensorPullbackRepresentativeDescent
+import WeilConjectures.AlgebraicGeometry.TensorPullbackRepresentativeDescent
 import WeilConjectures.Algebra.Homology.Ringed.RingedDerivedTensorNativeSupplement
 import WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
 import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients

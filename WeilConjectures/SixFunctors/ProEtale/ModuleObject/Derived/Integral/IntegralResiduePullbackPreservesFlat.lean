@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.IntegralResidueComparisonInterface
 public import WeilConjectures.CategoryTheory.Abelian.Flat.PreservesFlat
-import WeilConjectures.AlgebraicGeometry.ProperBaseChange.InverseImageModuleFlat
+import WeilConjectures.AlgebraicGeometry.InverseImageModuleFlat
 
 /-! Flatness preservation for the integral residue pullback.
 Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15.

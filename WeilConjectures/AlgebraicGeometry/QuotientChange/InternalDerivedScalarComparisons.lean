@@ -5,7 +5,7 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedModuleDerivedPushpull
+public import WeilConjectures.AlgebraicGeometry.CondensedModuleDerivedPushpull
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 public import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle

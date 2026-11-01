@@ -128,7 +128,7 @@ import all WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvi
 import all Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 
 import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationTensor
-import all WeilConjectures.CategoryTheory.Derived.DerivedExactSquareComposition
+import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 import WeilConjectures.CategoryTheory.ConstantModuleFlat
 import WeilConjectures.CategoryTheory.CommutativeSiteDerivedConstantModuleFunctor
 import WeilConjectures.CategoryTheory.Site.SiteDerivedConstantModuleFunctor

@@ -4,9 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import WeilConjectures.Algebra.Homology.PrincipalCone.PrincipalConeTower
+public import WeilConjectures.Algebra.Homology.PrincipalConeTower
 public import WeilConjectures.CategoryTheory.Ringed.RingedPrincipalLocalTests
-import WeilConjectures.CategoryTheory.Principal.PrincipalConeKoszulRoosComparison
+import WeilConjectures.AlgebraicGeometry.PrincipalConeKoszulRoosComparison
 import WeilConjectures.CategoryTheory.Principal.PrincipalIdealLocalTestCriterion
 import WeilConjectures.CategoryTheory.RingedKoszulCompletionReflector
 import WeilConjectures.CategoryTheory.RingedKoszulSystem
@@ -137,7 +137,7 @@ import Mathlib.Topology.Sheaves.Abelian
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.PushforwardZeroMonoidal
 import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
-import all WeilConjectures.CategoryTheory.SmoothPurity.UnitPowerCompleteness
+import all WeilConjectures.CategoryTheory.UnitPowerCompleteness
 
 /-! # The principal cone criterion on a small ringed site
 Source: Stacks 0999, 099B, 0A0E and 0941.

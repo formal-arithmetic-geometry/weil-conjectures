@@ -5,7 +5,7 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ProfiniteCondensedRing
+public import WeilConjectures.Topology.ProfiniteCondensedRing
 public import WeilConjectures.CategoryTheory.InternalAbelianSheafModuleEquivalence
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf
 public import Mathlib.Algebra.Category.Ring.Limits

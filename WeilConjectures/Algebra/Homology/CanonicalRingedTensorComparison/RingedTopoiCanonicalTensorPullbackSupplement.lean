@@ -163,7 +163,7 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree
 import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 
 import WeilConjectures.Algebra.Homology.KFlatTotalTensorModel.KFlatTotalTensorModelSupplement
-import WeilConjectures.CategoryTheory.Tensor.TensorPullbackRepresentativeDescent
+import WeilConjectures.AlgebraicGeometry.TensorPullbackRepresentativeDescent
 import WeilConjectures.CategoryTheory.ProperBaseChange.ResolvingRepresentativeWhiskeringSupplement
 import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 public import WeilConjectures.AlgebraicGeometry.RingedTopoiCanonicalTensorPullback

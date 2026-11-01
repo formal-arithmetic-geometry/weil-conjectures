@@ -6,7 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionSupplement
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedModuleDerivedPushpull
+public import WeilConjectures.AlgebraicGeometry.CondensedModuleDerivedPushpull
 public import WeilConjectures.AlgebraicGeometry.AdicCompletion.DerivedCompletionSupplement
 public import WeilConjectures.AlgebraicGeometry.Condensed.CondensedConstantConstructibilitySupplement
 public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinary.FiniteDiscreteOrdinaryEncodingSupplement

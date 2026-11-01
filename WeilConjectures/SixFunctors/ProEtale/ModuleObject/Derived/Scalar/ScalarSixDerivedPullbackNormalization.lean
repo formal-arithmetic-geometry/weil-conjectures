@@ -5,12 +5,12 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Scalar.ScalarSixDefinitions
+public import WeilConjectures.SixFunctors.ScalarSixDefinitions
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherence
 import WeilConjectures.AlgebraicGeometry.FreeParameterEvaluation.FreeParameterScalarMaps
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperBaseChange.ComapUpperStarIsoComposition
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperBaseChange.ComapUpperStarIsoMate
-import all WeilConjectures.CategoryTheory.Derived.DerivedExactSquareComposition
+import WeilConjectures.AlgebraicGeometry.ComapUpperStarIsoMate
+import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 
 /-! # Normalized non-flat derived pullback comparison -/
 

@@ -64,7 +64,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
 public import WeilConjectures.CategoryTheory.Scalar.ScalarInternalHomDataSupplement
 import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 import Mathlib.CategoryTheory.Adjunction.Opposites
-import WeilConjectures.CategoryTheory.Derived.DerivedSectionScalarTransport
+import WeilConjectures.CategoryTheory.DerivedSectionScalarTransport
 public import WeilConjectures.CategoryTheory.InternalSectionScalarAdjunction
 
 /-! # Scalar adjunctions under section reconstruction
