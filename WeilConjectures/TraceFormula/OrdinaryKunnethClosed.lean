@@ -49,8 +49,8 @@ obtained by unfolding definitions contain auxiliary proof constants and `eqToHom
 them with separately elaborated terms makes the elaborator and the kernel unfold large terms.
 
 The abstract decompositions of the Künneth map of a composite and the comparison along
-`(𝟙_Z × j) ≫ (g × 𝟙_Y)` are in `WeilConjectures.TraceFormula.OrdinaryKunnethClosedComposite`
-(split for compile time).
+`(𝟙_Z × j) ≫ (g × 𝟙_Y)` are in the module
+`OrdinaryKunnethClosedComposite` (split for compile time).
 
 ## Main statements
 
