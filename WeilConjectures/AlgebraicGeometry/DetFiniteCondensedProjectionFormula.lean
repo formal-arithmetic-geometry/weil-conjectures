@@ -76,6 +76,23 @@ end DerivedSquare
 
 namespace AlgebraicGeometry.ProEtale
 
+/-- The canonical condensed coefficient realization of the bounded-below site pullback.
+It is the composition of `ν^* = siteComparisonDerivedPullbackPlus`, the inclusion of
+bounded-below derived categories, and the inverse of the finite coefficient equivalence.
+The latter is induced by the canonical constant-scalar map
+`constRingSheafToCondensedRingObj`, so this is not an arbitrary choice of transport.
+Source: blueprint node det-thm-sf-pf-finite, order 2765, proof step "Étale-to-condensed
+realization of the specified PF component" (`ν^*K`, `ν^*L` at `Λ = A_{E,n}`)
+(blueprint: det-thm-sf-pf-finite). -/
+noncomputable def condensedSiteComparisonDerivedPullbackPlus
+    (T : Type) [CommRing T] [TopologicalSpace T] [IsTopologicalRing T]
+    [DiscreteTopology T] [Finite T] (X : Scheme.{u})
+    (K : AlgebraicGeometry.Etale.DerivedCategoryModule
+      (ULift.{u + 1} T) X)
+    (hK : DerivedCategory.TStructure.t.plus K) :=
+  (finiteCoefficientDerivedEquivalence X T).inverse.obj
+    ((siteComparisonDerivedPullbackPlus X (ULift.{u + 1} T)).obj ⟨K, hK⟩).obj
+
 /-- Bounded constructibility supplies the lower bound needed to use the canonical
 `siteComparisonDerivedPullbackPlus` functor.
 Proof: the second clause of `isBoundedConstructible` gives `a ≤ b` with
