@@ -33,6 +33,13 @@ variable (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω
   (left : ∀ s : RingStage.{u} l, LeftRealization.{u} l Ω c s (operation s))
   (d : TransportCoreData l Ω D hl c operation left)
 
+private theorem fullSubcategory_lift_unique
+    {A B : Type*} [Category A] [Category B] (P : ObjectProperty B)
+    (F : A ⥤ P.FullSubcategory) (H : A ⥤ B) (hH : ∀ K, P (H.obj K))
+    (h : F ⋙ P.ι = H) : F = P.lift H hH := by
+  subst H
+  rfl
+
 /-- Normalize support using the actual comparison constructed from the realization
 fields. This construction requires no equation for the initial arbitrary datum.
 Source: Zheng, Constructions 5.17 and 5.25; explicit lift and adjunction transport.

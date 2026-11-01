@@ -57,6 +57,16 @@ theorem scalarReductionDerivedRestriction_bounds
         HasProEtaleTorAmplitude T (Padic.coefficientExtensionRing l E (m + 1))
           ((scalarReductionDerivedExtension.{u, u} l E T m).obj
             ((scalarReductionDerivedRestriction.{u, u} l E T n).obj K)) a b := by
+  -- BLUEPRINT QUESTION: lem-coef-integral-hom-reduction, first proof paragraph,
+  -- uses R_X = p_X^* underline(O_E) and native condensed module objects. This
+  -- signature instead fixes scalarReductionTarget and its completed-ring restriction.
+  -- def-weil-finite-tor-amplitude now records condensedConstructibleFiniteTor;
+  -- hK here still uses finiteTorConstructible, which is a different predicate.
+  -- The released stage-1 repair note requires restatement on the current model,
+  -- withdrawal of this Lean attachment, and a new statement before proof work.
+  -- RegularQuotientScalarRightAdjoint also fixes the old categories in its binders;
+  -- replacing this theorem alone would therefore leave its consumer ill-typed.
+  -- Preserve this pending declaration; do not prove or compare the withdrawn model.
   sorry
 
 end WeilConjectures

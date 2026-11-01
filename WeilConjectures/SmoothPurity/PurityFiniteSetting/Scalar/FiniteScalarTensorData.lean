@@ -36,7 +36,10 @@ Source: thm-pur-finite-reduction-of-purity, proof Step 2; Stacks 07A4 and 0FPT.
   let F := (ProEtale.sheafExtendScalars φ T).mapHomologicalComplex (.up ℤ)
   exact
     { tensor C D := C ⊗ D
-      tensor_closed _ _ hC hD := ObjectProperty.prop_tensor hC hD
+      tensor_closed X Y hC hD :=
+        Eq.subst (motive := fun s => (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat
+            (@MonoidalCategoryStruct.tensorObj _ _ s X Y))
+          (a := MonoidalCategory.toMonoidalCategoryStruct) rfl (ObjectProperty.prop_tensor hC hD)
       secondTarget C := F.obj C
       target C D := F.obj C ⊗ F.obj D
       first := cochainLocalizationTensor T

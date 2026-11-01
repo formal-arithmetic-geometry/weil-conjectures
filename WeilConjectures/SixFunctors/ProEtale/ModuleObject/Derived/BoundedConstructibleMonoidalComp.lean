@@ -80,6 +80,13 @@ private noncomputable abbrev monoidalAux {X Y : Over (Spec (.of k))} [LocallyOfF
   unfold boundedConstructibleUpperStar
   exact ObjectProperty.monoidalLift _ _
 
+/-- The braiding of `Dᵇc(T)⟦Λ⟧`, with the body of `boundedConstructibleBraiding`. -/
+private noncomputable abbrev braidedAux (T : Over (Spec (.of k))) [LocallyOfFiniteType T.hom]
+    [QuasiCompact T.hom] [IsSeparated T.hom]
+    [(boundedConstructible (condensedRingObj Λ T.left)).IsMonoidal] :
+    BraidedCategory (Dᵇc(T.left)⟦Λ⟧) :=
+  ObjectProperty.fullBraidedSubcategory _
+
 variable [(boundedConstructible (condensedRingObj Λ X.left)).IsMonoidal]
   [(boundedConstructible (condensedRingObj Λ Y.left)).IsMonoidal]
   [(boundedConstructible (condensedRingObj Λ Z.left)).IsMonoidal]
@@ -90,6 +97,28 @@ private lemma δ_hom_aux (K M : Dᵇc(Y.left)⟦Λ⟧) :
     (δ (boundedConstructibleUpperStar Λ ℓ f) K M).hom =
       ((leftDerivedUpperStarTensor Λ f.left).app K.obj).app M.obj :=
   rfl
+
+private lemma braiding_hom_hom_aux (K M : Dᵇc(X.left)⟦Λ⟧) :
+    (@BraidedCategory.braiding _ _ _ (braidedAux Λ X) K M).hom.hom =
+      (@BraidedCategory.braiding _ _ _ (DerivedCategory.braidedCategory' _) K.obj M.obj).hom :=
+  rfl
+
+private lemma map_braiding_hom_δ_aux (K M : Dᵇc(Y.left)⟦Λ⟧) :
+    letI := braidedAux Λ Y
+    letI := braidedAux Λ X
+    (boundedConstructibleUpperStar Λ ℓ f).map (β_ K M).hom ≫
+        δ (boundedConstructibleUpperStar Λ ℓ f) M K =
+      δ (boundedConstructibleUpperStar Λ ℓ f) K M ≫
+        (β_ ((boundedConstructibleUpperStar Λ ℓ f).obj K)
+          ((boundedConstructibleUpperStar Λ ℓ f).obj M)).hom := by
+  refine ObjectProperty.hom_ext (P := boundedConstructible _) ?_
+  -- `rw` and not `simp`, and the braidings rewritten before `exact`: comparing the braiding of
+  -- `Dᵇc(-)⟦Λ⟧` with that of `DerivedCategory.braidedCategory'` by unfolding is expensive for the
+  -- kernel, see `braiding_hom_hom_aux`.
+  rw [ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.comp_hom,
+    δ_hom_aux, δ_hom_aux, boundedConstructibleUpperStar_map_hom, braiding_hom_hom_aux,
+    braiding_hom_hom_aux]
+  exact leftDerivedUpperStarTensor_braiding Λ f.left K.obj M.obj
 
 private lemma comp_tensor_δ_aux (K M : Dᵇc(Z.left)⟦Λ⟧) :
     δ (boundedConstructibleUpperStar Λ ℓ (f ≫ g)) K M ≫
