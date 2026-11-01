@@ -90,6 +90,41 @@ Source: the blueprint proof, “The colimit is filtered”
 (blueprint: lem-sfb-directed-local-category-quotient). -/
 def classOf {a b : O} (r : Rep birth a b) : T.Hom a b := Quot.mk _ r
 
+private theorem eventual_refl {a b : O} (r : Rep birth a b) : T.Eventual r r := by
+  have _ := hI
+  have _ := hdir
+  exact ⟨r.1.val, le_rfl, le_rfl, rfl⟩
+
+private theorem eventual_symm {a b : O} {r s : Rep birth a b}
+    (h : T.Eventual r s) : T.Eventual s r := by
+  have _ := hI
+  have _ := hdir
+  obtain ⟨p, hr, hs, e⟩ := h
+  exact ⟨p, hs, hr, e.symm⟩
+
+private theorem eventual_trans {a b : O} {r s t : Rep birth a b}
+    (h : T.Eventual r s) (h' : T.Eventual s t) : T.Eventual r t := by
+  have _ := hI
+  have _ := hdir
+  obtain ⟨p, hr, hs, e⟩ := h
+  obtain ⟨q, hs', ht, e'⟩ := h'
+  obtain ⟨m, hp, hq⟩ := exists_ge_ge p q
+  refine ⟨m, hr.trans hp, ht.trans hq, ?_⟩
+  calc
+    T.map (hr.trans hp) r.2 = T.map hp (T.map hr r.2) := (T.map_trans _ _ _).symm
+    _ = T.map hp (T.map hs s.2) := congrArg (T.map hp) e
+    _ = T.map (hs.trans hp) s.2 := T.map_trans _ _ _
+    _ = T.map hq (T.map hs' s.2) := (T.map_trans _ _ _).symm
+    _ = T.map hq (T.map ht t.2) := congrArg (T.map hq) e'
+    _ = T.map (ht.trans hq) t.2 := T.map_trans _ _ _
+
+private theorem step_eventual {a b : O} {r s : Rep birth a b}
+    (h : T.Step r s) : T.Eventual r s := by
+  have _ := hI
+  have _ := hdir
+  obtain ⟨h, e⟩ := h
+  exact ⟨s.1.val, h, le_rfl, e.trans (T.map_refl s.2).symm⟩
+
 variable [hI : Nonempty I] [hdir : IsDirected I (· ≤ ·)]
 
 include hI hdir
@@ -175,6 +210,24 @@ theorem comp_classOf {a b c : O} (r : Rep birth a b) (s : Rep birth b c)
     (m : I) (hr : r.1.val ≤ m) (hs : s.1.val ≤ m) :
     T.comp (T.classOf r) (T.classOf s) = T.classOf (T.compAt r s m hr hs) := by
   sorry
+
+private theorem class_transport {a b : O} (r : Rep birth a b)
+    (m : I) (hr : r.1.val ≤ m) :
+    T.classOf r = T.classOf
+      ⟨⟨m, r.1.property.1.trans hr, r.1.property.2.trans hr⟩, T.map hr r.2⟩ := by
+  have _ := hI
+  have _ := hdir
+  exact Quot.sound ⟨m, hr, le_rfl, (T.map_refl _).symm⟩
+
+private theorem comp_same_stage {a b c : O} (m : I)
+    (ha : birth a ≤ m) (hb : birth b ≤ m) (hc : birth c ≤ m)
+    (f : StageHom birth m a b ha hb) (g : StageHom birth m b c hb hc) :
+    T.comp (T.classOf ⟨⟨m, ha, hb⟩, f⟩) (T.classOf ⟨⟨m, hb, hc⟩, g⟩) =
+      T.classOf ⟨⟨m, ha, hc⟩, f ≫ g⟩ := by
+  have _ := hI
+  have _ := hdir
+  rw [T.comp_classOf _ _ m le_rfl le_rfl]
+  simp only [compAt, T.map_refl]
 
 /-- The actual category on the given label set `O`, with the constructed quotient Hom sets.
 Source: the blueprint proof, “Composition”
