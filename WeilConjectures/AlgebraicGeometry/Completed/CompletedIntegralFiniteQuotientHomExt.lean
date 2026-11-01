@@ -62,6 +62,13 @@ private theorem constantQuotient_surjective (l : ℕ) [Fact l.Prime] (E : Type u
     Function.Surjective
       ((WeilConjectures.integralConstantQuotientOfUniverses l E T n).hom.app U) := by
   have : LocallySmall.{max u (t + 1)} T.ProEt := locallySmall_max.{max u (t + 1), t, t + 1}
+  have : HasColimitsOfSize.{t + 1, t + 1} CommRingCat.{max u (t + 1)} :=
+    hasColimitsOfSizeShrink.{t + 1, t + 1, max u (t + 1), max u (t + 1)} _
+  have : PreservesFilteredColimitsOfSize.{t + 1, t + 1} (forget CommRingCat.{max u (t + 1)}) :=
+    preservesFilteredColimitsOfSize_shrink.{t + 1, max u (t + 1), t + 1, max u (t + 1)} _
+  have : (AlgebraicGeometry.Scheme.ProEt.topology T).PreservesSheafification
+      (forget CommRingCat.{max u (t + 1)}) :=
+    GrothendieckTopology.instPreservesSheafification _ _
   apply constRing_surj.{max u (t + 1), t + 1, t}
   intro b
   obtain ⟨a, ha⟩ := Ideal.Quotient.mk_surjective b.down
