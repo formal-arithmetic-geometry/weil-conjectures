@@ -125,6 +125,7 @@ import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 import WeilConjectures.AlgebraicGeometry.Condensed.CondensedCoverRestrictionConservative
 public import Mathlib.RingTheory.DedekindDomain.Basic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
+public import WeilConjectures.ProEtaleCoefficients.DerivedNakayamaResolution
 
 /-! # Completeness of finite constant scalar local models
 
@@ -549,7 +550,7 @@ private theorem local_complete_of_free
       (DerivedCategory.Q.obj ((singleFunctor (Modules l E T) 0).obj M)) := by
   classical
   obtain ⟨S, hS, hlocal, hsection, hrestrict⟩ :=
-    StrictCompletionRestriction.strict_completion_restriction_comparison l E
+    StrictCompletionRestriction.strict_completion_restriction_comparison (l := l) (E := E)
   have hcomplete (X : Scheme.{u}) (K : DerivedCategory (Modules l E X)) :
       IsDerivedComplete l E X K ↔ IsIso ((S X).unit.app K) := by
     obtain ⟨data, hd, ht, hs, hr, hu, hc⟩ := hS X
@@ -569,7 +570,9 @@ private theorem local_complete_of_free
   obtain ⟨hprod, ⟨c⟩⟩ := hrestrict (𝒰.f i) hmem
   obtain ⟨m, n, q, ⟨e⟩⟩ := h𝒰 i
   let : IsPrincipalIdealRing (Padic.coefficientExtensionIntegers l E) := by
-    have h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
+    have h := (Padic.extension_integers_dvr l E
+      (Padic.coefficientExtensionAbsoluteValue l E)
+      (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
     exact h.2.2.2.2.2.2.2.2.1
   have : Module.Finite (Padic.coefficientExtensionIntegers l E)
       (sfbScalarPresentationModule (Padic.coefficientExtensionIntegers l E) m n q) := by

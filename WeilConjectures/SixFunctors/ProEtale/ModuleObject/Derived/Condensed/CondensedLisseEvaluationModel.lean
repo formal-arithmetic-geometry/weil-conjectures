@@ -155,6 +155,31 @@ def G (U : C) : D J O ⥤ DerivedCategory (ModuleCat.{u + 1} (A J O U)) :=
 Source: HRS Definition 3.3 (blueprint: def-zl-condensed-lisse-evaluation-model). -/
 def lisse : ObjectProperty (D J O) := fun K ↦ IsDualizable K
 
+/-- The full subcategory defined by bounded finite projective representatives.
+Source: HRS Lemma 4.1 (blueprint: def-zl-condensed-lisse-evaluation-model). -/
+def perfect (U : C) : ObjectProperty (DerivedCategory (ModuleCat.{u + 1} (A J O U))) :=
+  fun Q ↦ DerivedCategory.IsPerfectRingComplex Q
+
+/-- Preservation of the ordinary Koszul braiding by the strong monoidal realization.
+Source: HRS (3.1) (blueprint: def-zl-condensed-lisse-evaluation-model). -/
+def strongSymmetric (U : C) (hU : IsTerminal U) : Prop :=
+  letI := DerivedCategory.braidedCategory' (ModuleCat.{u + 1} (A J O U))
+  letI := DerivedCategory.braidedCategory' (Mod (Sheaf J Ab.{u + 1}) O)
+  Nonempty (F J O U hU).Braided
+
+/-- The complete evaluation claim on the fixed canonical functors. Exact means
+triangulated; it imposes no t-exactness. Both natural identifications specify the
+restriction of F and its inverse G on the two actual full subcategories.
+Source: HRS Lemma 4.1(1)--(2)
+(blueprint: def-zl-condensed-lisse-evaluation-model). -/
+def Statement (U : C) (hU : IsTerminal U) : Prop :=
+  Nonempty (F J O U hU).FullyFaithful ∧
+  (∃ (_ : (F J O U hU).CommShift ℤ), (F J O U hU).IsTriangulated) ∧
+  strongSymmetric J O U hU ∧
+  ∃ e : (perfect J O U).FullSubcategory ≌ (lisse J O).FullSubcategory,
+    Nonempty (e.functor ⋙ (lisse J O).ι ≅ (perfect J O U).ι ⋙ F J O U hU) ∧
+    Nonempty (e.inverse ⋙ (perfect J O U).ι ≅ (lisse J O).ι ⋙ G J O U)
+
 end AlgebraicGeometry.ProEtale.CondensedRing.Evaluation
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
