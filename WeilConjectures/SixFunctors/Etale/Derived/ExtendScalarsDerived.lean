@@ -55,7 +55,8 @@ lemma kFlat_mapHomologicalComplex_obj_of_kFlatUpperStar
     (hK : kFlatUpperStar A g ((HomotopyCategory.quotient _ _).obj K)) :
     (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat
       (((g)^*[A].mapHomologicalComplex (.up ℤ)).obj K) :=
-  (HomotopyCategory.kFlat_quotient_obj_iff _).1 (ObjectProperty.prop_of_iso _
+  (HomotopyCategory.kFlat_quotient_obj_iff _).1 (ObjectProperty.prop_of_iso
+    (HomotopyCategory.quasiIso (Sheaf Z.smallEtaleTopology A) (.up ℤ)).kFlat
     (((g)^*[A].mapHomotopyCategoryFactors (.up ℤ)).app K) hK)
 
 end KFlatAux
