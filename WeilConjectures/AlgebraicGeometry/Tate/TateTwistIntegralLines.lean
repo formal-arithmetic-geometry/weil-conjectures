@@ -58,6 +58,10 @@ universe u v d c h
 open CategoryTheory CategoryTheory.Limits Opposite
 open AlgebraicGeometry AlgebraicGeometry.Scheme WeilConjectures
 
+-- `flatConstantModulesAbelian` (universes `max u v`) leaves a universe metavariable that stalls
+-- unification with the `WEqualsLocallyBijective` instance at universe `u + 1` on the slice sites.
+attribute [-instance] CategoryTheory.flatConstantModulesAbelian
+
 namespace AlgebraicGeometry.Scheme
 
 /-- The canonical bounded integral twist uses the recorded intrinsic coefficient line.
