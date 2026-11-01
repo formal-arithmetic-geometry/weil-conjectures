@@ -25,6 +25,9 @@ public import WeilConjectures.SmoothPurity.FiniteFieldDatum.FrobeniusDetailed
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
 public import WeilConjectures.WeilObject.Sheaf.StalkUnit
 import WeilConjectures.AlgebraicGeometry.ProEtaleObjectPullbackRestriction
+public import WeilConjectures.AlgebraicGeometry.CondensedArtinSchreierScalars
+public import WeilConjectures.AlgebraicGeometry.ConstantModelTorAmplitude
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.CompMonoidal
 
 /-!
 # Direct condensed Frobenius point transport
@@ -49,6 +52,57 @@ open AlgebraicGeometry.ProEtale
 open Opposite
 open scoped CategoryTheory.Obj
 namespace WeilConjectures
+
+private theorem section_smul_global
+    {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
+    (J : GrothendieckTopology C) [(J.W (A := Ab.{u + 1})).IsMonoidal]
+    (R : Sheaf J Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    (M : Mod (Sheaf J Ab.{u + 1}) R) (U : C) (r : MonObj.Γ R) :
+    ((CondensedRing.Evaluation.sections J R U).obj M).smul
+        (InternalAbelianSheafModule.sectionGlobalEval J R U r) =
+      (Mod.globalSmul r.hom M).hom.app (op U) := by
+  let F := sheafToPresheaf J Ab.{u + 1}
+  let E := (evaluation Cᵒᵖ Ab.{u + 1}).obj (op U)
+  let _ : E.Monoidal :=
+    Functor.CoreMonoidal.toMonoidal { εIso := Iso.refl _, μIso _ _ := Iso.refl _ }
+  have h := Mod.globalSmul_mapMod (F ⋙ E) r.hom M
+  change _ = (F ⋙ E).map (Mod.globalSmul r.hom M)
+  rw [← h]
+  ext x
+  rfl
+
+private theorem evaluation_nat_linear
+    {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]
+    [EssentiallySmall.{u + 1} C] [EssentiallySmall.{u + 1} D]
+    (J : GrothendieckTopology C) (K : GrothendieckTopology D)
+    [(J.W (A := Ab.{u + 1})).IsMonoidal] [(K.W (A := Ab.{u + 1})).IsMonoidal]
+    (F : Sheaf J Ab.{u + 1} ⥤ Sheaf K Ab.{u + 1}) [F.LaxMonoidal] [F.Additive]
+    (R : Sheaf J Ab.{u + 1}) [MonObj R] [IsCommMonObj R] [IsCommMonObj (F.obj R)]
+    (U : C) (V : D)
+    (δ : (sheafSections J Ab.{u + 1}).obj (op U) ⟶
+      F ⋙ (sheafSections K Ab.{u + 1}).obj (op V))
+    (M : Mod (Sheaf J Ab.{u + 1}) R) (r : MonObj.Γ R) :
+    δ.app M.X ≫
+      ((CondensedRing.Evaluation.sections K (F.obj R) V).obj ((F.mapMod R).obj M)).smul
+        (InternalAbelianSheafModule.sectionGlobalEval K (F.obj R) V
+          (MonObj.Γ.mapFunctor F r)) =
+      ((CondensedRing.Evaluation.sections J R U).obj M).smul
+        (InternalAbelianSheafModule.sectionGlobalEval J R U r) ≫ δ.app M.X := by
+  have htarget :
+      ((CondensedRing.Evaluation.sections K (F.obj R) V).obj ((F.mapMod R).obj M)).smul
+        (InternalAbelianSheafModule.sectionGlobalEval K (F.obj R) V
+          (MonObj.Γ.mapFunctor F r)) =
+      (F.map (Mod.globalSmul r.hom M)).hom.app (op V) := by
+    refine (section_smul_global K (F.obj R) ((F.mapMod R).obj M) V
+      (MonObj.Γ.mapFunctor F r)).trans ?_
+    exact congrArg (fun f : F.obj M.X ⟶ F.obj M.X ↦ f.hom.app (op V))
+      (Mod.globalSmul_mapMod F r.hom M)
+  calc
+    _ = δ.app M.X ≫ (F.map (Mod.globalSmul r.hom M)).hom.app (op V) :=
+      congrArg (fun f ↦ δ.app M.X ≫ f) htarget
+    _ = (Mod.globalSmul r.hom M).hom.app (op U) ≫ δ.app M.X :=
+      (δ.naturality (Mod.globalSmul r.hom M)).symm
+    _ = _ := congrArg (fun f ↦ f ≫ δ.app M.X) (section_smul_global J R M U r).symm
 
 /-- The terminal profinite object and the singleton test object are identified by their
 canonical terminal structures.  This is the object-level transport used in the point-unit map.

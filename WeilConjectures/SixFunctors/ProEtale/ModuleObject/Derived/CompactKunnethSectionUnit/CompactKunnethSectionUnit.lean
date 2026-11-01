@@ -11,6 +11,9 @@ import WeilConjectures.AlgebraicGeometry.ConstantModelTorAmplitude
 import WeilConjectures.CategoryTheory.ModuleObjects.Free
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.MonoidalModule
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactKunnethSectionUnit.CompactKunnethClosedExchange
+import WeilConjectures.PoincareDuality.ProjectionFormula
+import Mathlib.CategoryTheory.CommSq
 
 /-!
 # Normalization of compact Künneth on closed sections
@@ -52,7 +55,6 @@ noncomputable def sectionMap {datum : WeilConjectures.FiniteFieldDatum.{u}}
     (by
       rw [← d.q.hom.w, ← Category.assoc, d.cartesian.lift_snd, Category.id_comp]))
 
-
 /-- The first coordinate of the Cartesian lift a is gs.
 Source: blueprint `lem-pur-compact-kunneth-section-unit`, proof Step 1.
 Proof: apply the first projection identity of the Cartesian lift.
@@ -75,5 +77,21 @@ theorem sectionMap_q {datum : WeilConjectures.FiniteFieldDatum.{u}} {ell : ℕ}
   change I.d.cartesian.lift (I.d.g.hom.left ≫ I.s.hom.left) (𝟙 _) _ ≫
       I.d.q.hom.left = 𝟙 _
   exact I.d.cartesian.lift_snd _ _ _
+
+end AlgebraicGeometry.ProEtale.CondensedRing.CompactKunnethSectionUnit
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing.CompactKunnethSectionUnit
+
+private theorem supported_arrow_glue {D : Type*} [Category* D] [MonoidalCategory D]
+    {V W A B A' B' : D} (z : 𝟙_ D ⟶ V) (e : V ⟶ W)
+    (k₀ : V ⟶ A ⊗ B) (k₁ : W ⟶ A' ⊗ B')
+    (c : A ≅ 𝟙_ D) (d : B ≅ 𝟙_ D) (a : A ⟶ A') (b : B ⟶ B')
+    (hu : z ≫ k₀ ≫ (c.hom ⊗ₘ d.hom) = (λ_ (𝟙_ D)).inv)
+    (hn : e ≫ k₁ = k₀ ≫ (a ⊗ₘ b)) :
+    z ≫ e ≫ k₁ = (λ_ (𝟙_ D)).inv ≫ ((c.inv ≫ a) ⊗ₘ (d.inv ≫ b)) := by
+  rw [hn, ← hu]
+  simp only [Category.assoc, tensorHom_comp_tensorHom, Iso.hom_inv_id_assoc]
+
+-- Retain the original public characteristic hypothesis; this assembly uses only I's data.
 
 end AlgebraicGeometry.ProEtale.CondensedRing.CompactKunnethSectionUnit
