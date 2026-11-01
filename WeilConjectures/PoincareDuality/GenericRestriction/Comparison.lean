@@ -1,0 +1,234 @@
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
+module
+
+public import WeilConjectures.PoincareDuality.ProperProjectionComp
+public import WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.Comparison
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleIhom
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ClosedImmersionFullyFaithful
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Localizing
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarUnitCoherence
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.WeaklyEtaleIhom
+
+/-!
+# The internal-hom comparison of a derived pullback: formal properties
+
+Let `Λ` be a commutative condensed ring. For a morphism of schemes `g : Z' ⟶ Z`, the derived
+pullback `Lg^*` on the derived categories of module objects over `Λ` is monoidal, so it has a
+comparison map
+`ρ_g(K, M) : Lg^* RHom(K, M) ⟶ RHom(Lg^* K, Lg^* M)`
+(`CategoryTheory.Functor.LaxMonoidal.ihomComparison`). This file collects the formal properties of
+`ρ` used to prove that it is an isomorphism for a change of the base field and for the pullback to
+a geometric generic fibre (blueprint `det-pd-generic-closed-hom` (2)):
+
+* `ρ` is compatible with composition: the composition isomorphism
+  `L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*` is monoidal
+  (`ProEtale.CondensedRing.isMonoidal_leftDerivedUpperStarComp_hom`), so `ρ_{f ≫ g}` is invertible
+  as soon as `ρ_g` and `ρ_f` are
+  (`ProEtale.CondensedRing.isIso_ihomComparison_leftDerivedUpperStar_comp_app`);
+* `ρ` is invertible at `(K, Rf_* N)` for a morphism `f` with fully faithful `Rf_*` (an open or a
+  closed immersion), as soon as `Rf_*` commutes with the base change along `g` at `N` and at
+  `RHom(Lf^* K, N)` and `ρ` of the base change of `g` is invertible at `(Lf^* K, N)`
+  (`ProEtale.CondensedRing.isIso_ihomComparison_leftDerivedUpperStar_app_rightDerivedLowerStar`);
+* **dévissage in the second variable**: for an open immersion `j` with closed complement `i`,
+  `ρ_g` is invertible at `(K, M)` as soon as it is at `(K, Rj_* Lj^* M)` and at the objects
+  `(K, Ri_* X)`, `X` bounded constructible, and `Rj_*` commutes with the base change along `g` at
+  `Lj^* M`
+  (`ProEtale.CondensedRing.isIso_ihomComparison_leftDerivedUpperStar_of_isIso_open_closed`).
+-/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory Limits MonoidalCategory Pretriangulated
+
+open scoped CategoryTheory.Obj CategoryTheory.Functor
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+open Scheme Functor.LaxMonoidal
+
+variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+
+/-- The comparison `ρ_g(K, M) : Lg^* RHom(K, M) ⟶ RHom(Lg^* K, Lg^* M)` of the monoidal functor
+`Lg^*` (`CategoryTheory.Functor.LaxMonoidal.ihomComparison`), on the derived categories of module
+objects over `Λ`. It is the transpose of `Lg^* K ⊗ᴸ Lg^* RHom(K, M) ≅ Lg^*(K ⊗ᴸ RHom(K, M)) ⟶ Lg^* M`,
+hence compatible with evaluation. -/
+noncomputable def ihomUpperStarComparison {W X : Scheme.{u}} (g : W ⟶ X)
+    (K M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))) :
+    (L((g)^*⟦Λ⟧)).obj ((ihom K).obj M) ⟶
+      (ihom ((L((g)^*⟦Λ⟧)).obj K)).obj ((L((g)^*⟦Λ⟧)).obj M) :=
+  (ihomComparison L((g)^*⟦Λ⟧) K).natTrans.app M
+
+lemma ihomUpperStarComparison_eq {W X : Scheme.{u}} (g : W ⟶ X)
+    (K M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))) :
+    ihomUpperStarComparison Λ g K M = (ihomComparison L((g)^*⟦Λ⟧) K).natTrans.app M :=
+  rfl
+
+/-- The comparison `ρ_g(K, M)` is natural in `M`. -/
+@[reassoc]
+lemma ihomUpperStarComparison_naturality {W X : Scheme.{u}} (g : W ⟶ X)
+    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)))
+    {M M' : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))} (φ : M ⟶ M') :
+    (L((g)^*⟦Λ⟧)).map ((ihom K).map φ) ≫ ihomUpperStarComparison Λ g K M' =
+      ihomUpperStarComparison Λ g K M ≫ (ihom ((L((g)^*⟦Λ⟧)).obj K)).map ((L((g)^*⟦Λ⟧)).map φ) :=
+  (ihomComparison L((g)^*⟦Λ⟧) K).natTrans.naturality φ
+
+/-- The comparison `ρ_g(K, M)` is an isomorphism if and only if `ρ_g(K, M')` is, for `M ≅ M'`. -/
+lemma isIso_ihomUpperStarComparison_iff_of_iso_right {W X : Scheme.{u}} (g : W ⟶ X)
+    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)))
+    {M M' : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))} (e : M ≅ M') :
+    IsIso (ihomUpperStarComparison Λ g K M) ↔ IsIso (ihomUpperStarComparison Λ g K M') :=
+  NatTrans.isIso_app_iff_of_iso _ e
+
+/-- The comparison of a weakly étale morphism (for instance an open immersion, or the inclusion of
+the generic point of an integral scheme) is an isomorphism
+(`ProEtale.CondensedRing.isIso_ihomComparison_leftDerivedUpperStar_of_weaklyEtale`). -/
+instance isIso_ihomUpperStarComparison_of_weaklyEtale {W X : Scheme.{u}} (g : W ⟶ X)
+    [WeaklyEtale g]
+    (K M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))) :
+    IsIso (ihomUpperStarComparison Λ g K M) := by
+  have := isIso_ihomComparison_leftDerivedUpperStar_of_weaklyEtale Λ g K
+  rw [ihomUpperStarComparison_eq]
+  infer_instance
+
+/-- The comparison of `Lf^*` at `(K, Rf_* N)` is an isomorphism when the counit of `Lf^* ⊣ Rf_*`
+is invertible (`Rf_*` fully faithful, e.g. for an open or a closed immersion):
+`CategoryTheory.Functor.Monoidal.isIso_ihomComparison_app_rightAdjoint`. -/
+lemma isIso_ihomUpperStarComparison_rightDerivedLowerStar {V Z : Scheme.{u}} (f : V ⟶ Z)
+    [IsIso (derivedUpperStarLowerStarAdjunction Λ f).counit]
+    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
+      (condensedRingObj Λ Z)))
+    (N : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology V) Ab.{u + 1})
+      (condensedRingObj Λ V))) :
+    IsIso (ihomUpperStarComparison Λ f K ((R((f)_*⟦Λ⟧)).obj N)) :=
+  Functor.Monoidal.isIso_ihomComparison_app_rightAdjoint
+    (derivedUpperStarLowerStarAdjunction Λ f) K N
+
+/-- If `K` has a left dual, the comparison `ρ_g(K, M)` is an isomorphism for every `M`
+(`CategoryTheory.Functor.Monoidal.isIso_ihomComparison_app_of_exactPairing`). -/
+lemma isIso_ihomUpperStarComparison_of_exactPairing {W X : Scheme.{u}} (g : W ⟶ X)
+    (D K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))) [ExactPairing D K]
+    (M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))) :
+    IsIso (ihomUpperStarComparison Λ g K M) :=
+  Functor.Monoidal.isIso_ihomComparison_app_of_exactPairing L((g)^*⟦Λ⟧) D K M
+
+section Composition
+
+variable {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+
+/-- The composition isomorphism `L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*` of the derived pullbacks is a monoidal
+natural transformation (`ProEtale.CondensedRing.leftDerivedUpperStarComp_δ`,
+`ProEtale.CondensedRing.leftDerivedUpperStarComp_hom_app_unit`). -/
+instance isMonoidal_leftDerivedUpperStarComp_hom :
+    NatTrans.IsMonoidal (leftDerivedUpperStarComp Λ f g).hom := by
+  sorry
+
+/-- **The internal-hom comparison and composition.** The comparison of `L(f ≫ g)^*` at `(K, M)` is
+an isomorphism if and only if the composite of `Lf^*` of the comparison of `Lg^*` and of the
+comparison of `Lf^*` at `(Lg^* K, Lg^* M)` is one. -/
+lemma isIso_ihomUpperStarComparison_comp_iff
+    (K M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
+      (condensedRingObj Λ Z))) :
+    IsIso (ihomUpperStarComparison Λ (f ≫ g) K M) ↔
+      IsIso ((L((f)^*⟦Λ⟧)).map (ihomUpperStarComparison Λ g K M) ≫
+        ihomUpperStarComparison Λ f ((L((g)^*⟦Λ⟧)).obj K) ((L((g)^*⟦Λ⟧)).obj M)) := by
+  sorry
+
+/-- If the comparisons of `Lg^*` at `(K, M)` and of `Lf^*` at `(Lg^* K, Lg^* M)` are isomorphisms,
+so is the comparison of `L(f ≫ g)^*` at `(K, M)`. -/
+lemma isIso_ihomUpperStarComparison_comp
+    {K M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
+      (condensedRingObj Λ Z))}
+    (hg : IsIso (ihomUpperStarComparison Λ g K M))
+    (hf : IsIso (ihomUpperStarComparison Λ f ((L((g)^*⟦Λ⟧)).obj K) ((L((g)^*⟦Λ⟧)).obj M))) :
+    IsIso (ihomUpperStarComparison Λ (f ≫ g) K M) := by
+  rw [isIso_ihomUpperStarComparison_comp_iff]
+  infer_instance
+
+/-- If the comparisons of `L(f ≫ g)^*` and of `Lg^*` at `(K, M)` are isomorphisms, so is the
+comparison of `Lf^*` at `(Lg^* K, Lg^* M)`. -/
+lemma isIso_ihomUpperStarComparison_of_comp
+    {K M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
+      (condensedRingObj Λ Z))}
+    (hfg : IsIso (ihomUpperStarComparison Λ (f ≫ g) K M))
+    (hg : IsIso (ihomUpperStarComparison Λ g K M)) :
+    IsIso (ihomUpperStarComparison Λ f ((L((g)^*⟦Λ⟧)).obj K) ((L((g)^*⟦Λ⟧)).obj M)) := by
+  rw [isIso_ihomUpperStarComparison_comp_iff] at hfg
+  exact IsIso.of_isIso_comp_left ((L((f)^*⟦Λ⟧)).map (ihomUpperStarComparison Λ g K M)) _
+
+end Composition
+
+section DirectImage
+
+variable {Z Z' V V' : Scheme.{u}} {gZ : Z' ⟶ Z} {f : V ⟶ Z} {f' : V' ⟶ Z'} {gV : V' ⟶ V}
+  (sq : IsPullback gV f' f gZ)
+
+/-- **The comparison on direct images.** Let `f : V ⟶ Z` be a morphism with fully faithful `Rf_*`
+(an open or a closed immersion), `f' : V' ⟶ Z'` its base change along `gZ : Z' ⟶ Z`, again with
+fully faithful `Rf'_*`. If `Rf_*` commutes with the base change at `N` and at `RHom(Lf^* K, N)`,
+and the comparison of the base change `gV : V' ⟶ V` is an isomorphism at `(Lf^* K, N)`, then the
+comparison of `gZ` is an isomorphism at `(K, Rf_* N)`: both sides are direct images along `f'`,
+and after `Lf'^*` the comparison is that of `gV` (composition with the comparisons of `f`, `f'`,
+which are isomorphisms on direct images). -/
+lemma isIso_ihomUpperStarComparison_rightDerivedLowerStar_of_isPullback
+    [IsIso (derivedUpperStarLowerStarAdjunction Λ f).counit]
+    [IsIso (derivedUpperStarLowerStarAdjunction Λ f').counit]
+    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
+      (condensedRingObj Λ Z)))
+    (N : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology V) Ab.{u + 1})
+      (condensedRingObj Λ V)))
+    (hN : IsIso ((baseChangeMap Λ sq.toCommSq).app N))
+    (hH : IsIso ((baseChangeMap Λ sq.toCommSq).app ((ihom ((L((f)^*⟦Λ⟧)).obj K)).obj N)))
+    (hρ : IsIso (ihomUpperStarComparison Λ gV ((L((f)^*⟦Λ⟧)).obj K) N)) :
+    IsIso (ihomUpperStarComparison Λ gZ K ((R((f)_*⟦Λ⟧)).obj N)) := by
+  sorry
+
+end DirectImage
+
+section Devissage
+
+variable {Z Z' U U' W : Scheme.{u}} {gZ : Z' ⟶ Z} {i : W ⟶ Z} [IsClosedImmersion i]
+  {j : U ⟶ Z} [IsOpenImmersion j] {j' : U' ⟶ Z'} [IsOpenImmersion j'] {gU : U' ⟶ U}
+
+/-- **Dévissage in the second variable.** Let `j : U ⟶ Z` be an open immersion with closed
+complement `i : W ⟶ Z` and `j'` its base change along `gZ : Z' ⟶ Z`, such that `Rj_*` commutes
+with the base change at `Lj^* M`. If the comparison of `gZ` is an isomorphism at
+`(K, Rj_* Lj^* M)` and at every `(K, Ri_* X)` with `X` bounded constructible, then it is one at
+`(K, M)`, for bounded constructible `M` with `Rj_* Lj^* M` bounded constructible. Complete the
+unit `M ⟶ Rj_* Lj^* M` to a distinguished triangle `M ⟶ Rj_* Lj^* M ⟶ C ⟶ M[1]`: `C` is
+supported on `W`, so `C ≅ Ri_* Li^* C`, and the five lemma without connecting morphisms
+(`CategoryTheory.Pretriangulated.isIso₂_of_isIso₁₃_of_subsingleton`) applies to the images of the
+rotated triangle `C[-1] ⟶ M ⟶ Rj_* Lj^* M ⟶ C` under both sides of the comparison: there are no
+maps from `Lg^* RHom(K, C)` to `RHom(Lg^* K, Rj'_* -)` since `Lj'^*` kills the former. -/
+lemma isIso_ihomUpperStarComparison_of_isIso_open_closed
+    [(boundedConstructible (condensedRingObj Λ Z)).IsTriangulated]
+    (hij : IsCompl (Set.range i.base) (Set.range j.base)) (sqU : IsPullback gU j' j gZ)
+    (K M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
+      (condensedRingObj Λ Z)))
+    (hM : boundedConstructible (condensedRingObj Λ Z) M)
+    (hjM : boundedConstructible (condensedRingObj Λ Z) ((R((j)_*⟦Λ⟧)).obj ((L((j)^*⟦Λ⟧)).obj M)))
+    (hbc : IsIso ((baseChangeMap Λ sqU.toCommSq).app ((L((j)^*⟦Λ⟧)).obj M)))
+    (hU : IsIso (ihomUpperStarComparison Λ gZ K ((R((j)_*⟦Λ⟧)).obj ((L((j)^*⟦Λ⟧)).obj M))))
+    (hW : ∀ X : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology W) Ab.{u + 1})
+        (condensedRingObj Λ W)), boundedConstructible (condensedRingObj Λ W) X →
+      IsIso (ihomUpperStarComparison Λ gZ K ((R((i)_*⟦Λ⟧)).obj X))) :
+    IsIso (ihomUpperStarComparison Λ gZ K M) := by
+  sorry
+
+end Devissage
+
+end AlgebraicGeometry.ProEtale.CondensedRing

@@ -12184,6 +12184,9 @@ public import WeilConjectures.PoincareDuality.Biduality.EtaleReductionDualizingU
 public import WeilConjectures.PoincareDuality.Biduality.Integral
 public import WeilConjectures.PoincareDuality.Biduality.Reduction
 public import WeilConjectures.PoincareDuality.Biduality.ReductionIhom
+public import WeilConjectures.PoincareDuality.GenericRestriction.Comparison
+public import WeilConjectures.PoincareDuality.GenericRestriction.FieldExtension
+public import WeilConjectures.PoincareDuality.GenericRestriction.GenericFibre
 public import WeilConjectures.PoincareDuality.Poincare
 public import WeilConjectures.PoincareDuality.ProjectionCoherence
 public import WeilConjectures.PoincareDuality.ProjectionFormula

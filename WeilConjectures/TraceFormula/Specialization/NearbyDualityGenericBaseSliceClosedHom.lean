@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.PoincareDuality.GenericRestriction.GenericFibre
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBaseSliceInputs
 
 /-!
