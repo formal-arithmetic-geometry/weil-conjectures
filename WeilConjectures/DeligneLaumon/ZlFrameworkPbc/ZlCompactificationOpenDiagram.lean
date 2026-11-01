@@ -227,4 +227,26 @@ def FurtherOpen.outer {D : FiniteFieldDatum.{u}} {l : ℕ}
     isOpenImmersion := inferInstance
     isOpenImmersion' := inferInstance }
 
+/-- The actual support-transport diagram for a semilinear automorphism. This is in
+particular the geometric-Frobenius diagram when a compactification descends to k0.
+Source: thm-cbc-qbar.proof.md, Weil compatibility
+(blueprint: def-zl-compactification-open-diagram). -/
+def OpenDiagram.automorphism {D : FiniteFieldDatum.{u}} {l : ℕ}
+    (G : OpenDiagram D l) (x : G.X ≅ G.X) (y : G.Y ≅ G.Y) (t : G.c.Z ≅ G.c.Z)
+    (sp : ChosenCartesianSquare t.hom G.c.g G.c.g y.hom)
+    (sj : OpenImmersionSquare x.hom G.c.i G.c.i t.hom) : OpenDiagram D l where
+  X := G.X
+  Y := G.Y
+  U := G.X
+  V := G.Y
+  f := G.f
+  f' := G.f
+  u := x.hom
+  v := y.hom
+  c := G.c
+  c' := G.c
+  w := t.hom
+  properSquare := sp
+  openSquare := sj
+
 end WeilConjectures.ZlFrameworkPbc

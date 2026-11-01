@@ -220,4 +220,25 @@ noncomputable def openCoherenceRestrictionComp
   Functor.mapDerivedCategoryNatIso (upperStarComp Λ i j) ≪≫
     Functor.mapDerivedCategoryCompIso _ _
 
+/-- Successive open restrictions agree with direct restriction, with the two canonical
+restriction-composition comparisons inserted. Equality is stated on components so functor
+associators are definitional. Source: blueprint canonicity paragraph
+(blueprint: lem-sfb-derived-direct-image-open-coherence). -/
+def DirectImageSuccessiveRestriction
+    {X Y X' Y' X'' Y'' : Scheme.{u}}
+    {f : X ⟶ Y} {j : Y' ⟶ Y} {f' : X' ⟶ Y'} {i : X' ⟶ X}
+    {j' : Y'' ⟶ Y'} {f'' : X'' ⟶ Y''} {i' : X'' ⟶ X'}
+    (sq : CommSq i f' f j) (sq' : CommSq i' f'' f' j') : Prop :=
+  ∀ K : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)),
+    (openCoherenceRestrictionComp Λ j' j).hom.app
+        ((lowerStar Λ f).rightDerivedFunctor.obj K) ≫
+      (upperStar Λ j').mapDerivedCategory.map
+        ((derivedDirectImageOpenRestriction Λ sq).app K) ≫
+      (derivedDirectImageOpenRestriction Λ sq').app
+        ((upperStar Λ i).mapDerivedCategory.obj K) ≫
+      (lowerStar Λ f'').rightDerivedFunctor.map
+        ((openCoherenceRestrictionComp Λ i' i).inv.app K) =
+    (derivedDirectImageOpenRestriction Λ (sq'.horiz_comp sq)).app K
+
 end AlgebraicGeometry.ProEtale.CondensedRing

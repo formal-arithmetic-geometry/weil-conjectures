@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.SixFunctors.FiniteFreeCoefficients.Sites.FiniteFreeCoefficientExtensionData
 public import WeilConjectures.CategoryTheory.ProEtaleCoefficients.PreservesTotalTensorKFlatQuasiIsoSupplement
+public import WeilConjectures.SixFunctors.FiniteFreeCoefficients.NormalizedProScalarTensorGeometricSquareOnFlatRepresentative
+public import WeilConjectures.SixFunctors.FiniteFreeCoefficients.NormalizedProScalarTensorGeometricSquareOnFlatTensorCoherence
 
 /-! # Flat representative form of the normalized pro-scalar tensor square -/
 
@@ -55,6 +57,9 @@ theorem normalized_pro_scalar_tensor_geometric_square_on_flat
           (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q)) ≫
         (Sites.proScalarPull φ e.hom).hom.app
           (DerivedCategory.Q.obj P ⊗ DerivedCategory.Q.obj Q) := by
-  sorry
+  have hcoh := pro_scalar_pullback_tensor_cochain_square
+    φ X μ hμ Y e δ hδ P Q hP hQ
+  exact normalized_pro_scalar_tensor_geometric_square_representative
+    φ X μ hμ Y e δ hδ P Q hP hQ hcoh
 
 end WeilConjectures.FiniteFreeCoefficients

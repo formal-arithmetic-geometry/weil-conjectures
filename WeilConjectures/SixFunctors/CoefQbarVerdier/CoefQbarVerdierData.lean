@@ -17,6 +17,24 @@ public import WeilConjectures.SixFunctors.Sf.SfBidualityClass
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.Algebra.Homology.DerivedCategory.Linear
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.CategoryTheory.Adjunction.Restrict
+public import Mathlib.CategoryTheory.Triangulated.Opposite.Pretriangulated
+public import WeilConjectures.AlgebraicGeometry.Condensed.CondensedCoefficientComparisons
+public import WeilConjectures.AlgebraicGeometry.Condensed.CondensedConstantConstructibilitySupplement
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MonoidalStructure
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Braided
+public import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization
+public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsFlat
+public import WeilConjectures.CategoryTheory.ModuleObjects.Linear
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMapGlobalSections
+public import WeilConjectures.Compactification.Defs
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedModuleDerivedPushpull
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionProjection
 
 /-! # Verdier biduality at algebraically closed coefficients
 
@@ -516,3 +534,494 @@ def Dualizing (B : Duality D l hl Ω X) : Prop :=
 end CoefQbarVerdier
 
 end WeilConjectures
+
+namespace WeilConjectures.CondensedCoefQbarVerdier
+
+/-- Compatibility with the evaluation-defined double-dual arrow under a natural
+comparison of contravariant functors. The two comparison factors are forced by
+contravariance; this fixes the transported arrow, not merely its source and target.
+Source: blueprint thm-sf-biduality-class, coefficient descent
+(blueprint: def-sf-common-stage-verdier-data). -/
+def EvaluationCompatible
+    {C : Type a} [Category.{b} C] {B : Type c} [Category.{e} B]
+    (F : C ⥤ B) (D : Cᵒᵖ ⥤ C) (H : Bᵒᵖ ⥤ B)
+    (δ : 𝟭 C ⟶ D.rightOp ⋙ D) (ε : 𝟭 B ⟶ H.rightOp ⋙ H)
+    (r : D ⋙ F ≅ F.op ⋙ H) : Prop :=
+  ∀ K : C,
+    F.map (δ.app K) ≫ r.hom.app (op (D.obj (op K))) ≫
+      H.map (r.inv.app (op K)).op = ε.app (F.obj K)
+
+/-- An exact contravariant anti-equivalence together with its natural biduality
+isomorphism. The specific evaluation normalization is imposed by the stage clauses.
+Source: blueprint thm-sf-biduality-class, first conclusion
+(blueprint: def-sf-common-stage-verdier-data). -/
+structure ExactDuality (C : Type a) [Category.{b} C]
+    [HasShift C ℤ] [HasZeroObject C] [Preadditive C]
+    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] where
+  /-- The contravariant dual functor. -/
+  dual : Cᵒᵖ ⥤ C
+  /-- Exact anti-equivalence, using the actual distinguished triangles. -/
+  exact : ∃ s : dual.CommShift ℤ, ∀ T : Triangle Cᵒᵖ,
+    T ∈ distTriang Cᵒᵖ →
+      Triangle.mk (dual.map T.mor₁) (dual.map T.mor₂)
+        (dual.map T.mor₃ ≫ (s.commShiftIso (1 : ℤ)).hom.app T.obj₁) ∈
+          distTriang C
+  /-- The specified contravariant functor is an equivalence. -/
+  equivalence : dual.IsEquivalence
+  /-- The evaluation-defined natural double-dual isomorphism. -/
+  bidual : 𝟭 C ≅ dual.rightOp ⋙ dual
+
+/-- The ordinary category of modules over the specified pulled-back condensed ring.
+Source: current blueprint prop-functor-package (7)
+(blueprint: def-sf-common-stage-verdier-data). -/
+abbrev Ambient (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] :=
+  DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
+
+/-- Pullback from the condensed point is additive because it is a left adjoint.
+Source: native coefficient construction, upperStarFromPoint
+(blueprint: def-sf-common-stage-verdier-data).
+Proof: the composed inverse-image adjunction preserves finite coproducts and zero;
+in a preadditive category these are biproducts and imply additivity. -/
+theorem additivePull (X : Scheme.{u}) : (upperStarFromPoint X).Additive := by
+  let adj : upperStarFromPoint X ⊣ _ := by
+    unfold upperStarFromPoint
+    exact pointUpperStarLowerStarAdjunction.comp
+      (AlgebraicGeometry.ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ X))
+  have : (upperStarFromPoint X).IsLeftAdjoint := adj.isLeftAdjoint
+  have := Functor.preservesZeroMorphisms_of_isLeftAdjoint (upperStarFromPoint X)
+  have : PreservesColimitsOfSize.{0, 0} (upperStarFromPoint X) :=
+    adj.leftAdjoint_preservesColimits
+  have := preservesBinaryBiproducts_of_preservesBinaryCoproducts (upperStarFromPoint X)
+  exact Functor.additive_of_preservesBinaryBiproducts (upperStarFromPoint X)
+
+/-- Coordinates for an arbitrary algebraic closure, including one in an independent
+universe, in the native algebraic closure used by the condensed ring construction.
+Mathlib proves existence of this algebra isomorphism. Its induced coefficient action
+retains the specified closure, rather than treating it as an unrelated scalar field.
+Source: sk-def-sfb-qlbar-condensed, choice of algebraic closure
+(blueprint: def-sf-common-stage-verdier-data). -/
+def closureEquiv : Ω ≃ₐ[Padic l] PadicAlgCl l :=
+  IsAlgClosure.equiv (Padic l) Ω (PadicAlgCl l)
+
+/-- Canonical scalar multiplication on native algebraically closed coefficients.
+The action comes from constant global sections, transported to the scheme and then
+through ordinary localization. No linear structure is selected from an existence theorem.
+Source: current blueprint prop-functor-package (7)
+(blueprint: def-sf-common-stage-verdier-data). -/
+@[instance_reducible] def linearCategory : Linear (PadicAlgCl l) (PadicAlgClConstructible X l) := by
+  letI : (upperStarFromPoint X).Additive := additivePull X
+  letI := Mod.linearOfRingHom
+    ((CategoryTheory.MonObj.Γ.mapFunctor (upperStarFromPoint X)).comp
+      (Profinite.PadicAlgCl.constRingHom l))
+  infer_instance
+
+/-- Canonical linear structure for the independently specified closure. Its action
+is constant multiplication after the fixed closure coordinate isomorphism.
+Source: sk-def-sfb-qlbar-condensed (blueprint: def-sf-common-stage-verdier-data). -/
+@[instance_reducible] def closureLinear : Linear Ω (PadicAlgClConstructible X l) := by
+  letI : (upperStarFromPoint X).Additive := additivePull X
+  letI := Mod.linearOfRingHom
+    (((CategoryTheory.MonObj.Γ.mapFunctor (upperStarFromPoint X)).comp
+      (Profinite.PadicAlgCl.constRingHom l)).comp (closureEquiv l Ω).toRingHom)
+  infer_instance
+
+/-- The same canonical action at a finite coefficient field.
+Source: current blueprint prop-functor-package (7)
+(blueprint: def-sf-common-stage-verdier-data). -/
+@[instance_reducible] def finiteLinear (E : PadicAlgCl.FiniteIntermediateField l) :
+    Linear E (PadicSubfieldConstructible X l E) := by
+  letI : (upperStarFromPoint X).Additive := additivePull X
+  letI := Mod.linearOfRingHom
+    ((CategoryTheory.MonObj.Γ.mapFunctor (upperStarFromPoint X)).comp
+      (Profinite.continuousMapConstRingHom E))
+  infer_instance
+
+/-- The native triangulated-category hypothesis follows from the standing
+finite-type setting; it is not an additional restriction on that setting.
+Source: Mathlib AlgebraicGeometry.Noetherian, finite type over a field
+(blueprint: def-sf-common-stage-verdier-data).
+Proof: the field spectrum is Noetherian. A locally finite-type morphism over it
+has locally Noetherian source; quasi-compactness gives a compact source. These two
+properties define a Noetherian scheme, whose underlying space is Noetherian. -/
+theorem finiteTypeNoetherian (D : FiniteFieldDatum.{u}) (Z : Scheme.{u})
+    [Z.Over (Spec (.of D.k))] [LocallyOfFiniteType (Z ↘ Spec (.of D.k))]
+    [QuasiCompact (Z ↘ Spec (.of D.k))] : TopologicalSpace.NoetherianSpace Z := by
+  let : IsLocallyNoetherian Z :=
+    LocallyOfFiniteType.isLocallyNoetherian (Z ↘ Spec (.of D.k))
+  let : CompactSpace Z :=
+    QuasiCompact.compactSpace_of_compactSpace (Z ↘ Spec (.of D.k))
+  let : IsNoetherian Z := {}
+  infer_instance
+
+/-- Native finite-coefficient Verdier data. The comparison and evaluation are in the
+ordinary derived module category; its bidual arrow is the evaluation transpose.
+Source: current blueprint prop-functor-package (7), finite rational coefficients
+(blueprint: def-sf-common-stage-verdier-data). -/
+structure FiniteDatum (E : PadicAlgCl.FiniteIntermediateField l) where
+  duality : ExactDuality (PadicSubfieldConstructible X l E)
+  omega : PadicSubfieldConstructible X l E
+  additive : duality.dual.Additive
+  comparison : duality.dual ⋙ (boundedConstructible (padicSubfieldRingObj X l E)).ι ≅
+    (boundedConstructible (padicSubfieldRingObj X l E)).ι.op ⋙
+      (derivedHom (Profinite.continuousMapRingObj E) X).flip.obj omega.obj
+  linear : ∀ {K M : PadicSubfieldConstructible X l E} (f : K ⟶ M) (c : E),
+    duality.dual.map (c • f).op = c • duality.dual.map f.op
+  bidual_normalized :
+    letI := DerivedCategory.braidedCategory'
+      (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X l E))
+    EvaluationCompatible (boundedConstructible (padicSubfieldRingObj X l E)).ι
+      duality.dual ((derivedHom (Profinite.continuousMapRingObj E) X).flip.obj omega.obj)
+      duality.bidual.hom (MonoidalClosed.toIhomIhomNatTrans omega.obj) comparison
+
+/-- Finite evaluation is constructed from the actual tensor-Hom counit.
+Source: current blueprint prop-functor-package (7), evaluation
+(blueprint: def-sf-common-stage-verdier-data). -/
+def FiniteDatum.evaluation (E : PadicAlgCl.FiniteIntermediateField l)
+    (F : FiniteDatum l X E) (K : PadicSubfieldConstructible X l E) :
+    K.obj ⊗ (F.duality.dual.obj (op K)).obj ⟶ F.omega.obj :=
+  (𝟙 K.obj ⊗ₘ F.comparison.hom.app (op K)) ≫
+    (derivedTensorHomAdjunction (Profinite.continuousMapRingObj E) K.obj).counit.app
+      F.omega.obj
+
+/-- The native scalar tensor comparison is the inverse tensorator of the total
+left-derived scalar-extension functor. It includes its identity and tower coherences.
+Source: current blueprint sk-prop-scalar-six, tensor comparison
+(blueprint: def-sf-common-stage-verdier-data). -/
+def tensorInclusion (E : PadicAlgCl.FiniteIntermediateField l)
+    (K M : Ambient X (Profinite.continuousMapRingObj E)) :
+    (derivedExtendScalarsToPadicAlgCl X l E).obj (K ⊗ M) ≅
+      (derivedExtendScalarsToPadicAlgCl X l E).obj K ⊗
+        (derivedExtendScalarsToPadicAlgCl X l E).obj M := by
+  letI := Mod.extendScalarsMonoidal (padicSubfieldRingObjToPadicAlgCl X l E)
+  letI := (Mod.extendScalars
+    (padicSubfieldRingObjToPadicAlgCl X l E)).leftDerivedFunctorMonoidal
+  exact (Functor.Monoidal.μIso (derivedExtendScalarsToPadicAlgCl X l E) K M).symm
+
+/-- The native scalar unit, restricted along the fully faithful inclusion.
+Source: sk-prop-scalar-six, unit (blueprint: def-sf-common-stage-verdier-data). -/
+def finiteUnit (E : PadicAlgCl.FiniteIntermediateField l) :
+    constructibleExtendScalars X l (le_refl E) ≅ 𝟭 (PadicSubfieldConstructible X l E) :=
+  Functor.fullyFaithfulCancelRight (boundedConstructible (padicSubfieldRingObj X l E)).ι
+    (Functor.isoWhiskerLeft (boundedConstructible (padicSubfieldRingObj X l E)).ι
+      (condensedCoefficientUnitIso X l E))
+
+/-- The native multiplication constraint, restricted to constructible objects.
+Source: sk-prop-scalar-six, tower (blueprint: def-sf-common-stage-verdier-data). -/
+def finiteComp {E F G : PadicAlgCl.FiniteIntermediateField l} (h : E ≤ F) (k : F ≤ G) :
+    constructibleExtendScalars X l h ⋙ constructibleExtendScalars X l k ≅
+      constructibleExtendScalars X l (h.trans k) :=
+  Functor.fullyFaithfulCancelRight (boundedConstructible (padicSubfieldRingObj X l G)).ι
+    (Functor.isoWhiskerLeft (boundedConstructible (padicSubfieldRingObj X l E)).ι
+      (condensedCoefficientCompIso X l h k))
+
+/-- The finite scalar tensor constraint is the actual derived tensorator.
+Source: sk-prop-scalar-six, tensor (blueprint: def-sf-common-stage-verdier-data). -/
+def finiteTensor {E F : PadicAlgCl.FiniteIntermediateField l} (h : E ≤ F)
+    (K M : Ambient X (Profinite.continuousMapRingObj E)) :
+    (derivedExtendScalarsSubfield X l h).obj (K ⊗ M) ≅
+      (derivedExtendScalarsSubfield X l h).obj K ⊗
+        (derivedExtendScalarsSubfield X l h).obj M := by
+  letI := Mod.extendScalarsMonoidal (padicSubfieldRingObjMap X l h)
+  letI := (Mod.extendScalars (padicSubfieldRingObjMap X l h)).leftDerivedFunctorMonoidal
+  exact (Functor.Monoidal.μIso (derivedExtendScalarsSubfield X l h) K M).symm
+
+/-- The ordinary native integral coefficient category at a finite field.
+Source: current blueprint prop-functor-package (7), integral origin
+(blueprint: def-sf-common-stage-verdier-data). -/
+abbrev IntegralCategory (E : PadicAlgCl.FiniteIntermediateField l) :=
+  (boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj l E) X)).FullSubcategory
+
+/-- The same finite dual functor on the raw rationalization, using the canonical
+native integral-to-field equivalence. This is a real transport of the supplied
+functor; no second duality is chosen.
+Source: prop-functor-package (7), finite rationalization
+(blueprint: def-sf-common-stage-verdier-data). -/
+def FiniteDatum.rawDual (E : PadicAlgCl.FiniteIntermediateField l) (F : FiniteDatum l X E) :
+    (Rationalization (Submonoid.powers (l : ℤ)) (IntegralCategory l X E))ᵒᵖ ⥤
+      Rationalization (Submonoid.powers (l : ℤ)) (IntegralCategory l X E) :=
+  (rationalizationEquivalence X l E).functor.op ⋙ F.duality.dual ⋙
+    (rationalizationEquivalence X l E).inverse
+
+/-- Realization of the transported raw rational dual is the specified native dual.
+Source: canonical rationalization equivalence
+(blueprint: def-sf-common-stage-verdier-data).
+Proof: reassociate the composite and cancel inverse followed by functor using the
+counit of the actual rationalization equivalence. -/
+def FiniteDatum.rawDualComparison (E : PadicAlgCl.FiniteIntermediateField l)
+    (F : FiniteDatum l X E) :
+    FiniteDatum.rawDual l X E F ⋙ (rationalizationEquivalence X l E).functor ≅
+      (rationalizationEquivalence X l E).functor.op ⋙ F.duality.dual :=
+  Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft _ (Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft _ (rationalizationEquivalence X l E).counitIso ≪≫
+      Functor.rightUnitor _)
+
+/-- Derived completeness for the native integral coefficient ring: right orthogonality
+to complexes on which the uniformizer is inverted. Since the fraction field is
+`O_E[1/l]`, this is the usual derived-adic completeness condition, including all shifts.
+Source: blueprint def-weil-derived-complete, Stacks 091S
+(blueprint: def-sf-common-stage-verdier-data). -/
+def IntegralComplete (E : PadicAlgCl.FiniteIntermediateField l) :
+    ObjectProperty (Ambient X (Profinite.padicIntegersRingObj l E)) :=
+  fun K ↦ ∀ (M : Ambient X (Profinite.continuousMapRingObj E))
+    (f : (Mod.comap (padicIntegersToPadicSubfield X l E)).mapDerivedCategory.obj M ⟶ K),
+    f = 0
+
+/-- Completion is specified by its universal property, with the actual inclusion of
+derived-complete objects as right adjoint. This fixes the comparison as the adjunction
+unit, rather than choosing an arbitrary isomorphism with a completed tensor.
+Source: blueprint def-weil-derived-complete and prop-functor-package (7)
+(blueprint: def-sf-common-stage-verdier-data). -/
+structure IntegralCompletion (E : PadicAlgCl.FiniteIntermediateField l) where
+  reflector : Ambient X (Profinite.padicIntegersRingObj l E) ⥤
+    (IntegralComplete l X E).FullSubcategory
+  adjunction : reflector ⊣ (IntegralComplete l X E).ι
+
+/-- The ordinary-to-completed tensor comparison is the actual completion unit.
+Source: blueprint def-sf-rational-verdier-data, normalized completion comparison
+(blueprint: def-sf-common-stage-verdier-data). -/
+def IntegralCompletion.tensorComparison (E : PadicAlgCl.FiniteIntermediateField l)
+    (C : IntegralCompletion l X E)
+    (K M : Ambient X (Profinite.padicIntegersRingObj l E)) :
+    K ⊗ M ⟶ (C.reflector.obj (K ⊗ M)).obj := C.adjunction.unit.app (K ⊗ M)
+
+/-- The normalized comparison is invertible on a complete ordinary tensor.
+Source: reflective derived completion, Mathlib Adjunction.FullyFaithful
+(blueprint: def-sf-common-stage-verdier-data).
+Proof: a complete tensor lies in the essential image of the fully faithful inclusion;
+the unit of its reflection is therefore invertible. -/
+theorem IntegralCompletion.tensorComparison_isIso (E : PadicAlgCl.FiniteIntermediateField l)
+    (C : IntegralCompletion l X E)
+    (K M : Ambient X (Profinite.padicIntegersRingObj l E))
+    (h : IntegralComplete l X E (K ⊗ M)) :
+    IsIso (IntegralCompletion.tensorComparison l X E C K M) :=
+  C.adjunction.isIso_unit_app_of_iso (X := ⟨K ⊗ M, h⟩) (Iso.refl _)
+
+/-- Restriction of the actual integral internal Hom to constructible objects.
+Its preservation proof is supplied separately; the functor itself is fixed.
+Source: prop-functor-package (7), integral duality
+(blueprint: def-sf-common-stage-verdier-data). -/
+def integralDual (E : PadicAlgCl.FiniteIntermediateField l) (w : IntegralCategory l X E)
+    (h : ∀ K : IntegralCategory l X E,
+      boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj l E) X)
+        (((derivedHom (Profinite.padicIntegersRingObj l E) X).flip.obj w.obj).obj (op K.obj))) :
+    (IntegralCategory l X E)ᵒᵖ ⥤ IntegralCategory l X E :=
+  (boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj l E) X)).lift
+    ((boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj l E) X)).ι.op ⋙
+      (derivedHom (Profinite.padicIntegersRingObj l E) X).flip.obj w.obj)
+    (fun K ↦ h K.unop)
+
+/-- The actual evaluation-transpose arrow of integral duality, restricted through the
+fully faithful constructible inclusion. The symmetry is the derived Koszul symmetry.
+Source: prop-functor-package (7), integral biduality
+(blueprint: def-sf-common-stage-verdier-data). -/
+def integralBidual (E : PadicAlgCl.FiniteIntermediateField l) (w : IntegralCategory l X E)
+    (h : ∀ K : IntegralCategory l X E,
+      boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj l E) X)
+        (((derivedHom (Profinite.padicIntegersRingObj l E) X).flip.obj w.obj).obj (op K.obj))) :
+    𝟭 (IntegralCategory l X E) ⟶ (integralDual l X E w h).rightOp ⋙ integralDual l X E w h := by
+  letI := DerivedCategory.braidedCategory'
+    (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicIntegersRingObj l E) X))
+  exact
+    { app := fun K ↦ ObjectProperty.homMk
+        ((MonoidalClosed.toIhomIhomNatTrans w.obj).app K.obj)
+      naturality := fun K M f ↦ ObjectProperty.hom_ext _
+        ((MonoidalClosed.toIhomIhomNatTrans w.obj).naturality f.hom) }
+
+/-- Integral tensor-Hom evaluation in the actual ordinary condensed category.
+On integral constructible objects this is the completed evaluation as well, under
+the canonical ordinary-to-completed comparison; no unrelated evaluation is supplied.
+Source: prop-functor-package (7), integral evaluation
+(blueprint: def-sf-common-stage-verdier-data). -/
+def integralEvaluation (E : PadicAlgCl.FiniteIntermediateField l)
+    (w : IntegralCategory l X E) (K : IntegralCategory l X E) :
+    K.obj ⊗ (((derivedHom (Profinite.padicIntegersRingObj l E) X).flip.obj w.obj).obj
+      (op K.obj)) ⟶ w.obj :=
+  (derivedTensorHomAdjunction (Profinite.padicIntegersRingObj l E) K.obj).counit.app w.obj
+
+/-- Completed integral evaluation uses the inverse of the specified completion unit
+followed by the ordinary tensor-Hom counit. This retains the normalization required
+of the integral presentation of rational duality.
+Source: def-sf-rational-verdier-data, integral evaluation formula
+(blueprint: def-sf-common-stage-verdier-data). -/
+def IntegralOrigin.completedEvaluation (D : FiniteFieldDatum.{u})
+    [X.Over (Spec (.of D.k))] (E : PadicAlgCl.FiniteIntermediateField l)
+    (F : FiniteDatum l X E) (I : IntegralOrigin l X D E F) (K : IntegralCategory l X E) :
+    (I.completion.reflector.obj
+      (K.obj ⊗ ((integralDual l X E I.omega I.preserves).obj (op K)).obj)).obj ⟶ I.omega.obj := by
+  letI := IntegralCompletion.tensorComparison_isIso l X E I.completion K.obj
+    ((integralDual l X E I.omega I.preserves).obj (op K)).obj
+    (I.tensor_complete K ((integralDual l X E I.omega I.preserves).obj (op K)))
+  exact inv (IntegralCompletion.tensorComparison l X E I.completion K.obj
+    ((integralDual l X E I.omega I.preserves).obj (op K)).obj) ≫
+      integralEvaluation l X E I.omega K
+
+/-- The completed evaluation is precisely the ordinary counit after the normalized
+comparison; the completion introduces no independently chosen arrow.
+Source: def-sf-rational-verdier-data
+(blueprint: def-sf-common-stage-verdier-data).
+Proof: the comparison is invertible on the complete constructible tensor; cancel
+it against its inverse in the definition of completedEvaluation. -/
+theorem IntegralOrigin.completedEvaluation_normalized (D : FiniteFieldDatum.{u})
+    [X.Over (Spec (.of D.k))] (E : PadicAlgCl.FiniteIntermediateField l)
+    (F : FiniteDatum l X E) (I : IntegralOrigin l X D E F) (K : IntegralCategory l X E) :
+    IntegralCompletion.tensorComparison l X E I.completion K.obj
+        ((integralDual l X E I.omega I.preserves).obj (op K)).obj ≫
+      IntegralOrigin.completedEvaluation l X D E F I K = integralEvaluation l X E I.omega K := by
+  let := IntegralCompletion.tensorComparison_isIso l X E I.completion K.obj
+    ((integralDual l X E I.omega I.preserves).obj (op K)).obj
+    (I.tensor_complete K ((integralDual l X E I.omega I.preserves).obj (op K)))
+  simp only [IntegralOrigin.completedEvaluation, IsIso.hom_inv_id_assoc]
+
+/-- Coherence and evaluation normalization for the supplied finite comparisons.
+Identity and repeated fields are included in the quantified equations. No comparison
+is chosen from an existence assertion.
+Source: latest blueprint prop-functor-package (7) and sk-prop-scalar-six
+(blueprint: def-sf-common-stage-verdier-data). -/
+def FiniteCoherent (B : DualityData l Ω X D) : Prop :=
+  (∀ (E : PadicAlgCl.FiniteIntermediateField l) (K : PadicSubfieldConstructible X l E),
+    (B.beta E E le_rfl).hom.app (op K) =
+      (finiteUnit l X E).hom.app ((B.finite E).duality.dual.obj (op K)) ≫
+        (B.finite E).duality.dual.map ((finiteUnit l X E).hom.app K).op) ∧
+  (∀ (E F G : PadicAlgCl.FiniteIntermediateField l) (h : E ≤ F) (k : F ≤ G)
+      (K : PadicSubfieldConstructible X l E),
+    (constructibleExtendScalars X l k).map ((B.beta E F h).hom.app (op K)) ≫
+      (B.beta F G k).hom.app (op ((constructibleExtendScalars X l h).obj K)) =
+    (finiteComp l X h k).hom.app ((B.finite E).duality.dual.obj (op K)) ≫
+      (B.beta E G (h.trans k)).hom.app (op K) ≫
+        (B.finite G).duality.dual.map ((finiteComp l X h k).hom.app K).op) ∧
+  (∀ E : PadicAlgCl.FiniteIntermediateField l,
+    (B.omegaScalar E E le_rfl).hom = (finiteUnit l X E).hom.app (B.finite E).omega) ∧
+  (∀ (E F G : PadicAlgCl.FiniteIntermediateField l) (h : E ≤ F) (k : F ≤ G),
+    (constructibleExtendScalars X l k).map (B.omegaScalar E F h).hom ≫
+      (B.omegaScalar F G k).hom =
+    (finiteComp l X h k).hom.app (B.finite E).omega ≫
+      (B.omegaScalar E G (h.trans k)).hom) ∧
+  (∀ (E F : PadicAlgCl.FiniteIntermediateField l) (h : E ≤ F),
+    EvaluationCompatible (constructibleExtendScalars X l h)
+      (B.finite E).duality.dual (B.finite F).duality.dual
+      (B.finite E).duality.bidual.hom (B.finite F).duality.bidual.hom (B.beta E F h)) ∧
+  (∀ (E F : PadicAlgCl.FiniteIntermediateField l) (h : E ≤ F)
+      (K : PadicSubfieldConstructible X l E),
+    (finiteTensor l X h K.obj ((B.finite E).duality.dual.obj (op K)).obj).hom ≫
+      (𝟙 _ ⊗ₘ (boundedConstructible (padicSubfieldRingObj X l F)).ι.map
+        ((B.beta E F h).hom.app (op K))) ≫
+      FiniteDatum.evaluation l X F (B.finite F) ((constructibleExtendScalars X l h).obj K) =
+    (derivedExtendScalarsSubfield X l h).map (FiniteDatum.evaluation l X E (B.finite E) K) ≫
+      (boundedConstructible (padicSubfieldRingObj X l F)).ι.map (B.omegaScalar E F h).hom)
+
+/-- The finite-origin normalization equations on native data. The scalar square is
+required for every inclusion, including identities; its compatibility at a tower is
+read with the native scalar compositors. Evaluation and both bidual maps retain their
+split-retract formulas, with all arrows interpreted in the ambient derived category.
+Source: current blueprint prop-functor-package (7)
+(blueprint: def-sf-common-stage-verdier-data). -/
+def DualityProperties (B : DualityData l Ω X D) : Prop :=
+  (fun [_linearInst : Linear Ω (PadicAlgClConstructible X l)] ↦
+  FiniteCoherent l Ω X D B ∧
+  B.duality.dual.Additive ∧
+  (∀ {K M : PadicAlgClConstructible X l} (f : K ⟶ M) (c : Ω),
+    B.duality.dual.map (c • f).op = c • B.duality.dual.map f.op) ∧
+  (∀ (E : PadicAlgCl.FiniteIntermediateField l)
+      {K M : PadicSubfieldConstructible X l E} (f : K ⟶ M) (c : E),
+    (constructibleToPadicAlgCl X l E).map (c • f) =
+      (closureEquiv l Ω).symm (c : PadicAlgCl l) •
+        (constructibleToPadicAlgCl X l E).map f) ∧
+  (∀ (E : PadicAlgCl.FiniteIntermediateField l) (K : PadicSubfieldConstructible X l E),
+    B.duality.dual.obj (op ((constructibleToPadicAlgCl X l E).obj K)) =
+      (constructibleToPadicAlgCl X l E).obj ((B.finite E).duality.dual.obj (op K))) ∧
+  (∀ (E : PadicAlgCl.FiniteIntermediateField l) (K : PadicSubfieldConstructible X l E),
+    HEq ((B.comparison E).hom.app (op K))
+      (𝟙 ((constructibleToPadicAlgCl X l E).obj ((B.finite E).duality.dual.obj (op K))))) ∧
+  (∀ (E F : PadicAlgCl.FiniteIntermediateField l) (h : E ≤ F)
+      (K : PadicSubfieldConstructible X l E),
+    (constructibleToPadicAlgCl X l F).map ((B.beta E F h).hom.app (op K)) ≫
+      (B.comparison F).hom.app (op ((constructibleExtendScalars X l h).obj K)) ≫
+      B.duality.dual.map ((constructibleToPadicAlgClCompIso X l h).inv.app K).op =
+    (constructibleToPadicAlgClCompIso X l h).hom.app ((B.finite E).duality.dual.obj (op K)) ≫
+      (B.comparison E).hom.app (op K)) ∧
+  (∀ E : PadicAlgCl.FiniteIntermediateField l,
+    EvaluationCompatible (constructibleToPadicAlgCl X l E)
+      (B.finite E).duality.dual B.duality.dual
+      (B.finite E).duality.bidual.hom B.duality.bidual.hom (B.comparison E)) ∧
+  (∀ (E F : PadicAlgCl.FiniteIntermediateField l) (h : E ≤ F),
+    (constructibleToPadicAlgCl X l F).map (B.omegaScalar E F h).hom ≫
+      (B.omegaComparison F).hom =
+    (constructibleToPadicAlgClCompIso X l h).hom.app (B.finite E).omega ≫
+      (B.omegaComparison E).hom) ∧
+  (∀ (E : PadicAlgCl.FiniteIntermediateField l) (K : PadicSubfieldConstructible X l E),
+    (tensorInclusion l X E K.obj ((B.finite E).duality.dual.obj (op K)).obj).hom ≫
+      (𝟙 _ ⊗ₘ (boundedConstructible (padicAlgClRingObj X l)).ι.map
+        ((B.comparison E).hom.app (op K))) ≫
+      B.evaluation ((constructibleToPadicAlgCl X l E).obj K) =
+    (derivedExtendScalarsToPadicAlgCl X l E).map (FiniteDatum.evaluation l X E (B.finite E) K) ≫
+      (boundedConstructible (padicAlgClRingObj X l)).ι.map (B.omegaComparison E).hom) ∧
+  (∀ (K M : PadicAlgClConstructible X l) (f : K ⟶ M),
+    ((boundedConstructible (padicAlgClRingObj X l)).ι.map f ⊗ₘ 𝟙 _) ≫ B.evaluation M =
+      (𝟙 _ ⊗ₘ (boundedConstructible (padicAlgClRingObj X l)).ι.map
+        (B.duality.dual.map f.op)) ≫ B.evaluation K) ∧
+  (∀ (P K : PadicAlgClConstructible X l) (i : P ⟶ K) (p : K ⟶ P) (_h : i ≫ p = 𝟙 P),
+    ((boundedConstructible (padicAlgClRingObj X l)).ι.map i ⊗ₘ
+      (boundedConstructible (padicAlgClRingObj X l)).ι.map (B.duality.dual.map p.op)) ≫
+        B.evaluation K = B.evaluation P) ∧
+  (∀ (P K : PadicAlgClConstructible X l) (i : P ⟶ K) (p : K ⟶ P) (_h : i ≫ p = 𝟙 P),
+    i ≫ B.duality.bidual.hom.app K ≫ B.duality.dual.map (B.duality.dual.map p.op).op =
+      B.duality.bidual.hom.app P) ∧
+  (∀ (P K : PadicAlgClConstructible X l) (i : P ⟶ K) (p : K ⟶ P) (_h : i ≫ p = 𝟙 P),
+    B.duality.dual.map (B.duality.dual.map i.op).op ≫ B.duality.bidual.inv.app K ≫ p =
+      B.duality.bidual.inv.app P)) (_linearInst := B.linearCategory)
+
+/-- Common-stage Verdier duality on the ordinary condensed category, with all its
+finite-origin equations. This is a dependent record, not an existence assertion.
+Source: current blueprint prop-functor-package (7)
+(blueprint: def-sf-common-stage-verdier-data). -/
+def Duality := { B : DualityData l Ω X D // DualityProperties l Ω X D B }
+
+/-- The actual internal-Hom identification and the universal property of the same
+specified evaluation. The map in `universal` is evaluation transpose, not an arbitrary
+Hom-set equivalence. The native ambient Hom determines the permitted restriction.
+Source: current blueprint prop-functor-package (7)
+(blueprint: def-sf-common-stage-verdier-data). -/
+structure InternalHom (B : Duality l Ω X D) where
+  comparison : B.val.duality.dual ⋙ (boundedConstructible (padicAlgClRingObj X l)).ι ≅
+    (boundedConstructible (padicAlgClRingObj X l)).ι.op ⋙
+      (derivedHom (Profinite.padicAlgClRingObj l) X).flip.obj B.val.omega.obj
+  evaluation_normalized (K : PadicAlgClConstructible X l) :
+    B.val.evaluation K = (𝟙 K.obj ⊗ₘ comparison.hom.app (op K)) ≫
+      (derivedTensorHomAdjunction (Profinite.padicAlgClRingObj l) K.obj).counit.app
+        B.val.omega.obj
+  universal (K P : PadicAlgClConstructible X l) :
+    Function.Bijective (fun h : P ⟶ B.val.duality.dual.obj (op K) ↦
+      (𝟙 K.obj ⊗ₘ (boundedConstructible (padicAlgClRingObj X l)).ι.map h) ≫
+        B.val.evaluation K)
+
+/-- Restrict actual derived scalar extension, using a supplied preservation proof.
+Source: sk-prop-scalar-six (blueprint: def-sf-common-stage-verdier-data). -/
+def scalarRestriction (Z : Scheme.{u})
+    (h : ∀ K : ConstantModelBoundedConstructible Λ Z,
+      constantModelBoundedConstructible Λ' Z
+        (((Mod.extendScalars (coefficientMap a Z)).leftDerivedFunctor).obj K.obj)) :
+    ConstantModelBoundedConstructible Λ Z ⥤ ConstantModelBoundedConstructible Λ' Z :=
+  (constantModelBoundedConstructible Λ' Z).lift
+    ((constantModelBoundedConstructible Λ Z).ι ⋙
+      (Mod.extendScalars (coefficientMap a Z)).leftDerivedFunctor) h
+
+/-- The actual compactification scalar map: proper pushforward comparison followed
+by the open-extension comparison. This definition does not assume it is invertible.
+Source: sk-prop-scalar-six, compact support
+(blueprint: def-sf-common-stage-verdier-data). -/
+def supportScalar {Z Y : Scheme.{u}} {f : Z ⟶ Y} (c : Compactification f) :
+    rightDerivedLowerShriekOfCompactification Λ c ⋙
+        (Mod.extendScalars (coefficientMap a Y)).leftDerivedFunctor ⟶
+      (Mod.extendScalars (coefficientMap a Z)).leftDerivedFunctor ⋙
+        rightDerivedLowerShriekOfCompactification Λ' c :=
+  (Functor.associator _ _ _).hom ≫
+    Functor.whiskerLeft ((openImmersionLowerShriek Λ c.i).mapDerivedCategory)
+      (derivedPushHom a c.g) ≫
+    (Functor.associator _ _ _).inv ≫
+    Functor.whiskerRight (derivedOpenImmersionShriekIso a c.i).hom
+      (lowerStar Λ' c.g).rightDerivedFunctor ≫
+    (Functor.associator _ _ _).hom
+
+end WeilConjectures.CondensedCoefQbarVerdier

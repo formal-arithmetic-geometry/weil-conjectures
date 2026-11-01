@@ -11,6 +11,11 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.Coef
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChangeIntegralRational
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ReductionConstructible
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekBaseChange
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CompactlySupported
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.IntegralExchangeReduction
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.IntegralReductionConservative
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionLowerShriekUnit
 
 /-!
 
@@ -99,9 +104,9 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
   [IsSeparated X'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
-/-- **The proper base change theorem** (blueprint `sk-thm-sfb-proper-base-change`) for bounded
-constructible `𝒪_E`-sheaves, `E ⊆ ℚ̄_ℓ` a finite extension of `ℚ_ℓ`: for a cartesian square of
-schemes
+/-- **The proper base change theorem** for bounded constructible `𝒪_E`-sheaves (blueprint
+`sk-thm-sfb-proper-base-change`), `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ`: for a cartesian
+square of schemes
 
 ```
 X' --g'--> X
@@ -112,26 +117,64 @@ Y' --g---> Y
 ```
 
 with `f` proper, the base-change morphism `BC_sq : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*` is an
-isomorphism of functors `Dᵇc(X)⟦𝒪̲_E⟧ ⥤ Dᵇc(Y')⟦𝒪̲_E⟧`. By derived Nakayama it suffices that the
-first derived reduction `BC_sq(K₀) ⊗ᴸ_{𝒪_E} 𝔽_E` is invertible
-(`isIso_boundedConstructibleBaseChange_integral_app_of_reduction`); this is the pro-étale
-base-change morphism with coefficients `𝔽_E` at a complex of étale origin, invertible by the
-étale proper base change theorem (`ProEtale.isIso_derivedBaseChangeMap_app_of_isProper`). -/
-theorem isIso_boundedConstructibleBaseChange_of_isProper_padicIntegers
-    (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
-    [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] [IsProper f.left]
+isomorphism of functors `Dᵇc(X)⟦𝒪̲_E⟧ ⥤ Dᵇc(Y')⟦𝒪̲_E⟧`. This is the integral analogue of
+`isIso_boundedConstructibleBaseChange_of_isProper`; it reduces to the étale proper base change
+theorem `AlgebraicGeometry.Etale.isIso_baseChange_of_isProper` by finite reduction and
+integral Nakayama (Bhatt–Scholze, Sections 6.7–6.8). The induced norm identifies the coefficient
+with the continuous integral coefficient. The reduction of each base-change component is
+invertible by `integralExchange_reduction_isIso`; `integralReduction_reflects_isIso` then gives
+its invertibility on the Noetherian target, and componentwise invertibility assembles to an
+isomorphism of functors. -/
+theorem isIso_boundedConstructibleBaseChange_of_isProper_padicIntegers [IsProper f.left]
     (sq : IsPullback g' f' f g) :
-    IsIso (PadicIntegersRingObj.boundedConstructibleBaseChange ℓ E sq.toCommSq) := by
-  have hsq : IsPullback g'.left f'.left f.left g.left := sq.map (Over.forget _)
-  have := isNoetherian_of_locallyOfFiniteType X.hom
-  have := isNoetherian_of_locallyOfFiniteType Y'.hom
-  have : Finite (ResidueFieldCoeff.{u} ℓ E) :=
-    inferInstanceAs (Finite (ULift.{u + 1} (PadicAlgCl.integersResidueField ℓ E)))
-  rw [NatTrans.isIso_iff_isIso_app]
-  intro K₀
-  exact isIso_boundedConstructibleBaseChange_integral_app_of_reduction ℓ E sq.toCommSq hsq K₀
-    (isIso_derivedBaseChangeMap_app_of_isProper _ hsq _
-      (boundedConstructible_derivedReduction_obj X.left ℓ E _ K₀.property).plusEtaleOrigin)
+    IsIso (PadicIntegersRingObj.boundedConstructibleBaseChange
+      ℓ E sq.toCommSq) := by
+  let := PadicAlgCl.normedFieldOfAlgebra ℓ E
+  let : NormedAlgebra ℚ_[ℓ] E := ⟨fun a x ↦ by
+    change ‖algebraMap E (PadicAlgCl ℓ) (a • x)‖ ≤
+      ‖a‖ * ‖algebraMap E (PadicAlgCl ℓ) x‖
+    rw [Algebra.smul_def, map_mul, ← IsScalarTower.algebraMap_apply, norm_mul,
+      PadicAlgCl.norm_extends]⟩
+  let : LocallyOfFiniteType (X.left ↘ Spec (.of k)) := ‹LocallyOfFiniteType X.hom›
+  let : QuasiCompact (X.left ↘ Spec (.of k)) := ‹QuasiCompact X.hom›
+  let : IsSeparated (X.left ↘ Spec (.of k)) := ‹IsSeparated X.hom›
+  let : LocallyOfFiniteType (Y.left ↘ Spec (.of k)) := ‹LocallyOfFiniteType Y.hom›
+  let : QuasiCompact (Y.left ↘ Spec (.of k)) := ‹QuasiCompact Y.hom›
+  let : IsSeparated (Y.left ↘ Spec (.of k)) := ‹IsSeparated Y.hom›
+  let : LocallyOfFiniteType (X'.left ↘ Spec (.of k)) := ‹LocallyOfFiniteType X'.hom›
+  let : QuasiCompact (X'.left ↘ Spec (.of k)) := ‹QuasiCompact X'.hom›
+  let : IsSeparated (X'.left ↘ Spec (.of k)) := ‹IsSeparated X'.hom›
+  let : LocallyOfFiniteType (Y'.left ↘ Spec (.of k)) := ‹LocallyOfFiniteType Y'.hom›
+  let : QuasiCompact (Y'.left ↘ Spec (.of k)) := ‹QuasiCompact Y'.hom›
+  let : IsSeparated (Y'.left ↘ Spec (.of k)) := ‹IsSeparated Y'.hom›
+  let : IsNoetherian (Spec (.of k)) := {}
+  let : IsNoetherian Y'.left := AlgebraicGeometry.isNoetherian_of_locallyOfFiniteType
+    (Y'.left ↘ Spec (.of k))
+  have hbc : IsIso (UnitBallRingObj.boundedConstructibleBaseChange ℓ
+      (continuousIntegers ℓ E) sq.toCommSq) := by
+    rw [NatTrans.isIso_iff_isIso_app]
+    intro K
+    have hred := integralExchange_reduction_isIso ℓ E k
+      (X := X.left) (Y := Y.left) (X' := X'.left) (Y' := Y'.left)
+      (f := f.left) (g := g.left) (f' := f'.left) (g' := g'.left)
+      (sq.map (Over.forget (Spec (.of k)))) K
+    exact integralReduction_reflects_isIso ℓ E Y'.left _ hred
+  have hbcO (O : Subring E) [Fact (∀ x : E, x ∈ O ↔ ‖x‖ ≤ 1)]
+      (hO : O = continuousIntegers ℓ E) :
+      IsIso (UnitBallRingObj.boundedConstructibleBaseChange ℓ O sq.toCommSq) := by
+    subst O
+    exact hbc
+  have : Fact (∀ x : E, x ∈ (PadicAlgCl.integers ℓ E).toSubring ↔ ‖x‖ ≤ 1) := ⟨by
+    intro x
+    change ‖x‖₊ ≤ 1 ↔ ‖x‖ ≤ 1
+    rw [← NNReal.coe_le_coe, NNReal.coe_one, coe_nnnorm]⟩
+  have hO : (PadicAlgCl.integers ℓ E).toSubring = continuousIntegers ℓ E := by
+    ext x
+    rfl
+  have hbc' := hbcO (PadicAlgCl.integers ℓ E).toSubring hO
+  rw [PadicIntegersRingObj.boundedConstructibleBaseChange_eq_exchangeRight]
+  rw [UnitBallRingObj.boundedConstructibleBaseChange_eq_exchangeRight] at hbc'
+  exact hbc'
 
 /-- **The proper base change theorem** (blueprint `sk-thm-sfb-proper-base-change`) for bounded
 constructible `E`-sheaves, `E` a finite extension of `ℚ_ℓ`: for a cartesian square of schemes
