@@ -238,35 +238,33 @@ private theorem condensedPull_eq_coefficientPull
   simp only [condensedPull, coefficientPull, coefficientUnit,
     coefficientUnit_eq_adjoint, Category.assoc]
 
-/-- Coefficient functions form a contravariant functor on the category of covers.
-Source: latest blueprint, lem-wft-as-unit-trivialization.proof.md, restriction of
-coefficient functions (blueprint: lem-wft-as-coefficient-pull-calculus). -/
-theorem condensedPull_comp {X : Scheme.{u}} {W Y Z : Over X}
-    (j : W ⟶ Y) (h : Y ⟶ Z) :
-    condensedPull Λ (j ≫ h) = condensedPull Λ h ≫ condensedPull Λ j := by
-  have key := congrArg (fun e ↦ e.hom.app (condensedUnit Λ W.left))
-    (coefficientLowerStarFactor_assoc Λ j.left h.left Z.hom
-      (j ≫ h).left Y.hom W.hom rfl (Over.w h) (Over.w j))
-  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.associator_hom_app,
-    Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Functor.isoWhiskerRight_hom,
-    Functor.whiskerRight_app, Category.id_comp] at key
-  rw [coefficientLowerStarFactor_rfl] at key
-  unfold condensedPull
-  change (ProEtale.CondensedRing.lowerStar Λ Z.hom).map _ ≫
-      (coefficientLowerStarFactor Λ (Over.w (j ≫ h))).hom.app _ =
-    ((ProEtale.CondensedRing.lowerStar Λ Z.hom).map _ ≫
-      (coefficientLowerStarFactor Λ (Over.w h)).hom.app _) ≫
-    ((ProEtale.CondensedRing.lowerStar Λ Y.hom).map _ ≫
-      (coefficientLowerStarFactor Λ (Over.w j)).hom.app _)
-  dsimp only [Over.comp_left]
-  have hc := congrArg (fun t ↦ (ProEtale.CondensedRing.lowerStar Λ Z.hom).map t ≫
-      (coefficientLowerStarFactor Λ (Over.w (j ≫ h))).hom.app _)
-    (condensedCoefficientLift_comp Λ j.left h.left)
-  refine hc.trans ?_
-  simp only [CategoryTheory.Functor.map_comp, Category.assoc]
-  rw [← key]
-  rw [← NatTrans.naturality_assoc]
-  rfl
+/-- Pullback of coefficient functions is contravariantly functorial on covers.
+Source: functoriality of pullback of functions, blueprint lem-fd-as-characters
+(blueprint: lem-fd-as-coefficient-cover-maps).
+
+Proof: the coefficient unit of a composite is the composite of the coefficient
+units. Naturality and associativity of the pushforward comparison combine these
+units. The equality transports are functorial and their proofs are irrelevant. -/
+theorem condensedPull_comp
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {X : Scheme.{u}} {Y Z W : Over X}
+    (f : Y ⟶ Z) (g : Z ⟶ W) :
+    condensedPull Λ g ≫ condensedPull Λ f = condensedPull Λ (f ≫ g) := by
+  rw [condensedPull_eq_coefficientPull, condensedPull_eq_coefficientPull,
+    condensedPull_eq_coefficientPull]
+  change (coefficientPull Λ g.left W.hom ≫
+      (ProEtale.CondensedRing.lowerStarCongr Λ (Over.w g)).hom.app
+        (condensedUnit Λ Z.left)) ≫
+      (coefficientPull Λ f.left Z.hom ≫
+        (ProEtale.CondensedRing.lowerStarCongr Λ (Over.w f)).hom.app
+          (condensedUnit Λ Y.left)) =
+    coefficientPull Λ (f.left ≫ g.left) W.hom ≫
+      (ProEtale.CondensedRing.lowerStarCongr Λ (Over.w (f ≫ g))).hom.app
+        (condensedUnit Λ Y.left)
+  simp only [Category.assoc]
+  rw [reassoc_of% (coefficientPull_congr Λ f.left (Over.w g)),
+    reassoc_of% (coefficientPull_comp Λ f.left g.left W.hom)]
+  simp only [lowerStarCongr_trans]
 
 private theorem coefficientUnit_pull
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
