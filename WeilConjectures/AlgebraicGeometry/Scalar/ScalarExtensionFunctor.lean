@@ -517,7 +517,7 @@ private theorem scalarExtension_models_finiteLocal
   let c := ((ProEt.sliceEquiv S (U i)).constantSheafSheafCongrIso
     ((ProEt.topology S).over (U i)) (ProEt.topology (U i).left)
     (ModuleCat.{u + 1} B) (Over.mkIdTerminal (X := U i))).app M
-  exact ⟨M, hM, ⟨
+  exact ⟨M, (have := hM; Module.Finite.of_finite), ⟨
     (ProEtale.upperStarIsoLocalizationRestriction
       (ModuleCat.{u + 1} B) (U i).hom (U i).prop).app F ≪≫
     r.symm ≪≫ D.functor.mapIso e ≪≫ c⟩⟩
@@ -694,9 +694,6 @@ def scalarExtensionFunctorLineIso
         (proEtaleRingExtension (proEtaleConstantRingMap (T := T) f)) (.up ℤ) 0).app L)
 
 section TateComparisonProof
-
-open scoped ChangeOfRings in
-open scoped ChangeOfRings in
 
 -- Keep the tensor and dual APIs abstract during elaboration.
 set_option backward.isDefEq.respectTransparency true

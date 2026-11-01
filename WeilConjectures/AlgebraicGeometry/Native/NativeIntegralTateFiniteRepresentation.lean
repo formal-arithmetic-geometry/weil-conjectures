@@ -200,6 +200,8 @@ private theorem roots_power_representation (Y : Scheme.{u}) (N : ℕ) (hN : 0 < 
   exact ⟨c.pt, hfin, het,
     ⟨hFc.conePointUniqueUpToIso (productIsProduct _) ≪≫ Pi.mapIso (fun _ ↦ e)⟩⟩
 
+set_option synthInstance.maxHeartbeats 400000 in
+-- The `Module A B` search in the statement explores the slow `ULift.module` branch first.
 private theorem quotient_basis (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ) (n : ℕ)
     (a : ZMod (ℓ ^ (n + 1)) →+* ULift.{u + 1} (spEllQuotient ℓ E n)) :
@@ -282,10 +284,11 @@ theorem spIntegralTwistLevel_finiteEtale_representation
   obtain ⟨a, ⟨e₀⟩⟩ := spIntegralTwistLevel_comparison Y ℓ E n
   let A := ULift.{u + 1} (ZMod (ℓ ^ (n + 1)))
   let B := ULift.{u + 1} (spEllQuotient ℓ E n)
-  let : Algebra A B := (a.comp ULift.ringEquiv.toRingHom).toAlgebra
+  let iAB : Algebra A B := (a.comp ULift.ringEquiv.toRingHom).toAlgebra
+  let : Module A B := iAB.toModule
   obtain ⟨d, ⟨b⟩⟩ := quotient_basis ℓ E n a
-  let : Module.Free A B := Module.Free.of_basis b
-  let : Module.Finite A B := Module.Finite.of_basis b
+  let iFree : Module.Free A B := Module.Free.of_basis b
+  let iFin : Module.Finite A B := Module.Finite.of_basis b
   let J := Scheme.ProEt.topology Y
   obtain ⟨k, β, hβ⟩ := @constantFiniteFree_sectionBasis.{u + 1, u, 0}
     Y.ProEt inferInstance J
@@ -293,7 +296,7 @@ theorem spIntegralTwistLevel_finiteEtale_representation
     (inferInstanceAs (J.HasSheafCompose (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})))
     (WeilConjectures.integralCoefficientAbSheafify.{u, 0} Y)
     (WeilConjectures.integralCoefficientAbLocallyBijective.{u, 0} Y)
-    (CommRingCat.of A) (CommRingCat.of B) _ _ _
+    (CommRingCat.of A) (CommRingCat.of B) iAB iFree iFin
   let M := Scheme.proEtaleRootsOfUnitySheaf Y (ℓ ^ (n + 1))
   let U := sheafToPresheaf J AddCommGrpCat.{u + 1}
   let e₁ : U.obj (spIntegralTwistLevel Y ℓ E n).X ≅

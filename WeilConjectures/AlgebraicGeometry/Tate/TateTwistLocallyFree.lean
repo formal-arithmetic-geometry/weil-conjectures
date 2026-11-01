@@ -34,8 +34,9 @@ The theorem includes one common cover, normalized generators, canonical Kummer
 independence, signed invertible lines and equivalences with the negative twists.
 
 The finite clauses and the definitions they use are in
-`WeilConjectures.AlgebraicGeometry.Tate.TateTwistFiniteLocallyFree` (`tateTwist_finite_locallyFree`), the integral and
-rational twist functors, signed-line predicates and local calculations in
+`WeilConjectures.AlgebraicGeometry.Tate.TateTwistFiniteLocallyFree`
+(`tateTwist_finite_locallyFree`), the integral and rational twist functors, signed-line
+predicates and local calculations in
 `WeilConjectures.AlgebraicGeometry.Tate.TateTwistIntegralLines`; both are imported publicly.
 
 ## Main statements
