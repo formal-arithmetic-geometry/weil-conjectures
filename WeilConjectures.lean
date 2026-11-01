@@ -14326,6 +14326,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Stability.CtfStability
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DerivedHom
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DerivedHomAmplitude
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DerivedHomConstantTensor
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DerivedHomConstantTensorIso
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImage
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImageAmplitudeTorsion
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImageTorAmplitude
