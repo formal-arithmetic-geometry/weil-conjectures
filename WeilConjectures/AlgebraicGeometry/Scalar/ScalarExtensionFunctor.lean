@@ -162,6 +162,8 @@ import all WeilConjectures.AlgebraicGeometry.Finite.FiniteTensorConstructibleCoh
 import all WeilConjectures.AlgebraicGeometry.ProEtale.Bounded.ProEtaleBoundedConstructibleTriangulated
 
 import all WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantModuleConstructibility
+public import WeilConjectures.AlgebraicGeometry.Picard.KFlatResolutionIndependentCoefficients
+public import WeilConjectures.SmoothPurity.ChangeOfRingsKFlatIndependentCoefficients
 
 /-! # Derived scalar extension on the small pro-etale site
 
@@ -693,6 +695,476 @@ def scalarExtensionFunctorLineIso
       ((HomologicalComplex.singleMapHomologicalComplex
         (proEtaleRingExtension (proEtaleConstantRingMap (T := T) f)) (.up ℤ) 0).app L)
 
+/-- The finite signed Tate line, using the dependency's roots, powers, unit and duals.
+The index n denotes the positive exponent m=n+1. The quotient map a is unique.
+Source: blueprint clause (3) (blueprint: det-sp-scalar-extension-functor). -/
+abbrev scalarExtensionTateLine (T : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
+    (A : Type u) [CommRing A] (n : ℕ) (a : ZMod (ℓ ^ (n + 1)) →+* A) (r : ℤ) :=
+  WeilConjectures.coefficientTwistLine T (R := proEtaleConstantRing T A)
+    (tateFiniteLine T ℓ (ULift.{u + 1, u} A) n (ULift.ringEquiv.{u, u + 1}.symm.toRingHom.comp a)) r
+
+/-- Semilinear maps between the signed finite Tate lines, before scalar extension.
+Source: blueprint clause (3) (blueprint: det-sp-scalar-extension-functor). -/
+abbrev ScalarExtensionTateMaps
+    {A B : Type u} [CommRing A] [CommRing B] (f : A →+* B) (T : Scheme.{u})
+    (ℓ : ℕ) [Fact ℓ.Prime] (n : ℕ) (a : ZMod (ℓ ^ (n + 1)) →+* A) :=
+  ∀ r : ℤ, scalarExtensionTateLine T ℓ A n a r ⟶
+    (proEtaleRingRestrictScalars (proEtaleConstantRingMap (T := T) f)).obj
+      (scalarExtensionTateLine T ℓ B n (f.comp a) r)
+
+/-- Root tensors determine degree one; the coefficient map determines degree zero;
+positive powers and negative duals are normalized by tensoring and evaluation.
+The degree-one root equation uses HEq only to retain the two existing presentations
+of that same degree-one line, without unfolding module sheafification during elaboration.
+Source: blueprint proof (3) (blueprint: det-sp-scalar-extension-functor). -/
+def IsCanonicalScalarExtensionTateMaps
+    {A B : Type u} [CommRing A] [CommRing B] (f : A →+* B) (T : Scheme.{u})
+    (ℓ : ℕ) [Fact ℓ.Prime] (n : ℕ) (a : ZMod (ℓ ^ (n + 1)) →+* A)
+    (c : ScalarExtensionTateMaps f T ℓ n a) : Prop :=
+  (∀ (U : T.ProEtᵒᵖ) (s : (proEtaleConstantRing T A).obj.obj U),
+    (c 0).val.app U s = (proEtaleConstantRingMap (T := T) f).hom.app U s) ∧
+  (∀ (V : T.ProEt) (s : (proEtaleConstantRing T A).obj.obj (Opposite.op V))
+      (x : (proEtaleRootsOfUnitySheaf T (ℓ ^ (n + 1))).obj.obj (Opposite.op V))
+      (y : (scalarExtensionTateLine T ℓ A n a 1).val.obj (Opposite.op V)),
+    HEq y (tateFiniteTensor T ℓ (ULift.{u + 1, u} A) n
+      (ULift.ringEquiv.{u, u + 1}.symm.toRingHom.comp a) V s x) →
+    HEq ((c 1).val.app (Opposite.op V) y)
+      (tateFiniteTensor T ℓ (ULift.{u + 1, u} B) n
+        (ULift.ringEquiv.{u, u + 1}.symm.toRingHom.comp (f.comp a)) V
+        ((proEtaleConstantRingMap (T := T) f).hom.app (Opposite.op V) s) x)) ∧
+  (∀ (k : ℕ) (U : T.ProEtᵒᵖ)
+      (x : (scalarExtensionTateLine T ℓ A n a (Int.ofNat (k + 1))).val.obj U)
+      (y : (scalarExtensionTateLine T ℓ A n a 1).val.obj U),
+    (c (Int.ofNat (k + 2))).val.app U
+        (SheafOfModules.siteSheafTensorTmul (A := proEtaleConstantRing T A) _ _ U x y) =
+      SheafOfModules.siteSheafTensorTmul (A := proEtaleConstantRing T B) _ _ U
+        ((c (Int.ofNat (k + 1))).val.app U x) ((c 1).val.app U y)) ∧
+  ∀ (k : ℕ) (U : T.ProEtᵒᵖ)
+      (d : (scalarExtensionTateLine T ℓ A n a (Int.negSucc k)).val.obj U)
+      (x : (scalarExtensionTateLine T ℓ A n a (Int.ofNat (k + 1))).val.obj U),
+    (((c (Int.negSucc k)).val.app U d).app (Opposite.op (Over.mk (𝟙 U.unop))))
+        ((c (Int.ofNat (k + 1))).val.app U x) =
+      (proEtaleConstantRingMap (T := T) f).hom.app U
+        ((d.app (Opposite.op (Over.mk (𝟙 U.unop)))) x)
+
+private theorem scalarExtension_purSection
+    (T : Scheme.{u}) (R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1})
+    (α : R ⟶ S) (M : proEtaleRingModules T R) (V : T.ProEt)
+    (s : S.obj.obj (Opposite.op V)) (x : M.val.obj (Opposite.op V)) :
+    SheafOfModules.scalarExtensionSection.{u + 1, u, u + 1, u + 1}
+        α M (Opposite.op V) s x = purScalarSection (X := T) R S α M V s x := by
+  have h :=
+    PresheafOfModules.toPresheaf_map_sheafificationAdjunction_unit_app.{u + 1, u, u + 1, u + 1}
+    (J := ProEt.topology T) (R := (sheafCompose (ProEt.topology T)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S)
+    (α := 𝟙 (((sheafCompose (ProEt.topology T)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S).obj))
+    (SheafOfModules.changeOfRingsPresheafOfUniverses.{u, u + 1, u + 1, u + 1} α M)
+  exact congrArg (fun z ↦ z.app (Opposite.op V)
+    (s ⊗ₜ[R.obj.obj (Opposite.op V), (α.hom.app (Opposite.op V)).hom] x)) h
+
+private theorem scalarExtension_semilinear_dual_ext
+    (T : Scheme.{u}) {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}}
+    (α : R ⟶ S) (M P : proEtaleRingModules T R) (Q : proEtaleRingModules T S)
+    (e : SheafOfModules.changeOfRingsOfUniverses.{u, u + 1, u + 1, u + 1} α P ≅ Q)
+    (c d : M ⟶ (proEtaleRingRestrictScalars α).obj
+      ((SheafOfModules.homFunctor (R := S)).obj (Opposite.op Q) |>.obj
+        (SheafOfModules.unit _)))
+    (h : ∀ (U : T.ProEtᵒᵖ) (φ : M.val.obj U) (x : P.val.obj U),
+      ((c.val.app U φ).app (Opposite.op (Over.mk (𝟙 U.unop))))
+          (e.hom.val.app U (SheafOfModules.scalarExtensionSection α P U 1 x)) =
+        ((d.val.app U φ).app (Opposite.op (Over.mk (𝟙 U.unop))))
+          (e.hom.val.app U (SheafOfModules.scalarExtensionSection α P U 1 x))) :
+    c = d := by
+  let H := (SheafOfModules.homFunctor (R := S)).obj (Opposite.op Q) |>.obj
+    (SheafOfModules.unit _)
+  let F := SheafOfModules.scalarExtensionLift.{u + 1, u, u + 1, u + 1} α M H c
+  let G := SheafOfModules.scalarExtensionLift.{u + 1, u, u + 1, u + 1} α M H d
+  let j := ((SheafOfModules.homFunctor (R := S)).mapIso e.op).app
+    (SheafOfModules.unit _)
+  have hFG : F = G := by
+    apply (cancel_mono j.hom).1
+    apply SheafOfModules.scalarExtensionDual_hom_ext.{u + 1, u, u + 1} α M P
+    intro U s t φ x
+    change ((F.val.app U (SheafOfModules.scalarExtensionSection α M U s φ)).app
+        (Opposite.op (Over.mk (𝟙 U.unop))))
+          (e.hom.val.app U (SheafOfModules.scalarExtensionSection α P U t x)) =
+      ((G.val.app U (SheafOfModules.scalarExtensionSection α M U s φ)).app
+        (Opposite.op (Over.mk (𝟙 U.unop))))
+          (e.hom.val.app U (SheafOfModules.scalarExtensionSection α P U t x))
+    dsimp only [F, G]
+    rw [SheafOfModules.scalarExtensionLift_tmul.{u + 1, u, u + 1, u + 1},
+      SheafOfModules.scalarExtensionLift_tmul.{u + 1, u, u + 1, u + 1}]
+    have ht : e.hom.val.app U (SheafOfModules.scalarExtensionSection α P U t x) =
+        t • e.hom.val.app U (SheafOfModules.scalarExtensionSection α P U 1 x) := by
+      have hs := SheafOfModules.scalarExtensionSection_smul.{u + 1, u, u + 1, u + 1}
+        α P U t 1 x
+      rw [mul_one] at hs
+      rw [← hs, map_smul]
+    rw [ht]
+    change S.obj.map (𝟙 U.unop).op s •
+      (c.val.app U φ).app (Opposite.op (Over.mk (𝟙 U.unop)))
+        (t • e.hom.val.app U (SheafOfModules.scalarExtensionSection α P U 1 x)) =
+      S.obj.map (𝟙 U.unop).op s •
+      (d.val.app U φ).app (Opposite.op (Over.mk (𝟙 U.unop)))
+        (t • e.hom.val.app U (SheafOfModules.scalarExtensionSection α P U 1 x))
+    rw [map_smul, map_smul, h U φ x]
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro U
+  apply ModuleCat.hom_ext
+  apply LinearMap.ext
+  intro φ
+  have hh := congrArg (fun z : _ ⟶ H ↦ z.val.app U
+    (SheafOfModules.scalarExtensionSection α M U 1 φ)) hFG
+  dsimp only [F, G] at hh
+  simpa only [SheafOfModules.scalarExtensionLift_tmul, one_smul] using hh
+
+private theorem scalarExtensionTate_degreeOne_unique
+    {A B : Type u} [CommRing A] [CommRing B]
+    (f : A →+* B) (T : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
+    (n : ℕ) (a : ZMod (ℓ ^ (n + 1)) →+* A)
+    (c d : ScalarExtensionTateMaps f T ℓ n a)
+    (hc : IsCanonicalScalarExtensionTateMaps f T ℓ n a c)
+    (hd : IsCanonicalScalarExtensionTateMaps f T ℓ n a d) :
+    c 1 = d 1 := by
+  apply SheafOfModules.scalarExtension_hom_ext.{u + 1, u, u + 1, u + 1}
+    (tateFiniteScalar T ℓ (ULift.{u + 1, u} A) n
+      (ULift.ringEquiv.{u, u + 1}.symm.toRingHom.comp a))
+    (purTwistRootsModule T ℓ n)
+  intro U s x
+  have hh := eq_of_heq ((hc.2.1 U.unop s x _ (heq_of_eq rfl)).trans
+    (hd.2.1 U.unop s x _ (heq_of_eq rfl)).symm)
+  have hp := scalarExtension_purSection T (purTwistFiniteRing T ℓ n)
+    (proEtaleConstantRing T A)
+    (tateFiniteScalar T ℓ (ULift.{u + 1, u} A) n
+      (ULift.ringEquiv.{u, u + 1}.symm.toRingHom.comp a)) (purTwistRootsModule T ℓ n)
+    U.unop s x
+  exact (congrArg (fun z ↦ (c 1).val.app U z) hp).trans
+    (hh.trans (congrArg (fun z ↦ (d 1).val.app U z) hp).symm)
+
+private theorem scalarExtensionTate_positive_unique
+    {A B : Type u} [CommRing A] [CommRing B]
+    (f : A →+* B) (T : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
+    (n : ℕ) (a : ZMod (ℓ ^ (n + 1)) →+* A)
+    (c d : ScalarExtensionTateMaps f T ℓ n a)
+    (hc : IsCanonicalScalarExtensionTateMaps f T ℓ n a c)
+    (hd : IsCanonicalScalarExtensionTateMaps f T ℓ n a d) :
+    ∀ k : ℕ, c (Int.ofNat k) = d (Int.ofNat k) := by
+  intro k
+  induction k using Nat.twoStepInduction with
+  | zero =>
+    apply SheafOfModules.hom_ext
+    apply PresheafOfModules.hom_ext
+    intro U
+    apply ModuleCat.hom_ext
+    apply LinearMap.ext
+    intro s
+    exact (hc.1 U s).trans (hd.1 U s).symm
+  | one => exact scalarExtensionTate_degreeOne_unique f T ℓ n a c d hc hd
+  | more k hprev ih =>
+    apply SheafOfModules.scalarTensor_hom_ext.{u + 1, u, u + 1}
+      (scalarExtensionTateLine T ℓ A n a (Int.ofNat (k + 1)))
+      (scalarExtensionTateLine T ℓ A n a 1)
+    intro U x y
+    erw [hc.2.2.1, hd.2.2.1, ih]
+    have h1 : c 1 = d 1 := by
+      have hzero := hprev
+      clear hzero
+      exact scalarExtensionTate_degreeOne_unique f T ℓ n a c d hc hd
+    rw [h1]
+
+private theorem scalarExtensionTate_negative_unique
+    {A B : Type u} [CommRing A] [CommRing B]
+    (f : A →+* B) (T : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
+    (n : ℕ) (a : ZMod (ℓ ^ (n + 1)) →+* A)
+    (e : ∀ r : ℤ, SheafOfModules.changeOfRingsOfUniverses.{u, u + 1, u + 1, u + 1}
+        (proEtaleConstantRingMap (T := T) f) (scalarExtensionTateLine T ℓ A n a r) ≅
+          scalarExtensionTateLine T ℓ B n (f.comp a) r)
+    (c d : ScalarExtensionTateMaps f T ℓ n a)
+    (hc : IsCanonicalScalarExtensionTateMaps f T ℓ n a c)
+    (hd : IsCanonicalScalarExtensionTateMaps f T ℓ n a d)
+    (hpos : ∀ (k : ℕ) (U : T.ProEtᵒᵖ)
+      (x : (scalarExtensionTateLine T ℓ A n a (Int.ofNat k)).val.obj U),
+      (e (Int.ofNat k)).hom.val.app U
+        (SheafOfModules.scalarExtensionSection (proEtaleConstantRingMap (T := T) f)
+          _ U 1 x) = (c (Int.ofNat k)).val.app U x)
+    (k : ℕ) : c (Int.negSucc k) = d (Int.negSucc k) := by
+  let α := proEtaleConstantRingMap (T := T) f
+  let P := scalarExtensionTateLine T ℓ A n a (Int.ofNat (k + 1))
+  let N := scalarExtensionTateLine T ℓ A n a (Int.negSucc k)
+  let Q := scalarExtensionTateLine T ℓ B n (f.comp a) (Int.ofNat (k + 1))
+  apply scalarExtension_semilinear_dual_ext T α N P Q (e (.ofNat (k + 1)))
+  intro U φ x
+  rw [hpos]
+  have hp := scalarExtensionTate_positive_unique f T ℓ n a c d hc hd (k + 1)
+  have hd' := hd.2.2.2 k U φ x
+  rw [← hp] at hd'
+  exact (hc.2.2.2 k U φ x).trans hd'.symm
+
+private def scalarExtension_tensorSecondIso
+    (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1})
+    (M : proEtaleRingModules T R) {L K : proEtaleRingModules T R} (b : L ≅ K) :
+    (SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1} L).obj M ≅
+      (SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1} K).obj M where
+  hom := SheafOfModules.siteSheafTensorSecondMap.{u + 1, u, u + 1, u + 1} M b.hom
+  inv := SheafOfModules.siteSheafTensorSecondMap.{u + 1, u, u + 1, u + 1} M b.inv
+  hom_inv_id := by
+    apply SheafOfModules.scalarTensor_hom_ext.{u + 1, u, u + 1} M L
+    intro U x y
+    have h₁ := SheafOfModules.scalarTensor_second_tmul.{u + 1, u, u + 1}
+      (R := R) M (P := L) (P' := K) b.hom U x y
+    have h₂ := SheafOfModules.scalarTensor_second_tmul.{u + 1, u, u + 1}
+      (R := R) M (P := K) (P' := L) b.inv U x (b.hom.val.app U y)
+    have h := congrArg (fun z : L ⟶ L ↦ z.val.app U y) b.hom_inv_id
+    change b.inv.val.app U (b.hom.val.app U y) = y at h
+    exact (congrArg (fun z ↦
+      (SheafOfModules.siteSheafTensorSecondMap.{u + 1, u, u + 1, u + 1}
+        M b.inv).val.app U z) h₁).trans
+      (h₂.trans (congrArg (fun z ↦
+        SheafOfModules.siteSheafTensorTmul.{u + 1, u, u + 1, u + 1} M L U x z) h))
+  inv_hom_id := by
+    apply SheafOfModules.scalarTensor_hom_ext.{u + 1, u, u + 1} M K
+    intro U x y
+    have h₁ := SheafOfModules.scalarTensor_second_tmul.{u + 1, u, u + 1}
+      (R := R) M (P := K) (P' := L) b.inv U x y
+    have h₂ := SheafOfModules.scalarTensor_second_tmul.{u + 1, u, u + 1}
+      (R := R) M (P := L) (P' := K) b.hom U x (b.inv.val.app U y)
+    have h := congrArg (fun z : K ⟶ K ↦ z.val.app U y) b.inv_hom_id
+    change b.hom.val.app U (b.inv.val.app U y) = y at h
+    exact (congrArg (fun z ↦
+      (SheafOfModules.siteSheafTensorSecondMap.{u + 1, u, u + 1, u + 1}
+        M b.hom).val.app U z) h₁).trans
+      (h₂.trans (congrArg (fun z ↦
+        SheafOfModules.siteSheafTensorTmul.{u + 1, u, u + 1, u + 1} M K U x z) h))
+
+/-- There is exactly one semilinear family with the root, unit, power and dual formulas.
+Source: blueprint proof (3), Stacks 03EK, 03EM
+(blueprint: det-sp-scalar-extension-functor).
+Proof: the normalized scalar-extension tower gives the degree-one comparison on
+root tensors, and the unit comparison gives degree zero. Construct positive powers
+recursively with the proved binary tensor comparison and tensor maps. Every positive
+power is invertible by the root-line local models. Its proved dual comparison,
+followed by precomposition with the inverse positive comparison, gives the negative
+map and the evaluation formula. Restrict these linear comparisons along the scalar
+embedding. Root-tensor generation and induction give positive uniqueness; evaluation
+on the surjective positive comparison gives negative uniqueness. -/
+theorem scalarExtensionTateMaps_existsUnique
+    {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
+    (f : A →+* B) (T : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
+    [∀ x : T, Invertible (ℓ : T.residueField x)]
+    (n : ℕ) (a : ZMod (ℓ ^ (n + 1)) →+* A) :
+    ∃! c : ScalarExtensionTateMaps f T ℓ n a,
+      IsCanonicalScalarExtensionTateMaps f T ℓ n a c := by
+  classical
+  let α := proEtaleConstantRingMap (T := T) f
+  obtain ⟨e, he⟩ := scalarExtensionTate_comparisons f T ℓ n a
+  let c : ScalarExtensionTateMaps f T ℓ n a := fun r ↦
+    SheafOfModules.scalarExtensionEmbedding.{u + 1, u, u + 1, u + 1} α _ ≫
+      (proEtaleRingRestrictScalars α).map (e r).hom
+  refine ⟨c, he, ?_⟩
+  intro d hd
+  funext r
+  cases r with
+  | ofNat k => exact scalarExtensionTate_positive_unique f T ℓ n a d c hd he k
+  | negSucc k =>
+    exact (scalarExtensionTate_negative_unique f T ℓ n a e c d he hd
+      (fun k U x ↦ rfl) k).symm
+
+/-- The finite Tate scalar maps, fixed uniquely in every signed degree.
+Source: blueprint clause (3) (blueprint: det-sp-scalar-extension-functor). -/
+def scalarExtensionTateMaps
+    {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
+    (f : A →+* B) (T : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
+    [∀ x : T, Invertible (ℓ : T.residueField x)]
+    (n : ℕ) (a : ZMod (ℓ ^ (n + 1)) →+* A) : ScalarExtensionTateMaps f T ℓ n a :=
+  (scalarExtensionTateMaps_existsUnique f T ℓ n a).exists.choose
+
+/-- Signed Kummer comparisons are fixed by the power map on roots, the identity on
+coefficients, tensor products in positive degrees, and dual evaluation in negative degrees.
+Source: blueprint proof (3) (blueprint: det-sp-scalar-extension-functor). -/
+def IsCanonicalScalarExtensionTateLevelMaps
+    (T : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (A : Type u) [CommRing A]
+    (m n : ℕ) (hmn : m ≤ n) (a : ZMod (ℓ ^ (m + 1)) →+* A)
+    (c : ∀ r : ℤ, scalarExtensionTateLine T ℓ A n
+        (a.comp (ZMod.castHom (pow_dvd_pow ℓ (Nat.succ_le_succ hmn))
+          (ZMod (ℓ ^ (m + 1))))) r ⟶ scalarExtensionTateLine T ℓ A m a r) : Prop :=
+  (∀ (U : T.ProEtᵒᵖ) (s : (proEtaleConstantRing T A).obj.obj U),
+    (c 0).val.app U s = s) ∧
+  (∀ (V : T.ProEt) (s : (proEtaleConstantRing T A).obj.obj (Opposite.op V))
+      (x : (proEtaleRootsOfUnitySheaf T (ℓ ^ (n + 1))).obj.obj (Opposite.op V))
+      (y : (scalarExtensionTateLine T ℓ A n
+        (a.comp (ZMod.castHom (pow_dvd_pow ℓ (Nat.succ_le_succ hmn))
+          (ZMod (ℓ ^ (m + 1))))) 1).val.obj (Opposite.op V)),
+    HEq y (tateFiniteTensor T ℓ (ULift.{u + 1, u} A) n
+      (ULift.ringEquiv.{u, u + 1}.symm.toRingHom.comp
+        (a.comp (ZMod.castHom (pow_dvd_pow ℓ (Nat.succ_le_succ hmn))
+          (ZMod (ℓ ^ (m + 1)))))) V s x) →
+    HEq ((c 1).val.app (Opposite.op V) y)
+      (tateFiniteTensor T ℓ (ULift.{u + 1, u} A) m
+        (ULift.ringEquiv.{u, u + 1}.symm.toRingHom.comp a) V s
+        ((proEtaleRootsOfUnityTransition T (ℓ ^ (m + 1)) (ℓ ^ (n + 1))
+          (pow_pos (Fact.out : ℓ.Prime).pos _) (pow_pos (Fact.out : ℓ.Prime).pos _)
+          (pow_dvd_pow ℓ (Nat.succ_le_succ hmn))).hom.app (Opposite.op V) x))) ∧
+  (∀ (k : ℕ) (U : T.ProEtᵒᵖ)
+      (x : (scalarExtensionTateLine T ℓ A n
+        (a.comp (ZMod.castHom (pow_dvd_pow ℓ (Nat.succ_le_succ hmn))
+          (ZMod (ℓ ^ (m + 1))))) (Int.ofNat (k + 1))).val.obj U)
+      (y : (scalarExtensionTateLine T ℓ A n
+        (a.comp (ZMod.castHom (pow_dvd_pow ℓ (Nat.succ_le_succ hmn))
+          (ZMod (ℓ ^ (m + 1))))) 1).val.obj U),
+    (c (Int.ofNat (k + 2))).val.app U
+        (SheafOfModules.siteSheafTensorTmul (A := proEtaleConstantRing T A) _ _ U x y) =
+      SheafOfModules.siteSheafTensorTmul (A := proEtaleConstantRing T A) _ _ U
+        ((c (Int.ofNat (k + 1))).val.app U x) ((c 1).val.app U y)) ∧
+  ∀ (k : ℕ) (U : T.ProEtᵒᵖ)
+      (d : (scalarExtensionTateLine T ℓ A n
+        (a.comp (ZMod.castHom (pow_dvd_pow ℓ (Nat.succ_le_succ hmn))
+          (ZMod (ℓ ^ (m + 1))))) (Int.negSucc k)).val.obj U)
+      (x : (scalarExtensionTateLine T ℓ A n
+        (a.comp (ZMod.castHom (pow_dvd_pow ℓ (Nat.succ_le_succ hmn))
+          (ZMod (ℓ ^ (m + 1))))) (Int.ofNat (k + 1))).val.obj U),
+    (((c (Int.negSucc k)).val.app U d).app (Opposite.op (Over.mk (𝟙 U.unop))))
+        ((c (Int.ofNat (k + 1))).val.app U x) =
+      (d.app (Opposite.op (Over.mk (𝟙 U.unop)))) x
+
+private def scalarExtension_positiveIso
+    (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1})
+    {L K : proEtaleRingModules T R} (b : L ≅ K) :
+    ∀ k : ℕ, WeilConjectures.coefficientTwistPower T L k ≅
+      WeilConjectures.coefficientTwistPower T K k
+  | 0 => Iso.refl _
+  | 1 => b
+  | k + 2 => (SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1} L).mapIso
+      (scalarExtension_positiveIso T R b (k + 1)) ≪≫
+        scalarExtension_tensorSecondIso T R
+          (WeilConjectures.coefficientTwistPower T K (k + 1)) b
+
+private theorem scalarExtension_positiveIso_tmul
+    (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1})
+    {L K : proEtaleRingModules T R} (b : L ≅ K) (k : ℕ) (U : T.ProEtᵒᵖ)
+    (x : (WeilConjectures.coefficientTwistPower T L (k + 1)).val.obj U)
+    (y : L.val.obj U) :
+    (scalarExtension_positiveIso T R b (k + 2)).hom.val.app U
+      (SheafOfModules.siteSheafTensorTmul.{u + 1, u, u + 1, u + 1}
+        (WeilConjectures.coefficientTwistPower T L (k + 1)) L U x y) =
+        SheafOfModules.siteSheafTensorTmul.{u + 1, u, u + 1, u + 1}
+          (WeilConjectures.coefficientTwistPower T K (k + 1)) K U
+          ((scalarExtension_positiveIso T R b (k + 1)).hom.val.app U x)
+          (b.hom.val.app U y) := by
+  change (SheafOfModules.siteSheafTensorSecondMap.{u + 1, u, u + 1, u + 1}
+      (WeilConjectures.coefficientTwistPower T K (k + 1)) b.hom).val.app U
+    (((SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1} L).map
+      (scalarExtension_positiveIso T R b (k + 1)).hom).val.app U
+        (SheafOfModules.siteSheafTensorTmul.{u + 1, u, u + 1, u + 1}
+        (WeilConjectures.coefficientTwistPower T L (k + 1)) L U x y)) = _
+  let G := SheafOfModules.siteSheafTensorSecondMap.{u + 1, u, u + 1, u + 1}
+    (WeilConjectures.coefficientTwistPower T K (k + 1)) b.hom
+  have hF := SheafOfModules.scalarTensor_first_tmul.{u + 1, u, u + 1} (R := R)
+    (N := WeilConjectures.coefficientTwistPower T L (k + 1))
+    (N' := WeilConjectures.coefficientTwistPower T K (k + 1))
+    (scalarExtension_positiveIso T R b (k + 1)).hom L U x y
+  have hG := SheafOfModules.scalarTensor_second_tmul.{u + 1, u, u + 1} (R := R)
+    (P := L) (P' := K) (WeilConjectures.coefficientTwistPower T K (k + 1)) b.hom U
+    ((scalarExtension_positiveIso T R b (k + 1)).hom.val.app U x) y
+  exact (congrArg (fun z ↦ G.val.app U z) hF).trans hG
+
+private def scalarExtension_signedIso
+    (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1})
+    {L K : proEtaleRingModules T R} (b : L ≅ K) :
+    ∀ r : ℤ, WeilConjectures.coefficientTwistLine T L r ≅
+      WeilConjectures.coefficientTwistLine T K r
+  | .ofNat k => scalarExtension_positiveIso T R b k
+  | .negSucc k => ((SheafOfModules.homFunctor (R := R)).mapIso
+      (scalarExtension_positiveIso T R b (k + 1)).symm.op).app (SheafOfModules.unit _)
+
+private theorem scalarExtension_signedIso_eval
+    (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1})
+    {L K : proEtaleRingModules T R} (b : L ≅ K) (k : ℕ) (U : T.ProEtᵒᵖ)
+    (d : (WeilConjectures.coefficientTwistLine T L (.negSucc k)).val.obj U)
+    (x : (WeilConjectures.coefficientTwistPower T L (k + 1)).val.obj U) :
+    (((scalarExtension_signedIso T R b (.negSucc k)).hom.val.app U d).app
+      (Opposite.op (Over.mk (𝟙 U.unop))))
+        ((scalarExtension_positiveIso T R b (k + 1)).hom.val.app U x) =
+      d.app (Opposite.op (Over.mk (𝟙 U.unop))) x := by
+  change d.app (Opposite.op (Over.mk (𝟙 U.unop)))
+    ((scalarExtension_positiveIso T R b (k + 1)).inv.val.app U
+      ((scalarExtension_positiveIso T R b (k + 1)).hom.val.app U x)) = _
+  have h := congrArg (fun z ↦ z.val.app U x)
+    (scalarExtension_positiveIso T R b (k + 1)).hom_inv_id
+  change (scalarExtension_positiveIso T R b (k + 1)).inv.val.app U
+    ((scalarExtension_positiveIso T R b (k + 1)).hom.val.app U x) = x at h
+  rw [h]
+
+/-- Independence of every signed finite Tate line from the sufficiently large exponent,
+with the Kummer-induced comparison fixed uniquely.
+Source: blueprint proof (3) (blueprint: det-sp-scalar-extension-functor).
+Proof: clause (2) of det-def-sp-tate-twist-locally-free identifies the root lines by
+the actual Kummer power map. On the primitive-root cover it sends the chosen generator
+to the chosen generator, so is an isomorphism. Take the identity on the unit, tensor
+powers of this map in positive degrees, and precomposition by its inverse on duals
+in negative degrees. Evaluation specifies the dual uniquely.
+The root formula and tensor sheafification give uniqueness at positive degrees;
+nondegenerate evaluation gives it at negative degrees. -/
+theorem scalarExtensionTateLevelIso_existsUnique
+    (T : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
+    [∀ x : T, Invertible (ℓ : T.residueField x)]
+    (A : Type u) [CommRing A] [Finite A]
+    (m n : ℕ) (hmn : m ≤ n) (a : ZMod (ℓ ^ (m + 1)) →+* A) :
+    ∃! e : ∀ r : ℤ, scalarExtensionTateLine T ℓ A n
+        (a.comp (ZMod.castHom (pow_dvd_pow ℓ (Nat.succ_le_succ hmn))
+          (ZMod (ℓ ^ (m + 1))))) r ≅ scalarExtensionTateLine T ℓ A m a r,
+      IsCanonicalScalarExtensionTateLevelMaps T ℓ A m n hmn a (fun r ↦ (e r).hom) := by
+  classical
+  let a' := ULift.ringEquiv.{u, u + 1}.symm.toRingHom.comp a
+  let E := ULift.{u} (Padic ℓ)
+  let Ω := AlgebraicClosure (Padic ℓ)
+  let ι : E →ₐ[Padic ℓ] Ω :=
+    (Algebra.ofId (Padic ℓ) Ω).comp ULift.algEquiv.toAlgHom
+  have hA : ∀ x : ULift.{u + 1, u} A, (ℓ ^ (m + 1)) • x = 0 := by
+    have hz : ((ℓ ^ (m + 1) : ℕ) : ULift.{u + 1, u} A) = 0 := by
+      have h := congrArg a' (ZMod.natCast_self (ℓ ^ (m + 1)))
+      simpa only [map_natCast, map_zero] using h
+    intro x
+    rw [nsmul_eq_mul, hz, zero_mul]
+  obtain ⟨I, U, v, ζ, e₀, hcov, hζ, he₀, hfinite, hrest⟩ :=
+    tateTwist_locallyFree.{u, 0, 0} T ℓ E Ω ι
+  obtain ⟨a₀, hk₀, _⟩ := hfinite (ULift.{u + 1, u} A) m hA
+  have ha : a₀ = a' := Subsingleton.elim _ _
+  subst a₀
+  obtain ⟨k, hk⟩ := hk₀ n hmn
+  have : IsIso k := hk.1
+  let R := proEtaleConstantRing T A
+  let b : scalarExtensionTateLine T ℓ A n
+      (a.comp (ZMod.castHom (pow_dvd_pow ℓ (Nat.succ_le_succ hmn))
+        (ZMod (ℓ ^ (m + 1))))) 1 ≅ scalarExtensionTateLine T ℓ A m a 1 := asIso k
+  let e := scalarExtension_signedIso T R b
+  have he : IsCanonicalScalarExtensionTateLevelMaps T ℓ A m n hmn a
+      (fun r ↦ (e r).hom) := by
+    refine ⟨?_, ?_, ?_, ?_⟩
+    · intro U s
+      rfl
+    · intro V s x y hy
+      have hy' := eq_of_heq hy
+      subst y
+      exact heq_of_eq (hk.2 V s x)
+    · intro q U x y
+      exact scalarExtension_positiveIso_tmul T R b q U x y
+    · intro q U d x
+      exact scalarExtension_signedIso_eval T R b q U d x
+  refine ⟨e, he, ?_⟩
+  intro d hd
+  exact scalarExtensionTateLevel_unique T ℓ A m n hmn a d e hd he
+
+/-- The unique signed Kummer comparison used in exponent independence.
+Source: blueprint clause (3) (blueprint: det-sp-scalar-extension-functor). -/
+def scalarExtensionTateLevelIso
+    (T : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
+    [∀ x : T, Invertible (ℓ : T.residueField x)]
+    (A : Type u) [CommRing A] [Finite A]
+    (m n : ℕ) (hmn : m ≤ n) (a : ZMod (ℓ ^ (m + 1)) →+* A) :=
+  (scalarExtensionTateLevelIso_existsUnique T ℓ A m n hmn a).exists.choose
+
 section TateComparisonProof
 attribute [local instance] scalarTateSmall
 
@@ -779,6 +1251,80 @@ def scalarExtensionFunctor_composition
     scalarExtensionFunctor f T ⋙ scalarExtensionFunctor g T ≅
       scalarExtensionFunctor (g.comp f) T :=
   (scalarExtensionFunctor_composition_existsUnique f g T).exists.choose
+
+private theorem scalarExtensionFunctor_identity_data
+    {A : Type u} [CommRing A] (T : Scheme.{u}) :
+    ∃ ε : scalarExtensionFunctor (RingHom.id A) T ≅ 𝟭 _,
+      ∀ (P : CochainComplex (proEtaleRingModules T (proEtaleConstantRing T A)) ℤ),
+        ∃ v : (reductionChangeComplex T
+            (proEtaleConstantRingMap (T := T) (RingHom.id A))).obj P ⟶ P,
+          (∀ (i : ℤ) (U : T.ProEtᵒᵖ)
+            (s : (proEtaleConstantRing T A).obj.obj U) (x : (P.X i).val.obj U),
+            (v.f i).val.app U (reductionTensorSection T
+              (proEtaleConstantRingMap (T := T) (RingHom.id A)) (P.X i) U s x) = s • x) ∧
+          ε.hom.app (DerivedCategory.Q.obj P) =
+            scalarExtensionFunctorCounit (RingHom.id A) T P ≫ DerivedCategory.Q.map v := by
+  obtain ⟨e, he, _⟩ :=
+    WeilConjectures.OrdinaryFieldRealization.extendUnit_existsUnique T A
+  refine ⟨e, fun P ↦ ?_⟩
+  simpa only [scalarExtensionFunctorCounit,
+    WeilConjectures.OrdinaryFieldRealization.coefficientMap, proEtaleConstantRingMap,
+    RingHom.ulift] using he P
+
+/-- The identity extension has a unique multiplication-normalized unitor.
+Source: blueprint proof (4), Stacks 06YY
+(blueprint: det-sp-scalar-extension-functor).
+Proof: the inverse of the ordinary tensor unit is p ↦ 1 tensor p. Compose its
+localization with the derived counit on a K-flat model. The two multiplication
+maps are inverse and natural, so descend by lem-weil-pbc-site-derived-tensor-descent.
+Pure tensors determine the chain map uniquely, and K-flat resolutions determine the
+natural isomorphism uniquely. -/
+theorem scalarExtensionFunctor_identity_existsUnique
+    {A : Type u} [CommRing A] (T : Scheme.{u}) :
+    ∃! ε : scalarExtensionFunctor (RingHom.id A) T ≅ 𝟭 _,
+      ∀ (P : CochainComplex (proEtaleRingModules T (proEtaleConstantRing T A)) ℤ),
+        CochainComplex.IsAcyclicTensorKFlat.{u + 1, u} (R := proEtaleConstantRing T A) P →
+        ∃ v : (reductionChangeComplex T
+            (proEtaleConstantRingMap (T := T) (RingHom.id A))).obj P ⟶ P,
+          (∀ (i : ℤ) (U : T.ProEtᵒᵖ)
+            (s : (proEtaleConstantRing T A).obj.obj U) (x : (P.X i).val.obj U),
+            (v.f i).val.app U (reductionTensorSection T
+              (proEtaleConstantRingMap (T := T) (RingHom.id A)) (P.X i) U s x) = s • x) ∧
+          ε.hom.app (DerivedCategory.Q.obj P) =
+            scalarExtensionFunctorCounit (RingHom.id A) T P ≫ DerivedCategory.Q.map v := by
+  let : EssentiallySmall.{u + 1} T.ProEt := essentiallySmallSelf.{0, u, u + 1} _
+  obtain ⟨e, he⟩ := scalarExtensionFunctor_identity_data (A := A) T
+  refine ⟨e, fun P _ ↦ he P, ?_⟩
+  intro ε hε
+  apply Iso.ext
+  apply derived_natTrans_ext.{u + 2, u + 1, u + 2, u + 2, u + 2} _ _
+    (fun P ↦ CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}
+      (R := proEtaleConstantRing T A) P)
+  · intro X
+    obtain ⟨P, p, hp, _, hq, _⟩ :=
+      CochainComplex.exists_isKFlatResolutionIndependentCoefficients.{u + 1, u + 1, u}
+        (R := proEtaleConstantRing T A) X
+    exact ⟨P, p, hp, hq⟩
+  · intro P hP
+    obtain ⟨v, hv, hεv⟩ := hε P hP
+    obtain ⟨w, hw, hew⟩ := he P
+    rw [hεv, hew]
+    have hvw : v = w := by
+      apply HomologicalComplex.hom_ext
+      intro i
+      apply (SheafOfModules.toSheaf _).map_injective
+      apply reductionTensor_hom_ext T
+        (proEtaleConstantRingMap (T := T) (RingHom.id A)) (P.X i)
+      intro U s x
+      exact (hv i U s x).trans (hw i U s x).symm
+    rw [hvw]
+
+/-- The canonical identity-extension unitor, normalized by multiplication.
+Source: blueprint clause (4) (blueprint: det-sp-scalar-extension-functor). -/
+def scalarExtensionFunctor_identity
+    {A : Type u} [CommRing A] (T : Scheme.{u}) :
+    scalarExtensionFunctor (RingHom.id A) T ≅ 𝟭 _ :=
+  (scalarExtensionFunctor_identity_existsUnique (A := A) T).exists.choose
 
 attribute [local irreducible] scalarExtensionFunctor_composition
 

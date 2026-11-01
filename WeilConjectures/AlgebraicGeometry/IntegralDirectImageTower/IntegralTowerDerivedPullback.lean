@@ -75,6 +75,9 @@ import WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
 import WeilConjectures.CategoryTheory.InternalSectionModuleFlat
 import WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
+public import WeilConjectures.AlgebraicGeometry.IntegralDirectImageTower.IntegralDirectImageTowerData
+public import WeilConjectures.AlgebraicGeometry.Picard.KFlatResolutionIndependentCoefficients
+public import WeilConjectures.SixFunctors.Supporting.ModCondensedCachedInstances
 
 /-! # Normalized IntegralTowerDerivedPullback -/
 
@@ -126,6 +129,97 @@ private theorem flat_iso {T : Scheme.{u}} {M N : spIntegralSectionModules l E T}
     ((MonoidalCategory.tensoringRight (spIntegralSectionModules l E T)).mapIso e) hM'
   exact (exactFunctor _ _).prop_of_iso
     (siteSheafTensorRightIso (spIntegralSectionRing l E T) N).symm hN
+
+private theorem internal_resolving_ext {T : Scheme.{u}}
+    {D : Type*} [Category D] (F G : Integral l E T ⥤ D) (a b : F ⟶ G)
+    (h : ∀ (P : CochainComplex (Modules l E T) ℤ),
+      CochainComplex.IsKFlatIndependentCoefficients (R := spIntegralSectionRing l E T)
+        (((spIntegralModuleEquivalence l E T).functor.mapHomologicalComplex (.up ℤ)).obj P) →
+      (∀ i : ℤ, IsFlatOnSite (J := Scheme.ProEt.topology T)
+        (R := spIntegralSectionRing l E T)
+        ((spIntegralModuleEquivalence l E T).functor.obj (P.X i))) →
+      a.app (DerivedCategory.Q.obj P) = b.app (DerivedCategory.Q.obj P)) : a = b := by
+  let eqv := spIntegralModuleEquivalence l E T
+  let : eqv.functor.Additive := Functor.additive_of_preserves_binary_products _
+  let : eqv.inverse.Additive := Functor.additive_of_preserves_binary_products _
+  let ec := eqv.mapHomologicalComplex (.up ℤ)
+  apply Localization.natTrans_ext DerivedCategory.Q
+    (HomologicalComplex.quasiIso (Modules l E T) (.up ℤ))
+  intro K
+  obtain ⟨P, p, hP, hf, hp, _⟩ :=
+    CochainComplex.exists_isKFlatResolutionIndependentCoefficients
+      (R := spIntegralSectionRing l E T) (ec.functor.obj K)
+  let L := ec.inverse.obj P
+  let q : L ⟶ K := ec.inverse.map p ≫ ec.unitIso.inv.app K
+  have hp' : QuasiIso (ec.inverse.map p) := by
+    have := hp
+    change QuasiIso ((eqv.inverse.mapHomologicalComplex (.up ℤ)).map p)
+    infer_instance
+  have : QuasiIso q := by
+    dsimp only [q]
+    infer_instance
+  have hL : CochainComplex.IsKFlatIndependentCoefficients
+      (R := spIntegralSectionRing l E T) (ec.functor.obj L) :=
+    kflat_iso l E (ec.counitIso.symm.app P) hP
+  have hLf (i : ℤ) : IsFlatOnSite (J := Scheme.ProEt.topology T)
+      (R := spIntegralSectionRing l E T) (eqv.functor.obj (L.X i)) := by
+    apply flat_iso l E ((HomologicalComplex.eval _ _ i).mapIso
+      (ec.counitIso.symm.app P))
+    exact (exactFunctor _ _).prop_of_iso
+      (siteSheafTensorRightIso (spIntegralSectionRing l E T) (P.X i)).symm (hf i)
+  apply (cancel_epi (F.map (DerivedCategory.Q.map q))).1
+  rw [a.naturality, b.naturality]
+  rw [h L hL hLf]
+
+/-- Component form of the normalized pullback composition identity.
+Source: normalized scalar/pullback construction, paragraphs (2)--(3).
+(blueprint: lem-dla1-native-reduction-proper-composition-component).
+Proof: first use `Localization.natTrans_ext` to reduce equality of the two natural
+transformations to complexes in the internal module category. Pass such a complex to
+the section-module category through `spIntegralModuleEquivalence`, and apply
+`CochainComplex.exists_isKFlatResolutionIndependentCoefficients`
+(blueprint node `lem-pc-kflat-resolution`). Carry its flat-term K-flat replacement and
+quasi-isomorphism back through the equivalence. K-flatness and termwise flatness are
+invariant under the counit isomorphism, so the hypothesis applies to this replacement.
+Its augmentation becomes an isomorphism in the derived category. Naturality of both
+transformations, followed by cancellation of the image of this isomorphism, gives their
+equality on the original complex. Localization then gives equality on all derived
+objects, and evaluation gives the requested component.
+-/
+theorem nativeReductionPullbackComposition_component (s : Presentation l E)
+    (q : ReductionGeometry l E s)
+    (hrep : ∀ {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+      (P : CochainComplex (Modules l E Z) ℤ),
+      CochainComplex.IsKFlatIndependentCoefficients
+        (R := spIntegralSectionRing l E Z)
+        (((spIntegralModuleEquivalence l E Z).functor.mapHomologicalComplex (.up ℤ)).obj P) →
+      (∀ i : ℤ, IsFlatOnSite.{u + 1, u, u + 1, u + 1}
+        (J := Scheme.ProEt.topology Z)
+        (R := spIntegralSectionRing l E Z)
+        ((spIntegralModuleEquivalence l E Z).functor.obj (P.X i))) →
+      (((((TwoSquare.mk _ _ _ _ (q.pullback g).derived.inv) ≫ᵥ
+        (TwoSquare.mk _ _ _ _ (q.pullback f).derived.inv)).whiskerRight
+          (s.operations.comp f g).inv).whiskerLeft
+            (CondensedRing.leftDerivedUpperStarComp (spIntegralCondensed l E) f g).inv).natTrans.app
+              (DerivedCategory.Q.obj P)) =
+        ((TwoSquare.mk _ _ _ _ (q.pullback (f ≫ g)).derived.inv).natTrans.app
+          (DerivedCategory.Q.obj P))) :
+    ∀ {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+      (K : Integral l E Z),
+      (((((TwoSquare.mk _ _ _ _ (q.pullback g).derived.inv) ≫ᵥ
+        (TwoSquare.mk _ _ _ _ (q.pullback f).derived.inv)).whiskerRight
+          (s.operations.comp f g).inv).whiskerLeft
+            (CondensedRing.leftDerivedUpperStarComp (spIntegralCondensed l E) f g).inv).natTrans.app
+              K) = ((TwoSquare.mk _ _ _ _ (q.pullback (f ≫ g)).derived.inv).natTrans.app K) := by
+  intro X Y Z f g K
+  have h := internal_resolving_ext l E _ _
+    (((((TwoSquare.mk _ _ _ _ (q.pullback g).derived.inv) ≫ᵥ
+      (TwoSquare.mk _ _ _ _ (q.pullback f).derived.inv)).whiskerRight
+        (s.operations.comp f g).inv).whiskerLeft
+          (CondensedRing.leftDerivedUpperStarComp (spIntegralCondensed l E) f g).inv).natTrans)
+    ((TwoSquare.mk _ _ _ _ (q.pullback (f ≫ g)).derived.inv).natTrans)
+    (hrep f g)
+  exact congrArg (fun t ↦ t.app K) h
 
 set_option maxHeartbeats 1600000 in
 -- Comparing the recorded sheaf-module presentations requires additional reduction steps.

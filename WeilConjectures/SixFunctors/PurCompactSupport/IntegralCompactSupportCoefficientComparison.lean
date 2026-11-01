@@ -209,6 +209,20 @@ import Mathlib.CategoryTheory.Adjunction.CompositionIso
 import all WeilConjectures.SmoothPurity.Completed.CompletedIntegralFiniteFree
 import all WeilConjectures.CategoryTheory.SmoothPurity.AdicBasisLimit
 import WeilConjectures.CategoryTheory.Constant.ConstantSpecifiedBasis
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Coinduce
+public import WeilConjectures.CategoryTheory.Monoidal.Conjugate
+public import WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresAbelian
+public import WeilConjectures.CategoryTheory.Sites.MonObj
+public import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
+public import WeilConjectures.ProperBaseChange.FlatAlgebraicInverseImageOfUniverses
+public import WeilConjectures.ProperBaseChange.RingedToposPullbackFilteredColimits
+public import WeilConjectures.AlgebraicGeometry.Picard.DerivedChangeOfRingsIndependentCoefficients
+public import WeilConjectures.AlgebraicGeometry.Picard.KFlatResolutionIndependentCoefficients
+public import WeilConjectures.AlgebraicGeometry.Picard.KFlatRingedToposPullback
+public import WeilConjectures.AlgebraicGeometry.ProperBaseChange.RestrictionPullbackScalarComposition
+public import WeilConjectures.CategoryTheory.Adjunction.SquareCompatibleMate
+public import WeilConjectures.CategoryTheory.Derived.DerivedExactSquareComposition
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Integral compact-support coefficient comparison
 
@@ -406,6 +420,361 @@ def tensorComposition {W : Scheme.{u}}
   (((pbcDerivedScalarAdjunction a).comp (pbcDerivedScalarAdjunction b)).ofNatIsoRight
     (pbcDerivedRestrictComp a b d h)).leftAdjointUniq (pbcDerivedScalarAdjunction d)
 
+private theorem ordinaryPullback_composition
+    (M : proEtaleRingModules X TX) :
+    (proEtaleRingModulePullback f RX RY eR).map
+        ((pbcRestrictComp aX bX cX hX).inv.app M) ≫
+      (proEtaleRingRestrictionPullbackInv f RX SX RY SY aX aY eR eS ha).app
+        ((proEtaleRingRestrictScalars bX).obj M) ≫
+      (proEtaleRingRestrictScalars aY).map
+        ((proEtaleRingRestrictionPullbackInv f SX TX SY TY bX bY eS eT hb).app M) =
+    (proEtaleRingRestrictionPullbackInv f RX TX RY TY cX cY eR eT hc).app M ≫
+      (pbcRestrictComp aY bY cY hY).inv.app
+        ((proEtaleRingModulePullback f TX TY eT).obj M) := by
+  let LR := proEtaleRingModulePullback f RX RY eR
+  let LS := proEtaleRingModulePullback f SX SY eS
+  let LT := proEtaleRingModulePullback f TX TY eT
+  let ar := proEtaleRingModuleAdjunction f RX RY eR
+  let as_ := proEtaleRingModuleAdjunction f SX SY eS
+  let at_ := proEtaleRingModuleAdjunction f TX TY eT
+  let ηX := pbcRestrictComp aX bX cX hX
+  let ηY := pbcRestrictComp aY bY cY hY
+  let da := proEtaleRingRestrictionDirectImage f RX SX RY SY aX aY eR eS ha
+  let db := proEtaleRingRestrictionDirectImage f SX TX SY TY bX bY eS eT hb
+  let dc := proEtaleRingRestrictionDirectImage f RX TX RY TY cX cY eR eT hc
+  let α := TwoSquare.mk _ _ _ _
+    (proEtaleRingRestrictionPullbackInv f RX SX RY SY aX aY eR eS ha)
+  let β := TwoSquare.mk _ _ _ _
+    (proEtaleRingRestrictionPullbackInv f SX TX SY TY bX bY eS eT hb)
+  let γ := TwoSquare.mk _ _ _ _
+    (proEtaleRingRestrictionPullbackInv f RX TX RY TY cX cY eR eT hc)
+  have hma : mateEquiv as_ ar α = TwoSquare.mk _ _ _ _ da.hom :=
+    restrictionPullback_mate f RX SX RY SY aX aY eR eS ha
+  have hmb : mateEquiv at_ as_ β = TwoSquare.mk _ _ _ _ db.hom :=
+    restrictionPullback_mate f SX TX SY TY bX bY eS eT hb
+  have hmc : mateEquiv at_ ar γ = TwoSquare.mk _ _ _ _ dc.hom :=
+    restrictionPullback_mate f RX TX RY TY cX cY eR eT hc
+  have hm := mateEquiv_vcomp at_ as_ ar β α
+  rw [hma, hmb] at hm
+  have hd (N : proEtaleRingModules Y TY) :
+      ηX.inv.app ((proEtaleRingModuleDirectImage f TX TY eT).obj N) ≫
+          (proEtaleRingRestrictScalars aX).map (db.hom.app N) ≫
+          da.hom.app ((proEtaleRingRestrictScalars bY).obj N) =
+        dc.hom.app N ≫
+          (proEtaleRingModuleDirectImage f RX RY eR).map (ηY.inv.app N) := by
+    ext U x
+    change ((da.hom.app ((proEtaleRingRestrictScalars bY).obj N)).val.app U)
+      ((db.hom.app N).val.app U
+        ((ηX.inv.app ((proEtaleRingModuleDirectImage f TX TY eT).obj N)).val.app U x)) =
+      (ηY.inv.app N).val.app ((proEtaleBaseChange f).op.obj U)
+        ((dc.hom.app N).val.app U x)
+    dsimp only [da, db, dc, ηX, ηY, proEtaleRingRestrictionDirectImage]
+    erw [(proEtaleRingRestrictionDirectImage_existsUnique
+        f SX TX SY TY bX bY eS eT hb).choose_spec.1,
+      (proEtaleRingRestrictionDirectImage_existsUnique
+        f RX SX RY SY aX aY eR eS ha).choose_spec.1,
+      (proEtaleRingRestrictionDirectImage_existsUnique
+        f RX TX RY TY cX cY eR eT hc).choose_spec.1,
+      restrictionComp_inv_sections, restrictionComp_inv_sections]
+  have hq (N : proEtaleRingModules X TX) :
+      LR.map (ηX.inv.app N) ≫ α.app ((proEtaleRingRestrictScalars bX).obj N) ≫
+          (proEtaleRingRestrictScalars aY).map (β.app N) =
+        γ.app N ≫ ηY.inv.app (LT.obj N) := by
+    have hp : LR.map (ηX.inv.app N) ≫ (β ≫ₕ α).app N =
+        γ.app N ≫ ηY.inv.app (LT.obj N) := by
+      apply mate_naturality at_ ar γ (β ≫ₕ α) ηX.inv ηY.inv (fun P ↦ ?_) N
+      rw [hm, hmc]
+      simpa only [TwoSquare.vComp, TwoSquare.mk, TwoSquare.natTrans, NatTrans.comp_app,
+        Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
+        Functor.associator_inv_app, Category.id_comp, Category.comp_id, Category.assoc]
+        using hd P
+    simpa only [TwoSquare.hComp, TwoSquare.mk, TwoSquare.natTrans, NatTrans.comp_app,
+      Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
+      Functor.associator_inv_app, Category.id_comp, Category.comp_id, Category.assoc]
+      using hp
+  exact hq M
+
+private theorem openRestrictionMap_composition
+    {R S T : Coefficients.{u}} (a : Change R S) (b : Change S T) (d : Change R T)
+    (h : ∀ W : Scheme.{u}, a.map W ≫ b.map W = d.map W)
+    {U V : Scheme.{u}} (j : U ⟶ V) [IsOpenImmersion j]
+    (M : pbcModules U (T.ring U)) :
+    (openExtension R j).map ((pbcRestrictComp (a.map U) (b.map U) (d.map U)
+      (h U)).inv.app M) ≫
+      (openRestrictionMap a j).app ((pbcRestrict (b.map U)).obj M) ≫
+      (pbcRestrict (a.map V)).map ((openRestrictionMap b j).app M) =
+    (openRestrictionMap d j).app M ≫
+      (pbcRestrictComp (a.map V) (b.map V) (d.map V) (h V)).inv.app
+        ((openExtension T j).obj M) := by
+  let ηV := pbcRestrictComp (a.map V) (b.map V) (d.map V) (h V)
+  let ηU := pbcRestrictComp (a.map U) (b.map U) (d.map U) (h U)
+  let qa := asIso (proEtaleRingRestrictionPullbackInv j
+    (R.ring V) (S.ring V) (R.ring U) (S.ring U)
+    (a.map V) (a.map U) (R.pull j) (S.pull j) (a.square j))
+  let qb := asIso (proEtaleRingRestrictionPullbackInv j
+    (S.ring V) (T.ring V) (S.ring U) (T.ring U)
+    (b.map V) (b.map U) (S.pull j) (T.pull j) (b.square j))
+  let qd := asIso (proEtaleRingRestrictionPullbackInv j
+    (R.ring V) (T.ring V) (R.ring U) (T.ring U)
+    (d.map V) (d.map U) (R.pull j) (T.pull j) (d.square j))
+  let α := TwoSquare.mk _ _ _ _ (openRestrictionMap a j)
+  let β := TwoSquare.mk _ _ _ _ (openRestrictionMap b j)
+  let γ := TwoSquare.mk _ _ _ _ (openRestrictionMap d j)
+  have ha : mateEquiv (openAdjunction S j) (openAdjunction R j) α =
+      TwoSquare.mk _ _ _ _ qa.inv := by
+    exact (mateEquiv (openAdjunction S j) (openAdjunction R j)).apply_symm_apply _
+  have hb : mateEquiv (openAdjunction T j) (openAdjunction S j) β =
+      TwoSquare.mk _ _ _ _ qb.inv := by
+    exact (mateEquiv (openAdjunction T j) (openAdjunction S j)).apply_symm_apply _
+  have hd : mateEquiv (openAdjunction T j) (openAdjunction R j) γ =
+      TwoSquare.mk _ _ _ _ qd.inv := by
+    exact (mateEquiv (openAdjunction T j) (openAdjunction R j)).apply_symm_apply _
+  have hm := mateEquiv_vcomp (openAdjunction T j) (openAdjunction S j)
+    (openAdjunction R j) β α
+  rw [ha, hb] at hm
+  have hq (N : pbcModules V (T.ring V)) :
+      ηU.inv.app ((proEtaleRingModulePullback j (T.ring V) (T.ring U)
+          (T.pull j)).obj N) ≫
+        (pbcRestrict (a.map U)).map (qb.inv.app N) ≫
+        qa.inv.app ((pbcRestrict (b.map V)).obj N) =
+      qd.inv.app N ≫
+        (proEtaleRingModulePullback j (R.ring V) (R.ring U) (R.pull j)).map
+          (ηV.inv.app N) := by
+    let P := proEtaleRingModulePullback j (R.ring V) (R.ring U) (R.pull j)
+    have he : P.mapIso (ηV.symm.app N) ≪≫
+        qa.app ((pbcRestrict (b.map V)).obj N) ≪≫
+        (pbcRestrict (a.map U)).mapIso (qb.app N) =
+        qd.app N ≪≫ ηU.symm.app
+          ((proEtaleRingModulePullback j (T.ring V) (T.ring U) (T.pull j)).obj N) := by
+      apply Iso.ext
+      exact ordinaryPullback_composition j
+        (R.ring V) (S.ring V) (T.ring V) (R.ring U) (S.ring U) (T.ring U)
+        (a.map V) (b.map V) (d.map V) (h V)
+        (a.map U) (b.map U) (d.map U) (h U)
+        (R.pull j) (S.pull j) (T.pull j) (a.square j) (b.square j) (d.square j) N
+    have hi := congrArg Iso.inv he
+    have hh := congrArg (fun z ↦
+      ηU.inv.app ((proEtaleRingModulePullback j (T.ring V) (T.ring U)
+        (T.pull j)).obj N) ≫ z ≫ P.map (ηV.inv.app N)) hi
+    simpa only [Iso.trans_inv, Iso.symm_inv, Iso.app_inv, Iso.app_hom,
+      Functor.mapIso_inv, Category.assoc, ← P.map_comp, Iso.hom_inv_id_app,
+      P.map_id, Category.comp_id, Iso.inv_hom_id_app_assoc] using hh
+  have hp := mate_naturality (openAdjunction T j) (openAdjunction R j)
+    γ (β ≫ₕ α) ηU.inv ηV.inv (fun N ↦ ?_) M
+  · simpa only [TwoSquare.hComp, TwoSquare.mk, TwoSquare.natTrans, NatTrans.comp_app,
+      Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
+      Functor.associator_inv_app, Category.id_comp, Category.comp_id, Category.assoc,
+      α, β, γ, ηU, ηV] using hp
+  · rw [hm, hd]
+    simpa only [TwoSquare.vComp, TwoSquare.mk, TwoSquare.natTrans, NatTrans.comp_app,
+      Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
+      Functor.associator_inv_app, Category.id_comp, Category.comp_id, Category.assoc]
+      using hq N
+
+private theorem openRestriction_composition
+    {R S T : Coefficients.{u}} (a : Change R S) (b : Change S T) (d : Change R T)
+    (h : ∀ W : Scheme.{u}, a.map W ≫ b.map W = d.map W)
+    {U V : Scheme.{u}} (j : U ⟶ V) [IsOpenImmersion j]
+    (M : DerivedCategory (pbcModules U (T.ring U))) :
+    (openExtension R j).mapDerivedCategory.map
+        ((pbcDerivedRestrictComp (a.map U) (b.map U) (d.map U) (h U)).inv.app M) ≫
+      (openRestriction a j).hom.app ((pbcDerivedRestrict (b.map U)).obj M) ≫
+      (pbcDerivedRestrict (a.map V)).map ((openRestriction b j).hom.app M) =
+    (openRestriction d j).hom.app M ≫
+      (pbcDerivedRestrictComp (a.map V) (b.map V) (d.map V) (h V)).inv.app
+        ((openExtension T j).mapDerivedCategory.obj M) := by
+  have hh := Functor.exactSquare_comp_forward
+    (pbcRestrict (b.map U)) (pbcRestrict (a.map U)) (pbcRestrict (d.map U))
+    (pbcRestrict (b.map V)) (pbcRestrict (a.map V)) (pbcRestrict (d.map V))
+    (openExtension T j) (openExtension S j) (openExtension R j)
+    (asIso (openRestrictionMap b j)) (asIso (openRestrictionMap a j))
+    (asIso (openRestrictionMap d j))
+    (pbcRestrictComp (a.map U) (b.map U) (d.map U) (h U)).symm
+    (pbcRestrictComp (a.map V) (b.map V) (d.map V) (h V)).symm
+    (openRestrictionMap_composition a b d h j) M
+  simpa only [openRestriction, pbcDerivedRestrictComp, pbcDerivedRestrict,
+    Functor.mapDerivedCategoryNatIso_symm, Iso.trans_inv, Iso.symm_inv,
+    Iso.trans_hom, NatTrans.comp_app, Category.assoc] using hh
+
+private theorem derivedDirectRestriction_mate
+    {R S : Coefficients.{u}} (a : Change R S)
+    {U V : Scheme.{u}} (g : U ⟶ V) :
+    mateEquiv
+      (proEtaleRingDerivedAdjunction g (S.ring V) (S.ring U) (S.pull g))
+      (proEtaleRingDerivedAdjunction g (R.ring V) (R.ring U) (R.pull g))
+      (TwoSquare.mk _ _ _ _ (proEtaleRingRestrictionDerivedPullback g
+        (R.ring V) (S.ring V) (R.ring U) (S.ring U)
+        (a.map V) (a.map U) (R.pull g) (S.pull g) (a.square g)).inv) =
+      TwoSquare.mk _ _ _ _ (proEtaleRingRestrictionDerivedDirectImage g
+        (R.ring V) (S.ring V) (R.ring U) (S.ring U)
+        (a.map V) (a.map U) (R.pull g) (S.pull g) (a.square g)).hom := by
+  ext N
+  let as' := proEtaleRingDerivedAdjunction g (S.ring V) (S.ring U) (S.pull g)
+  have h := (proEtaleRingSheafChangeAdjunction g
+    (R.ring V) (S.ring V) (R.ring U) (S.ring U)
+    (a.map V) (a.map U) (R.pull g) (S.pull g) (a.square g)).2.2
+      ((push S g).obj N) N (as'.counit.app N)
+  dsimp only [as', push] at h
+  simp only [Adjunction.homEquiv_unit, Functor.map_comp,
+    Adjunction.right_triangle_components] at h
+  erw [(proEtaleRingRestrictScalars (a.map V)).mapDerivedCategory.map_id,
+    Category.id_comp] at h
+  simpa only [mateEquiv_apply, TwoSquare.mk, TwoSquare.natTrans,
+    NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.associator_hom_app, Functor.associator_inv_app,
+    Functor.rightUnitor_inv_app, Functor.leftUnitor_hom_app,
+    Functor.comp_map, Functor.comp_obj, Functor.id_obj, Category.id_comp,
+    Category.comp_id, Category.assoc, Functor.map_id] using h
+
+private theorem properRestriction_composition
+    {R S T : Coefficients.{u}} (a : Change R S) (b : Change S T) (d : Change R T)
+    (h : ∀ W : Scheme.{u}, a.map W ≫ b.map W = d.map W)
+    {U V : Scheme.{u}} (g : U ⟶ V)
+    (N : DerivedCategory (pbcModules U (T.ring U))) :
+    let ηV := pbcDerivedRestrictComp (a.map V) (b.map V) (d.map V) (h V)
+    let ηU := pbcDerivedRestrictComp (a.map U) (b.map U) (d.map U) (h U)
+    let da := proEtaleRingRestrictionDerivedDirectImage g
+      (R.ring V) (S.ring V) (R.ring U) (S.ring U)
+      (a.map V) (a.map U) (R.pull g) (S.pull g) (a.square g)
+    let db := proEtaleRingRestrictionDerivedDirectImage g
+      (S.ring V) (T.ring V) (S.ring U) (T.ring U)
+      (b.map V) (b.map U) (S.pull g) (T.pull g) (b.square g)
+    let dd := proEtaleRingRestrictionDerivedDirectImage g
+      (R.ring V) (T.ring V) (R.ring U) (T.ring U)
+      (d.map V) (d.map U) (R.pull g) (T.pull g) (d.square g)
+    ηV.inv.app ((push T g).obj N) ≫
+        (pbcDerivedRestrict (a.map V)).map (db.hom.app N) ≫
+        da.hom.app ((pbcDerivedRestrict (b.map U)).obj N) =
+      dd.hom.app N ≫ (push R g).map (ηU.inv.app N) := by
+  dsimp only
+  let ar := proEtaleRingDerivedAdjunction g (R.ring V) (R.ring U) (R.pull g)
+  let as' := proEtaleRingDerivedAdjunction g (S.ring V) (S.ring U) (S.pull g)
+  let at' := proEtaleRingDerivedAdjunction g (T.ring V) (T.ring U) (T.pull g)
+  let ηV := pbcDerivedRestrictComp (a.map V) (b.map V) (d.map V) (h V)
+  let ηU := pbcDerivedRestrictComp (a.map U) (b.map U) (d.map U) (h U)
+  let α := TwoSquare.mk _ _ _ _ (proEtaleRingRestrictionDerivedPullback g
+    (R.ring V) (S.ring V) (R.ring U) (S.ring U)
+    (a.map V) (a.map U) (R.pull g) (S.pull g) (a.square g)).inv
+  let β := TwoSquare.mk _ _ _ _ (proEtaleRingRestrictionDerivedPullback g
+    (S.ring V) (T.ring V) (S.ring U) (T.ring U)
+    (b.map V) (b.map U) (S.pull g) (T.pull g) (b.square g)).inv
+  let γ := TwoSquare.mk _ _ _ _ (proEtaleRingRestrictionDerivedPullback g
+    (R.ring V) (T.ring V) (R.ring U) (T.ring U)
+    (d.map V) (d.map U) (R.pull g) (T.pull g) (d.square g)).inv
+  have he : Functor.whiskerRight ηV.inv (pull R g) ≫ (β ≫ₕ α).natTrans =
+      γ.natTrans ≫ Functor.whiskerLeft (pull T g) ηU.inv := by
+    ext M
+    simpa only [ηV, ηU, α, β, γ, TwoSquare.hComp, TwoSquare.natTrans,
+      TwoSquare.mk, pull, pbcDerivedRestrict, pbcRestrict, reductionDerivedRestrict,
+      reductionRestrict, proEtaleRingRestrictScalars, Functor.comp_obj,
+      NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+      Functor.associator_hom_app, Functor.associator_inv_app,
+      Category.id_comp, Category.comp_id, Category.assoc]
+      using (proEtaleRestrictionPullback_scalarComposition g
+        (R.ring V) (S.ring V) (T.ring V) (R.ring U) (S.ring U) (T.ring U)
+        (a.map V) (b.map V) (d.map V) (h V)
+        (a.map U) (b.map U) (d.map U) (h U)
+        (R.pull g) (S.pull g) (T.pull g) (a.square g) (b.square g) (d.square g) M).symm
+  have hm := congrArg (fun z ↦ mateEquiv at' ar z) he
+  erw [mateEquiv_whiskerRight_comp at' ar ηV.inv (β ≫ₕ α),
+    mateEquiv_comp_whiskerLeft at' ar γ ηU.inv,
+    mateEquiv_vcomp at' as' ar β α] at hm
+  dsimp only [α, β, γ, at', as', ar] at hm
+  rw [derivedDirectRestriction_mate, derivedDirectRestriction_mate,
+    derivedDirectRestriction_mate] at hm
+  simpa only [ηV, ηU, TwoSquare.vComp, TwoSquare.natTrans, TwoSquare.mk,
+    Functor.comp_obj, push, pbcDerivedRestrict, pbcRestrict,
+    NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
+    Category.comp_id, Category.assoc] using congrArg (fun z ↦ z.natTrans.app N) hm
+
+private theorem properRestrictionInv_composition
+    {R S T : Coefficients.{u}} (a : Change R S) (b : Change S T) (d : Change R T)
+    (h : ∀ W : Scheme.{u}, a.map W ≫ b.map W = d.map W)
+    {U V : Scheme.{u}} (g : U ⟶ V)
+    (N : DerivedCategory (pbcModules U (T.ring U))) :
+    let ηV := pbcDerivedRestrictComp (a.map V) (b.map V) (d.map V) (h V)
+    let ηU := pbcDerivedRestrictComp (a.map U) (b.map U) (d.map U) (h U)
+    let da := proEtaleRingRestrictionDerivedDirectImage g
+      (R.ring V) (S.ring V) (R.ring U) (S.ring U)
+      (a.map V) (a.map U) (R.pull g) (S.pull g) (a.square g)
+    let db := proEtaleRingRestrictionDerivedDirectImage g
+      (S.ring V) (T.ring V) (S.ring U) (T.ring U)
+      (b.map V) (b.map U) (S.pull g) (T.pull g) (b.square g)
+    let dd := proEtaleRingRestrictionDerivedDirectImage g
+      (R.ring V) (T.ring V) (R.ring U) (T.ring U)
+      (d.map V) (d.map U) (R.pull g) (T.pull g) (d.square g)
+    (push R g).map (ηU.inv.app N) ≫
+        da.inv.app ((pbcDerivedRestrict (b.map U)).obj N) ≫
+        (pbcDerivedRestrict (a.map V)).map (db.inv.app N) =
+      dd.inv.app N ≫ ηV.inv.app ((push T g).obj N) := by
+  dsimp only
+  let ηV := pbcDerivedRestrictComp (a.map V) (b.map V) (d.map V) (h V)
+  let ηU := pbcDerivedRestrictComp (a.map U) (b.map U) (d.map U) (h U)
+  let da := proEtaleRingRestrictionDerivedDirectImage g
+    (R.ring V) (S.ring V) (R.ring U) (S.ring U)
+    (a.map V) (a.map U) (R.pull g) (S.pull g) (a.square g)
+  let db := proEtaleRingRestrictionDerivedDirectImage g
+    (S.ring V) (T.ring V) (S.ring U) (T.ring U)
+    (b.map V) (b.map U) (S.pull g) (T.pull g) (b.square g)
+  let dd := proEtaleRingRestrictionDerivedDirectImage g
+    (R.ring V) (T.ring V) (R.ring U) (T.ring U)
+    (d.map V) (d.map U) (R.pull g) (T.pull g) (d.square g)
+  have he : ηV.symm.app ((push T g).obj N) ≪≫
+      (pbcDerivedRestrict (a.map V)).mapIso (db.app N) ≪≫
+      da.app ((pbcDerivedRestrict (b.map U)).obj N) =
+    dd.app N ≪≫ (push R g).mapIso (ηU.symm.app N) := by
+    apply Iso.ext
+    exact properRestriction_composition a b d h g N
+  have hi := congrArg Iso.inv he
+  have hh := congrArg (fun z ↦ (push R g).map (ηU.inv.app N) ≫ z ≫
+    ηV.inv.app ((push T g).obj N)) hi
+  simp only [Iso.trans_inv, Iso.symm_inv, Iso.app_inv,
+    Functor.mapIso_inv, Category.assoc, ← Functor.map_comp_assoc,
+    Iso.inv_hom_id_app, Iso.hom_inv_id_app, Category.comp_id] at hh
+  erw [(push R g).map_id, Category.id_comp] at hh
+  exact hh
+
+private theorem restriction_composition
+    {R S T : Coefficients.{u}} (a : Change R S) (b : Change S T) (d : Change R T)
+    (h : ∀ W : Scheme.{u}, a.map W ≫ b.map W = d.map W)
+    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
+    (M : DerivedCategory (pbcModules X (T.ring X))) :
+    (image R c).map
+        ((pbcDerivedRestrictComp (a.map X) (b.map X) (d.map X) (h X)).inv.app M) ≫
+      (restriction a c).hom.app ((pbcDerivedRestrict (b.map X)).obj M) ≫
+      (pbcDerivedRestrict (a.map Y)).map ((restriction b c).hom.app M) =
+    (restriction d c).hom.app M ≫
+      (pbcDerivedRestrictComp (a.map Y) (b.map Y) (d.map Y) (h Y)).inv.app
+        ((image T c).obj M) := by
+  let da := proEtaleRingRestrictionDerivedDirectImage c.g
+    (R.ring Y) (S.ring Y) (R.ring c.Z) (S.ring c.Z)
+    (a.map Y) (a.map c.Z) (R.pull c.g) (S.pull c.g) (a.square c.g)
+  let db := proEtaleRingRestrictionDerivedDirectImage c.g
+    (S.ring Y) (T.ring Y) (S.ring c.Z) (T.ring c.Z)
+    (b.map Y) (b.map c.Z) (S.pull c.g) (T.pull c.g) (b.square c.g)
+  let dd := proEtaleRingRestrictionDerivedDirectImage c.g
+    (R.ring Y) (T.ring Y) (R.ring c.Z) (T.ring c.Z)
+    (d.map Y) (d.map c.Z) (R.pull c.g) (T.pull c.g) (d.square c.g)
+  have hn := da.inv.naturality ((openRestriction b c.i).hom.app M)
+  dsimp only [Functor.comp_map] at hn
+  dsimp only [restriction, image, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.comp_map,
+    Functor.map_comp, Functor.comp_obj]
+  simp only [Functor.map_comp]
+  change (push R c.g).map (_) ≫ ((push R c.g).map (_) ≫ da.inv.app _) ≫
+      ((pbcDerivedRestrict (a.map Y)).map ((push S c.g).map (_)) ≫
+        (pbcDerivedRestrict (a.map Y)).map (db.inv.app _)) =
+    ((push R c.g).map (_) ≫ dd.inv.app _) ≫ _
+  simp only [Category.assoc]
+  erw [← reassoc_of% hn]
+  rw [← Functor.map_comp_assoc, ← Functor.map_comp_assoc]
+  simp only [Category.assoc]
+  erw [openRestriction_composition a b d h c.i M, Functor.map_comp]
+  simp only [Category.assoc]
+  erw [properRestrictionInv_composition a b d h c.g]
+
 /-- Scalar composition, including quotient reductions, for the specified mates.
 Source: Stacks Tag 07A6, mate pasting
 (blueprint: lem-pur-compact-support-integral-coefficient-comparison).
@@ -424,7 +793,54 @@ theorem comparison_composition {R S T : Coefficients.{u}}
         (image T c).map ((tensorComposition (a.map X) (b.map X) (d.map X) (h X)).hom.app M) =
       (tensorComposition (a.map Y) (b.map Y) (d.map Y) (h Y)).hom.app
           ((image R c).obj M) ≫ (comparison d c).app M := by
-  sorry
+  let ax := pbcDerivedScalarAdjunction (a.map X)
+  let bx := pbcDerivedScalarAdjunction (b.map X)
+  let dx := pbcDerivedScalarAdjunction (d.map X)
+  let ay := pbcDerivedScalarAdjunction (a.map Y)
+  let by' := pbcDerivedScalarAdjunction (b.map Y)
+  let dy := pbcDerivedScalarAdjunction (d.map Y)
+  let ηX := pbcDerivedRestrictComp (a.map X) (b.map X) (d.map X) (h X)
+  let ηY := pbcDerivedRestrictComp (a.map Y) (b.map Y) (d.map Y) (h Y)
+  let acx := (ax.comp bx).ofNatIsoRight ηX
+  let acy := (ay.comp by').ofNatIsoRight ηY
+  let α := TwoSquare.mk _ _ _ _ (comparison a c)
+  let β := TwoSquare.mk _ _ _ _ (comparison b c)
+  let δ := TwoSquare.mk _ _ _ _ (comparison d c)
+  have ha : mateEquiv ax ay α = TwoSquare.mk _ _ _ _ (restriction a c).hom :=
+    (mateEquiv ax ay).apply_symm_apply _
+  have hb : mateEquiv bx by' β = TwoSquare.mk _ _ _ _ (restriction b c).hom :=
+    (mateEquiv bx by').apply_symm_apply _
+  have hd : mateEquiv dx dy δ = TwoSquare.mk _ _ _ _ (restriction d c).hom :=
+    (mateEquiv dx dy).apply_symm_apply _
+  have hm : mateEquiv acx acy (α ≫ᵥ β) =
+      TwoSquare.mk _ _ _ _ (restriction d c).hom := by
+    dsimp only [acx, acy]
+    rw [mateEquiv_ofNatIsoRight, mateEquiv_hcomp ax ay bx by', ha, hb]
+    ext N
+    have hh := congrArg (fun z ↦ z ≫ ηY.hom.app ((image T c).obj N))
+      (restriction_composition a b d h c N)
+    simp only [Category.assoc] at hh
+    erw [Iso.inv_hom_id_app, Category.comp_id] at hh
+    simpa only [ηX, ηY, TwoSquare.hComp, TwoSquare.natTrans, TwoSquare.mk,
+      NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+      Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
+      Category.comp_id, Category.assoc, Iso.inv_hom_id_app] using hh
+  have ht := mateEquiv_leftAdjointUniq acx dx acy dy δ
+  rw [hd] at ht
+  have he := (mateEquiv acx acy).injective (hm.trans ht.symm)
+  have hh := congrArg (fun z ↦ z.natTrans.app M ≫
+    (image T c).map ((acx.leftAdjointUniq dx).hom.app M)) he
+  simp only [TwoSquare.vComp, TwoSquare.natTrans, TwoSquare.mk, α, β, δ,
+    NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
+    Category.comp_id, Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app] at hh
+  erw [(image T c).map_id, Category.comp_id] at hh
+  simpa only [acx, acy, ax, bx, dx, ay, by', dy, ηX, ηY,
+    tensorComposition, TwoSquare.vComp, TwoSquare.natTrans, TwoSquare.mk,
+    NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
+    Category.comp_id, Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app,
+    Functor.map_id] using hh
 
 /-- Identity scalar restriction has the identity section functions, uniquely.
 Source: Stacks Tag 03DA
@@ -1364,6 +1780,29 @@ theorem completedMap_composition (L : Type u) [Field L] [Algebra ℚ_[l] L]
     intro x
     exact congrArg ULift.up (RingHom.congr_fun hq x.down)
   · exact (completedCoefficientMap_existsUnique l E L (j.comp i) W).exists.choose_spec
+
+/-- The ambient natural transformation is invertible on the full finite-Tor domain.
+Source: blueprint sk-thm-purity-transport, Step 3
+(blueprint: lem-pur-compact-support-integral-coefficient-comparison).
+Proof: each component is invertible by integralCoefficientComparison. A natural
+transformation is invertible if all its components are; their inverses are natural. -/
+theorem comparisonOnFiniteTor_isIso (c : Compactification f) :
+    IsIso (Functor.whiskerLeft (finiteTorConstructibleIntegral l E X).ι
+      (comparison (completedChange l E F i) c)) := by
+  exact @NatIso.isIso_of_isIso_app _ _ _ _ _ _ _
+    (fun M ↦ (integralCoefficientComparison l E F i D hl f c M.obj M.property).2.2.2.1)
+
+/-- The requested canonical natural isomorphism with source C_Y P_E and target P_F C_X.
+Source: blueprint sk-thm-purity-transport, Step 3
+(blueprint: lem-pur-compact-support-integral-coefficient-comparison). -/
+def comparisonIso (c : Compactification f) :
+    (finiteTorConstructibleIntegral l E X).ι ⋙ image (completed l E) c ⋙
+        pbcDerivedExtend (completedCoefficientMap l E F i Y) ≅
+      (finiteTorConstructibleIntegral l E X).ι ⋙
+        pbcDerivedExtend (completedCoefficientMap l E F i X) ⋙ image (completed l F) c :=
+  @asIso _ _ _ _ (Functor.whiskerLeft (finiteTorConstructibleIntegral l E X).ι
+    (comparison (completedChange l E F i) c))
+      (comparisonOnFiniteTor_isIso l E F i D hl f c)
 
 attribute [local irreducible] ordinaryIntegralModulePull ordinaryIntegralModuleAdjunction
   ordinaryIntegralDirectRingMap

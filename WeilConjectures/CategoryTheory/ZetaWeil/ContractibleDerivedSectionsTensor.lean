@@ -168,6 +168,18 @@ import Mathlib.CategoryTheory.Generator.Basic
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
 import Mathlib.Topology.ExtremallyDisconnected
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+public import Mathlib.CategoryTheory.Functor.Derived.PointwiseRightDerived
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CanonicalModuleEvaluationTensor
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.PartitionEvaluationColimits
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.PartitionFlatSections
+public import WeilConjectures.Algebra.Homology.Ringed.RingedTensorComplexConstraintsSupplement
+public import WeilConjectures.Algebra.Homology.RingedDerivedTensorHomAdjunction
+public import WeilConjectures.AlgebraicGeometry.Picard.KFlatResolutionIndependentCoefficients
+public import WeilConjectures.AlgebraicGeometry.Picard.SiteDerivedTensorDescentIndependentCoefficients
+public import WeilConjectures.AlgebraicGeometry.ProEtale.WContractibleDisjointCover
+public import WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
+public import WeilConjectures.CategoryTheory.ExactBraidedDerivedEvaluation
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.StoneanFiniteDisjointRefinements
 /-!
 # Derived tensor evaluation on contractible objects
 
@@ -201,6 +213,119 @@ abbrev contractibleModuleEvaluation :
     RingedTensorModules.{c, v, r} J R ⥤ ModuleCat.{max c v r} (R.obj.obj U) :=
   SheafOfModules.evaluation.{max c v r}
     ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R) U
+
+/-- The type of ordinary total-complex section pairings.
+Source: HRS Lemma 4.1(1), Stacks 06YN
+(blueprint: lem-zl-contractible-derived-sections-tensor). -/
+abbrev ContractibleSectionsPairing :=
+  ∀ P Q : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ,
+      ((contractibleModuleEvaluation.{c, v, r} J R U).mapHomologicalComplex
+          (ComplexShape.up ℤ)).obj P ⊗
+        ((contractibleModuleEvaluation.{c, v, r} J R U).mapHomologicalComplex
+          (ComplexShape.up ℤ)).obj Q ⟶
+        ((contractibleModuleEvaluation.{c, v, r} J R U).mapHomologicalComplex
+          (ComplexShape.up ℤ)).obj ((coefficientTotalTensor.{r, c, v} J R).obj (P, Q))
+
+/-- The strong monoidal structure on termwise derived evaluation.
+Source: HRS Lemma 4.1(1), Stacks 06YU
+(blueprint: lem-zl-contractible-derived-sections-tensor). -/
+abbrev ContractibleSectionsMonoidal
+    (S : CoefficientClosedStructure
+      (derivedInternalHomOfUniverses.{c, v, r, max c v r} J R)) :=
+  @Functor.Monoidal
+    (DerivedCategory (RingedTensorModules.{c, v, r} J R)) _ S.monoidal
+    (DerivedCategory (ModuleCat.{max c v r} (R.obj.obj U))) _ _
+    (contractibleModuleEvaluation.{c, v, r} J R U).mapDerivedCategory
+
+/-- The ordinary comparison of the actual degree-zero coefficient complexes.
+Source: HRS Lemma 4.1(1), Stacks 0FPT
+(blueprint: lem-zl-contractible-derived-sections-tensor). -/
+abbrev ContractibleSectionsUnitComplex :=
+  (𝟙_ (CochainComplex (ModuleCat.{max c v r} (R.obj.obj U)) ℤ)) ≅
+    ((contractibleModuleEvaluation.{c, v, r} J R U).mapHomologicalComplex
+      (ComplexShape.up ℤ)).obj (ringedTensorUnitComplex.{c, v, r} J R)
+
+/-- The canonical termwise localization, with its fixed unit, is total right derived sections.
+Source: HRS Lemma 4.1(1), Stacks 079P
+(blueprint: lem-zl-contractible-derived-sections-tensor). -/
+def ContractibleSectionsRightDerived : Prop :=
+  Functor.IsRightDerivedFunctor
+    (contractibleModuleEvaluation.{c, v, r} J R U).mapDerivedCategory
+      (contractibleModuleEvaluation.{c, v, r} J R U).mapDerivedCategoryFactorsh.inv
+      (HomotopyCategory.quasiIso (RingedTensorModules.{c, v, r} J R) (ComplexShape.up ℤ))
+
+private theorem contractibleSectionsRightDerived_of_exact :
+    ContractibleSectionsRightDerived.{c, v, r} J R U := by
+  exact Functor.isRightDerivedFunctor_of_inverts
+    (HomotopyCategory.quasiIso (RingedTensorModules.{c, v, r} J R) (.up ℤ))
+    (contractibleModuleEvaluation.{c, v, r} J R U).mapDerivedCategory
+    (contractibleModuleEvaluation.{c, v, r} J R U).mapDerivedCategoryFactorsh
+
+private theorem contractibleSectionsNativeCoherence :
+    ∃ S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, r, max c v r} J R),
+      S.monoidal = RingedDerivedNative.monoidal.{c, v, r, max c v r} J R ∧
+      ∃ T : CoefficientTensorModels.{r, c, v, max c v r} J R S,
+        ∃ β : @SymmetricCategory (DerivedCategory (RingedTensorModules.{c, v, r} J R))
+          _ S.monoidal,
+        ∃ hc : RingedDerivedTensorCoherence.{c, v, r, max c v r} J R S T β,
+          HEq β (RingedDerivedNative.symmetric.{c, v, r, max c v r} J R) ∧
+          HEq hc.unitIso (RingedDerivedNative.unitIso.{c, v, r, max c v r} J R) ∧
+          (∀ (P Q : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ)
+            (hP : P.IsKFlatIndependentCoefficients) (hQ : Q.IsKFlatIndependentCoefficients),
+            HEq (T.iso J R S P Q hP hQ)
+              (RingedDerivedNative.tensorIso.{c, v, r, max c v r} J R P Q (Or.inl hP))) := by
+  set_option backward.isDefEq.respectTransparency true in
+  set_option backward.isDefEq.respectTransparency.types true in
+    obtain ⟨⟨m, adj, ev⟩, hm, T, hT⟩ :=
+      RingedDerivedNative.closedAdjunction.{c, v, r, max c v r} J R
+    dsimp only [CoefficientClosedStructure.monoidal] at hm
+    subst m
+    let S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, r, max c v r} J R) :=
+      ⟨RingedDerivedNative.monoidal.{c, v, r, max c v r} J R, adj, ev⟩
+    let : MonoidalCategory (DerivedCategory (RingedTensorModules.{c, v, r} J R)) :=
+      RingedDerivedNative.monoidal.{c, v, r, max c v r} J R
+    let : SymmetricCategory (DerivedCategory (RingedTensorModules.{c, v, r} J R)) :=
+      RingedDerivedNative.symmetric.{c, v, r, max c v r} J R
+    let : (DerivedCategory.Q : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ ⥤
+        DerivedCategory (RingedTensorModules.{c, v, r} J R)).LaxMonoidal :=
+      RingedDerivedNative.lax.{c, v, r, max c v r} J R
+    have ht : T.comparison = RingedDerivedNative.comparison.{c, v, r, max c v r} J R :=
+      eq_of_heq hT
+    have htensor : ∀ P Q hP hQ,
+        T.iso J R S P Q hP hQ =
+          RingedDerivedNative.tensorIso.{c, v, r, max c v r} J R P Q (Or.inl hP) := by
+      intro P Q hP hQ
+      unfold CoefficientTensorModels.iso
+      rw [ht]
+      exact RingedDerivedNative.comparison_app.{c, v, r, max c v r} J R ⟨P, hP⟩ ⟨Q, hQ⟩
+    have hc := RingedDerivedNative.complexConstraints.{c, v, r} J R
+    refine ⟨S, rfl, T, RingedDerivedNative.symmetric.{c, v, r, max c v r} J R, {
+      tensorIso := RingedDerivedNative.tensorIso.{c, v, r, max c v r} J R
+      tensorIso_both := ?_
+      tensorIso_naturality := RingedDerivedNative.tensorIso_naturality.{c, v, r, max c v r} J R
+      unitIso := RingedDerivedNative.unitIso.{c, v, r, max c v r} J R
+      symmetry_model := ?_
+      associator_model := ?_
+      leftUnitor_model := ?_
+      rightUnitor_model := ?_ }, HEq.rfl, HEq.rfl, (fun P Q hP hQ ↦ heq_of_eq (htensor P Q hP hQ))⟩
+    · intro P Q hP hQ
+      exact (htensor P Q hP hQ).symm
+    · intro P Q hP hQ
+      refine ⟨β_ P Q, hc.symmetry P Q, ?_⟩
+      rw [htensor P Q hP hQ, htensor Q P hQ hP]
+      exact RingedDerivedNative.symmetry_square.{c, v, r, max c v r} J R P Q hP hQ
+    · intro P Q N hP hQ hN
+      refine ⟨MonoidalCategory.associator P Q N, hc.associator P Q N, ?_⟩
+      rw [htensor P Q hP hQ, htensor Q N hQ hN]
+      exact RingedDerivedNative.associator_square.{c, v, r, max c v r} J R P Q N hP hQ hN
+    · intro P hP
+      refine ⟨MonoidalCategory.leftUnitor P, ?_, ?_⟩
+      · exact hc.leftUnitor P
+      · exact RingedDerivedNative.leftUnitor_square.{c, v, r, max c v r} J R P hP
+    · intro P hP
+      refine ⟨MonoidalCategory.rightUnitor P, ?_, ?_⟩
+      · exact hc.rightUnitor P
+      · exact RingedDerivedNative.rightUnitor_square.{c, v, r, max c v r} J R P hP
 
 variable [HasDerivedCategory.{max c v r} (RingedTensorModules.{c, v, r} J R)]
   [HasDerivedCategory.{max c v r} (ModuleCat.{max c v r} (R.obj.obj U))]

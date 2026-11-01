@@ -119,6 +119,11 @@ import all Mathlib.Algebra.Category.ModuleCat.Presheaf.Pushforward
 import all Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import all Mathlib.CategoryTheory.Sites.CoverLifting
 import all WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
+public import WeilConjectures.AlgebraicGeometry.Picard.KFlatRingedToposPullback
+public import WeilConjectures.ProperBaseChange.FlatAlgebraicInverseImageOfUniverses
+public import WeilConjectures.ProperBaseChange.GeometricModuleConstruction
+public import WeilConjectures.SmoothPurity.CochainInverseComparison
+public import WeilConjectures.SmoothPurity.ProEtaleWeaklyEtaleLocalization
 
 /-! # Construction of open operation models -/
 
@@ -1378,6 +1383,82 @@ private theorem exactTensorTotalIso_hom_app
     (exactTensorTotalIso L μ hn V adj).hom.app (P, Q) = tensorPullbackTotal L μ hn P Q := by
   unfold exactTensorTotalIso
   rfl
+
+private theorem tensorComparisonOfExact_exists
+    {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]
+    [EssentiallySmall.{u + 1} C] [EssentiallySmall.{u + 1} D]
+    {J : GrothendieckTopology C} {K : GrothendieckTopology D}
+    (R : Sheaf J CommRingCat.{u + 1}) (S : Sheaf K CommRingCat.{u + 1})
+    (a : TensorModel R) (b : TensorModel S)
+    (L : Mod R ⥤ Mod S) [L.Additive] (d : ExactModel L)
+    (V : Mod S ⥤ Mod R) (adj : L ⊣ V)
+    (hf : ∀ P, resolving R P → resolving S ((L.mapHomologicalComplex (.up ℤ)).obj P))
+    (μ : ∀ M N : Mod R, L.obj (((tensor R).obj M).obj N) ≅
+      ((tensor S).obj (L.obj M)).obj (L.obj N))
+    (hμ : ∀ {M M' N N' : Mod R} (f : M ⟶ M') (g : N ⟶ N'),
+      L.map (((tensor R).map f).app N ≫ ((tensor R).obj M').map g) ≫ (μ M' N').hom =
+        (μ M N).hom ≫ ((tensor S).map (L.map f)).app (L.obj N) ≫
+          ((tensor S).obj (L.obj M')).map (L.map g)) :
+    Nonempty (TensorComparison L d a b μ) := by
+  let := monoidalCategory R
+  let := monoidalCategory S
+  have := a.preadditive
+  have := b.preadditive
+  have hn {M M' N N' : Mod R} (f : M ⟶ M') (g : N ⟶ N') :
+      L.map (f ⊗ₘ g) ≫ (μ M' N').hom =
+        (μ M N).hom ≫ (L.map f ⊗ₘ L.map g) := by
+    simpa only [AlgebraicGeometry.Scheme.ProjectionRestriction.tensor,
+      curriedTensor_obj_map, curriedTensor_map_app,
+      tensorHom_def, Category.assoc] using hμ f g
+  let F := L.mapHomologicalComplex (.up ℤ)
+  let LF := d.functor
+  let eps : DerivedCategory.Q ⋙ LF ⟶ F ⋙ DerivedCategory.Q :=
+    d.factors.hom
+  let β := fun P Q ↦ tensorPullbackTotal L μ hn P Q
+  let b₀ : (F.prod F) ⋙ total S ≅ total R ⋙ F := exactTensorTotalIso L μ hn V adj
+  let ff := resolvingQQ_fullyFaithful R (Der S)
+  obtain ⟨α, ha⟩ := tensorDescentNormalized
+    DerivedCategory.Q DerivedCategory.Q F LF eps (resolving R) (resolving S) hf ff
+    (total R) (total S) a.functor b.functor a.representative b.representative b₀
+    (fun P _ ↦ by dsimp only [eps]; infer_instance)
+    (fun P Q _ _ ↦ by dsimp only [eps]; infer_instance)
+  have hc (P Q : CochainComplex (Mod R) ℤ) (n k : ℤ) :
+      totalComponent a b L μ P Q n ≫ L.map (((total R).obj (P, Q)).d n k) =
+        ((total S).obj (F.obj P, F.obj Q)).d n k ≫ totalComponent a b L μ P Q k :=
+    tensorPullbackTotalComponent_comm L μ hn P Q n k
+  refine ⟨{ preserves := hf, comparison := α, comm := hc, representative := ?_ }⟩
+  intro P Q hp hq
+  have ht : totalMap a b L μ hc P Q = β P Q := by
+    rfl
+  change LF.map (a.representative.hom.app (⟨P, hp⟩, ⟨Q, hq⟩)) ≫
+    α.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≫
+    b.functor.map (CategoryTheory.Prod.mkHom (eps.app P) (eps.app Q)) ≫
+    b.representative.inv.app (⟨F.obj P, hf P hp⟩, ⟨F.obj Q, hf Q hq⟩) ≫
+      DerivedCategory.Q.map (totalMap a b L μ hc P Q) = _
+  rw [ht]
+  have hh := ha P Q hp hq
+  dsimp only [b₀, CategoryTheory.Functor.comp_obj] at hh
+  rw [exactTensorTotalIso_hom_app] at hh
+  exact hh
+
+private theorem restrictionTensorComparison_exists {m : Mode} {U X : Scheme.{u}}
+    (j : U ⟶ X) [IsOpenImmersion j]
+    (R : Sheaf (topology m X) CommRingCat.{u + 1})
+    (a : TensorModel R) (b : TensorModel (restrictRing m j R))
+    (μ : ∀ M N : Mod R, (restrict m j R).obj (((tensor R).obj M).obj N) ≅
+      ((tensor (restrictRing m j R)).obj ((restrict m j R).obj M)).obj
+        ((restrict m j R).obj N))
+    (hμ : ∀ {M M' N N' : Mod R} (f : M ⟶ M') (g : N ⟶ N'),
+      (restrict m j R).map (((tensor R).map f).app N ≫ ((tensor R).obj M').map g) ≫
+          (μ M' N').hom =
+        (μ M N).hom ≫ ((tensor (restrictRing m j R)).map
+          ((restrict m j R).map f)).app ((restrict m j R).obj N) ≫
+          ((tensor (restrictRing m j R)).obj ((restrict m j R).obj M')).map
+            ((restrict m j R).map g)) :
+    Nonempty (TensorComparison (restrict m j R) (restrictionModel j R) a b μ) := by
+  exact tensorComparisonOfExact_exists R (restrictRing m j R) a b (restrict m j R)
+    (restrictionModel j R) _ (openRestrictionAdjunction m j R)
+    (restriction_preserves_resolving j R) μ hμ
 
 section
 attribute [local irreducible] SheafOfModules.monoidalCategory

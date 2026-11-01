@@ -162,6 +162,8 @@ public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.AlgebraicGeometry.AdicStratifiedPerfectData
 import all WeilConjectures.AlgebraicGeometry.Integral.IntegralCriterionReductionsSupplement
 public import WeilConjectures.AlgebraicGeometry.IntegralConstantModelRealization
+public import WeilConjectures.AlgebraicGeometry.Integral.IntegralCompletedCoefficientTransportSupplement
+public import WeilConjectures.AlgebraicGeometry.Picard.DerivedChangeOfRingsIndependentCoefficients
 
 /-! # Canonical integral constant-model realization
 
@@ -183,5 +185,49 @@ namespace AlgebraicGeometry.ProEtale.IntegralConstantModel
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+
+end AlgebraicGeometry.ProEtale.IntegralConstantModel
+
+namespace AlgebraicGeometry.ProEtale.IntegralConstantModel
+
+private noncomputable def restrictionRoundTrip
+    {C : Type*} [Category C] {J : GrothendieckTopology C}
+    {R S : Sheaf J RingCat.{u + 1}} (c : R ≅ S) :
+    SheafOfModules.restrictScalars.{u + 1} c.hom ⋙
+      SheafOfModules.restrictScalars c.inv ≅ 𝟭 (SheafOfModules.{u + 1} S) :=
+  NatIso.ofComponents (fun M ↦ (SheafOfModules.fullyFaithfulForget S).preimageIso
+    (PresheafOfModules.isoMk (fun U ↦
+      (ModuleCat.restrictScalarsComp'App (c.inv.hom.app U).hom
+        (c.hom.hom.app U).hom (RingHom.id _) (by
+          have h := congr_app (congrArg (fun f : S ⟶ S ↦ f.hom) c.inv_hom_id) U
+          exact (congrArg RingCat.Hom.hom h).symm) (M.val.obj U)).symm ≪≫
+        ModuleCat.restrictScalarsId'App (RingHom.id _) rfl (M.val.obj U))
+      (by intro U V f; ext x; rfl)))
+    (by intro M N f; ext U x; rfl)
+
+private theorem restrictionTriangle
+    {C : Type*} [Category C] {J : GrothendieckTopology C}
+    {R S : Sheaf J RingCat.{u + 1}} (c : R ≅ S) (M : SheafOfModules.{u + 1} S) :
+    (SheafOfModules.restrictScalars c.hom).map ((restrictionRoundTrip c).inv.app M) ≫
+      (restrictionRoundTrip c.symm).hom.app
+        ((SheafOfModules.restrictScalars c.hom).obj M) = 𝟙 _ := by
+  ext U x
+  rfl
+
+private noncomputable def restrictionEquivalence
+    {C : Type*} [Category C] {J : GrothendieckTopology C}
+    {R S : Sheaf J RingCat.{u + 1}} (c : R ≅ S) :
+    SheafOfModules.{u + 1} S ≌ SheafOfModules.{u + 1} R where
+  functor := SheafOfModules.restrictScalars c.hom
+  inverse := SheafOfModules.restrictScalars c.inv
+  unitIso := (restrictionRoundTrip c).symm
+  counitIso := restrictionRoundTrip c.symm
+  functor_unitIso_comp := restrictionTriangle c
+
+private theorem restriction_isEquivalence
+    {C : Type*} [Category C] {J : GrothendieckTopology C}
+    {R S : Sheaf J RingCat.{u + 1}} (c : R ≅ S) :
+    (SheafOfModules.restrictScalars.{u + 1} c.hom).IsEquivalence :=
+  (restrictionEquivalence c).isEquivalence_functor
 
 end AlgebraicGeometry.ProEtale.IntegralConstantModel
