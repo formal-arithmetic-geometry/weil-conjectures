@@ -38,6 +38,7 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 import WeilConjectures.AlgebraicGeometry.IntegralDirectImageTower.IntegralTowerOrdinaryPullback
 import WeilConjectures.AlgebraicGeometry.IntegralDirectImageTower.IntegralTowerDerivedPullback
+public import WeilConjectures.AlgebraicGeometry.Picard.KFlatResolutionIndependentCoefficients
 
 /-! # Unique normalized scalar/pullback comparison -/
 
@@ -89,6 +90,83 @@ private theorem flat_iso {T : Scheme.{u}} {M N : spIntegralSectionModules l E T}
     ((MonoidalCategory.tensoringRight (spIntegralSectionModules l E T)).mapIso e) hM'
   exact (exactFunctor _ _).prop_of_iso
     (siteSheafTensorRightIso (spIntegralSectionRing l E T) N).symm hN
+
+private theorem geometric_hom_ext {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (M : Modules l E Y) (N : spIntegralSectionModules l E X)
+    (a b : (spIntegralModuleEquivalence l E X).functor.obj
+      ((CondensedRing.upperStar (spIntegralCondensed l E) f).obj M) ⟶ N)
+    (h : ∀ (V : Y.ProEt)
+      (x : ((spIntegralModuleEquivalence l E Y).functor.obj M).val.obj (op V)),
+      a.val.app (op ((Scheme.proEtaleBaseChange f).obj V))
+        (((CondensedRing.upperStarLowerStarAdjunction (spIntegralCondensed l E) f).unit.app
+          M).hom.hom.app (op V) x) =
+      b.val.app (op ((Scheme.proEtaleBaseChange f).obj V))
+        (((CondensedRing.upperStarLowerStarAdjunction (spIntegralCondensed l E) f).unit.app
+          M).hom.hom.app (op V) x)) : a = b := by
+  classical
+  let F := (spIntegralModuleEquivalence l E X).functor
+  let N' := F.objPreimage N
+  let e := F.objObjPreimageIso N
+  let a' := F.preimage (a ≫ e.inv)
+  let b' := F.preimage (b ≫ e.inv)
+  have ha : F.map a' = a ≫ e.inv := F.map_preimage _
+  have hb : F.map b' = b ≫ e.inv := F.map_preimage _
+  have he : a' = b' := by
+    apply ((CondensedRing.upperStarLowerStarAdjunction
+      (spIntegralCondensed l E) f).homEquiv M N').injective
+    apply Mod.hom_ext
+    apply Sheaf.hom_ext
+    apply NatTrans.ext
+    funext V
+    ext x
+    rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
+    have haV := congrArg (fun z ↦ z.val.app
+      (op ((Scheme.proEtaleBaseChange f).obj V.unop))
+      (((CondensedRing.upperStarLowerStarAdjunction (spIntegralCondensed l E) f).unit.app
+        M).hom.hom.app V x)) ha
+    have hbV := congrArg (fun z ↦ z.val.app
+      (op ((Scheme.proEtaleBaseChange f).obj V.unop))
+      (((CondensedRing.upperStarLowerStarAdjunction (spIntegralCondensed l E) f).unit.app
+        M).hom.hom.app V x)) hb
+    change a'.hom.hom.app _ _ = b'.hom.hom.app _ _
+    exact haV.trans ((congrArg (e.inv.val.app
+      (op ((Scheme.proEtaleBaseChange f).obj V.unop))) (h V.unop x)).trans hbV.symm)
+  apply (cancel_mono e.inv).mp
+  exact ha.symm.trans ((congrArg F.map he).trans hb)
+
+private theorem scalar_geometric_hom_ext (s : Presentation l E)
+    {X Y : Scheme.{u}} (f : X ⟶ Y) (M : Modules l E Y) (n : ℕ)
+    (N : Scheme.proEtaleRingModules X (SpTowerShriek.B l E X n))
+    (a b : (ordinaryLevel l E s X n).obj
+      ((CondensedRing.upperStar (spIntegralCondensed l E) f).obj M) ⟶ N)
+    (h : ∀ (V : Y.ProEt)
+      (x : ((spIntegralModuleEquivalence l E Y).functor.obj M).val.obj (op V)),
+      a.val.app (op ((Scheme.proEtaleBaseChange f).obj V))
+        (systemModelTmul ((s.towers X).scalar
+          (spIntegralReductionScalar l E X (s.reduction X).coefficient n)).model
+          ((spIntegralModuleEquivalence l E X).functor.obj
+            ((CondensedRing.upperStar (spIntegralCondensed l E) f).obj M))
+          (op ((Scheme.proEtaleBaseChange f).obj V)) 1
+          (((CondensedRing.upperStarLowerStarAdjunction (spIntegralCondensed l E) f).unit.app
+            M).hom.hom.app (op V) x)) =
+      b.val.app (op ((Scheme.proEtaleBaseChange f).obj V))
+        (systemModelTmul ((s.towers X).scalar
+          (spIntegralReductionScalar l E X (s.reduction X).coefficient n)).model
+          ((spIntegralModuleEquivalence l E X).functor.obj
+            ((CondensedRing.upperStar (spIntegralCondensed l E) f).obj M))
+          (op ((Scheme.proEtaleBaseChange f).obj V)) 1
+          (((CondensedRing.upperStarLowerStarAdjunction (spIntegralCondensed l E) f).unit.app
+            M).hom.hom.app (op V) x))) : a = b := by
+  let A := (s.towers X).scalar
+    (spIntegralReductionScalar l E X (s.reduction X).coefficient n)
+  apply (A.ordinaryAdj.homEquiv _ N).injective
+  apply geometric_hom_ext l E f M
+  intro V x
+  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
+  change a.val.app _ ((A.ordinaryAdj.unit.app _).val.app _ _) =
+    b.val.app _ ((A.ordinaryAdj.unit.app _).val.app _ _)
+  rw [A.unit_normalized]
+  exact h V x
 
 set_option maxHeartbeats 1600000 in
 -- Comparing the recorded sheaf-module presentations requires additional reduction steps.

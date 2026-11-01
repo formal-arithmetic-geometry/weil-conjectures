@@ -614,7 +614,58 @@ theorem integralFiniteEtale_level_models
               f).mapDerivedCategory.obj
                 ((AdicCompletion.derivedReduction l E X n).obj K)) ≅
           (Scheme.adicFinitePullback.{u, u} Y
-            (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))).obj (C n)) := by sorry
+            (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))).obj (C n)) := by
+  classical
+  let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
+  let e (n : ℕ) : FiniteDiscreteOrdinary.Encoding
+      (Padic.coefficientExtensionRing l E (n + 1)) Y := by
+    let A := Padic.coefficientExtensionRing l E (n + 1)
+    let : Finite A := Padic.finite_coefficientExtensionRing l E (n + 1) (by omega)
+    let : DiscreteTopology A := DerivedNakayama.quotientDiscrete l E (n + 1)
+    exact (FiniteDiscreteOrdinary.encoding_exists A Y).some
+  have hex (n : ℕ) : ∃ C : integralFiniteEtaleModel l E Y n,
+      (∃ c d : ℤ, ∀ q : ℤ, q < c ∨ d < q →
+        IsZero ((coefficientModelCohomology _ q).obj C)) ∧
+      (∀ q : ℤ, SheafOfModules.IsLocallyConstantFiniteTypeModules
+        (Scheme.smallModelComparisonEtaleTopology.{u, u} Y)
+        (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))
+        ((coefficientModelCohomology _ q).obj C)) ∧
+      HasCoefficientModelTorAmplitude _ C a b ∧ Nonempty
+        ((Scheme.adicFinitePullback.{u, u} Y
+          (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))).obj C ≅
+          (IntegralFiniteEncoding.finiteEncodingDerived
+            (Padic.coefficientExtensionRing l E (n + 1)) Y (e n)).obj
+            ((CondensedRing.upperStar (DerivedNakayama.quotientRing l E (n + 1))
+              f).mapDerivedCategory.obj
+                ((AdicCompletion.derivedReduction l E X n).obj K))) := by
+    let A := Padic.coefficientExtensionRing l E (n + 1)
+    let B := ULift.{u + 1} A
+    let : Finite A := Padic.finite_coefficientExtensionRing l E (n + 1) (by omega)
+    let : DiscreteTopology A := DerivedNakayama.quotientDiscrete l E (n + 1)
+    let P := (AdicCompletion.derivedReduction l E X n).obj K
+    let U := CondensedRing.upperStar (DerivedNakayama.quotientRing l E (n + 1)) f
+    let L := U.mapDerivedCategory.obj P
+    let F := IntegralFiniteEncoding.finiteEncodingFunctor A Y (e n)
+    let M := (IntegralFiniteEncoding.finiteEncodingDerived A Y (e n)).obj L
+    have htL : DerivedCategory.torAmplitudeIn _ a b L :=
+      DerivedCategory.torAmplitudeIn_mapDerivedCategory_obj U (hlevels n).2
+    have htM := encoded_tor A Y (e n) L a b hab htL
+    have hfM (q : ℤ) : IsCoefficientModelLocallyConstantFinite
+        (Scheme.coefficientProEtaleModelTopology.{u, u} Y) B
+        ((coefficientModelFixedScalars _ B).obj ((coefficientModelCohomology _ q).obj M)) := by
+      let i : F.obj (U.obj ((DerivedCategory.homologyFunctor _ q).obj P)) ≅
+          (coefficientModelCohomology _ q).obj M :=
+        F.mapIso ((U.mapDerivedCategoryHomologyFunctorIso q).app P) ≪≫
+          (F.mapDerivedCategoryHomologyFunctorIso q).app L
+      exact coefficientProEtale_finite_iso B ((coefficientModelFixedScalars _ B).mapIso i)
+        (encoded_local_models A Y (e n) _ (hlisse n q))
+    have hcM : coefficientBoundedConstructibleProEtale.{u, u} Y B M :=
+      ⟨fun q ↦ finite_lisse_constructible Y B _ (hfM q), a, b, hab,
+        Scheme.adicFiniteTor_cohomology_bounds _ _ a b htM⟩
+    exact finite_lisse_origin Y B M a b hcM htM hfM
+  choose C hC using hex
+  exact ⟨e, C, fun n ↦ ⟨(hC n).1, (hC n).2.1, (hC n).2.2.1⟩,
+    fun n ↦ ⟨(hC n).2.2.2.some.symm⟩⟩
 
 private theorem canonical_coefficient_naturality
     (A B : Type u) [CommRing A] [CommRing B]
@@ -910,7 +961,54 @@ theorem integralFiniteEtale_level_compatibility
         ((Scheme.adicFiniteExtension
           (Scheme.smallModelComparisonEtaleTopology.{u, u} Y)
           (IntegralSmallPerfect.uliftRingMap
-            (Padic.coefficientExtensionTransition l E (n + 1)))).obj (C (n + 1)) ≅ C n) := by sorry
+            (Padic.coefficientExtensionTransition l E (n + 1)))).obj (C (n + 1)) ≅ C n) := by
+  classical
+  let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
+  intro e C hC henc n
+  let A := Padic.coefficientExtensionRing l E (n + 2)
+  let B := Padic.coefficientExtensionRing l E (n + 1)
+  let g : A →+* B := Padic.coefficientExtensionTransition l E (n + 1)
+  let g' := IntegralSmallPerfect.uliftRingMap g
+  let T := Scheme.smallModelComparisonEtaleTopology.{u, u} Y
+  let J := Scheme.coefficientProEtaleModelTopology.{u, u} Y
+  let FB := Scheme.adicFinitePullback.{u, u} Y (ULift.{u + 1} B)
+  let GE := Scheme.adicFiniteExtension T g'
+  let GP := Scheme.adicFiniteExtension J g'
+  let P (i : ℕ) :=
+    (CondensedRing.upperStar (DerivedNakayama.quotientRing l E (i + 1)) f).mapDerivedCategory.obj
+       ((AdicCompletion.derivedReduction l E X i).obj K)
+  have hp : (Functor.const Profinite.{u}ᵒᵖ).map
+      (AddCommGrpCat.ofHom g'.toAddMonoidHom) ≫ FiniteDiscreteOrdinary.pointConstants B =
+        FiniteDiscreteOrdinary.pointConstants A ≫ (AdicCompletion.transitionRing l E n).hom := by
+    ext S a
+    rfl
+  let ce := encoding_extension A B Y g (AdicCompletion.transitionRing l E n)
+    (e (n + 1)) (e n) hp
+  let ρ : GP.obj ((IntegralFiniteEncoding.finiteEncodingDerived A Y (e (n + 1))).obj
+      (P (n + 1))) ≅ (IntegralFiniteEncoding.finiteEncodingDerived B Y (e n)).obj (P n) :=
+    (ce.app (P (n + 1))).symm ≪≫
+      (IntegralFiniteEncoding.finiteEncodingDerived B Y (e n)).mapIso
+        (restricted_level_transition l E f K n)
+  let i : FB.obj (GE.obj (C (n + 1))) ≅ FB.obj (C n) :=
+    (Scheme.adicFiniteComparison.{u, u} Y g').symm.app (C (n + 1)) ≪≫
+      GP.mapIso (henc (n + 1)).some.symm ≪≫ ρ ≪≫ (henc n).some
+  let R := ConstantCompletion.constant T (ULift.{u + 1} B)
+  let bounded := coefficientCohomologyBounded R
+  have hff (K L) (hK : bounded K) (hL : bounded L) :
+      Function.Bijective (FB.map : (K ⟶ L) → _) :=
+    (coefficientComparison_boundedClassical Y (ULift.{u + 1} B) FB
+      (Scheme.adicExactComparison Y (ULift.{u + 1} B))).1 K L hK hL
+  have hc : bounded (C n) := by
+    obtain ⟨c, d, hc⟩ := (hC n).1
+    exact ⟨min c d, d, min_le_right _ _, fun q hq ↦ hc q (by
+      rcases hq with hq | hq
+      · exact Or.inl (lt_of_lt_of_le hq (min_le_left _ _))
+      · exact Or.inr hq)⟩
+  have he : bounded (GE.obj (C (n + 1))) :=
+    ⟨a, b, hab, Scheme.adicScalarExtension_bound T g' (C (n + 1)) a b
+      (hC (n + 1)).2.2⟩
+  obtain ⟨t, _⟩ := Scheme.liftIsoOnProperty FB bounded hff _ _ he hc i
+  exact ⟨t⟩
 
 /-- Finite levels with lisse finite cohomology have compatible normalized etale origins.
 The statement concerns only finite coefficient complexes and their quotient maps.

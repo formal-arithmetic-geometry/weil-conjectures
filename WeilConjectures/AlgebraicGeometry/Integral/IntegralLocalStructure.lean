@@ -804,6 +804,10 @@ public import WeilConjectures.SixFunctors.ContinuousScalarFinitePresentation
 public import WeilConjectures.SixFunctors.InternalPerfectHomLimitSurjective
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsPull
 public import WeilConjectures.SmoothPurity.CoefficientLocallyConstantCounit
+public import WeilConjectures.AlgebraicGeometry.StrictCompletionRestriction.StrictCompletionRestrictionLimits
+public import WeilConjectures.AlgebraicGeometry.StrictCompletionRestriction.StrictIntegralCompletionPresentation
+public import WeilConjectures.AlgebraicGeometry.StrictCompletionRestriction.StrictIntegralScalarPullback
+public import WeilConjectures.AlgebraicGeometry.StrictCompletionRestriction.StrictScalarCompletionFunctorComparison
 
 /-! # Integral local structure for continuous coefficient complexes
 
@@ -1116,16 +1120,22 @@ private theorem restriction_complete
     (K : DerivedCategory (Modules l E Y)) (hK : IsDerivedComplete l E Y K) :
     IsDerivedComplete l E X
       ((CondensedRing.upperStar (DerivedNakayama.integerRing l E) f).mapDerivedCategory.obj K) := by
-  obtain ⟨S, hS, _, _, hrestrict⟩ :=
-    StrictCompletionRestriction.strict_completion_restriction_comparison l E
-  have hiff (Z : Scheme.{u}) (M : DerivedCategory (Modules l E Z)) :
-      IsDerivedComplete l E Z M ↔ IsIso ((S Z).unit.app M) := by
-    obtain ⟨_, _, _, _, _, _, hcomp⟩ := hS Z
-    exact CompletionTriangle.complete_iff_from_comparison l E Z _ _ hcomp M
-  obtain ⟨_, ⟨c⟩⟩ := hrestrict f (.of f hf)
-  apply (hiff X _).mpr
+  classical
+  obtain ⟨S, hS⟩ := StrictCompletionRestriction.strictIntegralCompletionPresentation l E Y
+  obtain ⟨T, hT⟩ := StrictCompletionRestriction.strictIntegralCompletionPresentation l E X
+  let F := CondensedRing.upperStar (DerivedNakayama.integerRing l E) f
+  let : PreservesLimitsOfSize.{u + 1, u + 1} F :=
+    StrictCompletionRestriction.strictCompletionRestrictionLimits _ f (.of f hf)
+  let : PreservesLimitsOfSize.{0, 0} F := preservesLimitsOfSize_shrink F
+  obtain ⟨c⟩ := StrictCompletionRestriction.strictScalarCompletionFunctorComparison F S T
+    (StrictCompletionRestriction.strictIntegralScalarPullback l E f S T hS hT)
+    (fun _ ↦ inferInstance)
+  obtain ⟨_, _, _, _, _, _, hScomp⟩ := hS
+  obtain ⟨_, _, _, _, _, _, hTcomp⟩ := hT
+  apply (CompletionTriangle.complete_iff_from_comparison l E X _ _ hTcomp _).mpr
   rw [← c.unit K]
-  let : IsIso ((S Y).unit.app K) := (hiff Y K).mp hK
+  let : IsIso (S.unit.app K) :=
+    (CompletionTriangle.complete_iff_from_comparison l E Y _ _ hScomp K).mp hK
   infer_instance
 
 private def reductionPullbackIso

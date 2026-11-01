@@ -245,6 +245,12 @@ private def reductionCounit (s : Presentation l E) (T : Scheme.{u}) :
     V.mapDerivedCategoryFactors.hom
   exact a ≫ b ≫ c
 
+private theorem reductionCounit_app (s : Presentation l E) (T : Scheme.{u})
+    (P : CochainComplex (Modules l E T) ℤ) :
+    (reductionCounit l E s T).app P = reductionComplexComparison l E s T P := by
+  simp only [reductionCounit, reductionComplexComparison, NatTrans.comp_app,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.map_comp, Category.assoc]
+
 set_option maxHeartbeats 1600000 in
 -- Elaborating the fixed section equivalence and its tensor structures needs this budget.
 set_option synthInstance.maxHeartbeats 200000 in
@@ -261,6 +267,39 @@ private theorem reduction_comparison_isIso (s : Presentation l E) (T : Scheme.{u
   have := (s.reduction T).computes _ hP
   unfold reductionComplexComparison
   infer_instance
+
+private theorem internal_kflat_iff (T : Scheme.{u}) (P : CochainComplex (Modules l E T) ℤ) :
+    (HomologicalComplex.quasiIso (Modules l E T) (.up ℤ)).kFlat P ↔
+      CochainComplex.IsKFlatIndependentCoefficients (R := spIntegralSectionRing l E T)
+        (((spIntegralModuleEquivalence l E T).functor.mapHomologicalComplex (.up ℤ)).obj P) := by
+  obtain ⟨_, e, e₀, _, _, _, _, _, _, _, _, _, _, hk⟩ :=
+    InternalAbelianSheafModule.internal_section_tensor_comparison
+      (Scheme.ProEt.topology T) (condensedRingObj (spIntegralCondensed l E) T)
+  rw [← hk P, ← HomotopyCategory.kFlat_quotient_obj_iff,
+    HomotopyCategory.kFlat_iff_preserves_acyclic]
+  constructor
+  · intro h A hA
+    exact (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic _).1
+      (h _ ((HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic A).2 hA)).2
+  · intro h A hA
+    obtain ⟨A, rfl⟩ := A.quotient_obj_surjective
+    rw [HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic] at hA
+    have ht := (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic _).2
+      (h A hA)
+    exact ⟨(HomotopyCategory.subcategoryAcyclic _).prop_of_iso
+      (β_ _ _) ht, ht⟩
+
+private theorem pullback_kflat {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (P : CochainComplex (Modules l E Y) ℤ)
+    (hP : CochainComplex.IsKFlatIndependentCoefficients (R := spIntegralSectionRing l E Y)
+      (((spIntegralModuleEquivalence l E Y).functor.mapHomologicalComplex (.up ℤ)).obj P)) :
+    CochainComplex.IsKFlatIndependentCoefficients (R := spIntegralSectionRing l E X)
+      (((spIntegralModuleEquivalence l E X).functor.mapHomologicalComplex (.up ℤ)).obj
+        (((CondensedRing.upperStar (spIntegralCondensed l E) f).mapHomologicalComplex
+          (.up ℤ)).obj P)) := by
+  apply (internal_kflat_iff l E X _).1
+  exact CondensedRing.kFlat_upperStar_mapHomologicalComplex_obj
+    (spIntegralCondensed l E) f ((internal_kflat_iff l E Y P).2 hP)
 
 set_option maxHeartbeats 1600000 in
 -- Elaborating the fixed section equivalence and its tensor structures needs this budget.

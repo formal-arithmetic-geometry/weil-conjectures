@@ -12,6 +12,12 @@ public import WeilConjectures.AlgebraicGeometry.ChosenCartesianSquare
 public import Mathlib.CategoryTheory.Monoidal.Functor
 public import Mathlib.CategoryTheory.Adjunction.Restrict
 public import WeilConjectures.CategoryTheory.Ringed.RingedDerivedClosedSymmetricMonoidal
+public import WeilConjectures.AlgebraicGeometry.Sf.SfFiniteExceptionalInverseImage
+public import WeilConjectures.SixFunctors.Exceptional.ExceptionalFiniteIntrinsicBounds
+public import WeilConjectures.SixFunctors.Supporting.SixFunctorOperationDatumStages
+public import WeilConjectures.TraceFormula.FiniteGeometricDirectDomain
+public import WeilConjectures.TraceFormula.FiniteGeometricTensorDomain
+public import WeilConjectures.TraceFormula.TraceFormulaFiniteDerivedOperations
 
 /-! # Geometric comparison data
 
@@ -139,8 +145,19 @@ def exceptionalCtf
       (Nat.succ_le_succ (Nat.zero_le n)))
     {X Y : TraceFormulaGeometricSpace F} (f : X ⟶ Y)
     : Ctf F l E n Y ⥤ Ctf F l E n X :=
-  sfStabilityFiniteExceptional F l hl E n X.obj.obj Y.obj.obj f.hom.hom
-    (TraceFormulaGeometricSpace.compactification G f)
+  letI : X.obj.obj.left.Over (Spec (.of F.k)) := ⟨X.obj.obj.hom⟩
+  letI : Y.obj.obj.left.Over (Spec (.of F.k)) := ⟨Y.obj.obj.hom⟩
+  letI : f.hom.hom.left.IsOver (Spec (.of F.k)) := ⟨Over.w f.hom.hom⟩
+  letI : LocallyOfFiniteType (X.obj.obj.left ↘ Spec (.of F.k)) := X.obj.property.1
+  letI : QuasiCompact (X.obj.obj.left ↘ Spec (.of F.k)) := X.obj.property.2
+  letI : LocallyOfFiniteType (Y.obj.obj.left ↘ Spec (.of F.k)) := Y.obj.property.1
+  letI : QuasiCompact (Y.obj.obj.left ↘ Spec (.of F.k)) := Y.obj.property.2
+  (domain F l E n X).lift ((domain F l E n Y).ι ⋙
+    ProEtale.sfFiniteExceptional (Padic.coefficientExtensionRing l E (n + 1))
+      (TraceFormulaGeometricSpace.compactification G f))
+    (fun K ↦ by
+      exact finiteGeometricExceptional_domain F l hl E n f.hom.hom.left
+        (TraceFormulaGeometricSpace.compactification G f) K.obj K.property)
 
 /-- The actual ambient tensor, restricted to the two finite-Tor inputs.
 Source: thm-sf-ctf-stability (ii) (blueprint: def-trf-geometric-comparison-data). -/
