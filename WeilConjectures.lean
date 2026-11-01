@@ -13908,6 +13908,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.ClosedSupportTriangle
 public import WeilConjectures.SixFunctors.Etale.Derived.ClosedUpperShriekCoproducts
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChange
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeExchange
+public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeOpenImmersion
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeOpenImmersionSheaf
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeStalk
@@ -13959,6 +13960,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Exchange.BaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange.OpenClosed
 public import WeilConjectures.SixFunctors.Etale.Derived.ExcisionComparison
+public import WeilConjectures.SixFunctors.Etale.Derived.ExtendScalarsDerived
 public import WeilConjectures.SixFunctors.Etale.Derived.FieldExtension.DirectImageBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.FieldExtension.UpperShriekBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.FieldStagePointers
