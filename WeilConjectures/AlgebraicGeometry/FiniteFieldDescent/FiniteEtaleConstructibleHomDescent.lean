@@ -11,6 +11,10 @@ public import Mathlib.FieldTheory.Separable
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.CategoryTheory.Limits.Types.Filtered
+public import WeilConjectures.AlgebraicGeometry.FiniteFieldDescent.FiniteEtaleConstructibleObjectDescent
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 
 /-! # Finite-stage descent and Hom continuity for constructible finite-coefficient complexes
 
@@ -124,5 +128,32 @@ noncomputable def finiteStageHomLeg {L : Type u} [Field L] [Algebra K L]
   (pullValCompIso f E.property.1 Λ).hom.app P₀ ≫
       (pull f Λ (IntermediateField.val E.1)).map u ≫
     (pullValCompIso f E.property.1 Λ).inv.app Q₀
+
+end AlgebraicGeometry.Etale.FiniteFieldDescent
+
+namespace AlgebraicGeometry.Etale.FiniteFieldDescent
+
+private theorem finiteStageHomLeg_map {L : Type u} [Field L] [Algebra K L]
+    (Λ : Type (u + 1)) [CommRing Λ] {E₀ : IntermediateField K L}
+    {P₀ Q₀ : DerivedCategoryModule Λ (scheme f E₀)}
+    (E : finiteStageIndex E₀) (u : P₀ ⟶ Q₀) :
+    finiteStageHomLeg f Λ (E := E)
+        ((pull f Λ (IntermediateField.inclusion E.property.1)).map u) =
+      (pull f Λ (IntermediateField.val E₀)).map u := by
+  unfold finiteStageHomLeg
+  rw [← Functor.comp_map, ← NatTrans.naturality_assoc]
+  simp
+
+private theorem finiteStageHomTransition_map {L : Type u} [Field L] [Algebra K L]
+    (Λ : Type (u + 1)) [CommRing Λ] {E₀ : IntermediateField K L}
+    {P₀ Q₀ : DerivedCategoryModule Λ (scheme f E₀)}
+    {E E' : finiteStageIndex E₀} (h : E ≤ E') (u : P₀ ⟶ Q₀) :
+    finiteStageHomTransition f Λ h
+        ((pull f Λ (IntermediateField.inclusion E.property.1)).map u) =
+      (pull f Λ (IntermediateField.inclusion E'.property.1)).map u := by
+  unfold finiteStageHomTransition
+  dsimp only
+  rw [← Functor.comp_map, ← NatTrans.naturality_assoc]
+  simp
 
 end AlgebraicGeometry.Etale.FiniteFieldDescent
