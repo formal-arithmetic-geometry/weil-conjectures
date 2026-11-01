@@ -14454,6 +14454,9 @@ public import WeilConjectures.SixFunctors.Etale.Perverse.AffinePushforward
 public import WeilConjectures.SixFunctors.Etale.Perverse.Basic
 public import WeilConjectures.SixFunctors.Etale.Perverse.Operations
 public import WeilConjectures.SixFunctors.Etale.Perverse.StalkSupport
+public import WeilConjectures.SixFunctors.Etale.ScalarExtension.Monoidal
+public import WeilConjectures.SixFunctors.Etale.ScalarExtension.Projection
+public import WeilConjectures.SixFunctors.Etale.ScalarExtension.ProjectionIso
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.AlgClosedExtension
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Coefficients
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.ConstantCoefficients
