@@ -42,6 +42,10 @@ open Profinite.CondensedAction
 
 namespace Profinite.CondensedAction.PointedDeletion
 
+/-- The condensed sets in the prescribed size convention.
+Source: blueprint paragraph (3) (blueprint: lem-sfb-pointed-free-deletion-contraction). -/
+abbrev Sets := Sheaf (coherentTopology Profinite.{u}) (Type (u + 1))
+
 /-- The actual finite power, including the terminal zero-fold power.
 Source: blueprint paragraph (3) (blueprint: lem-sfb-pointed-free-deletion-contraction). -/
 def power (X : Sets.{u}) (n : ℕ) : Sets.{u} := ∏ᶜ fun _ : Fin n ↦ X

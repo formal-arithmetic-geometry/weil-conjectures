@@ -48,6 +48,8 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Proper.ProperPr
 import WeilConjectures.SixFunctors.IntegralOnSlice.QcqsCompletionUnitLocality
 import WeilConjectures.SmoothPurity.Sf.SfIntegralConstructibleTriangulated
 import WeilConjectures.SmoothPurity.Qcqs.QcqsCompactSupportRealization
+public import Mathlib.Algebra.CharP.CharAndCard
+public import WeilConjectures.Compactification.FiniteFieldDatum.FiniteFieldFiberSupplement
 
 /-! # The finite and condensed pro-etale projection formulas
 
@@ -419,6 +421,52 @@ def integralMap
       (PurCompactSupport.image (PurCompactSupport.completed l E) c).map
         ((IntegralOnSlice.completionUnit l E X none).app
           (ordinaryInner l E f aX K.obj L.obj)))
+
+private theorem integral_isIso
+    (aX : TensorModel l E X) (aZ : TensorModel l E c.Z) (aY : TensorModel l E Y)
+    (K : sfIntegralConstructibleCategory l E X)
+    (L : sfIntegralConstructibleCategory l E Y) :
+    IsIso (integralMap l E D hl f c aX aZ aY K L) := by
+  have : IsLocallyNoetherian X :=
+    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of D.k))
+  have : IsLocallyNoetherian Y :=
+    LocallyOfFiniteType.isLocallyNoetherian (Y ↘ Spec (.of D.k))
+  have : CompactSpace X :=
+    QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of D.k))
+  have : CompactSpace Y :=
+    QuasiCompact.compactSpace_of_compactSpace (Y ↘ Spec (.of D.k))
+  have : IsNoetherian X := ⟨⟩
+  have : IsNoetherian Y := ⟨⟩
+  let (x : X) : Invertible (l : X.residueField x) :=
+    (residue_unit l D hl X x).invertible
+  let (y : Y) : Invertible (l : Y.residueField y) :=
+    (residue_unit l D hl Y y).invertible
+  have support (M : sfIntegralConstructibleCategory l E X) :
+      sfIntegralConstructible l E Y
+        ((PurCompactSupport.image (PurCompactSupport.completed l E) c).obj M.obj) :=
+    (sfIntegralConstructible l E Y).prop_of_iso
+      ((sfQcqsCompactSupportRealization l E D.k
+        (coefficient_unit l D hl) c).app M).symm
+      ((sfCompactSupportFiniteIntegralFunctor l D.k
+        (coefficient_unit l D hl) c E).obj M).property
+  have hs := tensor_domains l E Y (scheme_unit l D hl Y) aY _ _ (support K) L.property
+  have hp := pull_domains l E f (finite_dimension D X) (finite_dimension D Y)
+    (scheme_unit l D hl X) (scheme_unit l D hl Y) L.obj L.property
+  have hi := tensor_domains l E X (scheme_unit l D hl X) aX _ _ K.property hp
+  let P := ((PurCompactSupport.projectionMap (PurCompactSupport.completed l E) c aX aZ aY
+    (PurCompactSupport.completedPull_comp l E c.i c.g)).app K.obj).app L.obj
+  have hP : IsIso P := sfIntegralReduction_conservative l E Y P hs.1
+    (support ⟨_, hi.1⟩)
+    (integralOrdinaryProjection_finiteReductions D l hl E f c aX aZ aY K L)
+  let := hP
+  let : IsIso ((IntegralOnSlice.completionUnit l E X none).app
+      (ordinaryInner l E f aX K.obj L.obj)) := hi.2.1
+  let : IsIso ((IntegralOnSlice.completionUnit l E Y none).app
+      (ordinarySource l E c aY K.obj L.obj)) :=
+    (integralDomains l E D hl f c aX aY K L).1
+  apply (ObjectProperty.isIso_hom_iff _).mp
+  change IsIso (inv _ ≫ P ≫ (PurCompactSupport.image _ c).map _)
+  infer_instance
 
 attribute [local instance 2000] CommRing.toRing
 attribute [local instance 2000] isNoetherian_of_finite

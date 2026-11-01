@@ -11,6 +11,9 @@ import WeilConjectures.CategoryTheory.TwistedActionRingedSite.TwistedActionClose
 import WeilConjectures.CategoryTheory.Endofunctor.FixedPairCreatedLimits
 import WeilConjectures.CategoryTheory.Endofunctor.EquivalenceOrbitInduction
 import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
+public import Mathlib.CategoryTheory.Limits.FullSubcategory
+public import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+public import WeilConjectures.Mathlib.CategoryTheory.Endofunctor.Algebra
 
 /-! # The ringed site of a site automorphism
 
@@ -36,6 +39,43 @@ variable {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (a : (s.inverse.sheafPushforwardContinuous CommRingCat.{u} J J).obj R ≅ R)
 
 omit [s.functor.IsContinuous J J] in
+
+/-- Canonical small-limit lifting for the module translation forgetful functor.
+
+Source: step 2 of the action-site assembly (step 5 of the detailed proof below), in
+`literature/blueprint/latest/blueprint/part-duality-trace-formula/`
+`sec-poincare-duality/sec-perfect-complexes-on-the-point-and-two-exchange-formulas/`
+`sk-def-ops/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.md`.
+(blueprint: lem-sf-twisted-action-ringed-site).
+
+For each diagram, compose the generic full-subcategory and endofunctor-algebra lifts.
+The module-sheaf limit exists, and translation preserves it because it is an equivalence.
+-/
+noncomputable instance translationForgetCreatesLimits [(sigma J s R a).IsEquivalence] :
+    CreatesLimitsOfSize.{u, u} (Endofunctor.IsoAlgebra.forget (sigma J s R a)) := by
+  change CreatesLimitsOfSize.{u, u}
+    ((Endofunctor.Algebra.IsIsoStr (sigma J s R a)).ι ⋙
+      Endofunctor.Algebra.forget (sigma J s R a))
+  exact ⟨fun {_} _ ↦ inferInstance⟩
+
+/-- Canonical small-colimit lifting for the module translation forgetful functor.
+
+Source: step 2 of the action-site assembly (step 5 of the detailed proof below), in
+`literature/blueprint/latest/blueprint/part-duality-trace-formula/`
+`sec-poincare-duality/sec-perfect-complexes-on-the-point-and-two-exchange-formulas/`
+`sk-def-ops/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.md`.
+(blueprint: lem-sf-twisted-action-ringed-site).
+
+For each diagram, compose the generic full-subcategory and endofunctor-algebra lifts.
+The module-sheaf colimit exists, and translation preserves it because it is an equivalence.
+-/
+noncomputable instance translationForgetCreatesColimits [(sigma J s R a).IsEquivalence] :
+    CreatesColimitsOfSize.{u, u} (Endofunctor.IsoAlgebra.forget (sigma J s R a)) := by
+  change CreatesColimitsOfSize.{u, u}
+    ((Endofunctor.Algebra.IsIsoStr (sigma J s R a)).ι ⋙
+      Endofunctor.Algebra.forget (sigma J s R a))
+  exact ⟨fun {_} _ ↦ inferInstance⟩
+
 private theorem addLimits (P : RestrictionPresentation J s R a) :
     Nonempty (ModulePresentation J s R a) := by
   have : (sigma J s R a).IsEquivalence := by

@@ -34,6 +34,7 @@ import WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralCompactific
 import WeilConjectures.SixFunctors.RationalOperations.RationalOperationsData
 import WeilConjectures.Compactification.NagataCompactification
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import WeilConjectures.SmoothPurity.OperationsScalarLocalization.DerivedScalarLocalizationIso
 /-! # Rational purity and the geometric-Frobenius adjunction mate
 
 Source: main-20261015, sec-poincare-duality/sk-lem-finite,
@@ -182,6 +183,92 @@ def integralExchange (c₀ : Compactification f₀.left)
       (sfQcqsCompactSupportRealization l E D.k
         (PurCompactSupport.coefficientPrimeUnit l D hl) c).app (PX.obj M))
 
+private theorem square_comp {C : Type*} [Category C]
+    {A B C' D E F : C} {p : A ⟶ D} {q : B ⟶ E} {r : C' ⟶ F}
+    {a : A ⟶ B} {b : B ⟶ C'} {a' : D ⟶ E} {b' : E ⟶ F}
+    (ha : p ≫ a' = a ≫ q) (hb : q ≫ b' = b ≫ r) :
+    p ≫ (a' ≫ b') = (a ≫ b) ≫ r := by
+  rw [← Category.assoc, ha, Category.assoc, hb, ← Category.assoc]
+
+private theorem square_comp_five {C : Type*} [Category C]
+    {A0 A1 A2 A3 A4 A5 B0 B1 B2 B3 B4 B5 : C}
+    {p0 : A0 ⟶ B0} {p1 : A1 ⟶ B1} {p2 : A2 ⟶ B2}
+    {p3 : A3 ⟶ B3} {p4 : A4 ⟶ B4} {p5 : A5 ⟶ B5}
+    {a0 : A0 ⟶ A1} {a1 : A1 ⟶ A2} {a2 : A2 ⟶ A3}
+    {a3 : A3 ⟶ A4} {a4 : A4 ⟶ A5}
+    {b0 : B0 ⟶ B1} {b1 : B1 ⟶ B2} {b2 : B2 ⟶ B3}
+    {b3 : B3 ⟶ B4} {b4 : B4 ⟶ B5}
+    (h0 : p0 ≫ b0 = a0 ≫ p1) (h1 : p1 ≫ b1 = a1 ≫ p2)
+    (h2 : p2 ≫ b2 = a2 ≫ p3) (h3 : p3 ≫ b3 = a3 ≫ p4)
+    (h4 : p4 ≫ b4 = a4 ≫ p5) :
+    p0 ≫ b0 ≫ b1 ≫ b2 ≫ b3 ≫ b4 = (a0 ≫ a1 ≫ a2 ≫ a3 ≫ a4) ≫ p5 := by
+  simpa only [Category.assoc] using
+    square_comp (square_comp (square_comp (square_comp h0 h1) h2) h3) h4
+
+private theorem map_naturality {C : Type*} [Category C] {D : Type*} [Category D]
+    {E : Type*} [Category E] {F G : C ⥤ D} (η : F ⟶ G) (H : D ⥤ E)
+    {K L : C} (a : K ⟶ L) :
+    H.map (F.map a) ≫ H.map (η.app L) = H.map (η.app K) ≫ H.map (G.map a) := by
+  simpa only [Functor.map_comp] using congrArg H.map (η.naturality a)
+
+private theorem integralExchange_naturality (c₀ : Compactification f₀.left)
+    {K L : sfIntegralConstructibleCategory l E (D.geometricFiber X₀).left} (a : K ⟶ L) :
+    (integralFrobenius D l hl E Y₀).map
+      ((sfCompactSupportFiniteIntegralFunctor l D.k
+        (PurCompactSupport.coefficientPrimeUnit l D hl)
+        (zlGeometricCompactification D f₀ c₀) E).map a) ≫
+      (integralExchange D l hl f₀ E c₀ L).hom =
+    (integralExchange D l hl f₀ E c₀ K).hom ≫
+      (sfCompactSupportFiniteIntegralFunctor l D.k
+        (PurCompactSupport.coefficientPrimeUnit l D hl)
+        (zlGeometricCompactification D f₀ c₀) E).map
+          ((integralFrobenius D l hl E X₀).map a) := by
+  let : ∀ x : (D.geometricFiber X₀).left,
+    Invertible (l : (D.geometricFiber X₀).left.residueField x) :=
+      fun x ↦ sfWeilPrimeInvertible D l hl X₀ x
+  let : ∀ y : (D.geometricFiber Y₀).left,
+    Invertible (l : (D.geometricFiber Y₀).left.residueField y) :=
+      fun y ↦ sfWeilPrimeInvertible D l hl Y₀ y
+  let : IsIso (D.geometricFrobenius X₀).hom := (D.geometricFrobenius X₀).isIso_hom
+  let : IsIso (D.geometricFrobenius Y₀).hom := (D.geometricFrobenius Y₀).isIso_hom
+  let c := zlGeometricCompactification D f₀ c₀
+  let F := sfCompactSupportFiniteIntegralFunctor l D.k
+    (PurCompactSupport.coefficientPrimeUnit l D hl) c E
+  let PX := integralFrobenius D l hl E X₀
+  let lambdaX := FrobeniusCoefficientTwists.completedToOrdinary l E
+    (D.geometricFrobenius X₀).hom
+  let lambdaY := FrobeniusCoefficientTwists.completedToOrdinary l E
+    (D.geometricFrobenius Y₀).hom
+  let τ := sfQcqsCompactSupportRealization l E D.k
+    (PurCompactSupport.coefficientPrimeUnit l D hl) c
+  let η := zlCompactSupportFrobenius D f₀ c₀ l E
+  let PY := zlAmbientFrobenius D l E Y₀
+  let I := PurCompactSupport.image (PurCompactSupport.completed l E) c
+  let p0 := (integralDerivedPullback l E (D.geometricFrobenius Y₀).hom).map (F.map a).hom
+  let p1 := PY.map (F.map a).hom
+  let p2 := PY.map (I.map a.hom)
+  let p3 := I.map ((zlAmbientFrobenius D l E X₀).map a.hom)
+  let p4 := I.map ((integralDerivedPullback l E (D.geometricFrobenius X₀).hom).map a.hom)
+  let p5 := (F.map (PX.map a)).hom
+  have h0 := lambdaY.hom.naturality (F.map a)
+  change p0 ≫ (lambdaY.app (F.obj L)).hom =
+    (lambdaY.app (F.obj K)).hom ≫ p1 at h0
+  have h1 := map_naturality τ.inv PY a
+  change p1 ≫ PY.map (τ.inv.app L) = PY.map (τ.inv.app K) ≫ p2 at h1
+  have h2 := η.hom.naturality a.hom
+  change p2 ≫ (η.app L.obj).hom = (η.app K.obj).hom ≫ p3 at h2
+  have h3 := map_naturality lambdaX.inv I a
+  change p3 ≫ I.map (lambdaX.inv.app L) = I.map (lambdaX.inv.app K) ≫ p4 at h3
+  have h4 := τ.hom.naturality (PX.map a)
+  change p4 ≫ τ.hom.app (PX.obj L) = τ.hom.app (PX.obj K) ≫ p5 at h4
+  have h := square_comp_five h0 h1 h2 h3 h4
+  apply ObjectProperty.hom_ext
+  change p0 ≫ (lambdaY.app (F.obj L)).hom ≫ PY.map (τ.inv.app L) ≫
+      (η.app L.obj).hom ≫ I.map (lambdaX.inv.app L) ≫ τ.hom.app (PX.obj L) =
+    ((lambdaY.app (F.obj K)).hom ≫ PY.map (τ.inv.app K) ≫
+      (η.app K.obj).hom ≫ I.map (lambdaX.inv.app K) ≫ τ.hom.app (PX.obj K)) ≫ p5
+  exact h
+
 /-- Localization of the actual integral compact-support exchange, on each object.
 Source: node, rational beta
 (blueprint: lem-pur-rational-weil-naturality-mate).
@@ -199,7 +286,38 @@ theorem rationalExchange_existsUnique (c₀ : Compactification f₀.left)
           ((sfWeilFrobeniusPullback D l hl X₀ E).obj K),
       HEq e.hom ((sfRationalConstructibleLocalization l E (D.geometricFiber Y₀).left).map
         (integralExchange D l hl f₀ E c₀ K.obj).hom) := by
-  sorry
+  let : ∀ x : (D.geometricFiber X₀).left,
+    Invertible (l : (D.geometricFiber X₀).left.residueField x) :=
+      fun x ↦ sfWeilPrimeInvertible D l hl X₀ x
+  let : ∀ y : (D.geometricFiber Y₀).left,
+    Invertible (l : (D.geometricFiber Y₀).left.residueField y) :=
+      fun y ↦ sfWeilPrimeInvertible D l hl Y₀ y
+  let Q := sfRationalConstructibleLocalization l E (D.geometricFiber Y₀).left
+  let F := sfCompactSupportFiniteFunctor l D.k
+    (PurCompactSupport.coefficientPrimeUnit l D hl)
+    (zlGeometricCompactification D f₀ c₀) E
+  let e := Q.mapIso (integralExchange D l hl f₀ E c₀ K.obj)
+  have hY := (rationalDerivedPullback_existsUnique l E
+    (D.geometricFrobenius Y₀).hom).exists.choose_spec.2.1 (F.obj K)
+  have hX := (rationalDerivedPullback_existsUnique l E
+    (D.geometricFrobenius X₀).hom).exists.choose_spec.2.1 K
+  have hA : (sfWeilFrobeniusPullback D l hl Y₀ E).obj (F.obj K) =
+      Q.obj ((integralFrobenius D l hl E Y₀).obj
+        ((sfCompactSupportFiniteIntegralFunctor l D.k
+          (PurCompactSupport.coefficientPrimeUnit l D hl)
+          (zlGeometricCompactification D f₀ c₀) E).obj K.obj)) := hY
+  have hB : F.obj ((sfWeilFrobeniusPullback D l hl X₀ E).obj K) =
+      Q.obj ((sfCompactSupportFiniteIntegralFunctor l D.k
+        (PurCompactSupport.coefficientPrimeUnit l D hl)
+        (zlGeometricCompactification D f₀ c₀) E).obj
+          ((integralFrobenius D l hl E X₀).obj K.obj)) :=
+    congrArg F.obj hX
+  have he : HEq (eqToIso hA ≪≫ e ≪≫ (eqToIso hB).symm).hom e.hom := by
+    dsimp only [Iso.trans_hom, Iso.symm_hom, eqToIso.hom, eqToIso.inv]
+    exact (conj_eqToHom_iff_heq _ _ hA hB).1 rfl
+  refine ⟨eqToIso hA ≪≫ e ≪≫ (eqToIso hB).symm, he, ?_⟩
+  intro e' he'
+  exact Iso.ext (eq_of_heq (he'.trans he.symm))
 
 /-- Rational exchange with its integral representative normalization retained.
 Source: node, rational beta
@@ -228,6 +346,86 @@ def betaComponent
     ((S.ring.rationalLeft (zlGeometricCompactification D f₀ c₀) ⟨E⟩).app
       ((sfWeilFrobeniusPullback D l hl X₀ E).obj K)).symm
 
+private theorem functor_map_heq {C : Type*} [Category C] {D : Type*} [Category D]
+    (F : C ⥤ D) {X Y X' Y' : C} (hx : X = X') (hy : Y = Y')
+    {a : X ⟶ Y} {b : X' ⟶ Y'} (h : HEq a b) : HEq (F.map a) (F.map b) := by
+  cases hx
+  cases hy
+  cases h
+  rfl
+
+private theorem rationalExchange_naturality
+    {K L : sfRationalConstructibleCategory l E (D.geometricFiber X₀).left} (a : K ⟶ L) :
+    (sfWeilFrobeniusPullback D l hl Y₀ E).map
+      ((sfCompactSupportFiniteFunctor l D.k (PurCompactSupport.coefficientPrimeUnit l D hl)
+        (zlGeometricCompactification D f₀ c₀) E).map a) ≫
+      (rationalExchange D l hl f₀ E c₀ L).hom =
+    (rationalExchange D l hl f₀ E c₀ K).hom ≫
+      (sfCompactSupportFiniteFunctor l D.k (PurCompactSupport.coefficientPrimeUnit l D hl)
+        (zlGeometricCompactification D f₀ c₀) E).map
+          ((sfWeilFrobeniusPullback D l hl X₀ E).map a) := by
+  let : ∀ x : (D.geometricFiber X₀).left,
+    Invertible (l : (D.geometricFiber X₀).left.residueField x) :=
+      fun x ↦ sfWeilPrimeInvertible D l hl X₀ x
+  let : ∀ y : (D.geometricFiber Y₀).left,
+    Invertible (l : (D.geometricFiber Y₀).left.residueField y) :=
+      fun y ↦ sfWeilPrimeInvertible D l hl Y₀ y
+  let R := Padic.coefficientExtensionIntegers l E
+  let t := Padic.coefficientExtensionUniformizer l E
+  let F := sfCompactSupportFiniteFunctor l D.k
+    (PurCompactSupport.coefficientPrimeUnit l D hl)
+    (zlGeometricCompactification D f₀ c₀) E
+  let FI := sfCompactSupportFiniteIntegralFunctor l D.k
+    (PurCompactSupport.coefficientPrimeUnit l D hl)
+    (zlGeometricCompactification D f₀ c₀) E
+  let PX := sfWeilFrobeniusPullback D l hl X₀ E
+  let PY := sfWeilFrobeniusPullback D l hl Y₀ E
+  let PXI := integralFrobenius D l hl E X₀
+  let PYI := integralFrobenius D l hl E Y₀
+  have hx := (rationalDerivedPullback_existsUnique l E
+    (D.geometricFrobenius X₀).hom).exists.choose_spec
+  have hy := (rationalDerivedPullback_existsUnique l E
+    (D.geometricFrobenius Y₀).hom).exists.choose_spec
+  have : PX.Additive := hx.1
+  have : PY.Additive := hy.1
+  have : F.Additive := ⟨fun {K L} a b ↦
+    (sfCompactSupportFiniteHomMap l D.k
+      (PurCompactSupport.coefficientPrimeUnit l D hl)
+      (zlGeometricCompactification D f₀ c₀) E K L).map_add a b⟩
+  let eI : FI ⋙ PYI ≅ PXI ⋙ FI :=
+    NatIso.ofComponents (integralExchange D l hl f₀ E c₀)
+      (fun a ↦ integralExchange_naturality D l hl f₀ E c₀ a)
+  have hF (K : sfRationalConstructibleCategory l E (D.geometricFiber X₀).left) :
+      (F ⋙ PY).obj K = ⟨(FI ⋙ PYI).obj K.obj⟩ := hy.2.1 (F.obj K)
+  have hG (K : sfRationalConstructibleCategory l E (D.geometricFiber X₀).left) :
+      (PX ⋙ F).obj K = ⟨(PXI ⋙ FI).obj K.obj⟩ := congrArg F.obj (hx.2.1 K)
+  have mF (K L : sfIntegralConstructibleCategory l E (D.geometricFiber X₀).left)
+      (a : K ⟶ L) (z : Localization.Away t) :
+      HEq ((F ⋙ PY).map (z ⊗ₜ[R] a : ScalarLocalization.mk K ⟶ ScalarLocalization.mk L))
+        (z ⊗ₜ[R] (FI ⋙ PYI).map a) := by
+    change HEq (PY.map (F.map (z ⊗ₜ[R] a))) _
+    have hmap : F.map (z ⊗ₜ[R] a) = z ⊗ₜ[R] FI.map a := by
+      exact LinearMap.baseChange_tmul _ _ _
+    rw [hmap]
+    exact hy.2.2 _ _ (FI.map a) z
+  have mG (K L : sfIntegralConstructibleCategory l E (D.geometricFiber X₀).left)
+      (a : K ⟶ L) (z : Localization.Away t) :
+      HEq ((PX ⋙ F).map (z ⊗ₜ[R] a : ScalarLocalization.mk K ⟶ ScalarLocalization.mk L))
+        (z ⊗ₜ[R] (PXI ⋙ FI).map a) := by
+    have h := functor_map_heq F (hx.2.1 (ScalarLocalization.mk K))
+      (hx.2.1 (ScalarLocalization.mk L)) (hx.2.2 K L a z)
+    exact h.trans (heq_of_eq (LinearMap.baseChange_tmul _ _ _))
+  obtain ⟨e, he, _⟩ := OperationsScalarLocalization.iso_existsUnique t t (fun z ↦ z)
+    (FI ⋙ PYI) (PXI ⋙ FI) eI (F ⋙ PY) (PX ⋙ F) hF hG mF mG
+  have heq (K : sfRationalConstructibleCategory l E (D.geometricFiber X₀).left) :
+      rationalExchange D l hl f₀ E c₀ K = e.app K :=
+    (rationalExchange_existsUnique D l hl f₀ E c₀ K).unique
+      (rationalExchange_existsUnique D l hl f₀ E c₀ K).exists.choose_spec (he K)
+  have hn := e.hom.naturality a
+  change PY.map (F.map a) ≫ (e.app L).hom = (e.app K).hom ≫ F.map (PX.map a) at hn
+  rw [← heq K, ← heq L] at hn
+  exact hn
+
 /-- The constructed exchange is natural for every localized rational arrow.
 Source: node, canonical compact-support exchange
 (blueprint: lem-pur-rational-weil-naturality-mate).
@@ -243,7 +441,17 @@ theorem beta_naturality {K L : sfRationalConstructibleCategory l E (D.geometricF
     (betaComponent D l hl f₀ E Ω c₀ S K).hom ≫
       (S.ring.operation (zlGeometricCompactification D f₀ c₀)
         (.rational ⟨E⟩)).F.map ((sfWeilFrobeniusPullback D l hl X₀ E).map a) := by
-  sorry
+  let c := zlGeometricCompactification D f₀ c₀
+  let PX := sfWeilFrobeniusPullback D l hl X₀ E
+  let PY := sfWeilFrobeniusPullback D l hl Y₀ E
+  let F := sfCompactSupportFiniteFunctor l D.k
+    (PurCompactSupport.coefficientPrimeUnit l D hl) c E
+  let e : F ⋙ PY ≅ PX ⋙ F :=
+    NatIso.ofComponents (rationalExchange D l hl f₀ E c₀)
+      (fun a ↦ rationalExchange_naturality D l hl f₀ E c₀ a)
+  let τ := S.ring.rationalLeft c ⟨E⟩
+  let e' := Functor.isoWhiskerRight τ PY ≪≫ e ≪≫ Functor.isoWhiskerLeft PX τ.symm
+  exact e'.hom.naturality a
 
 /-- The actual compact-support exchange as a natural isomorphism.
 Source: node, beta

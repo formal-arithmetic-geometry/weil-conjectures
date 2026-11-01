@@ -7,6 +7,10 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Scalar.ScalarSixFiniteEtaleOrigin
 public import WeilConjectures.AlgebraicGeometry.Flat.FlatModelGeneration
+public import WeilConjectures.AlgebraicGeometry.Finite.Constant.FiniteConstantLocalModel
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixFiniteEtaleLisseComparisonModel
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixFiniteEtaleLisseData
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixFiniteEtaleLisseTransport
 
 /-! # Lisse finite-projective étale sheaves have local scalar models
 
@@ -54,6 +58,32 @@ theorem sfbFiniteScalarEtaleLisseModel (S : Scheme.{u}) [IsNoetherian S]
     (hL : FlatModelEtaleLisseProjective (ULift.{u + 1} A) L) :
     IsLocallyPerfectScalarModel Λ.X S
       ((sfbFiniteScalarRealization A e eR S).obj
-        ((DerivedCategory.singleFunctor _ 0).obj L)) := by sorry
+        ((DerivedCategory.singleFunctor _ 0).obj L)) := by
+  classical
+  obtain ⟨𝒰, h𝒰⟩ := finiteEtaleLisseScalarComparisonData A S L hL
+  refine ⟨𝒰, fun j ↦ ?_⟩
+  obtain ⟨P, hfin, hproj, ⟨i⟩⟩ := h𝒰 j
+  obtain ⟨Q, n, ⟨r⟩, ⟨q⟩⟩ :=
+    finiteProjectiveConstantScalarModel A e eR (𝒰.X j) P hfin hproj
+  obtain ⟨d⟩ := finiteScalarRealizationConstantChart A e eR S (𝒰.X j) (𝒰.f j) L P i
+  let C := (HomologicalComplex.single _ (.up ℤ) 0).obj Q
+  refine ⟨C, 0, 0, inferInstance, inferInstance, ?_, ?_⟩
+  · intro k
+    by_cases hk : k = 0
+    · subst k
+      exact ⟨n, ⟨(Retract.ofIso (HomologicalComplex.singleObjXSelf _ 0 Q)).trans r⟩⟩
+    · have hz := HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 Q k hk
+      have hzero : IsZero (Mod.finiteFree (scalarRingObj Λ.X) 0) := by
+        apply (IsZero.iff_id_eq_zero _).mpr
+        apply biproduct.hom_ext
+        intro i
+        exact Fin.elim0 i
+      exact ⟨0, ⟨Retract.ofIso (hz.iso hzero)⟩⟩
+  · let F := finiteConstantScalarExtension Λ.X (𝒰.X j)
+    let : F.Additive := AlgebraicGeometry.ProEtale.scalarExtension_additive Λ.X (𝒰.X j)
+    exact ⟨d ≪≫ (DerivedCategory.singleFunctor _ 0).mapIso q ≪≫
+      (DerivedCategory.singleFunctorIsoCompQ _ 0).app (F.obj Q) ≪≫
+      DerivedCategory.Q.mapIso
+        ((HomologicalComplex.singleMapHomologicalComplex F (.up ℤ) 0).app Q).symm⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -813,6 +813,77 @@ private theorem source_equation
   simp only [Category.assoc]
   rw [conjugate_cancel b b' q aq hn]
 
+/-- The root and tensor/pullback source composite is the prescribed ordered source
+coordinate followed by inverse realization. This is an identity of source maps:
+it involves no trace, exceptional inverse image, integration or purity arrow.
+
+Source: literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-smooth-purity/
+lem-pur-projection-purity-agreement.proof.md, final sentence on canonical
+reassociations and even shifts; step 6 of lem-route-projection-tensor-integration.
+(blueprint: lem-pur-projection-tensor-source-ordinary)
+
+Proof: identify projectionRootTransition with exponentTransition at degree one
+by uniqueness of the normalized root-power map. Induct on the ordered number of
+shifted Tate factors. At zero, baseExponentComparison is identity and both
+coefficient actions are tensor with the compared unit followed by the right
+unitor. Their unit maps coincide by comparison monoidality. At a successor,
+baseExponentComparison is ordinaryFiniteTensorRightMapIso of its preceding
+comparison and the shifted degree-one root map. Naturality of the site tensor
+comparison in each variable moves these maps across its tensor constraint.
+Naturality of the inverse associator and the induction equation then identify
+projectionTensorStep followed by the preceding action with the larger-exponent
+coefficientActionComparison after the inverse root transition. No factors are
+permuted. Naturality of this action in its initial object moves the exact/derived
+pullback comparison through the action. The specified tensorPullbackComparison
+and presentation isomorphism e give exactly smoothPurityCoefficientComparison
+followed by realizeTensorSource. Cancel sourceComparison with its inverse.
+Prepend the common smoothPurityReassociation. The HEq specifications of the
+chosen source isomorphisms fix these literal homs. At zero, use also the
+inverse-image identity comparison and the monoidal unit triangle. This argument
+works for every K, including the zero object and empty schemes; it requires no
+finite-Tor hypothesis or choice of a Tate-line generator. -/
+theorem projection_tensor_source_ordinary
+    (F : FiniteFieldDatum.{u}) (C : F.CoefficientDatum)
+    (E : IntermediateField (Padic C.l) C.Qbar) [FiniteDimensional (Padic C.l) E]
+    (n : ℕ) (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of F.k))
+    (K : ProEtale.AffineSpacePurity.C (projectionSetting F C E n).Coefficient Y)
+    (H : Etale.DerivedCategoryModule (projectionSetting F C E n).Coefficient Y)
+    (e : (comparison (projectionSetting F C E n).Coefficient Y).obj H ≅ K) (d : ℕ) :
+    let P := projectionSetting F C E n
+    (projectionTensorOrdinarySourceIso F C E n Y aY K H e d).hom =
+      (projectionSourceIso F C E n Y aY K d).hom ≫
+        (projectionOrdinarySourceRealization F C E n Y K H e d).inv := by
+  intro _P
+  let := (projection_geometry Y d).2
+  let X := iteratedAffineLine Y d
+  let p := iteratedAffineLineProj Y d
+  let M := (_P.smoothPurityPullback p).obj K
+  let J := (inverseImage _P.Coefficient p).obj K
+  let W := AffineOrderedIntegration.etaleCoefficient _P Y d
+  let q := (ProEtale.leftDerivedUpperStarIsoMapDerivedCategory
+    (ModuleCat.{u + 1} _P.Coefficient) p).inv.app K
+  have hn := coefficient_action_natural _P.Coefficient
+    (AffineOrderedIntegration.exponent _P) (annihilates _P) X q d
+  have hr := coefficient_root_action F C E n X (towerBase aY d) M d
+  have ht := tensor_realization_cancel _P p K H e W
+  exact source_equation
+    (_P.smoothPurityReassociation X d M)
+    (((smoothPurityTensor _P.Coefficient X).obj M).mapIso
+      ((comparison _P.Coefficient X).mapIso
+        (projectionCoefficientRootIso F C E n X (towerBase aY d) d)))
+    (_P.smoothPurityCoefficientComparison p K H e W)
+    (AffineOrderedIntegration.realizeTensorSource _P.Coefficient p K H W e)
+    (projectionSourceIso F C E n Y aY K d)
+    (AffineOrderedIntegration.sourceComparison _P Y K d)
+    (projectionTensorActionIso F C E n X (towerBase aY d) M d)
+    (AffineOrderedIntegration.coefficientActionComparison _P.Coefficient
+      (AffineOrderedIntegration.exponent _P) (annihilates _P) X M d)
+    (AffineOrderedIntegration.coefficientActionComparison _P.Coefficient
+      (AffineOrderedIntegration.exponent _P) (annihilates _P) X J d)
+    (q ▷ (comparison _P.Coefficient X).obj W)
+    ((action ((AffineSpacePurity.tensor _P.Coefficient X).flip.obj (shiftedLine _P X)) d).map q)
+    hr ht hn (source_normalization F C E n Y aY K d)
+
 set_option linter.unusedVariables false in
 set_option maxHeartbeats 400000 in
 -- Specializing the source equations normalizes the protected coordinate aliases.

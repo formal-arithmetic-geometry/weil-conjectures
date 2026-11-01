@@ -836,6 +836,7 @@ import WeilConjectures.Algebra.Homology.CanonicalTensorPullbackOfUniverses.Ringe
 import WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedLocalizingPullback
 import WeilConjectures.AlgebraicGeometry.Scalar.ScalarExtensionFunctor
 import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 
 /-!
 # Exceptional inverse image and coefficient extension
@@ -1622,6 +1623,23 @@ def reductionSitePullbackIso (A : Type u) [CommRing A] [Finite A]
       (Etale.leftDerivedUpperStarIsoMapDerivedCategory
         (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) i).symm _
 
+/-- The component of a Dctf comparison in the ambient intrinsic category.
+The underlying arrow changes neither coefficient functor nor object.
+Source: blueprint Step 2 (blueprint: det-sp-reduction-exceptional). -/
+def reductionExceptionalComponent {A B : Type u} [CommRing A] [CommRing B]
+    [Finite A] [Finite B] (φ : A →+* B) (X Y : Scheme.{u})
+    (hSX : ∀ M : spFiniteConstructibleTorCategory X A,
+      spFiniteConstructibleTor X B ((scalarExtensionFunctor φ X).obj M.obj))
+    (hSY : ∀ K : spFiniteConstructibleTorCategory Y A,
+      spFiniteConstructibleTor Y B ((scalarExtensionFunctor φ Y).obj K.obj))
+    (GA : spFiniteConstructibleTorCategory Y A ⥤ spFiniteConstructibleTorCategory X A)
+    (GB : spFiniteConstructibleTorCategory Y B ⥤ spFiniteConstructibleTorCategory X B)
+    (c : GA ⋙ reductionCtfScalar φ X hSX ⟶ reductionCtfScalar φ Y hSY ⋙ GB)
+    (K : spFiniteConstructibleTorCategory Y A) :
+    (scalarExtensionFunctor φ X).obj (GA.obj K).obj ⟶
+      (GB.obj ((reductionCtfScalar φ Y hSY).obj K)).obj :=
+  (c.app K).hom
+
 /-- The precise transported counit equation in intrinsic coordinates.
 Factoring this proposition keeps the realization record's projections small.
 Source: blueprint Step 4 (blueprint: det-sp-reduction-exceptional). -/
@@ -1682,5 +1700,104 @@ structure ReductionExceptionalRealization (A : Type u) [CommRing A] [Finite A]
   /-- The output comparison retains the actual transported counit. -/
   counit : reductionRealizationCounitEquation A j p hF G adj
     origin originIso right adjunction right_plus rightIso
+
+/-- The intrinsic chart identification, normalized by ordinary sum/evaluation and the
+specified affine-space trace. All changes of sites, scalars and inverse image are the
+canonical comparisons defined above. No orientation of a Tate line is chosen.
+Source: blueprint Steps 4, 11--12 (blueprint: det-sp-reduction-exceptional). -/
+def reductionIntrinsicChartIso (A : Type u) [CommRing A] [Finite A]
+    {X Z Y U : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] [IsNoetherian U]
+    (j : X ⟶ Z) [IsOpenImmersion j] (p : Z ⟶ Y) [IsProper p]
+    (hF : ∀ M : spFiniteConstructibleTorCategory X A,
+      spFiniteConstructibleTor Y A ((reductionCompactSupport A j p).obj M.obj))
+    (G : spFiniteConstructibleTorCategory Y A ⥤ spFiniteConstructibleTorCategory X A)
+    (adj : reductionCtfCompactSupport A j p hF ⊣ G)
+    (R : ReductionExceptionalRealization A j p hF G adj)
+    (M : Etale.EtaleCompactSupportNormalization (ULift.{u + 1, u} A))
+    (i : U ⟶ X) [IsOpenImmersion i] (d : ℕ) (e : U ⟶ affineTraceTower Y d)
+    [AlgebraicGeometry.Etale e] [IsSeparated e] [LocallyOfFiniteType e] [QuasiCompact e]
+    (he : i ≫ (j ≫ p) = e ≫ affineTraceProjection Y d)
+    (N : ℕ) (hA : (N : ULift.{u + 1, u} A) = 0)
+    (t : Etale.OrdinaryFiniteTwistTransport (ULift.{u + 1, u} A) N hA)
+    (D : ∀ (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (N : Γ(T, ⊤))),
+      Etale.OrdinaryFiniteP1Datum (ULift.{u + 1, u} A) N hA t T hT)
+    (hY : IsUnit (N : Γ(Y, ⊤))) (K : spFiniteConstructibleTorCategory Y A) :
+    (proEtaleConstantRingDerivedPullback A i).obj (G.obj K).obj ≅
+      (reductionSite A U).obj
+        ((Etale.ordinaryFinitePullback (ULift.{u + 1, u} A) e).obj
+          ((Etale.affineTraceRight (ULift.{u + 1, u} A) N hA Y d).obj (R.origin.obj K))) :=
+  (proEtaleConstantRingDerivedPullback A i).mapIso (R.rightIso.app K) ≪≫
+    (reductionSitePullbackIso A i).app _ ≪≫
+    (reductionSite A U).mapIso
+      ((reductionEtaleChartRightIso (ULift.{u + 1, u} A) M (j ≫ p) i d e he
+        (⟨Z, p, j, rfl, inferInstance, inferInstance⟩ : Compactification (j ≫ p))
+        R.right R.adjunction N hA t D hY).app (R.origin.obj K))
+
+/-- The normalized chart clause, expressed in ordinary-etale coordinates and transported
+through the actual finite-coefficient comparison. `o` is fixed by its origin equation;
+its only role is to identify the etale origin of K_B with the scalar-extended origin.
+The second equation is the commuting square for j* c and the canonical ordered Tate
+reassociation. The chart identifications are the counit-preserving definitions above.
+Source: blueprint Steps 4, 10--12 (blueprint: det-sp-reduction-exceptional). -/
+def ReductionExceptionalChartEquation
+    {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
+    (ℓ : ℕ) (φ : A →+* B) {X Z Y : Scheme.{u}}
+    (j : X ⟶ Z) [IsOpenImmersion j] (p : Z ⟶ Y) [IsProper p]
+    (d : ℕ)
+    (hFA : ∀ M : spFiniteConstructibleTorCategory X A,
+      spFiniteConstructibleTor Y A ((reductionCompactSupport A j p).obj M.obj))
+    (hFB : ∀ M : spFiniteConstructibleTorCategory X B,
+      spFiniteConstructibleTor Y B ((reductionCompactSupport B j p).obj M.obj))
+    (hSX : ∀ M : spFiniteConstructibleTorCategory X A,
+      spFiniteConstructibleTor X B ((scalarExtensionFunctor φ X).obj M.obj))
+    (hSY : ∀ K : spFiniteConstructibleTorCategory Y A,
+      spFiniteConstructibleTor Y B ((scalarExtensionFunctor φ Y).obj K.obj))
+    (GA : spFiniteConstructibleTorCategory Y A ⥤ spFiniteConstructibleTorCategory X A)
+    (GB : spFiniteConstructibleTorCategory Y B ⥤ spFiniteConstructibleTorCategory X B)
+    (adjA : reductionCtfCompactSupport A j p hFA ⊣ GA)
+    (adjB : reductionCtfCompactSupport B j p hFB ⊣ GB)
+    (RA : ReductionExceptionalRealization A j p hFA GA adjA)
+    (RB : ReductionExceptionalRealization B j p hFB GB adjB)
+    (c : GA ⋙ reductionCtfScalar φ X hSX ⟶ reductionCtfScalar φ Y hSY ⋙ GB) : Prop :=
+  ∃ o : RA.origin ⋙ Etale.scalarExtension (RingHom.ulift.{u + 1, u + 1, u, u} φ) Y ≅
+      reductionCtfScalar φ Y hSY ⋙ RB.origin,
+    (∀ K : spFiniteConstructibleTorCategory Y A,
+      (reductionSite B Y).map (o.hom.app K) ≫
+          RB.originIso.hom.app ((reductionCtfScalar φ Y hSY).obj K) =
+        (reductionSiteScalarIso φ Y).inv.app (RA.origin.obj K) ≫
+          (scalarExtensionFunctor φ Y).map (RA.originIso.hom.app K)) ∧
+    ∀ (n : ℕ) (hnA : ((ℓ ^ n : ℕ) : ULift.{u + 1, u} A) = 0)
+      (hnB : ((ℓ ^ n : ℕ) : ULift.{u + 1, u} B) = 0),
+    ∃ hY : IsUnit ((ℓ ^ n : ℕ) : Γ(Y, ⊤)),
+    ∀ (MA : Etale.EtaleCompactSupportNormalization (ULift.{u + 1, u} A))
+      (MB : Etale.EtaleCompactSupportNormalization (ULift.{u + 1, u} B))
+      (tA : Etale.OrdinaryFiniteTwistTransport (ULift.{u + 1, u} A) (ℓ ^ n) hnA)
+      (DA : ∀ (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit ((ℓ ^ n : ℕ) : Γ(T, ⊤))),
+        Etale.OrdinaryFiniteP1Datum (ULift.{u + 1, u} A) (ℓ ^ n) hnA tA T hT)
+      (tB : Etale.OrdinaryFiniteTwistTransport (ULift.{u + 1, u} B) (ℓ ^ n) hnB)
+      (DB : ∀ (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit ((ℓ ^ n : ℕ) : Γ(T, ⊤))),
+        Etale.OrdinaryFiniteP1Datum (ULift.{u + 1, u} B) (ℓ ^ n) hnB tB T hT)
+      (_ : IsNoetherian X) (_ : IsNoetherian Y)
+      (U : Scheme.{u}) [IsNoetherian U] (i : U ⟶ X) [IsOpenImmersion i]
+      (e : U ⟶ affineTraceTower Y d) [AlgebraicGeometry.Etale e] [IsSeparated e]
+      [LocallyOfFiniteType e] [QuasiCompact e]
+      (he : i ≫ (j ≫ p) = e ≫ affineTraceProjection Y d)
+      (K : spFiniteConstructibleTorCategory Y A),
+      (directImageScalarPullbackIso φ i).inv.app (GA.obj K).obj ≫
+          (proEtaleConstantRingDerivedPullback B i).map
+            (reductionExceptionalComponent φ X Y hSX hSY GA GB c K) ≫
+          (reductionIntrinsicChartIso B j p hFB GB adjB RB MB i d e he
+            (ℓ ^ n) hnB tB DB hY ((reductionCtfScalar φ Y hSY).obj K)).hom =
+        (scalarExtensionFunctor φ U).map
+            (reductionIntrinsicChartIso A j p hFA GA adjA RA MA i d e he
+              (ℓ ^ n) hnA tA DA hY K).hom ≫
+          (reductionSiteScalarIso φ U).hom.app _ ≫
+          (reductionSite B U).map
+            (reductionEtaleChartScalarIso (RingHom.ulift.{u + 1, u + 1, u, u} φ) (ℓ ^ n) hnA hnB hY
+              d e
+              (RA.origin.obj K)).hom ≫
+          (reductionSite B U).map
+            ((Etale.affineTraceRight (ULift.{u + 1, u} B) (ℓ ^ n) hnB Y d ⋙
+              Etale.ordinaryFinitePullback (ULift.{u + 1, u} B) e).map (o.hom.app K))
 
 end AlgebraicGeometry.ProEtale

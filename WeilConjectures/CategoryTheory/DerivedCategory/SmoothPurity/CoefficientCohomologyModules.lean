@@ -11,6 +11,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Point.PointFdQbarCa
 public import WeilConjectures.CategoryTheory.DerivedCategory.Field.FieldDerivedScalarTower
 public import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 public import WeilConjectures.Compactification.FiniteFieldDatum.FiniteFieldFiberSupplement
+public import WeilConjectures.CategoryTheory.DerivedCategory.Field.FieldCohomologyScalarExtension
 
 /-! # Cohomology modules of coefficient complexes
 
@@ -41,6 +42,13 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 
 namespace DerivedCategory
+
+/-- Cohomology restricted to bounded derived-complete complexes with finite generated
+cohomology. Source: blueprint order 1510
+(blueprint: def-weil-coefficient-cohomology-modules). -/
+noncomputable def coefficientFgCohomology (R : Type u) [CommRing R] (I : Ideal R) (i : ℤ) :
+    (pointFgComplete R I).FullSubcategory ⥤ ModuleCat.{u} R :=
+  (pointFgComplete R I).ι ⋙ homologyFunctor (ModuleCat.{u} R) i
 
 /-- Cohomology restricted to bounded finite-dimensional coefficient complexes.
 Source: blueprint order 1510 (blueprint: def-weil-coefficient-cohomology-modules). -/

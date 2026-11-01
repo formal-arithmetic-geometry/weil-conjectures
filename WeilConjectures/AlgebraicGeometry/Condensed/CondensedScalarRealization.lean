@@ -125,4 +125,30 @@ def condensedScalarExtensionModel :
   Classical.choice (SheafOfModules.nonempty_derivedChangeOfRingsCochainModel
     (condensedScalarMap Λ))
 
+/-- Scalar extension of constant complexes on the point, followed by the existing
+sectionwise/internal module equivalence and inverse image to X. These exact transports
+preserve quasi-isomorphisms. The only derived nonexact operation is coefficient extension.
+Source: HRS, Definition 3.5 and formula (3.1)
+(blueprint: def-zl-condensed-scalar-realization). -/
+def condensedScalarRealization (X : Scheme.{u}) :
+    DerivedCategory (ModuleCat.{u + 1} (condensedScalarRing Λ)) ⥤
+      DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+        (condensedRingObj Λ X)) :=
+  let e := InternalAbelianSheafModule.sectionModuleEquivalence
+    (coherentTopology Profinite.{u}) Λ
+  letI := Functor.additive_of_preserves_binary_products e.inverse
+  letI : PreservesFiniteLimits (upperStarFromPoint X) := by
+    unfold upperStarFromPoint pointUpperStar
+    infer_instance
+  letI : PreservesFiniteColimits (upperStarFromPoint X) := by
+    let : pointUpperStar.{u}.IsLeftAdjoint :=
+      pointUpperStarLowerStarAdjunction.isLeftAdjoint
+    unfold upperStarFromPoint
+    infer_instance
+  let F := (upperStarFromPoint X).mapMod Λ
+  letI := Functor.additive_of_preserves_binary_products F
+  commutativeSiteDerivedConstantModuleFunctor (coherentTopology Profinite.{u})
+      (condensedScalarRing Λ) ⋙
+    (condensedScalarExtensionModel Λ).T ⋙ e.inverse.mapDerivedCategory ⋙ F.mapDerivedCategory
+
 end AlgebraicGeometry.ProEtale

@@ -212,13 +212,13 @@ theorem canonical_ordinary_ringed_tensor_coherence
         (canonicalOrdinaryForwardHom l Y H)) := by
   let E := ProEtale.NativeFrobenius.equivalence Y l
   let _ : E.symm.functor.Additive := E.inverse_additive
+  have hinv := canonical_ordinary_tensor_inverse_associativity l Y H
   exact ordinary_coherence_of_inverse_associativity l Y (WeilFrobeniusAction.topology Y)
     (ProEtale.NativeFrobenius.ring Y l) E.symm
     (normalizedInverseHomComparison E
       (Functor.uncurry.obj (ordinaryIhomBifunctor l Y))
       (Functor.uncurry.obj
         (SheafOfModules.homFunctor (R := ProEtale.NativeFrobenius.ring Y l)))
-      (canonicalOrdinaryForwardHom l Y H))
-    (canonical_ordinary_tensor_inverse_associativity l Y H)
+      (canonicalOrdinaryForwardHom l Y H)) hinv
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
