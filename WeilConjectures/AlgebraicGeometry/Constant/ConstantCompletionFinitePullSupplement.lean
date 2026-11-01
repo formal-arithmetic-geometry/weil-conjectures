@@ -594,6 +594,12 @@ import all Mathlib.CategoryTheory.Adjunction.Basic
 import all Mathlib.CategoryTheory.Monoidal.CommGrp_
 import all WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod
 public import WeilConjectures.AlgebraicGeometry.ConstantCompletionFinitePull
+public import WeilConjectures.AlgebraicGeometry.Picard.KFlatResolutionIndependentCoefficients
+public import WeilConjectures.AlgebraicGeometry.Picard.KFlatRingedToposPullback
+public import WeilConjectures.ProEtaleCoefficients.RingedStrictTowerHomotopyLimit
+public import WeilConjectures.ProperBaseChange.ConstantCompletionCore
+public import WeilConjectures.ProperBaseChange.RingedTopoiDerivedPullback
+public import WeilConjectures.SmoothPurity.ChangeOfRingsKFlatIndependentCoefficients
 
 /-!
 # Constant coefficient completion: FinitePull
@@ -649,5 +655,35 @@ variable {L₂ : Sheaf J' (Type u) ⥤ Sheaf J'' (Type u)}
 variable (G : InverseImageData L₂) (H : InverseImageData (L ⋙ L₂))
 variable (V₂ : Sheaf J'' (Type u) ⥤ Sheaf J' (Type u)) (adj₂ : L₂ ⊣ V₂)
 variable [PreservesFiniteLimits L₂]
+
+end CategoryTheory.ConstantCompletion
+
+namespace CategoryTheory.ConstantCompletion
+
+/-- Tensor insertion fixes the ordinary pullback composition comparison.
+Source: Stacks 06YY (blueprint: lem-weil-pbc-constant-completion-equivalence). -/
+def IsPullComposition {R : Sheaf J CommRingCat.{u}} {S : Sheaf J' CommRingCat.{u}}
+    {T : Sheaf J'' CommRingCat.{u}}
+    (c : F.rings.obj R ⟶ S) (d : G.rings.obj S ⟶ T) (e : H.rings.obj R ⟶ T)
+    (a : pull H e ≅ pull F c ⋙ pull G d) : Prop :=
+  ∀ M : Mod R, pullInsertion H e M ≫ (underlying T).map (a.hom.app M) =
+    L₂.map (pullInsertion F c M) ≫ pullInsertion G d ((pull F c).obj M)
+
+/-- The derived composition comparison is the ordinary tensor comparison on K-flat models.
+Source: Stacks 06YY, 0G7E (blueprint: lem-weil-pbc-constant-completion-equivalence). -/
+def IsDerivedPullComposition {R : Sheaf J CommRingCat.{u}}
+    {S : Sheaf J' CommRingCat.{u}} {T : Sheaf J'' CommRingCat.{u}}
+    (c : F.rings.obj R ⟶ S) (d : G.rings.obj S ⟶ T) (e : H.rings.obj R ⟶ T)
+    (a : pull H e ≅ pull F c ⋙ pull G d)
+    (α : (derivedPull H (V₂ ⋙ V) (adj.comp adj₂) e).functor ≅
+      (derivedPull F V adj c).functor ⋙ (derivedPull G V₂ adj₂ d).functor) : Prop :=
+  ∀ P : Cx R, P.IsAcyclicTensorKFlat → (∀ q : ℤ, SheafOfModules.IsFlat (P.X q)) →
+    α.hom.app ((Q R).obj P) ≫
+        (derivedPull G V₂ adj₂ d).functor.map
+          ((derivedPull F V adj c).comparison.app P) ≫
+        (derivedPull G V₂ adj₂ d).comparison.app
+          (((pull F c).mapHomologicalComplex (ComplexShape.up ℤ)).obj P) =
+      (derivedPull H (V₂ ⋙ V) (adj.comp adj₂) e).comparison.app P ≫
+        (Q T).map ((NatIso.mapHomologicalComplex a (ComplexShape.up ℤ)).hom.app P)
 
 end CategoryTheory.ConstantCompletion

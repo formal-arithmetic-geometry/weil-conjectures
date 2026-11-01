@@ -1030,6 +1030,14 @@ private theorem complete_of_bounded_terms
           ((CochainComplex.singleFunctor _ 0).obj (P.X n))
     exact D.prop_of_iso eSingle.symm (hterms n)
 
+private instance continuousScalar_additive (A : Type u) [CommRing A]
+    [TopologicalSpace A] [IsTopologicalRing A] : (continuousScalarFunctor A).Additive := by
+  let : PreservesFiniteColimits (continuousScalarFunctor A) :=
+    ContinuousScalarPresentation.continuous_colimits A
+  let : PreservesBinaryBiproducts (continuousScalarFunctor A) :=
+    preservesBinaryBiproducts_of_preservesBinaryCoproducts _
+  exact Functor.additive_of_preservesBinaryBiproducts _
+
 private def scalarPointComplex
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

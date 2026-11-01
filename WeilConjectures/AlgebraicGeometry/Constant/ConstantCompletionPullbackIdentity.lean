@@ -225,6 +225,11 @@ import WeilConjectures.FromJoel.Algebra.Homology.ShortComplex.HomologicalComplex
 import Mathlib.CategoryTheory.Limits.Final
 import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
 public import WeilConjectures.AlgebraicGeometry.Constant.ConstantCompletionFinitePullSupplement
+public import WeilConjectures.AlgebraicGeometry.Picard.KFlatResolutionIndependentCoefficients
+public import WeilConjectures.AlgebraicGeometry.Picard.KFlatRingedToposPullback
+public import WeilConjectures.ProEtaleCoefficients.RingedStrictTowerHomotopyLimit
+public import WeilConjectures.ProperBaseChange.RingedTopoiDerivedPullback
+public import WeilConjectures.SmoothPurity.ChangeOfRingsKFlatIndependentCoefficients
 
 /-!
 # Constant coefficient completion: PullbackIdentity
@@ -274,5 +279,47 @@ variable {L₂ : Sheaf J' (Type u) ⥤ Sheaf J'' (Type u)}
 variable (G : InverseImageData L₂) (H : InverseImageData (L ⋙ L₂))
 variable (V₂ : Sheaf J'' (Type u) ⥤ Sheaf J' (Type u)) (adj₂ : L₂ ⊣ V₂)
 variable [PreservesFiniteLimits L₂]
+
+end CategoryTheory.ConstantCompletion
+
+namespace CategoryTheory.ConstantCompletion
+
+/-- The identity inverse image gives the identity scalar comparison under its normalized
+ordinary and derived identity identifications. Source: Stacks 099L, 06YY
+(blueprint: lem-weil-pbc-constant-completion-equivalence).
+Proof: the ordinary identity comparison multiplies 1 tensor m to m, fixing the stated
+insertion equation. Descend termwise through the K-flat universal comparison to obtain
+the derived identity isomorphisms. The scalar comparison inserts 1 and each identity
+isomorphism removes it, so the final equality holds on the resolving class and hence
+throughout the derived category. The inverse equation then gives the finite identity law. -/
+theorem pullback_identity (F₀ : InverseImageData (𝟭 (Sheaf J (Type u))))
+    (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A) :
+    ∃ (aR : pull F₀ (constantMap F₀ A) ≅ 𝟭 (Mod (constant J A)))
+      (aB : pull F₀ (completedMap F₀ A I) ≅ 𝟭 (Mod (completed J A I)))
+      (αR : (derivedPull F₀ (𝟭 _) Adjunction.id (constantMap F₀ A)).functor ≅
+        𝟭 (D (constant J A)))
+      (αB : (derivedPull F₀ (𝟭 _) Adjunction.id (completedMap F₀ A I)).functor ≅
+        𝟭 (D (completed J A I))),
+      (∀ M : Mod (constant J A), pullInsertion F₀ (constantMap F₀ A) M ≫
+        (underlying (constant J A)).map (aR.hom.app M) = 𝟙 _) ∧
+      (∀ M : Mod (completed J A I), pullInsertion F₀ (completedMap F₀ A I) M ≫
+        (underlying (completed J A I)).map (aB.hom.app M) = 𝟙 _) ∧
+      (∀ P : Cx (constant J A), P.IsAcyclicTensorKFlat →
+        (∀ q : ℤ, SheafOfModules.IsFlat (P.X q)) →
+        αR.hom.app ((Q (constant J A)).obj P) =
+          (derivedPull F₀ (𝟭 _) Adjunction.id (constantMap F₀ A)).comparison.app P ≫
+            (Q (constant J A)).map
+              ((NatIso.mapHomologicalComplex aR (ComplexShape.up ℤ)).hom.app P)) ∧
+      (∀ P : Cx (completed J A I), P.IsAcyclicTensorKFlat →
+        (∀ q : ℤ, SheafOfModules.IsFlat (P.X q)) →
+        αB.hom.app ((Q (completed J A I)).obj P) =
+          (derivedPull F₀ (𝟭 _) Adjunction.id (completedMap F₀ A I)).comparison.app P ≫
+            (Q (completed J A I)).map
+              ((NatIso.mapHomologicalComplex aB (ComplexShape.up ℤ)).hom.app P)) ∧
+      (∀ M : D (completed J A I),
+        (derivedPullComparison F₀ (𝟭 _) Adjunction.id A I).app M ≫
+            (dres (coefficientMap J A I)).map (αB.hom.app M) =
+          αR.hom.app ((dres (coefficientMap J A I)).obj M)) := by
+  sorry
 
 end CategoryTheory.ConstantCompletion

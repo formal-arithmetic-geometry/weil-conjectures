@@ -53,6 +53,20 @@ import all Mathlib.Algebra.Homology.DerivedCategory.Fractions
 import all Mathlib.CategoryTheory.Localization.CalculusOfFractions
 import all WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 import WeilConjectures.CategoryTheory.ProperBaseChange.ResolvingRepresentativeWhiskeringSupplement
+import WeilConjectures.CategoryTheory.Exact.ExactLocalizationInverseMate
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriekBaseChangeMate
+import WeilConjectures.Algebra.Homology.OpenTensorNormalization.FiniteBaseChangeRestrictionCoherence
+import WeilConjectures.Algebra.Homology.OpenTensorNormalization.FiniteTensorRestrictionCoherence
+public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.FiniteTensorDerivedComparison
+public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.FiniteTensorOrdinaryComparison
+public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.FiniteTensorTotalOfOrdinary
+public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.OpenTensorSupportAux
+public import WeilConjectures.AlgebraicGeometry.Picard.SiteDerivedTensorDescentIndependentCoefficients
+public import WeilConjectures.AlgebraicGeometry.StrictTower.FiniteConstantCoefficientTransport
+public import WeilConjectures.CategoryTheory.Derived.DerivedCoefficientMapDescent
+public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
+public import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 
 /-!
 # Normalized open extension, tensor and base change
@@ -83,6 +97,89 @@ private theorem ordinaryUnit_isIso {m : Mode} {U X : Scheme.{u}}
     rfl
   rw [h]
   infer_instance
+
+private theorem derivedUnit_isIso {m : Mode} {U X : Scheme.{u}}
+    {j : U ⟶ X} [IsOpenImmersion j] {R : Sheaf (topology m X) CommRingCat.{u + 1}}
+    (o : OpenExtension m j R) (M : Der (restrictRing m j R)) :
+    IsIso ((exactDerivedAdjunction o.adjunction).unit.app M) := by
+  let a := exactDerivedAdjunction o.adjunction
+  have hQ (P : CochainComplex (Mod (restrictRing m j R)) ℤ) :
+      IsIso (a.unit.app (DerivedCategory.Q.obj P)) := by
+    have hP : IsIso ((o.adjunction.mapHomologicalComplex (.up ℤ)).unit.app P) := by
+      have hn : ∀ n : ℤ,
+          IsIso (((o.adjunction.mapHomologicalComplex (.up ℤ)).unit.app P).f n) :=
+        fun n ↦ ordinaryUnit_isIso o (P.X n)
+      exact HomologicalComplex.Hom.isIso_of_components _
+    have hu : a.unit.app (DerivedCategory.Q.obj P) =
+        DerivedCategory.Q.map ((o.adjunction.mapHomologicalComplex (.up ℤ)).unit.app P) ≫
+          (restrict m j R).mapDerivedCategoryFactors.inv.app _ ≫
+            (restrict m j R).mapDerivedCategory.map
+              (o.ordinary.mapDerivedCategoryFactors.inv.app P) := by
+      simp only [a, exactDerivedAdjunction, Adjunction.localization_unit_app]
+      rfl
+    rw [hu]
+    infer_instance
+  exact (NatTrans.isIso_app_iff_of_iso a.unit (DerivedCategory.Q.objObjPreimageIso M)).mp
+    (hQ (DerivedCategory.Q.objPreimage M))
+
+private def transposeNatural
+    {A B E : Type*} [Category A] [Category B] [Category E]
+    {F : A ⥤ B} {G : B ⥤ A} (a : F ⊣ G) {P : E ⥤ A} {Q : E ⥤ B}
+    (t : P ⟶ Q ⋙ G) : P ⋙ F ⟶ Q where
+  app X := (a.homEquiv _ _).symm (t.app X)
+  naturality _X _Y f := a.homEquiv_naturality_right_square _ _ _ _ (t.naturality f)
+
+private theorem isIso_of_adjunct
+    {A B : Type*} [Category A] [Category B] {F : A ⥤ B} {G : B ⥤ A}
+    (a : F ⊣ G) [IsIso a.unit] {X : B} {Y : A} (f : F.obj Y ⟶ X)
+    (hf : IsIso (a.homEquiv _ _ f)) (hs : F.essImage X) : IsIso f := by
+  have : F.Full := a.fullyFaithfulLOfIsIsoUnit.full
+  have : F.Faithful := a.fullyFaithfulLOfIsIsoUnit.faithful
+  have : IsIso (a.counit.app X) := a.isIso_counit_app_iff_mem_essImage.mpr hs
+  have := hf
+  have he : f = F.map (a.homEquiv _ _ f) ≫ a.counit.app X := by
+    exact ((a.homEquiv _ _).symm_apply_apply f).symm
+  rw [he]
+  infer_instance
+
+private theorem tensorModel_exists {C : Type (u + 1)} [Category.{u} C]
+    {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{u + 1}) :
+    Nonempty (TensorModel R) := by
+  let A := Mod R
+  let H := HomotopyCategory.quotient A (.up ℤ)
+  obtain ⟨P, hp, hloc, ⟨B, ⟨hB⟩, T, ⟨hT⟩⟩, hd⟩ :=
+    site_derived_tensor_descent_independentCoefficients.{u + 1, u, u + 1, u + 2, 0, 0} J R
+  let f : (resolving R).FullSubcategory ⥤ P.FullSubcategory :=
+    P.lift ((resolving R).ι ⋙ H) (fun X ↦ (hp _).2 X.property)
+  let e : (resolving R).ι ⋙ H ⋙ DerivedCategory.Qh ≅
+      (resolving R).ι ⋙ DerivedCategory.Q :=
+    Functor.isoWhiskerLeft (resolving R).ι (DerivedCategory.quotientCompQhIso A)
+  let rep : ((resolving R).ι.prod (resolving R).ι) ⋙ total R ⋙ DerivedCategory.Q ≅
+      (((resolving R).ι ⋙ DerivedCategory.Q).prod
+        ((resolving R).ι ⋙ DerivedCategory.Q)) ⋙ T :=
+    Functor.isoWhiskerLeft (((resolving R).ι.prod (resolving R).ι) ⋙ total R)
+        (DerivedCategory.quotientCompQhIso A).symm ≪≫
+      Functor.isoWhiskerLeft ((resolving R).ι.prod (resolving R).ι)
+        (Functor.isoWhiskerRight hB.symm DerivedCategory.Qh) ≪≫
+      Functor.isoWhiskerLeft (f.prod f) hT ≪≫
+      Functor.isoWhiskerRight (NatIso.prod e e) T
+  have hres : ∀ X : HomotopyCategory A (.up ℤ),
+      ∃ (Y : P.FullSubcategory) (s : Y.obj ⟶ X),
+        HomotopyCategory.quasiIso A (.up ℤ) s := by
+    intro X
+    obtain ⟨K, q, hK, hf, hq, _⟩ :=
+      CochainComplex.exists_isKFlatResolutionIndependentCoefficients X.as
+    have hs : ∀ n, IsFlatOnSite (J := J) (R := R) (K.X n) := fun n ↦
+      (exactFunctor _ _).prop_of_iso (siteSheafTensorRightIso R (K.X n)).symm (hf n)
+    refine ⟨⟨H.obj K, (hp _).2 ⟨hK, hs⟩⟩, H.map q, ?_⟩
+    exact (HomotopyCategory.quotient_map_mem_quasiIso_iff q).2 hq
+  obtain ⟨ff⟩ := resolvingRepresentativesFullyFaithfulWhiskering (Der R) H
+    (HomotopyCategory.quotient_obj_surjective) (HomotopyCategory.quasiIso A (.up ℤ))
+    DerivedCategory.Qh (resolving R) P (fun X ↦ (hp _).symm) hres
+  exact ⟨{ preadditive := tensorPreadditive R
+           functor := T
+           representative := rep
+           descent := fun F G ↦ ff.map_bijective F G }⟩
 
 end SheafOfModules.OpenTensorNormalization
 

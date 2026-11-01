@@ -371,14 +371,18 @@ private theorem inverse_square_general :
 private def comparisonGeneral :
     CondensedRing.upperStar Λ' g ⋙ Mod.comap ((upperStarFromPoint X).map a) ≅
       Mod.comap ((upperStarFromPoint Y).map a) ⋙ CondensedRing.upperStar Λ g :=
-  Functor.isoWhiskerRight (cartesianCoefficientPullbackIso Λ' g)
+  Functor.isoWhiskerRight (Functor.isoWhiskerLeft
+      ((upperStar Ab.{u + 1} g).mapMod (condensedRingObj Λ' Y))
+      (Mod.extendScalarsIsoComapInv (condensedPullbackHom Λ' g)))
       (Mod.comap ((upperStarFromPoint X).map a)) ≪≫
     Mod.comapMapModComapIso (upperStar Ab.{u + 1} g)
       ((upperStarFromPoint Y).map a) ((upperStarFromPoint X).map a)
       (inv (condensedPullbackHom Λ g)) (inv (condensedPullbackHom Λ' g))
       (inverse_square_general a g) ≪≫
     Functor.isoWhiskerLeft (Mod.comap ((upperStarFromPoint Y).map a))
-      (cartesianCoefficientPullbackIso Λ g).symm
+      (Functor.isoWhiskerLeft
+      ((upperStar Ab.{u + 1} g).mapMod (condensedRingObj Λ Y))
+      (Mod.extendScalarsIsoComapInv (condensedPullbackHom Λ g))).symm
 
 end Comparison
 
@@ -430,5 +434,33 @@ private theorem internal_kflat_iff
   · intro h P hP
     exact (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic _).1
       (h _ ((HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic P).2 hP)).2
+
+private theorem pull_flatKFlat
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (g : X ⟶ Y)
+    (P : CochainComplex (Modules Λ Y) ℤ) (hP : FlatKFlat Λ Y P) :
+    FlatKFlat Λ X ((pullComplex Λ g).obj P) := by
+  let F := CondensedRing.upperStar Λ g
+  have hK (T : Scheme.{u}) := InternalAbelianSheafModule.comparison_kflat
+    (Scheme.ProEt.topology T) (condensedRingObj Λ T)
+  have : ((upperStar Ab.{u + 1} g).mapMod (condensedRingObj Λ Y) ⋙
+      Mod.comap (inv (condensedPullbackHom Λ g))).PreservesFlat :=
+    inverseImageModule_preservesFlat g (condensedRingObj Λ Y) (condensedRingObj Λ X)
+      (inv (condensedPullbackHom Λ g))
+  have : F.PreservesFlat := ⟨fun {M} hM ↦ ObjectProperty.prop_of_iso _
+    ((Functor.isoWhiskerLeft
+      ((upperStar Ab.{u + 1} g).mapMod (condensedRingObj Λ Y))
+      (Mod.extendScalarsIsoComapInv (condensedPullbackHom Λ g))).app M).symm
+      (Functor.PreservesFlat.flat_obj (F := (upperStar Ab.{u + 1} g).mapMod (condensedRingObj Λ Y) ⋙
+        Mod.comap (inv (condensedPullbackHom Λ g))) hM)⟩
+  have hp := (internal_kflat_iff P).mp ((hK Y P).mpr hP.1)
+  have hf (q : ℤ) : ObjectProperty.flat (P.X q) :=
+    (InternalAbelianSheafModule.flat_iff_sectionModule
+      (Scheme.ProEt.topology Y) (condensedRingObj Λ Y) _).mpr (hP.2 q)
+  have hk := F.kFlat_map_of_flat_terms P hp hf
+  exact ⟨(hK X _).mp ((internal_kflat_iff _).mpr hk),
+    fun q ↦ (InternalAbelianSheafModule.flat_iff_sectionModule
+      (Scheme.ProEt.topology X) (condensedRingObj Λ X) _).mp
+        (Functor.PreservesFlat.flat_obj (F := F) (hf q))⟩
 
 end AlgebraicGeometry.ProEtale.IntegralCoefficientSquare

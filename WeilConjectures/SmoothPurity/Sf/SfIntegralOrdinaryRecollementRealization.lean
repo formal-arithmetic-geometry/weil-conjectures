@@ -222,6 +222,9 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import WeilConjectures.CategoryTheory.StrictRoosNormalization
 import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedDirectImageLimits
 import WeilConjectures.AlgebraicGeometry.Koszul.KoszulReconstruction
+public import WeilConjectures.AlgebraicGeometry.Picard.KFlatResolutionIndependentCoefficients
+public import WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor
+public import WeilConjectures.ProperBaseChange.RingedToposDerivedPushforwardComposition
 
 /-! # Ordinary completed-ring realization of integral recollement
 
@@ -453,5 +456,15 @@ structure SfOrdinaryIntegralComparison {X Y : Scheme.{u}} (f : X ⟶ Y) [IsImmer
     ∀ n : ℕ, proEtaleCohomologicalSupport
       ((scalarReductionDerivedExtension l E X n).obj
         ((sfOrdinaryDerivedPull l E f).obj K)) ⊆ Set.Icc a b
+
+/-- Restriction of the specified completed pullback, with its unchanged object and map.
+Source: localization proof steps 2 and 5
+(blueprint: lem-sf-integral-ordinary-recollement-realization). -/
+def SfOrdinaryIntegralComparison.pullFunctor {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [IsImmersion f] (C : SfOrdinaryIntegralComparison l E f) :
+    sfIntegralConstructibleCategory l E Y ⥤ sfIntegralConstructibleCategory l E X :=
+  (sfIntegralConstructible l E X).lift
+    ((sfIntegralConstructible l E Y).ι ⋙ integralDerivedPullback l E f)
+    (fun K ↦ (C.pull_constructible K.obj K.property).2)
 
 end WeilConjectures

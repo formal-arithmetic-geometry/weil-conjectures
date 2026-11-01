@@ -344,6 +344,11 @@ public import Mathlib.CategoryTheory.Sites.SubcanonicalOver
 public import WeilConjectures.AlgebraicGeometry.Picard.RingedDerivedDisjointIso
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect.OfFlat
 public import WeilConjectures.AlgebraicGeometry.Etale.EtaleSectionGermIsoSupplement
+public import WeilConjectures.AlgebraicGeometry.CoefficientConnectedStalkConstant
+public import WeilConjectures.AlgebraicGeometry.FiniteConstantModel.FiniteConstantModelResolutionSupplement
+public import WeilConjectures.AlgebraicGeometry.IntegralFiniteConstantEncoding
+public import WeilConjectures.AlgebraicGeometry.IntegralFiniteSliceEncodingEquivalence
+public import WeilConjectures.WeilObject.Sheaf.Stalk
 
 /-! # Finite constant realization in the normalized coefficient presentation
 
@@ -356,6 +361,52 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
+
+@[irreducible] private def finiteScalarOrdinaryPullbackComparison
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] :
+    letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
+    ∀ (n : ℕ) (X : Scheme.{u}) (W : X.ProEt),
+      integralFiniteScalarFunctor l E X n ⋙
+          CondensedRing.upperStar (DerivedNakayama.quotientRing l E (n + 1)) W.hom ≅
+        integralFiniteScalarFunctor l E W.left n := by
+  let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
+  intro n X W
+  let A := Padic.coefficientExtensionRing l E (n + 1)
+  let U := ModuleCat.uliftFunctor.{u + 1, u} A
+  let B := FiniteConstantModel.scalarModules A
+  let C := (constantSheaf (coherentTopology Profinite.{u}) Ab.{u + 1}).mapMod
+    (AddCommGrpCat.of (ULift.{u + 1} A))
+  let V := Mod.extendScalars (FiniteConstantModel.scalarToContinuous A)
+  let P := CondensedRing.upperStarFromPointMod (Profinite.continuousCoefficientRingObj A) X
+  let Q := CondensedRing.upperStarFromPointMod (Profinite.continuousCoefficientRingObj A) W.left
+  let H := CondensedRing.upperStar (DerivedNakayama.quotientRing l E (n + 1)) W.hom
+  have e : P ⋙ H ≅ Q :=
+    CondensedRing.upperStarFromPointModComp (Profinite.continuousCoefficientRingObj A) W.hom
+  have m : (B ⋙ C ⋙ V ⋙ P) ⋙ H ≅ B ⋙ C ⋙ V ⋙ Q :=
+    Functor.associator B (C ⋙ V ⋙ P) H ≪≫ Functor.isoWhiskerLeft B
+      (Functor.associator C (V ⋙ P) H ≪≫ Functor.isoWhiskerLeft C
+        (Functor.associator V P H ≪≫ Functor.isoWhiskerLeft V e))
+  exact Functor.associator U (B ⋙ C ⋙ V ⋙ P) H ≪≫ Functor.isoWhiskerLeft U m
+
+@[irreducible] private def finiteScalarPullbackComparison
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] :
+    letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
+    ∀ (n : ℕ) (X : Scheme.{u}) (W : X.ProEt),
+      integralFiniteScalarRealization l E X n ⋙
+          (CondensedRing.upperStar (DerivedNakayama.quotientRing l E (n + 1))
+            W.hom).mapDerivedCategory ≅
+        integralFiniteScalarRealization l E W.left n := by
+  let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
+  intro n X W
+  letI := comp_preservesFiniteLimits (integralFiniteScalarFunctor l E X n)
+    (CondensedRing.upperStar (DerivedNakayama.quotientRing l E (n + 1)) W.hom)
+  letI := comp_preservesFiniteColimits (integralFiniteScalarFunctor l E X n)
+    (CondensedRing.upperStar (DerivedNakayama.quotientRing l E (n + 1)) W.hom)
+  exact (Functor.mapDerivedCategoryCompIso (integralFiniteScalarFunctor l E X n)
+    (CondensedRing.upperStar (DerivedNakayama.quotientRing l E (n + 1)) W.hom)).symm ≪≫
+      Functor.mapDerivedCategoryNatIso (finiteScalarOrdinaryPullbackComparison l E n X W)
 
 /-- A specified constant model on the coefficient-sized slice gives the actual internal
 scalar model on the corresponding scheme. No cohomological or perfectness condition is

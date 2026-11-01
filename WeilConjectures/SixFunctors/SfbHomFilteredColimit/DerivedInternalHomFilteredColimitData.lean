@@ -99,6 +99,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 public import Mathlib.Algebra.Homology.GrothendieckAbelian
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
+public import WeilConjectures.AlgebraicGeometry.Picard.DerivedChangeOfRingsIndependentCoefficients
 
 /-! # Strict coefficient tensor and internal-Hom roof
 
@@ -1059,6 +1060,18 @@ Source: the node's argument, step 6 (blueprint: def-sfb-internal-hom-strict-roof
 noncomputable def comparison (R : Sheaf J CommRingCat.{max u v r})
     (P L : CochainComplex (Modules.{u, v, r} J R) ℤ) :=
   (comparison_existsUnique.{u, v, r} J R P L).exists.choose
+
+/-- The other arrow of the strict roof: apply Hom with its functorial replacement to
+coefficient tensor of the actual augmentation of L.
+Source: the node's argument, step 6 (blueprint: def-sfb-internal-hom-strict-roof). -/
+noncomputable def roofDenominator (R : Sheaf J CommRingCat.{max u v r})
+    (P L : CochainComplex (Modules.{u, v, r} J R) ℤ)
+    (T : Modules.{u, v, r} J R) :
+    (homFixed.{u, v, r} J R P).obj ((tensor.{u, v, r} J R).obj (T, L)) ⟶
+      (homFixed.{u, v, r} J R P).obj ((tensor.{u, v, r} J R).obj
+        (T, (coefficientHomResolution.{r, u, v} J R).obj L)) :=
+  (homFixed.{u, v, r} J R P).map
+    ((tensor.{u, v, r} J R).map (𝟙 T, (resolutionUnit.{u, v, r} J R).app L))
 
 /-- Exact termwise-colimit continuity, expressed using the canonical cocone map.
 Source: Bhatt--Scholze 6.8.12 and the node's continuity hypothesis
