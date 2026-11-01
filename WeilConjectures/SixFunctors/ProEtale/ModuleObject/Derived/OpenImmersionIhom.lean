@@ -56,27 +56,6 @@ open Scheme
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 
-/-- The unit of the adjunction `Dj_! ⊣ Lj^*` along an open immersion `j` is an isomorphism. -/
-instance isIso_derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction_unit :
-    IsIso (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction' Λ j).unit := by
-  set adj := derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction' Λ j
-  have (T : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})
-      (condensedRingObj Λ U))) : IsIso (adj.unit.app T) := by
-    have h := Adjunction.homEquiv_ofNatIsoRight_apply
-      (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j)
-      (leftDerivedUpperStarIsoMapDerivedCategory_of_isOpenImmersion Λ j).symm
-      (𝟙 (D((j)_!open⟦Λ⟧).obj T))
-    simp only [Adjunction.homEquiv_unit, CategoryTheory.Functor.map_id] at h
-    have h' : IsIso (adj.unit.app T ≫ 𝟙 _) := by
-      erw [h]
-      have : IsIso (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j).unit :=
-        Adjunction.isIso_mapDerivedCategoryAdjunction_unit _
-      have := NatIso.isIso_app_of_isIso
-        (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j).unit T
-      exact IsIso.comp_isIso' (IsIso.comp_isIso' this (IsIso.id _)) inferInstance
-    exact IsIso.of_isIso_comp_right _ (𝟙 _)
-  exact NatIso.isIso_of_isIso_app _
-
 set_option synthInstance.maxHeartbeats 400000 in
 -- the instance search goes through the instances on `Mod (Sheaf (ProEt.topology X) Ab) _`
 /-- The counit of the adjunction `Dj_! ⊣ Lj^*` along an open immersion `j` is an isomorphism at

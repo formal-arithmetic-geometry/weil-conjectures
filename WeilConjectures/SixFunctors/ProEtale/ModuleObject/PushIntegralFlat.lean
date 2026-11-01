@@ -5,10 +5,8 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicIntModuleRightDerivedLowerStar
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralFlat
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ContinuousMapCoefficientSections
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ForgetRightDerivedLowerStar
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ContinuousMapComparison
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PadicAlgClSections
 
 /-!
