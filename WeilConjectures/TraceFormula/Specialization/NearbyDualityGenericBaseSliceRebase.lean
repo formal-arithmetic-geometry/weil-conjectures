@@ -121,18 +121,6 @@ section BaseMap
 
 variable {K : Type u} [Field K] [Algebra k' K] (x : K)
 
-/-- The identification `ε` of the geometric generic fibre of the generic slice model is an
-epimorphism: it is the faithfully flat inclusion `𝒳''_Ω ⟶ 𝒳''_η` followed by `𝒳''_η ≅ X₂`. -/
-lemma epi_genericSliceModel_ε (h : M.IsTraitModelOfGenericBase X₁ ι q g)
-    {b : M.total ⟶ 𝔸(ULift.{u} (Fin 1); trait k')}
-    (hb : b ≫ 𝔸(ULift.{u} (Fin 1); trait k') ↘ trait k' = q) :
-    Epi (genericSliceModel x hb).ε := by
-  have := (isTraitModelOfGenericBase_genericSliceModel x hb
-    h.isTraitModelOver).isTraitModelOver.epi_lift_traitGenericPointToSpec
-  rw [genericSliceModel_ε]
-  exact epi_comp' this inferInstance
-
-/-- **The slice base map of the re-based model**: the map `c : X₂ ⟶ X₁` of the generic slice is
 the map `c' : X₂ ⟶ X₁,η` of the generic slice of the re-based model followed by the projection
 `π : X₁,η ⟶ X₁`. Both satisfy the defining property of `c`, and the identification `ε` of the
 slice model is an epimorphism. -/
