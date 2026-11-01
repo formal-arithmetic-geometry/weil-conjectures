@@ -3355,6 +3355,7 @@ public import WeilConjectures.AlgebraicGeometry.CondensedHypercoverInjectiveRow
 public import WeilConjectures.AlgebraicGeometry.CondensedInternalHomSections
 public import WeilConjectures.AlgebraicGeometry.CondensedLfpCoefficientModel
 public import WeilConjectures.AlgebraicGeometry.CondensedLfpHomContinuity
+public import WeilConjectures.AlgebraicGeometry.CondensedLisseLattice
 public import WeilConjectures.AlgebraicGeometry.CondensedLocalCoefficientAdjoints
 public import WeilConjectures.AlgebraicGeometry.CondensedLocalModelGluing
 public import WeilConjectures.AlgebraicGeometry.CondensedLocalPieceCostalkModel
@@ -11551,6 +11552,7 @@ public import WeilConjectures.AlgebraicGeometry.RawRestrictedDerivedComparisonPu
 public import WeilConjectures.AlgebraicGeometry.RawRestrictedHomotopySectionsIso
 public import WeilConjectures.AlgebraicGeometry.RawRestrictedResolutionEvaluation
 public import WeilConjectures.AlgebraicGeometry.RawRestrictedSectionsUnitZero
+public import WeilConjectures.AlgebraicGeometry.RealCondensedFibre.RealCondensedFibrePullbackComparisons
 public import WeilConjectures.AlgebraicGeometry.ReciprocalCoverLineBundle
 public import WeilConjectures.AlgebraicGeometry.RecordedPerfectHomContinuity
 public import WeilConjectures.AlgebraicGeometry.RecordedPerfectHomNormalization
@@ -17896,6 +17898,10 @@ public import WeilConjectures.Mathlib.RingTheory.Polynomial.Quotient
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Basic
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Derivative
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Expand
+public import WeilConjectures.Mathlib.RingTheory.PowerSeries.FormalExpAbsoluteSummability
+public import WeilConjectures.Mathlib.RingTheory.PowerSeries.FormalExpDegreeEvaluation
+public import WeilConjectures.Mathlib.RingTheory.PowerSeries.FormalExpDegreeRegrouping
+public import WeilConjectures.Mathlib.RingTheory.PowerSeries.FormalExpEvaluationIdentity
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Inverse
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.Log
 public import WeilConjectures.Mathlib.RingTheory.PowerSeries.PiTopology
@@ -26176,6 +26182,7 @@ public import WeilConjectures.WeilSheaf.CondensedModelGeometricFiberPullback
 public import WeilConjectures.WeilSheaf.CondensedModelWeil
 public import WeilConjectures.WeilSheaf.CondensedModelWeilCoherence
 public import WeilConjectures.WeilSheaf.CondensedModelWeilDerived
+public import WeilConjectures.WeilSheaf.CondensedModule.CondensedModuleLocalFrobenius
 public import WeilConjectures.WeilSheaf.CondensedTwistedConstant
 public import WeilConjectures.WeilSheaf.Constant
 public import WeilConjectures.WeilSheaf.ConstantFieldComponent
@@ -26288,7 +26295,10 @@ public import WeilConjectures.WeilSheaf.LisseFiltration
 public import WeilConjectures.WeilSheaf.LisseLocus
 public import WeilConjectures.WeilSheaf.LisseLocusDimension
 public import WeilConjectures.WeilSheaf.LissePoincarePairing
+public import WeilConjectures.WeilSheaf.LisseRealization.LisseRationalRealizationData
 public import WeilConjectures.WeilSheaf.LocalFrobenius
+public import WeilConjectures.WeilSheaf.LocalFrobeniusLarge.LocalFrobeniusLargeCoefficients
+public import WeilConjectures.WeilSheaf.LocalFrobeniusLarge.LocalFrobeniusLargeScalarTower
 public import WeilConjectures.WeilSheaf.Localization
 public import WeilConjectures.WeilSheaf.LocalizationRational
 public import WeilConjectures.WeilSheaf.LowerShriek
