@@ -13,6 +13,8 @@ import WeilConjectures.SmoothPurity.Qcqs.QcqsCompactSupportFiniteComparison
 import WeilConjectures.SmoothPurity.Sf.SfIntegralConstructibleTriangulated
 import WeilConjectures.AlgebraicGeometry.ProEtale.Bounded.ProEtaleBoundedConstructibleTriangulated
 
+set_option linter.privateModule false
+
 /-! # Existence of a normalized compact-support comparison
 
 Source: Bhatt--Scholze, Definition 6.7.6 and Lemma 6.7.7; Stacks 0941, 0F7J

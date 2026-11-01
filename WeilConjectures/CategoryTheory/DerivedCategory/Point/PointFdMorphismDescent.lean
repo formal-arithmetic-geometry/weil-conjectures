@@ -43,8 +43,4 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 attribute [local irreducible] finiteFieldMap
 
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end DerivedCategory

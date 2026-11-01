@@ -41,7 +41,6 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 
 namespace DerivedCategory
 
-set_option backward.isDefEq.respectTransparency false in
 variable (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]
   [IsAlgClosure (Padic l) Ω]
 

@@ -86,8 +86,6 @@ instance immersionWeilFiberMap_isOver (j₀ : W₀ ⟶ X₀) :
   inferInstanceAs ((((Over.pullback
     (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map j₀).left).IsOver _)
 
-include hftX hqcX hsepX hftW hqcW hsepW in
 variable (j₀ : W₀ ⟶ X₀) [IsOpenImmersion j₀.left]
 
-include hftX hqcX hsepX hftW hqcW hsepW in
 end WeilConjectures

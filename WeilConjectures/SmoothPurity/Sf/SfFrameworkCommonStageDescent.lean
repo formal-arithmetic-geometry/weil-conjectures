@@ -497,5 +497,4 @@ def SfFrameworkFamily.comp (F : SfFrameworkFamily l Ω T S) (G : SfFrameworkFami
   scalar_shift := (sfFrameworkComposite_compatible F G).1
   unit := (sfFrameworkComposite_compatible F G).2
 
-set_option backward.isDefEq.respectTransparency.types false in
 end WeilConjectures

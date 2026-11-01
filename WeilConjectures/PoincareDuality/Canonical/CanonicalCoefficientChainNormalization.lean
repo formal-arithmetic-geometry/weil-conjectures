@@ -57,8 +57,6 @@ attribute [local irreducible] canonicalCoefficientIntegralUnit
   canonicalCoefficientFiniteUnit canonicalCoefficientFiniteKappaComplex
   coefficientFiniteInverseIso coefficientFinitePullIso
 
-attribute [local irreducible] coefficientIntegralInverseIso
-
 private def coefficientProjectionComplex (W : Scheme.{u}) (n : ℕ) :=
   (CochainComplex.singleFunctor _ 0).map (constantCoefficientProjection l E W n) ≫
     ((scalarReductionRestriction l E W n).mapCochainComplexSingleFunctor 0).inv.app

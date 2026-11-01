@@ -528,6 +528,4 @@ set_option backward.isDefEq.respectTransparency true in
 attribute [local irreducible] DerivedCategory.Q DerivedCategory.Qh
   proEtaleRingModulePullback Functor.mapDerivedCategory
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
 end AlgebraicGeometry.Scheme.IsomorphismScalarKFlatDescent

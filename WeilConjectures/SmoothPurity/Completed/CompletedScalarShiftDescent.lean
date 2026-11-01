@@ -54,6 +54,8 @@ import Mathlib.CategoryTheory.Localization.CalculusOfFractions
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 import Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
+set_option linter.privateModule false
+
 /-! # Normalized descent of the strict scalar shift
 
 Source: Stacks Project, Tags 011G, 014E, 06YS, 06YT and 08TC.

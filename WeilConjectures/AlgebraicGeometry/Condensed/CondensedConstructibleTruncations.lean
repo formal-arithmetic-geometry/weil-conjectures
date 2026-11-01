@@ -333,7 +333,6 @@ private theorem ordinary_exists [(boundedConstructible R).IsTriangulated] :
   obtain ⟨ht, t, h⟩ := restricted_standard (IsConstructibleModuleObject R)
   exact ⟨t, h⟩
 
-omit [IsCommMonObj R] in
 end Ordinary
 
 section Exchange
@@ -343,7 +342,6 @@ variable {X Y : Scheme.{u}}
   (S : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) [MonObj S] [IsCommMonObj S]
   [(boundedConstructible R).IsTriangulated] [(boundedConstructible S).IsTriangulated]
 
-omit [IsCommMonObj R] [IsCommMonObj S] in
 end Exchange
 
 end AlgebraicGeometry.ProEtale

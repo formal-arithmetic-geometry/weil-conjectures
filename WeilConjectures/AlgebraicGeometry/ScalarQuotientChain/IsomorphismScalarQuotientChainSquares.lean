@@ -349,7 +349,7 @@ private theorem extensionComp_pure (a : R ⟶ S) (c : S ⟶ T) (b : R ⟶ T)
   rw [pure_smul b M U (z * c.hom.app U s) x, mul_smul]
 
 omit [EssentiallySmall.{w} C] in
-attribute [local irreducible] extensionComp scalarArrow restrictionComp
+attribute [local irreducible] extensionComp restrictionComp
 
 end ScalarAdjunctions
 
@@ -497,15 +497,6 @@ private def restrictedArrow
     L ⋙ M ⋙ N ⟶ L' ⋙ M' ⋙ N' :=
   Functor.whiskerRight a N ≫ Functor.whiskerLeft (L' ⋙ M') e.hom
 
-attribute [local irreducible] transitionModuleRight
-
-attribute [local irreducible] quotientRight transitionRight
-attribute [local irreducible] finitePure rightPure
-
-attribute [local irreducible] rightModuleArrow
-
-attribute [local irreducible] doublePure leftPure
-
-attribute [local irreducible] quotientLeft transitionLeft
+attribute [local irreducible] finitePure
 
 end AlgebraicGeometry.ProEtale.ScalarQuotientChain

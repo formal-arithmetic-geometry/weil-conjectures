@@ -28,5 +28,4 @@ variable {C : Type uC} [Category.{vC} C] [Preadditive C] [HasZeroObject C]
   [IsTriangulated B]
   {t : TStructure C} {s : TStructure B} {F : C ⥤ B}
 
-omit [IsTriangulated C] [IsTriangulated B] in
 end WeilConjectures

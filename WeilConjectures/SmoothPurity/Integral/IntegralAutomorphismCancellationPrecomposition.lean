@@ -39,8 +39,6 @@ attribute [local irreducible] integralDerivedPullback integralComparisonComposit
   integralComparisonUnit inverseImagePullbackComparisonDerived pullbackIdentityEpsilon
   HasDerivedCategory.standard
 
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-attribute [-instance] WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective in
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
@@ -68,28 +66,4 @@ set_option allowUnsafeReducibility true in
 attribute [local irreducible] moduleIdentity derivedIdentity moduleTransport derivedTransport
   inverseImageCompletedCoefficientMap
 
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-attribute [-instance] WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective in
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-attribute [-instance] WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective in
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-attribute [-instance] WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective in
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-attribute [-instance] WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective in
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-attribute [-instance] WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective in
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-attribute [-instance] WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective in
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-attribute [-instance] WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective in
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-attribute [-instance] WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective in
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-attribute [-instance] WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective in
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-attribute [-instance] WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective in
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-attribute [-instance] WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective in
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-attribute [-instance] WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective in
 end WeilConjectures

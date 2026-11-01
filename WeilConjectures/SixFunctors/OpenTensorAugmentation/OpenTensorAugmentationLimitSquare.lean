@@ -146,6 +146,4 @@ attribute [local irreducible] integralOperationsTensorTowerFunctor
   completedIntegralCommRingSheafUnrestricted completedIntegralCoefficientSheafUnrestricted
   unrestrictedIntegralComplexFunctor scalarReductionExistence unrestrictedIntegralReductionExistence
 
-set_option maxHeartbeats 800000 in
--- The representative identities elaborate several independent tensor and Roos presentations.
 end WeilConjectures.OpenTensorAugmentation

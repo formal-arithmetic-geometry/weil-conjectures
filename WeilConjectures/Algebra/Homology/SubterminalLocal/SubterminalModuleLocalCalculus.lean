@@ -96,8 +96,8 @@ Source: Stacks 03DI (blueprint: lem-sp-subterminal-module-local-calculus). -/
 abbrev adj (Z : C) : jbang.{c, v, r} R Z ⊣ jstar.{c, v, r} R Z :=
   localizedSystemAdjunction.{c, v, r} R Z
 
-open Classical in
 section LocalCalculusProof
+open Classical
 set_option backward.defeqAttrib.useBackward true
 
 section SheafificationComparison
@@ -236,21 +236,6 @@ private def sliceExtension {A B : C} (_f : A ⟶ B) :
     SliceModules.{c, v, r} R A ⥤ SliceModules.{c, v, r} R B :=
   jbang.{c, v, r} R A ⋙ jstar.{c, v, r} R B
 
-omit [HasFiniteLimits C] in
-attribute [local instance] sliceExtension_additive
-
-omit [HasFiniteLimits C] in
-attribute [local instance] sliceExtension_limits
-
-omit [HasFiniteLimits C] in
-attribute [local instance] sliceExtension_colimits
-
-attribute [local instance] sliceRestriction_additive
-
-attribute [local instance] sliceRestriction_limits
-
-attribute [local instance] sliceRestriction_colimits
-
 private def restrictionSquare {U V W : C} (f : W ⟶ U) (g : W ⟶ V) :
     TwoSquare (jstar.{c, v, r} R V) (jstar.{c, v, r} R U)
       (overMap.{max c v r} (coefficients.{c, v, r} R) g)
@@ -258,8 +243,6 @@ private def restrictionSquare {U V W : C} (f : W ⟶ U) (g : W ⟶ V) :
   (overFunctorMap.{max c v r} (coefficients.{c, v, r} R) g).hom ≫
     (overFunctorMap.{max c v r} (coefficients.{c, v, r} R) f).inv
 
-omit [HasFiniteLimits C] in
-omit [HasFiniteLimits C] in
 end LocalCalculusProof
 
 end SheafOfModules.SubterminalLocal

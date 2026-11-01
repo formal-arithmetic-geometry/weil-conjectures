@@ -9,6 +9,8 @@ public import WeilConjectures.SixFunctors.Scalar.ScalarPullbackStrictConeData
 import all WeilConjectures.TraceFormula.Supporting.FiniteFreeCompletedScalarComparison
 import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSupplement
 
+set_option linter.privateModule false
+
 /-! # Unique derived descent of a supplied scalar pullback chain map -/
 
 @[expose] public noncomputable section

@@ -94,5 +94,4 @@ private theorem derived_products_of_Q
     preservesLimitsOfShape_of_natIso F.mapDerivedCategoryFactors.symm
   exact products_of_essSurj I DerivedCategory.Q F.mapDerivedCategory
 
-set_option linter.unusedVariables false in
 end AlgebraicGeometry.ProEtale

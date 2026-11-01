@@ -11,6 +11,7 @@ public import WeilConjectures.FourierTransform.IntegralCompletedComparison.Integ
 import all WeilConjectures.TraceFormula.Integral.IntegralComparisonRealizationModels
 import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSupplement
 import all WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+import all WeilConjectures.PoincareDuality.Integral.IntegralPullbackStrictFiniteComponent
 
 /-! # Shift compatibility on the finite pullback generators -/
 

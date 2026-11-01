@@ -58,7 +58,7 @@ attribute [local irreducible] canonicalCoefficientIntegralUnit
   canonicalCoefficientFiniteUnit canonicalCoefficientFiniteKappaComplex
   coefficientFiniteInverseIso coefficientFinitePullIso
 
-attribute [local irreducible] coefficientIntegralInverseIso coefficientProjectionComplex
+attribute [local irreducible] coefficientProjectionComplex
 
 private theorem coefficientProjectionComplex_one (W : Scheme.{u}) (n : ℕ)
     (U : W.ProEtᵒᵖ) :

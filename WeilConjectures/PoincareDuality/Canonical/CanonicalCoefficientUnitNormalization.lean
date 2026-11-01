@@ -9,6 +9,8 @@ public import WeilConjectures.PoincareDuality.Canonical.CanonicalCoefficientPull
 import all WeilConjectures.PoincareDuality.Canonical.CanonicalCoefficientPullbackModels
 import all WeilConjectures.SmoothPurity.Supporting.ConstantWeilStructure
 
+set_option linter.privateModule false
+
 /-!
 # The unit and Roos augmentation for canonical coefficient pullback
 
@@ -55,8 +57,6 @@ attribute [local irreducible] canonicalCoefficientIntegralComparison
 attribute [local irreducible] canonicalCoefficientIntegralUnit
   canonicalCoefficientFiniteUnit canonicalCoefficientFiniteKappaComplex
   coefficientFiniteInverseIso coefficientFinitePullIso
-
-attribute [local irreducible] coefficientIntegralInverseIso
 
 private theorem coefficientReductionComplex_eq (W : Scheme.{u}) (n : ℕ) :
     canonicalCoefficientReductionComplex l E W n = (finiteSingleRegularIso l E W n).hom := by

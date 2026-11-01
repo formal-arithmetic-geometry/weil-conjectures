@@ -77,10 +77,8 @@ instance immersionWeilOverPullback_quasiCompact {B T : Scheme.{u}} (f : T ⟶ B)
     QuasiCompact (((Over.pullback f).obj Y).left ↘ T) :=
   inferInstanceAs (QuasiCompact (pullback.snd Y.hom f))
 
-include hftX hqcX hsepX hftW hqcW hsepW himm in
 variable (E : Type u) [Field E] [_root_.Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 variable (Ω : Type v) [Field Ω] [_root_.Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
-include hftX hqcX hsepX hftW hqcW hsepW himm in
 end WeilConjectures

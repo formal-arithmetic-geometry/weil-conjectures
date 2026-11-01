@@ -201,25 +201,11 @@ variable {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
   (hsq : (isoSectionwiseInverseImage g CommRingCat.{max r (t + 1)}).map jY ≫
     cS.hom = cR.hom ≫ jX)
 
-include hsq in
-set_option maxHeartbeats 10000 in
--- Keep the identity-on-sections calculation independent of adjunction elaboration.
-attribute [local irreducible] restrictionScalarSquare
-
-set_option maxHeartbeats 20000 in
--- Keep scalar-square elaboration from unfolding the chosen adjunctions.
-attribute [local irreducible] scalarModuleIso
-attribute [-instance] scalarChainTransport_equivalence
-
 private theorem restrictionMap_apply
     {M N : CochainPullback.Modules.{max r (t + 1), t + 1, t} SX}
     (f : M ⟶ N) (U : X.ProEtᵒᵖ) (x : M.val.obj U) :
     ((restrictionFunctor jX).map f).val.app U x = f.val.app U x := rfl
 
-open scoped ChangeOfRings in
-set_option maxHeartbeats 20000 in
--- Keep the extension adjunction folded during the section calculation.
-include hsq in
 end ModuleSquare
 
 end AlgebraicGeometry.Scheme

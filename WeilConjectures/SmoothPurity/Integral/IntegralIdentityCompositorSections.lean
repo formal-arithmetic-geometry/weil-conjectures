@@ -21,6 +21,4 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 open AlgebraicGeometry.Scheme AlgebraicGeometry.ProEtale
 namespace WeilConjectures
 
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-attribute [-instance] WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective in
 end WeilConjectures

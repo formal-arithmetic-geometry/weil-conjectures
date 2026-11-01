@@ -12,6 +12,8 @@ import WeilConjectures.TraceFormula.Integral.IntegralPullbackResolutionMatching
 import WeilConjectures.TraceFormula.Integral.IntegralPullbackReductionCounit
 import WeilConjectures.CategoryTheory.ExactDerivedPasting.Word.ExactDerivedTransformationPasting
 
+set_option linter.privateModule false
+
 /-!
 # Composition of the integral inverse-image comparison
 
@@ -40,6 +42,20 @@ namespace AlgebraicGeometry.ProEtale
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+
+private instance postcomposeCompContinuous
+    {Z W V : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V) [IsIso h] [IsIso k] :
+    (proEtaleIsoPostcompose h ⋙ proEtaleIsoPostcompose k).IsContinuous
+      (ProEt.topology Z) (ProEt.topology V) :=
+  Functor.isContinuous_comp (proEtaleIsoPostcompose h) (proEtaleIsoPostcompose k)
+    _ (ProEt.topology W) _
+
+private instance mapCompContinuous
+    {Z W V : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V) [IsIso h] [IsIso k] :
+    (MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale h) ⋙
+      MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale k)).IsContinuous
+      (ProEt.topology Z) (ProEt.topology V) :=
+  postcomposeCompContinuous h k
 
 private theorem constantComposition
     {Z W V : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V) [IsIso h] [IsIso k]

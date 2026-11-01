@@ -36,7 +36,7 @@ attribute [local instance 5000] sfIntegralConstructibleLinear
 
 set_option allowUnsafeReducibility true in
 attribute [local reducible] GeneralAlgebraicallyClosedCoefficients.Stage
-attribute [local instance 5000] commonStageRepresentativeLinearity_stageLinear
+attribute [local instance 5000]
   GeneralAlgebraicallyClosedCoefficients.stageCategory
   GeneralAlgebraicallyClosedCoefficients.stagePreadditive
 

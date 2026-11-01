@@ -40,6 +40,8 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 import Mathlib.RingTheory.Flat.CategoryTheory
 
+set_option linter.privateModule false
+
 /-!
 # Completed scalar extension and cochain shifts
 
@@ -101,8 +103,4 @@ private theorem goodRepresentative_exists
   have := hq
   exact ⟨⟨P, hp⟩, ⟨asIso (DerivedCategory.Q.map p) ≪≫ e⟩⟩
 
-attribute [-instance] SheafOfModules.instPreadditive in
-attribute [-instance] SheafOfModules.instPreadditive in
-set_option backward.isDefEq.respectTransparency false in
-attribute [-instance] SheafOfModules.instPreadditive in
 end WeilConjectures

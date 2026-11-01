@@ -95,7 +95,6 @@ def localPointComplex (K : sfWeilComplex D l hl Y₀ E)
     (DerivedCategory.pointFiniteDimensional E).FullSubcategory :=
   (pointRationalFibre D l hl E).obj (localDerivedStalk l E D hl Y₀ K x)
 
-set_option linter.unusedSectionVars false in
 end WeilConjectures
 
 namespace WeilConjectures

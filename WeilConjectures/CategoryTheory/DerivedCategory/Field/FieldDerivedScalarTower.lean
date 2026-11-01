@@ -93,8 +93,4 @@ noncomputable def fieldScalarTower (f : K →+* L) (g : L →+* M) :
       fieldDerivedScalarExtension (g.comp f) :=
   (existsUnique_fieldScalarTower f g).exists.choose
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 end DerivedCategory

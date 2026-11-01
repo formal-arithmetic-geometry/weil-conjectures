@@ -45,6 +45,8 @@ public import WeilConjectures.AlgebraicGeometry.SixFunctors.InverseImagePullback
 public import WeilConjectures.ProperBaseChange.IntegralFinitePullbackComposition
 import WeilConjectures.TraceFormula.Integral.IntegralPullbackReductionCounit
 
+set_option linter.privateModule false
+
 /-!
 # The counit identity for the integral inverse-image comparison
 

@@ -65,7 +65,8 @@ Source: Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4), pp. 50--51
 (blueprint: lem-weil-isomorphism-comparison-scalar-extension).
 The ordinary tensor is expressed in its exact finite-free model. Its completion
 comparison is identified with the specified universal derived-tensor comparison.
-Split from `WeilConjectures.SixFunctors.Isomorphism.IsomorphismComparisonScalarExtension` for compile time.
+Split from `WeilConjectures.SixFunctors.Isomorphism.IsomorphismComparisonScalarExtension`
+for compile time.
 -/
 
 @[expose] public noncomputable section
