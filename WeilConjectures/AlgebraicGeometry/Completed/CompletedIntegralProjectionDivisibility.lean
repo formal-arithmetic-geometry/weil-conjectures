@@ -383,6 +383,12 @@ theorem completedIntegralProjection_divisible
   have : LocallySmall.{max u (t + 1)} T.ProEt := inferInstance
   classical
   let J := Scheme.ProEt.topology T
+  have : HasColimitsOfSize.{t + 1, t + 1} CommRingCat.{max u (t + 1)} :=
+    hasColimitsOfSizeShrink.{t + 1, t + 1, max u (t + 1), max u (t + 1)} _
+  have : PreservesFilteredColimitsOfSize.{t + 1, t + 1} (forget CommRingCat.{max u (t + 1)}) :=
+    preservesFilteredColimitsOfSize_shrink.{t + 1, max u (t + 1), t + 1, max u (t + 1)} _
+  have : J.PreservesSheafification (forget CommRingCat.{max u (t + 1)}) :=
+    GrothendieckTopology.instPreservesSheafification J _
   let A := Padic.coefficientExtensionIntegers l E
   let π := Padic.coefficientExtensionUniformizer l E
   let F : Type u ⥤ Type (max u (t + 1)) := uliftFunctor.{t + 1} ⋙ ct.{max u (t + 1)} J U
