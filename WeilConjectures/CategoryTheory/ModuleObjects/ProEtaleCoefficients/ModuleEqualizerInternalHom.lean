@@ -29,7 +29,6 @@ universe v u
 
 namespace CategoryTheory.Mod
 
-open MonoidalCategory Limits MonObj in
 section
 
 variable {C : Type u} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C]

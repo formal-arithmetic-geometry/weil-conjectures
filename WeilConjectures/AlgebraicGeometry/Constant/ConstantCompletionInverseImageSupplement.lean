@@ -618,13 +618,9 @@ attribute [instance] reductionRestriction_preservesZero
 attribute [-instance] restrictionReduction_additive reductionRestriction_additive
   reductionRestriction_preservesZero
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 section
 attribute [local irreducible] dres change
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end
 
 set_option backward.isDefEq.respectTransparency false in
@@ -911,12 +907,8 @@ private theorem sheaf_map_existsUnique_of_formula {X Y : Sheaf J (Type u)}
   intro m
   exact (hq' U m).trans (hq U m).symm
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 variable {C' : Type u} [SmallCategory C'] {J' : GrothendieckTopology C'}
 
-set_option genSizeOf false in
-set_option genInjectivity false in
 variable {L : Sheaf J (Type u) ⥤ Sheaf J' (Type u)} (F : InverseImageData L)
 
 set_option backward.isDefEq.respectTransparency false in
@@ -957,10 +949,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 attribute [instance] pull_additive
 
-set_option genSizeOf false in
-set_option genInjectivity false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 variable (V : Sheaf J' (Type u) ⥤ Sheaf J (Type u)) (adj : L ⊣ V)
 variable [hL : PreservesFiniteLimits L]
 

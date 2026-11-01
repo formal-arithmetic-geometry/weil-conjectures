@@ -335,6 +335,50 @@ private def inverseImageUniverses
     convert h' using 1
     all_goals rfl
 
+private theorem scalarLocalization_exact
+    {C : Type uC} [Category.{vC} C] [EssentiallySmall.{u} C]
+    {J : GrothendieckTopology C}
+    [HasSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
+    [HasSheafify J CommRingCat.{u}]
+    [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
+    (R : Sheaf J CommRingCat.{u}) (t : (R.obj ⋙ forget CommRingCat.{u}).sections) :
+    (scalarLocalization R t).Additive ∧ PreservesFiniteLimits (scalarLocalization R t) ∧
+      PreservesFiniteColimits (scalarLocalization R t) := by
+  let O := (sheafCompose J (forget₂ CommRingCat RingCat)).obj R
+  let P := ringedSectionLocalizationPresheafOfUniverses R t
+  let F := PresheafOfModules.sheafification (R := O) (𝟙 O.obj)
+  let adj := PresheafOfModules.sheafificationAdjunction (R := O) (𝟙 O.obj)
+  let I := SheafOfModules.forget O ⋙ PresheafOfModules.restrictScalars (𝟙 O.obj)
+  have hP : PreservesFiniteLimits (tensorRight P) := by
+    constructor
+    intro K _ _
+    have (U : Cᵒᵖ) : Module.Flat (R.obj.obj U) (P.obj U) :=
+      IsLocalization.flat (ringedSectionLocalizationCarrierOfUniverses R t U)
+        (Submonoid.powers (t.val U : R.obj.obj U))
+    exact ⟨⟨fun hc ↦ ⟨PresheafOfModules.evaluationJointlyReflectsLimits _ _
+      (fun U ↦ isLimitOfPreserves
+        (tensorRight (show ModuleCat (R.obj.obj U) from P.obj U))
+        (isLimitOfPreserves (PresheafOfModules.evaluation O.obj U) hc))⟩⟩⟩
+  have : PreservesLimitsOfSize.{0, 0} I := adj.rightAdjoint_preservesLimits
+  have : PreservesFiniteLimits I := inferInstance
+  have : F.Monoidal := inferInstance
+  let e : tensorRight (F.obj P) ≅ I ⋙ tensorRight P ⋙ F :=
+    Functor.isoWhiskerRight (asIso adj.counit).symm (tensorRight (F.obj P)) ≪≫
+      Functor.isoWhiskerLeft I (Functor.Monoidal.commTensorRight F P)
+  have : PreservesFiniteLimits (I ⋙ tensorRight P ⋙ F) :=
+    comp_preservesFiniteLimits I (tensorRight P ⋙ F)
+  have : PreservesFiniteLimits (tensorRight (F.obj P)) :=
+    preservesFiniteLimits_of_natIso e.symm
+  have : PreservesFiniteLimits (tensorRight (ringedSectionLocalizationOfUniverses R t)) :=
+    inferInstanceAs (PreservesFiniteLimits (tensorRight (F.obj P)))
+  let e' := (SheafOfModules.siteSheafTensorRightIso R
+    (ringedSectionLocalizationOfUniverses R t)).symm
+  have : PreservesFiniteLimits (scalarLocalization R t) :=
+    preservesFiniteLimits_of_natIso e'
+  have : PreservesFiniteColimits (scalarLocalization R t) :=
+    preservesFiniteColimits_of_natIso e'
+  exact ⟨Functor.additive_of_iso e', inferInstance, inferInstance⟩
+
 open MonoidalCategory in
 namespace LocalizationSequence
 

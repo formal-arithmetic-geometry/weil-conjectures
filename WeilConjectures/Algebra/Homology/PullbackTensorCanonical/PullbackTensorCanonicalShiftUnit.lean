@@ -223,9 +223,6 @@ def HasCanonicalTensorShifts [(DR).CommShift₂Int] : Prop :=
         (hg : ∀ n : ℤ, IsFlatOnSite (J := J) (R := R) (Q.X n)),
         cR.app Q = canonicalRepresentativeIso.{uC, vC, r, wR} R Q P hq hp hg hf)
 
-set_option genSizeOf false in
-set_option genCtorIdx false in
-set_option genInjectivity false in
 variable (f : RingedPullback.{r, uC, vC, uD, vD} R S)
   (k : Comparison.{r, uC, vC, uD, vD} (J := J) (K := K) (R := R) (S := S) f)
   (L : DerivedCategory (Modules.{uC, vC, r} R) ⥤
@@ -277,7 +274,6 @@ set_option backward.isDefEq.respectTransparency.types true
 
 attribute [local irreducible] canonicalDerivedTensor canonicalRepresentativeIso
 
-omit [HasDerivedCategory.{wR} (Modules.{uC, vC, r} R)] in
 omit [HasDerivedCategory.{wR} (Modules.{uC, vC, r} R)] in
 @[no_expose] private abbrev resolvingProperty : ObjectProperty (CochainComplex (MR) ℤ) :=
   fun P ↦ P.IsKFlatIndependentCoefficients ∧
@@ -331,7 +327,6 @@ set_option maxHeartbeats 1000000 in
 -- Converting the published total tensor to its cochain monoidal presentation is costly.
 attribute [local irreducible] HasCanonicalTensorShifts IsNormalized
 
-set_option maxHeartbeats 1000000 in
 -- The statement combines independently sized derived and total-tensor presentations.
 end SheafOfModules.PullbackTensorCanonical
 

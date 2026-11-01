@@ -160,8 +160,6 @@ set_option maxHeartbeats 800000 in
 -- Comparing chosen ordinary adjoints requires additional normalization.
 attribute [local irreducible] VaryingRing.alpha StrictTower.alpha
 
-set_option maxHeartbeats 800000 in
 -- The categorical cube specializes six exact derived paths.
-set_option maxHeartbeats 800000 in
 -- The dependent transport retains the four specified chosen-adjoint comparisons.
 end AlgebraicGeometry.ProEtale.SemilinearProperOpen

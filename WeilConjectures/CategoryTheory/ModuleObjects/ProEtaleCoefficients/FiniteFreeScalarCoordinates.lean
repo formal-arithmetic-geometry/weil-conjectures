@@ -146,9 +146,6 @@ private lemma scalarTensorIso_hom (M : Mod H R) :
   exact extendπ_extendDescHom φ _ _
 
 omit [Abelian H] [MonoidalPreadditive H] in
-omit [Abelian H] [MonoidalPreadditive H] in
-omit [Abelian H] [MonoidalPreadditive H] in
-omit [Abelian H] [MonoidalPreadditive H] in
 private lemma scalarTensorIso_naturality {M N : Mod H R} (f : M ⟶ N) :
     (comap φ).map ((extendScalars φ).map f) ≫ (scalarTensorIso φ N).hom =
       (scalarTensorIso φ M).hom ≫ ((comap φ).obj (regular B) ◁ f) := by

@@ -34,7 +34,6 @@ variable {I : Type w} [Preorder I] [IsDirectedOrder I] [Nonempty I]
   [∀ (i j : I) (h : i ≤ j), (S.T h).IsTriangulated]
   [∀ (i j : I) (h : i ≤ j), NatTrans.CommShift (S.transIso h).hom ℤ]
 
-set_option linter.unusedSectionVars false in
 section
 
 open CategoryTheory.Category

@@ -66,9 +66,6 @@ private theorem transition_id (n : ℕᵒᵖ) :
   simp only [towerDerivedEvaluationTransition, Functor.map_id,
     NatTrans.mapHomologicalComplex_id, Functor.whiskerRight_id', Localization.liftNatTrans_id]
 
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end TransitionLaws
 
 section Maps
@@ -223,12 +220,6 @@ private theorem constant_coherence (n : ℕᵒᵖ) (K : DerivedCategory A) :
     Iso.hom_inv_id_app, F.mapDerivedCategory.map_id]
   erw [Category.comp_id]
 
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end Maps
 
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end CategoryTheory.ExactTowerAugmentedCounit

@@ -289,7 +289,6 @@ noncomputable def etaleLocalizationCompIso {V W : X.Etale} (f : V ⟶ W) :
   Etale.localizationRestrictionComp' (ModuleCat.{u + 1} B) f.left W.hom V.hom f.w.symm
 
 set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 theorem etaleSliceRestriction_comp_aux {V W : X.Etale} (f : V ⟶ W)
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)) :
     (etaleSliceRestrictionIso X B V).hom.app F ≫

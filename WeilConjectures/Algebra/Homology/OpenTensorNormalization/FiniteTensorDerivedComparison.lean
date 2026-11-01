@@ -56,8 +56,6 @@ variable [∀ (V W Y Z : GradedObject ℤ B), GradedObject.HasTensor₄ObjExt V 
 
 end CochainOperations
 
-set_option maxHeartbeats 800000 in
 -- Native tensor structures require a larger elaboration budget.
-set_option maxHeartbeats 800000 in
 -- The native derived tensor structures require a larger elaboration budget.
 end SheafOfModules.OpenTensorNormalization

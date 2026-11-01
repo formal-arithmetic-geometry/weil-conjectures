@@ -523,5 +523,4 @@ private theorem coefficientAcyclicDerived
 end
 
 -- Keep the original interface, including hBY and hStructuralS, which this proof does not need.
-set_option linter.unusedVariables false in
 end CategoryTheory
