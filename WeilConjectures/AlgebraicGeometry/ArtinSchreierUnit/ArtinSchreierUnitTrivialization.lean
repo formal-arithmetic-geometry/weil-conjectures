@@ -20,6 +20,13 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.WeaklyEt
 import WeilConjectures.AlgebraicGeometry.FiniteEtaleEtaleLocalSplit
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Conservative
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
+public import WeilConjectures.AlgebraicGeometry.ArtinSchreierUnit.ArtinSchreierRootGeometry
+public import WeilConjectures.AlgebraicGeometry.ArtinSchreierUnit.ArtinSchreierRootNegation
+public import WeilConjectures.CategoryTheory.ModuleObjects.TensorInverseEqualizerDual
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMapGlobalSections
+import WeilConjectures.AlgebraicGeometry.ArtinSchreierTrace.CondensedProjectorCoverIso
+import WeilConjectures.Mathlib.AlgebraicGeometry.ColimitsOver
+import WeilConjectures.Mathlib.AlgebraicGeometry.Pullbacks
 
 /-! # Normalized multiplication and duality of the Artin–Schreier sheaf
 
@@ -242,3 +249,83 @@ structure NormalizedData (χ : AddChar k (MonObj.Γ Λ)) where
     (δ X 0).hom.hom ≫ (εinv X).hom.hom = dualZeroEvaluation k Λ χ X (ε X)
 
 end AlgebraicGeometry.ArtinSchreierUnit
+
+private theorem normalization_of_unit
+    (h : m ≫ e.hom ▷ L ≫ (λ_ L).hom = 𝟙 L) :
+    m ≫ (e.hom ⊗ₘ e.hom) ≫ (λ_ (𝟙_ C)).hom = e.hom := by
+  calc
+    m ≫ (e.hom ⊗ₘ e.hom) ≫ (λ_ (𝟙_ C)).hom =
+        m ≫ e.hom ▷ L ≫ (λ_ L).hom ≫ e.hom := by
+          simp only [MonoidalCategory.tensorHom_def, Category.assoc,
+            leftUnitor_naturality]
+    _ = e.hom := by
+      simpa only [Category.assoc, Category.id_comp] using
+        congrArg (fun v ↦ v ≫ e.hom) h
+
+private theorem inverse_pairing_zero
+    (hunit : ∀ f, eqToHom (congrArg F (zero_add f).symm) ≫
+      (μ 0 f).hom ≫ ε.hom ▷ F f ≫ (λ_ (F f)).hom = 𝟙 _)
+    (hθ : (θ 0).hom ≫ eqToHom (congrArg F (neg_zero : -(0 : A) = 0)) ≫ ε.hom =
+      εinv.hom) :
+    F 0 ◁ (θ 0).hom ≫ (μ 0 (-0)).inv ≫
+        eqToHom (congrArg F (add_neg_cancel (0 : A))) ≫ ε.hom =
+      ε.hom ▷ G 0 ≫ (λ_ (G 0)).hom ≫ εinv.hom := by
+  have hμ : (μ 0 (-0)).inv ≫ eqToHom (congrArg F (add_neg_cancel (0 : A))) =
+      ε.hom ▷ F (-0) ≫ (λ_ (F (-0))).hom ≫
+        eqToHom (congrArg F (neg_zero : -(0 : A) = 0)) := by
+    rw [← cancel_epi (eqToHom (congrArg F (zero_add (-(0 : A))).symm) ≫
+      (μ 0 (-0)).hom)]
+    simp only [Category.assoc, Iso.hom_inv_id_assoc]
+    rw [reassoc_of% (hunit (-(0 : A)))]
+    simp
+  rw [reassoc_of% hμ]
+  rw [MonoidalCategory.whisker_exchange_assoc, leftUnitor_naturality_assoc, hθ]
+
+private theorem zeroSectionEvaluation_heq (B : Scheme.{u})
+    {Y : Over 𝔸(PUnit; B)} (s : Over.mk (AffineSpace.zeroSection PUnit B) ⟶ Y)
+    {M : Mod (Sheaf (Scheme.ProEt.topology 𝔸(PUnit; B)) Ab.{u + 1})
+      (ProEtale.condensedRingObj Λ 𝔸(PUnit; B))}
+    (ι : M ⟶ (ProEtale.CondensedRing.lowerStar Λ Y.hom).obj (condensedUnit Λ Y.left)) :
+    HEq (condensedEvaluation Λ (AffineSpace.homOfVector (B ↘ B)
+        (fun _ : PUnit ↦ (0 : Γ(B, ⊤)))) s ι)
+      (condensedEvaluation Λ (AffineSpace.zeroSection PUnit B) s ι) := by
+  exact condensedEvaluation_heq Λ
+    (x := AffineSpace.homOfVector (B ↘ B) (fun _ : PUnit ↦ (0 : Γ(B, ⊤))))
+    (y := AffineSpace.zeroSection PUnit B) rfl s s (HEq.refl s) ι
+
+private theorem condensedEvaluation_heq {X T : Scheme.{u}} {x y : T ⟶ X}
+    (h : x = y) {Y : Over X} (s : Over.mk x ⟶ Y) (t : Over.mk y ⟶ Y)
+    (ht : HEq s t)
+    {M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (ProEtale.condensedRingObj Λ X)}
+    (ι : M ⟶ (ProEtale.CondensedRing.lowerStar Λ Y.hom).obj (condensedUnit Λ Y.left)) :
+    HEq (condensedEvaluation Λ x s ι) (condensedEvaluation Λ y t ι) := by
+  subst y
+  have hst : s = t := eq_of_heq ht
+  subst t
+  rfl
+
+private theorem coefficient_conditions (ℓ : ℕ) [Fact ℓ.Prime]
+    (E : PadicAlgCl.FiniteIntermediateField ℓ)
+    (hΛ : Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj.{u} E)) ∨
+      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj.{u} ℓ))) :
+    ProEtale.CondensedRing.IsAdmissibleCoefficient Λ ∧
+      IsUnit (Fintype.card k : MonObj.Γ Λ) := by
+  constructor
+  · refine ⟨ℓ, inferInstance, Or.inr (Or.inr (Or.inr (Or.inr ?_)))⟩
+    rcases hΛ with hE | hB
+    · exact Or.inl ⟨E, hE⟩
+    · exact Or.inr hB
+  · rcases hΛ with hE | hB
+    · obtain ⟨e⟩ := hE
+      have hq : IsUnit (Fintype.card k : E) :=
+        isUnit_iff_ne_zero.mpr (Nat.cast_ne_zero.mpr Fintype.card_ne_zero)
+      have h := hq.map ((MonObj.Γ.map e.inv.hom).comp
+        (Profinite.continuousMapConstRingHom.{u} E))
+      simpa only [RingHom.comp_apply, map_natCast] using h
+    · obtain ⟨e⟩ := hB
+      have hq : IsUnit (Fintype.card k : PadicAlgCl ℓ) :=
+        isUnit_iff_ne_zero.mpr (Nat.cast_ne_zero.mpr Fintype.card_ne_zero)
+      have h := hq.map ((MonObj.Γ.map e.inv.hom).comp
+        (Profinite.PadicAlgCl.constRingHom.{u} ℓ))
+      simpa only [RingHom.comp_apply, map_natCast] using h

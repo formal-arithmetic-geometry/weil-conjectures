@@ -98,6 +98,22 @@ import WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorIso
 import WeilConjectures.SmoothPurity.FiniteFieldDatum.FrobeniusDetailed
 import WeilConjectures.FourierTransform.ArtinSchreier
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Perfect
+import WeilConjectures.FourierTransform.FourierSetting
+import WeilConjectures.AlgebraicGeometry.CompletedIntegralConstantMapOfUniverses
+import WeilConjectures.CategoryTheory.Site.SiteConstantModuleHomSupplement
+import WeilConjectures.AlgebraicGeometry.ProEtale.Finite.ProEtaleFiniteModulesSupplement
+import WeilConjectures.AlgebraicGeometry.CompletedIntegralConstantMapOfUniverses
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+import WeilConjectures.CategoryTheory.Site.SiteConstantModuleHomSupplement
+import WeilConjectures.AlgebraicGeometry.ProEtale.Finite.ProEtaleFiniteModulesSupplement
+import WeilConjectures.ConstructibleSheaf.Defs
+import WeilConjectures.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleSurjectiveTowerDerivedLimitSupplement
+import WeilConjectures.SmoothPurity.IntegralOnSlice.DerivedCompleteOnSlices
+import WeilConjectures.SmoothPurity.Integral.Reduction.IntegralReductionTowerCanonical
+import WeilConjectures.AlgebraicGeometry.ProEtaleLisseFiniteModels
+import WeilConjectures.AlgebraicGeometry.CompletedConstantReduction.CompletedConstantSheafReductionSupplement
+public import WeilConjectures.SmoothPurity.Sf.SfIntegralOrdinaryRecollementRealization
 
 /-!
 # The convolution of the Fourier kernels
@@ -155,5 +171,102 @@ Source: kernel-composition (blueprint: lem-fd-convolution-kernel). -/
 abbrev fourierGeometricR13 (F : FourierSetting.{u}) (n : Type u) :=
   pullback.tripleProj₁₃ (fourierGeometricProjection F n)
     (fourierGeometricProjection F n) (fourierGeometricProjection F n)
+
+/-- Standard finite-dimensional affine products are Noetherian.
+Source: convolution-kernel finite rank hypothesis (blueprint: lem-fd-convolution-kernel).
+Proof: a finite-dimensional affine space is finite type over a field, and so is its
+square. A finite type scheme over a Noetherian field is Noetherian. -/
+theorem fourierSquareNoetherian (F : FourierSetting.{u}) (n : Type u) [Finite n] :
+    IsNoetherian (fourierGeometricSquare F n) := by
+  let π := fourierGeometricProjection F n
+  let f := pullback.fst π π ≫ π
+  have : IsLocallyNoetherian (fourierGeometricSquare F n) :=
+    LocallyOfFiniteType.isLocallyNoetherian f
+  have : CompactSpace (fourierGeometricSquare F n) :=
+    QuasiCompact.compactSpace_of_compactSpace f
+  exact ⟨⟩
+
+/-- The structural properties needed by the already defined compact-support functor.
+Source: convolution-kernel affine projections (blueprint: lem-fd-convolution-kernel).
+Proof: the square and triple are affine spaces of ranks 2r and 3r. Their structural
+maps are quasi-compact and finite type. The projection r13 is an affine-space
+projection, hence separated, quasi-compact and finite type. Its structural triangle
+commutes by the definition of fourierTripleOver. -/
+theorem fourierConvolutionGeometry (F : FourierSetting.{u}) (n : Type u) [Finite n] :
+    LocallyOfFiniteType (fourierGeometricTriple F n ↘ fourierGeometricBase F) ∧
+    QuasiCompact (fourierGeometricTriple F n ↘ fourierGeometricBase F) ∧
+    LocallyOfFiniteType (fourierGeometricSquare F n ↘ fourierGeometricBase F) ∧
+    QuasiCompact (fourierGeometricSquare F n ↘ fourierGeometricBase F) ∧
+    (fourierGeometricR13 F n).IsOver (fourierGeometricBase F) ∧
+    IsSeparated (fourierGeometricR13 F n) ∧
+    LocallyOfFiniteType (fourierGeometricR13 F n) ∧
+    QuasiCompact (fourierGeometricR13 F n) := by
+  let π := fourierGeometricProjection F n
+  have hs : LocallyOfFiniteType (fourierGeometricSquare F n ↘ fourierGeometricBase F) :=
+    inferInstanceAs (LocallyOfFiniteType (pullback.fst π π ≫ π))
+  have ht : LocallyOfFiniteType (fourierGeometricTriple F n ↘ fourierGeometricBase F) := by
+    change LocallyOfFiniteType (fourierGeometricR13 F n ≫ (pullback.fst π π ≫ π))
+    rw [← Category.assoc, pullback.tripleProj₁₃_fst]
+    infer_instance
+  have : LocallyOfFiniteType (fourierGeometricR13 F n ≫
+      (fourierGeometricSquare F n ↘ fourierGeometricBase F)) := ht
+  have hr : LocallyOfFiniteType (fourierGeometricR13 F n) :=
+    locallyOfFiniteType_of_comp (fourierGeometricR13 F n)
+      (fourierGeometricSquare F n ↘ fourierGeometricBase F)
+  refine ⟨ht, ?_, hs, ?_, ?_, ?_, hr, ?_⟩
+  · infer_instance
+  · infer_instance
+  · exact ⟨rfl⟩
+  · infer_instance
+  · infer_instance
+
+/-- The finite-field convention implies characteristic p on the pairing scheme.
+Source: def-fourier-set and convolution-kernel statement
+(blueprint: lem-fd-convolution-kernel).
+Proof: a finite field of cardinality p^a has characteristic p, since a is positive.
+The chosen algebraic closure has the same characteristic. Every k-algebra, hence
+all global functions on V times V, has characteristic p. -/
+theorem fourierPairingCharacteristic (F : FourierSetting.{u}) (n : Type u) :
+    CharP Γ(fourierGeometricSquare F n, ⊤) F.field.p := by
+  classical
+  let := Fintype.ofFinite F.field.k₀
+  have : CharP F.field.k₀ F.field.p := charP_of_card_eq_prime_pow
+    (by simpa only [Nat.card_eq_fintype_card] using
+      F.field.card_base.trans F.field.cardinality_eq)
+  have : CharP F.field.k F.field.p := charP_of_injective_algebraMap' F.field.k₀ _
+  let z := zeroSection n (fourierGeometricBase F)
+  let d : fourierGeometricBase F ⟶ fourierGeometricSquare F n :=
+    pullback.lift z z (by rfl)
+  have : Nontrivial Γ(fourierGeometricSquare F n, ⊤) := d.appTop.hom.domain_nontrivial
+  exact CharP.of_ringHom_of_ne_zero
+    ((Scheme.ΓSpecIso (CommRingCat.of F.field.k)).inv ≫
+      (fourierGeometricSquare F n ↘ fourierGeometricBase F).appTop).hom
+    F.field.p F.field.prime.ne_zero
+
+/-- The coefficient prime is invertible in the geometric base field.
+Source: def-fourier-set (blueprint: lem-fd-convolution-kernel).
+Proof: the finite-field cardinality determines characteristic p. The distinct prime l
+is nonzero in k, hence is a unit in this field. -/
+theorem fourierGeometricCoefficient_isUnit (F : FourierSetting.{u}) :
+    IsUnit (F.coefficients.l : F.field.k) := by
+  classical
+  let := Fintype.ofFinite F.field.k₀
+  have : CharP F.field.k₀ F.field.p := charP_of_card_eq_prime_pow
+    (by simpa only [Nat.card_eq_fintype_card] using
+      F.field.card_base.trans F.field.cardinality_eq)
+  have : CharP F.field.k F.field.p := charP_of_injective_algebraMap' F.field.k₀ _
+  exact (CharP.cast_ne_zero_of_ne_of_prime F.field.k
+    (Fact.out : F.coefficients.l.Prime) F.coefficients.different.symm).isUnit
+
+/-- The same scalar is a unit in every residue field of a k-scheme.
+Source: def-fourier-set (blueprint: lem-fd-convolution-kernel).
+Proof: apply the structure homomorphism from k to each residue field to the unit
+fourierGeometricCoefficient_isUnit. This includes non-closed geometric points. -/
+theorem fourierResidueCoefficient_isUnit (F : FourierSetting.{u}) (X : Scheme.{u})
+    [X.Over (fourierGeometricBase F)] (x : X) :
+    IsUnit (F.coefficients.l : X.residueField x) := by
+  simpa only [map_natCast] using (fourierGeometricCoefficient_isUnit F).map
+    ((Scheme.ΓSpecIso (CommRingCat.of F.field.k)).inv ≫
+      (X ↘ fourierGeometricBase F).appTop ≫ X.Γevaluation x).hom
 
 end WeilConjectures
