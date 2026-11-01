@@ -161,6 +161,212 @@ private theorem coefficient_refinement_of_restriction
 
 -- Proof-term congruence for the inherited proof-irrelevant instance parameters.
 
+private theorem derivedCategory_obj_eq (C : Type v₁) [Category.{v₂} C] [Abelian C]
+    [LocallySmall.{v₃} C] [Abelian.HasKInjectiveResolutions C] :
+    @DerivedCategory C _ _ (HasDerivedCategory.ofHasKInjectiveResolutions.{v₃} C) =
+      CategoryTheory.Quotient (Localization.Construction.relations
+        (HomologicalComplex.quasiIso C (ComplexShape.up ℤ))) := by
+  unfold DerivedCategory HasDerivedCategory.ofHasKInjectiveResolutions
+    HasDerivedCategory.standard
+  rfl
+
+private meta def instanceCongrHEq
+    (cache : IO.Ref (Std.HashMap (Lean.Expr × Lean.Expr) Lean.Expr))
+    (pairs : Array (Lean.Expr × Lean.Expr × Lean.Expr)) :
+    Nat → Lean.Expr → Lean.Expr → Lean.MetaM Lean.Expr
+  | 0, a, b => do
+    throwError "congruence depth exhausted: {a} versus {b}"
+  | n + 1, a, b => do
+    if let some h := (← cache.get).get? (a, b) then return h
+    let compute : Lean.MetaM Lean.Expr := do
+      let a ← Lean.instantiateMVars a
+      let b ← Lean.instantiateMVars b
+      let a := a.consumeMData
+      let b := b.consumeMData
+      if a.isFVar then
+        if let some v := (← a.fvarId!.getDecl).value? then
+          return ← instanceCongrHEq cache pairs n v b
+      if b.isFVar then
+        if let some v := (← b.fvarId!.getDecl).value? then
+          return ← instanceCongrHEq cache pairs n a v
+      let normalize (e : Lean.Expr) : Lean.Expr :=
+        match e.headBeta with
+        | .letE _ _ value body _ => body.instantiate1 value
+        | e' =>
+          if (e'.isAppOfArity ``CategoryTheory.Functor.obj 6 ||
+              e'.isAppOfArity ``CategoryTheory.Functor.map 8) &&
+              (e'.getArg! 4).isAppOfArity ``CategoryTheory.Functor.id 2 then
+            e'.getAppArgs.back!
+          else e'
+      let a' := normalize a
+      let b' := normalize b
+      if a != a' || b != b' then
+        return ← instanceCongrHEq cache pairs n a' b'
+      for (x, y, h) in pairs do
+        if a == x && b == y then return h
+        if a == y && b == x then return ← Lean.Meta.mkAppM ``HEq.symm #[h]
+      if a == b then
+        return ← Lean.Meta.mkHEqRefl a
+      if (← Lean.Meta.isProof a) && (← Lean.Meta.isProof b) then
+        return ← Lean.Meta.mkAppM ``proof_irrel_heq #[a, b]
+      if let .lam name type body info := a then
+        if let .lam name' type' body' info' := b then
+          let htype ← instanceCongrHEq cache pairs n type type'
+          let htype ← instanceCongrToEq htype
+          return ← Lean.Meta.withLocalDecl name info type fun x =>
+            Lean.Meta.withLocalDecl name' info' type' fun y => do
+              let hxy ← Lean.Meta.mkHEq x y
+              Lean.Meta.withLocalDeclD `hxy hxy fun hxy => do
+                let h ← instanceCongrHEq cache (pairs.push (x, y, hxy)) n
+                  (body.instantiate1 x) (body'.instantiate1 y)
+                let h ← Lean.Meta.mkLambdaFVars #[x, y, hxy] h
+                Lean.Meta.mkAppM ``Function.hfunext #[htype, h]
+      let expandProjection (e : Lean.Expr) : Lean.MetaM Lean.Expr := do
+        let fn := e.getAppFn
+        let .proj typeName index major := fn | return e
+        let info := Lean.getStructureInfo (← Lean.getEnv) typeName
+        let p ← Lean.Meta.mkProjection major info.fieldNames[index]!
+        return Lean.mkAppN p e.getAppArgs
+      let a' ← expandProjection a
+      let b' ← expandProjection b
+      if a != a' || b != b' then
+        return ← instanceCongrHEq cache pairs n a' b'
+      let af := a.getAppFn.consumeMData
+      let bf := b.getAppFn.consumeMData
+      let aa := a.getAppArgs
+      let ba := b.getAppArgs
+      if af.isConstOf ``DerivedCategory && bf.isConstOf ``CategoryTheory.Quotient then
+        let levels := (← Lean.getConstInfo ``DerivedCategory).levelParams.zip af.constLevels!
+        let ls := (← Lean.getConstInfo ``derivedCategory_obj_eq).levelParams.map fun name ↦
+          if name == `v₁ then (levels.lookup `u).get!
+          else if name == `v₂ then (levels.lookup `v).get!
+          else (levels.lookup `w).get!
+        let h ← Lean.Meta.mkAppOptM' (Lean.mkConst ``derivedCategory_obj_eq ls)
+          #[some aa[0]!, some aa[1]!, some aa[2]!, none, none]
+        let some (_, left, right) := (← Lean.Meta.inferType h).eq? |
+          throwError "expected derived-object equality"
+        let ha ← instanceCongrHEq cache pairs n a left
+        let hb ← instanceCongrHEq cache pairs n right b
+        let h ← Lean.Meta.mkAppM ``heq_of_eq #[h]
+        let h ← Lean.Meta.mkAppM ``HEq.trans #[ha, h]
+        return ← Lean.Meta.mkAppM ``HEq.trans #[h, hb]
+      if bf.isConstOf ``DerivedCategory && af.isConstOf ``CategoryTheory.Quotient then
+        let h ← instanceCongrHEq cache pairs n b a
+        return ← Lean.Meta.mkAppM ``HEq.symm #[h]
+      if af.isConstOf ``CategoryTheory.Preadditive.mk &&
+          bf.isConstOf ``CategoryTheory.Abelian.toPreadditive then
+        return ← Lean.Meta.mkHEqRefl a
+      if bf.isConstOf ``CategoryTheory.Preadditive.mk &&
+          af.isConstOf ``CategoryTheory.Abelian.toPreadditive then
+        return ← Lean.Meta.mkHEqRefl a
+      if af.isConstOf ``CategoryTheory.Functor.mk &&
+          bf.isConstOf ``CategoryTheory.Functor.ShiftSequence.sequence then
+        return ← Lean.Meta.mkHEqRefl a
+      if bf.isConstOf ``CategoryTheory.Functor.mk &&
+          af.isConstOf ``CategoryTheory.Functor.ShiftSequence.sequence then
+        return ← Lean.Meta.mkHEqRefl a
+      let sameHead ← if af == bf then pure true else
+        if af.isConst && bf.isConst && af.constName! == bf.constName! then
+          Lean.Meta.isDefEq af bf
+        else pure false
+      if sameHead && aa.size ≥ 4 && ba.size ≥ 4 &&
+          (af.isConstOf ``CategoryTheory.Functor.obj ||
+            af.isConstOf ``CategoryTheory.Functor.map ||
+            af.isConstOf ``CategoryTheory.NatTrans.app) then
+        let sameDomain ← Lean.Meta.isDefEq aa[0]! ba[0]!
+        let sameCodomain ← Lean.Meta.isDefEq aa[2]! ba[2]!
+        if !sameDomain || !sameCodomain then
+          let reduceComponent (e : Lean.Expr) : Lean.MetaM (Option Lean.Expr) := do
+            let some e' ← Lean.Meta.withTransparency .instances
+                (Lean.Meta.unfoldDefinition? e (ignoreTransparency := true)) | return none
+            let some f ← Lean.Meta.withTransparency .all
+                (Lean.Meta.reduceProj? e'.getAppFn) | return none
+            let e'' := Lean.mkAppN f e'.getAppArgs
+            if e'' == e then return none
+            return some e''
+          if let some a' ← reduceComponent a then
+            return ← instanceCongrHEq cache pairs n a' b
+          if let some b' ← reduceComponent b then
+            return ← instanceCongrHEq cache pairs n a b'
+      if !sameHead || aa.size != ba.size then
+        let isProjection (f : Lean.Expr) : Lean.MetaM Bool := do
+          if f.isConst then
+            return (← Lean.getProjectionFnInfo? f.constName!).isSome
+          return false
+        if !(← isProjection af) then
+          if let some a' ← Lean.Meta.unfoldDefinition? a (ignoreTransparency := true) then
+            return ← instanceCongrHEq cache pairs n a' b
+        if !(← isProjection bf) then
+          if let some b' ← Lean.Meta.unfoldDefinition? b (ignoreTransparency := true) then
+            return ← instanceCongrHEq cache pairs n a b'
+        let reduceProjection (e : Lean.Expr) : Lean.MetaM (Option Lean.Expr) := do
+          let some e' ← Lean.Meta.withTransparency .instances
+              (Lean.Meta.unfoldDefinition? e (ignoreTransparency := true)) | return none
+          let some f ← Lean.Meta.withTransparency .all
+              (Lean.Meta.reduceProj? e'.getAppFn) | return none
+          let e'' := Lean.mkAppN f e'.getAppArgs
+          if e'' == e then return none
+          if e''.getAppFn.isProj then
+            let .proj typeName index major := e''.getAppFn | return none
+            let info := Lean.getStructureInfo (← Lean.getEnv) typeName
+            let p ← Lean.Meta.mkProjection major info.fieldNames[index]!
+            let e''' := Lean.mkAppN p e''.getAppArgs
+            if e''' == e then return none
+          return some e''
+        if ← isProjection af then
+          if let some a' ← reduceProjection a then
+            return ← instanceCongrHEq cache pairs n a' b
+        if ← isProjection bf then
+          if let some b' ← reduceProjection b then
+            return ← instanceCongrHEq cache pairs n a b'
+        throwError "different congruence heads: {a} versus {b}"
+      let expandCompositeObj (e : Lean.Expr) : Lean.MetaM Lean.Expr := do
+        let args := e.getAppArgs
+        if e.isAppOf ``CategoryTheory.Functor.obj && args.size ≥ 2 then
+          let functor := args[args.size - 2]!
+          if functor.isAppOf ``CategoryTheory.Functor.comp then
+            let fs := functor.getAppArgs
+            let x ← Lean.Meta.mkAppM ``CategoryTheory.Functor.obj
+              #[fs[fs.size - 2]!, args.back!]
+            return ← Lean.Meta.mkAppM ``CategoryTheory.Functor.obj #[fs.back!, x]
+        return e
+      let a' ← expandCompositeObj a
+      let b' ← expandCompositeObj b
+      if a != a' || b != b' then
+        return ← instanceCongrHEq cache pairs n a' b'
+      let build : Lean.MetaM Lean.Expr := do
+        let mut first := 0
+        while first < aa.size && aa[first]! == ba[first]! do
+          first := first + 1
+        let f := Lean.mkAppN af (aa.extract 0 first)
+        let ct ← Lean.Meta.mkHCongrWithArity f (aa.size - first)
+        let mut args := #[]
+        for i in [first:aa.size] do
+          let h ← instanceCongrHEq cache pairs n aa[i]! ba[i]!
+          let h ← if ct.argKinds[i - first]! == .eq then
+            instanceCongrToEq h else pure h
+          args := args.push aa[i]! |>.push ba[i]! |>.push h
+        return Lean.mkAppN ct.proof args
+      try build catch err =>
+        -- Equal applications can expose their functor parameters differently.
+        -- Reduce a component projection before trying to compare those parameters.
+        let reduceComponent (e : Lean.Expr) : Lean.MetaM (Option Lean.Expr) := do
+          let some e' ← Lean.Meta.withTransparency .instances
+              (Lean.Meta.unfoldDefinition? e (ignoreTransparency := true)) | return none
+          let some f ← Lean.Meta.withTransparency .all
+              (Lean.Meta.reduceProj? e'.getAppFn) | return none
+          let e'' := Lean.mkAppN f e'.getAppArgs
+          if e'' == e then return none
+          return some e''
+        if let some a' ← reduceComponent a then
+          return ← instanceCongrHEq cache pairs n a' b
+        if let some b' ← reduceComponent b then
+          return ← instanceCongrHEq cache pairs n a b'
+        throw err
+    let h ← compute
+    cache.modify fun m => m.insert (a, b) h
+    return h
+
 private theorem cancel_map_iso {C D : Type*} [Category* C] [Category* D]
     (F : C ⥤ D) {M N : C} {A : D} (b : M ≅ N)
     (x : A ⟶ F.obj M) (y : A ⟶ F.obj N) (h : x ≫ F.map b.hom = y) :

@@ -163,6 +163,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
 import Mathlib.CategoryTheory.Adjunction.Whiskering
 import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinaryFiniteP1DatumUniqueness
 import WeilConjectures.AlgebraicGeometry.VectorIntegrationSite.OrderedIntegrationComparison
+public import WeilConjectures.SmoothPurity.OrdinaryFiniteTwistTransportUniqueness
 
 /-! # Pro-etale vector integration with local normalization
 Source: main-20261015, vector-bundle integration; Stacks 09AF and 099R
@@ -185,4 +186,24 @@ variable (r : ℕ)
 variable (d : ℕ) (F : SheafOfModules.{u} S.ringCatSheaf) [F.IsFiniteLocallyFreeOfRank d]
 
 set_option linter.unusedVariables false in
+end AlgebraicGeometry.ProEtale.VectorIntegrationSite
+
+namespace AlgebraicGeometry.ProEtale.VectorIntegrationSite
+
+private theorem compared_pullback_unit (A : Type (u + 1)) [CommRing A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y)
+    {K : Etale.DerivedCategoryModule A Y} (g : K ⟶ Etale.ordinaryFiniteUnit A Y) :
+    (upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor.map
+        ((comparison A Y).map g) ≫ (pullbackUnit A f).hom =
+      (pullback A f).inv.app K ≫ (comparison A X).map
+        ((Etale.ordinaryFinitePullback A f).map g ≫
+          (Etale.ordinaryFiniteUnitPullback A f).hom) := by
+  have hn := (pullback A f).inv.naturality g
+  dsimp only [Functor.comp_map] at hn
+  unfold pullbackUnit geoP1UnitPullback
+  simp only [Iso.trans_hom, Functor.mapIso_hom]
+  unfold pullback at hn ⊢
+  with_unfolding_all
+    erw [← Category.assoc, hn, Category.assoc, ← CategoryTheory.Functor.map_comp]
+
 end AlgebraicGeometry.ProEtale.VectorIntegrationSite

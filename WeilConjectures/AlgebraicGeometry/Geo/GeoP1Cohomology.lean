@@ -248,6 +248,8 @@ public import WeilConjectures.SmoothPurity.EtaleFiniteTwistPullbackRest
 public import WeilConjectures.SmoothPurity.FiniteEtaleTateLinePullback
 public import WeilConjectures.SmoothPurity.FiniteP1ChernMapBaseChange
 public import WeilConjectures.SmoothPurity.OrdinaryFiniteTwistTransportUniqueness
+public import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Shift
 
 /-!
 # The ordinary pro-etale projective-line decomposition and trace
@@ -559,34 +561,21 @@ theorem geoP1_decomposition_isIso_step
     (S : Scheme.{u}) [IsNoetherian S]
     (hS : IsUnit (N : Γ(S, ⊤))) :
     IsIso (geoP1DecompositionMap A N hN hA S hS) := by
-  let d := Etale.projectiveLineTraceDatum N hN A hA S hS
-  have : IsProper (ProjectiveLine S ↘ S) := ProjectiveSpace.instIsProper (ULift.{u} (Fin 2)) S
-  have hb : IsIso (biprod.desc
-      (Etale.ordinaryFiniteP1Unit A N hA (Etale.projectiveLineTraceTransport N hN A hA) S hS)
-      (Etale.ordinaryFiniteP1ChernPushforward A N hA S d.chern)) := by
-    rw [← d.decomposition_hom]
-    infer_instance
-  have := Etale.isIso_p1DecompositionMap_of_twisted A N hN hA
-    (Etale.projectiveLineTraceTransport N hN A hA) S hS d.chern hb
-  have := geoP1_sumComparison_isIso A S (Etale.ordinaryFiniteUnit A S)
-    (Etale.p1DecompositionTwist A N hA S (-1) (-2))
-  have := geoP1_pushComparison_isIso A (ProjectiveLine S ↘ S)
-    (Etale.ordinaryFiniteUnit A _) ⟨0, inferInstance⟩
-  unfold geoP1DecompositionMap
-  infer_instance
+  exact decomposition_isIso A N hN hA S hS
 
 /-- The transported ordinary decomposition square is the untwisted base-change
 identity. This is node step 4 for the untwisted summands, one square only.
 Source: blueprint sk-lem-geo-p1-cohomology, paragraph 2 (node step 4)
 (blueprint: geo-p1-untwisted-square-step).
 
-Proof (to be written): restrict the unbounded etale proper exchange to the
-bounded-below exchange (`unboundedEtaleCompactSupport_baseChange`, identity
-compactification of the proper projection) and identify it with the pro-etale
-exchange by `comparison_derivedBaseChangeMap`. Transport the ordinary untwisted
-decomposition square of the normalized datum through the comparison; datum
-uniqueness fixes the ordinary square and the decomposition-maps definition fixes the
-source map; compose with each biproduct injection. -/
+Proof: restrict the unbounded etale proper exchange to the
+bounded-below exchange (`proper_exchange_plus` of the unbounded compact-support
+comparisons, identity compactification of the proper projection) and identify it with
+the pro-etale exchange by `comparison_derivedBaseChangeMap` (`exchangeComparison`).
+Transport the ordinary untwisted decomposition square of the normalized datum through
+the comparison (`compared_sum_square`); Chern-class uniqueness fixes the ordinary
+square and the decomposition-maps definition fixes the source map; biproduct
+extensionality gives the square. -/
 theorem geoP1_untwisted_square_step
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
@@ -597,7 +586,7 @@ theorem geoP1_untwisted_square_step
         geoP1UnitExchange A g =
       geoP1SourceMap A N hN hA g hS ≫
         geoP1DecompositionMap A N hN hA S' hS' := by
-  sorry
+  exact untwisted_square A N hN hA g hS hS'
 
 /-- The twisted decomposition map (twist of (7.2) by (1)[2]) is invertible for a fixed
 Noetherian base.
@@ -615,20 +604,13 @@ theorem geoP1_twisted_isIso_step
     (S : Scheme.{u}) [IsNoetherian S]
     (hS : IsUnit (N : Γ(S, ⊤))) :
     IsIso (geoP1TwistedMap A N hN hA S hS) := by
-  have : IsProper (ProjectiveLine S ↘ S) := ProjectiveSpace.instIsProper (ULift.{u} (Fin 2)) S
-  have := geoP1_sumComparison_isIso A S
-    (Etale.p1DecompositionTwist A N hA S 1 2) (Etale.ordinaryFiniteUnit A S)
-  have := geoP1_pushComparison_isIso A (ProjectiveLine S ↘ S)
-    ((Etale.ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧)
-    (DerivedCategory.TStructure.t.plus.le_shift (2 : ℤ) _ ⟨0, inferInstance⟩)
-  unfold geoP1TwistedMap
-  infer_instance
+  exact twisted_isIso A N hN hA S hS
 
 /-- The transported shifted-line decomposition square, before projection to the trace.
 Source: blueprint sk-lem-geo-p1-cohomology, paragraph 2 (node step 4)
 (blueprint: geo-p1-twisted-square-step).
 
-Proof (to be written): as for the untwisted square, with the shifted positive line:
+Proof: as for the untwisted square, with the shifted positive line:
 the bounded-below exchange identified with the pro-etale exchange by
 `comparison_derivedBaseChangeMap` transports the ordinary twisted decomposition
 square of the normalized datum (fixed by datum uniqueness, with the roots-normalized
@@ -648,7 +630,7 @@ theorem geoP1_twisted_square_step
           ((geoP1Pullback A g).map biprod.snd ≫
             (geoP1UnitPullback A g).hom) ≫
         geoP1TwistedMap A N hN hA S' hS' := by
-  sorry
+  exact twisted_square A N hN hA g hS hS'
 
 private theorem geoP1_trace_projection_step
     {C D : Type*} [Category C] [Category D] [HasZeroMorphisms C]

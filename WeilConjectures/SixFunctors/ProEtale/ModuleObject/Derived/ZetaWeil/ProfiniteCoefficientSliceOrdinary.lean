@@ -45,6 +45,7 @@ import Mathlib.RingTheory.Flat.CategoryTheory
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 import WeilConjectures.CategoryTheory.Sites.PushforwardMonoidal
+public import WeilConjectures.SmoothPurity.SheafRingCoefficientOrdinaryAdjunction
 
 /-! # Ordinary coefficient extension on the profinite slice
 
@@ -67,6 +68,40 @@ private def restriction {R : Sheaf J RingCat.{r}} (U : C)
     {R' : Sheaf (J.over U) RingCat.{r}} (c : R' ≅ R.over U) :
     SheafOfModules.{m} R ⥤ SheafOfModules.{m} R' :=
   SheafOfModules.overFunctor R U ⋙ SheafOfModules.restrictScalars c.hom
+
+private def rightSquare [HasBinaryProducts C] {R S : Sheaf J RingCat.{r}}
+    (U : C) {R' S' : Sheaf (J.over U) RingCat.{r}}
+    (c : R' ≅ R.over U) (d : S' ≅ S.over U) (α : R ⟶ S) (β : R' ⟶ S')
+    (h : c.hom ≫ (J.overPullback RingCat.{r} U).map α = β ≫ d.hom) :
+    (SheafOfModules.restrictScalars.{m} d.inv ⋙
+      SheafOfModules.pushforward (SheafOfModules.pushforwardOver (R := S) U)) ⋙
+        SheafOfModules.restrictScalars α ≅
+      SheafOfModules.restrictScalars β ⋙ SheafOfModules.restrictScalars c.inv ⋙
+        SheafOfModules.pushforward (SheafOfModules.pushforwardOver (R := R) U) := by
+  let G := (Over.star U).sheafPushforwardContinuous RingCat.{r} J (J.over U)
+  let p := SheafOfModules.pushforwardOver (R := R) U
+  let q := SheafOfModules.pushforwardOver (R := S) U
+  have h' : (J.overPullback RingCat.{r} U).map α ≫ d.inv = c.inv ≫ β := by
+    calc
+      _ = c.inv ≫ (c.hom ≫ (J.overPullback RingCat.{r} U).map α) ≫ d.inv := by
+        simp only [← Category.assoc, Iso.inv_hom_id, Category.id_comp]
+      _ = c.inv ≫ (β ≫ d.hom) ≫ d.inv := by rw [h]
+      _ = _ := by simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
+  have hn : α ≫ q = p ≫ G.map ((J.overPullback RingCat.{r} U).map α) := by
+    apply Sheaf.hom_ext
+    apply NatTrans.ext
+    funext V
+    exact (α.hom.naturality Limits.prod.snd.op).symm
+  have hs : α ≫ (q ≫ G.map d.inv) = (p ≫ G.map c.inv) ≫ G.map β := by
+    rw [← Category.assoc, hn, Category.assoc, ← G.map_comp, h', G.map_comp]
+    simp only [Category.assoc]
+  let i := SheafOfModules.pushforwardComp (F := Over.star U) (G := 𝟭 (Over U)) q d.inv
+  let j := SheafOfModules.pushforwardComp (F := Over.star U) (G := 𝟭 (Over U)) p c.inv
+  exact Functor.isoWhiskerRight i _ ≪≫
+    SheafOfModules.pushforwardComp (F := 𝟭 C) (G := Over.star U) α (q ≫ G.map d.inv) ≪≫
+    SheafOfModules.pushforwardCongr hs ≪≫
+    (SheafOfModules.pushforwardComp (F := Over.star U) (G := 𝟭 (Over U))
+      (p ≫ G.map c.inv) β).symm ≪≫ Functor.isoWhiskerLeft _ j.symm
 
 end SliceCoefficientProof
 
