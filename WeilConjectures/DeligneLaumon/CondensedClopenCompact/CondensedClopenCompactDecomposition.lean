@@ -77,6 +77,16 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CondensedOrdina
 import WeilConjectures.AlgebraicGeometry.ProEtaleCoefficients.ProfiniteFiniteConstantLocalModel
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.DetSfCompBaseChangeDefs
 import Mathlib.CategoryTheory.Adjunction.Mates
+public import Mathlib.AlgebraicGeometry.PullbackCarrier
+public import Mathlib.CategoryTheory.Preadditive.FunctorCategory
+public import WeilConjectures.DeligneLaumon.CondensedClopenCompact.CondensedClopenCompactCounit
+import WeilConjectures.CategoryTheory.InverseMateEquivalence
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.BaseChange
+import WeilConjectures.CategoryTheory.Adjunction.SquareCompatibleMate
+import WeilConjectures.CategoryTheory.Derived.DerivedExactSquareComposition
+
+public import WeilConjectures.SixFunctors.CommonStageCompactWeilCohomology
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleUpperStar
 
 /-! # Finite clopen decomposition of condensed compact-support complexes
 
@@ -151,5 +161,128 @@ abbrev compactificationFrobenius (D : FiniteFieldDatum.{u})
   D.galoisMap c.g (by
     letI := Fintype.ofFinite D.k₀
     exact FiniteField.geometricFrobeniusAlgEquivOfAlgebraic D.k₀ D.k)
+
+end WeilConjectures.CondensedClopenCompact
+
+namespace WeilConjectures.CondensedClopenCompact
+
+private theorem compactification_frobenius_comm (D : FiniteFieldDatum.{u})
+    (X : Over (Spec (.of D.k₀)))
+    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+    (c : Compactification X.hom) :
+    (D.geometricFrobenius X).hom ≫ (geometricCompactification D c).i =
+      (geometricCompactification D c).i ≫ compactificationFrobenius D c := by
+  let σ := @FiniteField.geometricFrobeniusAlgEquivOfAlgebraic D.k₀ D.k _
+    (Fintype.ofFinite D.k₀) _ _ _
+  let b := Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))
+  change D.galoisMap X.hom σ ≫ (c.baseChange b).i =
+    (c.baseChange b).i ≫ D.galoisMap c.g σ
+  apply pullback.hom_ext
+  · simp only [Category.assoc, Compactification.baseChange_i_fst]
+    rw [← Category.assoc, (D.galoisMap_projections X.hom σ).1,
+      (D.galoisMap_projections c.g σ).1]
+    exact (c.baseChange_i_fst b).symm
+  · simp only [Category.assoc, Compactification.baseChange_i_snd]
+    rw [(D.galoisMap_projections X.hom σ).2,
+      (D.galoisMap_projections c.g σ).2]
+    simpa only [← Category.assoc] using congrArg
+      (fun f ↦ f ≫ Spec.map (CommRingCat.ofHom σ.toRingEquiv.toRingHom))
+      (c.baseChange_i_snd b).symm
+
+private theorem component_frobenius_comm (D : FiniteFieldDatum.{u})
+    {U X : Over (Spec (.of D.k₀))} (j : U ⟶ X)
+    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] :
+    (schemeFrobenius D U) ≫ geometricInclusion D j =
+      geometricInclusion D j ≫ (D.geometricFrobenius X).hom := by
+  let σ := @FiniteField.geometricFrobeniusAlgEquivOfAlgebraic D.k₀ D.k _
+    (Fintype.ofFinite D.k₀) _ _ _
+  let b := Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))
+  change D.galoisMap U.hom σ ≫ ((Over.pullback b).map j).left =
+    ((Over.pullback b).map j).left ≫ D.galoisMap X.hom σ
+  apply pullback.hom_ext
+  · simp only [Category.assoc, Over.pullback_map_left, pullback.lift_fst]
+    rw [← Category.assoc, (D.galoisMap_projections U.hom σ).1,
+      (D.galoisMap_projections X.hom σ).1]
+    simp only [b, pullback.lift_fst]
+  · simp only [Category.assoc, Over.pullback_map_left, pullback.lift_snd]
+    rw [(D.galoisMap_projections U.hom σ).2,
+      (D.galoisMap_projections X.hom σ).2]
+    simp only [← Category.assoc, b, pullback.lift_snd]
+
+private theorem empty_geometric_fiber (D : FiniteFieldDatum.{u}) (X : Over (Spec (.of D.k₀)))
+    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
+    (I : Type w) [IsEmpty I] (U : I → Over (Spec (.of D.k₀))) (j : ∀ i, U i ⟶ X)
+    (hcover : (⋃ i, Set.range (j i).left) = Set.univ) :
+    IsEmpty (D.geometricFiber X).left := by
+  refine ⟨fun x ↦ ?_⟩
+  have hx : (pullback.fst X.hom
+      (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))) x ∈
+      ⋃ i, Set.range (j i).left := by rw [hcover]; trivial
+  obtain ⟨i, _⟩ := Set.mem_iUnion.mp hx
+  exact isEmptyElim i
+
+private theorem geometric_inclusion_range (D : FiniteFieldDatum.{u})
+    {U X : Over (Spec (.of D.k₀))} (j : U ⟶ X) :
+    Set.range (geometricInclusion D j) =
+      (pullback.fst X.hom
+        (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))) ⁻¹' Set.range j.left := by
+  let b := Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))
+  have h := Scheme.Pullback.range_map (f := U.hom) (g := b) X.hom b
+    j.left (𝟙 _) (𝟙 _) (by simp) (by simp)
+  simpa [b, geometricInclusion, Over.pullback_map_left, pullback.map] using h
+
+private theorem restriction_bounded (ell : ℕ) [Fact ell.Prime] {U X : Scheme.{u}} (j : U ⟶ X)
+    (K : ProEtale.BoundedConstructible
+      (ProEtale.condensedRingObj (Profinite.padicAlgClRingObj ell) X)) :
+    ProEtale.boundedConstructible
+      (ProEtale.condensedRingObj (Profinite.padicAlgClRingObj ell) U)
+      ((pull ell j).obj K.obj) := by
+  have h := ProEtale.CondensedRing.boundedConstructible_leftDerivedUpperStar_obj_of_scheme
+    (Profinite.padicAlgClRingObj ell) j K.obj K.property
+  exact (ProEtale.boundedConstructible _).prop_of_iso
+    ((ProEtale.CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory
+      (Profinite.padicAlgClRingObj ell) j).app K.obj) h
+
+private theorem galoisMap_isIso (D : FiniteFieldDatum.{u}) {Z : Scheme.{u}}
+    (f : Z ⟶ Spec (.of D.k₀)) (sigma : D.k ≃ₐ[D.k₀] D.k) :
+    IsIso (D.galoisMap f sigma) := by
+  let e : _ ≅ _ := ⟨D.galoisMap f sigma, D.galoisMap f sigma.symm,
+    (D.galoisMap_inverse f sigma).1, (D.galoisMap_inverse f sigma).2⟩
+  exact e.isIso_hom
+
+private theorem isIso_desc_of_bicone
+    {C : Type*} [Category* C] [Preadditive C]
+    {I : Type w} [Fintype I] [DecidableEq I] (F : I → C) [HasBiproduct F]
+    {G : C} (inc : ∀ i, F i ⟶ G) (pr : ∀ i, G ⟶ F i)
+    (hd : ∀ i k, inc i ≫ pr k =
+      if h : i = k then eqToHom (congrArg F h) else 0)
+    (hs : ∑ i, pr i ≫ inc i = 𝟙 G) : IsIso (biproduct.desc inc) := by
+  let b : Bicone F :=
+    { pt := G
+      π := pr
+      ι := inc
+      ι_π := by
+        intro i k
+        by_cases h : i = k <;> simpa [h] using hd i k }
+  exact (biproduct.uniqueUpToIso F (isBilimitOfTotal b hs)).isIso_inv
+
+private theorem component_action_compat
+    {C B E : Type*} [Category* C] [Category* B] [Category* E]
+    (G : C ⥤ C) (H : B ⥤ B) (J : C ⥤ B) (F : C ⥤ E) (Fi : B ⥤ E)
+    (s : G ⋙ J ≅ J ⋙ H) (inc : J ⋙ Fi ⟶ F)
+    (ct : F ⟶ G ⋙ F) (cti : Fi ⟶ H ⋙ Fi)
+    (ht : inc ≫ ct = Functor.whiskerLeft J cti ≫
+      Functor.whiskerRight s.inv Fi ≫ Functor.whiskerLeft G inc)
+    (K : C) (theta : G.obj K ⟶ K) :
+    inc.app K ≫ (ct.app K ≫ F.map theta) =
+      (cti.app (J.obj K) ≫ Fi.map (s.inv.app K ≫ J.map theta)) ≫
+        inc.app K := by
+  have h := congrArg (fun a ↦ a.app K) ht
+  dsimp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app] at h
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← Category.assoc, h]
+  simp only [Category.assoc]
+  rw [← inc.naturality theta]
+  rfl
 
 end WeilConjectures.CondensedClopenCompact
