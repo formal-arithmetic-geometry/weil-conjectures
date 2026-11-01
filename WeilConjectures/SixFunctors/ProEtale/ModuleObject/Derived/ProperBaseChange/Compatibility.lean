@@ -6,14 +6,14 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
-import WeilConjectures.CategoryTheory.Adjunction.ProperBaseChange.CoefficientPushCopowerCriterion
+import WeilConjectures.CategoryTheory.CoefficientPushCopowerCriterion
 import WeilConjectures.CategoryTheory.GrothendieckDerivedCoproducts
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 import Mathlib.Algebra.Homology.HomologicalComplexLimits
 import Mathlib.CategoryTheory.Limits.Shapes.Products
 import WeilConjectures.CategoryTheory.DerivedModuleDirectSums
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedQbarScalarBasis
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedSubfieldBoundedCopowers
+import WeilConjectures.AlgebraicGeometry.CondensedQbarScalarBasis
+import WeilConjectures.AlgebraicGeometry.CondensedSubfieldBoundedCopowers
 
 /-! # Bounded-below coefficient pushforward compatibility
 

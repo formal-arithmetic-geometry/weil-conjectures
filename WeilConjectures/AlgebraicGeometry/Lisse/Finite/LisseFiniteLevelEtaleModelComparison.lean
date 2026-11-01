@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Lisse.Tower.LisseTowerEtaleDescentData
 import WeilConjectures.AlgebraicGeometry.Classical.ClassicalDerivedEquivalence
-import WeilConjectures.AlgebraicGeometry.Compact.CompactSupportComparisonUnit
+import WeilConjectures.AlgebraicGeometry.CompactSupportComparisonUnit
 import WeilConjectures.AlgebraicGeometry.ProEtale.Classical.ProEtaleClassicalSheaves
 import WeilConjectures.ConstructibleSheaf.Pullback
 

@@ -13,6 +13,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 public import Mathlib.Algebra.Homology.Single
+public import WeilConjectures.Algebra.Homology.DerivedTensor
 
 /-!
 # Derived tensor product on the small pro-etale site
@@ -46,24 +47,6 @@ local notation "𝓢" =>
   (sheafCompose (ProEt.topology Y)
     (forget₂ CommRingCat.{w + 1} RingCat.{w + 1})).obj 𝓡
 
-/-- Derived tensor with a chosen K-flat resolution `f : P ⟶ K₁`.
-
-The K-flat condition is the existing `CochainComplex.IsAcyclicTensorKFlat` for the constant
-sheaf of commutative rings.
-The representative is the total complex with degree `n` term `⨁ p + q = n, Pᵖ ⊗ K₂ᵠ`
-and differential `d_P ⊗ 1 + (-1)^p 1 ⊗ d_K₂`, mapped into the derived category.
-No independence-of-resolution theorem is asserted here.
-
-Source: blueprint `def-weil-derived-tensor`, order 663; Stacks Project, Tags 06YN,
-06YS and 06YU (blueprint: def-weil-derived-tensor). -/
-noncomputable def derivedTensor
-    (K₁ K₂ P : CochainComplex (SheafOfModules.{w + 1} 𝓢) ℤ)
-    (_f : P ⟶ K₁) (_hf : QuasiIso _f)
-    (_hP : CochainComplex.IsAcyclicTensorKFlat.{w + 1, w} (R := 𝓡) P) :
-    proEtaleDerivedCategory Y A :=
-  letI := SheafOfModules.monoidalCategory 𝓡
-  letI := HasDerivedCategory.standard (SheafOfModules.{w + 1} 𝓢)
-  DerivedCategory.Q.obj (CochainComplex.mapBifunctor P K₂ (curriedTensor _))
 
 /-- Derived tensor with the constant ring `B` along a ring map `φ : A →+* B`.
 

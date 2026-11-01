@@ -58,7 +58,7 @@ public import WeilConjectures.CategoryTheory.Ringed.RingedInternalHomExactRestri
 public import Mathlib.Algebra.Homology.Double
 public import Mathlib.CategoryTheory.Endomorphism
 public import WeilConjectures.CategoryTheory.Ringed.RingedPrincipalLocalTests
-import WeilConjectures.CategoryTheory.SmoothPurity.UnitPowerCompleteness
+import WeilConjectures.CategoryTheory.UnitPowerCompleteness
 import WeilConjectures.Algebra.Homology.Site.SitePerfectModelRestrictionSupplement
 import WeilConjectures.CategoryTheory.Principal.PrincipalKoszulQuotientTowersSupplement
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
@@ -68,6 +68,7 @@ import Mathlib.CategoryTheory.Sites.EpiMono
 import Mathlib.CategoryTheory.Sites.Abelian
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
+public import WeilConjectures.AlgebraicGeometry.PrincipalIdealLocalTestCriterion
 /-! # The principal image ideal and the covering-sieve local tests
 
 Source: Stacks 0999, 099B and 03DA.
@@ -171,16 +172,6 @@ private theorem sliceSection_eq (U : C)
 variable [HasDerivedCategory.{w} A]
   [∀ U : C, HasDerivedCategory.{w} (SheafOfModules.{u} ((R).over U))]
 
-/-- Use the given derived-category instances for the same slice module categories. Composing a
-restricted commutative ring sheaf with forgetful coefficients agrees definitionally with
-restricting its ring sheaf.
-
-Source: Stacks 0999, 099B and 03DA.
-(blueprint: lem-pur-principal-ideal-local-test-criterion). -/
-abbrev principalLocalTestSliceDerived :
-    ∀ U : C, HasDerivedCategory.{w} (ringedSiteModules.{u}
-      ((sheafCompose (J.over U) (forget₂ CommRingCat RingCat)).obj (O.over U))) :=
-  fun U ↦ inferInstanceAs (HasDerivedCategory.{w} (SheafOfModules.{u} ((R).over U)))
 
 /-- The principal image ideal gives exactly the covering-sieve formulation of local completeness. An
 image section locally lifts along the epimorphism onto the image and therefore is locally a

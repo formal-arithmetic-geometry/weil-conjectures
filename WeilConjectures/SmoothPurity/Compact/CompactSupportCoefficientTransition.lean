@@ -9,7 +9,7 @@ public import WeilConjectures.SmoothPurity.Compact.CompactSupportReductionTowerD
 public import WeilConjectures.SmoothPurity.Supporting.CoefDerivedSystemEvaluationCalculus
 public import WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
 import all WeilConjectures.SixFunctors.Coefficient.CoefficientRingedSequenceSiteSupplement
-import all WeilConjectures.CategoryTheory.Derived.DerivedExactSquareComposition
+import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 
 /-! # Native coefficient transitions
 

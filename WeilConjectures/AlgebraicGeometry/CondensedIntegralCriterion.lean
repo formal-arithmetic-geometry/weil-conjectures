@@ -16,7 +16,7 @@ public import Mathlib.Data.List.TFAE
 
 import WeilConjectures.AlgebraicGeometry.Integral.Models.IntegralModelsStacksBlueprint
 import WeilConjectures.AlgebraicGeometry.Integral.IntegralLocalStructure
-import WeilConjectures.AlgebraicGeometry.Integral.Residue.IntegralResidueCriterion
+import WeilConjectures.SixFunctors.ProEtale.IntegralResidueCriterion
 import WeilConjectures.AlgebraicGeometry.ProperBaseChange.NoetherianStratumDetectionSupplement
 import WeilConjectures.AlgebraicGeometry.Integral.IntegralPointComplexHomology
 

@@ -32,7 +32,7 @@ public import Mathlib.CategoryTheory.Adjunction.Limits
 public import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
-import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleAbelianClosedCounit
+import WeilConjectures.AlgebraicGeometry.ProEtaleAbelianClosedCounit
 import WeilConjectures.AlgebraicGeometry.ProEtaleModuleInverseImageUnitComparison
 import WeilConjectures.AlgebraicGeometry.ProEtaleInverseImage
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs

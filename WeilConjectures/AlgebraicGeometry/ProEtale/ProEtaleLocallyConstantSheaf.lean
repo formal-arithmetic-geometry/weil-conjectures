@@ -13,6 +13,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import WeilConjectures.CategoryTheory.RingedSiteModules
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+public import WeilConjectures.AlgebraicGeometry.ProEtaleConstantModuleEncoding
 
 /-!
 # Locally constant module sheaves on the small pro-etale site
@@ -52,34 +53,6 @@ noncomputable def proEtaleConstantModulePresheaf (C : Type w) [Category.{v} C] (
   obj _ := M
   map _ := 𝟙 M
 
-/-- Sheafification of the constant ring unit remains locally bijective after
-forgetting commutativity. Source: the constant-sheaf construction in Bhatt--Scholze
-7.3.1(1) (blueprint: def-weil-proetale-locally-constant-sheaf).
-Proof: the unit is locally bijective on underlying sets; forgetting commutativity
-leaves those sets and every restriction map unchanged. -/
-theorem proEtaleConstantRingUnit_locallyBijective (Y : Scheme.{t}) (A : Type t)
-    [CommRing A] :
-    Presheaf.IsLocallyInjective (ProEt.topology Y)
-      (Functor.whiskerRight (CategoryTheory.toSheafify (ProEt.topology Y)
-        ((Functor.const Y.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{t + 1, t} A))))
-        (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})) ∧
-    Presheaf.IsLocallySurjective (ProEt.topology Y)
-      (Functor.whiskerRight (CategoryTheory.toSheafify (ProEt.topology Y)
-        ((Functor.const Y.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{t + 1, t} A))))
-        (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})) := by
-  constructor
-  · apply (Presheaf.isLocallyInjective_forget_iff _ _).mp
-    change Presheaf.IsLocallyInjective (ProEt.topology Y)
-      (Functor.whiskerRight (CategoryTheory.toSheafify (ProEt.topology Y)
-        ((Functor.const Y.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{t + 1, t} A))))
-        (CategoryTheory.forget CommRingCat.{t + 1}))
-    infer_instance
-  · apply (Presheaf.isLocallySurjective_iff_whisker_forget _ _).mpr
-    change Presheaf.IsLocallySurjective (ProEt.topology Y)
-      (Functor.whiskerRight (CategoryTheory.toSheafify (ProEt.topology Y)
-        ((Functor.const Y.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{t + 1, t} A))))
-        (CategoryTheory.forget CommRingCat.{t + 1}))
-    infer_instance
 
 /-- The constant module sheaf, sheafifying the constant module presheaf together
 with the constant coefficient ring. Scalar multiplication is the sheafified original

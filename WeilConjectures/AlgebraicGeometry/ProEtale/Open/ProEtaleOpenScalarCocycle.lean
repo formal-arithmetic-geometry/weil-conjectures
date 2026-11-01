@@ -13,7 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Intrinsic.ProEtaleIntri
 
 import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChangeAdjunctionSupplement
 import all WeilConjectures.AlgebraicGeometry.Ordinary.OrdinaryRestrictionPullbackSquare
-import all WeilConjectures.CategoryTheory.Derived.DerivedExactSquareComposition
+import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 import WeilConjectures.CategoryTheory.Adjunction.ConjugatePaste
 import WeilConjectures.AlgebraicGeometry.Scalar.ScalarAssociatorConjugate
 import Mathlib.CategoryTheory.Adjunction.Basic

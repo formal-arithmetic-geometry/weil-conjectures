@@ -5,7 +5,7 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ProfiniteCondensedRing
+public import WeilConjectures.Topology.ProfiniteCondensedRing
 public import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeartStratificationDefs
 public import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Topology.KrullDimension
 public import Mathlib.Topology.Sober
 public import WeilConjectures.Mathlib.Topology.KrullDimension
-import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleAbelianClosedCounit
+import WeilConjectures.AlgebraicGeometry.ProEtaleAbelianClosedCounit
 import all WeilConjectures.AlgebraicGeometry.CondensedOpenClosedRecollement
 import all WeilConjectures.Mathlib.CategoryTheory.Triangulated.TriangleShift
 import all WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHomology

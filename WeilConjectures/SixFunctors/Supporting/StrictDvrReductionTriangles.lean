@@ -103,6 +103,8 @@ Their scalar-first tensor convention is the canonical symmetry presentation of
 
 set_option autoImplicit false
 
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
+
 universe t u
 
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated Opposite

@@ -31,6 +31,8 @@ public import Mathlib.Algebra.Category.Grp.Adjunctions
 public import Mathlib.Algebra.Homology.ShortComplex.Exact
 public import Mathlib.CategoryTheory.Sites.Coherent.CoherentSheaves
 public import Mathlib.Combinatorics.Quiver.ReflQuiver
+public import WeilConjectures.CategoryTheory.CondensedInternalBarData
+public import WeilConjectures.AlgebraicGeometry.FreeParameterScalarMaps
 
 /-! # The augmented internal homogeneous bar resolution
 
@@ -59,21 +61,6 @@ namespace Profinite.CondensedAction.InternalBar
 
 variable (R : Profinite.CondensedRing.{u}) [IsCommMonObj R.X]
 
-/-- The free internal module on a condensed set, by the two free adjunctions.
-Source: the free-module construction in step 1 of the internal bar proof
-(blueprint: lem-sfb-condensed-internal-bar-resolution). -/
-def free : Sheaf (coherentTopology Profinite.{u}) (Type (u + 1)) ⥤ Modules R :=
-  Sheaf.composeAndSheafify (coherentTopology Profinite.{u}) AddCommGrpCat.free.{u + 1} ⋙
-    Mod.free R.X
-
-/-- The actual free-forgetful adjunction, determining the generator inclusion.
-Source: step 1, the universal property of the free internal module
-(blueprint: lem-sfb-condensed-internal-bar-resolution). -/
-def freeAdjunction : free R ⊣
-    Mod.forget R.X ⋙ sheafCompose (coherentTopology Profinite.{u})
-      (forget AddCommGrpCat.{u + 1}) :=
-  (Sheaf.adjunction (coherentTopology Profinite.{u}) AddCommGrpCat.adj.{u + 1}).comp
-    (Mod.freeForgetAdjunction R.X)
 
 /-- The profinite space of tuples, including the one-point space in arity zero.
 Source: the objects in the homogeneous bar construction

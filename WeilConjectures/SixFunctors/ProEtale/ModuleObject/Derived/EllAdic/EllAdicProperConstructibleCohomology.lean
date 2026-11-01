@@ -9,9 +9,9 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarCoproducts
 import all WeilConjectures.AlgebraicGeometry.Adic.AdicConstructibilityPredicateComparison
-import WeilConjectures.AlgebraicGeometry.Integral.IntegralLfpConstantModelComparison
-import WeilConjectures.AlgebraicGeometry.Integral.Residue.IntegralResidueCriterion
-import WeilConjectures.AlgebraicGeometry.Integral.IntegralDirectImageLimits
+import WeilConjectures.AlgebraicGeometry.IntegralLfpConstantModelComparison
+import WeilConjectures.SixFunctors.ProEtale.IntegralResidueCriterion
+import WeilConjectures.SixFunctors.ProEtale.IntegralDirectImageLimits
 import all WeilConjectures.AlgebraicGeometry.DerivedNakayamaResolution
 import all WeilConjectures.NumberTheory.Padics.CoefficientExtensionFinite
 import all WeilConjectures.NumberTheory.Padics.CoefficientExtensionSupplement
@@ -20,6 +20,7 @@ import all WeilConjectures.AlgebraicGeometry.ContinuousCoefficientCommRing
 import all WeilConjectures.AlgebraicGeometry.ContinuousCoefficientUniverse
 import all Mathlib.Topology.Category.Profinite.EffectiveEpi
 import all WeilConjectures.CategoryTheory.RingObjects.ContinuousMap
+import WeilConjectures.AlgebraicGeometry.ContinuousIntegralPushComparison
 import all Mathlib.Condensed.TopComparison
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
 import all Mathlib.Topology.Algebra.Ring.Ideal
@@ -73,8 +74,8 @@ import WeilConjectures.CategoryTheory.DerivedCategory.FiniteCohomologicalDimensi
 import WeilConjectures.AlgebraicGeometry.Finite.Type.FiniteTypeFibreDimensionBound
 import all WeilConjectures.AlgebraicGeometry.ProEtale.Constructible.ProEtaleConstructibleOrigin
 import WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinary.FiniteDiscreteEncodingCompactification
-import all WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinary.FiniteDiscreteEncodingConstructibility
-import WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinary.FiniteDiscreteEncodingTensorTor
+import all WeilConjectures.AlgebraicGeometry.FiniteDiscreteEncodingConstructibility
+import WeilConjectures.AlgebraicGeometry.FiniteDiscreteEncodingTensorTor
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherence
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
@@ -300,7 +301,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import WeilConjectures.AlgebraicGeometry.ProEtale.AffineClosedSiteFunctorProperties
 import WeilConjectures.AlgebraicGeometry.ProEtaleAbelianClosedSupport
-import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleAbelianClosedCounit
+import WeilConjectures.AlgebraicGeometry.ProEtaleAbelianClosedCounit
 import WeilConjectures.Mathlib.AlgebraicGeometry.Cover.QuasiCompact
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Pullback
 import WeilConjectures.AlgebraicGeometry.CondensedSurjectiveClosedLocalPresentation
@@ -427,7 +428,7 @@ import Mathlib.CategoryTheory.Sites.Adjunction
 import Mathlib.Algebra.Category.Grp.Adjunctions
 import WeilConjectures.AlgebraicGeometry.IntegralLfpFiniteQuotientCharts
 import WeilConjectures.AlgebraicGeometry.IntegralLfpLocalTorsionCharts
-import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteDiscreteCondensedRing
+import WeilConjectures.AlgebraicGeometry.FiniteDiscreteCondensedRing
 import WeilConjectures.AlgebraicGeometry.Finite.FiniteDiscreteSchemeRingSupplement
 import WeilConjectures.CategoryTheory.SheafPullbackForgetComparison
 import Mathlib.CategoryTheory.Sites.Pullback
@@ -565,6 +566,7 @@ import Mathlib.CategoryTheory.Monoidal.Internal.FunctorCategory
 import WeilConjectures.AlgebraicGeometry.EtaleStratifiedFinite
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperBaseChange.Compatibility
+public import WeilConjectures.AlgebraicGeometry.EllAdicProperConstructibleCohomology
 
 /-!
 # Constructibility of proper ell-adic direct-image cohomology

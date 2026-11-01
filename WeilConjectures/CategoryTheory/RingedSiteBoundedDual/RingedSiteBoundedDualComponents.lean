@@ -11,6 +11,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 import WeilConjectures.CategoryTheory.Ringed.Site.RingedSiteDualityMaps
 import WeilConjectures.Algebra.Homology.SmoothPurity.PullbackExistsOfUniverses
 import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.InternalHomUnit
+public import WeilConjectures.Algebra.Homology.RingedSiteBoundedDualComponents
 
 /-! # Components of the bounded ordinary sheaf dual
 
@@ -35,43 +36,12 @@ variable {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
   [J.HasSheafCompose (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})]
   (R : Sheaf J CommRingCat.{max c v r})
 
-/-- Module sheaves in the chosen ambient universe.
-Source: Stacks 08JJ, 0A8X (blueprint: lem-sfb-ringed-site-bounded-dual-components). -/
-abbrev Modules := SheafOfModules.{max c v r}
-  ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)
 
-/-- The standard zero-object structure obtained from the terminal module sheaf.
-Source: Stacks 0A8X (blueprint: lem-sfb-ringed-site-bounded-dual-components). -/
-instance modulesHasZeroObject : HasZeroObject (Modules.{c, v, r} R) :=
-  hasZeroObject_of_hasTerminal_object
 
-/-- The coefficient sheaf as a module over itself.
-Source: Stacks 08JJ (blueprint: lem-sfb-ringed-site-bounded-dual-components). -/
-abbrev coefficient : Modules.{c, v, r} R := SheafOfModules.unit _
 
-/-- The standard complex R[0], with the standard single-complex construction.
-Source: Stacks 08JJ (blueprint: lem-sfb-ringed-site-bounded-dual-components). -/
-abbrev zeroComplex : CochainComplex (Modules.{c, v, r} R) ℤ :=
-  (CochainComplex.singleFunctor (Modules.{c, v, r} R) 0).obj (coefficient.{c, v, r} R)
 
-/-- The recorded internal sheaf Hom into the coefficient sheaf.
-Source: Stacks 04TT, 08JJ (blueprint: lem-sfb-ringed-site-bounded-dual-components). -/
-abbrev dual (T : Modules.{c, v, r} R) : Modules.{c, v, r} R :=
-  SheafOfModules.homObj T (coefficient.{c, v, r} R)
 
-/-- The recorded sheaf Hom complex into R[0].
-Source: Stacks 0A8X, 08JJ (blueprint: lem-sfb-ringed-site-bounded-dual-components). -/
-abbrev complexDual (E : CochainComplex (Modules.{c, v, r} R) ℤ) :
-    CochainComplex (Modules.{c, v, r} R) ℤ :=
-  homComplex (R := R) E (zeroComplex.{c, v, r} R)
 
-/-- Projection to the sole possibly nonzero Hom factor, followed by O^0 = R.
-Source: Stacks 0A8X, 08JJ (blueprint: lem-sfb-ringed-site-bounded-dual-components). -/
-def component (E : CochainComplex (Modules.{c, v, r} R) ℤ) (p q : ℤ) (h : p + q = 0) :
-    (complexDual.{c, v, r} R E).X q ⟶ dual.{c, v, r} R (E.X p) :=
-  homComplexπ E (zeroComplex.{c, v, r} R) q p 0 h ≫
-    SheafOfModules.homObjMap (𝟙 (E.X p))
-      (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) 0 (coefficient.{c, v, r} R)).hom
 
 attribute [local irreducible] homComplexFunctor homComplexπ
 

@@ -11,8 +11,9 @@ public import Mathlib.CategoryTheory.Triangulated.Subcategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension
+public import WeilConjectures.AlgebraicGeometry.PadicConstantLocalModelTor
 
-import all WeilConjectures.AlgebraicGeometry.Local.LocalModelTorBoundDescent
+import all WeilConjectures.AlgebraicGeometry.LocalModelTorBoundDescent
 import all WeilConjectures.AlgebraicGeometry.Finite.Constant.FiniteConstantLocalModel
 import all WeilConjectures.AlgebraicGeometry.InternalModuleAbEquivalence
 import all WeilConjectures.CategoryTheory.RingObjects.Ab

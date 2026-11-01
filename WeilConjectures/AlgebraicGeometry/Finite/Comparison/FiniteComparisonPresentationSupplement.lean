@@ -412,7 +412,7 @@ import all WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeMapDerived
 import all WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 import all WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence
 import all Mathlib.CategoryTheory.Functor.Flat
-import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteDiscreteEncodedPresentation
+import all WeilConjectures.AlgebraicGeometry.FiniteDiscreteEncodedPresentation
 import all Mathlib.Algebra.Module.FinitePresentation
 import all Mathlib.Algebra.Category.ModuleCat.Kernels
 import all WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinary.FiniteDiscreteOrdinaryEncodingSupplement
@@ -538,7 +538,7 @@ import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 import all WeilConjectures.CategoryTheory.Monoidal.Conjugate
 import all WeilConjectures.AlgebraicGeometry.Finite.FiniteDiscreteSchemeRingSupplement
 import WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSupplement
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteDiscreteConstructibleEncoding
+import WeilConjectures.AlgebraicGeometry.FiniteDiscreteConstructibleEncoding
 import WeilConjectures.AlgebraicGeometry.Finite.Constant.FiniteConstantLocalModel
 
 set_option linter.privateModule false

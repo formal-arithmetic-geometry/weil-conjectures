@@ -6,7 +6,7 @@ Authors: Bin Wu
 module
 
 public import Mathlib.AlgebraicGeometry.Sites.Proetale
-public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ProfiniteCondensedRing
+public import WeilConjectures.Topology.ProfiniteCondensedRing
 public import WeilConjectures.AlgebraicGeometry.ProfinitePointPullback
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
@@ -40,7 +40,7 @@ public import WeilConjectures.CategoryTheory.Sites.MonObj
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 public import Mathlib.CategoryTheory.Monoidal.Mod
 public import WeilConjectures.CategoryTheory.Right.RightDerivedFunctorOfQuasiIsoResolutions
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedModuleDerivedPushpull
+public import WeilConjectures.AlgebraicGeometry.CondensedModuleDerivedPushpull
 public import WeilConjectures.Algebra.Homology.DerivedInternalHomOfUniverses
 public import WeilConjectures.Algebra.Homology.DerivedInternalHom
 public import WeilConjectures.SixFunctors.Etale.Derived.Hom
@@ -214,6 +214,7 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
 import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientSectionsLocalization
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
+public import WeilConjectures.AlgebraicGeometry.ProfiniteFreeSliceDerivedHom
 
 /-! # Profinite free modules and unbounded derived slice Hom
 
@@ -238,6 +239,13 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposi
 open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.ProfiniteFreeSlice
 open ModuleObjectRingedComparison WeilConjectures
+-- Upstream's `HasDerivedCategory` instances on these module categories are found first and then
+-- fail the final defeq check, which blocks `HasDerivedCategory.ofIsGrothendieckAbelian`.
+attribute [-instance] AlgebraicGeometry.Scheme.proEtaleRingModules_hasDerivedCategory
+  AlgebraicGeometry.Scheme.ProjectionRestriction.derived
+  AlgebraicGeometry.Scheme.ProjectionRestriction.derivedOver
+  AlgebraicGeometry.Scheme.ProjectionRestriction.derivedOverModules
+
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) (P : Profinite.{u})
 
@@ -245,19 +253,10 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 Source: Stacks 08FI, 08J7; HRS Section 3
 (blueprint: lem-sfb-profinite-free-slice-derived-hom). -/
 abbrev test : X.ProEt := (profiniteToProEtOf X).obj P
-/-- The representable profinite parameter, lifted to the coefficient universe.
-Source: Stacks 08FI, 08J7; HRS Section 3
-(blueprint: lem-sfb-profinite-free-slice-derived-hom). -/
-abbrev parameter := ((coherentTopology Profinite.{u}).uliftYoneda.{u + 1}).obj P
 /-- The representable sheaf of the actual object X[P] of the small pro-etale site.
 Source: Stacks 08FI, 08J7; HRS Section 3
 (blueprint: lem-sfb-profinite-free-slice-derived-hom). -/
 abbrev represented := ((Scheme.ProEt.topology X).uliftYoneda.{u + 1}).obj (test X P)
-/-- The existing strong monoidal inverse image lifted to internal coefficient modules.
-Source: Stacks 08FI, 08J7; HRS Section 3
-(blueprint: lem-sfb-profinite-free-slice-derived-hom). -/
-def pointModulePullback : Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) Λ ⥤
-    Internal Λ X := (upperStarFromPoint X).mapMod Λ
 /-- The existing free condensed module on the representable profinite parameter.
 Source: Stacks 08FI, 08J7; HRS Section 3
 (blueprint: lem-sfb-profinite-free-slice-derived-hom). -/

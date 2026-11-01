@@ -17,11 +17,12 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Comparison
 import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
-import WeilConjectures.AlgebraicGeometry.Compact.CompactSupportComparisonUnit
+import WeilConjectures.AlgebraicGeometry.CompactSupportComparisonUnit
 import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantModuleEncoding
 import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantModuleConstructibility
 import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.ProEtaleConstructibleOrigin
 
 /-!
 # Constructible pro-etale coefficients are of etale origin

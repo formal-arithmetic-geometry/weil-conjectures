@@ -41,6 +41,8 @@ The gluing theorem specifies its inverse on sections, morphisms and restriction 
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
+
 universe t u v w
 
 open CategoryTheory CategoryTheory.Limits Opposite

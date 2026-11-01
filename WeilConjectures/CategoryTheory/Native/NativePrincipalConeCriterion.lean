@@ -20,9 +20,9 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import Mathlib.CategoryTheory.Sites.PreservesLocallyBijective
 public import WeilConjectures.CategoryTheory.Ringed.RingedPrincipalLocalTests
 public import Mathlib.CategoryTheory.Category.ULift
-public import WeilConjectures.Algebra.Homology.PrincipalCone.PrincipalConeTower
+public import WeilConjectures.Algebra.Homology.PrincipalConeTower
 import WeilConjectures.CategoryTheory.Native.NativePrincipalCompletenessSmallModel
-import WeilConjectures.Algebra.Homology.SmoothPurity.PrincipalConeExactEquivalence
+import WeilConjectures.Algebra.Homology.PrincipalConeExactEquivalence
 import WeilConjectures.CategoryTheory.Principal.PrincipalConeSmallSiteCriterion
 /-! # Principal cone criterion with independent site and coefficient sizes
 

@@ -539,20 +539,6 @@ private theorem composed_unit_compatible
   rw [← e.hom.naturality ((((a.comp b).ofNatIsoRight e).leftAdjointUniq c).hom.app K)] at h
   simpa only [Functor.map_comp, Functor.comp_map, Category.assoc] using h
 
-/-- The coherent tensor-unit maps to the derived reductions.
-Source: blueprint, reduction cone (blueprint: sk-def-pe-derived-completion).
-Proof: reductionComp is formed by left-adjoint uniqueness, which identifies the
-composite unit with the direct unit. Composing this identity with restrictComp
-is exactly the displayed compatibility of the positive consecutive units. -/
-theorem reductionUnit_compatible (K : DerivedCategory (Modules l E X)) (n : ℕ) :
-    (Mod.derivedExtendMapDerivedCategoryAdjunction (quotient l E X (n + 1))).unit.app K ≫
-        integralStep l E X K n =
-      (Mod.derivedExtendMapDerivedCategoryAdjunction (quotient l E X n)).unit.app K := by
-  exact composed_unit_compatible
-    (Mod.derivedExtendMapDerivedCategoryAdjunction (quotient l E X (n + 1)))
-    (Mod.derivedExtendMapDerivedCategoryAdjunction (transition l E X n))
-    (Mod.derivedExtendMapDerivedCategoryAdjunction (quotient l E X n))
-    (restrictComp l E X n) K
 
 private theorem generic_roosLimit
     {A : Type v} [Category.{w} A] [Abelian A] [HasDerivedCategory A]
@@ -627,51 +613,5 @@ private theorem generic_roosLimit
     simp only [Pi.lift_π]
     rw [hunit, Iso.inv_hom_id_assoc]
 
-/-- The specified augmented Roos model is the derived inverse limit of the canonical
-reductions; its evaluations compose with the explicit completionMap to the tensor units.
-The extra product instance is the usual categorical choice of product, not a hypothesis
-on K, and no choice of a triangulated lift is used to define the comparison.
-Source: blueprint, Roos interpretation, Stacks 08TC
-(blueprint: sk-def-pe-derived-completion).
-Proof: on a K-flat P, ordinary tensor with B_n computes relative derived extension.
-The scalar-extension counit gives the level identifications, compatibly with quotient
-transitions and tensor units. Exact countable products of module sheaves identify the
-product of the localized levels with the localized termwise product. The signed
-interchange of the two coordinates identifies roos with Cone(1-s)[-1]. Its cone triangle
-gives the asserted distinguished triangle. Its first arrow is the first-coordinate
-projection, whose composite with (unit,0) is the product of the canonical units.
-The coordinate formula makes the first projection of the augmentation the product
-of the specified tensor units, so this identifies the actual augmented limit map. -/
-theorem roos_isDerivedLimit (K : DerivedCategory (Modules l E X))
-    (P : CochainComplex (Modules l E X) ℤ)
-    (_hP : (HomologicalComplex.quasiIso (Modules l E X) (.up ℤ)).kFlat P)
-    (e : DerivedCategory.Q.obj P ≅ K)
-    [HasProduct (integralLevel l E X K)] :
-    ∃ (p : DerivedCategory.Q.obj (roos l E X P) ⟶ ∏ᶜ (integralLevel l E X K))
-      (δ : ∏ᶜ (integralLevel l E X K) ⟶
-        (DerivedCategory.Q.obj (roos l E X P))⟦(1 : ℤ)⟧),
-      IsDerivedLimitTriangle (integralStep l E X K) _ p δ ∧
-        completionMap l E X K P e ≫ p = Pi.lift (f := integralLevel l E X K)
-          (fun n ↦ (Mod.derivedExtendMapDerivedCategoryAdjunction
-            (quotient l E X n)).unit.app K) := by
-  obtain ⟨eL, hstep, hunit⟩ := strictScalarRealization l E X K P _hP e
-  let := modules_countableAB4Star l E X
-  exact generic_roosLimit (fun n ↦ (level l E X n).obj P) (levelStep l E X P)
-    P K e (integralLevel l E X K) (integralStep l E X K) (levelUnit l E X P)
-    (fun n ↦ (Mod.derivedExtendMapDerivedCategoryAdjunction (quotient l E X n)).unit.app K)
-    (augmentation l E X P)
-    (by
-      have hh : augmentation l E X P ≫
-          (genericCoconeIso (product l E X P) (oneSubShift l E X P)).inv ≫
-          CochainComplex.mappingCocone.fst (oneSubShift l E X P) =
-          unitProduct l E X P := by
-        apply HomologicalComplex.hom_ext
-        intro i
-        change biprod.lift ((unitProduct l E X P).f i) 0 ≫
-          ((genericCoconeIso (product l E X P) (oneSubShift l E X P)).inv.f i ≫
-            (CochainComplex.mappingCocone.fst (oneSubShift l E X P)).f i) = _
-        rw [genericCoconeIso_inv_fst_f, biprod.lift_fst]
-      exact hh)
-    eL hstep hunit
 
 end AlgebraicGeometry.ProEtale.AdicCompletion

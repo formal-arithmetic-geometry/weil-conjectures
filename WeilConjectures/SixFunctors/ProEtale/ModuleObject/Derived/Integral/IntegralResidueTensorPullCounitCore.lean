@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.IntegralResidueTensorPullPresentation
 public import WeilConjectures.CategoryTheory.Integral.IntegralResidueTensorModel
+public import WeilConjectures.AlgebraicGeometry.IntegralResidueTensorPullCounitCore
 
 /-! The normalized middle composite for the residue tensor-pull counit.
 

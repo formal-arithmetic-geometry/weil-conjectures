@@ -118,7 +118,7 @@ import all Mathlib.CategoryTheory.Sites.CoverPreserving
 import all WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
 import all WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingProperOpenArrows
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
-import all WeilConjectures.CategoryTheory.Derived.DerivedExactSquareComposition
+import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 
 /-! # Core constructions for intrinsic proper/open mates of semilinear systems
 

@@ -5,7 +5,7 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.CategoryTheory.Tensor.TensorPullbackRepresentativeDescent
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackRepresentativeDescent
 import all WeilConjectures.SixFunctors.ProjectionTensorCoefficient.ProjectionCoefficientTensorTotal
 import WeilConjectures.Algebra.Homology.RingIsomorphismTensorTransport
 import WeilConjectures.Algebra.Homology.ScalarHomOrdinary.ScalarHomOrdinaryTensorComparisonSupplement

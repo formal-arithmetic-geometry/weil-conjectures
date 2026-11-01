@@ -103,7 +103,7 @@ import all WeilConjectures.Algebra.Homology.KFlatResolutionIndependentCoefficien
 import all Mathlib.CategoryTheory.Monoidal.Closed.Basic
 import all WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 import all WeilConjectures.Algebra.Homology.CanonicalTensorPullbackOfUniverses.RingedTopoiCanonicalTensorPullbackOfUniverses
-import WeilConjectures.CategoryTheory.Tensor.TensorPullbackRepresentativeDescent
+import WeilConjectures.AlgebraicGeometry.TensorPullbackRepresentativeDescent
 import WeilConjectures.Algebra.Homology.CochainTensorModelRigidity
 import WeilConjectures.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 import Mathlib.Algebra.Homology.DerivedCategory.Basic

@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.ModuleObjectRingedComparison.InternalSectionDerivedTensorComparison
 public import WeilConjectures.AlgebraicGeometry.ModuleObjectRingedComparison.InternalSliceDerivedHomComparison
-import all WeilConjectures.CategoryTheory.ExactMonoidalEquivalenceDerived.ExactMonoidalEquivalenceDerived
+import all WeilConjectures.CategoryTheory.ExactMonoidalEquivalenceDerived
 import WeilConjectures.Algebra.Homology.RingedDerivedTensorHomAdjunction
 import WeilConjectures.Algebra.Homology.Ringed.RingedDerivedTensorNativeSupplement
 import WeilConjectures.Algebra.Homology.KInjectiveHomComplexOfUniverses
@@ -101,6 +101,7 @@ import all WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import all WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
 import all WeilConjectures.CategoryTheory.InternalSectionModuleFlat
 import all WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
+public import WeilConjectures.AlgebraicGeometry.InternalSectionTensorLocalization
 
 /-! # Localization of the sectionwise tensor comparison
 
@@ -313,6 +314,7 @@ private theorem nativeDescent : Nonempty (NativeDescentData F) := by
 end Abstract
 
 attribute [local instance 1000001] sectionRingHasSheafCompose
+attribute [local instance 2000] HasDerivedCategory.ofIsGrothendieckAbelian
 
 private def uncurryComparison {D E : Type*} [Category D] [Category E]
     [MonoidalCategory D] {F : D ⥤ E} {G : D × D ⥤ E}
@@ -631,8 +633,8 @@ attribute [local irreducible] complexTensorIso totalComparison ordinaryTensorIso
   CategoryTheory.InternalAbelianSheafModule.sectionModuleFunctor
 
 attribute [local implicit_reducible] hom forward localizationIso localizationTensorMap
-  complexForward internalTotalTensor sliceForward sliceComplexForward sliceLocalizationIso
-  sliceLocalizationTensorMap sliceNativeTensor
+  complexForward internalTotalTensor sliceDerivedForward sliceComplexForward
+  sliceDerivedLocalizationIso sliceLocalizationTensorMap sliceNativeTensor
 
 attribute [local irreducible] sliceEquivalence sliceRingObject
 attribute [local instance] ringedMonoidal ringedSymmetric ringedPreadditive

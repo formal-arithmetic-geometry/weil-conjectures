@@ -21,7 +21,7 @@ public import Mathlib.CategoryTheory.Sites.GlobalSections
 public import Mathlib.CategoryTheory.Functor.OfSequence
 public import Mathlib.CategoryTheory.Functor.Derived.RightDerived
 import all WeilConjectures.CategoryTheory.TowerRightDerivedEvaluation.TowerRightDerivedEvaluation
-import all WeilConjectures.CategoryTheory.Derived.DerivedExactSquareComposition
+import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 import WeilConjectures.Algebra.Homology.Coefficient.CoefficientRestrictionSectionsAcyclic
 import WeilConjectures.CategoryTheory.RingedSiteGrothendieckCoefficientUniverse
 import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse

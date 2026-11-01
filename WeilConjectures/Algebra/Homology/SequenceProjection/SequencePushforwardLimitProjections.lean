@@ -34,7 +34,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.CategoryTheory.SiteCoveringAxioms
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import WeilConjectures.CategoryTheory.Cochain.CochainHomotopyComparison
+import WeilConjectures.CategoryTheory.DerivedCategory.CochainHomotopyComparison
 import all WeilConjectures.CategoryTheory.SixFunctors.ResolvingDerivedAdjunction
 import all WeilConjectures.CategoryTheory.DerivedCategory.DerivedAdjunctionCompatibility
 import all Mathlib.Algebra.Homology.DerivedCategory.Basic

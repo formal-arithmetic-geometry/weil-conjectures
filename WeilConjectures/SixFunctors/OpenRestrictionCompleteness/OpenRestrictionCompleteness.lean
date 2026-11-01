@@ -10,7 +10,7 @@ public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionFinite
 public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionSupplement
 public import Mathlib.RingTheory.Ideal.Quotient.Index
 public import Mathlib.AlgebraicGeometry.Sites.Proetale
-import all WeilConjectures.Algebra.Homology.SmoothPurity.PrincipalConeExactEquivalence
+import all WeilConjectures.Algebra.Homology.PrincipalConeExactEquivalence
 import all WeilConjectures.SmoothPurity.IntegralOnSlice.IntegralDerivedOperationsOnSlices
 import all WeilConjectures.SixFunctors.Supporting.RoosIntrinsicCompletenessEquivalence
 import WeilConjectures.DeligneLaumon.PrincipalKoszulStrictReplacement.PrincipalKoszulStrictReplacement

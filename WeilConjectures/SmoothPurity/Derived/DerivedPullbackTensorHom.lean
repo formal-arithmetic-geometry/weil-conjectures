@@ -80,7 +80,7 @@ public import WeilConjectures.SmoothPurity.Finite.FiniteRationalDerivedOperation
 public import WeilConjectures.SmoothPurity.Common.CommonStageInternalHomData
 public import WeilConjectures.SmoothPurity.Common.CommonStagePullbackData
 public import WeilConjectures.SmoothPurity.Common.CommonStagePullbackDescent
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedModuleDerivedPushpull
+public import WeilConjectures.AlgebraicGeometry.CondensedModuleDerivedPushpull
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 
 import WeilConjectures.SmoothPurity.CommonStageInternalHomDescent.CommonStageInternalHomDescent

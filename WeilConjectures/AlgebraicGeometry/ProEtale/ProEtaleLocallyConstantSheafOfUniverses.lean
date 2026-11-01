@@ -44,6 +44,9 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 
 namespace AlgebraicGeometry.Scheme
 
+-- `hasSheafify_of_essentiallySmall` leaves its universe free and stalls universe unification here.
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
+
 /-- The constant module presheaf, with identity restriction maps and the given
 scalar multiplication. Source: the module version of Bhatt--Scholze 7.3.1(1)
 (blueprint: def-weil-proetale-locally-constant-sheaf). -/

@@ -5,7 +5,7 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.Algebra.Homology.PrincipalCone.PrincipalConeTower
+public import WeilConjectures.Algebra.Homology.PrincipalConeTower
 public import WeilConjectures.SmoothPurity.IntegralOnSlice.IntegralDerivedOperationsOnSlices
 public import WeilConjectures.AlgebraicGeometry.CompletedIntegralConstantMapOfUniverses
 public import WeilConjectures.SmoothPurity.Completed.CompletedIntegralCoefficientGerm

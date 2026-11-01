@@ -9,7 +9,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.EllAdic.
 public import WeilConjectures.AlgebraicGeometry.Condensed.CondensedConstantConstructibilitySupplement
 import WeilConjectures.AlgebraicGeometry.Cartesian.CartesianCoefficients
 import all WeilConjectures.AlgebraicGeometry.Condensed.CondensedCoefficientIsoConstructible
-import all WeilConjectures.AlgebraicGeometry.Integral.IntegralLfpConstantModelComparison
+import all WeilConjectures.AlgebraicGeometry.IntegralLfpConstantModelComparison
 import all WeilConjectures.AlgebraicGeometry.CondensedFieldLfpLocalTriviality
 import all WeilConjectures.AlgebraicGeometry.CondensedFieldContinuousRealization
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
@@ -157,6 +157,7 @@ import WeilConjectures.AlgebraicGeometry.CondensedQbarFieldPointCoefficientValue
 import WeilConjectures.AlgebraicGeometry.CondensedCoefficientPointUnitPasting
 import WeilConjectures.AlgebraicGeometry.CondensedQbarLfpCoverComposition
 import WeilConjectures.CategoryTheory.ModuleObjects.Free
+public import WeilConjectures.AlgebraicGeometry.AdicConstructibilityPredicateComparison
 
 /-!
 # Adic constructibility predicates on Noetherian schemes

@@ -6,7 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SixFunctors.Integral.IntegralDerivedReductionSupplement
-public import WeilConjectures.SixFunctors.Supporting.RestrictionOfScalarsExact
+public import WeilConjectures.AlgebraicGeometry.RestrictionOfScalarsExact
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct

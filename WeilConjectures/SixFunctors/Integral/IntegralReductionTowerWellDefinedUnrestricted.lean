@@ -40,6 +40,7 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUn
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
+public import WeilConjectures.AlgebraicGeometry.IntegralReductionTowerWellDefinedUnrestricted
 
 /-! # Canonical resolution comparisons without an auxiliary finite-field datum
 
@@ -80,43 +81,11 @@ attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (Y : AlgebraicGeometry.Scheme.{t})
 
-/-- Restriction changes the scalar action and keeps the underlying additive map.
-Source: Stacks Tag 03DA (blueprint: lem-weil-integral-reduction-tower-well-defined). -/
-noncomputable instance unrestrictedTowerRestrictionAdditive (n : ℕ) :
-    (scalarReductionRestriction l E Y n).Additive :=
-  inferInstance
 
-/-- Exactness supplies the limits instance for the recorded restriction functor.
-Source: Stacks Tag 03DA (blueprint: lem-weil-integral-reduction-tower-well-defined). -/
-noncomputable instance unrestrictedTowerRestrictionLimits (n : ℕ) :
-    PreservesFiniteLimits (scalarReductionRestriction l E Y n) :=
-  scalarReductionRestrictionLimits l E Y n
 
-/-- Exactness supplies the colimits instance for the recorded restriction functor.
-Source: Stacks Tag 03DA (blueprint: lem-weil-integral-reduction-tower-well-defined). -/
-noncomputable instance unrestrictedTowerRestrictionColimits (n : ℕ) :
-    PreservesFiniteColimits (scalarReductionRestriction l E Y n) :=
-  scalarReductionRestrictionColimits l E Y n
 
-/-- Additivity of the recorded extension, at the explicit coefficient sizes.
-Source: Stacks Tag 06YY (blueprint: lem-weil-integral-reduction-tower-well-defined). -/
-noncomputable instance unrestrictedTowerExtensionAdditive (n : ℕ) :
-    (scalarReductionExtension l E Y n).Additive :=
-  scalarReductionExtensionAdditive.{t, u} l E Y n
 
-/-- The termwise finite reduction, using the recorded change-of-rings functor.
-Source: Stacks Tag 06YY (blueprint: lem-weil-integral-reduction-tower-well-defined). -/
-noncomputable abbrev unrestrictedTowerFiniteComplex (n : ℕ)
-    (P : CochainComplex (scalarReductionSource l E Y) ℤ) :=
-  ((scalarReductionExtension l E Y n).mapHomologicalComplex
-    (ComplexShape.up ℤ)).obj P
 
-/-- The same reduction regarded as a complex over the completed coefficient sheaf.
-Source: Stacks Tag 03EK (blueprint: lem-weil-integral-reduction-tower-well-defined). -/
-noncomputable abbrev unrestrictedTowerComplex (n : ℕ)
-    (P : CochainComplex (scalarReductionSource l E Y) ℤ) :=
-  ((scalarReductionRestriction l E Y n).mapHomologicalComplex
-    (ComplexShape.up ℤ)).obj (unrestrictedTowerFiniteComplex l E Y n P)
 
 /-- A pure tensor, followed by sheafification, in the recorded finite reduction.
 Transport uses the object equality in the defining change-of-rings witness.
@@ -210,15 +179,6 @@ def unrestrictedTowerUnitCondition
   ∀ (n : ℕ) (i : ℤ) (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ) (x : (P.X i).val.obj U),
     ((γ n).f i).val.app U x = unrestrictedTowerTensorSection l E Y n (P.X i) U 1 x
 
-/-- The chain-level unit x ↦ x⊗1, determined uniquely by its sectionwise formula.
-Source: Stacks Tag 03EK (blueprint: lem-weil-integral-reduction-tower-well-defined). -/
-noncomputable def unrestrictedTowerUnit
-    (P : CochainComplex (scalarReductionSource l E Y) ℤ) (n : ℕ) :
-    P ⟶ unrestrictedTowerComplex l E Y n P :=
-  { f := fun i ↦ (scalarReductionExtension_adjunction l E Y n).choose.unit.app (P.X i)
-    comm' := fun i j _ ↦
-      ((scalarReductionExtension_adjunction l E Y n).choose.unit.naturality
-        (P.d i j)).symm }
 
 /-- The constructed unit has the prescribed sectionwise pure-tensor formula.
 Source: Stacks Tag 03EK (blueprint: lem-weil-integral-reduction-tower-well-defined).

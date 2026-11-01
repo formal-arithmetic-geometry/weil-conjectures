@@ -36,7 +36,7 @@ public import Mathlib.Combinatorics.Quiver.ReflQuiver
 
 import WeilConjectures.CategoryTheory.RingObjects.Condensed.CondensedAction.GroupAlgebra.CondensedGroupAlgebraExactForgetful
 import WeilConjectures.CategoryTheory.RingObjects.Condensed.CondensedAction.InternalBar.CondensedInternalBarData
-import WeilConjectures.CategoryTheory.RingObjects.Condensed.ProfiniteCondensedRing
+import WeilConjectures.Topology.ProfiniteCondensedRing
 import WeilConjectures.CategoryTheory.ModuleObjects.Monoidal
 import Mathlib.CategoryTheory.Sites.Limits
 import Mathlib.Data.Fin.Tuple.Basic

@@ -7,19 +7,20 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteDiscreteCoefficientEncodingDataSupplement
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
-import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteDiscreteEncodedPresentation
+import all WeilConjectures.AlgebraicGeometry.FiniteDiscreteEncodedPresentation
 import all WeilConjectures.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
 import all WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 import all WeilConjectures.CategoryTheory.Monoidal.Conjugate
 import all WeilConjectures.ConstructibleSheaf.Pullback
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteDiscreteConstructibleEncoding
-import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteDiscreteCondensedRing
+import WeilConjectures.AlgebraicGeometry.FiniteDiscreteConstructibleEncoding
+import WeilConjectures.AlgebraicGeometry.FiniteDiscreteCondensedRing
 import WeilConjectures.AlgebraicGeometry.InternalModuleAbEquivalence
 import WeilConjectures.CategoryTheory.RingObjects.Ab
 import Mathlib.CategoryTheory.Monoidal.Mod
 import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
+public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteConstructibleKernels
 
 /-! # Kernels of constructible internal modules with finite discrete coefficients
 

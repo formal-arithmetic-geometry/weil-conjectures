@@ -5,7 +5,7 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ProfiniteCondensedRing
+public import WeilConjectures.Topology.ProfiniteCondensedRing
 public import WeilConjectures.CategoryTheory.InternalAbelianSheafModuleEquivalence
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf
 public import Mathlib.Algebra.Category.Ring.Limits
@@ -17,6 +17,7 @@ public import Mathlib.Topology.ContinuousMap.Algebra
 public import Mathlib.Topology.Algebra.ContinuousMonoidHom
 public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 public import Mathlib.Combinatorics.Quiver.ReflQuiver
+public import WeilConjectures.CategoryTheory.CondensedActionModule
 
 /-! # Internal modules with an action of a profinite condensed group
 
@@ -40,9 +41,6 @@ namespace Profinite.CondensedAction
 
 variable (R : Profinite.CondensedRing.{u}) [IsCommMonObj R.X]
 
-/-- The existing internal-module category on the coherent profinite site.
-Source: blueprint paragraph (3) (blueprint: def-sfb-condensed-action-module). -/
-abbrev Modules := Mod (Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1}) R.X
 
 /-- Read the sectionwise module through the recorded internal-module equivalence.
 Source: blueprint paragraph (3) (blueprint: def-sfb-condensed-action-module). -/

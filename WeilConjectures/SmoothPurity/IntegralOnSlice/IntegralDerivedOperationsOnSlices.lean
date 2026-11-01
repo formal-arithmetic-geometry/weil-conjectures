@@ -90,6 +90,7 @@ public import WeilConjectures.Algebra.Homology.HomComplexComponents
 public import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMap
 public import WeilConjectures.Algebra.Homology.HomTensorDegreewiseEquation
 public import Mathlib.Algebra.Homology.DerivedCategory.Linear
+public import WeilConjectures.AlgebraicGeometry.IntegralDerivedOperationsOnSlices
 
 import all WeilConjectures.SmoothPurity.Integral.Reduction.IntegralReductionTowerUnrestrictedSupplement
 import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSupplement

@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 public import Mathlib.CategoryTheory.Adjunction.Mates
-import all WeilConjectures.CategoryTheory.Derived.DerivedExactSquareComposition
+import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 
 /-! # Pasting scalar mates after exact localization
 

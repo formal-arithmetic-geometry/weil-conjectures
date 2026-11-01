@@ -50,7 +50,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
-import WeilConjectures.CategoryTheory.Cochain.CochainHomotopyComparison
+import WeilConjectures.CategoryTheory.DerivedCategory.CochainHomotopyComparison
 import WeilConjectures.CategoryTheory.DerivedCategory.CochainAdjunctionCompatibility
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction

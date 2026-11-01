@@ -6,7 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Condensed.CondensedConstantConstructibilitySupplement
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedModuleDerivedPushpull
+public import WeilConjectures.AlgebraicGeometry.CondensedModuleDerivedPushpull
 public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionFinite
 public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionSupplement
 public import Mathlib.RingTheory.Ideal.Quotient.Index
@@ -122,7 +122,7 @@ import Mathlib.RingTheory.Finiteness.Basic
 import WeilConjectures.AlgebraicGeometry.ProEtale.RepleteAddCommGrp
 import Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
 import Mathlib.CategoryTheory.Triangulated.Pretriangulated
-import WeilConjectures.AlgebraicGeometry.Condensed.CondensedCoverRestrictionConservative
+import WeilConjectures.AlgebraicGeometry.CondensedCoverRestrictionConservative
 public import Mathlib.RingTheory.DedekindDomain.Basic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 public import WeilConjectures.ProEtaleCoefficients.DerivedNakayamaResolution

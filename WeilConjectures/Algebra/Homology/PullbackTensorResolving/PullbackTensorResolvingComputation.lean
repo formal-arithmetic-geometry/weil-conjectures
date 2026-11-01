@@ -106,11 +106,12 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 import WeilConjectures.FromJoel.Algebra.Homology.ShortComplex.HomologicalComplex
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
-import WeilConjectures.CategoryTheory.Cochain.CochainHomotopyComparison
+import WeilConjectures.CategoryTheory.DerivedCategory.CochainHomotopyComparison
 import Mathlib.CategoryTheory.Sites.EpiMono
 import Mathlib.Algebra.Category.Grp.EpiMono
 import Mathlib.Algebra.Category.Grp.Abelian
 import Mathlib.CategoryTheory.Sites.Abelian
+public import WeilConjectures.AlgebraicGeometry.PullbackTensorResolvingComputation
 
 /-! # Derived pullback computation with independent universes
 

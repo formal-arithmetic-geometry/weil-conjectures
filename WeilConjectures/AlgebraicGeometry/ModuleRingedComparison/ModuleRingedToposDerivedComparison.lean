@@ -6,7 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.ModuleRingedComparison.SectionDerivedRealization
-public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ProfiniteCondensedRing
+public import WeilConjectures.Topology.ProfiniteCondensedRing
 public import Mathlib.Algebra.Homology.Monoidal
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.CategoryTheory.Monoidal.CommMon_
@@ -22,9 +22,10 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Monoidal
 public import WeilConjectures.Algebra.Homology.CanonicalTensorPullbackOfUniverses.RingedTopoiCanonicalTensorPullbackOfUniverses
 public import WeilConjectures.Algebra.Homology.RingedTensorCorner.ProjectionMateExact
+public import WeilConjectures.AlgebraicGeometry.ModuleRingedToposDerivedComparison
 
 import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapCompat
-import WeilConjectures.AlgebraicGeometry.ModuleRingedComparison.SectionDerivedTensorNormalization
+import WeilConjectures.AlgebraicGeometry.SectionDerivedTensorNormalization
 
 public import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
 public import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
@@ -39,14 +40,6 @@ public import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
 public import Mathlib.CategoryTheory.Limits.EssentiallySmall
 public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
-public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
-public import WeilConjectures.Algebra.Homology.HomotopyCategory.DerivabilityStructure
-public import WeilConjectures.AlgebraicGeometry.ModuleRingedComparison.ResolvingOplaxConstraints.SectionOrdinaryMonoidalConstraints
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
-public import WeilConjectures.CategoryTheory.ProEtaleCoefficients.PreservesTotalTensorKFlatQuasiIsoSupplement
-public import WeilConjectures.FromJoel.Algebra.Homology.Bifunctor
-public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
-public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 /-! # Module-object and ringed-topos derived comparison
 
 Source: Stacks Project, Sites, Tag 00YV; Modules on Sites, Tags 03EK, 03EL,
@@ -232,203 +225,13 @@ private theorem projection_comparison_of_squares
 private theorem third_conjunct {P Q R S : Prop} (h : P ∧ Q ∧ R ∧ S) : R :=
   h.2.2.1
 
-private theorem tensor_natural_braiding.{v, w, t}
-    {C : Type v} [Category.{w} C] (J : GrothendieckTopology C)
-    [UnivLE.{max v w, t}] [HasSheafify J AddCommGrpCat.{t}]
-    [(J.W (A := AddCommGrpCat.{t})).IsMonoidal]
-    (R : Sheaf J AddCommGrpCat.{t}) [MonObj R] [IsCommMonObj R] :
-    ∃ e : ∀ M N : Mod (Sheaf J AddCommGrpCat.{t}) R,
-      (InternalAbelianSheafModule.sectionModuleEquivalence J R).functor.obj (M ⊗ N) ≅
-        (InternalAbelianSheafModule.sectionModuleEquivalence J R).functor.obj M ⊗
-          (InternalAbelianSheafModule.sectionModuleEquivalence J R).functor.obj N,
-    (∀ (M N : Mod (Sheaf J AddCommGrpCat.{t}) R) (U : Cᵒᵖ)
-        (x : M.X.obj.obj U) (y : N.X.obj.obj U),
-      ((e M N).hom.val.app U) (InternalAbelianSheafModule.comparison_internalTmul J R M N U x y) =
-        InternalAbelianSheafModule.comparison_sectionTmul J R
-          ((InternalAbelianSheafModule.sectionModuleEquivalence J R).functor.obj M)
-          ((InternalAbelianSheafModule.sectionModuleEquivalence J R).functor.obj N) U x y) ∧
-    (∀ (M M' N N' : Mod (Sheaf J AddCommGrpCat.{t}) R) (f : M ⟶ M') (g : N ⟶ N'),
-      (InternalAbelianSheafModule.sectionModuleEquivalence J R).functor.map (f ⊗ₘ g) ≫
-        (e M' N').hom = (e M N).hom ≫
-          ((InternalAbelianSheafModule.sectionModuleEquivalence J R).functor.map f ⊗ₘ
-            (InternalAbelianSheafModule.sectionModuleEquivalence J R).functor.map g)) ∧
-    (∀ M N : Mod (Sheaf J AddCommGrpCat.{t}) R,
-      (e M N).hom ≫ (β_ _ _).hom =
-        (InternalAbelianSheafModule.sectionModuleEquivalence J R).functor.map (β_ M N).hom ≫
-          (e N M).hom) := by
-  refine Exists.elim (InternalAbelianSheafModule.internal_section_tensor_comparison J R).2
-    (fun e he ↦ ?_)
-  refine Exists.elim he (fun e₀ hs ↦ ?_)
-  exact ⟨e, hs.1, hs.2.2.1, hs.2.2.2.2.2.2.1⟩
-
-private theorem ordinary_assoc_unit (X : Scheme.{u}) :
-    (∀ M N P : internalModules Λ X,
-      (ordinaryTensorComparison Λ X (M ⊗ N) P).hom ≫
-          (ordinaryTensorComparison Λ X M N).hom ▷ (equivalence Λ X).functor.obj P ≫
-          (α_ _ _ _).hom =
-        (equivalence Λ X).functor.map (α_ M N P).hom ≫
-          (ordinaryTensorComparison Λ X M (N ⊗ P)).hom ≫
-          (equivalence Λ X).functor.obj M ◁ (ordinaryTensorComparison Λ X N P).hom) ∧
-    (∀ M : internalModules Λ X,
-      (ordinaryTensorComparison Λ X (𝟙_ _) M).hom ≫
-          (ordinaryUnitComparison Λ X).hom ▷ (equivalence Λ X).functor.obj M ≫
-          (λ_ _).hom = (equivalence Λ X).functor.map (λ_ M).hom) ∧
-    (∀ M : internalModules Λ X,
-      (ordinaryTensorComparison Λ X M (𝟙_ _)).hom ≫
-          (equivalence Λ X).functor.obj M ◁ (ordinaryUnitComparison Λ X).hom ≫
-          (ρ_ _).hom = (equivalence Λ X).functor.map (ρ_ M).hom) := by
-  exact ResolvingOplaxConstraints.section_ordinary_monoidal_constraints Λ X
-
-private theorem ordinary_natural_braiding (X : Scheme.{u}) :
-    (∀ (M M' N N' : internalModules Λ X) (f : M ⟶ M') (g : N ⟶ N'),
-      (equivalence Λ X).functor.map (f ⊗ₘ g) ≫
-          (ordinaryTensorComparison Λ X M' N').hom =
-        (ordinaryTensorComparison Λ X M N).hom ≫
-          ((equivalence Λ X).functor.map f ⊗ₘ (equivalence Λ X).functor.map g)) ∧
-    (∀ M N : internalModules Λ X,
-      (ordinaryTensorComparison Λ X M N).hom ≫ (β_ _ _).hom =
-        (equivalence Λ X).functor.map (β_ M N).hom ≫
-          (ordinaryTensorComparison Λ X N M).hom) := by
-  refine Exists.elim (tensor_natural_braiding
-    (Scheme.ProEt.topology X) (condensedRingObj Λ X)) (fun e hs ↦ ?_)
-  have hpure := hs.1
-  have hnat := hs.2.1
-  have hbraid := hs.2.2
-  have he (M N : internalModules Λ X) : e M N = ordinaryTensorComparison Λ X M N := by
-    apply (ordinaryTensorComparison_existsUnique Λ X M N).unique (hpure M N)
-    unfold ordinaryTensorComparison
-    exact (ordinaryTensorComparison_existsUnique Λ X M N).exists.choose_spec
-  constructor
-  · intro M M' N N' f g
-    have h := hnat M M' N N' f g
-    simpa only [← he M' N', ← he M N] using h
-  · intro M N
-    have h := hbraid M N
-    simpa only [← he M N, ← he N M] using h
-
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
-set_option maxHeartbeats 800000 in
--- Comparing the two normalized monoidal witnesses elaborates the sheaf tensor constraints.
-/-- The chosen ordinary tensor maps obey all symmetric-monoidal coherence diagrams.
-Source: Stacks 03EK (blueprint: lem-pd-module-ringed-topos-derived-comparison).
-Proof: these are exactly the maps chosen from internal_section_tensor_comparison,
-whose proof checks the naturality, associator, unitors and symmetry on local pure
-tensors. The regular-unit comparison fixes local scalars, so the unit diagrams
-are the scalar action laws. Local generation extends each equality to the sheaf. -/
-theorem ordinary_monoidal (X : Scheme.{u}) :
-    (∀ (M M' N N' : internalModules Λ X) (f : M ⟶ M') (g : N ⟶ N'),
-      (equivalence Λ X).functor.map (f ⊗ₘ g) ≫
-          (ordinaryTensorComparison Λ X M' N').hom =
-        (ordinaryTensorComparison Λ X M N).hom ≫
-          ((equivalence Λ X).functor.map f ⊗ₘ (equivalence Λ X).functor.map g)) ∧
-    (∀ M N P : internalModules Λ X,
-      (ordinaryTensorComparison Λ X (M ⊗ N) P).hom ≫
-          (ordinaryTensorComparison Λ X M N).hom ▷ (equivalence Λ X).functor.obj P ≫
-          (α_ _ _ _).hom =
-        (equivalence Λ X).functor.map (α_ M N P).hom ≫
-          (ordinaryTensorComparison Λ X M (N ⊗ P)).hom ≫
-          (equivalence Λ X).functor.obj M ◁ (ordinaryTensorComparison Λ X N P).hom) ∧
-    (∀ M : internalModules Λ X,
-      (ordinaryTensorComparison Λ X (𝟙_ _) M).hom ≫
-          (ordinaryUnitComparison Λ X).hom ▷ (equivalence Λ X).functor.obj M ≫
-          (λ_ _).hom = (equivalence Λ X).functor.map (λ_ M).hom) ∧
-    (∀ M : internalModules Λ X,
-      (ordinaryTensorComparison Λ X M (𝟙_ _)).hom ≫
-          (equivalence Λ X).functor.obj M ◁ (ordinaryUnitComparison Λ X).hom ≫
-          (ρ_ _).hom = (equivalence Λ X).functor.map (ρ_ M).hom) ∧
-    (∀ M N : internalModules Λ X,
-      (ordinaryTensorComparison Λ X M N).hom ≫ (β_ _ _).hom =
-        (equivalence Λ X).functor.map (β_ M N).hom ≫
-          (ordinaryTensorComparison Λ X N M).hom) := by
-  have hc := ordinary_assoc_unit Λ X
-  have hnb := ordinary_natural_braiding Λ X
-  exact ⟨hnb.1, hc.1, hc.2.1, hc.2.2, hnb.2⟩
-
 variable [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)]
-
-/-- The actual module-object proper projection arrow, the adjoint of counit after delta.
-Source: Stacks 0B56 (blueprint: lem-pd-module-ringed-topos-derived-comparison). -/
-def internalProjection {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (K : DerivedCategory (internalModules Λ X)) (L : DerivedCategory (internalModules Λ Y)) :
-    ((CondensedRing.derivedTensor Λ Y).obj ((internalDerivedPushforward Λ f).obj K)).obj L ⟶
-      (internalDerivedPushforward Λ f).obj
-        (((CondensedRing.derivedTensor Λ X).obj K).obj ((internalDerivedPullback Λ f).obj L)) :=
-  (CondensedRing.derivedUpperStarLowerStarAdjunction Λ f).homEquiv _ _
-    (((internalDelta Λ f).app ((internalDerivedPushforward Λ f).obj K)).app L ≫
-      (((CondensedRing.derivedTensor Λ X).map
-        ((CondensedRing.derivedUpperStarLowerStarAdjunction Λ f).counit.app K)).app
-          ((internalDerivedPullback Λ f).obj L)))
-
-/-- The precise ringed projection mate alpha, in the dependency's uncurried interface.
-Source: Stacks 0B56 (blueprint: lem-pd-module-ringed-topos-derived-comparison). -/
-def projection {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (K : DerivedCategory (modules Λ X)) (L : DerivedCategory (modules Λ Y)) :
-    (tensor Λ Y).obj ((derivedPushforward Λ f).obj K, L) ⟶
-      (derivedPushforward Λ f).obj ((tensor Λ X).obj (K, (derivedPullback Λ f).obj L)) :=
-  derivedProjectionFormulaMate (derivedPullback Λ f) (derivedPushforward Λ f)
-    (derivedAdjunction Λ f) (tensor Λ Y) (tensor Λ X) (tensorPullComparison Λ f) K L
-
-/-- Equality of the actual oplax tensor natural transformations under comparison.
-Inverting this equation identifies the actual lax maps as well.
-Source: Stacks 07A4 (blueprint: lem-pd-module-ringed-topos-derived-comparison).
-Proof: the normalized underived maps both send s tensor (m tensor n) to
-(s tensor m) tensor (1 tensor n). Apply this equality to flat-term K-flat
-representatives and totalize with the same signs. The representative square in
-tensorPullComparison_existsUnique and uniqueness of two-variable derived tensor
-in lem-weil-pbc-site-derived-tensor-descent give the equation on every pair. -/
-theorem delta_comparison {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (M N : DerivedCategory (internalModules Λ Y)) :
-    (derivedEquivalence Λ X).functor.map (((internalDelta Λ f).app M).app N) ≫
-        (tensorComparison Λ X).hom.app
-          ((internalDerivedPullback Λ f).obj M,
-            (internalDerivedPullback Λ f).obj N) ≫
-        (tensor Λ X).map (Prod.mkHom
-          ((derivedPullComparison Λ f).hom.app M) ((derivedPullComparison Λ f).hom.app N)) =
-      (derivedPullComparison Λ f).hom.app (((CondensedRing.derivedTensor Λ Y).obj M).obj N) ≫
-        (derivedPullback Λ f).map ((tensorComparison Λ Y).hom.app (M, N)) ≫
-        (tensorPullComparison Λ f).hom.app
-          ((derivedEquivalence Λ Y).functor.obj M, (derivedEquivalence Λ Y).functor.obj N) := by
-  exact third_conjunct (section_derived_tensor_normalization Λ f) M N
 
 set_option maxHeartbeats 1600000 in
 -- The comparison instances contain large sheaf tensor constraints.
-/-- The module-object proper projection is the precise ringed projection mate alpha.
-This statement makes no invertibility assertion about the projection arrow.
-Source: Stacks 0B56 (blueprint: lem-pd-module-ringed-topos-derived-comparison).
-Proof: derived_homEquiv identifies the specified Hom bijection and counit, and
-delta_comparison identifies its tensor arrow. Their composite therefore has the
-same adjoint transpose, which is exactly derivedProjectionFormulaMate used in
-ringedProjectionMateExact. Naturality and unit normalization follow from the same
-identifications and the adjunction triangle identities. -/
-theorem projection_comparison {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (K : DerivedCategory (internalModules Λ X)) (L : DerivedCategory (internalModules Λ Y)) :
-    (derivedEquivalence Λ Y).functor.map (internalProjection Λ f K L) ≫
-        (derivedPushComparison Λ f).hom.app
-          (((CondensedRing.derivedTensor Λ X).obj K).obj ((internalDerivedPullback Λ f).obj L)) ≫
-        (derivedPushforward Λ f).map ((tensorComparison Λ X).hom.app
-          (K, (internalDerivedPullback Λ f).obj L)) ≫
-        (derivedPushforward Λ f).map ((tensor Λ X).map (Prod.mkHom
-          (𝟙 ((derivedEquivalence Λ X).functor.obj K))
-          ((derivedPullComparison Λ f).hom.app L))) =
-      (tensorComparison Λ Y).hom.app
-          ((internalDerivedPushforward Λ f).obj K, L) ≫
-        (tensor Λ Y).map (Prod.mkHom ((derivedPushComparison Λ f).hom.app K)
-          (𝟙 ((derivedEquivalence Λ Y).functor.obj L))) ≫
-        projection Λ f ((derivedEquivalence Λ X).functor.obj K)
-          ((derivedEquivalence Λ Y).functor.obj L) := by
-  exact projection_comparison_of_squares
-    (internalDerivedPullback Λ f) (internalDerivedPushforward Λ f)
-    (CondensedRing.derivedUpperStarLowerStarAdjunction Λ f)
-    (derivedPullback Λ f) (derivedPushforward Λ f) (derivedAdjunction Λ f)
-    (derivedEquivalence Λ X).functor (derivedEquivalence Λ Y).functor
-    (CondensedRing.derivedTensor Λ X) (CondensedRing.derivedTensor Λ Y)
-    (tensor Λ X) (tensor Λ Y) (derivedPullComparison Λ f) (derivedPushComparison Λ f)
-    (tensorComparison Λ X) (tensorComparison Λ Y) (internalDelta Λ f)
-    (tensorPullComparison Λ f) (delta_comparison Λ f)
-    ((sectionDerivedPushpullNormalization Λ f).2.2.2.2.2.2.2.2.1) K L
-
 -- Comparing the two localized mate squares elaborates the section-module constraints.
 /-- The ringed adjoint-of-unit open projection arrow, using inverse canonical delta.
 Source: Stacks 03DJ and 0B56

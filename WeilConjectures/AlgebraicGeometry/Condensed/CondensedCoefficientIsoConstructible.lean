@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Condensed.CondensedConstantConst
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
 import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeMapDerivedCategory
 import WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal
+public import WeilConjectures.AlgebraicGeometry.CondensedCoefficientIsoConstructible
 
 /-!
 # Constructible finite-Tor complexes under a condensed coefficient isomorphism

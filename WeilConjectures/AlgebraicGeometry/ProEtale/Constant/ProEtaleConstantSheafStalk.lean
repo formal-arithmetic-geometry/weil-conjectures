@@ -158,7 +158,7 @@ theorem proEtaleConstantModuleGerm_bijective (y : Spec (.of Ω) ⟶ Y)
         (O.obj ⋙ forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj F.val
     let cR := colimit.isColimit R
     let cM := colimit.isColimit SM.presheaf
-    let η := (PresheafOfModules.sheafificationAdjunction
+    let η := (PresheafOfModules.sheafificationAdjunction.{u + 1}
       (R := (sheafCompose (ProEt.topology Y)
         (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj O) α).unit.app P
     have hη := LinearMap.map_smul (η.app (op (ProEt.mk (𝟙 Y)))).hom

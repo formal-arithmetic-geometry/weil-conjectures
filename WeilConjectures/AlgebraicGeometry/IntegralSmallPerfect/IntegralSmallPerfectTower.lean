@@ -7,7 +7,7 @@ module
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
 public import Mathlib.Algebra.Category.ModuleCat.Ulift
 public import WeilConjectures.CategoryTheory.ConstantScalarRealization.ConstantRealizationDerivedScalarExtensionSupplement
-import WeilConjectures.CategoryTheory.Derived.DerivedExactSquareComposition
+import WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.Algebra.Category.ModuleCat.AB
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory

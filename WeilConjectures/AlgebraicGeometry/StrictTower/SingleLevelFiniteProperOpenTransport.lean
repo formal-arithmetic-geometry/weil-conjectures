@@ -12,7 +12,7 @@ import WeilConjectures.AlgebraicGeometry.StrictTower.FiniteCoefficientClopenAlph
 import all WeilConjectures.AlgebraicGeometry.Finite.Clopen.FiniteClopenMateSiteTransport
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBaseChangeNaturality
 import all WeilConjectures.CategoryTheory.RightDerivedPlusCube
-import all WeilConjectures.AlgebraicGeometry.Fixed.FixedComparisonDirectImageMate
+import all WeilConjectures.AlgebraicGeometry.FixedComparisonDirectImageMate
 import all WeilConjectures.AlgebraicGeometry.ClopenMateNormalization.EtaleClopenMateNormalization
 
 /-! # Finite coefficient transport of the single-level proper/open mate
@@ -320,7 +320,7 @@ private theorem coefficientPlusCounit
   let e := @asIso _ _ _ _ (hPullbackInv B f Λ φ) (hPullbackInv_isIso B f Λ φ)
   have hm : (mateEquiv a b e.hom).natTrans = hDirect B f Λ φ := by
     exact congrArg TwoSquare.natTrans ((mateEquiv a b).apply_symm_apply _)
-  rw [← hm, derived_mate_eq a b e]
+  rw [← hm, Adjunction.rightDerivedFunctorPlusBaseChange_mateEquiv a b e]
   change (hPullbackPlus B Λ φ f).inv.app _ ≫
     (modulePullback B f).mapDerivedCategoryPlus.map
       ((mateEquiv a.derivedPlus b.derivedPlus

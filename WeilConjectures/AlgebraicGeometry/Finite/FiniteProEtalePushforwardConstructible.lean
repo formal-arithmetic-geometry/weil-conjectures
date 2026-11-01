@@ -17,9 +17,9 @@ public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import WeilConjectures.AlgebraicGeometry.Finite.Type.FiniteTypeDirectImageConstructibility
+import WeilConjectures.AlgebraicGeometry.FiniteTypeDirectImageConstructibility
 import WeilConjectures.AlgebraicGeometry.Etale.ProEtale.EtaleProEtaleExceptionalObjectComparison
-import WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedDirectImageBoundedBelow
+import WeilConjectures.AlgebraicGeometry.UnboundedDirectImageBoundedBelow
 
 /-!
 # Constructibility of ordinary finite-coefficient pro-etale direct images

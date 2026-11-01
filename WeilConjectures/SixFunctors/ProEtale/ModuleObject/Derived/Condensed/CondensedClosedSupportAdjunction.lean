@@ -13,13 +13,14 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Intrinsic.ProEtaleIntri
 public import WeilConjectures.CategoryTheory.RingedSiteModules
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import WeilConjectures.CategoryTheory.Right.RightDerivedFunctorOfQuasiIsoResolutions
+public import WeilConjectures.AlgebraicGeometry.CondensedClosedSupportAdjunction
 
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Mono
 import WeilConjectures.AlgebraicGeometry.ProEtaleAbelianClosedSupport
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 import Mathlib.Algebra.Category.Grp.AB
-import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleAbelianClosedCounit
+import WeilConjectures.AlgebraicGeometry.ProEtaleAbelianClosedCounit
 import WeilConjectures.Mathlib.AlgebraicGeometry.Cover.QuasiCompact
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Pullback
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
@@ -84,66 +85,13 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ]
 
-/-- The existing category of left module objects over the pulled-back ring.
-Source: blueprint opening paragraph (blueprint: det-lem-formal-closed-support-adjunction).
-This is the ring-object presentation of module sheaves, with sectionwise linear maps. -/
-abbrev supportModules (X : Scheme.{u}) :=
-  Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)
 
-/-- Grothendieck structure for arbitrary left modules, without commutativity.
-Source: blueprint proof Step 6 (blueprint: det-lem-formal-closed-support-adjunction). -/
-noncomputable instance supportModules_grothendieck (X : Scheme.{u}) :
-    IsGrothendieckAbelian.{u + 1} (supportModules Λ X) :=
-  Mod.isGrothendieckAbelian.{u + 1, u + 1, u + 2} (condensedRingObj Λ X)
 
-/-- Canonical inverse image, transporting the action through the inverse of alpha.
-Source: blueprint proof Steps 1--2 (blueprint: det-lem-formal-closed-support-adjunction). -/
-noncomputable def supportPullback {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    supportModules Λ Y ⥤ supportModules Λ X :=
-  (ProEtale.upperStar Ab.{u + 1} f).mapMod (condensedRingObj Λ Y) ⋙
-    Mod.comap (asIso (condensedPullbackHom Λ f)).inv
 
-/-- Exactness and additivity are inherited from inverse image and scalar transport.
-Source: blueprint proof Step 2 (blueprint: det-lem-formal-closed-support-adjunction). -/
-noncomputable instance supportPullback_additive {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    (supportPullback Λ f).Additive := inferInstanceAs
-      (((ProEtale.upperStar Ab.{u + 1} f).mapMod (condensedRingObj Λ Y) ⋙
-        Mod.comap (asIso (condensedPullbackHom Λ f)).inv).Additive)
 
-/-- Inverse image preserves finite limits.
-Source: blueprint proof Step 2 (blueprint: det-lem-formal-closed-support-adjunction). -/
-noncomputable instance supportPullback_leftExact {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    PreservesFiniteLimits (supportPullback Λ f) := by
-  unfold supportPullback
-  infer_instance
 
-/-- Inverse image preserves finite colimits.
-Source: blueprint proof Step 2 (blueprint: det-lem-formal-closed-support-adjunction). -/
-noncomputable instance supportPullback_rightExact {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    PreservesFiniteColimits (supportPullback Λ f) := by
-  unfold supportPullback
-  infer_instance
 
-/-- Scalar transport equivalence along alpha. Both functors restrict scalars.
-Source: blueprint proof Step 1 (blueprint: det-lem-formal-closed-support-adjunction). -/
-noncomputable def supportCoefficientEquivalence {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      ((ProEtale.upperStar Ab.{u + 1} f).obj (condensedRingObj Λ Y)) ≌
-        supportModules Λ X :=
-  CategoryTheory.Equivalence.mk (Mod.comap (asIso (condensedPullbackHom Λ f)).inv)
-    (Mod.comap (condensedPullbackHom Λ f))
-    ((Mod.comapId _).symm ≪≫ Mod.comapCongr (by simp) ≪≫
-      Mod.comapComp (condensedPullbackHom Λ f) (asIso (condensedPullbackHom Λ f)).inv)
-    ((Mod.comapComp (asIso (condensedPullbackHom Λ f)).inv
-      (condensedPullbackHom Λ f)).symm ≪≫ Mod.comapCongr (by simp) ≪≫ Mod.comapId _)
 
-/-- Canonical module inverse/direct-image adjunction, including its specified unit.
-Source: blueprint proof Step 2 (blueprint: det-lem-formal-closed-support-adjunction). -/
-noncomputable def supportPullbackAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    supportPullback Λ f ⊣ lowerStar Λ f :=
-  (((ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} f).mapModAdjunction
-    (condensedRingObj Λ Y)).comp (supportCoefficientEquivalence Λ f).toAdjunction).ofNatIsoRight
-      ((Functor.associator _ _ _).symm ≪≫ comapPullbackHomCompIso Λ f)
 
 /-- The kernel of the canonical open unit, functorially in the module.
 Source: blueprint formula for Gamma (blueprint: det-lem-formal-closed-support-adjunction). -/

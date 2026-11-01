@@ -9,7 +9,7 @@ public import WeilConjectures.SmoothPurity.Compact.CompactSupportNativeSystemEva
 public import WeilConjectures.SmoothPurity.Compact.CompactSupportCoefficientTransition
 import all WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
 import all WeilConjectures.SmoothPurity.Compact.CompactSupportCoefficientTransition
-import all WeilConjectures.CategoryTheory.Derived.DerivedExactSquareComposition
+import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 import WeilConjectures.SmoothPurity.Compact.CompactSupportOrdinaryOpenTransition
 
 /-! # Coefficient compatibility of native open evaluation

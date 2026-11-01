@@ -23,6 +23,8 @@ set_option autoImplicit false
 set_option synthInstance.maxSize 1024
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
+
 universe t u d a b
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace WeilConjectures

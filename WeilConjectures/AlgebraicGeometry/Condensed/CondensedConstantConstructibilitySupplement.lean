@@ -47,11 +47,5 @@ Source: blueprint sk-def-sfb-constructible, final paragraph
 abbrev ConstantModelConstructible (X : Scheme.{u}) :=
   ObjectProperty.FullSubcategory (IsConstantModelConstructible Λ X)
 
-/-- The bounded constructible objects of finite Tor amplitude, as a full subcategory.
-Source: blueprint sk-def-sfb-constructible, final paragraph
-(blueprint: sk-def-sfb-constructible). -/
-abbrev ConstantModelConstructibleFiniteTor (X : Scheme.{u}) :=
-  (constantModelBoundedConstructible Λ X ⊓ fun K ↦
-    DerivedCategory.finiteTorAmplitude _ K).FullSubcategory
 
 end AlgebraicGeometry.ProEtale

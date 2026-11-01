@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Finite.Clopen.FiniteClopenMateData
 public import WeilConjectures.AlgebraicGeometry.ClopenMateNormalization.EtaleClopenMateNormalization
-public import WeilConjectures.AlgebraicGeometry.Fixed.FixedComparisonDirectImageMate
+public import WeilConjectures.AlgebraicGeometry.FixedComparisonDirectImageMate
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Proper.ProEtaleProperOpenComparison
 import WeilConjectures.CategoryTheory.RightDerivedPlusCube
 import WeilConjectures.AlgebraicGeometry.Finite.Clopen.FiniteClopenBetaSiteTransport

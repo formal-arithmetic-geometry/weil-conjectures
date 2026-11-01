@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Condensed.CondensedScalarRealization
 public import WeilConjectures.AlgebraicGeometry.ZetaWeil.ComponentRelativeProfiniteSite
-public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ProfiniteCondensedRing
+public import WeilConjectures.Topology.ProfiniteCondensedRing
 public import WeilConjectures.CategoryTheory.RingDerivedScalarExtension.RingDerivedScalarExtension
 public import WeilConjectures.AlgebraicGeometry.DerivedChangeOfRingsModel
 public import WeilConjectures.Algebra.Homology.DerivedChangeOfRingsCochainModel

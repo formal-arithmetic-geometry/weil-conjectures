@@ -36,6 +36,8 @@ set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
+
 universe t u v w s a b c d
 
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated Opposite

@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.AlgebraicGeometry.Strict.Tower.StrictTowerOperationsSupplement
+public import WeilConjectures.AlgebraicGeometry.LocallyClosedModuleExtensionData
 
 /-!
 # Coefficient parameters and normalization formulas for locally closed extension
@@ -31,60 +32,18 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- A Noetherian scheme with an arbitrary commutative coefficient sheaf; a bundle of
-parameters for the coherence assertion, not an additional hypothesis on coefficients.
-Source: Stacks, Tags 01OV and 09A5
-(blueprint: lem-sfb-locally-closed-extension-coherence). -/
-structure LocallyClosedCoefficients where
-  scheme : Scheme.{u}
-  locallyNoetherian : IsLocallyNoetherian scheme
-  compact : CompactSpace scheme
-  ring : Sheaf (ProEt.topology scheme) CommRingCat.{u + 1}
 
 attribute [instance] LocallyClosedCoefficients.locallyNoetherian
   LocallyClosedCoefficients.compact
 
-/-- A locally closed immersion with its inverse-image coefficient identification.
-Taking the source ring literally to be inverse image is the special case `Iso.refl`;
-allowing its identified presentation permits composition without silently equating rings.
-Source: Stacks, Tags 01IO and 03D2
-(blueprint: lem-sfb-locally-closed-extension-coherence). -/
-structure LocallyClosedCoefficientImmersion (S X : LocallyClosedCoefficients.{u}) where
-  hom : S.scheme ⟶ X.scheme
-  immersion : IsImmersion hom
-  coefficient : (proEtaleSheafInverseImage hom CommRingCat.{u + 1}).obj X.ring ≅ S.ring
 
 attribute [instance] LocallyClosedCoefficientImmersion.immersion
 
 namespace LocallyClosedCoefficientImmersion
 
-/-- Identity with the actual identity inverse-image comparison.
-Source: Stacks, Tag 09A5 (blueprint: lem-sfb-locally-closed-extension-coherence). -/
-def identity (X : LocallyClosedCoefficients.{u}) : LocallyClosedCoefficientImmersion X X where
-  hom := 𝟙 X.scheme
-  immersion := inferInstance
-  coefficient := (proEtaleRingInverseImageId X.scheme).app X.ring
 
-/-- Composition with the actual composition of inverse-image coefficient identifications.
-Source: Stacks, Tags 02V0 and 03D8
-(blueprint: lem-sfb-locally-closed-extension-coherence). -/
-def comp {S X T : LocallyClosedCoefficients.{u}}
-    (a : LocallyClosedCoefficientImmersion S X) (b : LocallyClosedCoefficientImmersion T S) :
-    LocallyClosedCoefficientImmersion T X where
-  hom := b.hom ≫ a.hom
-  immersion := inferInstance
-  coefficient := proEtaleRingCompositeCoefficients b.hom a.hom X.ring S.ring T.ring
-    a.coefficient b.coefficient
 
-/-- Exact inverse image with the specified inverse-image coefficients.
-Source: Stacks, Tag 03D2 (blueprint: lem-sfb-locally-closed-extension-coherence). -/
-abbrev pull {S X : LocallyClosedCoefficients.{u}} (a : LocallyClosedCoefficientImmersion S X) :=
-  proEtaleRingModulePullback a.hom X.ring S.ring a.coefficient
 
-/-- Actual direct image with action through the coefficient adjunction unit.
-Source: Stacks, Tag 03D3 (blueprint: lem-sfb-locally-closed-extension-coherence). -/
-abbrev push {S X : LocallyClosedCoefficients.{u}} (a : LocallyClosedCoefficientImmersion S X) :=
-  proEtaleRingModuleDirectImage a.hom X.ring S.ring a.coefficient
 
 /-- The canonical inverse-image composition, fixed by the sectionwise fibre-product map.
 Source: Stacks, Tag 03D8 (blueprint: lem-sfb-locally-closed-extension-coherence). -/
@@ -95,23 +54,7 @@ def pullComp {S X T : LocallyClosedCoefficients.{u}}
 
 end LocallyClosedCoefficientImmersion
 
-/-- The specified open unit is inverse to restriction.
-Source: Stacks, Tags 03DI and 09BN
-(blueprint: def-sfb-locally-closed-module-extension-data). -/
-def LocallyClosedOpenNormalization
-    {C D : Type*} [Category C] [Category D] (F : C ⥤ D) (L : D ⥤ C)
-    (r : F ⋙ L ≅ 𝟭 C) (adj : F ⊣ L) : Prop :=
-  ∀ M, dsimp% only [Functor.comp_obj, Functor.id_obj]
-    adj.unit.app M ≫ r.hom.app M = 𝟙 M
 
-/-- Restriction agrees with the specified closed counit after comparison.
-Source: Stacks, Tag 09AA
-(blueprint: def-sfb-locally-closed-module-extension-data). -/
-def LocallyClosedClosedNormalization
-    {C D : Type*} [Category C] [Category D] (F P : C ⥤ D) (L : D ⥤ C)
-    (r : F ⋙ L ≅ 𝟭 C) (d : P ⋙ L ⟶ 𝟭 C) (e : F ≅ P) : Prop :=
-  ∀ M, dsimp% only [Functor.comp_obj, Functor.id_obj]
-    r.hom.app M = L.map (e.hom.app M) ≫ d.app M
 
 /-- The composite of the two restriction comparisons and inverse-image composition.
 Source: Stacks, Tags 02V0 and 09AH

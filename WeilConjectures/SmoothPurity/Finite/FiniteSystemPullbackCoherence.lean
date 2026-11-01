@@ -9,7 +9,7 @@ public import WeilConjectures.ProperBaseChange.IntegralFinitePullbackComposition
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Module.ProEtaleModulePullbackComposition
 public import WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
 
-import WeilConjectures.CategoryTheory.Derived.DerivedExactSquareComposition
+import WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantModuleComparisonLocalization
 
 /-! # Coherent composition of finite-coefficient pullback on strict systems

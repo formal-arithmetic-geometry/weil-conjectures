@@ -10,6 +10,7 @@ public import WeilConjectures.SmoothPurity.Derived.DerivedScalarExtensionRestric
 public import WeilConjectures.SixFunctors.Integral.IntegralReductionTower
 import all WeilConjectures.SmoothPurity.Integral.Reduction.IntegralReductionTowerUnrestrictedSupplement
 import all WeilConjectures.SixFunctors.Integral.IntegralReductionTowerWellDefined
+public import WeilConjectures.AlgebraicGeometry.NormalizedDVRKFlatTransition
 
 /-! # Quotient transitions on K-flat representatives -/
 
@@ -255,31 +256,8 @@ attribute [local irreducible] Functor.mapDerivedCategory
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : AlgebraicGeometry.Scheme.{t})
   (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
-/-- Canonical abelian sheafification, registered only in this file. -/
-abbrev normalizedDVRKFlatTransitionLocal1 :
-    HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology X)
-    AddCommGrpCat.{max u (t + 1)} := integralCoefficientAbSheafify.{t, u} X
 attribute [local instance] normalizedDVRKFlatTransitionLocal1
-/-- The canonical locally bijective sheafification criterion, registered locally. -/
-abbrev normalizedDVRKFlatTransitionLocal2 :
-    (AlgebraicGeometry.Scheme.ProEt.topology X).WEqualsLocallyBijective
-    AddCommGrpCat.{max u (t + 1)} := integralCoefficientAbLocallyBijective.{t, u} X
 attribute [local instance] normalizedDVRKFlatTransitionLocal2
-
-/-- The universal derived tensor counit followed by the exact restriction comparison.
-Source: Stacks Tag 06YY; blueprint final proof step of DVR effectivity.
-This is an actual morphism built from the fixed derived functors. -/
-noncomputable def normalizedDVRKFlatComparison (n : ℕ)
-    (P : CochainComplex (scalarReductionSource l E X) ℤ) :
-    (scalarReductionDerivedRestriction l E X n).obj
-        ((scalarReductionDerivedExtension l E X n).obj (DerivedCategory.Q.obj P)) ⟶
-      DerivedCategory.Q.obj (unrestrictedTowerComplex l E X n P) :=
-  (scalarReductionDerivedRestriction l E X n).map
-      ((scalarReductionCounit l E X n).app
-        ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) ≫
-    (scalarReductionRestriction l E X n).mapDerivedCategoryFactorsh.hom.app
-      (((scalarReductionExtension l E X n).mapHomotopyCategory (.up ℤ)).obj
-        ((HomotopyCategory.quotient _ (.up ℤ)).obj P))
 
 attribute [local irreducible] normalizedDVRKFlatComparison
 

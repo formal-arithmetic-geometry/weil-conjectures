@@ -180,6 +180,7 @@ import all WeilConjectures.CategoryTheory.InternalSectionModuleFlat
 import all WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
 import all Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import WeilConjectures.AlgebraicGeometry.InternalSectionTotalComparison
 
 /-! # Canonical internal-to-sectionwise total-complex comparison
 
@@ -210,17 +211,6 @@ namespace AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison
 
 section GenericComparisonAPI
 
-/-- Named sheaf-composition evidence for the reconstructed section-ring comparison.
-Source: the small-model comparison of sites (blueprint: def-sfb-internal-section-total-comparison).
-Proof: replace the essentially small site by its small model. The induced topology
-preserves the sheaf condition, so composition with the forgetful ring functor
-carries sheaves to sheaves, and the site equivalence transports this fact back. -/
-theorem sectionRingHasSheafCompose {C : Type (u + 1)} [Category.{u} C]
-    (J : GrothendieckTopology C) :
-    J.HasSheafCompose (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}) :=
-  (equivSmallModel.{u + 1} C).hasSheafCompose J
-    ((equivSmallModel.{u + 1} C).inverse.inducedTopology J)
-    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})
 
 attribute [local instance 1000001] sectionRingHasSheafCompose
 
@@ -291,41 +281,15 @@ variable {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
   [J.WEqualsLocallyBijective AddCommGrpCat.{u + 1}]
 
 attribute [local instance 30001] Sheaf.monoidalCategory
-/-- The canonical braiding used by the section tensor comparison, via its symmetric structure.
-Source: Stacks 03EK (blueprint: def-sfb-internal-section-total-comparison). -/
-abbrev sectionComparisonBraiding : BraidedCategory (Sheaf J AddCommGrpCat.{u + 1}) :=
-  (Sheaf.symmetricCategory J AddCommGrpCat.{u + 1}).toBraidedCategory
 
 attribute [local instance 30000] sectionComparisonBraiding
 
 variable (R : Sheaf J AddCommGrpCat.{u + 1}) [MonObj R] [hcomm : IsCommMonObj R]
 
-omit [J.WEqualsLocallyBijective AddCommGrpCat.{u + 1}] in
-/-- Commutativity for the direct canonical braiding on abelian sheaves.
-Source: Stacks 03EK (blueprint: def-sfb-internal-section-total-comparison).
-Proof: its braiding agrees with the parent of the canonical symmetric structure,
-so the original commutativity proof has the required type. -/
-theorem sectionRingCommDirect :
-    @IsCommMonObj (Sheaf J AddCommGrpCat.{u + 1}) _ _
-      (Sheaf.braidedCategory J AddCommGrpCat.{u + 1}) R _ := by
-  exact hcomm
 
 attribute [local instance] sectionRingCommDirect
 
-/-- The primitive section functor is additive, with evidence named before totalization.
-Source: Stacks 00YV (blueprint: def-sfb-internal-section-total-comparison).
-Proof: it is the functor of the section-module equivalence, whose additivity follows
-from preservation of binary products in these preadditive categories. -/
-theorem sectionFunctorAdditiveForSite :
-    (sectionModuleFunctor.{u + 1, u + 1, u} J R).Additive :=
-  comparison_EAdditive J R
 
-/-- The primitive section functor is an equivalence.
-Source: Stacks 00YV (blueprint: def-sfb-internal-section-total-comparison).
-Proof: the section-module equivalence has this definitionally identical functor. -/
-theorem sectionFunctorEquivalenceForSite :
-    (sectionModuleFunctor.{u + 1, u + 1, u} J R).IsEquivalence :=
-  comparison_EEquiv J R
 
 attribute [local instance] sectionFunctorAdditiveForSite sectionFunctorEquivalenceForSite
 
@@ -442,131 +406,21 @@ end ProEtaleComparisonAPI
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u})
 
-/-- The original pulled-back coefficient monoid, named before forming module types.
-This is precisely the lax pullback monoid constructor already inferred here.
-Source: Stacks 03CV (blueprint: def-sfb-internal-section-total-comparison). -/
-@[instance_reducible]
-def coefficientMonoid : MonObj (condensedRingObj Λ X) := inferInstance
 
 attribute [instance 1000001] coefficientMonoid
 
-/-- The reconstructed section-ring sheaf of the pulled-back coefficient ring.
-Source: Stacks 03CV (blueprint: def-sfb-internal-section-total-comparison). -/
-abbrev ring : Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
-  sectionRingSheaf.{u + 1, u + 1, u} (Scheme.ProEt.topology X) (condensedRingObj Λ X)
 
-/-- Internal module objects, with the relative coequalizer tensor.
-Source: blueprint module objects
-(blueprint: def-sfb-internal-section-total-comparison). -/
-abbrev Internal := CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1})
-  (condensedRingObj Λ X)
 
-/-- Sectionwise module sheaves over the reconstructed ring.
-Source: Stacks 03CV (blueprint: def-sfb-internal-section-total-comparison). -/
-abbrev Modules := SheafOfModules.{u + 1}
-  ((sheafCompose (Scheme.ProEt.topology X)
-    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (ring Λ X))
 
-/-- The fixed equivalence, unchanged on underlying sheaves and maps.
-Source: Stacks 00YV (blueprint: def-sfb-internal-section-total-comparison). -/
-abbrev equivalence : Internal Λ X ≌ Modules Λ X :=
-  sectionModuleEquivalence.{u + 1, u + 1, u}
-    (Scheme.ProEt.topology X) (condensedRingObj Λ X)
 
-/-- The forward section functor, before constructing its inverse.
-Source: Stacks 00YV (blueprint: def-sfb-internal-section-total-comparison). -/
-def sectionForward : Internal Λ X ⥤ Modules Λ X :=
-  sectionModuleFunctor.{u + 1, u + 1, u}
-    (Scheme.ProEt.topology X) (condensedRingObj Λ X)
 
-/-- The primitive and equivalence presentations have the same forward functor.
-Source: Stacks 00YV (blueprint: def-sfb-internal-section-total-comparison).
-Proof: project the forward functor of the section equivalence. -/
-theorem sectionForward_eq : sectionForward Λ X = (equivalence Λ X).functor := by
-  rfl
 
-/-- The primitive forward functor is additive.
-Source: Stacks 00YV (blueprint: def-sfb-internal-section-total-comparison).
-Proof: use the generic section-functor additivity theorem. -/
-@[instance] theorem sectionForward_additive : (sectionForward Λ X).Additive :=
-  sectionFunctorAdditiveForSite (Scheme.ProEt.topology X) (condensedRingObj Λ X)
 
-/-- The primitive forward functor is an equivalence.
-Source: Stacks 00YV (blueprint: def-sfb-internal-section-total-comparison).
-Proof: use the generic section-functor equivalence theorem. -/
-@[instance] theorem sectionForward_isEquivalence : (sectionForward Λ X).IsEquivalence :=
-  sectionFunctorEquivalenceForSite (Scheme.ProEt.topology X) (condensedRingObj Λ X)
 
-/-- Additivity of the recorded section equivalence through its forward-functor API.
-Source: Stacks 00YV (blueprint: def-sfb-internal-section-total-comparison).
-Proof: rewrite by sectionForward_eq and use primitive section additivity. -/
-@[instance] theorem equivalenceAdditive : (equivalence Λ X).functor.Additive := by
-  rw [← sectionForward_eq]
-  infer_instance
 
-/-- Grothendieck abelianness supplies the small ordinary derived-category universe.
-Source: Stacks 07A5 (blueprint: def-sfb-internal-section-total-comparison).
-Proof: apply Grothendieck abelianness of module sheaves on a site small in
-the coefficient universe. Restriction of scalars from the commutative ring
-sheaf to its underlying ring sheaf does not change this category. -/
-@[instance] theorem sectionModulesGrothendieck {C : Type (u + 1)} [Category.{u} C]
-    (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u + 1}) :
-    IsGrothendieckAbelian.{u + 1} (SheafOfModules.{u + 1}
-      ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)) := by
-  classical
-  let S : Sheaf J RingCat.{u + 1} :=
-    (sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R
-  have : HasFilteredColimitsOfSize.{u + 1, u + 1} (SheafOfModules.{u + 1} S) :=
-    ⟨fun _ _ _ ↦ inferInstance⟩
-  have : AB5OfSize.{u + 1, u + 1} (SheafOfModules.{u + 1} S) :=
-    ⟨fun K _ _ ↦ HasExactColimitsOfShape.domain_of_functor K (SheafOfModules.toSheaf S)⟩
-  let T (U : C) := (PresheafOfModules.sheafification.{u + 1} (𝟙 S.obj)).obj
-    ((PresheafOfModules.free S.obj).obj (uliftYoneda.{u + 1}.obj U))
-  have hs : ObjectProperty.IsSeparating (.ofObj T) := by
-    intro M N f g h
-    apply (SheafOfModules.forget S ⋙ PresheafOfModules.toPresheaf S.obj).map_injective
-    ext ⟨U⟩ x
-    let adj := PresheafOfModules.sheafificationAdjunction.{u + 1} (𝟙 S.obj)
-    let e (M : SheafOfModules.{u + 1} S) :=
-      (adj.homEquiv
-        ((PresheafOfModules.free S.obj).obj (uliftYoneda.{u + 1}.obj U)) M).trans
-        (PresheafOfModules.freeHomEquiv.trans uliftYonedaEquiv)
-    have hn (a : T U ⟶ M) (k : M ⟶ N) :
-        (e N) (a ≫ k) = k.val.app (.op U) ((e M) a) := by
-      dsimp only [e, Equiv.trans_apply]
-      rw [adj.homEquiv_naturality_right]
-      let a' := (adj.homEquiv _ _) a
-      let k' := (SheafOfModules.forget S ⋙
-        PresheafOfModules.restrictScalars (𝟙 S.obj)).map k
-      change uliftYonedaEquiv (PresheafOfModules.freeHomEquiv (a' ≫ k')) = _
-      have hh := (PresheafOfModules.freeAdjunction S.obj).homEquiv_naturality_right a' k'
-      rw [PresheafOfModules.freeAdjunction_homEquiv,
-        PresheafOfModules.freeAdjunction_homEquiv] at hh
-      erw [hh, uliftYonedaEquiv_comp]
-    have hh := congrArg (e N) (h _ (ObjectProperty.ofObj_apply T U) ((e M).symm x))
-    rw [hn, hn, Equiv.apply_symm_apply] at hh
-    exact hh
-  have : HasSeparator (SheafOfModules.{u + 1} S) :=
-    ⟨_, hs.isSeparator_coproduct⟩
-  exact {}
 
-/-- Fix the dependency's existing totalization instance for this internal category.
-Source: Stacks 012Z; lem-pe-internal-section-tensor-comparison
-(blueprint: def-sfb-internal-section-total-comparison). -/
-instance internalTotalExists (P Q : CochainComplex (Internal Λ X) ℤ) :
-    P.HasMapBifunctor Q (curriedTensor (Internal Λ X)) :=
-  comparison_internalTotalExists (Scheme.ProEt.topology X) (condensedRingObj Λ X) P Q
 
-/-- The native total tensor on internal complexes.
-Source: Stacks 06YL (blueprint: def-sfb-internal-section-total-comparison). -/
-instance internalComplexMonoidal : MonoidalCategory (CochainComplex (Internal Λ X) ℤ) :=
-  CategoryTheory.Mod.monoidalCategoryCochainComplex
 
-/-- The native total tensor, with its instance fixed explicitly.
-Source: Stacks 06YL (blueprint: def-sfb-internal-section-total-comparison). -/
-def internalTotalTensor (P Q : CochainComplex (Internal Λ X) ℤ) :
-    CochainComplex (Internal Λ X) ℤ :=
-  (internalComplexMonoidal Λ X).tensorObj P Q
 
 /-- The ordinary lax localization comparison, for the same total tensor.
 Source: Stacks 06YS (blueprint: def-sfb-internal-section-total-comparison). -/
@@ -582,18 +436,7 @@ Source: Stacks 05RU (blueprint: def-sfb-internal-section-total-comparison). -/
 def forward : DerivedCategory (Internal Λ X) ⥤ DerivedCategory (Modules Λ X) :=
   (sectionForward Λ X).mapDerivedCategory
 
-/-- The functorial K-injective sheaf-Hom model, retaining both site universes.
-Source: Stacks 08J7 (blueprint: def-sfb-internal-section-total-comparison). -/
-def hom : (DerivedCategory (Modules Λ X))ᵒᵖ × DerivedCategory (Modules Λ X) ⥤
-    DerivedCategory (Modules Λ X) :=
-  derivedInternalHomOfUniverses.{u + 1, u, u, u + 1}
-    (Scheme.ProEt.topology X) (ring Λ X)
 
-/-- The exact equivalence applied termwise to cochain complexes.
-Source: Stacks 05RU (blueprint: def-sfb-internal-section-total-comparison). -/
-def complexForward :
-    CochainComplex (Internal Λ X) ℤ ⥤ CochainComplex (Modules Λ X) ℤ :=
-  (sectionForward Λ X).mapHomologicalComplex (.up ℤ)
 
 /-- The actual localization comparison for the termwise equivalence.
 Source: Stacks 05RU (blueprint: def-sfb-internal-section-total-comparison). -/

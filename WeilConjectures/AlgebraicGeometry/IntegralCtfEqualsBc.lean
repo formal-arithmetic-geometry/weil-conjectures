@@ -5,7 +5,7 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ProfiniteCondensedRing
+public import WeilConjectures.Topology.ProfiniteCondensedRing
 public import WeilConjectures.AlgebraicGeometry.ProEtaleCoefficients.ProfiniteFiniteConstantLocalModel
 public import WeilConjectures.AlgebraicGeometry.Condensed.CondensedConstantConstructibilitySupplement
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
@@ -16,7 +16,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 public import WeilConjectures.RingTheory.GlobalDimension
 public import Mathlib.Topology.Instances.ZMod
 import WeilConjectures.AlgebraicGeometry.ProEtaleCoefficients.LocalizingClosureCtfEqualsBc
-import WeilConjectures.AlgebraicGeometry.ProEtaleCoefficients.CohomologyTorInterval
+import WeilConjectures.AlgebraicGeometry.CohomologyTorInterval
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 import all WeilConjectures.AlgebraicGeometry.Constant.ConstantSquareZeroTorExample
 import all WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinary.FiniteDiscreteOrdinaryEncodingSupplement

@@ -13,6 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafC
 public import WeilConjectures.AlgebraicGeometry.Sf.SfIntrinsicRealizationTransport
 public import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+public import WeilConjectures.AlgebraicGeometry.LocallyClosedModuleExtensionCoherence
 
 public import WeilConjectures.AlgebraicGeometry.Locally.LocallyClosedModuleExtensionData
 import WeilConjectures.AlgebraicGeometry.LocallyClosedCoefficientImmersion.LocallyClosedModuleExtensionModel
@@ -30,51 +31,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Witnesses for the exact module extensions in the assertion. The open adjunction and
-closed counit normalize restriction. The coefficients of every arrow are inverse images.
-Source: Stacks, Tags 09AA, 09BM, 09BN, 03DI and 03DJ
-(blueprint: lem-sfb-locally-closed-extension-coherence). -/
-structure LocallyClosedExtensionData where
-  extension : ∀ {S X : LocallyClosedCoefficients.{u}}, LocallyClosedCoefficientImmersion S X →
-    proEtaleRingModules S.scheme S.ring ⥤ proEtaleRingModules X.scheme X.ring
-  additive : ∀ {S X : LocallyClosedCoefficients.{u}} (a : LocallyClosedCoefficientImmersion S X),
-    (extension a).Additive
-  finiteLimits : ∀ {S X : LocallyClosedCoefficients.{u}}
-    (a : LocallyClosedCoefficientImmersion S X), PreservesFiniteLimits (extension a)
-  finiteColimits : ∀ {S X : LocallyClosedCoefficients.{u}}
-    (a : LocallyClosedCoefficientImmersion S X), PreservesFiniteColimits (extension a)
-  restriction : ∀ {S X : LocallyClosedCoefficients.{u}}
-    (a : LocallyClosedCoefficientImmersion S X), extension a ⋙ a.pull ≅ 𝟭 _
-  openAdjunction : ∀ {S X : LocallyClosedCoefficients.{u}}
-    (a : LocallyClosedCoefficientImmersion S X) (_ : IsOpenImmersion a.hom),
-    extension a ⊣ a.pull
-  openNormalization : ∀ {S X : LocallyClosedCoefficients.{u}}
-    (a : LocallyClosedCoefficientImmersion S X) (ha : IsOpenImmersion a.hom),
-    LocallyClosedOpenNormalization (extension a) a.pull (restriction a) (openAdjunction a ha)
-  closedComparison : ∀ {S X : LocallyClosedCoefficients.{u}}
-    (a : LocallyClosedCoefficientImmersion S X) (_ : IsClosedImmersion a.hom),
-    extension a ≅ a.push
-  closedNormalization : ∀ {S X : LocallyClosedCoefficients.{u}}
-    (a : LocallyClosedCoefficientImmersion S X) (ha : IsClosedImmersion a.hom),
-    LocallyClosedClosedNormalization (extension a) a.push a.pull (restriction a)
-      (proEtaleRingModuleAdjunction a.hom X.ring S.ring a.coefficient).counit
-      (closedComparison a ha)
-  gamma : ∀ {S X T : LocallyClosedCoefficients.{u}}
-    (a : LocallyClosedCoefficientImmersion S X) (b : LocallyClosedCoefficientImmersion T S),
-    extension b ⋙ extension a ≅ extension (a.comp b)
-  identity : ∀ X : LocallyClosedCoefficients.{u},
-    extension (.identity X) ≅ 𝟭 (proEtaleRingModules X.scheme X.ring)
-
-attribute [instance] LocallyClosedExtensionData.additive LocallyClosedExtensionData.finiteLimits
-  LocallyClosedExtensionData.finiteColimits
-
 namespace LocallyClosedExtensionData
-
-/-- The actual termwise extension on the ordinary unbounded derived categories.
-Source: Stacks, Tags 015F and 05RU
-(blueprint: lem-sfb-locally-closed-extension-coherence). -/
-abbrev derived (E : LocallyClosedExtensionData.{u}) {S X : LocallyClosedCoefficients.{u}}
-    (a : LocallyClosedCoefficientImmersion S X) := (E.extension a).mapDerivedCategory
 
 /-- Normalized comparison laws on module sheaves. The two factorization orders follow
 by composing `gamma` with `closedComparison` and the open adjunction; normalization

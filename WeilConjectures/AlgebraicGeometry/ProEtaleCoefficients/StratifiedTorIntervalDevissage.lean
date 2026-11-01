@@ -5,7 +5,7 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ProfiniteCondensedRing
+public import WeilConjectures.Topology.ProfiniteCondensedRing
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension
 public import WeilConjectures.AlgebraicGeometry.Condensed.CondensedConstantConstructibilitySupplement
@@ -15,14 +15,15 @@ public import Mathlib.CategoryTheory.Triangulated.Subcategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
 public import WeilConjectures.AlgebraicGeometry.FiniteLocallyClosedStratification
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
-import WeilConjectures.AlgebraicGeometry.Constructible.ConstructibleOpenClosedRefinement
-import WeilConjectures.AlgebraicGeometry.Pullback.PullbackFiniteConstantLocalModel
+import WeilConjectures.SixFunctors.ConstructibleOpenClosedRefinement
+import WeilConjectures.AlgebraicGeometry.PullbackFiniteConstantLocalModel
 import WeilConjectures.AlgebraicGeometry.Cartesian.CartesianCoefficients
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedPullbackTensorComparison
+import WeilConjectures.AlgebraicGeometry.CondensedPullbackTensorComparison
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.OpenClosed
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherence
 import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Mathlib.Order.CompletePartialOrder
+public import WeilConjectures.AlgebraicGeometry.StratifiedTorIntervalDevissage
 
 /-!
 # A fixed Tor interval across constructible strata

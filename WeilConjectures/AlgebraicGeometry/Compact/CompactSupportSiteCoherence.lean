@@ -12,7 +12,7 @@ import all WeilConjectures.AlgebraicGeometry.Canonical.CanonicalOriginCompactSup
 public import WeilConjectures.AlgebraicGeometry.Compact.CompactSupportExchangeTransport
 import WeilConjectures.AlgebraicGeometry.Compact.CompactSupportFiniteTorsion
 import WeilConjectures.AlgebraicGeometry.Etale.Compact.EtaleCompactSupportComparisons
-import WeilConjectures.AlgebraicGeometry.Fixed.FixedComparisonDirectImageMate
+import WeilConjectures.AlgebraicGeometry.FixedComparisonDirectImageMate
 public import WeilConjectures.Compactification.RefinementCategory
 
 /-! # Compact-support site coherence

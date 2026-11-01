@@ -50,6 +50,7 @@ import all WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
 import all WeilConjectures.CategoryTheory.Monoidal.Conjugate
 import all WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import all WeilConjectures.CategoryTheory.Sites.MonObj
+public import WeilConjectures.AlgebraicGeometry.IntegralResiduePullOrdinaryUnit
 /-! # The ordinary scalar pullback square on homotopy categories -/
 
 @[expose] public section

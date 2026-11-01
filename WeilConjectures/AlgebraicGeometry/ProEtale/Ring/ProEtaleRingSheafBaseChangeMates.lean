@@ -11,7 +11,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafClosedLo
 import WeilConjectures.AlgebraicGeometry.ProEtaleAbelianClosedSupport
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 import Mathlib.Algebra.Category.Grp.AB
-import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleAbelianClosedCounit
+import WeilConjectures.AlgebraicGeometry.ProEtaleAbelianClosedCounit
 import WeilConjectures.Mathlib.AlgebraicGeometry.Cover.QuasiCompact
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Pullback
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
