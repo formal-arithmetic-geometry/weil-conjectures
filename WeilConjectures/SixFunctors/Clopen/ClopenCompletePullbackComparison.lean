@@ -22,6 +22,8 @@ Source: Stacks Project, proetale.tex, Tag 09C3; derived.tex, Tag 08TC.
 set_option autoImplicit false
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
+-- This instance has a free universe and leaves universe constraints stuck here.
+attribute [-instance] WeilConjectures.PrincipalKoszulStrictReplacement.siteSmall
 attribute [local instance 5000] HasDerivedCategory.standard
 
 universe u
