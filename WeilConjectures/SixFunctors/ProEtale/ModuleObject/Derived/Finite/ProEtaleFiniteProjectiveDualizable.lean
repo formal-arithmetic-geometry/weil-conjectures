@@ -26,6 +26,7 @@ Source: blueprint main-20261015, stratum Hom lemma, proof step 3.
 @[expose] public section
 
 set_option autoImplicit false
+set_option linter.privateModule false
 
 universe u
 

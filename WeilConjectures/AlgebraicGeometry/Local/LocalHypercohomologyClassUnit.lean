@@ -17,6 +17,7 @@ and Tags 0BKJ and 0D5X.
 
 @[expose] public section
 set_option autoImplicit false
+set_option linter.privateModule false
 set_option backward.defeqAttrib.useBackward true
 set_option synthInstance.maxSize 2048
 universe u w

@@ -31,6 +31,8 @@ Source: Stacks Project, Tag 09A3, relative rational-algebra module version
 
 @[expose] public section
 
+set_option linter.privateModule false
+
 universe u
 
 open CategoryTheory CategoryTheory.Limits

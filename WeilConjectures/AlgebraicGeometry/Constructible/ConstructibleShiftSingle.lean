@@ -21,6 +21,7 @@ import all WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory
 import all WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
 import all WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
 import all WeilConjectures.CategoryTheory.DerivedCategory.Constructible
+import all WeilConjectures.AlgebraicGeometry.CondensedConstructibleSerre
 
 /-! Geometric and shift components of the bounded-constructibility argument. -/
 
@@ -64,9 +65,11 @@ theorem boundedConstructible_shift_single
   · intro i
     by_cases hi : i = -n
     · subst i
-      exact constructible_of_iso R
-        (((DerivedCategory.homologyFunctor _ (-n)).mapIso e) ≪≫
-          (DerivedCategory.singleFunctorCompHomologyFunctorIso _ (-n)).app M).symm hM
+      obtain ⟨S, hS⟩ := hM
+      exact ⟨S, fun a ↦ lfp_of_iso (hS a)
+        (((ProEtale.upperStar A (S.immersion a)).mapMod R).mapIso
+          (((DerivedCategory.homologyFunctor _ (-n)).mapIso e) ≪≫
+            (DerivedCategory.singleFunctorCompHomologyFunctorIso _ (-n)).app M).symm)⟩
     · apply constructible_of_isZero R
       rcases lt_or_gt_of_ne hi with hi | hi
       · exact DerivedCategory.isZero_of_isGE K (-n) i hi

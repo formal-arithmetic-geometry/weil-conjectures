@@ -21,7 +21,8 @@ once. Every instance is `inferInstance`.
 The instances are scoped (2026-10-27): seen by every module downstream of
 `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal`, their unification against
 other rings defined as `condensedRingObj` (such as `AlgebraicGeometry.ProEtale.AdicCompletion.ring`)
-made instance searches there time out (`WeilConjectures.AlgebraicGeometry.Integral.Proper.IntegralProperReductionBound`).
+made instance searches there time out
+(`WeilConjectures.AlgebraicGeometry.Integral.Proper.IntegralProperReductionBound`).
 -/
 
 @[expose] public section

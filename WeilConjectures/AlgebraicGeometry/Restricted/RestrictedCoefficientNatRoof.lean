@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Derived.DerivedSquareLocalClassModels
+public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 import all WeilConjectures.AlgebraicGeometry.Restricted.RestrictedRoofSectionModels
 import all WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 import WeilConjectures.AlgebraicGeometry.Modules.RestrictPushforward
