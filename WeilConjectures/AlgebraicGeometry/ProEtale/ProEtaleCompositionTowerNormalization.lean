@@ -26,6 +26,7 @@ import all WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedExchangeAgrees
 import all WeilConjectures.AlgebraicGeometry.Compact.CompactSupportProperFactor
 import all WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedEtaleCompactSupportComparisonsSupplement
 import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleCompositionTowerDefinitions
+public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleCompositionTowerFormula
 
 /-!
 # Normalization on a compatible pro-etale compactification tower
@@ -482,6 +483,35 @@ private theorem tower_lambda_plus {H T V S : Scheme.{u}}
   rw [Category.assoc]
   rfl
 
+private theorem tower_site_interchange_isIso [Finite Λ]
+    {H T V S : Scheme.{u}}
+    [IsNoetherian H] [IsNoetherian T] [IsNoetherian V] [IsNoetherian S]
+    {b : H ⟶ T} {i : V ⟶ S} {r : H ⟶ V} {p : T ⟶ S}
+    [IsOpenImmersion b] [IsOpenImmersion i] [IsProper r] [IsProper p]
+    (sq : IsPullback b r p i)
+    (E : DerivedCategory.Plus (Sheaf H.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    IsIso (properOpenSiteInterchange Λ sq E) := by
+  letI := isIso_fixedComparisonDirectImageMatePlus Λ p
+  letI := isIso_fixedComparisonDirectImageMatePlus Λ r
+  have he := DerivedCategory.Plus.ι.map_injective (properOpen_site_mate Λ sq E)
+  haveI : IsIso (properOpenSiteComposite Λ sq E) := by
+    unfold properOpenSiteComposite
+    infer_instance
+  haveI : IsIso
+      (((properOpenSiteExtensionIso Λ i).hom.app
+          ((Etale.rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) r).obj E) ≫
+        (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) i).mapDerivedCategoryPlus.map
+          ((fixedComparisonDirectImageMatePlus Λ r).app E)) ≫
+        properOpenSiteInterchange Λ sq E) := by
+    rw [Category.assoc]
+    erw [← he]
+    infer_instance
+  exact IsIso.of_isIso_comp_left
+    ((properOpenSiteExtensionIso Λ i).hom.app _ ≫
+      (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) i).mapDerivedCategoryPlus.map
+        ((fixedComparisonDirectImageMatePlus Λ r).app E))
+    (properOpenSiteInterchange Λ sq E)
+
 private theorem tower_gamma_plus [Finite Λ]
     {H T V S : Scheme.{u}}
     [IsNoetherian H] [IsNoetherian T] [IsNoetherian V] [IsNoetherian S]
@@ -550,6 +580,45 @@ private theorem tower_gamma_plus [Finite Λ]
   exact ((openImmersionLowerShriekUpperStarAdjunction
     (ModuleCat.{u + 1} Λ) i).mapDerivedCategoryAdjunction.homEquiv _ _).apply_symm_apply _ |>.symm
 
+private theorem tower_lambda_naturality {H T V S : Scheme.{u}}
+    (b : H ⟶ T) (i : V ⟶ S) (r : H ⟶ V) (p : T ⟶ S)
+    [IsOpenImmersion b] (w : b ≫ p = r ≫ i)
+    {N N' : DerivedCategory
+      (Sheaf (Scheme.ProEt.topology H) (ModuleCat.{u + 1} Λ))} (v : N ⟶ N') :
+    (towerPull Λ i).map ((towerP Λ p).map ((towerJ Λ b).map v)) ≫
+        towerLambda Λ b i r p w N' =
+      towerLambda Λ b i r p w N ≫ (towerP Λ r).map v := by
+  have hn := (mateEquiv (towerPullPushAdjunction Λ p) (towerPullPushAdjunction Λ r)
+    (towerPullSquare Λ b i r p w).hom).natTrans.naturality ((towerJ Λ b).map v)
+  simp only [mateEquiv_apply, NatTrans.comp_app, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app, Functor.associator_hom_app, Functor.associator_inv_app,
+    Functor.leftUnitor_hom_app, Functor.rightUnitor_inv_app, Functor.comp_map,
+    TwoSquare.natTrans, CategoryTheory.Functor.map_comp, Category.id_comp,
+    Category.comp_id, Category.assoc] at hn
+  have hu := (towerOpenUnit Λ b).inv.naturality v
+  dsimp only [Functor.comp_map, Functor.id_map] at hu
+  unfold towerLambda towerExchange
+  simp only [Functor.map_comp, Category.assoc]
+  rw [reassoc_of% hn, ← Functor.map_comp, hu,
+    Functor.map_comp]
+
+private theorem tower_gamma_naturality {H T V S : Scheme.{u}}
+    (b : H ⟶ T) (i : V ⟶ S) (r : H ⟶ V) (p : T ⟶ S)
+    [IsOpenImmersion b] [IsOpenImmersion i] (w : b ≫ p = r ≫ i)
+    {N N' : DerivedCategory
+      (Sheaf (Scheme.ProEt.topology H) (ModuleCat.{u + 1} Λ))} (v : N ⟶ N')
+    (hN : IsIso (towerLambda Λ b i r p w N))
+    (hN' : IsIso (towerLambda Λ b i r p w N')) :
+    (towerJ Λ i).map ((towerP Λ r).map v) ≫ towerGamma Λ b i r p w N' hN' =
+      towerGamma Λ b i r p w N hN ≫ (towerP Λ p).map ((towerJ Λ b).map v) := by
+  letI := hN
+  letI := hN'
+  apply Adjunction.homEquiv_naturality_right_square
+  apply (cancel_epi (towerLambda Λ b i r p w N)).mp
+  simp only [← Category.assoc, IsIso.hom_inv_id, Category.id_comp]
+  rw [← tower_lambda_naturality Λ b i r p w v]
+  simp only [Category.assoc, IsIso.hom_inv_id, Category.comp_id]
+
 private theorem tower_lambda_model_isIso [Finite Λ]
     {H T V S : Scheme.{u}}
     [IsNoetherian H] [IsNoetherian T] [IsNoetherian V] [IsNoetherian S]
@@ -573,5 +642,60 @@ private theorem tower_lambda_model_isIso [Finite Λ]
       ((lowerStar (ModuleCat.{u + 1} Λ) p).rightDerivedFunctorPlusCompatibility.hom.app
         ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) b).mapDerivedCategoryPlus.obj N)))
     (towerLambda Λ b i r p sq.w N.obj)
+
+private theorem tower_gamma_model_isIso [Finite Λ]
+    {H T V S : Scheme.{u}}
+    [IsNoetherian H] [IsNoetherian T] [IsNoetherian V] [IsNoetherian S]
+    {b : H ⟶ T} {i : V ⟶ S} {r : H ⟶ V} {p : T ⟶ S}
+    [IsOpenImmersion b] [IsOpenImmersion i] [IsProper r] [IsProper p]
+    (sq : IsPullback b r p i)
+    (E : DerivedCategory.Plus (Sheaf H.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (hLambda : IsIso (towerLambda Λ b i r p sq.w
+      ((comparisonUpperStar (ModuleCat.{u + 1} Λ) H).mapDerivedCategory.obj E.obj))) :
+    IsIso (towerGamma Λ b i r p sq.w _ hLambda) := by
+  haveI := tower_site_interchange_isIso Λ sq E
+  have hg := tower_gamma_plus Λ sq E hLambda
+  haveI : IsIso ((towerJ Λ i).map
+      ((lowerStar (ModuleCat.{u + 1} Λ) r).rightDerivedFunctorPlusCompatibility.hom.app
+        ((comparisonUpperStar (ModuleCat.{u + 1} Λ) H).mapDerivedCategoryPlus.obj E)) ≫
+      towerGamma Λ b i r p sq.w _ hLambda) := by
+    rw [← hg]
+    infer_instance
+  exact IsIso.of_isIso_comp_left
+    ((towerJ Λ i).map
+      ((lowerStar (ModuleCat.{u + 1} Λ) r).rightDerivedFunctorPlusCompatibility.hom.app
+        ((comparisonUpperStar (ModuleCat.{u + 1} Λ) H).mapDerivedCategoryPlus.obj E)))
+    (towerGamma Λ b i r p sq.w _ hLambda)
+
+private theorem tower_witness_isIso [Finite Λ]
+    {H T V S : Scheme.{u}}
+    [IsNoetherian H] [IsNoetherian T] [IsNoetherian V] [IsNoetherian S]
+    {b : H ⟶ T} {i : V ⟶ S} {r : H ⟶ V} {p : T ⟶ S}
+    [IsOpenImmersion b] [IsOpenImmersion i] [IsProper r] [IsProper p]
+    (sq : IsPullback b r p i)
+    (N : DerivedCategory (Sheaf (Scheme.ProEt.topology H) (ModuleCat.{u + 1} Λ)))
+    (E : DerivedCategory.Plus (Sheaf H.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (eN : (comparisonUpperStar (ModuleCat.{u + 1} Λ) H).mapDerivedCategory.obj E.obj ≅ N) :
+    ∃ hLambda : IsIso (towerLambda Λ b i r p sq.w N),
+      IsIso (towerGamma Λ b i r p sq.w N hLambda) := by
+  haveI h0 := tower_lambda_model_isIso Λ sq E
+  have hl := tower_lambda_naturality Λ b i r p sq.w eN.hom
+  haveI : IsIso ((towerPull Λ i).map ((towerP Λ p).map ((towerJ Λ b).map eN.hom)) ≫
+      towerLambda Λ b i r p sq.w N) := by
+    rw [hl]
+    infer_instance
+  haveI hN : IsIso (towerLambda Λ b i r p sq.w N) :=
+    IsIso.of_isIso_comp_left
+      ((towerPull Λ i).map ((towerP Λ p).map ((towerJ Λ b).map eN.hom)))
+      (towerLambda Λ b i r p sq.w N)
+  haveI := tower_gamma_model_isIso Λ sq E h0
+  have hg := tower_gamma_naturality Λ b i r p sq.w eN.hom h0 hN
+  haveI : IsIso ((towerJ Λ i).map ((towerP Λ r).map eN.hom) ≫
+      towerGamma Λ b i r p sq.w N hN) := by
+    rw [hg]
+    infer_instance
+  exact ⟨hN, IsIso.of_isIso_comp_left
+    ((towerJ Λ i).map ((towerP Λ r).map eN.hom))
+    (towerGamma Λ b i r p sq.w N hN)⟩
 
 end AlgebraicGeometry.ProEtale
