@@ -40,7 +40,7 @@ with the internal hom of bounded constructible complexes at a finite coefficient
 - `AlgebraicGeometry.ProEtale.DerivedCategory.torAmplitudeIn_mapDerivedCategory_iff`
   (`lem-exc-comparison-tor-interval`): an étale complex has Tor amplitude in `[a, b]` if and only
   if its pullback to the pro-étale site has.
-- `AlgebraicGeometry.ProEtale.DerivedCategory.torAmplitudeIn_of_mapDerivedCategory`
+- `ProEtale.DerivedCategory.torAmplitudeIn_of_mapDerivedCategory_comparisonUpperStar`
   (`lem-exc-comparison-tor-interval` (ii)): an étale complex whose pullback to the pro-étale
   site has Tor amplitude in `[a, b]` has Tor amplitude in `[a, b]`.
 - `AlgebraicGeometry.ProEtale.DerivedCategory.nonempty_iso_mapDerivedCategory_derivedHom`
@@ -160,7 +160,8 @@ Let `K'` be a complex of étale `Λ`-sheaves. If `ν^* K'` has Tor amplitude in 
 This is the reverse implication of `torAmplitudeIn_mapDerivedCategory_iff`; the blueprint's
 hypotheses that `K'` be bounded below, that `ν^* K'` be bounded constructible and that the
 exponent of `Λ` be invertible on `X` are not needed. -/
-theorem torAmplitudeIn_of_mapDerivedCategory {X : Scheme.{u}} [IsNoetherianRing Λ]
+theorem torAmplitudeIn_of_mapDerivedCategory_comparisonUpperStar {X : Scheme.{u}}
+    [IsNoetherianRing Λ]
     {a b : ℤ} {K' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hKt : torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b
       (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K')) :
