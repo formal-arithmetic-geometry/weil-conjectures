@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.AdicCompletion.DerivedCompletionSupplement
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Monoidal
+public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsFlat
 
 /-!
 # Monoidal first-residue reduction
@@ -53,6 +55,8 @@ theorem integralTensorResidueComparison
       ((AdicCompletion.derivedReduction l E S 0).obj (M ⊗ N) ≅
         (AdicCompletion.derivedReduction l E S 0).obj M ⊗
           (AdicCompletion.derivedReduction l E S 0).obj N) := by
-  sorry
+  let φ := AdicCompletion.quotient l E S 0
+  let := Mod.extendScalarsMonoidal φ
+  exact ⟨asIso (((Mod.extendScalars φ).leftDerivedTensorComparison.app M).app N)⟩
 
 end AlgebraicGeometry.ProEtale

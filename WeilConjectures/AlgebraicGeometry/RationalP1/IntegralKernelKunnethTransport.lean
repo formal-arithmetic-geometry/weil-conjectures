@@ -7,6 +7,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.RationalP1.Native.NativeNormalizedSelfSquareProjection
 public import WeilConjectures.AlgebraicGeometry.RationalP1.Projective.ProjectiveFirstSectionComparison
 public import WeilConjectures.AlgebraicGeometry.RationalP1.IntegralKernelKunnethTensorSquare
+public import WeilConjectures.AlgebraicGeometry.RationalP1.First.RationalP1FirstTracePretrace
 @[expose] public noncomputable section
 set_option autoImplicit false
 universe u
@@ -65,5 +66,13 @@ theorem integral_kernel_kunneth_transport
       (firstPathComparison Λ Y).hom.app (A.obj M ⊗ B.obj T) =
     projectionMateMap Λ (ProjectiveLine Y ↘ Y) M (R.obj T) ≫
       R.map ((M ◁ e'.app T) ≫ projectionMap Λ (firstProjection Y) M (B.obj T)) := by
-  sorry
+  have h := native_kunneth Λ Y M T
+  have hn := congrArg (fun z ↦ z.app T) (native_opposite_mate_nat Λ Y)
+  have he := (native_opposite_mate Λ Y T).symm.trans hn
+  dsimp only at h ⊢
+  rw [he] at h
+  unfold secondPretraceExchangeMap at h
+  unfold nativeSelfSquareExchange
+  exact h
+
 end AlgebraicGeometry.ProEtale.RationalP1

@@ -19,6 +19,8 @@ import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedSupportProjectionFormula
 import WeilConjectures.CategoryTheory.Adjunction.ProjectionMap
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import WeilConjectures.AlgebraicGeometry.Integral.IntegralTensorConstructibility
+public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionFinite
 
 /-!
 # The shriek-stratum reduction for integral tensor constructibility
@@ -90,6 +92,6 @@ theorem integralTensorStratumReduction
       constantModelBoundedConstructible (DerivedNakayama.integerRing l E) X K →
       constantModelBoundedConstructible (DerivedNakayama.integerRing l E) X L →
       constantModelBoundedConstructible (DerivedNakayama.integerRing l E) X (K ⊗ L) := by
-  sorry
+  exact integralTensorConstructibility l E k p _hp _hpl
 
 end AlgebraicGeometry.ProEtale

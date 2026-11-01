@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.RationalP1.Native.NativeNormalizedSelfSquareProjection
 public import WeilConjectures.AlgebraicGeometry.RationalP1.Projective.ProjectiveFirstSectionComparison
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Trace.TraceBaseChangeFirst
 @[expose] public noncomputable section
 set_option autoImplicit false
 universe u
@@ -47,5 +48,9 @@ theorem integral_kernel_kunneth_tensor_square
           (secondProjection Y) (square Y).w).hom.app K ⊗ₘ
           (tracePullSquare Λ (ProjectiveLine Y ↘ Y) (firstProjection Y)
             (secondProjection Y) (square Y).w).hom.app L) := by
-  sorry
+  intro K L
+  have h := trace_square_tensor Λ (ProjectiveLine Y ↘ Y)
+    (firstProjection Y) (secondProjection Y) (square Y).w
+  exact h K L
+
 end AlgebraicGeometry.ProEtale.RationalP1
