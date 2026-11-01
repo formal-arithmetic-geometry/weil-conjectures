@@ -13,6 +13,11 @@ import all WeilConjectures.PoincareDuality.Pod.PodNativeRoosFunctorComparison
 import all WeilConjectures.CategoryTheory.RoosConeCalculus.RoosConeCalculus
 import all WeilConjectures.SmoothPurity.SequenceKInjectiveComparison.SequenceKInjectiveComparisonShifts
 import all WeilConjectures.CategoryTheory.Strict.StrictRoosShiftLocalization
+public import Mathlib.CategoryTheory.Limits.HasLimits
+public import WeilConjectures.Mathlib.CategoryTheory.Shift.CommShift
+public import WeilConjectures.PoincareDuality.Pod.PodStrictRoosReindexShift
+public import WeilConjectures.PoincareDuality.Pod.Reindexing.PodReindexingSignedRoosShift
+import WeilConjectures.PoincareDuality.Pod.PodNormalizedRoosComparisonShift
 
 /-! # K-injective normalized Roos comparison shift -/
 @[expose] public noncomputable section
@@ -40,6 +45,72 @@ private instance (priority := 20000) fixedAbSheafify (Z : Scheme.{u}) :
 private instance (priority := 20000) fixedAbBijective (Z : Scheme.{u}) :
     (AlgebraicGeometry.Scheme.ProEt.topology Z).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
   integralCoefficientAbLocallyBijective.{u, u} Z
+
+/-- Translate the strict five-factor square to the native coherent Roos shift.
+Source: Stacks 011G and 0941, signed Roos shift and exact relabelling
+(blueprint: lem-pod-reindexing-strict-native-shift-s8).
+Proof: coordinate uniqueness identifies the supplied source and target shifts with
+the native shift. Expand the composite shift comparisons, use the explicit equality
+of the two Roos map presentations, and apply the strict signed reindexing square. -/
+private theorem podReindexingStrictNativeShift
+    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
+    (D : PodCompletionReindex l E g)
+    (hnat : PodCompletionReindex.RoosNaturality l E g D)
+    (hshift : PodCompletionReindex.RoosShift l E g D)
+    (hgen : PodCompletionReindex.RestrictedGenerators l E g D)
+    (hSY : D.shiftSource.Laws) (hSX : D.shiftTarget.Laws) :
+    let := CategoryTheory.RoosConeCalculus.roosCommShift
+      (A := scalarReductionSource l E Y)
+    let := CategoryTheory.RoosConeCalculus.roosCommShift
+      (A := scalarReductionSource l E X)
+    let RY := (coefficientSequenceRestriction l E Y).mapHomologicalComplex (.up ℤ)
+    let RX := (coefficientSequenceRestriction l E X).mapHomologicalComplex (.up ℤ)
+    let P := (integralComparisonSequencePullback l E g).mapHomologicalComplex (.up ℤ)
+    let F := isoReductionIntegralComplex l E g
+    let HY := RY ⋙ roosF
+    let HX := RX ⋙ roosF
+    let U := HY ⋙ F
+    let V := P ⋙ HX
+    let f (C : CochainComplex (coefficientSequenceModules l E Y) ℤ) :
+      U.obj C ⟶ V.obj C := (D.roos (podRestrictedTower l E C)).hom ≫
+        integralOperationsRoosFunctor.map (D.restricted C).hom
+    ∀ (C : CochainComplex (coefficientSequenceModules l E Y) ℤ) (r : ℤ),
+      (U.commShiftIso r).hom.app C ≫ (f C)⟦r⟧' =
+      f (C⟦r⟧) ≫ (V.commShiftIso r).hom.app C := by
+  dsimp only
+  let := CategoryTheory.RoosConeCalculus.roosCommShift
+    (A := scalarReductionSource l E Y)
+  let := CategoryTheory.RoosConeCalculus.roosCommShift
+    (A := scalarReductionSource l E X)
+  let RY := (coefficientSequenceRestriction l E Y).mapHomologicalComplex (.up ℤ)
+  let RX := (coefficientSequenceRestriction l E X).mapHomologicalComplex (.up ℤ)
+  let P := (integralComparisonSequencePullback l E g).mapHomologicalComplex (.up ℤ)
+  let F := isoReductionIntegralComplex l E g
+  let HY := RY ⋙ roosF
+  let HX := RX ⋙ roosF
+  let U := HY ⋙ F
+  let V := P ⋙ HX
+  let f (C : CochainComplex (coefficientSequenceModules l E Y) ℤ) :
+      U.obj C ⟶ V.obj C := (D.roos (podRestrictedTower l E C)).hom ≫
+        integralOperationsRoosFunctor.map (D.restricted C).hom
+  have hy (C : CochainComplex (coefficientSequenceModules l E Y) ℤ) (r : ℤ) :
+      (Functor.commShiftIso roosF r).hom.app (RY.obj C) =
+        (D.shiftSource.comparison (podRestrictedTower l E C) r).hom := by
+    exact roosShift_hom_ext_complex_sheaf _ D.shiftSource hSY (RY.obj C) r
+  have hx (C : CochainComplex (coefficientSequenceModules l E X) ℤ) (r : ℤ) :
+      (Functor.commShiftIso roosF r).hom.app (RX.obj C) =
+        (D.shiftTarget.comparison (podRestrictedTower l E C) r).hom := by
+    exact roosShift_hom_ext_complex_sheaf _ D.shiftTarget hSX (RX.obj C) r
+  intro C r
+  simp only [Functor.commShiftIso_comp_hom_app, Functor.comp_map,
+    nativeRoos_map, Category.assoc]
+  erw [hy C r, hx (P.obj C) r]
+  erw [F.map_comp]
+  convert podStrictRoosReindexShift l E g D hnat hshift hgen hSX C r using 1
+  dsimp only [podRestrictionShift, Functor.mapIso_hom, RY, RX, P, F, f,
+    Functor.comp_map]
+  simp only [Category.assoc]
+  rfl
 
 variable {A : Type a} [Category.{b} A] [Abelian A] [HasCountableProducts A]
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
