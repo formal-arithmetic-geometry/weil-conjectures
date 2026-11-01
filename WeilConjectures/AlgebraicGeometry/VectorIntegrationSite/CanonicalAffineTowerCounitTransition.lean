@@ -737,6 +737,110 @@ private theorem root_tower_descent_succ
       (ordinaryFinitePullback A (affineTraceProjection T (d + 1))).map k)
     (root_base_succ_hom l E n T hT r s hrs hr hs d).symm)
 
+/-- For every tower length d, the root transition z (coefficient descent at s, pullback of
+`baseExponentComparison` along `affineTraceProjection T d`, inverse coefficient descent at
+r), pushed by `affineTraceLeft A T d` and followed by `affineTraceCounit` at exponent r,
+equals `affineTraceCounit` at exponent s, for the canonical transports and data.
+Source: blueprint thm-amb-vector-bundle-purity, proof, paragraph 2; Stacks 03PK, 03Q1.
+(blueprint: lem-pur-canonical-affine-tower-counit-transition)
+
+Proof: the forward projective decomposition square gives the trace equation after
+cancelling its isomorphisms and taking the second projection. Naturality of the
+coefficient-first proper projection and its prescribed counit normalization extend
+this equation to every complex K. Naturality of the open counit then gives the line
+counit equation. The shifted degree-one root square commutes with pullback. Applying
+it to the chart and its affine projection, then using tensor-pullback naturality,
+shows that line descent carries the line transition to pullback of f tensor the
+base-line transition, for every coefficient arrow f. Expand coefficient descent at
+a successor. The preceding descent square, the degree-one pullback square on the
+tower projection, and compositor naturality identify its transition with the last
+line transition followed by the last right functor applied to the preceding tower
+transition. Induct on d. At zero the descent is the inverse identity-pullback
+comparison and the base transition is identity, so they cancel. At a successor,
+expand the composite counit, use the line counit equation and its naturality at the
+preceding transition, then apply the induction hypothesis. All maps are the given
+ordered comparisons; no trace or transition is replaced. -/
+theorem canonicalAffineTowerCounitTransition
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
+    [FiniteDimensional (Padic l) E] (n : ℕ)
+    (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (l : Γ(T, ⊤)))
+    (r s : ℕ) (hrs : r ≤ s)
+    (hr : ((l ^ (r + 1) : ℕ) : Scheme.finiteTateCoefficient l E n) = 0)
+    (hs : ((l ^ (s + 1) : ℕ) : Scheme.finiteTateCoefficient l E n) = 0)
+    (d : ℕ) :
+    (Etale.affineTraceLeft (Scheme.finiteTateCoefficient l E n) T d).map
+      ((Etale.affineLinearCoefficientDescent _ (l ^ (s + 1)) hs
+          (Etale.projectiveLineTraceTransport _ (pow_pos (Fact.out : l.Prime).pos _) _ hs) T
+          (by simpa only [Nat.cast_pow] using hT.pow (s + 1)) d).hom ≫
+        (Etale.ordinaryFinitePullback _ (affineTraceProjection T d)).map
+          (baseExponentComparison l E n T hT r s hrs hr hs d).hom ≫
+        (Etale.affineLinearCoefficientDescent _ (l ^ (r + 1)) hr
+          (Etale.projectiveLineTraceTransport _ (pow_pos (Fact.out : l.Prime).pos _) _ hr) T
+          (by simpa only [Nat.cast_pow] using hT.pow (r + 1)) d).inv) ≫
+      Etale.affineTraceCounit _ (l ^ (r + 1)) hr
+        (Etale.projectiveLineTraceTransport _ (pow_pos (Fact.out : l.Prime).pos _) _ hr)
+        (fun Y _ hY ↦ Etale.projectiveLineTraceDatum _
+          (pow_pos (Fact.out : l.Prime).pos _) _ hr Y hY) T
+        (by simpa only [Nat.cast_pow] using hT.pow (r + 1)) d =
+    Etale.affineTraceCounit _ (l ^ (s + 1)) hs
+      (Etale.projectiveLineTraceTransport _ (pow_pos (Fact.out : l.Prime).pos _) _ hs)
+      (fun Y _ hY ↦ Etale.projectiveLineTraceDatum _
+        (pow_pos (Fact.out : l.Prime).pos _) _ hs Y hY) T
+      (by simpa only [Nat.cast_pow] using hT.pow (s + 1)) d := by
+  change (affineTraceLeft _ T d).map
+      (integrationTowerTransition l E n T hT r s hrs hr hs d).hom ≫ _ = _
+  induction d with
+  | zero =>
+    have h0 : baseExponentComparison l E n T hT r s hrs hr hs 0 = Iso.refl _ := by
+      with_unfolding_all rfl
+    let A := Scheme.finiteTateCoefficient l E n
+    let e := (affineLinearPullbackId A T).app (ordinaryFiniteUnit A T)
+    rw [integrationTowerTransition, h0]
+    change (𝟭 (DerivedCategoryModule A T)).map
+      (e.inv ≫ (ordinaryFinitePullback A (𝟙 T)).map (𝟙 (ordinaryFiniteUnit A T)) ≫
+        e.hom) ≫ _ = _
+    rw [CategoryTheory.Functor.map_id, Category.id_comp, Iso.inv_hom_id,
+      CategoryTheory.Functor.map_id, Category.id_comp]
+    unfold affineTraceCounit affineTraceAdjunction
+    rfl
+  | succ d ih =>
+    let A := Scheme.finiteTateCoefficient l E n
+    let X := affineTraceTower T d
+    let : IsNoetherian X := affineTraceNoetherian T d
+    let hX : IsUnit (l : Γ(X, ⊤)) := by
+      simpa using hT.map (affineTraceProjection T d).appTop.hom
+    let Ks := (affineTraceRight A (l ^ (s + 1)) hs T d).obj (ordinaryFiniteUnit A T)
+    let z := integrationTowerTransition l E n T hT r s hrs hr hs d
+    let e := rootLineStep l E n X hX r s hrs hr hs Ks
+    have hz : (integrationTowerTransition l E n T hT r s hrs hr hs (d + 1)).hom =
+        e ≫ (affineTraceLineRight A (l ^ (r + 1)) hr X).map z.hom := by
+      apply (cancel_mono (affineLinearCoefficientDescent A (l ^ (r + 1)) hr
+        (canonicalTransport l E n r hr) T
+        (by simpa only [Nat.cast_pow] using hT.pow (r + 1)) (d + 1)).hom).mp
+      rw [Category.assoc, root_tower_descent_succ]
+      let es := affineLinearCoefficientDescent A (l ^ (s + 1)) hs
+        (canonicalTransport l E n s hs) T
+        (by simpa only [Nat.cast_pow] using hT.pow (s + 1)) (d + 1)
+      let er := affineLinearCoefficientDescent A (l ^ (r + 1)) hr
+        (canonicalTransport l E n r hr) T
+        (by simpa only [Nat.cast_pow] using hT.pow (r + 1)) (d + 1)
+      change (es.hom ≫ (ordinaryFinitePullback A (affineTraceProjection T (d + 1))).map
+          (baseExponentComparison l E n T hT r s hrs hr hs (d + 1)).hom ≫ er.inv) ≫
+          er.hom = _
+      simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+      rfl
+    rw [hz, tower_counit_succ, tower_counit_succ]
+    exact paste_counit_transition (affineTraceLeft A T d)
+      (affineTraceLineAdjunction A (l ^ (r + 1)) hr
+        (canonicalTransport l E n r hr) X
+        (by simpa only [Nat.cast_pow] using hX.pow (r + 1))
+        (canonicalDatum l E n X hX r hr))
+      (affineTraceLineAdjunction A (l ^ (s + 1)) hs
+        (canonicalTransport l E n s hs) X
+        (by simpa only [Nat.cast_pow] using hX.pow (s + 1))
+        (canonicalDatum l E n X hX s hs))
+      e z.hom _ _ (root_line_counit l E n X hX r s hrs hr hs Ks) ih
+
 end Exponents
 
 set_option maxHeartbeats 400000 in

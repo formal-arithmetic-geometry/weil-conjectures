@@ -60,10 +60,10 @@ structure TransportCoreSystemLaws
         (d.reconstruction E true).equivalence.counit.app
           ((d.G E).obj ((d.reconstruction E false).equivalence.functor.obj K))
 
-/-- The system laws are supplied by strict-system transport and reconstruction.
+/-- The system laws assemble from a supplied support equality and reconstruction.
 Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Proposition 5.24.
-Proof: transport the strict-system support and reconstruction comparisons through
-both equivalences and retain their displayed equations.
+Proof: retain the supplied support equality and use the canonical adjunction and
+reduction comparison equations, which hold for every datum.
 (blueprint: lem-sf-exceptional-ring-transport-core-system-laws)
 -/
 theorem exists_exceptional_transport_core_system_laws
@@ -78,16 +78,19 @@ theorem exists_exceptional_transport_core_system_laws
     (operation : ∀ s : RingStage.{u} l, Operation.{u} l Ω X Y (s.stage l))
     (left : ∀ s : RingStage.{u} l,
       LeftRealization.{u} l Ω c s (operation s))
-    (d : TransportCoreData l Ω D hl c operation left) :
+    (d : TransportCoreData l Ω D hl c operation left)
+    (support : ∀ E : FieldStage.{u} l,
+      d.F E ⋙ (sequenceProperty l E Y).ι =
+        (sequenceProperty l E X).ι ⋙
+          IntegralSystemRealization.Operations.shriek l E.carrier (d.operations E) c.i ⋙
+            IntegralSystemRealization.Operations.push l E.carrier (d.operations E) c.g) :
     Nonempty (TransportCoreSystemLaws l Ω D hl c operation left d) := by
-  obtain ⟨hs⟩ := exists_exceptional_transport_core_system_support_law
-    l Ω D hl f c operation left d
   obtain ⟨ha⟩ := exists_exceptional_transport_core_system_adjunction_law
     l Ω D hl f c operation left d
   obtain ⟨hrF, hrG⟩ := exists_exceptional_transport_core_system_reduction_laws
     l Ω D hl f c operation left d
   exact ⟨{
-    support := hs
+    support := support
     adjunction_eq := ha
     reductionF_eq := hrF
     reductionG_eq := hrG }⟩

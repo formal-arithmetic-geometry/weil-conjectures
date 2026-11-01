@@ -106,6 +106,138 @@ def localizingLowerShriek {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification
       rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c)
     (fun K ↦ h K.obj K.property)
 
+/-- Orthogonality to every shifted generator detects zero in its localizing closure.
+The left orthogonal of the right orthogonal of the shift closure is localizing,
+contains the generators, and hence contains the object being tested. -/
+private theorem isZero_of_generator_vanishing
+    {C : Type u} [Category C] [HasZeroObject C] [HasShift C ℤ]
+    [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+    (P : ObjectProperty C) (K : C) (hK : localizingClosure P K)
+    (hz : ∀ M, P M → ∀ n : ℤ, ∀ g : M⟦n⟧ ⟶ K, g = 0) : IsZero K := by
+  let B := (P.shiftClosure ℤ).rightOrthogonal
+  let R := B.leftOrthogonal
+  have hR : IsLocalizingSubcategory R := by
+    refine ⟨inferInstance, inferInstance, ?_⟩
+    intro I F hF hgen
+    let _ := hF
+    change R (colimit F)
+    intro Z g hZ
+    apply colimit.hom_ext
+    intro i
+    rw [comp_zero]
+    exact hgen i.as (colimit.ι F i ≫ g) hZ
+  have hPR : P ≤ R := by
+    intro M hM N g hN
+    exact hN g (P.le_shiftClosure _ hM)
+  have hBK : B K := by
+    intro M g hM
+    obtain ⟨L, n, e, hL⟩ := hM
+    apply (cancel_epi e.inv).1
+    simpa using hz L hL n (e.inv ≫ g)
+  exact (IsZero.iff_id_eq_zero K).2 (hK R hR hPR (𝟙 K) hBK)
+
+/-- A map between objects of the localizing closure is an isomorphism when every
+shifted generator sees a bijection. Its cone lies in the closure and is orthogonal
+to the shifted generators by the exact Hom sequence. -/
+private theorem isIso_of_generator_bijective
+    {C : Type u} [Category C] [HasZeroObject C] [HasShift C ℤ]
+    [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+    (P : ObjectProperty C) {H Y : C} (c : H ⟶ Y)
+    (hH : localizingClosure P H) (hY : localizingClosure P Y)
+    (hbij : ∀ (M : C), P M → ∀ m : ℤ,
+      Function.Bijective (fun a : M⟦m⟧ ⟶ H ↦ a ≫ c)) : IsIso c := by
+  have hbijshift (M : C) (hM : P M) (m n : ℤ) :
+      Function.Injective (fun a : M⟦m⟧ ⟶ H⟦n⟧ ↦ a ≫ c⟦n⟧') := by
+    let K := M⟦m⟧
+    let adj := (shiftEquiv' C (-n) n (neg_add_cancel n)).toAdjunction
+    let e : M⟦m + -n⟧ ≅ K⟦-n⟧ := (shiftFunctorAdd C m (-n)).app M
+    have hinj (a b : K⟦-n⟧ ⟶ H) (hab : a ≫ c = b ≫ c) : a = b := by
+      apply (cancel_epi e.hom).mp
+      apply (hbij M hM (m + -n)).1
+      simpa only [Category.assoc] using congrArg (fun k ↦ e.hom ≫ k) hab
+    intro a b hab
+    apply (adj.homEquiv K H).symm.injective
+    apply hinj
+    have hh := congrArg (adj.homEquiv K Y).symm hab
+    change (adj.homEquiv K Y).symm
+      (a ≫ (shiftEquiv' C (-n) n (neg_add_cancel n)).inverse.map c) =
+      (adj.homEquiv K Y).symm
+        (b ≫ (shiftEquiv' C (-n) n (neg_add_cancel n)).inverse.map c) at hh
+    rw [adj.homEquiv_naturality_right_symm,
+      adj.homEquiv_naturality_right_symm] at hh
+    exact hh
+  obtain ⟨D, d, δ, hd⟩ := Pretriangulated.distinguished_cocone_triangle c
+  have hD : localizingClosure P D := by
+    intro Q hQ hPQ
+    let _ := hQ.1
+    let _ := hQ.2.1
+    exact Q.ext_of_isTriangulatedClosed₃ _ hd (hH Q hQ hPQ) (hY Q hQ hPQ)
+  have hz : IsZero D := isZero_of_generator_vanishing P D hD (by
+    intro M hM m a
+    have hδ : a ≫ δ = 0 := by
+      apply hbijshift M hM m 1
+      have hzero := Pretriangulated.comp_distTriang_mor_zero₃₁ _ hd
+      change δ ≫ c⟦(1 : ℤ)⟧' = 0 at hzero
+      simp only [Category.assoc, hzero, comp_zero, zero_comp]
+    obtain ⟨b, hb⟩ := Pretriangulated.Triangle.coyoneda_exact₃ _ hd a hδ
+    obtain ⟨b', hb'⟩ := (hbij M hM m).2 b
+    have hcd : c ≫ d = 0 := Pretriangulated.comp_distTriang_mor_zero₁₂ _ hd
+    change a = b ≫ d at hb
+    rw [hb, ← hb', Category.assoc, hcd, comp_zero])
+  exact (Pretriangulated.Triangle.isZero₃_iff_isIso₁ _ hd).mp hz
+
+/-- Compare the two adjoints by transposing the small counit under the large
+adjunction. Naturality identifies composition with this map with the composite
+of the two Hom equivalences. Shifted generators therefore detect an isomorphism. -/
+private theorem rightAdjoint_preserves_generators
+    {C : Type u} [Category C] [HasZeroObject C] [HasShift C ℤ]
+    [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+    {D : Type u} [Category D] [HasZeroObject D] [HasShift D ℤ]
+    [Preadditive D] [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D]
+    (P : ObjectProperty C) (Q : ObjectProperty D)
+    [P.IsStableUnderShift ℤ] [P.IsClosedUnderIsomorphisms]
+    (F : C ⥤ D) (hF : ∀ M, P M → Q (F.obj M))
+    (hLoc : ∀ M, localizingClosure P M → localizingClosure Q (F.obj M))
+    (G : Q.FullSubcategory ⥤ P.FullSubcategory)
+    (adSmall : Q.lift (P.ι ⋙ F) (fun M ↦ hF M.obj M.property) ⊣ G)
+    (J : (localizingClosure Q).FullSubcategory ⥤ (localizingClosure P).FullSubcategory)
+    (adBig : (localizingClosure Q).lift ((localizingClosure P).ι ⋙ F)
+      (fun M ↦ hLoc M.obj M.property) ⊣ J)
+    (N : Q.FullSubcategory) :
+    P (J.obj ((ObjectProperty.ιOfLE
+      (fun M hM _R _hR hgen ↦ hgen M hM)).obj N)).obj := by
+  let iP : P.FullSubcategory ⥤ (localizingClosure P).FullSubcategory :=
+    ObjectProperty.ιOfLE (fun M hM _R _hR hgen ↦ hgen M hM)
+  let iQ : Q.FullSubcategory ⥤ (localizingClosure Q).FullSubcategory :=
+    ObjectProperty.ιOfLE (fun M hM _R _hR hgen ↦ hgen M hM)
+  let V := G.obj N
+  let α : (iP.obj V) ⟶ J.obj (iQ.obj N) :=
+    adBig.homEquiv _ _ (iQ.map (adSmall.counit.app N))
+  have hi : IsIso α.hom := isIso_of_generator_bijective P α.hom (iP.obj V).property
+    (J.obj (iQ.obj N)).property (by
+      intro K hK n
+      let M : P.FullSubcategory := ⟨K⟦n⟧, P.le_shift n K hK⟩
+      let e : (K⟦n⟧ ⟶ V.obj) ≃ (K⟦n⟧ ⟶ (J.obj (iQ.obj N)).obj) :=
+        (P.fullyFaithfulι.homEquiv (X := M) (Y := V)).symm |>.trans
+          ((adSmall.homEquiv M N).symm |>.trans
+            ((ObjectProperty.fullyFaithfulιOfLE _).homEquiv |>.trans
+              (adBig.homEquiv (iP.obj M) (iQ.obj N) |>.trans
+                ((localizingClosure P).fullyFaithfulι.homEquiv))))
+      have he (g : K⟦n⟧ ⟶ V.obj) : e g = g ≫ α.hom := by
+        change (adBig.homEquiv (iP.obj M) (iQ.obj N) (iQ.map
+          ((adSmall.homEquiv M N).symm (ObjectProperty.homMk g)))).hom = _
+        rw [Adjunction.homEquiv_counit]
+        exact congrArg (fun f ↦ f.hom)
+          (adBig.homEquiv_naturality_left (iP.map (ObjectProperty.homMk (X := M) (Y := V) g))
+            (iQ.map (adSmall.counit.app N)))
+      have heq : (fun g : K⟦n⟧ ⟶ V.obj ↦ g ≫ α.hom) = e :=
+        funext (fun g ↦ (he g).symm)
+      change Function.Bijective (fun g : K⟦n⟧ ⟶ V.obj ↦ g ≫ α.hom)
+      rw [heq]
+      exact e.bijective)
+  let _ := hi
+  exact P.prop_of_iso (asIso α.hom) V.property
+
 private theorem boundedConstructible_iff (A : Type (u + 1)) [CommRing A] [Finite A] (T : Scheme.{u})
     (K : DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))) :
     Etale.DerivedCategory.isBoundedConstructible A T K ↔

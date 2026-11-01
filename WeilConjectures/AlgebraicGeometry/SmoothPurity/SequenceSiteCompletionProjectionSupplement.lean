@@ -113,6 +113,10 @@ import all WeilConjectures.CategoryTheory.SixFunctors.ResolvingDerivedAdjunction
 public import Mathlib.CategoryTheory.Sites.Limits
 import Mathlib.CategoryTheory.Abelian.FunctorCategory
 public import WeilConjectures.AlgebraicGeometry.SequenceSiteCompletionProjection
+public import Mathlib.Algebra.Homology.HomologicalComplexLimits
+public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Products
+public import WeilConjectures.SmoothPurity.HomComplexSectionsCochainsOfUniverses
 
 /-! # The constant/limit ringed sequence projection
 
@@ -732,6 +736,7 @@ private def seqExtension (b : Cone (rings.{c, v, r} J B τ)) :
 
 private instance seqExtension_additive (b : Cone (rings.{c, v, r} J B τ)) :
     (seqExtension J B τ b).Additive := by
+  unfold seqExtension
   let F := SheafOfModules.SequenceProjection.extension.{c, v, r} b.pt (rings J B τ) b.π
   let G := SheafOfModules.strictSystemToSequenceFunctor (rings J B τ)
   have : G.Additive := ⟨by
@@ -739,7 +744,9 @@ private instance seqExtension_additive (b : Cone (rings.{c, v, r} J B τ)) :
     ext U x
     exact congrArg (fun f ↦ f.val.app (op U.unop.2) x)
       ((SheafOfModules.systemEvaluation (rings J B τ) U.unop.1).map_add (f := f) (g := g))⟩
-  exact inferInstanceAs (F ⋙ G).Additive
+  constructor
+  intro M N f g
+  exact (congrArg G.map (F.map_add (f := f) (g := g))).trans G.map_add
 
 private def seqOrdinaryEvaluation (b : Cone (rings.{c, v, r} J B τ)) (n : ℕ) :
     seqExtension J B τ b ⋙ evaluation J B τ n ≅ (seqScalarData J B τ b n).model.E :=
@@ -812,6 +819,15 @@ private theorem seqUnitMorphism (b : Cone (rings.{c, v, r} J B τ))
     SheafOfModules.SequenceProjection.projection_natural.{c, v, r},
     ← Category.assoc, seqStrictUnitProjection]
   rfl
+
+private theorem seqTransition_apply (M : Systems.{c, v, r} J B τ)
+    {m n : ℕ} (h : n ≤ m) (U : Cᵒᵖ)
+    (x : ((evaluation J B τ m).obj M).val.obj U) :
+    ((transition J B τ h).app M).val.app U x =
+      M.val.map (Prod.mkHom (homOfLE h) (𝟙 U.unop)).op x := by
+  have he := (transition_exists J B τ h).exists.choose_spec M U
+  have he' := eq_of_heq he
+  exact congrFun he' x
 
 attribute [irreducible] seqModuleAdjunction
 

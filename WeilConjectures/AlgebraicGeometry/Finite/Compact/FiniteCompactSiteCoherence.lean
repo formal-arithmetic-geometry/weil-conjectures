@@ -90,6 +90,162 @@ attribute [local implicit_reducible] Compactification.copy
 attribute [local implicit_reducible] coherenceEtaleFunctor
 variable (R : Type (u + 1)) [CommRing R] [Finite R]
 
+/-- Change of compactification through the canonical common proper refinement,
+in bounded-below pro-etale modules. Each leg uses the proper/open refinement map.
+Source: Stacks Tag 0F7I (blueprint: lem-sp-finite-compact-site-coherence). -/
+def finiteCompactSiteChangePlus {X Y : Scheme.{u}} {f : X ⟶ Y} [QuasiCompact f]
+    (c d : Compactification f)
+    (E : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R))) :=
+  (properTransportRefinementPlus R (Compactification.infFst c d) E).symm ≪≫
+    properTransportRefinementPlus R (Compactification.infSnd c d) E
+
+/-- Change on an explicitly witnessed etale-origin object. The witness is retained
+and the underlying change is the computed common-refinement map.
+Source: Stacks Tag 0F7I (blueprint: lem-sp-finite-compact-site-coherence). -/
+def finiteCompactSiteChangeAtWitness {X Y : Scheme.{u}} {f : X ⟶ Y} [QuasiCompact f]
+    (c d : Compactification f)
+    (E : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)))
+    (K : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R)))
+    (w : (comparisonUpperStar (ModuleCat.{u + 1} R) X).mapDerivedCategoryPlus.obj E ≅ K) :=
+  (rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} R) c).mapIso w.symm ≪≫
+    finiteCompactSiteChangePlus R c d E ≪≫
+    (rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} R) d).mapIso w
+
+/-- Equality transport of derived open extension, including the open-immersion instance.
+Source: Stacks Tag 0F7J (blueprint: lem-sp-finite-compact-site-coherence). -/
+def finiteCompactSiteOpenCongr {X Y : Scheme.{u}} {j k : X ⟶ Y}
+    [IsOpenImmersion j] [IsOpenImmersion k] (w : j = k) :
+    (openImmersionLowerShriek (ModuleCat.{u + 1} R) j).mapDerivedCategoryPlus ≅
+      (openImmersionLowerShriek (ModuleCat.{u + 1} R) k).mapDerivedCategoryPlus := by
+  subst k
+  exact Iso.refl _
+
+/-- Canonical open-extension composition on a compatible tower, including its
+factorization equality. Source: Stacks Tag 0F7J
+(blueprint: lem-sp-finite-compact-site-coherence). -/
+def finiteCompactSiteTowerOpen {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
+    (T : Compactification.Triangle f g) :
+    (openImmersionLowerShriek (ModuleCat.{u + 1} R) T.cf.i).mapDerivedCategoryPlus ⋙
+        (openImmersionLowerShriek (ModuleCat.{u + 1} R) T.q).mapDerivedCategoryPlus ≅
+      (openImmersionLowerShriek (ModuleCat.{u + 1} R) T.cfg.i).mapDerivedCategoryPlus :=
+  (Functor.mapDerivedCategoryPlusCompIso _ _).symm ≪≫
+    Functor.mapDerivedCategoryPlusNatIso (proEtaleOpenExtensionComp R T.cf.i T.q).symm ≪≫
+    finiteCompactSiteOpenCongr R T.i_q
+
+/-- The computed tower arrow: apply P_q to the open adjunct Gamma, then the proper
+and open compositors. The first and last open comparisons insert the etale witness
+of J_a N E. Source: Stacks Tag 0F7J, the four displayed functors in its proof
+(blueprint: lem-sp-finite-compact-site-coherence). -/
+def finiteCompactSiteTowerPlus {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
+    (T : Compactification.Triangle f g)
+    [IsNoetherian Y] [IsNoetherian Z]
+    (E : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R))) :
+    (rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} R) T.cg).obj
+        ((rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} R) T.cf).obj
+          ((comparisonUpperStar (ModuleCat.{u + 1} R) X).mapDerivedCategoryPlus.obj E)) ⟶
+      (rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} R) T.cfg).obj
+        ((comparisonUpperStar (ModuleCat.{u + 1} R) X).mapDerivedCategoryPlus.obj E) :=
+  letI := isNoetherian_of_locallyOfFiniteType T.cf.g
+  letI := isNoetherian_of_locallyOfFiniteType T.cfg.g
+  letI := isNoetherian_of_locallyOfFiniteType T.cg.g
+  (lowerStar (ModuleCat.{u + 1} R) T.cg.g).rightDerivedFunctorPlus.map
+    ((openImmersionLowerShriek (ModuleCat.{u + 1} R) T.cg.i).mapDerivedCategoryPlus.map
+        ((lowerStar (ModuleCat.{u + 1} R) T.cf.g).rightDerivedFunctorPlus.map
+          ((properOpenSiteExtensionIso R T.cf.i).inv.app E)) ≫
+      properOpenSiteInterchange R T.isPullback.flip
+        ((Etale.openImmersionLowerShriek
+          (ModuleCat.{u + 1} R) T.cf.i).mapDerivedCategoryPlus.obj E) ≫
+      (lowerStar (ModuleCat.{u + 1} R) T.p).rightDerivedFunctorPlus.map
+        ((openImmersionLowerShriek (ModuleCat.{u + 1} R) T.q).mapDerivedCategoryPlus.map
+          ((properOpenSiteExtensionIso R T.cf.i).hom.app E))) ≫
+    (proEtaleComparisonDirectImageCompIso R T.p T.cg.g).hom.app _ ≫
+    (properTransportDirectImageCongr R T.p_g).hom.app _ ≫
+    (lowerStar (ModuleCat.{u + 1} R) T.cfg.g).rightDerivedFunctorPlus.map
+      ((finiteCompactSiteTowerOpen R T).hom.app _)
+
+/-- Composition on arbitrary supplied compactifications, computed through the supplied
+tower and proper/open common-refinement changes. The middle witness is exactly C_f.
+Source: Stacks Tags 0F7I and 0F7J
+(blueprint: lem-sp-finite-compact-site-coherence). -/
+def finiteCompactSiteCompositionPlus {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
+    [QuasiCompact f] [QuasiCompact g]
+    (c : Compactification f) (d : Compactification g) (e : Compactification (f ≫ g))
+    (T : Compactification.Triangle f g)
+    [IsNoetherian Y] [IsNoetherian Z]
+    (E : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R))) :
+    (rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} R) d).obj
+        ((rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} R) c).obj
+          ((comparisonUpperStar (ModuleCat.{u + 1} R) X).mapDerivedCategoryPlus.obj E)) ⟶
+      (rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} R) e).obj
+        ((comparisonUpperStar (ModuleCat.{u + 1} R) X).mapDerivedCategoryPlus.obj E) :=
+  (rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} R) d).map
+      ((finiteCompactSiteChangePlus R c T.cf E).hom) ≫
+    (finiteCompactSiteChangeAtWitness R d T.cg
+      ((Etale.rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} R) T.cf).obj E)
+      _ ((compactSupportSiteComparisonPlus R T.cf).app E)).hom ≫
+    finiteCompactSiteTowerPlus R T E ≫
+    (finiteCompactSiteChangePlus R T.cfg e E).hom
+
+/-- The site square for the actual proper/open refinement arrow. Here c is the fine
+compactification and d the coarse one, so rho is the inverse of properTransportRefinementPlus.
+Source: Stacks Tag 0F7I (blueprint: lem-sp-finite-compact-site-coherence).
+Proof: expand rho as P(alpha) followed by the proper compositor, using
+lem-amb-etale-compact-comparisons. Normalize direct-image composition with
+lem-sfb-derived-composition-adjunction-normalization and lem-weil-pbc-mate-pasting.
+The counit mates d then compose. Naturality moves N(alpha) next to d_u; the site
+clause of lem-sp-refinement-coefficient-mate replaces the three inner factors by
+alpha_pro followed by the open comparison. Naturality of the proper compositor
+moves that open comparison to its final position, giving precisely the two paths.
+No Cartesian hypothesis is placed on the original refinement square.
+-/
+theorem finiteCompactSite_refinement
+    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
+    (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    {c d : Compactification f} (r : c.Refinement d)
+    (E : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R))) :
+    (comparisonUpperStar (ModuleCat.{u + 1} R) Y).mapDerivedCategoryPlus.map
+        ((Etale.rightDerivedLowerShriekOfCompactificationPlusRefinementIso R r).hom.app E) ≫
+      (compactSupportSiteComparisonPlus R c).hom.app E =
+    (compactSupportSiteComparisonPlus R d).hom.app E ≫
+      (properTransportRefinementPlus R r E).inv := by
+  exact refinement_plus_inverse R r E
+
+private theorem common_refinement_square
+    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
+    (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    (c d b : Compactification f) (r : b.Refinement c) (s : b.Refinement d)
+    (E : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R))) :
+    (comparisonUpperStar (ModuleCat.{u + 1} R) Y).mapDerivedCategoryPlus.map
+        ((Etale.rightDerivedLowerShriekOfCompactificationPlusIso R c d).hom.app E) ≫
+      (compactSupportSiteComparisonPlus R d).hom.app E =
+    (compactSupportSiteComparisonPlus R c).hom.app E ≫
+      ((properTransportRefinementPlus R r E).inv ≫
+        (properTransportRefinementPlus R s E).hom) := by
+  have hs := inverse_square
+    (comparisonUpperStar (ModuleCat.{u + 1} R) Y).mapDerivedCategoryPlus
+    ((Etale.rightDerivedLowerShriekOfCompactificationPlusRefinementIso R s).app E)
+    ((compactSupportSiteComparisonPlus R b).app E)
+    ((compactSupportSiteComparisonPlus R d).app E)
+    (properTransportRefinementPlus R s E) (finiteCompactSite_refinement R f s E)
+  rw [Etale.rightDerivedLowerShriekOfCompactificationPlusIso_eq_refinementIso R r s]
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.map_comp,
+    Category.assoc]
+  simp only [Iso.app_inv, Iso.app_hom] at hs
+  rw [hs, ← Category.assoc, finiteCompactSite_refinement R f r E, Category.assoc]
+
+private theorem change_square_plus
+    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
+    (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    (c d : Compactification f)
+    (E : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R))) :
+    (comparisonUpperStar (ModuleCat.{u + 1} R) Y).mapDerivedCategoryPlus.map
+        ((Etale.rightDerivedLowerShriekOfCompactificationPlusIso R c d).hom.app E) ≫
+      (compactSupportSiteComparisonPlus R d).hom.app E =
+    (compactSupportSiteComparisonPlus R c).hom.app E ≫
+      (finiteCompactSiteChangePlus R c d E).hom := by
+  exact common_refinement_square R f c d _
+    (Compactification.infFst c d) (Compactification.infSnd c d) E
+
 private def towerEtaleIso
     {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
     (T : Compactification.Triangle f g) :
@@ -229,6 +385,139 @@ private theorem tower_etale_normalization
     Etale.rightDerivedLowerShriekOfCompactificationPlus, Functor.comp_obj,
     ObjectProperty.ι_obj] at h ⊢
   convert! h.symm using 1
+
+private def TowerSiteSquare
+    {X Y Z : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] [IsNoetherian Z]
+    {f : X ⟶ Y} {g : Y ⟶ Z} (T : Compactification.Triangle f g)
+    (E : FiniteSiteTower.DE R X) : Prop :=
+    (FiniteSiteTower.N R Z).map
+        ((Etale.native_bounded_triangle_iso (ModuleCat.{u + 1} R) T).hom.app E) ≫
+      (compactSupportSiteComparisonPlus R T.cfg).hom.app E =
+    (compactSupportSiteComparisonPlus R T.cg).hom.app
+        ((coherenceEtaleFunctor R T.cf).obj E) ≫
+      (rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} R) T.cg).map
+        ((compactSupportSiteComparisonPlus R T.cf).hom.app E) ≫
+      finiteCompactSiteTowerPlus R T E
+
+private theorem tower_site_square
+    {X Y Z : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] [IsNoetherian Z]
+    {f : X ⟶ Y} {g : Y ⟶ Z} (T : Compactification.Triangle f g)
+    (E : FiniteSiteTower.DE R X) : TowerSiteSquare R T E := by
+  rcases T with ⟨cf, cg, cfg, b, p, hi, hp, sq⟩
+  rcases cf with ⟨U, s, a, hf, hs, ha⟩
+  rcases cg with ⟨YB, q, i, hg, hq, hι⟩
+  rcases cfg with ⟨XB, r, j, hfg, hr, hj⟩
+  change U ⟶ XB at b
+  change XB ⟶ YB at p
+  change a ≫ b = j at hi
+  change p ≫ q = r at hp
+  change IsPullback s b i p at sq
+  subst f g j r
+  let := hs
+  let := hq
+  let := hr
+  let := ha
+  let := hι
+  let := hj
+  let := isNoetherian_of_locallyOfFiniteType s
+  let := isNoetherian_of_locallyOfFiniteType q
+  let := isNoetherian_of_locallyOfFiniteType (p ≫ q)
+  have : IsProper p := IsProper.of_comp p q
+  dsimp only [TowerSiteSquare]
+  have h := (FiniteSiteTower.paste R a b p q i s sq.flip E).2.1
+  rw [tower_etale_normalization] at h
+  have hk : proEtaleComparisonDirectImageCompIso R p q = FiniteSiteTower.kP R p q := by
+    unfold FiniteSiteTower.kP
+    rw [FiniteSiteTower.conjugate_iso_reverse]
+    exact (finiteSiteWordRefinement R).2.2.2.2.1 p q |>.2
+  simp only [FiniteSiteTower.B, FiniteSiteTower.D, FiniteSiteTower.AP,
+    FiniteSiteTower.GP, FiniteSiteTower.mP, FiniteSiteTower.towerTriangle,
+    FiniteSiteTower.compactificationF, FiniteSiteTower.compactificationG,
+    FiniteSiteTower.compactificationGF, Iso.trans_hom, NatTrans.comp_app,
+    Iso.symm_hom, Category.assoc, Functor.map_comp, FiniteSiteTower.N,
+    FiniteSiteTower.PE, FiniteSiteTower.PP, FiniteSiteTower.JE, FiniteSiteTower.JP,
+    Etale.rightDerivedLowerShriekOfCompactificationPlus, Functor.comp_obj] at h
+  simp only [site_plus_hom, finiteCompactSiteTowerPlus, finiteCompactSiteTowerOpen,
+    finiteCompactSiteOpenCongr, hk, properTransportDirectImageCongr_rfl, Iso.trans_hom,
+    NatTrans.comp_app, Iso.symm_hom, Iso.refl_hom, NatTrans.id_app,
+    Category.comp_id, Category.id_comp, Category.assoc, Functor.map_comp,
+    rightDerivedLowerShriekOfCompactificationPlus, coherenceEtaleFunctor,
+    Etale.rightDerivedLowerShriekOfCompactificationPlus, Functor.comp_obj, Functor.comp_map]
+  convert! h using 1
+
+/-- The computed tower composition satisfies the site-comparison equation, for
+arbitrary finite commutative coefficients and every supplied compactification tower.
+Source: Stacks Tags 0F7I, 0F7J and 0F7K
+(blueprint: lem-sp-finite-compact-site-coherence).
+
+Proof (the eight steps of the node):
+1. Exact open extensions and N preserve lower bounds. Each proper map between the
+Noetherian schemes is qcqs. Thus the specified proper counit mate and the open
+comparison are invertible, and F_pro N E has witness F_et E via C(E).
+2. Derive the ordinary direct-image compositors with their adjunction normalization,
+using lem-sfb-derived-composition-adjunction-normalization. The module sheaf categories
+are Grothendieck by lem-cbc-sieve-module-sheaves-grothendieck and the constant-ring
+module realization. Exact inverse images and their adjunctions give the Grothendieck
+hypotheses. The inverse-image comparisons compose. Parts (2), (3), (4) of
+lem-weil-pbc-mate-pasting therefore give composition and identity for the specified d.
+The exact open comparison composition equation descends termwise as well.
+3. The refinement square follows by expanding P(alpha), applying the site clause of
+lem-sp-refinement-coefficient-mate, and using naturality and step 2.
+4. On T, lem-amb-unbounded-compact-support-comparisons normalizes etale composition
+to P_q(Gamma_et J_a), followed by the proper and open compositors. It restricts on
+D+ to lem-amb-etale-compact-comparisons. The pro-etale arrow in this module uses
+properOpenSiteInterchange, the specified open adjunct of inverse transported restriction.
+5. Evaluate lem-sp-proper-open-coefficient-mate on J_a E. Whisker its site square by
+P_q and J_a; attach d_q on the source and P_q P_p J_b(e_a) on the target.
+Naturality of d_q and Gamma_pro gives the two comparison paths for the tower word.
+6. Postcompose with the proper and open compositors. Step 2 replaces comparison for
+the word P_q P_p J_b J_a by C_gf. The result is exactly the equation below.
+7. Use lem-cbc-compactifiable-compatible-tower and lem-cbc-compactifiable-cofiltered
+to compare arbitrary candidates with the tower. The refinement squares of step 3
+move C through each change. Naturality moves C_g through the change of F_f E;
+etale tower independence cancels the remaining comparisons. Every tower yields the
+same computed pro-etale arrow, equal to transport through C as a conclusion.
+8. Identity d is normalized, and identity e is an invertible idempotent by its
+composition law. For three maps substitute this equation twice and use naturality:
+both paths are C_hgf N(alpha_et_triple) followed by the inverse of
+F_h F_g(C_f), F_h(C_g F_f), C_h(F_g F_f). Etale associativity and units give
+pro-etale associativity and units. Naturality follows from that of all constituents.
+No coefficient presentation or base field is used.
+-/
+theorem finiteCompactSiteCoherence
+    {X Y Z : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] [IsNoetherian Z]
+    {f : X ⟶ Y} {g : Y ⟶ Z}
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g]
+    (c : Compactification f) (d : Compactification g) (e : Compactification (f ≫ g))
+    (T : Compactification.Triangle f g)
+    (E : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R))) :
+    (comparisonUpperStar (ModuleCat.{u + 1} R) Z).mapDerivedCategoryPlus.map
+        ((coherenceEtaleCompositor R c d e).hom.app E) ≫
+      (compactSupportSiteComparisonPlus R e).hom.app E =
+    (compactSupportSiteComparisonPlus R d).hom.app
+        ((Etale.rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} R) c).obj E) ≫
+      (rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} R) d).map
+        ((compactSupportSiteComparisonPlus R c).hom.app E) ≫
+      finiteCompactSiteCompositionPlus R c d e T E := by
+  let N := (comparisonUpperStar (ModuleCat.{u + 1} R) Z).mapDerivedCategoryPlus
+  let P := rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} R) d
+  let α := (coherenceEtaleChangeIso R c T.cf).hom.app E
+  have hf := map_cancel_boundary P ((compactSupportSiteComparisonPlus R T.cf).app E)
+    ((compactSupportSiteComparisonPlus R c).hom.app E)
+    ((finiteCompactSiteChangePlus R c T.cf E).hom)
+    ((comparisonUpperStar (ModuleCat.{u + 1} R) Y).mapDerivedCategoryPlus.map α)
+    (change_square_plus R f c T.cf E)
+  have hn := (compactSupportSiteComparisonPlus R d).hom.naturality α
+  have hp := mapped_paste_composition N
+    (change_square_plus R (f ≫ g) T.cfg e E)
+    (tower_site_square R T E)
+    (change_square_plus R g d T.cg ((coherenceEtaleFunctor R T.cf).obj E)) hn hf
+  rw [etale_compositor_tower R c d e T E]
+  simpa only [N, P, α, towerEtaleIso, coherenceEtaleFunctor, coherenceEtaleChangeIso,
+    coherenceFourMap, coherenceSixMap, finiteCompactSiteCompositionPlus,
+    finiteCompactSiteChangeAtWitness, Iso.trans_hom, Iso.symm_hom,
+    Functor.mapIso_hom, Iso.app_hom, Iso.app_inv, Category.assoc] using hp
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in

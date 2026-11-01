@@ -371,6 +371,21 @@ private theorem pairShift_additive
     (Y := ⟨Y.stage, (shiftFunctor (C Y.stage) n).obj Y.obj⟩) L hX hY f)
     (by rw [Functor.map_add]; exact sandwich_add _ _ _ _)
 
+private theorem stageAssociator_commShift (E L M : Index l Ω) (h : E ≤ L) (k : L ≤ M) :
+    NatTrans.CommShift ((stageSystem l Ω Y).assoc h k).hom ℤ := by
+  exact compIso_commShift_cast
+    (stageTransition l Ω Y E L h) (transition l Ω Y E L h)
+    (stageTransition l Ω Y L M k) (transition l Ω Y L M k)
+    (stageTransition l Ω Y E M (h.trans k)) (transition l Ω Y E M (h.trans k))
+    ((stageSystem_existsUnique l Ω Y).exists.choose_spec.1 E L h)
+    ((stageSystem_existsUnique l Ω Y).exists.choose_spec.1 L M k)
+    ((stageSystem_existsUnique l Ω Y).exists.choose_spec.1 E M (h.trans k))
+    (transitionCommShift l Ω Y E L h) (transitionCommShift l Ω Y L M k)
+    (transitionCommShift l Ω Y E M (h.trans k))
+    ((stageSystem l Ω Y).assoc h k) (associator l Ω Y E L M h k)
+    ((stageSystem_existsUnique l Ω Y).exists.choose_spec.2 E L M h k)
+    (associator_commShift l Ω Y E L M h k)
+
 variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
   (Y : AlgebraicGeometry.Scheme.{u})

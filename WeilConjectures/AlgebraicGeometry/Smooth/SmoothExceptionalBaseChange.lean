@@ -57,6 +57,21 @@ noncomputable def smoothExceptionalBaseChangeMap
       (upperStar (ModuleCat.{u + 1} A) g).leftDerivedFunctor.map
         ((rightDerivedUpperShriekAdjunction A f).counit.app K))
 
+private lemma braided_tensor_mate
+    {C D : Type*} [Category* C] [Category* D]
+    [MonoidalCategory C] [BraidedCategory C]
+    [MonoidalCategory D] [BraidedCategory D]
+    {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G)
+    (P W : C) (K Q : D)
+    (π : F.obj (W ⊗ P) ⟶ Q ⊗ K) (ε : Q ⟶ 𝟙_ D) :
+    adj.homEquiv _ _ (F.map (β_ P W).hom ≫ π ≫
+        (β_ Q K).hom ≫ (K ◁ ε) ≫ (ρ_ K).hom) =
+      (β_ P W).hom ≫ (adj.homEquiv _ _ (π ≫ (ε ▷ K)) ≫ G.map (λ_ K).hom) := by
+  rw [← adj.homEquiv_naturality_right, ← adj.homEquiv_naturality_left]
+  apply congrArg (adj.homEquiv _ _)
+  simp only [Category.assoc]
+  rw [← BraidedCategory.braiding_naturality_left_assoc, braiding_rightUnitor]
+
 private lemma unit_tensor_base_change
     {Cx Cy Cx' Cy' : Type*} [Category* Cx] [Category* Cy]
     [Category* Cx'] [Category* Cy']

@@ -11,6 +11,8 @@ public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 import WeilConjectures.AlgebraicGeometry.IntegralLfpLocalTorsionCharts
 import all WeilConjectures.AlgebraicGeometry.CondensedConstructibleSerre
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import WeilConjectures.AlgebraicGeometry.ContinuousIntegralCoefficients
+public import WeilConjectures.ProperBaseChange.CondensedConstructibleSerre
 
 /-! # A uniform torsion bound and finite quotient charts -/
 
@@ -33,6 +35,18 @@ private lemma finiteRefinement (X : Scheme.{u}) [TopologicalSpace.NoetherianSpac
   let : QuasiCompactCover V.cover.toPreZeroHypercover := .of_finite
   let W := Scheme.Cover.ofQuasiCompactCover V.cover
   exact ⟨W, hV, ⟨f⟩⟩
+
+private noncomputable def constPullbackIso {X Y : Scheme.{u}} (f : Y ⟶ X) :
+    constantSheaf (Scheme.ProEt.topology X) (Type (u + 1)) ⋙
+      Scheme.proEtaleSheafInverseImage f (Type (u + 1)) ≅
+    constantSheaf (Scheme.ProEt.topology Y) (Type (u + 1)) := by
+  let G := Scheme.proEtaleBaseChange f
+  let hT := terminalIsTerminal (C := X.ProEt)
+  exact Functor.isoWhiskerLeft _
+      (Functor.sheafPullbackConstruction.sheafPullbackIso G (Type (u + 1))
+        (Scheme.ProEt.topology X) (Scheme.ProEt.topology Y)).symm ≪≫
+    G.constantSheafsheafPullbackIso (Type (u + 1))
+      (Scheme.ProEt.topology X) (Scheme.ProEt.topology Y) hT (hT.isTerminalObj G)
 
 private noncomputable def setPullbackCompIso {X Y Z : Scheme.{u}}
     (f : Z ⟶ Y) (g : Y ⟶ X) :
