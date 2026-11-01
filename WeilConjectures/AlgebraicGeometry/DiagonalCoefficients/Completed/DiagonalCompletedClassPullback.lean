@@ -7,6 +7,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient.DiagonalCoefficientReference
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient.DiagonalCoefficientSourcePullback
+public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.DiagonalClassPullbackFromEndpoints
+public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.DiagonalClassRootLimitEndpoint
+public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.DiagonalClassSourceLimitEndpoint
 
 /-! # Completed diagonal class under geometric inverse image
 
@@ -93,6 +96,13 @@ theorem diagonalCompletedClass_pullback (l : ℕ) [Fact l.Prime]
       (derivedUpper R (baseW g)).map δz ≫ data.endpoints.lineW.shift =
         (singlePullback R (baseW g) (source R Y)).hom ≫
           (DerivedCategory.singleFunctor (Modules R (diagonalSurface Y')) 0).map
-            data.supported.hom ≫ δz' := by sorry
+            data.supported.hom ≫ δz' := by
+  obtain ⟨d, hd⟩ := DiagonalTrace.classLimitPresentation_exists l Y hY D δ hdelta
+  obtain ⟨d', hd'⟩ := DiagonalTrace.classLimitPresentation_exists l Y' hY' D' δ' hdelta'
+  obtain ⟨a⟩ := diagonalClassSourceLimitEndpoint_exists l Y Y' g geometry hY hY' D D'
+    d d' eP eW eP' eW' s s' hs hs'
+  have b := diagonalClassRootLimitEndpoint l g hY hY' D D' d d' eW eW' a.frame
+  exact diagonalClassPullback_from_endpoints l g hY hY' D D' d d'
+    δ δ' hd hd' eW eW' s s' a b
 
 end AlgebraicGeometry.ProEtale.DiagonalCoefficients

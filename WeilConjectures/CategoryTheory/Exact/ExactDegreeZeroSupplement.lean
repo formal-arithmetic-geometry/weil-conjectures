@@ -166,6 +166,17 @@ private theorem raw_unit_id
     𝟙 ((DerivedCategory.singleFunctor V 0).obj M)
   exact (DerivedCategory.singleFunctor V 0).map_id M
 
+/-- The named exact unit is normalized by the canonical derived identity comparison.
+(blueprint: def-geo-exact-degree-zero-interface) -/
+theorem unit_id (F : V ⥤ V) [F.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    (e : F ≅ 𝟭 V) (M : V) (f : M ⟶ F.obj M) (hf : f = e.inv.app M) :
+    unit F f =
+      (Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryIdIso V).inv.app
+        (obj V M) := by
+  unfold unit map comparison functor obj
+  exact raw_unit_id F e M f hf
+
 universe u
 
 end SheafExactDegreeZero

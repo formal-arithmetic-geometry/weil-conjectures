@@ -80,11 +80,8 @@ def inversePullback (m : ℕ) {X Y : SixFunctorSpace D} (f : X ⟶ Y) :
     (n := m + 1) (hn := Nat.le_add_left 1 m) X
   let RY := CompactSupportFiniteProjection.realization (C := C) (E := E)
     (n := m + 1) (hn := Nat.le_add_left 1 m) Y
-  let P := (upperStar (ModuleCat.{u + 1}
-    (ULift.{u + 1} (Padic.coefficientExtensionRing C.l E (m + 1))))
-      f.hom.left).leftDerivedFunctor
   exact Functor.isoWhiskerRight (pullback (C := C) (E := E) m f) RX.inverse ≪≫
-    Functor.isoWhiskerLeft (RY.inverse ⋙ P) RX.unitIso.symm
+    Functor.isoWhiskerLeft (RY.inverse ⋙ _) RX.unitIso.symm
 
 /-- Inverse coordinates for the K-injective-normalized finite direct image.
 Source: Stacks 07A5, normalized direct-image realization.

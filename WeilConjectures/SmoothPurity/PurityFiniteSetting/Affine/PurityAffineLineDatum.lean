@@ -372,6 +372,23 @@ noncomputable def puncturedMap {X Y : Scheme.{u}} (f : X ⟶ Y) :
     Punctured X ⟶ Punctured Y :=
   Classical.choose (existsUnique_puncturedMap f)
 
+/-- Its canonical square with the projections.
+Source: blueprint sk-def-purity-conv (blueprint: def-pur-affine-line-datum).
+Proof: compose the defining equality of puncturedMap with the affine projection and
+use affine-space map_over. -/
+theorem puncturedSquare {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    CommSq (puncturedMap f) (puncturedProjection X) (puncturedProjection Y) f := by
+  refine ⟨?_⟩
+  change puncturedMap f ≫ (openImmersion Y ≫ lineProjection Y) =
+    (openImmersion X ≫ lineProjection X) ≫ f
+  have hs : puncturedMap f ≫ openImmersion Y =
+      openImmersion X ≫ AffineSpace.map (ULift.{u} (Fin 1)) f :=
+    (Classical.choose_spec (existsUnique_puncturedMap f)).1
+  rw [← Category.assoc, hs, Category.assoc]
+  exact congrArg (fun g ↦ openImmersion X ≫ g)
+    (AffineSpace.map_over (n := ULift.{u} (Fin 1)) f) |>.trans
+      (Category.assoc _ _ _).symm
+
 /-- The class of the actual coordinate, transported through the exact site comparison.
 Source: blueprint sk-def-purity-conv (blueprint: def-pur-affine-line-datum). -/
 noncomputable def coordinateKummer (P : PurityFiniteSetting.{u})

@@ -428,6 +428,22 @@ theorem openCounitComparison {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j
   rw [Iso.inv_hom_id_app, CategoryTheory.Functor.map_id] at hp
   rw [← reassoc_of% hp]
 
+private theorem compared_pullback_unit (A : Type (u + 1)) [CommRing A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y)
+    {K : Etale.DerivedCategoryModule A Y} (g : K ⟶ Etale.ordinaryFiniteUnit A Y) :
+    (upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor.map
+        ((comparison A Y).map g) ≫ (pullbackUnit A f).hom =
+      (pullback A f).inv.app K ≫ (comparison A X).map
+        ((Etale.ordinaryFinitePullback A f).map g ≫
+          (Etale.ordinaryFiniteUnitPullback A f).hom) := by
+  have hn := (pullback A f).inv.naturality g
+  dsimp only [Functor.comp_map] at hn
+  unfold pullbackUnit geoP1UnitPullback
+  simp only [Iso.trans_hom, Functor.mapIso_hom]
+  unfold pullback at hn ⊢
+  with_unfolding_all
+    erw [← Category.assoc, hn, Category.assoc, ← CategoryTheory.Functor.map_comp]
+
 section TensorComparisonProof
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true

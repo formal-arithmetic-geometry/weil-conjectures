@@ -146,4 +146,35 @@ def towerCandidateComparison [Finite Λ] {X Y : Scheme.{u}} {f : X ⟶ Y}
     (compactSupportSiteComparison Λ d).symm
   (Φ.asEquivalence.congrLeft.fullyFaithfulInverse).preimageIso model
 
+/-- Alpha^p on the supplied candidates. Conjugate the published canonical origin
+composition by the canonical comparisons from e.restrict and d to the chosen models,
+and from the chosen composite to d.comp e. Existence of compactifications is a Prop
+and cannot select models: the explicit comparison factors here retain the candidates.
+This construction does not refer to exchange, lambda or gamma.
+Source: thm-sf-comp-composition, Construction and independence
+(blueprint: lem-trf-proetale-composition-tower-normalization). -/
+def towerOriginComposition [Finite Λ] {U V W : Scheme.{u}}
+    (h : U ⟶ V) (f : V ⟶ W) [QuasiCompact h] [QuasiCompact f]
+    (d : Compactification f) (e : Compactification (h ≫ d.i))
+    (L : DerivedCategory.Plus (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) d).obj
+      ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ)
+        e.restrict).obj
+        ((comparisonUpperStar (ModuleCat.{u + 1} Λ) U).mapDerivedCategory.obj L.obj)) ⟶
+    (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ)
+      (d.comp e)).obj
+        ((comparisonUpperStar (ModuleCat.{u + 1} Λ) U).mapDerivedCategory.obj L.obj) :=
+  letI : HasCompactification h := e.restrict.hasCompactification
+  letI : HasCompactification f := d.hasCompactification
+  letI : HasCompactification (h ≫ f) := (d.comp e).hasCompactification
+  let O := (comparisonUpperStarPlusEtaleOrigin (ModuleCat.{u + 1} Λ) U).obj L
+  (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) d).map
+      ((towerCandidateComparison Λ e.restrict
+        (HasCompactification.compactification h)).hom.app O) ≫
+    (towerCandidateComparison Λ d (HasCompactification.compactification f)).hom.app
+      ((originCompactSupport Λ h).obj O) ≫
+    (originCompositionAmbient Λ h f).hom.app O ≫
+    (towerCandidateComparison Λ (HasCompactification.compactification (h ≫ f))
+      (d.comp e)).hom.app O
+
 end AlgebraicGeometry.ProEtale

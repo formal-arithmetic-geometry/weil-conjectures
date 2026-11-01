@@ -48,6 +48,21 @@ open CategoryTheory.SuppliedExchangeProjection
 open scoped TensorProduct
 namespace WeilConjectures
 
+/-- The explicit covariant formula, including its intertwining equation and the
+forgetful equality. Source: blueprint prop-weil-operations, proof sentence 1
+(blueprint: lem-pod-semilinear-field-operation-lifts). -/
+def PodCovariantWeilLiftSpec
+    {C : Type a} {B : Type b} [Category.{c} C] [Category.{d} B]
+    {P : C ⥤ C} {Q : B ⥤ B} (F : C ⥤ B) (α : F ⋙ Q ≅ P ⋙ F) : Prop :=
+  IsoAlgebra.mapOfNatIso α ⋙ IsoAlgebra.forget Q = IsoAlgebra.forget P ⋙ F ∧
+  (∀ K : IsoAlgebra P,
+    ((IsoAlgebra.mapOfNatIso α).obj K).carrier = F.obj K.carrier ∧
+    ((IsoAlgebra.mapOfNatIso α).obj K).str = α.app K.carrier ≪≫ F.mapIso K.str) ∧
+  ∀ (K L : IsoAlgebra P) (u : K ⟶ L),
+    ((IsoAlgebra.mapOfNatIso α).map u).hom.f = F.map u.hom.f ∧
+    (α.hom.app K.carrier ≫ F.map K.str.hom) ≫ F.map u.hom.f =
+      Q.map (F.map u.hom.f) ≫ α.hom.app L.carrier ≫ F.map L.str.hom
+
 /-- The tensor lift uses the existing product of fixed pairs and the existing
 transport. Source: blueprint prop-weil-operations, proof sentence 1
 (blueprint: lem-pod-semilinear-field-operation-lifts). -/

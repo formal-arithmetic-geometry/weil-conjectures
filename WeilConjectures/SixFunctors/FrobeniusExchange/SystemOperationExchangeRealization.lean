@@ -1128,6 +1128,32 @@ theorem directImage_linear :
     apply ObjectProperty.hom_ext
     exact h.map_smul a.hom r
 
+/-- Alpha-star is the canonical operation isomorphism on the stated domain.
+This is an assertion about sourceComparison, already constructed on whole systems.
+Source: blueprint alpha-star; Zheng 4.10; Stacks 0941
+(blueprint: def-weil-system-operation-exchange-realization).
+Proof: the normalized system direct image of a coherent quotient system is the
+coherent finite-direct-image system. Finite-type direct-image constructibility
+and its finite reduction comparisons make it cartesian. Reconstruction's
+whole-system counit is therefore invertible on this system. Pullback by the
+scheme isomorphism g preserves the normalized inverse-limit computation.
+The composite defining sourceComparison is consequently invertible. -/
+theorem directAlpha_isIso (g : Y ⟶ Y) [IsIso g]
+    (K : sfIntegralConstructibleCategory l E X) :
+    IsIso ((sourceComparison l E (systemDirect l E f) g).app K.obj) := by
+  have hc : IsIso (((models l E).system Y).adjunction.counit.app
+      ((systemDirect l E f).obj ((reduction l E X).obj K.obj))) :=
+    systemDirectImage_effective l E K₀ hl f (models l E) K
+  let := hc
+  dsimp only [sourceComparison, NatTrans.comp_app, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app]
+  have hm : IsIso ((coefficientSequenceLimit l E Y).map
+      ((integralComparisonDerivedSequencePullback l E g).map
+        (((models l E).system Y).adjunction.counit.app
+          ((systemDirect l E f).obj ((reduction l E X).obj K.obj))))) := by
+    infer_instance
+  exact IsIso.comp_isIso' inferInstance hm
+
 variable [∀ x : X, Invertible (l : X.residueField x)]
   [∀ y : Y, Invertible (l : Y.residueField y)]
 
@@ -1238,6 +1264,69 @@ def compactOperationReduction (c : Compactification f) :
   whiskerRight (compactRealization l E K₀ hl f c).hom (reduction l E Y) ≫
     whiskerLeft (sfIntegralConstructible l E X).ι
       (operationReduction l E (systemDerivedOpen l E c.i ⋙ systemDirect l E c.g))
+
+/-- Alpha-shriek is the same whole-system comparison for the fixed proper/open
+composite, before evaluation at any finite coefficient exponent.
+Source: blueprint alpha-shriek; Bhatt--Scholze 6.7.6--6.7.7
+(blueprint: def-weil-system-operation-exchange-realization).
+Proof: exact open extension and proper direct image preserve the quotient
+cartesian condition on these constructible systems. Their Roos realization
+has the common finite Tor interval supplied by compact-support constructibility.
+Its reconstruction counit is invertible. Scheme-isomorphism pullback preserves
+this computation, giving invertibility of the already defined alpha composite. -/
+theorem compactAlpha_isIso (c : Compactification f) (g : Y ⟶ Y) [IsIso g]
+    (K : sfIntegralConstructibleCategory l E X) :
+    IsIso ((compactAlpha l E K₀ hl f c g).app K) := by
+  let H := systemDerivedOpen l E c.i ⋙ systemDirect l E c.g
+  have hc : IsIso ((operationReduction l E H).app K.obj) := by
+    apply (((models l E).system Y).isIso_iff_evaluations _).2
+    intro n
+    have h := (compactRealization_existsUnique l E K₀ hl f c).exists.choose_spec K n
+    have hi : IsIso
+        ((scalarReductionDerivedExtension l E Y n).map
+            ((compactRealization l E K₀ hl f c).hom.app K) ≫
+          (((models l E).system Y).reductionEvaluation n).inv.app
+            ((compactImage l E f c).obj K.obj) ≫
+          (coefficientSequenceDerivedEvaluation l E Y n).map
+            ((operationReduction l E H).app K.obj) ≫
+          (compactFiniteEvaluation l E c n).hom.app K.obj) := by
+      exact h.symm ▸ (inferInstance :
+        IsIso (sfCompactSupportFiniteReductionIso l K₀ hl c E K n).hom)
+    have : IsIso
+        ((((models l E).system Y).reductionEvaluation n).inv.app
+            ((compactImage l E f c).obj K.obj) ≫
+          (coefficientSequenceDerivedEvaluation l E Y n).map
+            ((operationReduction l E H).app K.obj) ≫
+          (compactFiniteEvaluation l E c n).hom.app K.obj) :=
+      IsIso.of_isIso_comp_left
+        ((scalarReductionDerivedExtension l E Y n).map
+          ((compactRealization l E K₀ hl f c).hom.app K)) _
+    have : IsIso
+        ((coefficientSequenceDerivedEvaluation l E Y n).map
+            ((operationReduction l E H).app K.obj) ≫
+          (compactFiniteEvaluation l E c n).hom.app K.obj) :=
+      IsIso.of_isIso_comp_left
+        ((((models l E).system Y).reductionEvaluation n).inv.app
+          ((compactImage l E f c).obj K.obj)) _
+    exact IsIso.of_isIso_comp_right _ ((compactFiniteEvaluation l E c n).hom.app K.obj)
+  change IsIso (((models l E).system Y).adjunction.counit.app
+    ((reduction l E X ⋙ H).obj K.obj)) at hc
+  have h₁ : IsIso ((integralDerivedPullback l E g).map
+      ((compactRealization l E K₀ hl f c).hom.app K)) := by infer_instance
+  have h₂ : IsIso (((models l E).pullback g).realization.hom.app
+      ((realize l E H).obj K.obj)) := by infer_instance
+  have h₃ : IsIso ((coefficientSequenceLimit l E Y).map
+      ((integralComparisonDerivedSequencePullback l E g).map
+        (((models l E).system Y).adjunction.counit.app
+          ((reduction l E X ⋙ H).obj K.obj)))) := by infer_instance
+  change IsIso ((integralDerivedPullback l E g).map
+      ((compactRealization l E K₀ hl f c).hom.app K) ≫
+    ((models l E).pullback g).realization.hom.app ((realize l E H).obj K.obj) ≫
+    (coefficientSequenceLimit l E Y).map
+      ((integralComparisonDerivedSequencePullback l E g).map
+        (((models l E).system Y).adjunction.counit.app
+          ((reduction l E X ⋙ H).obj K.obj))))
+  infer_instance
 
 /-- Integral compact exchange: proper system mate followed by the system open
 exchange, then the single specified total-limit realization composite.

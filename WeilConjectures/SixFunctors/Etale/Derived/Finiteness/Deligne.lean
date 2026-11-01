@@ -16,6 +16,8 @@ import WeilConjectures.AlgebraicGeometry.ModuleAbelianDerivedExchangeCompatibili
 import WeilConjectures.AlgebraicGeometry.SmoothGenericDirectImage
 import WeilConjectures.ConstructibleSheaf.OfForget
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
+public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
+public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 
 /-!
 # Deligne's generic constructibility for an open immersion
@@ -265,6 +267,62 @@ private theorem property_of_open
   · have hp := (isIso_derivedBaseChangeMapPlus_app_paste_horiz_iff hR.toCommSq hs.toCommSq
       (hs.toCommSq.horiz_comp hR.toCommSq) K hleft).2 inferInstance
     exact (isIso_derivedBaseChangeMapPlus_app_congr hvX hv _ _ K).1 hp
+
+private theorem nsmul_kernel_id
+    {C : Type*} [Category* C] [Abelian C] (G : C) (p : ℕ) :
+    p • 𝟙 (kernel (p • 𝟙 G)) = 0 := by
+  apply (cancel_mono (kernel.ι (p • 𝟙 G))).mp
+  simpa [Preadditive.nsmul_comp, Preadditive.comp_nsmul] using
+    kernel.condition (p • 𝟙 G)
+
+private theorem nsmul_coimage_id
+    {C : Type*} [Category* C] [Abelian C] (G : C) (p m : ℕ)
+    (hkill : (p * m) • 𝟙 G = 0) :
+    m • 𝟙 (cokernel (kernel.ι (p • 𝟙 G))) = 0 := by
+  have hcomp : (m • 𝟙 G) ≫ (p • 𝟙 G) = 0 := by
+    simpa [Preadditive.nsmul_comp, Preadditive.comp_nsmul,
+      smul_smul, Nat.mul_comm] using hkill
+  have h := Abelian.comp_coimage_π_eq_zero hcomp
+  apply (cancel_epi (cokernel.π (kernel.ι (p • 𝟙 G)))).mp
+  simpa [Abelian.coimage.π, Preadditive.nsmul_comp, Preadditive.comp_nsmul] using h
+
+private theorem annihilator_devissage
+    {C : Type*} [Category* C] [Abelian C] {R : Type*} [CommRing R]
+    (L P : C → Prop)
+    (hker : ∀ (G : C), L G → ∀ p : ℕ, L (kernel (p • 𝟙 G)))
+    (hcoker : ∀ (G : C), L G → ∀ p : ℕ, L (cokernel (kernel.ι (p • 𝟙 G))))
+    (hzero : ∀ G, IsZero G → P G)
+    (hseq : ∀ (E : ShortComplex C), E.ShortExact → P E.X₁ → P E.X₃ → P E.X₂)
+    (hprime : ∀ p : ℕ, p.Prime → IsUnit (p : R) →
+      ∀ G, L G → p • 𝟙 G = 0 → P G)
+    (n : ℕ) (hn : 0 < n) (hu : IsUnit (n : R))
+    (G : C) (hG : L G) (hk : n • 𝟙 G = 0) : P G := by
+  induction n using Nat.strong_induction_on generalizing G with
+  | h n ih =>
+    by_cases hone : n = 1
+    · exact hzero G ((IsZero.iff_id_eq_zero _).2 (by simpa [hone] using hk))
+    obtain ⟨p, hp, m, hpm⟩ := Nat.exists_prime_and_dvd hone
+    have hm : 0 < m := by
+      by_contra h
+      have : m = 0 := Nat.eq_zero_of_not_pos h
+      simp [this] at hpm
+      omega
+    have hmn : m < n := by
+      rw [hpm]
+      exact lt_mul_of_one_lt_left hm hp.one_lt
+    have hpunit : IsUnit (p : R) := by
+      rw [hpm, Nat.cast_mul] at hu
+      exact isUnit_of_mul_isUnit_left hu
+    have hmunit : IsUnit (m : R) := by
+      rw [hpm, Nat.cast_mul] at hu
+      exact isUnit_of_mul_isUnit_right hu
+    let φ := p • 𝟙 G
+    let E := ShortComplex.mk (kernel.ι φ) (cokernel.π (kernel.ι φ))
+      (cokernel.condition (kernel.ι φ))
+    have hE : E.ShortExact := { exact := ShortComplex.exact_cokernel (kernel.ι φ) }
+    exact hseq E hE
+      (hprime p hp hpunit _ (hker G hG p) (nsmul_kernel_id G p))
+      (ih m hmn hm hmunit _ (hcoker G hG p) (nsmul_coimage_id G p m (hpm ▸ hk)))
 
 private theorem property_of_shortExact
     {A : Type (u + 1)} [CommRing A] [Finite A] {S X : Scheme.{u}} (a : X ⟶ S)
