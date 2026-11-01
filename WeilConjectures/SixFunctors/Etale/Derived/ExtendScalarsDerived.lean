@@ -39,6 +39,28 @@ open CategoryTheory Limits MonoidalCategory HomologicalComplex
 
 open scoped CategoryTheory.Functor
 
+namespace AlgebraicGeometry.Etale
+
+section KFlatAux
+
+variable (A : Type*) [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  {Z Y : Scheme.{u}} (g : Z ⟶ Y)
+
+/-- A complex whose image in the homotopy category is in `kFlatUpperStar A g` has a K-flat
+pullback by `g`. -/
+lemma kFlat_mapHomologicalComplex_obj_of_kFlatUpperStar
+    {K : CochainComplex (Sheaf Y.smallEtaleTopology A) ℤ}
+    (hK : kFlatUpperStar A g ((HomotopyCategory.quotient _ _).obj K)) :
+    (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat
+      (((g)^*[A].mapHomologicalComplex (.up ℤ)).obj K) :=
+  (HomotopyCategory.kFlat_quotient_obj_iff _).1 (ObjectProperty.prop_of_iso _
+    (((g)^*[A].mapHomotopyCategoryFactors (.up ℤ)).app K) hK)
+
+end KFlatAux
+
+end AlgebraicGeometry.Etale
+
 -- The braiding of `ModuleCat` found by instance search (`instBraidedCategory`) is not syntactically
 -- the one underlying the derived tensor product of étale sheaves, and the kernel cannot compare
 -- the two monoidal structures in reasonable time; with these instances, instance search produces
@@ -180,8 +202,10 @@ lemma isIso_leftDerivedFunctorCounit_app_upperStar_mapHomotopyCategory_obj
     IsIso ((ProEtale.etaleSheafExtendScalars φ Z).leftDerivedFunctorCounit.app
       (((g)^*[ModuleCat.{u + 1} R].mapHomotopyCategory (.up ℤ)).obj
         ((HomotopyCategory.quotient _ _).obj K))) := by
-  exact (ProEtale.etaleSheafExtendScalars φ Z).derives_kFlat.isIso_of_isLeftDerivedFunctor
-    (ProEtale.etaleSheafExtendScalars φ Z).leftDerivedFunctorCounit ⟨_, hK⟩
+  have hK₀ := kFlat_mapHomologicalComplex_obj_of_kFlatUpperStar (ModuleCat.{u + 1} R) g hK
+  have := (ProEtale.etaleSheafExtendScalars φ Z).isIso_leftDerivedFunctorCounit_app_of_kFlat _ hK₀
+  exact (NatTrans.isIso_app_iff_of_iso _
+    (((g)^*[ModuleCat.{u + 1} R].mapHomotopyCategoryFactors (.up ℤ)).app K)).2 this
 
 instance isLeftDerivedFunctor_leftDerivedUpperStarEtaleSheafExtendScalars :
     (L((g)^*[ModuleCat.{u + 1} R]) ⋙ L(ProEtale.etaleSheafExtendScalars φ Z)).IsLeftDerivedFunctor
@@ -210,6 +234,7 @@ noncomputable def leftDerivedUpperStarEtaleSheafExtendScalarsIso :
     (Functor.isoWhiskerRight (mapHomotopyCategoryEtaleSheafExtendScalarsCompUpperStarIso φ g)
       DerivedCategory.Qh)
 
+omit [IsNoetherianRing R] in
 /-- The isomorphism `leftDerivedUpperStarEtaleSheafExtendScalarsIso` is compatible with the
 counits: it is induced by `g^*(S ⊗_R F) ≅ S ⊗_R g^* F`. -/
 @[reassoc]
