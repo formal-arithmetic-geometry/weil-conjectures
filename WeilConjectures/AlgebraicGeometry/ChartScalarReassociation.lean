@@ -200,4 +200,77 @@ def chartZeroUnitIso (R : Type (u + 1)) [CommRing R] (T : Scheme.{u})
         Functor.mapDerivedCategoryIdIso _).app K)) ≪≫
     λ_ K
 
+/-- Canonical scalar reassociation on every etale smooth chart over a finite or algebraically
+closed field, in the full intrinsic bounded constructible finite-Tor subcategory; naturality
+and the unit normalization specify the actual arrow, not just the existence of some
+isomorphism.
+
+Source: literature/blueprint/latest/blueprint/sec-smooth-purity/
+sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md, Charts;
+Stacks 06YY, 07A4 and 0D6D.
+(blueprint: lem-sp-reduction-exceptional-chart-scalar-reassociation).
+
+Proof:
+1. The chart-domain lemma preserves bounded constructible cohomology and finite Tor
+   amplitude under inverse image, Tate tensor powers and shift. Scalar extension
+   preserves this domain and its Tor bounds without flatness of B over A.
+2. Since ell differs from the characteristic, N is invertible. The finite-root site
+   comparison identifies the transported etale line with the root-tensor line and
+   fixes constant scalars. Ordinary balancing therefore gives chartEtaleTateScalarIso,
+   including its coefficient-unit component in degree zero.
+3. The line is locally free of rank one, so its degree-zero complex is K-flat. The
+   scalar/single adjunct is an isomorphism, and chartDerivedTateScalarMap is the
+   canonical derived extension of the same root balancing.
+4. Derived tensor pullback for the identity-topos coefficient morphism gives the
+   tensorator. The commuting constant-ring square gives chartPullbackScalarIso;
+   on flat-term K-flat representatives it sends x tensor b to x tensor b.
+5. Compose with scalar extension's shift comparison. Every factor is invertible
+   and natural, proving the displayed isomorphism and naturality. The intrinsic
+   domain is strictly full, so the ambient isomorphism is an isomorphism there.
+6. In degree zero with identity pullback the tensor, scalar-line, identity and shift
+   comparisons are the unit comparisons. Their coherence gives the final equation
+   through chartZeroUnitIso, namely the specified tensor-unit identification. -/
+theorem chartScalarReassociation
+    (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
+    (hbase : Finite k ∨ IsAlgClosed k) [Fact (ringChar k).Prime]
+    [Fact (ringChar k ≠ ℓ)]
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
+    (φ : A →+* B) (n : ℕ) (hA : ((ℓ ^ n : ℕ) : A) = 0)
+    (hB : ((ℓ ^ n : ℕ) : B) = 0)
+    {Y U : Scheme.{u}} [Y.Over (Spec (.of k))] [U.Over (Spec (.of k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
+    [IsSeparated (Y ↘ Spec (.of k))]
+    [LocallyOfFiniteType (U ↘ Spec (.of k))] [QuasiCompact (U ↘ Spec (.of k))]
+    [IsSeparated (U ↘ Spec (.of k))]
+    (d : ℕ) (e : U ⟶ AffineSpace (ULift.{u} (Fin d)) Y) [Etale e]
+    [(e ≫ (AffineSpace (ULift.{u} (Fin d)) Y ↘ Y)).IsOver (Spec (.of k))] :
+    (∀ K, exceptionalTransportProEtaleObjects A Y K →
+      exceptionalTransportProEtaleObjects B U
+        (L(sheafExtendScalars φ U).obj
+          ((AdjunctionTransfer.proEtaleChartOperation A (ℓ ^ n) hA
+            (e ≫ (AffineSpace (ULift.{u} (Fin d)) Y ↘ Y)) d (2 * (d : ℤ))).obj K)) ∧
+      exceptionalTransportProEtaleObjects B U
+        ((AdjunctionTransfer.proEtaleChartOperation B (ℓ ^ n) hB
+          (e ≫ (AffineSpace (ULift.{u} (Fin d)) Y ↘ Y)) d (2 * (d : ℤ))).obj
+            (L(sheafExtendScalars φ Y).obj K)) ∧
+      IsIso (chartScalarReassociationMap φ (ℓ ^ n) hA hB
+        (e ≫ (AffineSpace (ULift.{u} (Fin d)) Y ↘ Y)) d (2 * (d : ℤ)) K)) ∧
+    (∀ K L (v : K ⟶ L), exceptionalTransportProEtaleObjects A Y K →
+      exceptionalTransportProEtaleObjects A Y L →
+      L(sheafExtendScalars φ U).map
+          ((AdjunctionTransfer.proEtaleChartOperation A (ℓ ^ n) hA
+            (e ≫ (AffineSpace (ULift.{u} (Fin d)) Y ↘ Y)) d (2 * (d : ℤ))).map v) ≫
+        chartScalarReassociationMap φ (ℓ ^ n) hA hB
+          (e ≫ (AffineSpace (ULift.{u} (Fin d)) Y ↘ Y)) d (2 * (d : ℤ)) L =
+      chartScalarReassociationMap φ (ℓ ^ n) hA hB
+          (e ≫ (AffineSpace (ULift.{u} (Fin d)) Y ↘ Y)) d (2 * (d : ℤ)) K ≫
+        (AdjunctionTransfer.proEtaleChartOperation B (ℓ ^ n) hB
+          (e ≫ (AffineSpace (ULift.{u} (Fin d)) Y ↘ Y)) d (2 * (d : ℤ))).map
+            (L(sheafExtendScalars φ Y).map v)) ∧
+    (∀ K, exceptionalTransportProEtaleObjects A Y K →
+      chartScalarReassociationMap φ (ℓ ^ n) hA hB (𝟙 Y) 0 0 K ≫
+        (chartZeroUnitIso B Y (ℓ ^ n) hB (L(sheafExtendScalars φ Y).obj K)).hom =
+      L(sheafExtendScalars φ Y).map (chartZeroUnitIso A Y (ℓ ^ n) hA K).hom) := by
+  sorry
+
 end AlgebraicGeometry.ProEtale
