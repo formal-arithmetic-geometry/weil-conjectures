@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReadingReductionTranspose
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReadingReductionUpperStar
 public import WeilConjectures.SmoothPurity.OrientationTransitionLowerShriekPullback
+public import WeilConjectures.SmoothPurity.OrientationTransitionUpperStarCube
 public import WeilConjectures.SmoothPurity.OrientationTransitionUpperStarSquare
 
 /-!
@@ -157,7 +158,10 @@ theorem map_etaleReductionProEtaleTranspose_comp_eq
     etaleReductionUpperStarProEtaleMap ℓ E (n + 1) f M ≫
       etaleReductionProEtaleTranspose ℓ E n Z
         ((boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E) ℓ f).obj M) := by
-  sorry
+  exact map_comp_hom_app_comp_map_eq_of_cube
+    (leftDerivedUpperStar_map_finiteCoefficientDerivedEquivalenceComapIso_hom_app_comp f.left
+      (PadicAlgCl.integersModPowTransition ℓ E n) _)
+    (leftDerivedUpperStar_map_unit_app_comp_eq ℓ E n f M)
 
 end UpperStar
 
