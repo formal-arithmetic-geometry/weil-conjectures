@@ -1019,7 +1019,8 @@ end Finiteness
 
 `IsFinitenessCoefficient` is gone upstream: the statement is made for each coefficient ring of
 Deligne's finiteness theorems, in the namespaces of upstream's per-ring operations
-(`ℚ̲̄_ℓ`, `E̲`, `𝒪̲_E`) and of the local layer `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UnitBallRingObj.FiniteDiscreteCoefficient`
+(`ℚ̲̄_ℓ`, `E̲`, `𝒪̲_E`) and of the local layer
+`ProEtale.ModuleObject.Derived.UnitBallRingObj.FiniteDiscreteCoefficient`
 (`T̲`, `O̲`). -/
 
 section SingleConstructible
