@@ -193,11 +193,15 @@ theorem exists_subgroup_pullbackExchange_baseChangeHom_of_isIso_cartesian [IsSep
     (baseChangeHom hM b hb v hv) (baseChangeToGaloisModel_comp_total hM b hb v hv)
     (baseChangeToGaloisModel_comp_generic hM b hb v hv) A
     (isIso_pullbackExchange_baseChangeToGaloisLayer hM b hb v hv _) (by transport_exact hM1)
-    _
+    Finset.univ
     (fun τ : L₁.toIntermediateField ≃ₐ[traitTensorCompositum (PowerSeries K)
         (traitGenericField k') (traitGenericField K)] L₁.toIntermediateField ↦
       baseChangeAut hM b hb v hv (GenericAut.galoisEquiv.symm (τ.liftNormal _)))
-    _ _ hSA
+    (fun τ ↦ (baseChangeGaloisModel hM b hb v hv).galoisLayerAut
+      (baseChangeGaloisResidue hM b hb v hv)
+      (traitTensorCompositumSep (PowerSeries K) (traitGenericField k') (traitGenericField K))
+      (τ.liftNormal _))
+    (Fintype.card _) (by exact_mod_proofs hSA)
     (fun τ D ↦ pullbackExchange_baseChangeToGaloisLayer_app_comp_autAction_symm hM b hb v hv
       (Profinite.padicAlgClRingObj ℓ) (τ.liftNormal _) D)
   obtain ⟨π, hπdef⟩ : ∃ π : GenericAut k' K →* (L₁.toIntermediateField ≃ₐ[traitTensorCompositum
