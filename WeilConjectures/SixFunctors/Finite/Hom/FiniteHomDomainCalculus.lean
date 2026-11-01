@@ -125,6 +125,7 @@ import WeilConjectures.AlgebraicGeometry.ExceptionalCoefficients.EtaleScalarTens
 import WeilConjectures.AlgebraicGeometry.ExceptionalCoefficients.EtaleScalarTensorIdentity
 import WeilConjectures.SixFunctors.Etale.EtaleScalarUnitIdentity
 import WeilConjectures.AlgebraicGeometry.Etale.Scalar.EtaleScalarUnitComposition
+import all WeilConjectures.SixFunctors.FiniteHomDomainMonoidalProof
 
 /-! # Finite coefficient domains and evaluation transposition
 
