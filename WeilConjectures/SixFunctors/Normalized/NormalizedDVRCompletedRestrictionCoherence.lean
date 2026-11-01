@@ -157,15 +157,16 @@ theorem normalizedDVR_completedRestriction_coherence
       (normalizedDVRResCompletedComp l E X D hl (hmn.trans hrm)).hom.app P) := by
   let := HasDerivedCategory.standard (completedIntegralModuleSheaves l E X D hl)
   let (n : ℕ) := HasDerivedCategory.standard (normalizedDVRModules l E X n)
-  let γ {m n : ℕ} (h : n ≤ m) := normalizedDVRRestrictionComp
+  let γ {m n : ℕ} (h : n ≤ m) := normalizedDVRRestrictionComp.{_, _, _, max u (t + 1)}
     (completedIntegralCoefficientProjection l E X D hl m) (normalizedDVRQuotient l E X h)
     (completedIntegralCoefficientProjection l E X D hl n)
     (limit.w (integralCoefficientSheafSystem l E X) (homOfLE h).op)
-  let β {r m n : ℕ} (hrm : m ≤ r) (hmn : n ≤ m) := normalizedDVRRestrictionComp
-    (normalizedDVRQuotient l E X hrm) (normalizedDVRQuotient l E X hmn)
-    (normalizedDVRQuotient l E X (hmn.trans hrm))
-    ((integralCoefficientSheafSystem l E X).map_comp
-      (homOfLE hrm).op (homOfLE hmn).op).symm
+  let β {r m n : ℕ} (hrm : m ≤ r) (hmn : n ≤ m) :=
+    normalizedDVRRestrictionComp.{_, _, _, max u (t + 1)}
+      (normalizedDVRQuotient l E X hrm) (normalizedDVRQuotient l E X hmn)
+      (normalizedDVRQuotient l E X (hmn.trans hrm))
+      ((integralCoefficientSheafSystem l E X).map_comp
+        (homOfLE hrm).op (homOfLE hmn).op).symm
   constructor
   · intro n P
     have he := restrictionUnit
