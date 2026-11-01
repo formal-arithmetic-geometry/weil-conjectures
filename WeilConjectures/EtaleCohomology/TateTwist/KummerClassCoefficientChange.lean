@@ -254,4 +254,12 @@ theorem kummerClassOf_comp_tateTwistObjectOneChangeMap (v : Γ(X, ⊤)ˣ) :
     CategoryTheory.Functor.map_id, Category.id_comp,
     Functor.commShiftIso_hom_naturality, reassoc_of% hK]
 
+/-- The defining formula of `tateTwistObjectOneChangeMap` (stated through its equation lemma, so
+that it is literally the stored body: re-elaborating the body costs a large kernel check). -/
+theorem tateTwistObjectOneChangeMap_eq : type_of% @tateTwistObjectOneChangeMap.eq_1.{u} :=
+  @tateTwistObjectOneChangeMap.eq_1.{u}
+
+-- the body is heavy: only access it through `tateTwistObjectOneChangeMap_eq`
+attribute [irreducible] tateTwistObjectOneChangeMap
+
 end AlgebraicGeometry.Etale

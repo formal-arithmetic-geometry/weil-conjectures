@@ -15601,6 +15601,8 @@ public import WeilConjectures.SmoothPurity.OrientationTransition
 public import WeilConjectures.SmoothPurity.OrientationTransitionEtale
 public import WeilConjectures.SmoothPurity.OrientationTransitionFrame
 public import WeilConjectures.SmoothPurity.OrientationTransitionLowerShriek
+public import WeilConjectures.SmoothPurity.OrientationTransitionLowerShriekMate
+public import WeilConjectures.SmoothPurity.OrientationTransitionLowerShriekPullback
 public import WeilConjectures.SmoothPurity.OrientationTransitionReading
 public import WeilConjectures.SmoothPurity.OrientationTransitionShift
 public import WeilConjectures.SmoothPurity.OrientationTransitionSquares
@@ -15608,6 +15610,7 @@ public import WeilConjectures.SmoothPurity.OrientationTransitionTate
 public import WeilConjectures.SmoothPurity.OrientationTransitionTateSquare
 public import WeilConjectures.SmoothPurity.OrientationTransitionTateZero
 public import WeilConjectures.SmoothPurity.OrientationTransitionUnit
+public import WeilConjectures.SmoothPurity.OrientationTransitionUnitPieces
 public import WeilConjectures.SmoothPurity.OrientationTransitionUpperShriek
 public import WeilConjectures.SmoothPurity.OrientationUnique
 public import WeilConjectures.SmoothPurity.TateTwistBoundedConstructible
@@ -15630,6 +15633,7 @@ public import WeilConjectures.Tactic.TransportExact
 public import WeilConjectures.Tactic.TransportModProofs
 public import WeilConjectures.TateTwist.ComparisonSingle
 public import WeilConjectures.TateTwist.EtaleTateSheafPow
+public import WeilConjectures.TateTwist.EtaleTateSheafPowOne
 public import WeilConjectures.TateTwist.FiniteRootsOfUnity
 public import WeilConjectures.TateTwist.Integral
 public import WeilConjectures.TateTwist.IntegralLocallyFree

@@ -10,6 +10,7 @@ public import WeilConjectures.PoincareDuality.Biduality.EtaleReductionDualizingU
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReadingReduction
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReadingReductionUnit
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReadingReductionMate
+public import WeilConjectures.SmoothPurity.OrientationTransitionUnitPieces
 
 /-!
 # The reduction `𝒪_E ⧸ ℓⁿ⁺¹ ⟶ 𝒪_E ⧸ ℓⁿ` and the units
@@ -44,6 +45,8 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] (n : ℕ)
   (Y : Over (Spec (.of k))) [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
+set_option linter.unusedSectionVars false in
+-- the statement keeps the section variables of the file
 /-- Blueprint `det-sp-purity-coefficient-change`: change of coefficients in purity.
 
 **The comparisons of `ν^*` and of `Φ` with `Ψ` preserve the units, on the pro-étale site**:
@@ -93,7 +96,17 @@ theorem map_unitIso_hom_comp_comparisonUpperStarDerivedExtendScalarsIso_hom :
           𝟙_ _) ≫
       (DerivedCategory.mapDerivedCategoryComparisonUpperStarUnitIso
         (integersModPowCoeff.{u} ℓ E n) Y.left).inv := by
-  sorry
+  have h₁ := map_inv_comp_comparisonUpperStarDerivedExtendScalarsIso_hom_app_comp_map_hom
+    (integersModPowCoeffTransition_surjective ℓ E n) (ker_integersModPowCoeffTransition ℓ E n)
+    Y.left
+  have h₂ := finiteCoefficientDerivedEquivalenceExtendScalarsIso_hom_app_unit_comp Y.left
+    (PadicAlgCl.integersModPowTransition_surjective ℓ E n)
+    (ker_integersModPowCoeffTransition ℓ E n)
+  refine (congrArg (_ ≫ ·) h₁).trans ?_
+  have h₃ := h₂ =≫ (DerivedCategory.mapDerivedCategoryComparisonUpperStarUnitIso
+    (integersModPowCoeff.{u} ℓ E n) Y.left).inv
+  simp only [Category.assoc] at h₃
+  exact h₃.symm
 
 set_option maxHeartbeats 1000000 in
 -- the monoidal structures of the derived functors on sheaf categories are slow to unfold

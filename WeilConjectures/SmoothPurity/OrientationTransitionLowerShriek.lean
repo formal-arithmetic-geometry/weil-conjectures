@@ -10,6 +10,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReadingReductionLowerShriekComp
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReadingReductionLowerShriekOpen
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReductionUpperShriekCanonical
+public import WeilConjectures.SmoothPurity.OrientationTransitionLowerShriekPullback
 
 /-!
 # The reduction `𝒪_E ⧸ ℓⁿ⁺¹ ⟶ 𝒪_E ⧸ ℓⁿ` and the comparisons for `Rf_!`
@@ -107,8 +108,45 @@ theorem etaleReductionLowerShriekIsoOfIsOpenImmersion_extensionByZero_restrictSc
       (Sheaf.derivedRestrictScalars X.left.smallEtaleTopology
         (integersModPowCoeffTransition ℓ E n)).map
         ((etaleReductionLowerShriekIsoOfIsOpenImmersion ℓ E n j ≪≫ Functor.isoWhiskerLeft _
-          (Etale.rightDerivedLowerShriekIsoOfIsOpenImmersion _ j.left)).hom.app K) :=
-  sorry
+          (Etale.rightDerivedLowerShriekIsoOfIsOpenImmersion _ j.left)).hom.app K) := by
+  intro _ _
+  have h := map_app_comp_app_comp_map_app_eq_of_mateEquiv
+    (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E j)
+    (Etale.derivedOpenImmersionLowerShriekUpperStarAdjunction
+      (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E (n + 1))) j.left)
+    (Etale.derivedOpenImmersionLowerShriekUpperStarAdjunction
+      (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) j.left)
+    (etaleReductionTransposeNatTrans ℓ E n U) (etaleReductionTransposeNatTrans ℓ E n X)
+    (Etale.derivedRestrictScalarsCompOpenImmersionLowerShriekIso
+      (integersModPowCoeffTransition ℓ E n) j.left).hom
+    (TwoSquare.mk _ _ _ _ (etaleReductionLowerShriekIsoOfIsOpenImmersion ℓ E (n + 1) j ≪≫
+      Functor.isoWhiskerLeft _ (Etale.rightDerivedLowerShriekIsoOfIsOpenImmersion _ j.left)).inv)
+    (TwoSquare.mk _ _ _ _ (etaleReductionLowerShriekIsoOfIsOpenImmersion ℓ E n j ≪≫
+      Functor.isoWhiskerLeft _ (Etale.rightDerivedLowerShriekIsoOfIsOpenImmersion _ j.left)).inv)
+    (fun N ↦ by
+      rw [mateEquiv_etaleReductionLowerShriekIsoOfIsOpenImmersion_trans_inv_app,
+        mateEquiv_etaleReductionLowerShriekIsoOfIsOpenImmersion_trans_inv_app]
+      exact etaleReductionUpperStarIsoOfIsOpenImmersion_restrictScalars ℓ E n j N) K
+  rw [etaleReductionTransposeNatTrans_app, etaleReductionTransposeNatTrans_app] at h
+  have h' : (Etale.openImmersionLowerShriek
+        (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E (n + 1))) j.left).mapDerivedCategory.map
+        (etaleReductionTranspose ℓ E n U K) ≫
+      (Etale.derivedRestrictScalarsCompOpenImmersionLowerShriekIso
+        (integersModPowCoeffTransition ℓ E n) j.left).hom.app ((etaleReduction ℓ E n U).obj K) ≫
+      (Sheaf.derivedRestrictScalars X.left.smallEtaleTopology
+        (integersModPowCoeffTransition ℓ E n)).map
+        ((etaleReductionLowerShriekIsoOfIsOpenImmersion ℓ E n j ≪≫ Functor.isoWhiskerLeft _
+          (Etale.rightDerivedLowerShriekIsoOfIsOpenImmersion _ j.left)).inv.app K) =
+    (etaleReductionLowerShriekIsoOfIsOpenImmersion ℓ E (n + 1) j ≪≫ Functor.isoWhiskerLeft _
+        (Etale.rightDerivedLowerShriekIsoOfIsOpenImmersion _ j.left)).inv.app K ≫
+      etaleReductionTranspose ℓ E n X
+        ((PadicIntegersRingObj.boundedConstructibleLowerShriek ℓ E j).obj K) := h
+  rw [← cancel_epi ((etaleReductionLowerShriekIsoOfIsOpenImmersion ℓ E (n + 1) j ≪≫
+    Functor.isoWhiskerLeft _
+      (Etale.rightDerivedLowerShriekIsoOfIsOpenImmersion _ j.left)).inv.app K),
+    Iso.inv_hom_id_app_assoc, ← Category.assoc, ← h', Category.assoc, Category.assoc,
+    ← Functor.map_comp, Iso.inv_hom_id_app]
+  erw [CategoryTheory.Functor.map_id, Category.comp_id]
 
 /-- Blueprint `det-sp-purity-coefficient-change`, the open-immersion piece with `Rj_!` replaced by
 the extension by zero `D(j_!)`: for an open immersion `j`, the canonical comparisons
