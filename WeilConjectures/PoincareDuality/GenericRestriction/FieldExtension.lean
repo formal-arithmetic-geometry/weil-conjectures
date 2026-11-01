@@ -201,7 +201,7 @@ lemma isIso_ihomUpperStarComparison_rightDerivedLowerStar_of_fieldExtension
 change hypothesis at `Lj^* M` deduced from base change at all objects satisfying a property `P`
 (stating the hypothesis at a variable object keeps the identification of the instances it
 involves cheap). -/
-lemma isIso_ihomUpperStarComparison_of_isIso_open_closed_of_forall
+private lemma isIso_ihomUpperStarComparison_of_isIso_open_closed_of_forall
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     {Z Z' U U' W : Scheme.{u}} {gZ : Z' ⟶ Z} {i : W ⟶ Z} [IsClosedImmersion i]
     {j : U ⟶ Z} [IsOpenImmersion j] [QuasiCompact j] {j' : U' ⟶ Z'} [IsOpenImmersion j']

@@ -6,6 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib.CategoryTheory.Adjunction.Basic
+public import Mathlib.CategoryTheory.Limits.Shapes.ZeroObjects
 
 /-!
 
@@ -28,6 +29,8 @@ restriction `L.op ⋙ F` along a left adjoint `L ⊣ R` by `R.obj Y`.
   read through an identification of a right adjoint with a left adjoint factors through a unit.
 - `CategoryTheory.Adjunction.isIso_unit_app_obj_of_isIso_counit_app`: the unit is invertible at
   `R Y` when the counit is invertible at `Y`.
+- `CategoryTheory.Adjunction.subsingleton_hom_of_isZero_leftAdjoint`: there is at most one
+  morphism from an object killed by a left adjoint to an object in the image of its right adjoint.
 
 -/
 
@@ -158,5 +161,13 @@ theorem mkOfHomEquiv_homEquiv_unit_counit (adj : CoreHomEquiv F G) :
   refine ⟨fun X Y ↦ ?_, fun _ ↦ rfl, fun _ ↦ rfl⟩
   ext f
   simp
+
+/-- If `F ⊣ G`, there is at most one morphism from an object `A` killed by `F` to an object
+isomorphic to an object in the image of `G`. -/
+lemma subsingleton_hom_of_isZero_leftAdjoint (adj : F ⊣ G) {A B : C} {N : D} (e : B ≅ G.obj N)
+    (hA : Limits.IsZero (F.obj A)) : Subsingleton (A ⟶ B) :=
+  ⟨fun a b ↦ by
+    rw [← cancel_mono e.hom]
+    exact (adj.homEquiv _ _).symm.injective (hA.eq_of_src _ _)⟩
 
 end CategoryTheory.Adjunction

@@ -5,6 +5,8 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.NaturalTransformationOplax
 public import WeilConjectures.PoincareDuality.ProperProjectionComp
 public import WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleIhom
@@ -28,16 +30,16 @@ a geometric generic fibre (blueprint `det-pd-generic-closed-hom` (2)):
   `L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*` is monoidal
   (`ProEtale.CondensedRing.isMonoidal_leftDerivedUpperStarComp_hom`), so `ρ_{f ≫ g}` is invertible
   as soon as `ρ_g` and `ρ_f` are
-  (`ProEtale.CondensedRing.isIso_ihomComparison_leftDerivedUpperStar_comp_app`);
+  (`ProEtale.CondensedRing.isIso_ihomUpperStarComparison_comp`);
 * `ρ` is invertible at `(K, Rf_* N)` for a morphism `f` with fully faithful `Rf_*` (an open or a
   closed immersion), as soon as `Rf_*` commutes with the base change along `g` at `N` and at
   `RHom(Lf^* K, N)` and `ρ` of the base change of `g` is invertible at `(Lf^* K, N)`
-  (`ProEtale.CondensedRing.isIso_ihomComparison_leftDerivedUpperStar_app_rightDerivedLowerStar`);
+  (`ProEtale.CondensedRing.isIso_ihomUpperStarComparison_rightDerivedLowerStar_of_isPullback`);
 * **dévissage in the second variable**: for an open immersion `j` with closed complement `i`,
   `ρ_g` is invertible at `(K, M)` as soon as it is at `(K, Rj_* Lj^* M)` and at the objects
   `(K, Ri_* X)`, `X` bounded constructible, and `Rj_*` commutes with the base change along `g` at
   `Lj^* M`
-  (`ProEtale.CondensedRing.isIso_ihomComparison_leftDerivedUpperStar_of_isIso_open_closed`).
+  (`ProEtale.CondensedRing.isIso_ihomUpperStarComparison_of_isIso_open_closed`).
 -/
 
 @[expose] public section
@@ -47,39 +49,6 @@ universe u
 open CategoryTheory Limits MonoidalCategory Pretriangulated
 
 open scoped CategoryTheory.Obj CategoryTheory.Functor
-
-namespace CategoryTheory.NatTrans
-
-open Functor.LaxMonoidal Functor.OplaxMonoidal
-
-variable {C D : Type*} [Category* C] [Category* D] [MonoidalCategory C] [MonoidalCategory D]
-  {F₁ F₂ : C ⥤ D} [F₁.Monoidal] [F₂.Monoidal]
-
-/-- A natural isomorphism of monoidal functors compatible with the counits and the
-comultiplications is monoidal. -/
-lemma isMonoidal_hom_of_η_of_δ (e : F₁ ≅ F₂) (hη : e.hom.app (𝟙_ C) ≫ η F₂ = η F₁)
-    (hδ : ∀ X Y, δ F₁ X Y ≫ (e.hom.app X ⊗ₘ e.hom.app Y) = e.hom.app (X ⊗ Y) ≫ δ F₂ X Y) :
-    NatTrans.IsMonoidal e.hom where
-  unit := by
-    rw [← cancel_mono (η F₂), Category.assoc, hη, Functor.Monoidal.ε_η, Functor.Monoidal.ε_η]
-  tensor X Y := by
-    rw [← cancel_epi (δ F₁ X Y), Functor.Monoidal.δ_μ_assoc, reassoc_of% (hδ X Y),
-      Functor.Monoidal.δ_μ, Category.comp_id]
-
-end CategoryTheory.NatTrans
-
-namespace CategoryTheory.Adjunction
-
-variable {C D : Type*} [Category* C] [Category* D] {F : C ⥤ D} {G : D ⥤ C}
-
-/-- If `F ⊣ G`, there is at most one morphism from an object `A` killed by `F` to an object
-isomorphic to an object in the image of `G`. -/
-lemma subsingleton_hom_of_isZero_leftAdjoint (adj : F ⊣ G) {A B : C} {N : D} (e : B ≅ G.obj N)
-    (hA : Limits.IsZero (F.obj A)) : Subsingleton (A ⟶ B) :=
-  ⟨fun _ _ ↦ (Iso.homCongr (Iso.refl A) e).injective ((adj.homEquiv _ _).symm.injective
-    (hA.eq_of_src _ _))⟩
-
-end CategoryTheory.Adjunction
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -168,14 +137,19 @@ variable {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
 natural transformation (`ProEtale.CondensedRing.leftDerivedUpperStarComp_δ`,
 `ProEtale.CondensedRing.leftDerivedUpperStarComp_hom_app_unit`). -/
 instance isMonoidal_leftDerivedUpperStarComp_hom :
-    NatTrans.IsMonoidal (leftDerivedUpperStarComp Λ f g).hom := by
-  refine NatTrans.isMonoidal_hom_of_η_of_δ _ ?_ (leftDerivedUpperStarComp_δ Λ f g)
-  rw [Functor.OplaxMonoidal.comp_η]
-  exact leftDerivedUpperStarComp_hom_app_unit Λ f g
+    NatTrans.IsMonoidal (leftDerivedUpperStarComp Λ f g).hom :=
+  NatTrans.IsMonoidal.of_isIso_of_δ _ fun X Y ↦ (leftDerivedUpperStarComp_δ Λ f g X Y).symm
 
 /-- **The internal-hom comparison and composition.** The comparison of `L(f ≫ g)^*` at `(K, M)` is
 an isomorphism if and only if the composite of `Lf^*` of the comparison of `Lg^*` and of the
-comparison of `Lf^*` at `(Lg^* K, Lg^* M)` is one. -/
+comparison of `Lf^*` at `(Lg^* K, Lg^* M)` is one. Up to the composition isomorphism
+`L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*`, the comparison `ρ_{f ≫ g}(K, M)` is the composite
+```
+L(f ≫ g)^* RHom(K, M) ≅ Lf^* Lg^* RHom(K, M)
+  ⟶ Lf^* RHom(Lg^* K, Lg^* M)                  (Lf^* ρ_g(K, M))
+  ⟶ RHom(Lf^* Lg^* K, Lf^* Lg^* M)             (ρ_f(Lg^* K, Lg^* M))
+  ≅ RHom(L(f ≫ g)^* K, L(f ≫ g)^* M).
+``` -/
 lemma isIso_ihomUpperStarComparison_comp_iff
     (K M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
       (condensedRingObj Λ Z))) :
@@ -284,7 +258,15 @@ by `Lj^*`, so `C ≅ Ri_* Li^* C` (the restrictions to `U` and `W` jointly detec
 being quasi-compact), and the five lemma without connecting morphisms
 (`CategoryTheory.Pretriangulated.isIso₂_of_isIso₁₃_of_subsingleton`) applies to the images of the
 rotated triangle `C[-1] ⟶ M ⟶ Rj_* Lj^* M ⟶ C` under both sides of the comparison: there are no
-maps from `Lg^* RHom(K, C)` to `RHom(Lg^* K, Rj'_* -)` since `Lj'^*` kills the former. -/
+maps from `Lg^* RHom(K, C)` to `RHom(Lg^* K, Rj'_* -)` since `Lj'^*` kills the former.
+Writing `A(-) = Lg^* RHom(K, -)` and `B(-) = RHom(Lg^* K, Lg^* -)`, the diagram is
+```
+A(C[-1]) ⟶ A(M) ⟶ A(Rj_* Lj^* M) ⟶ A(C)
+   │≅        │        │≅              │
+   ↓         ↓ ρ      ↓               ↓
+B(C[-1]) ⟶ B(M) ⟶ B(Rj_* Lj^* M) ⟶ B(C)
+```
+with `B(Rj_* Lj^* M) ≅ RHom(Lg^* K, Rj'_* Lg_U^* Lj^* M)`. -/
 lemma isIso_ihomUpperStarComparison_of_isIso_open_closed [QuasiCompact j]
     [(boundedConstructible (condensedRingObj Λ Z)).IsTriangulated]
     (hij : IsCompl (Set.range i.base) (Set.range j.base)) (sqU : IsPullback gU j' j gZ)
