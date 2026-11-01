@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.LisseQlbar.LisseQlbarRepresentations
 public import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeartStratificationDefs
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteColimits
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocallyFreeTensor
 
 /-!
 # Finite coefficient lattices on normal schemes
@@ -90,7 +92,18 @@ theorem has_lattice_of_normal
     (hL : IsLisseCoefficientModule (fieldRing ell E) L) :
     hasLattice (Λ := integerRing ell E) (B := fieldRing ell E)
       (integerInclusion ell E) X L := by
-  sorry
+  classical
+  have hLF : CondensedRing.LocallyFree (condensedRingObj (fieldRing ell E) X) L := by
+    apply (isLocallyFree_iff L).2
+    exact hL
+  obtain ⟨y⟩ := (inferInstance : Nonempty X)
+  let x := Scheme.FiniteEtale.geometricPoint y
+  obtain ⟨G, hGact, hG⟩ := Scheme.FiniteEtale.exists_isFundamentalGroup x
+  letI : ∀ P, MulAction G ((Scheme.FiniteEtale.fiber x).obj P) := hGact
+  letI : CategoryTheory.PreGaloisCategory.IsFundamentalGroup
+      (Scheme.FiniteEtale.fiber x) G := hG
+  obtain ⟨c⟩ := lisse_qlbar_representations ell X _ x G
+  exact (c.normalField hnormal E L hLF).2
 
 end
 
