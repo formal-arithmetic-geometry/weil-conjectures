@@ -547,4 +547,39 @@ def basisSection (X : Spaces K) (n : ℕ) (V : X.val.left.ProEt) (a : Fin d) :
       (Ideal.Quotient.mk ((Ideal.span {integralScalarIntegerInclusion l E L i
         (Padic.coefficientExtensionUniformizer l E)}) ^ (n + 1)) (b a))
 
+/-- Basis inclusions and coordinates, fixed on all ordinary sections and on every
+complex by the published scalar model counit. Coordinate identities record finite-sum
+universality without installing a second finite-biproduct instance on the derived category.
+Source: proof Steps 1 and 5
+(blueprint: lem-coef-system-scalar-projection-identification). -/
+structure BasisCoordinates where
+  ordinary : ∀ X : Spaces K, Fin d →
+    (𝟭 (Modules (A l E) (aTransition l E) X.val.left) ⟶
+      (s.scalars X).scalar.model.E ⋙ U0 l E L i X.val.left)
+  ordinary_section : ∀ (X : Spaces K) (a : Fin d)
+    (M : Modules (A l E) (aTransition l E) X.val.left) (n : ℕ) (V : X.val.left.ProEt)
+    (x : M.val.obj (op (n, V))),
+    ((ordinary X a).app M).val.app (op (n, V)) x =
+      basisSection l E L i (b := b) X n V a •
+        scalarExtensionSection.{u + 1, u, u + 1} (systemInclusion l E L i X.val.left)
+          (s.scalars X).scalar M (op (n, V)) x
+  inclusion : ∀ X : Spaces K, Fin d → (𝟭 _ ⟶ Q l E L i s X)
+  coordinate : ∀ X : Spaces K, Fin d → (Q l E L i s X ⟶ 𝟭 _)
+  orthogonal : ∀ (X : Spaces K) (M : Derived (A l E) (aTransition l E) X.val.left)
+    (a z : Fin d),
+    (inclusion X a).app M ≫ (coordinate X z).app M = if a = z then 𝟙 M else 0
+  total : ∀ (X : Spaces K) (M : Derived (A l E) (aTransition l E) X.val.left),
+    ∑ a : Fin d, (coordinate X a).app M ≫ (inclusion X a).app M = 𝟙 _
+  representative : ∀ (X : Spaces K) (a : Fin d)
+    (P : CochainComplex (Modules (A l E) (aTransition l E) X.val.left) ℤ),
+    (inclusion X a).app (DerivedCategory.Q.obj P) ≫
+        (U l E L i X.val.left).map ((s.scalars X).scalar.model.ε.app P) ≫
+        (Functor.mapDerivedCategoryFactors (U0 l E L i X.val.left)).hom.app
+          (((s.scalars X).scalar.model.E.mapHomologicalComplex (.up ℤ)).obj P) =
+      DerivedCategory.Q.map (X := P)
+        (Y := (((s.scalars X).scalar.model.E ⋙ U0 l E L i X.val.left).mapHomologicalComplex
+          (.up ℤ)).obj P)
+        { f := fun j ↦ ((ordinary X a).app (P.X j))
+          comm' := fun j k _ ↦ ((ordinary X a).naturality (P.d j k)).symm }
+
 end WeilConjectures.SystemScalarProjection

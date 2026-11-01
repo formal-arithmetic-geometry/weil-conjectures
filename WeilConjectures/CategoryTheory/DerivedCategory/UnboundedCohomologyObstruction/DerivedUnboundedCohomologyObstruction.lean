@@ -22,6 +22,8 @@ import WeilConjectures.CategoryTheory.DerivedCategory.SmoothPurity.GrothendieckD
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
 import WeilConjectures.CategoryTheory.DerivedHomologyInjective
 import Mathlib.CategoryTheory.Generator.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.AB
+public import Mathlib.Algebra.Category.ModuleCat.EnoughInjectives
 
 /-!
 # Unbounded cohomology obstructs right adjoints
@@ -98,6 +100,96 @@ def injectiveHomMap [T.CommShift ℤ] {v : ModuleCat.{max r m} R ⥤ B} (a : e �
       ((e.mapDerivedCategorySingleFunctor 0).hom.app (v.obj J)) ≫
     (DerivedCategory.singleFunctorCompHomologyFunctorIso (ModuleCat.{max r m} R) 0).hom.app
       (e.obj (v.obj J)) ≫ a.counit.app J
+
+private theorem shifts_sum_isLimit
+    [IsGrothendieckAbelian.{vA} A] [HasExactLimitsOfShape (Discrete ℕ) A] (F : A) :
+    Nonempty (IsLimit (Fan.mk (∐ shifts F) (Sigma.π (shifts F)))) := by
+  classical
+  let : Abelian.HasKInjectiveResolutions A :=
+    Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian.{vA}
+  let K (n : ℕ) := ((CochainComplex.singleFunctor A 0).obj F)⟦((n + 1 : ℕ) : ℤ)⟧
+  let hs := coproductIsCoproduct K
+  let p := Cofan.IsColimit.proj hs
+  have hl := isLimitFanMkQObj
+    (HomologicalComplex.isLimitFanMkProjOfIsColimit
+      (fun d m n hm hn ↦ Nat.add_right_cancel
+        (CochainComplex.eq_of_not_isZero_singleFunctor_obj_shift_X F d (m + 1) (n + 1)
+          hm hn)) hs)
+  let en (n : ℕ) : Q.obj (K n) ≅ shifts F n :=
+    (Q.commShiftIso ((n + 1 : ℕ) : ℤ)).app _ ≪≫
+      (shiftFunctor _ ((n + 1 : ℕ) : ℤ)).mapIso ((singleFunctorIsoCompQ A 0).app F).symm
+  let x : ∐ shifts F ≅ Q.obj (∐ K) :=
+    (Sigma.mapIso en).symm ≪≫ (asIso (sigmaComparison Q K))
+  refine ⟨Fan.IsLimit.ofIsos hl (fun n ↦ (en n).symm) x ?_⟩
+  intro n
+  apply Sigma.hom_ext
+  intro j
+  dsimp [x]
+  simp only [Category.assoc, Sigma.ι_mapIso_inv_assoc, ι_comp_sigmaComparison_assoc]
+  change (en j).inv ≫ Q.map (Sigma.ι K j) ≫ Q.map (p n) =
+    Sigma.ι (shifts F) j ≫ Sigma.π (shifts F) n ≫ (en n).inv
+  rw [← Q.map_comp]
+  by_cases h : j = n
+  · subst j
+    have hp : Sigma.ι K n ≫ p n = 𝟙 _ := Cofan.IsColimit.inj_proj_self hs n
+    simp [hp]
+  · have hp : Sigma.ι K j ≫ p n = 0 := Cofan.IsColimit.inj_proj_of_ne hs h
+    simp [hp, Sigma.ι_π_of_ne_assoc _ h]
+
+private theorem directSum_not_surjective
+    (M : ℕ → ModuleCat.{max r m} R) (hM : ∀ n, ¬ IsZero (M n)) :
+    ¬ Function.Surjective (DirectSum.coeFnLinearMap R (M := fun n ↦ M n)) := by
+  classical
+  have hn (n : ℕ) : Nontrivial (M n) :=
+    not_subsingleton_iff_nontrivial.mp (fun h ↦ hM n (ModuleCat.isZero_of_subsingleton _))
+  let (n : ℕ) := hn n
+  choose x hx using fun n ↦ exists_ne (0 : M n)
+  intro h
+  obtain ⟨y, hy⟩ := h x
+  let n := y.support.sup id + 1
+  have hn : n ∉ y.support := fun h ↦
+    Nat.not_succ_le_self _ (Finset.le_sup (f := id) h)
+  have hz : y n = 0 := DFinsupp.notMem_support_iff.mp hn
+  exact hx n (by simpa [hz] using (congrFun hy n).symm)
+
+private theorem injectiveHomMap_bijective [T.CommShift ℤ]
+    (v : ModuleCat.{max r m} R ⥤ B) [v.Additive]
+    [PreservesFiniteLimits v] [PreservesFiniteColimits v] (a : e ⊣ v)
+    (F : A) (n : ℕ) (J : ModuleCat.{max r m} R) [Injective J] :
+    Function.Bijective (injectiveHomMap e T a F n J) := by
+  let : Injective (v.obj J) := a.map_injective J inferInstance
+  let X := T.obj (shifts F n)
+  let H := DerivedCategory.homologyFunctor B 0
+  let s := (DerivedCategory.singleFunctorCompHomologyFunctorIso B 0).app (v.obj J)
+  let c := e.mapDerivedCategoryHomologyFunctorIso 0
+  let d : cohomology e T F n ≅ e.obj (H.obj X) :=
+    (shiftIdentification e T F n).symm ≪≫ (c.app X).symm
+  let b := ((Equiv.ofBijective H.map (derived_homology_injective_bijective X (v.obj J))).trans
+    ((Iso.refl (H.obj X)).homCongr s)).trans (a.homEquiv (H.obj X) J).symm
+  let b' := b.trans (d.symm.homCongr (Iso.refl J))
+  have hb : (fun g ↦ b' g) = injectiveHomMap e T a F n J := by
+    funext g
+    simp only [b', b, Equiv.trans_apply, Equiv.ofBijective_apply, Iso.homCongr_apply,
+      Iso.refl_hom, Iso.refl_inv, Category.id_comp, Category.comp_id, Iso.symm_inv]
+    change d.hom ≫ (e.map (H.map g ≫ s.hom) ≫ a.counit.app J) = _
+    dsimp only [d, Iso.trans_hom, Iso.symm_hom, Iso.app_inv]
+    rw [e.map_comp]
+    simp only [Category.assoc]
+    have hnat : c.inv.app X ≫ e.map (H.map g) =
+        (evaluation e).map g ≫ c.inv.app ((singleFunctor B 0).obj (v.obj J)) := by
+      simpa only [H, evaluation, Functor.comp_map] using (c.inv.naturality g).symm
+    rw [reassoc_of% hnat]
+    have hc : e.map s.hom =
+        c.hom.app ((singleFunctor B 0).obj (v.obj J)) ≫
+          (homologyFunctor (ModuleCat.{max r m} R) 0).map
+            ((e.mapDerivedCategorySingleFunctor 0).hom.app (v.obj J)) ≫
+          (singleFunctorCompHomologyFunctorIso (ModuleCat.{max r m} R) 0).hom.app
+            (e.obj (v.obj J)) := by
+      exact (e.mapDerivedCategoryHomologyFunctorIso_hom_app_singleFunctor 0 (v.obj J)).symm
+    rw [hc]
+    simp [injectiveHomMap, c, H, X, Category.assoc]
+  rw [← hb]
+  exact b'.bijective
 
 /-- Unbounded positive cohomology prevents coproduct preservation and either right adjoint.
 
