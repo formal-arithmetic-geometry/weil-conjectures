@@ -60,4 +60,32 @@ def comparisonKoszulDiagramIso
     (diagramPull l E g).obj (H l E Y P) ≅ H l E X ((G l E g).obj P) :=
   θ.app P
 
+/-- Transpose the pulled Koszul isomorphism before localization.
+Source: Stacks 0G7E; transposition commutes degreewise with termwise pullback.
+(blueprint: def-a1-finite-pullback-localized-koszul-iso). -/
+def comparisonKoszulChainIso
+    (θ : FinitePullbackStrictTowerData.koszuls l E Y ⋙
+      FinitePullbackStrictTowerData.diagramPull l E g ≅
+        FinitePullbackStrictTowerData.G l E g ⋙ FinitePullbackStrictTowerData.koszuls l E X)
+    (P : CochainComplex (Modules l E Y) ℤ) :
+    (((towerPull l E g).mapHomologicalComplex (.up ℤ)).obj
+      ((transpose l E Y).obj (PrincipalKoszulStrictReplacement.sourceTower l E Y P))) ≅
+    ((transpose l E X).obj
+      (H l E X ((G l E g).obj P))) :=
+  (transpose l E X).mapIso (comparisonKoszulDiagramIso l E g θ P)
+
+/-- Localize the pulled Koszul isomorphism after transposing the strict tower.
+Source: Stacks 0G7E and 06XN. The transposition commutes degreewise with termwise pullback.
+(blueprint: def-a1-finite-pullback-localized-koszul-iso). -/
+def comparisonKoszulIso
+    (θ : FinitePullbackStrictTowerData.koszuls l E Y ⋙
+      FinitePullbackStrictTowerData.diagramPull l E g ≅
+        FinitePullbackStrictTowerData.G l E g ⋙ FinitePullbackStrictTowerData.koszuls l E X)
+    (P : CochainComplex (Modules l E Y) ℤ) :
+    DerivedCategory.Q.obj (((towerPull l E g).mapHomologicalComplex (.up ℤ)).obj
+      ((transpose l E Y).obj (PrincipalKoszulStrictReplacement.sourceTower l E Y P))) ≅
+    DerivedCategory.Q.obj ((transpose l E X).obj
+      (H l E X ((G l E g).obj P))) :=
+  DerivedCategory.Q.mapIso (comparisonKoszulChainIso l E g θ P)
+
 end WeilConjectures.FinitePullbackStrictTower

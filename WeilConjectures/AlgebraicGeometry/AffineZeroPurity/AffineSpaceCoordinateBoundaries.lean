@@ -130,13 +130,18 @@ theorem coordinate_cartier (B : Scheme.{u}) (c : ℕ) (i : Fin c) :
       rw [Scheme.IdealSheafData.comap_ofIdealTop, Ideal.map_span, Set.image_singleton] at h
       exact h
 
+private theorem zero_zero (B : Scheme.{u}) : zero B 0 = 𝟙 B := by
+  rfl
+
 /-- The zero section is a closed immersion. Source: proof Step 1
 (blueprint: def-pur-affine-space-coordinate-boundaries).
 Proof: the zero section is the composite of the closed last-coordinate sections;
 at dimension zero it is the identity. Closed immersions compose. -/
 theorem zero_closed (B : Scheme.{u}) (c : ℕ) : IsClosedImmersion (zero B c) := by
   induction c with
-  | zero => exact inferInstanceAs (IsClosedImmersion (𝟙 B))
+  | zero =>
+    rw [zero_zero]
+    exact inferInstanceAs (IsClosedImmersion (𝟙 B))
   | succ c ih =>
     have hz : zero B (c + 1) = zero B c ≫
         AffineSpace.zeroSection PUnit.{u + 1} (iteratedAffineLine B c) := by
@@ -150,6 +155,7 @@ theorem zero_closed (B : Scheme.{u}) (c : ℕ) : IsClosedImmersion (zero B c) :=
     exact @IsClosedImmersion.comp _ _ _ (zero B c)
       (AffineSpace.zeroSection PUnit.{u + 1} (iteratedAffineLine B c)) ih
       (AffineSpace.isClosedImmersion_zeroSection _ _)
+
 attribute [instance] zero_closed
 
 /-- The coordinate-normalized ordinary boundary, at the same exponent as gamma.

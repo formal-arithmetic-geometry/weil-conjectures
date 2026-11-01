@@ -36,6 +36,7 @@ import all WeilConjectures.AlgebraicGeometry.SemilinearProperOpen.SemilinearProp
 import all WeilConjectures.AlgebraicGeometry.SemilinearProperOpen.SemilinearProperOpenCore
 import all WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
 import WeilConjectures.SixFunctors.SequenceModuleEvaluation.SequenceModulePullbackEvaluation
+public import WeilConjectures.SmoothPurity.ProEtaleWeaklyEtaleLocalization
 
 /-! # Graph summands for arbitrary inverse systems of rings
 
@@ -342,7 +343,25 @@ proves exactness on systems without assuming coefficient transitions flat. -/
 theorem sum_exact {U T : Scheme.{u}} (e : U ⟶ T) [Etale e] :
     (sum C τ e).Additive ∧ PreservesFiniteLimits (sum C τ e) ∧
       PreservesFiniteColimits (sum C τ e) := by
-  sorry
+  have : (sumRestriction C τ e).Additive := by
+    constructor
+    intro M N f g
+    ext V x
+    rfl
+  have : (sum C τ e).Additive := (sumAdjunction C τ e).left_adjoint_additive
+  refine ⟨inferInstance, ?_⟩
+  obtain ⟨D⟩ := semilinearDerivedSections.{u + 1, u, u + 1}
+    (ProEt.topology T) (SemilinearProperOpen.coefficients C T)
+      (SemilinearProperOpen.transition C τ T)
+  exact VaryingRing.exact_of_componentwise
+    (A := SemilinearProperOpen.Modules C τ U)
+    (B := SemilinearProperOpen.Modules C τ T)
+    (C := fun n ↦ StrictTower.Modules (C n) U)
+    (D := fun n ↦ StrictTower.Modules (C n) T)
+    (sum C τ e) (ev C τ T) (ev C τ U) (fun n ↦ levelSum (C n) e)
+    D.systems.componentwise
+    (fun n ↦ (@asIso _ _ _ _ (sumEvaluationInv C τ e n)
+      (sumEvaluationInv_isIso C τ e n)).symm)
 
 /-- Additive structure supplied by the exact sum extension.
 Source: Stacks 03DI (blueprint: lem-sp-varying-ring-graph-summand). -/
@@ -513,6 +532,12 @@ Source: Stacks 09AE (blueprint: lem-sp-varying-ring-graph-summand). -/
 def restrictionComparison {U T : Scheme.{u}} (e : U ⟶ T) [Etale e] :=
   (SemilinearProperOpen.ordinaryAdj C τ e).leftAdjointUniq
     (restrictionPushAdjunction C τ e)
+
+/-- Sum extension adjoint to the existing geometric inverse image.
+Source: Stacks 03DI, 09AE (blueprint: lem-sp-varying-ring-graph-summand). -/
+def geometricSumAdjunction {U T : Scheme.{u}} (e : U ⟶ T) [Etale e] :
+    sum C τ e ⊣ SemilinearProperOpen.pull C τ e :=
+  (sumAdjunction C τ e).ofNatIsoRight (restrictionComparison C τ e).symm
 
 /-- The compactified graph of a lift, in the variable-first fibre-product convention.
 Source: Stacks 0F4L (blueprint: lem-sp-varying-ring-graph-summand). -/
@@ -807,7 +832,61 @@ theorem levelSum_exact (A : Type (u + 1)) [CommRing A] {U T : Scheme.{u}}
     (e : U ⟶ T) [Etale e] :
     (levelSum A e).Additive ∧ PreservesFiniteLimits (levelSum A e) ∧
       PreservesFiniteColimits (levelSum A e) := by
-  sorry
+  let W : T.ProEt := MorphismProperty.Over.mk ⊤ e (inferInstance : WeaklyEtale e)
+  let G := MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale e)
+  let : G.IsContinuous (ProEt.topology U) (ProEt.topology T) :=
+    ProEt.isContinuous_overMap (inferInstance : WeaklyEtale e)
+  let : G.IsCocontinuous (ProEt.topology U) (ProEt.topology T) :=
+    ProEt.isCocontinuous_overMap (inferInstance : WeaklyEtale e)
+  let B := StrictTower.coefficients A T
+  let R := (sheafCompose (ProEt.topology T)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj B
+  let S := (sheafCompose (ProEt.topology U)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (StrictTower.coefficients A U)
+  let c₀ := (G.pushforwardContinuousSheafificationCompatibility CommRingCat.{u + 1}
+    (ProEt.topology U) (ProEt.topology T)).app
+      ((Functor.const T.ProEtᵒᵖ).obj (CommRingCat.of A))
+  have hc : c₀.hom = levelCoefficientMap (fun _ : ℕ ↦ CommRingCat.of A) e 0 := by
+    apply Sheaf.hom_ext
+    apply sheafify_hom_ext (ProEt.topology U) _ _
+      ((G.sheafPushforwardContinuous CommRingCat.{u + 1}
+        (ProEt.topology U) (ProEt.topology T)).obj B).property
+    apply NatTrans.ext
+    funext V
+    have h := congrArg (fun f ↦ f.app V)
+      (G.toSheafify_pullbackSheafificationCompatibility CommRingCat.{u + 1}
+        (ProEt.topology U) (ProEt.topology T)
+        ((Functor.const T.ProEtᵒᵖ).obj (CommRingCat.of A)))
+    exact h.trans (levelCoefficientMap_unit (fun _ : ℕ ↦ CommRingCat.of A) e 0 V).symm
+  let c : S ≅ (G.sheafPushforwardContinuous RingCat.{u + 1}
+      (ProEt.topology U) (ProEt.topology T)).obj R :=
+    (sheafCompose (ProEt.topology U)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).mapIso c₀
+  let hd : (ProEt.sliceEquiv T W).inverse.IsDenseSubsite
+      (ProEt.topology U) ((ProEt.topology T).over W) := by
+    exact ProEt.sliceDense T W
+  obtain ⟨q, hq⟩ := ProEt.module_transport ((ProEt.topology T).over W)
+    (ProEt.topology U) (ProEt.sliceEquiv T W) (R.over W) S c
+  let t : SheafOfModules.overFunctor.{u + 1} R W ⋙ q.functor ≅
+      levelRestriction A e :=
+    Functor.fullyFaithfulCancelRight (SheafOfModules.forget S) (eqToIso (by
+      change SheafOfModules.overFunctor R W ⋙
+        (q.functor ⋙ SheafOfModules.forget S) = _
+      rw [hq]
+      dsimp only [levelRestriction]
+      rw [← hc]
+      rfl))
+  obtain ⟨ha, hl, hcol, _⟩ := SheafOfModules.localizedSystemExact.{u + 1, u, u + 1} B W
+  let := ha
+  let := hl
+  let := hcol
+  let a := ((q.symm.toAdjunction).comp
+    (SheafOfModules.localizedSystemAdjunction.{u + 1, u, u + 1} B W)).ofNatIsoRight t
+  let b := (levelSumAdjunction A e).ofNatIsoRight (levelRestrictionComparison A e)
+  let d := a.leftAdjointUniq b
+  have : PreservesFiniteLimits (levelSum A e) := preservesFiniteLimits_of_natIso d
+  have : PreservesFiniteColimits (levelSum A e) := preservesFiniteColimits_of_natIso d
+  exact ⟨Functor.additive_of_preserves_binary_products _, inferInstance, inferInstance⟩
 
 /-- Additivity of single-ring sum extension.
 Source: Stacks 03DI (blueprint: lem-sp-varying-ring-graph-summand). -/
@@ -964,6 +1043,78 @@ def ordinaryPullEvaluation {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     (@asIso _ _ _ _ (SemilinearProperOpen.evalPullInv C τ n f)
       (SemilinearProperOpen.evalPullInv_isIso C τ n f)).symm
     ((evaluation ℕᵒᵖ (StrictTower.Modules (C n) X)).obj (op 0))
+
+/-- The ordinary sum-evaluation comparison is the inverse mate of inverse-image evaluation.
+Source: Stacks 03DI; Zheng 4.10 (blueprint: lem-sp-varying-ring-graph-summand). -/
+def sumEvaluationInv {U T : Scheme.{u}} (e : U ⟶ T) [Etale e] (n : ℕ) :
+    ev C τ U n ⋙ levelSum (C n) e ⟶ sum C τ e ⋙ ev C τ T n :=
+  (mateEquiv (geometricSumAdjunction C τ e) (levelSumAdjunction (C n) e)).symm
+    (ordinaryPullEvaluation C τ e n).hom
+
+private theorem inverse_mate_right_transport
+    {A B D E : Type*} [Category A] [Category B] [Category D] [Category E]
+    {L : A ⥤ B} {R R' : B ⥤ A} {l : D ⥤ E} {r r' : E ⥤ D}
+    {F : A ⥤ D} {G : B ⥤ E}
+    (a : L ⊣ R) (b : l ⊣ r) (i : R ≅ R') (j : r ≅ r')
+    (d : R' ⋙ F ⟶ G ⋙ r) :
+    ((mateEquiv (a.ofNatIsoRight i) b).symm d).natTrans =
+      ((mateEquiv a (b.ofNatIsoRight j)).symm
+        (Functor.whiskerRight i.hom F ≫ d ≫ Functor.whiskerLeft G j.hom)).natTrans := by
+  ext X
+  simp only [mateEquiv_symm_apply, TwoSquare.mk, TwoSquare.natTrans,
+    Adjunction.ofNatIsoRight_unit,
+    Adjunction.ofNatIsoRight_counit, NatTrans.comp_app, Functor.whiskerRight_app,
+    Functor.whiskerLeft_app, Functor.associator_hom_app, Functor.associator_inv_app,
+    Functor.leftUnitor_inv_app, Functor.rightUnitor_hom_app, Functor.comp_obj,
+    Functor.comp_map, Category.id_comp, Category.assoc,
+    CategoryTheory.Functor.map_comp, CategoryTheory.Functor.map_id]
+  rw [← l.map_comp_assoc (j.hom.app _) (j.inv.app _), Iso.hom_inv_id_app,
+    l.map_id, Category.id_comp]
+
+/-- Sum extension commutes with evaluation by its summand units.
+Source: Stacks 03DI; Zheng 4.10
+(blueprint: lem-sp-graph-sum-evaluation-mate-invertible).
+Proof: apply the sequence-site evaluation theorem to the canonical localization
+restrictions and their chosen left adjoints. Transport their right adjoints by
+restrictionComparison and levelRestrictionComparison. Expanding the inverse-mate
+formula cancels the latter comparison with its inverse, yielding sumEvaluationInv. -/
+theorem sumEvaluationInv_isIso {U T : Scheme.{u}} (e : U ⟶ T) [Etale e] (n : ℕ) :
+    IsIso (sumEvaluationInv C τ e n) := by
+  have := levelSite_continuous e
+  have : ((𝟭 ℕ).prod (MorphismProperty.Over.map ⊤
+      (inferInstance : WeaklyEtale e))).IsContinuous
+      (coefficientSequenceTopology (ProEt.topology U))
+      (coefficientSequenceTopology (ProEt.topology T)) := sumSite_continuous e
+  let i := (restrictionComparison C τ e).symm
+  let j := levelRestrictionComparison (C n) e
+  let d := Functor.isoWhiskerRight i (ev C τ U n) ≪≫
+    ordinaryPullEvaluation C τ e n ≪≫ Functor.isoWhiskerLeft (ev C τ T n) j
+  have h := WeilConjectures.SequenceModuleEvaluation.sequenceModulePullbackEvaluation_isIso
+    (ProEt.topology U) (ProEt.topology T)
+    (MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale e))
+    (ring.{u + 1, u, u + 1} (coefficientSequenceTopology (ProEt.topology U))
+      (SemilinearProperOpen.ringSystem C τ U))
+    (ring.{u + 1, u, u + 1} (coefficientSequenceTopology (ProEt.topology T))
+      (SemilinearProperOpen.ringSystem C τ T)) n
+    ((sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
+      (sumCoefficientMap C τ e))
+    (ring.{u + 1, u, u + 1} (ProEt.topology U)
+      (SemilinearProperOpen.coefficients C U n))
+    (ring.{u + 1, u, u + 1} (ProEt.topology T)
+      (SemilinearProperOpen.coefficients C T n))
+    (evaluation_ring.{u + 1, u, u + 1} (ProEt.topology U)
+      (SemilinearProperOpen.coefficients C U) (SemilinearProperOpen.transition C τ U) n)
+    (evaluation_ring.{u + 1, u, u + 1} (ProEt.topology T)
+      (SemilinearProperOpen.coefficients C T) (SemilinearProperOpen.transition C τ T) n)
+    ((sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
+      (levelCoefficientMap C e n))
+    (sum C τ e) (levelSum (C n) e) (sumAdjunction C τ e)
+    ((levelSumAdjunction (C n) e).ofNatIsoRight j) d
+  change IsIso ((mateEquiv ((sumAdjunction C τ e).ofNatIsoRight i)
+    (levelSumAdjunction (C n) e)).symm (ordinaryPullEvaluation C τ e n).hom).natTrans
+  rw [inverse_mate_right_transport (sumAdjunction C τ e)
+    (levelSumAdjunction (C n) e) i j]
+  exact h
 
 set_option backward.isDefEq.respectTransparency true in
 /-- Ordinary open-evaluation inverse comparison, preserving both open adjunctions.

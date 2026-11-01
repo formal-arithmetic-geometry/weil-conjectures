@@ -53,6 +53,7 @@ public import Mathlib.CategoryTheory.Sites.Equivalence
 public import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
 public import Mathlib.CategoryTheory.Limits.EssentiallySmall
 public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
+public import WeilConjectures.SmoothPurity.ProEtaleWeaklyEtaleLocalization
 /-! # Completed open-immersion base change
 
 Source: blueprint order 1587; Stacks Tags 03DI, 09BP, 099N
@@ -1681,6 +1682,143 @@ def cbcCompleteProperty (T : Scheme.{t}) (r : ℕ) (a : Fin r → A)
   fun K ↦ IsDerivedCompleteIntrinsic T d r a ha K
     (DerivedCategory.Q.objPreimage K) (DerivedCategory.Q.objObjPreimageIso K)
 
+/-- The strict-tower construction produces a raw completed exchange before it is
+identified with the canonical choice. Its unit equation is the finite-level
+normalization, and its isomorphism is obtained from strict finite exchange and
+functorial derived inverse limits.
+Source: Stacks Tags 03DI, 09BP, 099N
+(blueprint: lem-route-cbc-completed-exchange-raw-construction).
+Proof: the strict-reduction comparison ρ_j : (j_!K)_• ≅ j_!(K_•)
+(lem-cbc-ringed-open-strict-reduction) followed by the completed-ring strict
+finite exchange b_K : G_g(j_!K_•) ≅ j'_!G_{g_U}(K_•)
+(lem-cbc-completed-ring-strict-finite-exchange) is an isomorphism of strict
+towers commuting with all quotient transitions. Apply functorial Rlim
+(prop-weil-pbc-rlim-functoriality) and compose with the inverse of the
+extension/Rlim comparison λ_{j'} (lem-cbc-exact-product-functor-strict-limit),
+an isomorphism because j' is quasi-compact, j'_! preserves products and
+countable products are exact. The composite β is an isomorphism, natural in K,
+and the completed-extension unit equation
+(lem-route-completed-extension-zero-unit-equation) is the displayed identity.
+-/
+theorem cbcCompletedExchange_raw_isIso_unit [QuasiCompact j]
+    (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) :
+    ∃ β : (cbcCompleteProperty d U r a ha).ι ⋙
+        cbcDerivedOpenShriek d j sq.isOpenImmersion ⋙ cbcCompletedPullback d g ⟶
+      (cbcCompleteProperty d U r a ha).ι ⋙ cbcCompletedPullback d gU ⋙
+        cbcDerivedOpenShriek d j' sq.isOpenImmersion',
+      IsIso β ∧
+        ∀ K : (cbcCompleteProperty d U r a ha).FullSubcategory,
+          (cbcCompletedPullbackComparison d g).app
+              ((cbcDerivedOpenShriek d j sq.isOpenImmersion).obj K.obj) ≫ β.app K =
+            (cbcOrdinaryExchange d sq).app K.obj ≫
+              (cbcDerivedOpenShriek d j' sq.isOpenImmersion').map
+                ((cbcCompletedPullbackComparison d gU).app K.obj) := by
+  sorry
+
+/-- Extension by zero preserves the intrinsic completion unit on a complete
+object. This is the open-extension part of endpoint completeness.
+Source: Stacks Tags 03DI and 09BP
+(blueprint: lem-route-cbc-extension-complete-of-complete).
+Proof: apply the ringed-slice tensor projection formula to the Koszul quotient
+tower, use exact products and the derived-limit comparison, and transport the
+completion unit through every quotient transition.
+-/
+theorem cbcOpenShriek_complete_of_complete [QuasiCompact j]
+    (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal)
+    (K : (cbcCompleteProperty d U r a ha).FullSubcategory)
+    (hK : cbcCompleteProperty d U r a ha K.obj) :
+    cbcCompleteProperty d X r a ha
+      ((cbcDerivedOpenShriek d j sq.isOpenImmersion).obj K.obj) := by
+  sorry
+
+/-- Completed pullback preserves intrinsic completion of an object. This is the
+reflector part of endpoint completeness and is independent of the exchange map.
+Source: Stacks Tags 03DI and 09BP
+(blueprint: lem-route-cbc-completed-pullback-complete-of-complete).
+Proof: identify completed pullback with the intrinsic completion reflector and
+use the completed-pullback reflection comparison on the Koszul quotient tower.
+-/
+theorem cbcCompletedPullback_complete_of_complete
+    {V W : Scheme.{t}} (f : V ⟶ W) (r : ℕ) (a : Fin r → A)
+    (ha : Ideal.span (Set.range a) = d.ideal)
+    (M : DerivedCategory (pbcModules W (pbcAdicCompletion W d)))
+    (hM : cbcCompleteProperty d W r a ha M) :
+    cbcCompleteProperty d V r a ha
+      ((cbcCompletedPullback d f).obj M) := by
+  sorry
+
+/-- Unit-compatible maps are unique once the three endpoint completion facts
+are supplied. The completeness hypothesis is essential: it makes the completed
+pullback comparison epimorphic on the complete subcategory.
+Source: Stacks Tag 099N
+(blueprint: lem-route-cbc-completed-exchange-unique-of-complete).
+Proof: cancel the completed pullback comparison componentwise using the
+completion reflection on complete objects, then use natural-transformation
+extensionality. The endpoint-completeness hypothesis supplies the required
+reflection instances for both maps.
+-/
+theorem cbcCompletedExchange_unique_of_complete [QuasiCompact j]
+    (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal)
+    (hcomplete : ∀ K : (cbcCompleteProperty d U r a ha).FullSubcategory,
+      cbcCompleteProperty d X r a ha
+          ((cbcDerivedOpenShriek d j sq.isOpenImmersion).obj K.obj) ∧
+        cbcCompleteProperty d X' r a ha
+          ((cbcCompletedPullback d g).obj
+            ((cbcDerivedOpenShriek d j sq.isOpenImmersion).obj K.obj)) ∧
+        cbcCompleteProperty d X' r a ha
+          ((cbcDerivedOpenShriek d j' sq.isOpenImmersion').obj
+            ((cbcCompletedPullback d gU).obj K.obj)))
+    (β γ : (cbcCompleteProperty d U r a ha).ι ⋙
+        cbcDerivedOpenShriek d j sq.isOpenImmersion ⋙ cbcCompletedPullback d g ⟶
+      (cbcCompleteProperty d U r a ha).ι ⋙ cbcCompletedPullback d gU ⋙
+        cbcDerivedOpenShriek d j' sq.isOpenImmersion')
+    (hβ : ∀ K : (cbcCompleteProperty d U r a ha).FullSubcategory,
+        (cbcCompletedPullbackComparison d g).app
+            ((cbcDerivedOpenShriek d j sq.isOpenImmersion).obj K.obj) ≫ β.app K =
+          (cbcOrdinaryExchange d sq).app K.obj ≫
+            (cbcDerivedOpenShriek d j' sq.isOpenImmersion').map
+              ((cbcCompletedPullbackComparison d gU).app K.obj))
+    (hγ : ∀ K : (cbcCompleteProperty d U r a ha).FullSubcategory,
+        (cbcCompletedPullbackComparison d g).app
+            ((cbcDerivedOpenShriek d j sq.isOpenImmersion).obj K.obj) ≫ γ.app K =
+          (cbcOrdinaryExchange d sq).app K.obj ≫
+            (cbcDerivedOpenShriek d j' sq.isOpenImmersion').map
+              ((cbcCompletedPullbackComparison d gU).app K.obj)) :
+    β = γ := by
+  sorry
+
+private theorem cbcCompletedExchange_endpoint_complete [QuasiCompact j]
+    (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) :
+    ∀ K : (cbcCompleteProperty d U r a ha).FullSubcategory,
+      cbcCompleteProperty d X r a ha
+          ((cbcDerivedOpenShriek d j sq.isOpenImmersion).obj K.obj) ∧
+        cbcCompleteProperty d X' r a ha
+          ((cbcCompletedPullback d g).obj
+            ((cbcDerivedOpenShriek d j sq.isOpenImmersion).obj K.obj)) ∧
+        cbcCompleteProperty d X' r a ha
+          ((cbcDerivedOpenShriek d j' sq.isOpenImmersion').obj
+            ((cbcCompletedPullback d gU).obj K.obj)) := by
+  intro K
+  have hleft := cbcOpenShriek_complete_of_complete d sq r a ha K K.property
+  have hpull := cbcCompletedPullback_complete_of_complete d g r a ha
+    ((cbcDerivedOpenShriek d j sq.isOpenImmersion).obj K.obj) hleft
+  have hsq : IsPullback gU j' j g :=
+    IsPullback.of_iso_pullback sq.toCommSq sq.isoPullback sq.hom_fst sq.hom_snd
+  have hqj' : QuasiCompact j' :=
+    MorphismProperty.of_isPullback (P := @QuasiCompact) hsq inferInstance
+  let hi := IsPullback.id_horiz j'
+  let sq' : OpenImmersionSquare (𝟙 U') j' j' (𝟙 X') :=
+    { toCommSq := hi.toCommSq
+      isoPullback := hi.isoPullback
+      hom_fst := hi.isoPullback_hom_fst
+      hom_snd := hi.isoPullback_hom_snd
+      isOpenImmersion := sq.isOpenImmersion'
+      isOpenImmersion' := sq.isOpenImmersion' }
+  have hbase := cbcCompletedPullback_complete_of_complete d gU r a ha K.obj K.property
+  have hright := cbcOpenShriek_complete_of_complete d sq' r a ha
+    ⟨(cbcCompletedPullback d gU).obj K.obj, hbase⟩ hbase
+  exact ⟨hleft, hpull, hright⟩
+
 /-- Extension by zero along a quasi-compact open immersion preserves intrinsic
 derived completeness. The completed base-change map is the unique natural map
 compatible with ordinary base change and the specified completion units. It is
@@ -1720,7 +1858,11 @@ theorem cbcCompletedExchange_exists [QuasiCompact j]
           (cbcOrdinaryExchange d sq).app K.obj ≫
             (cbcDerivedOpenShriek d j' sq.isOpenImmersion').map
               ((cbcCompletedPullbackComparison d gU).app K.obj) := by
-  sorry
+  obtain ⟨β, hβiso, hβ⟩ := cbcCompletedExchange_raw_isIso_unit d sq r a ha
+  have hcomplete := cbcCompletedExchange_endpoint_complete d sq r a ha
+  refine ⟨β, hβ, ?_⟩
+  intro γ hγ
+  exact (cbcCompletedExchange_unique_of_complete d sq r a ha hcomplete β γ hβ hγ).symm
 
 /-- The canonical completed base-change map, natural on the full complete subcategory.
 It is fixed by the ordinary adjoint mate and the strict quotient completion units.
@@ -1758,6 +1900,14 @@ theorem completedExtensionZeroComparison [QuasiCompact j]
           cbcCompleteProperty d X' r a ha
             ((cbcDerivedOpenShriek d j' sq.isOpenImmersion').obj
               ((cbcCompletedPullback d gU).obj K.obj))) := by
-  sorry
+  obtain ⟨β, hβiso, hβ⟩ := cbcCompletedExchange_raw_isIso_unit d sq r a ha
+  have hcomplete := cbcCompletedExchange_endpoint_complete d sq r a ha
+  have hex := cbcCompletedExchange_exists d sq r a ha
+  have hcanonical' : β = hex.exists.choose :=
+    hex.unique hβ hex.exists.choose_spec
+  have hcanonical : β = cbcCompletedExchange d sq r a ha := by
+    simpa only [cbcCompletedExchange] using hcanonical'
+  rw [hcanonical.symm]
+  exact ⟨hβiso, hcomplete⟩
 
 end AlgebraicGeometry.Scheme
