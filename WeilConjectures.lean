@@ -44,6 +44,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Coinduce
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ConstantFieldFlat
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ConstantFieldLocalSections
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.DerivedBaseChange
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.DerivedBaseChangeSingle
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ExtendScalars
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ExtendScalarsFlat
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ExtensionByZeroFlat
@@ -10951,6 +10952,9 @@ public import WeilConjectures.EtaleCohomology.TateTwist.FiniteKummerLevel
 public import WeilConjectures.EtaleCohomology.TateTwist.FiniteKummerLevelBaseChange
 public import WeilConjectures.EtaleCohomology.TateTwist.FrobeniusNormalization
 public import WeilConjectures.EtaleCohomology.TateTwist.FrobeniusScalar
+public import WeilConjectures.EtaleCohomology.TateTwist.KummerBoundaryCoefficientChange
+public import WeilConjectures.EtaleCohomology.TateTwist.KummerBoundaryRestrictScalars
+public import WeilConjectures.EtaleCohomology.TateTwist.KummerBoundaryRestrictScalarsMap
 public import WeilConjectures.EtaleCohomology.TateTwist.KummerClass
 public import WeilConjectures.EtaleCohomology.TateTwist.KummerClass.Basic
 public import WeilConjectures.EtaleCohomology.TateTwist.KummerClass.TwistPullback

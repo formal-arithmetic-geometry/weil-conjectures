@@ -136,13 +136,20 @@ lemma tateTwistSheafOneReductionMap_eq :
   rw [tateTwistSheafOneReductionMap, ← homEquiv_symm_extendScalarsChangeMap_app,
     ← Adjunction.homEquiv_naturality_left_symm, Category.assoc]
 
-include hρ ha in
-/-- **The reduction of the Tate twist `Λ(1)`**: the change of coefficients
-`Λ_X(1) ⟶ Res Λ'_X(1)` (`tateTwistObjectOneChangeMap`, the `e`-th power map) exhibits
-`Λ'_X(1)` as the derived extension of scalars of `Λ_X(1)`. -/
-theorem isDerivedBaseChange_tateTwistObjectOneChangeMap :
-    Sheaf.IsDerivedBaseChange (tateTwistObjectOneChangeMap ρ X e he) := by
-  have hη := isDerivedBaseChange_singleFunctor_map_unit hρ ha X (flat_tateTwistSheaf Λ X 1)
+/-- `tateTwistObjectOneChangeMap` through the unit of the extension of scalars along `ρ` and the
+isomorphism `tateTwistSheafOneReductionMap`. -/
+lemma tateTwistObjectOneChangeMap_eq_unit :
+    tateTwistObjectOneChangeMap ρ X e he =
+    ((tateTwistObjectIsoSingleFunctor Λ X 1).hom ≫
+      (DerivedCategory.singleFunctor _ 0).map
+          ((Sheaf.extendScalarsAdjunction X.smallEtaleTopology ρ).unit.app
+            (tateTwistSheaf Λ X 1)) ≫
+        ((Sheaf.restrictScalars X.smallEtaleTopology ρ).mapDerivedCategorySingleFunctor
+          0).inv.app ((Sheaf.extendScalars X.smallEtaleTopology ρ).obj (tateTwistSheaf Λ X 1))) ≫
+      (Sheaf.derivedRestrictScalars X.smallEtaleTopology ρ).map
+        ((DerivedCategory.singleFunctor _ 0).mapIso
+            (asIso (tateTwistSheafOneReductionMap X e he (ρ := ρ))) ≪≫
+          (tateTwistObjectOneIso X Λ').symm).hom := by
   have hu : (Sheaf.extendScalarsAdjunction X.smallEtaleTopology ρ).unit.app _ ≫
       (Sheaf.restrictScalars X.smallEtaleTopology ρ).map
         (tateTwistSheafOneReductionMap X e he (ρ := ρ)) =
@@ -150,25 +157,18 @@ theorem isDerivedBaseChange_tateTwistObjectOneChangeMap :
         (extendScalarsChangeMap ρ X).app _ := by
     rw [tateTwistSheafOneReductionMap_eq]
     exact (Adjunction.homEquiv_unit _ _ _ _).symm.trans (Equiv.apply_symm_apply _ _)
-  have hn := ((Sheaf.restrictScalars X.smallEtaleTopology ρ).mapDerivedCategorySingleFunctor
-    0).inv.naturality (tateTwistSheafOneReductionMap X e he (ρ := ρ))
-  have key : tateTwistObjectOneChangeMap ρ X e he =
-      ((tateTwistObjectIsoSingleFunctor Λ X 1).hom ≫
-        (DerivedCategory.singleFunctor _ 0).map
-            ((Sheaf.extendScalarsAdjunction X.smallEtaleTopology ρ).unit.app
-              (tateTwistSheaf Λ X 1)) ≫
-          ((Sheaf.restrictScalars X.smallEtaleTopology ρ).mapDerivedCategorySingleFunctor
-            0).inv.app ((Sheaf.extendScalars X.smallEtaleTopology ρ).obj (tateTwistSheaf Λ X 1))) ≫
-        (Sheaf.derivedRestrictScalars X.smallEtaleTopology ρ).map
-          ((DerivedCategory.singleFunctor _ 0).mapIso
-              (asIso (tateTwistSheafOneReductionMap X e he (ρ := ρ))) ≪≫
-            (tateTwistObjectOneIso X Λ').symm).hom := by
-    rw [tateTwistObjectOneChangeMap, tateTwistObjectOneIso, Iso.trans_hom, Functor.mapIso_hom,
-      Category.assoc, ← Functor.map_comp_assoc, ← hu, Functor.map_comp, Category.assoc,
-      Category.assoc, reassoc_of% hn, Iso.trans_hom, Functor.mapIso_hom, asIso_hom, Iso.symm_hom,
-      Functor.map_comp, Category.assoc]
-    rfl
-  rw [key]
+  exact comp_map_eq_of_unit_comp_eq _ _ (tateTwistObjectOneChangeMap_eq ρ X e he) rfl hu
+    (singleFunctor_map_restrictScalars_map_comp_singleFunctorRestrictScalarsIso_hom ρ X
+      (tateTwistSheafOneReductionMap X e he (ρ := ρ))) rfl
+
+include hρ ha in
+/-- **The reduction of the Tate twist `Λ(1)`**: the change of coefficients
+`Λ_X(1) ⟶ Res Λ'_X(1)` (`tateTwistObjectOneChangeMap`, the `e`-th power map) exhibits
+`Λ'_X(1)` as the derived extension of scalars of `Λ_X(1)`. -/
+theorem isDerivedBaseChange_tateTwistObjectOneChangeMap :
+    Sheaf.IsDerivedBaseChange (tateTwistObjectOneChangeMap ρ X e he) := by
+  have hη := isDerivedBaseChange_singleFunctor_map_unit hρ ha X (flat_tateTwistSheaf Λ X 1)
+  rw [tateTwistObjectOneChangeMap_eq_unit]
   exact (hη.of_iso (tateTwistObjectIsoSingleFunctor Λ X 1)).comp_map_iso
     ((DerivedCategory.singleFunctor _ 0).mapIso
       (asIso (tateTwistSheafOneReductionMap X e he (ρ := ρ))) ≪≫ (tateTwistObjectOneIso X Λ').symm)

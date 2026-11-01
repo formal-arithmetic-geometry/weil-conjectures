@@ -5,23 +5,26 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.EtaleCohomology.TateTwist.KummerClass
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.DerivedBaseChange
-public import WeilConjectures.EtaleCohomology.TateTwist.KummerLevelIndependence
+public import WeilConjectures.EtaleCohomology.TateTwist.KummerBoundaryRestrictScalarsMap
 
 /-!
 # The Kummer classes under a change of coefficients
 
 Let `ρ : Λ →+* Λ'` be a morphism of commutative rings whose characteristics satisfy
-`n = n' e` (for instance the reduction `𝒪_E ⧸ ℓⁿ⁺¹ ⟶ 𝒪_E ⧸ ℓⁿ`, with `e = ℓ`). The Kummer
-sequences of `n` and `n'` are related by the `e`-th power maps
-(`AlgebraicGeometry.Scheme.kummerSequencePowMap`), and extension of scalars along `ρ` gives a
-morphism `Λ ⊗ F ⟶ Λ' ⊗ F` of sheaves of `Λ`-modules
-(`AlgebraicGeometry.Etale.extendScalarsChangeMap`). Together they give a morphism from the
-pulled back Kummer sequence with coefficients `Λ` to the one with coefficients `Λ'`, with scalars
-restricted to `Λ`, so that the connecting morphisms correspond
-(`AlgebraicGeometry.Etale.kummerδ_comp_changeMap`): the change of coefficients of the Kummer
-class of a unit is its Kummer class.
+`n = n' e`. The change of coefficients of the Tate twists `Λ_X(1) ⟶ Res Λ'_X(1)`
+(`AlgebraicGeometry.Etale.tateTwistObjectOneChangeMap`, the `e`-th power map) and of the constant
+complexes `Λ_X ⟶ Res Λ'_X` (`AlgebraicGeometry.Etale.constantComplexChangeMap`) are compatible
+with the Kummer classes
+(`AlgebraicGeometry.Etale.kummerClassOf_comp_tateTwistObjectOneChangeMap`): the change of
+coefficients of the Kummer class of a unit is its Kummer class. This follows from the
+compatibility of the Kummer boundaries
+(`AlgebraicGeometry.Etale.kummerδ_comp_changeMap_restrictScalars`).
+
+Both changes of coefficients are written through the isomorphism
+`(Res F)[0] ≅ Res (F[0])` (`AlgebraicGeometry.Etale.singleFunctorRestrictScalarsIso`), whose type
+is stated with the derived restriction of scalars `Sheaf.derivedRestrictScalars`: this keeps
+every factor in one presentation, so that the compatibility is a cheap instance of the categorical
+lemma `CategoryTheory.comp_shift_map_eq_of_eq`.
 -/
 
 @[expose] public section
@@ -32,181 +35,72 @@ open CategoryTheory Limits
 
 open scoped CategoryTheory.Functor
 
-namespace CategoryTheory.ShortComplex
+namespace CategoryTheory
 
-variable {C : Type*} [Category* C] [Abelian C] {S S' : ShortComplex C} (σ : S ⟶ S') {Y : C}
-  (φ : Y ⟶ S.X₃)
-  (φ' : Y ⟶ S'.X₃) (h : φ ≫ σ.τ₃ = φ')
+/-- A categorical form of the compatibility of Kummer classes with a change of coefficients: for
+a functor `G : T' ⥤ T` commuting with the shifts, if `κ = c ≫ a ≫ tinv⟦1⟧'`,
+`τ = thom ≫ m₁ ≫ i₁ ≫ G tinv'`, `χ = c ≫ m₃ ≫ i₃ ≫ G cinv'` and `κ' = chom' ≫ b ≫ tinv'⟦1⟧'`
+with `tinv ≫ thom = 𝟙` and `cinv' ≫ chom' = 𝟙`, then the square of the boundaries
+`a ≫ (m₁ ≫ i₁)⟦1⟧' = m₃ ≫ i₃ ≫ G b ≫ (G.commShiftIso 1).hom` gives
+`κ ≫ τ⟦1⟧' = χ ≫ G κ' ≫ (G.commShiftIso 1).hom`. -/
+lemma comp_shift_map_eq_of_eq {T T' T₀ : Type*} [Category* T] [Category* T'] [Category* T₀]
+    [HasShift T ℤ] [HasShift T' ℤ] (G : T' ⥤ T) [G.CommShift ℤ] (S₀ : T₀ ⥤ T') {Z₁ Z₃ : T₀}
+    {P Q A B R₁ R₃ : T} {P' Q' : T'}
+    {κ : P ⟶ Q⟦(1 : ℤ)⟧} {c : P ⟶ A} {a : A ⟶ B⟦(1 : ℤ)⟧} {tinv : B ⟶ Q}
+    (hκ : κ = c ≫ a ≫ tinv⟦(1 : ℤ)⟧')
+    {τ : Q ⟶ G.obj Q'} {thom : Q ⟶ B} {m₁ : B ⟶ R₁} {i₁ : R₁ ⟶ G.obj (S₀.obj Z₁)}
+    {tinv' : S₀.obj Z₁ ⟶ Q'}
+    (hτ : τ = thom ≫ m₁ ≫ i₁ ≫ G.map tinv')
+    {χ : P ⟶ G.obj P'} {m₃ : A ⟶ R₃} {i₃ : R₃ ⟶ G.obj (S₀.obj Z₃)} {cinv' : S₀.obj Z₃ ⟶ P'}
+    (hχ : χ = c ≫ m₃ ≫ i₃ ≫ G.map cinv')
+    {κ' : P' ⟶ Q'⟦(1 : ℤ)⟧} {chom' : P' ⟶ S₀.obj Z₃} {b : S₀.obj Z₃ ⟶ (S₀.obj Z₁)⟦(1 : ℤ)⟧}
+    (hκ' : κ' = chom' ≫ b ≫ tinv'⟦(1 : ℤ)⟧')
+    (ht : tinv ≫ thom = 𝟙 B) (hc : cinv' ≫ chom' = 𝟙 _)
+    (hK : a ≫ (m₁ ≫ i₁)⟦(1 : ℤ)⟧' = m₃ ≫ i₃ ≫ G.map b ≫ (G.commShiftIso (1 : ℤ)).hom.app _) :
+    κ ≫ τ⟦(1 : ℤ)⟧' = χ ≫ G.map κ' ≫ (G.commShiftIso (1 : ℤ)).hom.app Q' := by
+  subst hκ hτ hχ hκ'
+  simp only [Functor.map_comp, Category.assoc] at hK ⊢
+  rw [← Functor.map_comp_assoc (shiftFunctor T (1 : ℤ)) tinv, ht, Functor.map_id, Category.id_comp,
+    ← Functor.map_comp_assoc G cinv', hc, Functor.map_id, Category.id_comp,
+    Functor.commShiftIso_hom_naturality, reassoc_of% hK]
 
-/-- A morphism of short complexes `σ : S ⟶ S'` induces a morphism from the pullback of `S`
-along `φ : Y ⟶ S.X₃` to the pullback of `S'` along `φ' = φ ≫ σ.τ₃`, which is the identity on
-`Y`. -/
-@[simps]
-noncomputable def pullbackMapOfHom : S.pullback φ ⟶ S'.pullback φ' where
-  τ₁ := σ.τ₁
-  τ₂ := Limits.pullback.map _ _ _ _ σ.τ₂ (𝟙 Y) σ.τ₃ σ.comm₂₃.symm (by simp [h])
-  τ₃ := 𝟙 Y
-  comm₁₂ := by
-    apply Limits.pullback.hom_ext
-    · simp only [ShortComplex.pullback, Limits.pullback.map, Category.assoc,
-        Limits.pullback.lift_fst, Limits.pullback.lift_fst_assoc]
-      exact σ.comm₁₂
-    · simp only [ShortComplex.pullback, Limits.pullback.map, Category.assoc,
-        Limits.pullback.lift_snd, Limits.pullback.lift_snd_assoc, comp_zero, zero_comp]
-  comm₂₃ := by
-    simp only [ShortComplex.pullback, Limits.pullback.map, Limits.pullback.lift_snd,
-      Category.comp_id]
-
-end CategoryTheory.ShortComplex
-
-namespace AlgebraicGeometry
-
-namespace Scheme
-
-variable {X : Scheme.{u}}
-
-/-- The morphism of Kummer sequences `0 ⟶ μ_c ⟶ 𝔾ₘ ⟶ 𝔾ₘ ⟶ 0` to
-`0 ⟶ μ_a ⟶ 𝔾ₘ ⟶ 𝔾ₘ ⟶ 0` given by the `b`-th power maps on `μ_c` and on the middle `𝔾ₘ`, and
-the identity on the last `𝔾ₘ`, for `c = a b`. -/
-@[simps]
-noncomputable def kummerSequencePowMap (a b c : ℕ) (h : c = a * b) :
-    X.kummerSequence c ⟶ X.kummerSequence a where
-  τ₁ := rootsOfUnityPow a b c h
-  τ₂ := b • 𝟙 X.gmSheaf
-  τ₃ := 𝟙 X.gmSheaf
-  comm₁₂ := rootsOfUnityPow_ι a b c h
-  comm₂₃ := by
-    change (b • 𝟙 X.gmSheaf) ≫ (a • 𝟙 X.gmSheaf) = (c • 𝟙 X.gmSheaf) ≫ 𝟙 _
-    rw [Category.comp_id, nsmul_id_comp_nsmul_id, h]
-
-end Scheme
-
-namespace Etale
-
-open Scheme
-
-variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] (ρ : Λ →+* Λ') (X : Scheme.{u})
-
-/-- The change of coefficients `Λ ⊗ F ⟶ Λ' ⊗ F` along `ρ : Λ →+* Λ'` of the extension of
-scalars of an étale sheaf of abelian groups `F`, as a morphism of sheaves of `Λ`-modules: the
-adjoint of the unit `F ⟶ Λ' ⊗ F`. -/
-noncomputable def extendScalarsChangeMap :
-    extendScalars Λ X ⟶ extendScalars Λ' X ⋙ Sheaf.restrictScalars X.smallEtaleTopology ρ where
-  app F := (extendScalars Λ X).map ((extendScalarsAdjunction Λ' X).unit.app F) ≫
-    (extendScalarsAdjunction Λ X).counit.app ((Sheaf.restrictScalars X.smallEtaleTopology ρ).obj
-      ((extendScalars Λ' X).obj F))
-  naturality F G g := by
-    have h := (extendScalarsAdjunction Λ' X).unit.naturality g
-    have h' := (extendScalarsAdjunction Λ X).counit.naturality
-      ((Sheaf.restrictScalars X.smallEtaleTopology ρ).map ((extendScalars Λ' X).map g))
-    dsimp only [Functor.comp_map, Functor.id_map, Functor.comp_obj, Functor.id_obj] at h h' ⊢
-    refine (Functor.map_comp_assoc _ _ _ _).symm.trans ?_
-    erw [h]
-    refine (Functor.map_comp_assoc _ _ _ _).trans ?_
-    erw [h']
-    exact (Category.assoc _ _ _).symm
-
-end Etale
-
-end AlgebraicGeometry
+end CategoryTheory
 
 namespace AlgebraicGeometry.Etale
 
 open Scheme
+
+section
 
 variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] (ρ : Λ →+* Λ') {X : Scheme.{u}}
   [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ' X] (e : ℕ)
   (he : ringChar Λ = ringChar Λ' * e)
 
-/-- The morphism from the Kummer sequence of level `n = ringChar Λ` pulled back along
-`φ : C ⟶ 𝔾ₘ`, with coefficients `Λ`, to the Kummer sequence of level `n' = ringChar Λ'` pulled
-back along `φ`, with coefficients `Λ'` and scalars restricted to `Λ`: the `e`-th power maps
-(`n = n' e`) followed by the change of coefficients along `ρ`. -/
-noncomputable def kummerPullbackChangeMap {C : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}}
-    (φ : C ⟶ X.gmSheaf) :
-    ((X.kummerSequence (ringChar Λ)).pullback φ).map (extendScalars Λ X) ⟶
-      ((X.kummerSequence (ringChar Λ')).pullback φ).map
-        (extendScalars Λ' X ⋙ Sheaf.restrictScalars X.smallEtaleTopology ρ) :=
-  (extendScalars Λ X).mapShortComplex.map
-      (ShortComplex.pullbackMapOfHom (kummerSequencePowMap _ e _ he) φ φ (Category.comp_id _)) ≫
-    ((X.kummerSequence (ringChar Λ')).pullback φ).mapNatTrans (extendScalarsChangeMap ρ X)
-
-/-- **The change of coefficients of the Kummer boundary**: the connecting morphism of the
-pulled back Kummer sequence with coefficients `Λ`, followed by the change of coefficients
-`μ_n ⊗ Λ ⟶ μ_{n'} ⊗ Λ'` (the `e`-th power map and `ρ`), is the change of coefficients
-`Λ ⊗ C ⟶ Λ' ⊗ C` followed by the connecting morphism of the sequence with coefficients `Λ'`,
-with scalars restricted to `Λ`. -/
-lemma kummerδ_comp_changeMap {C : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}}
-    (φ : C ⟶ X.gmSheaf)
-    (hC : ∀ x : X, Projective ((X.uliftPointSmallEtale x).sheafFiber.obj C)) :
-    kummerδ Λ φ hC ≫ ((DerivedCategory.singleFunctor _ 0).map
-        ((extendScalars Λ X).map (rootsOfUnityPow _ e _ he) ≫
-          (extendScalarsChangeMap ρ X).app _))⟦(1 : ℤ)⟧' =
-      (DerivedCategory.singleFunctor _ 0).map ((extendScalarsChangeMap ρ X).app C) ≫
-        ((shortExact_kummerSequence_pullback_map_extendScalars Λ' φ hC).map_of_exact
-          (Sheaf.restrictScalars X.smallEtaleTopology ρ)).singleδ := by
-  have h : kummerδ Λ φ hC ≫ ((DerivedCategory.singleFunctor _ 0).map
-        ((extendScalars Λ X).map (rootsOfUnityPow _ e _ he) ≫
-          (extendScalarsChangeMap ρ X).app _))⟦(1 : ℤ)⟧' =
-      (DerivedCategory.singleFunctor _ 0).map ((extendScalars Λ X).map (𝟙 C) ≫
-          (extendScalarsChangeMap ρ X).app C) ≫
-        ((shortExact_kummerSequence_pullback_map_extendScalars Λ' φ hC).map_of_exact
-          (Sheaf.restrictScalars X.smallEtaleTopology ρ)).singleδ :=
-    (ShortComplex.ShortExact.singleTriangle.map
-    (shortExact_kummerSequence_pullback_map_extendScalars Λ φ hC)
-    ((shortExact_kummerSequence_pullback_map_extendScalars Λ' φ hC).map_of_exact
-      (Sheaf.restrictScalars X.smallEtaleTopology ρ))
-    (kummerPullbackChangeMap ρ e he φ)).comm₃
-  rwa [CategoryTheory.Functor.map_id, Category.id_comp] at h
-
-/-- `AlgebraicGeometry.Etale.kummerδ_comp_changeMap`, with the restriction of scalars of the
-connecting morphism of the sequence with coefficients `Λ'`. -/
-lemma kummerδ_comp_changeMap_restrictScalars {C : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}}
+/-- `AlgebraicGeometry.Etale.kummerδ_comp_changeMap_restrictScalars`, stated with the
+isomorphisms `AlgebraicGeometry.Etale.singleFunctorRestrictScalarsIso`. -/
+lemma kummerδ_comp_changeMap_singleFunctorRestrictScalarsIso
+    {C : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}}
     (φ : C ⟶ X.gmSheaf)
     (hC : ∀ x : X, Projective ((X.uliftPointSmallEtale x).sheafFiber.obj C)) :
     kummerδ Λ φ hC ≫ ((DerivedCategory.singleFunctor _ 0).map
         ((extendScalars Λ X).map (rootsOfUnityPow _ e _ he) ≫
           (extendScalarsChangeMap ρ X).app _) ≫
-        ((Sheaf.restrictScalars X.smallEtaleTopology ρ).mapDerivedCategorySingleFunctor 0).inv.app
-          _)⟦(1 : ℤ)⟧' =
+        (singleFunctorRestrictScalarsIso ρ X (X.rootsOfUnitySheaf (ringChar Λ'))).hom)⟦(1 : ℤ)⟧' =
       (DerivedCategory.singleFunctor _ 0).map ((extendScalarsChangeMap ρ X).app C) ≫
-        ((Sheaf.restrictScalars X.smallEtaleTopology ρ).mapDerivedCategorySingleFunctor 0).inv.app
-          _ ≫
+        (singleFunctorRestrictScalarsIso ρ X C).hom ≫
         (Sheaf.derivedRestrictScalars X.smallEtaleTopology ρ).map (kummerδ Λ' φ hC) ≫
           ((Sheaf.derivedRestrictScalars X.smallEtaleTopology ρ).commShiftIso
-            (1 : ℤ)).hom.app _ := by
-  have h₁ := kummerδ_comp_changeMap ρ e he φ hC
-  have h₂ := (shortExact_kummerSequence_pullback_map_extendScalars Λ' φ hC).mapShiftedHom_singleδ
-    (Sheaf.restrictScalars X.smallEtaleTopology ρ)
-  simp only [ShiftedHom.map] at h₂
-  have h₂' : (Sheaf.derivedRestrictScalars X.smallEtaleTopology ρ).map (kummerδ Λ' φ hC) ≫
-      ((Sheaf.derivedRestrictScalars X.smallEtaleTopology ρ).commShiftIso (1 : ℤ)).hom.app _ =
-      ((Sheaf.restrictScalars X.smallEtaleTopology ρ).mapDerivedCategorySingleFunctor 0).hom.app
-          ((extendScalars Λ' X).obj C) ≫
-        ((shortExact_kummerSequence_pullback_map_extendScalars Λ' φ hC).map_of_exact
-          (Sheaf.restrictScalars X.smallEtaleTopology ρ)).singleδ ≫
-          (((Sheaf.restrictScalars X.smallEtaleTopology ρ).mapDerivedCategorySingleFunctor
-            0).inv.app
-              ((extendScalars Λ' X).obj (X.rootsOfUnitySheaf (ringChar Λ'))))⟦(1 : ℤ)⟧' :=
-    h₂
-  calc _ = (kummerδ Λ φ hC ≫ ((DerivedCategory.singleFunctor _ 0).map
-        ((extendScalars Λ X).map (rootsOfUnityPow _ e _ he) ≫
-          (extendScalarsChangeMap ρ X).app _))⟦(1 : ℤ)⟧') ≫
-        (((Sheaf.restrictScalars X.smallEtaleTopology ρ).mapDerivedCategorySingleFunctor 0).inv.app
-          _)⟦(1 : ℤ)⟧' := by rw [Functor.map_comp, Category.assoc]
-    _ = _ := by
-      rw [h₁, h₂', Iso.inv_hom_id_app_assoc]
-      exact Category.assoc _ _ _
+            (1 : ℤ)).hom.app _ :=
+  shift_map_comp_eq_of_comp_eq_of_heq
+    (kummerδ_comp_changeMap_eq_kummerδRestrictScalars ρ e he φ hC)
+    (singleFunctorRestrictScalarsIso_hom_comp_map_kummerδ ρ φ hC)
+    rfl rfl HEq.rfl HEq.rfl HEq.rfl
 
-end AlgebraicGeometry.Etale
-
-namespace AlgebraicGeometry.Etale
-
-open Scheme
+end
 
 variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] (ρ : Λ →+* Λ') (X : Scheme.{u})
-  [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ' X] [NeZero (ringChar Λ)]
-  [NeZero (ringChar Λ')] (e : ℕ) (he : ringChar Λ = ringChar Λ' * e)
+  [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ' X]
+  [NeZero (ringChar Λ)] [NeZero (ringChar Λ')] (e : ℕ) (he : ringChar Λ = ringChar Λ' * e)
 
 /-- The change of coefficients `Λ_X ⟶ Res Λ'_X` of the constant complexes, through the
 identifications `Λ_X ≅ (Λ ⊗ ℤ)[0]` of the Kummer classes
@@ -216,7 +110,7 @@ noncomputable def constantComplexChangeMap :
       (Sheaf.derivedRestrictScalars X.smallEtaleTopology ρ).obj (constantComplex Λ' X) :=
   (constantComplexIsoSingleFunctorExtendScalarsInt X Λ).hom ≫
     (DerivedCategory.singleFunctor _ 0).map ((extendScalarsChangeMap ρ X).app _) ≫
-      ((Sheaf.restrictScalars X.smallEtaleTopology ρ).mapDerivedCategorySingleFunctor 0).inv.app _ ≫
+      (singleFunctorRestrictScalarsIso ρ X _).hom ≫
         (Sheaf.derivedRestrictScalars X.smallEtaleTopology ρ).map
           (constantComplexIsoSingleFunctorExtendScalarsInt X Λ').inv
 
@@ -229,7 +123,7 @@ noncomputable def tateTwistObjectOneChangeMap :
   (tateTwistObjectOneIso X Λ).hom ≫
     (DerivedCategory.singleFunctor _ 0).map
       ((extendScalars Λ X).map (rootsOfUnityPow _ e _ he) ≫ (extendScalarsChangeMap ρ X).app _) ≫
-      ((Sheaf.restrictScalars X.smallEtaleTopology ρ).mapDerivedCategorySingleFunctor 0).inv.app _ ≫
+      (singleFunctorRestrictScalarsIso ρ X _).hom ≫
         (Sheaf.derivedRestrictScalars X.smallEtaleTopology ρ).map (tateTwistObjectOneIso X Λ').inv
 
 /-- **The change of coefficients of a Kummer class is the Kummer class**, with scalars restricted:
@@ -241,18 +135,16 @@ theorem kummerClassOf_comp_tateTwistObjectOneChangeMap (v : Γ(X, ⊤)ˣ) :
     kummerClassOf X Λ v ≫ (tateTwistObjectOneChangeMap ρ X e he)⟦(1 : ℤ)⟧' =
       constantComplexChangeMap ρ X ≫
         (Sheaf.derivedRestrictScalars X.smallEtaleTopology ρ).map (kummerClassOf X Λ' v) ≫
-        ((Sheaf.derivedRestrictScalars X.smallEtaleTopology ρ).commShiftIso (1 : ℤ)).hom.app _ := by
-  have hK := kummerδ_comp_changeMap_restrictScalars ρ e he (unitToGmSheaf v)
-    (fun x ↦ projective_sheafFiber_constantSheafInt (X.uliftPointSmallEtale x))
-  simp only [Functor.map_comp, Category.assoc] at hK
-  simp only [kummerClassOf_def, tateTwistObjectOneChangeMap, constantComplexChangeMap,
-    Functor.map_comp, Category.assoc]
-  rw [← Functor.map_comp_assoc (shiftFunctor _ (1 : ℤ)) (tateTwistObjectOneIso X Λ).inv,
-    Iso.inv_hom_id, CategoryTheory.Functor.map_id, Category.id_comp,
-    ← Functor.map_comp_assoc (Sheaf.derivedRestrictScalars X.smallEtaleTopology ρ)
-      (constantComplexIsoSingleFunctorExtendScalarsInt X Λ').inv, Iso.inv_hom_id,
-    CategoryTheory.Functor.map_id, Category.id_comp,
-    Functor.commShiftIso_hom_naturality, reassoc_of% hK]
+        ((Sheaf.derivedRestrictScalars X.smallEtaleTopology ρ).commShiftIso (1 : ℤ)).hom.app _ :=
+  comp_shift_map_eq_of_eq (Sheaf.derivedRestrictScalars X.smallEtaleTopology ρ)
+    (DerivedCategory.singleFunctor _ 0)
+    (kummerClassOf_def X Λ v)
+    (tateTwistObjectOneChangeMap.eq_1 ρ X e he)
+    (constantComplexChangeMap.eq_1 ρ X) (kummerClassOf_def X Λ' v)
+    (tateTwistObjectOneIso X Λ).inv_hom_id
+    (constantComplexIsoSingleFunctorExtendScalarsInt X Λ').inv_hom_id
+    (kummerδ_comp_changeMap_singleFunctorRestrictScalarsIso ρ e he (unitToGmSheaf v)
+      (fun x ↦ projective_sheafFiber_constantSheafInt (X.uliftPointSmallEtale x)))
 
 /-- The defining formula of `tateTwistObjectOneChangeMap` (stated through its equation lemma, so
 that it is literally the stored body: re-elaborating the body costs a large kernel check). -/

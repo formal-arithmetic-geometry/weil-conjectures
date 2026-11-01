@@ -55,7 +55,7 @@ lemma constantComplexChangeMap_eq_ofUnit [HasInvertibleExponent Λ X]
         (Sheaf.derivedRestrictScalars X.smallEtaleTopology ρ).map
           (constantComplexIsoSingleFunctorExtendScalarsIntOfUnit X Λ').inv := by
   rw [constantComplexChangeMap, constantComplexIsoSingleFunctorExtendScalarsInt_eq_ofUnit,
-    constantComplexIsoSingleFunctorExtendScalarsInt_eq_ofUnit]
+    constantComplexIsoSingleFunctorExtendScalarsInt_eq_ofUnit, singleFunctorRestrictScalarsIso_hom]
 
 omit [CommRing Λ'] in
 /-- The direct identification `Λ_X ≅ (Λ ⊗ ℤ)[0]`. -/
