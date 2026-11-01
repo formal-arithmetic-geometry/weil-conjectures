@@ -600,6 +600,8 @@ public import WeilConjectures.SmoothPurity.FiniteEtaleTateLinePullback
 public import WeilConjectures.SmoothPurity.FiniteP1ChernMapBaseChange
 public import WeilConjectures.SmoothPurity.OrdinaryFiniteTwistTransportUniqueness
 public import WeilConjectures.SmoothPurity.SupportedDerivedUnitForget
+public import WeilConjectures.AlgebraicGeometry.AffineOrderedIntegration.AffineOrderedProjectionTower
+public import WeilConjectures.AlgebraicGeometry.AffineOrderedIntegration.AffineOrderedProjectionTowerCompositor
 
 @[expose] public section
 set_option autoImplicit false
@@ -679,6 +681,75 @@ attribute [local implicit_reducible] orderedSource exceptional lineSource twistA
 end AlgebraicGeometry.ProEtale.AffineOrderedIntegration
 
 namespace AlgebraicGeometry.ProEtale.AffineOrderedIntegration
+
+/-- Coefficient-first standing canonical projection, with its compactification explicit.
+Source: def-exchange-projection, two canonical tensor symmetries
+(blueprint: lem-pur-affine-ordered-integration-transposes). -/
+def standingProjection (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
+    (M : C A X) (H : C A Y) :
+    ((tensor A Y).obj H).obj ((rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).obj M) ⟶
+      (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).obj
+        (((tensor A X).obj ((inverseImage A f).obj H)).obj M) :=
+  projection (ModuleCat.{u + 1} A) (HasCompactification.compactification f) M H
+
+/-- The pro-etale projection-composition equation with the actual origin compositor.
+Its only domain witnesses are those needed to evaluate that given compositor.
+Source: displayed PF equation
+(blueprint: lem-pur-affine-ordered-integration-transposes). -/
+def ProProjectionCompositionEquation (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X T Y : Scheme.{u}} (f : X ⟶ T) (g : T ⟶ Y)
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    [QuasiCompact f] [QuasiCompact g]
+    (M : C A X) (H : C A Y)
+    (hM : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} A) X M)
+    (hT : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} A) X
+      (((tensor A X).obj ((inverseImage A f).obj ((inverseImage A g).obj H))).obj M)) :
+    Prop :=
+  standingProjection A g ((rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).obj M) H ≫
+    (rightDerivedLowerShriek (ModuleCat.{u + 1} A) g).map
+      (standingProjection A f M ((inverseImage A g).obj H)) ≫
+    projectionOriginComponent A f g _ hT =
+  ((tensor A Y).obj H).map (projectionOriginComponent A f g M hM) ≫
+    standingProjection A (f ≫ g) M H ≫
+    (rightDerivedLowerShriek (ModuleCat.{u + 1} A) (f ≫ g)).map
+      (((tensor A X).map ((inverseImageComp A f g).hom.app H)).app M)
+
+/-- The displayed composition law for the ordinary canonical projection maps.
+Source: the PF composition display, retaining the exact inverse-image compositor
+(blueprint: lem-pur-affine-ordered-integration-transposes). -/
+def OrdinaryProjectionCompositionEquation (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X T Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian T] [IsNoetherian Y]
+    (f : X ⟶ T) (g : T ⟶ Y)
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g]
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    (M : Etale.DerivedCategoryModule A X) (H : Etale.DerivedCategoryModule A Y) : Prop :=
+  (Etale.compactSupportProjectionMap A g
+      ((Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).obj M) H ≫
+    (Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} A) g).map
+      (Etale.compactSupportProjectionMap A f M
+        ((Etale.upperStar (ModuleCat.{u + 1} A) g).mapDerivedCategory.obj H)) ≫
+    (Etale.unboundedEtaleLowerShriekCompIso A f g).hom.app
+      (((Etale.derivedTensor (ModuleCat.{u + 1} A) X).obj
+        ((Etale.upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategory.obj
+          ((Etale.upperStar (ModuleCat.{u + 1} A) g).mapDerivedCategory.obj H))).obj M)) =
+  (((Etale.derivedTensor (ModuleCat.{u + 1} A) Y).obj H).map
+      ((Etale.unboundedEtaleLowerShriekCompIso A f g).hom.app M) ≫
+    Etale.compactSupportProjectionMap A (f ≫ g) M H ≫
+    (Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} A) (f ≫ g)).map
+      (((Etale.derivedTensor (ModuleCat.{u + 1} A) X).map
+        ((Etale.unboundedEtaleUpperStarCompIso A f g).hom.app H)).app M))
+
+private theorem coordinate_ordinary_projection (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X T Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian T] [IsNoetherian Y]
+    (f : X ⟶ T) (g : T ⟶ Y)
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g]
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    (M : Etale.DerivedCategoryModule A X) (H : Etale.DerivedCategoryModule A Y) :
+    OrdinaryProjectionCompositionEquation A f g M H := by
+  exact (Etale.compactSupportProjectionMap_comp A f g M H).1
 
 private theorem integrationTranspose_zero (P : WeilConjectures.PurityFiniteSetting.{u})
     (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of P.field.k))

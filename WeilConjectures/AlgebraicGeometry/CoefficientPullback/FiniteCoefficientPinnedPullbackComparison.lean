@@ -34,6 +34,8 @@ import WeilConjectures.CategoryTheory.SixFunctors.Monoidal
 import WeilConjectures.CategoryTheory.Derived.DerivedTensorRightExact
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
+public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinary.FiniteDiscreteEncodingPullbackFixed
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.SingleFunctor
 
 /-! # The specified finite-coefficient inverse-image comparison
 
@@ -60,6 +62,164 @@ variable (A : Type u) [CommRing A] [Finite A]
   [TopologicalSpace A] [DiscreteTopology A] [IsTopologicalRing A]
 variable (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj R] [IsCommMonObj R]
+
+private theorem inverseMate_leftUniq
+    {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]
+    (G : C ≌ E) (H : D ≌ F)
+    {L₁ : C ⥤ D} {R₁ : D ⥤ C} {L₂ : E ⥤ F} {R₂ : F ⥤ E}
+    (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂)
+    (β : R₁ ⋙ G.functor ≅ H.functor ⋙ R₂) :
+    ((mateEquiv a₁ a₂).symm β.hom).natTrans =
+      ((G.toAdjunction.comp a₂).leftAdjointUniq
+        ((a₁.comp H.toAdjunction).ofNatIsoRight
+          (Iso.inverseCompIso (G := H)
+            (Iso.isoCompInverse (H := G) β ≪≫ Functor.associator _ _ _)))).hom := by
+  let α := (mateEquiv a₁ a₂).symm β.hom
+  let b := a₁.comp H.toAdjunction
+  let a := G.toAdjunction.comp a₂
+  let k := Iso.isoCompInverse (H := G) β ≪≫ Functor.associator _ _ _
+  let kr := Iso.inverseCompIso (G := H) k
+  have eq : (a.leftAdjointUniq (b.ofNatIsoRight kr)).hom =
+      (conjugateEquiv b a).symm kr.hom := by
+    ext M
+    apply (a.homEquiv _ _).injective
+    rw [Adjunction.homEquiv_leftAdjointUniq_hom_app, Adjunction.homEquiv_unit]
+    exact unit_conjugateEquiv_symm b a kr.hom M
+  change α.natTrans = (a.leftAdjointUniq (b.ofNatIsoRight kr)).hom
+  rw [eq]
+  apply (conjugateEquiv b a).injective
+  rw [Equiv.apply_symm_apply]
+  rw [← iterated_mateEquiv_conjugateEquiv a₁ a₂ G.toAdjunction H.toAdjunction α]
+  dsimp only [α]
+  rw [Equiv.apply_symm_apply]
+  ext M
+  simp [kr, k, mateEquiv, Iso.inverseCompIso, Iso.isoCompInverse]
+
+
+-- Step 8: the localized square on a single complex is the original heart square.
+
+private theorem single_square
+    {C D H V : Type*} [Category C] [Category D] [Category H] [Category V]
+    [Abelian C] [Abelian D] [Abelian H] [Abelian V]
+    [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory H]
+    [HasDerivedCategory V]
+    (F : C ⥤ D) (G : D ⥤ V) (J : C ⥤ H) (I : H ⥤ V)
+    [F.Additive] [G.Additive] [J.Additive] [I.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    [PreservesFiniteLimits J] [PreservesFiniteColimits J]
+    [PreservesFiniteLimits I] [PreservesFiniteColimits I]
+    (e : F ⋙ G ≅ J ⋙ I) (M : C) :
+    (mapDerivedCategorySquareIso e).hom.app ((DerivedCategory.singleFunctor C 0).obj M) ≫
+        I.mapDerivedCategory.map ((J.mapDerivedCategorySingleFunctor 0).hom.app M) ≫
+        (I.mapDerivedCategorySingleFunctor 0).hom.app (J.obj M) =
+      G.mapDerivedCategory.map ((F.mapDerivedCategorySingleFunctor 0).hom.app M) ≫
+        (G.mapDerivedCategorySingleFunctor 0).hom.app (F.obj M) ≫
+        (DerivedCategory.singleFunctor V 0).map (e.hom.app M) := by
+  apply (cancel_epi ((mapDerivedCategoryCompIso F G).hom.app
+    ((DerivedCategory.singleFunctor C 0).obj M))).1
+  simp only [mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    Category.assoc, Iso.hom_inv_id_app_assoc]
+  rw [mapDerivedCategoryCompIso_hom_app_singleFunctor,
+    mapDerivedCategoryNatIso_hom_app_singleFunctor]
+  erw [reassoc_of% (mapDerivedCategoryCompIso_hom_app_singleFunctor F G M)]
+
+-- Step 8: change the four exact comparison isomorphisms using naturality.
+
+private theorem single_square_transport
+    {C D H V : Type*} [Category C] [Category D] [Category H] [Category V]
+    [Abelian C] [Abelian D] [Abelian H] [Abelian V]
+    [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory H]
+    [HasDerivedCategory V]
+    (F : C ⥤ D) (G : D ⥤ V) (J : C ⥤ H) (I : H ⥤ V)
+    [F.Additive] [G.Additive] [J.Additive] [I.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    [PreservesFiniteLimits J] [PreservesFiniteColimits J]
+    [PreservesFiniteLimits I] [PreservesFiniteColimits I]
+    {F' : DerivedCategory C ⥤ DerivedCategory D}
+    {I' : DerivedCategory H ⥤ DerivedCategory V}
+    {G' : DerivedCategory D ⥤ DerivedCategory V}
+    {J' : DerivedCategory C ⥤ DerivedCategory H}
+    (a : F' ≅ F.mapDerivedCategory) (b : I' ≅ I.mapDerivedCategory)
+    (x : G.mapDerivedCategory ≅ G') (y : J.mapDerivedCategory ≅ J')
+    (e : F ⋙ G ≅ J ⋙ I) (M : C) :
+    (isoWhiskerRight a G' ≪≫ isoWhiskerLeft F.mapDerivedCategory x.symm ≪≫
+      mapDerivedCategorySquareIso e ≪≫ isoWhiskerRight y I.mapDerivedCategory ≪≫
+      isoWhiskerLeft J' b.symm).hom.app ((DerivedCategory.singleFunctor C 0).obj M) ≫
+        I'.map (y.inv.app ((DerivedCategory.singleFunctor C 0).obj M) ≫
+          (J.mapDerivedCategorySingleFunctor 0).hom.app M) ≫
+        b.hom.app ((DerivedCategory.singleFunctor H 0).obj (J.obj M)) ≫
+        (I.mapDerivedCategorySingleFunctor 0).hom.app (J.obj M) =
+      G'.map (a.hom.app ((DerivedCategory.singleFunctor C 0).obj M)) ≫
+        G'.map ((F.mapDerivedCategorySingleFunctor 0).hom.app M) ≫
+        x.inv.app ((DerivedCategory.singleFunctor D 0).obj (F.obj M)) ≫
+        (G.mapDerivedCategorySingleFunctor 0).hom.app (F.obj M) ≫
+        (DerivedCategory.singleFunctor V 0).map (e.hom.app M) := by
+  have hs := single_square F G J I e M
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    isoWhiskerRight_hom, isoWhiskerLeft_hom, whiskerRight_app, whiskerLeft_app,
+    Functor.map_comp, Category.assoc]
+  rw [← reassoc_of% b.inv.naturality (y.inv.app ((DerivedCategory.singleFunctor _ 0).obj M))]
+  rw [← reassoc_of% b.inv.naturality ((J.mapDerivedCategorySingleFunctor 0).hom.app M)]
+  simp only [Iso.inv_hom_id_app_assoc, ← Functor.map_comp_assoc]
+  simp only [Iso.hom_inv_id_app_assoc]
+  simp only [mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom,
+    NatTrans.comp_app, Category.assoc] at hs
+  rw [hs]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← reassoc_of% x.inv.naturality ((F.mapDerivedCategorySingleFunctor 0).hom.app M)]
+
+private theorem derivedSquare_transport
+    {C D H V : Type*}
+    [Category.{w + 1} C] [Abelian C] [IsGrothendieckAbelian.{w + 1} C]
+    [MonoidalCategory C] [MonoidalClosed C] [MonoidalPreadditive C] [BraidedCategory C]
+    [Abelian.HasFunctorialFlatResolution C]
+    [Category.{w + 1} D] [Abelian D] [IsGrothendieckAbelian.{w + 1} D]
+    [MonoidalCategory D] [MonoidalClosed D] [MonoidalPreadditive D] [BraidedCategory D]
+    [Abelian.HasFunctorialFlatResolution D]
+    [Category.{w + 1} H] [Abelian H] [IsGrothendieckAbelian.{w + 1} H]
+    [MonoidalCategory H] [MonoidalClosed H] [MonoidalPreadditive H] [BraidedCategory H]
+    [Abelian.HasFunctorialFlatResolution H]
+    [Category.{w + 1} V] [Abelian V] [IsGrothendieckAbelian.{w + 1} V]
+    [MonoidalCategory V] [MonoidalClosed V] [MonoidalPreadditive V] [BraidedCategory V]
+    [Abelian.HasFunctorialFlatResolution V]
+    (F : C ⥤ D) (G : D ⥤ V) (J : C ⥤ H) (I : H ⥤ V)
+    [F.Additive] [G.Additive] [J.Additive] [I.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    [PreservesFiniteLimits J] [PreservesFiniteColimits J]
+    [PreservesFiniteLimits I] [PreservesFiniteColimits I]
+    [F.IsLeftAdjoint] [G.IsLeftAdjoint] [J.IsLeftAdjoint] [I.IsLeftAdjoint]
+    [F.Monoidal] [G.Monoidal] [J.Monoidal] [I.Monoidal]
+    [F.PreservesFlat] [G.PreservesFlat] [J.PreservesFlat] [I.PreservesFlat]
+    {G' : DerivedCategory D ⥤ DerivedCategory V}
+    {J' : DerivedCategory C ⥤ DerivedCategory H}
+    (x : G.mapDerivedCategory ≅ G') (y : J.mapDerivedCategory ≅ J')
+    (e : F ⋙ G ≅ J ⋙ I) :
+    isoWhiskerRight (J.leftDerivedFunctorIsoMapDerivedCategory ≪≫ y).symm
+        I.leftDerivedFunctor ≪≫
+      leftDerivedFunctorCompNatIso F G J I e.symm ≪≫
+      isoWhiskerLeft F.leftDerivedFunctor (G.leftDerivedFunctorIsoMapDerivedCategory ≪≫ x) =
+    (isoWhiskerRight F.leftDerivedFunctorIsoMapDerivedCategory G' ≪≫
+      isoWhiskerLeft F.mapDerivedCategory x.symm ≪≫
+      mapDerivedCategorySquareIso e ≪≫
+      isoWhiskerRight y I.mapDerivedCategory ≪≫
+      isoWhiskerLeft J' I.leftDerivedFunctorIsoMapDerivedCategory.symm).symm := by
+  apply Iso.ext
+  ext K
+  simp only [leftDerivedFunctorCompNatIso, leftDerivedFunctorCompIso,
+    leftDerivedFunctorNatIso, mapDerivedCategorySquareIso,
+    Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv,
+    NatTrans.comp_app, isoWhiskerRight_hom, isoWhiskerRight_inv,
+    isoWhiskerLeft_hom, isoWhiskerLeft_inv, whiskerRight_app, whiskerLeft_app,
+    Functor.map_comp, Category.assoc, Iso.inv_hom_id_app_assoc,
+    mapDerivedCategoryNatIso_symm]
+  rw [I.leftDerivedFunctorIsoMapDerivedCategory.hom.naturality_assoc]
+  simp only [← Functor.map_comp_assoc, Iso.inv_hom_id_app]
+  rw [I.leftDerivedFunctorIsoMapDerivedCategory.hom.naturality_assoc]
+  rw [← x.hom.naturality]
+  simp only [CategoryTheory.Functor.map_id, Category.id_comp]
 
 /-- Identification of the concrete section-action heart with the Encoding heart.
 Source: the two Encoding normalization equations, clause (1)

@@ -74,6 +74,31 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
+/-- Tor amplitude in `[a, b]` on the whole derived category `D(T_proét, Λ)` of modules over the
+pulled-back condensed ring `Λ_T = p_T^* Λ`, for any commutative condensed ring `Λ` and any
+scheme `T`: `K ⊗ᴸ_{Λ_T} M` has cohomology concentrated in `[a, b]` for every module `M`
+placed in degree zero. It is the generic `DerivedCategory.torAmplitudeIn` at this category;
+no boundedness or constructibility is imposed on `K`.
+Source: latest blueprint sk-prop-sf-open-closed-triangle, def-weil-finite-tor-amplitude
+(blueprint: def-weil-finite-tor-amplitude). -/
+abbrev condensedTorAmplitudeIn
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] (T : Scheme.{u}) (a b : ℤ) :
+    ObjectProperty (DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))) :=
+  _root_.DerivedCategory.torAmplitudeIn _ a b
+
+/-- Finite Tor amplitude on the whole derived category `D(T_proét, Λ)`: Tor amplitude in some
+interval `[a, b]`. Any commutative condensed ring `Λ`, any scheme `T`, any object `K`.
+Source: latest blueprint sk-prop-sf-open-closed-triangle, def-weil-finite-tor-amplitude
+(blueprint: def-weil-finite-tor-amplitude). -/
+abbrev condensedFiniteTorAmplitude
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] (T : Scheme.{u}) :
+    ObjectProperty (DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))) :=
+  _root_.DerivedCategory.finiteTorAmplitude _
+
 /-- Bounded constructible objects of finite Tor amplitude in the ordinary derived
 category of modules over the pulled-back condensed ring. `finiteTorAmplitude`
 tests the actual relative derived tensor with every module placed in degree zero.
@@ -95,5 +120,34 @@ abbrev CondensedConstructibleFiniteTor
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (T : Scheme.{u}) :=
   (condensedConstructibleFiniteTor Λ T).FullSubcategory
+
+/-- The bounded constructible form is the restriction of the whole-category notion:
+`K ∈ D^b_{ctf}(T, Λ)` iff `K ∈ D^b_c(T, Λ)` and `K` has finite Tor amplitude in `D(T_proét, Λ)`.
+Source: latest blueprint sk-prop-sf-open-closed-triangle, def-weil-finite-tor-amplitude
+(blueprint: def-weil-finite-tor-amplitude). -/
+theorem condensedConstructibleFiniteTor_iff
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] (T : Scheme.{u})
+    (K : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))) :
+    condensedConstructibleFiniteTor Λ T K ↔
+      boundedConstructible (condensedRingObj Λ T) K ∧ condensedFiniteTorAmplitude Λ T K :=
+  Iff.rfl
+
+/-- Finite Tor amplitude is attained on an ordered interval `a ≤ b`, as in the source.
+(blueprint: def-weil-finite-tor-amplitude). -/
+theorem condensedFiniteTorAmplitude_iff_exists_le
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] (T : Scheme.{u})
+    (K : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))) :
+    condensedFiniteTorAmplitude Λ T K ↔
+      ∃ a b : ℤ, a ≤ b ∧ condensedTorAmplitudeIn Λ T a b K := by
+  constructor
+  · rintro ⟨a, b, h⟩
+    exact ⟨min a b, b, min_le_right a b,
+      _root_.DerivedCategory.torAmplitudeIn.mono (min_le_left a b) le_rfl h⟩
+  · rintro ⟨a, b, -, h⟩
+    exact ⟨a, b, h⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -16,6 +16,7 @@ public import WeilConjectures.Compactification.Refinement
 public import WeilConjectures.Compactification.RefinementCategory
 public import Mathlib.AlgebraicGeometry.Over
 public import Mathlib.CategoryTheory.Adjunction.Basic
+public import WeilConjectures.AlgebraicGeometry.Sf.SfFullCohomologicalDimension
 
 /-!
 # Ambient exceptional right adjoint datum
@@ -48,5 +49,51 @@ noncomputable def sfAmbientCompactSupportCandidate
     (d : Compactification f) : proEtaleDerivedCategory X A ⥤ proEtaleDerivedCategory Y A :=
   (sfIntrinsicExtensionByZero d.i A).mapDerivedCategory ⋙
     proEtaleConstantDerivedDirectImage d.g A
+
+/-- The actual ambient datum. Its adjunction at the specified compactification `c` is
+`adjunction c`; thus the family and the distinguished adjunction agree by definition.
+`Adjunction.homEquiv` supplies precisely the natural bijections in the node, with unit
+`homEquiv (𝟙 _)` and counit `homEquiv.symm (𝟙 _)`. All comparison isomorphisms are natural
+isomorphisms of functors on the whole ordinary derived categories. Only the proper part
+of `c` receives a FullCD bound.
+Source: blueprint order 1488 (blueprint: def-weil-ambient-exceptional-adjoint). -/
+structure SfAmbientExceptionalRightAdjointDatum
+    (A : Type u) [CommRing A] [Finite A] {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (c : Compactification f) where
+  /-- Nonnegative uniform full cohomological dimension bound for the chosen proper part. -/
+  fullCD : ∃ c_cd : ℕ, sfFullCohomologicalDimension c.g A c_cd
+  /-- Chosen ambient right adjoints for all compactifications. -/
+  rightAdjoint : ∀ _d : Compactification f,
+    proEtaleDerivedCategory Y A ⥤ proEtaleDerivedCategory X A
+  /-- Natural Hom bijections, including the one at `c`. -/
+  adjunction : ∀ d : Compactification f,
+    sfAmbientCompactSupportCandidate A d ⊣ rightAdjoint d
+  /-- Natural comparison of compact-support candidates along a refinement. -/
+  theta : ∀ {d e : Compactification f} (_v : d ⟶ e),
+    sfAmbientCompactSupportCandidate A d ≅ sfAmbientCompactSupportCandidate A e
+  /-- Contravariant natural comparison of right adjoints along a refinement. -/
+  rho : ∀ {d e : Compactification f} (_v : d ⟶ e), rightAdjoint e ≅ rightAdjoint d
+  /-- Refinement comparisons identify the units. -/
+  unit_compatibility : ∀ {d e : Compactification f} (v : d ⟶ e)
+    (K : proEtaleDerivedCategory X A),
+    (adjunction e).unit.app K ≫
+        (rho v).hom.app ((sfAmbientCompactSupportCandidate A e).obj K) =
+      (adjunction d).unit.app K ≫ (rightAdjoint d).map ((theta v).hom.app K)
+  /-- Refinement comparisons identify the counits. -/
+  counit_compatibility : ∀ {d e : Compactification f} (v : d ⟶ e)
+    (L : proEtaleDerivedCategory Y A),
+    (sfAmbientCompactSupportCandidate A d).map ((rho v).hom.app L) ≫
+        (adjunction d).counit.app L =
+      (theta v).hom.app ((rightAdjoint e).obj L) ≫ (adjunction e).counit.app L
+  /-- Identity refinements have identity left comparisons. -/
+  theta_id : ∀ d : Compactification f, theta (𝟙 d) = Iso.refl _
+  /-- Identity refinements have identity right comparisons. -/
+  rho_id : ∀ d : Compactification f, rho (𝟙 d) = Iso.refl _
+  /-- Composition coherence for the left comparisons. -/
+  theta_comp : ∀ {d e h : Compactification f} (v : d ⟶ e) (w : e ⟶ h),
+    theta (v ≫ w) = theta v ≪≫ theta w
+  /-- Composition coherence for the contravariant right comparisons. -/
+  rho_comp : ∀ {d e h : Compactification f} (v : d ⟶ e) (w : e ⟶ h),
+    rho (v ≫ w) = rho w ≪≫ rho v
 
 end AlgebraicGeometry.Scheme

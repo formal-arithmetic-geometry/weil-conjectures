@@ -19,6 +19,13 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Projection.ProEtaleProject
 import all WeilConjectures.SmoothPurity.SheafRingCoefficientOrdinaryAdjunction
 import WeilConjectures.Algebra.Homology.IndependentExtensionTensor.ExtensionTensorComparisonIndependent
 import WeilConjectures.SecSmoothPurity.ModuleTensorGenerators
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.CategoryTheory.Sites.Sheafification
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
+public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.FourCornersSupplement
+public import WeilConjectures.AlgebraicGeometry.ProEtaleInverseImage
+public import WeilConjectures.AlgebraicGeometry.RingedTopoiInverseImageTensorComparison
+public import WeilConjectures.CategoryTheory.AlgebraicInverseImageOfUniverses
 
 /-! # Ordinary scalar balancing and its unbounded chain comparison
 
@@ -633,5 +640,54 @@ private theorem total_single (P : CochainComplex A ℤ) :
       (L.map_isZero (HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 C b hb))
 
 end TotalComparison
+
+end AlgebraicGeometry.ProEtale
+
+namespace AlgebraicGeometry.ProEtale
+
+/-- The ordinary comparison beta, oriented from restriction after B-pullback to
+A-pullback after restriction. It is the inverse of the published normalized mate.
+Source: Stacks 03EL (blueprint: lem-sp-proetale-scalar-balancing-chain). -/
+def scalarBalancingBeta {A B : Type u} [CommRing A] [CommRing B]
+    (φ : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    proEtaleConstantRingPullback B f ⋙ scalarMateRestriction φ X ≅
+      scalarMateRestriction φ Y ⋙ proEtaleConstantRingPullback A f :=
+  (@asIso _ _ _ _
+    (proEtaleRingRestrictionPullbackInv f
+      (proEtaleConstantRing Y A) (proEtaleConstantRing Y B)
+      (proEtaleConstantRing X A) (proEtaleConstantRing X B)
+      (proEtaleConstantRingMap (T := Y) φ) (proEtaleConstantRingMap (T := X) φ)
+      (proEtaleConstantRingComparison f A) (proEtaleConstantRingComparison f B)
+      (proEtaleConstantInverseImageMap_naturality f
+        (CommRingCat.ofHom (RingHom.ulift φ))).symm)
+    (proEtaleRingRestrictionPullbackInv_isIso f
+      (proEtaleConstantRing Y A) (proEtaleConstantRing Y B)
+      (proEtaleConstantRing X A) (proEtaleConstantRing X B)
+      (proEtaleConstantRingMap (T := Y) φ) (proEtaleConstantRingMap (T := X) φ)
+      (proEtaleConstantRingComparison f A) (proEtaleConstantRingComparison f B)
+      (proEtaleConstantInverseImageMap_naturality f
+        (CommRingCat.ofHom (RingHom.ulift φ))).symm)).symm
+
+/-- The unit-section formula characterizing t, using images of presheaf pure tensors.
+Source: Stacks 03EL (blueprint: lem-sp-proetale-scalar-balancing-chain). -/
+def IsScalarBalancing {A B : Type u} [CommRing A] [CommRing B]
+    (φ : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (t : scalarMateOrdinaryTensor φ Y ⋙ proEtaleConstantRingPullback A f ≅
+      proEtaleConstantRingPullback A f ⋙ scalarMateOrdinaryTensor φ X) : Prop :=
+  ∀ (M : proEtaleRingModules Y (proEtaleConstantRing Y A)) (V : Y.ProEt)
+    (x : M.val.obj (Opposite.op V))
+    (s : (proEtaleConstantRing Y B).obj.obj (Opposite.op V)),
+    (t.hom.app M).val.app (Opposite.op ((proEtaleBaseChange f).obj V))
+      (((proEtaleConstantRingAdjunction A f).unit.app
+        ((scalarMateOrdinaryTensor φ Y).obj M)).val.app (Opposite.op V)
+          (proEtaleTensorPair Y (proEtaleConstantRing Y A) M
+            (scalarMateCoefficient φ Y) (Opposite.op V) x s)) =
+      proEtaleTensorPair X (proEtaleConstantRing X A)
+        ((proEtaleConstantRingPullback A f).obj M) (scalarMateCoefficient φ X)
+        (Opposite.op ((proEtaleBaseChange f).obj V))
+        (((proEtaleConstantRingAdjunction A f).unit.app M).val.app (Opposite.op V) x)
+        (((proEtaleRingDirectImageMap f (proEtaleConstantRing Y B)
+          (proEtaleConstantRing X B) (proEtaleConstantRingComparison f B)).hom.app
+            (Opposite.op V)) s)
 
 end AlgebraicGeometry.ProEtale

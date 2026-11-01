@@ -29,3 +29,22 @@ set_option linter.auxLemma false in
 attribute [local instance 100000] DerivedCategoryModule._proof_1 DerivedCategoryModule._proof_2
 
 end AlgebraicGeometry.Etale.FiniteSmoothPurity
+
+namespace AlgebraicGeometry.Etale.FiniteSmoothPurity
+
+/-- Generator-normalized derived root comparisons are exact degree-zero insertion transposes.
+Source: Stacks 06YY; the record's derived normalization and adjunction naturality.
+(blueprint: lem-pur-finite-smooth-root-derived-normalization).
+Proof: move the single image of the sheaf comparison through the derived adjunction
+Hom equivalence. Naturality of the exact restriction/single comparison identifies the
+result with the single image of the ordinary adjunct. The record's defining
+normalization gives the claimed equality. -/
+theorem CoefficientLineComparison.derived_eq_scalarInsertion
+    {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    {phi : A →+* B} {N M : ℕ} {hA : (N : A) = 0} {hB : (M : B) = 0}
+    {T : Scheme.{u}} (e : CoefficientLineComparison phi N M hA hB T) :
+    e.derivedIso.hom = SheafExactDegreeZero.scalarAdjointInsertion T.smallEtaleTopology phi
+      ((ProEtale.etaleSheafExtendScalarsAdjunction phi T).homEquiv _ _ e.sheafIso.hom) := by
+  exact e.derived_normalization.trans (scalarSingleMap_eq_scalarInsertion phi T _ _ e.sheafIso.hom)
+
+end AlgebraicGeometry.Etale.FiniteSmoothPurity

@@ -10,6 +10,9 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Shi
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.PurityRelativeKummerBaseChange
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.PurityRelativeKummerGeometric
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.PurityRelativeKummerRelativeConclusions
 
 /-!
 # Relative affine-line acyclicity and the actual Kummer generator
@@ -160,5 +163,67 @@ noncomputable def KummerBaseChangeConclusions (P : PurityFiniteSetting.{u})
       (P.derivedSheaf h (Line Y) true)) ∧
   IsIso ((ProEtale.derivedBaseChangeMap (ModuleCat.{u + 1} P.Coefficient)
     (puncturedSquare g)).app (P.derivedSheaf h (Punctured Y) true))
+
+end WeilConjectures.PurityFiniteSetting
+
+namespace WeilConjectures.PurityFiniteSetting
+
+/-- The affine line and punctured line over a separated finite-type k-scheme, with
+canonical units, the actual Kummer generator, higher vanishing and both kinds of
+base change, including geometric points which need not be of finite type.
+Source: blueprint sk-prop-a1-kummer, prop-pur-gm-relative-kummer
+(blueprint: prop-pur-gm-relative-kummer).
+
+Proof:
+1. Set r=ell^N and choose a primitive r-th root zeta.
+lem-pur-relative-kummer-coefficient-normalization makes A finite free over Z/r,
+trivializes the twist naturally and fixes the module/abelian and Kummer pullback maps.
+Apply thm-pur-kummer-affine-line to obtain the absolute constants, Kummer generator and
+vanishings, with their specified maps.
+2. For C=A^1_k or G_m,k and any k-scheme B,
+lem-pur-relative-kummer-strict-local-invariance identifies RGamma(C_S,L) with
+RGamma(C,L) by the actual pullback for every strict localization S of B.
+lem-pur-relative-kummer-normalized-stalks identifies the relative derived stalks
+through this map, preserving units and Kummer germs. Its conservative-stalk conclusion
+applied to step 1 gives clauses (1)-(3) over B, including untwisted acyclicity and
+restriction along j.
+3. For g : B' -> B apply lem-pur-relative-kummer-exchange-generators with L=A(1)_B.
+Its unit identity gives degree zero; its edge identity carries the coordinate class to
+the pulled-back class, which is kappa(t') by
+lem-pur-relative-kummer-coefficient-normalization. Step 2 gives the required unit and
+generator isomorphisms and vanishings over both bases. The lemma's cohomological
+criterion proves that both specified etale exchange maps are invertible. This applies
+also to B'=Spec Omega, since neither step assumes finite type for B.
+4. Both projections are affine, hence qcqs, as are all their base changes. Apply
+lem-pur-relative-kummer-site-normalization: exact comparison transports the vanishings
+and actual units of step 2; its equality c^1(kappa_et)=kappa identifies the actual
+pro-etale edge generator; and its conjugation identity transports the exchanges of
+step 3. Thus every clause holds in the prescribed pro-etale convention, including
+arbitrary geometric points. Pulling the coordinate pulls its Kummer class to kappa(t'),
+so the fibre computations have the stated normalization. -/
+theorem relative_kummer (P : PurityFiniteSetting.{u})
+    (h : P.ramificationIndex ∣ P.level) (Y : Scheme.{u})
+    [Y.Over (Spec (CommRingCat.of P.field.k))]
+    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of P.field.k))]
+    [QuasiCompact (Y ↘ Spec (CommRingCat.of P.field.k))]
+    [IsSeparated (Y ↘ Spec (CommRingCat.of P.field.k))] :
+    P.RelativeKummerConclusions h Y (Y ↘ Spec (CommRingCat.of P.field.k)) ∧
+    (∀ (Y' : Scheme.{u}) [Y'.Over (Spec (CommRingCat.of P.field.k))]
+      [LocallyOfFiniteType (Y' ↘ Spec (CommRingCat.of P.field.k))]
+      [QuasiCompact (Y' ↘ Spec (CommRingCat.of P.field.k))]
+      [IsSeparated (Y' ↘ Spec (CommRingCat.of P.field.k))]
+      (g : Y' ⟶ Y) [g.IsOver (Spec (CommRingCat.of P.field.k))],
+      P.KummerBaseChangeConclusions h g (Y ↘ Spec (CommRingCat.of P.field.k))) ∧
+    ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω]
+      (g : Spec (CommRingCat.of Ω) ⟶ Y),
+      P.KummerBaseChangeConclusions h g (Y ↘ Spec (CommRingCat.of P.field.k)) ∧
+      P.RelativeKummerConclusions h (Spec (CommRingCat.of Ω))
+        (g ≫ Y ↘ Spec (CommRingCat.of P.field.k)) := by
+  let a := Y ↘ Spec (CommRingCat.of P.field.k)
+  have hY : P.RelativeKummerConclusions h Y a :=
+    relative_kummer_relative_conclusions P h Y a
+      (fun Ω [Field Ω] [IsAlgClosed Ω] s =>
+        relative_kummer_geometric_stalk_conclusions P h Y a Ω s)
+  exact ⟨hY, relative_kummer_base_change_conclusions P h Y⟩
 
 end WeilConjectures.PurityFiniteSetting

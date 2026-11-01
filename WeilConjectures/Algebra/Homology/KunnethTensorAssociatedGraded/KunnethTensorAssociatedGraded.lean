@@ -108,3 +108,37 @@ noncomputable def tensorFilteredImage (K L : ModuleComplex R)
   imageSubobject (tensorFilteredDesc R K L FK FL n)
 
 end CochainComplex.KunnethTensorAssociatedGraded
+
+namespace CochainComplex.KunnethTensorAssociatedGraded
+
+private noncomputable def tensorFilteredStepMap (K L : ModuleComplex R)
+    (FK : DecreasingFiltration K) (FL : DecreasingFiltration L) (n : ℤ) :
+    tensorFilteredSource R K L FK FL (n + 1) ⟶
+      tensorFilteredSource R K L FK FL n := by
+  let f (q : {q : ℤ × ℤ // q.1 + q.2 = n + 1}) :
+      CochainComplex.mapBifunctor (FK.step q.1.1) (FL.step q.1.2)
+          (curriedTensor (ModuleCat.{u} R)) ⟶
+        CochainComplex.mapBifunctor (FK.step q.1.1) (FL.step (q.1.2 - 1))
+          (curriedTensor (ModuleCat.{u} R)) :=
+    HomologicalComplex.mapBifunctorMap
+      (𝟙 (FK.step q.1.1 : ModuleComplex R))
+      (Subobject.ofLE (FL.step q.1.2) (FL.step (q.1.2 - 1))
+        (FL.antitone_step (by omega)))
+      (curriedTensor (ModuleCat.{u} R)) (ComplexShape.up ℤ)
+  exact Limits.Sigma.desc (fun q ↦
+    f q ≫ Limits.Sigma.ι (fun q : {q : ℤ × ℤ // q.1 + q.2 = n} ↦
+      CochainComplex.mapBifunctor (FK.step q.1.1) (FL.step q.1.2)
+        (curriedTensor (ModuleCat.{u} R)))
+      ⟨(q.1.1, q.1.2 - 1), by omega⟩)
+
+private theorem tensorFilteredStepMap_desc (K L : ModuleComplex R)
+    (FK : DecreasingFiltration K) (FL : DecreasingFiltration L) (n : ℤ) :
+    tensorFilteredStepMap R K L FK FL n ≫ tensorFilteredDesc R K L FK FL n =
+      tensorFilteredDesc R K L FK FL (n + 1) := by
+  apply Limits.Sigma.hom_ext
+  intro q
+  simp [tensorFilteredStepMap, tensorFilteredDesc, tensorSummandMap,
+    HomologicalComplex.mapBifunctorMap, ← HomologicalComplex₂.total.map_comp,
+    ← Functor.map_comp, Subobject.ofLE_arrow]
+
+end CochainComplex.KunnethTensorAssociatedGraded

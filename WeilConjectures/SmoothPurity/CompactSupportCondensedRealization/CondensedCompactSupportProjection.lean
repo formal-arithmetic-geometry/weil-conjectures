@@ -101,6 +101,40 @@ private meta def exactRefinementInstanceCongr : Tactic := fun stx =>
     let e ← mkAppM ``eq_of_heq #[he]
     (← getMainGoal).assign (← mkAppM ``Eq.mp #[e, proof])
 
+/-- Coefficient extension commutes with the original refinement map itself.
+Source: blueprint proof Steps 15--16; proper/open coefficient mate pasting
+(blueprint: def-pur-condensed-compact-support-projection).
+Proof: transpose the two composites under the open adjunction. Coefficient restriction
+commutes with the original open unit and the proper counit, so both transposes are
+the same section-normalized restriction map. Uniqueness in the open Hom bijection
+and the proper compositor identify the original maps. This applies verbatim to the
+finite-valued closure coefficient and requires no new choice of comparison arrow. -/
+theorem condensedProjection_refinement {X Y : Scheme.{u}} {f : X ⟶ Y}
+    {c d : Compactification f} (r : c.Refinement d)
+    (K : BoundedConstructible (condensedRingObj Λ X))
+    (hK : boundedConstructible (condensedRingObj Λ' X) ((condensedScalar a X).obj K.obj)) :
+    (condensedScalar a Y).map ((fieldRefinement Λ r).app K) ≫
+        (condensedProjection a c).app K.obj =
+      (condensedProjection a d).app K.obj ≫
+        (fieldRefinement Λ' r).app ⟨(condensedScalar a X).obj K.obj, hK⟩ := by
+  have hproper := condensedPushScalar_refinement_factorization a r K
+  have hopen := fieldProperOpen_scalar_pasting a r K hK
+  let pasted := (condensedPushScalar a d.g).app
+      ((CondensedRing.openImmersionLowerShriek Λ d.i).mapDerivedCategory.obj K.obj) ≫
+    (CondensedRing.lowerStar Λ' d.g).rightDerivedFunctor.map
+      ((condensedScalar a d.Z).map (fieldProperOpen Λ r K) ≫
+        (condensedPushScalar a r.hom).app
+          ((CondensedRing.openImmersionLowerShriek Λ c.i).mapDerivedCategory.obj K.obj) ≫
+        (CondensedRing.lowerStar Λ' r.hom).rightDerivedFunctor.map
+          ((condensedOpenScalar a c.i).hom.app K.obj)) ≫
+    ((fieldPushComp Λ' r.hom d.g).hom ≫
+      eqToHom (congrArg (fieldDerivedLowerStar Λ') r.hom_g)).app
+        ((CondensedRing.openImmersionLowerShriek Λ' c.i).mapDerivedCategory.obj
+          ((condensedScalar a X).obj K.obj))
+  calc
+    _ = pasted := by exact_refinement_instance_congr hproper
+    _ = _ := by exact_refinement_instance_congr hopen
+
 attribute [local irreducible] fieldProperOpen fieldOpenAdjunction
   fieldProperOpenRestrictionNat
 attribute [local irreducible] CondensedRing.derivedUpperStarLowerStarAdjunction

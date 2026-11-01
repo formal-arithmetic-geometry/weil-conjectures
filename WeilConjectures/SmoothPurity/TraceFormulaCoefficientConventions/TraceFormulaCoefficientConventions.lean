@@ -89,6 +89,12 @@ Source: blueprint (blueprint: def-trf-coefficient-conventions). -/
 noncomputable abbrev geometricBaseChange (T : TraceFormulaCoefficientConventions.{u}) :
     Scheme.{u} := (T.datum.geometricFiber T.X₀).left
 
+/-- The structure morphism `a_X : X → Spec k`.
+Source: blueprint (blueprint: def-trf-coefficient-conventions). -/
+noncomputable abbrev structureMap (T : TraceFormulaCoefficientConventions.{u}) :
+    T.geometricBaseChange ⟶ Spec (CommRingCat.of T.datum.k) :=
+  (T.datum.geometricFiber T.X₀).hom
+
 /-- The recorded finite-coefficient inverse image along an arbitrary scheme morphism.
 Source: blueprint (blueprint: def-trf-coefficient-conventions). -/
 noncomputable def derivedPullback (T : TraceFormulaCoefficientConventions.{u})
@@ -98,6 +104,31 @@ noncomputable def derivedPullback (T : TraceFormulaCoefficientConventions.{u})
   unfold coefficientRing
   rw [← Nat.sub_add_cancel T.level_pos]
   exact finiteDerivedPullback T.coefficients.l T.coefficientField (T.level - 1) f
+
+/-- Finite type and separation survive the geometric base change used in the conventions.
+These are the usual pullback instances, with no additional geometric hypothesis.
+Source: blueprint (blueprint: def-trf-coefficient-conventions). -/
+noncomputable instance geometricFiniteType (T : TraceFormulaCoefficientConventions.{u}) :
+    LocallyOfFiniteType T.structureMap := by
+  change LocallyOfFiniteType (CategoryTheory.Limits.pullback.snd T.X₀.hom
+    (Spec.map (CommRingCat.ofHom (algebraMap T.datum.k₀ T.datum.k))))
+  infer_instance
+
+/-- Quasi-compactness survives the geometric base change.
+Source: blueprint (blueprint: def-trf-coefficient-conventions). -/
+noncomputable instance geometricQuasiCompact (T : TraceFormulaCoefficientConventions.{u}) :
+    QuasiCompact T.structureMap := by
+  change QuasiCompact (CategoryTheory.Limits.pullback.snd T.X₀.hom
+    (Spec.map (CommRingCat.ofHom (algebraMap T.datum.k₀ T.datum.k))))
+  infer_instance
+
+/-- Separation survives the geometric base change.
+Source: blueprint (blueprint: def-trf-coefficient-conventions). -/
+noncomputable instance geometricSeparated (T : TraceFormulaCoefficientConventions.{u}) :
+    IsSeparated T.structureMap := by
+  change IsSeparated (CategoryTheory.Limits.pullback.snd T.X₀.hom
+    (Spec.map (CommRingCat.ofHom (algebraMap T.datum.k₀ T.datum.k))))
+  infer_instance
 
 end TraceFormulaCoefficientConventions
 end WeilConjectures

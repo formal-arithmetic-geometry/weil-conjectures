@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.VectorTraceScalar.VectorTraceScalarData
+public import WeilConjectures.AlgebraicGeometry.VectorTraceScalar.VectorTraceScalarFrameRestriction
+public import WeilConjectures.AlgebraicGeometry.VectorTraceScalar.VectorTraceScalarFrameSource
 
 /-! # Frame descent of the affine scalar trace square
 
@@ -49,6 +51,9 @@ theorem frame_scalar_square (N : ℕ) (hN : 0 < N) (φ : A →+* B)
         (vector φ N hN hA hB S hS r F ≫ vectorBundleIntegration N hN B hB S hS r F) =
       (ordinaryFinitePullback B V.ι).map
         ((scalarExtension φ S).map (vectorBundleIntegration N hN A hA S hS r F) ≫
-          unit φ S) := by sorry
+          unit φ S)   := by
+  obtain ⟨t, D, _, _⟩ := exists_affineSpaceTopTrace N hN A hA
+  rw [frame_scalar_restriction N hN φ hA hB ha S hS r F V e t D]
+  exact frame_scalar_source N hN φ hA hB S hS r F V e t D
 
 end AlgebraicGeometry.Etale.VectorTraceScalar

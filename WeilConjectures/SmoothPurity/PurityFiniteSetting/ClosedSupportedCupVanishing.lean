@@ -17,6 +17,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additi
 import WeilConjectures.SmoothPurity.PurityFiniteSetting.ClosedUnitIso
 import WeilConjectures.SmoothPurity.PurityFiniteSetting.PullbackZero
 import WeilConjectures.SmoothPurity.PurityFiniteSetting.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.AffineZeroPurity.CoordinateSingleTensorLax
 
 /-!
 # Vanishing of the closed-support cup action
@@ -36,6 +37,29 @@ universe u
 open CategoryTheory CategoryTheory.Limits MonoidalCategory AlgebraicGeometry
 
 namespace WeilConjectures.PurityFiniteSetting
+
+/-- Regard an ordinary class as a class with full support using the direct-image
+identity isomorphism. Source: the full-support case of the supported-Hom construction,
+Stacks 0G76 (blueprint: lem-pur-closed-supported-cup-vanishing). -/
+def closedCupFullSupport (P : PurityFiniteSetting.{u}) (X : Scheme.{u}) (a t : ℤ)
+    (α : P.FunctorialCupOrdinaryH true X a t) : P.FunctorialCupH true (𝟙 X) a t :=
+  (P.functorialCupSingle true X).map
+    ((ProEtale.lowerStarId (ModuleCat.{u + 1} P.Coefficient) X).hom.app (P.constant X)) ≫ α
+
+/-- The existing supported cup with first support all of X, transported from
+X times_X Z to Z along the canonical second-projection isomorphism.
+Source: the tensor-morphism definition of def-pur-supported-cup, and Stacks 0G76
+(blueprint: lem-pur-closed-supported-cup-vanishing). -/
+def closedSupportedCup (P : PurityFiniteSetting.{u})
+    {Z X : Scheme.{u}} [X.Over (Spec (.of P.field.k))]
+    (i : Z ⟶ X) [IsClosedImmersion i] (a b t s : ℤ)
+    (α : P.FunctorialCupOrdinaryH true X a t) (β : P.FunctorialCupH true i b s) :
+    P.FunctorialCupH true i (a + b) (t + s) :=
+  P.functorialCupChangeSupport true i (ProEtale.cupIntersection (𝟙 X) i)
+    (pullback.snd (𝟙 X) i)
+    (pullback.condition.symm) (a + b) (t + s)
+    (P.functorialCup true (X ↘ Spec (.of P.field.k)) (𝟙 X) i a b t s
+      (P.closedCupFullSupport X a t α) β)
 
 /-- The forgetting-support square identifies the ordinary cup with the
 forgetful image of the supported cup. Source: Stacks 0G77

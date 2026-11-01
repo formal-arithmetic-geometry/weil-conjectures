@@ -30,6 +30,16 @@ import WeilConjectures.AlgebraicGeometry.Proper.ProperDerivedDirectImageCoproduc
 import WeilConjectures.NumberTheory.Padics.NonunitCoefficientStages
 import all WeilConjectures.Algebra.Homology.Coefficient.CoefficientEvaluationModels
 import WeilConjectures.Algebra.Homology.System.SystemRingedSequenceSite
+public import WeilConjectures.AlgebraicGeometry.Exceptional.ExceptionalOriginAdjunctionEvaluation
+public import WeilConjectures.AlgebraicGeometry.Exceptional.ExceptionalProOriginExactLinear
+public import WeilConjectures.AlgebraicGeometry.Exceptional.ExceptionalProperOpenOriginComparison
+public import WeilConjectures.AlgebraicGeometry.Exceptional.ExceptionalSiteOriginComparisonCore
+public import WeilConjectures.AlgebraicGeometry.Exceptional.ExceptionalSystemInterfaces
+public import WeilConjectures.AlgebraicGeometry.Exceptional.ExceptionalSystemTransport
+public import WeilConjectures.AlgebraicGeometry.FixedExceptionalSiteOriginEquivalence
+public import WeilConjectures.SixFunctors.ExceptionalIntegralReconstruction.ExceptionalIntegralNormalizedAdjunction
+public import WeilConjectures.SixFunctors.ExceptionalIntegralReconstruction.ExceptionalIntegralRealizationAssembly
+public import WeilConjectures.SixFunctors.ExceptionalIntegralReconstruction.ExceptionalIntegralReconstructionEquivalence
 
 /-! # Integral exceptional inverse image from actual coefficient systems
 
@@ -1468,5 +1478,77 @@ def integralExceptionalInverseImage :
     DerivedCategory (scalarReductionSource l E Y) ⥤
       DerivedCategory (scalarReductionSource l E X) :=
   integralExceptionalSystem l E D hl f ⋙ coefficientSequenceLimit l E X
+
+end WeilConjectures
+
+namespace WeilConjectures
+
+/-- On finite-Tor constructible inputs this strict-system realization is the
+integral exceptional operation of the recorded coefficient-compatible System.
+This is an identification of functors, so it identifies their action on every morphism.
+Source: blueprint integral exceptional construction and constructible adjunction
+(blueprint: def-pur-adic-exceptional-system-realization).
+Proof: the ordinary system construction and normalized-DVR effectivity give uniform
+constructible and Tor bounds and the integral adjunction. The left adjoint is the
+same completed compact-support functor as System.ring.integralLeft, using its
+normalization on integral representatives. Both right adjoints therefore represent
+the same Hom functor on the full finite-Tor subcategories. Uniqueness of right
+adjoints gives the natural isomorphism after the full inclusion. The comparison
+uses no smoothness or purity theorem and no choice of a lift of levelwise arrows. -/
+theorem integralExceptionalInverseImage_on_ctf
+    (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
+    (S : ConstructibleExceptionalCoefficients.System l Ω D hl (f := f)) :
+    Nonempty
+      ((finiteTorConstructibleIntegral l E Y).ι ⋙
+          integralExceptionalInverseImage l E D hl f ≅
+        (S.ring.operation (integralExceptionalCompactification D f)
+          (.integral { carrier := E })).G ⋙ (finiteTorConstructibleIntegral l E X).ι) := by
+  classical
+  let c := integralExceptionalCompactification D f
+  let T := integralExceptionalSupport l E D hl f
+  let G := integralExceptionalAdjoint l E D hl f
+  let CX : ExceptionalSystemSiteComparison (integralExceptionalIntegers l E)
+      (integralExceptionalUniformizer l E) X T.PX :=
+    { proEvaluation := (integralExceptionalComparison l E X T.PX).evaluation
+      ordinary := (integralExceptionalComparison l E X T.PX).ordinary
+      image := (integralExceptionalComparison l E X T.PX).derived }
+  let CY : ExceptionalSystemSiteComparison (integralExceptionalIntegers l E)
+      (integralExceptionalUniformizer l E) Y T.PY :=
+    { proEvaluation := (integralExceptionalComparison l E Y T.PY).evaluation
+      ordinary := (integralExceptionalComparison l E Y T.PY).ordinary
+      image := (integralExceptionalComparison l E Y T.PY).derived }
+  let CZ : ExceptionalSystemSiteComparison (integralExceptionalIntegers l E)
+      (integralExceptionalUniformizer l E) c.Z T.PZ :=
+    { proEvaluation := (integralExceptionalComparison l E c.Z T.PZ).evaluation
+      ordinary := (integralExceptionalComparison l E c.Z T.PZ).ordinary
+      image := (integralExceptionalComparison l E c.Z T.PZ).derived }
+  have (n : ℕ) : Finite (integralExceptionalIntegers l E ⧸
+      (Ideal.span ({integralExceptionalUniformizer l E} :
+        Set (integralExceptionalIntegers l E))) ^ (n + 1)) :=
+    (exceptionalStages l E).2.2.1 n
+  obtain ⟨P, R, ⟨h⟩⟩ := fixedExceptionalSystemTransport G CX CY CZ
+  let s : ExceptionalIntegralReconstruction.Systems l E c :=
+    { ordinary := T, right := G, siteX := CX, siteY := CY, siteZ := CZ,
+      properOpen := P, comparison := R, transport := h }
+  obtain ⟨rX⟩ :=
+    ExceptionalIntegralReconstruction.exceptionalIntegralReconstructionEquivalence l E D hl X
+  obtain ⟨rY⟩ :=
+    ExceptionalIntegralReconstruction.exceptionalIntegralReconstructionEquivalence l E D hl Y
+  obtain ⟨a⟩ :=
+    ExceptionalIntegralReconstruction.exceptionalIntegralNormalizedAdjunction l E D hl f c rX s
+  obtain ⟨t, ⟨d⟩⟩ :=
+    ExceptionalIntegralReconstruction.exceptionalIntegralRealizationAssembly l E D hl f c
+      rX rY s a
+  let s' := { s with transport := t }
+  let a' := a.withTransport l E c s t
+  let A := S.ring.operation c (.integral { carrier := E })
+  let eF : ExceptionalIntegralReconstruction.integralLeft l E c rX rY s' a' ≅ A.F :=
+    ((finiteTorConstructibleIntegral l E Y).fullyFaithfulι |>.whiskeringRight _).preimageIso
+      (d.realization ≪≫ (S.ring.left c (.integral { carrier := E })).symm)
+  let eG := Adjunction.rightAdjointUniq
+    ((ExceptionalIntegralReconstruction.integralAdjunction l E c rX rY s' a').ofNatIsoLeft eF)
+    A.adjunction
+  exact ⟨(ExceptionalIntegralReconstruction.rightComposite l E c rX rY s' a').symm ≪≫
+    Functor.isoWhiskerRight eG (finiteTorConstructibleIntegral l E X).ι⟩
 
 end WeilConjectures
