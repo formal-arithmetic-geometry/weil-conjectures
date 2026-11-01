@@ -1079,3 +1079,119 @@ theorem derived_realization
     (fun n ↦ (Mod.derivedExtendMapDerivedCategoryAdjunction (q n)).unit) c hc hs hu
 
 end CategoryTheory.Mod.KFlatScalarTower
+
+namespace CategoryTheory.Mod.KFlatScalarTower
+
+section
+
+set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
+open CategoryTheory MonoidalCategory MonObj Limits
+open scoped CategoryTheory.Obj
+
+private theorem realizeTransport
+    {D : Type u} [Category.{v} D]
+    (F : ℕ → D ⥤ D) (t : ∀ n, F (n + 1) ⟶ F n)
+    (unit : ∀ n, 𝟭 D ⟶ F n)
+    {O K : D} (e : O ≅ K)
+    (V : ℕ → D) (d : ∀ n, V (n + 1) ⟶ V n) (c : ∀ n, O ⟶ V n)
+    (m : ∀ n, (F n).obj O ≅ V n)
+    (hd : ∀ n, (t n).app O ≫ (m n).hom = (m (n + 1)).hom ≫ d n)
+    (hc : ∀ n, (unit n).app O ≫ (m n).hom = c n) :
+    ∃ en : ∀ n, V n ≅ (F n).obj K,
+      (∀ n, d n ≫ (en n).hom = (en (n + 1)).hom ≫ (t n).app K) ∧
+      (∀ n, c n ≫ (en n).hom = e.hom ≫ (unit n).app K) := by
+  let en (n : ℕ) : V n ≅ (F n).obj K := (m n).symm ≪≫ (F n).mapIso e
+  refine ⟨en, ?_, ?_⟩
+  · intro n
+    apply (cancel_epi (m (n + 1)).hom).mp
+    simp only [en, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom, Category.assoc,
+      Iso.hom_inv_id_assoc]
+    rw [← reassoc_of% (hd n), Iso.hom_inv_id_assoc]
+    exact ((t n).naturality e.hom).symm
+  · intro n
+    simp only [en, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom]
+    rw [← hc n, Category.assoc, Iso.hom_inv_id_assoc]
+    exact ((unit n).naturality e.hom).symm
+
+end
+
+end CategoryTheory.Mod.KFlatScalarTower
+
+namespace CategoryTheory.Mod.KFlatScalarTower
+
+section
+
+set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
+open CategoryTheory MonoidalCategory MonObj Limits
+open scoped CategoryTheory.Obj
+variable {C : Type u} [Category.{v} C] [Abelian C] [MonoidalCategory C]
+  [MonoidalPreadditive C] [SymmetricCategory C] [MonoidalClosed C]
+  [IsGrothendieckAbelian.{v} C] [Abelian.HasFunctorialFlatResolution C]
+  (R : C) [MonObj R] [IsCommMonObj R]
+  (S : ℕ → C) [∀ n, MonObj (S n)] [∀ n, IsCommMonObj (S n)]
+  (q : ∀ n, R ⟶ S n) [∀ n, IsMonHom (q n)]
+  (r : ∀ n, S (n + 1) ⟶ S n) [∀ n, IsMonHom (r n)]
+  (h : ∀ n, q (n + 1) ≫ r n = q n)
+variable (B : ℕ → Mod C R) (ι : ∀ n, 𝟙_ (Mod C R) ⟶ B n)
+  (τ : ∀ n, B (n + 1) ⟶ B n)
+
+/-- Native K-flat complexes realize a coherent tower of derived scalar extensions,
+including its canonical units.
+
+Source: Stacks Project, Tags 064K and 06XY; the scalar-realization argument of
+`lem-pe-kflat-scalar-tower-realization`, in internal module objects
+(blueprint: lem-pe-internal-kflat-scalar-tower-realization).
+
+Proof: the coequalizers defining extension of scalars and tensor with the restricted
+regular module are the same coequalizer. Its comparison is linear for the common
+ring; the action equations follow after precomposition with the epimorphic tensor
+projection. Compose this comparison with the braiding and with `eB`.
+The counit computing derived extension on a native K-flat complex is invertible.
+Exact restriction commutes with localization, so this counit gives the claimed
+level isomorphisms. The ordinary extension-restriction unit becomes the right
+unitor inverse followed by tensoring `ι`, by `hι`. Naturality of derived adjunctions
+therefore gives the second displayed identity. For transitions, `hτ` identifies
+the ordinary scalar-change morphism with tensoring `τ`. Take its adjunction mate.
+The quotient-factor equality `h` identifies the composite restriction, and
+uniqueness of left adjoints identifies its mate with `association`. Thus the first
+identity uses exactly `step`, including its specified associator. Finally transport
+all level isomorphisms along `eP`; naturality preserves both identities.
+
+The argument applies also to the zero complex and to a zero coefficient ring;
+neither flat terms nor a nonzero coefficient object is required. -/
+theorem realization
+    (eB : ∀ n, B n ≅ (Mod.comap (q n)).obj (Mod.regular (S n)))
+    (hι : ∀ n, (ι n).hom ≫ (eB n).hom.hom = q n)
+    (hτ : ∀ n, (τ n).hom ≫ (eB n).hom.hom = (eB (n + 1)).hom.hom ≫ r n)
+    (K : DerivedCategory (Mod C R)) (P : CochainComplex (Mod C R) ℤ)
+    (hP : (HomologicalComplex.quasiIso (Mod C R) (.up ℤ)).kFlat P)
+    (eP : DerivedCategory.Q.obj P ≅ K) :
+    ∃ e : ∀ n, DerivedCategory.Q.obj ((tensorLevel R B n).obj P) ≅
+        (restriction R S q n).obj ((reduction R S q n).obj K),
+      (∀ n, DerivedCategory.Q.map (tensorStep R B τ P n) ≫ (e n).hom =
+        (e (n + 1)).hom ≫ step R S q r h K n) ∧
+      (∀ n, DerivedCategory.Q.map (tensorUnit R B ι P n) ≫ (e n).hom =
+        eP.hom ≫ (Mod.derivedExtendMapDerivedCategoryAdjunction (q n)).unit.app K) := by
+  obtain ⟨c, hc, hs, hu⟩ := natural_computation R S q r h B ι τ eB hι hτ
+  let F (n : ℕ) := reduction R S q n ⋙ restriction R S q n
+  let t (n : ℕ) : F (n + 1) ⟶ F n :=
+    { app := fun K ↦ step R S q r h K n
+      naturality := by
+        intro X Y f
+        dsimp only [F, Functor.comp_map, step]
+        simpa only [Category.assoc] using towerStep_naturality
+          (Mod.derivedExtendMapDerivedCategoryAdjunction (r n))
+          (association R S q r h n) (restrictionComp R S q r h n) f }
+  have (n : ℕ) : IsIso ((c n).app P) := hc n P hP
+  exact realizeTransport F t
+    (fun n ↦ (Mod.derivedExtendMapDerivedCategoryAdjunction (q n)).unit) eP
+    (fun n ↦ DerivedCategory.Q.obj ((tensorLevel R B n).obj P))
+    (fun n ↦ DerivedCategory.Q.map (tensorStep R B τ P n))
+    (fun n ↦ DerivedCategory.Q.map (tensorUnit R B ι P n))
+    (fun n ↦ asIso ((c n).app P)) (fun n ↦ hs n P) (fun n ↦ hu n P)
+
+end
+
+end CategoryTheory.Mod.KFlatScalarTower

@@ -14,6 +14,10 @@ import WeilConjectures.CategoryTheory.DerivedCategory.DerivedAdjunctionCompatibi
 import WeilConjectures.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
 import WeilConjectures.Mathlib.Algebra.Homology.Localization
 
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
+public import Mathlib.CategoryTheory.Limits.HasLimits
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+import Mathlib.CategoryTheory.Functor.Derived.PointwiseRightDerived
 /-! # Derived reduction and restriction of scalars
 
 Source: Stacks Project, Tags 07A6, 06YY, 03CZ, 09T5 and 0DVC;
@@ -599,5 +603,102 @@ noncomputable def scalarReductionDerivedExistence :
 attribute [local semireducible] scalarReductionExtension
 
 attribute [local irreducible] scalarReductionDerivedExistence
+
+end WeilConjectures
+
+namespace WeilConjectures
+
+section
+
+set_option autoImplicit false
+set_option Elab.async false
+open CategoryTheory CategoryTheory.Limits
+variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+  [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (Y : AlgebraicGeometry.Scheme.{t})
+variable (n : ℕ)
+attribute [local instance] scalarReductionSiteSmall
+attribute [local instance] scalarReductionRestrictionLimits
+attribute [local instance] scalarReductionRestrictionColimits
+attribute [local instance] scalarReductionExtensionAdditive
+
+/-- Termwise exact restriction descended through localization.
+Source: Stacks Tag 015F
+(blueprint: lem-weil-derived-scalar-extension-restriction-adjunction). -/
+noncomputable def scalarReductionDerivedRestriction :=
+  (scalarReductionRestriction l E Y n).mapDerivedCategory
+
+/-- Derived tensor with the finite quotient over the completed coefficient ring.
+Its universal property determines it up to unique compatible isomorphism.
+Source: Stacks Tag 06YY
+(blueprint: lem-weil-derived-scalar-extension-restriction-adjunction). -/
+noncomputable def scalarReductionDerivedExtension :
+    DerivedCategory (scalarReductionSource l E Y) ⥤
+      DerivedCategory (scalarReductionTarget l E Y n) :=
+  (scalarReductionDerivedExistence l E Y n).choose
+
+/-- The universal comparison on homotopy complexes, an isomorphism on K-flat ones.
+Source: Stacks Tag 06YY
+(blueprint: lem-weil-derived-scalar-extension-restriction-adjunction). -/
+noncomputable def scalarReductionCounit :
+    DerivedCategory.Qh ⋙ scalarReductionDerivedExtension l E Y n ⟶
+      (scalarReductionExtension l E Y n).mapHomotopyCategory (ComplexShape.up ℤ) ⋙
+        DerivedCategory.Qh :=
+  (scalarReductionDerivedExistence l E Y n).choose_spec.choose
+
+-- The proof-valued witnesses have large types; their bodies are never needed below.
+
+end
+
+end WeilConjectures
+
+namespace WeilConjectures
+
+section
+
+set_option autoImplicit false
+set_option Elab.async false
+open CategoryTheory CategoryTheory.Limits
+variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+  [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (Y : AlgebraicGeometry.Scheme.{t})
+variable (n : ℕ)
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+/-- The underived tensor/restriction adjunction with its sectionwise unit normalization.
+Source: Stacks Tag 03CZ
+(blueprint: lem-weil-derived-scalar-extension-restriction-adjunction).
+Proof: send a tensor-linear map v to x ↦ v(1 tensor x), and send w to
+s tensor x ↦ s w(x). Balancing and restriction compatibility descend both maps
+through sheafification. Their composites are identities on tensor generators.
+Consequently the unit is precisely the image of 1 tensor x in the sheafification. -/
+theorem scalarReductionExtension_adjunction :
+    ∃ adj : scalarReductionExtension l E Y n ⊣ scalarReductionRestriction l E Y n,
+      ∀ (M : scalarReductionSource l E Y)
+        (U : (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ) (x : M.val.obj U),
+        (adj.unit.app M).val.app U x =
+          (eqToHom ((scalarReductionExistence l E Y n).choose_spec.choose M).symm).val.app U
+            (((PresheafOfModules.sheafificationAdjunction.{max u (t + 1)}
+              (J := AlgebraicGeometry.Scheme.ProEt.topology Y)
+              (R := integralCoefficientSheaf l E Y n)
+              (𝟙 (integralCoefficientSheaf l E Y n).obj)).unit.app
+              (SheafOfModules.changeOfRingsPresheaf.{t, t + 1, max u (t + 1)}
+                (completedIntegralCommRingProjectionUnrestricted l E Y n) M)).app U
+              ((ModuleCat.extendRestrictScalarsAdj
+                ((completedIntegralCommRingProjectionUnrestricted l E Y n).hom.app U).hom).unit.app
+                  (M.val.obj U) x)) := by
+  let : HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology Y)
+      AddCommGrpCat.{max u (t + 1)} := integralCoefficientAbSheafify.{t, u} Y
+  let : (AlgebraicGeometry.Scheme.ProEt.topology Y).WEqualsLocallyBijective
+      AddCommGrpCat.{max u (t + 1)} := integralCoefficientAbLocallyBijective.{t, u} Y
+  exact SheafOfModules.ScalarReductionProof.tensorAdjunction_of_identifications
+    (K := AlgebraicGeometry.Scheme.ProEt.topology Y)
+    (A := completedIntegralCommRingSheafUnrestricted l E Y)
+    (S := integralCoefficientCommRingSheaf l E Y n)
+    (completedIntegralCommRingProjectionUnrestricted l E Y n)
+    (scalarReductionExtension l E Y n)
+    (scalarReductionExistence l E Y n).choose_spec.choose
+    (scalarReductionExistence l E Y n).choose_spec.choose_spec.choose
+
+end
 
 end WeilConjectures

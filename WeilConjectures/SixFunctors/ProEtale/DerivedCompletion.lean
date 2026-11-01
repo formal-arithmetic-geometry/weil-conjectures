@@ -15,6 +15,10 @@ import WeilConjectures.CategoryTheory.DerivedCategory.KFlatAcyclic
 import WeilConjectures.CategoryTheory.ModuleObjects.SequentialLimitEpi
 import WeilConjectures.CategoryTheory.Triangulated.DerivedCountableProductsCore
 
+public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
+public import Mathlib.CategoryTheory.Functor.OfSequence
+public import Mathlib.Algebra.Homology.HomologicalComplexLimits
+import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 /-!
 # Derived completion for pulled-back continuous integral coefficients
 
@@ -785,5 +789,218 @@ def integralStep (K : DerivedCategory (Modules l E X)) (n : ℕ) :
     integralLevel l E X K (n + 1) ⟶ integralLevel l E X K n :=
   (restrict l E X (n + 1)).map (derivedStep l E X K n) ≫
     (restrictComp l E X n).hom.app ((derivedReduction l E X n).obj K)
+
+end AlgebraicGeometry.ProEtale.AdicCompletion
+
+namespace AlgebraicGeometry.ProEtale.AdicCompletion
+
+section
+
+set_option autoImplicit false
+set_option backward.defeqAttrib.useBackward true
+set_option backward.isDefEq.respectTransparency false
+set_option synthInstance.maxSize 4096
+open CategoryTheory CategoryTheory.Limits MonoidalCategory MonObj Opposite
+open scoped CategoryTheory.Obj
+variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+  [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u})
+attribute [local instance] AdicCompletion.ringMonoidalObject AdicCompletion.ringCommutative
+  AdicCompletion.finiteRingMonoidalObject AdicCompletion.finiteRingCommutative
+  AdicCompletion.modulesMonoidal AdicCompletion.modulesSymmetric AdicCompletion.modulesClosed
+  AdicCompletion.modulesMonoidalPreadditive AdicCompletion.finiteModulesDerived
+  AdicCompletion.modulesDerived
+  AdicCompletion.modulesProducts AdicCompletion.complexProducts
+attribute [local instance] ringMonoidalObject ringCommutative finiteRingMonoidalObject
+  finiteRingCommutative modulesMonoidal modulesSymmetric modulesClosed
+  modulesMonoidalPreadditive finiteModulesDerived modulesDerived modulesProducts complexProducts
+
+
+private theorem genericCoconeIso_inv_fst_f
+    {C : Type v} [Category.{w} C] [Abelian C]
+    (V : CochainComplex C ℤ) (t : V ⟶ V) (i : ℤ) :
+    (genericCoconeIso V t).inv.f i ≫ (CochainComplex.mappingCocone.fst t).f i =
+      (biprod.fst : (genericRoos V t).X i ⟶ V.X i) := by
+  change (genericCoconeCoordinateIso V t i).inv ≫
+    (CochainComplex.mappingCocone.fst t).f i = _
+  apply (cancel_epi (genericCoconeCoordinateIso V t i).hom).mp
+  rw [Iso.hom_inv_id_assoc]
+  simp only [genericCoconeCoordinateIso, biprod.lift_fst]
+
+private theorem strictScalarRealization
+    (K : DerivedCategory (Modules l E X)) (P : CochainComplex (Modules l E X) ℤ)
+    (hP : (HomologicalComplex.quasiIso (Modules l E X) (.up ℤ)).kFlat P)
+    (eP : DerivedCategory.Q.obj P ≅ K) :
+    ∃ e : ∀ n, DerivedCategory.Q.obj ((level l E X n).obj P) ≅ integralLevel l E X K n,
+      (∀ n, DerivedCategory.Q.map (levelStep l E X P n) ≫ (e n).hom =
+        (e (n + 1)).hom ≫ integralStep l E X K n) ∧
+      (∀ n, DerivedCategory.Q.map (levelUnit l E X P n) ≫ (e n).hom =
+        eP.hom ≫ (Mod.derivedExtendMapDerivedCategoryAdjunction (quotient l E X n)).unit.app K)
+    := by
+  exact Mod.KFlatScalarTower.realization
+    (ring l E X) (finiteRing l E X) (quotient l E X) (transition l E X)
+    (quotient_transition l E X) (finiteModule l E X) (finiteUnit l E X)
+    (fun n ↦ (DerivedNakayama.pullback l E X).map (quotientStep l E n))
+    (finiteModuleIso l E X)
+    (by
+      intro n
+      change (𝟙 _ ≫ (upperStarFromPoint X).map
+        (DerivedNakayama.reductionRing l E (n + 1))) ≫ 𝟙 _ = _
+      simp only [Category.id_comp, Category.comp_id])
+    (by
+      intro n
+      change (upperStarFromPoint X).map (transitionRing l E n) ≫ 𝟙 _ =
+        𝟙 _ ≫ (upperStarFromPoint X).map (transitionRing l E n)
+      simp only [Category.id_comp, Category.comp_id]) K P hP eP
+
+private theorem composed_unit_compatible
+    {C D A : Type*} [Category C] [Category D] [Category A]
+    {F : C ⥤ D} {G : D ⥤ C} {H : D ⥤ A} {I : A ⥤ D}
+    {L : C ⥤ A} {R : A ⥤ C}
+    (a : F ⊣ G) (b : H ⊣ I) (c : L ⊣ R) (e : I ⋙ G ≅ R) (K : C) :
+    let t := ((a.comp b).ofNatIsoRight e).leftAdjointUniq c
+    a.unit.app K ≫ (G.map (b.unit.app (F.obj K) ≫ I.map (t.hom.app K)) ≫
+      e.hom.app (L.obj K)) = c.unit.app K := by
+  have h := Adjunction.unit_leftAdjointUniq_hom_app ((a.comp b).ofNatIsoRight e) c K
+  simp only [Adjunction.ofNatIsoRight_unit, NatTrans.comp_app,
+    Adjunction.comp_unit_app, Category.assoc, Functor.whiskerLeft_app] at h
+  rw [← e.hom.naturality ((((a.comp b).ofNatIsoRight e).leftAdjointUniq c).hom.app K)] at h
+  simpa only [Functor.map_comp, Functor.comp_map, Category.assoc] using h
+
+/-- The coherent tensor-unit maps to the derived reductions.
+Source: blueprint, reduction cone (blueprint: sk-def-pe-derived-completion).
+Proof: reductionComp is formed by left-adjoint uniqueness, which identifies the
+composite unit with the direct unit. Composing this identity with restrictComp
+is exactly the displayed compatibility of the positive consecutive units. -/
+theorem reductionUnit_compatible (K : DerivedCategory (Modules l E X)) (n : ℕ) :
+    (Mod.derivedExtendMapDerivedCategoryAdjunction (quotient l E X (n + 1))).unit.app K ≫
+        integralStep l E X K n =
+      (Mod.derivedExtendMapDerivedCategoryAdjunction (quotient l E X n)).unit.app K := by
+  exact composed_unit_compatible
+    (Mod.derivedExtendMapDerivedCategoryAdjunction (quotient l E X (n + 1)))
+    (Mod.derivedExtendMapDerivedCategoryAdjunction (transition l E X n))
+    (Mod.derivedExtendMapDerivedCategoryAdjunction (quotient l E X n))
+    (restrictComp l E X n) K
+
+private theorem generic_roosLimit
+    {A : Type v} [Category.{w} A] [Abelian A] [HasDerivedCategory A]
+    [HasCountableProducts A] [CountableAB4Star A]
+    (V : ℕ → CochainComplex A ℤ) (t : ∀ n, V (n + 1) ⟶ V n)
+    (P : CochainComplex A ℤ) (K : DerivedCategory A)
+    (e : DerivedCategory.Q.obj P ≅ K)
+    (D : ℕ → DerivedCategory A) (d : ∀ n, D (n + 1) ⟶ D n) [HasProduct D]
+    (c : ∀ n, P ⟶ V n) (uD : ∀ n, K ⟶ D n)
+    (aug : P ⟶ genericRoos (∏ᶜ V) (towerTransitionEndomorphism t))
+    (haug : aug ≫ (genericCoconeIso (∏ᶜ V) (towerTransitionEndomorphism t)).inv ≫
+      CochainComplex.mappingCocone.fst (towerTransitionEndomorphism t) = Pi.lift c)
+    (eL : ∀ n, DerivedCategory.Q.obj (V n) ≅ D n)
+    (hstep : ∀ n, DerivedCategory.Q.map (t n) ≫ (eL n).hom = (eL (n + 1)).hom ≫ d n)
+    (hunit : ∀ n, DerivedCategory.Q.map (c n) ≫ (eL n).hom = e.hom ≫ uD n) :
+    ∃ (p : DerivedCategory.Q.obj
+        (genericRoos (∏ᶜ V) (towerTransitionEndomorphism t)) ⟶ ∏ᶜ D)
+      (δ : ∏ᶜ D ⟶ (DerivedCategory.Q.obj
+        (genericRoos (∏ᶜ V) (towerTransitionEndomorphism t)))⟦(1 : ℤ)⟧),
+      IsDerivedLimitTriangle d _ p δ ∧
+        (e.inv ≫ DerivedCategory.Q.map aug) ≫ p = Pi.lift uD := by
+  classical
+  let Q := DerivedCategory.Q (C := A)
+  have hp := (derivedCategory_termwiseProduct_isLimit A ℕ V).some
+  let hfan := (Fan.isLimitMapConeEquiv Q V (limit.cone (Discrete.functor V))) hp
+  let cone : Fan D := Fan.mk (Q.obj (∏ᶜ V))
+    (fun n ↦ Q.map (Pi.π V n) ≫ (eL n).hom)
+  let en : Discrete.functor (fun n ↦ Q.obj (V n)) ≅ Discrete.functor D :=
+    Discrete.natIso (fun n ↦ eL n.as)
+  let hc : IsLimit cone := (IsLimit.postcomposeHomEquiv en _).symm hfan
+  let ep : Q.obj (∏ᶜ V) ≅ ∏ᶜ D :=
+    hc.conePointUniqueUpToIso (productIsProduct D)
+  have he (n : ℕ) : ep.hom ≫ Pi.π D n = Q.map (Pi.π V n) ≫ (eL n).hom :=
+    hc.conePointUniqueUpToIso_hom_comp (productIsProduct D) ⟨n⟩
+  have hs : Q.map (towerTransitionEndomorphism t) ≫ ep.hom =
+      ep.hom ≫ towerTransitionEndomorphism d := by
+    apply Pi.hom_ext
+    intro n
+    have hπ := (towerTransitionEndomorphism_eq_iff
+      t (towerTransitionEndomorphism t)).mp rfl n
+    have hdπ := (towerTransitionEndomorphism_eq_iff
+      d (towerTransitionEndomorphism d)).mp rfl n
+    simp only [Category.assoc, hdπ, Preadditive.comp_sub, he]
+    rw [← Q.map_comp_assoc, hπ]
+    simp only [Functor.map_sub, Functor.map_comp, Preadditive.sub_comp]
+    simp only [← Category.assoc, he]
+    dsimp only [Q]
+    simp only [Category.assoc, hstep]
+  let ec := Q.mapIso (genericCoconeIso (∏ᶜ V) (towerTransitionEndomorphism t))
+  let T := Q.mapTriangle.obj
+    (CochainComplex.mappingCocone.triangle (towerTransitionEndomorphism t))
+  let p : Q.obj (genericRoos (∏ᶜ V) (towerTransitionEndomorphism t)) ⟶ ∏ᶜ D :=
+    ec.inv ≫ T.mor₁ ≫ ep.hom
+  let δ : ∏ᶜ D ⟶ (Q.obj (genericRoos (∏ᶜ V) (towerTransitionEndomorphism t)))⟦(1 : ℤ)⟧ :=
+    ep.inv ≫ T.mor₃ ≫ ec.hom⟦(1 : ℤ)⟧'
+  refine ⟨p, δ, ?_, ?_⟩
+  · have hT : T ∈ distTriang (DerivedCategory A) :=
+      DerivedCategory.mappingCocone_triangle_distinguished _
+    exact (Pretriangulated.distinguished_iff_of_iso
+      (Pretriangulated.Triangle.isoMk T
+        (Pretriangulated.Triangle.mk p (towerTransitionEndomorphism d) δ)
+        ec ep ep (by simp [p]) hs (by simp [δ]))).mp hT
+  · apply Pi.hom_ext
+    intro n
+    simp only [p, Category.assoc, he, ec, Functor.mapIso_inv]
+    change e.inv ≫ Q.map aug ≫
+      Q.map (genericCoconeIso (∏ᶜ V) (towerTransitionEndomorphism t)).inv ≫
+      Q.map (CochainComplex.mappingCocone.fst (towerTransitionEndomorphism t)) ≫
+      Q.map (Pi.π V n) ≫ (eL n).hom = _
+    rw [← Q.map_comp_assoc, ← Q.map_comp_assoc, Category.assoc aug, haug,
+      ← Q.map_comp_assoc]
+    simp only [Pi.lift_π]
+    rw [hunit, Iso.inv_hom_id_assoc]
+
+/-- The specified augmented Roos model is the derived inverse limit of the canonical
+reductions; its evaluations compose with the explicit completionMap to the tensor units.
+The extra product instance is the usual categorical choice of product, not a hypothesis
+on K, and no choice of a triangulated lift is used to define the comparison.
+Source: blueprint, Roos interpretation, Stacks 08TC
+(blueprint: sk-def-pe-derived-completion).
+Proof: on a K-flat P, ordinary tensor with B_n computes relative derived extension.
+The scalar-extension counit gives the level identifications, compatibly with quotient
+transitions and tensor units. Exact countable products of module sheaves identify the
+product of the localized levels with the localized termwise product. The signed
+interchange of the two coordinates identifies roos with Cone(1-s)[-1]. Its cone triangle
+gives the asserted distinguished triangle. Its first arrow is the first-coordinate
+projection, whose composite with (unit,0) is the product of the canonical units.
+The coordinate formula makes the first projection of the augmentation the product
+of the specified tensor units, so this identifies the actual augmented limit map. -/
+theorem roos_isDerivedLimit (K : DerivedCategory (Modules l E X))
+    (P : CochainComplex (Modules l E X) ℤ)
+    (_hP : (HomologicalComplex.quasiIso (Modules l E X) (.up ℤ)).kFlat P)
+    (e : DerivedCategory.Q.obj P ≅ K)
+    [HasProduct (integralLevel l E X K)] :
+    ∃ (p : DerivedCategory.Q.obj (roos l E X P) ⟶ ∏ᶜ (integralLevel l E X K))
+      (δ : ∏ᶜ (integralLevel l E X K) ⟶
+        (DerivedCategory.Q.obj (roos l E X P))⟦(1 : ℤ)⟧),
+      IsDerivedLimitTriangle (integralStep l E X K) _ p δ ∧
+        completionMap l E X K P e ≫ p = Pi.lift (f := integralLevel l E X K)
+          (fun n ↦ (Mod.derivedExtendMapDerivedCategoryAdjunction
+            (quotient l E X n)).unit.app K) := by
+  obtain ⟨eL, hstep, hunit⟩ := strictScalarRealization l E X K P _hP e
+  let := modules_countableAB4Star l E X
+  exact generic_roosLimit (fun n ↦ (level l E X n).obj P) (levelStep l E X P)
+    P K e (integralLevel l E X K) (integralStep l E X K) (levelUnit l E X P)
+    (fun n ↦ (Mod.derivedExtendMapDerivedCategoryAdjunction (quotient l E X n)).unit.app K)
+    (augmentation l E X P)
+    (by
+      have hh : augmentation l E X P ≫
+          (genericCoconeIso (product l E X P) (oneSubShift l E X P)).inv ≫
+          CochainComplex.mappingCocone.fst (oneSubShift l E X P) =
+          unitProduct l E X P := by
+        apply HomologicalComplex.hom_ext
+        intro i
+        change biprod.lift ((unitProduct l E X P).f i) 0 ≫
+          ((genericCoconeIso (product l E X P) (oneSubShift l E X P)).inv.f i ≫
+            (CochainComplex.mappingCocone.fst (oneSubShift l E X P)).f i) = _
+        rw [genericCoconeIso_inv_fst_f, biprod.lift_fst]
+      exact hh)
+    eL hstep hunit
+
+end
 
 end AlgebraicGeometry.ProEtale.AdicCompletion

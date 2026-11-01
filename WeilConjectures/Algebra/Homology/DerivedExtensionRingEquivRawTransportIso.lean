@@ -21,7 +21,9 @@ namespace ModuleCat
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
-private theorem kan_precomp_full
+/-- Precomposition with a functor `P` along which whiskering is fully faithful preserves right
+Kan extensions. -/
+theorem kan_precomp_full
     {A C D H : Type*} [Category A] [Category C] [Category D] [Category H]
     (P : A ⥤ C) (Q : C ⥤ D) (F : C ⥤ H) (L : D ⥤ H)
     [((Functor.whiskeringLeft A C H).obj P).Full]

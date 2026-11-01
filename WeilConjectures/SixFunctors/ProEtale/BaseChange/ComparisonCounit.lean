@@ -41,7 +41,10 @@ variable {C D C' D' : Type*} [Category* C] [Category* D] [Category* C'] [Categor
   [PreservesFiniteLimits a] [PreservesFiniteColimits a]
   [PreservesFiniteLimits b] [PreservesFiniteColimits b]
 
-private theorem derived_mate_eq (e : l ⊣ r) (d : p ⊣ t) (σ : a ⋙ p ≅ l ⋙ b) :
+/-- The right-derived base change of the mate of `σ` is the mate, for the derived adjunctions,
+of the comparison induced by `σ` on bounded-below derived categories. -/
+theorem CategoryTheory.Adjunction.rightDerivedFunctorPlusBaseChange_mateEquiv (e : l ⊣ r)
+    (d : p ⊣ t) (σ : a ⋙ p ≅ l ⋙ b) :
     let θ := (Functor.mapDerivedCategoryPlusCompIso a p).symm ≪≫
       Functor.mapDerivedCategoryPlusNatIso σ ≪≫ Functor.mapDerivedCategoryPlusCompIso l b
     Functor.rightDerivedFunctorPlusBaseChange (mateEquiv e d σ.hom).natTrans =
@@ -108,7 +111,9 @@ end
 namespace AlgebraicGeometry.ProEtale.ComparisonCore
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-private theorem underived_comparison_counit {U V : Scheme.{u}} (f : U ⟶ V)
+/-- The underived direct-image comparison, pulled back and composed with the pro-étale counit,
+is the comparison pullback of the étale counit. -/
+theorem underived_comparison_counit {U V : Scheme.{u}} (f : U ⟶ V)
     (K : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) f).inv.app
         ((Etale.lowerStar (ModuleCat.{u + 1} Λ) f).obj K) ≫
@@ -138,7 +143,9 @@ private theorem underived_comparison_counit {U V : Scheme.{u}} (f : U ⟶ V)
       (ModuleCat.{u + 1} Λ) f).inv.app ((Etale.lowerStar
         (ModuleCat.{u + 1} Λ) f).obj K) ≫ t) h
 
-private theorem underived_comparison_mate {U V : Scheme.{u}} (f : U ⟶ V) :
+/-- The underived direct-image comparison is the mate of the pullback comparison
+`comparisonUpperStarCompUpperStarIso`. -/
+theorem underived_comparison_mate {U V : Scheme.{u}} (f : U ⟶ V) :
     lowerStarComparisonUpperStarBaseChange f (ModuleCat.{u + 1} Λ) =
       (mateEquiv (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f)
         (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f)
@@ -172,7 +179,8 @@ private theorem comparison_counit_plus {U V : Scheme.{u}} (f : U ⟶ V)
       ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).derivedPlus.counit.app K) := by
   dsimp only
   rw [underived_comparison_mate Λ f,
-    derived_mate_eq (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f)
+    Adjunction.rightDerivedFunctorPlusBaseChange_mateEquiv
+      (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f)
       (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f)
       (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) f)]
   rw [mateEquiv_counit]

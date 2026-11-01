@@ -632,7 +632,7 @@ algebraic `E`-basis of `ℚ̄_ℓ`. A section with values in a finite subextensi
 finite support in this basis, its coordinates are continuous by finite-dimensional linear
 topology, and finite sums of continuous coordinates times basis vectors are such sections.
 This decomposes the presheaves sectionwise; sheafify. -/
-private theorem exists_padicAlgCl_point_basis
+theorem exists_padicAlgCl_point_basis
     [HasCoproducts.{u + 1} (Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
       (continuousMapRingObj E))] :
     ∃ I : Type (u + 1), Nonempty

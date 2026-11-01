@@ -4,15 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-
-public import Mathlib.RingTheory.DiscreteValuationRing.Basic
-public import Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.Defs
 public import Mathlib.LinearAlgebra.Matrix.Rank
-import Mathlib.LinearAlgebra.FreeModule.PID
-import Mathlib.LinearAlgebra.Dimension.Constructions
-import Mathlib.LinearAlgebra.Basis.SMul
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 import Mathlib.Data.Fin.Tuple.Sort
-import Mathlib.Logic.Equiv.Fintype
+import Mathlib.LinearAlgebra.FreeModule.PID
 
 /-! # Scalar Smith matrices with uniformizer powers -/
 
@@ -28,7 +23,7 @@ uniformizer powers. The number of nonzero entries is its module rank.
 Source: Mathlib's `Submodule.smithNormalForm` and
 `Submodule.exists_smith_normal_form_of_le`; Stacks Project, Algebra, Tag 00PD
 for the DVR characterization. Agent passage to a rectangular matrix.
-(blueprint: lem-sfb-dvr-matrix-smith-powers)
+(auxiliary; not a blueprint node)
 
 Proof: Apply scalar Smith form to the image of the matrix map in the finite free
 codomain. Its diagonal coefficients are nonzero, since the image basis is linearly

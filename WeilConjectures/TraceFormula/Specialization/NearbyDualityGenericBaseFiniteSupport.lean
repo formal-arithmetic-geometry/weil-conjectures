@@ -57,13 +57,16 @@ set_option maxHeartbeats 1000000 in
 -- the triangles of the duality map live on large derived categories
 /-- **Finite support of the cone of the duality map over a generic base, from the generic
 slices** (blueprint `sk-prop-tf-nearby-duality-foundation`, "Dimension induction"): if, for every
-open `V` of the total space and every coordinate `b : 𝒳_V ⟶ 𝔸¹_S` of the restriction `M|_V`, the
+open `V` of the total space embedded in an affine space `𝔸(ι_V; S)` over `S` (an immersion `c_V`),
+and every coordinate `b : 𝒳_V ⟶ 𝔸¹_S` of the restriction `M|_V`, the
 duality map of `M|_V` becomes an isomorphism on the special fibre of the generic slice of `b`
 (`hslice`, the generic-slice step of blueprint `det-tf-nearby-duality-slice`), then the duality
 map `δ_{M,K}` is an isomorphism away from finitely many closed points of the special fibre. -/
 theorem exists_finset_isIso_upperStar_nearbyDualityMapOfGenericBase
     (D : NearbyDualizingDataOfGenericBase k' ℓ) (h : M.IsTraitModelOfGenericBase X₁ ι q g)
-    (hslice : ∀ (V : M.total.Opens) [QuasiCompact V.ι]
+    (hslice : ∀ (V : M.total.Opens) [QuasiCompact V.ι] {ιV : Type u} [Finite ιV]
+      (cV : (M.restrictOpen V).total ⟶ 𝔸(ιV; trait k')) [IsImmersion cV]
+      (_ : cV ≫ 𝔸(ιV; trait k') ↘ trait k' = V.ι ≫ q)
       {b : (M.restrictOpen V).total ⟶ 𝔸(ULift.{u} (Fin 1); trait k')}
       (hb : b ≫ 𝔸(ULift.{u} (Fin 1); trait k') ↘ trait k' = V.ι ≫ q)
       (L : Dᵇc(X₁.left)⟦Profinite.padicAlgClRingObj ℓ⟧),
@@ -130,7 +133,8 @@ theorem exists_finset_isIso_upperStar_nearbyDualityMapOfGenericBase
     refine ⟨traitSliceField k', inferInstance, traitSlicePoint (traitSliceCoord k'),
       ⟨⊥, Ideal.isPrime_bot⟩, isGenericPoint_traitSlicePoint_traitSliceCoord k' _, ?_⟩
     have : IsOpenImmersion (M.restrictOpenHom V).total := inferInstanceAs (IsOpenImmersion V.ι)
-    have hs := hslice V (hcoord a)
+    have := hcVi
+    have hs := hslice V cV hcV (hcoord a)
       ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 X₁)).obj K)
     have hs' := (isIso_map_map_nearbyDualityMapOfGenericBase_iff_of_isOpenImmersion ℓ
       (j := 𝟙 X₁) (j' := M.restrictSpecialFibreι V) ((boundedConstructible _).ι ⋙

@@ -4,21 +4,34 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
+public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinaryEncoding
+public import WeilConjectures.SixFunctors.ProEtale.IntegralPresentationEncoding
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomModule
+import WeilConjectures.Algebra.Homology.DerivedCategory.AdicTower
+import WeilConjectures.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import WeilConjectures.Algebra.Homology.KFlatTensorPreservesQuasiIsoIndependentCoefficients
+import WeilConjectures.Algebra.Homology.PrincipalConeTower
+import WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated
+import WeilConjectures.Algebra.Homology.SheafRingCoefficientOrdinaryAdjunction
+import WeilConjectures.Algebra.Homology.SheafRingDerivedHomComparison
+import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum
+import WeilConjectures.AlgebraicGeometry.IntegralDerivedOperationsOnSlices
+import WeilConjectures.AlgebraicGeometry.NormalizedDVRKFlatTransition
+import WeilConjectures.AlgebraicGeometry.ProEtaleIntegralCoefficientLimit
+import WeilConjectures.CategoryTheory.DerivedCategory.CochainAdjunctionCompatibility
+import WeilConjectures.CategoryTheory.DerivedCategory.CochainHomotopyComparison
+import WeilConjectures.CategoryTheory.DerivedCategory.DerivedAdjunctionCompatibility
+import WeilConjectures.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
+import WeilConjectures.CategoryTheory.DerivedCategory.StandardQuotientsPerfect
+import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
+import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Existence
+import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Exists
+import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TriangleShift
 
-public import WeilConjectures.SixFunctors.ProEtale.Encoding.IntegralPresentationEncodingSupplement
-public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinary.FiniteDiscreteOrdinaryEncodingSupplement
-import all WeilConjectures.SmoothPurity.Sf.SfDerivedCompleteLegacyComparison
-import all WeilConjectures.AlgebraicGeometry.Completed.CompletedCoefficientRegularQuotients
-import WeilConjectures.SixFunctors.Normalized.NormalizedDVRKFlatTransition
-import all WeilConjectures.SmoothPurity.Normalized.NormalizedDVREffectivity
-import all WeilConjectures.CategoryTheory.Derived.DerivedExactSquareComposition
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-
-/-! # Transition compatibility for normalized integral comparisons -/
-
--- After pruning, this module only keeps private declarations.
 set_option linter.privateModule false
 
+/-! # Transition compatibility for normalized integral comparisons -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -118,156 +131,11 @@ private theorem adjointTransitionComparison
   dsimp only [Functor.comp_map] at hd
   rw [Category.assoc, reassoc_of% hd]
 
-/-- Locally surjective scalar restriction is full on sheaf modules. -/
-private theorem restrictionFull
-    {C : Type*} [Category C] {J : GrothendieckTopology C}
-    {R S : Sheaf J RingCat} (f : R ⟶ S)
-    [Presheaf.IsLocallySurjective J f.hom] :
-    (SheafOfModules.restrictScalars f).Full where
-  map_surjective {M N} g := by
-    let e := PresheafOfModules.restrictHomEquivOfIsLocallySurjective
-      (J := J) (M₁ := M.val) f.hom N.isSheaf
-    refine ⟨⟨e.symm g.val⟩, ?_⟩
-    apply SheafOfModules.hom_ext
-    exact e.apply_symm_apply g.val
-
-/-- The completed coefficient projections have full ordinary restriction. -/
-private theorem scalarRestrictionFull (n : ℕ) :
-    (scalarReductionRestriction.{u, u} l E X n).Full := by
-  let f := (sheafCompose (Scheme.ProEt.topology X)
-    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
-      (completedIntegralCommRingProjectionUnrestricted l E X n)
-  let : Presheaf.IsLocallySurjective (Scheme.ProEt.topology X) f.hom :=
-    Presheaf.isLocallySurjective_of_surjective _ _
-      (projection_surjective l E X _ (uniformizer_normalized l E X n))
-  exact restrictionFull f
-
-private def testDatum (p : ℕ) (hp : p.Prime) : FiniteFieldDatum.{0} := by
-  letI : Fact p.Prime := ⟨hp⟩
-  exact {
-    p := p
-    a := 1
-    q := p
-    prime := hp
-    exponent_pos := le_refl 1
-    cardinality_eq := (pow_one p).symm
-    k₀ := ZMod p
-    card_base := by simp [Nat.card_eq_fintype_card]
-    k := AlgebraicClosure (ZMod p) }
-
-private theorem existsTestDatum (l : ℕ) : ∃ D : FiniteFieldDatum.{0}, l ≠ D.p := by
-  by_cases h : l = 2
-  · exact ⟨testDatum 3 (by decide), by simp [testDatum, h]⟩
-  · exact ⟨testDatum 2 (by decide), h⟩
-
-/-- The restricted adjoint of the smaller reduction unit. -/
-private def adjointTransition
-    {C A B : Type*} [Category C] [Category A] [Category B]
-    {Lm : C ⥤ A} {Rm : A ⥤ C} {Ln : C ⥤ B} {Rn : B ⥤ C}
-    (am : Lm ⊣ Rm) (an : Ln ⊣ Rn) (T : B ⥤ A) (d : T ⋙ Rm ≅ Rn) :
-    Lm ⋙ Rm ⟶ Ln ⋙ Rn where
-  app M := Rm.map ((am.homEquiv M (T.obj (Ln.obj M))).symm
-      (an.unit.app M ≫ d.inv.app (Ln.obj M))) ≫ d.hom.app (Ln.obj M)
-  naturality {M N} f := by
-    have h : Lm.map f ≫
-        (am.homEquiv N (T.obj (Ln.obj N))).symm
-          (an.unit.app N ≫ d.inv.app (Ln.obj N)) =
-        (am.homEquiv M (T.obj (Ln.obj M))).symm
-          (an.unit.app M ≫ d.inv.app (Ln.obj M)) ≫ T.map (Ln.map f) := by
-      apply (am.homEquiv _ _).injective
-      rw [am.homEquiv_naturality_left, Equiv.apply_symm_apply,
-        am.homEquiv_naturality_right, Equiv.apply_symm_apply]
-      dsimp only [Functor.comp_obj, Functor.comp_map]
-      have hu := an.unit.naturality f
-      dsimp only [Functor.id_map, Functor.comp_map] at hu
-      rw [reassoc_of% hu]
-      simpa only [Category.assoc, Functor.comp_map] using
-        congrArg (fun k ↦ an.unit.app M ≫ k) (d.inv.naturality (Ln.map f))
-    dsimp only [Functor.comp_map]
-    rw [← Rm.map_comp_assoc, h, Rm.map_comp, Category.assoc]
-    simpa only [Category.assoc, Functor.comp_map] using congrArg
-      (fun k ↦ Rm.map ((am.homEquiv M (T.obj (Ln.obj M))).symm
-        (an.unit.app M ≫ d.inv.app (Ln.obj M))) ≫ k)
-      (d.hom.naturality (Ln.map f))
-
-private theorem normalizeRepresentativeTransition
-    {C A B : Type*} [Category C] [Category A] [Category B]
-    {Lm : C ⥤ A} {Rm : A ⥤ C} {Ln : C ⥤ B} {Rn : B ⥤ C}
-    (am : Lm ⊣ Rm) (an : Ln ⊣ Rn) (T : B ⥤ A) (d : T ⋙ Rm ≅ Rn)
-    (P V W : C) (cm : Rm.obj (Lm.obj P) ⟶ V) (cn : Rn.obj (Ln.obj P) ⟶ W)
-    (f : V ⟶ W)
-    (h : Rm.map ((am.homEquiv P (T.obj (Ln.obj P))).symm
-        (an.unit.app P ≫ d.inv.app (Ln.obj P))) ≫ d.hom.app (Ln.obj P) ≫
-        Rn.map (Ln.map (Iso.refl P).inv) ≫ cn =
-      Rm.map (Lm.map (Iso.refl P).inv) ≫ cm ≫ f) :
-    (adjointTransition am an T d).app P ≫ cn = cm ≫ f := by
-  simpa [adjointTransition] using h
-
 attribute [local irreducible] Functor.mapDerivedCategory
-
-private theorem sectionTransitionAdjoint
-    (D : FiniteFieldDatum.{0}) (hl : l ≠ D.p) (n : ℕ) :
-    sfDerivedReductionTransition l E X n =
-      adjointTransition
-        (derivedScalarExtensionRestrictionAdjunction.{u, u} l E X (n + 1)).choose
-        (derivedScalarExtensionRestrictionAdjunction.{u, u} l E X n).choose
-        (normalizedDVRRes.{u, u} l E X n.le_succ)
-        (normalizedDVRResCompletedComp.{0, u, u} l E X D hl n.le_succ) := by
-  apply (sfDerivedReductionTransition_existsUnique l E X n).unique
-    (sfDerivedReductionTransition_existsUnique l E X n).exists.choose_spec
-  intro P hP
-  have h := normalizedDVR_kflat_transition.{0, u, u} l E X D hl P hP
-    (DerivedCategory.Q.obj P) (Iso.refl _) n
-    (derivedScalarExtensionRestrictionAdjunction.{u, u} l E X (n + 1)).choose
-    (derivedScalarExtensionRestrictionAdjunction.{u, u} l E X n).choose
-    (normalizedDVRKFlatUnit.{0, u, u} l E X D hl (n + 1) P hP)
-    (normalizedDVRKFlatUnit.{0, u, u} l E X D hl n P hP)
-  have h' := normalizeRepresentativeTransition
-    (derivedScalarExtensionRestrictionAdjunction.{u, u} l E X (n + 1)).choose
-    (derivedScalarExtensionRestrictionAdjunction.{u, u} l E X n).choose
-    (normalizedDVRRes.{u, u} l E X n.le_succ)
-    (normalizedDVRResCompletedComp.{0, u, u} l E X D hl n.le_succ)
-    (DerivedCategory.Q.obj P) _ _
-    (normalizedDVRKFlatComparison.{u, u} l E X (n + 1) P)
-    (normalizedDVRKFlatComparison.{u, u} l E X n P)
-    (DerivedCategory.Q.map (integralTowerTransition l E X D hl P n)) h
-  have hf := congrArg (fun f ↦ DerivedCategory.Q.map f)
-    (transition_eq l E X D hl P n)
-  simpa only [normalizedDVRKFlatComparison, sfReductionRepresentativeComparison] using
-    h'.trans (congrArg
-      (fun f ↦ normalizedDVRKFlatComparison.{u, u} l E X (n + 1) P ≫ f) hf)
 
 section RestrictionCompositor
 attribute [local semireducible] completedIntegralCoefficientSheafUnrestricted
 
-/-- Ordinary restriction compositor coming from the limit projection equation. -/
-private noncomputable def normalizedDVRTransitionRestriction
-    (D : FiniteFieldDatum.{0}) (hl : l ≠ D.p) (n : ℕ) :
-    normalizedDVRModuleRes l E X n.le_succ ⋙
-      scalarReductionRestriction.{u, u} l E X (n + 1) ≅
-        scalarReductionRestriction.{u, u} l E X n := by
-  let e₀ := normalizedDVRRestrictionCompIso
-    (completedIntegralCoefficientProjection l E X D hl (n + 1))
-    (normalizedDVRQuotient l E X n.le_succ)
-  let he : completedIntegralCoefficientProjection l E X D hl (n + 1) ≫
-      normalizedDVRQuotient l E X n.le_succ =
-        completedIntegralCoefficientProjection l E X D hl n := by
-    exact limit.w (integralCoefficientSheafSystem l E X) (homOfLE n.le_succ).op
-  exact e₀ ≪≫ eqToIso (congrArg
-    (fun f : completedIntegralCoefficientSheaf l E X D hl ⟶
-        integralCoefficientSheaf l E X n ↦ SheafOfModules.restrictScalars.{u + 1} f) he)
-
-/-- Localization of the ordinary compositor is the specified tower compositor. -/
-private theorem normalizedDVRTransitionRestriction_comp
-    (D : FiniteFieldDatum.{0}) (hl : l ≠ D.p) (n : ℕ) :
-    (Functor.mapDerivedCategoryCompIso
-      (normalizedDVRModuleRes l E X n.le_succ)
-      (scalarReductionRestriction.{u, u} l E X (n + 1))).symm ≪≫
-        Functor.mapDerivedCategoryNatIso
-          (normalizedDVRTransitionRestriction l E X D hl n) =
-      normalizedDVRResCompletedComp l E X D hl n.le_succ := by
-  unfold normalizedDVRResCompletedComp
-  rfl
 end RestrictionCompositor
 
 end AlgebraicGeometry.ProEtale.IntegralPresentation

@@ -175,6 +175,8 @@ theorem compIso_triangleShriekTriangle_assoc (K : Dᵇc(W.left)⟦Profinite.padi
   · congr 1
   · congr 1
 
+set_option maxHeartbeats 400000 in
+-- The statement unfolds the staircase triangles of three compactifications.
 /-- **Associativity of the composition isomorphisms computed through the staircase**: the
 associativity equation of the composition isomorphisms of the lower shriek, with each
 composition isomorphism expressed through its triangle of the staircase of compactifications
