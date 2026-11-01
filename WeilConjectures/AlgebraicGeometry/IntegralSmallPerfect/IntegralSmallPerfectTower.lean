@@ -14,6 +14,7 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 import Mathlib.Algebra.Module.Shrink
 import Mathlib.RingTheory.Finiteness.Small
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KProjective
+public import WeilConjectures.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
 
 /-! # Descending perfect coefficient towers to the scalar universe
 
@@ -27,6 +28,9 @@ open CategoryTheory CategoryTheory.Limits
 open scoped ZeroObject
 
 namespace AlgebraicGeometry.ProEtale.IntegralSmallPerfect
+
+instance bigModuleDerived (A : Type u) [CommRing A] :
+    HasDerivedCategory (ModuleCat.{u + 1} A) := HasDerivedCategory.standard _
 
 private def liftComplex
     {C D : Type*} [Category* C] [Category* D] [Preadditive C] [Preadditive D]
@@ -180,6 +184,27 @@ private def uliftSameIso (A : Type u) [CommRing A] :
   intro M N f
   ext x
   rfl
+
+instance (priority := 10000) liftedRestrictEquivalence
+    (A : Type u) [CommRing A] :
+    (ModuleCat.restrictScalars.{u + 1}
+      (ULift.ringEquiv : ULift.{u + 1} A ≃+* A).symm.toRingHom).IsEquivalence :=
+  (ModuleCat.restrictScalarsEquivalenceOfRingEquiv.{u, u + 1, u + 1}
+    (ULift.ringEquiv : ULift.{u + 1} A ≃+* A).symm).isEquivalence_functor
+
+instance (priority := 100000) liftedRestrictLeftAdjoint
+    (A : Type u) [CommRing A] :
+    (ModuleCat.restrictScalars.{u + 1}
+      (ULift.ringEquiv : ULift.{u + 1} A ≃+* A).symm.toRingHom).IsLeftAdjoint :=
+  (ModuleCat.restrictScalarsEquivalenceOfRingEquiv.{u, u + 1, u + 1}
+    (ULift.ringEquiv : ULift.{u + 1} A ≃+* A).symm).toAdjunction.isLeftAdjoint
+
+instance (priority := 100000) liftedRestrictRightAdjoint
+    (A : Type u) [CommRing A] :
+    (ModuleCat.restrictScalars.{u + 1}
+      (ULift.ringEquiv : ULift.{u + 1} A ≃+* A).symm.toRingHom).IsRightAdjoint :=
+  (ModuleCat.restrictScalarsEquivalenceOfRingEquiv.{u, u + 1, u + 1}
+    (ULift.ringEquiv : ULift.{u + 1} A ≃+* A).symm).symm.toAdjunction.isRightAdjoint
 
 private theorem small_perfect_of_lifted_perfect
     (A : Type u) [CommRing A]
@@ -368,6 +393,28 @@ Source: Stacks Tag 064Z (blueprint: lem-pe-integral-small-perfect-tower). -/
 def uliftRingMap {A B : Type u} [CommRing A] [CommRing B] (q : A →+* B) :
     ULift.{u + 1} A →+* ULift.{u + 1} B :=
   ULift.ringEquiv.symm.toRingHom.comp (q.comp ULift.ringEquiv.toRingHom)
+
+private instance (priority := 100000) liftedMapRestrictLeftAdjoint
+    {A B : Type u} [CommRing A] [CommRing B] (q : A →+* B) :
+    (ModuleCat.restrictScalars.{u + 1} (uliftRingMap q)).IsLeftAdjoint :=
+  (ModuleCat.restrictCoextendScalarsAdj.{u + 1, u + 1, u + 1}
+    (uliftRingMap q)).isLeftAdjoint
+
+private instance (priority := 100000) liftedMapRestrictRightAdjoint
+    {A B : Type u} [CommRing A] [CommRing B] (q : A →+* B) :
+    (ModuleCat.restrictScalars.{u + 1} (uliftRingMap q)).IsRightAdjoint :=
+  (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1}
+    (uliftRingMap q)).isRightAdjoint
+
+private instance (priority := 100000) bigMapRestrictLeftAdjoint
+    {A B : Type u} [CommRing A] [CommRing B] (q : A →+* B) :
+    (ModuleCat.restrictScalars.{u + 1} q).IsLeftAdjoint :=
+  (ModuleCat.restrictCoextendScalarsAdj.{u + 1, u, u} q).isLeftAdjoint
+
+private instance (priority := 100000) bigMapRestrictRightAdjoint
+    {A B : Type u} [CommRing A] [CommRing B] (q : A →+* B) :
+    (ModuleCat.restrictScalars.{u + 1} q).IsRightAdjoint :=
+  (ModuleCat.extendRestrictScalarsAdj.{u + 1, u, u} q).isRightAdjoint
 
 private def ringRestrictSquare {A B : Type u} [CommRing A] [CommRing B] (q : A →+* B) :
     ModuleCat.restrictScalars.{u + 1} (uliftRingMap q) ⋙
