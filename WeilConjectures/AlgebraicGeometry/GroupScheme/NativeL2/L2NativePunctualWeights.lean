@@ -43,4 +43,15 @@ Source: latest blueprint, F_y (blueprint: def-weil-punctual-weights). -/
     (localClosedPoint D X₀ x i hi) (localClosedPointDegree D X₀ x - 1)
     (localClosedPoint_return D X₀ x i hi)
 
+/-- Every closed-point eigenvalue has the prescribed absolute value, for every lift.
+The scalar lift changes only the universe, and is removed before applying iota.
+Source: latest blueprint, displayed purity equation (blueprint: def-weil-punctual-weights). -/
+def Pure (M : WeilModule D l X₀) (iota : PadicAlgCl l →+* ℂ) (w : ℝ) : Prop :=
+  ∀ (x : {x : X₀.left // x ∈ closedPoints X₀.left})
+    (i : X₀.left.residueField x.val →+* D.k)
+    (hi : i.comp (X₀.hom.residueFieldAlgebraMap x.val) = algebraMap D.k₀ D.k)
+    (α : ULift.{u + 1} (PadicAlgCl l)),
+    Module.End.HasEigenvalue (closedOperator D l X₀ M x i hi).hom α →
+      ‖iota α.down‖ = (Nat.card (X₀.left.residueField x.val) : ℝ) ^ (w / 2)
+
 end WeilConjectures.NativeL2
