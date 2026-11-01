@@ -445,28 +445,6 @@ private theorem pull_counit_iso
     Functor.isIso_leftDerivedFunctorCounit _
   exact NatIso.isIso_app_of_isIso _ P
 
-/-- The canonical geometric compositor with the scalar interface exposed.
-Source: Stacks 07A6 (blueprint: def-sfb-scalar-pullback-square-data). -/
-@[irreducible] def scalarPullbackComposition
-    (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
-    [MonObj R] [IsCommMonObj R]
-    {U V W : Scheme.{u}} (h : U ⟶ V) (k : V ⟶ W) :
-    L R (h ≫ k) ≅ L R k ⋙ L R h := by
-  unfold L CondensedRing.moduleObjectDerivedPullback
-  exact CondensedRing.leftDerivedUpperStarComp R h k
-
-/-- The canonical geometric pullback square with the scalar interface exposed.
-Source: Stacks 07A7 (blueprint: def-sfb-scalar-pullback-square-data). -/
-@[irreducible] def scalarPullbackSquare
-    (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
-    [MonObj R] [IsCommMonObj R]
-    {X' X C Y : Scheme.{u}} {a : X' ⟶ X} {c : C ⟶ Y}
-    {f : X ⟶ Y} {f' : X' ⟶ C} (sq : ChosenCartesianSquare a f' f c) :
-    L R c ⋙ L R f' ≅ L R f ⋙ L R a :=
-  (scalarPullbackComposition R f' c).symm ≪≫
-    eqToIso (congrArg (fun h : X' ⟶ Y ↦ L R h) sq.toCommSq.w.symm) ≪≫
-    scalarPullbackComposition R a f
-
 /-- The typed square is the paste of the two canonical compositors.
 Source: Stacks 07A7 (blueprint: def-sfb-scalar-pullback-square-data). -/
 theorem scalarPullbackSquare_eq
