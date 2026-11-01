@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeUnitLowerStar
 public import WeilConjectures.SmoothPurity.OrientationTransitionLowerShriekPullback
+public import WeilConjectures.SmoothPurity.OrientationTransitionUpperStar
 
 /-!
 # The reduction square for the pullbacks, and the proper piece of the reduction square for `Rf_!`
@@ -20,7 +21,9 @@ compatibility `β : Ψ(red_{n+1} K) ≅ red_n K` of `Ψ` with the reductions
 * `ProEtale.CondensedRing.etaleReductionUpperStarIso_restrictScalars`: for any `f : Z ⟶ Y`, the
   canonical comparisons `f^* ⋙ red ≅ red ⋙ Lf^*` modulo `ℓⁿ⁺¹` and `ℓⁿ`
   (`ProEtale.CondensedRing.etaleReductionUpperStarIso`) are intertwined by `T` and the commutation
-  of `Res` with `Lf^*` (`Etale.leftDerivedUpperStarRestrictScalarsIso`);
+  of `Res` with `Lf^*` (`Etale.leftDerivedUpperStarRestrictScalarsIso`); it is assembled
+  (`CategoryTheory.map_comp_app_comp_map_eq_of_cube`) from the étale and pro-étale pieces of
+  `WeilConjectures.SmoothPurity.OrientationTransitionUpperStar`;
 * `ProEtale.CondensedRing.mateEquiv_etaleReductionUpperStarIso_inv`: for a proper `p`, the
   comparison `Rp_! ⋙ red ≅ red ⋙ Rp_!` (`ProEtale.CondensedRing.etaleReductionLowerShriekIso`),
   followed by `Rp_! ≅ Rp_*`, is the mate of the pullback comparison under `p^* ⊣ Rp_!` and
@@ -126,7 +129,27 @@ theorem etaleReductionUpperStarIso_restrictScalars (f : Z ⟶ Y)
     (etaleReductionUpperStarIso ℓ E (n + 1) f).inv.app M ≫
       (etaleReductionTransposeNatTrans ℓ E n Z).app
         ((boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E) ℓ f).obj M) := by
-  sorry
+  have := AlgebraicGeometry.ProEtale.isIso_derivedRestrictScalarsCompComparisonLowerStarMap
+    (integersModPowCoeffTransition_surjective ℓ E n) (ker_integersModPowCoeffTransition ℓ E n)
+    Z.left
+  exact map_comp_app_comp_map_eq_of_cube
+    (rightDerivedComparisonBaseChange _ f.left) (rightDerivedComparisonBaseChange _ f.left)
+    (derivedRestrictScalarsCompComparisonLowerStarMap _ Y.left)
+    (derivedRestrictScalarsCompComparisonLowerStarMap _ Z.left)
+    (Etale.leftDerivedUpperStarRestrictScalarsIso _ f.left).hom
+    (AlgebraicGeometry.ProEtale.leftDerivedUpperStarRestrictScalarsIso _ f.left).hom
+    _ _ _ _ (etaleReductionProEtaleTranspose ℓ E n Y M)
+    (etaleReductionProEtaleTranspose ℓ E n Z
+      ((boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E) ℓ f).obj M))
+    (etaleReductionUpperStarProEtaleMap ℓ E (n + 1) f M)
+    (etaleReductionUpperStarProEtaleMap ℓ E n f M)
+    (etaleReductionUpperStarIso_inv_app ℓ E (n + 1) f M)
+    (etaleReductionUpperStarIso_inv_app ℓ E n f M)
+    (etaleReductionTransposeNatTrans_app_comp ℓ E n Y M)
+    (etaleReductionTransposeNatTrans_app_comp ℓ E n Z _)
+    (AlgebraicGeometry.ProEtale.map_app_comp_rightDerivedComparisonBaseChange_app_comp_map_eq _
+      f.left _)
+    (map_etaleReductionProEtaleTranspose_comp_eq ℓ E n f M)
 
 end UpperStar
 
