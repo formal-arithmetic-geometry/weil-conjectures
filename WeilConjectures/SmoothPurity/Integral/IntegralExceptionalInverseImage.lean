@@ -1191,6 +1191,45 @@ def integralExceptionalComparison
       (integralExceptionalUniformizer l E)) :=
   Classical.choice (integralExceptionalComparison_exists l E W P)
 
+private theorem exceptionalLocalizationUniqueness
+    {A B C : Type*} [Category A] [Category B] [Category C]
+    (Q : A ⥤ B) (W : MorphismProperty A) [Q.IsLocalization W]
+    (F G : B ⥤ C) (H : A ⥤ C) (e : Q ⋙ F ≅ H) (e' : Q ⋙ G ≅ H) :
+    ∃! a : F ≅ G, ∀ X, a.hom.app (Q.obj X) ≫ e'.hom.app X = e.hom.app X := by
+  let : Localization.Lifting Q W H F := ⟨e⟩
+  let : Localization.Lifting Q W H G := ⟨e'⟩
+  refine ⟨Localization.liftNatIso Q W H H F G (Iso.refl H), ?_, ?_⟩
+  · intro X
+    rw [Localization.liftNatIso_hom, Localization.liftNatTrans_app]
+    change (e.hom.app X ≫ (NatTrans.id H).app X ≫ e'.inv.app X) ≫ e'.hom.app X = _
+    simp
+  · intro a ha
+    apply Iso.ext
+    apply Localization.natTrans_ext Q W
+    intro X
+    apply (cancel_mono (e'.hom.app X)).1
+    rw [Localization.liftNatIso_hom, Localization.liftNatTrans_app]
+    change a.hom.app (Q.obj X) ≫ e'.hom.app X =
+      (e.hom.app X ≫ (NatTrans.id H).app X ≫ e'.inv.app X) ≫ e'.hom.app X
+    simpa using ha X
+
+private theorem exceptionalRightDerivedUniqueness
+    {A B C : Type*} [Category A] [Category B] [Category C]
+    (Q : A ⥤ B) (W : MorphismProperty A) [Q.IsLocalization W]
+    (F G : B ⥤ C) (H : A ⥤ C) (η : H ⟶ Q ⋙ F) (η' : H ⟶ Q ⋙ G)
+    [F.IsRightDerivedFunctor η W] [G.IsRightDerivedFunctor η' W] :
+    ∃! a : F ≅ G, ∀ X, η.app X ≫ a.hom.app (Q.obj X) = η'.app X := by
+  refine ⟨Functor.rightDerivedUnique F G η η' W, ?_, ?_⟩
+  · intro X
+    simp
+  · intro a ha
+    apply Iso.ext
+    apply Functor.rightDerived_ext F η W
+    ext X
+    have hf : η.app X ≫ (Functor.rightDerivedUnique F G η η' W).hom.app (Q.obj X) =
+        η'.app X := by simp
+    exact (ha X).trans hf.symm
+
 attribute [local irreducible] integralExceptionalComparison
 
 variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)

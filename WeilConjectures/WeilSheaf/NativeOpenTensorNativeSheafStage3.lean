@@ -36,6 +36,20 @@ structure SheafDataCore (s : NativeOpenTensorData k₀ l j)
 @[irreducible] def SheafData (s : NativeOpenTensorData k₀ l j)
     (m : OpenTensorDescentModels (nativeOpenTensorDescentInput k₀ l j)) : Type _ :=
   SheafDataCore k₀ l j s m
+
+def sheafData_sr (s : NativeOpenTensorData k₀ l j)
+    (m : OpenTensorDescentModels (nativeOpenTensorDescentInput k₀ l j))
+    (d : SheafData k₀ l j s m) : nativeOpenSheafTensor k₀ l Z ⋙ upperStar k₀ l j ≅
+      (upperStar k₀ l j).prod (upperStar k₀ l j) ⋙ nativeOpenSheafTensor k₀ l U := by
+  unfold SheafData at d
+  exact d.sr
+
+theorem sheafData_hs (s : NativeOpenTensorData k₀ l j)
+    (m : OpenTensorDescentModels (nativeOpenTensorDescentInput k₀ l j))
+    (d : SheafData k₀ l j s m) : HEq m.sheafRestriction
+      (fun M N ↦ (sheafData_sr k₀ l j s m d).app (M, N)) := by
+  unfold SheafData at d; exact d.hs
+
 /-- The native balanced sheaf restriction isomorphism realizes the sheaf map of m.
 
 Source: Stacks 07A4. (blueprint: new-sf-native-open-tensor-sheaf-stage3)

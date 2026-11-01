@@ -43,6 +43,52 @@ structure TotalDataCore
     (sr : c.SB ⋙ c.R ≅ c.R.prod c.R ⋙ c.SA) : Type _ :=
   TotalDataCore c m sr
 
+def totalDataMk
+    {A B : Type a} [Category.{b} A] [Category.{b} B] [Abelian A] [Abelian B]
+    [HasDerivedCategory.{b} A] [HasDerivedCategory.{b} B]
+    (c : OpenTensorDescentInput A B) (m : OpenTensorDescentModels c)
+    [c.R.PreservesZeroMorphisms]
+    (sr : c.SB ⋙ c.R ≅ c.R.prod c.R ⋙ c.SA)
+    (total : Functor.uncurry.obj c.TB ⋙ c.R.mapHomologicalComplex (.up ℤ) ≅
+      (c.R.mapHomologicalComplex (.up ℤ)).prod (c.R.mapHomologicalComplex (.up ℤ)) ⋙
+        Functor.uncurry.obj c.TA)
+    (summands : ∀ P T (p q n : ℤ) (h : p + q = n),
+      c.R.map (m.iB P T p q n h) ≫ (total.hom.app (P, T)).f n =
+        sr.hom.app (P.X p, T.X q) ≫
+          m.iA ((c.R.mapHomologicalComplex (.up ℤ)).obj P)
+            ((c.R.mapHomologicalComplex (.up ℤ)).obj T) p q n h) :
+    TotalData c m sr := by
+  unfold TotalData
+  exact ⟨total, summands⟩
+
+def totalData_total
+    {A B : Type a} [Category.{b} A] [Category.{b} B] [Abelian A] [Abelian B]
+    [HasDerivedCategory.{b} A] [HasDerivedCategory.{b} B]
+    (c : OpenTensorDescentInput A B) (m : OpenTensorDescentModels c)
+    [c.R.PreservesZeroMorphisms]
+    (sr : c.SB ⋙ c.R ≅ c.R.prod c.R ⋙ c.SA)
+    (d : TotalData c m sr) :
+    Functor.uncurry.obj c.TB ⋙ c.R.mapHomologicalComplex (.up ℤ) ≅
+      (c.R.mapHomologicalComplex (.up ℤ)).prod (c.R.mapHomologicalComplex (.up ℤ)) ⋙
+        Functor.uncurry.obj c.TA := by
+  unfold TotalData at d
+  exact d.total
+
+theorem totalData_summands
+    {A B : Type a} [Category.{b} A] [Category.{b} B] [Abelian A] [Abelian B]
+    [HasDerivedCategory.{b} A] [HasDerivedCategory.{b} B]
+    (c : OpenTensorDescentInput A B) (m : OpenTensorDescentModels c)
+    [c.R.PreservesZeroMorphisms]
+    (sr : c.SB ⋙ c.R ≅ c.R.prod c.R ⋙ c.SA)
+    (d : TotalData c m sr) : ∀ P T (p q n : ℤ) (h : p + q = n),
+      c.R.map (m.iB P T p q n h) ≫
+          ((totalData_total c m sr d).hom.app (P, T)).f n =
+        sr.hom.app (P.X p, T.X q) ≫
+          m.iA ((c.R.mapHomologicalComplex (.up ℤ)).obj P)
+            ((c.R.mapHomologicalComplex (.up ℤ)).obj T) p q n h := by
+  unfold TotalData at d
+  exact d.summands
+
 end NativeNormalizedRestrictionProof
 
 namespace AlgebraicGeometry.ProEtaleWeilSheaf

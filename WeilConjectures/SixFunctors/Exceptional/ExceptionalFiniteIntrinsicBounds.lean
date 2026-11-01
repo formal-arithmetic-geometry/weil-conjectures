@@ -12,6 +12,9 @@ import all WeilConjectures.AlgebraicGeometry.SfAffineChartPresentation.PurityAff
 import all WeilConjectures.AlgebraicGeometry.Finite.Ring.FiniteRingConstructibleDerivedOrigin
 import WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicTorAmplitudeTransport
 import WeilConjectures.AlgebraicGeometry.ProEtale.Bounded.ProEtaleBoundedConstructibleTriangulated
+public import WeilConjectures.AlgebraicGeometry.Sf.SfFiniteExceptionalInverseImage
+public import WeilConjectures.Compactification.FiniteFieldDatum.FiniteFieldFiberSupplement
+public import WeilConjectures.SixFunctors.Finite.FiniteTorAmplitude
 
 /-! # Uniform intrinsic bounds for the specified exceptional functor
 
@@ -131,6 +134,61 @@ private theorem bounds_tor_iso
   refine ⟨h.1, ?_⟩
   intro P Q he f hf hQ M i hi
   exact h.2 P Q (he.map (fun z ↦ z ≪≫ e.symm)) f hf hQ M i hi
+
+/-- The specified finite exceptional inverse image preserves its full finite-Tor domain.
+Source: latest blueprint thm-sf-ctf-stability (v), using the affine-chart exceptional
+bounds of cor-pur-general-admissibility-datum
+(blueprint: lem-trf-finite-geometric-exceptional-domain).
+
+Proof: choose geometric dimension bounds for the target and the affine charts of f.
+Realize an intrinsic input in fixed finite-module coordinates. Exact coefficient
+realization preserves and reflects bounded constructibility and the same Tor interval.
+The affine-chart exceptional theorem bounds the output by the shifted finite interval.
+Realize this output back in intrinsic coordinates. The equivalence counit transports
+the input hypotheses; the defining comparison-transported exceptional composite is
+exactly the one bounded by the theorem. Thus both required properties hold, including
+for an empty scheme or a zero input. No coefficient-system construction is used. -/
+theorem finiteGeometricExceptional_domain
+    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
+    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+    (n : ℕ)
+    {X Y : Scheme.{u}} [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]
+    (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))]
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    (c : Compactification f)
+    (K : proEtaleDerivedCategory Y (Padic.coefficientExtensionRing l E (n + 1)))
+    (hK : finiteTorConstructible l E (n + 1) (Nat.succ_pos n) Y K) :
+    finiteTorConstructible l E (n + 1) (Nat.succ_pos n) X
+      ((ProEtale.sfFiniteExceptional (Padic.coefficientExtensionRing l E (n + 1)) c).obj K)
+    := by
+  let : HasCompactification f := c.hasCompactification
+  let A := Padic.coefficientExtensionRing l E (n + 1)
+  let Λ := ULift.{u + 1, u} A
+  let : HasInvertibleExponent Λ (Spec (.of D.k)) :=
+    coefficient_invertible D l hl E (n + 1) (Spec (.of D.k)) (𝟙 _)
+  let eY := sfIntrinsicDerivedEquivalence Y A
+  obtain ⟨dY, hdY⟩ := exists_topologicalKrullDim_le (Y ↘ Spec (.of D.k))
+  obtain ⟨dX, hbounds⟩ := ProEtale.exists_preservationClauses (Y ↘ Spec (.of D.k)) f
+  obtain ⟨a, b, ht⟩ := hK.2
+  have hclosed : (intrinsicFiniteTorsionConstructible l E (n + 1)
+      (Nat.succ_pos n) Y).IsClosedUnderIsomorphisms :=
+    (proEtale_bounded_constructible_isTriangulated Y A).1
+  let := hclosed
+  have hc : ProEtale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y
+      (eY.inverse.obj K) :=
+    (bounds_constructible_iff l E (n + 1) (Nat.succ_pos n) Y _).mp
+      (ObjectProperty.prop_of_iso _ (eY.counitIso.app K).symm hK.1)
+  have ht' := (ProEtale.intrinsic_hasProEtaleTorAmplitude_iff_torAmplitudeIn
+    A Y a b ht.1 (eY.inverse.obj K)).mp
+      (bounds_tor_iso Y A (eY.counitIso.app K).symm a b ht)
+  obtain ⟨_, htor⟩ := hbounds Λ dY hdY
+  obtain ⟨hc', ht'⟩ := htor a b (eY.inverse.obj K) hc ht'
+  exact ⟨(bounds_constructible_iff l E (n + 1) (Nat.succ_pos n) X _).mpr hc',
+    a - 2 * (dX : ℤ), b + 2 * (dY : ℤ) + 1,
+    (ProEtale.intrinsic_hasProEtaleTorAmplitude_iff_torAmplitudeIn
+      A X _ _ (by have := ht.1; omega) _).mpr ht'⟩
 
 /-- Uniform intrinsic exceptional bounds for the specified ambient right functor.
 Source: blueprint cor-pur-general-admissibility-datum, exceptional construction step 3

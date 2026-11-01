@@ -71,6 +71,60 @@ theorem TransportCoreData.normalizeCanonicalSupport_support (E : FieldStage.{u} 
     d'.F E ⋙ (sequenceProperty l E Y).ι =
       d'.systemSupportFunctor l Ω D hl c operation left E := rfl
 
+/-- Conjugating the system functor preserves every field required by `TransportCoreData`.
+The adjunction is transported by the explicit natural isomorphism. Whiskering that
+isomorphism transports `realizeF` and `evaluationF`; the reduction comparison is
+derived from `realizeF`. Recompute the right evaluation mate for these transported
+data, so its dependent unit and counit equations are retained. All other fields stay fixed.
+Source: Zheng, Construction 5.25, and Mathlib's `Adjunction.ofNatIsoLeft`.
+(blueprint: lem-sf-exceptional-system-support-conjugation-obstruction) -/
+def TransportCoreData.conjugateSystemF : TransportCoreData l Ω D hl c operation left :=
+  { d with
+    F := fun E ↦ (d.F E).copyObj (d.F E).obj (α E)
+    adjunction := fun E ↦ (d.adjunction E).ofNatIsoLeft
+      ((d.F E).isoCopyObj (d.F E).obj (α E))
+    realizeF := fun E ↦ d.realizeF E ≪≫
+      Functor.isoWhiskerLeft (d.reconstruction E true).equivalence.functor
+        (Functor.isoWhiskerRight ((d.F E).isoCopyObj (d.F E).obj (α E))
+          (d.reconstruction E false).equivalence.inverse)
+    evaluationF := fun E n ↦
+      Functor.isoWhiskerRight ((d.F E).isoCopyObj (d.F E).obj (α E)).symm
+        ((d.reconstruction E false).evaluation n) ≪≫ d.evaluationF E n
+    evaluationG := fun _ _ ↦ Adjunction.compatibleRightComparison _ _ _ }
+
+/-- A nonnatural conjugation obstructs a universal strict support map law.
+Proof: the conjugate retains the operations and all object representatives, so the
+two displayed right-hand sides agree, including the equality transports by proof
+irrelevance. The claimed laws would therefore identify the two maps. This
+contradicts the previous theorem. Object identifications are an explicit hypothesis;
+no support law is used.
+Source: the conjugation test for Zheng, Construction 5.25.
+(blueprint: lem-sf-exceptional-system-support-conjugation-obstruction) -/
+theorem not_forall_system_support_map_of_conjugation (E : FieldStage.{u} l)
+    {K K' : (sequenceProperty l E X).FullSubcategory} (u : K ⟶ K')
+    (hne : (α E K).inv ≫ (d.F E).map u ≫ (α E K').hom ≠ (d.F E).map u)
+    (objects : ∀ (d' : TransportCoreData l Ω D hl c operation left)
+      (K : (sequenceProperty l E X).FullSubcategory),
+      (d'.F E ⋙ (sequenceProperty l E Y).ι).obj K =
+        ((sequenceProperty l E X).ι ⋙
+          IntegralSystemRealization.Operations.shriek l E.carrier (d'.operations E) c.i ⋙
+            IntegralSystemRealization.Operations.push l E.carrier (d'.operations E) c.g).obj K) :
+    ¬ ∀ d' : TransportCoreData l Ω D hl c operation left,
+      (d'.F E ⋙ (sequenceProperty l E Y).ι).map u =
+        eqToHom (objects d' K) ≫
+        ((sequenceProperty l E X).ι ⋙
+          IntegralSystemRealization.Operations.shriek l E.carrier (d'.operations E) c.i ⋙
+            IntegralSystemRealization.Operations.push l E.carrier (d'.operations E) c.g).map u ≫
+        eqToHom (objects d' K').symm := by
+  intro h
+  have he := h (d.conjugateSystemF l Ω D hl c operation left α)
+  change (sequenceProperty l E Y).ι.map
+    ((α E K).inv ≫ (d.F E).map u ≫ (α E K').hom) = _ at he
+  have he' : (sequenceProperty l E Y).ι.map
+      ((α E K).inv ≫ (d.F E).map u ≫ (α E K').hom) =
+      (d.F E ⋙ (sequenceProperty l E Y).ι).map u := he.trans (h d).symm
+  exact hne ((sequenceProperty l E Y).ι.map_injective he')
+
 /-- The prescribed support composite, before lifting it to the full subcategory.
 Source: Zheng, Constructions 4.1 and 5.25.
 (blueprint: lem-sf-exceptional-system-support-explicit-normalization) -/

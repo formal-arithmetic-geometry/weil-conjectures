@@ -449,6 +449,103 @@ def theta {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of P.field.k))
       (exceptionalAntecedent P aY p K.obj) (exceptionalInput P aY p K Ke hKe eK)
       (Iso.refl _) ≫ inverseConjugate P aY p K
 
+/-- The actual exceptional transpose is the previous transpose followed by Rp_!(b).
+Source: Integration paragraph (blueprint: lem-pur-affine-line-composite-transpose).
+Proof: Step 1 establishes finite-Tor admissibility of N=Rp^!K and etale origin of all
+sources. Step 4 inverts the defining Hom transpose of gamma_{q,N}, giving b_{q,N}.
+Naturality in Step 2 replaces b_{q,N} Rq_!F_q(t) by t b_{q,M}. Step 5 uses the composite
+adjunction counit Rp_!(epsilon_q) epsilon_p and the conjugate equation for precisely
+originCompositionAmbient. Apply this equation to Theta and cancel c c^-1. Step 6 uses
+functoriality of Rp_! to separate t and b, leaving the stated equality. No isomorphy of
+gamma and no adjunction on arbitrary ambient pro-etale objects is used. -/
+
+private theorem iso_naturality_paste_local {C D E : Type*} [Category* C]
+    [Category* D] [Category* E] (F : C ⥤ D) (G : D ⥤ E) (H : C ⥤ E)
+    (Q : ObjectProperty C) (e : Q.ι ⋙ F ⋙ G ≅ Q.ι ⋙ H)
+    {T M : C} (hT : Q T) (hM : Q M) (v : T ⟶ M)
+    {V : D} {K : E} (a : F.obj M ⟶ V) (b : G.obj V ⟶ K) :
+    e.inv.app ⟨T, hT⟩ ≫ G.map (F.map v ≫ a) ≫ b =
+      H.map v ≫ (e.inv.app ⟨M, hM⟩ ≫ G.map a ≫ b) := by
+  have hn := e.inv.naturality (ObjectProperty.homMk v : ⟨T, hT⟩ ⟶ ⟨M, hM⟩)
+  change H.map v ≫ e.inv.app ⟨M, hM⟩ =
+    e.inv.app ⟨T, hT⟩ ≫ G.map (F.map v) at hn
+  rw [Functor.map_comp, ← Category.assoc, ← Category.assoc, ← hn,
+    Category.assoc, Category.assoc]
+
+private theorem transpose_paste_local {C D E : Type v} [Category.{w} C]
+    [Category.{w} D] [Category.{w} E] (F : C ⥤ D) (G : D ⥤ E) (H : C ⥤ E)
+    (Q : ObjectProperty C) (e : Q.ι ⋙ F ⋙ G ≅ Q.ι ⋙ H)
+    {T U M N : C} (hT : Q T) (hM : Q M) {V V' : D} {K : E}
+    (ehT : (H.obj T ⟶ K) ≃ (T ⟶ N))
+    (ehM : (H.obj M ⟶ K) ≃ (M ⟶ N))
+    (hn : ∀ (v : T ⟶ M) (b : H.obj M ⟶ K),
+      ehT (H.map v ≫ b) = v ≫ ehM b)
+    (v₁ : T ⟶ U) (v₂ : U ⟶ M) (t : V ⟶ V')
+    (alpha : F.obj T ⟶ V) (beta : G.obj V ⟶ K)
+    (a : F.obj M ⟶ V') (b : G.obj V' ⟶ K)
+    (hv : F.map (v₁ ≫ v₂) ≫ a = alpha ≫ t)
+    (ht : G.map t ≫ b = beta) :
+    ehT (e.inv.app ⟨T, hT⟩ ≫ G.map alpha ≫ beta) =
+      v₁ ≫ v₂ ≫ transposeComposition F G H Q hM ehM a b e := by
+  unfold transposeComposition
+  have hp := iso_naturality_paste_local F G H Q e hT hM (v₁ ≫ v₂) a b
+  rw [hv, Functor.map_comp, Category.assoc, ht] at hp
+  rw [hp, hn, Category.assoc]
+
+private theorem composition_transpose_local (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    [QuasiCompact f] [QuasiCompact g] [CompactSpace Y] [CompactSpace Z]
+    {T : C A X} (hT : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} A) X T)
+    {V : C A Y} (hV : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} A) Y V)
+    {L : C A Z} (hL : DerivedCategory.TStructure.t.plus L)
+    (alpha : (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).obj T ⟶ V)
+    (beta : (rightDerivedLowerShriek (ModuleCat.{u + 1} A) g).obj V ⟶ L) :
+    rightDerivedUpperShriekHomEquiv (f ≫ g) hT hL
+      ((originCompositionAmbient A f g).inv.app ⟨T, hT⟩ ≫
+        (rightDerivedLowerShriek (ModuleCat.{u + 1} A) g).map alpha ≫ beta) =
+      rightDerivedUpperShriekHomEquiv f hT hV.plus alpha ≫
+        (rightDerivedUpperShriek A f).map
+          (rightDerivedUpperShriekHomEquiv g hV hL beta) ≫
+        compositionInverse A f g ⟨L, hL⟩ := by
+  let t := rightDerivedUpperShriekHomEquiv g hV hL beta
+  let v := rightDerivedUpperShriekHomEquiv f hT hV.plus alpha ≫
+    (rightDerivedUpperShriek A f).map t
+  have hv : (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).map v ≫
+      rightDerivedUpperShriekCounit f _ (plus_rightDerivedUpperShriek_obj g hL) =
+      alpha ≫ t := by
+    rw [← rightDerivedUpperShriekHomEquiv_symm_apply f hT]
+    change (rightDerivedUpperShriekHomEquiv f hT
+      (plus_rightDerivedUpperShriek_obj g hL)).symm
+        (rightDerivedUpperShriekHomEquiv f hT hV.plus alpha ≫
+          (rightDerivedUpperShriek A f).map t) = _
+    rw [rightDerivedUpperShriekHomEquiv_naturality_right_symm f hT hV.plus,
+      Equiv.symm_apply_apply]
+  have ht : (rightDerivedLowerShriek (ModuleCat.{u + 1} A) g).map t ≫
+      rightDerivedUpperShriekCounit g L hL = beta := by
+    simpa only [rightDerivedUpperShriekHomEquiv_symm_apply] using
+      (rightDerivedUpperShriekHomEquiv g hV hL).symm_apply_apply beta
+  unfold compositionInverse
+  exact transpose_paste_local
+    (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f)
+    (rightDerivedLowerShriek (ModuleCat.{u + 1} A) g)
+    (rightDerivedLowerShriek (ModuleCat.{u + 1} A) (f ≫ g))
+    (DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} A) X)
+    (originCompositionAmbient A f g) hT
+    (plusEtaleOrigin_rightDerivedUpperShriek_obj f
+      (plus_rightDerivedUpperShriek_obj g hL))
+    (rightDerivedUpperShriekHomEquiv (f ≫ g) hT hL)
+    (rightDerivedUpperShriekHomEquiv (f ≫ g)
+      (plusEtaleOrigin_rightDerivedUpperShriek_obj f
+        (plus_rightDerivedUpperShriek_obj g hL)) hL)
+    (fun w c ↦ rightDerivedUpperShriekHomEquiv_naturality_left (f ≫ g) hT
+      (plusEtaleOrigin_rightDerivedUpperShriek_obj f
+        (plus_rightDerivedUpperShriek_obj g hL)) hL w c)
+    (rightDerivedUpperShriekHomEquiv f hT hV.plus alpha)
+    ((rightDerivedUpperShriek A f).map t) t alpha beta
+    (rightDerivedUpperShriekCounit f _ (plus_rightDerivedUpperShriek_obj g hL))
+    (rightDerivedUpperShriekCounit g L hL) hv ht
+
 theorem composite_transpose {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of P.field.k))
     [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY]
     (p : X ⟶ Y) [LocallyOfFiniteType p] [QuasiCompact p] [IsSeparated p]
