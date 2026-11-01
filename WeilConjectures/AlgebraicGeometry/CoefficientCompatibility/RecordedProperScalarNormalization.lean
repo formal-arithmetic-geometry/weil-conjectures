@@ -179,6 +179,4 @@ attribute [local irreducible] Functor.mapDerivedCategory Functor.rightDerivedFun
 attribute [local implicit_reducible] proEtaleConstantRingMap scalarExtensionFunctor
   sfIntrinsicDerivedEquivalence Equivalence.mapDerivedCategory Functor.mapHomologicalComplex
 
-set_option maxHeartbeats 600000 in
--- This cube transposition checks several large derived-adjunction comparison types.
 end AlgebraicGeometry.ProEtale.CoefficientCompatibility

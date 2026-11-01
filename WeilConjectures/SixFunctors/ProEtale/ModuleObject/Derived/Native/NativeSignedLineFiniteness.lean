@@ -35,8 +35,6 @@ section SignedLine
 
 variable (L : NativeTwistModules Λ X)
 
-local notation "𝒯" => coefficientSignedTwist X (condensedRingObj Λ X) L
-
 end SignedLine
 
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -36,6 +36,4 @@ variable {U' U X' X : Scheme.{u}} {gU : U' ⟶ U} {j' : U' ⟶ X'}
 
 open AlgebraicGeometry.ProEtale.StrictTower
 
-set_option maxHeartbeats 4000000 in
--- Sectionwise equality unfolds restriction of scalars on completed coefficient sheaves.
 end AlgebraicGeometry.Scheme

@@ -24,6 +24,9 @@ p. 67; the constant-coefficient argument of lem-pur-supported-hom, steps 1--4
 (blueprint: lem-pur-supported-sections-hom).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 set_option autoImplicit false
 universe u

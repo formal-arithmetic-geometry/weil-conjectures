@@ -13,6 +13,9 @@ import all WeilConjectures.Algebra.Homology.Coefficient.CoefficientSystemUnbound
 Source: Zheng, Construction 4.1 and Construction 5.15; Stacks Tag 03EL.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
@@ -79,10 +82,6 @@ private theorem insertion_naturality (W : Scheme.{u}) (n : ℕ)
     Functor.comp_map, Functor.id_map] using congrArg (fun k ↦ k ≫ r.hom.app
       ((siteCoefficientTensor (a.sheaf W n)).obj N)) h.symm
 
-set_option maxHeartbeats 2000000 in
--- Elaborating the composed coefficient functors exceeds the default heartbeat budget.
-set_option maxHeartbeats 2000000 in
--- The transition diagram contains several composed coefficient functors.
 end
 
 end AlgebraicGeometry

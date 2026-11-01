@@ -43,6 +43,9 @@ construction of the exact transport and its finite-level equivalences from the
 compact-support projection assembly.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option genInjectivity false

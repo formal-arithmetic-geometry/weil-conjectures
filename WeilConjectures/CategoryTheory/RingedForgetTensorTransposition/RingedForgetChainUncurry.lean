@@ -78,6 +78,9 @@ Source: Stacks 08J9, 070I; steps 5--8 of ringed tensor transposition
 (blueprint: lem-sf-ringed-forget-chain-uncurry).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 
 set_option autoImplicit false

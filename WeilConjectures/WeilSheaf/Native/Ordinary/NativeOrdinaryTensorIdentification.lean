@@ -86,7 +86,7 @@ local instance : HasLimitsOfSize.{b, b} (Mod C R) := inferInstance
 local instance : HasColimitsOfSize.{b, b} (Mod C R) := inferInstance
 
 private noncomputable def tensorRightIso (M : Mod C R) :
-    Mod.tensorLeft M ≅ MonoidalCategory.tensorRight M := NativeAux.tensorIso M
+    Mod.tensorLeft M ≅ MonoidalCategory.tensorRight M := PrecompositionAux.tensorIso M
 
 omit [MonoidalPreadditive C] in
 private theorem tensorRightIso_naturality {M N : Mod C R} (f : M ⟶ N) :
@@ -97,10 +97,10 @@ private theorem tensorRightIso_naturality {M N : Mod C R} (f : M ⟶ N) :
   apply Mod.tensorLeft_obj_hom_ext
   simp only [NatTrans.comp_app, Mod.comp_hom']
   rw [Mod.tensorπ_tensorLeftMap_assoc]
-  change P.X ◁ f.hom ≫ Mod.tensorπ P N ≫ (NativeAux.tensorComponent P N).hom.hom = _
-  rw [NativeAux.tensorComponent_π]
-  change _ = Mod.tensorπ P M ≫ (NativeAux.tensorComponent P M).hom.hom ≫ (P ◁ f).hom
-  rw [← Category.assoc, NativeAux.tensorComponent_π]
+  change P.X ◁ f.hom ≫ Mod.tensorπ P N ≫ (PrecompositionAux.tensorComponent P N).hom.hom = _
+  rw [PrecompositionAux.tensorComponent_π]
+  change _ = Mod.tensorπ P M ≫ (PrecompositionAux.tensorComponent P M).hom.hom ≫ (P ◁ f).hom
+  rw [← Category.assoc, PrecompositionAux.tensorComponent_π]
   exact (Mod.tensorObjπ_whiskerLeft f).symm
 
 private noncomputable def tensorLeftIso (M : Mod C R) :

@@ -14,6 +14,9 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Int
 /-! # Compatible local bases of the native integral root tower
 Source: coefficient twists, integral limit (blueprint: lem-twist-native-integral-local-line).
 -/
+
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
 @[expose] public noncomputable section
 set_option autoImplicit false
 universe u

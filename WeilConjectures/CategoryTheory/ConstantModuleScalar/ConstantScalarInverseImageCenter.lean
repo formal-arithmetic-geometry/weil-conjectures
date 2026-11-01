@@ -9,6 +9,9 @@ public import WeilConjectures.CategoryTheory.ConstantModuleScalar.ConstantModule
 
 /-! # Constant scalar multiplication under exact algebraic inverse image -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 universe u v r w

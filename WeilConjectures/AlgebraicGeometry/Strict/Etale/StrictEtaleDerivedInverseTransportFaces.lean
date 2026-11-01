@@ -336,17 +336,7 @@ set_option maxHeartbeats 1500000 in
 -- Nested coefficient and inverse-image transposes require additional elaboration.
 attribute [local semireducible] siteCoefficientTensor
 
-set_option maxHeartbeats 1500000 in
--- Nested coefficient and inverse-image transposes require additional elaboration.
 end Ordinary
 
 -- Keep the two localization calculations abstract from the chosen comparisons.
-set_option maxHeartbeats 300000 in
--- Instantiate the evaluation cube and cancel its component isomorphisms.
-set_option maxHeartbeats 300000 in
--- Instantiate the six-face calculation on one K-flat representative.
-set_option maxHeartbeats 300000 in
--- Pass from K-flat representatives to arbitrary derived objects.
-set_option maxHeartbeats 300000 in
--- Descend the finite comparisons and combine their compatibility faces.
 end AlgebraicGeometry

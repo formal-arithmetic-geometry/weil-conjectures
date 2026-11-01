@@ -42,6 +42,9 @@ termwise descent. The comparisons in the compatibility equations are fixed by
 fibre-product pasting and conjugation, not independently chosen isomorphisms.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 set_option autoImplicit false

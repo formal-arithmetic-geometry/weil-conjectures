@@ -1126,10 +1126,4 @@ private theorem tensor_comp {T W Z : ScalarSite.{u, v, r, w} A B}
   erw [Category.comp_id, Category.id_comp] at heM
   exact heM
 
-set_option maxHeartbeats 1600000 in
--- Comparing the dependent module and sheaf presentations needs extra elaboration time.
-set_option maxHeartbeats 1600000 in
--- Comparing the dependent module and sheaf presentations needs extra elaboration time.
-set_option maxHeartbeats 1600000 in
--- Comparing the dependent module and sheaf presentations needs extra elaboration time.
 end CategoryTheory.ToposFiniteFreeCompact

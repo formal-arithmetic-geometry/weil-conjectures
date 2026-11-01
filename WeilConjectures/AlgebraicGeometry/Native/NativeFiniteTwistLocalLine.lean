@@ -12,6 +12,9 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal
 /-! # Local bases for the native finite root line
 Source: coefficient twist construction (blueprint: lem-twist-native-finite-local-line).
 -/
+
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
 @[expose] public noncomputable section
 set_option autoImplicit false
 universe u

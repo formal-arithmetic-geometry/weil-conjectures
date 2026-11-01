@@ -14,6 +14,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageExact
 Source: Zheng, Construction 5.15, Lemma 5.16 and Proposition 2.29(2).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option genInjectivity false
@@ -50,10 +53,6 @@ variable {O O' : Type (u + 1)} [CommRing O] [CommRing O'] {ell : O} {mu : O'}
     (finite : ∀ n, StrictEtaleLevelInverseTransport TX TZ SA.openImage SB.openImage
       SA.openDerived.level SB.openDerived.level n)
 
-set_option maxHeartbeats 1000000 in
--- Three nested transposes expose concrete underlying sheaf functors.
-set_option maxHeartbeats 1200000 in
--- The insertion square contains several concrete scalar and geometric functors.
 section ScalarPreservation
 variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
     (T : GrothendieckTopology C)
@@ -69,10 +68,6 @@ omit [HasWeakSheafify T (Type (u + 1))]
     [T.HasSheafCompose (CategoryTheory.forget AddCommGrpCat.{u + 1})] in
 end ScalarPreservation
 
-set_option maxHeartbeats 1200000 in
--- Specializing preservation checks the concrete coefficient quotient categories.
-set_option maxHeartbeats 1600000 in
--- The representative substitutions compare several concrete derived functors.
 end Quotient
 
 private theorem inverse_three_eq {C : Type*} [Category C]
@@ -118,6 +113,4 @@ private theorem inverse_cube
       Functor.whiskerLeft_app, Functor.mapIso_hom, Iso.app_hom] using he)
   simpa only [Functor.mapIso_inv, Iso.app_inv] using hi
 
-set_option maxHeartbeats 4000000 in
--- Compare plain natural transformations before reversing the three object isomorphisms.
 end AlgebraicGeometry

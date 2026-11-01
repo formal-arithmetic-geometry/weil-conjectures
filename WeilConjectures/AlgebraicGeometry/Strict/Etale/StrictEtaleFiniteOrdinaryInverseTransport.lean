@@ -45,6 +45,4 @@ attribute [local instance 5000] strictEtaleSystemDerived strictEtaleLevelDerived
 
 attribute [local irreducible] siteCoefficientTensorAdj
 
-set_option maxHeartbeats 1000000 in
--- Keep tensor insertions behind their public underlying-sheaf API.
 end AlgebraicGeometry

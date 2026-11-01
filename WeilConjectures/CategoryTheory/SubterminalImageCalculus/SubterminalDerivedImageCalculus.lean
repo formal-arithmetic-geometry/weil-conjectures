@@ -359,8 +359,6 @@ end
 end LiftOverlap
 
 section OrdinaryOverlap
-set_option maxHeartbeats 400000 in
--- Normalize the termwise adjunction and restriction compositor together.
 end OrdinaryOverlap
 
 set_option backward.defeqAttrib.useBackward true
@@ -368,6 +366,4 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 universe w0 wU wV wW
 
-set_option maxHeartbeats 500000 in
--- Simultaneous elaboration of five adjunctions and their localization comparisons.
 end CategoryTheory.SubterminalImageCalculus

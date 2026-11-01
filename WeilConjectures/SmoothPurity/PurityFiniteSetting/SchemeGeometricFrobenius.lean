@@ -58,9 +58,4 @@ set_option backward.isDefEq.respectTransparency false in
 attribute [local irreducible] proEtaleRingModuleAdjunction
   proEtaleRingModulePullback proEtaleRingModulePullbackObj proEtaleRingModulePullbackMap
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 800000 in
--- Normalizing the chosen compositors elaborates dependent derived-functor transports.
 end WeilConjectures.PurityFiniteSetting

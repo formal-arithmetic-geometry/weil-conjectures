@@ -32,6 +32,9 @@ import Mathlib.CategoryTheory.Functor.Derived.PointwiseRightDerived
 import WeilConjectures.Algebra.Homology.System.SystemScalarModel
 import WeilConjectures.CategoryTheory.Derived.DerivedSquareIndependentUniverses
 /-! # Exact scalar transport on strict etale systems -/
+
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option genInjectivity false

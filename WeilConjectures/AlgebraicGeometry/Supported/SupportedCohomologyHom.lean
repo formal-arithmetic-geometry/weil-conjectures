@@ -37,6 +37,9 @@ The derived category is the ambient category of all module sheaves. The natural
 isomorphism is between additive-group-valued functors on its bounded-below subcategory.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 set_option autoImplicit false

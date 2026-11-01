@@ -36,6 +36,4 @@ attribute [local implicit_reducible] sfIntrinsicDerivedEquivalence
   Equivalence.mapDerivedCategory sfIntrinsicExtensionByZero
   proEtaleConstantRingMap scalarExtensionFunctor
 
-set_option maxHeartbeats 600000 in
--- The pasted square elaborates several derived presentation and adjunction types.
 end AlgebraicGeometry.ProEtale.CoefficientCompatibility

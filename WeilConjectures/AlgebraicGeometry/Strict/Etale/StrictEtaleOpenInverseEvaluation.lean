@@ -17,6 +17,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageExact
 Source: Zheng, Construction 5.15, Lemma 5.16 and Proposition 2.29(2).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option backward.defeqAttrib.useBackward true
@@ -164,8 +167,6 @@ variable {O O' : Type (u + 1)} [CommRing O] [CommRing O'] {ell : O} {mu : O'}
     (square : StrictEtaleInverseTransport TX TZ SA.openImage SB.openImage
       SA.openDerived.system SB.openDerived.system)
 
-set_option maxHeartbeats 2000000 in
--- The representative comparison expands several nested evaluation functors.
 end Evaluation
 
 end AlgebraicGeometry

@@ -28,6 +28,9 @@ second paragraph; Stacks Tags 09AF, 09BM, 09AA, 015F and 0FND
 (blueprint: lem-sf-derived-immersion-comparison-normalization).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 
 set_option autoImplicit false

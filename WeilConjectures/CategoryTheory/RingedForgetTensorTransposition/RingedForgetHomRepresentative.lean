@@ -135,6 +135,4 @@ variable [HasDerivedCategory.{wb} (RingedTensorModules.{c, v, r} J R)]
 
 attribute [local irreducible] homComplexFunctor derivedInternalHomOfUniverses
 
-set_option maxHeartbeats 1000000 in
--- Cancel a localized K-injective source resolution in the natural representative squares.
 end CategoryTheory.RingedForgetTensorTransposition

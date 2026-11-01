@@ -26,6 +26,9 @@ fixed-coefficient pro-etale maps. The categorical calculation follows the corres
 etale calculation in `WeilConjectures.SixFunctors.Etale.Derived`.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 set_option autoImplicit false

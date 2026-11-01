@@ -23,8 +23,4 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor SheafOfModules
 namespace AlgebraicGeometry
 attribute [local instance 5000] strictEtaleSystemDerived strictEtaleLevelDerived
-set_option maxHeartbeats 1000000 in
--- The normalized transport uses several derived-factorization comparisons.
-set_option maxHeartbeats 1000000 in
--- The two mate cubes include several normalized system comparison maps.
 end AlgebraicGeometry

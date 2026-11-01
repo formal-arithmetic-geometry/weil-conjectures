@@ -71,6 +71,9 @@ its unbounded derived tensor, and the recorded finite-value constructibility pre
   constructibility, bounded constructibility, and preservation of every cohomology interval.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 set_option autoImplicit false

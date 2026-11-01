@@ -15,6 +15,9 @@ Source: Zheng, Construction 4.1 and Construction 5.15; Stacks Tags 03D7 and 06YT
 (blueprint: lem-pur-strict-etale-derived-quotient-interchange).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 universe u
@@ -211,8 +214,6 @@ private def ordinaryComparison {m n : ℕ} (h : n ≤ m) :
     ((siteCoefficientTensorAdj.{u + 1, u, u + 1} (a.sheaf T m)).comp
       (coefficientTensorAdj (J := T.smallEtaleTopology) (O := O') (ell := mu) h))
 
-set_option maxHeartbeats 2000000 in
--- Unfolding the composite scalar adjunction and its underlying section maps is expensive.
 end
 
 end AlgebraicGeometry

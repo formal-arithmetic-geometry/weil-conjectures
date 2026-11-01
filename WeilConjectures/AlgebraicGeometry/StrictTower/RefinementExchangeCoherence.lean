@@ -27,6 +27,9 @@ compactification candidate, refinement comparison and proper/open exchange. The 
 below only supply quasi-compactness and invertibility, not a new choice of any operation.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048

@@ -27,6 +27,9 @@ Source: blueprint, sec-smooth-purity/sk-prop-a1-kummer/lem-exc-procyclic-two-ter
 statement and proof (blueprint: lem-exc-procyclic-two-term).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 universe u w

@@ -165,6 +165,4 @@ private def comparisonData
       U.mapDerivedCategory SB SA True :=
   makeComparisonData _ _ U.mapDerivedCategory SB SA βB βA m.derived χ.derived
 
-set_option maxHeartbeats 800000 in
--- Compare model isomorphisms without unfolding the total tensor or chosen Hom resolution.
 end CategoryTheory.RingedForgetTensorTransposition

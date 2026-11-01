@@ -10,6 +10,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 
 import WeilConjectures.AlgebraicGeometry.Pur.PurEtaleClosedRightAdjointCoproducts
 import WeilConjectures.AlgebraicGeometry.Pur.PurEtaleLisseDualizable
+import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.CohomologicalDimension
 import WeilConjectures.CategoryTheory.Sites.ConstantSheafMonoidal
 import WeilConjectures.CategoryTheory.GrothendieckDerivedCoproducts
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory

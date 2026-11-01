@@ -16,6 +16,9 @@ Source: coefficient-coherence proof steps 5--10.
 Proof: paste the unit-normalized proper and open coefficient squares, use naturality
 of the proper pushforward comparison, then substitute the four beta specifications
 and cancel the endpoint conjugations. -/
+
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
@@ -119,6 +122,4 @@ variable {X' Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}
   [dY' : Fact (∃ n : ℕ, topologicalKrullDim Y' ≤ (n : WithBot ℕ∞))]
   [iY' : Fact (∀ y : Y', IsUnit (l : Y'.presheaf.stalk y))]
 
-set_option maxHeartbeats 4000000 in
--- Elaborating the four localized coefficient comparisons exceeds the default limit.
 end AlgebraicGeometry.Scheme

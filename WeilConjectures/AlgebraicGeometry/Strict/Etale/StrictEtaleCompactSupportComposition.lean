@@ -14,6 +14,9 @@ import WeilConjectures.AlgebraicGeometry.Strict.Etale.StrictEtaleInverseTranspor
 Source: Zheng, Construction 5.15 and Proposition 2.29(2).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option genInjectivity false
