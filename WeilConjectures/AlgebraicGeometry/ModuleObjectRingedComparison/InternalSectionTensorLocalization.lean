@@ -314,6 +314,7 @@ private theorem nativeDescent : Nonempty (NativeDescentData F) := by
 end Abstract
 
 attribute [local instance 1000001] sectionRingHasSheafCompose
+attribute [local instance 2000] HasDerivedCategory.ofIsGrothendieckAbelian
 
 private def uncurryComparison {D E : Type*} [Category D] [Category E]
     [MonoidalCategory D] {F : D ⥤ E} {G : D × D ⥤ E}

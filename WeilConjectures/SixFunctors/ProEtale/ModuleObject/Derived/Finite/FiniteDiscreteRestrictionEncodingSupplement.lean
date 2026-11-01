@@ -10,8 +10,12 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 import WeilConjectures.CategoryTheory.Sites.PushforwardMonoidal
 import WeilConjectures.AlgebraicGeometry.FiniteDiscreteCoefficientSections
+public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteRestrictionEncoding
 
 /-! # Restriction compatibility of the fixed coefficient encoding -/
+
+-- After dropping the copy of upstream's theorem, this module only keeps private declarations.
+set_option linter.privateModule false
 
 @[expose] public section
 
@@ -229,39 +233,5 @@ private noncomputable def encodingPullbackNatIso (T U : Scheme.{u}) (j : U ⟶ T
   let b := (upperStarLowerStarAdjunction (Profinite.continuousMapRingObj.{u} B) j).comp
     EU.symm.toAdjunction
   exact a.leftAdjointUniq (b.ofNatIsoRight kr)
-
-/-- The common coefficient encoding commutes with inverse image along a scheme morphism.
-Source: Bhatt--Scholze, Proposition 5.3.2; the sectionwise encoding of internal
-modules and the coefficient identification pulled back from one fixed point.
-(blueprint: lem-weil-pbc-finite-discrete-restriction-encoding)
-
-Proof in words. Write the encoding as restriction of scalars along the fixed
-constant-ring identification, followed by sectionwise encoding. At the presheaf
-level, sectionwise encoding commutes with direct image, which is precomposition;
-restriction of scalars commutes with that same precomposition. The coefficient
-maps commute because all are obtained by pulling back eR from the profinite point.
-Restrict this direct-image isomorphism to sheaves. Conjugating by the two encoding
-equivalences and using uniqueness of left adjoints gives the inverse-image
-isomorphism. The internal inverse image is mapMod followed by extension of
-scalars along condensedPullbackHom. This ring map is invertible, so extension
-of scalars is canonically restriction along its inverse. Evaluate the resulting
-natural isomorphism at M. This uses no finiteness, nonempty-space, or nonzero-ring
-assumption. -/
-theorem finiteDiscreteCoefficient_restrictionEncoding
-    (T U : Scheme.{u}) (j : U ⟶ T) (M : FiniteDiscreteInternalModules B T) :
-    Nonempty (
-      ((j)^*[ModuleCat.{u + 1} (ULift.{u + 1} B)]).obj
-        ((finiteDiscreteCoefficientEquivalence B eR G hG T).inverse.obj M) ≅
-      (finiteDiscreteCoefficientEquivalence B eR G hG U).inverse.obj
-        ((Mod.comap (inv (condensedPullbackHom
-          (Profinite.continuousMapRingObj.{u} B) j))).obj
-          ((((j)^*[Ab.{u + 1}]).mapMod
-            (condensedRingObj (Profinite.continuousMapRingObj.{u} B) T)).obj M))) := by
-  refine ⟨(encodingPullbackNatIso B eR G hG T U j).app M ≪≫ ?_⟩
-  exact (finiteDiscreteCoefficientEquivalence B eR G hG U).inverse.mapIso
-    ((Mod.extendScalarsIsoComapInv
-      (condensedPullbackHom (Profinite.continuousMapRingObj.{u} B) j)).app
-      ((((j)^*[Ab.{u + 1}]).mapMod
-        (condensedRingObj (Profinite.continuousMapRingObj.{u} B) T)).obj M))
 
 end AlgebraicGeometry.ProEtale.CondensedRing

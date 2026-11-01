@@ -50,68 +50,6 @@ namespace AlgebraicGeometry.Scheme
 
 namespace LocallyClosedExtensionData
 
-/-- The same comparisons on unbounded derived categories, required to be the
-localizations of the module comparisons on every cochain complex, not arbitrary isos.
-Source: Stacks, Tags 05RU and 015F; exact-functor localization
-(blueprint: lem-sfb-locally-closed-extension-coherence). -/
-structure DerivedCoherence (E : LocallyClosedExtensionData.{u}) where
-  restriction : ∀ {S X : LocallyClosedCoefficients.{u}}
-    (a : LocallyClosedCoefficientImmersion S X), E.derived a ⋙ a.pull.mapDerivedCategory ≅ 𝟭 _
-  gamma : ∀ {S X T : LocallyClosedCoefficients.{u}}
-    (a : LocallyClosedCoefficientImmersion S X) (b : LocallyClosedCoefficientImmersion T S),
-    E.derived b ⋙ E.derived a ≅ E.derived (a.comp b)
-  identity : ∀ X : LocallyClosedCoefficients.{u}, E.derived (.identity X) ≅ 𝟭 _
-  restrictionTermwise : ∀ {S X : LocallyClosedCoefficients.{u}}
-    (a : LocallyClosedCoefficientImmersion S X)
-    (K : CochainComplex (proEtaleRingModules S.scheme S.ring) ℤ),
-    (restriction a).hom.app (DerivedCategory.Q.obj K) =
-      a.pull.mapDerivedCategory.map ((E.extension a).mapDerivedCategoryFactors.hom.app K) ≫
-        a.pull.mapDerivedCategoryFactors.hom.app
-          (((E.extension a).mapHomologicalComplex (.up ℤ)).obj K) ≫
-        DerivedCategory.Q.map
-          ((NatIso.mapHomologicalComplex (E.restriction a) (.up ℤ)).hom.app K)
-  gammaTermwise : ∀ {S X T : LocallyClosedCoefficients.{u}}
-    (a : LocallyClosedCoefficientImmersion S X) (b : LocallyClosedCoefficientImmersion T S)
-    (K : CochainComplex (proEtaleRingModules T.scheme T.ring) ℤ),
-    (gamma a b).hom.app (DerivedCategory.Q.obj K) ≫
-        (E.extension (a.comp b)).mapDerivedCategoryFactors.hom.app K =
-      (E.derived a).map ((E.extension b).mapDerivedCategoryFactors.hom.app K) ≫
-        (E.extension a).mapDerivedCategoryFactors.hom.app
-          (((E.extension b).mapHomologicalComplex (.up ℤ)).obj K) ≫
-        DerivedCategory.Q.map ((NatIso.mapHomologicalComplex (E.gamma a b) (.up ℤ)).hom.app K)
-  identityTermwise : ∀ (X : LocallyClosedCoefficients.{u})
-    (K : CochainComplex (proEtaleRingModules X.scheme X.ring) ℤ),
-    (identity X).hom.app (DerivedCategory.Q.obj K) =
-      (E.extension (.identity X)).mapDerivedCategoryFactors.hom.app K ≫
-        DerivedCategory.Q.map ((NatIso.mapHomologicalComplex (E.identity X) (.up ℤ)).hom.app K)
-  full : ∀ {S X : LocallyClosedCoefficients.{u}} (a : LocallyClosedCoefficientImmersion S X),
-    (E.derived a).Full
-  faithful : ∀ {S X : LocallyClosedCoefficients.{u}}
-    (a : LocallyClosedCoefficientImmersion S X), (E.derived a).Faithful
-  homBijection : ∀ {S X : LocallyClosedCoefficients.{u}}
-    (a : LocallyClosedCoefficientImmersion S X)
-    (M N : DerivedCategory (proEtaleRingModules S.scheme S.ring)),
-    Function.Bijective (fun f : (E.derived a).obj M ⟶ (E.derived a).obj N ↦
-      (restriction a).inv.app M ≫ a.pull.mapDerivedCategory.map f ≫ (restriction a).hom.app N)
-  innerUnit : ∀ {S X : LocallyClosedCoefficients.{u}}
-    (a : LocallyClosedCoefficientImmersion S X),
-    ∃ h : a.comp (.identity S) = a,
-      gamma a (.identity S) ≪≫ eqToIso (congrArg E.derived h) =
-        Functor.isoWhiskerRight (identity S) (E.derived a) ≪≫ Functor.leftUnitor (E.derived a)
-  outerUnit : ∀ {S X : LocallyClosedCoefficients.{u}}
-    (a : LocallyClosedCoefficientImmersion S X),
-    ∃ h : (LocallyClosedCoefficientImmersion.identity X).comp a = a,
-      gamma (.identity X) a ≪≫ eqToIso (congrArg E.derived h) =
-        Functor.isoWhiskerLeft (E.derived a) (identity X) ≪≫ Functor.rightUnitor (E.derived a)
-  associative : ∀ {S X T W : LocallyClosedCoefficients.{u}}
-    (a : LocallyClosedCoefficientImmersion S X) (b : LocallyClosedCoefficientImmersion T S)
-    (d : LocallyClosedCoefficientImmersion W T),
-    ∃ h : (a.comp b).comp d = a.comp (b.comp d),
-      Functor.isoWhiskerRight (gamma b d) (E.derived a) ≪≫ gamma a (b.comp d) =
-        Functor.associator (E.derived d) (E.derived b) (E.derived a) ≪≫
-          Functor.isoWhiskerLeft (E.derived d) (gamma a b) ≪≫ gamma (a.comp b) d ≪≫
-            eqToIso (congrArg E.derived h)
-
 end LocallyClosedExtensionData
 
 set_option backward.isDefEq.respectTransparency false in

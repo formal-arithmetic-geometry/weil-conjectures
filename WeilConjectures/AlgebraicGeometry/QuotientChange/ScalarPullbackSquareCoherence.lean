@@ -640,7 +640,7 @@ private theorem ordinary_scalar_comp_homotopy (φ : Λ ⟶ Λ') [IsMonHom φ]
     Functor.comp_obj, Category.id_comp, Category.comp_id] using hh
 
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 25000 in
+set_option maxHeartbeats 200000 in
 -- Bound elaboration while specializing the computation-counit calculation.
 private theorem scalar_comp_inv (φ : Λ ⟶ Λ') [IsMonHom φ]
     {U V W : Scheme.{u}} (h : U ⟶ V) (k : V ⟶ W)
