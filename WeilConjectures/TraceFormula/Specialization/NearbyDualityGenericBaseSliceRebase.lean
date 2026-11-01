@@ -121,6 +121,7 @@ section BaseMap
 
 variable {K : Type u} [Field K] [Algebra k' K] (x : K)
 
+/-- **The slice base map of the re-based model**: the map `c : X₂ ⟶ X₁` of the generic slice is
 the map `c' : X₂ ⟶ X₁,η` of the generic slice of the re-based model followed by the projection
 `π : X₁,η ⟶ X₁`. Both satisfy the defining property of `c`, and the identification `ε` of the
 slice model is an epimorphism. -/
