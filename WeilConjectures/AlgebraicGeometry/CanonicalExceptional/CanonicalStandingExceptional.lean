@@ -144,6 +144,93 @@ noncomputable def rightDerivedUpperShriekHomEquiv
         :=
   (Equiv.ofBijective _ (bijective_rightDerivedLowerShriek_map_comp_counit f hK hL)).symm
 
+@[simp]
+lemma rightDerivedUpperShriekHomEquiv_symm_apply
+    {K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
+    (hK : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X K)
+    {L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))}
+    (hL : DerivedCategory.TStructure.t.plus L) (g : K ⟶ (R(f)^![Λ]).obj L) :
+    (rightDerivedUpperShriekHomEquiv f hK hL).symm g =
+      (ProEtale.rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f).map g ≫
+          rightDerivedUpperShriekCounit f L hL :=
+  rfl
+
+/-- Naturality of the exceptional adjunction in the source. -/
+lemma rightDerivedUpperShriekHomEquiv_naturality_left_symm
+    {K K' : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
+    (hK : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X K) (hK' :
+        DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X K')
+    {L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))}
+    (hL : DerivedCategory.TStructure.t.plus L) (φ : K ⟶ K') (g : K' ⟶ (R(f)^![Λ]).obj L) :
+    (rightDerivedUpperShriekHomEquiv f hK hL).symm (φ ≫ g) =
+      (ProEtale.rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f).map φ ≫
+        (rightDerivedUpperShriekHomEquiv f hK' hL).symm g := by
+  simp
+
+/-- Naturality of the canonical exceptional Hom correspondence in its source. -/
+lemma rightDerivedUpperShriekHomEquiv_naturality_left
+    {K K' : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
+    (hK : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X K)
+    (hK' : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X K')
+    {L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))}
+    (hL : DerivedCategory.TStructure.t.plus L) (φ : K ⟶ K')
+    (g : (ProEtale.rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f).obj K' ⟶ L) :
+    rightDerivedUpperShriekHomEquiv f hK hL
+        ((ProEtale.rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f).map φ ≫ g) =
+      φ ≫ rightDerivedUpperShriekHomEquiv f hK' hL g := by
+  rw [← Equiv.eq_symm_apply, rightDerivedUpperShriekHomEquiv_naturality_left_symm f hK hK',
+    Equiv.symm_apply_apply]
+
+/-- On a compared bounded ordinary source, the canonical inverse-counit bijection is
+exactly the two-adjunction Hom chain. -/
+theorem homEquiv_on_comparison
+    (M : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (hM : DerivedCategory.TStructure.t.plus M)
+    (L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ)))
+    (hL : DerivedCategory.TStructure.t.plus L)
+    (z : (ProEtale.rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f).obj
+      (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj M) ⟶ L) :
+    rightDerivedUpperShriekHomEquiv f
+        (DerivedCategory.plusEtaleOrigin_mapDerivedCategory_obj hM) hL z =
+      D(ν^*(X)[ModuleCat.{u + 1} Λ]).map
+        ((Etale.rightDerivedUpperShriekAdjunction Λ f).homEquiv _ _
+          ((derivedComparisonAdjunction (ModuleCat.{u + 1} Λ) Y).homEquiv _ _
+            ((compactSupportSiteComparison Λ
+              (HasCompactification.compactification f)).inv.app ⟨M, hM⟩ ≫ z))) := by
+  apply (rightDerivedUpperShriekHomEquiv f
+    (DerivedCategory.plusEtaleOrigin_mapDerivedCategory_obj hM) hL).symm.injective
+  rw [Equiv.symm_apply_apply, rightDerivedUpperShriekHomEquiv_symm_apply,
+    rightDerivedLowerShriek_map_mapDerivedCategory_map_comp_counit f hM hL]
+  simp only [DerivedCategory.Plus.ι, ObjectProperty.ι_obj,
+    Etale.rightDerivedLowerShriek, Equiv.symm_apply_apply, Iso.app_hom,
+    Iso.hom_inv_id_app_assoc]
+
+/-- Realizing an ordinary map and then taking the canonical transpose gives its
+ordinary adjunct followed by the image of the comparison-adjunction unit. -/
+theorem homEquiv_compare_map
+    (M : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (hM : DerivedCategory.TStructure.t.plus M)
+    (K : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (hK : DerivedCategory.TStructure.t.plus (D(ν^*(Y)[ModuleCat.{u + 1} Λ]).obj K))
+    (t : (Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f).obj M ⟶ K) :
+    rightDerivedUpperShriekHomEquiv f
+      (DerivedCategory.plusEtaleOrigin_mapDerivedCategory_obj hM) hK
+      ((compactSupportSiteComparison Λ (HasCompactification.compactification f)).hom.app
+        ⟨M, hM⟩ ≫ D(ν^*(Y)[ModuleCat.{u + 1} Λ]).map t) =
+      D(ν^*(X)[ModuleCat.{u + 1} Λ]).map
+        ((Etale.rightDerivedUpperShriekAdjunction Λ f).homEquiv _ _ t) ≫
+      D(ν^*(X)[ModuleCat.{u + 1} Λ]).map
+        ((Etale.rightDerivedUpperShriek Λ f).map
+          ((derivedComparisonAdjunction (ModuleCat.{u + 1} Λ) Y).unit.app K)) := by
+  rw [homEquiv_on_comparison f M hM]
+  simp only [Iso.inv_hom_id_app_assoc, DerivedCategory.Plus.ι, ObjectProperty.ι_obj]
+  have he : (derivedComparisonAdjunction (ModuleCat.{u + 1} Λ) Y).homEquiv _ _
+      (D(ν^*(Y)[ModuleCat.{u + 1} Λ]).map t) =
+      t ≫ (derivedComparisonAdjunction (ModuleCat.{u + 1} Λ) Y).unit.app K := by
+    rw [Adjunction.homEquiv_unit]
+    exact ((derivedComparisonAdjunction (ModuleCat.{u + 1} Λ) Y).unit.naturality t).symm
+  rw [he, Adjunction.homEquiv_naturality_right, Functor.map_comp]
+
 /-- The unique change from the canonical counit to the standing counit.
 Source: uniqueness of the comparison-class adjunction
 (blueprint: lem-pur-canonical-standing-exceptional).
@@ -185,6 +272,37 @@ def comparisonIso
           ProEtale.rightDerivedUpperShriekCounit f L hL
     rw [Functor.map_comp, Category.assoc, hh, hi,
       CategoryTheory.Functor.map_id, Category.id_comp]
+
+/-- Postcomposition by the inverse counit comparison normalizes every standing transpose.
+Source: comparison-class adjunction, def-weil-exceptional-inverse-image.md
+(blueprint: lem-pur-canonical-standing-exceptional).
+Proof: inverse transposition with the standing counit identifies the canonical
+transpose followed by the comparison with the standing transpose. Cancel that
+comparison using its proved inverse identity. -/
+theorem homEquiv_comparison
+    {M : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
+    (hM : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X M)
+    {L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))}
+    (hL : DerivedCategory.TStructure.t.plus L)
+    (z : (ProEtale.rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f).obj M ⟶ L) :
+    ProEtale.rightDerivedUpperShriekHomEquiv f hM hL z ≫ (comparisonIso f L hL).inv =
+      rightDerivedUpperShriekHomEquiv f hM hL z := by
+  have hh := (ProEtale.rightDerivedUpperShriekHomEquiv f
+    (plusEtaleOrigin_rightDerivedUpperShriek_obj f hL) hL).symm_apply_apply
+      (rightDerivedUpperShriekCounit f L hL)
+  change (ProEtale.rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f).map
+    (comparisonIso f L hL).hom ≫ ProEtale.rightDerivedUpperShriekCounit f L hL =
+      rightDerivedUpperShriekCounit f L hL at hh
+  have he : rightDerivedUpperShriekHomEquiv f hM hL z ≫
+      (comparisonIso f L hL).hom = ProEtale.rightDerivedUpperShriekHomEquiv f hM hL z := by
+    apply (ProEtale.rightDerivedUpperShriekHomEquiv f hM hL).symm.injective
+    change (ProEtale.rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f).map
+      (rightDerivedUpperShriekHomEquiv f hM hL z ≫ (comparisonIso f L hL).hom) ≫
+      ProEtale.rightDerivedUpperShriekCounit f L hL = _
+    rw [Functor.map_comp, Category.assoc, hh]
+    exact (rightDerivedUpperShriekHomEquiv f hM hL).symm_apply_apply z
+      |>.trans ((ProEtale.rightDerivedUpperShriekHomEquiv f hM hL).symm_apply_apply z).symm
+  rw [← he, Category.assoc, Iso.hom_inv_id, Category.comp_id]
 
 end ProEtale.CanonicalExceptional
 end AlgebraicGeometry

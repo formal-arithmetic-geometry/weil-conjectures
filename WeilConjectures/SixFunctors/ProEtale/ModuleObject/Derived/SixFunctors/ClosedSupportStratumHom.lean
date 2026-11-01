@@ -49,3 +49,30 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
 end AlgebraicGeometry.ProEtale.CondensedRing
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+/-- Global RHom from a module in degree zero, computed by Hom into a K-injective
+representative. This is the global-sections Hom complex of the source statement:
+its degree n is Hom(M,I^n), and its differential is postcomposition with d_I.
+Source: blueprint stratum Hom lemma, definition of global RHom
+(blueprint: det-lem-formal-closed-support-stratum-hom). -/
+noncomputable def stratumGlobalRHom (X : Scheme.{u}) (M : supportModules Λ X) :
+    DerivedCategory (supportModules Λ X) ⥤ DerivedCategory Ab.{u + 1} :=
+  (preadditiveCoyoneda.obj (op M)).rightDerivedFunctor
+
+/-- RΓ is the unbounded right derived functor of Hom from the regular coefficient module.
+Source: blueprint stratum Hom lemma, definition of hypercohomology
+(blueprint: det-lem-formal-closed-support-stratum-hom). -/
+noncomputable def stratumRGamma (X : Scheme.{u}) :
+    DerivedCategory (supportModules Λ X) ⥤ DerivedCategory Ab.{u + 1} :=
+  stratumGlobalRHom Λ X (Mod.regular (condensedRingObj Λ X))
+
+/-- The coefficient-linear internal Hom dual of L. The existing closed module tensor
+represents sheaf Hom; its unit is the regular coefficient module.
+Source: blueprint stratum Hom lemma, L-dual definition
+(blueprint: det-lem-formal-closed-support-stratum-hom). -/
+noncomputable def stratumDual (S : Scheme.{u}) (L : supportModules Λ S) : supportModules Λ S :=
+  (ihom L).obj (𝟙_ (supportModules Λ S))
+
+end AlgebraicGeometry.ProEtale.CondensedRing

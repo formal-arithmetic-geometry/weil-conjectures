@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.RationalP1.Native.NativeNormalizedSelfSquareProjection
 public import WeilConjectures.AlgebraicGeometry.RationalP1.Projective.ProjectiveFirstSectionComparison
+public import WeilConjectures.AlgebraicGeometry.RationalP1.IntegralKernelKunnethTransport
 
 /-! # The coefficient-independent first kernel Kunneth comparison -/
 @[expose] public noncomputable section
@@ -60,6 +61,7 @@ theorem kernel_native_kunneth
       (firstPathComparison Λ Y).hom.app (A.obj M ⊗ B.obj T) =
     projectionMateMap Λ (ProjectiveLine Y ↘ Y) M (R.obj T) ≫
       R.map ((M ◁ e'.app T) ≫ projectionMap Λ (firstProjection Y) M (B.obj T)) := by
-  sorry
+  apply integral_kernel_kunneth_transport Λ Y M T
+  exact integral_kernel_kunneth_tensor_square Λ Y
 
 end AlgebraicGeometry.ProEtale.RationalP1

@@ -127,6 +127,33 @@ private lemma mate_identity {C D : Type*} [Category C] [Category D]
     Iso.symm_inv, Equiv.coe_fn_mk] at h ⊢
   simpa [hα] using h.symm
 
+private lemma compact_comparison_eq (N : ℕ) (hN : 0 < N)
+    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
+    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ) :
+    affineLinearCompactComparison N hN A hA S hS d =
+      (affineTraceUnboundedCompactComparison A S d).app
+        ((affineTraceRight A N hA S d).obj (ordinaryFiniteUnit A S)) := by
+  let K : DerivedCategory.Plus
+      (Sheaf (affineTraceTower S d).smallEtaleTopology (ModuleCat.{u + 1} A)) :=
+    ⟨_, Exists.elim (exists_affineSpaceTopTrace N hN A hA) (fun _ ht ↦
+      Exists.elim ht (fun _ hD ↦ (hD.2 S hS d).2.1))⟩
+  apply Iso.ext
+  change (affineTracePlusCompatibility A S d).inv.app K ≫
+    DerivedCategory.Plus.ι.map ((affineTraceCompactSupportComparison A S d).hom.app K) ≫
+      (rightDerivedLowerShriekPlusCompatibility (ModuleCat.{u + 1} A)
+        (affineTraceProjection S d)).hom.app K =
+    (affineTraceUnboundedCompactComparison A S d).hom.app (DerivedCategory.Plus.ι.obj K)
+  apply (cancel_epi ((affineTracePlusCompatibility A S d).hom.app K)).mp
+  simp only [Iso.hom_inv_id_app_assoc]
+  exact (affineTraceUnboundedCompactComparison_restriction A S d K).symm
+
+private lemma compact_comparison_zero (N : ℕ) (hN : 0 < N)
+    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
+    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) :
+    (affineLinearCompactComparison N hN A hA S hS 0).inv =
+      (unboundedEtaleLowerShriekId A S).hom.app (ordinaryFiniteUnit A S) := by
+  exact congrArg Iso.inv (compact_comparison_eq N hN A hA S hS 0)
+
 private lemma pullback_id_eq (A : Type (u + 1)) [CommRing A] (S : Scheme.{u}) :
     affineLinearPullbackId A S = leftDerivedUpperStarId (ModuleCat.{u + 1} A) S := by
   simp [affineLinearPullbackId, leftDerivedUpperStarId, Functor.leftDerivedFunctorNatIso,

@@ -41,6 +41,9 @@ variable {C D : Type w} [SmallCategory C] [SmallCategory D]
   (J : GrothendieckTopology C) (K : GrothendieckTopology D)
   (F : C ⥤ D) [F.IsContinuous J K] [RepresentablyFlat F]
 
+private abbrev sets (J : GrothendieckTopology C) (A : Type w) [CommRing A] :=
+  (sheafCompose J (forget CommRingCat.{w})).obj (ring J A)
+
 private abbrev base (J : GrothendieckTopology C) (A : Type w) [CommRing A] :=
   (sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj (ring J A)
 
@@ -69,6 +72,21 @@ private theorem coefficientMap_scalar (A : Type w) [CommRing A] (U : Cᵒᵖ) (a
           (toSheafify K ((Functor.const Dᵒᵖ).obj (CommRingCat.of A))).naturality
             (F.op.map f) })
   exact congrArg (fun t ↦ t.app U a) h'
+
+private def constantIso :
+    constantSheaf J (Type w) ⋙ sheafPullback F (Type w) J K ≅
+      constantSheaf K (Type w) :=
+  CategoryTheory.constantComparison J K (sheafPullback F (Type w) J K)
+    (F.sheafPushforwardContinuous (Type w) J K)
+    (sheafAdjunctionContinuous F (Type w) J K)
+
+private def ringIso (A : Type w) [CommRing A] :
+    sets K A ≅ (sheafPullback F (Type w) J K).obj (sets J A) :=
+  (constantCommuteCompose K (forget CommRingCat.{w})).app (CommRingCat.of A) ≪≫
+    ((constantIso J K F).app A).symm ≪≫
+      (sheafPullback F (Type w) J K).mapIso
+        (((constantCommuteCompose J (forget CommRingCat.{w})).app
+          (CommRingCat.of A)).symm)
 
 omit [RepresentablyFlat F] in
 omit [RepresentablyFlat F] in

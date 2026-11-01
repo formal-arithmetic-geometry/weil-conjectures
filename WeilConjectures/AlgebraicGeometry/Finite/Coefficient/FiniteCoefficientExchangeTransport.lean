@@ -428,6 +428,13 @@ noncomputable abbrev abelianForget (T : Scheme.{u})
   SheafOfModules.toSheaf ((sheafCompose (ProEt.topology T)
     (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)
 
+private instance scalarRestriction_faithful {T : Scheme.{u}}
+    {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : R ⟶ S) :
+    (proEtaleRingRestrictScalars a).Faithful :=
+  Functor.Faithful.of_comp_iso
+    (show proEtaleRingRestrictScalars a ⋙ abelianForget T R ≅ abelianForget T S
+      from Iso.refl _)
+
 private instance scalarRestriction_derived_reflects {T : Scheme.{u}}
     {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (a : R ⟶ S) :
     (proEtaleRingRestrictScalars a).mapDerivedCategory.ReflectsIsomorphisms := by

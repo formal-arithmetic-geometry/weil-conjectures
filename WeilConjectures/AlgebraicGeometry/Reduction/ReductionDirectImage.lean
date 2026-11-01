@@ -141,6 +141,53 @@ private theorem reductionGood_realization_iff (T : Scheme.{u})
       A T (min a b) (max a b) (min_le_max) K).mpr
         (DerivedCategory.torAmplitudeIn.mono (min_le_left _ _) (le_max_right _ _) ht)
 
+private theorem reductionGood_compactSupport
+    (ℓ pchar : ℕ) [Fact ℓ.Prime] (hℓ : pchar ≠ ℓ)
+    (k : Type u) [Field k] [CharP k pchar]
+    {X Z Y : Scheme.{u}}
+    [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
+    (f : X ⟶ Y) (j : X ⟶ Z) [IsOpenImmersion j]
+    (p : Z ⟶ Y) [IsProper p] (hf : j ≫ p = f)
+    (A : Type u) [CommRing A] [Finite A]
+    (hA : ∃ n : ℕ, ∀ x : A, (ℓ ^ n) • x = 0)
+    (M : proEtaleDerivedCategory X A) (hM : ReductionGood X A M) :
+    ReductionGood Y A ((reductionCompactSupport A j p).obj M) := by
+  classical
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+  have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace (Y ↘ Spec (.of k))
+  have : IsNoetherian X := isNoetherian_of_locallyOfFiniteType (X ↘ Spec (.of k))
+  have : HasInvertibleExponent (ULift.{u + 1} A) (Spec (.of k)) := by
+    obtain ⟨n, hn⟩ := hA
+    have hz : ((ℓ ^ n : ℕ) : ULift.{u + 1} A) = 0 := by
+      apply ULift.ext
+      change ((ℓ ^ n : ℕ) : A) = 0
+      simpa only [nsmul_eq_mul, mul_one] using hn 1
+    have hne : (ℓ : k) ≠ 0 :=
+      CharP.cast_ne_zero_of_ne_of_prime k (Fact.out : ℓ.Prime) hℓ
+    have hu : IsUnit ((ℓ ^ n : ℕ) : k) := by
+      rw [Nat.cast_pow]
+      exact isUnit_iff_ne_zero.mpr (pow_ne_zero n hne)
+    exact ⟨ℓ ^ n, pow_pos (Fact.out : ℓ.Prime).pos _, hz, by
+      simpa only [map_natCast] using hu.map (Scheme.ΓSpecIso (.of k)).inv.hom⟩
+  have : HasInvertibleExponent (ULift.{u + 1} A) Y :=
+    HasInvertibleExponent.of_hom (Y ↘ Spec (.of k))
+  let c : Compactification f := ⟨Z, p, j, hf.symm, inferInstance, inferInstance⟩
+  have : HasCompactification f := c.hasCompactification
+  let E := sfIntrinsicDerivedEquivalence X A
+  let K := E.inverse.obj M
+  have hK := reductionGood_iso (E.counitIso.app M).symm hM
+  obtain ⟨hF, R, ha⟩ := CondensedRing.ordinary_small_adjunction A k
+    (Y ↘ Spec (.of k)) f c
+  have ho := hF K ((reductionGood_realization_iff X A K).mp hK)
+  have ht := (reductionGood_realization_iff Y A _).mpr ho
+  let er := (FiniteCompactScalar.compactRealizationIso A c).app K
+  let ep := (Functor.isoWhiskerLeft
+    (sfIntrinsicExtensionByZero j A).mapDerivedCategory (properOriginPushIso A p)).app M
+  exact reductionGood_iso
+    (er.symm ≪≫ (sfIntrinsicCompactSupport c A).mapIso (E.counitIso.app M) ≪≫ ep.symm) ht
+
 set_option maxHeartbeats 18000 in
 -- Diagnose elaboration without unfolding large derived-functor constructions indefinitely.
 private theorem scalarMateRestriction_reflectsIso

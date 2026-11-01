@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleBraided
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek
 public import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicIntegralModel
+public import WeilConjectures.SixFunctors.Integral.IntegralVerdier
 
 @[expose] public section
 set_option autoImplicit false
@@ -47,5 +48,32 @@ theorem isIso_biduality_integral_constructible
       ((PadicIntegersRingObj.boundedConstructibleUpperShriek ℓ E.1 a).obj (𝟙_ _)).obj
       L.obj) := by
   sorry
+
+end AlgebraicGeometry.ProEtale.CondensedRing
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+/-- Integral coefficient-stage Verdier biduality used by the constructible transport.
+
+Source: `literature/blueprint/latest/blueprint/sec-six-functors-basics/
+sk-thm-sf-ctf-stability/det-prop-sf-biduality-general.proof.md`, the
+finite-stage-to-integral sentence.  The existing integral theorem supplies its
+complete derived-complete conclusion; this interface exposes that conclusion
+without assuming any condensed Qbar biduality statement.
+(blueprint: lem-pd-constructible-sheaf-biduality-integral) -/
+theorem integral_stage_biduality
+    (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime]
+    (hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E]
+    [FiniteDimensional (Padic l) E] (X : Scheme.{u})
+    [X.Over (Spec (.of D.k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of D.k))]
+    [QuasiCompact (X ↘ Spec (.of D.k))]
+    [IsSeparated (X ↘ Spec (.of D.k))]
+    (ω : WeilConjectures.sfIntegralConstructibleCategory l E X)
+    (r : ∀ n : ℕ,
+      (WeilConjectures.scalarReductionDerivedExtension l E X n).obj ω.obj ≅
+        WeilConjectures.integralDualizingFiniteTerm l E D X n) :
+    WeilConjectures.IntegralVerdier.Conclusion l E X D hl ω r := by
+  exact WeilConjectures.integral_verdier_biduality D l hl E X ω r
 
 end AlgebraicGeometry.ProEtale.CondensedRing

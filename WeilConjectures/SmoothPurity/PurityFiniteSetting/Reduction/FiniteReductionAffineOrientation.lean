@@ -463,7 +463,7 @@ theorem existsUnique_finiteReductionOrientationExceptionalComparison
     P.finiteReductionLineInput_constructible T
   have hL := exceptional_ctf P s K hK
   let := P.finiteReductionCompactSupportComparison_isIso m hm hmn s L hL
-  have hbij := finiteReduction_counit_bijective Q s
+  have hbij := finiteReduction_counit_bijective_public Q s
     ((P.finiteReduction m hm hmn Y).obj L)
     (P.finiteReduction_preserves_ctf m hm hmn Y L hL)
     ((P.finiteReduction m hm hmn T).obj K)

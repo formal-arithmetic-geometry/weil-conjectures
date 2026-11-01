@@ -391,4 +391,11 @@ def coefficientMap (a : A ⟶ A') {N : DerivedCategory.{u + 1} (Equivariant A G)
     (derived A G).obj N ⟶ (scalarBase a).obj ((derived A' G).obj N') :=
   (derived A G).map f ≫ (scalarComparison a).hom.app N'
 
+/-- The canonical coefficient restriction to a subgroup, with degree-zero trivial
+coefficients retained as the original regular module.
+Source: paragraph (3) (blueprint: def-sfb-condensed-derived-invariants). -/
+def regularTrivial (A : CondensedBar.Ring.{u}) (G : Type u) [Group G] [TopologicalSpace G]
+    [IsTopologicalGroup G] :=
+  (trivial (R := A.toMon) (P := G)).obj (Mod.regular A.X)
+
 end CategoryTheory.CondensedDerivedRestriction
