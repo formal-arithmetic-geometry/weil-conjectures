@@ -43,4 +43,19 @@ theorem exists_type_map_eq {C : Type c} [Category.{v} C]
     · exact Sheaf.isSeparated F Z ⊥ (hf.bot_mem i j hij a b hab) _ _ (by simp))
   exact ⟨x, hx⟩
 
+/-- Equality can be checked on a disjoint cover.
+Source: Stacks Project Tag 00VL
+(blueprint: lem-zl-disjoint-sheaf-sections).
+Proof: separatedness for the generated covering sieve, using functoriality on
+arrows factoring through a cover member. -/
+theorem type_ext {C : Type c} [Category.{v} C]
+    {J : GrothendieckTopology C} {W : C} {n : ℕ} {Y : Fin n → C}
+    {f : ∀ i, Y i ⟶ W} (hf : J.IsDisjointCover f)
+    (F : Sheaf J (Type w)) {x y : F.obj.obj (op W)}
+    (h : ∀ i, F.obj.map (f i).op x = F.obj.map (f i).op y) : x = y := by
+  apply Sheaf.isSeparated F W _ hf.ofArrows_mem
+  rintro Z g ⟨_, a, _, ⟨i⟩, rfl⟩
+  simp only [op_comp, Functor.map_comp, types_comp_apply]
+  rw [h i]
+
 end CategoryTheory.GrothendieckTopology.IsDisjointCover

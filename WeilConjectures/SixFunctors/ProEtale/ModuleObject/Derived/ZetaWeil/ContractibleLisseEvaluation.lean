@@ -14,6 +14,18 @@ public import WeilConjectures.CategoryTheory.ZetaWeil.ContractibleDerivedSection
 import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence
 import Mathlib.CategoryTheory.Adjunction.Restrict
 public import Mathlib.CategoryTheory.Sites.LocalSite
+public import Mathlib.CategoryTheory.Localization.Monoidal.Functor
+public import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
+public import WeilConjectures.Algebra.Homology.Ringed.RingedDerivedTensorNativeSupplement
+public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MonoidalStructure
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
+public import WeilConjectures.CategoryTheory.InternalSectionTensorComparison
+public import WeilConjectures.CategoryTheory.Monoidal.KFlatEquivalence
+public import WeilConjectures.CategoryTheory.RingedKFlatModel.RingedKFlatNativeModelIdentification
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Evaluation.ContractibleRealizationOrdinaryUnit
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Evaluation.ContractibleRealizationUnderivedModel
 
 /-! # Perfect complexes and dualizable objects under contractible evaluation
 
@@ -61,6 +73,33 @@ private theorem restriction_equivalence {L : V ⥤ W} {H : W ⥤ V}
     apply (hmap X.obj Y.obj X.property Y.property).1
     exact congrArg (fun k ↦ k.hom) h⟩
   exact ⟨adj'.toEquivalence, ⟨Iso.refl _⟩, ⟨Iso.refl _⟩⟩
+
+private theorem perfect_iff_dualizable
+    {R : Type (u + 1)} [CommRing R] [HasDerivedCategory.{u + 1} (ModuleCat.{u + 1} R)]
+    (Q : DerivedCategory (ModuleCat.{u + 1} R)) :
+    DerivedCategory.IsPerfectRingComplex Q ↔ IsDualizable Q := by
+  rw [← DerivedCategory.dualizable_iff_isPerfectRingComplex Q]
+  constructor
+  · rintro ⟨D, ev, coev, hQ, hD⟩
+    let h : ExactPairing Q D := {
+      evaluation' := ev
+      coevaluation' := coev
+      evaluation_coevaluation' := by
+        apply (cancel_epi (λ_ Q).inv).1
+        apply (cancel_mono (ρ_ Q).hom).1
+        simpa only [Category.assoc, Iso.inv_hom_id_assoc, Iso.inv_hom_id,
+          Category.comp_id] using hQ
+      coevaluation_evaluation' := by
+        apply (cancel_epi (ρ_ D).inv).1
+        apply (cancel_mono (λ_ D).hom).1
+        simpa only [Category.assoc, Iso.inv_hom_id_assoc, Iso.inv_hom_id,
+          Category.comp_id] using hD }
+    exact ⟨{ rightDual := D, exact := h }⟩
+  · rintro ⟨hQ⟩
+    let := hQ
+    refine ⟨Qᘁ, ε_ Q Qᘁ, η_ Q Qᘁ, ?_, ?_⟩
+    · simp only [ExactPairing.evaluation_coevaluation_assoc, Iso.inv_hom_id, Category.comp_id]
+    · simp only [ExactPairing.coevaluation_evaluation_assoc, Iso.inv_hom_id, Category.comp_id]
 
 end Duality
 
