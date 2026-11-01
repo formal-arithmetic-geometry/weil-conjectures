@@ -20,6 +20,7 @@ import WeilConjectures.CategoryTheory.RingObjects.Ab
 import Mathlib.CategoryTheory.Monoidal.Mod
 import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
+public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteConstructibleKernels
 
 /-! # Kernels of constructible internal modules with finite discrete coefficients
 

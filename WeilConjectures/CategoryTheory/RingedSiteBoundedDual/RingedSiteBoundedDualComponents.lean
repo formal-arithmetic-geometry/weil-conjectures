@@ -11,6 +11,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 import WeilConjectures.CategoryTheory.Ringed.Site.RingedSiteDualityMaps
 import WeilConjectures.Algebra.Homology.SmoothPurity.PullbackExistsOfUniverses
 import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.InternalHomUnit
+public import WeilConjectures.Algebra.Homology.RingedSiteBoundedDualComponents
 
 /-! # Components of the bounded ordinary sheaf dual
 

@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Derived.DerivedTensor
 public import WeilConjectures.CategoryTheory.RingedSiteModules
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+public import WeilConjectures.AlgebraicGeometry.ProEtaleTorAmplitude
 
 /-!
 # Tor amplitude on the small pro-etale site

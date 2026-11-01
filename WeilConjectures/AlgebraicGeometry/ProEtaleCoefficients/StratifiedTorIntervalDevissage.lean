@@ -23,6 +23,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.OpenClosed
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherence
 import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Mathlib.Order.CompletePartialOrder
+public import WeilConjectures.AlgebraicGeometry.StratifiedTorIntervalDevissage
 
 /-!
 # A fixed Tor interval across constructible strata

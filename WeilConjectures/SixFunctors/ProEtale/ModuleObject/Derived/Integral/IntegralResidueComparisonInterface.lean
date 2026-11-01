@@ -21,6 +21,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Exact
 public import Mathlib.CategoryTheory.Abelian.ShortExact
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 public import Mathlib.CategoryTheory.Adjunction.Mates
+public import WeilConjectures.AlgebraicGeometry.IntegralResidueComparisonInterface
 
 /-! # Interface for coherent integral residue comparisons
 

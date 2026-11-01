@@ -101,6 +101,7 @@ import all WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import all WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
 import all WeilConjectures.CategoryTheory.InternalSectionModuleFlat
 import all WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
+public import WeilConjectures.AlgebraicGeometry.InternalSectionTensorLocalization
 
 /-! # Localization of the sectionwise tensor comparison
 

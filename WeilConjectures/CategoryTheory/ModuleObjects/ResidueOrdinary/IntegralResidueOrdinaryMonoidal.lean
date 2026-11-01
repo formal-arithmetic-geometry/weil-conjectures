@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.IntegralResidueComparisonInterface
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.MapIhom
+public import WeilConjectures.AlgebraicGeometry.IntegralResidueOrdinaryMonoidal
 
 /-! # Strong monoidal ordinary pullback for condensed coefficient module objects
 

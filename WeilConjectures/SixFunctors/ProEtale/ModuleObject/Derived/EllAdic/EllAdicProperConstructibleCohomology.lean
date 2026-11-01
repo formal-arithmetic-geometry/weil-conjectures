@@ -565,6 +565,7 @@ import Mathlib.CategoryTheory.Monoidal.Internal.FunctorCategory
 import WeilConjectures.AlgebraicGeometry.EtaleStratifiedFinite
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperBaseChange.Compatibility
+public import WeilConjectures.AlgebraicGeometry.EllAdicProperConstructibleCohomology
 
 /-!
 # Constructibility of proper ell-adic direct-image cohomology

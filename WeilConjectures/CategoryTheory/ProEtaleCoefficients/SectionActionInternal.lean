@@ -29,6 +29,7 @@ import Mathlib.Algebra.Group.Shrink
 import Mathlib.CategoryTheory.Sites.Limits
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
+public import WeilConjectures.CategoryTheory.SectionActionInternal
 
 /-! # Normalized lifting of sectionwise actions
 

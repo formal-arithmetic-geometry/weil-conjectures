@@ -78,6 +78,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.
 public import WeilConjectures.Algebra.Homology.CanonicalTensorPullbackOfUniverses.RingedTopoiCanonicalTensorPullbackOfUniverses
 public import Mathlib.CategoryTheory.Monoidal.Transport
 public import WeilConjectures.Algebra.Homology.RingedTensorCorner.ProjectionMateExact
+public import WeilConjectures.AlgebraicGeometry.SectionDerivedTensorData
 
 /-! # Canonical derived section-module tensor data
 

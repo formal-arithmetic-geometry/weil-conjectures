@@ -13,6 +13,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 public import Mathlib.Algebra.Homology.Single
+public import WeilConjectures.Algebra.Homology.DerivedTensor
 
 /-!
 # Derived tensor product on the small pro-etale site

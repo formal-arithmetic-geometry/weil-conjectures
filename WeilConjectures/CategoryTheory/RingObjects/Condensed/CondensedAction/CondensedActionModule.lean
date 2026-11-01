@@ -17,6 +17,7 @@ public import Mathlib.Topology.ContinuousMap.Algebra
 public import Mathlib.Topology.Algebra.ContinuousMonoidHom
 public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 public import Mathlib.Combinatorics.Quiver.ReflQuiver
+public import WeilConjectures.CategoryTheory.CondensedActionModule
 
 /-! # Internal modules with an action of a profinite condensed group
 

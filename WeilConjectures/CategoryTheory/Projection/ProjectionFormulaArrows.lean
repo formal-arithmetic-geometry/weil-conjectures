@@ -33,6 +33,7 @@ import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
 import WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
 import WeilConjectures.Algebra.Homology.BoundedAboveFlatSheafKFlat
+public import WeilConjectures.AlgebraicGeometry.ProjectionFormulaArrows
 
 /-!
 # Projection-formula arrows and their specified finite-total inverse

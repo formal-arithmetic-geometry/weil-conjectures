@@ -13,6 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.QuotientChange.ScalarPullbackSqu
 import all WeilConjectures.AlgebraicGeometry.QuotientChange.ScalarPullbackSquareCoherence
 import all WeilConjectures.AlgebraicGeometry.SectionDerivedPushpullNormalization
 import WeilConjectures.AlgebraicGeometry.QuotientChange.NormalizedScalarSectionFamily
+public import WeilConjectures.AlgebraicGeometry.ScalarGeometricExchangeRectangle
 
 /-! # Scalar extension and geometric exchange
 

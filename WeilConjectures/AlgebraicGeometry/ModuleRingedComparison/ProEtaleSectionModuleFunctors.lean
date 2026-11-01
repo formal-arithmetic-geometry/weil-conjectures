@@ -11,6 +11,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.UnitCohe
 import WeilConjectures.AlgebraicGeometry.InverseImageModuleFlat
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FinalRingedUnitMate
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RingedDirectImagePairingLax
+public import WeilConjectures.AlgebraicGeometry.ProEtaleSectionModuleFunctors
 
 import WeilConjectures.AlgebraicGeometry.InternalModuleOperations.InternalModuleOperationsTransportSupplement
 import all WeilConjectures.CategoryTheory.InternalSectionTensorComparison

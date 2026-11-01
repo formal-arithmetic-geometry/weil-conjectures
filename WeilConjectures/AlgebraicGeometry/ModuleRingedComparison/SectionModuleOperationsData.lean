@@ -60,6 +60,7 @@ public import WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
 public import WeilConjectures.CategoryTheory.InternalSectionModuleFlat
 public import WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
+public import WeilConjectures.AlgebraicGeometry.SectionModuleOperationsData
 
 /-! # Existing section-module operations and pure-tensor data
 

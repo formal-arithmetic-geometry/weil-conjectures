@@ -111,6 +111,7 @@ import Mathlib.CategoryTheory.Sites.EpiMono
 import Mathlib.Algebra.Category.Grp.EpiMono
 import Mathlib.Algebra.Category.Grp.Abelian
 import Mathlib.CategoryTheory.Sites.Abelian
+public import WeilConjectures.AlgebraicGeometry.PullbackTensorResolvingComputation
 
 /-! # Derived pullback computation with independent universes
 

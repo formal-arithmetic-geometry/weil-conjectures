@@ -22,6 +22,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantModul
 import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantModuleConstructibility
 import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.ProEtaleConstructibleOrigin
 
 /-!
 # Constructible pro-etale coefficients are of etale origin

@@ -43,6 +43,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.Basic
 import WeilConjectures.CategoryTheory.Sites.RGammaDerivedLimit
 import Mathlib.LinearAlgebra.Finsupp.LinearCombination
 import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
+public import WeilConjectures.AlgebraicGeometry.FreeParameterScalarMaps
 
 /-! # Canonical free-parameter evaluation data and coherence.
 Source: Stacks 08J7, 07A6, 07A7 (blueprint: def-sfb-free-parameter-scalar-maps). -/

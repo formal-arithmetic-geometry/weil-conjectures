@@ -9,6 +9,7 @@ public import WeilConjectures.CategoryTheory.Integral.IntegralResidueTensorModel
 public import WeilConjectures.AlgebraicGeometry.IntegralResidueOrdinaryTensorSquare
 import WeilConjectures.AlgebraicGeometry.IntegralResidueOrdinaryTensorNormalization
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.IntegralResiduePullFlatModelMateNormalized
+public import WeilConjectures.AlgebraicGeometry.IntegralResidueScalarCounitModel
 
 /-! Scalar-counit normalization for the residue pull square.
 

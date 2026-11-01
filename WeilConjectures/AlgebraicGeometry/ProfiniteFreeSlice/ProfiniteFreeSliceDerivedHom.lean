@@ -214,6 +214,7 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
 import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientSectionsLocalization
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
+public import WeilConjectures.AlgebraicGeometry.ProfiniteFreeSliceDerivedHom
 
 /-! # Profinite free modules and unbounded derived slice Hom
 

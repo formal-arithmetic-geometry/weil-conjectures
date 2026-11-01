@@ -58,6 +58,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromReso
 public import WeilConjectures.Algebra.Homology.Site.SiteTensorFunctorialitySupplement
 public import WeilConjectures.CategoryTheory.RingedSiteModules
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import WeilConjectures.AlgebraicGeometry.SiteDerivedTensorRestriction
 
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import WeilConjectures.Algebra.Homology.Site.SiteTensorFunctorialitySupplement

@@ -68,6 +68,7 @@ import Mathlib.CategoryTheory.Sites.EpiMono
 import Mathlib.CategoryTheory.Sites.Abelian
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
+public import WeilConjectures.AlgebraicGeometry.PrincipalIdealLocalTestCriterion
 /-! # The principal image ideal and the covering-sieve local tests
 
 Source: Stacks 0999, 099B and 03DA.

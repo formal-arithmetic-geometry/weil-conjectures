@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.ModuleObjectRingedComparison.InternalSectionTotalComparison
+public import WeilConjectures.AlgebraicGeometry.InternalSectionDerivedTensorComparison
 
 public import WeilConjectures.Algebra.Homology.DerivedInternalHomOfUniverses
 public import WeilConjectures.Algebra.Homology.DerivedInternalHom

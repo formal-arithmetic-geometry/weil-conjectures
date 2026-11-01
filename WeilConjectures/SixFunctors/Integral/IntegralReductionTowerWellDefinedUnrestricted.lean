@@ -40,6 +40,7 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUn
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
+public import WeilConjectures.AlgebraicGeometry.IntegralReductionTowerWellDefinedUnrestricted
 
 /-! # Canonical resolution comparisons without an auxiliary finite-field datum
 

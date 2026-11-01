@@ -149,6 +149,7 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 import WeilConjectures.Algebra.Homology.CanonicalTensorPullbackOfUniverses.RingedTopoiCanonicalTensorComparisonOfUniverses
 import all WeilConjectures.AlgebraicGeometry.ProEtaleTensorComparison.ProEtaleInverseImageTensorComparisonSupplement
 import WeilConjectures.AlgebraicGeometry.ProEtale.Canonical.ProEtaleCanonicalAdjunctionUnit
+public import WeilConjectures.AlgebraicGeometry.ProEtaleTensorPullbackModels
 
 /-!
 # Canonical tensor pullback on the small pro-etale site

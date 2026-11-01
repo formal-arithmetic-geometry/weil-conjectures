@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.IntegralResiduePullSquareData
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.IntegralResiduePullOrdinaryUnit
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+public import WeilConjectures.AlgebraicGeometry.IntegralResiduePullFlatModelMateNormalized
 
 /-! The counit-normalized mate calculation for the integral residue pull square.
 

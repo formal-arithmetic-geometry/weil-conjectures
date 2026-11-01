@@ -22,6 +22,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Monoidal
 public import WeilConjectures.Algebra.Homology.CanonicalTensorPullbackOfUniverses.RingedTopoiCanonicalTensorPullbackOfUniverses
 public import WeilConjectures.Algebra.Homology.RingedTensorCorner.ProjectionMateExact
+public import WeilConjectures.AlgebraicGeometry.SectionDerivedRealization
 
 public import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
 public import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse

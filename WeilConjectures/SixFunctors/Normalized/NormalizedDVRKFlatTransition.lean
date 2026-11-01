@@ -10,6 +10,7 @@ public import WeilConjectures.SmoothPurity.Derived.DerivedScalarExtensionRestric
 public import WeilConjectures.SixFunctors.Integral.IntegralReductionTower
 import all WeilConjectures.SmoothPurity.Integral.Reduction.IntegralReductionTowerUnrestrictedSupplement
 import all WeilConjectures.SixFunctors.Integral.IntegralReductionTowerWellDefined
+public import WeilConjectures.AlgebraicGeometry.NormalizedDVRKFlatTransition
 
 /-! # Quotient transitions on K-flat representatives -/
 

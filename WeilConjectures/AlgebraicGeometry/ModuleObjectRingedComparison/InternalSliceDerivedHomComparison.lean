@@ -118,6 +118,7 @@ public import WeilConjectures.SixFunctors.CoefficientClosedStructure.Coefficient
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 public import WeilConjectures.CategoryTheory.Ringed.Slice.RingedSliceEvaluationTranspose
+public import WeilConjectures.AlgebraicGeometry.InternalSliceDerivedHomComparison
 
 import WeilConjectures.CategoryTheory.Sites.PushforwardMonoidal
 import Mathlib.Algebra.Ring.Ext

@@ -180,6 +180,7 @@ import all WeilConjectures.CategoryTheory.InternalSectionModuleFlat
 import all WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
 import all Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+public import WeilConjectures.AlgebraicGeometry.InternalSectionTotalComparison
 
 /-! # Canonical internal-to-sectionwise total-complex comparison
 

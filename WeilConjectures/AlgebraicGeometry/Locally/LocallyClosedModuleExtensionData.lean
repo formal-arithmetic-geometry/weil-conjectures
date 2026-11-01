@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.AlgebraicGeometry.Strict.Tower.StrictTowerOperationsSupplement
+public import WeilConjectures.AlgebraicGeometry.LocallyClosedModuleExtensionData
 
 /-!
 # Coefficient parameters and normalization formulas for locally closed extension

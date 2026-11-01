@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Constructible.ProEtaleConstructibleSheaf
+public import WeilConjectures.AlgebraicGeometry.ProEtaleConstantModuleEncoding
 
 /-!
 # Restricting a constant ring sheaf to its constant scalars

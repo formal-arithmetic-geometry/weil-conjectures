@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.ModuleObjects.ProperBaseChange.IntegralReductionTensor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.IntegralResiduePullSquare
 import WeilConjectures.CategoryTheory.DerivedCategory.KFlatAcyclic
+public import WeilConjectures.AlgebraicGeometry.IntegralResidueTensorPresentation
 
 /-! # The canonical restricted residue tensor presentation
 

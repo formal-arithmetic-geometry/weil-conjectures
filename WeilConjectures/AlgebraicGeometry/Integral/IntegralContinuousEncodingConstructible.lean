@@ -541,6 +541,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Coefficient.ProEtaleCoefficien
 import WeilConjectures.AlgebraicGeometry.Strict.Tower.StrictTowerOperationsSupplement
 import WeilConjectures.AlgebraicGeometry.Continuous.ContinuousIntegralCoefficientComparison
 import WeilConjectures.CategoryTheory.ProEtaleCoefficients.SectionActionInternal
+public import WeilConjectures.AlgebraicGeometry.IntegralContinuousEncodingConstructible
 
 /-! # Constructibility under continuous integral section encoding
 

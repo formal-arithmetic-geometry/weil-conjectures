@@ -147,6 +147,7 @@ public import Mathlib.LinearAlgebra.FreeModule.PID
 public import Mathlib.RingTheory.DedekindDomain.Basic
 public import Mathlib.RingTheory.DedekindDomain.Dvr
 public import Mathlib.RingTheory.Flat.TorsionFree
+public import WeilConjectures.AlgebraicGeometry.FiniteConstantLocalModel
 
 /-!
 # Finite constant local models for condensed coefficients

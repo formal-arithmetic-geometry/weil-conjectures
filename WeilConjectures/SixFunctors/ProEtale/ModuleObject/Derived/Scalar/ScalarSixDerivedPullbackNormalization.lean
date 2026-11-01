@@ -11,6 +11,7 @@ import WeilConjectures.AlgebraicGeometry.FreeParameterEvaluation.FreeParameterSc
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperBaseChange.ComapUpperStarIsoComposition
 import WeilConjectures.AlgebraicGeometry.ComapUpperStarIsoMate
 import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
+public import WeilConjectures.SixFunctors.ScalarSixDerivedPullbackNormalization
 
 /-! # Normalized non-flat derived pullback comparison -/
 

@@ -13,6 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafC
 public import WeilConjectures.AlgebraicGeometry.Sf.SfIntrinsicRealizationTransport
 public import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+public import WeilConjectures.AlgebraicGeometry.LocallyClosedModuleExtensionCoherence
 
 public import WeilConjectures.AlgebraicGeometry.Locally.LocallyClosedModuleExtensionData
 import WeilConjectures.AlgebraicGeometry.LocallyClosedCoefficientImmersion.LocallyClosedModuleExtensionModel

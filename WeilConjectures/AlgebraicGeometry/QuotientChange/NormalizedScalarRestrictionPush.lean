@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.InternalScalarMateProjection
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.IntegralResiduePullFlatModelMateNormalized
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.IntegralResiduePullOrdinaryUnit
+public import WeilConjectures.AlgebraicGeometry.NormalizedScalarRestrictionPush
 
 /-! # Normalized scalar restriction and direct image
 

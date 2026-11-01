@@ -13,6 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Intrinsic.ProEtaleIntri
 public import WeilConjectures.CategoryTheory.RingedSiteModules
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 public import WeilConjectures.CategoryTheory.Right.RightDerivedFunctorOfQuasiIsoResolutions
+public import WeilConjectures.AlgebraicGeometry.CondensedClosedSupportAdjunction
 
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Mono

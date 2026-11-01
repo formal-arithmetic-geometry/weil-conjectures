@@ -21,6 +21,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Exact
 public import Mathlib.CategoryTheory.Abelian.ShortExact
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 import WeilConjectures.CategoryTheory.DerivedCategory.KFlatAcyclic
+public import WeilConjectures.AlgebraicGeometry.IntegralReductionTensor
 
 /-! # Integral reduction as a derived tensor functor
 

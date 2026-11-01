@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.ProfiniteFreeSlice.ProfiniteFreeSliceDerivedHom
 public import WeilConjectures.AlgebraicGeometry.PointDerivedHom.PointPullbackDerivedHom
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
+public import WeilConjectures.AlgebraicGeometry.FreeParameterEvaluationData
 
 /-! # Evaluation coherence for free profinite parameters
 

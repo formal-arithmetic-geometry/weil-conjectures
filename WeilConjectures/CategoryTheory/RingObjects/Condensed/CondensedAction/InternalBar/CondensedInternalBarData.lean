@@ -31,6 +31,7 @@ public import Mathlib.Algebra.Category.Grp.Adjunctions
 public import Mathlib.Algebra.Homology.ShortComplex.Exact
 public import Mathlib.CategoryTheory.Sites.Coherent.CoherentSheaves
 public import Mathlib.Combinatorics.Quiver.ReflQuiver
+public import WeilConjectures.CategoryTheory.CondensedInternalBarData
 
 /-! # The augmented internal homogeneous bar resolution
 

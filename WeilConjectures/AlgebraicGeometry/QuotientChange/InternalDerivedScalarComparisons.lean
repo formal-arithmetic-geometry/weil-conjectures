@@ -10,6 +10,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoeffici
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 public import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 public import Mathlib.CategoryTheory.Adjunction.Mates
+public import WeilConjectures.AlgebraicGeometry.InternalDerivedScalarComparisons
 
 /-! # Integral quotient scalar comparison for unbounded direct image
 

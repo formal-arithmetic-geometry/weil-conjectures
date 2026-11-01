@@ -157,6 +157,7 @@ import WeilConjectures.AlgebraicGeometry.CondensedQbarFieldPointCoefficientValue
 import WeilConjectures.AlgebraicGeometry.CondensedCoefficientPointUnitPasting
 import WeilConjectures.AlgebraicGeometry.CondensedQbarLfpCoverComposition
 import WeilConjectures.CategoryTheory.ModuleObjects.Free
+public import WeilConjectures.AlgebraicGeometry.AdicConstructibilityPredicateComparison
 
 /-!
 # Adic constructibility predicates on Noetherian schemes

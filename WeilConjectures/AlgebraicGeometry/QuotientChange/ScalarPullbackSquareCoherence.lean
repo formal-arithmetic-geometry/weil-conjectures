@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.QuotientChange.InternalDerivedSc
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedAmbientExchange
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarCoherence
 import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
+public import WeilConjectures.AlgebraicGeometry.ScalarPullbackSquareCoherence
 
 /-! # Scalar pullback square coherence
 
