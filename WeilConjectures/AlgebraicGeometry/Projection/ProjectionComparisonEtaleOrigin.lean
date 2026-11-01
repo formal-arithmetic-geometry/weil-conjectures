@@ -94,6 +94,65 @@ noncomputable def projectionComparisonTensor (A : Type (u + 1)) [CommRing A] [Fi
   (((Etale.derivedTensor (ModuleCat.{u + 1} A) X).obj M).obj
     ((Etale.upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor.obj H))
 
+/-- The asserted equality, with every target identification written explicitly.
+The left route is PF-pro, P of the specified target identification, then C at the tensor.
+The right route is C at M tensor identity, the inverse comparison tensor map, then V(PF-et).
+Source: Stacks Tag 0E48 and the blueprint projection comparison, displayed equation
+(blueprint: def-smooth-purity-projection-comparison-equation). -/
+@[irreducible] def ProjectionComparisonEquation (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
+    (M : Etale.DerivedCategoryModule A X) (H : Etale.DerivedCategoryModule A Y)
+    (hM : _root_.DerivedCategory.TStructure.t.plus M)
+    (hD : _root_.DerivedCategory.TStructure.t.plus
+      (projectionComparisonTensor A (f := f) M H)) : Prop :=
+  ((projectionMapOfCompactification (ModuleCat.{u + 1} A) c).app
+      ((comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory.obj M)).app
+        ((comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory.obj H) ≫
+      (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).map
+        (projectionComparisonTargetIso A f M H).hom ≫
+      (compactSupportSiteComparison A c).hom.app
+        ⟨((Etale.derivedTensor (ModuleCat.{u + 1} A) X).obj M).obj
+          ((Etale.upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor.obj H), hD⟩ =
+    ((derivedTensor (ModuleCat.{u + 1} A) Y).map
+      ((compactSupportSiteComparison A c).hom.app ⟨M, hM⟩)).app
+        ((comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory.obj H) ≫
+      ((derivedTensorObjCompMapDerivedCategoryComparisonUpperStarIso
+        (ModuleCat.{u + 1} A)
+        ((Etale.rightDerivedLowerShriekOfCompactification
+          (ModuleCat.{u + 1} A) c).obj M)).inv.app H) ≫
+      (comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory.map
+        (((Etale.projectionMapOfCompactification (ModuleCat.{u + 1} A) c).app M).app H)
+
+/-- The full existential conclusion of the etale-origin comparison statement.
+Source: main-20261015 blueprint, thm-pur-cohomological-smoothness.proof.md
+(blueprint: def-smooth-purity-projection-comparison-equation). -/
+@[irreducible] def projectionComparisonConclusion
+    (D : WeilConjectures.FiniteFieldDatum.{u})
+    (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)
+    (E : Type (u + 1)) [Field E] [Algebra (Padic l) E]
+    [FiniteDimensional (Padic l) E] (n : ℕ) [Fact (1 ≤ n)]
+    {X Y : Scheme.{u}}
+    [X.Over (Spec (CommRingCat.of D.k))] [Y.Over (Spec (CommRingCat.of D.k))]
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of D.k))]
+    [QuasiCompact (X ↘ Spec (CommRingCat.of D.k))]
+    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of D.k))]
+    [QuasiCompact (Y ↘ Spec (CommRingCat.of D.k))]
+    (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of D.k))]
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    (c : Compactification f)
+    (M : Etale.DerivedCategoryModule (Padic.coefficientExtensionRing l E n) X)
+    (H : Etale.DerivedCategoryModule (Padic.coefficientExtensionRing l E n) Y)
+    (_hM : Etale.DerivedCategory.isBoundedConstructible
+      (Padic.coefficientExtensionRing l E n) X M)
+    (_hH : Etale.DerivedCategory.isBoundedConstructible
+      (Padic.coefficientExtensionRing l E n) Y H)
+    (_hTor : ∃ a b : ℤ, Etale.DerivedCategory.hasTorAmplitudeIn
+      (Padic.coefficientExtensionRing l E n) Y a b H) : Prop :=
+  ∃ (hM : _root_.DerivedCategory.TStructure.t.plus M)
+    (hD : _root_.DerivedCategory.TStructure.t.plus
+      (projectionComparisonTensor (Padic.coefficientExtensionRing l E n) (f := f) M H)),
+    ProjectionComparisonEquation (Padic.coefficientExtensionRing l E n) c M H hM hD
+
 attribute [local irreducible] Functor.mapDerivedCategory Functor.mapDerivedCategoryNatIso
   Functor.sheafPullbackConstruction.sheafPullback
   conjugateIsoEquiv Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
@@ -231,6 +290,18 @@ private theorem tensor_iso_square {C D : Type*} [Category C] [Category D]
   simpa only [Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom]
     using tensor_square V T P t q.hom a.hom b.hom r.hom hh
 
+private theorem inverse_projection_arrows {C : Type*} [Category C]
+    {A B D E F G : C} (pe : A ⟶ B) (pp : F ⟶ G)
+    (i : F ⟶ E) (ii : E ⟶ F) (j : D ⟶ B) (jj : B ⟶ D)
+    (t : A ⟶ E) (tt : E ⟶ A) (s : D ⟶ G) (ss : G ⟶ D)
+    (hi : i ≫ ii = 𝟙 F) (ht : tt ≫ t = 𝟙 E)
+    (hs : s ≫ ss = 𝟙 D) (hj : jj ≫ j = 𝟙 B)
+    (h : pe ≫ jj ≫ s = t ≫ ii ≫ pp) :
+    pp ≫ ss ≫ j = i ≫ tt ≫ pe := by
+  have hz := congrArg (fun z ↦ i ≫ tt ≫ z ≫ ss ≫ j) h
+  simpa only [Category.assoc, reassoc_of% hi, reassoc_of% ht, reassoc_of% hs, hj,
+    Category.id_comp, Category.comp_id] using hz.symm
+
 private theorem append_map {C D : Type*} [Category C] [Category D]
     (P : C ⥤ D) {A : D} {B E F : C} (u : A ⟶ P.obj B) (v : B ⟶ E) (w : E ⟶ F) :
     u ≫ P.map v ≫ P.map w = u ≫ P.map (v ≫ w) := by
@@ -286,6 +357,28 @@ private theorem paste_open_square
   rw [ht]
   simp only [Jp.map_comp]
   rw [reassoc_of% ho, reassoc_of% hg, reassoc_of% hb]
+
+private theorem bounded_of_constructible
+    (A : Type (u + 1)) [CommRing A] [Finite A] (X : Scheme.{u})
+    (M : Etale.DerivedCategoryModule A X)
+    (hM : Etale.DerivedCategory.isBoundedConstructible A X M) :
+    _root_.DerivedCategory.TStructure.t.bounded M := by
+  obtain ⟨r, s, _hrs, hbound⟩ := hM.2
+  exact ⟨⟨r, (_root_.DerivedCategory.isGE_iff M r).2
+      (fun i hi ↦ hbound i (Or.inl hi))⟩,
+     ⟨s, (_root_.DerivedCategory.isLE_iff M s).2
+      (fun i hi ↦ hbound i (Or.inr hi))⟩⟩
+
+private theorem plus_tensor_of_tor
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (M : Etale.DerivedCategoryModule A X) (H : Etale.DerivedCategoryModule A Y)
+    (hM : _root_.DerivedCategory.TStructure.t.bounded M)
+    (hH : ∃ a b : ℤ, Etale.DerivedCategory.hasTorAmplitudeIn A Y a b H) :
+    _root_.DerivedCategory.TStructure.t.plus (projectionComparisonTensor A (f := f) M H) := by
+  obtain ⟨a, b, ht⟩ := hH
+  exact Etale.plus_derivedTensor_leftDerivedUpperStar f hM
+    (Etale.DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn.mp ht)
 
 end TransportTriangle
 
@@ -831,6 +924,116 @@ private meta def normalizeProjectionInstances (proof : Expr) (helpers : Array Na
   if proof.hasSorry then
     throwError "Instance proof normalization left an unfinished proof"
   return proof
+
+private theorem projection_equation_of_plus
+    (M : Etale.DerivedCategoryModule A X) (H : Etale.DerivedCategoryModule A Y)
+    (hM : _root_.DerivedCategory.TStructure.t.plus M)
+    (hD : _root_.DerivedCategory.TStructure.t.plus
+      (projectionComparisonTensor A (f := f) M H)) :
+    ProjectionComparisonEquation A c M H hM hD := by
+  start_shared_proof
+  · unfold ProjectionComparisonEquation
+    dsimp only [derivedTensorRightDerivedLowerShriek,
+      rightDerivedLowerShriekDerivedTensorLeftDerivedUpperStar,
+      Etale.derivedTensorRightDerivedLowerShriek,
+      Etale.rightDerivedLowerShriekDerivedTensorLeftDerivedUpperStar,
+      Functor.comp_obj, ObjectProperty.ι_obj,
+      Functor.whiskeringLeft₂_obj_obj_obj_obj_obj,
+      Functor.postcompose₂_obj_obj_obj_obj, Functor.id_obj]
+    rw [target_comparison_eq]
+    apply inverse_projection_arrows
+    · exact (((TYp).mapIso ((compactSupportSiteComparison A c).app ⟨M, hM⟩)).app
+        ((VY).obj H)).hom_inv_id
+    · exact Iso.inv_hom_id_app
+        (t ((Etale.rightDerivedLowerShriekOfCompactification C c).obj M)) H
+    · exact ((rightDerivedLowerShriekOfCompactification C c).mapIso
+        (comparisonOpenTensorIso A f M H)).hom_inv_id
+    · exact Iso.inv_hom_id_app (compactSupportSiteComparison A c)
+        ⟨projectionComparisonTensor A (f := f) M H, hD⟩
+    · exact compact_projection_square A c M H hM hD
+  · finish_shared_proof
+
+/-- The compactification projection equation for chosen bounded-below witnesses.
+This is the equation part of `projectionComparison_etaleOrigin`; it is independent of
+constructibility and of any finite-field datum. Source: the compactification pasting
+argument in the proof of `lem-pur-projection-comparison-etale-origin` (blueprint:
+lem-pur-projection-comparison-etale-origin).
+-/
+theorem projectionComparison_equation_of_plus
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
+    (M : Etale.DerivedCategoryModule A X) (H : Etale.DerivedCategoryModule A Y)
+    (hM : _root_.DerivedCategory.TStructure.t.plus M)
+    (hD : _root_.DerivedCategory.TStructure.t.plus
+      (projectionComparisonTensor A (f := f) M H)) :
+    ProjectionComparisonEquation A c M H hM hD := by
+  exact projection_equation_of_plus A c M H hM hD
+
+/-- At positive finite coefficient level, the canonical compact-support site comparison
+intertwines the two compactification projection maps on bounded constructible inputs,
+with finite Tor amplitude only for H. The existential proofs record the bounded-below
+domains of the two comparisons, rather than impose additional hypotheses. Naturality
+in M,H is that of the specified bifunctor transformations and their natural inverses.
+Source: main-20261015 blueprint, thm-pur-cohomological-smoothness.proof.md, paragraph 1;
+Stacks Tags 0E48, 09AF, 0GL1
+(blueprint: lem-pur-projection-comparison-etale-origin).
+
+Proof:
+1. The coefficient ring is finite. Choose a lower bound r for M and a Tor interval
+   [a,b] for H. By lem-kun-0f1m take a flat-term K-flat model of H bounded below by a.
+   Pullback preserves this model and its bound. Exact open extension preserves the
+   lower bound r. By lem-kun-derived-tensor-t-est the two tensor inputs have lower
+   bound a+r. Thus M and M tensor f*H lie in the domains of C.
+2. On these flat K-flat models the canonical tensor and pullback comparisons agree
+   on pure tensors, including the total differential signs and the j*p*=f* identity.
+3. Apply lem-weil-pbc-ringed-exchange-tensor-coherence to the proper-factor site
+   comparison square. Its exchange is the canonical counit mate fixed in
+   lem-weil-pbc-comparison-direct-image-canonical-mate. This gives the proper square.
+4. Extend lem-cbc-proetale-extension-zero-comparison termwise. Exactness on both sites
+   makes it descend. Restrict the open tensor square back to X. Both routes become
+   the identity tensor map by lem-sf-open-tensor-normalization and the pure-tensor
+   formula for lem-pur-etale-open-derived-tensor. Full faithfulness of open extension
+   proves the open square, without local freeness of M.
+5. By lem-pur-compact-support-site-coherence, B=C inverse is exactly proper mate
+   followed by proper image of the open comparison. Both projections are the proper
+   counit mate followed by proper image of the corresponding open tensor map.
+6. Paste the proper and open squares. Naturality of the proper mate at the open
+   tensor arrow and naturality of projection in its first input give
+   B_D V(PF-et) = PF-pro (B_M tensor 1) t inverse, with the specified target transport.
+7. Precompose by t(C_M tensor 1), postcompose by C_D, and cancel inverse pairs.
+   This is ProjectionComparisonEquation. All factors are natural in both inputs,
+   so the equation is natural. Zero inputs, empty X and identity factors obey the
+   same equations; smoothness and exceptional pullback are never used.
+-/
+theorem projectionComparison_etaleOrigin
+    (D : WeilConjectures.FiniteFieldDatum.{u})
+    (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)
+    (E : Type (u + 1)) [Field E] [Algebra (Padic l) E]
+    [FiniteDimensional (Padic l) E] (n : ℕ) [Fact (1 ≤ n)]
+    {X Y : Scheme.{u}}
+    [X.Over (Spec (CommRingCat.of D.k))] [Y.Over (Spec (CommRingCat.of D.k))]
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of D.k))]
+    [QuasiCompact (X ↘ Spec (CommRingCat.of D.k))]
+    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of D.k))]
+    [QuasiCompact (Y ↘ Spec (CommRingCat.of D.k))]
+    (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of D.k))]
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    (c : Compactification f)
+    (M : Etale.DerivedCategoryModule (Padic.coefficientExtensionRing l E n) X)
+    (H : Etale.DerivedCategoryModule (Padic.coefficientExtensionRing l E n) Y)
+    (_hM : Etale.DerivedCategory.isBoundedConstructible
+      (Padic.coefficientExtensionRing l E n) X M)
+    (_hH : Etale.DerivedCategory.isBoundedConstructible
+      (Padic.coefficientExtensionRing l E n) Y H)
+    (_hTor : ∃ a b : ℤ, Etale.DerivedCategory.hasTorAmplitudeIn
+      (Padic.coefficientExtensionRing l E n) Y a b H) :
+    projectionComparisonConclusion D l _hl E n f c M H _hM _hH _hTor := by
+  unfold projectionComparisonConclusion
+  have : Finite (Padic.coefficientExtensionRing l E n) :=
+    Padic.finite_coefficientExtensionRing l E n (Fact.out : 1 ≤ n)
+  have hMb := bounded_of_constructible (Padic.coefficientExtensionRing l E n) X M _hM
+  have hD := plus_tensor_of_tor (Padic.coefficientExtensionRing l E n) f M H hMb _hTor
+  exact ⟨hMb.1, hD, projection_equation_of_plus _ c M H hMb.1 hD⟩
 
 open Lean Meta Elab Tactic in
 local elab "start_shared_proof" : tactic => do

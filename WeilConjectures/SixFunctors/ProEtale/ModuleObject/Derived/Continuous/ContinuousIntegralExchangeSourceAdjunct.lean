@@ -12,6 +12,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.Cha
 import WeilConjectures.SixFunctors.Supporting.ModCondensedCachedInstances
 import all WeilConjectures.AlgebraicGeometry.ProperBaseChange.OverSquare
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Continuous.ContinuousIntegralComparisons
+import all WeilConjectures.ProperBaseChange.ContinuousIntegralExchangeSourceAdjunctCounit
 
 /-! # Coherence of integral localization and the specified exchange map -/
 

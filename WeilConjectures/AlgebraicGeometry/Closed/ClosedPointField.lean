@@ -1,0 +1,102 @@
+/-
+Copyright (c) 2026 Bin Wu. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Bin Wu
+-/
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.FieldTheory.PurelyInseparable.Basic
+public import Mathlib.RingTheory.AlgebraicIndependent.Basic
+public import Mathlib.Topology.JacobsonSpace
+public import WeilConjectures.ZetaSeries
+
+import WeilConjectures.PointCount
+
+/-!
+# Residue fields of closed points
+
+Source: the blueprint of the Weil conjectures, chapter `sec-smooth-purity`, unit
+`sk-prop-sf-kunneth-ordinary` (blueprint: lem-kun-closed-point-field).
+-/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory
+
+namespace AlgebraicGeometry
+
+/-- Source: blueprint node `lem-kun-closed-point-field`, order 1694
+(blueprint: lem-kun-closed-point-field). Let `X` be a scheme of finite type over a field `K`
+(structure morphism `f`) and `x` a point, with `κ(x)` a `K`-algebra through `f`
+(`Scheme.Hom.residueFieldAlgebraMap`). (a) `x` is closed iff `trdeg_K κ(x) = 0`, iff
+`κ(x)` is finite over `K`. (b) If `K` is separably closed and `x` is closed, then
+`κ(x)/K` is finite and purely inseparable and `κ(x)` is separably closed.
+
+Proof. (1) On an affine open `Spec A ∋ x`, `A` is a finitely generated `K`-algebra, `x` is
+a prime `p` with `κ(x) = Frac (A/p)`, and `x` is closed in it iff `p` is maximal; `x` is
+closed in `X` iff it is closed in every affine open containing it, and finiteness of
+`κ(x)` does not depend on the open. (2) If `p` is maximal, Zariski's lemma makes
+`κ(x) = A/p` finite over `K`. Conversely, if `κ(x)` is finite, the domain `A/p` is a
+finite-dimensional `K`-subspace, multiplication by a nonzero element is injective hence
+surjective, so `A/p` is a field and `p` is maximal. (3) A finitely generated field extension
+has a finite transcendence basis, and it is finite exactly when this basis is empty, i.e.
+iff `trdeg = 0`. (4) If `K` is separably closed and `x` closed, `κ(x)/K` is finite by (a),
+hence purely inseparable, and `κ(x)` is separably closed. -/
+theorem closedPoint_iff_residueField_trdeg_zero_and_finite
+    {K : Type u} [Field K] {X : Scheme.{u}}
+    (f : X ⟶ Spec (.of K)) [LocallyOfFiniteType f] [QuasiCompact f] (x : X) :
+    (letI := (f.residueFieldAlgebraMap x).toAlgebra;
+      (x ∈ closedPoints X ↔ Algebra.trdeg K (X.residueField x) = 0) ∧
+        (x ∈ closedPoints X ↔ Module.Finite K (X.residueField x)) ∧
+        (IsSepClosed K → x ∈ closedPoints X →
+          Module.Finite K (X.residueField x) ∧
+          IsPurelyInseparable K (X.residueField x) ∧
+          IsSepClosed (X.residueField x))) := by
+  let := (f.residueFieldAlgebraMap x).toAlgebra
+  have : JacobsonSpace X := LocallyOfFiniteType.jacobsonSpace f
+  -- The Jacobson criterion turns finite residue extensions back into closed points.
+  have hfinite : x ∈ closedPoints X ↔ Module.Finite K (X.residueField x) := by
+    constructor
+    · exact f.finite_residueField_of_isClosed x
+    · intro h
+      have := h
+      have : LocallyOfFiniteType (X.fromSpecResidueField x ≫ f) := by
+        rw [← f.specMap_residueFieldAlgebraMap x]
+        apply (HasRingHomProperty.Spec_iff (P := @LocallyOfFiniteType)).mpr
+        change Algebra.FiniteType K (X.residueField x)
+        infer_instance
+      exact isClosed_singleton_iff_locallyOfFiniteType.mpr
+        (locallyOfFiniteType_of_comp (X.fromSpecResidueField x) f)
+  -- Compose the base residue-field map, the affine comparison, and the stalk map.
+  have hess : (f.residueFieldAlgebraMap x).EssFiniteType := by
+    have h₁ : (algebraMap K (f x).asIdeal.ResidueField).EssFiniteType := by
+      rw [RingHom.essFiniteType_algebraMap]
+      infer_instance
+    have h₂ : (Scheme.Spec.residueFieldIso (.of K) (f x)).inv.hom.EssFiniteType :=
+      (RingHom.FiniteType.of_surjective _
+        (Scheme.Spec.residueFieldIso (.of K) (f x)).symm.commRingCatIsoToRingEquiv.surjective
+        ).essFiniteType
+    have h₃ := (LocallyOfFiniteType.stalkMap f x).residueFieldMap
+    exact (h₁.comp h₂).comp h₃
+  have : Algebra.EssFiniteType K (X.residueField x) := hess
+  refine ⟨?_, hfinite, ?_⟩
+  · rw [trdeg_eq_zero_iff]
+    constructor
+    · intro hx
+      have := hfinite.mp hx
+      infer_instance
+    · intro hx
+      have := hx
+      exact hfinite.mpr Algebra.finite_of_essFiniteType_of_isAlgebraic
+  · intro hK hx
+    have := hK
+    have := hfinite.mp hx
+    exact ⟨inferInstance, inferInstance,
+      Algebra.IsAlgebraic.isSepClosed (F := K) (E := X.residueField x)⟩
+
+end AlgebraicGeometry

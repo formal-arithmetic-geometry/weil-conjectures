@@ -30,10 +30,68 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 open scoped CategoryTheory.Obj TensorProduct
 namespace AlgebraicGeometry.ProEtale
 
+private def internalScalarAction (A : Type u) [CommRing A]
+    (N : Mod Ab.{u + 1} (AddCommGrpCat.of (ULift.{u + 1} A))) (a : A) (x : N.X) : N.X :=
+  (Mod.act (A := AddCommGrpCat.of (ULift.{u + 1} A)) N.X).hom (ULift.up a ⊗ₜ[ℤ] x)
+
+private instance internalScalarModule (A : Type u) [CommRing A]
+    (N : Mod Ab.{u + 1} (AddCommGrpCat.of (ULift.{u + 1} A))) : Module A N.X where
+  smul := internalScalarAction A N
+  one_smul x := by
+    have h := congrArg (fun f ↦ f.hom (ULift.up (1 : ℤ) ⊗ₜ[ℤ] x))
+      (Mod.one_act (A := AddCommGrpCat.of (ULift.{u + 1} A)) N.X)
+    change internalScalarAction A N 1 x = x
+    have h' : internalScalarAction A N ((1 : ℤ) : A) x = (1 : ℤ) • x := h
+    simpa only [Int.cast_one, one_smul] using h'
+  mul_smul a b x := by
+    have h := congrArg (fun f ↦ f.hom ((ULift.up a ⊗ₜ[ℤ] ULift.up b) ⊗ₜ[ℤ] x))
+      (Mod.mul_act (A := AddCommGrpCat.of (ULift.{u + 1} A)) N.X)
+    exact h
+  smul_zero a := by
+    change internalScalarAction A N a 0 = 0
+    simp [internalScalarAction]
+  zero_smul x := by
+    change internalScalarAction A N 0 x = 0
+    rw [internalScalarAction, show (ULift.up (0 : A) : ULift.{u + 1} A) = 0 from rfl,
+      TensorProduct.zero_tmul, map_zero]
+  add_smul a b x := by
+    change internalScalarAction A N (a + b) x =
+      internalScalarAction A N a x + internalScalarAction A N b x
+    simp only [internalScalarAction, show (ULift.up (a + b) : ULift.{u + 1} A) =
+      ULift.up a + ULift.up b from rfl, TensorProduct.add_tmul, map_add]
+  smul_add a x y := by
+    change internalScalarAction A N a (x + y) =
+      internalScalarAction A N a x + internalScalarAction A N a y
+    simp [internalScalarAction, TensorProduct.tmul_add]
+
+private theorem scalarModules_essSurj (A : Type u) [CommRing A] :
+    (FiniteConstantModel.scalarModules A).EssSurj := by
+  constructor
+  intro N
+  let M := ModuleCat.of A N.X
+  refine ⟨M, ⟨Mod.isoMk (Iso.refl N.X) ?_⟩⟩
+  apply AddCommGrpCat.hom_ext_toIntLinearMap
+  apply TensorProduct.ext'
+  intro a x
+  rfl
+
+private instance scalarModules_equivalence (A : Type u) [CommRing A] :
+    (FiniteConstantModel.scalarModules A).IsEquivalence := by
+  let : (FiniteConstantModel.scalarModules A).Full :=
+    ContinuousScalarPresentation.scalarModules_full A
+  let : (FiniteConstantModel.scalarModules A).Faithful :=
+    ContinuousScalarPresentation.scalarModules_faithful A
+  let : (FiniteConstantModel.scalarModules A).EssSurj := scalarModules_essSurj A
+  exact {}
+
 private def scalarAbMap {A B : Type u} [CommRing A] [CommRing B] (q : A →+* B) :
     AddCommGrpCat.of (ULift.{u + 1} A) ⟶ AddCommGrpCat.of (ULift.{u + 1} B) :=
   AddCommGrpCat.ofHom
     (ULift.ringEquiv.symm.toRingHom.comp (q.comp ULift.ringEquiv.toRingHom)).toAddMonoidHom
+
+private instance scalarAbMap_monHom {A B : Type u} [CommRing A] [CommRing B]
+    (q : A →+* B) : IsMonHom (scalarAbMap q) :=
+  AddCommGrpCat.isMonHom_ofHom_ringHom _
 
 private def scalarRestrictionIso {A B : Type u} [CommRing A] [CommRing B]
     (q : A →+* B) :
@@ -69,6 +127,20 @@ private def scalarExtensionIso {A B : Type u} [CommRing A] [CommRing B]
   let b := ((ModuleCat.extendRestrictScalarsAdj.{u + 1} q).comp eB.toAdjunction).ofNatIsoRight r
   exact a.leftAdjointUniq b
 
+private instance constantPresheafBraided :
+    (Functor.const Profinite.{u}ᵒᵖ :
+      Ab.{u + 1} ⥤ Profinite.{u}ᵒᵖ ⥤ Ab.{u + 1}).Braided where
+  braided M N := by
+    apply NatTrans.ext
+    funext V
+    change (𝟙 (M ⊗ N)) ≫ (β_ M N).hom = (β_ M N).hom ≫ (𝟙 (N ⊗ M))
+    simp only [Category.id_comp, Category.comp_id]
+
+private instance constantSheafBraided :
+    (constantSheaf (coherentTopology Profinite.{u}) Ab.{u + 1}).Braided :=
+  inferInstanceAs (Functor.const Profinite.{u}ᵒᵖ ⋙
+    presheafToSheaf (coherentTopology Profinite.{u}) Ab.{u + 1}).Braided
+
 private def constantScalarExtensionIso {A B : Type u} [CommRing A] [CommRing B]
     (q : A →+* B) :
     Mod.extendScalars (scalarAbMap q) ⋙
@@ -102,6 +174,13 @@ private abbrev continuousAbMap {A B : Type u} [CommRing A] [CommRing B]
     Profinite.continuousCoefficientRingObj A ⟶
       Profinite.continuousCoefficientRingObj B :=
   (sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})).map (continuousRingMap q hq)
+
+private instance continuousAbMap_monHom {A B : Type u} [CommRing A] [CommRing B]
+    [TopologicalSpace A] [IsTopologicalRing A]
+    [TopologicalSpace B] [IsTopologicalRing B]
+    (q : A →+* B) (hq : Continuous q) : IsMonHom (continuousAbMap q hq) :=
+  inferInstanceAs (IsMonHom
+    ((sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})).map (continuousRingMap q hq)))
 
 private theorem scalarContinuous_square {A B : Type u} [CommRing A] [CommRing B]
     [TopologicalSpace A] [IsTopologicalRing A]

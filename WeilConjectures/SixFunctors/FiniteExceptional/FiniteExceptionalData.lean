@@ -283,6 +283,20 @@ theorem quotient_comp (T : Scheme.{u}) {m n t : ℕ} (h : n ≤ m) (k : t ≤ n)
     (Ideal.pow_le_pow_right (Nat.add_le_add_right h 1))
     (Ideal.pow_le_pow_right (Nat.add_le_add_right k 1)) x
 
+/-- The identical quotient induces the identity map of coefficient sheaves.
+Source: blueprint equal-index clause (blueprint: lem-coef-finite-exceptional).
+Proof: quotient induction gives identity on each residue class, and constant
+sheafification preserves identities. -/
+theorem quotient_id (T : Scheme.{u}) (n : ℕ) :
+    (PurCompactSupport.finiteQuotientChange l E (n + 1) (n + 1)
+      (Nat.succ_pos n) (Nat.succ_pos n) (Nat.add_le_add_right (le_refl n) 1)).map T =
+      𝟙 _ := by
+  rw [quotient_map l E T (le_refl n)]
+  have hq : compactSupportLevelQuotient l E n n le_rfl = RingHom.id _ :=
+    Ideal.Quotient.factor_eq
+  rw [hq]
+  exact (constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).map_id _
+
 /-- Actual tensor associativity restricted through the full finite-Tor inclusion.
 Source: blueprint quotient cocycle (blueprint: lem-coef-finite-exceptional). -/
 def reassoc (T : Scheme.{u}) {m n t : ℕ} (h : n ≤ m) (k : t ≤ n) :
@@ -290,6 +304,14 @@ def reassoc (T : Scheme.{u}) {m n t : ℕ} (h : n ≤ m) (k : t ≤ n) :
   Functor.fullyFaithfulCancelRight (domain l E T t).ι
     (Functor.isoWhiskerLeft (domain l E T m).ι
       (PurCompactSupport.tensorComposition _ _ _ (quotient_comp l E T h k)))
+
+/-- Actual multiplication unit for self reduction, restricted to finite Tor.
+Source: blueprint equal-index clause (blueprint: lem-coef-finite-exceptional). -/
+def selfReduction (T : Scheme.{u}) (n : ℕ) : Q l E T (le_refl n) ≅ 𝟭 _ :=
+  Functor.fullyFaithfulCancelRight (domain l E T n).ι
+    (Functor.isoWhiskerLeft (domain l E T n).ι
+      (eqToIso (congrArg pbcDerivedExtend (quotient_id l E T n)) ≪≫
+        PurCompactSupport.tensorIdentity _))
 
 /-- Brown representability for the specified ordinary etale compact-support candidate.
 Source: blueprint proof paragraph 1 (blueprint: lem-coef-finite-exceptional). -/

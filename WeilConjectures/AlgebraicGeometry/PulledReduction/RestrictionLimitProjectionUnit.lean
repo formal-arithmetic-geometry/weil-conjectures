@@ -58,6 +58,50 @@ private theorem normalized_mate
   simpa only [Functor.mapDerivedCategorySquareIso, Category.assoc] using
     (hα P).trans (_root_.derived_mate_factors adj adj' s P).symm
 
+private theorem normalized_mate_unit
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    [Abelian A] [Abelian B] [Abelian C] [Abelian D]
+    [HasDerivedCategory A] [HasDerivedCategory B]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    [Abelian.HasKInjectiveResolutions B] [Abelian.HasKInjectiveResolutions D]
+    {L : A ⥤ B} {R : B ⥤ A} {L' : C ⥤ D} {R' : D ⥤ C}
+    {G : A ⥤ C} {H : B ⥤ D}
+    [L.Additive] [R.Additive] [L'.Additive] [R'.Additive] [G.Additive] [H.Additive]
+    [PreservesFiniteLimits L] [PreservesFiniteColimits L]
+    [PreservesFiniteLimits L'] [PreservesFiniteColimits L']
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    [PreservesFiniteLimits H] [PreservesFiniteColimits H]
+    (adj : L ⊣ R) (adj' : L' ⊣ R') (s : G ⋙ L' ≅ L ⋙ H)
+    (β : R ⋙ G ⟶ H ⋙ R')
+    (hβ : (mateEquiv adj adj' (TwoSquare.mk _ _ _ _ s.hom)).natTrans = β)
+    (α : R.rightDerivedFunctor ⋙ G.mapDerivedCategory ⟶
+      H.mapDerivedCategory ⋙ R'.rightDerivedFunctor)
+    (hα : ∀ P : CochainComplex B ℤ,
+      G.mapDerivedCategory.map (_root_.chainDerivedUnit R P) ≫
+          α.app (DerivedCategory.Q.obj P) ≫
+          R'.rightDerivedFunctor.map (H.mapDerivedCategoryFactors.hom.app P) =
+        G.mapDerivedCategoryFactors.hom.app ((R.mapHomologicalComplex (.up ℤ)).obj P) ≫
+          DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex β (.up ℤ)).app P) ≫
+          _root_.chainDerivedUnit R' ((H.mapHomologicalComplex (.up ℤ)).obj P)) :
+    ∀ M : DerivedCategory A,
+      G.mapDerivedCategory.map
+          (adj.mapDerivedCategoryRightDerivedAdjunction.unit.app M) ≫
+        α.app (L.mapDerivedCategory.obj M) =
+      adj'.mapDerivedCategoryRightDerivedAdjunction.unit.app (G.mapDerivedCategory.obj M) ≫
+        R'.rightDerivedFunctor.map ((Functor.mapDerivedCategorySquareIso s).hom.app M) := by
+  intro M
+  have hn : α = (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
+      adj'.mapDerivedCategoryRightDerivedAdjunction
+      (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso s).hom)).natTrans := by
+    apply normalized_mate adj adj' s α
+    intro P
+    rw [hβ]
+    exact hα P
+  rw [hn]
+  exact unit_mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
+    adj'.mapDerivedCategoryRightDerivedAdjunction
+    (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso s).hom) M
+
 private theorem derivedUnit_complex
     {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
     [HasDerivedCategory C] [HasDerivedCategory D]
