@@ -31,6 +31,11 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite CategoryTheory.MonoidalCategory
 namespace CategoryTheory
 -- Cache the sheaf limit instances used repeatedly by the slice comparisons.
+
+private instance (priority := 2000) sheafPullbacks
+    {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) :
+    HasPullbacks (Sheaf J (Type u)) := inferInstance
+
 private instance (priority := 2000) sheafPullback
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     {X Y Z : Sheaf J (Type u)} (f : X ⟶ Z) (g : Y ⟶ Z) :

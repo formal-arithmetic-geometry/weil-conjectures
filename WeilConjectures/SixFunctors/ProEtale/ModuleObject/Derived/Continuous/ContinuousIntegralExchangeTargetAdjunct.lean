@@ -15,6 +15,9 @@ import all WeilConjectures.AlgebraicGeometry.ProperBaseChange.OverSquare
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Continuous.ContinuousIntegralComparisons
 import all WeilConjectures.SixFunctors.Supporting.ModCondensedCachedInstances
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.FiniteDiscreteRingObj.FiniteDiscreteCoefficientBaseChange
+import all WeilConjectures.ProperBaseChange.ContinuousIntegralExchangeTargetAdjunctPull
+import all WeilConjectures.ProperBaseChange.ContinuousIntegralExchangeTargetAdjunctFinish
+import all WeilConjectures.ProperBaseChange.ContinuousIntegralExchangeTargetAdjunctCounit
 
 /-! # Coherence of integral localization and the specified exchange map -/
 
