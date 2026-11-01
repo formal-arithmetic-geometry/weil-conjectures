@@ -8,6 +8,8 @@ module
 public import WeilConjectures.SixFunctors.PurCompactSupport.IntegralCompactSupportCoefficientComparison
 import WeilConjectures.SixFunctors.PurCompactSupport.ScalarGeometricPullComposition
 
+set_option linter.privateModule false
+
 /-! Pullback-compositor transport for the open projection coefficient square.
 (blueprint: lem-sf-open-projection-factor-compositor-transport).
 -/

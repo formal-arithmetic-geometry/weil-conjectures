@@ -9,6 +9,8 @@ public import WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorHom
 public import WeilConjectures.SixFunctors.Rational.RationalCoefficientCategoryComparison
 import WeilConjectures.SmoothPurity.Supporting.CoherentRationalPullbackIdentity
 
+set_option linter.privateModule false
+
 /-! # Identity comparison for common-stage pullback
 
 Source: Bhatt--Scholze, Remark 6.8.15; Stacks Tag 099N.

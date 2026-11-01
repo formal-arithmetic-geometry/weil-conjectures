@@ -35,7 +35,8 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Endofunctor
 
 -- The mate component and native carrier calculations below follow the proved private
 -- helpers of WeilConjectures.WeilSheaf.Native.Open.NativeOpenProperInterchange.
--- Only the heart comparison is needed here; the proper/open theorem and its additional imports are not used.
+-- Only the heart comparison is needed here; the proper/open theorem and its additional
+-- imports are not used.
 namespace CategoryTheory
 
 private theorem inverseMate_app
