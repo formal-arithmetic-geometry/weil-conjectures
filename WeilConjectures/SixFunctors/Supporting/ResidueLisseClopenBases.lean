@@ -121,8 +121,10 @@ private theorem constructibleLisseFiniteModels
   let R := (sheafCompose J
     (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (proEtaleConstantRing X A)
   let F' := (proEtaleModuleRestriction X A).obj F
-  obtain ⟨I, U, f, hf, he⟩ := ProEtale.finiteModels_over B F'
-    ((finiteLocal_iff X A F).mpr ⟨hl, constructibleFiniteStalks X A F hc⟩)
+  obtain ⟨I, U, f, hf, he⟩ := ProEtale.finiteModels_over B F' (by
+    obtain ⟨ι, W, g, hW, hM⟩ :=
+      (finiteLocal_iff X A F).mpr ⟨hl, constructibleFiniteStalks X A F hc⟩
+    exact ⟨ι, W, g, hW, fun i ↦ let ⟨M, _, e⟩ := hM i; ⟨M, Module.finite_of_finite B, e⟩⟩)
   refine ⟨I, U, f, hf, fun i ↦ ?_⟩
   obtain ⟨L, hL, ⟨e⟩⟩ := he i
   let := hL
