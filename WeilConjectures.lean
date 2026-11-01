@@ -14366,6 +14366,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorHom
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorResolution
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorRightUnitor
+public import WeilConjectures.SixFunctors.Etale.Derived.TensorSheaf
+public import WeilConjectures.SixFunctors.Etale.Derived.TensorSheafUpperStar
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 public import WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude
 public import WeilConjectures.SixFunctors.Etale.Derived.TorAmplitudeResidue
