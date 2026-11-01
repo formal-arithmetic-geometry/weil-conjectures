@@ -9,7 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.EtaleModuleSetPullbackComparison
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.LocallyConstantEquivalence
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.UniversalCover
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.LocallyConstantSections
-public import Mathlib.NumberTheory.ArithmeticFunction.Misc
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.ConstantSheaf
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.SectionsFunctor
 

@@ -6,8 +6,6 @@ Authors: Bin Wu
 module
 public import Mathlib.Algebra.CharP.CharAndCard
 public import Mathlib.FieldTheory.Finite.GaloisField
-public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
-public import WeilConjectures.NumberTheory.Padics.CoefficientExtension
 
 /-!
 # Global finite-field datum and geometric base change

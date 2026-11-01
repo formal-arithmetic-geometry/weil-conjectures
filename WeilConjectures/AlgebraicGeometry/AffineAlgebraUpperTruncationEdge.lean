@@ -19,8 +19,6 @@ import WeilConjectures.AlgebraicGeometry.DerivedLowerTruncationCycleFormula
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
-public import Mathlib.Algebra.Order.BigOperators.Ring.Finset
-public import Mathlib.Combinatorics.Matroid.Init
 
 /-! # The canonical affine derived edge after upper truncation
 

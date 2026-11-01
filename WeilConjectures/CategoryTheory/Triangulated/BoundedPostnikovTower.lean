@@ -5,8 +5,9 @@ Authors: Bin Wu
 -/
 module
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-public import WeilConjectures.CategoryTheory.Triangulated.TStructure.Homology
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import Mathlib.CategoryTheory.Triangulated.TStructure.Heart
+public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLEGT
 
 /-! # Finite ordered Postnikov towers
 

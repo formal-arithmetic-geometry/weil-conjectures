@@ -6,10 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Restriction
-public import Mathlib.Analysis.SpecialFunctions.Pow.Real
-public import Mathlib.Combinatorics.Quiver.ReflQuiver
-public import Mathlib.Data.Nat.Choose.Multinomial
-public import Mathlib.RingTheory.Flat.TorsionFree
 
 /-!
 # Frobenius elements along an open immersion

@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.CategoryTheory.StageSystem.Const
 public import WeilConjectures.WeilSheaf.FieldCoefficientTransition
-public import Mathlib.CategoryTheory.ExtremalEpi
 
 /-!
 # `D^b_{c,W}(X, ℚ̄_ℓ)` as the `2`-colimit of the `E`-stages

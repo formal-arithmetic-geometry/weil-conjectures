@@ -13,6 +13,7 @@ import WeilConjectures.AlgebraicGeometry.Sites.FieldSectionsStalkInvariants
 import WeilConjectures.AlgebraicGeometry.GeometricPointMorphismStalkBijection
 import Mathlib.FieldTheory.AlgebraicClosure
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import WeilConjectures.Mathlib.Algebra.Category.Ring.Basic
 
 /-! # Realizing equivariant germs on a one-point etale scheme
 

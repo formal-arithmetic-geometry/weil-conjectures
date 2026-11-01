@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LisseWeilSheafTensor
 public import WeilConjectures.RepresentationTheory.RepFunctors
-public import Mathlib.Algebra.Azumaya.Basic
 
 /-!
 # The Weil fundamental representation as a tensor functor

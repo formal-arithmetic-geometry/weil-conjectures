@@ -9,10 +9,6 @@ public import WeilConjectures.ConstructibleSheaf.Refinement
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.OpenClosed.Exact
 public import WeilConjectures.Topology.StratificationDense
-public import Mathlib.Analysis.Normed.Group.Basic
-public import Mathlib.Data.EReal.Inv
-public import Mathlib.Topology.Algebra.InfiniteSum.Order
-public import Mathlib.Topology.MetricSpace.Bounded
 
 /-!
 # Dévissage of a constructible sheaf

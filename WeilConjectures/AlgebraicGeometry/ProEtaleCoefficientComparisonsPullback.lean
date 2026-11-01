@@ -8,7 +8,6 @@ public import Mathlib.Algebra.Algebra.Defs
 public import Mathlib.Algebra.Field.Defs
 public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.CategoryTheory.Monoidal.Mon
-public import Mathlib.NumberTheory.ArithmeticFunction.Misc
 public import Mathlib.NumberTheory.Padics.PadicNumbers
 public import Mathlib.Topology.Category.Profinite.Basic
 public import WeilConjectures.AlgebraicGeometry.CompletedIntegralCoefficients

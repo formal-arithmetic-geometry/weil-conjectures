@@ -18,10 +18,6 @@ import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapAlgebra
 import WeilConjectures.AlgebraicGeometry.AffinePushforwardBaseChangeIsIso
 import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapPasting
 import WeilConjectures.AlgebraicGeometry.AffineBaseChangeTensorComparisons
-public import Mathlib.Algebra.Order.BigOperators.Ring.Finset
-public import Mathlib.Combinatorics.Matroid.Init
-public import Mathlib.Combinatorics.Quiver.ReflQuiver
-public import Mathlib.Logic.Equiv.PartialEquiv
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineVanishing
 
 /-! # Affine pushforward and arbitrary base change

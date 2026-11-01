@@ -13,6 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMapComp
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyFilteredColimit
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
+public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 
 /-!

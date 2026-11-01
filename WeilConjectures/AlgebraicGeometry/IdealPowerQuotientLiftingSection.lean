@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.IdealPowerLocalMapsEventuallyAgree
 import WeilConjectures.AlgebraicGeometry.FormalPolynomialPowerLifts
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 import WeilConjectures.Topology.GlueSheavesOfModules
-public import Mathlib.Algebra.Category.Grp.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-! # Lifting sections into ideal-power annihilator quotients

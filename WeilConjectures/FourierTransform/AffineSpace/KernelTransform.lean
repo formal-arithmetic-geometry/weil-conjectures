@@ -6,8 +6,8 @@ Authors: Christian Merten
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
-public import WeilConjectures.SixFunctors.Etale.Derived.Stability
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
+public import WeilConjectures.SixFunctors.Etale.Derived.Composition
 
 /-!
 # Kernel transforms along automorphisms

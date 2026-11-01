@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleHom
 public import WeilConjectures.AlgebraicGeometry.Modules.FpqcSections
+public import WeilConjectures.AlgebraicGeometry.Modules.AffineDescent
 
 /-!
 # The étale sheaf attached to a quasi-coherent module

@@ -11,9 +11,7 @@ module
 import WeilConjectures.AlgebraicGeometry.StrictLocalMateContinuityPresentation
 import WeilConjectures.AlgebraicGeometry.DerivedEtaleCohomologyLimit
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
-public import Mathlib.Algebra.Order.BigOperators.Ring.Finset
 public import Mathlib.CategoryTheory.Sites.GlobalSections
-public import Mathlib.Data.NNReal.Defs
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
 
 /-! # The strict-local base-change mate on global cohomology

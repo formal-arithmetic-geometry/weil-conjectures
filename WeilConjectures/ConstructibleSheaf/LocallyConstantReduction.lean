@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.GeometricFiber
 public import WeilConjectures.ConstructibleSheaf.Defs
 
 import WeilConjectures.ConstructibleSheaf.LocallyConstantCoverFiltrationExtension
-import WeilConjectures.ConstructibleSheaf.LocallyConstantRetractionExtension
 
 /-!
 # Reduction of finite locally constant `𝔽_ℓ`-sheaves to constant ones

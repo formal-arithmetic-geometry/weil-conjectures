@@ -11,6 +11,7 @@ public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.DegreeZero
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomPresheaf
 public import Mathlib.Algebra.Homology.DerivedCategory.Plus
 public import Mathlib.CategoryTheory.Sites.GlobalSections
+public import WeilConjectures.AlgebraicGeometry.Sites.PointCohomology
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.KunnethMap
 

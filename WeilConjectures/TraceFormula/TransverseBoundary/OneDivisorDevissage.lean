@@ -12,6 +12,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.GeometricPoint
 public import WeilConjectures.SixFunctors.BaseChange.EtaleDerivedUnbounded
 public import WeilConjectures.TraceFormula.TransverseBoundary.MonodromyDevissage
 public import WeilConjectures.TraceFormula.TransverseBoundary.MonodromyPullback
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.CospecializationSections
 
 /-!
 # Local constancy of a direct image by dévissage

@@ -14,7 +14,6 @@ import WeilConjectures.FieldTheory.AlgClosedFiniteTypeTensorDomain
 import WeilConjectures.FieldTheory.SepClosedTensorReduction
 import Mathlib.RingTheory.TensorProduct.Nontrivial
 import Mathlib.LinearAlgebra.TensorProduct.Finiteness
-public import Mathlib.RingTheory.Flat.TorsionFree
 
 /-!
 # Tensor products of fields over a separably closed field

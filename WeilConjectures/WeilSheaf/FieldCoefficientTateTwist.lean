@@ -9,7 +9,6 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.ForgetCoherence
 public import WeilConjectures.WeilSheaf.FieldCoefficientCohomology
 public import WeilConjectures.WeilSheaf.FieldCoefficientTransition
 public import WeilConjectures.WeilSheaf.TateTwistCohomology
-public import Mathlib.CategoryTheory.ExtremalEpi
 
 /-!
 # Tate twists commute with extension of scalars

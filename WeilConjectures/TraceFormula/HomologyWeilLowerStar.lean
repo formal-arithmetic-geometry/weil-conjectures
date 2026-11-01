@@ -13,8 +13,6 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheore
 public import WeilConjectures.WeilObject.BoundedConstructible.UpperLowerStar
 public import WeilConjectures.WeilObject.BoundedConstructible.Homology
 import WeilConjectures.AlgebraicGeometry.OverPullbackFiniteType
-public import Mathlib.Data.Nat.Choose.Multinomial
-public import Mathlib.NumberTheory.ArithmeticFunction.Misc
 public import WeilConjectures.CategoryTheory.PullbackFamily
 
 /-!

@@ -10,7 +10,6 @@ public import WeilConjectures.CategoryTheory.Sites.SheafComposeMonoidalPresheaf
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionMonoidal
-public import Mathlib.Topology.Connected.Separation
 public import WeilConjectures.RingTheory.ProEtale.WeakDimension
 
 /-!

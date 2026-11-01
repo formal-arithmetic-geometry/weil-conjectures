@@ -7,8 +7,6 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicIntSheafLinear
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
-public import Mathlib.Algebra.Category.AlgCat.TensorAlgebra
-public import Mathlib.Topology.MetricSpace.Ultra.TotallySeparated
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMapMulLeft
 
 /-!

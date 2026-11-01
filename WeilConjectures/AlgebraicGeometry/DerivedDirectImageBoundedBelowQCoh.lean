@@ -16,7 +16,6 @@ public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import WeilConjectures.CategoryTheory.TruncationHypercohomology
 import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
-public import Mathlib.Data.Nat.Totient
 
 /-! # Bounded-below direct image and quasi-coherence
 

@@ -12,8 +12,6 @@ import WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
 import Mathlib.CategoryTheory.Sites.Equivalence
 import Mathlib.CategoryTheory.Sites.CoverLifting
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
-public import Mathlib.Algebra.Order.Algebra
-public import Mathlib.Analysis.SpecialFunctions.Pow.NNReal
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 public import WeilConjectures.AlgebraicGeometry.ConstantCompletionBasic
 public import WeilConjectures.AlgebraicGeometry.ConstantCompletionFlatAndQuotients

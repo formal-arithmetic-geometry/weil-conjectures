@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.IdealPowerComplement
 import WeilConjectures.AlgebraicGeometry.IdealPowerTorsionFreeSectionLifting
 import WeilConjectures.AlgebraicGeometry.QuasiCoherentIdealZeroSetAffine
 import WeilConjectures.AlgebraicGeometry.Modules.IdealSheafFiniteType
-public import Mathlib.CategoryTheory.Limits.Shapes.Countable
 
 /-! # Extending a quasi-coherent section from an ideal power
 

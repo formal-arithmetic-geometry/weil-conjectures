@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentation
 public import WeilConjectures.WeilSheaf.StalkConstantSheaf
-public import Mathlib.Condensed.Discrete.Characterization
 
 /-!
 # Global sections and invariants of the Weil fundamental representation

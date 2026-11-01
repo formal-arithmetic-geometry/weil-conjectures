@@ -12,6 +12,7 @@ import Mathlib.CategoryTheory.Limits.Constructions.Filtered
 import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 import Mathlib.LinearAlgebra.Basis.VectorSpace
 import Mathlib.Algebra.Module.ZMod
+public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # Finite-sum presentation of constant coefficients killed by a prime
 

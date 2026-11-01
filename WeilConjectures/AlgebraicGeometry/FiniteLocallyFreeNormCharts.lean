@@ -12,7 +12,6 @@ public import Mathlib.RingTheory.Norm.Defs
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import WeilConjectures.AlgebraicGeometry.Modules.FinitePushforward
 import Mathlib.RingTheory.Norm.Basic
-public import Mathlib.Order.CompletePartialOrder
 
 /-!
 # Local determinant charts for a finite locally free norm

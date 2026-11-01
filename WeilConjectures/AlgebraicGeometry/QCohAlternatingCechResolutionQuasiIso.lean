@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.AlternatingCechTotalComplex
 import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 import WeilConjectures.AlgebraicGeometry.AffineOpenSectionsResolutionQuasiIso
 import Mathlib.Algebra.Category.ModuleCat.Products
-public import Mathlib.CategoryTheory.Monoidal.Mon
 
 /-! # Čech totalization of a quasi-coherent resolution
 

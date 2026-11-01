@@ -15,11 +15,6 @@ public import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 
 import all Mathlib.AlgebraicGeometry.Morphisms.FlatRank  -- for unfolding `Scheme.Hom.finrank`
-public import Mathlib.Algebra.Order.Module.Field
-public import Mathlib.Combinatorics.Quiver.ReflQuiver
-public import Mathlib.Data.EReal.Operations
-public import Mathlib.Topology.Algebra.InfiniteSum.Order
-public import Mathlib.Topology.MetricSpace.Bounded
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineVanishing
 
 /-!

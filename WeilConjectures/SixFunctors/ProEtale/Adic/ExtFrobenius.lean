@@ -9,8 +9,6 @@ public import WeilConjectures.CategoryTheory.Abelian.Injective.ExtMap
 public import WeilConjectures.CategoryTheory.Abelian.Injective.ExtMapExactFunctor
 public import WeilConjectures.CategoryTheory.Preadditive.Injective.ResolutionMap
 public import WeilConjectures.SixFunctors.ProEtale.Adic.GlobalSectionsExt
-public import Mathlib.RingTheory.WittVector.IsPoly
-public import Mathlib.Tactic.ReduceModChar
 
 /-!
 # The Frobenius on pro-étale `Ext` from a resolution

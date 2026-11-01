@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.Specialization.TraitSlice
-public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-!
 

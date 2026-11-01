@@ -8,7 +8,6 @@ module
 
 public import Mathlib.RingTheory.Regular.RegularSequence
 import WeilConjectures.RingTheory.RegularQuotientIdealIntersectionAux
-public import Mathlib.CategoryTheory.Category.Init
 
 /-!
 # Ideal intersection for a sequence regular modulo an ideal

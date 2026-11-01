@@ -18,6 +18,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 public import Mathlib.CategoryTheory.Limits.HasLimits
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseRightDerived
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 /-! # Derived reduction and restriction of scalars
 
 Source: Stacks Project, Tags 07A6, 06YY, 03CZ, 09T5 and 0DVC;

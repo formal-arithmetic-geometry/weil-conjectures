@@ -6,16 +6,10 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Category.ModuleCat.Kernels
-public import Mathlib.Algebra.Category.ModuleCat.AB
-public import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 public import Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 public import Mathlib.AlgebraicGeometry.Sites.Proetale
-public import Mathlib.Analysis.Normed.Group.Basic
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
-public import Mathlib.Data.EReal.Inv
-public import Mathlib.Topology.Algebra.InfiniteSum.Order
-public import Mathlib.Topology.MetricSpace.Bounded
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GlobalSections
 

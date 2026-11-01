@@ -15,16 +15,8 @@ import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingCl
 import WeilConjectures.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
 import WeilConjectures.CategoryTheory.Sites.TorsionSheafConstantModule
 public import Mathlib.Algebra.Category.Grp.EpiMono
-public import Mathlib.Algebra.Category.Grp.Zero
 public import Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-public import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
-public import Mathlib.CategoryTheory.Limits.Filtered
-public import Mathlib.CategoryTheory.Limits.Shapes.Countable
-public import Mathlib.CategoryTheory.Monoidal.Mon
-public import Mathlib.CategoryTheory.Sites.Abelian
-public import Mathlib.Combinatorics.Quiver.ReflQuiver
-public import Mathlib.Data.Int.ConditionallyCompleteOrder
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.Mathlib.Algebra.Homology.Localization

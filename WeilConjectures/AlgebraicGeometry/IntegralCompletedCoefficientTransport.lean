@@ -4,16 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ScalarExtensionRingIso
 public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplete
-public import WeilConjectures.AlgebraicGeometry.ProEtaleFiniteModelLocalConstancy
-public import WeilConjectures.AlgebraicGeometry.ProEtaleFiniteModelStalks
-public import WeilConjectures.AlgebraicGeometry.ProEtaleLisseFiniteModelsFromLisse
-public import WeilConjectures.AlgebraicGeometry.ProEtaleModuleInverseImageCanonicalUnit
-public import WeilConjectures.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 public import WeilConjectures.AlgebraicGeometry.SfIntegralReductionTower
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ConstructibleIntrinsic
-public import WeilConjectures.SixFunctors.ProEtale.FullCohomologicalDimension
 
 /-! # Canonical completed integral coefficient transport
 

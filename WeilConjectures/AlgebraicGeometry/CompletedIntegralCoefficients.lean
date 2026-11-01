@@ -14,6 +14,7 @@ public import Mathlib.CategoryTheory.Sites.Equivalence
 public import Mathlib.Algebra.Category.Ring.Limits
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
+public import WeilConjectures.NumberTheory.Padics.CoefficientExtension
 /-!
 # Completed integral coefficient sheaves
 

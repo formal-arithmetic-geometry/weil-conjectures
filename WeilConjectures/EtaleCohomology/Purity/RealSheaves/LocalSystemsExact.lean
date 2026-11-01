@@ -7,9 +7,6 @@ module
 
 public import WeilConjectures.ConstructibleSheaf.OpenClosed
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Subcategory
-public import Mathlib.Algebra.Order.Algebra
-public import Mathlib.Analysis.SpecialFunctions.Pow.NNReal
-public import Mathlib.Data.Nat.Choose.Multinomial
 public import Mathlib.RepresentationTheory.Basic
 public import Mathlib.RepresentationTheory.Intertwining
 public import Mathlib.RepresentationTheory.Rep.Basic

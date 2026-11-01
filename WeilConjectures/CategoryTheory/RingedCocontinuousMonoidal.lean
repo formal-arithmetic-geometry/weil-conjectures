@@ -7,6 +7,7 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import all WeilConjectures.AlgebraicGeometry.SemilinearDerivedCalculus
+public import Mathlib.CategoryTheory.Localization.Monoidal.Functor
 
 /-! # Monoidal restriction along a cocontinuous site functor
 

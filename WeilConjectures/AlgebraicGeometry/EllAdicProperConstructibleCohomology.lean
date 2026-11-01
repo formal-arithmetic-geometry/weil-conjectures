@@ -11,15 +11,6 @@ import all WeilConjectures.AlgebraicGeometry.FiniteDiscreteEncodingConstructibil
 import WeilConjectures.AlgebraicGeometry.IntegralLfpConstantModelComparison
 import all WeilConjectures.AlgebraicGeometry.ProEtaleConstructibleOrigin
 import WeilConjectures.SixFunctors.Etale.Derived.Stability.Generation
-public import Mathlib.Algebra.Order.Algebra
-public import Mathlib.Analysis.SpecialFunctions.Pow.NNReal
-public import Mathlib.CategoryTheory.Category.Init
-public import Mathlib.Combinatorics.Matroid.Init
-public import Mathlib.Data.Nat.Choose.Multinomial
-public import Mathlib.NumberTheory.ArithmeticFunction.Misc
-public import Mathlib.Tactic.NormNum.GCD
-public import Mathlib.Tactic.Positivity.Finset
-public import Mathlib.Topology.Sheaves.Init
 public import WeilConjectures.CategoryTheory.ConstantScalarRestrictionTensor
 
 set_option linter.privateModule false

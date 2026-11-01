@@ -9,13 +9,6 @@ public import Mathlib.LinearAlgebra.PerfectPairing.Basic
 public import WeilConjectures.CategoryTheory.DerivedCategory.HomSingleProjective
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
 public import WeilConjectures.SixFunctors.Etale.Derived.PointUnit
-public import Mathlib.Algebra.Azumaya.Basic
-public import Mathlib.Algebra.Category.ModuleCat.Algebra
-public import Mathlib.Algebra.Module.StablyFree.Basic
-public import Mathlib.LinearAlgebra.Matrix.FiniteDimensional
-public import Mathlib.RingTheory.WittVector.IsPoly
-public import Mathlib.Tactic.Polynomial.Basic
-public import Mathlib.Tactic.ReduceModChar
 
 /-!
 # The composition pairing at the point over a field

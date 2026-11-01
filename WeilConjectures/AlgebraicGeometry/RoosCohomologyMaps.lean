@@ -7,6 +7,7 @@ module
 public import WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimit
 public import WeilConjectures.AlgebraicGeometry.MilnorTower
 public import WeilConjectures.CategoryTheory.DerivedCategory.DegreewiseLimits
+public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
 /-!
 # Explicit maps and exactness for the strict Roos cohomology sequence

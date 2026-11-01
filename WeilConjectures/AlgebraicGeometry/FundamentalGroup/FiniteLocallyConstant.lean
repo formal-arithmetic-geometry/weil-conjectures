@@ -10,11 +10,7 @@ public import Mathlib.Algebra.Field.Defs
 public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-public import Mathlib.Analysis.Normed.Group.Basic
 public import Mathlib.CategoryTheory.FintypeCat
-public import Mathlib.Data.EReal.Inv
-public import Mathlib.Topology.Algebra.InfiniteSum.Order
-public import Mathlib.Topology.MetricSpace.Bounded
 public import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantSets
 
 /-!

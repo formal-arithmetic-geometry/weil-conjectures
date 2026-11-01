@@ -10,9 +10,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMapBasicProperties
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-public import Mathlib.Algebra.Order.BigOperators.Ring.Finset
-public import Mathlib.Combinatorics.Matroid.Init
-public import Mathlib.Combinatorics.Quiver.ReflQuiver
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineVanishing
 

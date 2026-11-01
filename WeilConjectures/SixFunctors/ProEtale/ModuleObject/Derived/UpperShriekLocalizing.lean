@@ -12,8 +12,6 @@ public import WeilConjectures.CategoryTheory.Triangulated.BrownRepresentability.
 public import WeilConjectures.CategoryTheory.Triangulated.CompactObjExtension
 public import WeilConjectures.CategoryTheory.Triangulated.LocalizingClosureGeneration
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ConstructibleEmbedding
-public import Mathlib.Data.Nat.Choose.Multinomial
-public import Mathlib.NumberTheory.ArithmeticFunction.Misc
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleStratum
 
 /-!

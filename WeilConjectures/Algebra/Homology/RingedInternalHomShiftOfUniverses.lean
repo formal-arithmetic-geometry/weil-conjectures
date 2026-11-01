@@ -4,10 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
-public import WeilConjectures.Algebra.Homology.RingedInternalHomExactRestriction
-public import WeilConjectures.AlgebraicGeometry.CoefficientRingedTensorHomModel
-import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMapOfUniverses
+public import Mathlib.Algebra.Category.Grp.Basic
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.Algebra.Category.ModuleCat.Presheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.InternalHom
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+public import WeilConjectures.Algebra.Homology.DerivedInternalHomOfUniverses
+public import WeilConjectures.Algebra.Homology.HomComplexComponents
 
 /-! # Normalized internal-Hom shifts with independent site universes
 

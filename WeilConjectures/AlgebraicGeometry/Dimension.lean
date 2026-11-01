@@ -6,7 +6,6 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
 public import Mathlib.AlgebraicGeometry.Fiber
 import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType

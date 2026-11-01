@@ -7,6 +7,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.CompletedIntegralCoefficients
 import WeilConjectures.AlgebraicGeometry.ProEtaleAffineWeaklyContractibleCover
 import WeilConjectures.AlgebraicGeometry.ProEtaleWeaklyContractibleEvaluationColimits
+public import Mathlib.CategoryTheory.Sites.EpiMono
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 
 /-!
 # Exact countable products of pro-etale module sheaves

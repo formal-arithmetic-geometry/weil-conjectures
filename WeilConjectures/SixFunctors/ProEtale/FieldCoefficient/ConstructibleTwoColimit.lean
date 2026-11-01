@@ -11,7 +11,6 @@ public import WeilConjectures.CategoryTheory.StageSystem.Const
 public import WeilConjectures.CategoryTheory.StageSystem.Restrict
 public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.ConstructibleHeart
 public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.ExtendScalarsComp
-public import Mathlib.CategoryTheory.ExtremalEpi
 
 /-!
 # The common-stage constructible category `D^b_c(X, ℚ̄_ℓ) = 2-colim_E D^b_c(X, E)` and its heart

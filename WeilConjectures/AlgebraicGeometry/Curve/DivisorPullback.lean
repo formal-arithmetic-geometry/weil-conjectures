@@ -9,7 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.Curve.Divisor
 public import WeilConjectures.AlgebraicGeometry.Curve.SerreDuality
 public import WeilConjectures.AlgebraicGeometry.Hilbert.Curve
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
-public import Mathlib.Order.CompletePartialOrder
 
 /-!
 # Pullback of divisors along finite flat morphisms of curves

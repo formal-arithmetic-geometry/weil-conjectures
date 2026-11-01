@@ -5,9 +5,18 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Sites.PointCohomology
 public import WeilConjectures.RingTheory.ProEtale.HenselianLocalRing
-public import WeilConjectures.Mathlib.RingTheory.Etale.Weakly
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughProjectives
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Cover.Over
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import Mathlib.CategoryTheory.Sites.EpiMono
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
+public import WeilConjectures.Mathlib.Algebra.Category.Grp.ForgetCorepresentable
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 
 /-!
 # Étale cohomology of a strictly henselian local scheme

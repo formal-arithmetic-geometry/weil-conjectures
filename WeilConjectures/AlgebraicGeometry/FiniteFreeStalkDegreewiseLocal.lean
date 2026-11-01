@@ -7,7 +7,6 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.StalkRestrictionComplexIso
 import WeilConjectures.AlgebraicGeometry.FiniteFreeStalkMapLocal
-public import Mathlib.Combinatorics.Matroid.Init
 @[expose] public section
 set_option autoImplicit false
 universe u

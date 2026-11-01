@@ -11,8 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import WeilConjectures.AlgebraicGeometry.SelfTorProjectionHomologyTermwise
-public import Mathlib.Combinatorics.Matroid.Init
-public import Mathlib.Data.Nat.Totient
 
 @[expose] public section
 set_option autoImplicit false

@@ -8,9 +8,6 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-public import Mathlib.Algebra.Order.BigOperators.Ring.Finset
-public import Mathlib.Combinatorics.Matroid.Init
-public import Mathlib.Data.Int.ConditionallyCompleteOrder
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineVanishing
 
 /-! # Quasi-coherent cohomology under a scheme isomorphism

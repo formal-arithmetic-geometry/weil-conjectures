@@ -5,12 +5,9 @@ Authors: Bin Wu
 -/
 module
 public import Mathlib.Algebra.Category.Grp.Basic
-public import Mathlib.Algebra.Order.Algebra
-public import Mathlib.Analysis.SpecialFunctions.Pow.NNReal
 public import Mathlib.CategoryTheory.Monoidal.Mod
 public import Mathlib.CategoryTheory.Sites.Coherent.Basic
 public import Mathlib.Topology.Category.Profinite.Basic
-public import Mathlib.Topology.Category.Profinite.EffectiveEpi
 public import WeilConjectures.CategoryTheory.InternalSectionTensorComparison
 public import WeilConjectures.CategoryTheory.ModuleObjects.Free
 

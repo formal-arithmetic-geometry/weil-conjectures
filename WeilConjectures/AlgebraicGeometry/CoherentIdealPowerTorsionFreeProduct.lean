@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.IdealSheafFiniteType
 import WeilConjectures.AlgebraicGeometry.QuasiCoherentIdealZeroSetAffine
 import WeilConjectures.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
 import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
-public import Mathlib.CategoryTheory.Limits.Shapes.Countable
 
 /-! # Removing ideal-power torsion from a coherent module
 

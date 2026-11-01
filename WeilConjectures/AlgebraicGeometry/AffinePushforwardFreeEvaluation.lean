@@ -10,10 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
-public import Mathlib.Algebra.Order.BigOperators.Ring.Finset
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
-public import Mathlib.Combinatorics.Matroid.Init
-public import Mathlib.Combinatorics.Quiver.ReflQuiver
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineVanishing
 
 /-! # Finite free evaluation over the direct-image algebra
