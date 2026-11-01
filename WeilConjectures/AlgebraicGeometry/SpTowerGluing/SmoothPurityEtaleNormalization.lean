@@ -43,3 +43,19 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 attribute [instance] GraphCoordinates.additive GraphCoordinates.inverseAdditive
 
 end AlgebraicGeometry.ProEtale.SpTowerGluing
+
+namespace AlgebraicGeometry.ProEtale.SpTowerGluing
+
+/-- The actual lifted quotient rings for the graph construction, with index n meaning n+1.
+Source: Local pairs, coefficient convention (blueprint: det-sp-tower-gluing). -/
+def graphRings (n : ℕ) : CommRingCat.{u + 1} :=
+  CommRingCat.of (ULift.{u + 1} (SpTowerShriek.R l E n))
+
+/-- The adjacent quotient maps, lifted without changing coefficients.
+Source: Local pairs, coefficient convention (blueprint: det-sp-tower-gluing). -/
+def graphTransitions (n : ℕ) : graphRings l E (n + 1) ⟶ graphRings l E n :=
+  CommRingCat.ofHom (ULift.ringEquiv.symm.toRingHom.comp
+    ((Ideal.Quotient.factorPowSucc (spEllIdeal l E) (n + 1)).comp
+      ULift.ringEquiv.toRingHom))
+
+end AlgebraicGeometry.ProEtale.SpTowerGluing

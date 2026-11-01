@@ -335,4 +335,49 @@ theorem native_conjugate_transport (P : WeilConjectures.PurityFiniteSetting.{u})
   simp only [conjugate, tensorCoefficientIso_symm, Iso.symm_hom]
   exact h.symm
 
+/-- The normalized finite affine-line conjugates are independent of the exponent.
+The transition is exactly inverse rho_{M,s0} followed by rho_{M,s1}, placed
+in degree zero, shifted by two, pulled to the pro-etale site, and tensored
+with Lp^*K. Source: final affine-line-adjunction paragraph of
+cor-pur-affine-space-zero-section-purity.proof.md
+(blueprint: lem-route-coordinate-line-conjugate-exponents).
+
+Proof: the finite purity setting fixes the coefficient quotient and the normalized
+integration transpose. For ordered exponents the root power map preserves the
+Kummer boundary and its coefficient unit. The normalized root comparisons of
+vector-integration site comparison therefore intertwine alpha at the two levels.
+Tensor with Lp^*K, shift by two and compose with the fixed normalized gamma.
+For arbitrary exponents apply this ordered equality to each exponent and their
+maximum. Cancel the invertible common-level power comparison; the remaining map
+is precisely transition. Equal exponents give identities. For the zero ring,
+empty base or zero K the equation is the equality of the unique zero maps.
+-/
+theorem conjugate_exponents (T : Scheme.{u}) (aT : T ⟶ Spec (.of P.field.k))
+    [LocallyOfFiniteType aT] [QuasiCompact aT] [IsSeparated aT]
+    (r s : ℕ)
+    (hr : ((P.coefficients.l ^ (r + 1) : ℕ) : Ring P) = 0)
+    (hs : ((P.coefficients.l ^ (s + 1) : ℕ) : Ring P) = 0)
+    (K : DerivedCategory.Plus
+      (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (Ring P))))
+    (Ke : Etale.DerivedCategoryModule (Ring P) T)
+    (hKe : Etale.DerivedCategory.constructibleFiniteTor
+      (ModuleCat.{u + 1} (Ring P)) T Ke)
+    (eK : (VectorIntegrationSite.comparison (Ring P) T).obj Ke ≅ K.obj) :
+    (CoordinateLine.tensorCoefficientIso (Ring P) T _ _
+      ((VectorIntegrationSite.comparison (Ring P) (AffineSpace PUnit.{u + 1} T)).mapIso
+        ((shiftFunctor _ (2 : ℤ)).mapIso
+          ((DerivedCategory.singleFunctor _ 0).mapIso
+            (transition P (AffineSpace PUnit.{u + 1} T)
+              ((AffineSpace PUnit.{u + 1} T ↘ T) ≫ aT) r s hr hs)))) K.obj).hom ≫
+      conjugate P T aT s hs K Ke hKe eK = conjugate P T aT r hr K Ke hKe eK := by
+  have hP : IsUnit (P.coefficients.l : Γ(ProjectiveLine T, ⊤)) :=
+    primeUnit P (ProjectiveLine T) ((ProjectiveLine T ↘ T) ≫ aT)
+  have hX : IsUnit (P.coefficients.l : Γ(AffineSpace PUnit.{u + 1} T, ⊤)) :=
+    primeUnit P (AffineSpace PUnit.{u + 1} T)
+      ((AffineSpace PUnit.{u + 1} T ↘ T) ≫ aT)
+  have htrans := native_transition_compatibility P T aT r s hr hs
+  have hchart := native_chart_compatibility P T aT r s hr hs hP hX htrans
+  have hsource := native_source_exponent_compatibility P T aT r s hr hs K Ke hKe eK
+  exact native_conjugate_transport P T aT r s hr hs K Ke hKe eK hchart hsource
+
 end AlgebraicGeometry.ProEtale.NativeCoordinateLine

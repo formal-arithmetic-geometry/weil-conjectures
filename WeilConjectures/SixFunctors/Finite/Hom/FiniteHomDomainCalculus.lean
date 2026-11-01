@@ -292,6 +292,49 @@ def FiniteHomDomainScalarComposition
         T''.map (Prod.mkHom (α.hom.app U) (α.hom.app V))) ∧
   α.hom.app I ≫ e''.hom = G.map e.hom ≫ e'.hom
 
+/-- The tensor and unit squares for the specified identity scalar comparison.
+Source: blueprint identity-coefficient clause; Stacks 07A4
+(blueprint: lem-coef-finite-hom-domain-calculus). -/
+def FiniteHomDomainScalarIdentity {C : Type a₁} [Category.{b₁} C]
+    (T : C × C ⥤ C) (I : C) (F : C ⥤ C)
+    {D₀ : C → C → Type b₁} (d₀ : ∀ U V, D₀ U V)
+    {V : Type b₁} (e₀ : V) (z : F ≅ 𝟭 C) : Prop :=
+  ∃ δ : ∀ U V : C, F.obj (T.obj (U, V)) ≅ T.obj (F.obj U, F.obj V),
+  ∃ e : F.obj I ≅ I,
+  (∀ U V, HEq (δ U V) (d₀ U V)) ∧ HEq e e₀ ∧
+  (∀ U V : C, (δ U V).hom ≫
+    T.map (Prod.mkHom (z.hom.app U) (z.hom.app V)) = z.hom.app (T.obj (U, V))) ∧
+  e.hom = z.hom.app I
+
+private theorem domainScalarComposition
+    {C : Type a₁} {C' : Type a₂} {C'' : Type a₃}
+    [Category.{b₁} C] [Category.{b₂} C'] [Category.{b₃} C'']
+    (T : C × C ⥤ C) (T' : C' × C' ⥤ C') (T'' : C'' × C'' ⥤ C'')
+    (I : C) (I' : C') (I'' : C'') (F : C ⥤ C') (G : C' ⥤ C'') (H : C ⥤ C'')
+    (α : F ⋙ G ≅ H)
+    (δ : ∀ U V : C, F.obj (T.obj (U, V)) ≅ T'.obj (F.obj U, F.obj V))
+    (δ' : ∀ U V : C', G.obj (T'.obj (U, V)) ≅ T''.obj (G.obj U, G.obj V))
+    (δ'' : ∀ U V : C, H.obj (T.obj (U, V)) ≅ T''.obj (H.obj U, H.obj V))
+    (e : F.obj I ≅ I') (e' : G.obj I' ≅ I'') (e'' : H.obj I ≅ I'')
+    (ht : ∀ U V : C,
+      α.hom.app (T.obj (U, V)) ≫ (δ'' U V).hom =
+        G.map (δ U V).hom ≫ (δ' (F.obj U) (F.obj V)).hom ≫
+          T''.map (Prod.mkHom (α.hom.app U) (α.hom.app V)))
+    (hu : α.hom.app I ≫ e''.hom = G.map e.hom ≫ e'.hom) :
+    FiniteHomDomainScalarComposition T T' T'' I I' I'' F G H α δ δ' δ'' e e' e'' :=
+  ⟨δ, δ', δ'', e, e', e'', fun _ _ ↦ HEq.rfl, fun _ _ ↦ HEq.rfl,
+    fun _ _ ↦ HEq.rfl, HEq.rfl, HEq.rfl, HEq.rfl, ht, hu⟩
+
+private theorem domainScalarIdentity
+    {C : Type a₁} [Category.{b₁} C] (T : C × C ⥤ C) (I : C) (F : C ⥤ C)
+    (δ : ∀ U V : C, F.obj (T.obj (U, V)) ≅ T.obj (F.obj U, F.obj V))
+    (e : F.obj I ≅ I) (z : F ≅ 𝟭 C)
+    (ht : ∀ U V : C, (δ U V).hom ≫
+      T.map (Prod.mkHom (z.hom.app U) (z.hom.app V)) = z.hom.app (T.obj (U, V)))
+    (hu : e.hom = z.hom.app I) :
+    FiniteHomDomainScalarIdentity T I F δ e z :=
+  ⟨δ, e, fun _ _ ↦ HEq.rfl, HEq.rfl, ht, hu⟩
+
 variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
   (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
   (X : Scheme.{u}) [hXover : X.Over (Spec (.of D.k))]
@@ -376,6 +419,84 @@ theorem finiteHomDomain_flatModel {n m : ℕ} (h : m ≤ n) (a b : ℤ) (hab : a
       (lt_of_lt_of_le hi (min_le_left _ _))
   · exact (_root_.DerivedCategory.isLE_iff L.obj d).1 hle i hi
 
+/-- Both endpoints of the ambient evaluation transpose are finite-Tor constructible.
+Source: blueprint opening proof paragraph and cor-weil-finite-constructible-hom
+(blueprint: lem-coef-finite-hom-domain-calculus).
+
+Proof: lem-kun-dimension-finite-type bounds the dimension of X, also for empty X.
+Apply cor-weil-finite-constructible-hom at level n+1 to K,M, and then the scalar-domain
+assertion to their internal Hom. Apply the scalar-domain assertion separately to
+K and M, and the same internal-Hom corollary at level m+1 to the resulting pair.
+These give bounded constructibility and finite Tor amplitude of the two endpoints.
+This argument asserts no invertibility of their comparison. -/
+theorem finiteHomDomain_endpoints {n m : ℕ} (h : m ≤ n)
+    (K M : finiteHomEtale l E X n)
+    (hK : Etale.DerivedCategory.isBoundedConstructible (finiteHomDomainCoeff l E n) X K)
+    (hM : Etale.DerivedCategory.isBoundedConstructible (finiteHomDomainCoeff l E n) X M)
+    (hKt : ∃ a b : ℤ, a ≤ b ∧
+      Etale.DerivedCategory.hasTorAmplitudeIn (finiteHomDomainCoeff l E n) X a b K)
+    (hMt : ∃ a b : ℤ, a ≤ b ∧
+      Etale.DerivedCategory.hasTorAmplitudeIn (finiteHomDomainCoeff l E n) X a b M) :
+    (Etale.DerivedCategory.isBoundedConstructible (finiteHomDomainCoeff l E m) X
+        ((finiteHomEtaleReduction l E X h).obj
+          ((finiteHomEtaleInternalHom l E X n).obj (op K, M))) ∧
+      ∃ a b : ℤ, a ≤ b ∧
+        Etale.DerivedCategory.hasTorAmplitudeIn (finiteHomDomainCoeff l E m) X a b
+          ((finiteHomEtaleReduction l E X h).obj
+            ((finiteHomEtaleInternalHom l E X n).obj (op K, M)))) ∧
+    (Etale.DerivedCategory.isBoundedConstructible (finiteHomDomainCoeff l E m) X
+        ((finiteHomEtaleInternalHom l E X m).obj
+          (op ((finiteHomEtaleReduction l E X h).obj K),
+            (finiteHomEtaleReduction l E X h).obj M)) ∧
+      ∃ a b : ℤ, a ≤ b ∧
+        Etale.DerivedCategory.hasTorAmplitudeIn (finiteHomDomainCoeff l E m) X a b
+          ((finiteHomEtaleInternalHom l E X m).obj
+            (op ((finiteHomEtaleReduction l E X h).obj K),
+              (finiteHomEtaleReduction l E X h).obj M))) := by
+  obtain ⟨a, b, hab, htK⟩ := hKt
+  obtain ⟨c, e, hce, htM⟩ := hMt
+  obtain ⟨d, hd⟩ := exists_topologicalKrullDim_le (X ↘ Spec (.of D.k))
+  have hH := finite_constructible_derivedHom_etale D l hl E (n + 1)
+    (Nat.succ_le_succ (Nat.zero_le n)) X d hd a b c e hab hce K M hK hM
+    (Etale.DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn.1 htK)
+    (Etale.DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn.1 htM)
+  have hinterval : c - b - 2 * (d : ℤ) ≤ e - a + 2 * (d : ℤ) := by omega
+  have hs := finiteHomDomain_flatModel D l hl E X h _ _ hinterval _ hH.1
+    (Etale.DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn.2 hH.2)
+  have hsK := finiteHomDomain_flatModel D l hl E X h a b hab K hK htK
+  have hsM := finiteHomDomain_flatModel D l hl E X h c e hce M hM htM
+  have hH' := finite_constructible_derivedHom_etale D l hl E (m + 1)
+    (Nat.succ_le_succ (Nat.zero_le m)) X d hd a b c e hab hce _ _
+    hsK.2.2.1 hsM.2.2.1
+    (Etale.DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn.1 hsK.2.2.2)
+    (Etale.DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn.1 hsM.2.2.2)
+  exact ⟨⟨hs.2.2.1, _, _, hinterval, hs.2.2.2⟩,
+    ⟨hH'.1, _, _, hinterval,
+      Etale.DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn.2 hH'.2⟩⟩
+
+/-- The actual self-quotient is the identity homomorphism.
+Source: blueprint identity-coefficient clause
+(blueprint: lem-coef-finite-hom-domain-calculus).
+
+Proof: quotient induction reduces the equality to the residue class of an element
+of the valuation ring. Both homomorphisms send it to that same residue class. -/
+theorem finiteHomDomain_quotient_id (n : ℕ) :
+    finiteHomQuotient l E (le_refl n) = RingHom.id (finiteHomDomainCoeff l E n) := by
+  ext x
+  change Ideal.Quotient.factor (le_refl (Padic.coefficientExtensionIdeal l E (n + 1)))
+    x.down = x.down
+  rw [Ideal.Quotient.factor_eq]
+  rfl
+
+/-- The canonical identity scalar comparison, the mate of identity on restriction.
+Its action on flat models is multiplication, not an arbitrary automorphism.
+Source: blueprint identity-coefficient clause; Stacks 06YY
+(blueprint: lem-coef-finite-hom-domain-calculus). -/
+def finiteHomDomainUnit (n : ℕ) :
+    finiteHomEtaleReduction l E X (le_refl n) ≅ 𝟭 (finiteHomEtale l E X n) :=
+  ProEtale.normalizedOriginScalarUnit X.smallEtaleTopology
+    (finiteHomQuotient l E (le_refl n)) (finiteHomDomain_quotient_id l E n)
+
 attribute [local irreducible] ProEtale.pbcFixedScalarExtension
   Etale.scalarExtensionRepresentative Etale.scalarSheafPullbackComplexIso
 
@@ -422,6 +543,55 @@ theorem finiteHomDomain_monoidal {n m : ℕ} (h : m ≤ n) :
     Etale.ExceptionalCoefficients.TensorNormalization (finiteHomQuotient l E h) X
       (Etale.ExceptionalCoefficients.tensorIso (finiteHomQuotient l E h) X) := by
   exact domainMonoidalProof D l hl E X h
+
+/-- Tensor and unit comparisons agree with actual successive scalar extension and
+with the identity quotient, on the ambient unbounded categories.
+Source: blueprint successive-quotient and identity clauses; Stacks 0D6D and 07A4
+(blueprint: lem-coef-finite-hom-domain-calculus).
+
+Proof: specialize the generic scalar tensor composition, regular-unit composition,
+tensor identity and regular-unit identity equations to the actual quotient ring maps.
+Their composition and identity equalities are finiteHomQuotient_comp and
+finiteHomDomain_quotient_id. The generic tensor identity follows from tensor composition
+by naturality and cancellation. The existential witnesses are the published tensor
+and unit comparisons, so all heterogeneous identifications are reflexive. -/
+theorem finiteHomDomain_scalarCoherence {n m r : ℕ} (h : m ≤ n) (k : r ≤ m) :
+    FiniteHomDomainScalarComposition
+      (Functor.uncurry.obj (Etale.derivedTensor
+        (ModuleCat.{u + 1} (finiteHomDomainCoeff l E n)) X))
+      (Functor.uncurry.obj (Etale.derivedTensor
+        (ModuleCat.{u + 1} (finiteHomDomainCoeff l E m)) X))
+      (Functor.uncurry.obj (Etale.derivedTensor
+        (ModuleCat.{u + 1} (finiteHomDomainCoeff l E r)) X))
+      (𝟙_ (finiteHomEtale l E X n)) (𝟙_ (finiteHomEtale l E X m))
+      (𝟙_ (finiteHomEtale l E X r))
+      (finiteHomEtaleReduction l E X h) (finiteHomEtaleReduction l E X k)
+      (finiteHomEtaleReduction l E X (k.trans h)) (finiteHomEtaleAssoc l E X h k)
+      (fun U V ↦ (Etale.ExceptionalCoefficients.tensorIso (finiteHomQuotient l E h) X).app (U, V))
+      (fun U V ↦ (Etale.ExceptionalCoefficients.tensorIso (finiteHomQuotient l E k) X).app (U, V))
+      (fun U V ↦ (Etale.ExceptionalCoefficients.tensorIso
+        (finiteHomQuotient l E (k.trans h)) X).app (U, V))
+      (Etale.ExceptionalCoefficients.unitIso (finiteHomQuotient l E h) X)
+      (Etale.ExceptionalCoefficients.unitIso (finiteHomQuotient l E k) X)
+      (Etale.ExceptionalCoefficients.unitIso (finiteHomQuotient l E (k.trans h)) X) ∧
+    FiniteHomDomainScalarIdentity
+      (Functor.uncurry.obj (Etale.derivedTensor
+        (ModuleCat.{u + 1} (finiteHomDomainCoeff l E n)) X))
+      (𝟙_ (finiteHomEtale l E X n)) (finiteHomEtaleReduction l E X (le_refl n))
+      (fun U V ↦ (Etale.ExceptionalCoefficients.tensorIso
+        (finiteHomQuotient l E (le_refl n)) X).app (U, V))
+      (Etale.ExceptionalCoefficients.unitIso (finiteHomQuotient l E (le_refl n)) X)
+      (finiteHomDomainUnit l E X n) := by
+  constructor
+  · apply domainScalarComposition
+    · exact Etale.ExceptionalCoefficients.scalarTensor_comp _ _ _
+        (finiteHomQuotient_comp l E h k) X
+    · exact (Etale.normalizedScalarUnit_comp _ _ _
+        (finiteHomQuotient_comp l E h k) X).symm
+  · apply domainScalarIdentity
+    · exact Etale.ExceptionalCoefficients.scalarTensor_id _
+        (finiteHomDomain_quotient_id l E n) X
+    · exact scalarUnit_id X _ (finiteHomDomain_quotient_id l E n)
 
 include D hl hXover hXsep hXft hXqc in
 attribute [local implicit_reducible] CategoryTheory.catToReflQuiver

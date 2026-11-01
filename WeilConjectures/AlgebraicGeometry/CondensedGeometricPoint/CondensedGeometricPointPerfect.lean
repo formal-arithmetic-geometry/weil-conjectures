@@ -135,6 +135,21 @@ def RestrictedComparison
       Nonempty ((restricted Λ k h).obj ((ihom C).obj (𝟙_ _)) ≅
         (ihom ((restricted Λ k h).obj C)).obj (𝟙_ _)))
 
+/-- The complete restricted claim. The closure witnesses assert that the two full
+subcategories inherit the ambient tensor, internal Hom and triangulation. They impose
+no extra assumptions: their existence is part of the conclusion. The monoidal unit
+isomorphism is `Functor.Monoidal.εIso` in the reverse direction, hence sends Λ_s to Λ(*).
+No equivalence on the ambient module or derived categories is asserted.
+Source: blueprint sk-lem-finite (blueprint: lem-sf-condensed-geometric-point-perfect). -/
+def Statement : Prop :=
+  ∃ (hc : ObjectProperty.IsMonoidal (ctf Λ k))
+    (hp : ObjectProperty.IsMonoidal (perfect Λ))
+    (hch : ObjectProperty.IsMonoidalClosed (ctf Λ k))
+    (hph : ObjectProperty.IsMonoidalClosed (perfect Λ))
+    (hct : (ctf Λ k).IsTriangulated) (hpt : (perfect Λ).IsTriangulated)
+    (h : ∀ K : (ctf Λ k).FullSubcategory, perfect Λ ((fiber Λ k).obj K.obj)),
+    @RestrictedComparison Λ _ _ k _ _ hc hp hch hph hct hpt h
+
 omit Λ k in
 /-- The discrete condensed ring of the actual quotient by the uniformizer ideal to power
 `n`. This specializes the recorded continuous-map construction with the discrete topology;
@@ -159,6 +174,72 @@ abbrev residueRingObj (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteInterme
     Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1} :=
   (sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj
     (residueRingSheaf ℓ E π n)
+
+/-- Derived evaluation at an algebraically closed geometric point is an exact symmetric
+monoidal equivalence from the specified bounded constructible finite-Tor category to
+bounded finite-projective scalar complexes. The four conjuncts are exactly the four
+coefficient choices. `Statement` includes the canonical internal-Hom comparison, its
+actual evaluation equation, Koszul braiding compatibility, the unit and dual formula.
+
+Source: current blueprint sec-six-functors/sk-lem-finite, geometric-point statement and
+first proof paragraph; Hemo--Richarz--Scholbach, Lemma 4.1
+(blueprint: lem-sf-condensed-geometric-point-perfect).
+
+Proof (the DAG's eleven steps):
+1. Use `lem-weil-pbc-geometric-field-proetale-evaluation` to identify the point topos with
+   the profinite topos, split covers, and identify final evaluation with singleton sections.
+   `lem-pe-internal-section-tensor-comparison` identifies internal module objects, tensors,
+   K-flat total complexes and hence closed Hom with section-ring modules. Exactness and
+   the cohomology formula come from `lem-weil-point-proetale-sections-exact`.
+2. For R = Λ(*) and B = Λ_s, form C(M) = B tensor over constant R with constant M.
+   The balanced formula b tensor m maps to b times t(m) proves C left adjoint to sections G.
+   Splitting a cover lifts sections of an epimorphism. Apply
+   `lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits`: G preserves colimits.
+   The adjunction unit is the identity on R, hence on free modules and presentations.
+3. `lem-sfb-admissible-scalar-realization-exact` gives Noetherian scalars and exact C for
+   finite, integral and rational coefficients. For the finite-subextension algebraic
+   closure the scalar ring is a field: `lem-trf-field-complex-cohomology-splitting` contracts
+   every acyclic scalar complex, and additive C preserves its contracting homotopy.
+   This proves exactness without replacing the coefficient by all continuous functions.
+4. The only nonempty stratum of Spec k is itself. Split a local trivializing cover and
+   pull its finite constant model back along a section. Thus constructible modules are
+   exactly C(M) for finitely presented scalar modules. The heart counit is invertible.
+5. Localize the exact adjunction using `lem-sc-derived-adjunction-from-underived`.
+   Its unit is invertible termwise; its counit is a quasi-isomorphism on bounded
+   constructible complexes by the cohomology computation of steps 1, 3 and 4. This gives
+   precisely the bounded constructible/scalar finite-cohomology equivalence.
+6. The point-evaluation tensor comparison of `lem-sf-point-ringed-evaluation-model` is
+   the comparison induced by tensoring sections on K-flat representatives. Its chain maps
+   preserve associators and unitors, and in bidegree (i,j) the sign is (-1)^(ij).
+7. Test a finite Tor interval for K against every C(M). The comparison and GC(M) = M
+   give the same scalar Tor interval. The Noetherian cohomology criterion
+   `lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion` and
+   `lem-pc-ring-pseudo-coherent-finite-tor-perfect` give a bounded finite-projective model.
+8. Conversely, realize each bounded finite-projective complex. Noetherian kernels are
+   finite by `lem-weil-pbc-noetherian-submodule-finite`, giving bounded constructible
+   cohomology. Finite-free retracts are flat and give the finite Tor interval, by the
+   identity specialization of `lem-sfb-perfect-scalar-change-model`.
+9. Restrict the step-6 structure and the exact adjunction. Tensor closure, the unit
+   comparison and signed coherence give the exact symmetric monoidal equivalence.
+10. Compute closed Hom on the finite-free retract models with
+    `lem-sfb-ringed-site-strict-perfect-hom`; finite matrices, sums and products give
+    C(Hom(P,Q)) = Hom(CP,CQ). The differential is d_Q f - (-1)^degree(f) f d_P, retaining
+    the evaluation normalization of `lem-sfb-ringed-site-duality-maps`.
+11. Transpose mapped evaluation as in `lem-sf-ringed-derived-closed-symmetric-monoidal`.
+    The matrix calculation makes this canonical natural comparison invertible; its mate
+    equation is the displayed evaluation equation. Koszul symmetry follows from step 6.
+    Set the second argument to the unit and apply the unit comparison for the dual formula.
+-/
+theorem condensed_geometric_point_perfect (p ℓ : ℕ) [Fact p.Prime] [Fact ℓ.Prime]
+    [CharP k p] (_hpℓ : p ≠ ℓ) (E : PadicAlgCl.FiniteIntermediateField ℓ)
+    (π : PadicAlgCl.integers ℓ E)
+    (_hπ : Ideal.span ({π} : Set (PadicAlgCl.integers ℓ E)) =
+      IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E)) (n : ℕ) (_hn : 1 ≤ n) :
+    Statement (residueRingObj.{u} ℓ E π n) k ∧
+    Statement (Profinite.padicIntegersRingObj.{u} ℓ E) k ∧
+    Statement (Profinite.continuousMapRingObj.{u} E) k ∧
+    Statement (Profinite.padicAlgClRingObj.{u} ℓ) k := by
+  sorry
 
 omit Λ k in
 omit Λ in

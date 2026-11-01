@@ -345,6 +345,55 @@ structure ProjectiveBundleBaseChangeDatum
   theta : (Scheme.Modules.tensorPullback map).obj D.L ≅ D'.L
   theta_quotient : projectiveBundleThetaQuotientLaw D D' g e map over theta
 
+/-- Coordinate geometry over a field: the coordinate hyperplane, its affine complement
+with the stated ratios, all divisor line bundles, and the scheme-theoretic reduced point.
+Source: blueprint sk-prop-an, proof Step 1; Stacks, Tags 01NG and 01MS
+(blueprint: lem-pur-projective-bundle-tautological-geometry). -/
+structure ProjectiveBundleCoordinateGeometry (K : Type u) [Field K] (n : ℕ) where
+  hyperplane : ∀ hn : 1 ≤ n,
+    (Scheme.Modules.Hom.zeroLocus (ProjectiveSpace.coordinateSection
+      (ULift.{u} (Fin (n + 1))) (Spec (.of K)) ⟨0⟩)).subscheme ≅
+        RelativeProjectiveSpace.scheme (Spec (.of K)) (n - 1)
+  hyperplane_over : ∀ hn : 1 ≤ n,
+    (hyperplane hn).hom ≫ RelativeProjectiveSpace.π (Spec (.of K)) (n - 1) =
+      (Scheme.Modules.Hom.zeroLocus (ProjectiveSpace.coordinateSection
+        (ULift.{u} (Fin (n + 1))) (Spec (.of K)) ⟨0⟩)).subschemeι ≫
+          (ℙ(ULift.{u} (Fin (n + 1)); Spec (.of K)) ↘ Spec (.of K))
+  affine : AffineSpace (ULift.{u} (Fin n)) (Spec (.of K)) ≅
+    (ProjectiveSpace.standardOpen (ULift.{u} (Fin (n + 1))) (Spec (.of K)) ⟨0⟩).toScheme
+  affine_over : affine.hom ≫
+      (ProjectiveSpace.standardOpen (ULift.{u} (Fin (n + 1))) (Spec (.of K)) ⟨0⟩).ι ≫
+      (ℙ(ULift.{u} (Fin (n + 1)); Spec (.of K)) ↘ Spec (.of K)) =
+    (AffineSpace (ULift.{u} (Fin n)) (Spec (.of K)) ↘ Spec (.of K))
+  ratios : ∀ i : Fin n,
+    (affine.hom ≫ (ProjectiveSpace.standardOpen (ULift.{u} (Fin (n + 1)))
+      (Spec (.of K)) ⟨0⟩).ι).appLE
+        (ProjectiveSpace.standardOpen (ULift.{u} (Fin (n + 1))) (Spec (.of K)) ⟨0⟩)
+        ⊤ (by simp) (ProjectiveSpace.coordRatio (ULift.{u} (Fin (n + 1)))
+          (Spec (.of K)) ⟨0⟩ ⟨i.succ⟩) = AffineSpace.coord _ ⟨i⟩
+  divisor : ∀ i : ULift.{u} (Fin (n + 1)),
+    (Scheme.Modules.Hom.zeroLocus (ProjectiveSpace.coordinateSection
+      (ULift.{u} (Fin (n + 1))) (Spec (.of K)) i)).IsInvertible
+  divisorLineBundle : ∀ i : ULift.{u} (Fin (n + 1)),
+    (Scheme.Modules.Hom.zeroLocus (ProjectiveSpace.coordinateSection
+      (ULift.{u} (Fin (n + 1))) (Spec (.of K)) i)).toModules.dual ≅
+        ProjectiveSpace.twist (ULift.{u} (Fin (n + 1))) (Spec (.of K)) 1
+  point : (⨆ i : Fin n, Scheme.Modules.Hom.zeroLocus (ProjectiveSpace.coordinateSection
+      (ULift.{u} (Fin (n + 1))) (Spec (.of K)) ⟨i.succ⟩)).subscheme ≅ Spec (.of K)
+  point_over : point.hom =
+    (⨆ i : Fin n, Scheme.Modules.Hom.zeroLocus (ProjectiveSpace.coordinateSection
+      (ULift.{u} (Fin (n + 1))) (Spec (.of K)) ⟨i.succ⟩)).subschemeι ≫
+        (ℙ(ULift.{u} (Fin (n + 1)); Spec (.of K)) ↘ Spec (.of K))
+  point_reduced : IsReduced
+    (⨆ i : Fin n, Scheme.Modules.Hom.zeroLocus (ProjectiveSpace.coordinateSection
+      (ULift.{u} (Fin (n + 1))) (Spec (.of K)) ⟨i.succ⟩)).subscheme
+  point_in_chart : ∀ x : (⨆ i : Fin n, Scheme.Modules.Hom.zeroLocus
+      (ProjectiveSpace.coordinateSection (ULift.{u} (Fin (n + 1)))
+        (Spec (.of K)) ⟨i.succ⟩)).subscheme,
+    (⨆ i : Fin n, Scheme.Modules.Hom.zeroLocus (ProjectiveSpace.coordinateSection
+      (ULift.{u} (Fin (n + 1))) (Spec (.of K)) ⟨i.succ⟩)).subschemeι x ∈
+      ProjectiveSpace.standardOpen (ULift.{u} (Fin (n + 1))) (Spec (.of K)) ⟨0⟩
+
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
 /-- The existing fixed-rank predicate, with the base explicit to avoid re-inferring the

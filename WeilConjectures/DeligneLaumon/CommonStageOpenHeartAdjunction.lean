@@ -542,6 +542,34 @@ private theorem reduction_isIso
   rw [V.map_comp]
   infer_instance
 
+@[irreducible] private def integralAdjunction
+    [∀ x : U, Invertible (l : U.residueField x)]
+    [∀ y : T, Invertible (l : T.residueField y)] :
+    integral D l hl j E ⊣ constructibleIntegralPullback l E j := by
+  let SU := (models l E).system U
+  let ST := (models l E).system T
+  let iU := (sfIntegralConstructible l E U).ι
+  let iT := (sfIntegralConstructible l E T).ι
+  let c := Compactification.ofIsOpenImmersion j
+  let a := compactOperationReduction l E D.k
+    (PurCompactSupport.coefficientPrimeUnit l D hl) j c
+  let : ∀ K, IsIso (a.app K) := reduction_isIso D l hl j E
+  let := NatIso.isIso_of_isIso_app a
+  let e : integral D l hl j E ⋙ (iT ⋙ ST.reduction) ≅
+      (iU ⋙ SU.reduction) ⋙ systemDerivedOpen l E j :=
+    asIso a ≪≫ isoWhiskerLeft (iU ⋙ SU.reduction)
+      (isoWhiskerLeft (systemDerivedOpen l E j) (systemDirectId l E T) ≪≫
+        CategoryTheory.Functor.rightUnitor _)
+  let t := whiskerLeft iT (integralComparisonPullbackCounit l E j ST SU
+    ((models l E).roos U) ((models l E).pullback j))
+  let : ∀ K, IsIso (t.app K) := fun K ↦ (models l E).effective j K
+  let := NatIso.isIso_of_isIso_app t
+  exact (systemDerivedOpenAdjunction l E j).restrictFullyFaithful
+    (faithfulIntegralReduction iU (sfIntegralConstructible l E U).fullyFaithfulι
+      SU.adjunction ((models l E).complete U))
+    (faithfulIntegralReduction iT (sfIntegralConstructible l E T).fullyFaithfulι
+      ST.adjunction ((models l E).complete T)) e.symm (asIso t).symm
+
 attribute [-instance] WeilConjectures.CompletedCoefficientPushforward.modAbelian
   WeilConjectures.CompletedCoefficientPushforward.hasDerived
   SheafOfModules.localizedSystemExtensionAdditive

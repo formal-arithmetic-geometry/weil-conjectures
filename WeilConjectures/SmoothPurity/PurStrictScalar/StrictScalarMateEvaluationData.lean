@@ -726,6 +726,33 @@ def subsequenceEvaluation (W : Scheme.{u}) (e n : ℕ) :
     ((evaluation ℕᵒᵖ
       (Modules (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) W)).obj (op n))).symm
 
+/-- Target evaluation uses the retained F exponent and the canonical completed
+coefficient tensor square, not a choice of an evaluated identification.
+Source: Stacks 03EK, 06YY, 0940
+(blueprint: def-pur-strict-scalar-mate-evaluation-data). -/
+def targetEvaluation {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
+    (S' : CoefficientDerivedSystemCalculus.{u, u} l F X) (e : ℕ)
+    (he : PurCompactSupport.Ramification l E F i e) (hepos : 1 ≤ e) (n : ℕ) :=
+  Functor.isoWhiskerLeft
+      (pbcDerivedExtend (completedCoefficientMap l E F i X) ⋙ support l F c S')
+      (subsequenceEvaluation l F Y e n) ≪≫
+    Functor.isoWhiskerLeft (pbcDerivedExtend (completedCoefficientMap l E F i X))
+      (positiveSupportEvaluation l F c S' (e * (n + 1))
+        (Nat.mul_pos hepos (Nat.le_add_left 1 n))) ≪≫
+    Functor.isoWhiskerRight
+      (PurCompactSupport.tensorSquare (completedCoefficientMap l E F i X)
+        ((PurCompactSupport.finiteChange l E F i e he hepos (n + 1)
+          (Nat.le_add_left 1 n)).map X)
+        (PurCompactSupport.projection l E (n + 1) (Nat.le_add_left 1 n) X)
+        (PurCompactSupport.projection l F (e * (n + 1))
+          (Nat.mul_pos hepos (Nat.le_add_left 1 n)) X)
+        (PurCompactSupport.ramified_reduction_square l E F i e he hepos (n + 1)
+          (Nat.le_add_left 1 n) X))
+      (PurCompactSupport.image (PurCompactSupport.finite l F (e * (n + 1))
+        (Nat.mul_pos hepos (Nat.le_add_left 1 n))) c ⋙
+          positiveRestriction l F Y (e * (n + 1))
+            (Nat.mul_pos hepos (Nat.le_add_left 1 n)))
+
 attribute [local irreducible] targetEvaluation
 
 end WeilConjectures.PurStrictScalar

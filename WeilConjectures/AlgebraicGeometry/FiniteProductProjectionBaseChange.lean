@@ -42,6 +42,7 @@ import WeilConjectures.SixFunctors.ProEtale.Comparison
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBaseChange
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusComp
 import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+public import WeilConjectures.AlgebraicGeometry.CompactificationProductExchange
 
 /-!
 # Finite-coefficient base change along a product projection
@@ -79,5 +80,46 @@ def finiteProductProjectionSquare (D : WeilConjectures.FiniteFieldDatum.{u})
     isoPullback := ((IsPullback.of_prod_fst_with_id f T).map (Over.forget _)).isoPullback
     hom_fst := ((IsPullback.of_prod_fst_with_id f T).map (Over.forget _)).isoPullback_hom_fst
     hom_snd := ((IsPullback.of_prod_fst_with_id f T).map (Over.forget _)).isoPullback_hom_snd }
+
+/-- Nagata compactification as a factorization over the field spectrum.
+Source: latest blueprint sk-lem-tf-independent-base-change, compactification paragraph
+(blueprint: sk-lem-tf-independent-base-change).
+
+Cancel the structure morphism of Y to get the separated finite-type hypotheses on f.
+The quasi-compact separated structure map of Y makes its source qcqs. A dense
+Nagata compactification then supplies c.i and c.g. Give its intermediate scheme
+the structure map c.g followed by Y.hom; c.comm and Over.w make both arrows maps
+over the field and identify their composite with f. -/
+private theorem finiteProductProjection_factorization
+    (D : WeilConjectures.FiniteFieldDatum.{u})
+    (X Y : Over (Spec (.of D.k)))
+    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+    (f : X ⟶ Y) :
+    ∃ (B : Over (Spec (.of D.k))) (j : X ⟶ B) (p : B ⟶ Y),
+      IsOpenImmersion j.left ∧ IsProper p.left ∧ j ≫ p = f := by
+  have : LocallyOfFiniteType (f.left ≫ Y.hom) := by
+    rw [Over.w f]
+    infer_instance
+  have : LocallyOfFiniteType f.left := locallyOfFiniteType_of_comp f.left Y.hom
+  have : QuasiCompact (f.left ≫ Y.hom) := by
+    rw [Over.w f]
+    infer_instance
+  have : QuasiCompact f.left := QuasiCompact.of_comp f.left Y.hom
+  have : IsSeparated (f.left ≫ Y.hom) := by
+    rw [Over.w f]
+    infer_instance
+  have : IsSeparated f.left := IsSeparated.of_comp f.left Y.hom
+  have : CompactSpace Y.left := QuasiCompact.compactSpace_of_compactSpace Y.hom
+  have : QuasiSeparatedSpace Y.left := quasiSeparatedSpace_of_quasiSeparated Y.hom
+  obtain ⟨c, _⟩ := exists_isDense_compactification f.left
+  let B : Over (Spec (.of D.k)) := Over.mk (c.g ≫ Y.hom)
+  let j : X ⟶ B := Over.homMk c.i (by
+    dsimp [B]
+    rw [← Category.assoc, ← c.comm, Over.w f])
+  let p : B ⟶ Y := Over.homMk c.g
+  have : IsOpenImmersion j.left := c.isOpenImmersion
+  have : IsProper p.left := c.isProper
+  exact ⟨B, j, p, inferInstance, inferInstance, Over.OverMorphism.ext c.comm.symm⟩
 
 end AlgebraicGeometry.Scheme

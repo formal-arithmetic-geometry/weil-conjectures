@@ -96,4 +96,31 @@ private theorem insertion_identity
   rw [h]
   exact adjoint_identity_unit _ _ _
 
+/-- The regular scalar unit is the multiplication comparison at an identity ring map.
+Source: blueprint finite-Hom identity clause; Stacks 06YY and 07A4
+(blueprint: lem-coef-etale-scalar-unit-identity).
+
+Proof: restriction of scalars at the identity has identity maps on sections. Its lax
+unit is therefore the inverse of the normalized restriction unit. The regular scalar
+unit is the exact-degree-zero adjunction insertion of this ordinary unit. The insertion
+identity law identifies it with the left-adjoint identity mate on the single unit
+object. Naturality transports the equality through singleFunctorObjUnitIso to the
+actual derived tensor unit. -/
+theorem scalarUnit_id
+    {A : Type (u + 1)} [CommRing A] (T : Scheme.{u})
+    (φ : A →+* A) (hφ : φ = RingHom.id A) :
+    (Etale.ExceptionalCoefficients.unitIso φ T).hom =
+      (ProEtale.normalizedOriginScalarUnit T.smallEtaleTopology φ hφ).hom.app
+        (Etale.constantComplex A T) := by
+  apply unit_identity_transport (Etale.scalarExtension φ T)
+    (ProEtale.normalizedOriginScalarUnit T.smallEtaleTopology φ hφ)
+    (_root_.DerivedCategory.singleFunctorObjUnitIso
+      (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)))
+  rw [Etale.scalarUnit_eq_adjointInsertion]
+  let R := Sheaf.restrictScalars T.smallEtaleTopology φ
+  let e := ProEtale.normalizedOriginRestrictionUnit T.smallEtaleTopology φ hφ
+  exact insertion_identity R
+    (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars T.smallEtaleTopology φ))
+    e (𝟙_ _) (Functor.LaxMonoidal.ε R) (restriction_unit_id T φ hφ)
+
 end WeilConjectures

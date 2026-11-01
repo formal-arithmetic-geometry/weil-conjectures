@@ -250,6 +250,58 @@ def compositionPullbackTensorFixed (A : Type u) [CommRing A] [Finite A]
       (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1} A)))) :=
   Classical.choose (existsUnique_compositionPullbackTensorFixed A f M N)
 
+/-- Canonical derivation of a specified exact-functor compositor.
+Source: main-20261015 composition proof Step 9, exact pullback composition
+(blueprint: thm-pur-composition-coherence). -/
+def compositionExactDerivedComp {C D E : Type v}
+    [Category.{w} C] [Category.{w} D] [Category.{w} E]
+    [Abelian C] [Abelian D] [Abelian E]
+    [HasDerivedCategory.{t} C] [HasDerivedCategory.{t} D] [HasDerivedCategory.{t} E]
+    (F : C ⥤ D) (G : D ⥤ E) (H : C ⥤ E)
+    [F.Additive] [G.Additive] [H.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    [PreservesFiniteLimits H] [PreservesFiniteColimits H] (e : H ≅ F ⋙ G) :
+    H.mapDerivedCategory ≅ F.mapDerivedCategory ⋙ G.mapDerivedCategory :=
+  letI := comp_preservesFiniteLimits F G
+  letI := comp_preservesFiniteColimits F G
+  Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryCompIso F G
+
+/-- Exact derived pullback composition, with the actual upper-star compositor.
+Source: main-20261015 composition proof Step 9
+(blueprint: thm-pur-composition-coherence). -/
+def compositionPullbackComp (C : Type v) [Category.{u + 1} C] [Abelian C]
+    [IsGrothendieckAbelian.{u + 1} C] {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
+    (ProEtale.upperStar C (f ≫ g)).mapDerivedCategory ≅
+      (ProEtale.upperStar C g).mapDerivedCategory ⋙
+        (ProEtale.upperStar C f).mapDerivedCategory :=
+  compositionExactDerivedComp (ProEtale.upperStar C g) (ProEtale.upperStar C f)
+    (ProEtale.upperStar C (f ≫ g)) (ProEtale.upperStarComp C f g)
+
+/-- Fixed coordinates have exactly the canonical pullback compositor.
+Source: main-20261015 composition proof Step 9
+(blueprint: thm-pur-composition-coherence).
+Proof: unfold sfFixedDerivedPullback. The generic exact pullback compositor has these
+endpoints. Its heterogeneous equality fixes the complete natural isomorphism uniquely.
+Only cached instances are transported. -/
+theorem existsUnique_compositionFixedPullbackComp (A : Type u) [CommRing A]
+    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
+    ∃! a : ProEtale.sfFixedDerivedPullback A (f ≫ g) ≅
+      ProEtale.sfFixedDerivedPullback A g ⋙ ProEtale.sfFixedDerivedPullback A f,
+      HEq a (compositionPullbackComp (ModuleCat.{u + 1} (ULift.{u + 1} A)) f g) := by
+  refine ⟨_, HEq.rfl, ?_⟩
+  intro a ha
+  exact eq_of_heq ha
+
+/-- The canonical pullback compositor in fixed scalar coordinates.
+Source: main-20261015 composition proof Step 9
+(blueprint: thm-pur-composition-coherence). -/
+def compositionFixedPullbackComp (A : Type u) [CommRing A] {X Y Z : Scheme.{u}}
+    (f : X ⟶ Y) (g : Y ⟶ Z) :
+    ProEtale.sfFixedDerivedPullback A (f ≫ g) ≅
+      ProEtale.sfFixedDerivedPullback A g ⋙ ProEtale.sfFixedDerivedPullback A f :=
+  Classical.choose (existsUnique_compositionFixedPullbackComp A f g)
+
 section Geometry
 variable (P : PurityFiniteSetting.{u}) {X Y Z : Scheme.{u}}
   [X.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))]

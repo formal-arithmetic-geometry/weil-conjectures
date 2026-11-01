@@ -137,4 +137,42 @@ private theorem comparison_commShift (P : PurityFiniteSetting.{u})
         (P.finiteReductionCoefficientSquare m hm hmn f)).inv ℤ := hi
   infer_instance
 
+/-- The specified quotient/pullback comparison respects the specified integer shifts.
+Source: blueprint finite-reduction-of-purity, Step 2; Stacks Tags 0D6D and 06YY.
+(blueprint: lem-pur-finite-reduction-pullback-comparison-shift).
+
+Proof: ordinary restriction of scalars and inverse image are exact, and their
+commuting square is termwise compatible with every cochain shift. Localization
+therefore makes the derived restriction square shift-compatible. Transpose its
+inverse through the two extension/restriction adjunctions. The scalar-extension
+shift is defined as the adjoint of the restriction shift, so shift compatibility
+of units and counits proves shift compatibility of the inverse mate, which is
+proEtaleReductionPullbackIso inverse. The ordinary raw-to-intrinsic pullback model
+localizes an exact natural isomorphism. Its presentation comparison is the
+composite of two exact-derived composition comparisons; hence it and its inverse
+commute with shifts. Whisker the inverse mate by these model comparisons at the
+two coefficient levels. Naturality and the composite-functor shift formula give
+exactly the displayed component equation. Zero and negative shifts, zero objects,
+identity ring maps and empty schemes require no separate assumption. -/
+theorem finiteReduction_pullbackComparison_shift (P : PurityFiniteSetting.{u})
+    (m : ℕ) (hm : 1 ≤ m) (hmn : m ≤ P.level)
+    {X Y : Scheme.{u}} (f : X ⟶ Y) (r : ℤ)
+    (K : Scheme.proEtaleDerivedCategory Y P.Ring) :
+    (P.finiteReduction m hm hmn X).map
+        (((P.finiteReductionPullback f).commShiftIso r).hom.app K) ≫
+      ((P.finiteReduction m hm hmn X).commShiftIso r).hom.app
+        ((P.finiteReductionPullback f).obj K) ≫
+      (P.finiteReductionPullbackComparison m hm hmn f K).hom⟦r⟧' =
+    (P.finiteReductionPullbackComparison m hm hmn f (K⟦r⟧)).hom ≫
+      ((P.finiteReductionSetting m hm).finiteReductionPullback f).map
+        (((P.finiteReduction m hm hmn Y).commShiftIso r).hom.app K) ≫
+      (((P.finiteReductionSetting m hm).finiteReductionPullback f).commShiftIso r).hom.app
+        ((P.finiteReduction m hm hmn Y).obj K) := by
+  have : NatTrans.CommShift (comparisonNatIso P m hm hmn f).hom ℤ :=
+    comparison_commShift P m hm hmn f
+  have he (L) : (comparisonNatIso P m hm hmn f).hom.app L =
+      (P.finiteReductionPullbackComparison m hm hmn f L).hom := by rfl
+  have h := NatTrans.shift_app_comm (comparisonNatIso P m hm hmn f).hom r K
+  simpa only [Functor.commShiftIso_comp_hom_app, Category.assoc, he] using h
+
 end WeilConjectures.PurityFiniteSetting

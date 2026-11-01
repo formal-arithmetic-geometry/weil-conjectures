@@ -18,6 +18,7 @@ import WeilConjectures.SmoothPurity.PurStrictScalar.StrictScalarMateFiniteEvalua
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 import WeilConjectures.SmoothPurity.PurStrictScalar.ProperBiproductCoordinate
 import WeilConjectures.SmoothPurity.PurStrictScalar.StrictProperBiproductCoordinate
+public import WeilConjectures.SmoothPurity.PurCompactSupport.FiniteFreeProperScalarComparison
 
 /-! # Finite scalar proper/open mate on strict compact-support reduction towers
 
@@ -67,6 +68,16 @@ def strictScalarPull {Z W : Scheme.{u}} (g : Z ⟶ W) :
     (scalarAdj l E F i Z)).ofNatIsoRight (properRestriction l E F i g).symm).leftAdjointUniq
       ((scalarAdj l E F i W).comp
         (adj (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) g))
+
+private theorem proper_isIso_of_basis {R S : PurCompactSupport.Coefficients.{u}}
+    (a : PurCompactSupport.Change R S) {Z W : Scheme.{u}} (g : Z ⟶ W) (d : ℕ)
+    (bW : (∏ᶜ fun _ : Fin d ↦ SheafOfModules.unit ((adicLisseForget W).obj (R.ring W))) ≅
+      (pbcRestrict (a.map W)).obj
+        (SheafOfModules.unit ((adicLisseForget W).obj (S.ring W)))) :
+    IsIso (PurCompactSupport.properComparison a g) := by
+  apply (NatTrans.isIso_iff_isIso_app _).2
+  intro N
+  exact PurCompactSupport.properComparison_isIso_of_finiteFree a g d ⟨bW.symm⟩ N
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in

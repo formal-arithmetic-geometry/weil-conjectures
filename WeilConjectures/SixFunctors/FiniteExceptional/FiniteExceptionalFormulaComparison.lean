@@ -51,6 +51,15 @@ variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
 
 omit Xsep Ysep in
 include D hl Xbase Ybase Xft Xqc Yft Yqc fbase fsep fft fqc in
+
+/-- The K-flat quotient/pullback comparison in the actual quotient presentation. -/
+def quotientPullIso {X Y : Scheme.{u}} (f : X ⟶ Y) {m n : ℕ} (h : n ≤ m) :
+    finiteDerivedPullback l E m f ⋙ reduction l E X h ≅
+      reduction l E Y h ⋙ finiteDerivedPullback l E n f :=
+  Functor.isoWhiskerLeft _ (quotientModelIso l E X h) ≪≫
+    pullbackTensorQuotient l E f h ≪≫
+    Functor.isoWhiskerRight (quotientModelIso l E Y h).symm _
+
 /-- Ordinary pullback preserves the actual finite-Tor constructible domain. -/
 theorem pull_mem (n : ℕ) (K : (domain l E Y n).FullSubcategory) :
     domain l E X n ((finiteDerivedPullback l E n f).obj K.obj) := by
@@ -92,6 +101,38 @@ theorem pull_mem (n : ℕ) (K : (domain l E Y n).FullSubcategory) :
       (pullbackTensorFiniteRealization l E f n)
   dsimp [XO, YO, fo] at ht
   exact (domain l E X n).prop_of_iso (r.app K.obj) ht
+
+/-- The inner pullback/duality coefficient comparison is a composite of fixed maps. -/
+def innerQuotientIso {m n : ℕ} (h : n ≤ m)
+    (L : (domain l E Y m).FullSubcategory) :
+    (reduction l E X h).obj ((finiteDerivedPullback l E m f).obj
+        ((dual l E D Y m).obj (op L.obj))) ≅
+      (finiteDerivedPullback l E n f).obj
+        ((dual l E D Y n).obj (op ((reduction l E Y h).obj L.obj))) :=
+  (quotientPullIso l E f h).app ((dual l E D Y m).obj (op L.obj)) ≪≫
+    (finiteDerivedPullback l E n f).mapIso
+      (@asIso _ _ _ _ (dualQuotientMap l E D hl Y h L.obj)
+        (dualQuotientMap_isIso l E D hl Y h L))
+
+/-- Quotient tensor commutes with the double-dual pullback formula on its stated domain. -/
+def formulaQuotientIso {m n : ℕ} (h : n ≤ m)
+    (L : (domain l E Y m).FullSubcategory) :
+    (reduction l E X h).obj ((H l E D f m).obj L.obj) ≅
+      (H l E D f n).obj ((reduction l E Y h).obj L.obj) := by
+  let V : (domain l E X m).FullSubcategory :=
+    ⟨_, pull_mem l E D hl f m ⟨_, dual_mem l E D hl Y m L⟩⟩
+  exact @asIso _ _ _ _ (dualQuotientMap l E D hl X h V.obj)
+      (dualQuotientMap_isIso l E D hl X h V) ≪≫
+    (dual l E D X n).mapIso (innerQuotientIso l E D hl f h L).symm.op
+
+/-- Conjugate the explicit dual formula comparison by its normalized formula isomorphisms. -/
+def exceptionalQuotientComponent {m n : ℕ} (h : n ≤ m)
+    (L : (domain l E Y m).FullSubcategory) :
+    (reduction l E X h).obj ((G l E D hl f c m).obj L).obj ≅
+      ((G l E D hl f c n).obj ((Q l E Y h).obj L)).obj :=
+  (reduction l E X h).mapIso ((dualFormulaIso l E D hl f c m).app L) ≪≫
+    formulaQuotientIso l E D hl f h L ≪≫
+    ((dualFormulaIso l E D hl f c n).app ((Q l E Y h).obj L)).symm
 
 variable (c : Compactification f)
 

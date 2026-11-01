@@ -403,6 +403,26 @@ def functorialCupInverseImage (P : PurityFiniteSetting.{u}) (pro : Bool)
   | false => Etale.upperStar (ModuleCat.{u + 1} P.Coefficient) v
   | true => ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient) v
 
+/-- Additivity of the existing inverse image. Source: Stacks 03Q1
+(blueprint: lem-pur-supported-cup-functoriality). -/
+instance functorialCupInverseImage_additive (P : PurityFiniteSetting.{u}) (pro : Bool)
+    {X Y : Scheme.{u}} (v : Y ⟶ X) : (P.functorialCupInverseImage pro v).Additive := by
+  cases pro <;> dsimp [functorialCupInverseImage] <;> infer_instance
+
+/-- Left exactness of the existing inverse image. Source: Stacks 03Q1
+(blueprint: lem-pur-supported-cup-functoriality). -/
+instance functorialCupInverseImage_limits (P : PurityFiniteSetting.{u}) (pro : Bool)
+    {X Y : Scheme.{u}} (v : Y ⟶ X) :
+    PreservesFiniteLimits (P.functorialCupInverseImage pro v) := by
+  cases pro <;> dsimp [functorialCupInverseImage] <;> infer_instance
+
+/-- Right exactness of the existing inverse image. Source: Stacks 03Q1
+(blueprint: lem-pur-supported-cup-functoriality). -/
+instance functorialCupInverseImage_colimits (P : PurityFiniteSetting.{u}) (pro : Bool)
+    {X Y : Scheme.{u}} (v : Y ⟶ X) :
+    PreservesFiniteColimits (P.functorialCupInverseImage pro v) := by
+  cases pro <;> dsimp [functorialCupInverseImage] <;> infer_instance
+
 /-- The published sheaf structure, selected by the site. Source: purity conventions
 (blueprint: lem-pur-supported-cup-functoriality). -/
 @[reducible] instance functorialCupMonoidal (P : PurityFiniteSetting.{u}) (pro : Bool) (X :
@@ -870,6 +890,19 @@ def functorialCupExchange (P : PurityFiniteSetting.{u}) (pro : Bool)
   | false => (P.functorialCupExchange_existsUnique false i j v g sq).choose
   | true => (P.functorialCupExchange_existsUnique true i j v g sq).choose
 
+/-- Exact inverse image on derived Hom, precomposed by closed coefficient exchange
+and followed by the normalized twist identification and canonical shift comparison.
+This is the formula tau[a] v inverse(alpha) b inverse of proof Step 4.
+Source: Stacks 0G78 and 09XP (blueprint: lem-pur-supported-cup-functoriality). -/
+def functorialCupPullback (P : PurityFiniteSetting.{u}) (pro : Bool)
+    {C X D Y : Scheme.{u}} (i : C ⟶ X) (j : D ⟶ Y)
+    [IsClosedImmersion i] [IsClosedImmersion j] (v : Y ⟶ X) (g : D ⟶ C)
+    (sq : ChosenCartesianSquare g j i v) (aX : X ⟶ Spec (.of P.field.k))
+    (a r : ℤ) (α : P.FunctorialCupH pro i a r) : P.FunctorialCupH pro j a r :=
+  functorialCupNormalizedHom (hB := P.functorialCupHasDerived pro X)
+    (hD := P.functorialCupHasDerived pro Y) (P.functorialCupInverseImage pro v)
+    (P.functorialCupExchange pro i j v g sq) (P.functorialCupTwistPullback pro v aX r) a α
+
 section EtaleExchangeNormalization
 
 open Etale
@@ -959,6 +992,29 @@ def functorialCupChangeSupport (P : PurityFiniteSetting.{u}) (pro : Bool)
     (a r : ℤ) (α : P.FunctorialCupH pro j a r) : P.FunctorialCupH pro i a r :=
   (P.functorialCupSingle pro X).map (P.functorialCupSupportMap pro i j g h) ≫ α
 
+/-- Only the integral indices are transported. -/
+def functorialCupReindex (P : PurityFiniteSetting.{u}) (pro : Bool)
+    {C X : Scheme.{u}} (i : C ⟶ X) {a b r s : ℤ} (ha : a = b) (hr : r = s)
+    (α : P.FunctorialCupH pro i a r) : P.FunctorialCupH pro i b s :=
+  α ≫ eqToHom (congrArg₂
+    (fun r a ↦ P.functorialCupTarget pro X a r)
+    hr ha)
+
+/-- The Ext realization with its localization supplied explicitly. -/
+def functorialCupExtHom {B : Type c} [Category.{v} B] [Abelian B]
+    [HasExt.{w} B] [hD : HasDerivedCategory.{w} B] {F G : B} (x : Abelian.Ext F G 1) :
+    (DerivedCategory.singleFunctor B 0).obj F ⟶
+      ((DerivedCategory.singleFunctor B 0).obj G)⟦(1 : ℤ)⟧ := x.hom
+
+/-- Ext smallness cached before evaluating the fixed coefficient lines. -/
+theorem functorialCupHasExt (P : PurityFiniteSetting.{u}) (pro : Bool) (X : Scheme.{u}) :
+    HasExt.{u + 1} (P.functorialCupSheaves pro X) :=
+  hasExt_of_hasDerivedCategory _
+
+/-- Transport an Ext class through the equality of its coefficient endpoints. -/
+def functorialCupExtTarget {B : Type c} [Category.{v} B] [Abelian B] [HasExt.{w} B]
+    {F G H : B} (h : G = H) (x : Abelian.Ext F G 1) : Abelian.Ext F H 1 := h ▸ x
+
 attribute [local instance] functorialCupHasExt
 
 /-- The identity direct-image unitor of the actual supported coefficient source.
@@ -971,6 +1027,182 @@ def functorialCupFullSupportIso (P : PurityFiniteSetting.{u}) (pro : Bool)
   | false => (Etale.lowerStarId (ModuleCat.{u + 1} P.Coefficient) X).app
       (P.constantEtale X)
   | true => (ProEtale.lowerStarId (ModuleCat.{u + 1} P.Coefficient) X).app (P.constant X)
+
+/-- Realization of an extension after a specified source identification. -/
+def functorialCupSupportedExt {B : Type c} [Category.{v} B] [Abelian B]
+    [HasExt.{w} B] [hD : HasDerivedCategory.{w} B] {S F G : B}
+    (e : S ≅ F) (x : Abelian.Ext F G 1) :
+    (DerivedCategory.singleFunctor B 0).obj S ⟶
+      ((DerivedCategory.singleFunctor B 0).obj G)⟦(1 : ℤ)⟧ :=
+  (DerivedCategory.singleFunctor B 0).map e.hom ≫ functorialCupExtHom x
+
+/-- The etale signed line agrees with the degree-one frame line. -/
+theorem functorialCupFrameTwistEtale_eq (P : PurityFiniteSetting.{u}) (X : Scheme.{u}) :
+    P.frameTwistEtale X 1 = P.functorialCupTwist false X 1 := by rfl
+
+/-- The pro-etale signed line agrees with the degree-one frame line. -/
+theorem functorialCupFrameTwist_eq (P : PurityFiniteSetting.{u}) (X : Scheme.{u}) :
+    P.frameTwist X 1 = P.functorialCupTwist true X 1 := by rfl
+
+/-- The published Kummer extension, with the fixed selected-site endpoints. -/
+def functorialCupKummerExt (P : PurityFiniteSetting.{u}) (pro : Bool) (X : Scheme.{u})
+    (aX : X ⟶ Spec (.of P.field.k)) (v : Γ(X, ⊤)ˣ) :
+    Abelian.Ext (P.functorialCupConstant pro X) (P.functorialCupTwist pro X 1) 1 :=
+  match pro with
+  | false => by
+      letI : HasExt.{u + 1} (P.functorialCupSheaves false X) := P.functorialCupHasExt false X
+      exact functorialCupExtTarget (P.functorialCupFrameTwistEtale_eq X)
+        (P.frameKummerEtale X aX v)
+  | true => by
+      letI : HasExt.{u + 1} (P.functorialCupSheaves true X) := P.functorialCupHasExt true X
+      exact functorialCupExtTarget (P.functorialCupFrameTwist_eq X) (P.frameKummer X aX v)
+
+/-- The concrete published Kummer class in the full-support Hom model. The direct
+image along the identity is identified by its canonical unitor.
+Source: def-pur-frame-class, arbitrary-index Kummer prescription
+(blueprint: lem-pur-supported-cup-functoriality). -/
+def functorialCupKummer (P : PurityFiniteSetting.{u}) (pro : Bool) (X : Scheme.{u})
+    (aX : X ⟶ Spec (.of P.field.k)) (v : Γ(X, ⊤)ˣ) :
+    P.FunctorialCupH pro (𝟙 X) 1 1 :=
+  functorialCupSupportedExt (hD := P.functorialCupHasDerived pro X)
+    (P.functorialCupFullSupportIso pro X) (P.functorialCupKummerExt pro X aX v)
+
+/-- The `identity` clause of `FunctorialCupAlgebraLaws`.
+Named to share its kernel type.
+Source: Stacks 0FPL, 0FPM, 03PL and 0G78 (blueprint: lem-pur-supported-cup-functoriality). -/
+def FunctorialCupAlgebraIdentity (P : PurityFiniteSetting.{u}) (pro : Bool) : Prop :=
+  ∀ {C X : Scheme.{u}} (i : C ⟶ X) [IsClosedImmersion i]
+      (sq : ChosenCartesianSquare (𝟙 C) i i (𝟙 X))
+      (aX : X ⟶ Spec (.of P.field.k)) (a r : ℤ) (α : P.FunctorialCupH pro i a r),
+    P.functorialCupPullback pro i i (𝟙 X) (𝟙 C) sq aX a r α = α
+
+/-- The `composition` clause of `FunctorialCupAlgebraLaws`.
+Named to share its kernel type.
+Source: Stacks 0FPL, 0FPM, 03PL and 0G78 (blueprint: lem-pur-supported-cup-functoriality). -/
+def FunctorialCupAlgebraComposition (P : PurityFiniteSetting.{u}) (pro : Bool) : Prop :=
+  ∀ {C X D Y E Z : Scheme.{u}}
+      (i : C ⟶ X) (j : D ⟶ Y) (k : E ⟶ Z)
+      [IsClosedImmersion i] [IsClosedImmersion j] [IsClosedImmersion k]
+      (v : Y ⟶ X) (w : Z ⟶ Y) (g : D ⟶ C) (h : E ⟶ D)
+      (sq : ChosenCartesianSquare g j i v) (sq' : ChosenCartesianSquare h k j w)
+      (sq'' : ChosenCartesianSquare (h ≫ g) k i (w ≫ v))
+      (aX : X ⟶ Spec (.of P.field.k)) (a r : ℤ) (α : P.FunctorialCupH pro i a r),
+    P.functorialCupPullback pro i k (w ≫ v) (h ≫ g) sq'' aX a r α =
+      P.functorialCupPullback pro j k w h sq' (v ≫ aX) a r
+        (P.functorialCupPullback pro i j v g sq aX a r α)
+
+/-- The `kummer_add` clause of `FunctorialCupAlgebraLaws`.
+Named to share its kernel type.
+Source: Stacks 0FPL, 0FPM, 03PL and 0G78 (blueprint: lem-pur-supported-cup-functoriality). -/
+def FunctorialCupAlgebraKummerAdd (P : PurityFiniteSetting.{u}) (pro : Bool) : Prop :=
+  ∀ (X : Scheme.{u}) (aX : X ⟶ Spec (.of P.field.k)) (u w : Γ(X, ⊤)ˣ),
+    P.functorialCupKummer pro X aX (u * w) =
+      P.functorialCupKummer pro X aX u + P.functorialCupKummer pro X aX w
+
+/-- The `kummer_pullback` clause of `FunctorialCupAlgebraLaws`.
+Named to share its kernel type.
+Source: Stacks 0FPL, 0FPM, 03PL and 0G78 (blueprint: lem-pur-supported-cup-functoriality). -/
+def FunctorialCupAlgebraKummerPullback (P : PurityFiniteSetting.{u}) (pro : Bool) : Prop :=
+  ∀ {X Y : Scheme.{u}} (v : Y ⟶ X)
+      (sq : ChosenCartesianSquare v (𝟙 Y) (𝟙 X) v)
+      (aX : X ⟶ Spec (.of P.field.k)) (u : Γ(X, ⊤)ˣ),
+    P.functorialCupPullback pro (𝟙 X) (𝟙 Y) v v sq aX 1 1
+        (P.functorialCupKummer pro X aX u) =
+      P.functorialCupKummer pro Y (v ≫ aX) (Units.map v.appTop.hom.toMonoidHom u)
+
+/-- The `add_left` clause of `FunctorialCupAlgebraLaws`.
+Named to share its kernel type.
+Source: Stacks 0FPL, 0FPM, 03PL and 0G78 (blueprint: lem-pur-supported-cup-functoriality). -/
+def FunctorialCupAlgebraAddLeft (P : PurityFiniteSetting.{u}) (pro : Bool) : Prop :=
+  ∀ {C D X : Scheme.{u}} (aX : X ⟶ Spec (.of P.field.k))
+      (i : C ⟶ X) (j : D ⟶ X) [IsClosedImmersion i] [IsClosedImmersion j]
+      (a b r s : ℤ) (α α' : P.FunctorialCupH pro i a r) (β : P.FunctorialCupH pro j b s),
+    P.functorialCup pro aX i j a b r s (α + α') β =
+      P.functorialCup pro aX i j a b r s α β + P.functorialCup pro aX i j a b r s α' β
+
+/-- The `add_right` clause of `FunctorialCupAlgebraLaws`.
+Named to share its kernel type.
+Source: Stacks 0FPL, 0FPM, 03PL and 0G78 (blueprint: lem-pur-supported-cup-functoriality). -/
+def FunctorialCupAlgebraAddRight (P : PurityFiniteSetting.{u}) (pro : Bool) : Prop :=
+  ∀ {C D X : Scheme.{u}} (aX : X ⟶ Spec (.of P.field.k))
+      (i : C ⟶ X) (j : D ⟶ X) [IsClosedImmersion i] [IsClosedImmersion j]
+      (a b r s : ℤ) (α : P.FunctorialCupH pro i a r) (β β' : P.FunctorialCupH pro j b s),
+    P.functorialCup pro aX i j a b r s α (β + β') =
+      P.functorialCup pro aX i j a b r s α β + P.functorialCup pro aX i j a b r s α β'
+
+/-- The `smul_left` clause of `FunctorialCupAlgebraLaws`.
+Named to share its kernel type.
+Source: Stacks 0FPL, 0FPM, 03PL and 0G78 (blueprint: lem-pur-supported-cup-functoriality). -/
+def FunctorialCupAlgebraSmulLeft (P : PurityFiniteSetting.{u}) (pro : Bool) : Prop :=
+  ∀ {C D X : Scheme.{u}} (aX : X ⟶ Spec (.of P.field.k))
+      (i : C ⟶ X) (j : D ⟶ X) [IsClosedImmersion i] [IsClosedImmersion j]
+      (a b r s : ℤ) (c : P.Coefficient)
+      (α : P.FunctorialCupH pro i a r) (β : P.FunctorialCupH pro j b s),
+    P.functorialCup pro aX i j a b r s (c • α) β = c • P.functorialCup pro aX i j a b r s α β
+
+/-- The `smul_right` clause of `FunctorialCupAlgebraLaws`.
+Named to share its kernel type.
+Source: Stacks 0FPL, 0FPM, 03PL and 0G78 (blueprint: lem-pur-supported-cup-functoriality). -/
+def FunctorialCupAlgebraSmulRight (P : PurityFiniteSetting.{u}) (pro : Bool) : Prop :=
+  ∀ {C D X : Scheme.{u}} (aX : X ⟶ Spec (.of P.field.k))
+      (i : C ⟶ X) (j : D ⟶ X) [IsClosedImmersion i] [IsClosedImmersion j]
+      (a b r s : ℤ) (c : P.Coefficient)
+      (α : P.FunctorialCupH pro i a r) (β : P.FunctorialCupH pro j b s),
+    P.functorialCup pro aX i j a b r s α (c • β) = c • P.functorialCup pro aX i j a b r s α β
+
+/-- The `associativity` clause of `FunctorialCupAlgebraLaws`.
+Named to share its kernel type.
+Source: Stacks 0FPL, 0FPM, 03PL and 0G78 (blueprint: lem-pur-supported-cup-functoriality). -/
+def FunctorialCupAlgebraAssociativity (P : PurityFiniteSetting.{u}) (pro : Bool) : Prop :=
+  ∀ {C D E X : Scheme.{u}} (aX : X ⟶ Spec (.of P.field.k))
+      (i : C ⟶ X) (j : D ⟶ X) (k : E ⟶ X)
+      [IsClosedImmersion i] [IsClosedImmersion j] [IsClosedImmersion k]
+      (g : pullback i (ProEtale.cupIntersection j k) ⟶
+        pullback (ProEtale.cupIntersection i j) k)
+      (hg : g ≫ ProEtale.cupIntersection (ProEtale.cupIntersection i j) k =
+        ProEtale.cupIntersection i (ProEtale.cupIntersection j k))
+      (a b c r s t : ℤ) (α : P.FunctorialCupH pro i a r)
+      (β : P.FunctorialCupH pro j b s) (γ : P.FunctorialCupH pro k c t),
+    P.functorialCup pro aX (ProEtale.cupIntersection i j) k (a+b) c (r+s) t
+        (P.functorialCup pro aX i j a b r s α β) γ =
+      P.functorialCupReindex pro _ (add_assoc a b c).symm (add_assoc r s t).symm
+        (P.functorialCupChangeSupport pro _ _ g hg (a+(b+c)) (r+(s+t))
+          (P.functorialCup pro aX i (ProEtale.cupIntersection j k) a (b+c) r (s+t)
+            α (P.functorialCup pro aX j k b c s t β γ)))
+
+/-- The `symmetry` clause of `FunctorialCupAlgebraLaws`.
+Named to share its kernel type.
+Source: Stacks 0FPL, 0FPM, 03PL and 0G78 (blueprint: lem-pur-supported-cup-functoriality). -/
+def FunctorialCupAlgebraSymmetry (P : PurityFiniteSetting.{u}) (pro : Bool) : Prop :=
+  ∀ {C D X : Scheme.{u}} (aX : X ⟶ Spec (.of P.field.k))
+      (i : C ⟶ X) (j : D ⟶ X) [IsClosedImmersion i] [IsClosedImmersion j]
+      (g : pullback j i ⟶ pullback i j)
+      (hg : g ≫ ProEtale.cupIntersection i j = ProEtale.cupIntersection j i)
+      (a b r s : ℤ) (α : P.FunctorialCupH pro i a r) (β : P.FunctorialCupH pro j b s),
+    P.functorialCup pro aX i j a b r s α β = ((-1 : ℤ) ^ (a*b).natAbs) •
+      P.functorialCupReindex pro _ (add_comm b a) (add_comm s r)
+        (P.functorialCupChangeSupport pro _ _ g hg (b+a) (s+r)
+          (P.functorialCup pro aX j i b a s r β α))
+
+/-- The `pullback` clause of `FunctorialCupAlgebraLaws`.
+Named to share its kernel type.
+Source: Stacks 0FPL, 0FPM, 03PL and 0G78 (blueprint: lem-pur-supported-cup-functoriality). -/
+def FunctorialCupAlgebraPullback (P : PurityFiniteSetting.{u}) (pro : Bool) : Prop :=
+  ∀ {C D X C' D' Y : Scheme.{u}} (aX : X ⟶ Spec (.of P.field.k))
+      (i : C ⟶ X) (j : D ⟶ X) (i' : C' ⟶ Y) (j' : D' ⟶ Y)
+      [IsClosedImmersion i] [IsClosedImmersion j]
+      [IsClosedImmersion i'] [IsClosedImmersion j']
+      (v : Y ⟶ X) (g : C' ⟶ C) (h : D' ⟶ D)
+      (sq : ChosenCartesianSquare g i' i v) (sq' : ChosenCartesianSquare h j' j v)
+      (q : pullback i' j' ⟶ pullback i j)
+      (sqp : ChosenCartesianSquare q (ProEtale.cupIntersection i' j')
+        (ProEtale.cupIntersection i j) v)
+      (a b r s : ℤ) (α : P.FunctorialCupH pro i a r) (β : P.FunctorialCupH pro j b s),
+    P.functorialCupPullback pro _ _ v q sqp aX (a+b) (r+s)
+        (P.functorialCup pro aX i j a b r s α β) =
+      P.functorialCup pro (v ≫ aX) i' j' a b r s
+        (P.functorialCupPullback pro i i' v g sq aX a r α)
+        (P.functorialCupPullback pro j j' v h sq' aX b s β)
 
 /-- Ordinary cohomology in the same derived-Hom model. Source: Hom_A(A,-)=sections
 (blueprint: lem-pur-supported-cup-functoriality). -/
@@ -1027,6 +1259,560 @@ def functorialCupOpenInclusion (P : PurityFiniteSetting.{u}) (pro : Bool)
       (P.functorialCupConstantPullback true i.openComplement.ι).inv ≫
       (ProEtale.openImmersionLowerShriekUpperStarAdjunction
         (ModuleCat.{u + 1} P.Coefficient) i.openComplement.ι).counit.app (P.constant X)
+
+/-- The source coefficient arrows form a complex for every closed support.
+Source: Stacks 09XP, proof Steps 4 and 7
+(blueprint: lem-pur-supported-cup-functoriality).
+Proof: restriction of an extension-by-zero section to the complementary closed
+subscheme is zero, on every object of either small site. Sheafification preserves
+this identity. -/
+theorem functorialCupSequence_zero (P : PurityFiniteSetting.{u}) (pro : Bool)
+    {C X : Scheme.{u}} (i : C ⟶ X) [IsClosedImmersion i] :
+    P.functorialCupOpenInclusion pro i ≫ P.functorialCupRestriction pro i = 0 := by
+  have hd : Disjoint (Set.range i.openComplement.ι.base) (Set.range i.base) :=
+    disjoint_range_of_range_eq_compl i.openComplement.ι i
+      i.range_eq_compl_range_openComplement_ι
+  cases pro with
+  | false =>
+    have hz := Etale.isZero_upperStar_lowerStar_of_disjoint_range
+      (ModuleCat.{u + 1} P.Coefficient) i.openComplement.ι i hd (P.constantEtale C)
+    have : Subsingleton (P.functorialCupConstant false i.openComplement.toScheme ⟶
+        (Etale.upperStar (ModuleCat.{u + 1} P.Coefficient) i.openComplement.ι).obj
+          (P.functorialCupSource false i)) := ⟨fun _ _ ↦ hz.eq_of_tgt _ _⟩
+    have : Subsingleton (P.functorialCupOpenSource false i ⟶
+        P.functorialCupSource false i) := Equiv.subsingleton
+      ((Etale.openImmersionLowerShriekUpperStarAdjunction
+        (ModuleCat.{u + 1} P.Coefficient) i.openComplement.ι).homEquiv _ _)
+    exact Subsingleton.elim _ _
+  | true =>
+    have hz := ProEtale.isZero_upperStar_lowerStar_of_disjoint
+      (ModuleCat.{u + 1} P.Coefficient) i i.openComplement.ι hd.symm (P.constant C)
+    have : Subsingleton (P.functorialCupConstant true i.openComplement.toScheme ⟶
+        (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient) i.openComplement.ι).obj
+          (P.functorialCupSource true i)) := ⟨fun _ _ ↦ hz.eq_of_tgt _ _⟩
+    have : Subsingleton (P.functorialCupOpenSource true i ⟶
+        P.functorialCupSource true i) := Equiv.subsingleton
+      ((ProEtale.openImmersionLowerShriekUpperStarAdjunction
+        (ModuleCat.{u + 1} P.Coefficient) i.openComplement.ι).homEquiv _ _)
+    exact Subsingleton.elim _ _
+
+/-- The actual open-closed coefficient sequence, before deriving.
+Source: Stacks 095L, 09XP (blueprint: lem-pur-supported-cup-functoriality). -/
+def functorialCupSequence (P : PurityFiniteSetting.{u}) (pro : Bool)
+    {C X : Scheme.{u}} (i : C ⟶ X) [IsClosedImmersion i] :=
+  ShortComplex.mk (P.functorialCupOpenInclusion pro i) (P.functorialCupRestriction pro i)
+    (P.functorialCupSequence_zero pro i)
+
+private theorem adjunctionCounitSquare
+    {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
+    {L : C ⥤ D} {R : D ⥤ C} {L' : C' ⥤ D'} {R' : D' ⥤ C'}
+    (a : L ⊣ R) (b : L' ⊣ R') (F : D ⥤ D') (G : C ⥤ C')
+    (e : L ⋙ F ≅ G ⋙ L') (t : R ⋙ G ⟶ F ⋙ R')
+    (hu : ∀ K : C, G.map (a.unit.app K) ≫ t.app (L.obj K) ≫
+      R'.map (e.hom.app K) = b.unit.app (G.obj K)) (M : D) :
+    e.hom.app (R.obj M) ≫ L'.map (t.app M) ≫ b.counit.app (F.obj M) =
+      F.map (a.counit.app M) := by
+  apply (cancel_epi (e.inv.app (R.obj M))).1
+  simp only [Iso.inv_hom_id_app_assoc]
+  apply (b.homEquiv _ _).injective
+  have hl : (b.homEquiv _ _).symm (t.app M) =
+      L'.map (t.app M) ≫ b.counit.app (F.obj M) := b.homEquiv_counit _ _ _
+  change (b.homEquiv (G.obj (R.obj M)) (F.obj M))
+      (L'.map (t.app M) ≫ b.counit.app (F.obj M)) =
+    (b.homEquiv (G.obj (R.obj M)) (F.obj M))
+      (e.inv.app (R.obj M) ≫ F.map (a.counit.app M))
+  rw [← hl]
+  apply Eq.trans ((b.homEquiv _ _).apply_symm_apply (t.app M))
+  rw [Adjunction.homEquiv_unit, R'.map_comp, ← hu]
+  simp only [Category.assoc, ← R'.map_comp_assoc, Iso.hom_inv_id_app]
+  erw [R'.map_id, Category.id_comp]
+  have hn := t.naturality (a.counit.app M)
+  change G.map (R.map (a.counit.app M)) ≫ t.app M =
+    t.app (L.obj (R.obj M)) ≫ R'.map (F.map (a.counit.app M)) at hn
+  rw [← hn, ← G.map_comp_assoc, a.right_triangle_components]
+  erw [G.map_id, Category.id_comp]
+
+private theorem openComparison_normalized (P : PurityFiniteSetting.{u})
+    {C X : Scheme.{u}} (i : C ⟶ X) [IsClosedImmersion i] :
+    ∃ e : (P.functorialCupComparisonFunctor X).obj
+        (P.functorialCupOpenSource false i) ≅ P.functorialCupOpenSource true i,
+      (P.functorialCupComparisonFunctor X).map (P.functorialCupOpenInclusion false i) =
+        e.hom ≫ P.functorialCupOpenInclusion true i := by
+  let A := ModuleCat.{u + 1} P.Coefficient
+  let j := i.openComplement.ι
+  let F := ProEtale.comparisonUpperStar A X
+  let G := ProEtale.comparisonUpperStar A i.openComplement.toScheme
+  let E := Etale.openImmersionLowerShriek A j
+  let L := ProEtale.openImmersionLowerShriek A j
+  let U := Etale.upperStar A j
+  let V := ProEtale.upperStar A j
+  let a := Etale.openImmersionLowerShriekUpperStarAdjunction A j
+  let b := ProEtale.openImmersionLowerShriekUpperStarAdjunction A j
+  let ar := Etale.openImmersionLowerShriekAdjunction A j
+  let br := ProEtale.openImmersionLowerShriekAdjunction A j
+  let er := Etale.upperStarIsoOpenImmersionRestriction A j
+  let pr := ProEtale.upperStarIsoOpenImmersionRestriction A j
+  let τ := ProEtale.comparisonUpperStarCompUpperStarIso A j
+  let θ := ProEtale.openImmersionLowerShriekComparisonUpperStarIso A j
+  have hu (K : Sheaf i.openComplement.toScheme.smallEtaleTopology A) :
+      G.map (a.unit.app K) ≫ τ.inv.app (E.obj K) ≫ V.map (θ.hom.app K) =
+        b.unit.app (G.obj K) := by
+    have hr := (ProEtale.openComparison_unit_normalization P.Coefficient j).2 K
+    change G.map (ar.unit.app K) ≫
+      (ProEtale.openComparisonRestrictionIso P.Coefficient j).hom.app (E.obj K) ≫
+      (ProEtale.openImmersionRestriction A j).map (θ.hom.app K) =
+        br.unit.app (G.obj K) at hr
+    change G.map (ar.unit.app K ≫ er.inv.app (E.obj K)) ≫
+      τ.inv.app (E.obj K) ≫ V.map (θ.hom.app K) =
+        br.unit.app (G.obj K) ≫ pr.inv.app (L.obj (G.obj K))
+    rw [G.map_comp]
+    apply ((pr.app (L.obj (G.obj K))).homToEquiv).injective
+    change (G.map (ar.unit.app K) ≫ G.map (er.inv.app (E.obj K)) ≫
+      τ.inv.app (E.obj K) ≫ V.map (θ.hom.app K)) ≫ pr.hom.app _ =
+        (br.unit.app (G.obj K) ≫ pr.inv.app _) ≫ pr.hom.app _
+    simp only [Category.assoc, Iso.inv_hom_id_app]
+    rw [pr.hom.naturality]
+    erw [Category.comp_id]
+    change G.map (ar.unit.app K) ≫
+      ((G.map (er.inv.app (E.obj K)) ≫ τ.inv.app (E.obj K)) ≫
+        pr.hom.app (F.obj (E.obj K))) ≫
+      (ProEtale.openImmersionRestriction A j).map (θ.hom.app K) = _ at hr
+    simpa only [Category.assoc] using hr
+  have hc := adjunctionCounitSquare a b F G θ τ.inv hu (P.constantEtale X)
+  let e := θ.app (P.constantEtale i.openComplement.toScheme)
+  refine ⟨e, ?_⟩
+  change F.map (E.map (P.functorialCupConstantPullback false j).inv ≫
+      a.counit.app (P.constantEtale X)) = e.hom ≫
+    L.map (P.functorialCupConstantPullback true j).inv ≫
+      b.counit.app (P.constant X)
+  rw [F.map_comp]
+  change _ = e.hom ≫ L.map (G.map
+    (P.functorialCupConstantPullback false j).inv ≫ τ.inv.app _) ≫ _
+  rw [L.map_comp]
+  simp only [Category.assoc]
+  have hn := θ.hom.naturality (P.functorialCupConstantPullback false j).inv
+  change F.map (E.map (P.functorialCupConstantPullback false j).inv) ≫ θ.hom.app _ =
+    e.hom ≫ L.map (G.map (P.functorialCupConstantPullback false j).inv) at hn
+  rw [← reassoc_of% hn, hc]
+
+private theorem etaleSequence_shortExact (P : PurityFiniteSetting.{u})
+    {C X : Scheme.{u}} (i : C ⟶ X) [IsClosedImmersion i] :
+    (P.functorialCupSequence false i).ShortExact := by
+  let A := ModuleCat.{u + 1} P.Coefficient
+  let j := i.openComplement.ι
+  let eU := P.functorialCupConstantPullback false j
+  let eC := P.functorialCupConstantPullback false i
+  let S := Etale.openClosedShortComplex A j i
+    (disjoint_range_of_range_eq_compl j i i.range_eq_compl_range_openComplement_ι)
+    (P.constantEtale X)
+  let e₁ := (Etale.openImmersionLowerShriek A j).mapIso eU
+  let e₃ := (Etale.lowerStar A i).mapIso eC
+  let e : S ≅ P.functorialCupSequence false i := ShortComplex.isoMk
+    e₁ (Iso.refl _) e₃ (by
+      change (Etale.openImmersionLowerShriek A j).map eU.hom ≫
+        ((Etale.openImmersionLowerShriek A j).map eU.inv ≫
+          (Etale.openImmersionLowerShriekUpperStarAdjunction A j).counit.app
+            (P.constantEtale X)) =
+        (Etale.openImmersionLowerShriekUpperStarAdjunction A j).counit.app
+          (P.constantEtale X) ≫ 𝟙 _
+      rw [← Functor.map_comp_assoc, Iso.hom_inv_id,
+        CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]) (by
+      change 𝟙 _ ≫ Etale.closedConstantSectionMap P.Coefficient i =
+        (Etale.upperStarLowerStarAdjunction A i).unit.app (P.constantEtale X) ≫
+          (Etale.lowerStar A i).map eC.hom
+      simp only [Category.id_comp]
+      rw [section_unit]
+      change _ = (Etale.upperStarLowerStarAdjunction A i).unit.app _ ≫
+        (Etale.lowerStar A i).map
+          ((Scheme.upperStarConstantSheafIso A i).hom.app (𝟙_ A))
+      rw [Etale.upperStarConstantSheafIso_hom_app_tensorUnit]
+      exact (Adjunction.unit_app_unit_comp_map_η
+        (Etale.upperStarLowerStarAdjunction A i)).symm)
+  exact ShortComplex.shortExact_of_iso e
+    (Etale.shortExact_openClosedShortComplex A j i (P.constantEtale X)
+      i.range_eq_compl_range_openComplement_ι)
+
+/-- Exactness of this normalized coefficient sequence on either small site.
+Source: Stacks 095L, 09XP, proof Steps 4 and 7
+(blueprint: lem-pur-supported-cup-functoriality).
+Proof: apply the recorded open-closed sequence on the etale site. On the pro-etale
+site compare the exact sequence by exact inverse image, identifying the closed
+source by restriction of local constants and the open source by the counit-normalized
+extension-by-zero comparison. This argument does not require a quasi-compact complement. -/
+theorem functorialCupSequence_shortExact (P : PurityFiniteSetting.{u}) (pro : Bool)
+    {C X : Scheme.{u}} (i : C ⟶ X) [IsClosedImmersion i] :
+    (P.functorialCupSequence pro i).ShortExact := by
+  cases pro with
+  | false => exact etaleSequence_shortExact P i
+  | true =>
+    let F := P.functorialCupComparisonFunctor X
+    obtain ⟨e₁, h₁⟩ := openComparison_normalized P i
+    let e₃ := (comparisonSource_normalized P i).choose
+    have h₃ := (comparisonSource_normalized P i).choose_spec.1
+    let e : (P.functorialCupSequence false i).map F ≅
+        P.functorialCupSequence true i := ShortComplex.isoMk e₁ (Iso.refl _) e₃
+      (by
+        change e₁.hom ≫ P.functorialCupOpenInclusion true i =
+          F.map (P.functorialCupOpenInclusion false i) ≫ 𝟙 _
+        exact h₁.symm.trans (Category.comp_id _).symm)
+      (by
+        change 𝟙 _ ≫ P.functorialCupRestriction true i =
+          F.map (P.functorialCupRestriction false i) ≫ e₃.hom
+        exact (Category.id_comp _).trans h₃.symm)
+    exact ShortComplex.shortExact_of_iso e ((etaleSequence_shortExact P i).map_of_exact F)
+
+/-- Cohomology of the open complement in its exact extension-by-zero adjunction
+model Hom_X(j!A_U,F[a])=Hom_U(A_U,j*F[a]). This retains the usual cohomology
+on U with the restriction of A(r). Source: Stacks 09XP
+(blueprint: lem-pur-supported-cup-functoriality). -/
+abbrev FunctorialCupOpenH (P : PurityFiniteSetting.{u}) (pro : Bool)
+    {C X : Scheme.{u}} (i : C ⟶ X) [IsClosedImmersion i] (a r : ℤ) : Type (u + 1) :=
+  (P.functorialCupSingle pro X).obj (P.functorialCupOpenSource pro i) ⟶
+    P.functorialCupTarget pro X a r
+
+/-- Ordinary restriction is precomposition with the open adjunction counit.
+Source: Stacks 09XP (blueprint: lem-pur-supported-cup-functoriality). -/
+def functorialCupOpenRestriction (P : PurityFiniteSetting.{u}) (pro : Bool)
+    {C X : Scheme.{u}} (i : C ⟶ X) [IsClosedImmersion i] (a r : ℤ)
+    (α : P.FunctorialCupOrdinaryH pro X a r) : P.FunctorialCupOpenH pro i a r :=
+  (P.functorialCupSingle pro X).map (P.functorialCupOpenInclusion pro i) ≫ α
+
+/-- The actual connecting morphism of the native support coefficient sequence.
+Source: Stacks 09XP (blueprint: def-pur-supported-cup-functoriality-models). -/
+def functorialCupConnecting (P : PurityFiniteSetting.{u}) (pro : Bool)
+    {C X : Scheme.{u}} (i : C ⟶ X) [IsClosedImmersion i] :
+    (P.functorialCupSingle pro X).obj (P.functorialCupSource pro i) ⟶
+      ((P.functorialCupSingle pro X).obj (P.functorialCupOpenSource pro i))⟦(1 : ℤ)⟧ :=
+  (P.functorialCupSequence_shortExact pro i).singleδ
+
+/-- The localization boundary with the source sequence's actual connecting arrow.
+Its normalization is the same Ext composition as the individual frame boundary.
+Source: thm-pur-with-support-exactness and Stacks 09XP, proof Steps 4 and 7
+(blueprint: lem-pur-supported-cup-functoriality). -/
+def functorialCupBoundary (P : PurityFiniteSetting.{u}) (pro : Bool)
+    {C X : Scheme.{u}} (i : C ⟶ X) [IsClosedImmersion i] (a r : ℤ)
+    (α : P.FunctorialCupOpenH pro i a r) : P.FunctorialCupH pro i (a + 1) r :=
+  ShiftedHom.comp (P.functorialCupConnecting pro i) α rfl
+
+private theorem normalizedKernelIso {E : Type c} [Category.{v} E] [Abelian E]
+    {S T : ShortComplex E} (hS : S.ShortExact) (hT : T.ShortExact)
+    (e₂ : S.X₂ ≅ T.X₂) (e₃ : S.X₃ ≅ T.X₃)
+    (h : e₂.hom ≫ T.g = S.g ≫ e₃.hom) :
+    ∃! e₁ : S.X₁ ≅ T.X₁, S.f ≫ e₂.hom = e₁.hom ≫ T.f := by
+  let φ : Arrow.mk S.g ≅ Arrow.mk T.g := Arrow.isoMk e₂ e₃ h
+  let e := KernelFork.mapIsoOfIsLimit hS.fIsKernel hT.fIsKernel φ
+  have he : S.f ≫ e₂.hom = e.hom ≫ T.f := by
+    exact (KernelFork.mapOfIsLimit_ι (KernelFork.ofι S.f S.zero) hT.fIsKernel φ.hom).symm
+  refine ⟨e, he, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  have := hT.mono_f
+  apply (cancel_mono T.f).1
+  exact he'.symm.trans he
+
+private theorem normalizedKernelIso_of_exact
+    {B D : Type c} [Category.{v} B] [Category.{v} D] [Abelian B] [Abelian D]
+    (F : B ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    {S : ShortComplex B} {T : ShortComplex D} (hS : S.ShortExact) (hT : T.ShortExact)
+    (e₂ : F.obj S.X₂ ≅ T.X₂) (e₃ : F.obj S.X₃ ≅ T.X₃)
+    (h : e₂.hom ≫ T.g = F.map S.g ≫ e₃.hom) :
+    ∃! e₁ : F.obj S.X₁ ≅ T.X₁, F.map S.f ≫ e₂.hom = e₁.hom ≫ T.f := by
+  exact normalizedKernelIso (hS.map_of_exact F) hT e₂ e₃ h
+
+/-- Open coefficient exchange is uniquely normalized by its inclusion in the unit.
+Source: Stacks 09XP, supported functoriality, Steps 4 and 7
+(blueprint: lem-pur-supported-cup-functoriality).
+Proof: exact inverse image and extension by zero commute for the base-changed open.
+Their canonical comparison respects counits by adjunction. Its tensor-unit
+normalization gives the displayed equation; the monic open inclusion proves uniqueness. -/
+theorem functorialCupOpenExchange_existsUnique (P : PurityFiniteSetting.{u}) (pro : Bool)
+    {C X D Y : Scheme.{u}} (i : C ⟶ X) (j : D ⟶ Y)
+    [IsClosedImmersion i] [IsClosedImmersion j] (v : Y ⟶ X) (g : D ⟶ C)
+    (_sq : ChosenCartesianSquare g j i v) :
+    ∃! b : (P.functorialCupInverseImage pro v).obj (P.functorialCupOpenSource pro i) ≅
+        P.functorialCupOpenSource pro j,
+      (P.functorialCupInverseImage pro v).map (P.functorialCupOpenInclusion pro i) ≫
+          (P.functorialCupConstantPullback pro v).hom =
+        b.hom ≫ P.functorialCupOpenInclusion pro j := by
+  let F := P.functorialCupInverseImage pro v
+  let e := (P.functorialCupExchange_existsUnique pro i j v g _sq).choose
+  have he := (P.functorialCupExchange_existsUnique pro i j v g _sq).choose_spec.1
+  exact normalizedKernelIso_of_exact F
+    (P.functorialCupSequence_shortExact pro i)
+    (P.functorialCupSequence_shortExact pro j)
+    (P.functorialCupConstantPullback pro v) e he.symm
+
+/-- Canonical open pullback, expressed by exact inverse image on the adjunction Hom model.
+Source: Stacks 09XP (blueprint: lem-pur-supported-cup-functoriality). -/
+def functorialCupOpenPullback (P : PurityFiniteSetting.{u}) (pro : Bool)
+    {C X D Y : Scheme.{u}} (i : C ⟶ X) (j : D ⟶ Y)
+    [IsClosedImmersion i] [IsClosedImmersion j] (v : Y ⟶ X) (g : D ⟶ C)
+    (sq : ChosenCartesianSquare g j i v) (aX : X ⟶ Spec (.of P.field.k))
+    (a r : ℤ) (α : P.FunctorialCupOpenH pro i a r) : P.FunctorialCupOpenH pro j a r :=
+  functorialCupNormalizedHom (hB := P.functorialCupHasDerived pro X)
+    (hD := P.functorialCupHasDerived pro Y) (P.functorialCupInverseImage pro v)
+    (P.functorialCupOpenExchange_existsUnique pro i j v g sq).choose
+    (P.functorialCupTwistPullback pro v aX r) a α
+
+/-- The full_support clause of localization, named to share its kernel type.
+Source: Stacks Tag 09XP (blueprint: def-pur-supported-cup-functoriality-models). -/
+def FunctorialCupLocalizationFullSupport (P : PurityFiniteSetting.{u}) (pro : Bool) : Prop :=
+  ∀ (X : Scheme.{u}) (_aX : X ⟶ Spec (.of P.field.k)) (a r : ℤ),
+    Function.Bijective (P.functorialCupForget pro (𝟙 X) a r)
+
+/-- The forget_support clause of localization, named to share its kernel type.
+Source: Stacks Tag 09XP (blueprint: def-pur-supported-cup-functoriality-models). -/
+def FunctorialCupLocalizationForgetSupport (P : PurityFiniteSetting.{u}) (pro : Bool) : Prop :=
+  ∀ {C X D Y : Scheme.{u}} (i : C ⟶ X) (j : D ⟶ Y)
+      [IsClosedImmersion i] [IsClosedImmersion j] (v : Y ⟶ X) (g : D ⟶ C)
+      (sq : ChosenCartesianSquare g j i v) (aX : X ⟶ Spec (.of P.field.k))
+      (a r : ℤ) (α : P.FunctorialCupH pro i a r),
+    P.functorialCupForget pro j a r (P.functorialCupPullback pro i j v g sq aX a r α) =
+      P.functorialCupOrdinaryPullback pro v aX a r (P.functorialCupForget pro i a r α)
+
+/-- The open_restriction clause of localization, named to share its kernel type.
+Source: Stacks Tag 09XP (blueprint: def-pur-supported-cup-functoriality-models). -/
+def FunctorialCupLocalizationOpenRestriction (P : PurityFiniteSetting.{u}) (pro : Bool) : Prop :=
+  ∀ {C X D Y : Scheme.{u}} (i : C ⟶ X) (j : D ⟶ Y)
+      [IsClosedImmersion i] [IsClosedImmersion j] (v : Y ⟶ X) (g : D ⟶ C)
+      (sq : ChosenCartesianSquare g j i v) (aX : X ⟶ Spec (.of P.field.k))
+      (a r : ℤ) (α : P.FunctorialCupOrdinaryH pro X a r),
+    P.functorialCupOpenPullback pro i j v g sq aX a r
+        (P.functorialCupOpenRestriction pro i a r α) =
+      P.functorialCupOpenRestriction pro j a r
+        (P.functorialCupOrdinaryPullback pro v aX a r α)
+
+/-- The boundary clause of localization, named to share its kernel type.
+Source: Stacks Tag 09XP (blueprint: def-pur-supported-cup-functoriality-models). -/
+def FunctorialCupLocalizationBoundary (P : PurityFiniteSetting.{u}) (pro : Bool) : Prop :=
+  ∀ {C X D Y : Scheme.{u}} (i : C ⟶ X) (j : D ⟶ Y)
+      [IsClosedImmersion i] [IsClosedImmersion j] (v : Y ⟶ X) (g : D ⟶ C)
+      (sq : ChosenCartesianSquare g j i v) (aX : X ⟶ Spec (.of P.field.k))
+      (a r : ℤ) (α : P.FunctorialCupOpenH pro i a r),
+    P.functorialCupPullback pro i j v g sq aX (a+1) r
+        (P.functorialCupBoundary pro i a r α) =
+      P.functorialCupBoundary pro j a r (P.functorialCupOpenPullback pro i j v g sq aX a r α)
+
+/-- The localization compatibility clauses, including the full-support normalization.
+Source: Stacks 09XP and 0G78, proof Step 4
+(blueprint: lem-pur-supported-cup-functoriality). -/
+structure FunctorialCupLocalizationLaws (P : PurityFiniteSetting.{u}) (pro : Bool) : Prop where
+  full_support : P.FunctorialCupLocalizationFullSupport pro
+  forget_support : P.FunctorialCupLocalizationForgetSupport pro
+  open_restriction : P.FunctorialCupLocalizationOpenRestriction pro
+  boundary : P.FunctorialCupLocalizationBoundary pro
+
+/-- Closed sources are canonically identified by the site comparison, normalized
+on local constants. Source: Stacks 099V, 099W; proof Step 6
+(blueprint: lem-pur-supported-cup-functoriality).
+Proof: on a weakly etale Y over X the inverse-image section formula computes
+etale sections on Y of the closed direct image. Etale base change identifies these
+with constants on Y times_X C. Degree-zero comparison identifies them with the
+same pro-etale constants. These identifications commute with restriction and
+scalar multiplication and carry 1 to 1. They glue to the specified isomorphism.
+The epic constant restriction makes it unique. -/
+theorem functorialCupComparisonSource_existsUnique (P : PurityFiniteSetting.{u})
+    {C X : Scheme.{u}} (i : C ⟶ X) [IsClosedImmersion i] :
+    ∃! b : (P.functorialCupComparisonFunctor X).obj
+        (P.functorialCupSource false i) ≅ P.functorialCupSource true i,
+      (P.functorialCupComparisonFunctor X).map
+          (P.functorialCupRestriction false i) ≫ b.hom = P.functorialCupRestriction true i := by
+  exact comparisonSource_normalized P i
+
+/-- The comparison target of the signed twist is its defining pro-etale sheaf.
+Source: finite coefficient twist comparison, Stacks 099W
+(blueprint: lem-pur-supported-cup-functoriality).
+Proof: unfold the two selected twists and the comparison functor. Both sides
+are exact comparison inverse image of the same signed finite etale Tate sheaf. -/
+theorem functorialCupComparisonTwist_eq (P : PurityFiniteSetting.{u})
+    (X : Scheme.{u}) (r : ℤ) :
+    (P.functorialCupComparisonFunctor X).obj (P.functorialCupTwist false X r) =
+      P.functorialCupTwist true X r := by
+  rfl
+
+/-- The comparison target of the coefficient unit is its defining pro-etale constant.
+Source: finite coefficient comparison, Stacks 099W
+(blueprint: lem-pur-supported-cup-functoriality).
+Proof: unfold the constant sheaves and comparison functor; the pro-etale
+coefficient unit was defined as comparison inverse image of the etale unit. -/
+theorem functorialCupComparisonConstant_eq (P : PurityFiniteSetting.{u})
+    (X : Scheme.{u}) :
+    (P.functorialCupComparisonFunctor X).obj (P.functorialCupConstant false X) =
+      P.functorialCupConstant true X := by
+  rfl
+
+/-- Canonical comparison on the supported Hom groups. The finite twist on the
+pro-etale site is the exact inverse image of the identical etale twist.
+Source: Stacks 09B1, supported functoriality Step 7
+(blueprint: lem-pur-supported-cup-functoriality). -/
+def functorialCupCompare (P : PurityFiniteSetting.{u})
+    {C X : Scheme.{u}} (i : C ⟶ X) [IsClosedImmersion i] (a r : ℤ)
+    (α : P.FunctorialCupH false i a r) : P.FunctorialCupH true i a r :=
+  functorialCupNormalizedHom (hB := P.functorialCupHasDerived false X)
+    (hD := P.functorialCupHasDerived true X) (P.functorialCupComparisonFunctor X)
+    (P.functorialCupComparisonSource_existsUnique i).choose (eqToIso
+    (P.functorialCupComparisonTwist_eq X r)) a α
+
+/-- Ordinary site comparison in the identical degree-zero and shift conventions.
+Source: Stacks 099W (blueprint: lem-pur-supported-cup-functoriality). -/
+def functorialCupOrdinaryCompare (P : PurityFiniteSetting.{u}) (X : Scheme.{u}) (a r : ℤ)
+    (α : P.FunctorialCupOrdinaryH false X a r) : P.FunctorialCupOrdinaryH true X a r :=
+  functorialCupNormalizedHom (hB := P.functorialCupHasDerived false X)
+    (hD := P.functorialCupHasDerived true X) (P.functorialCupComparisonFunctor X)
+    (eqToIso (P.functorialCupComparisonConstant_eq X)) (eqToIso
+    (P.functorialCupComparisonTwist_eq X r)) a α
+
+/-- Open comparison preserves the actual extension-by-zero counit.
+Source: Stacks 099V, proof Step 7; lem-cbc-proetale-extension-zero-comparison
+(blueprint: lem-pur-supported-cup-functoriality).
+Proof: the canonical comparison restricts to the identity on the open. Under the
+two extension-by-zero adjunctions the counits correspond to that same identity.
+The open inclusion is monic, so its equation specifies the comparison uniquely. -/
+theorem functorialCupComparisonOpen_existsUnique (P : PurityFiniteSetting.{u})
+    {C X : Scheme.{u}} (i : C ⟶ X) [IsClosedImmersion i] :
+    ∃! b : (P.functorialCupComparisonFunctor X).obj
+        (P.functorialCupOpenSource false i) ≅ P.functorialCupOpenSource true i,
+      (P.functorialCupComparisonFunctor X).map
+          (P.functorialCupOpenInclusion false i) =
+        b.hom ≫ P.functorialCupOpenInclusion true i := by
+  let F := P.functorialCupComparisonFunctor X
+  let e := (P.functorialCupComparisonSource_existsUnique i).choose
+  have he := (P.functorialCupComparisonSource_existsUnique i).choose_spec.1
+  exact normalizedKernelIso_of_exact F
+    (P.functorialCupSequence_shortExact false i)
+    (P.functorialCupSequence_shortExact true i)
+    (eqToIso (P.functorialCupComparisonConstant_eq X)) e (by
+      change 𝟙 _ ≫ P.functorialCupRestriction true i =
+        F.map (P.functorialCupRestriction false i) ≫ e.hom
+      exact (Category.id_comp _).trans he.symm)
+
+/-- Site comparison on open cohomology in the extension-by-zero adjunction model.
+Source: Stacks 099V, 09XP (blueprint: lem-pur-supported-cup-functoriality). -/
+def functorialCupOpenCompare (P : PurityFiniteSetting.{u})
+    {C X : Scheme.{u}} (i : C ⟶ X) [IsClosedImmersion i] (a r : ℤ)
+    (α : P.FunctorialCupOpenH false i a r) : P.FunctorialCupOpenH true i a r :=
+  functorialCupNormalizedHom (hB := P.functorialCupHasDerived false X)
+    (hD := P.functorialCupHasDerived true X) (P.functorialCupComparisonFunctor X)
+    (P.functorialCupComparisonOpen_existsUnique i).choose (eqToIso
+    (P.functorialCupComparisonTwist_eq X r)) a α
+
+/-- The `supported_bijective` clause of `FunctorialCupComparisonLaws`.
+Named to share its kernel type.
+Source: Stacks 09B1, 099V, 099W and 09XP (blueprint: lem-pur-supported-cup-functoriality). -/
+def FunctorialCupComparisonSupportedBijective (P : PurityFiniteSetting.{u}) : Prop :=
+  ∀ {C X : Scheme.{u}} (i : C ⟶ X) [IsClosedImmersion i]
+      (_aX : X ⟶ Spec (.of P.field.k)) (a r : ℤ),
+    Function.Bijective (P.functorialCupCompare i a r)
+
+/-- The `ordinary_bijective` clause of `FunctorialCupComparisonLaws`.
+Named to share its kernel type.
+Source: Stacks 09B1, 099V, 099W and 09XP (blueprint: lem-pur-supported-cup-functoriality). -/
+def FunctorialCupComparisonOrdinaryBijective (P : PurityFiniteSetting.{u}) : Prop :=
+  ∀ (X : Scheme.{u}) (_aX : X ⟶ Spec (.of P.field.k)) (a r : ℤ),
+    Function.Bijective (P.functorialCupOrdinaryCompare X a r)
+
+/-- The `open_bijective` clause of `FunctorialCupComparisonLaws`.
+Named to share its kernel type.
+Source: Stacks 09B1, 099V, 099W and 09XP (blueprint: lem-pur-supported-cup-functoriality). -/
+def FunctorialCupComparisonOpenBijective (P : PurityFiniteSetting.{u}) : Prop :=
+  ∀ {C X : Scheme.{u}} (i : C ⟶ X) [IsClosedImmersion i]
+      (_aX : X ⟶ Spec (.of P.field.k)) (a r : ℤ),
+    Function.Bijective (P.functorialCupOpenCompare i a r)
+
+/-- The `pullback` clause of `FunctorialCupComparisonLaws`.
+Named to share its kernel type.
+Source: Stacks 09B1, 099V, 099W and 09XP (blueprint: lem-pur-supported-cup-functoriality). -/
+def FunctorialCupComparisonPullback (P : PurityFiniteSetting.{u}) : Prop :=
+  ∀ {C X D Y : Scheme.{u}} (i : C ⟶ X) (j : D ⟶ Y)
+      [IsClosedImmersion i] [IsClosedImmersion j] (v : Y ⟶ X) (g : D ⟶ C)
+      (sq : ChosenCartesianSquare g j i v) (aX : X ⟶ Spec (.of P.field.k))
+      (a r : ℤ) (α : P.FunctorialCupH false i a r),
+    P.functorialCupCompare j a r (P.functorialCupPullback false i j v g sq aX a r α) =
+      P.functorialCupPullback true i j v g sq aX a r (P.functorialCupCompare i a r α)
+
+/-- The `ordinary_pullback` clause of `FunctorialCupComparisonLaws`.
+Named to share its kernel type.
+Source: Stacks 09B1, 099V, 099W and 09XP (blueprint: lem-pur-supported-cup-functoriality). -/
+def FunctorialCupComparisonOrdinaryPullback (P : PurityFiniteSetting.{u}) : Prop :=
+  ∀ {X Y : Scheme.{u}} (v : Y ⟶ X)
+      (aX : X ⟶ Spec (.of P.field.k)) (a r : ℤ)
+      (α : P.FunctorialCupOrdinaryH false X a r),
+    P.functorialCupOrdinaryCompare Y a r (P.functorialCupOrdinaryPullback false v aX a r α) =
+      P.functorialCupOrdinaryPullback true v aX a r (P.functorialCupOrdinaryCompare X a r α)
+
+/-- The `open_pullback` clause of `FunctorialCupComparisonLaws`.
+Named to share its kernel type.
+Source: Stacks 09B1, 099V, 099W and 09XP (blueprint: lem-pur-supported-cup-functoriality). -/
+def FunctorialCupComparisonOpenPullback (P : PurityFiniteSetting.{u}) : Prop :=
+  ∀ {C X D Y : Scheme.{u}} (i : C ⟶ X) (j : D ⟶ Y)
+      [IsClosedImmersion i] [IsClosedImmersion j] (v : Y ⟶ X) (g : D ⟶ C)
+      (sq : ChosenCartesianSquare g j i v) (aX : X ⟶ Spec (.of P.field.k))
+      (a r : ℤ) (α : P.FunctorialCupOpenH false i a r),
+    P.functorialCupOpenCompare j a r (P.functorialCupOpenPullback false i j v g sq aX a r α) =
+      P.functorialCupOpenPullback true i j v g sq aX a r (P.functorialCupOpenCompare i a r α)
+
+/-- The `cup` clause of `FunctorialCupComparisonLaws`.
+Named to share its kernel type.
+Source: Stacks 09B1, 099V, 099W and 09XP (blueprint: lem-pur-supported-cup-functoriality). -/
+def FunctorialCupComparisonCup (P : PurityFiniteSetting.{u}) : Prop :=
+  ∀ {C D X : Scheme.{u}} (aX : X ⟶ Spec (.of P.field.k))
+      (i : C ⟶ X) (j : D ⟶ X) [IsClosedImmersion i] [IsClosedImmersion j]
+      (a b r s : ℤ) (α : P.FunctorialCupH false i a r) (β : P.FunctorialCupH false j b s),
+    P.functorialCupCompare _ (a+b) (r+s) (P.functorialCup false aX i j a b r s α β) =
+      P.functorialCup true aX i j a b r s
+        (P.functorialCupCompare i a r α) (P.functorialCupCompare j b s β)
+
+/-- The `kummer` clause of `FunctorialCupComparisonLaws`.
+Named to share its kernel type.
+Source: Stacks 09B1, 099V, 099W and 09XP (blueprint: lem-pur-supported-cup-functoriality). -/
+def FunctorialCupComparisonKummer (P : PurityFiniteSetting.{u}) : Prop :=
+  ∀ (X : Scheme.{u}) (aX : X ⟶ Spec (.of P.field.k)) (u : Γ(X, ⊤)ˣ),
+    P.functorialCupCompare (𝟙 X) 1 1 (P.functorialCupKummer false X aX u) =
+      P.functorialCupKummer true X aX u
+
+/-- The `forget_support` clause of `FunctorialCupComparisonLaws`.
+Named to share its kernel type.
+Source: Stacks 09B1, 099V, 099W and 09XP (blueprint: lem-pur-supported-cup-functoriality). -/
+def FunctorialCupComparisonForgetSupport (P : PurityFiniteSetting.{u}) : Prop :=
+  ∀ {C X : Scheme.{u}} (i : C ⟶ X) [IsClosedImmersion i] (a r : ℤ)
+      (α : P.FunctorialCupH false i a r),
+    P.functorialCupOrdinaryCompare X a r (P.functorialCupForget false i a r α) =
+      P.functorialCupForget true i a r (P.functorialCupCompare i a r α)
+
+/-- The `open_restriction` clause of `FunctorialCupComparisonLaws`.
+Named to share its kernel type.
+Source: Stacks 09B1, 099V, 099W and 09XP (blueprint: lem-pur-supported-cup-functoriality). -/
+def FunctorialCupComparisonOpenRestriction (P : PurityFiniteSetting.{u}) : Prop :=
+  ∀ {C X : Scheme.{u}} (i : C ⟶ X) [IsClosedImmersion i] (a r : ℤ)
+      (α : P.FunctorialCupOrdinaryH false X a r),
+    P.functorialCupOpenCompare i a r (P.functorialCupOpenRestriction false i a r α) =
+      P.functorialCupOpenRestriction true i a r (P.functorialCupOrdinaryCompare X a r α)
+
+/-- The `boundary` clause of `FunctorialCupComparisonLaws`.
+Named to share its kernel type.
+Source: Stacks 09B1, 099V, 099W and 09XP (blueprint: lem-pur-supported-cup-functoriality). -/
+def FunctorialCupComparisonBoundary (P : PurityFiniteSetting.{u}) : Prop :=
+  ∀ {C X : Scheme.{u}} (i : C ⟶ X) [IsClosedImmersion i] (a r : ℤ)
+      (α : P.FunctorialCupOpenH false i a r),
+    P.functorialCupCompare i (a+1) r (P.functorialCupBoundary false i a r α) =
+      P.functorialCupBoundary true i a r (P.functorialCupOpenCompare i a r α)
+
+/-- All operation-identification clauses for the canonical etale-to-pro-etale
+comparison, including both arrows and the boundary of localization.
+Source: Stacks 09B1, 099V and 099W, proof Steps 6--8
+(blueprint: lem-pur-supported-cup-functoriality). -/
+structure FunctorialCupComparisonLaws (P : PurityFiniteSetting.{u}) : Prop where
+  supported_bijective : P.FunctorialCupComparisonSupportedBijective
+  ordinary_bijective : P.FunctorialCupComparisonOrdinaryBijective
+  open_bijective : P.FunctorialCupComparisonOpenBijective
+  pullback : P.FunctorialCupComparisonPullback
+  ordinary_pullback : P.FunctorialCupComparisonOrdinaryPullback
+  open_pullback : P.FunctorialCupComparisonOpenPullback
+  cup : P.FunctorialCupComparisonCup
+  kummer : P.FunctorialCupComparisonKummer
+  forget_support : P.FunctorialCupComparisonForgetSupport
+  open_restriction : P.FunctorialCupComparisonOpenRestriction
+  boundary : P.FunctorialCupComparisonBoundary
 
 section SequenceProof
 

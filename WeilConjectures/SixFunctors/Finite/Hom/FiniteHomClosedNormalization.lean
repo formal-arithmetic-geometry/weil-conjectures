@@ -46,4 +46,23 @@ private theorem derived_normalized
     finiteHomDerivedRightAdjunctionGeneral]
   exact native_normalized
 
+/-- The uniquely normalized etale closed record is the native braided closed record.
+Source: blueprint thm-coef-finite-hom, evaluation paragraph.
+(blueprint: lem-coef-finite-hom-closed-normalization).
+
+Proof: the native right-tensor adjunction and its natural evaluation satisfy the
+normalization definition by reflexivity. Uniqueness in
+finiteHomEtaleClosed_existsUnique identifies that record with its chosen witness.
+The assertion concerns the entire record, including its fixed adjunctions. -/
+theorem finiteHom_etale_closed_normalization
+    (A : Type a) [Category.{u + 1} A] [Abelian A]
+    [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
+    [SymmetricCategory A] [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
+    (X : Scheme.{u}) :
+    finiteHomEtaleClosedGeneral A X =
+      finiteHomNativeDerivedClosed (Sheaf X.smallEtaleTopology A) := by
+  exact (finiteHomEtaleClosed_existsUnique A X).unique
+    (finiteHomEtaleClosed_existsUnique A X).choose_spec.1
+    (derived_normalized (Sheaf X.smallEtaleTopology A))
+
 end WeilConjectures

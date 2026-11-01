@@ -92,4 +92,37 @@ private theorem tensor_identity_from_comp
   rw [← hn, ← F.map_comp_assoc] at hc
   exact F.map_injective ((cancel_mono (δ.hom.app (U, V))).mp hc).symm
 
+/-- Multiplication at an identity coefficient map respects the published tensorator.
+Source: blueprint thm-coef-finite-hom, identity coefficient clause; Stacks 07A4
+(blueprint: lem-coef-etale-scalar-tensor-identity).
+
+Proof: substitute the identity ring map. Its restriction compositor is identity on
+sections, so the derived compositor is the whiskered identity restriction. Mathlib's
+adjoint composition identity identifies its left mate with the whiskered scalar unit.
+In the tensor composition square use naturality to replace z(FW) by F(zW). Tensorator
+naturality at zU,zV turns its right side into F applied to the desired composite,
+followed by the tensorator. Cancel that tensorator and use faithfulness of F, which
+is isomorphic to the identity. No additional representative equation is needed. -/
+theorem scalarTensor_id
+    {A : Type (u + 1)} [CommRing A] (φ : A →+* A) (hφ : φ = RingHom.id A)
+    (T : Scheme.{u}) (U V : DerivedCategoryModule A T) :
+    (tensorIso φ T).hom.app (U, V) ≫
+      (Functor.uncurry.obj (derivedTensor (ModuleCat.{u + 1} A) T)).map
+        (Prod.mkHom ((ProEtale.normalizedOriginScalarUnit T.smallEtaleTopology φ hφ).hom.app U)
+          ((ProEtale.normalizedOriginScalarUnit T.smallEtaleTopology φ hφ).hom.app V)) =
+    (ProEtale.normalizedOriginScalarUnit T.smallEtaleTopology φ hφ).hom.app
+      (((derivedTensor (ModuleCat.{u + 1} A) T).obj U).obj V)  := by
+  subst φ
+  apply tensor_identity_from_comp _ (scalarExtension (RingHom.id A) T)
+    (tensorIso (RingHom.id A) T)
+    (ProEtale.normalizedOriginScalarUnit T.smallEtaleTopology (RingHom.id A) rfl)
+  intro K L
+  have h := scalarTensor_comp (RingHom.id A) (RingHom.id A) (RingHom.id A)
+    (by ext; rfl) T K L
+  rw [scalar_comp_unit] at h
+  simpa only [Functor.uncurry, scalarExtension, Iso.trans_hom, NatTrans.comp_app,
+    Functor.isoWhiskerLeft_hom,
+    Functor.whiskerLeft_app, Functor.rightUnitor_hom_app, Functor.comp_obj,
+    Functor.id_obj, Category.comp_id] using h
+
 end AlgebraicGeometry.Etale.ExceptionalCoefficients

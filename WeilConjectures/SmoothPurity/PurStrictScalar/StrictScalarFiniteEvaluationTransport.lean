@@ -144,6 +144,63 @@ def reductionEvaluation (W : Scheme.{u})
     Functor.isoWhiskerRight (S.reductionEvaluation n) _ ≪≫
     Functor.isoWhiskerRight (PurCompactSupport.finiteReductionIso l E W n).symm _
 
+/-- Evaluate the scalar-extended reduced input and then apply its geometric image.
+Every factor is fixed without reference to an F reduction calculus or to the
+strict scalar mate. Source: Stacks 03DA, 03EK, 0D6E, 0E8I, 0940
+(blueprint: def-pur-strict-scalar-finite-evaluation-transport). -/
+def scalarImageEvaluation {X Y : Scheme.{u}} {f : X ⟶ Y}
+    (c : Compactification f) (S : CoefficientDerivedSystemCalculus.{u, u} l E X)
+    (e : ℕ) (he : PurCompactSupport.Ramification l E F i e) (hepos : 1 ≤ e) (n : ℕ) :
+    reduction l E X S ⋙ T l E F i X ⋙ image l F c ⋙
+        ev (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) Y n ≅
+      pbcDerivedExtend (PurCompactSupport.projection l E (n + 1)
+        (Nat.le_add_left 1 n) X) ⋙
+      pbcDerivedExtend ((PurCompactSupport.finiteChange l E F i e he hepos (n + 1)
+        (Nat.le_add_left 1 n)).map X) ⋙
+      PurCompactSupport.image (PurCompactSupport.finite l F (e * (n + 1))
+        (Nat.mul_pos hepos (Nat.le_add_left 1 n))) c ⋙
+      positiveRestriction l F Y (e * (n + 1))
+        (Nat.mul_pos hepos (Nat.le_add_left 1 n)) :=
+  Functor.isoWhiskerLeft (reduction l E X S ⋙ T l E F i X)
+      (constantImageEvaluation l F c n) ≪≫
+    Functor.isoWhiskerRight
+      (Functor.isoWhiskerLeft (reduction l E X S) (tensorEvaluation l E F i X n))
+      (PurCompactSupport.image (constants l F) c) ≪≫
+    Functor.isoWhiskerRight
+      (Functor.isoWhiskerRight (reductionEvaluation l E X S n) (baseTensor l E F i X))
+      (PurCompactSupport.image (constants l F) c) ≪≫
+    Functor.isoWhiskerRight
+      (Functor.isoWhiskerLeft
+        (pbcDerivedExtend (PurCompactSupport.projection l E (n + 1)
+          (Nat.le_add_left 1 n) X)) (finiteBalancing l E F i X e he hepos n))
+      (PurCompactSupport.image (constants l F) c) ≪≫
+    Functor.isoWhiskerLeft
+      (pbcDerivedExtend (PurCompactSupport.projection l E (n + 1)
+        (Nat.le_add_left 1 n) X))
+      (Functor.isoWhiskerLeft
+        (pbcDerivedExtend ((PurCompactSupport.finiteChange l E F i e he hepos (n + 1)
+          (Nat.le_add_left 1 n)).map X))
+        (positiveImageRestriction l F c (e * (n + 1))
+          (Nat.mul_pos hepos (Nat.le_add_left 1 n))))
+
+/-- Transport the ramified reduction balancing through geometric image and back
+to the native target support model. No scalar proper/open mate occurs here.
+Source: Stacks 03EK, 06YY, 0940
+(blueprint: def-pur-strict-scalar-finite-evaluation-transport). -/
+def ramifiedImageBalancing {X Y : Scheme.{u}} {f : X ⟶ Y}
+    (c : Compactification f) (S : CoefficientDerivedSystemCalculus.{u, u} l E X)
+    (S' : CoefficientDerivedSystemCalculus.{u, u} l F X) (e : ℕ)
+    (he : PurCompactSupport.Ramification l E F i e) (hepos : 1 ≤ e) :
+    reduction l E X S ⋙ T l E F i X ⋙ image l F c ≅
+      pbcDerivedExtend (completedCoefficientMap l E F i X) ⋙
+        support l F c S' ⋙ subsequence l F Y e :=
+  Functor.isoWhiskerRight (reductionBalancing l E F i X S S' e he hepos) (image l F c) ≪≫
+    Functor.isoWhiskerLeft
+      (pbcDerivedExtend (completedCoefficientMap l E F i X) ⋙ reduction l F X S')
+      (reindexImage l F c e hepos).symm ≪≫
+    Functor.isoWhiskerLeft (pbcDerivedExtend (completedCoefficientMap l E F i X))
+      (Functor.isoWhiskerRight (supportModel l F c S').symm (subsequence l F Y e))
+
 variable (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
   (i : E →ₐ[ℚ_[l]] F)
 

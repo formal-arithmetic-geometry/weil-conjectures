@@ -269,4 +269,72 @@ def Assertions (M : AdicCompletion.Modules l E T) : Prop :=
         (preadditiveCoyoneda.obj (op (target l E i uS L))).obj
           ((level l E h v M n)⟦q⟧)))
 
+/-- Supported integral lattice Hom is computed by its actual reduction tower.
+Source: blueprint latest, uniform constructible Ext proof, Lattices and
+Integral targets; Stacks Tag 0D6K
+(blueprint: lem-sfb-lattice-supported-hom-reduction-tower).
+
+Proof plan:
+1. Finite type over k makes the schemes Noetherian. Every subset is quasi-compact,
+   so all open complements and stratum inclusions satisfy the support lemmas'
+   quasi-compactness hypotheses. A local basis dualizes to a basis of L-dual,
+   including rank zero, and its evaluation and coevaluation glue.
+2. Apply sk-lem-integral-models (4) to b=h∘v and the lisse lattice M. This gives
+   constructibility and identifies each derived reduction with the ordinary
+   supported quotient in degree zero. Part (2) gives derived completeness in
+   the ordinary category of modules over the pulled-back continuous integral ring.
+3. Exact v_! and closed h_* preserve the scalar quotient sequence. Their coefficient
+   actions commute with the uniformizer, so their quotient cokernel is exactly N_n.
+   Quotient maps commute with successive quotient transitions. On a nonpositive
+   K-flat resolution, H⁰ of derived reduction is this ordinary quotient and the
+   reduction unit induces its quotient map. Integral models makes all other
+   cohomology vanish. Canonical truncation thus identifies derived and ordinary
+   reductions, compatibly with both transitions and quotient units.
+4. Completeness supplies the reduction Roos triangle. Transport it along the
+   preceding level isomorphisms: the products intertwine 1-shift, and its first
+   arrow has exactly the quotient projections specified here.
+5. Apply sk-lem-formal-closed-support-ii with the finite locally free dual of L.
+   The product comparisons for support, open restriction, and dual tensor preserve
+   projections. Additivity identifies the image of 1-shift with the transition
+   endomorphism for F_n. The transported image is its Roos triangle.
+6. Apply lem-kun-site-rgamma-derived-limit (Stacks 0D6K) on S. The sections product
+   comparison preserves projections and transports this triangle to the B_n Roos
+   triangle. Thus RΓ(S,F) is a derived limit of B_n.
+7. Apply det-lem-formal-closed-support-stratum-hom at N and at every N_n. Its
+   ordinary/derived tensor comparison identifies its functor with T_R. Compose
+   with step 6 and use uniqueness up to isomorphism of Roos limits. Taking H^q
+   and the same support-Hom theorem's shifted-Hom formula gives both final
+   abelian-group isomorphisms for every integer q, including negative degrees. -/
+theorem supported_lattice_hom_reduction_tower
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+    (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hp : p ≠ l)
+    {X Z V S B T : Scheme.{u}}
+    [X.Over (Spec (.of k))] [Z.Over (Spec (.of k))]
+    [V.Over (Spec (.of k))] [S.Over (Spec (.of k))]
+    [B.Over (Spec (.of k))] [T.Over (Spec (.of k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of k))]
+    [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))]
+    [LocallyOfFiniteType (Z ↘ Spec (.of k))]
+    [QuasiCompact (Z ↘ Spec (.of k))] [IsSeparated (Z ↘ Spec (.of k))]
+    [LocallyOfFiniteType (V ↘ Spec (.of k))]
+    [QuasiCompact (V ↘ Spec (.of k))] [IsSeparated (V ↘ Spec (.of k))]
+    [LocallyOfFiniteType (S ↘ Spec (.of k))]
+    [QuasiCompact (S ↘ Spec (.of k))] [IsSeparated (S ↘ Spec (.of k))]
+    [LocallyOfFiniteType (B ↘ Spec (.of k))]
+    [QuasiCompact (B ↘ Spec (.of k))] [IsSeparated (B ↘ Spec (.of k))]
+    [LocallyOfFiniteType (T ↘ Spec (.of k))]
+    [QuasiCompact (T ↘ Spec (.of k))] [IsSeparated (T ↘ Spec (.of k))]
+    (i : Z ⟶ X) (j : V ⟶ X) (uS : S ⟶ Z) (h : B ⟶ X) (v : T ⟶ B)
+    [i.IsOver (Spec (.of k))] [j.IsOver (Spec (.of k))]
+    [uS.IsOver (Spec (.of k))] [h.IsOver (Spec (.of k))] [v.IsOver (Spec (.of k))]
+    [IsClosedImmersion i] [IsOpenImmersion j] [IsOpenImmersion uS]
+    [IsClosedImmersion h] [IsOpenImmersion v]
+    (hij : Set.range i.base = (Set.range j.base)ᶜ)
+    (L : AdicCompletion.Modules l E S) (M : AdicCompletion.Modules l E T)
+    (hL : IsLisseCoefficientModule (DerivedNakayama.integerRing l E) L)
+    (hM : IsLisseCoefficientModule (DerivedNakayama.integerRing l E) M) :
+    Assertions l E h v i j uS L M := by
+  sorry
+
 end AlgebraicGeometry.ProEtale.SupportedLatticeHom

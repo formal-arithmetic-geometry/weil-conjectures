@@ -387,6 +387,31 @@ def ComparisonNatural
         ((((sectionComplex.{t, u} k B α).map g).f (p + j)).hom
           ((((q.hom.f j).hom h).v p (p + j) rfl).hom ((f.f p).hom x)))
 
+/-- The node's hypotheses and conclusion for a fixed actual coefficient model.
+Objects and maps of L are rigidly specified as tensor scalar extension of constant modules.
+Source: blueprint point comparison (blueprint: def-pod-point-derived-hom-models). -/
+def Statement : Prop :=
+  ∀ (L : ModuleCat.{max u (t + 1)} R ⥤ Modules.{t, u} k B)
+    (hobj : ∀ M : ModuleCat.{max u (t + 1)} R,
+      L.obj M = extensionObject.{t, u} k B α M)
+    (_hmap : ∀ {M N : ModuleCat.{max u (t + 1)} R} (f : M ⟶ N),
+      L.map f = eqToHom (hobj M) ≫ extensionMorphism.{t, u} k B α f ≫
+          eqToHom (hobj N).symm)
+    (adj : L ⊣ sections.{t, u} k B α),
+    ExplicitAdjunction.{t, u} k B α L hobj adj →
+    ∀ [PreservesFiniteLimits L] [PreservesFiniteColimits L]
+      [PreservesFiniteLimits (sections.{t, u} k B α)]
+      [PreservesFiniteColimits (sections.{t, u} k B α)],
+    Function.Bijective (scalar.{t, u} k B α (op (finalObject k))) →
+    ∀ (c : CochainComplex (ModuleCat.{max u (t + 1)} R) ℤ),
+    (∀ F : CochainComplex (ModuleCat.{max u (t + 1)} R) ℤ,
+      F.Acyclic → (moduleTotal F c).Acyclic) →
+    (∀ p : ℤ, Module.Flat R (c.X p)) →
+    ∀ (I : CochainComplex (Modules.{t, u} k B) ℤ) [CochainComplex.IsKInjective I]
+      (iota : (CochainComplex.singleFunctor (Modules.{t, u} k B) 0).obj
+        (SheafOfModules.unit (ring.{t, u} k B)) ⟶ I) [QuasiIso iota],
+      ComparisonResult.{t, u} k B α L hobj adj c I iota
+
 variable [PreservesFiniteLimits (sections.{t, u} k B α)]
   [PreservesFiniteColimits (sections.{t, u} k B α)]
 
