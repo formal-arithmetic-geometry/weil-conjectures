@@ -37,4 +37,11 @@ form `cohomologicalDimension ℓ _ (Spec k) < ⊤` used by `brownHypotheses`. -/
 public def BaseFieldFiniteCD (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] : Prop :=
   cohomologicalDimension ℓ (Fact.out : ℓ.Prime) (Spec (.of k)) < ⊤
 
+/-- An algebraically closed field has cd_ℓ = 0 (`cohomologicalDimension_baseField`). -/
+public theorem BaseFieldFiniteCD.of_isAlgClosed (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
+    [IsAlgClosed k] : BaseFieldFiniteCD ℓ k := by
+  unfold BaseFieldFiniteCD
+  rw [(cohomologicalDimension_baseField ℓ Fact.out k).1 inferInstance]
+  exact WithTop.coe_lt_top 0
+
 end AlgebraicGeometry.ProEtale

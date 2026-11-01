@@ -324,8 +324,6 @@ private theorem flat_of_levels
       (integralCoefficientCommRingSheaf l E V n)).mapIso
         (Iso.prod (Iso.refl Z) e)).symm
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end WeilConjectures
 namespace WeilConjectures.IntegralCoherence
 universe s

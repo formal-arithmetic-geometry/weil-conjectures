@@ -201,7 +201,6 @@ private def EvaluationNormalization
 namespace CochainComplex
 
 -- Resolve the entire tower functorially, so its transition maps remain strict.
-set_option synthInstance.maxSize 1024 in
 end CochainComplex
 
 namespace AlgebraicGeometry.Scheme
@@ -286,8 +285,6 @@ variable
   [hT : T.IsLeftDerivedFunctor τ
     (HomotopyCategory.quasiIso (pbcTowers Y (pbcAdicCompletion Y d)) (.up ℤ))]
 
-omit hL hT in
-include hL hT in
 end NormalizedPair
 
 end AlgebraicGeometry.Scheme

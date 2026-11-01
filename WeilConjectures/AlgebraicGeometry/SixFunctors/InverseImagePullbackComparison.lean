@@ -197,6 +197,11 @@ Source: Stacks Tag 03D6 (blueprint: def-weil-inverse-image-pullback-comparison).
 abbrev inverseImageIntegralModules : integralTowerModules l E Y ⥤ integralTowerModules l E X :=
   isoSectionwiseModuleInverseImage g (inverseImageCompletedCoefficientMap l E g)
 
+/-- Exact inverse image descends termwise to the unbounded finite derived category.
+Source: Stacks Tag 05RU (blueprint: def-weil-inverse-image-pullback-comparison). -/
+abbrev inverseImageFiniteDerived (n : ℕ) :=
+  (inverseImageFiniteModules l E g n).mapDerivedCategory
+
 /-- Exact inverse image descends termwise to the entire completed-coefficient derived
 category; no derived-completeness or constructibility condition is imposed.
 Source: Stacks Tag 05RU (blueprint: def-weil-inverse-image-pullback-comparison). -/
@@ -347,6 +352,39 @@ Source: Stacks Tag 03D6 (blueprint: def-weil-inverse-image-pullback-comparison).
 def inverseImageFiniteComparisonComplex (n : ℕ)
     (K : CochainComplex (integralOperationsFiniteModules l E Y n) ℤ) :=
   (inverseImageFiniteComparison_existsUnique l E g n K).exists.choose
+
+/-- Finite comparison in the derived category: the class of the sheafified tensor-unit
+chain map, with the canonical exact-functor localization comparisons on both sides.
+Source: Stacks Tag 03D6 (blueprint: def-weil-inverse-image-pullback-comparison). -/
+def inverseImagePullbackComparisonFinite
+    (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x))
+    (_hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) (n : ℕ)
+    (K : CochainComplex (integralOperationsFiniteModules l E Y n) ℤ) :
+    (inverseImageFiniteDerived l E g n).obj (DerivedCategory.Q.obj K) ⟶
+      (integralOperationsLevelPullback l E g n).mapDerivedCategory.obj
+        (DerivedCategory.Q.obj K) :=
+  (inverseImageFiniteModules l E g n).mapDerivedCategoryFactors.hom.app K ≫
+    DerivedCategory.Q.map (inverseImageFiniteComparisonComplex l E g n K) ≫
+      (integralOperationsLevelPullback l E g n).mapDerivedCategoryFactors.inv.app K
+
+/-- In the recorded finite intrinsic presentation, the same comparison has exactly
+finiteDerivedPullback as its target. The adjunction comparison preserves x tensor 1.
+Source: Stacks Tags 03D6 and 00YV
+(blueprint: def-weil-inverse-image-pullback-comparison). -/
+def inverseImagePullbackComparisonFiniteIntrinsic
+    (F : Type t) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
+    (hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x))
+    (hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) (n : ℕ)
+    (K : CochainComplex (integralOperationsFiniteModules l F Y n) ℤ) :
+    (inverseImageFiniteDerived l F g n).obj (DerivedCategory.Q.obj K) ⟶
+      (finiteDerivedPullback l F n g).obj (DerivedCategory.Q.obj K) :=
+  letI : Finite (Padic.coefficientExtensionRing l F (n + 1)) :=
+    Padic.finite_coefficientExtensionRing l F (n + 1) (Nat.succ_le_succ (Nat.zero_le n))
+  let e : integralOperationsLevelPullback l F g n ≅
+      sfIntrinsicPullback (Padic.coefficientExtensionRing l F (n + 1)) g :=
+    inverseImageFiniteIntrinsicPullbackComparison g (Padic.coefficientExtensionRing l F (n + 1))
+  inverseImagePullbackComparisonFinite l F g hX hY n K ≫
+    (Functor.mapDerivedCategoryNatIso e).hom.app (DerivedCategory.Q.obj K)
 
 private abbrev coefficientProjection (W : Scheme.{t}) (n : ℕ) :=
   (sheafCompose (ProEt.topology W)

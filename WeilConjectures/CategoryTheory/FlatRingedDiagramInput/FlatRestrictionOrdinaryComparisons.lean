@@ -345,8 +345,5 @@ variable {C D : Type u} [SmallCategory C] [SmallCategory D]
   {K : GrothendieckTopology C} {H : GrothendieckTopology D}
   (x : FlatRingedDiagramInput K H) (J : Type u) [SmallCategory J]
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 400000 in
 -- Restriction preserves the underlying sheaf but changes its bundled scalar action.
 end CategoryTheory.FlatRingedDiagramInput

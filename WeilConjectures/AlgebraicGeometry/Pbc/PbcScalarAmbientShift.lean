@@ -241,10 +241,6 @@ private theorem scalarAdjunction_shift :
   rw [he] at hu
   exact Adjunction.CommShift.mk' _ ℤ hu
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end NormalizedScalarAdjunctionShift
 
 end ScalarShift

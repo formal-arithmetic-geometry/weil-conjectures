@@ -258,11 +258,9 @@ private theorem quotientUnit_compatible (P : CochainComplex (Modules l E W) ℤ)
 
 end UnitCompatibility
 
-omit [EssentiallySmall.{max u (t + 1)} W.ProEt] in
 section RoosTowerComparisonAPI
 attribute [local irreducible] roosF DerivedCategory DerivedCategory.Q
 
-omit [EssentiallySmall.{max u (t + 1)} W.ProEt] in
 end RoosTowerComparisonAPI
 
 private def quotientAugmentation (P : CochainComplex (Modules l E W) ℤ) :
@@ -313,11 +311,6 @@ private def ordinaryAugmentation :
       (ℕᵒᵖ ⥤ CochainComplex (ComparisonModules l E W) ℤ)) ⟶ ordinaryTower l E W :=
   IntegralOnSlice.augmentation l E W none
 
-omit [EssentiallySmall.{max u (t + 1)} W.ProEt]
-  [HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology W) AddCommGrpCat.{max u (t + 1)}]
-  [(AlgebraicGeometry.Scheme.ProEt.topology W).WEqualsLocallyBijective
-    AddCommGrpCat.{max u (t + 1)}] in
-omit [EssentiallySmall.{max u (t + 1)} W.ProEt] in
 end OrdinaryWrapperAPI
 
 section ScalarRoosComparison
@@ -328,7 +321,6 @@ attribute [local irreducible] CochainComplex.mappingCone roosF
 
 end ScalarRoosComparison
 
-omit [EssentiallySmall.{max u (t + 1)} W.ProEt] in
 end
 
 omit [EssentiallySmall.{max u (t + 1)} W.ProEt]
@@ -350,10 +342,6 @@ omit [EssentiallySmall.{max u (t + 1)} W.ProEt]
   [HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology W) AddCommGrpCat.{max u (t + 1)}]
   [(AlgebraicGeometry.Scheme.ProEt.topology W).WEqualsLocallyBijective
     AddCommGrpCat.{max u (t + 1)}] in
-omit [EssentiallySmall.{max u (t + 1)} W.ProEt]
-  [HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology W) AddCommGrpCat.{max u (t + 1)}]
-  [(AlgebraicGeometry.Scheme.ProEt.topology W).WEqualsLocallyBijective
-    AddCommGrpCat.{max u (t + 1)}] in
 private lemma good_shift (P : CochainComplex (integralTowerModules l E W) ℤ)
     (hP : integralOperationsGoodComplex l E W P) (m : ℤ) :
     integralOperationsGoodComplex l E W (P⟦m⟧) := by
@@ -371,14 +359,6 @@ attribute [local irreducible] IntegralOnSlice.completion
 section QuotientDescentAPI
 attribute [local irreducible] roosF DerivedCategory DerivedCategory.Q
 
-omit [EssentiallySmall.{max u (t + 1)} W.ProEt]
-  [HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology W) AddCommGrpCat.{max u (t + 1)}]
-  [(AlgebraicGeometry.Scheme.ProEt.topology W).WEqualsLocallyBijective
-    AddCommGrpCat.{max u (t + 1)}] in
-omit [EssentiallySmall.{max u (t + 1)} W.ProEt]
-  [HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology W) AddCommGrpCat.{max u (t + 1)}]
-  [(AlgebraicGeometry.Scheme.ProEt.topology W).WEqualsLocallyBijective
-    AddCommGrpCat.{max u (t + 1)}] in
 end QuotientDescentAPI
 
 end ConcreteInstances
@@ -393,10 +373,7 @@ attribute [local irreducible] roosF
 attribute [local irreducible] roosAugment roosLift negativeRoosAugment limit
   DerivedCategory DerivedCategory.Q
 
-set_option maxHeartbeats 400000 in
 -- Checking all strict coordinates and natural comparison squares needs extra heartbeats.
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
 end Helpers
 
 end WeilConjectures.RoosIntrinsicUnitComparison

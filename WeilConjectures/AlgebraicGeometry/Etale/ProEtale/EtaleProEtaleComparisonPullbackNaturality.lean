@@ -43,6 +43,25 @@ namespace AlgebraicGeometry.ProEtale
 
 set_option maxHeartbeats 1600000 in
 -- The canonical adjunction comparisons involve large functors on the two scheme sites.
+
+private theorem constant_comparison_unit
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    {K : C ⥤ D} {S : D ⥤ C} {K' : C ⥤ E} {S' : E ⥤ C}
+    {L : D ⥤ E} {R : E ⥤ D}
+    (c : K ⊣ S) (d : K' ⊣ S') (a : L ⊣ R) (r : R ⋙ S ≅ S') (M : C) :
+    (c.comp a).homEquiv M (K'.obj M)
+        ((((c.comp a).ofNatIsoRight r).leftAdjointUniq d).hom.app M) =
+      d.unit.app M ≫ r.inv.app (K'.obj M) := by
+  have h := Adjunction.homEquiv_leftAdjointUniq_hom_app
+    ((c.comp a).ofNatIsoRight r) d M
+  rw [Adjunction.homEquiv_ofNatIsoRight_apply] at h
+  apply (cancel_mono (r.hom.app (K'.obj M))).1
+  calc
+    _ = d.unit.app M := h
+    _ = (d.unit.app M ≫ r.inv.app _) ≫ r.hom.app _ := by
+      rw [Category.assoc, Iso.inv_hom_id_app]
+      exact (Category.comp_id _).symm
+
 private theorem homEquiv_conjugate
     {C D : Type*} [Category C] [Category D]
     {L L' : C ⥤ D} {R R' : D ⥤ C}

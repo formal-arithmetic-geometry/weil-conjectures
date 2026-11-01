@@ -352,10 +352,8 @@ private theorem complexHomProjection_map
 
 attribute [irreducible] complexHomProjection
 
-set_option maxHeartbeats 800000 in
 -- Checking the concrete Hom-component types needs this heartbeat budget.
 end NormalizedComparison
 
-set_option maxHeartbeats 800000 in
 -- The coefficient-action interface and its normalized comparison have dependent object types.
 end SheafOfModules

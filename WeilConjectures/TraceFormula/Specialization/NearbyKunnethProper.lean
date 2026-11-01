@@ -105,6 +105,18 @@ lemma boundedConstructible_kunnethMap_source
     (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ _ hΨA)
     (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ _ hΨB)
 
+/-- **Tensor closure over the trait**: the bounded constructible complexes of `ℚ̄_ℓ`-sheaves on a
+scheme `T` over the trait `S = Spec k'⟦t⟧` are stable under `- ⊗ᴸ -` (SGA 4½ [Th. finitude], 1.6;
+Bhatt–Scholze, Section 6.8). The tensor closure `isMonoidal_boundedConstructible` is only available
+for schemes of finite type over a field, which `T` is not. -/
+theorem boundedConstructible_tensor_of_trait {T : Scheme.{u}} (_qT : T ⟶ trait k')
+    (C D : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) T)))
+    (_hC : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) T) C)
+    (_hD : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) T) D) :
+    boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) T) (C ⊗ D) :=
+  sorry
+
 set_option maxHeartbeats 800000 in
 -- instance search for the monoidal structure of bounded constructible complexes
 omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in

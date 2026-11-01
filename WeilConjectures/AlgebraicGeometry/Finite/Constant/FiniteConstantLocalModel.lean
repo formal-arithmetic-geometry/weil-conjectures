@@ -762,11 +762,4 @@ private noncomputable def internalRegularCoordinates (K : Type*) [Ring K] :
   map_add' _ _ := rfl
   map_smul' _ _ := rfl
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency false in
 end AlgebraicGeometry.ProEtale

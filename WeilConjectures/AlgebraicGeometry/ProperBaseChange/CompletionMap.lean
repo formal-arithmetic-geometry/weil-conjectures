@@ -174,8 +174,4 @@ noncomputable def adicCompletionProjection :
 variable {L : proEtaleDerivedCategory X Λ} (N : AdicKFlatModel X Λ L)
 
 -- Shift the strict mapping-cone map and characterize it by both cocone coordinates.
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
 end AlgebraicGeometry.Scheme

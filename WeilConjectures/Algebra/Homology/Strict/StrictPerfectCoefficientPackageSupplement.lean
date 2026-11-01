@@ -58,6 +58,42 @@ noncomputable def StrictPerfectCoefficientPackage.e {R : Sheaf J RingCat.{u}}
     {F : CochainComplex (SheafOfModules.{u} R) ℤ}
     (P : StrictPerfectCoefficientPackage R F) (r : ℤ) := P.p r ≫ P.i r
 
+/-- Termwise sheafification, including the differential.
+Source: proper base change, definition 1263
+(blueprint: def-weil-pbc-strict-perfect-coefficient-package). -/
+noncomputable def strictPerfectConstantComplex (F : CochainComplex (ModuleCat.{u} Λ) ℤ) :=
+  ((strictPerfectConstantSheaf J Λ).mapHomologicalComplex (ComplexShape.up ℤ)).obj F
+
+/-- Transport of a degreewise splitting through sheafification and the finite-free comparison.
+Source: proper base change, definition 1263
+(blueprint: def-weil-pbc-strict-perfect-coefficient-package).
+Proof: cancel the adjacent comparison and its inverse. The remaining composite is the
+image of `i_r ≫ p_r`; use the original splitting and preservation of identity maps. -/
+theorem strictPerfectConstant_splitting {F : CochainComplex (ModuleCat.{u} Λ) ℤ}
+    (P : ModuleCat.StrictPerfectCoefficientPackage F) (r : ℤ) :
+    ((strictPerfectConstantSheaf J Λ).map (P.i r) ≫
+      strictPerfectConstantFiniteFreeComparison J Λ (P.N r)) ≫
+      (inv (strictPerfectConstantFiniteFreeComparison J Λ (P.N r)) ≫
+        (strictPerfectConstantSheaf J Λ).map (P.p r)) =
+      𝟙 ((strictPerfectConstantComplex J Λ F).X r) := by
+  simp only [Category.assoc, IsIso.hom_inv_id_assoc]
+  rw [← Functor.map_comp, P.splitting]
+  exact (strictPerfectConstantSheaf J Λ).map_id (F.X r)
+
+/-- The associated constant package: sheafify the complex and both splitting maps termwise,
+then identify the constant finite tuples with finite tuples of the constant ring sheaf.
+Source: proper base change, definition 1263
+(blueprint: def-weil-pbc-strict-perfect-coefficient-package). -/
+noncomputable def _root_.ModuleCat.StrictPerfectCoefficientPackage.constant
+    {F : CochainComplex (ModuleCat.{u} Λ) ℤ} (P : ModuleCat.StrictPerfectCoefficientPackage F) :
+    SheafOfModules.StrictPerfectCoefficientPackage _ (strictPerfectConstantComplex J Λ F) where
+  N := P.N
+  i r := (strictPerfectConstantSheaf J Λ).map (P.i r) ≫
+    strictPerfectConstantFiniteFreeComparison J Λ (P.N r)
+  p r := inv (strictPerfectConstantFiniteFreeComparison J Λ (P.N r)) ≫
+    (strictPerfectConstantSheaf J Λ).map (P.p r)
+  splitting := strictPerfectConstant_splitting J Λ P
+
 attribute [instance] CategoryTheory.module_overFunctor_preservesZero
 
 end SheafOfModules

@@ -309,8 +309,6 @@ theorem pbc_levelwise_truncation_cohomology (M : AdicTower T d) (m : ℤ) :
       simp only [Functor.id_map, Category.assoc]
       rw [truncGE_restriction_unit]
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 section ReductionTowerPresentation
 
 -- Compare the completed-coefficient aliases without expanding the chosen limit cone.
@@ -1558,8 +1556,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 attribute [local semireducible] completedReductionCoefficient in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 /-- Uniform bounded constructibility is preserved under (TC), with the stated sharp
 cohomological windows. The conclusion uses the full common-local-model predicate;
 it does not claim that the original model truncations have finite free terms.
@@ -1684,12 +1680,6 @@ end IntegralCoefficients
 
 open AlgebraicGeometry.ProEtale
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
 section OriginNormalizationProof
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false

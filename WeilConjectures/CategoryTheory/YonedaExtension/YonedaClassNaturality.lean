@@ -40,5 +40,4 @@ private theorem normalized_naturality {V₀ U₀ V₁ U₁ V U V' U' : A} {n : �
     Ext.mk₀_comp_mk₀_assoc, Category.assoc, Iso.hom_inv_id_assoc, Iso.hom_inv_id,
     Category.comp_id] using hh
 
-set_option backward.isDefEq.respectTransparency false in
 end CategoryTheory.YonedaExtension

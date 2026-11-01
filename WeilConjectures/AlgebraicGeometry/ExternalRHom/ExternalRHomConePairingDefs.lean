@@ -561,6 +561,12 @@ noncomputable def homMap {X : Scheme.{u}} {E E' K K' : DerivedCategoryModule A X
     ((globalHom A X).obj (op E)).obj K ⟶ ((globalHom A X).obj (op E')).obj K' :=
   ((globalHom A X).map f.op).app K ≫ ((globalHom A X).obj (op E')).map g
 
+/-- The external tensor of two derived objects via the recorded inverse images.
+Source: Stacks 06YS (blueprint: def-pur-external-rhom-pairing-interface). -/
+noncomputable abbrev external {X Y P : Scheme.{u}} (a : P ⟶ X) (b : P ⟶ Y)
+    (K : DerivedCategoryModule A X) (L' : DerivedCategoryModule A Y) :=
+  (pull A a).obj K ⊗ (pull A b).obj L'
+
 /-- The comparison of inverse images around a commuting square.
 Source: Stacks 03D8 (blueprint: def-pur-external-rhom-pairing-interface). -/
 noncomputable def squarePullIso {X X' P P' : Scheme.{u}}

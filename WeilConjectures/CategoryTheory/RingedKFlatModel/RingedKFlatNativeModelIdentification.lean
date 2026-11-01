@@ -494,7 +494,6 @@ private def chainLeftUnitor
       (ringedTensorUnitComplex.{c, v, u} J R, P) ≅ P :=
   HomologicalComplex.leftUnitor P
 
-omit [HasDerivedCategory.{w} (RingedTensorModules.{c, v, u} J R)] in
 private theorem comparison_exists :
     ∃ e : nativeTensor.{c, v, u, w} J R ≅ S.tensor,
       ∀ (P Q : CochainComplex (RingedTensorModules.{c, v, u} J R) ℤ)
@@ -653,8 +652,6 @@ private theorem comparison_oneKFlat
       rw [← Category.assoc, he P Q hP hQ, ← hc.tensorIso_both P Q hP hQ]
       exact hr.symm
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 private theorem associator_model_native
     (β : @SymmetricCategory (DerivedCategory (RingedTensorModules.{c, v, u} J R))
       _ S.monoidal)
@@ -821,5 +818,4 @@ private theorem comparison_constraints
     fun X ↦ congr_app hleft X, fun X ↦ congr_app hright X⟩
 
 -- Preserve the recorded signature, whose second K-flat proof fixes the allowed model pairs.
-set_option linter.unusedVariables false in
 end CategoryTheory.RingedKFlatModel
