@@ -923,6 +923,9 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.IntegralModelsStacks
 
+-- `strictDvrSiteSmall` leaves its universe free and stalls universe unification here.
+attribute [-instance] WeilConjectures.strictDvrSiteSmall
+
 private theorem bp_internal_complete_iso
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] {X : Scheme.{u}}

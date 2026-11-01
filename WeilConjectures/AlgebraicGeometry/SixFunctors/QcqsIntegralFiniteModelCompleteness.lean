@@ -107,6 +107,10 @@ are formed by the recorded derived extension along the actual quotient homomorph
 The ordinary coordinate condition retains the comparison equivalence and etale-origin pair.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 
 set_option autoImplicit false
