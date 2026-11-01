@@ -25605,6 +25605,7 @@ public import WeilConjectures.TraceFormula.FiniteGeometricDirectDomain
 public import WeilConjectures.TraceFormula.FiniteGeometricTensorDomain
 public import WeilConjectures.TraceFormula.FixedPoint
 public import WeilConjectures.TraceFormula.FixedPointAlgebra
+public import WeilConjectures.TraceFormula.FixedPointAlgebraStatement
 public import WeilConjectures.TraceFormula.FixedPointComponent
 public import WeilConjectures.TraceFormula.FixedPointScheme
 public import WeilConjectures.TraceFormula.Frobenius
