@@ -14,6 +14,9 @@ import WeilConjectures.Algebra.Homology.UpperTruncationStepSES
 import WeilConjectures.CategoryTheory.TruncationRawExact
 import WeilConjectures.CategoryTheory.TruncationQuadrantVanishing
 import WeilConjectures.CategoryTheory.TruncationAbutmentCocone
+public import Mathlib.Algebra.Homology.SpectralSequence.Basic
+public import WeilConjectures.CategoryTheory.CanonicalFiltration
+public import WeilConjectures.CategoryTheory.TruncationTriangle
 
 /-! # The canonical edge for acyclic cohomology objects
 
@@ -324,6 +327,25 @@ private theorem representative_acyclic (F : A ⥤ B) [F.Additive]
       (DerivedCategory.homologyFunctor A j).mapIso e))
 
 set_option linter.unusedVariables false in
+
+/-- The degree-zero second-page identification, with an object placed in degree q.
+This is exactly the shift and ordinary-derived comparison in thm-sp-truncation-e2,
+followed by the inverse of the degree-zero augmentation.
+Source: Stacks Tags 05TD and 0D7U (blueprint: lem-fd-acyclic-heart-edge). -/
+noncomputable def acyclicHeartSingleIso (F : A ⥤ B) [F.Additive]
+    [PreservesFiniteLimits F] (X : A) (q : ℤ) :
+    (DerivedCategory.homologyFunctor B q).obj
+        (F.rightDerivedFunctor.obj ((DerivedCategory.singleFunctor A q).obj X)) ≅ F.obj X :=
+  (DerivedCategory.homologyFunctor B q).mapIso
+      (F.rightDerivedFunctor.mapIso
+        (((DerivedCategory.singleFunctors A).shiftIso (-q) q 0 (by omega)).app X).symm) ≪≫
+    (DerivedCategory.homologyFunctor B q).mapIso
+      ((F.rightDerivedFunctor.commShiftIso (-q)).app
+        ((DerivedCategory.singleFunctor A 0).obj X)) ≪≫
+    ((DerivedCategory.homologyFunctor B 0).shiftIso (-q) q 0 (by omega)).app
+      (F.rightDerivedFunctor.obj ((DerivedCategory.singleFunctor A 0).obj X)) ≪≫
+    F.homologyRightDerivedFunctorObjSingleFunctorIso X 0 ≪≫ F.rightDerivedZeroIsoSelf.app X
+
 /-- The canonical acyclic-heart edge is invertible and natural, including in compatible
 morphisms of the derived-functor data. Compatibility is imposed only on shifted single
 objects, by their degree-zero augmentation comparisons, not on the edge to be proved.
