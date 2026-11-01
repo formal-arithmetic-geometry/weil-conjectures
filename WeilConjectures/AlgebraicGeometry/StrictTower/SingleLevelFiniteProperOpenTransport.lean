@@ -320,7 +320,7 @@ private theorem coefficientPlusCounit
   let e := @asIso _ _ _ _ (hPullbackInv B f Λ φ) (hPullbackInv_isIso B f Λ φ)
   have hm : (mateEquiv a b e.hom).natTrans = hDirect B f Λ φ := by
     exact congrArg TwoSquare.natTrans ((mateEquiv a b).apply_symm_apply _)
-  rw [← hm, derived_mate_eq a b e]
+  rw [← hm, Adjunction.rightDerivedFunctorPlusBaseChange_mateEquiv a b e]
   change (hPullbackPlus B Λ φ f).inv.app _ ≫
     (modulePullback B f).mapDerivedCategoryPlus.map
       ((mateEquiv a.derivedPlus b.derivedPlus
