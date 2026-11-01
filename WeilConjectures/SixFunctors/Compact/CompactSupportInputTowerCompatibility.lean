@@ -165,7 +165,6 @@ private theorem normalizedDVRTransitionRestriction_comp
 end RestrictionCompositor
 
 end AlgebraicGeometry.ProEtale.IntegralPresentation
-end AlgebraicGeometry.ProEtale.IntegralPresentation
 
 end IntegralReductionTransitionHelpers
 

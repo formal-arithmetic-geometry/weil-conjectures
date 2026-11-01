@@ -239,6 +239,13 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposi
 open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.ProfiniteFreeSlice
 open ModuleObjectRingedComparison WeilConjectures
+-- Upstream's `HasDerivedCategory` instances on these module categories are found first and then
+-- fail the final defeq check, which blocks `HasDerivedCategory.ofIsGrothendieckAbelian`.
+attribute [-instance] AlgebraicGeometry.Scheme.proEtaleRingModules_hasDerivedCategory
+  AlgebraicGeometry.Scheme.ProjectionRestriction.derived
+  AlgebraicGeometry.Scheme.ProjectionRestriction.derivedOver
+  AlgebraicGeometry.Scheme.ProjectionRestriction.derivedOverModules
+
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) (P : Profinite.{u})
 
@@ -254,11 +261,6 @@ abbrev parameter := ((coherentTopology Profinite.{u}).uliftYoneda.{u + 1}).obj P
 Source: Stacks 08FI, 08J7; HRS Section 3
 (blueprint: lem-sfb-profinite-free-slice-derived-hom). -/
 abbrev represented := ((Scheme.ProEt.topology X).uliftYoneda.{u + 1}).obj (test X P)
-/-- The existing strong monoidal inverse image lifted to internal coefficient modules.
-Source: Stacks 08FI, 08J7; HRS Section 3
-(blueprint: lem-sfb-profinite-free-slice-derived-hom). -/
-def pointModulePullback : Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) Λ ⥤
-    Internal Λ X := (upperStarFromPoint X).mapMod Λ
 /-- The existing free condensed module on the representable profinite parameter.
 Source: Stacks 08FI, 08J7; HRS Section 3
 (blueprint: lem-sfb-profinite-free-slice-derived-hom). -/

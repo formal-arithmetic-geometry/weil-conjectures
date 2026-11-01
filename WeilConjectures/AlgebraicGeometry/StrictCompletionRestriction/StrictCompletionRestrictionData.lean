@@ -44,6 +44,13 @@ open WeilConjectures
 open CategoryTheory.InternalAbelianSheafModule
 
 namespace AlgebraicGeometry.ProEtale.StrictCompletionRestriction
+-- Upstream's `HasDerivedCategory` instances on these module categories are found first and then
+-- fail the final defeq check, which blocks `HasDerivedCategory.ofIsGrothendieckAbelian`.
+attribute [-instance] AlgebraicGeometry.Scheme.proEtaleRingModules_hasDerivedCategory
+  AlgebraicGeometry.Scheme.ProjectionRestriction.derived
+  AlgebraicGeometry.Scheme.ProjectionRestriction.derivedOver
+  AlgebraicGeometry.Scheme.ProjectionRestriction.derivedOverModules
+
 
 /-- The existing small-site local-equivalence instance with its unused larger
 coefficient universe fixed to zero, so inference keeps the prescribed universe.

@@ -228,8 +228,6 @@ private theorem third_conjunct {P Q R S : Prop} (h : P ∧ Q ∧ R ∧ S) : R :=
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
-set_option maxHeartbeats 800000 in
--- Comparing the two normalized monoidal witnesses elaborates the sheaf tensor constraints.
 variable [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)]
 
 set_option maxHeartbeats 1600000 in
