@@ -101,7 +101,7 @@ private theorem qbarPullIso_comp
       (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ
         (h.asOver (Spec (.of k))) (j.asOver (Spec (.of k)))).app
         ((constructibleToPadicAlgCl V ℓ E).obj K) := by
-  set_option backward.isDefEq.respectTransparency false in
+  set_option backward.isDefEq.respectTransparency true in
   apply Iso.ext
   apply ObjectProperty.hom_ext
   dsimp only [Iso.trans, Functor.mapIso, Iso.app,
@@ -110,25 +110,21 @@ private theorem qbarPullIso_comp
   dsimp only [boundedConstructibleUpperStar,
     constructibleToQbarPullIso, ObjectProperty.lift, ObjectProperty.isoMk,
     ObjectProperty.homMk, Functor.comp_map, ObjectProperty.ι_map]
-  conv_lhs =>
-    lhs
-    arg 2
-    rw [bounded_comp_hom ℓ k (Profinite.continuousMapRingObj E) h j K]
-  conv_rhs =>
-    rhs
-    erw [bounded_comp_hom ℓ k (Profinite.padicAlgClRingObj ℓ) h j _]
+  simp only [bounded_comp_hom ℓ k (Profinite.continuousMapRingObj E) h j K,
+    bounded_comp_hom ℓ k (Profinite.padicAlgClRingObj ℓ) h j]
   have he := congr_app
     (derived_pull_comp (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) h j) K.obj
   simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
     Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
     Category.comp_id] at he
-  convert he using 1 <;>
-    dsimp only [constructibleToPadicAlgCl, ObjectProperty.lift_obj_obj,
-      Functor.comp_obj, ObjectProperty.ι_obj, Iso.app_hom,
-      derivedExtendScalarsToPadicAlgCl,
-      padicSubfieldRingObjToPadicAlgCl, Scheme.Hom.asOver, OverClass.asOverHom,
-      OverClass.asOver, Over.homMk, CostructuredArrow.homMk,
-      Over.mk, CostructuredArrow.mk, Over.Hom.left]
+  convert he using 1
+  set_option backward.isDefEq.respectTransparency false in
+  simp only [constructibleToPadicAlgCl, ObjectProperty.lift_obj_obj,
+    Functor.comp_obj, ObjectProperty.ι_obj, Iso.app_hom,
+    derivedExtendScalarsToPadicAlgCl,
+    padicSubfieldRingObjToPadicAlgCl, OverClass.asOverHom,
+    OverClass.asOver, Over.homMk, CostructuredArrow.homMk,
+    Over.mk, CostructuredArrow.mk, Over.Hom.left]
 
 end CompositionCalculation
 
