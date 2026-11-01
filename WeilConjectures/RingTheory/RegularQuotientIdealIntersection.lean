@@ -7,10 +7,8 @@ Authors: Bin Wu
 module
 
 public import Mathlib.RingTheory.Regular.RegularSequence
-import WeilConjectures.AlgebraicGeometry.KoszulComplex
-import WeilConjectures.RingTheory.KoszulRegularSequence
-import WeilConjectures.RingTheory.RegularSequenceKoszulRegular
 import WeilConjectures.RingTheory.RegularQuotientIdealIntersectionAux
+public import Mathlib.CategoryTheory.Category.Init
 
 /-!
 # Ideal intersection for a sequence regular modulo an ideal

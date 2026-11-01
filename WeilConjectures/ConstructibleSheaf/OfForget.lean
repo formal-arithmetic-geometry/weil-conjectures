@@ -5,9 +5,13 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale
 public import WeilConjectures.CategoryTheory.Sites.ConstantForget
 public import WeilConjectures.ConstructibleSheaf.KernelCokernel
+public import Mathlib.Analysis.Normed.Group.Basic
+public import Mathlib.Data.EReal.Inv
+public import Mathlib.Topology.Algebra.InfiniteSum.Order
+public import Mathlib.Topology.MetricSpace.Bounded
+public import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantSets
 
 /-!
 # Finite local constancy of sheaves of modules can be tested on sets

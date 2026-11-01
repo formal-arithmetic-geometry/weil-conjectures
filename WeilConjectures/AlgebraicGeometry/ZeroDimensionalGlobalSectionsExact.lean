@@ -15,9 +15,11 @@ import Mathlib.AlgebraicGeometry.AlgClosed.Basic
 import Mathlib.AlgebraicGeometry.Artinian
 import WeilConjectures.Mathlib.CategoryTheory.Limits.FunctorCategory.Shapes.Products
 import WeilConjectures.AlgebraicGeometry.ZeroDimensionalEtaleCohomologyIso
-import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
-import WeilConjectures.AlgebraicGeometry.StrictlyHenselianSectionsStalk
-import WeilConjectures.AlgebraicGeometry.UniversalHomeomorphismInvariance
+public import Mathlib.Algebra.Order.BigOperators.Ring.Finset
+public import Mathlib.AlgebraicGeometry.QuasiAffine
+public import Mathlib.Data.NNReal.Defs
+public import Mathlib.RingTheory.DedekindDomain.Dvr
+public import Mathlib.RingTheory.SimpleRing.Principal
 
 @[expose] public section
 

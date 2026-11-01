@@ -5,9 +5,11 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.EtaleFiniteRefinement.GenericFinite
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
+public import WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFactorization
 
 /-!
 # Quasi-finite separated morphisms are finite over a neighbourhood of the generic point

@@ -12,9 +12,11 @@ public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import Mathlib.CategoryTheory.Generator.Basic
 import WeilConjectures.AlgebraicGeometry.ConstructibleSheafGeneration
 import WeilConjectures.AlgebraicGeometry.ConstructibleColimitFactorization
-import WeilConjectures.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
-import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import WeilConjectures.ConstructibleSheaf.FinitePushforward
+public import Mathlib.Algebra.Category.ModuleCat.Adjunctions
+public import Mathlib.Analysis.Normed.Group.Basic
+public import Mathlib.Data.EReal.Inv
+public import Mathlib.Topology.Algebra.InfiniteSum.Order
+public import Mathlib.Topology.MetricSpace.Bounded
 
 @[expose] public section
 

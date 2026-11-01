@@ -9,6 +9,7 @@ import WeilConjectures.AlgebraicGeometry.AdicResiduePerfectReductionComparison
 import WeilConjectures.AlgebraicGeometry.AdicResidueStalkTowerFamily
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
+public import WeilConjectures.CategoryTheory.LocallyConstantFiniteTypeModules
 
 /-! # A covering family with one perfect model for all finite reductions
 

@@ -17,6 +17,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Integral
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FinitelyPresentedStalk
 public import WeilConjectures.TraceFormula.PointFiberFunctor
+public import WeilConjectures.CategoryTheory.DerivedCategory.FlatExtendScalars
 
 /-!
 # The integral point fibre functor

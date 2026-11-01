@@ -10,23 +10,11 @@ public import WeilConjectures.AlgebraicGeometry.Sites.BrauerGroup
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyClopen
 public import WeilConjectures.AlgebraicGeometry.Sites.DivisorSequence
 public import WeilConjectures.FieldTheory.Tsen
-public import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField
 public import WeilConjectures.Mathlib.RingTheory.NoetherNormalization
-public import WeilConjectures.Mathlib.Topology.NoetherianSpace
 
 import WeilConjectures.AlgebraicGeometry.Curve.BrauerReductionInjection
 import WeilConjectures.AlgebraicGeometry.Curve.BrauerFiniteModificationInjection
 import WeilConjectures.AlgebraicGeometry.ReducedCurveNormalization
-import WeilConjectures.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
-import WeilConjectures.AlgebraicGeometry.EtaleAffineQcoherent
-import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsSheaf
-import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
-import WeilConjectures.AlgebraicGeometry.Regular
-import WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
-import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
-import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
-import WeilConjectures.SixFunctors.Finite.Exact
 
 /-!
 # Tsen's theorem and the Brauer group of a curve

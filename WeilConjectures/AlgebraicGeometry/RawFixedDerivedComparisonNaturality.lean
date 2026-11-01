@@ -10,9 +10,9 @@ public import WeilConjectures.AlgebraicGeometry.RawFixedDerivedComparison
 public import WeilConjectures.AlgebraicGeometry.RawRestrictedDerivedComparisonPullback
 public import WeilConjectures.AlgebraicGeometry.EtaleComplexPullbackTransport
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictScalars
 import all WeilConjectures.AlgebraicGeometry.RestrictedDerivedSectionsShiftTransport
 import WeilConjectures.AlgebraicGeometry.RestrictedDerivedSectionPullbackCommShift
+public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Naturality of fixed-coefficient raw evaluation
 

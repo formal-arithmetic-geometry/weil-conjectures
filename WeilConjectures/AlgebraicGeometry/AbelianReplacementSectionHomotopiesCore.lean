@@ -7,8 +7,6 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.AbelianCounitResolutionCalculation
 import WeilConjectures.AlgebraicGeometry.AbelianReplacementSectionHomotopiesCoreParts
-import WeilConjectures.Algebra.Homology.MappingCylinderSplitFactorization
-import WeilConjectures.Algebra.Homology.LiftToInjectiveUniqueUpToHomotopy
 import Mathlib.Algebra.Homology.ModelCategory.Injective
 /-! # Constructing the section homotopies before acyclicity
 

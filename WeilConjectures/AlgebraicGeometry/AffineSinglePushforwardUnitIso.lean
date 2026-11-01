@@ -6,10 +6,17 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
 import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.Algebra.Order.BigOperators.Ring.Finset
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import Mathlib.Combinatorics.Matroid.Init
+public import Mathlib.Data.Int.ConditionallyCompleteOrder
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineVanishing
+public import WeilConjectures.AlgebraicGeometry.DerivedHomMayerVietoris
+public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 
 /-! # AffineSinglePushforwardUnitIso
 

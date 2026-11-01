@@ -15,6 +15,7 @@ import WeilConjectures.AlgebraicGeometry.AffinePushforwardBaseChangeIsIso
 import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 import WeilConjectures.AlgebraicGeometry.Modules.PullbackUnit
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 
 /-! # A finite kernel presentation for sections on finite étale thickenings -/
 

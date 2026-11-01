@@ -19,6 +19,14 @@ public import Mathlib.Algebra.Category.ModuleCat.EnoughInjectives
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.MapBijective
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GlobalSections
 public import WeilConjectures.SixFunctors.ProEtale.GaloisEvaluation
+public import Mathlib.Algebra.Azumaya.Basic
+public import Mathlib.Condensed.Discrete.Characterization
+public import Mathlib.RepresentationTheory.Coinduced
+public import Mathlib.RingTheory.WittVector.IsPoly
+public import Mathlib.Tactic.ReduceModChar
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Separated
+public import WeilConjectures.Compactification.NagataCompactification
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 
 /-!
 # The ambient exceptional right adjoint fails for an elliptic curve

@@ -9,6 +9,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.ExchangeCube
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SquareComparisonCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ResidueFieldTransportBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ResidueFieldTransportSection
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 
 /-!
 # Derived pullback and pushforward of residue field module sheaves

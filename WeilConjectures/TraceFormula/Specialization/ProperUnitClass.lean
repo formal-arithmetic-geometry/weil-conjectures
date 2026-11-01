@@ -6,7 +6,21 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructibleUnitIdentity
-public import WeilConjectures.TraceFormula.Specialization.PointExchange
+public import Mathlib.Algebra.Algebra.Defs
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.Algebra.CharP.Defs
+public import Mathlib.Algebra.Field.Defs
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
+public import WeilConjectures.SixFunctors.NearbyCycles.Basic
+public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructible
+public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructibleExchange
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperLowerShriek
+public import WeilConjectures.TraceFormula.Basic
+public import WeilConjectures.TraceFormula.Specialization.Integral
+public import WeilConjectures.TraceFormula.Specialization.NearbyProperExchange
+public import WeilConjectures.TraceFormula.Specialization.PointModel
 
 /-!
 

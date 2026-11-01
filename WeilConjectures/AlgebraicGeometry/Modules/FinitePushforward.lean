@@ -10,15 +10,17 @@ public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
-public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-public import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine
 public import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
-public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
-public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.FreeLocus
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 
 import all Mathlib.AlgebraicGeometry.Morphisms.FlatRank  -- for unfolding `Scheme.Hom.finrank`
+public import Mathlib.Algebra.Order.Module.Field
+public import Mathlib.Combinatorics.Quiver.ReflQuiver
+public import Mathlib.Data.EReal.Operations
+public import Mathlib.Topology.Algebra.InfiniteSum.Order
+public import Mathlib.Topology.MetricSpace.Bounded
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineVanishing
 
 /-!
 # The pushforward of the structure sheaf along a finite morphism

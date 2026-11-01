@@ -11,6 +11,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Compar
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReduction
 public import WeilConjectures.TraceFormula.CurveLocal.SwapProduct
+public import WeilConjectures.TraceFormula.Product
 
 /-!
 

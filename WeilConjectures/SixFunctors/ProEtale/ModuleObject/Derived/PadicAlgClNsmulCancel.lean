@@ -5,7 +5,16 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldLinear
+public import Mathlib.Algebra.Category.Grp.Basic
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.Sites.Proetale
+public import Mathlib.CategoryTheory.Monoidal.Mod
+public import Mathlib.NumberTheory.Padics.Complex
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
+public import WeilConjectures.CategoryTheory.RingObjects.GlobalSections
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.CoefficientLinear
 
 /-!
 # Multiplication by nonzero integers on `ℚ̲̄_ℓ`-module objects is cancellable

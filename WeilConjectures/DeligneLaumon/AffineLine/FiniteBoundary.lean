@@ -5,9 +5,12 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
-public import WeilConjectures.DeligneLaumon.Reduction.FormalSteps
-public import WeilConjectures.WeilSheaf.Finiteness
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.Algebra.CharP.Defs
+public import Mathlib.Algebra.Field.Defs
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteVanishing
+public import WeilConjectures.WeilSheaf.CohomologyNonneg
 
 /-!
 # Compactly supported cohomology of a finite scheme

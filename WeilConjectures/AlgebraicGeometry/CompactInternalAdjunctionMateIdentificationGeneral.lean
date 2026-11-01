@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.CompactInternalAdjunctionMateCanonicalMaps
+public import WeilConjectures.SixFunctors.Etale.Derived.TensorHom
 
 /-! Mate calculus for `CompactInternalAdjunctionMateIdentification` over a general coefficient
 category: compatibility of the compact Tensor–Hom isomorphism with comparison squares, and the

@@ -4,22 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageKanRepresentative
-public import WeilConjectures.AlgebraicGeometry.EtaleSectionsFpqcDescent
-public import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparisonComposition
-public import WeilConjectures.AlgebraicGeometry.EtaleSetSectionComparisonIdentity
-public import WeilConjectures.AlgebraicGeometry.EtaleSetTerminalRestriction
-public import WeilConjectures.AlgebraicGeometry.EtaleSetTerminalTransport
-public import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 public import WeilConjectures.AlgebraicGeometry.ProEtaleCoefficientPullbackUniverses
-public import WeilConjectures.AlgebraicGeometry.ProEtaleSiteComparison
-public import WeilConjectures.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
-public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Comp
-public import WeilConjectures.CategoryTheory.RightDerivedExactComposite
-public import WeilConjectures.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
-public import WeilConjectures.CategoryTheory.Sites.CohomologyRightDerivedSections
-public import WeilConjectures.CategoryTheory.Sites.InjectiveModuleAbelianAcyclic
-public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 
 /-! # Geometric comparison on the existing small site models
 

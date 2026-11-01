@@ -11,6 +11,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.EssImageKern
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekComparison
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TorAmplitude
 public import WeilConjectures.SixFunctors.ProEtale.FullCohomologicalDimension
+public import WeilConjectures.CategoryTheory.DerivedCategory.HomologyCoproducts
 
 /-!
 # Pro-étale complexes with cohomology sheaves of étale origin

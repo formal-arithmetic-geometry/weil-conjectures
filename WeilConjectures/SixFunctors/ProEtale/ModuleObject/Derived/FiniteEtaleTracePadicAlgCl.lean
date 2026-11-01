@@ -5,9 +5,11 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.RingObjects.Condensed.PadicAlgClGlobalSections
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldLinear
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.FiniteEtaleTrace
+public import Mathlib.NumberTheory.Padics.Complex
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
+public import WeilConjectures.CategoryTheory.RingObjects.GlobalSections
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.CoefficientLinear
 
 /-!
 # Split units of `Lg^* ⊣ Rg_*` from a trace of nonzero degree, for `ℚ̲̄_ℓ`-coefficients

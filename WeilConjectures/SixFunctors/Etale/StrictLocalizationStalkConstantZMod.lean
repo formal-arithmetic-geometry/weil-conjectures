@@ -5,8 +5,15 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.Etale.Derived.Stalks.StrictLocalizationVanishing
 public import WeilConjectures.SixFunctors.Etale.ZModCoefficients
+public import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
+public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
+public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
+public import WeilConjectures.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageForgetComparison
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationRestriction
+public import WeilConjectures.AlgebraicGeometry.UnrestrictedStrictHenselizationStalk
+public import WeilConjectures.SixFunctors.Etale.ForgetModuleCohomology
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Forget
 
 /-!
 # Cohomology over the strict localization as a stalk of a higher direct image

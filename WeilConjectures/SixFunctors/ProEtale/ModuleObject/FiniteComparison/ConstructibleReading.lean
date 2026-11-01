@@ -5,16 +5,43 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.ModuleObjects.FinitelyPresentedComap
-public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.IsoClosed
-public import WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Stability
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FinitelyPresentedStalk
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.ConstantRegular
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.Derived
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.LowerStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.UpperStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Constructible
+public import Mathlib.Algebra.Category.ModuleCat.Adjunctions
+public import Mathlib.Algebra.Order.Floor.Extended
+public import Mathlib.Algebra.Order.Interval.Basic
+public import Mathlib.Analysis.Complex.UpperHalfPlane.Basic
+public import Mathlib.Analysis.SpecialFunctions.Bernstein
+public import Mathlib.Analysis.SpecialFunctions.Gamma.Basic
+public import Mathlib.Analysis.SpecialFunctions.Trigonometric.DerivHyp
+public import Mathlib.Combinatorics.Enumerative.DyckWord
+public import Mathlib.Combinatorics.SimpleGraph.Triangle.Removal
+public import Mathlib.Data.NNRat.Floor
+public import Mathlib.Data.Nat.Choose.Multinomial
+public import Mathlib.Geometry.Euclidean.Altitude
+public import Mathlib.NumberTheory.Chebyshev
+public import Mathlib.NumberTheory.Height.NumberField
+public import Mathlib.NumberTheory.Height.Projectivization
+public import Mathlib.NumberTheory.LucasLehmer
+public import Mathlib.NumberTheory.SelbergSieve
+public import Mathlib.RingTheory.Radical.NatInt
+public import Mathlib.Tactic.NormNum.Irrational
+public import Mathlib.Tactic.NormNum.IsCoprime
+public import Mathlib.Tactic.NormNum.IsSquare
+public import Mathlib.Tactic.NormNum.LegendreSymbol
+public import Mathlib.Tactic.NormNum.ModEq
+public import Mathlib.Tactic.NormNum.NatFib
+public import Mathlib.Tactic.NormNum.NatLog
+public import Mathlib.Tactic.NormNum.NatSqrt
+public import Mathlib.Tactic.NormNum.Ordinal
+public import Mathlib.Tactic.NormNum.Parity
+public import Mathlib.Tactic.NormNum.Prime
+public import Mathlib.Tactic.NormNum.RealSqrt
+public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 
 /-!
 # The condensed reading of constructible étale sheaves and complexes

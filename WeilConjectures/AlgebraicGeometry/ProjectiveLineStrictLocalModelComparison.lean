@@ -6,17 +6,14 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.StrictHenselian
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import WeilConjectures.AlgebraicGeometry.ProjectiveLineCompatibleStrictHenselizationResidues
 import WeilConjectures.AlgebraicGeometry.ProjectiveLineStrictLocalStalkExchangeComparison
 import WeilConjectures.AlgebraicGeometry.ProjectiveLineResidueCohomologyComparison
-import WeilConjectures.AlgebraicGeometry.DerivedExchangeTermwise
-import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
-import WeilConjectures.AlgebraicGeometry.StrictHenselizationStalkFormula
-import WeilConjectures.AlgebraicGeometry.StrictHenselizationFunctoriality
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 
 /-!
 # Strict-local model for the two maps in geometric-stalk reduction

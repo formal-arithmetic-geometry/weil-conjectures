@@ -12,6 +12,7 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Int
 import Mathlib.Algebra.Category.Grp.ForgetCorepresentable
 import Mathlib.CategoryTheory.Sites.Equivalence
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Proetale.Basic
 
 /-! # Coordinates for one discrete coefficient section
 

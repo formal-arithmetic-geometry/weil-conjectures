@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageTorAmplitude
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Ordinary
 
 /-!
 # Direct images along morphisms of finite cohomological dimension

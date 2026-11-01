@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FrobeniusRestriction
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilPath
+public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius.Points
+public import WeilConjectures.RingTheory.ProEtale.WeakDimension
 
 /-!
 # Local Frobenius elements from paths on the geometric curve

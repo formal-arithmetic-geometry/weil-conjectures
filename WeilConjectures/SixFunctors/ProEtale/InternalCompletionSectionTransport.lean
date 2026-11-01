@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.IntegralConstantModelRealization
 public import WeilConjectures.AlgebraicGeometry.IntegralModelsStacksData
+public import WeilConjectures.CategoryTheory.ModuleObjects.FinitelyPresentedComap
 
 /-! # Exact conservative transport of integral complexes to the constant small site
 

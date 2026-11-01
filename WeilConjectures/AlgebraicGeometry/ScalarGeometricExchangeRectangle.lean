@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.ScalarPullbackSquareCoherence
 import all WeilConjectures.AlgebraicGeometry.ScalarPullbackSquareCoherence
 import all WeilConjectures.AlgebraicGeometry.SectionDerivedPushpullNormalization
 import WeilConjectures.AlgebraicGeometry.SectionPullNormalizationTransport
+public import WeilConjectures.AlgebraicGeometry.SemilinearSystemModels
 
 /-! # Scalar extension and geometric exchange
 

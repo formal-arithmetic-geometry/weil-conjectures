@@ -4,9 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import WeilConjectures.AlgebraicGeometry.IntegralResidueOrdinaryTensorSquare
-public import WeilConjectures.AlgebraicGeometry.IntegralResidueTensorModel
-import WeilConjectures.AlgebraicGeometry.IntegralResidueOrdinaryTensorNormalization
+public import Mathlib.Algebra.Homology.ComplexShape
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import Mathlib.Analysis.Normed.Field.Basic
+public import Mathlib.Analysis.Normed.Module.Basic
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
+public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
+public import Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import Mathlib.CategoryTheory.Monoidal.Mod
+public import Mathlib.CategoryTheory.Monoidal.Preadditive
+public import Mathlib.Topology.Category.Profinite.Basic
+public import WeilConjectures.AlgebraicGeometry.IntegralReductionTensor
 
 /-! Scalar-counit normalization for the residue pull square.
 

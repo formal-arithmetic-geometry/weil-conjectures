@@ -4,8 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import WeilConjectures.AlgebraicGeometry.ProEtaleOperations
 public import WeilConjectures.AlgebraicGeometry.StrictPerfectCoefficientPackage
+public import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 
 /-!
 # Strict-perfect packages with independent site universes

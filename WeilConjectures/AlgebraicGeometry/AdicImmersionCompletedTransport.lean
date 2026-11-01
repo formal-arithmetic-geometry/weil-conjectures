@@ -7,6 +7,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.AdicImmersionResidueTransport
 import WeilConjectures.AlgebraicGeometry.AdicImmersionResidueComparison
 import WeilConjectures.AlgebraicGeometry.AdicImmersionSliceComparison
+public import WeilConjectures.AlgebraicGeometry.StrictPerfectPackageOnSite
 
 /-! # Completed restriction and residue comparison for an immersion
 

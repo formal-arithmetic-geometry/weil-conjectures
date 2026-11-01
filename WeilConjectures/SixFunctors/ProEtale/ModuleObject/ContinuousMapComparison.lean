@@ -12,6 +12,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 public import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstantHom
 public import WeilConjectures.CategoryTheory.Sites.PullbackLocallyBijective
 public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicIntModuleRightDerivedLowerStar
+public import Mathlib.AlgebraicGeometry.QuasiAffine
 
 /-!
 # The pullback of a condensed ring of continuous maps

@@ -7,6 +7,9 @@ module
 
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraTwist
 public import WeilConjectures.TraceFormula.Frobenius
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleBraided
+public import WeilConjectures.WeilObject.BoundedConstructible.UpperLowerStar
 
 /-!
 

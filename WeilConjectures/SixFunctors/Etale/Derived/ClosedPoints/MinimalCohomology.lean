@@ -5,9 +5,50 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ConstructibleDirectImage
-public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
+public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import Mathlib.Algebra.Order.Floor.Extended
+public import Mathlib.Algebra.Order.Interval.Basic
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.Analysis.Complex.UpperHalfPlane.Basic
+public import Mathlib.Analysis.SpecialFunctions.Bernstein
+public import Mathlib.Analysis.SpecialFunctions.Gamma.Basic
+public import Mathlib.Analysis.SpecialFunctions.Trigonometric.DerivHyp
+public import Mathlib.CategoryTheory.Abelian.RightDerived
+public import Mathlib.CategoryTheory.Sites.GlobalSections
+public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
+public import Mathlib.Combinatorics.Enumerative.DyckWord
+public import Mathlib.Combinatorics.SimpleGraph.Triangle.Removal
+public import Mathlib.Condensed.Discrete.Characterization
+public import Mathlib.Data.NNRat.Floor
+public import Mathlib.Data.Nat.Choose.Multinomial
+public import Mathlib.Geometry.Euclidean.Altitude
+public import Mathlib.NumberTheory.Chebyshev
+public import Mathlib.NumberTheory.Height.NumberField
+public import Mathlib.NumberTheory.Height.Projectivization
+public import Mathlib.NumberTheory.LucasLehmer
+public import Mathlib.NumberTheory.SelbergSieve
+public import Mathlib.RingTheory.Radical.NatInt
+public import Mathlib.Tactic.NormNum.Irrational
+public import Mathlib.Tactic.NormNum.IsCoprime
+public import Mathlib.Tactic.NormNum.IsSquare
+public import Mathlib.Tactic.NormNum.LegendreSymbol
+public import Mathlib.Tactic.NormNum.ModEq
+public import Mathlib.Tactic.NormNum.NatFib
+public import Mathlib.Tactic.NormNum.NatLog
+public import Mathlib.Tactic.NormNum.NatSqrt
+public import Mathlib.Tactic.NormNum.Ordinal
+public import Mathlib.Tactic.NormNum.Parity
+public import Mathlib.Tactic.NormNum.Prime
+public import Mathlib.Tactic.NormNum.RealSqrt
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.LeftTExact
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
 /-!
 # The first cohomology of a bounded below complex

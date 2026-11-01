@@ -8,6 +8,8 @@ module
 public import WeilConjectures.CategoryTheory.Sites.ModuleCohomologyExt
 public import WeilConjectures.SixFunctors.Etale.ForgetModuleCohomology
 public import WeilConjectures.SixFunctors.Etale.Derived.PointUnit
+public import WeilConjectures.SixFunctors.Etale.Gabber
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
 
 /-!
 # Étale cohomology classes with coefficients in a ring are abelian cohomology classes

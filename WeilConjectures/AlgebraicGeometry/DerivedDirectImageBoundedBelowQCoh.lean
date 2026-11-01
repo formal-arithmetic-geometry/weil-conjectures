@@ -6,9 +6,7 @@ Authors: Bin Wu
 
 module
 
-import WeilConjectures.CategoryTheory.PBCFiltration
 
-public import WeilConjectures.AlgebraicGeometry.Cohomology.QuasicoherentExtension
 
 
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
@@ -17,9 +15,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import WeilConjectures.CategoryTheory.TruncationHypercohomology
 import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
-import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentExtensionExtension
-import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
+public import Mathlib.Data.Nat.Totient
 
 /-! # Bounded-below direct image and quasi-coherence
 

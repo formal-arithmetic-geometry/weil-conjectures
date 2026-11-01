@@ -14,21 +14,14 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.Topology.KrullDimension
-public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
-public import WeilConjectures.AlgebraicGeometry.EffectiveCartier
-public import WeilConjectures.AlgebraicGeometry.Modules.AffineComplement
 public import WeilConjectures.AlgebraicGeometry.Modules.FinitePushforward
 public import WeilConjectures.AlgebraicGeometry.Modules.HilbertPolynomial
-public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.Modules.VeryAmple
-public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.CoordinateSection
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LinearCombination
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.SegreTwist
-public import WeilConjectures.Mathlib.Topology.NoetherianSpace
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 
 /-!
 # Ample invertible modules and the Hilbert degree

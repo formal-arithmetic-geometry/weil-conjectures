@@ -10,9 +10,9 @@ public import WeilConjectures.Algebra.Homology.KFlat
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import WeilConjectures.AlgebraicGeometry.QCqsDerivedProjectionIsoUniverses
 import WeilConjectures.AlgebraicGeometry.SelfTorProjectionHomologyTermwise
-import WeilConjectures.Topology.ClosedImmersionPushforwardExact
+public import Mathlib.Combinatorics.Matroid.Init
+public import Mathlib.Data.Nat.Totient
 
 @[expose] public section
 set_option autoImplicit false

@@ -5,8 +5,9 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.DeligneLaumon.Reduction.AffineCurve
 public import WeilConjectures.DeligneLaumon.Reduction.Weights
+public import WeilConjectures.WeilSheaf.StalkExact
+public import WeilConjectures.WeilSheaf.VerdierDualLocalization
 
 /-!
 # Local Frobenius eigenvalues of mixed Weil sheaves

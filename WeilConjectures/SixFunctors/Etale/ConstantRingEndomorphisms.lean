@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.PointUnit
 public import WeilConjectures.SixFunctors.Etale.ForgetModuleCohomology
 public import WeilConjectures.CategoryTheory.Sites.ModuleCohomologyExt
+public import Mathlib.RingTheory.WittVector.IsPoly
 
 /-!
 # Endomorphisms of the constant sheaf `Λ` for a quotient ring `Λ` of `ℤ`

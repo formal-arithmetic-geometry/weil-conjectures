@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.CoefficientConstructibleEtaleModules
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.FiniteLimits
 
 /-! # Inverse image of finite module local systems
 

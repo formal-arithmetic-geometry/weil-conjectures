@@ -11,6 +11,7 @@ import all WeilConjectures.AlgebraicGeometry.AdicStratumCompletionUnit
 import all WeilConjectures.AlgebraicGeometry.ProEtaleOperations
 import WeilConjectures.CategoryTheory.LocalizedModuleExactForSystems
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import WeilConjectures.AlgebraicGeometry.StrictPerfectPackageOnSite
 
 /-! # Slice comparisons for the fixed completed immersion model
 

@@ -5,7 +5,22 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.GaloisActionUnitTransportInputs
+public import Mathlib.Algebra.Order.Algebra
+public import Mathlib.Analysis.SpecialFunctions.Pow.NNReal
+public import Mathlib.CategoryTheory.Adjunction.Basic
+public import Mathlib.CategoryTheory.Adjunction.Mates
+public import Mathlib.CategoryTheory.Adjunction.Unique
+public import Mathlib.CategoryTheory.EffectiveEpi.Comp
+public import Mathlib.CategoryTheory.ExtremalEpi
+public import Mathlib.CategoryTheory.Monoidal.Mon
+public import Mathlib.Combinatorics.Matroid.Init
+public import Mathlib.Combinatorics.Quiver.ReflQuiver
+public import Mathlib.Data.Nat.Choose.Multinomial
+public import Mathlib.NumberTheory.ArithmeticFunction.Misc
+public import Mathlib.Tactic.NormNum.GCD
+public import Mathlib.Tactic.Positivity.Finset
+public import Mathlib.Topology.Sheaves.Init
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Unique
 
 /-!
 # Unit transports under a change of left adjoints

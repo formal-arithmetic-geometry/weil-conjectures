@@ -6,6 +6,12 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.GaloisActionCounit
+public import Mathlib.Algebra.Category.Grp.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
+public import Mathlib.AlgebraicGeometry.Sites.Proetale
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
+public import WeilConjectures.SixFunctors.ProEtale.GaloisCoverTrace
 
 /-!
 # The Galois action of a covering on sections

@@ -6,8 +6,16 @@ Authors: Claude
 module
 
 public import WeilConjectures.ConstructibleSheaf.OpenClosed
-public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LocalSystems
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Subcategory
+public import Mathlib.Algebra.Order.Algebra
+public import Mathlib.Analysis.SpecialFunctions.Pow.NNReal
+public import Mathlib.Data.Nat.Choose.Multinomial
+public import Mathlib.RepresentationTheory.Basic
+public import Mathlib.RepresentationTheory.Intertwining
+public import Mathlib.RepresentationTheory.Rep.Basic
+public import WeilConjectures.ConstructibleSheaf.Biproduct
+public import WeilConjectures.ConstructibleSheaf.KernelCokernel
+public import WeilConjectures.Mathlib.RepresentationTheory.Continuous.Basic
 
 /-!
 # Exactness of the Galois correspondence for finite local systems

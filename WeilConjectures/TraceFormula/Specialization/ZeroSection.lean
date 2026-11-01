@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.NearbyCycles.Exchange
 public import WeilConjectures.TraceFormula.Specialization.DeformationModelNormalCone
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Field
 
 /-!
 

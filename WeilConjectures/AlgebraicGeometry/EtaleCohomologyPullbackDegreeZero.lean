@@ -8,9 +8,9 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.GlobalSections
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KInjective
 public import Mathlib.Algebra.Homology.Single
 import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZeroAux
+public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 
 /-!
 # Degree-zero étale cohomology and pullback

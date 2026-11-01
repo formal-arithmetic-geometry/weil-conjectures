@@ -8,6 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.AdicResidueLiftComparisons
 public import WeilConjectures.CategoryTheory.Sites.FiniteDisjointCover
 import WeilConjectures.CategoryTheory.SiteRestrictionKInjective
 import WeilConjectures.CategoryTheory.Sites.DisjointGluing
+public import WeilConjectures.AlgebraicGeometry.StrictPerfectPackageOnSite
 
 /-! # Derived isomorphisms on a finite disjoint covering
 

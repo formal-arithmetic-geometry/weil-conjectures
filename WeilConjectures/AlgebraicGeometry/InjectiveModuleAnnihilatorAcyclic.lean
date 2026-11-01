@@ -11,6 +11,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RestrictScalars
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 import WeilConjectures.AlgebraicGeometry.InjectiveModuleSheafHCohomology
+public import Mathlib.Algebra.Category.ModuleCat.Adjunctions
 
 /-!
 # Acyclicity of annihilator subsheaves of injective module sheaves

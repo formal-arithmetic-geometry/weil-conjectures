@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.ComparisonSquarePaths
 import WeilConjectures.SixFunctors.ProEtale.BaseChange.ComparisonSquareComponent
 import WeilConjectures.SixFunctors.ProEtale.BaseChange.ComparisonSquareTransport
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
 
 /-! # Compatibility of canonical derived site comparisons
 

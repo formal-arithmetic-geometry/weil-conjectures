@@ -7,9 +7,6 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.Cohomology.MayerVietorisFreeComplex
 import WeilConjectures.AlgebraicGeometry.Cohomology.MayerVietorisOpenRestrictionBijective
-import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
-import WeilConjectures.AlgebraicGeometry.ZariskiExtensionByZeroAdjunction
-import WeilConjectures.AlgebraicGeometry.ZariskiExtensionByZeroExact
 /-! # Ext transport from an open subscheme to its ambient scheme
 
 Source: Stacks Project, Tags 00A7, 01AK, 04J0, and Section 01F7.

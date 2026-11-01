@@ -14,6 +14,11 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.ForgetCoherence
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromy
 public import WeilConjectures.WeilSheaf.Dual
 public import WeilConjectures.WeilSheaf.StalkFrobenius
+public import Mathlib.RepresentationTheory.Coinduced
+public import Mathlib.RingTheory.WittVector.IsPoly
+public import Mathlib.Tactic.Polynomial.Basic
+public import Mathlib.Tactic.ReduceModChar
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 
 /-!
 # The Weil fundamental representation of a lisse Weil sheaf

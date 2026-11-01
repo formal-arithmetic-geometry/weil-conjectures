@@ -5,9 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.Adic.GlobalSectionsHom
 public import WeilConjectures.WeilSheaf.Cohomology
-public import WeilConjectures.WeilSheaf.Finiteness
 
 /-!
 # Compactly supported cohomology in degree zero

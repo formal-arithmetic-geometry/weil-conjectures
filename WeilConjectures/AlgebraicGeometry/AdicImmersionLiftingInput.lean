@@ -9,6 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.AdicStratifiedPerfectData
 import WeilConjectures.AlgebraicGeometry.AdicImmersionCompletedTransport
 import WeilConjectures.AlgebraicGeometry.AdicImmersionResidueLisse
 import WeilConjectures.AlgebraicGeometry.ConstantFieldResidueTensorBounds
+public import WeilConjectures.AlgebraicGeometry.StrictPerfectPackageOnSite
+public import WeilConjectures.CategoryTheory.LocallyConstantFiniteTypeModules
 
 /-! # Immersion transport of lisse residue lifting inputs
 

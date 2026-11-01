@@ -10,6 +10,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReductionLowerShriekIso
 public import WeilConjectures.TraceFormula.CurveLocal.ExchangeRestriction
 public import WeilConjectures.TraceFormula.CurveLocal.SwapProduct
+public import WeilConjectures.AlgebraicGeometry.OverPullbackFiniteType
 
 /-!
 

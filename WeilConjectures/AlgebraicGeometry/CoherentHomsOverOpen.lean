@@ -19,6 +19,7 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 import WeilConjectures.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
 import WeilConjectures.AlgebraicGeometry.SectionsOverQuasiCompactOpen
+public import Mathlib.CategoryTheory.Limits.Shapes.Countable
 
 /-! # Coherent homomorphisms over an open complement
 

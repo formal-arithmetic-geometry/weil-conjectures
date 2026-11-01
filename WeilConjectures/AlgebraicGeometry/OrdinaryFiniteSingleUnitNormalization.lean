@@ -4,7 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Arrows
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Kummer
+public import WeilConjectures.SixFunctors.Etale.Derived.Invertible
 /-!
 Source: blueprint thm-amb-p1-adjunction.proof.md.
 (auxiliary; not a blueprint node).

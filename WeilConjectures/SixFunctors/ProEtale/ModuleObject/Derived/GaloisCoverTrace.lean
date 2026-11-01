@@ -9,7 +9,9 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.AdjunctionTrace
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.GaloisCoverTrace
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Finite
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldLinear
+public import Mathlib.NumberTheory.Padics.Complex
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMapGlobalSections
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.CoefficientLinear
 
 /-!
 # The derived trace of a finite étale Galois covering

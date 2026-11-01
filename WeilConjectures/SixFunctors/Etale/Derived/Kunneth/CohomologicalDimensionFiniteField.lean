@@ -8,8 +8,11 @@ module
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import WeilConjectures.AlgebraicGeometry.Sites.GaloisModule
 public import WeilConjectures.FieldTheory.FiniteFieldGaloisCohomology
-public import WeilConjectures.SixFunctors.Etale.Derived.ForgetCohomologyVanishing
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.CohomologicalDimension
+public import WeilConjectures.AlgebraicGeometry.EtaleModuleCohomologyForget
+public import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.CohomologicalDimensionDefs
+public import WeilConjectures.SixFunctors.Etale.ForgetModuleCohomology
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
 
 /-!
 # The cohomological dimension of a finite field

@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.TraceFormula.Specialization.TraitProduct
 public import WeilConjectures.TraceFormula.Specialization.TraitSlice
+public import Mathlib.RingTheory.PowerSeries.NoZeroDivisors
+public import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!
 

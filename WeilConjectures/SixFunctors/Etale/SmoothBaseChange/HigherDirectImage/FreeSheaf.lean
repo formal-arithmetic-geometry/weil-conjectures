@@ -13,8 +13,8 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyFilteredColimit
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Coinduce
 public import WeilConjectures.CategoryTheory.Sites.CechInjectiveModule
-public import WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomology
-public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 
 /-!
 # Free sheaves under extension by zero and pullback, and cohomology

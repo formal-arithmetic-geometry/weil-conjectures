@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.ComparisonSquarePaths
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategorySquarePasting
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
 
 /-! # Normalization of the etale comparison-square path under exact derivation
 

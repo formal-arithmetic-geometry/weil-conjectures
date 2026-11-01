@@ -5,12 +5,11 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.QuotPowTriangle
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Linear
 public import WeilConjectures.CategoryTheory.DerivedCategory.UniversalCoefficient
-public import WeilConjectures.EtaleCohomology.PoincareDuality.Degreewise
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
+public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.Dual
+public import WeilConjectures.SixFunctors.Etale.Derived.PoincarePairing
 
 /-!
 # The integral degreewise form of Poincaré duality

@@ -6,7 +6,16 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralCompletion
-public import WeilConjectures.SixFunctors.Etale.Derived.IntegralCoefficients
+public import Mathlib.Algebra.Algebra.Defs
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.Algebra.GroupWithZero.NonZeroDivisors
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.NumberTheory.Padics.Complex
+public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Completion
+public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
+public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
 
 /-!
 # Reductions of derived completions

@@ -10,6 +10,8 @@ public import WeilConjectures.AlgebraicGeometry.StrictHenselizationClosedFiberBa
 public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroCoverConstruction
 public import WeilConjectures.TraceFormula.CurveLocal.ModelVanishing
 public import WeilConjectures.AlgebraicGeometry.Curve.SerreDuality
+public import WeilConjectures.RingTheory.TangentCone
+public import WeilConjectures.TraceFormula.CurveLocal.BlowupRestriction
 
 /-!
 

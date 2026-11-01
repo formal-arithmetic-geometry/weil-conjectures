@@ -47,6 +47,8 @@ import WeilConjectures.NumberTheory.Padics.IntegersCosetBasis
 import all WeilConjectures.SixFunctors.ProEtale.IntegralCompletionPresentation
 import WeilConjectures.SixFunctors.ProEtale.IntegralNormalizedRestrictionSquares
 import WeilConjectures.SixFunctors.ProEtale.IntegralSectionProjectionNormalization
+public import WeilConjectures.AlgebraicGeometry.ProEtaleIntegralCoefficientLimit
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 
 /-!
 # Constructibility of all integral reductions from the first

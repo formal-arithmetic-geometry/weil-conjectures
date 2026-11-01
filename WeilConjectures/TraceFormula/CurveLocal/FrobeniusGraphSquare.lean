@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.TraceFormula.CurveLocal.SwapProduct
 public import WeilConjectures.TraceFormula.TraceClass
+public import WeilConjectures.TraceFormula.CurveLocal.Model
+public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroTransfer
 
 /-!
 

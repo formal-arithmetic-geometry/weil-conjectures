@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.IntegralResidueTensorPullPresentation
+public import WeilConjectures.AlgebraicGeometry.IntegralResidueTensorModel
 
 /-! The normalized middle composite for the residue tensor-pull counit.
 

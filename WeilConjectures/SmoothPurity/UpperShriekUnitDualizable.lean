@@ -14,6 +14,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedC
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntegralDualizable
 public import WeilConjectures.SmoothPurity.IntegralDualizingComplexIso
 public import WeilConjectures.SmoothPurity.TateTwistPullback
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionUpperShriek
 
 /-!
 # The relative dualizing complex of a smooth morphism is dualizable

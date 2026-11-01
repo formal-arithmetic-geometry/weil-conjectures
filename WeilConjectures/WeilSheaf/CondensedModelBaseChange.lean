@@ -10,6 +10,7 @@ public import WeilConjectures.WeilSheaf.CondensedModelWeilDerived
 public import WeilConjectures.WeilSheaf.CondensedModelDescent
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.WeaklyEtale
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactConstructible
 public import
 WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebraMapDerivedComp
 

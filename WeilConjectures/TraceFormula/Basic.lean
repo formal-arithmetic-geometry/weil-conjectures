@@ -7,16 +7,10 @@ module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 public import WeilConjectures.CategoryTheory.ModuleObjects.RegularEndBijective
-public import WeilConjectures.CategoryTheory.RingObjects.Condensed.PadicAlgClGlobalSections
-public import WeilConjectures.CategoryTheory.RingObjects.GlobalSections
 public import WeilConjectures.Mathlib.CategoryTheory.Conj
-public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperLowerShriek
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleBraided
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructiblePullback
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek
-public import WeilConjectures.WeilObject.BoundedConstructible.UpperLowerStar
 public import WeilConjectures.WeilObject.Sheaf.Stalk
+public import WeilConjectures.WeilObject.BoundedConstructible.Defs
 
 /-!
 

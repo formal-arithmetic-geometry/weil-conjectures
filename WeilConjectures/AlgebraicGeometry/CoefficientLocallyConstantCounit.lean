@@ -7,6 +7,15 @@ module
 public import WeilConjectures.AlgebraicGeometry.ProEtaleSmallModelComparison
 import Mathlib.CategoryTheory.Sites.LocalProperties
 import WeilConjectures.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
+public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import Mathlib.CategoryTheory.Sites.Finite
+public import Mathlib.CategoryTheory.Sites.Precoverage.Generates
+public import WeilConjectures.AlgebraicGeometry.Morphisms.ProAffineEtale
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.Continuity
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStar
 
 /-! # Classicality of coefficient-sized locally constant set sheaves
 

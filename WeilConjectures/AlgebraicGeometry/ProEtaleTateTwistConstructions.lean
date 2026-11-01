@@ -8,6 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleTateTwistLevels
 import all WeilConjectures.AlgebraicGeometry.ProEtaleTateTwistLevels
 import Mathlib.CategoryTheory.Monoidal.Limits.Colimits
 import Mathlib.CategoryTheory.Filtered.Final
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 
 /-! # Coefficient extension maps, the field colimit and signed Tate twists
 

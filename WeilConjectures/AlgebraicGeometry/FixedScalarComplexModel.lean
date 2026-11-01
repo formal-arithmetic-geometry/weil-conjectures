@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.CoefficientProEtaleTorAmplitude
 public import WeilConjectures.CategoryTheory.ConstantScalarRestrictionTensor
+public import Mathlib.CategoryTheory.Sites.LocalSite
 
 /-! # Fixed-scalar complexes on the coefficient-sized pro-etale site
 

@@ -6,10 +6,13 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.CompExact
-public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalarsComp
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.NonFlatPullFacConjugate
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushIntegralDerivedIso
+public import Mathlib.Algebra.Order.Algebra
+public import Mathlib.Analysis.SpecialFunctions.Pow.NNReal
+public import Mathlib.CategoryTheory.ExtremalEpi
+public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalarsAdjunctionQh
+public import WeilConjectures.CategoryTheory.ModuleObjects.FinitelyPresentedComap
 
 /-!
 # Compatibility of isomorphisms of left derived functors with the counits

@@ -6,7 +6,19 @@ Authors: Claude
 module
 
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Whiskering
-public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
+public import Mathlib.Algebra.Category.Grp.Basic
+public import Mathlib.Algebra.Category.ModuleCat.AB
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.AlgebraicGeometry.Sites.Proetale
+public import Mathlib.Analysis.Normed.Group.Basic
+public import Mathlib.Data.EReal.Inv
+public import Mathlib.Topology.Algebra.InfiniteSum.Order
+public import Mathlib.Topology.MetricSpace.Bounded
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.Defs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 
 /-!
 # Pullbacks of pro-étale sheaves and underlying abelian sheaves

@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.TraceFormula.ShriekTraceFunctionFiniteEtale
 public import WeilConjectures.ZetaFunction.WeilObjectOfLisseTraceFunction
+public import WeilConjectures.TraceFormula.StalkFrobeniusOfId
 
 /-!
 # The local traces of the Weil object of a lisse sheaf as Galois traces

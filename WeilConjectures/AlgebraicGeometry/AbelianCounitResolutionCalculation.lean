@@ -7,7 +7,6 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.AbelianCounitCocycleCalculation
-import WeilConjectures.AlgebraicGeometry.AbelianResolutionComparisonEvaluation
 
 /-! # The abelian counit on a resolution
 

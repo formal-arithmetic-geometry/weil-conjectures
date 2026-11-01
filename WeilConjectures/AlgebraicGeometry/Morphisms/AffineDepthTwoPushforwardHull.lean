@@ -24,6 +24,8 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.DepthTwoHartogsAlgebraCompari
 import WeilConjectures.AlgebraicGeometry.Morphisms.AffineDepthTwoLocallyFreeModel
 import WeilConjectures.AlgebraicGeometry.Morphisms.OpenRestrictionPushforwardComparison
 import WeilConjectures.AlgebraicGeometry.Morphisms.OpenBaseChangeStructureModule
+public import Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
+public import Mathlib.Order.CompletePartialOrder
 
 /-! # Affine depth-two hull of a finite etale pushforward
 

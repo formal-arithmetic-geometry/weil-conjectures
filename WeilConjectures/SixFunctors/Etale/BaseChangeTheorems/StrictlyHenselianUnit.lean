@@ -8,8 +8,11 @@ module
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictlyHenselian
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.DegreeZero
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Ordinary
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomPresheaf
+public import Mathlib.Algebra.Homology.DerivedCategory.Plus
+public import Mathlib.CategoryTheory.Sites.GlobalSections
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.KunnethMap
 
 /-!
 # The unit of `t^* ⊣ Rt_*` at a constant sheaf over a strictly henselian local ring

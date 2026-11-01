@@ -5,8 +5,45 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.DerivedCategory.FlatExtendScalars
 public import WeilConjectures.NumberTheory.Padics.IntegersModPow
+public import Mathlib.Algebra.Field.ULift
+public import Mathlib.Algebra.Module.Torsion.Basic
+public import Mathlib.Algebra.Order.Floor.Extended
+public import Mathlib.Algebra.Order.Interval.Basic
+public import Mathlib.Analysis.Complex.UpperHalfPlane.Basic
+public import Mathlib.Analysis.SpecialFunctions.Bernstein
+public import Mathlib.Analysis.SpecialFunctions.Gamma.Basic
+public import Mathlib.Analysis.SpecialFunctions.Trigonometric.DerivHyp
+public import Mathlib.Combinatorics.Enumerative.DyckWord
+public import Mathlib.Combinatorics.SimpleGraph.Triangle.Removal
+public import Mathlib.Data.NNRat.Floor
+public import Mathlib.Data.Nat.Choose.Multinomial
+public import Mathlib.Geometry.Euclidean.Altitude
+public import Mathlib.NumberTheory.Chebyshev
+public import Mathlib.NumberTheory.Height.NumberField
+public import Mathlib.NumberTheory.Height.Projectivization
+public import Mathlib.NumberTheory.LucasLehmer
+public import Mathlib.NumberTheory.SelbergSieve
+public import Mathlib.RingTheory.DedekindDomain.Basic
+public import Mathlib.RingTheory.Flat.TorsionFree
+public import Mathlib.RingTheory.Henselian
+public import Mathlib.RingTheory.Radical.NatInt
+public import Mathlib.RingTheory.RingHom.Flat
+public import Mathlib.RingTheory.SimpleRing.Principal
+public import Mathlib.Tactic.NormNum.Irrational
+public import Mathlib.Tactic.NormNum.IsCoprime
+public import Mathlib.Tactic.NormNum.IsSquare
+public import Mathlib.Tactic.NormNum.LegendreSymbol
+public import Mathlib.Tactic.NormNum.ModEq
+public import Mathlib.Tactic.NormNum.NatFib
+public import Mathlib.Tactic.NormNum.NatLog
+public import Mathlib.Tactic.NormNum.NatSqrt
+public import Mathlib.Tactic.NormNum.Ordinal
+public import Mathlib.Tactic.NormNum.Parity
+public import Mathlib.Tactic.NormNum.Prime
+public import Mathlib.Tactic.NormNum.RealSqrt
+public import Mathlib.Topology.Sheaves.Init
+public import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!
 

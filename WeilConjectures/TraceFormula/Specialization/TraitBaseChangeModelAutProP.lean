@@ -8,6 +8,7 @@ module
 public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModelAutGalois
 public import WeilConjectures.FieldTheory.TameLaurentSeries
 public import WeilConjectures.RepresentationTheory.ProPGroupPadicMatrix
+public import Mathlib.FieldTheory.Galois.Profinite
 
 /-!
 

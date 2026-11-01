@@ -10,6 +10,7 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.SliceRestrictionFlat
 import WeilConjectures.Algebra.Homology.RingedSiteRestrictionKFlat
 import WeilConjectures.Algebra.Homology.SliceTensorNatural
 import WeilConjectures.AlgebraicGeometry.CoefficientTorFlatModel
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.FiniteLimits
 
 /-!
 # Local and global finite Tor dimension on a quasi-compact pro-etale site

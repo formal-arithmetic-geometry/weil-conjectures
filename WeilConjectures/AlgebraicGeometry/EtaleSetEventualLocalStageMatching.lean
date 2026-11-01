@@ -10,12 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSetSheafComparison
 public import WeilConjectures.AlgebraicGeometry.FullAffineEtaleSite
 import WeilConjectures.AlgebraicGeometry.EtaleSetEventualLocalStageCompatibility
 import WeilConjectures.AlgebraicGeometry.EtaleSetLocalStageImageEquations
-import WeilConjectures.AlgebraicGeometry.AffineEtaleInverseImageComparison
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
-import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
-import WeilConjectures.AlgebraicGeometry.FullAffineEtaleTopos
-import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Eventual matching of local stage representatives
 

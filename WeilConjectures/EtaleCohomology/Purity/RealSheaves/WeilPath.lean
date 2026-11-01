@@ -5,10 +5,38 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FrobeniusTransport
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.PathTransport
-public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius.Points
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Basic
+public import Mathlib.Algebra.Order.Floor.Extended
+public import Mathlib.Algebra.Order.Interval.Basic
+public import Mathlib.Analysis.Complex.UpperHalfPlane.Basic
+public import Mathlib.Analysis.SpecialFunctions.Bernstein
+public import Mathlib.Analysis.SpecialFunctions.Gamma.Basic
+public import Mathlib.Analysis.SpecialFunctions.Trigonometric.DerivHyp
+public import Mathlib.Combinatorics.Enumerative.DyckWord
+public import Mathlib.Combinatorics.SimpleGraph.Triangle.Removal
+public import Mathlib.Data.NNRat.Floor
+public import Mathlib.Geometry.Euclidean.Altitude
+public import Mathlib.NumberTheory.Chebyshev
+public import Mathlib.NumberTheory.Height.NumberField
+public import Mathlib.NumberTheory.Height.Projectivization
+public import Mathlib.NumberTheory.LucasLehmer
+public import Mathlib.NumberTheory.SelbergSieve
+public import Mathlib.RingTheory.Radical.NatInt
+public import Mathlib.Tactic.NormNum.Irrational
+public import Mathlib.Tactic.NormNum.IsCoprime
+public import Mathlib.Tactic.NormNum.IsSquare
+public import Mathlib.Tactic.NormNum.LegendreSymbol
+public import Mathlib.Tactic.NormNum.ModEq
+public import Mathlib.Tactic.NormNum.NatFib
+public import Mathlib.Tactic.NormNum.NatLog
+public import Mathlib.Tactic.NormNum.NatSqrt
+public import Mathlib.Tactic.NormNum.Ordinal
+public import Mathlib.Tactic.NormNum.Parity
+public import Mathlib.Tactic.NormNum.Prime
+public import Mathlib.Tactic.NormNum.RealSqrt
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.GeometricFiber
+public import WeilConjectures.Mathlib.CategoryTheory.Galois.Prorepresentability
 
 /-!
 # Base points for the Weil fundamental representation

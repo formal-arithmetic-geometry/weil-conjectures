@@ -8,6 +8,7 @@ module
 public import WeilConjectures.TraceFormula.CurveLocal.ReductionCoefficientDatum
 public import WeilConjectures.TraceFormula.CurveLocal.ReductionExchangeRestriction
 public import WeilConjectures.TraceFormula.CurveLocal.StalkExchangeRestriction
+public import WeilConjectures.TraceFormula.SupportedRestrictionIntegral
 
 /-!
 

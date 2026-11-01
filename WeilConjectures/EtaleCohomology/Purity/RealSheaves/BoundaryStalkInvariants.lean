@@ -7,8 +7,8 @@ module
 
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.BoundaryGenericRep
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.BoundaryNeighbourhoodData
-public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.UnramifiedBoundary
 public import WeilConjectures.WeilSheaf.BoundaryStalkSpecialization
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafRepresentation
 
 /-!
 # Boundary stalks of direct images as inertia invariants

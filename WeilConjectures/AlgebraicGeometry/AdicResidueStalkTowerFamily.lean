@@ -8,6 +8,9 @@ public import WeilConjectures.AlgebraicGeometry.AdicResidueAlgebraTower
 import WeilConjectures.AlgebraicGeometry.AdicEtaleStalkLevels
 import all WeilConjectures.AlgebraicGeometry.AdicPerfectModelCompleteReduction
 import WeilConjectures.AlgebraicGeometry.LisseCoefficientConstructible
+public import WeilConjectures.AlgebraicGeometry.AdicConstructibleFiniteReductions
+public import WeilConjectures.AlgebraicGeometry.StrictPerfectPackageOnSite
+public import WeilConjectures.CategoryTheory.LocallyConstantFiniteTypeModules
 
 /-! # Normalized algebraic stalk towers on a weakly contractible covering
 

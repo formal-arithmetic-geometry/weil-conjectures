@@ -6,18 +6,15 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.StrictHenselization
 
 
-public import WeilConjectures.AlgebraicGeometry.StrictHenselizationRestriction
 import WeilConjectures.AlgebraicGeometry.StrictLocalMateContinuityPresentation
 import WeilConjectures.AlgebraicGeometry.DerivedEtaleCohomologyLimit
-import WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
-import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
-import WeilConjectures.AlgebraicGeometry.FibreProductNeighbourhoodLimit
-import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
-import WeilConjectures.AlgebraicGeometry.StrictLocalGermRestrictionIso
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
+public import Mathlib.Algebra.Order.BigOperators.Ring.Finset
+public import Mathlib.CategoryTheory.Sites.GlobalSections
+public import Mathlib.Data.NNReal.Defs
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
 
 /-! # The strict-local base-change mate on global cohomology
 

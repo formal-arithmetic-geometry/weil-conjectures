@@ -22,6 +22,7 @@ public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroCoverConstr
 public import WeilConjectures.TraceFormula.CurveLocal.ModelVanishing
 public import WeilConjectures.SixFunctors.Etale.Derived.StrictLocalizationPoints
 public import WeilConjectures.TraceFormula.TransverseBoundary.PuncturedTraitChart
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationLimitDimension
 
 /-!
 

@@ -7,13 +7,6 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModuleAdjunction
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
-import WeilConjectures.AlgebraicGeometry.SpecFieldPointResidueField
-import WeilConjectures.ConstructibleSheaf.Defs
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import WeilConjectures.AlgebraicGeometry.ConstructibleFieldFiniteSeparableConstantDatum
 import WeilConjectures.AlgebraicGeometry.ConstructibleFieldFiniteSeparableConstantCore
 

@@ -11,6 +11,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SquareCo
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.Derived
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.UpperStarCompCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ResidueFieldTransportBaseChange
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 
 /-!
 # The base change map and the finite-coefficient comparison

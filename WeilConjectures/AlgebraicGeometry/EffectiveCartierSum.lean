@@ -5,12 +5,13 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.Blowup.BlowupUniversal
 
 
 public import WeilConjectures.AlgebraicGeometry.FiniteOverField
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
 public import WeilConjectures.Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.Combinatorics.Quiver.ReflQuiver
+public import Mathlib.Order.CompletePartialOrder
 
 /-!
 # Sums of effective Cartier divisors

@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.ScalarExtension
+public import Mathlib.Tactic.Polynomial.Basic
 
 /-!
 # Extension of scalars between finite extensions of `ℚ_ℓ`

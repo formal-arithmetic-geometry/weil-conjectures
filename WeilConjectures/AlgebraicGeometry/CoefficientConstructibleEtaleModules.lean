@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.EtaleConstantRingModuleEquivalen
 public import WeilConjectures.AlgebraicGeometry.FiniteLocallyClosedStratification
 public import WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
 public import WeilConjectures.CategoryTheory.ConstantCoefficientScalarExtension
+public import Mathlib.Order.CompletePartialOrder
 
 /-! # Constructible etale modules in the coefficient universe
 

@@ -20,6 +20,7 @@ public import WeilConjectures.NumberTheory.Padics.IntegersNoetherian
 public import WeilConjectures.SixFunctors.Etale.Derived.AdicSystem
 public import WeilConjectures.TraceFormula.FixedPointScheme
 public import WeilConjectures.TraceFormula.Correspondence
+public import WeilConjectures.CategoryTheory.DerivedCategory.FlatExtendScalars
 
 /-!
 

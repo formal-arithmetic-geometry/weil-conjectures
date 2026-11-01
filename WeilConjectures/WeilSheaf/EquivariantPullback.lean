@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.WeilSheaf.CurvePullback
 public import WeilConjectures.WeilSheaf.StalkComparison
+public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
 /-!
 # Stalks of Weil sheaves pulled back to a scheme over a finite extension
