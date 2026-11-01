@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Reduction
-public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DerivedHomConstantTensor
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DerivedHomConstantTensorIso
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.FiniteStage
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekConstantTensor
 
