@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.IsLE
+public import WeilConjectures.CategoryTheory.DerivedCategory.IsLE
 public import WeilConjectures.SixFunctors.Etale.Derived.ClosedSupportAmplitude
 public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageAmplitude
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.EtaleDuality
