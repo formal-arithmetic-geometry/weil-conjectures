@@ -28,6 +28,10 @@ by an orientation of `f`:
 - `ProEtale.CondensedRing.integralCompOpenImmersionOrientation`: for
   `ψ : 𝒪_{E,X}(d)[2d] ⟶ Rf^! 𝒪_{E,Y}`, the morphism
   `𝒪_{E,X}(d)[2d] ⟶ Rf^! 𝒪_{E,Y} ≅ Rf^! Rj^! 𝒪_{E,Z} ≅ R(f ≫ j)^! 𝒪_{E,Z}`.
+- `ProEtale.CondensedRing.integersToPadicAlgClUpperShriekUnitIso_comp_openImmersion`: the
+  coefficient comparison `T(Rf^! 𝒪_E) ≅ Rf^! ℚ̄_ℓ` is compatible with the composition
+  isomorphisms and with purity for `j`, by the pasting lemma
+  `CategoryTheory.map_map_comp_comp_exchange_eq'`.
 
 ## Unproved steps
 
@@ -38,17 +42,6 @@ The following steps are stated and `sorry`ed:
   `f ≫ j`. This is the finite statement that the orientation of the diagonal argument is
   compatible with composition with an open immersion, together with the compatibility of the
   reduction comparisons `etaleReductionUpperShriekIso` with the composition isomorphisms.
-- `ProEtale.CondensedRing.integersToPadicAlgClUpperShriekUnitIso_comp_openImmersion`: the
-  coefficient comparison `T(Rf^! 𝒪_E) ≅ Rf^! ℚ̄_ℓ` (`integersToPadicAlgClUpperShriekUnitIso`) is
-  compatible with the composition isomorphisms and with purity for the open immersion `j`.
-  It follows from the pasting lemma `CategoryTheory.map_map_comp_comp_exchange_eq'` applied to
-  `boundedConstructibleUpperShriekExtendScalars_comp_app`,
-  `boundedConstructibleUpperShriekToPadicAlgCl_comp_app` (proved from the two lower-shriek
-  compatibilities below) and
-  `extendScalars_map_upperShriekUnit_comp_integersToPadicAlgClUpperShriekUnitIso`, but the
-  instantiation does not elaborate yet: the unit objects of the two presentations of the
-  `E`-complexes (`PadicSubfieldConstructible` and `Dᵇc(-)⟦E⟧`) occurring in
-  `integersToPadicAlgClUpperShriekUnitIso` exceed the recursion depth when unified.
 - `ProEtale.CondensedRing.boundedConstructibleLowerShriekExtendScalarsIso_comp` and
   `ProEtale.CondensedRing.boundedConstructibleLowerShriekToPadicAlgClIso_comp`: the coefficient
   comparisons of `Rf_!` are compatible with the composition isomorphisms.
@@ -264,6 +257,23 @@ lemma integersToPadicAlgClUpperShriekUnitIso_hom :
     boundedConstructibleUpperShriekExtendScalars ℓ E f := rfl
   simp only [Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom, asIso_hom, Iso.symm_hom, e]
 
+/-- `integersToPadicAlgClUpperShriekUnitIso_hom` with the extension of scalars typed as
+`boundedConstructibleToPadicAlgCl` on `Dᵇc(-)⟦E⟧` and the unit of `Dᵇc(Y)⟦E⟧` written out, the
+form in which the exchanges `boundedConstructibleUpperShriekToPadicAlgCl` are composed. -/
+lemma integersToPadicAlgClUpperShriekUnitIso_hom_eq :
+    (integersToPadicAlgClUpperShriekUnitIso ℓ E f).hom =
+      (boundedConstructibleToPadicAlgCl X.left ℓ E).map
+          ((boundedConstructibleUpperShriekExtendScalars ℓ E f).app (𝟙_ _) ≫
+            (ContinuousMapRingObj.boundedConstructibleUpperShriek ℓ E f).map
+              (Functor.Monoidal.εIso (boundedConstructibleExtendScalars Y.left ℓ E)).inv) ≫
+        (boundedConstructibleUpperShriekToPadicAlgCl ℓ E f).app
+          (𝟙_ (Dᵇc(Y.left)⟦Profinite.continuousMapRingObj E⟧)) ≫
+        (boundedConstructibleUpperShriek ℓ f).map
+          (Functor.Monoidal.εIso (constructibleToPadicAlgCl Y.left ℓ E)).inv := by
+  refine (integersToPadicAlgClUpperShriekUnitIso_hom ℓ E f).trans ?_
+  unfold boundedConstructibleToPadicAlgCl
+  with_reducible_and_instances rfl
+
 end ExchangeComposition
 
 section OpenImmersionUnit
@@ -335,8 +345,46 @@ theorem integersToPadicAlgClUpperShriekUnitIso_comp_openImmersion :
     (integersToPadicAlgClUpperShriekUnitIso ℓ E f).hom ≫
       (boundedConstructibleUpperShriek ℓ f).map
         (boundedConstructibleUpperShriekUnitIso_padicAlgCl ℓ j).inv ≫
-      (boundedConstructibleUpperShriekComp_padicAlgCl ℓ f j).inv.app _ :=
-  sorry
+      (boundedConstructibleUpperShriekComp_padicAlgCl ℓ f j).inv.app _ := by
+  have hj := extendScalars_map_upperShriekUnit_comp_integersToPadicAlgClUpperShriekUnitIso ℓ j E
+  simp only [integersToPadicAlgClUnitIso, Iso.trans_inv, Functor.mapIso_inv, Functor.comp_map,
+    Iso.app_inv, Category.assoc] at hj
+  -- the hypotheses are matched up to instances only: the units of the two presentations
+  -- (`PadicSubfieldConstructible`, `Dᵇc(-)⟦E⟧`) agree only after unfolding instances
+  have key := map_map_comp_comp_exchange_eq'
+    (boundedConstructibleUpperShriekExtendScalars ℓ E f)
+    (boundedConstructibleUpperShriekExtendScalars ℓ E j)
+    (boundedConstructibleUpperShriekExtendScalars ℓ E (f ≫ j))
+    (boundedConstructibleUpperShriekToPadicAlgCl ℓ E f)
+    (boundedConstructibleUpperShriekToPadicAlgCl ℓ E j)
+    (boundedConstructibleUpperShriekToPadicAlgCl ℓ E (f ≫ j))
+    (boundedConstructibleUpperShriekComp_padicIntegers ℓ E.1 f j).inv
+    (boundedConstructibleUpperShriekComp ℓ E f j).inv
+    (boundedConstructibleUpperShriekComp_padicAlgCl ℓ f j).inv
+    (boundedConstructibleUpperShriekUnitIso_padicIntegers ℓ E.1 j).inv
+    (boundedConstructibleUpperShriekUnitIso_padicAlgCl ℓ j).inv
+    (Functor.Monoidal.εIso (boundedConstructibleExtendScalars Y.left ℓ E)).inv
+    (Functor.Monoidal.εIso (boundedConstructibleExtendScalars Z.left ℓ E)).inv
+    (Functor.Monoidal.εIso (constructibleToPadicAlgCl Y.left ℓ E)).inv
+    (Functor.Monoidal.εIso (constructibleToPadicAlgCl Z.left ℓ E)).inv
+    (integersToPadicAlgClUpperShriekUnitIso ℓ E f).hom
+    (integersToPadicAlgClUpperShriekUnitIso ℓ E j).hom
+    (integersToPadicAlgClUpperShriekUnitIso ℓ E (f ≫ j)).hom
+    (by with_reducible_and_instances exact integersToPadicAlgClUpperShriekUnitIso_hom_eq ℓ E f)
+    (by with_reducible_and_instances exact integersToPadicAlgClUpperShriekUnitIso_hom_eq ℓ E j)
+    (by with_reducible_and_instances
+      exact integersToPadicAlgClUpperShriekUnitIso_hom_eq ℓ E (f ≫ j))
+    (by with_reducible_and_instances
+      exact boundedConstructibleUpperShriekExtendScalars_comp_app ℓ E f j (𝟙_ _))
+    (by with_reducible_and_instances
+      exact boundedConstructibleUpperShriekToPadicAlgCl_comp_app ℓ E f j (𝟙_ _))
+    (by exact hj)
+  refine Eq.trans ?_ (key.trans ?_)
+  · simp only [Functor.comp_map]
+    unfold boundedConstructibleToPadicAlgCl
+    with_reducible_and_instances rfl
+  · unfold boundedConstructibleToPadicAlgCl
+    with_reducible_and_instances rfl
 
 /-- The extension of scalars to `ℚ̄_ℓ` of the integral orientation of `f ≫ j` induced by `ψ` is
 the orientation of `f ≫ j` induced by the extension of scalars of `ψ`. -/
