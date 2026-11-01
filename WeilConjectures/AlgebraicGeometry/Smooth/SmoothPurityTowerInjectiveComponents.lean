@@ -51,6 +51,10 @@ import WeilConjectures.CategoryTheory.Sites.CohomologyRightDerivedSections
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.Comp
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHomology
+public import Mathlib.Algebra.Homology.DerivedCategory.KInjective
+public import Mathlib.Algebra.Homology.HomologicalComplexLimits
+public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Products
 
 /-!
 # Acyclic components of injective coefficient towers
@@ -83,6 +87,11 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 variable {T S : Scheme.{t}} (g : T ⟶ S)
+
+/-- The standard ordinary localization of the actual tower category.
+Source: blueprint proof, step 1 (blueprint: det-sp-tower-injective-components). -/
+instance spTowerHasDerived (T : Scheme.{t}) :
+    HasDerivedCategory (spCoefficientTowers l E T) := HasDerivedCategory.standard _
 
 private theorem presheafPushforward_finiteLimits.{v, w, v₁, w₁, v₂, w₂}
     {C : Type w₁} [Category.{v₁} C] {D : Type w₂} [Category.{v₂} D]
