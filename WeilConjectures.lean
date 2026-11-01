@@ -26623,6 +26623,7 @@ public import WeilConjectures.ZetaLinearAlgebra.DetTrace
 public import WeilConjectures.ZetaLinearAlgebra.Fatou
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Exact
+public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.FrobeniusModuleWeights
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Hom
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.LocalPolynomial
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Map
