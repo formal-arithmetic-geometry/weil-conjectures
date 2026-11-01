@@ -74,6 +74,14 @@ Source: ILO XI §4.3 (blueprint: def-trf-oriented-nearby-cycles). -/
 def etaleTopology (X : Scheme.{u}) : GrothendieckTopology (EtaleSite.{u, v} X) :=
   (AsSmall.down : EtaleSite.{u, v} X ⥤ X.Etale).inducedTopology X.smallEtaleTopology
 
+/-- The transported small étale site has finite limits.
+Source: ILO XI §4.3 (blueprint: def-trf-oriented-nearby-cycles).
+Proof: transport the finite limits of `Scheme.Etale` along `AsSmall.equiv`.
+The equivalence identifies their cones and their universal properties. -/
+theorem etaleSite_hasFiniteLimits (X : Scheme.{u}) :
+    HasFiniteLimits (EtaleSite.{u, v} X) := by
+  sorry
+
 attribute [instance] etaleSite_hasFiniteLimits
 
 /-- The actual scheme-theoretic base-change functor on the transported small étale sites.
@@ -82,7 +90,24 @@ def etaleBaseChange {T B : Scheme.{u}} (f : T ⟶ B) :
     EtaleSite.{u, v} B ⥤ EtaleSite.{u, v} T :=
   AsSmall.down ⋙ MorphismProperty.Over.pullback @Etale ⊤ f ⋙ AsSmall.up
 
+/-- Base change preserves finite limits on the étale sites.
+Source: ILO XI §4.3 (blueprint: def-trf-oriented-nearby-cycles).
+Proof: scheme fibre products commute with finite limits in the slice. The equivalences
+`AsSmall.equiv` preserve those limits. -/
+theorem etaleBaseChange_preservesFiniteLimits {T B : Scheme.{u}} (f : T ⟶ B) :
+    PreservesFiniteLimits (etaleBaseChange.{u, v} f) := by
+  sorry
+
 attribute [instance] etaleBaseChange_preservesFiniteLimits
+
+/-- Base change is continuous for the transported étale topologies.
+Source: ILO XI §4.3 (blueprint: def-trf-oriented-nearby-cycles).
+Proof: base change preserves étale morphisms and jointly surjective families. Thus it
+preserves the generating étale covers; finite-limit preservation gives continuity.
+Transport the covers through `AsSmall.equiv`. -/
+theorem etaleBaseChange_isContinuous {T B : Scheme.{u}} (f : T ⟶ B) :
+    (etaleBaseChange.{u, v} f).IsContinuous (etaleTopology B) (etaleTopology T) := by
+  sorry
 
 attribute [instance] etaleBaseChange_isContinuous
 
@@ -146,6 +171,16 @@ def p₂ {T B : Scheme.{u}} (f : T ⟶ B) :=
 Source: ILO XI §4.3 (blueprint: def-trf-oriented-nearby-cycles). -/
 def identity (E : Type (s + 1)) [Category.{s} E] : GeometricMorphism E E :=
   ⟨𝟭 E, 𝟭 E, Adjunction.id, inferInstance⟩
+
+/-- A type-(c) covering becomes invertible in every sheaf.
+Source: ILO XI Lemma 1.2(ii) (blueprint: def-trf-oriented-nearby-cycles).
+Proof: its covering diagonal equalizes its two pullback projections. The sheaf
+condition therefore makes the restriction bijective, hence invertible in `Type`. -/
+theorem map_toFirst_isIso {T B : Scheme.{u}} (f : T ⟶ B)
+    (H : VanishingTopos.{u, v} f) (V : EtaleSite.{u, v} B) :
+    IsIso (H.obj.map (OrientedProduct.toFirst (etaleBaseChange f) (𝟭 _)
+      (OrientedProduct.middle (etaleBaseChange f) (𝟭 _) V)).op) := by
+  sorry
 
 attribute [instance] map_toFirst_isIso
 

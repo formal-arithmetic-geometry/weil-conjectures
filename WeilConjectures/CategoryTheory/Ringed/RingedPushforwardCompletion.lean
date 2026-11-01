@@ -74,7 +74,11 @@ public import Mathlib.CategoryTheory.Functor.Derived.RightDerived
 
 import Mathlib.CategoryTheory.Adjunction.Unique
 import WeilConjectures.CategoryTheory.Augmented.AugmentedCechTensorPullback
-import WeilConjectures.CategoryTheory.RingedToposMorphism.RingedToposDerivedAdjunctionOfUniverses
+import WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
+import WeilConjectures.CategoryTheory.RingedDerivedRestriction
+import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
 import WeilConjectures.CategoryTheory.Ringed.RingedDerivedClosedSymmetricMonoidal
 
 -- The successor-universe sheafification instance gets stuck on coefficient-universe goals.
@@ -101,12 +105,4 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory
 
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.defeqAttrib.useBackward true in
-attribute [-instance] hasSheafCompose_of_preservesMulticospan
-  hasSheafComposeEssentiallySmallSite in
 end CategoryTheory
