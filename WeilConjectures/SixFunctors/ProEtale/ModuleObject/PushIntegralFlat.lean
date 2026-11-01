@@ -5,10 +5,8 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicIntModuleRightDerivedLowerStar
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralFlat
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ContinuousMapCoefficientSections
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ForgetRightDerivedLowerStar
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ContinuousMapComparison
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PadicAlgClSections
 
 /-!
@@ -18,17 +16,17 @@ Let `ℓ` be a prime, `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ` with 
 a scheme. The coefficient ring objects `𝒪_{E,X} = p_X^* 𝒪̲_E` and `E_X = p_X^* E̲` on `X_proét`
 are flat abelian sheaves: tensoring with them is exact
 (`AlgebraicGeometry.ProEtale.preservesFiniteLimits_tensorLeft_padicIntegersRingObj` and
-`AlgebraicGeometry.ProEtale.preservesFiniteLimits_tensorLeft_continuousMapRingObj`).
+`AlgebraicGeometry.ProEtale.preservesFiniteLimits_tensorLeft_continuousMapRingObj`). The same
+holds for `E_X` with `E` any finite extension of `ℚ_ℓ`
+(`preservesFiniteLimits_tensorLeft_continuousMapRingObj_of_finiteDimensional`) and for `𝒪_{E,X}`
+with `E` any subfield of `ℚ̄_ℓ`
+(`preservesFiniteLimits_tensorLeft_padicIntegersRingObj_of_algebra`).
 
 Indeed, `T_X ≅ C(-, T)_X` for `T = 𝒪_E, E`
 (`AlgebraicGeometry.ProEtale.isIso_continuousMapComparison`),
 and the sections `C(U, T)` of the latter are torsion-free, hence flat, abelian groups, so that
 tensoring with it preserves monomorphisms
 (`CategoryTheory.Sheaf.preservesMonomorphisms_tensorLeft_of_flat`), and it is right exact.
-
-Consequently the derived pushforwards of `𝒪_E`- and `E`-module objects commute with forgetting
-to abelian sheaves
-(`AlgebraicGeometry.ProEtale.CondensedRing.rightDerivedLowerStarCompMapDerivedCategoryForgetIso`).
 -/
 
 @[expose] public section
@@ -105,5 +103,38 @@ instance preservesFiniteLimits_tensorLeft_continuousMapRingObj :
       (tensorLeft (condensedRingObj (Profinite.continuousMapRingObj E.1) X)) :=
   have := preservesMonomorphisms_tensorLeft_continuousMapComparison X E.1
   preservesFiniteLimits_tensorLeft_of_preservesMonomorphisms X _
+
+namespace CondensedRing
+
+/-- For a finite extension `E` of `ℚ_ℓ`, `E_X = p_X^* E̲` is flat over `ℤ`. -/
+theorem preservesFiniteLimits_tensorLeft_continuousMapRingObj_of_finiteDimensional
+    (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] (X : Scheme.{u}) :
+    PreservesFiniteLimits
+      (tensorLeft (condensedRingObj (Profinite.continuousMapRingObj.{u} E) X)) := by
+  let : IsUltrametricDist E := IsUltrametricDist.of_normedAlgebra ℚ_[ℓ]
+  have : CharZero E := charZero_of_injective_algebraMap (algebraMap ℚ_[ℓ] E).injective
+  have := preservesMonomorphisms_tensorLeft_continuousMapComparison X E
+  exact preservesFiniteLimits_tensorLeft_of_preservesMonomorphisms X _
+
+/-- For a subfield `E` of `ℚ̄_ℓ`, `𝒪_{E,X} = p_X^* 𝒪̲_E` is flat over `ℤ`. -/
+theorem preservesFiniteLimits_tensorLeft_padicIntegersRingObj_of_algebra (E : Type) [Field E]
+    [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)]
+    (X : Scheme.{u}) :
+    PreservesFiniteLimits
+      (tensorLeft (condensedRingObj (Profinite.padicIntegersRingObj.{u} ℓ E) X)) := by
+  let := PadicAlgCl.normedFieldOfAlgebra ℓ E
+  let : NormedAlgebra ℚ_[ℓ] E :=
+    { norm_smul_le c x := by
+        change ‖algebraMap E (PadicAlgCl ℓ) (c • x)‖ ≤
+          ‖c‖ * ‖algebraMap E (PadicAlgCl ℓ) x‖
+        rw [Algebra.smul_def, map_mul, ← IsScalarTower.algebraMap_apply, norm_mul,
+          PadicAlgCl.norm_extends] }
+  let : IsUltrametricDist E := IsUltrametricDist.of_normedAlgebra ℚ_[ℓ]
+  have : CharZero E := charZero_of_injective_algebraMap (algebraMap ℚ_[ℓ] E).injective
+  have : IsAddTorsionFree E := inferInstance
+  have := preservesMonomorphisms_tensorLeft_continuousMapComparison X (PadicAlgCl.integers ℓ E)
+  exact preservesFiniteLimits_tensorLeft_of_preservesMonomorphisms X _
+
+end CondensedRing
 
 end AlgebraicGeometry.ProEtale

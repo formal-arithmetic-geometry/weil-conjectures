@@ -7,7 +7,8 @@ module
 
 public import WeilConjectures.CategoryTheory.Triangulated.RecollementTriangle
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleClosedPushforward
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionIhom
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenClosedConservative
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionProjection
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarShift
 
 /-!

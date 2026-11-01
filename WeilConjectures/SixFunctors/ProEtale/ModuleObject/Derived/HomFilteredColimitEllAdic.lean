@@ -7,13 +7,12 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.IntegralLfpLocallyFreeResolution
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.ConstructibleExtContinuity
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.HomFilteredColimitConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyFreeOfFinitelyPresentedField
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushIntegralFlat
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicAlgClFlat
-
-import all WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 
 /-!
 # Continuity of `Hom` out of constructible sheaves with `ℓ`-adic coefficients
@@ -31,13 +30,15 @@ They follow from the dévissage
 `homCommutesWithFilteredColimits_singleFunctor_of_isConstructibleModuleObject`,
 whose two hypotheses are verified here:
 
-* flatness of `Λ_X` over `ℤ`, from the torsion-freeness of continuous maps into `Λ`
-  (`AlgebraicGeometry.ProEtale.preservesMonomorphisms_tensorLeft_continuousMapComparison`);
+* flatness of `Λ_X` over `ℤ`
+  (`WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushIntegralFlat`);
 * the case of lisse sheaves `L` on a scheme with noetherian underlying space: for the fields `E`
   and `ℚ̄_ℓ` such an `L` is locally free, and for `𝒪_E` it has a resolution
   `0 ⟶ F₁ ⟶ F₀ ⟶ L ⟶ 0` by locally free sheaves (`integral_lfp_locallyFree_resolution`); locally
   free sheaves are handled by
-  `homCommutesWithFilteredColimits_singleFunctor_of_isLocallyFree`.
+  `homCommutesWithFilteredColimits_singleFunctor_of_isLocallyFree` (the case of `E` is
+  `homCommutesWithFilteredColimits_singleFunctor_continuousMapRingObj`, in
+  `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.ConstructibleExtContinuity`).
 -/
 
 @[expose] public section
@@ -53,53 +54,6 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 open Scheme
 
 variable (ℓ : ℕ) [Fact ℓ.Prime]
-
-/-! ### Flatness -/
-
-/-- For a finite extension `E` of `ℚ_ℓ`, `E_X = p_X^* E̲` is flat over `ℤ`. -/
-theorem preservesFiniteLimits_tensorLeft_continuousMapRingObj_of_finiteDimensional
-    (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] (X : Scheme.{u}) :
-    PreservesFiniteLimits
-      (tensorLeft (condensedRingObj (Profinite.continuousMapRingObj.{u} E) X)) := by
-  let : IsUltrametricDist E := IsUltrametricDist.of_normedAlgebra ℚ_[ℓ]
-  have : CharZero E := charZero_of_injective_algebraMap (algebraMap ℚ_[ℓ] E).injective
-  have := preservesMonomorphisms_tensorLeft_continuousMapComparison X E
-  exact preservesFiniteLimits_tensorLeft_of_preservesMonomorphisms X _
-
-/-- For a subfield `E` of `ℚ̄_ℓ`, `𝒪_{E,X} = p_X^* 𝒪̲_E` is flat over `ℤ`. -/
-theorem preservesFiniteLimits_tensorLeft_padicIntegersRingObj_of_algebra (E : Type) [Field E]
-    [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)]
-    (X : Scheme.{u}) :
-    PreservesFiniteLimits
-      (tensorLeft (condensedRingObj (Profinite.padicIntegersRingObj.{u} ℓ E) X)) := by
-  let := PadicAlgCl.normedFieldOfAlgebra ℓ E
-  let : NormedAlgebra ℚ_[ℓ] E :=
-    { norm_smul_le c x := by
-        change ‖algebraMap E (PadicAlgCl ℓ) (c • x)‖ ≤
-          ‖c‖ * ‖algebraMap E (PadicAlgCl ℓ) x‖
-        rw [Algebra.smul_def, map_mul, ← IsScalarTower.algebraMap_apply, norm_mul,
-          PadicAlgCl.norm_extends] }
-  let : IsUltrametricDist E := IsUltrametricDist.of_normedAlgebra ℚ_[ℓ]
-  have : CharZero E := charZero_of_injective_algebraMap (algebraMap ℚ_[ℓ] E).injective
-  have : IsAddTorsionFree E := inferInstance
-  have := preservesMonomorphisms_tensorLeft_continuousMapComparison X (PadicAlgCl.integers ℓ E)
-  exact preservesFiniteLimits_tensorLeft_of_preservesMonomorphisms X _
-
-/-! ### Lisse sheaves -/
-
-/-- Blueprint `sk-lem-constructible-ext-continuity`, lisse case for `E`: on a scheme with
-noetherian underlying space, `Hom(L[0], -[n])` commutes with filtered colimits for every locally
-finitely presented `E_X`-module `L`, which is locally free. -/
-theorem homCommutesWithFilteredColimits_singleFunctor_continuousMapRingObj (E : Type)
-    [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] (X : Scheme.{u})
-    [TopologicalSpace.NoetherianSpace X]
-    (L : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.continuousMapRingObj.{u} E) X))
-    (hL : IsLocallyFinitelyPresented (condensedRingObj (Profinite.continuousMapRingObj E) X) L) :
-    DerivedCategory.HomCommutesWithFilteredColimits.{u + 1}
-      ((DerivedCategory.singleFunctor _ 0).obj L) :=
-  have := preservesFiniteLimits_tensorLeft_continuousMapRingObj_of_finiteDimensional ℓ E X
-  homCommutesWithFilteredColimits_singleFunctor_of_isLocallyFree _ X (continuous_lf ℓ E X L hL)
 
 /-- Blueprints `sk-lem-constructible-ext-continuity` and `sk-lem-int-ext` (1), lisse case for
 `𝒪_E`: on a scheme with noetherian underlying space, `Hom(L[0], -[n])` commutes with filtered
