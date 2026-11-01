@@ -345,7 +345,4 @@ private theorem exactDerivedAdjunction
   rw [hunit, Category.assoc, ← hn, ← DerivedCategory.Q.map_comp_assoc]
   rfl
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.defeqAttrib.useBackward true in
 end CategoryTheory

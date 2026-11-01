@@ -164,7 +164,6 @@ def etaleSumTensorTestRealizationComplex (T : Scheme.{u}) (A : Type (u + 1))
       (constantModuleHomRingIso T.smallEtaleTopology A).inv).mapHomologicalComplex
         (ComplexShape.up ℤ)
 
-set_option backward.isDefEq.respectTransparency false in
 /-- The actual direct-sum total tensor, with Koszul differential.
 Source: Stacks Tag 012Z (blueprint: lem-pur-etale-sum-tensor-test). -/
 def etaleSumTensorTestTotal (T : Scheme.{u}) (A : Type (u + 1)) [CommRing A]

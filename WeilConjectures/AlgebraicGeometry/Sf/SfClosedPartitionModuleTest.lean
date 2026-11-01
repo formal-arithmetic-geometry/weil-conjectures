@@ -125,5 +125,4 @@ private theorem finite_stalk_of_isZero {Y : Scheme.{u}} {A : Type u} [CommRing A
     ModuleCat.isZero_iff_subsingleton.mp hz
   infer_instance
 
-set_option linter.unusedVariables false in
 end AlgebraicGeometry.Scheme

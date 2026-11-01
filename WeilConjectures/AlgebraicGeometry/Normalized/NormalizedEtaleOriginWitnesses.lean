@@ -44,5 +44,4 @@ variable (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
   (rho : ∀ (m n : ℕ) (h : n ≤ m),
     (normalizedOriginReduction (Scheme.ProEt.topology T) d m n h).obj (M m) ≅ M n)
 
-include rho in
 end AlgebraicGeometry.ProEtale

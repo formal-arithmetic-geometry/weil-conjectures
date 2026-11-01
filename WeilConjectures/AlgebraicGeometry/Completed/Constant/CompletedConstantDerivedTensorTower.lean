@@ -234,8 +234,6 @@ private theorem tensor_left_quasiIso
   intro i
   exact (ht' i).of_iso (CochainComplex.mapBifunctorMappingCone₂Iso K α F)
 
-set_option maxRecDepth 2048 in
-set_option backward.isDefEq.respectTransparency false in
 end SheafOfModules
 
 namespace AlgebraicGeometry.Scheme

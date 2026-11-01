@@ -127,5 +127,4 @@ instance ordinaryFiniteDegreeZero_isLE (A : Type (u + 1)) [CommRing A] (T : Sche
     unfold ordinaryFiniteDegreeZero
     infer_instance
 
-set_option backward.isDefEq.respectTransparency false in
 end AlgebraicGeometry.Etale

@@ -1293,13 +1293,5 @@ namespace AlgebraicGeometry.ProEtale
 variable (B : Type) [CommRing B] [TopologicalSpace B] [IsTopologicalRing B]
   [DiscreteTopology B] [Finite B]
 
-attribute [local instance] presentationSiteSmall etale_bounded_iso constantModel_bounded_iso in
 -- Fix the coefficient universes only within these private proofs.
-attribute [-instance] WeilConjectures.integralOperationsAbSheafify
-  WeilConjectures.integralOperationsAbLocallyBijective
-  WeilConjectures.integralOperationsSiteSmall
-  WeilConjectures.integralOperationsCommHasDerivedCategory
-  WeilConjectures.integralCoefficientAbLocallyBijective
-  WeilConjectures.integralCoefficientAbSheafify
-  WeilConjectures.integralCoefficientRingSheafify in
 end AlgebraicGeometry.ProEtale

@@ -822,8 +822,6 @@ attribute [local irreducible] cbcDerivedOpenShriek cbcProperOpenGamma
   AdicCoefficientDatum.pullComp AdicCoefficientDatum.pullId
   AdicCoefficientDatum.pushComp AdicCoefficientDatum.pushId HasDerivedCategory.standard
 
-set_option backward.isDefEq.respectTransparency true in
-set_option maxHeartbeats 1600000 in
 -- The concrete derived categories make the kernel check of the iso composites expensive.
 end
 

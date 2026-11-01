@@ -469,12 +469,4 @@ private lemma scalarIdIso_naturality {A N : ringedSiteModules.{u} (𝓡 R)}
 omit [EssentiallySmall.{u} C] in
 open ScalarComparisonProof
 
-omit [EssentiallySmall.{u} C] in
-omit [EssentiallySmall.{u} C] in
-omit [EssentiallySmall.{u} C] in
-omit [EssentiallySmall.{u} C] in
-omit [EssentiallySmall.{u} C] in
-omit [EssentiallySmall.{u} C] in
-omit [EssentiallySmall.{u} C] [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
-  [HasSheafify J AddCommGrpCat.{u}] in
 end SheafOfModules

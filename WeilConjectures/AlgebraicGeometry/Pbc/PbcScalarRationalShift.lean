@@ -52,9 +52,6 @@ Source: blueprint order 1307 (blueprint: lem-pbc-scalar-rational-exactness). -/
       ObjectProperty.ι (PbcIsBoundedConstructibleComplete T (pbcIntegralDatum l E)) ⋙
         pbcEmbeddingAmbientTensor l E F i T := Iso.refl _
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option linter.unusedVariables false in
 /-- The actual tensor Hom formula agrees with tensoring integral arrows by one.
 Source: blueprint order 1307 (blueprint: lem-pbc-scalar-rational-exactness).
 Proof: put the scalar equal to one in pbcRationalScalarHom_exists. The normalized
@@ -80,14 +77,5 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option linter.unusedVariables false in
 attribute [local irreducible] pbcRationalScalarHom
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-omit [IsNoetherian T] dim inv in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end ScalarShift
 end AlgebraicGeometry.Scheme

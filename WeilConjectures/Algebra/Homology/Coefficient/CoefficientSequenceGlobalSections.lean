@@ -73,10 +73,6 @@ section GenericLocalizedSquare
 
 universe uc vc ud vd ue ve uf vf ug vg dc dd de df dg
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
 end GenericLocalizedSquare
 
 variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
@@ -568,19 +564,4 @@ private theorem coefficientTowerComparison
 
 end GenericTower
 
-omit [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}] in
-omit [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}] in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-omit [J.WEqualsLocallyBijective AddCommGrpCat.{w}] in
-omit [EssentiallySmall.{w} C] in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-omit [EssentiallySmall.{w} C] in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end SheafOfModules

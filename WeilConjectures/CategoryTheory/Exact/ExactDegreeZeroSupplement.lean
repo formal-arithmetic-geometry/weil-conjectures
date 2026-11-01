@@ -34,6 +34,12 @@ variable {V W X : Type*} [Category V] [Category W] [Category X]
 
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
+/-- The named interface has the same objects as the usual single functor.
+(blueprint: def-geo-exact-degree-zero-interface) -/
+theorem obj_eq (M : V) : obj V M = (DerivedCategory.singleFunctor V 0).obj M := by
+  unfold obj
+  rfl
+
 /-- Compatibility with the canonical composition and isomorphism comparisons.
 Source: Mathlib exact-functor single comparison and the source library's single coherence.
 (blueprint: def-geo-exact-degree-zero-interface) -/

@@ -95,20 +95,8 @@ private theorem coefficient_jump (n k q : ℕ) :
     simp only [Category.assoc]
     rfl
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 variable (X : Scheme.{t}) (B : Type t) [CommRing B]
   (r : ℕ) (b : Fin r → B)
   (C : CochainComplex (SheafOfModules.{t + 1} (adicModuleRing X B)) ℤ)
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end AlgebraicGeometry.Scheme

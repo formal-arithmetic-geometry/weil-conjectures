@@ -270,5 +270,4 @@ variable (V : Sheaf J' (Type u) ⥤ Sheaf J (Type u)) (adj : L ⊣ V)
 variable [hL : PreservesFiniteLimits L]
 attribute [local irreducible] derivedPull pull change
 
-include V adj hL in
 end CategoryTheory.ConstantCompletion

@@ -146,6 +146,5 @@ attribute [local irreducible] SheafOfModules.monoidalCategory RingedTensor.tenso
 
 attribute [instance] AdjointLift.right_additive
 
-set_option maxHeartbeats 600000 in
 -- Comparing the supplied scalar presentation and derived adjunction uses dependent instances.
 end CategoryTheory.RingedDerivedComparisons
