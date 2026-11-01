@@ -183,21 +183,4 @@ variable {C₀ : Type sa} [Category.{sb} C₀] {J : GrothendieckTopology C₀}
 
 end ScalarData
 
-/-- The normalized models can be chosen simultaneously over every field, scheme,
-map and inclusion in the fixed universe bound, retaining all quotient transitions.
-Source: current blueprint integral transport; Stacks 06YS, 06YY and 0941
-(blueprint: lem-trf-effective-quotient-model-descent).
-Proof: choose the evaluation calculus for every field and scheme by
-lem-coef-derived-system-evaluation-calculus and its normalized Roos construction
-by lem-trf-roos-adjunction-quotient-normalization. Choose the primitive pullback
-and scalar models of lem-trf-primitive-quotient-realization-comparisons for those
-same choices. The preceding representative-descent assertion makes their
-comparisons independent of all representatives and common refinements. The
-strict generator transition, triple association and identity equations survive
-localization as in effectiveQuotientModelScalarCoherence. Thus these simultaneous
-choices retain exactly the prescribed model normalization. The ambient effectivity
-assertion and the constructibility assertion apply to each choice. -/
--- STATEMENT-DISPUTED: inherits the universal-presentation normalization obstruction of
--- primitiveQuotientRealizationComparisons; finite derived evaluations do not fix the
--- whole-system presentation isomorphism. See the report and the existing T6 counterexample.
 end WeilConjectures
