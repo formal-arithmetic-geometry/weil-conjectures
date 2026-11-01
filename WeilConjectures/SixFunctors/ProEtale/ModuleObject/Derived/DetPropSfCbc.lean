@@ -131,6 +131,10 @@ import WeilConjectures.AlgebraicGeometry.Condensed.CondensedQcqsPushforwardConti
 import WeilConjectures.Algebra.Homology.Ringed.RingedDerivedSliceLocalization
 import WeilConjectures.AlgebraicGeometry.Cartesian.CartesianCoefficients
 import WeilConjectures.AlgebraicGeometry.Completed.CompletedCondensedCoefficients
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleUpperStar
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.NoetherianProperFiniteness
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Constructible
+public import WeilConjectures.SixFunctors.RationalIntegralGenerators
 
 /-!
 # Compact-support base change
@@ -178,6 +182,33 @@ attribute [local instance 40000] AlgebraicGeometry.ProEtale.sheafBraidedCategory
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
+/-- The existing ordinary condensed-module functors, organized in the existing exchange formalism.
+Pullback is total left derivation, direct image is total right derivation, and open extension is
+exact termwise descent. The adjunctions and every pullback compositor are the published ones;
+only the existing exact/total comparison transports the right side of the open adjunction.
+Source: `det-prop-sf-cbc`, exchange definition and proof steps 9--10
+(blueprint: det-prop-sf-cbc). -/
+noncomputable def compactSupportCondensedFormalism : CompactSupportFormalism := by
+  letI (X : Scheme.{u}) :
+      ((Scheme.ProEt.topology X).W (A := Ab.{u + 1})).IsMonoidal :=
+    CategoryTheory.GrothendieckTopology.W.monoidal
+  exact
+  { obj := fun X ↦ D Λ X
+    pb := fun f ↦ detSfDerivedPullback Λ f
+    pbId := fun T ↦ leftDerivedUpperStarId Λ T
+    pbComp := fun f g ↦ leftDerivedUpperStarComp Λ f g
+    pbComp_assoc := fun f g h K ↦ leftDerivedUpperStarComp_assoc_app Λ f g h K
+    pbId_comp := fun f K ↦ leftDerivedUpperStarComp_id_left_app Λ f K
+    pbComp_id := fun f K ↦ leftDerivedUpperStarComp_id_right_app Λ f K
+    pf := fun f ↦ (lowerStar Λ f).rightDerivedFunctor
+    adj := fun f ↦ derivedUpperStarLowerStarAdjunction Λ f
+    sh := fun j _ ↦ by
+      haveI : IsOpenImmersion j := Fact.out
+      exact J Λ j
+    shAdj := fun j _ ↦ by
+      haveI : IsOpenImmersion j := Fact.out
+      exact (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j).ofNatIsoRight
+        (leftDerivedUpperStarIsoMapDerivedCategory Λ j).symm }
 
 /-- Canonical change from an arbitrary Cartesian open square to its literal pullback.
 The isomorphism `sq.isoPullback` supplies an equivalence of the exact derived pullback functors.
@@ -226,6 +257,75 @@ noncomputable def compactSupportOpenBaseChangeIso
     Functor.isoWhiskerRight
       (leftDerivedUpperStarIsoMapDerivedCategory Λ (pullback.fst f g)).symm
       D(((c.baseChange g).i)_!open⟦Λ⟧)
+
+/-- Counit naturality detects isomorphisms between objects on which the counit is invertible. -/
+private theorem isIso_of_open_counits
+    {C D : Type*} [Category C] [Category D] {L : C ⥤ D} {R : D ⥤ C}
+    (adj : L ⊣ R) {A B : D} (m : A ⟶ B)
+    [IsIso (adj.counit.app A)] [IsIso (adj.counit.app B)] [IsIso (R.map m)] :
+    IsIso m := by
+  have hc : IsIso (adj.counit.app A ≫ m) := by
+    have h := adj.counit.naturality m
+    simp only [Functor.id_map, Functor.comp_map] at h
+    rw [← h]
+    infer_instance
+  exact IsIso.of_isIso_comp_left (adj.counit.app A) m
+
+/-- The canonical open mate is invertible if its endpoints are related by an open comparison.
+This is the essential-image and counit-naturality argument of det-prop-sf-cbc, step 8. -/
+private theorem isIso_open_baseChange_of_comparison
+    (F : CompactSupportFormalism)
+    {U' U Z' Z : Scheme.{u}} {t : U' ⟶ U} {l : U' ⟶ Z'} {r : U ⟶ Z}
+    {b : Z' ⟶ Z} [IsOpenImmersion l] [IsOpenImmersion r]
+    (sq : IsPullback t l r b)
+    [IsIso (F.shAdj l).unit] [IsIso (F.shAdj r).unit]
+    (beta : F.sh r ⋙ F.pb b ≅ F.pb t ⋙ F.sh l) :
+    IsIso (F.baseChange t l r b sq.w).natTrans := by
+  let adj := F.shAdj l
+  let ff := adj.fullyFaithfulLOfIsIsoUnit
+  have := ff.full
+  have := ff.faithful
+  have hcomp : ∀ M, IsIso ((F.baseChange t l r b sq.w).natTrans.app M) := by
+    intro M
+    let m := (F.baseChange t l r b sq.w).natTrans.app M
+    have hs : IsIso (adj.counit.app ((F.sh r ⋙ F.pb b).obj M)) :=
+      adj.isIso_counit_app_of_iso (beta.app M)
+    have ht : IsIso (adj.counit.app ((F.pb t ⋙ F.sh l).obj M)) :=
+      adj.isIso_counit_app_of_iso (Iso.refl _)
+    have hm : IsIso ((F.pb l).map m) := F.isIso_map_baseChange_app t l r b sq.w M
+    exact isIso_of_open_counits adj m
+  exact NatIso.isIso_of_isIso_app _
+
+/-- The compact-support formalism has extension-by-zero base change on every chosen Cartesian
+open square. The proof transports the literal pullback comparison along `sq.isoPullback`.
+Exact descent preserves the invertible open-adjunction units, hence open extension is fully
+faithful. Both endpoints of the canonical mate lie in its essential image by the transported
+comparison. Its restriction is invertible by `isIso_map_baseChange_app`. Counit naturality
+expresses the mate as a composite of invertible maps, proving invertibility of the actual mate.
+Source: `det-prop-sf-cbc`, proof steps 8--9 (blueprint: det-prop-sf-cbc). -/
+@[instance] theorem compactSupportCondensedFormalism_hasBaseChange :
+    (compactSupportCondensedFormalism Λ).HasBaseChange := by
+  let F := compactSupportCondensedFormalism Λ
+  have hunit {U Z : Scheme.{u}} (j : U ⟶ Z) [IsOpenImmersion j] :
+      IsIso (F.shAdj j).unit := by
+    have : IsIso (openImmersionLowerShriekUpperStarAdjunction Λ j).unit :=
+      (openImmersionLowerShriekUpperStarAdjunction Λ j).unit_isIso_of_L_fully_faithful
+    have : IsIso (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j).unit :=
+      inferInstance
+    change IsIso ((derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j).unit ≫
+      Functor.whiskerLeft _ (leftDerivedUpperStarIsoMapDerivedCategory Λ j).inv)
+    infer_instance
+  refine ⟨?_⟩
+  intro U' U Z' Z t l r b _ _ sq
+  have := hunit l
+  have := hunit r
+  let beta : J Λ r ⋙ detSfDerivedPullback Λ b ≅
+      detSfDerivedPullback Λ t ⋙ J Λ l :=
+    Functor.isoWhiskerLeft (J Λ r) (leftDerivedUpperStarIsoMapDerivedCategory Λ b) ≪≫
+      condensedOpenBaseChangeDerivedIso (Mon.mk Λ) r b ≪≫
+      (compactSupportOpenPullbackTransport Λ sq).symm ≪≫
+      Functor.isoWhiskerRight (leftDerivedUpperStarIsoMapDerivedCategory Λ t).symm (J Λ l)
+  exact isIso_open_baseChange_of_comparison F sq beta
 
 /-- The proper exchange on the extension-by-zero of a bounded-constructible object.
 The proof reduces the proper mate to finite scalar models, lifts through derived Nakayama, and
@@ -276,7 +376,15 @@ theorem condensed_compactSupport_extension_boundedConstructible
     (hK : boundedConstructible (condensedRingObj Λ X) K) :
     boundedConstructible (condensedRingObj Λ c.Z)
       (D((c.i)_!open⟦Λ⟧).obj K) := by
-  sorry
+  have _ := hΛ
+  let e (n : ℤ) :=
+    ((openImmersionLowerShriek Λ c.i).mapDerivedCategoryHomologyFunctorIso n).app K
+  obtain ⟨⟨a, b, hab⟩, hc⟩ := (mem_boundedConstructible_iff _ K).1 hK
+  refine (mem_boundedConstructible_iff _ _).2
+    ⟨⟨a, b, fun i hi ↦ ?_⟩, fun n ↦ ?_⟩
+  · exact ((openImmersionLowerShriek Λ c.i).map_isZero (hab i hi)).of_iso (e i).symm
+  · exact IsConstructibleModuleObject.of_iso (e n)
+      (isConstructibleModuleObject_openImmersionLowerShriek_obj Λ c.i _ (hc n))
 
 /-- Proper finiteness sends a bounded-constructible extension-by-zero object to the base.
 This is the Noetherian proper-finiteness part, before arbitrary pullback.
@@ -300,7 +408,21 @@ theorem condensed_compactSupport_proper_finiteness
     (hExt : boundedConstructible (condensedRingObj Λ c.Z)
       (D((c.i)_!open⟦Λ⟧).obj K)) :
     boundedConstructible (condensedRingObj Λ Y) ((detSfCompactSupport Λ c).obj K) := by
-  sorry
+  have _ := g
+  rcases hΛ with h | h | h
+  · obtain ⟨E, ⟨e⟩⟩ := h
+    exact nppf_transport e c.g
+      (proper_pushforward_mem_boundedConstructible ell E _ (Or.inl rfl) c.g)
+      _ hExt
+  · obtain ⟨E, ⟨e⟩⟩ := h
+    exact nppf_transport e c.g
+      (proper_pushforward_mem_boundedConstructible ell E _ (Or.inr (Or.inl rfl)) c.g)
+      _ hExt
+  · obtain ⟨e⟩ := h
+    exact nppf_transport e c.g
+      (proper_pushforward_mem_boundedConstructible ell
+        (⟨⊥, inferInstance⟩ : PadicAlgCl.FiniteIntermediateField ell) _ (Or.inr (Or.inr rfl)) c.g)
+      _ hExt
 
 /-- Pullback along the arbitrary base map preserves the bounded-constructible proper endpoint.
 This is the coefficient pullback argument, separated from proper finiteness.
@@ -325,7 +447,8 @@ theorem condensed_compactSupport_pullback_constructible
     (hM : boundedConstructible (condensedRingObj Λ Y) M) :
     boundedConstructible (condensedRingObj Λ Y')
       ((detSfDerivedPullback Λ g).obj M) := by
-  sorry
+  have _ := hΛ
+  exact boundedConstructible_leftDerivedUpperStar_obj_of_scheme Λ g M hM
 
 /-- The left compact-support endpoint combines extension-by-zero, proper finiteness and pullback.
 Source: `det-prop-sf-cbc`, constructibility step (blueprint: det-prop-sf-cbc). -/

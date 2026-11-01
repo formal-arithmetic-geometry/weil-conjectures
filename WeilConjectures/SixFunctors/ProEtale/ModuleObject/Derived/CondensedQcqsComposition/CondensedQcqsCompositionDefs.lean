@@ -23,6 +23,8 @@ public import WeilConjectures.CategoryTheory.InverseMateEquivalence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.AmbientQcqsExchangeCanonicalShifts
 public import WeilConjectures.CategoryTheory.Shift.RestrictFullyFaithful
 public import WeilConjectures.CategoryTheory.DerivedCategory.Shift.IdIso
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CondensedOpenProper.CondensedProperOpenQcqsCalculus
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CondensedQcqsComposition.QcqsTowerNormalizationLaw
 /-! # Condensed compact-support composition over quasi-separated bases
 
 Definition interface (blueprint: def-zl-qcqs-composition-defs).
@@ -54,6 +56,18 @@ section
 -- Match the coefficient-instance presentation in the bounded qcqs comparison theorem.
 attribute [local instance] Sheaf.monoidalCategory Sheaf.symmetricCategory
 
+/-- The existing ordinary bounded constructible category with finite constant local models.
+Source: latest blueprint, coefficient/category convention
+(blueprint: lem-zl-condensed-shriek-composition-qcqs). -/
+abbrev C (X : Scheme.{u}) :=
+  ConstantModelBoundedConstructible (Profinite.padicAlgClRingObj ℓ) X
+
+/-- The existing bounded constructible object predicate, with no completion condition.
+Source: latest blueprint, coefficient/category convention
+(blueprint: lem-zl-condensed-shriek-composition-qcqs). -/
+abbrev bc (X : Scheme.{u}) :=
+  constantModelBoundedConstructible (Profinite.padicAlgClRingObj ℓ) X
+
 /-- A coherent compactification system for the given morphism. The comparison is fixed
 on every proper refinement and satisfies identity and cocycle equations.
 Source: Stacks 0F7J, refinement comparisons in the source proof, Step 3
@@ -75,6 +89,40 @@ structure System {X Y : Scheme.{u}} (f : X ⟶ Y) where
   comparison_id : ∀ c : Compactification f, comparison c c = Iso.refl _
   comparison_cocycle : ∀ c d e : Compactification f,
     comparison c d ≪≫ comparison d e = comparison c e
+
+/-- The actual restriction of Rp_* j_! to bounded constructible objects.
+Source: source proof, Steps 2--3 (blueprint: lem-zl-condensed-shriek-composition-qcqs). -/
+abbrev System.support {X Y : Scheme.{u}} {f : X ⟶ Y} (S : System ℓ f)
+    (c : Compactification f) : C ℓ X ⥤ C ℓ Y :=
+  (bc ℓ Y).lift ((bc ℓ X).ι ⋙
+    rightDerivedLowerShriekOfCompactification (Profinite.padicAlgClRingObj ℓ) c) (S.preserves c)
+
+/-- The specified compositor on a compatible compactification tower. Its middle map
+is the unique identity-on-open normalized proper/open interchange, not an arbitrary map.
+Source: source proof, Step 2 (blueprint: lem-zl-condensed-shriek-composition-qcqs). -/
+def TowerNormalized {X Z Y : Scheme.{u}} {h : X ⟶ Z} {g : Z ⟶ Y}
+    (Sh : System ℓ h) (Sg : System ℓ g) (Sgh : System ℓ (h ≫ g))
+    (α : ∀ (c : Compactification h) (d : Compactification g)
+      (e : Compactification (h ≫ g)), Sh.support ℓ c ⋙ Sg.support ℓ d ≅ Sgh.support ℓ e) :
+    Prop :=
+  ∀ (T : Compactification.Triangle h g) [QuasiCompact (T.cf.g ≫ T.cg.i)] (K : C ℓ X),
+    TowerNormalizationLaw
+      ((openImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) T.cf.i).mapDerivedCategory)
+      ((lowerStar (Profinite.padicAlgClRingObj ℓ) T.cf.g).rightDerivedFunctor)
+      ((openImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) T.cg.i).mapDerivedCategory)
+      ((lowerStar (Profinite.padicAlgClRingObj ℓ) T.cg.g).rightDerivedFunctor)
+      ((openImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) T.q).mapDerivedCategory)
+      ((lowerStar (Profinite.padicAlgClRingObj ℓ) T.p).rightDerivedFunctor)
+      ((openImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) T.cfg.i).mapDerivedCategory)
+      ((lowerStar (Profinite.padicAlgClRingObj ℓ) (T.p ≫ T.cg.g)).rightDerivedFunctor)
+      ((lowerStar (Profinite.padicAlgClRingObj ℓ) T.cfg.g).rightDerivedFunctor)
+      (openFactor (Profinite.padicAlgClRingObj ℓ) T.cf.i T.q T.cfg.i T.i_q).hom
+      (rightDerivedLowerStarComp (Profinite.padicAlgClRingObj ℓ) T.p T.cg.g).hom
+      (Functor.rightDerivedFunctorNatIso
+        (eqToIso (congrArg (fun t ↦ lowerStar (Profinite.padicAlgClRingObj ℓ) t) T.p_g))).hom
+      (fun M m ↦ compositionInterchangeIsNormalized (Profinite.padicAlgClRingObj ℓ) T.cf.g T.cg.i
+        (detSfBoundaryCompactification (middle T)) M m)
+      K.obj ((α T.cf T.cg T.cfg).hom.app K).hom
 
 end
 

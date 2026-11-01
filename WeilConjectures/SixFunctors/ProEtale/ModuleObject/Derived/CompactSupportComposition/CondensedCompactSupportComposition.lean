@@ -216,6 +216,50 @@ def ComparisonLawsFor (k : Type u) [Field k]
 
 set_option maxHeartbeats 2000000 in
 -- The simultaneous coherence predicate elaborates many nested derived-functor comparisons.
+
+/-- The open compositor is the canonical uniqueness-of-left-adjoint comparison.
+Source: blueprint composition, consecutive open factors
+(blueprint: sk-thm-sf-comp-composition). -/
+def openComp {X Y Z : Scheme.{u}} (i : X ⟶ Y) (j : Y ⟶ Z)
+    [IsOpenImmersion i] [IsOpenImmersion j] :
+    D((i)_!open⟦Λ⟧) ⋙ D((j)_!open⟦Λ⟧) ≅ D((i ≫ j)_!open⟦Λ⟧) :=
+  Adjunction.leftAdjointUniq
+    ((derivedOpenImmersionLowerShriekUpperStarAdjunction Λ i).comp
+      (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j))
+    ((derivedOpenImmersionLowerShriekUpperStarAdjunction Λ (i ≫ j)).ofNatIsoRight
+      (Functor.mapDerivedCategoryNatIso (upperStarComp Λ i j) ≪≫
+        Functor.mapDerivedCategoryCompIso _ _))
+
+/-- The canonical open compositor transported along an equality of scheme morphisms.
+Source: blueprint composition, identification of the composite open factor
+(blueprint: sk-thm-sf-comp-composition). -/
+@[irreducible] def openFactor {X Y Z : Scheme.{u}} (i : X ⟶ Y) (j : Y ⟶ Z) (h : X ⟶ Z)
+    [IsOpenImmersion i] [IsOpenImmersion j] [IsOpenImmersion h] (e : i ≫ j = h) :
+    D((i)_!open⟦Λ⟧) ⋙ D((j)_!open⟦Λ⟧) ≅ D((h)_!open⟦Λ⟧) :=
+  openComp Λ i j ≪≫ eqToIso (by subst h; rfl)
+
+/-- The intermediate compactification in a compactification triangle.
+Source: blueprint composition, proper/open interchange
+(blueprint: sk-thm-sf-comp-composition). -/
+def middle {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
+    (T : Compactification.Triangle f g) : Compactification (T.cf.g ≫ T.cg.i) where
+  Z := T.cfg.Z
+  i := T.q
+  g := T.p
+  comm := T.isPullback.w
+  isProper := inferInstance
+  isOpenImmersion := inferInstance
+
+/-- The canonical identity comparison for the identity compactification.
+Source: blueprint composition, identity normalization
+(blueprint: sk-thm-sf-comp-composition). -/
+@[irreducible] def identity (X : Scheme.{u}) :
+    rightDerivedLowerShriekOfCompactification Λ (Compactification.ofIsProper (𝟙 X)) ≅ 𝟭 _ :=
+  Functor.isoWhiskerRight (derivedOpenImmersionLowerShriekId Λ X) _ ≪≫
+    Functor.leftUnitor _ ≪≫
+      conjugateIsoEquiv (derivedUpperStarLowerStarAdjunction Λ (𝟙 X))
+        (Adjunction.id) (leftDerivedUpperStarId Λ X).symm
+
 /-- Existence of coherent comparisons, with the full targets expressed by preservation.
 The witnesses and conditions are preservation, canonical refinement normalization, composition,
 proper/open normalization, compactification independence, units, associativity, arbitrary
