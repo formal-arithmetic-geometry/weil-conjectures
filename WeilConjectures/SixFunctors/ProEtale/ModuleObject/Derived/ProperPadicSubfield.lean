@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperNoetherianBase
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaPadicAlgCl
-import WeilConjectures.Tactic.ExactModProofs
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaPadicIntegers
 
 /-!
 # Proper base change and the projection formula for `E`-sheaves
@@ -20,9 +20,9 @@ proper projection formula for bounded constructible `E`-complexes from the integ
   square `g' ≫ p = p' ≫ g` with `p` proper over noetherian bases over fields in which `ℓ` is
   invertible, the base change map with coefficients `E` is invertible at every bounded
   constructible `E`-complex;
-* `ProEtale.CondensedRing.isIso_projectionMap_continuousMapRingObj_of_integral`: if the
-  projection map is an isomorphism on bounded constructible `𝒪_E`-complexes, it is an
-  isomorphism on bounded constructible `E`-complexes.
+* `ProEtale.CondensedRing.isIso_projectionMap_continuousMapRingObj_of_boundedConstructible`: for
+  a proper `p`, the projection map with coefficients `E` is invertible at bounded constructible
+  `E`-complexes.
 
 A bounded constructible `E`-complex `K` has an integral model: `K ≅ E ⊗ᴸ_{𝒪_E} K₀` for a bounded
 constructible `𝒪_E`-complex `K₀`
@@ -98,19 +98,16 @@ variable {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ 
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
-set_option maxHeartbeats 1000000 in
--- the concrete coefficient rings are unfolded when comparing elaborations from different files
-/-- **The `E` projection formula from the integral one**: if the projection map
-`Rp_* K ⊗ᴸ M ⟶ Rp_*(K ⊗ᴸ Lp^* M)` is an isomorphism on bounded constructible `𝒪_E`-complexes,
-it is an isomorphism on bounded constructible `E`-complexes. -/
-theorem isIso_projectionMap_continuousMapRingObj_of_integral (E : FiniteIntermediateField ℓ)
-    (p : X ⟶ Y)
-    (h : ∀ (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
-        (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X.left)))
-      (M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y.left) Ab.{u + 1})
-        (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) Y.left))),
-      boundedConstructible _ K → boundedConstructible _ M →
-        IsIso (((projectionMap (Profinite.padicIntegersRingObj ℓ E.1) p.left).app K).app M))
+/-- **The projection formula for `E`** (blueprint `det-thm-sfb-proper-base-change-rational` (3),
+for `Λ = E`): for a proper `p : X ⟶ Y` and bounded constructible `E`-complexes `K` on `X` and
+`M` on `Y`, the projection map `Rp_* K ⊗ᴸ M ⟶ Rp_*(K ⊗ᴸ Lp^* M)` is an isomorphism. The
+complexes have integral models `E ⊗ᴸ_{𝒪_E} K₀` and `E ⊗ᴸ_{𝒪_E} M₀`
+(`exists_derivedExtendScalars_iso_integralModel`), at which the projection map is invertible
+since the integral one is at `(K₀, M₀)`
+(`isIso_projectionMap_padicIntegersRingObj_of_boundedConstructible`,
+`isIso_projectionMap_app_app_padicSubfield_of_padicIntegers`). -/
+theorem isIso_projectionMap_continuousMapRingObj_of_boundedConstructible
+    (E : FiniteIntermediateField ℓ) (p : X ⟶ Y) [IsProper p.left]
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
       (condensedRingObj (Profinite.continuousMapRingObj E.1) X.left)))
     (M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y.left) Ab.{u + 1})
@@ -133,11 +130,10 @@ theorem isIso_projectionMap_continuousMapRingObj_of_integral (E : FiniteIntermed
     _ _ K₀.property (boundedConstructible_leftDerivedUpperStar_obj _ ℓ p M₀)
   have e₁ := isIso_projectionMap_app_app_padicSubfield_of_padicIntegers ℓ E p.left K₀.obj M₀.obj
     _ _ (exists_isGE_of_boundedConstructible K₀.property).choose_spec
-    (by exact_mod_proofs (exists_isGE_of_boundedConstructible hKM₀).choose_spec)
-    (by exact_mod_proofs h K₀.obj M₀.obj K₀.property M₀.property)
-  have e₂ := @NatTrans.isIso_app_app_of_iso _ _ _ _ _ _ _ _
-    (projectionMap (Profinite.continuousMapRingObj E.1) p.left) _ _ _ _ eK.some eM.some
-    (by exact_mod_proofs e₁)
-  exact_mod_proofs e₂
+    (exists_isGE_of_boundedConstructible hKM₀).choose_spec
+    (isIso_projectionMap_padicIntegersRingObj_of_boundedConstructible ℓ E.1 p K₀.obj M₀.obj
+      K₀.property M₀.property)
+  exact NatTrans.isIso_app_app_of_iso
+    (projectionMap (Profinite.continuousMapRingObj E.1) p.left) eK.some eM.some
 
 end AlgebraicGeometry.ProEtale.CondensedRing

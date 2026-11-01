@@ -288,19 +288,16 @@ theorem properDirectImage_baseChange_projectionFormula_continuousMapRingObj (p :
         IsIso ((baseChangeMap 𝐄 ((Over.forget _).map_commSq sq.toCommSq)).app K)) ∧
     (∀ (K : 𝔻[𝐄](X.left)) (M : 𝔻[𝐄](Y.left)), boundedConstructible (condensedRingObj 𝐄 X.left) K →
       boundedConstructible (condensedRingObj 𝐄 Y.left) M →
-        IsIso (((projectionMap 𝐄 p.left).app K).app M)) :=
-  ⟨fun K hK ↦ ContinuousMapRingObj.boundedConstructible_rightDerivedLowerStar_obj ℓ E p ⟨K, hK⟩,
-    fun sq K hK ↦ by
-      have : IsNoetherian ((Over.forget (Spec (.of k))).obj Y) := isNoetherian_left Y
-      have : IsNoetherian ((Over.forget (Spec (.of k))).obj Y') := isNoetherian_left Y'
-      have : IsProper ((Over.forget (Spec (.of k))).map p) := ‹IsProper p.left›
-      exact isIso_baseChangeMap_app_padicSubfield_of_isProper ℓ (Y := (Over.forget _).obj Y)
-        (Y' := (Over.forget _).obj Y') Y.hom Y'.hom ((Over.forget _).map_commSq sq.toCommSq)
-        (sq.map (Over.forget _)) E K hK,
-    fun K M hK hM ↦ isIso_projectionMap_continuousMapRingObj_of_integral ℓ E p
-      (fun K M hK hM ↦ by
-        exact_mod_proofs (properDirectImage_baseChange_projectionFormula_padicIntegersRingObj ℓ
-          (X' := X) (Y' := Y) E.1 p).2.2 K M hK hM) K M hK hM⟩
+        IsIso (((projectionMap 𝐄 p.left).app K).app M)) := by
+  refine ⟨fun K hK ↦ ?_, fun {g p' g'} sq K hK ↦ ?_, fun K M hK hM ↦ ?_⟩
+  · exact ContinuousMapRingObj.boundedConstructible_rightDerivedLowerStar_obj ℓ E p ⟨K, hK⟩
+  · have : IsNoetherian ((Over.forget (Spec (.of k))).obj Y) := isNoetherian_left Y
+    have : IsNoetherian ((Over.forget (Spec (.of k))).obj Y') := isNoetherian_left Y'
+    have : IsProper ((Over.forget (Spec (.of k))).map p) := ‹IsProper p.left›
+    exact isIso_baseChangeMap_app_padicSubfield_of_isProper ℓ (Y := (Over.forget _).obj Y)
+      (Y' := (Over.forget _).obj Y') Y.hom Y'.hom ((Over.forget _).map_commSq sq.toCommSq)
+      (sq.map (Over.forget _)) E K hK
+  · exact isIso_projectionMap_continuousMapRingObj_of_boundedConstructible ℓ E p K M hK hM
 
 /-- Blueprint `sk-prop-proper-image-localizing`: Proper direct image and extension by zero;
 the case `Λ = E̲` (for which `Dctf = Dbc`). If `p : X ⟶ Y` is proper, `Rp_*` maps
