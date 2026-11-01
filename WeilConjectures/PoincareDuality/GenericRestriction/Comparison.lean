@@ -48,6 +48,39 @@ open CategoryTheory Limits MonoidalCategory Pretriangulated
 
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 
+namespace CategoryTheory.NatTrans
+
+open Functor.LaxMonoidal Functor.OplaxMonoidal
+
+variable {C D : Type*} [Category* C] [Category* D] [MonoidalCategory C] [MonoidalCategory D]
+  {F₁ F₂ : C ⥤ D} [F₁.Monoidal] [F₂.Monoidal]
+
+/-- A natural isomorphism of monoidal functors compatible with the counits and the
+comultiplications is monoidal. -/
+lemma isMonoidal_hom_of_η_of_δ (e : F₁ ≅ F₂) (hη : e.hom.app (𝟙_ C) ≫ η F₂ = η F₁)
+    (hδ : ∀ X Y, δ F₁ X Y ≫ (e.hom.app X ⊗ₘ e.hom.app Y) = e.hom.app (X ⊗ Y) ≫ δ F₂ X Y) :
+    NatTrans.IsMonoidal e.hom where
+  unit := by
+    rw [← cancel_mono (η F₂), Category.assoc, hη, Functor.Monoidal.ε_η, Functor.Monoidal.ε_η]
+  tensor X Y := by
+    rw [← cancel_epi (δ F₁ X Y), Functor.Monoidal.δ_μ_assoc, reassoc_of% (hδ X Y),
+      Functor.Monoidal.δ_μ, Category.comp_id]
+
+end CategoryTheory.NatTrans
+
+namespace CategoryTheory.Adjunction
+
+variable {C D : Type*} [Category* C] [Category* D] {F : C ⥤ D} {G : D ⥤ C}
+
+/-- If `F ⊣ G`, there is at most one morphism from an object `A` killed by `F` to an object
+isomorphic to an object in the image of `G`. -/
+lemma subsingleton_hom_of_isZero_leftAdjoint (adj : F ⊣ G) {A B : C} {N : D} (e : B ≅ G.obj N)
+    (hA : Limits.IsZero (F.obj A)) : Subsingleton (A ⟶ B) :=
+  ⟨fun _ _ ↦ (Iso.homCongr (Iso.refl A) e).injective ((adj.homEquiv _ _).symm.injective
+    (hA.eq_of_src _ _))⟩
+
+end CategoryTheory.Adjunction
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme Functor.LaxMonoidal
@@ -56,7 +89,8 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 
 /-- The comparison `ρ_g(K, M) : Lg^* RHom(K, M) ⟶ RHom(Lg^* K, Lg^* M)` of the monoidal functor
 `Lg^*` (`CategoryTheory.Functor.LaxMonoidal.ihomComparison`), on the derived categories of module
-objects over `Λ`. It is the transpose of `Lg^* K ⊗ᴸ Lg^* RHom(K, M) ≅ Lg^*(K ⊗ᴸ RHom(K, M)) ⟶ Lg^* M`,
+objects over `Λ`. It is the transpose of
+`Lg^* K ⊗ᴸ Lg^* RHom(K, M) ≅ Lg^*(K ⊗ᴸ RHom(K, M)) ⟶ Lg^* M`,
 hence compatible with evaluation. -/
 noncomputable def ihomUpperStarComparison {W X : Scheme.{u}} (g : W ⟶ X)
     (K M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -135,7 +169,9 @@ natural transformation (`ProEtale.CondensedRing.leftDerivedUpperStarComp_δ`,
 `ProEtale.CondensedRing.leftDerivedUpperStarComp_hom_app_unit`). -/
 instance isMonoidal_leftDerivedUpperStarComp_hom :
     NatTrans.IsMonoidal (leftDerivedUpperStarComp Λ f g).hom := by
-  sorry
+  refine NatTrans.isMonoidal_hom_of_η_of_δ _ ?_ (leftDerivedUpperStarComp_δ Λ f g)
+  rw [Functor.OplaxMonoidal.comp_η]
+  exact leftDerivedUpperStarComp_hom_app_unit Λ f g
 
 /-- **The internal-hom comparison and composition.** The comparison of `L(f ≫ g)^*` at `(K, M)` is
 an isomorphism if and only if the composite of `Lf^*` of the comparison of `Lg^*` and of the
@@ -146,7 +182,21 @@ lemma isIso_ihomUpperStarComparison_comp_iff
     IsIso (ihomUpperStarComparison Λ (f ≫ g) K M) ↔
       IsIso ((L((f)^*⟦Λ⟧)).map (ihomUpperStarComparison Λ g K M) ≫
         ihomUpperStarComparison Λ f ((L((g)^*⟦Λ⟧)).obj K) ((L((g)^*⟦Λ⟧)).obj M)) := by
-  sorry
+  have h := Functor.LaxMonoidal.isIso_ihomComparison_app_iff_of_iso
+    (leftDerivedUpperStarComp Λ f g) K M
+  rw [Functor.LaxMonoidal.ihomComparison_comp_app] at h
+  exact h
+
+/-- `ProEtale.CondensedRing.isIso_ihomUpperStarComparison_comp_iff` for a morphism
+`h` equal to `f ≫ g`. -/
+lemma isIso_ihomUpperStarComparison_comp_iff_of_eq {h : X ⟶ Z} (hfg : f ≫ g = h)
+    (K M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
+      (condensedRingObj Λ Z))) :
+    IsIso (ihomUpperStarComparison Λ h K M) ↔
+      IsIso ((L((f)^*⟦Λ⟧)).map (ihomUpperStarComparison Λ g K M) ≫
+        ihomUpperStarComparison Λ f ((L((g)^*⟦Λ⟧)).obj K) ((L((g)^*⟦Λ⟧)).obj M)) := by
+  subst hfg
+  exact isIso_ihomUpperStarComparison_comp_iff Λ f g K M
 
 /-- If the comparisons of `Lg^*` at `(K, M)` and of `Lf^*` at `(Lg^* K, Lg^* M)` are isomorphisms,
 so is the comparison of `L(f ≫ g)^*` at `(K, M)`. -/
@@ -195,7 +245,24 @@ lemma isIso_ihomUpperStarComparison_rightDerivedLowerStar_of_isPullback
     (hH : IsIso ((baseChangeMap Λ sq.toCommSq).app ((ihom ((L((f)^*⟦Λ⟧)).obj K)).obj N)))
     (hρ : IsIso (ihomUpperStarComparison Λ gV ((L((f)^*⟦Λ⟧)).obj K) N)) :
     IsIso (ihomUpperStarComparison Λ gZ K ((R((f)_*⟦Λ⟧)).obj N)) := by
-  sorry
+  let eA := (L((gZ)^*⟦Λ⟧)).mapIso (ihomRightDerivedLowerStarIso Λ f K N) ≪≫
+    asIso ((baseChangeMap Λ sq.toCommSq).app ((ihom ((L((f)^*⟦Λ⟧)).obj K)).obj N))
+  let eB := (ihom ((L((gZ)^*⟦Λ⟧)).obj K)).mapIso (asIso ((baseChangeMap Λ sq.toCommSq).app N)) ≪≫
+    ihomRightDerivedLowerStarIso Λ f' _ _
+  have hρf' : IsIso (ihomUpperStarComparison Λ f' ((L((gZ)^*⟦Λ⟧)).obj K)
+      ((L((gZ)^*⟦Λ⟧)).obj ((R((f)_*⟦Λ⟧)).obj N))) :=
+    (isIso_ihomUpperStarComparison_iff_of_iso_right Λ f' ((L((gZ)^*⟦Λ⟧)).obj K)
+      (asIso ((baseChangeMap Λ sq.toCommSq).app N))).2
+      (isIso_ihomUpperStarComparison_rightDerivedLowerStar Λ f' _ _)
+  have h₁ := isIso_ihomUpperStarComparison_rightDerivedLowerStar Λ f K N
+  have h₂ := (isIso_ihomUpperStarComparison_iff_of_iso_right Λ gV ((L((f)^*⟦Λ⟧)).obj K)
+    (asIso ((derivedUpperStarLowerStarAdjunction Λ f).counit.app N))).2 hρ
+  have hρh := (isIso_ihomUpperStarComparison_comp_iff_of_eq Λ gV f sq.w K
+    ((R((f)_*⟦Λ⟧)).obj N)).2 (IsIso.comp_isIso' (Functor.map_isIso _ _) h₂)
+  rw [isIso_ihomUpperStarComparison_comp_iff] at hρh
+  have h₃ := @IsIso.of_isIso_comp_right _ _ _ _ _ _ _ hρf' hρh
+  exact (derivedUpperStarLowerStarAdjunction Λ f').isIso_of_isIso_map_of_iso_rightAdjoint_obj
+    eA eB _
 
 end DirectImage
 
@@ -204,17 +271,21 @@ section Devissage
 variable {Z Z' U U' W : Scheme.{u}} {gZ : Z' ⟶ Z} {i : W ⟶ Z} [IsClosedImmersion i]
   {j : U ⟶ Z} [IsOpenImmersion j] {j' : U' ⟶ Z'} [IsOpenImmersion j'] {gU : U' ⟶ U}
 
-/-- **Dévissage in the second variable.** Let `j : U ⟶ Z` be an open immersion with closed
-complement `i : W ⟶ Z` and `j'` its base change along `gZ : Z' ⟶ Z`, such that `Rj_*` commutes
-with the base change at `Lj^* M`. If the comparison of `gZ` is an isomorphism at
+set_option maxHeartbeats 1000000 in
+-- the dévissage elaborates many derived functors of module objects
+omit [IsOpenImmersion j'] in
+/-- **Dévissage in the second variable.** Let `j : U ⟶ Z` be a quasi-compact open immersion with
+closed complement `i : W ⟶ Z` and `j'` its base change along `gZ : Z' ⟶ Z`, such that `Rj_*`
+commutes with the base change at `Lj^* M`. If the comparison of `gZ` is an isomorphism at
 `(K, Rj_* Lj^* M)` and at every `(K, Ri_* X)` with `X` bounded constructible, then it is one at
 `(K, M)`, for bounded constructible `M` with `Rj_* Lj^* M` bounded constructible. Complete the
-unit `M ⟶ Rj_* Lj^* M` to a distinguished triangle `M ⟶ Rj_* Lj^* M ⟶ C ⟶ M[1]`: `C` is
-supported on `W`, so `C ≅ Ri_* Li^* C`, and the five lemma without connecting morphisms
+unit `M ⟶ Rj_* Lj^* M` to a distinguished triangle `M ⟶ Rj_* Lj^* M ⟶ C ⟶ M[1]`: `C` is killed
+by `Lj^*`, so `C ≅ Ri_* Li^* C` (the restrictions to `U` and `W` jointly detect isomorphisms, `j`
+being quasi-compact), and the five lemma without connecting morphisms
 (`CategoryTheory.Pretriangulated.isIso₂_of_isIso₁₃_of_subsingleton`) applies to the images of the
 rotated triangle `C[-1] ⟶ M ⟶ Rj_* Lj^* M ⟶ C` under both sides of the comparison: there are no
 maps from `Lg^* RHom(K, C)` to `RHom(Lg^* K, Rj'_* -)` since `Lj'^*` kills the former. -/
-lemma isIso_ihomUpperStarComparison_of_isIso_open_closed
+lemma isIso_ihomUpperStarComparison_of_isIso_open_closed [QuasiCompact j]
     [(boundedConstructible (condensedRingObj Λ Z)).IsTriangulated]
     (hij : IsCompl (Set.range i.base) (Set.range j.base)) (sqU : IsPullback gU j' j gZ)
     (K M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
@@ -227,7 +298,64 @@ lemma isIso_ihomUpperStarComparison_of_isIso_open_closed
         (condensedRingObj Λ W)), boundedConstructible (condensedRingObj Λ W) X →
       IsIso (ihomUpperStarComparison Λ gZ K ((R((i)_*⟦Λ⟧)).obj X))) :
     IsIso (ihomUpperStarComparison Λ gZ K M) := by
-  sorry
+  -- the triangle `M ⟶ Rj_* Lj^* M ⟶ C ⟶ M[1]`
+  obtain ⟨C, v', w, hT⟩ := distinguished_cocone_triangle
+    ((derivedUpperStarLowerStarAdjunction Λ j).unit.app M)
+  have hC : boundedConstructible (condensedRingObj Λ Z) C :=
+    (boundedConstructible _).ext_of_isTriangulatedClosed₃ _ hT hM hjM
+  -- `C` is supported on `W`
+  have hjC : IsZero ((L((j)^*⟦Λ⟧)).obj C) := by
+    have h₁ : IsIso ((L((j)^*⟦Λ⟧)).map
+        ((derivedUpperStarLowerStarAdjunction Λ j).unit.app M)) :=
+      IsIso.of_isIso_fac_right (hh := IsIso.id _)
+        ((derivedUpperStarLowerStarAdjunction Λ j).left_triangle_components M)
+    exact (Triangle.isZero₃_iff_isIso₁ _ ((L((j)^*⟦Λ⟧)).map_distinguished _ hT)).2 h₁
+  have hjC' : IsZero ((L((j)^*⟦Λ⟧)).obj (C⟦(-1 : ℤ)⟧)) :=
+    ((shiftFunctor _ (-1 : ℤ)).map_isZero hjC).of_iso
+      (((L((j)^*⟦Λ⟧)).commShiftIso (-1 : ℤ)).app C)
+  have hu := isIso_derivedUpperStarLowerStarAdjunction_unit_app_of_isZero Λ j i hij hjC'
+  have hC' : boundedConstructible (condensedRingObj Λ Z) (C⟦(-1 : ℤ)⟧) :=
+    (boundedConstructible _).le_shift (-1 : ℤ) C hC
+  have hφ₁ : IsIso (ihomUpperStarComparison Λ gZ K (C⟦(-1 : ℤ)⟧)) :=
+    (isIso_ihomUpperStarComparison_iff_of_iso_right Λ gZ K
+      (asIso ((derivedUpperStarLowerStarAdjunction Λ i).unit.app (C⟦(-1 : ℤ)⟧)))).2
+      (hW _ (boundedConstructible_leftDerivedUpperStar_obj_of_scheme Λ i _ hC'))
+  -- the images of the rotated triangle `C[-1] ⟶ M ⟶ Rj_* Lj^* M ⟶ C`
+  have hT' := inv_rot_of_distTriang _ hT
+  let adj : (curriedTensor _).obj K ⊣ ihom K := ihom.adjunction K
+  let := adj.rightAdjointCommShift ℤ
+  have := adj.commShift_of_leftAdjoint ℤ
+  have : (ihom K).IsTriangulated := adj.isTriangulated_rightAdjoint
+  let adj' : (curriedTensor _).obj ((L((gZ)^*⟦Λ⟧)).obj K) ⊣ ihom ((L((gZ)^*⟦Λ⟧)).obj K) :=
+    ihom.adjunction _
+  let := adj'.rightAdjointCommShift ℤ
+  have := adj'.commShift_of_leftAdjoint ℤ
+  have : (ihom ((L((gZ)^*⟦Λ⟧)).obj K)).IsTriangulated := adj'.isTriangulated_rightAdjoint
+  have hT₁ := (L((gZ)^*⟦Λ⟧)).map_distinguished _ ((ihom K).map_distinguished _ hT')
+  have hT₂ := (ihom ((L((gZ)^*⟦Λ⟧)).obj K)).map_distinguished _
+    ((L((gZ)^*⟦Λ⟧)).map_distinguished _ hT')
+  have : IsIso (ihomUpperStarComparison Λ gZ K
+      (Triangle.mk ((derivedUpperStarLowerStarAdjunction Λ j).unit.app M) v' w).invRotate.obj₁) :=
+    hφ₁
+  refine Pretriangulated.isIso₂_of_isIso₁₃_of_subsingleton hT₁ hT₂ _ _
+    (ihomUpperStarComparison Λ gZ K ((R((j)_*⟦Λ⟧)).obj ((L((j)^*⟦Λ⟧)).obj M)))
+    (ihomUpperStarComparison_naturality Λ gZ K _)
+    (ihomUpperStarComparison_naturality Λ gZ K _) ?_
+  -- the third term is `Rj'_*` of an object, and `Lj'^*` kills the first one
+  let eB := (ihom ((L((gZ)^*⟦Λ⟧)).obj K)).mapIso
+      (asIso ((baseChangeMap Λ sqU.toCommSq).app ((L((j)^*⟦Λ⟧)).obj M))) ≪≫
+    ihomRightDerivedLowerStarIso Λ j' _ _
+  have hz₀ : IsZero ((L((j)^*⟦Λ⟧)).obj ((ihom K).obj (C⟦(-1 : ℤ)⟧))) :=
+    (isZero_leftDerivedUpperStar_obj_rightDerivedLowerStar_obj_of_disjoint Λ j i
+      hij.symm.disjoint _).of_iso ((L((j)^*⟦Λ⟧)).mapIso ((ihom K).mapIso
+        (asIso ((derivedUpperStarLowerStarAdjunction Λ i).unit.app (C⟦(-1 : ℤ)⟧))) ≪≫
+          ihomRightDerivedLowerStarIso Λ i K _))
+  have hz : IsZero ((L((j')^*⟦Λ⟧)).obj ((L((gZ)^*⟦Λ⟧)).obj ((ihom K).obj (C⟦(-1 : ℤ)⟧)))) :=
+    ((L((gU)^*⟦Λ⟧)).map_isZero hz₀).of_iso
+      ((pullbackSquareComparison Λ sqU.toCommSq).app _)
+  exact (derivedUpperStarLowerStarAdjunction Λ j').subsingleton_hom_of_isZero_leftAdjoint eB
+    (((shiftFunctor _ (1 : ℤ)).map_isZero hz).of_iso
+      (((L((j')^*⟦Λ⟧)).commShiftIso (1 : ℤ)).app _))
 
 end Devissage
 

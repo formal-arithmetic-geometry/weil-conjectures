@@ -204,7 +204,8 @@ involves cheap). -/
 lemma isIso_ihomUpperStarComparison_of_isIso_open_closed_of_forall
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     {Z Z' U U' W : Scheme.{u}} {gZ : Z' ⟶ Z} {i : W ⟶ Z} [IsClosedImmersion i]
-    {j : U ⟶ Z} [IsOpenImmersion j] {j' : U' ⟶ Z'} [IsOpenImmersion j'] {gU : U' ⟶ U}
+    {j : U ⟶ Z} [IsOpenImmersion j] [QuasiCompact j] {j' : U' ⟶ Z'} [IsOpenImmersion j']
+    {gU : U' ⟶ U}
     [(boundedConstructible (condensedRingObj Λ Z)).IsTriangulated]
     (hij : IsCompl (Set.range i.base) (Set.range j.base)) (sqU : IsPullback gU j' j gZ)
     (K M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
@@ -297,6 +298,9 @@ theorem isIso_ihomUpperStarComparison_of_fieldExtension_of_range_subset (X : Ove
     have hz' : i.left.base z = j.left.base u :=
       c.left.isClosedEmbedding.injective (by simpa using hz)
     exact Set.disjoint_left.1 hcompl.disjoint ⟨z, hz'⟩ ⟨u, rfl⟩
+  have : QuasiCompact j.left := by
+    have : QuasiCompact (j.left ≫ Z.hom) := by rw [Over.w j]; infer_instance
+    exact QuasiCompact.of_comp j.left Z.hom
   have sqU := IsPullback.of_hasPullback j.left πZ
   have hjM := boundedConstructible_leftDerivedUpperStar_obj _ ℓ j ⟨M, hM⟩
   refine isIso_ihomUpperStarComparison_of_isIso_open_closed_of_forall _ hcompl sqU K M hM
