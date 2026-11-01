@@ -10,6 +10,9 @@ import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapShift
 import WeilConjectures.Mathlib.CategoryTheory.Shift.Adjunction
 import WeilConjectures.Mathlib.CategoryTheory.Functor.Derived.Adjunction
 import Mathlib.CategoryTheory.Triangulated.Adjunction
+
+set_option linter.privateModule false
+
 /-! The canonical projection map is invertible on the third vertex of a distinguished
 triangle whenever it is invertible on the first two vertices. -/
 
@@ -22,15 +25,8 @@ open Scheme
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
-attribute [local instance] shiftPush shiftPull
-attribute [local instance] shiftTensor
-omit [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A]
-  [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A] in
-attribute [local instance] shiftMapAdj
 variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
 open DerivedCategory
-
-attribute [local instance] shiftCounit
 
 section
 
@@ -48,19 +44,5 @@ private lemma comparison_eq :
           (Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) (g)^*[A]) Qh) :=
   rfl
 
-attribute [local instance] shiftComparison
 end
-private lemma shiftAdjunction {Z Y : Scheme.{u}} (g : Z ⟶ Y) :
-    (derivedUpperStarLowerStarAdjunction A g).CommShift ℤ := by
-  have he : derivedUpperStarLowerStarAdjunction A g =
-      (mapDerivedUpperStarLowerStarAdjunction A g).ofNatIsoLeft
-        (leftDerivedUpperStarIsoMapDerivedCategory A g).symm :=
-    Adjunction.derived_eq_ofNatIsoLeft _ _ _ _ _ _
-      (leftDerivedUpperStarIsoMapDerivedCategory A g)
-      ((g)^*[A].leftDerivedFunctorIsoMapDerivedCategory_hom_fac).symm
-  rw [he]
-  have : NatTrans.CommShift (leftDerivedUpperStarIsoMapDerivedCategory A g).symm.hom ℤ :=
-    Functor.CommShift.ofIso_compatibility (leftDerivedUpperStarIsoMapDerivedCategory A g).symm ℤ
-  exact Adjunction.commShift_ofNatIsoLeft _ _
-attribute [local instance] shiftAdjunction
 end AlgebraicGeometry.Etale

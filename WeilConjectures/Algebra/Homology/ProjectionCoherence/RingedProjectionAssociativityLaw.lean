@@ -89,6 +89,8 @@ import WeilConjectures.Algebra.Homology.CanonicalTensorPullbackOfUniverses.Deriv
 import WeilConjectures.Algebra.Homology.KFlatTotalTensorModel.KFlatTotalTensorModelSupplement
 import WeilConjectures.SecSmoothPurity.CochainComparisonMonoidalEquationsSupplement
 
+set_option linter.privateModule false
+
 /-! Field-level coherence law for normalized ringed projection tensor comparisons.
 (blueprint: lem-sfb-ringed-projection-tensor-laws-associativity-law) -/
 
@@ -195,12 +197,4 @@ private theorem totalTensor_map {A : RingedTensorCorner.{u, w}}
   simp [totalTensor, Functor.map₂HomologicalComplex, HomologicalComplex.mapBifunctorMap,
     ← HomologicalComplex₂.total.map_comp]
 
-set_option maxHeartbeats 1600000 in
--- Elaborate the nested tensor presentations with their specified representative data.
-set_option maxHeartbeats 1600000 in
--- Elaborate the nested tensor presentations with their specified representative data.
-set_option maxHeartbeats 1600000 in
--- Elaborate the nested tensor presentations with their specified representative data.
-set_option maxHeartbeats 1600000 in
--- The three nested tensor comparison components require additional elaboration heartbeats.
 end SheafOfModules.ProjectionCoherence

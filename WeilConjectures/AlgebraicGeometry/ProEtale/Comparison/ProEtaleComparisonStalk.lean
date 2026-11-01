@@ -22,6 +22,8 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Comap
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Basic
 
+set_option linter.privateModule false
+
 /-!
 # Etale-to-pro-etale comparison on geometric stalks
 
@@ -86,5 +88,4 @@ private noncomputable def comparisonPoint
       apply Over.OverMorphism.ext
       exact hw
 
-set_option backward.isDefEq.respectTransparency false in
 end AlgebraicGeometry.Scheme

@@ -60,8 +60,6 @@ variable (A : Type uA) [Category.{u + 1} A] [Abelian A]
     L(upperStar A g') ⋙ rightDerivedLowerShriek A f') [IsIso B]
   (N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
 
-omit [HasSmallSiteSheafify A] [IsIso (projectionMap A f')] in
-omit [HasSmallSiteSheafify A] in
 end MateIdentification
 
 end General
@@ -80,7 +78,8 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
   [IsIso (projectionMap (ModuleCat.{u + 1} Λ) f)] [IsIso (projectionMap (ModuleCat.{u + 1} Λ) f')]
   (sq : CommSq g' f' f g)
   (B : rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f ⋙ L(upperStar (ModuleCat.{u + 1} Λ) g) ⟶
-    L(upperStar (ModuleCat.{u + 1} Λ) g') ⋙ rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f') [IsIso B]
+    L(upperStar (ModuleCat.{u + 1} Λ) g') ⋙ rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) f')
+  [IsIso B]
   (N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
 
 end AlgebraicGeometry.Etale

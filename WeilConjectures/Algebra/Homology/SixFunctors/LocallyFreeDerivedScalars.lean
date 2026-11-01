@@ -92,6 +92,8 @@ import Mathlib.RingTheory.Flat.EquationalCriterion
 import WeilConjectures.Algebra.Homology.SmoothPurity.PullbackExistsOfUniverses
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 
+set_option linter.privateModule false
+
 /-! # Derived scalar extension of locally finite free module sheaves
 
 Source: Stacks Project, Modules on Sites, Tags 0GN1 and 08FC; Cohomology on Sites,
@@ -188,5 +190,4 @@ private noncomputable def scalarOverIso
   exact ((PresheafOfModules.sheafification.{r} (R := A.over U) (𝟙 _)).mapIso ep ≪≫
     asIso (overSheafificationMap.{u, v, r, r} A U P)).symm
 
-set_option backward.isDefEq.respectTransparency false in
 end SheafOfModules

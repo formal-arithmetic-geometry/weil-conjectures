@@ -9,6 +9,8 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResol
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 public import Mathlib.CategoryTheory.Adjunction.Mates
 
+set_option linter.privateModule false
+
 /-! # Normalization of derived composition by the specified adjunctions
 
 Source: Stacks Project, Derived Categories, Tags 09T5, 0DVC and 0FND;

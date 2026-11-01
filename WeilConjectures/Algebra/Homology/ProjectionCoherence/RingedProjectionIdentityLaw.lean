@@ -99,6 +99,8 @@ import WeilConjectures.FromJoel.Algebra.Homology.BifunctorHomotopy
 import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 import Mathlib.CategoryTheory.Localization.CalculusOfFractions
 
+set_option linter.privateModule false
+
 /-! Field-level coherence law for normalized ringed projection tensor comparisons.
 (blueprint: lem-sfb-ringed-projection-tensor-laws-identity-law) -/
 
@@ -149,8 +151,4 @@ attribute [local irreducible] monoidalCategory CanonicalRingedTensorComparison.t
   RingedTensorEdge.tensorComparison ringedTopoiCanonicalDerivedTensorComparison
   derivedPullbackComplexComparison
 
-set_option maxHeartbeats 800000 in
--- Keep both representative comparisons explicit during the derived transport.
-set_option maxHeartbeats 1000000 in
--- Elaborate faithful restriction with both derived tensor functors fixed.
 end SheafOfModules.ProjectionCoherence

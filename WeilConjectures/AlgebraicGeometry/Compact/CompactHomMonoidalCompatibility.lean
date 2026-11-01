@@ -45,9 +45,6 @@ variable (A : Type uA) [Category.{u + 1} A] [Abelian A]
     L(upperStar A g') ⋙ rightDerivedLowerShriek A f') [IsIso B]
   (N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
 
-omit [HasSmallSiteSheafify A] in
-omit [HasSmallSiteSheafify A] [UpperStarPreservesFlat A] in
-omit [HasSmallSiteSheafify A] [UpperStarPreservesFlat A] in
 section FiniteCoefficient
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]

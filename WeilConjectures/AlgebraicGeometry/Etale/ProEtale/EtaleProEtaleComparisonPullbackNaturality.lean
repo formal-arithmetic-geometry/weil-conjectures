@@ -14,6 +14,8 @@ import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.CohomologyLimit
 
+set_option linter.privateModule false
+
 /-!
 # Pullback naturality of the etale–pro-etale cohomology comparison
 

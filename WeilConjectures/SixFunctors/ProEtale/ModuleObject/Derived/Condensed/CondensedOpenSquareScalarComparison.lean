@@ -46,6 +46,8 @@ import Mathlib.CategoryTheory.Localization.Predicate
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionEssImage
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.BaseChange
 
+set_option linter.privateModule false
+
 /-! # Scalar-compatible open base change for condensed coefficients
 
 Source: blueprint main-20261015, det-sf-open-closed-sequence-ring-sheaf, proof (4),

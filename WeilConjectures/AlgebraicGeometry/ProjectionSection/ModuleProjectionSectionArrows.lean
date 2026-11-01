@@ -132,7 +132,6 @@ def pullbackSection {X V : Scheme.{u}} (r : V ⟶ X) (i : X ⟶ V) (h : i ≫ r 
     CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ (𝟙 X) ≪≫
     profinitePointModuleDerivedIdentity Λ X
 
-attribute [-instance] CategoryTheory.catToReflQuiver in
 end ProjectionSection
 
 end AlgebraicGeometry.ProEtale

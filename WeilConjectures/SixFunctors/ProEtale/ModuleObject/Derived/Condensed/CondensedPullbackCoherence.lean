@@ -100,6 +100,4 @@ theorem pullbackSquareComparison_paste_horizontal
   rw [← Functor.map_comp, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id]
   rfl
 
-set_option maxHeartbeats 20000000 in
--- Instantiating the inverse calculation unifies large derived pullback objects.
 end AlgebraicGeometry.ProEtale.CondensedRing

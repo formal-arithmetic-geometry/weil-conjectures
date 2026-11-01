@@ -112,8 +112,8 @@ theorem finiteCoefficientComparison_hom_inv_id (A : Type u) [CommRing A]
     (A₀ : Type) [CommRing A₀] [TopologicalSpace A₀] [DiscreteTopology A₀]
     (r : A ≃+* A₀) :
     finiteCoefficientComparisonHom A A₀ r ≫ finiteCoefficientComparisonInv A A₀ r = 𝟙 _ := by
-  letI : TopologicalSpace A := ⊥
-  letI : DiscreteTopology A := discreteTopology_bot A
+  let : TopologicalSpace A := ⊥
+  let : DiscreteTopology A := discreteTopology_bot A
   ext S s
   apply ULift.ext
   apply ContinuousMap.ext
@@ -130,8 +130,8 @@ theorem finiteCoefficientComparison_inv_hom_id (A : Type u) [CommRing A]
     (A₀ : Type) [CommRing A₀] [TopologicalSpace A₀] [DiscreteTopology A₀]
     (r : A ≃+* A₀) :
     finiteCoefficientComparisonInv A A₀ r ≫ finiteCoefficientComparisonHom A A₀ r = 𝟙 _ := by
-  letI : TopologicalSpace A := ⊥
-  letI : DiscreteTopology A := discreteTopology_bot A
+  let : TopologicalSpace A := ⊥
+  let : DiscreteTopology A := discreteTopology_bot A
   ext S s
   apply ULift.ext
   apply ContinuousMap.ext

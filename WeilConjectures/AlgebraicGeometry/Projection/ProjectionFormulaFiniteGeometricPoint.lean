@@ -52,7 +52,6 @@ private lemma constantCounit (F : Sheaf (Spec (.of k)).smallEtaleTopology (Modul
     infer_instance
   exact isIso_of_reflects_iso _ (sheafCompose J U)
 
-omit [IsAlgClosed k] in
 section CoproductFunctors
 universe v
 variable (A : Type v) [Category.{u + 1} A] [Abelian A]

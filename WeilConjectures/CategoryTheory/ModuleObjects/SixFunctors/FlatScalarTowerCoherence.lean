@@ -25,6 +25,8 @@ public import Mathlib.CategoryTheory.Monoidal.Braided.Reflection
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
+set_option linter.privateModule false
+
 /-!
 # Coherence of exact scalar extension for sheaf module objects
 
@@ -99,7 +101,6 @@ variable {H : Type u} [Category.{v} H] [MonoidalCategory H] [BraidedCategory H]
 
 end DerivedLaws
 
-set_option backward.isDefEq.respectTransparency false in
 section OrdinaryProof
 
 variable {H : Type u} [Category.{v} H] [MonoidalCategory H] [BraidedCategory H]
@@ -141,8 +142,6 @@ private theorem unit_transport {f' : A ⟶ B} [IsMonHom f'] (e : f = f') (M : Mo
   simp only [eqToHom_refl, id_hom']
   exact Category.comp_id _
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 end OrdinaryProof
 
 section DerivedProof
@@ -164,8 +163,6 @@ variable {D₀ D₁ D₂ D₃ : Type*}
   [PreservesFiniteLimits V] [PreservesFiniteColimits V]
   [PreservesFiniteLimits T] [PreservesFiniteColimits T]
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 end DerivedProof
 
 section DerivedUnitProof
@@ -221,8 +218,6 @@ variable {H : Type u} [Category.{v} H] [MonoidalCategory H] [BraidedCategory H]
   [∀ X : H, PreservesColimitsOfSize.{0, 0} (tensorLeft X)]
   [∀ X : H, PreservesColimitsOfSize.{0, 0} (tensorRight X)]
 
-set_option backward.isDefEq.respectTransparency false in
 end ScalarDerivedProof
 
-set_option backward.isDefEq.respectTransparency false in
 end CategoryTheory.Mod

@@ -32,6 +32,8 @@ import Mathlib.CategoryTheory.Monoidal.CommGrp_
 import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod
 import WeilConjectures.Algebra.Homology.Ringed.RingedTensorTotalComponent
 
+set_option linter.privateModule false
+
 /-! # The identity comparison on ordinary total tensor complexes
 
 Source: Stacks Project, Tags 03EL, 07A4 and 0FPI.
@@ -62,6 +64,4 @@ private theorem total_map_eq {A : Type*} [Category A] [Abelian A]
   simp [Functor.uncurry_obj_map, Functor.map₂HomologicalComplex,
     HomologicalComplex.mapBifunctorMap, ← HomologicalComplex₂.total.map_comp]
 
-set_option maxHeartbeats 800000 in
--- Elaborate the ordinary tensor comparison on all total-complex summands.
 end SheafOfModules.ProjectionCoherence

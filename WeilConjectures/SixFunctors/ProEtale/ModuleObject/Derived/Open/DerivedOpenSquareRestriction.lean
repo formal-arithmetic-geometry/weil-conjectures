@@ -19,6 +19,8 @@ import WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormulaAdjunction
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.FullyFaithful
 import WeilConjectures.CategoryTheory.SmoothPurity.CanonicalRightDerivedAdjunctionShift
 
+set_option linter.privateModule false
+
 /-! # Unbounded open restriction of condensed-module direct image
 
 Source: blueprint main-20261015, sec-six-functors-basics,

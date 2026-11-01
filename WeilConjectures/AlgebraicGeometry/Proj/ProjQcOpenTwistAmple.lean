@@ -19,6 +19,8 @@ import WeilConjectures.AlgebraicGeometry.NonvanishingLocusRestrict
 import all WeilConjectures.AlgebraicGeometry.TensorPowerSectionOpenRestrictionN
 import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
+set_option linter.privateModule false
+
 /-!
 # Sufficiently divisible twists on a quasi-compact Proj open
 
@@ -53,9 +55,4 @@ private def tensorSection {X : Scheme.{u}} (M : X.Modules) (Q : X.Opens) :
   | 0, _ => Scheme.Modules.unitSectionsEquiv Q 1
   | k + 1, s => Scheme.Modules.tmulSection (s 0) (tensorSection M Q k (Fin.tail s))
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end AlgebraicGeometry

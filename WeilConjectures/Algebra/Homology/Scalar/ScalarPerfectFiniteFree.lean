@@ -36,6 +36,4 @@ variable [∀ U : C, EssentiallySmall.{s} (Over U)]
   [∀ U : C, (J.over U).WEqualsLocallyBijective AddCommGrpCat.{s}]
   {B : Sheaf J CommRingCat.{s}} (φ : scalarPerfectRing J R ⟶ B)
 
-omit [∀ U : C, HasSheafify (J.over U) CommRingCat.{s}] in
-omit [∀ U : C, HasSheafify (J.over U) CommRingCat.{s}] in
 end SheafOfModules

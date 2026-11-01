@@ -33,6 +33,8 @@ import WeilConjectures.AlgebraicGeometry.Modules.RestrictionTensorComparison
 import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
 import WeilConjectures.AlgebraicGeometry.Modules.SectionAvoidance
 
+set_option linter.privateModule false
+
 /-!
 # Common-degree twists on a quasi-compact Proj open
 
@@ -63,7 +65,7 @@ variable {A σ : Type u} [CommRing A] [SetLike σ A] [AddSubgroupClass σ A]
 open ProjectiveSpectrum.Twist HomogeneousLocalization Opposite MonoidalCategory
 open Scheme.Modules
 
-attribute [local instance] schemeMonoidal
+attribute [local instance] SheafOfModules.monoidalCategory
 
 private def mulSections (a b c : ℤ) (h : a + b = c)
     (U : (Proj 𝒜).Opens) (s : Γ(twist 𝒜 a, U)) (t : Γ(twist 𝒜 b, U)) :

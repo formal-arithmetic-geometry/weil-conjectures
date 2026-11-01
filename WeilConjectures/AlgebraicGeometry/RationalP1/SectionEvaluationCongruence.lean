@@ -12,8 +12,9 @@ set_option autoImplicit false
 universe u₁ u₂
 namespace AlgebraicGeometry.ProEtale.RationalP1
 /- The structural instance comparison follows the proved congruence procedure in
-WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteCoefficientProperFormulaTools (G3). All produced terms are built from
-HEq reflexivity, proof irrelevance, function extensionality and congruence theorems. -/
+WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteCoefficientProperFormulaTools
+(G3). All produced terms are built from HEq reflexivity, proof irrelevance, function
+extensionality and congruence theorems. -/
 /-- Equality of dependent function types under heterogeneous equality of families.
 Source: function extensionality (blueprint: lem-sfb-section-evaluation-congruence).
 Proof: eliminate the domain equality and family equality, then use reflexivity. -/
