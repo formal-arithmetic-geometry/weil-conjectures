@@ -6,6 +6,10 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBaseSliceInputs
+public import WeilConjectures.TraceFormula.Specialization.GenericSliceExchangeTransport
+public import WeilConjectures.TraceFormula.Specialization.TraitModelOfGenericBaseExtension
+public import WeilConjectures.Tactic.TransportExact
+public import WeilConjectures.TraceFormula.Specialization.TraitSliceInvariantsProof
 
 /-!
 
@@ -16,10 +20,17 @@ at a finite level, the inclusion of the summand cut out by the averaging idempot
 group of Galois automorphisms of the slice model
 (`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_averaging_genericSliceExchange`). This is
 the generic-slicing identification `g_s^* Ψ_M ≃ (Ψ_{M''} c^*)^P` of SGA 4½, [Th. finitude], §3
-(Lemme 3.4 and 3.7), with the pro-`p` averaging. It is an input owned by the nearby-cycles slice
-tasks: Th. finitude 3.7 is #1790's (`trace2/nearby-finiteness-slice`), the slice traits and the
-equivariance along a change of trait are `trace2/nearby-slice-traits` and
-`trace2/nearby-trait-equivariance`.
+(Lemme 3.4 and 3.7), with the pro-`p` averaging.
+
+It is deduced from the same statement for the base change `M ×_{𝔸¹_S} Spec K⟦t⟧` of `M` along
+the generic slice (`NearbyCyclesModel.exists_subgroup_pullbackExchange_baseChangeHom_traitSlice`),
+whose exchange agrees with the slice exchange up to isomorphisms intertwining the actions of the
+generic automorphisms
+(`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_iso_pullbackExchange_genericSliceHom`). The
+restrictions of complexes on `X₁` to the geometric generic fibre extend to the total space
+(`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_boundedConstructible_extension`), as that
+statement requires. The finite group is the quotient of the generic automorphisms by the normal
+core of the subgroups acting trivially on the two complexes.
 -/
 
 @[expose] public section
@@ -27,6 +38,7 @@ equivariance along a change of trait are `trace2/nearby-slice-traits` and
 universe u
 
 open CategoryTheory Limits MonoidalCategory MonoidalClosed
+
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
 
@@ -61,6 +73,8 @@ variable {F : Type u} [Field F] {k' : Type u} [Field k'] {X₁ : Over (Spec (.of
 
 namespace IsTraitModelOfGenericBase
 
+set_option maxHeartbeats 25600000 in
+-- the statement involves the actions of the finite quotient on the slice
 /-- **The slice exchange is an averaging summand at a finite level** (blueprint
 `det-tf-nearby-duality-slice`, the generic-slicing identification `g_s^* Ψ_M ≃ (Ψ_{M''} c^*)^P`,
 with `det-tf-invariants-duality`; SGA 4½, [Th. finitude], §3). For two bounded constructible
@@ -73,15 +87,12 @@ generic point `Spec Ω_K` through automorphisms `σ` over the generic point `η_
 with `|Γ| • (rᵢ ≫ α_{Aᵢ}) = ∑ₐ ρ(ψ a)` and `ρ(ψ a⁻¹)` inverse to `ρ(ψ a)` on `Ψ_{M''} c^* Aᵢ`.
 The order of `Γ` is invertible, the coefficients being `ℚ̄_ℓ`.
 
-Owned by the nearby-cycles slice tasks (#1790, `trace2/nearby-slice-traits`,
-`trace2/nearby-trait-equivariance`); not proved here. It is stronger than the splitting (M2)
-`NearbyCyclesModel.isSplitMono_pullbackExchange_app_toCartesian_genericSliceTraitHom` of
-#1790, which is itself `sorry` there: besides a retraction it needs the action of `P` on
-`Ψ_{M''} c^* Aᵢ` to factor through a finite quotient realised by automorphisms of the slice model.
-Missing are: the Galois-layer form of the slice model (an algebraic geometric generic point of the
-slice trait over the strict localization `S'` of `𝔸¹_S`), Deligne's finiteness over `S'` (so that
-`P` acts through a finite quotient on `ℚ̄_ℓ`-complexes), and the passage of the torsion splittings
-of #1818 to `ℚ̄_ℓ` coefficients through `R lim`. -/
+`Γ` is the quotient of the generic automorphisms by the normal core of the intersection of the
+subgroups of finite index of
+`NearbyCyclesModel.exists_subgroup_pullbackExchange_baseChangeHom_traitSlice` for `A₁` and `A₂`,
+transported to the generic slice model by
+`NearbyCyclesModel.IsTraitModelOfGenericBase.exists_retraction_pullbackExchange_genericSliceHom`,
+and `ψ a` is the action `NearbyCyclesModel.genericSliceAut` of a representative of `a`. -/
 theorem exists_averaging_genericSliceExchange
     (A₁ A₂ : Dᵇc(X₁.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     ∃ (Γ : Type u) (_ : Group Γ) (_ : Fintype Γ)
@@ -107,7 +118,83 @@ theorem exists_averaging_genericSliceExchange
               ((genericSliceUpperStar (traitSliceCoord k') ℓ h hb).obj A) ≫
             (genericSliceSelfAction (traitSliceCoord k') ℓ h hb (ψ a)).app
               ((genericSliceUpperStar (traitSliceCoord k') ℓ h hb).obj A) = 𝟙 _ := by
-  sorry
+  classical
+  -- the generic-slicing identification for the base change, at `A₁` and `A₂`
+  obtain ⟨B₁, hB₁, ⟨eB₁⟩⟩ := h.exists_boundedConstructible_extension A₁.2
+  obtain ⟨B₂, hB₂, ⟨eB₂⟩⟩ := h.exists_boundedConstructible_extension A₂.2
+  obtain ⟨V₁, _, htriv₁, r₁, hr₁, havg₁⟩ :=
+    exists_subgroup_pullbackExchange_baseChangeHom_traitSlice h.isTraitModelOver hb
+      (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ M.ε A₁.obj A₁.2) hB₁ eB₁
+  obtain ⟨V₂, _, htriv₂, r₂, hr₂, havg₂⟩ :=
+    exists_subgroup_pullbackExchange_baseChangeHom_traitSlice h.isTraitModelOver hb
+      (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ M.ε A₂.obj A₂.2) hB₂ eB₂
+  -- transported to the generic slice model
+  obtain ⟨hinv₁, hsplit₁⟩ := h.exists_retraction_pullbackExchange_genericSliceHom
+    (traitSliceCoord k') hb (Profinite.padicAlgClRingObj ℓ) A₁.obj htriv₁ r₁
+    (by transport_exact hr₁) (by transport_exact havg₁)
+  obtain ⟨hinv₂, hsplit₂⟩ := h.exists_retraction_pullbackExchange_genericSliceHom
+    (traitSliceCoord k') hb (Profinite.padicAlgClRingObj ℓ) A₂.obj htriv₂ r₂
+    (by transport_exact hr₂) (by transport_exact havg₂)
+  -- the finite quotient
+  have : V₁.FiniteIndex := Subgroup.finiteIndex_of_finite_quotient
+  have : V₂.FiniteIndex := Subgroup.finiteIndex_of_finite_quotient
+  obtain ⟨N, hN⟩ : ∃ N : Subgroup (GenericAut k' (traitSliceField k')),
+      N = (V₁ ⊓ V₂).normalCore := ⟨_, rfl⟩
+  have : N.Normal := hN ▸ inferInstance
+  have : N.FiniteIndex := hN ▸ inferInstance
+  have hN₁ : N ≤ V₁ := hN ▸ (Subgroup.normalCore_le _).trans inf_le_left
+  have hN₂ : N ≤ V₂ := hN ▸ (Subgroup.normalCore_le _).trans inf_le_right
+  have : Fintype (GenericAut k' (traitSliceField k') ⧸ N) := Subgroup.fintypeQuotientOfFiniteIndex
+  have hmem : ∀ a : GenericAut k' (traitSliceField k') ⧸ N, a.out * a⁻¹.out ∈ N := fun a ↦ by
+    rw [← QuotientGroup.eq_one_iff, QuotientGroup.mk_mul, QuotientGroup.out_eq',
+      QuotientGroup.out_eq', mul_inv_cancel]
+  obtain ⟨r₁', h₁₁, h₁₂⟩ := hsplit₁ N hN₁
+  obtain ⟨r₂', h₂₁, h₂₂⟩ := hsplit₂ N hN₂
+  have hex : genericSliceExchange (traitSliceCoord k') ℓ h hb = liftExchange
+      ((h.genericSliceHom (traitSliceCoord k') hb).pullbackExchange
+        (Profinite.padicAlgClRingObj ℓ)) _ _ _ _ := rfl
+  refine ⟨GenericAut k' (traitSliceField k') ⧸ N, inferInstance, inferInstance,
+    fun a ↦ genericSliceAut (traitSliceCoord k') hb a.out,
+    fun a ↦ ⟨rfl, ?_, a.out.τ, a.out.τ_comp_traitGenericPointToSpec,
+      genericSliceAut_generic_snd _ _ _⟩, fun T ↦ ?_, ?_⟩
+  · refine ⟨(genericSliceAut (traitSliceCoord k') hb a.out⁻¹).generic, ?_, ?_⟩ <;>
+      apply pullback.hom_ext <;> simp
+  · have := isIso_nsmul_id_derived_padicAlgClRingObj ℓ _
+      (Fintype.card_ne_zero (α := GenericAut k' (traitSliceField k') ⧸ N)) T.obj
+    have : IsIso ((ObjectProperty.ι _).map (Fintype.card
+        (GenericAut k' (traitSliceField k') ⧸ N) • 𝟙 T)) := by
+      rw [Functor.map_nsmul, CategoryTheory.Functor.map_id]
+      exact this
+    exact isIso_of_reflects_iso _ (ObjectProperty.ι _)
+  · rintro A (rfl | rfl)
+    · refine ⟨ObjectProperty.homMk r₁', ?_, ?_, fun a ↦ ?_⟩
+      · apply ObjectProperty.hom_ext
+        rw [ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.homMk_hom,
+          ObjectProperty.FullSubcategory.id_hom, hex, liftExchange_app_hom]
+        transport_exact h₁₁
+      · apply (ObjectProperty.ι _).map_injective
+        rw [Functor.map_nsmul, Functor.map_sum, Functor.map_comp, ObjectProperty.ι_map,
+          ObjectProperty.ι_map, ObjectProperty.homMk_hom, hex, liftExchange_app_hom]
+        transport_exact h₁₂
+      · apply ObjectProperty.hom_ext
+        rw [ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.id_hom,
+          genericSliceSelfAction_app, genericSliceSelfAction_app, ObjectProperty.homMk_hom,
+          ObjectProperty.homMk_hom]
+        transport_exact (hinv₁ a.out a⁻¹.out (hN₁ (hmem a)))
+    · refine ⟨ObjectProperty.homMk r₂', ?_, ?_, fun a ↦ ?_⟩
+      · apply ObjectProperty.hom_ext
+        rw [ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.homMk_hom,
+          ObjectProperty.FullSubcategory.id_hom, hex, liftExchange_app_hom]
+        transport_exact h₂₁
+      · apply (ObjectProperty.ι _).map_injective
+        rw [Functor.map_nsmul, Functor.map_sum, Functor.map_comp, ObjectProperty.ι_map,
+          ObjectProperty.ι_map, ObjectProperty.homMk_hom, hex, liftExchange_app_hom]
+        transport_exact h₂₂
+      · apply ObjectProperty.hom_ext
+        rw [ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.id_hom,
+          genericSliceSelfAction_app, genericSliceSelfAction_app, ObjectProperty.homMk_hom,
+          ObjectProperty.homMk_hom]
+        transport_exact (hinv₂ a.out a⁻¹.out (hN₂ (hmem a)))
 
 end IsTraitModelOfGenericBase
 
