@@ -157,6 +157,8 @@ import Mathlib.Algebra.Category.Grp.EpiMono
 import Mathlib.Algebra.Category.Grp.Abelian
 import Mathlib.CategoryTheory.Sites.Abelian
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
+public import WeilConjectures.AlgebraicGeometry.Picard.KFlatResolutionIndependentCoefficients
+public import WeilConjectures.ProperBaseChange.RingedToposDerivedPushforwardComposition
 
 /-! # Derived adjunction for the ringed sequence projection
 
@@ -581,6 +583,37 @@ private theorem derivedPart
   · intro Q I f
     rw [hεapp]
     exact hd Q I f
+
+/-- The canonical left derived scalar extension for the specified ringed sequence.
+This selects the universal left-derived pair constructed by `derivedPart`, which
+computes the actual tensor extension on flat-term K-flat representatives.
+Source: Stacks 06YY and 0FND
+(blueprint: lem-coef-sequence-projection-derived-adjunction). -/
+@[no_expose] def derivedExtension
+    [HasDerivedCategory.{d} (Modules A)] [HasDerivedCategory.{d} (StrictRingSystem B)] :
+    DerivedCategory.{d} (Modules A) ⥤ DerivedCategory.{d} (StrictRingSystem B) :=
+  (derivedPart A B α).choose
+
+/-- The canonical right derived inverse limit of the restricted sequence levels.
+This selects the universal right-derived pair of the actual limit functor, with
+its limit projections, constructed by `derivedPart`.
+Source: Stacks 0940 and 0FND
+(blueprint: lem-coef-sequence-projection-derived-adjunction). -/
+@[no_expose] def derivedInverseLimit
+    [HasDerivedCategory.{d} (Modules A)] [HasDerivedCategory.{d} (StrictRingSystem B)] :
+    DerivedCategory.{d} (StrictRingSystem B) ⥤ DerivedCategory.{d} (Modules A) :=
+  (derivedPart A B α).choose_spec.choose
+
+/-- The canonical derived adjunction between tensor extension and inverse limit.
+The selected adjunction is the one normalized by `derivedPart` on every chain map:
+its transpose is the ordinary tensor/limit transpose followed by the right-derived
+comparison. In particular its counit is adjoint to the actual limit projections.
+Source: Stacks 0FND, 06YY and 0940
+(blueprint: lem-coef-sequence-projection-derived-adjunction). -/
+@[no_expose] def canonicalDerivedAdjunction
+    [HasDerivedCategory.{d} (Modules A)] [HasDerivedCategory.{d} (StrictRingSystem B)] :
+    derivedExtension A B α ⊣ derivedInverseLimit A B α :=
+  (derivedPart A B α).choose_spec.choose_spec.choose_spec.choose_spec.choose
 
 private def extensionIso (M : Modules A) (n : ℕ) :
     ((extension A B α).obj M).level n ≅ changeOfRings (α.app (op n)) M :=

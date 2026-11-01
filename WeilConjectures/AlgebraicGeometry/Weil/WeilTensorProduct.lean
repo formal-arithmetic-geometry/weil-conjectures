@@ -55,6 +55,7 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUn
 import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
 public import WeilConjectures.SixFunctors.WfTensorLinearity.WeilTensorDescent
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
+public import WeilConjectures.AlgebraicGeometry.Picard.KFlatResolutionIndependentCoefficients
 
 /-!
 # Relative condensed derived tensor and its geometric Frobenius
@@ -1396,6 +1397,56 @@ def wfTensorFrobenius (K L : WeilD D c X₀ E) :
       1 (fun _ : Fin 1 ↦ pbcStageUniformizer.{u} c.l c.Qbar E) (wfUniformizer_generates D c E)
       (D.geometricFrobenius X₀) (pbcStageUniformizer.{u} c.l c.Qbar E))
     (wfWeilStructure D c X₀ E K) (wfWeilStructure D c X₀ E L)
+
+/-- The relative derived tensor over the actual pulled-back condensed ring.
+Source: latest blueprint, first sentence (blueprint: def-wf-tensor-product).
+This is Layer B of det-def-sfb-derived-tensor-hom, before any adic presentation. -/
+abbrev wfCondensedTensor := Functor.uncurry.obj (CondensedRing.derivedTensor Λ Y)
+
+/-- Exact termwise pullback on the derived category of actual condensed modules.
+Source: latest blueprint, geometric Frobenius pullback
+(blueprint: def-wf-tensor-product). -/
+abbrev wfCondensedFrobenius := (CondensedRing.upperStar Λ g).mapDerivedCategory
+
+/-- The counit-normalized derived tensor comparison, transported along the canonical
+identification of left-derived pullback with exact termwise pullback.
+Source: latest blueprint, second sentence (blueprint: def-wf-tensor-product). -/
+def wfCondensedTensorPullback
+    (M N : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))) :
+    (wfCondensedFrobenius Λ g).obj ((wfCondensedTensor Λ Y).obj (M, N)) ≅
+      (wfCondensedTensor Λ Y).obj
+        ((wfCondensedFrobenius Λ g).obj M, (wfCondensedFrobenius Λ g).obj N) :=
+  let ε := CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ g
+  (ε.app ((wfCondensedTensor Λ Y).obj (M, N))).symm ≪≫
+    ((CondensedRing.leftDerivedUpperStarTensorIso Λ g).app M).app N ≪≫
+      (wfCondensedTensor Λ Y).mapIso (Iso.prod (ε.app M) (ε.app N))
+
+/-- A strict Weil pair on the actual condensed derived category, in the exact-functor
+convention of def-weil-weil-sheaf-complex. Specialize g to geometric Frobenius.
+Source: latest blueprint, second sentence (blueprint: def-wf-tensor-product). -/
+abbrev wfCondensedWeilPair := IsoAlgebra (wfCondensedFrobenius Λ g)
+
+/-- The tensor Frobenius is precisely the normalized comparison followed by the
+relative derived tensor of the two supplied Weil isomorphisms. This applies to both
+finite and algebraically closed condensed coefficients and arbitrary unbounded carriers.
+Source: latest blueprint, second sentence (blueprint: def-wf-tensor-product). -/
+def wfCondensedTensorFrobenius (K L : wfCondensedWeilPair Λ g) :
+    (wfCondensedFrobenius Λ g).obj
+        ((wfCondensedTensor Λ Y).obj (K.carrier, L.carrier)) ≅
+      (wfCondensedTensor Λ Y).obj (K.carrier, L.carrier) :=
+  wfCondensedTensorPullback Λ g K.carrier L.carrier ≪≫
+    (wfCondensedTensor Λ Y).mapIso (Iso.prod K.str L.str)
+
+/-- Specialization to the geometric Frobenius automorphism of the chosen geometric fibre.
+The coefficient ring may be either finite or algebraically closed, with its condensed
+ring structure; the displayed construction is uniform in that ring.
+Source: latest blueprint, second sentence (blueprint: def-wf-tensor-product). -/
+abbrev wfCondensedGeometricTensorFrobenius (D : FiniteFieldDatum.{u})
+    (X₀ : Over (Spec (CommRingCat.of D.k₀)))
+    [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]
+    (K L : wfCondensedWeilPair Λ (D.geometricFrobenius X₀).hom) :=
+  wfCondensedTensorFrobenius Λ (D.geometricFrobenius X₀).hom K L
 
 end WeilConjectures
 
