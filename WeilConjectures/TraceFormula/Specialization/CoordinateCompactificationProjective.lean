@@ -553,37 +553,6 @@ lemma genericSliceToTraitHom_total :
 
 end TraitHom
 
-/-- **The map of bases of a generic slice through the generic fibre**: for any
-`w : 𝒳_η ⟶ X₁ ×_F η` with `𝒳_Ω ⟶ 𝒳_η ⟶ X₁` equal to `ε`, the map `c : X₂ ⟶ X₁`
-(`NearbyCyclesModel.IsTraitModelOfGenericBase.genericSliceBaseMap`) is
-`X₂ ≅ 𝒳''_η ⟶ 𝒳_η ⟶ X₁ ×_F η ⟶ X₁`. -/
-lemma IsTraitModelOfGenericBase.genericSliceBaseMap_eq {F : Type u} [Field F]
-    {Z₁ : Over (Spec (.of F))} {Z' : Over (Spec (.of k'))}
-    {ι : Spec (.of (FractionRing (PowerSeries k'))) ⟶ Spec (.of F)}
-    {P : NearbyCyclesModel Z₁.left Z'.left} {qP : P.total ⟶ trait k'}
-    {gP : P.generic ⟶ Spec (.of (traitGenericField k'))}
-    (hP : P.IsTraitModelOfGenericBase Z₁ ι qP gP) {bP : P.total ⟶ 𝔸(ULift.{u} (Fin 1); trait k')}
-    (hbP : bP ≫ 𝔸(ULift.{u} (Fin 1); trait k') ↘ trait k' = qP)
-    (w : pullback qP (traitGenericSpec k') ⟶ pullback Z₁.hom ι)
-    (hw : genericFibreInclusion P qP gP hP.isTraitModelOver.isPullback_j.w ≫ w ≫
-      pullback.fst _ _ = P.ε) :
-    hP.genericSliceBaseMap x hbP = (genericSliceFibreIso x hbP).inv ≫
-      genericSliceFibreMap x hbP ≫ w ≫ pullback.fst _ _ := by
-  have := hP.epi_genericSliceModel_ε x hbP
-  refine (cancel_epi (genericSliceModel x hbP).ε).1 ?_
-  have key : pullback.lift (pullback.fst _ _) (pullback.snd _ _ ≫ traitGenericPointToSpec K)
-      (by rw [pullback.condition, Category.assoc, traitGenericPointToSpec_traitGenericSpec]) ≫
-        genericSliceFibreMap x hbP =
-      baseChangeGenericMap hP.isTraitModelOver bP hbP (traitSlice x) (traitSlice_over x) ≫
-        genericFibreInclusion P qP gP hP.isTraitModelOver.isPullback_j.w := by
-    apply pullback.hom_ext
-    · simp
-    · simp only [Category.assoc, genericSliceFibreMap_snd, pullback.lift_snd_assoc,
-        genericFibreInclusion_snd, baseChangeGenericMap_g_assoc,
-        traitGenericPointToSpec_traitGenericSpecMap]
-  rw [hP.genericSliceModel_ε_comp_genericSliceBaseMap, genericSliceModel_ε, Category.assoc,
-    Iso.hom_inv_id_assoc, reassoc_of% key, hw]
-
 variable {Xc : Over (Spec (@CommRingCat.of (FractionRing (PowerSeries k')) Field.toCommRing))}
   {Xc' : Over (Spec (.of k'))} {N : NearbyCyclesModel Xc.left Xc'.left} {qN : N.total ⟶ trait k'}
   {gN : N.generic ⟶ Spec (.of (traitGenericField k'))}

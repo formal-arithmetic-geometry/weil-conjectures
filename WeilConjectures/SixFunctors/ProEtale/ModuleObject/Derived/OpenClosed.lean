@@ -8,6 +8,7 @@ module
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenClosedConservative
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarShift
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.OpenClosed
 
 /-!
@@ -26,6 +27,9 @@ constructible derived categories `Dᵇc(X)⟦Λ⟧`:
 * `Lg^* (j_! K)` vanishes when the range of `g` misses the range of the open immersion `j`
   (`ProEtale.CondensedRing.isZero_boundedConstructibleUpperStar_obj_openImmersionLowerShriek`, from
   `ProEtale.CondensedRing.isZero_leftDerivedUpperStar_obj_openImmersionLowerShriek_of_disjoint`).
+* morphisms from a shifted extension by zero `(j_! N)[n]` to `Ri_* M` vanish when the ranges of
+  `j` and `i` are disjoint
+  (`ProEtale.CondensedRing.eq_zero_of_shift_openImmersionLowerShriek_to_lowerStar`).
 
 -/
 
@@ -94,6 +98,34 @@ lemma isZero_boundedConstructibleUpperStar_obj_openImmersionLowerShriek
           ((boundedConstructibleOpenImmersionLowerShriekCompatibility Λ ℓ j).app K))
   rw [IsZero.iff_id_eq_zero] at h ⊢
   exact (boundedConstructible (condensedRingObj Λ W.left)).ι.map_injective (by simpa using h)
+
+/-- Maps from a shifted extension by zero `(j_! N)[n]` to a pushforward `Ri_* M` vanish when the
+range of the closed immersion `i` misses the range of the open immersion `j`: by the adjunction
+`Li^* ⊣ Ri_*` they correspond to maps out of `(Li^* j_! N)[n] = 0`. -/
+lemma eq_zero_of_shift_openImmersionLowerShriek_to_lowerStar {U Z X : Over (Spec (.of k))}
+    [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom]
+    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+    (j : U ⟶ X) [IsOpenImmersion j.left] (i : Z ⟶ X)
+    (hji : Disjoint (Set.range j.left.base) (Set.range i.left.base)) (N : Dᵇc(U.left)⟦Λ⟧)
+    (n : ℤ) (M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z.left) Ab.{u + 1})
+      (condensedRingObj Λ Z.left)))
+    (φ : (shiftFunctor _ n).obj ((boundedConstructible (condensedRingObj Λ X.left)).ι.obj
+      ((boundedConstructibleOpenImmersionLowerShriek Λ ℓ j).obj N)) ⟶
+        R((i.left)_*⟦Λ⟧).obj M) : φ = 0 := by
+  have h₀ : IsZero (L((i.left)^*⟦Λ⟧).obj ((boundedConstructible
+      (condensedRingObj Λ X.left)).ι.obj ((boundedConstructibleOpenImmersionLowerShriek Λ ℓ
+        j).obj N))) :=
+    (isZero_leftDerivedUpperStar_obj_openImmersionLowerShriek_of_disjoint Λ j.left i.left hji
+      N.obj).of_iso (L((i.left)^*⟦Λ⟧).mapIso
+        ((boundedConstructibleOpenImmersionLowerShriekCompatibility Λ ℓ j).app N))
+  have h₁ : IsZero (L((i.left)^*⟦Λ⟧).obj ((shiftFunctor _ n).obj ((boundedConstructible
+      (condensedRingObj Λ X.left)).ι.obj ((boundedConstructibleOpenImmersionLowerShriek Λ ℓ
+        j).obj N)))) :=
+    ((shiftFunctor _ n).map_isZero h₀).of_iso ((L((i.left)^*⟦Λ⟧).commShiftIso n).app _)
+  rw [← ((derivedUpperStarLowerStarAdjunction Λ i.left).homEquiv _ _).apply_symm_apply φ,
+    h₁.eq_of_src (((derivedUpperStarLowerStarAdjunction Λ i.left).homEquiv _ _).symm φ) 0,
+    Adjunction.homEquiv_unit, Functor.map_zero, Limits.comp_zero]
+
 
 end BoundedConstructible
 
