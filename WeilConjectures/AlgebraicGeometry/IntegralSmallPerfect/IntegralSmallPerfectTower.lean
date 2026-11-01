@@ -28,6 +28,9 @@ open scoped ZeroObject
 
 namespace AlgebraicGeometry.ProEtale.IntegralSmallPerfect
 
+instance bigModuleDerived (A : Type u) [CommRing A] :
+    HasDerivedCategory (ModuleCat.{u + 1} A) := HasDerivedCategory.standard _
+
 private def liftComplex
     {C D : Type*} [Category* C] [Category* D] [Preadditive C] [Preadditive D]
     (F : C ⥤ D) [F.Additive] [F.Full] [F.Faithful]
@@ -180,6 +183,27 @@ private def uliftSameIso (A : Type u) [CommRing A] :
   intro M N f
   ext x
   rfl
+
+instance (priority := 10000) liftedRestrictEquivalence
+    (A : Type u) [CommRing A] :
+    (ModuleCat.restrictScalars.{u + 1}
+      (ULift.ringEquiv : ULift.{u + 1} A ≃+* A).symm.toRingHom).IsEquivalence :=
+  (ModuleCat.restrictScalarsEquivalenceOfRingEquiv.{u, u + 1, u + 1}
+    (ULift.ringEquiv : ULift.{u + 1} A ≃+* A).symm).isEquivalence_functor
+
+instance (priority := 100000) liftedRestrictLeftAdjoint
+    (A : Type u) [CommRing A] :
+    (ModuleCat.restrictScalars.{u + 1}
+      (ULift.ringEquiv : ULift.{u + 1} A ≃+* A).symm.toRingHom).IsLeftAdjoint :=
+  (ModuleCat.restrictScalarsEquivalenceOfRingEquiv.{u, u + 1, u + 1}
+    (ULift.ringEquiv : ULift.{u + 1} A ≃+* A).symm).toAdjunction.isLeftAdjoint
+
+instance (priority := 100000) liftedRestrictRightAdjoint
+    (A : Type u) [CommRing A] :
+    (ModuleCat.restrictScalars.{u + 1}
+      (ULift.ringEquiv : ULift.{u + 1} A ≃+* A).symm.toRingHom).IsRightAdjoint :=
+  (ModuleCat.restrictScalarsEquivalenceOfRingEquiv.{u, u + 1, u + 1}
+    (ULift.ringEquiv : ULift.{u + 1} A ≃+* A).symm).symm.toAdjunction.isRightAdjoint
 
 private theorem small_perfect_of_lifted_perfect
     (A : Type u) [CommRing A]
