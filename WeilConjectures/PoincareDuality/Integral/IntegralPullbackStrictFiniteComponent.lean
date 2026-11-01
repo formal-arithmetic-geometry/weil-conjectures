@@ -69,12 +69,6 @@ Source: Stacks 0941 (blueprint: lem-pod-integral-pullback-strict-finite-componen
       (((coefficientSequenceRestriction l E W).mapHomologicalComplex (.up ℤ)).obj C)
 
 section Proof
-attribute [local instance 30000] zeroOfFiniteLimits
-attribute [local instance 50] additiveOfFiniteLimits
-attribute [local instance]
-  finitePullback_limits finitePullback_colimits nativeFinitePullback_limits
-  nativeFinitePullback_colimits mixedFinitePullback_limits mixedFinitePullback_colimits
-attribute [local irreducible] restrictionEvaluation finiteEvaluation strictLevel
 attribute [local irreducible] unrestrictedIntegralReductionFunctor scalarReductionExtension
 attribute [local instance] scalarReductionRestrictionLimits scalarReductionRestrictionColimits
 attribute [local irreducible] coefficientSequenceRestriction
@@ -157,8 +151,8 @@ private theorem map_iso_cancel_assoc {A B : Type*} [Category A] [Category B]
 end Proof
 
 attribute [local irreducible] unrestrictedIntegralReductionFunctor scalarReductionExtension
-attribute [local irreducible] strictLevel restrictionEvaluation finiteEvaluation
-  coefficientSequenceRestriction completedIntegralCommRingProjectionUnrestricted
+attribute [local irreducible] coefficientSequenceRestriction
+  completedIntegralCommRingProjectionUnrestricted
 attribute [local implicit_reducible] integralOperationsPullbackTowerFunctor
   integralOperationsPullbackLevel integralOperationsRestrict
   integralOperationsLevelPullback coefficientProEtaleModuleDirectImage
