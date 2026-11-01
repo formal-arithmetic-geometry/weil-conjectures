@@ -253,10 +253,6 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
 Source: Stacks 08FI, 08J7; HRS Section 3
 (blueprint: lem-sfb-profinite-free-slice-derived-hom). -/
 abbrev test : X.ProEt := (profiniteToProEtOf X).obj P
-/-- The representable profinite parameter, lifted to the coefficient universe.
-Source: Stacks 08FI, 08J7; HRS Section 3
-(blueprint: lem-sfb-profinite-free-slice-derived-hom). -/
-abbrev parameter := ((coherentTopology Profinite.{u}).uliftYoneda.{u + 1}).obj P
 /-- The representable sheaf of the actual object X[P] of the small pro-etale site.
 Source: Stacks 08FI, 08J7; HRS Section 3
 (blueprint: lem-sfb-profinite-free-slice-derived-hom). -/

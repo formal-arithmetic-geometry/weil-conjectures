@@ -32,10 +32,6 @@ namespace AlgebraicGeometry.ProEtale.FreeParameterEvaluation
 
 variable (R : Profinite.CondensedRing.{u}) [IsCommMonObj R.X]
 
-/-- The recorded free module on h_P.
-Source: Stacks 08J7 (blueprint: def-sfb-free-parameter-evaluation-data). -/
-abbrev freeParameter (P : Profinite.{u}) := ProfiniteFreeSlice.freeParameter R.X P
-
 /-- The relative parameter scheme from the recorded test-object functor.
 Source: Stacks 08J7 (blueprint: def-sfb-free-parameter-evaluation-data). -/
 abbrev testScheme (X : Scheme.{u}) (P : Profinite.{u}) := (ProfiniteFreeSlice.test X P).left
