@@ -48,8 +48,8 @@ zero `i_!` needs no resolutions and only the pushforward is derived.
   compactification. Its canonical mate goes in the direction
   `Lg'^* ⋙ i'_! ⟶ i_! ⋙ Lḡ^*` (`Etale.derivedPlusOpenImmersionLowerShriekBaseChange`); base
   change for extension by zero asserts that this mate is an isomorphism
-  (`Etale.isIso_derivedPlusOpenImmersionLowerShriekBaseChange`, currently `sorry`: on geometric
-  stalks both sides are the pulled-back stalk on `X'` and vanish outside `X'`), and the
+  (`Etale.isIso_derivedPlusOpenImmersionLowerShriekBaseChange`, deduced from the underived base
+  change isomorphism `Etale.openImmersionLowerShriekBaseChangeMap`), and the
   construction of `Ex_!^c` uses its inverse.
 
 The independence of `Ex_!^c` from the chosen compactification is *not* treated here; all
@@ -112,17 +112,6 @@ lemma Etale.squareUpperStarIso_eq {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {g : Y'
     Iso.trans_symm, Iso.trans_assoc]
   rfl
 
-/-- The inclusion `D⁺ ⥤ D` maps the pullback comparison `Etale.pullbackSquareComparison` of a
-commutative square to the isomorphism induced on unbounded derived categories by the square
-isomorphism `Etale.squareUpperStarIso`. -/
-lemma Etale.ι_map_pullbackSquareComparison_hom_app {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y}
-    {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X} (sq : CommSq g' f' f g)
-    (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology A)) :
-    DerivedCategory.Plus.ι.map ((Etale.pullbackSquareComparison A sq).hom.app K) =
-      (Functor.mapDerivedCategorySquareIso (Etale.squareUpperStarIso A sq)).hom.app
-        (DerivedCategory.Plus.ι.obj K) := by
-  sorry
-
 end SquareUpperStar
 
 /-! ### The extension-by-zero exchange morphism on bounded below derived categories -/
@@ -165,6 +154,17 @@ lemma Etale.derivedPlusOpenImmersionLowerShriekBaseChangeSquareStep_inv_app (sq 
       D+((j')_!open[A]).map
         ((pullbackSquareComparison A sq.flip).inv.app (D+((j)_!open[A]).obj K)) :=
   congr(Iso.inv $(Etale.derivedPlusOpenImmersionLowerShriekBaseChangeSquareStep_app A sq K))
+
+/-- For a Cartesian square of open immersions, the exchange morphism of the square isomorphism
+for the adjunctions `j_! ⊣ j^*` and `j'_! ⊣ j'^*` is an isomorphism: it is the base change map
+`Etale.openImmersionLowerShriekBaseChangeMap`. -/
+lemma Etale.isIso_exchangeLeft_squareUpperStarIso (sq : IsPullback g' j' j g) :
+    IsIso (Adjunction.exchangeLeft (openImmersionLowerShriekUpperStarAdjunction A j)
+      (openImmersionLowerShriekUpperStarAdjunction A j')
+      (squareUpperStarIso A sq.toCommSq.flip)) := by
+  rw [Adjunction.exchangeLeft_eq_of_unit_app_comp _ _ _ _
+    (unit_map_openImmersionLowerShriekBaseChangeMap_app A sq.toCommSq)]
+  exact isIso_openImmersionLowerShriekBaseChangeMap A sq
 
 /- The K-flat resolution package on the coefficient category `A`, as in the sections
 `DerivedUpperStar` and `DerivedUpperLowerStarAdjunction` of
@@ -240,16 +240,6 @@ lemma Etale.derivedPlusOpenImmersionLowerShriekBaseChange_app (sq : CommSq g' j'
           (derivedPlusOpenImmersionLowerShriekBaseChangeCounitStep A j g j').app K := by
   simp [Etale.derivedPlusOpenImmersionLowerShriekBaseChange]
 
-/-- For a Cartesian square of open immersions, the exchange morphism of the square isomorphism
-for the adjunctions `j_! ⊣ j^*` and `j'_! ⊣ j'^*` is an isomorphism: it is the base change map
-`Etale.openImmersionLowerShriekBaseChangeMap`. -/
-lemma Etale.isIso_exchangeLeft_squareUpperStarIso (sq : IsPullback g' j' j g) :
-    IsIso (Adjunction.exchangeLeft (openImmersionLowerShriekUpperStarAdjunction A j)
-      (openImmersionLowerShriekUpperStarAdjunction A j') (squareUpperStarIso A sq.toCommSq.flip)) := by
-  rw [Adjunction.exchangeLeft_eq_of_unit_app_comp _ _ _ _
-    (unit_map_openImmersionLowerShriekBaseChangeMap_app A sq.toCommSq)]
-  exact isIso_openImmersionLowerShriekBaseChangeMap A sq
-
 /-- The extension-by-zero exchange morphism `Etale.derivedPlusOpenImmersionLowerShriekBaseChange`
 is the exchange morphism `Adjunction.exchangeLeft` of the pullback comparison of the square for
 the bounded below derived adjunctions `j_! ⊣ j^*` and `j'_! ⊣ j'^*`. -/
@@ -273,10 +263,11 @@ subscheme `X ⊆ Z` under `g`, and on geometric stalks both sides are the pulled
 stalk at points of `X'` and vanish outside `X'`. -/
 theorem Etale.isIso_derivedPlusOpenImmersionLowerShriekBaseChange (sq : IsPullback g' j' j g) :
     IsIso (Etale.derivedPlusOpenImmersionLowerShriekBaseChange A sq.toCommSq) := by
+  have := Etale.isIso_exchangeLeft_squareUpperStarIso A sq
+  rw [Etale.squareUpperStarIso_eq] at this
   rw [Etale.derivedPlusOpenImmersionLowerShriekBaseChange_eq_exchangeLeft]
-  exact Adjunction.isIso_exchangeLeft_mapDerivedCategoryPlusAdjunction _ _ _
-    (Etale.isIso_exchangeLeft_squareUpperStarIso A sq) _
-    (Etale.ι_map_pullbackSquareComparison_hom_app A sq.toCommSq.flip)
+  exact Adjunction.isIso_exchangeLeft_mapDerivedCategoryPlusAdjunction_of_eqToIso _ _
+    (Etale.upperStarComp A g' j (g' ≫ j) rfl) (Etale.upperStarComp A j' g (j' ≫ g) rfl) _ _
 
 /-- The extension-by-zero exchange isomorphism `j_! ⋙ Lg^* ≅ Lg'^* ⋙ j'_!` of a Cartesian
 square of open immersions: the inverse of the canonical exchange morphism
@@ -338,17 +329,4 @@ lemma Etale.lowerShriekBaseChange_app (c : Compactification f) (sq : IsPullback 
 
 end LowerShriek
 
-end AlgebraicGeometry
-
-namespace AlgebraicGeometry
-variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-example {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y}
-    {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X} (sq : CommSq g' f' f g) (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology A)) :
-    DerivedCategory.Plus.ι.map (((Functor.mapDerivedCategoryPlusNatIso (Etale.upperStarComp A f' g) ≪≫ Functor.mapDerivedCategoryPlusCompIso _ _).symm ≪≫
-          eqToIso (by rw [sq.w]) ≪≫ Functor.mapDerivedCategoryPlusNatIso (Etale.upperStarComp A g' f) ≪≫
-            Functor.mapDerivedCategoryPlusCompIso _ _).hom.app K) =
-      (Functor.mapDerivedCategorySquareIso ((Etale.upperStarComp A f' g).symm ≪≫ eqToIso (by rw [sq.w]) ≪≫ Etale.upperStarComp A g' f)).hom.app
-        (DerivedCategory.Plus.ι.obj K) :=
-  Functor.ι_map_mapDerivedCategoryPlusCompIso_symm_trans_eqToIso_trans_hom_app
-    (Etale.upperStarComp A f' g) (Etale.upperStarComp A g' f) (by rw [sq.w]) (by rw [sq.w]) K
 end AlgebraicGeometry

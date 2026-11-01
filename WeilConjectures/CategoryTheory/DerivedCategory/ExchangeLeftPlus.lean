@@ -20,6 +20,11 @@ restricts the one induced by `θ` on unbounded derived categories
 The proof embeds everything into the unbounded derived categories along the fully faithful
 inclusions `DerivedCategory.Plus.ι`, where the statement is
 `CategoryTheory.Adjunction.exchangeLeft_mapDerivedCategoryAdjunction`.
+
+The variant
+`CategoryTheory.Adjunction.isIso_exchangeLeft_mapDerivedCategoryPlusAdjunction_of_eqToIso` covers
+square isomorphisms passing through a diagonal, as the pullback comparisons of squares of
+schemes do.
 -/
 
 @[expose] public section
@@ -171,8 +176,8 @@ theorem isIso_exchangeLeft_mapDerivedCategoryPlusAdjunction [IsIso (exchangeLeft
   have e₂ : DerivedCategory.Plus.ι.map (jS'.mapDerivedCategoryPlus.map
       (θp.hom.app (jS.mapDerivedCategoryPlus.obj X))) =
       jS'.mapDerivedCategory.map ((Functor.mapDerivedCategorySquareIso θ).hom.app
-        (jS.mapDerivedCategory.obj (DerivedCategory.Plus.ι.obj X))) := by
-    exact congrArg jS'.mapDerivedCategory.map (hθ (jS.mapDerivedCategoryPlus.obj X))
+        (jS.mapDerivedCategory.obj (DerivedCategory.Plus.ι.obj X))) :=
+    congrArg jS'.mapDerivedCategory.map (hθ (jS.mapDerivedCategoryPlus.obj X))
   have h : DerivedCategory.Plus.ι.map ((exchangeLeft aj.mapDerivedCategoryPlusAdjunction
       aj'.mapDerivedCategoryPlusAdjunction θp).app X) =
       (exchangeLeft aj.mapDerivedCategoryAdjunction aj'.mapDerivedCategoryAdjunction
@@ -182,6 +187,24 @@ theorem isIso_exchangeLeft_mapDerivedCategoryPlusAdjunction [IsIso (exchangeLeft
     rfl
   rw [h, exchangeLeft_mapDerivedCategoryAdjunction]
   infer_instance
+
+/-- The form of `Adjunction.isIso_exchangeLeft_mapDerivedCategoryPlusAdjunction` for a square
+isomorphism `e₁.symm ≪≫ eqToIso h ≪≫ e₂ : jU ⋙ H ≅ H' ⋙ jU'` passing through a diagonal
+`P = Q`, with its bounded below counterpart assembled from the isomorphisms induced by `e₁` and
+`e₂` on bounded below derived categories. -/
+theorem isIso_exchangeLeft_mapDerivedCategoryPlusAdjunction_of_eqToIso {P Q : D₁ ⥤ C₂}
+    [P.Additive] [PreservesFiniteLimits P] [PreservesFiniteColimits P]
+    [Q.Additive] [PreservesFiniteLimits Q] [PreservesFiniteColimits Q]
+    (e₁ : P ≅ jU ⋙ H) (e₂ : Q ≅ H' ⋙ jU') (h : P = Q)
+    (hD : P.mapDerivedCategoryPlus = Q.mapDerivedCategoryPlus)
+    [IsIso (exchangeLeft aj aj' (e₁.symm ≪≫ eqToIso h ≪≫ e₂))] :
+    IsIso (exchangeLeft aj.mapDerivedCategoryPlusAdjunction aj'.mapDerivedCategoryPlusAdjunction
+      ((Functor.mapDerivedCategoryPlusNatIso e₁ ≪≫
+          Functor.mapDerivedCategoryPlusCompIso jU H).symm ≪≫
+        eqToIso hD ≪≫ Functor.mapDerivedCategoryPlusNatIso e₂ ≪≫
+          Functor.mapDerivedCategoryPlusCompIso H' jU')) :=
+  isIso_exchangeLeft_mapDerivedCategoryPlusAdjunction aj aj' _ _
+    (Functor.ι_map_mapDerivedCategoryPlusCompIso_symm_trans_eqToIso_trans_hom_app e₁ e₂ h hD)
 
 end Adjunction
 
