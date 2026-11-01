@@ -448,5 +448,4 @@ private def quotientAugmentation (T : Sheaf J CommRingCat.{u})
 attribute [local irreducible] reductionTensorTower
   koszulRepresentativeQuotient
 
-set_option backward.isDefEq.respectTransparency false in
 end CategoryTheory

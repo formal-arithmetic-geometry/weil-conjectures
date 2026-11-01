@@ -6,6 +6,9 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.BrownTowerComparison.BrownTowerBoundedTransport
+public import WeilConjectures.AlgebraicGeometry.BrownTowerComparison.BrownTowerFiniteEvaluationExistence
+public import WeilConjectures.AlgebraicGeometry.BrownTowerComparison.BrownTowerGeometricSiteComparison
+public import WeilConjectures.AlgebraicGeometry.BrownTowerComparison.BrownTowerGeometricTransportData
 
 /-! # Geometric comparisons before transporting the Brown adjunction
 
@@ -99,34 +102,11 @@ structure GeometricTransport (S : StrictEtaleCompactSupport O t c)
 and actual compact-support comparison before adjoining the transported counit.
 Source: Zheng Lemmas 4.10 and 5.22 and the canonical compact-support site comparison.
 
-Proof: At each finite level construct the constant-ring module realization and the
-ordinary exceptional right adjoint. Transpose the inverse of the evaluated support
-comparison along derived extension from one level. Below that level its evaluations
-are the proper scalar counit mates followed by open scalar comparison, and above it
-both sides vanish. Unbounded scalar coherence and joint conservativity make this
-extension comparison invertible. Conjugate it under the composite extension/Brown
-and finite-support/extension adjunctions to obtain evaluation of the Brown right
-adjoint. The conjugation counit equation and the defining transpose yield the finite
-counit equation by the extension triangle identity. Transpose this equation along
-the actual system transitions to get the coefficient mates; identity and composition
-follow from the unit and associativity of derived scalar change and mate pasting.
-Choose these finite comparisons together, retaining the canonical support comparison.
-Construct the site inverse/direct images using the strict-system comparison
-and identify their finite evaluations through constant-ring realization. Finite site
-full faithfulness makes the evaluated units invertible; conservativity gives the
-system units. The counit is invertible on bounded-below objects of levelwise origin.
-Reflect common lower bounds through exact, conservative finite inverse image and
-then through the exact evaluations. The finite adjoint comparison identifies the
-exceptional quotient mates with the chosen finite counit transposes. Coefficient
-compatibility on constructible finite-Tor inputs makes these mates invertible, so
-normalized inputs give normalized exceptional systems. Finally paste the proper
-site mate and termwise open-extension comparison into a transformation on whole
-systems. Its finite evaluations are the named compact-support site isomorphisms;
-conservativity proves invertibility on bounded-below inputs. Exact open extension
-and right-derived proper image give its bound. No transported counit or Hom
-equivalence is chosen in this construction: those
-are obtained afterwards by inverting this compact-support comparison at the bounded
-exceptional image and by composing the three adjunction Hom bijections.
+Proof: Apply `brownTowerFiniteEvaluation_exists` to obtain the finite evaluation
+package together with its canonical support comparison and normalization. Apply
+`brownTowerGeometricTransport_core_exists` to that package. Finally copy the core
+fields into `GeometricTransport`, using the package's finite witness; no arbitrary
+finite support isomorphism is introduced by the assembly.
 (blueprint: lem-pur-brown-tower-geometric-transport). -/
 theorem brownTowerGeometricTransport_exists
     (p l : ℕ) [Fact p.Prime] [Fact l.Prime] (_hpl : p ≠ l)
@@ -145,7 +125,26 @@ theorem brownTowerGeometricTransport_exists
     (S : StrictEtaleCompactSupport (Padic.coefficientExtensionIntegers l E) t c)
     (G : EtaleTowerBrownAdjunction S) :
     ∃ H : FiniteEvaluation S G, Nonempty (GeometricTransport S G H) := by
-  sorry
+  obtain ⟨N⟩ := brownTowerFiniteEvaluation_exists p l _hpl k E t _ht f c S G
+  let H := N.data
+  obtain ⟨D⟩ := brownTowerGeometricTransport_core_exists p l _hpl k E t _ht f c S G N
+  let _ := H.finite
+  exact ⟨H, ⟨{
+    finite := H.finite
+    siteX := D.siteX
+    siteY := D.siteY
+    compact := D.compact
+    compactComparison := D.compactComparison
+    compactEvaluation := D.compactEvaluation
+    realizationX := D.realizationX
+    realizationY := D.realizationY
+    compactComparison_evaluation := D.compactComparison_evaluation
+    compact_iso := D.compact_iso
+    unit_iso_X := D.unit_iso_X
+    unit_iso_Y := D.unit_iso_Y
+    counit_iso_X := D.counit_iso_X
+    counit_iso_Y := D.counit_iso_Y
+    bound := D.bound }⟩⟩
 
 end BrownTowerComparison
 end AlgebraicGeometry

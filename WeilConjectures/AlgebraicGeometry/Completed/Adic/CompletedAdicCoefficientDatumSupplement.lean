@@ -763,13 +763,10 @@ private theorem restrictedChangeTensorIso
 
 end CompletedTensorComparisonProof
 
-set_option backward.isDefEq.respectTransparency false in
 section FiniteReductionComparison
 
 attribute [local irreducible] SheafOfModules.monoidalCategory
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 private theorem completedOrdinaryRestrictionComparison (T : Scheme.{t})
@@ -791,8 +788,6 @@ private abbrev completedChangeModels (T : Scheme.{t})
   let h := (completedAdicChangeData T φ).choose_spec.choose_spec.choose_spec.choose_spec.2.2
   h.choose_spec
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
 end FiniteReductionComparison
 
 private abbrev completedRestriction (T : Scheme.{t})

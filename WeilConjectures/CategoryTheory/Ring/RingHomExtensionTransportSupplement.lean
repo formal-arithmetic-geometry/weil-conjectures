@@ -31,5 +31,4 @@ private theorem point_eq (U : (Discrete PUnit.{u + 1})ᵒᵖ) :
   rcases U with ⟨⟨⟨⟩⟩⟩
   rfl
 
-set_option linter.unusedVariables false in
 end CategoryTheory

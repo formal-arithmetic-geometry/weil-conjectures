@@ -192,4 +192,11 @@ theorem TestLineHom.IsEtaleCompatible.comp {X : AlgebraicSpace S}
   rw [hf, he]
   rfl
 
+/-- The underlying cartesian morphism of a cartesian isomorphism.
+Source: Stacks, Tag 03G7 (blueprint: def-trf-cartesian-line-presentation). -/
+def TestLineIso.toHom {F : (Over S)ᵒᵖ ⥤ Type u} {P Q : TestLineFamily F}
+    (e : TestLineIso P Q) : TestLineHom P Q where
+  app W := (e.app W).hom
+  naturality j := e.naturality j
+
 end AlgebraicGeometry.AlgebraicSpace

@@ -109,5 +109,4 @@ private theorem coverHomologyZero
   exact (h i).of_iso
     (((CondensedRing.upperStar Γ.X (𝒰.f i)).mapDerivedCategoryHomologyFunctorIso q).app K)
 
-set_option linter.unusedVariables false in
 end AlgebraicGeometry.ProEtale

@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.TraceFormula.Specialization.GenericSliceTraitGaloisLayerIntegral
 public import WeilConjectures.TraceFormula.Specialization.GenericSliceTraitExists
+public import WeilConjectures.TraceFormula.Specialization.GenericSliceTraitUnramified
+public import WeilConjectures.TraceFormula.Specialization.NearbyFinitenessPadicAlgCl
 public import WeilConjectures.Tactic.ExactModProofs
 
 /-!
@@ -52,15 +54,18 @@ Together with the trait case `n = 0`
 lisse sheaves and the proper-exchange cases, they prove the finiteness theorem by induction on `n`
 (`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_obj`).
 
-## Unfinished
+## Implementation notes
 
 The slice step is proved from Th. finitude 3.7 and the averaging splitting (M2)
-(`WeilConjectures.TraceFormula.Specialization.GenericSliceTraitGaloisLayerIntegral`). The
-criterion is `sorry`ed; no blueprint node states it (the blueprint has no node for the finiteness
-of nearby cycles). The criterion needs that the cohomology
-sheaves of `Ψ B` are ind-constructible, which for torsion coefficients holds for every étale
-sheaf, but has no analogue for pro-étale `ℚ̄_ℓ`-sheaves without passing through `𝒪_E`-lattices
-and their reductions (Bhatt–Scholze, *The pro-étale topology for schemes*, §6.8).
+(`WeilConjectures.TraceFormula.Specialization.GenericSliceTraitGaloisLayerIntegral`). Deligne's
+argument for the criterion needs that the cohomology sheaves of `Ψ B` are ind-constructible,
+which holds for every étale sheaf with torsion coefficients (Stacks 03SA) but has no analogue for
+pro-étale `ℚ̄_ℓ`-sheaves. The criterion is therefore deduced from the finiteness theorem itself,
+which is proved first with the finite coefficients `𝔽_E`, by Deligne's induction with the
+closed-point criterion (`WeilConjectures.TraceFormula.Specialization.NearbyFinitenessTorsion`),
+and then for `ℚ̄_ℓ` through integral models and the integral criterion for derived complete
+`𝒪_E`-complexes (`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_obj_of_integral`,
+Bhatt–Scholze, *The pro-étale topology for schemes*, §6.8).
 
 -/
 
@@ -71,28 +76,6 @@ universe u
 open CategoryTheory Limits
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
-
-namespace AlgebraicGeometry.GenericSliceTrait
-
-variable {k' : Type u} [Field k'] (D : GenericSliceTrait k')
-
-/-- The composite `k'⟦t⟧ ⟶ R ⟶ K⟦t⟧` of the structure map and the change of trait of a generic
-slice trait is the coefficientwise map. -/
-lemma ι_comp_φ : D.ι.comp D.φ = PowerSeries.map (algebraMap k' (traitSliceField k')) := by
-  have h : Spec.map (CommRingCat.ofHom (D.ι.comp D.φ)) = traitMap k' (traitSliceField k') := by
-    rw [CommRingCat.ofHom_comp, Spec.map_comp, D.spec_φ, reassoc_of% D.spec_ι_comp,
-      traitSlice_over]
-  exact congrArg CommRingCat.Hom.hom (Spec.map_injective h)
-
-/-- The change of trait `Spec K⟦t⟧ ⟶ S'` of a generic slice trait is unramified: `t` is a
-uniformizer of both. -/
-lemma maximalIdeal_eq_map_ι :
-    IsLocalRing.maximalIdeal (PowerSeries (traitSliceField k')) =
-      (IsLocalRing.maximalIdeal D.R).map D.ι := by
-  rw [D.maximalIdeal_eq, Ideal.map_map, ι_comp_φ,
-    maximalIdeal_powerSeries_eq_map k' (traitSliceField k')]
-
-end AlgebraicGeometry.GenericSliceTrait
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -225,6 +208,9 @@ theorem nonempty_retract_upperStar_nearbyCycles_affineSpaceSlice (n : ℕ) (i : 
   ⟨⟨_, retraction (((affineSpaceSliceHom k' n i).pullbackExchange
     (Profinite.padicAlgClRingObj ℓ)).app B), IsSplitMono.id _⟩⟩
 
+omit [Fact (ringChar k').Prime] in
+set_option linter.unusedVariables false in
+-- the hypotheses of the core case of the induction are not needed by the proof, see below
 /-- **Deligne's criterion on the coordinate slices, core case** (SGA 4½, [Th. finitude], proof of
 Thm. 3.2): suppose that for every coordinate `i` and every bounded constructible complex `B` on
 `𝔸ⁿ⁺¹_S`, the restriction `Lhᵢ,ₛ^* Ψ B` of the nearby cycles to the geometric generic fibre of the
@@ -232,8 +218,13 @@ Thm. 3.2): suppose that for every coordinate `i` and every bounded constructible
 of the extension by zero `v_! L = Rc_* j_{W!} Rc'_* L` of a lisse sheaf `L` along a locally
 closed immersion `v : E ⟶ 𝔸ⁿ⁺¹_S` into the generic fibre are bounded constructible, in the case
 not covered by the proper exchange: the closed subscheme `D` meets the special fibre and no
-closed subscheme of `D` containing `W` is quasi-finite over `S`. See the module docstring;
-`sorry`ed. -/
+closed subscheme of `D` containing `W` is quasi-finite over `S`.
+
+Since the nearby cycles of `𝔸ⁿ⁺¹_S` preserve bounded constructible complexes
+(`NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_obj_of_integral`, deduced from
+the case of finite coefficients), the hypotheses on the slices and on `D`, `W` are not needed:
+`v_! L` is bounded constructible. They are kept so that the statement is the step of Deligne's
+induction in `NearbyCyclesModel.boundedConstructible_nearbyCycles_affineSpace_lisse_generic`. -/
 theorem boundedConstructible_nearbyCycles_affineSpace_lisse_of_slices (n : ℕ)
     (h : ∀ (i : Fin (n + 1))
       (B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology (affineSpaceModel k' (n + 1)).total)
@@ -261,8 +252,12 @@ theorem boundedConstructible_nearbyCycles_affineSpace_lisse_of_slices (n : ℕ)
         ((R((c)_*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj
           (D((W.ι)_!open⟦Profinite.padicAlgClRingObj ℓ⟧).obj
             ((R((c')_*⟦Profinite.padicAlgClRingObj ℓ⟧)).obj
-              ((DerivedCategory.singleFunctor _ 0).obj L))))) :=
-  sorry
+              ((DerivedCategory.singleFunctor _ 0).obj L))))) := by
+  have : IsNoetherian (affineSpaceModel k' (n + 1)).total :=
+    (isTraitModel_affineSpaceModel (k' := k') (n + 1)).isNoetherian_total
+  exact boundedConstructible_nearbyCycles_affineSpace_obj_of_integral (n + 1)
+    (boundedConstructible_rightDerivedLowerStar_of_isClosedImmersion _ c
+      (boundedConstructible_lisseExtension_closed (n + 1) D c W E c' L hL))
 
 end NearbyCyclesModel
 

@@ -21,6 +21,9 @@ Multiplication short exact sequences show that the target universal counit compu
 on the image of a resolving object. No preservation of the resolving class is needed.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 set_option autoImplicit false
@@ -86,7 +89,6 @@ variable {A B A' B' : Type*} [Category* A] [Category* B] [Category* A'] [Categor
     DerivedCategory.Q.map ((a'.mapHomologicalComplex (.up ℤ)).unit.app P))
   (he : ∀ X, F.map (a.unit.app X) ≫ ρ.hom.app (E.obj X) ≫
     R'.map (e.hom.app X) = a'.unit.app (F.obj X))
-include hβ hunit hunit' he in
 end
 
 section
@@ -139,7 +141,6 @@ variable {A B A' B' : Type*} [Category* A] [Category* B] [Category* A'] [Categor
   (hres : ∀ K, ∃ (P : CochainComplex A ℤ) (p : P ⟶ K), H P ∧ QuasiIso p)
   (hcomp : ∀ P, H P → IsIso (ε.app P) ∧
     IsIso (ε'.app ((F.mapHomologicalComplex (.up ℤ)).obj P)))
-include hunit hunit' he hres hcomp in
 end
 
 section
@@ -157,7 +158,6 @@ variable {A B A' B' : Type*} [Category* A] [Category* B] [Category* A'] [Categor
   (hc' : ∀ X : A', IsColimit (CokernelCofork.ofπ (a'.unit.app X) (hz' X)))
   (F : A ⥤ A') [F.Additive] [PreservesFiniteColimits F] (G : B ⥤ B')
   (ρ : R ⋙ F ≅ G ⋙ R')
-include hc hc' in
 end
 
 section
@@ -178,7 +178,6 @@ variable {A B : Type*} [Category* A] [Abelian A] [HasDerivedCategory A]
     R.mapDerivedCategory.map (ε.app P) ≫
     R.mapDerivedCategoryFactors.hom.app ((E.mapHomologicalComplex (.up ℤ)).obj P) =
     DerivedCategory.Q.map ((a.mapHomologicalComplex (.up ℤ)).unit.app P))
-include hres hunit in
 end
 
 section
@@ -193,16 +192,9 @@ variable {A B : Type*} [Category* A] [Abelian A] [HasDerivedCategory A]
   (a : E ⊣ R)
   (hz : ∀ X : A, (n • 𝟙 X) ≫ a.unit.app X = 0)
   (hc : ∀ X : A, IsColimit (CokernelCofork.ofπ (a.unit.app X) (hz X)))
-include hz in
-omit [HasDerivedCategory A] [HasDerivedCategory B]
-  [PreservesFiniteLimits R] [PreservesFiniteColimits R] in
-include hc in
-omit [HasDerivedCategory A] [HasDerivedCategory B]
-  [PreservesFiniteLimits R] [PreservesFiniteColimits R] in
 variable (L : DerivedCategory A ⥤ DerivedCategory B)
   (ε : DerivedCategory.Q ⋙ L ⟶ E.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)
   [R.ReflectsIsomorphisms]
-include hc in
 end
 
 section CokernelExchange
@@ -246,5 +238,4 @@ variable {A B A' B' : Type*} [Category* A] [Category* B] [Category* A'] [Categor
     R'.mapDerivedCategoryFactors.hom.app ((E'.mapHomologicalComplex (.up ℤ)).obj P) =
     DerivedCategory.Q.map ((a'.mapHomologicalComplex (.up ℤ)).unit.app P))
 
-include hc hc' hres hres' hm hm' hcomp hcomp' hu hu' in
 end CokernelExchange

@@ -38,6 +38,8 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarAdjunctionCompat
 import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionComp
 import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjectionBaseChange
+public import WeilConjectures.ProperBaseChange.RingedSliceExtensionTensorHomData
+public import WeilConjectures.SmoothPurity.CompactificationProjectionComposition
 
 /-! # Tensor projection maps and compact-support composition
 
@@ -95,6 +97,75 @@ private theorem projection_transport
   simp only [Category.assoc, Functor.map_comp]
   rw [reassoc_of% hfg, ← reassoc_of% hn, reassoc_of% ht]
   rw [b.hom.naturality q, reassoc_of% hh]
+
+private theorem tensor_projection_conjugation
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    (F : C ⥤ D) (G : D ⥤ E) (H : C ⥤ E)
+    (T : C ⥤ C ⥤ C) (U : D ⥤ D ⥤ D) (V : E ⥤ E ⥤ E)
+    (s : T ≅ T.flip) (t : U ≅ U.flip) (v : V ≅ V.flip)
+    (Lf Df : D ⥤ C) (Lg Dg : E ⥤ D) (Lh Dh : E ⥤ C)
+    (lf : Lf ≅ Df) (lg : Lg ≅ Dg) (lh : Lh ≅ Dh)
+    (lc : Lh ≅ Lg ⋙ Lf) (dc : Dh ≅ Dg ⋙ Df) (a : F ⋙ G ≅ H)
+    (M : C) (K : E)
+    (pf : (U.obj (F.obj M)).obj (Lg.obj K) ⟶ F.obj ((T.obj M).obj (Lf.obj (Lg.obj K))))
+    (pf' : (U.obj (F.obj M)).obj (Dg.obj K) ⟶ F.obj ((T.obj M).obj (Lf.obj (Dg.obj K))))
+    (pg : (V.obj (G.obj (F.obj M))).obj K ⟶ G.obj ((U.obj (F.obj M)).obj (Lg.obj K)))
+    (ph : (V.obj (H.obj M)).obj K ⟶ H.obj ((T.obj M).obj (Lh.obj K)))
+    (hf : (U.obj (F.obj M)).map (lg.hom.app K) ≫ pf' =
+      pf ≫ F.map ((T.obj M).map (Lf.map (lg.hom.app K))))
+    (hc : lc.hom.app K ≫ Lf.map (lg.hom.app K) ≫ lf.hom.app (Dg.obj K) =
+      lh.hom.app K ≫ dc.hom.app K)
+    (ht : pg ≫ G.map pf ≫ a.hom.app ((T.obj M).obj (Lf.obj (Lg.obj K))) =
+      (V.map (a.hom.app M)).app K ≫ ph ≫ H.map ((T.obj M).map (lc.hom.app K))) :
+    (v.hom.app K).app (G.obj (F.obj M)) ≫ pg ≫
+        G.map ((U.obj (F.obj M)).map (lg.hom.app K)) ≫
+        G.map ((t.inv.app (Dg.obj K)).app (F.obj M)) ≫
+        G.map ((t.hom.app (Dg.obj K)).app (F.obj M) ≫ pf' ≫
+          F.map ((T.obj M).map (lf.hom.app (Dg.obj K))) ≫
+          F.map ((s.inv.app (Df.obj (Dg.obj K))).app M)) ≫
+        a.hom.app ((T.obj (Df.obj (Dg.obj K))).obj M) =
+      (V.obj K).map (a.hom.app M) ≫ (v.hom.app K).app (H.obj M) ≫ ph ≫
+        H.map ((T.obj M).map (lh.hom.app K)) ≫
+        H.map ((s.inv.app (Dh.obj K)).app M) ≫ H.map ((T.map (dc.hom.app K)).app M) := by
+  let r := (T.obj M).map (Lf.map (lg.hom.app K) ≫ lf.hom.app (Dg.obj K)) ≫
+    (s.inv.app (Df.obj (Dg.obj K))).app M
+  let q := (T.obj M).map (lh.hom.app K) ≫ (s.inv.app (Dh.obj K)).app M
+  have hcr : (T.obj M).map (lc.hom.app K) ≫ r =
+      q ≫ (T.map (dc.hom.app K)).app M := by
+    dsimp only [r, q]
+    rw [← Category.assoc, ← Functor.map_comp, hc, Functor.map_comp, Category.assoc]
+    have hs : (T.obj M).map (dc.hom.app K) ≫
+        (s.inv.app (Df.obj (Dg.obj K))).app M =
+      (s.inv.app (Dh.obj K)).app M ≫ (T.map (dc.hom.app K)).app M :=
+      congr_app (s.inv.naturality (dc.hom.app K)) M
+    simpa only [Category.assoc] using
+      congrArg (((T.obj M).map (lh.hom.app K)) ≫ ·) hs
+  have ha := a.hom.naturality r
+  dsimp only [Functor.comp_map] at ha
+  have hv := (v.hom.app K).naturality (a.hom.app M)
+  have hcancel : G.map ((t.inv.app (Dg.obj K)).app (F.obj M)) ≫
+      G.map ((t.hom.app (Dg.obj K)).app (F.obj M) ≫ pf' ≫
+        F.map ((T.obj M).map (lf.hom.app (Dg.obj K))) ≫
+        F.map ((s.inv.app (Df.obj (Dg.obj K))).app M)) =
+      G.map (pf' ≫ F.map ((T.obj M).map (lf.hom.app (Dg.obj K))) ≫
+        F.map ((s.inv.app (Df.obj (Dg.obj K))).app M)) := by
+    rw [← G.map_comp, Iso.inv_hom_id_app_app_assoc]
+  rw [reassoc_of% hcancel]
+  have hfg := congrArg G.map hf
+  simp only [Functor.map_comp] at hfg
+  simp only [Functor.map_comp, Category.assoc]
+  rw [reassoc_of% hfg]
+  have hr : G.map (F.map ((T.obj M).map (Lf.map (lg.hom.app K)))) ≫
+      G.map (F.map ((T.obj M).map (lf.hom.app (Dg.obj K)))) ≫
+      G.map (F.map ((s.inv.app (Df.obj (Dg.obj K))).app M)) = G.map (F.map r) := by
+    simp only [r, Functor.map_comp, Category.assoc]
+  rw [reassoc_of% hr, ha]
+  rw [reassoc_of% ht]
+  have hh := congrArg H.map hcr
+  simp only [Functor.map_comp] at hh
+  rw [hh, reassoc_of% hv]
+  simp only [q, Functor.map_comp, Category.assoc]
+  rfl
 
 namespace AlgebraicGeometry.Etale
 
@@ -241,6 +312,29 @@ private theorem projectionMap_compactification_comp
     Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, Iso.symm_hom,
     Category.assoc] using ht
 
+private theorem pullback_comparison_comp
+    (A : Type (u + 1)) [CommRing A]
+    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    (K : DerivedCategoryModule A Z) :
+    (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) f g).hom.app K ≫
+        (upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor.map
+          ((leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) g).hom.app K) ≫
+        (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) f).hom.app
+          ((upperStar (ModuleCat.{u + 1} A) g).mapDerivedCategory.obj K) =
+      (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) (f ≫ g)).hom.app K ≫
+        (unboundedEtaleUpperStarCompIso A f g).hom.app K := by
+  simp only [leftDerivedUpperStarComp, Functor.leftDerivedFunctorNatIso,
+    Functor.leftDerivedFunctorCompIso, leftDerivedUpperStarIsoMapDerivedCategory,
+    unboundedEtaleUpperStarCompIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app, Category.assoc,
+    Iso.inv_hom_id_app_assoc]
+  rw [← (upperStar (ModuleCat.{u + 1} A)
+    f).leftDerivedFunctorIsoMapDerivedCategory.inv.naturality_assoc]
+  simp only [← Functor.map_comp, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id,
+    Category.comp_id]
+  erw [Category.comp_id]
+
 end ProjectionProof
 
 section TensorConventionProof
@@ -290,6 +384,172 @@ private theorem projectionMap_chosen_comp
       (HasCompactification.compactification g)) M K
 
 -- Normalize the two tensor conventions without unfolding the derived functors.
+
+private theorem compactSupportProjectionMap_comp_forward
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    [QuasiCompact f] [QuasiCompact (f ≫ g)]
+    (M : DerivedCategoryModule A X) (K : DerivedCategoryModule A Z) :
+    compactSupportProjectionMap A g
+        ((rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).obj M) K ≫
+      (rightDerivedLowerShriek (ModuleCat.{u + 1} A) g).map
+        (compactSupportProjectionMap A f M
+          ((upperStar (ModuleCat.{u + 1} A) g).mapDerivedCategory.obj K)) ≫
+      (unboundedEtaleLowerShriekCompIso A f g).hom.app
+        (((derivedTensor (ModuleCat.{u + 1} A) X).obj
+          ((upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategory.obj
+            ((upperStar (ModuleCat.{u + 1} A) g).mapDerivedCategory.obj K))).obj M) =
+    ((derivedTensor (ModuleCat.{u + 1} A) Z).obj K).map
+        ((unboundedEtaleLowerShriekCompIso A f g).hom.app M) ≫
+      compactSupportProjectionMap A (f ≫ g) M K ≫
+      (rightDerivedLowerShriek (ModuleCat.{u + 1} A) (f ≫ g)).map
+        (((derivedTensor (ModuleCat.{u + 1} A) X).map
+          ((unboundedEtaleUpperStarCompIso A f g).hom.app K)).app M) := by
+  have h := tensor_projection_conjugation (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f)
+    (rightDerivedLowerShriek (ModuleCat.{u + 1} A) g) (rightDerivedLowerShriek (ModuleCat.{u + 1} A)
+    (f ≫ g)) (derivedTensor (ModuleCat.{u + 1} A) X) (derivedTensor (ModuleCat.{u + 1} A) Y)
+    (derivedTensor (ModuleCat.{u + 1} A) Z)
+    (derivedTensorSymmetry (ModuleCat.{u + 1} A) X)
+    (derivedTensorSymmetry (ModuleCat.{u + 1} A) Y)
+    (derivedTensorSymmetry (ModuleCat.{u + 1} A) Z)
+    ((upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor) ((upperStar (ModuleCat.{u + 1} A)
+      f).mapDerivedCategory) ((upperStar (ModuleCat.{u + 1} A) g).leftDerivedFunctor) ((upperStar
+      (ModuleCat.{u + 1} A) g).mapDerivedCategory) ((upperStar (ModuleCat.{u + 1} A) (f ≫
+      g)).leftDerivedFunctor) ((upperStar (ModuleCat.{u + 1} A) (f ≫ g)).mapDerivedCategory)
+      (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) f)
+      (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) g)
+      (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) (f ≫ g))
+      (leftDerivedUpperStarComp (ModuleCat.{u + 1} A) f g) (unboundedEtaleUpperStarCompIso A f g)
+      (unboundedEtaleLowerShriekCompIso A f g) M K (((projectionMap (ModuleCat.{u + 1} A) f).app
+      M).app (((upperStar (ModuleCat.{u + 1} A) g).leftDerivedFunctor).obj K)) (((projectionMap
+      (ModuleCat.{u + 1} A) f).app M).app (((upperStar (ModuleCat.{u + 1} A)
+      g).mapDerivedCategory).obj K)) (((projectionMap (ModuleCat.{u + 1} A) g).app
+      ((rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).obj M)).app K) (((projectionMap
+      (ModuleCat.{u + 1} A) (f ≫ g)).app M).app K)
+    (((projectionMap (ModuleCat.{u + 1} A) f).app M).naturality
+      ((leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) g).hom.app K))
+    (pullback_comparison_comp A f g K) (projectionMap_chosen_comp A f g M K)
+  have eg : compactSupportProjectionMap A g ((rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).obj
+    M) K =
+      ((derivedTensorSymmetry (ModuleCat.{u + 1} A) Z).hom.app K).app
+          ((rightDerivedLowerShriek (ModuleCat.{u + 1} A) g).obj ((rightDerivedLowerShriek
+            (ModuleCat.{u + 1} A) f).obj M)) ≫ (((projectionMap (ModuleCat.{u + 1} A) g).app
+            ((rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).obj M)).app K) ≫
+        (rightDerivedLowerShriek (ModuleCat.{u + 1} A) g).map (((derivedTensor (ModuleCat.{u + 1} A)
+          Y).obj ((rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).obj M)).map
+          ((leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) g).hom.app K)) ≫
+        (rightDerivedLowerShriek (ModuleCat.{u + 1} A) g).map (((derivedTensorSymmetry (ModuleCat.{u
+          + 1} A) Y).inv.app
+          (((upperStar (ModuleCat.{u + 1} A) g).mapDerivedCategory).obj K)).app
+            ((rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).obj M)) := by
+    exact compactSupportProjectionMap_eq A g ((rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).obj
+      M) K
+  have ef : compactSupportProjectionMap A f M (((upperStar (ModuleCat.{u + 1} A)
+    g).mapDerivedCategory).obj K) =
+      ((derivedTensorSymmetry (ModuleCat.{u + 1} A) Y).hom.app
+          (((upperStar (ModuleCat.{u + 1} A) g).mapDerivedCategory).obj K)).app
+            ((rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).obj M) ≫ (((projectionMap
+            (ModuleCat.{u + 1} A) f).app M).app (((upperStar (ModuleCat.{u + 1} A)
+            g).mapDerivedCategory).obj K)) ≫
+        (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).map (((derivedTensor (ModuleCat.{u + 1} A)
+          X).obj M).map ((leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) f).hom.app
+          (((upperStar (ModuleCat.{u + 1} A) g).mapDerivedCategory).obj K))) ≫
+        (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).map (((derivedTensorSymmetry (ModuleCat.{u
+          + 1} A) X).inv.app
+          (((upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategory).obj (((upperStar (ModuleCat.{u +
+            1} A) g).mapDerivedCategory).obj K))).app M) := by
+    exact compactSupportProjectionMap_eq A f M (((upperStar (ModuleCat.{u + 1} A)
+      g).mapDerivedCategory).obj K)
+  have eh : compactSupportProjectionMap A (f ≫ g) M K =
+      ((derivedTensorSymmetry (ModuleCat.{u + 1} A) Z).hom.app K).app ((rightDerivedLowerShriek
+        (ModuleCat.{u + 1} A) (f ≫ g)).obj M) ≫
+        (((projectionMap (ModuleCat.{u + 1} A) (f ≫ g)).app M).app K) ≫ (rightDerivedLowerShriek
+          (ModuleCat.{u + 1} A) (f ≫ g)).map (((derivedTensor (ModuleCat.{u + 1} A) X).obj M).map
+          ((leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) (f ≫ g)).hom.app K)) ≫
+        (rightDerivedLowerShriek (ModuleCat.{u + 1} A) (f ≫ g)).map (((derivedTensorSymmetry
+          (ModuleCat.{u + 1} A) X).inv.app
+          (((upperStar (ModuleCat.{u + 1} A) (f ≫ g)).mapDerivedCategory).obj K)).app M) := by
+    exact compactSupportProjectionMap_eq A (f ≫ g) M K
+  have hL := congrArg₂ (fun x y ↦ x ≫ (rightDerivedLowerShriek (ModuleCat.{u + 1} A) g).map y ≫
+    (unboundedEtaleLowerShriekCompIso A f g).hom.app (((derivedTensor (ModuleCat.{u + 1} A) X).obj
+      (((upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategory).obj (((upperStar (ModuleCat.{u + 1}
+      A) g).mapDerivedCategory).obj K))).obj M)) eg ef
+  have hR := congrArg (fun x ↦ ((derivedTensor (ModuleCat.{u + 1} A) Z).obj K).map
+    ((unboundedEtaleLowerShriekCompIso A f g).hom.app M) ≫ x ≫
+    (rightDerivedLowerShriek (ModuleCat.{u + 1} A) (f ≫ g)).map (((derivedTensor (ModuleCat.{u + 1}
+      A) X).map ((unboundedEtaleUpperStarCompIso A f g).hom.app K)).app M)) eh
+  apply hL.trans
+  apply Eq.trans ?_ hR.symm
+  simpa only [Category.assoc] using h
+
+/-- Tensor projection maps respect the tower-normalized compact-support compositor.
+Source: Stacks Project, Tags 0F7B and 0F7J, with the tensor square of Tag 0E48
+(blueprint: lem-amb-shriek-tensor-composition).
+
+Proof: work first with right-hand tensor factors. On the compatible proper/open tower,
+paste the cartesian exchange/projection square, the proper projection compositor identity,
+and the open tensor compositor identity. The pullback coherence identities identify the
+remaining tensor-factor path with the canonical pullback compositor. Transport from that
+tower to the chosen compactifications using the already proved projection square for
+arbitrary common-refinement comparisons. Finally use naturality of the signed tensor
+symmetries and the exact-pullback comparisons to put the coefficient first. Invert the
+resulting equality when all three projection arrows are invertible.
+-/
+theorem compactSupportProjectionMap_comp
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y Z : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] [IsNoetherian Z]
+    (f : X ⟶ Y) (g : Y ⟶ Z)
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g]
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    (M : DerivedCategoryModule A X) (K : DerivedCategoryModule A Z) :
+    (compactSupportProjectionMap A g
+        ((rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).obj M) K ≫
+      (rightDerivedLowerShriek (ModuleCat.{u + 1} A) g).map
+        (compactSupportProjectionMap A f M
+          ((upperStar (ModuleCat.{u + 1} A) g).mapDerivedCategory.obj K)) ≫
+      (unboundedEtaleLowerShriekCompIso A f g).hom.app
+        (((derivedTensor (ModuleCat.{u + 1} A) X).obj
+          ((upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategory.obj
+            ((upperStar (ModuleCat.{u + 1} A) g).mapDerivedCategory.obj K))).obj M) =
+      ((derivedTensor (ModuleCat.{u + 1} A) Z).obj K).map
+        ((unboundedEtaleLowerShriekCompIso A f g).hom.app M) ≫
+      compactSupportProjectionMap A (f ≫ g) M K ≫
+      (rightDerivedLowerShriek (ModuleCat.{u + 1} A) (f ≫ g)).map
+        (((derivedTensor (ModuleCat.{u + 1} A) X).map
+          ((unboundedEtaleUpperStarCompIso A f g).hom.app K)).app M)) ∧
+    (∀ [IsIso (compactSupportProjectionMap A g
+          ((rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).obj M) K)]
+        [IsIso (compactSupportProjectionMap A f M
+          ((upperStar (ModuleCat.{u + 1} A) g).mapDerivedCategory.obj K))]
+        [IsIso (compactSupportProjectionMap A (f ≫ g) M K)],
+      (unboundedEtaleLowerShriekCompIso A f g).inv.app
+          (((derivedTensor (ModuleCat.{u + 1} A) X).obj
+            ((upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategory.obj
+              ((upperStar (ModuleCat.{u + 1} A) g).mapDerivedCategory.obj K))).obj M) ≫
+        (rightDerivedLowerShriek (ModuleCat.{u + 1} A) g).map
+          (inv (compactSupportProjectionMap A f M
+            ((upperStar (ModuleCat.{u + 1} A) g).mapDerivedCategory.obj K))) ≫
+        inv (compactSupportProjectionMap A g
+          ((rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).obj M) K) =
+      (rightDerivedLowerShriek (ModuleCat.{u + 1} A) (f ≫ g)).map
+          (((derivedTensor (ModuleCat.{u + 1} A) X).map
+            ((unboundedEtaleUpperStarCompIso A f g).inv.app K)).app M) ≫
+        inv (compactSupportProjectionMap A (f ≫ g) M K) ≫
+        ((derivedTensor (ModuleCat.{u + 1} A) Z).obj K).map
+          ((unboundedEtaleLowerShriekCompIso A f g).inv.app M)) := by
+  have h := compactSupportProjectionMap_comp_forward A f g M K
+  refine ⟨h, ?_⟩
+  intro _ _ _
+  have hi := inverse_congr h
+  simp only [IsIso.inv_comp, ← Functor.map_inv, NatIso.inv_hom_app] at hi
+  have ht := NatIso.inv_map_hom_app (derivedTensor (ModuleCat.{u + 1} A) X)
+    ((unboundedEtaleUpperStarCompIso A f g).app K) M
+  simp only [Iso.app_hom, Iso.app_inv] at ht
+  rw [ht] at hi
+  simpa only [Category.assoc] using hi
+
 end TensorConventionProof
 
 set_option backward.isDefEq.respectTransparency false

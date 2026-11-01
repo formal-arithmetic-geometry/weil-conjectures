@@ -121,7 +121,6 @@ private abbrev Site.ringSets (X : Site.{u, w}) :=
   (sheafCompose X.J (CategoryTheory.forget CommRingCat.{u})).obj X.A
 
 open CategoryTheory.MonoidalCategory in
-open CategoryTheory.MonoidalCategory in
 private abbrev transpose {X Y : Site.{u, w}} (f : Morphism X Y)
     (M : X.modules) {T : Sheaf Y.J (Type u)} (x : T ⟶ Y.sets.obj (f.modules.obj M)) :=
   (f.adj.homEquiv T (X.sets.obj M)).symm (x ≫ f.underlying.hom.app M)
@@ -134,7 +133,6 @@ private theorem transpose_injective {X Y : Site.{u, w}} (f : Morphism X Y)
   apply (cancel_mono (f.underlying.hom.app M)).mp
   exact (f.adj.homEquiv T (X.sets.obj M)).symm.injective h
 
-open CategoryTheory.MonoidalCategory in
 open CategoryTheory.MonoidalCategory in
 private theorem homEquiv_conjugate
     {C D : Type*} [Category* C] [Category* D]
@@ -166,13 +164,6 @@ private def liftLinear {X : Site.{u, w}} {M N : X.modules}
         ext x
         exact CategoryTheory.congr_fun (q.hom.naturality i) x }
 
-open CategoryTheory.MonoidalCategory in
-open CategoryTheory.MonoidalCategory in
-open CategoryTheory.MonoidalCategory in
-open CategoryTheory.MonoidalCategory in
-open CategoryTheory.MonoidalCategory in
-open CategoryTheory.MonoidalCategory in
-open CategoryTheory.MonoidalCategory in
 open CategoryTheory.MonoidalCategory in
 private def normalizedAdj {X Y : Site.{u, w}} {f : Morphism X Y} (l : Lift f) :
     l.edge.pullback ⊣ f.modules :=
@@ -211,7 +202,6 @@ private theorem composite_transpose {X Y Z : Site.{u, w}}
   rw [normalized_transpose, transpose_precomp, normalized_transpose]
 
 open CategoryTheory.MonoidalCategory in
-open CategoryTheory.MonoidalCategory in
 private theorem preserves_flat {X Y : Site.{u, w}} {f : Morphism X Y} (l : Lift f)
     (P : CochainComplex Y.modules ℤ) (hp : Y.corner.mateFlat P) :
     X.corner.mateFlat ((l.edge.pullback.mapHomologicalComplex (.up ℤ)).obj P) := by
@@ -229,7 +219,6 @@ private theorem preserves_flat {X Y : Site.{u, w}} {f : Morphism X Y} (l : Lift 
     (siteSheafTensorRightIso X.A _) (ht n)
 
 open CategoryTheory.MonoidalCategory in
-open CategoryTheory.MonoidalCategory in
 private theorem tensor_model (X : Site.{u, w}) :
     ∃ r : RingedTensorModel X.corner, ∀ P Q hP hQ,
       r.representative.hom.app (⟨P, hP⟩, ⟨Q, hQ⟩) =
@@ -244,8 +233,6 @@ private theorem tensor_model (X : Site.{u, w}) :
     representative := Functor.isoWhiskerLeft (ι.prod ι) X.model.comparison }
   exact ⟨r, fun _ _ _ _ ↦ rfl⟩
 
-open CategoryTheory.MonoidalCategory in
-open CategoryTheory.MonoidalCategory in
 open CategoryTheory.MonoidalCategory in
 private theorem conjugate_transpose
     {C D : Type*} [Category* C] [Category* D]
@@ -292,10 +279,6 @@ private theorem complex_conjugate {X Y Z : Site.{u, w}}
   simp only [Adjunction.homEquiv_counit] at hh
   exact hh
 
-open CategoryTheory.MonoidalCategory in
-open CategoryTheory.MonoidalCategory in
-open CategoryTheory.MonoidalCategory in
-open CategoryTheory.MonoidalCategory in
 open CategoryTheory.MonoidalCategory in
 private theorem square_tensor {X Y Z : Site.{u, w}}
     {f : Morphism X Y} {g : Morphism Y Z} {k : Morphism X Z}
@@ -384,9 +367,7 @@ private theorem square_tensor {X Y Z : Site.{u, w}}
     ← li.tensor_canonical] at hh
   exact hh
 
-set_option maxHeartbeats 800000 in
 -- Comparing the four recorded site presentations requires additional definitional equality work.
-open CategoryTheory.MonoidalCategory in
 open CategoryTheory.MonoidalCategory in
 private theorem unit_of_tensor
     {C D : Type*} [Category* C] [Category* D] [MonoidalCategory C] [MonoidalCategory D]
@@ -417,10 +398,6 @@ private theorem unit_of_tensor
     Functor.OplaxMonoidal.η F ▷ F.obj (𝟙_ C)
   simpa only [← tensorHom_id] using hright.symm
 
-set_option maxHeartbeats 800000 in
 -- The two complex adjunctions and their derived counterparts have different presentation wrappers.
-open CategoryTheory.MonoidalCategory in
-set_option maxHeartbeats 800000 in
 -- Resolve the source and compare both composite adjunctions without unfolding their constructions.
-open CategoryTheory.MonoidalCategory in
 end CategoryTheory.RingedDerivedComparisons

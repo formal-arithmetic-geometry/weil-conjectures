@@ -160,7 +160,4 @@ attribute [local irreducible] compute
 
 set_option backward.isDefEq.respectTransparency.types false
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 end SheafOfModules.OrdinaryLineScalar

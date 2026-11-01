@@ -110,9 +110,6 @@ private noncomputable def familyMap
     (limitComplex A).obj I ⟶ ∏ᶜ (fun n : ℕ ↦ I.asFunctor.obj (op n)) :=
   Pi.lift (fun n ↦ (ordinaryCone I).π.app (op n))
 
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 open CochainComplex CochainComplex.HomComplex HomologicalComplex in
 private lemma cocone_fst_f
     {A : Type a} [Category.{b} A] [Abelian A]
@@ -135,9 +132,6 @@ private lemma cocone_snd_v
     Cochain.leftShift_v (n := 0) _ _ _ _ p q h q (add_zero q), mappingCone.snd,
     Int.negOnePow_even 2 ⟨1, rfl⟩]
 
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 open CochainComplex in
 private noncomputable def coconeMap
     {A : Type a} [Category.{b} A] [Abelian A]
@@ -146,14 +140,6 @@ private noncomputable def coconeMap
     (h : f ≫ b = a ≫ g) : mappingCocone f ⟶ mappingCocone g :=
   (mappingCone.map f g a b h)⟦(-1 : ℤ)⟧'
 
-open CochainComplex CochainComplex.HomComplex in
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-open CochainComplex CochainComplex.HomComplex in
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 private def ceilIndex (e : ℕ) : ℕᵒᵖ ⥤ ℕᵒᵖ :=
   (show ℕ →o ℕ from
     { toFun := fun n ↦ n / e
@@ -207,7 +193,4 @@ private lemma cocone_ext
   · simpa only [Category.assoc] using hf
   · simpa only [Category.assoc] using hs
 
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end CategoryTheory.StrictTowerArithmetic

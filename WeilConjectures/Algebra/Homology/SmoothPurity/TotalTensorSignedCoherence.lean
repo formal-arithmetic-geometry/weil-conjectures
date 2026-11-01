@@ -41,26 +41,6 @@ variable {A : Type uA} [Category.{vA} A] [Preadditive A] [HasZeroObject A]
   [∀ (X Y Z : GradedObject ℤ A), GradedObject.HasGoodTensor₁₂Tensor X Y Z]
   [∀ (X Y Z : GradedObject ℤ A), GradedObject.HasGoodTensorTensor₂₃ X Y Z]
 
-omit [BraidedCategory A]
-  [∀ (W X Y Z : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt W X Y Z] in
-omit [BraidedCategory A]
-  [∀ (W X Y Z : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt W X Y Z] in
-omit [BraidedCategory A]
-  [∀ (W X Y Z : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt W X Y Z] in
-omit [BraidedCategory A]
-  [∀ (W X Y Z : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt W X Y Z] in
-omit [BraidedCategory A]
-  [∀ (W X Y Z : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt W X Y Z] in
-omit [BraidedCategory A]
-  [∀ (W X Y Z : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt W X Y Z] in
-omit [BraidedCategory A]
-  [∀ (W X Y Z : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt W X Y Z] in
-omit [BraidedCategory A]
-  [∀ (W X Y Z : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt W X Y Z] in
-omit [BraidedCategory A] in
-omit [BraidedCategory A] in
-omit [BraidedCategory A]
-  [∀ (W X Y Z : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt W X Y Z] in
 end Formulas
 
 variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)

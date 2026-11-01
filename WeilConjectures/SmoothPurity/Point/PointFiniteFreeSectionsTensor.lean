@@ -163,8 +163,6 @@ variable (O : SheafOfModules.{max a w} rR ⥤ SheafOfModules.{max a w} rS) [O.Ad
   (cE : ∀ U : Cᵒᵖ, A → R.obj.obj U) (cL : ∀ U : Cᵒᵖ, B → S.obj.obj U)
   (qE : (A ≃+* R.obj.obj one) → Prop) (qL : (B ≃+* S.obj.obj one) → Prop)
 
-set_option genInjectivity false in
-set_option genSizeOfSpec false in
 end WeilConjectures
 end
 
@@ -358,8 +356,6 @@ variable {C : Type cG} [Category.{vG} C] {J : GrothendieckTopology C}
 
 end CoreAssembly
 
-set_option linter.unusedVariables false in
-set_option backward.isDefEq.respectTransparency true in
 end WeilConjectures
 
 end

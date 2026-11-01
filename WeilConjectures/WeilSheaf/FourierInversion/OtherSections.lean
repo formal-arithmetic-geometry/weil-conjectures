@@ -12,6 +12,8 @@ public import WeilConjectures.WeilSheaf.TateTwist
 import WeilConjectures.WeilSheaf.ProjectionFormulaLisse.LowerShriek
 import WeilConjectures.WeilSheaf.Projective.ProjectiveLineDecomposition
 import WeilConjectures.WeilSheaf.SmoothPurity.AffineChartLocalization
+public import WeilConjectures.WeilSheaf.RankOneThomDevissage
+public import WeilConjectures.WeilSheaf.RankOneThomOnSheaves
 
 /-!
 # Fourier inversion: inputs from other sections
@@ -131,18 +133,18 @@ theorem WeilComplex.nonempty_iso_upperStar_comp_derivedLowerShriek_of_isPullback
     [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))] :
     Nonempty (WeilComplex.upperStar π ⋙ WeilComplex.derivedLowerShriek k₀ l π ≅
       WeilComplex.tateTwist k₀ l X (-1) ⋙ shiftFunctor _ (-2 : ℤ)) := by
-  obtain ⟨p, hp⟩ := WeilComplex.exists_projectiveLine_trace_decomposition
-    (k₀ := k₀) (l := l) X
-  obtain ⟨α, hα⟩ := WeilComplex.exists_affineChart_localization
+  letI : LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← CategoryTheory.comp_over π (Spec (CommRingCat.of k₀))]
+    infer_instance
+  obtain ⟨σ, hσshift, hσ⟩ := WeilComplex.exists_rankOneThom_on_toComplex
     (k₀ := k₀) (l := l) π s hπ
-  let τ := α ≫ p
-  have : ∀ K, IsIso (τ.app K) := by
-    intro K
-    obtain ⟨w, hw⟩ := hα K
-    have := hp K
-    exact isIso_triangle_first_coordinate (α.app K) _ w hw (p.app K)
-  have : IsIso τ := NatIso.isIso_of_isIso_app τ
-  exact ⟨asIso τ⟩
+  letI := hσshift
+  have : ∀ K, IsIso (σ.app K) := WeilComplex.isIso_app_of_isIso_toComplex
+    (k₀ := k₀) (l := l)
+    (WeilComplex.tateTwist k₀ l X (-1) ⋙ shiftFunctor _ (-2 : ℤ))
+    (WeilComplex.upperStar π ⋙ WeilComplex.derivedLowerShriek k₀ l π) σ hσ
+  have : IsIso σ := NatIso.isIso_of_isIso_app σ
+  exact ⟨(asIso σ).symm⟩
 
 end OtherSections
 

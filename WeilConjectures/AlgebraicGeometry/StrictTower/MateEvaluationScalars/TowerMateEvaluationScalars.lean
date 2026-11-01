@@ -261,8 +261,6 @@ variable {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
   [PreservesFiniteLimits L] [PreservesFiniteColimits L]
   [PreservesFiniteLimits R] [PreservesFiniteColimits R]
 
-omit [PreservesFiniteLimits R] [PreservesFiniteColimits R] in
-set_option backward.isDefEq.respectTransparency false in
 end ExactEvaluation
 
 section ExactScalarDescent
@@ -442,7 +440,6 @@ def evaluationFactors (X : Scheme.{u}) (n : ℕ) :=
     (inferInstance : HasDerivedCategory (Modules B X))
     ((evaluation ℕᵒᵖ (Modules B X)).obj (op n)) inferInstance inferInstance inferInstance
 
-set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency false in
 /-- Evaluation preserves the same alpha, including the specified clopen section projector.
 Source: Stacks 03DI, 03DJ, 07A7 (blueprint: lem-cbc-tower-mate-evaluation-scalars).
@@ -745,7 +742,6 @@ theorem scalar_open_normalized (φ : B →+* Λ) {U X : Scheme.{u}} (f : U ⟶ X
   exact (unit_mateEquiv_symm (dJAdj Λ f) (dJAdj B f)
     (TwoSquare.mk _ _ _ _ (scalarG φ f).hom) K).symm.trans hu'.symm
 
-set_option backward.isDefEq.respectTransparency false in
 section ScalarCalculations
 
 attribute [local irreducible] Functor.leftAdjoint Scheme.proEtaleRingModulePullback

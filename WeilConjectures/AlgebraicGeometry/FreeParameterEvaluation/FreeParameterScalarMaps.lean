@@ -129,8 +129,6 @@ def scalarTensor (K L : DerivedCategory (PointModules R)) :
 attribute [local irreducible] freeScalarMap freeGeneratorScalar
 
 omit [IsCommMonObj S.X] in
-omit [IsCommMonObj R.X] [IsCommMonObj S.X] in
-omit [IsCommMonObj S.X] in
 set_option backward.defeqAttrib.useBackward false
 attribute [local irreducible] DerivedCategory instCategoryDerivedCategory
   DerivedCategory.singleFunctors Profinite.CondensedAction.InternalBar.free

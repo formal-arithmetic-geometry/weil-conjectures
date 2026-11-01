@@ -65,8 +65,6 @@ theorem scalarExtensionUnitIso_tmul {R S : Sheaf J CommRingCat.{u}} (α : R ⟶ 
     change (α.hom.app U a) * s = _
     exact mul_comm _ _)
 
-omit [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
-  [HasWeakSheafify J AddCommGrpCat.{u}] in
 /-- The unit comparison is the explicit multiplication construction.
 Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-binary-coherence). -/
 noncomputable def ScalarExtensionTensorCore.unitComparison
@@ -74,8 +72,6 @@ noncomputable def ScalarExtensionTensorCore.unitComparison
     (_e : ScalarExtensionTensorCore R S α) :
     changeOfRingsOfUniverses α (𝒪 R) ≅ 𝒪 S := scalarExtensionUnitIso α
 
-omit [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
-  [HasWeakSheafify J AddCommGrpCat.{u}] in
 /-- scalarTensor_hom_ext for the normalized binary comparison.
 Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-binary-coherence).
 Proof: tensor generation and the sheafification adjunction reduce the assertion to the
@@ -94,8 +90,6 @@ theorem scalarTensor_hom_ext {R : Sheaf J CommRingCat.{u}}
   intro x y
   exact h U x y
 
-omit [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
-  [HasWeakSheafify J AddCommGrpCat.{u}] in
 /-- scalarTensorTmul_naturality for the normalized binary comparison.
 Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-binary-coherence).
 Proof: tensor generation and the sheafification adjunction reduce the assertion to the
@@ -109,8 +103,6 @@ theorem scalarTensorTmul_naturality {R : Sheaf J CommRingCat.{u}} (N P : Mod R)
     (scalarSheafificationUnit (siteTensorPresheaf N.val P.val)) i
       (x ⊗ₜ[R.obj.obj U] y)).symm
 
-omit [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
-  [HasWeakSheafify J AddCommGrpCat.{u}] in
 /-- scalarTensor_first_tmul for the normalized binary comparison.
 Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-binary-coherence).
 Proof: tensor generation and the sheafification adjunction reduce the assertion to the
@@ -198,10 +190,6 @@ theorem scalarExtension_tensor_hom_ext {R S : Sheaf J CommRingCat.{u}} (α : R �
     simp only [map_add, scalarExtensionSection_add, ih, ih']
   | tmul x y => exact h (op V) (S.obj.map i.op s) x y
 
-omit [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
-  [HasWeakSheafify J AddCommGrpCat.{u}] in
-omit [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
-  [HasWeakSheafify J AddCommGrpCat.{u}] in
 /-- scalarTensorTmul_add_first for the normalized binary comparison.
 Source: Stacks, Tag 03EK (blueprint: lem-sp-scalar-extension-binary-coherence).
 Proof: tensor generation and the sheafification adjunction reduce the assertion to the
