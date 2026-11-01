@@ -22,6 +22,10 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImage
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenCover
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Duality
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Generation
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriek
+public import WeilConjectures.SixFunctors.Etale.Derived.Supports
+public import WeilConjectures.SixFunctors.Etale.Derived.VerdierBiduality
 
 /-!
 
@@ -79,6 +83,27 @@ noncomputable def mapDerivedCategoryComparisonUpperStarUnitIso (X : Scheme.{u}) 
     ((ν^*(X)[ModuleCat.{u + 1} Λ]).mapDerivedCategorySingleFunctor 0).app _ ≪≫
     (_root_.DerivedCategory.singleFunctor _ 0).mapIso (comparisonUpperStarUnitIso Λ X) ≪≫
     _root_.DerivedCategory.singleFunctorObjUnitIso _
+
+end DerivedCategory
+
+/-- `Rν_*` sends the monoidal unit `Λ` of `D(X_proét, Λ)` to the monoidal unit `Λ` of
+`D(X_ét, Λ)`: the pro-étale unit is `ν^*` of the étale unit
+(`DerivedCategory.mapDerivedCategoryComparisonUpperStarUnitIso`), and the unit
+`M ⟶ Rν_* ν^* M` of the comparison adjunction is invertible on the bounded below `M = Λ`
+(`isIso_derivedComparisonAdjunction_unit_app`). -/
+noncomputable def rightDerivedComparisonLowerStarUnitIso (X : Scheme.{u}) (Λ : Type (u + 1))
+    [CommRing Λ] [Finite Λ] :
+    (R(ν_*(X)[ModuleCat.{u + 1} Λ])).obj (𝟙_ _) ≅ 𝟙_ _ :=
+  haveI := isIso_derivedComparisonAdjunction_unit_app (ModuleCat.{u + 1} Λ) X (𝟙_ _)
+    ⟨0, _root_.DerivedCategory.TStructure.t.isGE_of_iso
+      (_root_.DerivedCategory.singleFunctorObjUnitIso _) 0⟩
+  (R(ν_*(X)[ModuleCat.{u + 1} Λ])).mapIso
+      (DerivedCategory.mapDerivedCategoryComparisonUpperStarUnitIso Λ X).symm ≪≫
+    (asIso ((derivedComparisonAdjunction (ModuleCat.{u + 1} Λ) X).unit.app (𝟙_ _))).symm
+
+namespace DerivedCategory
+
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 omit [Finite Λ] in
 /-- Blueprint `lem-exc-comparison-tor-interval`: Finite Tor amplitude under the site
@@ -142,6 +167,23 @@ theorem torAmplitudeIn_of_mapDerivedCategory {X : Scheme.{u}} [IsNoetherianRing 
     Etale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K' :=
   (torAmplitudeIn_mapDerivedCategory_iff a b K').1 hKt
 
+/-- The étale-origin step of blueprint `lem-weil-finite-duality-site-comparison`: for `X`
+separated of finite type over an algebraic closure `k` of `𝔽_p`, `K ∈ Dctf(X_ét, Λ)` and
+`M ∈ Dᵇc(X_ét, Λ)`, the pro-étale complex `RHom(ν^* K, ν^* M)` is of étale origin: the counit
+`ν^* Rν_* R ⟶ R` of the comparison adjunction is an isomorphism at `R = RHom(ν^* K, ν^* M)`. -/
+theorem isIso_derivedComparisonAdjunction_counit_app_derivedHom {k : Type u} [Field k]
+    {p : ℕ} [Fact p.Prime] [Algebra (ZMod p) k] [IsAlgClosure (ZMod p) k]
+    {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [IsSeparated aX] [LocallyOfFiniteType aX]
+    [QuasiCompact aX] [HasInvertibleExponent Λ X]
+    {K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (hK : Etale.DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K)
+    (hM : Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X M) :
+    IsIso ((derivedComparisonAdjunction (ModuleCat.{u + 1} Λ) X).counit.app
+      (((ProEtale.derivedHom (ModuleCat.{u + 1} Λ) X).obj
+        (op (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K))).obj
+          (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj M))) :=
+  sorry
+
 /-- Blueprint `lem-weil-finite-duality-site-comparison`: Finite-stage duality under the site
 comparison.
 
@@ -189,8 +231,72 @@ theorem nonempty_iso_mapDerivedCategory_derivedHom_of_isSeparated {k : Type u} [
         Nonempty (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K ≅
           (ProEtale.verdierDual Λ aX).obj
             (op ((ProEtale.verdierDual Λ aX).obj
-              (op (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K))))) :=
-  sorry
+              (op (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K))))) := by
+  have : IsAlgClosed k := IsAlgClosure.isAlgClosed (ZMod p)
+  -- clause 1: `RHom(ν^* K, ν^* M)` is of étale origin, and `Rν_*` of it is `RHom(K, M)`
+  have h₁ {K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+      (hK : Etale.DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K)
+      (hM : Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X M) :
+      Nonempty (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj
+          (((Etale.derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).obj M) ≅
+        ((ProEtale.derivedHom (ModuleCat.{u + 1} Λ) X).obj
+          (op (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K))).obj
+            (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj M)) := by
+    let adj := derivedComparisonAdjunction (ModuleCat.{u + 1} Λ) X
+    obtain ⟨c, hc⟩ := hM.1.1
+    have := isIso_derivedComparisonAdjunction_unit_app (ModuleCat.{u + 1} Λ) X M ⟨c, hc⟩
+    have := isIso_derivedComparisonAdjunction_counit_app_derivedHom Λ aX (p := p) hK hM
+    exact ⟨(D(ν^*(X)[ModuleCat.{u + 1} Λ])).mapIso
+      (((rightDerivedComparisonLowerStarCompDerivedHomIso (ModuleCat.{u + 1} Λ) K).app _).symm ≪≫
+        ((Etale.derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).mapIso
+          (asIso (adj.unit.app M)).symm).symm ≪≫ asIso (adj.counit.app _)⟩
+  refine ⟨h₁, ?_⟩
+  intro _
+  -- clause 2: the pro-étale `Ra_X^!` is `ν^* ∘ a_X^× ∘ Rν_*`, and `Rν_* Λ ≅ Λ`
+  let e₂ : D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj (Etale.dualizingComplex Λ aX) ≅
+      ProEtale.dualizingComplex Λ aX :=
+    D(ν^*(X)[ModuleCat.{u + 1} Λ]).mapIso ((Etale.rightDerivedUpperShriek Λ aX).mapIso
+      (rightDerivedComparisonLowerStarUnitIso (Spec (.of k)) Λ).symm)
+  -- the étale inputs: `ω_X` is bounded constructible, and Verdier biduality on `Dctf`
+  have hX : Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X
+        (Etale.dualizingComplex Λ aX) ∧
+      ∀ {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))},
+        Etale.DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K →
+        Etale.DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
+          ((Etale.verdierDual Λ aX).obj (op K)) ∧
+        Nonempty (K ≅ (Etale.verdierDual Λ aX).obj (op ((Etale.verdierDual Λ aX).obj (op K)))) := by
+    by_cases hne : Nonempty X
+    · have := HasInvertibleExponent.of_hom_of_nonempty (Λ := Λ) aX
+      have hΛ : Etale.DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) (Spec (.of k))
+          (𝟙_ _) :=
+        ⟨(Etale.DerivedCategory.boundedConstructible _ _).prop_of_iso
+            (_root_.DerivedCategory.singleFunctorObjUnitIso _)
+            (Etale.DerivedCategory.boundedConstructible_singleFunctor_obj _ 0), 0, 0,
+          (Etale.DerivedCategory.torAmplitudeIn _ _ 0 0).prop_of_iso
+            (_root_.DerivedCategory.singleFunctorObjUnitIso _)
+            (_root_.DerivedCategory.torAmplitudeIn_singleFunctor_obj_of_flat
+              (ObjectProperty.flat_of_isDualizable isDualizable_unit))⟩
+      exact ⟨(Etale.constructibleFiniteTor_dualizingComplex Λ (𝟙 _) aX hΛ).1,
+        fun hK ↦ ⟨Etale.constructibleFiniteTor_verdierDual Λ aX hK,
+          Etale.nonempty_iso_verdierDual_verdierDual Λ aX hK⟩⟩
+    · have : IsEmpty X := not_nonempty_iff.1 hne
+      have hz := Etale.isZero_derivedCategory_of_isEmpty (ModuleCat.{u + 1} Λ) X
+      exact ⟨ObjectProperty.prop_of_isZero _ (hz _), fun _ ↦
+        ⟨ObjectProperty.prop_of_isZero _ (hz _), ⟨(hz _).iso (hz _)⟩⟩⟩
+  -- clause 3: clause 1 for `M = ω_X`, followed by clause 2
+  have h₃ {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+      (hK : Etale.DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K) :
+      Nonempty (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj ((Etale.verdierDual Λ aX).obj (op K)) ≅
+        (ProEtale.verdierDual Λ aX).obj (op (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K))) :=
+    have ⟨e⟩ := h₁ hK hX.1
+    ⟨e ≪≫ ((ProEtale.derivedHom (ModuleCat.{u + 1} Λ) X).obj _).mapIso e₂⟩
+  refine ⟨⟨e₂⟩, fun hK ↦ ⟨h₃ hK, ?_⟩⟩
+  -- clause 4: transport étale biduality along clause 3, applied to `K` and to `𝔻_X K`
+  obtain ⟨hDK, ⟨b⟩⟩ := hX.2 hK
+  obtain ⟨e⟩ := h₃ hK
+  obtain ⟨e'⟩ := h₃ hDK
+  exact ⟨D(ν^*(X)[ModuleCat.{u + 1} Λ]).mapIso b ≪≫ e' ≪≫
+    (ProEtale.verdierDual Λ aX).mapIso e.op.symm⟩
 
 /-- Blueprint `thm-sf-hom-comparison-constructible`: Internal-Hom comparison for finite-Tor
 constructible inputs.
