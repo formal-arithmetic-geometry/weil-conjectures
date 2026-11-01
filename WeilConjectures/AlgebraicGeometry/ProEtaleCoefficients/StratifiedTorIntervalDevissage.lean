@@ -78,7 +78,7 @@ private theorem concentration_of_pullback_tor
     (F : C ⥤ D) [F.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     (T : ExactDerivedTensorComparisonFamily F) (c d : ℤ) (K : DerivedCategory C)
-    (hK : DerivedCategory.torAmplitudeIn _ c d (F.mapDerivedCategory.obj K)) (M : C) :
+    (hK : _root_.DerivedCategory.torAmplitudeIn _ c d (F.mapDerivedCategory.obj K)) (M : C) :
     DerivedCategory.homologyConcentratedIn c d
       (F.mapDerivedCategory.obj (K ⊗ (DerivedCategory.singleFunctor _ 0).obj M)) :=
   (DerivedCategory.homologyConcentratedIn c d).prop_of_iso
@@ -103,21 +103,21 @@ private theorem torInterval_of_open_closed
     (c d : ℤ)
     (K : DerivedCategory
       (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)))
-    (hi : DerivedCategory.torAmplitudeIn _ c d
+    (hi : _root_.DerivedCategory.torAmplitudeIn _ c d
       ((CondensedRing.upperStar Λ i).mapDerivedCategory.obj K))
-    (hj : DerivedCategory.torAmplitudeIn _ c d
+    (hj : _root_.DerivedCategory.torAmplitudeIn _ c d
       ((CondensedRing.upperStar Λ j).mapDerivedCategory.obj K)) :
-    DerivedCategory.torAmplitudeIn _ c d K := by
+    _root_.DerivedCategory.torAmplitudeIn _ c d K := by
   intro M
   let E := K ⊗ (DerivedCategory.singleFunctor _ 0).obj M
   have hlocal {Y : Scheme.{u}} (f : Y ⟶ X)
-      (hf : DerivedCategory.torAmplitudeIn _ c d
+      (hf : _root_.DerivedCategory.torAmplitudeIn _ c d
         ((CondensedRing.upperStar Λ f).mapDerivedCategory.obj K)) :
       DerivedCategory.homologyConcentratedIn c d
         ((CondensedRing.upperStar Λ f).mapDerivedCategory.obj E) :=
     concentration_of_pullback_tor _ (pullbackTensorIso Λ f) c d K hf M
   have hvan {Y : Scheme.{u}} (f : Y ⟶ X)
-      (hf : DerivedCategory.torAmplitudeIn _ c d
+      (hf : _root_.DerivedCategory.torAmplitudeIn _ c d
         ((CondensedRing.upperStar Λ f).mapDerivedCategory.obj K))
       (q : ℤ) (hq : q < c ∨ d < q) :
       IsZero ((CondensedRing.upperStar Λ f).obj
@@ -167,9 +167,9 @@ private theorem torInterval_of_iso_pullback
     (c d : ℤ)
     (K : DerivedCategory
       (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)))
-    (ht : DerivedCategory.torAmplitudeIn _ c d
+    (ht : _root_.DerivedCategory.torAmplitudeIn _ c d
       ((CondensedRing.upperStar Λ e.hom).mapDerivedCategory.obj K)) :
-    DerivedCategory.torAmplitudeIn _ c d K := by
+    _root_.DerivedCategory.torAmplitudeIn _ c d K := by
   let F := CondensedRing.upperStar Λ e.hom
   intro A
   let T := K ⊗ (DerivedCategory.singleFunctor _ 0).obj A
@@ -202,11 +202,11 @@ private theorem torInterval_of_stratified
     (hlocal : ∀ (S : Scheme.{u})
       (N : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj Λ S)),
       HasFiniteConstantLocalModel Λ S N →
-        DerivedCategory.torAmplitudeIn _ c d ((DerivedCategory.singleFunctor _ 0).obj N))
+        _root_.DerivedCategory.torAmplitudeIn _ c d ((DerivedCategory.singleFunctor _ 0).obj N))
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
     (hM : IsConstantModelConstructible Λ X M) :
-    DerivedCategory.torAmplitudeIn _ c d ((DerivedCategory.singleFunctor _ 0).obj M) := by
+    _root_.DerivedCategory.torAmplitudeIn _ c d ((DerivedCategory.singleFunctor _ 0).obj M) := by
   classical
   have hX : CompactSpace X ∧ QuasiSeparatedSpace X := ⟨inferInstance, inferInstance⟩
   obtain ⟨S, hS⟩ : IsFiniteConstantStratified Λ X M := by
@@ -237,7 +237,7 @@ private theorem torInterval_of_stratified
         ((CondensedRing.upperStarComp Λ f (S.immersion k)).app M).symm at hm
       simpa only [hf] using hm
   have htor_aux (n : ℕ) : ∀ v : Fin N, N - v.val = n →
-      DerivedCategory.torAmplitudeIn _ c d
+      _root_.DerivedCategory.torAmplitudeIn _ c d
         ((DerivedCategory.singleFunctor _ 0).obj (R v)) := by
     induction n using Nat.strong_induction_on with
     | h n ih =>
@@ -254,15 +254,15 @@ private theorem torInterval_of_stratified
         have hrTor := ih (N - (right v).val)
           ((reverseIndex_lt (right v).isLt hrt).trans_eq hv) (right v) rfl
         have hpull {w : Fin N} (f : V w ⟶ V v) (hf : f ≫ t v = t w)
-            (ht : DerivedCategory.torAmplitudeIn _ c d
+            (ht : _root_.DerivedCategory.torAmplitudeIn _ c d
               ((DerivedCategory.singleFunctor _ 0).obj (R w))) :
-            DerivedCategory.torAmplitudeIn _ c d
+            _root_.DerivedCategory.torAmplitudeIn _ c d
               ((CondensedRing.upperStar Λ f).mapDerivedCategory.obj
                 ((DerivedCategory.singleFunctor _ 0).obj (R v))) := by
           let e : (CondensedRing.upperStar Λ f).obj (R v) ≅ R w :=
             ((CondensedRing.upperStarComp Λ f (t v)).app M).symm ≪≫
               (CondensedRing.upperStarCongr Λ hf).app M
-          exact (DerivedCategory.torAmplitudeIn _ c d).prop_of_iso
+          exact (_root_.DerivedCategory.torAmplitudeIn _ c d).prop_of_iso
             (((DerivedCategory.singleFunctor _ 0).mapIso e).symm ≪≫
               (((CondensedRing.upperStar Λ f).mapDerivedCategorySingleFunctor 0).app
                 (R v)).symm) ht
@@ -273,11 +273,11 @@ private theorem torInterval_of_stratified
           (hpull (re v) (hright v hvleaf) hrTor) (hpull (le v) (hl v hvleaf) hlTor)
   have htor (v : Fin N) := htor_aux (N - v.val) v rfl
   obtain ⟨e, he⟩ := hroot
-  have ht : DerivedCategory.torAmplitudeIn _ c d
+  have ht : _root_.DerivedCategory.torAmplitudeIn _ c d
       ((CondensedRing.upperStar Λ e.hom).mapDerivedCategory.obj
         ((DerivedCategory.singleFunctor _ 0).obj M)) := by
     rw [he]
-    exact (DerivedCategory.torAmplitudeIn _ c d).prop_of_iso
+    exact (_root_.DerivedCategory.torAmplitudeIn _ c d).prop_of_iso
       (((CondensedRing.upperStar Λ (t root)).mapDerivedCategorySingleFunctor 0).app M).symm
       (htor root)
   exact torInterval_of_iso_pullback Λ e c d _ ht
@@ -324,11 +324,11 @@ theorem torAmplitudeIn_of_constructible_of_uniform_local_model
     (hlocal : ∀ (S : Scheme.{u})
       (N : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj Λ.X S)),
       HasFiniteConstantLocalModel Λ.X S N →
-        DerivedCategory.torAmplitudeIn _ c d ((DerivedCategory.singleFunctor _ 0).obj N))
+        _root_.DerivedCategory.torAmplitudeIn _ c d ((DerivedCategory.singleFunctor _ 0).obj N))
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ.X X))
     (hM : IsConstantModelConstructible Λ.X X M) :
-    DerivedCategory.torAmplitudeIn _ c d ((DerivedCategory.singleFunctor _ 0).obj M) := by
+    _root_.DerivedCategory.torAmplitudeIn _ c d ((DerivedCategory.singleFunctor _ 0).obj M) := by
   exact torInterval_of_stratified Λ.X c d hlocal X M hM
 
 end AlgebraicGeometry.ProEtale

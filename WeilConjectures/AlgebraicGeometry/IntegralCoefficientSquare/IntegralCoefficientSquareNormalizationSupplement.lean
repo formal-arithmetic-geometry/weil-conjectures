@@ -342,6 +342,9 @@ private theorem generators
 private def pointScalar : constantPoint A ⟶ Profinite.continuousCoefficientRingObj A :=
   FiniteConstantModel.scalarToContinuous A
 
+private instance pointScalar_isMonHom : IsMonHom (pointScalar A) :=
+  inferInstanceAs (IsMonHom (FiniteConstantModel.scalarToContinuous A))
+
 private theorem scalar_square_general
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
     [MonObj Λ] [MonObj Λ'] (a : Λ ⟶ Λ')
