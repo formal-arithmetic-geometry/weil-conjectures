@@ -17,6 +17,7 @@ import all WeilConjectures.TraceFormula.Integral.IntegralComparisonSequenceSyste
 import all WeilConjectures.AlgebraicGeometry.Scalar.ScalarDataExistence
 import all WeilConjectures.AlgebraicGeometry.Scalar.ScalarEvaluationTransposeExistence
 import all WeilConjectures.SixFunctors.SequenceScalarConstruction.SystemScalarPackageExists
+import all WeilConjectures.SmoothPurity.ScalarExtensionTower.OrdinaryScalarTowerProof
 
 /-! # Ordinary scalar interchange for coherent quotient systems
 
