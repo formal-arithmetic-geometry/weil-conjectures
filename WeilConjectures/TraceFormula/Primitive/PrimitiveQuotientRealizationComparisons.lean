@@ -207,13 +207,9 @@ variable {C : Type a} [Category.{b} C] {J : GrothendieckTopology C}
 private abbrev Mod (R : Sheaf J CommRingCat.{r}) :=
   SheafOfModules.{r} (SheafOfModules.derivedChangeRingIndependentCoefficients J R)
 
-attribute [local instance] Ordinary.additive
 
-attribute [local irreducible] adj
 
-attribute [local irreducible] comp
 
-attribute [local irreducible] unit
 
 private theorem flat_of_single_kFlat [EssentiallySmall.{r} C]
     (M : Mod R)
