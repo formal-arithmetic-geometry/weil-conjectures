@@ -61,10 +61,6 @@ structure Object (C : Type u) where
   /-- The original site object. -/
   base : C
 
-/-- The recorded sheaf tensor, with its coefficient argument resolved once.
-Source: Stacks 03EK (blueprint: lem-sf-twisted-action-ringed-site). -/
-noncomputable abbrev tensorObj {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
-    {R : Sheaf J CommRingCat.{u}} (M N : Modules R) : Modules R := M ⊗ N
 
 /-- The recorded tensor on morphisms, with the same resolved coefficient.
 Source: Stacks 03EK (blueprint: lem-sf-twisted-action-ringed-site). -/

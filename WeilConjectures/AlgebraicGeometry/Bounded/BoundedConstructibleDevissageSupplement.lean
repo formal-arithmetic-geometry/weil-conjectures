@@ -40,13 +40,5 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- Boundedness and constructible homology are invariant under isomorphism. -/
-instance isClosedUnderIsomorphisms_boundedConstructibleModule
-    {X : Scheme.{u}} (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-    [MonObj R] [IsCommMonObj R] :
-    (boundedConstructible R).IsClosedUnderIsomorphisms where
-  of_iso e h := ⟨DerivedCategory.TStructure.t.bounded.prop_of_iso e h.1,
-    fun n ↦ _root_.constructible_of_iso (R := R)
-      ((homologyFunctor _ n).mapIso e) (h.2 n)⟩
 
 end AlgebraicGeometry.ProEtale

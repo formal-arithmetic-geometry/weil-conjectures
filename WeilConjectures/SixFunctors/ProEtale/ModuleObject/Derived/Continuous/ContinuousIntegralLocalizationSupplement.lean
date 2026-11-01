@@ -415,21 +415,5 @@ noncomputable def integralLocalizationSequenceMapIso
   have : IsIso α := NatIso.isIso_of_isIso_app α
   exact asIso α
 
-/-- Reindex the unit telescope along the order equivalence with the lifted natural numbers.
-Source: Bhatt--Scholze, Lemma 6.8.2, localization telescope.
-(blueprint: def-weil-pbc-integral-localization-telescope). -/
-noncomputable def integralLocalizationLiftedCocone (X : Scheme.{u})
-    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (integralCoeff ℓ E) X))) :
-    Cocone ((ULift.orderIso : ULift.{x} ℕ ≃o ℕ).equivalence.functor ⋙
-      integralLocalizationSequence ℓ K) :=
-  (Cocone.precompose (Functor.whiskerLeft (ULift.orderIso : ULift.{x} ℕ ≃o ℕ).equivalence.functor
-    (NatTrans.ofSequence (F := integralLocalizationSequence ℓ K) (G := Mod.smulSequence K ℓ)
-      (fun _ ↦ 𝟙 K) (fun n ↦ by
-        simp only [integralLocalizationSequence, Functor.ofSequence_map_homOfLE_succ,
-          Nat.add_sub_cancel_left, pow_one]
-        exact (Category.comp_id _).trans (Category.id_comp _).symm)))).obj
-    ((integralLocalizationCocone ℓ E X K).whisker
-      (ULift.orderIso : ULift.{x} ℕ ≃o ℕ).equivalence.functor)
 
 end AlgebraicGeometry.ProEtale.CondensedRing
