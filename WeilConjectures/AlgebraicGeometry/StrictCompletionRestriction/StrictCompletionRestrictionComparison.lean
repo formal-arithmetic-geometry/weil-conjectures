@@ -29,6 +29,14 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open scoped CategoryTheory.Obj
 open WeilConjectures
 open CategoryTheory.InternalAbelianSheafModule
+
+-- Upstream's `HasDerivedCategory` instances on these module categories are found first and then
+-- fail the final defeq check, which blocks `HasDerivedCategory.ofIsGrothendieckAbelian`.
+attribute [-instance] AlgebraicGeometry.Scheme.proEtaleRingModules_hasDerivedCategory
+  AlgebraicGeometry.Scheme.ProjectionRestriction.derived
+  AlgebraicGeometry.Scheme.ProjectionRestriction.derivedOver
+  AlgebraicGeometry.Scheme.ProjectionRestriction.derivedOverModules
+
 namespace AlgebraicGeometry.ProEtale.StrictCompletionRestriction
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
