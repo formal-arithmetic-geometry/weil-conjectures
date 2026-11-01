@@ -114,6 +114,12 @@ theorem range_traitGenericTensorLift :
       exact ⟨ω ⊗ₜ 1, by rw [traitGenericTensorLift_tmul]; simp⟩
     exact this
 
+/-- The compositum `F_K·F^sep = F_K(F^sep)` inside `Ω_K`. -/
+noncomputable def traitGenericSepCompositum :
+    IntermediateField (FractionRing (PowerSeries K)) (traitGenericField K) :=
+  adjoin (FractionRing (PowerSeries K)) (traitGenericFieldMap k' K ''
+    separableClosure (FractionRing (PowerSeries k')) (traitGenericField k'))
+
 variable {k' K} [IsSepClosed k'] [IsAlgClosed K]
 
 /-- The kernel of `Ω ⊗_F F_K ⟶ Ω_K` is the nilradical, the unique prime ideal. -/
@@ -144,13 +150,6 @@ theorem isMaximal_nilradical_traitGenericField_tensorProduct (htr : Algebra.trde
   let := (traitLaurentFieldMap k' K).toAlgebra
   rw [Ideal.Quotient.maximal_ideal_iff_isField_quotient]
   exact (traitGenericTensorResidueEquiv htr).toMulEquiv.isField (Field.toIsField _)
-
-variable (k' K) in
-/-- The compositum `F_K·F^sep = F_K(F^sep)` inside `Ω_K`. -/
-noncomputable def traitGenericSepCompositum :
-    IntermediateField (FractionRing (PowerSeries K)) (traitGenericField K) :=
-  adjoin (FractionRing (PowerSeries K)) (traitGenericFieldMap k' K ''
-    separableClosure (FractionRing (PowerSeries k')) (traitGenericField k'))
 
 omit [IsSepClosed k'] [IsAlgClosed K] in
 /-- `F_K·F^sep ⊆ F_K·Ω`. -/
