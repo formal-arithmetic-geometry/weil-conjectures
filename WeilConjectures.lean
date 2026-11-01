@@ -16600,6 +16600,7 @@ public import WeilConjectures.DeligneLaumon.AffineLine.BoundaryWeights
 public import WeilConjectures.DeligneLaumon.AffineLine.Concentration
 public import WeilConjectures.DeligneLaumon.AffineLine.ConstantTwist
 public import WeilConjectures.DeligneLaumon.AffineLine.Constituent
+public import WeilConjectures.DeligneLaumon.AffineLine.Conventions
 public import WeilConjectures.DeligneLaumon.AffineLine.CurveTopBound
 public import WeilConjectures.DeligneLaumon.AffineLine.Defs
 public import WeilConjectures.DeligneLaumon.AffineLine.DegreeOne

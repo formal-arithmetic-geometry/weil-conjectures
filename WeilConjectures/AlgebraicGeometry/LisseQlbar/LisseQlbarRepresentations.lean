@@ -118,10 +118,13 @@ abbrev fibre {X : Scheme.{u}} {Ω : Type u} [Field Ω]
     CondensedRing.Evaluation.sections (Scheme.ProEt.topology (Spec (.of Ω)))
       (condensedRingObj Λ (Spec (.of Ω))) (Scheme.ProEt.mk (𝟙 _))
 
-/-- The lattice condition uses the given inclusion and its scalar-extension adjoint.
-Source: blueprint, introductory lattice definition
-(blueprint: thm-lisse-qlbar-representations). -/
+/-- An embedded lisse integral module whose given inclusion rationalizes to an isomorphism.
+Source: latest blueprint, thm-lisse-qlbar-representations.md, introductory lattice definition,
+and sk-lem-uniform-constructible-ext/_section.md, lattice antecedent
+(blueprint: def-sfb-lisse-integral-lattice). -/
 def hasLattice
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ]
     (B : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj B] [IsCommMonObj B]
     (a : Λ ⟶ B) [IsMonHom a] (X : Scheme.{u})
     (L : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj B X)) : Prop :=
@@ -130,29 +133,30 @@ def hasLattice
     ∃ i : M ⟶ (Mod.comap (coefficientMap a X)).obj L,
       Mono i ∧ IsIso (((Mod.extendRestrictAdjunction (coefficientMap a X)).homEquiv M L).symm i)
 
-/-- The condensed finite-extension coefficient, with the inherited absolute-value
- topology. Source: blueprint, coefficient convention
-(blueprint: thm-lisse-qlbar-representations). -/
-abbrev fieldRing (E : PadicAlgCl.FiniteIntermediateField l) :=
-  letI := PadicAlgCl.normedFieldOfAlgebra l E
+/-- The finite-extension condensed coefficient ring with its inherited absolute-value topology.
+Source: latest blueprint, thm-lisse-qlbar-representations.md, coefficient convention
+(blueprint: def-sfb-lisse-integral-lattice). -/
+abbrev fieldRing (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) :=
+  letI := PadicAlgCl.normedFieldOfAlgebra ℓ E
   Profinite.continuousMapRingObj.{u} E
 
-/-- The recorded integer ring with its induced topology, condensed by continuous
-functions. Source: blueprint, coefficient convention
-(blueprint: thm-lisse-qlbar-representations). -/
-abbrev integerRing (E : PadicAlgCl.FiniteIntermediateField l) :=
-  letI := PadicAlgCl.normedFieldOfAlgebra l E
-  Profinite.continuousMapRingObj.{u} (Padic.coefficientExtensionIntegers l E)
+/-- The condensed ring of integers with its induced topology.
+Source: latest blueprint, thm-lisse-qlbar-representations.md, coefficient convention
+(blueprint: def-sfb-lisse-integral-lattice). -/
+abbrev integerRing (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) :=
+  letI := PadicAlgCl.normedFieldOfAlgebra ℓ E
+  Profinite.continuousMapRingObj.{u} (Padic.coefficientExtensionIntegers ℓ E)
 
-/-- Canonical integral-to-rational coefficient inclusion.
-Source: blueprint, lattices (blueprint: thm-lisse-qlbar-representations). -/
-abbrev integerInclusion (E : PadicAlgCl.FiniteIntermediateField l) :
-    integerRing.{u} l E ⟶ fieldRing l E :=
-  letI := PadicAlgCl.normedFieldOfAlgebra l E
+/-- The canonical inclusion of integral into rational condensed coefficients.
+Source: latest blueprint, thm-lisse-qlbar-representations.md, lattice definition
+(blueprint: def-sfb-lisse-integral-lattice). -/
+abbrev integerInclusion (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) :
+    integerRing.{u} ℓ E ⟶ fieldRing ℓ E :=
+  letI := PadicAlgCl.normedFieldOfAlgebra ℓ E
   (sheafCompose (coherentTopology Profinite.{u})
     (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
       (Profinite.continuousMapRingSheafMap
-        (Padic.coefficientExtensionIntegers l E).subtype continuous_subtype_val)
+        (Padic.coefficientExtensionIntegers ℓ E).subtype continuous_subtype_val)
 
 set_option maxHeartbeats 0 in
 -- Large clause records contain canonical sheaf, fibre and coefficient comparison types.
