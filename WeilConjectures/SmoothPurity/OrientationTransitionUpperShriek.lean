@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReductionCanonical
 public import WeilConjectures.PoincareDuality.Biduality.EtaleReductionDualizingUnit
+public import WeilConjectures.SmoothPurity.OrientationTransitionLowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReadingReduction
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReadingReductionMate
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReductionUpperShriekCanonical
@@ -73,7 +74,8 @@ theorem map_etaleReductionLowerShriekIso_hom_comp_derivedExtendScalarsLowerShrie
         ((PadicIntegersRingObj.boundedConstructibleLowerShriek ℓ E f).obj K)).hom ≫
       (etaleReductionLowerShriekIsoOfCompactification ℓ E n
         (compactificationOverField f)).hom.app K := by
-  sorry
+  exact reductionSquareCompatible_etaleReductionLowerShriekIsoOfCompactification ℓ E n
+    (compactificationOverField f) K
 
 omit [HasCompactification f.left] [CompactSpace Y.left] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)] in
