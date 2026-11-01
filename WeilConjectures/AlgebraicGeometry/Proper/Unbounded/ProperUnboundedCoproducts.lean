@@ -144,7 +144,8 @@ theorem properUnbounded_preservesCoproducts
       exact ⟨isColimitOfPreserves (DerivedCategory.homologyFunctor B q) hc⟩
     · exact derivedTruncation_coproducts (Profinite.continuousMapRingObj E) X
     · intro a b I M hM hb
-      obtain ⟨c, hc, c', hc', hi⟩ := properUnboundedWindowBounded ℓ E p a b I M hM hb
+      obtain ⟨c, hc, c', hc', hi⟩ :=
+        properUnboundedWindowBounded ℓ E k p₀ hp₀ hpℓ X Y p a b I M hM hb
       refine ⟨c, hc, ?_⟩
       have := hi
       exact ⟨(Cofan.isColimitMapCoconeEquiv _ M c).2 hc'.ofPointIso⟩
@@ -206,7 +207,8 @@ theorem properUnbounded_preservesCoproducts_padicAlgCl
       exact ⟨isColimitOfPreserves (DerivedCategory.homologyFunctor B q) hc⟩
     · exact derivedTruncation_coproducts (Profinite.padicAlgClRingObj ℓ) X
     · intro a b I M hM hb
-      obtain ⟨c, hc, c', hc', hi⟩ := properUnboundedWindowBounded_padicAlgCl ℓ p a b I M hM hb
+      obtain ⟨c, hc, c', hc', hi⟩ :=
+        properUnboundedWindowBounded_padicAlgCl ℓ k p₀ hp₀ hpℓ X Y p a b I M hM hb
       refine ⟨c, hc, ?_⟩
       have := hi
       exact ⟨(Cofan.isColimitMapCoconeEquiv _ M c).2 hc'.ofPointIso⟩

@@ -1133,4 +1133,43 @@ theorem etaleCompactScalarComposition
       (exact_open_preserves_plus A e.restrict.i M)
       (scalar_open_preserves_plus φ e.restrict.i M hQM)
 
+/-- The open-restriction scalar square, using the restricted compactification.
+Source: Stacks 0F7L, 0GL6 and 0E48
+(blueprint: lem-pur-etale-compact-scalar-coherence).
+Proof: step 11 identifies proper open-restriction exchange by its counit transpose.
+Ringed exchange/tensor coherence applied to the coefficient square gives its scalar square.
+Step 12 checks the open-extension base-change scalar square on K-flat representatives:
+on the unique open summand both maps are scalar tensor; elsewhere both are zero. The
+inverse comparison has the prescribed open-unit transpose. Step 13 expands compact-support
+exchange into proper exchange and open exchange, substitutes the scalar proper/open
+formula, and pastes the squares using naturality. Everything works on unbounded inputs. -/
+theorem etaleCompactScalarOpenRestriction
+    [Finite A] [Finite B] (φ : A →+* B)
+    {X XV Y V : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
+    {f : X ⟶ Y} [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    {fv : XV ⟶ V} {v : V ⟶ Y} {vx : XV ⟶ X} [IsOpenImmersion v]
+    (sq : IsPullback vx fv f v) (c : Compactification f)
+    (M : DerivedCategoryModule A X) :
+    (upperStar (ModuleCat.{u + 1} B) v).mapDerivedCategory.map
+        ((compactScalarMap φ c).app M) ≫
+        (unboundedEtaleCompactSupportExchange B sq c).app
+          ((scalarExtension φ X).obj M) ≫
+        (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} B)
+          (c.ofIsPullback sq)).map ((properOpenCoefficientPullbackIso φ vx).hom.app M) =
+      (properOpenCoefficientPullbackIso φ v).hom.app
+          ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).obj M) ≫
+        (scalarExtension φ V).map
+          ((unboundedEtaleCompactSupportExchange A sq c).app M) ≫
+        (compactScalarMap φ (c.ofIsPullback sq)).app
+          ((upperStar (ModuleCat.{u + 1} A) vx).mapDerivedCategory.obj M) := by
+  have : IsOpenImmersion vx :=
+    MorphismProperty.IsStableUnderBaseChange.of_isPullback sq.flip inferInstance
+  have : IsLocallyNoetherian V := LocallyOfFiniteType.isLocallyNoetherian v
+  have : CompactSpace V := QuasiCompact.compactSpace_of_compactSpace v
+  have : IsNoetherian V := ⟨⟩
+  have : IsLocallyNoetherian XV := LocallyOfFiniteType.isLocallyNoetherian vx
+  have : CompactSpace XV := QuasiCompact.compactSpace_of_compactSpace vx
+  have : IsNoetherian XV := ⟨⟩
+  exact compact_scalar_exchange_raw φ sq c M
+
 end AlgebraicGeometry.Etale
