@@ -95,6 +95,27 @@ def fundamentalClass (P : PurityFiniteSetting.{u}) {Z X : Scheme.{u}}
     P.FunctorialCupH true i (2 * (c : ℤ)) c :=
   (existsUnique_fundamentalClass P i aX c hreg hZ).exists.choose
 
+/-- The ordinary representative is uniquely fixed by finite etale/pro-etale comparison.
+Source: supported adjunction in (a), Step 2b (blueprint: sk-thm-regular).
+Proof: the support constant and finite Tate target are bounded below etale-origin
+complexes. The derived site comparison is fully faithful on these objects. The
+canonical source and target comparisons identify its Hom bijection with the
+published functorialCupCompare, so the given global class has exactly one lift. -/
+theorem existsUnique_ordinaryClass (P : PurityFiniteSetting.{u}) {Z X : Scheme.{u}}
+    (i : Z ⟶ X) [IsClosedImmersion i] (aX : X ⟶ Spec (.of P.field.k))
+    [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX] [Smooth aX]
+    (c : ℕ) (hreg : PurityConventions.IsRegularOfPureCodimension i c)
+    (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z)) :
+    ∃! α : P.FunctorialCupH false i (2 * (c : ℤ)) c,
+      P.functorialCupCompare i (2 * (c : ℤ)) c α = fundamentalClass P i aX c hreg hZ := by
+  let hbij := (PurityFiniteSetting.supportedCupFunctoriality P).2.supported_bijective
+    (i := i) aX (2 * (c : ℤ)) c
+  obtain ⟨α, hα⟩ := hbij.2 (fundamentalClass P i aX c hreg hZ)
+  refine ⟨α, hα, ?_⟩
+  intro β hβ
+  apply hbij.1
+  exact hβ.trans hα.symm
+
 set_option maxHeartbeats 800000 in
 -- The published root-tensor comparison unfolds several derived-site layers.
 end WeilConjectures.RegularClosedImmersionPurity

@@ -10,6 +10,12 @@ public import WeilConjectures.AlgebraicGeometry.SupportedCohomologyHomSpecified
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ClosedUpperShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.ZeroSectionComplement
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.PurGysinLocalizationPushforward
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.PurityGysinCohomologyExtraction
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.PurityGysinExtractionHypotheses
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.PurityGysinOpenCoefficientIso
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.PurityGysinSupportHom
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.PurityRelativeKummer
 
 /-! # Structure of the zero-section exceptional object
 
@@ -140,5 +146,112 @@ def gysinCoordinateSupportSection (P : PurityFiniteSetting.{u})
     (P.gysinInput h Y)) x
   ((complementSectionsIso P (zeroSection Y) j (gysinCoordinateComplement Y) 1).hom.app
     (P.gysinInput h Y)) y
+
+/-- Structure of the exceptional inverse image of the zero section, with the
+specified supported-Hom identification and coordinate boundary.
+Source: literature/blueprint/latest/blueprint/sec-smooth-purity/sk-lem-sp-reduction,
+lem-pur-gysin-structure.md and its proof, steps 1--4
+(blueprint: lem-pur-gysin-structure).
+
+Proof:
+1. Apply lem-pur-gysin-localization-pushforward to the affine-line datum
+   def-pur-affine-line-datum: pushing localization along p gives the triangle
+   Rs! A(1) -> Rp_* A(1) -> Rpi_* A(1) -> Rs! A(1)[1]. Its middle arrow is
+   the open-adjunction unit followed by the direct-image compositor.
+2. prop-pur-gm-relative-kummer computes the middle and open terms. The unit
+   composition identity fix-prop-adjunctions makes H^0 of the middle arrow
+   invertible: its composite with the p-unit is the pi-unit.
+3. lem-pur-gysin-cohomology-extraction gives H^r(Rs! A(1))=0 for r != 2
+   and identifies H^2 with the constant rank-one module on the Kummer
+   boundary. After shifting, this proves the first three conjuncts, including
+   constructibility and Tor amplitude [0,0].
+4. lem-pur-gysin-support-hom identifies support cohomology with Hom using
+   lem-pur-supported-hom followed by s_* adjoint to Rs!. Its second clause
+   identifies Hom with global H^0 sections. These are exactly the specified
+   maps below. thm-pur-with-support-exactness supplies the support boundary;
+   applying the first identification to the coordinate class gives m, whose
+   H^0 section is its image under the composite identification. The open
+   coefficient comparison is canonical pullback of the finite root line.
+-/
+theorem gysin_structure_statement (P : PurityFiniteSetting.{u})
+    (h : P.ramificationIndex ∣ P.level) (Y : Scheme.{u})
+    (a : Y ⟶ Spec (CommRingCat.of P.field.k))
+    [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a] :
+    finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos Y
+      ((finiteCoefficientIntrinsicRealization Y P.Ring).mapDerivedCategory.obj
+        (P.gysinValue h Y)) ∧
+    (∀ q : ℤ, q ≠ 0 →
+      IsZero ((_root_.DerivedCategory.homologyFunctor (ProSheaves P Y) q).obj
+        (P.gysinValue h Y))) ∧
+    (∃ H : EtSheaves P Y,
+      Nonempty ((comparisonUpperStar (Modules P) Y).obj H ≅
+        (_root_.DerivedCategory.homologyFunctor (ProSheaves P Y) 0).obj (P.gysinValue h Y)) ∧
+      ∃ V : Scheme.Cover.{u} Scheme.etalePrecoverage Y,
+        ∀ i : V.I₀, Nonempty
+          ((Etale.upperStar (Modules P) (V.f i)).obj H ≅ P.constantEtale (V.X i))) ∧
+    Function.Bijective (P.gysinHomToSections h Y) ∧
+    Function.Bijective (P.gysinSupportToHom h Y a) ∧
+    Function.Bijective (P.gysinSupportToSections h Y a) ∧
+    ∃ b : (upperStar (Modules P) (openImmersion Y)).mapDerivedCategory.obj
+        (P.gysinInput h Y).obj ≅ P.derivedSheaf h (Punctured Y) true,
+      b.hom = P.gysinOpenCoefficient h Y ∧
+      ∀ δ : Sheaf.SupportSequenceBoundary (Scheme.ProEt.topology (Line Y)) (Modules P)
+          (supportRestrictionArrow (zeroSection Y)) ⊤,
+        Sheaf.SupportSequenceExact (Scheme.ProEt.topology (Line Y)) (Modules P)
+          (supportRestrictionArrow (zeroSection Y)) ⊤ δ →
+        ∃ m : P.derivedSheaf h Y false ⟶ P.gysinValue h Y,
+          P.gysinSupportToHom h Y a
+              ((δ 1).app ⟨P.gysinInput h Y, trivial⟩
+                (P.gysinCoordinateSupportSection h Y a b)) = m ∧
+          P.gysinHomToSections h Y m = P.gysinSupportToSections h Y a
+            ((δ 1).app ⟨P.gysinInput h Y, trivial⟩
+              (P.gysinCoordinateSupportSection h Y a b)) := by
+  letI : Y.Over (Spec (CommRingCat.of P.field.k)) := ⟨a⟩
+  letI : LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of P.field.k)) := by
+    change LocallyOfFiniteType a
+    infer_instance
+  letI : QuasiCompact (Y ↘ Spec (CommRingCat.of P.field.k)) := by
+    change QuasiCompact a
+    infer_instance
+  letI : IsSeparated (Y ↘ Spec (CommRingCat.of P.field.k)) := by
+    change IsSeparated a
+    infer_instance
+  obtain ⟨first, δ, δet, _, hT, he⟩ :=
+    gysin_localization_pushforward P h Y a
+  let T := gysinTriangle P h Y first δ
+  obtain ⟨hK, _, _⟩ := relative_kummer P h Y
+  obtain ⟨⟨L, M, hB, eB, hC, eC₀, eC₁, hMor₂⟩⟩ :=
+    gysin_triangle_extraction_hypotheses P h Y a first δ δet hT he hK
+  letI : IsIso ((DerivedCategory.homologyFunctor
+      (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} P.Coefficient)) 0).map
+      T.mor₂) := hMor₂
+  obtain ⟨hA, hMor₃, hShift, eShift⟩ := gysin_cohomology_extraction P Y a T L M hT
+    hB eB hC eC₀ eC₁
+  let d : GysinExtractionResult P Y T :=
+    { M := M, hA := hA, hMor₃ := hMor₃, hShift := hShift, eShift := eShift }
+  have hfinite := gysin_clause1_finiteTor P h Y a first δ hT d
+  have hzero : ∀ q : ℤ, q ≠ 0 → IsZero
+      ((_root_.DerivedCategory.homologyFunctor (ProSheaves P Y) q).obj
+        (P.gysinValue h Y)) := by
+    simpa [T, gysinTriangle, gysinValue] using d.hShift
+  have hlocal := gysin_clause1_local_model P h Y a first δ hT d
+  obtain ⟨hsup, hconcentrated⟩ := gysin_support_hom P h Y a
+  have hhom : Function.Bijective (P.gysinHomToSections h Y) :=
+    hconcentrated.2 hzero
+  have hsections : Function.Bijective (P.gysinSupportToSections h Y a) := by
+    change Function.Bijective (fun x ↦
+      P.gysinHomToSections h Y (P.gysinSupportToHom h Y a x))
+    exact hhom.comp hsup
+  letI : IsIso (P.gysinOpenCoefficient h Y) :=
+    gysin_open_coefficient_isIso P h Y a
+  let b : (upperStar (Modules P) (openImmersion Y)).mapDerivedCategory.obj
+      (P.gysinInput h Y).obj ≅ P.derivedSheaf h (Punctured Y) true :=
+    asIso (P.gysinOpenCoefficient h Y)
+  refine ⟨hfinite, hzero, hlocal, hhom, hsup, hsections, b, rfl, ?_⟩
+  · intro δ hδ
+    let z := (δ 1).app ⟨P.gysinInput h Y, trivial⟩
+        (P.gysinCoordinateSupportSection h Y a b)
+    refine ⟨P.gysinSupportToHom h Y a z, rfl, ?_⟩
+    rfl
 
 end WeilConjectures.PurityFiniteSetting
