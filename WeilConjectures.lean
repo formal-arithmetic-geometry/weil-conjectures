@@ -10129,6 +10129,7 @@ public import WeilConjectures.CategoryTheory.PointSystemRefineAll
 public import WeilConjectures.CategoryTheory.PointSystemRefinementChainExists
 public import WeilConjectures.CategoryTheory.PointSystemRefinementMap
 public import WeilConjectures.CategoryTheory.PointSystemSchedule
+public import WeilConjectures.CategoryTheory.Preadditive.ActionTrivialModEll
 public import WeilConjectures.CategoryTheory.Preadditive.AveragingDuality
 public import WeilConjectures.CategoryTheory.Preadditive.CokernelBiproduct
 public import WeilConjectures.CategoryTheory.Preadditive.CoyonedaSectionsExtendScalars
@@ -11899,6 +11900,7 @@ public import WeilConjectures.Mathlib.FieldTheory.Finite.GaloisField
 public import WeilConjectures.Mathlib.FieldTheory.Finite.Polynomial
 public import WeilConjectures.Mathlib.FieldTheory.Fixed
 public import WeilConjectures.Mathlib.FieldTheory.Galois.Infinite
+public import WeilConjectures.Mathlib.FieldTheory.Galois.Profinite
 public import WeilConjectures.Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
 public import WeilConjectures.Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.Mathlib.FieldTheory.IsAlgClosed.Classification
@@ -11953,6 +11955,7 @@ public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Submodule
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Vanishing
 public import WeilConjectures.Mathlib.LinearAlgebra.Trace
 public import WeilConjectures.Mathlib.LinearAlgebra.TraceSemilinear
+public import WeilConjectures.Mathlib.NumberTheory.Basic
 public import WeilConjectures.Mathlib.NumberTheory.Cyclotomic.CyclotomicCharacter
 public import WeilConjectures.Mathlib.NumberTheory.LegendreSymbol.AddCharacter
 public import WeilConjectures.Mathlib.NumberTheory.Padics.Complex
@@ -14554,7 +14557,6 @@ public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Compactification
 public import WeilConjectures.SixFunctors.LowerShriek.Formalism.Composition
 public import WeilConjectures.SixFunctors.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.ModuleTraceAdjustment
-public import WeilConjectures.SixFunctors.NearbyCycles.ActionTrivialModEll
 public import WeilConjectures.SixFunctors.NearbyCycles.AutAction
 public import WeilConjectures.SixFunctors.NearbyCycles.AutActionComp
 public import WeilConjectures.SixFunctors.NearbyCycles.AutActionExchange
@@ -15550,6 +15552,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.ReductionRationalIsIso
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.ReductionTower
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.RetractionLift
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.Separated
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.SplitMonoReduction
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.Uniformizer
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedPullIsoCoherence
@@ -16344,6 +16347,7 @@ public import WeilConjectures.TraceFormula.Specialization.GaloisLayerStabilizati
 public import WeilConjectures.TraceFormula.Specialization.GaloisLayerStabilizationPadicAlgCl
 public import WeilConjectures.TraceFormula.Specialization.GenericAutFiniteQuotient
 public import WeilConjectures.TraceFormula.Specialization.GenericAutModEll
+public import WeilConjectures.TraceFormula.Specialization.GenericAutPow
 public import WeilConjectures.TraceFormula.Specialization.GenericBaseMeasure
 public import WeilConjectures.TraceFormula.Specialization.GenericBaseMeasureSlice
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorAffineLine
@@ -16533,6 +16537,7 @@ public import WeilConjectures.TraceFormula.Specialization.ResidueConstantSmoothE
 public import WeilConjectures.TraceFormula.Specialization.ResidueConstantThickOrigin
 public import WeilConjectures.TraceFormula.Specialization.ResidueFieldBaseChangeLift
 public import WeilConjectures.TraceFormula.Specialization.SliceBaseModel
+public import WeilConjectures.TraceFormula.Specialization.SliceNearbyCyclesFiniteQuotient
 public import WeilConjectures.TraceFormula.Specialization.SliceSupport
 public import WeilConjectures.TraceFormula.Specialization.SliceTrait
 public import WeilConjectures.TraceFormula.Specialization.SliceTraitAlgebraic
