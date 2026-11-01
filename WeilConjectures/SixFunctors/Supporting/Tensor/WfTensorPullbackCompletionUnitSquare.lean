@@ -17,6 +17,10 @@ The strict square combines normalized constants and augmented Koszul transport;
 applying localization gives the equality on the recorded models.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 universe u

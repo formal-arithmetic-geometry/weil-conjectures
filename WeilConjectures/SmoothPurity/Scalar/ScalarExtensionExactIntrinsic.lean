@@ -24,6 +24,9 @@ Source: literature/blueprint/master/blueprint/sec-smooth-purity/
 (blueprint: lem-weil-scalar-extension-exact-triangulated).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false

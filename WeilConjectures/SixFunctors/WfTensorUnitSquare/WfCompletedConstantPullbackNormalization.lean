@@ -15,6 +15,10 @@ import all WeilConjectures.AlgebraicGeometry.Weil.WeilTensorProduct
 Source: the coefficient-normalization step of the Frobenius tensor-unit argument.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096

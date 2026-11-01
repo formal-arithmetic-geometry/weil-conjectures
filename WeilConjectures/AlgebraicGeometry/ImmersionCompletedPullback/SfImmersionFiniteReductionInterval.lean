@@ -16,6 +16,10 @@ import all WeilConjectures.AlgebraicGeometry.Finite.FiniteImmersionConstructibil
 Source: localization Step 6, finite constructibility; Stacks Tags 09AK, 09AL and 09B5.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096

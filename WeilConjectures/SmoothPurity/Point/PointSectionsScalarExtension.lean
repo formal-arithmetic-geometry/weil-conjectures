@@ -207,7 +207,6 @@ attribute [local irreducible] limit HasDerivedCategory.standard
 
 attribute [-instance] WeilConjectures.podCompletedOrdinaryScalarExtension_preservesFiniteLimits
   WeilConjectures.podCompletedOrdinaryScalarExtension_preservesFiniteColimits
-
   WeilConjectures.coefficientComplexIntegralLimits
   WeilConjectures.coefficientComplexIntegralColimits
   WeilConjectures.coefficientComplexRationalAdditive
