@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.Derived.DerivedTensorKoszulSymmetry
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CondensedPullbackTensorKoszul
 
 /-! # Canonical condensed derived pullback tensor constraints
 
@@ -38,28 +39,10 @@ open AlgebraicGeometry.ProEtale.CondensedRing
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
-/-- The canonical tensor, unit, and symmetry coherence equations for derived pullback:
-for `F = Lf^*`, `μ_{K,N} : F(K ⊗ N) ≅ FK ⊗ FN` and `e : F 𝟙 ≅ 𝟙`,
-`μ_{K⊗N,M} ≫ (μ_{K,N} ▷ FM) ≫ α = F(α) ≫ μ_{K,N⊗M} ≫ (FK ◁ μ_{N,M})`,
-`μ_{𝟙,K} ≫ (e ▷ FK) ≫ λ = F(λ)`, `μ_{K,𝟙} ≫ (FK ◁ e) ≫ ρ = F(ρ)` and
-`μ_{K,N} ≫ σ = F(σ) ≫ μ_{N,K}`, with `σ` the localized Koszul symmetry.
+/-- The canonical tensor, unit, and symmetry coherence equations for derived pullback.
 
-Source: literature/blueprint/latest/blueprint/sec-proetale-coefficients/
-sk-prop-sf-open-closed-triangle/def-weil-derived-pullback-tensor-hom.md, direct
-condensed-coefficient derived pullback and K-flat relative tensor paragraphs.
-
-Proof (node steps):
-1. For `T = X, Y`, det-prop-sfb-module-category clause 4 makes the `Λ_T`-module objects a
-   closed symmetric monoidal Grothendieck abelian category with unit `Λ_T` and functorial
-   flat resolutions; def-sfb-derived-tensor-modules and lem-sfb-derived-monoidal give the
-   K-flat derived tensor with unit `Λ_T[0]` and associator/unitors from signed total
-   complexes, and def-pur-localized-derived-tensor-braiding its localized Koszul symmetry.
-2. lem-sfb-derived-pullback-strong-monoidal (`monoidal_leftDerivedUpperStar`) gives `μ`
-   and `e`, natural, with tensorator `μ⁻¹` and unit `e⁻¹`; its associativity and two
-   unitality axioms, rewritten with these inverses, are the first three equations. No
-   boundedness or constructibility is assumed.
-3. The symmetry equation is lem-sf-condensed-derived-pullback-braiding with `M = K`,
-   `N = L`: its `δ_f` is the same `μ` and its `σ` the localized Koszul braiding of Step 1.
+This packages the comparison isomorphism and unit comparison supplied by the
+strong-monoidality theorem for condensed module objects.
 (blueprint: lem-pur-derived-pullback-tensor-constraints) -/
 theorem derivedPullbackTensorConstraints
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -100,6 +83,22 @@ theorem derivedPullbackTensorConstraints
       L((f)^*⟦Λ⟧).map
           (CategoryTheory.derivedTensorKoszulSymmetry _ K N).hom ≫
         (((leftDerivedUpperStarTensorIso Λ f).app N).app K).hom := by
-  sorry
+  let := leftDerivedUpperStarOplaxMonoidal Λ f
+  have hδ (A B : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))) :
+      Functor.OplaxMonoidal.δ L((f)^*⟦Λ⟧) A B =
+        (((leftDerivedUpperStarTensorIso Λ f).app A).app B).hom := by
+    rfl
+  have hη : Functor.OplaxMonoidal.η L((f)^*⟦Λ⟧) =
+      (leftDerivedUpperStarUnitIso Λ f).hom := by
+    exact leftDerivedUpperStarOplaxMonoidal_η Λ f
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · simpa only [hδ] using
+      (Functor.OplaxMonoidal.associativity L((f)^*⟦Λ⟧) K N M)
+  · simpa only [hδ, hη] using
+      (Functor.OplaxMonoidal.left_unitality_hom L((f)^*⟦Λ⟧) K)
+  · simpa only [hδ, hη] using
+      (Functor.OplaxMonoidal.right_unitality_hom L((f)^*⟦Λ⟧) K)
+  · exact condensedPullbackTensorKoszul Λ f K N
 
 end AlgebraicGeometry.ProEtale.CondensedRing

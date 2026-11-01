@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.WeilSheaf.FourierInversion.Defs
 public import WeilConjectures.WeilSheaf.TateTwist
+public import WeilConjectures.WeilSheaf.RankOneThomFiniteFibre
+public import WeilConjectures.WeilSheaf.RankOneThomIntegralClass
 
 /-!
 # Rank-one Thom map on sheaf objects
@@ -36,16 +38,11 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
 `σ : P(-1)[-2] ⟶ Rπ_! π^* P`, invertible on objects coming from Weil sheaves.  It points in the
 direction of the class: no inverse, and no dévissage of a general complex, is used here.
 
-Proof in words.  Construct the compatible finite Kummer classes of the zero section and pass to
-their inverse limit to obtain the integral class; compact-support direct image gives
-`τ_V : Λ_X → Rπ_!Λ_Y(1)[2]`, and untwisting by the perfect line `Λ_X(-1)[-2]` (projection
-formulas for `j_!` and `Rr_*`) gives `Λ_X(-1)[-2] → Rπ_!Λ_Y`.  Tensoring with `P` and the
-projection map `P ⊗ Rπ_!Λ_Y → Rπ_!(π^*P)` give `σ_P`, natural and compatible with shifts.
-At a geometric point of `X`, the finite-fibre calculation identifies the first reduction of
-`τ_V` with `A₁ → RΓ_c(𝔸¹,A₁(1)[2])`, sending `1` to the supported origin class, hence with an
-isomorphism.  Derived completeness of both endpoints and of the cone, followed by derived
-Nakayama, makes the integral `τ_V` invertible; scalar comparison transports this to `E` and
-`Q̄_ℓ`.  The projection formula then makes `σ_P` invertible for every Weil sheaf `P`.
+Proof in words.  The integral class construction
+(`WeilComplex.exists_rankOneThom_integral_class`) gives a shift-compatible `σ` whose
+degree-two homology map on every sheaf object is an isomorphism.  Away from degree two both
+endpoints have zero homology (`WeilComplex.rankOneThom_offDegree_zero`), so every homology map
+of `σ_P` is an isomorphism, and homology detects isomorphisms in the derived category.
 (blueprint: lem-pur-rank-one-native-sheaf-thom)
 -/
 theorem WeilComplex.exists_rankOneThom_on_toComplex
@@ -62,6 +59,33 @@ theorem WeilComplex.exists_rankOneThom_on_toComplex
         WeilComplex.upperStar π ⋙ WeilComplex.derivedLowerShriek k₀ l π),
       NatTrans.CommShift σ ℤ ∧ ∀ P : WeilSheaf k₀ l X,
         IsIso (σ.app ((WeilSheaf.toComplex (k₀ := k₀) (l := l) (X := X)).obj P)) := by
-  sorry
+  obtain ⟨σ, hσ, h₂⟩ := WeilComplex.exists_rankOneThom_integral_class
+    (k₀ := k₀) (l := l) π s hπ
+  have hσiso : ∀ P : WeilSheaf k₀ l X, IsIso (σ.app (WeilSheaf.toComplex.obj P)) := by
+    intro P
+    have hm : IsIso ((WeilComplex.objectProperty k₀ l X).ι.map
+        (σ.app (WeilSheaf.toComplex.obj P))) := by
+      apply (_root_.DerivedCategory.isIso_iff _ _).2
+      intro r
+      by_cases hr : r = 2
+      · subst r
+        have h₂P : IsIso ((WeilComplex.homologySheaf (2 : ℤ)).map
+            (σ.app (WeilSheaf.toComplex.obj P))) := h₂ P
+        exact (WeilSheaf.objectProperty k₀ l X).ι.map_isIso
+          ((WeilComplex.homologySheaf (2 : ℤ)).map
+            (σ.app (WeilSheaf.toComplex.obj P)))
+      · obtain ⟨hs, ht⟩ := WeilComplex.rankOneThom_offDegree_zero
+          (k₀ := k₀) (l := l) π s hπ P hr
+        have hzero : IsIso ((WeilComplex.homologySheaf r).map
+            (σ.app (WeilSheaf.toComplex.obj P))) :=
+          ht.isIso hs ((WeilComplex.homologySheaf r).map
+            (σ.app (WeilSheaf.toComplex.obj P)))
+        exact (WeilSheaf.objectProperty k₀ l X).ι.map_isIso
+          ((WeilComplex.homologySheaf r).map
+            (σ.app (WeilSheaf.toComplex.obj P)))
+    exact @Functor.FullyFaithful.isIso_of_isIso_map _ _ _ _ _
+      (WeilComplex.objectProperty k₀ l X).fullyFaithfulι _ _
+      (σ.app (WeilSheaf.toComplex.obj P)) hm
+  exact ⟨σ, hσ, hσiso⟩
 
 end AlgebraicGeometry

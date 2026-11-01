@@ -13,6 +13,9 @@ import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import WeilConjectures.SmoothPurity.PurityFiniteSetting.PurityRelativeKummerBaseChange
 public import WeilConjectures.SmoothPurity.PurityFiniteSetting.PurityRelativeKummerGeometric
 public import WeilConjectures.SmoothPurity.PurityFiniteSetting.PurityRelativeKummerRelativeConclusions
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.PurityRelativeKummerArbitraryBaseMaps
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.PurityRelativeKummerAssembly
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.PurityRelativeKummerExchangeFromConclusions
 
 /-!
 # Relative affine-line acyclicity and the actual Kummer generator
@@ -219,11 +222,17 @@ theorem relative_kummer (P : PurityFiniteSetting.{u})
       P.KummerBaseChangeConclusions h g (Y ↘ Spec (CommRingCat.of P.field.k)) ∧
       P.RelativeKummerConclusions h (Spec (CommRingCat.of Ω))
         (g ≫ Y ↘ Spec (CommRingCat.of P.field.k)) := by
-  let a := Y ↘ Spec (CommRingCat.of P.field.k)
-  have hY : P.RelativeKummerConclusions h Y a :=
-    relative_kummer_relative_conclusions P h Y a
-      (fun Ω [Field Ω] [IsAlgClosed Ω] s =>
-        relative_kummer_geometric_stalk_conclusions P h Y a Ω s)
-  exact ⟨hY, relative_kummer_base_change_conclusions P h Y⟩
+  have hc (B : Scheme.{u}) (a : B ⟶ Spec (CommRingCat.of P.field.k)) :
+      P.RelativeKummerConclusions h B a := by
+    obtain ⟨hu, ht, hzero, hgen, hvan⟩ := P.relative_kummer_arbitrary_base_maps h B a
+    exact P.relativeKummerConclusions_of_maps h B a hu ht hzero hgen hvan
+  have hY := hc Y (Y ↘ Spec (CommRingCat.of P.field.k))
+  refine ⟨hY, ?_, ?_⟩
+  · intro Y' _ _ _ _ g _
+    exact P.relative_kummer_base_change_of_relative_conclusions h g _ hY (hc Y' _)
+  · intro Ω _ _ g
+    have hΩ := hc (Spec (CommRingCat.of Ω))
+      (g ≫ Y ↘ Spec (CommRingCat.of P.field.k))
+    exact ⟨P.relative_kummer_base_change_of_relative_conclusions h g _ hY hΩ, hΩ⟩
 
 end WeilConjectures.PurityFiniteSetting

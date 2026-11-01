@@ -8,6 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.AffineOrderedIntegration.AffineOrderedSupportedTensorCoordinates
 public import WeilConjectures.AlgebraicGeometry.AffineOrderedIntegration.AffineOrderedLineEvaluationCoordinates
 public import WeilConjectures.AlgebraicGeometry.AffineOrderedIntegration.AffineOrderedEtaleSourceReassociation
+public import WeilConjectures.AlgebraicGeometry.AffineOrderedIntegration.AffineOrderedEtaleCounitLinePaste
+public import WeilConjectures.AlgebraicGeometry.AffineOrderedIntegration.AffineOrderedEtaleCounitTensorRecursion
 
 /-! # Recursion of the ordinary counit coordinates
 
@@ -86,6 +88,24 @@ theorem etaleCounit_recursion
     (supportedTensorCoordinates P Y aY Ke hKe (d + 1) hJ.1.1.1).hom =
       (supportedTensorCoordinates P Y aY Ke hKe (d + 2) hJnext).hom ≫
         (comparison (AffineLinePurity.Ring P) Y).map
-          (orderedCounitStep P Y aY Ke (d + 1)) := by sorry
+          (orderedCounitStep P Y aY Ke (d + 1)) := by
+  let : IsNoetherian Y := tower_noetherian P Y aY 0
+  let : LocallyOfFiniteType (towerBase aY (d + 1)) := (tower_geometry aY (d + 1)).1
+  let : QuasiCompact (towerBase aY (d + 1)) := (tower_geometry aY (d + 1)).2.1
+  let : IsSeparated (towerBase aY (d + 1)) := (tower_geometry aY (d + 1)).2.2
+  let : IsNoetherian (iteratedAffineLine Y (d + 1)) := tower_noetherian P Y aY (d + 1)
+  have hp := etaleCounit_line_paste P Y aY Ke hKe d H hJ eH
+  have ht := etaleCounit_tensor_recursion P Y aY Ke hKe d H hJ eH hJnext
+  let A := (AffineLineEvaluation.support P aY (iteratedAffineLineProj Y (d + 2))).map
+      ((comparison (AffineLinePurity.Ring P) (iteratedAffineLine Y (d + 2))).map
+        (etaleSourceReassociation P Y aY Ke d).hom ≫
+      (AffineLineEvaluation.lineWitness P (iteratedAffineLine Y (d + 1)) H.obj
+        (sourceEtale P Y Ke (d + 1)) hJ eH).iso.hom)
+  let B := (AffineLineEvaluation.compositor P aY (iteratedAffineLineProj Y (d + 1))
+    H.obj (sourceEtale P Y Ke (d + 1)) hJ eH).inv
+  let C := (supportedTensorCoordinates P Y aY Ke hKe (d + 1) hJ.1.1.1).hom
+  have hpc := congrArg (fun z ↦ A ≫ B ≫ z ≫ C) hp
+  have hmain := hpc.trans ht
+  simpa only [A, B, C, Category.assoc] using hmain
 
 end AlgebraicGeometry.ProEtale.AffineOrderedIntegration

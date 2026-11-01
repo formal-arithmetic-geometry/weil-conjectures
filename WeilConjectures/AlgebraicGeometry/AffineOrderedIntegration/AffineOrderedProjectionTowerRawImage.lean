@@ -6,6 +6,9 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.AffineOrderedIntegration.AffineOrderedProjectionTower
+public import WeilConjectures.AlgebraicGeometry.AffineOrderedIntegration.AffineOrderedProjectionTowerRawImageFactor
+public import WeilConjectures.AlgebraicGeometry.AffineOrderedIntegration.AffineOrderedProjectionTowerRawImageLambda
+public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleCompositionTowerFormula
 
 /-! The comparison-image calculation for the affine projection tower.
 
@@ -44,6 +47,23 @@ theorem projection_tower_raw_image
     projectionTowerMap A b e
         ((comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory.obj L.obj) =
       towerOriginComposition A f g b e L := by
-  sorry
+  let : IsNoetherian b.Z := by
+    let : IsLocallyNoetherian b.Z := LocallyOfFiniteType.isLocallyNoetherian b.g
+    let : CompactSpace b.Z := QuasiCompact.compactSpace_of_compactSpace b.g
+    exact ⟨⟩
+  let : IsNoetherian e.Z := by
+    let : IsLocallyNoetherian e.Z := LocallyOfFiniteType.isLocallyNoetherian e.g
+    let : CompactSpace e.Z := QuasiCompact.compactSpace_of_compactSpace e.g
+    exact ⟨⟩
+  let : IsNoetherian e.restrict.Z := by
+    let : IsLocallyNoetherian e.restrict.Z :=
+      LocallyOfFiniteType.isLocallyNoetherian e.restrict.g
+    let : CompactSpace e.restrict.Z :=
+      QuasiCompact.compactSpace_of_compactSpace e.restrict.g
+    exact ⟨⟩
+  obtain ⟨hLambda, _⟩ := projection_tower_raw_image_lambda A f g b e L
+  have hfactor := projection_tower_raw_image_factor A f g b e L hLambda
+  have hformula := proEtaleCompositionTowerFormula A f g b e L hLambda
+  exact hfactor.trans hformula.symm
 
 end AlgebraicGeometry.ProEtale.AffineOrderedIntegration

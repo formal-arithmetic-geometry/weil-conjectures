@@ -8,6 +8,8 @@ module
 public import WeilConjectures.SmoothPurity.PurityFiniteSetting.Coordinate.CoordinateBoundaryGeometricPullback
 public import WeilConjectures.SmoothPurity.PurityFiniteSetting.Coordinate.CoordinateLocalizationSplice
 public import WeilConjectures.AlgebraicGeometry.Supported.SupportedHomCocycleNormalization
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.CoordinateLocalizationEtaleBoundaryCocycle
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.CoordinateLocalizationEtaleCocycleYoneda
 
 /-! # Normalized coordinate localization splice on the étale site
 
@@ -50,6 +52,7 @@ theorem coordinateLocalization_etale_normalized_splice
     N.chi (P.coordinateEtaleInput h (Line T)) 2
         (-M.alphaEtale P h aT) =
       (-P.coordinateLocalizationClass h T aT).hom := by
-  sorry
+  obtain ⟨W⟩ := coordinateLocalization_etale_boundary_cocycle P h T aT M N
+  exact coordinateLocalization_etale_cocycle_yoneda P h T aT M N W
 
 end WeilConjectures.PurityFiniteSetting
