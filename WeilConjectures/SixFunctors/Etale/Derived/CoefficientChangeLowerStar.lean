@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.Adjunction.MateIterated
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeUnitLowerStar
-public import WeilConjectures.SixFunctors.Etale.Derived.ExtendScalarsDerived
+public import WeilConjectures.SixFunctors.Etale.Derived.ExtendScalarsRestrictScalarsMate
 
 /-!
 # The proper direct image carries derived base changes to derived base changes
@@ -43,7 +43,7 @@ variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] (ρ : Λ →+* Λ'
 
 section
 
-variable [IsNoetherianRing Λ] {Z Y : Scheme.{u}} (p : Z ⟶ Y)
+variable {Z Y : Scheme.{u}} (p : Z ⟶ Y)
 
 /-- The base change map `Ψ (Rp_* K) ⟶ Rp_* (Ψ K)` of derived extension of scalars along the
 derived direct image: the mate of the commutation `Lp^* ∘ Ψ ≅ Ψ ∘ Lp^*`
@@ -53,16 +53,6 @@ noncomputable def rightDerivedLowerStarExtendScalarsMap :
       L(ProEtale.etaleSheafExtendScalars ρ Z) ⋙ R((p)_*[ModuleCat.{u + 1} Λ']) :=
   mateEquiv (derivedUpperStarLowerStarAdjunction _ p) (derivedUpperStarLowerStarAdjunction _ p)
     (leftDerivedUpperStarEtaleSheafExtendScalarsIso ρ p).hom
-
-/-- The commutation `Lp^* Ψ ≅ Ψ Lp^*` of derived extension of scalars with the derived pullback is
-the mate, along the adjunctions `Ψ ⊣ Res`, of the commutation `Lp^* Res ≅ Res Lp^*` of restriction
-of scalars with the derived pullback. -/
-theorem mateEquiv_leftDerivedUpperStarEtaleSheafExtendScalarsIso_inv :
-    mateEquiv (leftDerivedEtaleSheafExtendScalarsAdjunction ρ Y)
-        (leftDerivedEtaleSheafExtendScalarsAdjunction ρ Z)
-        (leftDerivedUpperStarEtaleSheafExtendScalarsIso ρ p).inv =
-      (leftDerivedUpperStarRestrictScalarsIso ρ p).hom :=
-  sorry
 
 /-- **Derived extension of scalars commutes with `Rp_*` for proper `p`**: for a finite ring `Λ`,
 the base change map `Ψ (Rp_* K) ⟶ Rp_* (Ψ K)` is an isomorphism. Restricted to `Λ`, it is the

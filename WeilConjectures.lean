@@ -9153,6 +9153,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.MateCompose
 public import WeilConjectures.CategoryTheory.Adjunction.MateCounitIsIso
 public import WeilConjectures.CategoryTheory.Adjunction.MateCube
 public import WeilConjectures.CategoryTheory.Adjunction.MateFixedSquare
+public import WeilConjectures.CategoryTheory.Adjunction.MateIterated
 public import WeilConjectures.CategoryTheory.Adjunction.MateOfNatIsoLeft
 public import WeilConjectures.CategoryTheory.Adjunction.MatePasting
 public import WeilConjectures.CategoryTheory.Adjunction.MateTransport
