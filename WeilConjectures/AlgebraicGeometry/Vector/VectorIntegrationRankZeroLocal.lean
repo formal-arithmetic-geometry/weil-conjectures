@@ -109,6 +109,21 @@ private lemma identity_comparison_plus
   simpa only [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id,
     Functor.comp_obj, Functor.id_obj, Category.assoc] using h
 
+private lemma compact_comparison_zero (N : ℕ) (hN : 0 < N)
+    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
+    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) :
+    (affineLinearCompactComparison N hN A hA S hS 0).inv =
+      (unboundedEtaleLowerShriekId A S).hom.app (ordinaryFiniteUnit A S) := by
+  unfold affineLinearCompactComparison
+  simp only [Iso.trans_inv, Iso.symm_inv, Iso.app_inv, Functor.mapIso_inv,
+    affineTracePlusCompatibility, affineTraceCompactSupportComparison]
+  rw [identity_comparison_plus]
+  simp only [Nat.rec_zero, Functor.id_obj, Nat.zero_eq, Functor.comp_obj,
+    ObjectProperty.ι_obj, Iso.inv_hom_id_app_assoc, NatIso.trans_app, Iso.trans_hom,
+    Iso.app_hom, Functor.leftUnitor_hom_app, Iso.symm_hom,
+    Functor.rightUnitor_inv_app, Category.comp_id]
+  exact Category.comp_id _
+
 private lemma identity_exchange (A : Type (u + 1)) [CommRing A] [Finite A]
     {T S : Scheme.{u}} [IsNoetherian T] [IsNoetherian S] (f : T ⟶ S)
     (sq : IsPullback f (𝟙 T) (𝟙 S) f) (K : DerivedCategoryModule A S) :

@@ -9,6 +9,9 @@ public import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.TransportCor
 import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.ExceptionalRingTransportCoreLawsSystem
 import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.ExceptionalRingTransportCoreLawsEvaluation
 import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.TransportCoreData.ExceptionalRingTransportCoreLawsNormalization
+public import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.ExceptionalRingTransportCoreLawsSystemAdjunction
+public import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.ExceptionalRingTransportCoreLawsSystemReduction
+public import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.TransportCoreData.ExceptionalRingTransportSupportNormalization
 
 /-! # Compatibility laws for exceptional integral transport
 
@@ -118,7 +121,8 @@ structure TransportCoreLaws
 /-- Choose transport data and their laws together, fixing the comparison maps by
 proper/open realization before assembling the law packages. The comparison maps of
 an arbitrary input datum need not satisfy the normalization equations.
-Proof: obtain transport data and their support identity. Replace the integral-left
+Proof: obtain transport data, replace the support functor by the explicit canonical
+lift and obtain its strict support identity. Replace the integral-left
 and system comparisons by their explicit normalized constructions. Apply the system
 and evaluation law packages to this datum, and use the proved normalization laws.
 Source: Zheng, Constructions 4.1 and 5.25 and Proposition 5.26.
@@ -141,22 +145,24 @@ theorem exists_exceptional_transport_core_laws
     (leftShift : ∀ s : RingStage.{u} l, (left s).hom.CommShift ℤ) :
     ∃ d : TransportCoreData l Ω D hl c operation left,
       Nonempty (TransportCoreLaws l Ω D hl c operation left d) := by
-  obtain ⟨d⟩ := exists_exceptional_transport_core_data l Ω D hl f c operation left leftShift
-  obtain ⟨hs₀⟩ := exists_exceptional_transport_core_system_laws
-    l Ω D hl f c operation left d
-  let d' := d.normalizeComparisons l Ω D hl c operation left hs₀.support
-  obtain ⟨hs⟩ := exists_exceptional_transport_core_system_laws
+  obtain ⟨d₀⟩ := exists_exceptional_transport_core_data l Ω D hl f c operation left leftShift
+  let d := d₀.normalizeActualSupport l Ω D hl c operation left
+  have hs₀ := d₀.normalizeActualSupport_support l Ω D hl c operation left
+  let d' := d.normalizeComparisons l Ω D hl c operation left hs₀
+  obtain ⟨ha⟩ := exists_exceptional_transport_core_system_adjunction_law
+    l Ω D hl f c operation left d'
+  obtain ⟨hrF, hrG⟩ := exists_exceptional_transport_core_system_reduction_laws
     l Ω D hl f c operation left d'
   obtain ⟨he⟩ := exists_exceptional_transport_core_evaluation_laws
     l Ω D hl f c operation left d'
   obtain ⟨hn⟩ := exists_exceptional_transport_core_normalization_laws
-    l Ω D hl f c operation left d hs₀.support
+    l Ω D hl f c operation left d hs₀
   refine ⟨d', ⟨?_⟩⟩
   exact {
-    support := hs.support
-    adjunction_eq := hs.adjunction_eq
-    reductionF_eq := hs.reductionF_eq
-    reductionG_eq := hs.reductionG_eq
+    support := hs₀
+    adjunction_eq := ha
+    reductionF_eq := hrF
+    reductionG_eq := hrG
     evaluation_unit := he.evaluation_unit
     evaluation_counit := he.evaluation_counit
     integralLeft_normalized := hn.integralLeft_normalized

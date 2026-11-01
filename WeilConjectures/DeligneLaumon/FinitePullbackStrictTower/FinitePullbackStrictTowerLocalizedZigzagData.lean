@@ -62,4 +62,48 @@ def comparisonBalancedDiagramIso
     tensorReduction l E X ((G l E g).obj P) ≅ ((finiteComplex l E g).obj P).asFunctor :=
   lambda.app P
 
+/-- Transpose the balanced diagram isomorphism before localization.
+Source: Stacks 03EL and 06YY; transposition reverses the complex-of-functors construction.
+(blueprint: def-a1-finite-pullback-localized-zigzag-data). -/
+def comparisonBalancedChainIso
+    (lambda : FinitePullbackStrictTowerData.G l E g ⋙
+      FinitePullbackStrictTowerData.reductions l E X ≅ FinitePullbackStrictTowerData.finite l E g)
+    (P : CochainComplex (Modules l E Y) ℤ) :
+    ((transpose l E X).obj
+      (tensorReduction l E X ((G l E g).obj P))) ≅
+    ((integralOperationsPullbackTowerFunctor l E g ⋙ transpose l E X).obj P) :=
+  (transpose l E X).mapIso (comparisonBalancedDiagramIso l E g lambda P)
+
+/-- Localize the specified balanced diagram isomorphism.
+Source: Stacks 03EL and 06XN.
+(blueprint: def-a1-finite-pullback-localized-zigzag-data). -/
+def comparisonBalancedIso
+    (lambda : FinitePullbackStrictTowerData.G l E g ⋙
+      FinitePullbackStrictTowerData.reductions l E X ≅ FinitePullbackStrictTowerData.finite l E g)
+    (P : CochainComplex (Modules l E Y) ℤ) :
+    DerivedCategory.Q.obj ((transpose l E X).obj
+      (tensorReduction l E X ((G l E g).obj P))) ≅
+    DerivedCategory.Q.obj
+      ((integralOperationsPullbackTowerFunctor l E g ⋙ transpose l E X).obj P) :=
+  DerivedCategory.Q.mapIso (comparisonBalancedChainIso l E g lambda P)
+
+/-- The specified localized Koszul-augmentation-balanced zigzag.
+Source: Stacks 099N(5), 0G7E and 06XN.
+(blueprint: def-a1-finite-pullback-localized-zigzag-data). -/
+def comparisonZQ
+    (θ : FinitePullbackStrictTowerData.koszuls l E Y ⋙
+      FinitePullbackStrictTowerData.diagramPull l E g ≅
+        FinitePullbackStrictTowerData.G l E g ⋙ FinitePullbackStrictTowerData.koszuls l E X)
+    (lambda : FinitePullbackStrictTowerData.G l E g ⋙
+      FinitePullbackStrictTowerData.reductions l E X ≅ FinitePullbackStrictTowerData.finite l E g)
+    (P : CochainComplex (Modules l E Y) ℤ) :
+    DerivedCategory.Q.obj (((towerPull l E g).mapHomologicalComplex (.up ℤ)).obj
+      ((transpose l E Y).obj (PrincipalKoszulStrictReplacement.sourceTower l E Y P))) ⟶
+    DerivedCategory.Q.obj
+      ((integralOperationsPullbackTowerFunctor l E g ⋙ transpose l E X).obj P) :=
+  (comparisonKoszulIso l E g θ P).hom ≫
+    DerivedCategory.Q.map ((transpose l E X).map
+      (augmentation l E X ((G l E g).obj P))) ≫
+    (comparisonBalancedIso l E g lambda P).hom
+
 end WeilConjectures.FinitePullbackStrictTower

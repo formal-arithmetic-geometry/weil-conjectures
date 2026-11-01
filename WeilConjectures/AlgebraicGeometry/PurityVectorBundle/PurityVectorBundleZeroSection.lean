@@ -70,5 +70,18 @@ def zeroSection (V : PurityVectorBundle P Z hZ c) : Z ⟶ V.E :=
   @VectorBundleZeroSection.zero Z (isNoetherian_of_locallyOfFiniteType hZ)
     c V.𝓔 V.locallyFree ≫ V.phi.inv
 
+/-- An étale trivialization comprises an étale base change and a scheme isomorphism over
+its source from the pullback bundle to relative affine `c`-space. Surjectivity of the
+étale map and preservation of the zero section are not part of this definition.
+Source: blueprint, `sk-def-purity-conv`, order 1895
+(blueprint: def-pur-vector-bundle-zero-section). -/
+structure Trivialization (V : PurityVectorBundle P Z hZ c) where
+  Z' : Scheme.{u}
+  u : Z' ⟶ Z
+  [etale : Etale u]
+  tau : pullback V.p u ≅ AffineSpace (ULift.{u} (Fin c)) Z'
+  over_commutes : tau.hom ≫ (AffineSpace (ULift.{u} (Fin c)) Z' ↘ Z') =
+    pullback.snd V.p u
+
 end PurityVectorBundle
 end AlgebraicGeometry

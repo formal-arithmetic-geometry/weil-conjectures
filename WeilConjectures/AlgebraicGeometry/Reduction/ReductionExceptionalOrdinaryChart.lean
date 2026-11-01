@@ -130,6 +130,18 @@ private theorem rightAdjointUniq_scalar_of_counits
     b.app (G.obj K) ≫ F'.map (S.map _) at hn
   rw [← reassoc_of% hn, ha, ← T.map_comp_assoc, g.rightAdjointUniq_hom_app_counit j]
 
+private theorem counit_postcompose
+    {C D : Type*} [Category C] [Category D]
+    {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G)
+    {M : C} {K K' W : D} (b : W ⟶ F.obj M) (r : M ⟶ G.obj K)
+    (a : K ⟶ K') (z : W ⟶ K) (h : b ≫ F.map r ≫ adj.counit.app K = z) :
+    b ≫ F.map (r ≫ G.map a) ≫ adj.counit.app K' = z ≫ a := by
+  have hn := adj.counit.naturality a
+  change F.map (G.map a) ≫ adj.counit.app K' = adj.counit.app K ≫ a at hn
+  simp only [Functor.map_comp, Category.assoc]
+  rw [hn]
+  exact (reassoc_of% h) a
+
 private def scalarComposite
     {C D E C' D' E' : Type*}
     [Category C] [Category D] [Category E] [Category C'] [Category D'] [Category E']
@@ -144,6 +156,37 @@ private def scalarComposite
     simp only [Functor.comp_map] at hγ hβ ⊢
     rw [← Category.assoc, hγ, Category.assoc, ← M'.map_comp, hβ]
     simp only [Functor.map_comp, Category.assoc]
+
+private theorem compose_counit_scalar_to
+    {C D E C' D' E' : Type*}
+    [Category C] [Category D] [Category E] [Category C'] [Category D'] [Category E']
+    {L : C ⥤ D} {R : D ⥤ C} {M : D ⥤ E} {Q : E ⥤ D}
+    {L' : C' ⥤ D'} {R' : D' ⥤ C'} {M' : D' ⥤ E'} {Q' : E' ⥤ D'}
+    (a : L ⊣ R) (b : M ⊣ Q) (a' : L' ⊣ R') (b' : M' ⊣ Q')
+    (S : C ⥤ C') (T : D ⥤ D') (U : E ⥤ E')
+    (β : L ⋙ T ⟶ S ⋙ L') (γ : M ⋙ U ⟶ T ⋙ M')
+    (K : E) (K' : E') (v : U.obj K ⟶ K')
+    (r : S.obj (R.obj (Q.obj K)) ⟶ R'.obj (T.obj (Q.obj K)))
+    (q : T.obj (Q.obj K) ⟶ Q'.obj K')
+    (hr : β.app (R.obj (Q.obj K)) ≫ L'.map r ≫ a'.counit.app (T.obj (Q.obj K)) =
+      T.map (a.counit.app (Q.obj K)))
+    (hq : γ.app (Q.obj K) ≫ M'.map q ≫ b'.counit.app K' =
+      U.map (b.counit.app K) ≫ v) :
+    γ.app (L.obj (R.obj (Q.obj K))) ≫ M'.map (β.app (R.obj (Q.obj K))) ≫
+      M'.map (L'.map (r ≫ R'.map q)) ≫ (a'.comp b').counit.app K' =
+      U.map ((a.comp b).counit.app K) ≫ v := by
+  simp only [Adjunction.comp_counit_app, Functor.map_comp, Category.assoc]
+  have hn := a'.counit.naturality q
+  simp only [Functor.comp_map, Functor.id_map] at hn
+  have hn' := congrArg (fun z ↦ M'.map z) hn
+  simp only [Functor.map_comp] at hn'
+  rw [reassoc_of% hn']
+  have hr' := congrArg (fun z ↦ M'.map z) hr
+  simp only [Functor.map_comp] at hr'
+  rw [reassoc_of% hr']
+  have hm := γ.naturality (a.counit.app (Q.obj K))
+  simp only [Functor.comp_map] at hm
+  rw [← reassoc_of% hm, hq, ← U.map_comp_assoc]
 
 private theorem compose_counit_scalar
     {C D E C' D' E' : Type*}
@@ -576,6 +619,135 @@ private theorem chart_left_scalar
   erw [Iso.inv_hom_id_app, Iso.inv_hom_id_app]
   simp only [Category.comp_id, Functor.map_comp, Category.assoc]
   erw [hj, reassoc_of% ha, ← reassoc_of% hn]
+
+/-- In ordinary etale coordinates, the scalar counit equation forces the ordered
+chart scalar formula at a single input. Source: blueprint latest, reduction-
+exceptional proof, Locality and Charts (blueprint: lem-sp-reduction-ordinary-chart).
+
+Proof: compose the adjunction of open sum/evaluation along i with each of the
+specified compact-support adjunctions. The scalar/open counit identity identifies
+the restriction of q with the transpose of the scalar-extended composite counit,
+postcomposed with a. Transport the two adjunctions by reductionEtaleChartLeftIso.
+The chart counit scalar equation for sum followed by ordered affine integration
+identifies this transpose with reductionEtaleChartScalarIso, followed by the
+chart right functor applied to a. This uses the generator-normalized Tate-line
+comparison: both maps send (z tensor x) tensor b to z tensor φ(x)b. The P1
+normalizations fix the trace and diagonal classes, and their ordered composites
+fix all dimensions. Injectivity of the B-chart adjunction Hom equivalence gives
+the equality. Right-adjoint uniqueness is precisely reductionEtaleChartRightIso.
+For d=0 the affine adjunction is the identity. The zero coefficient ring is
+included by the same generator and adjunction identities. This statement has no
+site realization, no intrinsic coefficient transpose and no input-origin choice. -/
+theorem reductionExceptional_ordinary_chart
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
+    (φ : A →+* B) (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0) (hB : (N : B) = 0)
+    {X Y U : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] [IsNoetherian U]
+    (f : X ⟶ Y) (i : U ⟶ X) [IsOpenImmersion i]
+    (d : ℕ) (e : U ⟶ affineTraceTower Y d)
+    [AlgebraicGeometry.Etale e] [IsSeparated e] [LocallyOfFiniteType e] [QuasiCompact e]
+    (he : i ≫ f = e ≫ affineTraceProjection Y d) (cf : Compactification f)
+    (MA : Etale.EtaleCompactSupportNormalization A)
+    (MB : Etale.EtaleCompactSupportNormalization B)
+    (tA : Etale.OrdinaryFiniteTwistTransport A N hA)
+    (DA : ∀ (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (N : Γ(T, ⊤))),
+      Etale.OrdinaryFiniteP1Datum A N hA tA T hT)
+    (tB : Etale.OrdinaryFiniteTwistTransport B N hB)
+    (DB : ∀ (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (N : Γ(T, ⊤))),
+      Etale.OrdinaryFiniteP1Datum B N hB tB T hT)
+    (hY : IsUnit (N : Γ(Y, ⊤)))
+    (GA : Etale.DerivedCategoryModule A Y ⥤ Etale.DerivedCategoryModule A X)
+    (GB : Etale.DerivedCategoryModule B Y ⥤ Etale.DerivedCategoryModule B X)
+    (adjA : Etale.rightDerivedLowerShriekOfCompactification
+      (ModuleCat.{u + 1} A) cf ⊣ GA)
+    (adjB : Etale.rightDerivedLowerShriekOfCompactification
+      (ModuleCat.{u + 1} B) cf ⊣ GB)
+    (L : Etale.DerivedCategoryModule A Y)
+    (hL : Etale.DerivedCategory.boundedConstructibleFiniteTor A Y L)
+    (LB : Etale.DerivedCategoryModule B Y)
+    (a : (Etale.scalarExtension φ Y).obj L ⟶ LB)
+    (q : (Etale.scalarExtension φ X).obj (GA.obj L) ⟶ GB.obj LB)
+    (hq : (Etale.compactScalarMap φ cf).app (GA.obj L) ≫
+        (Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} B) cf).map q ≫
+        adjB.counit.app LB = (Etale.scalarExtension φ Y).map (adjA.counit.app L) ≫ a) :
+    (Etale.scalarPullbackIso φ i).inv.app (GA.obj L) ≫
+        (Etale.ordinaryFinitePullback B i).map q ≫
+        (reductionEtaleChartRightIso B MB f i d e he cf GB adjB N hB tB DB hY).hom.app LB =
+      (Etale.scalarExtension φ U).map
+        ((reductionEtaleChartRightIso A MA f i d e he cf GA adjA N hA tA DA hY).hom.app L) ≫
+      (reductionEtaleChartScalarIso φ N hA hB hY d e L).hom ≫
+      (Etale.affineTraceRight B N hB Y d ⋙ Etale.ordinaryFinitePullback B e).map a := by
+  have _ := hL
+  let aA := ((Etale.derivedEtaleLowerShriekUpperStarAdjunction
+    (ModuleCat.{u + 1} A) i inferInstance).ofNatIsoRight
+      (Etale.leftDerivedUpperStarIsoMapDerivedCategory
+        (ModuleCat.{u + 1} A) i).symm).comp adjA
+  let aB := ((Etale.derivedEtaleLowerShriekUpperStarAdjunction
+    (ModuleCat.{u + 1} B) i inferInstance).ofNatIsoRight
+      (Etale.leftDerivedUpperStarIsoMapDerivedCategory
+        (ModuleCat.{u + 1} B) i).symm).comp adjB
+  let hA' := reductionEtaleChartAdjunction A Y N hA tA DA hY d e
+  let hB' := reductionEtaleChartAdjunction B Y N hB tB DB hY d e
+  let lA := reductionEtaleChartLeftIso A MA f i d e he cf
+  let lB := reductionEtaleChartLeftIso B MB f i d e he cf
+  let β := scalarComposite (CoefficientCompatibility.sumCoefficientIso φ i).hom
+    (Etale.compactScalarMap φ cf)
+  let γ := scalarComposite (CoefficientCompatibility.sumCoefficientIso φ e).hom
+    (affineLeftScalar φ Y d)
+  let qi := (Etale.scalarPullbackIso φ i).inv.app (GA.obj L) ≫
+    (Etale.ordinaryFinitePullback B i).map q
+  let r := (reductionEtaleChartScalarIso φ N hA hB hY d e L).hom
+  have hqi : β.app ((GA ⋙ Etale.ordinaryFinitePullback A i).obj L) ≫
+      ((Etale.etaleLowerShriek (ModuleCat.{u + 1} B) i inferInstance).mapDerivedCategory ⋙
+        Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} B) cf).map qi ≫
+      aB.counit.app LB = (Etale.scalarExtension φ Y).map (aA.counit.app L) ≫ a := by
+    have h := compose_counit_scalar_to
+      ((Etale.derivedEtaleLowerShriekUpperStarAdjunction
+        (ModuleCat.{u + 1} A) i inferInstance).ofNatIsoRight
+          (Etale.leftDerivedUpperStarIsoMapDerivedCategory
+            (ModuleCat.{u + 1} A) i).symm) adjA
+      ((Etale.derivedEtaleLowerShriekUpperStarAdjunction
+        (ModuleCat.{u + 1} B) i inferInstance).ofNatIsoRight
+          (Etale.leftDerivedUpperStarIsoMapDerivedCategory
+            (ModuleCat.{u + 1} B) i).symm) adjB
+      (Etale.scalarExtension φ U) (Etale.scalarExtension φ X) (Etale.scalarExtension φ Y)
+      (CoefficientCompatibility.sumCoefficientIso φ i).hom
+      (Etale.compactScalarMap φ cf) L LB a
+      ((Etale.scalarPullbackIso φ i).inv.app (GA.obj L)) q
+      (sum_scalar_counit φ i _) hq
+    simpa only [β, qi, aA, aB, scalarComposite, Functor.comp_map,
+      Etale.ordinaryFinitePullback, Functor.comp_obj, Category.assoc] using h
+  have hb : Epi (β.app ((GA ⋙ Etale.ordinaryFinitePullback A i).obj L)) := by
+    dsimp only [β, scalarComposite]
+    have := Etale.compactScalarMap_isIso φ cf
+      ((Etale.etaleLowerShriek (ModuleCat.{u + 1} A) i inferInstance).mapDerivedCategory.obj
+        ((GA ⋙ Etale.ordinaryFinitePullback A i).obj L))
+    infer_instance
+  have hr : β.app ((Etale.affineTraceRight A N hA Y d ⋙
+        Etale.ordinaryFinitePullback A e).obj L) ≫
+      ((Etale.etaleLowerShriek (ModuleCat.{u + 1} B) i inferInstance).mapDerivedCategory ⋙
+        Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} B) cf).map r ≫
+      (hB'.ofNatIsoLeft lB).counit.app ((Etale.scalarExtension φ Y).obj L) =
+        (Etale.scalarExtension φ Y).map ((hA'.ofNatIsoLeft lA).counit.app L) := by
+    exact transported_counit_scalar hA' hB' lA lB
+      (Etale.scalarExtension φ U) (Etale.scalarExtension φ Y) β γ L r
+      (chart_left_scalar φ MA MB f cf i d e he)
+      (chart_scalar_counit φ N hN hA hB Y hY tA tB DA DB d e L)
+  have hr' : β.app ((Etale.affineTraceRight A N hA Y d ⋙
+        Etale.ordinaryFinitePullback A e).obj L) ≫
+      ((Etale.etaleLowerShriek (ModuleCat.{u + 1} B) i inferInstance).mapDerivedCategory ⋙
+        Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} B) cf).map
+        (r ≫ (Etale.affineTraceRight B N hB Y d ⋙
+          Etale.ordinaryFinitePullback B e).map a) ≫
+      (hB'.ofNatIsoLeft lB).counit.app LB =
+        (Etale.scalarExtension φ Y).map ((hA'.ofNatIsoLeft lA).counit.app L) ≫ a := by
+    exact counit_postcompose (hB'.ofNatIsoLeft lB) _ r a _ hr
+  have h := rightAdjointUniq_scalar_of_counits aA (hA'.ofNatIsoLeft lA)
+    aB (hB'.ofNatIsoLeft lB) (Etale.scalarExtension φ U) (Etale.scalarExtension φ Y)
+    β L LB a qi
+    (r ≫ (Etale.affineTraceRight B N hB Y d ⋙ Etale.ordinaryFinitePullback B e).map a)
+    hqi hb hr'
+  simpa only [aA, aB, hA', hB', lA, lB, qi, r,
+    reductionEtaleChartRightIso, Category.assoc] using h.symm
 
 attribute [local irreducible] ProEtale.reductionEtaleChartAdjunction
   ProEtale.reductionEtaleChartLeftIso ProEtale.reductionEtaleChartRightIso

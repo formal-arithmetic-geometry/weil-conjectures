@@ -8,6 +8,9 @@ module
 public import WeilConjectures.SixFunctors.Regular.RegularQuotientTraceData
 import WeilConjectures.SixFunctors.Regular.RegularQuotientInjectiveKernel
 import WeilConjectures.Algebra.Homology.RegularQuotientCone.RegularQuotientConeAdjoint
+public import WeilConjectures.SixFunctors.RegularQuotientTraceFromKInjective
+public import WeilConjectures.SixFunctors.RegularQuotientTraceOnInjectiveTerms
+public import WeilConjectures.SixFunctors.RegularQuotientTraceOnKInjective
 
 /-! # Invertibility of the normalized regular quotient coinduction trace
 
@@ -45,6 +48,10 @@ theorem reductionCoinductionTrace_isIso
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (T : Scheme.{u}) (n : ℕ) :
     IsIso (reductionCoinductionTrace.{u} l E T n) := by
-  sorry
+  rw [NatTrans.isIso_iff_isIso_app]
+  intro K
+  exact reductionCoinductionTrace_isIso_of_KInjective l E T n K (fun I ↦
+    reductionCoinductionTrace_isIso_onKInjective l E T n I (fun J ↦
+      reductionCoinductionTrace_isIso_onInjectiveTerms l E T n J))
 
 end WeilConjectures

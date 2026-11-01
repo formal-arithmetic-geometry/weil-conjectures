@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.ExceptionalRingTransportCoreLawsSystemSupportObjects
 public import WeilConjectures.CategoryTheory.SixFunctors.FunctorObjectConjugation
+public import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.Reconstruction.ExceptionalRingTransportSupportComparison
+public import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.TransportCoreData.ExceptionalRingTransportFunctorLift
 
 /-! Map part of the exceptional transport support identity.
 Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24,
@@ -48,12 +50,96 @@ conjugating its maps by arbitrary object automorphisms. Whenever a family change
 a map, `not_forall_system_support_map_of_conjugation` refutes the universal claim.
 The object comparison alone cannot supply this missing normalization. -/
 
-/--
-The strict-system support comparison on morphisms at one fixed field stage.
-Together with the object component, this is the map premise of `Functor.ext`.
-Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24,
-5.26 (blueprint: lem-sf-exceptional-ring-transport-core-system-support-law-maps).
--/
+/-- Construct the prescribed support functor and transport the existing data to it.
+Its objects and maps are those of the actual open/proper composite. Membership in
+sequenceProperty follows from the proved whole-system support comparison, and the
+adjunction and comparisons are transported through the fully faithful inclusion.
+No equality between the old and prescribed object representatives is assumed.
+Source: Zheng, Construction 5.25 and Proposition 5.26.
+(blueprint: lem-sf-exceptional-ring-transport-core-system-support-law-maps) -/
+def TransportCoreData.normalizeCanonicalSupport : TransportCoreData l Ω D hl c operation left :=
+  d.liftSystemF l Ω D hl c operation left
+    (fun E ↦ d.systemSupportFunctor l Ω D hl c operation left E)
+    (fun E ↦ d.supportComparison l Ω D hl c operation left E)
+
+/-- The explicitly constructed transport has the required strict support functor.
+Proof: its full-subcategory lift retains the actual support objects and maps.
+Source: Zheng, Construction 5.25 and Proposition 5.26.
+(blueprint: lem-sf-exceptional-ring-transport-core-system-support-law-maps) -/
+theorem TransportCoreData.normalizeCanonicalSupport_support (E : FieldStage.{u} l) :
+    let d' := d.normalizeCanonicalSupport l Ω D hl c operation left
+    d'.F E ⋙ (sequenceProperty l E Y).ι =
+      d'.systemSupportFunctor l Ω D hl c operation left E := rfl
+
+/-- Conjugating the system functor preserves every field required by `TransportCoreData`.
+The adjunction is transported by the explicit natural isomorphism. Whiskering that
+isomorphism transports `realizeF` and `evaluationF`; the reduction comparison is
+derived from `realizeF`. Recompute the right evaluation mate for these transported
+data, so its dependent unit and counit equations are retained. All other fields stay fixed.
+Source: Zheng, Construction 5.25, and Mathlib's `Adjunction.ofNatIsoLeft`.
+(blueprint: lem-sf-exceptional-system-support-conjugation-obstruction) -/
+def TransportCoreData.conjugateSystemF : TransportCoreData l Ω D hl c operation left :=
+  { d with
+    F := fun E ↦ (d.F E).copyObj (d.F E).obj (α E)
+    adjunction := fun E ↦ (d.adjunction E).ofNatIsoLeft
+      ((d.F E).isoCopyObj (d.F E).obj (α E))
+    realizeF := fun E ↦ d.realizeF E ≪≫
+      Functor.isoWhiskerLeft (d.reconstruction E true).equivalence.functor
+        (Functor.isoWhiskerRight ((d.F E).isoCopyObj (d.F E).obj (α E))
+          (d.reconstruction E false).equivalence.inverse)
+    evaluationF := fun E n ↦
+      Functor.isoWhiskerRight ((d.F E).isoCopyObj (d.F E).obj (α E)).symm
+        ((d.reconstruction E false).evaluation n) ≪≫ d.evaluationF E n
+    evaluationG := fun _ _ ↦ Adjunction.compatibleRightComparison _ _ _ }
+
+/-- A nonnatural conjugation obstructs a universal strict support map law.
+Proof: the conjugate retains the operations and all object representatives, so the
+two displayed right-hand sides agree, including the equality transports by proof
+irrelevance. The claimed laws would therefore identify the two maps. This
+contradicts the previous theorem. Object identifications are an explicit hypothesis;
+no support law is used.
+Source: the conjugation test for Zheng, Construction 5.25.
+(blueprint: lem-sf-exceptional-system-support-conjugation-obstruction) -/
+theorem not_forall_system_support_map_of_conjugation (E : FieldStage.{u} l)
+    {K K' : (sequenceProperty l E X).FullSubcategory} (u : K ⟶ K')
+    (hne : (α E K).inv ≫ (d.F E).map u ≫ (α E K').hom ≠ (d.F E).map u)
+    (objects : ∀ (d' : TransportCoreData l Ω D hl c operation left)
+      (K : (sequenceProperty l E X).FullSubcategory),
+      (d'.F E ⋙ (sequenceProperty l E Y).ι).obj K =
+        ((sequenceProperty l E X).ι ⋙
+          IntegralSystemRealization.Operations.shriek l E.carrier (d'.operations E) c.i ⋙
+            IntegralSystemRealization.Operations.push l E.carrier (d'.operations E) c.g).obj K) :
+    ¬ ∀ d' : TransportCoreData l Ω D hl c operation left,
+      (d'.F E ⋙ (sequenceProperty l E Y).ι).map u =
+        eqToHom (objects d' K) ≫
+        ((sequenceProperty l E X).ι ⋙
+          IntegralSystemRealization.Operations.shriek l E.carrier (d'.operations E) c.i ⋙
+            IntegralSystemRealization.Operations.push l E.carrier (d'.operations E) c.g).map u ≫
+        eqToHom (objects d' K').symm := by
+  intro h
+  have he := h (d.conjugateSystemF l Ω D hl c operation left α)
+  change (sequenceProperty l E Y).ι.map
+    ((α E K).inv ≫ (d.F E).map u ≫ (α E K').hom) = _ at he
+  have he' : (sequenceProperty l E Y).ι.map
+      ((α E K).inv ≫ (d.F E).map u ≫ (α E K').hom) =
+      (d.F E ⋙ (sequenceProperty l E Y).ι).map u := he.trans (h d).symm
+  exact hne ((sequenceProperty l E Y).ι.map_injective he')
+
+/-- The prescribed support composite, before lifting it to the full subcategory.
+Source: Zheng, Constructions 4.1 and 5.25.
+(blueprint: lem-sf-exceptional-system-support-explicit-normalization) -/
+abbrev TransportCoreData.systemSupportFunctor (E : FieldStage.{u} l) :=
+  (sequenceProperty l E X).ι ⋙
+    IntegralSystemRealization.Operations.shriek l E.carrier (d.operations E) c.i ⋙
+      IntegralSystemRealization.Operations.push l E.carrier (d.operations E) c.g
+
+/-- The support-map identity for the explicitly normalized datum. The prior
+universal assertion for arbitrary representatives was false: conjugation can change
+its maps while preserving every field of TransportCoreData. Here normalizeCanonicalSupport
+constructs the actual support lift and transports all dependent comparisons.
+Proof: the map of the full-subcategory lift is the prescribed composite map.
+Source: Zheng, Constructions 4.1 and 5.25 and Proposition 5.26.
+(blueprint: lem-sf-exceptional-ring-transport-core-system-support-law-maps) -/
 theorem exceptional_transport_core_system_support_map
     (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]
     [IsAlgClosure (Padic l) Ω] (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
@@ -69,14 +155,10 @@ theorem exceptional_transport_core_system_support_map
     (d : TransportCoreData l Ω D hl c operation left)
     (E : FieldStage.{u} l)
     {K K' : (sequenceProperty l E X).FullSubcategory} (u : K ⟶ K') :
-    (d.F E ⋙ (sequenceProperty l E Y).ι).map u =
-      eqToHom (exceptional_transport_core_system_support_obj
-        l Ω D hl f c operation left d E K) ≫
+    let d' := d.normalizeCanonicalSupport l Ω D hl c operation left
+    (d'.F E ⋙ (sequenceProperty l E Y).ι).map u =
       ((sequenceProperty l E X).ι ⋙
-        IntegralSystemRealization.Operations.shriek l E.carrier (d.operations E) c.i ⋙
-          IntegralSystemRealization.Operations.push l E.carrier (d.operations E) c.g).map u ≫
-      eqToHom (exceptional_transport_core_system_support_obj
-        l Ω D hl f c operation left d E K').symm := by
-  sorry
+        IntegralSystemRealization.Operations.shriek l E.carrier (d'.operations E) c.i ⋙
+          IntegralSystemRealization.Operations.push l E.carrier (d'.operations E) c.g).map u := rfl
 
 end WeilConjectures.ExceptionalIntegralScalar

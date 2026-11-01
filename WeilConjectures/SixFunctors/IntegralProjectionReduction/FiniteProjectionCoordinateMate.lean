@@ -59,6 +59,32 @@ theorem inverseComparison_evaluation
   erw [f.unitIso.inv.naturality]
   rfl
 
+/-- Recover an equation in realized coordinates from its inverse coordinates.
+The output unit is cancellable, and naturality moves it through each functor.
+Source: equivalence triangle identities, Stacks 003G.
+(blueprint: lem-sf-finite-projection-coordinate-mate). -/
+theorem forward_of_inverse_equation
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    (e : A ≌ B) (f : C ≌ D) (R : B ⥤ D) (r : A ⥤ C)
+    (er : e.functor ⋙ R ≅ r ⋙ f.functor)
+    {M : B} {N : A} {W Z : C} {I : D}
+    (pi : I ⟶ R.obj M) (t : M ⟶ e.functor.obj N)
+    (q : r.obj N ⟶ W) (s : I ⟶ f.functor.obj Z) (a : Z ⟶ W)
+    (h : f.inverse.map pi ≫ (inverseComparison e f R r er).hom.app M ≫
+        r.map (e.inverse.map t ≫ e.unitIso.inv.app N) ≫ q =
+      f.inverse.map s ≫ f.unitIso.inv.app Z ≫ a) :
+    pi ≫ R.map t ≫ er.hom.app N ≫ f.functor.map q = s ≫ f.functor.map a := by
+  apply f.inverse.map_injective
+  apply (cancel_mono (f.unitIso.inv.app W)).mp
+  simp only [Functor.map_comp, Category.assoc]
+  have he := inverseComparison_evaluation e f R r er t q
+  simp only [Functor.map_comp, Category.assoc] at he
+  simp only [Functor.map_comp, Category.assoc] at h
+  rw [he]
+  rw [h]
+  erw [f.unitIso.inv.naturality]
+  rfl
+
 end WeilConjectures.IntegralProjectionReduction
 
 namespace WeilConjectures.IntegralProjectionReduction

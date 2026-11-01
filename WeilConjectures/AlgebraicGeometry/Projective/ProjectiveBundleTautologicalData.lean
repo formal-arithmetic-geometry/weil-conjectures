@@ -236,6 +236,24 @@ noncomputable def projectiveBundleFrameSection
   projectiveBundleFrameVector D n U e i ≫
     (Scheme.Modules.tensorPullback (D.A.data.relProjHom ⁻¹ᵁ U).ι).map D.quotient
 
+/-- The full defining frame-section composite, usable while the frame vector stays hidden.
+Source: Stacks Project, Tags 01OB, 0095, 0096
+(blueprint: def-pur-projective-bundle-tautological-data). -/
+theorem projectiveBundleFrameSection_formula {B : Scheme.{u}} {F : B.Modules}
+    (R : ProjectiveBundleRealization B F) (n : ℕ) (U : B.Opens)
+    (e : B.ModuleFrame F U (n + 1)) (i : ULift.{u} (Fin (n + 1))) :
+    projectiveBundleFrameSection R n U e i =
+      ((projectiveBundlePullbackUnitIso (R.A.data.relProjHom ∣_ U)).inv ≫
+        (Scheme.Modules.tensorPullback (R.A.data.relProjHom ∣_ U)).map
+          (SheafOfModules.ιFree i ≫ e.inv) ≫
+        ((projectiveBundlePullbackComp (R.A.data.relProjHom ∣_ U) U.ι).app F).hom ≫
+        (projectiveBundlePullbackCongr (morphismRestrict_ι _ _)).hom.app F ≫
+        ((projectiveBundlePullbackComp (R.A.data.relProjHom ⁻¹ᵁ U).ι
+          R.A.data.relProjHom).app F).inv) ≫
+      (Scheme.Modules.tensorPullback (R.A.data.relProjHom ⁻¹ᵁ U).ι).map R.quotient := by
+  unfold projectiveBundleFrameSection projectiveBundleFrameVector
+  rfl
+
 attribute [irreducible] projectiveBundleFrameSection
 
 set_option genInjectivity false in

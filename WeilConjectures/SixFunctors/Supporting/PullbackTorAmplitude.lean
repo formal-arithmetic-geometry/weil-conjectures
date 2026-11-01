@@ -208,4 +208,28 @@ theorem sf_pullback_torAmplitude
   · exact torAmplitude_of_iso X.left A eP a b
       ((comparison_tor_iff X.left A a b hTor.1 P hplusP).mp htP)
 
+/-- Consequently pullback carries Dᵇ_ctf(Y,A) into Dᵇ_ctf(X,A), clause (i) of the
+finite-stage preservation summary. This is object-property preservation, so it
+specifies the restriction of the same ambient functor to the full subcategories.
+Source: Weil blueprint, order 2064 (blueprint: lem-sf-pullback-tor-amplitude).
+Proof: unpack finiteTorConstructible to obtain bounded constructibility and one
+ordered interval witnessing finite Tor amplitude. Apply sf_pullback_torAmplitude
+with that interval. Its two conclusions, with the same interval as witness, are
+the defining two conditions of finiteTorConstructible on X. -/
+theorem sf_pullback_finiteTorConstructible
+    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)
+    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+    (n : ℕ) (hn : 1 ≤ n)
+    (X Y : Over (Spec (CommRingCat.of D.k)))
+    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
+    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
+    (f : X ⟶ Y) [IsSeparated f.left] [LocallyOfFiniteType f.left] [QuasiCompact f.left]
+    (K : proEtaleDerivedCategory Y.left (Padic.coefficientExtensionRing l E n))
+    (hK : finiteTorConstructible l E n hn Y.left K) :
+    finiteTorConstructible l E n hn X.left
+      ((sfFiniteDerivedPullback l E n hn f.left).obj K) := by
+  obtain ⟨hc, a, b, hTor⟩ := hK
+  obtain ⟨hc', hTor'⟩ := sf_pullback_torAmplitude D l _hl E n hn X Y f K hc a b hTor
+  exact ⟨hc', a, b, hTor'⟩
+
 end WeilConjectures
