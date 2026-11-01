@@ -1,0 +1,1529 @@
+/-
+Copyright (c) 2026 Bin Wu. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Bin Wu
+-/
+module
+
+public import WeilConjectures.AlgebraicGeometry.AffineZeroPurity.CoordinateSectionArrows
+import all Mathlib.Logic.Small.Defs
+import all Mathlib.CategoryTheory.Limits.HasLimits
+import all WeilConjectures.Compactification.Defs
+import all WeilConjectures.AlgebraicGeometry.Canonical.CanonicalOriginCompactSupportComposition
+import all WeilConjectures.AlgebraicGeometry.SupportedConstantNormalization.SupportedConstantExchangeNormalization
+import WeilConjectures.AlgebraicGeometry.ClosedSectionCompactOrigin.ClosedSectionCompactOrigin
+import all WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedEtaleCompactSupportComparisonsSupplement
+import WeilConjectures.SixFunctors.Etale.Derived.CompactificationRefinementLowerStar
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionProper
+import WeilConjectures.SixFunctors.Etale.Derived.CupProductCoherence
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteCoefficientRecords
+import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Arrows
+import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinaryFiniteP1KummerSupplement
+import WeilConjectures.AlgebraicGeometry.Relative.RelativeKummerExchangeGeneratorsSupplement
+import WeilConjectures.AlgebraicGeometry.Etale.EtaleSinglePullbackComparisonsSupplement
+import WeilConjectures.AlgebraicGeometry.EtaleFiniteTwistPullback
+import Mathlib.AlgebraicGeometry.Sites.Etale
+import Mathlib.AlgebraicGeometry.Scheme
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateSheaf
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateTwist
+import WeilConjectures.AlgebraicGeometry.Sites.Kummer
+import Mathlib.Algebra.Module.ZMod
+import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
+import Mathlib.CategoryTheory.Sites.Monoidal
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import WeilConjectures.AlgebraicGeometry.EtaleConstantRingModuleEquivalence
+import WeilConjectures.CategoryTheory.RingedSiteModules
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
+import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+import WeilConjectures.AlgebraicGeometry.DerivedCategories
+import WeilConjectures.AlgebraicGeometry.RingedTopoiDerivedPullback
+import WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
+import WeilConjectures.CategoryTheory.AlgebraicInverseImage
+import Mathlib.Algebra.Category.ModuleCat.Sheaf
+import Mathlib.Algebra.Category.Ring.Limits
+import Mathlib.Algebra.Category.Grp.Limits
+import Mathlib.CategoryTheory.Sites.Whiskering
+import Mathlib.CategoryTheory.Sites.Equivalence
+import Mathlib.Algebra.Homology.DerivedCategory.Basic
+import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
+import WeilConjectures.Algebra.Homology.KFlatResolution
+import WeilConjectures.Algebra.Homology.ChangeOfRingsKFlatQuasiIso
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
+import Mathlib.Algebra.Category.Grp.FilteredColimits
+import Mathlib.Algebra.Homology.BifunctorShift
+import Mathlib.Algebra.Homology.QuasiIso
+import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
+import Mathlib.CategoryTheory.Limits.EssentiallySmall
+import WeilConjectures.AlgebraicGeometry.KFlatRingedToposPullback
+import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
+import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+import Mathlib.CategoryTheory.Limits.ExactFunctor
+import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
+import Mathlib.Algebra.Homology.HomologicalComplex
+import Mathlib.Algebra.Homology.Additive
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RingedToposFlatPullback
+import WeilConjectures.CategoryTheory.AlgebraicInverseImageOfUniverses
+import Mathlib.CategoryTheory.Types.Basic
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatAlgebraicInverseImageOfUniverses
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatEquationalCriterionOfUniverses
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatLocalRelationsOfUniverses
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUniverses
+import WeilConjectures.CategoryTheory.Sites.WeakSheafifyAddCommGrpLeftExact
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Submodule
+import Mathlib.LinearAlgebra.TensorProduct.Vanishing
+import Mathlib.RingTheory.TensorProduct.DirectLimitFG
+import Mathlib.LinearAlgebra.TensorProduct.Finiteness
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
+import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
+import WeilConjectures.CategoryTheory.Sites.InverseImageLocalFamilies
+import Mathlib.CategoryTheory.Sites.Sheaf
+import Mathlib.CategoryTheory.Sites.LocallyBijective
+import Mathlib.CategoryTheory.Sites.Limits
+import Mathlib.CategoryTheory.Adjunction.Limits
+import Mathlib.CategoryTheory.Limits.Types.Pullbacks
+import Mathlib.CategoryTheory.Functor.EpiMono
+import Mathlib.CategoryTheory.Limits.Types.Equalizers
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Equalizers
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ScalarTensorComparisonOfUniverses
+import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
+import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
+import Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
+import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+import WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
+import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
+import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+import WeilConjectures.Algebra.Homology.RingedToposAdaptedFlatResolution
+import WeilConjectures.Algebra.Homology.RingedToposPullbackFilteredColimits
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Mathlib.CategoryTheory.Sites.PreservesSheafification
+import Mathlib.CategoryTheory.Limits.Preserves.Limits
+import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
+import Mathlib.RingTheory.Flat.CategoryTheory
+import Mathlib.CategoryTheory.ObjectProperty.ColimitsOfShape
+import Mathlib.Algebra.Homology.Embedding.CochainComplex
+import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
+import Mathlib.Algebra.Category.Grp.AB
+import WeilConjectures.Algebra.Homology.RingedToposAcyclicKFlatPullback
+import WeilConjectures.Algebra.Homology.BoundedFlatIndependentCoefficients
+import Mathlib.CategoryTheory.Monoidal.Preadditive
+import WeilConjectures.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Mathlib.CategoryTheory.Monoidal.Closed.Basic
+import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
+import Mathlib.CategoryTheory.Sites.EpiMono
+import Mathlib.CategoryTheory.Adjunction.Additive
+import Mathlib.Algebra.Category.Grp.EpiMono
+import Mathlib.Algebra.Category.Grp.Abelian
+import Mathlib.CategoryTheory.Sites.Abelian
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
+import WeilConjectures.Algebra.Homology.Site.SiteDerivedTensorDescent
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.TensorShiftIso
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
+import WeilConjectures.AlgebraicGeometry.EtaleFiniteTwistPullbackBase
+import WeilConjectures.ConstructibleSheaf.Defs
+import WeilConjectures.EtaleCohomology.TateTwist.Sheaf
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateLinePullback
+import WeilConjectures.EtaleCohomology.TateTwist.RootsOfUnityPullback
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateTensorFamily
+import WeilConjectures.CategoryTheory.NormalizedSignedTensorPowers
+import WeilConjectures.CategoryTheory.Monoidal.IntTensorFamily
+import WeilConjectures.CategoryTheory.IntTensorFamilyIso
+import Mathlib.CategoryTheory.Monoidal.Braided.Basic
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateLocalLine
+import WeilConjectures.AlgebraicGeometry.Sites.SmallEtaleRepresentablePresheafSheaf
+import WeilConjectures.ConstructibleSheaf.Pullback
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.LocallyTrivialInverse
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.MonoidalComp
+import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Unit
+import WeilConjectures.AlgebraicGeometry.EtaleFiniteTwistPullbackRest
+import Mathlib.CategoryTheory.Abelian.Refinements
+import Mathlib.Algebra.Homology.ShortComplex.Exact
+import WeilConjectures.AlgebraicGeometry.ProperProjectionFormula
+import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
+import WeilConjectures.CategoryTheory.Monoidal.EtaleDerivedTensorSymmetrySupplement
+import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
+import Mathlib.AlgebraicGeometry.Morphisms.Proper
+import Mathlib.AlgebraicGeometry.Noetherian
+import Mathlib.Topology.Defs.Filter
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.SixFunctors.Etale.Derived.Tensor
+import WeilConjectures.AlgebraicGeometry.ExactUnboundedExchange
+import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
+import WeilConjectures.SixFunctors.BaseChange.Square
+import WeilConjectures.SixFunctors.Etale.Derived.Shift
+import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive
+import all WeilConjectures.AlgebraicGeometry.AffineOrderedIntegration.AffineOrderedCounitZero
+import all WeilConjectures.AlgebraicGeometry.SfDiagonalSectionForgetSupportsUnit
+import all WeilConjectures.AlgebraicGeometry.SfP1IntegralTransportData
+import all WeilConjectures.AlgebraicGeometry.Projective.ProjectiveLineTraceSupplement
+import all WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1DiagonalComponents
+import all WeilConjectures.AlgebraicGeometry.ProjectiveLineDiagonalMaps
+import all WeilConjectures.AlgebraicGeometry.Ordinary.OrdinarySupportedCartierKummerSupplement
+import all WeilConjectures.AlgebraicGeometry.Etale.EtaleSinglePullbackComparisonsSupplement
+import all WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+import all Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+import all WeilConjectures.AlgebraicGeometry.OrdinaryFiniteCoefficientRecords
+import all WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Arrows
+import all WeilConjectures.AlgebraicGeometry.Ordinary.OrdinaryFiniteP1KummerSupplement
+import all WeilConjectures.AlgebraicGeometry.Relative.RelativeKummerExchangeGeneratorsSupplement
+import all WeilConjectures.AlgebraicGeometry.EtaleFiniteTwistPullback
+import all Mathlib.AlgebraicGeometry.Sites.Etale
+import all Mathlib.AlgebraicGeometry.Scheme
+import all WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import all WeilConjectures.AlgebraicGeometry.FiniteEtaleTateSheaf
+import all WeilConjectures.AlgebraicGeometry.FiniteEtaleTateTwist
+import all WeilConjectures.AlgebraicGeometry.Sites.Kummer
+import all Mathlib.Algebra.Module.ZMod
+import all Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
+import all Mathlib.CategoryTheory.Sites.Monoidal
+import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import all WeilConjectures.AlgebraicGeometry.EtaleConstantRingModuleEquivalence
+import all WeilConjectures.CategoryTheory.RingedSiteModules
+import all Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+import all WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
+import all WeilConjectures.AlgebraicGeometry.EtaleSheaves
+import all WeilConjectures.AlgebraicGeometry.DerivedCategories
+import all WeilConjectures.AlgebraicGeometry.RingedTopoiDerivedPullback
+import all WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
+import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
+import all WeilConjectures.CategoryTheory.AlgebraicInverseImage
+import all Mathlib.Algebra.Category.ModuleCat.Sheaf
+import all Mathlib.Algebra.Category.Ring.Limits
+import all Mathlib.Algebra.Category.Grp.Limits
+import all Mathlib.CategoryTheory.Sites.Whiskering
+import all Mathlib.CategoryTheory.Sites.Equivalence
+import all Mathlib.Algebra.Homology.DerivedCategory.Basic
+import all Mathlib.CategoryTheory.Functor.Derived.LeftDerived
+import all WeilConjectures.Algebra.Homology.KFlatResolution
+import all WeilConjectures.Algebra.Homology.ChangeOfRingsKFlatQuasiIso
+import all WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import all WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
+import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
+import all Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
+import all Mathlib.Algebra.Category.Grp.FilteredColimits
+import all Mathlib.Algebra.Homology.BifunctorShift
+import all Mathlib.Algebra.Homology.QuasiIso
+import all Mathlib.CategoryTheory.Comma.StructuredArrow.Small
+import all Mathlib.CategoryTheory.Limits.EssentiallySmall
+import all WeilConjectures.AlgebraicGeometry.KFlatRingedToposPullback
+import all WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
+import all WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
+import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+import all Mathlib.CategoryTheory.Limits.ExactFunctor
+import all WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
+import all Mathlib.Algebra.Homology.HomologicalComplex
+import all Mathlib.Algebra.Homology.Additive
+import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RingedToposFlatPullback
+import all WeilConjectures.CategoryTheory.AlgebraicInverseImageOfUniverses
+import all Mathlib.CategoryTheory.Types.Basic
+import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatAlgebraicInverseImageOfUniverses
+import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatEquationalCriterionOfUniverses
+import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatLocalRelationsOfUniverses
+import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUniverses
+import all WeilConjectures.CategoryTheory.Sites.WeakSheafifyAddCommGrpLeftExact
+import all Mathlib.Algebra.Category.ModuleCat.Presheaf.Submodule
+import all Mathlib.LinearAlgebra.TensorProduct.Vanishing
+import all Mathlib.RingTheory.TensorProduct.DirectLimitFG
+import all Mathlib.LinearAlgebra.TensorProduct.Finiteness
+import all Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
+import all Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
+import all WeilConjectures.CategoryTheory.Sites.InverseImageLocalFamilies
+import all Mathlib.CategoryTheory.Sites.Sheaf
+import all Mathlib.CategoryTheory.Sites.LocallyBijective
+import all Mathlib.CategoryTheory.Sites.Limits
+import all Mathlib.CategoryTheory.Adjunction.Limits
+import all Mathlib.CategoryTheory.Limits.Types.Pullbacks
+import all Mathlib.CategoryTheory.Functor.EpiMono
+import all Mathlib.CategoryTheory.Limits.Types.Equalizers
+import all Mathlib.CategoryTheory.Limits.Preserves.Shapes.Equalizers
+import all Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
+import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ScalarTensorComparisonOfUniverses
+import all Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
+import all Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
+import all Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+import all WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
+import all WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+import all WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
+import all Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
+import all Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+import all WeilConjectures.Algebra.Homology.RingedToposAdaptedFlatResolution
+import all WeilConjectures.Algebra.Homology.RingedToposPullbackFilteredColimits
+import all WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import all Mathlib.CategoryTheory.Sites.PreservesSheafification
+import all Mathlib.CategoryTheory.Limits.Preserves.Limits
+import all WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+import all Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
+import all Mathlib.RingTheory.Flat.CategoryTheory
+import all Mathlib.CategoryTheory.ObjectProperty.ColimitsOfShape
+import all Mathlib.Algebra.Homology.Embedding.CochainComplex
+import all Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
+import all Mathlib.Algebra.Category.Grp.AB
+import all WeilConjectures.Algebra.Homology.RingedToposAcyclicKFlatPullback
+import all WeilConjectures.Algebra.Homology.BoundedFlatIndependentCoefficients
+import all Mathlib.CategoryTheory.Monoidal.Preadditive
+import all WeilConjectures.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import all Mathlib.CategoryTheory.Monoidal.Closed.Basic
+import all WeilConjectures.CategoryTheory.Abelian.Flat.Basic
+import all Mathlib.CategoryTheory.Sites.EpiMono
+import all Mathlib.CategoryTheory.Adjunction.Additive
+import all Mathlib.Algebra.Category.Grp.EpiMono
+import all Mathlib.Algebra.Category.Grp.Abelian
+import all Mathlib.CategoryTheory.Sites.Abelian
+import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
+import all WeilConjectures.Algebra.Homology.Site.SiteDerivedTensorDescent
+import all WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
+import all WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
+import all WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
+import all WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.TensorShiftIso
+import all WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
+import all WeilConjectures.AlgebraicGeometry.EtaleFiniteTwistPullbackBase
+import all WeilConjectures.ConstructibleSheaf.Defs
+import all WeilConjectures.EtaleCohomology.TateTwist.Sheaf
+import all WeilConjectures.AlgebraicGeometry.FiniteEtaleTateLinePullback
+import all WeilConjectures.EtaleCohomology.TateTwist.RootsOfUnityPullback
+import all WeilConjectures.AlgebraicGeometry.FiniteEtaleTateTensorFamily
+import all WeilConjectures.CategoryTheory.NormalizedSignedTensorPowers
+import all WeilConjectures.CategoryTheory.Monoidal.IntTensorFamily
+import all WeilConjectures.CategoryTheory.IntTensorFamilyIso
+import all Mathlib.CategoryTheory.Monoidal.Braided.Basic
+import all WeilConjectures.AlgebraicGeometry.FiniteEtaleTateLocalLine
+import all WeilConjectures.AlgebraicGeometry.Sites.SmallEtaleRepresentablePresheafSheaf
+import all WeilConjectures.ConstructibleSheaf.Pullback
+import all WeilConjectures.SixFunctors.Etale.UpperLowerStar.LocallyTrivialInverse
+import all WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
+import all WeilConjectures.SixFunctors.Etale.UpperLowerStar.MonoidalComp
+import all WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Unit
+import all WeilConjectures.AlgebraicGeometry.EtaleFiniteTwistPullbackRest
+import all Mathlib.CategoryTheory.Abelian.Refinements
+import all Mathlib.Algebra.Homology.ShortComplex.Exact
+import all WeilConjectures.AlgebraicGeometry.ProperProjectionFormula
+import all WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
+import all WeilConjectures.CategoryTheory.Monoidal.EtaleDerivedTensorSymmetrySupplement
+import all WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
+import all Mathlib.AlgebraicGeometry.Morphisms.Proper
+import all Mathlib.AlgebraicGeometry.Noetherian
+import all Mathlib.Topology.Defs.Filter
+import all WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import all WeilConjectures.SixFunctors.Etale.Derived.Tensor
+import all WeilConjectures.AlgebraicGeometry.ExactUnboundedExchange
+import all WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
+import all WeilConjectures.SixFunctors.BaseChange.Square
+import all WeilConjectures.SixFunctors.Etale.Derived.Shift
+import all WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
+import all WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive
+import all WeilConjectures.AlgebraicGeometry.ProjectiveLineDiagonalAlphaUnits
+import all WeilConjectures.AlgebraicGeometry.FiniteP1DiagonalPicard
+import all WeilConjectures.AlgebraicGeometry.P1DiagonalLocalIdeal
+import all WeilConjectures.AlgebraicGeometry.ProjectiveSpace.OfInvertible
+import all WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LinearCombination
+import all WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Canonical
+import all WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
+import all WeilConjectures.AlgebraicGeometry.Modules.TensorSection
+import all WeilConjectures.AlgebraicGeometry.Modules.FieldBaseChange
+import all WeilConjectures.AlgebraicGeometry.OrdinaryFiniteChernPullback
+import all WeilConjectures.AlgebraicGeometry.FiniteP1ChernMapBaseChange
+import all WeilConjectures.AlgebraicGeometry.OrdinaryFiniteClassArbitraryBase
+import all WeilConjectures.EtaleCohomology.Purity.Smooth.KummerBoundaryComparison
+import all WeilConjectures.AlgebraicGeometry.EtaleModuleInjectiveForgetAcyclic
+import all WeilConjectures.CategoryTheory.Sites.SheafCohomologyRightDerived
+import all WeilConjectures.AlgebraicGeometry.Sites.GmPicardPullback
+import all WeilConjectures.CategoryTheory.Abelian.Ext.MapExactFunctorConj
+import all WeilConjectures.AlgebraicGeometry.SupportedDerivedUnitForget
+import all WeilConjectures.AlgebraicGeometry.Ordinary.OrdinarySupportedKummerSystemSupplement
+import all WeilConjectures.ConstructibleSheaf.FinitePushforward.ConstantUnit
+import all WeilConjectures.CategoryTheory.DerivedSingleUnitExact
+import all WeilConjectures.CategoryTheory.DerivedSingleUnit
+import all WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
+import all WeilConjectures.AlgebraicGeometry.OrdinaryFiniteFirstChern
+import all WeilConjectures.AlgebraicGeometry.OrdinarySupportedChernNormalization
+import all WeilConjectures.AlgebraicGeometry.SupportedKummerChernRealization
+import all WeilConjectures.AlgebraicGeometry.Ordinary.OrdinarySupportedKummerBoundarySupplement
+import all WeilConjectures.CategoryTheory.Sites.Torsor
+import all WeilConjectures.AlgebraicGeometry.Sites.GmPicard
+import all WeilConjectures.AlgebraicGeometry.OrdinaryFiniteConstantUnitComp
+import all WeilConjectures.AlgebraicGeometry.OrdinaryFiniteUnitPullbackHom
+import all WeilConjectures.ConstructibleSheaf.UpperStarConstantSheafComp
+import all WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarAdjunctionCompat
+import all WeilConjectures.SixFunctors.Etale.Derived.LeftDerivedUpperStarSingle
+import all Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+import all Mathlib.Algebra.Homology.DerivedCategory.TStructure
+import all WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+import all WeilConjectures.SixFunctors.Etale.Derived.Coefficients
+import all WeilConjectures.AlgebraicGeometry.FiniteP1KummerNaturality
+import all WeilConjectures.AlgebraicGeometry.FiniteP1TwistedUnitBaseChange
+import all WeilConjectures.AlgebraicGeometry.OrdinaryFiniteTwistTransportUniqueness
+import all Mathlib.CategoryTheory.Adjunction.Whiskering
+import all WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.SingleFunctor
+import all WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
+import all WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+import all WeilConjectures.AlgebraicGeometry.FiniteP1ChernAdjunctBaseChange
+import all WeilConjectures.AlgebraicGeometry.FiniteP1ChernAdjunctMate
+import all WeilConjectures.AlgebraicGeometry.OrdinaryFiniteUnitPullbackComp
+import all WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
+import all WeilConjectures.AlgebraicGeometry.FiniteP1UnitOnPullback
+import all WeilConjectures.AlgebraicGeometry.SfDiagonalKernelIntegrals
+import all WeilConjectures.EtaleCohomology.Purity.Smooth.TraceDiagonal
+import all WeilConjectures.AlgebraicGeometry.EtaleCoordinateTraceContractions
+import all WeilConjectures.AlgebraicGeometry.EtaleCoordinateTraceData
+import all WeilConjectures.ConstructibleSheaf.LisseRankOne
+import all WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
+import all WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
+import all WeilConjectures.AlgebraicGeometry.ChosenCartesianSquare
+import all Mathlib.AlgebraicGeometry.Pullbacks
+import all WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
+import all Mathlib.GroupTheory.Torsion
+import all WeilConjectures.AlgebraicGeometry.ProperUnboundedBaseChangeModN
+import all WeilConjectures.AlgebraicGeometry.TorsionAssembly
+import all WeilConjectures.SixFunctors.BaseChange.Derived
+import all WeilConjectures.AlgebraicGeometry.TorsionEtaleSheaf
+import all WeilConjectures.AlgebraicGeometry.TorsionSheafCharacterizations
+import all WeilConjectures.SixFunctors.BaseChange.DerivedForget
+import all WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.AbTorsionSheaf
+import all WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine
+import all WeilConjectures.SixFunctors.Etale.Derived.DirectImageVanishingTorsion
+import all WeilConjectures.SixFunctors.BaseChange.DerivedUnboundedFac
+import all WeilConjectures.AlgebraicGeometry.ProperUnboundedBaseChangeForgetful
+import all Mathlib.Data.ZMod.Basic
+import all WeilConjectures.AlgebraicGeometry.UnboundedCoefficientForgetfulAux
+import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.DerivedBaseChange
+import all WeilConjectures.AlgebraicGeometry.UnboundedAbelianExchangeComparison
+import all Mathlib.Algebra.Homology.HomotopyCategory.KInjective
+import all WeilConjectures.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
+import all WeilConjectures.AlgebraicGeometry.ModuleAbelianKInjectiveDirectImageAcyclic
+import all WeilConjectures.AlgebraicGeometry.EtaleModuleAbelianRingedPresentation
+import all WeilConjectures.CategoryTheory.Ringed.RingedToposMorphismSupplement
+import all Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+import all Mathlib.CategoryTheory.Category.ULift
+import all Mathlib.CategoryTheory.Sites.CartesianMonoidal
+import all WeilConjectures.AlgebraicGeometry.ModuleSheafConstantRingEquivalence
+import all WeilConjectures.CategoryTheory.ContinuousRingedToposModuleDirectImage
+import all WeilConjectures.CategoryTheory.GeometricModuleConstruction
+import all WeilConjectures.CategoryTheory.RingedToposRingData
+import all WeilConjectures.CategoryTheory.AdjunctionRingOperations
+import all Mathlib.CategoryTheory.Monoidal.Cartesian.Basic
+import all Mathlib.CategoryTheory.Adjunction.Basic
+import all Mathlib.CategoryTheory.Monoidal.CommGrp_
+import all WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod
+import all WeilConjectures.CategoryTheory.ProperBaseChange.RestrictionRingedToposModuleDirectImageSupplement
+import all WeilConjectures.CategoryTheory.RingedToposDerivedPushforwardComposition
+import all Mathlib.CategoryTheory.Functor.Derived.RightDerived
+import all WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutions
+import all WeilConjectures.Mathlib.Algebra.Homology.GrothendieckAbelian
+import all Mathlib.CategoryTheory.Localization.DerivabilityStructure.Derives
+import all WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
+import all WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
+import all WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
+import all Mathlib.Algebra.Homology.DerivedCategory.Fractions
+import all WeilConjectures.CategoryTheory.RingedToposKFlatPullback
+import all WeilConjectures.CategoryTheory.GeometricModuleTransport
+import all Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
+import all WeilConjectures.CategoryTheory.GeometricRingTransport
+import all WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresRingCore
+import all WeilConjectures.CategoryTheory.SheafRingObjectReconstruction
+import all WeilConjectures.CategoryTheory.Adjunction.FiniteProductRingFunctor
+import all WeilConjectures.Algebra.Homology.Module.ModulePullbackPushforwardAdjunctionSupplement
+import all WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+import all WeilConjectures.AlgebraicGeometry.ModuleAbelianUnderivedExchange
+import all WeilConjectures.AlgebraicGeometry.ProperTorsionProjectionFormula
+import all WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ProperProjectionFormula
+import all WeilConjectures.AlgebraicGeometry.EtaleCoordinateKunnethFactorization
+import all WeilConjectures.AlgebraicGeometry.EtaleCoordinateKunnethFactorizationTranspose
+import all WeilConjectures.AlgebraicGeometry.EtaleCoordinateKunnethRouteEquality
+import all WeilConjectures.AlgebraicGeometry.EtaleCoordinateKunnethLeftRoute
+import all WeilConjectures.SixFunctors.Etale.Derived.Kunneth.KunnethMap
+import all WeilConjectures.AlgebraicGeometry.EtaleCoordinateKunnethLeftRoutePrecomp
+import all WeilConjectures.AlgebraicGeometry.EtaleKunnethSymmetricFactorization
+import all WeilConjectures.AlgebraicGeometry.ProperSupportedKunnethRoute
+import all WeilConjectures.EtaleCohomology.Purity.Smooth.TraceDiagonal.Basic
+import all WeilConjectures.AlgebraicGeometry.EtaleKunnethTensorSymmetry
+import all WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ProperFactor.KunnethMapAgrees
+import all WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategorySymmetric
+import all WeilConjectures.AlgebraicGeometry.EtaleCoordinateKunnethRightRoute
+import all WeilConjectures.AlgebraicGeometry.EtaleProjectionTraceNormalization
+import all WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionUnit
+import all WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionMonoidal
+import all WeilConjectures.AlgebraicGeometry.EtaleEvenLineSelfSymmetry
+import all WeilConjectures.AlgebraicGeometry.EtaleEvenShiftCanonicalSelfSymmetry
+import all Mathlib.Tactic.SuppressCompilation
+import all WeilConjectures.AlgebraicGeometry.EtaleLineFlatBraiding
+import all WeilConjectures.ConstructibleSheaf.InternalHom
+import all WeilConjectures.AlgebraicGeometry.EtaleSecondCoordinateContraction
+import all WeilConjectures.AlgebraicGeometry.EtaleTraceBaseChangeEvaluation
+import all WeilConjectures.AlgebraicGeometry.EtaleOrderedProjectionComparison
+import all WeilConjectures.AlgebraicGeometry.EtaleTensorTraceBaseChange
+import all WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionBaseChange
+import all WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Braided
+import all WeilConjectures.CategoryTheory.Adjunction.SmoothPurity.SectionProjectionUnitSupplement
+import all WeilConjectures.AlgebraicGeometry.EtaleCanonicalTensorComparison
+import all WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
+import all WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
+import all WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Reduction
+import all WeilConjectures.AlgebraicGeometry.EtaleProjectionTraceTensorInterchange
+import all WeilConjectures.AlgebraicGeometry.Sf.SfSupportedDiagonalDataSupplement
+import all WeilConjectures.AlgebraicGeometry.SfSupportedTraceContractions
+import all WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormulaCoherence
+import all WeilConjectures.AlgebraicGeometry.SfSupportedFirstExtraction
+import all WeilConjectures.AlgebraicGeometry.ProperRelativeKunnethSupports
+import all WeilConjectures.AlgebraicGeometry.ProperKunnethNormalizationAlgebra
+import all Mathlib.CategoryTheory.Functor.Category
+import all WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
+import all WeilConjectures.AlgebraicGeometry.ProperShriekCompSupports
+import all WeilConjectures.AlgebraicGeometry.SfSupportedSecondExtraction
+import all WeilConjectures.AlgebraicGeometry.SfSupportedCoefficientBraid
+import all WeilConjectures.AlgebraicGeometry.SfSupportedCoordinateTensor
+import all WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionExchange
+import all WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCompositionCoherence
+import all WeilConjectures.AlgebraicGeometry.SfDiagonalInsertionProjection
+import all WeilConjectures.AlgebraicGeometry.SfProperSectionProjection
+import all WeilConjectures.AlgebraicGeometry.SfProperProjectionComposition
+import all WeilConjectures.AlgebraicGeometry.SmoothPurity.ShriekTensorCompositionSupplement
+import all WeilConjectures.AlgebraicGeometry.SfIdentityProjectionNormalization
+import all WeilConjectures.AlgebraicGeometry.SfGraphFirstProjectionSquare
+import all WeilConjectures.AlgebraicGeometry.SfGraphProjectionStages
+import all WeilConjectures.AlgebraicGeometry.SfGraphProjectionData
+import all WeilConjectures.AlgebraicGeometry.SfGraphCompactSupportComposition
+import all WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
+import all WeilConjectures.AlgebraicGeometry.EtaleGraphPresentation
+import all WeilConjectures.SixFunctors.EtaleLocallyClosedGraphModel
+import all Mathlib.AlgebraicGeometry.OpenImmersion
+import all WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjectionBaseChange
+import all WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependenceUnbounded
+import all WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
+import all WeilConjectures.AlgebraicGeometry.SfGraphProjectionWord
+import all WeilConjectures.AlgebraicGeometry.CompactificationProjectionComposition
+import all WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionBaseChange
+import all WeilConjectures.AlgebraicGeometry.OpenImmersionProjectionComposition
+import all WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjection
+import all WeilConjectures.CategoryTheory.Adjunction.ProjectionMapCompat
+import all WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompCoherence
+import all WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionComp
+import all WeilConjectures.AlgebraicGeometry.SfEtaleAmbientAdjointProjection
+import all WeilConjectures.AlgebraicGeometry.EtaleProperDerivedDirectImageAdjoint
+import all WeilConjectures.CategoryTheory.GrothendieckDerivedBrownRightAdjoint
+import all WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
+import all WeilConjectures.CategoryTheory.GrothendieckDerivedBrownCohomologicalRepresentability
+import all Mathlib.CategoryTheory.Triangulated.Yoneda
+import all WeilConjectures.CategoryTheory.GrothendieckDerivedBrownRetract
+import all Mathlib.CategoryTheory.Retract
+import all Mathlib.CategoryTheory.Adjunction.FullyFaithful
+import all WeilConjectures.CategoryTheory.GrothendieckDerivedBrownRetractData
+import all WeilConjectures.CategoryTheory.GrothendieckDerivedCompactLocalizationModel
+import all WeilConjectures.CategoryTheory.CompactlyGenerated
+import all Mathlib.CategoryTheory.Triangulated.Functor
+import all WeilConjectures.CategoryTheory.GrothendieckDerivedGabrielPopescuPresentation
+import all Mathlib.Algebra.Category.ModuleCat.Abelian
+import all Mathlib.CategoryTheory.Equivalence
+import all WeilConjectures.CategoryTheory.GabrielPopescuAbelianCore
+import all WeilConjectures.CategoryTheory.GabrielPopescuLargeHomRightAdjoint
+import all Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
+import all Mathlib.Algebra.Category.ModuleCat.Ulift
+import all Mathlib.CategoryTheory.Preadditive.Yoneda.Limits
+import all WeilConjectures.CategoryTheory.DerivedLargeCoproductsTransfer
+import all WeilConjectures.CategoryTheory.DerivedHomologyInjective
+import all Mathlib.CategoryTheory.Preadditive.Injective.Basic
+import all WeilConjectures.CategoryTheory.DerivedHomologyInjectiveSurjective
+import all Mathlib.Algebra.Homology.SingleHomology
+import all WeilConjectures.CategoryTheory.DerivedHomologyInjectiveInjective
+import all Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughInjectives
+import all WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
+import all Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
+import all Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+import all WeilConjectures.CategoryTheory.LargeHomSolutionSet
+import all Mathlib.CategoryTheory.Adjunction.AdjointFunctorTheorems
+import all Mathlib.CategoryTheory.Abelian.GrothendieckCategory.ModuleEmbedding.GabrielPopescu
+import all Mathlib.Algebra.Category.ModuleCat.AB
+import all Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+import all WeilConjectures.CategoryTheory.CompactDerivedSourceCore
+import all WeilConjectures.CategoryTheory.DerivedModuleCompactGeneration
+import all WeilConjectures.CategoryTheory.DerivedModuleRankOneProperties
+import all Mathlib.Algebra.Module.ULift
+import all WeilConjectures.CategoryTheory.CompactObject
+import all WeilConjectures.CategoryTheory.WeakTriangulatedGenerator
+import all WeilConjectures.CategoryTheory.DerivedModuleRankOneCompact
+import all WeilConjectures.CategoryTheory.DerivedModuleRankOneCompactInjective
+import all WeilConjectures.CategoryTheory.DerivedModuleRankOneCompactSurjective
+import all WeilConjectures.CategoryTheory.DerivedModuleDirectSums
+import all Mathlib.Algebra.Homology.DerivedCategory.KProjective
+import all Mathlib.Algebra.Category.ModuleCat.Projective
+import all Mathlib.Algebra.Category.ModuleCat.Products
+import all WeilConjectures.CategoryTheory.DerivedModuleRankOneGenerator
+import all WeilConjectures.CategoryTheory.DerivedModuleRankOneNonzeroMap
+import all WeilConjectures.CategoryTheory.DerivedModuleNonzeroClassMap
+import all WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+import all WeilConjectures.CategoryTheory.TriangulatedEquivalenceTransfer
+import all WeilConjectures.CategoryTheory.CompactGenerationEquivalence
+import all WeilConjectures.CategoryTheory.GrothendieckDerivedExactLocalization
+import all WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
+import all WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
+import all WeilConjectures.CategoryTheory.BrownCohomologicalRepresentabilityUniverseTransfer
+import all Mathlib.CategoryTheory.Limits.Preserves.Opposites
+import all Mathlib.CategoryTheory.Triangulated.Opposite.Functor
+import all WeilConjectures.CategoryTheory.SmoothPurity.CountableCoproductsIdempotentComplete
+import all Mathlib.CategoryTheory.Adjunction.PartialAdjoint
+import all WeilConjectures.CategoryTheory.GrothendieckDerivedCoproducts
+import all Mathlib.Algebra.Homology.HomologicalComplexLimits
+import all Mathlib.CategoryTheory.Limits.Shapes.Products
+import all WeilConjectures.CategoryTheory.ProjectionFormulaCoproducts
+import all Mathlib.CategoryTheory.Limits.Shapes.ZeroMorphisms
+import all WeilConjectures.CategoryTheory.CoproductsOfCopowers
+import all Mathlib.CategoryTheory.MorphismProperty.Retract
+import all WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
+import all WeilConjectures.AlgebraicGeometry.SfEtaleGraphTransferTensor
+import all WeilConjectures.SixFunctors.Etale.Derived.EtaleLowerShriekCompactification
+import all WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comp
+import all WeilConjectures.AlgebraicGeometry.SfExactExchangePasting
+import all WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekBaseChange
+import all WeilConjectures.SixFunctors.LowerShriek.Formalism.BaseChange
+import all WeilConjectures.SixFunctors.Etale.Derived.UpperStarRestrictScalars
+import all WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedComp
+import all WeilConjectures.AlgebraicGeometry.SfDiagonalPushComparison
+import all WeilConjectures.AlgebraicGeometry.OrdinaryProperForgetComparison
+import all WeilConjectures.AlgebraicGeometry.SfP1SupportedExtMapData
+
+/-! # Rank-zero supported coordinate product normalization -/
+
+@[expose] public noncomputable section
+set_option autoImplicit false
+set_option backward.defeqAttrib.useBackward true
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
+set_option synthInstance.maxSize 2048
+set_option maxRecDepth 2048
+universe u
+open CategoryTheory CategoryTheory.Limits MonoidalCategory
+open AlgebraicGeometry WeilConjectures
+-- Normalize the proper identity directly, without a rank-one Cartier calculation.
+-- This is the identity argument of CoordinateSectionProjectiveTrace, specialized
+-- as private helpers so the rank-zero proof only uses the unbounded comparisons.
+namespace AlgebraicGeometry.Etale.CoordinateZeroNormalization
+open CategoryTheory.Abelian
+set_option linter.auxLemma false in
+attribute [local instance 100000] DerivedCategoryModule._proof_1 DerivedCategoryModule._proof_2
+attribute [local implicit_reducible] rightDerivedLowerShriek rightDerivedLowerShriekIso
+  unboundedFormalism
+
+private lemma identity_inclusion
+    {C : Type*} [Category C] {O U R : C ⥤ C}
+    (a : O ⊣ U) (b : U ⊣ R) [IsIso a.unit]
+    (e : U ≅ 𝟭 C) (o : O ≅ 𝟭 C) (r : R ≅ 𝟭 C)
+    (ho : conjugateEquiv Adjunction.id a o.hom = e.inv)
+    (hr : conjugateEquiv b Adjunction.id e.inv = r.hom) (M : C) :
+    b.unit.app (O.obj M) ≫ R.map (inv (a.unit.app M)) ≫ r.hom.app M =
+      o.hom.app M := by
+  have ha := unit_conjugateEquiv Adjunction.id a o.hom M
+  rw [ho] at ha
+  simp only [Adjunction.id_unit, NatTrans.id_app, Functor.id_obj,
+    Category.id_comp] at ha
+  have hb := unit_conjugateEquiv b Adjunction.id e.inv (O.obj M)
+  rw [hr] at hb
+  simp only [Adjunction.id_unit, NatTrans.id_app, Functor.id_obj,
+    Functor.id_map, Category.id_comp] at hb
+  try dsimp only [Functor.id_obj, Functor.comp_obj] at hb ⊢
+  erw [r.hom.naturality (inv (a.unit.app M))]
+  try dsimp only [Functor.id_obj, Functor.comp_obj]
+  rw [← Category.assoc, hb]
+  simp only [Functor.id_map]
+  have h := congrArg (fun z ↦ inv (a.unit.app M) ≫ z ≫ e.hom.app M) ha
+  simp only [Category.assoc, IsIso.inv_hom_id_assoc, Iso.inv_hom_id_app,
+    Category.comp_id] at h
+  rw [e.hom.naturality] at h
+  have h' := congrArg (fun z ↦ e.inv.app (O.obj M) ≫ z) h
+  try dsimp only [Functor.id_obj, Functor.comp_obj] at h' ⊢
+  simpa only [Category.assoc, Iso.inv_hom_id_app_assoc, Functor.id_map] using h'
+
+private theorem identity_derived_open_inclusion
+    (A : Type (u + 1)) [CommRing A] [Finite A] (X : Scheme.{u})
+    (M : DerivedCategoryModule A X) :
+    (derivedOpenImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} A) (𝟙 X)).app M ≫
+      (rightDerivedLowerStarIdIso A X).hom.app M =
+    (Functor.mapDerivedCategoryNatIso
+      (Adjunction.leftAdjointIdIso
+        (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) (𝟙 X))
+        (upperStarId (ModuleCat.{u + 1} A) X)) ≪≫
+      Functor.mapDerivedCategoryIdIso _).hom.app M := by
+  let e := Functor.mapDerivedCategoryNatIso (upperStarId (ModuleCat.{u + 1} A) X) ≪≫
+    Functor.mapDerivedCategoryIdIso _
+  let o := Functor.mapDerivedCategoryNatIso
+    (Adjunction.leftAdjointIdIso
+      (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) (𝟙 X))
+      (upperStarId (ModuleCat.{u + 1} A) X)) ≪≫ Functor.mapDerivedCategoryIdIso _
+  have hr := congrArg Iso.hom (derived_star_id_conjugate A X)
+  have h := identity_inclusion
+    (derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) (𝟙 X))
+    (mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) (𝟙 X))
+    e o (rightDerivedLowerStarIdIso A X) (derived_open_id_conjugate A X) hr M
+  simpa only [derivedOpenImmersionLowerShriekToLowerStar, NatTrans.comp_app,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_inv_app,
+    Functor.comp_obj, Functor.id_obj, Category.id_comp, Category.assoc,
+    NatIso.isIso_inv_app] using h
+
+private theorem star_identity_comp
+    (A : Type (u + 1)) [CommRing A] [Finite A] (X : Scheme.{u})
+    (M : DerivedCategoryModule A X) :
+    (rightDerivedLowerStarCompHom (ModuleCat.{u + 1} A) (𝟙 X) (𝟙 X) (𝟙 X)
+      (Category.id_comp (𝟙 X)).symm).app M =
+    (ordinaryFinitePushforward A (𝟙 X)).map ((rightDerivedLowerStarIdIso A X).hom.app M) := by
+  have h := (unboundedFormalism A).pfComp'_id_left_inv_app (𝟙 X) M
+  rw [unbounded_pf_id] at h
+  have hc : ((unboundedFormalism A).pfComp' (𝟙 X) (𝟙 X) (𝟙 X)
+      (Category.id_comp (𝟙 X))).inv =
+      rightDerivedLowerStarCompHom (ModuleCat.{u + 1} A) (𝟙 X) (𝟙 X) (𝟙 X)
+        (Category.id_comp (𝟙 X)).symm := by
+    rw [ExchangeFormalism.pfComp', conjugateIsoEquiv_apply_inv, Iso.symm_inv,
+      unbounded_pb_comp']
+    simpa only [rightDerivedLowerStarCompHom, exact_pb_comp,
+      Functor.mapDerivedCategoryTriangleIso, unboundedFormalism] using
+      (conjugateEquiv_leftDerivedUpperStarComp_hom (ModuleCat.{u + 1} A)
+        (𝟙 X) (𝟙 X) (𝟙 X) (Category.id_comp (𝟙 X)).symm).symm
+  rw [hc] at h
+  exact h
+
+private theorem model_forget_chosen
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} {f : X ⟶ Y} [HasCompactification f] [QuasiCompact f]
+    (c : Compactification f) (M : DerivedCategoryModule A X) :
+    (rightDerivedLowerShriekIso A c).hom.app M ≫
+      (compactificationForgetSupports (ModuleCat.{u + 1} A)
+        (HasCompactification.compactification f)).app M =
+    (compactificationForgetSupports (ModuleCat.{u + 1} A) c).app M := by
+  simpa only [rightDerivedLowerShriekIso, compactificationForgetSupports,
+    NatTrans.comp_app, Functor.whiskerRight_app, Category.assoc] using
+    rightDerivedLowerShriekOfCompactificationIso_hom_app_comp_toLowerStar A
+      c (HasCompactification.compactification f) M
+
+private theorem identity_naturality_unitor
+    {C : Type*} [Category C] {O R : C ⥤ C}
+    (r : R ≅ 𝟭 C) (o : O ≅ 𝟭 C) (M : C) :
+    R.map (o.hom.app M) ≫ r.hom.app M =
+      (Functor.isoWhiskerLeft O r ≪≫ Functor.rightUnitor O ≪≫ o).hom.app M := by
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
+    Functor.whiskerLeft_app, Functor.rightUnitor_hom_app, Functor.comp_obj,
+    Functor.id_obj, Category.id_comp]
+  simpa only [Functor.id_map, Functor.id_obj] using r.hom.naturality (o.hom.app M)
+
+private theorem identity_forget_normalization
+    (A : Type (u + 1)) [CommRing A] [Finite A] (X : Scheme.{u}) :
+    (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} A) (𝟙 X)) ≪≫
+      rightDerivedLowerStarIdIso A X = unboundedEtaleLowerShriekId A X := by
+  apply Iso.ext
+  apply NatTrans.ext
+  funext M
+  let c := Compactification.ofIsProper (𝟙 X)
+  have hc := model_forget_chosen A c M
+  have hf : (rightDerivedLowerShriekIsoRightDerivedLowerStar
+      (ModuleCat.{u + 1} A) (𝟙 X)).hom =
+      compactificationForgetSupports (ModuleCat.{u + 1} A)
+        (HasCompactification.compactification (𝟙 X)) := by
+    rw [rightDerivedLowerShriekIsoRightDerivedLowerStar_hom,
+      rightDerivedLowerShriekToLowerStarComp_comp_eq]
+    rfl
+  simp only [Iso.trans_hom, NatTrans.comp_app]
+  rw [hf]
+  apply (cancel_epi ((rightDerivedLowerShriekIso A c).hom.app M)).1
+  rw [← Category.assoc, hc]
+  simp only [unboundedEtaleLowerShriekId, Iso.trans_hom, Iso.symm_hom,
+    NatTrans.comp_app]
+  rw [Iso.hom_inv_id_app_assoc]
+  simp only [compactificationForgetSupports, NatTrans.comp_app,
+    Functor.whiskerRight_app]
+  with_unfolding_all
+    change ((ordinaryFinitePushforward A (𝟙 X)).map
+        ((derivedOpenImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} A) (𝟙 X)).app M) ≫
+        (rightDerivedLowerStarCompHom (ModuleCat.{u + 1} A) (𝟙 X) (𝟙 X) (𝟙 X)
+          (Category.id_comp (𝟙 X)).symm).app M) ≫
+        (rightDerivedLowerStarIdIso A X).hom.app M = _
+  rw [Category.assoc, star_identity_comp, ← Functor.map_comp_assoc,
+    identity_derived_open_inclusion]
+  let O := (openImmersionLowerShriek (ModuleCat.{u + 1} A) (𝟙 X)).mapDerivedCategory
+  let o : O ≅ 𝟭 (DerivedCategoryModule A X) := Functor.mapDerivedCategoryNatIso
+    (Adjunction.leftAdjointIdIso
+      (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) (𝟙 X))
+      (upperStarId (ModuleCat.{u + 1} A) X)) ≪≫ Functor.mapDerivedCategoryIdIso _
+  have ht :
+      (Functor.isoWhiskerLeft O (rightDerivedLowerStarIdIso A X) ≪≫
+        Functor.rightUnitor O ≪≫ o).hom.app M =
+      (identityEtaleCompactSupportComparison A X ≪≫
+        Functor.mapDerivedCategoryNatIso
+          (Adjunction.leftAdjointIdIso
+            (etaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) (𝟙 X)
+              inferInstance) (upperStarId (ModuleCat.{u + 1} A) X)) ≪≫
+        Functor.mapDerivedCategoryIdIso _).hom.app M := by
+    exact NatTrans.congr_app (congrArg Iso.hom (identity_tail_eq A X)) M
+  have hn := identity_naturality_unitor (rightDerivedLowerStarIdIso A X) o M
+  simpa only [o, O, ordinaryFinitePushforward, Iso.trans_hom, NatTrans.comp_app] using
+    hn.trans ht
+
+end AlgebraicGeometry.Etale.CoordinateZeroNormalization
+
+namespace AlgebraicGeometry.ProEtale.AffineZeroPurity
+open AffineSpacePurity
+
+-- The rank-zero list contains no coordinate classes.
+section EmptyProduct
+
+set_option allowUnsafeReducibility true in
+attribute [local reducible] iteratedAffineLine supportData zero classSource
+  PurityFiniteSetting.functorialCupSource AffineSpacePurity.action
+  Scheme.Hom.toIteratedAffineLine
+
+private theorem support_map_self (P : PurityFiniteSetting.{u})
+    {C X : Scheme.{u}} (i : C ⟶ X) [IsClosedImmersion i]
+    (g : C ⟶ C) (h : g ≫ i = i) :
+    P.functorialCupSupportMap true i i g h = 𝟙 _ := by
+  exact ((P.functorialCupSupportMap_existsUnique true i i g h).choose_spec.2
+    (𝟙 _) (Category.comp_id _)).symm
+
+private theorem empty_supported_product (P : PurityFiniteSetting.{u}) (n : ℕ)
+    (B : Scheme.{u}) (aB : B ⟶ Spec (.of P.field.k))
+    (is : List (Fin 0)) (g : support B 0 is ⟶ B)
+    (hg : g ≫ zero B 0 = supportMap B 0 is) (h : is.length = 0) :
+    coordinateSupportedCompose
+      ((cupSingle (setting P n) B).map
+        ((setting P n).functorialCupSupportMap true (zero B 0)
+          (supportMap B 0 is) g hg))
+      (classSource_eq P n B 0 is).symm
+      (product P n B aB 0 is)
+      (congrArg (target P n B) h) =
+    (cupSingle (setting P n) B).map
+      ((lowerStarId (ModuleCat.{u + 1} (setting P n).Coefficient) B).hom.app
+        ((setting P n).constant B)) := by
+  cases is with
+  | nil =>
+    unfold coordinateSupportedCompose product coordinateProductFold coordinateProductStart
+    with_unfolding_all
+      simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
+      change (cupSingle (setting P n) B).map
+          ((setting P n).functorialCupSupportMap true (𝟙 B) (𝟙 B) g hg) ≫
+        (cupSingle (setting P n) B).map
+          ((lowerStarId (ModuleCat.{u + 1} (setting P n).Coefficient) B).hom.app
+            ((setting P n).constant B)) = _
+      rw [support_map_self, CategoryTheory.Functor.map_id, Category.id_comp]
+  | cons i _ => exact Fin.elim0 i
+
+private theorem empty_supported_class (P : PurityFiniteSetting.{u}) (n : ℕ)
+    (B : Scheme.{u}) (aB : B ⟶ Spec (.of P.field.k)) :
+    supportedClass P n B aB 0 =
+      (cupSingle (setting P n) B).map
+        ((lowerStarId (ModuleCat.{u + 1} (setting P n).Coefficient) B).hom.app
+          ((setting P n).constant B)) := by
+  exact empty_supported_product P n B aB (List.finRange 0) (supportIso B 0).hom
+    (supportIso_existsUnique B 0).exists.choose_spec (@List.length_finRange 0)
+
+end EmptyProduct
+
+section IdentityComparison
+
+open AlgebraicGeometry.ClosedSectionCompactOrigin
+
+attribute [local instance 1000002] instCategoryDerivedCategory
+
+-- Keep the coefficient quotient and its cached ring structure folded during comparison.
+attribute [local irreducible] PurityFiniteSetting.Coefficient PurityFiniteSetting.Ring
+attribute [local instance 100001] PurityFiniteSetting.coefficientCommRing
+
+set_option allowUnsafeReducibility true in
+attribute [local reducible] AffineOrderedIntegration.proCategory
+  AffineOrderedIntegration.etaleCategory originCompactSupport
+  etaleUnit proUnit etaleSource proSource originUnit
+  SupportedConstantNormalization.supported SupportedConstantNormalization.push
+  SupportedConstantNormalization.constant
+attribute [local implicit_reducible] comparisonUpperStarPlusEtaleOrigin
+  rightDerivedLowerShriek Etale.rightDerivedLowerShriekPlus Etale.derivedPlusFormalism
+  DerivedCategory.Plus.singleFunctors SingleFunctors.lift cupSingle
+set_option linter.auxLemma false in
+attribute [local instance 100000] Etale.DerivedCategoryModule._proof_1
+  Etale.DerivedCategoryModule._proof_2
+  AffineSpacePurity.C._proof_1 AffineSpacePurity.C._proof_2
+
+private theorem candidate_self (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} {f : X ⟶ Y} [QuasiCompact f] (c : Compactification f) :
+    (towerCandidateComparison A c c).hom = 𝟙 _ := by
+  let Φ := comparisonUpperStarPlusEtaleOrigin (ModuleCat.{u + 1} A) X
+  let : Φ.IsEquivalence :=
+    isEquivalence_comparisonUpperStarPlusEtaleOrigin (ModuleCat.{u + 1} A) X
+  apply (Φ.asEquivalence.congrLeft.fullyFaithfulInverse).map_injective
+  change Functor.whiskerLeft Φ (towerCandidateComparison A c c).hom = _
+  dsimp only [towerCandidateComparison]
+  rw [preimage_whiskerLeft]
+  simp only [Etale.rightDerivedLowerShriekOfCompactificationPlusιIso,
+    Etale.rightDerivedLowerShriekOfCompactificationPlusIso_refl,
+    Functor.isoWhiskerRight_refl, Iso.refl_trans, Iso.symm_self_id,
+    Iso.trans_hom, Iso.refl_hom, Iso.symm_hom, Equivalence.congrLeft_inverse,
+    Functor.asEquivalence_functor, Functor.whiskeringLeft_obj_map, Functor.whiskerLeft_id']
+  all_goals erw [Category.id_comp, Iso.hom_inv_id]
+
+private theorem ambient_composition_hom (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    [QuasiCompact f] [QuasiCompact g]
+    (K : (DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} A) X).FullSubcategory) :
+    (originCompositionAmbient A f g).hom.app K =
+      ((originComposition A f g).hom.app K).hom := by
+  let H := (DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} A) Z).fullyFaithfulι
+  have h := (H.whiskeringRight
+      ((DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} A) X).FullSubcategory)).map_preimage
+    (X := originCompactSupport A f ⋙ originCompactSupport A g)
+    (Y := originCompactSupport A (f ≫ g)) (originCompositionAmbient A f g).hom
+  exact (NatTrans.congr_app h K).symm
+
+private theorem compact_identity_square (P : PurityFiniteSetting.{u})
+    (B : Scheme.{u})
+    (E : DerivedCategory.Plus
+      (Sheaf B.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient))) :
+    (compactComparison P (HasCompactification.compactification (𝟙 B)) E).hom ≫
+      ((originCompactSupportId P.Coefficient B).hom.app
+        ((comparisonUpperStarPlusEtaleOrigin (ModuleCat.{u + 1} P.Coefficient) B).obj E)).hom =
+    (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) B).mapDerivedCategory.map
+      (DerivedCategory.Plus.ι.map
+        ((Etale.rightDerivedLowerShriekPlusId P.Coefficient B).hom.app E)) := by
+  let Φ := comparisonUpperStarPlusEtaleOrigin (ModuleCat.{u + 1} P.Coefficient) B
+  let : Φ.IsEquivalence :=
+    isEquivalence_comparisonUpperStarPlusEtaleOrigin (ModuleCat.{u + 1} P.Coefficient) B
+  let N := (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) B).mapDerivedCategory
+  let model := compactSupportSiteComparison P.Coefficient
+      (HasCompactification.compactification (𝟙 B)) ≪≫
+    Functor.isoWhiskerRight
+      (Etale.rightDerivedLowerShriekPlusCompatibility
+        (ModuleCat.{u + 1} P.Coefficient) (𝟙 B)).symm N ≪≫
+    Functor.isoWhiskerRight (Etale.rightDerivedLowerShriekPlusId P.Coefficient B)
+      (DerivedCategory.Plus.ι ⋙ N)
+  let H := (DerivedCategory.plusEtaleOrigin
+    (ModuleCat.{u + 1} P.Coefficient) B).fullyFaithfulι
+  have h := NatTrans.congr_app (preimage_whiskerBoth Φ _ H
+    (F := originCompactSupport P.Coefficient (𝟙 B)) (G := 𝟭 _) model) E
+  change ((originCompactSupportId P.Coefficient B).hom.app (Φ.obj E)).hom =
+    model.hom.app E at h
+  rw [h]
+  simp only [model, compactComparison, Iso.trans_hom, Iso.symm_hom,
+    Functor.mapIso_hom, Iso.app_hom, Iso.app_inv, Category.assoc]
+  dsimp only [Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
+    NatTrans.comp_app, Iso.trans_hom, Iso.symm_hom, Functor.comp_map]
+  erw [Iso.inv_hom_id_app_assoc]
+  change N.map ((Etale.rightDerivedLowerShriekPlusCompatibility
+      (ModuleCat.{u + 1} P.Coefficient) (𝟙 B)).hom.app E) ≫
+    (N.map ((Etale.rightDerivedLowerShriekPlusCompatibility
+      (ModuleCat.{u + 1} P.Coefficient) (𝟙 B)).inv.app E) ≫
+    N.map (DerivedCategory.Plus.ι.map
+      ((Etale.rightDerivedLowerShriekPlusId P.Coefficient B).hom.app E))) = _
+  rw [← N.map_comp_assoc, Iso.hom_inv_id_app, N.map_id]
+  erw [Category.id_comp]
+
+private theorem origin_congr_cancel (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} {f g : X ⟶ Y} [HasCompactification f] [HasCompactification g]
+    [QuasiCompact f] [QuasiCompact g] (h : f = g)
+    (K : (DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} A) X).FullSubcategory) :
+    ((originCompactSupportCongr A f h).hom.app K).hom ≫
+      (rightDerivedLowerShriekCongr (ModuleCat.{u + 1} A) h.symm).hom.app K.obj = 𝟙 _ := by
+  subst g
+  simp only [originCompactSupportCongr, rightDerivedLowerShriekCongr_rfl,
+    Iso.refl_hom, NatTrans.id_app]
+  exact Category.id_comp _
+
+private theorem ambient_comp_id_right (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
+    [HasCompactification (f ≫ 𝟙 Y)] [QuasiCompact f]
+    (K : (DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} A) X).FullSubcategory) :
+    (originCompositionAmbient A f (𝟙 Y)).hom.app K ≫
+      (rightDerivedLowerShriekCongr (ModuleCat.{u + 1} A) (Category.comp_id f)).hom.app
+        K.obj =
+      ((originCompactSupportId A Y).hom.app ((originCompactSupport A f).obj K)).hom := by
+  rw [ambient_composition_hom, originComposition_id_right]
+  dsimp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.rightUnitor_hom_app]
+  change (((originCompactSupportId A Y).hom.app ((originCompactSupport A f).obj K)).hom ≫
+    𝟙 _ ≫ ((originCompactSupportCongr A f (Category.comp_id f).symm).hom.app K).hom) ≫ _ = _
+  erw [Category.id_comp]
+  rw [Category.assoc, origin_congr_cancel]
+  exact Category.comp_id _
+
+private theorem etale_congr_cancel (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} {f g : X ⟶ Y} [HasCompactification f] [HasCompactification g]
+    (h : f = g)
+    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) :
+    (Etale.rightDerivedLowerShriekPlusCongr A h).hom.app K ≫
+      (Etale.rightDerivedLowerShriekPlusCongr A h.symm).hom.app K = 𝟙 _ := by
+  subst g
+  simp only [Etale.rightDerivedLowerShriekPlusCongr,
+    CompactSupportFormalism.lowerShriekCongr, Iso.refl_hom, NatTrans.id_app]
+  erw [Category.id_comp]
+  rfl
+
+private theorem etale_comp_id_right (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
+    [HasCompactification (f ≫ 𝟙 Y)] [QuasiCompact f]
+    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) :
+    (Etale.rightDerivedLowerShriekPlusCompIso A f (𝟙 Y)).hom.app K ≫
+      (Etale.rightDerivedLowerShriekPlusCongr A (Category.comp_id f)).hom.app K =
+    (Etale.rightDerivedLowerShriekPlusId A Y).hom.app
+      ((Etale.rightDerivedLowerShriekPlus (ModuleCat.{u + 1} A) f).obj K) := by
+  rw [Etale.rightDerivedLowerShriekPlusCompIso_id_right]
+  dsimp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.rightUnitor_hom_app]
+  simp only [Category.assoc, etale_congr_cancel]
+  erw [Category.id_comp]
+  exact Category.comp_id
+    ((Etale.rightDerivedLowerShriekPlusId A Y).hom.app
+      ((Etale.rightDerivedLowerShriekPlus (ModuleCat.{u + 1} A) f).obj K))
+
+-- Project the comparison chains without unfolding their constructions.
+private theorem chain5_map_inv_hom
+    {C D : Type*} [Category C] [Category D]
+    {K L : C} {V W X Y : D} (F : C ⥤ D)
+    (a : V ≅ F.obj K) (b : L ≅ K) (c : F.obj L ≅ W) (d : W ≅ X) (e : X ≅ Y) :
+    (a ≪≫ F.mapIso b.symm ≪≫ c ≪≫ d ≪≫ e).hom =
+      a.hom ≫ F.map b.inv ≫ c.hom ≫ d.hom ≫ e.hom := rfl
+
+private theorem chain6_map_inv_map_hom
+    {C D : Type*} [Category C] [Category D] (Q : ObjectProperty D)
+    {K L : C} {V W Y : D} {Z T : Q.FullSubcategory} (F : C ⥤ D)
+    (b : L ≅ K) (c : F.obj L ≅ V) (d : V ≅ W) (e : W ≅ Z.obj)
+    (v : Z ≅ T) (x : T.obj ≅ Y) :
+    (F.mapIso b.symm ≪≫ c ≪≫ d ≪≫ e ≪≫ Q.ι.mapIso v ≪≫ x).hom =
+      F.map b.inv ≫ c.hom ≫ d.hom ≫ e.hom ≫ v.hom.hom ≫ x.hom := rfl
+
+private theorem normalize_six
+    {C : Type*} [Category C] {X₀ X₁ X₂ X₃ X₄ X₅ : C}
+    (a : X₀ ⟶ X₁) (b : X₁ ⟶ X₁) (c : X₁ ⟶ X₂) (d : X₂ ⟶ X₃)
+    (e : X₃ ⟶ X₄) (f : X₄ ⟶ X₅) (g : X₁ ⟶ X₃)
+    (hb : b = 𝟙 _) (hcd : c ≫ d = g) :
+    a ≫ b ≫ c ≫ d ≫ e ≫ f = a ≫ g ≫ e ≫ f := by
+  simpa only [hb, Category.id_comp, Category.assoc] using
+    congrArg (fun z ↦ a ≫ z ≫ e ≫ f) hcd
+
+private theorem normalize_five_natural
+    {C : Type*} [Category C] (F : C ⥤ C) (ε : F ≅ 𝟭 C)
+    {U V W : C} (d : V ⟶ F.obj U) (a : F.obj V ⟶ F.obj V)
+    (b : F.obj (F.obj U) ⟶ W) (c : W ⟶ F.obj U)
+    (ha : a = 𝟙 _) (hbc : b ≫ c = ε.hom.app (F.obj U)) :
+    a ≫ F.map d ≫ b ≫ c ≫ ε.hom.app U = ε.hom.app V ≫ d ≫ ε.hom.app U := by
+  rw [ha, Category.id_comp, ← Category.assoc b c (ε.hom.app U), hbc]
+  simpa only [Functor.id_map, Category.assoc] using
+    congrArg (fun z ↦ z ≫ ε.hom.app U) (ε.hom.naturality d)
+
+section SigmaCalculation
+
+attribute [local irreducible] proClosedIso etaleClosedIso
+  ClosedSectionCompactOrigin.constantComparison originCompactSupportId towerCandidateComparison
+  originCompositionAmbient originComposition compactSupportSiteComparison
+  Functor.rightDerivedFunctor Functor.mapDerivedCategory
+  Functor.rightDerivedFunctorIsoMapDerivedCategory Functor.mapDerivedCategorySingleFunctor
+
+private theorem pro_sigma_specialized (P : PurityFiniteSetting.{u}) (B : Scheme.{u})
+    [QuasiCompact (𝟙 B : B ⟶ B).openComplement.ι] :
+    (proSigma P (𝟙 B) (HasCompactification.compactification (𝟙 B)) (𝟙 B)
+      (Category.id_comp (𝟙 B))).hom =
+    (rightDerivedLowerShriek (ModuleCat.{u + 1} P.Coefficient) (𝟙 B)).map
+        (proClosedIso P (𝟙 B)).inv ≫
+      ((towerCandidateComparison P.Coefficient (HasCompactification.compactification (𝟙 B))
+        (HasCompactification.compactification (𝟙 B))).hom.app
+          ((originCompactSupport P.Coefficient (𝟙 B)).obj (originUnit P B))) ≫
+      ((originCompositionAmbient P.Coefficient (𝟙 B) (𝟙 B)).hom.app (originUnit P B)) ≫
+      ((rightDerivedLowerShriekCongr (ModuleCat.{u + 1} P.Coefficient)
+        (Category.id_comp (𝟙 B))).hom.app (originUnit P B).obj) ≫
+      (((originCompactSupportId P.Coefficient B).hom.app (originUnit P B)).hom) ≫
+      (ClosedSectionCompactOrigin.constantComparison P B).hom := by
+  refine (congrArg (fun e ↦ e.hom) (proSigma.eq_def P (𝟙 B)
+    (HasCompactification.compactification (𝟙 B)) (𝟙 B) (Category.id_comp (𝟙 B)))).trans ?_
+  exact chain6_map_inv_map_hom
+    (DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} P.Coefficient) B)
+    (Z := (originCompactSupport P.Coefficient (𝟙 B)).obj (originUnit P B))
+    (T := originUnit P B)
+    (rightDerivedLowerShriek (ModuleCat.{u + 1} P.Coefficient) (𝟙 B))
+    (proClosedIso P (𝟙 B))
+    ((towerCandidateComparison P.Coefficient (HasCompactification.compactification (𝟙 B))
+      (HasCompactification.compactification (𝟙 B))).app
+        ((originCompactSupport P.Coefficient (𝟙 B)).obj (originUnit P B)))
+    ((originCompositionAmbient P.Coefficient (𝟙 B) (𝟙 B)).app (originUnit P B))
+    ((rightDerivedLowerShriekCongr (ModuleCat.{u + 1} P.Coefficient)
+      (Category.id_comp (𝟙 B))).app (originUnit P B).obj)
+    ((originCompactSupportId P.Coefficient B).app (originUnit P B))
+    (ClosedSectionCompactOrigin.constantComparison P B)
+
+private theorem etale_sigma_specialized (P : PurityFiniteSetting.{u}) (B : Scheme.{u}) :
+    (etaleSigma P (𝟙 B) (HasCompactification.compactification (𝟙 B)) (𝟙 B)
+      (Category.id_comp (𝟙 B))).hom =
+    ((Etale.rightDerivedLowerShriekOfCompactificationPlusIso P.Coefficient
+      (HasCompactification.compactification (𝟙 B))
+      (HasCompactification.compactification (𝟙 B))).hom.app (etaleSource P (𝟙 B))) ≫
+      (Etale.rightDerivedLowerShriekPlus (ModuleCat.{u + 1} P.Coefficient) (𝟙 B)).map
+        (etaleClosedIso P (𝟙 B)).inv ≫
+      ((Etale.rightDerivedLowerShriekPlusCompIso P.Coefficient (𝟙 B) (𝟙 B)).hom.app
+        (etaleUnit P B)) ≫
+      ((Etale.rightDerivedLowerShriekPlusCongr P.Coefficient
+        (Category.id_comp (𝟙 B))).hom.app (etaleUnit P B)) ≫
+      (Etale.rightDerivedLowerShriekPlusId P.Coefficient B).hom.app (etaleUnit P B) := by
+  refine (congrArg (fun e ↦ e.hom) (etaleSigma.eq_def P (𝟙 B)
+    (HasCompactification.compactification (𝟙 B)) (𝟙 B) (Category.id_comp (𝟙 B)))).trans ?_
+  exact chain5_map_inv_hom
+    (Etale.rightDerivedLowerShriekPlus (ModuleCat.{u + 1} P.Coefficient) (𝟙 B))
+    ((Etale.rightDerivedLowerShriekOfCompactificationPlusIso P.Coefficient
+      (HasCompactification.compactification (𝟙 B))
+      (HasCompactification.compactification (𝟙 B))).app (etaleSource P (𝟙 B)))
+    (etaleClosedIso P (𝟙 B))
+    ((Etale.rightDerivedLowerShriekPlusCompIso P.Coefficient (𝟙 B) (𝟙 B)).app
+      (etaleUnit P B))
+    ((Etale.rightDerivedLowerShriekPlusCongr P.Coefficient
+      (Category.id_comp (𝟙 B))).app (etaleUnit P B))
+    ((Etale.rightDerivedLowerShriekPlusId P.Coefficient B).app (etaleUnit P B))
+
+private theorem pro_sigma_id (P : PurityFiniteSetting.{u}) (B : Scheme.{u})
+    [QuasiCompact (𝟙 B : B ⟶ B).openComplement.ι] :
+    (proSigma P (𝟙 B) (HasCompactification.compactification (𝟙 B)) (𝟙 B)
+      (Category.id_comp (𝟙 B))).hom =
+    (rightDerivedLowerShriek (ModuleCat.{u + 1} P.Coefficient) (𝟙 B)).map
+        (proClosedIso P (𝟙 B)).inv ≫
+      ((originCompactSupportId P.Coefficient B).hom.app
+        ((originCompactSupport P.Coefficient (𝟙 B)).obj (originUnit P B))).hom ≫
+      ((originCompactSupportId P.Coefficient B).hom.app (originUnit P B)).hom ≫
+      (ClosedSectionCompactOrigin.constantComparison P B).hom := by
+  have ht := NatTrans.congr_app
+    (candidate_self P.Coefficient (HasCompactification.compactification (𝟙 B)))
+    ((originCompactSupport P.Coefficient (𝟙 B)).obj (originUnit P B))
+  refine (pro_sigma_specialized P B).trans ?_
+  exact normalize_six
+    ((rightDerivedLowerShriek (ModuleCat.{u + 1} P.Coefficient) (𝟙 B)).map
+      (proClosedIso P (𝟙 B)).inv)
+    ((towerCandidateComparison P.Coefficient (HasCompactification.compactification (𝟙 B))
+      (HasCompactification.compactification (𝟙 B))).hom.app
+        ((originCompactSupport P.Coefficient (𝟙 B)).obj (originUnit P B)))
+    ((originCompositionAmbient P.Coefficient (𝟙 B) (𝟙 B)).hom.app (originUnit P B))
+    ((rightDerivedLowerShriekCongr (ModuleCat.{u + 1} P.Coefficient)
+      (Category.id_comp (𝟙 B))).hom.app (originUnit P B).obj)
+    (((originCompactSupportId P.Coefficient B).hom.app (originUnit P B)).hom)
+    (ClosedSectionCompactOrigin.constantComparison P B).hom
+    (((originCompactSupportId P.Coefficient B).hom.app
+      ((originCompactSupport P.Coefficient (𝟙 B)).obj (originUnit P B))).hom)
+    ht (ambient_comp_id_right P.Coefficient (𝟙 B) (originUnit P B))
+
+private theorem etale_sigma_id (P : PurityFiniteSetting.{u}) (B : Scheme.{u}) :
+    (etaleSigma P (𝟙 B) (HasCompactification.compactification (𝟙 B)) (𝟙 B)
+      (Category.id_comp (𝟙 B))).hom =
+    (Etale.rightDerivedLowerShriekPlusId P.Coefficient B).hom.app
+        (etaleSource P (𝟙 B)) ≫
+      (etaleClosedIso P (𝟙 B)).inv ≫
+      (Etale.rightDerivedLowerShriekPlusId P.Coefficient B).hom.app (etaleUnit P B) := by
+  have ht := congrArg (fun e ↦ e.hom.app (etaleSource P (𝟙 B)))
+    (Etale.rightDerivedLowerShriekOfCompactificationPlusIso_refl P.Coefficient
+      (HasCompactification.compactification (𝟙 B)))
+  refine (etale_sigma_specialized P B).trans ?_
+  exact normalize_five_natural
+    (Etale.rightDerivedLowerShriekPlus (ModuleCat.{u + 1} P.Coefficient) (𝟙 B))
+    (Etale.rightDerivedLowerShriekPlusId P.Coefficient B)
+    (etaleClosedIso P (𝟙 B)).inv
+    ((Etale.rightDerivedLowerShriekOfCompactificationPlusIso P.Coefficient
+      (HasCompactification.compactification (𝟙 B))
+      (HasCompactification.compactification (𝟙 B))).hom.app (etaleSource P (𝟙 B)))
+    ((Etale.rightDerivedLowerShriekPlusCompIso P.Coefficient (𝟙 B) (𝟙 B)).hom.app
+      (etaleUnit P B))
+    ((Etale.rightDerivedLowerShriekPlusCongr P.Coefficient
+      (Category.id_comp (𝟙 B))).hom.app (etaleUnit P B))
+    ht (etale_comp_id_right P.Coefficient (𝟙 B) (etaleUnit P B))
+
+end SigmaCalculation
+
+private theorem closed_id_source (P : PurityFiniteSetting.{u})
+    (B : Scheme.{u}) (b : B ⟶ Spec (.of P.field.k))
+    [LocallyOfFiniteType b] [QuasiCompact b] [IsSeparated b] [IsNoetherian B] :
+    (supportedComparison P (𝟙 B)).hom ≫ (proClosedIso P (𝟙 B)).inv ≫
+      ((originCompactSupportId P.Coefficient B).hom.app (originUnit P B)).hom =
+    (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) B).mapDerivedCategory.map
+      (DerivedCategory.Plus.ι.map ((etaleClosedIso P (𝟙 B)).inv ≫
+        (Etale.rightDerivedLowerShriekPlusId P.Coefficient B).hom.app (etaleUnit P B))) := by
+  let := tower_noetherian P B b 0
+  let F := rightDerivedLowerShriek (ModuleCat.{u + 1} P.Coefficient) (𝟙 B)
+  let V := (comparisonUpperStarPlusEtaleOrigin (ModuleCat.{u + 1} P.Coefficient) B).obj
+    (etaleSource P (𝟙 B))
+  let t : V ⟶ (originCompactSupport P.Coefficient (𝟙 B)).obj (originUnit P B) :=
+    ⟨(supportedComparison P (𝟙 B)).hom ≫ (proClosedIso P (𝟙 B)).inv⟩
+  have hn := congrArg (fun a ↦ a.hom)
+    ((originCompactSupportId P.Coefficient B).hom.naturality t)
+  change F.map ((supportedComparison P (𝟙 B)).hom ≫ (proClosedIso P (𝟙 B)).inv) ≫
+      ((originCompactSupportId P.Coefficient B).hom.app
+        ((originCompactSupport P.Coefficient (𝟙 B)).obj (originUnit P B))).hom =
+    ((originCompactSupportId P.Coefficient B).hom.app V).hom ≫
+      (supportedComparison P (𝟙 B)).hom ≫ (proClosedIso P (𝟙 B)).inv at hn
+  have hs := (closed_section_compact_origin P b (𝟙 B)
+    (HasCompactification.compactification (𝟙 B)) (𝟙 B) (Category.id_comp (𝟙 B))).1
+  rw [pro_sigma_id, etale_sigma_id] at hs
+  let N := (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) B).mapDerivedCategory
+  change (compactComparison P (HasCompactification.compactification (𝟙 B))
+      (etaleSource P (𝟙 B))).hom ≫
+    F.map (supportedComparison P (𝟙 B)).hom ≫ F.map (proClosedIso P (𝟙 B)).inv ≫
+    ((originCompactSupportId P.Coefficient B).hom.app
+      ((originCompactSupport P.Coefficient (𝟙 B)).obj (originUnit P B))).hom ≫
+    ((originCompactSupportId P.Coefficient B).hom.app (originUnit P B)).hom ≫
+    (ClosedSectionCompactOrigin.constantComparison P B).hom =
+    N.map (DerivedCategory.Plus.ι.map
+      ((Etale.rightDerivedLowerShriekPlusId P.Coefficient B).hom.app
+        (etaleSource P (𝟙 B)) ≫ (etaleClosedIso P (𝟙 B)).inv ≫
+        (Etale.rightDerivedLowerShriekPlusId P.Coefficient B).hom.app (etaleUnit P B))) ≫
+    (ClosedSectionCompactOrigin.constantComparison P B).hom at hs
+  simp only [Functor.map_comp, Category.assoc] at hs
+  rw [← F.map_comp_assoc, reassoc_of% hn] at hs
+  rw [reassoc_of% (compact_identity_square P B (etaleSource P (𝟙 B)))] at hs
+  apply (cancel_epi
+    ((comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) B).mapDerivedCategory.map
+      (DerivedCategory.Plus.ι.map
+        ((Etale.rightDerivedLowerShriekPlusId P.Coefficient B).hom.app
+          (etaleSource P (𝟙 B)))))).1
+  apply (cancel_mono (ClosedSectionCompactOrigin.constantComparison P B).hom).1
+  simpa only [Functor.map_comp, Category.assoc] using hs
+
+-- Restricting the actual sheafified constant along the identity is the identity unitor.
+-- Inline the Over category to avoid expanding the concrete pullback machinery.
+set_option linter.style.haveILetI false in
+private theorem pro_restriction_id (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) :
+    SupportedConstantNormalization.restriction A true (𝟙 X) =
+      (lowerStarId (ModuleCat.{u + 1} A) X).inv.app
+        (SupportedConstantNormalization.constant A true X) := by
+  let : MorphismProperty.HasPullbacksAlong @AlgebraicGeometry.WeaklyEtale.{u} (𝟙 X) :=
+    { hasPullback := fun _ _ ↦ inferInstance }
+  let : MorphismProperty.IsStableUnderBaseChangeAlong
+      @AlgebraicGeometry.WeaklyEtale.{u} (𝟙 X) :=
+    { of_isPullback := fun pb h ↦
+        MorphismProperty.IsStableUnderBaseChange.of_isPullback pb h }
+  letI : Category.{u} (MorphismProperty.Over @AlgebraicGeometry.WeaklyEtale.{u} ⊤ X) :=
+    inferInstanceAs (Category.{u} X.ProEt)
+  let D := ModuleCat.{u + 1} A
+  let M := ModuleCat.of A A
+  apply ((sheafificationAdjunction (Scheme.ProEt.topology X) D).homEquiv
+    ((Functor.const X.ProEtᵒᵖ).obj M) _).injective
+  let K := (constantSheaf (Scheme.ProEt.topology X) D).obj M
+  let a : ((Functor.const X.ProEtᵒᵖ).obj M) ⟶
+      (sheafToPresheaf (Scheme.ProEt.topology X) D).obj
+        ((lowerStar D (𝟙 X)).obj K) :=
+    Functor.whiskerLeft (Scheme.proEtaleBaseChange (𝟙 X)).op
+      (toSheafify (Scheme.ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).obj M))
+  change ((sheafificationAdjunction (Scheme.ProEt.topology X) D).homEquiv
+    ((Functor.const X.ProEtᵒᵖ).obj M) _)
+      (((sheafificationAdjunction (Scheme.ProEt.topology X) D).homEquiv
+        ((Functor.const X.ProEtᵒᵖ).obj M) _).symm a) = _
+  rw [Equiv.apply_symm_apply]
+  erw [Adjunction.homEquiv_apply]
+  apply NatTrans.ext
+  funext U
+  change (toSheafify (Scheme.ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).obj M)).app
+      ((Scheme.proEtaleBaseChange (𝟙 X)).op.obj U) =
+    (toSheafify (Scheme.ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).obj M)).app U ≫
+      ((constantSheaf (Scheme.ProEt.topology X) D).obj M).obj.map
+        ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ X).hom.app U.unop).op
+  have h := (toSheafify (Scheme.ProEt.topology X)
+    ((Functor.const X.ProEtᵒᵖ).obj M)).naturality
+      ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ X).hom.app U.unop).op
+  change 𝟙 M ≫ _ = _ at h
+  rw [Category.id_comp] at h
+  exact h
+
+private theorem etale_restriction_id (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) :
+    SupportedConstantNormalization.restriction A false (𝟙 X) =
+      (Etale.lowerStarId (ModuleCat.{u + 1} A) X).inv.app
+        (SupportedConstantNormalization.constant A false X) := by
+  dsimp only [SupportedConstantNormalization.restriction]
+  simp only [Iso.app_hom]
+  rw [Etale.SfP1Transport.constant_id, Adjunction.homEquiv_unit,
+    Etale.upperStarId_hom_app_unit_app]
+
+private theorem supported_identity_square (P : PurityFiniteSetting.{u}) (X : Scheme.{u}) :
+    (supportedComparison P (𝟙 X)).hom ≫
+      (DerivedCategory.singleFunctor _ 0).map
+        ((lowerStarId (ModuleCat.{u + 1} P.Coefficient) X).hom.app
+          (SupportedConstantNormalization.constant P.Coefficient true X)) =
+    (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X).mapDerivedCategory.map
+      ((DerivedCategory.singleFunctor _ 0).map
+        ((Etale.lowerStarId (ModuleCat.{u + 1} P.Coefficient) X).hom.app
+          (SupportedConstantNormalization.constant P.Coefficient false X))) ≫
+      (ClosedSectionCompactOrigin.constantComparison P X).hom := by
+  let A := P.Coefficient
+  let N := comparisonUpperStar (ModuleCat.{u + 1} A) X
+  let Ce := SupportedConstantNormalization.constant A false X
+  let Cp := SupportedConstantNormalization.constant A true X
+  let ae := (Etale.lowerStarId (ModuleCat.{u + 1} A) X).app Ce
+  let ap := (lowerStarId (ModuleCat.{u + 1} A) X).app Cp
+  let e : N.obj Ce ≅ Cp := SupportedConstantNormalization.compareUnit A X
+  let g : N.obj ((Etale.lowerStar (ModuleCat.{u + 1} A) (𝟙 X)).obj Ce) ⟶
+      (lowerStar (ModuleCat.{u + 1} A) (𝟙 X)).obj Cp :=
+    SupportedConstantNormalization.gamma A (𝟙 X)
+  have h : N.map ae.inv ≫ g = e.hom ≫ ap.inv := by
+    have hh := SupportedConstantNormalization.gamma_normalized A (𝟙 X)
+    rw [pro_restriction_id, etale_restriction_id] at hh
+    exact hh
+  have hh : g ≫ ap.hom = N.map ae.hom ≫ e.hom := by
+    apply (cancel_epi (N.map ae.inv)).1
+    rw [reassoc_of% h]
+    simp only [Iso.inv_hom_id, Category.comp_id, ← N.map_comp_assoc,
+      Iso.inv_hom_id, N.map_id, Category.id_comp]
+  let Se := DerivedCategory.singleFunctor
+    (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) 0
+  let Sp := DerivedCategory.singleFunctor
+    (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)) 0
+  let ψ := N.mapDerivedCategorySingleFunctor 0
+  change (ψ.hom.app _ ≫ Sp.map g) ≫ Sp.map ap.hom =
+    N.mapDerivedCategory.map (Se.map ae.hom) ≫ (ψ.hom.app Ce ≫ Sp.map e.hom)
+  rw [Category.assoc, ← Sp.map_comp, hh, Sp.map_comp]
+  erw [← reassoc_of% (ψ.hom.naturality ae.hom)]
+
+private theorem iso_app_of_trans
+    {C D : Type*} [Category C] [Category D] {F G H : C ⥤ D}
+    (a : F ≅ G) (b : G ≅ H) (e : F ≅ H) (h : a ≪≫ b = e) (M : C) :
+    e.hom.app M = a.hom.app M ≫ b.hom.app M :=
+  (congrArg (fun i ↦ i.hom.app M) h).symm
+
+private theorem prefix_iso_app
+    {C D : Type*} [Category C] [Category D] {F G H : C ⥤ D}
+    (a : F ≅ G) (b : G ≅ H) (M : C) {V : D}
+    (l : G.obj M ⟶ V) (k : V ⟶ H.obj M) (h : b.hom.app M = l ≫ k) :
+    a.hom.app M ≫ l ≫ k = (a ≪≫ b).hom.app M := by
+  change a.hom.app M ≫ (l ≫ k) = a.hom.app M ≫ b.hom.app M
+  rw [← h]
+
+private theorem preimage_chain_post
+    {C D : Type*} [Category C] [Category D] (F : C ⥤ D) [F.Full] [F.Faithful]
+    {U V W : C} {X Y Z : D}
+    (a : F.obj U ≅ X) (b : X ≅ Y) (c : Y ≅ Z) (d : Z ≅ F.obj V)
+    (k : V ⟶ W) (ε : U ⟶ W) (t : Y ⟶ F.obj W)
+    (ht : c.hom ≫ d.hom ≫ F.map k = t)
+    (hε : F.map ε = a.hom ≫ b.hom ≫ t) :
+    (F.preimageIso (a ≪≫ b ≪≫ c ≪≫ d)).hom ≫ k = ε := by
+  apply F.map_injective
+  rw [F.map_comp, Functor.preimageIso_hom, F.map_preimage, hε]
+  simp only [Iso.trans_hom, Category.assoc, ht]
+
+private theorem etale_closed_id (P : PurityFiniteSetting.{u}) (B : Scheme.{u})
+    [IsNoetherian B] :
+    (etaleClosedIso P (𝟙 B)).hom ≫
+      (DerivedCategory.Plus.singleFunctor _ 0).map
+        ((Etale.lowerStarId (ModuleCat.{u + 1} P.Coefficient) B).hom.app
+          (SupportedConstantNormalization.constant P.Coefficient false B)) =
+    (Etale.rightDerivedLowerShriekPlusId P.Coefficient B).hom.app (etaleUnit P B) := by
+  let E := etaleUnit P B
+  let F := Etale.lowerStar (ModuleCat.{u + 1} P.Coefficient) (𝟙 B)
+  let C := SupportedConstantNormalization.constant P.Coefficient false B
+  let e := Etale.lowerStarId (ModuleCat.{u + 1} P.Coefficient) B
+  let S := DerivedCategory.singleFunctor
+    (Sheaf B.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient)) 0
+  let k := (DerivedCategory.Plus.singleFunctor _ 0).map (e.hom.app C)
+  let a := (Etale.rightDerivedLowerShriekPlusCompatibility
+    (ModuleCat.{u + 1} P.Coefficient) (𝟙 B)).app E
+  let r := Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar
+    (ModuleCat.{u + 1} P.Coefficient) (𝟙 B)
+  let t := (Etale.rightDerivedLowerStarIdIso P.Coefficient B).hom.app E.obj
+  have ht := prefix_iso_app F.rightDerivedFunctorIsoMapDerivedCategory
+    (Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryIdIso _) (S.obj C)
+    ((F.mapDerivedCategorySingleFunctor 0).hom.app C) (S.map (e.hom.app C))
+    (Etale.SfP1Transport.exact_single_identity F e C)
+  have hp := Etale.AffineOrderedCounitZeroAux.identity_comparison_plus P.Coefficient B E
+  have hi := iso_app_of_trans r (Etale.rightDerivedLowerStarIdIso P.Coefficient B)
+    (Etale.unboundedEtaleLowerShriekId P.Coefficient B)
+    (Etale.CoordinateZeroNormalization.identity_forget_normalization P.Coefficient B) E.obj
+  have hε := hp.trans (congrArg (fun z ↦ a.hom ≫ z) hi)
+  have hdef := congrArg (fun i ↦ i.hom ≫ k) (etaleClosedIso.eq_def P (𝟙 B))
+  refine hdef.trans ?_
+  apply preimage_chain_post DerivedCategory.Plus.ι
+    (U := (Etale.rightDerivedLowerShriekPlus (ModuleCat.{u + 1} P.Coefficient) (𝟙 B)).obj E)
+    (V := etaleSource P (𝟙 B)) (W := E)
+    a (r.app E.obj) (F.rightDerivedFunctorIsoMapDerivedCategory.app E.obj)
+    ((F.mapDerivedCategorySingleFunctor 0).app C) k
+    ((Etale.rightDerivedLowerShriekPlusId P.Coefficient B).hom.app E) t
+  · with_unfolding_all exact ht
+  · exact hε
+
+-- Transport from the true pro-etale constant to the chosen coordinate coefficient sheaf.
+private theorem proper_comparison_eq (A : Type (u + 1)) [CommRing A]
+    {X Y : Scheme.{u}} (s : X ⟶ Y) [IsClosedImmersion s] [HasCompactification s] :
+    rightDerivedLowerShriekIsoOfIsProper (ModuleCat.{u + 1} A) s =
+      rightDerivedLowerShriekIsoRightDerivedFunctorLowerStar (ModuleCat.{u + 1} A) s := by
+  rw [rightDerivedLowerShriekIsoOfIsProper.eq_def,
+    rightDerivedLowerShriekIsoRightDerivedFunctorLowerStar.eq_def]
+
+private def proper_identity_iso (A : Type (u + 1)) [CommRing A]
+    (B : Scheme.{u}) [IsNoetherian B] :
+    DerivedCategory.singleFunctor (Sheaf (Scheme.ProEt.topology B) (ModuleCat.{u + 1} A)) 0 ⋙
+      rightDerivedLowerShriek (ModuleCat.{u + 1} A) (𝟙 B) ≅
+    DerivedCategory.singleFunctor (Sheaf (Scheme.ProEt.topology B) (ModuleCat.{u + 1} A)) 0 :=
+  let S := DerivedCategory.singleFunctor
+    (Sheaf (Scheme.ProEt.topology B) (ModuleCat.{u + 1} A)) 0
+  let L := lowerStar (ModuleCat.{u + 1} A) (𝟙 B)
+  Functor.isoWhiskerLeft S
+      (rightDerivedLowerShriekIsoRightDerivedFunctorLowerStar (ModuleCat.{u + 1} A) (𝟙 B)) ≪≫
+    Functor.isoWhiskerLeft S L.rightDerivedFunctorIsoMapDerivedCategory ≪≫
+    L.mapDerivedCategorySingleFunctor 0 ≪≫
+    Functor.isoWhiskerRight (lowerStarId (ModuleCat.{u + 1} A) B) S
+
+private theorem map_iso_chain_post_hom
+    {C D : Type*} [Category C] [Category D]
+    (S : C ⥤ D) (F G H : D ⥤ D) (L : C ⥤ C)
+    (a : F ≅ G) (b : G ≅ H) (c : S ⋙ H ≅ L ⋙ S) (e : L ≅ 𝟭 C)
+    (M : C) {U : D} (χ : U ≅ S.obj M) :
+    (F.mapIso χ ≪≫ a.app (S.obj M) ≪≫ b.app (S.obj M) ≪≫ c.app M).hom ≫
+      S.map (e.hom.app M) =
+    F.map χ.hom ≫ (Functor.isoWhiskerLeft S a ≪≫ Functor.isoWhiskerLeft S b ≪≫
+      c ≪≫ Functor.isoWhiskerRight e S).hom.app M := by
+  simp only [Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, NatTrans.comp_app,
+    Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Functor.isoWhiskerRight_hom,
+    Functor.whiskerRight_app, Category.assoc]
+
+private theorem pro_closed_identity_hom (P : PurityFiniteSetting.{u})
+    (B : Scheme.{u}) [IsNoetherian B] :
+    (proClosedIso P (𝟙 B)).hom ≫
+      (DerivedCategory.singleFunctor _ 0).map
+        ((lowerStarId (ModuleCat.{u + 1} P.Coefficient) B).hom.app
+          (SupportedConstantNormalization.constant P.Coefficient true B)) =
+    (rightDerivedLowerShriek (ModuleCat.{u + 1} P.Coefficient) (𝟙 B)).map
+        (ClosedSectionCompactOrigin.constantComparison P B).hom ≫
+      (proper_identity_iso P.Coefficient B).hom.app
+        (SupportedConstantNormalization.constant P.Coefficient true B) := by
+  have h := congrArg (fun e ↦ e.hom) (proClosedIso.eq_def P (𝟙 B))
+  have hh := congrArg (fun z ↦ z ≫ (DerivedCategory.singleFunctor _ 0).map
+    ((lowerStarId (ModuleCat.{u + 1} P.Coefficient) B).hom.app
+      (SupportedConstantNormalization.constant P.Coefficient true B))) h
+  refine hh.trans ?_
+  rw [proper_comparison_eq]
+  let S := DerivedCategory.singleFunctor
+    (Sheaf (Scheme.ProEt.topology B) (ModuleCat.{u + 1} P.Coefficient)) 0
+  let L := lowerStar (ModuleCat.{u + 1} P.Coefficient) (𝟙 B)
+  exact map_iso_chain_post_hom S
+    (rightDerivedLowerShriek (ModuleCat.{u + 1} P.Coefficient) (𝟙 B))
+    L.rightDerivedFunctor L.mapDerivedCategory L
+    (rightDerivedLowerShriekIsoRightDerivedFunctorLowerStar
+      (ModuleCat.{u + 1} P.Coefficient) (𝟙 B))
+    L.rightDerivedFunctorIsoMapDerivedCategory (L.mapDerivedCategorySingleFunctor 0)
+    (lowerStarId (ModuleCat.{u + 1} P.Coefficient) B)
+    (SupportedConstantNormalization.constant P.Coefficient true B)
+    (ClosedSectionCompactOrigin.constantComparison P B)
+
+private theorem identity_pro_constant (P : PurityFiniteSetting.{u})
+    (B : Scheme.{u}) (b : B ⟶ Spec (.of P.field.k))
+    [LocallyOfFiniteType b] [QuasiCompact b] [IsSeparated b] [IsNoetherian B] :
+    ((originCompactSupportId P.Coefficient B).hom.app (originUnit P B)).hom ≫
+      (ClosedSectionCompactOrigin.constantComparison P B).hom =
+    (proClosedIso P (𝟙 B)).hom ≫
+      (DerivedCategory.singleFunctor _ 0).map
+        ((lowerStarId (ModuleCat.{u + 1} P.Coefficient) B).hom.app
+          (SupportedConstantNormalization.constant P.Coefficient true B)) := by
+  let S := DerivedCategory.singleFunctor
+    (Sheaf (Scheme.ProEt.topology B) (ModuleCat.{u + 1} P.Coefficient)) 0
+  let χ := ClosedSectionCompactOrigin.constantComparison P B
+  let d := proClosedIso P (𝟙 B)
+  let γ := supportedComparison P (𝟙 B)
+  let a := S.map
+    ((lowerStarId (ModuleCat.{u + 1} P.Coefficient) B).hom.app
+      (SupportedConstantNormalization.constant P.Coefficient true B))
+  have hs := closed_id_source P B b
+  have he := etale_closed_id P B
+  have he' : (etaleClosedIso P (𝟙 B)).inv ≫
+      (Etale.rightDerivedLowerShriekPlusId P.Coefficient B).hom.app (etaleUnit P B) =
+    (DerivedCategory.Plus.singleFunctor _ 0).map
+      ((Etale.lowerStarId (ModuleCat.{u + 1} P.Coefficient) B).hom.app
+        (SupportedConstantNormalization.constant P.Coefficient false B)) := by
+    rw [← he]
+    simp only [Iso.inv_hom_id_assoc]
+  rw [he'] at hs
+  have hh := congrArg (fun z ↦ z ≫ χ.hom) hs
+  have hγ := supported_identity_square P B
+  change γ.hom ≫ a = _ at hγ
+  change (γ.hom ≫ d.inv ≫
+      ((originCompactSupportId P.Coefficient B).hom.app (originUnit P B)).hom) ≫ χ.hom =
+    (comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) B).mapDerivedCategory.map
+      ((DerivedCategory.singleFunctor _ 0).map
+        ((Etale.lowerStarId (ModuleCat.{u + 1} P.Coefficient) B).hom.app
+          (SupportedConstantNormalization.constant P.Coefficient false B))) ≫ χ.hom at hh
+  rw [← hγ] at hh
+  have hd : d.inv ≫
+      ((originCompactSupportId P.Coefficient B).hom.app (originUnit P B)).hom ≫
+      χ.hom = a := by
+    apply (cancel_epi γ.hom).1
+    simp only [Category.assoc] at hh
+    with_unfolding_all exact hh
+  have hd' := congrArg (fun z ↦ d.hom ≫ z) hd
+  simp only [Iso.hom_inv_id_assoc] at hd'
+  exact hd'
+
+private theorem chain3_post_app_hom
+    {C D : Type*} [Category C] [Category D] {F G H I J : C ⥤ D}
+    (a : F ≅ G) (b : G ≅ H) (c : H ≅ I) (d : I ≅ J) (M : C) :
+    (a ≪≫ b ≪≫ c).hom.app M ≫ d.hom.app M =
+      (a ≪≫ b ≪≫ c ≪≫ d).hom.app M := by
+  simp only [Iso.trans_hom, NatTrans.comp_app, Category.assoc]
+
+private theorem closed_single_identity_hom (A : Type (u + 1)) [CommRing A] [Finite A]
+    (B : Scheme.{u}) [IsNoetherian B]
+    (M : Sheaf (Scheme.ProEt.topology B) (ModuleCat.{u + 1} A)) :
+    (closedSingleIso A (𝟙 B) M).hom ≫
+      (DerivedCategory.singleFunctor _ 0).map
+        ((lowerStarId (ModuleCat.{u + 1} A) B).hom.app M) =
+    (proper_identity_iso A B).hom.app M := by
+  rw [closedSingleIso.eq_def, closedSingleComparison.eq_def]
+  let S := DerivedCategory.singleFunctor
+    (Sheaf (Scheme.ProEt.topology B) (ModuleCat.{u + 1} A)) 0
+  let L := lowerStar (ModuleCat.{u + 1} A) (𝟙 B)
+  exact chain3_post_app_hom
+    (Functor.isoWhiskerLeft S (rightDerivedLowerShriekIsoRightDerivedFunctorLowerStar
+      (ModuleCat.{u + 1} A) (𝟙 B)))
+    (Functor.isoWhiskerLeft S L.rightDerivedFunctorIsoMapDerivedCategory)
+    (L.mapDerivedCategorySingleFunctor 0)
+    (Functor.isoWhiskerRight (lowerStarId (ModuleCat.{u + 1} A) B) S) M
+
+private theorem native_coordinate_identity (P : PurityFiniteSetting.{u}) (n : ℕ)
+    (B : Scheme.{u}) (b : B ⟶ Spec (.of P.field.k))
+    [LocallyOfFiniteType b] [QuasiCompact b] [IsSeparated b] [IsNoetherian B] :
+    (closedSingleIso (setting P n).Coefficient (𝟙 B) ((setting P n).constant B)).hom ≫
+      (cupSingle (setting P n) B).map
+        ((lowerStarId (ModuleCat.{u + 1} (setting P n).Coefficient) B).hom.app
+          ((setting P n).constant B)) = coordinateIdentity P n B := by
+  let Q := setting P n
+  let F := rightDerivedLowerShriek (ModuleCat.{u + 1} Q.Coefficient) (𝟙 B)
+  let S := DerivedCategory.singleFunctor
+    (Sheaf (Scheme.ProEt.topology B) (ModuleCat.{u + 1} Q.Coefficient)) 0
+  let δ := proper_identity_iso Q.Coefficient B
+  let χ := ClosedSectionCompactOrigin.constantComparison Q B
+  have hd' := identity_pro_constant Q B b
+  have hddef := pro_closed_identity_hom Q B
+  erw [hddef] at hd'
+  let κ := S.mapIso (cupConstantIso Q B)
+  let ξ := χ ≪≫ κ.symm
+  have hξ : ξ.hom ≫ κ.hom = χ.hom := by
+    change (χ.hom ≫ κ.inv) ≫ κ.hom = χ.hom
+    erw [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+  have hnat := δ.hom.naturality (cupConstantIso Q B).hom
+  change F.map κ.hom ≫
+      δ.hom.app (SupportedConstantNormalization.constant Q.Coefficient true B) =
+    δ.hom.app (Q.constant B) ≫ κ.hom at hnat
+  have hδ : F.map ξ.hom ≫ δ.hom.app (Q.constant B) =
+      ((originCompactSupportId Q.Coefficient B).hom.app (originUnit Q B)).hom ≫
+        ξ.hom := by
+    apply (cancel_mono κ.hom).1
+    rw [Category.assoc, ← hnat, ← F.map_comp_assoc]
+    erw [hξ, Category.assoc, hξ]
+    with_unfolding_all exact hd'.symm
+  let t : originUnit Q B ⟶
+      (⟨unit P n B, unit_origin P n B⟩ :
+        (DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Q.Coefficient) B).FullSubcategory) :=
+    ⟨ξ.hom⟩
+  have hn := congrArg (fun z ↦ z.hom)
+    ((originCompactSupportId Q.Coefficient B).hom.naturality t)
+  with_unfolding_all
+    change F.map ξ.hom ≫ coordinateIdentity P n B =
+      ((originCompactSupportId Q.Coefficient B).hom.app (originUnit Q B)).hom ≫ ξ.hom at hn
+  have hfinal := (cancel_epi (F.map ξ.hom)).1 (hδ.trans hn.symm)
+  have heq := closed_single_identity_hom Q.Coefficient B (Q.constant B)
+  with_unfolding_all exact heq.trans hfinal
+
+end IdentityComparison
+
+end AlgebraicGeometry.ProEtale.AffineZeroPurity
