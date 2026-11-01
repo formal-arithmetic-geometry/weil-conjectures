@@ -830,7 +830,6 @@ private noncomputable def compactificationBaseChangeMap
     (c.ofIsPullback sq).Z ⟶ c.Z :=
   pullback.fst c.g g
 
-attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint in
 end AlgebraicGeometry.ProEtale
 
 namespace AlgebraicGeometry.ProEtale

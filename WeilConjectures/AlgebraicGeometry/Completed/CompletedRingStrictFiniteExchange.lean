@@ -104,8 +104,6 @@ private theorem kflat_resolutions (T : Scheme.{u})
     CochainComplex.exists_isKFlatResolutionIndependentCoefficients
       (R := pbcAdicCompletion T d) K
   exact ⟨P, s, hP, hs⟩
-attribute [-instance] CategoryTheory.catToReflQuiver in
-attribute [-instance] CategoryTheory.catToReflQuiver in
 section
 attribute [local implicit_reducible] cbcStrictOpen Functor.mapHomologicalComplex
   catToReflQuiver

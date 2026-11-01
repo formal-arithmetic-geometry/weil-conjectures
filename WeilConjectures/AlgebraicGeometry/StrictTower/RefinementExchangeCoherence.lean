@@ -102,5 +102,4 @@ set_option backward.isDefEq.respectTransparency.types false
 attribute [local irreducible] G R J rId rComp gamma adj exchange
   towers_hasDerivedCategory
 
-set_option linter.unusedVariables false in
 end AlgebraicGeometry.ProEtale.StrictTower

@@ -115,8 +115,6 @@ private theorem stageSquare {m n : ℕ} (h : n ≤ m) :
   rw [a.generators, a.generators]
   rfl
 
-include ha in
-include ha in
 end Construction
 
 section DerivedSquare

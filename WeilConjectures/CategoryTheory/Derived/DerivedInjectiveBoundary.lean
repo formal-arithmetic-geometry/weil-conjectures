@@ -30,10 +30,6 @@ variable {C : Type u} [Category.{v} C] [Abelian C]
   {A : Type a} [Category.{w} A] [Abelian A]
   [HasDerivedCategory C] [HasDerivedCategory A] [EnoughInjectives C]
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.defeqAttrib.useBackward true in
 variable (S F G : C ⥤ A) [S.Additive] [F.Additive] [G.Additive]
   (ι : S ⟶ F) (π : F ⟶ G) (w : ι ≫ π = 0)
 
@@ -53,7 +49,4 @@ theorem exact_transport {R : ShortComplex A} (hR : R.Exact)
     simp
   exact ⟨w, ShortComplex.exact_of_iso (ShortComplex.isoMk e₁ e₂ e₃ h₁ h₂) hR⟩
 
-omit [EnoughInjectives C] in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.defeqAttrib.useBackward true in
 end CategoryTheory.Functor

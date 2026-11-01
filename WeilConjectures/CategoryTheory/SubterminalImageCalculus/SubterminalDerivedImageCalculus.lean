@@ -251,7 +251,7 @@ structure Comparisons
 
 universe e ve we t vt
 open CategoryTheory.Abelian Opposite
-attribute [local instance 20000] smallSheafify smallLocalCriterion
+attribute [local instance 20000] smallSheafify
 set_option backward.defeqAttrib.useBackward true
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
@@ -354,10 +354,6 @@ variable {A : Type a} [Category.{va} A] [Abelian A]
     F.mapHomologicalComplex (.up ℤ) ⋙ T.mapHomologicalComplex (.up ℤ))
   (hc : CompositionNormalization p.qF qT s.qF c t)
 
-omit [HasDerivedCategory A] [HasDerivedCategory B] [HasDerivedCategory D] in
-omit [HasDerivedCategory A] [HasDerivedCategory B] [HasDerivedCategory D] in
-include hc in
-include hc in
 end
 
 end LiftOverlap

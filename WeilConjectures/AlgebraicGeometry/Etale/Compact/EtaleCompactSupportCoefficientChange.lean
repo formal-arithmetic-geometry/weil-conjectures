@@ -166,10 +166,6 @@ def compactSupportCoefficientComparisonPlus
     (((rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} A) c).map M.unit ≫
       (compactSupportCoefficientRestrictionPlus φ c).hom.app M.obj).hom))
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 end AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.ProEtale
@@ -177,6 +173,4 @@ namespace AlgebraicGeometry.ProEtale
 private local instance fixedSmall (T : Scheme.{u}) : EssentiallySmall.{u + 1} T.ProEt :=
   essentiallySmallSelf.{0, u, u + 1} _
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 end AlgebraicGeometry.ProEtale

@@ -70,8 +70,6 @@ private theorem cancelMappedInverse
   rw [eq_of_heq h]
   simp only [Category.assoc, ← F.map_comp, i.inv_hom_id, F.map_id, Category.comp_id]
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 namespace AlgebraicGeometry.Scheme
 
 namespace QbarCoefficientSmoothBaseChange
@@ -382,8 +380,6 @@ structure Presentation where
   alpha : StageSystem.Morphism.Hom F G
   alpha_eq : ∀ E, HEq (alpha.τ E) (smoothExchangeStage l Ω E sq)
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 namespace Presentation
 variable (P : Presentation l Ω sq)
 
@@ -410,7 +406,6 @@ attribute [local irreducible] sbcRationalLeft sbcRationalRight sbcRationalExchan
 attribute [local irreducible] ScalarLocalization.between ScalarLocalization.betweenNat
 attribute [local irreducible] sbcPush sbcPull sbcExchange
 
-omit [IsNoetherian T] dT iT in
 end Presentation
 end Descent
 

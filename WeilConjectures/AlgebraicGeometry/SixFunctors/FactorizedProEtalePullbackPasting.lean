@@ -192,7 +192,6 @@ variable {C D E B : Type*} [Category C] [Category D] [Category E] [Category B]
   [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
   [HasDerivedCategory B]
 
-omit [HasDerivedCategory D] [HasDerivedCategory E] in
 end Localization
 
 private theorem square_localization

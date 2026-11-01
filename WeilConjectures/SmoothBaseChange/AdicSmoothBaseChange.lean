@@ -56,5 +56,4 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-set_option backward.isDefEq.respectTransparency false in
 end WeilConjectures

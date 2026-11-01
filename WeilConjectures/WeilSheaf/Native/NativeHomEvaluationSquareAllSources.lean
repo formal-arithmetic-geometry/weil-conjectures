@@ -110,7 +110,7 @@ private noncomputable def homIso
     (P I : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ) :
     (UC).obj (CochainComplex.bifunctorHomObj (HW) P I) ≅
       CochainComplex.bifunctorHomObj (HO) ((UC).obj P) ((UC).obj I) :=
-  NativeTransport.complexIso (U) (HW) (HO) homObjIso homObjIso_right homObjIso_left P I
+  PrecompositionTransport.complexIso (U) (HW) (HO) homObjIso homObjIso_right homObjIso_left P I
 
 private theorem homIso_projection
     (P I : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ)
@@ -118,9 +118,9 @@ private theorem homIso_projection
     (homIso P I).hom.f n ≫
         CochainComplex.bifunctorHomπ (HO) ((UC).obj P) ((UC).obj I) n p q hpq =
       (U).map (CochainComplex.bifunctorHomπ (HW) P I n p q hpq) := by
-  change (NativeTransport.component (U) (HW) (HO) homObjIso P I n).hom ≫ _ = _
+  change (PrecompositionTransport.component (U) (HW) (HO) homObjIso P I n).hom ≫ _ = _
   simpa only [homObjIso, Iso.refl_hom, Category.comp_id] using
-    NativeTransport.component_π (U) (HW) (HO) homObjIso P I n p q hpq
+    PrecompositionTransport.component_π (U) (HW) (HO) homObjIso P I n p q hpq
 
 private theorem homIso_left
     {P J I : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ} (a : P ⟶ J) :
@@ -128,7 +128,7 @@ private theorem homIso_left
         (homIso P I).hom =
       (homIso J I).hom ≫ CochainComplex.bifunctorHomMapLeft
         (H := HO) (Y := (UC).obj I) ((UC).map a) :=
-  NativeTransport.complexIso_left (U) (HW) (HO) homObjIso homObjIso_right homObjIso_left a
+  PrecompositionTransport.complexIso_left (U) (HW) (HO) homObjIso homObjIso_right homObjIso_left a
 
 attribute [local irreducible] homIso
 

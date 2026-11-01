@@ -62,7 +62,6 @@ theorem comparison_eq (X Y : {X : Scheme.{u} // A X}) (f : X.val ⟶ Y.val)
   exact (compactification_refinement_coherence F G).2.2.2.1 X Y f e d c
     _ _ _ he hd hc _ _ _ _ _ _ _ _ _
 
-include G in
 section AssociativityTransfer
 variable {C₁ C₂ C₃ C₄ : Type*} [Category C₁] [Category C₂] [Category C₃] [Category C₄]
 

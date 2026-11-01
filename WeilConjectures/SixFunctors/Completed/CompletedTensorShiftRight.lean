@@ -739,5 +739,4 @@ attribute [local irreducible] goodOutputShiftIso goodInputShiftIso
   integralOperationsGoodComplex completedTensorShiftOneSub completedTensorShiftProductIso
   completedTensorShiftRoosIso integralOperationsRoos integralOperationsRoosMap DerivedCategory.Q
 
-set_option backward.isDefEq.respectTransparency true in
 end WeilConjectures

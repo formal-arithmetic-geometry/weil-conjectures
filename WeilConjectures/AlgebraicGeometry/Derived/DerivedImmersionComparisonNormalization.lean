@@ -160,7 +160,6 @@ private theorem exact_mate
     (Functor.exactSquare_fac d) (NatTrans.mapHomologicalComplex b.hom (.up ℤ)) hι K
   exact hc.trans (Functor.exactSquare_fac b K).symm
 
-open SheafOfModules.OpenTensorNormalization in
 end CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale

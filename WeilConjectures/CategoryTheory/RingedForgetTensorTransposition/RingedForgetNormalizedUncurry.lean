@@ -130,6 +130,4 @@ attribute [local irreducible] homComplexFunctor homComplexπ derivedInternalHomO
   coefficientHomResolution coefficientHomResolutionIso coefficientHomResolutionInverse
   coefficientTotalTensor coefficientTensorGenerator CoefficientTensorModels.iso
 
-omit [∀ I : Type (max c v r), PreservesLimitsOfShape (Discrete I) U] in
-set_option linter.unusedSectionVars false in
 end CategoryTheory.RingedForgetTensorTransposition

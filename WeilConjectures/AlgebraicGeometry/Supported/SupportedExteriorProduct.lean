@@ -656,7 +656,6 @@ section CoefficientTensorProof
 
 attribute [local instance] supportedHasSheafify supportedHasWeakSheafify
 
-open scoped ZeroObject in
 end CoefficientTensorProof
 
 section ComplexTensorProof

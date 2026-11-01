@@ -62,7 +62,6 @@ variable {A : Type a} [Category.{x} A] [Preadditive A]
   {B : Type b} [Category.{y} B] [Preadditive B]
   (F G : A ⥤ B) [F.Additive] [G.Additive]
 
-set_option linter.unusedSectionVars false in
 end CategoryTheory.Idempotents
 
 attribute [local irreducible] pbcAmbientCompleteRawSystem

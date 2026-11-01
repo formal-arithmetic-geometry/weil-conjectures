@@ -141,5 +141,4 @@ theorem native_weil_tensor_ringed_kflat_resolution
         (Λ.resolutionNatTrans.app (e.functor.obj K))))
     infer_instance
 
-omit [Fact (ringChar k₀ ≠ l)] in
 end AlgebraicGeometry.ProEtaleWeilSheaf

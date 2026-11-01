@@ -540,7 +540,7 @@ def restrictedMap {N N' : CochainComplex (coefficientSequenceModules l E W) ℤ}
     (coefficientSequenceDerivedRestriction l E W).map f ≫
       (restrictionFactors l E W).hom.app N'
 
-attribute [local irreducible] replacementIso restrictedMap
+attribute [local irreducible] restrictedMap
 
 /-- The composite total limit has the standard coherent cochain shifts.
 Source: Stacks 070K (blueprint: lem-pur-sequence-kinjective-comparison-shifts). -/
@@ -549,7 +549,7 @@ instance totalLimitCommShift : (coefficientSequenceLimit l E W).CommShift ℤ :=
     Functor.rightDerivedFunctor
       (lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤ scalarReductionSource l E W)).CommShift ℤ)
 
-attribute [local irreducible] NormalizationFor ArbitraryReplacementFor
+attribute [local irreducible] NormalizationFor
   DerivedNaturalityFor ResolutionCocycleFor SystemResolutionCocycleFor
 
 /-- The normalization of the natural comparison at every K-injective system.

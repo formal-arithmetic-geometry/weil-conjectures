@@ -17,6 +17,7 @@ import WeilConjectures.CategoryTheory.DerivedModuleDirectSums
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ClosedImmersion
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
 import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Coproducts
+import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.CohomologicalDimension
 import Mathlib.CategoryTheory.Triangulated.Opposite.Pretriangulated
 import Mathlib.CategoryTheory.Limits.Shapes.Opposites.Products
 

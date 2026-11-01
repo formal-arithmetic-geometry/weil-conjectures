@@ -31,6 +31,4 @@ attribute [local implicit_reducible] Functor.mapHomologicalComplex
 
 open AlgebraicGeometry.ProEtale
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.defeqAttrib.useBackward true in
 end WeilConjectures.PurityFiniteSetting.RankOne

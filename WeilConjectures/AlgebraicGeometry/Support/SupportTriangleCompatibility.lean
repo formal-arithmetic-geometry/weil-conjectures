@@ -49,5 +49,4 @@ variable {X Z U : Scheme.{u}} (s : Z ⟶ X) (j : U ⟶ X)
   [IsClosedImmersion s] [IsOpenImmersion j] [QuasiCompact j]
   (hPair : IsCompl (Set.range s) (Set.range j))
 
-set_option linter.unusedSectionVars false in
 end AlgebraicGeometry.ProEtale

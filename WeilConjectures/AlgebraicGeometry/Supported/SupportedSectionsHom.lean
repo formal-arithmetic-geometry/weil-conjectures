@@ -128,8 +128,4 @@ private theorem constantHomEquiv_apply
       ((toSheafify J ((Functor.const Cᵒᵖ).obj (ModuleCat.of R R))).app (op T) (1 : R)) := by
   rfl
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end AlgebraicGeometry.ProEtale

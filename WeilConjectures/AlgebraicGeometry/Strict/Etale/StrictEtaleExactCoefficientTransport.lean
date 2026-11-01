@@ -189,7 +189,6 @@ private def scalarUnit (n : ℕ) :
     ext V x
     exact congrArg (fun k ↦ k.val.app V x) h
 
-set_option maxRecDepth 10000 in
 end ScalarOrdinary
 
 end AlgebraicGeometry

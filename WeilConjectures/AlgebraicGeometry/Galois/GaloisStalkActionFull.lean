@@ -25,7 +25,4 @@ open CategoryTheory Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-set_option linter.unusedVariables false in
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
 end AlgebraicGeometry.Scheme

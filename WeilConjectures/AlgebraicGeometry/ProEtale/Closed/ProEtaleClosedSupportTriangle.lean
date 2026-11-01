@@ -74,30 +74,11 @@ open Opposite
 
 universe uC vC
 
-set_option backward.isDefEq.respectTransparency false in
-attribute [local instance] finiteCoefficientRestriction_isEquivalence
-
-attribute [local instance] finiteCoefficientRestriction_additive
-
 variable {T Z U : Scheme.{u}} (i : Z ⟶ T) [IsClosedImmersion i]
   (j : U ⟶ T) [IsOpenImmersion j] [QuasiCompact j]
   (hij : IsCompl (Set.range i.base) (Set.range j.base))
   (A : Type (u + 1)) [Ring A] [Finite A] [TopologicalSpace A] [DiscreteTopology A]
 
-include hij in
-include hij in
-omit [IsClosedImmersion i] [QuasiCompact j] in
-include hij in
-omit [IsOpenImmersion j] in
-attribute [local instance] finiteModulesGroth
-
-attribute [local instance] finitePull_limits
-
-attribute [local instance] finitePull_colimits
-
-attribute [local instance] finitePush_limits
-
-include hij in
 end
 
 end AlgebraicGeometry.ProEtale

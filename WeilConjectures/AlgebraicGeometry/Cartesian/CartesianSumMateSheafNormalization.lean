@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.BaseChange
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FiniteEtale
 import WeilConjectures.SixFunctors.BaseChange.Etale
+import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.DegreeZero
 
 /-! # The sheaf sum mate in the common direct image
 

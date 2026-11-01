@@ -29,5 +29,4 @@ open CategoryTheory Opposite
 namespace AlgebraicGeometry.Scheme
 
 -- Keep the quantified proof-binder names in the existing statement.
-set_option linter.unusedVariables false in
 end AlgebraicGeometry.Scheme

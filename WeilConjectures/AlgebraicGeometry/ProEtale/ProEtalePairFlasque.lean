@@ -235,6 +235,4 @@ theorem finiteSupportedClosedComparison_isIso (Λ : Type (u + 1))
     isIso_upperStarLowerStarAdjunction_unit_app_of_isCompl s j hPair _ (hz M)
   exact NatIso.isIso_of_isIso_app _
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 end AlgebraicGeometry.ProEtale

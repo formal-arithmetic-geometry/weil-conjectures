@@ -28,5 +28,4 @@ namespace CategoryTheory.ScalarObject
 variable (R : Type r) [Ring R] (G : Type g) [Group G]
   [TopologicalSpace G] [IsTopologicalGroup G]
 
-omit [TopologicalSpace G] [IsTopologicalGroup G] in
 end CategoryTheory.ScalarObject

@@ -103,9 +103,7 @@ omit [EnoughInjectives A] [EnoughInjectives B] [HasDerivedCategory AddCommGrpCat
 omit [EnoughInjectives A] [EnoughInjectives B] [HasDerivedCategory AddCommGrpCat] in
 omit [EnoughInjectives A] [EnoughInjectives B]
   [HasDerivedCategory A] [HasDerivedCategory B] [HasDerivedCategory AddCommGrpCat] in
-set_option linter.unusedSectionVars false in
 variable {C : Type u₃} [Category.{v} C] [Abelian C] [EnoughInjectives C]
   [HasDerivedCategory.{w₃} C]
 
-set_option linter.unusedVariables false in
 end CategoryTheory.Functor

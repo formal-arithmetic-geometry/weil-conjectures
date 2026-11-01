@@ -111,7 +111,7 @@ private noncomputable def moduleRho {X Y : Scheme.{u}} (f : X ⟶ Y) (A : Type u
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency false in
-attribute [local irreducible] relativeFrobeniusIso relativeFrobeniusMap
+attribute [local irreducible] relativeFrobeniusMap
 
 set_option backward.isDefEq.respectTransparency false in
 private theorem rho_trivialization (A : Type u) [CommRing A]
@@ -168,7 +168,7 @@ private noncomputable def constantPullbackIso (A : Type u) [CommRing A]
   (conjugateIsoEquiv Adjunction.id (proEtaleConstantRingAdjunction A f)).symm
     (constantPushforwardIso A X f r).symm
 
-attribute [local irreducible] constantPushforwardIso constantPullbackIso constantPullbackComp
+attribute [local irreducible] constantPushforwardIso constantPullbackIso
 
 attribute [local irreducible] iterateFrobenius
 
@@ -178,13 +178,8 @@ set_option backward.isDefEq.respectTransparency false in
 attribute [local irreducible] conjugateIsoEquiv conjugateEquiv
 
 set_option backward.isDefEq.respectTransparency false in
-attribute [local irreducible] rightMate rightIsoMate
+attribute [local irreducible] rightIsoMate
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 section RingedProduct
 
 universe uC vC uR vM
@@ -195,8 +190,6 @@ variable (φF : R ⟶ (F.sheafPushforwardContinuous RingCat J J).obj R)
 variable (φG : R ⟶ (G.sheafPushforwardContinuous RingCat J J).obj R)
 variable (φH : R ⟶ (H.sheafPushforwardContinuous RingCat J J).obj R)
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 end RingedProduct
 
 -- Forget scalars before comparing the composite direct-image normalization.
@@ -205,5 +198,4 @@ attribute [local irreducible] Functor.mapDerivedCategory
   Functor.mapDerivedCategoryNatIso Functor.mapDerivedCategoryCompIso
   Functor.mapDerivedCategoryIdIso
 
-set_option backward.isDefEq.respectTransparency false in
 end AlgebraicGeometry.Scheme

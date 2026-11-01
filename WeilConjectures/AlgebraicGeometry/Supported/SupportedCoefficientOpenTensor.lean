@@ -120,8 +120,6 @@ end
 namespace AlgebraicGeometry.Etale
 end AlgebraicGeometry.Etale
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 namespace AlgebraicGeometry.Etale
 private theorem square_inv_eq
     (C : Type v) [Category.{u + 1} C] [Abelian C]
@@ -216,10 +214,6 @@ omit [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory D'] [HasD
     [PreservesFiniteColimits F'] [PreservesFiniteLimits a] [PreservesFiniteColimits a]
     [PreservesFiniteLimits p] [PreservesFiniteColimits p] [PreservesFiniteLimits q]
     [PreservesFiniteColimits q] [PreservesFiniteLimits h] [PreservesFiniteColimits h] in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end
 
 section
@@ -702,8 +696,6 @@ variable (C : Type v) [Category.{u + 1} C] [Abelian C]
   [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]
   [SymmetricCategory C] [MonoidalClosed C] [Abelian.HasFunctorialFlatResolution C]
     [UpperStarPreservesFlat C]
-omit [UpperStarPreservesFlat C] in
-omit [UpperStarPreservesFlat C] in
 end AlgebraicGeometry.Etale
 
 end

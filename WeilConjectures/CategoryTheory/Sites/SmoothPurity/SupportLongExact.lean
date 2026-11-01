@@ -190,8 +190,6 @@ omit [HasSheafify J A] [EnoughInjectives (Sheaf J A)]
   [HasDerivedCategory.{d} (Sheaf J A)] [HasDerivedCategory.{e} A] in
 omit [HasSheafify J A] [EnoughInjectives (Sheaf J A)]
   [HasDerivedCategory.{d} (Sheaf J A)] [HasDerivedCategory.{e} A] in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.defeqAttrib.useBackward true in
 end CategoryTheory.Sheaf
 
 namespace CategoryTheory

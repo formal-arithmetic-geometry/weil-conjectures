@@ -51,8 +51,8 @@ private theorem nativeHomTransport_right
     {K I I' : CochainComplex C ℤ} (a : I ⟶ I') :
     (U.mapHomologicalComplex (.up ℤ)).map
         (CochainComplex.bifunctorHomMapRight (H := HC) (K := K) a) ≫
-      (NativeTransport.complexIso U HC HD e er el K I').hom =
-    (NativeTransport.complexIso U HC HD e er el K I).hom ≫
+      (PrecompositionTransport.complexIso U HC HD e er el K I').hom =
+    (PrecompositionTransport.complexIso U HC HD e er el K I).hom ≫
       CochainComplex.bifunctorHomMapRight (H := HD)
         (K := (U.mapHomologicalComplex (.up ℤ)).obj K)
         ((U.mapHomologicalComplex (.up ℤ)).map a) := by
@@ -62,13 +62,13 @@ private theorem nativeHomTransport_right
   intro p q hpq
   simp only [HomologicalComplex.comp_f, Category.assoc]
   change U.map ((CochainComplex.bifunctorHomMapRight (H := HC) (K := K) a).f n) ≫
-      (NativeTransport.component U HC HD e K I' n).hom ≫ _ =
-    (NativeTransport.component U HC HD e K I n).hom ≫
+      (PrecompositionTransport.component U HC HD e K I' n).hom ≫ _ =
+    (PrecompositionTransport.component U HC HD e K I n).hom ≫
       (CochainComplex.bifunctorHomMapRight (H := HD)
         (K := (U.mapHomologicalComplex (.up ℤ)).obj K)
         ((U.mapHomologicalComplex (.up ℤ)).map a)).f n ≫ _
-  rw [NativeTransport.component_π, CochainComplex.bifunctorHomMapRight_f_π,
-    NativeTransport.component_π_assoc]
+  rw [PrecompositionTransport.component_π, CochainComplex.bifunctorHomMapRight_f_π,
+    PrecompositionTransport.component_π_assoc]
   rw [← CategoryTheory.Functor.map_comp_assoc,
     CochainComplex.bifunctorHomMapRight_f_π, CategoryTheory.Functor.map_comp,
     Category.assoc, er]
@@ -176,7 +176,7 @@ variable (HC : Aᵒᵖ ⥤ A ⥤ A) [HC.Additive] [∀ M, (HC.obj M).Additive]
 
 private noncomputable def complexIso (P I : CochainComplex A ℤ) :
     CochainComplex.bifunctorHomObj HC P I ≅ CochainComplex.internalHomObj P I :=
-  NativeTransport.complexIso (𝟭 _) HC MonoidalClosed.internalHom
+  PrecompositionTransport.complexIso (𝟭 _) HC MonoidalClosed.internalHom
     (fun M N ↦ (e M).app N)
     (fun M _N _N' f ↦ (e M).hom.naturality f)
     (fun _M _M' N f ↦ NatTrans.congr_app (el f) N) P I

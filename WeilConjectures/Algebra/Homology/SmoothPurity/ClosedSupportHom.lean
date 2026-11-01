@@ -124,10 +124,7 @@ variable {C : Type u} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{w} C]
   {D : Type u'} [Category.{v'} D] [Abelian D]
   [HasDerivedCategory C] [HasDerivedCategory D]
 
-set_option backward.isDefEq.respectTransparency false in
-attribute [local irreducible] closedSupport_resolutionIso
 
-set_option backward.isDefEq.respectTransparency false in
 end CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
@@ -171,5 +168,4 @@ noncomputable def closedSupportSectionsPullback (A : Type (u + 1)) [CommRing A]
   app J := globalSectionsUpperStarMap (ModuleCat.{u + 1} A) v J
   naturality _ _ f := closedSupportHom_globalSections_natural v f
 
-set_option backward.isDefEq.respectTransparency false in
 end AlgebraicGeometry.Etale

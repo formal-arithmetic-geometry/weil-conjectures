@@ -29,5 +29,4 @@ open CategoryTheory Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-set_option linter.unusedVariables false in
 end AlgebraicGeometry.Scheme

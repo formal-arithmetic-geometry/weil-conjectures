@@ -63,5 +63,4 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency false in
 set_option maxHeartbeats 800000 in
 -- Normalizing the chosen compositors elaborates dependent derived-functor transports.
-set_option backward.isDefEq.respectTransparency false in
 end WeilConjectures.PurityFiniteSetting

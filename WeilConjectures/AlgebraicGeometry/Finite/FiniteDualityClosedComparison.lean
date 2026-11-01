@@ -315,6 +315,4 @@ The closed finite-duality comparison.  The hypotheses on the structure morphisms
 the finite-type, separated finite-field setting of the source; the bounded-below lift is
 the first clause of the conclusion, and `δ` is the named canonical direct-image comparison.
 -/
-set_option backward.isDefEq.respectTransparency false in
-set_option linter.unusedVariables false in
 end AlgebraicGeometry

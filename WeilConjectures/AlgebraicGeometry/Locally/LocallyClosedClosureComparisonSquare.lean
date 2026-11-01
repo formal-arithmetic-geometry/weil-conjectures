@@ -374,7 +374,4 @@ private theorem closure_pullback_comp (A : Type (u + 1)) [CommRing A] [Finite A]
   erw [CategoryTheory.Functor.map_id, Category.comp_id]
 
 -- Pasting two restriction-normalized comparison squares preserves normalization.
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 end AlgebraicGeometry.ProEtale

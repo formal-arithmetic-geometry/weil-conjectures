@@ -30,7 +30,4 @@ open CategoryTheory Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-attribute [local instance] IsSepClosure.sep_closed in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.defeqAttrib.useBackward true in
 end AlgebraicGeometry.Scheme

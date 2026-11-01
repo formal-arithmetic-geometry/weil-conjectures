@@ -74,9 +74,6 @@ end GenericModelComparisons
 section ExplicitTriangle
 variable {C : Type u} [Category C] [Abelian C] [HasDerivedCategory C]
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.defeqAttrib.useBackward true in
 end ExplicitTriangle
 
 section ModelComparison
@@ -85,19 +82,11 @@ variable {C : Type u} {D : Type v} [Category C] [Category D] [Abelian C] [Abelia
   [HasDerivedCategory C] [HasDerivedCategory D] [EnoughInjectives C]
   [CategoryTheory.Abelian.HasKInjectiveResolutions C]
 
-omit [CategoryTheory.Abelian.HasKInjectiveResolutions C] in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.defeqAttrib.useBackward true in
 section Counit
 variable [EnoughInjectives D] [CategoryTheory.Abelian.HasKInjectiveResolutions D]
   (L : C ⥤ D) (R : D ⥤ C) [L.Additive] [R.Additive]
   [PreservesFiniteLimits L] [PreservesFiniteColimits L] (adj : L ⊣ R)
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.defeqAttrib.useBackward true in
-omit [EnoughInjectives C] [CategoryTheory.Abelian.HasKInjectiveResolutions C] in
 end Counit
 
 section Unit
@@ -105,10 +94,6 @@ variable [EnoughInjectives D] [CategoryTheory.Abelian.HasKInjectiveResolutions D
   (L : C ⥤ D) (R : D ⥤ C) [L.Additive] [R.Additive]
   [PreservesFiniteLimits L] [PreservesFiniteColimits L] (adj : L ⊣ R)
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.defeqAttrib.useBackward true in
-omit [EnoughInjectives C] [CategoryTheory.Abelian.HasKInjectiveResolutions C] in
 end Unit
 
 section NormalizedComparisons
@@ -116,14 +101,6 @@ variable [EnoughInjectives D] [CategoryTheory.Abelian.HasKInjectiveResolutions D
   (L : C ⥤ D) (R : D ⥤ C) [L.Additive] [R.Additive]
   [PreservesFiniteLimits L] [PreservesFiniteColimits L] (adj : L ⊣ R)
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.defeqAttrib.useBackward true in
-omit [EnoughInjectives C] [CategoryTheory.Abelian.HasKInjectiveResolutions C] in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.defeqAttrib.useBackward true in
-omit [EnoughInjectives C] [CategoryTheory.Abelian.HasKInjectiveResolutions C] in
 end NormalizedComparisons
 
 end ModelComparison
@@ -317,7 +294,6 @@ attribute [local irreducible] supportDerivedAdjunction
 
 universe v w
 
-set_option linter.unusedSectionVars false in
 end AlgebraicGeometry.ProEtale
 
 section EtaleComparison
@@ -326,12 +302,6 @@ section GenericTriangle
 variable {C : Type u} {D : Type v} [Category C] [Category D] [Abelian C] [Abelian D]
   [HasDerivedCategory C] [HasDerivedCategory D]
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.defeqAttrib.useBackward true in
 end GenericTriangle
 
 open AlgebraicGeometry AlgebraicGeometry.ProEtale
@@ -369,17 +339,12 @@ omit [Finite Λ] [Etale v] [Etale vU] in
 attribute [local irreducible] finiteSupportedSections finiteClosedUpperShriek
   supportModelInclusion
 
-omit [Finite Λ] in
 variable {Z Z' : Scheme.{u}} (s : Z ⟶ X) (vZ : Z' ⟶ Z) (s' : Z' ⟶ X')
   [IsClosedImmersion s] [IsOpenImmersion j] [QuasiCompact j]
   [IsClosedImmersion s'] [IsOpenImmersion j'] [QuasiCompact j']
   (hPair : IsCompl (Set.range s) (Set.range j))
   (hPair' : IsCompl (Set.range s') (Set.range j'))
 
-omit [Finite Λ] in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.defeqAttrib.useBackward true in
 end AlgebraicGeometry.ProEtale
 
 end EtaleComparison
@@ -392,7 +357,4 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 attribute [local irreducible] upperStar lowerStar upperStarLowerStarAdjunction
   finiteClosedUpperShriek supportShriekModelComparison supportFirstModelComparison
   supportThirdModelComparison supportSheafAdjunction supportDerivedAdjunction
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.defeqAttrib.useBackward true in
 end AlgebraicGeometry.ProEtale

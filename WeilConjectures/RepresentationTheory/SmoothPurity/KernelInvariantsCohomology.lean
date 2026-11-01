@@ -31,16 +31,6 @@ variable {A : Type v} [Ring A]
 variable {G : Type u} [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
 variable {B : Type z} [Group B] [TopologicalSpace B] [IsTopologicalGroup B]
 
-omit [TopologicalSpace B] [IsTopologicalGroup B] in
-attribute [local irreducible] kernelFixedSubmodule
-
-omit [TopologicalSpace B] [IsTopologicalGroup B] in
-omit [TopologicalSpace B] [IsTopologicalGroup B] in
-attribute [local irreducible] kernelFixedRepresentation
-
-attribute [local irreducible] discreteInflationAdjunction
-
-omit [IsTopologicalGroup B] in
 section Exactness
 set_option linter.style.haveILetI false
 variable {B₀ : Type} [Group B₀] [TopologicalSpace B₀] [IsTopologicalGroup B₀]
@@ -49,5 +39,4 @@ variable [CompactSpace B₀] [T2Space B₀] [TotallyDisconnectedSpace B₀]
 
 end Exactness
 
-set_option linter.style.haveILetI false in
 end Rep
