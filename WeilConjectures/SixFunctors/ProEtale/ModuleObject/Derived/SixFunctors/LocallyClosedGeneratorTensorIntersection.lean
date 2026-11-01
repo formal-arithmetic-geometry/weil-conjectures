@@ -488,7 +488,8 @@ private theorem moduleClosedSupportedUnit
     IsIso ((upperStarLowerStarAdjunction Λ i).unit.app N) := by
   have hzero : IsZero ((ProEtale.upperStar Ab.{u + 1} j).obj N.X) :=
     ((Mod.forget _).map_isZero hj).of_iso (upperStarObjXIso Λ j N).symm
-  exact moduleUnitOfAbelian Λ i N ((ProEtale.abelian_closed_support_counit_and_unit i j hij).2 N.X hzero)
+  exact moduleUnitOfAbelian Λ i N
+    ((ProEtale.abelian_closed_support_counit_and_unit i j hij).2 N.X hzero)
 
 private instance generatorExtension_additive
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -822,7 +823,7 @@ private theorem lisse_flat
   obtain ⟨U, hU⟩ := hP
   have hraw := ProEtale.condensed_locally_free_tensor_preservesFiniteLimits
     (condensedRingObj Λ W) P
-    ⟨U, fun k ↦ (freeAt_iff_standard Λ (U.f k) P).mpr (hU k)⟩
+    ((isLocallyFree_iff P).2 ⟨U, hU⟩)
   apply (ObjectProperty.flat_iff_preservesFiniteLimits P).mpr
   exact preservesFiniteLimits_of_natIso
     (Mod.ResidueOrdinary.relativeTensorRightIso P ≪≫
