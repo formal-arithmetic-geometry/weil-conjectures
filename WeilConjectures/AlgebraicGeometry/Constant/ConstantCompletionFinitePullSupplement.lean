@@ -639,13 +639,9 @@ variable (V : Sheaf J' (Type u) ⥤ Sheaf J (Type u)) (adj : L ⊣ V)
 variable [hL : PreservesFiniteLimits L]
 attribute [local irreducible] derivedPull pull change
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 section
 attribute [local irreducible] dres
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end
 
 variable {C'' : Type u} [SmallCategory C''] {J'' : GrothendieckTopology C''}

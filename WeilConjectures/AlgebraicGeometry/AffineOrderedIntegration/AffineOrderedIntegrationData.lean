@@ -581,6 +581,14 @@ import WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion
 import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
 import WeilConjectures.ConstructibleSheaf.Monoidal
 import WeilConjectures.ConstructibleSheaf.SpecializationCriterion
+public import WeilConjectures.ProperBaseChange.GeometricModuleConstruction
+public import WeilConjectures.ProperBaseChange.RingedTopoiDerivedPullback
+public import WeilConjectures.ProperBaseChange.RingedToposDerivedPushforwardComposition
+public import WeilConjectures.SmoothPurity.EtaleFiniteTwistPullbackRest
+public import WeilConjectures.SmoothPurity.FiniteEtaleTateLinePullback
+public import WeilConjectures.SmoothPurity.FiniteP1ChernMapBaseChange
+public import WeilConjectures.SmoothPurity.OrdinaryFiniteTwistTransportUniqueness
+public import WeilConjectures.SmoothPurity.SupportedDerivedUnitForget
 
 /-! # Ordered affine integration data
 
@@ -786,6 +794,18 @@ private theorem flat_tensor_shift_plus
       (((MonoidalCategory.tensorRight K).commShiftIso (2 : ℤ)).app S).symm hs
   exact DerivedCategory.TStructure.t.plus.prop_of_iso (β_ _ _) hs'
 
+private theorem tensor_plus_of_tor
+    (B : Type v) [Category.{u + 1} B] [Abelian B] [IsGrothendieckAbelian B]
+    [MonoidalCategory B] [MonoidalPreadditive B] [SymmetricCategory B]
+    [MonoidalClosed B] [Abelian.HasFunctorialFlatResolution B]
+    (X : Scheme.{u}) (K W : DerivedCategory (Sheaf X.smallEtaleTopology B))
+    {a b : ℤ} (ht : Etale.DerivedCategory.torAmplitudeIn B X a b K)
+    (hW : DerivedCategory.TStructure.t.plus W) :
+    DerivedCategory.TStructure.t.plus (((Etale.derivedTensor B X).obj K).obj W) := by
+  obtain ⟨c, hc⟩ := hW
+  have : W.IsGE c := hc
+  exact ⟨a + c, DerivedCategory.isGE_tensor_of_torAmplitudeIn ht W c⟩
+
 private theorem flat_unit (B : Type*) [Category B] [Abelian B]
     [MonoidalCategory B] [MonoidalPreadditive B] [BraidedCategory B] :
     ObjectProperty.flat (𝟙_ B) :=
@@ -973,6 +993,48 @@ def sourceComparison (P : WeilConjectures.PurityFiniteSetting.{u})
         (coefficient P Y d) K :=
   (sourceComparison_existsUnique P Y K d).exists.choose
 
+private theorem tensorSource_origin (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) (K : C A Y)
+    (Ke : Etale.DerivedCategoryModule A Y) (W : Etale.DerivedCategoryModule A X)
+    (hp : etaleFiniteTor A Y Ke)
+    (hW : DerivedCategory.TStructure.t.plus W)
+    (eK : (comparison A Y).obj Ke ≅ K) :
+    DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} A) X
+      (AffineLinePurity.projectionSourceObject A f ((comparison A X).obj W) K) := by
+  obtain ⟨a, b, ht⟩ :=
+    (Etale.constructibleFiniteTor_leftDerivedUpperStar (ModuleCat.{u + 1} A) f hp).2
+  have hs : DerivedCategory.TStructure.t.plus
+      (AffineLinePurity.ordinarySourceObject A f W Ke) := by
+    unfold AffineLinePurity.ordinarySourceObject
+    exact tensor_plus_of_tor (ModuleCat.{u + 1} A) X _ W ht hW
+  have e := AffineLinePurity.realizedTensorComparison A f K Ke W eK
+  unfold AffineLinePurity.proSourceObject at e
+  exact (DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} A) X).prop_of_iso
+    e (DerivedCategory.plusEtaleOrigin_mapDerivedCategory_obj hs)
+
+/-- The source has a bounded-below etale origin, which is an applicability conclusion.
+Source: coordinate finite-Tor input and lem-sf-pullback-tor-amplitude
+(blueprint: lem-pur-affine-ordered-integration-transposes).
+Proof: use the ordinary source Ke pulled back along p_d and tensor it with the explicit
+finite Tate coefficient. Its lower bound follows from the finite Tor interval of Ke.
+The canonical pullback/tensor comparison and eK identify its realization with the stated
+source. Exact comparison preserves the lower bound and gives the etale-origin witness. -/
+theorem source_origin (P : WeilConjectures.PurityFiniteSetting.{u})
+    (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of P.field.k))
+    [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY]
+    (K : Plus (AffineLinePurity.Ring P) Y) (Ke : Etale.DerivedCategoryModule
+      (AffineLinePurity.Ring P) Y)
+    (hKe : etaleFiniteTor (AffineLinePurity.Ring P) Y Ke)
+    (eK : (comparison (AffineLinePurity.Ring P) Y).obj Ke ≅ K.obj) (d : ℕ) :
+    DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} (AffineLinePurity.Ring P))
+      (iteratedAffineLine Y d)
+      (AffineLinePurity.projectionSourceObject (AffineLinePurity.Ring P) (iteratedAffineLineProj Y
+        d)
+        (coefficient P Y d) K.obj) := by
+  exact tensorSource_origin (AffineLinePurity.Ring P) (iteratedAffineLineProj Y d)
+    K.obj Ke (etaleCoefficient P Y d)
+    hKe (coefficient_plus_on_base P Y aY d) eK
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 
@@ -1141,6 +1203,84 @@ def augmentation (P : WeilConjectures.PurityFiniteSetting.{u})
   projectionTensorTrace (AffineLinePurity.Ring P) (compactification Y d) (coefficient P Y d) K.obj
     (integration P Y aY d) (projection_isIso P Y aY K Ke hKe eK d)
 
+/-- The specified exceptional transpose with the standing compactification made explicit.
+Source: restricted exceptional Hom correspondence
+(blueprint: lem-pur-affine-ordered-integration-transposes). -/
+def standingTranspose (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
+    [QuasiCompact f] [CompactSpace Y]
+    (M : C A X) (K : C A Y)
+    (hM : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} A) X M)
+    (hK : boundedBelow A Y K)
+    (z : (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A)
+      (HasCompactification.compactification f)).obj M ⟶ K) :
+    M ⟶ (rightDerivedUpperShriek A f).obj K :=
+  rightDerivedUpperShriekHomEquiv f hM hK z
+
+/-- The actual integration transpose before the exceptional endpoint normalization.
+Source: definition of P, the specified restricted exceptional Hom bijection
+(blueprint: lem-pur-affine-ordered-integration-transposes). -/
+def integrationTransposeRaw (P : WeilConjectures.PurityFiniteSetting.{u})
+    (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of P.field.k))
+    [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY]
+    (K : Plus (AffineLinePurity.Ring P) Y) (Ke : Etale.DerivedCategoryModule
+      (AffineLinePurity.Ring P) Y)
+    (hKe : etaleFiniteTor (AffineLinePurity.Ring P) Y Ke)
+    (eK : (comparison (AffineLinePurity.Ring P) Y).obj Ke ≅ K.obj) :
+    (d : ℕ) → Σ M N : D P (iteratedAffineLine Y d), M ⟶ N
+  | 0 => ⟨_, _, 𝟙 K.obj⟩
+  | d + 1 =>
+    letI := (projection_geometry Y (d + 1)).1
+    letI := (projection_geometry Y (d + 1)).2
+    letI : IsNoetherian Y := tower_noetherian P Y aY 0
+    ⟨_, _, (sourceComparison P Y K.obj (d + 1)).hom ≫
+      standingTranspose (AffineLinePurity.Ring P) (iteratedAffineLineProj Y (d + 1))
+        _ K.obj (source_origin P Y aY K Ke hKe eK (d + 1)) K.property
+        (augmentation P Y aY K Ke hKe eK (d + 1))⟩
+
+private theorem homHEq_existsUnique {Cat : Type*} [Category Cat]
+    {K L : Cat} (f : K ⟶ L) : ∃! g : K ⟶ L, HEq g f :=
+  ⟨f, HEq.rfl, fun _ hg ↦ eq_of_heq hg⟩
+
+/-- This exact transpose has the recorded exceptional comparison endpoints.
+Source: normalized standing exceptional functor
+(blueprint: lem-pur-affine-ordered-integration-transposes).
+Proof: at zero both functors are normalized to identity. At a positive stage unfold
+ComparisonHom and exceptional at the outer successor. The specified restricted Hom
+bijection has exactly this standing exceptional target, while sourceComparison has
+exactly the ordered source. Proof irrelevance identifies compactifiability witnesses.
+Transport the computed arrow along these endpoint equalities. HEq fixes it uniquely. -/
+theorem integrationTranspose_existsUnique (P : WeilConjectures.PurityFiniteSetting.{u})
+    (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of P.field.k))
+    [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY]
+    (K : Plus (AffineLinePurity.Ring P) Y) (Ke : Etale.DerivedCategoryModule
+      (AffineLinePurity.Ring P) Y)
+    (hKe : etaleFiniteTor (AffineLinePurity.Ring P) Y Ke)
+    (eK : (comparison (AffineLinePurity.Ring P) Y).obj Ke ≅ K.obj) (d : ℕ) :
+    ∃! p : ComparisonHom P Y K.obj d,
+      HEq p (integrationTransposeRaw P Y aY K Ke hKe eK d).2.2 := by
+  cases d with
+  | zero =>
+    unfold ComparisonHom orderedSource exceptional
+    exact homHEq_existsUnique (𝟙 K.obj)
+  | succ d =>
+    unfold ComparisonHom exceptional
+    exact homHEq_existsUnique (integrationTransposeRaw P Y aY K Ke hKe eK (d + 1)).2.2
+
+/-- The integration transpose, with its map fixed by the independent integration
+construction. Source: P_(p_d,K)
+(blueprint: lem-pur-affine-ordered-integration-transposes). -/
+@[irreducible]
+def integrationTranspose (P : WeilConjectures.PurityFiniteSetting.{u})
+    (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of P.field.k))
+    [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY]
+    (K : Plus (AffineLinePurity.Ring P) Y) (Ke : Etale.DerivedCategoryModule
+      (AffineLinePurity.Ring P) Y)
+    (hKe : etaleFiniteTor (AffineLinePurity.Ring P) Y Ke)
+    (eK : (comparison (AffineLinePurity.Ring P) Y).obj Ke ≅ K.obj) (d : ℕ) :
+    ComparisonHom P Y K.obj d :=
+  (integrationTranspose_existsUnique P Y aY K Ke hKe eK d).exists.choose
+
 /-- The explicit ordinary tensor-source representative of Lp_d*K(d)[2d].
 Source: bounded etale origin (blueprint: lem-pur-affine-ordered-integration-transposes). -/
 def sourceEtale (P : WeilConjectures.PurityFiniteSetting.{u}) (Y : Scheme.{u})
@@ -1169,6 +1309,70 @@ def sourceRealization (P : WeilConjectures.PurityFiniteSetting.{u}) (Y : Scheme.
     (eK : (comparison (AffineLinePurity.Ring P) Y).obj Ke ≅ K) (d : ℕ) :=
   realizeTensorSource (AffineLinePurity.Ring P) (iteratedAffineLineProj Y d)
     K Ke (etaleCoefficient P Y d) eK ≪≫ (sourceComparison P Y K d).symm
+
+/-- Both coordinate sources retain the bounded constructible finite-Tor domain.
+Source: pullback and tensor finite-Tor preservation
+(blueprint: lem-pur-affine-ordered-integration-transposes).
+Proof: pullback preserves the bounds and the finite Tor interval of Ke. The coefficient
+is locally free of rank one shifted by 2d. Tensoring translates the two intervals;
+comparison identifies the result with the ordered source by sourceRealization. -/
+theorem source_applicability (P : WeilConjectures.PurityFiniteSetting.{u})
+    (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of P.field.k))
+    [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY]
+    (K : Plus (AffineLinePurity.Ring P) Y) (Ke : Etale.DerivedCategoryModule
+      (AffineLinePurity.Ring P) Y)
+    (hKe : etaleFiniteTor (AffineLinePurity.Ring P) Y Ke)
+    (eK : (comparison (AffineLinePurity.Ring P) Y).obj Ke ≅ K.obj) (d : ℕ) :
+    boundedBelow (AffineLinePurity.Ring P) (iteratedAffineLine Y d) ((orderedSource P Y d).obj
+      K.obj) ∧
+      etaleFiniteTor (AffineLinePurity.Ring P) (iteratedAffineLine Y d) (sourceEtale P Y Ke d) := by
+  let A := AffineLinePurity.Ring P
+  let f := iteratedAffineLineProj Y d
+  have ht := baseCoefficient_ctf A (exponent P)
+    (pow_pos (Fact.out : P.coefficients.l.Prime).pos _) (annihilates P)
+    (iteratedAffineLine Y d)
+    (affineTracePullbackInvertible (exponent P) f (exponentUnit P Y aY)) d
+  have hs : etaleFiniteTor A (iteratedAffineLine Y d) (sourceEtale P Y Ke d) := by
+    unfold sourceEtale AffineLinePurity.ordinarySourceObject
+    exact Etale.constructibleFiniteTor_tensor A _
+      (Etale.constructibleFiniteTor_leftDerivedUpperStar (ModuleCat.{u + 1} A) f hKe) ht
+  refine ⟨?_, hs⟩
+  exact (DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} A) _).prop_of_iso
+    (sourceComparison P Y K.obj d).symm (source_origin P Y aY K Ke hKe eK d) |>.plus
+
+/-- Gamma_q at the actual exceptional input Rp_d!K, with its retained canonical origin.
+Source: the displayed recursion (blueprint: lem-pur-affine-ordered-integration-transposes). -/
+def exceptionalLine (P : WeilConjectures.PurityFiniteSetting.{u})
+    (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of P.field.k))
+    [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY]
+    (K : Plus (AffineLinePurity.Ring P) Y) (Ke : Etale.DerivedCategoryModule
+      (AffineLinePurity.Ring P) Y)
+    (hKe : etaleFiniteTor (AffineLinePurity.Ring P) Y Ke)
+    (eK : (comparison (AffineLinePurity.Ring P) Y).obj Ke ≅ K.obj) (d : ℕ) :=
+  letI : LocallyOfFiniteType (towerBase aY d) := (tower_geometry aY d).1
+  letI : QuasiCompact (towerBase aY d) := (tower_geometry aY d).2.1
+  letI : IsSeparated (towerBase aY d) := (tower_geometry aY d).2.2
+  lineComparison P (iteratedAffineLine Y d) (towerBase aY d)
+    ⟨(exceptional P Y d).obj K.obj, (stage_applicability P Y aY K Ke hKe eK d).1⟩
+    (stageEtale P Y K.obj Ke d) (stage_applicability P Y aY K Ke hKe eK d).2
+    (stageComparison P Y K.obj Ke eK d)
+
+/-- Gamma_q at G_dK, with the canonical tensor-source etale representative.
+Source: the naturality square (blueprint: lem-pur-affine-ordered-integration-transposes). -/
+def sourceLine (P : WeilConjectures.PurityFiniteSetting.{u})
+    (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of P.field.k))
+    [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY]
+    (K : Plus (AffineLinePurity.Ring P) Y) (Ke : Etale.DerivedCategoryModule
+      (AffineLinePurity.Ring P) Y)
+    (hKe : etaleFiniteTor (AffineLinePurity.Ring P) Y Ke)
+    (eK : (comparison (AffineLinePurity.Ring P) Y).obj Ke ≅ K.obj) (d : ℕ) :=
+  letI : LocallyOfFiniteType (towerBase aY d) := (tower_geometry aY d).1
+  letI : QuasiCompact (towerBase aY d) := (tower_geometry aY d).2.1
+  letI : IsSeparated (towerBase aY d) := (tower_geometry aY d).2.2
+  lineComparison P (iteratedAffineLine Y d) (towerBase aY d)
+    ⟨(orderedSource P Y d).obj K.obj, (source_applicability P Y aY K Ke hKe eK d).1⟩
+    (sourceEtale P Y Ke d) (source_applicability P Y aY K Ke hKe eK d).2
+    (sourceRealization P Y K.obj Ke eK d)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

@@ -24,6 +24,10 @@ import WeilConjectures.AlgebraicGeometry.BoundedConstructibleDevissage
 import WeilConjectures.AlgebraicGeometry.CondensedFinitePresentationDescent
 import WeilConjectures.AlgebraicGeometry.CondensedSheafExtContinuity
 import WeilConjectures.AlgebraicGeometry.CondensedCoefficientComplexPresentation
+public import WeilConjectures.AlgebraicGeometry.Bounded.BoundedConstructibleDevissageSupplement
+public import WeilConjectures.AlgebraicGeometry.Condensed.CondensedDerivedTensorComparisonSupplement
+public import WeilConjectures.AlgebraicGeometry.Condensed.CondensedFiniteModelProofAPISupplement
+public import WeilConjectures.AlgebraicGeometry.ProperBaseChange.SplitCoefficientDerivedFaithfulSupplement
 /-!
 
 # The bounded constructible `ℚ̄_ℓ`-complexes as the 2-colimit over the finite subextensions
@@ -222,6 +226,28 @@ noncomputable def constructibleCocone :
   Φ E := constructibleToPadicAlgCl X ℓ E
   iso h := constructibleToPadicAlgClCompIso X ℓ h
 
+@[local instance]
+private lemma continuity_tri : (homColimitProperty N c).IsTriangulated where
+  exists_zero := by
+    refine ⟨0, isZero_zero D, fun n ↦ ?_⟩
+    have h (Y : D) : IsZero ((preadditiveCoyoneda.obj (op (0 : D))).obj Y) := by
+      apply (IsZero.iff_id_eq_zero _).2
+      ext f
+      exact (isZero_zero D).eq_of_src _ _
+    apply (colimit.isColimit _).nonempty_isColimit_iff_isIso_desc.1
+    exact ⟨IsColimit.ofIsZero _ ((Functor.isZero_iff _).2 (fun i ↦ h _)) (h _)⟩
+  toIsTriangulatedClosed₂ := .mk' (homColimitProperty_extensions N c)
+
+@[local instance]
+private lemma continuity_shift : (homColimitProperty N c).IsStableUnderShift ℤ where
+  isStableUnderShiftBy n := ⟨fun K h ↦ homColimitProperty_shift N c K h n⟩
+
+@[local instance]
+private lemma continuity_iso : (homColimitProperty N c).IsClosedUnderIsomorphisms where
+  of_iso e h n := desc_iso_transfer N c _ _
+    (Functor.isoWhiskerLeft (shiftFunctor D n)
+      (preadditiveCoyoneda.mapIso e.symm.op)) (h n)
+
 end Constructible
 
 end AlgebraicGeometry.ProEtale
@@ -356,6 +382,9 @@ private lemma bounded_factors_cocone
   exact CategoryTheory.factors_of_colimit_cocone N DerivedCategory.Q c hc K
     (CategoryTheory.factors_iso _ ((shiftFunctorZero _ ℤ).app K)
       (CategoryTheory.shiftFactors_of_hom_colimit N DerivedCategory.Q K h 0))
+
+private lemma tensorComp_eq {E F : FiniteIntermediateField ℓ} (h : E ≤ F) :
+    derivedExtendScalarsCompIso X ℓ h = finiteCoefficientDerivedTensorCompIso X ℓ h := rfl
 
 attribute [local irreducible] derivedExtendScalarsCompIso
 

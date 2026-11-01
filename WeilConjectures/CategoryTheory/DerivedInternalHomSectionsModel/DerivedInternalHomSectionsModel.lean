@@ -463,9 +463,6 @@ private theorem globalMap_quasiIso
   rw [h]
   infer_instance
 
-set_option backward.isDefEq.respectTransparency true in
-set_option synthInstance.maxSize 2048 in
-set_option linter.unusedSectionVars false in
 set_option backward.isDefEq.respectTransparency false in
 set_option maxHeartbeats 300000 in
 -- Naturality compares several composites through product functors and localization.

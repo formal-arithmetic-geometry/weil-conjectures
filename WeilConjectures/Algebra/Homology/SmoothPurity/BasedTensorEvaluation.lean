@@ -275,6 +275,118 @@ private theorem tensorUnit_isIso (φ : R ⟶ S) (d : ℕ)
     inferInstanceAs (IsIso (toSheafify J (changeOfRingsPresheaf.{vC, uC, u} φ F).presheaf))
   exact isIso_of_reflects_iso _ (PresheafOfModules.toPresheaf (𝓡 S).obj)
 
+private theorem tensorUnit_naturality (φ : R ⟶ S)
+    {F G : SheafOfModules.{u} (𝓡 R)} (f : F ⟶ G) :
+    (tensorPresheafFunctor φ).map f ≫ tensorUnit φ G =
+      tensorUnit φ F ≫ ((tensorFunctor φ).map f).val := by
+  exact (PresheafOfModules.sheafificationAdjunction (𝟙 (𝓡 S).obj)).unit.naturality
+    ((tensorPresheafFunctor φ).map f)
+
+private theorem tensorCoordinates_naturality (φ : R ⟶ S) (d : ℕ)
+    (e : (∏ᶜ fun _ : Fin d ↦ unit (𝓡 R)) ≅
+      (restrictScalars.{u} (𝓻 φ)).obj (unit (𝓡 S)))
+    {F G : SheafOfModules.{u} (𝓡 R)} (f : F ⟶ G) :
+    (PresheafOfModules.restrictScalars (𝓻 φ).hom).map
+        ((tensorPresheafFunctor φ).map f) ≫ (tensorCoordinates φ d e G).hom =
+      (tensorCoordinates φ d e F).hom ≫ (Limits.Pi.map (fun _ : Fin d ↦ f)).val := by
+  ext V x
+  induction x using TensorProduct.induction_on with
+  | zero => exact map_zero _ |>.trans (map_zero _).symm
+  | add x y hx hy =>
+    exact (map_add _ x y).trans ((congrArg₂ (· + ·) hx hy).trans
+      (map_add _ x y).symm)
+  | tmul s m =>
+    apply sectionProduct_ext d G V
+    intro i
+    change (Pi.π (fun _ : Fin d ↦ G) i).val.app V
+      ((tensorCoordinates φ d e G).hom.app V
+        (((tensorPresheafFunctor φ).map f).app V (s ⊗ₜ[R.obj.obj V, (φ.hom.app V).hom] m))) = _
+    have ht : ((tensorPresheafFunctor φ).map f).app V
+        (s ⊗ₜ[R.obj.obj V, (φ.hom.app V).hom] m) =
+        s ⊗ₜ[R.obj.obj V, (φ.hom.app V).hom] f.val.app V m := by
+      exact ModuleCat.ExtendScalars.map_tmul _ _ _ _
+    have hp := congrArg (fun g ↦ g.val.app V
+      ((tensorCoordinateApp φ d e F V).hom (s ⊗ₜ[R.obj.obj V, (φ.hom.app V).hom] m)))
+      (Pi.map_π (fun _ : Fin d ↦ f) i)
+    have hN := tensorCoordinateApp_tmul φ d e G V s (f.val.app V m) i
+    have hM := tensorCoordinateApp_tmul φ d e F V s m i
+    have hT := congrArg ((Pi.π (fun _ : Fin d ↦ G) i).val.app V ∘
+      (tensorCoordinateApp φ d e G V).hom) ht
+    unfold tensorCoordinates
+    exact hT.trans (hN.trans (((f.val.app V).hom.map_smul _ _).symm.trans
+      ((congrArg (f.val.app V) hM).symm.trans hp.symm)))
+
+@[irreducible] private def tensorSheafCoordinates (φ : R ⟶ S) (d : ℕ)
+    (e : (∏ᶜ fun _ : Fin d ↦ unit (𝓡 R)) ≅
+      (restrictScalars.{u} (𝓻 φ)).obj (unit (𝓡 S)))
+    (F : SheafOfModules.{u} (𝓡 R)) :
+    (restrictScalars.{u} (𝓻 φ)).obj ((tensorFunctor φ).obj F) ≅
+      ∏ᶜ fun _ : Fin d ↦ F := by
+  have := tensorUnit_isIso φ d e F
+  let Q := PresheafOfModules.restrictScalars (𝓻 φ).hom
+  let η := Q.mapIso (asIso (tensorUnit φ F))
+  let β := tensorCoordinates φ d e F
+  exact
+    { hom := ⟨η.inv ≫ β.hom⟩
+      inv := ⟨β.inv ≫ η.hom⟩
+      hom_inv_id := by
+        apply SheafOfModules.hom_ext
+        change (η.inv ≫ β.hom) ≫ (β.inv ≫ η.hom) = 𝟙 _
+        simp
+      inv_hom_id := by
+        apply SheafOfModules.hom_ext
+        change (β.inv ≫ η.hom) ≫ (η.inv ≫ β.hom) = 𝟙 _
+        simp }
+
+private theorem tensorSheafCoordinates_unit (φ : R ⟶ S) (d : ℕ)
+    (e : (∏ᶜ fun _ : Fin d ↦ unit (𝓡 R)) ≅
+      (restrictScalars.{u} (𝓻 φ)).obj (unit (𝓡 S)))
+    (F : SheafOfModules.{u} (𝓡 R)) :
+    (PresheafOfModules.restrictScalars (𝓻 φ).hom).map (tensorUnit φ F) ≫
+      (tensorSheafCoordinates φ d e F).hom.val = (tensorCoordinates φ d e F).hom := by
+  have := tensorUnit_isIso φ d e F
+  let Q := PresheafOfModules.restrictScalars (𝓻 φ).hom
+  let η := Q.mapIso (asIso (tensorUnit φ F))
+  unfold tensorSheafCoordinates
+  change η.hom ≫ (η.inv ≫ (tensorCoordinates φ d e F).hom) = _
+  exact η.hom_inv_id_assoc _
+
+@[irreducible] private def tensorCoordinateIso (φ : R ⟶ S) (d : ℕ)
+    (e : (∏ᶜ fun _ : Fin d ↦ unit (𝓡 R)) ≅
+      (restrictScalars.{u} (𝓻 φ)).obj (unit (𝓡 S))) :
+    tensorFunctor φ ⋙ restrictScalars.{u} (𝓻 φ) ≅
+      Functor.pi' (fun _ : Fin d ↦ 𝟭 (SheafOfModules.{u} (𝓡 R))) ⋙ Pi.functor (Fin d) :=
+  NatIso.ofComponents (tensorSheafCoordinates φ d e) (by
+    intro F G f
+    apply SheafOfModules.hom_ext
+    have := tensorUnit_isIso φ d e F
+    let Q := PresheafOfModules.restrictScalars (𝓻 φ).hom
+    apply (cancel_epi (Q.map (tensorUnit φ F))).1
+    change Q.map (tensorUnit φ F) ≫
+        (Q.map ((tensorFunctor φ).map f).val ≫
+          (tensorSheafCoordinates φ d e G).hom.val) =
+      Q.map (tensorUnit φ F) ≫
+        ((tensorSheafCoordinates φ d e F).hom.val ≫
+          (Limits.Pi.map (fun _ : Fin d ↦ f)).val)
+    calc
+      _ = (Q.map (tensorUnit φ F) ≫ Q.map ((tensorFunctor φ).map f).val) ≫
+          (tensorSheafCoordinates φ d e G).hom.val := (Category.assoc _ _ _).symm
+      _ = (Q.map ((tensorPresheafFunctor φ).map f) ≫ Q.map (tensorUnit φ G)) ≫
+          (tensorSheafCoordinates φ d e G).hom.val := by
+        have hn := congrArg Q.map (tensorUnit_naturality φ f).symm
+        simp only [Functor.map_comp] at hn
+        exact congrArg (fun k ↦ k ≫ (tensorSheafCoordinates φ d e G).hom.val) hn
+      _ = Q.map ((tensorPresheafFunctor φ).map f) ≫
+          (tensorCoordinates φ d e G).hom := by
+        exact (Category.assoc _ _ _).trans
+          (congrArg (fun k ↦ Q.map ((tensorPresheafFunctor φ).map f) ≫ k)
+            (tensorSheafCoordinates_unit φ d e G))
+      _ = (tensorCoordinates φ d e F).hom ≫
+          (Limits.Pi.map (fun _ : Fin d ↦ f)).val :=
+        tensorCoordinates_naturality φ d e f
+      _ = _ := ((congrArg (fun k ↦ k ≫ (Limits.Pi.map (fun _ : Fin d ↦ f)).val)
+        (tensorSheafCoordinates_unit φ d e F)).symm).trans (Category.assoc _ _ _))
+
 private theorem power_exact (D : Type*) [Category D] [Abelian D] (d : ℕ) :
     PreservesFiniteLimits
         (Functor.pi' (fun _ : Fin d ↦ 𝟭 D) ⋙ Pi.functor (Fin d)) ∧
@@ -303,7 +415,6 @@ private theorem power_exact (D : Type*) [Category D] [Abelian D] (d : ℕ) :
   exact ⟨preservesFiniteLimits_of_natIso e, preservesFiniteColimits_of_natIso e'⟩
 
 omit [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasSheafify J AddCommGrpCat.{u}] in
-omit [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasSheafify J AddCommGrpCat.{u}] in
 private theorem restriction_limits (α : R ⟶ S) :
     PreservesFiniteLimits (restrictScalars.{u}
       ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).map α)) := by
@@ -329,8 +440,5 @@ private theorem restriction_colimits (α : R ⟶ S) :
     inferInstanceAs (PreservesFiniteColimits (toSheaf.{u} B))
   exact preservesFiniteColimits_of_reflects_of_preserves _ (toSheaf A)
 
-set_option linter.unusedVariables false in
-set_option maxHeartbeats 200000 in
 -- The long conjunction repeatedly elaborates sectionwise products and scalar restrictions.
-set_option synthInstance.maxHeartbeats 80000 in
 end SheafOfModules

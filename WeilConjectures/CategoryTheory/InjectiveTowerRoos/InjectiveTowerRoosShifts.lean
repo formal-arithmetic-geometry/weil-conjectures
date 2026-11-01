@@ -698,10 +698,6 @@ private lemma roosU_degreewise_epi (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ)
     (fun n : ℕ ↦ (I.X q).map (homOfLE (Nat.le_succ n)).op)
     ((roosU I).f q) (roosU_f_π I q)).epi
 
-omit [HasLimitsOfShape ℕᵒᵖ A] in
-omit [HasLimitsOfShape ℕᵒᵖ A] in
-omit [HasLimitsOfShape ℕᵒᵖ A] in
-omit [HasLimitsOfShape ℕᵒᵖ A] in
 private lemma roosι_u (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (q p : ℤ)
     (h : q - 1 = p) : (roosι I).f q ≫ ucoord I q p h = 0 := by
   simp [roosι, roosLift, ucoord]

@@ -72,7 +72,6 @@ private abbrev Site.ringSets (X : Site.{u, w}) :=
   (sheafCompose X.J (CategoryTheory.forget CommRingCat.{u})).obj X.A
 
 open CategoryTheory.MonoidalCategory in
-open CategoryTheory.MonoidalCategory in
 private abbrev transpose {X Y : Site.{u, w}} (f : Morphism X Y)
     (M : X.modules) {T : Sheaf Y.J (Type u)} (x : T ⟶ Y.sets.obj (f.modules.obj M)) :=
   (f.adj.homEquiv T (X.sets.obj M)).symm (x ≫ f.underlying.hom.app M)
@@ -85,7 +84,6 @@ private theorem transpose_injective {X Y : Site.{u, w}} (f : Morphism X Y)
   apply (cancel_mono (f.underlying.hom.app M)).mp
   exact (f.adj.homEquiv T (X.sets.obj M)).symm.injective h
 
-open CategoryTheory.MonoidalCategory in
 open CategoryTheory.MonoidalCategory in
 private theorem homEquiv_conjugate
     {C D : Type*} [Category* C] [Category* D]
@@ -117,8 +115,6 @@ private def liftLinear {X : Site.{u, w}} {M N : X.modules}
         ext x
         exact CategoryTheory.congr_fun (q.hom.naturality i) x }
 
-open CategoryTheory.MonoidalCategory in
-open CategoryTheory.MonoidalCategory in
 private def normalizedAdj {X : Site.{u, w}} {f : Morphism X X} (l : Lift f) :
     l.edge.pullback ⊣ f.modules :=
   l.edge.moduleAdjunction.ofNatIsoRight (eqToIso l.pushforward_eq)
@@ -133,7 +129,6 @@ private theorem normalized_transpose {X : Site.{u, w}} {f : Morphism X X}
     Functor.map_comp, eqToIso.hom, Functor.whiskerRight_app, Lift.insertion,
     Category.assoc] using l.ordinary_adjunction M N b
 
-open CategoryTheory.MonoidalCategory in
 private theorem identity_mate {C : Type*} [Category C] {L R : C ⥤ C}
     (a : L ⊣ R) (e : L ≅ 𝟭 C) (M : C) :
     a.homEquiv M M (e.hom.app M) ≫
@@ -162,7 +157,6 @@ private def purePair {X : Site.{u, w}} (M N : X.modules)
        exact (RingedTensor.pure_restrict X.A M N i _ _).symm }⟩
 
 open CategoryTheory.MonoidalCategory in
-open CategoryTheory.MonoidalCategory in
 private abbrev totalTensor (X : Site.{u, w}) :=
   Functor.uncurry.obj ((@curriedTensor X.modules _ (monoidalCategory X.A)).map₂HomologicalComplex
     (.up ℤ) (.up ℤ) (.up ℤ))
@@ -174,10 +168,7 @@ private abbrev totalComparison {X : Site.{u, w}} {f : Morphism X X} (l : Lift f)
     l.edge.pushforward l.edge.moduleAdjunction P Q
 
 open CategoryTheory.MonoidalCategory in
-set_option maxHeartbeats 800000 in
 -- The representative equation specializes several universe-polymorphic tensor models.
-open CategoryTheory.MonoidalCategory in
-open CategoryTheory.MonoidalCategory in
 private theorem unit_of_tensor
     {C D : Type*} [Category* C] [Category* D] [MonoidalCategory C] [MonoidalCategory D]
     {F G : C ⥤ D} [F.Monoidal] [G.Monoidal] (c : F ≅ G)

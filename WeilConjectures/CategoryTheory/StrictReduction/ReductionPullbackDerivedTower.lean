@@ -327,7 +327,6 @@ def IsNormalized (F : A ⥤ B) [F.Additive]
 
 end CategoryTheory.StrictReduction
 
-open CategoryTheory.Functor in
 private noncomputable def cochainRepresentativeWhiskering
     {A : Type a} [Category.{b} A] [Abelian A] [HasDerivedCategory.{w} A]
     (good : CochainComplex A ℤ → Prop)

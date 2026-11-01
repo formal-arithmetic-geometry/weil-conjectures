@@ -11,6 +11,8 @@ public import WeilConjectures.NumberTheory.Padics.IntegralScalarTowers
 public import WeilConjectures.CategoryTheory.Sites.WeaklyContractible
 public import Mathlib.Topology.LocallyConstant.Basic
 public import Mathlib.Topology.Connected.Clopen
+public import WeilConjectures.AlgebraicGeometry.InternalPerfectOrdinaryHomCohomology
+public import WeilConjectures.AlgebraicGeometry.InternalPerfectReductionHomotopyComparison
 
 /-! # Actual internal endomorphism reductions and scalar quotient cohomology -/
 
@@ -38,9 +40,10 @@ Choose bases of the finitely many nonzero terms of P. The scalar model has terms
 finite sums of the internal regular module, hence is K-flat by bounded-flat
 K-flatness. Derived reduction is therefore the ordinary constant complex P/pi^j.
 The canonical derived-to-ordinary comparison agrees with scalar balancing, because
-both are mates of the same restriction-of-scalars adjunction. Under the finite
-coefficient equivalence, the terms of the reduced complex are constant finite free
-modules. Weak contractibility makes sections exact, so these terms are projective;
+both are mates of the same restriction-of-scalars adjunction. Transfer weak
+contractibility to the final object of the underlying scheme site. Its abelian
+tensor unit is projective, hence so is the regular finite coefficient module.
+The reduced terms are finite sums of this module and are therefore projective;
 the bounded-above complex is K-projective. The localization bijection computes its
 derived endomorphisms as chain maps modulo chain homotopy. This is H^0 of the signed
 Hom complex of its sections. Finite freeness and boundedness identify the latter
@@ -76,6 +79,79 @@ theorem internalPerfectEndomorphism_homComparison
           (HomologicalComplex.homologyMap
             (Padic.scalarQuotientTransition (Padic.coefficientExtensionUniformizer l E)
               (CochainComplex.moduleHomComplex P P) (m + 1) (n + 1)
-              (Nat.succ_le_succ h)) 0) (e m x) := by sorry
+              (Nat.succ_le_succ h)) 0) (e m x) := by
+  classical
+  let e₀ : ∀ n : ℕ,
+      (internalReductionHomTower l E W.left
+        (internalPerfectScalarModel l E W.left P)
+        (internalPerfectScalarModel l E W.left P)).obj (op n) ≃
+      internalPerfectOrdinaryHom l E W.left P n :=
+    internalPerfectReductionHomEquiv l E X W _hweak P a b _ha _hb _hfree
+  have he₀ := internalPerfectReduction_homotopyComparison l E X W
+    _hAffine _hweak P a b _ha _hb _hfree
+  obtain ⟨e₁, he₁⟩ := internalPerfectOrdinary_homCohomology l E X W
+    _hAffine _hweak P a b _ha _hb _hfree
+  let e := fun n : ℕ ↦ (e₀ n).trans (e₁ n)
+  have he (n : ℕ) (x : (internalReductionHomTower l E W.left
+      (internalPerfectScalarModel l E W.left P)
+      (internalPerfectScalarModel l E W.left P)).obj (op (n + 1))) :
+      e n ((internalReductionHomTower l E W.left
+        (internalPerfectScalarModel l E W.left P)
+        (internalPerfectScalarModel l E W.left P)).map (homOfLE (Nat.le_succ n)).op x) =
+      LocallyConstant.map
+        (HomologicalComplex.homologyMap
+          (Padic.scalarQuotientTransition (Padic.coefficientExtensionUniformizer l E)
+            (CochainComplex.moduleHomComplex P P) (n + 2) (n + 1)
+            (Nat.succ_le_succ (Nat.le_succ n))) 0) (e (n + 1) x) := by
+    exact (congrArg (e₁ n) (he₀ n x)).trans (he₁ n (e₀ (n + 1) x))
+  refine ⟨e, ?_⟩
+  intro n m h x
+  induction m, h using Nat.le_induction with
+  | base =>
+    have htrid :
+        Padic.scalarQuotientTransition
+            (Padic.coefficientExtensionUniformizer l E)
+            (CochainComplex.moduleHomComplex P P) (n + 1) (n + 1)
+            (Nat.succ_le_succ (Nat.le_refl n)) = 𝟙 _ := by
+      apply (cancel_epi (cokernel.π
+        ((Padic.coefficientExtensionUniformizer l E) ^ (n + 1) •
+          𝟙 (CochainComplex.moduleHomComplex P P)))).1
+      rw [Padic.scalarQuotientTransition, cokernel.π_desc]
+      exact (Category.comp_id _).symm
+    have hmap : (homOfLE (Nat.le_refl n)).op = (𝟙 (op n : ℕᵒᵖ)) :=
+      Subsingleton.elim _ _
+    rw [hmap]
+    have htower := (internalReductionHomTower l E W.left
+      (internalPerfectScalarModel l E W.left P)
+      (internalPerfectScalarModel l E W.left P)).map_id (op n)
+    rw [htower]
+    change (e n) x = LocallyConstant.map _ ((e n) x)
+    rw [htrid, HomologicalComplex.homologyMap_id]
+    rfl
+  | succ m hnm ih =>
+    have hf : (homOfLE (hnm.trans (Nat.le_succ m))).op =
+        (homOfLE (Nat.le_succ m)).op ≫ (homOfLE hnm).op := Subsingleton.elim _ _
+    rw [hf, Functor.map_comp, types_comp_apply, ih]
+    erw [he m x]
+    have htr :
+        Padic.scalarQuotientTransition
+            (Padic.coefficientExtensionUniformizer l E)
+            (CochainComplex.moduleHomComplex P P) (m + 2) (n + 1)
+            (Nat.succ_le_succ (hnm.trans (Nat.le_succ m))) =
+          Padic.scalarQuotientTransition
+            (Padic.coefficientExtensionUniformizer l E)
+            (CochainComplex.moduleHomComplex P P) (m + 2) (m + 1)
+            (by omega) ≫
+          Padic.scalarQuotientTransition
+            (Padic.coefficientExtensionUniformizer l E)
+            (CochainComplex.moduleHomComplex P P) (m + 1) (n + 1)
+            (by omega) := by
+      apply (cancel_epi (cokernel.π
+        ((Padic.coefficientExtensionUniformizer l E) ^ (m + 2) •
+          𝟙 (CochainComplex.moduleHomComplex P P)))).1
+      simp [Padic.scalarQuotientTransition]
+    rw [htr, HomologicalComplex.homologyMap_comp]
+    ext y
+    simp only [LocallyConstant.map_apply, Function.comp_apply, ModuleCat.comp_apply]
 
 end AlgebraicGeometry.ProEtale

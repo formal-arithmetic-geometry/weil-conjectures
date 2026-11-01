@@ -146,8 +146,6 @@ variable {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]
   {R : Sheaf J CommRingCat.{u + 1}} {S : Sheaf H CommRingCat.{u + 1}}
   {F : C ⥤ D} (o : Operation F R S) (t : o.OrdinaryTensor)
 
-open MonoidalCategory in
-open MonoidalCategory in
 end AlgebraicGeometry.Scheme.ProjectionRestriction
 
 namespace AlgebraicGeometry.Scheme

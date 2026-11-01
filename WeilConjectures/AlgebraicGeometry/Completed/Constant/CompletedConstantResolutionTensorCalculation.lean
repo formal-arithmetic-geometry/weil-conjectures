@@ -350,7 +350,6 @@ private theorem constantSemilinear_naturality (X : Scheme.{u})
   exact congrArg (completedConstantGenerator X D N' U) (h x)
 
 -- Work with the unbundled tensor carrier, so scalar restriction is unfolded once.
-set_option maxHeartbeats 1000000 in
 -- Bundled sheaf and scalar-restriction conversions require extra elaboration.
 private abbrev reductionModuleLevel (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] (I : Ideal A)
@@ -412,9 +411,7 @@ private def reductionModuleIso (X : Scheme.{u})
 
 set_option maxHeartbeats 1000000 in
 -- Bundled sheaf and scalar-restriction conversions require extra elaboration.
-set_option maxHeartbeats 2000000 in
 -- Comparing the several bundled scalar-restriction presentations is expensive.
-set_option maxHeartbeats 1000000 in
 -- Bundled sheaf and scalar-restriction conversions require extra elaboration.
 private def realizationUnitIso (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] [IsNoetherianRing A] (I : Ideal A)
@@ -496,11 +493,8 @@ private theorem reductionModuleStep_generator (X : Scheme.{u})
 
 set_option maxHeartbeats 1000000 in
 -- The comparison uses the regular scalar-extension isomorphism on its source.
-set_option maxHeartbeats 1000000 in
 -- Bundled sheaf and scalar-restriction conversions require extra elaboration.
-set_option maxHeartbeats 1000000 in
 -- Bundled sheaf and scalar-restriction conversions require extra elaboration.
-set_option maxHeartbeats 1000000 in
 -- Cache the complex diagram once for the tower and its comparison.
 private def reductionComplexDiagram (X : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] (I : Ideal A)
@@ -561,15 +555,10 @@ private def isoOfOpSequence {D : Type*} [Category* D] {F G : ℕᵒᵖ ⥤ D}
 
 set_option maxHeartbeats 1000000 in
 -- Name the normalized module comparison before lifting it to complexes.
-set_option maxHeartbeats 1000000 in
 -- Check module transition compatibility independently of the cochain construction.
-set_option maxHeartbeats 1000000 in
 -- Keep the level isomorphism as a named term for kernel checking.
-set_option maxHeartbeats 1000000 in
 -- Check the complex successor square before assembling a sequence isomorphism.
-set_option maxHeartbeats 1000000 in
 -- Assemble the already checked components through a generic sequence constructor.
-set_option maxHeartbeats 1000000 in
 -- Bundled sheaf and scalar-restriction conversions require extra elaboration.
 private theorem flatOnSite_of_iso (X : Scheme.{u})
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
@@ -582,6 +571,5 @@ private theorem flatOnSite_of_iso (X : Scheme.{u})
       (SheafOfModules.siteSheafTensorRightIso R N).symm
   exact (exactFunctor _ _).prop_of_iso k hM
 
-set_option maxHeartbeats 1000000 in
 -- Bundled sheaf and scalar-restriction conversions require extra elaboration.
 end AlgebraicGeometry.Scheme

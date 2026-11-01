@@ -399,7 +399,6 @@ private local instance intrinsicPreadditive : MonoidalPreadditive 𝒜 :=
 
 variable [HasDerivedCategory.{w} 𝒜]
 
-omit [HasDerivedCategory.{w} 𝒜] in
 end SheafOfModules
 
 namespace CategoryTheory

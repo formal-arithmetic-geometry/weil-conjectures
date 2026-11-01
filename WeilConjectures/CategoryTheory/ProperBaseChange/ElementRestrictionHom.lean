@@ -599,7 +599,6 @@ private theorem derivedHomRestriction
   exact ⟨(Localization.fullyFaithfulWhiskeringLeft (QR.op.prod QR) W _).preimageIso
     (left ≪≫ asIso α ≪≫ (asIso β).symm ≪≫ right.symm)⟩
 
-set_option backward.isDefEq.respectTransparency false in
 private abbrev fibreSheaf
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     {A B : Sheaf J (Type u)} (b : B ⟶ A) : Sheaf (elementTopology A) (Type u) where
@@ -619,7 +618,6 @@ private def flattenElements
     (B.obj.elementsMk X.unop.1.unop.unop.1 X.unop.2.val)
     f.unop.val.unop.unop.val (congrArg Subtype.val f.unop.property)).op
 
-set_option backward.isDefEq.respectTransparency false in
 private theorem bijective_of_pointwise_heq {α β : Type u} (h : α = β)
     (f : α → β) (hf : ∀ x, HEq (f x) x) : Function.Bijective f := by
   subst β
@@ -722,9 +720,7 @@ private theorem flattenRestrictionEquivalence
     (K := elementTopology (fibreSheaf b)) (flattenElements b) (presentationElementRing R B)
   exact ⟨T.modules, ⟨Functor.isoWhiskerLeft F q.symm ≪≫ h⟩⟩
 
-set_option maxHeartbeats 800000 in
 -- The nested functor comparisons require additional elaboration heartbeats.
-set_option backward.isDefEq.respectTransparency true in
 private def representableElements
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (U : C) :
     Over U ⥤ ((presheafToSheaf J (Type u)).obj (yoneda.obj U)).obj.Elementsᵒᵖ where
@@ -734,7 +730,6 @@ private def representableElements
     rw [← NatTrans.naturality_apply]
     exact congrArg ((toSheafify J (yoneda.obj U)).app _) (Over.w f))).op
 
-set_option backward.isDefEq.respectTransparency false in
 private def inverseHomComparison
     {A B : Type*} [Category A] [Category B] (E : A ≌ B)
     (H : Aᵒᵖ × A ⥤ A) (K : Bᵒᵖ × B ⥤ B)

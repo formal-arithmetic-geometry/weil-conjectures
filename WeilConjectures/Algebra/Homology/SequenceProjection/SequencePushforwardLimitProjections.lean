@@ -220,8 +220,6 @@ private theorem complexProjection
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 private theorem ordinaryLevel
     (A : Sheaf J CommRingCat.{w}) (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w})
     (α : (Functor.const ℕᵒᵖ).obj A ⟶ B)
@@ -345,7 +343,5 @@ set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
 -- The statement retains all normalized presentation clauses of the sequence adjunction.
-set_option maxHeartbeats 200000 in
 -- Retain all normalization clauses in the full comparison statement.
-set_option backward.isDefEq.respectTransparency.types false in
 end SheafOfModules.SequenceProjection

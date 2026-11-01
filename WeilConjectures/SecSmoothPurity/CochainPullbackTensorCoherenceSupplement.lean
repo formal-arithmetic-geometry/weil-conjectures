@@ -67,9 +67,7 @@ set_option maxHeartbeats 600000 in
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
-set_option maxHeartbeats 600000 in
 -- Nested scalar-extension presentations require explicit termwise conversions.
-set_option maxHeartbeats 600000 in
 -- Termwise scalar restriction and the two scalar extensions have dependent sources.
 end CategoryTheory.CochainPullback
 

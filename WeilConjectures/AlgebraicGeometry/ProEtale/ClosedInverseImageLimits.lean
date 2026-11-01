@@ -159,7 +159,6 @@ private theorem isIso_precomposition_toSheafify {S T : Scheme.{u}}
   rw [← he]
   exact hc.comp hbij
 
-set_option backward.isDefEq.respectTransparency false in
 end AffineProEt
 
 section Localization

@@ -485,7 +485,6 @@ theorem adjunctionGenerators (B : Sheaf J CommRingCat.{max c v r}) :
     (hu ((localizedSystemRestriction.{c, v, r} B U).obj Q)
       (op (Over.mk phi)) x)).symm.trans hx
 
-set_option linter.unusedSectionVars false in
 /-- Sheafification on the slice in the same module universe.
 Source: Stacks 03CY (blueprint: lem-cbc-ringed-open-scalar-adjunction). -/
 abbrev sliceSheafify : HasSheafify (J.over U) AddCommGrpCat.{max c v r} := by

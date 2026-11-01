@@ -20,6 +20,7 @@ import Mathlib.CategoryTheory.Adjunction.Basic
 import Mathlib.CategoryTheory.Sites.Equivalence
 import Mathlib.CategoryTheory.Monoidal.CommGrp_
 import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod
+public import WeilConjectures.ProperBaseChange.GeometricModuleConstruction
 
 /-! # Auxiliary ringed presentation comparisons -/
 
@@ -30,6 +31,11 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite CategoryTheory.MonoidalCategory
 namespace CategoryTheory
 -- Cache the sheaf limit instances used repeatedly by the slice comparisons.
+
+private instance (priority := 2000) sheafPullbacks
+    {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) :
+    HasPullbacks (Sheaf J (Type u)) := inferInstance
+
 private instance (priority := 2000) sheafPullback
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     {X Y Z : Sheaf J (Type u)} (f : X ⟶ Z) (g : Y ⟶ Z) :
@@ -190,7 +196,6 @@ private theorem ringData_mul {C D : Type u} [SmallCategory C] [SmallCategory D]
   ext U t
   exact e.ring_mul _ _ _ _ (fun _ _ ↦ rfl) U t
 
-set_option backward.isDefEq.respectTransparency false in
 -- Transport the ring operations through the product/fibre comparison.
 private abbrev restrictSets {C C' : Type u} [SmallCategory C] [SmallCategory C']
     {J : GrothendieckTopology C} {J' : GrothendieckTopology C'}
@@ -230,6 +235,110 @@ private theorem pullbackSection_ext {C : Type u} [SmallCategory C]
   exact Prod.ext ((pullbackSections_fst f g U x).trans
     (hf.trans (pullbackSections_fst f g U y).symm))
     ((pullbackSections_snd f g U x).trans (hg.trans (pullbackSections_snd f g U y).symm))
+
+private def fibrePullbackEquiv {C : Type u} [SmallCategory C]
+    {J : GrothendieckTopology C} {A B : Sheaf J (Type u)} (b : B ⟶ A)
+    (X : Over A) (U : Cᵒᵖ) (s : B.obj.obj U) :
+    {x : (pullback X.hom b).obj.obj U // (pullback.snd X.hom b).hom.app U x = s} ≃
+      {x : X.left.obj.obj U // X.hom.hom.app U x = b.hom.app U s} where
+  toFun x := ⟨(pullback.fst X.hom b).hom.app U x.val, by
+    have h := congrArg (fun f ↦ f.hom.app U x.val) (pullback.condition (f := X.hom) (g := b))
+    change X.hom.hom.app U ((pullback.fst X.hom b).hom.app U x.val) =
+      b.hom.app U ((pullback.snd X.hom b).hom.app U x.val) at h
+    exact h.trans (congrArg (b.hom.app U) x.property)⟩
+  invFun x := ⟨(pullbackSections X.hom b U).symm ⟨(x.val, s), x.property⟩, by
+    rw [← pullbackSections_snd]
+    exact congrArg (fun p ↦ p.val.2) ((pullbackSections X.hom b U).apply_symm_apply _)⟩
+  left_inv x := by
+    apply Subtype.ext
+    apply pullbackSection_ext X.hom b U
+    · rw [← pullbackSections_fst]
+      exact congrArg (fun p ↦ p.val.1) ((pullbackSections X.hom b U).apply_symm_apply _)
+    · change (pullback.snd X.hom b).hom.app U
+        ((pullbackSections X.hom b U).symm _) = _
+      rw [← pullbackSections_snd]
+      exact (congrArg (fun p ↦ p.val.2)
+        ((pullbackSections X.hom b U).apply_symm_apply
+          ⟨((pullback.fst X.hom b).hom.app U x.val, s), _⟩)).trans x.property.symm
+  right_inv x := by
+    apply Subtype.ext
+    change (pullback.fst X.hom b).hom.app U ((pullbackSections X.hom b U).symm _) = _
+    rw [← pullbackSections_fst]
+    exact congrArg (fun p ↦ p.val.1) ((pullbackSections X.hom b U).apply_symm_apply _)
+
+private def fibrePullbackIso {C : Type u} [SmallCategory C]
+    {J : GrothendieckTopology C} {A B : Sheaf J (Type u)} (b : B ⟶ A)
+    (_h : Functor.IsContinuous (elementMap b) (elementTopology B) (elementTopology A)) :
+    Over.pullback b ⋙ elementFibrePresheafFunctor B ≅
+      elementFibrePresheafFunctor A ⋙
+        (Functor.whiskeringLeft _ _ (Type u)).obj (elementMap b).op := by
+  refine NatIso.ofComponents (fun X ↦ NatIso.ofComponents
+    (fun U ↦ (fibrePullbackEquiv b X U.unop.unop.1 U.unop.unop.2).toIso) ?_) ?_
+  · intro U V f
+    ext x
+    apply Subtype.ext
+    exact (NatTrans.naturality_apply (pullback.fst X.hom b).hom
+      f.unop.unop.1 x.val)
+  · intro X Y f
+    ext U x
+    apply Subtype.ext
+    change (pullback.fst Y.hom b).hom.app U.unop.unop.1
+      (((Over.pullback b).map f).left.hom.app U.unop.unop.1 x.val) = _
+    exact congrArg (fun h : pullback X.hom b ⟶ Y.left ↦
+      h.hom.app U.unop.unop.1 x.val) (pullback.lift_fst _ _ _)
+
+private def fibreRestrictionIso {C : Type u} [SmallCategory C]
+    {J : GrothendieckTopology C} {R : Sheaf J RingCat.{u}}
+    {A B : Sheaf J (Type u)} (b : B ⟶ A)
+    (h : Functor.IsContinuous (elementMap b) (elementTopology B) (elementTopology A))
+    (s : RingedSheafSliceAdjunctionData R A)
+    (t : RingedSheafSliceAdjunctionData R B) :
+    s.fibreEquivalence.inverse ⋙ restrictSets (elementMap b) ≅
+      Over.pullback b ⋙ t.fibreEquivalence.inverse := by
+  letI := h
+  apply Functor.fullyFaithfulCancelRight (sheafToPresheaf (elementTopology B) (Type u))
+  exact Functor.isoWhiskerRight s.fibre_iso
+      ((Functor.whiskeringLeft _ _ (Type u)).obj (elementMap b).op) ≪≫
+    (fibrePullbackIso b h).symm ≪≫
+    Functor.isoWhiskerLeft (Over.pullback b) t.fibre_iso.symm
+
+private def productPullbackIso {E : Type*} [Category E] [CartesianMonoidalCategory E]
+    [HasPullbacks E] {A B : E} (b : B ⟶ A) :
+    productOver A ⋙ Over.pullback b ≅ productOver B := by
+  refine NatIso.ofComponents (fun X ↦ ?_) ?_
+  · change Over.mk (pullback.snd (CartesianMonoidalCategory.fst A X) b) ≅
+      Over.mk (CartesianMonoidalCategory.fst B X)
+    refine Over.isoMk ?_ ?_
+    · refine ⟨CartesianMonoidalCategory.lift
+          (pullback.snd (CartesianMonoidalCategory.fst A X) b)
+          (pullback.fst (CartesianMonoidalCategory.fst A X) b ≫
+            CartesianMonoidalCategory.snd A X),
+        pullback.lift
+          (CartesianMonoidalCategory.lift (CartesianMonoidalCategory.fst B X ≫ b)
+            (CartesianMonoidalCategory.snd B X)) (CartesianMonoidalCategory.fst B X)
+          (by simp), ?_, ?_⟩
+      · apply pullback.hom_ext
+        · apply CartesianMonoidalCategory.hom_ext
+          · simpa only [Category.assoc, pullback.lift_fst,
+              CartesianMonoidalCategory.lift_fst_assoc,
+              CartesianMonoidalCategory.lift_fst, Category.id_comp] using
+              (pullback.condition (f := CartesianMonoidalCategory.fst A X) (g := b)).symm
+          · simp
+        · simp
+      · apply CartesianMonoidalCategory.hom_ext <;> simp
+    · simp
+  · intro X Y f
+    apply Over.OverMorphism.ext
+    change pullback.lift
+        (pullback.fst (CartesianMonoidalCategory.fst A X) b ≫ (𝟙 A ⊗ₘ f))
+        (pullback.snd (CartesianMonoidalCategory.fst A X) b) _ ≫
+        CartesianMonoidalCategory.lift (pullback.snd (CartesianMonoidalCategory.fst A Y) b)
+          (pullback.fst (CartesianMonoidalCategory.fst A Y) b ≫
+            CartesianMonoidalCategory.snd A Y) =
+      CartesianMonoidalCategory.lift (pullback.snd (CartesianMonoidalCategory.fst A X) b)
+        (pullback.fst (CartesianMonoidalCategory.fst A X) b ≫
+          CartesianMonoidalCategory.snd A X) ≫ (𝟙 B ⊗ₘ f)
+    apply CartesianMonoidalCategory.hom_ext <;> simp
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency false
@@ -675,5 +784,4 @@ private def moduleSquare
 attribute [irreducible] moduleSquare
 
 -- The original existential binders h and k are retained verbatim.
-set_option linter.unusedVariables false in
 end CategoryTheory

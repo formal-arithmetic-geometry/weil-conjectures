@@ -88,6 +88,18 @@ def finiteTensorPullbackComparison (P : PurityFiniteSetting.{u}) (m : ℕ) (hm :
   (sfIntrinsicDerivedEquivalence X (P.finiteReductionSetting m hm).Ring).functor.preimageIso
     e₀₄
 
+/-- Specialize the published pullback/tensor comparison to the actual finite quotient.
+Its finiteness proof is supplied internally, rather than added as a hypothesis.
+Source: thm-pur-composition-coherence, exact tensor pullback
+(blueprint: def-pur-finite-tensor-fixed-comparisons). -/
+def finiteTensorPullbackTensor (P : PurityFiniteSetting.{u}) {X Y : Scheme.{u}}
+    (f : X ⟶ Y) (K L : _root_.DerivedCategory
+      (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} P.Coefficient))) :
+    CompositionPullbackTensorType P.Ring f K L :=
+  letI : Finite P.Ring := Padic.finite_coefficientExtensionRing
+    P.coefficients.l P.extension P.level P.level_pos
+  compositionPullbackTensorFixed P.Ring f K L
+
 /-- The input-realization unit for the published shifted pullback presentation.
 Source: def-pur-finite-reduction-comparisons
 (blueprint: def-pur-finite-tensor-fixed-comparisons). -/

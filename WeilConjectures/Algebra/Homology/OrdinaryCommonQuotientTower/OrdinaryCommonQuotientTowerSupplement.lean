@@ -1008,10 +1008,6 @@ variable {R B : Sheaf J CommRingCat.{r}} {φ : R ⟶ B}
   (b : ∀ n : ℕ,
     DerivedChangeOfRingsCochainModel.{u, v, r, wB, wS} (D.extensionProjection n))
 
-omit [EssentiallySmall.{r} C] [J.WEqualsLocallyBijective AddCommGrpCat.{r}]
-  [HasSheafify J AddCommGrpCat.{r}] [HasDerivedCategory.{wR} (Mod R)]
-  [HasDerivedCategory.{wB} (Mod B)]
-  [∀ n : ℕ, HasDerivedCategory.{wS} (Mod(D.S.obj (op n)))] in
 variable {D a b}
 
 /-- The constructed quotient units have the normalized pure-section formula.

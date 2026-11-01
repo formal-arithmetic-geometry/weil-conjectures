@@ -482,8 +482,6 @@ noncomputable abbrev derivedLocalIsoSheaf [HasWeakSheafify J (Type (u + 1))] :=
   (presheafToSheaf J (Type (u + 1))).obj (derivedLocalIsoPresheaf J B A D)
 
 omit [EssentiallySmall.{u + 1} C] in
-omit [EssentiallySmall.{u + 1} C] in
-omit [EssentiallySmall.{u + 1} C] in
 private theorem pairSection_ext [HasWeakSheafify J (Type (u + 1))]
     (F G : Sheaf J (Type (u + 1))) (U : C) (x y : (F ⨯ G).obj.obj (op U))
     (h₁ : (prod.fst : F ⨯ G ⟶ F).hom.app (op U) x =
@@ -513,7 +511,6 @@ private theorem pairSection_ext [HasWeakSheafify J (Type (u + 1))]
       (ConcreteCategory.congr_hom ht x).trans
         (h₂.trans (ConcreteCategory.congr_hom ht y).symm)
 
-omit [EssentiallySmall.{u + 1} C] in
 private noncomputable def presheafPairSection
     (P Q : Cᵒᵖ ⥤ Type (u + 1)) (U : C)
     (s : P.obj (op U)) (t : Q.obj (op U)) : (P ⨯ Q).obj (op U) :=

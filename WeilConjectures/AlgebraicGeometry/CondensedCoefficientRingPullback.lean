@@ -7,6 +7,9 @@ module
 public import WeilConjectures.AlgebraicGeometry.IntegralModelsStacksData
 public import WeilConjectures.AlgebraicGeometry.InternalModuleOperationsTransport
 import WeilConjectures.AlgebraicGeometry.CartesianCoefficientTwists
+public import WeilConjectures.AlgebraicGeometry.InternalModuleOperations.InternalModuleOperationsTransportSupplement
+public import WeilConjectures.AlgebraicGeometry.ProEtaleToposFunctorialityInverseImage
+public import WeilConjectures.CategoryTheory.SheafPullbackForgetComparison
 
 /-! # The cartesian section-ring coefficient map
 
@@ -21,6 +24,29 @@ open scoped CategoryTheory.Obj
 attribute [local instance 2000] AlgebraicGeometry.ProEtale.sheafMonoidalCategory
   AlgebraicGeometry.ProEtale.sheafMonoidalClosed
 namespace AlgebraicGeometry.ProEtale.IntegralModelsStacks
+
+/-- The ring-sheaf encoding of alpha is uniquely fixed by its abelian adjunct.
+Source: Stacks Tags 00YV and 03D2; the untwisted section-ring argument of
+CartesianCoefficientTwists.spCoefficientIso_existsUnique.
+(blueprint: lem-sfb-condensed-coefficient-ring-pullback).
+Proof: reconstruct section rings from the internal multiplication. The coefficient
+adjunct is a ring homomorphism since condensedPullbackHom is monoidal. Lift the
+abelian adjunction to ring objects. Its adjunct determines the map uniquely, and
+alpha is invertible by lem-sfb-alpha-iso; forgetting reflects isomorphisms. -/
+private theorem coefficientIso_existsUnique
+    (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] :
+    ∃! c : (Scheme.proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj
+        (InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u} (Scheme.ProEt.topology Y)
+          (condensedRingObj Λ Y)) ≅
+        InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u} (Scheme.ProEt.topology X)
+          (condensedRingObj Λ X),
+      ∀ (V : Y.ProEtᵒᵖ) (a : (condensedRingObj Λ Y).obj.obj V),
+        (((Scheme.proEtaleSheafAdjunction f CommRingCat.{u + 1}).homEquiv _ _)
+          c.hom).hom.app V a = (condensedPushforwardHom Λ f).hom.app V a := by
+  apply sectionRingPullbackIso_ofMonHom f (condensedRingObj Λ Y)
+    (condensedRingObj Λ X) (condensedPullbackHom Λ f) (condensedPushforwardHom Λ f)
+  exact (abelianAdjunct_eq f _ _ _).trans (unitAlgHom_comp_map_condensedPullbackHom Λ f)
 
 /-- The actual coefficient map, reconstructed as commutative rings on the small sites.
 Source: Stacks Tag 00YV; the underlying additive map is eta_f.
@@ -94,7 +120,7 @@ private theorem smallRingAdjunction_unit {X Y : Scheme.{u}} (f : Y ⟶ X)
 
 Source: Stacks Project, Sites Tag 00YV and Modules on Sites Tag 03D2;
 ring-coordinate transport in step 1 of lem-sfb-constant-slice-module-encoding.
-(auxiliary; not a blueprint node).
+(blueprint: lem-sfb-condensed-coefficient-ring-pullback).
 
 Proof: forget the ring inverse image to underlying abelian sheaves. The canonical
 forgetful comparison is an isomorphism: inverse image on sets preserves finite
@@ -117,7 +143,7 @@ theorem condensedSmallRingMap_pullback_isIso
       (Scheme.coefficientProEtaleModelTopology.{u, u} X)
       (Scheme.coefficientProEtaleModelTopology.{u, u} Y)).homEquiv _ _).symm
         (condensedSmallRingMap f Λ)) := by
-  obtain ⟨c, hc, _⟩ := spCoefficientIso_existsUnique f Λ
+  obtain ⟨c, hc, _⟩ := coefficientIso_existsUnique f Λ
   let R := InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}
     (Scheme.ProEt.topology X) (condensedRingObj Λ X)
   let A := smallRing X (condensedRingObj Λ X)

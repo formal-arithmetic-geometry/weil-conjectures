@@ -45,6 +45,7 @@ import WeilConjectures.Compactification.NagataCompactification
 import WeilConjectures.AlgebraicGeometry.ProperBaseChange.CompatibleCompactificationTriangle
 import WeilConjectures.AlgebraicGeometry.CompactCompositionProjection.CompositionProjectionMate
 import WeilConjectures.SecSmoothPurity.CompositeTensorLocalData.CompositeTensorTranspose
+public import WeilConjectures.AlgebraicGeometry.StandingExceptionalAdjunction
 
 /-! # Composition and the dualizing tensor mate
 
@@ -352,44 +353,28 @@ def omega {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] : D Λ X :=
 
 /-- The standing exceptional counit, computed by its specified Hom bijection.
 The zero extension is never used on the bounded-below domain in the assertion.
-Source: epsilon_h in the statement (blueprint: lem-pur-composition-tensor-mate). -/
+Source: epsilon_h in the statement (blueprint: def-pur-composition-tensor-maps). -/
 def epsilon {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] [CompactSpace Y]
     (K : D Λ Y) : (F Λ f).obj ((G Λ f).obj K) ⟶ K :=
-  open Classical in
-  if hK : _root_.DerivedCategory.TStructure.t.plus K then
-    (standingExceptionalHomEquiv Λ f
-      (plusEtaleOrigin_rightDerivedUpperShriek_obj f hK) hK).symm (𝟙 _)
-  else 0
+  standingExceptionalCounit Λ f K
 
 /-- The specified compact-support compositor alpha on its etale-origin domain.
-Source: thm-sf-comp-composition (blueprint: lem-pur-composition-tensor-mate). -/
+Source: thm-sf-comp-composition (blueprint: def-pur-composition-tensor-maps). -/
 def alpha {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
     [QuasiCompact f] [QuasiCompact g]
     (M : D Λ X) : (F Λ g).obj ((F Λ f).obj M) ⟶ (F Λ (f ≫ g)).obj M :=
-  open Classical in
-  if hM : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X M then
-    (originCompositionAmbient Λ f g).hom.app ⟨M, hM⟩
-  else 0
+  standingCompactSupportCompositor Λ f g M
 
 /-- The counit mate of alpha, computed by successively transposing through g and f.
 On bounded constructible K this is literally standingExceptionalComposition.
-Source: pur9-def-upper-shriek-composition (blueprint: lem-pur-composition-tensor-mate). -/
+Source: pur9-def-upper-shriek-composition (blueprint: def-pur-composition-tensor-maps). -/
 def c {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
     [QuasiCompact f] [QuasiCompact g]
     [CompactSpace Y] [CompactSpace Z] (K : D Λ Z) :
     (G Λ (f ≫ g)).obj K ⟶ (G Λ f).obj ((G Λ g).obj K) :=
-  open Classical in
-  if hK : _root_.DerivedCategory.TStructure.t.plus K then
-    (standingExceptionalHomEquiv Λ g
-      ((plusEtaleOrigin_rightDerivedUpperShriek_obj (f ≫ g) hK).rightDerivedLowerShriek_obj f)
-      hK).trans
-      (standingExceptionalHomEquiv Λ f
-        (plusEtaleOrigin_rightDerivedUpperShriek_obj (f ≫ g) hK)
-        (plus_rightDerivedUpperShriek_obj g hK))
-      (alpha Λ f g ((G Λ (f ≫ g)).obj K) ≫ epsilon Λ (f ≫ g) K)
-  else 0
+  standingExceptionalCompositionAmbient Λ f g K
 
 variable [UpperStarPreservesFlat (ModuleCat.{u + 1} Λ)]
 
@@ -487,14 +472,14 @@ def TensorClause {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 /-- Restrict the existing exceptional adjunction to the actual full bounded
 constructible categories, with their supplied preservation proofs.
-Source: constructible adjunction (blueprint: lem-pur-composition-tensor-mate). -/
+Source: constructible adjunction (blueprint: def-pur-composition-tensor-maps). -/
 def restrictedAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y)
     [HasCompactification f] [CompactSpace Y]
     (hF : ∀ M : D Λ X, DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X M →
       DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y ((F Λ f).obj M))
     (hG : ∀ K : D Λ Y, DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y K →
       DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X ((G Λ f).obj K)) :=
-  rightDerivedUpperShriekAdjunction f
+  standingExceptionalAdjunction Λ f
     (DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X)
     (DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y)
     (fun _ hM ↦ hM.plusEtaleOrigin) (fun _ hK ↦ hK.plusEtaleOrigin.plus) hF hG

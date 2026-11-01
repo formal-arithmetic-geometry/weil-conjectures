@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SmoothPurity.CompletedLineTensor.CompletedLineTensorOrdinaryData
 import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSupplement
 import all WeilConjectures.TraceFormula.Supporting.FiniteFreeCompletedScalarComparison
+public import WeilConjectures.SmoothPurity.CompletedLineTensor.CompletedLineGoodRepresentativeEvaluation
 
 /-! # Ordinary signed-line scalar evaluation
 
@@ -54,22 +55,11 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
   (ι : E →ₐ[ℚ_[l]] F)
 
-/-- The ordinary scalar comparison respects the specified signed-line evaluation.
+/-- The normalized ordinary scalar comparison respects signed-line evaluation.
 Source: Stacks 03EL, 03EO, 06YY; blueprint Proof (3), inverse-pair compatibility
 (blueprint: lem-pur-completed-line-ordinary-evaluation).
-Proof: first check the ordinary sheaf square on sections. The two scalar-line
-comparisons move the two line factors past the scalar factor. Evaluation then
-multiplies by the image of their pairing. For positive exponents this is precisely
-IsPairNormalized's negative pairing clause; for negative exponents interchange the
-paired factors, and for zero use multiplication. The defining evaluation formula
-identifies the other path with scalar extension of evaluation. Sheafified tensor
-generators determine these maps. Apply the square termwise to a flat-term K-flat
-representative. Exact line tensor preserves these representatives. Substitute the
-universal-counit normalizations of the two ordinary comparisons and the exact
-localization comparisons of evaluation. Naturality and cancellation of the invertible
-K-flat counits give the derived square. Every derived object has such a resolution,
-so naturality transports the equality to every unbounded object. This argument uses
-ordinary derived extension only, with no completeness assumption. -/
+The representative square is supplied on the good K-flat localization, and full
+faithfulness of its localization transports it to every derived object. -/
 theorem ordinary_evaluation_compatibility (L : integralTowerModules l E X)
     [L.IsFiniteLocallyFreeOfRank 1] (N : integralTowerModules l F X)
     [N.IsFiniteLocallyFreeOfRank 1]
@@ -80,9 +70,34 @@ theorem ordinary_evaluation_compatibility (L : integralTowerModules l E X)
     (d.ordinary (-m)).hom.app ((tensor l E X L m).obj K) ≫
       (tensor l F X N (-m)).map
         ((d.ordinary m).hom.app K) ≫
-      (epsilon l F X N m).hom.app ((completedDerivedScalarExtension l E F ι X).obj K) =
+      (epsilon l F X N m).hom.app
+        ((completedDerivedScalarExtension l E F ι X).obj K) =
     (completedDerivedScalarExtension l E F ι X).map
-      ((epsilon l E X L m).hom.app K) := by sorry
+      ((epsilon l E X L m).hom.app K) := by
+  classical
+  let lhs : (tensor l E X L m ⋙ tensor l E X L (-m)) ⋙
+      completedDerivedScalarExtension l E F ι X ⟶
+      completedDerivedScalarExtension l E F ι X :=
+    Functor.whiskerLeft (tensor l E X L m) (d.ordinary (-m)).hom ≫
+      Functor.whiskerRight (d.ordinary m).hom (tensor l F X N (-m)) ≫
+      Functor.whiskerLeft (completedDerivedScalarExtension l E F ι X)
+        (epsilon l F X N m).hom
+  let rhs : (tensor l E X L m ⋙ tensor l E X L (-m)) ⋙
+      completedDerivedScalarExtension l E F ι X ⟶
+      completedDerivedScalarExtension l E F ι X :=
+    Functor.whiskerRight (epsilon l E X L m).hom
+      (completedDerivedScalarExtension l E F ι X)
+  let Λ := integralOperationsGoodLocalization l E X
+  let QI := (HomologicalComplex.quasiIso (integralTowerModules l E X) (.up ℤ)).inverseImage
+    (integralOperationsGoodComplex l E X).ι
+  let : Λ.IsLocalization QI := integralOperationsGoodLocalization_isLocalization l E X
+  let ff := Localization.fullyFaithfulWhiskeringLeft Λ QI
+    (DerivedCategory (integralTowerModules l F X))
+  have hh : lhs = rhs := ff.map_injective (by
+    apply NatTrans.ext
+    funext P
+    exact completed_good_representative_evaluation l E X F ι L N b d hd m P)
+  exact congrArg (fun n ↦ n.app K) hh
 
 end CompletedLineTensor
 end WeilConjectures

@@ -43,11 +43,7 @@ variable {I : Type u} [Preorder I] (C : I → Cat.{u, u + 1})
 variable (hdelta : ∀ i j k (h : i ≤ j) (h' : j ≤ k) (A : C i),
   (v k).map ((gamma i j k h h').hom.app A) ≫ (delta i k (h.trans h')).hom.app A =
     (delta j k h').hom.app ((U i j h).obj A) ≫ (delta i j h).hom.app A)
-include hdelta in
-include hdelta in
-include hdelta in
 variable [Nonempty I] [IsDirected I (· ≤ ·)]
-include hdelta in
 variable (hUid : ∀ i, U i i le_rfl = 𝟭 (C i))
   (hgammaRight : ∀ i k (h : i ≤ k),
     HEq (gamma i k k h le_rfl) (Iso.refl (U i k h)))
@@ -56,15 +52,6 @@ variable (hUid : ∀ i, U i i le_rfl = 𝟭 (C i))
       (gamma i j l h (h'.trans h'')).hom.app A =
     (U k l h'').map ((gamma i j k h h').hom.app A) ≫
       (gamma i k l (h.trans h') h'').hom.app A)
-include hgamma in
-include hdelta hgamma in
-include hdelta hgamma in
-include hdelta hgamma in
-include hdelta hgamma in
-include hdelta hgamma in
-omit [Nonempty I] [IsDirected I (· ≤ ·)] in
-omit [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] in
-include hdelta hgamma in
 end PresentationPairs
 
 end AlgebraicGeometry.Scheme

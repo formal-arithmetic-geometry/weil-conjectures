@@ -154,8 +154,6 @@ abbrev pbcTowerEvaluation (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) (n 
 
 variable {X} {R S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}} (φ : R ⟶ S)
 
-set_option linter.defProp false in
-set_option linter.defProp false in
 variable {B : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
   (ψ : S ⟶ B) (χ : R ⟶ B) (h : φ ≫ ψ = χ)
 

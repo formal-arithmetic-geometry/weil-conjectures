@@ -74,7 +74,6 @@ lemma signedCoconeShiftIso_inr (m i j : ℤ) (h : i + 1 = j) :
     Linear.comp_units_smul, Category.assoc, shiftFunctorObjXIso]
   simp only [Iso.app_hom, shiftFunctorComm_hom_app_f]
   simp only [
-
     Cochain.ofHom_v]
   erw [← HomologicalComplex.XIsoOfEq_hom_naturality_assoc]
   · simp only [mappingCone.inr_f_desc_f_assoc, shiftFunctor_map_f',
