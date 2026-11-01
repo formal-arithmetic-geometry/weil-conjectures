@@ -12,7 +12,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleProductsDerived
 public import WeilConjectures.AlgebraicGeometry.ProEtaleMilnorEpimorphic
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
-import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleLeftComplete
+public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleLeftComplete
 
 /-!
 # Left completeness of the unbounded pro-étale derived category
@@ -56,6 +56,7 @@ theorem left_complete (X : Scheme.{t})
       (CategoryTheory.ringedSiteModules.{max u (t + 1)} R) ℤ) :
     IsIso (DerivedCategory.Q.map
       (AlgebraicGeometry.Scheme.ProEt.postnikovComparison K)) := by
-  sorry
+  have := left_complete_quasiIso X R K
+  infer_instance
 
 end AlgebraicGeometry.Scheme.ProEt

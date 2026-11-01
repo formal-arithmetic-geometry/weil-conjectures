@@ -8,7 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteCoefficientRecords
 public import WeilConjectures.AlgebraicGeometry.ProjectiveLineDiagonalMaps
 import WeilConjectures.AlgebraicGeometry.FiniteP1DiagonalPicard
 import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteConstantUnitComp
-import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteFirstChern
+public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteFirstChern
 import WeilConjectures.AlgebraicGeometry.OrdinarySupportedChernNormalization
 import WeilConjectures.AlgebraicGeometry.ProjectiveLineDiagonalAlphaUnits
 public import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinaryFiniteP1KummerSupplement
@@ -251,6 +251,11 @@ private theorem coefficient_chart_adjunct (A : Type (u + 1)) [CommRing A]
       rw [supportedDerivedUnit_eq A e] at hc
       exact hc) d v
 
+attribute [local semireducible] ordinaryFiniteSupportedRealization
+  supportedKummerChern ordinaryFiniteP1KummerClass
+  ordinaryFiniteLinePullbackMap ordinaryFiniteP1DiagonalChartMap
+  ordinaryFiniteP1Unit ordinaryFiniteP1ChernPushforward ordinaryFiniteP1DiagonalSupportedMap
+
 /-- The diagonal component formula with the base hyperplane Chern arrow specified.
 Source: blueprint lem-amb-p1-diagonal-integrals, Chern additivity and adjunct steps.
 (blueprint: lem-amb-p1-diagonal-chern-fixed-base)
@@ -374,11 +379,6 @@ theorem ordinaryFiniteP1_diagonal_kummer_component_formula_fixed (N : ℕ) (hN :
         rw [ordinaryFiniteP1ChernPushforward_eq]
         exact unit_chern_core (ordinaryFiniteAdjunction A r)
           (ordinaryFiniteUnitPullback A r).hom c)))
-
-attribute [local semireducible] ordinaryFiniteSupportedRealization
-  supportedKummerChern ordinaryFiniteP1KummerClass
-  ordinaryFiniteLinePullbackMap ordinaryFiniteP1DiagonalChartMap
-  ordinaryFiniteP1Unit ordinaryFiniteP1ChernPushforward ordinaryFiniteP1DiagonalSupportedMap
 
 /-- The supported diagonal boundary has the base and relative hyperplane components.
 Source: blueprint lem-amb-p1-diagonal-integrals, standard-chart proof;

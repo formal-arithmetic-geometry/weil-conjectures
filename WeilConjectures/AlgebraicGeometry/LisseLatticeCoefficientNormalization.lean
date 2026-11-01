@@ -59,8 +59,7 @@ private theorem coefficientIntegers_mem (l : ℕ) [Fact l.Prime] (E : Type*) [Fi
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (x : E) :
     x ∈ Padic.coefficientExtensionIntegers l E ↔
       Padic.coefficientExtensionAbsoluteValue l E x ≤ 1 :=
-  (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec.1 x
+  Padic.mem_coefficientExtensionIntegers l E x
 
 private noncomputable def coefficientWithAbsLiftIntegerRingEquiv (l : ℕ) [Fact l.Prime]
     (E : Type) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
