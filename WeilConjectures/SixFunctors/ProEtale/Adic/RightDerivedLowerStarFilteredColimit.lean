@@ -8,6 +8,8 @@ module
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Constructions.Filtered
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ForgetAbRightDerivedLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.LowerStarFilteredColimit
+-- keeps instance search for colimits of pro-étale sheaves fast
+public import WeilConjectures.SixFunctors.ProEtale.Comparison
 
 /-!
 # Higher direct images commute with filtered colimits and direct sums
