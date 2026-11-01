@@ -43,26 +43,4 @@ open CategoryTheory CategoryTheory.Limits SheafOfModules
 
 namespace CategoryTheory
 
-attribute [instance] RingedPathRightDerived.additive
-
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 800000 in
--- The sheaf functors in the Hom normalization need additional elaboration fuel.
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 800000 in
--- Pasting mates elaborates the two module adjunctions and their complex transports.
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 800000 in
--- Nested derived comparisons require elaborating quotient functors.
 end CategoryTheory

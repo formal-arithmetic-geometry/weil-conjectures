@@ -69,9 +69,4 @@ def derivedSquareUnitMap {X S Z T : Scheme.{u}}
       ((DerivedCategory.singleFunctor
         (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) 0).obj G)
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
--- Avoid unfolding the unique-adjoint comparison during elaboration.
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
 end AlgebraicGeometry

@@ -489,5 +489,4 @@ theorem integralExtHomContinuous_of_isNoetherian
   have hlocal' := Eq.mp (congrArg (fun R => localIntegralContinuity R (I := I)) hR) hlocal
   exact constructible_hom_continuity _ X C hC K b hK hlocal' q
 
-set_option linter.unusedSectionVars false in
 end AlgebraicGeometry.ProEtale.CondensedRing

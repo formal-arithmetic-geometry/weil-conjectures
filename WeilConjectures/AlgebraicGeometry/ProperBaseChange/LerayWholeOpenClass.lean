@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeOpenChoices
 public import WeilConjectures.AlgebraicGeometry.LerayDegenerateSections
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 import WeilConjectures.AlgebraicGeometry.Section.SectionCohomologyCycleFormula
 
 /-! # The cocycle Leray edge on a restricted resolution

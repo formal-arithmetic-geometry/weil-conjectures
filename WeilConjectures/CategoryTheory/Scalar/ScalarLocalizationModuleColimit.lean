@@ -52,9 +52,4 @@ namespace CategoryTheory
 
 variable {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
 
-set_option linter.style.whitespace false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types true in
-set_option maxHeartbeats 400000 in
--- The sectionwise tensor normalization has a large elaborated type.
 end CategoryTheory

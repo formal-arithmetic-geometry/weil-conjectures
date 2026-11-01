@@ -55,10 +55,6 @@ include ℓ k hTd hTf hT
 
 variable (f : X ⟶ Y) (g : Y' ⟶ Y) (f' : X' ⟶ Y') (g' : X' ⟶ X)
 
-variable {f g f' g'} in
-variable {f g f' g'} in
-variable {f g f' g'} in
-variable {f g f' g'} in
 end ExchangeStepCache
 
 variable (B : Type) [CommRing B] [TopologicalSpace B] [IsTopologicalRing B]

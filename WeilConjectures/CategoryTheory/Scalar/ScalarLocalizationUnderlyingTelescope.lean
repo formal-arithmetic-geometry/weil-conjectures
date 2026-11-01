@@ -228,8 +228,4 @@ private theorem telescope_of_complexColimit
         simpa only [scalarLocalizationTelescopeLeg, ← Category.assoc, eK.inv_hom_id,
           Category.id_comp] using hn.symm
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 1200000 in
--- The tensor and derived coefficient structures require substantial elaboration.
 end CategoryTheory

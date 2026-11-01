@@ -96,6 +96,149 @@ set_option autoImplicit false
 universe c d vc vd r w w'
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace CategoryTheory.NativeRestriction
+/-! Private copies of the restriction Hom comparison of
+`WeilConjectures.CategoryTheory.NativeRingedRestrictionHom`, which keeps them private. -/
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem restriction_map_bijective
+    {C : Type c} {D : Type d} [Category.{vc} C] [Category.{vd} D]
+    (F : C ⥤ D) [F.IsEquivalence] (R : Dᵒᵖ ⥤ RingCat.{max c d vc vd r})
+    (M N : PresheafOfModules.{max c d vc vd r} R) :
+    Function.Bijective (fun f : M ⟶ N ↦ (PresheafOfModules.pushforward₀ F R).map f) := by
+  let W := (Functor.whiskeringLeft Cᵒᵖ Dᵒᵖ AddCommGrpCat.{max c d vc vd r}).obj F.op
+  have hi : Function.Injective (fun f : M ⟶ N ↦
+      (PresheafOfModules.pushforward₀ F R).map f) := by
+    intro f g h
+    apply (PresheafOfModules.toPresheaf R).map_injective
+    apply W.map_injective
+    exact congrArg ((PresheafOfModules.toPresheaf (F.op ⋙ R)).map) h
+  refine ⟨hi, ?_⟩
+  intro α
+  let β : M.presheaf ⟶ N.presheaf :=
+    W.preimage ((PresheafOfModules.toPresheaf (F.op ⋙ R)).map α)
+  have hb (X : Cᵒᵖ) (x : M.obj (F.op.obj X)) :
+      β.app (F.op.obj X) x = α.app X x :=
+    ConcreteCategory.congr_hom (NatTrans.congr_app
+      (W.map_preimage (X := M.presheaf) (Y := N.presheaf)
+        ((PresheafOfModules.toPresheaf (F.op ⋙ R)).map α)) X) x
+  have hs (Y : Dᵒᵖ) (r : R.obj Y) (x : M.obj Y) :
+      β.app Y (r • x) = r • β.app Y x := by
+    let e := F.op.objObjPreimageIso Y
+    apply (ConcreteCategory.bijective_of_isIso (N.presheaf.map e.inv)).1
+    change N.map e.inv (β.app Y (r • x)) = N.map e.inv (r • β.app Y x)
+    have hn (z : M.obj Y) :
+        N.map e.inv (β.app Y z) = β.app _ (M.map e.inv z) :=
+      (β.naturality_apply e.inv z).symm
+    rw [hn, M.map_smul, hb, map_smul, N.map_smul, hn, hb]
+  refine ⟨PresheafOfModules.homMk β hs, ?_⟩
+  ext X x
+  exact hb X x
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private def restrictionHomMap
+    {C : Type c} {D : Type d} [Category.{vc} C] [Category.{vd} D]
+    (F : C ⥤ D) (R : Dᵒᵖ ⥤ CommRingCat.{max c d vc vd r})
+    (M N : PresheafOfModules.{max c d vc vd r} (R ⋙ forget₂ _ _)) :
+    (PresheafOfModules.pushforward₀ F (R ⋙ forget₂ _ _)).obj
+        (PresheafOfModules.homObj M N) ⟶
+      PresheafOfModules.homObj (R := F.op ⋙ R)
+        ((PresheafOfModules.pushforward₀ F (R ⋙ forget₂ _ _)).obj M)
+        ((PresheafOfModules.pushforward₀ F (R ⋙ forget₂ _ _)).obj N) where
+  app X := ModuleCat.ofHom
+    (X := (PresheafOfModules.homObj (R := R) M N).obj (F.op.obj X))
+    (Y := (PresheafOfModules.homObj (R := F.op ⋙ R)
+      ((PresheafOfModules.pushforward₀ F (R ⋙ forget₂ _ _)).obj M)
+      ((PresheafOfModules.pushforward₀ F (R ⋙ forget₂ _ _)).obj N)).obj X)
+    { toFun := fun φ ↦ (PresheafOfModules.pushforward₀
+        (Over.post (X := X.unop) F) _).map φ
+      map_add' := fun _ _ ↦ rfl
+      map_smul' := fun _ _ ↦ rfl }
+  naturality f := by
+    ext φ : 2
+    apply PresheafOfModules.hom_ext
+    intro W
+    ext x
+    change φ.app (op (Over.mk (F.map W.unop.hom ≫ F.map f.unop))) x =
+      φ.app (op (Over.mk (F.map (W.unop.hom ≫ f.unop)))) x
+    exact PresheafOfModules.restrictOver_hom_app_congr φ (F.map_comp _ _).symm x
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+@[irreducible] private def restrictionHomIso
+    {C : Type c} {D : Type d} [Category.{vc} C] [Category.{vd} D]
+    (F : C ⥤ D) (hF : ∀ X : C, (Over.post (X := X) F).IsEquivalence)
+    (R : Dᵒᵖ ⥤ CommRingCat.{max c d vc vd r})
+    (M N : PresheafOfModules.{max c d vc vd r} (R ⋙ forget₂ _ _)) :
+    (PresheafOfModules.pushforward₀ F (R ⋙ forget₂ _ _)).obj
+        (PresheafOfModules.homObj M N) ≅
+      PresheafOfModules.homObj (R := F.op ⋙ R)
+        ((PresheafOfModules.pushforward₀ F (R ⋙ forget₂ _ _)).obj M)
+        ((PresheafOfModules.pushforward₀ F (R ⋙ forget₂ _ _)).obj N) := by
+  let α := restrictionHomMap.{_, _, _, _, r} F R M N
+  have ha (X : Cᵒᵖ) : IsIso (α.app X) := by
+    let := hF X.unop
+    rw [ConcreteCategory.isIso_iff_bijective]
+    exact restriction_map_bijective.{_, _, _, _, r} (Over.post (X := X.unop) F) _ _ _
+  exact PresheafOfModules.isoMk (fun X ↦ asIso (α.app X)) (fun _ _ f ↦ α.naturality f)
+
+private theorem restrictionHomIso_hom
+    {C : Type c} {D : Type d} [Category.{vc} C] [Category.{vd} D]
+    (F : C ⥤ D) (hF : ∀ X : C, (Over.post (X := X) F).IsEquivalence)
+    (R : Dᵒᵖ ⥤ CommRingCat.{max c d vc vd r})
+    (M N : PresheafOfModules.{max c d vc vd r} (R ⋙ forget₂ _ _)) :
+    (restrictionHomIso.{_, _, _, _, r} F hF R M N).hom = restrictionHomMap.{_, _, _, _, r} F R M N
+      := by
+  unfold restrictionHomIso
+  rfl
+
+section Restriction
+variable {C : Type c} {D : Type d} [Category.{vc} C] [Category.{vd} D]
+  {K : GrothendieckTopology C} {J : GrothendieckTopology D}
+  (F : C ⥤ D) [Functor.IsContinuous F K J] (R : Sheaf J CommRingCat.{max c d vc vd r})
+
+private def sheafHomIso (hF : ∀ X : C, (Over.post (X := X) F).IsEquivalence)
+    (M N : NativeModules.{max c d vc vd r, d, vd} R) :
+    (restrictModules.{_, _, _, _, r} (K := K) F R).obj (SheafOfModules.homObj (R := R) M N) ≅
+      SheafOfModules.homObj (R := restrictedCommRing.{_, _, _, _, r} (K := K) F R)
+        ((restrictModules.{_, _, _, _, r} (K := K) F R).obj M)
+        ((restrictModules.{_, _, _, _, r} (K := K) F R).obj N) :=
+  { hom := ⟨restrictionHomMap.{_, _, _, _, r} F R.obj M.val N.val⟩
+    inv := ⟨(restrictionHomIso.{_, _, _, _, r} F hF R.obj M.val N.val).inv⟩
+    hom_inv_id := by
+      apply SheafOfModules.hom_ext
+      change restrictionHomMap.{_, _, _, _, r} F R.obj M.val N.val ≫ _ = _
+      rw [← restrictionHomIso_hom.{_, _, _, _, r} F hF R.obj M.val N.val]
+      exact Iso.hom_inv_id _
+    inv_hom_id := by
+      apply SheafOfModules.hom_ext
+      change _ ≫ restrictionHomMap.{_, _, _, _, r} F R.obj M.val N.val = _
+      rw [← restrictionHomIso_hom.{_, _, _, _, r} F hF R.obj M.val N.val]
+      exact Iso.inv_hom_id _ }
+
+
+-- Categorical comparisons elaborate several nested restriction and localization functors.
+set_option maxHeartbeats 800000 in
+-- The nested functor comparisons require additional elaboration heartbeats.
+set_option backward.isDefEq.respectTransparency false in
+private theorem sheafHomIso_naturality
+    (hF : ∀ X : C, (Over.post (X := X) F).IsEquivalence)
+    {M M' N N' : NativeModules.{max c d vc vd r, d, vd} R} (f : M' ⟶ M) (g : N ⟶ N') :
+    (restrictModules.{_, _, _, _, r} (K := K) F R).map (SheafOfModules.homObjMap (R := R) f g) ≫
+        (sheafHomIso.{_, _, _, _, r} F R hF M' N').hom =
+      (sheafHomIso.{_, _, _, _, r} F R hF M N).hom ≫
+        SheafOfModules.homObjMap (R := restrictedCommRing.{_, _, _, _, r} (K := K) F R)
+          ((restrictModules.{_, _, _, _, r} (K := K) F R).map f)
+          ((restrictModules.{_, _, _, _, r} (K := K) F R).map g) := by
+  apply SheafOfModules.hom_ext
+  ext X φ : 3
+  apply PresheafOfModules.hom_ext
+  intro W
+  ext x
+  rfl
+
+end Restriction
+
 
 private def scalarRoundTrip {C : Type c} [Category.{vc} C]
     {J : GrothendieckTopology C} {R S : Sheaf J RingCat.{r}} (a : R ≅ S) :

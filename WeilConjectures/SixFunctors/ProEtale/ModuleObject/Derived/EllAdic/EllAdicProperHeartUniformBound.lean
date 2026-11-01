@@ -531,5 +531,4 @@ theorem properLowerStar_uniformBound_padicAlgClRingObj
         ((DerivedCategory.singleFunctor _ 0).obj M)).IsLE d :=
   qbar_bound ℓ p
 
-set_option linter.unusedVariables false in
 end AlgebraicGeometry.ProEtale.CondensedRing

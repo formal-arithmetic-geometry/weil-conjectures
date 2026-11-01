@@ -275,5 +275,4 @@ variable (T : Scheme.{u}) [IsNoetherian T]
   [Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]
   [Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]
 
-set_option synthInstance.checkSynthOrder false in
 end WeilConjectures

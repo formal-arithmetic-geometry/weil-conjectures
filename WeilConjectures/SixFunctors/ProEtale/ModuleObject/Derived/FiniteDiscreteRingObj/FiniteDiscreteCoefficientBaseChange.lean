@@ -211,7 +211,6 @@ lemma boundedConstructibleBaseChange_eq_exchangeRight (sq : CommSq g' f' f g) :
 attribute [local irreducible] boundedConstructibleUpperStar boundedConstructibleLowerStar
   boundedConstructibleUpperStarLowerStarAdjunction boundedConstructiblePullbackSquareComparison
 
-variable {f g f' g'} in
 end BaseChange
 
 end FiniteDiscreteRingObj
@@ -350,7 +349,6 @@ lemma boundedConstructibleBaseChange_eq_exchangeRight (sq : CommSq g' f' f g) :
 attribute [local irreducible] boundedConstructibleUpperStar boundedConstructibleLowerStar
   boundedConstructibleUpperStarLowerStarAdjunction boundedConstructiblePullbackSquareComparison
 
-variable {f g f' g'} in
 end BaseChange
 
 end UnitBallRingObj

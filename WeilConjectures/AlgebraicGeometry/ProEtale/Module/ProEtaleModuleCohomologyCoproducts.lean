@@ -46,6 +46,7 @@ open scoped Simplicial
 universe u v w z s u' v'
 noncomputable section
 set_option autoImplicit false
+set_option linter.privateModule false
 set_option backward.isDefEq.respectTransparency false
 private theorem alternating_preservesCoproducts (C : Type u) [Category.{v} C] [Preadditive C]
     (I : Type s) [HasCoproducts.{s} C] :
