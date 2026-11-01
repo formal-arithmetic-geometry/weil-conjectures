@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import WeilConjectures.AlgebraicGeometry.ContinuousIntegralCoefficients
+public import WeilConjectures.AlgebraicGeometry.ContinuousIntegralCoefficientData
+public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
 import all WeilConjectures.AlgebraicGeometry.ConstructibleFiniteHeart
 import all WeilConjectures.AlgebraicGeometry.IntegralContinuousEncodingConstructible
-import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeTriangulated
-import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImage
 import all WeilConjectures.SixFunctors.FiniteCtfInternalEtaleRealization
 import WeilConjectures.SixFunctors.ProEtale.IntegralDirectImageLimits
 import WeilConjectures.SixFunctors.ProEtale.IntegralReductionPullbackNormalization
 import WeilConjectures.SixFunctors.ProEtale.IntegralResidueCriterion
+import WeilConjectures.AlgebraicGeometry.ContinuousCoefficientModuleEncoding
+import WeilConjectures.AlgebraicGeometry.ConstantModelTorAmplitude
+import WeilConjectures.CategoryTheory.ConstantScalarRestrictionTensor
 
 /-! # Upper bounds for integral constructible sheaves -/
 

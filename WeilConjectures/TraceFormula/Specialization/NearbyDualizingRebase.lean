@@ -5,12 +5,9 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingGenericBaseUnique
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBaseSlice
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.Basic
-public import WeilConjectures.SixFunctors.NearbyCycles.AutActionExchange
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingRebaseAux
-import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 

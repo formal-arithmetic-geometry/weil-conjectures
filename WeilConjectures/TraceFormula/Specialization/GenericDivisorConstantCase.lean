@@ -6,9 +6,9 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.DVRStalkLocalEquation
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorGenericPoint
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorThickOrigin
+public import WeilConjectures.TraceFormula.Specialization.GenericDivisorLisse
 
 /-!
 

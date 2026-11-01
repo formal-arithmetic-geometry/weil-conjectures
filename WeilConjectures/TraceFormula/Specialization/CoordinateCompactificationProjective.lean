@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Differentials
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DualizingFieldChange.GenericPoint
 public import WeilConjectures.TraceFormula.Specialization.CoordinateCompactification
 public import WeilConjectures.TraceFormula.Specialization.GenericSliceHom

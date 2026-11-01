@@ -6,8 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.PullbackFamily
-public import WeilConjectures.WeilObject.BoundedConstructible.UpperLowerStar
-public import WeilConjectures.WeilObject.BoundedConstructible.Homology
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.HomologyFunctorCoherence
 
 /-!

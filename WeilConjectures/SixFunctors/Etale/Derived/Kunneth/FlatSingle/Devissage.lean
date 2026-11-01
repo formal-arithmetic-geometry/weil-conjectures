@@ -8,11 +8,9 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FlatSingle.FiniteGood
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FlatSingle.BaseChange
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
-public import WeilConjectures.ConstructibleSheaf.FilteredColimit
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FlatSingle.Coefficients
-public import WeilConjectures.ConstructibleSheaf.FiniteTypePushforward
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FlatSingle.Degreewise
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FlatSingle.FlatLowerStar
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FlatSingle.HomologyFlat
 
 /-!
 # Dévissage of the flat sheaf in the base change map

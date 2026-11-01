@@ -4,8 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Claude
 -/
 module
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineRelative
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerClass
 
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerOrientation
 
 /-!
 # Base change of the direct images of `Λ(1)` from `𝔸¹` and `𝔾ₘ`

@@ -8,6 +8,7 @@ module
 public import WeilConjectures.Compactification.OverRefinementBaseChange
 public import WeilConjectures.Mathlib.CategoryTheory.Iso
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ClopenLowerShriek
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.MorphismDefs
 
 /-!
 

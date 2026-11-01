@@ -9,6 +9,7 @@ public import WeilConjectures.PoincareDuality.ProjectionFormulaCoherence
 public import WeilConjectures.TraceFormula.BaseChangeCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleMonoidalComp
 public import WeilConjectures.CategoryTheory.Monoidal.ProjectionBaseChange
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.MorphismDefs
 
 /-!
 

@@ -5,16 +5,9 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
-public import WeilConjectures.Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
-public import WeilConjectures.TateTwist.TateModuleTrivialization
-public import WeilConjectures.TateTwist.UpperStarExtendScalars
-public import WeilConjectures.TateTwist.Pullback
-public import WeilConjectures.TraceFormula.Specialization.NearbyDualityTwistCompositionSlice
-public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethFiniteSupport
 public import WeilConjectures.TraceFormula.Specialization.NearbyTwistProjectiveLine
-public import WeilConjectures.TraceFormula.Specialization.TraitChangeTrait
-public import WeilConjectures.TraceFormula.Specialization.TraitModelGenericPoint
+public import WeilConjectures.TraceFormula.Specialization.NearbyDualityTwistAssembly
+public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBaseSliceOpenComp
 
 /-!
 

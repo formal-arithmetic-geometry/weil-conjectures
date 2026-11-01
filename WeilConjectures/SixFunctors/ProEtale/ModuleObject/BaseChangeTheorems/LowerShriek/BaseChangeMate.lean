@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.ExchangeFormalism.ShriekBaseChangeMate
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.BaseChangeProper
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CompositionTriangle
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.MorphismDefs
 import WeilConjectures.CategoryTheory.Adjunction.SquareCompatibleMate
 
 /-!

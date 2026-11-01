@@ -5,15 +5,9 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.NormalSchemeOpen
 public import WeilConjectures.ConstructibleSheaf.SylowGaloisCoverTrivializing
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.FiniteEtaleTraceDegree
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EllGroupMonodromyDevissage
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.LowerStar
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekBaseChange
-public import WeilConjectures.TraceFormula.Specialization.GenericDivisorFiniteCover
-public import WeilConjectures.TraceFormula.Specialization.GenericDivisorFiniteGeneric
-public import WeilConjectures.TraceFormula.Specialization.GenericDivisorFiniteTransfer
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorNormalization
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorResidueConstant
 

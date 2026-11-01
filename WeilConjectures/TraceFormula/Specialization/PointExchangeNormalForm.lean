@@ -5,13 +5,10 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.Specialization.ComponentExchangeFactor
-public import WeilConjectures.TraceFormula.Specialization.CompactificationRouteClosedExtension
 public import WeilConjectures.TraceFormula.Specialization.DeformationUnitClass
 public import WeilConjectures.TraceFormula.Specialization.PointExchangeOnComponentBdc
 public import WeilConjectures.TraceFormula.Specialization.PointExchangeNormalFormAux
 public import WeilConjectures.TraceFormula.Specialization.SupportIdentityOnComponent
-public import WeilConjectures.Tactic.FirstOrderApply
 
 /-!
 

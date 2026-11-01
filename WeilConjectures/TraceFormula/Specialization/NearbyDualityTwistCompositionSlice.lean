@@ -6,11 +6,9 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBaseSliceOpenComp
-public import WeilConjectures.TraceFormula.Specialization.NearbyExceptionalExchangeSlice
 public import WeilConjectures.TraceFormula.Specialization.NearbyTwistCompat
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityTwistAssembly
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingCompositionLaw
-import WeilConjectures.Tactic.TransportExact
 
 /-!
 

@@ -5,7 +5,6 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMorphismComp
 public import WeilConjectures.TraceFormula.OrdinaryKunnethDevissage
 public import WeilConjectures.TraceFormula.GenericBaseChangePullback
 

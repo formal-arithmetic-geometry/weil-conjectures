@@ -4,12 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTwistLine
-public import WeilConjectures.AlgebraicGeometry.SfEtaleAmbientAdjointProjection
-public import WeilConjectures.Compactification.ProjectiveSpace
+public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateTwist
+public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 import WeilConjectures.AlgebraicGeometry.SfCompactificationKernelTransport
 import WeilConjectures.AlgebraicGeometry.SfP1CoordinateIntegrals
 import WeilConjectures.SixFunctors.Etale.Derived.CupProductCoherence
+import WeilConjectures.AlgebraicGeometry.SfDiagonalKernelIntegrals
 
 /-! # Projective-line trace adjunction over an arbitrary affine base
 

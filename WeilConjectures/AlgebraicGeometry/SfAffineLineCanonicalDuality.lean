@@ -4,9 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTwistLine
 public import WeilConjectures.AlgebraicGeometry.SfEtaleAmbientAdjointProjection
 public import WeilConjectures.Compactification.ProjectiveSpace
+public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateTwist
 import WeilConjectures.AlgebraicGeometry.EtaleFiniteTwistPullback
 import WeilConjectures.AlgebraicGeometry.SfAffineBaseP1TraceAdjunction
 import WeilConjectures.AlgebraicGeometry.SfExceptionalTensorTransitivity

@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Claude
 -/
 module
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
-public import WeilConjectures.SixFunctors.Etale.Derived.Stalks.Basic
 
 /-!
 # Vanishing of germs and the support of an étale sheaf

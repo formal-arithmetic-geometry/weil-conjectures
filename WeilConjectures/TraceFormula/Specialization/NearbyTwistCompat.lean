@@ -5,13 +5,8 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.Adjunction.MateCube
-public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
-public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
-public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructibleUnitIdentity
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBaseSliceOpen
 public import WeilConjectures.TraceFormula.Specialization.NearbyExceptionalExchangeSlice
-import WeilConjectures.Tactic.TransportExact
 
 /-!
 

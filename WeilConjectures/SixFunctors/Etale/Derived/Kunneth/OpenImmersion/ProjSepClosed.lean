@@ -8,7 +8,6 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ProperFactor.ExchangeCompat
 public import WeilConjectures.SixFunctors.Etale.Derived.ClosedPoints.Detection
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Locality
 
 /-!
 # Base change along open immersions: the projective case over a separably closed field

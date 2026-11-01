@@ -4,9 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Claude
 -/
 module
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Shriek
 
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 
 /-!
 # The exceptional inverse image along an isomorphism

@@ -6,13 +6,12 @@ Authors: Nailin Guan
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleIhom
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
+public import WeilConjectures.Compactification.Over
 import WeilConjectures.AlgebraicGeometry.BoundedConstructibleDevissage
 import WeilConjectures.AlgebraicGeometry.FiniteTypeDirectImageSingleBound
 import WeilConjectures.AlgebraicGeometry.FiniteTypeDirectImageSingleConstructible
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 
 /-!
 

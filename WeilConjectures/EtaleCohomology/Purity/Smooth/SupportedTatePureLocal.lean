@@ -5,11 +5,8 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.Algebra.Homology.DerivedCategory.SingleHomology
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.CartierKummerClass
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-public import WeilConjectures.SixFunctors.OpenClosed.Conservative
-public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Local
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability.FiniteEtaleAdjoint
 
 /-!
 # The purity hypothesis is local

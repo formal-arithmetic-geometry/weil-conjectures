@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Claude
 -/
 module
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.KunnethMap
 
-public import WeilConjectures.SixFunctors.Etale.Derived.Stalks.Support
 
 /-!
 # Globally generated étale sheaves

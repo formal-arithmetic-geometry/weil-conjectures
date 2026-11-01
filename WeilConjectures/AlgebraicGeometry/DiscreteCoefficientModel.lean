@@ -15,7 +15,6 @@ import all WeilConjectures.AlgebraicGeometry.IntegralModelsFlatResidue
 import all WeilConjectures.AlgebraicGeometry.NoetherianGlobalConstructibility
 import all WeilConjectures.CategoryTheory.ConstantScalarRestrictionTensor
 import WeilConjectures.CategoryTheory.RingedCocontinuousMonoidal
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Monoidal
 
 /-! # Normalized models for discrete constant coefficients
 

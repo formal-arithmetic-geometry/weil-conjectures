@@ -7,8 +7,9 @@ module
 
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionTensorMapCounit
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.AffineSpace
-public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.EtaleDuality
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.ProjectiveLineAdjunction
+public import WeilConjectures.CategoryTheory.Adjunction.ProjectionTensorMapRightAdjointUniq
+public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.EtaleDuality
 
 /-!
 # Smooth duality for the affine line

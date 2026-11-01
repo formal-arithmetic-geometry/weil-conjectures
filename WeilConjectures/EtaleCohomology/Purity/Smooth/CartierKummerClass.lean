@@ -5,19 +5,9 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Morphisms.RegularImmersion
-public import WeilConjectures.AlgebraicGeometry.Regular
-public import WeilConjectures.ConstructibleSheaf.Defs
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.Coprojection
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.FrameIndependence
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerProductBaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionFrame
-public import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
-public import WeilConjectures.SixFunctors.Etale.Derived.GeometricPoint
 public import WeilConjectures.SixFunctors.Etale.Derived.HeartGluing
-public import WeilConjectures.SixFunctors.Etale.Derived.SupportsEtale
-public import WeilConjectures.SixFunctors.Etale.Derived.SupportsOpenImmersion
-public import WeilConjectures.SixFunctors.Integral.Exact
 
 /-!
 # The cycle class of an effective Cartier divisor via Kummer boundaries

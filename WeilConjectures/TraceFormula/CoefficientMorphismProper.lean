@@ -7,7 +7,8 @@ module
 
 public import WeilConjectures.TraceFormula.CoefficientMorphismBasic
 public import WeilConjectures.TraceFormula.ContractingGraph
-public import WeilConjectures.TraceFormula.ProperCurve
+public import WeilConjectures.TraceFormula.LefschetzVerdier
+public import WeilConjectures.TraceFormula.FixedPointScheme
 
 /-!
 

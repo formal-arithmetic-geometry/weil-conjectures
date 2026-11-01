@@ -5,14 +5,9 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionUpperShriek
 public import WeilConjectures.TraceFormula.CompactCohomology
 public import WeilConjectures.TraceFormula.OpenPieceCoherence
-public import WeilConjectures.CategoryTheory.Triangulated.TriangleMorphismExtension
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CompactlySupported
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarShift
-public import WeilConjectures.TraceFormula.CompactPullbackShift
 
 /-!
 

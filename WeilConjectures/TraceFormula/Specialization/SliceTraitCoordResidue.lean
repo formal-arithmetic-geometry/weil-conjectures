@@ -6,8 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.Specialization.SliceTraitValuation
-public import WeilConjectures.TraceFormula.Specialization.SliceTraitExists
-public import WeilConjectures.TraceFormula.Specialization.SliceTraitGaloisLayer
 public import WeilConjectures.SixFunctors.NearbyCycles.TraitChangeInduction.SliceGaloisFields
 public import WeilConjectures.RingTheory.Valuation.ResidueLinearIndependent
 public import WeilConjectures.FieldTheory.PerfectClosureLinearIndependent

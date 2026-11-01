@@ -5,13 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.CurveTestDatum
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.DegreeZero
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Coefficients
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.BaseChangeUniversalHomeomorphism
 public import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
-public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism.Algebra
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FieldBaseChangeNormal
 
 /-!

@@ -8,8 +8,6 @@ module
 public import WeilConjectures.TraceFormula.Specialization.GenericSliceTraitGaloisLayer
 public import WeilConjectures.TraceFormula.Specialization.GenericSliceTraitExists
 public import WeilConjectures.TraceFormula.Specialization.GenericSliceTraitUnramified
-public import WeilConjectures.SixFunctors.NearbyCycles.CartesianModelWeaklyEtale
-public import WeilConjectures.Tactic.ExactModProofs
 public import WeilConjectures.SixFunctors.NearbyCycles.TraitChangeFiniteCoefficient
 
 /-!

@@ -9,7 +9,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineInputs
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerRelativeBaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RankOneLocal
 public import WeilConjectures.EtaleCohomology.TateTwist.KummerClass
-public import WeilConjectures.EtaleCohomology.TateTwist.KummerClass.TwistPullback
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerOrientation
 
 /-!
 # The affine line and the punctured line over a base, with `Λ(1) = μₙ ⊗ Λ` coefficients

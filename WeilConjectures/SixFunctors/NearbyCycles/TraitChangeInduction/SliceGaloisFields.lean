@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.Specialization.SliceTraitMap
-public import WeilConjectures.TraceFormula.Specialization.TraitTensorCompositum
 
 /-!
 

@@ -7,7 +7,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.IntegralModelsStacksData
 public import WeilConjectures.AlgebraicGeometry.InternalModuleOperationsTransport
 import WeilConjectures.AlgebraicGeometry.CondensedCoefficientRingPullback
-import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 
 /-! # Pulling back constant coordinates on the coefficient ring
 

@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.NearbyCycles.TraitChangeInduction.SliceStabilityMixedChar
-public import WeilConjectures.TraceFormula.Specialization.SliceTraitGaloisLayer
 public import WeilConjectures.FieldTheory.PPowerDegreeCyclicSubextension
 public import WeilConjectures.FieldTheory.CyclicDegreePGenerator
 

@@ -5,13 +5,12 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic
-public import WeilConjectures.TraceFormula.Additivity
 public import WeilConjectures.TraceFormula.ShriekTraceFunction
 public import WeilConjectures.TraceFormula.WeilDistTriangLowerShriek
 public import WeilConjectures.TraceFormula.WeilDistTriangTrace
 public import WeilConjectures.TraceFormula.WeilSheafUpperStar
-public import WeilConjectures.WeilObject.BoundedConstructible.UpperLowerStar
+public import WeilConjectures.AlgebraicGeometry.OverPullbackFiniteType
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.CospecializationSections
 
 /-!
 

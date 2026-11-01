@@ -7,10 +7,9 @@ module
 
 public import WeilConjectures.CategoryTheory.Monoidal.Rigid.TraceZigzag
 public import WeilConjectures.CategoryTheory.Monoidal.ZigzagTransport
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleMonoidalShift
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleUpperStarBraided
 public import WeilConjectures.TraceFormula.PointNormalizationBaseChange
-public import WeilConjectures.TraceFormula.PointNormalizationTau
+public import WeilConjectures.TraceFormula.PointNormalizationKunneth
 
 /-!
 

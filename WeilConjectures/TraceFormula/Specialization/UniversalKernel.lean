@@ -5,12 +5,9 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.Specialization.DeformationTraceSpecialization
-public import WeilConjectures.TraceFormula.Specialization.NearbyDualityExchange
 public import WeilConjectures.Tactic.MatchTactic
 public import WeilConjectures.TraceFormula.Specialization.ExchangeOnProper
-public import WeilConjectures.SixFunctors.NearbyCycles.ExchangeId
-public import WeilConjectures.SixFunctors.NearbyCycles.KunnethPullback
+public import WeilConjectures.TraceFormula.Specialization.NearbyDuality
 
 /-!
 

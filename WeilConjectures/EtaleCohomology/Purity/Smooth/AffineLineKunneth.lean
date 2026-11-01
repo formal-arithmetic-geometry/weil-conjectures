@@ -9,13 +9,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.Conventions
 public import WeilConjectures.CategoryTheory.DerivedCategory.HomSingleProjective
 public import WeilConjectures.Algebra.Homology.DerivedCategory.SingleHomology
 public import WeilConjectures.SixFunctors.Etale.Derived.GeometricPoint
-public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Relative
-public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
-public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
-public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
-public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
-public import WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 
 /-!

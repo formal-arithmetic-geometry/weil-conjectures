@@ -5,13 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.AffineSpace.ZeroSection
-public import WeilConjectures.AlgebraicGeometry.Morphisms.RegularImmersion
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Line
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineSmooth
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SupportedTatePureLocal
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.ZeroSectionPurity
-public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Diagonal
 
 /-!
 # Purity for the zero section of the affine line and for the diagonal of the projective line

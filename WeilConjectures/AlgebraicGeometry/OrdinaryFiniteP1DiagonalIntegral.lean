@@ -7,6 +7,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1DiagonalComponents
 public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1KummerMaps
 public import WeilConjectures.AlgebraicGeometry.ProjectiveLineDiagonalCartier
+public import WeilConjectures.AlgebraicGeometry.OrdinarySupportedCartierKummer
 
 @[expose] public section
 set_option autoImplicit false

@@ -5,7 +5,6 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.PullbackFamily
 public import WeilConjectures.TraceFormula.ShriekTraceFunction
 
 /-!

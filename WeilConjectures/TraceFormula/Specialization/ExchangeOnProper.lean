@@ -5,7 +5,6 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.NearbyCycles.HomComp
 public import WeilConjectures.TraceFormula.Specialization.SupportCompactSupportExchange
 
 /-!

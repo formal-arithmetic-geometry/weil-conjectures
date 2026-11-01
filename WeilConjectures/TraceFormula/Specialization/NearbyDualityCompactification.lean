@@ -5,12 +5,6 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.Specialization.NearbyDualityClosure
-public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGlobal
-public import WeilConjectures.TraceFormula.Specialization.NearbyDualityProper
-public import WeilConjectures.TraceFormula.Specialization.TraitModelProperExchange
-public import WeilConjectures.TraceFormula.Specialization.TraitModelCompactification
-public import WeilConjectures.TraceFormula.Specialization.NearbyDualityFiniteSupport
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBaseInduction
 public import WeilConjectures.TraceFormula.Specialization.GenericBaseMeasureSlice
 

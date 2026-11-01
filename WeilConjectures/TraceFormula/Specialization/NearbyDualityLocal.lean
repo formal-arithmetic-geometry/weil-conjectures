@@ -5,9 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.NearbyCycles.KunnethLocal
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityCompactification
-public import WeilConjectures.TraceFormula.Specialization.TraitProductRestrict
 
 /-!
 

@@ -6,10 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Derived
-public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
-public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Vertical
-public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.OpenImmersion.NonClosedPoints
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.OpenImmersion.ClosedPoints
 

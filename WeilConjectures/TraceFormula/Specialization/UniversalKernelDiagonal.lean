@@ -8,6 +8,7 @@ module
 public import WeilConjectures.TraceFormula.Specialization.DiagExternalProduct
 public import WeilConjectures.TraceFormula.Specialization.UniversalKernel
 public import WeilConjectures.Tactic.TransportExact
+public import WeilConjectures.TraceFormula.Specialization.NearbyDualityExchange
 
 /-!
 

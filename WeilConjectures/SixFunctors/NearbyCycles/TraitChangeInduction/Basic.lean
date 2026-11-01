@@ -11,9 +11,7 @@ public import WeilConjectures.SixFunctors.NearbyCycles.RestrictOpens
 public import WeilConjectures.SixFunctors.NearbyCycles.ProperTraitChange
 public import WeilConjectures.SixFunctors.NearbyCycles.TraitCompactification
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ClosedPointsDetection
-public import WeilConjectures.Compactification.AffineCharts
 public import WeilConjectures.SixFunctors.NearbyCycles.TraitChangeInduction.BasicCharts
-import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 

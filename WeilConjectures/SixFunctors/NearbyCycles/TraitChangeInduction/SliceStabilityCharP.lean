@@ -9,8 +9,6 @@ public import WeilConjectures.SixFunctors.NearbyCycles.TraitChangeInduction.Slic
 public import WeilConjectures.TraceFormula.Specialization.SliceTraitValuation
 public import WeilConjectures.RingTheory.Valuation.ArtinSchreierNormalForm
 public import WeilConjectures.RingTheory.Valuation.GaloisResidueRoot
-public import WeilConjectures.TraceFormula.Specialization.SliceTraitAlgebraic
-public import WeilConjectures.TraceFormula.Specialization.SliceTraitCoordResidue
 public import WeilConjectures.RingTheory.DiscreteValuationRing.CompletionStrictlyHenselian
 public import WeilConjectures.SixFunctors.NearbyCycles.TraitChangeInduction.SliceFrobeniusLift
 

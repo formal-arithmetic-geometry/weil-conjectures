@@ -5,7 +5,7 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.FiniteP1ArbitraryBaseIntegrals
-public import WeilConjectures.AlgebraicGeometry.SfDiagonalKernelIntegrals
+public import WeilConjectures.AlgebraicGeometry.SfSupportedDiagonalData
 import WeilConjectures.AlgebraicGeometry.SfP1IntegralSectionComparison
 import WeilConjectures.AlgebraicGeometry.SfP1IntegralTraceComparison
 

@@ -6,8 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.FieldTheory.RatFunc.AsPolynomial
-public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethGlobal
-public import WeilConjectures.TraceFormula.Specialization.SliceSupport
+public import WeilConjectures.TraceFormula.Specialization.TraitInstances
 public import WeilConjectures.TraceFormula.Specialization.TraitSlice
 
 /-!

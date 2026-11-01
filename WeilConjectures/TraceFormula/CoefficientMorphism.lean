@@ -7,10 +7,9 @@ module
 
 public import WeilConjectures.TraceFormula.CoefficientMorphismAdditivity
 public import WeilConjectures.TraceFormula.CoefficientMorphismCurve
-public import WeilConjectures.TraceFormula.CoefficientMorphismPushforward
-public import WeilConjectures.TraceFormula.ModelExtension
 public import WeilConjectures.TraceFormula.ModelLineTower
 public import WeilConjectures.TraceFormula.ModelOpenClosed
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineTower
 
 /-!
 

@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.TorsionFreeResolutionMod
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.MonoidalModule
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushResidueIsoCriterion
 
 /-!
 # Torsion-free `f_*`-acyclic resolutions on the pro-étale site

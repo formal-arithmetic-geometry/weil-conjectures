@@ -6,11 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.IntegralLfpLocallyFreeResolution
-public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.HomFilteredColimitConstructible
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyFreeOfFinitelyPresentedField
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushIntegralFlat
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicAlgClFlat
 
 import all WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory

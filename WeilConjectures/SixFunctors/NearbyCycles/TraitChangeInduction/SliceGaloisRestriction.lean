@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.NearbyCycles.TraitChangeInduction.SliceGaloisFields
-public import WeilConjectures.FieldTheory.GaloisRestriction
 public import WeilConjectures.SixFunctors.NearbyCycles.TraitChangeInduction.SliceStability
 
 /-!

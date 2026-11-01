@@ -5,9 +5,10 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.CondensedModuleDerivedPushpull
-public import WeilConjectures.AlgebraicGeometry.ConstantModelTorAmplitude
 public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinaryEncoding
-public import WeilConjectures.SixFunctors.ProEtale.Comparison
+public import WeilConjectures.AlgebraicGeometry.CondensedConstantConstructibility
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.Defs
+public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
 import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import all WeilConjectures.AlgebraicGeometry.FiniteDiscreteEncodingCompactification
 import WeilConjectures.AlgebraicGeometry.FiniteDiscreteEncodingConstructibility

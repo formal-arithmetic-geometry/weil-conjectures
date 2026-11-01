@@ -5,12 +5,8 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerProductBaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ThomClass
-public import WeilConjectures.SixFunctors.Etale.Derived.InvertibleRestriction
-public import WeilConjectures.AlgebraicGeometry.AffineSpace.ZeroSection
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Ideal
-public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 
 /-!
 # Frame independence of the class of a frame

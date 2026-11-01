@@ -8,7 +8,6 @@ module
 public import WeilConjectures.SmoothPurity.Defs
 public import WeilConjectures.SmoothPurity.EtaleReductionProperBaseChange
 public import WeilConjectures.SmoothPurity.UpperShriekBaseChangeReduction
-public import WeilConjectures.TraceFormula.PurityTensorMap
 
 /-!
 

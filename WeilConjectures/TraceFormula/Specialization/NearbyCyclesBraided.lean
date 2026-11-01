@@ -5,9 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.NearbyCycles.KunnethBraided
 public import WeilConjectures.TraceFormula.Specialization.KernelPullbackDeformation
-public import WeilConjectures.Tactic.TransportExact
 
 /-!
 
