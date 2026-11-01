@@ -28,7 +28,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 public import WeilConjectures.AlgebraicGeometry.ChosenCartesianSquare
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import WeilConjectures.SixFunctors.BaseChange.Square
-public import WeilConjectures.CategoryTheory.ProEtaleCoefficients.CompatibleSquareComponents
+public import WeilConjectures.CategoryTheory.CompatibleSquareComponents
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
