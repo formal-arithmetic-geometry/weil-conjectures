@@ -347,6 +347,11 @@ public import WeilConjectures.AlgebraicGeometry.Etale.EtaleSectionGermIsoSupplem
 public import WeilConjectures.CategoryTheory.ConstantScalarRealization.ConstantRealizationDerivedScalarExtensionSupplement
 public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.ExactDerivedAdjunctionSupplement
 public import WeilConjectures.AlgebraicGeometry.Integral.Finite.IntegralFiniteLevels
+public import WeilConjectures.AlgebraicGeometry.CoefficientComparisonFixedPullback
+public import WeilConjectures.AlgebraicGeometry.Picard.DerivedChangeOfRingsIndependentCoefficients
+public import WeilConjectures.AlgebraicGeometry.Picard.KFlatResolutionIndependentCoefficients
+public import WeilConjectures.AlgebraicGeometry.Picard.SiteDerivedTensorDescentIndependentCoefficients
+public import WeilConjectures.Algebra.Homology.NilpotentCoefficientTensorAcyclic
 
 /-! # Compatible finite etale origins on a lisse stratum
 
@@ -369,6 +374,103 @@ abbrev integralFiniteEtaleModel
   ConstantCompletion.D (ConstantCompletion.constant
     (Scheme.smallModelComparisonEtaleTopology.{u, u} X)
     (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))))
+
+/-- Finite-level origin data before imposing compatibility of consecutive levels.
+Source: Stacks Tags 09AL and 099Y; proof step 2 of the integral local structure argument
+(blueprint: lem-pe-integral-finite-etale-level-models).
+
+The proof applies finite-coefficient constructible comparison separately to each reduction.
+The coefficient encoding transports the resulting etale origin back to the normalized
+finite presentation. The bounded cohomology, lisse finite-type condition, and Tor interval
+are transported along the comparison isomorphisms. The construction is independent for
+each level, so no transition maps are asserted here. -/
+theorem integralFiniteEtale_level_models
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
+    (f : Y ⟶ X) [IsImmersion f]
+    (K : DerivedCategory (AdicCompletion.Modules l E X)) (a b : ℤ) (hab : a ≤ b)
+    (hlevels : ∀ n : ℕ,
+      constantModelBoundedConstructible (DerivedNakayama.quotientRing l E (n + 1)) X
+        ((AdicCompletion.derivedReduction l E X n).obj K) ∧
+      DerivedCategory.torAmplitudeIn _ a b ((AdicCompletion.derivedReduction l E X n).obj K))
+    (hlisse : ∀ (n : ℕ) (q : ℤ),
+      HasFiniteConstantLocalModel (DerivedNakayama.quotientRing l E (n + 1)) Y
+        ((CondensedRing.upperStar (DerivedNakayama.quotientRing l E (n + 1)) f).obj
+          ((DerivedCategory.homologyFunctor _ q).obj
+            ((AdicCompletion.derivedReduction l E X n).obj K)))) :
+    letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
+    ∃ (e : ∀ n : ℕ, FiniteDiscreteOrdinary.Encoding
+          (Padic.coefficientExtensionRing l E (n + 1)) Y)
+      (C : ∀ n : ℕ, integralFiniteEtaleModel l E Y n),
+      (∀ n : ℕ,
+        (∃ c d : ℤ, ∀ q : ℤ, q < c ∨ d < q →
+          IsZero ((coefficientModelCohomology _ q).obj (C n))) ∧
+        (∀ q : ℤ, SheafOfModules.IsLocallyConstantFiniteTypeModules
+          (Scheme.smallModelComparisonEtaleTopology.{u, u} Y)
+          (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))
+          ((coefficientModelCohomology _ q).obj (C n))) ∧
+        HasCoefficientModelTorAmplitude _ (C n) a b) ∧
+      ∀ n : ℕ, Nonempty
+        ((IntegralFiniteEncoding.finiteEncodingDerived
+          (Padic.coefficientExtensionRing l E (n + 1)) Y (e n)).obj
+            ((CondensedRing.upperStar (DerivedNakayama.quotientRing l E (n + 1))
+              f).mapDerivedCategory.obj
+                ((AdicCompletion.derivedReduction l E X n).obj K)) ≅
+          (Scheme.adicFinitePullback.{u, u} Y
+            (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))).obj (C n)) := by sorry
+
+/-- Compatibility of separately obtained finite etale origins.
+Source: Stacks Tags 099Y and 09AL; proof step 2 of the integral local structure argument
+(blueprint: lem-pe-integral-finite-etale-compatibility).
+
+Normalize the scalar restriction maps on the two consecutive finite coefficient encodings.
+The universal property of the corresponding left adjoints identifies the two derived
+extensions. Canonical transitivity of the actual reductions gives the comparison on the
+pro-etale side; full faithfulness of finite etale comparison lifts it to the chosen origins.
+This argument is independent of the existence construction and consumes its output as
+explicit hypotheses. -/
+theorem integralFiniteEtale_level_compatibility
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
+    (f : Y ⟶ X) [IsImmersion f]
+    (K : DerivedCategory (AdicCompletion.Modules l E X)) (a b : ℤ) (hab : a ≤ b)
+    (hlevels : ∀ n : ℕ,
+      constantModelBoundedConstructible (DerivedNakayama.quotientRing l E (n + 1)) X
+        ((AdicCompletion.derivedReduction l E X n).obj K) ∧
+      DerivedCategory.torAmplitudeIn _ a b ((AdicCompletion.derivedReduction l E X n).obj K))
+    (hlisse : ∀ (n : ℕ) (q : ℤ),
+      HasFiniteConstantLocalModel (DerivedNakayama.quotientRing l E (n + 1)) Y
+        ((CondensedRing.upperStar (DerivedNakayama.quotientRing l E (n + 1)) f).obj
+          ((DerivedCategory.homologyFunctor _ q).obj
+            ((AdicCompletion.derivedReduction l E X n).obj K))))
+ :
+    letI := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
+    ∀ (e : ∀ n : ℕ, FiniteDiscreteOrdinary.Encoding
+      (Padic.coefficientExtensionRing l E (n + 1)) Y)
+      (C : ∀ n : ℕ, integralFiniteEtaleModel l E Y n)
+      (hC : ∀ n : ℕ,
+        (∃ c d : ℤ, ∀ q : ℤ, q < c ∨ d < q →
+          IsZero ((coefficientModelCohomology _ q).obj (C n))) ∧
+        (∀ q : ℤ, SheafOfModules.IsLocallyConstantFiniteTypeModules
+          (Scheme.smallModelComparisonEtaleTopology.{u, u} Y)
+          (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))
+          ((coefficientModelCohomology _ q).obj (C n))) ∧
+        HasCoefficientModelTorAmplitude _ (C n) a b)
+      (henc : ∀ n : ℕ, Nonempty
+        ((IntegralFiniteEncoding.finiteEncodingDerived
+          (Padic.coefficientExtensionRing l E (n + 1)) Y (e n)).obj
+            ((CondensedRing.upperStar (DerivedNakayama.quotientRing l E (n + 1))
+              f).mapDerivedCategory.obj
+                ((AdicCompletion.derivedReduction l E X n).obj K)) ≅
+          (Scheme.adicFinitePullback.{u, u} Y
+            (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))).obj (C n))),
+      ∀ n : ℕ, Nonempty
+        ((Scheme.adicFiniteExtension
+          (Scheme.smallModelComparisonEtaleTopology.{u, u} Y)
+          (IntegralSmallPerfect.uliftRingMap
+            (Padic.coefficientExtensionTransition l E (n + 1)))).obj (C (n + 1)) ≅ C n) := by sorry
 
 /-- Finite levels with lisse finite cohomology have compatible normalized etale origins.
 The statement concerns only finite coefficient complexes and their quotient maps.

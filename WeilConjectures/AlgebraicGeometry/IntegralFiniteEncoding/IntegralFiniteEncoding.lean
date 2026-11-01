@@ -204,6 +204,8 @@ import all WeilConjectures.AlgebraicGeometry.Sf.SfIntrinsicRealizationTransport
 import all WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStar
 import all Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import WeilConjectures.AlgebraicGeometry.CoefficientComparisonFixedPullback
+public import WeilConjectures.AlgebraicGeometry.Picard.KFlatResolutionIndependentCoefficients
 
 /-! # Finite internal coefficients on the coefficient-sized site
 
@@ -218,12 +220,35 @@ open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.IntegralFiniteEncoding
 
+instance smallProEtaleDownEquivalence (X : Scheme.{u}) :
+    (AsSmall.down : Scheme.coefficientProEtaleSiteModel.{u, u} X ⥤ X.ProEt).IsEquivalence :=
+  (AsSmall.equiv.{u, u + 1, u + 1} (C := X.ProEt)).isEquivalence_inverse
+
 instance smallProEtaleDownDense (X : Scheme.{u}) :
     (AsSmall.down : Scheme.coefficientProEtaleSiteModel.{u, u} X ⥤ X.ProEt).IsDenseSubsite
       (Scheme.coefficientProEtaleModelTopology.{u, u} X) (Scheme.ProEt.topology X) := by
   change (AsSmall.down : Scheme.coefficientProEtaleSiteModel.{u, u} X ⥤ X.ProEt).IsDenseSubsite
     (AsSmall.down.inducedTopology (Scheme.ProEt.topology X)) (Scheme.ProEt.topology X)
   infer_instance
+
+instance smallConstantDerived (X : Scheme.{u})
+    (A : Type (u + 1)) [CommRing A] :
+    HasDerivedCategory (CategoryTheory.ConstantCompletion.Mod
+      (CategoryTheory.ConstantCompletion.constant
+        (Scheme.coefficientProEtaleModelTopology.{u, u} X) A)) :=
+  HasDerivedCategory.standard _
+
+instance smallFixedScalarsAdditive (X : Scheme.{u})
+    (A : Type (u + 1)) [CommRing A] :
+    (coefficientModelFixedScalars (Scheme.coefficientProEtaleModelTopology.{u, u} X) A).Additive :=
+  ⟨by intro M N f g; ext V m; rfl⟩
+
+instance smallFixedScalarsIsEquivalence (X : Scheme.{u})
+    (A : Type (u + 1)) [CommRing A] :
+    (coefficientModelFixedScalars
+      (Scheme.coefficientProEtaleModelTopology.{u, u} X) A).IsEquivalence :=
+  AlgebraicGeometry.ProEtale.scalars_equivalence
+    (Scheme.coefficientProEtaleModelTopology.{u, u} X) A
 
 def smallFixedScalarsEquivalence (X : Scheme.{u})
     (A : Type (u + 1)) [CommRing A] :
@@ -257,6 +282,24 @@ def finiteEncodingFunctor (A : Type u) [CommRing A]
   e.ordinary.functor ⋙ e.fixed.functor ⋙
     (smallSiteSheafEquivalence X (ULift.{u + 1} A)).functor ⋙
     (smallFixedScalarsEquivalence X (ULift.{u + 1} A)).inverse
+
+instance finiteEncoding_equivalence (A : Type u) [CommRing A]
+    [TopologicalSpace A] [IsTopologicalRing A]
+    (X : Scheme.{u}) (e : FiniteDiscreteOrdinary.Encoding A X) :
+    (finiteEncodingFunctor A X e).IsEquivalence := by
+  unfold finiteEncodingFunctor
+  infer_instance
+
+instance finiteEncoding_additive (A : Type u) [CommRing A]
+    [TopologicalSpace A] [IsTopologicalRing A]
+    (X : Scheme.{u}) (e : FiniteDiscreteOrdinary.Encoding A X) :
+    (finiteEncodingFunctor A X e).Additive := by
+  let D := smallSiteSheafEquivalence X (ULift.{u + 1} A)
+  let : D.functor.Additive := ⟨by intro M N f g; ext V m; rfl⟩
+  let : (smallFixedScalarsEquivalence X (ULift.{u + 1} A)).functor.Additive :=
+    inferInstanceAs (coefficientModelFixedScalars _ (ULift.{u + 1} A)).Additive
+  dsimp only [finiteEncodingFunctor]
+  infer_instance
 
 /-- Exact derived encoding into constant-ring modules on the coefficient-sized site.
 Source: Stacks Tag 099Y (blueprint: def-pe-integral-finite-encoding). -/
