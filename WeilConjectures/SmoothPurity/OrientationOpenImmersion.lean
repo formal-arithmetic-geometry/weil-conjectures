@@ -49,10 +49,10 @@ The following steps are stated and `sorry`ed:
   the canonical reduction isomorphism `etaleReductionUpperShriekIso` (built from the
   compactification chosen by Nagata's theorem) with
   `etaleReductionUpperShriekIsoOfIsOpenImmersion` (built from the trivial compactification).
-- `ProEtale.CondensedRing.extendScalarsIntegralOrientation_integralOpenImmersionOrientation`: the
-  extension of scalars to `ℚ̄_ℓ` of the integral identification is the `ℚ̄_ℓ` one, i.e. the
-  coefficient comparison `integersToPadicAlgClUpperShriekUnitIso` is compatible with
-  `Rj^! ≅ j^*` on both sides. It should follow formally from the two `sorry`ed inputs
+- The two inputs of
+  `ProEtale.CondensedRing.extendScalarsIntegralOrientation_integralOpenImmersionOrientation` (the
+  extension of scalars to `ℚ̄_ℓ` of the integral identification is the `ℚ̄_ℓ` one), which is
+  deduced from them:
   `extendScalarsIntegralTateTwistBoundedConstructibleIso_zero` (the twist comparison in degree
   `0` and the units) and
   `extendScalars_map_upperShriekUnit_comp_integersToPadicAlgClUpperShriekUnitIso` (the
@@ -90,6 +90,15 @@ noncomputable def integralTateTwistBoundedConstructibleZeroIso
     (X := integralTateTwistBoundedConstructible ℓ E.1 X.hom 0) (Y := 𝟙_ _)
     (DerivedCategory.singleFunctorObjUnitIso (Mod (Sheaf (ProEt.topology X.left) Ab.{u + 1})
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X.left)))
+
+/-- For a fully faithful functor `F`, precomposing `g ≫ F.map h` under `F.preimage` is
+postcomposing with `h`. -/
+lemma _root_.CategoryTheory.Functor.FullyFaithful.preimage_comp_comp_map {C D : Type*}
+    [Category C] [Category D] {F : C ⥤ D} (hF : F.FullyFaithful) {X Y Z : C} {W : D}
+    (f : F.obj X ⟶ W) (g : W ⟶ F.obj Y) (h : Y ⟶ Z) :
+    hF.preimage (f ≫ g) ≫ h = hF.preimage (f ≫ g ≫ F.map h) := by
+  apply hF.map_injective
+  simp
 
 section OpenImmersion
 
@@ -186,11 +195,14 @@ theorem extendScalarsIntegralOrientation_integralOpenImmersionOrientation :
     ← Category.assoc _ _ (_ ≫ _),
     (boundedConstructibleExtendScalars X.left ℓ E ⋙ constructibleToPadicAlgCl X.left ℓ E).map_comp,
     Category.assoc]
-  erw [extendScalars_map_upperShriekUnit_comp_integersToPadicAlgClUpperShriekUnitIso]
-  erw [reassoc_of% extendScalarsIntegralTateTwistBoundedConstructibleIso_zero, Iso.hom_inv_id_assoc]
-  apply (ObjectProperty.fullyFaithfulι _).map_injective
-  rw [ι_map_openImmersionOrientation, Functor.map_comp, Functor.FullyFaithful.map_preimage,
-    Category.assoc]
+  convert_to _ ≫ _ ≫ ((integersToPadicAlgClUnitIso ℓ E X).inv ≫
+    (boundedConstructibleUpperShriekUnitIso_padicAlgCl ℓ j).inv) = _ using 3
+  · exact extendScalars_map_upperShriekUnit_comp_integersToPadicAlgClUpperShriekUnitIso ℓ j E
+  rw [← Category.assoc]
+  convert_to (_ ≫ (integersToPadicAlgClUnitIso ℓ E X).hom) ≫ _ = _ using 2
+  all_goals try exact extendScalarsIntegralTateTwistBoundedConstructibleIso_zero ℓ (X := X) E
+  rw [Category.assoc, Iso.hom_inv_id_assoc]
+  exact Functor.FullyFaithful.preimage_comp_comp_map _ _ _ _
 
 /-- The canonical orientation of an open immersion is a canonical orientation in the sense of
 `IsCanonicalSmoothOrientation`. -/

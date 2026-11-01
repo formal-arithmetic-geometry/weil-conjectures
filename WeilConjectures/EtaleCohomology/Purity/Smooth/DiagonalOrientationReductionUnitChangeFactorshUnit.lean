@@ -8,13 +8,16 @@ module
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReductionUnitChangeFactorsh
 
 /-!
-# test
+# The unit of the derived categories and the restriction of scalars
+
+For a morphism of étale sheaves `g : 𝟙 ⟶ Res 𝟙`, the morphism `g[0]` read through the
+identifications `𝟙[0] ≅ 𝟙` of the units of the derived categories and the comparison
+`Res ∘ Qh ≅ Qh ∘ Res` is `ε Qh` followed by `Qh` of `g[0]` on homotopy categories
+(`AlgebraicGeometry.Etale.singleFunctorObjUnitIso_inv_comp_map_comp_factorsh_eq`). The steps are
+separate lemmas, combined by whiskering, to keep the kernel cost low.
 -/
 
 @[expose] public section
-
-set_option profiler true
-set_option profiler.threshold 1000
 
 universe u
 

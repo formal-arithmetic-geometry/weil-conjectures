@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReductionUnitPullback
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReductionUnitChangeConstant
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReductionUnitChangeFactorshUnit
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReductionUnitChangePullback
 public import WeilConjectures.EtaleCohomology.TateTwist.KummerClassCoefficientChange
 
@@ -184,8 +185,8 @@ lemma singleFunctorObjUnitIso_inv_comp_map_comp_factorsh (g : 𝟙_ _ ⟶
       ε DerivedCategory.Qh ≫ DerivedCategory.Qh.map ((HomotopyCategory.quotient _ (.up ℤ)).map
         ((HomologicalComplex.single _ (.up ℤ) 0).map g ≫
           (HomologicalComplex.singleMapHomologicalComplex
-            (Sheaf.restrictScalars X.smallEtaleTopology ρ) (.up ℤ) 0).inv.app (𝟙_ _))) := by
-  sorry
+            (Sheaf.restrictScalars X.smallEtaleTopology ρ) (.up ℤ) 0).inv.app (𝟙_ _))) :=
+  singleFunctorObjUnitIso_inv_comp_map_comp_factorsh_eq ρ X g
 
 variable (ρ) in
 /-- The change of coefficients `Λ ⊗ ℤ ⟶ Res(Λ' ⊗ ℤ)` of the constant sheaves is the unit map

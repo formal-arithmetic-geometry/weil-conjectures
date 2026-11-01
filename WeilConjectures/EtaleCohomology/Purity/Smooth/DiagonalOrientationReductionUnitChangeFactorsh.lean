@@ -9,13 +9,20 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationR
 public import WeilConjectures.EtaleCohomology.TateTwist.KummerClassCoefficientChange
 
 /-!
-# test
+# Sheaves placed in degree zero and the restriction of scalars on homotopy categories
+
+Let `ρ : Λ →+* Λ'` be a morphism of commutative rings and `Res` the restriction of scalars of
+étale sheaves along `ρ`. For a morphism of sheaves `g : 𝟙 ⟶ Res 𝟙`, the morphism `g[0]` of the
+derived categories, read through the identifications `F[0] ≅ Qh(F[0])` and the comparison
+`Res ∘ Qh ≅ Qh ∘ Res`, is `Qh` of `g[0]` on homotopy categories
+(`AlgebraicGeometry.Etale.singleFunctorObjIsoQh_inv_comp_map_comp_factorsh`), together with the
+descriptions of the identifications `𝟙[0] ≅ 𝟙` of the units through `Qh`.
+
+Each instantiation of a general lemma on derived functors is stated as its own lemma, as their
+combination is expensive for the kernel.
 -/
 
 @[expose] public section
-
-set_option profiler true
-set_option profiler.threshold 1000
 
 universe u
 
@@ -42,6 +49,9 @@ lemma restrictScalars_mapDerivedCategorySingleFunctor_inv_app_comp_factors_hom_a
       (Sheaf.restrictScalars X.smallEtaleTopology ρ) (.up ℤ) 0).inv.app (𝟙_ _)) :=
   Functor.mapDerivedCategorySingleFunctor_inv_app_mapDerivedCategoryFactors_hom_app _ _
 
+/-- A morphism of sheaves `g : 𝟙 ⟶ Res 𝟙` placed in degree zero, read through the
+identifications `F[0] ≅ Qh(F[0])` and the comparison `Res ∘ Qh ≅ Qh ∘ Res`, is `Qh` of `g[0]` on
+homotopy categories. -/
 @[reassoc]
 lemma singleFunctorObjIsoQh_inv_comp_map_comp_factorsh (g : 𝟙_ _ ⟶
       (Sheaf.restrictScalars X.smallEtaleTopology ρ).obj
