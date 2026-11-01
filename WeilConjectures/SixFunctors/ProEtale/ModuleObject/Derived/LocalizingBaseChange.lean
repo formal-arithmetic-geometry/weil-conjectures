@@ -8,7 +8,6 @@ module
 public import WeilConjectures.Mathlib.CategoryTheory.Shift.Adjunction
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.AdjunctionShift
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocalizingProjection
-public import WeilConjectures.TraceFormula.Specialization.GenericDivisorShift
 
 /-!
 # Proper base change on the localizing categories `Loc(Dbc)`
@@ -61,7 +60,36 @@ local notation "𝔻(" X ")" =>
   DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-  {X Y X' Y' : Scheme.{u}} {p : X ⟶ Y} {g : Y' ⟶ Y} {p' : X' ⟶ Y'} {g' : X' ⟶ X}
+  {X Y X' Y' : Scheme.{u}}
+
+/-- The transport `L(a)^* = L(b)^*` along an equality `a = b` commutes with the shifts. -/
+lemma commShift_eqToHom_leftDerivedUpperStar {a b : X ⟶ Y} (h : a = b)
+    (e : L((a)^*⟦Λ⟧) = L((b)^*⟦Λ⟧)) : NatTrans.CommShift (eqToHom e) ℤ := by
+  subst h
+  exact inferInstanceAs (NatTrans.CommShift (𝟙 _) ℤ)
+
+omit [MonObj Λ] [IsCommMonObj Λ] in
+private lemma commShift_symm_trans_eqToIso_trans_hom_aux {C D : Type*} [Category C]
+    [Category D] [HasShift C ℤ] [HasShift D ℤ] {F₁ F₂ F₃ F₄ : C ⥤ D} [F₁.CommShift ℤ]
+    [F₂.CommShift ℤ] [F₃.CommShift ℤ] [F₄.CommShift ℤ] (c₁ : F₂ ≅ F₁) (c₂ : F₃ ≅ F₄)
+    (e : F₂ = F₃) [NatTrans.CommShift c₁.hom ℤ] [NatTrans.CommShift c₂.hom ℤ]
+    [NatTrans.CommShift (eqToHom e) ℤ] :
+    NatTrans.CommShift (c₁.symm ≪≫ eqToIso e ≪≫ c₂).hom ℤ :=
+  inferInstanceAs (NatTrans.CommShift (c₁.inv ≫ eqToHom e ≫ c₂.hom) ℤ)
+
+variable {p : X ⟶ Y} {g : Y' ⟶ Y} {p' : X' ⟶ Y'} {g' : X' ⟶ X}
+
+/-- The pullback comparison `Lg^* ⋙ Lp'^* ≅ Lp^* ⋙ Lg'^*` of a commutative square commutes with
+the shifts. -/
+instance commShift_pullbackSquareComparison_hom (sq : CommSq g' p' p g) :
+    NatTrans.CommShift (pullbackSquareComparison Λ sq).hom ℤ := by
+  obtain e : L((p' ≫ g)^*⟦Λ⟧) = L((g' ≫ p)^*⟦Λ⟧) := by rw [sq.w]
+  have := commShift_eqToHom_leftDerivedUpperStar Λ sq.w.symm e
+  have he : pullbackSquareComparison Λ sq =
+      (leftDerivedUpperStarComp Λ p' g).symm ≪≫ eqToIso e ≪≫ leftDerivedUpperStarComp Λ g' p :=
+    rfl
+  rw [he]
+  exact commShift_symm_trans_eqToIso_trans_hom_aux _ _ e
 
 /-- The base change map `Lg^* Rp_* ⟶ Rp'_* Lg'^*` of a commutative square commutes with the
 shifts. -/
