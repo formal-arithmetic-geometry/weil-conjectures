@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReductionUnitPullback
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReductionUnitChangeConstant
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReductionUnitChangePullback
 public import WeilConjectures.EtaleCohomology.TateTwist.KummerClassCoefficientChange
 
 /-!
@@ -201,8 +202,8 @@ lemma extendScalarsConstantZModIso_inv_comp_extendScalarsChangeMap_app :
 lemma constantComplexIsoSingleFunctorExtendScalarsInt_eq_ofUnit (Γ : Type (u + 1)) [CommRing Γ]
     [HasInvertibleExponent Γ X] :
     constantComplexIsoSingleFunctorExtendScalarsInt X Γ =
-      constantComplexIsoSingleFunctorExtendScalarsIntOfUnit X Γ := by
-  sorry
+      constantComplexIsoSingleFunctorExtendScalarsIntOfUnit X Γ :=
+  constantComplexIsoSingleFunctorExtendScalarsInt_eq_constantComplexIsoOfUnit Γ X
 
 
 end AlgebraicGeometry.Etale

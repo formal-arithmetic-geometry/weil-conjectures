@@ -181,8 +181,16 @@ theorem extendScalars_map_upperShriekUnit_comp_integersToPadicAlgClUpperShriekUn
 is the canonical orientation `openImmersionOrientation`. -/
 theorem extendScalarsIntegralOrientation_integralOpenImmersionOrientation :
     extendScalarsIntegralOrientation ℓ E j 0 (integralOpenImmersionOrientation ℓ j E) =
-      openImmersionOrientation ℓ j :=
-  sorry
+      openImmersionOrientation ℓ j := by
+  rw [extendScalarsIntegralOrientation, integralOpenImmersionOrientation,
+    ← Category.assoc _ _ (_ ≫ _),
+    (boundedConstructibleExtendScalars X.left ℓ E ⋙ constructibleToPadicAlgCl X.left ℓ E).map_comp,
+    Category.assoc]
+  erw [extendScalars_map_upperShriekUnit_comp_integersToPadicAlgClUpperShriekUnitIso]
+  erw [reassoc_of% extendScalarsIntegralTateTwistBoundedConstructibleIso_zero, Iso.hom_inv_id_assoc]
+  apply (ObjectProperty.fullyFaithfulι _).map_injective
+  rw [ι_map_openImmersionOrientation, Functor.map_comp, Functor.FullyFaithful.map_preimage,
+    Category.assoc]
 
 /-- The canonical orientation of an open immersion is a canonical orientation in the sense of
 `IsCanonicalSmoothOrientation`. -/

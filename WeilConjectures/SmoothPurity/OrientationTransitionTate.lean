@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReductionTateTwist
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReadingReduction
+public import WeilConjectures.SmoothPurity.OrientationTransitionTateZero
+public import WeilConjectures.SmoothPurity.OrientationTransitionUpperShriek
 public import WeilConjectures.TateTwist.IntegralReduction
 
 /-!
@@ -75,7 +77,20 @@ lemma integersModPowReductionTateTwistIso_zero :
           (Etale.HasTateTwist.twistObjectZeroIso
             (Λ := integersModPowCoeff.{u} ℓ E (n + 1)) X.left).hom ≫
         Functor.OplaxMonoidal.η (integersModPowDerivedExtendScalars ℓ E n X.left) := by
-  sorry
+  let _ := Etale.derivedExtendScalarsMonoidal (integersModPowCoeffTransition_surjective ℓ E n)
+    (ker_integersModPowCoeffTransition ℓ E n) X.left
+  have hβ := (etaleReductionExtendScalarsIso ℓ E n X).hom.naturality
+    (integralTateTwistBoundedConstructibleNatZeroIso ℓ E X).hom
+  rw [Functor.comp_map, etaleReductionExtendScalarsIso_hom_app_eq,
+    etaleReductionExtendScalarsIso_hom_app_eq] at hβ
+  rw [integersModPowReductionTateTwistIso, Iso.trans_hom, Iso.trans_hom, Iso.symm_hom,
+    Functor.mapIso_inv, Category.assoc, Category.assoc,
+    etaleReductionIntegralTateTwistIso_zero_hom_comp_twistObjectZeroIso_hom, ← reassoc_of% hβ,
+    ← map_etaleReductionUnitIso_hom_comp_constantComplexIso,
+    Etale.derivedExtendScalarsConstantComplexIso_hom_eq_η,
+    (Iso.eq_inv_comp _).mpr
+      (etaleReductionIntegralTateTwistIso_zero_hom_comp_twistObjectZeroIso_hom ℓ E X (n + 1)),
+    Functor.map_comp, Functor.map_comp, Category.assoc, Category.assoc]
 
 /-- **The degree-one case in restriction form**: the transpose under `Ψ ⊣ Res` of
 `β : Ψ(red_{n+1} 𝒪_{E,X}(1)) ≅ red_n 𝒪_{E,X}(1)`, followed by `red_n 𝒪_{E,X}(1) ≅ Λ'_X(1)`, is
