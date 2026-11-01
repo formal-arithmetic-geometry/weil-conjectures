@@ -40,6 +40,7 @@ import WeilConjectures.Algebra.Homology.BoundedFlatReplacement
 import WeilConjectures.AlgebraicGeometry.Picard.KFlatResolutionIndependentCoefficients
 import WeilConjectures.Algebra.Homology.SheafRingDerivedCoefficientAdjunction
 import WeilConjectures.AlgebraicGeometry.Picard.KFlatRingedToposPullback
+public import WeilConjectures.AlgebraicGeometry.FinitePointComparison.FinitePointNativeTensorComparison
 
 /-! # Normalized tensor and scalar comparisons at the finite condensed point
 
@@ -527,5 +528,65 @@ structure ComparisonFamily where
       (Scheme.ProEt.topology (Spec (.of k))) S) →
     InternalAbelianSheafModule.InternalSectionScalarAdjunction.{u + 1, u + 1, u, u + 1}
       (Scheme.ProEt.topology (Spec (.of k))) (R := R) (S := S) a
+
+end AlgebraicGeometry.ProEtale.FinitePointComparison
+
+namespace AlgebraicGeometry.ProEtale.FinitePointComparison
+
+private theorem internal_tensor_exists : ∀
+    (R : Sheaf (Scheme.ProEt.topology (Spec (.of k))) AddCommGrpCat.{u + 1})
+    [MonObj R] [IsCommMonObj R],
+    IsFiniteCoefficient k (InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}
+      (Scheme.ProEt.topology (Spec (.of k))) R) →
+    exactFunctor _ _ (InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u}
+        (Scheme.ProEt.topology (Spec (.of k))) R).functor ∧
+    ∃ e : (InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u}
+        (Scheme.ProEt.topology (Spec (.of k))) R).functor.Monoidal,
+      (∀ (M N : Mod (Sheaf (Scheme.ProEt.topology (Spec (.of k)))
+          AddCommGrpCat.{u + 1}) R)
+        (V : (Spec (.of k)).ProEtᵒᵖ) (x : M.X.obj.obj V) (y : N.X.obj.obj V),
+        ((e.δ M N).val.app V)
+          (InternalAbelianSheafModule.comparison_internalTmul
+            (Scheme.ProEt.topology (Spec (.of k))) R M N V x y) =
+          InternalAbelianSheafModule.comparison_sectionTmul
+            (Scheme.ProEt.topology (Spec (.of k)))
+            R
+            ((InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u}
+              (Scheme.ProEt.topology (Spec (.of k))) R).functor.obj M)
+            ((InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u}
+              (Scheme.ProEt.topology (Spec (.of k))) R).functor.obj N) V x y) ∧
+      (∀ (V : (Spec (.of k)).ProEtᵒᵖ) (r : R.obj.obj V),
+        (e.η.val.app V) r = r) ∧
+      ∀ M N : Mod (Sheaf (Scheme.ProEt.topology (Spec (.of k))) AddCommGrpCat.{u + 1}) R,
+        e.δ M N ≫ (β_ _ _).hom =
+          (InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u}
+            (Scheme.ProEt.topology (Spec (.of k))) R).functor.map (β_ M N).hom ≫ e.δ N M := by
+  intro R _ _ _
+  obtain ⟨hex, t, z, ht, hz, hn, ha, hl, hr, hs, _⟩ :=
+    InternalAbelianSheafModule.internal_section_tensor_comparison
+      (Scheme.ProEt.topology (Spec (.of k))) R
+  let e : (InternalAbelianSheafModule.sectionModuleEquivalence
+      (Scheme.ProEt.topology (Spec (.of k))) R).functor.CoreMonoidal :=
+    Functor.CoreMonoidal.mk' z.symm (fun M N ↦ (t M N).symm)
+      (by
+        intro M N f P
+        simpa using (hn M N P P f (𝟙 P)).symm)
+      (by
+        intro M N P f
+        simpa using (hn P P M N (𝟙 P) f).symm)
+      ha
+      (by
+        intro M
+        apply (cancel_mono (λ_ _).hom).mp
+        simp only [Iso.symm_inv, Category.assoc, Iso.inv_hom_id]
+        rw [hl, ← Functor.map_comp, Iso.inv_hom_id]
+        simp)
+      (by
+        intro M
+        apply (cancel_mono (ρ_ _).hom).mp
+        simp only [Iso.symm_inv, Category.assoc, Iso.inv_hom_id]
+        rw [hr, ← Functor.map_comp, Iso.inv_hom_id]
+        simp)
+  exact ⟨hex, e.toMonoidal, ht, hz, hs⟩
 
 end AlgebraicGeometry.ProEtale.FinitePointComparison

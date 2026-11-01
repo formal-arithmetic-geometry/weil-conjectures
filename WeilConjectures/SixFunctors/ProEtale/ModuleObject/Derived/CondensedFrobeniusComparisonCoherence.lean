@@ -44,6 +44,7 @@ import WeilConjectures.SmoothPurity.FiniteFieldDatum.FrobeniusFactorization
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 import WeilConjectures.AlgebraicGeometry.Cohomological.CohomologicalDimension
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedPullbackCoherence
 
 /-!
 # Condensed coefficient coherence of the canonical Frobenius comparison
@@ -195,5 +196,20 @@ Source: definition of Lh* (blueprint: lem-pur-condensed-frobenius-comparison-coh
 abbrev frobeniusU (D : WeilConjectures.FiniteFieldDatum.{u}) (Λ : ScalarSixRing.{u})
     {S₀ T₀ : Over (Spec (CommRingCat.of D.k₀))} (h₀ : S₀ ⟶ T₀) :=
   scalarSixPull Λ (D.purityFrobeniusMap h₀)
+
+end AlgebraicGeometry.ProEtale.CondensedRing
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+private theorem towerCalculation {A B H : Type*}
+    [Category A] [Category B] [Category H]
+    (T : A ⥤ B) (U : B ⥤ H) (V : A ⥤ H) (τ : T ⋙ U ⟶ V)
+    {P G : A} (κ : P ⟶ G) {x y z w : H}
+    (a : U.obj (T.obj G) ⟶ x) (b : x ⟶ y) (c : y ⟶ z)
+    (q : V.obj G ⟶ z) (r : V.obj P ⟶ w) (t : w ⟶ z)
+    (ht : τ.app G ≫ q = a ≫ b ≫ c) (hk : V.map κ ≫ q = r ≫ t) :
+    U.map (T.map κ) ≫ a ≫ b ≫ c = τ.app P ≫ r ≫ t := by
+  rw [← ht]
+  exact (τ.naturality_assoc κ q).trans (by rw [hk])
 
 end AlgebraicGeometry.ProEtale.CondensedRing
