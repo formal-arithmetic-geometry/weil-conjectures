@@ -8,6 +8,7 @@ module
 public import WeilConjectures.TraceFormula.BaseChange.LocalTrace
 public import WeilConjectures.TraceFormula.BaseChange.LowerShriek
 public import WeilConjectures.TraceFormula.BaseChange.LowerShriekIterate
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Compact.CompactCohomologyFibres
 
 /-!
 

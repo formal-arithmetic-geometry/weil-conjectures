@@ -10,6 +10,10 @@ public import WeilConjectures.EtaleCohomology.TateTwist.KummerClass
 public import WeilConjectures.EtaleCohomology.TateTwist.AffineLineDescentClauses
 public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageAmplitude
 
+import WeilConjectures.EtaleCohomology.Purity.Smooth.GmRelativeKummer
+import WeilConjectures.SixFunctors.Etale.Derived.BaseChangeCube
+import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Local
+
 /-!
 # The cohomology of `𝔸¹` and `𝔾ₘ` with coefficients in the Tate twist `μₙ ⊗ Λ`
 
@@ -62,12 +66,34 @@ open Scheme
 
 namespace Etale
 
+-- Keep the symmetric braiding and sheaf colimits explicit during instance search.
+attribute [local instance high] SymmetricCategory.toBraidedCategory
+attribute [local instance 2000] CategoryTheory.Sheaf.instHasColimitsOfShape
+
+attribute [local irreducible] upperStar lowerStar CategoryTheory.Functor.leftDerivedFunctor
+  rightDerivedLowerStar derivedUpperStarLowerStarAdjunction
+  CategoryTheory.Functor.rightDerivedFunctor derivedBaseChangeMap derivedSquareUpperStarIso
+  tateTwistObject tateTwistSheaf
+  leftDerivedUpperStarConstantComplexIso leftDerivedUpperStarTateObjectIso
+  rightDerivedLowerStarComp leftDerivedUpperStarComp
+
+attribute [local instance] HasInvertibleExponent.opens
+
+-- An interface for the class map, proved before protecting the constant-object alias.
+attribute [local irreducible] constantComplex conjugateEquiv Adjunction.comp
+
+-- Naturality and composition of adjoints, with no geometric constructions to unfold.
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [NeZero (ringChar Λ)]
   {k : Type u} [Field k] (B : Scheme.{u}) (aB : B ⟶ Spec (.of k)) [IsSeparated aB]
   [LocallyOfFiniteType aB] [HasInvertibleExponent Λ B]
 
 attribute [local instance] HasInvertibleExponent.opens
 
+-- The adopted statement retains separatedness, though the comparison proof does not need it.
+set_option linter.unusedSectionVars false in
+set_option maxHeartbeats 600000 in
+-- The proof compares the units and class maps of composite derived adjunctions.
+set_option maxRecDepth 10000 in
 include aB in
 /-- Blueprint `sk-prop-a1-kummer`: The affine line and `𝔾ₘ` with `Λ(1)`-coefficients
 

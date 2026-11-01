@@ -21,6 +21,11 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Extension
 public import WeilConjectures.SixFunctors.ProEtale.Adic.MayerVietoris
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Module
+import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
+import WeilConjectures.Compactification.ProjectiveSpace
+import WeilConjectures.AlgebraicGeometry.Adic.AdicDenseOpenImmersionFiniteness
+import WeilConjectures.AlgebraicGeometry.Adic.AdicClosedImmersionFiniteness
+import WeilConjectures.AlgebraicGeometry.Adic.AdicProjectiveSpaceFiniteness
 
 /-!
 # Finiteness for the pushforward of constructible `ℓ`-adic sheaves
@@ -417,8 +422,42 @@ preserves `Dᵇc(-, ℚ̄_ℓ)`); blueprint `sk-prop-sf-finiteness` is the finit
 theorem finiteLowerStar_singleFunctor_of_isAffine (hK : ringChar K ≠ l) [LocallyOfFiniteType s]
     [IsAffine Y] {T : Scheme.{u}} [IsAffine T] (g : T ⟶ Y) [LocallyOfFiniteType g]
     {F : AdicSheaf l T} (hF : IsAdicConstructibleSheaf F) :
-    finiteLowerStar l g ((DerivedCategory.singleFunctor _ 0).obj F) :=
-  sorry
+    finiteLowerStar l g ((DerivedCategory.singleFunctor _ 0).obj F) := by
+  have : QuasiCompact g := inferInstance
+  have : QuasiCompact s := inferInstance
+  obtain ⟨n, e, he, hei⟩ := exists_immersion_affineSpace_of_quasiAffine g
+  have : IsImmersion e := hei
+  let j := e ≫ AffineSpace.toRelativeProjectiveSpace (ULift.{u} (Fin n)) Y
+  let p := ℙ(Option (ULift.{u} (Fin n)); Y) ↘ Y
+  have hfac : j ≫ p = g := by
+    dsimp [j, p]
+    rw [Category.assoc, AffineSpace.toRelativeProjectiveSpace_over, he]
+  have : QuasiCompact (j ≫ p) := hfac.symm ▸ ‹QuasiCompact g›
+  have : QuasiCompact j := .of_comp j p
+  have : IsImmersion j := inferInstance
+  have : CompactSpace ℙ(Option (ULift.{u} (Fin n)); Y) :=
+    QuasiCompact.compactSpace_of_compactSpace p
+  have : IsLocallyNoetherian ℙ(Option (ULift.{u} (Fin n)); Y) :=
+    LocallyOfFiniteType.isLocallyNoetherian (p ≫ s)
+  have : IsNoetherian ℙ(Option (ULift.{u} (Fin n)); Y) := {}
+  have h₁ :=
+    bounded_constructible_rightDerivedFunctor_adicLowerStar_of_denseOpenImmersion hK
+      (j.imageι ≫ p ≫ s) j.toImage j.toImage.denseRange F hF
+  have h₂ := bounded_constructible_rightDerivedFunctor_adicLowerStar_of_isClosedImmersion
+    j.imageι _ h₁.1 h₁.2
+  have : IsLocallyNoetherian Y := LocallyOfFiniteType.isLocallyNoetherian s
+  have h₃ := finiteLowerStar_of_bounded p (fun F hF ↦
+    bounded_constructible_rightDerivedFunctor_adicLowerStar_projectiveSpace hK s
+      (ULift.{u} (Fin n)) F hF) _ h₂.1 h₂.2
+  change (DerivedCategory.TStructure.t.bounded ⊓
+    _root_.DerivedCategory.homologyProperty (adicConstructibleSheaf l Y)) _
+  refine ObjectProperty.prop_of_iso _ ?_ h₃
+  refine (p)_*ᵃ[l].rightDerivedFunctor.mapIso
+    ((Functor.rightDerivedFunctorCompIso' (j.toImage)_*ᵃ[l] (j.imageι)_*ᵃ[l]
+      (adicLowerStarComp l j.toImage j.imageι)).app _) ≪≫ ?_
+  exact (Functor.rightDerivedFunctorCompIso' (j.toImage ≫ j.imageι)_*ᵃ[l] (p)_*ᵃ[l]
+    (adicLowerStarComp l (j.toImage ≫ j.imageι) p ≪≫
+      adicLowerStarCongr l ((j.toImage_imageι_assoc p).trans hfac))).app _
 
 /-- A constructible sheaf placed in degree `0` is bounded with constructible cohomology. -/
 lemma bounded_homologyProperty_singleFunctor {T : Scheme.{u}} {F : AdicSheaf l T}
@@ -582,6 +621,5 @@ theorem finiteLowerStar_singleFunctor (hK : ringChar K ≠ l) [LocallyOfFiniteTy
     isAdicConstructibleSheaf_homology_rightDerivedFunctor_lowerStar s f hK hF⟩
 
 end Finiteness
-
 
 end AlgebraicGeometry.ProEtale

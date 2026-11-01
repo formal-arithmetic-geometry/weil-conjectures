@@ -92,6 +92,8 @@ products, which are not available yet.
 
 @[expose] public section
 
+set_option Elab.async false
+
 universe u
 
 open scoped CategoryTheory.Obj
@@ -103,6 +105,15 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 open Scheme
 
 section Purity
+
+-- Keep abstract categorical calculations from expanding the sheaf-module models.
+attribute [local irreducible] DerivedCategory.monoidalClosed Mod.monoidalClosed
+  Mod.monoidalCategory Mod.monoidalCategoryStruct upperStarFromPoint
+  Functor.leftDerivedFunctor Functor.rightDerivedFunctor Functor.mapDerivedCategory
+
+attribute [local irreducible] Scheme.PurityIntegralTower.ReconstructionResult
+  boundedConstructibleLowerShriek boundedConstructibleUpperShriek
+  boundedConstructibleUpperShriekAdjunction
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)]
@@ -453,6 +464,7 @@ noncomputable def smoothPurityIso :
       (shiftFunctor _ (2 * d : ℤ)).obj (tateTwistDerived X.left ℓ d) :=
   (ObjectProperty.ι _).mapIso (asIso (smoothPurityMap ℓ f d)).symm
 
+omit [SmoothOfRelativeDimension d f.left] in
 /-- Blueprint `sk-thm-purity-transport`, étale case: **normalization of purity in relative
 dimension zero**: for an open immersion `j`, the purity isomorphism `Rj^! ℚ̄_ℓ ≅ ℚ̄_ℓ(0)[0]` is
 the canonical identification `Rj^! ℚ̄_ℓ ≅ j^* ℚ̄_ℓ ≅ ℚ̄_ℓ`

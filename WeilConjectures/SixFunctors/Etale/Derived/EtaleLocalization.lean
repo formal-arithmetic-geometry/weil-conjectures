@@ -8,6 +8,8 @@ module
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion
 public import WeilConjectures.SixFunctors.OpenClosed.Conservative
+import WeilConjectures.AlgebraicGeometry.Etale.Compact.EtaleCompactSupportGraphDerivedIsoSupplement
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
 
 /-!
 # Étale localization of the derived categories of étale sheaves
