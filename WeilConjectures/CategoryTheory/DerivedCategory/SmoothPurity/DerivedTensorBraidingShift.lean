@@ -31,7 +31,8 @@ variable (C : Type uC) [Category.{u + 1} C] [Abelian C]
   [MonoidalCategory C] [MonoidalPreadditive C]
   [BraidedCategory C] [MonoidalClosed C] [Abelian.HasFunctorialFlatResolution C]
 
-local instance : HasColimitsOfSize.{0, 0} C := hasColimitsOfSizeShrink C
+local instance hasColimitsOfSize_derivedTensorBraidingShift : HasColimitsOfSize.{0, 0} C :=
+  hasColimitsOfSizeShrink C
 
 omit [Abelian.HasFunctorialFlatResolution C] [HasDerivedCategory C] in
 private theorem cochain_braiding_shift (K M : CochainComplex C ℤ) (n : ℤ) :
