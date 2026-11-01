@@ -23,6 +23,10 @@ import Mathlib.CategoryTheory.Triangulated.Orthogonal
 import all WeilConjectures.ProperBaseChange.RingedLocalizationFactorTensorAugmentation
 import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 import all WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationTensor
+public import WeilConjectures.CategoryTheory.DerivedCategory.BoundedComplexTriangulatedDevissage
+public import WeilConjectures.CategoryTheory.RingedExtendedCech
+public import WeilConjectures.CategoryTheory.RingedIdealGenerators
+public import WeilConjectures.CategoryTheory.RingedSiteModules
 
 /-! # Independence of augmented extended Cech complexes from generators
 
@@ -62,6 +66,23 @@ private theorem augmented_iso_of_colocal
     simp only [Category.assoc, hg, hf, Category.id_comp]
   · apply (hY' b hb).injective
     simp only [Category.assoc, hf, hg, Category.id_comp]
+
+@[instance_reducible]
+private noncomputable instance moduleMonoidal : MonoidalCategory
+    (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) :=
+  SheafOfModules.monoidalCategory O
+
+private noncomputable instance moduleSymmetric : SymmetricCategory
+    (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) :=
+  SheafOfModules.symmetricCategory O
+
+private noncomputable instance moduleMonoidalPreadditive : MonoidalPreadditive
+    (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) :=
+  (SheafOfModules.tensorClosed O).1.some
+
+private noncomputable instance moduleMonoidalClosed : MonoidalClosed
+    (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) :=
+  (SheafOfModules.tensorClosed O).2.1.some
 
 section TensorFiltration
 
@@ -275,6 +296,29 @@ private theorem cech_augmentation_trW
     change P.trW (DerivedCategory.Q.map ((f ⊗ₘ g) ≫ (λ_ (ringedSiteRingComplex O)).hom))
     rw [tensorHom_def, Category.assoc, Functor.map_comp]
     exact P.trW.comp_mem _ _ hfirst hsecond
+
+private instance localizationClass_iso (U : C) :
+    (ringedIdealLocalizationTriangulated O I ι U).IsClosedUnderIsomorphisms where
+  of_iso e h P hP hT hgen := by
+    let := hP
+    exact P.prop_of_iso e (h P hP hT hgen)
+
+private instance localizationClass_triangulated (U : C) :
+    (ringedIdealLocalizationTriangulated O I ι U).IsTriangulated where
+  exists_zero := ⟨0, isZero_zero _, fun P hP hT _ ↦ by
+    let := hP
+    let := hT
+    exact P.prop_zero⟩
+  isStableUnderShiftBy n := ⟨fun E h P hP hT hgen ↦ by
+    let := hT
+    exact P.le_shift n E (h P hP hT hgen)⟩
+  ext₂' T hT h₁ h₃ := by
+    apply ObjectProperty.le_isoClosure
+    intro P hP hPT hgen
+    let := hP
+    let := hPT
+    exact P.ext_of_isTriangulatedClosed₂ T hT
+      (h₁ P hP hPT hgen) (h₃ P hP hPT hgen)
 
 end TensorFiltration
 

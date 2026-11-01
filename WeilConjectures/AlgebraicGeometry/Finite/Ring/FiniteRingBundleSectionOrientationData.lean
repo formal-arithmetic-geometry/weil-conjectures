@@ -267,4 +267,17 @@ def bundleSectionComparison (A : Type (u + 1)) [CommRing A] [Finite A]
         (rightDerivedUpperShriek A q).map
           (ordinaryFiniteUnitPullback A v).hom)
 
+/-- The zero section expressed in the actual inverse frame, by its Cartesian lifting property.
+Source: orientation-charts Step 4 (blueprint: lem-trf-finite-ring-bundle-section-orientation).
+-/
+def bundleSectionChartZero (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)
+    (M : S.Modules) [M.IsFiniteLocallyFreeOfRank d] (V : S.Opens)
+    (e : VectorBundleZeroSection.Trivialization S d M V) :
+    V.toScheme ⟶ affineTraceTower V.toScheme d :=
+  (vectorIntegrationChart_isPullback S d M V e).lift
+    (V.ι ≫ VectorBundleZeroSection.zero S d M) (𝟙 _)
+    ((Category.assoc _ _ _).trans
+      ((congrArg (fun f ↦ V.ι ≫ f) (VectorBundleZeroSection.zero_spec S d M).1).trans
+        ((Category.comp_id _).trans (Category.id_comp _).symm)))
+
 end AlgebraicGeometry.Etale

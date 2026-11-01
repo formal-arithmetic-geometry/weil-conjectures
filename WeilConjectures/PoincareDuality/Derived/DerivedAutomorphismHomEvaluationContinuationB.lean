@@ -125,6 +125,7 @@ import all WeilConjectures.PoincareDuality.PodReindexingCoherence.PodReindexingE
 
 public import WeilConjectures.PoincareDuality.Pod.PodHomComplexShiftRepresentatives
 public import WeilConjectures.SixFunctors.Supporting.DerivedAutomorphismHomEvaluationContinuationA
+public import WeilConjectures.ProperBaseChange.RingedStrictTowerHomotopyLimitIndependentCoefficients
 
 /-! # Internal Hom and evaluation under coefficient-site isomorphisms
 
@@ -385,6 +386,35 @@ theorem podIntegralPullbackComp_normalization
         (podCompletedDerivedInverseImage l E h).map (podCompletedToTowerIso l E g M).hom ≫
         (podCompletedToTowerIso l E h ((constructibleIntegralPullback l E g).obj M)).hom) := by
   sorry
+
+/-- Evaluation equation of the coefficient base-change map: precomposed with the
+tensor comparison, the transpose `c` followed by evaluation is the image of evaluation.
+Source: Stacks 0GMX; the map of def-pur-coefficient-base-change-hom.
+Proof: `c` is the closed transpose of `μ⁻¹ ≫ F(ev)`; the counit identity of the
+right-tensor/internal-Hom adjunction gives `(c ⊗ 1) ≫ ev = μ⁻¹ ≫ F(ev)`, and
+precomposing with `μ` cancels `μ⁻¹`.
+(blueprint: stage3-derived-automorphism-continuation-b). -/
+theorem baseChangeHom_evaluation
+    {A : Type a} {B : Type c} [Category.{b} A] [Category.{d} B]
+    {HA : Aᵒᵖ × A ⥤ A} {HB : Bᵒᵖ × B ⥤ B}
+    (SA : CoefficientClosedStructure HA) (SB : CoefficientClosedStructure HB)
+    (F : A ⥤ B) (μ : SA.tensor ⋙ F ≅ F.prod F ⋙ SB.tensor) (P Q : A) :
+    μ.hom.app (HA.obj (op P, Q), P) ≫
+      SB.tensor.map (Prod.mkHom (coefficientBaseChangeHom SA SB F μ P Q) (𝟙 _)) ≫
+      SB.evaluation (F.obj P) (F.obj Q) = F.map (SA.evaluation P Q) := by
+  let := SB.monoidal
+  have h := ((SB.adjunction (F.obj P)).homEquiv _ _).symm_apply_apply
+    (μ.inv.app (HA.obj (op P, Q), P) ≫ F.map (SA.evaluation P Q))
+  rw [Adjunction.homEquiv_counit] at h
+  change (MonoidalCategory.tensorRight (F.obj P)).map
+    (coefficientBaseChangeHom SA SB F μ P Q) ≫ SB.evaluation (F.obj P) (F.obj Q) = _ at h
+  change μ.hom.app (HA.obj (op P, Q), P) ≫
+    (MonoidalCategoryStruct.tensorHom
+      (coefficientBaseChangeHom SA SB F μ P Q) (𝟙 (F.obj P))) ≫
+    SB.evaluation (F.obj P) (F.obj Q) = F.map (SA.evaluation P Q)
+  erw [MonoidalCategory.tensorHom_id]
+  erw [h]
+  simpa only [Category.assoc] using (Iso.hom_inv_id_app_assoc μ _ _)
 
 end IntegralComposition
 

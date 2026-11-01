@@ -12,6 +12,10 @@ public import WeilConjectures.Algebra.Homology.DerivedInternalHom
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 public import Mathlib.Algebra.Homology.Monoidal
+public import Mathlib.CategoryTheory.Monoidal.CoherenceLemmas
+public import WeilConjectures.AlgebraicGeometry.RingedTopoiTensorComparisonConstruction
+public import WeilConjectures.CategoryTheory.RingedExtendedCech
+public import WeilConjectures.ProperBaseChange.RingedToposKFlatPullback
 
 /-!
 # Tensor coherence for a Cech pullback functor
@@ -51,6 +55,41 @@ structure TensorCoherence {A : Type u} {B : Type v} [Category A] [Category B]
         (F.map unitA.inv ≫ u.hom ≫ unitB.hom)) ≫
       (λ_ (𝟙_ B)).hom =
     F.map (λ_ (𝟙_ A)).hom ≫ F.map unitA.inv ≫ u.hom ≫ unitB.hom
+
+private theorem tensor_unit_end
+    {B : Type v} [Category B] [MonoidalCategory B]
+    (a b : 𝟙_ B ⟶ 𝟙_ B) :
+    (a ⊗ₘ b) ≫ (λ_ (𝟙_ B)).hom = (λ_ (𝟙_ B)).hom ≫ a ≫ b := by
+  simp only [tensorHom_def, id_whiskerLeft, whiskerRight_id, ← unitors_equal, ← unitors_inv_equal,
+    Category.assoc, Iso.inv_hom_id_assoc, Iso.inv_hom_id, Category.comp_id]
+
+private theorem tensorCoherence_of_comparison
+    {A : Type u} {B : Type v} [Category A] [Category B]
+    [MonoidalCategory A] [MonoidalCategory B]
+    (F : A ⥤ B)
+    (t : ∀ X Y, F.obj (X ⊗ Y) ≅ F.obj X ⊗ F.obj Y)
+    (ht : ∀ {X X' Y Y'} (f : X ⟶ X') (g : Y ⟶ Y'),
+      F.map (f ⊗ₘ g) ≫ (t X' Y').hom =
+        (t X Y).hom ≫ (F.map f ⊗ₘ F.map g))
+    (v : F.obj (𝟙_ A) ≅ 𝟙_ B) :
+    Nonempty (TensorCoherence F (𝟙_ A) (𝟙_ B) v) := by
+  -- Normalize through the target unit identification, which the structure lets us choose.
+  let w : F.obj (𝟙_ A) ≅ 𝟙_ B :=
+    (F.mapIso (λ_ (𝟙_ A))).symm ≪≫ t (𝟙_ A) (𝟙_ A) ≪≫
+      tensorIso v v ≪≫ λ_ (𝟙_ B)
+  let a : 𝟙_ B ≅ 𝟙_ B := v.symm ≪≫ w
+  have hw : (t (𝟙_ A) (𝟙_ A)).hom ≫ (v.hom ⊗ₘ v.hom) ≫
+      (λ_ (𝟙_ B)).hom = F.map (λ_ (𝟙_ A)).hom ≫ w.hom := by
+    simp only [w, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_inv, tensorIso_hom,
+      ← F.map_comp_assoc, Iso.hom_inv_id, F.map_id, Category.id_comp]
+  have ha : w.hom ≫ a.inv = v.hom := by
+    simp only [a, Iso.trans_inv, Iso.symm_inv, Iso.hom_inv_id_assoc]
+  refine ⟨⟨t, ht, Iso.refl _, a.symm, ?_⟩⟩
+  simp only [Iso.refl_inv, F.map_id, Category.id_comp, Iso.symm_hom]
+  rw [← tensorHom_comp_tensorHom, Category.assoc, tensor_unit_end]
+  simp only [← Category.assoc] at hw ⊢
+  rw [hw]
+  simp only [Category.assoc, ha]
 
 /--
 For the canonical tensor products of sheaves of modules, the supplied left adjoint `F` of

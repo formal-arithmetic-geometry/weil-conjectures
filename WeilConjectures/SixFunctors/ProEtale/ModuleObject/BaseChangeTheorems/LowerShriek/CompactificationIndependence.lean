@@ -11,6 +11,9 @@ public import WeilConjectures.Mathlib.CategoryTheory.Functor.SquareTransport
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.Proper
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionLowerShriekUnit
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.BaseChange
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructiblePullback
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekInterchange
 
 /-!
 
@@ -420,6 +423,47 @@ theorem isIso_boundedConstructibleOpenImmersionLowerShriekRefinement
       (isZero_boundedConstructibleUpperStar_obj_openImmersionLowerShriek Λ ℓ i₁ (c ≫ h) hdisj
         K).of_iso ((boundedConstructibleUpperStarComp Λ ℓ c h).app _).symm
     exact ⟨⟨hT.to_ _, hS.eq_of_src _ _, hT.eq_of_src _ _⟩⟩
+
+/-- The pushforward comparison `i₁_! ⟶ i_! ⋙ Rh_*` (for any right adjoint `Rh_*` of `Lh^*`) is
+an isomorphism if the proper interchange `Adjunction.exchangeRight` of the cartesian square `sq`
+under `L(𝟙 X)^* ⊣ R(𝟙 X)_*` and `Lh^* ⊣ Rh_*` is: its other factors are isomorphisms, so the
+unit of `Lh^* ⊣ Rh_*` is an isomorphism on `i₁_! K`. -/
+private theorem isIso_refinementPushforward_of_isIso_exchangeRight
+    (sq : IsPullback (𝟙 X) i i₁ h)
+    {Rh : Dᵇc(Z.left)⟦Λ⟧ ⥤ Dᵇc(Z₁.left)⟦Λ⟧} (adj : boundedConstructibleUpperStar Λ ℓ h ⊣ Rh)
+    {Rid : Dᵇc(X.left)⟦Λ⟧ ⥤ Dᵇc(X.left)⟦Λ⟧}
+    (aid : boundedConstructibleUpperStar Λ ℓ (𝟙 X) ⊣ Rid)
+    (he : IsIso (Adjunction.exchangeRight aid adj
+      (boundedConstructibleOpenImmersionLowerShriekBaseChangeIso' Λ ℓ sq)))
+    [IsIso (boundedConstructibleOpenImmersionLowerShriekRefinement Λ ℓ
+      sq.toCommSq.snd_comp_eq_of_fst_eq_id)] :
+    IsIso ((Functor.rightUnitor _).inv ≫ Functor.whiskerLeft _ adj.unit ≫
+      (Functor.associator _ _ _).inv ≫
+      Functor.whiskerRight (inv (boundedConstructibleOpenImmersionLowerShriekRefinement Λ ℓ
+        sq.toCommSq.snd_comp_eq_of_fst_eq_id)) Rh) := by
+  let eid : Rid ≅ 𝟭 _ := conjugateIsoEquiv aid Adjunction.id
+    (boundedConstructibleUpperStarId Λ ℓ X).symm
+  have : IsIso aid.counit := by
+    have : Rid.Full := Functor.Full.of_iso eid.symm
+    have : Rid.Faithful := Functor.Faithful.of_iso eid.symm
+    exact aid.counit_isIso_of_R_fully_faithful
+  rw [NatTrans.isIso_iff_isIso_app]
+  intro K
+  have hex : IsIso ((Adjunction.exchangeRight aid adj
+      (boundedConstructibleOpenImmersionLowerShriekBaseChangeIso' Λ ℓ sq)).app K) :=
+    inferInstance
+  rw [Adjunction.exchangeRight_app] at hex
+  have hu : IsIso (adj.unit.app
+      ((boundedConstructibleOpenImmersionLowerShriek Λ ℓ i₁).obj (Rid.obj K))) := by
+    exact IsIso.of_isIso_comp_right _
+      (Rh.map ((boundedConstructibleOpenImmersionLowerShriekBaseChangeIso' Λ ℓ sq).hom.app
+            (Rid.obj K)) ≫
+        Rh.map ((boundedConstructibleOpenImmersionLowerShriek Λ ℓ i).map (aid.counit.app K)))
+  have hunit : IsIso (adj.unit.app ((boundedConstructibleOpenImmersionLowerShriek Λ ℓ i₁).obj K)) :=
+    (NatTrans.isIso_app_iff_of_iso _
+      ((boundedConstructibleOpenImmersionLowerShriek Λ ℓ i₁).mapIso (eid.app K))).mp hu
+  dsimp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app]
+  infer_instance
 
 /-- The *pushforward comparison* `i₁_! ⟶ i_! ⋙ Rh_*` on bounded constructible complexes for a
 cartesian square `sq` of open immersions `i`, `i₁` and a morphism `h` as in

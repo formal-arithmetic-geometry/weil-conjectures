@@ -186,3 +186,68 @@ theorem finiteIntrinsicOrdinaryPullbackNormalization
     Functor.whiskerRight_app, Functor.whiskerLeft_app,
     Functor.leftUnitor_inv_app, Functor.associator_hom_app, Category.id_comp,
     SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply] using hv
+
+/-- The ringed-to-intrinsic pullback bridge is the conjugate of the normalized
+ordinary scalar inverse mate.
+Source: Stacks 00YV; the uniqueness clause of openSquarePullbackModel_existsUnique.
+(blueprint: lem-sf-finite-intrinsic-pullback-normalization).
+
+Proof: the inverse mate's unit equation and the coefficient equivalence triangle
+identities show that the displayed conjugate preserves the actual intrinsic unit.
+Evaluate that equation on every section. The uniqueness clause of the prescribed
+bridge identifies the two isomorphisms. This uses neither tensor products nor
+resolutions and holds for empty schemes and the zero ring. -/
+theorem finiteIntrinsicOrdinaryPullbackNormalization
+    (R : Type u) [CommRing R] [Finite R] {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    openSquarePullbackModel R f =
+      (Functor.leftUnitor _).symm ≪≫
+        Functor.isoWhiskerRight (sfIntrinsicModuleEquivalence Y R).counitIso.symm
+          (proEtaleConstantRingPullback R f) ≪≫
+        Functor.associator _ _ _ ≪≫
+        Functor.isoWhiskerLeft (sfIntrinsicModuleEquivalence Y R).inverse
+          (finiteScalarOrdinaryPullbackComparison R f) := by
+  let EX := sfIntrinsicModuleEquivalence X R
+  let EY := sfIntrinsicModuleEquivalence Y R
+  let a := ProEtale.upperStarLowerStarAdjunction
+    (ModuleCat.{u + 1} (ULift.{u + 1} R)) f
+  let b := proEtaleConstantRingAdjunction R f
+  let d := openSquare_directImageModel R f
+  have hd : d = eqToIso (finiteScalarConstantPushforward_eq R f) := by
+    exact pushforwardCongr_eq _
+  let c := sfIntrinsicDirectImageComparison f R
+  let s := finiteScalarOrdinaryPullbackComparison R f
+  let e : proEtaleConstantRingPullback R f ≅ sfIntrinsicPullback R f :=
+    (Functor.leftUnitor _).symm ≪≫
+      Functor.isoWhiskerRight EY.counitIso.symm _ ≪≫
+        Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft EY.inverse s
+  apply (openSquarePullbackModel_existsUnique R f).unique
+    (openSquarePullbackModel_existsUnique R f).exists.choose_spec
+  intro M V x
+  have hs : (mateEquiv a (b.ofNatIsoRight d) s.hom).natTrans = c.inv := by
+    rw [mate_right_iso]
+    have h : (mateEquiv a b s.hom).natTrans =
+        (c.symm ≪≫ Functor.isoWhiskerLeft EX.functor d.symm).hom := by
+      rw [hd]
+      unfold s finiteScalarOrdinaryPullbackComparison
+      exact congrArg TwoSquare.natTrans ((mateEquiv a b).apply_symm_apply _)
+    rw [h]
+    apply NatTrans.ext
+    funext K
+    simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+      Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Category.assoc,
+      Iso.inv_hom_id_app, Category.comp_id, Functor.comp_obj, EX]
+  have hu := normalized_inverseMate_unit EY EX a (b.ofNatIsoRight d) c s hs M
+  change (b.ofNatIsoRight d).unit.app M ≫ _ =
+    (sfIntrinsicConstantModuleAdjunction f R).unit.app M at hu
+  rw [Adjunction.ofNatIsoRight_unit] at hu
+  have hv := congrArg (fun z ↦ z.val.app (Opposite.op V) x) hu
+  simp only [NatTrans.comp_app, SheafOfModules.comp_val, PresheafOfModules.comp_app,
+    ModuleCat.comp_apply] at hv
+  change ((e.hom.app M).val.app (Opposite.op ((proEtaleBaseChange f).obj V)))
+    (((b.unit.app M).val.app (Opposite.op V)) x) =
+      ((sfIntrinsicConstantModuleAdjunction f R).unit.app M).val.app (Opposite.op V) x at hv
+  simpa only [e, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    Functor.leftUnitor_inv_app, Functor.associator_hom_app, Category.id_comp,
+    SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply] using hv

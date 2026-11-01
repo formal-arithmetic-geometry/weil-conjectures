@@ -245,6 +245,24 @@ import all WeilConjectures.AlgebraicGeometry.CondensedCoefficientPointUnitPastin
 import all WeilConjectures.AlgebraicGeometry.CondensedQbarLfpCoverComposition
 import all WeilConjectures.CategoryTheory.ModuleObjects.Free
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
+public import WeilConjectures.AlgebraicGeometry.Continuous.ContinuousCoefficientBasicSupplement
+public import WeilConjectures.AlgebraicGeometry.Rational.RationalModuleRealizationFunctor
+public import WeilConjectures.CategoryTheory.InternalSectionTensorComparison
+public import WeilConjectures.ProperBaseChange.CondensedConstructibleSerre
+public import WeilConjectures.ProperBaseChange.CondensedFieldContinuousRealization
+public import WeilConjectures.ProperBaseChange.NormalizedScalar.NormalizedBoundedScalar
+public import WeilConjectures.ProperBaseChange.NormalizedScalar.NormalizedCoefficientLocalization
+public import WeilConjectures.ProperBaseChange.NormalizedScalar.NormalizedIntegralComparison
+public import WeilConjectures.ProperBaseChange.NormalizedScalar.NormalizedRealizationClauses
+public import WeilConjectures.ProperBaseChange.NormalizedScalar.NormalizedSectionScalar
+public import WeilConjectures.ProperBaseChange.RealizationScalarFunctorCoreDerivedData
+import WeilConjectures.AlgebraicGeometry.Rational.RationalModuleLocalizationTransport
+import WeilConjectures.AlgebraicGeometry.Completed.Constant.CompletedConstantDerivedScalarFactorization
+import WeilConjectures.SixFunctors.AdicFiniteRealization.AdicSectionFiniteFreeTransport
+import WeilConjectures.SixFunctors.AdicFiniteRealization.AdicFiniteFreeScalarTransport
+import WeilConjectures.AlgebraicGeometry.Continuous.ContinuousCoefficientCompletionSupplement
+import WeilConjectures.AlgebraicGeometry.Rational.RationalModuleLocalModelsTransport
+public import WeilConjectures.SmoothPurity.CoefficientRealization.CoefficientRealizationData
 
 /-! # Actual scalar extension on raw integral rationalizations
 
@@ -277,3 +295,60 @@ variable (T : Scheme.{u}) [IsNoetherian T]
 
 set_option synthInstance.checkSynthOrder false in
 end WeilConjectures
+
+namespace WeilConjectures.NormalizedScalar
+
+/-- The ordinary bounded constructible integral category is triangulated.
+Source: the integral constructible Serre theorem transported across the isometric
+coefficient presentation (blueprint: lem-weil-pbc-realization-scalar-functor).
+Proof: apply the normalized integral coefficient triangulation theorem. -/
+instance realizationScalarSourceTriangulated :
+    (boundedConstructible (integralRing l E T)).IsTriangulated :=
+  integral_triangulated T
+
+/-- The normalized scalar-functor assertion on the actual pulled-back coefficients.
+The finite-quotient limit uses the identity-on-values comparison from the given
+unit ball to the canonical integer ring. The localization cocone starts with the
+actual integral inclusion and has the fraction legs. The source of `forward` is
+the ordinary bounded constructible Verdier rationalization; no completeness
+condition, reduction-tower category, or equivalence assertion occurs here.
+Source: Bhatt--Scholze, Lemma 6.8.2, Propositions 6.8.11(3), 6.8.14(2).
+(blueprint: lem-weil-pbc-realization-scalar-functor). -/
+structure RealizationData : Prop where
+  integralLimit : IntegralLimit l E T
+  coefficientLocalization : CoefficientLocalization T l E
+  coefficientLocalizationComparison : CoefficientLocalizationComparison T l E
+  extensionExact : ScalarExactData l E T
+  scalarAdjunction : ScalarAdjunctionData l E T
+  derivedScalar : DerivedScalarData l E T
+  sectionNormalized : SectionData l E T
+  forward : ForwardData l E T
+
+/-- The normalized forward scalar functor through ordinary Verdier rationalization.
+Source: Bhatt--Scholze, Lemma 6.8.2, Propositions 6.8.11(3), 6.8.14(2).
+(blueprint: lem-weil-pbc-realization-scalar-functor).
+
+Proof: use the isometric small presentation only to transport ordinary exactness
+and integral constructible triangulation. Norm uniqueness identifies the original
+unit ball with the canonical finite-quotient limit. The localization telescope,
+with its actual initial inclusion, gives the normalized coefficient localization.
+The extension/restriction adjunction and exact termwise factorizations give the
+ordinary unit, both total derived computations, and the all-complex derived-unit
+equation. The existing section-normalization theorem applies to this same
+coefficient map. Exact scalar extension preserves ordinary bounded constructible
+objects. Its integral scalar identity therefore gives a triangulated Verdier lift.
+Localization of Hom modules proves field linearity; naturality multiplied by a
+field scalar gives the fraction equation with the same shift-compatible comparison.
+No legacy realization existence theorem is used. -/
+theorem normalized_realization_scalar_functor : RealizationData l E T := by
+  exact
+    { integralLimit := integral_limit l E T
+      coefficientLocalization := coefficient_localization T l E
+      coefficientLocalizationComparison := coefficient_localization_comparison T l E
+      extensionExact := scalar_exact_data l E T
+      scalarAdjunction := scalar_adjunction_data l E T
+      derivedScalar := derived_scalar_data l E T
+      sectionNormalized := section_normalized l E T
+      forward := bounded_forward_exists l E T }
+
+end WeilConjectures.NormalizedScalar

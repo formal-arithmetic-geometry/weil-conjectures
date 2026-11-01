@@ -68,6 +68,49 @@ def modulePullbackComplexComparison :
   isoWhiskerLeft DerivedCategory.Q (modulePullbackExactComparison Λ f) ≪≫
     (upperStar Λ f).mapDerivedCategoryFactors
 
+/-- The resolution counit evaluated on a cochain complex, with the canonical localization
+and homotopy factorization maps. It is the map used to compute pullback on a K-flat
+resolution, and is defined for any complex.
+Source: Stacks Tag 05SE; node proof step 3
+(blueprint: lem-sfb-module-derived-functor-compositor-shifts). -/
+def modulePullbackResolutionCounit
+    (M : CochainComplex
+      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) ℤ) :
+    (moduleObjectDerivedPullback Λ f).obj (DerivedCategory.Q.obj M) ⟶
+      DerivedCategory.Q.obj ((upperStar Λ f).mapHomologicalComplex (.up ℤ) |>.obj M) :=
+  (moduleObjectDerivedPullback Λ f).map
+      ((DerivedCategory.quotientCompQhIso _).hom.app M) ≫
+    (upperStar Λ f).leftDerivedFunctorCounit.app
+      ((HomotopyCategory.quotient _ (.up ℤ)).obj M) ≫
+    DerivedCategory.Qh.map
+      (((upperStar Λ f).mapHomotopyCategoryFactors (.up ℤ)).hom.app M) ≫
+    (DerivedCategory.quotientCompQhIso _).inv.app
+      (((upperStar Λ f).mapHomologicalComplex (.up ℤ)).obj M)
+
+private theorem modulePullbackResolutionCounit_eq (M : CochainComplex
+    (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) ℤ) :
+    modulePullbackResolutionCounit Λ f M =
+      (modulePullbackComplexComparison Λ f).hom.app M := by
+  have h := congr_app (upperStar Λ f).leftDerivedFunctorIsoMapDerivedCategory_hom_fac
+    ((HomotopyCategory.quotient _ (.up ℤ)).obj M)
+  dsimp only [whiskerLeft_app, NatTrans.comp_app] at h
+  dsimp only [modulePullbackResolutionCounit, modulePullbackComplexComparison,
+    Iso.trans_hom, isoWhiskerLeft_hom, NatTrans.comp_app, whiskerLeft_app]
+  rw [← h, Functor.mapDerivedCategoryFactorsh_hom_app]
+  change (upperStar Λ f).leftDerivedFunctor.map (𝟙 _) ≫
+    ((upperStar Λ f).leftDerivedFunctorIsoMapDerivedCategory.hom.app
+      (DerivedCategory.Q.obj M) ≫
+      ((upperStar Λ f).mapDerivedCategory.map (𝟙 _) ≫
+        (upperStar Λ f).mapDerivedCategoryFactors.hom.app M ≫
+        𝟙 _ ≫ DerivedCategory.Qh.map (𝟙 _))) ≫
+      DerivedCategory.Qh.map (𝟙 _) ≫ 𝟙 _ =
+    (upperStar Λ f).leftDerivedFunctorIsoMapDerivedCategory.hom.app
+      (DerivedCategory.Q.obj M) ≫
+      (upperStar Λ f).mapDerivedCategoryFactors.hom.app M
+  simp only [map_id, comp_obj, Category.id_comp, Category.comp_id,
+    NatIso.cancel_natIso_hom_left]
+  erw [Category.comp_id]
+
 /-- Exactness with precisely the transported pullback shifts and the fixed K-injective
 pushforward shifts; compatibility of `c_f` and the termwise comparison with every shift.
 Source: Stacks Tags 014X, 015F and 05SE

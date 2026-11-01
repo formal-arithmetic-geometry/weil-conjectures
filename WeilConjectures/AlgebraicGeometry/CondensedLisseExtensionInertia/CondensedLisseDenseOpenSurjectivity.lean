@@ -1,0 +1,48 @@
+/-
+Copyright (c) 2026 Bin Wu. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Bin Wu
+-/
+module
+
+public import WeilConjectures.Compactification.FiniteFieldDatum.FiniteFieldFiberSupplement
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Line
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyExtension
+
+@[expose] public section
+set_option autoImplicit false
+universe u
+open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
+open AlgebraicGeometry.ProEtale AlgebraicGeometry.Scheme.FiniteEtale
+open scoped CategoryTheory.Obj
+namespace AlgebraicGeometry.ProEtale.CondensedLisseExtensionInertia
+
+/-- The open immersion and fundamental-group surjectivity needed by the reverse extension.
+Source: `lem-wf-dense-open-pi1-surjective` and the projective-line open construction.
+(blueprint: lem-dl-a1-condensed-lisse-dense-open-surjectivity).
+
+The source proof obtains regularity and connectedness from the projective-line pullback,
+then applies the published surjectivity theorem to the induced open immersion.  The
+point is presented over an algebraic closure by transport along the supplied field
+embedding, and the resulting path identity is unchanged by that transport. -/
+theorem dense_open_pullbackPathHom_surjective
+    (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime]
+    (U₀ C₀ : (ProjectiveLine (Spec (.of D.k₀))).Opens)
+    (_hl : l ≠ D.p)
+    (_hdense : Dense (U₀ : Set (ProjectiveLine (Spec (.of D.k₀)))))
+    (_hUC : U₀ ≤ C₀) (U C : Scheme.{u})
+    (_eU : U ≅ pullback (U₀.ι ≫ ProjectiveLine (Spec (.of D.k₀)) ↘ Spec (.of D.k₀))
+      (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))))
+    (_eC : C ≅ pullback (C₀.ι ≫ ProjectiveLine (Spec (.of D.k₀)) ↘ Spec (.of D.k₀))
+      (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))))
+    (_j₀ : Over.mk (U₀.ι ≫ ProjectiveLine (Spec (.of D.k₀)) ↘ Spec (.of D.k₀)) ⟶
+      Over.mk (C₀.ι ≫ ProjectiveLine (Spec (.of D.k₀)) ↘ Spec (.of D.k₀)))
+    (_hj₀ : _j₀.left = (ProjectiveLine (Spec (.of D.k₀))).homOfLE _hUC)
+    (_j : U ⟶ C) (_hj : _j = _eU.hom ≫
+      ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map _j₀).left ≫ _eC.inv)
+    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (b : Spec (.of Ω) ⟶ U)
+    (σ : Aut (fiber (b ≫ _j))) :
+    ∃ τ : Aut (fiber b), pullbackPathIso _j τ = σ := by
+  sorry
+
+end AlgebraicGeometry.ProEtale.CondensedLisseExtensionInertia

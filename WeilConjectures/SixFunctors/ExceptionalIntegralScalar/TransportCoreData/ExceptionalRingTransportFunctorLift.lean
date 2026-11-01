@@ -72,4 +72,17 @@ def TransportCoreData.liftSystemF
     ((sequenceProperty l E Y).fullyFaithfulι.whiskeringRight
       (sequenceProperty l E X).FullSubcategory).preimageIso (comparison E))
 
+/-- The new left functor has exactly the prescribed ambient objects and maps.
+Proof: the full-subcategory lift retains the object and map fields of H. Its
+composite with inclusion is definitionally H, independent of the membership proof.
+Source: Zheng, Construction 5.25; Mathlib's `ObjectProperty.lift`.
+(blueprint: lem-sf-exceptional-transport-functor-lift) -/
+theorem TransportCoreData.liftSystemF_comp
+    (H : ∀ E : FieldStage.{u} l,
+      (sequenceProperty l E X).FullSubcategory ⥤ coefficientSequenceDerived l E.carrier Y)
+    (comparison : ∀ E : FieldStage.{u} l, d.F E ⋙ (sequenceProperty l E Y).ι ≅ H E)
+    (E : FieldStage.{u} l) :
+    (d.liftSystemF l Ω D hl c operation left H comparison).F E ⋙
+      (sequenceProperty l E Y).ι = H E := rfl
+
 end WeilConjectures.ExceptionalIntegralScalar

@@ -11,6 +11,13 @@ import all WeilConjectures.AlgebraicGeometry.ContinuousIntegralScalarExact
 import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
 import Mathlib.Algebra.Homology.HomologicalComplexLimits
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicSubfieldFiniteExtend
+public import Mathlib.CategoryTheory.Functor.OfSequence
+public import Mathlib.CategoryTheory.Limits.Types.Filtered
+public import Mathlib.CategoryTheory.Monoidal.Closed.FunctorCategory.Complete
+public import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
+public import WeilConjectures.CategoryTheory.ModuleObjects.Monoidal
+public import WeilConjectures.ConstructibleSheaf.FreeLifting
+
 /-! # Clearing denominators between integral constructible images
 
 The coefficient telescope is tensored with a complex representing the target. Its colimit
@@ -53,6 +60,21 @@ private noncomputable def extendComapTensorNatIso :
     intro M N f
     apply hom_ext
     exact (extendForgetTensorIso φ).hom.naturality f)
+
+private theorem tensor_regular_leftUnitor_inv (M : Mod C R) :
+    (λ_ M).inv.hom =
+      (λ_ M.X).inv ≫ η[R] ▷ M.X ≫ tensorObjπ (regular R) M := by
+  dsimp only [MonoidalCategory.leftUnitor, Mod.monoidalCategory, Monoidal.induced,
+    Mod.monoidalCategoryStruct, Functor.mapIso, Iso.trans_inv, fromBimod_map,
+    Bimod.leftUnitorBimod, Bimod.isoOfIso]
+  change Bimod.LeftUnitorBimod.inv ((toBimod R).obj M) ≫
+    (Bimod.whiskerRight toBimodRegularIso.inv ((toBimod R).obj M)).hom = _
+  dsimp only [Bimod.LeftUnitorBimod.inv]
+  simp only [Category.assoc]
+  erw [ι_colimMap]
+  change (λ_ M.X).inv ≫ η[R] ▷ M.X ≫
+    toBimodRegularIso.inv.hom ▷ M.X ≫ tensorObjπ (regular R) M = _
+  erw [toBimodRegularIso_inv_hom, id_whiskerRight, Category.id_comp]
 
 omit [MonoidalPreadditive C] [Abelian.HasFunctorialFlatResolution C] in
 set_option backward.isDefEq.respectTransparency false in

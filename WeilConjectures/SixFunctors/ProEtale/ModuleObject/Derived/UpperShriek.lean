@@ -8,6 +8,10 @@ module
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarLeftAdjoint
+public import WeilConjectures.AlgebraicGeometry.BaseFieldFiniteCD.FiniteCohomologicalDimensionHypothesis
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.EllAdic.EllAdicLocalizingBrownRepresentability
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.EllAdic.EllAdicLocalizingExceptionalBounded
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.EllAdic.EllAdicLocalizingExceptionalConstructible
 
 /-!
 
@@ -99,6 +103,52 @@ variable {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
   {f : X ⟶ Y} (c : Compactification f.left)
+
+private theorem baseField_cd_lt_top_gap :
+    AlgebraicGeometry.ProEtale.BaseFieldFiniteCD ℓ k := by
+  sorry
+
+/-- Restrict the localizing adjunction along the full bounded constructible inclusions: for an
+`ℓ`-adic coefficient ring `Λ` and a proper `g`, the restriction of `R((g)_*⟦Λ⟧)` to bounded
+constructible complexes is a left adjoint, provided every right adjoint of the localizing proper
+pushforward preserves bounded constructibility (`hG`). -/
+private theorem isLeftAdjoint_boundedConstructibleLowerStar_of_ellAdic
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    [IsProper g.left] (hΛ : IsEllAdicCoefficient ℓ Λ inferInstance)
+    (hbc : ∀ K : Dᵇc(Z.left)⟦Λ⟧, boundedConstructible (condensedRingObj Λ Y.left)
+      ((R((g.left)_*⟦Λ⟧)).obj K.obj))
+    (hG : ∀ (G : (boundedConstructibleLocalizingClosure Λ Y.left).FullSubcategory ⥤
+        (boundedConstructibleLocalizingClosure Λ Z.left).FullSubcategory)
+      (_ : ellAdicLocalizingLowerStar Λ ℓ g hΛ ⊣ G) (K : Dᵇc(Y.left)⟦Λ⟧),
+      boundedConstructible (condensedRingObj Λ Z.left)
+        ((G.obj ((boundedConstructibleToLocalizing Λ Y.left).obj K)).obj)) :
+    ((boundedConstructible _).lift ((boundedConstructible _).ι ⋙ R((g.left)_*⟦Λ⟧))
+      hbc).IsLeftAdjoint := by
+  let F := ellAdicLocalizingLowerStar Λ ℓ g hΛ
+  have : F.IsLeftAdjoint := ellAdic_isLeftAdjoint_localizingLowerStar Λ ℓ g hΛ
+  let G := F.rightAdjoint
+  let adj : F ⊣ G := Adjunction.ofIsLeftAdjoint F
+  let Gbc : Dᵇc(Y.left)⟦Λ⟧ ⥤ Dᵇc(Z.left)⟦Λ⟧ :=
+    (boundedConstructible (condensedRingObj Λ Z.left)).lift
+      (boundedConstructibleToLocalizing Λ Y.left ⋙ G ⋙
+        (boundedConstructibleLocalizingClosure Λ Z.left).ι)
+      (fun K ↦ hG G adj K)
+  let iZ := boundedConstructibleToLocalizing Λ Z.left
+  let iY := boundedConstructibleToLocalizing Λ Y.left
+  have hiZ : iZ.FullyFaithful :=
+    ObjectProperty.fullyFaithfulιOfLE (boundedConstructible_le_localizingClosure Λ Z.left)
+  have hiY : iY.FullyFaithful :=
+    ObjectProperty.fullyFaithfulιOfLE (boundedConstructible_le_localizingClosure Λ Y.left)
+  have eF : iZ ⋙ F ≅ (boundedConstructible _).lift
+      ((boundedConstructible _).ι ⋙ R((g.left)_*⟦Λ⟧)) hbc ⋙ iY :=
+    NatIso.ofComponents (fun K ↦ Iso.refl _) (fun a ↦ by
+      simp only [Iso.refl_hom, Category.comp_id, Category.id_comp]
+      rfl)
+  have eG : iY ⋙ G ≅ Gbc ⋙ iZ :=
+    NatIso.ofComponents (fun K ↦ Iso.refl _) (fun a ↦ by
+      simp only [Iso.refl_hom, Category.comp_id, Category.id_comp]
+      rfl)
+  exact (Adjunction.restrictFullyFaithful adj hiZ hiY eF eG).isLeftAdjoint
 
 /-- The exceptional inverse image `Rf^! : Dᵇc(Y)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(X)⟦ℚ̲̄_ℓ⟧` attached to a
 compactification
