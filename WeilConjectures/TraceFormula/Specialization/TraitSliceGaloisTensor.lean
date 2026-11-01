@@ -118,7 +118,7 @@ theorem isField_separableClosure_tensorProduct_traitLaurentField
     (fun c hc ↦ mem_range_traitLaurentFieldMap_of_isSeparable htr c hc) _
 
 
-omit [IsAlgClosed K] in
+omit [IsSepClosed k'] [IsAlgClosed K] in
 /-- `Spec(Ω ⊗_F F_K) ⟶ Spec(F^sep ⊗_F F_K)` is a homeomorphism, `Ω / F^sep` being purely
 inseparable. -/
 theorem isHomeomorph_comap_traitGenericField_tensorProduct :
