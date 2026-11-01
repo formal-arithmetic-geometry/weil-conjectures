@@ -49,30 +49,6 @@ namespace AlgebraicGeometry.ProEtale
 
 open Scheme PadicAlgCl
 
-namespace CondensedRing
-
-variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-
-/-- The derived pushforward along a closed immersion into a scheme with noetherian underlying
-space of a module object placed in degree `0` is its pushforward placed in degree `0`: the
-pushforward along a closed immersion is exact. -/
-noncomputable def rightDerivedLowerStarSingleIsoOfIsClosedImmersion {Z X : Scheme.{u}}
-    [TopologicalSpace.NoetherianSpace X] (i : Z ⟶ X) [IsClosedImmersion i]
-    (F : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) :
-    (R((i)_*⟦Λ⟧)).obj ((DerivedCategory.singleFunctor _ 0).obj F) ≅
-      (DerivedCategory.singleFunctor _ 0).obj ((i)_*⟦Λ⟧.obj F) :=
-  let U : X.Opens := ⟨(Set.range i.base)ᶜ, i.isClosedEmbedding.isClosed_range.isOpen_compl⟩
-  haveI : TopologicalSpace.NoetherianSpace U := U.ι.isOpenEmbedding.isInducing.noetherianSpace
-  haveI : QuasiCompact U.ι := ⟨fun _ _ _ ↦ TopologicalSpace.NoetherianSpace.isCompact _⟩
-  have hc : IsCompl (Set.range i.base) (Set.range U.ι.base) := by
-    rw [Scheme.Opens.range_ι U]
-    exact isCompl_compl
-  haveI := preservesFiniteColimits_lowerStar_of_isCompl Λ i U.ι hc
-  ((i)_*⟦Λ⟧).rightDerivedFunctorIsoMapDerivedCategory.app _ ≪≫
-    (((i)_*⟦Λ⟧).mapDerivedCategorySingleFunctor 0).app F
-
-end CondensedRing
-
 open CondensedRing
 
 section Adjunction
