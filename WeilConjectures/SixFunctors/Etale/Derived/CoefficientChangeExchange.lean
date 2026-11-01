@@ -421,6 +421,9 @@ lemma isCompactPullbackCompatible_compactlySupportedGlobalSectionsRestrictScalar
     (derivedRestrictScalarsCompRightDerivedGlobalSectionsIso_hom_app_globalSectionsTransport ρ h)
     (derivedRestrictScalarsCompRightDerivedLowerShriekIso_baseChangeMap ρ aX sq) K'
 
+-- The proof uses neither the surjectivity of `ρ` nor the finiteness of `Λ'`.
+set_option linter.unusedVariables false in
+set_option linter.unusedSectionVars false in
 /-- Blueprint `lem-fix-compact-support-coefficient-change` (subsection
 `sk-def-sfb-coefficient-comparisons`): for a surjection `ρ : Λ →+* Λ'` of finite rings whose
 exponent is invertible on the separably closed field `k` and a separated finite-type
