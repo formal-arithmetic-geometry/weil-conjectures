@@ -32,6 +32,10 @@ The finite/common-stage transports and scalar/inclusion comparisons below use th
 specified comparisons of the supplied system, with their recorded reverse orientation.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option genSizeOf false

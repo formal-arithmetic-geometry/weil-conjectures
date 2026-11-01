@@ -13,6 +13,7 @@ import all WeilConjectures.TraceFormula.Integral.IntegralComparisonRealizationMo
 import all WeilConjectures.TraceFormula.CompletionUnit.CompletionUnitModels
 import all WeilConjectures.SixFunctors.SequenceModuleEvaluation.SequenceModulePullbackEvaluation
 import all WeilConjectures.TraceFormula.Ordinary.OrdinaryQuotientPullbackSuccessor
+import all WeilConjectures.TraceFormula.Ordinary.OrdinaryQuotientPullbackTowerComparison
 import all WeilConjectures.SmoothPurity.Completed.CompletedPullbackTensorIntegralConstruction
 
 /-! # Quotient realization steps
