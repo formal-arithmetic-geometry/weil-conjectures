@@ -720,11 +720,6 @@ private theorem geometric_restriction (A : Type (u + 2)) [Category.{u + 1} A]
     (section_square_coherence A s p b f j₁ j₂ sp sb h sq
       ((lowerStar A f).rightDerivedFunctorPlus.obj M))
 
-attribute [local irreducible] CategoryTheory.Adjunction.derivedPlus
-  upperStarLowerStarAdjunction upperStarCompDerivedPlus
-
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
 /-- The specified proper/open restriction identification is the canonical restriction map,
 after identifying `K` with `j₁^* j₁! K` by the extension-by-zero unit.
 Source: blueprint thm-cbc-finite-torsion, proof step 5; Stacks Project, Tags 0F7B and 0F7I
@@ -750,14 +745,15 @@ Proof:
    Conjugacy of the direct-image compositor and the inverse-image compositor cancels the
    intermediate `Rs_*` and `Rp_*` factors because `s ≫ p = id`.
    These are precisely the two factors on the right. This proves equality of the specified
-   maps, for arbitrary bounded-below K; it also applies to the empty scheme and zero ring. -/
-theorem properOpenIdentification_unit
-    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+   maps, for arbitrary bounded-below K and any commutative coefficient ring `Λ`; it also applies
+   to the empty scheme and zero ring. -/
+theorem properOpenIdentificationOfCommRing_unit
+    (Λ : Type (u + 1)) [CommRing Λ]
     {T₁ T₂ X : Scheme.{u}} (f : T₁ ⟶ T₂) [IsProper f]
     (j₁ : X ⟶ T₁) (j₂ : X ⟶ T₂) [IsOpenImmersion j₁] [IsOpenImmersion j₂]
     (h : j₁ ≫ f = j₂)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    (properOpenIdentification Λ f j₁ j₂ h K).hom ≫
+    (properOpenIdentificationOfCommRing Λ f j₁ j₂ h K).hom ≫
         (derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus
           (ModuleCat.{u + 1} Λ) j₁).unit.app K =
       (upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) j₁ f j₂ h.symm).hom.app
@@ -787,13 +783,13 @@ theorem properOpenIdentification_unit
   let e := (extensionZeroBaseChangeDerivedPlusIso Λ geom.2.2).app K ≪≫
     (openImmersionLowerShriek A s).mapDerivedCategoryPlus.mapIso
       ((upperStarIdDerivedPlus A X).app K)
-  let c := (clopenSectionDirectImage Λ p s geom.2.1 sp).choose.app K
+  let c := (clopenSectionDirectImage_of_commRing Λ p s geom.2.1 sp).choose.app K
   let M := J.obj K
   have hc : c.hom ≫
       (derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus A s).unit.app K =
         R.map (a'.unit.app ((openImmersionLowerShriek A s).mapDerivedCategoryPlus.obj K)) ≫
           ρ.hom.app (S.obj ((openImmersionLowerShriek A s).mapDerivedCategoryPlus.obj K)) := by
-    have hh := (clopenSectionDirectImage Λ p s geom.2.1 sp).choose_spec K
+    have hh := (clopenSectionDirectImage_of_commRing Λ p s geom.2.1 sp).choose_spec K
     have hu := NatTrans.congr_app (exact_unit Λ s) K
     change _ = _ at hu
     rw [hu]
@@ -805,8 +801,35 @@ theorem properOpenIdentification_unit
     ((openImmersionLowerShriek A s).mapDerivedCategoryPlus.obj K) K e c
     ((derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus A j₁).unit.app K)
     ((derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus A s).unit.app K) he hc
-  unfold properOpenIdentification
+  unfold properOpenIdentificationOfCommRing
   dsimp only [Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, asIso_hom]
   exact ht
+
+attribute [local irreducible] CategoryTheory.Adjunction.derivedPlus
+  upperStarLowerStarAdjunction upperStarCompDerivedPlus
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+/-- The finite-coefficient case of `properOpenIdentificationOfCommRing_unit`, kept for its
+existing users (`properOpenIdentification` is `properOpenIdentificationOfCommRing` at a finite
+ring, `properOpenIdentification_eq_ofCommRing`).
+(blueprint: lem-weil-pbc-proper-open-identification-unit). -/
+theorem properOpenIdentification_unit
+    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    {T₁ T₂ X : Scheme.{u}} (f : T₁ ⟶ T₂) [IsProper f]
+    (j₁ : X ⟶ T₁) (j₂ : X ⟶ T₂) [IsOpenImmersion j₁] [IsOpenImmersion j₂]
+    (h : j₁ ≫ f = j₂)
+    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    (properOpenIdentification Λ f j₁ j₂ h K).hom ≫
+        (derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus
+          (ModuleCat.{u + 1} Λ) j₁).unit.app K =
+      (upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) j₁ f j₂ h.symm).hom.app
+          ((rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) f).obj
+            ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j₁).mapDerivedCategoryPlus.obj K)) ≫
+        (upperStar (ModuleCat.{u + 1} Λ) j₁).mapDerivedCategoryPlus.map
+          ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f).derivedPlus.counit.app
+            ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j₁).mapDerivedCategoryPlus.obj
+              K)) :=
+  properOpenIdentificationOfCommRing_unit Λ f j₁ j₂ h K
 
 end AlgebraicGeometry.Etale

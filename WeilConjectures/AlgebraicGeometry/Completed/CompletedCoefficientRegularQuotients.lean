@@ -66,6 +66,40 @@ def spEllCommRingSheaf (n : ℕ) :
     (CommRingCat.of (ULift.{t + 1}
       (Padic.coefficientExtensionIntegers l E ⧸ spEllIdeal l E ^ (n + 1))))
 
+/-- The actual ell-power projection, from the uniquely normalized tower comparison.
+Source: blueprint, coefficient towers, completed-coefficient comparison
+(blueprint: lem-sp-completed-coefficient-regular-quotients). -/
+def spCompletedEllCommRingProjection (n : ℕ) :
+    completedIntegralCommRingSheafUnrestricted l E T ⟶ spEllCommRingSheaf l E T n where
+  hom :=
+    { app := fun U ↦
+        letI := completedIntegralCoefficientCommRingUnrestricted l E T U
+        CommRingCat.ofHom
+          ((((sp_completed_coefficient_limit l E T).choose.hom ≫
+          limit.π (spCoefficientRings l E T) (op n)).hom.app U).hom)
+      naturality := fun _ _ f ↦ (forget₂ CommRingCat RingCat).map_injective
+        (((sp_completed_coefficient_limit l E T).choose.hom ≫
+          limit.π (spCoefficientRings l E T) (op n)).hom.naturality f) }
+
+/-- Every uniformizer quotient transition, induced by the identity on integers.
+Source: blueprint, finite coefficient reductions
+(blueprint: lem-sp-completed-coefficient-regular-quotients). -/
+def spUniformizerQuotientTransition {m n : ℕ} (h : m ≤ n) :
+    integralCoefficientCommRingSheaf l E T n ⟶ integralCoefficientCommRingSheaf l E T m :=
+  (constantSheaf _ CommRingCat.{max u (t + 1)}).map
+    (CommRingCat.ofHom (RingHom.ulift
+      (Ideal.Quotient.factorPow (Ideal.span {Padic.coefficientExtensionUniformizer l E})
+        (Nat.add_le_add_right h 1))))
+
+/-- Every ell-power quotient transition, induced by the identity on integers.
+Source: blueprint, coefficient towers, quotient reductions
+(blueprint: lem-sp-completed-coefficient-regular-quotients). -/
+def spEllQuotientTransition {m n : ℕ} (h : m ≤ n) :
+    spEllCommRingSheaf l E T n ⟶ spEllCommRingSheaf l E T m :=
+  (constantSheaf _ CommRingCat.{max u (t + 1)}).map
+    (CommRingCat.ofHom (RingHom.ulift
+      (Ideal.Quotient.factorPow (spEllIdeal l E) (Nat.add_le_add_right h 1))))
+
 private theorem constRing_surj {C : Type*} [Category* C]
     (J : GrothendieckTopology C) [HasSheafify J CommRingCat.{u}]
     [HasSheafify J (Type u)] [J.PreservesSheafification (forget CommRingCat.{u})]
@@ -107,6 +141,42 @@ private def scalarHom (U : T.ProEtᵒᵖ) :
         (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionIntegers l E))))).app U).hom.comp
       ULift.ringEquiv.symm.toRingHom)
 
+private theorem ell_factor : ∃ e : ℕ, 1 ≤ e ∧
+    ∃ v : (Padic.coefficientExtensionIntegers l E)ˣ,
+      (l : Padic.coefficientExtensionIntegers l E) =
+        v * Padic.coefficientExtensionUniformizer l E ^ e := by
+  let O := Padic.coefficientExtensionIntegers l E
+  let π := Padic.coefficientExtensionUniformizer l E
+  have h := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
+    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  let : IsDiscreteValuationRing O := h.2.2.2.2.2.2.2.1
+  have hgen : Ideal.span ({π} : Set O) = Padic.coefficientExtensionMaximalIdeal l E :=
+    h.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
+  have hm : Padic.coefficientExtensionMaximalIdeal l E = IsLocalRing.maximalIdeal O :=
+    IsLocalRing.eq_maximalIdeal h.2.2.2.2.1
+  have hπ : Irreducible π :=
+    (IsDiscreteValuationRing.irreducible_iff_uniformizer π).2 (hm.symm.trans hgen.symm)
+  have hl0 : (l : O) ≠ 0 := by
+    intro heq
+    have heq' : (l : E) = 0 := congrArg (fun x : O ↦ (x : E)) heq
+    have hq : (l : ℚ_[l]) ≠ 0 := Nat.cast_ne_zero.mpr (Fact.out : l.Prime).ne_zero
+    exact hq ((algebraMap ℚ_[l] E).injective (by simpa only [map_natCast, map_zero]
+      using heq'))
+  obtain ⟨e, v, hv⟩ := IsDiscreteValuationRing.eq_unit_mul_pow_irreducible hl0 hπ
+  refine ⟨e, ?_, v, hv⟩
+  have hval : Padic.coefficientExtensionAbsoluteValue l E (l : E) < 1 := by
+    have hext := spectralNorm_extends (K := ℚ_[l]) (L := E) (l : ℚ_[l])
+    change spectralNorm ℚ_[l] E (l : E) < 1
+    simpa only [map_natCast] using hext.trans_lt (Padic.norm_p_lt_one (p := l))
+  have hnu : ¬ IsUnit (l : O) := by
+    intro hu
+    exact (ne_of_lt hval) ((h.2.2.1 (l : O)).mp hu)
+  by_contra he
+  have he0 : e = 0 := by omega
+  apply hnu
+  rw [hv, he0, pow_zero, mul_one]
+  exact v.isUnit
+
 private abbrev constO :=
   (constantSheaf (Scheme.ProEt.topology T) CommRingCat.{max u (t + 1)}).obj
     (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionIntegers l E)))
@@ -133,6 +203,13 @@ private theorem uniformizer_normalized (n : ℕ) :
   ext U x
   exact congrArg (fun h ↦ h.hom.app U x)
     (limit.lift_π (integralConstantConeOfUniverses l E T) (op n))
+
+private theorem ell_normalized (n : ℕ) :
+    constMap l E T ≫ spCompletedEllCommRingProjection l E T n =
+      constQuot l E T (spEllIdeal l E ^ (n + 1)) := by
+  ext U x
+  exact congrArg (fun h ↦ h.hom.app U x)
+    ((sp_completed_coefficient_limit l E T).choose_spec.1 n)
 
 private theorem projection_scalar {I : Ideal (Padic.coefficientExtensionIntegers l E)}
     (p : completedIntegralCommRingSheafUnrestricted l E T ⟶
@@ -222,6 +299,30 @@ private theorem normalized_ext {I : Ideal (Padic.coefficientExtensionIntegers l 
   ext U x
   exact congrArg (fun h ↦ h.hom.app U x) h
 
+private theorem normalized_kernel (n : ℕ)
+    (I : Ideal (Padic.coefficientExtensionIntegers l E))
+    (hI : I = Padic.coefficientExtensionIdeal l E (n + 1))
+    (p : completedIntegralCommRingSheafUnrestricted l E T ⟶
+      (constantSheaf (Scheme.ProEt.topology T) CommRingCat.{max u (t + 1)}).obj
+        (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionIntegers l E ⧸ I))))
+    (hp : constMap l E T ≫ p = constQuot l E T I) (U : T.ProEtᵒᵖ) :
+    RingHom.ker (p.hom.app U).hom =
+      Ideal.span {scalarHom l E T U (Padic.coefficientExtensionUniformizer l E) ^ (n + 1)} := by
+  subst I
+  have he := normalized_ext l E T ⟨n, le_rfl⟩ p
+    (completedIntegralCommRingProjectionUnrestricted l E T n) hp
+    (uniformizer_normalized l E T n)
+  rw [he]
+  exact uniformizer_kernel l E T n U
+
+private theorem sheaf_epi {C : Type*} [Category* C] {J : GrothendieckTopology C}
+    {R H : Sheaf J CommRingCat.{u}} (p : R ⟶ H)
+    (hs : ∀ U, Function.Surjective (p.hom.app U)) : Epi p where
+  left_cancellation f g h := by
+    ext U x
+    obtain ⟨x, rfl⟩ := hs U x
+    exact congrArg (fun h ↦ h.hom.app U x) h
+
 private theorem quotient_iso {C : Type t} [Category C]
     {J : GrothendieckTopology C} [HasSheafify J CommRingCat.{u}]
     (R H : Sheaf J CommRingCat.{u})
@@ -264,5 +365,196 @@ private theorem quotient_iso {C : Type t} [Category C]
     ← toSheafify_naturality, Category.assoc]
   simp only [asIso_hom, sheafificationAdjunction_counit_app_val]
   rw [toSheafify_sheafifyLift, Category.comp_id, hq]
+
+/-- Completed coefficients have regular positive scalar powers and the specified finite
+quotients, with the actual projections and all quotient transitions normalized.
+
+Source: blueprint, sk-lem-sp-tower proof, first paragraph; coefficient setup in
+sk-def-sp-coefficient-towers; Stacks Tags 00WK, 00YR, 03CO and 03DB.
+(blueprint: lem-sp-completed-coefficient-regular-quotients).
+
+Proof: (1) DVR factorization gives ell = u pi^e. The extending absolute value of ell
+is less than one, so e is positive. Equality (ell^n)=(pi^(en)) proves cofinality;
+finite residue field and the finite-quotient theorem give finiteness of both families.
+(2) The integral-limit comparison identifies the actual completed ring and its scalar
+map with the uniformizer tower. Cofinal restriction to en identifies the ell tower:
+reduce from a sufficiently large en to define the inverse, independently of the choice.
+(3) Apply completedIntegralScalar_regular on every object to pi powers.
+(4) Apply completedIntegralProjection_divisible at index j-1 to a section in ker rho_j;
+it is a pi^j multiple. The converse follows by reduction. Injectivity ensures unique
+preimages glue, so this sectionwise ideal is the ideal subsheaf pi^jR.
+(5) A section of the finite constant sheaf locally comes from O/pi^j, by 00WK and the
+underlying-set comparison for ring sheafification. Lift the representative to O and
+then to its compatible constant family. These local lifts prove rho_j is epi by sheaf
+separatedness and cancellation against any two maps out of its target.
+(6) Multiplication by the constant unit u^n is invertible. Hence ell^n is regular,
+ell^nR=pi^(en)R, and the same conclusions hold for the actual ell projections.
+(7) The sectionwise quotient map descends through ring sheafification. To construct its
+inverse, lift target sections locally and glue their quotient classes: differences
+of lifts lie in the kernel ideal by (4) and (6). The inverse is independent of lifts,
+respects restrictions and ring operations, and is inverse on local representatives.
+Both composites in each transition square send a local representative x to its lower
+reduction; 00WK and separatedness imply equality. No property of T is used. -/
+theorem sp_completed_coefficient_regular_quotients :
+    (∃ (v : (Padic.coefficientExtensionIntegers l E)ˣ) (e : ℕ),
+      1 ≤ e ∧ (l : Padic.coefficientExtensionIntegers l E) =
+        (v : Padic.coefficientExtensionIntegers l E) *
+          Padic.coefficientExtensionUniformizer l E ^ e) ∧
+    ((∀ j : ℕ, ∃ n : ℕ, spEllIdeal l E ^ (n + 1) ≤
+        Padic.coefficientExtensionIdeal l E (j + 1)) ∧
+      (∀ n : ℕ, ∃ j : ℕ, Padic.coefficientExtensionIdeal l E (j + 1) ≤
+        spEllIdeal l E ^ (n + 1))) ∧
+    (∀ n : ℕ, Finite (Padic.coefficientExtensionRing l E (n + 1)) ∧
+      Finite (Padic.coefficientExtensionIntegers l E ⧸ spEllIdeal l E ^ (n + 1))) ∧
+    (∀ (n : ℕ) (U : T.ProEtᵒᵖ),
+      Function.Injective (fun x : (completedIntegralCommRingSheafUnrestricted l E T).obj.obj U ↦
+        (@id ((completedIntegralCommRingSheafUnrestricted l E T).obj.obj U)
+          ((spCompletedScalarSection l E T (Padic.coefficientExtensionUniformizer l E)).val U)) ^
+          (n + 1) * x) ∧
+      Function.Injective (fun x : (completedIntegralCommRingSheafUnrestricted l E T).obj.obj U ↦
+        (@id ((completedIntegralCommRingSheafUnrestricted l E T).obj.obj U)
+          ((spCompletedScalarSection l E T l).val U)) ^ (n + 1) * x)) ∧
+    (∀ n : ℕ, Epi (completedIntegralCommRingProjectionUnrestricted l E T n) ∧
+      Epi (spCompletedEllCommRingProjection l E T n) ∧
+      ∀ U : T.ProEtᵒᵖ,
+        RingHom.ker ((completedIntegralCommRingProjectionUnrestricted l E T n).hom.app U).hom =
+          sectionPowerIdeal (completedIntegralCommRingSheafUnrestricted l E T)
+            (spCompletedScalarSection l E T (Padic.coefficientExtensionUniformizer l E))
+            (n + 1) U ∧
+        RingHom.ker ((spCompletedEllCommRingProjection l E T n).hom.app U).hom =
+          sectionPowerIdeal (completedIntegralCommRingSheafUnrestricted l E T)
+            (spCompletedScalarSection l E T l) (n + 1) U) ∧
+    ∃ (a : ∀ n : ℕ, principalPowerRingQuotient
+        (completedIntegralCommRingSheafUnrestricted l E T)
+        (spCompletedScalarSection l E T (Padic.coefficientExtensionUniformizer l E)) (n + 1) ≅
+          integralCoefficientCommRingSheaf l E T n)
+      (b : ∀ n : ℕ, principalPowerRingQuotient
+        (completedIntegralCommRingSheafUnrestricted l E T)
+        (spCompletedScalarSection l E T l) (n + 1) ≅ spEllCommRingSheaf l E T n),
+      (∀ n : ℕ,
+        principalPowerRingProjection (completedIntegralCommRingSheafUnrestricted l E T)
+          (spCompletedScalarSection l E T (Padic.coefficientExtensionUniformizer l E))
+          (n + 1) ≫ (a n).hom = completedIntegralCommRingProjectionUnrestricted l E T n) ∧
+      (∀ n : ℕ,
+        principalPowerRingProjection (completedIntegralCommRingSheafUnrestricted l E T)
+          (spCompletedScalarSection l E T l) (n + 1) ≫ (b n).hom =
+            spCompletedEllCommRingProjection l E T n) ∧
+      (∀ (m n : ℕ) (h : m ≤ n),
+        ∃ (r : principalPowerRingQuotient (completedIntegralCommRingSheafUnrestricted l E T)
+            (spCompletedScalarSection l E T (Padic.coefficientExtensionUniformizer l E))
+            (n + 1) ⟶ principalPowerRingQuotient
+              (completedIntegralCommRingSheafUnrestricted l E T)
+              (spCompletedScalarSection l E T (Padic.coefficientExtensionUniformizer l E))
+              (m + 1))
+          (s : principalPowerRingQuotient (completedIntegralCommRingSheafUnrestricted l E T)
+            (spCompletedScalarSection l E T l) (n + 1) ⟶ principalPowerRingQuotient
+              (completedIntegralCommRingSheafUnrestricted l E T)
+              (spCompletedScalarSection l E T l) (m + 1)),
+          principalPowerRingProjection (completedIntegralCommRingSheafUnrestricted l E T)
+            (spCompletedScalarSection l E T (Padic.coefficientExtensionUniformizer l E))
+            (n + 1) ≫ r =
+              principalPowerRingProjection (completedIntegralCommRingSheafUnrestricted l E T)
+                (spCompletedScalarSection l E T (Padic.coefficientExtensionUniformizer l E))
+                (m + 1) ∧
+          principalPowerRingProjection (completedIntegralCommRingSheafUnrestricted l E T)
+            (spCompletedScalarSection l E T l) (n + 1) ≫ s =
+              principalPowerRingProjection (completedIntegralCommRingSheafUnrestricted l E T)
+                (spCompletedScalarSection l E T l) (m + 1) ∧
+          r ≫ (a m).hom = (a n).hom ≫ spUniformizerQuotientTransition l E T h ∧
+          s ≫ (b m).hom = (b n).hom ≫ spEllQuotientTransition l E T h) := by
+  classical
+  obtain ⟨e, he, v, hv⟩ := ell_factor l E
+  let π := Padic.coefficientExtensionUniformizer l E
+  let O := Padic.coefficientExtensionIntegers l E
+  let R := completedIntegralCommRingSheafUnrestricted l E T
+  let a := spCompletedScalarSection l E T π
+  let b := spCompletedScalarSection l E T l
+  have hell : spEllIdeal l E = Ideal.span {π} ^ e := by
+    unfold spEllIdeal
+    rw [hv, Ideal.span_singleton_mul_left_unit v.isUnit, Ideal.span_singleton_pow]
+  have hpos (n : ℕ) : 1 ≤ e * (n + 1) := by nlinarith
+  have hpow (n : ℕ) : spEllIdeal l E ^ (n + 1) =
+      Padic.coefficientExtensionIdeal l E (e * (n + 1) - 1 + 1) := by
+    rw [Nat.sub_add_cancel (hpos n)]
+    change spEllIdeal l E ^ (n + 1) = Ideal.span {π} ^ (e * (n + 1))
+    rw [hell, pow_mul]
+  have hscalar (n : ℕ) (U : T.ProEtᵒᵖ) :
+      scalarHom l E T U (l : O) ^ (n + 1) =
+        scalarHom l E T U (v : O) ^ (n + 1) *
+          scalarHom l E T U π ^ (e * (n + 1)) := by
+    rw [hv, map_mul, map_pow, mul_pow, ← pow_mul]
+  have hunit (n : ℕ) (U : T.ProEtᵒᵖ) :
+      IsUnit (scalarHom l E T U (v : O) ^ (n + 1)) :=
+    (v.isUnit.map (scalarHom l E T U)).pow (n + 1)
+  have hkerπ := uniformizer_kernel l E T
+  have hkerl (n : ℕ) (U : T.ProEtᵒᵖ) :
+      RingHom.ker ((spCompletedEllCommRingProjection l E T n).hom.app U).hom =
+        sectionPowerIdeal R b (n + 1) U := by
+    have hk := normalized_kernel l E T (e * (n + 1) - 1)
+      (spEllIdeal l E ^ (n + 1)) (hpow n)
+      (spCompletedEllCommRingProjection l E T n) (ell_normalized l E T n) U
+    rw [Nat.sub_add_cancel (hpos n)] at hk
+    change _ = Ideal.span {scalarHom l E T U (l : O) ^ (n + 1)}
+    rw [hscalar, Ideal.span_singleton_mul_left_unit (hunit n U)]
+    exact hk
+  have hsπ (n : ℕ) := projection_surjective l E T _ (uniformizer_normalized l E T n)
+  have hsl (n : ℕ) := projection_surjective l E T _ (ell_normalized l E T n)
+  refine ⟨⟨v, e, he, hv⟩, ?_, ?_, ?_, ?_, ?_⟩
+  · constructor
+    · intro j
+      obtain ⟨n, hn⟩ := (sp_coefficient_ideals_cofinal l E).1 (j + 1)
+      exact ⟨n, (Ideal.pow_le_pow_right (Nat.le_succ n)).trans hn⟩
+    · intro n
+      obtain ⟨j, hj⟩ := (sp_coefficient_ideals_cofinal l E).2 (n + 1)
+      exact ⟨j, (Ideal.pow_le_pow_right (Nat.le_succ j)).trans hj⟩
+  · intro n
+    refine ⟨Padic.finite_coefficientExtensionRing l E (n + 1) (by omega), ?_⟩
+    rw [hpow n]
+    exact Padic.finite_coefficientExtensionRing l E _ (by omega)
+  · intro n U
+    refine ⟨completedIntegralScalar_regular l E T (n + 1) U, ?_⟩
+    change Function.Injective (fun x : R.obj.obj U ↦ scalarHom l E T U (l : O) ^ (n + 1) * x)
+    intro x y hxy
+    dsimp only at hxy
+    rw [hscalar, mul_assoc, mul_assoc] at hxy
+    apply completedIntegralScalar_regular l E T (e * (n + 1)) U
+    exact (hunit n U).mul_left_cancel hxy
+  · intro n
+    exact ⟨sheaf_epi _ (hsπ n), sheaf_epi _ (hsl n), fun U ↦ ⟨hkerπ n U, hkerl n U⟩⟩
+  · have hA (n : ℕ) := quotient_iso R (integralCoefficientCommRingSheaf l E T n) a
+      (n + 1) (completedIntegralCommRingProjectionUnrestricted l E T n) (hsπ n) (hkerπ n)
+    have hB (n : ℕ) := quotient_iso R (spEllCommRingSheaf l E T n) b
+      (n + 1) (spCompletedEllCommRingProjection l E T n) (hsl n) (hkerl n)
+    choose A hA using hA
+    choose B hB using hB
+    refine ⟨A, B, hA, hB, ?_⟩
+    intro m n h
+    have hcπ : completedIntegralCommRingProjectionUnrestricted l E T n ≫
+        spUniformizerQuotientTransition l E T h =
+          completedIntegralCommRingProjectionUnrestricted l E T m := by
+      apply normalized_ext l E T ⟨m, le_rfl⟩ _ _ ?_
+        (uniformizer_normalized l E T m)
+      rw [← Category.assoc, uniformizer_normalized]
+      unfold constQuot spUniformizerQuotientTransition
+      rw [← Functor.map_comp]
+      congr 1
+    have hcl : spCompletedEllCommRingProjection l E T n ≫
+        spEllQuotientTransition l E T h = spCompletedEllCommRingProjection l E T m := by
+      apply normalized_ext l E T ?_ _ _ ?_ (ell_normalized l E T m)
+      · exact ⟨e * (m + 1) - 1, (hpow m).ge⟩
+      rw [← Category.assoc, ell_normalized]
+      unfold constQuot spEllQuotientTransition
+      rw [← Functor.map_comp]
+      congr 1
+    refine ⟨(A n).hom ≫ spUniformizerQuotientTransition l E T h ≫ (A m).inv,
+      (B n).hom ≫ spEllQuotientTransition l E T h ≫ (B m).inv, ?_, ?_, ?_, ?_⟩
+    · rw [← Category.assoc, hA, ← Category.assoc, hcπ, ← hA m]
+      simp
+      rfl
+    · rw [← Category.assoc, hB, ← Category.assoc, hcl, ← hB m]
+      simp
+      rfl
+    · simp
+    · simp
 
 end AlgebraicGeometry.ProEtale
