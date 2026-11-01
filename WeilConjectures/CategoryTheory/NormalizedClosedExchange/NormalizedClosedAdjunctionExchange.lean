@@ -60,6 +60,7 @@ public import Mathlib.Algebra.Field.ZMod
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 
 import WeilConjectures.AlgebraicGeometry.Finite.Coefficient.FiniteCoefficientDescentTwoColimit
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition
 
 /-! # Evaluation-normalized closed-adjunction exchange
 
@@ -236,6 +237,30 @@ private theorem map_eq_inv_exchange {U : Y ⥤ X} {V : X ⥤ Y} {F : X ⥤ Y} {R
   simp only [IsIso.inv_hom_id]
   simpa [map, homChain, Function.comp_apply, Adjunction.homEquiv_unit,
     Adjunction.homEquiv_counit, ← uncurry_id_eq_ev, curry_uncurry] using eh.symm
+
+section
+omit sX sY
+
+/- The instance binders are implicit, so that a concrete use unifies them with the goal
+instead of searching instances again. -/
+private theorem map_comp_eq_inv_absoluteExchange {C : Type u₁} {_ : Category.{v₁} C}
+    {_ : MonoidalCategory C} {_ : MonoidalClosed C} {D : Type u₂} {_ : Category.{v₂} D}
+    {_ : MonoidalCategory D} {_ : MonoidalClosed D} {U : D ⥤ C} {V : C ⥤ D} {F : C ⥤ D}
+    {R : D ⥤ C} (adjU : U ⊣ V) (adjF : F ⊣ R)
+    (p : curriedTensorInsertFunctor₁ F ⟶
+      curriedTensorPost F ⋙ (Functor.whiskeringLeft D C D).obj U)
+    {_ : ∀ (M : C) (L : D), IsIso ((p.app M).app L)}
+    (ωX : C) (ωY : D) (γ : R.obj ωY ≅ ωX) (M : C)
+    {h : IsIso (Verdier.absoluteExchange adjU adjF p ωX ωY γ M)} :
+    map adjU adjF (projectionOfNatTrans p) M ωY ≫ V.map ((ihom M).map γ.hom) =
+      @inv _ _ _ _ (Verdier.absoluteExchange adjU adjF p ωX ωY γ M) h := by
+  rw [map_eq_inv_exchange]
+  apply IsIso.eq_inv_of_inv_hom_id
+  rw [Verdier.absoluteExchange]
+  simp only [Category.assoc, ← Functor.map_comp_assoc, ← Functor.map_comp, Iso.hom_inv_id,
+    Functor.map_id, Category.id_comp]
+  exact @IsIso.inv_hom_id _ _ _ _ _
+    (Verdier.isIso_exchange_of_isIso adjU adjF (projectionOfNatTrans p).hom M ωY)
 
 omit [MonoidalCategory X] [MonoidalClosed X]
   [MonoidalCategory Y] [MonoidalClosed Y] in
