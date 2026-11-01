@@ -52,6 +52,8 @@ import WeilConjectures.AlgebraicGeometry.Purity.PurityComparisonUnitInjectiveMod
 import WeilConjectures.CategoryTheory.InjectiveModulePresheaf
 import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
+public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleSiteComparisonFiniteLevel
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 
 /-!
 # Site-comparison compatibility of the support boundary
@@ -145,6 +147,42 @@ noncomputable def finiteComparisonSectionHypercohomology
             (ModuleCat.{u + 1} A) ⋙
             (evaluation _ _).obj (op ((Scheme.toProEt T).obj V))).rightDerivedFunctorPlus)
           (DerivedCategory.Plus.homologyFunctor (ModuleCat.{u + 1} A) q)).hom)
+
+/-- The coefficient identification on the open complement, using exactly the
+unit-normalized isomorphism whose coherence is
+`supportSiteComparison_pullback_coherent`, transported to the actual restriction functors.
+Source: comparison-pullback clause of the blueprint
+(blueprint: lem-pur-support-comparison-boundary). -/
+noncomputable def supportBoundaryOpenCoefficientIso
+    (A : Type (u + 1)) [CommRing A] {U T : Scheme.{u}}
+    (j : U ⟶ T) [IsOpenImmersion j] :
+    Etale.openImmersionRestriction (ModuleCat.{u + 1} A) j ⋙
+        comparisonUpperStar (ModuleCat.{u + 1} A) U ≅
+      comparisonUpperStar (ModuleCat.{u + 1} A) T ⋙
+        openImmersionRestriction (ModuleCat.{u + 1} A) j :=
+  Functor.isoWhiskerRight
+    (Etale.upperStarIsoOpenImmersionRestriction (ModuleCat.{u + 1} A) j).symm
+    (comparisonUpperStar (ModuleCat.{u + 1} A) U) ≪≫
+  supportSiteComparisonCoefficientPullbackIso (ModuleCat.{u + 1} A) j ≪≫
+  Functor.isoWhiskerLeft (comparisonUpperStar (ModuleCat.{u + 1} A) T)
+    (upperStarIsoOpenImmersionRestriction (ModuleCat.{u + 1} A) j)
+
+/-- Unit normalization on the open, ensuring that evaluation of the unit on `T`
+over the open object is the unit on the restricted sheaf on `U`, with the specified
+coefficient identification. Deriving evaluation of this equation gives the open
+comparison `finiteComparisonSectionHypercohomology` in the localization ladder.
+Source: comparison-pullback and open-global-comparison clauses of the blueprint
+(blueprint: lem-pur-support-comparison-boundary). -/
+def SupportBoundaryOpenUnitNormalized
+    (A : Type (u + 1)) [CommRing A] {U T : Scheme.{u}}
+    (j : U ⟶ T) [IsOpenImmersion j] : Prop :=
+  ∀ F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A),
+    (Etale.openImmersionRestriction (ModuleCat.{u + 1} A) j).map
+        ((comparisonAdjunction (ModuleCat.{u + 1} A) T).unit.app F) =
+      (comparisonAdjunction (ModuleCat.{u + 1} A) U).unit.app
+          ((Etale.openImmersionRestriction (ModuleCat.{u + 1} A) j).obj F) ≫
+        (comparisonLowerStar (ModuleCat.{u + 1} A) U).map
+          ((supportBoundaryOpenCoefficientIso A j).hom.app F)
 
 end AlgebraicGeometry.ProEtale
 

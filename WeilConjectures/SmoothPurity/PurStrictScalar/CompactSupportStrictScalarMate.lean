@@ -69,6 +69,16 @@ def strictScalarPull {Z W : Scheme.{u}} (g : Z ⟶ W) :
       ((scalarAdj l E F i W).comp
         (adj (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) g))
 
+private theorem leftAdjointUniq_ofNatIsoRight_inv
+    {A B : Type*} [Category A] [Category B]
+    {L L' : A ⥤ B} {U U' : B ⥤ A}
+    (a : L ⊣ U) (b : L' ⊣ U') (δ : U ≅ U') :
+    (a.ofNatIsoRight δ |>.leftAdjointUniq b).inv =
+      (conjugateEquiv a b).symm δ.hom := by
+  ext N
+  simp [Adjunction.leftAdjointUniq, conjugateEquiv_symm_apply_app,
+    Adjunction.ofNatIsoRight_unit]
+
 private theorem proper_isIso_of_basis {R S : PurCompactSupport.Coefficients.{u}}
     (a : PurCompactSupport.Change R S) {Z W : Scheme.{u}} (g : Z ⟶ W) (d : ℕ)
     (bW : (∏ᶜ fun _ : Fin d ↦ SheafOfModules.unit ((adicLisseForget W).obj (R.ring W))) ≅

@@ -123,4 +123,27 @@ def supportPresentation (R : Type u) [CommRing R] [Finite R]
     isoWhiskerLeft _ (directImagePresentation R c.g) ≪≫
     (Functor.associator _ _ _).symm
 
+/-- Genuine transport of b to fixed-module coordinates. Apply the intrinsic target
+realization's fully faithful inverse on morphisms to the conjugated b. Both boundary
+isomorphisms are specified above by their units and representative normalizations.
+Source: Stacks 00YV and 0GL6, blueprint Charts paragraph
+(blueprint: def-sp-et-proet-coefficient-transport). -/
+def transportedRecordedReductionDirectImageComparison
+    {R S : Type u} [CommRing R] [CommRing S] [Finite R] [Finite S]
+    (ψ : R →+* S) {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
+    (b : reductionCompactSupport R c.i c.g ⋙ scalarExtensionFunctor ψ Y ⟶
+      scalarExtensionFunctor ψ X ⋙ reductionCompactSupport S c.i c.g) :
+    rightDerivedLowerShriekOfCompactification
+        (ModuleCat.{u + 1} (ULift.{u + 1, u} R)) c ⋙ liftedScalarExtension ψ Y ⟶
+      liftedScalarExtension ψ X ⋙ rightDerivedLowerShriekOfCompactification
+        (ModuleCat.{u + 1} (ULift.{u + 1, u} S)) c :=
+  ((Functor.FullyFaithful.ofFullyFaithful
+    (sfIntrinsicDerivedEquivalence Y S).functor).whiskeringRight _).preimage
+    (whiskerLeft (rightDerivedLowerShriekOfCompactification
+        (ModuleCat.{u + 1} (ULift.{u + 1, u} R)) c) (scalarPresentation ψ Y).inv ≫
+      whiskerRight (supportPresentation R c).inv (scalarExtensionFunctor ψ Y) ≫
+      whiskerLeft (sfIntrinsicDerivedEquivalence X R).functor b ≫
+      whiskerRight (scalarPresentation ψ X).hom (reductionCompactSupport S c.i c.g) ≫
+      whiskerLeft (liftedScalarExtension ψ X) (supportPresentation S c).hom)
+
 end AlgebraicGeometry.ProEtale.CoefficientCompatibility

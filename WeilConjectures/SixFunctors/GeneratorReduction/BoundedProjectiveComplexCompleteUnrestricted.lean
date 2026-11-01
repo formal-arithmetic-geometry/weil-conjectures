@@ -116,8 +116,10 @@ theorem boundedProjectiveComplex_complete
     (IntegralOnSlice.hom l E T (some U)).mapIso
       ((Iso.refl _).prod (SheafOfModules.overFunctor_derivedRestrictionIso R U K))
   have hfree (r : ℕ) : IsZero (G.obj (DerivedCategory.Q.obj
-      (CompletedCoefficientFree.freeCell l E T r 0))) := by
-    have hc := (CompletedCoefficientFree.completed_coefficient_free_resolution l E T).2.1 r 0
+      (WeilConjectures.CompletedCoefficientFree.freeCell l E T r 0))) := by
+    have hc :=
+      (WeilConjectures.CompletedCoefficientFree.completed_coefficient_free_resolution l E T).2.1
+        r 0
     exact (e _).isZero_iff.mp ((complete_local_iff l E T _).mp hc U s hs)
   have : G.kernel.IsStableUnderShift ℤ := by
     constructor

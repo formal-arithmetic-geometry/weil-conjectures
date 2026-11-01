@@ -58,7 +58,7 @@ theorem native_open_tensor_restriction_descent (s : NativeOpenTensorData k₀ l 
   let stages : NativeRestrictionStageInputs k₀ l j s m := {
     restriction_kflat := s.restriction_kflat
     sheaf := nativeSheafComparisonStage3 k₀ l j s m hm
-    total := fun sr => totalComparisonStage3 k₀ l j s m hm sr
+    total := fun sr ↦ totalComparisonStage3 k₀ l j s m hm sr
     pair := nativePairRestrictionStage3 k₀ l j (U := U) (Z := Z) }
   exact normalizedComparisonStage3 k₀ l j s m hm stages
 

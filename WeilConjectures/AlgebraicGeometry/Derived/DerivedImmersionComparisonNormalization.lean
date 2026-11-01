@@ -105,6 +105,40 @@ private theorem exactSquare_fac
   rw [mapDerivedCategoryCompIso_hom_app_factors, mapDerivedCategoryNatIso_fac]
   rw [← Category.assoc, hi, Category.assoc]
 
+private theorem exactSquarePlus_fac
+    {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]
+    [Abelian C] [Abelian D] [Abelian E] [Abelian F]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    [HasDerivedCategory E] [HasDerivedCategory F]
+    {R : C ⥤ D} {G : D ⥤ F} {L : C ⥤ E} {S : E ⥤ F}
+    [R.Additive] [G.Additive] [L.Additive] [S.Additive]
+    [PreservesFiniteLimits R] [PreservesFiniteColimits R]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    [PreservesFiniteLimits L] [PreservesFiniteColimits L]
+    [PreservesFiniteLimits S] [PreservesFiniteColimits S]
+    (e : R ⋙ G ≅ L ⋙ S) (K : HomotopyCategory.Plus C) :
+    ((mapDerivedCategoryPlusCompIso R G).symm ≪≫
+      mapDerivedCategoryPlusNatIso e ≪≫ mapDerivedCategoryPlusCompIso L S).hom.app
+        (DerivedCategory.Plus.Qh.obj K) ≫
+      S.mapDerivedCategoryPlus.map (L.mapDerivedCategoryPlusFactorsh.hom.app K) ≫
+      S.mapDerivedCategoryPlusFactorsh.hom.app (L.mapHomotopyCategoryPlus.obj K) =
+    G.mapDerivedCategoryPlus.map (R.mapDerivedCategoryPlusFactorsh.hom.app K) ≫
+      G.mapDerivedCategoryPlusFactorsh.hom.app (R.mapHomotopyCategoryPlus.obj K) ≫
+      DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus e.hom).app K) := by
+  have hc := mapDerivedCategoryPlusCompIso_hom_app_factorsh R G K
+  have hi : (mapDerivedCategoryPlusCompIso R G).inv.app (DerivedCategory.Plus.Qh.obj K) ≫
+      (R ⋙ G).mapDerivedCategoryPlusFactorsh.hom.app K =
+    G.mapDerivedCategoryPlus.map (R.mapDerivedCategoryPlusFactorsh.hom.app K) ≫
+      G.mapDerivedCategoryPlusFactorsh.hom.app (R.mapHomotopyCategoryPlus.obj K) := by
+    apply (cancel_epi ((mapDerivedCategoryPlusCompIso R G).hom.app
+      (DerivedCategory.Plus.Qh.obj K))).mp
+    rw [Iso.hom_inv_id_app_assoc]
+    exact hc.symm
+  simp only [Iso.trans_hom, Iso.symm_hom,
+    NatTrans.comp_app, Category.assoc]
+  rw [mapDerivedCategoryPlusCompIso_hom_app_factorsh, mapDerivedCategoryPlusNatIso_hom_app_factorsh]
+  rw [← Category.assoc, hi, Category.assoc]
+
 end Functor
 
 open SheafOfModules.OpenTensorNormalization in
@@ -159,6 +193,63 @@ private theorem exact_mate
     (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso d).hom)
     (Functor.exactSquare_fac d) (NatTrans.mapHomologicalComplex b.hom (.up ℤ)) hι K
   exact hc.trans (Functor.exactSquare_fac b K).symm
+
+private theorem exact_base_change
+    {B B' C C' : Type*} [Category* B] [Category* B'] [Category* C] [Category* C']
+    [Abelian B] [Abelian B'] [Abelian C] [Abelian C']
+    [HasDerivedCategory B] [HasDerivedCategory B']
+    [HasDerivedCategory C] [HasDerivedCategory C']
+    [EnoughInjectives B] [EnoughInjectives B']
+    {G : B ⥤ C} {G' : B' ⥤ C'} {β : B ⥤ B'} {γ : C ⥤ C'}
+    [G.Additive] [G'.Additive] [β.Additive] [γ.Additive]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    [PreservesFiniteLimits G'] [PreservesFiniteColimits G']
+    [PreservesFiniteLimits β] [PreservesFiniteColimits β]
+    [PreservesFiniteLimits γ] [PreservesFiniteColimits γ]
+    (e : G ⋙ γ ≅ β ⋙ G') :
+    Functor.rightDerivedFunctorPlusBaseChange e.hom ≫
+        Functor.whiskerLeft β.mapDerivedCategoryPlus
+          G'.rightDerivedFunctorPlusIsoMapDerivedCategoryPlus.hom =
+      Functor.whiskerRight G.rightDerivedFunctorPlusIsoMapDerivedCategoryPlus.hom
+          γ.mapDerivedCategoryPlus ≫
+        ((Functor.mapDerivedCategoryPlusCompIso G γ).symm ≪≫
+          Functor.mapDerivedCategoryPlusNatIso e ≪≫
+            Functor.mapDerivedCategoryPlusCompIso β G').hom := by
+  apply Localization.natTrans_ext DerivedCategory.Plus.Qh
+    (HomotopyCategory.Plus.quasiIso B)
+  intro K
+  apply (cancel_epi (γ.mapDerivedCategoryPlus.map
+    (G.rightDerivedFunctorPlusUnit.app K))).mp
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app]
+  have hf := congr_app (Functor.rightDerivedFunctorPlusBaseChange_fac e.hom) K
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    Functor.associator_hom_app, Category.comp_id] at hf
+  rw [reassoc_of% hf, ← Functor.map_comp_assoc]
+  have hu := congr_app G.rightDerivedFunctorPlusIsoMapDerivedCategoryPlus_hom_fac K
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app] at hu
+  rw [hu]
+  apply (cancel_mono
+    (G'.mapDerivedCategoryPlus.map (β.mapDerivedCategoryPlusFactorsh.hom.app K) ≫
+      G'.mapDerivedCategoryPlusFactorsh.hom.app (β.mapHomotopyCategoryPlus.obj K))).mp
+  simp only [Category.assoc]
+  rw [Functor.exactSquarePlus_fac e K]
+  simp only [Functor.rightDerivedFunctorPlusBaseChangeAux, NatTrans.comp_app,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
+    Functor.associator_inv_app, Category.comp_id, Category.id_comp,
+    Functor.mapHomotopyCategoryPlusCompIso_refl_hom_app,
+    Functor.mapHomotopyCategoryPlusCompIso_refl_inv_app, Functor.map_id]
+  erw [Category.id_comp, Category.id_comp]
+  erw [Category.assoc, Category.assoc, Category.assoc]
+  erw [G'.rightDerivedFunctorPlusIsoMapDerivedCategoryPlus.hom.naturality_assoc]
+  simp only [← G'.mapDerivedCategoryPlus.map_comp_assoc,
+    Iso.inv_hom_id_app, Functor.map_id, Category.id_comp]
+  have hu' := congr_app G'.rightDerivedFunctorPlusIsoMapDerivedCategoryPlus_hom_fac
+    (β.mapHomotopyCategoryPlus.obj K)
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app] at hu'
+  erw [reassoc_of% hu']
+  simp only [Iso.inv_hom_id_app, ← Functor.map_comp_assoc,
+    Functor.map_id, Category.id_comp]
+  erw [Category.comp_id]
 
 open SheafOfModules.OpenTensorNormalization in
 end CategoryTheory
