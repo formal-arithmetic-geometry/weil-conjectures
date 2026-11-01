@@ -21,6 +21,10 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.DualizableProject
 import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
 import WeilConjectures.AlgebraicGeometry.Integral.IntegralTensorConstructibility
 import WeilConjectures.AlgebraicGeometry.SixFunctors.DualizableIntegralCompletion
+public import WeilConjectures.AlgebraicGeometry.CondensedIntegralCriterion
+public import WeilConjectures.AlgebraicGeometry.IntegralTensorResidueComparison
+public import WeilConjectures.AlgebraicGeometry.IntegralTensorResidueField
+public import WeilConjectures.AlgebraicGeometry.IntegralTensorStratumReduction
 
 /-!
 # The ordinary integral derived tensor product
@@ -107,8 +111,15 @@ and derived completeness.
 Source: blueprint latest, det-lem-int-tensor-product
 (blueprint: det-lem-int-tensor-product).
 
-Proof: the constructibility clause is the separate stratum/residue argument
-`integralTensorConstructibility`. For the moreover clause, each term of the local complex is
+Proof: `integralTensorStratumReduction` implements shriek generation (2), the immersion
+projection formula, pullback preservation and shriek preservation (1). On each stratum,
+the integral criterion makes N complete and gives bounded constructible residues for
+M and N. Local scalar perfection makes M dualizable, so `dualizableIntegralCompletion`
+makes M tensor N complete. `integralTensorResidueComparison` identifies its first
+reduction with the tensor over F_E; `integralTensorResidueField` uses field flatness,
+common stratification and cover refinements, and bounded truncations. The reverse
+integral criterion gives the required stratum assertion and finishes the reduction.
+For the moreover clause, each term of the local complex is
 pulled back from a finite sum of units, hence is dualizable. A bounded complex of such terms is
 dualizable in the derived category. Dualizability descends along the given pro-etale cover.
 Choose a right dual: its tensor adjunction makes tensoring with M a right adjoint, so it
@@ -145,7 +156,25 @@ theorem integralTensorProduct
         (∀ N : DerivedCategory (AdicCompletion.Modules l E S),
           IsDerivedComplete l E S N → IsDerivedComplete l E S (M ⊗ N))) := by
   constructor
-  · exact integralTensorConstructibility l E k p _hp _hpl
+  · apply integralTensorStratumReduction l E k p _hp _hpl
+    intro S _ _ _ _ M N hM hN hLocal
+    have : IsLocallyNoetherian S := LocallyOfFiniteType.isLocallyNoetherian
+      (S ↘ Spec (.of k))
+    have : CompactSpace S := QuasiCompact.compactSpace_of_compactSpace
+      (S ↘ Spec (.of k))
+    have : IsNoetherian S := ⟨⟩
+    obtain ⟨C, hC⟩ := hLocal
+    have hd := localModel_dualizable l E S M C hC
+    have hMr := ((condensed_integral_criterion l E S M).out 0 1).mp hM
+    have hNr := ((condensed_integral_criterion l E S N).out 0 1).mp hN
+    have hcomplete := dualizableIntegralCompletion l E S M hd N hNr.1
+    have hresidue := integralTensorResidueField l E S _ _ hMr.2 hNr.2
+    obtain ⟨e⟩ := integralTensorResidueComparison l E S M N
+    have := (constantModelConstructibleFiniteTor_wellDefined
+      (DerivedNakayama.quotientRing l E 1) S).2.1
+    apply ((condensed_integral_criterion l E S (M ⊗ N)).out 0 1).mpr
+    exact ⟨hcomplete, (constantModelBoundedConstructible
+      (DerivedNakayama.quotientRing l E 1) S).prop_of_iso e.symm hresidue⟩
   · intro S M hM
     obtain ⟨C, hC⟩ := hM
     have hd := localModel_dualizable l E S M C hC
