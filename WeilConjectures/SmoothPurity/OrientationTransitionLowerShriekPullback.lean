@@ -23,11 +23,11 @@ the canonical comparison `Rj_! ⋙ red ≅ red ⋙ D(j_!)` is, under the adjunct
 `j^! ⋙ red ≅ j^* ⋙ red ≅ red ⋙ D(j^*)`
 (`ProEtale.CondensedRing.etaleReductionUpperStarIsoOfIsOpenImmersion`,
 `ProEtale.CondensedRing.mateEquiv_etaleReductionLowerShriekIsoOfIsOpenImmersion_trans_app`).
-This file (blueprint `det-sp-purity-coefficient-change`) states the compatibility of the latter
-with `T` and the mate `D(j^*) ⋙ Res ⟶ Res ⋙ D(j^*)` of the commutation of `Res` with `D(j_!)`
-(`ProEtale.CondensedRing.etaleReductionUpperStarIsoOfIsOpenImmersion_restrictScalars`), from which
-the compatibility for `Rj_!` follows by
-`CategoryTheory.map_app_comp_app_comp_map_app_eq_of_mateEquiv`.
+The compatibility of the latter with `T` and the mate `D(j^*) ⋙ Res ⟶ Res ⋙ D(j^*)` of the
+commutation of `Res` with `D(j_!)` is
+`ProEtale.CondensedRing.etaleReductionUpperStarIsoOfIsOpenImmersion_restrictScalars`
+(`WeilConjectures.SmoothPurity.OrientationTransitionLowerShriekOpen`), from which the compatibility
+for `Rj_!` follows by `CategoryTheory.map_app_comp_app_comp_map_app_eq_of_mateEquiv`.
 -/
 
 @[expose] public section
@@ -125,31 +125,5 @@ lemma mateEquiv_etaleReductionLowerShriekIsoOfIsOpenImmersion_trans_inv_app (m :
           (Etale.rightDerivedLowerShriekIsoOfIsOpenImmersion _ j.left)).inv)).app N =
       (etaleReductionUpperStarIsoOfIsOpenImmersion ℓ E j m).hom.app N :=
   mateEquiv_etaleReductionLowerShriekIsoOfIsOpenImmersion_trans_app ℓ E j m N
-
-/-- Blueprint `det-sp-purity-coefficient-change`, the open-immersion piece transposed to `j^*`:
-through the transposes `T : red_{n+1} ⟶ red_n ⋙ Res` of `β`, the comparisons
-`j^! ⋙ red ≅ red ⋙ D(j^*)` modulo `ℓⁿ⁺¹` and `ℓⁿ`
-(`etaleReductionUpperStarIsoOfIsOpenImmersion`) are intertwined by the mate
-`D(j^*) ⋙ Res ⟶ Res ⋙ D(j^*)` of the commutation of `Res` with `D(j_!)`
-(`Etale.derivedRestrictScalarsCompOpenImmersionLowerShriekIso`). -/
-theorem etaleReductionUpperStarIsoOfIsOpenImmersion_restrictScalars
-    (N : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) :
-    have := HasCompactification.of_over j
-    (etaleReductionTransposeNatTrans ℓ E n U).app
-        ((PadicIntegersRingObj.boundedConstructibleUpperShriek ℓ E j).obj N) ≫
-      (Sheaf.derivedRestrictScalars U.left.smallEtaleTopology
-        (integersModPowCoeffTransition ℓ E n)).map
-        ((etaleReductionUpperStarIsoOfIsOpenImmersion ℓ E j n).hom.app N) ≫
-      (mateEquiv (Etale.derivedOpenImmersionLowerShriekUpperStarAdjunction
-          (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) j.left)
-        (Etale.derivedOpenImmersionLowerShriekUpperStarAdjunction
-          (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E (n + 1))) j.left)
-        (Etale.derivedRestrictScalarsCompOpenImmersionLowerShriekIso
-          (integersModPowCoeffTransition ℓ E n) j.left).hom).app
-        ((etaleReduction ℓ E n X).obj N) =
-    (etaleReductionUpperStarIsoOfIsOpenImmersion ℓ E j (n + 1)).hom.app N ≫
-      (Etale.upperStar (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E (n + 1)))
-        j.left).mapDerivedCategory.map ((etaleReductionTransposeNatTrans ℓ E n X).app N) := by
-  sorry
 
 end AlgebraicGeometry.ProEtale.CondensedRing

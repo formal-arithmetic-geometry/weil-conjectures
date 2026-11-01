@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.EtaleCohomology.TateTwist.ReductionTateSheafPowOne
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReadingReductionTranspose
+public import WeilConjectures.TateTwist.ComparisonSingleNaturality
+public import WeilConjectures.TateTwist.ComparisonSingleRestrictScalarsHom
 public import WeilConjectures.TateTwist.IntegralReduction
 
 /-!
@@ -84,7 +86,13 @@ lemma rightDerivedComparisonLowerStarSingleFunctorIso_hom_naturality
       (R(ν_*(X)[ModuleCat.{u + 1} Λ])).map
           ((DerivedCategory.singleFunctor _ 0).map (ν^*(X)[ModuleCat.{u + 1} Λ].map g)) ≫
         (rightDerivedComparisonLowerStarSingleFunctorIso Λ X T).hom := by
-  sorry
+  -- `rightDerivedComparisonLowerStarSingleFunctorIso` is built on the Mathlib instance
+  -- `IsGrothendieckAbelian (ModuleCat Λ)`, the statement on the shortcut
+  -- `ModuleCat.isGrothendieckAbelian_of_commRing`: the shortcut is generalized first, since
+  -- comparing them directly is costly in the kernel.
+  generalize ModuleCat.isGrothendieckAbelian_of_commRing Λ = i
+  obtain rfl := Subsingleton.elim i (@instIsGrothendieckAbelianModuleCat Λ _)
+  exact rightDerivedComparisonLowerStarSingleFunctorIso_hom_comp_map X g
 
 /-- **`Rν_* ν^* S ≅ S` commutes with the restriction of scalars**: for a sheaf `S` of
 `Λ'`-modules, the restriction of scalars of `Rν_* ν^* S ≅ S` is the base change map
@@ -106,8 +114,8 @@ lemma derivedRestrictScalars_map_rightDerivedComparisonLowerStarSingleFunctorIso
         (rightDerivedComparisonLowerStarSingleFunctorIso Λ X
           ((Sheaf.restrictScalars X.smallEtaleTopology φ).obj S)).hom ≫
         ((Sheaf.restrictScalars X.smallEtaleTopology φ).mapDerivedCategorySingleFunctor
-          0).inv.app S := by
-  sorry
+          0).inv.app S :=
+  derivedRestrictScalars_map_rightDerivedComparisonLowerStarSingleFunctorIso_hom_eq φ X S
 
 end AlgebraicGeometry.ProEtale
 

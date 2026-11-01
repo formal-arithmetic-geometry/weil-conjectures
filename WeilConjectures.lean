@@ -15900,6 +15900,7 @@ public import WeilConjectures.SmoothPurity.OrientationTransitionEtale
 public import WeilConjectures.SmoothPurity.OrientationTransitionFrame
 public import WeilConjectures.SmoothPurity.OrientationTransitionLowerShriek
 public import WeilConjectures.SmoothPurity.OrientationTransitionLowerShriekMate
+public import WeilConjectures.SmoothPurity.OrientationTransitionLowerShriekOpen
 public import WeilConjectures.SmoothPurity.OrientationTransitionLowerShriekPullback
 public import WeilConjectures.SmoothPurity.OrientationTransitionLowerShriekUpperStar
 public import WeilConjectures.SmoothPurity.OrientationTransitionReading
@@ -15937,6 +15938,11 @@ public import WeilConjectures.Tactic.MatchTactic
 public import WeilConjectures.Tactic.TransportExact
 public import WeilConjectures.Tactic.TransportModProofs
 public import WeilConjectures.TateTwist.ComparisonSingle
+public import WeilConjectures.TateTwist.ComparisonSingleInv
+public import WeilConjectures.TateTwist.ComparisonSingleInvShortcut
+public import WeilConjectures.TateTwist.ComparisonSingleNaturality
+public import WeilConjectures.TateTwist.ComparisonSingleRestrictScalars
+public import WeilConjectures.TateTwist.ComparisonSingleRestrictScalarsHom
 public import WeilConjectures.TateTwist.EtaleTateSheafPow
 public import WeilConjectures.TateTwist.EtaleTateSheafPowOne
 public import WeilConjectures.TateTwist.FiniteRootsOfUnity

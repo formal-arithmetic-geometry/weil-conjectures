@@ -11,6 +11,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReadingReductionLowerShriekOpen
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReductionUpperShriekCanonical
 public import WeilConjectures.SmoothPurity.OrientationTransitionLowerShriekPullback
+public import WeilConjectures.SmoothPurity.OrientationTransitionLowerShriekOpen
 public import WeilConjectures.SmoothPurity.OrientationTransitionLowerShriekUpperStar
 
 /-!
