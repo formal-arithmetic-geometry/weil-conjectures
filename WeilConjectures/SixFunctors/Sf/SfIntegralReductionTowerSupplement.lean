@@ -145,7 +145,8 @@ private theorem unitCompatibilityOfComparisons
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : AlgebraicGeometry.Scheme.{u})
 
-local instance (priority := 4000) : EssentiallySmall.{u + 1} X.ProEt :=
+local instance (priority := 4000) instSfIntegralReductionTowerSupplement1
+    : EssentiallySmall.{u + 1} X.ProEt :=
   essentiallySmallSelf.{u} _
 
 /-- Ordinary reduction read as a completed-coefficient module.

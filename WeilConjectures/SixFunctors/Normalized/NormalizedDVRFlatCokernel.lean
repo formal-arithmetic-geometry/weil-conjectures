@@ -272,15 +272,18 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : AlgebraicGeometry.Scheme.{t})
   (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
 
-local instance (priority := 10000) : EssentiallySmall.{max u (t + 1)} X.ProEt :=
+local instance (priority := 10000) instNormalizedDVRFlatCokernel1
+    : EssentiallySmall.{max u (t + 1)} X.ProEt :=
   essentiallySmallSelf.{u} X.ProEt
-local instance (priority := 10000) : HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology X)
+local instance (priority := 10000) instNormalizedDVRFlatCokernel2
+    : HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology X)
     AddCommGrpCat.{max u (t + 1)} := integralCoefficientAbSheafify.{t, u} X
-local instance (priority := 10000) :
+local instance (priority := 10000) instNormalizedDVRFlatCokernel3 :
     (AlgebraicGeometry.Scheme.ProEt.topology X).WEqualsLocallyBijective
       AddCommGrpCat.{max u (t + 1)} := integralCoefficientAbLocallyBijective.{t, u} X
 
-local instance : HasDerivedCategory (completedIntegralModuleSheaves l E X D hl) :=
+local instance instNormalizedDVRFlatCokernel4
+    : HasDerivedCategory (completedIntegralModuleSheaves l E X D hl) :=
   HasDerivedCategory.standard _
 
 /-- Compatible completed coefficients, acting on sheaf morphisms. -/
@@ -314,15 +317,16 @@ def normalizedDVRFlatRestrictionComp {m n : ℕ} (h : n ≤ m) :
 
 attribute [local irreducible] normalizedDVRFlatRestrictionComp
 
-local instance (j : ℕ) : HasDerivedCategory (normalizedDVRModules l E X j) :=
+local instance instNormalizedDVRFlatCokernel5
+    (j : ℕ) : HasDerivedCategory (normalizedDVRModules l E X j) :=
   HasDerivedCategory.standard _
 
-local instance (j : ℕ) :
+local instance instNormalizedDVRFlatCokernel6 (j : ℕ) :
     (completedIntegralRestrictScalars l E X D hl j).PreservesZeroMorphisms :=
   inferInstanceAs (SheafOfModules.restrictScalars.{max u (t + 1)}
     (completedIntegralCoefficientProjection l E X D hl j)).PreservesZeroMorphisms
 
-local instance (j : ℕ) :
+local instance instNormalizedDVRFlatCokernel7 (j : ℕ) :
     (completedIntegralRestrictScalars l E X D hl j).Additive :=
   inferInstanceAs (SheafOfModules.restrictScalars.{max u (t + 1)}
     (completedIntegralCoefficientProjection l E X D hl j)).Additive

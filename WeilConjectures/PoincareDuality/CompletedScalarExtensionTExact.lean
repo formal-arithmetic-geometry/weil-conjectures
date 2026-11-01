@@ -98,11 +98,11 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L) (Y : AlgebraicGeometry.Scheme.{u})
 
-local instance (priority := 6000) :
+local instance (priority := 6000) instCompletedScalarExtensionTExact1 :
     (AlgebraicGeometry.Scheme.ProEt.topology Y).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
   integralCoefficientAbLocallyBijective.{u, u} Y
 
-local instance (priority := 6000) :
+local instance (priority := 6000) instCompletedScalarExtensionTExact2 :
     HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology Y) AddCommGrpCat.{u + 1} :=
   integralCoefficientAbSheafify.{u, u} Y
 

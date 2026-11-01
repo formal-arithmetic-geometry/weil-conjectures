@@ -25,7 +25,8 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
   (Y : AlgebraicGeometry.Scheme.{u})
 
-local instance (priority := 4000) : EssentiallySmall.{u + 1} Y.ProEt :=
+local instance (priority := 4000) instSfDerivedCompleteLegacyComparison1
+    : EssentiallySmall.{u + 1} Y.ProEt :=
   essentiallySmallSelf.{u} _
 
 open CategoryTheory.Pretriangulated in

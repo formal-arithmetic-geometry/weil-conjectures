@@ -31,13 +31,16 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : AlgebraicGeometry.Scheme.{t})
   (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
 
-local instance : HasDerivedCategory (completedIntegralModuleSheaves l E X D hl) :=
+local instance instNormalizedDVRRoosAugmentation1
+    : HasDerivedCategory (completedIntegralModuleSheaves l E X D hl) :=
   HasDerivedCategory.standard _
-local instance (priority := 10000) : EssentiallySmall.{max u (t + 1)} X.ProEt :=
+local instance (priority := 10000) instNormalizedDVRRoosAugmentation2
+    : EssentiallySmall.{max u (t + 1)} X.ProEt :=
   essentiallySmallSelf.{u} X.ProEt
-local instance (priority := 10000) : HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology X)
+local instance (priority := 10000) instNormalizedDVRRoosAugmentation3
+    : HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology X)
     AddCommGrpCat.{max u (t + 1)} := integralCoefficientAbSheafify.{t, u} X
-local instance (priority := 10000) :
+local instance (priority := 10000) instNormalizedDVRRoosAugmentation4 :
     (AlgebraicGeometry.Scheme.ProEt.topology X).WEqualsLocallyBijective
       AddCommGrpCat.{max u (t + 1)} := integralCoefficientAbLocallyBijective.{t, u} X
 

@@ -33,15 +33,15 @@ namespace WeilConjectures
 
 attribute [local irreducible] completedScalarComparison completedScalarChainComparison
 
-local instance (priority := 7000) (T : Scheme.{u}) :
+local instance (priority := 7000) instFdCoefficientScalarLiftNormalization1 (T : Scheme.{u}) :
     (ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
   integralCoefficientAbLocallyBijective.{u, u} T
 
-local instance (priority := 7000) (T : Scheme.{u}) :
+local instance (priority := 7000) instFdCoefficientScalarLiftNormalization2 (T : Scheme.{u}) :
     HasSheafify (ProEt.topology T) AddCommGrpCat.{u + 1} :=
   integralCoefficientAbSheafify.{u, u} T
 
-local instance (priority := 6000) (l : ℕ) [Fact l.Prime]
+local instance (priority := 6000) instFdCoefficientScalarLiftNormalization3 (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (T : Scheme.{u}) : HasDerivedCategory (integralTowerModules.{u, u} l E T) :=
   integralTowerHasDerivedCategory.{u, u} l E T
