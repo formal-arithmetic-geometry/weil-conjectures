@@ -592,6 +592,14 @@ import all WeilConjectures.AlgebraicGeometry.SmoothPurity.ShriekTensorCompositio
 import WeilConjectures.AlgebraicGeometry.FiniteEtaleTwistLine
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 import WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion
+public import WeilConjectures.ProperBaseChange.GeometricModuleConstruction
+public import WeilConjectures.ProperBaseChange.RingedTopoiDerivedPullback
+public import WeilConjectures.ProperBaseChange.RingedToposDerivedPushforwardComposition
+public import WeilConjectures.SmoothPurity.EtaleFiniteTwistPullbackRest
+public import WeilConjectures.SmoothPurity.FiniteEtaleTateLinePullback
+public import WeilConjectures.SmoothPurity.FiniteP1ChernMapBaseChange
+public import WeilConjectures.SmoothPurity.OrdinaryFiniteTwistTransportUniqueness
+public import WeilConjectures.SmoothPurity.SupportedDerivedUnitForget
 
 @[expose] public section
 set_option autoImplicit false
@@ -667,5 +675,188 @@ end
 attribute [local implicit_reducible] iteratedAffineLine iteratedAffineLineProj
 attribute [local semireducible] orderedSource exceptional lineSource twistAction
 attribute [local implicit_reducible] orderedSource exceptional lineSource twistAction
+
+end AlgebraicGeometry.ProEtale.AffineOrderedIntegration
+
+namespace AlgebraicGeometry.ProEtale.AffineOrderedIntegration
+
+private theorem integrationTranspose_zero (P : WeilConjectures.PurityFiniteSetting.{u})
+    (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of P.field.k))
+    [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY]
+    (K : Plus (AffineLinePurity.Ring P) Y)
+    (Ke : Etale.DerivedCategoryModule (AffineLinePurity.Ring P) Y)
+    (hKe : etaleFiniteTor (AffineLinePurity.Ring P) Y Ke)
+    (eK : (comparison (AffineLinePurity.Ring P) Y).obj Ke ≅ K.obj) :
+    HEq (integrationTranspose P Y aY K Ke hKe eK 0) (𝟙 K.obj) := by
+  unfold integrationTranspose
+  exact (integrationTranspose_existsUnique P Y aY K Ke hKe eK 0).exists.choose_spec
+
+private theorem lineComparison_isIso (P : WeilConjectures.PurityFiniteSetting.{u})
+    (T : Scheme.{u}) (aT : T ⟶ Spec (.of P.field.k))
+    [LocallyOfFiniteType aT] [QuasiCompact aT] [IsSeparated aT]
+    (K : Plus (AffineLinePurity.Ring P) T)
+    (Ke : Etale.DerivedCategoryModule (AffineLinePurity.Ring P) T)
+    (hKe : etaleFiniteTor (AffineLinePurity.Ring P) T Ke)
+    (eK : (comparison (AffineLinePurity.Ring P) T).obj Ke ≅ K.obj) :
+    IsIso (lineComparison P T aT K Ke hKe eK) := by
+  let : IsNoetherian T := isNoetherian_of_locallyOfFiniteType aT
+  obtain ⟨hT, _, h⟩ :=
+    (CoordinateLine.coordinateLineAdjunction P T aT).2.2.2.2.2.1 P.level (annihilates P)
+  have := (h K Ke hKe eK).2
+  unfold lineComparison
+  infer_instance
+
+private theorem exceptionalComposite_isIso (P : WeilConjectures.PurityFiniteSetting.{u})
+    (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of P.field.k))
+    [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY]
+    (K : Plus (AffineLinePurity.Ring P) Y) (d : ℕ) :
+    IsIso (exceptionalComposite P Y aY K d) := by
+  have he : HEq (exceptionalComposite P Y aY K d)
+      (exceptionalCompositeRaw P Y aY K d).2.2 := by
+    unfold exceptionalComposite
+    exact (exceptionalComposite_existsUnique P Y aY K d).exists.choose_spec
+  cases d with
+  | zero =>
+    have he' : exceptionalComposite P Y aY K 0 =
+        (exceptionalCompositeRaw P Y aY K 0).2.2 := by
+      unfold exceptional
+      exact eq_of_heq he
+    rw [he']
+    let : HasCompactification (lastProjection Y 0 ≫ 𝟙 (iteratedAffineLine Y 0)) :=
+      HasCompactification.of_eq (f := lastProjection Y 0) (Category.comp_id _).symm
+    change IsIso ((rightDerivedUpperShriekCongr
+      (AffineLinePurity.Ring P)
+      (Category.comp_id (lastProjection Y 0)).symm).hom.app K.obj)
+    exact NatIso.hom_app_isIso _ _
+  | succ d =>
+    let : HasCompactification (iteratedAffineLineProj Y (d + 1)) :=
+      (projection_geometry Y (d + 1)).2
+    let : HasCompactification (iteratedAffineLineProj Y (d + 2)) :=
+      (projection_geometry Y (d + 2)).2
+    let : HasCompactification
+        (lastProjection Y (d + 1) ≫ iteratedAffineLineProj Y (d + 1)) :=
+      HasCompactification.of_eq (f := iteratedAffineLineProj Y (d + 2))
+        (iteratedAffineLineProj_succ Y (d + 1))
+    let : IsNoetherian Y := tower_noetherian P Y aY 0
+    let : IsNoetherian (iteratedAffineLine Y (d + 1)) := tower_noetherian P Y aY (d + 1)
+    unfold exceptional at he ⊢
+    rw [eq_of_heq he]
+    exact AffineZeroPurity.compositionInverse_isIso (AffineLinePurity.Ring P)
+      (lastProjection Y (d + 1)) (iteratedAffineLineProj Y (d + 1)) K
+
+/-- Ordered affine integration transposes equal the recorded ordered affine comparisons.
+The exceptional conjugate is the one built from originCompositionAmbient, and its inverse
+is exactly exceptionalComposite. The recursion and naturality are evaluated at Rp_d!K.
+Source: main-20261015, projection-purity-agreement proof, final paragraph
+(blueprint: lem-pur-affine-ordered-integration-transposes).
+
+Proof:
+1. Work first on ordinary etale sites at exponent ell^(level+1), which annihilates A
+without any ramification divisibility restriction. Finite type makes all coordinate
+and projective compactification spaces Noetherian. The normalized proper/open tower
+comparison is transported to the actual originCompositionAmbient by
+lem-pur-compact-support-site-coherence, with the retained bounded-below witnesses.
+2. Apply lem-amb-shriek-tensor-composition and lem-sf-composition-projection-mate to the
+last coordinate and preceding projection. They give the displayed PF composition
+identity. The compactification tensor-action identity is clause 3 of
+lem-pur-finite-projection-action-laws. The ordinary projections are invertible by
+lem-sf-etale-ambient-adjoint-projection; invert only those projections or their bounded
+constructible compared components.
+3. Compose the normalized projective-line adjunction with the open adjunction.
+The open tensor/counit action law and naturality of proper projection rewrite its
+counit as (1_H tensor I_S) Pi. Here I_S is precisely restriction of the projective trace
+by the open counit. The finite Tate pullback comparison identifies its coefficient.
+This works at every positive finite level, without flatness over the Kummer ring.
+4. Induct on the coordinates. At zero the adjunction and trace are identities. Apply
+lem-pur-composite-integration-counit to the induction hypothesis and the line formula.
+Tate additivity and the even shifts identify the new coefficient. The trace at A is
+exactly the ordered counit of lem-amb-affine-space-top-trace, hence the specified vector
+integration in its trivial frame.
+5. Use lem-pur-vector-integration-site-comparison and
+lem-pur-finite-site-counit-projection-transport to carry the trace, projection,
+counit and exceptional transpose equations to the pro-etale site. Their comparison
+squares preserve the actual adjunctions and reflect equality independently of origin.
+6. The existing coordinate-line adjunction makes each exceptional line comparison
+invertible. The exceptional compositor is invertible by the proved relative-Hom
+composition argument, with the identity normalization at zero. Pullback finite-Tor
+preservation and tensor finite-Tor preservation supply the retained origins.
+7. Apply lem-pur-integration-transpose-composition. Its trace contraction is Step 4;
+its projection composition is Step 2. Transport its right mate using Step 5. This gives
+the successor formula with the exact c_d and I_d of def-pur-affine-space-comparison.
+Induction identifies P with that definition's Gamma and proves invertibility from
+the line and compositor isomorphisms.
+8. Extract arbitrary-arrow line naturality from dimension-one ordered naturality by
+cancelling its source and exceptional normalization isomorphisms. Apply this to P
+to obtain the stated square at the actual
+exceptional target. Every source shift is 2 or 2d, so the block permutation sign is +1.
+The identity adjunction handles rank zero. Zero coefficients K and empty bases have
+only the corresponding zero arrows, and none of the constructions excludes them. -/
+theorem ordered_integration_transposes (P : WeilConjectures.PurityFiniteSetting.{u})
+    (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of P.field.k))
+    [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY]
+    (K : Plus (AffineLinePurity.Ring P) Y) (Ke : Etale.DerivedCategoryModule
+      (AffineLinePurity.Ring P) Y)
+    (hKe : etaleFiniteTor (AffineLinePurity.Ring P) Y Ke)
+    (eK : (comparison (AffineLinePurity.Ring P) Y).obj Ke ≅ K.obj) :
+    (∀ d : ℕ, integrationTranspose P Y aY K Ke hKe eK d =
+      affineSpacePurityComparison P Y aY K Ke hKe eK d) ∧
+    (∀ d : ℕ, IsIso (integrationTranspose P Y aY K Ke hKe eK d)) ∧
+    (∀ d : ℕ, IsIso (exceptionalComposite P Y aY K d)) ∧
+    (∀ d : ℕ, integrationTranspose P Y aY K Ke hKe eK (d + 1) =
+      (sourceReassociation P Y aY K.obj d).hom ≫
+        (lineSource P (iteratedAffineLine Y d)).map
+          (integrationTranspose P Y aY K Ke hKe eK d) ≫
+        exceptionalLine P Y aY K Ke hKe eK d ≫ exceptionalComposite P Y aY K d) ∧
+    (∀ d : ℕ,
+      (lineSource P (iteratedAffineLine Y d)).map
+          (integrationTranspose P Y aY K Ke hKe eK d) ≫
+        exceptionalLine P Y aY K Ke hKe eK d =
+      sourceLine P Y aY K Ke hKe eK d ≫
+        (rightDerivedUpperShriek (AffineLinePurity.Ring P) (lastProjection Y d)).map
+          (integrationTranspose P Y aY K Ke hKe eK d)) ∧
+    HEq (integrationTranspose P Y aY K Ke hKe eK 0) (𝟙 K.obj) := by
+  have hzero := integrationTranspose_zero P Y aY K Ke hKe eK
+  have hsucc := integrationTranspose_successor P Y aY K Ke hKe eK
+  have hcomp := exceptionalComposite_isIso P Y aY K
+  have hline (d : ℕ) : IsIso (exceptionalLine P Y aY K Ke hKe eK d) := by
+    let : LocallyOfFiniteType (towerBase aY d) := (tower_geometry aY d).1
+    let : QuasiCompact (towerBase aY d) := (tower_geometry aY d).2.1
+    let : IsSeparated (towerBase aY d) := (tower_geometry aY d).2.2
+    exact lineComparison_isIso P (iteratedAffineLine Y d) (towerBase aY d)
+      ⟨_, (stage_applicability P Y aY K Ke hKe eK d).1⟩
+      (stageEtale P Y K.obj Ke d) (stage_applicability P Y aY K Ke hKe eK d).2
+      (stageComparison P Y K.obj Ke eK d)
+  refine ⟨?_, ?_, hcomp, hsucc, ?_, hzero⟩
+  · intro d
+    induction d with
+    | zero =>
+      unfold affineSpacePurityComparison orderedRec comparisonZero
+      unfold ComparisonHom orderedSource exceptional
+      exact eq_of_heq hzero
+    | succ d ih =>
+      rw [hsucc d, ih]
+      rfl
+  · intro d
+    induction d with
+    | zero =>
+      have hz : integrationTranspose P Y aY K Ke hKe eK 0 = 𝟙 K.obj :=
+        eq_of_heq hzero
+      rw [hz]
+      exact IsIso.id K.obj
+    | succ d ih =>
+      rw [hsucc d]
+      have := hcomp d
+      have := hline d
+      infer_instance
+  · intro d
+    let : LocallyOfFiniteType (towerBase aY d) := (tower_geometry aY d).1
+    let : QuasiCompact (towerBase aY d) := (tower_geometry aY d).2.1
+    let : IsSeparated (towerBase aY d) := (tower_geometry aY d).2.2
+    exact lineComparison_natural P (iteratedAffineLine Y d) (towerBase aY d)
+      ⟨_, (source_applicability P Y aY K Ke hKe eK d).1⟩ (sourceEtale P Y Ke d)
+      (source_applicability P Y aY K Ke hKe eK d).2 (sourceRealization P Y K.obj Ke eK d)
+      ⟨_, (stage_applicability P Y aY K Ke hKe eK d).1⟩ (stageEtale P Y K.obj Ke d)
+      (stage_applicability P Y aY K Ke hKe eK d).2 (stageComparison P Y K.obj Ke eK d)
+      (integrationTranspose P Y aY K Ke hKe eK d)
 
 end AlgebraicGeometry.ProEtale.AffineOrderedIntegration

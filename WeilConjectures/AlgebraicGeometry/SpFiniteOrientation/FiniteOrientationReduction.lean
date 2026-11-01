@@ -19,6 +19,13 @@ import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 import all WeilConjectures.AlgebraicGeometry.Reduction.ReductionCompatibilities
 import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Unit
 import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMapsCoherence
+public import WeilConjectures.AlgebraicGeometry.Etale.Scalar.EtaleScalarPullbackIdentityNormalization
+public import WeilConjectures.AlgebraicGeometry.FiniteSmoothPurity.FiniteBundleSectionAdjointScalar
+public import WeilConjectures.AlgebraicGeometry.FiniteSmoothPurity.FiniteSectionIntegratedSpecialization
+public import WeilConjectures.AlgebraicGeometry.FiniteSmoothPurity.FiniteSectionSpecializationScalar
+public import WeilConjectures.AlgebraicGeometry.FiniteSmoothPurity.FiniteSmoothDiagonalScalar
+public import WeilConjectures.SixFunctors.DncCoefficientTransport.SectionScalarBaseChange
+public import WeilConjectures.SmoothPurity.DncCoefficientTransport.DncCoefficientTransportData
 
 /-! # Finite diagonal orientations at the unit and under reduction
 
@@ -115,6 +122,21 @@ private theorem tensor_mate_unit
   simpa only [Functor.comp_obj, Functor.id_obj, unitors_equal] using
     (rightUnitor_naturality (adj.counit.app (𝟙_ D)))
 
+private theorem braided_tensor_mate
+    {C D : Type*} [Category* C] [Category* D]
+    [MonoidalCategory C] [BraidedCategory C]
+    [MonoidalCategory D] [BraidedCategory D]
+    {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G)
+    (P W : C) (K : D) (Q : D)
+    (π : F.obj (W ⊗ P) ⟶ Q ⊗ K) (ε : Q ⟶ 𝟙_ D) :
+    adj.homEquiv _ _ (F.map (β_ P W).hom ≫ π ≫
+        (β_ Q K).hom ≫ (K ◁ ε) ≫ (ρ_ K).hom) =
+      (β_ P W).hom ≫ (adj.homEquiv _ _ (π ≫ (ε ▷ K)) ≫ G.map (λ_ K).hom) := by
+  rw [← adj.homEquiv_naturality_right, ← adj.homEquiv_naturality_left]
+  apply congrArg (adj.homEquiv _ _)
+  simp only [Category.assoc]
+  rw [← BraidedCategory.braiding_naturality_left_assoc, braiding_rightUnitor]
+
 private theorem gamma_unit
     {C : Type*} [Category* C] [MonoidalCategory C]
     {P W L : C} (u : P ≅ 𝟙_ C) (alpha : W ≅ L) (theta : P ⊗ W ⟶ W)
@@ -157,6 +179,20 @@ private theorem tensor_unit :
           (Etale.leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} Λ) f).hom ≫
         (ρ_ (Etale.dualizingComplex Λ f)).hom := by
   exact tensor_unit_general (Etale.rightDerivedUpperShriekAdjunction Λ f)
+
+private theorem smooth_tensor_eq
+    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    let := Etale.derivedBraidedCategory Λ X
+    Etale.smoothTensorDualityMap Λ f inferInstance K =
+      (β_ ((Etale.upperStar (ModuleCat.{u + 1} Λ) f).leftDerivedFunctor.obj K)
+        (Etale.dualizingComplex Λ f)).hom ≫
+        Etale.dualizingComplexTensorMap Λ f K := by
+  let := Etale.derivedBraidedCategory Λ X
+  let := Etale.derivedBraidedCategory Λ Y
+  exact braided_tensor_mate (Etale.rightDerivedUpperShriekAdjunction Λ f) _ _ K _
+    (inv (((Etale.projectionMap (ModuleCat.{u + 1} Λ) f).app _).app K))
+    ((Etale.rightDerivedUpperShriekAdjunction Λ f).counit.app _)
+
 private theorem tensor_naturality
     {K K' : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (g : K ⟶ K') :
@@ -177,6 +213,33 @@ private theorem tensor_naturality
   exact congrArg (fun k ↦ _ ≫ (Etale.rightDerivedUpperShriek Λ f).map k)
     (leftUnitor_naturality g)
 
+private theorem smooth_tensor_naturality
+    {K K' : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    (g : K ⟶ K') :
+    ((Etale.upperStar (ModuleCat.{u + 1} Λ) f).leftDerivedFunctor.map g) ▷
+        Etale.dualizingComplex Λ f ≫
+        Etale.smoothTensorDualityMap Λ f inferInstance K' =
+      Etale.smoothTensorDualityMap Λ f inferInstance K ≫
+        (Etale.rightDerivedUpperShriek Λ f).map g := by
+  let := Etale.derivedBraidedCategory Λ X
+  rw [smooth_tensor_eq, smooth_tensor_eq]
+  rw [BraidedCategory.braiding_naturality_left_assoc]
+  change _ ≫ ((Etale.derivedTensor (ModuleCat.{u + 1} Λ) X).obj
+    (Etale.dualizingComplex Λ f)).map
+    ((Etale.upperStar (ModuleCat.{u + 1} Λ) f).leftDerivedFunctor.map g) ≫ _ = _
+  rw [tensor_naturality]
+  simp only [Category.assoc]
+
+private theorem smooth_tensor_unit :
+    (Etale.leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} Λ) f).inv ▷
+        Etale.dualizingComplex Λ f ≫
+      Etale.smoothTensorDualityMap Λ f inferInstance (𝟙_ _) =
+      (λ_ (Etale.dualizingComplex Λ f)).hom := by
+  let := Etale.derivedBraidedCategory Λ X
+  rw [smooth_tensor_eq, tensor_unit]
+  simp only [← BraidedCategory.braiding_naturality_left_assoc]
+  simp
+
 end
 
 /-- The fixed-ring source identification at the coefficient unit: pull back the
@@ -191,6 +254,71 @@ def sourceUnitIso (A : Type (u + 1)) [CommRing A]
     ((Etale.ordinaryFinitePullback A f).mapIso
       (PurityFiniteSetting.smoothPurityUnitIso A Y) ≪≫
       Etale.leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} A) f)).app L ≪≫ λ_ L
+
+private theorem tensor_obj_map (A : Type (u + 1)) [CommRing A] (X : Scheme.{u})
+    (K : Etale.DerivedCategoryModule A X) {M N : Etale.DerivedCategoryModule A X}
+    (g : M ⟶ N) : ((Etale.ordinaryFiniteTensor A X).obj K).map g = K ◁ g :=
+  rfl
+
+private theorem symmetry_app_app
+    {B : Type uA} [Category.{u + 1} B] [Abelian B] [IsGrothendieckAbelian.{u + 1} B]
+    [MonoidalCategory B] [MonoidalPreadditive B] [SymmetricCategory B] [MonoidalClosed B]
+    [Abelian.HasFunctorialFlatResolution B] (X : Scheme.{u})
+    (K N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology B)) :
+    letI := _root_.DerivedCategory.braidedCategory' (Sheaf X.smallEtaleTopology B)
+    ((Etale.derivedTensorSymmetry B X).hom.app K).app N = (β_ K N).hom :=
+  rfl
+
+private theorem etale_theta_unit_tensor (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] :
+    PurityFiniteSetting.smoothPurityEtaleTheta A f (Etale.ordinaryFiniteUnit A Y) =
+      ((Etale.upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor.obj
+          (Etale.ordinaryFiniteUnit A Y) ◁
+          (Etale.rightDerivedUpperShriek A f).map
+            (PurityFiniteSetting.smoothPurityUnitIso A Y).hom) ≫
+        Etale.smoothTensorDualityMap A f inferInstance
+          (Etale.ordinaryFiniteUnit A Y) := by
+  rw [smooth_tensor_eq]
+  dsimp only [PurityFiniteSetting.smoothPurityEtaleTheta]
+  rw [tensor_obj_map, symmetry_app_app]
+  rfl
+
+private theorem etale_theta_unit (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] :
+    PurityFiniteSetting.smoothPurityEtaleTheta A f (Etale.ordinaryFiniteUnit A Y) =
+      (sourceUnitIso A f
+        ((Etale.rightDerivedUpperShriek A f).obj
+          (Etale.ordinaryFiniteUnit A Y))).hom := by
+  let U := PurityFiniteSetting.smoothPurityUnitIso A Y
+  let H := Etale.rightDerivedUpperShriek A f
+  let P := (Etale.upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor
+  let W := Etale.dualizingComplex A f
+  let V := Etale.leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} A) f
+  have ht := smooth_tensor_unit A f
+  have hn := smooth_tensor_naturality A f U.hom
+  have hs : Etale.smoothTensorDualityMap A f
+      inferInstance (𝟙_ _) = V.hom ▷ W ≫ (λ_ W).hom := by
+    apply (cancel_epi (V.inv ▷ W)).1
+    simpa only [← Category.assoc, ← comp_whiskerRight, Iso.inv_hom_id,
+      id_whiskerRight, Category.id_comp] using ht
+  have he : PurityFiniteSetting.smoothPurityEtaleTheta A f
+      (Etale.ordinaryFiniteUnit A Y) =
+      (P.obj (Etale.ordinaryFiniteUnit A Y) ◁ H.map U.hom) ≫
+        Etale.smoothTensorDualityMap A f inferInstance
+          (Etale.ordinaryFiniteUnit A Y) :=
+    etale_theta_unit_tensor A f
+  rw [he]
+  apply ((H.mapIso U).cancel_iso_hom_right _ _).1
+  simp only [Functor.mapIso_hom, Category.assoc]
+  rw [← hn]
+  dsimp only [W] at hs
+  rw [hs]
+  erw [whisker_exchange_assoc, whisker_exchange_assoc]
+  change _ ≫ _ ≫ (𝟙_ _ ◁ H.map U.hom) ≫ (λ_ _).hom = _
+  rw [leftUnitor_naturality]
+  simp only [sourceUnitIso, Iso.trans_hom, Functor.mapIso_hom,
+    Iso.app_hom, Functor.map_comp, NatTrans.comp_app, Category.assoc]
+  rfl
 
 attribute [local instance] towerCoefficientCommRing
 

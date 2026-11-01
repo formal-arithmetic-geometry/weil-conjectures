@@ -37,6 +37,58 @@ private theorem unique_precomp {C : Type v} [Category.{w} C]
   apply (cancel_epi p).mp
   exact (eq_of_heq he).trans (IsIso.hom_inv_id_assoc p t).symm
 
+private theorem iso_naturality_paste {C D E : Type v} [Category.{w} C]
+    [Category.{w} D] [Category.{w} E] (F : C ⥤ D) (G : D ⥤ E) (H : C ⥤ E)
+    (P : ObjectProperty C) (e : P.ι ⋙ F ⋙ G ≅ P.ι ⋙ H)
+    {T M : C} (hT : P T) (hM : P M) (u : T ⟶ M)
+    {V : D} {K : E} (a : F.obj M ⟶ V) (b : G.obj V ⟶ K) :
+    e.inv.app ⟨T, hT⟩ ≫ G.map (F.map u ≫ a) ≫ b =
+      H.map u ≫ (e.inv.app ⟨M, hM⟩ ≫ G.map a ≫ b) := by
+  have hn := e.inv.naturality (ObjectProperty.homMk u : ⟨T, hT⟩ ⟶ ⟨M, hM⟩)
+  change H.map u ≫ e.inv.app ⟨M, hM⟩ =
+    e.inv.app ⟨T, hT⟩ ≫ G.map (F.map u) at hn
+  rw [Functor.map_comp, ← Category.assoc, ← Category.assoc, ← hn,
+    Category.assoc, Category.assoc]
+
+private theorem isIso_of_bijective_comp {C : Type v} [Category.{w} C]
+    (P : ObjectProperty C) {M N : C} (hM : P M) (hN : P N) (d : M ⟶ N)
+    (h : ∀ T, P T → Function.Bijective (fun u : T ⟶ M ↦ u ≫ d)) : IsIso d := by
+  obtain ⟨q, hq⟩ := (h N hN).2 (𝟙 N)
+  refine ⟨q, ?_, hq⟩
+  apply (h M hM).1
+  change (d ≫ q) ≫ d = 𝟙 M ≫ d
+  exact (Category.assoc _ _ _).trans
+    ((congrArg (fun t ↦ d ≫ t) hq).trans
+      ((Category.comp_id _).trans (Category.id_comp _).symm))
+
+private theorem isIso_transpose_compositor {C D E : Type v} [Category.{w} C]
+    [Category.{w} D] [Category.{w} E] (F : C ⥤ D) (G : D ⥤ E) (H : C ⥤ E)
+    (P : ObjectProperty C) {M N : C} {V : D} {K : E} (hM : P M) (hN : P N)
+    (ef : ∀ T, P T → (F.obj T ⟶ V) ≃ (T ⟶ M))
+    (eg : ∀ T, P T → (G.obj (F.obj T) ⟶ K) ≃ (F.obj T ⟶ V))
+    (eh : ∀ T, P T → (H.obj T ⟶ K) ≃ (T ⟶ N))
+    (a : F.obj M ⟶ V) (b : G.obj V ⟶ K)
+    (hf : ∀ T (hT : P T) (u : T ⟶ M), (ef T hT).symm u = F.map u ≫ a)
+    (hg : ∀ T (hT : P T) (t : F.obj T ⟶ V), (eg T hT).symm t = G.map t ≫ b)
+    (hh : ∀ T (hT : P T) (u : T ⟶ M) (t : H.obj M ⟶ K),
+      eh T hT (H.map u ≫ t) = u ≫ eh M hM t)
+    (e : P.ι ⋙ F ⋙ G ≅ P.ι ⋙ H) :
+    IsIso (transposeComposition F G H P hM (eh M hM) a b e) := by
+  unfold transposeComposition
+  apply isIso_of_bijective_comp P hM hN
+  intro T hT
+  let E := ((ef T hT).symm.trans (eg T hT).symm).trans
+    (((e.app ⟨T, hT⟩).homFromEquiv).trans (eh T hT))
+  have he (u : T ⟶ M) : E u =
+      u ≫ eh M hM (e.inv.app ⟨M, hM⟩ ≫ G.map a ≫ b) := by
+    simp only [E, Equiv.trans_apply, Iso.homFromEquiv_apply, Iso.app_inv, hg, hf]
+    rw [iso_naturality_paste F G H P e hT hM u, hh]
+  have heq : (fun u : T ⟶ M ↦
+      u ≫ eh M hM (e.inv.app ⟨M, hM⟩ ≫ G.map a ≫ b)) = E :=
+    funext (fun u ↦ (he u).symm)
+  rw [heq]
+  exact E.bijective
+
 attribute [local irreducible] targetPullbackIso projectionMap
 
 private theorem target_ctf (P : PurityFiniteSetting.{u}) (n : ℕ) (X : Scheme.{u})
@@ -261,6 +313,34 @@ def sectionAdjunct (P : PurityFiniteSetting.{u}) (n : ℕ) (B : Scheme.{u})
   rightDerivedUpperShriekHomEquiv (lastSection B r)
     (target_origin P n _ (towerBase aB r) r)
     (target_plus P n _ (towerBase aB (r + 1)) (r + 1)) (sectionArrow P n B aB r)
+
+private theorem compositionInverse_isIso (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    [QuasiCompact f] [QuasiCompact g] [CompactSpace Y] [CompactSpace Z]
+    (K : Plus A Z) : IsIso (compositionInverse A f g K) := by
+  unfold compositionInverse
+  exact isIso_transpose_compositor
+    (rightDerivedLowerShriek (ModuleCat.{u + 1} A) f)
+    (rightDerivedLowerShriek (ModuleCat.{u + 1} A) g)
+    (rightDerivedLowerShriek (ModuleCat.{u + 1} A) (f ≫ g))
+    (DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} A) X)
+    (plusEtaleOrigin_rightDerivedUpperShriek_obj f
+      (plus_rightDerivedUpperShriek_obj g K.property))
+    (plusEtaleOrigin_rightDerivedUpperShriek_obj (f ≫ g) K.property)
+    (fun _ hT ↦ rightDerivedUpperShriekHomEquiv f hT
+      (plus_rightDerivedUpperShriek_obj g K.property))
+    (fun _ hT ↦ rightDerivedUpperShriekHomEquiv g
+      (hT.rightDerivedLowerShriek_obj f) K.property)
+    (fun _ hT ↦ rightDerivedUpperShriekHomEquiv (f ≫ g) hT K.property)
+    (rightDerivedUpperShriekCounit f _ (plus_rightDerivedUpperShriek_obj g K.property))
+    (rightDerivedUpperShriekCounit g K.obj K.property)
+    (fun _ hT u ↦ rightDerivedUpperShriekHomEquiv_symm_apply f hT _ u)
+    (fun _ hT t ↦ rightDerivedUpperShriekHomEquiv_symm_apply g
+      (hT.rightDerivedLowerShriek_obj f) K.property t)
+    (fun _ hT u t ↦ rightDerivedUpperShriekHomEquiv_naturality_left
+      (f ≫ g) hT _ K.property u t)
+    (originCompositionAmbient A f g)
 
 attribute [local irreducible] originCompositionAmbient rightDerivedUpperShriekHomEquiv
   rightDerivedUpperShriekCounit
