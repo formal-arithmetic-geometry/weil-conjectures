@@ -13,6 +13,8 @@ public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 
+set_option linter.privateModule false
+
 /-!
 # Restriction of the abelian derived exchange to bounded-below complexes
 -/

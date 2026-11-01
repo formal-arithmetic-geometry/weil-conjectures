@@ -8,6 +8,8 @@ module
 public import WeilConjectures.SmoothPurity.Integral.IntegralOperationsScalarComparisons
 import WeilConjectures.CategoryTheory.Ringed.Finite.RingedFiniteFreeHomBaseChangeTensor
 
+set_option linter.privateModule false
+
 /-! # The prescribed finite scalar tensor comparison on arbitrary K-flat inputs
 
 Source: blueprint dual-Tate compatibility, Step 5; Stacks 07A4 and 08J9.

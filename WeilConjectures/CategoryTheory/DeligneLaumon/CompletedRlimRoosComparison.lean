@@ -167,6 +167,8 @@ import Mathlib.CategoryTheory.Sites.Abelian
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 import all WeilConjectures.AlgebraicGeometry.Completed.CompletedRlimFunctor
 
+set_option linter.privateModule false
+
 /-! # The normalized Roos comparison for the actual total inverse limit
 
 Source: Stacks Project, sites-cohomology.tex, Tag 0941,

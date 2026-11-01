@@ -16,6 +16,8 @@ import WeilConjectures.AlgebraicGeometry.Sf.SfIntrinsicRealizationTransport
 import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.AlgebraicGeometry.Finite.Compact.FiniteCompactSupportScalarComparison
 
+set_option linter.privateModule false
+
 /-!
 # Finite-level bounded constructibility for proper support
 

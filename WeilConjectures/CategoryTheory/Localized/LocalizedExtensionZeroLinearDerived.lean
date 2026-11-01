@@ -9,6 +9,8 @@ public import WeilConjectures.Algebra.Homology.SmoothPurity.LocalizedModuleExact
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor
 
+set_option linter.privateModule false
+
 /-!
 # Linearity of localized extension by zero on derived module sheaves
 

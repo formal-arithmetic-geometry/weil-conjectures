@@ -53,6 +53,8 @@ import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import Mathlib.CategoryTheory.Sites.Abelian
 import Mathlib.Algebra.Homology.Functor
 
+set_option linter.privateModule false
+
 /-! # Quasi-isomorphism invariance of the Hom complex with smaller coefficient rings
 
 Source: Stacks Project, Tags 03DI, 03DJ, 08FI, 0A8Y, 0A94 and 0A95.
@@ -148,5 +150,4 @@ private theorem quasiIso_of_sectionsOfUniverses
 
 end MixedHom
 
-open MixedHom in
 end CategoryTheory

@@ -105,6 +105,8 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUn
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ComparisonMonoidal
 
+set_option linter.privateModule false
+
 /-! # Direct finite-coefficient derived tensor comparison
 
 Source: Stacks Project, Tags 06YS and 06YU, and the finite coefficient site comparison.

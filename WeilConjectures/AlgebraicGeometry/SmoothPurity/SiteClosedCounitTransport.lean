@@ -34,6 +34,8 @@ public import WeilConjectures.CategoryTheory.RingedSiteModules
 public import WeilConjectures.AlgebraicGeometry.Canonical.CanonicalCompactSupportSiteComparison
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
+set_option linter.privateModule false
+
 /-!
 # Counit normalization of the site-transported closed adjoint
 
@@ -78,8 +80,4 @@ private theorem inclusion_comp_inv
 
 set_option maxHeartbeats 600000 in
 -- Keep the large comparison composites folded while matching their components.
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.defeqAttrib.useBackward true in
-attribute [local irreducible] Functor.mapDerivedCategory Functor.rightDerivedFunctor in
 end AlgebraicGeometry.ProEtale

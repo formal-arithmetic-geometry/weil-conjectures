@@ -42,6 +42,8 @@ public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBaseChangeComp
 import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarCoherence
 
+set_option linter.privateModule false
+
 /-!
 # Actual unbounded open adjunctions and site-comparison counits
 

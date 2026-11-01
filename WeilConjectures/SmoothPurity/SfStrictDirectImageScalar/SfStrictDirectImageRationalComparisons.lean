@@ -26,7 +26,7 @@ attribute [-instance] WeilConjectures.CompletedCoefficientPushforward.modAbelian
 universe u v
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Scheme TensorProduct
 namespace WeilConjectures.SfStrictDirectImageScalar
-attribute [local irreducible] HasComparisonLaws IsRationalMaps
+attribute [local irreducible] IsRationalMaps
   sfIntegralConstructible HasDerivedCategory.standard
   completedOrdinaryScalarExtension completedOrdinaryScalarComplex
   completedScalarChangeData completedScalarComparison completedDerivedScalarExtension

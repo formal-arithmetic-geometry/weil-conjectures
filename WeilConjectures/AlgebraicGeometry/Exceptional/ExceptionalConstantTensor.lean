@@ -54,7 +54,6 @@ universe v
 
 variable {R : Type v} [CommRing R]
 
-set_option backward.isDefEq.respectTransparency false in
 section Devissage
 
 variable {D : Type*} [Category* D] [HasShift D ℤ] [Preadditive D]
@@ -63,7 +62,6 @@ variable {D : Type*} [Category* D] [HasShift D ℤ] [Preadditive D]
   [F.CommShift ℤ] [G.CommShift ℤ] [F.IsTriangulated] [G.IsTriangulated]
   (τ : F ⟶ G) [NatTrans.CommShift τ ℤ]
 
-omit [NatTrans.CommShift τ ℤ] in
 end Devissage
 
 end ExceptionalConstantTensor

@@ -23,6 +23,8 @@ import WeilConjectures.SmoothPurity.Finite.FiniteTorAmplitudeSites
 import WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriekConstructible
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomComparison
 
+set_option linter.privateModule false
+
 /-!
 # Affine-chart assembly for constructible exceptional inverse image
 

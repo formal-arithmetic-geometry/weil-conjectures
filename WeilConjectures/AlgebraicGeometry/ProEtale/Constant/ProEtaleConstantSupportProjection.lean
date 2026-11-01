@@ -24,6 +24,8 @@ import WeilConjectures.CategoryTheory.Sites.ConstantSheafMonoidal
 import WeilConjectures.CategoryTheory.Monoidal.OplaxOfLaxSquare
 import Mathlib.CategoryTheory.Triangulated.Adjunction
 
+set_option linter.privateModule false
+
 /-!
 # Projection on constant coefficients for coproduct-preserving compact support
 
@@ -57,9 +59,6 @@ variable {C : Type uC} [Category.{u + 1} C] [Abelian C]
 variable (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
   [F.PreservesFlat] [F.IsLeftAdjoint] [F.Monoidal]
 
-omit [Abelian.HasFunctorialFlatResolution D] [PreservesFiniteLimits F]
-  [PreservesFiniteColimits F] [F.Monoidal] in
-omit [F.PreservesFlat] [F.IsLeftAdjoint] in
 variable [F.leftDerivedFunctor.CommShift ℤ]
   [NatTrans.CommShift
     (F₁ := DerivedCategory.Qh ⋙ F.leftDerivedFunctor)
@@ -109,7 +108,5 @@ variable (A : Type uC) [Category.{u + 1} A] [Abelian A]
 
 end SupportTensor
 
-attribute [-instance] ModuleCat.MonoidalCategory.instBraidedCategory in
-attribute [-instance] ModuleCat.MonoidalCategory.instBraidedCategory in
 end ProEtale
 end AlgebraicGeometry

@@ -22,6 +22,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TorAmplitudeResidue
 import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
 
+set_option linter.privateModule false
+
 /-!
 # Testing finite Tor amplitude at the residue field
 

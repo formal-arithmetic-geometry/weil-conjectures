@@ -12,6 +12,8 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
 import WeilConjectures.CategoryTheory.TruncationTriangle
 import WeilConjectures.CategoryTheory.DerivedCategory.Perfect.PerfectRingTriangleClosure
 
+set_option linter.privateModule false
+
 /-!
 # Perfectness from bounded perfect cohomology
 

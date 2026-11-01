@@ -8,6 +8,8 @@ module
 public import WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorHom
 public import WeilConjectures.SixFunctors.Rational.RationalCoefficientCategoryComparison
 
+set_option linter.privateModule false
+
 /-! # Scalar-compatible identity maps before common-stage descent
 
 Source: Bhatt--Scholze, Remark 6.8.15; Stacks Tag 099N.

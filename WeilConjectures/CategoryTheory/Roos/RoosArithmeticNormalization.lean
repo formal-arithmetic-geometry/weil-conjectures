@@ -49,22 +49,14 @@ universe v w d
 variable {A : Type v} [Category.{w} A] [Abelian A] [HasCountableProducts A]
   [HasLimitsOfShape ℕᵒᵖ A]
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-omit [HasCountableProducts A] in
 section DerivedComparison
 
 variable [HasDerivedCategory.{d} A] [HasDerivedCategory.{d} (ℕᵒᵖ ⥤ A)]
   [Abelian.HasKInjectiveResolutions (ℕᵒᵖ ⥤ A)]
   [(lim : (ℕᵒᵖ ⥤ A) ⥤ A).Additive]
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
 end DerivedComparison
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-omit [HasLimitsOfShape ℕᵒᵖ A] in
 variable [HasDerivedCategory.{d} A] [HasDerivedCategory.{d} (ℕᵒᵖ ⥤ A)]
   [Abelian.HasKInjectiveResolutions (ℕᵒᵖ ⥤ A)]
   [(lim : (ℕᵒᵖ ⥤ A) ⥤ A).Additive]

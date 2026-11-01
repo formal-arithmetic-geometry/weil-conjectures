@@ -15,6 +15,8 @@ import WeilConjectures.NumberTheory.Padics.LocalFieldIntegralBasis
 import Mathlib.LinearAlgebra.TensorProduct.Basis
 import Mathlib.RingTheory.TensorProduct.Quotient
 
+set_option linter.privateModule false
+
 /-! # Coefficient-model balancing and proof helpers
 
 Source: Bhatt--Scholze, Definition 6.7.6 and Lemmas 6.7.7, 6.8.2(1);
@@ -72,6 +74,4 @@ open CategoryTheory.MonoidalCategory
 set_option backward.isDefEq.respectTransparency false in
 attribute [local instance] coefficientSectionModule
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end WeilConjectures

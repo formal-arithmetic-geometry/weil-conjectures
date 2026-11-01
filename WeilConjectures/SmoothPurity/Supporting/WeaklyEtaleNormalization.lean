@@ -24,6 +24,8 @@ import Mathlib.Algebra.Algebra.Pi
 import WeilConjectures.RingTheory.ProEtale.WeakDimension
 import WeilConjectures.RingTheory.ReducedNoetherianTotalRingFractions
 
+set_option linter.privateModule false
+
 /-!
 # Normalization tensor decomposition for a local weakly etale map
 

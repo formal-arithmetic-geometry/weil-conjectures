@@ -89,5 +89,4 @@ private theorem reindexing_unit
             CategoryTheory.Functor.map_id, Category.id_comp]
 
 -- The ordinary mate simplification exposes the canonical projection equation.
-set_option linter.flexible false in
 end AlgebraicGeometry.Scheme

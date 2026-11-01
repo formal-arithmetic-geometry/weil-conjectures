@@ -26,7 +26,8 @@ attribute [local irreducible] standingExceptionalHomEquiv originCompositionAmbie
 /- The compiled source definitions carry separate certificates for sheafification and
 Grothendieck abelianness. Direct conversion of the resulting derived-category data is
 expensive. Build explicit congruence proofs instead; the kernel checks the resulting term.
-Adapted from the private transport in WeilConjectures.SmoothPurity.Exceptional.ExceptionalSupportProjectionIso,
+Adapted from the private transport in
+WeilConjectures.SmoothPurity.Exceptional.ExceptionalSupportProjectionIso,
 with heterogeneous function extensionality for the lambda motives in these definitions. -/
 section StandingInstanceTransport
 open Lean Meta Elab Tactic

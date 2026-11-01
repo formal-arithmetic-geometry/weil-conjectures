@@ -10,6 +10,8 @@ public import WeilConjectures.ProperBaseChange.ProperIntegralOrdinaryData
 public import WeilConjectures.ProperBaseChange.IntegralCoefficientCompletenessTransportSupplement
 import all WeilConjectures.AlgebraicGeometry.ImmersionCompletedPullback.SfImmersionCompletedPullbackComparison
 
+set_option linter.privateModule false
+
 /-! # Recoding the normalized strict Roos comparison
 
 Source: Stacks Project, sites-modules.tex, Tags 03EK/03EL; proetale.tex, Tag 099N(5).

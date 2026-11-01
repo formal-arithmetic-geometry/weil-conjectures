@@ -98,6 +98,8 @@ import WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionRingIsoSupplement
 import all WeilConjectures.Algebra.Homology.ProperBaseChange.OpenImmersionTensorPiece
 public import WeilConjectures.AlgebraicGeometry.Adic.AdicPullbackPresentationModels
 import all WeilConjectures.AlgebraicGeometry.Adic.AdicPullbackPresentationModels
+
+set_option linter.privateModule false
 /-!
 # Counit-normalized transport of adic pullback presentations
 
@@ -177,9 +179,6 @@ variable
   (hε : Functor.whiskerLeft DerivedCategory.Qh e.hom ≫ ε₂ = ε₁)
   (hτ : Functor.whiskerLeft DerivedCategory.Qh et.hom ≫ τ₂ = τ₁)
 
-include hε hτ in
-include hτ in
-include hε hτ in
 end TransportSquares
 
 -- Restriction is inverse image along the corresponding site object.
@@ -222,8 +221,6 @@ end TransportSquares
 section OpenMateTransport
 variable (U : Y.ProEt) [hU : IsOpenImmersion U.hom] (n : ℕ)
 
-include hU in
-include hU in
 end OpenMateTransport
 
 end AlgebraicGeometry.Scheme

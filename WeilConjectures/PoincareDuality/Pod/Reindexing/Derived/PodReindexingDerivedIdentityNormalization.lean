@@ -8,6 +8,8 @@ module
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
+set_option linter.privateModule false
+
 /-! # Derived identity normalization
 
 Source: blueprint dual-Tate compatibility, Step 6; localization universal property

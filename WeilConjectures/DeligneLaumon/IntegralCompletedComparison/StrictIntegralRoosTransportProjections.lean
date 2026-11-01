@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.DeligneLaumon.IntegralCompletedComparison.StrictIntegralRoosTransport
 
+set_option linter.privateModule false
+
 /-! # Finite projections of the recoded strict Roos comparison
 
 Source: Stacks Project, sites-modules.tex, Tags 03EK/03EL; proetale.tex, Tag 099N(5).

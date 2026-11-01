@@ -12,6 +12,8 @@ import Mathlib.CategoryTheory.Limits.Shapes.Kernels
 import all WeilConjectures.AlgebraicGeometry.Adic.AdicReductionTriangle
 import WeilConjectures.AlgebraicGeometry.Completed.CompletedIntegralScalarRegular
 
+set_option linter.privateModule false
+
 /-! # The actual ordinary quotient kernel and injective divisibility
 
 Source: Stacks Tags 03D7, 06YP and 079P; the normalized right-exact tensor sequence and evaluation

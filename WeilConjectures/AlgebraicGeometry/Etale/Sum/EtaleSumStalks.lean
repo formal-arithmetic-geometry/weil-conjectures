@@ -8,6 +8,8 @@ module
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
+set_option linter.privateModule false
+
 /-!
 # Geometric stalks of étale sum extension
 
@@ -265,7 +267,6 @@ private noncomputable def presheafIso (F : U.Etaleᵒᵖ ⥤ ModuleCat.{u + 1} A
 open Classical in
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
-omit [Etale f] in
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
@@ -288,11 +289,6 @@ private noncomputable def sheafIso
     (toSheafify X.smallEtaleTopology (presheaf f A F.obj)))).symm ≪≫
       presheafIso f A x F.obj
 
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
 end Etale.SumStalks
 
-open Classical in
 end AlgebraicGeometry

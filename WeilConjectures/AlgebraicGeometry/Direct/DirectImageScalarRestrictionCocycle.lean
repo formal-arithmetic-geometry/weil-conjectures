@@ -8,6 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Fixed.ProEtaleFixedScalarRestrictionDirectImage
 import all WeilConjectures.AlgebraicGeometry.ProEtale.Fixed.ProEtaleFixedScalarRestrictionDirectImage
 
+set_option linter.privateModule false
+
 /-!
 # Coefficient cocycle of the normalized pro-etale derived direct image
 

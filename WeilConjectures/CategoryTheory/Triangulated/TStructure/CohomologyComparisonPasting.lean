@@ -48,28 +48,7 @@ variable {C : Type uC} [Category.{vC} C] [Preadditive C] [HasZeroObject C]
   [HasShift Z ℤ] [∀ n : ℤ, (shiftFunctor Z n).Additive]
   [Pretriangulated Z] [triZ : IsTriangulated Z]
 
-set_option linter.unusedSectionVars false in
-set_option linter.unusedSectionVars false in
 variable (tC : TStructure C) (tD : TStructure D)
   (F : C ⥤ D) [F.CommShift ℤ] [F.IsTriangulated] [hF : F.IsTExact tC tD]
 
-omit triC in
-include triC triD triB in
-include triC triD in
-include triC triD in
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
-include triC triD triB in
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
-include triC in
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
-include triC triD triB triE in
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
-include triC triD triB triE triA triZ in
-include triC triD in
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
 end CategoryTheory.Triangulated.TStructure

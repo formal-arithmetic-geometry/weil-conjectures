@@ -10,6 +10,8 @@ import all WeilConjectures.ProperBaseChange.IntegralCoefficientPresentation.Inte
 import all WeilConjectures.AlgebraicGeometry.Completed.Pullback.CompletedPullbackReductionData
 import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChangeAdjunctionSupplement
 
+set_option linter.privateModule false
+
 /-! # Finite integral coefficient pullback normalization
 
 Source: Stacks Project, sites-modules.tex, Tags 03EK/03EL; proetale.tex, Tag 099N(5).
@@ -209,5 +211,4 @@ private def comparison (n : ℕ) : finiteIntegral l E g n ≅ finiteCompleted l 
 
 attribute [local irreducible] pbcIntegralDatum reductionComparison pullbackComparison
 
-set_option linter.unusedVariables false in
 end WeilConjectures.IntegralCompletedComparison

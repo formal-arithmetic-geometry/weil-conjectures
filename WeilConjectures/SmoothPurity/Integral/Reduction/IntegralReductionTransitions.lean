@@ -20,8 +20,8 @@ The two constructions of this node are the published declarations
 `L_n ⊣ Res_n`, the `.choose` of the published normalized adjunction) and
 `normalizedDVRReductionTransition` (the inverse Hom-adjunction image under `𝔞_m` of
 `η_n` followed by the inverse restriction comparison `e_{m,n}⁻¹`) of
-`WeilConjectures.SmoothPurity.Normalized.NormalizedDVREffectivity`, reexported here unchanged. They are not
-redeclared, so that one definition per notion is kept.
+`WeilConjectures.SmoothPurity.Normalized.NormalizedDVREffectivity`, reexported here unchanged.
+They are not redeclared, so that one definition per notion is kept.
 -/
 
 @[expose] public noncomputable section

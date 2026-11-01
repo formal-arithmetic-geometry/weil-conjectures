@@ -95,6 +95,8 @@ public import Mathlib.CategoryTheory.Monoidal.Ring
 public import Mathlib.CategoryTheory.Adjunction.Limits
 public import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
 
+set_option linter.privateModule false
+
 /-! # Finite Kummer level of the Tate twist
 
 Source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/

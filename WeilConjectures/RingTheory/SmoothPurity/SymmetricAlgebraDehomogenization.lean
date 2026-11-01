@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 public import WeilConjectures.Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 public import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
+
+set_option linter.privateModule false
 /-! # Dehomogenizing a symmetric algebra
 
 Source: Stacks Project, Constructions, Tags 01OA and 01NG.
@@ -25,10 +27,4 @@ local notation "A" => B
 variable (G : ℕ → Submodule R B) [GradedAlgebra G]
 variable (hG : ∀ n, G n = (LinearMap.range (e.toLinearMap.comp (ι R (R × M)))) ^ n)
 local notation "t" => e (ι R (R × M) (1, 0))
-omit [GradedAlgebra G] in
-include hG in
-omit [GradedAlgebra G] in
-include hG in
-include hG in
-include hG in
 end SymmetricAlgebra

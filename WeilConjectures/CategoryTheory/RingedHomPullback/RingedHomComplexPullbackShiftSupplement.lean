@@ -76,6 +76,8 @@ import all WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
 import all WeilConjectures.CategoryTheory.RingedHomUniverses.RingedInternalHomShiftOfUniversesSupplement
 public import WeilConjectures.Algebra.Homology.RingedHomComplexPullbackShift
 
+set_option linter.privateModule false
+
 /-! # Pullback of Hom complexes and signed source shifts
 
 Source: Stacks Project, sites-modules.tex, Tag 0GMX (remark-pullback-internal-hom),
@@ -502,8 +504,6 @@ omit [HasSheafify J AddCommGrpCat.{max c v r}]
 
 attribute [local irreducible] sourceShift
 
-omit [HasSheafify J AddCommGrpCat.{max c v r}]
-  [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}] in
 end OneSite
 
 section TwoSites
@@ -527,9 +527,5 @@ variable [HasSheafify J AddCommGrpCat.{max c v d t r}]
   [HasSheafify K AddCommGrpCat.{max c v d t r}]
   [K.WEqualsLocallyBijective AddCommGrpCat.{max c v d t r}]
 
-omit [HasSheafify J AddCommGrpCat.{max c v d t r}]
-  [J.WEqualsLocallyBijective AddCommGrpCat.{max c v d t r}]
-  [HasSheafify K AddCommGrpCat.{max c v d t r}]
-  [K.WEqualsLocallyBijective AddCommGrpCat.{max c v d t r}] in
 end TwoSites
 end CategoryTheory.RingedHomPullback

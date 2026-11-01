@@ -11,7 +11,8 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryHomology
 /-! # Exact forgetting computes the action on native cohomology
 
 The private composition lemmas adapt the kernel/quotient proof in
-`WeilConjectures.CategoryTheory.DerivedCategory.SmoothPurity.GoodTruncationNormalization` to every degree.
+`WeilConjectures.CategoryTheory.DerivedCategory.SmoothPurity.GoodTruncationNormalization` to every
+degree.
 -/
 
 @[expose] public noncomputable section

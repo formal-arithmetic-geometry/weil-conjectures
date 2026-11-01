@@ -16,7 +16,8 @@ Source: blueprint main-20261015, `sec-six-functors/sk-thm-sf-package/`
 (blueprint: def-sf-sequence-adjoint-shift-interfaces).
 
 The constructions of this node are the published declarations of
-`WeilConjectures.SixFunctors.Supporting.PurSequenceAdjointResolutionShifts`, reexported here unchanged:
+`WeilConjectures.SixFunctors.Supporting.PurSequenceAdjointResolutionShifts`, reexported here
+unchanged:
 `purSequenceShiftedReplacement` (the ordinary shift comparison followed by the shifted given
 replacement map), the left and right shift models `PurSequenceLeftShiftModels` and
 `PurSequenceRightShiftModels` (coherent integer shifts, reduction and total-limit comparison

@@ -28,7 +28,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 attribute [local implicit_reducible] PurCompactSupport.completed
   completedIntegralCommRingSheafUnrestricted
   ordinaryIntegralModulePush ordinaryIntegralPullComplex IntegralOnSlice.Site
-attribute [-instance] OpenFactorCoherence.siteSheafify OpenFactorCoherence.siteLocallyBijective
+attribute [-instance] OpenFactorCoherence.siteLocallyBijective
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall
 attribute [-instance] integralOperationsSiteSmall scalarReductionSourceDerived
   scalarReductionTargetDerived integralOperationsCommHasDerivedCategory

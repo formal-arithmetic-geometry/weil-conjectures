@@ -13,6 +13,8 @@ public import WeilConjectures.Mathlib.Topology.KrullDimension
 import WeilConjectures.AlgebraicGeometry.Fibre.FibreDimensionAfterBaseChange
 import WeilConjectures.AlgebraicGeometry.EquidimensionalOpenLocalDimension
 
+set_option linter.privateModule false
+
 /-! # Pointwise dimension from pure geometric fibres
 
 Source: Stacks Project, Algebra, Tag 00P4; Morphisms, Tag 02FY (1);

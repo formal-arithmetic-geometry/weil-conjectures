@@ -227,5 +227,4 @@ private theorem comparison_eq {U X : Scheme.{u}} (s : U ⟶ X)
     (Adjunction.homEquiv_symm_rightAdjointUniq_hom_app
       (exactDerivedAdjunction (reverseSheafAdjunction Λ s)) (adjunction Λ s) N).symm
 
-set_option linter.unusedSectionVars false in
 end AlgebraicGeometry.ProEtale.ClopenCompositeCounit

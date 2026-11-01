@@ -325,7 +325,7 @@ def nuSingle (R : Type (u + 1)) [CommRing R] (T : Scheme.{u}) :
   Functor.singleFunctorCompLeftDerivedFunctorIso
     (comparisonUpperStar (ModuleCat.{u + 1} R) T)
 
-attribute [local irreducible] nuSingle etSingle proSingle
+attribute [local irreducible] nuSingle proSingle
 
 /-- Ordinary balanced scalar comparison, fixed by the commuting restriction square.
 Both right adjoints restrict the same sections with the same A-action. Consequently
@@ -346,9 +346,7 @@ def scalarSheafIso {A B : Type (u + 1)} [CommRing A] [CommRing B]
 
 attribute [local irreducible] scalarSheafIso
 
-attribute [local irreducible] schemeSheafIso
 
-attribute [local irreducible] schemeIso
 
 /-- The normalized finite-root scalar comparison already specified by its generators.
 The theorem determines its map uniquely: each local root goes to the same unit and
@@ -460,11 +458,10 @@ def shiftIso (R : Type (u + 1)) [CommRing R] (T : Scheme.{u}) (s : ℤ) :
       (comparisonUpperStar (ModuleCat.{u + 1} R) T).leftDerivedFunctorIsoMapDerivedCategory.symm
       (shiftFunctor (DerivedCategory (Pro R T)) s)
 
-attribute [local irreducible] proTwistSheafPullback
 
-attribute [local irreducible] etTensor etTensorRaw proTensor proTensorRaw
+attribute [local irreducible] etTensorRaw proTensor proTensorRaw
 
-attribute [local irreducible] etTwistPullback proTwistPullback
+attribute [local irreducible] proTwistPullback
 
 /-- The localization comparison for the exact site inverse image, on cochain complexes.
 Source: Stacks, Tags 0GLZ and 05RU (blueprint: lem-sp-etale-chart-comparison-isos). -/
@@ -506,10 +503,8 @@ def ScalarModel {A B : Type (u + 1)} [CommRing A] [CommRing B]
 
 attribute [local irreducible] ScalarModel
 
-attribute [local irreducible] TwistNatural
 
-attribute [local irreducible] TwistPullbackLaw
 
-attribute [local irreducible] etId proId etComp proComp
+attribute [local irreducible] proId etComp proComp
 
 end AlgebraicGeometry.ProEtale.EtaleChartComparison

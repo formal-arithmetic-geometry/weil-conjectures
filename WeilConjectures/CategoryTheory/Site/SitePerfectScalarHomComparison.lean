@@ -231,7 +231,6 @@ structure SitePerfectScalarHomData where
 
 variable (M : SitePerfectScalarHomData.{c, v, r, w} J φ)
 
-attribute [local semireducible] SheafOfModules.monoidalCategory in
 end Site
 
 end CategoryTheory

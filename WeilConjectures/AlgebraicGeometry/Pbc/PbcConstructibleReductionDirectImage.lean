@@ -14,6 +14,8 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.Algebra.Divisibility.Units
 import Mathlib.GroupTheory.OrderOfElement
 
+set_option linter.privateModule false
+
 /-! # Canonical constructible reduction cohomology under proper direct image
 Source: blueprint preservation proof, steps 3--4 and 6; Stacks Tags 095U and 0GL0
 (blueprint: lem-weil-pbc-constructible-reduction-direct-image).

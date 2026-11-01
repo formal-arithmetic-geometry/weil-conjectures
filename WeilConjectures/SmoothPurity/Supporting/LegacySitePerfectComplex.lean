@@ -40,5 +40,4 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace WeilConjectures
 
-set_option backward.isDefEq.respectTransparency false in
 end WeilConjectures

@@ -26,11 +26,6 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Sc
 open scoped CategoryTheory.Functor
 namespace WeilConjectures
 
-attribute [local instance 2000] CommRing.toRing in
-attribute [local instance 2000] CommRing.toRing in
-attribute [local instance 2000] CommRing.toRing in
-attribute [local instance 2000] isNoetherian_of_finite in
-attribute [-instance] ModuleCat.MonoidalCategory.instBraidedCategory in
 section InstanceTransport
 open Lean Meta Elab Tactic
 

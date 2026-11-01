@@ -83,8 +83,6 @@ variable {C : Type*} [Category.{u + 1} C] [Abelian C]
   [BraidedCategory D] [MonoidalClosed D] [Abelian.HasFunctorialFlatResolution D]
   (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
   [F.PreservesFlat] [F.IsLeftAdjoint] [F.Monoidal]
-omit [Abelian.HasFunctorialFlatResolution D] [PreservesFiniteLimits F]
-  [PreservesFiniteColimits F] [F.Monoidal] in
 end CategoryTheory.Functor
 
 namespace WeilConjectures.PurityFiniteSetting
@@ -143,14 +141,6 @@ variable (A : Type v) [Category.{u + 1} A] [Abelian A]
   [SymmetricCategory A] [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
   [UpperStarPreservesFlat A] {T S R : Scheme.{u}} (i : T ⟶ S) (g : S ⟶ R)
 
-omit [MonoidalPreadditive A] [Abelian.HasFunctorialFlatResolution A]
-  [UpperStarPreservesFlat A] in
-omit [UpperStarPreservesFlat A] in
-attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint in
-omit [UpperStarPreservesFlat A] in
-attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint in
-attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint in
-attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint in
 end ActionComposition
 
 section ActionOpen
@@ -178,8 +168,6 @@ variable (A : Type v) [Category.{u + 1} A] [Abelian A]
   [SymmetricCategory A] [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
   [UpperStarPreservesFlat A]
 
-omit [UpperStarPreservesFlat A] in
-omit [UpperStarPreservesFlat A] in
 end ActionCertificates
 
 attribute [local instance high] SymmetricCategory.toBraidedCategory
@@ -204,8 +192,6 @@ variable (A : Type v) [Category.{u + 1} A] [Abelian A]
   [SymmetricCategory A] [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
   [UpperStarPreservesFlat A]
 
-omit [UpperStarPreservesFlat A] in
-omit [UpperStarPreservesFlat A] in
 end ActionCertificates
 
 attribute [local instance high] SymmetricCategory.toBraidedCategory

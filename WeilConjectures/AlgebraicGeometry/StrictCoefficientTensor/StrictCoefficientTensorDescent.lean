@@ -256,7 +256,6 @@ structure Descent where
     ∃! α : T ≅ T', ∀ P : CochainComplex (Mod.{c, v, r} J R) ℤ,
       Resolving J R P → α.hom.app (DerivedCategory.Q.obj P) ≫ ε'.app P = ε.app P
 
-attribute [local instance 21000] coefficientCompose
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
