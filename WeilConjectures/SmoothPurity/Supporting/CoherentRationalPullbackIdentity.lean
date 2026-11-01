@@ -51,12 +51,5 @@ variable (L : Type u) [Field L] [Algebra ℚ_[l] L]
 
 end Rationalization
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-attribute [local irreducible] integralIdentityUnit
 
-set_option maxHeartbeats 400000 in
--- The coherence projections and coefficient-size transports need extra elaboration heartbeats.
 end WeilConjectures

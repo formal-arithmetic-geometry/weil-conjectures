@@ -53,8 +53,7 @@ private theorem coefficient_killed
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (n : ℕ) :
     ((l ^ n : ℕ) : Padic.coefficientExtensionRing l E n) = 0 := by
-  let h := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  let h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   have hl : (l : Padic.coefficientExtensionIntegers l E) ∈
       Padic.coefficientExtensionMaximalIdeal l E := by
     apply (h.2.1 _).mpr

@@ -18,6 +18,7 @@ import WeilConjectures.CategoryTheory.Derived.DerivedExactMateSupplement
 import WeilConjectures.CategoryTheory.Exact.ExactLocalizationInverseMate
 import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Unique
+import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.DegreeZero
 
 /-! # Sheaf and derived-unit normalizations of the Cartesian sum mate
 

@@ -78,6 +78,4 @@ private theorem inclusion_comp_inv
     (Functor.mapDerivedCategoryCompIso V W).app K.obj from
     Iso.ext (Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app V W K))
 
-set_option maxHeartbeats 600000 in
--- Keep the large comparison composites folded while matching their components.
 end AlgebraicGeometry.ProEtale

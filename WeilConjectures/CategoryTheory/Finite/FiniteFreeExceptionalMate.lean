@@ -388,8 +388,5 @@ variable {C : Type a} {D : Type b} [Category.{vA} C] [Category.{vB} D]
   [HasDerivedCategory.{w} (Sheaf K (ModuleCat.{max u a b vA vB} A))]
   [HasDerivedCategory.{w} (Sheaf K (ModuleCat.{max u a b vA vB} B))]
 
-set_option linter.unusedVariables false in
-set_option maxHeartbeats 800000 in
--- The long signature compares four derived categories with explicit coefficient transports.
 end Sites
 end CategoryTheory

@@ -43,6 +43,4 @@ private local instance (W : Scheme.{u}) :
     (ProEt.topology W).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
   integralCoefficientAbLocallyBijective.{u, u} W
 
-set_option maxHeartbeats 500000 in
--- Control elaboration of the exact scalar model and its representative equations.
 end WeilConjectures.PodCoefficientDescent

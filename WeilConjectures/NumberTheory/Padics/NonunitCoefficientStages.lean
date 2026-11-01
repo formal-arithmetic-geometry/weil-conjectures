@@ -51,8 +51,7 @@ theorem nonunit_coefficient_stages
       (coefficientExtensionIntegers l E) := by
   let R := coefficientExtensionIntegers l E
   let J := coefficientExtensionMaximalIdeal l E
-  have h := (extension_integers_dvr l E (coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  have h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   let : IsLocalRing R := h.2.2.2.1
   let : IsDiscreteValuationRing R := h.2.2.2.2.2.2.2.1
   have hJ : J = IsLocalRing.maximalIdeal R := IsLocalRing.eq_maximalIdeal h.2.2.2.2.1

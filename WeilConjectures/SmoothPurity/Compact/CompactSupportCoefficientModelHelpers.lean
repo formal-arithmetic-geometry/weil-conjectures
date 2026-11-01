@@ -71,7 +71,5 @@ attribute [local irreducible] Padic.coefficientExtensionIntegers
   Padic.coefficientExtensionIdeal Padic.coefficientExtensionUniformizer
 open CategoryTheory.MonoidalCategory
 
-set_option backward.isDefEq.respectTransparency false in
-attribute [local instance] coefficientSectionModule
 
 end WeilConjectures

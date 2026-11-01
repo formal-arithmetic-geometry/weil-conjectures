@@ -58,11 +58,11 @@ theorem native_adic_restriction_flat :
   intro M hM
   have e : E ⋙ MonoidalCategory.tensorRight M ≅
       MonoidalCategory.tensorRight (R.obj M) ⋙ E :=
-    Functor.isoWhiskerLeft E (NativeAux.tensorIso M).symm ≪≫
+    Functor.isoWhiskerLeft E (BraidedCategory.tensorLeftIsoTensorRight M).symm ≪≫
       ((adj.comp (Mod.ihomAdjunction M)).ofNatIsoRight
         (ProEtale.adicUpperStarIhomIso l f M)).leftAdjointUniq
           ((Mod.ihomAdjunction (R.obj M)).comp adj) ≪≫
-      Functor.isoWhiskerRight (NativeAux.tensorIso (R.obj M)) E
+      Functor.isoWhiskerRight (BraidedCategory.tensorLeftIsoTensorRight (R.obj M)) E
   have : PreservesFiniteLimits (MonoidalCategory.tensorRight M) := hM.2.1
   have : PreservesFiniteColimits (MonoidalCategory.tensorRight M) := hM.2.2
   have : PreservesFiniteLimits (MonoidalCategory.tensorRight (R.obj M) ⋙ E) :=

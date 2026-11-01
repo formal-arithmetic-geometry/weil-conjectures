@@ -34,7 +34,4 @@ open Lean Meta Elab Tactic
 
 end StandingInstanceTransport
 
-set_option maxRecDepth 4096 in
-set_option maxHeartbeats 400000 in
--- Allow the congruence tactic to traverse the two compiled instance-certificate expressions.
 end AlgebraicGeometry.ProEtale

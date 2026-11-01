@@ -85,9 +85,7 @@ theorem finiteComparedInvertibleExponent (P : PurityFiniteSetting.{u})
   classical
   let l := P.coefficients.l
   let E := P.extension
-  have hdvr := (Padic.extension_integers_dvr l E
-    (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
+  have hdvr := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   have hm : (l : Padic.coefficientExtensionIntegers l E) ∈
       Padic.coefficientExtensionMaximalIdeal l E := by
     apply (hdvr.2.1 _).2

@@ -325,7 +325,7 @@ def nuSingle (R : Type (u + 1)) [CommRing R] (T : Scheme.{u}) :
   Functor.singleFunctorCompLeftDerivedFunctorIso
     (comparisonUpperStar (ModuleCat.{u + 1} R) T)
 
-attribute [local irreducible] nuSingle proSingle
+attribute [local irreducible] nuSingle
 
 /-- Ordinary balanced scalar comparison, fixed by the commuting restriction square.
 Both right adjoints restrict the same sections with the same A-action. Consequently
@@ -459,9 +459,7 @@ def shiftIso (R : Type (u + 1)) [CommRing R] (T : Scheme.{u}) (s : ℤ) :
       (shiftFunctor (DerivedCategory (Pro R T)) s)
 
 
-attribute [local irreducible] etTensorRaw proTensor proTensorRaw
 
-attribute [local irreducible] proTwistPullback
 
 /-- The localization comparison for the exact site inverse image, on cochain complexes.
 Source: Stacks, Tags 0GLZ and 05RU (blueprint: lem-sp-etale-chart-comparison-isos). -/
@@ -505,6 +503,5 @@ attribute [local irreducible] ScalarModel
 
 
 
-attribute [local irreducible] proId etComp proComp
 
 end AlgebraicGeometry.ProEtale.EtaleChartComparison

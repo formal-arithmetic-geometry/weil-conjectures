@@ -37,6 +37,9 @@ private abbrev Piece [Input P] (U : X.Opensᵒᵖ) (n : ℕ) : Type u := (P n).v
 private instance gradedMul [Input P] (U : X.Opensᵒᵖ) : GradedMonoid.GMul (Piece (P := P) U) :=
   ⟨fun {m n} a b ↦ (Input.graded (P := P)).mul m n U.unop a b⟩
 
+private instance gradedOne [Input P] (U : X.Opensᵒᵖ) : GradedMonoid.GOne (Piece (P := P) U) :=
+  ⟨(Input.graded (P := P)).unit.val.app U (1 : X.presheaf.obj U)⟩
+
 private instance gradedRing [Input P] (U : X.Opensᵒᵖ) : DirectSum.GCommRing (Piece (P := P) U) where
   mul := fun {m n} ↦ fun a b ↦ (Input.graded (P := P)).mul m n U.unop a b
   one := (Input.graded (P := P)).unit.val.app U (1 : X.presheaf.obj U)

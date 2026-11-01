@@ -87,7 +87,7 @@ universe u
 
 open scoped CategoryTheory.Obj
 
-open CategoryTheory Limits
+open CategoryTheory
 
 open scoped CategoryTheory.Functor
 
@@ -98,6 +98,7 @@ open Scheme
 /-! #### The coefficient ring `E̲`, `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ` -/
 
 namespace ContinuousMapRingObj
+
 
 section Exchange
 
@@ -181,125 +182,6 @@ noncomputable def boundedConstructibleLowerStarOpenImmersionLowerShriekExchange
     (boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeSquareStep ℓ E sq).hom ≫
     boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeCounitStep ℓ E
 
-private lemma exchange_eq_mate (sq : IsPullback p i' j p') :
-    boundedConstructibleLowerStarOpenImmersionLowerShriekExchange ℓ E sq =
-      (mateEquiv (boundedConstructibleUpperStarLowerStarAdjunction ℓ E p)
-        (boundedConstructibleUpperStarLowerStarAdjunction ℓ E p')
-        (TwoSquare.mk _ _ _ _
-          (boundedConstructibleOpenImmersionLowerShriekBaseChangeIso
-            (Profinite.continuousMapRingObj E) ℓ sq).hom)).natTrans := by
-  ext K
-  simp [boundedConstructibleLowerStarOpenImmersionLowerShriekExchange,
-    boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeUnitStep,
-    boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeSquareStep,
-    boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeCounitStep,
-    mateEquiv, Category.assoc]
-
--- This is the open–closed argument of the source library’s étale exchange theorem.
-private theorem exchangeIsIsoOfComplement
-    (sq : IsPullback p i' j p')
-    {C P : Over (Spec (.of k))}
-    [LocallyOfFiniteType C.hom] [QuasiCompact C.hom] [IsSeparated C.hom]
-    [LocallyOfFiniteType P.hom] [QuasiCompact P.hom] [IsSeparated P.hom]
-    (c : C ⟶ Z) [IsClosedImmersion c.left] (r : P ⟶ Z') (q : P ⟶ C)
-    (sqc : IsPullback r q p' c)
-    (hc : Set.range c.left.base = (Set.range j.left.base)ᶜ)
-    [QuasiCompact j.left]
-    [IsIso (boundedConstructibleBaseChange ℓ E sqc.toCommSq)] :
-    IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange ℓ E sq) := by
-  have hj := boundedOpenUnitIsIso (Profinite.continuousMapRingObj E) ℓ j
-  have hi' := boundedOpenUnitIsIso (Profinite.continuousMapRingObj E) ℓ i'
-  have hdisj : Disjoint (Set.range c.left.base) (Set.range j.left.base) := by
-    rw [hc]
-    exact disjoint_compl_left
-  have hdisj' : Disjoint (Set.range r.left.base) (Set.range i'.left.base) := by
-    rw [Set.disjoint_left]
-    rintro _ ⟨a, rfl⟩ ⟨u, hu⟩
-    refine Set.disjoint_left.1 hdisj ⟨q.left.base a, rfl⟩ ⟨p.left.base u, ?_⟩
-    have hw := congrArg Over.Hom.left sq.w
-    have hwc := congrArg Over.Hom.left sqc.w
-    simp only [Over.comp_left] at hw hwc
-    rw [← Scheme.Hom.comp_apply, hw, Scheme.Hom.comp_apply, hu,
-      ← Scheme.Hom.comp_apply, hwc, Scheme.Hom.comp_apply]
-  have point (K : Dᵇc(X'.left)⟦Profinite.continuousMapRingObj E⟧) :
-      IsIso ((boundedConstructibleLowerStarOpenImmersionLowerShriekExchange ℓ E sq).app K) := by
-    let f := (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange ℓ E sq).app K
-    have hopen : IsIso ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ
-        j).map f) := by
-      dsimp only [f]
-      rw [exchange_eq_mate]
-      exact isIso_map_mateEquiv_app_of_isIso
-        (boundedConstructibleUpperStarLowerStarAdjunction ℓ E p)
-        (boundedConstructibleUpperStarLowerStarAdjunction ℓ E p')
-        (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
-          (Profinite.continuousMapRingObj E) ℓ j)
-        (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
-          (Profinite.continuousMapRingObj E) ℓ i')
-        (TwoSquare.mk _ _ _ _
-          (boundedConstructibleOpenImmersionLowerShriekBaseChangeIso
-            (Profinite.continuousMapRingObj E) ℓ sq).hom) K
-    suffices hmap : IsIso ((boundedConstructible _).ι.map f) from
-      isIso_of_reflects_iso f (boundedConstructible _).ι
-    apply (derivedModuleJointIso (Profinite.continuousMapRingObj E) c.left j.left
-      (by rw [hc]; simp)).isIso_of_pairFunctor
-    · refine isIso_of_source_target_iso_zero _
-        (derivedPullbackExtensionZero (Profinite.continuousMapRingObj E) j.left c.left hdisj
-          ((boundedConstructibleLowerStar ℓ E p).obj K).obj).isoZero
-        (IsZero.isoZero ?_)
-      have hN : IsZero ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ r).obj
-          ((boundedConstructibleOpenImmersionLowerShriek (Profinite.continuousMapRingObj E) ℓ
-            i').obj K)) :=
-        IsZero.of_full_of_faithful_of_isZero (boundedConstructible _).ι _
-          (derivedPullbackExtensionZero (Profinite.continuousMapRingObj E) i'.left r.left hdisj'
-            K.obj)
-      have htarget : IsZero ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ
-          c).obj ((boundedConstructibleLowerStar ℓ E p').obj
-            ((boundedConstructibleOpenImmersionLowerShriek (Profinite.continuousMapRingObj E) ℓ
-              i').obj K))) :=
-        ((boundedConstructibleLowerStar ℓ E q).map_isZero hN).of_iso
-          (asIso ((boundedConstructibleBaseChange ℓ E sqc.toCommSq).app
-            ((boundedConstructibleOpenImmersionLowerShriek (Profinite.continuousMapRingObj E) ℓ
-              i').obj K)))
-      exact (boundedConstructible _).ι.map_isZero htarget
-    · exact (NatIso.isIso_map_iff
-        (boundedConstructibleUpperStarCompatibility (Profinite.continuousMapRingObj E) ℓ j) f).1 (by
-          change IsIso ((boundedConstructible _).ι.map
-            ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ j).map f))
-          infer_instance)
-  exact NatIso.isIso_of_isIso_app _
-
-private theorem exchangeIsIsoOfProperBC
-    [IsProper p'.left] (sq : IsPullback p i' j p')
-    (hBC : ∀ {C P : Over (Spec (.of k))}
-      [LocallyOfFiniteType C.hom] [QuasiCompact C.hom] [IsSeparated C.hom]
-      [LocallyOfFiniteType P.hom] [QuasiCompact P.hom] [IsSeparated P.hom]
-      (c : C ⟶ Z) (r : P ⟶ Z') (q : P ⟶ C) (sqc : IsPullback r q p' c),
-      IsIso (boundedConstructibleBaseChange ℓ E sqc.toCommSq)) :
-    IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange ℓ E sq) := by
-  let C : Over (Spec (.of k)) := Over.mk (j.left.closedComplement ≫ Z.hom)
-  let c : C ⟶ Z := Over.homMk j.left.closedComplement
-  have : IsClosedImmersion c.left := inferInstanceAs (IsClosedImmersion j.left.closedComplement)
-  have : LocallyOfFiniteType C.hom := by dsimp [C]; infer_instance
-  have : QuasiCompact C.hom := by dsimp [C]; infer_instance
-  have : IsSeparated C.hom := by dsimp [C]; infer_instance
-  let P : Over (Spec (.of k)) :=
-    Over.mk (pullback.snd p'.left c.left ≫ C.hom)
-  let r : P ⟶ Z' := Over.homMk (pullback.fst p'.left c.left) (by
-    change pullback.fst p'.left c.left ≫ Z'.hom =
-      pullback.snd p'.left c.left ≫ C.hom
-    rw [← Over.w p', pullback.condition_assoc, Over.w c])
-  let q : P ⟶ C := Over.homMk (pullback.snd p'.left c.left)
-  have : LocallyOfFiniteType P.hom := by dsimp [P]; infer_instance
-  have : QuasiCompact P.hom := by dsimp [P]; infer_instance
-  have : IsSeparated P.hom := by dsimp [P]; infer_instance
-  have sqc : IsPullback r q p' c :=
-    IsPullback.of_map (Over.forget _) (Over.OverMorphism.ext pullback.condition)
-      (IsPullback.of_hasPullback p'.left c.left)
-  have := hBC c r q sqc
-  have : QuasiCompact (j.left ≫ Z.hom) := by rw [Over.w]; infer_instance
-  have : QuasiCompact j.left := QuasiCompact.of_comp j.left Z.hom
-  exact exchangeIsIsoOfComplement ℓ E sq c r q sqc j.left.range_closedComplement
-
 end Exchange
 
 end ContinuousMapRingObj
@@ -307,6 +189,7 @@ end ContinuousMapRingObj
 /-! #### The coefficient ring `𝒪̲_E`, `E ⊆ ℚ̄_ℓ` a finite extension of `ℚ_ℓ` -/
 
 namespace PadicIntegersRingObj
+
 
 section Exchange
 
