@@ -10,7 +10,9 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoeffici
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralReductionConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReadingReductionTranspose
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReadingReductionUpperStar
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.UpperStarComapCube
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.UpperStarDerived
+public import WeilConjectures.SmoothPurity.OrientationTransitionUpperStarTransition
 
 /-!
 # The reduction square for the pullbacks: the cube
@@ -116,8 +118,8 @@ lemma finiteCoefficientModEquivalence_upperStar_comap_cube
       (ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} T)) f).map
         ((finiteCoefficientModEquivalenceComapIso Y ρ).hom.app N) ≫
       (upperStarRestrictScalarsIso ρ.ulift f).hom.app
-        ((finiteCoefficientModEquivalence Y T').functor.obj N) := by
-  sorry
+        ((finiteCoefficientModEquivalence Y T').functor.obj N) :=
+  map_comapUpperStarIso_symm_hom_app_comp_finiteCoefficientModEquivalenceComapIso_hom_app f ρ N
 
 /-- **The comparison of the finite-coefficient models, the derived pullbacks and the
 restrictions of scalars form a commutative cube**: for `ρ : T →+* T'`, the commutations of the
@@ -193,6 +195,8 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 set_option synthInstance.maxHeartbeats 400000 in
 -- The derived pullback over `𝒪_E ⧸ ℓⁿ⁺¹` needs a slow instance search (monoidal structure on
 -- graded objects for the K-flat resolutions).
+set_option maxHeartbeats 1000000 in
+-- elaborating this statement unifies large composites of derived functors
 /-- **The condensed transition commutes with the derived pullbacks**: the condensed transition
 `red_{n+1} K ⟶ Res((𝒪_E ⧸ ℓⁿ) ⊗ᴸ red_{n+1} K) ≅ Res(red_n K)` (the unit of the derived extension
 of scalars along `𝒪_E ⧸ ℓⁿ⁺¹ ⟶ 𝒪_E ⧸ ℓⁿ`, followed by
@@ -229,6 +233,18 @@ lemma leftDerivedUpperStar_map_unit_app_comp_eq
         (Mod.comap (integersModPowTransition Z.left ℓ E n)).mapDerivedCategory.map
           ((boundedConstructibleIntegersModPowReductionTransitionIso ℓ E n Z.left).hom.app
             ((boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E) ℓ f).obj M)) := by
-  sorry
+  exact map_unit_app_comp_map_comp_eq rfl rfl
+    (upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app
+      (Profinite.padicIntegersRingObjToIntegersModPow ℓ E (n + 1)) f.left)
+    (upperStar_map_unit_comp_derivedComapLeftDerivedUpperStarIso_hom_app
+      (Profinite.padicIntegersRingObjToIntegersModPow ℓ E n) f.left)
+    (map_mapDerivedCategoryComapCompIso_inv_app_comp_derivedComapLeftDerivedUpperStarIso _ _ _
+      f.left (integersModPowReduction_comp_integersModPowTransition Y.left ℓ E n)
+      (integersModPowReduction_comp_integersModPowTransition Z.left ℓ E n))
+    (boundedConstructibleIntegersModPowReductionTransitionIso_hom_app ℓ E n Y.left M)
+    (boundedConstructibleIntegersModPowReductionTransitionIso_hom_app ℓ E n Z.left _)
+    rfl rfl rfl rfl rfl rfl
+    (boundedConstructibleUpperStarIntegersModPowReductionIso_inv_app_hom ℓ E (n + 1) f M)
+    (boundedConstructibleUpperStarIntegersModPowReductionIso_inv_app_hom ℓ E n f M)
 
 end AlgebraicGeometry.ProEtale.CondensedRing

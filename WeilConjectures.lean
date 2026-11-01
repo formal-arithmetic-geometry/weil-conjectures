@@ -15407,6 +15407,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColim
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimitMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.UpperShriekCompatibility
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.UpperShriekCompatibilityProper
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ComapUpperStarIsoComp
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ConstructibleDerivedAdicComplete
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ConstructibleEmbedding
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ConstructibleNakayama
@@ -15687,6 +15688,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.Scalars
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.StrictlyHenselianBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.UpperStar
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.UpperStarComapCube
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.UpperStarCompCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.UpperStarDerived
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FinitelyPresentedStalk
@@ -15917,6 +15919,7 @@ public import WeilConjectures.SmoothPurity.OrientationTransitionUpperShriek
 public import WeilConjectures.SmoothPurity.OrientationTransitionUpperStar
 public import WeilConjectures.SmoothPurity.OrientationTransitionUpperStarCube
 public import WeilConjectures.SmoothPurity.OrientationTransitionUpperStarSquare
+public import WeilConjectures.SmoothPurity.OrientationTransitionUpperStarTransition
 public import WeilConjectures.SmoothPurity.OrientationUnique
 public import WeilConjectures.SmoothPurity.SmoothImageFactor
 public import WeilConjectures.SmoothPurity.TateTwistBoundedConstructible
