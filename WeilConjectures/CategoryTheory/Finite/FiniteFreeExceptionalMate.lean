@@ -182,7 +182,7 @@ private theorem exceptionalOrdinaryBasis
     intro U
     have : IsIso (biproduct.desc fun i ↦ ((CategoryTheory.evaluation _ _).obj U).map (ψ i)) :=
       hU U
-    exact Functor.isIso_map_biproductDesc ((CategoryTheory.evaluation _ _).obj U) ψ
+    exact (Functor.isIso_map_biproductDesc ((CategoryTheory.evaluation _ _).obj U) ψ).2 this
   have he : (biproduct.desc fun i ↦ (sheafToPresheaf _ _).map
       ((Sheaf.adjunction J (ModuleCat.extendRestrictScalarsAdj (algebraMap A B))).unit.app F ≫
         (sheafCompose J
@@ -210,10 +210,11 @@ private theorem exceptionalOrdinaryBasis
             ((basis i : B) • 𝟙 _))) := by
     have : IsIso (biproduct.desc ψ ≫ t) := inferInstance
     rwa [← he] at this
-  have := Functor.isIso_map_biproductDesc (sheafToPresheaf _ _) (φ := fun i ↦
+  have := Functor.isIso_map_biproductDesc (sheafToPresheaf _ _) (g := fun i ↦
       (Sheaf.adjunction J (ModuleCat.extendRestrictScalarsAdj (algebraMap A B))).unit.app F ≫
         (sheafCompose J
           (ModuleCat.restrictScalars.{max u a vA} (algebraMap A B))).map ((basis i : B) • 𝟙 _))
+    |>.2 inferInstance
   exact isIso_of_reflects_iso _ (sheafToPresheaf _ _)
 
 private theorem exceptionalDerivedUnit
@@ -279,7 +280,7 @@ private theorem exceptionalDerivedBasis
             (U.mapHomologicalComplex (.up ℤ)).map (coeff i • 𝟙 _))) := by
         rw [e]
         exact h (K.X n)
-      exact Functor.isIso_map_biproductDesc (HomologicalComplex.eval _ _ n) _
+      exact (Functor.isIso_map_biproductDesc (HomologicalComplex.eval _ _ n) _).2 this
     exact HomologicalComplex.Hom.isIso_of_components _
   have hQ (K : CochainComplex X ℤ) :
       IsIso (biproduct.desc fun i : Fin r ↦ d.unit.app (DerivedCategory.Q.obj K) ≫
