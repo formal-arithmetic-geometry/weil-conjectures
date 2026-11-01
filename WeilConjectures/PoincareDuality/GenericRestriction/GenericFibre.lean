@@ -70,7 +70,49 @@ theorem isIso_ihomUpperStarComparison_of_isPullback (X : Over (Spec (.of k)))
     (hK : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left) K)
     (hM : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left) M) :
     IsIso (ihomUpperStarComparison (Profinite.padicAlgClRingObj ℓ) g K M) := by
-  sorry
+  let := φ.toAlgebra
+  have hchar : ringChar (FractionRing (MvPolynomial (ULift.{u} (Fin 1)) k)) = ringChar k :=
+    (Algebra.ringChar_eq k _).symm
+  have : Fact (ringChar (FractionRing (MvPolynomial (ULift.{u} (Fin 1)) k))).Prime := by
+    rw [hchar]
+    infer_instance
+  have : Fact (ringChar (FractionRing (MvPolynomial (ULift.{u} (Fin 1)) k)) ≠ ℓ) := by
+    rw [hchar]
+    infer_instance
+  have : LocallyOfFiniteType (b ≫ 𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k)) := by
+    rw [hb]
+    infer_instance
+  have : QuasiCompact (b ≫ 𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k)) := by
+    rw [hb]
+    infer_instance
+  have : IsSeparated (b ≫ 𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k)) := by
+    rw [hb]
+    infer_instance
+  have : LocallyOfFiniteType b :=
+    locallyOfFiniteType_of_comp b (𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k))
+  have : QuasiCompact b :=
+    QuasiCompact.of_comp b (𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k))
+  have : IsSeparated b :=
+    IsSeparated.of_comp b (𝔸(ULift.{u} (Fin 1); Spec (.of k)) ↘ Spec (.of k))
+  obtain ⟨g₁, rfl, sq₁⟩ : ∃ g₁ : X' ⟶ pullback b (affineLineGenericPoint k),
+      g₁ ≫ pullback.fst _ _ = g ∧
+        IsPullback g₁ b' (pullback.snd b (affineLineGenericPoint k))
+          (Spec.map (CommRingCat.ofHom φ)) := by
+    refine ⟨pullback.lift g (b' ≫ Spec.map (CommRingCat.ofHom φ)) (by simpa using sq.w),
+      pullback.lift_fst _ _ _, IsPullback.of_right ?_ (pullback.lift_snd _ _ _)
+        (IsPullback.of_hasPullback _ _)⟩
+    rwa [pullback.lift_fst]
+  have : LocallyOfFiniteType (Over.mk (pullback.snd b (affineLineGenericPoint k))).hom :=
+    inferInstanceAs (LocallyOfFiniteType (pullback.snd b (affineLineGenericPoint k)))
+  have : QuasiCompact (Over.mk (pullback.snd b (affineLineGenericPoint k))).hom :=
+    inferInstanceAs (QuasiCompact (pullback.snd b (affineLineGenericPoint k)))
+  have : IsSeparated (Over.mk (pullback.snd b (affineLineGenericPoint k))).hom :=
+    inferInstanceAs (IsSeparated (pullback.snd b (affineLineGenericPoint k)))
+  refine isIso_ihomUpperStarComparison_comp _ _ _ inferInstance ?_
+  exact isIso_ihomUpperStarComparison_of_fieldExtension ℓ
+    (Over.mk (pullback.snd b (affineLineGenericPoint k))) sq₁ _ _
+    (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ _ hK)
+    (boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ _ _ hM)
 
 section BoundedConstructible
 
@@ -95,7 +137,12 @@ theorem isIso_nearbyDualityMap_upperStarOfMap_id_of_isIso {P : Over (Spec (.of k
     IsIso (Verdier.nearbyDualityMap (fun A B ↦ Functor.LaxMonoidal.μ
       (boundedConstructibleUpperStarOfMap ℓ (X := P) (Y := P') g) A B)
       (𝟙 ((boundedConstructibleUpperStarOfMap ℓ g).obj N)) A) := by
-  sorry
+  rw [Verdier.nearbyDualityMap_id_eq_ihomComparison]
+  have : IsIso ((boundedConstructible _).ι.map ((Functor.LaxMonoidal.ihomComparison
+      (boundedConstructibleUpperStarOfMap ℓ (X := P) (Y := P') g) A).natTrans.app N)) := by
+    rw [ι_map_ihomComparison_upperStarOfMap_app]
+    exact h
+  exact isIso_of_reflects_iso _ (boundedConstructible _).ι
 
 end BoundedConstructible
 

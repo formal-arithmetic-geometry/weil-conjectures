@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.PoincareDuality.GenericRestriction.GenericFibre
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBaseSliceInputs
+public import WeilConjectures.TraceFormula.Specialization.SliceSpecialPullback
 
 /-!
 
@@ -70,7 +71,16 @@ theorem isIso_closedHomComparison_sliceSpecialUpperStar
     IsIso (Verdier.nearbyDualityMap
       (Functor.LaxMonoidal.μ (sliceSpecialUpperStar (traitSliceCoord k') ℓ h hb))
       (𝟙 ((sliceSpecialUpperStar (traitSliceCoord k') ℓ h hb).obj (dualizingComplex ℓ X'))) A) := by
-  sorry
+  have hsq := isPullback_sliceSpecialMap_traitSlicePoint (traitSliceCoord k') h.isTraitModelOver hb
+  rw [traitSlicePoint_eq_comp_affineLineGenericPoint (transcendental_traitSliceCoord k')] at hsq
+  have hiso := isIso_ihomUpperStarComparison_of_isPullback ℓ X'
+    (specialCoordinate h.isTraitModelOver b hb) (specialCoordinate_over _ _ _)
+    (transcendentalFractionLift (transcendental_traitSliceCoord k')) hsq A.obj
+    (dualizingComplex ℓ X').obj A.property (dualizingComplex ℓ X').property
+  have := isIso_nearbyDualityMap_upperStarOfMap_id_of_isIso ℓ (P := X')
+    (P' := baseChangeSpecial b (traitSlice (traitSliceCoord k')))
+    (sliceSpecialMap _ h.isTraitModelOver hb) (dualizingComplex ℓ X') A hiso
+  exact this
 
 /-- **The pullback to the base of a generic slice commutes with internal Hom** (blueprint
 `det-pd-generic-closed-hom` (2), on the generic fibres): the comparison
