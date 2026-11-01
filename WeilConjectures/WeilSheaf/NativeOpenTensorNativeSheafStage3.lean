@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 public import WeilConjectures.CategoryTheory.Native.NativeOpenTensorDescentData
 import all WeilConjectures.WeilSheaf.Native.Open.NativeOpenTensorSheafComparisons
+public import WeilConjectures.WeilSheaf.Native.Open.NativeOpenTensorExtensionDescent
 
 /-! Native balanced sheaf restriction comparison.
 (blueprint: new-sf-native-open-tensor-sheaf-stage3)
@@ -60,5 +61,17 @@ s.sheafRestriction M N, and hm.sheafRestriction gives the HEq with m.sheafRestri
 theorem nativeSheafComparisonStage3 (s : NativeOpenTensorData k₀ l j)
     (m : OpenTensorDescentModels (nativeOpenTensorDescentInput k₀ l j))
     (hm : NativeOpenTensorModelsCompatibility k₀ l j s m) :
-    Nonempty (SheafData k₀ l j s m) := by sorry
+    Nonempty (SheafData k₀ l j s m) := by
+  refine ⟨?_⟩
+  delta SheafData
+  refine { sr := sheafRestrictionIso k₀ l j s, hs := ?_ }
+  apply hm.sheafRestriction.trans
+  apply Function.hfunext rfl
+  intro M M' hM
+  cases hM
+  apply Function.hfunext rfl
+  intro N N' hN
+  cases hN
+  exact (native_restriction_components k₀ l j s M N).symm
+
 end AlgebraicGeometry.ProEtaleWeilSheaf

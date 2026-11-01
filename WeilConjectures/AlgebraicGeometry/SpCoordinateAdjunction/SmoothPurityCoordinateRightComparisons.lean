@@ -95,6 +95,26 @@ structure PullTwist (b : SpTowerShriek.Base l E)
               (wT.tower d) ≪≫
                 (DerivedCategory.singleFunctor (SpTowerShriek.S l E X) 0).mapIso ordinary)))
 
+/-- Finite Kummer identification of the actual ell-power line, fixed by the root
+projection and multiplication of the two coefficient scalars. The ramification
+transport is Base.ideals. Source: Local pairs, finite Kummer identification
+(blueprint: def-sp-coordinate-right-comparisons). -/
+structure RootLines (T : Scheme.{u}) where
+  iso : ∀ n : ℕ, spEllTwistOne l E T n ≅ SpTowerClasses.finiteLine l E T n
+  normalized : ∀ (n : ℕ) (U : T.ProEtᵒᵖ)
+    (a : (SpTowerShriek.B l E T n).obj.obj U)
+    (b : (purTwistIntegralConstant T l E).obj.obj U)
+    (x : (purTwistZlOne T l).obj.obj U),
+    (iso n).hom.val.app U
+      (SheafOfModules.scalarExtensionSection.{u + 1, u, u + 1, u + 1}
+        (spEllTwistQuotient l E T n) (purTwistIntegralOne T l E) U a
+          (purTwistIntegralTensor T l E U b x)) =
+      Scheme.tateFiniteTensor T l (SpTowerClasses.FiniteRing l E n) n
+        (SpTowerClasses.finiteScalar l E n) U.unop
+        (a * (spEllTwistQuotient l E T n).hom.app U b)
+        ((limit.π (proEtaleRootsOfUnityTower T l (Fact.out : l.Prime))
+          (op n)).hom.app U x)
+
 /-- Evaluate the ordinary adjunct of a line pullback in the specified finite-line
 coordinates. This definition uses the actual ordinary adjunction, before deriving.
 Source: strict Tate pullback (blueprint: def-sp-coordinate-right-comparisons). -/

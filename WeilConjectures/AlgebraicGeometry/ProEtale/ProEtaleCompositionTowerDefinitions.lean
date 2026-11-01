@@ -126,6 +126,20 @@ def towerGamma {H T V S : Scheme.{u}} (b : H ⟶ T) (i : V ⟶ S)
     (ModuleCat.{u + 1} Λ) i).mapDerivedCategoryAdjunction).homEquiv _ _).symm
       (inv (towerLambda Λ b i r p w N))
 
+/-- E is the unique open-extension compositor conjugate to composite restriction.
+Source: Construction, final open compositor
+(blueprint: lem-trf-proetale-composition-tower-normalization). -/
+def towerOpenComposition {U H T : Scheme.{u}} (j : U ⟶ H) (b : H ⟶ T)
+    [IsOpenImmersion j] [IsOpenImmersion b] :
+    towerJ Λ j ⋙ towerJ Λ b ≅ towerJ Λ (j ≫ b) :=
+  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    Functor.mapDerivedCategoryNatIso
+      (((openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j).comp
+        (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) b)).leftAdjointUniq
+          ((openImmersionLowerShriekUpperStarAdjunction
+            (ModuleCat.{u + 1} Λ) (j ≫ b)).ofNatIsoRight
+              (upperStarComp (ModuleCat.{u + 1} Λ) j b)))
+
 /-- Canonical change of candidate on the full etale-origin class. Transport the
 canonical etale common-refinement comparison through the named site comparisons,
 then descend it uniquely along the etale-origin equivalence. This is not a choice
@@ -176,5 +190,14 @@ def towerOriginComposition [Finite Λ] {U V W : Scheme.{u}}
     (originCompositionAmbient Λ h f).hom.app O ≫
     (towerCandidateComparison Λ (HasCompactification.compactification (h ≫ f))
       (d.comp e)).hom.app O
+
+/-- Equality transport for open extension, used with bj=a.
+Source: Construction, compatible triangle
+(blueprint: lem-trf-proetale-composition-tower-normalization). -/
+def towerOpenCongr {X Y : Scheme.{u}} {v v' : X ⟶ Y}
+    [IsOpenImmersion v] [IsOpenImmersion v'] (w : v = v') :
+    towerJ Λ v ≅ towerJ Λ v' := by
+  subst v'
+  exact Iso.refl _
 
 end AlgebraicGeometry.ProEtale

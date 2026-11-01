@@ -51,10 +51,21 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing.CohomologyTransport
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
+/-- The ambient category from the recorded ordinary-derived convention.
+Source: blueprint, derived categories of condensed modules.
+(blueprint: lem-weil-condensed-isomorphism-cohomology-transport) -/
+abbrev D (T : Scheme.{u}) := DerivedCategory
+  (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))
+
 /-- Published derived tensor inverse image, retaining its canonical coefficient map.
 Source: blueprint, module-derived push/pull.
 (blueprint: lem-weil-condensed-isomorphism-cohomology-transport) -/
 abbrev L {T U : Scheme.{u}} (f : T ⟶ U) := moduleObjectDerivedPullback Λ f
+
+/-- Published total right derived direct image.
+Source: blueprint, module-derived push/pull.
+(blueprint: lem-weil-condensed-isomorphism-cohomology-transport) -/
+abbrev R {T U : Scheme.{u}} (f : T ⟶ U) := moduleObjectDerivedPushforward Λ f
 
 /-- The actual scalar map Λ(*) → Γ(T,Λ_T), induced by the strong monoidal p_T^*.
 Source: blueprint, pullback from the point and scalar sections.
@@ -96,6 +107,15 @@ def square {T' T U' U : Scheme.{u}} (h : T' ⟶ T) (a' : T' ⟶ U')
   (leftDerivedUpperStarComp Λ a' b).symm ≪≫
     eqToIso (congrArg (fun f : T' ⟶ U ↦ L Λ f) w.symm) ≪≫
     leftDerivedUpperStarComp Λ h a
+
+/-- Canonical direct-image exchange, with no arbitrary base-change hypothesis.
+Source: the displayed adjoint in the node.
+(blueprint: lem-weil-condensed-isomorphism-cohomology-transport) -/
+def ordinary {T' T U' U : Scheme.{u}} (h : T' ⟶ T) (a' : T' ⟶ U')
+    (a : T ⟶ U) (b : U' ⟶ U) (w : h ≫ a = a' ≫ b) :
+    R Λ a ⋙ L Λ b ⟶ L Λ h ⋙ R Λ a' :=
+  Adjunction.exchangeRight (derivedUpperStarLowerStarAdjunction Λ a)
+    (derivedUpperStarLowerStarAdjunction Λ a') (square Λ h a' a b w)
 
 /-- A semilinear isomorphism square with precisely the geometric hypotheses of the node.
 The isomorphisms are in schemes, not in Over k.

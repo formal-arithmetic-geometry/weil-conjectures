@@ -6,6 +6,10 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.CategoryTheory.Native.NativeOpenTensorDescentData
+public import WeilConjectures.CategoryTheory.Derived.DerivedResolvingPairRestriction
+public import WeilConjectures.WeilSheaf.Native.NativeTensorAcyclicTestComparison
+public import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRingedBridge
+public import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRingedKFlatResolution
 
 /-! Fully faithful restriction on native K-flat pairs.
 (blueprint: new-sf-native-open-tensor-pair-restriction-stage3) -/
@@ -91,6 +95,31 @@ With this resolution property, derivedResolvingPairRestriction for the predicate
 NativeIsKFlat on Z gives the fully faithful precomposition. -/
 theorem nativePairRestrictionStage3 :
     Nonempty (NativePairRestrictionData k₀ l j) := by
-  sorry
+  let T := nativeTensorBifunctor k₀ l Z
+  let : T.Additive := by
+    constructor
+    intro A B f g
+    apply NatTrans.ext
+    funext N
+    exact (nativeTensorBifunctor_flip_obj_additive k₀ l Z N).map_add
+  let : ∀ M, (T.obj M).Additive := fun M ↦
+    (tensorIhomAdjunction k₀ l Z M).left_adjoint_additive
+  let adj : T ⊣₂ ihomBifunctor k₀ l Z :=
+    { adj := tensorIhomAdjunction k₀ l Z
+      unit_whiskerRight_map := by
+        intro A B f
+        apply NatTrans.ext
+        funext P
+        exact (unit_conjugateEquiv_symm
+          (tensorIhomAdjunction k₀ l Z B) (tensorIhomAdjunction k₀ l Z A)
+          ((ihomBifunctor k₀ l Z).map f.op) P).symm }
+  obtain ⟨b⟩ := native_weil_tensor_ringed_bridge k₀ l Z
+  obtain ⟨ρ, ε, hρ, hε⟩ := native_weil_tensor_ringed_kflat_resolution T b adj
+  obtain ⟨ff⟩ := derivedResolvingPairRestriction
+    (DerivedCategory (ProEtaleWeilSheaf k₀ l U)) (NativeIsKFlat k₀ l Z) (by
+      intro K
+      exact ⟨ρ.obj K, ε.app K,
+        native_tensor_acyclic_test_kflat k₀ l Z _ (hρ K), hε K⟩)
+  exact ⟨⟨ff⟩⟩
 
 end AlgebraicGeometry.ProEtaleWeilSheaf

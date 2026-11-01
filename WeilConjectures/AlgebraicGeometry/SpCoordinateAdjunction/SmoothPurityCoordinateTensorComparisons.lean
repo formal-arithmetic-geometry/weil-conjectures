@@ -66,6 +66,11 @@ Source: Tate factors in Local pairs (blueprint: def-sp-coordinate-tate-tensor-co
 abbrev line {T : Scheme.{u}} (w : SpChartAdmissibility.Twists l E T) (r : ℕ) :=
   (DerivedCategory.singleFunctor (SpTowerShriek.S l E T) 0).obj (w.tower r)
 
+/-- The single complex representing that same strict line.
+Source: termwise Tate construction (blueprint: def-sp-coordinate-tate-tensor-comparisons). -/
+abbrev lineComplex {T : Scheme.{u}} (w : SpChartAdmissibility.Twists l E T) (r : ℕ) :=
+  (CochainComplex.singleFunctor (SpTowerShriek.S l E T) 0).obj (w.tower r)
+
 /-- The canonical total-complex shift in the first tensor variable, with the same
 coefficient-size instances as the recorded tensor model. Source: Local pairs,
 addition of shifts (blueprint: def-sp-coordinate-tate-tensor-comparisons). -/

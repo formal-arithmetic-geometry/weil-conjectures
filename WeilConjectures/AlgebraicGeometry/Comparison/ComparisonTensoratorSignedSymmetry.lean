@@ -70,6 +70,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 import WeilConjectures.CategoryTheory.RingedSiteModules
 import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategoryMonoidal
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Braided
+public import WeilConjectures.CategoryTheory.Monoidal.Braided.Adjunction
 
 /-! # Etale to pro-etale comparison preserves signed symmetry
 
@@ -86,6 +89,11 @@ universe u
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 
 namespace AlgebraicGeometry.ProEtale
+
+private theorem canonical_symmetry_hom (J K : _root_.DerivedCategory C) :
+    ((_root_.DerivedCategory.canonicalTensorSymmetry C).hom.app J).app K =
+      (derivedTensorKoszulSymmetry C J K).hom := by
+  rfl
 
 /-- The etale-to-pro-etale comparison tensorator commutes with the signed derived
 symmetries.  This is the localization of the signed total-complex exchange square.
