@@ -236,7 +236,7 @@ private theorem boundedConstructible_torBounds
     exact ⟨hK, min a b - 1, b,
       hcomplex K (min a b) b (min_le_right _ _) hK ⟨ha', hb⟩⟩
 
-private theorem ordinary_localModel_iff (A : Type u) [CommRing A]
+private theorem ordinary_localModel_iff (A : Type u) [CommRing A] [Finite A]
     (T : Scheme.{u})
     (M : Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1} A))) :
     FiniteDiscreteOrdinary.ordinaryLocalModel A T M ↔
@@ -244,7 +244,7 @@ private theorem ordinary_localModel_iff (A : Type u) [CommRing A]
   constructor
   · rintro ⟨C, hC⟩
     refine ⟨ULift.{u + 1} C.I₀, fun i ↦ C.X i.down, fun i ↦ C.f i.down, ?_,
-      fun i ↦ hC i.down⟩
+      fun i ↦ let ⟨P, _, e⟩ := hC i.down; ⟨P, Module.Finite.of_finite, e⟩⟩
     convert C.mem₀ using 1
     apply le_antisymm
     · rintro V f ⟨i⟩
@@ -258,9 +258,10 @@ private theorem ordinary_localModel_iff (A : Type u) [CommRing A]
       unfold Scheme.proetalePrecoverage
       infer_instance
     exact ⟨C.restrictIndexOfSmall.{u}, fun i ↦
-      h (Precoverage.ZeroHypercover.Small.restrictFun C i)⟩
+      let ⟨P, _, e⟩ := h (Precoverage.ZeroHypercover.Small.restrictFun C i)
+      ⟨P, Module.finite_of_finite (ULift.{u + 1} A), e⟩⟩
 
-private theorem ordinary_constructible_iff (A : Type u) [CommRing A]
+private theorem ordinary_constructible_iff (A : Type u) [CommRing A] [Finite A]
     (T : Scheme.{u}) [CompactSpace T] [QuasiSeparatedSpace T]
     (M : Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1} A))) :
     FiniteDiscreteOrdinary.ordinaryConstructible A T M ↔
