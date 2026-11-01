@@ -20,6 +20,7 @@ import all WeilConjectures.AlgebraicGeometry.ContinuousCoefficientCommRing
 import all WeilConjectures.AlgebraicGeometry.ContinuousCoefficientUniverse
 import all Mathlib.Topology.Category.Profinite.EffectiveEpi
 import all WeilConjectures.CategoryTheory.RingObjects.ContinuousMap
+import WeilConjectures.AlgebraicGeometry.ContinuousIntegralPushComparison
 import all Mathlib.Condensed.TopComparison
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
 import all Mathlib.Topology.Algebra.Ring.Ideal

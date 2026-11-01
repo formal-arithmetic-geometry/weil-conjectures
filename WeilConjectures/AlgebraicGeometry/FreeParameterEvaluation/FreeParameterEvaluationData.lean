@@ -32,14 +32,6 @@ namespace AlgebraicGeometry.ProEtale.FreeParameterEvaluation
 
 variable (R : Profinite.CondensedRing.{u}) [IsCommMonObj R.X]
 
-/-- The recorded internal condensed module category.
-Source: HRS Section 3 (blueprint: def-sfb-free-parameter-evaluation-data). -/
-abbrev PointModules := Profinite.CondensedAction.Modules R
-
-/-- The recorded internal modules on the small pro-etale site.
-Source: HRS Section 3 (blueprint: def-sfb-free-parameter-evaluation-data). -/
-abbrev Modules (X : Scheme.{u}) := ModuleObjectRingedComparison.Internal R.X X
-
 /-- The recorded free module on h_P.
 Source: Stacks 08J7 (blueprint: def-sfb-free-parameter-evaluation-data). -/
 abbrev freeParameter (P : Profinite.{u}) := ProfiniteFreeSlice.freeParameter R.X P
@@ -51,14 +43,6 @@ abbrev testScheme (X : Scheme.{u}) (P : Profinite.{u}) := (ProfiniteFreeSlice.te
 /-- Its structural projection.
 Source: Stacks 08J7 (blueprint: def-sfb-free-parameter-evaluation-data). -/
 abbrev projection (X : Scheme.{u}) (P : Profinite.{u}) := (ProfiniteFreeSlice.test X P).hom
-
-/-- The existing exact point inverse image on modules.
-Source: HRS Section 3 (blueprint: def-sfb-free-parameter-evaluation-data). -/
-abbrev pointPull (X : Scheme.{u}) := ProfiniteFreeSlice.pointModulePullback R.X X
-
-/-- The ordinary unbounded point inverse image.
-Source: HRS Section 3 (blueprint: def-sfb-free-parameter-evaluation-data). -/
-abbrev pointPullD (X : Scheme.{u}) := (pointPull R X).mapDerivedCategory
 
 /-- The free parameter in degree zero.
 Source: Stacks 08J7 (blueprint: def-sfb-free-parameter-evaluation-data). -/
