@@ -30,6 +30,10 @@ set_option backward.isDefEq.respectTransparency.types false
 attribute [local instance 20000] cachedRingCompose cachedAddCompose cachedCommCompose
 attribute [local instance 20000] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
+private theorem cachedCommCompose {T : Type*} [Category T]
+    [EssentiallySmall.{w} T] (τ : GrothendieckTopology T) :
+    τ.HasSheafCompose (CategoryTheory.forget CommRingCat.{w}) := inferInstance
+
 private theorem exactSquare_fac
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
     [Abelian A] [Abelian B] [Abelian C] [Abelian D]

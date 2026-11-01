@@ -27,6 +27,70 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 open AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures
 
+private theorem lattice_complete_of_homology {A : Type u} [CommRing A]
+    [HasDerivedCategory.{w} (ModuleCat.{v} A)]
+    (I : Ideal A) (K : DerivedCategory (ModuleCat.{v} A))
+    (hK : ∀ i : ℤ, IsAdicComplete I
+      ((DerivedCategory.homologyFunctor (ModuleCat.{v} A) i).obj K)) :
+    DerivedCategory.IsDerivedComplete I K := by
+  classical
+  let := ModuleCat.module_countableAB4Star (A := A)
+  obtain ⟨hP, hprops⟩ := derivedCategory_countableProducts_and_towerLimit (ModuleCat.{v} A)
+  let := hP
+  intro f hf _ L ⟨p, δ, hT⟩
+  apply (Triangle.isZero₁_iff_isIso₂ _ hT).mpr
+  apply (DerivedCategory.isIso_iff (ModuleCat.{v} A) _).mpr
+  intro i
+  let F := DerivedCategory.homologyFunctor (ModuleCat.{v} A) i
+  let : PreservesLimitsOfShape (Discrete ℕ) F := hprops.2.1 ℕ i
+  have hSC : (HomologicalComplex.shortComplexFunctor
+      (ModuleCat.{v} A) (.up ℤ) i).Linear A := ⟨by intros; rfl⟩
+  have hCH : (HomologicalComplex.homologyFunctor
+      (ModuleCat.{v} A) (.up ℤ) i).Linear A :=
+    Functor.linear_of_iso _
+      (HomologicalComplex.homologyFunctorIso (ModuleCat.{v} A) (.up ℤ) i).symm
+  have hHL : F.Linear A := by
+    let : Localization.Lifting DerivedCategory.Q
+        (HomologicalComplex.quasiIso (ModuleCat.{v} A) (.up ℤ))
+        (HomologicalComplex.homologyFunctor (ModuleCat.{v} A) (.up ℤ) i) F :=
+      ⟨DerivedCategory.homologyFunctorFactors (ModuleCat.{v} A) i⟩
+    exact (Localization.functor_linear_iff DerivedCategory.Q
+      (HomologicalComplex.quasiIso (ModuleCat.{v} A) (.up ℤ)) A
+      (HomologicalComplex.homologyFunctor (ModuleCat.{v} A) (.up ℤ) i) F).mp hCH
+  let M := F.obj K
+  let e : F.obj (∏ᶜ (fun _ : ℕ ↦ K)) ≅ ModuleCat.of A (ℕ → M) :=
+    PreservesProduct.iso F (fun _ : ℕ ↦ K) ≪≫
+      ModuleCat.piIsoPi (fun _ : ℕ ↦ M)
+  let d := towerTransitionEndomorphism (K := fun _ : ℕ ↦ K) (fun _ ↦ f • 𝟙 K)
+  have he (n : ℕ) : e.hom ≫ ModuleCat.ofHom (LinearMap.proj n) =
+      F.map (Pi.π (fun _ : ℕ ↦ K) n) := by
+    simp only [e, Iso.trans_hom, Category.assoc, ModuleCat.piIsoPi_hom_ker_subtype,
+      PreservesProduct.iso_hom]
+    exact piComparison_comp_π F (fun _ : ℕ ↦ K) n
+  have hd : F.map d ≫ e.hom = e.hom ≫
+      ModuleCat.ofHom (ModuleCat.sequenceDifference (M := M) f) := by
+    apply ModuleCat.hom_ext
+    ext a n
+    have hn := congrArg (fun k ↦ k.hom a) (show
+        F.map d ≫ e.hom ≫ ModuleCat.ofHom (LinearMap.proj n) =
+          e.hom ≫ ModuleCat.ofHom (LinearMap.proj n) -
+            e.hom ≫ ModuleCat.ofHom (LinearMap.proj (n + 1)) ≫ (f • 𝟙 M) by
+      rw [he, ← F.map_comp,
+        (towerTransitionEndomorphism_eq_iff _ d).mp rfl n,
+        F.map_sub, F.map_comp, Functor.map_smul, F.map_id,
+        ← Category.assoc, he])
+    simpa [ModuleCat.sequenceDifference] using hn
+  let := hK i
+  have : IsIso (ModuleCat.ofHom (ModuleCat.sequenceDifference (M := M) f)) :=
+    (ConcreteCategory.isIso_iff_bijective _).mpr
+      (ModuleCat.difference_of_complete I M f hf)
+  have hconj : F.map d = e.hom ≫
+      ModuleCat.ofHom (ModuleCat.sequenceDifference (M := M) f) ≫ e.inv := by
+    rw [← Category.assoc, ← hd, Category.assoc, Iso.hom_inv_id, Category.comp_id]
+  change IsIso (F.map d)
+  rw [hconj]
+  infer_instance
+
 private noncomputable def lattice_homologyIso {A : Type u} [CommRing A]
     (P : CochainComplex (ModuleCat.{u} A) ℤ) (hd : ∀ i j, P.d i j = 0) (i : ℤ) :
     (DerivedCategory.homologyFunctor (ModuleCat.{u} A) i).obj

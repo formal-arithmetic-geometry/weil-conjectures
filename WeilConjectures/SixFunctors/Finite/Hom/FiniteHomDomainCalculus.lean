@@ -125,6 +125,7 @@ import WeilConjectures.AlgebraicGeometry.ExceptionalCoefficients.EtaleScalarTens
 import WeilConjectures.AlgebraicGeometry.ExceptionalCoefficients.EtaleScalarTensorIdentity
 import WeilConjectures.SixFunctors.Etale.EtaleScalarUnitIdentity
 import WeilConjectures.AlgebraicGeometry.Etale.Scalar.EtaleScalarUnitComposition
+import all WeilConjectures.SixFunctors.FiniteHomDomainMonoidalProof
 
 /-! # Finite coefficient domains and evaluation transposition
 
@@ -262,6 +263,34 @@ instance finiteHomDomainCoeffFinite (l : ℕ) [Fact l.Prime] (E : Type u) [Field
     Finite (finiteHomDomainCoeff l E n) :=
   @Finite.of_equiv _ _ (Padic.finite_coefficientExtensionRing l E (n + 1)
     (Nat.succ_le_succ (Nat.zero_le n))) Equiv.ulift.symm
+
+/-- The tensor and unit squares for a specified scalar composition comparison.
+Source: blueprint successive-coefficient clause; Stacks 0D6D and 07A4
+(blueprint: lem-coef-finite-hom-domain-calculus). -/
+def FiniteHomDomainScalarComposition
+    {C : Type a₁} {C' : Type a₂} {C'' : Type a₃}
+    [Category.{b₁} C] [Category.{b₂} C'] [Category.{b₃} C'']
+    (T : C × C ⥤ C) (T' : C' × C' ⥤ C') (T'' : C'' × C'' ⥤ C'')
+    (I : C) (I' : C') (I'' : C'') (F : C ⥤ C') (G : C' ⥤ C'') (H : C ⥤ C'')
+    (α : F ⋙ G ≅ H)
+    {D₀ : C → C → Type b₂} (d₀ : ∀ U V, D₀ U V)
+    {D₁ : C' → C' → Type b₃} (d₁ : ∀ U V, D₁ U V)
+    {D₂ : C → C → Type b₃} (d₂ : ∀ U V, D₂ U V)
+    {V : Type b₂} (e₀ : V) {V' : Type b₃} (e₁ : V') {V'' : Type b₃} (e₂ : V'') :
+    Prop :=
+  ∃ δ : ∀ U V : C, F.obj (T.obj (U, V)) ≅ T'.obj (F.obj U, F.obj V),
+  ∃ δ' : ∀ U V : C', G.obj (T'.obj (U, V)) ≅ T''.obj (G.obj U, G.obj V),
+  ∃ δ'' : ∀ U V : C, H.obj (T.obj (U, V)) ≅ T''.obj (H.obj U, H.obj V),
+  ∃ e : F.obj I ≅ I', ∃ e' : G.obj I' ≅ I'', ∃ e'' : H.obj I ≅ I'',
+  (∀ U V, HEq (δ U V) (d₀ U V)) ∧
+  (∀ U V, HEq (δ' U V) (d₁ U V)) ∧
+  (∀ U V, HEq (δ'' U V) (d₂ U V)) ∧
+  HEq e e₀ ∧ HEq e' e₁ ∧ HEq e'' e₂ ∧
+  (∀ U V : C,
+    α.hom.app (T.obj (U, V)) ≫ (δ'' U V).hom =
+      G.map (δ U V).hom ≫ (δ' (F.obj U) (F.obj V)).hom ≫
+        T''.map (Prod.mkHom (α.hom.app U) (α.hom.app V))) ∧
+  α.hom.app I ≫ e''.hom = G.map e.hom ≫ e'.hom
 
 variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
   (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

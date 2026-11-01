@@ -29,6 +29,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResol
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import WeilConjectures.SmoothPurity.SystemRestrictionMateCoherenceEquations
 public import WeilConjectures.SmoothPurity.SystemSingletonEvaluationMate
+public import WeilConjectures.CategoryTheory.RingedSiteGrothendieckCoefficientUniverse
 
 /-! # Restriction mates and their coherence
 
@@ -70,6 +71,10 @@ variable (HB : StrictRingSystem BX ⥤ StrictRingSystem BY) [HB.Additive]
   [Abelian.HasKInjectiveResolutions (StrictRingSystem BX)]
   [Abelian.HasKInjectiveResolutions (StrictRingSystem ((Functor.const ℕᵒᵖ).obj AX))]
   (adjB : FB.functor ⊣ HB) (adjA : FA.functor ⊣ HA)
+
+private theorem cachedCommCompose {T : Type*} [Category T]
+    [EssentiallySmall.{w} T] (τ : GrothendieckTopology T) :
+    τ.HasSheafCompose (CategoryTheory.forget CommRingCat.{w}) := inferInstance
 
 private def inverseImageIso (F G : SystemGeometricInverseImageData BY BX uTop I) :
     F.functor ≅ G.functor := by

@@ -21,6 +21,7 @@ import WeilConjectures.CategoryTheory.SmoothPurity.UnitNormalizedLiftComposition
 import Mathlib.CategoryTheory.Adjunction.Mates
 import Mathlib.Combinatorics.Quiver.ReflQuiver
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarCoherence
+public import WeilConjectures.CategoryTheory.Adjunction.ConjugatePaste
 
 /-! # Condensed compact-support refinement coherence
 
@@ -88,6 +89,17 @@ private theorem fieldProperOpen_spec {X Y : Scheme.{u}} {f : X ⟶ Y}
         fieldProperOpenRestriction Λ r K.obj =
       (fieldOpenAdjunction Λ c.i).unit.app K.obj :=
   (fieldProperOpen_existsUnique Λ r K).exists.choose_spec
+
+private meta def exactRefinementInstanceCongr : Tactic := fun stx =>
+    withMainContext do
+    let h := stx[1]
+    let proof ← elabTerm h none
+    let target ← instantiateMVars (← getMainTarget)
+    let proofType ← instantiateMVars (← inferType proof)
+    let cache ← IO.mkRef ({} : Std.HashMap (Expr × Expr) Expr)
+    let he ← instanceCongrHEq cache #[] 200 proofType target
+    let e ← mkAppM ``eq_of_heq #[he]
+    (← getMainGoal).assign (← mkAppM ``Eq.mp #[e, proof])
 
 attribute [local irreducible] fieldProperOpen fieldOpenAdjunction
   fieldProperOpenRestrictionNat

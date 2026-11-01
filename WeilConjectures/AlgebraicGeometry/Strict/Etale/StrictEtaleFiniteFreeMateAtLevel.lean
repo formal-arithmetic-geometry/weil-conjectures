@@ -36,6 +36,19 @@ attribute [local instance 5000] strictEtaleSystemDerived strictEtaleLevelDerived
       ((toSheafify T.smallEtaleTopology ((Functor.const T.Etaleᵒᵖ).obj
         (CommRingCat.of (O ⧸ Ideal.span {ell} ^ (n + 1))))).naturality f).symm)
 
+private def toPoint (T : Scheme.{u}) (M : Sheaf T.smallEtaleTopology (Type (u + 1))) :
+    M ⟶ (constantSheaf T.smallEtaleTopology (Type (u + 1))).obj PUnit where
+  hom :=
+    { app := fun U ↦ TypeCat.ofHom (fun _ ↦
+        (toSheafify T.smallEtaleTopology ((Functor.const T.Etaleᵒᵖ).obj
+          PUnit.{u + 2})).app U PUnit.unit)
+      naturality := by
+        intro V W f
+        ext x
+        exact congrArg (fun g ↦ g PUnit.unit)
+          ((toSheafify T.smallEtaleTopology ((Functor.const T.Etaleᵒᵖ).obj
+            PUnit.{u + 2})).naturality f) }
+
 private theorem constantSection_apply (T : Scheme.{u}) (O : Type (u + 1)) [CommRing O]
     (ell : O) (n : ℕ) (r : O ⧸ Ideal.span {ell} ^ (n + 1)) (V : T.Etaleᵒᵖ)
     (x : ((constantSheaf T.smallEtaleTopology (Type (u + 1))).obj PUnit).obj.obj V) :

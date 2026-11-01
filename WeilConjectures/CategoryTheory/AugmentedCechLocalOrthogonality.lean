@@ -114,6 +114,12 @@ import all WeilConjectures.ProperBaseChange.ExtendedCechUnitIsoImpliesComplete
 import WeilConjectures.Algebra.Homology.Site.SitePerfectModelRestrictionSupplement
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryNatTrans
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive
+public import WeilConjectures.Algebra.Homology.HomComplexSectionsDerivedNaturalityOfUniverses
+public import WeilConjectures.CategoryTheory.RingedCechLocalizationAcyclic
+public import WeilConjectures.CategoryTheory.RingedExtendedCech
+public import WeilConjectures.CategoryTheory.RingedIdealGenerators
+public import WeilConjectures.CategoryTheory.RingedKoszulSystem
+public import WeilConjectures.CategoryTheory.RingedSiteModules
 
 /-! # Local orthogonality of extended Cech complexes
 
@@ -158,6 +164,15 @@ def ringedIdealLocalizationTriangulated
           (fun m : M.val.obj (op (Over.mk f)) ↦
             O.obj.map f.op (ι.val.app (op V) x) • m)) →
         P ((DerivedCategory.singleFunctor _ 0).obj M)) → P A
+
+private instance slice_derived
+    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
+    (O : Sheaf J CommRingCat.{u})
+    [h : ∀ V : C, HasDerivedCategory.{w} (ringedSiteModules.{u}
+      ((sheafCompose (J.over V) (forget₂ CommRingCat RingCat)).obj (O.over V)))]
+    (V : C) : HasDerivedCategory.{w} (SheafOfModules.{u}
+      (((sheafCompose J (forget₂ CommRingCat RingCat)).obj O).over V)) :=
+  h V
 
 private theorem hom_zero_of_localization
     {A : Type*} [Category A] [HasZeroMorphisms A]

@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.BrownTowerComparison.BrownTowerGeometricTransportData
 public import WeilConjectures.AlgebraicGeometry.BrownTowerComparison.BrownTowerFiniteEvaluationExistence
+public import WeilConjectures.AlgebraicGeometry.BrownTowerComparison.BrownTowerGeometricBoundData
 /-! # Geometric transport for normalized finite evaluation -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -78,7 +79,28 @@ theorem brownTowerGeometricTransport_core_exists
     (G : EtaleTowerBrownAdjunction S)
     (N : CanonicalFiniteEvaluation S G) :
     Nonempty (GeometricTransportCore S G N.data) := by
-  sorry
+  let _ : ∀ n : ℕ, Finite (Ring (Padic.coefficientExtensionIntegers l E) t n) :=
+    N.data.finite
+  obtain ⟨D⟩ := geometricTransportSiteData_exists S G N.data
+  let _ : ∀ n : ℕ, Finite (Ring (Padic.coefficientExtensionIntegers l E) t n) :=
+    D.finite
+  obtain ⟨B⟩ := geometricTransportBoundData_exists S G N.data D
+  exact ⟨{
+    finite := D.finite
+    siteX := D.siteX
+    siteY := D.siteY
+    compact := D.compact
+    compactComparison := D.compactComparison
+    compactEvaluation := D.compactEvaluation
+    realizationX := D.realizationX
+    realizationY := D.realizationY
+    compactComparison_evaluation := D.compactComparison_evaluation
+    compact_iso := D.compact_iso
+    unit_iso_X := D.unit_iso_X
+    unit_iso_Y := D.unit_iso_Y
+    counit_iso_X := D.counit_iso_X
+    counit_iso_Y := D.counit_iso_Y
+    bound := B.bound }⟩
 
 end BrownTowerComparison
 end AlgebraicGeometry

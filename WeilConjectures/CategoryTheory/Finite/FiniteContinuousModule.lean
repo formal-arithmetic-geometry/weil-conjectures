@@ -53,6 +53,12 @@ def FiniteContinuousModule.forget (R : Type r) [Ring R] (G : Type g) [Group G]
   ObjectProperty.ι _ ⋙ ObjectProperty.ι _ ⋙ Rep.RepToAction R G ⋙
     (CategoryTheory.forget (ModuleCat R)).mapAction G
 
+/-- Forget continuity and finiteness of a finite continuous group set.
+Source: Stacks Tag 0DV5 (blueprint: def-pod-finite-continuous-module). -/
+def finiteContActionForget (G : Type g) [Group G] [TopologicalSpace G] :
+    ContAction FintypeCat.{u} G ⥤ Action (Type u) G :=
+  ObjectProperty.ι _ ⋙ (CategoryTheory.forget FintypeCat).mapAction G
+
 end CategoryTheory
 
 end
