@@ -624,7 +624,8 @@ theorem quotientExpressionStrictKFlatTowers_towerData
         (∀ S : CoefficientDerivedSystemTensors l E W,
           ∃ (hA : SystemGood l E (A.interpret l E N))
             (hB : SystemGood l E (B.interpret l E N))
-            (e : DerivedCategory.Q.obj (total l E (A.interpret l E N) (B.interpret l E N)) ≅
+            (e : DerivedCategory.Q.obj
+                (total (W := W) l E (A.interpret l E N) (B.interpret l E N)) ≅
               S.systemClosed.tensor.obj
                 (DerivedCategory.Q.obj (A.interpret l E N),
                   DerivedCategory.Q.obj (B.interpret l E N))),
@@ -843,7 +844,8 @@ theorem quotientExpressionStrictKFlatTowers
         (∀ S : CoefficientDerivedSystemTensors l E W,
           ∃ (hA : SystemGood l E (A.interpret l E N))
             (hB : SystemGood l E (B.interpret l E N))
-            (e : DerivedCategory.Q.obj (total l E (A.interpret l E N) (B.interpret l E N)) ≅
+            (e : DerivedCategory.Q.obj
+                (total (W := W) l E (A.interpret l E N) (B.interpret l E N)) ≅
               S.systemClosed.tensor.obj
                 (DerivedCategory.Q.obj (A.interpret l E N),
                   DerivedCategory.Q.obj (B.interpret l E N))),
