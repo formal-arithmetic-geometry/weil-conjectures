@@ -20,7 +20,7 @@ import WeilConjectures.AlgebraicGeometry.CohomologyTorInterval
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 import all WeilConjectures.AlgebraicGeometry.Constant.ConstantSquareZeroTorExample
 import all WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinary.FiniteDiscreteOrdinaryEncodingSupplement
-import all WeilConjectures.AlgebraicGeometry.Pullback.PullbackFiniteConstantLocalModel
+import all WeilConjectures.AlgebraicGeometry.PullbackFiniteConstantLocalModel
 
 /-! # Integral and rational constructible complexes have finite Tor amplitude
 

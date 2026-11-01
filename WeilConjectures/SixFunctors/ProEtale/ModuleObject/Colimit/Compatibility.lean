@@ -21,9 +21,6 @@ public import WeilConjectures.CategoryTheory.CoefficientPushCopowerCriterion
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive
 public import WeilConjectures.CategoryTheory.DerivedModuleDirectSums
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
-public import WeilConjectures.CategoryTheory.RingObjects.Condensed.CondensedQbarPointBasis
-public import WeilConjectures.AlgebraicGeometry.CondensedQbarScalarBasisSections
-public import WeilConjectures.AlgebraicGeometry.CondensedQbarScalarBasisUnitOfSections
 
 /-!
 
