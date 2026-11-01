@@ -135,6 +135,7 @@ import all WeilConjectures.CategoryTheory.Sites.PushforwardMonoidal
 import all WeilConjectures.CategoryTheory.Sites.MonObj
 import all Mathlib.CategoryTheory.Sites.LocallySurjective
 import all Mathlib.CategoryTheory.Monoidal.Mon
+public import WeilConjectures.SixFunctors.IntegralModelsGenerators
 
 /-!
 # Comparison with completed condensed coefficients
@@ -178,14 +179,6 @@ private theorem completedRingComparisonNaturality
     (𝟙 _ ≫ e.hom.app A.X) ≫ H.map a
   simp only [Category.id_comp]
   exact e.hom.naturality a
-
-/-- Convert a condensed ring sheaf to its existing ring object, then pull back to `X`.
-Source: blueprint comparison with completed coefficients, notation `Λ_X`
-(blueprint: sk-prop-sfb-qlbar-colimit-x). -/
-noncomputable def completedCoefficient (X : Scheme.{u})
-    (R : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1}) :=
-  coefficientRing X
-    (Mon.mk ((sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj R))
 
 /-- Pull back an actual condensed ring homomorphism, including all its ring structure.
 Source: blueprint comparison with completed coefficients, its canonical maps

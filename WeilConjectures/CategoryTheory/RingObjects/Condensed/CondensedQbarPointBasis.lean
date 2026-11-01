@@ -11,6 +11,7 @@ import WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
 import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
 import Mathlib.Topology.Algebra.Module.FiniteDimension
 import Mathlib.Algebra.Category.ModuleCat.Colimits
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 
 /-! Finite-support coordinates for the condensed algebraic closure.
 
@@ -18,6 +19,9 @@ Source: the finite-subextension-valued section model of
 `WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension`, and the
 finite-basis template `continuousBasisSheafIso` in Colimit/Compatibility.lean.
 (blueprint: lem-weil-pbc-condensed-qbar-point-basis) -/
+
+-- After dropping the copy of upstream's declaration, this module only keeps private declarations.
+set_option linter.privateModule false
 
 @[expose] public section
 
@@ -342,73 +346,5 @@ private noncomputable def basisPresheafCofanIsColimit {I : Type (u + 1)}
   change ULift.up (sectionSum ℓ E b U.unop (Finsupp.single i.as f.down)) = _
   simp only [sectionSum, Finsupp.liftAddHom_apply_single]
   rfl
-
-/-- The regular condensed algebraic closure is a coproduct of copies of the regular finite
-coefficient field.
-
-Source: Compatibility.lean, `continuousBasisSheafIso`, with the finite-subextension section
-model of FiniteSubextension.lean. Choose an algebraic basis of the closure over `E`. On each
-profinite set, every finite-field-valued section has uniformly finite support in this basis:
-expand a finite basis of its field of values over `ℚ_ℓ` and take the union of their supports.
-Each coordinate is continuous on that finite field by finite-dimensional linear topology.
-Finite sums of continuous coordinates times basis vectors are finite-field-valued continuous
-sections, and the basis identities make these maps inverse. This proves the presheaf
-coproduct universal property sectionwise. Sheafification and its module functor preserve this
-coproduct; the canonical ring comparisons identify its terms and vertex with the stated
-regular modules.
-(blueprint: lem-weil-pbc-condensed-qbar-point-basis) -/
-theorem exists_padicAlgCl_point_basis
-    [HasCoproducts.{u + 1} (Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
-      (continuousMapRingObj E))] :
-    ∃ I : Type (u + 1), Nonempty
-      ((∐ fun _ : I ↦ Mod.regular (continuousMapRingObj.{u} E)) ≅
-        (Mod.comap (padicSubfieldRingObjToPadicAlgCl ℓ E)).obj
-          (Mod.regular (padicAlgClRingObj ℓ))) := by
-  classical
-  let I := ULift.{u + 1} (Module.Free.ChooseBasisIndex E (PadicAlgCl ℓ))
-  let b : Module.Basis I E (PadicAlgCl ℓ) :=
-    (Module.Free.chooseBasis E (PadicAlgCl ℓ)).reindex Equiv.ulift.symm
-  let R := pointRPresheaf.{u} ℓ E
-  let S := pointSPresheaf.{u} ℓ
-  let a := pointMapPresheaf.{u} ℓ E
-  let sh := presheafToSheaf (coherentTopology Profinite.{u}) Ab.{u + 1}
-  have := pointR_preservesCoproducts ℓ E I
-  let e : (∐ fun _ : I ↦ Mod.regular R) ≅ (Mod.comap a).obj (Mod.regular S) :=
-    (colimit.isColimit _).coconePointUniqueUpToIso (basisPresheafCofanIsColimit ℓ E b)
-  let : HasColimitsOfSize.{u + 1, u + 1}
-      (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) :=
-    IsGrothendieckAbelian.hasColimits _
-  have : HasColimitsOfShape (Discrete I)
-      (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) :=
-    HasColimitsOfShape.of_small.{u + 1, u + 1} _ _
-  have : PreservesColimitsOfShape (Discrete I) (sh.mapMod R) := by
-    have : PreservesColimitsOfShape (Discrete I) (sh.mapMod R ⋙ Mod.forget (sh.obj R)) :=
-      inferInstanceAs (PreservesColimitsOfShape (Discrete I) (Mod.forget R ⋙ sh))
-    have : ReflectsColimitsOfShape (Discrete I)
-        (Mod.forget (D := Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) (sh.obj R)) :=
-      reflectsColimitsOfShape_of_reflectsIsomorphisms
-    exact preservesColimitsOfShape_of_reflects_of_preserves _ (Mod.forget (sh.obj R))
-  let e' := Mod.mapCopowerIso sh a e
-  let r := Sheaf.sheafifyRingPresheafIso _ (continuousMapRingSheaf E)
-  let s := Sheaf.sheafifyRingPresheafIso _ (padicAlgClCondensedRing ℓ)
-  let a' := padicSubfieldRingObjToPadicAlgCl.{u} ℓ E
-  have ha : a' ≫ s.inv = r.inv ≫ sh.map a := by
-    dsimp only [a', r, s]
-    rw [padicSubfieldRingObjToPadicAlgCl, Sheaf.sheafCompose_map_eq]
-    simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
-    rfl
-  have : PreservesColimitsOfShape (Discrete I)
-      (Mod.comap (D := Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) r.inv) := by
-    have : PreservesColimitsOfShape (Discrete I)
-        (Mod.comap (D := Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) r.inv ⋙
-          Mod.forget (continuousMapRingObj E)) :=
-      inferInstanceAs (PreservesColimitsOfShape (Discrete I) (Mod.forget (sh.obj R)))
-    have : ReflectsColimitsOfShape (Discrete I)
-        (Mod.forget (D := Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
-          (continuousMapRingObj E)) := reflectsColimitsOfShape_of_reflectsIsomorphisms
-    exact preservesColimitsOfShape_of_reflects_of_preserves _ (Mod.forget (continuousMapRingObj E))
-  refine ⟨I, ⟨?_⟩⟩
-  exact ((Mod.restrictedRegularIsoOfRingIso (sh.map a) a' r s ha) ≪≫
-    (Mod.comap r.inv).mapIso e'.symm ≪≫ Mod.comapCopowerIso r).symm
 
 end Profinite
