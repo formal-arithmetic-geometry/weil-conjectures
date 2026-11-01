@@ -83,4 +83,22 @@ def internalPerfectOrdinaryHomStep (W : Scheme.{u})
     ((Mod.extendScalars (AdicCompletion.transition l E W n)).mapHomotopyCategory (.up ℤ)).map f ≫
       H.map a.hom
 
+/-- The ordinary reduction step reduces a representative chain map and balances its scalars.
+Source: functoriality of the homotopy quotient.
+(blueprint: def-pe-internal-perfect-ordinary-reductions).
+Proof: the induced homotopy functor sends a chain-map class to its scalar-extended class;
+the quotient functor preserves the two compositions with the balancing isomorphism. -/
+theorem internalPerfectOrdinaryHomStep_map (W : Scheme.{u})
+    (P : CochainComplex (ModuleCat.{u} (Padic.coefficientExtensionIntegers l E)) ℤ)
+    (n : ℕ) (f : internalPerfectOrdinaryReduction l E W P (n + 1) ⟶
+      internalPerfectOrdinaryReduction l E W P (n + 1)) :
+    internalPerfectOrdinaryHomStep l E W P n
+        ((HomotopyCategory.quotient _ (.up ℤ)).map f) =
+      (HomotopyCategory.quotient _ (.up ℤ)).map
+        ((internalPerfectOrdinaryReductionStep l E W P n).inv ≫
+          ((Mod.extendScalars (AdicCompletion.transition l E W n)).mapHomologicalComplex
+            (.up ℤ)).map f ≫ (internalPerfectOrdinaryReductionStep l E W P n).hom) := by
+  simp only [internalPerfectOrdinaryHomStep, Functor.mapHomotopyCategory_map,
+    Functor.map_comp]
+
 end AlgebraicGeometry.ProEtale
