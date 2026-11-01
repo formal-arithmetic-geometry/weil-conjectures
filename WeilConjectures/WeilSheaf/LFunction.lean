@@ -5,15 +5,11 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.EulerProductAux
 public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.LocalFrobenius
-public import WeilConjectures.WeilSheaf.StalkFunctor
-public import WeilConjectures.WeilSheaf.StalkIso
 public import WeilConjectures.ZetaFunction.TraceFormula
 public import WeilConjectures.ZetaLinearAlgebra.AlternatingEulerProduct
 public import WeilConjectures.ZetaLinearAlgebra.DetTrace
-public import WeilConjectures.ZetaLinearAlgebra.TraceDatum
 
 /-!
 # The Euler-product form of the trace formula for Weil complexes

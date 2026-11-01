@@ -6,7 +6,8 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+public import Mathlib.Algebra.Category.Grp.AB
 import WeilConjectures.AlgebraicGeometry.EtaleSetSectionLift
 import all WeilConjectures.AlgebraicGeometry.AbelianPullbackGlobalSectionsComparison
 

@@ -52,8 +52,8 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 open Scheme
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
-  {k : Type u} [Field k] [Fact (ringChar k ≠ ℓ)]
-  {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
+  {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+  {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
 /-- **The internal Hom comparison for `𝒪_E ⟶ E` is an isomorphism** (blueprint
 `det-prop-scalar-six-tensor-hom` (2)): for bounded constructible `𝒪_E`-complexes `A` and `B`,

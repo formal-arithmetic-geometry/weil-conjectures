@@ -5,25 +5,17 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMapDevissage
-
-
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism.Algebra
-public import WeilConjectures.SixFunctors.BaseChange.DerivedForget
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.EdgeMapBaseChange
-
-
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.FieldTheory.IsSepClosed
 public import WeilConjectures.AlgebraicGeometry.Curve
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import WeilConjectures.AlgebraicGeometry.Curve.Reductions
 import WeilConjectures.AlgebraicGeometry.Curve.AlgebraicallyClosedCohomologyInvariant
 import WeilConjectures.AlgebraicGeometry.Curve.SepClosedComparison
 import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 import WeilConjectures.AlgebraicGeometry.EtalePullbackForgetModules
-public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-!
 # Invariance of the cohomology of a proper curve under extension of the base field

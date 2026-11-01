@@ -9,6 +9,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRestrictionOfHom
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CoefficientChange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.UpperShriekCompatibilityProper
 public import WeilConjectures.TraceFormula.SupportedRestrictionCoefficientChange
+public import WeilConjectures.TraceFormula.SupportedRestrictionE
 
 /-!
 
@@ -50,28 +51,6 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 namespace Correspondence.FixedLocus
 
 variable (F : c.FixedLocus) (E : FiniteIntermediateField ℓ)
-
-/-- Compact-support base change `Rc_! ⋙ LΔ^* ≅ Lι^* ⋙ Rd_!` in the fixed square, with
-`E`-coefficients. -/
-noncomputable def lowerShriekBaseChangeIsoE :
-    ContinuousMapRingObj.boundedConstructibleLowerShriek ℓ E c.support ⋙
-        boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (diag X) ≅
-      boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ F.ι ⋙
-        ContinuousMapRingObj.boundedConstructibleLowerShriek ℓ E F.d :=
-  asIso (boundedConstructibleLowerShriekBaseChange_padicSubfield ℓ E F.isPullback)
-
-/-- The supported restriction `Lι^* Rc^! P ⟶ Rd^! LΔ^* P` with `E`-coefficients: the mate
-`Rc^! ⋙ Lι^* ⟶ LΔ^* ⋙ Rd^!` of the inverse of compact-support base change in the fixed square. -/
-noncomputable def supportedRestrictionE
-    (P : Dᵇc((X ⨯ X).left)⟦Profinite.continuousMapRingObj E⟧) :
-    (boundedConstructibleUpperStar _ ℓ F.ι).obj
-        ((ContinuousMapRingObj.boundedConstructibleUpperShriek ℓ E c.support).obj P) ⟶
-      (ContinuousMapRingObj.boundedConstructibleUpperShriek ℓ E F.d).obj
-        ((boundedConstructibleUpperStar _ ℓ (diag X)).obj P) :=
-  (CategoryTheory.mateEquiv
-    (ContinuousMapRingObj.boundedConstructibleUpperShriekAdjunction ℓ E c.support)
-    (ContinuousMapRingObj.boundedConstructibleUpperShriekAdjunction ℓ E F.d)
-    (TwoSquare.mk _ _ _ _ (F.lowerShriekBaseChangeIsoE E).inv)).natTrans.app P
 
 /-- **The supported restriction under `E ⟶ ℚ̄_ℓ`**: the extension of scalars `T` of the
 `E`-supported restriction of `P`, followed by the `f^!`-exchange for `d` and the pullback

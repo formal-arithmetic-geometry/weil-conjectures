@@ -5,12 +5,6 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.Compactification.NagataCompactification
-public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
-public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageTorAmplitude
-public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness
-public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.QuotientCoefficients
-public import WeilConjectures.SixFunctors.Etale.Derived.Stability.ClosedImmersion
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImageTorAmplitudeNoetherian
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion
 

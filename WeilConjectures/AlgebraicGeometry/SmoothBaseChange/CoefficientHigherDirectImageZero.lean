@@ -10,7 +10,6 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RestrictScalars
 import WeilConjectures.AlgebraicGeometry.EtaleBaseChangeRestrictScalars
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Coefficients
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
 /-!
 # Reflection of higher-direct-image vanishing under restriction of coefficients

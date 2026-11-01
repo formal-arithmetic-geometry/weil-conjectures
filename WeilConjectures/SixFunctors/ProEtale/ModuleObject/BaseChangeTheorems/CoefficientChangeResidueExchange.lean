@@ -51,7 +51,8 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme PadicAlgCl
 
-variable (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ)
+variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
+  [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
   {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
 set_option maxHeartbeats 400000 in
@@ -62,48 +63,48 @@ coefficients `𝔽_E` at the first derived reduction of `K` are isomorphic arrow
 commutative square and every bounded below `K`. -/
 theorem nonempty_arrowIso_derivedReduction_map_exchangeRight (sq : CommSq g' f' f g)
     (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))) (n : ℤ) [K.IsGE n] :
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))) (n : ℤ) [K.IsGE n] :
     Nonempty (Arrow.mk ((derivedReduction Y' ℓ E).map ((Adjunction.exchangeRight
-        (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E.1) f)
-        (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E.1) f')
-        (pullbackSquareComparison (Profinite.padicIntegersRingObj ℓ E.1) sq)).app K)) ≅
+        (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E) f)
+        (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E) f')
+        (pullbackSquareComparison (Profinite.padicIntegersRingObj ℓ E) sq)).app K)) ≅
       Arrow.mk ((ProEtale.derivedBaseChangeMap
         (ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)) sq).app
         ((derivedReduction X ℓ E).obj K))) := by
   have h₁ : IsIso ((derivedUpperStarExtendScalarsPushHom
-      (Profinite.padicIntegersRingObjToResidueField ℓ E.1) f).app K) :=
+      (Profinite.padicIntegersRingObjToResidueField ℓ E) f).app K) :=
     isIso_derivedUpperStarExtendScalarsPushHom_residueField_app ℓ E f K n
-  have : ((g')^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧.leftDerivedFunctor.obj K).IsGE n :=
+  have : ((g')^*⟦Profinite.padicIntegersRingObj ℓ E⟧.leftDerivedFunctor.obj K).IsGE n :=
     isGE_leftDerivedUpperStar_obj _ g' K n
   have h₂ : IsIso ((derivedUpperStarExtendScalarsPushHom
-      (Profinite.padicIntegersRingObjToResidueField ℓ E.1) f').app
-      ((g')^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧.leftDerivedFunctor.obj K)) :=
+      (Profinite.padicIntegersRingObjToResidueField ℓ E) f').app
+      ((g')^*⟦Profinite.padicIntegersRingObj ℓ E⟧.leftDerivedFunctor.obj K)) :=
     isIso_derivedUpperStarExtendScalarsPushHom_residueField_app ℓ E f'
-      ((g')^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧.leftDerivedFunctor.obj K) n
+      ((g')^*⟦Profinite.padicIntegersRingObj ℓ E⟧.leftDerivedFunctor.obj K) n
   -- `obtain` would make the elaborator unfold the types; we use `Nonempty.some` instead
   have k₂ := nonempty_arrowIso_map_exchangeRight_derivedExtendScalars_of_nonFlat'
-    (Profinite.padicIntegersRingObjToResidueField ℓ E.1)
+    (Profinite.padicIntegersRingObjToResidueField ℓ E)
     (derivedUpperStarExtendScalarsIsoCompCoherence
-      (Profinite.padicIntegersRingObjToResidueField ℓ E.1)) sq K h₁ h₂
+      (Profinite.padicIntegersRingObjToResidueField ℓ E)) sq K h₁ h₂
   have k₂' : Nonempty (Arrow.mk ((Mod.extendScalars (coefficientMap
-      (Profinite.padicIntegersRingObjToResidueField ℓ E.1) Y')).leftDerivedFunctor.map
+      (Profinite.padicIntegersRingObjToResidueField ℓ E) Y')).leftDerivedFunctor.map
         ((Adjunction.exchangeRight
-          (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E.1) f)
-          (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E.1) f')
-          (pullbackSquareComparison (Profinite.padicIntegersRingObj ℓ E.1) sq)).app K)) ≅
+          (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E) f)
+          (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E) f')
+          (pullbackSquareComparison (Profinite.padicIntegersRingObj ℓ E) sq)).app K)) ≅
       Arrow.mk ((Adjunction.exchangeRight
         (derivedUpperStarLowerStarAdjunction
-          (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)) f)
+          (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)) f)
         (derivedUpperStarLowerStarAdjunction
-          (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)) f')
+          (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)) f')
         (pullbackSquareComparison
-          (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)) sq)).app
+          (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)) sq)).app
         ((Mod.extendScalars (coefficientMap
-          (Profinite.padicIntegersRingObjToResidueField ℓ E.1) X)).leftDerivedFunctor.obj K))) := by
+          (Profinite.padicIntegersRingObjToResidueField ℓ E) X)).leftDerivedFunctor.obj K))) := by
     transport_mod_proofs k₂
   have k₃ := ProEtale.nonempty_arrowIso_map_exchangeRight_residueField_derivedBaseChangeMap
     (ℓ := ℓ) (E := E) sq ((Mod.extendScalars (coefficientMap
-      (Profinite.padicIntegersRingObjToResidueField ℓ E.1) X)).leftDerivedFunctor.obj K)
+      (Profinite.padicIntegersRingObjToResidueField ℓ E) X)).leftDerivedFunctor.obj K)
   exact ⟨(residueFieldModuleSheaf Y' ℓ E).mapDerivedCategory.mapArrow.mapIso k₂'.some ≪≫ k₃.some⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing

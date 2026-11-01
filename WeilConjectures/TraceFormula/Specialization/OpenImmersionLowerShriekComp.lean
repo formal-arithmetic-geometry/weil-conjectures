@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.ExchangeFormalism.Identity
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CompositionTriangle
 public import WeilConjectures.Tactic.ExactModProofs
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.BaseChangeIndependence
 
 /-!
 

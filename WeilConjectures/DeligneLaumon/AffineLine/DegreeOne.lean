@@ -5,15 +5,9 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.DeligneLaumon.AffineLine.ArtinSchreierDual
 public import WeilConjectures.DeligneLaumon.AffineLine.FourierWeight
-public import WeilConjectures.DeligneLaumon.AffineLine.Purity
-public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafSemicontinuity
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import WeilConjectures.WeilSheaf.CohomologyShift
 public import WeilConjectures.WeilSheaf.FourierStalk
-public import WeilConjectures.WeilSheaf.HomologyShift
-public import WeilConjectures.WeilSheaf.StalkIso
 
 /-!
 # The degree-one estimate for an irreducible factor

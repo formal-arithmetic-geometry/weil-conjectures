@@ -70,11 +70,9 @@ The isomorphism `γ` is the conjugate of the composition isomorphism of lower sh
   `j`, and `ProEtale.CondensedRing.isIso_map_verdierBiduality_iff_of_isOpenImmersion`:
   `Lj^* δ_K` is an isomorphism iff `δ_{Lj^* K}` is.
 
-## Sorried input
-
-- `ProEtale.CondensedRing.isIso_verdierBiduality`: **constructible biduality**, `δ_K` is an
-  isomorphism for `K` bounded constructible and `ω_X` the dualizing complex relative to the
-  structure morphism `X ⟶ Spec k` (Input 3.3 of the specification).
+**Constructible biduality**, `δ_K` an isomorphism for every bounded constructible `K`
+(`ProEtale.CondensedRing.isIso_verdierBiduality`), is proved in
+`WeilConjectures.PoincareDuality.Biduality.Constructible`, by reduction to finite coefficients.
 
 -/
 
@@ -165,17 +163,6 @@ noncomputable def verdierDual (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj �
 noncomputable def verdierBiduality (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     K ⟶ verdierDual ℓ (verdierDual ℓ K) :=
   Verdier.bidualityMap (dualizingComplex ℓ X) K
-
-/-- **Constructible Verdier biduality** (blueprint `sk-thm-pd-verdier-duality`): the double-dual
-morphism `δ_K : K ⟶ 𝔻_X 𝔻_X K` is an isomorphism for `K` bounded constructible. See the module
-docstring.
-
-The dualizing complex must be taken relative to `Spec k` (or at least to a regular base): for the
-complex `Ra^! ℚ̄_ℓ = ℚ̄_ℓ` relative to `a = 𝟙` on a nodal curve and `K` the skyscraper `ℚ̄_ℓ` at
-the node, `𝔻𝔻K` has rank `9`. -/
-theorem isIso_verdierBiduality (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    IsIso (verdierBiduality ℓ K) :=
-  sorry
 
 /-- **Biduality for dualizable complexes** (the lisse step of the blueprint theorem
 `det-pd-biduality-coefficients`): if the dualizing complex `ω_X` is isomorphic to an invertible

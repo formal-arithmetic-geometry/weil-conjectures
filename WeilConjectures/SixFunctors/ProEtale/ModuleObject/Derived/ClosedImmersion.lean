@@ -7,30 +7,27 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ClosedImmersionFullyFaithful
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenClosed
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekInterchange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.ClosedImmersion
 
 /-!
 
-# Full faithfulness of `Ri_*` on derived categories of module objects
+# Full faithfulness of `Ri_*` on bounded constructible complexes
 
 Let `Λ` be a commutative condensed ring, `i : Z ⟶ X` a closed immersion and `j : U ⟶ X` an open
 immersion. This file proves:
 
 * the derived pushforward `Ri_*` is fully faithful, i.e. the counit `Li^* Ri_* ⟶ 𝟭` is an
-  isomorphism, on `D(Mod_{Λ_Z})`
-  (`ProEtale.CondensedRing.isIso_derivedUpperStarLowerStarAdjunction_counit_of_isClosedImmersion`)
-  and on bounded constructible complexes
-  (`ProEtale.CondensedRing.isIso_boundedConstructibleUpperStarLowerStarAdjunction_counit`);
+  isomorphism, on bounded constructible complexes
+  (`ProEtale.CondensedRing.isIso_boundedConstructibleUpperStarLowerStarAdjunction_counit`), as it
+  is on `D(Mod_{Λ_Z})`
+  (`ProEtale.CondensedRing.isIso_derivedUpperStarLowerStarAdjunction_counit_of_isClosedImmersion`,
+  in `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ClosedImmersionFullyFaithful`);
 * `Lj^* Ri_* = 0` on bounded constructible complexes when the ranges of `i` and `j` are disjoint
   (`ProEtale.CondensedRing.isZero_boundedConstructibleUpperStar_obj_lowerStar_obj`), by adjunction
   from `Li^* j_! = 0`.
-
-The pushforward `i_*` on module objects is fully faithful
-(`ProEtale.CondensedRing.fullyFaithfulLowerStarOfIsClosedImmersion`) and preserves K-injective
-complexes, being right adjoint to the exact functor `i^*`, so its right derived functor is fully
-faithful (`CategoryTheory.Functor.full_rightDerivedFunctor`).
 
 -/
 
@@ -47,21 +44,6 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 open Scheme
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-
-section Derived
-
-variable {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
-
-instance : ((i)_*⟦Λ⟧).PreservesKInjectiveComplexes :=
-  (upperStarLowerStarAdjunction Λ i).preservesKInjectiveComplexes
-
-/-- The derived pushforward `Ri_*` along a closed immersion is fully faithful on module objects
-over `Λ`: the counit `Li^* Ri_* ⟶ 𝟭` is an isomorphism. -/
-instance isIso_derivedUpperStarLowerStarAdjunction_counit_of_isClosedImmersion :
-    IsIso (derivedUpperStarLowerStarAdjunction Λ i).counit :=
-  (derivedUpperStarLowerStarAdjunction Λ i).counit_isIso_of_R_fully_faithful
-
-end Derived
 
 section BoundedConstructible
 

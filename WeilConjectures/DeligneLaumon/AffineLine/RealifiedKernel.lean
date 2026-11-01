@@ -61,14 +61,16 @@ theorem exists_frobeniusEnd_stalk_fourierKernel (z : (affinePlane k₀).finitePo
     ∃ (c : k₀) (r : ℕ), ∀ ψ : AddChar k₀ (PadicAlgCl l),
       ((fourierKernel ψ).stalk z).frobeniusEnd = ψ c ^ r • LinearMap.id := by
   obtain ⟨c, hc⟩ := exists_frobeniusEnd_stalk_artinSchreier (l := l) (1 : k₀)
-    ⟨(affinePlane.mul k₀).base z.1, Scheme.Hom.map_mem_finitePoints _ z.2⟩
+    ⟨(affineSpacePair.pairing PUnit k₀).base z.1, Scheme.Hom.map_mem_finitePoints _ z.2⟩
   refine ⟨c, (affinePlane k₀ ↘ Spec (CommRingCat.of k₀)).degreeOver z.1 /
-    (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).degreeOver ((affinePlane.mul k₀).base z.1),
+    (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).degreeOver
+      ((affineSpacePair.pairing PUnit k₀).base z.1),
     fun ψ ↦ ?_⟩
   have hrank : Module.finrank (PadicAlgCl l) ((fourierKernel ψ).stalk z).carrier = 1 :=
     (finrank_stalk_upperStar _ _ z).trans (finrank_stalk_artinSchreier ψ 1 _)
   rw [LinearMap.eq_trace_smul_id_of_finrank_eq_one hrank ((fourierKernel ψ).stalk z).frobeniusEnd,
     ← pow_one ((fourierKernel ψ).stalk z).frobeniusEnd, fourierKernel,
+    affineSpaceFourierKernel,
     LinearMap.trace_pow_eq_of_charpoly_eq (charpoly_frobeniusEnd_stalk_upperStar _ _ z) 1,
     pow_one, hc ψ, smul_pow, ← Module.End.one_eq_id, one_pow, map_smul, LinearMap.trace_one,
     finrank_stalk_artinSchreier, Nat.cast_one, smul_eq_mul, mul_one]

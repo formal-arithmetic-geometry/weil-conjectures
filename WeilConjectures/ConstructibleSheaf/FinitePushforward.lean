@@ -5,39 +5,21 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
-public import WeilConjectures.AlgebraicGeometry.StrictHenselization
-
-
 public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.CategoryTheory.Presentable.Finite
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward.Generators
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward.Presentation
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward.GenericPoint
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward.PointSplitting
-public import WeilConjectures.SixFunctors.Finite.BaseChange
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.FinitelyPresentable
 import WeilConjectures.AlgebraicGeometry.ConstructibleLimitDescentGeneral
-import WeilConjectures.AlgebraicGeometry.NormalConstantGenericUnit
-import WeilConjectures.AlgebraicGeometry.NormalConstantOpenUnit
-import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 import Mathlib.CategoryTheory.Presentable.Directed
-import WeilConjectures.AlgebraicGeometry.ConstructibleAffineFreePresentationGeneral
-import WeilConjectures.AlgebraicGeometry.EtaleSectionsFilteredColimit
 import Mathlib.CategoryTheory.Presentable.Limits
 import WeilConjectures.AlgebraicGeometry.ConstructibleModuleNoetherianStalkDetector
 import WeilConjectures.AlgebraicGeometry.ConstructibleModuleFiniteSelectionGeneral
-import WeilConjectures.AlgebraicGeometry.EtaleSheaves
-import WeilConjectures.AlgebraicGeometry.NormalScheme
-import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
-import WeilConjectures.AlgebraicGeometry.StrictHenselizationStalkFormula
-import WeilConjectures.RingTheory.EtaleColimitNormalLocalDomain
-import WeilConjectures.RingTheory.StrictHenselizationTriples
-import WeilConjectures.AlgebraicGeometry.Sites.ConstantSheafSections
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
+import WeilConjectures.Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-!
 # Constructible sheaves embed into finite pushforwards of constant sheaves

@@ -11,30 +11,18 @@ public import Mathlib.CategoryTheory.Sites.SubcanonicalOver
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.FieldTheory.IsSepClosed
 public import WeilConjectures.AlgebraicGeometry.Curve.Picard
-public import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
-public import WeilConjectures.AlgebraicGeometry.DualNumbers
 public import WeilConjectures.AlgebraicGeometry.DualNumbersBaseChange
 public import WeilConjectures.AlgebraicGeometry.Picard.DualNumbers
 public import WeilConjectures.AlgebraicGeometry.EffectiveDescent
 public import WeilConjectures.CategoryTheory.Comma.Over.DescentRepresentable
-public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.QuasiProjective
-public import WeilConjectures.AlgebraicGeometry.GroupScheme.Separated
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.QuasiProjective
 public import WeilConjectures.AlgebraicGeometry.Picard.Degree
 public import WeilConjectures.AlgebraicGeometry.Picard.Scheme
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.AffineNeighbourhood
-public import WeilConjectures.AlgebraicGeometry.Regular
-public import WeilConjectures.Mathlib.Algebra.DualNumber
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Irreducible
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Basic
-public import WeilConjectures.PointCount
 public import WeilConjectures.AlgebraicGeometry.FieldExtensionLimit
 public import WeilConjectures.Mathlib.CategoryTheory.Types.Basic
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.InfPoints
+import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Functoriality
 
 /-!
 # The Jacobian of a smooth projective curve

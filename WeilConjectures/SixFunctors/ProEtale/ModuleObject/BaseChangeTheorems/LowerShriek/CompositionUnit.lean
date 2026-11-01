@@ -5,9 +5,7 @@ Authors: Weil conjectures project
 -/
 module
 
-public import WeilConjectures.CategoryTheory.ExchangeFormalism.CompositionCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.BaseChangeMate
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.ExchangeFormalism
 
 /-!
 

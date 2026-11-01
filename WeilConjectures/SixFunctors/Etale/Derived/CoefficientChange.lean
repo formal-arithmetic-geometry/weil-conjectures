@@ -6,11 +6,9 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.AdicSystem
-public import WeilConjectures.SixFunctors.Etale.Derived.RestrictScalarsLowerStar
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekBoundedBelow
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Ordinary
-public import WeilConjectures.CategoryTheory.DerivedCategory.FiniteCohomologicalDimension
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedComp
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
+import WeilConjectures.SixFunctors.Etale.LowerStarGeometricPoint
 
 /-!
 # Compact cohomology and geometric stalks commute with restriction of scalars

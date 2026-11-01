@@ -6,10 +6,9 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 public import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorProduct
-import WeilConjectures.AlgebraicGeometry.ModulePullbackTensorCoherence
 public import WeilConjectures.AlgebraicGeometry.DerivedPullbackMonoidalDescent
+import WeilConjectures.AlgebraicGeometry.ModulePullbackTensorCoherence
 
 /-! # The canonical monoidal model of derived pullback
 

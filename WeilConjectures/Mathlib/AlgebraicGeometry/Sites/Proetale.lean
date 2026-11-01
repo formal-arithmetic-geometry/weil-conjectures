@@ -191,6 +191,14 @@ instance locallySmall : LocallySmall.{u + 1} X.ProEt :=
 
 variable {X}
 
+/-- The underlying morphism of schemes of a morphism of the small pro-étale site is weakly
+étale. -/
+lemma weaklyEtale_left {A B : X.ProEt} (φ : A ⟶ B) : WeaklyEtale φ.left := by
+  have : WeaklyEtale (φ.left ≫ B.hom) := by
+    rw [MorphismProperty.Over.w φ]
+    exact A.prop
+  exact .of_comp φ.left B.hom
+
 /-- A presieve on `V : X.ProEt` is a pro-étale covering exactly when the family of
 underlying morphisms of schemes is a pro-étale covering of `V.left`. -/
 lemma mem_precoverage_iff {V : X.ProEt} {R : Presieve V} :

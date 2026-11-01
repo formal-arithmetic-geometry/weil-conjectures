@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.ShiftComparison
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
+import Mathlib.CategoryTheory.Sites.Point.IsMonoidalW
 
 /-!
 # The tensor comparison of the derived pullback commutes with shifts

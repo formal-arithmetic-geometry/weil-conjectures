@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.Assoc
 public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
+public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TriangleShift
 
 /-!
 

@@ -79,8 +79,7 @@ set_option hygiene false in
 /-- The condensed field `E̲`. -/
 local notation "𝐄" => Profinite.continuousMapRingObj.{u} E
 
-omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
-  [IsSeparated X.hom] in
+omit [Fact (ringChar k).Prime] [IsSeparated X.hom] in
 /-- Blueprint `det-thm-sf-pf-field-tensor`: Tensor closure of the rational localizing
 categories; the case `Λ = E`.
 
@@ -157,8 +156,7 @@ set_option hygiene false in
 /-- The condensed field `ℚ̲̄_ℓ`. -/
 local notation "𝐐" => Profinite.padicAlgClRingObj.{u} ℓ
 
-omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
-  [IsSeparated X.hom] in
+omit [Fact (ringChar k).Prime] [IsSeparated X.hom] in
 /-- Blueprint `det-thm-sf-pf-field-tensor`: Tensor closure of the rational localizing
 categories; the case `Λ = ℚ̄_ℓ`.
 

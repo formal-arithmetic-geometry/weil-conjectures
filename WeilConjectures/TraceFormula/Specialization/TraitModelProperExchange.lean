@@ -5,9 +5,11 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperNoetherianBase
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.WeaklyEtale
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingMap
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethGlobal
+public import WeilConjectures.SixFunctors.NearbyCycles.PushforwardExchangeSquare
 
 /-!
 
@@ -29,8 +31,8 @@ invertible by blueprint `det-sp-nearby-cycles-exchanges` (2),
 law of the pullback exchanges, the two differ by `Ψ_S` of the base change morphism
 `Lε^* Ra_* ⟶ Rg_* Lε^*` of the cartesian square of generic fibres, which is invertible by proper
 base change (blueprint `sk-thm-sfb-proper-base-change`,
-`ProEtale.CondensedRing.isIso_baseChangeMap_app_of_isProper_padicAlgCl`), and by pullback
-exchanges along identities (`NearbyCyclesModel.pushforwardExchange_square_aux`).
+`ProEtale.CondensedRing.isIso_baseChangeMap_app_padicAlgCl_of_isProper`), and
+by pullback exchanges along identities (`NearbyCyclesModel.pushforwardExchange_square_aux`).
 
 -/
 
@@ -46,65 +48,9 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
-/-! ### Abstract computation -/
+/-! ### Restriction to bounded constructible complexes -/
 
 namespace NearbyCyclesModel
-
-section Abstract
-
-variable {DX DX1 DZ DZ1 SX SX1 SZ SZ1 : Type*} [Category DX] [Category DX1] [Category DZ]
-  [Category DZ1] [Category SX] [Category SX1] [Category SZ] [Category SZ1]
-  {ΨM : DX ⥤ SX} {ΨM1 : DX1 ⥤ SX1} {ΨP : DZ ⥤ SZ} {ΨP1 : DZ1 ⥤ SZ1}
-  {f : DX ⥤ DZ} {e : DX1 ⥤ DZ1} {g : DX1 ⥤ DX} {k : DZ1 ⥤ DZ}
-  {f' : SX ⥤ SZ} {e' : SX1 ⥤ SZ1} {g' : SX1 ⥤ SX} {k' : SZ1 ⥤ SZ}
-  {Rg : DX ⥤ DX1} {Rk : DZ ⥤ DZ1} {Rg' : SX ⥤ SX1} {Rk' : SZ ⥤ SZ1}
-
-/-- **The square law of the pushforward exchanges**, in abstract categories: for a commutative
-square of morphisms of models `φ : P ⟶ M`, `ψ_M : M ⟶ M₁`, `ψ_P : P ⟶ P₁`, `φ' : P₁ ⟶ M₁`
-(pullback exchanges `α`, pushforward exchanges `χ` the mates of `α`), with the base change
-morphisms `bc`, `bc'` of the squares of bases and of special fibres,
-`Rk'_*(α_φ) ∘ bc' ∘ e'^*(χ_{ψ_M}) = χ_{ψ_P} ∘ Ψ_{P₁}(bc) ∘ α_{φ'}`. Both sides have the same
-adjoint for `k'^* ⊣ Rk'_*`, by the square law of the pullback exchanges. -/
-lemma pushforwardExchange_square_aux (ag : g ⊣ Rg) (ak : k ⊣ Rk) (ag' : g' ⊣ Rg')
-    (ak' : k' ⊣ Rk') (αφ : ΨM ⋙ f' ⟶ f ⋙ ΨP) (αφ' : ΨM1 ⋙ e' ⟶ e ⋙ ΨP1)
-    (αψM : ΨM1 ⋙ g' ⟶ g ⋙ ΨM) (αψP : ΨP1 ⋙ k' ⟶ k ⋙ ΨP)
-    (χψM : Rg ⋙ ΨM1 ⟶ ΨM ⋙ Rg') (χψP : Rk ⋙ ΨP1 ⟶ ΨP ⋙ Rk')
-    (hχψM : ∀ A, g'.map (χψM.app A) ≫ ag'.counit.app (ΨM.obj A) =
-      αψM.app (Rg.obj A) ≫ ΨM.map (ag.counit.app A))
-    (hχψP : ∀ V, k'.map (χψP.app V) ≫ ak'.counit.app (ΨP.obj V) =
-      αψP.app (Rk.obj V) ≫ ΨP.map (ak.counit.app V))
-    (θ : e ⋙ k ⟶ g ⋙ f) (θ' : e' ⋙ k' ⟶ g' ⋙ f')
-    (bc : Rg ⋙ e ⟶ f ⋙ Rk) (bc' : Rg' ⋙ e' ⟶ f' ⋙ Rk')
-    (hbc : ∀ A, k.map (bc.app A) ≫ ak.counit.app (f.obj A) =
-      θ.app (Rg.obj A) ≫ f.map (ag.counit.app A))
-    (hbc' : ∀ C, k'.map (bc'.app C) ≫ ak'.counit.app (f'.obj C) =
-      θ'.app (Rg'.obj C) ≫ f'.map (ag'.counit.app C))
-    (hSQ : ∀ C, θ'.app (ΨM1.obj C) ≫ f'.map (αψM.app C) ≫ αφ.app (g.obj C) =
-      k'.map (αφ'.app C) ≫ αψP.app (e.obj C) ≫ ΨP.map (θ.app C))
-    (A : DX) :
-    e'.map (χψM.app A) ≫ bc'.app (ΨM.obj A) ≫ Rk'.map (αφ.app A) =
-      αφ'.app (Rg.obj A) ≫ ΨP1.map (bc.app A) ≫ χψP.app (f.obj A) := by
-  have hL : k'.map (e'.map (χψM.app A)) ≫ k'.map (bc'.app (ΨM.obj A)) ≫
-      ak'.counit.app _ ≫ αφ.app A = k'.map (αφ'.app (Rg.obj A)) ≫ αψP.app _ ≫
-        ΨP.map (θ.app _ ≫ f.map (ag.counit.app A)) := by
-    have n₁ := θ'.naturality (χψM.app A)
-    have n₂ := αφ.naturality (ag.counit.app A)
-    simp only [Functor.comp_obj, Functor.comp_map] at n₁ n₂
-    rw [reassoc_of% (hbc' (ΨM.obj A)), reassoc_of% n₁, ← f'.map_comp_assoc, hχψM,
-      f'.map_comp_assoc]
-    erw [n₂]
-    rw [reassoc_of% (hSQ (Rg.obj A)), ΨP.map_comp]
-  have nR := αψP.naturality (bc.app A)
-  have nL := ak'.counit.naturality (αφ.app A)
-  simp only [Functor.comp_obj, Functor.comp_map, Functor.id_obj, Functor.id_map] at nR nL
-  apply (ak'.homEquiv _ _).symm.injective
-  rw [Adjunction.homEquiv_counit, Adjunction.homEquiv_counit]
-  simp only [Functor.map_comp, Category.assoc]
-  erw [nL, hχψP, reassoc_of% nR]
-  rw [← ΨP.map_comp, hbc]
-  exact hL
-
-end Abstract
 
 section Restricted
 
@@ -132,30 +78,6 @@ lemma Hom.isIso_boundedConstructiblePushforwardExchange_app (φ : M.Hom N f.left
 end Restricted
 
 end NearbyCyclesModel
-
-/-! ### Proper base change -/
-
-section ProperBaseChange
-
-variable (ℓ : ℕ) [Fact ℓ.Prime]
-
-/-- **Proper base change** (blueprint `sk-thm-sfb-proper-base-change`) on the ambient derived
-categories of `ℚ̄_ℓ`-modules: for a cartesian square `g' ≫ p = p' ≫ g` of schemes with `p`
-proper, the base change morphism `Lg^* Rp_* K ⟶ Rp'_* Lg'^* K` is an isomorphism for bounded
-constructible `K`. The base `g` is arbitrary (here: the geometric generic point
-`Spec Ω ⟶ Spec k`), unlike
-`ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl`,
-whose squares are of finite type over a field. -/
-theorem isIso_baseChangeMap_app_of_isProper_padicAlgCl {X Y X' Y' : Scheme.{u}} {p : X ⟶ Y}
-    {g : Y' ⟶ Y} {p' : X' ⟶ Y'} {g' : X' ⟶ X} [IsProper p] (sq : CommSq g' p' p g)
-    (hsq : IsPullback g' p' p g)
-    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X)))
-    (hK : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X) K) :
-    IsIso ((baseChangeMap (Profinite.padicAlgClRingObj ℓ) sq).app K) :=
-  sorry
-
-end ProperBaseChange
 
 /-! ### The proper exchange of a proper trait model -/
 
@@ -236,7 +158,7 @@ exchanges along identities and base change along identities, with the proper exc
 model of the geometric generic fibre (blueprint `det-sp-nearby-cycles-exchanges` (2)) composed
 with `Ψ_S` of the proper base change morphism of the square of generic fibres. -/
 theorem IsTraitModelOfBase.isIso_pushforwardExchange_app_ambient
-    [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
+    [Fact (ringChar k ≠ ℓ)] [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)]
     (h : M.IsTraitModelOfBase k q g) [IsProper q] [IsProper (toPoint X).left]
     (hgen : IsPullback M.ε g X.hom (traitGenericPoint k' ≫ traitToBase k k'))
     (A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
@@ -269,7 +191,9 @@ theorem IsTraitModelOfBase.isIso_pushforwardExchange_app_ambient
     (baseChangeMap 𝐐 ⟨hb⟩) (baseChangeMap 𝐐 ⟨hs⟩)
     (Adjunction.exchangeRight_app_comp_counit' _ _ _ _ rfl)
     (Adjunction.exchangeRight_app_comp_counit' _ _ _ _ rfl) hSQ A
-  have pbc := isIso_baseChangeMap_app_of_isProper_padicAlgCl ℓ ⟨hb⟩ hgen' A hA
+  have : IsNoetherian (point k).left := inferInstanceAs (IsNoetherian (Spec (.of k)))
+  have pbc := isIso_baseChangeMap_app_padicAlgCl_of_isProper ℓ
+    (𝟙 (point k).left) (traitGenericPoint k' ≫ traitToBase k' k') ⟨hb⟩ hgen' A hA
   -- the base change morphisms are invertible
   have : IsIso (baseChangeMap 𝐐 ⟨hs⟩) := by
     have : WeaklyEtale (𝟙 X'.left) := MorphismProperty.id_mem _ _

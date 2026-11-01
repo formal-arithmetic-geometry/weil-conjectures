@@ -8,7 +8,6 @@ module
 
 public import WeilConjectures.Algebra.Homology.DerivedInternalHom
 public import WeilConjectures.AlgebraicGeometry.CanonicalPullbackTensorComparison
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 
 /-! # Canonical derived tensor/internal-Hom bijections
 Source: Stacks Project, cohomology.tex, Tag 08DJ (lemma-internal-hom).

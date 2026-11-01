@@ -8,15 +8,9 @@ module
 public import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
 public import WeilConjectures.AlgebraicGeometry.DensePoints
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.PropertyC
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Fiber
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ResidueField
-public import WeilConjectures.Mathlib.RingTheory.Etale.ResidueField
-public import WeilConjectures.Mathlib.RingTheory.Etale.Field
-
 import WeilConjectures.AlgebraicGeometry.SmoothSectionComponentOpen
 
 /-!

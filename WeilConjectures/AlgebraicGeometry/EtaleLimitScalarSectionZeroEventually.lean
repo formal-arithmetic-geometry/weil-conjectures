@@ -6,7 +6,8 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
+public import Mathlib.Algebra.Category.Grp.AB
 import WeilConjectures.AlgebraicGeometry.EtaleLimitScalarSectionMapLaws
 import WeilConjectures.AlgebraicGeometry.EtaleLimitScalarSectionColimit
 import Mathlib.Algebra.Category.Grp.FilteredColimits

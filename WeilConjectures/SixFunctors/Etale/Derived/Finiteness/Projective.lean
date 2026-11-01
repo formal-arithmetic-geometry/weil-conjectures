@@ -5,18 +5,8 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Curve
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.FiniteMorphism
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.SymmetricProduct
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive
 public import WeilConjectures.ConstructibleSheaf.FiniteTypePushforward
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
-public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.BoundedConstructible
-public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FiniteCancellation
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ProjectiveCurve
-public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.TargetLocal
 
 /-!
 # Constructibility of projective direct images

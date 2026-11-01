@@ -118,7 +118,7 @@ theorem isZero_upperStar_prodMap_lowerStar_prodMap_externalProduct (i : Z ⟶ X)
       (prod.map i (𝟙 Y))).obj
       ((boundedConstructibleLowerStar ℓ E.1 (prod.map (𝟙 X) f)).obj
         (boundedConstructibleExternalProduct ℓ E.1 N B))) := by
-  refine isZero_of_isZero_etaleReduction ℓ E one_ne_zero ?_
+  refine isZero_of_isZero_etaleReduction ℓ E.1 one_ne_zero ?_
   refine (nonempty_etaleReduction_upperStar_lowerStar_externalProduct_iso ℓ E 1 i f N B).elim
     fun e ↦ ?_
   refine (Etale.isZero_upperStar_prodMap_lowerStar_prodMap_tensor

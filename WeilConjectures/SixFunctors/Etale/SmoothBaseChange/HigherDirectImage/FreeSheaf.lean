@@ -7,16 +7,14 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.Colimits
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Zero
-public import WeilConjectures.AlgebraicGeometry.EtaleCohomologyFilteredColimit
-public import WeilConjectures.AlgebraicGeometry.EtaleFreeSheafDerivedSections
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomPresheaf
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusExact
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
-public import WeilConjectures.AlgebraicGeometry.Curve.Reductions
-public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyColimit
+public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyFilteredColimit
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Coinduce
 public import WeilConjectures.CategoryTheory.Sites.CechInjectiveModule
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.TStructure
+public import WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomology
+public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 
 /-!
 # Free sheaves under extension by zero and pullback, and cohomology

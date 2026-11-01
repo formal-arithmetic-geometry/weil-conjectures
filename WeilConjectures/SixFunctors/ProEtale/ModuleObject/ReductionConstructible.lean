@@ -45,7 +45,9 @@ namespace AlgebraicGeometry.ProEtale
 
 open Scheme PadicAlgCl
 
-variable (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ) [IsNoetherian X]
+variable (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)]
+  [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
+  [IsNoetherian X]
 
 /-- **Reduction modulo a uniformizer preserves bounded constructible complexes**: on a noetherian
 scheme `X`, if `K ∈ D(Mod_{𝒪_{E,X}})` is bounded constructible, so is
@@ -54,15 +56,15 @@ its restriction of scalars is a bounded constructible `𝒪_{E,X}`-complex, and 
 descends along `𝒪_{E,X} ⟶ 𝔽_{E,X}`. -/
 theorem boundedConstructible_derivedExtendScalars_residueField
     (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)))
-    (hK : boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X) K) :
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X)))
+    (hK : boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X) K) :
     boundedConstructible (residueFieldRingObj X ℓ E)
       ((Mod.extendScalars (padicIntegersToResidueField X ℓ E)).leftDerivedFunctor.obj K) := by
-  obtain ⟨ϖ, hϖ⟩ := PadicAlgCl.isPrincipal_maximalIdeal_integers ℓ E.1
+  obtain ⟨ϖ, hϖ⟩ := PadicAlgCl.isPrincipal_maximalIdeal_integers ℓ E
   rw [Ideal.submodule_span_eq] at hϖ
   have hS := shortExact_padicIntegersRegularEnd X ℓ E ϖ hϖ
   have hT := Mod.exists_distinguished_regularEndSMul_derivedExtendScalars _ hS K
-  have h₃ : boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)
+  have h₃ : boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X)
       ((Mod.comap (padicIntegersToResidueField X ℓ E)).mapDerivedCategory.obj
         ((Mod.extendScalars (padicIntegersToResidueField X ℓ E)).leftDerivedFunctor.obj K)) :=
     (boundedConstructible _).ext_of_isTriangulatedClosed₃ _
@@ -83,13 +85,13 @@ theorem boundedConstructible_derivedExtendScalars_residueField
 (`ProEtale.DerivedCategory.boundedConstructible`). -/
 theorem boundedConstructible_derivedReduction_obj
     (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)))
-    (hK : boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X) K) :
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X)))
+    (hK : boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X) K) :
     ProEtale.DerivedCategory.boundedConstructible
       (ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)) X
       ((derivedReduction X ℓ E).obj K) := by
   have : Finite (ResidueFieldCoeff.{u} ℓ E) :=
-    inferInstanceAs (Finite (ULift.{u + 1} (integersResidueField ℓ E.1)))
+    inferInstanceAs (Finite (ULift.{u + 1} (integersResidueField ℓ E)))
   have hL := boundedConstructible_derivedExtendScalars_residueField X ℓ E K hK
   rw [← DerivedCategory.boundedConstructibleIntrinsic_eq]
   refine ⟨(residueFieldModuleSheaf X ℓ E).bounded_mapDerivedCategory_obj hL.1, fun n ↦ ?_⟩
@@ -97,7 +99,7 @@ theorem boundedConstructible_derivedReduction_obj
     (((residueFieldModuleSheaf X ℓ E).mapDerivedCategoryHomologyFunctorIso n).app _) ?_
   exact isConstructible_of_iso
     (((residueFieldModuleSheafIsoOfSection X ℓ E (residueFieldSectionFac X ℓ E)).app _).symm)
-    (isConstructible_finiteCoefficientModEquivalence_functor_obj (integersResidueField ℓ E.1)
+    (isConstructible_finiteCoefficientModEquivalence_functor_obj (integersResidueField ℓ E)
       (hL.2 n))
 
 end AlgebraicGeometry.ProEtale

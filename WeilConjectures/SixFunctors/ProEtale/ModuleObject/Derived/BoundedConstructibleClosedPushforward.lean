@@ -6,7 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleOpenCover
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ClosedImmersion
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ClosedImmersionFullyFaithful
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenClosedConservative
 
 /-!
 # Closed pushforward of bounded constructible complexes
@@ -21,6 +22,9 @@ Let `Λ` be a commutative condensed ring and `X` a scheme with noetherian underl
   (`ProEtale.CondensedRing.boundedConstructible_rightDerivedLowerStar_of_isClosedImmersion`):
   `Lc^* Rc_* B ≅ B`, and the restriction of `Rc_* B` to the open complement of `Z` vanishes, by
   the adjunctions `j_! ⊣ Lj^*` and `Lc^* ⊣ Rc_*` and the vanishing of `Lc^* j_!`.
+* A complex whose restriction to a quasi-compact open `U` vanishes is supported on the closed
+  complement `Z`: the unit `K ⟶ Ri_* Li^* K` is an isomorphism
+  (`ProEtale.CondensedRing.isIso_derivedUpperStarLowerStarAdjunction_unit_app_of_isZero`).
 
 No finiteness hypothesis on `X` over a field is needed, unlike for the general pushforward.
 -/
@@ -112,5 +116,24 @@ theorem boundedConstructible_rightDerivedLowerStar_of_isClosedImmersion {X Z : S
         (by rw [hU]; exact disjoint_compl_left) B)
   · exact (boundedConstructible _).prop_of_iso
       (asIso ((derivedUpperStarLowerStarAdjunction Λ c).counit.app B)).symm hB
+
+/-- A complex whose restriction to the open `U` vanishes is supported on the closed complement
+`Z`: the unit `K ⟶ Ri_* Li^* K` is an isomorphism. -/
+theorem isIso_derivedUpperStarLowerStarAdjunction_unit_app_of_isZero {X U Z : Scheme.{u}}
+    (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j] (i : Z ⟶ X) [IsClosedImmersion i]
+    (hij : IsCompl (Set.range i.base) (Set.range j.base))
+    {K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))} (hK : IsZero ((L((j)^*⟦Λ⟧)).obj K)) :
+    IsIso ((derivedUpperStarLowerStarAdjunction Λ i).unit.app K) := by
+  have hN : IsZero ((L((j)^*⟦Λ⟧)).obj ((R((i)_*⟦Λ⟧)).obj ((L((i)^*⟦Λ⟧)).obj K))) :=
+    isZero_leftDerivedUpperStar_obj_rightDerivedLowerStar_obj_of_disjoint Λ j i
+      hij.symm.disjoint _
+  have h₁ : IsIso ((L((j)^*⟦Λ⟧)).map ((derivedUpperStarLowerStarAdjunction Λ i).unit.app K)) :=
+    isIso_of_source_target_iso_zero _ hK.isoZero hN.isoZero
+  have h₂ : IsIso ((L((i)^*⟦Λ⟧)).map ((derivedUpperStarLowerStarAdjunction Λ i).unit.app K)) :=
+    IsIso.of_isIso_fac_right (hh := IsIso.id _)
+      ((derivedUpperStarLowerStarAdjunction Λ i).left_triangle_components K)
+  exact (jointlyReflectIsomorphisms_leftDerivedUpperStar_of_isCompl Λ i j hij).isIso_of_pairFunctor
+    _ h₁ h₂
 
 end AlgebraicGeometry.ProEtale.CondensedRing

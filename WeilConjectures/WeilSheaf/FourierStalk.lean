@@ -200,8 +200,12 @@ theorem nonempty_iso_upperStar_fibreInclusion_fourierKernel (ψ : AddChar k₀ (
     (a : k₀) :
     Nonempty ((WeilSheaf.upperStar (affineLine.fibreInclusion k₀ a)).obj (fourierKernel ψ) ≅
       artinSchreier ψ a) := by
-  rw [fourierKernel, artinSchreier, artinSchreier]
-  exact nonempty_iso_upperStar_fibreInclusion_mul_smul_one a _
+  obtain ⟨e⟩ : Nonempty ((WeilSheaf.upperStar (affineLine.fibreInclusion k₀ a)).obj
+      ((WeilSheaf.upperStar (affinePlane.mul k₀)).obj (artinSchreier ψ 1)) ≅
+        artinSchreier ψ a) := by
+    rw [artinSchreier, artinSchreier]
+    exact nonempty_iso_upperStar_fibreInclusion_mul_smul_one a _
+  exact ⟨(WeilSheaf.upperStar (affineLine.fibreInclusion k₀ a)).mapIso (fourierKernelIso ψ) ≪≫ e⟩
 
 /-- **The fibre of the Fourier transform over a rational point**: pulled back to the point
 `a : Spec k₀ ⟶ 𝔸¹`, the transform `FT_ψ(K)` is `RΓ_c(𝔸¹, K ⊗ ℒ_{ψ(a x)})[1]`, by compact support
@@ -227,7 +231,7 @@ theorem nonempty_iso_fourierTransform_comp_upperStar_rationalPointHom
     (WeilComplex.upperStarCompIso _ _).symm ≪≫
       WeilComplex.upperStarCongrIso (affineLine.fibreInclusion_fst a) ≪≫
       WeilComplex.upperStarIdIso _
-  rw [fourierTransform]
+  rw [fourierTransform_eq]
   exact ⟨Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerLeft _ (Functor.associator _ _ _ ≪≫
       Functor.isoWhiskerLeft _ (Functor.associator _ _ _ ≪≫

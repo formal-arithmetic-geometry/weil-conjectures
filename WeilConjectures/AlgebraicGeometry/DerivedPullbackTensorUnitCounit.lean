@@ -9,7 +9,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorComparisonDescent
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Unit
 import WeilConjectures.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
-import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 
 /-! # Unit comparison for derived pullback
 

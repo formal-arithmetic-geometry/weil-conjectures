@@ -13,6 +13,10 @@ public import Mathlib.CategoryTheory.Iso
 Two commutative squares `e₁ ≫ s = s₁ ≫ e₁'` and `e₂ ≫ s = s₂ ≫ e₂'` with isomorphisms as
 horizontal sides and a common right side `s` glue to a commutative square
 `(e₁ ≫ e₂⁻¹) ≫ s₂ = s₁ ≫ (e₁' ≫ e₂'⁻¹)`.
+
+In an equation `a ≫ b = c ≫ d ≫ e` with `a`, `b`, `c`, `e` invertible, `d` is invertible
+(`CategoryTheory.isIso_of_comp_eq_comp_comp`); and a criterion for `F.map a` to be invertible
+(`CategoryTheory.isIso_map_of_map_comp_eq`).
 -/
 
 @[expose] public section
@@ -36,3 +40,33 @@ lemma comp_inv_comp_eq_of_comm {𝒜 : Type*} [Category* 𝒜]
   rw [this, reassoc_of% h₁]
 
 end CategoryTheory.Iso
+
+namespace CategoryTheory
+
+/-- In an equation `a ≫ b = c ≫ d ≫ e` with `a`, `b`, `c`, `e` invertible, `d` is invertible. -/
+lemma isIso_of_comp_eq_comp_comp {C : Type*} [Category* C] {P Q R S T : C} {a : P ⟶ Q}
+    {b : Q ⟶ R} {c : P ⟶ S} {d : S ⟶ T} {e : T ⟶ R} (h : a ≫ b = c ≫ d ≫ e) [IsIso a]
+    [IsIso b] [IsIso c] [IsIso e] : IsIso d := by
+  have : d = inv c ≫ a ≫ b ≫ inv e := by simp [reassoc_of% h]
+  rw [this]
+  infer_instance
+
+/-- If a commutative square
+```
+P --a--> Q --b--> R --c--> S
+|d                         ‖
+v                          ‖
+T ----------e------------> S
+```
+satisfies `a ≫ b ≫ c = d ≫ e` with `b`, `c`, `e`, `F d` isomorphisms, then `F a` is an
+isomorphism. -/
+lemma isIso_map_of_map_comp_eq {C D : Type*} [Category* C] [Category* D] (F : C ⥤ D)
+    {P Q R S T : C} {a : P ⟶ Q} {b : Q ⟶ R} {c : R ⟶ S} {d : P ⟶ T} {e : T ⟶ S}
+    (h : a ≫ b ≫ c = d ≫ e) [IsIso b] (hc : IsIso c) (hd : IsIso (F.map d)) [IsIso e] :
+    IsIso (F.map a) := by
+  have h' := congr(F.map $h)
+  simp only [Functor.map_comp] at h'
+  have : IsIso (F.map a ≫ F.map b ≫ F.map c) := by rw [h']; infer_instance
+  exact IsIso.of_isIso_comp_right (F.map a) (F.map b ≫ F.map c)
+
+end CategoryTheory

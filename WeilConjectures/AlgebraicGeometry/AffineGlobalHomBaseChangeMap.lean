@@ -6,16 +6,9 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.GlobalDerivedHom
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
-public import WeilConjectures.AlgebraicGeometry.CanonicalDerivedTensorHom
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorHomAdjunction
-public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 public import WeilConjectures.Algebra.Homology.ExtensionKFlatQuasiIso
 public import WeilConjectures.AlgebraicGeometry.GlobalHomOriginalCounitNormalization
 import WeilConjectures.AlgebraicGeometry.OriginalCounitAdjunctionTransport

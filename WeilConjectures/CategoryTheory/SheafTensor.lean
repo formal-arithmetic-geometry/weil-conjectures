@@ -158,3 +158,41 @@ theorem sfbSheafTensor_properties
   exact ⟨inferInstance, inferInstance, inferInstance, inferInstance⟩
 
 end CategoryTheory
+
+namespace CategoryTheory
+
+section
+
+open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
+open scoped CategoryTheory.MonoidalClosed
+attribute [local instance]
+  CategoryTheory.sfbSheafTensor_monoidalPreadditive
+  CategoryTheory.sfbSheafTensor_hasWeakSheafify
+
+/-- The canonical comparison from the localized sheaf tensor to the sheafified
+objectwise tensor. It uses the inverse sheafification counits followed by the tensor
+comparison of the strong monoidal sheafification functor, so it is natural in both
+sheaves and specifies the tensor, not an arbitrary isomorphism.
+
+Source: blueprint `sk-def-sfb-sheaf-tensor`, the displayed tensor definition and proof,
+Monoidal structure on sheaves paragraph (blueprint: sk-def-sfb-sheaf-tensor).
+-/
+noncomputable def sfbSheafTensor_comparison
+    {C : Type uC} [Category.{vC} C] [EssentiallySmall.{vA} C]
+    (J : GrothendieckTopology C)
+    {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]
+    [MonoidalCategory A] [SymmetricCategory A] [MonoidalClosed A]
+    (F G : Sheaf J A) :
+    (sfbSheafTensorStructure (A := A) J).monoidal.tensorObj F G ≅
+      (presheafToSheaf J A).obj (F.obj ⊗ G.obj) := by
+  let t := sfbSheafTensorStructure (A := A) J
+  letI : MonoidalCategory (Sheaf J A) := t.monoidal
+  letI : (presheafToSheaf J A).Monoidal := t.sheafificationMonoidal
+  exact
+    ((asIso ((sheafificationAdjunction J A).counit.app F)).symm ⊗ᵢ
+        (asIso ((sheafificationAdjunction J A).counit.app G)).symm) ≪≫
+      Functor.Monoidal.μIso (presheafToSheaf J A) F.obj G.obj
+
+end
+
+end CategoryTheory

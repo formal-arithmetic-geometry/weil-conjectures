@@ -100,8 +100,7 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k]
   {X' : Over (Spec (.of k'))} [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
   [IsSeparated X'.hom] {M : NearbyCyclesModel X.left X'.left}
 
-omit [Fact (ringChar k).Prime] [Fact (ringChar k').Prime] [LocallyOfFiniteType X.hom]
-  [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
+omit [Fact (ringChar k).Prime] [Fact (ringChar k').Prime] [IsSeparated X.hom]
   [IsSeparated X'.hom] in
 /-- The lax tensor map of nearby cycles on bounded constructible complexes is natural. -/
 lemma boundedConstructibleTensorMap_natural

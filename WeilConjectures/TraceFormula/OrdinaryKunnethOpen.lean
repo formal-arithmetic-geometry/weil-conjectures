@@ -9,6 +9,7 @@ public import WeilConjectures.TraceFormula.OrdinaryKunneth
 public import WeilConjectures.CategoryTheory.Adjunction.KunnethNatTransRestriction
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRestrict
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.WeaklyEtale
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperAmbient
 public import WeilConjectures.TraceFormula.LowerShriekCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SquareComparisonCoherence
 
@@ -66,31 +67,6 @@ variable {A B A' B' : Over (Spec (.of k))} [LocallyOfFiniteType A.hom] [QuasiCom
   [LocallyOfFiniteType A'.hom] [QuasiCompact A'.hom] [IsSeparated A'.hom]
   [LocallyOfFiniteType B'.hom] [QuasiCompact B'.hom] [IsSeparated B'.hom]
   {f : A ⟶ B} {g : B' ⟶ B} {f' : A' ⟶ B'} {g' : A' ⟶ A}
-
-set_option maxHeartbeats 1000000 in
--- the instances of the categories of module objects are found for the ambient lemmas
-/-- On the ambient derived categories, the pullback comparison of a commutative square on bounded
-constructible complexes is the pullback comparison `pullbackSquareComparison` of the underlying
-square of schemes. -/
-lemma boundedConstructiblePullbackSquareComparison_hom_app_hom_eq_pullbackSquareComparison
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    (sq : CommSq g' f' f g) (K : Dᵇc(B.left)⟦Λ⟧) :
-    ((boundedConstructiblePullbackSquareComparison Λ ℓ sq).hom.app K).hom =
-      (pullbackSquareComparison Λ
-        (⟨Over.left_comp_left_eq_of_comp_eq sq.w⟩ : CommSq g'.left f'.left f.left g.left)).hom.app
-        K.obj := by
-  have hinv (a : A' ⟶ B') (b : B' ⟶ B) :
-      ((boundedConstructibleUpperStarComp Λ ℓ a b).inv.app K).hom =
-        (leftDerivedUpperStarComp Λ a.left b.left).inv.app K.obj := by
-    simp [boundedConstructibleUpperStarComp, boundedConstructibleUpperStarCompatibility,
-      ObjectProperty.liftCompιIso]
-  have e {A₁ A₂ : Dᵇc(A'.left)⟦Λ⟧} (h : A₁ = A₂) :
-      (eqToHom h).hom = eqToHom (congrArg ObjectProperty.FullSubcategory.obj h) := by
-    subst h
-    rfl
-  rw [boundedConstructiblePullbackSquareComparison_hom_app, pullbackSquareComparison_hom_app,
-    ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.FullSubcategory.comp_hom, hinv,
-    boundedConstructibleUpperStarComp_hom_app_hom, e]
 
 set_option maxHeartbeats 1000000 in
 -- the instances of the categories of module objects are found for the ambient lemma

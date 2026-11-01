@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.CompUnit
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Unit
 public import WeilConjectures.SixFunctors.Etale.Derived.WeilFrobenius
+public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralCoefficient
 
 /-!
 # Frobenius operators and the adjunction `La^* ⊣ Ra_*`

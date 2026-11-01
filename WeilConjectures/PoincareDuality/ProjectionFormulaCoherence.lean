@@ -6,6 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.PoincareDuality.ProjectionFormula
+public import WeilConjectures.PoincareDuality.ProjectionFormulaComposition
+public import WeilConjectures.PoincareDuality.ProjectionFormulaProper
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.Coherence
 
 /-!
@@ -18,7 +20,7 @@ For a proper morphism `f`, the exceptional projection morphism
 `Lf^* (Rf_! T ⊗ᴸ M) ≅ Lf^* Rf_! T ⊗ᴸ Lf^* M ⟶ T ⊗ᴸ Lf^* M`, the counit tensored with
 `Lf^* M`.
 
-## Sorried input
+## Main statements
 
 - `ProEtale.CondensedRing.upperStar_map_exceptionalProjection_comp_counit`: the clause
   "identification with the direct-image projection formula through `Rf_! ≅ Rf_*` for proper `f`"
@@ -27,6 +29,9 @@ For a proper morphism `f`, the exceptional projection morphism
   for composable `f`, `g`, compatible with the composition law" of `prop-sf-pf-coherence`.
 - `ProEtale.CondensedRing.exceptionalProjection_id`: the clause "the identity for `f = id`" of
   `prop-sf-pf-coherence`.
+
+They are proved in `WeilConjectures.PoincareDuality.ProjectionFormulaProper` (the first and the
+last) and `WeilConjectures.PoincareDuality.ProjectionFormulaComposition` (composition).
 
 -/
 
@@ -63,7 +68,9 @@ theorem upperStar_map_exceptionalProjection_comp_counit (f : X ⟶ Y) [IsProper 
         ((boundedConstructibleLowerShriek ℓ f).obj T) M ≫
       (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ f).counit.app T ▷
         (boundedConstructibleUpperStar _ ℓ f).obj M :=
-  sorry
+  Adjunction.map_comp_ofNatIsoRight_counit (boundedConstructibleUpperStarLowerStarAdjunction ℓ f)
+    (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).symm _
+    (boundedConstructibleExceptionalProjectionMorphism_comp_lowerShriekIsoLowerStar ℓ f T M)
 
 variable {Z : Over (Spec (.of k))} [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom]
   [IsSeparated Z.hom]
@@ -86,7 +93,7 @@ theorem exceptionalProjection_comp (f : X ⟶ Y) (g : Y ⟶ Z)
         (boundedConstructibleLowerShriekComp_padicAlgCl ℓ f g).inv.app
           (T ⊗ (boundedConstructibleUpperStar _ ℓ f).obj
             ((boundedConstructibleUpperStar _ ℓ g).obj M)) :=
-  sorry
+  boundedConstructibleExceptionalProjectionMorphism_comp_whiskerLeft ℓ f g T M
 
 variable (X) in
 /-- **The exceptional projection morphism of the identity is the identity** (blueprint
@@ -98,7 +105,15 @@ theorem exceptionalProjection_id (T M : Dᵇc(X.left)⟦Profinite.padicAlgClRing
         (boundedConstructibleLowerStarId ℓ X).hom.app _ ≫
         T ◁ (boundedConstructibleUpperStarId _ ℓ X).hom.app M =
       ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (𝟙 X)).hom.app T ≫
-        (boundedConstructibleLowerStarId ℓ X).hom.app T) ▷ M :=
-  sorry
+        (boundedConstructibleLowerStarId ℓ X).hom.app T) ▷ M := by
+  have h := boundedConstructibleExceptionalProjectionMorphism_comp_lowerShriekIsoLowerStar ℓ (𝟙 X)
+    T M
+  have h' := Adjunction.projectionMorphism_comp_conjugate_id
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ (𝟙 X))
+    (boundedConstructibleUpperStarId _ ℓ X)
+    (fun X' Y' ↦ boundedConstructibleUpperStarId_hom_app_tensor_δ ℓ X X' Y') T M
+  rw [reassoc_of% h, boundedConstructibleLowerStarId, reassoc_of% h', ← whiskerLeft_comp,
+    Iso.inv_hom_id_app, comp_whiskerRight]
+  simp
 
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -6,11 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.DeligneLaumon.AffineLine.LocalDuality
-public import WeilConjectures.WeilSheaf.DirectImageStalkMap
-public import WeilConjectures.WeilSheaf.HomologySequence
-public import WeilConjectures.WeilSheaf.LowerStarTriangulated
 public import WeilConjectures.WeilSheaf.RealPurity
-public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Exact
 
 /-!
 # Exactness of the ordinary direct image at a fixed pure weight

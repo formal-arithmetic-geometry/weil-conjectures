@@ -76,3 +76,23 @@ noncomputable instance tensorFour (W X Y Z : GradedObject ℤ C) :
 
 end CountableTensorStructures
 end CategoryTheory
+
+namespace CategoryTheory.CountableTensorStructures
+
+section
+
+set_option autoImplicit false
+open CategoryTheory CategoryTheory.Limits MonoidalCategory
+variable {C : Type u} [Category.{v} C] [Abelian C]
+  [MonoidalCategory C] [MonoidalPreadditive C] [HasCountableCoproducts C]
+  [TensorPreservesCountableCoproducts C]
+
+/-- The standard signed direct-sum monoidal structure on integer cochain complexes.
+Source: Mathlib `HomologicalComplex.monoidalCategory`, Stacks Tag 0G6E
+(blueprint: def-sfb-countable-tensor-structures). -/
+noncomputable instance monoidal : MonoidalCategory (CochainComplex C ℤ) :=
+  HomologicalComplex.monoidalCategory C (.up ℤ)
+
+end
+
+end CategoryTheory.CountableTensorStructures

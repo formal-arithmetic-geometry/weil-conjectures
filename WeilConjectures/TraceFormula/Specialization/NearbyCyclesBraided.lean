@@ -65,8 +65,7 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k k' : Type u} [Field k] [Field k'] [Fact
   {X' : Over (Spec (.of k'))} [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
   [IsSeparated X'.hom] {M : NearbyCyclesModel X.left X'.left}
 
-omit [Fact (ringChar k).Prime] [Fact (ringChar k').Prime] [LocallyOfFiniteType X.hom]
-  [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
+omit [Fact (ringChar k).Prime] [Fact (ringChar k').Prime] [IsSeparated X.hom]
   [IsSeparated X'.hom] in
 /-- The tensor maps of the lax monoidal structure of nearby cycles on bounded constructible
 complexes are `NearbyCyclesModel.boundedConstructibleTensorMap`. -/
@@ -78,8 +77,7 @@ lemma boundedConstructibleNearbyCycles_μ
   apply ObjectProperty.hom_ext
   exact nearbyCyclesLaxMonoidal_μ _ M A.obj B.obj
 
-omit [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
-  [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom] in
+omit [IsSeparated X.hom] [IsSeparated X'.hom] in
 /-- **Nearby cycles on bounded constructible complexes are lax braided** (blueprint
 `sk-lem-tf-nearby-mate-coherences`, "`μ` is symmetric"). -/
 lemma boundedConstructibleNearbyCycles_μ_braiding

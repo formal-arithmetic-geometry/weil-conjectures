@@ -89,11 +89,11 @@ theorem pointCompactSupportExchangeOfSeparated_app_lowerStar_normalForm :
   have hχa := NearbyCyclesModel.Hom.boundedConstructiblePushforwardExchange_app_map ℓ
     (deformationToTraitModelHom B b.left.ker k') hMB hMS (𝟙_ _)
   have : IsProper (g ≫ (compactificationOverField (toPoint X)).overI).left :=
-    isProper_left_of_isProper_hom _
-  have : IsProper (g ≫ toPoint X).left := isProper_left_of_isProper_hom _
+    isProper_left_of_isProper_of_isSeparated _
+  have : IsProper (g ≫ toPoint X).left := isProper_left_of_isProper_of_isSeparated _
   have : IsProper ((g ≫ (compactificationOverField (toPoint X)).overI) ≫
       toPoint (compactificationOverField (toPoint X)).overObj).left :=
-    isProper_left_of_isProper_hom _
+    isProper_left_of_isProper_of_isSeparated _
   have : IsProper (toPoint B).left := by rw [toPoint_left]; infer_instance
   have g1 := congrArg R(((toPoint (compactificationOverField (toPoint X)).overObj).left)_*⟦
     Profinite.padicAlgClRingObj ℓ⟧).map (closedExtension_id_app_of_eq
@@ -124,24 +124,24 @@ theorem pointCompactSupportExchangeOfSeparated_app_lowerStar_normalForm :
     rfl
   have : IsProper (deformationSpecialFibreMap g (map_siteIdeal_ker_le_of_comp_eq g hbg) k' ≫
       pointSpecialMap x (compactificationOverField (toPoint X)).overI k').left :=
-    isProper_left_of_isProper_hom _
+    isProper_left_of_isProper_of_isSeparated _
   have : IsProper ((deformationSpecialFibreMap g (map_siteIdeal_ker_le_of_comp_eq g hbg) k' ≫
       pointSpecialMap x (compactificationOverField (toPoint X)).overI k') ≫
       deformationSpecialFibreToCompactified (compactificationOverField (toPoint X)).overObj
         (x ≫ (compactificationOverField (toPoint X)).overI) k').left :=
-    isProper_left_of_isProper_hom _
+    isProper_left_of_isProper_of_isSeparated _
   have : IsProper (((deformationSpecialFibreMap g (map_siteIdeal_ker_le_of_comp_eq g hbg) k' ≫
       pointSpecialMap x (compactificationOverField (toPoint X)).overI k') ≫
       deformationSpecialFibreToCompactified (compactificationOverField (toPoint X)).overObj
         (x ≫ (compactificationOverField (toPoint X)).overI) k') ≫
       toPoint (compactifiedSpecialFibre (compactificationOverField (toPoint X)).overObj
         (x ≫ (compactificationOverField (toPoint X)).overI) k')).left :=
-    isProper_left_of_isProper_hom _
+    isProper_left_of_isProper_of_isSeparated _
   have : IsProper ((deformationSpecialFibreMap g (map_siteIdeal_ker_le_of_comp_eq g hbg) k' ≫
       pointSpecialMap x (compactificationOverField (toPoint X)).overI k') ≫
       toPoint (deformationSpecialFibre (compactificationOverField (toPoint X)).overObj
         (Hom.ker (x ≫ (compactificationOverField (toPoint X)).overI).left) k')).left :=
-    isProper_left_of_isProper_hom _
+    isProper_left_of_isProper_of_isSeparated _
   have : IsProper (toPoint (compactifiedSpecialFibre (compactificationOverField (toPoint X)).overObj
       (x ≫ (compactificationOverField (toPoint X)).overI) k')).left := by
     rw [toPoint_left]
@@ -225,7 +225,7 @@ theorem pointCompactSupportExchangeOfSeparated_app_lowerStar_normalForm :
   have hχiso :=
     NearbyCyclesModel.Hom.isIso_boundedConstructiblePushforwardExchange_of_isProper
       (φ := deformationToTraitModelHom B b.left.ker k') hMB hMS
-      (isPullback_deformationSpecialFibre_toPoint B _ k')
+      (isTraitModel_deformationModel B _ k') (isPullback_deformationSpecialFibre_toPoint B _ k')
       (isPullback_deformationModel_ε_toPoint B _ k')
   fo_apply pointExchange_normalForm_aux using _, _, _, _, _, _, _, _, _, hχiso, _, _,
     _, _, _, _, _, _, _, _, _, _, _, hnat, hχa, hF3, _, hG, _, _, _, _, _, _, _, hχg, _, _, _, _,

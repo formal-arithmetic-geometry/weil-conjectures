@@ -103,7 +103,6 @@ theorem isDualizable_obj_of_isIso_map_ihomUnitTensorToIhom (j : U ⟶ X) [IsOpen
     ← Functor.Monoidal.isIso_map_ihomUnitTensorToIhom_iff]
   exact hL
 
-omit [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] in
 /-- A bounded constructible `ℚ̄_ℓ`-complex `L` whose comparison map `[L, 𝟙] ⊗ L ⟶ [L, L]` is an
 isomorphism is dualizable: `[L, 𝟙]` is a left dual of `L`
 (`CategoryTheory.MonoidalClosed.exactPairingOfIsIso`), hence a right dual by the braiding. -/

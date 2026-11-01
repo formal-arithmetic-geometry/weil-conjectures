@@ -6,10 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.NearbyCycles.Kunneth
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
-public import WeilConjectures.TraceFormula.Basic
 import WeilConjectures.TraceFormula.OrdinaryKunnethGlobal
-import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 # The ordinary Künneth formula for global sections over a field

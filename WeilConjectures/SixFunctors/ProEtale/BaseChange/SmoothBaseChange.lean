@@ -9,6 +9,7 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Derived
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.Comparison
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ComparisonLowerStarCanonical
 import WeilConjectures.SixFunctors.ProEtale.BaseChange.ComparisonCounit
 import WeilConjectures.SixFunctors.ProEtale.BaseChange.ComparisonSquare
 
@@ -115,22 +116,6 @@ namespace ProEtale
 section Comparison
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-
-variable (f) in
-/-- Blueprint `prop-weil-pbc-comparison-direct-image`: for `f` quasi-compact and
-quasi-separated, the canonical isomorphism `ν_Y^* Rf_* ≅ Rf_* ν_X^*` on bounded below derived
-categories, the base change morphism of right derived functors induced by the underived
-comparison `ν_Y^* f_* ⟶ f_* ν_X^*`
-(`AlgebraicGeometry.ProEtale.lowerStarComparisonUpperStarBaseChange`). -/
-noncomputable def rightDerivedLowerStarComparisonPlusIso [QuasiCompact f] [QuasiSeparated f] :
-    R+(Etale.lowerStar A f) ⋙ D+(ν^*(Y)[A]) ≅ D+(ν^*(X)[A]) ⋙ R+(ProEtale.lowerStar A f) :=
-  have := isIso_lowerStarComparisonUpperStarBaseChange f A
-  have : IsIso (Functor.rightDerivedFunctorPlusBaseChange
-      (lowerStarComparisonUpperStarBaseChange f A)) :=
-    Functor.isIso_rightDerivedFunctorPlusBaseChange_of_rightAcyclic
-      (asIso (lowerStarComparisonUpperStarBaseChange f A))
-      (fun I _ ↦ rightAcyclic_lowerStar_comparisonUpperStar_obj_of_injective A f I)
-  asIso (Functor.rightDerivedFunctorPlusBaseChange (lowerStarComparisonUpperStarBaseChange f A))
 
 variable (f) in
 /-- The isomorphism `ν_Y^* Rf_* ≅ Rf_* ν_X^*` of

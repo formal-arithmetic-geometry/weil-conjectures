@@ -45,7 +45,14 @@ variable {A B A' B' A'' B'' : Type*} [Category* A] [Category* B] [Category* A'] 
   {Lf'' : B'' ⥤ A''} {Rf'' : A'' ⥤ B''}
 
 /-- **Two-out-of-three for pasted exchange morphisms**: in the situation of
-`CategoryTheory.Adjunction.exchangeRight_app_paste`, if the exchange morphism of the left square
+`CategoryTheory.Adjunction.exchangeRight_app_paste`, with squares
+```
+B --G₁--> B' --G₂--> B''
+|Lf        |Lf'       |Lf''
+v          v           v
+A --G₁'-> A' --G₂'-> A''
+```
+and right adjoints `Rf`, `Rf'`, `Rf''` going up, if the exchange morphism of the left square
 is invertible, then the exchange morphism of the outer square is invertible if and only if the
 exchange morphism of the right square is invertible at all objects `G₁' K`. -/
 lemma isIso_exchangeRight_paste_iff {G₁ : B ⥤ B'} {G₁' : A ⥤ A'} {G₂ : B' ⥤ B''}

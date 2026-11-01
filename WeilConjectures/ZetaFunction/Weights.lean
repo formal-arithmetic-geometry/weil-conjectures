@@ -7,10 +7,7 @@ module
 
 public import WeilConjectures.DeligneLaumon.Reduction.DirectImage
 public import WeilConjectures.DeligneLaumon.Reduction.MixedStalk
-public import WeilConjectures.WeilSheaf.Finiteness
-public import WeilConjectures.WeilSheaf.GeometricCoinvariants
 public import WeilConjectures.WeilSheaf.PoincareDuality
-public import WeilConjectures.ZetaLinearAlgebra.Weights
 
 /-!
 # The weight estimate for smooth proper varieties

@@ -10,6 +10,7 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverFiel
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.Limit
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Colimits
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.EpiMono
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Transition
 
 /-!
 # Survival of a cokernel element under base change

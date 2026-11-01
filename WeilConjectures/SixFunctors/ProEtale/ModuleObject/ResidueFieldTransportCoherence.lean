@@ -31,8 +31,10 @@ namespace AlgebraicGeometry.ProEtale
 
 open Scheme CondensedRing PadicAlgCl
 
-variable (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ)
+variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
+  [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
 
+omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] in
 /-- **The derived residue field transport is compatible with composition**: the isomorphisms
 `residueFieldDerivedUpperStarIso` are compatible with the composition isomorphisms
 `L(p ≫ q)^* ≅ Lq^* ⋙ Lp^*` of derived pullbacks. -/
@@ -45,11 +47,11 @@ theorem residueFieldDerivedUpperStarIsoCompCoherenceAt {X Y Z : Scheme.{u}} (p :
   with_reducible
     refine compCoherence_of_isoConj
       (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory
-        (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)) q)
+        (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)) q)
       (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory
-        (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)) p)
+        (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)) p)
       (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory
-        (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)) (p ≫ q))
+        (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)) (p ≫ q))
       (ProEtale.leftDerivedUpperStarIsoMapDerivedCategory
         (ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)) q)
       (ProEtale.leftDerivedUpperStarIsoMapDerivedCategory
@@ -57,28 +59,28 @@ theorem residueFieldDerivedUpperStarIsoCompCoherenceAt {X Y Z : Scheme.{u}} (p :
       (ProEtale.leftDerivedUpperStarIsoMapDerivedCategory
         (ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)) (p ≫ q))
       ((Functor.mapDerivedCategoryCompIso
-          ((q)^*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)⟧)
+          ((q)^*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)⟧)
           (residueFieldModuleSheaf Y ℓ E)).inv ≫
         (Functor.mapDerivedCategoryNatIso (residueFieldModuleSheafUpperStarIso ℓ E q)).hom ≫
         (Functor.mapDerivedCategoryCompIso (residueFieldModuleSheaf Z ℓ E)
           ((q)^*[ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)])).hom)
       ((Functor.mapDerivedCategoryCompIso
-          ((p)^*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)⟧)
+          ((p)^*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)⟧)
           (residueFieldModuleSheaf X ℓ E)).inv ≫
         (Functor.mapDerivedCategoryNatIso (residueFieldModuleSheafUpperStarIso ℓ E p)).hom ≫
         (Functor.mapDerivedCategoryCompIso (residueFieldModuleSheaf Y ℓ E)
           ((p)^*[ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)])).hom)
       ((Functor.mapDerivedCategoryCompIso
-          ((p ≫ q)^*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)⟧)
+          ((p ≫ q)^*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)⟧)
           (residueFieldModuleSheaf X ℓ E)).inv ≫
         (Functor.mapDerivedCategoryNatIso (residueFieldModuleSheafUpperStarIso ℓ E (p ≫ q))).hom ≫
         (Functor.mapDerivedCategoryCompIso (residueFieldModuleSheaf Z ℓ E)
           ((p ≫ q)^*[ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)])).hom)
       ((Functor.mapDerivedCategoryNatIso (CondensedRing.upperStarComp
-        (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)) p q)).hom ≫
+        (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)) p q)).hom ≫
         (Functor.mapDerivedCategoryCompIso
-          ((q)^*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)⟧)
-          ((p)^*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)⟧)).hom)
+          ((q)^*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)⟧)
+          ((p)^*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)⟧)).hom)
       ((Functor.mapDerivedCategoryNatIso (ProEtale.upperStarComp
         (ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)) p q)).hom ≫
         (Functor.mapDerivedCategoryCompIso
@@ -87,7 +89,7 @@ theorem residueFieldDerivedUpperStarIsoCompCoherenceAt {X Y Z : Scheme.{u}} (p :
       ?_ (residueFieldDerivedUpperStarIso ℓ E q) (residueFieldDerivedUpperStarIso ℓ E p)
       (residueFieldDerivedUpperStarIso ℓ E (p ≫ q)) ?_ ?_ ?_
       (CondensedRing.leftDerivedUpperStarComp
-        (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)) p q)
+        (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)) p q)
       (ProEtale.leftDerivedUpperStarComp (ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)) p q)
       ?_ ?_ M
   · with_reducible

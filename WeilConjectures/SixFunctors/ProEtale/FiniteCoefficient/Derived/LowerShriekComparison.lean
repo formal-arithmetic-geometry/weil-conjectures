@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.Comparison
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ComparisonLowerStarCanonical
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriek
 
@@ -34,11 +35,11 @@ applied to the extension by zero and to the proper part.
 
 ## Implementation notes
 
-The comparison of the direct images along the proper part is the existing statement
-`AlgebraicGeometry.ProEtale.nonempty_iso_comparisonUpperStar_comp_rightDerivedLowerStar` of
-blueprint `sk-prop-sf-comparison`, which only asserts that *some* isomorphism exists; the
-compact-support comparison is built from a chosen one. It is used below only through the
-bijections of `Hom`-sets it induces, which do not depend on the choice.
+The comparison of the direct images along the proper part is the canonical isomorphism
+`AlgebraicGeometry.ProEtale.rightDerivedLowerStarComparisonPlusIso` of blueprint
+`sk-prop-sf-comparison`, the base change morphism of right derived functors induced by the
+underived base change morphism `ν^* g_* ⟶ g_* ν^*`. All comparisons of this file are therefore
+canonical composites of explicit natural isomorphisms; none involves a choice.
 -/
 
 @[expose] public section
@@ -101,10 +102,10 @@ variable {Z Y : Scheme.{u}} (g : Z ⟶ Y) [QuasiCompact g] [QuasiSeparated g]
 
 /-- Blueprint `sk-prop-sf-comparison`, the comparison direct image, on the unbounded derived
 categories restricted to bounded below complexes: for a quasi-compact quasi-separated `g`,
-`Rg_*^{proét} ∘ ν_Z^* ≅ ν_Y^* ∘ Rg_*^{ét}` as functors `D⁺(Z_ét) ⥤ D(Y_proét)`. It is a chosen
-isomorphism of
-`AlgebraicGeometry.ProEtale.nonempty_iso_comparisonUpperStar_comp_rightDerivedLowerStar`,
-transported along the inclusions of the bounded below derived categories. -/
+`Rg_*^{proét} ∘ ν_Z^* ≅ ν_Y^* ∘ Rg_*^{ét}` as functors `D⁺(Z_ét) ⥤ D(Y_proét)`. It is the
+inverse of the canonical isomorphism
+`AlgebraicGeometry.ProEtale.rightDerivedLowerStarComparisonPlusIso`, transported
+along the inclusions of the bounded below derived categories. -/
 noncomputable def rightDerivedLowerStarComparisonIso :
     DerivedCategory.Plus.ι ⋙ D(ν^*(Z)[A]) ⋙ R(ProEtale.lowerStar A g) ≅
       DerivedCategory.Plus.ι ⋙ R(Etale.lowerStar A g) ⋙ D(ν^*(Y)[A]) :=
@@ -112,7 +113,7 @@ noncomputable def rightDerivedLowerStarComparisonIso :
     Functor.isoWhiskerLeft D+(ν^*(Z)[A])
       (ProEtale.lowerStar A g).rightDerivedFunctorPlusCompatibility.symm ≪≫
     Functor.isoWhiskerRight
-      (nonempty_iso_comparisonUpperStar_comp_rightDerivedLowerStar A g).some.symm
+      (rightDerivedLowerStarComparisonPlusIso g A).symm
       DerivedCategory.Plus.ι ≪≫
     Functor.isoWhiskerLeft R+(Etale.lowerStar A g)
       (ν^*(Y)[A]).mapDerivedCategoryPlusCompatibility ≪≫

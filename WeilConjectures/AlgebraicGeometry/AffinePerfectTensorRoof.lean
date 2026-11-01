@@ -7,8 +7,11 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
-public import WeilConjectures.AlgebraicGeometry.DerivedTensorAugmentation
 public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
+public import WeilConjectures.Algebra.Homology.KFlat
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+public import Mathlib.Algebra.Homology.Monoidal
 import WeilConjectures.AlgebraicGeometry.RHomSupportedQuasiCoherentPerfectPart
 import WeilConjectures.AlgebraicGeometry.AffineKoszulSectionRoof
 import WeilConjectures.AlgebraicGeometry.TensorRoofTransposition

@@ -8,7 +8,6 @@ module
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatDevissage
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ConstructibleDirectImage
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.TensorBaseChange
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.KFlat
 
 /-!
 # Reduction of the base change map to single sheaves

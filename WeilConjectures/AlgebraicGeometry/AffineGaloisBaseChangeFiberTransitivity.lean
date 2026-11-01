@@ -7,7 +7,6 @@ Authors: Bin Wu
 module
 
 public import Mathlib.FieldTheory.Galois.Basic
-public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 public import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
 import WeilConjectures.AlgebraicGeometry.TensorGaloisPrimeTransitivity
 

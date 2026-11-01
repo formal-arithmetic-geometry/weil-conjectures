@@ -8,7 +8,6 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.SchemeOrdinaryEvaluationFormula
 public import WeilConjectures.AlgebraicGeometry.CanonicalDerivedTensorHom
-public import WeilConjectures.Algebra.Homology.KFlat
 import WeilConjectures.AlgebraicGeometry.SchemeOrdinaryEvaluationLocalization
 
 /-! # Evaluation with actual models on one scheme site

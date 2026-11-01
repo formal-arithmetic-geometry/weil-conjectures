@@ -124,8 +124,7 @@ noncomputable def compactifiedToPointModelHom :
   comm_i := by rw [toPoint_left]; exact (isPullback_compactifiedSpecialFibre X x k').w.symm
   comm_ε := by rw [toPoint_left]; exact (compactifiedGenericToBase_hom X x k').symm
 
-omit [IsSepClosed k'] [Fact (ringChar k).Prime] [Fact (ringChar k').Prime]
-  [Fact (ringChar k ≠ ℓ)] [Fact (ringChar k' ≠ ℓ)] in
+omit [IsSepClosed k'] [Fact (ringChar k).Prime] [Fact (ringChar k').Prime] in
 lemma isIsoOn_compactifiedToPointModelHom_pushforwardExchange :
     IsIsoOn (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι
       ((compactifiedToPointModelHom X x k').pushforwardExchange (Profinite.padicAlgClRingObj ℓ)) :=
@@ -133,7 +132,11 @@ lemma isIsoOn_compactifiedToPointModelHom_pushforwardExchange :
   have : IsProper (toPoint X).left := by rw [toPoint_left]; infer_instance
   have : IsProper (compactifiedToPointModelHom X x k').total :=
     inferInstanceAs (IsProper (compactifiedTotalToTrait X x k'))
+  have : IsNoetherian (point k).left := inferInstanceAs (IsNoetherian (Spec (.of k)))
   (compactifiedToPointModelHom X x k').isIso_pushforwardExchange_app_of_isProper
+    (point k).hom
+    (isTraitModel_compactifiedDeformationModel X x k').exists_over
+    (isTraitModel_traitModel k k').exists_over
     (by
       have h := isPullback_compactifiedSpecialFibre X x k'
       rw [← toPoint_left (compactifiedSpecialFibre X x k')] at h

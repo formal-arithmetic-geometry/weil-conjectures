@@ -5,12 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.DeligneLaumon.AffineLine.Defs
-public import WeilConjectures.WeilSheaf.CurveEndpoints
-public import WeilConjectures.WeilSheaf.LowerStarId
-public import WeilConjectures.WeilSheaf.TateTwistCohomology
 public import WeilConjectures.ZetaFunction.Examples
-public import WeilConjectures.ZetaFunction.Weights
 
 /-!
 # Compactly supported cohomology of the affine line and of the multiplicative group

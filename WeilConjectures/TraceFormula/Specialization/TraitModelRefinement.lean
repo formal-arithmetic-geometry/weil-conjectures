@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.Compactification.CommonRefinement
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
 public import WeilConjectures.TraceFormula.Specialization.TraitModelGenericSpec
 
@@ -442,10 +443,12 @@ theorem Compactification.exists_refinement (C₁ C₂ : h.Compactification) :
   let F : N.total ⟶ pullback z₃ zT :=
     pullback.lift (pullback.lift (eN ≫ ι₃.left) q (by rw [Category.assoc, Over.w ι₃, heN']))
       (pullback.lift C₁.hom.total C₂.hom.total (by rw [← C₁.q_eq, ← C₂.q_eq]))
-      (by simp [z₃, zT, ← C₁.q_eq])
+      (by
+        simp [z₃, zT, ← C₁.q_eq, -pullback.fst_comp_eq_toBase, -pullback.snd_comp_eq_toBase])
   have hF₁ : F ≫ pr₁ = C₁.hom.total := by simp [F, pr₁]
   have hF₂ : F ≫ pr₂ = C₂.hom.total := by simp [F, pr₂]
-  have hFz : F ≫ zW = q := by simp [F, zW, z₃]
+  have hFz : F ≫ zW = q := by
+    simp [F, zW, z₃, -pullback.fst_comp_eq_toBase, -pullback.snd_comp_eq_toBase]
   have : QuasiCompact F := by
     have : QuasiCompact (F ≫ zW) := by
       rw [hFz]
@@ -493,7 +496,8 @@ theorem Compactification.exists_refinement (C₁ C₂ : h.Compactification) :
   have hκW₁ : κW ≫ pr₁ = p₁K ≫ σ₁ := by simp [κW, pr₁]
   have hκW₂ : κW ≫ pr₂ = p₂K ≫ σ₂ := by simp [κW, pr₂]
   have hκW₃ : κW ≫ pr₃ = pullback.fst _ _ := by simp [κW, pr₃]
-  have hκWz : κW ≫ zW = pullback.snd _ _ ≫ traitGenericSpec k' := by simp [κW, zW, z₃]
+  have hκWz : κW ≫ zW = pullback.snd _ _ ≫ traitGenericSpec k' := by
+    simp [κW, zW, z₃, -pullback.fst_comp_eq_toBase, -pullback.snd_comp_eq_toBase]
   let κ : pullback X₃.hom (traitGenericSpec k' ≫ traitToBase k k') ⟶
       pullback zW (traitGenericSpec k') := pullback.lift κW (pullback.snd _ _) hκWz
   have hκfst : κ ≫ pullback.fst _ _ = κW := pullback.lift_fst _ _ _

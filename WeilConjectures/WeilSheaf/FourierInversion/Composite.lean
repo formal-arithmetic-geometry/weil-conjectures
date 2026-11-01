@@ -34,8 +34,8 @@ theorem nonempty_iso_fourierKernel_artinSchreierOf (ψ : AddChar k₀ (PadicAlgC
     Nonempty (fourierKernel ψ ≅ artinSchreierOf ψ
       ((affinePlane.fst k₀).appTop (AffineSpace.coord _ PUnit.unit) *
         (affinePlane.snd k₀).appTop (AffineSpace.coord _ PUnit.unit))) := by
-  rw [fourierKernel, artinSchreierOf_eq]
-  exact ⟨(WeilSheaf.upperStarCongr affinePlane.mul_eq_homOfSection).app _⟩
+  rw [artinSchreierOf_eq]
+  exact ⟨fourierKernelIso ψ ≪≫ (WeilSheaf.upperStarCongr affinePlane.mul_eq_homOfSection).app _⟩
 
 /-- The Fourier kernels for `ψ` and `ψ⁻¹` pulled back to the triple product `𝔸³` with points
 `(x, ξ, y)` multiply to `ℒ_ψ((x - y) ξ)`: tensoring with `r₁₂^* μ^* ℒ_ψ` and then with

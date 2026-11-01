@@ -7,8 +7,6 @@ module
 
 public import WeilConjectures.DeligneLaumon.AffineLine.LinearCharacters
 public import WeilConjectures.DeligneLaumon.AffineLine.PunctualTransform
-public import WeilConjectures.WeilSheaf.LisseLocus
-public import WeilConjectures.WeilSheaf.StalkExtensionByZero
 public import WeilConjectures.WeilSheaf.SupportSubobject
 
 /-!

@@ -42,6 +42,10 @@ geometric generic point of the special-fibre line `𝔸¹_{k'}`. -/
 abbrev traitSliceField : Type u :=
   AlgebraicClosure (RatFunc k')
 
+/-- The field `K = k'(x)^alg` of the generic slices has the characteristic of `k'`. -/
+lemma ringChar_traitSliceField : ringChar (traitSliceField k') = ringChar k' :=
+  (Algebra.ringChar_eq k' (traitSliceField k')).symm
+
 /-- The coordinate `x = X ∈ k'(X) ⊆ K` of the generic slices. -/
 noncomputable def traitSliceCoord : traitSliceField k' :=
   algebraMap (RatFunc k') (traitSliceField k') RatFunc.X

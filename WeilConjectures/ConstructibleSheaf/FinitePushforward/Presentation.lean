@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.ConstructibleSheaf.EtaleLowerShriekQcqs
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward.FiniteSubsum
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfShape
 
 /-!
 # Presentations of constructible sheaves (Stacks 095N)

@@ -9,13 +9,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.CanonicalDerivedTensorHom
 import WeilConjectures.AlgebraicGeometry.StrictlyPerfectEvaluationModel
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
-import WeilConjectures.Algebra.Homology.BoundedAboveFlatSheafKFlat
-import WeilConjectures.Algebra.Homology.DerivedInternalHom
-import WeilConjectures.Algebra.Homology.HomComplex
-import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
-import WeilConjectures.AlgebraicGeometry.StrictlyPerfectDerivedInternalHom
-import WeilConjectures.AlgebraicGeometry.DerivedInternalHomRestrictOpen
+import WeilConjectures.AlgebraicGeometry.StrictlyPerfectOrdinaryEvaluation
 
 /-! # Strictly perfect local tensor--RHom evaluation
 

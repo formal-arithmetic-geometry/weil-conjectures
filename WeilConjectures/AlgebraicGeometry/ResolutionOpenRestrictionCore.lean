@@ -8,7 +8,6 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.ResolutionOpenComparisonMap
 public import WeilConjectures.AlgebraicGeometry.Ample
-public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 import WeilConjectures.AlgebraicGeometry.NonvanishingGeneratingLocus
 import WeilConjectures.AlgebraicGeometry.ResolutionOpenRestrictionNatural
 

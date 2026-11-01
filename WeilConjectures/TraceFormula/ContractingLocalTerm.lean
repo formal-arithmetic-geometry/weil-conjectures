@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.TraceFormula.ContractingAdditivity
 public import WeilConjectures.TraceFormula.Specialization.Vanishing
+import WeilConjectures.TraceFormula.ProperCompatibility
 
 /-!
 

@@ -155,7 +155,7 @@ section Braided
 
 attribute [local instance] boundedConstructibleBraiding
 
-omit [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] in
+omit [IsSeparated X.hom] in
 lemma boundedConstructible_braiding_hom_hom (K M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (β_ K M).hom.hom =
       (@BraidedCategory.braiding _ _ _ (DerivedCategory.braidedCategory' _) K.obj M.obj).hom :=

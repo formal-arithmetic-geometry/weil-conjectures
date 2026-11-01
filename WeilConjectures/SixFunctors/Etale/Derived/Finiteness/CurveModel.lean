@@ -5,11 +5,8 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FiniteComparison
-public import WeilConjectures.SixFunctors.OpenClosed.Conservative
-public import WeilConjectures.SixFunctors.OpenClosed.Exact
-public import WeilConjectures.SixFunctors.OpenClosed.Vanishing
+public import WeilConjectures.ConstructibleSheaf.FinitePushforward
 
 /-!
 # Direct images on the pieces of a generic curve model

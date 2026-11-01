@@ -10,6 +10,8 @@ public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.Mathlib.CategoryTheory.Endofunctor.Algebra
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.SepClosedPoint
+
 /-!
 
 # Weil sheaves of `ℚ̄_ℓ`-modules and their stalks
@@ -66,12 +68,12 @@ Frobenius action is `ProEtale.CondensedRing.WeilSheaf.frobeniusStalkFunctor`.
   geometric Galois Frobenius at the geometric point over a `k`-rational point,
   a functor `WeilSheaf ℓ f.geometricFrobeniusOver ⥤ IsoAlgebra (𝟭 Mod_{Spec k̄})`.
 
-## Sorried input
+## Main results
 
 - `ProEtale.CondensedRing.isEquivalence_upperStarFromPointMod`: for `Ω` separably closed, the
   pullback `p^*` from condensed `Λ`-modules to `Λ`-modules on `(Spec Ω)_proét` is an
   equivalence, the pro-étale site of `Spec Ω` being equivalent to profinite sets through
-  `S ↦ Spec C(S, Ω)`. This is the only sorry: the comparison isomorphisms are constructed.
+  `S ↦ Spec C(S, Ω)` (`ProEtale.isEquivalence_mapMod_upperStarFromPoint`).
 
 -/
 
@@ -131,7 +133,7 @@ profinite sets, through `S ↦ Spec C(S, Ω)` (blueprint `sk-prop-pe-condensed-p
 `det-pe-condensed-point-coefficients` for the coefficient ring). -/
 instance isEquivalence_upperStarFromPointMod [IsSepClosed Ω] :
     (upperStarFromPointMod Λ (Spec (.of Ω))).IsEquivalence :=
-  sorry
+  ProEtale.isEquivalence_mapMod_upperStarFromPoint Ω Λ
 
 /-- For a separably closed field `Ω`, the pullback `σ^*` of `Λ`-modules along an endomorphism
 `σ` of `Spec Ω` is isomorphic to the identity: writing `P = p^*` for the equivalence

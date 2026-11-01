@@ -8,10 +8,12 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.PQFCohomology
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
+public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 import Mathlib.Algebra.Homology.Factorizations.CM5a
 import WeilConjectures.FromJoel.Algebra.Homology.Embedding.ExtendMap
 import WeilConjectures.AlgebraicGeometry.PushforwardInjectivesSectionsQuasiIso
 import WeilConjectures.AlgebraicGeometry.Modules.Ext
+import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 
 /-! # Maps on module cohomology induced by scheme maps
 

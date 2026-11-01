@@ -11,6 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.CanonicalDerivedTensorHom
 import WeilConjectures.AlgebraicGeometry.StrictlyPerfectLocalHomComputations
 import WeilConjectures.AlgebraicGeometry.ExactSourceEvaluationLocalComparisons
 import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationDifferential
+import WeilConjectures.AlgebraicGeometry.StrictlyPerfectOrdinaryEvaluation
 
 /-! # A local retraction of canonical derived evaluation
 

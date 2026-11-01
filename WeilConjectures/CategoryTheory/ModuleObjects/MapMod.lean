@@ -23,7 +23,8 @@ object, so that `F.obj R` is an algebra object of `D` (`Functor.monObjObj`, a sc
 `Functor.modObjObj` is made a scoped instance of `CategoryTheory.Obj`, and:
 
 * `Functor.mapMod` commutes with the forgetful functors (`Functor.mapMod_comp_forget`) and with
-  restriction of scalars (`Functor.mapModComapIso`), and is exact when `F` is.
+  restriction of scalars (`Functor.mapModComapIso`), sends the regular module to the regular
+  module (`Functor.mapModRegularIso`), and is exact when `F` is.
 * `Functor.mapModCompIso`: for a monoidal natural isomorphism `τ : F ⋙ G ⟶ H`, transporting
   module objects along `F` and then `G` is transporting them along `H` and restricting scalars
   along `τ.app R`.
@@ -95,6 +96,14 @@ def mapModComapIso : Mod.comap φ ⋙ F.mapMod R ≅ F.mapMod S ⋙ Mod.comap (F
     rw [F.map_comp, μ_natural_left_assoc])) (fun _ ↦ by ext; simp)
 
 end Comap
+
+variable (R) in
+/-- The image of the regular module under a lax monoidal functor `F` is the regular module over
+`F R`. -/
+noncomputable def mapModRegularIso :
+    (F.mapMod R).obj (Mod.regular R : Mod C R) ≅ (Mod.regular (F.obj R) : Mod D (F.obj R)) :=
+  Mod.isoMk (Iso.refl (F.obj R)) (by
+    erw [Category.comp_id, MonoidalCategory.whiskerLeft_id, Category.id_comp])
 
 /-! ### Exactness of `mapMod` -/
 

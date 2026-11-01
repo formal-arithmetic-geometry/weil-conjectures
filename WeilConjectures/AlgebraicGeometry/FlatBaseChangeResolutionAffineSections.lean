@@ -13,13 +13,6 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import WeilConjectures.AlgebraicGeometry.FlatBaseChangeAffineDictionary
 import WeilConjectures.AlgebraicGeometry.FlatBaseChangeResolutionSections
 import WeilConjectures.AlgebraicGeometry.FlatBaseChangeOpenChoicesExist
-import WeilConjectures.AlgebraicGeometry.LerayDegenerateSections
-import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSectionsBijective
-import WeilConjectures.AlgebraicGeometry.OrdinaryHigherImageQuasiCoherent
-import WeilConjectures.AlgebraicGeometry.TensorPullback
-import WeilConjectures.AlgebraicGeometry.HigherDirectImagePresheaf
-import WeilConjectures.AlgebraicGeometry.ZariskiModuleAbelianCohomologyNatural
-import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Cech
 
 /-! # Affine sections of the resolution-defined flat base-change comparison
 

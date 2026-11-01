@@ -6,12 +6,14 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 public import WeilConjectures.AlgebraicGeometry.Modules.Ext
 public import WeilConjectures.Topology.OpenModuleCohomology
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import Mathlib.AlgebraicGeometry.Pullbacks
+public import WeilConjectures.Topology.RingedSpaceModuleCohomology
+public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
+import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
 /-! # Restricted resolution choices for the section formula
 

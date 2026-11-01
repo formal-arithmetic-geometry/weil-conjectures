@@ -5,14 +5,12 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.AffineSpaceClosedChart
 public import WeilConjectures.AlgebraicGeometry.AffineSpaceClosedPoints
-public import WeilConjectures.AlgebraicGeometry.ClosedPointsFiberProduct
 public import WeilConjectures.AlgebraicGeometry.QuasiFiniteClosedPoints
-public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethSlice
-public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethSliceStep
+public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethFormula
 public import WeilConjectures.TraceFormula.Specialization.TraitProductRestrict
-public import WeilConjectures.Tactic.ExactModProofs
+import WeilConjectures.TraceFormula.Specialization.SliceSupport
+import WeilConjectures.AlgebraicGeometry.StrictHenselizationLimitDimension
 
 /-!
 
@@ -24,9 +22,8 @@ for bounded constructible `A`, `B`. This file proves that `C` is supported on fi
 points of the special fibre `X_s × Y_s`
 (`NearbyCyclesModel.exists_finite_isIso_upperStar_map_kunnethMap_of_boundedConstructible`), given
 that its source and target are bounded constructible, that the total spaces locally embed into
-`𝔸ᵐ_S`, `𝔸^{m'}_S`, and that the Künneth formula holds in chart dimension `m + m' - 1` over the
-trait of the generic slices: by the generic-slicing step
-(`NearbyCyclesModel.isIso_map_kunnethMap_baseChangeSpecialMap_fst`, blueprint
+`𝔸ᵐ_S`, `𝔸^{m'}_S`, and that the generic-slicing step holds in chart dimension `m + m' - 1`:
+by the generic-slicing step (`NearbyCyclesModel.SliceKunnethFormula`, blueprint
 `sk-prop-tf-nearby-external-kunneth`, "Finite support"), `C` vanishes on the special fibre
 `(𝒵 ×_{𝔸¹_S} Spec K⟦t⟧)_s` of the generic slice of every chart coordinate.
 
@@ -269,29 +266,32 @@ lemma isTraitModelOver_restrictOpen_productOpen
 
 set_option maxHeartbeats 1600000 in
 -- the triangle of the Künneth map has large terms
+omit [IsSepClosed k'] [Fact (ringChar k').Prime] [Fact (ringChar k' ≠ ℓ)] in
 /-- **The finite-support step of Gabber's Künneth formula** (blueprint
 `sk-prop-tf-nearby-external-kunneth`, "Finite support"; Illusie, *Autour du théorème de monodromie
 locale*, proof of Thm. 4.7): for the product `P` over the strictly henselian trait of models `M`,
 `N` of finite type and bounded constructible `A`, `B` such that the source and the target of the
 Künneth map `Π_{A,B}` are bounded constructible, and whose total spaces locally embed into `𝔸ᵐ_S`,
-`𝔸^{m'}_S`, if the Künneth formula holds in chart dimension `m + m' - 1` over the trait of the
-generic slices, then `Π_{A,B}` is an isomorphism away from finitely many closed points of the
-special fibre `X_s × Y_s`.
+`𝔸^{m'}_S`, if the generic-slicing step holds in chart dimension `m + m' - 1`
+(`NearbyCyclesModel.SliceKunnethFormula`), then `Π_{A,B}` is an isomorphism away from finitely
+many closed points of the special fibre `X_s × Y_s`.
 
 Around every point, the coordinates of charts `V ⟶ 𝔸(ι_V; S)`, `W ⟶ 𝔸(ι_W; S)` of the total
 spaces detect closed points of the special fibre of `V ×_S W`, and the cone of
 `Π_{A,B}` vanishes over the generic point of each coordinate line
-(`NearbyCyclesModel.isIso_map_kunnethMap_baseChangeSpecialMap_fst` and its mirror, for the
+(`NearbyCyclesModel.SliceKunnethFormula` and its mirror, for the
 restriction of the product to `V ×_S W`); conclude by
 `ProEtale.CondensedRing.exists_finset_isZero_of_forall_exists_coordinates`.
 -/
 theorem exists_finite_isIso_upperStar_map_kunnethMap_of_boundedConstructible
+    [TopologicalSpace.NoetherianSpace X] [TopologicalSpace.NoetherianSpace Y]
+    [TopologicalSpace.NoetherianSpace Z]
     (hM : M.IsTraitModelOver qM gM) (hN : N.IsTraitModelOver qN gN)
     (hpb : IsPullback φ₁.total φ₂.total qM qN)
     (hP : P.IsTraitModelOver (φ₁.total ≫ qM) (φ₁.generic ≫ gM))
     (hgen : φ₂.generic ≫ gN = φ₁.generic ≫ gM) {m m' : ℕ}
     (hm : qM.LocallyEmbedsInAffineSpace m) (hm' : qN.LocallyEmbedsInAffineSpace m')
-    (hIH : 0 < m + m' → KunnethFormula ℓ (traitSliceField k') (m + m' - 1))
+    (hslice : 0 < m + m' → SliceKunnethFormula (Profinite.padicAlgClRingObj ℓ) k' (m + m' - 1))
     {eM : M.total ⟶ X} (heM : M.j ≫ eM = M.ε) {eN : N.total ⟶ Y} (heN : N.j ≫ eN = N.ε)
     {A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X))}
@@ -428,17 +428,18 @@ theorem exists_finite_isIso_upperStar_map_kunnethMap_of_boundedConstructible
           (traitSlice (traitSliceCoord k'))
         have hlt : Nat.card {j : ιV // j ≠ a} < Nat.card ιV :=
           Finite.card_subtype_lt (x := a) (by simp)
-        exact isIso_map_kunnethMap_baseChangeSpecialMap_fst hMV hNW hpbU hPU hgenU
+        exact (hslice (by omega)).isIso ψ₁ ψ₂ hMV hNW hpbU hPU hgenU inferInstance
+          inferInstance inferInstance
           (b := cV ≫ AffineSpace.reindex (fun _ ↦ a) (trait k')) (by simp [hcV])
-          (hIH (by omega)) (by omega) (Scheme.Hom.LocallyEmbedsInAffineSpace.of_isImmersion c' hc')
+          (by omega) (Scheme.Hom.LocallyEmbedsInAffineSpace.of_isImmersion c' hc')
           (hm'.restrict W) heMV heNW hA' hB'
       · obtain ⟨c', hc'i, hc'⟩ := exists_isImmersion_pullback_reindex cW a
           (traitSlice (traitSliceCoord k'))
         have hlt : Nat.card {j : ιW // j ≠ a} < Nat.card ιW :=
           Finite.card_subtype_lt (x := a) (by simp)
         exact isIso_map_kunnethMap_baseChangeSpecialMap_snd hMV hNW hpbU hPU hgenU
-          (b := cW ≫ AffineSpace.reindex (fun _ ↦ a) (trait k')) (by simp [hcW])
-          (hIH (by omega)) (by omega) (hm.restrict V)
+          (b := cW ≫ AffineSpace.reindex (fun _ ↦ a) (trait k')) (by simp [hcW]) _
+          (hslice (by omega)) (by omega) (hm.restrict V)
           (Scheme.Hom.LocallyEmbedsInAffineSpace.of_isImmersion c' hc') heMV heNW hA' hB'
     rw [← isIso_map_map_kunnethMap_iff_of_isKunnethRestriction _ hR] at hslice
     let r' : (P.restrictSpecialFibre U).left ⟶ Z'.left := (P.i ⁻¹ᵁ U).ι

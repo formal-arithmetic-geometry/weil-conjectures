@@ -7,7 +7,6 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeMayerVietorisCanonicalData
-import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeOpenUnit
 import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeMayerVietorisCanonicalShift
 import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeMayerVietorisCanonicalPullback
 import WeilConjectures.AlgebraicGeometry.OpenImageComplexComparisonUnit

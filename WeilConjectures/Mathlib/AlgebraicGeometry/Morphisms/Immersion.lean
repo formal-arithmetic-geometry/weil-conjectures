@@ -23,6 +23,8 @@ Unrelated additions to Mathlib's `AlgebraicGeometry.IsImmersion`:
   the categorical product in `Over S`.
 - `AlgebraicGeometry.IsImmersion.isIso_of_nonempty`: an immersion with nonempty source into
   the spectrum of a field is an isomorphism.
+- `AlgebraicGeometry.isIso_of_isImmersion_of_surjective`: a surjective immersion into a reduced
+  scheme is an isomorphism.
 
 -/
 
@@ -160,5 +162,22 @@ lemma Scheme.Hom.isAffineOpen_preimage_of_le_coborderRange {X Y : Scheme.{u}} (j
   have h := (hV.preimage_of_isOpenImmersion j.coborderRange.ι
     (by rwa [Scheme.Opens.opensRange_ι])).preimage j.liftCoborder
   rwa [← Scheme.Hom.comp_preimage, Scheme.Hom.liftCoborder_ι] at h
+
+/-- A surjective immersion into a reduced scheme is an isomorphism: it factors as a closed
+immersion followed by a surjective open immersion. -/
+lemma isIso_of_isImmersion_of_surjective {S T : Scheme.{u}} (f : S ⟶ T)
+    [IsImmersion f] [IsReduced T] (hf : Function.Surjective f.base) : IsIso f := by
+  have : IsIso f.coborderRange.ι := by
+    rw [isIso_iff_isOpenImmersion_and_surjective]
+    refine ⟨inferInstance, ⟨fun y ↦ ?_⟩⟩
+    obtain ⟨x, rfl⟩ := hf y
+    exact ⟨f.liftCoborder.base x, by rw [← Scheme.Hom.comp_apply, f.liftCoborder_ι]⟩
+  have : Surjective f.liftCoborder := ⟨fun y ↦ by
+    obtain ⟨x, hx⟩ := hf (f.coborderRange.ι.base y)
+    refine ⟨x, f.coborderRange.ι.isOpenEmbedding.injective ?_⟩
+    rw [← Scheme.Hom.comp_apply, f.liftCoborder_ι, hx]⟩
+  have := isIso_of_isClosedImmersion_of_surjective f.liftCoborder
+  rw [← f.liftCoborder_ι]
+  infer_instance
 
 end AlgebraicGeometry

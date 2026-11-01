@@ -312,27 +312,31 @@ open Scheme PadicAlgCl CondensedRing
 
 section FinitelyPresented
 
-variable (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ)
+variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
+  [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
 
+omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] in
 /-- The residue map `𝒪_{E,V} ⟶ 𝔽_{E,V}` on global sections is the postcomposition of continuous
 functions `V → 𝒪_E` with the residue map `𝒪_E → 𝔽_E`. -/
 lemma Γ_map_padicIntegersToResidueField (V : Scheme.{u}) :
-    letI := normedFieldOfAlgebra ℓ E.1
-    ∀ f : C(V, integers ℓ E.1),
+    letI := normedFieldOfAlgebra ℓ E
+    haveI := isUltrametricDist_ofAlgebra ℓ E
+    ∀ f : C(V, integers ℓ E),
       Γ.map (padicIntegersToResidueField V ℓ E)
-          (continuousMapCoefficientSectionRingHom V (integers ℓ E.1) f) =
-        continuousMapCoefficientSectionRingHom V (integersResidueField ℓ E.1)
-          ((⟨integersResidue ℓ E.1, continuous_integersResidue ℓ E.1⟩ :
-            C(integers ℓ E.1, integersResidueField ℓ E.1)).comp f) := by
-  let := normedFieldOfAlgebra ℓ E.1
+          (continuousMapCoefficientSectionRingHom V (integers ℓ E) f) =
+        continuousMapCoefficientSectionRingHom V (integersResidueField ℓ E)
+          ((⟨integersResidue ℓ E, continuous_integersResidue ℓ E⟩ :
+            C(integers ℓ E, integersResidueField ℓ E)).comp f) := by
+  let := normedFieldOfAlgebra ℓ E
+  have := isUltrametricDist_ofAlgebra ℓ E
   intro f
-  have hn := continuousMapComparison_naturality V (integersResidue ℓ E.1)
-    (continuous_integersResidue ℓ E.1)
-  have hn' : inv (continuousMapComparison V (integers ℓ E.1)) ≫
+  have hn := continuousMapComparison_naturality V (integersResidue ℓ E)
+    (continuous_integersResidue ℓ E)
+  have hn' : inv (continuousMapComparison V (integers ℓ E)) ≫
       padicIntegersToResidueField V ℓ E =
       (sheafCompose (ProEt.topology V) (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
-        (continuousMapRingSheafMap V (integersResidue ℓ E.1) (continuous_integersResidue ℓ E.1)) ≫
-        inv (continuousMapComparison V (integersResidueField ℓ E.1)) := by
+        (continuousMapRingSheafMap V (integersResidue ℓ E) (continuous_integersResidue ℓ E)) ≫
+        inv (continuousMapComparison V (integersResidueField ℓ E)) := by
     rw [IsIso.inv_comp_eq, ← Category.assoc, ← hn, Category.assoc, IsIso.hom_inv_id,
       Category.comp_id]
     rfl
@@ -346,19 +350,21 @@ lemma Γ_map_padicIntegersToResidueField (V : Scheme.{u}) :
   rfl
 
 
+omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] in
 /-- **Nakayama's lemma for finitely presented `𝒪_{E,V}`-modules.** On any scheme `V`, a finitely
 presented `𝒪_{E,V}`-module object whose reduction `N ⊗_{𝒪_{E,V}} 𝔽_{E,V}` vanishes is zero. -/
 theorem isZero_of_isFinitelyPresented_of_isZero_extendScalars {V : Scheme.{u}}
     (N : Mod (Sheaf (ProEt.topology V) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) V))
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) V))
     (hN : Mod.IsFinitelyPresented _ N)
     (h : IsZero ((Mod.extendScalars (padicIntegersToResidueField V ℓ E)).obj N)) :
     IsZero N := by
-  let := normedFieldOfAlgebra ℓ E.1
+  let := normedFieldOfAlgebra ℓ E
+  have := isUltrametricDist_ofAlgebra ℓ E
   refine Mod.isZero_of_isFinitelyPresented_of_isZero_extendScalars_of_continuousMap
-    (padicIntegersToResidueField V ℓ E) (integersResidue ℓ E.1)
-    (continuous_integersResidue ℓ E.1) (integersResidue_surjective ℓ E.1)
-    (isUnit_of_isUnit_integersResidue ℓ E.1) (isUnit_continuousMap_integers ℓ E.1)
+    (padicIntegersToResidueField V ℓ E) (integersResidue ℓ E)
+    (continuous_integersResidue ℓ E) (integersResidue_surjective ℓ E)
+    (isUnit_of_isUnit_integersResidue ℓ E) (isUnit_continuousMap_integers ℓ E)
     (Mod.regularEndRingHom.comp (continuousMapCoefficientSectionRingHom V _))
     (Mod.regularEndRingHom_bijective.comp (continuousMapCoefficientSectionRingHom_bijective V _))
     (Mod.regularEndRingHom.comp (continuousMapCoefficientSectionRingHom V _))
@@ -374,28 +380,31 @@ end FinitelyPresented
 
 section Constructible
 
-variable (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ)
+variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
+  [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
 
+omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] in
 /-- Let `g : V ⟶ X` be a morphism along which the pullback of an `𝒪_{E,X}`-module `M` is finitely
 presented. If the reduction of `M` vanishes, so does `g^* M`: the reduction commutes with
 pullbacks. -/
 lemma isZero_upperStar_of_isZero_extendScalars {X V : Scheme.{u}} (g : V ⟶ X)
     (M : Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))
-    (hM : Mod.IsFinitelyPresented _ ((g)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧.obj M))
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))
+    (hM : Mod.IsFinitelyPresented _ ((g)^*⟦Profinite.padicIntegersRingObj ℓ E⟧.obj M))
     (h : IsZero ((Mod.extendScalars (padicIntegersToResidueField X ℓ E)).obj M)) :
-    IsZero ((g)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧.obj M) :=
+    IsZero ((g)^*⟦Profinite.padicIntegersRingObj ℓ E⟧.obj M) :=
   isZero_of_isFinitelyPresented_of_isZero_extendScalars ℓ E _ hM
-    ((((g)^*⟦Profinite.continuousMapRingObj (integersResidueField ℓ E.1)⟧).map_isZero h).of_iso
-      ((pullIso (Profinite.padicIntegersRingObjToResidueField ℓ E.1) g).app M))
+    ((((g)^*⟦Profinite.continuousMapRingObj (integersResidueField ℓ E)⟧).map_isZero h).of_iso
+      ((pullIso (Profinite.padicIntegersRingObjToResidueField ℓ E) g).app M))
 
+omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] in
 /-- **Nakayama's lemma for constructible `𝒪_E`-module objects.** On a noetherian scheme `X`, a
 constructible `𝒪_{E,X}`-module object `M` whose reduction `M ⊗_{𝒪_{E,X}} 𝔽_{E,X}` vanishes is
 zero. -/
 theorem isZero_of_isConstructibleModuleObject_of_isZero_extendScalars
     {X : Scheme.{u}} [IsNoetherian X]
     (M : Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))
     (hM : IsConstructibleModuleObject _ M)
     (h : IsZero ((Mod.extendScalars (padicIntegersToResidueField X ℓ E)).obj M)) :
     IsZero M := by
@@ -428,20 +437,20 @@ theorem isZero_of_isConstructibleModuleObject_of_isZero_extendScalars
       exact hz
     exact ⟨⟨a, i⟩, w, rfl⟩
   have hz (a : Fin S.n) (i : Fin (N a)) : IsZero ((((W a i).ι ≫ (𝒰 a).f (j a i) ≫
-      S.immersion a))^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧.obj M) := by
+      S.immersion a))^*⟦Profinite.padicIntegersRingObj ℓ E⟧.obj M) := by
     refine isZero_upperStar_of_isZero_extendScalars ℓ E _ M ?_ h
-    have h₁ := isFinitelyPresented_upperStar_of_comap_iso (Profinite.padicIntegersRingObj ℓ E.1)
+    have h₁ := isFinitelyPresented_upperStar_of_comap_iso (Profinite.padicIntegersRingObj ℓ E)
       ((𝒰 a).f (j a i)) (condensedPullbackHom _ (S.immersion a))
       (comapUpperStarObjIso _ (S.immersion a) M) (h𝒰 a (j a i))
     exact (CondensedRing.IsFinitelyPresented.upperStar _ (W a i).ι h₁).of_iso
-      (((W a i).ι)^*⟦Profinite.padicIntegersRingObj ℓ E.1⟧.mapIso
+      (((W a i).ι)^*⟦Profinite.padicIntegersRingObj ℓ E⟧.mapIso
         ((CondensedRing.upperStarComp _ ((𝒰 a).f (j a i)) (S.immersion a)).app M).symm ≪≫
         ((CondensedRing.upperStarComp _ (W a i).ι ((𝒰 a).f (j a i) ≫ S.immersion a)).app M).symm)
   have hqcg (p : Σ a : Fin S.n, Fin (N a)) :
       QuasiCompact ((W p.1 p.2).ι ≫ (𝒰 p.1).f (j p.1 p.2) ≫ S.immersion p.1) :=
     have := hW' p.1 p.2
     quasiCompact_of_compactSpace _
-  refine CondensedRing.isZero_of_isZero_X (Profinite.padicIntegersRingObj ℓ E.1)
+  refine CondensedRing.isZero_of_isZero_X (Profinite.padicIntegersRingObj ℓ E)
     ((IsZero.iff_id_eq_zero _).2 ?_)
   refine ProEtale.eq_zero_of_forall_upperStar_map_eq_zero_addCommGrp
     (Z := fun p : Σ a : Fin S.n, Fin (N a) ↦ (W p.1 p.2).toScheme)

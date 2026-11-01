@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.CurveLocal.SwapProduct
+public import WeilConjectures.TraceFormula.TraceClass
 
 /-!
 

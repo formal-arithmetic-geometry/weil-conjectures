@@ -281,7 +281,7 @@ section General
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)] {k' : Type u} [Field k'] [Fact (ringChar k').Prime]
-  [Fact (ringChar k' ≠ ℓ)] [Algebra k k']
+  [Fact (ringChar k' ≠ ℓ)]
   {Y X : Over (Spec (.of k))} [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
   [IsSeparated Y.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   {Y' X' : Over (Spec (.of k'))} [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom]
@@ -292,19 +292,20 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [IsProper ι.left] [IsProper ι'.left]
   {N : NearbyCyclesModel Y.left Y'.left} {P : NearbyCyclesModel X.left X'.left}
   (hN : N.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
-  (hS : (traitModel k k').PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
+  {T : NearbyCyclesModel (point k).left (point k').left}
+  (hS : T.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
 
 omit [IsProper (toPoint Y).left] [IsProper (toPoint Y').left] in
 /-- On the ambient derived categories, `Ψ_S(f)` followed by the restricted proper exchange `χ_a`
 is `Ψ_S(f)` followed by the ambient `χ_a`. -/
 lemma map_hom_comp_boundedConstructiblePushforwardExchange_app_hom
-    (a : N.Hom (traitModel k k') (toPoint Y).left (toPoint Y').left)
+    (a : N.Hom T (toPoint Y).left (toPoint Y').left)
     (K : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (f : (boundedConstructibleLowerShriek ℓ (toPoint Y)).obj K ⟶
       (boundedConstructibleLowerStar ℓ (toPoint Y)).obj K) :
     ((NearbyCyclesModel.boundedConstructibleNearbyCycles hS).map f).hom ≫
         ((a.boundedConstructiblePushforwardExchange ℓ hN hS).app K).hom =
-      ((traitModel k k').nearbyCycles (Profinite.padicAlgClRingObj ℓ)).map
+      (T.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).map
           (Y := R(((toPoint Y).left)_*⟦Profinite.padicAlgClRingObj ℓ⟧).obj K.obj) f.hom ≫
         (a.pushforwardExchange (Profinite.padicAlgClRingObj ℓ)).app K.obj := by
   rw [NearbyCyclesModel.Hom.boundedConstructiblePushforwardExchange_app_hom]
@@ -316,10 +317,10 @@ morphisms `a₁` of `P` and `a = φ ≫ a₁` of `N` to the trait, the exchange
 `ν = χ_{a₁}⁻¹ ∘ Ra'_{1*}(ν_ι)` followed by `Ra_! ≅ Ra_*` and `χ_a` is `Ra'_! ≅ Ra'_*`. -/
 theorem compactSupportExchangeOfCompactification_app_comp_map_comp_pushforwardExchange_app
     (φ : N.Hom P ι.left ι'.left) [IsIso (φ.pullbackExchange (Profinite.padicAlgClRingObj ℓ))]
-    (a₁ : P.Hom (traitModel k k') (toPoint X).left (toPoint X').left)
+    (a₁ : P.Hom T (toPoint X).left (toPoint X').left)
     (ha₁ : IsIsoOn (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
       X.left)).ι (a₁.pushforwardExchange (Profinite.padicAlgClRingObj ℓ)))
-    (a : N.Hom (traitModel k k') (toPoint Y).left (toPoint Y').left)
+    (a : N.Hom T (toPoint Y).left (toPoint Y').left)
     (htot : φ.total ≫ a₁.total = a.total) (hgen : φ.generic ≫ a₁.generic = a.generic)
     (K : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (compactSupportExchangeOfCompactification ℓ hN hS (comp_toPoint ι) (comp_toPoint ι') φ a₁
@@ -384,7 +385,7 @@ theorem compactSupportExchangeOfCompactification_app_comp_map_comp_pushforwardEx
     cast_proofs compactificationLowerShriekIso_hom_app_hom_comp_map_comp_conjugateIsoEquiv_inv_app
       ℓ ι (toPoint X) (toPoint Y) (comp_toPoint ι) K
   case hz =>
-    cast_proofs Eq.refl (((traitModel k k').nearbyCycles (Profinite.padicAlgClRingObj ℓ)).map
+    cast_proofs Eq.refl ((T.nearbyCycles (Profinite.padicAlgClRingObj ℓ)).map
       (Y := R(((toPoint Y).left)_*⟦Profinite.padicAlgClRingObj ℓ⟧).obj K.obj)
         ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint Y)).hom.app K).hom ≫
       (a.pushforwardExchange (Profinite.padicAlgClRingObj ℓ)).app K.obj)

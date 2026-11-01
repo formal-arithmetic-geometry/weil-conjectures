@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.Specialization.Integral
+import WeilConjectures.TraceFormula.LocalTerm
 
 /-!
 

@@ -7,10 +7,10 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 import WeilConjectures.AlgebraicGeometry.EtaleLimitAffineStageTailColimit
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Filtered
-import WeilConjectures.AlgebraicGeometry.EtaleLimitAffineEventualZero
 
 /-! # Finite-stage vanishing when one stage is affine
 

@@ -487,6 +487,20 @@ end BoundedConstructible
 
 /-! #### The coefficient ring `E̲`, `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ` -/
 
+/-- The projection morphism of `Lp^* ⊣ Rp_*` is the projection map `projectionMap`. Stated for an
+abstract `Λ`: the two forms are unified once, without the instances of a concrete coefficient ring
+(by `rw` with this lemma, `ContinuousMapRingObj.isIso_properProjectionMorphism` does not unfold
+them). -/
+private lemma projectionMorphism_eq_projectionMap
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    {Z Y : Scheme.{u}} (p : Z ⟶ Y)
+    (A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)))
+    (B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj Λ Y))) :
+    (derivedUpperStarLowerStarAdjunction Λ p).projectionMorphism A B =
+      ((projectionMap Λ p).app A).app B :=
+  rfl
+
 namespace ContinuousMapRingObj
 
 
@@ -624,14 +638,47 @@ lemma boundedConstructibleExceptionalProjection_app_app
       boundedConstructibleExceptionalProjectionMorphism ℓ E f K B :=
   rfl
 
+/-- The projection morphism `PF^*_p` of a proper morphism `p` is an isomorphism on bounded
+constructible `E`-complexes: the proper projection formula (blueprint
+`det-thm-sfb-proper-base-change-rational`). -/
+lemma isIso_properProjectionMorphism {Z : Over (Spec (.of k))}
+    [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] (p : Z ⟶ Y)
+    [IsProper p.left]
+    (A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z.left) Ab.{u + 1})
+      (condensedRingObj (Profinite.continuousMapRingObj E) Z.left)))
+    (B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y.left) Ab.{u + 1})
+      (condensedRingObj (Profinite.continuousMapRingObj E) Y.left)))
+    (hA : boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj E) Z.left) A)
+    (hB : boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj E) Y.left) B) :
+    IsIso ((derivedUpperStarLowerStarAdjunction (Profinite.continuousMapRingObj E)
+      p.left).projectionMorphism A B) := by
+  rw [projectionMorphism_eq_projectionMap]
+  exact (properDirectImage_baseChange_projectionFormula_continuousMapRingObj ℓ E (X' := Z)
+    (Y' := Y) p).2.2 A B hA hB
+
 /-- **The derived projection formula for `Rf_!`** (`E`-coefficient): the exceptional projection
-morphism `PF^!_{f,K,B}` is an isomorphism for bounded constructible `K` and `B`. See the module
-docstring. -/
+morphism `PF^!_{f,K,B}` is an isomorphism for bounded constructible `K` and `B`. For the chosen
+compactification `X ⟶[i] Z ⟶[g] Y` it is the projection morphism `PF^*_g` at `Di_! K`, an
+isomorphism by the proper projection formula (blueprint `det-thm-sfb-proper-base-change-rational`,
+`Di_! K` being bounded constructible), followed by the inverse of the isomorphism `q_i` and an
+identification. -/
 instance isIso_boundedConstructibleExceptionalProjectionMorphism
     (K : Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧)
     (B : Dᵇc(Y.left)⟦Profinite.continuousMapRingObj E⟧) :
-    IsIso (boundedConstructibleExceptionalProjectionMorphism ℓ E f K B) :=
-  sorry
+    IsIso (boundedConstructibleExceptionalProjectionMorphism ℓ E f K B) := by
+  let c := compactificationOverField f
+  have hA := boundedConstructible_openImmersionLowerShriek_obj
+    (Profinite.continuousMapRingObj E) ℓ c.overI K
+  have : IsIso (properProjectionMorphism (Profinite.continuousMapRingObj E) c.overG.left
+      ((D((c.overI.left)_!open⟦Profinite.continuousMapRingObj E⟧)).obj K.obj) B.obj) :=
+    isIso_properProjectionMorphism ℓ E c.overG _ B.obj hA B.property
+  have : IsIso (properProjectionMorphism (Profinite.continuousMapRingObj E) c.g
+      ((D((c.i)_!open⟦Profinite.continuousMapRingObj E⟧)).obj K.obj) B.obj) := this
+  have : IsIso (exceptionalProjectionMorphismOfCompactification
+      (Profinite.continuousMapRingObj E) c K.obj B.obj) := by
+    unfold exceptionalProjectionMorphismOfCompactification
+    infer_instance
+  exact isIso_homMk_of_isIso _
 
 /-- The components of the exceptional projection are isomorphisms (`E`-coefficient). -/
 instance isIso_boundedConstructibleExceptionalProjection_app_app
@@ -784,14 +831,48 @@ lemma boundedConstructibleExceptionalProjection_app_app
       boundedConstructibleExceptionalProjectionMorphism ℓ E f K B :=
   rfl
 
+set_option maxHeartbeats 1000000 in
+-- unifying the two forms of the projection morphism unfolds the monoidal structure of `Lp^*`
+/-- The projection morphism `PF^*_p` of a proper morphism `p` is an isomorphism on bounded
+constructible `𝒪_E`-complexes: the proper projection formula (blueprint
+`det-thm-sfb-proper-base-change-integral`). -/
+lemma isIso_properProjectionMorphism {Z : Over (Spec (.of k))}
+    [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] (p : Z ⟶ Y)
+    [IsProper p.left]
+    (A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z.left) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) Z.left)))
+    (B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y.left) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) Y.left)))
+    (hA : boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) Z.left) A)
+    (hB : boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) Y.left) B) :
+    IsIso ((derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E)
+      p.left).projectionMorphism A B) :=
+  (properDirectImage_baseChange_projectionFormula_padicIntegersRingObj ℓ E (X' := Z) (Y' := Y)
+    p).2.2 A B hA hB
+
 /-- **The derived projection formula for `Rf_!`** (`𝒪_E`-coefficient): the exceptional projection
-morphism `PF^!_{f,K,B}` is an isomorphism for bounded constructible `K` and `B`. See the module
-docstring. -/
+morphism `PF^!_{f,K,B}` is an isomorphism for bounded constructible `K` and `B`. For the chosen
+compactification `X ⟶[i] Z ⟶[g] Y` it is the projection morphism `PF^*_g` at `Di_! K`, an
+isomorphism by the proper projection formula (blueprint `det-thm-sfb-proper-base-change-integral`,
+`Di_! K` being bounded constructible), followed by the inverse of the isomorphism `q_i` and an
+identification. -/
 instance isIso_boundedConstructibleExceptionalProjectionMorphism
     (K : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧)
     (B : Dᵇc(Y.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) :
-    IsIso (boundedConstructibleExceptionalProjectionMorphism ℓ E f K B) :=
-  sorry
+    IsIso (boundedConstructibleExceptionalProjectionMorphism ℓ E f K B) := by
+  let c := compactificationOverField f
+  have hA := boundedConstructible_openImmersionLowerShriek_obj
+    (Profinite.padicIntegersRingObj ℓ E) ℓ c.overI K
+  have : IsIso (properProjectionMorphism (Profinite.padicIntegersRingObj ℓ E) c.overG.left
+      ((D((c.overI.left)_!open⟦Profinite.padicIntegersRingObj ℓ E⟧)).obj K.obj) B.obj) :=
+    isIso_properProjectionMorphism ℓ E c.overG _ B.obj hA B.property
+  have : IsIso (properProjectionMorphism (Profinite.padicIntegersRingObj ℓ E) c.g
+      ((D((c.i)_!open⟦Profinite.padicIntegersRingObj ℓ E⟧)).obj K.obj) B.obj) := this
+  have : IsIso (exceptionalProjectionMorphismOfCompactification
+      (Profinite.padicIntegersRingObj ℓ E) c K.obj B.obj) := by
+    unfold exceptionalProjectionMorphismOfCompactification
+    infer_instance
+  exact isIso_homMk_of_isIso _
 
 /-- The components of the exceptional projection are isomorphisms (`𝒪_E`-coefficient). -/
 instance isIso_boundedConstructibleExceptionalProjection_app_app

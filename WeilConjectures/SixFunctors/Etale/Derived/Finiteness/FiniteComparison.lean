@@ -5,13 +5,10 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.ConstructibleSheaf.FiniteDerived
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.BoundedConstructible
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FiniteCancellation
 public import WeilConjectures.SixFunctors.Etale.Derived.InvertibleRestriction
-public import WeilConjectures.SixFunctors.Finite.Stalk
-public import WeilConjectures.SixFunctors.OpenClosed.Supported
 
 /-!
 # Constant coefficients under a finite modification

@@ -105,19 +105,22 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   (φ : M.Hom (traitModel k k') (toPoint B).left (toPoint B').left)
   (hM : M.PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
   (hN : (traitModel k k').PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
+  (hMt : M.IsTraitModel)
   [IsProper φ.total] (hi : IsPullback M.i (toPoint B').left φ.total (traitModel k k').i)
   (hε : IsPullback M.ε φ.generic (toPoint B).left (traitModel k k').ε)
 
-include hi hε in
+include hMt hi hε in
 /-- The pushforward exchange `χ_a : Ψ_s Ra_* ⟶ Ra'_* Ψ_M` of a proper morphism of models to the
 trait with cartesian squares of special and of generic fibres is invertible on bounded
 constructible complexes (blueprint `det-sp-nearby-cycles-exchanges` (2)). -/
 lemma isIso_boundedConstructiblePushforwardExchange_of_isProper :
     IsIso (φ.boundedConstructiblePushforwardExchange ℓ hM hN) := by
   have : IsProper (toPoint B).left := by rw [toPoint_left]; infer_instance
+  have : IsNoetherian (point k).left := inferInstanceAs (IsNoetherian (Spec (.of k)))
   rw [boundedConstructiblePushforwardExchange_eq_liftExchange]
   exact isIso_liftExchange_of_isIso_app _ _ _ _ _
-    fun K ↦ φ.isIso_pushforwardExchange_app_of_isProper hi hε K.property
+    fun K ↦ φ.isIso_pushforwardExchange_app_of_isProper (point k).hom hMt.exists_over
+      (isTraitModel_traitModel k k').exists_over hi hε K.property
 
 /-- **The compact-support exchange of a proper model over the trait** (blueprint
 `det-nearby-exchange-maps` (3) for a proper morphism): the inverse of the pushforward exchange
@@ -129,7 +132,7 @@ noncomputable def properCompactSupportExchange :
         boundedConstructibleNearbyCycles hN :=
   have : IsProper (toPoint B).left := by rw [toPoint_left]; infer_instance
   have : IsProper (toPoint B').left := by rw [toPoint_left]; infer_instance
-  have := φ.isIso_boundedConstructiblePushforwardExchange_of_isProper hM hN hi hε
+  have := φ.isIso_boundedConstructiblePushforwardExchange_of_isProper hM hN hMt hi hε
   invExchange (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint B))
     (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint B'))
     (φ.boundedConstructiblePushforwardExchange ℓ hM hN)
@@ -152,13 +155,13 @@ theorem unitClass_comp_map_comp_properCompactSupportExchange_app :
     BorelMooreSection.unitClass ℓ B' ≫
         (boundedConstructibleLowerShriek ℓ (toPoint B')).map
           (boundedConstructibleUnit ℓ hM) ≫
-        (φ.properCompactSupportExchange hM hN hi hε).app (𝟙_ _) =
+        (φ.properCompactSupportExchange hM hN hMt hi hε).app (𝟙_ _) =
       boundedConstructibleUnit ℓ hN ≫
         (boundedConstructibleNearbyCycles hN).map (BorelMooreSection.unitClass ℓ B) := by
   have : IsProper (toPoint B).left := by rw [toPoint_left]; infer_instance
   have : IsProper (toPoint B').left := by rw [toPoint_left]; infer_instance
   have hu := φ.boundedConstructibleUnit_comp_map_unit_comp_pushforwardExchange_app ℓ hM hN
-  have := φ.isIso_boundedConstructiblePushforwardExchange_of_isProper hM hN hi hε
+  have := φ.isIso_boundedConstructiblePushforwardExchange_of_isProper hM hN hMt hi hε
   refine (fun h ↦ ?_) (unitClass_comp_invExchange_app
     (boundedConstructibleUpperStarLowerStarAdjunction ℓ (toPoint B))
     (boundedConstructibleUpperStarLowerStarAdjunction ℓ (toPoint B'))

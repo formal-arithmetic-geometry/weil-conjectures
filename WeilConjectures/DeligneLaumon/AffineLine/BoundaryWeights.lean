@@ -5,17 +5,11 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.AffineSpace.GeometricallyConnected
 public import WeilConjectures.DeligneLaumon.AffineLine.Defs
-public import WeilConjectures.DeligneLaumon.Reduction.Weights
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
-public import WeilConjectures.Mathlib.Topology.KrullDimension
 public import WeilConjectures.PointCountFiber
 public import WeilConjectures.WeilSheaf.FourierTrace
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafSemicontinuity
 public import WeilConjectures.WeilSheaf.ShiftedSheaf
-public import WeilConjectures.WeilSheaf.StalkFunctor
-public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Exact
 public import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.TraceBound
 
 /-!

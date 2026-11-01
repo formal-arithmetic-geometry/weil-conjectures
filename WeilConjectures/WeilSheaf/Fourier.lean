@@ -14,6 +14,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Extensive
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TriangleShift
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseInternalHom
 public import WeilConjectures.WeilSheaf.Tensor
+public import WeilConjectures.WeilSheaf.UpperStarId
 
 /-!
 # Artin–Schreier sheaves and the Fourier–Deligne transform
@@ -28,21 +29,34 @@ pushforward `AS_* ℚ̄_ℓ` of the constant Weil sheaf is a Weil sheaf, and eac
 `ψ`-isotypic component, and `ℒ_{ψ(a x)}` is its pullback along `x ↦ a x`
 (`AlgebraicGeometry.artinSchreier`). It is lisse of rank one and pure of weight zero.
 
-The *Fourier–Deligne transform* of a Weil complex `K` on the affine line is
+For a finite index type `ι` of cardinality `r`, the *Fourier–Deligne transform* of a Weil
+complex `K` on the affine space `𝔸^ι = 𝔸(ι; Spec k₀)` is
 
-`FT_ψ(K) = Rpr₂!(pr₁^* K ⊗ μ^* ℒ_ψ)[1]`,
+`FT_ψ(K) = Rpr₂!(pr₁^* K ⊗ ⟨-, -⟩^* ℒ_ψ)[r]`,
 
-where `pr₁, pr₂ : 𝔸¹ ×_{k₀} 𝔸¹ ⟶ 𝔸¹` are the projections and `μ` is the multiplication
-(`AlgebraicGeometry.fourierTransform`), with Laumon's shift by the relative dimension one. The
-tensor product with the lisse kernel `μ^* ℒ_ψ` is the internal hom out of its dual,
-derived on the category of pro-étale Weil sheaves (`AlgebraicGeometry.WeilComplex.ihomLisse`).
+where `pr₁, pr₂ : 𝔸^ι ×_{k₀} 𝔸^ι ⟶ 𝔸^ι` are the projections and
+`⟨-, -⟩ : 𝔸^ι ×_{k₀} 𝔸^ι ⟶ 𝔸¹`, `(x, y) ↦ ∑ᵢ xᵢ yᵢ`, is the standard pairing
+(`AlgebraicGeometry.affineSpaceFourierTransform`), with Laumon's shift by the relative dimension
+`r`. The tensor product with the lisse kernel `⟨-, -⟩^* ℒ_ψ` is the internal hom out of its
+dual, derived on the category of pro-étale Weil sheaves
+(`AlgebraicGeometry.WeilComplex.ihomLisse`). Since `affineLine k₀` is `𝔸(PUnit; Spec k₀)`, the
+transform on the affine line, `FT_ψ(K) = Rpr₂!(pr₁^* K ⊗ μ^* ℒ_ψ)[1]` with `μ` the
+multiplication (`AlgebraicGeometry.fourierTransform`), is the case `ι = PUnit`: there the pairing
+is the multiplication (`AlgebraicGeometry.affineSpacePair.pairing_punit`).
 
 ## Main declarations
 
 - `AlgebraicGeometry.WeilSheaf.artinSchreierPushforward`: `AS_* ℚ̄_ℓ`, with the translation
   action `AlgebraicGeometry.WeilSheaf.artinSchreierTranslationAction`.
-- `AlgebraicGeometry.artinSchreier` and `AlgebraicGeometry.fourierTransform`: the
-  Artin–Schreier sheaves and the Fourier–Deligne transform of the affine line.
+- `AlgebraicGeometry.artinSchreier`: the Artin–Schreier sheaves.
+- `AlgebraicGeometry.affineSpacePair`: `𝔸^ι ×_{k₀} 𝔸^ι`, with its projections
+  `AlgebraicGeometry.affineSpacePair.fst`, `AlgebraicGeometry.affineSpacePair.snd` and the
+  pairing `AlgebraicGeometry.affineSpacePair.pairing`.
+- `AlgebraicGeometry.affineSpaceFourierKernel` and
+  `AlgebraicGeometry.affineSpaceFourierTransform`: the kernel `⟨-, -⟩^* ℒ_ψ` and the
+  Fourier–Deligne transform on `𝔸^ι`.
+- `AlgebraicGeometry.fourierKernel` and `AlgebraicGeometry.fourierTransform`: their cases
+  `ι = PUnit`, the kernel and the Fourier–Deligne transform of the affine line.
 - `AlgebraicGeometry.WeilSheaf.HasLinearArtinSchreierConstituent`: a geometric linear
   Artin–Schreier sheaf is a constituent of the geometric restriction of a Weil sheaf.
 
@@ -599,6 +613,73 @@ lemma affineLine.artinSchreierSplitHom_artinSchreierAverageHom (ψ : AddChar k�
   exact congrArg ULift.up (affineLine.artinSchreierAverage_artinSchreierSplit V.unop.hom ψ g)
 
 end ArtinSchreierTorsor
+
+section AffineSpacePair
+
+variable (ι : Type u) (k₀ : Type u) [Field k₀]
+
+/-- The product `𝔸^ι ×_{k₀} 𝔸^ι` of the affine space `𝔸^ι = 𝔸(ι; Spec k₀)` with itself, with
+its two projections and the standard pairing to the affine line. For `ι = PUnit` it is the
+affine plane `AlgebraicGeometry.affinePlane`. -/
+noncomputable def affineSpacePair : Scheme.{u} :=
+  pullback (𝔸(ι; Spec (CommRingCat.of k₀)) ↘ Spec (CommRingCat.of k₀))
+    (𝔸(ι; Spec (CommRingCat.of k₀)) ↘ Spec (CommRingCat.of k₀))
+
+noncomputable instance affineSpacePair.instOver :
+    (affineSpacePair ι k₀).Over (Spec (CommRingCat.of k₀)) :=
+  ⟨pullback.fst _ _ ≫ 𝔸(ι; Spec (CommRingCat.of k₀)) ↘ Spec (CommRingCat.of k₀)⟩
+
+instance affineSpacePair.locallyOfFiniteType_over [Finite ι] :
+    LocallyOfFiniteType (affineSpacePair ι k₀ ↘ Spec (CommRingCat.of k₀)) := by
+  have : LocallyOfFiniteType
+      (pullback.fst (𝔸(ι; Spec (CommRingCat.of k₀)) ↘ Spec (CommRingCat.of k₀))
+        (𝔸(ι; Spec (CommRingCat.of k₀)) ↘ Spec (CommRingCat.of k₀))) :=
+    MorphismProperty.pullback_fst _ _ inferInstance
+  exact inferInstanceAs (LocallyOfFiniteType (pullback.fst _ _ ≫ _))
+
+/-- The first projection `pr₁ : 𝔸^ι ×_{k₀} 𝔸^ι ⟶ 𝔸^ι`. -/
+noncomputable def affineSpacePair.fst : affineSpacePair ι k₀ ⟶ 𝔸(ι; Spec (CommRingCat.of k₀)) :=
+  pullback.fst _ _
+
+/-- The second projection `pr₂ : 𝔸^ι ×_{k₀} 𝔸^ι ⟶ 𝔸^ι`. -/
+noncomputable def affineSpacePair.snd : affineSpacePair ι k₀ ⟶ 𝔸(ι; Spec (CommRingCat.of k₀)) :=
+  pullback.snd _ _
+
+instance affineSpacePair.isOver_fst :
+    (affineSpacePair.fst ι k₀).IsOver (Spec (CommRingCat.of k₀)) :=
+  ⟨rfl⟩
+
+instance affineSpacePair.isOver_snd :
+    (affineSpacePair.snd ι k₀).IsOver (Spec (CommRingCat.of k₀)) :=
+  ⟨pullback.condition.symm⟩
+
+instance affineSpacePair.isSeparated_snd : IsSeparated (affineSpacePair.snd ι k₀) :=
+  MorphismProperty.pullback_snd _ _ inferInstance
+
+instance affineSpacePair.quasiCompact_snd : QuasiCompact (affineSpacePair.snd ι k₀) :=
+  MorphismProperty.pullback_snd _ _ inferInstance
+
+instance affineSpacePair.locallyOfFiniteType_snd [Finite ι] :
+    LocallyOfFiniteType (affineSpacePair.snd ι k₀) :=
+  MorphismProperty.pullback_snd _ _ inferInstance
+
+/-- The standard pairing `⟨-, -⟩ : 𝔸^ι ×_{k₀} 𝔸^ι ⟶ 𝔸¹`, `(x, y) ↦ ∑ᵢ xᵢ yᵢ`, the morphism to
+the affine line given by the global function `AlgebraicGeometry.AffineSpace.stdPairing`. -/
+noncomputable def affineSpacePair.pairing [Fintype ι] : affineSpacePair ι k₀ ⟶ affineLine k₀ :=
+  AffineSpace.homOfVector (affineSpacePair ι k₀ ↘ Spec (CommRingCat.of k₀)) fun _ ↦
+    AffineSpace.stdPairing ι (Spec (CommRingCat.of k₀))
+
+instance affineSpacePair.isOver_pairing [Fintype ι] :
+    (affineSpacePair.pairing ι k₀).IsOver (Spec (CommRingCat.of k₀)) :=
+  ⟨AffineSpace.homOfVector_over _ _⟩
+
+lemma affineSpacePair.pairing_appTop_coord [Fintype ι] :
+    (affineSpacePair.pairing ι k₀).appTop (AffineSpace.coord _ PUnit.unit) =
+      ∑ i : ι, (affineSpacePair.fst ι k₀).appTop (AffineSpace.coord _ i) *
+        (affineSpacePair.snd ι k₀).appTop (AffineSpace.coord _ i) :=
+  AffineSpace.homOfVector_appTop_coord _ _ _
+
+end AffineSpacePair
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)]
@@ -1291,45 +1372,84 @@ instance (G : WeilSheaf k₀ l X) (hG : G.IsLisse) :
     (WeilComplex.tensorLisse G hG).IsTriangulated :=
   inferInstanceAs ((WeilComplex.ihomLisse (G.dual hG) hG.dual).IsTriangulated)
 
-variable (k₀) in
-/-- The affine plane `𝔸¹ ×_{k₀} 𝔸¹` over `k₀`, with its two projections and the multiplication
-map to the affine line. -/
-noncomputable def affinePlane : Scheme.{u} :=
-  pullback (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) (affineLine k₀ ↘ Spec (CommRingCat.of k₀))
+section AffineSpaceFourier
 
-noncomputable instance : (affinePlane k₀).Over (Spec (CommRingCat.of k₀)) :=
-  ⟨pullback.fst _ _ ≫ affineLine k₀ ↘ Spec (CommRingCat.of k₀)⟩
+variable (ι : Type u) [Fintype ι]
 
-instance : LocallyOfFiniteType (affinePlane k₀ ↘ Spec (CommRingCat.of k₀)) := by
-  have : LocallyOfFiniteType (pullback.fst (affineLine k₀ ↘ Spec (CommRingCat.of k₀))
-      (affineLine k₀ ↘ Spec (CommRingCat.of k₀))) :=
-    MorphismProperty.pullback_fst _ _ inferInstance
-  exact inferInstanceAs (LocallyOfFiniteType (pullback.fst _ _ ≫ _))
+/-- The kernel `⟨-, -⟩^* ℒ_ψ` of the Fourier–Deligne transform on `𝔸^ι ×_{k₀} 𝔸^ι`, the
+pullback of the Artin–Schreier sheaf along the standard pairing. -/
+noncomputable def affineSpaceFourierKernel (ψ : AddChar k₀ (PadicAlgCl l)) :
+    WeilSheaf k₀ l (affineSpacePair ι k₀) :=
+  (WeilSheaf.upperStar (affineSpacePair.pairing ι k₀)).obj (artinSchreier ψ 1)
+
+/-- The kernel of the Fourier–Deligne transform on `𝔸^ι` is lisse, as a pullback of the lisse
+Artin–Schreier sheaf. -/
+theorem isLisse_affineSpaceFourierKernel (ψ : AddChar k₀ (PadicAlgCl l)) :
+    (affineSpaceFourierKernel ι ψ).IsLisse :=
+  ProEtale.IsAdicLisseSheaf.upperStar _ (isLisse_artinSchreier ψ 1)
+
+/-- The Fourier–Deligne transform `FT_ψ(K) = Rpr₂!(pr₁^* K ⊗ ⟨-, -⟩^* ℒ_ψ)[r]` from Weil
+complexes on `𝔸^ι` to Weil complexes on the dual affine space, `r = #ι`, with Laumon's shift by
+the relative dimension. It is a triangulated functor between the triangulated categories of
+Weil complexes. -/
+noncomputable def affineSpaceFourierTransform (ψ : AddChar k₀ (PadicAlgCl l)) :
+    WeilComplex k₀ l 𝔸(ι; Spec (CommRingCat.of k₀)) ⥤
+      WeilComplex k₀ l 𝔸(ι; Spec (CommRingCat.of k₀)) :=
+  WeilComplex.upperStar (affineSpacePair.fst ι k₀) ⋙
+    WeilComplex.tensorLisse (affineSpaceFourierKernel ι ψ)
+      (isLisse_affineSpaceFourierKernel ι ψ) ⋙
+    WeilComplex.derivedLowerShriek k₀ l (affineSpacePair.snd ι k₀) ⋙
+    shiftFunctor _ (Fintype.card ι : ℤ)
+
+instance affineSpaceFourierTransform.additive (ψ : AddChar k₀ (PadicAlgCl l)) :
+    (affineSpaceFourierTransform (l := l) ι ψ).Additive := by
+  unfold affineSpaceFourierTransform
+  infer_instance
+
+noncomputable instance affineSpaceFourierTransform.commShift (ψ : AddChar k₀ (PadicAlgCl l)) :
+    (affineSpaceFourierTransform (l := l) ι ψ).CommShift ℤ := by
+  unfold affineSpaceFourierTransform
+  infer_instance
+
+/-- The Fourier–Deligne transform on `𝔸^ι` is a triangulated functor, as a composite of the
+triangulated functors `pr₁^*`, `- ⊗ ⟨-, -⟩^* ℒ_ψ`, `Rpr₂!` and the shift. -/
+instance affineSpaceFourierTransform.isTriangulated (ψ : AddChar k₀ (PadicAlgCl l)) :
+    (affineSpaceFourierTransform (l := l) ι ψ).IsTriangulated := by
+  unfold affineSpaceFourierTransform
+  infer_instance
+
+end AffineSpaceFourier
+
+/-- `affinePlane k₀` is the affine plane `𝔸¹ ×_{k₀} 𝔸¹` over `k₀`, with its two projections and
+the multiplication map to the affine line: notation for the case `ι = PUnit` of
+`AlgebraicGeometry.affineSpacePair`, so that the line and the `𝔸^ι` declarations elaborate to the
+same scheme and its `Over` structure and instances are those of `affineSpacePair`. -/
+macro "affinePlane " k₀:term:max : term => `(AlgebraicGeometry.affineSpacePair PUnit $k₀)
 
 variable (k₀) in
 /-- The first projection `pr₁ : 𝔸¹ ×_{k₀} 𝔸¹ ⟶ 𝔸¹`. -/
 noncomputable def affinePlane.fst : affinePlane k₀ ⟶ affineLine k₀ :=
-  pullback.fst _ _
+  affineSpacePair.fst PUnit.{u + 1} k₀
 
 variable (k₀) in
 /-- The second projection `pr₂ : 𝔸¹ ×_{k₀} 𝔸¹ ⟶ 𝔸¹`. -/
 noncomputable def affinePlane.snd : affinePlane k₀ ⟶ affineLine k₀ :=
-  pullback.snd _ _
+  affineSpacePair.snd PUnit.{u + 1} k₀
 
 instance : (affinePlane.fst k₀).IsOver (Spec (CommRingCat.of k₀)) :=
-  ⟨rfl⟩
+  inferInstanceAs ((affineSpacePair.fst PUnit.{u + 1} k₀).IsOver (Spec (CommRingCat.of k₀)))
 
 instance : (affinePlane.snd k₀).IsOver (Spec (CommRingCat.of k₀)) :=
-  ⟨pullback.condition.symm⟩
+  inferInstanceAs ((affineSpacePair.snd PUnit.{u + 1} k₀).IsOver (Spec (CommRingCat.of k₀)))
 
 instance : IsSeparated (affinePlane.snd k₀) :=
-  MorphismProperty.pullback_snd _ _ inferInstance
+  inferInstanceAs (IsSeparated (affineSpacePair.snd PUnit.{u + 1} k₀))
 
 instance : QuasiCompact (affinePlane.snd k₀) :=
-  MorphismProperty.pullback_snd _ _ inferInstance
+  inferInstanceAs (QuasiCompact (affineSpacePair.snd PUnit.{u + 1} k₀))
 
 instance : LocallyOfFiniteType (affinePlane.snd k₀) :=
-  MorphismProperty.pullback_snd _ _ inferInstance
+  inferInstanceAs (LocallyOfFiniteType (affineSpacePair.snd PUnit.{u + 1} k₀))
 
 variable (k₀) in
 /-- The multiplication `μ : 𝔸¹ ×_{k₀} 𝔸¹ ⟶ 𝔸¹`, `(x, y) ↦ x y`. -/
@@ -1341,45 +1461,66 @@ noncomputable def affinePlane.mul : affinePlane k₀ ⟶ affineLine k₀ :=
 instance : (affinePlane.mul k₀).IsOver (Spec (CommRingCat.of k₀)) :=
   ⟨AffineSpace.homOfVector_over _ _⟩
 
-/-- The kernel `μ^* ℒ_ψ` of the Fourier–Deligne transform on `𝔸¹ ×_{k₀} 𝔸¹`. -/
+variable (k₀) in
+omit [Finite k₀] in
+/-- For `ι = PUnit`, the product `𝔸^ι ×_{k₀} 𝔸^ι` is the affine plane and the standard pairing
+is the multiplication `μ : 𝔸¹ ×_{k₀} 𝔸¹ ⟶ 𝔸¹`: a one-term sum is the product. -/
+theorem affineSpacePair.pairing_punit :
+    affineSpacePair.pairing PUnit.{u + 1} k₀ = affinePlane.mul k₀ := by
+  refine congrArg (AffineSpace.homOfVector _) (funext fun _ ↦ ?_)
+  rw [AffineSpace.stdPairing, Fintype.sum_unique]
+  rfl
+
+/-- The kernel `μ^* ℒ_ψ` of the Fourier–Deligne transform on `𝔸¹ ×_{k₀} 𝔸¹`: the case
+`ι = PUnit` of `AlgebraicGeometry.affineSpaceFourierKernel`. -/
 noncomputable def fourierKernel (ψ : AddChar k₀ (PadicAlgCl l)) :
     WeilSheaf k₀ l (affinePlane k₀) :=
-  (WeilSheaf.upperStar (affinePlane.mul k₀)).obj (artinSchreier ψ 1)
+  affineSpaceFourierKernel PUnit.{u + 1} ψ
+
+/-- The kernel of the Fourier–Deligne transform on the line is the pullback `μ^* ℒ_ψ` of the
+Artin–Schreier sheaf along the multiplication, since for `ι = PUnit` the pairing is the
+multiplication (`AlgebraicGeometry.affineSpacePair.pairing_punit`). -/
+noncomputable def fourierKernelIso (ψ : AddChar k₀ (PadicAlgCl l)) :
+    fourierKernel ψ ≅ (WeilSheaf.upperStar (affinePlane.mul k₀)).obj (artinSchreier ψ 1) :=
+  (WeilSheaf.upperStarCongr (X := affineSpacePair PUnit.{u + 1} k₀)
+    (affineSpacePair.pairing_punit k₀)).app (artinSchreier ψ 1)
 
 /-- The kernel of the Fourier–Deligne transform is lisse, as a pullback of the lisse
 Artin–Schreier sheaf. -/
 theorem isLisse_fourierKernel (ψ : AddChar k₀ (PadicAlgCl l)) : (fourierKernel ψ).IsLisse :=
-  ProEtale.IsAdicLisseSheaf.upperStar _ (isLisse_artinSchreier ψ 1)
+  isLisse_affineSpaceFourierKernel PUnit.{u + 1} ψ
 
 -- TODO(unify): def-fd-transform
 /-- The Fourier–Deligne transform `FT_ψ(K) = Rpr₂!(pr₁^* K ⊗ μ^* ℒ_ψ)[1]` from Weil complexes
 on the affine line to Weil complexes on the dual affine line, with Laumon's shift by the
-relative dimension one. It is a triangulated functor between the triangulated categories of
-Weil complexes. -/
+relative dimension one: the case `ι = PUnit` of `AlgebraicGeometry.affineSpaceFourierTransform`.
+It is a triangulated functor between the triangulated categories of Weil complexes. -/
 noncomputable def fourierTransform (ψ : AddChar k₀ (PadicAlgCl l)) :
     WeilComplex k₀ l (affineLine k₀) ⥤ WeilComplex k₀ l (affineLine k₀) :=
-  WeilComplex.upperStar (affinePlane.fst k₀) ⋙
-    WeilComplex.tensorLisse (fourierKernel ψ) (isLisse_fourierKernel ψ) ⋙
-    WeilComplex.derivedLowerShriek k₀ l (affinePlane.snd k₀) ⋙
-    shiftFunctor _ (1 : ℤ)
+  affineSpaceFourierTransform PUnit.{u + 1} ψ
+
+/-- The Fourier–Deligne transform of the line is `Rpr₂!(pr₁^* K ⊗ μ^* ℒ_ψ)[1]`. -/
+theorem fourierTransform_eq (ψ : AddChar k₀ (PadicAlgCl l)) :
+    fourierTransform ψ = WeilComplex.upperStar (affinePlane.fst k₀) ⋙
+      WeilComplex.tensorLisse (fourierKernel ψ) (isLisse_fourierKernel ψ) ⋙
+      WeilComplex.derivedLowerShriek k₀ l (affinePlane.snd k₀) ⋙
+      shiftFunctor _ (1 : ℤ) :=
+  rfl
 
 -- TODO(unify): def-fd-transform
-instance (ψ : AddChar k₀ (PadicAlgCl l)) : (fourierTransform (l := l) ψ).Additive := by
-  unfold fourierTransform
-  infer_instance
+instance (ψ : AddChar k₀ (PadicAlgCl l)) : (fourierTransform (l := l) ψ).Additive :=
+  inferInstanceAs (affineSpaceFourierTransform (l := l) PUnit.{u + 1} ψ).Additive
 
 -- TODO(unify): def-fd-transform
 noncomputable instance (ψ : AddChar k₀ (PadicAlgCl l)) :
-    (fourierTransform (l := l) ψ).CommShift ℤ := by
-  unfold fourierTransform
-  infer_instance
+    (fourierTransform (l := l) ψ).CommShift ℤ :=
+  inferInstanceAs ((affineSpaceFourierTransform (l := l) PUnit.{u + 1} ψ).CommShift ℤ)
 
 -- TODO(unify): def-fd-transform
 /-- The Fourier–Deligne transform is a triangulated functor, as a composite of the triangulated
 functors `pr₁^*`, `- ⊗ μ^* ℒ_ψ`, `Rpr₂!` and the shift. -/
-instance (ψ : AddChar k₀ (PadicAlgCl l)) : (fourierTransform (l := l) ψ).IsTriangulated := by
-  unfold fourierTransform
-  infer_instance
+instance (ψ : AddChar k₀ (PadicAlgCl l)) : (fourierTransform (l := l) ψ).IsTriangulated :=
+  inferInstanceAs (affineSpaceFourierTransform (l := l) PUnit.{u + 1} ψ).IsTriangulated
 
 end Fourier
 

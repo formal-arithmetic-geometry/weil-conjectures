@@ -8,7 +8,6 @@ module
 public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructibleExchange
 public import WeilConjectures.TraceFormula.Basic
 public import WeilConjectures.TraceFormula.Specialization.NearbyFiniteness
-public import WeilConjectures.TraceFormula.Specialization.TraitDirectImageUnit
 public import WeilConjectures.TraceFormula.Specialization.TraitHigherDirectImage
 public import WeilConjectures.CategoryTheory.DerivedCategory.AdjunctionUnitSingle
 

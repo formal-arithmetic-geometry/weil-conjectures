@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.ExternalHom
-public import WeilConjectures.PoincareDuality.Verdier
+public import WeilConjectures.PoincareDuality.Biduality.Constructible
 public import WeilConjectures.TraceFormula.Product
 
 /-!

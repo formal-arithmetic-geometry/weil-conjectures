@@ -12,21 +12,22 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteLocallyConstantCokernel
 /-!
 # Cokernels of morphisms of constant pro-étale sheaves are locally constant
 
-Let `Λ` be a finite commutative ring and `X` a scheme. This file shows that the cokernel of a
-morphism `φ : M_X ⟶ N_X` between the constant pro-étale sheaves of `Λ`-modules of a finitely
-generated module `M` and a finite module `N` is locally constant with finite stalks
+Let `Λ` be a commutative ring and `X` a scheme. This file shows that the cokernel of a
+morphism `φ : M_X ⟶ N_X` between the constant pro-étale sheaves of `Λ`-modules of finitely
+generated modules `M` and `N` is locally constant with finitely generated stalks
 (`AlgebraicGeometry.ProEtale.isFiniteLocallyConstant_cokernel`). The morphism `φ` is determined
 by the global sections of `N_X` that are the images of generators of `M`; global sections of the
 sheafification of the constant presheaf are locally constant, so on the members of a pro-étale
 covering family `φ` is the constant morphism of a linear map `ψ : M ⟶ N`, and there the cokernel
-is the constant sheaf of the finite module `N ⧸ ψ(M)`.
+is the constant sheaf of the finitely generated module `N ⧸ ψ(M)`.
 
 ## Main statements
 
 - `AlgebraicGeometry.ProEtale.IsFiniteLocallyConstant.of_cover`: being locally constant with
-  finite stalks is local for the pro-étale topology.
+  finitely generated stalks is local for the pro-étale topology.
 - `AlgebraicGeometry.ProEtale.isFiniteLocallyConstant_cokernel`: the cokernel of a morphism of
-  constant sheaves of finite modules is locally constant with finite stalks.
+  constant sheaves of finitely generated modules is locally constant with finitely generated
+  stalks.
 -/
 
 @[expose] public section
@@ -41,9 +42,9 @@ open Scheme
 
 variable {Λ : Type (u + 1)} [CommRing Λ]
 
-/-- Being locally constant with finite stalks is local for the pro-étale topology: if the
-pullbacks of `F` along the members of a pro-étale covering family are locally constant with
-finite stalks, so is `F` (compose the covering families). -/
+/-- Being locally constant with finitely generated stalks is local for the pro-étale topology:
+if the pullbacks of `F` along the members of a pro-étale covering family are locally constant
+with finitely generated stalks, so is `F` (compose the covering families). -/
 theorem IsFiniteLocallyConstant.of_cover {X : Scheme.{u}}
     {F : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)} {ι : Type (u + 1)}
     {W : ι → Scheme.{u}} (g : ∀ i, W i ⟶ X)
@@ -56,13 +57,13 @@ theorem IsFiniteLocallyConstant.of_cover {X : Scheme.{u}}
   obtain ⟨M, hM, ⟨e⟩⟩ := hc p.1 p.2
   exact ⟨M, hM, ⟨(upperStarComp _ (g' p.1 p.2) (g p.1)).app F ≪≫ e⟩⟩
 
-/-- The cokernel of a morphism `(Λⁿ)_X ⟶ N_X` of constant pro-étale sheaves, with `N` finite, is
-locally constant with finite stalks. The images `s_j ∈ Γ(X, N_X)` of the basis vectors are
-constant on the members `V` of a pro-étale cover, `s_j|_V = n_j`; on `V` the morphism is then the
-constant morphism of the linear map `ψ : Λⁿ ⟶ N` sending the `j`-th basis vector to `n_j`, and the
-cokernel is the constant sheaf of `N ⧸ ψ(Λⁿ)`. -/
+/-- The cokernel of a morphism `(Λⁿ)_X ⟶ N_X` of constant pro-étale sheaves, with `N` finitely
+generated, is locally constant with finitely generated stalks. The images `s_j ∈ Γ(X, N_X)` of
+the basis vectors are constant on the members `V` of a pro-étale cover, `s_j|_V = n_j`; on `V`
+the morphism is then the constant morphism of the linear map `ψ : Λⁿ ⟶ N` sending the `j`-th
+basis vector to `n_j`, and the cokernel is the constant sheaf of `N ⧸ ψ(Λⁿ)`. -/
 theorem isFiniteLocallyConstant_cokernel_of_free {X : Scheme.{u}} {n : ℕ}
-    {N : ModuleCat.{u + 1} Λ} [Finite N]
+    {N : ModuleCat.{u + 1} Λ} [Module.Finite Λ N]
     (φ : (constantSheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ)).obj
         (ModuleCat.of Λ (Fin n → Λ)) ⟶
       (constantSheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ)).obj N) :
@@ -93,15 +94,15 @@ theorem isFiniteLocallyConstant_cokernel_of_free {X : Scheme.{u}} {n : ℕ}
       rw [Module.Basis.constr_basis, Pi.basisFun_apply]
       exact (hm j).symm
     refine ⟨ModuleCat.of Λ (N ⧸ LinearMap.range ψ.hom),
-      Finite.of_surjective _ (Submodule.mkQ_surjective _), ⟨upperStarCokernelIsoOfEq _ φ ψ
+      inferInstance, ⟨upperStarCokernelIsoOfEq _ φ ψ
         (constantSheafCompUpperStarMkIdIso_inv_app_comp_map_comp_hom_app _ _ (f i)
           (MorphismProperty.Over.homMk (pullback.lift (𝟙 _) (𝟙 _) rfl)
             (pullback.lift_snd _ _ _)) φ ψ h)⟩⟩
 
-/-- The cokernel of a morphism `M_X ⟶ N_X` of constant pro-étale sheaves, with `M` finitely
-generated and `N` finite, is locally constant with finite stalks. -/
+/-- The cokernel of a morphism `M_X ⟶ N_X` of constant pro-étale sheaves, with `M` and `N`
+finitely generated, is locally constant with finitely generated stalks. -/
 theorem isFiniteLocallyConstant_cokernel {X : Scheme.{u}}
-    {M N : ModuleCat.{u + 1} Λ} [Module.Finite Λ M] [Finite N]
+    {M N : ModuleCat.{u + 1} Λ} [Module.Finite Λ M] [Module.Finite Λ N]
     (φ : (constantSheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)).obj M ⟶
       (constantSheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)).obj N) :
     IsFiniteLocallyConstant Λ (cokernel φ) := by

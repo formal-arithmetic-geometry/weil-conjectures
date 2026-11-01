@@ -79,15 +79,25 @@ lemma preservesFiniteLimits_tensorLeft_of_preservesMonomorphisms
     Functor.preservesHomology_of_preservesMonos_and_cokernels _
   exact (tensorLeft A).preservesFiniteLimits_of_preservesHomology
 
-variable (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
+variable (ℓ : ℕ) [Fact ℓ.Prime]
+
+section Integers
+
+variable (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)]
 
 /-- **`𝒪_{E,X}` is flat over `ℤ`**: tensoring with `𝒪_{E,X} = p_X^* 𝒪̲_E` is exact. -/
 instance preservesFiniteLimits_tensorLeft_padicIntegersRingObj :
     PreservesFiniteLimits
-      (tensorLeft (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)) :=
-  let := PadicAlgCl.normedFieldOfAlgebra ℓ E.1
-  have := preservesMonomorphisms_tensorLeft_continuousMapComparison X (PadicAlgCl.integers ℓ E.1)
+      (tensorLeft (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X)) :=
+  let := PadicAlgCl.normedFieldOfAlgebra ℓ E
+  have := PadicAlgCl.isUltrametricDist_ofAlgebra ℓ E
+  have : CharZero E := (algebraMap E (PadicAlgCl ℓ)).charZero
+  have := preservesMonomorphisms_tensorLeft_continuousMapComparison X (PadicAlgCl.integers ℓ E)
   preservesFiniteLimits_tensorLeft_of_preservesMonomorphisms X _
+
+end Integers
+
+variable (E : PadicAlgCl.FiniteIntermediateField ℓ)
 
 /-- **`E_X` is flat over `ℤ`**: tensoring with `E_X = p_X^* E̲` is exact. -/
 instance preservesFiniteLimits_tensorLeft_continuousMapRingObj :

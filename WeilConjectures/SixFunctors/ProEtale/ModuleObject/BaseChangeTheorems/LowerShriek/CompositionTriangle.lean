@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.ExchangeFormalism.Composition
 public import WeilConjectures.Compactification.TriangleOfIsPullback
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.BaseChangeIndependence
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ClopenLowerShriek
 
 /-!
 

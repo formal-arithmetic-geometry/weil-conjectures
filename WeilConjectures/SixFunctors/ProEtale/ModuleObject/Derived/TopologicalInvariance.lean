@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.TopologicalInvariance
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleLowerStar
 
 /-!
 
@@ -29,6 +31,8 @@ universe u
 
 open CategoryTheory Limits MonoidalCategory
 
+open scoped CategoryTheory.Obj
+
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
@@ -44,12 +48,24 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   [QuasiCompact X'.hom] [IsSeparated X'.hom]
   (r : X ⟶ X') [IsFinite r.left] [IsUniversalHomeomorphism r.left]
 
+omit [IsFinite r.left] in
 /-- **Topological invariance** of the bounded constructible derived category: for a finite
 universal homeomorphism `r`, the unit `𝟭 ⟶ Lr^* ⋙ Rr_*` of the adjunction `Lr^* ⊣ Rr_*` is an
 isomorphism, so that `Lr^*` is an equivalence with inverse `Rr_*` (blueprint `i-topology`). -/
 theorem isIso_unit_boundedConstructibleUpperStarLowerStarAdjunction :
-    IsIso (boundedConstructibleUpperStarLowerStarAdjunction ℓ r).unit :=
-  sorry
+    IsIso (boundedConstructibleUpperStarLowerStarAdjunction ℓ r).unit := by
+  have := isEquivalence_upperStar_of_isUniversalHomeomorphism (Profinite.padicAlgClRingObj ℓ) r.left
+  have : ((r.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧).leftDerivedFunctor.IsEquivalence :=
+    Functor.isEquivalence_of_iso
+      (Functor.leftDerivedFunctorIsoMapDerivedCategory _).symm
+  let hFF : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ r).FullyFaithful :=
+    Functor.FullyFaithful.ofCompFaithful (G := (boundedConstructible _).ι)
+      (((ObjectProperty.fullyFaithfulι _).comp
+        (Functor.FullyFaithful.ofFullyFaithful _)).ofIso
+        (boundedConstructibleUpperStarCompatibility _ ℓ r).symm)
+  have := hFF.full
+  have := hFF.faithful
+  exact (boundedConstructibleUpperStarLowerStarAdjunction ℓ r).unit_isIso_of_L_fully_faithful
 
 end TopologicalInvariance
 

@@ -7,9 +7,11 @@ module
 
 public import Mathlib
 public import WeilConjectures.Mathlib.FieldTheory.IsAlgClosed.Basic
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.ConstantCoefficients
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.IntegralBaseChange
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.Detection
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Field
+public import Mathlib.RingTheory.PicardGroup
 import WeilConjectures.AlgebraicGeometry.SmoothBaseChange.PrimeCyclicDetection
 import WeilConjectures.AlgebraicGeometry.SmoothBaseChange.PrimeQuotientDetection
 

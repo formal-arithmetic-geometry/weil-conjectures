@@ -60,11 +60,6 @@ isomorphism by the étale theorem
 - `ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_prodMap`: generic base change
   over the field `k` along `X ⨯ Y ⟶ Y`.
 
-## Inputs from other subsections
-
-- `ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl`: proper
-  base change.
-
 -/
 
 @[expose] public section
@@ -145,10 +140,10 @@ theorem isIso_boundedConstructibleBaseChange_prodMap_of_isOpenImmersion (j : U �
     exact (Nat.prime_dvd_prime_iff_eq (Fact.out : (ringChar k).Prime) Fact.out).1
       ((ringChar.spec k ℓ).1 h)
   refine isIso_boundedConstructibleBaseChange_padicAlgCl_of_integral ℓ _ hsq fun E K₀ ↦ ?_
-  have hΛ := ProEtale.natCast_eq_zero_residueFieldCoeff.{u} ℓ E
-  refine isIso_boundedConstructibleBaseChange_integral_app_of_reduction ℓ E _ hsq K₀ ?_
+  have hΛ := ProEtale.natCast_eq_zero_residueFieldCoeff.{u} ℓ E.1
+  refine isIso_boundedConstructibleBaseChange_integral_app_of_reduction ℓ E.1 _ hsq K₀ ?_
   exact ProEtale.isIso_derivedBaseChangeMap_app_of_isOpenImmersion_of_field _ Y.hom X.hom j.left
-    hW hsq ℓ hℓ hΛ _ (ProEtale.boundedConstructible_derivedReduction_obj U.left ℓ E _ K₀.property)
+    hW hsq ℓ hℓ hΛ _ (ProEtale.boundedConstructible_derivedReduction_obj U.left ℓ E.1 _ K₀.property)
 
 /-- Base change along a product projection for a proper morphism `p`: the square
 `commSq_prodMap_snd p` is cartesian, so its base change morphism is an isomorphism by proper base

@@ -80,7 +80,8 @@ variable [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [LocallyOfFiniteT
 /-- **Nearby cycles of the deformation kill complexes supported away from `I`**: for a closed
 immersion `g : Z ⟶ X` with `g⁻¹ I = 𝒪_Z`, `Ψ_X(Rg_* M) ≅ Rg'_* Ψ_Z(M) = 0`, by proper base change
 for nearby cycles, the special fibre of the deformation of `Z` along `g⁻¹ I` being empty. -/
-theorem isZero_deformationNearbyCycles_obj_lowerStar_obj (I : X.left.IdealSheafData) (g : Z ⟶ X)
+theorem isZero_deformationNearbyCycles_obj_lowerStar_obj [Fact (ringChar k' ≠ ℓ)]
+    (I : X.left.IdealSheafData) (g : Z ⟶ X)
     [IsClosedImmersion g.left] (hI : I.comap g.left = ⊤)
     (hM : (deformationModel X I k').PreservesBoundedConstructible (Profinite.padicAlgClRingObj ℓ))
     (M : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
@@ -101,7 +102,10 @@ theorem isZero_deformationNearbyCycles_obj_lowerStar_obj (I : X.left.IdealSheafD
     rw [show deformationGenericMap g hJ k' ≫ pullback.snd _ _ = pullback.snd _ _ from
       (pullback.lift_snd _ _ _).trans (Category.comp_id _)]
     exact isPullback_deformationModel_ε k' (X := Z) _
-  have := (deformationModelHom g hJ k').isIso_pushforwardExchange_app_of_isProper
+  have := isNoetherian_of_locallyOfFiniteType X.hom
+  have := (deformationModelHom g hJ k').isIso_pushforwardExchange_app_of_isProper X.hom
+    (isTraitModel_deformationModel Z _ k').exists_over
+    (isTraitModel_deformationModel X I k').exists_over
     (isPullback_deformationSpecialFibreMap k' g hJ) hε M.property
   have h3 : IsZero
       (R(((deformationSpecialFibreMap g hJ k').left)_*⟦Profinite.padicAlgClRingObj ℓ⟧).obj

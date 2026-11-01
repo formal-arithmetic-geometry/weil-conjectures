@@ -6,14 +6,9 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.Modules.FiniteFreeComplex
-
-
-public import WeilConjectures.AlgebraicGeometry.CoherentFormalModulesAbelian
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModuleAnnihilated
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
-import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.FinitePushforwardCoherent
 import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine

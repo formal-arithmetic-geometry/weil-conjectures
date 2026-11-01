@@ -5,9 +5,9 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.DeligneLaumon.AffineLine.ZeroExtension
 public import WeilConjectures.WeilSheaf.HomologyShift
 public import WeilConjectures.WeilSheaf.OpenClosedTriangle
+public import WeilConjectures.WeilSheaf.Fourier
 
 /-!
 # Concentration of the zero-extension transform

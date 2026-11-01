@@ -7,6 +7,7 @@ module
 
 public import Mathlib.LinearAlgebra.TensorProduct.Basic
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerBoundaryComparison
+public import WeilConjectures.Mathlib.Algebra.Group.Equiv.Defs
 
 /-!
 # Base change of the Kummer coefficients
@@ -208,34 +209,39 @@ lemma exists_eq_zsmul_id_zmod (n : ℕ)
     (m • (b • (ULift.up (1 : ZMod n) : ULift.{u + 1} (ZMod n)))).down
   simp [← hm, mul_comm]
 
-section BaseChange
+section Instances
 
-variable (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] (q : ℕ)
+/-! The `HasExt` instances of the étale sheaf categories, as lemmas applied to variables, used as
+local instances below. Instance synthesis otherwise produces `IsGrothendieckAbelian.hasExt` applied
+to the (non-atomic) sheaf category; inside definitions this proof is abstracted into an auxiliary
+lemma stating the unfolded `HasExt`, which the kernel can only compare with the original by
+unfolding the derived category constructions. -/
 
-/-- `Extᵠ(Λ ⊗ ℤ_X, N) ≅ Hᵠ(X, N)` on a quasi-compact quasi-separated scheme. -/
-noncomputable def extExtendScalarsIntAddEquiv
-    (N : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
-    Abelian.Ext.{u + 1} ((extendScalars Λ X).obj X.constantSheafInt) N q ≃+
-      Sheaf.H ((forget₂Sheaf Λ X).obj N) q :=
-  AddEquiv.ofBijective _ (bijective_extToSheafHOf Λ (unitIntToExtendScalars Λ X)
-    (bijective_unitIntToExtendScalars_comp Λ X) q N)
+/-- `HasExt` for étale sheaves of `Λ`-modules, as a lemma to be used as a local instance. -/
+lemma hasExt_sheaf_moduleCat (X : Scheme.{u}) :
+    HasExt.{u + 1} (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
+  inferInstance
 
-/-- The coefficient extension `Hᵠ(X, μₙ) ⟶ Hᵠ(X, μₙ ⊗ Λ) = Extᵠ(Λ_X, μₙ ⊗ Λ)` induced by
-`μₙ ⟶ μₙ ⊗ Λ`, `n` the characteristic of `Λ`. -/
-noncomputable def kummerCoefficientMap :
-    Sheaf.H (X.rootsOfUnitySheaf (ringChar Λ)) q →+
-      Abelian.Ext.{u + 1} ((extendScalars Λ X).obj X.constantSheafInt)
-        ((extendScalars Λ X).obj (X.rootsOfUnitySheaf (ringChar Λ))) q :=
-  (extExtendScalarsIntAddEquiv Λ X q _).symm.toAddMonoidHom.comp
-    (Sheaf.H.map ((extendScalarsAdjunction Λ X).unit.app _) q)
+/-- `HasExt` for abelian étale sheaves, as a lemma to be used as a local instance. -/
+lemma hasExt_sheaf_addCommGrpCat (X : Scheme.{u}) :
+    HasExt.{u + 1} (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :=
+  inferInstance
 
-/-- The natural map `Λ ⊗ Hᵠ(X, μₙ) ⟶ Hᵠ(X, μₙ ⊗ Λ)`, `c ⊗ x ↦ c • x`. -/
-noncomputable def kummerCoefficientTensorMap :
-    Λ ⊗[ℤ] Sheaf.H (X.rootsOfUnitySheaf (ringChar Λ)) q →+
-      Abelian.Ext.{u + 1} ((extendScalars Λ X).obj X.constantSheafInt)
-        ((extendScalars Λ X).obj (X.rootsOfUnitySheaf (ringChar Λ))) q :=
+end Instances
+
+attribute [local instance high] hasExt_sheaf_moduleCat hasExt_sheaf_addCommGrpCat
+
+section Generic
+
+/-! Generic constructions on tensor products, instantiated below at `Ext`-groups. -/
+
+variable {A B : Type*} [AddCommGroup A] [AddCommGroup B]
+
+/-- The map `R ⊗ A ⟶ B`, `c ⊗ x ↦ c • g x`, for an `R`-module `B`. -/
+noncomputable def _root_.TensorProduct.liftSMulAddHom (R : Type*) [CommRing R] [Module R B]
+    (g : A →+ B) : R ⊗[ℤ] A →+ B :=
   TensorProduct.liftAddHom
-    { toFun c := (DistribSMul.toAddMonoidHom _ c).comp (kummerCoefficientMap Λ X q)
+    { toFun c := (DistribSMul.toAddMonoidHom _ c).comp g
       map_zero' := by ext; simp
       map_add' c d := by ext; simp [add_smul] }
     (fun m c x ↦ by
@@ -243,10 +249,102 @@ noncomputable def kummerCoefficientTensorMap :
         DistribSMul.toAddMonoidHom_apply, map_zsmul, zsmul_eq_mul]
       rw [mul_smul, Int.cast_smul_eq_zsmul, smul_comm])
 
+lemma _root_.TensorProduct.liftSMulAddHom_tmul (R : Type*) [CommRing R] [Module R B]
+    (g : A →+ B) (c : R) (x : A) :
+    TensorProduct.liftSMulAddHom R g (c ⊗ₜ x) = c • g x :=
+  TensorProduct.liftAddHom_tmul _ _ _ _
+
+/-- Two additive maps out of `L ⊗ M` agreeing on pure tensors agree. -/
+private lemma tensorAddHom_apply_eq_of_tmul {L M P : Type*} [AddCommGroup L] [AddCommGroup M]
+    [AddCommGroup P] (f g : L ⊗[ℤ] M →+ P) (h : ∀ c x, f (c ⊗ₜ x) = g (c ⊗ₜ x))
+    (y : L ⊗[ℤ] M) : f y = g y := by
+  induction y using TensorProduct.induction_on with
+  | zero => rw [map_zero, map_zero]
+  | add a b ha hb => rw [map_add, map_add, ha, hb]
+  | tmul c x => exact h c x
+
+end Generic
+
+section BaseChange
+
+variable (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] (q : ℕ)
+
+/-- The comparison `Extᵠ(Λ ⊗ ℤ_X, N) ⟶ Hᵠ(X, N)` is bijective. -/
+lemma bijective_extToSheafHOf_unitIntToExtendScalars
+    (N : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    Function.Bijective (extToSheafHOf Λ (unitIntToExtendScalars Λ X) N q) :=
+  bijective_extToSheafHOf Λ _ (bijective_unitIntToExtendScalars_comp Λ X) q N
+
+/-- The maps comparing `Hᵠ(X, μₙ)` with `Extᵠ(Λ_X, μₙ ⊗ Λ)`, bundled so that they are constructed
+in a single definition (see `extExtendScalarsIntAddEquiv`, `kummerCoefficientMap` and
+`kummerCoefficientTensorMap`). -/
+structure KummerCoefficientMaps where
+  /-- `Extᵠ(Λ ⊗ ℤ_X, N) ≅ Hᵠ(X, N)`. -/
+  addEquiv (N : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    Abelian.Ext.{u + 1} ((extendScalars Λ X).obj X.constantSheafInt) N q ≃+
+      Sheaf.H ((forget₂Sheaf Λ X).obj N) q
+  /-- `Hᵠ(X, μₙ) ⟶ Extᵠ(Λ_X, μₙ ⊗ Λ)`. -/
+  map : Sheaf.H (X.rootsOfUnitySheaf (ringChar Λ)) q →+
+      Abelian.Ext.{u + 1} ((extendScalars Λ X).obj X.constantSheafInt)
+        ((extendScalars Λ X).obj (X.rootsOfUnitySheaf (ringChar Λ))) q
+  /-- `Λ ⊗ Hᵠ(X, μₙ) ⟶ Extᵠ(Λ_X, μₙ ⊗ Λ)`. -/
+  tensorMap : Λ ⊗[ℤ] Sheaf.H (X.rootsOfUnitySheaf (ringChar Λ)) q →+
+      Abelian.Ext.{u + 1} ((extendScalars Λ X).obj X.constantSheafInt)
+        ((extendScalars Λ X).obj (X.rootsOfUnitySheaf (ringChar Λ))) q
+
+/-- The comparison maps of `KummerCoefficientMaps`. -/
+noncomputable def kummerCoefficientMaps : KummerCoefficientMaps Λ X q :=
+  let e (N : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+      Abelian.Ext.{u + 1} ((extendScalars Λ X).obj X.constantSheafInt) N q ≃+
+        Sheaf.H ((forget₂Sheaf Λ X).obj N) q :=
+    AddEquiv.ofBijectiveAddMonoidHom _ (bijective_extToSheafHOf_unitIntToExtendScalars Λ X q N)
+  let m : Sheaf.H (X.rootsOfUnitySheaf (ringChar Λ)) q →+
+      Abelian.Ext.{u + 1} ((extendScalars Λ X).obj X.constantSheafInt)
+        ((extendScalars Λ X).obj (X.rootsOfUnitySheaf (ringChar Λ))) q :=
+    (e _).symmComp (Sheaf.H.map (F := X.rootsOfUnitySheaf (ringChar Λ))
+      ((extendScalarsAdjunction Λ X).unit.app (X.rootsOfUnitySheaf (ringChar Λ))) q)
+  { addEquiv := e
+    map := m
+    tensorMap := TensorProduct.liftSMulAddHom Λ m }
+
+/-- `Extᵠ(Λ ⊗ ℤ_X, N) ≅ Hᵠ(X, N)` on a quasi-compact quasi-separated scheme. -/
+noncomputable def extExtendScalarsIntAddEquiv
+    (N : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    Abelian.Ext.{u + 1} ((extendScalars Λ X).obj X.constantSheafInt) N q ≃+
+      Sheaf.H ((forget₂Sheaf Λ X).obj N) q :=
+  (kummerCoefficientMaps Λ X q).addEquiv N
+
+/-- The coefficient extension `Hᵠ(X, μₙ) ⟶ Hᵠ(X, μₙ ⊗ Λ) = Extᵠ(Λ_X, μₙ ⊗ Λ)` induced by
+`μₙ ⟶ μₙ ⊗ Λ`, `n` the characteristic of `Λ`. -/
+noncomputable def kummerCoefficientMap :
+    Sheaf.H (X.rootsOfUnitySheaf (ringChar Λ)) q →+
+      Abelian.Ext.{u + 1} ((extendScalars Λ X).obj X.constantSheafInt)
+        ((extendScalars Λ X).obj (X.rootsOfUnitySheaf (ringChar Λ))) q :=
+  (kummerCoefficientMaps Λ X q).map
+
+private lemma kummerCoefficientMap_eq : kummerCoefficientMap Λ X q =
+    (extExtendScalarsIntAddEquiv Λ X q _).symmComp
+      (Sheaf.H.map (F := X.rootsOfUnitySheaf (ringChar Λ))
+      ((extendScalarsAdjunction Λ X).unit.app (X.rootsOfUnitySheaf (ringChar Λ))) q) :=
+  rfl
+
+/-- The natural map `Λ ⊗ Hᵠ(X, μₙ) ⟶ Hᵠ(X, μₙ ⊗ Λ)`, `c ⊗ x ↦ c • x`. -/
+noncomputable def kummerCoefficientTensorMap :
+    Λ ⊗[ℤ] Sheaf.H (X.rootsOfUnitySheaf (ringChar Λ)) q →+
+      Abelian.Ext.{u + 1} ((extendScalars Λ X).obj X.constantSheafInt)
+        ((extendScalars Λ X).obj (X.rootsOfUnitySheaf (ringChar Λ))) q :=
+  (kummerCoefficientMaps Λ X q).tensorMap
+
+private lemma kummerCoefficientTensorMap_eq :
+    kummerCoefficientTensorMap Λ X q =
+      TensorProduct.liftSMulAddHom Λ (kummerCoefficientMap Λ X q) :=
+  rfl
+
 @[simp]
 lemma kummerCoefficientTensorMap_tmul (c : Λ) (x : Sheaf.H (X.rootsOfUnitySheaf (ringChar Λ)) q) :
-    kummerCoefficientTensorMap Λ X q (c ⊗ₜ x) = c • kummerCoefficientMap Λ X q x :=
-  TensorProduct.liftAddHom_tmul _ _ _ _
+    kummerCoefficientTensorMap Λ X q (c ⊗ₜ x) = c • kummerCoefficientMap Λ X q x := by
+  rw [kummerCoefficientTensorMap_eq]
+  exact TensorProduct.liftSMulAddHom_tmul Λ _ c x
 
 lemma extExtendScalarsIntAddEquiv_smul (N : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     (c : Λ)
@@ -259,8 +357,9 @@ lemma extExtendScalarsIntAddEquiv_smul (N : Sheaf X.smallEtaleTopology (ModuleCa
 lemma extExtendScalarsIntAddEquiv_kummerCoefficientMap
     (x : Sheaf.H (X.rootsOfUnitySheaf (ringChar Λ)) q) :
     extExtendScalarsIntAddEquiv Λ X q _ (kummerCoefficientMap Λ X q x) =
-      Sheaf.H.map ((extendScalarsAdjunction Λ X).unit.app _) q x :=
-  (extExtendScalarsIntAddEquiv Λ X q _).apply_symm_apply _
+      Sheaf.H.map ((extendScalarsAdjunction Λ X).unit.app _) q x := by
+  rw [kummerCoefficientMap_eq]
+  exact AddEquiv.apply_symmComp _ _ x
 
 end BaseChange
 
@@ -362,12 +461,13 @@ theorem bijective_kummerCoefficientTensorMap (f : X ⟶ Spec (.of k))
   let C : Λ ⊗[ℤ] Sheaf.H (X.rootsOfUnitySheaf (ringChar Λ)) q ≃ₗ[ℤ] Λ ⊗[ℤ] F.obj Z :=
     TensorProduct.congr (LinearEquiv.refl ℤ Λ) Hζ.toIntLinearEquiv
   have hcomp : ∀ y, Hτ (extExtendScalarsIntAddEquiv Λ X q _ (kummerCoefficientTensorMap Λ X q y)) =
-      F.tensorMapOf ψ (C y) := by
-    intro y
-    induction y using TensorProduct.induction_on with
-    | zero => rw [map_zero, map_zero, map_zero, map_zero, map_zero]
-    | add a b ha hb => rw [map_add, map_add, map_add, ha, hb, map_add, map_add]
-    | tmul c x =>
+      F.tensorMapOf ψ (C y) :=
+    tensorAddHom_apply_eq_of_tmul
+      (Hτ.toAddMonoidHom.comp ((extExtendScalarsIntAddEquiv Λ X q _).toAddMonoidHom.comp
+        (kummerCoefficientTensorMap Λ X q)))
+      ((F.tensorMapOf ψ).comp C.toLinearMap.toAddMonoidHom) fun c x ↦ by
+      change Hτ (extExtendScalarsIntAddEquiv Λ X q _ (kummerCoefficientTensorMap Λ X q (c ⊗ₜ x))) =
+        F.tensorMapOf ψ (C (c ⊗ₜ x))
       rw [kummerCoefficientTensorMap_tmul, extExtendScalarsIntAddEquiv_smul,
         extExtendScalarsIntAddEquiv_kummerCoefficientMap]
       change Sheaf.H.map τ.hom q (Sheaf.H.map _ q (Sheaf.H.map _ q x)) =

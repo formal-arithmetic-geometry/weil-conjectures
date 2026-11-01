@@ -5,11 +5,9 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.AffineImmersion
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne.FiniteBoundary
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne.FirstStep
+import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne.Transport
 
 /-!
 # The second step of Deligne's generic constructibility: smooth source, locally constant sheaf

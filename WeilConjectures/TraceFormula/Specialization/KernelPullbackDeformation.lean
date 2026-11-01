@@ -89,8 +89,7 @@ noncomputable def boundedConstructibleNearbyCyclesLaxMonoidal
     (boundedConstructible _) _ (M.nearbyCycles (Profinite.padicAlgClRingObj ℓ))
     (M.nearbyCyclesLaxMonoidal (Profinite.padicAlgClRingObj ℓ)) _
 
-omit [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
-  [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom] in
+omit [IsSeparated X.hom] [IsSeparated X'.hom] in
 /-- The unit of the lax monoidal structure of nearby cycles on bounded constructible complexes is
 the specialization unit. -/
 lemma boundedConstructibleNearbyCyclesLaxMonoidal_ε

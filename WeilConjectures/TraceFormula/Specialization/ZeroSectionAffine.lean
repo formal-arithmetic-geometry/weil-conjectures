@@ -6,8 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.PolynomialAffineNoether
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ClosedImmersion
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekInterchange
 public import WeilConjectures.TraceFormula.Specialization.DefectBoundedConstructible
 public import WeilConjectures.TraceFormula.Specialization.DefectGenericDivisor
 public import WeilConjectures.TraceFormula.Specialization.FiniteSupportConservative

@@ -96,3 +96,27 @@ theorem preservesFiniteLimits_comparisonCoefficientPullback_type (T : Scheme.{u}
     (Scheme.toProEt T) (Type (u + 1)) T.smallEtaleTopology (Scheme.ProEt.topology T)
 
 end AlgebraicGeometry.ProEtale
+
+namespace AlgebraicGeometry.Scheme
+
+section
+
+open CategoryTheory CategoryTheory.Limits
+
+/-- The set-valued comparison adjunction, with inverse image given by left Kan extension
+followed by sheafification and direct image by restriction along `toProEt T`.
+The Kan extension at `W` is the colimit over `CostructuredArrow (toProEt T).op (op W)`,
+which is the opposite of the category of pairs `(U, W ⟶ u(U))` of Tag 00WX.
+Source: Stacks Project, Tags 099R and 00WX
+(blueprint: def-weil-pbc-site-comparison-morphism). -/
+noncomputable def proEtaleSiteComparison (T : Scheme.{u}) :
+    Functor.sheafPullbackConstruction.sheafPullback (toProEt T)
+      (Type (u + 1)) T.smallEtaleTopology (ProEt.topology T) ⊣
+    (toProEt T).sheafPushforwardContinuous
+      (Type (u + 1)) T.smallEtaleTopology (ProEt.topology T) :=
+  Functor.sheafPullbackConstruction.sheafAdjunctionContinuous (toProEt T)
+    (Type (u + 1)) T.smallEtaleTopology (ProEt.topology T)
+
+end
+
+end AlgebraicGeometry.Scheme

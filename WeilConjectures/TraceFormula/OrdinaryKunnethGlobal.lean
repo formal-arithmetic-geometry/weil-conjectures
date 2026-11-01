@@ -10,14 +10,9 @@ public import WeilConjectures.CategoryTheory.ObjectProperty.FullSubcategoryEqToH
 public import WeilConjectures.SixFunctors.NearbyCycles.Kunneth
 public import WeilConjectures.SixFunctors.NearbyCycles.ExchangeCoherence
 public import WeilConjectures.TraceFormula.ProperKunneth
-public import WeilConjectures.TraceFormula.GenericBaseChangePullback
 public import WeilConjectures.TraceFormula.OrdinaryKunnethProjection
 public import WeilConjectures.TraceFormula.FieldDualizable
 public import WeilConjectures.TraceFormula.HomologyWeilLowerStar
-public import WeilConjectures.WeilObject.BoundedConstructible.UpperLowerStar
-public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMorphismDualizable
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SquareComparisonCoherence
-public import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 # The ordinary Künneth formula for global sections on `Dᵇc`

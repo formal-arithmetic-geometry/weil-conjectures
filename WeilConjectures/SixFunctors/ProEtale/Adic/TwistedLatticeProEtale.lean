@@ -66,11 +66,6 @@ lemma proEtTwistedSectionsPresheaf_map_coe {S : Type w} (c : ↥(pullback f f) �
       σ.1 ∘ (pullbackMapRight f g.left (MorphismProperty.Over.w g)).base :=
   rfl
 
-/-- The morphisms of the small pro-étale site are weakly étale. -/
-lemma ProEt.weaklyEtale_left {U U' : Y.ProEt} (g : U' ⟶ U) : WeaklyEtale g.left := by
-  have : WeaklyEtale (g.left ≫ U.hom) := by rw [MorphismProperty.Over.w g]; exact U'.prop
-  exact WeaklyEtale.of_comp g.left U.hom
-
 variable {f}
 
 /-- The base change to `V ×_Y U` of a pro-étale covering family of `U` is a pro-étale covering

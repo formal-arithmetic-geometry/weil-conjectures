@@ -11,6 +11,7 @@ public import WeilConjectures.Algebra.Homology.DerivedInternalHom
 import WeilConjectures.AlgebraicGeometry.DerivedTensorQCohClosure
 import WeilConjectures.AlgebraicGeometry.PerfectImpliesQCoh
 import WeilConjectures.AlgebraicGeometry.PerfectRHomTensorComparison
+import WeilConjectures.AlgebraicGeometry.DerivedInternalHomAdjunction
 
 /-! # PerfectPart of derived internal Hom
 

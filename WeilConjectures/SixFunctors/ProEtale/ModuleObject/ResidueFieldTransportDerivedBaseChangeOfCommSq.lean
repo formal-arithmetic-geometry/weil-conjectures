@@ -31,7 +31,8 @@ namespace AlgebraicGeometry.ProEtale
 
 open Scheme CondensedRing PadicAlgCl
 
-variable {ℓ : ℕ} [Fact ℓ.Prime] {E : FiniteIntermediateField ℓ}
+variable {ℓ : ℕ} [Fact ℓ.Prime] {E : Type} [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
+  [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
   {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
 /-- **The base-change morphism and residue field module sheaves.** `D(G_{Y'})` of the
@@ -43,11 +44,11 @@ theorem nonempty_arrowIso_map_exchangeRight_residueField_of_commSq (sq : CommSq 
     Nonempty (Arrow.mk ((residueFieldModuleSheaf Y' ℓ E).mapDerivedCategory.map
         ((Adjunction.exchangeRight
           (CondensedRing.derivedUpperStarLowerStarAdjunction
-            (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)) f)
+            (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)) f)
           (CondensedRing.derivedUpperStarLowerStarAdjunction
-            (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)) f')
+            (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)) f')
           (pullbackSquareComparison
-            (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)) sq)).app M)) ≅
+            (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)) sq)).app M)) ≅
       Arrow.mk ((Adjunction.exchangeRight
         (ProEtale.derivedUpperStarLowerStarAdjunction
           (ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)) f)

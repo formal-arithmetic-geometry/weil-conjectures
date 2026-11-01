@@ -16,6 +16,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedC
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleOpenCover
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.HomologyCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyFreeOfFinitelyPresented
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.StalkZeroLocus
 public import WeilConjectures.TraceFormula.Specialization.ClosedPointsSupport
 
 /-!
@@ -134,13 +135,6 @@ lemma isZero_upperStar_opensRange {V X : Scheme.{u}} (j : V ⟶ X) [IsOpenImmers
     (upperStarComp Λ j.isoOpensRange.inv j.isoOpensRange.hom).app _)
 
 end Detection
-
-/-- The free module of rank `0` is zero. -/
-lemma isZero_finiteFree_zero {W : Scheme.{u}}
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] :
-    IsZero (Mod.finiteFree (condensedRingObj Λ W) 0) := by
-  rw [IsZero.iff_id_eq_zero]
-  exact biproduct.hom_ext _ _ fun i ↦ i.elim0
 
 /-! ### The rank function -/
 

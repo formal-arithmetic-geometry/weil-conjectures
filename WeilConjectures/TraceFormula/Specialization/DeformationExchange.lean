@@ -127,11 +127,11 @@ theorem specializesComponentClass_deformation {B : Over (Spec (.of k))} [QuasiCo
         (supportClosureMap c ≫ Limits.prod.snd) = c.support by
           rw [prodLift_supportClosureMap, supportClosureι_map],
       Category.assoc, F.isPullback.w, ← Category.assoc]
-  have : IsProper ((j ≫ F.ι) ≫ c.support).left := isProper_left_of_isProper_hom _
-  have : IsProper ((j ≫ F.ι) ≫ supportClosureι c).left := isProper_left_of_isProper_hom _
+  have : IsProper ((j ≫ F.ι) ≫ c.support).left := isProper_left_of_isProper_of_isSeparated _
+  have : IsProper ((j ≫ F.ι) ≫ supportClosureι c).left := isProper_left_of_isProper_of_isSeparated _
   have : IsProper (((j ≫ F.ι) ≫ supportClosureι c) ≫ Limits.prod.lift
     (supportClosureMap c ≫ Limits.prod.fst) (supportClosureMap c ≫ Limits.prod.snd)).left :=
-    isProper_left_of_isProper_hom _
+    isProper_left_of_isProper_of_isSeparated _
   have hF2 := compactificationRoute_ambient_eq_fixedSquareRoute_of_eq ℓ j (rfl : j ≫ F.ι = _)
     F.isPullback.w (supportClosureι c)
     (Limits.prod.lift (supportClosureMap c ≫ Limits.prod.fst)
@@ -139,17 +139,20 @@ theorem specializesComponentClass_deformation {B : Over (Spec (.of k))} [QuasiCo
     (by rw [prodLift_supportClosureMap, supportClosureι_map])
     (𝟙_ Dᵇc(B.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (by rw [hphg]; rfl)
   have : IsProper (hc.componentSpecialLift k' j hb ≫ (hc.specialFixedLocus k').d).left :=
-    isProper_left_of_isProper_hom _
+    isProper_left_of_isProper_of_isSeparated _
   have : IsProper ((hc.componentSpecialLift k' j hb ≫ (hc.specialFixedLocus k').d) ≫
-    diag (deformationSpecialFibre X (y ≫ c.c₁).left.ker k')).left := isProper_left_of_isProper_hom _
-  have : IsProper (componentSpecialFibreMap k' j hb).left := isProper_left_of_isProper_hom _
+    diag (deformationSpecialFibre X (y ≫ c.c₁).left.ker k')).left :=
+    isProper_left_of_isProper_of_isSeparated _
+  have : IsProper (componentSpecialFibreMap k' j hb).left :=
+    isProper_left_of_isProper_of_isSeparated _
   have : IsProper (componentSpecialFibreMap k' j hb ≫
-    (hc.specialCorrespondence k').support).left := isProper_left_of_isProper_hom _
+    (hc.specialCorrespondence k').support).left := isProper_left_of_isProper_of_isSeparated _
   have : IsProper (componentSpecialFibreMap k' j hb ≫ hc.supportClosureSpecialι k').left :=
-    isProper_left_of_isProper_hom _
+    isProper_left_of_isProper_of_isSeparated _
   have : IsProper ((componentSpecialFibreMap k' j hb ≫ hc.supportClosureSpecialι k') ≫
-    supportClosureSpecialMap c y k').left := isProper_left_of_isProper_hom _
-  have : IsProper (hc.componentSpecialLift k' j hb).left := isProper_left_of_isProper_hom _
+    supportClosureSpecialMap c y k').left := isProper_left_of_isProper_of_isSeparated _
+  have : IsProper (hc.componentSpecialLift k' j hb).left :=
+    isProper_left_of_isProper_of_isSeparated _
   have hphg' : ((componentSpecialFibreMap k' j hb).left ≫ (hc.supportClosureSpecialι k').left) ≫
       (supportClosureSpecialMap c y k').left = ((hc.componentSpecialLift k' j hb ≫
         (hc.specialFixedLocus k').d) ≫

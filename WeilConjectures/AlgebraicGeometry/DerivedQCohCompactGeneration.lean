@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import WeilConjectures.CategoryTheory.CompactlyGenerated
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 public import Mathlib.Topology.QuasiSeparated
-import WeilConjectures.AlgebraicGeometry.DerivedQCohDirectSums
 import WeilConjectures.AlgebraicGeometry.DerivedQCohPerfectGeneration
 import WeilConjectures.AlgebraicGeometry.PerfectComplexRepresentatives
 import WeilConjectures.AlgebraicGeometry.PerfectObjectCompact

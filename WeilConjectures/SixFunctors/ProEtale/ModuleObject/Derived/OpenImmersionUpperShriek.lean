@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriekIndependence
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionLowerShriekIso
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek
 
 /-!
@@ -49,53 +49,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] {U X : Over (Spec (
   [QuasiCompact X.hom] [IsSeparated X.hom]
   (j : U ⟶ X) [IsOpenImmersion j.left]
 
-/-- The identification of `X` with the middle object of the compactification
-`U ⟶[j] X ⟶[𝟙] X` of an open immersion `j`. -/
-noncomputable def openImmersionCompactificationHom :
-    X ⟶ (Compactification.ofIsOpenImmersion j.left).overObj :=
-  Over.homMk (𝟙 X.left) (by
-    change 𝟙 X.left ≫ 𝟙 X.left ≫ X.hom = X.hom
-    simp)
-
-instance : IsIso (openImmersionCompactificationHom j) := by
-  have : IsIso ((Over.forget _).map (openImmersionCompactificationHom j)) :=
-    inferInstanceAs (IsIso (𝟙 X.left))
-  exact isIso_of_reflects_iso _ (Over.forget _)
-
-instance : IsProper (openImmersionCompactificationHom j).left :=
-  inferInstanceAs (IsProper (𝟙 X.left))
-
-omit [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom]
-  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] in
-lemma isPullback_openImmersionCompactificationHom :
-    IsPullback (𝟙 U) j (Compactification.ofIsOpenImmersion j.left).overI
-      (openImmersionCompactificationHom j) :=
-  IsPullback.of_horiz_isIso ⟨by ext; simp [openImmersionCompactificationHom]; rfl⟩
-
-omit [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom]
-  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] in
-lemma openImmersionCompactificationHom_comp_overG :
-    openImmersionCompactificationHom j ≫ (Compactification.ofIsOpenImmersion j.left).overG =
-      𝟙 X := by
-  ext
-  simp [openImmersionCompactificationHom, Compactification.overG]
-  rfl
-
 variable [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
-
-/-- The lower shriek along an open immersion is the extension by zero, `Rj_! ≅ j_!`, on bounded
-constructible `ℚ̄_ℓ`-complexes: by independence of the compactification
-(`boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl`), `Rj_!` is `j_! ⋙ R(𝟙 X)_*`
-for the trivial compactification `U ⟶[j] X ⟶[𝟙] X`
-(`AlgebraicGeometry.Compactification.ofIsOpenImmersion`), and `R(𝟙 X)_* ≅ 𝟭`. -/
-noncomputable def boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl :
-    boundedConstructibleLowerShriek ℓ j ≅
-      boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j :=
-  boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
-      (compactificationOverField j) (.ofIsOpenImmersion j.left) ≪≫
-    Functor.isoWhiskerLeft (boundedConstructibleOpenImmersionLowerShriek _ ℓ j)
-      (boundedConstructibleLowerStarId ℓ X) ≪≫
-    Functor.rightUnitor _
 
 /-- The exceptional inverse image along an open immersion is the pullback, `Rj^! ≅ j^*`, on
 bounded constructible `ℚ̄_ℓ`-complexes: the conjugate of

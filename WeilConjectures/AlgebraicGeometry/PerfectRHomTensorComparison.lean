@@ -7,12 +7,10 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
-public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
-public import WeilConjectures.AlgebraicGeometry.DerivedInternalHomAdjunction
 public import WeilConjectures.AlgebraicGeometry.DerivedPullbackMonoidalModel
 public import Mathlib.CategoryTheory.Monoidal.Rigid.Basic
+public import WeilConjectures.Algebra.Homology.DerivedInternalHom
 import Mathlib.CategoryTheory.Yoneda
-import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence
 import WeilConjectures.AlgebraicGeometry.DualizableEvaluationCriterion
 import WeilConjectures.AlgebraicGeometry.PerfectRHomTensorComparisonDual
 import WeilConjectures.AlgebraicGeometry.PerfectRHomEvaluationIsomorphisms

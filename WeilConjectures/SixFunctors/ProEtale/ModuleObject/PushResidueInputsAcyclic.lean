@@ -117,9 +117,9 @@ omit [MonoidalPreadditive C] [IsCommMonObj R] [IsCommMonObj S] in
 noncomputable def comapPreimage [Epi φ] {A B : Mod C S}
     (g : (comap φ).obj A ⟶ (comap φ).obj B) : A ⟶ B :=
   homMk g.hom (by
-    have : PreservesColimitsOfSize.{v, v} (tensorRight A.X) :=
+    have : PreservesColimitsOfSize.{v, v} (MonoidalCategory.tensorRight A.X) :=
       preservesColimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight A.X)
-    have : Epi (φ ▷ A.X) := (tensorRight A.X).map_epi φ
+    have : Epi (φ ▷ A.X) := (MonoidalCategory.tensorRight A.X).map_epi φ
     rw [← cancel_epi (φ ▷ A.X)]
     have h := act_hom g
     rw [act_comap_obj, act_comap_obj] at h
@@ -221,23 +221,25 @@ lemma rightAcyclic_forget_of_rightAcyclic_lowerStar
 
 end
 
-variable (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) {X Y : Scheme.{u}}
+variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
+  [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] {X Y : Scheme.{u}}
   (f : X ⟶ Y)
 
+omit [FiniteDimensional ℚ_[ℓ] E] in
 /-- For a uniformizer `ϖ` and an injective `𝒪_{E,X}`-module `J`, the kernel `J[ϖ]` of the action
 of `ϖ` on `J` is `f_*`-acyclic: `0 ⟶ J[ϖ] ⟶ J --ϖ--> J ⟶ 0` is short exact and stays so after
 `f_*`, injective modules being divisible and `f_*` preserving injective modules. -/
-lemma rightAcyclic_lowerStar_kernel (ϖ : PadicAlgCl.integers ℓ E.1)
-    (hϖ : IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E.1) = Ideal.span {ϖ})
+lemma rightAcyclic_lowerStar_kernel (ϖ : PadicAlgCl.integers ℓ E)
+    (hϖ : IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E) = Ideal.span {ϖ})
     (J : Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)) [Injective J] :
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X)) [Injective J] :
     ((f)_*⟦_⟧).rightAcyclic
-      (Limits.kernel (Mod.regularEndSMul (padicIntegersRegularEnd X ℓ E ϖ) J)) := by
+      (Limits.kernel (Mod.regularEndSMul (padicIntegersRegularEndOfAlgebra X ℓ E ϖ) J)) := by
   have := mono_padicIntegersRegularEnd_hom X ℓ E ϖ hϖ
-  have := Mod.epi_regularEndSMul_of_injective (r := padicIntegersRegularEnd X ℓ E ϖ) J
+  have := Mod.epi_regularEndSMul_of_injective (r := padicIntegersRegularEndOfAlgebra X ℓ E ϖ) J
   refine Functor.rightAcyclic_kernel_of_injective _ ?_
-  have h : (f)_*⟦_⟧.map (Mod.regularEndSMul (padicIntegersRegularEnd X ℓ E ϖ) J) =
-      Mod.regularEndSMul (padicIntegersRegularEnd Y ℓ E ϖ) ((f)_*⟦_⟧.obj J) :=
+  have h : (f)_*⟦_⟧.map (Mod.regularEndSMul (padicIntegersRegularEndOfAlgebra X ℓ E ϖ) J) =
+      Mod.regularEndSMul (padicIntegersRegularEndOfAlgebra Y ℓ E ϖ) ((f)_*⟦_⟧.obj J) :=
     Mod.hom_ext _ _ (lowerStar_map_regularEndSMul ℓ E ϖ f J)
   rw [h]
   have := mono_padicIntegersRegularEnd_hom Y ℓ E ϖ hϖ
@@ -260,7 +262,7 @@ lemma rightAcyclic_lowerStar_comap_of_injective
 of scalars sending injective `𝔽_{E,X}`-modules to `f_*`-acyclic `𝒪_{E,X}`-modules. -/
 instance isIso_rightDerivedFunctorPlusBaseChange_comapLowerStarIso_residueField :
     IsIso (Functor.rightDerivedFunctorPlusBaseChange
-      (comapLowerStarIso (Profinite.padicIntegersRingObjToResidueField ℓ E.1) f).hom) :=
+      (comapLowerStarIso (Profinite.padicIntegersRingObjToResidueField ℓ E) f).hom) :=
   Functor.isIso_rightDerivedFunctorPlusBaseChange_of_rightAcyclic _
     fun I _ ↦ rightAcyclic_lowerStar_comap_of_injective ℓ E f I
 
@@ -268,7 +270,7 @@ instance isIso_rightDerivedFunctorPlusBaseChange_comapLowerStarIso_residueField 
 change morphism `res R^q f_* M ⟶ R^q f_*(res M)` is an isomorphism. -/
 instance isIso_rightDerivedBaseChange_comapLowerStarIso_residueField (q : ℕ) :
     IsIso (Functor.rightDerivedBaseChange
-      (comapLowerStarIso (Profinite.padicIntegersRingObjToResidueField ℓ E.1) f).hom q) := by
+      (comapLowerStarIso (Profinite.padicIntegersRingObjToResidueField ℓ E) f).hom q) := by
   rw [NatTrans.isIso_iff_isIso_app]
   intro M
   rw [Functor.rightDerivedBaseChange_app]
@@ -279,25 +281,26 @@ is.** -/
 theorem rightAcyclic_lowerStar_of_comap
     (M : Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (residueFieldRingObj X ℓ E))
     (hM : ((f)_*⟦_⟧).rightAcyclic ((Mod.comap (padicIntegersToResidueField X ℓ E)).obj M)) :
-    ((f)_*⟦Profinite.continuousMapRingObj (PadicAlgCl.integersResidueField ℓ E.1)⟧).rightAcyclic
+    ((f)_*⟦Profinite.continuousMapRingObj (PadicAlgCl.integersResidueField ℓ E)⟧).rightAcyclic
       M := fun q ↦ by
   have hz : IsZero ((Mod.comap (padicIntegersToResidueField Y ℓ E)).obj
       ((((f)_*⟦_⟧).rightDerived (q + 1)).obj M)) :=
     (hM q).of_iso ((asIso (Functor.rightDerivedBaseChange
-      (comapLowerStarIso (Profinite.padicIntegersRingObjToResidueField ℓ E.1) f).hom
+      (comapLowerStarIso (Profinite.padicIntegersRingObjToResidueField ℓ E) f).hom
         (q + 1))).app M)
   rw [IsZero.iff_id_eq_zero] at hz ⊢
   exact (Mod.comap _).map_injective (by rw [CategoryTheory.Functor.map_id, Functor.map_zero, hz])
 
+omit [FiniteDimensional ℚ_[ℓ] E] in
 /-- **The underived (Push) comparison for `𝒪_E ⟶ 𝔽_E`** is an isomorphism at an `f_*`-acyclic
 `𝒪_{E,X}`-module `M` on which a uniformizer `ϖ` acts injectively. -/
-theorem isIso_pushHom_residueField_app_of_rightAcyclic (ϖ : PadicAlgCl.integers ℓ E.1)
-    (hϖ : IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E.1) = Ideal.span {ϖ})
+theorem isIso_pushHom_residueField_app_of_rightAcyclic (ϖ : PadicAlgCl.integers ℓ E)
+    (hϖ : IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E) = Ideal.span {ϖ})
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))
-    [Mono (Mod.regularEndSMul (padicIntegersRegularEnd X ℓ E ϖ) M)]
+      (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))
+    [Mono (Mod.regularEndSMul (padicIntegersRegularEndOfAlgebra X ℓ E ϖ) M)]
     (hM : ((f)_*⟦_⟧).rightAcyclic M) :
-    IsIso ((pushHom (Profinite.padicIntegersRingObjToResidueField ℓ E.1) f).app M) :=
+    IsIso ((pushHom (Profinite.padicIntegersRingObjToResidueField ℓ E) f).app M) :=
   isIso_pushHom_residueField_app_of_mono ℓ E ϖ f hϖ M
     (rightAcyclic_forget_of_rightAcyclic_lowerStar _ f hM)
 

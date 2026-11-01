@@ -211,7 +211,7 @@ end Profinite
 
 namespace Profinite
 
-open PadicAlgCl
+open _root_.PadicAlgCl
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] {E F : FiniteIntermediateField ℓ}
 

@@ -6,12 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.WeilSheaf.FourierInversion
-public import WeilConjectures.WeilSheaf.FourierTateTwist
-public import WeilConjectures.WeilSheaf.HomologySequence
-public import WeilConjectures.WeilSheaf.StalkFunctor
 public import WeilConjectures.DeligneLaumon.AffineLine.BoundaryTransform
 public import WeilConjectures.DeligneLaumon.AffineLine.Punctual
-public import WeilConjectures.DeligneLaumon.Reduction.FibreCohomology
 
 /-!
 # The ordinary amplitude of the Fourier–Deligne transform on the line

@@ -24,11 +24,12 @@ constructions of `WeilConjectures.PoincareDuality.Abstract`:
 * the **Poincaré duality morphism** `PD_p : Rp_* ℚ̄_ℓ,X(d)[2d] ⟶ RHom(Rp_! ℚ̄_ℓ,X, ℚ̄_ℓ,S)`, the
   composite of `Rp_*(pur_p⁻¹)`, the identification `Rp^! ℚ̄_ℓ,S ≅ RHom(ℚ̄_ℓ,X, Rp^! ℚ̄_ℓ,S)` and
   the Verdier exchange morphism `Φ_{p,ℚ̄_ℓ,X,ℚ̄_ℓ,S}`;
-* the **compact-support cup product**
-  `cup_c : Rp_! ℚ̄_ℓ,X ⊗ᴸ Rp_* ℚ̄_ℓ,X(d)[2d] ⟶ Rp_! ℚ̄_ℓ,X(d)[2d]`, from the derived exceptional
-  projection morphism and the counit of `Lp^* ⊣ Rp_*`.
+* the **compact-support cup product** `cup_c : Rp_! K ⊗ᴸ Rp_* L ⟶ Rp_!(K ⊗ᴸ L)` of arbitrary
+  bounded constructible `ℚ̄_ℓ`-module objects `K` and `L` on `X`, from the derived exceptional
+  projection morphism and the counit of `Lp^* ⊣ Rp_*` (this does not use purity).
 
-All three share the normalization of `pur_p`: the transpose of `PD_p` is exactly `Tr_p ∘ cup_c`
+The trace and `PD_p` share the normalization of `pur_p`, and the transpose of `PD_p` is exactly
+`Tr_p ∘ cup_c` for `K = ℚ̄_ℓ,X` and `L = ℚ̄_ℓ,X(d)[2d]`, up to `ℚ̄_ℓ,X ⊗ᴸ L ≅ L`
 (`ProEtale.CondensedRing.uncurry_poincareMap`), and `PD_p` is an isomorphism by Verdier
 duality (`ProEtale.CondensedRing.isIso_poincareMap`), which is **Poincaré duality** in the
 form `𝔻_S(Rp_! ℚ̄_ℓ,X) ≅ Rp_* ℚ̄_ℓ,X(d)[2d]`.
@@ -106,23 +107,23 @@ noncomputable def poincareMap :
     (boundedConstructibleExceptionalProjection ℓ p)
     (boundedConstructibleSmoothPurityIso ℓ p d)
 
-/-- The **compact-support cup product**
-`cup_c : Rp_! ℚ̄_ℓ,X ⊗ᴸ Rp_* ℚ̄_ℓ,X(d)[2d] ⟶ Rp_! ℚ̄_ℓ,X(d)[2d]`: the derived
-exceptional projection morphism `PF^!`, the counit `Lp^* Rp_* ⟶ 𝟭` and the left unitor. -/
-noncomputable def cupProduct :
-    (boundedConstructibleLowerShriek ℓ p).obj (𝟙_ _) ⊗
-        (boundedConstructibleLowerStar ℓ p).obj
-          (boundedConstructibleTateTwist ℓ X d (2 * d)) ⟶
-      (boundedConstructibleLowerShriek ℓ p).obj
-        (boundedConstructibleTateTwist ℓ X d (2 * d)) :=
+/-- The **compact-support cup product** `cup_c : Rp_! K ⊗ᴸ Rp_* L ⟶ Rp_!(K ⊗ᴸ L)` of two
+bounded constructible `ℚ̄_ℓ`-module objects `K` and `L` on `X`: the derived exceptional projection
+morphism `PF^!_{p,K,Rp_* L}`, followed by `Rp_!(K ⊗ᴸ -)` of the counit `Lp^* Rp_* L ⟶ L`. -/
+noncomputable def cupProduct (K L : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (boundedConstructibleLowerShriek ℓ p).obj K ⊗ (boundedConstructibleLowerStar ℓ p).obj L ⟶
+      (boundedConstructibleLowerShriek ℓ p).obj (K ⊗ L) :=
   Verdier.cupProduct (boundedConstructibleUpperStarLowerStarAdjunction ℓ p)
-    (boundedConstructibleExceptionalProjection ℓ p)
+    (boundedConstructibleExceptionalProjection ℓ p) K L
 
 /-- **Poincaré duality is the trace–cup pairing**: the transpose
 `Rp_! ℚ̄_ℓ,X ⊗ᴸ Rp_* ℚ̄_ℓ,X(d)[2d] ⟶ ℚ̄_ℓ,S` of the Poincaré duality morphism is the cup product
-followed by the trace. -/
+`Rp_! ℚ̄_ℓ,X ⊗ᴸ Rp_* ℚ̄_ℓ,X(d)[2d] ⟶ Rp_!(ℚ̄_ℓ,X ⊗ᴸ ℚ̄_ℓ,X(d)[2d]) ≅ Rp_! ℚ̄_ℓ,X(d)[2d]` followed by
+the trace. -/
 theorem uncurry_poincareMap :
-    uncurry (poincareMap ℓ p d) = cupProduct ℓ p d ≫ trace ℓ p d :=
+    uncurry (poincareMap ℓ p d) =
+      cupProduct ℓ p (𝟙_ _) (boundedConstructibleTateTwist ℓ X d (2 * d)) ≫
+        (boundedConstructibleLowerShriek ℓ p).map (λ_ _).hom ≫ trace ℓ p d :=
   Verdier.uncurry_poincareMap _ _ _ _
 
 /-- **Poincaré duality**: the Poincaré duality morphism

@@ -5,10 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.DeligneLaumon.AffineLine.Constituent
 public import WeilConjectures.DeligneLaumon.AffineLine.Perverse
-public import WeilConjectures.DeligneLaumon.AffineLine.RamifiedAtInfinity
-public import WeilConjectures.DeligneLaumon.AffineLine.PunctualTransform
 
 /-!
 # Irreducible middle extensions under the Fourier transform

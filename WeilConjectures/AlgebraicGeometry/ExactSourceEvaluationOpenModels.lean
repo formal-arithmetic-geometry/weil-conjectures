@@ -8,13 +8,10 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationData
 public import WeilConjectures.AlgebraicGeometry.CanonicalDerivedTensorHom
-public import WeilConjectures.Algebra.Homology.KFlat
-
 import WeilConjectures.AlgebraicGeometry.ExactSourceKInjectiveEvaluationOpenModels
 import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationPostcomposition
 import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationDifferential
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
-import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
 
 /-! # Ordinary models for evaluation on the open scheme
 

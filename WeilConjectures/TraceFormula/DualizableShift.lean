@@ -31,7 +31,7 @@ open Scheme
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k]
   [Fact (ringChar k ≠ ℓ)]
-  (X : Over (Spec (.of k)))
+  (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
 
 /-- The tensor product of shifts in `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`, `A⟦a⟧ ⊗ B⟦b⟧ ≅ (A ⊗ B)⟦a + b⟧`: the
 isomorphism `DerivedCategory.shiftTensorShiftIso` of the ambient derived category, restricted to

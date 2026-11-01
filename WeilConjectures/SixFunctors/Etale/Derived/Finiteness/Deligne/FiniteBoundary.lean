@@ -5,11 +5,10 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FiniteBoundary
-public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne.Composition
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne.ChangeOfBase
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne.OpenCover
+import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne.ClosedImmersion
 
 /-!
 # Generic constructibility across a finite boundary

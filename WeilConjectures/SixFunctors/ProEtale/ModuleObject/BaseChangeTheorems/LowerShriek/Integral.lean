@@ -6,6 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CompactlySupported
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.Proper
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionLowerShriekUnit
 
 /-!
 
@@ -26,13 +28,11 @@ Let `ℓ` be a prime and `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ`, w
 The constructions are the generic ones of those files. The only coefficient-specific input is the
 proper base change theorem for bounded constructible `𝒪_E`-sheaves
 (`ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_of_isProper_padicIntegers`,
-blueprint `sk-thm-sfb-proper-base-change`), which is `sorry`, as are its `E` and `ℚ̄_ℓ` versions
-(`ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_of_isProper`).
+blueprint `sk-thm-sfb-proper-base-change`, in
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.Proper`).
 
 ## Main statements
 
-- `ProEtale.CondensedRing.isIso_boundedConstructibleBaseChange_of_isProper_padicIntegers`: proper
-  base change on bounded constructible `𝒪_E`-sheaves (`sorry`).
 - `ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactificationIso_padicIntegers`:
   `Rf_!^{c₁} ≅ Rf_!^{c₂}` for `𝒪_E`-sheaves.
 - `ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange_padicIntegers`: the
@@ -57,45 +57,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
   [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
   {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
 
-/-! ### Proper base change -/
-
-section Proper
-
-variable {X Y X' Y' : Over (Spec (.of k))}
-  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
-  [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
-  [IsSeparated X'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
-  {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
-
-include k in
-/-- Compatibility required from `sec-six-functors-basics` (to be proved there):
-blueprint `sk-thm-sfb-proper-base-change`.
-**The proper base change theorem** for bounded constructible `𝒪_E`-sheaves (blueprint
-`sk-thm-sfb-proper-base-change`), `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ`: for a cartesian
-square of schemes
-
-```
-X' --g'--> X
-|          |
-f'         f
-v          v
-Y' --g---> Y
-```
-
-with `f` proper, the base-change morphism `BC_sq : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*` is an
-isomorphism of functors `Dᵇc(X)⟦𝒪̲_E⟧ ⥤ Dᵇc(Y')⟦𝒪̲_E⟧`. This is the integral analogue of
-`isIso_boundedConstructibleBaseChange_of_isProper`; it reduces to the étale proper base change
-theorem `AlgebraicGeometry.Etale.isIso_baseChange_of_isProper` by writing a constructible
-`𝒪_E`-complex as the derived limit of its reductions modulo `ϖⁿ` (Bhatt–Scholze, Section 6.7).
-Currently `sorry`, as are its `E` and `ℚ̄_ℓ` versions. -/
-theorem isIso_boundedConstructibleBaseChange_of_isProper_padicIntegers [IsProper f.left]
-    (sq : IsPullback g' f' f g) :
-    IsIso (PadicIntegersRingObj.boundedConstructibleBaseChange
-      ℓ E sq.toCommSq) :=
-  sorry
-
-end Proper
-
 /-! ### Independence of the compactification -/
 
 section Pushforward
@@ -108,16 +69,33 @@ variable {X Z Z₁ : Over (Spec (.of k))}
   [IsProper h.left]
 
 /-- For bounded constructible `𝒪_E`-sheaves, the pushforward comparison `i₁_! ⟶ i_! ⋙ Rh_*` of a
-cartesian square `sq` with `h` proper is an isomorphism. Mathematically it follows from proper
-base change for `𝒪_E`-sheaves
-(`isIso_boundedConstructibleBaseChange_of_isProper_padicIntegers`) by the argument of the
-interchange lemma, which is formalised for `ℚ̲̄_ℓ` only
-(`isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl`). -/
+cartesian square `sq` with `h` proper is an isomorphism: the unit of `Lh^* ⊣ Rh_*` is invertible on
+extensions by zero (`isIso_unit_app_openImmersionLowerShriek`), by proper base change for
+`𝒪_E`-sheaves (`isIso_boundedConstructibleBaseChange_of_isProper_padicIntegers`). -/
 theorem isIso_boundedConstructibleOpenImmersionLowerShriekRefinementPushforward_padicIntegers
     (sq : IsPullback (𝟙 X) i i₁ h) :
     IsIso (PadicIntegersRingObj.boundedConstructibleOpenImmersionLowerShriekRefinementPushforward
       ℓ E sq) :=
-  sorry
+  by
+  have := isIso_boundedConstructibleOpenImmersionLowerShriekRefinement
+    (Profinite.padicIntegersRingObj ℓ E) ℓ sq
+  rw [NatTrans.isIso_iff_isIso_app]
+  intro K
+  have := isIso_unit_app_openImmersionLowerShriek _ ℓ
+    (PadicIntegersRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E h)
+    (PadicIntegersRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E (𝟙 X))
+    (PadicIntegersRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E
+      (overPullbackSnd h (overClosedComplement i₁))) sq
+    (by
+      rw [← PadicIntegersRingObj.boundedConstructibleBaseChange_eq_exchangeRight]
+      exact isIso_boundedConstructibleBaseChange_of_isProper_padicIntegers ℓ E sq.flip)
+    (by
+      rw [← PadicIntegersRingObj.boundedConstructibleBaseChange_eq_exchangeRight]
+      exact isIso_boundedConstructibleBaseChange_of_isProper_padicIntegers ℓ E
+        (isPullback_overPullbackFst_overPullbackSnd h (overClosedComplement i₁))) K
+  simp only [PadicIntegersRingObj.boundedConstructibleOpenImmersionLowerShriekRefinementPushforward,
+    NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app]
+  infer_instance
 
 end Pushforward
 

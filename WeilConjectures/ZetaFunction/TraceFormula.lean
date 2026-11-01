@@ -5,13 +5,9 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.DeligneLaumon.Reduction.FiniteDirectImage
 public import WeilConjectures.WeilSheaf.Finiteness
-public import WeilConjectures.WeilSheaf.StalkCharpoly
-public import WeilConjectures.WeilSheaf.StalkPairing
 public import WeilConjectures.WeilSheaf.TraceFunctionCongr
 public import WeilConjectures.ZetaFunction.WeilObjectComparison
-public import WeilConjectures.ZetaSeries
 
 /-!
 # The Grothendieck–Lefschetz trace formula and point counts

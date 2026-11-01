@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.LongExact
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Serre
+import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Leray
 
 /-!
 # Coherent cohomology of projective schemes over a noetherian ring

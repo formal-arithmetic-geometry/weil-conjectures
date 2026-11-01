@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.ChowLemma.ProjectiveModification
 public import WeilConjectures.AlgebraicGeometry.GeometricFibreDimension
-public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.BoundedConstructible
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Modification
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Projective
 

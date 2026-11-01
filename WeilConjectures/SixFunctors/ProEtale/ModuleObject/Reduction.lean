@@ -65,38 +65,40 @@ namespace AlgebraicGeometry.ProEtale
 
 open Scheme PadicAlgCl
 
-variable (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ)
+variable (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)]
+  [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
 
 /-- The coefficient ring object `𝔽_{E,X} = p_X^* 𝔽̲_E` on `X_proét`. -/
 noncomputable abbrev residueFieldRingObj : Sheaf (ProEt.topology X) Ab.{u + 1} :=
-  condensedRingObj (Profinite.continuousMapRingObj (integersResidueField ℓ E.1)) X
+  condensedRingObj (Profinite.continuousMapRingObj (integersResidueField ℓ E)) X
 
 /-- The residue map `𝒪_{E,X} ⟶ 𝔽_{E,X}` of coefficient ring objects on `X_proét`: the pullback
 along `p_X` of the residue map `𝒪̲_E ⟶ 𝔽̲_E` of condensed rings. -/
 noncomputable abbrev padicIntegersToResidueField :
-    condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X ⟶ residueFieldRingObj X ℓ E :=
-  coefficientMap (Profinite.padicIntegersRingObjToResidueField ℓ E.1) X
+    condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X ⟶ residueFieldRingObj X ℓ E :=
+  coefficientMap (Profinite.padicIntegersRingObjToResidueField ℓ E) X
 
 /-- The residue field `𝔽_E`, lifted to the universe `u + 1` of the coefficient rings of pro-étale
 sheaves of modules on `u`-schemes. -/
 def ResidueFieldCoeff : Type (u + 1) :=
-  ULift.{u + 1} (integersResidueField ℓ E.1)
+  ULift.{u + 1} (integersResidueField ℓ E)
 
 noncomputable instance : CommRing (ResidueFieldCoeff.{u} ℓ E) :=
-  inferInstanceAs (CommRing (ULift.{u + 1} (integersResidueField ℓ E.1)))
+  inferInstanceAs (CommRing (ULift.{u + 1} (integersResidueField ℓ E)))
 
+omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] in
 /-- The prime `ℓ` is zero in `𝔽_E`. -/
 lemma natCast_eq_zero_residueFieldCoeff : ((ℓ : ℕ) : ResidueFieldCoeff.{u} ℓ E) = 0 :=
-  ULift.ext _ _ (natCast_eq_zero_integersResidueField ℓ E.1)
+  ULift.ext _ _ (natCast_eq_zero_integersResidueField ℓ E)
 
 /-- The constants `𝔽_E ⟶ Γ(𝔽_{E,X})`: an element of the residue field `𝔽_E` is the constant
 function `X → 𝔽_E`, a global section of `𝔽_{E,X} = C(-, 𝔽_E)_X`
 (`ProEtale.continuousMapCoefficientSectionRingHom`). -/
 noncomputable def residueFieldSectionRingHom :
     ResidueFieldCoeff.{u} ℓ E →+* Γ (residueFieldRingObj X ℓ E) :=
-  (continuousMapCoefficientSectionRingHom X (integersResidueField ℓ E.1)).comp
-    ((algebraMap (integersResidueField ℓ E.1) C(X, integersResidueField ℓ E.1)).comp
-      (ULift.ringEquiv : ULift.{u + 1} (integersResidueField ℓ E.1) ≃+* _).toRingHom)
+  (continuousMapCoefficientSectionRingHom X (integersResidueField ℓ E)).comp
+    ((algebraMap (integersResidueField ℓ E) C(X, integersResidueField ℓ E)).comp
+      (ULift.ringEquiv : ULift.{u + 1} (integersResidueField ℓ E) ≃+* _).toRingHom)
 
 /-- An `𝔽_{E,X}`-module object, regarded as a pro-étale sheaf of `𝔽_E`-modules: `𝔽_E` acts through
 the constant global sections of `𝔽_{E,X}` (`ProEtale.residueFieldSectionRingHom`). -/
@@ -135,7 +137,7 @@ residue map `𝒪_{E,X} ⟶ 𝔽_{E,X}`, followed by the exact functor
 `ProEtale.residueFieldModuleSheaf`. -/
 noncomputable def derivedReduction :
     DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
-        (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)) ⥤
+        (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X)) ⥤
       DerivedCategory (Sheaf (ProEt.topology X)
         (ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E))) :=
   (Mod.extendScalars (padicIntegersToResidueField X ℓ E)).leftDerivedFunctor ⋙

@@ -5,17 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.DeligneLaumon.Reduction.CompactSupport
-public import WeilConjectures.DeligneLaumon.Reduction.FiniteMiddleExtension
 public import WeilConjectures.DeligneLaumon.AffineLine.AffineCurveUpper
-public import WeilConjectures.DeligneLaumon.Reduction.FibreCohomology
-public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteWeights
-public import WeilConjectures.WeilSheaf.LisseLocus
-public import WeilConjectures.WeilSheaf.StalkFunctor
-public import WeilConjectures.WeilSheaf.Triangle
-public import WeilConjectures.AlgebraicGeometry.AffineSpace.Line
-public import WeilConjectures.AlgebraicGeometry.AffineSpace.Fiber
-public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 
 /-!
 # The curve estimate on an arbitrary affine curve

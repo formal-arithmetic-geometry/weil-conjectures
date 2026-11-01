@@ -5,10 +5,8 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Construction
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Rankin
 public import WeilConjectures.Mathlib.NumberTheory.Padics.Complex
-public import WeilConjectures.Mathlib.RingTheory.PowerSeries.PiTopology
 public import Mathlib.RingTheory.RootsOfUnity.Complex
 public import Mathlib.Topology.Algebra.ClopenNhdofOne
 

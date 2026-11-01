@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarLeftAdjoint
 
 /-!
 
@@ -31,7 +32,8 @@ adjunction `Rf_!(c) ⊣ Rf^!(c)` is the composite of these two adjunctions.
 The only input is that `Rg_*` on bounded constructible complexes is a left adjoint for proper `g`
 (`isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj`,
 `isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj`,
-`isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj`, `sorry`ed). As the
+`isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj`; see
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarLeftAdjoint`). As the
 pushforward on bounded constructible complexes, everything is stated for each of the `ℓ`-adic
 coefficient rings `ℚ̲̄_ℓ`, `E̲` and `𝒪̲_E` (in the namespaces `ProEtale.CondensedRing`,
 `ProEtale.CondensedRing.ContinuousMapRingObj` and `ProEtale.CondensedRing.PadicIntegersRingObj`).
@@ -53,13 +55,14 @@ adjunction `Rf_! ⊣ Rf^!` is the adjunction `Rf_!(c) ⊣ Rf^!(c)`.
   `ProEtale.CondensedRing.boundedConstructibleUpperShriekAdjunction`: the adjunction
   `Rf_! ⊣ Rf^!`.
 
-## Sorried input
+## The input
 
 - `ProEtale.CondensedRing.isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj`,
   `ProEtale.CondensedRing.isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj` and
   `ProEtale.CondensedRing.isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj`:
   for `g` proper, `Rg_*` on bounded constructible `ℚ̄_ℓ`-, `E`- and `𝒪_E`-sheaves is a left
-  adjoint.
+  adjoint, over any field (in
+  `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarLeftAdjoint`).
 
 ## Implementation notes
 
@@ -85,52 +88,6 @@ open Scheme
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)]
-
-/-! ### The proper pushforward -/
-
-section ProperLowerStar
-
-include k
-
-variable {Z Y : Over (Spec (.of k))}
-  [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] [LocallyOfFiniteType Y.hom]
-  [QuasiCompact Y.hom] [IsSeparated Y.hom]
-  (g : Z ⟶ Y)
-
-/- `[IsProper g.left]` is a binder of each instance, not a section variable: an instance proved
-by `sorry` does not use it, so as a section variable it would be silently dropped. -/
-
-/-- Blueprint `sk-def-sfb-dc-upper-shriek` (the constructible adjunction `Rf_! ⊣ Rf^!` at the
-stage `ℚ̄_ℓ`, for a proper morphism `g`, where `Rg_! = Rg_*`). For a proper morphism
-`g : Z ⟶ Y`, the derived pushforward `Rg_* : Dᵇc(Z)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y)⟦ℚ̲̄_ℓ⟧` on bounded
-constructible `ℚ̄_ℓ`-sheaves is a left adjoint; its right adjoint is the exceptional inverse image
-`Rg^!` along `g` (SGA 4 XVIII, 3.1.4; Bhatt–Scholze, Section 6.8). -/
-instance isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj [IsProper g.left] :
-    (boundedConstructibleLowerStar ℓ g).IsLeftAdjoint :=
-  sorry
-
-/-- For a proper morphism `g : Z ⟶ Y` and a finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, the
-derived pushforward `Rg_* : Dᵇc(Z)⟦E̲⟧ ⥤ Dᵇc(Y)⟦E̲⟧` on bounded constructible `E`-sheaves is a left
-adjoint; its right adjoint is the exceptional inverse image `Rg^!` along `g` (SGA 4 XVIII, 3.1.4;
-Bhatt–Scholze, Section 6.8). -/
-instance isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj
-    (E : PadicAlgCl.FiniteIntermediateField ℓ)
-    [IsProper g.left] :
-    (ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E g).IsLeftAdjoint :=
-  sorry
-
-/-- For a proper morphism `g : Z ⟶ Y` and a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, the derived
-pushforward `Rg_* : Dᵇc(Z)⟦𝒪̲_E⟧ ⥤ Dᵇc(Y)⟦𝒪̲_E⟧` on bounded constructible `𝒪_E`-sheaves is a
-left adjoint; its right adjoint is the exceptional inverse image `Rg^!` along `g` (SGA 4 XVIII,
-3.1.4; Bhatt–Scholze, Section 6.8). -/
-instance isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj
-    (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
-    [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
-    [IsProper g.left] :
-    (PadicIntegersRingObj.boundedConstructibleLowerStar ℓ E g).IsLeftAdjoint :=
-  sorry
-
-end ProperLowerStar
 
 /-! ### The adjunction along a compactification -/
 
@@ -182,7 +139,6 @@ end OfCompactification
 /-! #### The coefficient ring `E̲`, `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ` -/
 
 namespace ContinuousMapRingObj
-
 
 section OfCompactification
 
@@ -237,7 +193,6 @@ end ContinuousMapRingObj
 /-! #### The coefficient ring `𝒪̲_E`, `E ⊆ ℚ̄_ℓ` a finite extension of `ℚ_ℓ` -/
 
 namespace PadicIntegersRingObj
-
 
 section OfCompactification
 
@@ -333,7 +288,6 @@ end Chosen
 
 namespace ContinuousMapRingObj
 
-
 section Chosen
 
 include ℓ k
@@ -377,7 +331,6 @@ end ContinuousMapRingObj
 /-! #### The coefficient ring `𝒪̲_E`, `E ⊆ ℚ̄_ℓ` a finite extension of `ℚ_ℓ` -/
 
 namespace PadicIntegersRingObj
-
 
 section Chosen
 

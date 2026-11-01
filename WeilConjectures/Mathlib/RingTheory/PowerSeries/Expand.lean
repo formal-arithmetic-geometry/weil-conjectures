@@ -19,6 +19,8 @@ public import Mathlib.RingTheory.PowerSeries.Inverse
   its constant coefficient modulo `T ^ p`.
 - `PowerSeries.X_mul_derivative_expand`: the Euler operator `X d/dX` commutes with the expansion
   `X ↦ X ^ p` up to the factor `p`: `X (f (X ^ p))' = p (X f')(X ^ p)`.
+- `PowerSeries.eq_sum_X_pow_mul_expand`, `PowerSeries.finite_expand`: every power series is
+  `∑_{r < m} t^r g_r(t^m)`, so `t ↦ t^m` is a finite ring map.
 -/
 
 @[expose] public section
@@ -68,5 +70,56 @@ theorem X_mul_derivative_expand (p : ℕ) (hp : p ≠ 0) (f : R⟦X⟧) :
     push_cast
     ring
   · simp
+
+
+section Expand
+
+variable (m : ℕ) (hm : m ≠ 0)
+
+/-- Every power series is `∑_{r < m} t^r g_r(t^m)`, with `g_r = ∑ₙ a_{mn+r} tⁿ`. -/
+lemma eq_sum_X_pow_mul_expand (f : PowerSeries R) :
+    f = ∑ r ∈ Finset.range m,
+      X ^ r * expand m hm (mk fun n ↦ coeff (m * n + r) f) := by
+  ext N
+  rw [map_sum, Finset.sum_eq_single (N % m)]
+  · rw [coeff_X_pow_mul', if_pos (Nat.mod_le N m), coeff_expand]
+    have hd : m ∣ N - N % m := Nat.dvd_sub_mod N
+    rw [if_pos hd, coeff_mk]
+    congr 1
+    rw [Nat.mul_div_cancel' hd, Nat.sub_add_cancel (Nat.mod_le N m)]
+  · intro r hr hrN
+    rw [coeff_X_pow_mul']
+    split_ifs with hrle
+    · rw [coeff_expand, if_neg]
+      intro hd
+      apply hrN
+      have h2 : N % m = r % m := ((Nat.modEq_iff_dvd' hrle).2 hd).symm
+      rw [h2, Nat.mod_eq_of_lt (Finset.mem_range.1 hr)]
+    · rfl
+  · intro h
+    exact absurd (Finset.mem_range.2 (Nat.mod_lt N (Nat.pos_of_ne_zero hm))) h
+
+/-- `expand m` is injective. -/
+lemma expand_injective : Function.Injective (expand m hm (R := R)) := by
+  intro f g h
+  ext n
+  have := congrArg (coeff (m * n)) h
+  rwa [coeff_expand_mul, coeff_expand_mul] at this
+
+/-- `t ↦ t^m` is a finite ring map: `R⟦t⟧` is spanned by `1, t, …, t^{m-1}` over its image. -/
+lemma finite_expand : (expand m hm (R := R)).toRingHom.Finite := by
+  classical
+  let := (expand m hm (R := R)).toRingHom.toAlgebra
+  let : Module (PowerSeries R) (PowerSeries R) := Algebra.toModule
+  refine ⟨⟨(Finset.range m).image fun r ↦ (X : PowerSeries R) ^ r, ?_⟩⟩
+  rw [eq_top_iff]
+  intro f _
+  rw [eq_sum_X_pow_mul_expand m hm f]
+  refine Submodule.sum_mem _ fun r hr ↦ ?_
+  rw [mul_comm]
+  exact Submodule.smul_mem _ (mk fun n ↦ coeff (m * n + r) f)
+    (Submodule.subset_span (Finset.mem_coe.2 (Finset.mem_image_of_mem _ hr)))
+
+end Expand
 
 end PowerSeries

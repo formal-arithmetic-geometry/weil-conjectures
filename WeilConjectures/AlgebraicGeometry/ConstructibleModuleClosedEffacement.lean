@@ -6,9 +6,11 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 import WeilConjectures.AlgebraicGeometry.ConstructibleModuleFinitePushforwardEmbedding
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
 import WeilConjectures.AlgebraicGeometry.FinitePushforwardConstantClosedEffacement

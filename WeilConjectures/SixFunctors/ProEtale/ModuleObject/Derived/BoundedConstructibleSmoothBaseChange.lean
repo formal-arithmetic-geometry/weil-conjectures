@@ -92,9 +92,9 @@ theorem isIso_boundedConstructibleBaseChange_of_smooth (sq : IsPullback u p' p v
   revert K
   rw [← NatTrans.isIso_iff_isIso_app]
   refine isIso_boundedConstructibleBaseChange_padicAlgCl_of_integral ℓ _ hsq fun E K₀ ↦ ?_
-  refine isIso_boundedConstructibleBaseChange_integral_app_of_reduction ℓ E _ hsq K₀ ?_
+  refine isIso_boundedConstructibleBaseChange_integral_app_of_reduction ℓ E.1 _ hsq K₀ ?_
   exact ProEtale.isIso_derivedBaseChangeMap_app_of_smooth _ v.left hsq ℓ
-    (Fact.out : ℓ.Prime).ne_zero (ProEtale.natCast_eq_zero_residueFieldCoeff.{u} ℓ E) hℓY _
-    (ProEtale.boundedConstructible_derivedReduction_obj X.left ℓ E _ K₀.property)
+    (Fact.out : ℓ.Prime).ne_zero (ProEtale.natCast_eq_zero_residueFieldCoeff.{u} ℓ E.1) hℓY _
+    (ProEtale.boundedConstructible_derivedReduction_obj X.left ℓ E.1 _ K₀.property)
 
 end AlgebraicGeometry.ProEtale.CondensedRing

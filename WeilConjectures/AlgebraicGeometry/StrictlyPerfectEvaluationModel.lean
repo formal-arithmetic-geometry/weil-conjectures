@@ -6,8 +6,9 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.StrictlyPerfectOrdinaryEvaluation
 public import WeilConjectures.AlgebraicGeometry.CanonicalDerivedTensorHom
+public import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationData
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationDifferential
 import WeilConjectures.AlgebraicGeometry.StrictlyPerfectEvaluationComparisons
 

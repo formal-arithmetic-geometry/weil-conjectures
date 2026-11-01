@@ -63,4 +63,13 @@ lemma prodKerEquivOfLeftInverse_symm_apply (s : G →* H) (i : H →* G)
     (prodKerEquivOfLeftInverse s i h).symm p = i p.1 * p.2 :=
   rfl
 
+/-- Given a commutative square of groups `q₁ ∘ r = ψ ∘ q₂` with `r` surjective and `ψ`
+injective, `r` maps the kernel of `q₂` onto the kernel of `q₁`. -/
+theorem map_ker_eq_ker_of_comp_eq {I₂ I₁ Q₂ Q₁ : Type*} [Group I₂] [Group I₁] [Group Q₂]
+    [Group Q₁] {r : I₂ →* I₁} {q₂ : I₂ →* Q₂} {q₁ : I₁ →* Q₁} {ψ : Q₂ →* Q₁}
+    (hr : Function.Surjective r) (hψ : Function.Injective ψ) (h : q₁.comp r = ψ.comp q₂) :
+    q₂.ker.map r = q₁.ker := by
+  rw [← ker_comp_of_injective q₂ ψ hψ, ← h, ← comap_ker,
+    Subgroup.map_comap_eq_self_of_surjective hr]
+
 end MonoidHom

@@ -5,15 +5,20 @@ Authors: Bin Wu
 -/
 
 module
+
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
-public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+public import WeilConjectures.AlgebraicGeometry.Curve
 import WeilConjectures.AlgebraicGeometry.Curve.ArtinSchreierBaseChangeModel
 import WeilConjectures.AlgebraicGeometry.PrimeInjectiveCohomologyComparison
 import WeilConjectures.AlgebraicGeometry.AlgClosedExtensionModuleSections
 import WeilConjectures.AlgebraicGeometry.AlgClosedExtensionInjectiveAcyclic
 import WeilConjectures.AlgebraicGeometry.CohomologyRestrictionSquareTransport
+import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
+
 @[expose] public section
 universe u
 open CategoryTheory

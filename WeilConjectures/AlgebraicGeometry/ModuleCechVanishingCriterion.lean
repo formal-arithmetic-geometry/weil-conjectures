@@ -7,13 +7,14 @@ Authors: Bin Wu
 module
 
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
-public import WeilConjectures.AlgebraicGeometry.PQFCohomology
 public import WeilConjectures.CategoryTheory.SiteCechComplex
+public import WeilConjectures.Topology.RingedSpaceModuleCohomology
 import WeilConjectures.AlgebraicGeometry.ModuleInjectiveOpenCoverCechAcyclic
 import WeilConjectures.AlgebraicGeometry.ModuleOpenRestrictionInjectives
 import WeilConjectures.AlgebraicGeometry.ModuleSectionsSurjectiveOfCechH1
 import WeilConjectures.AlgebraicGeometry.Modules.Ext
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
+import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 
 /-!
 # The Čech vanishing criterion for module sheaves

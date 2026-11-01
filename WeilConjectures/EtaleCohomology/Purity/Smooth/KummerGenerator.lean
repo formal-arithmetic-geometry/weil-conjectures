@@ -9,6 +9,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.ConstructibleTorsio
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineRelative
 public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
 public import WeilConjectures.SixFunctors.Etale.Derived.AlgClosedField
+import WeilConjectures.SixFunctors.Etale.Derived.Point
 
 /-!
 # Detecting generators of direct images at geometric points

@@ -16,8 +16,11 @@ public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Field
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.InfPoints
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Functoriality
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.InfPointsEquiv
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Kernel
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.LocalPoints
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.PointOfDerivation
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.RelativeFree
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.RelativePoints
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Ring
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 
@@ -82,6 +85,10 @@ algebras of the closed subgroup schemes of `GL_n`.
   `R[ε]` reducing to the identity.
 - `AlgebraicGeometry.GrpObj.lieEquivIdentityComponent`: `Lie(G°) = Lie(G)` for a group scheme of
   finite type over a field.
+- `AlgebraicGeometry.GrpObj.infPointsAt`, `AlgebraicGeometry.GrpObj.lieAt`: the infinitesimal
+  points `X[ε] ⟶ G` with values in a scheme `X`, and the base change `y_X` of a tangent vector;
+  `AlgebraicGeometry.GrpObj.infPointsAtConj`: the conjugation action of `G(X)` on them.
+- `AlgebraicGeometry.GrpObj.centralizer`: the centralizer of a rational point.
 
 ## Main results
 
@@ -97,6 +104,12 @@ algebras of the closed subgroup schemes of `GL_n`.
   subgroup scheme are central in the Lie algebra.
 - `AlgebraicGeometry.GrpObj.finrank_lie_eq_topologicalKrullDim`: in characteristic zero the Lie
   algebra has the dimension of the group (Cartier's theorem).
+- `AlgebraicGeometry.GrpObj.mem_range_differential_kerι_iff`: `Lie(ker f) = ker(df)`;
+  `AlgebraicGeometry.GrpObj.mem_range_differential_centralizerι_iff`: the Lie algebra of the
+  centralizer of `g` is the subspace fixed by `d(c_g)`.
+- `AlgebraicGeometry.GrpObj.existsUnique_prod_eq`: the infinitesimal points with values in `X`
+  form the free `Γ(X, 𝒪_X)`-module `Lie(G) ⊗ Γ(X, 𝒪_X)`. The adjoint representation built from
+  this is in `WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.Adjoint`.
 
 ## Implementation notes
 

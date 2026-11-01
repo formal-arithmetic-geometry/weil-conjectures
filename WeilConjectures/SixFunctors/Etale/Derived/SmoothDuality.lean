@@ -9,6 +9,8 @@ public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMaps
+public import WeilConjectures.EtaleCohomology.TateTwist.Normalized
+public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.AffineLine
 
 /-!
 # Smooth cohomological duality without a chosen orientation
@@ -65,9 +67,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Y : Scheme.{u}}
   (f : X ⟶ Y) [HasCompactification f] (d : ℕ) [SmoothOfRelativeDimension d f]
 
 include d in
-/-- Compatibility required from `sec-six-functors-basics` (to be proved there):
-blueprint `thm-asd-smooth-tensor`.
-Blueprint `thm-asd-smooth-tensor`: Smooth cohomological duality without a chosen
+/-- Blueprint `thm-asd-smooth-tensor`: Smooth cohomological duality without a chosen
 orientation.
 
 Let `f : X ⟶ Y` be smooth, separated, compactifiable and of pure relative dimension `d`, let `Λ`
@@ -75,7 +75,12 @@ be a finite ring whose exponent is invertible on `X`, and put `ω_f = Rf^! Λ_Y`
 a locally constant sheaf `L` of free rank-one `Λ`-modules: `L` is locally constant, every stalk
 of `L` at a geometric point is free of rank one, and `ω_f ≅ L[2d]`. For every complex `K` on `Y`,
 the canonical map `θ_{f,K} : ω_f ⊗ᴸ Lf^* K ⟶ Rf^! K`
-(`AlgebraicGeometry.Etale.dualizingComplexTensorMap`) is an isomorphism. -/
+(`AlgebraicGeometry.Etale.dualizingComplexTensorMap`) is an isomorphism.
+
+The proof reduces, through the étale-local normal form, to étale morphisms
+(`AlgebraicGeometry.Etale.etaleSmoothDuality`) and to the affine line
+(`AlgebraicGeometry.Etale.affineLineSmoothDuality`, from the projective-line adjunction), for the
+Tate twist `μₙ ⊗ Λ` (`AlgebraicGeometry.Etale.hasKummerClass`). -/
 theorem exists_dualizingComplex_iso_and_tensor :
     ∃ L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ), IsLocallyConstantSheaf L ∧
       (∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X),
@@ -84,7 +89,9 @@ theorem exists_dualizingComplex_iso_and_tensor :
         ((_root_.DerivedCategory.singleFunctor _ 0).obj L)⟦(2 * d : ℤ)⟧) ∧
       ∀ K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
         IsIso (dualizingComplexTensorMap Λ f K) :=
-  sorry
+  have : NeZero (ringChar Λ) := ⟨CharP.char_ne_zero_of_finite Λ (ringChar Λ)⟩
+  exists_dualizingComplex_iso_and_tensor_of_etale_of_affineLine etaleSmoothDuality
+    (affineLineSmoothDuality etaleSmoothDuality) f d
 
 include d in
 /-- The tensor formula of `thm-asd-smooth-tensor` with the factors in the other order:

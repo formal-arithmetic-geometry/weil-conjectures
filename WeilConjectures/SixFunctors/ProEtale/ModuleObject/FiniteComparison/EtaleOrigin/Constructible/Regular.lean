@@ -142,7 +142,7 @@ noncomputable def finiteCoefficientModEquivalenceFiniteFreeIso (k : ℕ) :
 
 /-- A finitely presented module object over `Λ_X` corresponds, under
 `finiteCoefficientModEquivalence`, to a sheaf of `T`-modules which is locally constant with
-finite stalks: it is the cokernel of a morphism of constant sheaves `T^m ⟶ T^n`. -/
+finitely generated stalks: it is the cokernel of a morphism of constant sheaves `T^m ⟶ T^n`. -/
 theorem isFiniteLocallyConstant_finiteCoefficientModEquivalence_obj
     {N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.continuousMapRingObj T) X)}

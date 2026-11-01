@@ -5,19 +5,10 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.CohomologyFiniteExtension
-public import WeilConjectures.AlgebraicGeometry.CohomologyFiniteExtensionExtension
-public import WeilConjectures.AlgebraicGeometry.FiniteFreePullbackResidueCriterion
-public import WeilConjectures.AlgebraicGeometry.FiniteFreeResidueLocusOpen
-public import WeilConjectures.AlgebraicGeometry.FinitePresentationIntegralFiltration
 public import WeilConjectures.AlgebraicGeometry.FlatModelFiniteFreeShortening
-public import WeilConjectures.AlgebraicGeometry.IntegralIdealProperCohomology
 public import WeilConjectures.AlgebraicGeometry.ProperFlatCechModel
-
-
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
-public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 public import WeilConjectures.AlgebraicGeometry.Cohomology.ProperFinite
 public import WeilConjectures.AlgebraicGeometry.Modules.FiniteFreeComplex
 

@@ -13,12 +13,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageKanRepresentative
 import WeilConjectures.AlgebraicGeometry.Sites.CohomologyColimit
 import Mathlib.CategoryTheory.Sites.LocallySurjective
 import Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import WeilConjectures.AlgebraicGeometry.AffineEtaleInverseImageComparison
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
-import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
-import WeilConjectures.AlgebraicGeometry.FullAffineEtaleTopos
-import WeilConjectures.AlgebraicGeometry.LimitAffineTransition
-import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
 
 /-! # Finite local stage representatives
 

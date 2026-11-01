@@ -14,7 +14,6 @@ public import Mathlib.Algebra.Homology.QuasiIso
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 import WeilConjectures.AlgebraicGeometry.ModulePushforwardInjectiveAcyclic
 import WeilConjectures.AlgebraicGeometry.Modules.Ext
-import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 
 /-! # Global sections of a resolution of the direct image of injectives
 

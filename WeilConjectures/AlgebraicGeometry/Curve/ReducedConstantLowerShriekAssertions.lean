@@ -8,7 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import WeilConjectures.ConstructibleSheaf.Pullback
+public import WeilConjectures.AlgebraicGeometry.Curve
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Derived
 import WeilConjectures.AlgebraicGeometry.Curve.ReducedConstantLowerShriekReduction
 

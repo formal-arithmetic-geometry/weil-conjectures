@@ -7,10 +7,12 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.AffineGlobalHomBaseChangeMap
+public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 import WeilConjectures.AlgebraicGeometry.PerfectRHomTensorComparison
 import WeilConjectures.AlgebraicGeometry.PerfectImpliesQCoh
 import WeilConjectures.AlgebraicGeometry.CanonicalPullbackTensorMonoidalRealization
 import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence
+import WeilConjectures.AlgebraicGeometry.DerivedInternalHomAdjunction
 
 /-! # Invertibility of the evaluation-defined perfect internal-Hom pullback map
 

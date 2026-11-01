@@ -6,7 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.NearbyCycles.Exchange
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.TopInvariance
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UniversalHomeomorphism
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.TopologicalInvariance
 
 /-!
 
@@ -51,35 +52,6 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 open Scheme
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-
-/-- **Topological invariance for module objects**: the pullback `r^*` of module objects over `Λ`
-along a universal homeomorphism `r` is an equivalence of categories. The lift of the adjunction
-`r^* ⊣ r_*` of sheaves to module objects has invertible unit and counit, these being computed on
-the underlying sheaves, and the extension of scalars along `α_r` is an equivalence. -/
-theorem isEquivalence_upperStar_of_isUniversalHomeomorphism {X Y : Scheme.{u}} (r : X ⟶ Y)
-    [IsUniversalHomeomorphism r] : (r)^*⟦Λ⟧.IsEquivalence := by
-  have := ProEtale.isEquivalence_lowerStar_of_isUniversalHomeomorphism Ab.{u + 1} r
-  have := ProEtale.isEquivalence_upperStar_of_isUniversalHomeomorphism Ab.{u + 1} r
-  let adj₀ := ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} r
-  have : IsIso adj₀.unit := adj₀.unit_isIso_of_L_fully_faithful
-  have : IsIso adj₀.counit := adj₀.counit_isIso_of_R_fully_faithful
-  let adj := adj₀.mapModAdjunction (condensedRingObj Λ Y)
-  have : IsIso adj.unit := by
-    refine @NatIso.isIso_of_isIso_app _ _ _ _ _ _ _ fun M ↦ ?_
-    have : IsIso ((Mod.forget _).map (adj.unit.app M)) := by
-      rw [Mod.forget_map, Adjunction.mapModAdjunction_unit_app_hom]
-      infer_instance
-    exact isIso_of_reflects_iso _ (Mod.forget _)
-  have : IsIso adj.counit := by
-    refine @NatIso.isIso_of_isIso_app _ _ _ _ _ _ _ fun N ↦ ?_
-    have : IsIso ((Mod.forget _).map (adj.counit.app N)) := by
-      rw [Mod.forget_map, Adjunction.mapModAdjunction_counit_app_hom]
-      infer_instance
-    exact isIso_of_reflects_iso _ (Mod.forget _)
-  have : ((r)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y)).IsEquivalence :=
-    adj.toEquivalence.isEquivalence_functor
-  unfold upperStar
-  infer_instance
 
 set_option maxHeartbeats 1000000 in
 -- the instances of the general lemma are found for each of the categories of module objects

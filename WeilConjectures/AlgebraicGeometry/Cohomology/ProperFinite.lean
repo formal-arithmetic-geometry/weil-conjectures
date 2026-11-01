@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.ProperFinite.ChowStep
-public import WeilConjectures.AlgebraicGeometry.Modules.Annihilator
 
 /-!
 # Finiteness of the cohomology of coherent sheaves on proper schemes

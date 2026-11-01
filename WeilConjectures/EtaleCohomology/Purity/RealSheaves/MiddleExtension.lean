@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.WeilSheaf.CurveEndpoints
 public import WeilConjectures.WeilSheaf.LFunction
+import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.Basic
 
 /-!
 # The Euler product of a middle extension on an affine curve

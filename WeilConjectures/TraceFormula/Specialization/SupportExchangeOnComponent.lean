@@ -8,6 +8,7 @@ module
 public import WeilConjectures.TraceFormula.Product
 public import WeilConjectures.TraceFormula.Specialization.DeformationProperPoint
 public import WeilConjectures.TraceFormula.Specialization.ExchangeOnProperBdc
+public import WeilConjectures.TraceFormula.Specialization.ComponentModelHom
 
 /-!
 
@@ -53,21 +54,6 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   (hb : b ≫ j ≫ F.ι = y)
 
 include hb in
-/-- Functions vanishing at `y` pull back along `B ⊂ F ⊂ C` to functions vanishing at `b`. -/
-lemma map_siteIdeal_le_ker_component :
-    ∀ ⦃U' : B.left.AffineZariskiSite⦄ ⦃U : c.C.left.AffineZariskiSite⦄
-      (hU : U'.1 ≤ (j ≫ F.ι).left ⁻¹ᵁ U.1),
-      (y.left.ker.siteIdeal U).map ((j ≫ F.ι).left.appLE U.1 U'.1 hU).hom ≤
-        b.left.ker.siteIdeal U' := by
-  refine IdealSheafData.map_siteIdeal_le_of_comap_le _ ?_
-  rw [IdealSheafData.comap_le_ker_iff, ← Over.comp_left, hb]
-
-/-- The morphism of deformation models `𝒟_B ⟶ 𝒞` over `B ⊂ F ⊂ C` (`ι ∘ j`), for the deformations
-of `B` along `ker b` and of `C` along `ker y`. -/
-noncomputable def componentModelHom :=
-  deformationModelHom (j ≫ F.ι) (map_siteIdeal_le_ker_component j hb) k'
-
-include hb in
 /-- If `B` is proper with underlying set `{b}`, the morphism of total spaces of
 `componentModelHom` is proper: `𝒟_B` is proper over the trait and `𝒞` is separated over it. -/
 lemma isProper_componentModelHom_total [IsProper B.hom]
@@ -109,28 +95,6 @@ lemma isClosedImmersion_comp_ι [IsOpenImmersion j.left] [IsProper B.hom] :
     IsClosedImmersion (j ≫ F.ι).left :=
   have := isClosedImmersion_left_of_isProper j
   inferInstanceAs (IsClosedImmersion (j.left ≫ F.ι.left))
-
-include hb in
-/-- The preimage of `y` under the closed immersion `B ⊂ F ⊂ C` is the point `b`. -/
-lemma comap_ker_component [IsClosedImmersion (j ≫ F.ι).left] :
-    y.left.ker.comap (j ≫ F.ι).left = b.left.ker := by
-  have : IsClosedImmersion y.left := isClosedImmersion_of_comp_eq_id c.C.hom y.left (Over.w y)
-  have hP : IsPullback b.left (𝟙 _) (j ≫ F.ι).left y.left :=
-    (IsPullback.of_horiz_isIso_mono (fst := 𝟙 _) (snd := b.left)
-      ⟨by rw [Category.id_comp, ← Over.comp_left, hb]⟩).flip
-  rw [← IdealSheafData.ker_fst_of_isClosedImmersion, ← hP.isoPullback_hom_fst,
-    Scheme.Hom.ker_comp_of_isIso]
-
-include hb in
-/-- If `B ⊂ F ⊂ C` is a closed immersion, so is the morphism of total spaces of
-`componentModelHom`: the deformation space of `B` along `ker b = (ker y)|_B` is closed in that of
-`C` (`IdealSheafData.isClosedImmersion_deformationSpaceMap`). -/
-lemma isClosedImmersion_componentModelHom_total [IsClosedImmersion (j ≫ F.ι).left] :
-    IsClosedImmersion (componentModelHom k' j hb).total :=
-  have := IdealSheafData.isClosedImmersion_deformationSpaceMap (j ≫ F.ι).left y.left.ker
-    b.left.ker (map_siteIdeal_le_ker_component j hb) (comap_ker_component j hb).symm
-  MorphismProperty.of_isPullback
-    (isPullback_deformationTotalMap (j ≫ F.ι) (map_siteIdeal_le_ker_component j hb) k').flip this
 
 include hb in
 /-- If moreover `B` is proper with underlying set `{b}`, the morphism of total spaces `𝒟_B ⟶ 𝒞̄`

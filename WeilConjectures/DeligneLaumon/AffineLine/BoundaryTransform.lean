@@ -5,11 +5,10 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.DeligneLaumon.AffineLine.BoundaryWeights
 public import WeilConjectures.WeilSheaf.CurveEndpoints
 public import WeilConjectures.WeilSheaf.FiniteEtale
-public import WeilConjectures.WeilSheaf.HomologyShift
 public import WeilConjectures.WeilSheaf.LowerShriekPackage
+public import WeilConjectures.WeilSheaf.ShiftedSheaf
 
 /-!
 # The Fourier transform of the boundary sheaf

@@ -44,10 +44,11 @@ The internal hom `RHom(K, -)` is `ihom K`, the right adjoint of `K ⊗ -`; with 
 * `CategoryTheory.Verdier.exchangePairing` and `CategoryTheory.Verdier.exchange`: the Verdier
   exchange morphism `Φ_{K,L} : G RHom(K, S L) ⟶ RHom(P K, L)`, the transpose of the pairing
   `P K ⊗ G RHom(K, S L) ⟶ P (K ⊗ F G RHom(K, S L)) ⟶ P (K ⊗ RHom(K, S L)) ⟶ P S L ⟶ L`.
-* `CategoryTheory.Verdier.trace`, `CategoryTheory.Verdier.poincareMap` and
-  `CategoryTheory.Verdier.cupProduct`: for a chosen isomorphism `pur : S 𝟙 ≅ T`, the trace
-  `P T ⟶ P S 𝟙 ⟶ 𝟙`, the Poincaré duality morphism `G T ⟶ G S 𝟙 ⟶ G RHom(𝟙, S 𝟙) ⟶ RHom(P 𝟙, 𝟙)`
-  and the compact-support cup product `P 𝟙 ⊗ G T ⟶ P (𝟙 ⊗ F G T) ⟶ P (𝟙 ⊗ T) ⟶ P T`.
+* `CategoryTheory.Verdier.cupProduct`: the compact-support cup product
+  `P K ⊗ G L ⟶ P (K ⊗ F G L) ⟶ P (K ⊗ L)`, for arbitrary objects `K` and `L` of `C`.
+* `CategoryTheory.Verdier.trace` and `CategoryTheory.Verdier.poincareMap`: for a chosen
+  isomorphism `pur : S 𝟙 ≅ T`, the trace `P T ⟶ P S 𝟙 ⟶ 𝟙` and the Poincaré duality morphism
+  `G T ⟶ G S 𝟙 ⟶ G RHom(𝟙, S 𝟙) ⟶ RHom(P 𝟙, 𝟙)`.
 * `CategoryTheory.Verdier.bidualityMap`: in a braided monoidal closed category with an object
   `ω`, the double-dual morphism `K ⟶ D D K`, `D = RHom(-, ω)`, the transpose of
   `D K ⊗ K ⟶ K ⊗ D K ⟶ ω`.
@@ -57,9 +58,12 @@ The internal hom `RHom(K, -)` is `ihom K`, the right adjoint of `K ⊗ -`; with 
 
 ## Main results
 
+* `CategoryTheory.Verdier.exchangePairing_eq_cupProduct`: the pairing defining the Verdier
+  exchange morphism is the cup product `P K ⊗ G RHom(K, S L) ⟶ P (K ⊗ RHom(K, S L))`
+  followed by the evaluation and the counit of `P ⊣ S`.
 * `CategoryTheory.Verdier.uncurry_poincareMap`: **Poincaré duality is the trace–cup pairing**:
   the transpose `P 𝟙 ⊗ G T ⟶ 𝟙` of the Poincaré duality morphism is the composite of the cup
-  product and the trace.
+  product `P 𝟙 ⊗ G T ⟶ P (𝟙 ⊗ T) ≅ P T` and the trace.
 * `CategoryTheory.Verdier.isIso_exchange_of_isIso`: the exchange morphism `Φ_{K,L}` is an
   isomorphism if the component of `pf` at `(K, B)` is an isomorphism for every `B` (the Yoneda
   argument of the specification).
@@ -190,6 +194,27 @@ lemma pf_naturality_right (K : C) {B B' : D} (h : B ⟶ B') :
     P.obj K ◁ h ≫ (pf.app K).app B' = (pf.app K).app B ≫ P.map (K ◁ F.map h) :=
   (pf.app K).naturality h
 
+section CupProduct
+
+omit [MonoidalClosed C] [MonoidalClosed D] in
+/-- The **compact-support cup product** `P K ⊗ G L ⟶ P (K ⊗ L)`, i.e.
+`Rf_! K ⊗ Rf_* L ⟶ Rf_!(K ⊗ Lf^* Rf_* L) ⟶ Rf_!(K ⊗ L)`, for arbitrary `K` and `L`: the
+projection morphism `pf` followed by the counit `F G ⟶ 𝟭`. -/
+noncomputable def cupProduct (K L : C) : P.obj K ⊗ G.obj L ⟶ P.obj (K ⊗ L) :=
+  (pf.app K).app (G.obj L) ≫ P.map (K ◁ adj.counit.app L)
+
+omit [MonoidalClosed C] [MonoidalClosed D] in
+/-- The cup product is natural in its second variable. -/
+@[reassoc]
+lemma cupProduct_natural_right (K : C) {L L' : C} (h : L ⟶ L') :
+    P.obj K ◁ G.map h ≫ cupProduct adj pf K L' = cupProduct adj pf K L ≫ P.map (K ◁ h) := by
+  rw [cupProduct, cupProduct, pf_naturality_right_assoc, Category.assoc, ← P.map_comp,
+    ← P.map_comp, ← MonoidalCategory.whiskerLeft_comp, ← MonoidalCategory.whiskerLeft_comp]
+  congr 3
+  exact adj.counit_naturality h
+
+end CupProduct
+
 section Exchange
 
 /-- The pairing `P K ⊗ G RHom(K, S L) ⟶ L` whose transpose is the Verdier exchange morphism: the
@@ -205,6 +230,16 @@ tensor-hom adjunction. -/
 noncomputable def exchange (K : C) (L : D) :
     G.obj ((ihom K).obj (S.obj L)) ⟶ (ihom (P.obj K)).obj L :=
   curry (exchangePairing adj adj' pf K L)
+
+omit [MonoidalClosed D] in
+/-- The pairing defining the Verdier exchange morphism is the cup product
+`P K ⊗ G RHom(K, S L) ⟶ P (K ⊗ RHom(K, S L))`, followed by the evaluation and the counit of
+`P ⊣ S`. -/
+lemma exchangePairing_eq_cupProduct (K : C) (L : D) :
+    exchangePairing adj adj' pf K L =
+      cupProduct adj pf K ((ihom K).obj (S.obj L)) ≫ P.map ((ihom.ev K).app _) ≫
+        adj'.counit.app L := by
+  simp only [exchangePairing, cupProduct, Category.assoc]
 
 lemma uncurry_exchange (K : C) (L : D) :
     uncurry (exchange adj adj' pf K L) = exchangePairing adj adj' pf K L :=
@@ -275,21 +310,17 @@ purity isomorphism, the identification `X ≅ RHom(𝟙, X)`, and the Verdier ex
 noncomputable def poincareMap : G.obj T ⟶ (ihom (P.obj (𝟙_ C))).obj (𝟙_ D) :=
   G.map (pur.inv ≫ toIhomUnit _) ≫ exchange adj adj' pf (𝟙_ C) (𝟙_ D)
 
-/-- The **compact-support cup product** `P 𝟙 ⊗ G T ⟶ P T`, i.e.
-`Rf_! Λ ⊗ Rf_* Λ(d)[2d] ⟶ Rf_!(Λ ⊗ Lf^* Rf_* Λ(d)[2d]) ⟶ Rf_!(Λ ⊗ Λ(d)[2d]) ⟶ Rf_! Λ(d)[2d]`:
-the projection morphism, the counit `F G ⟶ 𝟭` and the left unitor. -/
-noncomputable def cupProduct : P.obj (𝟙_ C) ⊗ G.obj T ⟶ P.obj T :=
-  (pf.app (𝟙_ C)).app (G.obj T) ≫ P.map (𝟙_ C ◁ adj.counit.app T) ≫ P.map (λ_ T).hom
-
 /-- **Poincaré duality is the trace–cup pairing.** The transpose `P 𝟙 ⊗ G T ⟶ 𝟙` of the
-Poincaré duality morphism is exactly the cup product followed by the trace. In particular the
-Poincaré duality morphism, the trace and the pairing share the normalization of the purity
-isomorphism. -/
+Poincaré duality morphism is exactly the cup product
+`Rf_! Λ ⊗ Rf_* Λ(d)[2d] ⟶ Rf_!(Λ ⊗ Λ(d)[2d]) ≅ Rf_! Λ(d)[2d]` followed by the trace. In
+particular the Poincaré duality morphism, the trace and the pairing share the normalization of
+the purity isomorphism. -/
 theorem uncurry_poincareMap :
-    uncurry (poincareMap adj adj' pf pur) = cupProduct adj pf ≫ trace adj' pur := by
+    uncurry (poincareMap adj adj' pf pur) =
+      cupProduct adj pf (𝟙_ C) T ≫ P.map (λ_ T).hom ≫ trace adj' pur := by
   rw [poincareMap, uncurry_natural_left, uncurry_exchange, exchangePairing,
     pf_naturality_right_assoc, cupProduct, trace]
-  simp only [Category.assoc, ← P.map_comp_assoc, ← P.map_comp]
+  simp only [Category.assoc, ← P.map_comp_assoc]
   congr 3
   have hc := adj.counit_naturality (pur.inv ≫ toIhomUnit (S.obj (𝟙_ D)))
   rw [← MonoidalCategory.whiskerLeft_comp_assoc, hc, MonoidalCategory.whiskerLeft_comp_assoc,

@@ -5,8 +5,6 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-public import WeilConjectures.Mathlib.Algebra.Homology.SingleHomology
 public import WeilConjectures.TraceFormula.Main
 public import WeilConjectures.WeilObject.BoundedConstructible.Homology
 

@@ -8,7 +8,7 @@ module
 public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.Stalk
 import WeilConjectures.PointCount
-import WeilConjectures.WeilSheaf.LowerShriekOperations
+import WeilConjectures.ZetaFunction.WeilObjectComparison
 import WeilConjectures.WeilSheaf.StalkCharpoly
 import WeilConjectures.WeilSheaf.TraceFunctionCongr
 

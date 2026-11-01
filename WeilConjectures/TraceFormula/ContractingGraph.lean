@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.ContractingLocalTerm
+public import WeilConjectures.TraceFormula.LocalTermPoint
 public import WeilConjectures.TraceFormula.PieceAdditivity
 
 /-!
@@ -135,35 +136,6 @@ variable {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.h
   [IsSeparated X.hom] {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
 
 /-! ### The local term at a contracting point -/
-
-/-- The local term along an open and closed subscheme `B` of the fixed locus with underlying set
-`{y}` is the integral of a Borel–Moore section `γ` of the point if the restriction of the trace
-class to `B` is the pushforward of `γ` along the point of `B`. -/
-lemma localTerm_traceClass_eq_integral_of_restrict_eq {c : Correspondence ℓ K}
-    (F : c.FixedLocus) {y : RationalPoint c.C} (hy : y ≫ c.c₁ = y ≫ c.c₂)
-    {B : Over (Spec (.of k))} [QuasiCompact B.hom] [IsProper B.hom] (j : B ⟶ F.F)
-    [IsOpenImmersion j.left] [IsClosedImmersion j.left]
-    (hB : Set.range j.left.base = {(F.liftPoint y hy).left.base (default : Spec (.of k))})
-    (γ : BorelMooreSection ℓ (point k))
-    (H : ∀ (e : point k ⟶ B) [IsProper e.left], e ≫ j = F.liftPoint y hy →
-      (c.traceClass F).restrict j = BorelMooreSection.pushforward e γ) :
-    (c.traceClass F).localTerm j = γ.integral := by
-  have hrange : Set.range (F.liftPoint y hy).left.base ⊆ Set.range j.left.base := by
-    rw [hB]
-    rintro _ ⟨z, rfl⟩
-    rw [Subsingleton.elim (α := Spec (.of k)) z default]
-    rfl
-  let e : point k ⟶ B := Over.homMk (IsOpenImmersion.lift j.left _ hrange) (by
-    rw [← Over.w j, ← Category.assoc, IsOpenImmersion.lift_fac]
-    exact Over.w (F.liftPoint y hy))
-  have he : e ≫ j = F.liftPoint y hy :=
-    Over.OverMorphism.ext (IsOpenImmersion.lift_fac _ _ _)
-  have : IsProper (e.left ≫ B.hom) := by
-    rw [Over.w e]
-    exact inferInstanceAs (IsProper (𝟙 (Spec (.of k))))
-  have : IsProper e.left := IsProper.of_comp e.left B.hom
-  rw [BorelMooreSection.localTerm, H e he]
-  exact BorelMooreSection.integral_pushforward e _
 
 /-- **The local term at a contracting point** (blueprint `sk-thm-tf-contracting-local-term` for
 `Z = {c₁(y)}`, Varshavsky, Thm. 2.1.3): if `c` is contracting at the fixed point `y` and `B` is an

@@ -48,7 +48,7 @@ namespace Etale
 variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
 
 variable (Λ) in
-/-- *Base change for projective-line projections*: for every affine scheme `S` on which the
+/-- *Base change for projective-line projections*: for every scheme `S` on which the
 exponent of `Λ` is invertible and every cartesian square of the projection
 `q : ℙ¹_S ⟶ S` (here `ℙ¹_S = ℙ(Option (Fin 1); S)`, the target of the standard chart of `𝔸¹_S`)
 with quasi-compact base change admitting a compactification, the canonical base change map
@@ -56,7 +56,7 @@ with quasi-compact base change admitting a compactification, the canonical base 
 `Rq^! = q^*(1)[2]` with counit built from the projective-line trace, and unit and counit commute
 with base change. -/
 def ProjectiveLineBaseChange : Prop :=
-  ∀ ⦃S : Scheme.{u}⦄ [IsAffine S] [HasInvertibleExponent Λ S] ⦃S' P' : Scheme.{u}⦄
+  ∀ ⦃S : Scheme.{u}⦄ [HasInvertibleExponent Λ S] ⦃S' P' : Scheme.{u}⦄
     {g : S' ⟶ S} {q' : P' ⟶ S'} {g' : P' ⟶ ℙ(Option (ULift.{u} (Fin 1)); S)}
     (sq : IsPullback g' q' (ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S) g) [HasCompactification q']
     [QuasiCompact q'], IsIso (rightDerivedUpperShriekBaseChangeMap Λ sq)
@@ -67,7 +67,7 @@ the projection `ℙ¹_S ⟶ S`; base change maps compose, and base change holds 
 immersions. -/
 theorem affineLineBaseChange_of_projectiveLineBaseChange (h : ProjectiveLineBaseChange Λ) :
     AffineLineBaseChange Λ := by
-  intro S _ _ S' P' g p' g' sq _ _
+  intro S _ S' P' g p' g' sq _ _
   have : QuasiCompact (AffineSpace.toRelativeProjectiveSpace (ULift.{u} (Fin 1)) S ≫
       ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S) := by
     rw [AffineSpace.toRelativeProjectiveSpace_over]
@@ -89,18 +89,18 @@ variable [HasTateTwist Λ]
 
 variable (Λ) in
 /-- *The projective-line adjunction commutes with base change* (the form in which blueprint
-`det-sp-p1-adjunction` is used): for every affine scheme `S` on which the exponent of `Λ` is
-invertible and every cartesian square
+`det-sp-p1-adjunction` is used): for every scheme `S` on which the exponent of `Λ` is
+invertible and every `g : S' ⟶ S`, with the cartesian square
 
 ```
-  P' --g'--> ℙ¹_S
-  |           |
-  q'          q
-  ↓           ↓
-  S' --g---> S
+  ℙ¹_{S'} --g'--> ℙ¹_S
+     |             |
+     q'            q
+     ↓             ↓
+     S' ----g----> S
 ```
 
-with quasi-compact `q'` admitting a compactification, there are adjunctions
+(`AlgebraicGeometry.ProjectiveSpace.isPullback_map`), there are adjunctions
 `Rq_! ⊣ Lq^*(1)[2]` and `Rq'_! ⊣ Lq'^*(1)[2]` whose counits are compatible with the
 compact-support base change `Ex_! : Lg^* Rq_! ⟶ Rq'_! Lg'^*` and the canonical isomorphism
 `Lg'^*(Lq^* K(1)[2]) ≅ Lq'^* Lg^* K(1)[2]`:
@@ -109,52 +109,75 @@ compact-support base change `Ex_! : Lg^* Rq_! ⟶ Rq'_! Lg'^*` and the canonical
 
 In the blueprint, `Rq_! = Rq_*` (`q` is proper), and the counit is
 `ε_K : Rq_* q^* K(1)[2] ≅ K ⊗ Rq_* Λ(1)[2] ⟶ K`, from the trace `Tr_q` of `def-amb-p1-trace`; the
-counit commutes with base change since the trace and the projection formula do. -/
+counit commutes with base change since the trace and the projection formula do. Base change for
+an arbitrary cartesian square of `q` follows, since such a square is isomorphic to this one
+(`AlgebraicGeometry.Etale.projectiveLineBaseChange_of_adjunction`). -/
 def ProjectiveLineAdjunctionBaseChange : Prop :=
-  ∀ ⦃S : Scheme.{u}⦄ [IsAffine S] [HasInvertibleExponent Λ S] ⦃S' P' : Scheme.{u}⦄
-    {g : S' ⟶ S} {q' : P' ⟶ S'} {g' : P' ⟶ ℙ(Option (ULift.{u} (Fin 1)); S)}
-    (sq : IsPullback g' q' (ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S) g) [HasCompactification q']
-    [QuasiCompact q'],
+  ∀ ⦃S : Scheme.{u}⦄ [HasInvertibleExponent Λ S] ⦃S' : Scheme.{u}⦄ (g : S' ⟶ S),
     haveI : HasInvertibleExponent Λ ℙ(Option (ULift.{u} (Fin 1)); S) := .of_hom (_ ↘ S)
-    haveI : HasInvertibleExponent Λ P' := .of_hom (g' ≫ _ ↘ S)
     haveI : HasInvertibleExponent Λ S' := .of_hom g
+    haveI : HasInvertibleExponent Λ ℙ(Option (ULift.{u} (Fin 1)); S') := .of_hom (_ ↘ S')
     ∃ (adj : R((ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S))_![ModuleCat.{u + 1} Λ] ⊣
         L(((ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S))^*[ModuleCat.{u + 1} Λ]) ⋙
           twistShift Λ ℙ(Option (ULift.{u} (Fin 1)); S) 1)
-      (adj' : R(q')_![ModuleCat.{u + 1} Λ] ⊣
-        L((q')^*[ModuleCat.{u + 1} Λ]) ⋙ twistShift Λ P' 1),
+      (adj' : R((ℙ(Option (ULift.{u} (Fin 1)); S') ↘ S'))_![ModuleCat.{u + 1} Λ] ⊣
+        L(((ℙ(Option (ULift.{u} (Fin 1)); S') ↘ S'))^*[ModuleCat.{u + 1} Λ]) ⋙
+          twistShift Λ ℙ(Option (ULift.{u} (Fin 1)); S') 1),
       ∀ K : _root_.DerivedCategory (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
-        (rightDerivedLowerShriekBaseChangeMap Λ sq).app
+        (rightDerivedLowerShriekBaseChangeMap Λ
+            (ProjectiveSpace.isPullback_map (Option (ULift.{u} (Fin 1))) g)).app
             ((twistShift Λ _ 1).obj
               ((L(((ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S))^*[ModuleCat.{u + 1} Λ])).obj K)) ≫
-          (R(q')_![ModuleCat.{u + 1} Λ]).map
-            ((leftDerivedUpperStarTwistShiftIso Λ g' 1 _).hom ≫
-              (twistShift Λ P' 1).map ((derivedSquareUpperStarIso _ sq.toCommSq).inv.app K)) ≫
+          (R((ℙ(Option (ULift.{u} (Fin 1)); S') ↘ S'))_![ModuleCat.{u + 1} Λ]).map
+            ((leftDerivedUpperStarTwistShiftIso Λ
+                (ProjectiveSpace.map (Option (ULift.{u} (Fin 1))) g) 1 _).hom ≫
+              (twistShift Λ ℙ(Option (ULift.{u} (Fin 1)); S') 1).map
+                ((derivedSquareUpperStarIso _
+                  (ProjectiveSpace.isPullback_map (Option (ULift.{u} (Fin 1))) g).toCommSq).inv.app
+                    K)) ≫
             adj'.counit.app ((L((g)^*[ModuleCat.{u + 1} Λ])).obj K) =
           (L((g)^*[ModuleCat.{u + 1} Λ])).map (adj.counit.app K)
 
 /-- **Base change for the projective line from the adjunction** (the formal part of the
-blueprint argument "the unit and counit commute with base change"): the base change map of
+blueprint argument "the unit and counit commute with base change"). For the standard square of
+`g : S' ⟶ S` (`AlgebraicGeometry.ProjectiveSpace.isPullback_map`), the base change map of
 `Rq^!` is the mate of the inverse of `Ex_!`, which, computed through the adjunctions
 `Rq_! ⊣ Lq^*(1)[2]` and `Rq'_! ⊣ Lq'^*(1)[2]` with compatible counits, is the canonical
 isomorphism `Lg'^*(Lq^* K(1)[2]) ≅ Lq'^* Lg^* K(1)[2]`
-(`CategoryTheory.isIso_mateEquiv_app_of_counit`). -/
+(`CategoryTheory.isIso_mateEquiv_app_of_counit`). An arbitrary cartesian square of `q` is
+isomorphic to the standard one through an isomorphism `e : P' ≅ ℙ¹_{S'}` over `S'`: stacking the
+square of the open immersion `𝟙 : ℙ¹_S ⟶ ℙ¹_S` with vertical map `e` on the standard square, the
+base change maps compose
+(`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_comp_iff`). -/
 theorem projectiveLineBaseChange_of_adjunction (h : ProjectiveLineAdjunctionBaseChange Λ) :
     ProjectiveLineBaseChange Λ := by
-  intro S _ _ S' P' g q' g' sq _ _
+  intro S _ S' P' g q' g' sq _ _
   have : HasInvertibleExponent Λ ℙ(Option (ULift.{u} (Fin 1)); S) := .of_hom (_ ↘ S)
-  have : HasInvertibleExponent Λ P' := .of_hom (g' ≫ _ ↘ S)
   have : HasInvertibleExponent Λ S' := .of_hom g
-  obtain ⟨adj, adj', hc⟩ := h sq
-  have := isIso_rightDerivedLowerShriekBaseChangeMap Λ sq
+  have : HasInvertibleExponent Λ ℙ(Option (ULift.{u} (Fin 1)); S') := .of_hom (_ ↘ S')
+  have sq₀ := ProjectiveSpace.isPullback_map (Option (ULift.{u} (Fin 1))) g
+  have h₀ : IsIso (rightDerivedUpperShriekBaseChangeMap Λ sq₀) := by
+    obtain ⟨adj, adj', hc⟩ := h g
+    have := isIso_rightDerivedLowerShriekBaseChangeMap Λ sq₀
+    rw [NatTrans.isIso_iff_isIso_app]
+    intro K
+    exact isIso_mateEquiv_app_of_counit (rightDerivedUpperShriekAdjunction _ _)
+      (rightDerivedUpperShriekAdjunction _ _) adj adj'
+      (inv (rightDerivedLowerShriekBaseChangeMap Λ sq₀)) K
+      ((leftDerivedUpperStarTwistShiftIso Λ _ 1 _).hom ≫
+        (twistShift Λ _ 1).map ((derivedSquareUpperStarIso _ sq₀.toCommSq).inv.app K))
+      (by simp [← hc K])
+  let e := sq.isoIsPullback _ _ sq₀
+  have sqe : IsPullback g' e.hom (𝟙 _) (ProjectiveSpace.map (Option (ULift.{u} (Fin 1))) g) :=
+    IsPullback.of_vert_isIso ⟨by rw [Category.comp_id, IsPullback.isoIsPullback_hom_fst]⟩
+  have : HasCompactification (𝟙 ℙ(Option (ULift.{u} (Fin 1)); S)) :=
+    (Compactification.ofIsOpenImmersion _).hasCompactification
+  have : HasCompactification e.hom := (Compactification.ofIsOpenImmersion _).hasCompactification
+  have := isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion_right Λ sqe
   rw [NatTrans.isIso_iff_isIso_app]
   intro K
-  exact isIso_mateEquiv_app_of_counit (rightDerivedUpperShriekAdjunction _ _)
-    (rightDerivedUpperShriekAdjunction _ _) adj adj'
-    (inv (rightDerivedLowerShriekBaseChangeMap Λ sq)) K
-    ((leftDerivedUpperStarTwistShiftIso Λ g' 1 _).hom ≫
-      (twistShift Λ P' 1).map ((derivedSquareUpperStarIso _ sq.toCommSq).inv.app K))
-    (by simp [← hc K])
+  exact (isIso_rightDerivedUpperShriekBaseChangeMap_comp_iff sqe sq₀ sq (Category.id_comp _)
+    (IsPullback.isoIsPullback_hom_snd _ _ _ _) K inferInstance).2 inferInstance
 
 end Adjunction
 

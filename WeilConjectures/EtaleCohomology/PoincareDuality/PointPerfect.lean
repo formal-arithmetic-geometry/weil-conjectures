@@ -8,22 +8,18 @@ module
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Perfect
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Linear
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.SixFunctors.Etale.Derived.DerivedComplete
-public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
-public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CompactSupportTorsion
 public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CompactSupport
-public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
-public import WeilConjectures.SixFunctors.Etale.Derived.Stability
+public import WeilConjectures.EtaleCohomology.PoincareDuality.CompactSupportPerfect
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedField
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedFieldExact
 public import WeilConjectures.SixFunctors.ProEtale.Adic.DerivedForget
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ExtensionByZero
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Truncation
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriek
+import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar
 
 /-!
 # The global sections are perfect at the point
@@ -116,34 +112,6 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k] [I
   [HasInvertibleExponent Λ (Spec (.of k))]
   {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX]
   [HasCompactification aX]
-
-/-- Blueprint `sk-lem-finite`: Finiteness: the global sections are perfect at the point.
-This is also blueprint `thm-pod-point-perfectness` (Point perfectness of global sections), at
-the finite stage.
-
-Also blueprint `prop-trf-compact-support-perfectness`: Compact-support perfectness (compactly
-supported cohomology).
-
-**`RΓ_c(X, K)` is perfect.** Let `Λ` be a finite ring whose exponent is invertible in the
-separably closed field `k`, `X` separated of finite type over `k` and `K ∈ Dctf(X, Λ)`. Then
-`RΓ_c(X, K)` is a perfect complex of `Λ`-modules: it is bounded with finite cohomology modules
-and of finite Tor amplitude (`sk-prop-sf-trace-perfectness`), hence perfect over the
-Noetherian ring `Λ`. -/
-theorem isPerfect_compactlySupportedGlobalSections
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K) :
-    ((compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) aX).obj K).IsPerfect := by
-  have := HasInvertibleExponent.of_hom (Λ := Λ) aX
-  obtain ⟨a, b, hab⟩ := isZero_compactlySupportedCohomology_of_lt Λ aX K hK
-  refine _root_.DerivedCategory.isPerfect_of_finiteTorAmplitude ⟨⟨a, ?_⟩, ⟨b, ?_⟩⟩
-    (finite_compactlySupportedCohomology Λ aX K hK)
-    (finiteTorAmplitude_compactlySupportedGlobalSections Λ aX K hK)
-  · change _root_.DerivedCategory.IsGE _ a
-    rw [_root_.DerivedCategory.isGE_iff]
-    exact fun q hq ↦ hab q (Or.inl hq)
-  · change _root_.DerivedCategory.IsLE _ b
-    rw [_root_.DerivedCategory.isLE_iff]
-    exact fun q hq ↦ hab q (Or.inr hq)
 
 include aX in
 /-- Blueprint `sk-lem-finite`: Finiteness: the global sections are perfect at the point.

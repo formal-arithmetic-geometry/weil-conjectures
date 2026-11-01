@@ -5,20 +5,11 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.FieldBaseChangeDimension
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologicalDimension
-public import WeilConjectures.AlgebraicGeometry.Sites.TorsionAcyclic
-public import WeilConjectures.CategoryTheory.Sites.SheafCohomologyModules
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughInjectives
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.TStructure
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
-public import WeilConjectures.SixFunctors.Etale.Gabber
-public import WeilConjectures.SixFunctors.OpenClosed.Conservative
 public import
   WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomPresheaf
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMap
-public import WeilConjectures.SixFunctors.BaseChange.DerivedForget
-public import WeilConjectures.SixFunctors.BaseChange.RestrictScalars
 public import WeilConjectures.SixFunctors.Etale.Derived.HigherDirectImageAffine
 
 /-!

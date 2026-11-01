@@ -6,18 +6,18 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 public import WeilConjectures.Blowup.Affine.ReesGrading
 public import WeilConjectures.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.IdealPowersReesMultiplication
 import WeilConjectures.AlgebraicGeometry.IdealPowersReesZeroGenerators
 import WeilConjectures.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
-import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
-import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import WeilConjectures.AlgebraicGeometry.Modules.HilbertPolynomial
+import WeilConjectures.Algebra.Homology.KFlat
 
 /-! # Graded sheaf data for powers of an extended ideal
 

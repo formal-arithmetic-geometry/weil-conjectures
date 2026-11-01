@@ -43,7 +43,8 @@ namespace AlgebraicGeometry.ProEtale
 
 open Scheme CondensedRing PadicAlgCl
 
-variable (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ)
+variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
+  [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
 
 /-- The isomorphisms `residueFieldDerivedUpperStarIso : Lh^* ⋙ D(G) ≅ D(G) ⋙ Lh^*` are
 compatible with the composition isomorphisms `L(p ≫ q)^* ≅ Lq^* ⋙ Lp^*` along `p` and `q`. -/
@@ -55,12 +56,13 @@ def ResidueFieldDerivedUpperStarIsoCompCoherenceAt {X Y Z : Scheme.{u}} (p : X �
           p q).hom.app ((residueFieldModuleSheaf Z ℓ E).mapDerivedCategory.obj M) =
       (residueFieldModuleSheaf X ℓ E).mapDerivedCategory.map
           ((CondensedRing.leftDerivedUpperStarComp
-            (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)) p q).hom.app M) ≫
+            (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)) p q).hom.app M) ≫
         (residueFieldDerivedUpperStarIso ℓ E p).hom.app
-          (L((q)^*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)⟧).obj M) ≫
+          (L((q)^*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)⟧).obj M) ≫
         L((p)^*[ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)]).map
           ((residueFieldDerivedUpperStarIso ℓ E q).hom.app M)
 
+omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] in
 /-- The isomorphisms `residueFieldDerivedUpperStarIso` commute with the transports along an
 equality `u = v` of morphisms of schemes. -/
 lemma residueFieldDerivedUpperStarIso_hom_app_leftDerivedUpperStarCongr {X Y : Scheme.{u}}
@@ -71,8 +73,8 @@ lemma residueFieldDerivedUpperStarIso_hom_app_leftDerivedUpperStarCongr {X Y : S
           ((residueFieldModuleSheaf Y ℓ E).mapDerivedCategory.obj M) =
       (residueFieldModuleSheaf X ℓ E).mapDerivedCategory.map
           (eqToHom (by rw [e] :
-            L((u)^*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)⟧).obj M =
-              L((v)^*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)⟧).obj M)) ≫
+            L((u)^*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)⟧).obj M =
+              L((v)^*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)⟧).obj M)) ≫
         (residueFieldDerivedUpperStarIso ℓ E v).hom.app M := by
   subst e
   simp
@@ -96,6 +98,7 @@ private lemma cube_aux {C : Type*} [Category* C] {O₁ O₂ O₃ O₄ O₅ O₆ 
 
 variable {ℓ E} {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
+omit [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] in
 /-- The cube condition of `CategoryTheory.Adjunction.nonempty_arrowIso_map_exchangeRight_app` for
 the derived pullbacks of module objects over `𝔽_E` and of sheaves of `𝔽_E`-modules along a
 commutative square, assuming the compatibility of `residueFieldDerivedUpperStarIso` with the
@@ -107,16 +110,16 @@ lemma residueFieldDerivedUpperStarIso_cube (sq : CommSq g' f' f g)
     L((f')^*[ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)]).map
         ((residueFieldDerivedUpperStarIso ℓ E g).inv.app M) ≫
         (residueFieldDerivedUpperStarIso ℓ E f').inv.app
-          (L((g)^*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)⟧).obj M) ≫
+          (L((g)^*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)⟧).obj M) ≫
         (residueFieldModuleSheaf X' ℓ E).mapDerivedCategory.map
           ((pullbackSquareComparison
-            (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)) sq).hom.app M) =
+            (Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)) sq).hom.app M) =
       (leftDerivedUpperStarSquareIso (ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)) sq).hom.app
           ((residueFieldModuleSheaf Y ℓ E).mapDerivedCategory.obj M) ≫
         L((g')^*[ModuleCat.{u + 1} (ResidueFieldCoeff.{u} ℓ E)]).map
           ((residueFieldDerivedUpperStarIso ℓ E f).inv.app M) ≫
         (residueFieldDerivedUpperStarIso ℓ E g').inv.app
-          (L((f)^*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E.1)⟧).obj M) := by
+          (L((f)^*⟦Profinite.continuousMapRingObj.{u} (integersResidueField ℓ E)⟧).obj M) := by
   -- The unifications with `inv_inv_comp_eq_comp_inv_inv` and `cube_aux` only need to unfold
   -- reducible constants. At default transparency the elaborator unfolds the composition of the
   -- derived categories (a localization) when comparing the (pretty-printing identical) sides,

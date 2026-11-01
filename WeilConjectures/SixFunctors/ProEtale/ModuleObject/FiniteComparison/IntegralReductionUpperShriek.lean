@@ -9,6 +9,7 @@ public import WeilConjectures.CategoryTheory.Triangulated.ReductionTriangleDoubl
 public import WeilConjectures.CategoryTheory.ObjectProperty.LiftCommShift
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralReductionProperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralReductionRestrictConstructible
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleTriangulated
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReductionLowerShriek
 
 /-!

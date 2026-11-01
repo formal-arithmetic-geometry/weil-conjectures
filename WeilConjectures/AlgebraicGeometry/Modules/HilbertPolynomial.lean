@@ -5,17 +5,15 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
-public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.Vanishing
-public import WeilConjectures.AlgebraicGeometry.Cohomology.LongExact
-public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
-public import WeilConjectures.AlgebraicGeometry.Cohomology.Serre
-public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 public import WeilConjectures.AlgebraicGeometry.Modules.IdealSheafFiniteType
 public import WeilConjectures.AlgebraicGeometry.Modules.SectionAvoidance
 public import WeilConjectures.Mathlib.Algebra.Group.ForwardDiff
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-public import WeilConjectures.Mathlib.Topology.KrullDimension
+public import WeilConjectures.Compactification.Defs
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
+public import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
+public import WeilConjectures.RingTheory.ProEtale.WeakDimension
+public import WeilConjectures.AlgebraicGeometry.Modules.FlatResolution
 
 /-!
 # Hilbert polynomials of ample invertible modules

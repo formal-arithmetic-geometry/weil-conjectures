@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.ZetaFunction.WeightSeparation
+public import WeilConjectures.ZetaFunction.SmoothProper
 
 /-!
 # Integral Frobenius factors

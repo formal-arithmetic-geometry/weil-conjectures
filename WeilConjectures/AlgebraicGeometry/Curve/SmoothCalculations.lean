@@ -9,20 +9,11 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
-import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
+public import WeilConjectures.AlgebraicGeometry.Curve
 import WeilConjectures.AlgebraicGeometry.ArtinSchreierSequence
 import WeilConjectures.AlgebraicGeometry.Curve.ConstantModCharPDegreeTwo
-import WeilConjectures.AlgebraicGeometry.Curve.ConstantInvariance
-import WeilConjectures.AlgebraicGeometry.Curve.EtaleCohomologicalDimension
 import WeilConjectures.AlgebraicGeometry.Curve.Estimate
-import WeilConjectures.AlgebraicGeometry.EtaleSheaves
-import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
-import WeilConjectures.AlgebraicGeometry.Curve.Affine
-import WeilConjectures.AlgebraicGeometry.Curve.Compactification
-import WeilConjectures.AlgebraicGeometry.Curve.SerreDuality
-import WeilConjectures.AlgebraicGeometry.Sites.Gm
-import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 import WeilConjectures.LinearAlgebra.SemilinearFrobenius
 import WeilConjectures.AlgebraicGeometry.IsProperOrIsAffine
 import WeilConjectures.AlgebraicGeometry.ZeroDimensionalEtaleCohomologyRest
@@ -40,6 +31,7 @@ import WeilConjectures.AlgebraicGeometry.CohomologyRestrictionSquareTransport
 import WeilConjectures.AlgebraicGeometry.Curve.ClopenConstantAssertions
 import WeilConjectures.AlgebraicGeometry.Curve.PrimeAnnihilatedPrimaryCases
 import WeilConjectures.AlgebraicGeometry.Curve.PrimeTorsionNonunitCohomology
+import Mathlib.Algebra.Field.ULift
 
 /-!
 # The curve assertions for constant coefficients on smooth curves

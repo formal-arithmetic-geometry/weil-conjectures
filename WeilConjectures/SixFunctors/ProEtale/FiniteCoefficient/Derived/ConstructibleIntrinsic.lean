@@ -14,8 +14,8 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Con
 Blueprint `def-weil-finite-torsion-constructibility` defines `Dᵇc(Y, A_{E,n})` intrinsically:
 the complexes on `Y_proét` with finitely many nonzero cohomology sheaves, all constructible in
 the sense of `AlgebraicGeometry.ProEtale.IsConstructible` (on the strata of a finite partition by
-locally closed constructible subschemes, locally constant with finite stalks). The repository
-works with the étale-origin reading
+locally closed constructible subschemes, locally constant with finitely generated stalks). The
+repository works with the étale-origin reading
 `AlgebraicGeometry.ProEtale.DerivedCategory.boundedConstructible` (blueprint
 `def-weil-pbc-proetale-modules`). This file states the intrinsic property and shows that the
 étale-origin objects satisfy it; the converse is blueprint
@@ -68,12 +68,12 @@ lemma DerivedCategory.boundedConstructibleIntrinsic.of_iso
     fun n ↦ isConstructible_of_iso
       ((_root_.DerivedCategory.homologyFunctor _ n).mapIso e) (hK.2 n)⟩
 
-/-- At a finite coefficient ring, the objects of étale origin
+/-- The objects of étale origin
 (`AlgebraicGeometry.ProEtale.DerivedCategory.boundedConstructible`) are intrinsically bounded
 constructible: `D(ν^*)` is induced by the exact functor `ν^*`, which commutes with the
 cohomology sheaves and preserves constructibility
 (`AlgebraicGeometry.ProEtale.isConstructible_comparisonUpperStar_obj`). -/
-lemma DerivedCategory.boundedConstructible_le_boundedConstructibleIntrinsic [Finite Λ] :
+lemma DerivedCategory.boundedConstructible_le_boundedConstructibleIntrinsic :
     DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X ≤
       DerivedCategory.boundedConstructibleIntrinsic Λ X := by
   rintro K ⟨K', ⟨hb, hc⟩, ⟨e⟩⟩

@@ -5,9 +5,11 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.CategoryTheory.DerivedCategory.Coproducts
 public import WeilConjectures.CategoryTheory.DerivedCategory.ProjectiveSingleHom
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Products
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 
 /-!
 # Homology commutes with coproducts in the derived category
@@ -31,6 +33,8 @@ coproducts.
 
 - `DerivedCategory.preservesColimitsOfShape_homologyFunctor`.
 - `DerivedCategory.exists_finset_forall_comp_eq_zero`.
+- `DerivedCategory.isIso_sigmaComparison_iff`: a functor to `D(C)` commutes with a coproduct if
+  and only if all its homology functors do.
 -/
 
 @[expose] public section
@@ -107,5 +111,32 @@ lemma exists_finset_forall_comp_eq_zero [Abelian.HasKInjectiveResolutions C]
     (homologyFunctor C 0 ⋙ G) hc π hπ (homologyElementOfHom adj φ)
   exact ⟨S, fun j hj ↦ eq_zero_of_homologyElementOfHom_eq_zero adj _
     ((homologyElementOfHom_comp adj φ (π j)).trans (hS j hj))⟩
+
+section SigmaComparison
+
+variable {A : Type*} [Category* A] [Abelian.HasKInjectiveResolutions C] {J : Type*}
+  [HasColimitsOfShape (Discrete J) C] [HasExactColimitsOfShape (Discrete J) C]
+  [HasColimitsOfShape (Discrete J) (DerivedCategory C)]
+
+/-- A functor to the derived category commutes with a coproduct if and only if all its homology
+functors do. -/
+lemma isIso_sigmaComparison_iff (F : A ⥤ DerivedCategory C) (X : J → A) [HasCoproduct X] :
+    IsIso (sigmaComparison F X) ↔ ∀ n, IsIso (sigmaComparison (F ⋙ homologyFunctor C n) X) := by
+  rw [isIso_iff]
+  refine forall_congr' fun n ↦ ?_
+  rw [sigmaComparison_comp, isIso_comp_left_iff]
+
+/-- The functor `singleFunctor C 0` placing an object in degree `0` commutes with coproducts. -/
+instance isIso_sigmaComparison_singleFunctor (X : J → C) :
+    IsIso (sigmaComparison (singleFunctor C 0) X) := by
+  rw [isIso_sigmaComparison_iff]
+  intro n
+  rcases lt_trichotomy n 0 with hn | rfl | hn
+  · exact isIso_sigmaComparison_of_isZero _ _ fun Y ↦ isZero_of_isGE _ 0 n hn
+  · exact CategoryTheory.Limits.isIso_sigmaComparison_of_natIso
+      (singleFunctorCompHomologyFunctorIso C 0).symm X
+  · exact isIso_sigmaComparison_of_isZero _ _ fun Y ↦ isZero_of_isLE _ 0 n hn
+
+end SigmaComparison
 
 end DerivedCategory

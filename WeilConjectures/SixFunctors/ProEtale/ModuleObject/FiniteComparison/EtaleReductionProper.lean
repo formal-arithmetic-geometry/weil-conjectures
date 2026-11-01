@@ -126,7 +126,8 @@ theorem exists_isClosedImmersion_comp_overProdSnd (f : X ⟶ Y) [IsProper f.left
   have := c.isOpenImmersion
   have hc : c.i ≫ c.g = X.hom := c.comm.symm
   let i : X ⟶ overProd (Over.mk c.g) Y :=
-    Over.homMk (pullback.lift c.i f.left (by simp [hc])) (by simp [overProd])
+    Over.homMk (pullback.lift c.i f.left (by simp [hc]))
+      (by dsimp only [overProd, Over.mk_hom]; rw [pullback.lift_snd_assoc, Over.w])
   have hi₁ : i.left ≫ pullback.fst c.g Y.hom = c.i := by simp [i]
   have hi₂ : i.left ≫ pullback.snd c.g Y.hom = f.left := by simp [i]
   refine ⟨Over.mk c.g, c.isProper, i, ?_, ?_⟩

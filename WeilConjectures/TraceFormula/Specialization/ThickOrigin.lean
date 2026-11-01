@@ -36,7 +36,8 @@ applies to the thick origin `V(x^m) ⊆ 𝔸¹_k`
 
 ## Implementation notes
 
-The remaining hypothesis, that `Le^* σ_{𝒟}` is an isomorphism, is not proved here. For the thick
+The remaining hypothesis, that `Le^* σ_{𝒟}` is an isomorphism, is proved for `ℚ̄_ℓ` in
+`ThickOriginPowUnit.lean` (`isIso_upperStar_zeroSection_unit_polyAffineThickOrigin`). For the thick
 origin the total space of `𝒟` is `Spec k'⟦t⟧[x, u]/(tu - x^m)` (Rees algebra
 `k[x, t, x^m/t]`), the zero section is `u = 0` and its special fibre is topologically the
 origin, so the hypothesis is the computation of the nearby cycles of `Λ` at the singular point

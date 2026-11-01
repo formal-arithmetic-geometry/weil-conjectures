@@ -9,6 +9,7 @@ public import WeilConjectures.TraceFormula.CurveLocal.IntegralModelPointStalk
 public import WeilConjectures.TraceFormula.CurveLocal.ReductionTransfer
 public import WeilConjectures.TraceFormula.PointFiberFunctorIntegralPerfect
 public import WeilConjectures.TraceFormula.SupportedRestrictionIntegral
+public import WeilConjectures.TraceFormula.SupportedRestrictionRational
 
 /-!
 

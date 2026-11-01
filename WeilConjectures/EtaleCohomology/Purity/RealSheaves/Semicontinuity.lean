@@ -6,10 +6,7 @@ Authors: Christian Merten
 module
 
 public import Mathlib.Analysis.Complex.Polynomial.Basic
-public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Boundary
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Rankin
-public import WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Basic
-public import WeilConjectures.Mathlib.RingTheory.PowerSeries.PiTopology
 public import WeilConjectures.PointCountBound
 
 /-!

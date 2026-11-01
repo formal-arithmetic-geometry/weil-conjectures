@@ -7,9 +7,9 @@ module
 
 public import Mathlib.CategoryTheory.Center.Linear
 public import WeilConjectures.CategoryTheory.Adjunction.MateBiproduct
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralUpperShriekCompatibility
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldBiproductUnit
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.ToPadicAlgClCompatibility
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleAdditive
 
 /-!
 # Extension of scalars along finite subextensions commutes with `g^!` for proper `g`
@@ -50,7 +50,9 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {E F : FiniteIntermediateField ℓ} (h : E
 /-- **`g^!` commutes with extension of scalars along `E ≤ F`**, for a proper morphism `g`: the
 mate `Rg^!_E ⋙ T_Z ⟶ T_Y ⋙ Rg^!_F` of the inverse of (Push) under the adjunctions
 `Rg_* ⊣ Rg^!` is an isomorphism. -/
-theorem isIso_mateEquiv_boundedConstructibleLowerStarExtendScalarsSubfield [IsProper g.left] :
+theorem isIso_mateEquiv_boundedConstructibleLowerStarExtendScalarsSubfield [IsProper g.left]
+    [(ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E g).IsLeftAdjoint]
+    [(ContinuousMapRingObj.boundedConstructibleLowerStar ℓ F g).IsLeftAdjoint] :
     IsIso (mateEquiv
       (Adjunction.ofIsLeftAdjoint
         (ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E g))

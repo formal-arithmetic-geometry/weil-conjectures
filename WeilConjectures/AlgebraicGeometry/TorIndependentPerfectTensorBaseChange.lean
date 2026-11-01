@@ -18,6 +18,7 @@ import WeilConjectures.Algebra.Homology.ModuleStalkExact
 import WeilConjectures.AlgebraicGeometry.PerfectImpliesQCoh
 import WeilConjectures.AlgebraicGeometry.DerivedTensorQCohClosure
 import WeilConjectures.AlgebraicGeometry.TorIndependentPerfectPullbackComparison
+import WeilConjectures.CategoryTheory.Monoidal.DerivedBraided
 
 /-! # Tor-independent base change for a perfect tensor factor
 

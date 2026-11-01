@@ -45,10 +45,9 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 open Scheme
 
 variable (ℓ : ℕ) [Fact ℓ.Prime]
-  {k : Type u} [Field k] [Fact (ringChar k ≠ ℓ)]
-  (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
+  {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+  (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
-omit [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] in
 /-- **The internal Hom comparison for `E ⊆ F`** on bounded constructible complexes: for finite
 subextensions `E ≤ F` of `ℚ̄_ℓ`, the extension of scalars `Dᵇc(X)⟦E⟧ ⥤ Dᵇc(X)⟦F⟧` commutes with
 internal homs. -/

@@ -84,6 +84,7 @@ noncomputable def deformationCompactSupportExchange :=
       (isTraitModel_deformationModel X I k') (deformationModel_exists_comp_ε X I k'))
     ((traitModel k k').preservesBoundedConstructible_of_isTraitModel (ℓ := ℓ)
       (isTraitModel_traitModel k k') ⟨traitToBase k k', traitModel_j_traitToBase k k'⟩)
+    (isTraitModel_deformationModel X I k')
     (isPullback_deformationSpecialFibre_toPoint X I k')
     (isPullback_deformationModel_ε_toPoint X I k')
 
@@ -100,6 +101,7 @@ theorem unitClass_comp_map_comp_deformationCompactSupportExchange_app :
       traitSpecializationUnit k k' ≫
         (traitSpecialization k k').map (BorelMooreSection.unitClass ℓ X) :=
   (deformationToTraitModelHom X I k').unitClass_comp_map_comp_properCompactSupportExchange_app _ _
+    (isTraitModel_deformationModel X I k')
     (isPullback_deformationSpecialFibre_toPoint X I k')
     (isPullback_deformationModel_ε_toPoint X I k')
 

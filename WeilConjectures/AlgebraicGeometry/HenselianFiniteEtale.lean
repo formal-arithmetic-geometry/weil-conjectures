@@ -5,9 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.HenselianConnectedness
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
-public import WeilConjectures.Mathlib.RingTheory.LocalRing.Basic
 public import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantSets
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.RingTheory.Henselian
@@ -18,6 +16,7 @@ import WeilConjectures.AlgebraicGeometry.SchemeClopenIdempotent
 import WeilConjectures.AlgebraicGeometry.FiniteEtaleRestrictionFullyFaithful
 import WeilConjectures.AlgebraicGeometry.FiniteEtaleLiftingEssentialSurjectivity
 import WeilConjectures.AlgebraicGeometry.FiniteEtaleEquivalenceH1
+import Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 /-!
 # Finite étale schemes over a proper scheme over a henselian pair

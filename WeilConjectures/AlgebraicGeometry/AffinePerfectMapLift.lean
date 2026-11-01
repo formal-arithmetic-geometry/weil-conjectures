@@ -9,10 +9,13 @@ module
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.DerivedTensorAugmentation
 public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 import WeilConjectures.Algebra.Homology.KFlatResolution
 import WeilConjectures.AlgebraicGeometry.AffinePerfectTensorRoof
 import WeilConjectures.AlgebraicGeometry.PerfectDerivedTensor
 import WeilConjectures.AlgebraicGeometry.DerivedTensorStalkVanishing
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree
+import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
 
 /-! # Affine lifting of maps from perfect complexes
 

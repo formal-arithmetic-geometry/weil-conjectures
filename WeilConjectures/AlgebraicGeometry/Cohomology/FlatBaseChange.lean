@@ -5,13 +5,13 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.Algebra.Homology.ExtWithAction
-public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechModuleBaseChange
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DerivedGlobalSections
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DerivedFlatBaseChange.BaseChangeMap
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DerivedFlatBaseChange.ExtendScalars
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DerivedFlatBaseChange.Pullback
 public import WeilConjectures.AlgebraicGeometry.MixedAffineSectionsBaseChangeMate
+import WeilConjectures.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 
 /-!
 # Cohomology and flat base change

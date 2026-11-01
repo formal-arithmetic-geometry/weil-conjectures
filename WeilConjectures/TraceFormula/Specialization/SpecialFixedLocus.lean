@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.TraceFormula.Specialization.NearbyCycles
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
 
 /-!
 

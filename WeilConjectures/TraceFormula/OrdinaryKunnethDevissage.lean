@@ -8,7 +8,6 @@ module
 public import WeilConjectures.TraceFormula.OrdinaryKunnethClosed
 public import WeilConjectures.TraceFormula.OrdinaryKunnethOpen
 public import WeilConjectures.TraceFormula.ConstructibleGeneration
-public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Generators
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleUpperStarDeltaShift
 public import WeilConjectures.TraceFormula.IntegersToPadicAlgClLowerStar
 public import WeilConjectures.TraceFormula.OrdinaryKunnethIntegral

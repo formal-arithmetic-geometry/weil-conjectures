@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.DeformationToNormalCone
 public import WeilConjectures.TraceFormula.Specialization.ZeroSection
+public import Mathlib.RingTheory.PowerSeries.NoZeroDivisors
 
 /-!
 

@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 public import WeilConjectures.ConstructibleSheaf.StalkZeroLocus
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Immersion
 public import WeilConjectures.Mathlib.Topology.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FinitelyPresentedStalk
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyFreeOfFinitelyPresented
@@ -59,6 +60,13 @@ def stalkZeroLocus {X : Scheme.{u}} (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab
     s (IsLocalRing.closedPoint Ω) = x →
       IsZero ((s)^*⟦Profinite.padicAlgClRingObj.{u} ℓ⟧.obj M)}
 
+/-- The free module of rank `0` is zero. -/
+lemma isZero_finiteFree_zero {W : Scheme.{u}}
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] :
+    IsZero (Mod.finiteFree (condensedRingObj Λ W) 0) := by
+  rw [IsZero.iff_id_eq_zero]
+  exact biproduct.hom_ext _ _ fun i ↦ i.elim0
+
 /-- Over a nonempty quasi-compact quasi-separated scheme, the free module `(ℚ̲̄_ℓ)^d` vanishes
 exactly when `d = 0`: the endomorphisms of the unit evaluate to the nonzero ring `ℚ̄_ℓ`. -/
 lemma isZero_finiteFree_iff {W : Scheme.{u}} [CompactSpace W] [QuasiSeparatedSpace W]
@@ -78,8 +86,7 @@ lemma isZero_finiteFree_iff {W : Scheme.{u}} [CompactSpace W] [QuasiSeparatedSpa
     rw [← End.one_def, map_one, map_zero] at h2
     exact one_ne_zero h2
   · rintro rfl
-    rw [IsZero.iff_id_eq_zero]
-    exact biproduct.hom_ext _ _ fun j ↦ j.elim0
+    exact isZero_finiteFree_zero _
 
 /-- **Vanishing at a geometric point is read off the fibre rank.** Let `N` be a `ℚ̲̄_ℓ,Y`-module
 whose pullbacks to the members of a pro-étale cover are finitely presented. The pullback of `N`
@@ -218,7 +225,7 @@ lemma isOpen_preimage_stalkZeroLocus_of_isLocallyFinitelyPresented {T : Scheme.{
   have : IsLocallyNoetherian Z.left := LocallyOfFiniteType.isLocallyNoetherian Z.hom
   have : CompactSpace Z.left := QuasiCompact.compactSpace_of_compactSpace Z.hom
   have : IsNoetherian Z.left := ⟨⟩
-  have : TopologicalSpace.NoetherianSpace T := j.isEmbedding.isInducing.noetherianSpace
+  have : TopologicalSpace.NoetherianSpace T := IsImmersion.noetherianSpace j
   let T' : Over (Spec (.of k)) := Over.mk (j ≫ Z.hom)
   have : LocallyOfFiniteType T'.hom := inferInstanceAs (LocallyOfFiniteType (j ≫ Z.hom))
   have : QuasiCompact T'.hom := inferInstanceAs (QuasiCompact (j ≫ Z.hom))

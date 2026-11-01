@@ -5,15 +5,13 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.OverPullbackFiniteType
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMorphismDualizable
-public import WeilConjectures.CategoryTheory.Monoidal.ExceptionalTensorMap
 public import WeilConjectures.PoincareDuality.ProjectionFormulaMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleSmoothBaseChange
 public import WeilConjectures.TraceFormula.ConstructibleGenerationLowerStar
 public import WeilConjectures.TraceFormula.PurityBaseChange
 public import WeilConjectures.TraceFormula.PurityOrientation
-public import WeilConjectures.TraceFormula.PurityTensorMapShift
+public import WeilConjectures.TraceFormula.PurityTensorMapDualizable
 
 /-!
 
@@ -74,32 +72,6 @@ variable {X Y X' Y' : Over (Spec (.of k))}
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
   [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom]
   [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
-
-/-- **The purity map is an isomorphism on dualizable objects**: for any `f` and a dualizable `K`,
-`γ_{f,K} : Lf^* K ⊗ Rf^! ℚ̄_ℓ ⟶ Rf^! K` is an isomorphism, the projection formula being a module
-structure over `Lf^*`. -/
-theorem isIso_upperShriekUnitTensorMap_of_isDualizable (f : X ⟶ Y)
-    {K : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (hK : IsDualizable K) :
-    IsIso (upperShriekUnitTensorMap ℓ f K) := by
-  obtain ⟨_⟩ := hK
-  let := BraidedCategory.exactPairing_swap K Kᘁ
-  exact Adjunction.isIso_exceptionalTensorMap
-    (boundedConstructibleUpperShriekAdjunction ℓ f)
-    (boundedConstructibleExceptionalProjection ℓ f)
-    (boundedConstructibleExceptionalProjection_unit ℓ f)
-    (boundedConstructibleExceptionalProjection_tensor ℓ f) Kᘁ K
-
-/-- The invertibility of the purity map `γ_{f,K}` only depends on `K` up to isomorphism. -/
-lemma isIso_upperShriekUnitTensorMap_of_iso (f : X ⟶ Y)
-    {K K' : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (e : K ≅ K')
-    [IsIso (upperShriekUnitTensorMap ℓ f K')] : IsIso (upperShriekUnitTensorMap ℓ f K) := by
-  have hn := upperShriekUnitTensorMap_naturality ℓ f e.hom
-  have : IsIso (upperShriekUnitTensorMap ℓ f K ≫
-      (boundedConstructibleUpperShriek ℓ f).map e.hom) := by
-    rw [← hn]
-    infer_instance
-  exact IsIso.of_isIso_comp_right _
-    ((boundedConstructibleUpperShriek ℓ f).map e.hom)
 
 variable {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 

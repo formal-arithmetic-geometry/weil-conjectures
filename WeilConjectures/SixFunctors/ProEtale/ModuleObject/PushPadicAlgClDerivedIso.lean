@@ -55,12 +55,15 @@ theorem isIso_derivedPushHom_app_padicAlgCl_of_isGE_of_injective
     (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
       (padicSubfieldRingObj X ℓ E))) (n : ℤ) [K.IsGE n] :
     IsIso ((derivedPushHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) f).app K) := by
-  obtain ⟨T, _, ⟨e⟩⟩ := K.exists_iso_Q_obj_of_isGE n
-  obtain ⟨I, i, _, hI, _⟩ :=
-    CochainComplex.Plus.modelCategoryQuillen.exists_quasiIso_injective T n
+  -- `have` first: `obtain` on the term itself would abstract it over the large goal.
+  have hK := K.exists_iso_Q_obj_of_isGE n
+  obtain ⟨T, _, ⟨e⟩⟩ := hK
+  have hT := CochainComplex.Plus.modelCategoryQuillen.exists_quasiIso_injective T n
+  obtain ⟨I, i, _, hI, _⟩ := hT
   have : I.IsKInjective := CochainComplex.isKInjective_of_injective I n
   rw [NatTrans.isIso_app_iff_of_iso _
     (e ≪≫ asIso (Q.map i) ≪≫ ((quotientCompQhIso _).app I).symm)]
+  dsimp only [Functor.comp_obj]
   have h := derivedPushHom_app_Qh_fac (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) f I
   have : ∀ k, IsIso (((NatTrans.mapHomologicalComplex
       (pushHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) f) (ComplexShape.up ℤ)).app I).f
@@ -87,7 +90,11 @@ theorem isIso_derivedPushHom_app_padicAlgCl_of_isGE_of_injective
         (ComplexShape.up ℤ) |>.obj I) n fun k ↦
       rightAcyclic_lowerStar_of_rightAcyclic_forget _ f (hacyc (I.X k) (hI k))
   have := IsIso.of_isIso_fac_left h
-  exact @IsIso.of_isIso_comp_right _ _ _ _ _ _ _ inferInstance this
+  have := @IsIso.of_isIso_comp_right _ _ _ _ _ _ _ inferInstance this
+  -- The goal and `this` differ only in proofs inside instance arguments; at default
+  -- transparency the unifier unfolds those instances (about 40 s), at reducible transparency it
+  -- compares their arguments.
+  with_reducible exact this
 
 variable [QuasiCompact f] [QuasiSeparated f]
 

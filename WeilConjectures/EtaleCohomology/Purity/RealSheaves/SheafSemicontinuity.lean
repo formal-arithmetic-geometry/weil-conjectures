@@ -13,7 +13,6 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.MiddleExtension
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseRank
 public import WeilConjectures.WeilSheaf.BoundaryStalk
 public import WeilConjectures.WeilSheaf.DirectImageStalk
-public import WeilConjectures.WeilSheaf.GeometricCoinvariants
 
 /-!
 # Boundary semicontinuity of weights for Weil sheaves

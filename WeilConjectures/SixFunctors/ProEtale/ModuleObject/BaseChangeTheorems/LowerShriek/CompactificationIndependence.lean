@@ -9,6 +9,9 @@ public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.Compactification.Refinement
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.SquareTransport
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleLowerStar
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.Proper
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionLowerShriekUnit
 
 /-!
 
@@ -62,13 +65,13 @@ Any two compactifications `c₁` and `c₂` of `f` have a common refinement `c`
   `ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl`: the
   isomorphism `Rf_!^{c₁} ≅ Rf_!^{c₂}` for `E`- and `ℚ̄_ℓ`-sheaves.
 
-## Sorried input
+## Main statements
 
 - `ProEtale.CondensedRing.isIso_boundedConstructibleOpenImmersionLowerShriekRefinement`: the
   restriction comparison is an isomorphism for a cartesian square.
 - `ProEtale.CondensedRing.isIso_boundedConstructibleOpenImmersionLowerShriekRefinementPushforward`
-  and its `_padicAlgCl` version: the pushforward comparison is an isomorphism for `h` proper.
-- `Compactification.exists_overRefinement`: the existence of common refinements.
+  and its `_padicAlgCl` version: the pushforward comparison is an isomorphism for `h` proper, by
+  proper base change (`ProEtale.CondensedRing.isIso_unit_app_openImmersionLowerShriek`).
 
 -/
 
@@ -167,7 +170,10 @@ noncomputable def boundedConstructibleOpenImmersionLowerShriekRefinement (w : i 
     (boundedConstructibleOpenImmersionLowerShriekRefinementTriangleStep Λ ℓ w).hom ≫
     boundedConstructibleOpenImmersionLowerShriekRefinementCounitStep Λ ℓ
 
-/-- The restriction comparison `i_! ⟶ i₁_! ⋙ Lh^*` is an isomorphism when the square
+/-- Compatibility required from `sec-proetale-coefficients` (to be proved there): blueprint
+`sk-lem-nagata-density-normalization`.
+
+The restriction comparison `i_! ⟶ i₁_! ⋙ Lh^*` is an isomorphism when the square
 ```
 X --i--> Z
 |𝟙       |h
@@ -180,7 +186,71 @@ theorem isIso_boundedConstructibleOpenImmersionLowerShriekRefinement
     (sq : IsPullback (𝟙 X) i i₁ h) :
     IsIso (boundedConstructibleOpenImmersionLowerShriekRefinement Λ ℓ
       sq.toCommSq.snd_comp_eq_of_fst_eq_id) :=
-  sorry
+  by
+  have : QuasiCompact (i.left ≫ Z.hom) := by
+    rw [Over.w i]
+    infer_instance
+  have : QuasiCompact i.left := QuasiCompact.of_comp i.left Z.hom
+  rw [NatTrans.isIso_iff_isIso_app]
+  intro K
+  let c := overClosedComplement i
+  refine isIso_of_isIso_boundedConstructibleUpperStar_map_of_isCompl Λ ℓ c i
+    (isCompl_range_overClosedComplement i) _ ?_ ?_
+  · -- Over `X`, by the triangle identity of `i_! ⊣ Li^*`, whose unit is an isomorphism.
+    let adj := boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ i
+    have hε : IsIso ((boundedConstructibleUpperStar Λ ℓ i).map (adj.counit.app
+        ((boundedConstructibleUpperStar Λ ℓ h).obj
+          ((boundedConstructibleOpenImmersionLowerShriek Λ ℓ i₁).obj K)))) := by
+      have : IsIso (adj.unit.app _ ≫ (boundedConstructibleUpperStar Λ ℓ i).map (adj.counit.app
+          ((boundedConstructibleUpperStar Λ ℓ h).obj
+            ((boundedConstructibleOpenImmersionLowerShriek Λ ℓ i₁).obj K)))) := by
+        rw [adj.right_triangle_components]
+        exact IsIso.id _
+      exact IsIso.of_isIso_comp_left (adj.unit.app _) _
+    simp only [boundedConstructibleOpenImmersionLowerShriekRefinement,
+      boundedConstructibleOpenImmersionLowerShriekRefinementUnitStep,
+      boundedConstructibleOpenImmersionLowerShriekRefinementCounitStep, NatTrans.comp_app,
+      Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.leftUnitor_inv_app,
+      Functor.rightUnitor_hom_app, Category.id_comp, Functor.map_comp]
+    have a₁ : IsIso ((boundedConstructibleUpperStar Λ ℓ i).map
+        ((boundedConstructibleOpenImmersionLowerShriek Λ ℓ i).map
+          ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ i₁).unit.app K))) :=
+      have := NatIso.isIso_app_of_isIso
+        (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ i₁).unit K
+      have := Functor.map_isIso (boundedConstructibleOpenImmersionLowerShriek Λ ℓ i)
+        ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ i₁).unit.app K)
+      Functor.map_isIso _ _
+    have a₂ : IsIso ((boundedConstructibleUpperStar Λ ℓ i).map
+        ((boundedConstructibleOpenImmersionLowerShriekRefinementTriangleStep Λ ℓ
+          sq.toCommSq.snd_comp_eq_of_fst_eq_id).hom.app K)) :=
+      Functor.map_isIso _ _
+    exact IsIso.comp_isIso' a₁ (IsIso.comp_isIso' a₂ (by
+      erw [CategoryTheory.Functor.map_id, Category.comp_id]
+      exact hε))
+  · -- Over the closed complement of `X ⊆ Z` both sides vanish, since `h⁻¹(X) = X`.
+    have hS : Limits.IsZero ((boundedConstructibleUpperStar Λ ℓ c).obj
+        ((boundedConstructibleOpenImmersionLowerShriek Λ ℓ i).obj K)) :=
+      isZero_boundedConstructibleUpperStar_obj_openImmersionLowerShriek Λ ℓ i c
+        (isCompl_range_overClosedComplement i).disjoint.symm K
+    have hsq : IsPullback (𝟙 X.left) i.left i₁.left h.left := by
+      simpa using sq.map (Over.forget _)
+    have hr : Set.range i.left.base = h.left.base ⁻¹' Set.range i₁.left.base := by
+      rw [← hsq.isoPullback_hom_snd, Scheme.Hom.comp_base, TopCat.coe_comp, Set.range_comp,
+        Set.range_eq_univ.2 hsq.isoPullback.hom.surjective, Set.image_univ]
+      exact Scheme.Pullback.range_snd i₁.left h.left
+    have hdisj : Disjoint (Set.range i₁.left.base) (Set.range (c ≫ h).left.base) := by
+      rw [Set.disjoint_right]
+      rintro _ ⟨z, rfl⟩ hz
+      have hz' : c.left.base z ∈ Set.range i.left.base := by
+        rw [hr]
+        exact hz
+      exact Set.disjoint_left.1 (isCompl_range_overClosedComplement i).disjoint ⟨z, rfl⟩ hz'
+    have hT : Limits.IsZero ((boundedConstructibleUpperStar Λ ℓ c).obj
+        ((boundedConstructibleUpperStar Λ ℓ h).obj
+          ((boundedConstructibleOpenImmersionLowerShriek Λ ℓ i₁).obj K))) :=
+      (isZero_boundedConstructibleUpperStar_obj_openImmersionLowerShriek Λ ℓ i₁ (c ≫ h) hdisj
+        K).of_iso ((boundedConstructibleUpperStarComp Λ ℓ c h).app _).symm
+    exact ⟨⟨hT.to_ _, hS.eq_of_src _ _, hT.eq_of_src _ _⟩⟩
 
 /-- The *pushforward comparison* `i₁_! ⟶ i_! ⋙ Rh_*` on bounded constructible complexes for a
 cartesian square `sq` of open immersions `i`, `i₁` and a morphism `h` as in
@@ -338,7 +408,10 @@ variable {X Z Z₁ : Over (Spec (.of k))}
   {i : X ⟶ Z} {i₁ : X ⟶ Z₁} {h : Z ⟶ Z₁} [IsOpenImmersion i.left] [IsOpenImmersion i₁.left]
   [IsProper h.left]
 
-/-- For bounded constructible `E`-sheaves, the pushforward comparison `i₁_! ⟶ i_! ⋙ Rh_*` of a
+/-- Compatibility required from `sec-proetale-coefficients` (to be proved there): blueprint
+`sk-lem-nagata-density-normalization`.
+
+For bounded constructible `E`-sheaves, the pushforward comparison `i₁_! ⟶ i_! ⋙ Rh_*` of a
 cartesian square `sq` with `h` proper is an isomorphism: over `X ⊆ Z₁` both sides
 restrict to the identity, and over the closed complement `Z₁ ∖ X` the stalks of `Rh_*(i_! K)` are,
 by proper base change, the cohomology of the fibres of `h` over `Z₁ ∖ X`, which do not meet `X ⊆ Z`,
@@ -347,14 +420,55 @@ theorem isIso_boundedConstructibleOpenImmersionLowerShriekRefinementPushforward
     (sq : IsPullback (𝟙 X) i i₁ h) :
     IsIso (ContinuousMapRingObj.boundedConstructibleOpenImmersionLowerShriekRefinementPushforward
       ℓ E sq) :=
-  sorry
+  by
+  have := isIso_boundedConstructibleOpenImmersionLowerShriekRefinement
+    (Profinite.continuousMapRingObj E) ℓ sq
+  rw [NatTrans.isIso_iff_isIso_app]
+  intro K
+  have := isIso_unit_app_openImmersionLowerShriek _ ℓ
+    (ContinuousMapRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E h)
+    (ContinuousMapRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E (𝟙 X))
+    (ContinuousMapRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E
+      (overPullbackSnd h (overClosedComplement i₁))) sq
+    (by
+      rw [← ContinuousMapRingObj.boundedConstructibleBaseChange_eq_exchangeRight]
+      exact isIso_boundedConstructibleBaseChange_of_isProper ℓ E sq.flip)
+    (by
+      rw [← ContinuousMapRingObj.boundedConstructibleBaseChange_eq_exchangeRight]
+      exact isIso_boundedConstructibleBaseChange_of_isProper ℓ E
+        (isPullback_overPullbackFst_overPullbackSnd h (overClosedComplement i₁))) K
+  simp only [ContinuousMapRingObj.boundedConstructibleOpenImmersionLowerShriekRefinementPushforward,
+    NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app]
+  infer_instance
 
-/-- For bounded constructible `ℚ̄_ℓ`-sheaves, the pushforward comparison `i₁_! ⟶ i_! ⋙ Rh_*` of a
+/-- Compatibility required from `sec-proetale-coefficients` (to be proved there): blueprint
+`sk-lem-nagata-density-normalization`.
+
+For bounded constructible `ℚ̄_ℓ`-sheaves, the pushforward comparison `i₁_! ⟶ i_! ⋙ Rh_*` of a
 cartesian square `sq` with `h` proper is an isomorphism. -/
 theorem isIso_boundedConstructibleOpenImmersionLowerShriekRefinementPushforward_padicAlgCl
     (sq : IsPullback (𝟙 X) i i₁ h) :
     IsIso (boundedConstructibleOpenImmersionLowerShriekRefinementPushforward ℓ sq) :=
-  sorry
+  by
+  have := isIso_boundedConstructibleOpenImmersionLowerShriekRefinement
+    (Profinite.padicAlgClRingObj ℓ) ℓ sq
+  rw [NatTrans.isIso_iff_isIso_app]
+  intro K
+  have := isIso_unit_app_openImmersionLowerShriek _ ℓ
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ h)
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ (𝟙 X))
+    (boundedConstructibleUpperStarLowerStarAdjunction ℓ
+      (overPullbackSnd h (overClosedComplement i₁))) sq
+    (by
+      rw [← boundedConstructibleBaseChange_eq_exchangeRight]
+      exact isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl ℓ sq.flip)
+    (by
+      rw [← boundedConstructibleBaseChange_eq_exchangeRight]
+      exact isIso_boundedConstructibleBaseChange_of_isProper_padicAlgCl ℓ
+        (isPullback_overPullbackFst_overPullbackSnd h (overClosedComplement i₁))) K
+  simp only [boundedConstructibleOpenImmersionLowerShriekRefinementPushforward,
+    NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app]
+  infer_instance
 
 end Pushforward
 

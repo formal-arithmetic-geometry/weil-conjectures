@@ -58,8 +58,9 @@ isomorphism is made.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.isIso_projectiveLineDecompositionMap`: blueprint
-  `thm-amb-p1-decomposition`, stated here and proved in its own subsection.
+- The decomposition map is an isomorphism (blueprint `thm-amb-p1-decomposition`):
+  `AlgebraicGeometry.Etale.isIso_projectiveLineDecompositionMap`, in
+  `WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineCohomology`.
 -/
 
 @[expose] public section
@@ -227,15 +228,6 @@ noncomputable def projectiveLineDecompositionMap :
         (ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S)).homEquiv _ _
       ((leftDerivedUpperStarConstantComplexIso Λ (ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S)).hom ≫
         projectiveLineHyperplaneClass Λ S))
-
-/-- Blueprint `thm-amb-p1-decomposition`: *the cohomology of the projective line*. For a scheme
-`S` on which the exponent of `Λ` is invertible and a normalized rank-one datum, the decomposition
-map `(1, h) : Λ_S(1)[2] ⊕ Λ_S ⟶ Rq_*(Λ_{ℙ¹_S}(1)[2])`
-(`AlgebraicGeometry.Etale.projectiveLineDecompositionMap`) is an isomorphism; equivalently
-`Rq_* Λ_{ℙ¹_S} ≅ Λ_S ⊕ Λ_S(-1)[-2]` via `1` and the hyperplane class `h`. -/
-theorem isIso_projectiveLineDecompositionMap [HasKummerClass.IsNormalized Λ] :
-    IsIso (projectiveLineDecompositionMap Λ S) := by
-  sorry
 
 /-- Blueprint `def-amb-p1-trace`: *the trace of the projective line*
 `Tr_q : Rq_*(Λ_{ℙ¹_S}(1)[2]) ⟶ Λ_S`, the second component of the inverse of the decomposition

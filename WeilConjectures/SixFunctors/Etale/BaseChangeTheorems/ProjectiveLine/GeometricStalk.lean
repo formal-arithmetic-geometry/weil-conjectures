@@ -6,16 +6,14 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Curve.FieldExtension
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Curve
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
-public import WeilConjectures.Mathlib.Topology.KrullDimension
 public import Mathlib.RingTheory.KrullDimension.Polynomial
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 import WeilConjectures.AlgebraicGeometry.ProjectiveLineGeometricStalkReduction
+import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine.StrictHenselian
+import WeilConjectures.RingTheory.ProEtale.WeakDimension
 
 /-!
 # The exchange morphism of the projective line at a geometric point

@@ -79,13 +79,6 @@ open Scheme
 
 variable {k : Type u} [Field k]
 
-/-- A scheme of finite type over a field is noetherian. -/
-lemma isNoetherian_left (Y : Over (Spec (.of k))) [LocallyOfFiniteType Y.hom]
-    [QuasiCompact Y.hom] : IsNoetherian Y.left := by
-  have : IsLocallyNoetherian Y.left := LocallyOfFiniteType.isLocallyNoetherian Y.hom
-  have : CompactSpace Y.left := QuasiCompact.compactSpace_of_compactSpace Y.hom
-  exact ⟨⟩
-
 /-! ### Closed subschemes and their preimages -/
 
 section Closed

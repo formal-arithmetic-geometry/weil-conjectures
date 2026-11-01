@@ -87,8 +87,8 @@ theorem boundedConstructible_geometricNearbyCycles_traitStdModel_of_isFinite {T 
       comm_ε := pullback.condition.symm }
   have hiso :=
     Hom.isIso_pushforwardExchange_app_of_isProper_geometric (X' := traitStdSpecialFibre p)
-      (Y' := Over.mk (𝟙 (Spec (.of k')))) (M := M) (N := traitSelfModel k') ψ rfl hj.flip hi
-      B hB
+      (Y' := Over.mk (𝟙 (Spec (.of k')))) (M := M) (N := traitSelfModel k') ψ
+      (isTraitModel_traitStdModel _) (isTraitModel_traitSelfModel k') rfl hj.flip hi B hB
   have := (isTraitModel_traitSelfModel k').isNoetherian_total
   have h₁ : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ)
       (Spec (.of k')))
@@ -173,9 +173,9 @@ theorem boundedConstructible_nearbyCycles_affineSpace_of_locallyQuasiFinite_comp
     (c ≫ q) j p' hjp hK
   let φ := traitStdHom q hj hi c rfl
   have : IsIso ((φ.pushforwardExchange (Profinite.padicAlgClRingObj ℓ)).app K) :=
-    Hom.isIso_pushforwardExchange_app_of_isProper_geometric φ rfl
-      (isPullback_traitStdHom_generic q hj hi c rfl) (isPullback_traitStdHom_special q hi c rfl)
-      K hK
+    Hom.isIso_pushforwardExchange_app_of_isProper_geometric φ (isTraitModel_traitStdModel _)
+      (isTraitModel_affineSpaceModel n) rfl (isPullback_traitStdHom_generic q hj hi c rfl)
+      (isPullback_traitStdHom_special q hi c rfl) K hK
   have := isNoetherian_of_isTraitModel (isTraitModel_affineSpaceModel (k' := k') n)
   have := isClosedImmersion_traitStdSpecialHom q hi c rfl
   exact (boundedConstructible _).prop_of_iso
