@@ -11159,6 +11159,7 @@ public import WeilConjectures.EtaleCohomology.TateTwist.KummerClassTorsor
 public import WeilConjectures.EtaleCohomology.TateTwist.KummerLevelIndependence
 public import WeilConjectures.EtaleCohomology.TateTwist.Normalized
 public import WeilConjectures.EtaleCohomology.TateTwist.Preserves
+public import WeilConjectures.EtaleCohomology.TateTwist.ReductionTateSheafPowOne
 public import WeilConjectures.EtaleCohomology.TateTwist.ReductionTateTwistOne
 public import WeilConjectures.EtaleCohomology.TateTwist.RootsOfUnityPullback
 public import WeilConjectures.EtaleCohomology.TateTwist.Sheaf
@@ -15905,6 +15906,7 @@ public import WeilConjectures.SmoothPurity.OrientationTransitionReading
 public import WeilConjectures.SmoothPurity.OrientationTransitionShift
 public import WeilConjectures.SmoothPurity.OrientationTransitionSquares
 public import WeilConjectures.SmoothPurity.OrientationTransitionTate
+public import WeilConjectures.SmoothPurity.OrientationTransitionTateOne
 public import WeilConjectures.SmoothPurity.OrientationTransitionTateSquare
 public import WeilConjectures.SmoothPurity.OrientationTransitionTateStep
 public import WeilConjectures.SmoothPurity.OrientationTransitionTateZero

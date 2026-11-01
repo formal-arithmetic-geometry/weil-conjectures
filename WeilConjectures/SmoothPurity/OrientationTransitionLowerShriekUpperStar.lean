@@ -8,6 +8,9 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeUnitLowerStar
 public import WeilConjectures.SmoothPurity.OrientationTransitionLowerShriekPullback
 public import WeilConjectures.SmoothPurity.OrientationTransitionUpperStar
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReadingBaseChange
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReductionLowerShriekCanonical
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReductionUpperStarReading
 
 /-!
 # The reduction square for the pullbacks, and the proper piece of the reduction square for `Rf_!`
@@ -43,6 +46,99 @@ universe u
 open CategoryTheory Limits
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
+
+namespace CategoryTheory
+
+section MateOfNatIsoRight
+
+variable {C₁ C₂ D₁ D₂ : Type*} [Category* C₁] [Category* C₂] [Category* D₁] [Category* D₂]
+
+/-- The mate under an adjunction whose right adjoint is replaced by an isomorphic functor
+(`Adjunction.ofNatIsoRight`), against an unchanged adjunction: on `d`, it is `G` of the inverse
+of the isomorphism at `d`, followed by the mate under the original adjunction. -/
+lemma mateEquiv_ofNatIsoRight_left_app {G : C₁ ⥤ D₁} {H : C₂ ⥤ D₂} {L₁ : C₁ ⥤ C₂}
+    {R₁ R₁' : C₂ ⥤ C₁} {L₂ : D₁ ⥤ D₂} {R₂ : D₂ ⥤ D₁} (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)
+    (e : R₁ ≅ R₁') (α : TwoSquare G L₁ L₂ H) (d : C₂) :
+    (mateEquiv (adj₁.ofNatIsoRight e) adj₂ α).app d =
+      G.map (e.inv.app d) ≫ (mateEquiv adj₁ adj₂ α).app d := by
+  simp only [mateEquiv, Adjunction.ofNatIsoRight, Equiv.coe_fn_mk]
+  simp only [Functor.comp_obj, Functor.whiskerRight_comp, Functor.whiskerRight_twice,
+    Category.assoc, Iso.inv_hom_id_assoc, NatTrans.comp_app, Functor.id_obj,
+    Functor.rightUnitor_inv_app, Functor.whiskerLeft_app, Functor.associator_hom_app,
+    Functor.associator_inv_app, Functor.whiskerRight_app, Functor.comp_map,
+    Functor.leftUnitor_hom_app, Category.comp_id, Category.id_comp]
+  have h := α.natTrans.naturality (e.inv.app d)
+  simp only [Functor.comp_map] at h
+  rw [← adj₂.unit_naturality_assoc, ← R₂.map_comp_assoc, ← h, R₂.map_comp_assoc]
+
+end MateOfNatIsoRight
+
+section PastedMate
+
+universe v₁ v₂ v₃ v₄ v₅ v₆
+
+-- The category structures are implicit arguments, determined by unification with the explicit
+-- arguments rather than by instance search, so that instantiations reuse the instance terms of
+-- the given functors.
+variable {A₁ A₂ B₁ B₂ C₁ C₂ : Type*} {_ : Category.{v₁} A₁} {_ : Category.{v₂} A₂}
+  {_ : Category.{v₃} B₁} {_ : Category.{v₄} B₂} {_ : Category.{v₅} C₁} {_ : Category.{v₆} C₂}
+
+/-- **The mate of a pasted pullback comparison is the pasted pushforward comparison.** Let
+`c : L₁ ⋙ R_X ≅ R_Y ⋙ L` and `r : L ⋙ ρ_X ≅ ρ_Y ⋙ L₂` be comparisons of left adjoints
+`L₁ ⊣ R₀`, `L ⊣ R`, `L₂ ⊣ R₂`, with mates `γ : R₀ ⋙ R_Y ⟶ R_X ⋙ R` (invertible) and
+`δ : R ⋙ ρ_Y ≅ ρ_X ⋙ R₂`. Let `e : R₁ ≅ R₀`, `s : R₂' ≅ R₂`, and let `Φ` be the inverse of the
+horizontal paste of `γ⁻¹ ≫ e⁻¹` and of `δ` followed by `s⁻¹`. Then the mate of the paste `u` of
+`c` and `r` under `L₁ ⊣ R₁` (transported along `e`) and `L₂ ⊣ R₂` is `Φ` followed by `s`. -/
+theorem mateEquiv_inv_app_eq_hComp_inv_app {eR_Y : A₁ ⥤ C₁} {eR_X : A₂ ⥤ C₂} {L₁ : A₁ ⥤ A₂}
+    {R₀ R₁ : A₂ ⥤ A₁} (adj₀ : L₁ ⊣ R₀)
+    (e : R₁ ≅ R₀) {L : B₁ ⥤ B₂} {R : B₂ ⥤ B₁} (adj : L ⊣ R) {L₂ : C₁ ⥤ C₂} {R₂ R₂' : C₂ ⥤ C₁}
+    (adj₂ : L₂ ⊣ R₂) (s : R₂' ≅ R₂) {R_Y : A₁ ⥤ B₁} {R_X : A₂ ⥤ B₂} {ρ_Y : B₁ ⥤ C₁}
+    {ρ_X : B₂ ⥤ C₂} (c : L₁ ⋙ R_X ≅ R_Y ⋙ L) (r : L ⋙ ρ_X ≅ ρ_Y ⋙ L₂)
+    (γ : R₀ ⋙ R_Y ⟶ R_X ⋙ R) [IsIso γ] (hγ : mateEquiv adj₀ adj c.inv = γ)
+    (δ : R ⋙ ρ_Y ≅ ρ_X ⋙ R₂) (hδ : (mateEquiv adj adj₂ r.inv).natTrans = δ.hom)
+    (σ : R ⋙ ρ_Y ≅ ρ_X ⋙ R₂') (hσ : σ = δ ≪≫ Functor.isoWhiskerLeft ρ_X s.symm)
+    (hY : R_Y ⋙ ρ_Y = eR_Y) (hX : R_X ⋙ ρ_X = eR_X)
+    (Φ : R₁ ⋙ eR_Y ≅ eR_X ⋙ R₂')
+    (hΦ : HEq Φ.inv (TwoSquare.hComp
+      (TwoSquare.mk _ _ _ _ (inv γ ≫ Functor.whiskerRight e.inv R_Y))
+      (TwoSquare.mk _ _ _ _ σ.inv)).natTrans)
+    (u : L₁ ⋙ eR_X ≅ eR_Y ⋙ L₂)
+    (hu : HEq u (Functor.isoWhiskerRight c ρ_X ≪≫ Functor.isoWhiskerLeft R_Y r)) (K : A₂) :
+    (mateEquiv (adj₀.ofNatIsoRight e.symm) adj₂ u.inv).app K =
+      Φ.hom.app K ≫ s.hom.app (eR_X.obj K) := by
+  subst hX hY
+  replace hΦ := eq_of_heq hΦ
+  replace hu := eq_of_heq hu
+  have hpaste : u.inv =
+      TwoSquare.hComp (TwoSquare.mk _ _ _ _ c.inv) (TwoSquare.mk _ _ _ _ r.inv) := by
+    subst hu
+    ext K
+    simp only [Functor.comp_obj, Iso.trans_inv, Functor.isoWhiskerLeft_inv,
+      Functor.isoWhiskerRight_inv, NatTrans.comp_app, Functor.whiskerLeft_app,
+      Functor.whiskerRight_app, TwoSquare.hComp, Functor.associator_hom_app,
+      Functor.associator_inv_app, Category.comp_id, Category.id_comp]
+  refine (mateEquiv_ofNatIsoRight_left_app adj₀ adj₂ e.symm u.inv K).trans ?_
+  subst hσ
+  rw [hpaste, mateEquiv_vcomp adj₀ adj adj₂,
+    ← Iso.app_hom, ← Iso.inv_comp_eq, Iso.app_inv, hΦ]
+  generalize mateEquiv adj adj₂ (TwoSquare.mk _ _ _ _ r.inv) = m₂ at hδ ⊢
+  generalize mateEquiv adj₀ adj (TwoSquare.mk _ _ _ _ c.inv) = m₁ at hγ ⊢
+  subst hγ
+  obtain rfl : m₂ = δ.hom := hδ
+  simp only [Functor.comp_obj, TwoSquare.hComp, Iso.trans_inv, Functor.isoWhiskerLeft_inv,
+    Iso.symm_inv, Functor.whiskerLeft_comp, Functor.whiskerLeft_twice, Category.assoc,
+    Functor.whiskerRight_comp, Functor.whiskerRight_twice, Iso.inv_hom_id, Category.comp_id,
+    Iso.hom_inv_id_assoc, NatTrans.comp_app, Functor.whiskerLeft_app, Functor.associator_hom_app,
+    Functor.associator_inv_app, Functor.whiskerRight_app, Functor.comp_map, Category.id_comp,
+    TwoSquare.vComp]
+  simp only [← Functor.map_comp_assoc, Iso.inv_hom_id_app, Functor.map_id, Category.id_comp]
+  erw [NatIso.isIso_inv_app, IsIso.inv_hom_id]
+  simp only [Functor.map_id, Category.id_comp, Iso.inv_hom_id_app, Functor.comp_obj,
+    Category.comp_id]
+
+end PastedMate
+
+end CategoryTheory
 
 namespace AlgebraicGeometry.Etale
 
@@ -166,6 +262,9 @@ noncomputable abbrev boundedConstructibleUpperStarLowerShriekAdjunction_padicInt
   (PadicIntegersRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E p).ofNatIsoRight
     (boundedConstructibleLowerShriekIsoLowerStar_padicIntegers ℓ E p).symm
 
+-- unifying the categories of the generic lemma with those of the étale reductions (rather than
+-- with those of the adjunctions) needs a deeper recursion in the elaborator
+set_option maxRecDepth 20000 in
 /-- Blueprint `det-sp-purity-coefficient-change`: for a proper `p`, the canonical comparison
 `Rp_! ⋙ red ≅ red ⋙ Rp_!` (`etaleReductionLowerShriekIso`) followed by `Rp_! ≅ Rp_*` is the mate,
 under `p^* ⊣ Rp_!` and `Lp^* ⊣ Rp_*`, of the inverse of the pullback comparison
@@ -179,6 +278,26 @@ theorem mateEquiv_etaleReductionUpperStarIso_inv (m : ℕ)
       (etaleReductionUpperStarIso ℓ E m p).inv).app K =
     (etaleReductionLowerShriekIso ℓ E m p ≪≫ Functor.isoWhiskerLeft _
       (Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar _ p.left)).hom.app K := by
-  sorry
+  intro hc
+  have := isIso_boundedConstructibleLowerStarIntegersModPowReduction_of_compatible ℓ E m p
+    (integersModPowPullUnitCompatible ℓ E m p.left) (integersModPowPullδCompatible ℓ E m p.left)
+  rw [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app]
+  exact mateEquiv_inv_app_eq_hComp_inv_app
+    (R_Y := boundedConstructibleIntegersModPowReduction Y.left ℓ E m)
+    (R_X := boundedConstructibleIntegersModPowReduction X.left ℓ E m)
+    (ρ_Y := finiteEtaleReading ℓ E m Y) (ρ_X := finiteEtaleReading ℓ E m X)
+    (eR_Y := etaleReduction ℓ E m Y) (eR_X := etaleReduction ℓ E m X)
+    (PadicIntegersRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E p)
+    (boundedConstructibleLowerShriekIsoLowerStar_padicIntegers ℓ E p)
+    (IntegersModPowRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E m p)
+    (Etale.derivedUpperStarLowerStarAdjunction _ p.left)
+    (Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar _ p.left)
+    (boundedConstructibleUpperStarIntegersModPowReductionIso ℓ E m p)
+    (finiteEtaleReadingUpperStarIso ℓ E m p)
+    (boundedConstructibleLowerStarIntegersModPowReduction ℓ E m p) rfl
+    (finiteEtaleReadingLowerStarIso ℓ E m p) (mateEquiv_finiteEtaleReadingUpperStarIso_inv ℓ E m p)
+    (finiteEtaleReadingLowerShriekIso ℓ E m p) rfl rfl rfl (etaleReductionLowerShriekIso ℓ E m p)
+    (heq_of_eq rfl) (etaleReductionUpperStarIso ℓ E m p)
+    (heq_of_eq (etaleReductionUpperStarIso_eq ℓ E m p)) K
 
 end AlgebraicGeometry.ProEtale.CondensedRing
