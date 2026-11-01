@@ -32,6 +32,17 @@ abbrev Ring := pthRootAlgebra n r R t
 
 abbrev root (i : Fin r) : Ring t n := Ideal.Quotient.mk _ (MvPolynomial.X i)
 
+def lift {S : Type v} [CommRing S] [Algebra R S]
+    (x : Fin r → S) (hx : ∀ i, x i ^ n = algebraMap R S (t i)) : Ring t n →ₐ[R] S :=
+  Ideal.Quotient.liftₐ _ (MvPolynomial.aeval x) (by
+    have hle : Ideal.span (Set.range (fun j : Fin r ↦
+        MvPolynomial.X j ^ n - MvPolynomial.C (t j))) ≤
+        RingHom.ker (MvPolynomial.aeval x).toRingHom := by
+      apply Ideal.span_le.mpr
+      rintro _ ⟨i, rfl⟩
+      simpa using sub_eq_zero.mpr (hx i)
+    exact fun a ha ↦ hle ha)
+
 @[ext] theorem hom_ext {S : Type v} [CommRing S] [Algebra R S]
     {f g : Ring t n →ₐ[R] S} (h : ∀ i, f (root t n i) = g (root t n i)) : f = g := by
   apply Ideal.Quotient.algHom_ext R
