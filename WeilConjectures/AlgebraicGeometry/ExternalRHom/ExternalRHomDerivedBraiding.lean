@@ -33,5 +33,6 @@ private theorem braided_ofIso
 variable (C : Type u) [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{w} C]
   [HasDerivedCategory.{w} C] [MonoidalCategory C] [MonoidalClosed C]
   [MonoidalPreadditive C] [BraidedCategory C] [Abelian.HasFunctorialFlatResolution C]
-local instance : HasColimitsOfSize.{0, 0} C := hasColimitsOfSizeShrink C
+local instance externalRHomHasColimitsOfSize : HasColimitsOfSize.{0, 0} C :=
+  hasColimitsOfSizeShrink C
 attribute [local instance] DerivedCategory.braidedCategory'
