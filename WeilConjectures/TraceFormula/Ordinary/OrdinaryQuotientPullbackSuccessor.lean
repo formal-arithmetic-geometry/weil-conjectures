@@ -317,6 +317,8 @@ open OrdinarySuccessorProof
 attribute [local irreducible] integralOperationsPullbackGenerator
   unrestrictedIntegralTensorSection
 
+set_option maxHeartbeats 400000 in
+-- The generator-level computation through the pullback tower is expensive.
 /-- Normalized level comparisons intertwine the two actual successor maps.
 Source: Stacks sites-modules.tex, inverse-image adjunction (03D7), and
 sites-cohomology.tex, strict sequence limits (0941), applied to the finite

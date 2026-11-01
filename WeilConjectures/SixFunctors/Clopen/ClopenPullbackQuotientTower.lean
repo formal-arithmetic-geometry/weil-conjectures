@@ -22,6 +22,8 @@ Source: Stacks Project, sites-modules.tex, Tags 03D2 and 03D8.
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
+-- This instance has a free universe and leaves universe constraints stuck here.
+attribute [-instance] WeilConjectures.PrincipalKoszulStrictReplacement.siteSmall
 attribute [local irreducible] HasDerivedCategory.standard
 
 universe u
