@@ -363,6 +363,25 @@ import Mathlib.CategoryTheory.Yoneda
 import Mathlib.CategoryTheory.Generator.Basic
 import WeilConjectures.Algebra.Homology.RingedTensorCorner.ProjectionMateExact
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+public import Mathlib.Algebra.Polynomial.Roots
+public import Mathlib.Algebra.Ring.Hom.InjSurj
+public import Mathlib.CategoryTheory.Limits.Types.ColimitType
+public import Mathlib.CategoryTheory.Localization.CalculusOfFractions
+public import Mathlib.CategoryTheory.Products.Basic
+public import WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionRingIsoSupplement
+public import WeilConjectures.CategoryTheory.Diagram.DiagramSiteModuleEquivalence
+public import WeilConjectures.CategoryTheory.Diagram.DiagramSiteTopology
+public import WeilConjectures.CategoryTheory.Ringed.RingedEquivalenceSlices
+public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
+public import WeilConjectures.ProEtaleCoefficients.RingedStrictTowerHomotopyLimit
+public import WeilConjectures.ProperBaseChange.ConstantCompletionCore
+public import WeilConjectures.ProperBaseChange.ConstantCompletionOrdinaryPullComparison
+public import WeilConjectures.ProperBaseChange.FlatAlgebraicInverseImageOfUniverses
+public import WeilConjectures.ProperBaseChange.RingedTopoiDerivedPullback
+public import WeilConjectures.ProperBaseChange.RingedToposDerivedPushforwardComposition
+public import WeilConjectures.ProperBaseChange.RingedToposPullbackFilteredColimits
+public import WeilConjectures.SmoothPurity.ConstantCompletionOrdinaryFinitePullExistence
+public import WeilConjectures.SmoothPurity.HomComplexSectionsCochainsOfUniverses
 
 /-!
 # Strict quotient towers and the completed-adjunction mate
@@ -398,6 +417,463 @@ attribute [local irreducible] HasDerivedCategory.standard constantSheaf
 attribute [local irreducible] ConstantCompletion.quotientPresentation
   ConstantCompletion.strictLimit ConstantCompletion.derivedExtension ConstantCompletion.derivedPull
   ConstantCompletion.pull
+
+private abbrev rs (R : Sheaf J CommRingCat.{u}) :=
+  (sheafCompose J (forget CommRingCat.{u})).obj R
+
+private def acrossIso {L : Sheaf J (Type u) ⥤ Sheaf K (Type u)}
+    {R : Sheaf J CommRingCat.{u}} {S T : Sheaf K CommRingCat.{u}}
+    (a : SheafOfModules.AlgebraicInverseImage L R S) (c : S ≅ T) :
+    SheafOfModules.AlgebraicInverseImage L R T := by
+  let r := res c.inv
+  refine
+    { ringUnderlying := a.ringUnderlying ≪≫ (sheafCompose K (forget CommRingCat.{u})).mapIso c
+      modules := a.modules ⋙ r
+      moduleUnderlying := a.moduleUnderlying
+      ringAdd := ?_, ringMul := ?_, ringZero := ?_, ringOne := ?_
+      moduleAdd := ?_, moduleZero := ?_, moduleSMul := ?_ }
+  · intro X x y z h U t
+    exact (congrArg (c.hom.hom.app U) (a.ringAdd X x y z h U t)).trans
+      ((c.hom.hom.app U).hom.map_add _ _)
+  · intro X x y z h U t
+    exact (congrArg (c.hom.hom.app U) (a.ringMul X x y z h U t)).trans
+      ((c.hom.hom.app U).hom.map_mul _ _)
+  · intro X x h U t
+    exact (congrArg (c.hom.hom.app U) (a.ringZero X x h U t)).trans
+      ((c.hom.hom.app U).hom.map_zero)
+  · intro X x h U t
+    exact (congrArg (c.hom.hom.app U) (a.ringOne X x h U t)).trans
+      ((c.hom.hom.app U).hom.map_one)
+  · intro M X x y z h U t
+    exact a.moduleAdd M X x y z h U t
+  · intro M X x h U t
+    exact a.moduleZero M X x h U t
+  · intro M X x y z h U t
+    have ht := a.moduleSMul M X x y z h U t
+    change _ = @SMul.smul
+      (((sheafCompose K (forget₂ CommRingCat.{u} RingCat.{u})).obj S).obj.obj U)
+      ((a.modules.obj M).val.obj U) inferInstance
+      (c.inv.hom.app U (c.hom.hom.app U _)) _
+    have hc (s : S.obj.obj U) : c.inv.hom.app U (c.hom.hom.app U s) = s :=
+      ConcreteCategory.congr_hom (congrArg (fun f ↦ f.hom.app U) c.hom_inv_id) s
+    erw [hc]
+    exact ht
+
+private def algebraComp
+    {L : Sheaf J (Type u) ⥤ Sheaf K (Type u)}
+    {L' : Sheaf K (Type u) ⥤ Sheaf H (Type u)}
+    {R : Sheaf J CommRingCat.{u}} {S : Sheaf K CommRingCat.{u}}
+    {T : Sheaf H CommRingCat.{u}}
+    (a : SheafOfModules.AlgebraicInverseImage L R S)
+    (b : SheafOfModules.AlgebraicInverseImage L' S T) :
+    SheafOfModules.AlgebraicInverseImage (L ⋙ L') R T := by
+  refine
+    { ringUnderlying := L'.mapIso a.ringUnderlying ≪≫ b.ringUnderlying
+      modules := a.modules ⋙ b.modules
+      moduleUnderlying := Functor.isoWhiskerLeft a.modules b.moduleUnderlying ≪≫
+        Functor.isoWhiskerRight a.moduleUnderlying L'
+      ringAdd := ?_, ringMul := ?_, ringZero := ?_, ringOne := ?_
+      moduleAdd := ?_, moduleZero := ?_, moduleSMul := ?_ }
+  · intro X x y z h U t
+    simpa only [Functor.comp_map, Functor.comp_obj, Iso.trans_hom, Functor.mapIso_hom,
+      ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app, types_comp_apply,
+      Functor.map_comp]
+      using b.ringAdd (L.obj X) (L.map x ≫ a.ringUnderlying.hom)
+        (L.map y ≫ a.ringUnderlying.hom) (L.map z ≫ a.ringUnderlying.hom)
+        (a.ringAdd X x y z h) U t
+  · intro X x y z h U t
+    simpa only [Functor.comp_map, Functor.comp_obj, Iso.trans_hom, Functor.mapIso_hom,
+      ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app, types_comp_apply,
+      Functor.map_comp]
+      using b.ringMul (L.obj X) (L.map x ≫ a.ringUnderlying.hom)
+        (L.map y ≫ a.ringUnderlying.hom) (L.map z ≫ a.ringUnderlying.hom)
+        (a.ringMul X x y z h) U t
+  · intro X x h U t
+    simpa only [Functor.comp_map, Functor.comp_obj, Iso.trans_hom, Functor.mapIso_hom,
+      ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app, types_comp_apply,
+      Functor.map_comp]
+      using b.ringZero (L.obj X) (L.map x ≫ a.ringUnderlying.hom)
+        (a.ringZero X x h) U t
+  · intro X x h U t
+    simpa only [Functor.comp_map, Functor.comp_obj, Iso.trans_hom, Functor.mapIso_hom,
+      ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app, types_comp_apply,
+      Functor.map_comp]
+      using b.ringOne (L.obj X) (L.map x ≫ a.ringUnderlying.hom)
+        (a.ringOne X x h) U t
+  · intro M X x y z h U t
+    simpa only [Functor.comp_map, Functor.comp_obj, Iso.trans_inv,
+      Functor.isoWhiskerRight_inv, Functor.isoWhiskerLeft_inv, NatTrans.comp_app,
+      Functor.whiskerRight_app, Functor.whiskerLeft_app, ObjectProperty.FullSubcategory.comp_hom,
+      types_comp_apply, Functor.map_comp]
+      using b.moduleAdd (a.modules.obj M) (L.obj X)
+        (L.map x ≫ a.moduleUnderlying.inv.app M)
+        (L.map y ≫ a.moduleUnderlying.inv.app M)
+        (L.map z ≫ a.moduleUnderlying.inv.app M) (a.moduleAdd M X x y z h) U t
+  · intro M X x h U t
+    simpa only [Functor.comp_map, Functor.comp_obj, Iso.trans_inv,
+      Functor.isoWhiskerRight_inv, Functor.isoWhiskerLeft_inv, NatTrans.comp_app,
+      Functor.whiskerRight_app, Functor.whiskerLeft_app, ObjectProperty.FullSubcategory.comp_hom,
+      types_comp_apply, Functor.map_comp]
+      using b.moduleZero (a.modules.obj M) (L.obj X)
+        (L.map x ≫ a.moduleUnderlying.inv.app M) (a.moduleZero M X x h) U t
+  · intro M X x y z h U t
+    simpa only [Functor.comp_map, Functor.comp_obj, Iso.trans_inv, Iso.trans_hom,
+      Functor.mapIso_hom, Functor.isoWhiskerRight_inv, Functor.isoWhiskerLeft_inv,
+      NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+      ObjectProperty.FullSubcategory.comp_hom, types_comp_apply, Functor.map_comp]
+      using b.moduleSMul (a.modules.obj M) (L.obj X)
+        (L.map x ≫ a.ringUnderlying.hom) (L.map y ≫ a.moduleUnderlying.inv.app M)
+        (L.map z ≫ a.moduleUnderlying.inv.app M) (a.moduleSMul M X x y z h) U t
+
+private abbrev rb (R : Sheaf J CommRingCat.{u}) :=
+  (sheafCompose J (forget₂ CommRingCat.{u} RingCat)).obj R
+
+private theorem algebra_ringAdd
+    {L : Sheaf J (Type u) ⥤ Sheaf K (Type u)}
+    {R : Sheaf J CommRingCat.{u}} {S : Sheaf K CommRingCat.{u}}
+    (a : SheafOfModules.AlgebraicInverseImage L R S) :
+    L.map (CategoryTheory.ringAdd (rb R)) ≫ a.ringUnderlying.hom =
+      CartesianMonoidalCategory.lift
+        (L.map (CartesianMonoidalCategory.fst _ _) ≫ a.ringUnderlying.hom)
+        (L.map (CartesianMonoidalCategory.snd _ _) ≫ a.ringUnderlying.hom) ≫
+          CategoryTheory.ringAdd (rb S) := by
+  ext U x
+  exact a.ringAdd _ _ _ _ (fun _ _ ↦ rfl) U x
+
+private theorem algebra_ringMul
+    {L : Sheaf J (Type u) ⥤ Sheaf K (Type u)}
+    {R : Sheaf J CommRingCat.{u}} {S : Sheaf K CommRingCat.{u}}
+    (a : SheafOfModules.AlgebraicInverseImage L R S) :
+    L.map (CategoryTheory.ringMul (rb R)) ≫ a.ringUnderlying.hom =
+      CartesianMonoidalCategory.lift
+        (L.map (CartesianMonoidalCategory.fst _ _) ≫ a.ringUnderlying.hom)
+        (L.map (CartesianMonoidalCategory.snd _ _) ≫ a.ringUnderlying.hom) ≫
+          CategoryTheory.ringMul (rb S) := by
+  ext U x
+  exact a.ringMul _ _ _ _ (fun _ _ ↦ rfl) U x
+
+private def ringConj
+    {L L' : Sheaf J (Type u) ⥤ Sheaf K (Type u)} [PreservesFiniteLimits L]
+    (e : L ≅ L') {R : Sheaf J CommRingCat.{u}} {S : Sheaf K CommRingCat.{u}}
+    (a : SheafOfModules.AlgebraicInverseImage L R S)
+    (b : SheafOfModules.AlgebraicInverseImage L' R S) : S ⟶ S := by
+  let t := a.ringUnderlying.symm ≪≫ e.app (rs R) ≪≫ b.ringUnderlying
+  have ha := CategoryTheory.compare_binary L L' e
+    a.ringUnderlying a.ringUnderlying a.ringUnderlying
+    b.ringUnderlying b.ringUnderlying b.ringUnderlying
+    (CategoryTheory.ringAdd (rb R)) (CategoryTheory.ringAdd (rb S))
+    (CategoryTheory.ringAdd (rb S)) (algebra_ringAdd a) (algebra_ringAdd b)
+  have hm := CategoryTheory.compare_binary L L' e
+    a.ringUnderlying a.ringUnderlying a.ringUnderlying
+    b.ringUnderlying b.ringUnderlying b.ringUnderlying
+    (CategoryTheory.ringMul (rb R)) (CategoryTheory.ringMul (rb S))
+    (CategoryTheory.ringMul (rb S)) (algebra_ringMul a) (algebra_ringMul b)
+  have hone (U : Dᵒᵖ) : t.hom.hom.app U (1 : S.obj.obj U) = (1 : S.obj.obj U) := by
+    let x : rs R ⟶ rs R :=
+      ⟨{ app U := ↾fun _ ↦ (1 : R.obj.obj U)
+         naturality := by intro V W f; ext z; exact ((R.obj.map f).hom.map_one).symm }⟩
+    let z := a.ringUnderlying.inv.hom.app U (0 : S.obj.obj U)
+    have hA : a.ringUnderlying.hom.hom.app U ((L.map x).hom.app U z) =
+        (1 : S.obj.obj U) := a.ringOne (rs R) x (fun _ _ ↦ rfl) U z
+    have hB := b.ringOne (rs R) x (fun _ _ ↦ rfl) U
+      ((e.hom.app (rs R)).hom.app U z)
+    have hn : (e.hom.app (rs R)).hom.app U ((L.map x).hom.app U z) =
+        (L'.map x).hom.app U ((e.hom.app (rs R)).hom.app U z) :=
+      congrArg (fun f ↦ f.hom.app U z) (e.hom.naturality x)
+    have hh : a.ringUnderlying.inv.hom.app U
+        (a.ringUnderlying.hom.hom.app U ((L.map x).hom.app U z)) =
+        (L.map x).hom.app U z :=
+      congrArg (fun f ↦ f.hom.app U ((L.map x).hom.app U z))
+        a.ringUnderlying.hom_inv_id
+    have hA' : a.ringUnderlying.inv.hom.app U (1 : S.obj.obj U) =
+        (L.map x).hom.app U z := by
+      rw [← hA]
+      exact hh
+    change b.ringUnderlying.hom.hom.app U
+      ((e.hom.app (rs R)).hom.app U (a.ringUnderlying.inv.hom.app U
+        (1 : S.obj.obj U))) = (1 : S.obj.obj U)
+    rw [hA', hn]
+    exact hB
+  refine ⟨{
+    app U := CommRingCat.ofHom
+      { toFun := t.hom.hom.app U
+        map_one' := hone U
+        map_mul' := by
+          intro x y
+          change (show S.obj.obj U from t.hom.hom.app U (x * y)) =
+            (show S.obj.obj U from t.hom.hom.app U x) *
+              (show S.obj.obj U from t.hom.hom.app U y)
+          exact congrArg (fun f ↦ f.hom.app U (x, y)) hm
+        map_zero' := ?_
+        map_add' := by
+          intro x y
+          change (show S.obj.obj U from t.hom.hom.app U (x + y)) =
+            (show S.obj.obj U from t.hom.hom.app U x) +
+              (show S.obj.obj U from t.hom.hom.app U y)
+          exact congrArg (fun f ↦ f.hom.app U (x, y)) ha }
+    naturality := ?_ }⟩
+  · have hz := congrArg (fun f ↦ f.hom.app U ((0 : S.obj.obj U), (0 : S.obj.obj U))) ha
+    change (show S.obj.obj U from t.hom.hom.app U ((0 : S.obj.obj U) + (0 : S.obj.obj U))) =
+      (show S.obj.obj U from t.hom.hom.app U (0 : S.obj.obj U)) +
+        (show S.obj.obj U from t.hom.hom.app U (0 : S.obj.obj U)) at hz
+    rw [zero_add] at hz
+    exact add_eq_left.mp hz.symm
+  · intro U V f
+    ext x
+    exact CategoryTheory.congr_fun (t.hom.hom.naturality f) x
+
+private theorem algebra_moduleAdd
+    {L : Sheaf J (Type u) ⥤ Sheaf K (Type u)}
+    {R : Sheaf J CommRingCat.{u}} {S : Sheaf K CommRingCat.{u}}
+    (a : SheafOfModules.AlgebraicInverseImage L R S) (M : Mod R) :
+    L.map (CategoryTheory.moduleAdd M) ≫ a.moduleUnderlying.inv.app M =
+      CartesianMonoidalCategory.lift
+        (L.map (CartesianMonoidalCategory.fst _ _) ≫ a.moduleUnderlying.inv.app M)
+        (L.map (CartesianMonoidalCategory.snd _ _) ≫ a.moduleUnderlying.inv.app M) ≫
+          CategoryTheory.moduleAdd (a.modules.obj M) := by
+  ext U x
+  exact a.moduleAdd M _ _ _ _ (fun _ _ ↦ rfl) U x
+
+private theorem algebra_moduleSMul
+    {L : Sheaf J (Type u) ⥤ Sheaf K (Type u)}
+    {R : Sheaf J CommRingCat.{u}} {S : Sheaf K CommRingCat.{u}}
+    (a : SheafOfModules.AlgebraicInverseImage L R S) (M : Mod R) :
+    L.map (CategoryTheory.moduleSMul M) ≫ a.moduleUnderlying.inv.app M =
+      CartesianMonoidalCategory.lift
+        (L.map (CartesianMonoidalCategory.fst _ _) ≫ a.ringUnderlying.hom)
+        (L.map (CartesianMonoidalCategory.snd _ _) ≫ a.moduleUnderlying.inv.app M) ≫
+          CategoryTheory.moduleSMul (a.modules.obj M) := by
+  ext U x
+  exact a.moduleSMul M _ _ _ _ (fun _ _ ↦ rfl) U x
+
+private def algebraIso
+    {L L' : Sheaf J (Type u) ⥤ Sheaf K (Type u)} [PreservesFiniteLimits L]
+    (e : L ≅ L') {R : Sheaf J CommRingCat.{u}} {S : Sheaf K CommRingCat.{u}}
+    (a : SheafOfModules.AlgebraicInverseImage L R S)
+    (b : SheafOfModules.AlgebraicInverseImage L' R S)
+    (hr : a.ringUnderlying.inv ≫ e.hom.app (rs R) ≫ b.ringUnderlying.hom = 𝟙 _) :
+    a.modules ≅ b.modules := by
+  let z : a.modules ⋙ underlying S ≅ b.modules ⋙ underlying S :=
+    a.moduleUnderlying ≪≫ Functor.isoWhiskerLeft (underlying R) e ≪≫ b.moduleUnderlying.symm
+  have ha (M : Mod R) := CategoryTheory.compare_binary L L' e
+    (a.moduleUnderlying.app M).symm (a.moduleUnderlying.app M).symm
+    (a.moduleUnderlying.app M).symm
+    (b.moduleUnderlying.app M).symm (b.moduleUnderlying.app M).symm
+    (b.moduleUnderlying.app M).symm
+    (CategoryTheory.moduleAdd M) (CategoryTheory.moduleAdd (a.modules.obj M))
+    (CategoryTheory.moduleAdd (b.modules.obj M)) (algebra_moduleAdd a M) (algebra_moduleAdd b M)
+  have hs (M : Mod R) := CategoryTheory.compare_binary L L' e
+    a.ringUnderlying (a.moduleUnderlying.app M).symm (a.moduleUnderlying.app M).symm
+    b.ringUnderlying (b.moduleUnderlying.app M).symm (b.moduleUnderlying.app M).symm
+    (CategoryTheory.moduleSMul M) (CategoryTheory.moduleSMul (a.modules.obj M))
+    (CategoryTheory.moduleSMul (b.modules.obj M))
+    (algebra_moduleSMul a M) (algebra_moduleSMul b M)
+  have hs' (M : Mod R) : CategoryTheory.moduleSMul (a.modules.obj M) ≫ z.hom.app M =
+      (𝟙 _ ⊗ₘ z.hom.app M) ≫ CategoryTheory.moduleSMul (b.modules.obj M) := by
+    have hv := hs M
+    change CategoryTheory.moduleSMul (a.modules.obj M) ≫ z.hom.app M =
+      ((a.ringUnderlying.inv ≫ e.hom.app (rs R) ≫ b.ringUnderlying.hom) ⊗ₘ
+        z.hom.app M) ≫ CategoryTheory.moduleSMul (b.modules.obj M) at hv
+    rw [hr] at hv
+    exact hv
+  refine NatIso.ofComponents (fun M ↦ CategoryTheory.liftModuleIso (z.app M) ?_ ?_) ?_
+  · intro U x y
+    exact congrArg (fun f ↦ f.hom.app U (x, y)) (ha M)
+  · intro U r x
+    exact congrArg (fun f ↦ f.hom.app U (r, x)) (hs' M)
+  · intro M N f
+    ext U x
+    exact congrArg (fun h ↦ h.hom.app U x) (z.hom.naturality f)
+
+private theorem constantRingNatEnd_id
+    (t : ∀ A : CommRingCat.{u}, (constantSheaf K CommRingCat.{u}).obj A ⟶
+      (constantSheaf K CommRingCat.{u}).obj A)
+    (ht : ∀ {A B : CommRingCat.{u}} (f : A ⟶ B),
+      (constantSheaf K CommRingCat.{u}).map f ≫ t B =
+        t A ≫ (constantSheaf K CommRingCat.{u}).map f) (A : CommRingCat.{u}) :
+    t A = 𝟙 _ := by
+  apply ((sheafificationAdjunction K CommRingCat.{u}).homEquiv
+    ((Functor.const Dᵒᵖ).obj A) ((constantSheaf K CommRingCat.{u}).obj A)).injective
+  erw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
+  apply NatTrans.ext
+  funext U
+  let α (B : CommRingCat.{u}) : B ⟶
+      ((constantSheaf K CommRingCat.{u}).obj B).obj.obj U :=
+    (toSheafify K ((Functor.const Dᵒᵖ).obj B)).app U ≫ (t B).hom.app U
+  have hα {B F : CommRingCat.{u}} (f : B ⟶ F) :
+      f ≫ α F = α B ≫ ((constantSheaf K CommRingCat.{u}).map f).hom.app U := by
+      let ηB : B ⟶ ((constantSheaf K CommRingCat.{u}).obj B).obj.obj U :=
+        (toSheafify K ((Functor.const Dᵒᵖ).obj B)).app U
+      let ηF : F ⟶ ((constantSheaf K CommRingCat.{u}).obj F).obj.obj U :=
+        (toSheafify K ((Functor.const Dᵒᵖ).obj F)).app U
+      have hn := NatTrans.congr_app
+        (toSheafify_naturality K ((Functor.const Dᵒᵖ).map f)) U
+      change f ≫ ηF = ηB ≫ ((constantSheaf K CommRingCat.{u}).map f).hom.app U at hn
+      have hh := NatTrans.congr_app (congrArg
+        (fun (r : (constantSheaf K CommRingCat.{u}).obj B ⟶
+          (constantSheaf K CommRingCat.{u}).obj F) ↦ r.hom) (ht f)) U
+      change ((constantSheaf K CommRingCat.{u}).map f).hom.app U ≫ (t F).hom.app U =
+        (t B).hom.app U ≫ ((constantSheaf K CommRingCat.{u}).map f).hom.app U at hh
+      dsimp only [α]
+      erw [← Category.assoc]
+      change (f ≫ ηF) ≫ (t F).hom.app U =
+        (ηB ≫ (t B).hom.app U) ≫ ((constantSheaf K CommRingCat.{u}).map f).hom.app U
+      rw [hn, Category.assoc, hh, ← Category.assoc]
+  have h := constantRingSectionRigidity K U α (fun f ↦ hα f) A
+  change α A = (toSheafify K ((Functor.const Dᵒᵖ).obj A)).app U ≫ 𝟙 _
+  simpa only [Category.comp_id] using h
+
+private theorem acrossIsoComparison
+    {L : Sheaf J (Type u) ⥤ Sheaf K (Type u)}
+    (F : InverseImageData L) {R : Sheaf J CommRingCat.{u}}
+    {S : Sheaf K CommRingCat.{u}} (c : F.rings.obj R ≅ S) :
+    ∃ e : pull F c.hom ≅ (acrossIso (F.algebra R) c).modules,
+      ∀ M, pullInsertion F c.hom M ≫ (underlying S).map (e.hom.app M) =
+        (F.algebra R).moduleUnderlying.inv.app M := by
+  obtain ⟨θ, hθ, hθinv, hθnat⟩ :=
+    SheafOfModules.exists_scalarExtensionRingIso.{u, u, u, u} c
+  let e : pull F c.hom ≅ (acrossIso (F.algebra R) c).modules :=
+    NatIso.ofComponents (fun M ↦ θ ((F.algebra R).modules.obj M))
+      (fun f ↦ hθnat _ _ ((F.algebra R).modules.map f))
+  refine ⟨e, ?_⟩
+  intro M
+  rw [pullInsertion]
+  have hi : insertion c.hom ((F.algebra R).modules.obj M) =
+      (underlying S).map ((θ ((F.algebra R).modules.obj M)).inv) := by
+    apply (insertion_existsUnique c.hom _).unique
+      (insertion_existsUnique c.hom _).exists.choose_spec
+    intro U x
+    exact hθinv _ U x
+  change (F.algebra R).moduleUnderlying.inv.app M ≫
+      (insertion c.hom ((F.algebra R).modules.obj M) ≫
+        (underlying S).map ((θ ((F.algebra R).modules.obj M)).hom)) = _
+  erw [hi, ← (underlying S).map_comp, Iso.inv_hom_id, Functor.map_id, Category.comp_id]
+
+private theorem constantAlgebraSquare
+    {L L' : Sheaf J (Type u) ⥤ Sheaf K (Type u)} [PreservesFiniteLimits L]
+    (e : L ≅ L')
+    (a : ∀ A : CommRingCat.{u}, SheafOfModules.AlgebraicInverseImage L
+      ((constantSheaf J CommRingCat.{u}).obj A) ((constantSheaf K CommRingCat.{u}).obj A))
+    (b : ∀ A : CommRingCat.{u}, SheafOfModules.AlgebraicInverseImage L'
+      ((constantSheaf J CommRingCat.{u}).obj A) ((constantSheaf K CommRingCat.{u}).obj A))
+    (ha : ∀ {A B : CommRingCat.{u}} (f : A ⟶ B),
+      L.map ((sheafCompose J (forget CommRingCat.{u})).map
+        ((constantSheaf J CommRingCat.{u}).map f)) ≫ (a B).ringUnderlying.hom =
+      (a A).ringUnderlying.hom ≫ (sheafCompose K (forget CommRingCat.{u})).map
+        ((constantSheaf K CommRingCat.{u}).map f))
+    (hb : ∀ {A B : CommRingCat.{u}} (f : A ⟶ B),
+      L'.map ((sheafCompose J (forget CommRingCat.{u})).map
+        ((constantSheaf J CommRingCat.{u}).map f)) ≫ (b B).ringUnderlying.hom =
+      (b A).ringUnderlying.hom ≫ (sheafCompose K (forget CommRingCat.{u})).map
+        ((constantSheaf K CommRingCat.{u}).map f)) (A : CommRingCat.{u}) :
+    ∃ z : (a A).modules ≅ (b A).modules,
+      ∀ M, (a A).moduleUnderlying.inv.app M ≫
+          (underlying ((constantSheaf K CommRingCat.{u}).obj A)).map (z.hom.app M) =
+        e.hom.app ((underlying ((constantSheaf J CommRingCat.{u}).obj A)).obj M) ≫
+          (b A).moduleUnderlying.inv.app M := by
+  let t (B : CommRingCat.{u}) :
+      (constantSheaf K CommRingCat.{u}).obj B ⟶ (constantSheaf K CommRingCat.{u}).obj B :=
+    ringConj e (a B) (b B)
+  have ht {B F : CommRingCat.{u}} (f : B ⟶ F) :
+      (constantSheaf K CommRingCat.{u}).map f ≫ t F =
+        t B ≫ (constantSheaf K CommRingCat.{u}).map f := by
+    apply (sheafCompose K (forget CommRingCat.{u})).map_injective
+    apply (cancel_epi (a B).ringUnderlying.hom).mp
+    simp only [Functor.map_comp]
+    change (a B).ringUnderlying.hom ≫ _ ≫
+        ((a F).ringUnderlying.inv ≫ e.hom.app _ ≫ (b F).ringUnderlying.hom) =
+      (a B).ringUnderlying.hom ≫
+        ((a B).ringUnderlying.inv ≫ e.hom.app _ ≫ (b B).ringUnderlying.hom) ≫ _
+    rw [← Category.assoc, ← ha f]
+    simp only [Category.assoc, Iso.hom_inv_id_assoc]
+    rw [e.hom.naturality_assoc]
+    rw [← hb f]
+  have hr : (a A).ringUnderlying.inv ≫ e.hom.app _ ≫ (b A).ringUnderlying.hom = 𝟙 _ :=
+    congrArg ((sheafCompose K (forget CommRingCat.{u})).map) (constantRingNatEnd_id t ht A)
+  refine ⟨algebraIso e (a A) (b A) hr, ?_⟩
+  intro M
+  simp only [algebraIso, NatIso.ofComponents_hom_app, CategoryTheory.liftModuleIso,
+    CategoryTheory.liftModuleMap]
+  change (a A).moduleUnderlying.inv.app M ≫
+      ((a A).moduleUnderlying.hom.app M ≫ e.hom.app _ ≫
+        (b A).moduleUnderlying.inv.app M) = _
+  simp only [← Category.assoc, Iso.inv_hom_id_app, Category.id_comp]
+
+private def constantAlgebra
+    {L : Sheaf J (Type u) ⥤ Sheaf K (Type u)} (F : InverseImageData L)
+    (A : CommRingCat.{u}) :
+    SheafOfModules.AlgebraicInverseImage L (constant J A) (constant K A) :=
+  acrossIso (F.algebra (constant J A)) (F.constants.app A)
+
+private theorem constantAlgebra_naturality
+    {L : Sheaf J (Type u) ⥤ Sheaf K (Type u)} (F : InverseImageData L)
+    {A B : CommRingCat.{u}} (f : A ⟶ B) :
+    L.map ((sheafCompose J (forget CommRingCat.{u})).map
+        ((constantSheaf J CommRingCat.{u}).map f)) ≫ (constantAlgebra F B).ringUnderlying.hom =
+      (constantAlgebra F A).ringUnderlying.hom ≫
+        (sheafCompose K (forget CommRingCat.{u})).map
+          ((constantSheaf K CommRingCat.{u}).map f) := by
+  change L.map _ ≫ ((F.algebra _).ringUnderlying.hom ≫ _) =
+    ((F.algebra _).ringUnderlying.hom ≫ _) ≫ _
+  rw [← Category.assoc, F.ring_naturality]
+  simp only [Category.assoc]
+  exact congrArg (fun t ↦ (F.algebra _).ringUnderlying.hom ≫
+    (sheafCompose K (forget CommRingCat.{u})).map t) (F.constants.hom.naturality f)
+
+private theorem algebraComp_naturality
+    {L : Sheaf J (Type u) ⥤ Sheaf K (Type u)}
+    {L' : Sheaf K (Type u) ⥤ Sheaf H (Type u)}
+    (F : InverseImageData L) (G : InverseImageData L')
+    {A B : CommRingCat.{u}} (f : A ⟶ B) :
+    (L ⋙ L').map ((sheafCompose J (forget CommRingCat.{u})).map
+        ((constantSheaf J CommRingCat.{u}).map f)) ≫
+        (algebraComp (constantAlgebra F B) (constantAlgebra G B)).ringUnderlying.hom =
+      (algebraComp (constantAlgebra F A) (constantAlgebra G A)).ringUnderlying.hom ≫
+        (sheafCompose H (forget CommRingCat.{u})).map
+          ((constantSheaf H CommRingCat.{u}).map f) := by
+  change L'.map (L.map _) ≫ (L'.map _ ≫ _) = (L'.map _ ≫ _) ≫ _
+  rw [← Category.assoc, ← L'.map_comp, constantAlgebra_naturality F f, L'.map_comp]
+  simp only [Category.assoc]
+  rw [constantAlgebra_naturality G f]
+
+private theorem pullInsertion_naturality
+    {L : Sheaf J (Type u) ⥤ Sheaf K (Type u)} (F : InverseImageData L)
+    {R : Sheaf J CommRingCat.{u}} {S : Sheaf K CommRingCat.{u}}
+    (c : F.rings.obj R ⟶ S) {M N : Mod R} (f : M ⟶ N) :
+    pullInsertion F c M ≫ (underlying S).map ((pull F c).map f) =
+      L.map ((underlying R).map f) ≫ pullInsertion F c N := by
+  rw [pullInsertion, pullInsertion]
+  change (F.algebra R).moduleUnderlying.inv.app M ≫
+      ((insertion c ((F.algebra R).modules.obj M)) ≫
+        (underlying S).map ((change c).map ((F.algebra R).modules.map f))) = _
+  rw [finiteInsertion_naturality]
+  erw [← Category.assoc, ← (F.algebra R).moduleUnderlying.inv.naturality f]
+  rfl
+
+private theorem comp_normalization
+    {L : Sheaf J (Type u) ⥤ Sheaf K (Type u)}
+    {L' : Sheaf K (Type u) ⥤ Sheaf H (Type u)}
+    (F : InverseImageData L) (G : InverseImageData L') (A : CommRingCat.{u})
+    (eF : pull F (constantMap F A) ≅ (constantAlgebra F A).modules)
+    (hF : ∀ M, pullInsertion F (constantMap F A) M ≫
+        (underlying (constant K A)).map (eF.hom.app M) =
+      (F.algebra (constant J A)).moduleUnderlying.inv.app M)
+    (eG : pull G (constantMap G A) ≅ (constantAlgebra G A).modules)
+    (hG : ∀ M, pullInsertion G (constantMap G A) M ≫
+        (underlying (constant H A)).map (eG.hom.app M) =
+      (G.algebra (constant K A)).moduleUnderlying.inv.app M) (M : Mod (constant J A)) :
+    L'.map (pullInsertion F (constantMap F A) M) ≫
+        pullInsertion G (constantMap G A) ((pull F (constantMap F A)).obj M) ≫
+        (underlying (constant H A)).map
+          (((Functor.isoWhiskerRight eF (pull G (constantMap G A))) ≪≫
+            Functor.isoWhiskerLeft (constantAlgebra F A).modules eG).hom.app M) =
+      (algebraComp (constantAlgebra F A) (constantAlgebra G A)).moduleUnderlying.inv.app M := by
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+    Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    Functor.map_comp]
+  erw [reassoc_of% (pullInsertion_naturality G (constantMap G A) (eF.hom.app M)), hG]
+  erw [← Category.assoc, ← L'.map_comp, hF]
+  rfl
 
 /-- A small site, with its given topology.
 Source: Stacks 099M (blueprint: lem-sp-completion-mate-comparison). -/
@@ -855,7 +1331,89 @@ theorem moduleSquare_existsUnique
     (sq : Square f g h k) (A : Type u) [CommRing A] :
     ∃! e : g.modulePull A ⋙ k.modulePull A ≅ f.modulePull A ⋙ h.modulePull A,
       moduleSquare_normalized sq A e := by
-  sorry
+  let B := CommRingCat.of A
+  let ag (B : CommRingCat.{u}) := constantAlgebra g.algebra B
+  let ak (B : CommRingCat.{u}) := constantAlgebra k.algebra B
+  let af (B : CommRingCat.{u}) := constantAlgebra f.algebra B
+  let ah (B : CommRingCat.{u}) := constantAlgebra h.algebra B
+  obtain ⟨eg, heg⟩ := acrossIsoComparison g.algebra (g.algebra.constants.app B)
+  obtain ⟨ek, hek⟩ := acrossIsoComparison k.algebra (k.algebra.constants.app B)
+  obtain ⟨ef, hef⟩ := acrossIsoComparison f.algebra (f.algebra.constants.app B)
+  obtain ⟨eh, heh⟩ := acrossIsoComparison h.algebra (h.algebra.constants.app B)
+  let el : g.modulePull A ⋙ k.modulePull A ≅ (algebraComp (ag B) (ak B)).modules :=
+    Functor.isoWhiskerRight eg (k.modulePull A) ≪≫ Functor.isoWhiskerLeft (ag B).modules ek
+  let er : f.modulePull A ⋙ h.modulePull A ≅ (algebraComp (af B) (ah B)).modules :=
+    Functor.isoWhiskerRight ef (h.modulePull A) ≪≫ Functor.isoWhiskerLeft (af B).modules eh
+  obtain ⟨z, hz⟩ := constantAlgebraSquare sq
+    (fun F ↦ algebraComp (ag F) (ak F)) (fun F ↦ algebraComp (af F) (ah F))
+    (fun v ↦ algebraComp_naturality g.algebra k.algebra v)
+    (fun v ↦ algebraComp_naturality f.algebra h.algebra v) B
+  let e := el ≪≫ z ≪≫ er.symm
+  have hl (M : Y.modules A) :
+      k.inverse.map (pullInsertion g.algebra (constantMap g.algebra A) M) ≫
+        pullInsertion k.algebra (constantMap k.algebra A) ((g.modulePull A).obj M) ≫
+          (underlying (X'.ring A)).map (el.hom.app M) =
+        (algebraComp (ag B) (ak B)).moduleUnderlying.inv.app M :=
+    comp_normalization g.algebra k.algebra B eg heg ek hek M
+  have hr (M : Y.modules A) :
+      h.inverse.map (pullInsertion f.algebra (constantMap f.algebra A) M) ≫
+        pullInsertion h.algebra (constantMap h.algebra A) ((f.modulePull A).obj M) ≫
+          (underlying (X'.ring A)).map (er.hom.app M) =
+        (algebraComp (af B) (ah B)).moduleUnderlying.inv.app M :=
+    comp_normalization f.algebra h.algebra B ef hef eh heh M
+  have hn : moduleSquare_normalized sq A e := by
+    intro M
+    let V := underlying (X'.ring A)
+    let P := k.inverse.map (pullInsertion g.algebra (constantMap g.algebra A) M) ≫
+      pullInsertion k.algebra (constantMap k.algebra A) ((g.modulePull A).obj M)
+    let Q := h.inverse.map (pullInsertion f.algebra (constantMap f.algebra A) M) ≫
+      pullInsertion h.algebra (constantMap h.algebra A) ((f.modulePull A).obj M)
+    have hP : P ≫ V.map (el.hom.app M) =
+        (algebraComp (ag B) (ak B)).moduleUnderlying.inv.app M := by
+      simpa only [P, Category.assoc] using hl M
+    have hQ : Q ≫ V.map (er.hom.app M) =
+        (algebraComp (af B) (ah B)).moduleUnderlying.inv.app M := by
+      simpa only [Q, Category.assoc] using hr M
+    have he : e.hom.app M ≫ er.hom.app M = el.hom.app M ≫ z.hom.app M := by
+      simp only [e, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+        Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
+    have hn' : P ≫ V.map (e.hom.app M) =
+        sq.hom.app ((underlying (Y.ring A)).obj M) ≫ Q := by
+      apply (cancel_mono (V.map (er.hom.app M))).mp
+      calc
+        _ = P ≫ V.map (el.hom.app M) ≫ V.map (z.hom.app M) := by
+          rw [Category.assoc, ← V.map_comp, he, V.map_comp, Category.assoc]
+        _ = (algebraComp (ag B) (ak B)).moduleUnderlying.inv.app M ≫
+            V.map (z.hom.app M) := by rw [← Category.assoc, hP]
+        _ = sq.hom.app ((underlying (Y.ring A)).obj M) ≫
+            (algebraComp (af B) (ah B)).moduleUnderlying.inv.app M := hz M
+        _ = _ := by rw [Category.assoc, hQ]
+    simpa only [P, Q, Category.assoc] using hn'
+  refine ⟨e, hn, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  apply NatTrans.ext
+  funext M
+  have ig : IsIso (pullInsertion g.algebra (constantMap g.algebra A) M) := by
+    apply (isIso_comp_right_iff _ ((underlying (Y'.ring A)).map (eg.hom.app M))).mp
+    erw [heg]
+    exact NatIso.hom_app_isIso
+      (g.algebra.algebra
+        ((constantSheaf Y.topology CommRingCat.{u}).obj B)).moduleUnderlying.symm M
+  have ik : IsIso (pullInsertion k.algebra (constantMap k.algebra A)
+      ((g.modulePull A).obj M)) := by
+    apply (isIso_comp_right_iff _ ((underlying (X'.ring A)).map
+      (ek.hom.app ((g.modulePull A).obj M)))).mp
+    erw [hek]
+    exact NatIso.hom_app_isIso
+      (k.algebra.algebra
+        ((constantSheaf Y'.topology CommRingCat.{u}).obj B)).moduleUnderlying.symm
+      ((g.modulePull A).obj M)
+  apply (underlying (X'.ring A)).map_injective
+  apply (cancel_epi (k.inverse.map (pullInsertion g.algebra
+    (constantMap g.algebra A) M) ≫ pullInsertion k.algebra
+      (constantMap k.algebra A) ((g.modulePull A).obj M))).mp
+  exact (he' M).trans (hn M).symm
 
 /-- The ordinary module comparison with its scalar-insertion normalization.
 Source: Stacks 0E48 (blueprint: lem-sp-completion-mate-comparison). -/

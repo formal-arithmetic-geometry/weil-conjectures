@@ -817,6 +817,15 @@ private theorem seqUnitMorphism (b : Cone (rings.{c, v, r} J B τ))
     ← Category.assoc, seqStrictUnitProjection]
   rfl
 
+private theorem seqTransition_apply (M : Systems.{c, v, r} J B τ)
+    {m n : ℕ} (h : n ≤ m) (U : Cᵒᵖ)
+    (x : ((evaluation J B τ m).obj M).val.obj U) :
+    ((transition J B τ h).app M).val.app U x =
+      M.val.map (Prod.mkHom (homOfLE h) (𝟙 U.unop)).op x := by
+  have he := (transition_exists J B τ h).exists.choose_spec M U
+  have he' := eq_of_heq he
+  exact congrFun he' x
+
 attribute [irreducible] seqModuleAdjunction
 
 end WeilConjectures.SemilinearSections

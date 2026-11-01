@@ -137,6 +137,9 @@ public import Mathlib.CategoryTheory.Adjunction.Evaluation
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 public import Mathlib.CategoryTheory.Adjunction.Mates
+public import WeilConjectures.CategoryTheory.Diagram.DiagramSiteModuleEquivalence
+public import WeilConjectures.CategoryTheory.Diagram.DiagramSiteTopology
+public import WeilConjectures.ProperBaseChange.RingedToposDerivedPushforwardComposition
 /-! # Scalar normalization of singleton evaluation and direct image
 
 Source: Stacks, Tags 0D6D, 07A6 and 0D6E; Zheng, Construction 4.1 and the comparison
@@ -166,6 +169,10 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   [EssentiallySmall.{w} C]
   [J.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]
   [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}]
+
+private theorem cachedCommCompose {T : Type*} [Category T]
+    [EssentiallySmall.{w} T] (τ : GrothendieckTopology T) :
+    τ.HasSheafCompose (CategoryTheory.forget CommRingCat.{w}) := inferInstance
 
 /-- Actual restriction of strict systems, transported from the recorded sequence-site
 restriction. Source: Stacks 03DA; Zheng 4.1
