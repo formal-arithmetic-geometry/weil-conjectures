@@ -15,8 +15,11 @@ import Mathlib.Algebra.Homology.Embedding.CochainComplex
 import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.StalkTensor
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
+import WeilConjectures.AlgebraicGeometry.ModuleCupGodementTensorCoordinates
 
 @[expose] public section
+-- This module only keeps private proof helpers.
+set_option linter.privateModule false
 universe u
 set_option autoImplicit false
 open CategoryTheory CategoryTheory.MonoidalCategory AlgebraicGeometry

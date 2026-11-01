@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsUnit
+public import WeilConjectures.AlgebraicGeometry.RegularExtensionComparison
 import WeilConjectures.CategoryTheory.FunctorFiniteMatrixCoordinates
 
 /-! # Composition and normalized regular scalar extension

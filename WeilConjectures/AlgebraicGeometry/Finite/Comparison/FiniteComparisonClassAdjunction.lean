@@ -72,23 +72,13 @@ variable
     (a : F.obj (U.obj X) ⟶ Y) (b : Y ⟶ Y'),
     e X Y' hY' (a ≫ b) = e X Y hY a ≫ R.map b)
 
-end CategoryTheory
-
-end HomDescent
-
-universe u
-
-open CategoryTheory CategoryTheory.Limits
-open scoped CategoryTheory.Functor
-
-namespace AlgebraicGeometry.ProEtale
-
 /-- Transport the given Hom bijections using the canonical representative of each object. -/
 private def comparisonHomDescent (X : D) (Y : E) (hY : Q Y) :
     (F.obj X ⟶ Y) ≃ (I.obj X ⟶ R.obj Y) :=
   (F.mapIso (U.objObjPreimageIso X)).symm.homFromEquiv.trans
     ((e (U.objPreimage X) Y hY).trans (I.mapIso (U.objObjPreimageIso X)).homFromEquiv)
 
+include el in
 /-- Naturality in the source follows by lifting its conjugate to the full functor. -/
 private theorem comparisonHomDescent_left (X X' : D) (Y : E) (hY : Q Y)
     (a : X ⟶ X') (b : F.obj X' ⟶ Y) :
@@ -104,6 +94,7 @@ private theorem comparisonHomDescent_left (X X' : D) (Y : E) (hY : Q Y)
   simpa [comparisonHomDescent, Category.assoc] using
     congrArg (fun t ↦ I.map (U.objObjPreimageIso X).inv ≫ t) h
 
+include er in
 /-- Naturality in the target is preserved by the transport. -/
 private theorem comparisonHomDescent_right (X : D) (Y Y' : E) (hY : Q Y) (hY' : Q Y')
     (a : F.obj X ⟶ Y) (b : Y ⟶ Y') :
@@ -113,6 +104,7 @@ private theorem comparisonHomDescent_right (X : D) (Y Y' : E) (hY : Q Y) (hY' : 
     congrArg (fun t ↦ I.map (U.objObjPreimageIso X).inv ≫ t)
       (er (U.objPreimage X) Y Y' hY hY' (F.map (U.objObjPreimageIso X).hom ≫ a) b)
 
+include el in
 /-- On an object in the image the descended bijection is exactly the original one. -/
 private theorem comparisonHomDescent_obj (X : C) (Y : E) (hY : Q Y)
     (a : F.obj (U.obj X) ⟶ Y) :
@@ -121,6 +113,17 @@ private theorem comparisonHomDescent_obj (X : C) (Y : E) (hY : Q Y)
   have h := el (U.objPreimage (U.obj X)) X Y hY a₀ a
   simp only [a₀, Functor.map_preimage] at h
   simp [comparisonHomDescent, h]
+
+end CategoryTheory
+
+end HomDescent
+
+universe u
+
+open CategoryTheory CategoryTheory.Limits
+open scoped CategoryTheory.Functor
+
+namespace AlgebraicGeometry.ProEtale
 
 /-- The named direct-image comparison on D+, placed in the ordinary derived
 categories using their specified inclusion comparisons. It is the actual counit mate.

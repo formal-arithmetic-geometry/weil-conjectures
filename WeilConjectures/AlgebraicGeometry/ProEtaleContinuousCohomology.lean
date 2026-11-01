@@ -7,6 +7,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleContinuousCohomologyLimit
 public import WeilConjectures.AlgebraicGeometry.MilnorTower
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
+public import WeilConjectures.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
+public import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
 
 /-!
 # Continuous pro-étale cohomology
@@ -30,7 +33,39 @@ universe t w w'
 open CategoryTheory CategoryTheory.Limits Opposite
 open AlgebraicGeometry.Scheme.ProEt
 
+attribute [local instance 30000] SheafOfModules.hasSheafify_coefficientUniverse
+  SheafOfModules.wEqualsLocallyBijective_coefficientUniverse
+
 namespace AlgebraicGeometry.ProEtale
+
+/-- Module sheaves over the constant integer sheaf on the pro-étale site have K-injective
+resolutions, because they form a Grothendieck abelian category. -/
+noncomputable instance continuousCohomologyAbelianSheaves_hasKInjectiveResolutions
+    (X : Scheme.{t}) :
+    Abelian.HasKInjectiveResolutions (continuousCohomologyAbelianSheaves X) :=
+  letI := SheafOfModules.isGrothendieckAbelianOfUniverses.{t + 1, t, t + 1, t + 1}
+    (Scheme.ProEt.topology X)
+    ((sheafCompose (Scheme.ProEt.topology X)
+      (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj
+        (continuousCohomologyIntegerSheaf X))
+  inferInstance
+
+/-- Global sections `Γ(X, -)` of an abelian sheaf on the small pro-étale site: evaluation at
+the terminal object `Scheme.ProEt.mk (𝟙 X)` of the underlying abelian sheaf. -/
+noncomputable abbrev continuousCohomologySections (X : Scheme.{t}) :
+    continuousCohomologyAbelianSheaves X ⥤ AddCommGrpCat.{t + 1} :=
+  SheafOfModules.toSheaf _ ⋙ sheafToPresheaf _ _ ⋙
+    (evaluation _ _).obj (op (Scheme.ProEt.mk (𝟙 X)))
+
+/-- Derived global sections `RΓ(X, -)` on the small pro-étale site, applied to an abelian
+sheaf placed in degree zero: the right derived functor of `continuousCohomologySections`
+composed with the single-degree embedding.
+Source: blueprint `sk-prop-pe-continuous-cohomology` (auxiliary; not a blueprint node). -/
+noncomputable abbrev continuousCohomologyGlobalSections (X : Scheme.{t})
+    [HasDerivedCategory.{w} (continuousCohomologyAbelianSheaves X)]
+    [HasDerivedCategory.{w'} AddCommGrpCat.{t + 1}] :
+    continuousCohomologyAbelianSheaves X ⥤ DerivedCategory AddCommGrpCat.{t + 1} :=
+  DerivedCategory.singleFunctor _ 0 ⋙ (continuousCohomologySections X).rightDerivedFunctor
 
 /-- The comparison, Milnor exact sequence, naturality, and finite-level vanishing
 for an epimorphic inverse system of abelian sheaves on the small pro-étale site.

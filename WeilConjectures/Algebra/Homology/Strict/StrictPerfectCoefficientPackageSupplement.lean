@@ -58,6 +58,34 @@ noncomputable def StrictPerfectCoefficientPackage.e {R : Sheaf J RingCat.{u}}
     {F : CochainComplex (SheafOfModules.{u} R) ℤ}
     (P : StrictPerfectCoefficientPackage R F) (r : ℤ) := P.p r ≫ P.i r
 
+attribute [instance] CategoryTheory.module_overFunctor_preservesZero
+
+end SheafOfModules
+
+namespace ModuleCat
+
+variable {Λ : Type u} [CommRing Λ]
+
+end ModuleCat
+
+namespace SheafOfModules
+
+variable {C : Type u} [Category.{u} C] (J : GrothendieckTopology C)
+  (Λ : Type u) [CommRing Λ]
+
+attribute [instance] strictPerfectConstantPresheaf_additive
+
+attribute [instance] strictPerfectConstantSheaf_additive
+
+end SheafOfModules
+
+namespace SheafOfModules
+
+variable {C : Type u} [Category.{u} C] (J : GrothendieckTopology C)
+  (Λ : Type u) [CommRing Λ]
+
+attribute [instance] strictPerfectConstantFiniteFreeComparison_isIso
+
 /-- Termwise sheafification, including the differential.
 Source: proper base change, definition 1263
 (blueprint: def-weil-pbc-strict-perfect-coefficient-package). -/
@@ -93,34 +121,6 @@ noncomputable def _root_.ModuleCat.StrictPerfectCoefficientPackage.constant
   p r := inv (strictPerfectConstantFiniteFreeComparison J Λ (P.N r)) ≫
     (strictPerfectConstantSheaf J Λ).map (P.p r)
   splitting := strictPerfectConstant_splitting J Λ P
-
-attribute [instance] CategoryTheory.module_overFunctor_preservesZero
-
-end SheafOfModules
-
-namespace ModuleCat
-
-variable {Λ : Type u} [CommRing Λ]
-
-end ModuleCat
-
-namespace SheafOfModules
-
-variable {C : Type u} [Category.{u} C] (J : GrothendieckTopology C)
-  (Λ : Type u) [CommRing Λ]
-
-attribute [instance] strictPerfectConstantPresheaf_additive
-
-attribute [instance] strictPerfectConstantSheaf_additive
-
-end SheafOfModules
-
-namespace SheafOfModules
-
-variable {C : Type u} [Category.{u} C] (J : GrothendieckTopology C)
-  (Λ : Type u) [CommRing Λ]
-
-attribute [instance] strictPerfectConstantFiniteFreeComparison_isIso
 
 /-- The idempotent identities of a sheaf coefficient package.
 Source: proper base change, definition 1263

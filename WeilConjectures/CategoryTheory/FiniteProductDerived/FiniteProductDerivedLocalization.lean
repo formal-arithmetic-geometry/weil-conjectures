@@ -47,12 +47,6 @@ variable {A : Type a} [Category.{b} A] [Abelian A] [HasDerivedCategory A]
   (hzero : ∀ (M N : ∀ i, B i), G.map (fun i ↦ (0 : M i ⟶ N i)) = 0)
   (η : 𝟭 A ≅ Functor.pi' r ⋙ G) (ε : G ⋙ Functor.pi' r ≅ 𝟭 _)
 
-end DerivedPi
-
-end CategoryTheory.FiniteProductDerived
-
-namespace CategoryTheory.FiniteProductDerived
-
 private def tupleComplex : (∀ i, CochainComplex (B i) ℤ) ⥤ CochainComplex A ℤ where
   obj P :=
     { X n := G.obj (fun i ↦ (P i).X n)
@@ -108,6 +102,7 @@ private def tupleCounit : tupleComplex G hzero ⋙
 private def tupleEquivalence : CochainComplex A ℤ ≌ (∀ i, CochainComplex (B i) ℤ) :=
   CategoryTheory.Equivalence.mk _ _ (tupleUnit r G hzero η) (tupleCounit r G hzero ε)
 
+include G hzero η ε in
 /-- Localize an exact finite-product equivalence coordinatewise.
 Source: Stacks Project, Tags 015F and 05RU, finite-product localization calculation
 (blueprint: lem-pur-exact-finite-product-derived-equivalence).
@@ -165,5 +160,7 @@ theorem derivedPi_isEquivalence
   let : Localization.Lifting DerivedCategory.Q W (rc ⋙ Qi) rd := ⟨α⟩
   exact Localization.isEquivalence DerivedCategory.Q W Qi Wi (rc ⋙ Qi) rd
     (E.inverse ⋙ DerivedCategory.Q) Gd γ β
+
+end DerivedPi
 
 end CategoryTheory.FiniteProductDerived

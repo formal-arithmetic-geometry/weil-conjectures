@@ -14,6 +14,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
 public import Mathlib.Topology.Algebra.Ring.Ideal
 public import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 public import WeilConjectures.CategoryTheory.Right.RightDerivedFunctorOfQuasiIsoResolutions
+public import WeilConjectures.AlgebraicGeometry.DerivedNakayamaResolution
 
 import WeilConjectures.SixFunctors.ProEtale.Adic.PadicIntSheafLinear
 import WeilConjectures.CategoryTheory.Sites.MonObj
@@ -46,6 +47,9 @@ import Mathlib.NumberTheory.Padics.ProperSpace
 import Mathlib.Topology.Algebra.Valued.LocallyCompact
 import WeilConjectures.Mathlib.RingTheory.OrderOfVanishing.Noetherian
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+import WeilConjectures.NumberTheory.Padics.ContinuousUniformizerDivision
+import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvr
+import WeilConjectures.NumberTheory.Padics.IntegersCosetBasis
 
 /-!
 # The two-term resolution of the finite coefficient sheaves
@@ -93,8 +97,31 @@ open Category BraidedCategory
 namespace UnitScalar
 variable (A : Type u) [Category.{v} A] [Preadditive A]
   [MonoidalCategory A] [MonoidalPreadditive A]
+@[instance_reducible] private def scalarRing : CommRing (End (𝟙_ A)) :=
+  { (inferInstance : Ring (End (𝟙_ A))) with
+    mul_comm := fun a b ↦ by
+      have h := unitEndAction_naturality a b
+      simpa only [End.mul_def, unitEndAction_unit] using h }
+-- A private copy fixes the scalar action on each Hom space.
 private def Scalars := End (𝟙_ A)
 
+private instance : CommRing (Scalars A) := scalarRing A
+variable [BraidedCategory A]
+end UnitScalar
+
+namespace UnitScalar
+variable {A : Type u} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A]
+  [HasDerivedCategory.{v} A] [MonoidalCategory A] [MonoidalClosed A]
+  [MonoidalPreadditive A] [BraidedCategory A] [Abelian.HasFunctorialFlatResolution A]
+local instance : HasColimitsOfSize.{0, 0} A := hasColimitsOfSizeShrink A
+end UnitScalar
+
+end ScalarTools
+
+section Sectionwise
+universe v w
+variable {C : Type v} [Category.{w} C] (J : GrothendieckTopology C)
+  [HasSheafify J Ab.{u + 1}]
 private theorem shortExact_of_sectionwise
     (S : ShortComplex (Sheaf J Ab.{u + 1}))
     (hS : ∀ T : Cᵒᵖ,
@@ -116,27 +143,6 @@ private theorem shortExact_of_sectionwise
     infer_instance
   have : Epi S.g := Functor.epi_of_epi_map F hEpi
   exact ⟨S.exact_of_f_is_kernel hk'⟩
-
-private instance : CommRing (Scalars A) := scalarRing A
-variable [BraidedCategory A]
-omit [Preadditive A] [MonoidalPreadditive A] [BraidedCategory A] in
-omit [Preadditive A] [MonoidalPreadditive A] in
-omit [Preadditive A] [MonoidalPreadditive A] in
-end UnitScalar
-
-namespace UnitScalar
-variable {A : Type u} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A]
-  [HasDerivedCategory.{v} A] [MonoidalCategory A] [MonoidalClosed A]
-  [MonoidalPreadditive A] [BraidedCategory A] [Abelian.HasFunctorialFlatResolution A]
-local instance : HasColimitsOfSize.{0, 0} A := hasColimitsOfSizeShrink A
-end UnitScalar
-
-end ScalarTools
-
-section Sectionwise
-universe v w
-variable {C : Type v} [Category.{w} C] (J : GrothendieckTopology C)
-  [HasSheafify J Ab.{u + 1}]
 end Sectionwise
 
 section QuotientTools
@@ -147,7 +153,6 @@ variable {C : Type u} [Category.{v} C] [Abelian C]
   {U : C} (d : End U) (B : ℕ → C) (r : ∀ n, U ⟶ B n)
   (hz : ∀ n, (d ^ n) ≫ r n = 0)
   (hs : ∀ n, (ShortComplex.mk _ _ (hz n)).ShortExact)
-include hz hs in
 end PowerQuotients
 
 end QuotientTools
@@ -248,9 +253,7 @@ private theorem uniformizerEnd_apply (S : Profinite.{u}ᵒᵖ)
   rfl
 
 private theorem uniformizer_ne_zero : Padic.coefficientExtensionUniformizer l E ≠ 0 := by
-  let h := (Padic.extension_integers_dvr l E
-    (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  let h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   have hm : Padic.coefficientExtensionMaximalIdeal l E ≠ ⊥ :=
     h.2.2.2.2.2.2.2.2.2.1
   have hgen : Ideal.span ({Padic.coefficientExtensionUniformizer l E} :

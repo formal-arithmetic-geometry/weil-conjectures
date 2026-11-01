@@ -300,6 +300,9 @@ theorem coefficientComplexBeta_existsUnique :
   intro n
   exact (hβ P 1 1 n).trans (hformula P 1 1 n).symm
 
+variable (M : Type u) [Field M] [Algebra (Padic l) M] [FiniteDimensional (Padic l) M]
+  (κ : L →ₐ[Padic l] M)
+
 /-- Restriction of a composite inclusion is the composite integer map.
 Source: blueprint coefficient-point paragraph, tower clause
 (blueprint: lem-weil-coefficient-complex-rationalization).
@@ -397,9 +400,6 @@ private theorem deriveCoefficientTower
       Functor.whiskerLeft_id', Category.id_comp]
     rw [← he, reassoc_of% hm]
   exact congr_app ht K
-
-variable (M : Type u) [Field M] [Algebra (Padic l) M] [FiniteDimensional (Padic l) M]
-  (κ : L →ₐ[Padic l] M)
 
 end WeilConjectures
 

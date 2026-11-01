@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalarsComp
 import WeilConjectures.CategoryTheory.DerivedCategory.CochainAdjunctionCompatibility
 import WeilConjectures.CategoryTheory.Exact.ExactRestrictionCompositionSupplement
+import all WeilConjectures.CategoryTheory.ModuleObjects.KFlatScalarTower.InternalKFlatScalarTowerRealizationSupplement
 
 /-! # Derived scalar-extension counits and composition -/
 
@@ -17,6 +18,8 @@ universe u v
 open CategoryTheory MonoidalCategory MonObj Limits
 namespace CategoryTheory.Mod
 namespace CounitComposition
+
+open KFlatScalarTower
 
 variable {C : Type u} [Category.{v} C] [Abelian C] [MonoidalCategory C]
   [MonoidalPreadditive C] [SymmetricCategory C] [MonoidalClosed C]

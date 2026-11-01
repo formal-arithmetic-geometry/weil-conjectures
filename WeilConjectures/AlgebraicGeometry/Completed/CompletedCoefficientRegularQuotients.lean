@@ -147,8 +147,7 @@ private theorem ell_factor : ∃ e : ℕ, 1 ≤ e ∧
         v * Padic.coefficientExtensionUniformizer l E ^ e := by
   let O := Padic.coefficientExtensionIntegers l E
   let π := Padic.coefficientExtensionUniformizer l E
-  have h := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  have h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   let : IsDiscreteValuationRing O := h.2.2.2.2.2.2.2.1
   have hgen : Ideal.span ({π} : Set O) = Padic.coefficientExtensionMaximalIdeal l E :=
     h.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec

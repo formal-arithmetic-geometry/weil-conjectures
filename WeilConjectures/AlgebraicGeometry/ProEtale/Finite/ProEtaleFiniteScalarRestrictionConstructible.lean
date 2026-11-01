@@ -49,10 +49,8 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   (a₀ : R₀ ⟶ S₀) (a : R ⟶ S) (comm : α ≫ a.hom = a₀ ≫ β)
   (P : _root_.PresheafOfModules.{t} S₀)
 
-end
-
+include comm in
 set_option backward.isDefEq.respectTransparency false in
-
 private theorem scalarRestrictionSheafification : Nonempty
     ((PresheafOfModules.sheafification α).obj
       ((PresheafOfModules.restrictScalars a₀).obj P) ≅
@@ -89,6 +87,8 @@ private theorem scalarRestrictionSheafification : Nonempty
     infer_instance
   have : IsIso f := isIso_of_reflects_iso f (SheafOfModules.toSheaf R)
   exact ⟨asIso f⟩
+
+end
 
 private theorem constantModelRestriction (X : Scheme.{u})
     (A B : Type u) [CommRing A] [CommRing B] (a : A →+* B)

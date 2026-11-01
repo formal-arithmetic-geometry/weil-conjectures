@@ -416,6 +416,13 @@ private theorem scalar_tower_from_complete {R : Type u} [CommRing R]
     rw [← Category.assoc, hchain]
     simp only [Category.assoc]
 
+section Coefficients
+
+variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+  [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+  [HasDerivedCategory.{v} (ModuleCat.{u} (coefficientExtensionIntegers l E))]
+  [∀ n : ℕ, HasDerivedCategory.{v} (ModuleCat.{u} (coefficientExtensionRing l E n))]
+
 /-- A compatible tower of perfect complexes over the positive coefficient quotients is
 represented by one bounded finite free integral complex. The maps in the conclusion are the
 universal arrows for the derived reductions, and the displayed equation is their compatibility
@@ -470,8 +477,7 @@ theorem integral_scalar_tower_lift
   let π := fun n : ℕ ↦ Ideal.Quotient.mk (coefficientExtensionIdeal l E (n + 1))
   let ρ := fun n : ℕ ↦ coefficientExtensionTransition l E (n + 1)
   let t : A := coefficientExtensionUniformizer l E
-  have hcoeff := (extension_integers_dvr l E (coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  have hcoeff := (coefficientExtensionIntegers_dvr l E).choose_spec
   have : IsLocalRing A := hcoeff.2.2.2.1
   have hgen : Ideal.span ({t} : Set A) = coefficientExtensionMaximalIdeal l E :=
     hcoeff.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
@@ -508,6 +514,8 @@ theorem integral_scalar_tower_lift
     rw [he r n, he 0 n]
     exact (hr n).trans (map_zero _).symm
   exact scalar_tower_from_complete π ρ hρ hπ hker hcomplete hsep M f hM hf
+
+end Coefficients
 
 /-- Scalar multiplication on homology, via the linear short-complex homology functor.
 Source: Mathlib `ShortComplex.homologyMap_smul`; the scalar action used in blueprint
@@ -549,8 +557,7 @@ theorem integral_scalar_cohomology_images
   have _ := hn
   let A := coefficientExtensionIntegers l E
   let t : A := coefficientExtensionUniformizer l E
-  have hcoeff := (extension_integers_dvr l E (coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  have hcoeff := (coefficientExtensionIntegers_dvr l E).choose_spec
   have hgen : Ideal.span ({t} : Set A) = coefficientExtensionMaximalIdeal l E :=
     hcoeff.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
   have ht : t ≠ 0 := by
@@ -623,14 +630,5 @@ theorem integral_scalar_cohomology_images
       HomologicalComplex.homologyMap r q) x = _
     rw [← HomologicalComplex.homologyMap_comp, hπ]
     rfl
-
-section Coefficients
-
-variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
-  [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
-  [HasDerivedCategory.{v} (ModuleCat.{u} (coefficientExtensionIntegers l E))]
-  [∀ n : ℕ, HasDerivedCategory.{v} (ModuleCat.{u} (coefficientExtensionRing l E n))]
-
-end Coefficients
 
 end Padic

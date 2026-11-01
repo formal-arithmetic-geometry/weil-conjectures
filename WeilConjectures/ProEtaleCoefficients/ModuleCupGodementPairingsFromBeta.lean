@@ -9,8 +9,11 @@ public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 public import Mathlib.AlgebraicTopology.AlternatingFaceMapComplex
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+import WeilConjectures.AlgebraicGeometry.ModuleCupGodementModel
 
 @[expose] public section
+-- This module only keeps private proof helpers.
+set_option linter.privateModule false
 universe u
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false

@@ -101,10 +101,4 @@ private def inclusion (r : ℕ) : (SimplexCategory.Truncated r)ᵒᵖ ⥤ Finite
   map := fun f ↦ f
 end FiniteSplitIndex
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end AlgebraicGeometry

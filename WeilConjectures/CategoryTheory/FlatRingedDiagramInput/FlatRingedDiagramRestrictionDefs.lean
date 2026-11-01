@@ -236,14 +236,16 @@ Source: Stacks 03D3, 0FND and 0DVC
 (blueprint: def-weil-pbc-flat-ringed-diagram-input). -/
 abbrev restrictUComplex (x : FlatRingedDiagramInput K H) (J : Type u) [SmallCategory J] :
     cochainSU x J ⥤ cochainRU x J :=
-    (x.restrictU J).mapHomologicalComplex (.up ℤ)
+    ((Functor.whiskeringRight J _ _).obj (SheafOfModules.restrictScalars.{u}
+      ((sheafCompose H (forget₂ CommRingCat RingCat)).map x.aU))).mapHomologicalComplex (.up ℤ)
 
 /-- The actual restriction at V applied degreewise.
 Source: Stacks 03D3, 0FND and 0DVC
 (blueprint: def-weil-pbc-flat-ringed-diagram-input). -/
 abbrev restrictVComplex (x : FlatRingedDiagramInput K H) (J : Type u) [SmallCategory J] :
     cochainSV x J ⥤ cochainRV x J :=
-    (x.restrictV J).mapHomologicalComplex (.up ℤ)
+    ((Functor.whiskeringRight J _ _).obj (SheafOfModules.restrictScalars.{u}
+      ((sheafCompose K (forget₂ CommRingCat RingCat)).map x.aV))).mapHomologicalComplex (.up ℤ)
 
 variable [HasDerivedCategory.{w} (x.diagramsRU J)]
   [HasDerivedCategory.{w} (x.diagramsSU J)]

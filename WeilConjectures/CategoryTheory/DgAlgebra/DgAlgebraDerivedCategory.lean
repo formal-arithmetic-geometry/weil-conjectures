@@ -44,6 +44,16 @@ open CategoryTheory.MonoidalOpposite CategoryTheory.Pretriangulated
 
 namespace CategoryTheory.DgAlgebra
 
+/-- Integer cochain complexes of abelian groups, expressed as modules over the integers.
+Source: Stacks, dga.tex, definition-dga (blueprint: def-sfb-dg-derived-category). -/
+abbrev Complex := CochainComplex (ModuleCat.{u} (ULift.{u} ℤ)) ℤ
+
+/-- An associative unital dg algebra is a monoid in cochain complexes. The chain-map
+condition on multiplication is precisely the signed Leibniz rule, and the complex
+identity is d squared equals zero. No graded commutativity is required.
+Source: Stacks, dga.tex, definition-dga (blueprint: def-sfb-dg-derived-category). -/
+abbrev Algebra := Mon Complex.{u}
+
 /-- A module object in the reversed tensor category has action M tensor A to M.
 Thus these are right dg modules, with d(ma)=d(m)a+(-1)^degree(m)m d(a).
 Source: Stacks, dga.tex, definition-dgm (blueprint: def-sfb-dg-derived-category). -/
