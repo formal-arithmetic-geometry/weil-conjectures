@@ -39,8 +39,6 @@ variable (f : RingedPullback.{u, u, u, u, u} R S)
   [HasDerivedCategory.{w} (Modules.{u, u, u} d.S')]
   [ExactPullback f] [ExactPullback (changed f d)]
   [ExactRestriction d.sourceMap] [ExactRestriction d.targetMap]
-include k in
-include k in
 end
 
 private def fixedSecond {A : Type u} [Category.{v} A] (Y : A) : A ⥤ A × A where

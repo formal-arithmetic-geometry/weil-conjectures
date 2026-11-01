@@ -16,6 +16,8 @@ set_option backward.isDefEq.respectTransparency false
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Etale
+private theorem cachedModSheafify (Z : Scheme.{u}) (A : Type (u + 1)) [CommRing A] :
+    HasSheafify Z.smallEtaleTopology (ModuleCat.{u + 1} A) := inferInstance
 attribute [local instance] cachedModSheafify
 
 /-- For a scheme Z, n≥0 and R=ULift(Z/n), the ordinary finite root tensor map μ_n→forget(R_Z(1)) is

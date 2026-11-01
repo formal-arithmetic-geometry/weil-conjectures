@@ -129,6 +129,7 @@ whole unbounded derived categories, with arbitrary coefficient transition maps.
 @[expose] public noncomputable section
 
 set_option autoImplicit false
+set_option linter.privateModule false
 set_option synthInstance.maxSize 4096
 -- Avoid repeating the dependent localization conversions during tactic linting.
 set_option linter.unusedTactic false

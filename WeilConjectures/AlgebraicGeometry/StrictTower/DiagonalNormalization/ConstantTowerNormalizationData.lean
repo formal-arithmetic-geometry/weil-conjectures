@@ -11,7 +11,8 @@ public import WeilConjectures.AlgebraicGeometry.StrictTower.ConstantNormalizatio
 /-! # Canonical constant-tower diagonal comparisons
 
 Source: Stacks Project, Tags 08BJ, 070K and 07A7; the explicit constructions in
-`WeilConjectures.AlgebraicGeometry.StrictTower.ConstantNormalization.ConstantTowerDirectImageNormalization`, lines 1016–1100.
+`WeilConjectures.AlgebraicGeometry.StrictTower.ConstantNormalization.ConstantTowerDirectImageNormalization`,
+lines 1016–1100.
 (blueprint: def-sf-constant-tower-normalization-data)
 
 These abbreviations expose the existing constructions through a definition-owned interface.

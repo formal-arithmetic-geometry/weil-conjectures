@@ -298,9 +298,6 @@ def IsNormalized
 
 section
 
-omit [HasDerivedCategory.{w} (Modules R)] in
-omit [HasDerivedCategory.{w} (Modules R)] in
-omit [HasDerivedCategory.{w} (Modules R)] in
 end
 
 section
@@ -330,13 +327,6 @@ private theorem totalTensor_map {E E' F F' : Complex R}
 omit [HasDerivedCategory (Modules R)] in
 attribute [local irreducible] representative
 
-attribute [local irreducible] representativeNatIso
-
-omit [HasDerivedCategory (Modules R)] in
-attribute [local irreducible] nativePairShift
-
 end
-
-attribute [local irreducible] modelShift modelAssociator modelSymmetry
 
 end SheafOfModules.DerivedTensorConstraints

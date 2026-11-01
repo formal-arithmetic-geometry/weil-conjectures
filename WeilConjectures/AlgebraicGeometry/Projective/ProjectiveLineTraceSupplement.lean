@@ -447,7 +447,7 @@ theorem projectiveLineTrace_chern (N : ℕ) (hN : 0 < N)
     (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) :
     ordinaryFiniteP1ChernPushforward A N hA S
         (projectiveLineTraceDatum N hN A hA S hS).chern ≫
-      projectiveLineTrace N hN A hA S hS = 𝟙 (ordinaryFiniteUnit A S) := by
+      (projectiveLineTraceDatum N hN A hA S hS).trace = 𝟙 (ordinaryFiniteUnit A S) := by
   exact (projectiveLineTraceDatum N hN A hA S hS).trace_chern
 
 end AlgebraicGeometry.Etale

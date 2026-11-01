@@ -187,5 +187,4 @@ variable (L : DerivedCategory (Modules R) ⥤ DerivedCategory (Modules S))
 attribute [-instance] CategoryTheory.hasSheafCompose_of_preservesMulticospan in
 attribute [local irreducible] IsNormalizedIdentification tensorShift
 
-attribute [-instance] CategoryTheory.hasSheafCompose_of_preservesMulticospan in
 end SheafOfModules.ExactPullbackSigned

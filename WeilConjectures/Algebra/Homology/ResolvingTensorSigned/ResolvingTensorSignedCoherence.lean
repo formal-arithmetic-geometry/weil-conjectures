@@ -72,8 +72,6 @@ set_option maxHeartbeats 1600000 in
 attribute [-instance] CategoryTheory.hasSheafCompose_of_preservesMulticospan in
 set_option maxHeartbeats 1600000 in
 -- Comparing the two tensor presentations needs additional elaboration heartbeats.
-attribute [-instance] CategoryTheory.hasSheafCompose_of_preservesMulticospan in
-attribute [-instance] CategoryTheory.hasSheafCompose_of_preservesMulticospan in
 end
 
 variable (k : Comparison.{r, uC, vC, uD, vD} f)
@@ -81,5 +79,4 @@ variable (k : Comparison.{r, uC, vC, uD, vD} f)
   [L.CommShift ℤ] [NatTrans.CommShift epsilon ℤ]
   [(derivedTensor R).CommShift₂Int] [(derivedTensor S).CommShift₂Int]
 
-attribute [-instance] CategoryTheory.hasSheafCompose_of_preservesMulticospan in
 end SheafOfModules.ResolvingTensorSigned

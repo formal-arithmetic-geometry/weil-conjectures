@@ -19,6 +19,7 @@ Source: Stacks Project, Tag 0E8I, and Tags 06YS and 06YU.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option linter.privateModule false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false

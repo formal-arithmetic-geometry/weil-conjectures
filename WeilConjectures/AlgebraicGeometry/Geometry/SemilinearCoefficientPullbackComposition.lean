@@ -117,6 +117,7 @@ Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 03CZ and 07A4.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option linter.privateModule false
 set_option synthInstance.maxSize 4096
 universe c v r
 open CategoryTheory CategoryTheory.Limits

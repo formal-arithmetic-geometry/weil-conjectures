@@ -15,6 +15,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Functor.Derived.Adjunction
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option linter.privateModule false
 set_option synthInstance.maxSize 4096
 set_option backward.defeqAttrib.useBackward true
 

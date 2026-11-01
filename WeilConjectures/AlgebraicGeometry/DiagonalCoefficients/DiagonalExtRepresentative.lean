@@ -21,7 +21,6 @@ universe u v w t
 open CategoryTheory CategoryTheory.Abelian
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
-attribute [local instance 5000] cyclicSmallShiftedSingleHom
 
 /-- The actual Hom representative, kept behind a named function.
 Source: Mathlib Ext.Basic (blueprint: def-diagonal-ext-representative). -/

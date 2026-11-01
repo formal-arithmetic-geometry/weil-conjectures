@@ -48,7 +48,8 @@ private theorem replacement (S : Scheme.{u})
   let Λ := (inferInstance : Abelian.HasFunctorialFlatResolution E).some.reduced
   let R := Λ.kFlatResolutionFunctor ObjectProperty.flat.essImage_ι_le
   let ε := Λ.kFlatResolutionNatTrans ObjectProperty.flat.essImage_ι_le
-  have toLean (K : CochainComplex.KFlat E) : CochainComplex.IsAcyclicTensorKFlat (R := S.sheaf) K.obj := by
+  have toLean (K : CochainComplex.KFlat E) :
+      CochainComplex.IsAcyclicTensorKFlat (R := S.sheaf) K.obj := by
     have h := (HomotopyCategory.kFlat_quotient_obj_iff K.obj).2 K.property
     rw [HomotopyCategory.kFlat_iff_preserves_acyclic] at h
     intro N hN

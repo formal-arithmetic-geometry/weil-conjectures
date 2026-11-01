@@ -39,6 +39,7 @@ lem-amb-compact-support-site-comparison-open
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option linter.privateModule false
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.ProEtale
@@ -92,8 +93,4 @@ private theorem pro_square_conjugate (A : Type (u + 1)) [CommRing A]
     conjugateIsoEquiv_iso_symm, conjugateIsoEquiv_upperStarComp]
   simp only [Iso.trans_assoc]
   congr 2
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.defeqAttrib.useBackward true in
 end AlgebraicGeometry.ProEtale

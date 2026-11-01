@@ -30,6 +30,7 @@ The last two are induced by augmentations into nonnegative injective resolutions
 -/
 
 @[expose] public section
+set_option linter.privateModule false
 
 universe u v
 
@@ -184,7 +185,6 @@ variable {B B' C C' : Type*} [Category* B] [Category* B'] [Category* C] [Categor
   [PreservesFiniteLimits β] [PreservesFiniteColimits β]
   [PreservesFiniteLimits γ] [PreservesFiniteColimits γ]
 
-omit [EnoughInjectives B] in
 end
 
 private theorem derived_mate_plus_comparison

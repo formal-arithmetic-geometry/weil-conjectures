@@ -590,7 +590,6 @@ private theorem tensor_target_compactification_iso
     (derivedTensorObjCompMapDerivedCategoryComparisonUpperStarIso (ModuleCat.{u + 1} A) M)
     ((Etale.leftDerivedUpperStarCompactificationIso (ModuleCat.{u + 1} A) c).app H)
     ((comparisonOpenDerivedPullbackIso A f).app H)
-
           ((comparisonOpenDerivedPullbackIso A c.i).app
       (L(Etale.upperStar (ModuleCat.{u + 1} A) c.g).obj H))
     (L(upperStar (ModuleCat.{u + 1} A) c.i).mapIso
@@ -871,7 +870,6 @@ local elab "finish_shared_proof" : tactic => do
     replaceMainGoal []
 
 -- The two goals intentionally separate elaboration from sharing its completed proof.
-set_option linter.style.multiGoal false in
 end CompactificationTensor
 
 end AlgebraicGeometry.ProEtale

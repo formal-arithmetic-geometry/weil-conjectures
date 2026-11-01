@@ -74,5 +74,4 @@ namespace AlgebraicGeometry.ProEtale.SpTowerShriek
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 end AlgebraicGeometry.ProEtale.SpTowerShriek

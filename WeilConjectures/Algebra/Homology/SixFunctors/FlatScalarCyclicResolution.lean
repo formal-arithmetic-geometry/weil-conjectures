@@ -244,5 +244,4 @@ private theorem flat_scalar_kernel [IsDomain A]
   change R.obj.map f.op x = R.obj.map f.op 0
   exact hz.trans (map_zero (R.obj.map f.op).hom).symm
 
-omit [HasWeakSheafify J CommRingCat.{r}] in
 end SheafOfModules

@@ -779,9 +779,6 @@ private theorem reduction_comp (TC : SystemTensorCoherence S)
 
 end Derived
 
-omit [EssentiallySmall.{w} C] in
-omit [EssentiallySmall.{w} C] in
-omit [EssentiallySmall.{w} C] in
 end CoefficientReductionProof
 
 namespace AlgebraicGeometry.ProEtale

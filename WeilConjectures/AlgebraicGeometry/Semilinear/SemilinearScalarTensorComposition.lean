@@ -28,5 +28,4 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   (B : ℕ → Sheaf J CommRingCat.{max c v r})
   (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)
 
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 end WeilConjectures.SemilinearSections

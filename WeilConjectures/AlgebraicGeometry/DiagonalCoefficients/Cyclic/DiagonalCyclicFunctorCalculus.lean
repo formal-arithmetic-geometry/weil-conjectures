@@ -27,7 +27,6 @@ open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
-attribute [local instance 5000] cyclicSmallShiftedSingleHom
 
 attribute [local irreducible] CategoryTheory.Abelian.Ext
   HasDerivedCategory.standard HasDerivedCategory.ofIsGrothendieckAbelian
