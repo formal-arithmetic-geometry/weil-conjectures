@@ -92,6 +92,9 @@ import WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+public import WeilConjectures.AlgebraicGeometry.Picard.DerivedChangeOfRingsIndependentCoefficients
+public import WeilConjectures.AlgebraicGeometry.Picard.KFlatResolutionIndependentCoefficients
+public import WeilConjectures.SmoothPurity.ChangeOfRingsKFlatIndependentCoefficients
 
 /-! # Flat common-quotient reduction, with strict towers and quotient cones
 
@@ -255,6 +258,14 @@ structure Comparison where
         ((ηL.app (op n)).f i).val.app U p = 0 ↔
           D.locallyInIdealProduct n ((restriction φ).obj (P.X i)) U p)
 
+private theorem restriction_preservesFiniteLimits :
+    PreservesFiniteLimits (restriction φ) :=
+  (restrictScalars_exact_kflat ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)).1
+
+private theorem restriction_preservesFiniteColimits :
+    PreservesFiniteColimits (restriction φ) :=
+  (restrictScalars_exact_kflat ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)).2
+
 attribute [local semireducible] scalarSection
 
 omit [HasDerivedCategory.{wR} (Modules R)] [HasDerivedCategory.{wB} (Modules B)] in
@@ -277,5 +288,154 @@ private theorem flat_representatives (M : DerivedCategory (Modules B)) :
   unfold IsFlatOnSite
   exact ⟨preservesFiniteLimits_of_natIso (siteSheafTensorRightIso B (P.X i)).symm,
     preservesFiniteColimits_of_natIso (siteSheafTensorRightIso B (P.X i)).symm⟩
+
+private theorem flat_extension_exact
+    (F : DerivedChangeOfRingsCochainModel.{u, v, r, wR, wB} φ)
+    (hflat : IsFlatOnSite (R := R)
+      ((restriction φ).obj (unit (derivedChangeRingIndependentCoefficients J B)))) :
+    PreservesFiniteLimits F.E ∧ PreservesFiniteColimits F.E := by
+  let := isMonoidal_W_independentCoefficients R
+  let := monoidalCategory R
+  let := symmetricCategory R
+  unfold IsFlatOnSite at hflat
+  let S := (restriction φ).obj (unit (derivedChangeRingIndependentCoefficients J B))
+  let VR := toSheaf (derivedChangeRingIndependentCoefficients J R)
+  let VB := toSheaf (derivedChangeRingIndependentCoefficients J B)
+  have : PreservesFiniteLimits (siteSheafTensorRight S) := hflat.1
+  have : PreservesFiniteColimits (siteSheafTensorRight S) := hflat.2
+  have : PreservesFiniteLimits (MonoidalCategory.tensorRight S) :=
+    preservesFiniteLimits_of_natIso (siteSheafTensorRightIso R S)
+  have : PreservesFiniteColimits (MonoidalCategory.tensorRight S) :=
+    preservesFiniteColimits_of_natIso (siteSheafTensorRightIso R S)
+  have : PreservesFiniteLimits (MonoidalCategory.tensorLeft S) :=
+    preservesFiniteLimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight S).symm
+  have : PreservesFiniteColimits (MonoidalCategory.tensorLeft S) :=
+    preservesFiniteColimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight S).symm
+  obtain ⟨e, he⟩ := exists_changeOfRings_tensor_comparison_independent φ
+  let j : F.E ⋙ VB ≅ MonoidalCategory.tensorLeft S ⋙ VR :=
+    NatIso.ofComponents (fun M ↦ VB.mapIso (eqToIso (F.obj_eq M)) ≪≫ e M) (by
+      intro M N f
+      dsimp
+      rw [F.map_eq, Functor.map_comp, Functor.map_comp]
+      simp only [Category.assoc]
+      simp only [VB, ← Functor.map_comp_assoc, eqToHom_trans, eqToHom_refl]
+      rw [Functor.map_comp, Category.assoc]
+      exact congrArg (fun g ↦ VB.map (eqToHom (F.obj_eq M)) ≫ g) (he f))
+  have : PreservesFiniteLimits (MonoidalCategory.tensorLeft S ⋙ VR) :=
+    comp_preservesFiniteLimits _ _
+  have : PreservesFiniteColimits (MonoidalCategory.tensorLeft S ⋙ VR) :=
+    comp_preservesFiniteColimits _ _
+  have : PreservesFiniteLimits (F.E ⋙ VB) := preservesFiniteLimits_of_natIso j.symm
+  have : PreservesFiniteColimits (F.E ⋙ VB) := preservesFiniteColimits_of_natIso j.symm
+  exact ⟨preservesFiniteLimits_of_reflects_of_preserves F.E VB,
+    preservesFiniteColimits_of_reflects_of_preserves F.E VB⟩
+
+private theorem restriction_kflat
+    (hflat : IsFlatOnSite (R := R)
+      ((restriction φ).obj (unit (derivedChangeRingIndependentCoefficients J B))))
+    (P : CochainComplex (Modules B) ℤ)
+    (hP : CochainComplex.IsKFlatIndependentCoefficients (R := B) P) :
+    CochainComplex.IsKFlatIndependentCoefficients (R := R)
+      (((restriction φ).mapHomologicalComplex (.up ℤ)).obj P) := by
+  classical
+  have : PreservesFiniteLimits (restriction φ) := restriction_preservesFiniteLimits
+  have : PreservesFiniteColimits (restriction φ) := restriction_preservesFiniteColimits
+  let := isMonoidal_W_independentCoefficients R
+  let := isMonoidal_W_independentCoefficients B
+  let := monoidalCategory R
+  let := monoidalCategory B
+  let := symmetricCategory R
+  let := symmetricCategory B
+  let := preservesZeroMorphisms_curriedTensor_independentCoefficients R
+  let := preservesZeroMorphisms_curriedTensor_obj_independentCoefficients R
+  let := preservesZeroMorphisms_curriedTensor_independentCoefficients B
+  let := preservesZeroMorphisms_curriedTensor_obj_independentCoefficients B
+  obtain ⟨E⟩ := nonempty_derivedChangeOfRingsCochainModel φ
+  have hE := flat_extension_exact E hflat
+  have : PreservesFiniteLimits E.E := hE.1
+  have : PreservesFiniteColimits E.E := hE.2
+  let U := restriction φ
+  obtain ⟨e₀, he₀⟩ := exists_changeOfRings_tensorCancellation_independentCoefficients φ
+  let e (M : Modules B) (N : Modules R) :=
+    U.mapIso (((MonoidalCategory.curriedTensor _).obj M).mapIso (eqToIso (E.obj_eq N))) ≪≫
+      e₀ M N
+  have he {M M' : Modules B} {N N' : Modules R} (f : M ⟶ M') (g : N ⟶ N') :
+      U.map (MonoidalCategory.tensorHom f (E.E.map g)) ≫ (e M' N').hom =
+        (e M N).hom ≫ MonoidalCategory.tensorHom (U.map f) g := by
+    have hs : MonoidalCategory.tensorHom f (E.E.map g) ≫
+        MonoidalCategory.whiskerLeft M' (eqToHom (E.obj_eq N')) =
+      MonoidalCategory.whiskerLeft M (eqToHom (E.obj_eq N)) ≫
+        MonoidalCategory.tensorHom f (changeOfRingsHom φ N g) := by
+      rw [← MonoidalCategory.id_tensorHom, ← MonoidalCategory.id_tensorHom,
+        MonoidalCategory.tensorHom_comp_tensorHom, MonoidalCategory.tensorHom_comp_tensorHom]
+      simp only [Category.comp_id, Category.id_comp, E.map_eq, Category.assoc,
+        eqToHom_trans, eqToHom_refl]
+    change U.map (MonoidalCategory.tensorHom f (E.E.map g)) ≫
+      U.map (MonoidalCategory.whiskerLeft M' (eqToHom (E.obj_eq N'))) ≫ (e₀ M' N').hom =
+      U.map (MonoidalCategory.whiskerLeft M (eqToHom (E.obj_eq N))) ≫ (e₀ M N).hom ≫
+        MonoidalCategory.tensorHom (U.map f) g
+    rw [← U.map_comp_assoc, hs, U.map_comp, Category.assoc, he₀ f g]
+  let e' (M : Modules B) (N : Modules R) :=
+    U.mapIso (BraidedCategory.braiding (E.E.obj N) M) ≪≫ e M N ≪≫
+      BraidedCategory.braiding (U.obj M) N
+  have he' {M M' : Modules B} {N N' : Modules R} (f : M ⟶ M') (g : N ⟶ N') :
+      U.map (MonoidalCategory.tensorHom (E.E.map g) f) ≫ (e' M' N').hom =
+        (e' M N).hom ≫ MonoidalCategory.tensorHom g (U.map f) := by
+    dsimp only [e', Iso.trans_hom, Functor.mapIso_hom]
+    simp only [Category.assoc]
+    rw [← U.map_comp_assoc, BraidedCategory.braiding_naturality,
+      U.map_comp, Category.assoc]
+    rw [← Category.assoc (U.map (MonoidalCategory.tensorHom f (E.E.map g)))
+      (e M' N').hom, he f g]
+    simp only [Category.assoc]
+    rw [BraidedCategory.braiding_naturality]
+  unfold CochainComplex.IsKFlatIndependentCoefficients at hP ⊢
+  intro F hF
+  let L := ((E.E.mapHomologicalComplex (.up ℤ)).obj F)
+  have hL : L.Acyclic := fun i ↦ (hF i).map E.E
+  have hp : (CochainComplex.mapBifunctor L P (MonoidalCategory.curriedTensor _)).Acyclic :=
+    hP L hL
+  let T := (((MonoidalCategory.curriedTensor _).mapBifunctorHomologicalComplex
+    (.up ℤ) (.up ℤ)).obj L).obj P
+  have hcolim (K : Type) [Category.{0} K] : PreservesColimitsOfShape K U := by
+    have : PreservesColimitsOfShape K (U ⋙ toSheaf
+        (derivedChangeRingIndependentCoefficients J R)) :=
+      inferInstanceAs (PreservesColimitsOfShape K
+        (toSheaf (derivedChangeRingIndependentCoefficients J B)))
+    have : ReflectsColimitsOfShape K (toSheaf
+        (derivedChangeRingIndependentCoefficients J R)) :=
+      reflectsColimitsOfShape_of_reflectsIsomorphisms
+    exact preservesColimitsOfShape_of_reflects_of_preserves U (toSheaf _)
+  have : PreservesColimitsOfSize.{0, 0} U := ⟨fun {K} instK ↦ @hcolim K instK⟩
+  have : U.PreservesTotalComplex T (.up ℤ) := fun _ ↦ inferInstance
+  let t := (HomologicalComplex₂.mapTotalIso U T (.up ℤ)).symm
+  let f : (((U.mapHomologicalComplex (.up ℤ)).mapHomologicalComplex (.up ℤ)).obj T) ≅
+      (((MonoidalCategory.curriedTensor _).mapBifunctorHomologicalComplex
+        (.up ℤ) (.up ℤ)).obj F).obj ((U.mapHomologicalComplex (.up ℤ)).obj P) :=
+    HomologicalComplex.Hom.isoOfComponents
+      (fun i ↦ HomologicalComplex.Hom.isoOfComponents
+        (fun j ↦ e' (P.X j) (F.X i)) (by
+          intro j j' hj
+          change (e' (P.X j) (F.X i)).hom ≫
+              MonoidalCategory.whiskerLeft (F.X i) (U.map (P.d j j')) =
+            U.map (MonoidalCategory.whiskerLeft (E.E.obj (F.X i)) (P.d j j')) ≫
+              (e' (P.X j') (F.X i)).hom
+          simpa only [E.E.map_id, MonoidalCategory.id_tensorHom]
+            using (he' (P.d j j') (𝟙 (F.X i))).symm))
+      (by
+        intro i i' hi
+        apply HomologicalComplex.Hom.ext
+        funext j
+        change (e' (P.X j) (F.X i)).hom ≫
+            MonoidalCategory.whiskerRight (F.d i i') (U.obj (P.X j)) =
+          U.map (MonoidalCategory.whiskerRight (E.E.map (F.d i i')) (P.X j)) ≫
+            (e' (P.X j) (F.X i')).hom
+        simpa only [U.map_id, MonoidalCategory.tensorHom_id]
+          using (he' (𝟙 (P.X j)) (F.d i i')).symm)
+  have hU : (((U.mapHomologicalComplex (.up ℤ)).obj
+      (CochainComplex.mapBifunctor L P (MonoidalCategory.curriedTensor _)))).Acyclic :=
+    fun i ↦ (hp i).map U
+  exact HomologicalComplex.Acyclic.of_iso hU
+    (t ≪≫ HomologicalComplex₂.total.mapIso f (.up ℤ))
 
 end SheafOfModules.CommonQuotientReduction

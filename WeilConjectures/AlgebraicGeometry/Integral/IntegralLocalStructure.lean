@@ -761,6 +761,49 @@ import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrFactorization
 import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrFactorizationUnique
 import WeilConjectures.Mathlib.RingTheory.OrderOfVanishing.Noetherian
 import WeilConjectures.AlgebraicGeometry.MLSetsTowerLimitNonempty
+public import Mathlib.CategoryTheory.Sites.Precoverage
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Coinduce
+public import WeilConjectures.AlgebraicGeometry.Abelian.AbelianEtaleProEtaleCohomologyComparison
+public import WeilConjectures.AlgebraicGeometry.CompletionTriangle.CompletionTriangleComparisonSupplement
+public import WeilConjectures.AlgebraicGeometry.FiniteConstantModel.FiniteConstantModelResolutionSupplement
+public import WeilConjectures.AlgebraicGeometry.Integral.Finite.IntegralFiniteLevels
+public import WeilConjectures.AlgebraicGeometry.IntegralFiniteConstantComparison
+public import WeilConjectures.AlgebraicGeometry.IntegralFiniteEtaleModels
+public import WeilConjectures.AlgebraicGeometry.IntegralFiniteScalarRealization
+public import WeilConjectures.AlgebraicGeometry.IntegralScalarReductionComparison
+public import WeilConjectures.AlgebraicGeometry.IntegralScalarTorsion
+public import WeilConjectures.AlgebraicGeometry.IntegralSmallPerfect.IntegralSmallPerfectTower
+public import WeilConjectures.AlgebraicGeometry.InternalPerfectReductionHomML
+public import WeilConjectures.AlgebraicGeometry.Picard.DerivedAdjunctionCompatibility
+public import WeilConjectures.AlgebraicGeometry.Picard.RingedDerivedDisjointIso
+public import WeilConjectures.AlgebraicGeometry.ProEtale.RepleteAddCommGrp
+public import WeilConjectures.AlgebraicGeometry.Pullback.PullbackFiniteConstantLocalModel
+public import WeilConjectures.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
+public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Comp
+public import WeilConjectures.CategoryTheory.ModuleObjects.SequentialLimitEpi
+public import WeilConjectures.CategoryTheory.Monoidal.Conjugate
+public import WeilConjectures.CategoryTheory.RightDerivedExactComposite
+public import WeilConjectures.CategoryTheory.Sites.CohomologyRightDerivedSections
+public import WeilConjectures.CategoryTheory.Sites.InjectiveModuleAbelianAcyclic
+public import WeilConjectures.CategoryTheory.Triangulated.DerivedCountableProductsExistence
+public import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.Devissage
+public import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
+public import WeilConjectures.NumberTheory.Padics.IntegralScalarTowers
+public import WeilConjectures.ProEtaleCoefficients.CoefficientComparisonAffineCech
+public import WeilConjectures.ProEtaleCoefficients.CoefficientComparisonConstantChartCounit
+public import WeilConjectures.ProperBaseChange.ConstantCompletionCore
+public import WeilConjectures.ProperBaseChange.FlatAlgebraicInverseImageOfUniverses
+public import WeilConjectures.ProperBaseChange.GeometricModuleConstruction
+public import WeilConjectures.ProperBaseChange.GeometricModuleTransport
+public import WeilConjectures.ProperBaseChange.NilpotentReductionStep
+public import WeilConjectures.ProperBaseChange.RingedStrictTowerHomotopyLimitIndependentCoefficients
+public import WeilConjectures.ProperBaseChange.RingedToposKFlatPullback
+public import WeilConjectures.SixFunctors.ConstantInverseImageScalarNormalization
+public import WeilConjectures.SixFunctors.ConstantScalarAlgebraicPullback
+public import WeilConjectures.SixFunctors.ContinuousScalarFinitePresentation
+public import WeilConjectures.SixFunctors.InternalPerfectHomLimitSurjective
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsPull
+public import WeilConjectures.SmoothPurity.CoefficientLocallyConstantCounit
 
 /-! # Integral local structure for continuous coefficient complexes
 
@@ -781,6 +824,505 @@ open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
+
+private theorem section_of_eventualRange
+    (F : ℕᵒᵖ ⥤ Type v) (hF : F.IsMittagLeffler)
+    (x : F.obj (op 0)) (hx : x ∈ F.eventualRange (op 0)) :
+    ∃ s : F.sections, s.val (op 0) = x := by
+  classical
+  let G := F.toPreimages ({x} : Set (F.obj (op 0)))
+  have hnonempty (n : ℕᵒᵖ) : Nonempty (G.obj n) := by
+    let f : n ⟶ op 0 := (homOfLE (Nat.zero_le n.unop)).op
+    obtain ⟨y, hy⟩ := F.mem_eventualRange_iff.mp hx f
+    refine ⟨⟨y, Set.mem_iInter.mpr ?_⟩⟩
+    intro g
+    change F.map g y ∈ ({x} : Set (F.obj (op 0)))
+    rw [Subsingleton.elim g f]
+    exact hy
+  let : ∀ n : ℕᵒᵖ, Nonempty (G.obj n) := hnonempty
+  obtain ⟨s, hs⟩ := G.nonempty_sections_of_isMittagLeffler (hF.toPreimages _ _)
+  refine ⟨⟨fun n ↦ (s n).val, ?_⟩, ?_⟩
+  · intro i j f
+    exact congrArg Subtype.val (hs f)
+  · have h := Set.mem_iInter.mp (s (op 0)).property (𝟙 (op 0))
+    simpa using h
+
+private theorem section_with_property
+    (F : ℕᵒᵖ ⥤ Type v) (hF : F.IsMittagLeffler)
+    (Q : F.obj (op 0) → Prop)
+    (hQ : ∀ n : ℕ, ∃ x : F.obj (op n),
+      Q (F.map (homOfLE (Nat.zero_le n)).op x)) :
+    ∃ s : F.sections, Q (s.val (op 0)) := by
+  obtain ⟨i, f, hf⟩ := F.isMittagLeffler_iff_eventualRange.mp hF (op 0)
+  obtain ⟨x, hx⟩ := hQ i.unop
+  have hx' : F.map f x ∈ F.eventualRange (op 0) := by
+    rw [hf]
+    exact ⟨x, rfl⟩
+  obtain ⟨s, hs⟩ := section_of_eventualRange F hF (F.map f x) hx'
+  refine ⟨s, ?_⟩
+  rw [hs]
+  simpa only [Subsingleton.elim f (homOfLE (Nat.zero_le i.unop)).op] using hx
+
+private theorem reduction_iso_section
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+    (W : Scheme.{u}) (T K : DerivedCategory (AdicCompletion.Modules l E W))
+    (hML : (internalReductionHomTower l E W T K).IsMittagLeffler)
+    (hiso : ∀ n : ℕ, Nonempty
+      ((AdicCompletion.derivedReduction l E W n).obj T ≅
+        (AdicCompletion.derivedReduction l E W n).obj K)) :
+    ∃ s : (internalReductionHomTower l E W T K).sections, IsIso (s.val (op 0)) := by
+  let F := internalReductionHomTower l E W T K
+  have hmap : ∀ (n : ℕ) (f : internalReductionHom l E W T K n),
+      IsIso f → IsIso (F.map (homOfLE (Nat.zero_le n)).op f) := by
+    intro n
+    induction n with
+    | zero =>
+        intro f hf
+        simpa using hf
+    | succ n ih =>
+        intro f hf
+        let : IsIso f := hf
+        have hstep : IsIso (internalReductionHomStep l E W T K n f) := by
+          dsimp [internalReductionHomStep]
+          infer_instance
+        have hcomp : (homOfLE (Nat.zero_le (n + 1))).op =
+            (homOfLE (Nat.le_add_right n 1)).op ≫ (homOfLE (Nat.zero_le n)).op :=
+          Subsingleton.elim _ _
+        rw [hcomp, F.map_comp, types_comp_apply]
+        simp only [F, internalReductionHomTower, Functor.ofOpSequence_map_homOfLE_succ]
+        change IsIso (F.map (homOfLE (Nat.zero_le n)).op
+          (internalReductionHomStep l E W T K n f))
+        exact ih _ hstep
+  apply section_with_property F hML IsIso
+  intro n
+  obtain ⟨i⟩ := hiso n
+  exact ⟨i.hom, hmap n i.hom inferInstance⟩
+
+private theorem compatible_reductions_lift
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+    (S : Scheme.{u}) (T K : DerivedCategory (AdicCompletion.Modules l E S))
+    (hK : IsDerivedComplete l E S K)
+    (φ : ∀ n : ℕ, internalReductionHom l E S T K n)
+    (hφ : ∀ n : ℕ, internalReductionHomStep l E S T K n (φ (n + 1)) = φ n) :
+    ∃ g : T ⟶ K, ∀ n : ℕ, (AdicCompletion.derivedReduction l E S n).map g = φ n := by
+  classical
+  let adj (n : ℕ) := Mod.derivedExtendMapDerivedCategoryAdjunction (quotient l E S n)
+  let a (n : ℕ) : T ⟶ integralLevel l E S K n := (adj n).homEquiv T _ (φ n)
+  have ha (n : ℕ) : a (n + 1) ≫ integralStep l E S K n = a n := by
+    let U := restrict l E S (n + 1)
+    let J := finiteRestrict l E S n
+    let V := finiteExtend l E S n
+    let b := Mod.derivedExtendMapDerivedCategoryAdjunction (transition l E S n)
+    let e := restrictComp l E S n
+    let α := reductionComp l E S n
+    have hc : V.map (φ (n + 1)) ≫ α.hom.app K = α.hom.app T ≫ φ n := by
+      calc
+        _ = α.hom.app T ≫
+            (α.inv.app T ≫ V.map (φ (n + 1)) ≫ α.hom.app K) := by simp
+        _ = _ := congrArg (fun f ↦ α.hom.app T ≫ f) (hφ n)
+    have hs : U.map (φ (n + 1)) ≫ integralStep l E S K n =
+        integralStep l E S T n ≫ (restrict l E S n).map (φ n) := by
+      exact AdicCompletion.restricted_compatible b e (φ (n + 1)) (φ n)
+        (α.hom.app T) (α.hom.app K) hc
+    change ((adj (n + 1)).unit.app T ≫ (restrict l E S (n + 1)).map (φ (n + 1))) ≫
+      integralStep l E S K n = (adj n).unit.app T ≫ (restrict l E S n).map (φ n)
+    rw [Category.assoc, hs, ← Category.assoc]
+    exact congrArg (fun f ↦ f ≫ (restrict l E S n).map (φ n))
+      (reductionUnit_compatible l E S T n)
+  let : CountableAB4Star (Modules l E S) := .of_epi_π_app_zero
+    (Mod.epiπAppZeroOfEpi Scheme.ProEt.epi_π_app_zero_of_epi_addCommGrpCat)
+  let : HasCountableProducts (DerivedCategory (Modules l E S)) :=
+    derivedCategory_hasCountableProducts (Modules l E S)
+  obtain ⟨Q, hQ, ⟨eQ⟩, hη⟩ := hK
+  obtain ⟨p, δ, htriangle, hp⟩ := roos_isDerivedLimit l E S K Q hQ eQ
+  let A : T ⟶ ∏ᶜ (integralLevel l E S K) := Pi.lift a
+  have hA : A ≫ towerTransitionEndomorphism (integralStep l E S K) = 0 := by
+    apply Pi.hom_ext
+    intro n
+    simp only [A, towerTransitionEndomorphism, towerProductShift, Category.assoc,
+      Preadditive.comp_sub, Preadditive.sub_comp, Pi.lift_π,
+      Pi.lift_π_assoc, Category.comp_id, ha, sub_self, zero_comp]
+  obtain ⟨g, hg⟩ := Pretriangulated.Triangle.coyoneda_exact₂ _ htriangle A hA
+  change A = g ≫ p at hg
+  let : IsIso (DerivedCategory.Q.map (augmentation l E S Q)) := hη
+  let v : K ≅ DerivedCategory.Q.obj (roos l E S Q) :=
+    eQ.symm ≪≫ asIso (DerivedCategory.Q.map (augmentation l E S Q))
+  refine ⟨g ≫ v.inv, ?_⟩
+  intro n
+  apply ((adj n).homEquiv T _).injective
+  rw [Adjunction.homEquiv_unit]
+  have hunit : v.hom ≫ p ≫ Pi.π (integralLevel l E S K) n = (adj n).unit.app K := by
+    change completionMap l E S K Q eQ ≫ p ≫ _ = _
+    rw [← Category.assoc, hp, Pi.lift_π]
+  rw [(adj n).unit_naturality]
+  change (g ≫ v.inv) ≫ (adj n).unit.app K = a n
+  rw [← hunit]
+  simp only [Category.assoc, Iso.inv_hom_id_assoc]
+  rw [← Category.assoc, ← hg]
+  exact Pi.lift_π a n
+
+private theorem iso_of_complete_reductions
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+    (S : Scheme.{u}) (T K : DerivedCategory (Modules l E S))
+    (hT : IsDerivedComplete l E S T) (hK : IsDerivedComplete l E S K)
+    (hML : (internalReductionHomTower l E S T K).IsMittagLeffler)
+    (hiso : ∀ n : ℕ, Nonempty
+      ((derivedReduction l E S n).obj T ≅ (derivedReduction l E S n).obj K)) :
+    Nonempty (T ≅ K) := by
+  obtain ⟨s, h₀⟩ := reduction_iso_section l E S T K hML hiso
+  have hs (n : ℕ) : internalReductionHomStep l E S T K n
+      (s.val (op (n + 1))) = s.val (op n) := by
+    have h := s.property (homOfLE (Nat.le_add_right n 1)).op
+    simpa only [internalReductionHomTower, Functor.ofOpSequence_map_homOfLE_succ,
+      TypeCat.ofHom_apply] using h
+  obtain ⟨g, hg⟩ := compatible_reductions_lift l E S T K hK (fun n ↦ s.val (op n)) hs
+  have hred : IsIso ((derivedReduction l E S 0).map g) := by
+    rw [hg 0]
+    exact h₀
+  let : IsIso g := (derived_nakayama_first_reduction l E S).2.2.2 T K g hT hK hred
+  exact ⟨asIso g⟩
+
+private theorem complete_of_iso
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+    (S : Scheme.{u}) {K L : DerivedCategory (Modules l E S)} (e : K ≅ L)
+    (hK : IsDerivedComplete l E S K) : IsDerivedComplete l E S L := by
+  obtain ⟨P, hP, ⟨i⟩, hc⟩ := hK
+  exact ⟨P, hP, ⟨i ≪≫ e⟩, hc⟩
+
+private theorem complete_of_bounded_terms
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+    (S : Scheme.{u}) (P : CochainComplex (Modules l E S) ℤ)
+    (a b : ℤ) (ha : P.IsStrictlyGE a) (hb : P.IsStrictlyLE b)
+    (hterms : ∀ n : ℤ, IsDerivedComplete l E S
+      (DerivedCategory.Q.obj ((CochainComplex.singleFunctor _ 0).obj (P.X n)))) :
+    IsDerivedComplete l E S (DerivedCategory.Q.obj P) := by
+  let : P.IsStrictlyGE a := ha
+  let : P.IsStrictlyLE b := hb
+  let D : ObjectProperty (DerivedCategory (Modules l E S)) := IsDerivedComplete l E S
+  let : D.IsClosedUnderIsomorphisms := ⟨fun e h ↦ complete_of_iso l E S e h⟩
+  let Z := DerivedCategory.Q.obj
+    ((CochainComplex.singleFunctor (Modules l E S) 0).obj (P.X (a - 1)))
+  have hz : IsZero Z := DerivedCategory.Q.map_isZero
+    ((CochainComplex.singleFunctor (Modules l E S) 0).map_isZero
+      (P.isZero_of_isStrictlyGE a (a - 1) (by omega)))
+  let : D.ContainsZero := ⟨⟨Z, hz, hterms (a - 1)⟩⟩
+  let : D.IsStableUnderShift ℤ := ⟨fun n ↦
+    ⟨fun K hK ↦ (derived_nakayama_first_reduction l E S).2.2.1 K hK n⟩⟩
+  let : D.IsTriangulatedClosed₃ := .mk'
+    (fun T hT h₁ h₂ ↦ (derived_nakayama_first_reduction l E S).2.1 T hT h₁ h₂)
+  let : D.IsTriangulatedClosed₂ := .of_isTriangulatedClosed₃
+  let : D.IsTriangulated := {}
+  have hbounded := HomotopyCategory.mem_subcategory_of_strictly_bounded
+    (D.inverseImage DerivedCategory.Qh) P a b (fun n _ _ ↦ ?_)
+  · exact D.prop_of_iso ((DerivedCategory.quotientCompQhIso _).app P) hbounded
+  · let eSingle : DerivedCategory.Qh.obj
+        ((HomotopyCategory.singleFunctor (Modules l E S) 0).obj (P.X n)) ≅
+        DerivedCategory.Q.obj ((CochainComplex.singleFunctor _ 0).obj (P.X n)) :=
+      DerivedCategory.Qh.mapIso
+        ((HomotopyCategory.singleFunctorPostcompQuotientIso (Modules l E S) 0).app
+          (P.X n)) ≪≫
+        (DerivedCategory.quotientCompQhIso _).app
+          ((CochainComplex.singleFunctor _ 0).obj (P.X n))
+    exact D.prop_of_iso eSingle.symm (hterms n)
+
+private def scalarPointComplex
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+    (P : CochainComplex (ModuleCat.{u} (Padic.coefficientExtensionIntegers l E)) ℤ) :
+    CochainComplex (Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+      (DerivedNakayama.integerRing l E)) ℤ :=
+  let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
+  let F := ModuleCat.uliftFunctor.{u + 1, u} (Padic.coefficientExtensionIntegers l E) ⋙
+    continuousScalarFunctor (Padic.coefficientExtensionIntegers l E)
+  (F.mapHomologicalComplex (.up ℤ)).obj P
+
+private theorem scalarPointComplex_free
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+    (P : CochainComplex (ModuleCat.{u} (Padic.coefficientExtensionIntegers l E)) ℤ)
+    (hfree : ∀ n : ℤ, Module.Finite (Padic.coefficientExtensionIntegers l E) (P.X n) ∧
+      Module.Free (Padic.coefficientExtensionIntegers l E) (P.X n)) :
+    ∀ n : ℤ, Mod.IsFree (DerivedNakayama.integerRing l E) ((scalarPointComplex l E P).X n) := by
+  let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
+  intro n
+  let A := Padic.coefficientExtensionIntegers l E
+  let : Module.Finite A (P.X n) := (hfree n).1
+  let : Module.Free A (P.X n) := (hfree n).2
+  obtain ⟨r, ⟨i⟩⟩ := FiniteConstantModel.finiteFree_coordinates A (ULift.{u + 1} (P.X n))
+  exact ⟨r, ⟨(continuousScalarFunctor A).mapIso i.toModuleIso.symm ≪≫
+    ContinuousScalarPresentation.continuousFreeIso A r⟩⟩
+
+private def scalarPointModelIso
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+    (S : Scheme.{u})
+    (P : CochainComplex (ModuleCat.{u} (Padic.coefficientExtensionIntegers l E)) ℤ) :
+    internalPerfectScalarModel l E S P ≅ DerivedCategory.Q.obj
+      (((CondensedRing.upperStarFromPointMod (DerivedNakayama.integerRing l E)
+        S).mapHomologicalComplex (.up ℤ)).obj (scalarPointComplex l E P)) :=
+  Iso.refl _
+
+private theorem scalarPointModel_complete
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+    (S : Scheme.{u})
+    (P : CochainComplex (ModuleCat.{u} (Padic.coefficientExtensionIntegers l E)) ℤ)
+    (a b : ℤ) (ha : P.IsStrictlyGE a) (hb : P.IsStrictlyLE b)
+    (hfree : ∀ n : ℤ, Module.Finite (Padic.coefficientExtensionIntegers l E) (P.X n) ∧
+      Module.Free (Padic.coefficientExtensionIntegers l E) (P.X n)) :
+    IsDerivedComplete l E S (internalPerfectScalarModel l E S P) := by
+  let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
+  let : P.IsStrictlyGE a := ha
+  let : P.IsStrictlyLE b := hb
+  let Q := scalarPointComplex l E P
+  let D : CochainComplex (Modules l E S) ℤ :=
+    ((CondensedRing.upperStarFromPointMod (DerivedNakayama.integerRing l E)
+      S).mapHomologicalComplex (.up ℤ)).obj Q
+  have hQa : Q.IsStrictlyGE a := by
+    dsimp [Q, scalarPointComplex]
+    infer_instance
+  have hQb : Q.IsStrictlyLE b := by
+    dsimp [Q, scalarPointComplex]
+    infer_instance
+  let : Q.IsStrictlyGE a := hQa
+  let : Q.IsStrictlyLE b := hQb
+  have hDa : D.IsStrictlyGE a := inferInstance
+  have hDb : D.IsStrictlyLE b := inferInstance
+  apply complete_of_iso l E S (scalarPointModelIso l E S P).symm
+  apply complete_of_bounded_terms l E S D a b hDa hDb
+  intro n
+  apply (FiniteScalarCompletion.finite_scalar_local_model_complete l E S).2.1 (Q.X n)
+  obtain ⟨r, ⟨e⟩⟩ := scalarPointComplex_free l E P hfree n
+  exact ⟨r, r, 0, ⟨e ≪≫ (cokernelZeroIsoTarget :
+    cokernel (0 : Mod.finiteFree (DerivedNakayama.integerRing l E) r ⟶ _) ≅ _).symm⟩⟩
+
+private theorem restriction_complete
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) (hf : IsImmersion f ∨ WeaklyEtale f)
+    (K : DerivedCategory (Modules l E Y)) (hK : IsDerivedComplete l E Y K) :
+    IsDerivedComplete l E X
+      ((CondensedRing.upperStar (DerivedNakayama.integerRing l E) f).mapDerivedCategory.obj K) := by
+  obtain ⟨S, hS, _, _, hrestrict⟩ :=
+    StrictCompletionRestriction.strict_completion_restriction_comparison l E
+  have hiff (Z : Scheme.{u}) (M : DerivedCategory (Modules l E Z)) :
+      IsDerivedComplete l E Z M ↔ IsIso ((S Z).unit.app M) := by
+    obtain ⟨_, _, _, _, _, _, hcomp⟩ := hS Z
+    exact CompletionTriangle.complete_iff_from_comparison l E Z _ _ hcomp M
+  obtain ⟨_, ⟨c⟩⟩ := hrestrict f (.of f hf)
+  apply (hiff X _).mpr
+  rw [← c.unit K]
+  let : IsIso ((S Y).unit.app K) := (hiff Y K).mp hK
+  infer_instance
+
+private def reductionPullbackIso
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
+    (CondensedRing.upperStar (DerivedNakayama.integerRing l E) f).mapDerivedCategory ⋙
+        derivedReduction l E X n ≅
+      derivedReduction l E Y n ⋙
+        (CondensedRing.upperStar (DerivedNakayama.quotientRing l E (n + 1)) f).mapDerivedCategory :=
+  Functor.isoWhiskerRight
+      (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory
+        (DerivedNakayama.integerRing l E) f).symm _ ≪≫
+    CondensedRing.derivedUpperStarExtendScalarsIso
+      (DerivedNakayama.reductionRing l E (n + 1)) f ≪≫
+    Functor.isoWhiskerLeft _
+      (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory
+        (DerivedNakayama.quotientRing l E (n + 1)) f)
+
+private theorem finiteModel_iso
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {X : Scheme.{u}}
+    {M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)}
+    (e : M ≅ N) (hM : HasFiniteConstantLocalModel Λ X M) :
+    HasFiniteConstantLocalModel Λ X N := by
+  obtain ⟨U, hU⟩ := hM
+  refine ⟨U, fun i ↦ ?_⟩
+  obtain ⟨P, hP, ⟨eP⟩⟩ := hU i
+  exact ⟨P, hP, ⟨((CondensedRing.upperStar Λ (U.f i)).mapIso e).symm ≪≫ eP⟩⟩
+
+private theorem finiteModel_composite
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    (M : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z))
+    (hM : HasFiniteConstantLocalModel Λ Y ((CondensedRing.upperStar Λ g).obj M)) :
+    HasFiniteConstantLocalModel Λ X ((CondensedRing.upperStar Λ (f ≫ g)).obj M) :=
+  finiteModel_iso Λ ((CondensedRing.upperStarComp Λ f g).app M).symm
+    (pullback_finiteConstantLocalModel Λ f _ hM)
+
+private theorem finiteModel_zero
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (X : Scheme.{u})
+    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
+    (hM : IsZero M) : HasFiniteConstantLocalModel Λ X M := by
+  refine ⟨.singleton (𝟙 X) (Precoverage.mem_coverings_of_isIso _), fun i ↦ ?_⟩
+  dsimp only [Precoverage.ZeroHypercover.singleton, PreZeroHypercover.singleton]
+  refine ⟨0, ?_, ⟨?_⟩⟩
+  · exact ⟨0, 0, 𝟙 _, ⟨(isZero_zero _).iso (isZero_cokernel_of_epi (𝟙 _))⟩⟩
+  · apply ((CondensedRing.upperStar Λ _).map_isZero hM).iso
+    simpa only [CondensedRing.upperStarFromPointMod] using
+      (CondensedRing.upperStarFromPointMod Λ X).map_isZero (isZero_zero _)
+
+private theorem finiteModel_congr
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    {X Y : Scheme.{u}} (f g : X ⟶ Y) (h : f = g)
+    (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))
+    (hM : HasFiniteConstantLocalModel Λ X ((CondensedRing.upperStar Λ f).obj M)) :
+    HasFiniteConstantLocalModel Λ X ((CondensedRing.upperStar Λ g).obj M) := by
+  subst g
+  exact hM
+
+private def finiteModelAlong
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    {X : Scheme.{u}}
+    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
+    {Y : Scheme.{u}} (f : Y ⟶ X) : Prop :=
+  HasFiniteConstantLocalModel Λ Y ((CondensedRing.upperStar Λ f).obj M)
+
+private theorem finite_family_stratification
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (X : Scheme.{u}) {ι : Type v}
+    (M : ι → Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
+    (hM : ∀ q : ι, IsFiniteConstantStratified Λ X (M q)) (s : Finset ι) :
+    ∃ S : Scheme.Stratification X, ∀ q ∈ s, ∀ i : Fin S.n,
+      finiteModelAlong Λ (M q) (S.immersion i) := by
+  classical
+  induction s using Finset.induction_on with
+  | empty => exact ⟨Scheme.Stratification.trivial X, by simp⟩
+  | @insert q s hqs ih =>
+      obtain ⟨S, hS⟩ := ih
+      obtain ⟨T, hT⟩ := hM q
+      refine ⟨S.inter T, fun r hr i ↦ ?_⟩
+      let k := (finProdFinEquiv.symm i)
+      change finiteModelAlong Λ (M r)
+        (pullback.fst (S.immersion k.1) (T.immersion k.2) ≫ S.immersion k.1)
+      rcases Finset.mem_insert.mp hr with h | hr
+      · subst r
+        have h := finiteModel_composite Λ
+          (pullback.snd (S.immersion k.1) (T.immersion k.2)) (T.immersion k.2)
+          (M q) (hT k.2)
+        exact finiteModel_congr Λ _ _ pullback.condition.symm (M q) h
+      · exact finiteModel_composite Λ
+          (pullback.fst (S.immersion k.1) (T.immersion k.2)) (S.immersion k.1)
+          (M r) (hS r hr k.1)
+
+private theorem simultaneous_finite_models
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (X : Scheme.{u}) [IsNoetherian X]
+    (K : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)))
+    (hK : constantModelBoundedConstructible Λ X K) :
+    ∃ S : Scheme.Stratification X, ∀ (q : ℤ) (i : Fin S.n),
+      HasFiniteConstantLocalModel Λ (S.domain i)
+        ((CondensedRing.upperStar Λ (S.immersion i)).obj
+          ((DerivedCategory.homologyFunctor _ q).obj K)) := by
+  classical
+  have hcons (q : ℤ) : IsFiniteConstantStratified Λ X
+      ((DerivedCategory.homologyFunctor _ q).obj K) := by
+    simpa only [IsConstantModelConstructible, if_pos
+      (show CompactSpace X ∧ QuasiSeparatedSpace X from ⟨inferInstance, inferInstance⟩)]
+      using hK.2 q
+  obtain ⟨⟨a, ha⟩, ⟨b, hb⟩⟩ := hK.1
+  obtain ⟨S, hS⟩ := finite_family_stratification Λ X
+    (fun q ↦ (DerivedCategory.homologyFunctor _ q).obj K) hcons (Finset.Icc a b)
+  refine ⟨S, fun q i ↦ ?_⟩
+  by_cases hq : a ≤ q ∧ q ≤ b
+  · exact hS q (Finset.mem_Icc.mpr hq) i
+  · apply finiteModel_zero
+    apply (CondensedRing.upperStar Λ (S.immersion i)).map_isZero
+    by_cases hqa : q < a
+    · exact (DerivedCategory.isGE_iff K a).mp ha q hqa
+    · exact (DerivedCategory.isLE_iff K b).mp hb q (by omega)
+
+private theorem noetherian_stratum {X : Scheme.{u}} [IsNoetherian X]
+    (S : Scheme.Stratification X) (s : Fin S.n) : IsNoetherian (S.domain s) := by
+  have := LocallyOfFiniteType.isLocallyNoetherian (S.immersion s)
+  have : TopologicalSpace.NoetherianSpace (S.domain s) :=
+    (S.immersion s).isEmbedding.isInducing.noetherianSpace
+  exact {}
+
+private theorem local_structure_on_chart
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+    (X : Scheme.{u}) (W : X.ProEt) (haff : IsAffine W.left)
+    (hweak : (Scheme.ProEt.topology X).IsWeaklyContractible.{u + 1} W)
+    (K : DerivedCategory (Modules l E W.left)) (hK : IsDerivedComplete l E W.left K)
+    (P : CochainComplex (ModuleCat.{u} (Padic.coefficientExtensionIntegers l E)) ℤ)
+    (a b : ℤ) (ha : P.IsStrictlyGE a) (hb : P.IsStrictlyLE b)
+    (hP : ∀ i : ℤ, Module.Finite (Padic.coefficientExtensionIntegers l E) (P.X i) ∧
+      Module.Free (Padic.coefficientExtensionIntegers l E) (P.X i))
+    (hiso : ∀ n : ℕ, Nonempty
+      ((derivedReduction l E W.left n).obj (internalPerfectScalarModel l E W.left P) ≅
+        (derivedReduction l E W.left n).obj K)) :
+    ∃ Q : CochainComplex (Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+        (DerivedNakayama.integerRing l E)) ℤ,
+      Q.IsStrictlyGE a ∧ Q.IsStrictlyLE b ∧
+      (∀ q : ℤ, Mod.IsFree (DerivedNakayama.integerRing l E) (Q.X q)) ∧
+      Nonempty (K ≅ DerivedCategory.Q.obj
+        (((CondensedRing.upperStarFromPointMod (DerivedNakayama.integerRing l E)
+          W.left).mapHomologicalComplex (.up ℤ)).obj Q)) := by
+  obtain ⟨e, he⟩ := integralScalarDualTensor_torsionBound l E P a b ha hb (fun i ↦ (hP i).1)
+  have hML := (internalPerfectReductionHom_mittagLeffler l E X W haff hweak
+    P a b ha hb hP K hiso e he).2
+  obtain ⟨i⟩ := iso_of_complete_reductions l E W.left
+    (internalPerfectScalarModel l E W.left P) K
+    (scalarPointModel_complete l E W.left P a b ha hb hP) hK hML hiso
+  let : P.IsStrictlyGE a := ha
+  let : P.IsStrictlyLE b := hb
+  refine ⟨scalarPointComplex l E P, ?_, ?_, scalarPointComplex_free l E P hP,
+    ⟨i.symm ≪≫ scalarPointModelIso l E W.left P⟩⟩
+  · dsimp [scalarPointComplex]
+    infer_instance
+  · dsimp [scalarPointComplex]
+    infer_instance
+
+private def coverObject {X : Scheme.{u}}
+    (U : Scheme.Cover.{u} Scheme.proetalePrecoverage X) (i : U.I₀) : X.ProEt :=
+  let : WeaklyEtale (U.f i) := Scheme.Cover.map_prop U.forgetQc i
+  Scheme.ProEt.mk (U.f i)
+
+private theorem connected_contractible_cover (X : Scheme.{u}) [IsNoetherian X] :
+    ∃ U : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ i : U.I₀,
+      IsAffine (U.X i) ∧
+      (Scheme.ProEt.topology X).IsWeaklyContractible.{u + 1} (coverObject U i) ∧
+      Scheme.AdicResidueSliceWeaklyContractible.{u, u} X (AsSmall.up.obj (coverObject U i)) ∧
+      ∃ z : X, Set.range (U.f i).base ⊆ connectedComponent z := by
+  classical
+  let O (z : X) : X.Opens := ⟨connectedComponent z,
+    TopologicalSpace.NoetherianSpace.isOpen_connectedComponent z⟩
+  let V (z : X) : X.ProEt := Scheme.ProEt.mk (O z).ι
+  choose κ W h hcover hW using
+    fun z : X ↦ (Scheme.ProEt.weaklyContractible_basis X).1 (V z)
+  let E (z : X) : Scheme.Cover.{u} Scheme.proetalePrecoverage (O z).toScheme :=
+    { I₀ := κ z
+      X := fun j ↦ (W z j).left
+      f := fun j ↦ (h z j).left
+      mem₀ := by
+        have hh := hcover z
+        rw [Scheme.ProEt.mem_precoverage_iff, Presieve.map_ofArrows] at hh
+        exact hh }
+  let C := X.openCoverOfIsOpenCover O (by
+    apply eq_top_iff.mpr
+    intro z _
+    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨z, mem_connectedComponent⟩)
+  let B := (C.weaken (Scheme.zariskiPrecoverage_le_propQCPrecoverage
+    (P := @WeaklyEtale))).bind E
+  refine ⟨B, fun i ↦ ?_⟩
+  obtain ⟨R, hR, ⟨e⟩⟩ := hW i.1 i.2
+  let := hR
+  have ha : IsAffine (B.X i) := IsAffine.of_isIso e.inv
+  refine ⟨ha, Scheme.ProEt.isWeaklyContractible_of_iso (R := R) e.symm,
+    Scheme.coefficientSliceWeaklyContractible_of_wContractible X (coverObject B i) R e.symm,
+    i.1, ?_⟩
+  rintro _ ⟨x, rfl⟩
+  exact ((h i.1 i.2).left x).property
 
 /-- A derived complete integral complex with bounded constructible residue reduction
 has bounded finite free scalar models pro-etale locally on a finite stratification.
@@ -838,6 +1380,95 @@ theorem integral_local_structure
               DerivedCategory.Q.obj
                 (((CondensedRing.upperStarFromPointMod (DerivedNakayama.integerRing l E)
                     (U.X i)).mapHomologicalComplex (.up ℤ)).obj P)) := by
-  sorry
+  classical
+  obtain ⟨S, hS⟩ := simultaneous_finite_models
+    (DerivedNakayama.quotientRing l E 1) X _ hr
+  obtain ⟨⟨a, ha⟩, ⟨b, hb⟩⟩ := hr.1
+  have hbound (q : ℤ) (hq : q < min a b ∨ b < q) :
+      IsZero ((DerivedCategory.homologyFunctor _ q).obj
+        ((derivedReduction l E X 0).obj K)) := by
+    rcases hq with hq | hq
+    · exact (DerivedCategory.isGE_iff _ a).mp ha q (hq.trans_le (min_le_left _ _))
+    · exact (DerivedCategory.isLE_iff _ b).mp hb q hq
+  obtain ⟨hlevels, _, hlisse⟩ := integral_finite_levels l E X K hc hr
+    (min a b) b (min_le_right _ _) hbound
+  refine ⟨S, fun s ↦ ?_⟩
+  let : IsNoetherian (S.domain s) := noetherian_stratum S s
+  obtain ⟨U, hU⟩ := connected_contractible_cover (S.domain s)
+  refine ⟨U, fun i ↦ ?_⟩
+  obtain ⟨haff, hweak, hweakModel, z, himage⟩ := hU i
+  have hmod := hlisse S s (fun q ↦ hS q s)
+  let : WeaklyEtale (U.f i) := Scheme.Cover.map_prop U.forgetQc i
+  let Ks := (CondensedRing.upperStar (DerivedNakayama.integerRing l E)
+    (S.immersion s)).mapDerivedCategory.obj K
+  let Ki := (CondensedRing.upperStar (DerivedNakayama.integerRing l E)
+    (U.f i)).mapDerivedCategory.obj Ks
+  have hcs : IsDerivedComplete l E (S.domain s) Ks :=
+    restriction_complete l E (S.immersion s) (Or.inl inferInstance) K hc
+  have hci : IsDerivedComplete l E (U.X i) Ki :=
+    restriction_complete l E (U.f i) (Or.inr inferInstance) Ks hcs
+  let eKi : (CondensedRing.upperStar (DerivedNakayama.integerRing l E)
+      (U.f i ≫ S.immersion s)).mapDerivedCategory.obj K ≅ Ki :=
+    (Functor.mapDerivedCategoryNatIso
+      (CondensedRing.upperStarComp (DerivedNakayama.integerRing l E)
+        (U.f i) (S.immersion s))).app K ≪≫
+      (Functor.mapDerivedCategoryCompIso _ _).app K
+  let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
+  let (n : ℕ) : Finite (Padic.coefficientExtensionRing l E (n + 1)) :=
+    Padic.finite_coefficientExtensionRing l E (n + 1) (by omega)
+  obtain ⟨enc, C, hC, hβ, henc⟩ := integralFiniteEtale_models l E
+    (S.immersion s) K (min a b) b (min_le_right _ _) hlevels hmod
+  let V : Scheme.coefficientProEtaleSiteModel.{u, u} (S.domain s) :=
+    AsSmall.up.obj (coverObject U i)
+  let B (n : ℕ) := ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))
+  let St (n : ℕ) : DerivedCategory (ModuleCat.{u + 1} (B n)) :=
+    (Scheme.coefficientEtaleDerivedStalk.{u, u} (S.domain s) (B n)
+      ((S.domain s).algClosurePoint z)).obj (C n)
+  have hlocal (n : ℕ) := Scheme.coefficient_connected_stalk_constant
+    (S.domain s) (B n) z V haff hweakModel himage (C n)
+    (hC n).1 (hC n).2.1 (min a b) b (hC n).2.2
+  have hSt (n : ℕ) : DerivedCategory.IsPerfect (St n) := (hlocal n).1
+  have hStβ (n : ℕ) : Nonempty
+      ((ConstantScalarRealization.moduleDerivedExtension
+        (IntegralSmallPerfect.uliftRingMap
+          (Padic.coefficientExtensionTransition l E (n + 1)))).obj (St (n + 1)) ≅ St n) := by
+    obtain ⟨e⟩ := Scheme.coefficientEtale_stalk_scalarExtension.{u, u} (S.domain s)
+      (IntegralSmallPerfect.uliftRingMap
+        (Padic.coefficientExtensionTransition l E (n + 1)))
+      ((S.domain s).algClosurePoint z) (C (n + 1))
+    obtain ⟨β⟩ := hβ n
+    exact ⟨e ≪≫ (Scheme.coefficientEtaleDerivedStalk.{u, u} (S.domain s) (B n)
+      ((S.domain s).algClosurePoint z)).mapIso β⟩
+  obtain ⟨M, hM, hMe, f, hf⟩ := IntegralSmallPerfect.smallPerfect_tower
+    (fun n ↦ Padic.coefficientExtensionRing l E (n + 1))
+    (fun n ↦ Padic.coefficientExtensionTransition l E (n + 1)) St hSt hStβ
+  obtain ⟨P, c, d, hPa, hPb, hP, p, hp, _⟩ :=
+    Padic.integral_scalar_tower_lift l E M f hM hf
+  have hP' (q : ℤ) : Module.Finite (Padic.coefficientExtensionIntegers l E) (P.X q) ∧
+      Module.Free (Padic.coefficientExtensionIntegers l E) (P.X q) :=
+    ⟨(hP q).2, (hP q).1⟩
+  have hmodels (n : ℕ) : Nonempty
+      ((derivedReduction l E (U.X i) n).obj
+          (internalPerfectScalarModel l E (U.X i) P) ≅
+        (derivedReduction l E (U.X i) n).obj Ki) := by
+    obtain ⟨er⟩ := integralScalarReduction_of_universal l E (U.X i)
+      P c d hPa hPb hP' n (M n) (p n) (hp n)
+    obtain ⟨ec⟩ := henc n
+    obtain ⟨el⟩ := (hlocal n).2
+    let H := Scheme.adicResidueRestriction
+      (ConstantCompletion.constant
+        (Scheme.coefficientProEtaleModelTopology.{u, u} (S.domain s)) (B n)) V
+    obtain ⟨em⟩ := integralFiniteConstant_comparison l E n (S.domain s)
+      (coverObject U i) (enc n) _ (M n) (St n) (hMe n)
+      ⟨el ≪≫ H.mapIso ec.symm⟩
+    let F := (CondensedRing.upperStar (DerivedNakayama.quotientRing l E (n + 1))
+      (U.f i)).mapDerivedCategory
+    let e₁ := (reductionPullbackIso l E (U.f i) n).app Ks
+    let e₂ := (reductionPullbackIso l E (S.immersion s) n).app K
+    exact ⟨er ≪≫ em ≪≫ (e₁ ≪≫ F.mapIso e₂).symm⟩
+  obtain ⟨Q, hQlo, hQhi, hQfree, ⟨eQ⟩⟩ :=
+    local_structure_on_chart l E (S.domain s) (coverObject U i) haff hweak
+      Ki hci P c d hPa hPb hP' hmodels
+  exact ⟨Q, c, d, hQlo, hQhi, hQfree, ⟨eKi ≪≫ eQ⟩⟩
 
 end AlgebraicGeometry.ProEtale

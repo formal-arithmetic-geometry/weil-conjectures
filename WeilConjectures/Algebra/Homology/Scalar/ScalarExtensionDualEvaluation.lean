@@ -31,8 +31,6 @@ local notation:max "Mod" R:arg =>
 set_option hygiene false in
 local notation:max "𝒪" R:arg => unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)
 
-omit [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
-  [HasWeakSheafify J AddCommGrpCat.{u}] in
 /-- scalarDual_section_ext: the scalar-extension evaluation construction.
 Source: Stacks Project, Tags 03EK and 04TT
 (blueprint: lem-sp-scalar-extension-dual-evaluation).

@@ -75,13 +75,11 @@ private noncomputable def cyclesIso {U V : C} {U' V' : B}
     (h : Φ.map f ≫ eV.hom = eU.hom ≫ g) : Φ.obj (kernel f) ≅ kernel g :=
   PreservesKernel.iso Φ f ≪≫ kernel.mapIso (Φ.map f) g eU eV h
 
-omit [PreservesFiniteColimits Φ] in
 private noncomputable def quotientIso {U V : C} {U' V' : B}
     (f : U ⟶ V) (g : U' ⟶ V') (eU : Φ.obj U ≅ U') (eV : Φ.obj V ≅ V')
     (h : Φ.map f ≫ eV.hom = eU.hom ≫ g) : Φ.obj (cokernel f) ≅ cokernel g :=
   PreservesCokernel.iso Φ f ≪≫ cokernel.mapIso (Φ.map f) g eU eV h
 
-omit [PreservesFiniteLimits Φ] in
 private structure Comparison (X : BigradedExactCouple C s)
     (Y : BigradedExactCouple B s) where
   δ : ∀ p q, Φ.obj (X.D p q) ≅ Y.D p q
@@ -109,23 +107,16 @@ private noncomputable def Comparison.di {X : BigradedExactCouple C s}
   imageIso Φ _ _ (e.δ (p + 1) (q - 1)) (e.δ (p + 1 - 1) (q - 1 + 1))
     (e.ha (p + 1) (q - 1))
 
-omit [Φ.Additive] in
 private noncomputable def Comparison.ki {X : BigradedExactCouple C s}
     {Y : BigradedExactCouple B s} (e : Comparison Φ X Y) (p q : ℤ) :
     Φ.obj (kernel (X.d p q)) ≅ kernel (Y.d p q) :=
   cyclesIso Φ _ _ (e.φ p q) (e.φ (p + 2 + s) (q - 1 - s)) (e.hd p q)
 
-omit [PreservesFiniteColimits Φ] in
-omit [Φ.Additive] [PreservesFiniteLimits Φ] [PreservesFiniteColimits Φ] in
-omit [PreservesFiniteColimits Φ] in
 private noncomputable def Comparison.ei {X : BigradedExactCouple C s}
     {Y : BigradedExactCouple B s} (e : Comparison Φ X Y) (p q : ℤ) :
     Φ.obj (X.derivedE p q) ≅ Y.derivedE p q :=
   quotientIso Φ _ _ (e.φ (p - s - 2) (q + s + 1)) (e.ki p q) (e.lift_comm p q)
 
-omit [Φ.Additive] in
-omit [Φ.Additive] in
-omit [PreservesFiniteColimits Φ] in
 private noncomputable def Comparison.next {X : BigradedExactCouple C s}
     {Y : BigradedExactCouple B s} (e : Comparison Φ X Y) :
     Comparison Φ X.derived Y.derived where

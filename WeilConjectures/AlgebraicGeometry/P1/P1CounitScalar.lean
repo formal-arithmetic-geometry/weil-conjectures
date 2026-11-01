@@ -576,6 +576,18 @@ import all Mathlib.CategoryTheory.Adjunction.Whiskering
 import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinaryFiniteP1DatumUniqueness
 import WeilConjectures.AlgebraicGeometry.Proper.ProperFiniteCoefficientExtension
 import WeilConjectures.AlgebraicGeometry.ExceptionalCoefficients.ExceptionalCoefficientUnitCoherence
+public import WeilConjectures.AlgebraicGeometry.Picard.DerivedChangeOfRingsIndependentCoefficients
+public import WeilConjectures.AlgebraicGeometry.Picard.KFlatResolutionIndependentCoefficients
+public import WeilConjectures.AlgebraicGeometry.Reduction.ReductionExceptionalObjects
+public import WeilConjectures.AlgebraicGeometry.VectorTraceScalar.VectorTraceScalarAffineInduction
+public import WeilConjectures.ProperBaseChange.GeometricModuleConstruction
+public import WeilConjectures.ProperBaseChange.RingedTopoiDerivedPullback
+public import WeilConjectures.ProperBaseChange.RingedToposDerivedPushforwardComposition
+public import WeilConjectures.SmoothPurity.EtaleFiniteTwistPullbackRest
+public import WeilConjectures.SmoothPurity.FiniteEtaleTateLinePullback
+public import WeilConjectures.SmoothPurity.FiniteP1ChernMapBaseChange
+public import WeilConjectures.SmoothPurity.OrdinaryFiniteTwistTransportUniqueness
+public import WeilConjectures.SmoothPurity.SupportedDerivedUnitForget
 
 /-!
 # Scalar compatibility of the normalized projective-line counit
@@ -632,6 +644,19 @@ attribute [local irreducible] Functor.leftAdjoint Functor.rightAdjoint
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
 attribute [-instance] CategoryTheory.catToReflQuiver in
+
+private theorem transpose_of_counit_square
+    {C D : Type*} [Category C] [Category D]
+    {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G)
+    {X : C} {Y Z : D} (β : Y ⟶ F.obj X) [IsIso β]
+    (a : X ⟶ G.obj Z) (ε : Y ⟶ Z)
+    (h : β ≫ F.map a ≫ adj.counit.app Z = ε) :
+    a = adj.homEquiv _ _ (inv β ≫ ε) := by
+  apply (adj.homEquiv _ _).symm.injective
+  rw [Equiv.symm_apply_apply]
+  change F.map a ≫ adj.counit.app Z = inv β ≫ ε
+  rw [← h, IsIso.inv_hom_id_assoc]
+
 private theorem tensor_trace_counit_square
     {C D : Type*} [Category C] [Category D]
     (T : C ⥤ D) (TA : C ⥤ C ⥤ C) (TB : D ⥤ D ⥤ D)
@@ -784,21 +809,17 @@ t_B b=e_unit T_S(t_A), with the same Kummer-normalized trace and balanced lambda
 lem-amb-proper-coproducts-projection. Substitute the actual counit formulas, then
 use tensorator naturality at (1_K,t_A) and its right-unit equation. The result is
 beta(G_A K) F_B(a_K) epsilon_B=T_S(epsilon_A), the first displayed equation.
-(6) S is Noetherian because it is finite type over a field. By
-lem-sp-finite-coefficient-input-models, K has a bounded flat constructible model and
-its coefficient extension remains in Dctf. Exact inverse image preserves this model's
-bounds and flat terms. Pull back a constructible stratification: base-changed locally
-closed strata are constructible by lem-pur-scheme-constructible-preimage, and the
-trivializing etale covers pull back. Tensor with the locally rank-one twist and shift;
-this gives a bounded flat constructible model of G_A K. Its finite degree interval
-bounds Tor against every degree-zero module. Thus beta is invertible there by
-lem-sp-et-proet-coefficient-compatibility. Precompose the first equation with its
-inverse. The exceptional B-adjunction Hom bijection identifies a_K with the unique
-transpose of beta(G_A K) inverse followed by T_S(epsilon_A), equivalently the mate
-of beta inverse on the finite-Tor subcategories. N=ell^n is invertible on S because
-ell differs from the positive characteristic; the same-annihilator root comparison
-exists by ordinary balancing and flatness of the Tate line. Its generators and scalar
-counit normalization fix the isomorphism used in both displayed clauses. -/
+(6) S is Noetherian because it is finite type over a field, and P is Noetherian
+because it is proper over S. The proper finite coefficient extension theorem
+lem-asd-proper-finite-coefficient-extension makes beta invertible on every input,
+in particular at G_A K, so no bounded flat model is needed. Precompose the first
+equation with its inverse. The exceptional B-adjunction Hom bijection identifies a_K
+with the unique transpose of beta(G_A K) inverse followed by T_S(epsilon_A).
+N=ell^n is invertible on S because ell differs from the positive characteristic. The
+same-annihilator root comparison is constructed with the identity root map and the
+generator-normalized ordinary Tate scalar map; generator uniqueness identifies it with
+the balanced vector-trace map, and the uniqueness theorems for normalized twist
+transports and P1 data identify the arbitrary data with the canonical trace data. -/
 theorem p1_counit_scalar
     (ell p n : ℕ) [Fact ell.Prime] (_hp : 0 < p) (_hEll : p ≠ ell)
     (k : Type u) [Field k] [CharP k p]
@@ -841,6 +862,88 @@ theorem p1_counit_scalar
             (@inv _ _ _ _ ((scalarMate φ (ProjectiveLine S ↘ S)).app
                 ((ordinaryFiniteP1Right A (ell ^ n) hA S).obj K)) hβ ≫
               (scalarExtension φ S).map (dA.adjunction.counit.app K)) := by
-  sorry
+  classical
+  have hN : 0 < ell ^ n := pow_pos (Fact.out : ell.Prime).pos n
+  have hS : IsUnit ((ell ^ n : ℕ) : Γ(S, ⊤)) := by
+    have h : (ell : k) ≠ 0 := CharP.cast_ne_zero_of_ne_of_prime k
+      (Fact.out : ell.Prime) _hEll
+    have hu := (isUnit_iff_ne_zero.mpr (pow_ne_zero n h)).map
+      (Scheme.ΓSpecIso (.of k)).inv.hom
+    simpa only [map_pow, map_natCast, Nat.cast_pow] using
+      hu.map (S ↘ Spec (.of k)).appTop.hom
+  let : IsLocallyNoetherian S :=
+    LocallyOfFiniteType.isLocallyNoetherian (S ↘ Spec (.of k))
+  let : CompactSpace S :=
+    QuasiCompact.compactSpace_of_compactSpace (S ↘ Spec (.of k))
+  let : IsNoetherian S := ⟨⟩
+  let T := ProjectiveLine S
+  have hT := ordinaryFiniteP1_isUnit (ell ^ n) S hS
+  have hi := ProEtale.reductionTateOrdinaryScalar_isIso φ T (ell ^ n) hA hB
+  let e : FiniteSmoothPurity.CoefficientLineComparison φ (ell ^ n) (ell ^ n) hA hB T := {
+    roots := 𝟙 _
+    roots_power := by
+      rw [Nat.div_self hN, one_nsmul]
+      exact Category.id_comp _
+    sheafIso := asIso (((ProEtale.etaleSheafExtendScalarsAdjunction φ T).homEquiv _ _).symm
+      (ProEtale.reductionEtaleTateMap φ T (ell ^ n) hA hB))
+    generators := by
+      intro W a z
+      simp only [asIso_hom, Equiv.apply_symm_apply]
+      change (ProEtale.reductionEtaleTateMap φ T (ell ^ n) hA hB).hom.app W
+        (Scheme.finiteEtaleTateOneGenerator A (ell ^ n) T hA W a z) =
+          Scheme.finiteEtaleTateOneGenerator B (ell ^ n) T hB W (φ a) z
+      simpa only [ProEtale.reductionEtaleTateMap] using
+        (ProEtale.reductionEtaleTateMap_existsUnique φ T (ell ^ n) hA hB).exists.choose_spec
+          W a z
+    derivedIso := ProEtale.reductionEtaleTateIso φ T (ell ^ n) hA hB hT
+    derived_normalization := by rfl }
+  refine ⟨hS, e, ?_⟩
+  intro tA tB dA dB K _hK
+  obtain rfl := ordinaryFiniteTwistTransport_unique A (ell ^ n) hA tA
+    (projectiveLineTraceTransport (ell ^ n) hN A hA)
+  obtain rfl := ordinaryFiniteTwistTransport_unique B (ell ^ n) hB tB
+    (projectiveLineTraceTransport (ell ^ n) hN B hB)
+  obtain rfl := ordinaryFiniteP1Datum_unique A (ell ^ n) hA _ S hS dA
+    (projectiveLineTraceDatum (ell ^ n) hN A hA S hS)
+  obtain rfl := ordinaryFiniteP1Datum_unique B (ell ^ n) hB _ S hS dB
+    (projectiveLineTraceDatum (ell ^ n) hN B hB S hS)
+  have hb := comparison_balancing_sheaf φ (ell ^ n) hN hA hB T hT e
+  have hline : (ProEtale.reductionEtaleShiftedLineIso φ T (ell ^ n) hA hB hT).hom =
+      VectorTraceScalar.line φ (ell ^ n) hN hA hB T hT := by
+    dsimp only [ProEtale.reductionEtaleShiftedLineIso, Iso.trans_hom,
+      Iso.app_hom, Functor.mapIso_hom, ProEtale.reductionEtaleTateIso, asIso_hom,
+      ProEtale.reductionEtaleTateExtensionMap, VectorTraceScalar.line,
+      WeilConjectures.PurityFiniteSetting.finiteTateScalarLineMap]
+    simp only [Int.natCast_one]
+    change _ = (VectorTraceScalar.balancing φ (ell ^ n) hN hA hB T hT 1).hom at hb
+    rw [← hb]
+    rfl
+  have ha : (ProEtale.reductionEtaleP1ScalarIso φ S (ell ^ n) hA hB hS K).hom =
+      VectorTraceScalar.projectiveSource φ (ell ^ n) hN hA hB S hS K := by
+    simp only [ProEtale.reductionEtaleP1ScalarIso, Iso.trans_hom, Iso.app_hom,
+      Functor.mapIso_hom, Iso.prod_hom, Functor.uncurry_obj_map,
+      Iso.symm_hom, VectorTraceScalar.projectiveSource]
+    rw [hline]
+    rfl
+  have hc := VectorTraceScalar.p1_counit_from_trace φ (ell ^ n) hN hA hB S hS
+    (VectorTraceScalar.projective_trace_square (ell ^ n) hN φ hA hB S hS) K
+  rw [← ha] at hc
+  change ((scalarMate φ (ProjectiveLine S ↘ S)).app
+      ((ordinaryFiniteP1Right A (ell ^ n) hA S).obj K) ≫
+    (ordinaryFinitePushforward B (ProjectiveLine S ↘ S)).map
+      (ProEtale.reductionEtaleP1ScalarIso φ S (ell ^ n) hA hB hS K).hom ≫
+    (projectiveLineTraceDatum (ell ^ n) hN B hB S hS).adjunction.counit.app
+      ((scalarExtension φ S).obj K) = _) ∧ _
+  refine ⟨hc, ?_⟩
+  have : IsLocallyNoetherian (ProjectiveLine S) :=
+    LocallyOfFiniteType.isLocallyNoetherian (ProjectiveLine S ↘ S)
+  have : CompactSpace (ProjectiveLine S) :=
+    QuasiCompact.compactSpace_of_compactSpace (ProjectiveLine S ↘ S)
+  have : IsNoetherian (ProjectiveLine S) := ⟨⟩
+  have hβ := (properFiniteCoefficientExtension φ (ProjectiveLine S ↘ S)).1
+    ((ordinaryFiniteP1Right A (ell ^ n) hA S).obj K)
+  refine ⟨hβ, ?_⟩
+  exact transpose_of_counit_square
+    (projectiveLineTraceDatum (ell ^ n) hN B hB S hS).adjunction _ _ _ hc
 
 end AlgebraicGeometry.Etale

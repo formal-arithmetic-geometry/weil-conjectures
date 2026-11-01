@@ -278,7 +278,6 @@ private theorem restriction_colimits
     inferInstanceAs (PreservesColimitsOfSize.{u, u} (SheafOfModules.toSheaf.{u} (rings B)))
   exact preservesColimits_of_reflects_of_preserves _ (SheafOfModules.toSheaf.{u} (rings R))
 
-set_option backward.isDefEq.respectTransparency false in
 private theorem sectionScalar_word_zero
     {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{u}) (r : ℕ)

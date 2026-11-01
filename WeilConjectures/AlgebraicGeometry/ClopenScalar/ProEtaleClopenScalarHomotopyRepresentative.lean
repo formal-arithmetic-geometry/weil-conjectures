@@ -36,7 +36,6 @@ variable {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B]
   [HasDerivedCategory A] [HasDerivedCategory B]
 
 omit [HasDerivedCategory A] [HasDerivedCategory B] in
-omit [HasDerivedCategory A] [HasDerivedCategory B] in
 private theorem homotopyFactors_inv (F : A ⥤ B) [F.Additive]
     (P : CochainComplex A ℤ) :
     (F.mapHomotopyCategoryFactors (.up ℤ)).inv.app P = 𝟙 _ := by
@@ -47,6 +46,5 @@ end QuotientFormulas
 
 attribute [local irreducible] computation
 
-set_option maxHeartbeats 800000 in
 -- The quotient square has several dependent localization and coefficient functor types.
 end AlgebraicGeometry.Scheme.ProEt.ClopenScalar

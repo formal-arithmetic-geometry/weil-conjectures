@@ -21,6 +21,9 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantRingP
 import WeilConjectures.SixFunctors.Exceptional.ExceptionalFiniteOperations
 import WeilConjectures.AlgebraicGeometry.Finite.FiniteCtfTriangulated
 import all WeilConjectures.AlgebraicGeometry.Scalar.ScalarExtensionFunctor
+public import Mathlib.CategoryTheory.Adjunction.Mates
+public import WeilConjectures.SixFunctors.CoefDualFormulaScalarTranspose.CoefDualFormulaFiniteTrace
+public import WeilConjectures.SixFunctors.Exceptional.ExceptionalFiniteRestrictionAdjunction
 
 /-!
 # Finite exceptional inverse image and quotient coefficients
@@ -44,6 +47,39 @@ namespace WeilConjectures.FiniteExceptional
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+
+private theorem support_inverse
+    {C D C' D' : Type*} [Category* C] [Category* D] [Category* C'] [Category* D']
+    (EX : C ≌ C') (EY : D ≌ D') (P : C ⥤ D) (S : C' ⥤ D')
+    (t : EX.functor ⋙ S ≅ P ⋙ EY.functor) (M : C) (L : D)
+    (v : P.obj M ⟶ L) :
+    (Iso.inverseCompIso
+      ((Iso.compInverseIso t).symm ≪≫ Functor.associator _ _ _)).hom.app
+        (EX.functor.obj M) ≫ EY.inverse.map (t.hom.app M ≫ EY.functor.map v) =
+      P.map (EX.unitIso.inv.app M) ≫ v ≫ EY.unitIso.hom.app L := by
+  have ht : t.inv.app (EX.inverse.obj (EX.functor.obj M)) ≫
+      S.map (EX.counitIso.hom.app (EX.functor.obj M)) ≫ t.hom.app M =
+        EY.functor.map (P.map (EX.unitIso.inv.app M)) := by
+    rw [EX.counit_app_functor]
+    change t.inv.app (EX.inverse.obj (EX.functor.obj M)) ≫
+      S.map (EX.functor.map (EX.unitIso.inv.app M)) ≫ t.hom.app M = _
+    have hn := t.inv.naturality (EX.unitIso.inv.app M)
+    dsimp only [Functor.comp_map, Functor.comp_obj, Functor.id_obj] at hn
+    rw [← Category.assoc, ← hn, Category.assoc]
+    simp
+  calc
+    _ = EY.unitIso.hom.app (P.obj (EX.inverse.obj (EX.functor.obj M))) ≫
+        EY.inverse.map (t.inv.app (EX.inverse.obj (EX.functor.obj M)) ≫
+          S.map (EX.counitIso.hom.app (EX.functor.obj M)) ≫
+          t.hom.app M ≫ EY.functor.map v) := by
+      simp [Iso.inverseCompIso, Iso.compInverseIso, Functor.map_comp, Category.assoc]
+    _ = EY.unitIso.hom.app (P.obj (EX.inverse.obj (EX.functor.obj M))) ≫
+        EY.inverse.map (EY.functor.map (P.map (EX.unitIso.inv.app M) ≫ v)) := by
+      have htv := reassoc_of% ht
+      rw [htv, EY.functor.map_comp]
+    _ = _ := by simpa only [Functor.id_map, Functor.comp_obj, Functor.comp_map,
+      Functor.id_obj, Category.assoc] using
+      (EY.unitIso.hom.naturality (P.map (EX.unitIso.inv.app M) ≫ v)).symm
 
 /-- The existing positive-level finite-Tor constructible predicate.
 Source: blueprint finite-Tor domain (blueprint: lem-coef-finite-exceptional). -/
@@ -329,7 +365,7 @@ def AdjunctionNormalized (n : ℕ) (a : F l E D hl f c n ⊣ G l E D hl f c n) :
                   (Padic.coefficientExtensionRing l E (n + 1))).unitIso.hom.app L.obj))
 
 /-- The constructible adjunction is uniquely fixed by the recorded bounded Hom chain.
-Source: blueprint proof paragraph 1 (blueprint: lem-coef-finite-exceptional).
+Source: blueprint proof paragraph 1 (blueprint: def-sf-finite-exceptional-constructions).
 Proof: lem-sf-proetale-constructible-origin supplies a bounded etale representative
 for every constructible input. Transport specifiedExceptionalHomEquiv through the
 canonical coefficient realizations. Its naturality supplies Adjunction.mkOfHomEquiv.
@@ -339,7 +375,170 @@ adjunction is unique. Preservation and Tor domains are operations_preserve. -/
 theorem adjunction_existsUnique (n : ℕ) :
     ∃! a : F l E D hl f c n ⊣ G l E D hl f c n,
       AdjunctionNormalized l E D hl f c n a := by
-  sorry
+  classical
+  let A := Padic.coefficientExtensionRing l E (n + 1)
+  let E' : ConstructibleExceptionalCoefficients.FieldStage.{u} l := { carrier := E }
+  let n' : ℕ+ := ⟨n + 1, Nat.succ_pos n⟩
+  let EX := sfIntrinsicDerivedEquivalence X A
+  let EY := sfIntrinsicDerivedEquivalence Y A
+  let RX := (domain l E X n).ι ⋙ EX.inverse
+  let RY := (domain l E Y n).ι ⋙ EY.inverse
+  let P := ProEtale.sfFixedCompactSupport A c
+  let J := ProEtale.sfFiniteExceptionalFixed A c
+  have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace (Y ↘ Spec (.of D.k))
+  let hX (K : (domain l E X n).FullSubcategory) :
+      DerivedCategory.TStructure.t.plus (RX.obj K) :=
+    (sfRestrictionOrigin l E' n' X K).choose
+  let hY (L : (domain l E Y n).FullSubcategory) :
+      DerivedCategory.TStructure.t.plus (RY.obj L) :=
+    (sfRestrictionOrigin l E' n' Y L).choose
+  let wX (K : (domain l E X n).FullSubcategory) :
+      FixedEtaleOriginWitness X (ULift.{u + 1, u} A) ⟨RX.obj K, hX K⟩ :=
+    Classical.choice (sfRestrictionOrigin l E' n' X K).choose_spec
+  let t := ProEtale.sfIntrinsicCompactSupportComparison A c
+  let sF : sfIntrinsicCompactSupport c A ⋙ EY.inverse ≅ EX.inverse ⋙ P :=
+    (Iso.inverseCompIso
+      ((Iso.compInverseIso t).symm ≪≫ Functor.associator _ _ _)).symm
+  let rF : F l E D hl f c n ⋙ RY ≅ RX ⋙ P :=
+    NatIso.ofComponents (fun K ↦ sF.app K.obj)
+      (by intro K K' v; exact sF.hom.naturality v.hom)
+  let rG : G l E D hl f c n ⋙ RX ≅ RY ⋙ J :=
+    NatIso.ofComponents (fun L ↦ EX.unitIso.symm.app (J.obj (RY.obj L)))
+      (by intro L L' v; exact EX.unitIso.inv.naturality (J.map (RY.map v)))
+  let e (K : (domain l E X n).FullSubcategory)
+      (L : (domain l E Y n).FullSubcategory) :
+      (P.obj (RX.obj K) ⟶ RY.obj L) ≃ (RX.obj K ⟶ J.obj (RY.obj L)) :=
+    fixedHom l E D f c n ⟨RX.obj K, hX K⟩ (wX K) ⟨RY.obj L, hY L⟩
+  have heLeft {K K'} (s : K ⟶ K') (L) (a : P.obj (RX.obj K') ⟶ RY.obj L) :
+      e K L (P.map (RX.map s) ≫ a) = RX.map s ≫ e K' L a := by
+    change ProEtale.specifiedExceptionalHomEquiv _ c
+      ⟨RX.obj K, hX K⟩ (wX K) ⟨RY.obj L, hY L⟩ (P.map (RX.map s) ≫ a) ≫
+        (fixedExceptionalIso l E f c n).inv.app (RY.obj L) =
+      RX.map s ≫ ProEtale.specifiedExceptionalHomEquiv _ c
+        ⟨RX.obj K', hX K'⟩ (wX K') ⟨RY.obj L, hY L⟩ a ≫ _
+    have hh := sfSpecifiedHomLeft (ULift.{u + 1, u} A) c
+      ⟨RX.obj K, hX K⟩ ⟨RX.obj K', hX K'⟩ (wX K) (wX K')
+      ⟨RY.obj L, hY L⟩ (RX.map s) a
+    exact (congrArg (· ≫ (fixedExceptionalIso l E f c n).inv.app (RY.obj L)) hh).trans
+      (Category.assoc _ _ _)
+  have heRight (K) {L L'} (a : P.obj (RX.obj K) ⟶ RY.obj L) (b : L ⟶ L') :
+      e K L' (a ≫ RY.map b) = e K L a ≫ J.map (RY.map b) := by
+    change ProEtale.specifiedExceptionalHomEquiv _ c
+      ⟨RX.obj K, hX K⟩ (wX K) ⟨RY.obj L', hY L'⟩ (a ≫ RY.map b) ≫
+        (fixedExceptionalIso l E f c n).inv.app (RY.obj L') =
+      (ProEtale.specifiedExceptionalHomEquiv _ c
+        ⟨RX.obj K, hX K⟩ (wX K) ⟨RY.obj L, hY L⟩ a ≫ _) ≫ J.map (RY.map b)
+    have hh := sfSpecifiedHomRight (ULift.{u + 1, u} A) c
+      ⟨RX.obj K, hX K⟩ (wX K) ⟨RY.obj L, hY L⟩ ⟨RY.obj L', hY L'⟩ a (RY.map b)
+    have hn := (fixedExceptionalIso l E f c n).inv.naturality (RY.map b)
+    calc
+      _ = (ProEtale.specifiedExceptionalHomEquiv _ c
+          ⟨RX.obj K, hX K⟩ (wX K) ⟨RY.obj L, hY L⟩ a ≫
+          (ProEtale.sfFiniteExceptionalAt (ULift.{u + 1, u} A) c).map (RY.map b)) ≫
+            (fixedExceptionalIso l E f c n).inv.app (RY.obj L') :=
+        congrArg (· ≫ (fixedExceptionalIso l E f c n).inv.app (RY.obj L')) hh
+      _ = _ := by
+        rw [Category.assoc]
+        exact (congrArg (ProEtale.specifiedExceptionalHomEquiv _ c
+          ⟨RX.obj K, hX K⟩ (wX K) ⟨RY.obj L, hY L⟩ a ≫ ·) hn).trans
+            (Category.assoc _ _ _).symm
+  obtain ⟨a, ha⟩ := sfRestrictHom RX RY P J (F l E D hl f c n)
+    (G l E D hl f c n) rF rG e heLeft heRight
+  have hnorm : AdjunctionNormalized l E D hl f c n a := by
+    intro M W L hM hL v
+    let K0 : (domain l E X n).FullSubcategory := ⟨EX.functor.obj M.obj, hM⟩
+    let L0 : (domain l E Y n).FullSubcategory := ⟨EY.functor.obj L.obj, hL⟩
+    let x : (F l E D hl f c n).obj K0 ⟶ L0 :=
+      ObjectProperty.homMk (t.hom.app M.obj ≫ EY.functor.map v)
+    apply EX.inverse.map_injective
+    apply (cancel_mono (EX.unitIso.inv.app (J.obj (RY.obj L0)))).1
+    change RX.map (a.homEquiv K0 L0 x) ≫ rG.hom.app L0 =
+      EX.inverse.map (EX.functor.map
+        (fixedHom l E D f c n M W L v ≫ J.map (EY.unitIso.hom.app L.obj))) ≫ _
+    rw [ha]
+    have hs : rF.inv.app K0 ≫ RY.map x =
+        P.map (EX.unitIso.inv.app M.obj) ≫ v ≫ EY.unitIso.hom.app L.obj := by
+      exact support_inverse EX EY P _ t M.obj L.obj v
+    rw [hs]
+    have hu := EX.unitIso.inv.naturality
+      (fixedHom l E D f c n M W L v ≫ J.map (EY.unitIso.hom.app L.obj))
+    dsimp only [Functor.comp_map, Functor.comp_obj, Functor.id_map,
+      Functor.id_obj] at hu
+    change EX.inverse.map (EX.functor.map _) ≫
+      EX.unitIso.inv.app (J.obj (RY.obj L0)) = _ at hu
+    apply Eq.trans ?_ hu.symm
+    change ProEtale.specifiedExceptionalHomEquiv _ c
+      ⟨RX.obj K0, hX K0⟩ (wX K0) ⟨RY.obj L0, hY L0⟩
+        (P.map (EX.unitIso.inv.app M.obj) ≫ v ≫ EY.unitIso.hom.app L.obj) ≫
+          (fixedExceptionalIso l E f c n).inv.app (RY.obj L0) =
+      EX.unitIso.inv.app M.obj ≫
+        (ProEtale.specifiedExceptionalHomEquiv _ c M W L v ≫
+          (fixedExceptionalIso l E f c n).inv.app L.obj) ≫
+            J.map (EY.unitIso.hom.app L.obj)
+    erw [sfSpecifiedHomLeft (ULift.{u + 1, u} A) c
+      ⟨RX.obj K0, hX K0⟩ M (wX K0) W ⟨RY.obj L0, hY L0⟩
+      (EX.unitIso.inv.app M.obj) (v ≫ EY.unitIso.hom.app L.obj)]
+    erw [sfSpecifiedHomRight (ULift.{u + 1, u} A) c M W L
+      ⟨RY.obj L0, hY L0⟩ v (EY.unitIso.hom.app L.obj)]
+    simp only [Category.assoc]
+    exact congrArg
+      (fun z ↦ EX.unitIso.inv.app M.obj ≫
+        ProEtale.specifiedExceptionalHomEquiv _ c M W L v ≫ z)
+      ((fixedExceptionalIso l E f c n).inv.naturality (EY.unitIso.hom.app L.obj))
+  refine ⟨a, hnorm, ?_⟩
+  intro a' ha'
+  have hHom
+      (M : DerivedCategory.Plus (Sheaf (ProEt.topology X)
+        (ModuleCat.{u + 1} (ULift.{u + 1, u} A))))
+      (W : FixedEtaleOriginWitness X _ M)
+      (L : DerivedCategory.Plus (Sheaf (ProEt.topology Y)
+        (ModuleCat.{u + 1} (ULift.{u + 1, u} A))))
+      (hM : domain l E X n (EX.functor.obj M.obj))
+      (hL : domain l E Y n (EY.functor.obj L.obj))
+      (x : (F l E D hl f c n).obj ⟨_, hM⟩ ⟶ ⟨_, hL⟩) :
+      a'.homEquiv _ _ x = a.homEquiv _ _ x := by
+    let v : P.obj M.obj ⟶ L.obj := EY.functor.preimage (t.inv.app M.obj ≫ x.hom)
+    have hx : ObjectProperty.homMk (t.hom.app M.obj ≫ EY.functor.map v) = x := by
+      apply ObjectProperty.hom_ext
+      dsimp only [v]
+      rw [Functor.map_preimage]
+      simp only [Iso.hom_inv_id_app_assoc]
+      rfl
+    rw [← hx]
+    apply ObjectProperty.hom_ext
+    exact (ha' M W L hM hL v).trans (hnorm M W L hM hL v).symm
+  have : (domain l E X n).IsClosedUnderIsomorphisms :=
+    (finite_ctf_isTriangulated l E (n + 1) (Nat.succ_pos n) X).1
+  have : (domain l E Y n).IsClosedUnderIsomorphisms :=
+    (finite_ctf_isTriangulated l E (n + 1) (Nat.succ_pos n) Y).1
+  apply Adjunction.ext
+  apply NatTrans.ext
+  funext K
+  let hM := (domain l E X n).prop_of_iso (EX.counitIso.app K.obj).symm K.property
+  let K0 : (domain l E X n).FullSubcategory := ⟨EX.functor.obj (RX.obj K), hM⟩
+  let eK : K0 ≅ K := (domain l E X n).fullyFaithfulι.preimageIso (EX.counitIso.app K.obj)
+  let FK := (F l E D hl f c n).obj K0
+  let hL := (domain l E Y n).prop_of_iso (EY.counitIso.app FK.obj).symm FK.property
+  let L0 : (domain l E Y n).FullSubcategory := ⟨EY.functor.obj (RY.obj FK), hL⟩
+  let eL : L0 ≅ FK := (domain l E Y n).fullyFaithfulι.preimageIso
+    (EY.counitIso.app FK.obj)
+  have hu0 : a'.unit.app K0 = a.unit.app K0 := by
+    have hh := hHom ⟨RX.obj K, hX K⟩ (wX K) ⟨RY.obj FK, hY FK⟩ hM hL eL.inv
+    change a'.unit.app K0 ≫ (G l E D hl f c n).map eL.inv =
+      a.unit.app K0 ≫ (G l E D hl f c n).map eL.inv at hh
+    have hh' := congrArg (· ≫ (G l E D hl f c n).map eL.hom) hh
+    simp only [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id] at hh'
+    have hg := (G l E D hl f c n).map_id FK
+    rw [hg] at hh'
+    exact (Category.comp_id _).symm.trans (hh'.trans (Category.comp_id _))
+  apply (cancel_epi eK.hom).1
+  calc
+    eK.hom ≫ a'.unit.app K = a'.unit.app K0 ≫
+        (F l E D hl f c n ⋙ G l E D hl f c n).map eK.hom :=
+      by simpa only [Functor.id_map] using a'.unit.naturality eK.hom
+    _ = a.unit.app K0 ≫ (F l E D hl f c n ⋙ G l E D hl f c n).map eK.hom := by rw [hu0]
+    _ = eK.hom ≫ a.unit.app K := by
+      simpa only [Functor.id_map] using (a.unit.naturality eK.hom).symm
 
 /-- The specified constructible adjunction, selected only by its unique Hom normalization.
 Source: blueprint proof paragraph 1 (blueprint: lem-coef-finite-exceptional). -/

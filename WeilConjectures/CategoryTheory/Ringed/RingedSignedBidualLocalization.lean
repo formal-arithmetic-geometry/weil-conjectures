@@ -121,9 +121,6 @@ private noncomputable def flipEval (A B : Mod.{c, v, u} J R) :
     ((β_ (PresheafOfModules.homObj A.val B.val) A.val).hom ≫
       IsoTensorHom.tensorHomUncurry.{c, v, u} (𝟙 _))
 
-omit [HasSheafify J AddCommGrpCat.{max c v u}]
-  [J.WEqualsLocallyBijective AddCommGrpCat.{max c v u}]
-  [HasDerivedCategory.{w} (RingedTensorModules.{c, v, u} J R)] in
 private noncomputable def betaTerm (E O : CX.{c, v, u} J R) (a : ℤ) :
     E.X a ⟶ (homComplex (R := R) (homComplex (R := R) E O) O).X a :=
   (homComplexIsLimit (R := R) (homComplex (R := R) E O) O a).lift

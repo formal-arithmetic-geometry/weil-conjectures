@@ -27,7 +27,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry.Scheme
 
-set_option backward.isDefEq.respectTransparency false in
 private def tensorComparisonCurried {C D : Type*} [Category* C] [Category* D]
     [MonoidalCategory C] [MonoidalCategory D] (E : C ⥤ D)
     (e : E.prod E ⋙ tensor D ≅ tensor C ⋙ E) :

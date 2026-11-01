@@ -1367,8 +1367,6 @@ section TensorTransitionSpecialization
 attribute [local instance 2001] SheafOfModules.monoidalCategory
   SheafOfModules.isMonoidal_W_independentCoefficients
 
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency true in
 end TensorTransitionSpecialization
 
 section Roos

@@ -674,8 +674,6 @@ private theorem ordinaryTranspose
   intro U m n
   exact congrArg (fun q ↦ q.hom.app U (m, n)) hEq
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end SiteComparison
 
 private abbrev verticalSite (X : Scheme.{u}) :=
@@ -698,8 +696,6 @@ private def commutativeRingMap (R : ℕ → CommRingCat.{u + 1})
 section Main
 attribute [local irreducible] SheafOfModules.monoidalCategory
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
 end Main
 
 end AlgebraicGeometry.ProEtale.VaryingRing

@@ -172,6 +172,8 @@ import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrFactorizationUniq
 import WeilConjectures.Mathlib.RingTheory.OrderOfVanishing.Noetherian
 import WeilConjectures.SixFunctors.ProEtale.AlgClosedFieldSiteColimits
 import all WeilConjectures.TraceFormula.Supporting.PointFiniteReductionSectionAlgebra
+public import WeilConjectures.AlgebraicGeometry.Picard.SuccessiveDerivedQuotientNormalization
+public import WeilConjectures.SmoothPurity.SheafRingCoefficientOrdinaryAdjunction
 
 /-! # Sections of the geometric point and integral coefficient extension
 
@@ -786,29 +788,255 @@ noncomputable def pointDerivedTensorUnit :
     Functor.mapDerivedCategoryNatIso (pointOrdinaryTensorUnit k l E) ≪≫
     Functor.mapDerivedCategoryIdIso _
 
+private theorem pointTensorSection_smul_one
+    (N : integralTowerModules.{u, u} l E (Spec (.of k)))
+    (U : (Spec (.of k)).ProEtᵒᵖ)
+    (s : (completedIntegralCommRingSheafUnrestricted.{u, u} l L
+      (Spec (.of k))).obj.obj U) (x : N.val.obj U) :
+    completedScalarTensorSection l E L ι (Spec (.of k)) N U s x =
+      s • completedScalarTensorSection l E L ι (Spec (.of k)) N U 1 x := by
+  let Y := Spec (.of k)
+  have : EssentiallySmall.{u + 1} Y.ProEt := essentiallySmallSelf.{u} _
+  let a := completedCoefficientMap.{u, u} l E L ι Y
+  let η := (PresheafOfModules.sheafificationAdjunction
+    (𝟙 (completedIntegralCoefficientSheafUnrestricted l L Y).obj)).unit.app
+      (SheafOfModules.changeOfRingsPresheaf.{u, u + 1, u + 1} a N)
+  change (eqToHom (completedOrdinaryScalarExtension_obj l E L ι Y N).symm).val.app U
+    (η.app U (s ⊗ₜ[_, (a.hom.app U).hom] x)) =
+      s • (eqToHom (completedOrdinaryScalarExtension_obj l E L ι Y N).symm).val.app U
+        (η.app U ((1 : (completedIntegralCommRingSheafUnrestricted l L Y).obj.obj U)
+          ⊗ₜ[_, (a.hom.app U).hom] x))
+  rw [← ((eqToHom
+    (completedOrdinaryScalarExtension_obj l E L ι Y N).symm).val.app U).hom.map_smul,
+    ← (η.app U).hom.map_smul]
+  congr 2
+  change s ⊗ₜ[_, (a.hom.app U).hom] x = (s * 1) ⊗ₜ[_, (a.hom.app U).hom] x
+  rw [mul_one]
+
+private theorem pointScalarAdjunction :
+    ∃ A : completedOrdinaryScalarExtension.{u, u} l E L ι (Spec (.of k)) ⊣
+        SheafOfModules.SuccessiveDerivedQuotient.restriction.{u + 1, u, u + 1}
+          (completedCoefficientMap.{u, u} l E L ι (Spec (.of k))),
+      ∀ (N : integralTowerModules.{u, u} l E (Spec (.of k)))
+        (U : (Spec (.of k)).ProEtᵒᵖ) (x : N.val.obj U),
+        (A.unit.app N).val.app U x =
+          completedScalarTensorSection l E L ι (Spec (.of k)) N U 1 x := by
+  let Y := Spec (.of k)
+  let : EssentiallySmall.{u + 1} Y.ProEt := essentiallySmallSelf.{u} _
+  obtain ⟨A, hA⟩ := (SheafOfModules.sheafRingCoefficientOrdinaryAdjunction
+    (completedCoefficientMap.{u, u} l E L ι Y)).2.2
+      (completedOrdinaryScalarExtension l E L ι Y)
+      (completedOrdinaryScalarExtension_obj l E L ι Y)
+      (fun f ↦ completedOrdinaryScalarExtension_map l E L ι Y f)
+  refine ⟨A, ?_⟩
+  intro N U x
+  have h := hA N ((completedOrdinaryScalarExtension l E L ι Y).obj N)
+    (eqToHom (completedOrdinaryScalarExtension_obj l E L ι Y N).symm) U x
+  simp only [eqToHom_trans, eqToHom_refl, Adjunction.homEquiv_id] at h
+  set_option backward.isDefEq.respectTransparency false in
+    exact h
+
+private theorem scalarAssocFromUnits
+    {R S T : Sheaf J CommRingCat.{r}} (a : R ⟶ S) (b : S ⟶ T) (c : R ⟶ T)
+    (hab : a ≫ b = c)
+    (F : Modules R ⥤ Modules S) (G : Modules S ⥤ Modules T)
+    (H : Modules R ⥤ Modules T)
+    (A : F ⊣ restriction a) (B : G ⊣ restriction b) (D : H ⊣ restriction c)
+    (sa : ∀ (N : Modules R) U, S.obj.obj U → N.val.obj U → (F.obj N).val.obj U)
+    (sb : ∀ (N : Modules S) U, T.obj.obj U → N.val.obj U → (G.obj N).val.obj U)
+    (sc : ∀ (N : Modules R) U, T.obj.obj U → N.val.obj U → (H.obj N).val.obj U)
+    (ha : ∀ N U x, (A.unit.app N).val.app U x = sa N U 1 x)
+    (hb : ∀ N U x, (B.unit.app N).val.app U x = sb N U 1 x)
+    (hc : ∀ N U x, (D.unit.app N).val.app U x = sc N U 1 x)
+    (hsa : ∀ N U s x, sa N U s x = s • sa N U 1 x)
+    (hsb : ∀ N U s x, sb N U s x = s • sb N U 1 x)
+    (hsc : ∀ N U s x, sc N U s x = s • sc N U 1 x) :
+    ∃! α : F ⋙ G ≅ H, ∀ N U s t x,
+      (α.hom.app N).val.app U (sb (F.obj N) U t (sa N U s x)) =
+        sc N U (t * b.hom.app U s) x := by
+  cases hab
+  let adj := (A.comp B).ofNatIsoRight (resComp a b)
+  let α := adj.leftAdjointUniq D
+  have hu N U x : (α.hom.app N).val.app U (sb (F.obj N) U 1 (sa N U 1 x)) =
+      sc N U 1 x := by
+    have h := congrArg (fun f ↦ f.val.app U x)
+      (Adjunction.unit_leftAdjointUniq_hom_app adj D N)
+    change (α.hom.app N).val.app U
+      ((B.unit.app _).val.app U ((A.unit.app N).val.app U x)) = _ at h
+    rw [ha, hb] at h
+    exact h.trans (hc N U x)
+  have hα N U s t x :
+      (α.hom.app N).val.app U (sb (F.obj N) U t (sa N U s x)) =
+        sc N U (t * b.hom.app U s) x := by
+    have hs : sb (F.obj N) U 1 (s • sa N U 1 x) =
+        b.hom.app U s • sb (F.obj N) U 1 (sa N U 1 x) := by
+      have h := ((B.unit.app (F.obj N)).val.app U).hom.map_smul s (sa N U 1 x)
+      change (B.unit.app (F.obj N)).val.app U (s • sa N U 1 x) =
+        b.hom.app U s • (show (G.obj (F.obj N)).val.obj U from
+          (B.unit.app (F.obj N)).val.app U (sa N U 1 x)) at h
+      rw [hb, hb] at h
+      exact h
+    rw [hsa, hsb, hs, ((α.hom.app N).val.app U).hom.map_smul,
+      ((α.hom.app N).val.app U).hom.map_smul, hu, hsc N U (t * b.hom.app U s) x]
+    exact smul_smul t (b.hom.app U s) (sc N U 1 x)
+  refine ⟨α, hα, ?_⟩
+  intro β hβ
+  apply Iso.ext
+  apply NatTrans.ext
+  funext N
+  apply ((A.comp B).homEquiv N _).injective
+  ext U x
+  change (β.hom.app N).val.app U
+    ((B.unit.app _).val.app U ((A.unit.app N).val.app U x)) =
+    (α.hom.app N).val.app U
+      ((B.unit.app _).val.app U ((A.unit.app N).val.app U x))
+  rw [ha, hb]
+  exact (hβ N U 1 1 x).trans (hα N U 1 1 x).symm
+
+private theorem pointCompletedCoefficientMap_comp :
+    completedCoefficientMap.{u, u} l E M (κ.comp ι) (Spec (.of k)) =
+      completedCoefficientMap.{u, u} l E L ι (Spec (.of k)) ≫
+        completedCoefficientMap.{u, u} l L M κ (Spec (.of k)) := by
+  let Y := Spec (.of k)
+  apply (completedCoefficientMap_existsUnique l E M (κ.comp ι) Y).unique
+  · exact (completedCoefficientMap_existsUnique l E M (κ.comp ι) Y).exists.choose_spec
+  · intro n
+    rw [Category.assoc, completedCoefficientMap_projection, ← Category.assoc,
+      completedCoefficientMap_projection, Category.assoc]
+    congr 1
+    have hq : integralScalarQuotientMap l E M (κ.comp ι) n =
+        (integralScalarQuotientMap l L M κ n).comp
+          (integralScalarQuotientMap l E L ι n) := by
+      apply RingHom.ext
+      intro x
+      induction x using Quotient.inductionOn' with
+      | h x => rfl
+    unfold integralScalarQuotientSheafMap
+    rw [← Functor.map_comp, hq]
+    congr 1
+
+/-- The balanced sheaf-tensor associator is fixed on all iterated pure tensors.
+Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension).
+Proof: send b tensor (a tensor x) to b*iota(a) tensor x. Balancing proves that
+this is well defined; its inverse sends c tensor x to c tensor (1 tensor x).
+The two composites are identities on generators. These maps respect restrictions
+and all sheaf morphisms, and their generator formulas imply uniqueness. -/
+theorem pointOrdinaryTensorAssoc_existsUnique :
+    ∃! α : completedOrdinaryScalarExtension.{u, u} l E L ι (Spec (.of k)) ⋙
+        completedOrdinaryScalarExtension.{u, u} l L M κ (Spec (.of k)) ≅
+        completedOrdinaryScalarExtension.{u, u} l E M (κ.comp ι) (Spec (.of k)),
+      ∀ (F : integralTowerModules.{u, u} l E (Spec (.of k))) (U : (Spec (.of k)).ProEtᵒᵖ)
+        (a : (completedIntegralCommRingSheafUnrestricted.{u, u} l L (Spec (.of k))).obj.obj U)
+        (b : (completedIntegralCommRingSheafUnrestricted.{u, u} l M (Spec (.of k))).obj.obj U)
+        (x : F.val.obj U),
+        (α.hom.app F).val.app U
+          (completedScalarTensorSection.{u, u} l L M κ (Spec (.of k))
+            ((completedOrdinaryScalarExtension.{u, u} l E L ι (Spec (.of k))).obj F) U b
+            (completedScalarTensorSection.{u, u} l E L ι (Spec (.of k)) F U a x)) =
+          completedScalarTensorSection.{u, u} l E M (κ.comp ι) (Spec (.of k)) F U
+            (b * (completedCoefficientMap.{u, u} l L M κ (Spec (.of k))).hom.app U a) x := by
+  let : EssentiallySmall.{u + 1} (Spec (.of k)).ProEt := essentiallySmallSelf.{u} _
+  obtain ⟨A, hA⟩ := pointScalarAdjunction k l E L ι
+  obtain ⟨B, hB⟩ := pointScalarAdjunction k l L M κ
+  obtain ⟨C, hC⟩ := pointScalarAdjunction k l E M (κ.comp ι)
+  exact scalarAssocFromUnits _ _ _
+    (pointCompletedCoefficientMap_comp k l E L ι M κ).symm _ _ _ A B C
+    (completedScalarTensorSection l E L ι (Spec (.of k)))
+    (completedScalarTensorSection l L M κ (Spec (.of k)))
+    (completedScalarTensorSection l E M (κ.comp ι) (Spec (.of k))) hA hB hC
+    (pointTensorSection_smul_one k l E L ι)
+    (pointTensorSection_smul_one k l L M κ)
+    (pointTensorSection_smul_one k l E M (κ.comp ι))
+
+/-- The canonical ordinary tensor associator.
+Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension). -/
+noncomputable def pointOrdinaryTensorAssoc :=
+  (pointOrdinaryTensorAssoc_existsUnique k l E L ι M κ).exists.choose
+
+/-- The ordinary derived tensor associator, descended from the balanced maps.
+Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension). -/
+noncomputable def pointDerivedTensorAssoc :
+    completedDerivedScalarExtension.{u, u} l E L ι (Spec (.of k)) ⋙
+      completedDerivedScalarExtension.{u, u} l L M κ (Spec (.of k)) ≅
+      completedDerivedScalarExtension.{u, u} l E M (κ.comp ι) (Spec (.of k)) :=
+  Functor.isoWhiskerRight (pointOrdinaryDerivedComparison k l E L ι) _ ≪≫
+    Functor.isoWhiskerLeft _ (pointOrdinaryDerivedComparison k l L M κ) ≪≫
+    (Functor.mapDerivedCategoryCompIso
+      (completedOrdinaryScalarExtension.{u, u} l E L ι (Spec (.of k)))
+      (completedOrdinaryScalarExtension.{u, u} l L M κ (Spec (.of k)))).symm ≪≫
+    Functor.mapDerivedCategoryNatIso (pointOrdinaryTensorAssoc k l E L ι M κ) ≪≫
+    (pointOrdinaryDerivedComparison k l E M (κ.comp ι)).symm
+
+/-- The module associator is the ordinary balanced multiplication of coefficient factors.
+Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension).
+Proof: send b tensor (a tensor n) to b*kappa(a) tensor n, with inverse c tensor n
+to c tensor (1 tensor n). Balancing proves the inverse identities and naturality;
+generators determine the map uniquely. -/
+theorem pointIntegralModuleAssoc_existsUnique :
+    ∃! α : pointIntegralModuleTensor l E L ι ⋙ pointIntegralModuleTensor l L M κ ≅
+        pointIntegralModuleTensor l E M (κ.comp ι),
+      ∀ (N : ModuleCat.{u + 1} (Padic.coefficientExtensionIntegers l E))
+        (a : Padic.coefficientExtensionIntegers l L)
+        (b : Padic.coefficientExtensionIntegers l M) (n : N),
+        α.hom.app N
+          (b ⊗ₜ[Padic.coefficientExtensionIntegers l L,
+            integralScalarIntegerInclusion.{u} l L M κ]
+            (a ⊗ₜ[Padic.coefficientExtensionIntegers l E,
+              integralScalarIntegerInclusion.{u} l E L ι] n)) =
+          (b * integralScalarIntegerInclusion.{u} l L M κ a) ⊗ₜ[
+            Padic.coefficientExtensionIntegers l E,
+            integralScalarIntegerInclusion.{u} l E M (κ.comp ι)] n := by
+  let α := coefficientComplexIntegralAssoc.{u, u + 1} l E L ι M κ
+  have hα (N : ModuleCat.{u + 1} (Padic.coefficientExtensionIntegers l E))
+      (a : Padic.coefficientExtensionIntegers l L)
+      (b : Padic.coefficientExtensionIntegers l M) (n : N) :
+      α.hom.app N (b ⊗ₜ[Padic.coefficientExtensionIntegers l L,
+        integralScalarIntegerInclusion l L M κ]
+        (a ⊗ₜ[Padic.coefficientExtensionIntegers l E,
+          integralScalarIntegerInclusion l E L ι] n)) =
+        (b * integralScalarIntegerInclusion l L M κ a) ⊗ₜ[
+          Padic.coefficientExtensionIntegers l E,
+          integralScalarIntegerInclusion l E M (κ.comp ι)] n := by
+    dsimp only [α, coefficientComplexIntegralAssoc, Iso.trans_hom, Iso.symm_hom,
+      NatTrans.comp_app]
+    rw [ModuleCat.comp_apply, scalarComp_inv_tmul.{u, u + 1},
+      scalarTransport_tmul.{u, u + 1} _ _ (coefficientComplexIntegerComp l E L ι M κ)]
+  refine ⟨α, hα, ?_⟩
+  intro β hβ
+  apply Iso.ext
+  apply NatTrans.ext
+  funext N
+  apply scalarDouble_hom_ext.{u, u + 1}
+    (integralScalarIntegerInclusion l E L ι) (integralScalarIntegerInclusion l L M κ)
+  intro n
+  exact (hβ N 1 1 n).trans (hα N 1 1 n).symm
+
+/-- The ordinary module-complex associator in the derived category.
+Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension). -/
+noncomputable def pointIntegralModuleDerivedAssoc :
+    pointIntegralModuleDerivedTensor l E L ι ⋙ pointIntegralModuleDerivedTensor l L M κ ≅
+      pointIntegralModuleDerivedTensor l E M (κ.comp ι) :=
+  (Functor.mapDerivedCategoryCompIso
+    (pointIntegralModuleTensor l E L ι) (pointIntegralModuleTensor l L M κ)).symm ≪≫
+      Functor.mapDerivedCategoryNatIso
+        (pointIntegralModuleAssoc_existsUnique l E L ι M κ).exists.choose
+
 set_option backward.isDefEq.respectTransparency.types false in
 omit [IsAlgClosed k] in
 attribute [local irreducible] completedScalarChangeData
   completedIntegralCoefficientSheafUnrestricted
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-omit [IsAlgClosed k] in
 section AbstractAssociator
 
 universe v w r
 variable {C : Type v} [Category.{w} C] {J : GrothendieckTopology C}
   [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
 
-open SheafOfModules.SuccessiveDerivedQuotient in
 end AbstractAssociator
 
 variable (M : Type u) [Field M] [Algebra ℚ_[l] M] [FiniteDimensional ℚ_[l] M]
   (κ : L →ₐ[ℚ_[l]] M)
 
-omit [IsAlgClosed k] in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 /-- Fraction-field extension on coefficient modules.
 Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension). -/
 noncomputable abbrev pointModuleRationalization :=
@@ -871,6 +1099,17 @@ Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-ext
 noncomputable abbrev pointCoefficientFieldDerivedTensor :=
   (ModuleCat.extendScalars.{u, u, u + 1} ι.toRingHom).mapDerivedCategory
 
+/-- The ordinary field-complex associator.
+Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension). -/
+noncomputable def pointCoefficientFieldDerivedAssoc :
+    pointCoefficientFieldDerivedTensor l E L ι ⋙ pointCoefficientFieldDerivedTensor l L M κ ≅
+      pointCoefficientFieldDerivedTensor l E M (κ.comp ι) :=
+  (Functor.mapDerivedCategoryCompIso
+    (ModuleCat.extendScalars.{u, u, u + 1} ι.toRingHom) (ModuleCat.extendScalars.{u, u, u + 1}
+        κ.toRingHom)).symm ≪≫
+      Functor.mapDerivedCategoryNatIso (ModuleCat.extendScalarsComp.{u, u + 1} ι.toRingHom
+        κ.toRingHom).symm
+
 /-- Rationalization and finite extension commute by the actual balanced localization map.
 Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension).
 Proof: send b tensor (a tensor n) to ba tensor (1 tensor n), where a is included
@@ -905,12 +1144,223 @@ noncomputable def pointDerivedTensorRationalization :
       Functor.mapDerivedCategoryCompIso
         (pointModuleRationalization l E) (ModuleCat.extendScalars.{u, u, u + 1} ι.toRingHom)
 
+private theorem ordinarySectionsTowerTransport
+    {C₀ : Type a} {C₁ : Type b} {C₂ : Type c}
+    {D₀ : Type d} {D₁ : Type e} {D₂ : Type f}
+    [Category C₀] [Category C₁] [Category C₂]
+    [Category D₀] [Category D₁] [Category D₂]
+    (F : C₀ ⥤ C₁) (G : C₁ ⥤ C₂) (H : C₀ ⥤ C₂)
+    (S₀ : C₀ ⥤ D₀) (S₁ : C₁ ⥤ D₁) (S₂ : C₂ ⥤ D₂)
+    (M₁ : D₀ ⥤ D₁) (M₂ : D₁ ⥤ D₂) (M₃ : D₀ ⥤ D₂)
+    (t₁ : S₀ ⋙ M₁ ≅ F ⋙ S₁) (t₂ : S₁ ⋙ M₂ ≅ G ⋙ S₂)
+    (t₃ : S₀ ⋙ M₃ ≅ H ⋙ S₂) (a : F ⋙ G ≅ H) (m : M₁ ⋙ M₂ ≅ M₃)
+    (h : ∀ K, M₂.map (t₁.hom.app K) ≫ t₂.hom.app (F.obj K) ≫
+      S₂.map (a.hom.app K) = m.hom.app (S₀.obj K) ≫ t₃.hom.app K) :
+    Functor.isoWhiskerRight a S₂ ≪≫ t₃.symm =
+      Functor.isoWhiskerLeft F t₂.symm ≪≫ Functor.isoWhiskerRight t₁.symm M₂ ≪≫
+        Functor.isoWhiskerLeft S₀ m := by
+  apply Iso.ext
+  apply NatTrans.ext
+  funext K
+  apply (cancel_epi (M₂.map (t₁.hom.app K) ≫ t₂.hom.app (F.obj K))).mp
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
+    Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, Category.assoc,
+    Iso.hom_inv_id_app_assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id_app,
+    CategoryTheory.Functor.map_id, Category.id_comp]
+  have hf := congrArg (fun z ↦ z ≫ t₃.inv.app K) (h K)
+  simp only [Category.assoc, Iso.hom_inv_id_app] at hf
+  exact hf.trans (Category.comp_id _)
+
+private theorem transportTower
+    {C₀ : Type a} {C₁ : Type b} {C₂ : Type c}
+    {D₀ : Type d} {D₁ : Type e} {D₂ : Type f}
+    [Category C₀] [Category C₁] [Category C₂]
+    [Category D₀] [Category D₁] [Category D₂]
+    (T₁ F₁ : C₀ ⥤ C₁) (T₂ F₂ : C₁ ⥤ C₂) (T₃ F₃ : C₀ ⥤ C₂)
+    (S₀ : C₀ ⥤ D₀) (S₁ : C₁ ⥤ D₁) (S₂ : C₂ ⥤ D₂)
+    (M₁ : D₀ ⥤ D₁) (M₂ : D₁ ⥤ D₂) (M₃ : D₀ ⥤ D₂)
+    (d₁ : T₁ ≅ F₁) (d₂ : T₂ ≅ F₂) (d₃ : T₃ ≅ F₃)
+    (t₁ : S₀ ⋙ M₁ ≅ F₁ ⋙ S₁) (t₂ : S₁ ⋙ M₂ ≅ F₂ ⋙ S₂)
+    (t₃ : S₀ ⋙ M₃ ≅ F₃ ⋙ S₂) (a : F₁ ⋙ F₂ ≅ F₃)
+    (m : M₁ ⋙ M₂ ≅ M₃) (K : C₀)
+    (h : S₂.map (a.hom.app K) ≫ t₃.inv.app K =
+      t₂.inv.app (F₁.obj K) ≫ M₂.map (t₁.inv.app K) ≫ m.hom.app (S₀.obj K)) :
+    S₂.map ((T₂.map (d₁.hom.app K)) ≫ d₂.hom.app (F₁.obj K) ≫
+        a.hom.app K ≫ d₃.inv.app K) ≫ S₂.map (d₃.hom.app K) ≫ t₃.inv.app K =
+      S₂.map (d₂.hom.app (T₁.obj K)) ≫ t₂.inv.app (T₁.obj K) ≫
+        M₂.map (S₁.map (d₁.hom.app K) ≫ t₁.inv.app K) ≫
+        m.hom.app (S₀.obj K) := by
+  simp only [Functor.map_comp, Category.assoc]
+  have hc : S₂.map (d₃.inv.app K) ≫ S₂.map (d₃.hom.app K) = 𝟙 _ := by
+    rw [← S₂.map_comp, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id]
+  rw [reassoc_of% hc]
+  rw [h]
+  have hd := congrArg S₂.map (d₂.hom.naturality (d₁.hom.app K))
+  simp only [Functor.map_comp] at hd
+  rw [reassoc_of% hd]
+  have ht := t₂.inv.naturality (d₁.hom.app K)
+  simp only [Functor.comp_map] at ht
+  rw [reassoc_of% ht]
+
+private theorem pointOrdinarySectionsTowerForward
+    (N : integralTowerModules.{u, u} l E (Spec (.of k))) :
+    (pointIntegralModuleTensor l L M κ).map
+        ((pointSectionsTensor k l E L ι).hom.app N) ≫
+      (pointSectionsTensor k l L M κ).hom.app
+        ((completedOrdinaryScalarExtension l E L ι (Spec (.of k))).obj N) ≫
+      (pointCompletedSections k l M).map
+        ((pointOrdinaryTensorAssoc k l E L ι M κ).hom.app N) =
+    (pointIntegralModuleAssoc_existsUnique l E L ι M κ).exists.choose.hom.app
+        ((pointCompletedSections k l E).obj N) ≫
+      (pointSectionsTensor k l E M (κ.comp ι)).hom.app N := by
+  apply scalarDouble_hom_ext.{u, u + 1}
+    (integralScalarIntegerInclusion l E L ι)
+    (integralScalarIntegerInclusion l L M κ)
+  intro x
+  simp only [ModuleCat.comp_apply]
+  change ((pointOrdinaryTensorAssoc k l E L ι M κ).hom.app N).val.app
+    (op (Scheme.ProEt.mk (𝟙 (Spec (.of k)))))
+    ((pointSectionsTensor k l L M κ).hom.app _
+      ((1 : Padic.coefficientExtensionIntegers l M) ⊗ₜ[_,
+        integralScalarIntegerInclusion l L M κ]
+        ((pointSectionsTensor k l E L ι).hom.app N
+          ((1 : Padic.coefficientExtensionIntegers l L) ⊗ₜ[_,
+            integralScalarIntegerInclusion l E L ι] x)))) = _
+  erw [(pointSectionsTensor_existsUnique k l E L ι).exists.choose_spec]
+  erw [(pointSectionsTensor_existsUnique k l L M κ).exists.choose_spec]
+  erw [(pointOrdinaryTensorAssoc_existsUnique k l E L ι M κ).exists.choose_spec]
+  erw [(pointIntegralModuleAssoc_existsUnique l E L ι M κ).exists.choose_spec]
+  erw [(pointSectionsTensor_existsUnique k l E M (κ.comp ι)).exists.choose_spec]
+  simp only [map_one, mul_one]
+
+private theorem pointOrdinarySectionsTower :
+    Functor.isoWhiskerRight (pointOrdinaryTensorAssoc k l E L ι M κ)
+        (pointCompletedSections k l M) ≪≫
+      (pointSectionsTensor k l E M (κ.comp ι)).symm =
+    Functor.isoWhiskerLeft
+        (completedOrdinaryScalarExtension l E L ι (Spec (.of k)))
+        (pointSectionsTensor k l L M κ).symm ≪≫
+      Functor.isoWhiskerRight (pointSectionsTensor k l E L ι).symm
+        (pointIntegralModuleTensor l L M κ) ≪≫
+      Functor.isoWhiskerLeft (pointCompletedSections k l E)
+        (pointIntegralModuleAssoc_existsUnique l E L ι M κ).exists.choose := by
+  exact ordinarySectionsTowerTransport
+    (completedOrdinaryScalarExtension l E L ι (Spec (.of k)))
+    (completedOrdinaryScalarExtension l L M κ (Spec (.of k)))
+    (completedOrdinaryScalarExtension l E M (κ.comp ι) (Spec (.of k)))
+    (pointCompletedSections k l E) (pointCompletedSections k l L)
+    (pointCompletedSections k l M)
+    (pointIntegralModuleTensor l E L ι) (pointIntegralModuleTensor l L M κ)
+    (pointIntegralModuleTensor l E M (κ.comp ι))
+    (pointSectionsTensor k l E L ι) (pointSectionsTensor k l L M κ)
+    (pointSectionsTensor k l E M (κ.comp ι))
+    (pointOrdinaryTensorAssoc k l E L ι M κ)
+    (pointIntegralModuleAssoc_existsUnique l E L ι M κ).exists.choose
+    (pointOrdinarySectionsTowerForward k l E L ι M κ)
+
+private theorem pointDerivedSectionsTower
+    (K : DerivedCategory (integralTowerModules.{u, u} l E (Spec (.of k)))) :
+    (pointCompletedDerivedSections k l M).map
+        ((pointDerivedTensorAssoc k l E L ι M κ).hom.app K) ≫
+      (pointDerivedSectionsTensor k l E M (κ.comp ι)).inv.app K =
+    (pointDerivedSectionsTensor k l L M κ).inv.app
+        ((completedDerivedScalarExtension l E L ι (Spec (.of k))).obj K) ≫
+      (pointIntegralModuleDerivedTensor l L M κ).map
+        ((pointDerivedSectionsTensor k l E L ι).inv.app K) ≫
+      (pointIntegralModuleDerivedAssoc l E L ι M κ).hom.app
+        ((pointCompletedDerivedSections k l E).obj K) := by
+  have h := deriveCoefficientTower
+    (completedOrdinaryScalarExtension l E L ι (Spec (.of k)))
+    (completedOrdinaryScalarExtension l L M κ (Spec (.of k)))
+    (pointCompletedSections k l M) (pointCompletedSections k l E)
+    (pointCompletedSections k l L) (pointIntegralModuleTensor l E L ι)
+    (pointIntegralModuleTensor l L M κ)
+    (completedOrdinaryScalarExtension l E M (κ.comp ι) (Spec (.of k)))
+    (pointIntegralModuleTensor l E M (κ.comp ι))
+    (pointOrdinaryTensorAssoc k l E L ι M κ)
+    (pointSectionsTensor k l E M (κ.comp ι)).symm
+    (pointSectionsTensor k l L M κ).symm
+    (pointSectionsTensor k l E L ι).symm
+    (pointIntegralModuleAssoc_existsUnique l E L ι M κ).exists.choose
+    (pointOrdinarySectionsTower k l E L ι M κ) K
+  let T₁ := completedOrdinaryScalarExtension l E L ι (Spec (.of k))
+  let T₂ := completedOrdinaryScalarExtension l L M κ (Spec (.of k))
+  let T₃ := completedOrdinaryScalarExtension l E M (κ.comp ι) (Spec (.of k))
+  let a := (Functor.mapDerivedCategoryCompIso T₁ T₂).symm ≪≫
+    Functor.mapDerivedCategoryNatIso (pointOrdinaryTensorAssoc k l E L ι M κ)
+  let t₁ := Functor.mapDerivedCategorySquareIso (pointSectionsTensor k l E L ι)
+  let t₂ := Functor.mapDerivedCategorySquareIso (pointSectionsTensor k l L M κ)
+  let t₃ := Functor.mapDerivedCategorySquareIso (pointSectionsTensor k l E M (κ.comp ι))
+  have h' : (pointCompletedDerivedSections k l M).map (a.hom.app K) ≫ t₃.inv.app K =
+      t₂.inv.app (T₁.mapDerivedCategory.obj K) ≫
+        (pointIntegralModuleDerivedTensor l L M κ).map (t₁.inv.app K) ≫
+        (pointIntegralModuleDerivedAssoc l E L ι M κ).hom.app
+          ((pointCompletedDerivedSections k l E).obj K) := by
+    simpa only [a, t₁, t₂, t₃, T₁, T₂,
+      pointIntegralModuleDerivedAssoc, Functor.mapDerivedCategorySquareIso,
+      Iso.trans_inv, Iso.trans_hom, Iso.symm_hom, Iso.symm_inv,
+      Functor.mapDerivedCategoryNatIso_symm, NatTrans.comp_app, Category.assoc] using h
+  have ht := transportTower
+    (completedDerivedScalarExtension l E L ι (Spec (.of k))) T₁.mapDerivedCategory
+    (completedDerivedScalarExtension l L M κ (Spec (.of k))) T₂.mapDerivedCategory
+    (completedDerivedScalarExtension l E M (κ.comp ι) (Spec (.of k))) T₃.mapDerivedCategory
+    (pointCompletedDerivedSections k l E) (pointCompletedDerivedSections k l L)
+    (pointCompletedDerivedSections k l M)
+    (pointIntegralModuleDerivedTensor l E L ι) (pointIntegralModuleDerivedTensor l L M κ)
+    (pointIntegralModuleDerivedTensor l E M (κ.comp ι))
+    (pointOrdinaryDerivedComparison k l E L ι) (pointOrdinaryDerivedComparison k l L M κ)
+    (pointOrdinaryDerivedComparison k l E M (κ.comp ι))
+    t₁ t₂ t₃ a (pointIntegralModuleDerivedAssoc l E L ι M κ) K h'
+  simpa only [pointDerivedSectionsTensor, pointDerivedTensorAssoc,
+    a, t₁, t₂, t₃, T₁, T₂, T₃,
+    Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.trans_inv,
+    Iso.symm_hom, Iso.symm_inv, NatTrans.comp_app,
+    Functor.isoWhiskerRight_hom, Functor.isoWhiskerRight_inv,
+    Functor.whiskerRight_app, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
+    Iso.app_hom, Iso.app_inv, Category.assoc] using ht
+
+private theorem pointModuleAssoc_eq :
+    (pointIntegralModuleAssoc_existsUnique l E L ι M κ).exists.choose =
+      coefficientComplexIntegralAssoc.{u, u + 1} l E L ι M κ := by
+  apply (pointIntegralModuleAssoc_existsUnique l E L ι M κ).unique
+  · exact (pointIntegralModuleAssoc_existsUnique l E L ι M κ).exists.choose_spec
+  · intro N a b n
+    dsimp only [coefficientComplexIntegralAssoc, Iso.trans_hom, Iso.symm_hom,
+      NatTrans.comp_app]
+    rw [ModuleCat.comp_apply, scalarComp_inv_tmul.{u, u + 1},
+      scalarTransport_tmul.{u, u + 1} _ _ (coefficientComplexIntegerComp l E L ι M κ)]
+
+private theorem pointModuleBeta_eq :
+    (pointTensorRationalization_existsUnique l E L ι).exists.choose =
+      coefficientComplexBeta.{u, u + 1} l E L ι := by
+  apply (pointTensorRationalization_existsUnique l E L ι).unique
+  · exact (pointTensorRationalization_existsUnique l E L ι).exists.choose_spec
+  · exact (coefficientComplexBeta_existsUnique.{u, u + 1} l E L ι).exists.choose_spec
+
+private theorem pointRationalizationTower
+    (K : DerivedCategory (ModuleCat.{u + 1} (Padic.coefficientExtensionIntegers l E))) :
+    (pointModuleDerivedRationalization l M).map
+        ((pointIntegralModuleDerivedAssoc l E L ι M κ).hom.app K) ≫
+      (pointDerivedTensorRationalization l E M (κ.comp ι)).hom.app K =
+    (pointDerivedTensorRationalization l L M κ).hom.app
+        ((pointIntegralModuleDerivedTensor l E L ι).obj K) ≫
+      (pointCoefficientFieldDerivedTensor l L M κ).map
+        ((pointDerivedTensorRationalization l E L ι).hom.app K) ≫
+      (pointCoefficientFieldDerivedAssoc l E L ι M κ).hom.app
+        ((pointModuleDerivedRationalization l E).obj K) := by
+  apply deriveCoefficientTower
+  apply Iso.ext
+  apply NatTrans.ext
+  funext P
+  simp only [Iso.trans_hom, NatTrans.comp_app,
+    Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
+    Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app]
+  rw [pointModuleAssoc_eq, pointModuleBeta_eq, pointModuleBeta_eq, pointModuleBeta_eq]
+  exact coefficientModuleTower.{u, u + 1} l E L ι M κ P
+
 set_option backward.isDefEq.respectTransparency true
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 section Constructible
 
 variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
@@ -1007,6 +1457,28 @@ noncomputable def pointIntegralScalarUnit
   (pointConstructibleCompletionIso l E E (AlgHom.id ℚ_[l] E) D hl K hK).symm ≪≫
     (pointDerivedTensorUnit D.k l E).app K
 
+/-- The integral associator is the specified conjugate of the ordinary derived associator.
+Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension). -/
+noncomputable def pointIntegralScalarAssoc
+    (K : completedIntegralDerivedCategory l E
+            (Spec (.of D.k)) D hl)
+    (hK : boundedConstructibleDerivedCompleteIntegral D l hl E
+            (Spec (.of D.k)) K) :
+    (integralScalarExtension.{u} l L M κ
+            (Spec (.of D.k))).obj
+        ((integralScalarExtension.{u} l E L ι
+            (Spec (.of D.k))).obj K) ≅
+      (integralScalarExtension.{u} l E M (κ.comp ι)
+            (Spec (.of D.k))).obj K :=
+  (pointConstructibleCompletionIso l L M κ D hl _
+    (integralScalarExtension_constructible D l hl E L ι
+      (Spec (.of D.k)) ⟨K, hK⟩)).symm ≪≫
+    (completedDerivedScalarExtension.{u, u} l L M κ
+            (Spec (.of D.k))).mapIso
+      (pointConstructibleCompletionIso l E L ι D hl K hK).symm ≪≫
+    (pointDerivedTensorAssoc D.k l E L ι M κ).app K ≪≫
+    pointConstructibleCompletionIso l E M (κ.comp ι) D hl K hK
+
 /-- Rational phi is integral phi tensored with L, followed by the balanced localization map.
 Source: blueprint final paragraph (blueprint: lem-weil-point-sections-scalar-extension). -/
 noncomputable def pointRationalSectionsScalarExtensionIso
@@ -1062,6 +1534,30 @@ private theorem pointScalarSectionsNatural
       integralScalarExtensionOfUniverses] using ψ.naturality f
   exact inverseSquare _ _ _ _ hn
 
+private theorem pointScalarSectionsTower
+    (K : completedIntegralDerivedCategory l E (Spec (.of D.k)) D hl)
+    (hK : boundedConstructibleDerivedCompleteIntegral D l hl E (Spec (.of D.k)) K) :
+    (pointCompletedDerivedSections D.k l M).map
+        (pointIntegralScalarAssoc l E L ι M κ D hl K hK).hom ≫
+      (pointSectionsScalarExtensionIso l E M (κ.comp ι) D hl K hK).hom =
+    (pointSectionsScalarExtensionIso l L M κ D hl _
+      (integralScalarExtension_constructible D l hl E L ι (Spec (.of D.k)) ⟨K, hK⟩)).hom ≫
+      (pointIntegralModuleDerivedTensor l L M κ).map
+        (pointSectionsScalarExtensionIso l E L ι D hl K hK).hom ≫
+      (pointIntegralModuleDerivedAssoc l E L ι M κ).hom.app
+        ((pointCompletedDerivedSections D.k l E).obj K) := by
+  let C := pointConstructibleCompletionIso l E L ι D hl K hK
+  let S := pointCompletedDerivedSections D.k l M
+  let A := completedDerivedScalarExtension l L M κ (Spec (.of D.k))
+  have hn := (pointDerivedSectionsTensor D.k l L M κ).inv.naturality C.inv
+  simp only [Functor.comp_map] at hn
+  simp only [pointIntegralScalarAssoc, pointSectionsScalarExtensionIso,
+    Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Functor.mapIso_hom,
+    Functor.mapIso_inv, Functor.map_comp, Category.assoc,
+    Iso.app_hom, Iso.app_inv, Iso.map_hom_inv_id_assoc]
+  rw [pointDerivedSectionsTower]
+  rw [reassoc_of% hn]
+
 private theorem pointRationalSectionsNatural
     (K J : completedIntegralDerivedCategory l E (Spec (.of D.k)) D hl)
     (hK : boundedConstructibleDerivedCompleteIntegral D l hl E (Spec (.of D.k)) K)
@@ -1084,10 +1580,33 @@ private theorem pointRationalSectionsNatural
     ((pointDerivedTensorRationalization l E L ι).hom.naturality
       ((pointCompletedDerivedSections D.k l E).map f))
 
+private theorem pointRationalSectionsTower
+    (K : completedIntegralDerivedCategory l E (Spec (.of D.k)) D hl)
+    (hK : boundedConstructibleDerivedCompleteIntegral D l hl E (Spec (.of D.k)) K) :
+    (pointModuleDerivedRationalization l M).map
+        ((pointCompletedDerivedSections D.k l M).map
+          (pointIntegralScalarAssoc l E L ι M κ D hl K hK).hom) ≫
+      (pointRationalSectionsScalarExtensionIso l E M (κ.comp ι) D hl K hK).hom =
+    (pointRationalSectionsScalarExtensionIso l L M κ D hl _
+      (integralScalarExtension_constructible D l hl E L ι (Spec (.of D.k)) ⟨K, hK⟩)).hom ≫
+      (pointCoefficientFieldDerivedTensor l L M κ).map
+        (pointRationalSectionsScalarExtensionIso l E L ι D hl K hK).hom ≫
+      (pointCoefficientFieldDerivedAssoc l E L ι M κ).hom.app
+        ((pointModuleDerivedRationalization l E).obj
+          ((pointCompletedDerivedSections D.k l E).obj K)) := by
+  simp only [pointRationalSectionsScalarExtensionIso, Iso.trans_hom,
+    Functor.mapIso_hom, Iso.app_hom, Category.assoc, Functor.map_comp]
+  rw [← Functor.map_comp_assoc, pointScalarSectionsTower]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [pointRationalizationTower]
+  have hn := (pointDerivedTensorRationalization l L M κ).hom.naturality
+    (pointSectionsScalarExtensionIso l E L ι D hl K hK).hom
+  simp only [Functor.comp_map] at hn
+  rw [reassoc_of% hn]
+
 attribute [local irreducible] pointSectionsScalarExtensionIso pointIntegralScalarAssoc
   pointIntegralScalarUnit pointRationalSectionsScalarExtensionIso
 
-set_option linter.all false in
 end Constructible
 
 end WeilConjectures

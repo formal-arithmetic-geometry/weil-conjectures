@@ -73,8 +73,6 @@ def proEtaleGlobalEvaluationTerminal (A : Type u) [CommRing A] [Finite A]
   isoWhiskerRight (proEtaleUnitLerayDirectImageIso A f).symm
     (proEtaleUnitLeraySections A Y) ≪≫ proEtaleUnitLerayTerminalIso A f
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 section MateTransport
 variable {C D E : Type*} [Category C] [Category D] [Category E]
   {Lf : D ⥤ C} {Lg : E ⥤ D} {Lc : E ⥤ C}
@@ -502,35 +500,14 @@ private theorem sectionDirectImageIso_normalization {X Y : Scheme.{u}} (f : X �
         ((sfIntrinsicModuleEquivalence X A).counitIso.inv_hom_id_app M))
       (show M.val.obj ((proEtaleBaseChange f).op.obj W) from r)
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end SectionRealization
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 800000 in
 -- The coefficient transports require comparing nested pushforward module actions.
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 variable (P : WeilConjectures.PurityFiniteSetting.{u})
   {T Y W : Scheme.{u}}
   [T.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))]
   [W.Over (Spec (.of P.field.k))]
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option linter.unusedSectionVars false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end AlgebraicGeometry.Scheme
 
 end

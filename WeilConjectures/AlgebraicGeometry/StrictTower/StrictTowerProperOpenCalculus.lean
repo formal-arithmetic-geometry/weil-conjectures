@@ -867,8 +867,6 @@ private theorem alpha_identities :
 
 end NormalizedIdentities
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 /-- Beta commutes with composition of open immersions, before evaluation.
 Source: Stacks, Tag 09AE and blueprint, second proof step
 (blueprint: lem-cbc-strict-tower-proper-open-calculus).

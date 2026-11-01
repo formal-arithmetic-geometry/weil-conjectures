@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Hypercover.ProEtaleHypercoverTotal
+public import WeilConjectures.AlgebraicGeometry.ProEtale.SectionsConservative
 
 /-!
 # The restriction augmentation into total hypercover sections

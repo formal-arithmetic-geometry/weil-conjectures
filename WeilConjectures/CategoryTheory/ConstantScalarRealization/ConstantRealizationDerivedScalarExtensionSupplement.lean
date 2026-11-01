@@ -1022,7 +1022,6 @@ Source: Stacks 03DA (blueprint: lem-sfb-constant-realization-derived-scalar-exte
 def restrictionComposition : restriction J b ⋙ restriction J q ≅ restriction J (b.comp q) :=
   Classical.choose (restrictionComposition_existsUnique J q b)
 
-set_option backward.isDefEq.respectTransparency false in
 variable [HasDerivedCategory.{wR} (ModuleCat.{max u v} R)]
   [HasDerivedCategory.{wS} (ModuleCat.{max u v} S)]
   [HasDerivedCategory.{wT} (ModuleCat.{max u v} T)]
@@ -1030,6 +1029,5 @@ variable [HasDerivedCategory.{wR} (ModuleCat.{max u v} R)]
   [HasDerivedCategory.{dS} (realizationModules J S)]
   [HasDerivedCategory.{dT} (realizationModules J T)]
 
-set_option backward.isDefEq.respectTransparency false in
 end Tower
 end CategoryTheory.ConstantScalarRealization
