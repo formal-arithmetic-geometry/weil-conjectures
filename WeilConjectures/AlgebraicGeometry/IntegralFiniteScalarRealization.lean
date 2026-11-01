@@ -38,6 +38,21 @@ def integralFiniteScalarFunctor (W : Scheme.{u}) (n : ℕ) :
   ModuleCat.uliftFunctor.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)) ⋙
     FiniteConstantModel.modelFunctor (Padic.coefficientExtensionRing l E (n + 1)) W
 
+private theorem finiteScalar_assertions (W : Scheme.{u}) (n : ℕ) :
+    (integralFiniteScalarFunctor l E W n).Additive ∧
+      PreservesFiniteLimits (integralFiniteScalarFunctor l E W n) ∧
+      PreservesFiniteColimits (integralFiniteScalarFunctor l E W n) := by
+  let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
+  let A := Padic.coefficientExtensionRing l E (n + 1)
+  let : Finite A := Padic.finite_coefficientExtensionRing l E (n + 1) (by omega)
+  let : DiscreteTopology A := DerivedNakayama.quotientDiscrete l E (n + 1)
+  obtain ⟨hA, _⟩ := AdmissibleScalarRealization.finite_scalar_assertions A W
+  let : (FiniteConstantModel.modelFunctor A W).Additive := hA.2.1
+  let : PreservesFiniteLimits (FiniteConstantModel.modelFunctor A W) := hA.2.2.1
+  let : PreservesFiniteColimits (FiniteConstantModel.modelFunctor A W) := hA.2.2.2.1
+  dsimp [integralFiniteScalarFunctor]
+  exact ⟨inferInstance, inferInstance, inferInstance⟩
+
 instance (W : Scheme.{u}) (n : ℕ) :
     (integralFiniteScalarFunctor l E W n).Additive :=
   (finiteScalar_assertions l E W n).1

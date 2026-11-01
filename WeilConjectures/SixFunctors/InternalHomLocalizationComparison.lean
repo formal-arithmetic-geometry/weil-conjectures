@@ -68,6 +68,9 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionIn
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
+public import WeilConjectures.Algebra.Homology.DerivedChangeOfRingsCochainModel
+public import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
+public import WeilConjectures.CategoryTheory.RingedSiteLocalization
 
 /-! # Internal Hom and localization under sequential continuity
 
@@ -137,6 +140,112 @@ variable (R : Sheaf J CommRingCat.{max c v r})
 omit [∀ T : Sheaf J CommRingCat.{max c v r},
   HasDerivedCategory.{w} (scalarModules J T)] in
 attribute [local instance] localizationTensor_additive
+
+private def localizationRestrictedTensorPresheafIso (N : scalarModules J R) :
+    N.val ⊗ ((scalarRestriction a).obj (SheafOfModules.unit
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj S))).val ≅
+    (PresheafOfModules.restrictScalars
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).map a).hom).obj
+        (changeOfRingsPresheaf a N) := by
+  refine PresheafOfModules.isoMk (fun V ↦ ?_) ?_
+  · let ρ := (a.hom.app V).hom
+    change ModuleCat.of (R.obj.obj V) (TensorProduct (R.obj.obj V) (N.val.obj V)
+      ((ModuleCat.restrictScalars ρ).obj (ModuleCat.of (S.obj.obj V) (S.obj.obj V)))) ≅
+      (ModuleCat.restrictScalars ρ).obj
+        ((ModuleCat.extendScalars ρ).obj (N.val.obj V))
+    exact (TensorProduct.comm (R.obj.obj V) (N.val.obj V)
+      ((ModuleCat.restrictScalars ρ).obj (ModuleCat.of (S.obj.obj V)
+        (S.obj.obj V)))).toModuleIso
+  · intro V W f
+    apply ModuleCat.hom_ext
+    ext z
+    induction z using TensorProduct.induction_on with
+    | zero => simp only [map_zero]
+    | add x y hx hy => simp only [map_add, hx, hy]
+    | tmul x b =>
+        change S.obj.map f b ⊗ₜ[R.obj.obj W, (a.hom.app W).hom] N.val.map f x =
+          changeOfRingsMap a N f (b ⊗ₜ[R.obj.obj V, (a.hom.app V).hom] x)
+        exact (Classical.choose_spec (exists_changeOfRingsMap a N f) b x).symm
+
+private def localizationRestrictedTensorIso (N : scalarModules J R) :
+    (SheafOfModules.monoidalCategory R).tensorObj N
+      ((scalarRestriction a).obj (SheafOfModules.unit
+        ((sheafCompose J (forget₂ CommRingCat RingCat)).obj S))) ≅
+      (scalarRestriction a).obj (changeOfRings a N) := by
+  let _ := SheafOfModules.monoidalCategory R
+  let F := PresheafOfModules.sheafification
+    (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).obj)
+  exact tensorObjIsoSheafification N _ ≪≫
+    F.mapIso (localizationRestrictedTensorPresheafIso.{c, v, r} a N) ≪≫
+      ScalarHomCancellation.cancellationRestrictSheafifyIso
+        ((sheafCompose J (forget₂ CommRingCat RingCat)).map a)
+        (changeOfRingsPresheaf a N)
+
+private theorem localizationRestrictionSheafification_unit
+    {A B : Sheaf J RingCat.{max c v r}} (a₀ : A ⟶ B)
+    (P : PresheafOfModules.{max c v r} B.obj) (V : Cᵒᵖ) (x : P.obj V) :
+    (ScalarHomCancellation.cancellationRestrictSheafifyIso a₀ P).hom.val.app V
+      (((PresheafOfModules.sheafificationAdjunction (𝟙 A.obj)).unit.app
+        ((PresheafOfModules.restrictScalars a₀.hom).obj P)).app V x) =
+      ((PresheafOfModules.sheafificationAdjunction (𝟙 B.obj)).unit.app P).app V x := by
+  have h := (PresheafOfModules.sheafificationHomEquiv
+    (P := (PresheafOfModules.restrictScalars a₀.hom).obj P)
+    (F := (restrictScalars a₀).obj
+      ((PresheafOfModules.sheafification (𝟙 B.obj)).obj P)) (𝟙 A.obj)).apply_symm_apply
+      ((PresheafOfModules.restrictScalars a₀.hom).map
+        ((PresheafOfModules.sheafificationAdjunction (𝟙 B.obj)).unit.app P))
+  have h' := congrArg ((PresheafOfModules.toPresheaf A.obj).map) h
+  rw [PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def] at h'
+  have hx := congrArg (fun k ↦ k.app V x) h'
+  unfold ScalarHomCancellation.cancellationRestrictSheafifyIso
+  change (ScalarHomCancellation.cancellationRestrictSheafifyHom a₀ P).val.app V
+    (((PresheafOfModules.sheafificationAdjunction (𝟙 A.obj)).unit.app
+      ((PresheafOfModules.restrictScalars a₀.hom).obj P)).app V x) = _
+  unfold ScalarHomCancellation.cancellationRestrictSheafifyHom
+  exact hx
+
+private theorem localizationRestrictedTensorIso_pure
+    (N : scalarModules J R) (V : Cᵒᵖ) (x : N.val.obj V) (b : S.obj.obj V) :
+    (localizationRestrictedTensorIso.{c, v, r} a N).hom.val.app V
+      (ScalarHomOrdinary.pure R N ((scalarRestriction a).obj (SheafOfModules.unit
+        ((sheafCompose J (forget₂ CommRingCat RingCat)).obj S))) V x b) =
+      ((PresheafOfModules.sheafificationAdjunction
+        (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj S).obj)).unit.app
+          (changeOfRingsPresheaf a N)).app V
+            (b ⊗ₜ[R.obj.obj V, (a.hom.app V).hom] x) := by
+  let B := (scalarRestriction a).obj (SheafOfModules.unit
+    ((sheafCompose J (forget₂ CommRingCat RingCat)).obj S))
+  let F := PresheafOfModules.sheafification
+    (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).obj)
+  let adj := PresheafOfModules.sheafificationAdjunction
+    (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).obj)
+  let eP := localizationRestrictedTensorPresheafIso.{c, v, r} a N
+  let c := ScalarHomCancellation.cancellationRestrictSheafifyIso
+    ((sheafCompose J (forget₂ CommRingCat RingCat)).map a) (changeOfRingsPresheaf a N)
+  have he : (tensorObjIsoSheafification N B).inv ≫
+      (localizationRestrictedTensorIso.{c, v, r} a N).hom = F.map eP.hom ≫ c.hom := by
+    dsimp only [localizationRestrictedTensorIso, Iso.trans_hom, Functor.mapIso_hom]
+    change (tensorObjIsoSheafification N B).inv ≫
+      (tensorObjIsoSheafification N B).hom ≫ F.map eP.hom ≫ c.hom = _
+    rw [Iso.inv_hom_id_assoc]
+  have hn := congrArg (fun k ↦ k.app V (x ⊗ₜ[R.obj.obj V] b))
+    (adj.unit.naturality eP.hom)
+  have hh := congrArg (fun k ↦ k.val.app V
+    ((adj.unit.app (N.val ⊗ B.val)).app V (x ⊗ₜ[R.obj.obj V] b))) he
+  change (localizationRestrictedTensorIso.{c, v, r} a N).hom.val.app V
+    (ScalarHomOrdinary.pure R N B V x b) = _ at hh
+  rw [hh]
+  change c.hom.val.app V ((F.map eP.hom).val.app V
+    ((adj.unit.app (N.val ⊗ B.val)).app V (x ⊗ₜ[R.obj.obj V] b))) = _
+  change (adj.unit.app ((PresheafOfModules.restrictScalars
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).map a).hom).obj
+        (changeOfRingsPresheaf a N))).app V (eP.hom.app V (x ⊗ₜ[R.obj.obj V] b)) =
+      (F.map eP.hom).val.app V
+        ((adj.unit.app (N.val ⊗ B.val)).app V (x ⊗ₜ[R.obj.obj V] b)) at hn
+  refine (congrArg (c.hom.val.app V) hn.symm).trans ?_
+  exact localizationRestrictionSheafification_unit.{c, v, r}
+    ((sheafCompose J (forget₂ CommRingCat RingCat)).map a) (changeOfRingsPresheaf a N) V
+    (b ⊗ₜ[R.obj.obj V, (a.hom.app V).hom] x)
 
 private def localizationUnderlyingIso (N : scalarModules J R) :
     (scalarLocalization R s).obj N ≅

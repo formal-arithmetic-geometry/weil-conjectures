@@ -9,6 +9,8 @@ public import WeilConjectures.Algebra.Homology.HomComplexComponents
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 import WeilConjectures.Algebra.Homology.HomTensorDegreewiseEquation
 import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMap
+public import WeilConjectures.Algebra.Homology.HomComplex
+public import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 
 /-! # Canonical Hom representative evaluation on a ringed site
 
@@ -50,6 +52,15 @@ noncomputable def coefficientHomComponent
     (homComplex.{c, v, max c v u, max c v u} (R := A) L M).X n ⟶
       SheafOfModules.homObj (R := A) (L.X p) (M.X q) :=
   homComplexπ.{c, v, max c v u, max c v u} (R := A) L M n p q h
+
+/-- Compatibility of the cached projection presentation with the native tensor-Hom API. -/
+private theorem coefficientHomComponent_eq_native
+    (L M : CochainComplex (SheafOfModules.{max c v}
+      ((sheafCompose J (forget₂ CommRingCat.{max c v} RingCat.{max c v})).obj R)) ℤ)
+    (n p q : ℤ) (h : p + n = q) :
+    coefficientHomComponent.{0, c, v} J R L M n p q h =
+      homTensorCurryProjection R L M n p q h := by
+  rfl
 
 end HomProjection
 

@@ -16,6 +16,10 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 
 public import WeilConjectures.AlgebraicGeometry.Locally.LocallyClosedModuleExtensionData
 import WeilConjectures.AlgebraicGeometry.LocallyClosedCoefficientImmersion.LocallyClosedModuleExtensionModel
+public import WeilConjectures.AlgebraicGeometry.Locally.LocallyClosedModuleExtensionAssociativityPart
+public import WeilConjectures.AlgebraicGeometry.Locally.LocallyClosedModuleExtensionBinary
+public import WeilConjectures.AlgebraicGeometry.Locally.LocallyClosedModuleExtensionBoundary
+public import WeilConjectures.AlgebraicGeometry.Locally.LocallyClosedModuleExtensionUnitPart
 
 /-! Normalized locally closed module extension: assembly from the fixed model. -/
 
@@ -161,6 +165,36 @@ private theorem normalized_existsUnique
   apply (cancel_mono (r.hom.app M)).mp
   exact he'.trans he.symm
 
+private theorem model_binary_existsUnique {S X T : LocallyClosedCoefficients.{u}}
+    (a : LocallyClosedCoefficientImmersion S X) (b : LocallyClosedCoefficientImmersion T S)
+    (M : proEtaleRingModules T.scheme T.ring) :
+    ∃! e : a.modelExtension.obj (b.modelExtension.obj M) ≅ (a.comp b).modelExtension.obj M,
+      LocallyClosedObjectNormalization (a.comp b).modelExtension (a.comp b).pull
+        (a.comp b).modelRestriction
+        (LocallyClosedCompositeRestrictionMap a.modelExtension b.modelExtension a.pull b.pull
+          (a.comp b).pull a.modelRestriction b.modelRestriction (a.pullComp b) M) e := by
+  exact normalized_existsUnique (a.comp b).modelExtension (a.comp b).pull
+    (a.comp b).modelRestriction (a.modelExtension.obj (b.modelExtension.obj M)) M _
+    (locallyClosedModel_binary_exists a b M)
+
+-- An objectwise normalized comparison is automatically natural. This is the
+-- categorical glue between the geometric binary lemma and the final system.
+
+private def normalizedNatIso
+    {C D : Type*} [Category C] [Category D] (F H : C ⥤ D) (L : D ⥤ C)
+    [H.Full] [H.Faithful] (r : H ⋙ L ≅ 𝟭 C) (s : F ⋙ L ≅ 𝟭 C)
+    (e : ∀ M, F.obj M ≅ H.obj M)
+    (he : ∀ M, L.map (e M).hom ≫ r.hom.app M = s.hom.app M) : F ≅ H :=
+  NatIso.ofComponents e (by
+    intro M N f
+    apply restriction_injective H L r (e M)
+    apply (cancel_mono (r.hom.app N)).mp
+    simp only [Functor.map_comp, Category.assoc]
+    have hr : L.map (H.map f) ≫ r.hom.app N = r.hom.app M ≫ f :=
+      r.hom.naturality f
+    rw [he, hr, ← Category.assoc, he]
+    exact s.hom.naturality f)
+
 private def compositeRestriction
     {A B C : Type*} [Category A] [Category B] [Category C]
     (Ea : B ⥤ C) (Eb : A ⥤ B) (La : C ⥤ B) (Lb : B ⥤ A) (Lab : C ⥤ A)
@@ -187,6 +221,92 @@ private def compositeRestriction
       _ = c.hom.app _ ≫ Lb.map (ra.hom.app (Eb.obj M)) ≫
           Lb.map (Eb.map f) ≫ rb.hom.app N := by rw [Lb.map_comp, Category.assoc]
       _ = _ := by rw [hb]; simp only [Category.assoc])
+
+private theorem compositeRestriction_hom
+    {A B C : Type*} [Category A] [Category B] [Category C]
+    (Ea : B ⥤ C) (Eb : A ⥤ B) (La : C ⥤ B) (Lb : B ⥤ A) (Lab : C ⥤ A)
+    (ra : Ea ⋙ La ≅ 𝟭 B) (rb : Eb ⋙ Lb ≅ 𝟭 A) (c : Lab ≅ La ⋙ Lb) (M : A) :
+    (compositeRestriction Ea Eb La Lb Lab ra rb c).hom.app M =
+      c.hom.app (Ea.obj (Eb.obj M)) ≫ Lb.map (ra.hom.app (Eb.obj M)) ≫ rb.hom.app M := rfl
+
+@[irreducible] private def uniqueChoice {A : Type*} {P : A → Prop}
+    (h : ∃! x, P x) : A := h.choose
+
+private structure NormalizedComponent {S X T : LocallyClosedCoefficients.{u}}
+    (a : LocallyClosedCoefficientImmersion S X) (b : LocallyClosedCoefficientImmersion T S)
+    (M : proEtaleRingModules T.scheme T.ring) where
+  iso : a.modelExtension.obj (b.modelExtension.obj M) ≅ (a.comp b).modelExtension.obj M
+  normalized : LocallyClosedObjectNormalization (a.comp b).modelExtension
+    (a.comp b).pull (a.comp b).modelRestriction
+    (LocallyClosedCompositeRestrictionMap a.modelExtension b.modelExtension a.pull b.pull
+      (a.comp b).pull a.modelRestriction b.modelRestriction (a.pullComp b) M) iso
+
+private theorem normalizedComponent_existsUnique {S X T : LocallyClosedCoefficients.{u}}
+    (a : LocallyClosedCoefficientImmersion S X) (b : LocallyClosedCoefficientImmersion T S)
+    (M : proEtaleRingModules T.scheme T.ring) :
+    ∃! _e : NormalizedComponent a b M, True := by
+  obtain ⟨e, he, hu⟩ := model_binary_existsUnique a b M
+  refine ⟨⟨e, he⟩, trivial, ?_⟩
+  rintro ⟨e', he'⟩ _
+  have h : e' = e := hu e' he'
+  subst e'
+  rfl
+
+private structure BinaryComparison
+    {A B C : Type*} [Category A] [Category B] [Category C]
+    (Ea : B ⥤ C) (Eb : A ⥤ B) (La : C ⥤ B) (Lb : B ⥤ A) (Lab : C ⥤ A)
+    (H : A ⥤ C) (ra : Ea ⋙ La ≅ 𝟭 B) (rb : Eb ⋙ Lb ≅ 𝟭 A)
+    (rh : H ⋙ Lab ≅ 𝟭 A) (c : Lab ≅ La ⋙ Lb) where
+  iso : Eb ⋙ Ea ≅ H
+  normalized : LocallyClosedBinaryNormalization Ea Eb La Lb Lab H ra rb rh c iso
+
+private theorem binaryComparison_nonempty
+    {A B C : Type*} [Category A] [Category B] [Category C]
+    (Ea : B ⥤ C) (Eb : A ⥤ B) (La : C ⥤ B) (Lb : B ⥤ A) (Lab : C ⥤ A)
+    (H : A ⥤ C) [H.Full] [H.Faithful]
+    (ra : Ea ⋙ La ≅ 𝟭 B) (rb : Eb ⋙ Lb ≅ 𝟭 A)
+    (rh : H ⋙ Lab ≅ 𝟭 A) (c : Lab ≅ La ⋙ Lb)
+    (e : ∀ M, Ea.obj (Eb.obj M) ≅ H.obj M)
+    (he : ∀ M, LocallyClosedObjectNormalization H Lab rh
+      (LocallyClosedCompositeRestrictionMap Ea Eb La Lb Lab ra rb c M) (e M)) :
+    Nonempty (BinaryComparison Ea Eb La Lb Lab H ra rb rh c) := ⟨{
+  iso := normalizedNatIso (Eb ⋙ Ea) H Lab rh
+    (compositeRestriction Ea Eb La Lb Lab ra rb c) e (fun M ↦ by
+      rw [compositeRestriction_hom]
+      exact he M)
+  normalized := fun M ↦ he M }⟩
+
+@[irreducible] private def binaryComparisonFromComponents
+    {A B C : Type*} [Category A] [Category B] [Category C]
+    (Ea : B ⥤ C) (Eb : A ⥤ B) (La : C ⥤ B) (Lb : B ⥤ A) (Lab : C ⥤ A)
+    (H : A ⥤ C) [H.Full] [H.Faithful]
+    (ra : Ea ⋙ La ≅ 𝟭 B) (rb : Eb ⋙ Lb ≅ 𝟭 A)
+    (rh : H ⋙ Lab ≅ 𝟭 A) (c : Lab ≅ La ⋙ Lb)
+    (e : ∀ M, Ea.obj (Eb.obj M) ≅ H.obj M)
+    (he : ∀ M, LocallyClosedObjectNormalization H Lab rh
+      (LocallyClosedCompositeRestrictionMap Ea Eb La Lb Lab ra rb c M) (e M)) :
+    BinaryComparison Ea Eb La Lb Lab H ra rb rh c :=
+  Classical.choice (binaryComparison_nonempty Ea Eb La Lb Lab H ra rb rh c e he)
+
+@[irreducible] private def modelBinaryComparison
+    {S X T : LocallyClosedCoefficients.{u}}
+    (a : LocallyClosedCoefficientImmersion S X) (b : LocallyClosedCoefficientImmersion T S)
+    (Q : ∀ M, NormalizedComponent a b M) :
+    BinaryComparison a.modelExtension b.modelExtension a.pull b.pull (a.comp b).pull
+      (a.comp b).modelExtension a.modelRestriction b.modelRestriction
+      (a.comp b).modelRestriction (a.pullComp b) :=
+  binaryComparisonFromComponents a.modelExtension b.modelExtension a.pull b.pull (a.comp b).pull
+    (a.comp b).modelExtension a.modelRestriction b.modelRestriction
+    (a.comp b).modelRestriction (a.pullComp b)
+    (fun M ↦ (Q M).iso) (fun M ↦ (Q M).normalized)
+
+@[irreducible] private def compositionFromComponents
+    (Q : ∀ {S X T : LocallyClosedCoefficients.{u}}
+      (a : LocallyClosedCoefficientImmersion S X) (b : LocallyClosedCoefficientImmersion T S)
+      (M : proEtaleRingModules T.scheme T.ring), NormalizedComponent a b M) :
+    LocallyClosedModelComposition.{u} where
+  gamma := fun a b ↦ (modelBinaryComparison a b (Q a b)).iso
+  normalized := fun a b ↦ (modelBinaryComparison a b (Q a b)).normalized
 
 private structure OpenNormalization
     {C D : Type*} [Category C] [Category D] (F : C ⥤ D) (L : D ⥤ C)
@@ -224,5 +344,68 @@ private theorem closedNormalization_nonempty
     (h : ∃ e : F ≅ P, LocallyClosedClosedNormalization F P L r d e) :
     ClosedNormalization F P L r d :=
   Classical.choice (closedNormalization_nonempty F P L r d h)
+
+private theorem assembleFixedModel (G : LocallyClosedModelComposition.{u}) :
+    ∃ E : LocallyClosedExtensionData.{u}, E.NormalizedComposition := by
+  obtain ⟨identity, inner, outer, assoc⟩ := locallyClosedModel_unit_associativity G
+  refine ⟨{
+    extension := fun a ↦ a.modelExtension
+    additive := fun a ↦ inferInstance
+    finiteLimits := fun a ↦ inferInstance
+    finiteColimits := fun a ↦ inferInstance
+    restriction := fun a ↦ a.modelRestriction
+    openAdjunction := fun a ha ↦ (openNormalization a.modelExtension a.pull a.modelRestriction
+      ((locallyClosedModel_boundary a).1 ha)).adj
+    openNormalization := fun a ha ↦ (openNormalization a.modelExtension a.pull a.modelRestriction
+      ((locallyClosedModel_boundary a).1 ha)).normalized
+    closedComparison := fun a ha ↦ (closedNormalization a.modelExtension a.push a.pull
+      a.modelRestriction
+      (proEtaleRingModuleAdjunction a.hom _ _ a.coefficient).counit
+      ((locallyClosedModel_boundary a).2 ha)).iso
+    closedNormalization := fun a ha ↦ (closedNormalization a.modelExtension a.push a.pull
+      a.modelRestriction
+      (proEtaleRingModuleAdjunction a.hom _ _ a.coefficient).counit
+      ((locallyClosedModel_boundary a).2 ha)).normalized
+    gamma := G.gamma
+    identity := identity }, ?_⟩
+  exact ⟨G.normalized, inner, outer, assoc⟩
+
+/-- Exact locally closed extension on module sheaves, with normalized factorization
+comparisons and unital, associative composition.
+
+Source: Stacks, proetale.tex Tags 09AA, 09BM, 09BN and 09AH; sites-modules.tex
+Tags 03DI and 03DJ; schemes.tex Tag 02V0; blueprint main-20261015,
+det-prop-scalar-six-pullback proof (2)
+(blueprint: lem-sfb-locally-closed-module-extension-coherence).
+
+Proof: construct a fixed closed-then-open extension, using a locally closed
+factorization, the actual closed direct image and the identified open extension.
+The open factor is a fully faithful left adjoint and the closed factor a fully
+faithful right adjoint. Their exactness and additivity compose; the inverse open
+unit, the closed counit and canonical inverse-image composition give restriction.
+The model module proves these assertions for the constructed functor.
+
+The boundary lemma compares this fixed model to the actual open and closed
+extensions. Its proof uses restriction to intersections and shrinking of an open
+ambient neighbourhood of the closed support; these preserve the specified units
+and counits. The binary lemma constructs an objectwise normalized isomorphism by
+interchanging the middle open and closed factors, composing pure factors, and
+comparing with the chosen factorization.
+
+Restriction is injective on maps between objects in the extension image: the
+extension is fully faithful and its composite with restriction is the identity.
+This proves uniqueness of the objectwise comparison. The normalization formulas
+and naturality of restriction then prove naturality of the chosen comparisons,
+so they assemble into gamma. Finally the formal unit/associativity lemma supplies
+identity comparisons and the three coherence laws: restriction turns each pair
+of paths into the same canonical inverse-image pasting, and its injectivity makes
+the original paths equal. Assemble this data and the boundary normalizations into
+the required system. The three unfinished comparison lemmas are in separate
+modules, each with its source and proof in words.
+-/
+theorem locallyClosedModuleExtensionCoherence :
+    ∃ E : LocallyClosedExtensionData.{u}, E.NormalizedComposition := by
+  exact assembleFixedModel (compositionFromComponents
+    (fun a b M ↦ uniqueChoice (normalizedComponent_existsUnique a b M)))
 
 end AlgebraicGeometry.Scheme
