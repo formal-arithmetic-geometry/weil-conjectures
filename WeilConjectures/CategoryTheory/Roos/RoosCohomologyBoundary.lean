@@ -32,5 +32,4 @@ variable {C : Type uC} [Category.{vC} C] [Abelian C] [HasDerivedCategory.{w} C]
   [HasCountableProducts (DerivedCategory C)]
   {D : Type uD} [Category.{vD} D] {S : Type uS} [Category.{vS} S]
 
-set_option backward.isDefEq.respectTransparency false in
 end CategoryTheory

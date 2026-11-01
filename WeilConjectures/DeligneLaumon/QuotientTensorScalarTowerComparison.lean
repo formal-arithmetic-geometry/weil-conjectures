@@ -605,10 +605,6 @@ private theorem tensorScalarLevelIso_unit
   change (completedIntegralCommRingProjectionUnrestricted l E W n).hom.app U 1 = 1
   exact map_one ((completedIntegralCommRingProjectionUnrestricted l E W n).hom.app U).hom
 
-omit [EssentiallySmall.{max u (t + 1)} W.ProEt]
-  [HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology W) AddCommGrpCat.{max u (t + 1)}]
-  [(AlgebraicGeometry.Scheme.ProEt.topology W).WEqualsLocallyBijective
-    AddCommGrpCat.{max u (t + 1)}] in
 end GeneratorChecks
 end TensorProof
 

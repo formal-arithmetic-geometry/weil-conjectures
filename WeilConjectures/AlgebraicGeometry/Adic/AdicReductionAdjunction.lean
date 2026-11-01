@@ -88,8 +88,4 @@ noncomputable def adicDerivedRestrict (X : Scheme.{t}) {A B : Type t}
   letI := (adicRestrictScalars_exact X φ).2
   (SheafOfModules.restrictScalars.{t + 1} (adicModuleMap X φ)).mapDerivedCategory
 
-set_option linter.style.haveILetI false in
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end AlgebraicGeometry.Scheme

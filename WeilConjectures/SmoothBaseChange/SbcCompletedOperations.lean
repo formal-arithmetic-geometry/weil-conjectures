@@ -1743,24 +1743,9 @@ attribute [local irreducible] sbcOrdinaryTheta sbcFiniteTheta sbcTheta sbcAdjunc
   proEtaleRingDerivedAdjunction Functor.mapDerivedCategory Functor.rightDerivedFunctor
   completedAdicDerivedChange proEtaleRingModulePullback proEtaleAmbientRingedPullbackComparison
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
 private def pushUnderlying (M : PbcComplete l E U) :
     ((sbcPush l E q).obj M).obj ⟶ (sbcAmbientPush l E q).obj M.obj := 𝟙 _
 
-set_option maxHeartbeats 400000 in
 -- Abstracting the dependent functor families requires additional elaboration steps.
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-set_option maxHeartbeats 600000 in
 -- Generalizing the comparison data and sixteen functors requires additional elaboration steps.
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency true in
 end WeilConjectures

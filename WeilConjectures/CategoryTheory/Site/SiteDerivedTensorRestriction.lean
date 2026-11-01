@@ -715,5 +715,4 @@ end TensorProof
 
 attribute [local instance] siteSectionModule
 
-set_option backward.isDefEq.respectTransparency.types false in
 end CategoryTheory

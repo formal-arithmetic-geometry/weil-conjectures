@@ -323,8 +323,6 @@ private theorem relativeExtension_morphism {T Z : Scheme.{u}}
   exact ⟨_, a, b, hab, hE, hβ, α', hα'a, hα'b⟩
 
 set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
 private def integerSectionEquiv (T : Scheme.{u})
     (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) :
     (supportedIntegralConstant T ⟶ F) ≃+
@@ -562,8 +560,4 @@ private theorem openSectionPullback_isIso {T T' : Scheme.{u}}
 
 attribute [local irreducible] relativeExtensionEnlargeComplex
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end AlgebraicGeometry.Etale

@@ -112,8 +112,4 @@ open Lean Meta Elab Tactic in
 attribute [local irreducible] CondensedRing.upperStarFromPointMod CondensedRing.upperStar
   upperStarFromPoint upperStar Functor.mapMod Functor.mapHomologicalComplex
 
-set_option cleanup.letToHave false in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-set_option backward.defeqAttrib.useBackward true in
 end AlgebraicGeometry.ProEtale

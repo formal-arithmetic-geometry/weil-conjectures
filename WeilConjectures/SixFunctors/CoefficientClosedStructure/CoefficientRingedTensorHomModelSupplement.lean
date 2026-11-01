@@ -198,6 +198,5 @@ theorem coefficientTotalTensor_isKFlat
 
 end TensorRepresentatives
 
-set_option maxHeartbeats 500000 in
 -- Elaborate the representative tensor-Hom square with independent site universes.
 end WeilConjectures

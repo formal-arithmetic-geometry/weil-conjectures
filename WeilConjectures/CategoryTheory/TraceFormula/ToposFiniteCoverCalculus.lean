@@ -9,6 +9,9 @@ public import WeilConjectures.CategoryTheory.TraceFormula.CoherentTopos
 public import WeilConjectures.AlgebraicGeometry.OrientedNearbyCycles.OrientedNearbyCycles
 import Mathlib.CategoryTheory.Sites.Sheafification
 import Mathlib.CategoryTheory.Sites.Limits
+public import Mathlib.CategoryTheory.Limits.Types.Pullbacks
+public import Mathlib.CategoryTheory.Sites.LeftExact
+public import Mathlib.CategoryTheory.Sites.LocallySurjective
 
 /-!
 # Epimorphic families and finite quasi-compact cover calculus
@@ -31,6 +34,17 @@ universe u v w
 open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace CategoryTheory
+
+/-- Coproducts in the containing universe, using Mathlib's sheafification construction
+with the discrete diagram shape specified explicitly. This packages the existing
+colimit structure so typeclass search need not rediscover its diagram universes.
+Source: Stacks Project, Sites, Tag 00WB, the sheafification universal property;
+the coproduct construction in step 1 of the node
+(blueprint: lem-trf-topos-finite-cover-calculus). -/
+instance (priority := 2000) toposFiniteCoverCoproducts
+    {C : Type u} [Category.{v} C] (J : GrothendieckTopology C) :
+    HasCoproducts.{max u v w} (Sheaf J (Type (max u v w))) :=
+  fun I ↦ Sheaf.instHasColimitsOfShape (K := Discrete I) (D := Type (max u v w))
 
 /-- Joint epimorphy is equivalent to local lifting through individual family members,
 and is stable under pullback and fibre products of families. Epimorphic images and

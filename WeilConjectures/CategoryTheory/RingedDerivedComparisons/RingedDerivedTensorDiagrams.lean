@@ -53,9 +53,7 @@ attribute [local semireducible] SheafOfModules.monoidalCategory
 
 universe u₁ v₁ u₂ v₂
 
-set_option maxHeartbeats 1000000 in
 -- Infer the total tensor on the explicit coefficient-module category.
-set_option maxHeartbeats 800000 in
 -- Normalize the dependent ringed-site representative comparison equations.
 section Representatives
 variable {X Y : Site.{u, w}} (e : RingedTensorEdge Y.corner X.corner)
@@ -77,19 +75,11 @@ include hY hX in
 local instance : MonoidalCategory Y.modules := SheafOfModules.monoidalCategory Y.A
 local instance : MonoidalCategory X.modules := SheafOfModules.monoidalCategory X.A
 
-set_option maxHeartbeats 1600000 in
 -- Normalize the dependent ringed-site representative comparison equations.
-include hY hX in
-set_option maxHeartbeats 800000 in
 -- Normalize the dependent ringed-site representative comparison equations.
-set_option maxHeartbeats 1200000 in
 -- Normalize the dependent ringed-site representative comparison equations.
-include hY hX in
-set_option maxHeartbeats 1000000 in
 -- Normalize the dependent ringed-site representative comparison equations.
-include hY hX in
 end Representatives
 
-set_option maxHeartbeats 800000 in
 -- Normalize the dependent ringed-site representative comparison equations.
 end CategoryTheory.RingedDerivedComparisons

@@ -389,9 +389,6 @@ private theorem integerActionTopology_mem (J : Precoverage C)
       (integerActionInclusion (C := C)) ∈ integerActionTopology J (IntegerActionSite.mk X) at h
     rwa [integerActionInclusion_push_pull] at h
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.defeqAttrib.useBackward true in
-set_option linter.unusedVariables false in
 set_option backward.defeqAttrib.useBackward true in
 private theorem integerActionInclusion_compatible
     (K : GrothendieckTopology (IntegerActionSite C)) :

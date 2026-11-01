@@ -41,8 +41,6 @@ def tensorPullbackFrames {T : Scheme.{u}} (L M : T.Modules)
     (Functor.Monoidal.μIso (Scheme.Modules.pullback f)
       (Scheme.Modules.unit T) (Scheme.Modules.unit T)).inv ≫
         (x ⊗ₘ y) ≫ (Functor.Monoidal.μIso (Scheme.Modules.pullback f) L M).hom
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 private lemma scalar_natural {X : Scheme.{u}} {A B : X.Modules}
     (f : A ⟶ B) (r : Γ(X, ⊤)) :
     Scheme.Modules.smulHom A r ≫ f = f ≫ Scheme.Modules.smulHom B r := by

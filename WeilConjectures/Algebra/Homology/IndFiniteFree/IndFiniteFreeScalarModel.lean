@@ -575,7 +575,6 @@ private noncomputable def ordinaryComparison
     rw [pureTensor_whiskerLeft, ordinaryIso_pure, ordinaryIso_pure,
       extensionPure_naturality])
 
-omit [HasDerivedCategory.{wR} (Modules R)] in
 /-- Normalization of the chain comparison on the sheafification-unit images of local
 pure tensors. The coprojections are those of the supplied algebra colimit.
 Source: Stacks 03EP, 03CY (blueprint: lem-sfb-ind-finite-free-scalar-model). -/
