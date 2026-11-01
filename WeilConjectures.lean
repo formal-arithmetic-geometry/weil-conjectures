@@ -26575,6 +26575,7 @@ public import WeilConjectures.WeilSheaf.WeilDescentRepresentation
 public import WeilConjectures.WeilSheaf.WeilGroupArithmetic
 public import WeilConjectures.WeilSheaf.WeilMonodromy
 public import WeilConjectures.WeilSheaf.WeilMonodromyGeneral
+public import WeilConjectures.WeilSheaf.WeilTensorWeilStatement
 public import WeilConjectures.ZetaFunction
 public import WeilConjectures.ZetaFunction.BettiNumbers
 public import WeilConjectures.ZetaFunction.BettiSymmetry
