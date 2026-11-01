@@ -4,12 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import Mathlib.Algebra.Category.Grp.Basic
-public import Mathlib.CategoryTheory.Monoidal.Mod
-public import Mathlib.CategoryTheory.Sites.Coherent.Basic
-public import Mathlib.Topology.Category.Profinite.Basic
-public import WeilConjectures.CategoryTheory.InternalSectionTensorComparison
-public import WeilConjectures.CategoryTheory.ModuleObjects.Free
+public import WeilConjectures.AlgebraicGeometry.IntegralModelsStacksData
 
 /-! # Typed constructions for discrete point models
 

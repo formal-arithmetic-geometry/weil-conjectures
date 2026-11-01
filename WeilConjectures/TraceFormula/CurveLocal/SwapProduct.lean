@@ -5,10 +5,10 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.Algebra.Category.Ring.Basic
-public import Mathlib.Algebra.Field.Defs
-public import Mathlib.AlgebraicGeometry.Scheme
-public import Mathlib.CategoryTheory.Limits.Constructions.Over.Products
+public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRestriction
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReduction
+public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroTransfer
+public import WeilConjectures.TraceFormula.SupportedRestrictionIntegral
 
 /-!
 

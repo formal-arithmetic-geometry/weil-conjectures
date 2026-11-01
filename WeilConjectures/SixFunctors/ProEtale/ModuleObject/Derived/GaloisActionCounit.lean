@@ -5,10 +5,7 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.CategoryTheory.Adjunction.Basic
-public import Mathlib.CategoryTheory.Adjunction.Mates
-public import Mathlib.CategoryTheory.Adjunction.Unique
-public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Unique
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.GaloisActionUnitTransportInputs
 
 /-!
 # Unit transports under a change of left adjoints

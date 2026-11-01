@@ -6,6 +6,7 @@ Authors: Bin Wu
 
 module
 
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 import WeilConjectures.AlgebraicGeometry.ModuleSheafConstantRingEquivalence
 import WeilConjectures.CategoryTheory.Sites.InjectivePresheafModuleCechCocycleLiftMax
 import WeilConjectures.CategoryTheory.InjectiveModulePresheaf
@@ -13,8 +14,11 @@ import Mathlib.Algebra.Homology.ShortComplex.Ab
 import WeilConjectures.AlgebraicGeometry.EtaleCechVanishingCriterion
 import WeilConjectures.AlgebraicGeometry.EtaleSiteCechComplexComparison
 import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
-public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
+import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+import WeilConjectures.AlgebraicGeometry.FreeCechComplexExact
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
 /-! # Abelian sheaf cohomology of injective module sheaves
 

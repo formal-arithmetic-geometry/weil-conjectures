@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.Algebra.Homology.DerivedChangeOfRingsCochainModel
+public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
+public import WeilConjectures.CategoryTheory.SiteCoveringAxioms
 import Mathlib.Algebra.Category.Ring.Colimits
 import Mathlib.Algebra.Category.Ring.FilteredColimits
 import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
@@ -12,14 +14,10 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import WeilConjectures.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import WeilConjectures.CategoryTheory.DerivedCategory.DerivedAdjunctionCompatibility
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import WeilConjectures.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
+import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 import WeilConjectures.CategoryTheory.Sites.TorsionSheafConstantModule
-public import Mathlib.Algebra.Category.Grp.EpiMono
-public import Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
-public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-public import WeilConjectures.Mathlib.Algebra.Homology.Localization
 
 /-!
 # Derived reduction of an extension by a divisible sheaf

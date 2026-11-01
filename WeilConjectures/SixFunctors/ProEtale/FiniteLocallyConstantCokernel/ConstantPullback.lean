@@ -6,12 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Category.ModuleCat.Kernels
-public import Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
-public import Mathlib.AlgebraicGeometry.Sites.Proetale
-public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
-public import Mathlib.CategoryTheory.Sites.ConstantSheaf
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GlobalSections
+public import WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf
 
 /-!
 # Pullbacks of constant pro-étale sheaves

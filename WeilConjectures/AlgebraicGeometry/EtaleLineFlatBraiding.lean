@@ -4,12 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
+public import WeilConjectures.AlgebraicGeometry.EtaleCoordinateTraceData
 import WeilConjectures.ConstructibleSheaf.InternalHom
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.LocallyTrivialInverse
-public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs
-public import WeilConjectures.ConstructibleSheaf.LisseRankOne
-public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 
 /-! # Flatness and ordinary identity self braiding of an etale line
 

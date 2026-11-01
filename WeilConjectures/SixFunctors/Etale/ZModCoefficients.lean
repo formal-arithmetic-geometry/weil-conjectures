@@ -5,11 +5,9 @@ Authors: Claude
 -/
 module
 
-public import Mathlib.Algebra.Category.ModuleCat.Basic
-public import Mathlib.AlgebraicGeometry.Scheme
-public import Mathlib.AlgebraicGeometry.Sites.Etale
-public import Mathlib.CategoryTheory.Sites.ConstantSheaf
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
+public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyContinuity
+public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 
 /-!
 # The coefficient ring `ℤ/ℓ` for étale sheaves of modules
