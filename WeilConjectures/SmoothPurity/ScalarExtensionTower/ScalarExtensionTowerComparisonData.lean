@@ -56,7 +56,8 @@ Stacks Tags 03EL and 07A4 (blueprint: lem-pur-scalar-extension-tower-coherence).
 * `comparisons_existsUnique`: the unique comparisons with their pure-tensor normalization.
 
 This is the self-contained comparison construction formerly in
-`WeilConjectures.SmoothPurity.ScalarExtensionTower.ScalarExtensionTowerCoherence`, which publicly re-exports this module.
+`WeilConjectures.SmoothPurity.ScalarExtensionTower.ScalarExtensionTowerCoherence`,
+which publicly re-exports this module.
 -/
 
 @[expose] public noncomputable section

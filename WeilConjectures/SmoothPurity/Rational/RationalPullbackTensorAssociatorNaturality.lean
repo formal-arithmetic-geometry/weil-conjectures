@@ -11,7 +11,8 @@ import all WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorConstraints
 /-! # Naturality of the normalized rational tensor associator
 
 Source: the proved private integral and rational calculations in
-`WeilConjectures.SmoothPurity.Common.CommonStageTensorLineCoherenceNaturality`, extracted to avoid its
+`WeilConjectures.SmoothPurity.Common.CommonStageTensorLineCoherenceNaturality`,
+extracted to avoid its
 import of the parent comparison theorem. Stacks 06YS, 07A4 and 0941.
 -/
 

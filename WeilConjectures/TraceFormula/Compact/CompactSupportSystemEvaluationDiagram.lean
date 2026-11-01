@@ -272,7 +272,6 @@ def compactSupportCanonicalJLevel
 Source: node proof step 3, Stacks 03DI, 015F
 (blueprint: def-trf-compact-support-system-evaluation-diagram). -/
 def compactSupportCanonicalJLevelAdjunction
-
     {X Z : Scheme.{t}} (j : X ⟶ Z) [IsOpenImmersion j]
     (o : IntegralOpenReduction.Operations l E j) (n : ℕ) :
     compactSupportCanonicalJLevel l E j o n ⊣

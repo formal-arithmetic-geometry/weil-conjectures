@@ -16,7 +16,8 @@ Source: Stacks Tags 03EL and 07A4
 
 The associator multiplies successive coefficients. Checking unit generators through
 the two scalar adjunctions proves both the pullback and the tensor composition equations.
-`WeilConjectures.SmoothPurity.ScalarExtensionTower.ScalarExtensionTowerCoherence` publicly re-exports this theorem.
+`WeilConjectures.SmoothPurity.ScalarExtensionTower.ScalarExtensionTowerCoherence`
+publicly re-exports this theorem.
 -/
 
 @[expose] public noncomputable section
