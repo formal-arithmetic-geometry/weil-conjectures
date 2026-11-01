@@ -7,7 +7,9 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Reduction
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DerivedHomConstantTensor
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.FiniteStage
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekConstantTensor
 
 /-!
 # Finite coefficient reduction on `Dctf`
@@ -120,7 +122,7 @@ theorem isIso_derivedHomTensorMap_reductionModIdeal {X : Scheme.{u}} (aX : X ⟶
     (hM : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X M) :
     IsIso (derivedHomTensorMap K M
       (constantSingle (ModuleCat.{u + 1} Λ) X (ModuleCat.of Λ (Λ ⧸ J)))) :=
-  sorry
+  isIso_derivedHomTensorMap_constantSingle aX hK hM (ModuleCat.of Λ (Λ ⧸ J))
 
 /-- The internal hom commutes with finite coefficient reduction in its second variable on
 `Dctf`: `RHom(K, M)_B ≅ RHom(K, M_B)`
@@ -148,7 +150,10 @@ theorem nonempty_iso_reductionModIdeal_dualizingComplex [HasInvertibleExponent �
     Nonempty ((reductionModIdeal Λ X J).obj (dualizingComplex Λ aX) ≅
       (R(aX)^![Λ]).obj
         (constantSingle (ModuleCat.{u + 1} Λ) (Spec (.of k)) (ModuleCat.of Λ (Λ ⧸ J)))) :=
-  sorry
+  have := isIso_dualizingComplexTensorMap_constantSingle_of_field Λ aX (ModuleCat.of Λ (Λ ⧸ J))
+  ⟨((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj (dualizingComplex Λ aX)).mapIso
+      (leftDerivedUpperStarSingleConstantSheafIso _ aX _).symm ≪≫
+    asIso (dualizingComplexTensorMap Λ aX _)⟩
 
 omit [Finite Λ] in
 /-- The unit `Λ_X` lies in `Dctf(X, Λ)`. -/
@@ -334,3 +339,6 @@ theorem nonempty_iso_rightDerivedUpperShriek_verdierDual_and_reductionModIdeal {
 end Etale
 
 end AlgebraicGeometry
+#print axioms AlgebraicGeometry.Etale.constructibleFiniteTor_stability_reductionModIdeal
+#print axioms AlgebraicGeometry.Etale.isIso_derivedHomTensorMap_reductionModIdeal
+#print axioms AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_dualizingComplex
