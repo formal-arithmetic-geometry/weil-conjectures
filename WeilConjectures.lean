@@ -7350,6 +7350,7 @@ public import WeilConjectures.AlgebraicGeometry.GroupScheme.AmpleFamilySmooth
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Basic
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Cartier
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Center
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.CondensedPunctualWeights
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Defs
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.DiagonalDerivationCoefficients
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.DiagonalTangentAddition
