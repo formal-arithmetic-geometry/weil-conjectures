@@ -12187,6 +12187,9 @@ public import WeilConjectures.PoincareDuality.Biduality.EtaleReductionDualizingU
 public import WeilConjectures.PoincareDuality.Biduality.Integral
 public import WeilConjectures.PoincareDuality.Biduality.Reduction
 public import WeilConjectures.PoincareDuality.Biduality.ReductionIhom
+public import WeilConjectures.PoincareDuality.GenericRestriction.Comparison
+public import WeilConjectures.PoincareDuality.GenericRestriction.FieldExtension
+public import WeilConjectures.PoincareDuality.GenericRestriction.GenericFibre
 public import WeilConjectures.PoincareDuality.Poincare
 public import WeilConjectures.PoincareDuality.ProjectionCoherence
 public import WeilConjectures.PoincareDuality.ProjectionFormula
@@ -16375,6 +16378,7 @@ public import WeilConjectures.TraceFormula.Specialization.GenericDivisorThickOri
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorTriangulated
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorUnit
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorUniversalHomeomorphism
+public import WeilConjectures.TraceFormula.Specialization.GenericSliceBaseMap
 public import WeilConjectures.TraceFormula.Specialization.GenericSliceHom
 public import WeilConjectures.TraceFormula.Specialization.GenericSliceModelAut
 public import WeilConjectures.TraceFormula.Specialization.GenericSlicePoint
@@ -16538,6 +16542,7 @@ public import WeilConjectures.TraceFormula.Specialization.ResidueConstantThickOr
 public import WeilConjectures.TraceFormula.Specialization.ResidueFieldBaseChangeLift
 public import WeilConjectures.TraceFormula.Specialization.SliceBaseModel
 public import WeilConjectures.TraceFormula.Specialization.SliceNearbyCyclesFiniteQuotient
+public import WeilConjectures.TraceFormula.Specialization.SliceSpecialPullback
 public import WeilConjectures.TraceFormula.Specialization.SliceSupport
 public import WeilConjectures.TraceFormula.Specialization.SliceTrait
 public import WeilConjectures.TraceFormula.Specialization.SliceTraitAlgebraic
