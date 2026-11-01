@@ -632,8 +632,8 @@ attribute [local irreducible] complexTensorIso totalComparison ordinaryTensorIso
   CategoryTheory.InternalAbelianSheafModule.sectionModuleFunctor
 
 attribute [local implicit_reducible] hom forward localizationIso localizationTensorMap
-  complexForward internalTotalTensor sliceForward sliceComplexForward sliceLocalizationIso
-  sliceLocalizationTensorMap sliceNativeTensor
+  complexForward internalTotalTensor sliceDerivedForward sliceComplexForward
+  sliceDerivedLocalizationIso sliceLocalizationTensorMap sliceNativeTensor
 
 attribute [local irreducible] sliceEquivalence sliceRingObject
 attribute [local instance] ringedMonoidal ringedSymmetric ringedPreadditive

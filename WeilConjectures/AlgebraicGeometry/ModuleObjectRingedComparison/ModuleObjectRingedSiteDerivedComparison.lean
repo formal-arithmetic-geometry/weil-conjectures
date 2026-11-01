@@ -473,8 +473,8 @@ private theorem sliceHomIso
     (TU : CoefficientTensorModels.{u, u + 1, u, u + 1}
       ((Scheme.ProEt.topology X).over U) ((ring Λ X).over U) SU)
     (tU : SliceTensorComparison Λ X U SU TU) :
-    ∃ θU : sliceNativeHom Λ X U ⋙ sliceForward Λ X U ≅
-      ((sliceForward Λ X U).op.prod (sliceForward Λ X U)) ⋙
+    ∃ θU : sliceNativeHom Λ X U ⋙ sliceDerivedForward Λ X U ≅
+      ((sliceDerivedForward Λ X U).op.prod (sliceDerivedForward Λ X U)) ⋙
         derivedInternalHomOfUniverses.{u + 1, u, u, u + 1}
           ((Scheme.ProEt.topology X).over U) ((ring Λ X).over U),
       sliceHomEvaluationNormalized Λ X U SU TU tU θU := by
@@ -519,15 +519,15 @@ private theorem sliceHom
     NatIso.ofComponents (fun p ↦ d.eta p.1.unop p.2) (by
       intro p q f
       exact d.eta_naturality _ _ _ _ f.1.unop f.2)
-  let c : sliceInternalRestriction Λ X U ⋙ sliceForward Λ X U ≅ forward Λ X ⋙ rs :=
+  let c : sliceInternalRestriction Λ X U ⋙ sliceDerivedForward Λ X U ≅ forward Λ X ⋙ rs :=
     Functor.isoWhiskerLeft (forward Λ X ⋙ rs) E.counitIso
-  let _ : (sliceForward Λ X U).Full :=
+  let _ : (sliceDerivedForward Λ X U).Full :=
     inferInstanceAs (sliceDerivedEquivalence Λ X U).functor.Full
-  let _ : (sliceForward Λ X U).Faithful :=
+  let _ : (sliceDerivedForward Λ X U).Faithful :=
     inferInstanceAs (sliceDerivedEquivalence Λ X U).functor.Faithful
   obtain ⟨z, hz⟩ := restrictionLift
     (Functor.uncurry.obj (CondensedRing.derivedHom Λ X)) (sliceNativeHom Λ X U)
-    (hom Λ X) _ (forward Λ X) (sliceForward Λ X U)
+    (hom Λ X) _ (forward Λ X) (sliceDerivedForward Λ X U)
     (sliceInternalRestriction Λ X U) rs c θ θU ρ
   exact ⟨⟨θU, hθU, z, hz⟩⟩
 

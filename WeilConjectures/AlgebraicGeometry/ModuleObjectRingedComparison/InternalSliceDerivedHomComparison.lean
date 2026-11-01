@@ -147,6 +147,12 @@ namespace AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison
 
 attribute [local instance 1000001] sectionRingHasSheafCompose
 attribute [local instance] sectionFunctorAdditiveForSite sectionFunctorEquivalenceForSite
+-- Upstream's `HasDerivedCategory` instances on these module categories are found first and then
+-- fail the final defeq check, which blocks `HasDerivedCategory.ofIsGrothendieckAbelian`.
+attribute [-instance] AlgebraicGeometry.Scheme.proEtaleRingModules_hasDerivedCategory
+  AlgebraicGeometry.Scheme.ProjectionRestriction.derived
+  AlgebraicGeometry.Scheme.ProjectionRestriction.derivedOver
+  AlgebraicGeometry.Scheme.ProjectionRestriction.derivedOverModules
 
 universe u₀ v₀ u₁ v₁ u₂ v₂ u₃ v₃
 
@@ -264,6 +270,20 @@ Source: Stacks 05RU (blueprint: def-sfb-internal-slice-derived-hom-comparison). 
 def sliceDerivedEquivalence :
     DerivedCategory (SliceInternal Λ X U) ≌ DerivedCategory (SliceModules Λ X U) :=
   (sliceEquivalence Λ X U).mapDerivedCategory
+
+/-- The direct derived section functor, in the derived-category universe of the local closed
+structure. Upstream's `sliceForward` lands in the standard (larger) universe.
+Source: Stacks 05RU (blueprint: def-sfb-internal-slice-derived-hom-comparison). -/
+def sliceDerivedForward :
+    DerivedCategory (SliceInternal Λ X U) ⥤ DerivedCategory (SliceModules Λ X U) :=
+  (sliceEquivalence Λ X U).functor.mapDerivedCategory
+
+/-- The actual localization comparison for `sliceDerivedForward`.
+Source: Stacks 05RU (blueprint: def-sfb-internal-slice-derived-hom-comparison). -/
+def sliceDerivedLocalizationIso :
+    DerivedCategory.Q ⋙ sliceDerivedForward Λ X U ≅
+      sliceComplexForward Λ X U ⋙ DerivedCategory.Q :=
+  (sliceEquivalence Λ X U).functor.mapDerivedCategoryFactors
 
 /-- Derived module restriction, expressed through the section equivalences. Its
 underlying sections and maps are the literal slice restriction, by their counits.
@@ -445,8 +465,8 @@ def SliceTensorModelsType (SU : SliceClosedStructureType Λ X U) :=
 /-- Natural comparisons of the fixed native slice tensor.
 Source: Stacks 06YS (blueprint: def-sfb-internal-slice-derived-hom-comparison). -/
 def SliceTensorComparisonIsoType (SU : SliceClosedStructureType Λ X U) :=
-  sliceNativeTensor Λ X U ⋙ (sliceForward Λ X U) ≅
-    ((sliceForward Λ X U).prod (sliceForward Λ X U)) ⋙ SU.tensor
+  sliceNativeTensor Λ X U ⋙ (sliceDerivedForward Λ X U) ≅
+    ((sliceDerivedForward Λ X U).prod (sliceDerivedForward Λ X U)) ⋙ SU.tensor
 
 /-- Representative normalization of the local derived tensor comparison, for every
 pair with K-flat section images. No derived input is required to be flat.
@@ -456,7 +476,7 @@ def sliceTensorComparisonNormalized
     (TU : SliceTensorModelsType Λ X U SU)
     (iso : SliceTensorComparisonIsoType Λ X U SU) : Prop :=
   tensorLocalizationSquareHEq DerivedCategory.Q DerivedCategory.Q
-    (sliceComplexForward Λ X U) (sliceForward Λ X U) (sliceLocalizationIso Λ X U)
+    (sliceComplexForward Λ X U) (sliceDerivedForward Λ X U) (sliceDerivedLocalizationIso Λ X U)
     (sliceNativeTensor Λ X U)
     (MonoidalCategory.tensor (CochainComplex (SliceInternal Λ X U) ℤ)) SU.tensor
     (coefficientTotalTensor.{u, u + 1, u} ((Scheme.ProEt.topology X).over U)
@@ -517,7 +537,7 @@ def sliceNativeEvaluation (K N : DerivedCategory (SliceInternal Λ X U)) :
 /-- The local section functor commutes with restriction through its fixed counit.
 Source: Stacks 03DH, 08JB (blueprint: def-sfb-internal-slice-derived-hom-comparison). -/
 def sliceRestrictionSectionIso (K : DerivedCategory (Internal Λ X)) :
-    (sliceForward Λ X U).obj ((sliceInternalRestriction Λ X U).obj K) ≅
+    (sliceDerivedForward Λ X U).obj ((sliceInternalRestriction Λ X U).obj K) ≅
       (ringedSliceDerivedRestriction.{u + 1, u, u, u + 1, u + 1}
         (Scheme.ProEt.topology X) (ring Λ X) U).obj ((forward Λ X).obj K) :=
   (sliceDerivedEquivalence Λ X U).counitIso.app _
@@ -533,13 +553,13 @@ def sliceHomEvaluationNormalized
     (TU : CoefficientTensorModels.{u, u + 1, u, u + 1}
       ((Scheme.ProEt.topology X).over U) ((ring Λ X).over U) SU)
     (tU : SliceTensorComparison Λ X U SU TU)
-    (iso : sliceNativeHom Λ X U ⋙ (sliceForward Λ X U) ≅
-    (((sliceForward Λ X U).op).prod
-      (sliceForward Λ X U)) ⋙
+    (iso : sliceNativeHom Λ X U ⋙ (sliceDerivedForward Λ X U) ≅
+    (((sliceDerivedForward Λ X U).op).prod
+      (sliceDerivedForward Λ X U)) ⋙
       derivedInternalHomOfUniverses.{u + 1, u, u, u + 1}
         ((Scheme.ProEt.topology X).over U) ((ring Λ X).over U)) : Prop :=
   homEvaluationSquare (sliceNativeTensor Λ X U) (sliceNativeHom Λ X U)
-    (sliceNativeEvaluation Λ X U) (sliceForward Λ X U) SU.tensor
+    (sliceNativeEvaluation Λ X U) (sliceDerivedForward Λ X U) SU.tensor
     (derivedInternalHomOfUniverses.{u + 1, u, u, u + 1}
       ((Scheme.ProEt.topology X).over U) ((ring Λ X).over U))
     SU.evaluation tU.iso iso
@@ -563,9 +583,9 @@ def sliceHomRestrictionCompatible
         (Scheme.ProEt.topology X) (ring Λ X) U))
     (θ : Functor.uncurry.obj (CondensedRing.derivedHom Λ X) ⋙ forward Λ X ≅
       ((forward Λ X).op.prod (forward Λ X)) ⋙ hom Λ X)
-    (iso : sliceNativeHom Λ X U ⋙ (sliceForward Λ X U) ≅
-    (((sliceForward Λ X U).op).prod
-      (sliceForward Λ X U)) ⋙
+    (iso : sliceNativeHom Λ X U ⋙ (sliceDerivedForward Λ X U) ≅
+    (((sliceDerivedForward Λ X U).op).prod
+      (sliceDerivedForward Λ X U)) ⋙
       derivedInternalHomOfUniverses.{u + 1, u, u, u + 1}
         ((Scheme.ProEt.topology X).over U) ((ring Λ X).over U))
     (restriction : Functor.uncurry.obj (CondensedRing.derivedHom Λ X) ⋙
@@ -576,7 +596,7 @@ def sliceHomRestrictionCompatible
     (sliceNativeHom Λ X U) (hom Λ X)
     (derivedInternalHomOfUniverses.{u + 1, u, u, u + 1}
       ((Scheme.ProEt.topology X).over U) ((ring Λ X).over U))
-    (forward Λ X) (sliceForward Λ X U) (sliceInternalRestriction Λ X U)
+    (forward Λ X) (sliceDerivedForward Λ X U) (sliceInternalRestriction Λ X U)
     (ringedSliceDerivedRestriction.{u + 1, u, u, u + 1, u + 1}
       (Scheme.ProEt.topology X) (ring Λ X) U)
     (sliceRestrictionSectionIso Λ X U) θ iso d.eta restriction
@@ -603,9 +623,9 @@ structure SliceHomComparison
     (θ : Functor.uncurry.obj (CondensedRing.derivedHom Λ X) ⋙ forward Λ X ≅
       ((forward Λ X).op.prod (forward Λ X)) ⋙ hom Λ X) where
   /-- The comparison on all B|U-module objects, in both derived variables. -/
-  iso : sliceNativeHom Λ X U ⋙ (sliceForward Λ X U) ≅
-    (((sliceForward Λ X U).op).prod
-      (sliceForward Λ X U)) ⋙
+  iso : sliceNativeHom Λ X U ⋙ (sliceDerivedForward Λ X U) ≅
+    (((sliceDerivedForward Λ X U).op).prod
+      (sliceDerivedForward Λ X U)) ⋙
       derivedInternalHomOfUniverses.{u + 1, u, u, u + 1}
         ((Scheme.ProEt.topology X).over U) ((ring Λ X).over U)
   /-- The local isomorphism identifies the two actual adjunction counits. -/
