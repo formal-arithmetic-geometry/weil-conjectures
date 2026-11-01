@@ -42,6 +42,62 @@ private lemma coefficientCube_of_iso
       (tC.map (sqE.hom.app V)) (αq (lf.obj V)).hom
       (Lp.map (αg V).hom ≫ sqΩ.hom.app (tB.obj V)) (congrArg Iso.hom h)
 
+/-- The composition coherence of lifted comparison isomorphisms, for abstract functors. -/
+private lemma lift_pull_comp
+    {CTE CUE CVE CTO CUO CVO : Type*}
+    [Category CTE] [Category CUE] [Category CVE] [Category CTO] [Category CUO] [Category CVO]
+    {PTE : ObjectProperty CTE} {PUE : ObjectProperty CUE} {PVE : ObjectProperty CVE}
+    {PTO : ObjectProperty CTO} {PUO : ObjectProperty CUO} {PVO : ObjectProperty CVO}
+    {eT : CTE ⥤ CTO} {eU : CUE ⥤ CUO} {eV : CVE ⥤ CVO}
+    {hE : CUE ⥤ CTE} {jE : CVE ⥤ CUE} {hjE : CVE ⥤ CTE}
+    {hO : CUO ⥤ CTO} {jO : CVO ⥤ CUO} {hjO : CVO ⥤ CTO}
+    {peT : ∀ K, PTO ((PTE.ι ⋙ eT).obj K)} {peU : ∀ K, PUO ((PUE.ι ⋙ eU).obj K)}
+    {peV : ∀ K, PVO ((PVE.ι ⋙ eV).obj K)}
+    {phE : ∀ K, PTE ((PUE.ι ⋙ hE).obj K)} {pjE : ∀ K, PUE ((PVE.ι ⋙ jE).obj K)}
+    {phjE : ∀ K, PTE ((PVE.ι ⋙ hjE).obj K)}
+    {phO : ∀ K, PTO ((PUO.ι ⋙ hO).obj K)} {pjO : ∀ K, PUO ((PVO.ι ⋙ jO).obj K)}
+    {phjO : ∀ K, PTO ((PVO.ι ⋙ hjO).obj K)}
+    {αh : hE ⋙ eT ≅ eU ⋙ hO} {αj : jE ⋙ eU ≅ eV ⋙ jO} {αhj : hjE ⋙ eT ≅ eV ⋙ hjO}
+    {cE : hjE ≅ jE ⋙ hE} {cO : hjO ≅ jO ⋙ hO}
+    {bcE : PTE.lift (PVE.ι ⋙ hjE) phjE ≅
+      PUE.lift (PVE.ι ⋙ jE) pjE ⋙ PTE.lift (PUE.ι ⋙ hE) phE}
+    {bcO : PTO.lift (PVO.ι ⋙ hjO) phjO ≅
+      PUO.lift (PVO.ι ⋙ jO) pjO ⋙ PTO.lift (PUO.ι ⋙ hO) phO}
+    (hcomp : Functor.whiskerRight cE.hom eT ≫ (Functor.associator _ _ _).hom ≫
+        Functor.whiskerLeft jE αh.hom ≫ (Functor.associator _ _ _).inv ≫
+        Functor.whiskerRight αj.hom hO =
+      αhj.hom ≫ Functor.whiskerLeft eV cO.hom ≫ (Functor.associator _ _ _).inv)
+    (hbcE : ∀ K, (bcE.hom.app K).hom = cE.hom.app K.obj)
+    (hbcO : ∀ K, (bcO.hom.app K).hom = cO.hom.app K.obj)
+    (K : PVE.FullSubcategory) :
+    (PTO.lift (PTE.ι ⋙ eT) peT).mapIso (bcE.app K) ≪≫
+      ObjectProperty.isoMk
+        (X := (PTO.lift (PTE.ι ⋙ eT) peT).obj
+          ((PTE.lift (PUE.ι ⋙ hE) phE).obj ((PUE.lift (PVE.ι ⋙ jE) pjE).obj K)))
+        (Y := (PTO.lift (PUO.ι ⋙ hO) phO).obj
+          ((PUO.lift (PUE.ι ⋙ eU) peU).obj ((PUE.lift (PVE.ι ⋙ jE) pjE).obj K))) _
+        (αh.app ((PUE.lift (PVE.ι ⋙ jE) pjE).obj K).obj) ≪≫
+      (PTO.lift (PUO.ι ⋙ hO) phO).mapIso
+        (ObjectProperty.isoMk
+          (X := (PUO.lift (PUE.ι ⋙ eU) peU).obj ((PUE.lift (PVE.ι ⋙ jE) pjE).obj K))
+          (Y := (PUO.lift (PVO.ι ⋙ jO) pjO).obj ((PVO.lift (PVE.ι ⋙ eV) peV).obj K)) _
+          (αj.app K.obj)) =
+    ObjectProperty.isoMk
+        (X := (PTO.lift (PTE.ι ⋙ eT) peT).obj ((PTE.lift (PVE.ι ⋙ hjE) phjE).obj K))
+        (Y := (PTO.lift (PVO.ι ⋙ hjO) phjO).obj ((PVO.lift (PVE.ι ⋙ eV) peV).obj K)) _
+        (αhj.app K.obj) ≪≫
+      bcO.app ((PVO.lift (PVE.ι ⋙ eV) peV).obj K) := by
+  apply Iso.ext
+  apply ObjectProperty.hom_ext
+  have he := congr_app hcomp K.obj
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
+    Category.comp_id] at he
+  simp only [Iso.trans_hom, ObjectProperty.FullSubcategory.comp_hom, Functor.mapIso_hom,
+    Iso.app_hom, ObjectProperty.isoMk_hom, ObjectProperty.homMk_hom, ObjectProperty.lift_map,
+    Functor.comp_map, ObjectProperty.ι_map, hbcE, hbcO]
+  exact he
+
 end Diagrams
 
 universe u
@@ -101,30 +157,10 @@ private theorem qbarPullIso_comp
       (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ
         (h.asOver (Spec (.of k))) (j.asOver (Spec (.of k)))).app
         ((constructibleToPadicAlgCl V ℓ E).obj K) := by
-  set_option backward.isDefEq.respectTransparency true in
-  apply Iso.ext
-  apply ObjectProperty.hom_ext
-  dsimp only [Iso.trans, Functor.mapIso, Iso.app,
-    ObjectProperty.FullSubcategory.comp_hom]
-  unfold constructibleToPadicAlgCl constructibleToQbarPullIso
-  dsimp only [boundedConstructibleUpperStar,
-    constructibleToQbarPullIso, ObjectProperty.lift, ObjectProperty.isoMk,
-    ObjectProperty.homMk, Functor.comp_map, ObjectProperty.ι_map]
-  simp only [bounded_comp_hom ℓ k (Profinite.continuousMapRingObj E) h j K,
-    bounded_comp_hom ℓ k (Profinite.padicAlgClRingObj ℓ) h j]
-  have he := congr_app
-    (derived_pull_comp (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) h j) K.obj
-  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
-    Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
-    Category.comp_id] at he
-  convert he using 1
-  set_option backward.isDefEq.respectTransparency false in
-  simp only [constructibleToPadicAlgCl, ObjectProperty.lift_obj_obj,
-    Functor.comp_obj, ObjectProperty.ι_obj, Iso.app_hom,
-    derivedExtendScalarsToPadicAlgCl,
-    padicSubfieldRingObjToPadicAlgCl, OverClass.asOverHom,
-    OverClass.asOver, Over.homMk, CostructuredArrow.homMk,
-    Over.mk, CostructuredArrow.mk, Over.Hom.left]
+  exact lift_pull_comp
+    (derived_pull_comp (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) h j)
+    (bounded_comp_hom ℓ k (Profinite.continuousMapRingObj E) h j)
+    (bounded_comp_hom ℓ k (Profinite.padicAlgClRingObj ℓ) h j) K
 
 end CompositionCalculation
 
