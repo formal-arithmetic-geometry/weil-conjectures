@@ -31,6 +31,9 @@ The equation uses the prescribed scalar associator and the prescribed comparison
 sectionwise sheafified extension by zero on the full ordinary unbounded categories.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 set_option autoImplicit false

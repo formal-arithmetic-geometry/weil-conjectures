@@ -128,6 +128,9 @@ import all WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientDatumSupplement
 Source: Stacks Tags 06YY, 07A6 and 0D6D.
 (blueprint: lem-sp-scalar-associator-conjugate) -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096

@@ -263,7 +263,8 @@ attribute [-instance] WeilConjectures.integralOperationsSiteSmall
   WeilConjectures.integralReductionSiteEssentiallySmall
   SheafOfModules.localizedSystemExtensionAdditive SheafOfModules.localizedSystemExtensionLimits
   SheafOfModules.localizedSystemExtensionColimits SheafOfModules.localizedSystemRestrictionAdditive
-  SheafOfModules.localizedSystemRestrictionLimits SheafOfModules.localizedSystemRestrictionColimits in
+  SheafOfModules.localizedSystemRestrictionLimits
+  SheafOfModules.localizedSystemRestrictionColimits in
 /-- The open mate is invertible. On extension-by-zero summands both it and its inverse
 are identity on the underlying section; scalar actions agree by the coefficient square.
 Source: Stacks Tag 0E8I
@@ -512,7 +513,8 @@ attribute [-instance] WeilConjectures.integralOperationsSiteSmall
   WeilConjectures.integralReductionSiteEssentiallySmall
   SheafOfModules.localizedSystemExtensionAdditive SheafOfModules.localizedSystemExtensionLimits
   SheafOfModules.localizedSystemExtensionColimits SheafOfModules.localizedSystemRestrictionAdditive
-  SheafOfModules.localizedSystemRestrictionLimits SheafOfModules.localizedSystemRestrictionColimits in
+  SheafOfModules.localizedSystemRestrictionLimits
+  SheafOfModules.localizedSystemRestrictionColimits in
 private theorem openExtension_derivedSlicePresentation (R : Coefficients.{u})
     {U V : Scheme.{u}} (j : U ⟶ V) [IsOpenImmersion j] :
     ∃ e : DerivedCategory (pbcModules U (R.ring U)) ≌
@@ -532,7 +534,8 @@ attribute [-instance] WeilConjectures.integralOperationsSiteSmall
   WeilConjectures.integralReductionSiteEssentiallySmall
   SheafOfModules.localizedSystemExtensionAdditive SheafOfModules.localizedSystemExtensionLimits
   SheafOfModules.localizedSystemExtensionColimits SheafOfModules.localizedSystemRestrictionAdditive
-  SheafOfModules.localizedSystemRestrictionLimits SheafOfModules.localizedSystemRestrictionColimits in
+  SheafOfModules.localizedSystemRestrictionLimits
+  SheafOfModules.localizedSystemRestrictionColimits in
 private theorem sliceTensor_supported {V : Scheme.{u}}
     (R : Sheaf (ProEt.topology V) CommRingCat.{u + 1}) (W : V.ProEt)
     (a : ProEtaleTensorModel V R)
@@ -574,7 +577,8 @@ attribute [-instance] WeilConjectures.integralOperationsSiteSmall
   WeilConjectures.integralReductionSiteEssentiallySmall
   SheafOfModules.localizedSystemExtensionAdditive SheafOfModules.localizedSystemExtensionLimits
   SheafOfModules.localizedSystemExtensionColimits SheafOfModules.localizedSystemRestrictionAdditive
-  SheafOfModules.localizedSystemRestrictionLimits SheafOfModules.localizedSystemRestrictionColimits in
+  SheafOfModules.localizedSystemRestrictionLimits
+  SheafOfModules.localizedSystemRestrictionColimits in
 /-- The open projection inverse is invertible.
 Source: Stacks Tag 0E8I
 (blueprint: def-pur-integral-compact-support-coefficient-data).

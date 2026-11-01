@@ -18,6 +18,9 @@ Unit Step 2: ordinary derived coefficient extension preserves the finite-Tor dom
 (blueprint: lem-pur-adic-scalar-extension-tor-bound).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 set_option autoImplicit false
 attribute [local irreducible] HasDerivedCategory.standard
