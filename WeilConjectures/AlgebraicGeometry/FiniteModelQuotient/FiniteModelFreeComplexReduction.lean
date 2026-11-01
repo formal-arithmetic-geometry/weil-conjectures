@@ -25,6 +25,8 @@ namespace AlgebraicGeometry.ProEtale.FiniteModelQuotient
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
+set_option maxHeartbeats 800000 in
+-- The derived reduction unfolds the two-term free model complex and its matrix.
 /-- Derived reduction of the literal two-term free model complex keeps its matrix.
 
 Source: blueprint latest, integral ctf-equals-bc, Local models; Stacks Tags 093M,
