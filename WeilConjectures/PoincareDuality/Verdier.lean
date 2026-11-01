@@ -14,6 +14,14 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenClos
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionIhom
 public import WeilConjectures.SixFunctors.Etale.Derived.DoubleDual
 
+import WeilConjectures.CategoryTheory.Monoidal.Closed.BidualityTruncation
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.ConstructibleSheafBiduality
+import WeilConjectures.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
+import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
+import WeilConjectures.CategoryTheory.Monoidal.Conjugate
+import WeilConjectures.ConstructibleSheaf.Pullback
+
 /-!
 
 # Verdier duality on bounded constructible complexes on the pro-étale site
@@ -83,6 +91,14 @@ universe u
 open CategoryTheory MonoidalCategory MonoidalClosed
 
 open scoped CategoryTheory.Functor CategoryTheory.Obj
+
+private theorem isIso_biduality_fullSubcategory
+    {C : Type*} [Category C] [MonoidalCategory C] [MonoidalClosed C]
+    [BraidedCategory C] (P : ObjectProperty C) [P.IsMonoidal]
+    [P.IsMonoidalClosed] (W K : P.FullSubcategory)
+    (h : IsIso (toIhomIhom W.obj K.obj)) : IsIso (toIhomIhom W K) := by
+  have : IsIso (P.ι.map (toIhomIhom W K)) := h
+  exact isIso_of_reflects_iso (toIhomIhom W K) P.ι
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 

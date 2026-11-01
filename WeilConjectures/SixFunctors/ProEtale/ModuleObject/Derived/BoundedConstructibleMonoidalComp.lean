@@ -9,6 +9,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Subcategory
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructiblePullback
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalBraided
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleBraided
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleMonoidalComp
 
 /-!
 # The composition isomorphisms of the derived pullbacks of bounded constructible complexes are
@@ -20,6 +21,12 @@ of the strong monoidal pullbacks
 (`ProEtale.CondensedRing.boundedConstructibleUpperStarComp_hom_app_tensor_δ`). It is the
 restriction of the corresponding statement on the ambient derived categories
 (`ProEtale.CondensedRing.leftDerivedUpperStarTensor_comp`).
+
+The statements are proved once for a coefficient ring `Λ` that is a variable, and then
+specialised to `ℚ̲̄_ℓ`: unifying them directly at the concrete ring unfolds the restricted
+functors. The braiding statements are in
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleMonoidalCompBraided`,
+which this module imports.
 -/
 
 @[expose] public section
@@ -113,6 +120,76 @@ lemma δ_boundedConstructibleUpperStar_hom (K M : Dᵇc(Y.left)⟦Profinite.padi
     (δ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f) K M).hom =
       ((leftDerivedUpperStarTensor (Profinite.padicAlgClRingObj ℓ) f.left).app K.obj).app M.obj :=
   (boundedConstructibleUpperStar_δ_hom ℓ f K M).trans rfl
+/-! ### The statements for a general coefficient ring -/
+
+section General
+
+variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+
+/-- The monoidal structure of the restricted pullback, with the body of
+`monoidal_boundedConstructibleUpperStar`, for a coefficient ring `Λ` whose bounded constructible
+complexes form monoidal subcategories. -/
+private noncomputable abbrev monoidalAux {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom]
+    [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
+    [IsSeparated Y.hom] [(boundedConstructible (condensedRingObj Λ X.left)).IsMonoidal]
+    [(boundedConstructible (condensedRingObj Λ Y.left)).IsMonoidal] (f : X ⟶ Y) :
+    (boundedConstructibleUpperStar Λ ℓ f).Monoidal := by
+  unfold boundedConstructibleUpperStar
+  exact ObjectProperty.monoidalLift _ _
+
+variable [(boundedConstructible (condensedRingObj Λ X.left)).IsMonoidal]
+  [(boundedConstructible (condensedRingObj Λ Y.left)).IsMonoidal]
+  [(boundedConstructible (condensedRingObj Λ Z.left)).IsMonoidal]
+
+attribute [local instance] monoidalAux
+
+private lemma δ_hom_aux (K M : Dᵇc(Y.left)⟦Λ⟧) :
+    (δ (boundedConstructibleUpperStar Λ ℓ f) K M).hom =
+      ((leftDerivedUpperStarTensor Λ f.left).app K.obj).app M.obj :=
+  rfl
+
+private lemma comp_tensor_δ_aux (K M : Dᵇc(Z.left)⟦Λ⟧) :
+    δ (boundedConstructibleUpperStar Λ ℓ (f ≫ g)) K M ≫
+        ((boundedConstructibleUpperStarComp Λ ℓ f g).hom.app K ⊗ₘ
+          (boundedConstructibleUpperStarComp Λ ℓ f g).hom.app M) =
+      (boundedConstructibleUpperStarComp Λ ℓ f g).hom.app (K ⊗ M) ≫
+        (boundedConstructibleUpperStar Λ ℓ f).map (δ
+            (boundedConstructibleUpperStar Λ ℓ g) K M) ≫
+        δ (boundedConstructibleUpperStar Λ ℓ f) _ _ := by
+  refine ObjectProperty.hom_ext (P := boundedConstructible _) ?_
+  simp only [ObjectProperty.FullSubcategory.comp_hom, boundedConstructibleUpperStar_map_hom,
+    δ_hom_aux, boundedConstructibleUpperStarComp_hom_app_hom, ObjectProperty.tensorHom_hom']
+  have key := leftDerivedUpperStarTensor_comp_of_eq Λ f.left g.left
+      (Over.comp_left _ _ _ f g)
+    K.obj M.obj
+  simp only [eqToHom_comp_of_self] at key
+  exact key
+
+private lemma id_tensor_δ_aux (K M : Dᵇc(X.left)⟦Λ⟧) :
+    δ (boundedConstructibleUpperStar Λ ℓ (𝟙 X)) K M ≫
+        ((boundedConstructibleUpperStarId Λ ℓ X).hom.app K ⊗ₘ
+          (boundedConstructibleUpperStarId Λ ℓ X).hom.app M) =
+      (boundedConstructibleUpperStarId Λ ℓ X).hom.app (K ⊗ M) := by
+  refine ObjectProperty.hom_ext (P := boundedConstructible _) ?_
+  simp only [ObjectProperty.FullSubcategory.comp_hom, δ_hom_aux,
+    boundedConstructibleUpperStarId_hom_app_hom, ObjectProperty.tensorHom_hom']
+  have key := leftDerivedUpperStarTensor_id_of_eq Λ X.left (Over.id_left X) K.obj M.obj
+  simp only [eqToHom_comp_of_self] at key
+  exact key
+
+end General
+
+/-! ### The coefficient ring `ℚ̲̄_ℓ` -/
+
+-- `with_reducible_and_instances`: the statement for a general `Λ` agrees with the goal up to the
+-- instances of `Dᵇc(-)⟦ℚ̲̄_ℓ⟧` and of `Lf^*`; at the default transparency the unifier unfolds the
+-- restricted `ℚ̲̄_ℓ`-functors instead.
+lemma δ_boundedConstructibleUpperStar_hom (K M : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (δ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f) K M).hom =
+      ((leftDerivedUpperStarTensor (Profinite.padicAlgClRingObj ℓ) f.left).app K.obj).app
+        M.obj := by
+  have h := δ_hom_aux ℓ f (Λ := Profinite.padicAlgClRingObj ℓ) K M
+  with_reducible_and_instances exact h
 
 /-- **The composition isomorphism of the derived pullbacks of bounded constructible complexes is
 monoidal**: it commutes with the tensor comparisons. -/
@@ -133,6 +210,8 @@ lemma boundedConstructibleUpperStarComp_hom_app_tensor_δ (K M :
       (Over.comp_left _ _ _ f g) K.obj M.obj
   simp only [eqToHom_comp_of_self] at key
   exact key
+  have h := comp_tensor_δ_aux ℓ f g (Λ := Profinite.padicAlgClRingObj ℓ) K M
+  exact h
 
 variable (X) in
 /-- **The identity isomorphism of the derived pullback of bounded constructible complexes is
