@@ -584,7 +584,7 @@ theorem condensed_point_dual_comparison
   refine ⟨inferInstance, inferInstance, ?_⟩
   obtain ⟨s, hs⟩ := condensed_point_canonical_tensor ℓ k I
   obtain ⟨he, hp⟩ := condensed_point_component_equivalence ℓ k I
-  obtain ⟨hc, hi, hv, hn, hr⟩ := condensed_point_normalized_duality ℓ k I hs
+  obtain ⟨hc, hi, _, _, hr⟩ := condensed_point_normalized_duality ℓ k I hs
   refine ⟨s, hs, ?_⟩
   exact
     { equivalence := he
@@ -594,8 +594,14 @@ theorem condensed_point_dual_comparison
         infer_instance
       dual_constructible := hc
       comparison_isIso := hi
-      evaluation := hv
-      naturality := hn
+      evaluation := fun t K _hK ↦ by
+        unfold condensedBoundaryDualComparison
+        rw [← uncurry_eq, uncurry_natural_right, uncurry_eq,
+          Functor.LaxMonoidal.ihomComparison_ev, Category.assoc]
+      naturality := fun t K L f _hK _hL ↦ by
+        unfold condensedBoundaryDualComparison
+        rw [← Category.assoc, Functor.LaxMonoidal.map_pre_app_comp_ihomComparison_app,
+          Category.assoc, pre_comm_ihom_map, Category.assoc]
       reparametrization := hr }
 
 end AlgebraicGeometry.ProEtale.CondensedRing

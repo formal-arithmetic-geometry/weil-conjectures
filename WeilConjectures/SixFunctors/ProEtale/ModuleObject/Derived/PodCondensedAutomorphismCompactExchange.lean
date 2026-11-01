@@ -214,6 +214,18 @@ def podGeometricCompactification (D : WeilConjectures.FiniteFieldDatum.{u})
   isProper := MorphismProperty.overPullbackMap (P := @IsProper)
     _ c.overG c.isProper
 
+private theorem pod_compactification_exists
+    (D : WeilConjectures.FiniteFieldDatum.{u})
+    {X Y : Over (Spec (.of D.k₀))} (f : X ⟶ Y)
+    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
+    [LocallyOfFiniteType f.left] [QuasiCompact f.left] [IsSeparated f.left] :
+    Nonempty (Compactification f.left) := by
+  let _ : CompactSpace (Spec (CommRingCat.of D.k₀)) := inferInstance
+  let _ : QuasiSeparatedSpace (Spec (CommRingCat.of D.k₀)) := inferInstance
+  let _ : IsLocallyNoetherian Y.left := LocallyOfFiniteType.isLocallyNoetherian Y.hom
+  let _ : CompactSpace Y.left := QuasiCompact.compactSpace_of_compactSpace Y.hom
+  exact ⟨AlgebraicGeometry.NagataCompactification f.left⟩
+
 open CompactificationReindexing
 
 set_option maxHeartbeats 1600000 in
