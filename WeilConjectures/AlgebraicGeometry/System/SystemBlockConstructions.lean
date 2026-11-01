@@ -395,8 +395,4 @@ instance SystemBlockRepetition.preservesKInjective
     (R : SystemBlockRepetition J B τ t) : R.repetition.PreservesKInjectiveComplexes where
   isKInjective_map I := R.kinjective I inferInstance
 
-omit [EssentiallySmall.{r} C] in
-omit [EssentiallySmall.{r} C] in
-omit [EssentiallySmall.{r} C] in
-omit [EssentiallySmall.{r} C] in
 end WeilConjectures.SemilinearSections

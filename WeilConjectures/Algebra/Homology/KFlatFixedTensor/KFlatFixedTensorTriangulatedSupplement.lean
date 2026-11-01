@@ -792,60 +792,25 @@ private theorem descendTensorPresentation
 
 end Generic
 
+section ShiftKFlat
+
 variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
   {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{r})
 
-section LocalTensorDefinitions
-
-attribute [local instance 2000] tensorAdditive
-
-attribute [local instance 2000] tensorObjAdditive
-
-attribute [local instance 2000] tensorHasMapBifunctor
-attribute [local irreducible] ordinaryTensor
-
-variable [HasDerivedCategory.{w} (Modules R)]
-
-attribute [local irreducible] selectedResolvingTensorPresentation
-
-attribute [local irreducible] selectedTensorPresentation
-
-attribute [local irreducible] derivedTensor
-
-attribute [local semireducible] selectedTensorPresentation
-
-omit [HasDerivedCategory.{w} (Modules R)] in
-private def ordinaryBraiding : ordinaryTensor R ≅ (ordinaryTensor R).flip := by
-  unfold ordinaryTensor
-  exact BraidedCategory.curriedBraidingNatIso (Modules R)
-
-omit [HasDerivedCategory.{w} (Modules R)] in
-private theorem kFlat_iff_ordinary (A : CochainComplex (Modules R) ℤ) :
-    CochainComplex.IsKFlatIndependentCoefficients A ↔
-      ∀ E : CochainComplex (Modules R) ℤ, E.Acyclic →
-        (CochainComplex.mapBifunctor E A (ordinaryTensor R)).Acyclic := by
-  unfold ordinaryTensor
-  rfl
-
-omit [HasDerivedCategory.{w} (Modules R)] in
-private theorem tensor_quasiIso
-    (A : CochainComplex (Modules R) ℤ)
-    (hA : CochainComplex.IsKFlatIndependentCoefficients A)
-    {B B' : CochainComplex (Modules R) ℤ} (f : B ⟶ B') (hf : QuasiIso f) :
-    QuasiIso (((totalTensor R).obj A).map f) ∧
-      QuasiIso (((totalTensor R).flip.obj A).map f) := by
-  exact tensor_quasiIso_generic (ordinaryTensor R)
-    (fun f ↦ CochainComplex.mappingCone.quasiIso_iff_acyclic f)
-    (ordinaryBraiding R) A ((kFlat_iff_ordinary R A).1 hA) f hf
-
-omit [HasDerivedCategory.{w} (Modules R)] in
-private theorem shift_kFlat
+/-- K-flatness for the canonical sheaf tensor is stable under shifts.
+Source: Stacks, Tag 06YU
+(blueprint: lem-weil-pbc-kflat-fixed-tensor-triangulated). -/
+theorem shift_kFlat
     (A : CochainComplex (Modules R) ℤ)
     (hA : CochainComplex.IsKFlatIndependentCoefficients A) (n : ℤ) :
     CochainComplex.IsKFlatIndependentCoefficients (A⟦n⟧) := by
-  apply (kFlat_iff_ordinary R (A⟦n⟧)).2
+  let := SheafOfModules.monoidalCategory R
+  let := SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients R
+  let := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients R
+  let := tensorAdditive R
+  let := tensorObjAdditive R
   intro E hE
-  have ht := (kFlat_iff_ordinary R A).1 hA E hE
+  have ht := hA E hE
   have hs : (CochainComplex.mapBifunctor E A (ordinaryTensor R)⟦n⟧).Acyclic := by
     rw [← HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic] at ht ⊢
     rw [← HomotopyCategory.shift_quotient_obj]
@@ -853,32 +818,6 @@ private theorem shift_kFlat
   intro i
   exact (hs i).of_iso (CochainComplex.mapBifunctorShift₂Iso E A (ordinaryTensor R) n).symm
 
-private abbrev homotopyTensor : HomotopyCategory (Modules R) (.up ℤ) ⥤
-    HomotopyCategory (Modules R) (.up ℤ) ⥤ HomotopyCategory (Modules R) (.up ℤ) :=
-  (ordinaryTensor R).bifunctorMapHomotopyCategory (.up ℤ) (.up ℤ) (.up ℤ)
-
-private theorem resolvingProperty_shift : (resolvingProperty R).IsStableUnderShift ℤ := by
-  constructor
-  intro n
-  constructor
-  intro X hX
-  obtain ⟨A, rfl⟩ := X.quotient_obj_surjective
-  have h := (resolvingProperty_spec R _).1 hX
-  change CochainComplex.IsKFlatIndependentCoefficients A ∧
-    (∀ i : ℤ, SheafOfModules.IsFlatOnSite (J := J) (R := R) (A.X i)) at h
-  rw [ObjectProperty.prop_shift_iff, HomotopyCategory.shift_quotient_obj]
-  apply (resolvingProperty_spec R _).2
-  constructor
-  · exact shift_kFlat R A h.1 n
-  · intro i
-    exact h.2 (i + n)
-
-set_option linter.unusedVariables false in
-end LocalTensorDefinitions
-
--- Preserve the original abbreviation interface for importing modules.
-attribute [reducible] ordinaryTensor derivedTensor selectedResolvingTensorPresentation
-  selectedTensorPresentation
-  TensorPresentation.ofExists ResolvingTensorPresentation.ofExists
+end ShiftKFlat
 
 end SheafOfModules.KFlatFixedTensor

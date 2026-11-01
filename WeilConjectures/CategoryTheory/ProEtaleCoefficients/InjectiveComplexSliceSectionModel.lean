@@ -132,10 +132,5 @@ variable [HasDerivedCategory.{w} (constantModuleSheaves J Λ)] [HasDerivedCatego
 variable [∀ W : C, HasDerivedCategory.{w}
   (SheafOfModules.{u} (((constantSheaf J RingCat.{u}).obj (RingCat.of Λ)).over W))]
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.defeqAttrib.useBackward true in
-set_option maxHeartbeats 600000 in
 -- Comparing the composite derived units requires the full slice-evaluation definitions.
-set_option synthInstance.maxHeartbeats 80000 in
 end CategoryTheory

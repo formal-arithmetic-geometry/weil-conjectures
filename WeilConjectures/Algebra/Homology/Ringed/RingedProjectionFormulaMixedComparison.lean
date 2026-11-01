@@ -80,9 +80,6 @@ private theorem tensorPullbackTotal_naturality
   rw [tensorHom_def, Category.assoc]
   rfl
 
-set_option maxHeartbeats 1000000 in
 -- Normalize the defining square at the identity total tensor maps.
-set_option maxHeartbeats 3000000 in
 -- The comparison transports several total-complex functors with large instance arguments.
-set_option synthInstance.maxHeartbeats 100000 in
 end SheafOfModules

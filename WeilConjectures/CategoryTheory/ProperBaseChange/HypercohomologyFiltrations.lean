@@ -116,15 +116,6 @@ variable {A : Type u₁} [Category.{v₁} A] [Abelian A] [HasDerivedCategory.{w�
   {B : Type u₂} [Category.{v₂} B] [Abelian B] [HasDerivedCategory.{w₂} B]
   (F : DerivedCategory A ⥤ DerivedCategory B) [F.CommShift ℤ] [F.IsTriangulated]
   (K : CochainComplex.Plus A)
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
-set_option linter.unusedSectionVars false in
-omit [HasDerivedCategory A] in
-set_option backward.isDefEq.respectTransparency false in
-omit [HasDerivedCategory A] in
-set_option backward.isDefEq.respectTransparency false in
-omit [HasDerivedCategory A] [HasDerivedCategory B] in
-set_option backward.isDefEq.respectTransparency false in
 omit [Abelian A] [HasDerivedCategory A] in
 private theorem inverse_square {V W V' W' : A} (a : V ⟶ W) (b : V' ⟶ W')
     (e : V ≅ V') (f : W ≅ W') (h : a ≫ f.hom = e.hom ≫ b) :

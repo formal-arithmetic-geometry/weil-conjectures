@@ -36,5 +36,4 @@ private theorem torAmplitude_iso
   rintro N P ⟨q⟩ f hf hP M i hi
   exact h.2 N P ⟨q ≪≫ e.symm⟩ f hf hP M i hi
 
-set_option linter.unusedVariables false in
 end WeilConjectures

@@ -438,10 +438,5 @@ private theorem augmentation_naturality {P P' : CochainComplex (Modules R) ℤ}
     exact congrArg (fun f ↦ f.f i) h
   · simp
 
-omit [HasCountableProducts (Modules R)] in
-open MonoidalCategory in
-set_option maxHeartbeats 400000 in
 -- Elaborating the tensor square and single-complex comparison needs extra heartbeats.
-omit [HasCountableProducts (Modules R)] in
-open MonoidalCategory in
 end SheafOfModules.KFlatRoos

@@ -380,8 +380,6 @@ private theorem pbcScalarCompletedPullIso_hom
   unfold pbcScalarCompletedPullIso
   rfl
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 variable {X' Y' : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
     {f : X ⟶ Y} {a : Y' ⟶ Y} (sq : ChosenCartesianSquare g' f' f a)
 

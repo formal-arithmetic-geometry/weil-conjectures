@@ -156,6 +156,5 @@ private theorem inverse_square
   simp only [Category.assoc, r.hom_inv_id, Category.comp_id]
   rw [h, s.hom_inv_id_assoc]
 
-set_option maxHeartbeats 800000 in
 -- Comparing the recorded corner presentations in representative equations needs extra fuel.
 end CategoryTheory.RingedDerivedComparisons
