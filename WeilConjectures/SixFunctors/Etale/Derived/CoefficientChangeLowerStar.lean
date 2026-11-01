@@ -50,8 +50,8 @@ variable {Z Y : Scheme.{u}} (p : Z ⟶ Y)
 derived direct image: the mate of the commutation `Lp^* ∘ Ψ ≅ Ψ ∘ Lp^*`
 (`AlgebraicGeometry.Etale.leftDerivedUpperStarEtaleSheafExtendScalarsIso`). -/
 noncomputable def rightDerivedLowerStarExtendScalarsMap :
-    R((p)_*[ModuleCat.{u + 1} Λ]) ⋙ L(ProEtale.etaleSheafExtendScalars ρ Y) ⟶
-      L(ProEtale.etaleSheafExtendScalars ρ Z) ⋙ R((p)_*[ModuleCat.{u + 1} Λ']) :=
+    R((p)_*[ModuleCat.{u + 1} Λ]) ⋙ L(sheafExtendScalars ρ Y) ⟶
+      L(sheafExtendScalars ρ Z) ⋙ R((p)_*[ModuleCat.{u + 1} Λ']) :=
   mateEquiv (derivedUpperStarLowerStarAdjunction _ p) (derivedUpperStarLowerStarAdjunction _ p)
     (leftDerivedUpperStarEtaleSheafExtendScalarsIso ρ p).hom
 
@@ -75,7 +75,7 @@ lemma map_unit_app_comp_derivedRestrictScalarsCompRightDerivedLowerStarIso_hom_a
     (R((p)_*[ModuleCat.{u + 1} Λ])).map
         ((leftDerivedEtaleSheafExtendScalarsAdjunction ρ Z).unit.app K) ≫
       (derivedRestrictScalarsCompRightDerivedLowerStarIso ρ p d hd).hom.app
-        ((L(ProEtale.etaleSheafExtendScalars ρ Z)).obj K) =
+        ((L(sheafExtendScalars ρ Z)).obj K) =
     (leftDerivedEtaleSheafExtendScalarsAdjunction ρ Y).unit.app
         ((R((p)_*[ModuleCat.{u + 1} Λ])).obj K) ≫
       (Sheaf.derivedRestrictScalars Y.smallEtaleTopology ρ).map

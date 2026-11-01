@@ -169,8 +169,6 @@ attribute [local instance 20000] AlgebraicGeometry.Etale.sheafBraidedCategory
 namespace AlgebraicGeometry.Etale
 
 open Scheme
-open ProEtale (etaleSheafExtendScalars etaleSheafExtendScalarsAdjunction
-  etaleSheafExtendScalarsCompUpperStarIso)
 
 variable (R S : Type (u + 1)) [CommRing R] [CommRing S] [Algebra R S]
   {Y Z : Scheme.{u}} (g : Z ⟶ Y)
@@ -196,34 +194,34 @@ along the adjunction between extension and restriction of scalars. -/
 lemma sheafExtendScalarsProjectionTranspose_upperStar
     (P : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R)) :
     (g)^*[ModuleCat.{u + 1} S].map ((sheafExtendScalarsProjectionTranspose R S Y).app P) ≫
-      (etaleSheafExtendScalarsCompUpperStarIso (algebraMap R S) g).hom.app P =
-    (etaleSheafExtendScalarsCompUpperStarIso (algebraMap R S) g).hom.app
+      (sheafExtendScalarsCompUpperStarIso (algebraMap R S) g).hom.app P =
+    (sheafExtendScalarsCompUpperStarIso (algebraMap R S) g).hom.app
         (P ⊗ sheafRestrictScalarsUnit R S Y) ≫
-      (etaleSheafExtendScalars (algebraMap R S) Z).map
+      (sheafExtendScalars (algebraMap R S) Z).map
         ((tensorRestrictScalarsUnitUpperStarMap R S g).app P) ≫
       (sheafExtendScalarsProjectionTranspose R S Z).app ((g)^*[ModuleCat.{u + 1} R].obj P) := by
   have h₀ : (tensorRestrictScalarsUnitUpperStarMap R S g).app P ≫
       (sheafExtendScalarsProjection R S Z).app ((g)^*[ModuleCat.{u + 1} R].obj P) =
       (g)^*[ModuleCat.{u + 1} R].map ((sheafExtendScalarsProjection R S Y).app P) ≫
         (upperStarRestrictScalarsMap R S g).app
-          ((etaleSheafExtendScalars (algebraMap R S) Y).obj P) ≫
+          ((sheafExtendScalars (algebraMap R S) Y).obj P) ≫
         (sheafCompose Z.smallEtaleTopology
           (ModuleCat.restrictScalars.{u + 1} (algebraMap R S))).map
-          ((etaleSheafExtendScalarsCompUpperStarIso (algebraMap R S) g).hom.app P) := by
+          ((sheafExtendScalarsCompUpperStarIso (algebraMap R S) g).hom.app P) := by
     rw [sheafExtendScalarsProjection_upperStar]
     simp [tensorRightUpperStarMap]
-  have hU : (etaleSheafExtendScalars (algebraMap R S) Z).map
+  have hU : (sheafExtendScalars (algebraMap R S) Z).map
         ((upperStarRestrictScalarsMap R S g).app
-          ((etaleSheafExtendScalars (algebraMap R S) Y).obj P)) ≫
-      (etaleSheafExtendScalarsAdjunction (algebraMap R S) Z).counit.app _ =
-      (etaleSheafExtendScalarsCompUpperStarIso (algebraMap R S) g).inv.app _ ≫
+          ((sheafExtendScalars (algebraMap R S) Y).obj P)) ≫
+      (sheafExtendScalarsAdjunction (algebraMap R S) Z).counit.app _ =
+      (sheafExtendScalarsCompUpperStarIso (algebraMap R S) g).inv.app _ ≫
         (g)^*[ModuleCat.{u + 1} S].map
-          ((etaleSheafExtendScalarsAdjunction (algebraMap R S) Y).counit.app _) :=
-    mateEquiv_counit (etaleSheafExtendScalarsAdjunction (algebraMap R S) Y)
-      (etaleSheafExtendScalarsAdjunction (algebraMap R S) Z)
-      (etaleSheafExtendScalarsCompUpperStarIso (algebraMap R S) g).inv
-      ((etaleSheafExtendScalars (algebraMap R S) Y).obj P)
-  have hσ := (etaleSheafExtendScalarsCompUpperStarIso (algebraMap R S) g).hom.naturality
+          ((sheafExtendScalarsAdjunction (algebraMap R S) Y).counit.app _) :=
+    mateEquiv_counit (sheafExtendScalarsAdjunction (algebraMap R S) Y)
+      (sheafExtendScalarsAdjunction (algebraMap R S) Z)
+      (sheafExtendScalarsCompUpperStarIso (algebraMap R S) g).inv
+      ((sheafExtendScalars (algebraMap R S) Y).obj P)
+  have hσ := (sheafExtendScalarsCompUpperStarIso (algebraMap R S) g).hom.naturality
     ((sheafExtendScalarsProjection R S Y).app P)
   dsimp at hσ
   simp only [sheafExtendScalarsProjectionTranspose, NatTrans.comp_app, Functor.whiskerRight_app,
@@ -256,23 +254,23 @@ lemma mapHomotopyCategory_sheafExtendScalarsProjectionTranspose_upperStar [IsNoe
     ((g)^*[ModuleCat.{u + 1} S].mapHomotopyCategory (.up ℤ)).map
         ((Functor.mapHomotopyCategoryCompIso
             (Iso.refl (tensorRight (sheafRestrictScalarsUnit R S Y) ⋙
-              etaleSheafExtendScalars (algebraMap R S) Y)) (.up ℤ)).hom.app K ≫
+              sheafExtendScalars (algebraMap R S) Y)) (.up ℤ)).hom.app K ≫
           (NatTrans.mapHomotopyCategory (sheafExtendScalarsProjectionTranspose R S Y)
             (.up ℤ)).app K) ≫
       (mapHomotopyCategoryEtaleSheafExtendScalarsCompUpperStarIso (algebraMap R S) g).hom.app K =
     (mapHomotopyCategoryEtaleSheafExtendScalarsCompUpperStarIso (algebraMap R S) g).hom.app
         (((tensorRight (sheafRestrictScalarsUnit R S Y)).mapHomotopyCategory (.up ℤ)).obj K) ≫
-      ((etaleSheafExtendScalars (algebraMap R S) Z).mapHomotopyCategory (.up ℤ)).map
+      ((sheafExtendScalars (algebraMap R S) Z).mapHomotopyCategory (.up ℤ)).map
         ((mapHomotopyCategoryTensorRestrictScalarsUnitUpperStarMap R S g).app K) ≫
       (Functor.mapHomotopyCategoryCompIso
           (Iso.refl (tensorRight (sheafRestrictScalarsUnit R S Z) ⋙
-            etaleSheafExtendScalars (algebraMap R S) Z)) (.up ℤ)).hom.app
+            sheafExtendScalars (algebraMap R S) Z)) (.up ℤ)).hom.app
         (((g)^*[ModuleCat.{u + 1} R].mapHomotopyCategory (.up ℤ)).obj K) ≫
       (NatTrans.mapHomotopyCategory (sheafExtendScalarsProjectionTranspose R S Z) (.up ℤ)).app
         (((g)^*[ModuleCat.{u + 1} R].mapHomotopyCategory (.up ℤ)).obj K) :=
   NatTrans.mapHomotopyCategory_transpose_square (sheafExtendScalarsProjectionTranspose R S Y)
     (sheafExtendScalarsProjectionTranspose R S Z)
-    (etaleSheafExtendScalarsCompUpperStarIso (algebraMap R S) g).hom
+    (sheafExtendScalarsCompUpperStarIso (algebraMap R S) g).hom
     (tensorRestrictScalarsUnitUpperStarMap R S g)
     (sheafExtendScalarsProjectionTranspose_upperStar R S g)
     (mapHomotopyCategoryEtaleSheafExtendScalarsCompUpperStarIso (algebraMap R S) g).hom rfl
@@ -284,7 +282,7 @@ variable [IsNoetherianRing R]
 
 set_option hygiene false in
 /-- Derived extension of scalars on `X`. -/
-local notation "Ψ[" X "]" => L(etaleSheafExtendScalars (algebraMap R S) X)
+local notation "Ψ[" X "]" => L(sheafExtendScalars (algebraMap R S) X)
 
 set_option hygiene false in
 /-- The derived tensor product with `S_X`. -/
@@ -321,14 +319,14 @@ private lemma leftDerivedSheafExtendScalarsProjection_transpose_upperStar_aux
   transpose_upperStar_aux
     (T₁ := (tensorRight (sheafRestrictScalarsUnit R S Y)).mapHomotopyCategory (.up ℤ))
     (T₃ := (tensorRight (sheafRestrictScalarsUnit R S Z)).mapHomotopyCategory (.up ℤ))
-    (E₁ := (etaleSheafExtendScalars (algebraMap R S) Y).mapHomotopyCategory (.up ℤ))
-    (E₃ := (etaleSheafExtendScalars (algebraMap R S) Z).mapHomotopyCategory (.up ℤ))
+    (E₁ := (sheafExtendScalars (algebraMap R S) Y).mapHomotopyCategory (.up ℤ))
+    (E₃ := (sheafExtendScalars (algebraMap R S) Z).mapHomotopyCategory (.up ℤ))
     (gR := (g)^*[ModuleCat.{u + 1} R].mapHomotopyCategory (.up ℤ))
     (gS := (g)^*[ModuleCat.{u + 1} S].mapHomotopyCategory (.up ℤ))
     (tensorRight (sheafRestrictScalarsUnit R S Y)).leftDerivedFunctorCounit
     (tensorRight (sheafRestrictScalarsUnit R S Z)).leftDerivedFunctorCounit
-    (etaleSheafExtendScalars (algebraMap R S) Y).leftDerivedFunctorCounit
-    (etaleSheafExtendScalars (algebraMap R S) Z).leftDerivedFunctorCounit
+    (sheafExtendScalars (algebraMap R S) Y).leftDerivedFunctorCounit
+    (sheafExtendScalars (algebraMap R S) Z).leftDerivedFunctorCounit
     (g)^*[ModuleCat.{u + 1} R].leftDerivedFunctorCounit
     (g)^*[ModuleCat.{u + 1} S].leftDerivedFunctorCounit
     (leftDerivedSheafExtendScalarsProjection R S Y) (leftDerivedSheafExtendScalarsProjection R S Z)
@@ -343,10 +341,10 @@ private lemma leftDerivedSheafExtendScalarsProjection_transpose_upperStar_aux
     (mapHomotopyCategoryEtaleSheafExtendScalarsCompUpperStarIso (algebraMap R S) g)
     (mapHomotopyCategoryTensorRestrictScalarsUnitUpperStarMap R S g)
     (Functor.mapHomotopyCategoryCompIso (Iso.refl (tensorRight (sheafRestrictScalarsUnit R S Y) ⋙
-      etaleSheafExtendScalars (algebraMap R S) Y)) (.up ℤ))
+      sheafExtendScalars (algebraMap R S) Y)) (.up ℤ))
     (NatTrans.mapHomotopyCategory (sheafExtendScalarsProjectionTranspose R S Y) (.up ℤ))
     (Functor.mapHomotopyCategoryCompIso (Iso.refl (tensorRight (sheafRestrictScalarsUnit R S Z) ⋙
-      etaleSheafExtendScalars (algebraMap R S) Z)) (.up ℤ))
+      sheafExtendScalars (algebraMap R S) Z)) (.up ℤ))
     (NatTrans.mapHomotopyCategory (sheafExtendScalarsProjectionTranspose R S Z) (.up ℤ))
     (leftDerivedUpperStarEtaleSheafExtendScalarsIso_hom_app_comp_counit (algebraMap R S) g)
     (leftDerivedTensorRightUpperStarMap_app_comp_counit g

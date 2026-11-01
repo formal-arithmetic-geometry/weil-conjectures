@@ -9,14 +9,15 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.DerivedBaseChange
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ExtendScalars
 public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.KFlat
-public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionConstructible
+public import WeilConjectures.SixFunctors.Etale.ScalarExtension.Basic
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 
 /-!
 # Derived extension of scalars of étale sheaves
 
 Let `φ : R →+* S` be a morphism of commutative rings, not necessarily flat. Derived extension of
 scalars `Ψ = - ⊗ᴸ_R S : D(X_ét, R) ⥤ D(X_ét, S)` is the total left derived functor of the
-extension of scalars of étale sheaves (`AlgebraicGeometry.ProEtale.etaleSheafExtendScalars`),
+extension of scalars of étale sheaves (`AlgebraicGeometry.Etale.sheafExtendScalars`),
 computed on K-flat complexes: restricted back to `R`, extension of scalars is the tensor product
 with the constant sheaf `S_X`, so it sends quasi-isomorphisms between K-flat complexes to
 quasi-isomorphisms. It is left adjoint to the derived restriction of scalars, and its unit
@@ -74,12 +75,6 @@ open Scheme
 
 variable {R S : Type (u + 1)} [CommRing R] [CommRing S] (φ : R →+* S)
 
-/- Mathlib's instance is stated for `extendScalars.{u₁, u₂, max u₂ w}`, and unifying
-`u + 1 =?= max (u + 1) ?w` gets stuck. -/
-instance (φ : R →+* S) : (ModuleCat.extendScalars.{u + 1, u + 1, u + 1} φ).IsLeftAdjoint :=
-  (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} φ).isLeftAdjoint
-
-
 section
 
 variable (X : Scheme.{u})
@@ -90,8 +85,8 @@ instance : (sheafCompose X.smallEtaleTopology
 /-- Derived extension of scalars is computed on K-flat complexes: restricted back to `R`, the
 extension of scalars of a morphism `f` of complexes is `f ⊗ S_X`, a quasi-isomorphism when `f`
 is a quasi-isomorphism between K-flat complexes. -/
-instance preservesKFlatQuasiIso_etaleSheafExtendScalars :
-    (ProEtale.etaleSheafExtendScalars φ X).PreservesKFlatQuasiIso where
+instance preservesKFlatQuasiIso_sheafExtendScalars :
+    (sheafExtendScalars φ X).PreservesKFlatQuasiIso where
   quasiIso_map {K L} hK hL f _ := by
     let := φ.toAlgebra
     let J := X.smallEtaleTopology
@@ -106,7 +101,7 @@ instance preservesKFlatQuasiIso_etaleSheafExtendScalars :
       (mem_quasiIso_iff _).1 (((quasiIso _ (.up ℤ)).arrow_mk_iso_iff
         (Arrow.isoOfNatIso (CochainComplex.map₂HomologicalComplexFlipObjSingleIso
           (curriedTensor _) c) f)).1 h₁)
-    have h₃ : QuasiIso (((ProEtale.etaleSheafExtendScalars φ X ⋙
+    have h₃ : QuasiIso (((sheafExtendScalars φ X ⋙
         sheafCompose J (ModuleCat.restrictScalars.{u + 1} φ)).mapHomologicalComplex
           (.up ℤ)).map f) :=
       (mem_quasiIso_iff _).1 (((quasiIso _ (.up ℤ)).arrow_mk_iso_iff
@@ -120,8 +115,8 @@ instance preservesKFlatQuasiIso_etaleSheafExtendScalars :
 /-- Derived extension of scalars `- ⊗ᴸ_R S : D(X_ét, R) ⥤ D(X_ét, S)` is left adjoint to the
 derived restriction of scalars. -/
 noncomputable def leftDerivedEtaleSheafExtendScalarsAdjunction :
-    L(ProEtale.etaleSheafExtendScalars φ X) ⊣ Sheaf.derivedRestrictScalars X.smallEtaleTopology φ :=
-  (ProEtale.etaleSheafExtendScalarsAdjunction φ X).derivedAdjunction.ofNatIsoRight
+    L(sheafExtendScalars φ X) ⊣ Sheaf.derivedRestrictScalars X.smallEtaleTopology φ :=
+  (sheafExtendScalarsAdjunction φ X).derivedAdjunction.ofNatIsoRight
     (sheafCompose X.smallEtaleTopology
       (ModuleCat.restrictScalars.{u + 1} φ)).rightDerivedFunctorIsoMapDerivedCategory
 
@@ -142,17 +137,17 @@ section Pullback
 variable [IsNoetherianRing R] {Y Z : Scheme.{u}} (g : Z ⟶ Y)
 
 /-- The isomorphism `g^*(S ⊗_R -) ≅ S ⊗_R g^* -` of
-`AlgebraicGeometry.ProEtale.etaleSheafExtendScalarsCompUpperStarIso`, on homotopy categories. -/
+`AlgebraicGeometry.Etale.sheafExtendScalarsCompUpperStarIso`, on homotopy categories. -/
 noncomputable def mapHomotopyCategoryEtaleSheafExtendScalarsCompUpperStarIso :
-    (ProEtale.etaleSheafExtendScalars φ Y).mapHomotopyCategory (.up ℤ) ⋙
+    (sheafExtendScalars φ Y).mapHomotopyCategory (.up ℤ) ⋙
         (g)^*[ModuleCat.{u + 1} S].mapHomotopyCategory (.up ℤ) ≅
       (g)^*[ModuleCat.{u + 1} R].mapHomotopyCategory (.up ℤ) ⋙
-        (ProEtale.etaleSheafExtendScalars φ Z).mapHomotopyCategory (.up ℤ) :=
+        (sheafExtendScalars φ Z).mapHomotopyCategory (.up ℤ) :=
   Functor.mapHomotopyCategoryCompIso (Iso.refl _) _ ≪≫
     { hom := NatTrans.mapHomotopyCategory
-        (ProEtale.etaleSheafExtendScalarsCompUpperStarIso φ g).hom (.up ℤ)
+        (sheafExtendScalarsCompUpperStarIso φ g).hom (.up ℤ)
       inv := NatTrans.mapHomotopyCategory
-        (ProEtale.etaleSheafExtendScalarsCompUpperStarIso φ g).inv (.up ℤ)
+        (sheafExtendScalarsCompUpperStarIso φ g).inv (.up ℤ)
       hom_inv_id := by simp [← NatTrans.mapHomotopyCategory_comp]
       inv_hom_id := by simp [← NatTrans.mapHomotopyCategory_comp] } ≪≫
     (Functor.mapHomotopyCategoryCompIso (Iso.refl _) _).symm
@@ -160,23 +155,23 @@ noncomputable def mapHomotopyCategoryEtaleSheafExtendScalarsCompUpperStarIso :
 /-- The counit exhibiting `L(S ⊗_R -) ⋙ Lg^*` as a total left derived functor of
 `S ⊗_R - ⋙ g^*`: the counit of `L(S ⊗_R -)` followed by the counit of `Lg^*`. -/
 noncomputable def leftDerivedEtaleSheafExtendScalarsUpperStarCounit :
-    DerivedCategory.Qh ⋙ L(ProEtale.etaleSheafExtendScalars φ Y) ⋙ L((g)^*[ModuleCat.{u + 1} S]) ⟶
-      (ProEtale.etaleSheafExtendScalars φ Y).mapHomotopyCategory (.up ℤ) ⋙
+    DerivedCategory.Qh ⋙ L(sheafExtendScalars φ Y) ⋙ L((g)^*[ModuleCat.{u + 1} S]) ⟶
+      (sheafExtendScalars φ Y).mapHomotopyCategory (.up ℤ) ⋙
         (g)^*[ModuleCat.{u + 1} S].mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh :=
-  Functor.whiskerRight (ProEtale.etaleSheafExtendScalars φ Y).leftDerivedFunctorCounit
+  Functor.whiskerRight (sheafExtendScalars φ Y).leftDerivedFunctorCounit
       L((g)^*[ModuleCat.{u + 1} S]) ≫
-    Functor.whiskerLeft ((ProEtale.etaleSheafExtendScalars φ Y).mapHomotopyCategory (.up ℤ))
+    Functor.whiskerLeft ((sheafExtendScalars φ Y).mapHomotopyCategory (.up ℤ))
       (g)^*[ModuleCat.{u + 1} S].leftDerivedFunctorCounit
 
 instance isLeftDerivedFunctor_leftDerivedEtaleSheafExtendScalarsUpperStar :
-    (L(ProEtale.etaleSheafExtendScalars φ Y) ⋙ L((g)^*[ModuleCat.{u + 1} S])).IsLeftDerivedFunctor
+    (L(sheafExtendScalars φ Y) ⋙ L((g)^*[ModuleCat.{u + 1} S])).IsLeftDerivedFunctor
       (leftDerivedEtaleSheafExtendScalarsUpperStarCounit φ g)
       (HomotopyCategory.quasiIso _ (.up ℤ)) := by
   refine LocalizerMorphism.isLeftDerivedFunctor_of_isLeftDerivabilityStructure
     (HomotopyCategory.quasiIso _ (.up ℤ)).localizerMorphismKFlat _ (fun K ↦ ?_)
-  have : IsIso ((ProEtale.etaleSheafExtendScalars φ Y).leftDerivedFunctorCounit.app
+  have : IsIso ((sheafExtendScalars φ Y).leftDerivedFunctorCounit.app
       ((HomotopyCategory.quasiIso _ (.up ℤ)).localizerMorphismKFlat.functor.obj K)) :=
-    (ProEtale.etaleSheafExtendScalars φ Y).isIso_leftDerivedFunctorCounit_app_of_kFlat
+    (sheafExtendScalars φ Y).isIso_leftDerivedFunctorCounit_app_of_kFlat
       K.obj.as ((HomotopyCategory.kFlat_quotient_obj_iff _).1 K.property)
   simp only [leftDerivedEtaleSheafExtendScalarsUpperStarCounit, NatTrans.comp_app,
     Functor.whiskerRight_app, Functor.whiskerLeft_app]
@@ -185,13 +180,13 @@ instance isLeftDerivedFunctor_leftDerivedEtaleSheafExtendScalarsUpperStar :
 /-- The counit exhibiting `Lg^* ⋙ L(S ⊗_R -)` as a total left derived functor of
 `g^* ⋙ S ⊗_R -`: the counit of `Lg^*` followed by the counit of `L(S ⊗_R -)`. -/
 noncomputable def leftDerivedUpperStarEtaleSheafExtendScalarsCounit :
-    DerivedCategory.Qh ⋙ L((g)^*[ModuleCat.{u + 1} R]) ⋙ L(ProEtale.etaleSheafExtendScalars φ Z) ⟶
+    DerivedCategory.Qh ⋙ L((g)^*[ModuleCat.{u + 1} R]) ⋙ L(sheafExtendScalars φ Z) ⟶
       (g)^*[ModuleCat.{u + 1} R].mapHomotopyCategory (.up ℤ) ⋙
-        (ProEtale.etaleSheafExtendScalars φ Z).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh :=
+        (sheafExtendScalars φ Z).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh :=
   Functor.whiskerRight (g)^*[ModuleCat.{u + 1} R].leftDerivedFunctorCounit
-      L(ProEtale.etaleSheafExtendScalars φ Z) ≫
+      L(sheafExtendScalars φ Z) ≫
     Functor.whiskerLeft ((g)^*[ModuleCat.{u + 1} R].mapHomotopyCategory (.up ℤ))
-      (ProEtale.etaleSheafExtendScalars φ Z).leftDerivedFunctorCounit
+      (sheafExtendScalars φ Z).leftDerivedFunctorCounit
 
 omit [IsNoetherianRing R] in
 /-- On a complex whose pullback by `g` is K-flat, the counit of `L(S ⊗_R -)` at the pullback is an
@@ -199,16 +194,16 @@ isomorphism. -/
 lemma isIso_leftDerivedFunctorCounit_app_upperStar_mapHomotopyCategory_obj
     (K : CochainComplex (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R)) ℤ)
     (hK : kFlatUpperStar (ModuleCat.{u + 1} R) g ((HomotopyCategory.quotient _ _).obj K)) :
-    IsIso ((ProEtale.etaleSheafExtendScalars φ Z).leftDerivedFunctorCounit.app
+    IsIso ((sheafExtendScalars φ Z).leftDerivedFunctorCounit.app
       (((g)^*[ModuleCat.{u + 1} R].mapHomotopyCategory (.up ℤ)).obj
         ((HomotopyCategory.quotient _ _).obj K))) := by
   have hK₀ := kFlat_mapHomologicalComplex_obj_of_kFlatUpperStar (ModuleCat.{u + 1} R) g hK
-  have := (ProEtale.etaleSheafExtendScalars φ Z).isIso_leftDerivedFunctorCounit_app_of_kFlat _ hK₀
+  have := (sheafExtendScalars φ Z).isIso_leftDerivedFunctorCounit_app_of_kFlat _ hK₀
   exact (NatTrans.isIso_app_iff_of_iso _
     (((g)^*[ModuleCat.{u + 1} R].mapHomotopyCategoryFactors (.up ℤ)).app K)).2 this
 
 instance isLeftDerivedFunctor_leftDerivedUpperStarEtaleSheafExtendScalars :
-    (L((g)^*[ModuleCat.{u + 1} R]) ⋙ L(ProEtale.etaleSheafExtendScalars φ Z)).IsLeftDerivedFunctor
+    (L((g)^*[ModuleCat.{u + 1} R]) ⋙ L(sheafExtendScalars φ Z)).IsLeftDerivedFunctor
       (leftDerivedUpperStarEtaleSheafExtendScalarsCounit φ g)
       (HomotopyCategory.quasiIso _ (.up ℤ)) := by
   refine LocalizerMorphism.isLeftDerivedFunctor_of_isLeftDerivabilityStructure
@@ -223,11 +218,11 @@ instance isLeftDerivedFunctor_leftDerivedUpperStarEtaleSheafExtendScalars :
 /-- **Derived extension of scalars commutes with the derived pullback.** For `g : Z ⟶ Y`, the
 isomorphism `Lg^*(K ⊗ᴸ_R S) ≅ (Lg^* K) ⊗ᴸ_R S` of functors `D(Y_ét, R) ⥤ D(Z_ét, S)` induced by
 the isomorphism `g^*(S ⊗_R F) ≅ S ⊗_R g^* F` of
-`AlgebraicGeometry.ProEtale.etaleSheafExtendScalarsCompUpperStarIso`: both composites are total
+`AlgebraicGeometry.Etale.sheafExtendScalarsCompUpperStarIso`: both composites are total
 left derived functors of the two sides. -/
 noncomputable def leftDerivedUpperStarEtaleSheafExtendScalarsIso :
-    L(ProEtale.etaleSheafExtendScalars φ Y) ⋙ L((g)^*[ModuleCat.{u + 1} S]) ≅
-      L((g)^*[ModuleCat.{u + 1} R]) ⋙ L(ProEtale.etaleSheafExtendScalars φ Z) :=
+    L(sheafExtendScalars φ Y) ⋙ L((g)^*[ModuleCat.{u + 1} S]) ≅
+      L((g)^*[ModuleCat.{u + 1} R]) ⋙ L(sheafExtendScalars φ Z) :=
   Functor.leftDerivedNatIso _ _ (leftDerivedEtaleSheafExtendScalarsUpperStarCounit φ g)
     (leftDerivedUpperStarEtaleSheafExtendScalarsCounit φ g)
     (HomotopyCategory.quasiIso _ (.up ℤ))

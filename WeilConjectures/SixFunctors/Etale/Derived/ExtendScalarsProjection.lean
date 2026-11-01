@@ -115,12 +115,11 @@ attribute [local instance 20000] AlgebraicGeometry.Etale.sheafBraidedCategory
 namespace AlgebraicGeometry.Etale
 
 open Scheme
-open ProEtale (etaleSheafExtendScalars etaleSheafExtendScalarsAdjunction)
 
 variable (R S : Type (u + 1)) [CommRing R] [CommRing S] [Algebra R S] (X : Scheme.{u})
 
 /-- Extension of scalars `S ⊗_R -` of étale sheaves on `X`. -/
-local notation "𝓔" => etaleSheafExtendScalars (algebraMap R S) X
+local notation "𝓔" => sheafExtendScalars (algebraMap R S) X
 
 set_option hygiene false in
 /-- Restriction of scalars of étale sheaves on `X`. -/
@@ -204,7 +203,7 @@ instance isIso_leftDerivedSheafExtendScalarsProjection :
 along the adjunction between extension and restriction of scalars. -/
 noncomputable def sheafExtendScalarsProjectionTranspose : tensorRight 𝓢 ⋙ 𝓔 ⟶ 𝓔 :=
   Functor.whiskerRight (sheafExtendScalarsProjection R S X) 𝓔 ≫
-    Functor.whiskerLeft 𝓔 (etaleSheafExtendScalarsAdjunction (algebraMap R S) X).counit
+    Functor.whiskerLeft 𝓔 (sheafExtendScalarsAdjunction (algebraMap R S) X).counit
 
 /-- **The transpose of the derived projection map**: on the image `Qh K` of an object of the
 homotopy category, the transpose `Ψ (L(- ⊗ S_X) (Qh K)) ⟶ Ψ (Qh K)` along `Ψ ⊣ Res` of
@@ -227,7 +226,7 @@ lemma leftDerivedSheafExtendScalarsProjection_transpose
     (𝓔).leftDerivedFunctorCounit (tensorRight 𝓢).leftDerivedFunctorCounit
     (𝓡).mapDerivedCategoryFactorsh (leftDerivedSheafExtendScalarsProjection R S X)
     (leftDerivedEtaleSheafExtendScalarsAdjunction (algebraMap R S) X)
-    ((etaleSheafExtendScalarsAdjunction (algebraMap R S) X).mapHomotopyCategory (.up ℤ))
+    ((sheafExtendScalarsAdjunction (algebraMap R S) X).mapHomotopyCategory (.up ℤ))
     (Functor.mapHomotopyCategoryCompIso (Iso.refl (tensorRight 𝓢 ⋙ 𝓔)) (.up ℤ))
     (NatTrans.mapHomotopyCategory (sheafExtendScalarsProjectionTranspose R S X) (.up ℤ))
     (leftDerivedEtaleSheafExtendScalarsAdjunction_counit_app_Qh_obj (algebraMap R S) X) K
@@ -236,7 +235,7 @@ lemma leftDerivedSheafExtendScalarsProjection_transpose
     (leftDerivedSheafExtendScalarsRestrictScalarsCounit_app R S X K)
     (leftDerivedSheafExtendScalarsProjection_app_comp_counit R S X K)
     (Adjunction.mapHomotopyCategory_map_comp_counit_app_of_eq
-      (etaleSheafExtendScalarsAdjunction (algebraMap R S) X) (sheafExtendScalarsProjection R S X)
+      (sheafExtendScalarsAdjunction (algebraMap R S) X) (sheafExtendScalarsProjection R S X)
       (sheafExtendScalarsProjectionTranspose R S X) rfl K)
 
 end AlgebraicGeometry.Etale

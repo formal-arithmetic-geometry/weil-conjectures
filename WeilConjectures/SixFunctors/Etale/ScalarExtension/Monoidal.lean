@@ -10,27 +10,28 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs
 public import WeilConjectures.CategoryTheory.Monoidal.Conjugate
 public import WeilConjectures.CategoryTheory.Sites.SheafComposePushforwardMonoidal
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
-public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionConstructible
+public import WeilConjectures.SixFunctors.Etale.ScalarExtension.Basic
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 
 /-!
 # Extension of scalars of étale sheaves is monoidal
 
 For a morphism of commutative rings `φ : R →+* S`, extension of scalars
-`S ⊗_R - : Sh(X_ét, R) ⥤ Sh(X_ét, S)` (`AlgebraicGeometry.ProEtale.etaleSheafExtendScalars`) is
+`S ⊗_R - : Sh(X_ét, R) ⥤ Sh(X_ét, S)` (`AlgebraicGeometry.Etale.sheafExtendScalars`) is
 strong monoidal, and for a morphism of schemes `g : Y ⟶ X` the isomorphism
 `g^* (S ⊗_R F) ≅ S ⊗_R g^* F` of
-`AlgebraicGeometry.ProEtale.etaleSheafExtendScalarsCompUpperStarIso` is monoidal.
+`AlgebraicGeometry.Etale.sheafExtendScalarsCompUpperStarIso` is monoidal.
 
 This is the étale counterpart of `WeilConjectures.SixFunctors.ProEtale.ScalarExtensionMonoidal`.
 
 ## Main results
 
-- `AlgebraicGeometry.Etale.monoidal_etaleSheafExtendScalars`: extension of scalars is strong
+- `AlgebraicGeometry.Etale.monoidal_sheafExtendScalars`: extension of scalars is strong
   monoidal, its oplax structure being that of the left adjoint of the lax monoidal restriction
   of scalars.
-- `AlgebraicGeometry.Etale.etaleSheafExtendScalarsCompUpperStarIso_eq_conjugateIsoEquiv`: the
+- `AlgebraicGeometry.Etale.sheafExtendScalarsCompUpperStarIso_eq_conjugateIsoEquiv`: the
   commutation with `g^*` is the conjugate of the identification `g_* ⋙ res = res ⋙ g_*`.
-- `AlgebraicGeometry.Etale.isMonoidal_etaleSheafExtendScalarsCompUpperStarIso_hom`: the
+- `AlgebraicGeometry.Etale.isMonoidal_sheafExtendScalarsCompUpperStarIso_hom`: the
   commutation with `g^*` is monoidal.
 
 ## Implementation notes
@@ -57,8 +58,6 @@ attribute [local instance 20000] AlgebraicGeometry.Etale.sheafBraidedCategory
 namespace AlgebraicGeometry.Etale
 
 open Scheme
-open ProEtale (etaleSheafExtendScalars etaleSheafExtendScalarsAdjunction
-  etaleSheafExtendScalarsCompUpperStarIso)
 
 variable {R S : Type (u + 1)} [CommRing R] [CommRing S] (φ : R →+* S) (X : Scheme.{u})
 
@@ -69,28 +68,28 @@ noncomputable instance laxMonoidal_sheafComposeRestrictScalars :
 
 /-- Extension of scalars of étale sheaves is oplax monoidal, being left adjoint to the lax
 monoidal restriction of scalars. -/
-noncomputable instance oplaxMonoidal_etaleSheafExtendScalars :
-    (etaleSheafExtendScalars φ X).OplaxMonoidal :=
+noncomputable instance oplaxMonoidal_sheafExtendScalars :
+    (sheafExtendScalars φ X).OplaxMonoidal :=
   composeAndSheafifyOplaxMonoidal _ (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} φ)
 
 /-- The adjunction between extension and restriction of scalars of étale sheaves is
 monoidal. -/
-instance isMonoidal_etaleSheafExtendScalarsAdjunction :
-    (etaleSheafExtendScalarsAdjunction φ X).IsMonoidal :=
+instance isMonoidal_sheafExtendScalarsAdjunction :
+    (sheafExtendScalarsAdjunction φ X).IsMonoidal :=
   isMonoidal_sheafAdjunction _ (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} φ)
 
-instance isIso_δ_etaleSheafExtendScalars
+instance isIso_δ_sheafExtendScalars
     (F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)) :
-    IsIso (Functor.OplaxMonoidal.δ (etaleSheafExtendScalars φ X) F G) :=
+    IsIso (Functor.OplaxMonoidal.δ (sheafExtendScalars φ X) F G) :=
   isIso_δ_composeAndSheafify _ (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} φ) F G
 
-instance isIso_η_etaleSheafExtendScalars :
-    IsIso (Functor.OplaxMonoidal.η (etaleSheafExtendScalars φ X)) :=
+instance isIso_η_sheafExtendScalars :
+    IsIso (Functor.OplaxMonoidal.η (sheafExtendScalars φ X)) :=
   isIso_η_composeAndSheafify _ (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} φ)
 
 /-- Extension of scalars of étale sheaves is strong monoidal. -/
-noncomputable instance monoidal_etaleSheafExtendScalars :
-    (etaleSheafExtendScalars φ X).Monoidal :=
+noncomputable instance monoidal_sheafExtendScalars :
+    (sheafExtendScalars φ X).Monoidal :=
   .ofOplaxMonoidal _
 
 variable {X} {Y : Scheme.{u}} (g : Y ⟶ X)
@@ -105,19 +104,19 @@ noncomputable def lowerStarCompSheafComposeRestrictScalarsIso :
   Iso.refl _
 
 /-- The isomorphism `g^* (S ⊗_R F) ≅ S ⊗_R g^* F` of
-`AlgebraicGeometry.ProEtale.etaleSheafExtendScalarsCompUpperStarIso`, obtained by uniqueness of
+`AlgebraicGeometry.Etale.sheafExtendScalarsCompUpperStarIso`, obtained by uniqueness of
 left adjoints, is the conjugate of the identification `g_* ⋙ res = res ⋙ g_*` of
 `AlgebraicGeometry.Etale.lowerStarCompSheafComposeRestrictScalarsIso`. -/
-lemma etaleSheafExtendScalarsCompUpperStarIso_eq_conjugateIsoEquiv :
-    etaleSheafExtendScalarsCompUpperStarIso φ g =
+lemma sheafExtendScalarsCompUpperStarIso_eq_conjugateIsoEquiv :
+    sheafExtendScalarsCompUpperStarIso φ g =
       (conjugateIsoEquiv
-        ((upperStarLowerStarAdjunction _ g).comp (etaleSheafExtendScalarsAdjunction φ Y))
-        ((etaleSheafExtendScalarsAdjunction φ X).comp (upperStarLowerStarAdjunction _ g))).symm
+        ((upperStarLowerStarAdjunction _ g).comp (sheafExtendScalarsAdjunction φ Y))
+        ((sheafExtendScalarsAdjunction φ X).comp (upperStarLowerStarAdjunction _ g))).symm
         (lowerStarCompSheafComposeRestrictScalarsIso φ g).symm := by
   ext F : 3
-  apply ((etaleSheafExtendScalarsAdjunction φ X).comp
+  apply ((sheafExtendScalarsAdjunction φ X).comp
     (upperStarLowerStarAdjunction _ g)).homEquiv _ _ |>.injective
-  rw [etaleSheafExtendScalarsCompUpperStarIso, Adjunction.homEquiv_leftAdjointUniq_hom_app,
+  rw [sheafExtendScalarsCompUpperStarIso, Adjunction.homEquiv_leftAdjointUniq_hom_app,
     Adjunction.homEquiv_unit, conjugateIsoEquiv_symm_apply_hom]
   rw [← unit_conjugateEquiv_symm]
   simp only [Functor.comp_obj, Adjunction.ofNatIsoRight_unit, NatTrans.comp_app, Functor.id_obj,
@@ -137,13 +136,13 @@ instance isMonoidal_lowerStarCompSheafComposeRestrictScalarsIso_hom :
   exact this
 
 /-- The isomorphism `g^* (S ⊗_R F) ≅ S ⊗_R g^* F` of
-`AlgebraicGeometry.ProEtale.etaleSheafExtendScalarsCompUpperStarIso` is monoidal, being the
+`AlgebraicGeometry.Etale.sheafExtendScalarsCompUpperStarIso` is monoidal, being the
 conjugate of the monoidal identification `g_* ⋙ res ≅ res ⋙ g_*`. -/
-instance isMonoidal_etaleSheafExtendScalarsCompUpperStarIso_hom :
-    NatTrans.IsMonoidal (etaleSheafExtendScalarsCompUpperStarIso φ g).hom := by
+instance isMonoidal_sheafExtendScalarsCompUpperStarIso_hom :
+    NatTrans.IsMonoidal (sheafExtendScalarsCompUpperStarIso φ g).hom := by
   have : NatTrans.IsMonoidal (lowerStarCompSheafComposeRestrictScalarsIso φ g).symm.hom :=
     inferInstanceAs (NatTrans.IsMonoidal (lowerStarCompSheafComposeRestrictScalarsIso φ g).inv)
-  rw [etaleSheafExtendScalarsCompUpperStarIso_eq_conjugateIsoEquiv]
+  rw [sheafExtendScalarsCompUpperStarIso_eq_conjugateIsoEquiv]
   exact isMonoidal_conjugateEquiv_symm _ _ _
 
 end AlgebraicGeometry.Etale

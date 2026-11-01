@@ -48,21 +48,21 @@ variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
 /-- The mate of `g^*(S ⊗_R -) ≅ S ⊗_R g^*` along extension and restriction of scalars of étale
 sheaves is the comparison `g^* (Res M) ⟶ Res (g^* M)` of
 `AlgebraicGeometry.Etale.upperStarRestrictScalars`. -/
-lemma mateEquiv_etaleSheafExtendScalarsCompUpperStarIso_inv :
-    mateEquiv (ProEtale.etaleSheafExtendScalarsAdjunction φ Y)
-        (ProEtale.etaleSheafExtendScalarsAdjunction φ Z)
-        (ProEtale.etaleSheafExtendScalarsCompUpperStarIso φ g).inv =
+lemma mateEquiv_sheafExtendScalarsCompUpperStarIso_inv :
+    mateEquiv (sheafExtendScalarsAdjunction φ Y)
+        (sheafExtendScalarsAdjunction φ Z)
+        (sheafExtendScalarsCompUpperStarIso φ g).inv =
       upperStarRestrictScalars φ g := by
   rw [upperStarRestrictScalars, Equiv.eq_symm_apply]
   ext1
   rw [iterated_mateEquiv_conjugateEquiv]
-  have h0 : conjugateEquiv ((ProEtale.etaleSheafExtendScalarsAdjunction φ Y).comp
+  have h0 : conjugateEquiv ((sheafExtendScalarsAdjunction φ Y).comp
       (upperStarLowerStarAdjunction _ g))
       (((upperStarLowerStarAdjunction _ g).comp
-        (ProEtale.etaleSheafExtendScalarsAdjunction φ Z)).ofNatIsoRight
+        (sheafExtendScalarsAdjunction φ Z)).ofNatIsoRight
         (NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun _ ↦ rfl)))
-      (ProEtale.etaleSheafExtendScalarsCompUpperStarIso φ g).inv = 𝟙 _ := by
-    simp only [ProEtale.etaleSheafExtendScalarsCompUpperStarIso, Adjunction.leftAdjointUniq,
+      (sheafExtendScalarsCompUpperStarIso φ g).inv = 𝟙 _ := by
+    simp only [sheafExtendScalarsCompUpperStarIso, Adjunction.leftAdjointUniq,
       Iso.symm_inv, conjugateIsoEquiv_symm_apply_hom, Iso.refl_hom]
     exact (conjugateEquiv _ _).apply_symm_apply _
   rename_i G
@@ -78,18 +78,18 @@ homotopy categories. -/
 lemma leftDerivedEtaleSheafExtendScalarsAdjunction_counit_app_Qh_obj (X : Scheme.{u})
     (K : HomotopyCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} S)) (.up ℤ)) :
     (leftDerivedEtaleSheafExtendScalarsAdjunction φ X).counit.app (DerivedCategory.Qh.obj K) =
-      (L(ProEtale.etaleSheafExtendScalars φ X)).map
+      (L(sheafExtendScalars φ X)).map
           ((Sheaf.restrictScalars X.smallEtaleTopology φ).mapDerivedCategoryFactorsh.hom.app K) ≫
-        (ProEtale.etaleSheafExtendScalars φ X).leftDerivedFunctorCounit.app
+        (sheafExtendScalars φ X).leftDerivedFunctorCounit.app
           (((Sheaf.restrictScalars X.smallEtaleTopology φ).mapHomotopyCategory
             (.up ℤ)).obj K) ≫
         DerivedCategory.Qh.map
-          (((ProEtale.etaleSheafExtendScalarsAdjunction φ X).mapHomotopyCategory
+          (((sheafExtendScalarsAdjunction φ X).mapHomotopyCategory
             (.up ℤ)).counit.app K) := by
   set r := Sheaf.restrictScalars X.smallEtaleTopology φ
-  have h₁ := ((ProEtale.etaleSheafExtendScalarsAdjunction φ X).mapHomotopyCategory
+  have h₁ := ((sheafExtendScalarsAdjunction φ X).mapHomotopyCategory
     (.up ℤ)).derivedε_fac_app (HomotopyCategory.quasiIso _ (.up ℤ))
-    (ProEtale.etaleSheafExtendScalars φ X).leftDerivedFunctorCounit
+    (sheafExtendScalars φ X).leftDerivedFunctorCounit
     r.rightDerivedFunctorUnit K
   have h₃ := NatTrans.congr_app
     r.rightDerivedFunctorIsoMapDerivedCategory_hom_fac K
@@ -130,10 +130,10 @@ theorem mateEquiv_leftDerivedUpperStarEtaleSheafExtendScalarsIso_inv :
         (leftDerivedEtaleSheafExtendScalarsAdjunction φ Z)
         (leftDerivedUpperStarEtaleSheafExtendScalarsIso φ g).inv =
       (leftDerivedUpperStarRestrictScalarsIso φ g).hom := by
-  exact Adjunction.mateEquiv_leftDerived_inv_eq (ProEtale.etaleSheafExtendScalarsAdjunction φ Y)
-    (ProEtale.etaleSheafExtendScalarsAdjunction φ Z)
-    (ProEtale.etaleSheafExtendScalarsCompUpperStarIso φ g)
-    (upperStarRestrictScalarsIso φ g) (mateEquiv_etaleSheafExtendScalarsCompUpperStarIso_inv φ g)
+  exact Adjunction.mateEquiv_leftDerived_inv_eq (sheafExtendScalarsAdjunction φ Y)
+    (sheafExtendScalarsAdjunction φ Z)
+    (sheafExtendScalarsCompUpperStarIso φ g)
+    (upperStarRestrictScalarsIso φ g) (mateEquiv_sheafExtendScalarsCompUpperStarIso_inv φ g)
     (mapHomotopyCategoryEtaleSheafExtendScalarsCompUpperStarIso φ g) rfl _ _ _ _
     (g)^*[ModuleCat.{u + 1} R].leftDerivedFunctorIsoMapDerivedCategory_hom_app_Qh _ _
     (g)^*[ModuleCat.{u + 1} S].leftDerivedFunctorIsoMapDerivedCategory_hom_app_Qh

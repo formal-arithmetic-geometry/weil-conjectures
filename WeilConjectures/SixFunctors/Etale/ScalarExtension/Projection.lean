@@ -53,8 +53,6 @@ attribute [local instance 20000] AlgebraicGeometry.Etale.sheafBraidedCategory
 namespace AlgebraicGeometry.Etale
 
 open Scheme
-open ProEtale (etaleSheafExtendScalars etaleSheafExtendScalarsAdjunction
-  etaleSheafExtendScalarsCompUpperStarIso)
 
 variable (R S : Type (u + 1)) [CommRing R] [CommRing S] [Algebra R S]
 
@@ -72,24 +70,24 @@ and restriction of scalars, at the unit: the composite of the unit of the adjunc
 monoidal structure of restriction of scalars and of the right unitor. -/
 noncomputable def sheafExtendScalarsProjection :
     tensorRight (sheafRestrictScalarsUnit R S X) ⟶
-      etaleSheafExtendScalars (algebraMap R S) X ⋙
+      sheafExtendScalars (algebraMap R S) X ⋙
         sheafCompose X.smallEtaleTopology
           (ModuleCat.restrictScalars.{u + 1} (algebraMap R S)) where
-  app K := ((etaleSheafExtendScalarsAdjunction (algebraMap R S) X).unit.app K ▷ _) ≫
+  app K := ((sheafExtendScalarsAdjunction (algebraMap R S) X).unit.app K ▷ _) ≫
     μ (sheafCompose X.smallEtaleTopology
       (ModuleCat.restrictScalars.{u + 1} (algebraMap R S))) _ _ ≫
     (sheafCompose X.smallEtaleTopology (ModuleCat.restrictScalars.{u + 1} (algebraMap R S))).map
       (ρ_ _).hom
   naturality K L f := by
-    have h₁ : f ≫ (etaleSheafExtendScalarsAdjunction (algebraMap R S) X).unit.app L =
-        (etaleSheafExtendScalarsAdjunction (algebraMap R S) X).unit.app K ≫
+    have h₁ : f ≫ (sheafExtendScalarsAdjunction (algebraMap R S) X).unit.app L =
+        (sheafExtendScalarsAdjunction (algebraMap R S) X).unit.app K ≫
           (sheafCompose X.smallEtaleTopology
             (ModuleCat.restrictScalars.{u + 1} (algebraMap R S))).map
-            ((etaleSheafExtendScalars (algebraMap R S) X).map f) :=
-      (etaleSheafExtendScalarsAdjunction (algebraMap R S) X).unit.naturality f
+            ((sheafExtendScalars (algebraMap R S) X).map f) :=
+      (sheafExtendScalarsAdjunction (algebraMap R S) X).unit.naturality f
     have h₂ := μ_natural_left
       (sheafCompose X.smallEtaleTopology (ModuleCat.restrictScalars.{u + 1} (algebraMap R S)))
-      ((etaleSheafExtendScalars (algebraMap R S) X).map f) (𝟙_ _)
+      ((sheafExtendScalars (algebraMap R S) X).map f) (𝟙_ _)
     dsimp
     rw [← comp_whiskerRight_assoc, h₁, comp_whiskerRight_assoc, reassoc_of% h₂,
       Category.assoc, Category.assoc, ← Functor.map_comp, ← Functor.map_comp]
@@ -103,15 +101,15 @@ variable {X Y : Scheme.{u}} (g : Y ⟶ X)
 
 /-- The base change map `g^* (res M) ⟶ res (g^* M)` of restriction of scalars along the
 pullback: the mate of the commutation `g^* (S ⊗_R -) ≅ S ⊗_R g^*` of
-`AlgebraicGeometry.ProEtale.etaleSheafExtendScalarsCompUpperStarIso`. -/
+`AlgebraicGeometry.Etale.sheafExtendScalarsCompUpperStarIso`. -/
 noncomputable def upperStarRestrictScalarsMap :
     sheafCompose X.smallEtaleTopology (ModuleCat.restrictScalars.{u + 1} (algebraMap R S)) ⋙
         (g)^*[ModuleCat.{u + 1} R] ⟶
       (g)^*[ModuleCat.{u + 1} S] ⋙
         sheafCompose Y.smallEtaleTopology (ModuleCat.restrictScalars.{u + 1} (algebraMap R S)) :=
-  mateEquiv (etaleSheafExtendScalarsAdjunction (algebraMap R S) X)
-    (etaleSheafExtendScalarsAdjunction (algebraMap R S) Y)
-    (etaleSheafExtendScalarsCompUpperStarIso (algebraMap R S) g).inv
+  mateEquiv (sheafExtendScalarsAdjunction (algebraMap R S) X)
+    (sheafExtendScalarsAdjunction (algebraMap R S) Y)
+    (sheafExtendScalarsCompUpperStarIso (algebraMap R S) g).inv
 
 /-- Coextension of scalars commutes with the direct image `g_*`, both being computed
 objectwise. -/
@@ -151,13 +149,13 @@ instance isIso_upperStarRestrictScalarsMap : IsIso (upperStarRestrictScalarsMap 
   have hA : (mateEquiv (upperStarLowerStarAdjunction (ModuleCat.{u + 1} S) g)
       (upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) g)
         (upperStarRestrictScalarsMap R S g)).natTrans =
-      conjugateEquiv ((etaleSheafExtendScalarsAdjunction (algebraMap R S) X).comp
+      conjugateEquiv ((sheafExtendScalarsAdjunction (algebraMap R S) X).comp
           (upperStarLowerStarAdjunction (ModuleCat.{u + 1} S) g))
         ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) g).comp
-          (etaleSheafExtendScalarsAdjunction (algebraMap R S) Y))
-        (etaleSheafExtendScalarsCompUpperStarIso (algebraMap R S) g).inv :=
+          (sheafExtendScalarsAdjunction (algebraMap R S) Y))
+        (sheafExtendScalarsCompUpperStarIso (algebraMap R S) g).inv :=
     iterated_mateEquiv_conjugateEquiv _ _ _ _ _
-  rw [etaleSheafExtendScalarsCompUpperStarIso_eq_conjugateIsoEquiv,
+  rw [sheafExtendScalarsCompUpperStarIso_eq_conjugateIsoEquiv,
     conjugateIsoEquiv_symm_apply_inv, Equiv.apply_symm_apply] at hA
   have h := iterated_mateEquiv_conjugateEquiv_symm
     (upperStarLowerStarAdjunction (ModuleCat.{u + 1} S) g)
@@ -209,16 +207,16 @@ lemma sheafExtendScalarsProjection_upperStar
     (P : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)) :
     (g)^*[ModuleCat.{u + 1} R].map ((sheafExtendScalarsProjection R S X).app P) ≫
         (upperStarRestrictScalarsMap R S g).app
-          ((etaleSheafExtendScalars (algebraMap R S) X).obj P) ≫
+          ((sheafExtendScalars (algebraMap R S) X).obj P) ≫
         (sheafCompose Y.smallEtaleTopology
           (ModuleCat.restrictScalars.{u + 1} (algebraMap R S))).map
-          ((etaleSheafExtendScalarsCompUpperStarIso (algebraMap R S) g).hom.app P) =
+          ((sheafExtendScalarsCompUpperStarIso (algebraMap R S) g).hom.app P) =
       δ (g)^*[ModuleCat.{u + 1} R] P (sheafRestrictScalarsUnit R S X) ≫
         (_ ◁ upperStarSheafRestrictScalarsUnitMap R S g) ≫
         (sheafExtendScalarsProjection R S Y).app ((g)^*[ModuleCat.{u + 1} R].obj P) :=
-  (etaleSheafExtendScalarsAdjunction (algebraMap R S) X).map_unitProjection_comp_mateEquiv
-    (etaleSheafExtendScalarsAdjunction (algebraMap R S) Y)
-    (etaleSheafExtendScalarsCompUpperStarIso _ g)
+  (sheafExtendScalarsAdjunction (algebraMap R S) X).map_unitProjection_comp_mateEquiv
+    (sheafExtendScalarsAdjunction (algebraMap R S) Y)
+    (sheafExtendScalarsCompUpperStarIso _ g)
     (NatTrans.IsMonoidal.δ_comp_tensorHom _) P
 
 end Pullback
