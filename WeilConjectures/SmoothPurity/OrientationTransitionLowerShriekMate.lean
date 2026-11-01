@@ -76,5 +76,31 @@ theorem mateEquiv_whiskerRight_inv_app {L₂ : A₁ ⥤ A₂} {R₂ : A₂ ⥤ A
   rw [mateEquiv_conjugateEquiv_vcomp a₁ b b₂ θ ε.inv,
     Adjunction.rightAdjointUniq_ofNatIsoLeft_symm_hom]
   rfl
+/-- **Compatibility of squares through transformations `T`, transported to the mates**: the
+converse of `CategoryTheory.map_app_comp_app_comp_map_app_eq_of_mateEquiv`. If the squares
+`θ : r₁ ⋙ L ⟶ L₁ ⋙ r₂`, `θ' : r₁' ⋙ L' ⟶ L₁ ⋙ r₂'` and `ι : S₁ ⋙ L ⟶ L' ⋙ S₂` are compatible
+through `T₁ : r₁ ⟶ r₁' ⋙ S₁` and `T₂ : r₂ ⟶ r₂' ⋙ S₂`, then so are their mates
+`R₁ ⋙ r₁ ⟶ r₂ ⋙ R`, `R₁ ⋙ r₁' ⟶ r₂' ⋙ R'` and `R' ⋙ S₁ ⟶ S₂ ⋙ R`. -/
+theorem app_comp_map_mateEquiv_app_comp_mateEquiv_app_eq_of_map (T₁ : r₁ ⟶ r₁' ⋙ S₁)
+    (T₂ : r₂ ⟶ r₂' ⋙ S₂) (ι : TwoSquare S₁ L' L S₂) (θ : TwoSquare r₁ L₁ L r₂)
+    (θ' : TwoSquare r₁' L₁ L' r₂')
+    (h : ∀ K : C₁, L.map (T₁.app K) ≫ ι.app (r₁'.obj K) ≫ S₂.map (θ'.app K) =
+      θ.app K ≫ T₂.app (L₁.obj K))
+    (N : C₂) :
+    T₁.app (R₁.obj N) ≫ S₁.map ((mateEquiv a₁ b' θ').app N) ≫
+        (mateEquiv b' b ι).app (r₂'.obj N) =
+      (mateEquiv a₁ b θ).app N ≫ R.map (T₂.app N) := by
+  apply (b.homEquiv _ _).symm.injective
+  simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
+  have h₁ := mateEquiv_counit b' b ι (r₂'.obj N)
+  have h₂ := ι.natTrans.naturality ((mateEquiv a₁ b' θ').app N)
+  have h₃ := mateEquiv_counit a₁ b' θ' N
+  have h₄ := T₂.naturality (a₁.counit.app N)
+  have h₅ := mateEquiv_counit a₁ b θ N
+  have hK := h (R₁.obj N)
+  simp only [Functor.comp_obj, Functor.comp_map, Functor.id_obj] at h₁ h₂ h₃ h₄ h₅ hK
+  rw [h₁]
+  erw [reassoc_of% h₂]
+  rw [← S₂.map_comp, h₃, S₂.map_comp, reassoc_of% hK, ← h₄, b.counit_naturality, reassoc_of% h₅]
 
 end CategoryTheory

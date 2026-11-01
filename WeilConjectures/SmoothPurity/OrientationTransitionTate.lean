@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationReductionTateTwist
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReadingReduction
+public import WeilConjectures.SmoothPurity.OrientationTransitionTateStep
 public import WeilConjectures.SmoothPurity.OrientationTransitionTateZero
 public import WeilConjectures.SmoothPurity.OrientationTransitionUpperShriek
 public import WeilConjectures.TateTwist.IntegralReduction
@@ -138,7 +139,25 @@ lemma integersModPowReductionTateTwistIso_step (d : ℕ) :
       ((integersModPowReductionTateTwistIso ℓ E n X 1).hom ⊗ₘ
           (integersModPowReductionTateTwistIso ℓ E n X d).hom) ≫
         ((Etale.tateTwistIntTensorFamily (integersModPowCoeff.{u} ℓ E n) X.left).step d).hom := by
-  sorry
+  let _ := Etale.derivedExtendScalarsMonoidal (integersModPowCoeffTransition_surjective ℓ E n)
+    (ker_integersModPowCoeffTransition ℓ E n) X.left
+  have hs : ((Etale.tateTwistIntTensorFamily (integersModPowCoeff.{u} ℓ E (n + 1)) X.left).step
+      d).hom = ((etaleReductionIntegralTateTwistIso ℓ E (n + 1) X 1).inv ⊗ₘ
+        (etaleReductionIntegralTateTwistIso ℓ E (n + 1) X d).inv) ≫
+      (etaleReductionIntegralTateTwistMulIso ℓ E X (n + 1) d).hom ≫
+        (etaleReductionIntegralTateTwistIso ℓ E (n + 1) X (d + 1)).hom := by
+    rw [etaleReductionIntegralTateTwistMulIso_hom]
+    simp [tensorHom_comp_tensorHom_assoc]
+  rw [IntTensorFamily.map_step_hom, Category.assoc, IsIso.inv_comp_eq, hs]
+  simp only [integersModPowReductionTateTwistIso, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_inv,
+    Functor.map_comp, Category.assoc]
+  rw [← Functor.map_comp_assoc _ (etaleReductionIntegralTateTwistIso ℓ E (n + 1) X (d + 1)).hom,
+    Iso.hom_inv_id, CategoryTheory.Functor.map_id, Category.id_comp,
+    map_etaleReductionIntegralTateTwistMulIso_hom_comp_assoc]
+  erw [← Functor.OplaxMonoidal.δ_natural_assoc]
+  rw [etaleReductionIntegralTateTwistMulIso_hom]
+  simp [tensorHom_comp_tensorHom_assoc]
+  rfl
 
 /-- Blueprint `det-sp-purity-coefficient-change`: change of coefficients in purity
 

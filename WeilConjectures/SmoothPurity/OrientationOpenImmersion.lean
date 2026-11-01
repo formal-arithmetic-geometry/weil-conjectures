@@ -147,17 +147,6 @@ theorem isIntegralSmoothOrientation_integralOpenImmersionOrientation :
     IsIntegralSmoothOrientation ℓ E j 0 (integralOpenImmersionOrientation ℓ j E) :=
   sorry
 
-/-- The unit comparison `𝟙 ≅ T 𝟙` of the extension of scalars `T` along `𝒪_E ⟶ E ⟶ ℚ̄_ℓ`, for
-the monoidal functors `boundedConstructibleExtendScalars` and `constructibleToPadicAlgCl`. -/
-noncomputable def integersToPadicAlgClUnitIso (T : Over (Spec (.of k))) [LocallyOfFiniteType T.hom]
-    [QuasiCompact T.hom] [IsSeparated T.hom] :
-    𝟙_ (Dᵇc(T.left)⟦Profinite.padicAlgClRingObj ℓ⟧) ≅
-      (boundedConstructibleExtendScalars T.left ℓ E ⋙ constructibleToPadicAlgCl T.left ℓ E).obj
-        (𝟙_ _) :=
-  Functor.Monoidal.εIso (constructibleToPadicAlgCl T.left ℓ E) ≪≫
-    (constructibleToPadicAlgCl T.left ℓ E).mapIso
-      (Functor.Monoidal.εIso (boundedConstructibleExtendScalars T.left ℓ E))
-
 /-- In degree `0`, the comparison `T(𝒪_{E,X}(0)[0]) ≅ ℚ̄_ℓ,X(0)[0]`
 (`extendScalarsIntegralTateTwistBoundedConstructibleIso`) is compatible with the identifications
 of both sides with the units `𝒪_{E,X}` and `ℚ̄_ℓ,X` and with the unit comparison of `T`. -/
@@ -170,20 +159,6 @@ theorem extendScalarsIntegralTateTwistBoundedConstructibleIso_zero :
         (((shiftFunctorZero' _ (2 * ((0 : ℕ) : ℤ)) (by simp)).app _).hom ≫
           (tateTwistDerivedZeroIso ℓ X.left).hom) ≫
       (integersToPadicAlgClUnitIso ℓ E X).hom :=
-  sorry
-
-/-- The coefficient comparison `T(Rj^! 𝒪_{E,Y}) ≅ Rj^! ℚ̄_ℓ,Y`
-(`integersToPadicAlgClUpperShriekUnitIso`) of an open immersion `j` is compatible with the
-identifications `Rj^! 𝒪_{E,Y} ≅ j^* 𝒪_{E,Y} ≅ 𝒪_{E,X}` and `Rj^! ℚ̄_ℓ,Y ≅ ℚ̄_ℓ,X`
-(`boundedConstructibleUpperShriekUnitIso_padicAlgCl`) and with the unit comparison of `T`. -/
-theorem extendScalars_map_upperShriekUnit_comp_integersToPadicAlgClUpperShriekUnitIso :
-    (boundedConstructibleExtendScalars X.left ℓ E ⋙ constructibleToPadicAlgCl X.left ℓ E).map
-        ((Functor.Monoidal.εIso
-          (boundedConstructibleUpperStar (Profinite.padicIntegersRingObj ℓ E.1) ℓ j)).hom ≫
-          ((boundedConstructibleUpperShriekIsoUpperStar_padicIntegers ℓ E.1 j).app _).inv) ≫
-      (integersToPadicAlgClUpperShriekUnitIso ℓ E j).hom =
-    (integersToPadicAlgClUnitIso ℓ E X).inv ≫
-      (boundedConstructibleUpperShriekUnitIso_padicAlgCl ℓ j).inv :=
   sorry
 
 /-- The extension of scalars to `ℚ̄_ℓ` of the integral canonical orientation of an open immersion
