@@ -1816,18 +1816,6 @@ private theorem quotientUnit_epi (T : Site.{u}) (A : Type u) [CommRing A]
   rw [← ht]
   exact congrArg (fun z ↦ z.val.app U (r • m)) h
 
-private theorem pullInsertion_naturality {V U : Site.{u}} (f : Morphism V U)
-    (A : Type u) [CommRing A] {M N : V.modules A} (a : M ⟶ N) :
-    f.inverse.map ((ConstantCompletion.underlying (V.ring A)).map a) ≫
-        ConstantCompletion.pullInsertion f.algebra (ConstantCompletion.constantMap f.algebra A) N =
-      ConstantCompletion.pullInsertion f.algebra (ConstantCompletion.constantMap f.algebra A) M ≫
-        (ConstantCompletion.underlying (U.ring A)).map ((f.modulePull A).map a) := by
-  symm
-  dsimp only [ConstantCompletion.pullInsertion, ConstantCompletion.pull, Functor.comp_map]
-  erw [Category.assoc, ConstantCompletion.finiteInsertion_naturality U.topology
-    (ConstantCompletion.constantMap f.algebra A), ← Category.assoc,
-    ← (f.algebra.algebra _).moduleUnderlying.inv.naturality a, Category.assoc]
-
 private theorem constantPullInsertion_isIso {V U : Site.{u}} (f : Morphism V U)
     (A : Type u) [CommRing A] (M : V.modules A) :
     IsIso (ConstantCompletion.pullInsertion f.algebra

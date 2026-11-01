@@ -8,6 +8,9 @@ module
 public import WeilConjectures.SmoothPurity.ProperScalarProjectionCanonicalEndpoint
 public import WeilConjectures.AlgebraicGeometry.Proper.ProperScalarCounitSquare
 public import WeilConjectures.AlgebraicGeometry.Direct.DirectImageScalarOperations
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantModuleUnit
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Scalar.ProEtaleScalarMateIdentifications
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Scalar.ProEtaleScalarTensorNormalization
 
 /-! # Proper scalar projection normalization
 
@@ -99,6 +102,36 @@ theorem properScalarMate_explicit_transport_iso
   simp only [Category.assoc, e]
   exact congrArg (fun t ↦ hY.hom.app ((directImageConstantPush A g).obj K) ≫ t)
     (Category.comp_id ((directImageScalarComparison φ g).app K)).symm
+
+/-- Realize the constant restricted regular module as the native scalar coefficient,
+using constant-sheaf restriction, normalized module realization and degree-zero comparison. -/
+private noncomputable def scalarCoefficientRealizationIso
+    {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
+    (φ : A →+* B) (Y : Scheme.{u}) :
+    (sfIntrinsicDerivedEquivalence Y A).functor.obj
+      ((constantSheaf (ProEt.topology Y)
+        (ModuleCat.{u + 1} (ULift.{u + 1, u} A))).mapDerivedCategory.obj
+        ((DerivedCategory.singleFunctor _ 0).obj
+          ((ModuleCat.restrictScalars.{u + 1} φ.ulift).obj
+            (ModuleCat.of (ULift.{u + 1, u} B) (ULift.{u + 1, u} B))))) ≅
+      DerivedCategory.Q.obj (scalarMateCoefficientComplex φ Y) := by
+  let M := ModuleCat.of (ULift.{u + 1, u} B) (ULift.{u + 1, u} B)
+  let U : ModuleCat.{u + 1} (ULift.{u + 1, u} B) ⥤
+      ModuleCat.{u + 1} (ULift.{u + 1, u} A) := ModuleCat.restrictScalars φ.ulift
+  letI : U.IsLeftAdjoint :=
+    (ModuleCat.restrictCoextendScalarsAdj.{u + 1, u + 1, u + 1}
+      (φ.ulift : ULift.{u + 1, u} A →+* ULift.{u + 1, u} B)).isLeftAdjoint
+  let CA := constantSheaf (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1, u} A))
+  let CB := constantSheaf (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1, u} B))
+  let E := (sfIntrinsicModuleEquivalence Y A).functor
+  let e : E.obj (CA.obj (U.obj M)) ≅ scalarMateCoefficient φ Y :=
+    E.mapIso ((constantCommuteCompose (ProEt.topology Y) U).symm.app M) ≪≫
+      (sfRealizationRestriction Y φ).symm.app (CB.obj M) ≪≫
+      (proEtaleCoefficientRestrictScalars Y φ).mapIso (proEtaleConstantModuleUnit Y B)
+  exact E.mapDerivedCategory.mapIso ((CA.mapDerivedCategorySingleFunctor 0).app (U.obj M)) ≪≫
+    (E.mapDerivedCategorySingleFunctor 0).app (CA.obj (U.obj M)) ≪≫
+    (DerivedCategory.singleFunctor _ 0).mapIso e ≪≫
+    (DerivedCategory.singleFunctorIsoCompQ _ 0).app (scalarMateCoefficient φ Y)
 
 /-- The normalized geometric mate is the intrinsic finite scalar projection.
 The proof is the finite discrete encoding, scalar-mate normalization and

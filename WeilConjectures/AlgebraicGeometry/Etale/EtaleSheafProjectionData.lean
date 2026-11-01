@@ -93,4 +93,34 @@ noncomputable def etaleLiftSection (A : Type (u + 1)) [CommRing A]
     (((upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) e).unit.app N).hom.app
       (op ((MorphismProperty.Over.map ⊤ (inferInstance : Etale e)).obj W)) n)
 
+/-- The germ-normalized sum-stalk isomorphism supplied by `exists_etaleSumStalksIso`.
+Its germ formula fixes every summand generator and hence uniquely determines the
+linear equivalence; choosing this witness postpones only its proof, not any data.
+Source: Stacks, Tag 03S5 (blueprint: lem-pur-etale-sheaf-projection-map). -/
+noncomputable def etaleProjectionSumStalkIso (A : Type (u + 1)) [CommRing A]
+    {V T : Scheme.{u}} (e : V ⟶ T) [Etale e]
+    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ T)
+    (M : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} A)) :
+    ((Scheme.pointSmallEtale t).sheafFiber (A := ModuleCat.{u + 1} A)).obj
+        ((etaleLowerShriek (ModuleCat.{u + 1} A) e inferInstance).obj M) ≅
+      ModuleCat.of A (⨁ v : Over.mk t ⟶ Over.mk e,
+        ((Scheme.pointSmallEtale v.left).sheafFiber (A := ModuleCat.{u + 1} A)).obj M) :=
+  ((exists_etaleSumStalksIso e A Ω t).choose M).toModuleIso
+
+/-- The inverse-image stalk comparison at a lift, including transport along its
+triangle equation. It is the module-valued form of the canonical comparison underlying
+`inverseImage_stalk_germ`.
+Source: Stacks, Tag 03Q1 (blueprint: lem-pur-etale-sheaf-projection-map). -/
+noncomputable def etaleProjectionLiftStalkIso (A : Type (u + 1)) [CommRing A]
+    {V T : Scheme.{u}} (e : V ⟶ T) [Etale e]
+    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ T)
+    (v : Over.mk t ⟶ Over.mk e)
+    (N : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) :
+    ((Scheme.pointSmallEtale v.left).sheafFiber (A := ModuleCat.{u + 1} A)).obj
+        ((upperStar (ModuleCat.{u + 1} A) e).obj N) ≅
+      ((Scheme.pointSmallEtale t).sheafFiber (A := ModuleCat.{u + 1} A)).obj N :=
+  (upperStarCompSheafFiberIso (ModuleCat.{u + 1} A) e v.left).app N ≪≫
+    eqToIso (congrArg (fun z ↦
+      ((Scheme.pointSmallEtale z).sheafFiber (A := ModuleCat.{u + 1} A)).obj N) v.w)
+
 end AlgebraicGeometry.Etale
