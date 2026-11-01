@@ -3911,6 +3911,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.EtaleSheafHLargeFilteredCo
 public import WeilConjectures.AlgebraicGeometry.Curve.ExistsAmpleOfDimLEOne
 public import WeilConjectures.AlgebraicGeometry.Curve.ExistsAmpleOfReducedDimLEOne
 public import WeilConjectures.AlgebraicGeometry.Curve.ExtensionInvariance
+public import WeilConjectures.AlgebraicGeometry.Curve.ExtensionPresentationShortExact
 public import WeilConjectures.AlgebraicGeometry.Curve.FieldExtension
 public import WeilConjectures.AlgebraicGeometry.Curve.FilteredFiniteCoverLowerShriekTransfer
 public import WeilConjectures.AlgebraicGeometry.Curve.FilteredFiniteCoverLowerShriekTransferCore
@@ -4036,6 +4037,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.ReductionUnitsPowerInclusi
 public import WeilConjectures.AlgebraicGeometry.Curve.ReductionUnitsPowerKernel
 public import WeilConjectures.AlgebraicGeometry.Curve.ReductionUnitsPowerQuotient
 public import WeilConjectures.AlgebraicGeometry.Curve.Reductions
+public import WeilConjectures.AlgebraicGeometry.Curve.RelativeTorsorExtension
 public import WeilConjectures.AlgebraicGeometry.Curve.ResidueSequence
 public import WeilConjectures.AlgebraicGeometry.Curve.ResidueTrace
 public import WeilConjectures.AlgebraicGeometry.Curve.RetractAssertions
@@ -4044,11 +4046,13 @@ public import WeilConjectures.AlgebraicGeometry.Curve.RiemannRochCoherent
 public import WeilConjectures.AlgebraicGeometry.Curve.RootTrivializationBaseChange
 public import WeilConjectures.AlgebraicGeometry.Curve.RootsOfUnityCohomology
 public import WeilConjectures.AlgebraicGeometry.Curve.RootsOfUnityTop
+public import WeilConjectures.AlgebraicGeometry.Curve.SRMatchingObjectOneMember
 public import WeilConjectures.AlgebraicGeometry.Curve.SepClosedComparison
 public import WeilConjectures.AlgebraicGeometry.Curve.SepClosedComparisonCore
 public import WeilConjectures.AlgebraicGeometry.Curve.SepClosedComparisonCurve
 public import WeilConjectures.AlgebraicGeometry.Curve.SeparatingFunction
 public import WeilConjectures.AlgebraicGeometry.Curve.SerreDuality
+public import WeilConjectures.AlgebraicGeometry.Curve.SimplicialHomObjectPushout
 public import WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations
 public import WeilConjectures.AlgebraicGeometry.Curve.SmoothConstantLowerShriekLocalization
 public import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
