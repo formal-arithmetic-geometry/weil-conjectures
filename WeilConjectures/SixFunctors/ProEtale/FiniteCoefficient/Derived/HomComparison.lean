@@ -44,6 +44,9 @@ with the internal hom of bounded constructible complexes at a finite coefficient
 
 ## Main statements
 
+- `ProEtale.DerivedCategory.isIso_derivedComparisonAdjunction_counit_app_derivedHom`:
+  for `K ∈ Dctf(X_ét, Λ)` and `M` bounded below, `RHom(ν^* K, ν^* M)` is of étale origin, by
+  dévissage over the generators `Rg_* Rj_! L` of `Dctf(X_ét, Λ)`.
 - `AlgebraicGeometry.ProEtale.DerivedCategory.torAmplitudeIn_mapDerivedCategory_iff`
   (`lem-exc-comparison-tor-interval`): an étale complex has Tor amplitude in `[a, b]` if and only
   if its pullback to the pro-étale site has.
@@ -266,7 +269,8 @@ lemma plusEtaleOrigin_derivedHom_mapDerivedCategory_rightDerivedLowerStar_rightD
   have hB : _root_.DerivedCategory.TStructure.t.plus
       ((Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) j).obj L₀) :=
     have : L₀.IsGE 0 := inferInstanceAs (((_root_.DerivedCategory.singleFunctor _ 0).obj L).IsGE 0)
-    have := (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).isGE_mapDerivedCategory_obj L₀ 0
+    have := (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).isGE_mapDerivedCategory_obj
+      L₀ 0
     ⟨0, _root_.DerivedCategory.TStructure.t.isGE_of_iso eB.symm 0⟩
   let A := D((j)_!open[ModuleCat.{u + 1} Λ]).obj (D(ν^*(U)[ModuleCat.{u + 1} Λ]).obj L₀)
   let e₁ : D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj ((R(Etale.lowerStar (ModuleCat.{u + 1} Λ) g)).obj
@@ -283,15 +287,17 @@ lemma plusEtaleOrigin_derivedHom_mapDerivedCategory_rightDerivedLowerStar_rightD
     (op ((R((g)_*[ModuleCat.{u + 1} Λ])).obj A)) _ hT
   have : IsIso (((ProEtale.derivedHom (ModuleCat.{u + 1} Λ) X).obj
       (op ((R((g)_*[ModuleCat.{u + 1} Λ])).obj A))).map a) :=
-    (Pretriangulated.Triangle.isZero₃_iff_isIso₁ _ hw).1 (isZero_derivedHom_rightDerivedLowerStar_of_disjoint g j'
-      (hgj' ▸ disjoint_compl_left) A _)
+    (Pretriangulated.Triangle.isZero₃_iff_isIso₁ _ hw).1
+      (isZero_derivedHom_rightDerivedLowerStar_of_disjoint g j'
+        (hgj' ▸ disjoint_compl_left) A _)
   -- `RHom(Rg_* A, Rg_* ν^* C) ≅ Rg_* RHom(A, ν^* C) ≅ Rg_* Rj_* RHom(ν^* L, j^* ν^* C)`
   let e₂ := (rightDerivedLowerStarCompDerivedHomClosedImmersionIso g A).app
     (D(ν^*(Ubar)[ModuleCat.{u + 1} Λ]).obj C)
   let e₃ := (derivedHomOpenImmersionLowerShriekIso _ j
     (D(ν^*(U)[ModuleCat.{u + 1} Λ]).obj L₀)).app (D(ν^*(Ubar)[ModuleCat.{u + 1} Λ]).obj C)
   -- `RHom(ν^* L, ν^*(j^* C))` is of étale origin, `L` being dualizable
-  obtain ⟨D, hD, ⟨_⟩⟩ := Etale.exists_exactPairing_singleFunctor_of_isFiniteLocallyConstantSheaf Λ L hL
+  obtain ⟨D, hD, ⟨_⟩⟩ :=
+    Etale.exists_exactPairing_singleFunctor_of_isFiniteLocallyConstantSheaf Λ L hL
   obtain ⟨-, d, d', hDt⟩ := hD
   obtain ⟨c', hc'⟩ := hC
   have hjC : ((D(Etale.upperStar (ModuleCat.{u + 1} Λ) j)).obj C).IsGE c' :=
@@ -313,22 +319,49 @@ lemma plusEtaleOrigin_derivedHom_mapDerivedCategory_rightDerivedLowerStar_rightD
 
 end EtaleOrigin
 
-/-- The étale-origin step of blueprint `lem-weil-finite-duality-site-comparison`: for `X`
-separated of finite type over an algebraic closure `k` of `𝔽_p`, `K ∈ Dctf(X_ét, Λ)` and
-`M ∈ Dᵇc(X_ét, Λ)`, the pro-étale complex `RHom(ν^* K, ν^* M)` is of étale origin: the counit
-`ν^* Rν_* R ⟶ R` of the comparison adjunction is an isomorphism at `R = RHom(ν^* K, ν^* M)`. -/
+/-- The étale-origin step of blueprint `lem-weil-finite-duality-site-comparison`: for `X` of
+finite type over a field, `K ∈ Dctf(X_ét, Λ)` and `M` a bounded below étale complex, the
+pro-étale complex `RHom(ν^* K, ν^* M)` is of étale origin: the counit `ν^* Rν_* R ⟶ R` of the
+comparison adjunction is an isomorphism at `R = RHom(ν^* K, ν^* M)`.
+
+By the generation of `Dctf(X_ét, Λ)` by the complexes `Rg_* Rj_! L`
+(`AlgebraicGeometry.Etale.ctf_generated_by_rightDerivedLowerStar_rightDerivedLowerShriek`), it
+suffices to treat a thick subcategory
+(`isTriangulated_plusEtaleOrigin_derivedHom_mapDerivedCategory`) and the generators
+(`plusEtaleOrigin_derivedHom_mapDerivedCategory_rightDerivedLowerStar_rightDerivedLowerShriek`).
+-/
 theorem isIso_derivedComparisonAdjunction_counit_app_derivedHom {k : Type u} [Field k]
-    {p : ℕ} [Fact p.Prime] [Algebra (ZMod p) k] [IsAlgClosure (ZMod p) k]
-    {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [IsSeparated aX] [LocallyOfFiniteType aX]
-    [QuasiCompact aX] [HasInvertibleExponent Λ X]
+    {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
     {K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : Etale.DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K)
-    (hM : Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X M) :
+    (hM : _root_.DerivedCategory.TStructure.t.plus M) :
     IsIso ((derivedComparisonAdjunction (ModuleCat.{u + 1} Λ) X).counit.app
       (((ProEtale.derivedHom (ModuleCat.{u + 1} Λ) X).obj
         (op (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K))).obj
-          (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj M))) :=
-  sorry
+          (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj M))) := by
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian aX
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace aX
+  have : IsNoetherian X := {}
+  have := isTriangulated_plusEtaleOrigin_derivedHom_mapDerivedCategory Λ M
+  have := isStableUnderRetracts_plusEtaleOrigin_derivedHom_mapDerivedCategory Λ M
+  have := isClosedUnderIsomorphisms_plusEtaleOrigin_derivedHom_mapDerivedCategory Λ M
+  refine ((plusEtaleOrigin_iff _).1
+    (Etale.ctf_generated_by_rightDerivedLowerStar_rightDerivedLowerShriek Λ X
+      (fun K ↦ plusEtaleOrigin (ModuleCat.{u + 1} Λ) X
+        (((ProEtale.derivedHom (ModuleCat.{u + 1} Λ) X).obj
+          (op (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj K))).obj
+            (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj M)))
+      (fun str i Ubar j _ _ g _ _ _ L _ hL ↦ ?_) K hK)).2
+  have : TopologicalSpace.NoetherianSpace (str.domain i) :=
+    (str.immersion i).isEmbedding.isInducing.noetherianSpace
+  have : QuasiCompact j := ⟨fun _ _ _ ↦ TopologicalSpace.NoetherianSpace.isCompact _⟩
+  -- the open complement of the closed immersion `g`
+  let V : X.Opens := ⟨(Set.range g.base)ᶜ, g.isClosedEmbedding.isClosed_range.isOpen_compl⟩
+  have : TopologicalSpace.NoetherianSpace V := V.ι.isOpenEmbedding.isInducing.noetherianSpace
+  have : QuasiCompact V.ι := ⟨fun _ _ _ ↦ TopologicalSpace.NoetherianSpace.isCompact _⟩
+  exact plusEtaleOrigin_derivedHom_mapDerivedCategory_rightDerivedLowerStar_rightDerivedLowerShriek
+    Λ j g V.ι (by rw [Scheme.Opens.range_ι]; exact (compl_compl _).symm) L hL hM
+
 
 /-- Blueprint `lem-weil-finite-duality-site-comparison`: Finite-stage duality under the site
 comparison.
@@ -391,7 +424,7 @@ theorem nonempty_iso_mapDerivedCategory_derivedHom_of_isSeparated {k : Type u} [
     let adj := derivedComparisonAdjunction (ModuleCat.{u + 1} Λ) X
     obtain ⟨c, hc⟩ := hM.1.1
     have := isIso_derivedComparisonAdjunction_unit_app (ModuleCat.{u + 1} Λ) X M ⟨c, hc⟩
-    have := isIso_derivedComparisonAdjunction_counit_app_derivedHom Λ aX (p := p) hK hM
+    have := isIso_derivedComparisonAdjunction_counit_app_derivedHom Λ aX hK ⟨c, hc⟩
     exact ⟨(D(ν^*(X)[ModuleCat.{u + 1} Λ])).mapIso
       (((rightDerivedComparisonLowerStarCompDerivedHomIso (ModuleCat.{u + 1} Λ) K).app _).symm ≪≫
         ((Etale.derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).mapIso
