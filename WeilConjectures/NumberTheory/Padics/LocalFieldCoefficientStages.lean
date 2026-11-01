@@ -242,10 +242,8 @@ theorem local_field_coefficient_stages
   classical
   let R := coefficientExtensionIntegers l E
   let S := coefficientExtensionIntegers l F
-  have hE := (extension_integers_dvr l E (coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
-  have hF := (extension_integers_dvr l F (coefficientExtensionAbsoluteValue l F)
-    (spectralNorm_extends (K := ℚ_[l]) (L := F))).choose_spec.choose_spec
+  have hE := (coefficientExtensionIntegers_dvr l E).choose_spec
+  have hF := (coefficientExtensionIntegers_dvr l F).choose_spec
   have hmemE : ∀ x : E, x ∈ R ↔ coefficientExtensionAbsoluteValue l E x ≤ 1 := hE.1
   have hmemF : ∀ x : F, x ∈ S ↔ coefficientExtensionAbsoluteValue l F x ≤ 1 := hF.1
   have hmE : ∀ x : R, x ∈ coefficientExtensionMaximalIdeal l E ↔

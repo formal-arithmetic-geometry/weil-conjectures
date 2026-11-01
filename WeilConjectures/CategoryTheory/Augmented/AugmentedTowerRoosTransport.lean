@@ -11,6 +11,8 @@ import all WeilConjectures.SixFunctors.Scalar.ScalarRoosComparison
 import Mathlib.CategoryTheory.Preadditive.Biproducts
 import Mathlib.CategoryTheory.Adjunction.Limits
 
+set_option linter.privateModule false
+
 /-! # Transport of strict augmented towers through the Roos construction
 
 Source: Stacks Tag 08TC and the scalar-restriction paragraph of
@@ -41,8 +43,5 @@ end ProductRoos
 attribute [local implicit_reducible] WeilConjectures.integralOperationsRoos
   WeilConjectures.integralOperationsRoosFunctor CochainComplex.mappingCocone
   Functor.mapHomologicalComplex
-
-set_option maxHeartbeats 2000000 in
--- The canonical comparisons involve several chosen product and cocone models.
 
 end CategoryTheory

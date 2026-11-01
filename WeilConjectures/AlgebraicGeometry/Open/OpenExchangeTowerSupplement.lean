@@ -11,6 +11,8 @@ import WeilConjectures.AlgebraicGeometry.Open.OpenSourceComposition
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedComp
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CompConjugate
+
+set_option linter.privateModule false
 /-! The compactification tower calculation for open composition. -/
 @[expose] public section
 open CategoryTheory CategoryTheory.Limits
@@ -123,9 +125,4 @@ private theorem open_congr_derived (A : Type (u + 1)) [CommRing A]
   cases h
   apply Iso.ext
   exact Functor.mapDerivedCategoryNatIso_refl.symm
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 300000 in
--- The explicit tower and derived-unit rewrites exceed the default cumulative heartbeat bound.
-set_option backward.isDefEq.respectTransparency false in
 end AlgebraicGeometry.Etale

@@ -29,7 +29,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 open scoped TensorProduct ChangeOfRings
 namespace AlgebraicGeometry.Scheme
-set_option backward.isDefEq.respectTransparency false in
 variable (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
   [IsNoetherian Y] [Y.IsSeparated] [∀ x : Y, Invertible (l : Y.residueField x)]
   {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y)
@@ -40,15 +39,6 @@ variable (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
 attribute [local irreducible] GrothendieckTopology.Point.sheafFiber
   GrothendieckTopology.Point.presheafFiber
 
-set_option backward.isDefEq.respectTransparency false in
-set_option maxRecDepth 2000 in
-set_option backward.isDefEq.respectTransparency false in
-set_option maxRecDepth 2000 in
-set_option maxRecDepth 2000 in
-set_option maxRecDepth 2000 in
-set_option maxRecDepth 2000 in
 variable [Algebra E L] (ha : algebraMap E L = ι.toRingHom)
 
-set_option backward.isDefEq.respectTransparency false in
-set_option maxRecDepth 2000 in
 end AlgebraicGeometry.Scheme

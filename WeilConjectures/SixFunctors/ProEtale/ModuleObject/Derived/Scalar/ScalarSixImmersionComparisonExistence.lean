@@ -31,7 +31,4 @@ attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
-set_option linter.unusedVariables false in
-set_option maxHeartbeats 2000000 in
--- Preserve the original coherence binder and check the concrete coefficient functors.
 end AlgebraicGeometry.ProEtale.CondensedRing

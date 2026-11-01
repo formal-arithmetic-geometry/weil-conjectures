@@ -115,6 +115,4 @@ structure GaloisAdicCanonicalConstruction
               (eqToHom (lisseRationalFiberFunctor_obj l E.val Y y F)
                 ((d.τR E).hom.app F z))
 
-set_option maxHeartbeats 5000000 in
--- Elaborating the three dependent normalized stages requires a larger budget.
 end AlgebraicGeometry.Scheme

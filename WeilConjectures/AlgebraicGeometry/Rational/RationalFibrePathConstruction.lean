@@ -46,6 +46,4 @@ private lemma fractionTensorPure {R B : Type*} [CommRing R] [IsDomain R] [Field 
   simpa only [smul_smul, inv_mul_cancel₀ hs0, one_smul, TensorProduct.smul_tmul',
     smul_eq_mul, mul_one] using hv
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 end AlgebraicGeometry.Scheme

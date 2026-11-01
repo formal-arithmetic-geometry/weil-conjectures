@@ -62,6 +62,8 @@ import Mathlib.Algebra.Category.ModuleCat.Kernels
 import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsMonoidal
 import Mathlib.CategoryTheory.Adjunction.Limits
 
+set_option linter.privateModule false
+
 /-! # The two coefficient units present the same positive cyclic quotient
 
 Source: finite-reduction comparison in `det-lem-int-tensor-pullback.proof.md`.
@@ -113,6 +115,4 @@ private def scalarQuotient (n : ℕ) :
       map_add' := by intros; rfl
       map_smul' := by intros; rfl }
 
-set_option maxHeartbeats 2000000 in
--- Allow the nested coefficient and module-object transports to normalize.
 end AlgebraicGeometry.ProEtale.IntegralTensorPullback

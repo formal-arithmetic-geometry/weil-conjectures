@@ -60,6 +60,8 @@ import Mathlib.CategoryTheory.Limits.Types.Equalizers
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Equalizers
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 
+set_option linter.privateModule false
+
 /-!
 # Flat internal module sheaves under a site inverse image
 
@@ -653,6 +655,15 @@ private theorem sectionModuleCounit_smul {Y : Site.{u}}
   intro eY M W a b
   exact ((eY.counitIso.inv.app M).val.app W).hom.map_smul a b
 
+/-- Commutativity of a monoid object transports along an isomorphism of monoid objects. -/
+private theorem isCommMonObj_of_isIso {C : Type*} [Category C] [MonoidalCategory C]
+    [BraidedCategory C] {M N : C} [MonObj M] [IsCommMonObj M] [MonObj N]
+    (ρ : M ⟶ N) [IsIso ρ] [IsMonHom ρ] : IsCommMonObj N where
+  mul_comm := by
+    have h : μ[N] = (inv ρ ⊗ₘ inv ρ) ≫ μ[M] ≫ ρ := by
+      rw [← IsMonHom.mul_hom_assoc, IsIso.inv_hom_id, Category.comp_id]
+    rw [h, BraidedCategory.braiding_naturality_assoc, IsCommMonObj.mul_comm_assoc]
+
 private theorem inverseImageSectionModuleUnit_smul {X Y : Site.{u}} (f : Pullback X Y)
     (R : Sheaf Y.J Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (S : Sheaf X.J Ab.{u + 1}) [MonObj S] [IsCommMonObj S]
@@ -671,6 +682,7 @@ private theorem inverseImageSectionModuleUnit_smul {X Y : Site.{u}} (f : Pullbac
       (@HSMul.hSMul RY MY MY inferInstance a b) =
       @HSMul.hSMul SX MX MX inferInstance (inverseImageSectionRingUnit f R S ρ W a)
         (((abelianAdjunction f).unit.app N.X).hom.app W b) := by
+  have := isCommMonObj_of_isIso ρ
   let U := f.base
   let adj := abelianAdjunction f
   let P := (((abelianPullback f)).mapMod R).obj N

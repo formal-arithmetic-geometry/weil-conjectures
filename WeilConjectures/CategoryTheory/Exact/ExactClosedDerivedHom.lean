@@ -53,8 +53,6 @@ private theorem comparison_square :
     Iso.hom_inv_id_app_assoc] at q'
   erw [Functor.map_id, Category.comp_id] at q'
   exact q'.symm
-include e in
-include e in
 end Square
 end CategoryTheory
 namespace CategoryTheory.Functor
@@ -152,9 +150,4 @@ variable {L : D ⥤ C} [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteCo
 omit [PreservesFiniteLimits L] [PreservesFiniteColimits L]
   [Abelian.HasFunctorialFlatResolution C] [Abelian.HasFunctorialFlatResolution D]
   [PreservesFiniteLimits F] [PreservesFiniteColimits F] [F.PreservesFlat] in
-include adj in
-include adj in
-include adj in
-include adj in
-include adj in
 end CategoryTheory.Functor

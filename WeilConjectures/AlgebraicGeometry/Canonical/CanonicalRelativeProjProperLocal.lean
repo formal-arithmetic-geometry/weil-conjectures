@@ -72,7 +72,7 @@ The comparison between the restricted canonical Proj and the local relative Proj
 in `exists_canonicalRelativeProj_restrict_iso`.
 (blueprint: lem-trf-canonical-relative-proj-proper-local). -/
 theorem canonicalRelativeProj_restrict_proper {S : Scheme.{u}} (E : S.Modules)
-    (hE : E.IsQuasiCoherentFiniteType) (U : S.Opens) (hU : IsAffineOpen U) :
+    (hE : E.IsQuasiCoherentFiniteType) (U : S.Opens) (_hU : IsAffineOpen U) :
     IsProper ((@SymmetricAlgebraSheaf.gradedAlgebraData S E hE.1).relProjHom ∣_ U) := by
   have hglobal := canonicalRelativeProj_global_proper E hE
   exact inferInstance

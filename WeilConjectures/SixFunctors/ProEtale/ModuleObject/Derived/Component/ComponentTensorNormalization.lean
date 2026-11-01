@@ -14,6 +14,8 @@ import Mathlib.CategoryTheory.Monoidal.Multifunctor
 import Mathlib.CategoryTheory.Monoidal.Closed.Braided
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
 
+set_option linter.privateModule false
+
 /-! # Unit normalization of the component inverse image
 
 Source: Hemo--Richarz--Scholbach, Construction (4.1).

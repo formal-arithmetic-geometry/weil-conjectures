@@ -15,6 +15,8 @@ import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence
 import Mathlib.CategoryTheory.Adjunction.Restrict
 public import Mathlib.CategoryTheory.Sites.LocalSite
 
+set_option linter.privateModule false
+
 /-! # Perfect complexes and dualizable objects under contractible evaluation
 
 Source: Hemo--Richarz--Scholbach, Section 3, (3.1)--(3.2), Remark 3.2,

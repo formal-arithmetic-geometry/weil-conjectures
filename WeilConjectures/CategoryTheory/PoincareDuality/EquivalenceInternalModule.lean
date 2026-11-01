@@ -8,6 +8,8 @@ module
 public import WeilConjectures.CategoryTheory.InternalModule.InternalModule
 public import WeilConjectures.CategoryTheory.Finite.FiniteContinuousModule
 
+set_option linter.privateModule false
+
 /-!
 # Equivalences of module objects and finite continuous linear actions
 
@@ -346,8 +348,6 @@ private def pointUnit : ContAction FintypeCat.{u} G where
   obj := Action.trivial G (FintypeCat.of PUnit)
   property := ⟨continuous_snd⟩
 
-omit [IsTopologicalGroup G] in
-omit [TopologicalSpace G] [IsTopologicalGroup G] in
 end InternalModule
 end FiniteActions
 

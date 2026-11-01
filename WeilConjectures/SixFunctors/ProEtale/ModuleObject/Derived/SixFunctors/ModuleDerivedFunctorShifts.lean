@@ -15,7 +15,7 @@ blueprint compactification coherence, refinement (2)
 (blueprint: def-sfb-module-derived-functor-shifts).
 
 The three constructions of this node are the published declarations of
-`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.ModuleDerivedFunctorCompositorShifts`, reexported here unchanged:
+`ModuleDerivedFunctorCompositorShifts` (in this directory), reexported here unchanged:
 `modulePullbackExactComparison` (the canonical universal-counit comparison
 `c_u : Lu^* ≅ D(u^*)`), `modulePullbackDerivedCommShift` (the termwise shifts of `D(u^*)`
 transported along `c_u`, by `Functor.CommShift.ofIso`) and

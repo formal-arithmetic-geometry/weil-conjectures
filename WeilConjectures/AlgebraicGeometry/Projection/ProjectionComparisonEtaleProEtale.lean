@@ -25,6 +25,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarProjection
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
+set_option linter.privateModule false
+
 /-!
 # Etale-to-pro-etale comparison of the direct-image projection morphism
 

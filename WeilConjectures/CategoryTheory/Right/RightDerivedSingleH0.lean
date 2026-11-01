@@ -342,7 +342,3 @@ theorem CategoryTheory.Functor.rightDerivedFunctorUnit_homology_zero
   erw [CategoryTheory.Functor.map_id, Category.id_comp]
   rfl
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in

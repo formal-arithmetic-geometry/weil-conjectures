@@ -58,6 +58,7 @@ theorem finiteFreeScalarDerivedComparison_nativeTensor
         ((curriedTensor (ModuleRingedComparison.internalModules Λ.X Z)).flip.obj M) :=
     preservesColimitsOfShape_of_natIso (F := tensorLeft M)
       (NatIso.ofComponents (fun N ↦ β_ M N) (by intros; simp [curriedTensor]))
+  have := isLeftDerivabilityStructure_localizerMorphismKFlat Λ.X Z
   have hm : IsIso (Functor.LaxMonoidal.μ DerivedCategory.Qh
       ((HomotopyCategory.quotient _ _).obj (complex Λ S Z))
       ((HomotopyCategory.quotient _ _).obj C)) :=

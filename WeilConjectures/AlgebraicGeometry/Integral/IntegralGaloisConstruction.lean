@@ -37,6 +37,4 @@ namespace AlgebraicGeometry.Scheme
 
 attribute [local irreducible] lisseRationalFiberFunctor
 
-set_option genSizeOfSpec false in
-set_option genInjectivity false in
 end AlgebraicGeometry.Scheme

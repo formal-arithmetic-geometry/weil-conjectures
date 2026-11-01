@@ -27,6 +27,5 @@ variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
     (J : GrothendieckTopology C)
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
 
-omit [EssentiallySmall.{u + 1} C] in
 end Site
 end AlgebraicGeometry.FiniteReduction

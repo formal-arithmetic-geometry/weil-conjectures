@@ -17,6 +17,8 @@ import WeilConjectures.ConstructibleSheaf.MonoidalParts
 import WeilConjectures.AlgebraicGeometry.Etale.EtaleStalkTensorScalar
 import Mathlib.CategoryTheory.Sites.Adjunction
 
+set_option linter.privateModule false
+
 /-! # Tensor products, scalar extension and stalks of lisse sheaves
 
 Source: Stacks Project, sites-modules, 093V, 03EL; etale-cohomology, 095D, 04FM,

@@ -204,9 +204,9 @@ private theorem closed_scalar_iso
     (B : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj A Z)) :
     IsIso ((CondensedRing.pushHom a i).app B) := by
   have hiA := CondensedRing.moduleCounitOfAbelian A i
-    (ProEtale.abelian_closed_support i j h).1
+    (ProEtale.abelian_closed_support_counit_and_unit i j h).1
   have hiR := CondensedRing.moduleCounitOfAbelian R i
-    (ProEtale.abelian_closed_support i j h).1
+    (ProEtale.abelian_closed_support_counit_and_unit i j h).1
   let δ := (CondensedRing.pushHom a i).app B
   apply (CondensedRing.jointlyReflectIsomorphisms_upperStar_of_isCompl R i j
     (by rw [h]; exact isCompl_compl)).isIso_of_pairFunctor δ

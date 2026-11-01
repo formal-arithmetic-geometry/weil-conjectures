@@ -10,6 +10,8 @@ public import WeilConjectures.AlgebraicGeometry.IntegralTensorPullback.IntegralT
 import all WeilConjectures.AlgebraicGeometry.AdicCompletion.DerivedCompletionSupplement
 import WeilConjectures.WeilObject.Sheaf.StalkUnit
 
+set_option linter.privateModule false
+
 /-! # Ordinary pullback and the actual completion augmentation
 
 Source: blueprint det-lem-int-tensor-pullback, first paragraph; Stacks 099M.
@@ -63,8 +65,6 @@ private def pointRegularIso
     (X : Scheme.{u}) :=
   (Functor.Monoidal.εIso (CondensedRing.upperStarFromPointMod Λ X)).symm
 
-set_option maxHeartbeats 800000 in
--- The unit comparison involves several module-functor wrappers.
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
@@ -88,12 +88,4 @@ private def levelIso {X Y : Scheme.{u}} (g : X ⟶ Y)
         (((pull l E g).mapHomologicalComplex (.up ℤ)).obj P) :=
   (Functor.mapHomologicalComplexCompIso (levelFunctorIso l E g n) (.up ℤ)).app P
 
-set_option maxHeartbeats 800000 in
--- Normalize the concrete quotient and complex wrappers in this compatibility proof.
-set_option maxHeartbeats 800000 in
--- Check unit coherence using the named comparison without unfolding its construction.
-set_option maxHeartbeats 800000 in
--- Convert the concrete complex wrappers to the degreewise monoidal unit calculation.
-set_option maxHeartbeats 800000 in
--- The concrete product and completion models require several definitional conversions.
 end AlgebraicGeometry.ProEtale.IntegralTensorPullback

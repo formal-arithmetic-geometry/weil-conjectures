@@ -41,8 +41,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.PreGaloisCategory Opposite Topology
 namespace AlgebraicGeometry.Scheme
 
-set_option genSizeOfSpec false in
-set_option genInjectivity false in
 variable {Y : Scheme.{u}}
   {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y)
   (G : Type u) [Group G] [TopologicalSpace G]
@@ -51,7 +49,6 @@ variable {Y : Scheme.{u}}
   (l : ℕ) [Fact l.Prime] [IsNoetherian Y] [Y.IsSeparated]
   [∀ x : Y, Invertible (l : Y.residueField x)]
   (E : Type (u + 1)) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
-omit [IsNoetherian Y] [Y.IsSeparated] in
 variable [ConnectedSpace Y] [IsTopologicalGroup G] [CompactSpace G]
   [IsFundamentalGroup (FiniteEtale.fiber y) G]
   (P : ProfiniteGrp.{u}) (δ : G ≃ₜ* P)

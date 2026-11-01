@@ -165,6 +165,4 @@ private theorem moduleMap_isIso_of_bijective
   have : IsIso ((SheafOfModules.forget A).map z) := ‹IsIso z.val›
   exact isIso_of_reflects_iso z (SheafOfModules.forget A)
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end AlgebraicGeometry.Scheme.ProEtaleOpenRestriction

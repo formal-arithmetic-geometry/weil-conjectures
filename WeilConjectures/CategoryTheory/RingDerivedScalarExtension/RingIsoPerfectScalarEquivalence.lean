@@ -12,6 +12,8 @@ import Mathlib.CategoryTheory.ObjectProperty.Equivalence
 import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
+set_option linter.privateModule false
+
 /-! # Perfect scalar transport along a ring isomorphism
 Source: HRS Proposition 4.3(3); Stacks Project Tag 06Y6.
 -/

@@ -270,7 +270,7 @@ private theorem supportJointZero {Z U X : Scheme.{u}}
     (hj : IsZero ((supportPullback Λ j).obj M)) : IsZero M := by
   have hAb := (Mod.forget _).map_isZero hj
   have hunit := supportUnitOfAbelian Λ i M
-    ((ProEtale.abelian_closed_support i j (by rw [hij, compl_compl])).2 M.X hAb)
+    ((ProEtale.abelian_closed_support_counit_and_unit i j (by rw [hij, compl_compl])).2 M.X hAb)
   exact ((lowerStar Λ i).map_isZero hi).of_iso
     (asIso ((supportPullbackAdjunction Λ i).unit.app M))
 
@@ -295,7 +295,7 @@ private theorem supportTriangle {Z U X : Scheme.{u}}
   have : PreservesColimitsOfSize.{u + 1, u + 1} (lowerStar Λ i) :=
     (closedSupportAdjunction Λ i j hij).leftAdjoint_preservesColimits
   have hc := supportCounitOfAbelian Λ i
-    (ProEtale.abelian_closed_support i j (by rw [hij, compl_compl])).1
+    (ProEtale.abelian_closed_support_counit_and_unit i j (by rw [hij, compl_compl])).1
   have ff := (supportPullbackAdjunction Λ i).fullyFaithfulROfIsIsoCounit
   have := ff.full
   have := ff.faithful
@@ -514,7 +514,7 @@ theorem formal_closed_support_adjunction
     let ec := (shiftFunctor (DerivedCategory (supportModules Λ X)) (1 : ℤ)).preimageIso
       (Triangle.π₃.mapIso e)
     have hc := supportCounitOfAbelian Λ i
-      (ProEtale.abelian_closed_support i j hij).1
+      (ProEtale.abelian_closed_support_counit_and_unit i j hij).1
     have ff := (supportPullbackAdjunction Λ i).fullyFaithfulROfIsIsoCounit
     have := ff.full
     have := ff.faithful

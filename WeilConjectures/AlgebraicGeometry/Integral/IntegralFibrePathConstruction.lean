@@ -44,12 +44,9 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
-set_option genSizeOfSpec false in
-set_option genInjectivity false in
 variable {Y : Scheme.{u}}
 
 attribute [local irreducible] GrothendieckTopology.Point.sheafFiber
   GrothendieckTopology.Point.presheafFiber pathUnderlyingStalk
 
-set_option backward.isDefEq.respectTransparency false in
 end AlgebraicGeometry.Scheme

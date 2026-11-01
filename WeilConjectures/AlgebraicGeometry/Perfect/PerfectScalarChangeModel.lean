@@ -110,7 +110,4 @@ private noncomputable def scalarAdjunction (X : Scheme.{u}) :
       Profinite.isTerminalPUnit).comp (pointUpperStarLowerStarAdjunction.comp
         (upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ X)))
 
-omit [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ'] [IsMonHom a] in
-set_option linter.unusedVariables false in
-set_option linter.unusedSectionVars false in
 end AlgebraicGeometry.ProEtale

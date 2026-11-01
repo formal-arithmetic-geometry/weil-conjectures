@@ -187,8 +187,7 @@ private noncomputable def smallAlgebraModel (ℓ : ℕ) [Fact ℓ.Prime]
 private theorem mem_spectral_integers (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] (x : E) :
     x ∈ Padic.coefficientExtensionIntegers ℓ E ↔ spectralNorm ℚ_[ℓ] E x ≤ 1 := by
-  exact (Padic.extension_integers_dvr ℓ E (Padic.coefficientExtensionAbsoluteValue ℓ E)
-    (spectralNorm_extends (K := ℚ_[ℓ]) (L := E))).choose_spec.choose_spec.1 x
+  exact (Padic.coefficientExtensionIntegers_dvr ℓ E).choose_spec.1 x
 
 /-- A coefficient equivalence preserves the canonical spectral norm. -/
 private theorem spectral_equiv_norm (ℓ : ℕ) [Fact ℓ.Prime]

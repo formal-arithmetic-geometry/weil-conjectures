@@ -9,6 +9,8 @@ public import Mathlib.CategoryTheory.Bicategory.Grothendieck
 public import Mathlib.CategoryTheory.Whiskering
 public import Mathlib.CategoryTheory.Category.Preorder
 
+set_option linter.privateModule false
+
 /-!
 # Normalization of coefficient comparisons
 

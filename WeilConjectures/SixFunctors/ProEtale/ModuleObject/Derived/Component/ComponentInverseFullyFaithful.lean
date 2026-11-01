@@ -13,6 +13,8 @@ import WeilConjectures.RingTheory.ProEtale.WeaklyEtaleIndEtale
 import Mathlib.CategoryTheory.Sites.LocallyBijective
 import Mathlib.CategoryTheory.Sites.Coherent.CoherentTopology
 
+set_option linter.privateModule false
+
 /-! # Full faithfulness of component inverse image on abelian sheaves
 Source: Hemo--Richarz--Scholbach, Proposition 4.3(1), equation (4.2).
 (blueprint: lem-zl-component-inverse-fully-faithful).

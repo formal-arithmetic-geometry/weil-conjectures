@@ -71,10 +71,4 @@ private noncomputable def scalarTensorIso
             simp only [e, TensorProduct.AlgebraTensorModule.distribBaseChange_symm_tmul,
               LinearMap.baseChange_tmul, Representation.tprod_apply, TensorProduct.map_tmul] }
 
-set_option maxHeartbeats 8000000 in
--- The construction witness has large dependent fibre types.
-set_option maxHeartbeats 8000000 in
--- The colimit witness contains dependent scalar-extension fibre objects.
-set_option maxHeartbeats 8000000 in
--- Coefficient models and their tensor objects carry large dependent category transports.
 end AlgebraicGeometry.Scheme

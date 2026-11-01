@@ -711,10 +711,8 @@ characterizes that restriction uniquely. -/
 theorem lisseIntegerInclusion_exists :
     ∃ f : Padic.coefficientExtensionIntegers l E →+*
       Padic.coefficientExtensionIntegers l L, ∀ x, (f x : L) = ι (x : E) := by
-  have hE := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec.1
-  have hL := (Padic.extension_integers_dvr l L (Padic.coefficientExtensionAbsoluteValue l L)
-    (spectralNorm_extends (K := ℚ_[l]) (L := L))).choose_spec.choose_spec.1
+  have hE := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec.1
+  have hL := (Padic.coefficientExtensionIntegers_dvr l L).choose_spec.1
   have hmap (a : E) : spectralNorm ℚ_[l] L (ι a) = spectralNorm ℚ_[l] E a := by
     unfold spectralNorm
     rw [minpoly.algHom_eq ι ι.injective]
@@ -747,10 +745,8 @@ theorem lisseRamificationIndex_exists :
     ∃ e : ℕ, 0 < e ∧
       Ideal.map (lisseIntegerInclusion l E L ι) (Padic.coefficientExtensionMaximalIdeal l E) =
         Padic.coefficientExtensionMaximalIdeal l L ^ e := by
-  have hE := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
-  have hL := (Padic.extension_integers_dvr l L (Padic.coefficientExtensionAbsoluteValue l L)
-    (spectralNorm_extends (K := ℚ_[l]) (L := L))).choose_spec.choose_spec
+  have hE := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
+  have hL := (Padic.coefficientExtensionIntegers_dvr l L).choose_spec
   rcases hE with ⟨_, hmE, _, _, _, _, _, _, _, hneE, _⟩
   rcases hL with ⟨_, hmL, _, _, hmaxL, _, _, hdvrL, _⟩
   have : IsDiscreteValuationRing (Padic.coefficientExtensionIntegers l L) := hdvrL
@@ -1420,8 +1416,7 @@ lemma lisseCoherence_uniformizerIdeal_eq (B : Type (u + 1)) [Field B]
     Ideal.span ({Padic.coefficientExtensionUniformizer l B} :
       Set (Padic.coefficientExtensionIntegers l B)) =
         Padic.coefficientExtensionMaximalIdeal l B :=
-  (Padic.extension_integers_dvr l B (Padic.coefficientExtensionAbsoluteValue l B)
-    (spectralNorm_extends (K := ℚ_[l]) (L := B))).choose_spec.choose_spec
+  (Padic.coefficientExtensionIntegers_dvr l B).choose_spec
       |>.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
 
 /-- The coefficient index and ideal identities used by tensor comparison.
@@ -2571,8 +2566,7 @@ theorem lisseCoherence_integerInclusion_comp
 
 private theorem maximalIdeal_pow_injective :
     Function.Injective (fun n : ℕ ↦ Padic.coefficientExtensionMaximalIdeal l E ^ n) := by
-  have h := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  have h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   rcases h with ⟨_, _, _, _, hm, _, _, hdvr, _, hne, _⟩
   have : IsDiscreteValuationRing (Padic.coefficientExtensionIntegers l E) := hdvr
   intro n m hnm

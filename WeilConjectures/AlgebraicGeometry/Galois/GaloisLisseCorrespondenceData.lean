@@ -733,6 +733,4 @@ attribute [local irreducible] galoisRationalSheavesAbelian
   galoisAlgebraicModelScalarExtension galoisIntegralScalarExtension
   galoisRationalScalarExtension
 
-set_option genSizeOfSpec false in
-set_option genInjectivity false in
 end AlgebraicGeometry.Scheme

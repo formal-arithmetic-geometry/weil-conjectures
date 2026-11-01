@@ -114,8 +114,7 @@ private lemma fiberMap_eq
     T.map f = eqToHom (hT F) ≫ ModuleCat.ofHom
       (rationalFiberMap l E Y y F G f) ≫ eqToHom (hT G).symm := by
   have : IsFractionRing (Padic.coefficientExtensionIntegers l E) E :=
-    (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-      (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec.2.2.2.2.2.2.1
+    (Padic.coefficientExtensionIntegers_dvr l E).choose_spec.2.2.2.2.2.2.1
   obtain ⟨a, m, n, hf, _⟩ := fractionCommonPure
     (R := Padic.coefficientExtensionIntegers l E) (B := E)
     (M := F.integral ⟶ G.integral) f 0

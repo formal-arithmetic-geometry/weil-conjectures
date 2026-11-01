@@ -282,8 +282,7 @@ theorem lisseRationalFiberComparison_naturality
         (lisseRationalScalarExtension l E Y L ι ⋙ U ⋙
           ModuleCat.extendScalars k).map f := by
   have : IsFractionRing (Padic.coefficientExtensionIntegers l E) E :=
-    (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-      (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec.2.2.2.2.2.2.1
+    (Padic.coefficientExtensionIntegers_dvr l E).choose_spec.2.2.2.2.2.2.1
   obtain ⟨a, g, rfl⟩ := fractionTensorPure (F.integral ⟶ G.integral) f
   have hQ := (lisseRationalScalarExtensionData l E Y L ι).map_tmul F G a g
   change (lisseRationalScalarExtension l E Y L ι).map

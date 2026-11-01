@@ -53,6 +53,8 @@ import Mathlib.Analysis.Normed.Module.FiniteDimension
 import Mathlib.Topology.MetricSpace.Ultra.TotallySeparated
 import WeilConjectures.Mathlib.CategoryTheory.Monoidal.NaturalTransformationOplax
 
+set_option linter.privateModule false
+
 /-! # Coefficient-normalized ordinary component edges
 
 Source: Hemo--Richarz--Scholbach, construction (4.1), pp. 8--9.
@@ -470,6 +472,4 @@ private theorem normalized_mate
     conjugateIsoEquiv_isoWhiskerLeft]
   simp [Adjunction.leftAdjointUniq]
 
-set_option maxHeartbeats 2000000 in
--- Coefficient-sheaf unification unfolds site restrictions; the cancellation is abstract.
 end AlgebraicGeometry.ProEtale.ComponentDerivedSquare

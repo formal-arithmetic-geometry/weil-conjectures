@@ -38,6 +38,4 @@ attribute [local irreducible] scalarSixChange scalarSixPull scalarSixTower
   Mod.derivedExtendMapDerivedCategoryAdjunction
   Mod.derivedExtendRestrictAdjunction Mod.extendScalars
 
-set_option maxHeartbeats 65000 in
--- Bound elaboration while keeping the localization construction folded.
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -95,7 +95,8 @@ private theorem unit_tensor_transport
 private theorem constant_cyclic_unit_isIso (X : Scheme.{u}) (N : ℕ)
     (M : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
     (hM : ∀ U (m : M.obj.obj U), N • m = 0) :
-    IsIso (MonObj.one (X := Sheaf.sheafifyRingPresheaf (Scheme.ProEt.topology X)
+    IsIso (MonObj.one (X := Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1}
+      (Scheme.ProEt.topology X)
       ((Functor.const X.ProEtᵒᵖ).obj (RingCat.of (ULift.{u + 1} (ZMod N))))) ▷ M) := by
   let J := Scheme.ProEt.topology X
   let A := (Functor.const X.ProEtᵒᵖ).obj (RingCat.of (ULift.{u + 1} (ZMod N))) ⋙
@@ -121,7 +122,7 @@ private theorem constant_cyclic_unit_isIso (X : Scheme.{u}) (N : ℕ)
   have : IsIso (MonObj.one (X := A) ▷ P) :=
     IsIso.of_isIso_comp_left (λ_ P).inv _
   have hF := monoidal_unit_tensor_isIso (presheafToSheaf J Ab.{u + 1}) A P
-  let R := Sheaf.sheafifyRingPresheaf J
+  let R := Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1} J
     ((Functor.const X.ProEtᵒᵖ).obj (RingCat.of (ULift.{u + 1} (ZMod N))))
   have : IsIso (MonObj.one (X := R) ▷ (presheafToSheaf J Ab.{u + 1}).obj P) := hF
   exact unit_tensor_transport R (M := (presheafToSheaf J Ab.{u + 1}).obj P)
@@ -145,7 +146,7 @@ private theorem bottom_quotient_equiv (l : ℕ) [Fact l.Prime] (n : ℕ) :
 
 private theorem bottom_coefficient_iso (l : ℕ) [Fact l.Prime]
     (X : Scheme.{u}) (n : ℕ) :
-    ∃ e : Sheaf.sheafifyRingPresheaf (Scheme.ProEt.topology X)
+    ∃ e : Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1} (Scheme.ProEt.topology X)
         ((Functor.const X.ProEtᵒᵖ).obj
           (RingCat.of (ULift.{u + 1} (ZMod (l ^ (n + 1)))))) ≅
       condensedRingObj (spEllPointRingObj l ⟨⊥, inferInstance⟩ n) X,

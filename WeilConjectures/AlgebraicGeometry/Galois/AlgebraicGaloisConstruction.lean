@@ -26,8 +26,4 @@ namespace AlgebraicGeometry.Scheme
 
 attribute [local irreducible] lisseRationalFiberFunctor
 
-set_option maxHeartbeats 1000000 in
--- Dependent normalized coefficient comparisons require a larger elaboration budget.
-set_option genSizeOfSpec false in
-set_option genInjectivity false in
 end AlgebraicGeometry.Scheme

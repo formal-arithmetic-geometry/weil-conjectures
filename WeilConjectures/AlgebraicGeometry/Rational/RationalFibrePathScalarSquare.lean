@@ -38,5 +38,4 @@ variable (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
 attribute [local irreducible] GrothendieckTopology.Point.sheafFiber
   GrothendieckTopology.Point.presheafFiber lisseRationalFiberFunctor
 
-set_option maxRecDepth 2000 in
 end AlgebraicGeometry.Scheme

@@ -1206,6 +1206,4 @@ private theorem rational_monoidal_from_tensor_unit
 
 end Rationalization
 
-set_option maxHeartbeats 8000000 in
--- The final theorem combines the independently checked comparison clauses.
 end AlgebraicGeometry.Scheme

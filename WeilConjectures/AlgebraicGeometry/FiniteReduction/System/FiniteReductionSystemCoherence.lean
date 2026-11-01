@@ -12,6 +12,8 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolutio
 import WeilConjectures.FromJoel.Algebra.Homology.LeftResolution.CochainComplex
 import WeilConjectures.SixFunctors.ProEtale.Comparison.Flat
 
+set_option linter.privateModule false
+
 /-! Compatibility of the normalized comparison with successive coefficient reduction. -/
 
 @[expose] public noncomputable section

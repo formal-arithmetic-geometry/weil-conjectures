@@ -160,7 +160,5 @@ theorem single_rightDerived_counit (a : L ⊣ R) (X : D) :
   simp only [Category.id_comp, Category.comp_id]
   rfl
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end Canonical
 end CategoryTheory.Adjunction

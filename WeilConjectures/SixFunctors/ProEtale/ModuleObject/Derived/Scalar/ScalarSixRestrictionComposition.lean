@@ -13,6 +13,8 @@ import WeilConjectures.CategoryTheory.ProEtaleCoefficients.EquivalenceAdjunction
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Scalar.ScalarSixImmersionIdentifiers
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherence
 
+set_option linter.privateModule false
+
 /-! # Binary normalization of the transported immersion compositor
 
 Source: blueprint latest, det-prop-scalar-six-pullback.proof.md, (1)--(2).
@@ -794,6 +796,4 @@ private theorem scalar_normalized
     (D.gamma a b ≪≫ eqToIso (congrArg E.derived h.symm))
     (scalarSixPullComp Λ g.left f.left) cp hn hq
 
-set_option maxHeartbeats 1600000 in
--- The comparison involves many nested functor constructions.
 end AlgebraicGeometry.ProEtale.CondensedRing

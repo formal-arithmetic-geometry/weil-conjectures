@@ -10,6 +10,8 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherenc
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CompConjugate
 
+set_option linter.privateModule false
+
 /-! Source: blueprint composition isomorphism and its canonicity and associativity. -/
 
 @[expose] public section

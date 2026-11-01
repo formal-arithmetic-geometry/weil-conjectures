@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.CondensedPullbackTensorComparison
 public import WeilConjectures.Topology.ProfiniteCondensedRing
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedClosedSupportAdjunction
 
 /-!
 # Open and closed formulas for internal derived Hom

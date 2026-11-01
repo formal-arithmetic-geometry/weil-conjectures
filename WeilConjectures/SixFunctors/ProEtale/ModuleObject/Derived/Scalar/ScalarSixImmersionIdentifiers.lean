@@ -9,6 +9,8 @@ public import WeilConjectures.SixFunctors.ScalarSixDefinitions
 import all WeilConjectures.AlgebraicGeometry.WeilSheaf.ProfiniteCoefficientInverseImageSupplement
 import all WeilConjectures.AlgebraicGeometry.InternalModuleOperations.InternalModuleOperationsTransportSupplement
 
+set_option linter.privateModule false
+
 /-! # Composition of the normalized coefficient identifications
 
 Source: blueprint latest, det-prop-scalar-six-pullback.proof.md, (1)--(2).

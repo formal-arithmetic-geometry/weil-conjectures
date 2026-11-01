@@ -498,10 +498,4 @@ private theorem derived_homology_comp (F : C ⥤ D) (G : D ⥤ E)
     rfl
   exact congr_app h K
 
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
 end DerivedCategory

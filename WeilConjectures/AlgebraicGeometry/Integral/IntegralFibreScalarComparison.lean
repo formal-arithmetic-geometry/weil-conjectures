@@ -47,8 +47,6 @@ variable (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
   (L : Type (u + 1)) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L)
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 end AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry.Scheme
@@ -56,5 +54,4 @@ namespace AlgebraicGeometry.Scheme
 attribute [local irreducible] GrothendieckTopology.Point.sheafFiber
   GrothendieckTopology.Point.presheafFiber pathUnderlyingStalk
 
-set_option backward.isDefEq.respectTransparency false in
 end AlgebraicGeometry.Scheme

@@ -67,8 +67,7 @@ theorem lisseIntegerInclusion_separability_tensor :
   have : FiniteDimensional E L := FiniteDimensional.right ℚ_[l] E L
   have : CharZero E := charZero_of_injective_algebraMap (algebraMap ℚ_[l] E).injective
   have : Algebra.IsSeparable E L := inferInstance
-  have hd := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  have hd := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   have : IsFractionRing R E := hd.2.2.2.2.2.2.1
   have : IsPrincipalIdealRing R := hd.2.2.2.2.2.2.2.2.1
   have : IsIntegralClosure S R L :=

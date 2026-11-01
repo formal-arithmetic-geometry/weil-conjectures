@@ -19,6 +19,8 @@ import WeilConjectures.Algebra.Homology.DerivedFreeModuleHomology
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Mathlib.CategoryTheory.Functor.OfSequence
 
+set_option linter.privateModule false
+
 /-!
 # Dualizable derived modules over an arbitrary commutative ring
 

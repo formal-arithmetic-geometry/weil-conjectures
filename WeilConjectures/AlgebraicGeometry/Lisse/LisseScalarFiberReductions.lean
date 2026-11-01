@@ -104,8 +104,7 @@ private lemma uniformizerIdeal_eq (B : Type (d + 1)) [Field B]
     Ideal.span ({Padic.coefficientExtensionUniformizer l B} :
       Set (Padic.coefficientExtensionIntegers l B)) =
         Padic.coefficientExtensionMaximalIdeal l B :=
-  (Padic.extension_integers_dvr l B (Padic.coefficientExtensionAbsoluteValue l B)
-    (spectralNorm_extends (K := ℚ_[l]) (L := B))).choose_spec.choose_spec
+  (Padic.coefficientExtensionIntegers_dvr l B).choose_spec
       |>.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
 
 private lemma scalarIndex_eq (n : ℕ) :

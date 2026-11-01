@@ -10,6 +10,8 @@ import all WeilConjectures.AlgebraicGeometry.ZetaWeil.ComponentLiftBaseChange
 import WeilConjectures.CategoryTheory.Monoidal.Conjugate
 import WeilConjectures.CategoryTheory.Sites.PushforwardMonoidal
 
+set_option linter.privateModule false
+
 /-! # Coefficient-normalized abelian component square
 
 Source: Hemo--Richarz--Scholbach, construction (4.1), pp. 8--9.
@@ -131,7 +133,6 @@ private lemma beta_pasting
 
 namespace AlgebraicGeometry.ProEtale.ComponentDerivedSquare
 
-attribute [instance] NormalizedAbelianSquare.monoidal
 
 private def testComparison {X Y : Scheme.{u}} [IsAffine X] [IsAffine Y]
     (f : Y ⟶ X) :

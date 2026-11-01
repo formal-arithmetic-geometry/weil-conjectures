@@ -388,7 +388,6 @@ Source: Stacks 07A4 (blueprint: lem-sfb-trace-base-change-first). -/
 def traceDegreeZeroUnitIso : F.leftDerivedFunctor.obj (𝟙_ _) ≅ 𝟙_ _ :=
   F.leftDerivedTensorUnitIso
 
-omit [F.PreservesFlat] in
 variable {E : Type u₃} [Category.{u + 1} E] [Abelian E] [IsGrothendieckAbelian.{u + 1} E]
   [MonoidalCategory E] [MonoidalPreadditive E] [MonoidalClosed E] [BraidedCategory E]
   [Abelian.HasFunctorialFlatResolution E]
@@ -834,7 +833,6 @@ private def traceDataSquare
       U₂.map (T.tensorF K M) ≫ T.tensorTwo (F.obj K) (F.obj M) ≫
         (s.hom.app K ⊗ₘ s.hom.app M)
 
-attribute [local irreducible] traceDataFormula
 
 section AbstractTrace
 variable {C D V : Type*} [Category C] [Category D] [Category V]
@@ -853,11 +851,8 @@ variable {C D V : Type*} [Category C] [Category D] [Category V]
       Functor.OplaxMonoidal.δ U₂ (F.obj K) (F.obj L) ≫
         (s.hom.app K ⊗ₘ s.hom.app L))
 
-include hs in
-set_option backward.isDefEq.respectTransparency false in
 end AbstractTrace
 
-attribute [local irreducible] TraceFirstFormula
 
 section DerivedTraceAssembly
 variable {C : Type u₁} [Category.{u + 1} C] [Abelian C]

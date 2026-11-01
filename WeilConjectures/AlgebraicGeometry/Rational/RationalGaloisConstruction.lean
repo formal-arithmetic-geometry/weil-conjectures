@@ -46,8 +46,6 @@ namespace AlgebraicGeometry.Scheme
 
 attribute [local irreducible] lisseRationalFiberFunctor
 
-set_option genSizeOfSpec false in
-set_option genInjectivity false in
 variable {Y : Scheme.{u}} [ConnectedSpace Y]
   {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y)
   (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G]
@@ -60,21 +58,4 @@ variable {Y : Scheme.{u}} [ConnectedSpace Y]
   (E : Type (u + 1)) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   (i : IntegralGaloisConstruction y G c P δ l E)
 
-set_option maxHeartbeats 1000000 in
--- Tensor induction compares the scalar-extended action and rationalized Hom map.
-open Padic in
-set_option maxHeartbeats 1000000 in
--- Resolve the coefficient and representation topology instances once for localization.
-set_option maxHeartbeats 1000000 in
--- The localization extensionality proof elaborates several scalar restrictions.
-set_option maxHeartbeats 1000000 in
--- Transport the fixed rational fibre map through both tensor comparisons.
-set_option maxHeartbeats 2000000 in
--- Clear denominators uniformly, then compare maps after localization.
-set_option maxHeartbeats 3000000 in
--- Transport a stable lattice through the integral equivalence and base change.
-set_option maxHeartbeats 2000000 in
--- Elaborate the rational Hom injection through the representation category.
-set_option maxHeartbeats 2000000 in
--- Assemble the equivalence with the chosen fibre functor and its normalization.
 end AlgebraicGeometry.Scheme

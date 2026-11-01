@@ -25,7 +25,6 @@ variable {E H : Type*} [Category E] [Category H]
   {F G : E ⥤ H} [mF : F.Monoidal] [mG : G.Monoidal] (e : F ≅ G)
   (hd : ∀ X Y, e.hom.app (X ⊗ Y) ≫ δ G X Y =
     δ F X Y ≫ (e.hom.app X ⊗ₘ e.hom.app Y))
-include hd in
 end TensorMonoidal
 end CategoryTheory
 namespace CategoryTheory

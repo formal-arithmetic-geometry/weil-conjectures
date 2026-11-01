@@ -33,8 +33,6 @@ open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
-open SheafOfModules in
-open SheafOfModules in
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   (T : Scheme.{u}) [IsAffine T] [IsWContractibleRing Γ(T, ⊤)]
   [(componentTests T).IsContinuous

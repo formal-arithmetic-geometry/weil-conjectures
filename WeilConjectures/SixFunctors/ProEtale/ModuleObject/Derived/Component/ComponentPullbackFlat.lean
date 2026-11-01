@@ -53,5 +53,4 @@ variable (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
   [PreservesFiniteColimits (componentInverse T)]
 
 -- Preserve the existing hypotheses although the general site theorem needs fewer of them.
-set_option linter.unusedSectionVars false in
 end AlgebraicGeometry.ProEtale.CondensedRing

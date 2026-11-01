@@ -8,6 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.ComponentDerivedSquare.ComponentDerivedSquareData
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
+set_option linter.privateModule false
+
 /-! # Localization preserves the ordinary component-square coherence equations -/
 
 @[expose] public noncomputable section

@@ -14,6 +14,8 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolutio
 import WeilConjectures.FromJoel.Algebra.Homology.LeftResolution.CochainComplex
 import WeilConjectures.SixFunctors.ProEtale.Comparison.Flat
 
+set_option linter.privateModule false
+
 /-! Construction of normalized coherent finite reduction systems. -/
 
 @[expose] public noncomputable section

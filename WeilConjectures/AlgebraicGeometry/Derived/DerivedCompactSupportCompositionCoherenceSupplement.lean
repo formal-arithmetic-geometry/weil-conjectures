@@ -13,6 +13,8 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Comp
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 import Mathlib.CategoryTheory.Adjunction.CompositionIso
 
+set_option linter.privateModule false
+
 /-!
 # Structural coherence for three proper images and three open extensions
 

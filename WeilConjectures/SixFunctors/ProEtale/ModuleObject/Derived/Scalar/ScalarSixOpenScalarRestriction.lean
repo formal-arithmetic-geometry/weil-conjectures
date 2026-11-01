@@ -249,6 +249,4 @@ private theorem openRestriction
   rw [restriction_localized]
   exact ht
 
-set_option maxHeartbeats 2000000 in
--- Bound the elaboration of the concrete scalar and open adjunctions.
 end AlgebraicGeometry.ProEtale.CondensedRing

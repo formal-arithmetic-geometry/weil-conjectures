@@ -164,5 +164,4 @@ theorem module_derived_compositor_coherence (ℓ : ℕ) [Fact ℓ.Prime]
     Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Iso.symm_hom, Category.comp_id]
   simpa only [Iso.inv_hom_id_app_assoc, Category.assoc] using hi
 
-set_option linter.unusedSectionVars false in
 end AlgebraicGeometry.ProEtale.CondensedRing

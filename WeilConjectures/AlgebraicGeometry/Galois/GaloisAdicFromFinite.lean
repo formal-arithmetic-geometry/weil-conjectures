@@ -76,10 +76,6 @@ private theorem integralEvaluation_from_construction
       (galoisUnderlyingFLC (Padic.coefficientExtensionIntegers l E.val)
         (F.obj.obj (op n)) h) (κ w)) (hproj z)
 
-set_option maxHeartbeats 8000000 in
--- The normalized stalk and tensor comparisons have large dependent module types.
-set_option maxHeartbeats 8000000 in
--- The normalized stalk and tensor comparisons have large dependent module types.
 end ConstructionConsequences
 
 end AlgebraicGeometry.Scheme
