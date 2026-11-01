@@ -252,6 +252,48 @@ def coefficientRationalTwistOne :
   (Mod.extendScalars (coefficientMap (twistIntegralToRational l E) X)).obj
     (coefficientIntegralTwistOne l E X)
 
+/-- Nonnegative powers of a coefficient line, with degree zero the coefficient unit.
+Source: signed twists display (blueprint: def-coefficient-twists-detailed). -/
+def coefficientTwistNat (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+    [MonObj R] [IsCommMonObj R]
+    (L : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) :
+    ℕ → Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R
+  | 0 => 𝟙_ _
+  | n + 1 => coefficientTwistNat R L n ⊗ L
+
+/-- Negative powers are the internal sheaf Hom of the positive power into the unit.
+Source: signed twists display (blueprint: def-coefficient-twists-detailed). -/
+def coefficientSignedTwist (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+    [MonObj R] [IsCommMonObj R]
+    (L : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) :
+    ℤ → Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R
+  | (n : ℕ) => coefficientTwistNat X R L n
+  | .negSucc n => (ihom (coefficientTwistNat X R L (n + 1))).obj (𝟙_ _)
+
+/-- K(m) is derived tensor with the signed line placed in degree zero.
+Source: final K(m) display (blueprint: def-coefficient-twists-detailed). -/
+def coefficientTwistFunctor (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+    [MonObj R] [IsCommMonObj R]
+    (L : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) (m : ℤ) :
+    DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) ⥤
+      DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) :=
+  tensorRight ((DerivedCategory.singleFunctor _ 0).obj (coefficientSignedTwist X R L m))
+
+/-- The finite twist functor on the unbounded finite-coefficient derived category.
+Source: final K(m) display (blueprint: def-coefficient-twists-detailed). -/
+abbrev coefficientFiniteTwistFunctor (n : ℕ) (m : ℤ) :=
+  coefficientTwistFunctor X _ (coefficientFiniteTwistOne l E X n) m
+
+/-- The integral twist functor on the unbounded continuous-coefficient derived category.
+Source: final K(m) display (blueprint: def-coefficient-twists-detailed). -/
+abbrev coefficientIntegralTwistFunctor (m : ℤ) :=
+  coefficientTwistFunctor X _ (coefficientIntegralTwistOne l E X) m
+
+/-- The rational twist functor on the unbounded continuous-coefficient derived category.
+Source: final K(m) display (blueprint: def-coefficient-twists-detailed). -/
+abbrev coefficientRationalTwistFunctor (m : ℤ) :=
+  coefficientTwistFunctor X _ (coefficientRationalTwistOne l E X) m
+
 end AlgebraicGeometry.ProEtale
 
 @[expose] public noncomputable section
