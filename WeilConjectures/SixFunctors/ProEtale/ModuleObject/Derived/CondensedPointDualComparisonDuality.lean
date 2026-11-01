@@ -41,6 +41,10 @@ public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CondensedPointDualComparisonScalarExact
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CondensedPointDualComparisonScalarLimits
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CondensedPointDualComparisonScalarColimits
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CondensedPointDualComparisonData
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CondensedPointDualityConstructibility
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CondensedPointDualityFiniteModel
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CondensedPointDualityReparametrization
 
 /-! # Duality for normalized point evaluation -/
 
@@ -75,6 +79,24 @@ theorem condensed_point_normalized_duality
       CondensedBoundaryEvaluationAssertion ℓ k I ∧
       CondensedBoundaryDualNaturalityAssertion ℓ k I ∧
       CondensedBoundaryReparametrizationAssertion ℓ k I := by
-  sorry
+  have hmodel := condensed_point_duality_finite_model ℓ k I hs
+  have hrepr := condensed_point_duality_reparametrization ℓ k I hs
+  refine ⟨?_, ?_, ?_, ?_, ?_⟩
+  · intro K hK
+    exact condensed_point_dual_constructible ℓ k I K hK
+  · intro t K hK
+    have := hmodel K hK t
+    unfold condensedBoundaryDualComparison
+    infer_instance
+  · intro t K _hK
+    unfold condensedBoundaryDualComparison
+    rw [← uncurry_eq, uncurry_natural_right, uncurry_eq,
+      Functor.LaxMonoidal.ihomComparison_ev, Category.assoc]
+  · intro t K L f _hK _hL
+    unfold condensedBoundaryDualComparison
+    rw [← Category.assoc, Functor.LaxMonoidal.map_pre_app_comp_ihomComparison_app,
+      Category.assoc, pre_comm_ihom_map, Category.assoc]
+  · intro e σ t
+    exact ⟨condensedBoundaryCanonicalReindexIso ℓ k I e σ t, hrepr e σ t⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing

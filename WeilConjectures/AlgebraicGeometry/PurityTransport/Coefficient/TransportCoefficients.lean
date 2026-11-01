@@ -13,6 +13,7 @@ public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubexte
 public import WeilConjectures.Mathlib.NumberTheory.Padics.RingHoms
 public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleRootsOfUnityInverseImageSupplement
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.MonoidalModule
+public import WeilConjectures.CategoryTheory.ProEtaleCoefficients.LocalizingAdmissibleCoefficients
 
 /-! # Concrete coefficients and the root-tower Tate line
 
@@ -158,5 +159,23 @@ def Coefficient.smoothSource (c : Coefficient ell) {X Y : Scheme.{u}}
   (CondensedRing.upperStar (c.obj ell) f).leftDerivedFunctor ⋙
     tensorRight (c.derivedLine ell X d)
 
+/-- Every existing purity coefficient is an admissible localizing coefficient.
+This certificate only supplies the empty coefficient change; its ring and topology
+are the existing Coefficient.obj, independently of the site universe.
+Source: concrete coefficient list and its admissibility certificate
+(blueprint: def-per-transport-concrete-coefficients). -/
+abbrev coefficientAdmissible (ell : ℕ) [Fact ell.Prime] (c : PurityTransport.Coefficient ell) :
+    IsLocalizingAdmissibleCoefficient ell (c.obj.{u} ell) := by
+  cases c with
+  | finite A fin n hA =>
+    let : TopologicalSpace A := ⊥
+    let : DiscreteTopology A := discreteTopology_bot A
+    exact Or.inl ⟨A, inferInstance, inferInstance, inferInstance, inferInstance,
+      fin, ⟨n + 1, fun x ↦ by simp only [nsmul_eq_mul, Nat.cast_pow, hA, zero_mul]⟩, ⟨Iso.refl _⟩⟩
+  | integers => exact Or.inr (Or.inl ⟨Iso.refl _⟩)
+  | rationals => exact Or.inr (Or.inr (Or.inl ⟨Iso.refl _⟩))
+  | integral E => exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inl ⟨E, ⟨Iso.refl _⟩⟩))))
+  | rational E => exact Or.inr (Or.inr (Or.inr (Or.inl ⟨E, ⟨Iso.refl _⟩⟩)))
+  | closure => exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr ⟨Iso.refl _⟩))))
 
 end AlgebraicGeometry.ProEtale.PurityTransport

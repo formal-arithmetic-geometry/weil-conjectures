@@ -57,6 +57,10 @@ import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Mathlib.Algebra.Module.Projective
 import Mathlib.CategoryTheory.Sites.LocallySurjective
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CondensedPointDualComparisonAssertions
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CondensedPointDualComparisonCanonical
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CondensedPointDualComparisonData
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CondensedPointDualComparisonDuality
 
 /-! # Condensed point evaluation and derived dual comparison
 
@@ -365,6 +369,12 @@ def CondensedBoundaryScalarExtensionPresentation : Prop :=
     C.functor ⋙ finiteConstantScalarExtension (Profinite.padicAlgClRingObj ℓ)
       (point k).left)
 
+/-- The exact clause of the canonical finite-boundary comparison.
+Source: blueprint Step 5 and its Frobenius paragraph
+(blueprint: lem-a1-condensed-point-dual-comparison). -/
+def CondensedBoundaryExactAssertion : Prop :=
+  ∀ t : I, (condensedBoundaryFiber ℓ k I t).IsTriangulated
+
 /-- The dual constructible clause of the canonical finite-boundary comparison.
 Source: blueprint Step 5 and its Frobenius paragraph
 (blueprint: lem-a1-condensed-point-dual-comparison). -/
@@ -491,5 +501,101 @@ def CondensedBoundaryReparametrizationAssertion
       CondensedBoundaryReindexSectionNormalization ℓ k I e σ t a ∧
       CondensedBoundaryReindexMonoidal ℓ k I e σ t a ∧
       CondensedBoundaryReindexDualNormalization ℓ k I e σ t a
+
+/-- The collected named clauses of the canonical finite-boundary comparison.
+Source: blueprint Step 5 and its Frobenius paragraph
+(blueprint: lem-a1-condensed-point-dual-comparison). -/
+structure CondensedBoundaryDualComparisonAssertions
+    [s : CondensedBoundaryEvaluationTensor ℓ k I] : Prop where
+  equivalence : CondensedBoundaryEquivalenceAssertion ℓ k I
+  scalar_extension_presentation : CondensedBoundaryScalarExtensionPresentation ℓ k
+  exact : CondensedBoundaryExactAssertion ℓ k I
+  dual_constructible : CondensedBoundaryDualConstructibleAssertion ℓ k I
+  comparison_isIso : CondensedBoundaryDualIsIsoAssertion ℓ k I
+  evaluation : CondensedBoundaryEvaluationAssertion ℓ k I
+  naturality : CondensedBoundaryDualNaturalityAssertion ℓ k I
+  reparametrization : CondensedBoundaryReparametrizationAssertion ℓ k I
+
+end AlgebraicGeometry.ProEtale.CondensedRing
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+/-- Condensed point evaluation is the exact finite-boundary equivalence, with its
+specified scalar-extension inverse and canonical, evaluation-preserving derived dual
+comparison, natural both in complexes and in reparametrizations of the geometric points.
+
+Source: blueprint lem-a1-local-boundary-duality.proof.md, Step 5 and the Frobenius paragraph
+(blueprint: lem-a1-condensed-point-dual-comparison).
+
+Proof, following the node's nine steps:
+1. The geometric-point/profinite-site identification and split covers make sections exact.
+   Singleton evaluation identifies the coefficient ring with Λ. Local lifting of sections
+   of epimorphisms of sheaves of sets also gives global lifting on this point.
+2. Pull a finite constant local model back along a section of one covering member. Over
+   Λ a finite presentation has a finite basis, so constructible modules on the point are
+   finite powers of the coefficient unit. Their morphisms are exactly scalar matrices.
+3. The copower tensor/sections adjunction has unit v ↦ 1 tensor v and counit
+   a tensor m ↦ a m. Scalar extension is exact because vector-space sequences split.
+   Its unit and counit are isomorphisms on finite-dimensional and constructible objects.
+4. Derive these exact functors termwise. The unit and counit induce the corresponding
+   maps on cohomology, so their restrictions to the stated full subcategories are inverse
+   isomorphisms. All morphisms remain ambient ordinary derived morphisms.
+5. Apply finite clopen module gluing to the component inclusions. Restriction and gluing
+   are exact and derive termwise. Constructibility is local on the cover, and finitely
+   many cohomological bounds have a common minimum and maximum. This includes I empty.
+6. Lift cohomology generators using projectivity of the finite free modules. The
+   projective-cohomology splitting lemma gives bounded zero-differential finite free
+   models on each component. Glue them, padding ranks so the global terms are retracts
+   of finite free modules. These models verify the canonical maps without defining them.
+7. The bounded-free ringed-site Hom model computes the sheaf dual. Restricting and taking
+   sections gives the ordinary finite free scalar dual complex, which computes scalar
+   derived Hom by the projective Hom evaluation model. The dual is again constructible.
+8. Section tensor has the displayed pure-tensor formula; its totalization has the
+   displayed summand formula. The finite free models are K-flat. Transpose the evaluated
+   sheaf evaluation using tensor--Hom adjunction. The signed ringed-site duality and
+   projective scalar Hom models identify the two evaluation formulas, including the
+   Koszul sign when the arguments are interchanged. This proves invertibility and the
+   evaluation square for the specified comparison.
+9. Precomposition is scalar matrix multiplication and commutes with sections and chain
+   homotopies, proving naturality and independence of the models. A field automorphism
+   reindexes the terminal point and fixes constant coefficient sections; a component
+   permutation reindexes the factors. The displayed pullback composition and section
+   formulas therefore give the final duality square, compatibly with composition.
+
+The proof dependencies, in this order, are
+`lem-weil-pbc-geometric-field-proetale-evaluation`,
+`lem-weil-pbc-site-sheaf-sets-epi-locally-surjective`,
+`sk-def-sfb-constructible`, `sk-prop-sfb-cartesian-coefficients`,
+`det-def-sfb-constructible-local-model`, `lem-weil-pbc-vector-space-projective`,
+`lem-weil-pbc-exact-functor-derived-factorization`,
+`lem-sp-exact-functor-preserves-homology`, `lem-weil-pbc-unbounded-derived-iso-cohomology`,
+`lem-pur-clopen-ringed-module-gluing`, `lem-sf-projective-cohomology-split-model`,
+`lem-weil-pbc-ringed-site-bounded-free-rhom-model`, `def-pur-sheaf-hom`,
+`lem-pod-projective-hom-evaluation-model`, `def-pc-tensor-complex-sheaves`,
+`def-pc-kflat-complex`, `def-weil-derived-pullback-tensor-hom`, and
+`lem-sfb-ringed-site-duality-maps`. -/
+theorem condensed_point_dual_comparison
+    [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] :
+    PreservesFiniteLimits (pointSections ℓ k) ∧
+    PreservesFiniteColimits (pointSections ℓ k) ∧
+    Exists fun [s : CondensedBoundaryEvaluationTensor ℓ k I] ↦
+      IsCanonicalCondensedBoundaryEvaluationTensor ℓ k I ∧
+      CondensedBoundaryDualComparisonAssertions ℓ k I := by
+  refine ⟨inferInstance, inferInstance, ?_⟩
+  obtain ⟨s, hs⟩ := condensed_point_canonical_tensor ℓ k I
+  obtain ⟨he, hp⟩ := condensed_point_component_equivalence ℓ k I
+  obtain ⟨hc, hi, hv, hn, hr⟩ := condensed_point_normalized_duality ℓ k I hs
+  refine ⟨s, hs, ?_⟩
+  exact
+    { equivalence := he
+      scalar_extension_presentation := hp
+      exact := fun t ↦ by
+        dsimp [condensedBoundaryFiber]
+        infer_instance
+      dual_constructible := hc
+      comparison_isIso := hi
+      evaluation := hv
+      naturality := hn
+      reparametrization := hr }
 
 end AlgebraicGeometry.ProEtale.CondensedRing

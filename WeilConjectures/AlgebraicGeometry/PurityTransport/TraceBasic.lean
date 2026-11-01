@@ -149,14 +149,12 @@ def traceOpenToStar (c : Coefficient ell) {X Y : Scheme.{u}} (j : X ⟶ Y)
 /-- The canonical compact-support/direct-image map for the displayed compactification.
 It is constructed from the open-extension map and the direct-image compositor;
 it does not use the smooth adjunction or its trace.
-Source: the proper coincidence in clause (3) (blueprint: det-sp-trace-basic). -/
+Source: the proper coincidence in clause (3) (blueprint: new-det-sp-trace-basic-definitions). -/
 def traceShriekToStar (c : Coefficient ell) {X Y : Scheme.{u}} {f : X ⟶ Y}
     (cf : Compactification f) (K : c.derived ell X) :
     (CondensedRing.rightDerivedLowerShriekOfCompactification (c.obj.{u} ell) cf).obj K ⟶
       (actualPush (c.obj.{u} ell) f).obj K :=
-  (actualPush (c.obj.{u} ell) cf.g).map (traceOpenToStar ell c cf.i K) ≫
-    (lowerComp (c.obj.{u} ell) cf.i cf.g).inv.app K ≫
-    (eqToIso (congrArg (actualPush (c.obj.{u} ell)) cf.comm.symm)).hom.app K
+  (traceShriekToStarNat ell c cf).app K
 
 /-- Derive the sheaf-level finite-etale sum. Exact finite direct image and exact
 inverse image identify its source with `Rf_* Lf^* K`. The map `b.counit` is
