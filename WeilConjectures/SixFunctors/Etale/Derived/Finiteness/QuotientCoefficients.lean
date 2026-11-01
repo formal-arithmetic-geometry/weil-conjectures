@@ -8,7 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.DerivedCategory.ConstructibleTorsion
 public import WeilConjectures.CategoryTheory.DerivedCategory.Rationalization
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImage
-public import WeilConjectures.SixFunctors.Etale.Derived.RestrictScalarsLowerStar
+public import WeilConjectures.SixFunctors.Etale.Derived.RestrictScalarsLowerStarSingle
 
 /-!
 # Finiteness of direct images for complexes killed by an ideal of finite index
@@ -48,35 +48,6 @@ namespace AlgebraicGeometry
 open Scheme
 
 namespace Etale
-
-section RestrictScalars
-
-variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] (φ : Λ →+* Λ') {X Y : Scheme.{u}}
-  (f : X ⟶ Y)
-
-/-- Restriction of scalars along `φ : Λ →+* Λ'` commutes with the derived direct image of a sheaf
-placed in degree `0`: `Res (Rf_* M) ≅ Rf_* (Res M)`. This is the bounded below comparison
-`AlgebraicGeometry.Etale.rightDerivedLowerStarRestrictScalars`, transported to the unbounded
-derived categories. -/
-noncomputable def restrictScalarsRightDerivedLowerStarSingleIso
-    (M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ')) :
-    (Sheaf.restrictScalars Y.smallEtaleTopology φ).mapDerivedCategory.obj
-        ((R((f)_*[ModuleCat.{u + 1} Λ'])).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj M)) ≅
-      (R((f)_*[ModuleCat.{u + 1} Λ])).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj
-        ((Sheaf.restrictScalars X.smallEtaleTopology φ).obj M)) :=
-  (Sheaf.restrictScalars Y.smallEtaleTopology φ).mapDerivedCategory.mapIso
-      ((((f)_*[ModuleCat.{u + 1} Λ']).rightDerivedFunctorPlusCompatibility.app
-        ((_root_.DerivedCategory.Plus.singleFunctor _ 0).obj M)).symm) ≪≫
-    ((Sheaf.restrictScalars Y.smallEtaleTopology φ).mapDerivedCategoryPlusCompatibility.app
-      _).symm ≪≫
-    _root_.DerivedCategory.Plus.ι.mapIso
-      (asIso ((rightDerivedLowerStarRestrictScalars φ f).app _) ≪≫
-        ((f)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlus.mapIso
-          (((Sheaf.restrictScalars X.smallEtaleTopology φ).mapDerivedCategoryPlusSingleFunctor
-            0).app M)) ≪≫
-    ((f)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusCompatibility.app _
-
-end RestrictScalars
 
 variable {Λ : Type (u + 1)} [CommRing Λ] (J : Ideal Λ) {X Y : Scheme.{u}}
 

@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.SourceExchangeKunneth
+public import WeilConjectures.TraceFormula.ProperPushforwardKernel
 
 /-!
 

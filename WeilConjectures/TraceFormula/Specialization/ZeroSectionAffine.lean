@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.PolynomialAffineNoether
 public import WeilConjectures.TraceFormula.Specialization.DefectBoundedConstructible
 public import WeilConjectures.TraceFormula.Specialization.DefectGenericDivisor
 public import WeilConjectures.TraceFormula.Specialization.FiniteSupportConservative
+public import WeilConjectures.TraceFormula.Specialization.DefectLocal
 
 /-!
 

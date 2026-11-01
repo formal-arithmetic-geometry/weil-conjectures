@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 public import WeilConjectures.AlgebraicGeometry.Modules.HomTensor.Basic
 public import WeilConjectures.AlgebraicGeometry.Modules.HomTensor.Free
 public import WeilConjectures.AlgebraicGeometry.Modules.HomTensor.LocallyFree

@@ -9,6 +9,7 @@ public import WeilConjectures.TraceFormula.KunnethVerdierUnit
 public import WeilConjectures.TraceFormula.ExceptionalKunnethRestriction
 public import WeilConjectures.TraceFormula.KunnethVerdierClosed
 public import WeilConjectures.TraceFormula.PurityCompatibility
+public import WeilConjectures.TraceFormula.KunnethVerdierOpen
 
 /-!
 # The Künneth–Verdier theorem for `ℚ̄_ℓ`-coefficients

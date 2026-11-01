@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerChernClass
+public import WeilConjectures.EtaleCohomology.TateTwist.KummerClass.TwistPullback
 
 /-!
 # The comparison `Extᵠ(Λ ⊗ ℤ, -) ≅ Hᵠ` and pullback

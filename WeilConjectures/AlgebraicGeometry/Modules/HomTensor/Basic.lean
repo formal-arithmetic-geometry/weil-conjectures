@@ -5,7 +5,10 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Modules.Dual
+public import WeilConjectures.AlgebraicGeometry.Modules.DualDefs
+public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+public import WeilConjectures.AlgebraicGeometry.PicardFunctor
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.LocallySurjective
 public import WeilConjectures.AlgebraicGeometry.Modules.HomTensor.Presheaf
 
 /-!

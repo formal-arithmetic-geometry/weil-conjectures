@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorGeneric
-public import WeilConjectures.TraceFormula.Specialization.DefectLocal
+public import WeilConjectures.TraceFormula.Specialization.DefectExchanges
 
 /-!
 

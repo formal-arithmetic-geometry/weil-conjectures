@@ -24,13 +24,15 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 public import Mathlib.RingTheory.Flat.Stability
 public import WeilConjectures.AlgebraicGeometry.AffineSheafResolutionOfRingModelExtension
-public import WeilConjectures.AlgebraicGeometry.NoetherianProperBoundedCoherentImage
+public import WeilConjectures.AlgebraicGeometry.ProperFiniteSectionsAffine
 public import WeilConjectures.AlgebraicGeometry.ProperFlatCohomologyData
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackFinitePresentation
 public import WeilConjectures.AlgebraicGeometry.ProperCohomologyFiniteFreeResolution
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
 public import WeilConjectures.AlgebraicGeometry.ProperFlatSingleNoetherianDescent
+public import WeilConjectures.AlgebraicGeometry.Coherent
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 
 /-! # Descent-first bounded flat Čech models
 

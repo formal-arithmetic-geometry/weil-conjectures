@@ -5,7 +5,8 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerClassGenerator
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerCoefficients
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerAffineLine
 
 /-!
 # Kummer classes with coefficients and the classical Kummer boundary

@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageTorAmplitude
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.QuotientCoefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImageAmplitudeTorsion
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.TorAmplitudeFiniteConstant
 

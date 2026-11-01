@@ -6,7 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.ExceptionalKunnethFunctoriality
-public import WeilConjectures.TraceFormula.KunnethVerdierOpen
+public import WeilConjectures.TraceFormula.KunnethVerdierRestriction
+public import WeilConjectures.TraceFormula.OpenPieceCoherence
 public import WeilConjectures.PoincareDuality.ProjectionFormulaOpenImmersion
 
 /-!

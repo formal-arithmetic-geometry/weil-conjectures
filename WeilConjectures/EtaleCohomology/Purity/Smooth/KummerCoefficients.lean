@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.EtaleCohomology.TateTwist.KummerClass
+public import WeilConjectures.EtaleCohomology.TateTwist.KummerClass.Basic
 
 /-!
 # Kummer classes with coefficients

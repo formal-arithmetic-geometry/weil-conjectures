@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Bidual
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+public import WeilConjectures.AlgebraicGeometry.Modules.DualDefs
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomFree
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
@@ -64,26 +64,6 @@ open CategoryTheory MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
 
 variable {X : Scheme.{u}}
-
-/-- The internal hom `Hom(M, N)` of sheaves of modules on a scheme, the sheaf of modules
-`U ↦ Hom_{𝒪_U}(M|_U, N|_U)`. -/
-noncomputable abbrev homObj (M N : X.Modules) : X.Modules :=
-  SheafOfModules.homObj (R := X.sheaf) M N
-
-/-- The dual `M^∨ = Hom(M, 𝒪_X)` of a sheaf of modules on a scheme. -/
-noncomputable abbrev dual (M : X.Modules) : X.Modules :=
-  homObj M (SheafOfModules.unit _)
-
-@[inherit_doc] scoped postfix:max "ᵛ" => AlgebraicGeometry.Scheme.Modules.dual
-
-/-- The transpose `Nᵛ ⟶ Mᵛ` of a morphism `f : M ⟶ N` of sheaves of modules on a scheme. -/
-noncomputable abbrev dualMap {M N : X.Modules} (f : M ⟶ N) : Nᵛ ⟶ Mᵛ :=
-  SheafOfModules.homObjMap (R := X.sheaf) f (𝟙 _)
-
-variable (X) in
-/-- The dual `M ↦ Mᵛ` as a contravariant functor on sheaves of modules on a scheme. -/
-noncomputable abbrev dualFunctor : X.Modulesᵒᵖ ⥤ X.Modules :=
-  (SheafOfModules.homFunctor X.sheaf).flip.obj (SheafOfModules.unit _)
 
 /-- `𝒪_X`-modules form a monoidal closed category, with internal hom `homObj`. -/
 noncomputable instance : MonoidalClosed X.Modules :=

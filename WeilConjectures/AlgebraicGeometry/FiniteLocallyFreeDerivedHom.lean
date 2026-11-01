@@ -9,6 +9,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import WeilConjectures.Algebra.Homology.DerivedInternalHom
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 import WeilConjectures.AlgebraicGeometry.ExtEvaluation
 import WeilConjectures.AlgebraicGeometry.Modules.FiniteLocallyFreeTensorExact
 import WeilConjectures.AlgebraicGeometry.HomComplexSingle

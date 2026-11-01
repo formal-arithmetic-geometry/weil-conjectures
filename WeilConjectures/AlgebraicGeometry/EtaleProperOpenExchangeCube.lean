@@ -7,7 +7,8 @@ module
 public import WeilConjectures.Algebra.Homology.ChangeOfRingsTensorAcyclic
 public import WeilConjectures.Algebra.Homology.KFlatResolution
 public import WeilConjectures.Algebra.Homology.KFlatTensorConeTwoOutOfThree
-public import WeilConjectures.AlgebraicGeometry.CompactificationProjectionComposition
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
+public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 public import WeilConjectures.AlgebraicGeometry.ExactUnboundedExchange
 public import WeilConjectures.CategoryTheory.Adjunction.FiniteProductRingFunctor
@@ -17,6 +18,8 @@ public import WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresRingCore
 public import WeilConjectures.CategoryTheory.Sites.WeakSheafifyAddCommGrpLeftExact
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjectionBaseChange
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
 import WeilConjectures.AlgebraicGeometry.EtaleProperOpenCartesianNormalization
 import WeilConjectures.AlgebraicGeometry.EtaleProperOpenCubeNormalization
 import all WeilConjectures.AlgebraicGeometry.UnboundedProperOpenComposition

@@ -9,7 +9,6 @@ public import WeilConjectures.CategoryTheory.Monoidal.Closed.DualFullyFaithful
 public import WeilConjectures.PoincareDuality.Biduality.EtaleReadingHom
 public import WeilConjectures.PoincareDuality.Biduality.EtaleReductionDualizing
 public import WeilConjectures.PoincareDuality.Biduality.Reduction
-public import WeilConjectures.SixFunctors.Etale.Derived.VerdierBiduality
 
 /-!
 # Finite-coefficient biduality on the pro-étale site from the étale site

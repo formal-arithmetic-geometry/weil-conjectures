@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.TraceFormula.SourceExchangeClass
 public import WeilConjectures.TraceFormula.SourceExchangeKernel
+public import WeilConjectures.TraceFormula.SourceExchangeTest
 
 /-!
 
