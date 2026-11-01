@@ -368,9 +368,4 @@ def SfCbcExpression.a (hunit : SfCbcReducedUnitsInvertible d)
   whiskerLeft (E.complete d) ((sfCbcSite T).unit _ (sfCbcModelIdeal d)) ≫
     whiskerRight (E.q d hunit) ((sfCbcSite T).rlim _)
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
 end AlgebraicGeometry.Scheme

@@ -271,12 +271,6 @@ variable {C D : Type u} [SmallCategory C] [SmallCategory D]
     {T : C} {S : D} (hT : IsTerminal T) (hS : IsTerminal S)
     (b : GlobalPullback d hT hS)
 
-omit [HasDerivedCategory.{w} (Modules K Λ)]
-  [HasDerivedCategory.{w} (Sheaf J AddCommGrpCat.{u})]
-  [HasDerivedCategory.{w} (ModuleCat.{u} Λ)] [HasDerivedCategory.{w} AddCommGrpCat.{u}]
-  [EnoughInjectives (Modules J Λ)] [EnoughInjectives (Modules K Λ)]
-  [EnoughInjectives (Sheaf J AddCommGrpCat.{u})]
-  [EnoughInjectives (Sheaf K AddCommGrpCat.{u})] in
 end Derived
 
 end CategoryTheory

@@ -27,5 +27,4 @@ namespace SheafOfModules
 variable {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
   {R : Sheaf J RingCat.{u}} (M N : SheafOfModules.{u} R)
 
-set_option backward.isDefEq.respectTransparency false in
 end SheafOfModules

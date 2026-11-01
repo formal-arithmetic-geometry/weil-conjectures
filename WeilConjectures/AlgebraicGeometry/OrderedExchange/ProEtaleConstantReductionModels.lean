@@ -570,7 +570,6 @@ def canonicalModelAugmentation
       Functor.whiskerRight (NatTrans.mapHomotopyCategory τ (.up ℤ)) DerivedCategory.Qh)
 
 set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 private theorem modelAugmentation_existsUnique
     {B : Type*} [Category B] [Abelian B] [HasDerivedCategory B]
     {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
@@ -645,7 +644,6 @@ def augmentation (T : Scheme.{t}) : diagonal (A := A) T ⟶ reduction d T :=
   canonicalModelAugmentation (Functor.const ℕᵒᵖ) (reductionModule d T)
     (reductionData d T) (ordinaryAugmentation d T)
 
-set_option backward.isDefEq.respectTransparency false in
 /-- The canonical quotient completion unit, from the diagonal/limit adjunction.
 Source: Stacks 099M (blueprint: lem-sp-completion-mate-comparison). -/
 def unit (T : Scheme.{t}) : 𝟭 (D (A := A) T) ⟶ completion d T :=

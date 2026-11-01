@@ -626,20 +626,10 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
   (B : Sheaf J CommRingCat.{r})
   (t : (B.obj ⋙ CategoryTheory.forget CommRingCat.{r}).sections)
 
-omit [EssentiallySmall.{r} C]
-  [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
-  [J.WEqualsLocallyBijective AddCommGrpCat.{r}] [HasSheafify J AddCommGrpCat.{r}]
-  [HasSheafify J CommRingCat.{r}] in
-omit [EssentiallySmall.{r} C]
-  [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
-  [J.WEqualsLocallyBijective AddCommGrpCat.{r}] [HasSheafify J AddCommGrpCat.{r}] in
 private instance quotientLocallyBijectiveCommRing :
     J.WEqualsLocallyBijective CommRingCat.{r} := by
   let : PreservesFilteredColimitsOfSize.{r, r}
       (CategoryTheory.forget CommRingCat.{r}) := preservesFilteredColimitsOfSize_shrink _
   exact GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall J
 
-omit [EssentiallySmall.{r} C]
-  [J.WEqualsLocallyBijective AddCommGrpCat.{r}] [HasSheafify J AddCommGrpCat.{r}]
-  [HasSheafify J CommRingCat.{r}] in
 end SheafOfModules

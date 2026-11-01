@@ -43,8 +43,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace CategoryTheory.UnboundedExactTower
 
-attribute [instance] ExactMorphism.additive ExactMorphism.finiteLimits
-  ExactMorphism.finiteColimits
 
 /-- The existing Grothendieck-category K-injective resolution construction for module
 sheaves. Source: Stacks 079P, 07A5
@@ -438,6 +436,43 @@ theorem localized_mate_cochain_normalization (a : F ⊣ G) (a' : F' ⊣ G')
         cochainUnit G' ((h.mapHomologicalComplex (.up ℤ)).obj I) := by
   exact localized_mate_cochain a a' θ I
 
+/-- Equality of the actual ordinary and tower square mates after constants and evaluation.
+Neither equality requires the mate to be invertible or derived evaluation to be faithful.
+Source: Stacks 07A7 and the explicit counit-transpose calculation
+(blueprint: lem-sbc-unbounded-exact-adjunction-square). -/
+def SquareCompatible (a : F ⊣ G) (a' : F' ⊣ G') (θ : g ⋙ F' ≅ F ⋙ h) : Prop :=
+  (∀ K : DerivedCategory A,
+    (constantInterchange g).inv.app (G.rightDerivedFunctor.obj K) ≫
+      ((Functor.whiskeringRight ℕᵒᵖ B B').obj g).mapDerivedCategory.map
+        ((constantComparison a).app K) ≫
+      (mateEquiv (a.whiskerRight ℕᵒᵖ).mapDerivedCategoryRightDerivedAdjunction
+        (a'.whiskerRight ℕᵒᵖ).mapDerivedCategoryRightDerivedAdjunction
+        (TwoSquare.mk _ _ _ _ (localizedSquare _ _ _ _ (towerSquare F F' g h θ)).hom)).app
+          ((Functor.const ℕᵒᵖ : A ⥤ _).mapDerivedCategory.obj K) =
+    (Functor.const ℕᵒᵖ : B' ⥤ _).mapDerivedCategory.map
+        ((mateEquiv a.mapDerivedCategoryRightDerivedAdjunction
+          a'.mapDerivedCategoryRightDerivedAdjunction
+          (TwoSquare.mk _ _ _ _ (localizedSquare F F' g h θ).hom)).app K) ≫
+      (constantComparison a').app (h.mapDerivedCategory.obj K) ≫
+      ((Functor.whiskeringRight ℕᵒᵖ A' B').obj G').rightDerivedFunctor.map
+        ((constantInterchange h).inv.app K)) ∧
+  (∀ (n : ℕᵒᵖ) (K : DerivedCategory (ℕᵒᵖ ⥤ A)),
+    ((evaluation ℕᵒᵖ B').obj n).mapDerivedCategory.map
+        ((mateEquiv (a.whiskerRight ℕᵒᵖ).mapDerivedCategoryRightDerivedAdjunction
+          (a'.whiskerRight ℕᵒᵖ).mapDerivedCategoryRightDerivedAdjunction
+          (TwoSquare.mk _ _ _ _
+            (localizedSquare _ _ _ _ (towerSquare F F' g h θ)).hom)).app K) ≫
+      (evaluationComparison a' n).app
+        (((Functor.whiskeringRight ℕᵒᵖ A A').obj h).mapDerivedCategory.obj K) ≫
+      G'.rightDerivedFunctor.map ((towerDerivedEvaluationInterchange h n).hom.app K) =
+    (towerDerivedEvaluationInterchange g n).hom.app
+        (((Functor.whiskeringRight ℕᵒᵖ A B).obj G).rightDerivedFunctor.obj K) ≫
+      g.mapDerivedCategory.map ((evaluationComparison a n).app K) ≫
+      (mateEquiv a.mapDerivedCategoryRightDerivedAdjunction
+        a'.mapDerivedCategoryRightDerivedAdjunction
+        (TwoSquare.mk _ _ _ _ (localizedSquare F F' g h θ).hom)).app
+          (((evaluation ℕᵒᵖ A).obj n).mapDerivedCategory.obj K))
+
 end Square
 
 section ComparisonProofs
@@ -578,8 +613,6 @@ variable {A : Type uA} {B : Type uB} {A' : Type uA'} {B' : Type uB'}
   [PreservesFiniteLimits g] [PreservesFiniteColimits g]
   [PreservesFiniteLimits h] [PreservesFiniteColimits h]
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end EvaluationCube
 
 end CategoryTheory.UnboundedExactTower

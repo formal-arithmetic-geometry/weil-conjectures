@@ -180,8 +180,6 @@ private theorem augment_coordinates (X : CochainComplex (ℕᵒᵖ ⥤ D) ℤ)
 
 attribute [local irreducible] augment in
 attribute [local irreducible] strictRoosComplex strictRoosCoordinates in
-omit [HasCountableProducts D] in
-omit [HasCountableProducts D] in
 private theorem square_comp {X Y Z W : CochainComplex (ℕᵒᵖ ⥤ D) ℤ}
     (hZW : Z = W)
     (a b : strictRoosProduct X ⟶ strictRoosProduct Y)
@@ -337,7 +335,6 @@ variable {E : Type u} {H : Type v} [Category.{vA} E] [Category.{vB} H]
     [Abelian E] [Abelian H] [HasCountableProducts E] [HasCountableProducts H]
     (F : E ⥤ H) [F.Additive]
 
-omit [HasCountableProducts H] in
 end ScalarAugmentation
 
 set_option backward.isDefEq.respectTransparency false in
@@ -345,5 +342,4 @@ set_option backward.isDefEq.respectTransparency false in
 attribute [local irreducible] compactRoosScalarFunctor
   SheafOfModules.changeOfRingsOfUniverses SheafOfModules.changeOfRingsHomOfUniverses
 
-set_option backward.isDefEq.respectTransparency false in
 end CategoryTheory

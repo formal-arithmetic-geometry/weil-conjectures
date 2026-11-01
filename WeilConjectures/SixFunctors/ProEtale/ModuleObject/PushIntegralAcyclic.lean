@@ -7,6 +7,14 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.Adic.RightDerivedLowerStarFilteredColimit
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushIntegralFlat
+public import Mathlib.CategoryTheory.Monoidal.Linear
+public import WeilConjectures.CategoryTheory.ModuleObjects.Abelian
+public import WeilConjectures.CategoryTheory.ModuleObjects.Linear
+public import WeilConjectures.CategoryTheory.ModuleObjects.RegularEnd
+public import WeilConjectures.CategoryTheory.ModuleObjects.Symmetric
+public import WeilConjectures.FourierTransform.ArtinSchreier
+public import WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.MonoidalModule
 
 /-!
 # `E ⊗_{𝒪_E}` of injective `𝒪_E`-modules is `f_*`-acyclic
@@ -35,16 +43,12 @@ open Scheme
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) (X : Scheme.{u})
 
-/-- The inverse image `p_X^*` is additive, being a left adjoint. -/
-instance additive_upperStarFromPoint : (upperStarFromPoint X).Additive :=
-  have adj : upperStarFromPoint X ⊣ _ := pointUpperStarLowerStarAdjunction.comp
-    (ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ X))
-  have : (upperStarFromPoint X).IsLeftAdjoint := adj.isLeftAdjoint
-  have := Functor.preservesZeroMorphisms_of_isLeftAdjoint (upperStarFromPoint X)
-  have : PreservesColimitsOfSize.{0, 0} (upperStarFromPoint X) :=
-    adj.leftAdjoint_preservesColimits
-  have := preservesBinaryBiproducts_of_preservesBinaryCoproducts (upperStarFromPoint X)
-  Functor.additive_of_preservesBinaryBiproducts (upperStarFromPoint X)
+/-- Pullback from the coefficient point is additive, since it is the composite of two
+left adjoints between abelian sheaf categories.
+Source: inverse image of abelian sheaves (blueprint: lem-kernel-condensed-projector-scalars). -/
+instance additive_upperStarFromPoint (X : Scheme.{u}) : (upperStarFromPoint X).Additive := by
+  unfold upperStarFromPoint
+  infer_instance
 
 /-- The map `p_X^*(ℓ⁻ᵏ φ) : 𝒪_{E,X} ⟶ E_X`. -/
 noncomputable abbrev padicIntegersToPadicSubfieldInvPow (k : ℕ) :

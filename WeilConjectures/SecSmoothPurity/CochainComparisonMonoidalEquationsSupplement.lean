@@ -85,8 +85,6 @@ private theorem comparison_ι (f : RingedPullback R S) (k : Comparison f)
     HomologicalComplex.ι_mapBifunctorDesc, Iso.hom_inv_id_assoc]
   exact Category.comp_id _
 
-set_option maxHeartbeats 100000 in
 -- Work only with the normalized total comparison, before introducing lifted instances.
-set_option maxHeartbeats 160000 in
 -- Assemble the ordinary structure and identify its total comparison.
 end CategoryTheory.CochainPullback

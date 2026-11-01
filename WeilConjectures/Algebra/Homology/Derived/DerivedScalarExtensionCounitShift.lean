@@ -111,6 +111,8 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 
 namespace SheafOfModules
 
+set_option synthInstance.maxHeartbeats 200000 in
+-- `PreservesLimit` for the right-extension equivalence `Ψ` is found through `IsEquivalence`.
 /-- The derived scalar-extension counit determines a unique natural shift comparison,
 and this comparison makes derived scalar extension triangulated.
 Source: Stacks Project, derived.tex, Tags 05SU(2), 05SE (LF part), and

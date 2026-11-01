@@ -296,6 +296,15 @@ def IsNormalized
         DerivedCategory.Q.mapIso (CochainComplex.Monoidal.braiding E.obj F.obj) ≪≫
         representative R F E)
 
+private theorem flat_of_isZero (P : Modules R) (hP : IsZero P) :
+    SheafOfModules.IsFlatOnSite (J := J) (R := R) P := by
+  let := SheafOfModules.isMonoidal_W_independentCoefficients R
+  let := SheafOfModules.monoidalCategory R
+  let := SheafOfModules.tensorPreadditive R
+  have h : ObjectProperty.flat P := ObjectProperty.prop_of_isZero _ hP
+  exact (exactFunctor _ _).prop_of_iso
+    (SheafOfModules.siteSheafTensorRightIso R P).symm h.2
+
 section
 
 omit [HasDerivedCategory.{w} (Modules R)] in

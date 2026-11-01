@@ -1013,6 +1013,4 @@ attribute [local irreducible] Functor.mapDerivedCategoryFactors
   Functor.mapHomologicalComplexCompIso
   Functor.mapDerivedCategoryCompIso Functor.mapDerivedCategoryNatIso
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
 end SheafOfModules.RingedTensor

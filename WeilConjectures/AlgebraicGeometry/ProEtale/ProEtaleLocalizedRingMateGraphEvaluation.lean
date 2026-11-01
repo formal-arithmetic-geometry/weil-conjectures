@@ -112,10 +112,4 @@ private theorem normalizedUnit {B : Scheme.{u}} (V : B.ProEt)
       (proEtaleObjectInverseImageIndexPoint V W).hom.op = 𝟙 (op W) := ht
   erw [ht', L.map_id, Category.id_comp]
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end AlgebraicGeometry.Scheme

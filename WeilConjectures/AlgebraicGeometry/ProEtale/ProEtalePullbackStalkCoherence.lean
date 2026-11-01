@@ -643,6 +643,4 @@ private theorem descend_square
   rw [hd, ← hw]
   simp only [Category.assoc, Iso.hom_inv_id_app, Category.comp_id]
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
 end AlgebraicGeometry.Scheme
