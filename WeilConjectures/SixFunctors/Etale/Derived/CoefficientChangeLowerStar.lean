@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.Adjunction.MateIterated
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeUnitLowerStar
+public import WeilConjectures.SixFunctors.Etale.Derived.ExtendScalarsLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.ExtendScalarsRestrictScalarsMate
 
 /-!
@@ -59,8 +60,9 @@ the base change map `Ψ (Rp_* K) ⟶ Rp_* (Ψ K)` is an isomorphism. Restricted 
 projection map `Rp_* K ⊗ᴸ Λ'_Y ⟶ Rp_* (K ⊗ᴸ Λ'_Z)`. -/
 theorem isIso_rightDerivedLowerStarExtendScalarsMap_app [Finite Λ] [IsProper p]
     (K : DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    IsIso ((rightDerivedLowerStarExtendScalarsMap ρ p).app K) :=
-  sorry
+    IsIso ((rightDerivedLowerStarExtendScalarsMap ρ p).app K) := by
+  let := ρ.toAlgebra
+  exact isIso_mateEquiv_leftDerivedUpperStarEtaleSheafExtendScalarsIso_app Λ Λ' p K
 
 /-- `Rp_*` of the unit of `Ψ ⊣ Res`, followed by the coefficient comparison of `Rp_*`, is the unit
 at `Rp_* K` followed by the restriction of scalars of the base change map

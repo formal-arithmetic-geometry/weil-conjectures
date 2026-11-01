@@ -13962,7 +13962,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Exchange.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange.OpenClosed
 public import WeilConjectures.SixFunctors.Etale.Derived.ExcisionComparison
 public import WeilConjectures.SixFunctors.Etale.Derived.ExtendScalarsDerived
+public import WeilConjectures.SixFunctors.Etale.Derived.ExtendScalarsLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.ExtendScalarsProjection
+public import WeilConjectures.SixFunctors.Etale.Derived.ExtendScalarsProjectionPullback
 public import WeilConjectures.SixFunctors.Etale.Derived.ExtendScalarsRestrictScalarsMate
 public import WeilConjectures.SixFunctors.Etale.Derived.FieldExtension.DirectImageBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.FieldExtension.UpperShriekBaseChange
