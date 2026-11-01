@@ -37,6 +37,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.BaseChange
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import WeilConjectures.AlgebraicGeometry.Adic.AdicConstructibilityPredicateComparison
 
 /-! # Strict Weil complexes with actual condensed coefficients
 
@@ -132,6 +133,83 @@ Source: latest blueprint, native category paragraph (blueprint: sk-def-sf-weil-c
 abbrev WeilModule {T : Scheme.{u}} (g : T ≅ T) :=
   WeilConjectures.condensedWeilModules Λ g.hom
 
+/-- For the stated field coefficients, Dctf has the same objects as the dependency's Dbc.
+Source: latest blueprint, Complement, "they are the strict Weil complexes of
+[def-weil-weil-sheaf-complex]" (blueprint: sk-def-sf-weil-complexes).
+Proof: adicConstructibilityPredicateComparison identifies finite scalar constant models
+with the dependency's locally finitely presented strata, including Qbar. Transport this
+identification through the coefficient-ring isomorphism. The field case of
+integral_ctf_equals_bc identifies bounded constant-model constructibility with its
+intersection with finite Tor amplitude. Compose these two predicate equalities.
+Noetherianity supplies the qcqs and locally Noetherian hypotheses of these results. -/
+theorem field_ctf_eq_boundedConstructible {T : Scheme.{u}} [IsNoetherian T]
+    (ell : ℕ) [Fact ell.Prime]
+    (hΛ : (∃ E : PadicAlgCl.FiniteIntermediateField ell,
+      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E.1))) ∨
+      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ell))) :
+    (constantModelBoundedConstructible Λ T ⊓ fun L ↦
+      DerivedCategory.finiteTorAmplitude _ L) = boundedConstructible (condensedRingObj Λ T) := by
+  sorry
+
+/-- The identity on carriers and structure maps from Dctf pairs to the dependency's pairs.
+Source: latest blueprint, identification of strict Weil complexes in the Complement
+(blueprint: sk-def-sf-weil-complexes). -/
+def toRecordedStrict {T : Scheme.{u}} [IsNoetherian T] (g : T ≅ T)
+    (ell : ℕ) [Fact ell.Prime]
+    (hΛ : (∃ E : PadicAlgCl.FiniteIntermediateField ell,
+      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E.1))) ∨
+      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ell))) :
+    Complex Λ g ⥤ WeilConjectures.condensedStrictWeilComplex Λ g.hom where
+  obj K := ⟨CategoryTheory.Endofunctor.IsoAlgebra.mk K.carrier.obj
+      ((ObjectProperty.ι _).mapIso K.str),
+    (congrFun (field_ctf_eq_boundedConstructible Λ ell hΛ) K.carrier.obj).mp
+      K.carrier.property⟩
+  map f := ObjectProperty.homMk (ObjectProperty.homMk
+    { f := f.hom.f.hom
+      h := congrArg (fun a ↦ a.hom) f.hom.h })
+
+/-- Repackage the same carrier and Frobenius map in Dctf, using the field predicate equality.
+Source: latest blueprint, identification of strict Weil complexes in the Complement
+(blueprint: sk-def-sf-weil-complexes). -/
+def fromRecordedStrict {T : Scheme.{u}} [IsNoetherian T] (g : T ≅ T)
+    (ell : ℕ) [Fact ell.Prime]
+    (hΛ : (∃ E : PadicAlgCl.FiniteIntermediateField ell,
+      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E.1))) ∨
+      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ell))) :
+    WeilConjectures.condensedStrictWeilComplex Λ g.hom ⥤ Complex Λ g where
+  obj K := CategoryTheory.Endofunctor.IsoAlgebra.mk
+    ⟨K.obj.carrier,
+      (congrFun (field_ctf_eq_boundedConstructible Λ ell hΛ) K.obj.carrier).mpr K.property⟩
+    (ObjectProperty.isoMk _ K.obj.str)
+  map f := ObjectProperty.homMk
+    { f := ObjectProperty.homMk f.hom.hom.f
+      h := ObjectProperty.hom_ext _ f.hom.hom.h }
+
+/-- The canonical equivalence keeps each underlying complex, map and Weil structure.
+Both directions are the explicit repackaging functors above; no equivalence is chosen.
+Source: latest blueprint, Complement, identification with the dependency's strict pairs
+(blueprint: sk-def-sf-weil-complexes). -/
+def recordedStrictEquivalence {T : Scheme.{u}} [IsNoetherian T] (g : T ≅ T)
+    (ell : ℕ) [Fact ell.Prime]
+    (hΛ : (∃ E : PadicAlgCl.FiniteIntermediateField ell,
+      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E.1))) ∨
+      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ell))) :
+    Complex Λ g ≌ WeilConjectures.condensedStrictWeilComplex Λ g.hom :=
+  CategoryTheory.Equivalence.mk (toRecordedStrict Λ g ell hΛ)
+    (fromRecordedStrict Λ g ell hΛ) (Iso.refl _) (Iso.refl _)
+
+/-- The equivalence is compatible with the two actual forgetful functors.
+Source: latest blueprint, "they are the strict Weil complexes" and the For clause
+(blueprint: sk-def-sf-weil-complexes). -/
+def recordedStrictForgetIso {T : Scheme.{u}} [IsNoetherian T] (g : T ≅ T)
+    (ell : ℕ) [Fact ell.Prime]
+    (hΛ : (∃ E : PadicAlgCl.FiniteIntermediateField ell,
+      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E.1))) ∨
+      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ell))) :
+    (recordedStrictEquivalence Λ g ell hΛ).functor ⋙ ObjectProperty.ι _ ⋙
+      CategoryTheory.Endofunctor.IsoAlgebra.forget (action Λ g) ≅
+      forget Λ g ⋙ ObjectProperty.ι _ := Iso.refl _
+
 section Native
 
 open CategoryTheory.Endofunctor.IsoAlgebra
@@ -201,6 +279,126 @@ def nativeComparison (ell : ℕ) [Fact ell.Prime] [IsNoetherian T]
         h := ObjectProperty.hom_ext _
           ((WeilConjectures.condensedWeilDerivedStructure Λ g.hom).hom.naturality f.hom) } }
 
+/-- The ambient comparison is exactly the dependency's realization after its inclusion.
+Source: latest blueprint, K maps to (For K, theta_K)
+(blueprint: sk-def-sf-weil-complexes). -/
+def ambientComparison_recordedIso :
+    (WeilConjectures.condensedWeilComplexProperty Λ g.hom).ι ⋙ ambientComparison Λ g ≅
+      WeilConjectures.condensedWeilRealization Λ g.hom ⋙ ObjectProperty.ι _ := Iso.refl _
+
+/-- The new packaging and the dependency's realization agree as functors of strict pairs.
+Source: latest blueprint, native-to-strict comparison in the Complement
+(blueprint: sk-def-sf-weil-complexes). -/
+def nativeComparison_recordedIso (ell : ℕ) [Fact ell.Prime] [IsNoetherian T]
+    (hΛ : (∃ E : PadicAlgCl.FiniteIntermediateField ell,
+      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E.1))) ∨
+      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ell))) :
+    nativeComparison Λ g ell hΛ ⋙ (recordedStrictEquivalence Λ g ell hΛ).functor ≅
+      WeilConjectures.condensedWeilRealization Λ g.hom := Iso.refl _
+
+/-- Finite type over the closure field makes the specified geometric fibre Noetherian.
+This is inferred from the existing finite-type and quasi-compact assumptions.
+Source: latest blueprint, finite-type setting of the cited Weil-sheaf definition
+(blueprint: sk-def-sf-weil-complexes). -/
+instance recordedModel_isNoetherian (D : FiniteFieldDatum.{u})
+    (Y₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] :
+    IsNoetherian (D.geometricFiber Y₀).left where
+  toIsLocallyNoetherian := by
+    change IsLocallyNoetherian (pullback Y₀.hom _)
+    infer_instance
+  toCompactSpace := by
+    change CompactSpace ↥(pullback Y₀.hom
+      (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) : Scheme.{u})
+    infer_instance
+
+/-- The coefficient choices of the dependency are the two field rings used above.
+Source: latest blueprint, Lambda in {E,Qlb} (blueprint: sk-def-sf-weil-complexes).
+Proof: for finite E use E itself and the identity ring-object isomorphism; for Qbar use
+its identity ring-object isomorphism. These are precisely the two constructors. -/
+theorem weilCoefficient_field (ell : ℕ) [Fact ell.Prime] (c : WeilCoefficient ell) :
+    (∃ E : PadicAlgCl.FiniteIntermediateField ell,
+      Nonempty (Mon.mk (WeilCoefficient.ab c) ≅
+        Mon.mk (Profinite.continuousMapRingObj E.1))) ∨
+      Nonempty (Mon.mk (WeilCoefficient.ab c) ≅
+        Mon.mk (Profinite.padicAlgClRingObj ell)) := by
+  sorry
+
+/-- On the geometric fibre this is the dependency's strict Weil category, over the
+identical underlying complex and geometric-Frobenius structure map.
+Source: latest blueprint, Complement, "they are the strict Weil complexes of
+[def-weil-weil-sheaf-complex]" (blueprint: sk-def-sf-weil-complexes). -/
+def weilStrictEquivalence (D : FiniteFieldDatum.{u}) (ell : ℕ) [Fact ell.Prime]
+    (hEll : ell ≠ D.p) (Y₀ : Over (Spec (.of D.k₀)))
+    [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] (c : WeilCoefficient ell) :
+    Complex (WeilCoefficient.ab c) (D.geometricFrobenius Y₀) ≌
+      strictWeilComplexCategory D ell hEll Y₀ c :=
+  recordedStrictEquivalence (WeilCoefficient.ab c) (D.geometricFrobenius Y₀) ell
+    (weilCoefficient_field ell c)
+
+/-- The requested comparison is the dependency's recorded realization followed by the
+inverse of the explicit equivalence. In particular it retains the same For and theta_K.
+Source: latest blueprint, K maps to (For K, theta_K)
+(blueprint: sk-def-sf-weil-complexes). -/
+def weilComparison (D : FiniteFieldDatum.{u}) (ell : ℕ) [Fact ell.Prime]
+    (hEll : ell ≠ D.p) (Y₀ : Over (Spec (.of D.k₀)))
+    [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] (c : WeilCoefficient ell) :
+    weilComplexCategory D ell hEll Y₀ c ⥤
+      Complex (WeilCoefficient.ab c) (D.geometricFrobenius Y₀) :=
+  weilComplexRealization D ell hEll Y₀ c ⋙ (weilStrictEquivalence D ell hEll Y₀ c).inverse
+
+/-- Identifying strict categories recovers exactly the dependency's recorded functor.
+Source: latest blueprint, comparison clause (blueprint: sk-def-sf-weil-complexes). -/
+def weilComparison_recordedIso (D : FiniteFieldDatum.{u}) (ell : ℕ) [Fact ell.Prime]
+    (hEll : ell ≠ D.p) (Y₀ : Over (Spec (.of D.k₀)))
+    [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] (c : WeilCoefficient ell) :
+    weilComparison D ell hEll Y₀ c ⋙ (weilStrictEquivalence D ell hEll Y₀ c).functor ≅
+      weilComplexRealization D ell hEll Y₀ c := Iso.refl _
+
+/-- The field-model comparison specializes the generic comparison, rather than
+introducing another realization.
+Source: latest blueprint, comparison clause (blueprint: sk-def-sf-weil-complexes). -/
+def weilComparison_nativeIso (D : FiniteFieldDatum.{u}) (ell : ℕ) [Fact ell.Prime]
+    (hEll : ell ≠ D.p) (Y₀ : Over (Spec (.of D.k₀)))
+    [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] (c : WeilCoefficient ell) :
+    weilComparison D ell hEll Y₀ c ≅
+      nativeComparison (WeilCoefficient.ab c) (D.geometricFrobenius Y₀) ell
+        (weilCoefficient_field ell c) := Iso.refl _
+
+/-- The actual comparison is an equivalence on hearts, transported from the dependency.
+Source: latest blueprint, Complement, equivalence on hearts
+(blueprint: sk-def-sf-weil-complexes).
+Proof: apply weilComplexRealization_heart_equivalence. The explicit strict equivalence
+preserves carriers in both directions, hence preserves degree-zero concentration.
+Its maps are the identity on underlying morphisms. Transport the dependency's
+bijections on heart morphisms and its essential-surjectivity witnesses along its
+inverse. The identity comparison weilComparison_recordedIso identifies the functors. -/
+theorem weilComparison_heart_equivalence (D : FiniteFieldDatum.{u}) (ell : ℕ)
+    [Fact ell.Prime] (hEll : ell ≠ D.p) (Y₀ : Over (Spec (.of D.k₀)))
+    [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] (c : WeilCoefficient ell) :
+    (∀ K L : weilComplexCategory D ell hEll Y₀ c,
+      DerivedCategory.TStructure.t.IsLE K.obj 0 → DerivedCategory.TStructure.t.IsGE K.obj 0 →
+      DerivedCategory.TStructure.t.IsLE L.obj 0 → DerivedCategory.TStructure.t.IsGE L.obj 0 →
+        Function.Bijective (fun f : K ⟶ L ↦ (weilComparison D ell hEll Y₀ c).map f)) ∧
+    (∀ P : Complex (WeilCoefficient.ab c) (D.geometricFrobenius Y₀),
+      DerivedCategory.TStructure.t.IsLE P.carrier.obj 0 →
+      DerivedCategory.TStructure.t.IsGE P.carrier.obj 0 →
+        ∃ K : weilComplexCategory D ell hEll Y₀ c,
+          DerivedCategory.TStructure.t.IsLE K.obj 0 ∧ DerivedCategory.TStructure.t.IsGE K.obj 0 ∧
+            Nonempty ((weilComparison D ell hEll Y₀ c).obj K ≅ P)) := by
+  sorry
+
+/-- The nonfaithfulness is that of the dependency's recorded realization at the point.
+Source: latest blueprint, Complement, Jordan-block nonfaithfulness
+(blueprint: sk-def-sf-weil-complexes).
+Proof: use the two distinct morphisms supplied by weilComplexRealization_not_faithful.
+Their images remain equal after the inverse strict equivalence. Thus their images
+under weilComparison coincide, contradicting injectivity if that functor were faithful.
+This uses the same Jordan class as the dependency, not a second independent example. -/
+theorem weilComparison_not_faithful (D : FiniteFieldDatum.{u}) (ell : ℕ)
+    [Fact ell.Prime] (hEll : ell ≠ D.p) (c : WeilCoefficient ell) :
+    ¬ (weilComparison D ell hEll (Over.mk (𝟙 (Spec (.of D.k₀)))) c).Faithful := by
+  sorry
+
 end Native
 
 /-- The ambient dual is the recorded relative derived internal Hom into the coefficient unit.
@@ -208,6 +406,28 @@ Source: latest blueprint, contragredient paragraph (blueprint: sk-def-sf-weil-co
 abbrev dual {T : Scheme.{u}} (K : DerivedCategory
     (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))) :=
   (ihom K).obj (𝟙_ _)
+
+/-- The actual signed Tate sheaf from the recorded `sk-def-sp-tate-twist` node.
+The coefficient line is the specified `c.firstLine`; no replacement line is introduced.
+Source: latest blueprint, actual signed Tate sheaves
+(blueprint: sk-def-sf-weil-complexes). -/
+def tateLine (T : Scheme.{u}) (r : ℤ) :
+    Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj (c.obj ell) T) :=
+  spInternalSignedTwist T (condensedRingObj (c.obj ell) T) (c.firstLine ell T) r
+
+/-- The actual Tate sheaf placed in degree zero.
+Source: latest blueprint, Tate sheaves in degree zero (blueprint: sk-def-sf-weil-complexes). -/
+def derivedTateLine (T : Scheme.{u}) (r : ℤ) : c.derived ell T :=
+  (DerivedCategory.singleFunctor _ 0).obj (tateLine ell c T r)
+
+/-- The termwise root-normalized Tate structure in the ambient derived category.
+At r=0 it is the canonical coefficient-unit isomorphism.
+Source: latest blueprint, tau_r and varphi_Lambda (blueprint: sk-def-sf-weil-complexes). -/
+def tateDatum {T : Scheme.{u}} (g : T ≅ T)
+    [∀ x : T, Invertible (ell : T.residueField x)] (r : ℤ) :
+    (action (c.obj ell) g).obj (derivedTateLine ell c T r) ≅ derivedTateLine ell c T r :=
+  ((upperStar (c.obj ell) g.hom).mapDerivedCategorySingleFunctor 0).app _ ≪≫
+    (DerivedCategory.singleFunctor _ 0).mapIso (tatePull ell c g r)
 
 end AlgebraicGeometry.ProEtale.CondensedRing.StrictWeilCondensed
 

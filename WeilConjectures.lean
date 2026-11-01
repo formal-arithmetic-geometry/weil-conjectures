@@ -23656,6 +23656,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperSta
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarUnitCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.WeaklyEtaleIhom
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.WeaklyEtaleProjection
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.WeilTateTwist.WeilTateTwistConventions
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ZetaWeil.ContractibleLisseEvaluation
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ZetaWeil.ProfiniteCoefficientSliceBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ZetaWeil.ProfiniteCoefficientSliceOrdinary
