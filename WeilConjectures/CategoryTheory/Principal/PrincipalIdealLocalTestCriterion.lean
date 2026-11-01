@@ -172,16 +172,6 @@ private theorem sliceSection_eq (U : C)
 variable [HasDerivedCategory.{w} A]
   [∀ U : C, HasDerivedCategory.{w} (SheafOfModules.{u} ((R).over U))]
 
-/-- Use the given derived-category instances for the same slice module categories. Composing a
-restricted commutative ring sheaf with forgetful coefficients agrees definitionally with
-restricting its ring sheaf.
-
-Source: Stacks 0999, 099B and 03DA.
-(blueprint: lem-pur-principal-ideal-local-test-criterion). -/
-abbrev principalLocalTestSliceDerived :
-    ∀ U : C, HasDerivedCategory.{w} (ringedSiteModules.{u}
-      ((sheafCompose (J.over U) (forget₂ CommRingCat RingCat)).obj (O.over U))) :=
-  fun U ↦ inferInstanceAs (HasDerivedCategory.{w} (SheafOfModules.{u} ((R).over U)))
 
 /-- The principal image ideal gives exactly the covering-sieve formulation of local completeness. An
 image section locally lifts along the epimorphism onto the image and therefore is locally a

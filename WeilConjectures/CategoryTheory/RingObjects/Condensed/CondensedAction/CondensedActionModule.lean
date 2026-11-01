@@ -41,9 +41,6 @@ namespace Profinite.CondensedAction
 
 variable (R : Profinite.CondensedRing.{u}) [IsCommMonObj R.X]
 
-/-- The existing internal-module category on the coherent profinite site.
-Source: blueprint paragraph (3) (blueprint: def-sfb-condensed-action-module). -/
-abbrev Modules := Mod (Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1}) R.X
 
 /-- Read the sectionwise module through the recorded internal-module equivalence.
 Source: blueprint paragraph (3) (blueprint: def-sfb-condensed-action-module). -/

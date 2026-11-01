@@ -182,15 +182,6 @@ noncomputable abbrev proEtaleOrdinaryTensor (X : Scheme.{u})
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :=
   @curriedTensor (proEtaleRingModules X R) _ (SheafOfModules.monoidalCategory R)
 
-/-- Bilinearity of the existing tensor on the small site with separate Hom universe.
-Source: Stacks 03EK (blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback).
-Proof: the four identities hold for sectionwise tensor maps on pure tensors. They pass
-through module sheafification, yielding the four MonoidalPreadditive laws. -/
-@[instance] theorem proEtaleTensorPreadditive (X : Scheme.{u})
-    (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) :
-    @MonoidalPreadditive (proEtaleRingModules X R) _ _
-      (SheafOfModules.monoidalCategory R) := by
-  exact SheafOfModules.cochainModulesPreadditive R
 
 /-- The flat-term K-flat representatives used in the ordinary uncompleted tensor.
 Source: Stacks 07A4 (blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback). -/

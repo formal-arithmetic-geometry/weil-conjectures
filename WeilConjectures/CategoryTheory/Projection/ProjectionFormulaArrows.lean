@@ -198,26 +198,6 @@ private lemma tensorAdjunctionRetractInverse_identities
     rw [IsIso.inv_hom_id_assoc, ← V.map_comp, tensorHom_comp_tensorHom,
       ← L.map_comp, hip, L.map_id, Category.id_comp, id_tensorHom_id, V.map_id]
 
-/-- The chain mate whose degree maps are the sums of the ordinary t_{I^a,F^r}.
-Source: definition 1264 (blueprint: def-weil-pbc-projection-formula-arrows). -/
-noncomputable def tensorAdjunctionTotal
-    (he : ∀ {X X' Y Y' : A} (f : X ⟶ X') (g : Y ⟶ Y'),
-      L.map (f ⊗ₘ g) ≫ (e X' Y').hom = (e X Y).hom ≫ (L.map f ⊗ₘ L.map g))
-    (I : CochainComplex B ℤ) (F : CochainComplex A ℤ) :
-    CochainComplex.mapBifunctor ((V.mapHomologicalComplex (ComplexShape.up ℤ)).obj I)
-      F (curriedTensor A) ⟶
-    (V.mapHomologicalComplex (ComplexShape.up ℤ)).obj
-      (CochainComplex.mapBifunctor I ((L.mapHomologicalComplex (ComplexShape.up ℤ)).obj F)
-        (curriedTensor B)) := by
-  letI := tensorPullbackTotal_isIso L e he V adj
-    ((V.mapHomologicalComplex (ComplexShape.up ℤ)).obj I) F
-  exact (adj.mapHomologicalComplex (ComplexShape.up ℤ)).homEquiv _ _
-    (inv (tensorPullbackTotal L e he
-      ((V.mapHomologicalComplex (ComplexShape.up ℤ)).obj I) F) ≫
-        HomologicalComplex.mapBifunctorMap
-          ((adj.mapHomologicalComplex (ComplexShape.up ℤ)).counit.app I)
-          (𝟙 ((L.mapHomologicalComplex (ComplexShape.up ℤ)).obj F))
-          (curriedTensor B) (ComplexShape.up ℤ))
 
 private noncomputable def restrictCofanIsColimit
     {D : Type*} [Category D] [HasZeroMorphisms D] {J : Type*} {f : J → D}
@@ -486,18 +466,6 @@ namespace CategoryTheory
 
 variable {A : Type u} [Category.{v} A] {B : Type u'} [Category.{v'} B]
 
-/-- The uncurried presentation of the existing right-adjoint projection map.
-This only transports the bifunctor interface; the mate itself is the upstream
-`CategoryTheory.Adjunction.rightAdjointProjectionMap`.
-Source: definition 1264 (blueprint: def-weil-pbc-projection-formula-arrows). -/
-noncomputable def derivedProjectionFormulaMate
-    (L : A ⥤ B) (V : B ⥤ A) (adj : L ⊣ V)
-    (TR : A × A ⥤ A) (TS : B × B ⥤ B)
-    (alpha : TR ⋙ L ≅ (L.prod L) ⋙ TS) (E : B) (F : A) :
-    TR.obj (V.obj E, F) ⟶ V.obj (TS.obj (E, L.obj F)) :=
-  ((adj.rightAdjointProjectionMap (T_C := Functor.curry.obj TS)
-    (T_D := Functor.curry.obj TR)
-    (Functor.curry.map alpha.hom ≫ (Functor.curryObjProdComp L L TS).hom)).app E).app F
 
 end CategoryTheory
 

@@ -131,99 +131,14 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
   [J.WEqualsLocallyBijective AddCommGrpCat.{r}] [HasSheafify J AddCommGrpCat.{r}]
   {R S : Sheaf J CommRingCat.{r}}
 
-/-- The ordinary total tensor bifunctor, using the recorded monoidal sheaf tensor.
-Source: Stacks, Tag 06YU (blueprint: lem-trf-site-derived-tensor-restriction). -/
-def SiteTensorComplexFunctor (A : Sheaf J CommRingCat.{r}) :
-    CochainComplex (ringedSiteModules.{r}
-      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj A)) ℤ ⥤ CochainComplex
-          (ringedSiteModules.{r}
-      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj A)) ℤ ⥤ CochainComplex
-          (ringedSiteModules.{r}
-      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj A)) ℤ := by
-  letI := SheafOfModules.monoidalCategory A
-  exact (MonoidalCategory.curriedTensor (ringedSiteModules.{r}
-      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj A))).map₂HomologicalComplex
-    (ComplexShape.up ℤ) (ComplexShape.up ℤ) (ComplexShape.up ℤ)
 
-/-- A local tensor in the monoidal tensor, through the sheafification-unit pure tensor.
-Source: Stacks, Tag 03EK (blueprint: lem-trf-site-derived-tensor-restriction). -/
-def siteMonoidalTmul (M N : (ringedSiteModules.{r}
-      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))) (U : Cᵒᵖ) (x : M.val.obj U)
-          (y : N.val.obj U) :
-    ((SheafOfModules.monoidalCategory R).tensorObj M N).val.obj U := by
-  letI := SheafOfModules.monoidalCategory R
-  exact (SheafOfModules.tensorObjIsoSheafification M N).inv.val.app U
-    (SheafOfModules.siteSheafTensorTmul M N U x y)
 
-/-- Include a local pure tensor in bidegree `(i,j)` of the total tensor complex.
-Source: Stacks, Tag 06YU (blueprint: lem-trf-site-derived-tensor-restriction). -/
-def siteTotalTmul (P Q : CochainComplex (ringedSiteModules.{r}
-      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) (i j : ℤ)
-    (U : Cᵒᵖ) (x : (P.X i).val.obj U) (y : (Q.X j).val.obj U) :
-    ((((SiteTensorComplexFunctor R).obj P).obj Q).X (i + j)).val.obj U := by
-  letI := SheafOfModules.monoidalCategory R
-  exact (HomologicalComplex.ιMapBifunctor P Q
-    (MonoidalCategory.curriedTensor (ringedSiteModules.{r}
-      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))) (ComplexShape.up ℤ) i j
-          (i + j) rfl).val.app U
-      (siteMonoidalTmul (R := R) (P.X i) (Q.X j) U x y)
 
-/-- The resolving class selected by the recorded independent-coefficient descent theorem.
-Source: Stacks, Tags 06YS, 06YU (blueprint: lem-trf-site-derived-tensor-restriction). -/
-def tensorDescentClass [HasDerivedCategory.{w} (ringedSiteModules.{r}
-      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))] :=
-  (SheafOfModules.site_derived_tensor_descent_independentCoefficients.{u, v, r, w, 0, 0} J R).choose
 
-/-- Its specified comparison with the total tensor on complexes.
-Source: Stacks, Tag 06YU (blueprint: lem-trf-site-derived-tensor-restriction). -/
-def tensorDescentComplexIso [HasDerivedCategory.{w} (ringedSiteModules.{r}
-      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))] :=
-  (SheafOfModules.siteHomotopyTensorExistsIndependentCoefficients.{u, v, r, w}
-    J R).choose_spec.1.some
 
-/-- Its specified comparison with the recorded derived tensor on the resolving class.
-Source: Stacks, Tag 06YU (blueprint: lem-trf-site-derived-tensor-restriction). -/
-def tensorDescentDerivedIso [HasDerivedCategory.{w} (ringedSiteModules.{r}
-      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))] :=
-  (SheafOfModules.siteDerivedTensorExistsIndependentCoefficients.{u, v, r, w} J R).choose_spec.some
 
-/-- K-flatness with flat terms, using exactly the two recorded predicates.
-Source: Stacks, Tags 06YN, 06YS (blueprint: lem-trf-site-derived-tensor-restriction). -/
-def TensorFlatRepresentative (P : CochainComplex (ringedSiteModules.{r}
-      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) : Prop :=
-  CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) P ∧
-    ∀ i : ℤ, SheafOfModules.IsFlatOnSite (J := J) (R := R) (P.X i)
 
-/-- The recorded derived tensor, curried without constructing a second tensor product.
-Source: Stacks, Tag 06YU (blueprint: lem-trf-site-derived-tensor-restriction). -/
-abbrev siteRestrictionDerivedTensor [HasDerivedCategory.{w} (ringedSiteModules.{r}
-      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))] :=
-  Functor.curry.obj (SheafOfModules.siteDerivedTensorIndependentCoefficients J R)
 
-/-- Canonical two-sided computation: totalization, homotopy quotient, and descent.
-Source: Stacks, Tag 06YU (blueprint: lem-trf-site-derived-tensor-restriction). -/
-def tensorDescentPair [HasDerivedCategory.{w} (ringedSiteModules.{r}
-      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))]
-    (P Q : CochainComplex (ringedSiteModules.{r}
-      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ)
-    (hP : TensorFlatRepresentative P) (hQ : TensorFlatRepresentative Q) :
-    DerivedCategory.Q.obj (((SiteTensorComplexFunctor R).obj P).obj Q) ≅
-      ((siteRestrictionDerivedTensor (R := R)).obj (DerivedCategory.Q.obj P)).obj
-        (DerivedCategory.Q.obj Q) := by
-  let d := SheafOfModules.site_derived_tensor_descent_independentCoefficients.{u, v, r, w, 0, 0} J R
-  let p : (tensorDescentClass (R := R)).FullSubcategory :=
-    ⟨(HomotopyCategory.quotient _ _).obj P, (d.choose_spec.1 _).2 hP⟩
-  let q : (tensorDescentClass (R := R)).FullSubcategory :=
-    ⟨(HomotopyCategory.quotient _ _).obj Q, (d.choose_spec.1 _).2 hQ⟩
-  exact (DerivedCategory.quotientCompQhIso (ringedSiteModules.{r}
-      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))).symm.app _ ≪≫
-    DerivedCategory.Qh.mapIso ((tensorDescentComplexIso (R := R)).symm.app (P, Q)) ≪≫
-    (tensorDescentDerivedIso (R := R)).app (p, q) ≪≫
-    (SheafOfModules.siteDerivedTensorIndependentCoefficients J R).mapIso
-      (Iso.prod ((DerivedCategory.quotientCompQhIso (ringedSiteModules.{r}
-      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))).app P)
-        ((DerivedCategory.quotientCompQhIso (ringedSiteModules.{r}
-      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))).app Q))
 
 /-- Termwise restriction, exactly the recorded scalar restriction functor.
 Source: Stacks, Tag 03DA (blueprint: lem-trf-site-derived-tensor-restriction). -/

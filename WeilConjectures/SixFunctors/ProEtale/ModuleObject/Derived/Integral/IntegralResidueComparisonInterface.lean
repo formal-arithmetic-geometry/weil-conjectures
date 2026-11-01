@@ -44,19 +44,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
-/-- Ambient derived category used by the coefficient-comparison interface. -/
-abbrev residueExchangeDerived
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ]
-    (X : Scheme.{u}) :=
-  DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-    (condensedRingObj Λ X))
 
-/-- Derived pullback with its domain and codomain exposed explicitly. -/
-@[irreducible] noncomputable def residueExchangeUpperStar
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    residueExchangeDerived Λ Y ⥤ residueExchangeDerived Λ X :=
-  L((f)^*⟦Λ⟧)
 
 /-- Derived direct image with its domain and codomain exposed explicitly. -/
 @[irreducible] noncomputable def residueExchangeLowerStar
@@ -74,46 +62,8 @@ abbrev residueExchangeDerived
     unfold residueExchangeUpperStar residueExchangeLowerStar
     exact derivedUpperStarLowerStarAdjunction Λ f
 
-/-- The actual derived coefficient reduction with its two categories exposed. -/
-@[irreducible] noncomputable def residueExchangeReduction (X : Scheme.{u}) :
-    residueExchangeDerived (integralCoeff ℓ E) X ⥤
-      residueExchangeDerived
-        (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) X :=
-  integralReduction ℓ E X
 
-/-- The library's canonical composition comparison, with typed pull functors. -/
-@[irreducible] noncomputable def residueExchangeUpperStarComp
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
-    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
-    residueExchangeUpperStar Λ (f ≫ g) ≅
-      residueExchangeUpperStar Λ g ⋙ residueExchangeUpperStar Λ f :=
-  by
-    unfold residueExchangeUpperStar
-    exact leftDerivedUpperStarComp Λ f g
 
-/-- Pullback comparisons for actual derived reduction, compatible with composition.
-The data concern arbitrary schemes and morphisms, without constructibility or base change.
-Source: Bhatt--Scholze, Remark 6.8.15, and associativity of derived tensor.
-(blueprint: def-weil-pbc-residue-exchange-comparison-interface). -/
-structure IntegralResiduePullComparisons where
-  pull : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y),
-    residueExchangeUpperStar (integralCoeff ℓ E) f ⋙ residueExchangeReduction ℓ E X ≅
-      residueExchangeReduction ℓ E Y ⋙
-        residueExchangeUpperStar
-          (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) f
-  comp : ∀ {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
-      (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
-        (condensedRingObj (integralCoeff ℓ E) Z))),
-    (residueExchangeReduction ℓ E X).map
-        ((residueExchangeUpperStarComp (integralCoeff ℓ E) f g).hom.app K) ≫
-        (pull f).hom.app ((residueExchangeUpperStar (integralCoeff ℓ E) g).obj K) ≫
-        (residueExchangeUpperStar
-          (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) f).map
-          ((pull g).hom.app K) =
-      (pull (f ≫ g)).hom.app K ≫
-        (residueExchangeUpperStarComp
-          (Profinite.continuousMapRingObj.{u} (integralResidue ℓ E)) f g).hom.app
-            ((residueExchangeReduction ℓ E Z).obj K)
 
 namespace IntegralResiduePullComparisons
 
