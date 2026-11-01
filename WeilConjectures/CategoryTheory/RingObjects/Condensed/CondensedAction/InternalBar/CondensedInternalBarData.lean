@@ -60,12 +60,6 @@ namespace Profinite.CondensedAction.InternalBar
 
 variable (R : Profinite.CondensedRing.{u}) [IsCommMonObj R.X]
 
-/-- The free internal module on a condensed set, by the two free adjunctions.
-Source: the free-module construction in step 1 of the internal bar proof
-(blueprint: lem-sfb-condensed-internal-bar-resolution). -/
-def free : Sheaf (coherentTopology Profinite.{u}) (Type (u + 1)) ⥤ Modules R :=
-  Sheaf.composeAndSheafify (coherentTopology Profinite.{u}) AddCommGrpCat.free.{u + 1} ⋙
-    Mod.free R.X
 
 /-- The actual free-forgetful adjunction, determining the generator inclusion.
 Source: step 1, the universal property of the free internal module

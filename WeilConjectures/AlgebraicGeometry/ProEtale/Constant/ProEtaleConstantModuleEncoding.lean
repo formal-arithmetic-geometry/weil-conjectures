@@ -25,15 +25,6 @@ namespace AlgebraicGeometry.Scheme
 
 variable (T : Scheme.{u}) (B : Type u) [CommRing B]
 
-/-- The canonical constant-section map, forgetting commutativity. -/
-noncomputable def proEtaleModuleScalarUnit :
-    (Functor.const T.ProEtᵒᵖ).obj (RingCat.of (ULift.{u + 1, u} B)) ⟶
-      ((sheafCompose (ProEt.topology T)
-        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
-          (proEtaleConstantRing T B)).obj :=
-  Functor.whiskerRight (toSheafify (ProEt.topology T)
-    ((Functor.const T.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1, u} B))))
-    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})
 
 /-- Restriction to constant scalars preserves the underlying additive sheaf exactly. -/
 noncomputable def proEtaleModuleRestriction :
