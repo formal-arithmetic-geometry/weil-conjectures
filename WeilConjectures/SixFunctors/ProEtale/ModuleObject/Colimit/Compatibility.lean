@@ -15,6 +15,15 @@ import WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
 import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
 import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextensionBasis
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushFiniteFree
+public import Mathlib.Algebra.Homology.HomologicalComplexLimits
+public import Mathlib.CategoryTheory.Limits.Shapes.Products
+public import WeilConjectures.CategoryTheory.Adjunction.ProperBaseChange.CoefficientPushCopowerCriterion
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive
+public import WeilConjectures.CategoryTheory.DerivedModuleDirectSums
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.CondensedQbarPointBasis
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedQbarScalarBasisSections
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedQbarScalarBasisUnitOfSections
 
 /-!
 
@@ -83,6 +92,20 @@ variable {C : Type*} [Category C] [MonoidalCategory C]
   (F : C ⥤ D) [F.LaxMonoidal]
   {R S : C} [MonObj R] [MonObj S]
   (a : R ⟶ S) [IsMonHom a]
+
+private theorem additive_mapMod : (F.mapMod R).Additive where
+  map_add := hom_ext _ _ F.map_add
+
+private noncomputable def mapRegularIso :
+    (F.mapMod R).obj (regular R) ≅ regular (F.obj R) :=
+  isoMk (Iso.refl _) (by simp only [Iso.refl_hom, Category.comp_id,
+    MonoidalCategory.whiskerLeft_id, Category.id_comp])
+
+private noncomputable def mapFiniteFreeIso (n : ℕ) :
+    (F.mapMod R).obj (finiteFree R n) ≅ finiteFree (F.obj R) n := by
+  have : (F.mapMod R).Additive := additive_mapMod F
+  exact (F.mapMod R).mapBiproduct (fun _ : Fin n ↦ regular R) ≪≫
+    biproduct.mapIso (fun _ ↦ mapRegularIso F)
 
 private noncomputable def mapRestrictedRegularIso :
     (F.mapMod R).obj ((comap a).obj (regular S)) ≅

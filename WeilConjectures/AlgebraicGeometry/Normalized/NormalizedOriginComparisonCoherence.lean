@@ -101,6 +101,109 @@ private theorem mateUnit
     ← F.map_comp, ← F.map_comp, Category.assoc, hu, F.map_id X, L₂.map_id (F.obj X)]
   exact Category.id_comp _
 
+private theorem ordinaryRestrictionUnit (T : Scheme.{u}) (R : Type (u + 1)) [CommRing R] :
+    (pbcComparisonRestrict T (RingHom.id R)).inv =
+      Functor.whiskerRight
+        (normalizedOriginRestrictionUnit T.smallEtaleTopology (RingHom.id R) rfl).hom
+        (comparisonUpperStar (ModuleCat.{u + 1} R) T) ≫
+      (comparisonUpperStar (ModuleCat.{u + 1} R) T).leftUnitor.hom ≫
+      (comparisonUpperStar (ModuleCat.{u + 1} R) T).rightUnitor.inv ≫
+      Functor.whiskerLeft (comparisonUpperStar (ModuleCat.{u + 1} R) T)
+        (normalizedOriginRestrictionUnit (Scheme.ProEt.topology T) (RingHom.id R) rfl).inv := by
+  let a := comparisonAdjunction (ModuleCat.{u + 1} R) T
+  let b := Sheaf.restrictCoextendScalarsAdj T.smallEtaleTopology (RingHom.id R)
+  let c := Sheaf.restrictCoextendScalarsAdj (Scheme.ProEt.topology T) (RingHom.id R)
+  change (conjugateEquiv (a.comp c) (b.comp a)).symm (𝟙 _) = _
+  apply (conjugateEquiv (a.comp c) (b.comp a)).injective
+  rw [Equiv.apply_symm_apply]
+  symm
+  rw [← Category.assoc]
+  rw [← conjugateEquiv_comp _ a]
+  rw [← conjugateEquiv_comp _ (a.comp Adjunction.id)]
+  rw [← conjugateEquiv_comp _ (Adjunction.id.comp a)]
+  rw [conjugateEquiv_whiskerLeft c Adjunction.id a,
+    conjugateEquiv_whiskerRight Adjunction.id b a,
+    conjugateEquiv_leftUnitor_hom a]
+  have hr : conjugateEquiv (a.comp Adjunction.id) a
+      (comparisonUpperStar (ModuleCat.{u + 1} R) T).rightUnitor.inv =
+      (comparisonLowerStar (ModuleCat.{u + 1} R) T).leftUnitor.hom := by
+    ext X
+    simp
+  rw [hr]
+  ext X
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    Functor.leftUnitor_hom_app, Functor.rightUnitor_inv_app,
+    Category.id_comp, Category.assoc]
+  dsimp only [b, c, normalizedOriginRestrictionUnit, Sheaf.restrictCoextendScalarsAdj]
+  simp only [Functor.comp_obj, sheafCompose_obj_obj, Functor.id_obj,
+    conjugateEquiv_apply_app, Adjunction.id_unit, NatTrans.id_app, Functor.id_map,
+    Category.id_comp, Functor.map_comp, Adjunction.id_counit, CategoryTheory.Functor.map_id,
+    Category.comp_id, Category.assoc, ObjectProperty.FullSubcategory.comp_hom,
+    sheafCompose_map_hom, NatTrans.comp_app, Functor.whiskerRight_app, ModuleCat.hom_comp,
+    LinearMap.coe_comp, Function.comp_apply, ObjectProperty.FullSubcategory.id_hom,
+    ModuleCat.hom_id]
+  rename_i U x
+  apply ModuleCat.CoextendScalars.ext
+  apply LinearMap.ext
+  intro r
+  let M := ((comparisonLowerStar (ModuleCat.{u + 1} R) T).obj X).obj.obj U
+  let z : (ModuleCat.coextendScalars (RingHom.id R)).obj M := x
+  change r • (ModuleCat.CoextendScalars.equiv (RingHom.id R) M z) (1 : R) =
+    (ModuleCat.CoextendScalars.equiv (RingHom.id R) M z) r
+  have h := (ModuleCat.CoextendScalars.equiv (RingHom.id R) M z).map_smul r (1 : R)
+  simpa [ModuleCat.restrictScalars.smul_def, mul_one] using h.symm
+
+private theorem derivedRestrictionUnit (T : Scheme.{u})
+    (R : Type (u + 1)) [CommRing R] :
+    (pbcDerivedComparisonRestrict T (RingHom.id R)).inv =
+      Functor.whiskerRight
+        (Functor.mapDerivedCategoryNatIso
+          (normalizedOriginRestrictionUnit T.smallEtaleTopology (RingHom.id R) rfl) ≪≫
+          Functor.mapDerivedCategoryIdIso _).hom
+        (comparisonUpperStar (ModuleCat.{u + 1} R) T).mapDerivedCategory ≫
+      Functor.whiskerLeft
+        (comparisonUpperStar (ModuleCat.{u + 1} R) T).mapDerivedCategory
+        (Functor.mapDerivedCategoryNatIso
+          (normalizedOriginRestrictionUnit (Scheme.ProEt.topology T) (RingHom.id R) rfl) ≪≫
+          Functor.mapDerivedCategoryIdIso _).inv := by
+  have ho (X : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} R)) :
+      (pbcComparisonRestrict T (RingHom.id R)).hom.app X ≫
+        (comparisonUpperStar (ModuleCat.{u + 1} R) T).map
+          ((normalizedOriginRestrictionUnit T.smallEtaleTopology (RingHom.id R) rfl).hom.app
+            X) =
+      (normalizedOriginRestrictionUnit (Scheme.ProEt.topology T) (RingHom.id R) rfl).hom.app
+        ((comparisonUpperStar (ModuleCat.{u + 1} R) T).obj X) := by
+    apply (cancel_epi ((pbcComparisonRestrict T (RingHom.id R)).inv.app X)).1
+    rw [Iso.inv_hom_id_app_assoc, ordinaryRestrictionUnit]
+    simp
+  ext K
+  have h := Functor.mapDerivedCategorySquareIso_hom_app_id
+    (pbcComparisonRestrict T (RingHom.id R))
+    (normalizedOriginRestrictionUnit T.smallEtaleTopology (RingHom.id R) rfl)
+    (normalizedOriginRestrictionUnit (Scheme.ProEt.topology T) (RingHom.id R) rfl) ho K
+  change (pbcDerivedComparisonRestrict T (RingHom.id R)).hom.app K ≫ _ = _ at h
+  dsimp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
+  apply (cancel_epi ((pbcDerivedComparisonRestrict T (RingHom.id R)).hom.app K)).1
+  rw [Iso.hom_inv_id_app]
+  rw [← Category.assoc, h, Iso.hom_inv_id_app]
+  rfl
+
+private theorem comparisonScalarUnit (T : Scheme.{u})
+    {R : Type (u + 1)} [CommRing R] (φ : R →+* R) (hφ : φ = RingHom.id R)
+    (K : DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} R))) :
+    (comparisonUpperStar (ModuleCat.{u + 1} R) T).mapDerivedCategory.map
+      ((normalizedOriginScalarUnit T.smallEtaleTopology φ hφ).hom.app K) =
+    (pbcComparisonReduction T φ).inv.app K ≫
+      (normalizedOriginScalarUnit (Scheme.ProEt.topology T) φ hφ).hom.app
+        ((comparisonUpperStar (ModuleCat.{u + 1} R) T).mapDerivedCategory.obj K) := by
+  subst φ
+  apply (cancel_epi ((pbcComparisonReduction T (RingHom.id R)).hom.app K)).1
+  simp only [Iso.hom_inv_id_app_assoc]
+  change (pbcComparisonReductionMap T (RingHom.id R)).app K ≫ _ = _
+  unfold pbcComparisonReductionMap
+  rw [derivedRestrictionUnit]
+  exact mateUnit _ _ _ _ _ K
+
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
