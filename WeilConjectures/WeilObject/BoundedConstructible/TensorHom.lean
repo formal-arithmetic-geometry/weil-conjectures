@@ -105,7 +105,28 @@ noncomputable def weilTensorComparison :
         ((curriedTensor _).obj _).mapIso
           ((boundedConstructibleUpperStarCompatibility (Profinite.padicAlgClRingObj ℓ) ℓ
             Φ).app KL.2).symm))
-    sorry
+    (by
+      rintro ⟨K₁, L₁⟩ ⟨K₂, L₂⟩ ⟨φ, ψ⟩
+      ext1
+      have h₁ := NatTrans.congr_app
+        ((leftDerivedUpperStarTensorIso (Profinite.padicAlgClRingObj ℓ) Φ.left).hom.naturality
+          φ.hom) L₁.obj
+      have h₂ := ((leftDerivedUpperStarTensorIso (Profinite.padicAlgClRingObj ℓ) Φ.left).hom.app
+          K₂.obj).naturality ψ.hom
+      dsimp [leftDerivedUpperStarTensorLeft, leftDerivedUpperStarTensorRight] at h₁ h₂
+      simp only [boundedConstructibleTensor, boundedConstructibleUpperStar, Functor.comp_obj,
+        Functor.uncurry_obj_obj, curriedTensor_obj_obj, ObjectProperty.lift_obj_obj,
+        ObjectProperty.ι_obj, ObjectProperty.tensorObj_obj, Functor.prod_obj, Functor.comp_map,
+        Functor.uncurry_obj_map, curriedTensor_map_app, ObjectProperty.whiskerRight_def,
+        curriedTensor_obj_map, ObjectProperty.whiskerLeft_def, ObjectProperty.lift_map,
+        ObjectProperty.ι_map, ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.homMk_hom,
+        Functor.map_comp, boundedConstructibleUpperStarCompatibility, ObjectProperty.liftCompιIso,
+        Functor.mapIso_symm, Functor.FullyFaithful.preimageIso_hom, Iso.trans_hom, Iso.app_hom,
+        Iso.refl_hom, NatTrans.id_app, Iso.symm_hom, Functor.mapIso_inv, Iso.app_inv, Iso.refl_inv,
+        CategoryTheory.Functor.map_id, whiskerLeft_id, Category.comp_id, Category.id_comp,
+        Category.assoc,
+        reassoc_of% h₂, reassoc_of% h₁, Functor.prod_map]
+      exact congrArg (_ ≫ ·) (Category.id_comp _).symm)
 
 /-- The derived tensor product of Weil objects: a pair of Weil objects `(K, φ_K)` and `(L, φ_L)`
 for `Φ` is sent to `K ⊗ᴸ L` with the structure isomorphism
