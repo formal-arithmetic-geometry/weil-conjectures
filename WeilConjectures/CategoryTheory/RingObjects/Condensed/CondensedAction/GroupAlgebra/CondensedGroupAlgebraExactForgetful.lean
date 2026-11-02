@@ -97,10 +97,6 @@ variable (A : Profinite.CondensedRing.{u}) [IsCommMonObj A.X]
 variable (G : Type u) [TopologicalSpace G] [Group G] [IsTopologicalGroup G]
   [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]
 
-end Profinite.CondensedAction.GroupAlgebra
-
-namespace Profinite.CondensedAction.GroupAlgebra
-
 /-- The condensed group as its representable sheaf of continuous maps, lifted into
 its coefficient universe. Source: paragraph (3), internal bar input
 (blueprint: lem-sfb-condensed-group-algebra-exact-forgetful). -/

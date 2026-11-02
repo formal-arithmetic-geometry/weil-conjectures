@@ -17,6 +17,7 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Bounded.ProEtaleBoundedCon
 import WeilConjectures.NumberTheory.Padics.CoefficientExtensionSupplement
 import Mathlib.RingTheory.Ideal.Quotient.Index
 import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalarsComp
+import WeilConjectures.AlgebraicGeometry.ConstantModelTorAmplitude
 
 /-! Scalar restriction for the finite integral coefficient triangle. -/
 

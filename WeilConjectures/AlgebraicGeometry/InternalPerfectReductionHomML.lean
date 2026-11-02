@@ -30,6 +30,7 @@ public import Mathlib.CategoryTheory.CofilteredSystem
 public import Mathlib.Algebra.Module.Torsion.Basic
 
 import WeilConjectures.AlgebraicGeometry.InternalPerfectDualTensorFinite
+import WeilConjectures.CategoryTheory.FiniteTripleMittagLeffler
 import WeilConjectures.AlgebraicGeometry.InternalPerfectEndomorphismQuotientComparison
 import Mathlib.CategoryTheory.CofilteredSystem
 
