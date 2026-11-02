@@ -7,6 +7,7 @@ module
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RingedRefinement.RingedRefinementData
 import WeilConjectures.CategoryTheory.AdjunctionRefinementTranspose
 import WeilConjectures.CategoryTheory.NormalizedIdentityMate
+public import WeilConjectures.AlgebraicGeometry.StrictTower.StrictConstantTowerOperationsSupplement
 /-! Proper/open normalization from an intrinsic alpha equation.
 (blueprint: new-lem-pur-ringed-refinement-finite-normalization).
 -/
@@ -55,6 +56,28 @@ private theorem normalized_transport
 attribute [local irreducible] ProEtale.StrictTower.G ProEtale.StrictTower.R
   ProEtale.StrictTower.J ProEtale.StrictTower.adj ProEtale.StrictTower.gId
   ProEtale.StrictTower.alpha FiniteRealization.derived
+
+private theorem gamma_refinement_transpose (B : Type (u + 1)) [CommRing B]
+    {X Y Z : Scheme.{u}} (u : Y ⟶ Z) (j₁ : X ⟶ Y) (j₂ : X ⟶ Z)
+    [IsProper u] [IsOpenImmersion j₁] [IsOpenImmersion j₂]
+    [QuasiCompact j₁] [QuasiCompact j₂] (h : j₁ ≫ u = (𝟙 X) ≫ j₂)
+    (M : ProEtale.StrictTower.Derived.{u} B X) :
+    (ProEtale.StrictTower.adj.{u} B u).homEquiv
+      ((ProEtale.StrictTower.J.{u} B j₂).obj M)
+      ((ProEtale.StrictTower.J.{u} B j₁).obj M)
+      ((ProEtale.StrictTower.alpha.{u} B j₁ (𝟙 X) u j₂ h).app M ≫
+        (ProEtale.StrictTower.J.{u} B j₁).map
+          ((ProEtale.StrictTower.gId.{u} B X).hom.app M :
+            (ProEtale.StrictTower.G.{u} B (𝟙 X)).obj M ⟶ M)) =
+      (ProEtale.StrictTower.J.{u} B j₂).map
+        ((ProEtale.StrictTower.rId.{u} B X).inv.app M) ≫
+          (ProEtale.StrictTower.gamma.{u} B j₁ (𝟙 X) u j₂ h).app M := by
+  dsimp only [ProEtale.StrictTower.gamma]
+  exact CategoryTheory.mateEquiv_identity_refinement (ProEtale.StrictTower.adj.{u} B u)
+    (ProEtale.StrictTower.adj.{u} B (𝟙 X))
+    (ProEtale.StrictTower.J.{u} B j₂) (ProEtale.StrictTower.J.{u} B j₁)
+    (ProEtale.StrictTower.alpha.{u} B j₁ (𝟙 X) u j₂ h)
+    (ProEtale.StrictTower.gId.{u} B X) (ProEtale.StrictTower.rId.{u} B X) rfl M
 
 /-- Transport of the intrinsic alpha equation gives finite refinement normalization.
 Source: coefficient supplement Step 10; Stacks 07A6 and 0B65.
