@@ -222,8 +222,6 @@ private theorem normalized_mate_isIso
 attribute [local semireducible] directImageOpenRestriction derivedDirectImageOpenRestriction
   openCoherencePullbackSquare
 
-set_option maxHeartbeats 1000000 in
--- the kernel check of this normalization exceeds the default heartbeats
 private theorem representative_normalization
     {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {j : Y' ⟶ Y}
     {f' : X' ⟶ Y'} {i : X' ⟶ X} [IsOpenImmersion j] [IsOpenImmersion i]
@@ -256,10 +254,11 @@ private theorem representative_normalization
         ((lowerStar Λ f').rightDerivedFunctorObjQIso
         (((upperStar Λ i).mapHomologicalComplex (.up ℤ)).obj I)).inv := by
   intro I hI
-  exact normalized_mate_maps (upperStarLowerStarAdjunction Λ f)
+  have h := normalized_mate_maps (upperStarLowerStarAdjunction Λ f)
     (upperStarLowerStarAdjunction Λ f') (openCoherencePullbackSquare Λ sq.toCommSq)
     (directImageOpenRestriction Λ sq.toCommSq)
     (derivedDirectImageOpenRestriction Λ sq.toCommSq) rfl rfl I
+  exact h
 
 private theorem derived_invertible
     {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {j : Y' ⟶ Y}
