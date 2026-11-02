@@ -645,7 +645,9 @@ private theorem properOpenInterchange_localizing
     intro I K hK
     have : PreservesColimit K (J ⋙ R) := hsums I K hK
     change PreservesColimit K ((J ⋙ R) ⋙ V)
-    infer_instance
+    have : PreservesColimit (K ⋙ J ⋙ R) V :=
+      adj.leftAdjoint_preservesColimits.preservesColimitsOfShape.preservesColimit
+    exact comp_preservesColimit (J ⋙ R) V
   have hij : IsCompl (Set.range z.base) (Set.range i.base) := by
     dsimp only [z]
     rw [Scheme.Hom.range_closedComplement]

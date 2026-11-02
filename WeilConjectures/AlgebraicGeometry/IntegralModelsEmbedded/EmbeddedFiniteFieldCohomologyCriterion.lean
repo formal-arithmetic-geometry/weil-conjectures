@@ -62,7 +62,7 @@ theorem finiteFieldCohomologyCriterion
       CategoryTheory.siteAbelianWEqualsLocallyBijective.{u + 1, u, u + 1} _
     ((∀ i : ℤ, IsConstantModelConstructible (discreteObj A) X
         ((DerivedCategory.homologyFunctor.{u + 1} _ i).obj B)) ∧
-      DerivedCategory.finiteTorAmplitude _ B) ↔
+      _root_.DerivedCategory.finiteTorAmplitude _ B) ↔
     ((∀ i : ℤ, Scheme.IsConstructibleProEtaleModuleSheaf X (ULift.{u, 0} A)
         ((@DerivedCategory.homologyFunctor
           (Scheme.proEtaleRingModules X (Scheme.proEtaleConstantRing X (ULift.{u, 0} A)))
@@ -117,7 +117,7 @@ theorem finiteFieldCohomologyCriterion
       exact (IsZero.iff_id_eq_zero _).1 (h.of_iso c.symm)
     · intro h
       exact (H.functor.map_isZero h).of_iso c
-  have ht : DerivedCategory.finiteTorAmplitude _ B ↔
+  have ht : _root_.DerivedCategory.finiteTorAmplitude _ B ↔
       Scheme.HasFiniteCoefficientProEtaleTorAmplitude.{u, u} X (ULift.{u + 1, 0} A) K := by
     constructor
     · rintro ⟨a, b, h⟩

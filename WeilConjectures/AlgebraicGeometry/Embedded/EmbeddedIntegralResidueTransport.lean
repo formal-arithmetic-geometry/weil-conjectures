@@ -49,12 +49,12 @@ private theorem residueProperty_iso
     (e : K ≅ L)
     (h : (∀ n : ℤ, IsConstantModelConstructible Λ X
       ((DerivedCategory.homologyFunctor _ n).obj K)) ∧
-      DerivedCategory.finiteTorAmplitude _ K) :
+      _root_.DerivedCategory.finiteTorAmplitude _ K) :
     (∀ n : ℤ, IsConstantModelConstructible Λ X
       ((DerivedCategory.homologyFunctor _ n).obj L)) ∧
-      DerivedCategory.finiteTorAmplitude _ L := by
+      _root_.DerivedCategory.finiteTorAmplitude _ L := by
   exact ⟨fun n ↦ constructible_iso ((DerivedCategory.homologyFunctor _ n).mapIso e)
-    (h.1 n), (DerivedCategory.finiteTorAmplitude _).prop_of_iso e h.2⟩
+    (h.1 n), (_root_.DerivedCategory.finiteTorAmplitude _).prop_of_iso e h.2⟩
 
 private theorem residueProperty_coefficientIso
     {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
@@ -64,11 +64,11 @@ private theorem residueProperty_coefficientIso
       (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) :
     ((∀ n : ℤ, IsConstantModelConstructible Λ X
       ((DerivedCategory.homologyFunctor _ n).obj K)) ∧
-      DerivedCategory.finiteTorAmplitude _ K) ↔
+      _root_.DerivedCategory.finiteTorAmplitude _ K) ↔
     ((∀ n : ℤ, IsConstantModelConstructible Λ' X
       ((DerivedCategory.homologyFunctor _ n).obj
         ((Mod.comap ((upperStarFromPoint X).map e.inv.hom)).mapDerivedCategory.obj K))) ∧
-      DerivedCategory.finiteTorAmplitude _
+      _root_.DerivedCategory.finiteTorAmplitude _
         ((Mod.comap ((upperStarFromPoint X).map e.inv.hom)).mapDerivedCategory.obj K)) := by
   have forward {A B : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
       [MonObj A] [MonObj B] [IsCommMonObj A] [IsCommMonObj B]
@@ -76,11 +76,11 @@ private theorem residueProperty_coefficientIso
         (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj A X)))
       (h : (∀ n : ℤ, IsConstantModelConstructible A X
         ((DerivedCategory.homologyFunctor _ n).obj L)) ∧
-        DerivedCategory.finiteTorAmplitude _ L) :
+        _root_.DerivedCategory.finiteTorAmplitude _ L) :
       (∀ n : ℤ, IsConstantModelConstructible B X
         ((DerivedCategory.homologyFunctor _ n).obj
           ((Mod.comap ((upperStarFromPoint X).map d.inv.hom)).mapDerivedCategory.obj L))) ∧
-        DerivedCategory.finiteTorAmplitude _
+        _root_.DerivedCategory.finiteTorAmplitude _
           ((Mod.comap ((upperStarFromPoint X).map d.inv.hom)).mapDerivedCategory.obj L) := by
     obtain ⟨a, b, hab⟩ := h.2
     have hb : DerivedCategory.TStructure.t.bounded L :=
