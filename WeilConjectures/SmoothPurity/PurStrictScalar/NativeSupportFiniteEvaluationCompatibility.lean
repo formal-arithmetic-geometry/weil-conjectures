@@ -38,7 +38,7 @@ and both vanish outside the open. Exact localization preserves this equality.
 Compose these two squares and use naturality of reductionEvaluation. The native
 finiteImageIso factors cancel the finite direct/open model comparisons. This gives
 the displayed equation, including positive exponent one and the empty open. -/
-theorem nativeSupport_finiteEvaluation {X Y : Scheme.{u}} {f : X ⟶ Y}
+theorem nativeSupport_finiteEvaluation_compatibility {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) (S : CoefficientDerivedSystemCalculus.{u, u} l E X)
     (m : ℕ) (hm : 1 ≤ m) (M : DerivedCategory (scalarReductionSource l E X)) :
     (ev (ULift.{u + 1} (Padic.coefficientExtensionIntegers l E)) Y (m - 1)).map

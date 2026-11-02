@@ -132,6 +132,15 @@ private theorem actual_pairCounit (n : ℕ)
   erw [DerivedCategory.Qh.map_id, Category.id_comp]
   rfl
 
+omit [EssentiallySmall.{max u (t + 1)} Y.ProEt]
+  [HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology Y) AddCommGrpCat.{max u (t + 1)}]
+  [(AlgebraicGeometry.Scheme.ProEt.topology Y).WEqualsLocallyBijective
+    AddCommGrpCat.{max u (t + 1)}] in
+/-- The actual scalar pair retains the prescribed ordinary adjunction. -/
+private theorem actual_ordinaryAdjunction (n : ℕ) :
+    (coefficientActualScalarDerivedPair l E Y n).ordinaryAdjunction =
+      (scalarReductionExtension_adjunction l E Y n).choose := rfl
+
 -- STATEMENT-DISPUTED: repaired; an arbitrary mu need not satisfy the counit square.
 -- Choose the comparison and its normalization together.
 set_option maxHeartbeats 400000 in
@@ -249,7 +258,7 @@ theorem reduction_normalization_data_exists
     dsimp only [c, s, integralReductionScalarPair] at h
     erw [totalPair_eq_generator.{t, u} Y (integralCoefficientCommRingSheaf l E Y n),
       totalPair_eq_generator.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl)]
-    simp only [pairUnit, coefficientActualScalarDerivedPair_ordinaryAdjunction,
+    simp only [pairUnit, actual_ordinaryAdjunction,
       reductionUnit] at h ⊢
     dsimp only [coefficientTotalTensor, totalTensor, ordinaryTensor, scalarReductionExtension,
       scalarReductionExistence] at h ⊢

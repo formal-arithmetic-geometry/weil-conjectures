@@ -80,10 +80,6 @@ variable {X Y : Scheme.{u}} (g : X ⟶ Y)
       (show R'.obj.obj ((proEtaleBaseChange g).op.obj U) from ρ.hom.app U a) •
         (show N.val.obj ((proEtaleBaseChange g).op.obj U) from β.hom.app U x))
 
-include h hb in
-include h hb in
-attribute [local irreducible] transportRawApp
-
 end TensorTransport
 
 end WeilConjectures

@@ -75,7 +75,7 @@ theorem twoTermUnit_tensor_isKInjective
     HasExactColimitsOfShape.domain_of_functor ℤ (SheafOfModules.toSheaf _)
   have hunit : (𝟙_ M) = (show M from SheafOfModules.unit
       ((sheafCompose (AlgebraicGeometry.Scheme.ProEt.topology Y)
-        (forget₂ CommRingCat RingCat)).obj R)) := by
+        (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj R)) := by
     with_unfolding_all rfl
   have hdual (n : ℤ) : IsDualizable (Q.X n) := by
     by_cases hn : n = -1
