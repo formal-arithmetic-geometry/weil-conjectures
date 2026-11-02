@@ -78,6 +78,8 @@ or separably closed fields; this theorem isolates the finite-cd extension.
 @[expose] public section
 
 set_option autoImplicit false
+
+attribute [-instance] WeilConjectures.strictDvrSiteSmall
 set_option synthInstance.maxSize 4096
 
 universe u

@@ -288,11 +288,11 @@ private theorem finite_formulas
     (p : X ⟶ Y) [p.IsOver (Spec (.of k))] [IsProper p] :
     (∀ {X' Y' : Scheme.{u}} (g : Y' ⟶ Y) (p' : X' ⟶ Y') (g' : X' ⟶ X)
       (sq : ChosenCartesianSquare g' p' p g) (K : DerivedCategory (Modules R X)),
-      (constantModelBoundedConstructible R X ⊓ DerivedCategory.finiteTorAmplitude _) K →
+      (constantModelBoundedConstructible R X ⊓ _root_.DerivedCategory.finiteTorAmplitude _) K →
       IsIso ((condensedAmbientExchange R sq).app K)) ∧
     (∀ (K : DerivedCategory (Modules R X)) (M : DerivedCategory (Modules R Y)),
-      (constantModelBoundedConstructible R X ⊓ DerivedCategory.finiteTorAmplitude _) K →
-      (constantModelBoundedConstructible R Y ⊓ DerivedCategory.finiteTorAmplitude _) M →
+      (constantModelBoundedConstructible R X ⊓ _root_.DerivedCategory.finiteTorAmplitude _) K →
+      (constantModelBoundedConstructible R Y ⊓ _root_.DerivedCategory.finiteTorAmplitude _) M →
       IsIso (moduleObjectProjectionMap R p K M)) := by
   classical
   let Xo := Over.mk (X ↘ Spec (.of k))
@@ -478,11 +478,11 @@ theorem finiteCoefficientProperFormulas
     (p : X ⟶ Y) [p.IsOver (Spec (.of k))] [IsProper p] :
     (∀ {X' Y' : Scheme.{u}} (g : Y' ⟶ Y) (p' : X' ⟶ Y') (g' : X' ⟶ X)
       (sq : ChosenCartesianSquare g' p' p g) (K : DerivedCategory (Modules R X)),
-      (constantModelBoundedConstructible R X ⊓ DerivedCategory.finiteTorAmplitude _) K →
+      (constantModelBoundedConstructible R X ⊓ _root_.DerivedCategory.finiteTorAmplitude _) K →
       IsIso ((condensedAmbientExchange R sq).app K)) ∧
     (∀ (K : DerivedCategory (Modules R X)) (M : DerivedCategory (Modules R Y)),
-      (constantModelBoundedConstructible R X ⊓ DerivedCategory.finiteTorAmplitude _) K →
-      (constantModelBoundedConstructible R Y ⊓ DerivedCategory.finiteTorAmplitude _) M →
+      (constantModelBoundedConstructible R X ⊓ _root_.DerivedCategory.finiteTorAmplitude _) K →
+      (constantModelBoundedConstructible R Y ⊓ _root_.DerivedCategory.finiteTorAmplitude _) M →
       IsIso (moduleObjectProjectionMap R p K M)) := by
   have hf := finite_formulas R A e l hA k p
   refine Eq.mp ?_ hf
