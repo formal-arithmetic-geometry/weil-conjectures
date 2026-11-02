@@ -70,6 +70,7 @@ import all WeilConjectures.AlgebraicGeometry.Strict.Tower.StrictTowerExchangeMat
 import all WeilConjectures.CategoryTheory.FlatScalarTowerLimit.FlatScalarTowerLimitSquare
 import all WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedPullbackReflection
 import WeilConjectures.AlgebraicGeometry.Stratum.StratumCompletionUnitRestriction
+import WeilConjectures.AlgebraicGeometry.BoundedConstructibleTower
 
 /-! # Coefficient normalization of the raw ordered completed exchange
 
@@ -771,6 +772,226 @@ theorem precomp_unit_injective {C : Type*} [Category C] {G : C ⥤ C} (η : 𝟭
   simp only [Functor.id_map, Functor.id_obj] at h₁ h₂
   rw [h₁, h₂, hG]
 
+/-- Precomposition with a map inverted by a reflection-type endofunctor is bijective into
+every object of the reflecting class. -/
+theorem precomp_bijective_of_isIso_map {C : Type*} [Category C] (G : C ⥤ C) (η : 𝟭 C ⟶ G)
+    (S : C → Prop)
+    (hb : ∀ X Z, S Z → Function.Bijective (fun a : G.obj X ⟶ Z ↦ η.app X ≫ a))
+    {X Y : C} (f : X ⟶ Y) (hf : IsIso (G.map f)) (Z : C) (hZ : S Z) :
+    Function.Bijective (fun a : Y ⟶ Z ↦ f ≫ a) := by
+  have := hf
+  have hn (a : G.obj Y ⟶ Z) : f ≫ η.app Y ≫ a = η.app X ≫ G.map f ≫ a := by
+    rw [← Category.assoc, ← Category.assoc]
+    congr 1
+    exact η.naturality f
+  constructor
+  · intro a b hab
+    obtain ⟨a', rfl⟩ := (hb Y Z hZ).2 a
+    obtain ⟨b', rfl⟩ := (hb Y Z hZ).2 b
+    simp only at hab ⊢
+    rw [hn, hn] at hab
+    rw [(cancel_epi (G.map f)).mp ((hb X Z hZ).1 hab)]
+  · intro c
+    obtain ⟨c', rfl⟩ := (hb X Z hZ).2 c
+    refine ⟨η.app Y ≫ inv (G.map f) ≫ c', ?_⟩
+    simp only
+    rw [hn, IsIso.hom_inv_id_assoc]
+
+section CompleteEquivalence
+
+set_option allowUnsafeReducibility true in
+attribute [local semireducible] reductionModule completedReductionModuleTowerFunctor reduction
+
+/-- Derived scalar extension along the constant-to-completed coefficient map, as a left
+adjoint of the derived restriction `res`. -/
+def resAdjunction (T : Scheme.{t}) : pbcDerivedExtend (exchangeScalar d T) ⊣ res d T :=
+  pbcDerivedScalarAdjunction (exchangeScalar d T)
+
+set_option backward.isDefEq.respectTransparency true in
+/-- At every finite quotient level the ordinary scalar-extension unit becomes invertible:
+the balancing map identifies `F_n ⊗ (B ⊗ M)` with `F_n ⊗ M`, and the strict balancing
+comparison `ordinaryRho` identifies the two finite reductions. -/
+theorem level_map_scalarUnit_isIso (T : Scheme.{t}) (n : ℕ)
+    (P : CochainComplex (reductionModules T (exchangeConstantRing T A)) ℤ) (i : ℤ) :
+    IsIso ((level d T n).map
+      ((pbcScalarAdjunction (exchangeScalar d T)).unit.app (P.X i))) := by
+  let φ := exchangeScalar d T
+  let M := P.X i
+  let β := (HomologicalComplex.eval _ _ i).mapIso
+    (asIso (reductionBalance T φ (d.projection T n) (quotient d T n) rfl P))
+  let e : (level d T n).obj ((pbcExtend φ ⋙ pbcRestrict φ).obj M) ≅ (level d T n).obj M :=
+    ((ordinaryRho_existsUnique d T).exists.choose.app
+      ((reductionChange T φ).obj M)).app (op n) ≪≫ (reductionRestrict T (quotient d T n)).mapIso β
+  have hc : (level d T n).map ((pbcScalarAdjunction φ).unit.app M) ≫ e.hom = 𝟙 _ := by
+    apply level_hom_ext T (quotient d T n) M
+    intro U s x
+    have h₁ := tensorSection_map d T n ((pbcScalarAdjunction φ).unit.app M) U s x
+    have h₂ : ((pbcScalarAdjunction φ).unit.app M).val.app U x =
+        reductionTensorSection T φ M U 1 x := by
+      unfold pbcScalarAdjunction
+      exact (pbcScalarAdjunction_exists φ).exists.choose_spec M U x
+    have h₃ := (ordinaryRho_existsUnique d T).exists.choose_spec
+      ((reductionChange T φ).obj M) n U s (reductionTensorSection T φ M U 1 x)
+    have h₄ := reductionBalance_tmul T φ (d.projection T n) (quotient d T n) rfl P i U s 1 x
+    simp only [map_one, mul_one] at h₄
+    rw [h₂] at h₁
+    with_unfolding_all
+      exact (congrArg (fun w ↦ e.hom.val.app U w) h₁).trans
+        ((congrArg (fun w ↦ β.hom.val.app U w) h₃).trans h₄)
+  have hc' : e.hom ≫ (level d T n).map ((pbcScalarAdjunction φ).unit.app M) = 𝟙 _ := by
+    rw [(Iso.comp_hom_eq_id e).1 hc, Iso.hom_inv_id]
+  exact ⟨⟨e.hom, hc, hc'⟩⟩
+
+/-- The strict quotient diagram inverts the ordinary scalar-extension unit on complexes. -/
+theorem reductionModule_map_scalarUnit_isIso (T : Scheme.{t})
+    (P : CochainComplex (reductionModules T (exchangeConstantRing T A)) ℤ) :
+    IsIso (((reductionModule d T).mapHomologicalComplex (.up ℤ)).map
+      ((NatTrans.mapHomologicalComplex (pbcScalarAdjunction (exchangeScalar d T)).unit
+        (.up ℤ)).app P)) := by
+  have (i : ℤ) : IsIso ((((reductionModule d T).mapHomologicalComplex (.up ℤ)).map
+      ((NatTrans.mapHomologicalComplex (pbcScalarAdjunction (exchangeScalar d T)).unit
+        (.up ℤ)).app P)).f i) := by
+    have (n : ℕᵒᵖ) : IsIso (((reductionModule d T).map
+        ((pbcScalarAdjunction (exchangeScalar d T)).unit.app (P.X i))).app n) :=
+      level_map_scalarUnit_isIso d T n.unop P i
+    have h : IsIso ((reductionModule d T).map
+        ((pbcScalarAdjunction (exchangeScalar d T)).unit.app (P.X i))) :=
+      NatIso.isIso_of_isIso_app _
+    exact h
+  exact HomologicalComplex.Hom.isIso_of_components _
+
+/-- The derived quotient reduction inverts the localization of a chain map between K-flat
+complexes once the strict quotient diagram inverts it. -/
+theorem reduction_map_Q_isIso (T : Scheme.{t})
+    {P P' : CochainComplex (reductionModules T (exchangeConstantRing T A)) ℤ} (g : P ⟶ P')
+    (hP : CochainComplex.IsKFlatIndependentCoefficients (R := exchangeConstantRing T A) P)
+    (hP' : CochainComplex.IsKFlatIndependentCoefficients (R := exchangeConstantRing T A) P')
+    (hg : IsIso (((reductionModule d T).mapHomologicalComplex (.up ℤ)).map g)) :
+    IsIso ((reduction d T).map (DerivedCategory.Q.map g)) := by
+  let N := complexCounitNat (reductionModule d T) (reductionData d T).reduction
+    (reductionData d T).counit
+  have : IsIso (N.app P) := by
+    rw [complexCounitNat_app]
+    exact (reductionData d T).complexCounit_isIso P hP
+  have : IsIso (N.app P') := by
+    rw [complexCounitNat_app]
+    exact (reductionData d T).complexCounit_isIso P' hP'
+  have : IsIso (((reductionModule d T).mapHomologicalComplex (.up ℤ) ⋙
+      DerivedCategory.Q).map g) := by
+    rw [Functor.comp_map]
+    infer_instance
+  have : IsIso ((DerivedCategory.Q ⋙ (reductionData d T).reduction).map g ≫ N.app P') := by
+    rw [N.naturality g]
+    infer_instance
+  have : IsIso ((DerivedCategory.Q ⋙ (reductionData d T).reduction).map g) :=
+    IsIso.of_isIso_comp_right _ (N.app P')
+  rw [Functor.comp_map] at this
+  exact this
+
+/-- The quotient reduction inverts the unit of derived scalar extension. -/
+theorem reduction_map_resAdjunction_unit_isIso (T : Scheme.{t}) (X : D (A := A) T) :
+    IsIso ((reduction d T).map ((resAdjunction d T).unit.app X)) := by
+  let φ := exchangeScalar d T
+  let adj := resAdjunction d T
+  let Q : CochainComplex (reductionModules T (exchangeConstantRing T A)) ℤ ⥤ D (A := A) T :=
+    DerivedCategory.Q
+  obtain ⟨L, s, hL, hflat, hs, -⟩ :=
+    CochainComplex.exists_isKFlatResolutionIndependentCoefficients (Q.objPreimage X)
+  have := hs
+  let e : Q.obj L ≅ X := asIso (Q.map s) ≪≫ Q.objObjPreimageIso X
+  have hX : adj.unit.app X = e.inv ≫ adj.unit.app (Q.obj L) ≫
+      (pbcDerivedExtend φ ⋙ res d T).map e.hom := by
+    rw [← adj.unit.naturality e.hom, Functor.id_map, Iso.inv_hom_id_assoc]
+  let g := (NatTrans.mapHomologicalComplex (pbcScalarAdjunction φ).unit (.up ℤ)).app L
+  have hsp : adj.unit.app (Q.obj L) ≫ (res d T).map (pbcComplexCounit φ L) ≫
+      (pbcRestrict φ).mapDerivedCategoryFactors.hom.app
+        (((pbcExtend φ).mapHomologicalComplex (.up ℤ)).obj L) = Q.map g := by
+    with_unfolding_all exact (pbcDerivedScalarAdjunction_exists φ).exists.choose_spec L hL
+  have : IsIso (pbcComplexCounit φ L) := by
+    have := pbcExtensionCounit_isIso φ L hL
+    unfold pbcComplexCounit
+    infer_instance
+  have hU : adj.unit.app (Q.obj L) = Q.map g ≫ inv ((res d T).map (pbcComplexCounit φ L) ≫
+      (pbcRestrict φ).mapDerivedCategoryFactors.hom.app
+        (((pbcExtend φ).mapHomologicalComplex (.up ℤ)).obj L)) := by
+    rw [← hsp, Category.assoc, IsIso.hom_inv_id, Category.comp_id]
+  have hP' : CochainComplex.IsKFlatIndependentCoefficients (R := exchangeConstantRing T A)
+      (((pbcExtend φ ⋙ pbcRestrict φ).mapHomologicalComplex (.up ℤ)).obj L) :=
+    (SheafOfModules.isKFlat_restrictScalars_of_flat φ (orderedScalarFlat d T) _
+      (reductionChange_isKFlat T φ L hL hflat)).1
+  have : IsIso ((reduction d T).map (Q.map g)) :=
+    reduction_map_Q_isIso d T g hL hP' (reductionModule_map_scalarUnit_isIso d T L)
+  rw [hX, hU]
+  simp only [Functor.map_comp]
+  infer_instance
+
+/-- Derived scalar extension followed by restriction has the same quotient completion: the
+completion of the counit of `resAdjunction` is invertible. -/
+theorem completion_map_resAdjunction_counit_isIso (T : Scheme.{t}) (K : d.derived T) :
+    IsIso ((completedReductionTower T d ⋙ completedRlim T (d.completedRing T)).map
+      ((resAdjunction d T).counit.app K)) := by
+  let adj := resAdjunction d T
+  let C := completedReductionTower T d ⋙ completedRlim T (d.completedRing T)
+  have hr : (res d T).ReflectsIsomorphisms :=
+    (proEtaleRingSheafChangeAdjunction (𝟙 T)
+      (exchangeConstantRing T A) (d.completedRing T)
+      (exchangeConstantRing T A) (d.completedRing T)
+      (exchangeScalar d T) (exchangeScalar d T) (exchangeConstantIso (𝟙 T) A)
+      (d.integralRingIso (𝟙 T)) (exchangeScalar_comm d (𝟙 T))).1
+  have := reduction_map_resAdjunction_unit_isIso d T ((res d T).obj K)
+  have ht : (reduction d T).map (adj.unit.app ((res d T).obj K)) ≫
+      (reduction d T).map ((res d T).map (adj.counit.app K)) = 𝟙 _ := by
+    rw [← CategoryTheory.Functor.map_comp, adj.right_triangle_components]
+    exact (reduction d T).map_id _
+  have : IsIso ((reduction d T).map ((res d T).map (adj.counit.app K))) := by
+    rw [IsIso.eq_inv_of_hom_inv_id ht]
+    infer_instance
+  have : IsIso ((res d T ⋙ completion d T).map (adj.counit.app K)) := by
+    rw [Functor.comp_map]
+    unfold completion
+    rw [Functor.comp_map]
+    infer_instance
+  have : IsIso ((C ⋙ res d T).map (adj.counit.app K)) :=
+    (NatIso.isIso_map_iff (completedComparison d T) _).2 this
+  rw [Functor.comp_map] at this
+  exact isIso_of_reflects_iso _ (res d T)
+
+/-- Restriction is bijective on morphisms into a quotient-complete object. -/
+theorem res_map_bijective (T : Scheme.{t}) (K K' : d.derived T)
+    (hK' : d.TowerComplete T K') :
+    Function.Bijective (fun f : K ⟶ K' ↦ (res d T).map f) := by
+  let adj := resAdjunction d T
+  have hb := precomp_bijective_of_isIso_map
+    (completedReductionTower T d ⋙ completedRlim T (d.completedRing T))
+    (completedUnitNatTrans d T) (d.TowerComplete T)
+    (fun X Z hZ ↦ (quotient_reflection d T).2 X Z hZ) (adj.counit.app K)
+    (completion_map_resAdjunction_counit_isIso d T K) K' hK'
+  have he : (fun f : K ⟶ K' ↦ (res d T).map f) =
+      (adj.homEquiv _ _) ∘ (fun f : K ⟶ K' ↦ adj.counit.app K ≫ f) := by
+    funext f
+    simp only [Function.comp_apply, Adjunction.homEquiv_unit, Functor.map_comp,
+      Adjunction.right_triangle_components_assoc]
+  rw [he]
+  exact (adj.homEquiv _ _).bijective.comp hb
+
+/-- Every constant-coefficient complete object is the restriction of a quotient-complete
+completed-coefficient object: the completion of its derived scalar extension. -/
+theorem res_essSurj (T : Scheme.{t}) (X : D (A := A) T) (hX : IsComplete d T X) :
+    ∃ K : d.derived T, d.TowerComplete T K ∧ Nonempty ((res d T).obj K ≅ X) := by
+  let adj := resAdjunction d T
+  let C := completedReductionTower T d ⋙ completedRlim T (d.completedRing T)
+  let K₀ := (pbcDerivedExtend (exchangeScalar d T)).obj X
+  have : IsIso ((completion d T).map (adj.unit.app X)) := by
+    have := reduction_map_resAdjunction_unit_isIso d T X
+    unfold completion
+    rw [Functor.comp_map]
+    infer_instance
+  have : IsIso ((unit d T).app X) := hX
+  exact ⟨C.obj K₀, (quotient_reflection d T).1 K₀, ⟨(completedComparison d T).app K₀ ≪≫
+    (asIso ((completion d T).map (adj.unit.app X))).symm ≪≫ (asIso ((unit d T).app X)).symm⟩⟩
+
+end CompleteEquivalence
+
 /-- Restriction gives an equivalence on the two full complete subcategories.
 Source: Stacks Tags 099C, 099I and 099M
 (blueprint: lem-weil-pbc-ordered-complete-equivalence).
@@ -786,7 +1007,19 @@ theorem restriction_complete_equiv (T : Scheme.{t}) :
     ∃ e : AComplete d T ≌ Complete d T,
       Nonempty (e.functor ⋙ ObjectProperty.ι (IsComplete d T) ≅
         inclusion d T ⋙ res d T) := by
-  sorry
+  let F : AComplete d T ⥤ D (A := A) T := inclusion d T ⋙ res d T
+  have : F.Faithful := ⟨fun {K K'} f g h ↦ ObjectProperty.hom_ext _
+    ((res_map_bijective d T K.obj K'.obj K'.property).1 h)⟩
+  have : F.Full := ⟨fun {K K'} g ↦ by
+    obtain ⟨f, hf⟩ := (res_map_bijective d T K.obj K'.obj K'.property).2 g
+    exact ⟨ObjectProperty.homMk f, hf⟩⟩
+  let G := ObjectProperty.lift (IsComplete d T) F
+    (fun K ↦ (restriction_complete_iff d T K.obj).mp K.property)
+  have : G.EssSurj := ⟨fun Y ↦ by
+    obtain ⟨K, hK, ⟨e⟩⟩ := res_essSurj d T Y.obj Y.property
+    exact ⟨⟨K, hK⟩, ⟨ObjectProperty.isoMk _ e⟩⟩⟩
+  have : G.IsEquivalence := {}
+  exact ⟨G.asEquivalence, ⟨ObjectProperty.liftCompιIso _ _ _⟩⟩
 
 theorem restriction_complete (T : Scheme.{t}) :
     (∀ K : d.derived T, d.TowerComplete T K ↔ IsComplete d T ((res d T).obj K)) ∧
