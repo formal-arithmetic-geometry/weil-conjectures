@@ -72,8 +72,8 @@ the finite-level adjunctions, and the asserted coefficient-system coherences.
 * The identity/composition theorems state coherence with canonical tensor identifications.
 The records, the integer-ring and coefficient-change definitions, the scalar transport
 projection and the identity/composition theorems are in
-`WeilConjectures.AlgebraicGeometry.Etale.Coefficient.EtaleCoefficientSystemAdjointCore`, re-exported here (split for the per-file
-compile limit).
+`WeilConjectures.AlgebraicGeometry.Etale.Coefficient.EtaleCoefficientSystemAdjointCore`,
+re-exported here (split for the per-file compile limit).
 -/
 @[expose] public noncomputable section
 

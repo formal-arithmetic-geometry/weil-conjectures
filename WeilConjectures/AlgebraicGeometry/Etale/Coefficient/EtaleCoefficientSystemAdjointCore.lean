@@ -76,7 +76,8 @@ the finite-level adjunctions, and the asserted coefficient-system coherences.
 This core module holds the exceptional-adjoint and transport records, the integer-ring
 and coefficient-change definitions, the scalar transport projection
 `strictEtaleScalarTransportProjection` (blueprint: lem-pur-etale-scalar-transport-projection)
-and the identity/composition theorems; `WeilConjectures.AlgebraicGeometry.Etale.Coefficient.EtaleCoefficientSystemAdjoint` re-exports
+and the identity/composition theorems;
+`WeilConjectures.AlgebraicGeometry.Etale.Coefficient.EtaleCoefficientSystemAdjoint` re-exports
 it and proves the existence theorems (split for the per-file compile limit).
 -/
 @[expose] public noncomputable section

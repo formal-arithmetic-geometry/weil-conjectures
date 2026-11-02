@@ -25,7 +25,6 @@ set_option linter.privateModule false
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option synthInstance.maxSize 2048
-set_option profiler true
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 open AlgebraicGeometry AlgebraicGeometry.Scheme
