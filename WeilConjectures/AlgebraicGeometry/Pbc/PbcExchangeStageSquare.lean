@@ -177,6 +177,10 @@ Formalized below (before the `sorry`):
 * The direct-image equations are solved for `β ≫ Rf_F.map SIC` by `Iso.inv_comp_eq`.
 * The pullback equations are solved for `β.inv` by `eq_inv_comp_comp_inv`, with the outer
   isomorphisms passed explicitly. A direct `rw` with `Functor.mapIso_inv` timed out.
+Tried next: moving `Lg.β` and `Rf'_F.map Lg'.β` across the goal with a generic two-sided
+lemma (`p.inv ≫ A ≫ B = R ≫ T ≫ q.inv → A ≫ B ≫ q.hom = p.hom ≫ R ≫ T`), applied by `refine`
+with `p`, `q` given explicitly. Unifying it with the goal times out at `whnf`, even after
+`dsimp only`. The goal should first be restated with `show` in the substituted form.
 Still to do:
 * For `E ≠ F`, rewrite the comparison components as `eqToHom`s with
   `pbcScalarIntegralComparison_ne`, `iso_app_of_heq_functor` and
