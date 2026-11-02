@@ -411,7 +411,7 @@ theorem localProEtaleComparisonCoefficients_represents :
         (DerivedPresentation.ofMap _))
       (localProEtaleComparisonCoefficients a (lisseTowerEtaleQuotient d n)).hom
       (lisseTowerOrdinaryComparisonCoefficients a d n).hom := by
-  letI := ProEt.isContinuous_overPullback a
+  let := ProEt.isContinuous_overPullback a
   have h1 := derivedRepresents_mapDerivedCategorySquareIso
     (F₁ := sheafCompose S.smallEtaleTopology
       (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} (lisseTowerEtaleQuotient d n)))
@@ -548,7 +548,7 @@ theorem localIsomorphismProEtaleCoefficients_represents :
       (normalizationPullbackIso (ProEt.topology T)
         (MorphismProperty.Over.pullback @WeaklyEtale ⊤ b) (ProEt.topology Z)
           (lisseTowerEtaleQuotient d n)).hom := by
-  letI := ProEt.isContinuous_overPullback b
+  let := ProEt.isContinuous_overPullback b
   have h := derivedRepresents_mapDerivedCategorySquareIso
     (F₁ := sheafCompose (ProEt.topology T)
       (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} (lisseTowerEtaleQuotient d n)))
@@ -593,14 +593,14 @@ theorem lisseTowerPulledScalarIso_represents :
     refine NatTrans.ext (funext fun K ↦ ?_)
     simp only [Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerRight_hom,
       Functor.isoWhiskerLeft_hom, NatTrans.comp_app, Functor.associator_hom_app,
-      Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.map_comp, Functor.map_id,
+      Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.map_comp,
       Functor.associator_inv_app, Category.id_comp, Category.comp_id, Category.assoc]
     erw [Category.comp_id]
     rfl
   · refine NatTrans.ext (funext fun K ↦ ?_)
     simp only [lisseTowerOrdinaryPulledScalarIso, Iso.trans_hom, Iso.symm_hom,
       Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom, NatTrans.comp_app,
-      Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.map_comp, Functor.map_id,
+      Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.map_comp,
       Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
       Category.comp_id, Category.assoc]
     erw [Category.comp_id]
@@ -731,11 +731,11 @@ theorem constantAdicQuotientRightIso_represents :
   refine k.congr ?_ ?_
   · delta constantAdicQuotientRightIso constantAdicQuotientPullComparison
       proEtaleRingRestrictionDerivedPullback
-    simp only [id, Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerRight_hom,
+    simp only [Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerRight_hom,
       Functor.isoWhiskerLeft_hom, Category.assoc, mapDerivedCategorySquareIso, Iso.trans_inv,
       Iso.symm_inv]
   · simp only [constantAdicOrdinaryQuotientRightIso, Iso.trans_hom, Iso.symm_hom,
-      Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom, Category.assoc, Iso.symm_inv]
+      Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom, Iso.symm_inv]
 
 
 /-- The ordinary constant model, transported to completion coefficients. -/

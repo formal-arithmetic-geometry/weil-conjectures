@@ -347,7 +347,7 @@ private theorem fixedProEtaleConstantIso_restrictScalars {X Y : Scheme.{u}} (f :
       (Functor.associator _ _ _).inv ≫
       Functor.whiskerRight (fixedProEtaleConstantIso f S).hom
         (sheafCompose (ProEt.topology Y) (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1} q)) := by
-  letI := ProEt.isContinuous_overPullback f
+  let := ProEt.isContinuous_overPullback f
   let hX : IsTerminal (⊤_ X.ProEt) := terminalIsTerminal
   let hY := hX.isTerminalObj (proEtaleBaseChange f) (⊤_ X.ProEt)
   let adj := (constantSheafAdj (ProEt.topology X) (ModuleCat.{u + 1} R) hX).comp
@@ -445,7 +445,7 @@ private theorem comparisonConstantIso_homEquiv (X : Scheme.{u})
   erw [← h]
   simp only [ProEtale.comparisonLowerStarCompGlobalSectionsIso, Iso.trans_hom, Iso.symm_hom,
     NatTrans.comp_app, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Iso.refl_hom,
-    NatTrans.id_app, Category.assoc, Category.id_comp]
+    Category.assoc, Category.id_comp]
   erw [Iso.inv_hom_id_app, Category.comp_id]
   rw [Adjunction.comp_homEquiv, Adjunction.comp_homEquiv]
   exact (homEquiv_comp_rightAdjointUniq_hom_app
@@ -778,7 +778,7 @@ private theorem fixedConstantIso_inv_section {X Z : Scheme.{u}} (g : Z ⟶ X)
       (fsrSection g d j ((constantSheaf (ProEt.topology Z)
         (ModuleCat.{u + 1} (A ⧸ d.ideal ^ (j + 1)))).obj M) _ (constSection g _ M w)) =
     betaSection g d j M w := by
-  letI : (ProEt.topology Z).PreservesSheafification
+  let : (ProEt.topology Z).PreservesSheafification
       (forget₂ (ModuleCat.{u + 1} (A ⧸ d.ideal ^ (j + 1))) AddCommGrpCat.{u + 1}) :=
     Sheaf.preservesSheafification_of_adjunction (ProEt.topology Z)
       (ModuleCat.forget₂CoinduceAdj _)
@@ -1138,7 +1138,7 @@ private theorem canonicalOrdinaryConstantModel_section {X Z : Scheme.{u}} (g : Z
         ((constantAdicQuotientModules X d j).obj N)).val.app (op (⊤_ X.ProEt)) w)
       (canonicalSourcePresentationIso_section X d j qN (moduleRestrictElem _ N z)))
   simp only [SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply,
-    SheafOfModules.id_val, PresheafOfModules.id_app, ModuleCat.id_apply]
+    SheafOfModules.id_val, PresheafOfModules.id_app]
   exact chain4_eq e1 e2 e3 e4
 
 /- The right square sends pulled-back constant sections to pulled-back constant sections. -/
