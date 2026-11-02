@@ -120,6 +120,24 @@ theorem hom_eq_of_heq_objects {C : Type*} [Category C] {x x' y y' : C}
   subst hx hy
   simp [eq_of_heq h]
 
+/-- Conclude a square conjugated by `eqToHom`s from a square with inverted end factors. -/
+theorem eqToHom_square_of_inv_square {C : Type*} [Category C]
+    {s t p₀ p₁ m₀ m₁ d₀ d₁ a₁ x₀ x₁ b₀ : C}
+    (P : p₀ ⟶ p₁) (Pinv : p₁ ⟶ p₀) (M : m₀ ⟶ m₁) (M' : p₁ ⟶ d₀) (D : d₀ ⟶ d₁)
+    (A : p₀ ⟶ a₁) (X : x₀ ⟶ x₁) (X' : a₁ ⟶ b₀) (B : b₀ ⟶ d₁) (Binv : d₁ ⟶ b₀)
+    (h₀ : s = p₀) (h₁ : p₁ = m₀) (h₂ : m₁ = d₀) (h₃ : d₁ = t)
+    (k₀ : s = p₀) (k₁ : a₁ = x₀) (k₂ : x₁ = b₀) (k₃ : d₁ = t)
+    (hP : P ≫ Pinv = 𝟙 _) (hB : Binv ≫ B = 𝟙 _)
+    (hM : M = eqToHom h₁.symm ≫ M' ≫ eqToHom h₂.symm)
+    (hX : X = eqToHom k₁.symm ≫ X' ≫ eqToHom k₂.symm)
+    (hE : M' ≫ D ≫ Binv = Pinv ≫ A ≫ X') :
+    eqToHom h₀ ≫ (P ≫ eqToHom h₁ ≫ M ≫ eqToHom h₂ ≫ D) ≫ eqToHom h₃ =
+      eqToHom k₀ ≫ (A ≫ eqToHom k₁ ≫ X ≫ eqToHom k₂ ≫ B) ≫ eqToHom k₃ := by
+  subst h₀ h₁ h₂ k₁ k₂ h₃ hM hX
+  simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
+  calc P ≫ M' ≫ D = P ≫ (M' ≫ D ≫ Binv) ≫ B := by simp [hB]
+    _ = A ≫ X' ≫ B := by rw [hE]; simp [reassoc_of% hP]
+
 /-- Move a component of a natural transformation along an equality of objects. -/
 theorem natTrans_app_eq_eqToHom {C D : Type*} [Category C] [Category D] {G H : C ⥤ D}
     (τ : G ⟶ H) {x y : C} (e : x = y) :
