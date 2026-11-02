@@ -1137,10 +1137,6 @@ private theorem transportNatIso {C D : Type*} [Category* C] [Category* D]
   subst F' G'
   exact ⟨e, fun _ ↦ HEq.rfl⟩
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-attribute [local irreducible] commonTranspose commonTensorComparison
-
 section CommonCompositorProof
 
 /-- The recorded scheme compositor in literal common-stage coordinates.
@@ -1172,8 +1168,7 @@ theorem common_compositor_existsUnique {Z : Scheme.{u}} (h : Z ⟶ X) [IsIso h]
 
 end CommonCompositorProof
 
-attribute [local irreducible] shiftedPullbackInput rationalDerivedPullback
-  rationalDerivedInternalHom
+attribute [local irreducible] rationalDerivedPullback rationalDerivedInternalHom
 
 end CommonStage
 
