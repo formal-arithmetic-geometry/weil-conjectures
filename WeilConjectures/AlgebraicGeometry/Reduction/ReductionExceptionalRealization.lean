@@ -307,4 +307,39 @@ private theorem realizationFromData (A : Type u) [CommRing A] [Finite A]
   rw [hCmp]
   exact hc K
 
+/-- The already proved intrinsic realization equivalence identifies precisely the
+finite-ctf subcategories.  This public form combines the existing finite-support
+and realization predicate comparisons without changing either predicate.
+Source: blueprint `det-sp-reduction-exceptional`, Charts, finite coefficient domains. -/
+theorem reductionCtf_realization_iff (T : Scheme.{u}) (A : Type u)
+    [CommRing A] [Finite A]
+    (K : DerivedCategory (Sheaf (ProEt.topology T)
+      (ModuleCat.{u + 1} (ULift.{u + 1, u} A)))) :
+    spFiniteConstructibleTor T A ((sfIntrinsicDerivedEquivalence T A).functor.obj K) ↔
+      ProEtale.DerivedCategory.constructibleFiniteTor
+        (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) T K :=
+  (finiteCtf_iff_good T A _).trans (reductionGood_realization_iff T A K)
+
+/-- The recorded intrinsic finite-ctf property is invariant under isomorphism.
+Source: blueprint `det-sp-reduction-exceptional`, Charts, finite coefficient domains. -/
+theorem reductionCtf_of_iso (T : Scheme.{u}) (A : Type u) [CommRing A] [Finite A]
+    {K L : proEtaleDerivedCategory T A} (e : K ≅ L)
+    (h : spFiniteConstructibleTor T A K) : spFiniteConstructibleTor T A L :=
+  (finiteCtf_iff_good T A _).mpr
+    (reductionGood_iso e ((finiteCtf_iff_good T A _).mp h))
+
+/-- The canonical comparison on the ordinary-etale and intrinsic finite-ctf
+categories, with the existing coefficient realization as underlying functor.
+Source: blueprint `det-sp-reduction-exceptional`, Charts, finite coefficient domains. -/
+def reductionSiteCtf (T : Scheme.{u}) (A : Type u) [CommRing A] [Finite A] :
+    (Etale.DerivedCategory.constructibleFiniteTor
+      (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) T).FullSubcategory ⥤
+      spFiniteConstructibleTorCategory T A :=
+  (spFiniteConstructibleTor T A).lift
+    ((Etale.DerivedCategory.constructibleFiniteTor
+      (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) T).ι ⋙ reductionSite A T)
+    (fun K ↦ (reductionCtf_realization_iff T A _).mpr
+      (DerivedCategory.constructibleFiniteTor_mapDerivedCategory
+        (ULift.{u + 1, u} A) K.property))
+
 end AlgebraicGeometry.ProEtale

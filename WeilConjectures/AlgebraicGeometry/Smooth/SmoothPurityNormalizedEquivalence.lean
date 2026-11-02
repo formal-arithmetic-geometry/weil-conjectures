@@ -56,6 +56,11 @@ import WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSupple
 import WeilConjectures.SmoothPurity.Sf.SfDerivedCompleteLegacyComparison
 import WeilConjectures.AlgebraicGeometry.Smooth.SmoothPurityCompletedReductionAdjunction
 import WeilConjectures.AlgebraicGeometry.Smooth.SmoothPurityCompletedReductionConstructible
+public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
+public import WeilConjectures.AlgebraicGeometry.ProEtaleCountableProductsExact
+public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
+public import WeilConjectures.ProperBaseChange.RingedStrictTowerHomotopyLimitIndependentCoefficients
 
 /-!
 # Normalized coefficient towers and derived-complete integral complexes
@@ -86,5 +91,57 @@ namespace AlgebraicGeometry.ProEtale
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{u})
+
+end AlgebraicGeometry.ProEtale
+
+namespace AlgebraicGeometry.ProEtale
+
+/-- The ambient reduction/total-limit adjunction, its isomorphisms on complete and
+normalized objects, and its restriction to the recorded constructible categories.
+Exact scalar forgetting is part of the construction, not an additional hypothesis.
+Source: blueprint, normalized equivalence; Bhatt--Scholze, Lemma 3.5.7
+(blueprint: det-sp-normalized-equivalence). -/
+structure SpNormalizedEquivalence (D : SpCoefficientTowersAbelian l E T)
+    (R : SpReductionTower l E T D) where
+  /-- Forgetting actions preserves componentwise addition. -/
+  [forgetAdditive : (spCompletedStrictTower l E T D).Additive]
+  /-- Forgetting actions preserves kernels and finite products. -/
+  [forgetLimits : PreservesFiniteLimits (spCompletedStrictTower l E T D)]
+  /-- Forgetting actions preserves cokernels and finite coproducts. -/
+  [forgetColimits : PreservesFiniteColimits (spCompletedStrictTower l E T D)]
+  /-- Total derived limit is exact, with its standard integer shift structure. -/
+  [limitShift : (spCompletedTotalLimit l E T D).CommShift ℤ]
+  /-- It carries distinguished triangles to distinguished triangles. -/
+  limit_triangulated : (spCompletedTotalLimit l E T D).IsTriangulated
+  /-- The products in the Roos triangle are products in the derived category. -/
+  [products : HasCountableProducts
+    (DerivedCategory (WeilConjectures.scalarReductionSource.{u, u} l E T))]
+  /-- The Roos triangle uses the actual derived strict-tower transitions and the
+  K-injective-normalized projections; it chooses no arbitrary lift from a triangle. -/
+  roos : ∀ C : spDerivedCoefficientTowers l E T D,
+    ∃ δ : (∏ᶜ fun n : ℕ ↦ (spDerivedCompletedEvaluation l E T D n).obj C) ⟶
+        ((spCompletedTotalLimit l E T D).obj C)⟦(1 : ℤ)⟧,
+      IsDerivedLimitTriangle
+        (fun n : ℕ ↦ (spDerivedCompletedTransition l E T D n).app C)
+        ((spCompletedTotalLimit l E T D).obj C)
+        (Pi.lift (fun n : ℕ ↦ (spCompletedTotalProjection l E T D n).app C)) δ
+  /-- The ambient adjunction on the ordinary unbounded derived categories. -/
+  adjunction : spCompletedReduction l E T D R ⊣ spCompletedTotalLimit l E T D
+  /-- No boundedness or constructibility is assumed on a derived-complete object. -/
+  unit_isIso : ∀ M : DerivedCategory (WeilConjectures.scalarReductionSource.{u, u} l E T),
+    WeilConjectures.IntegralOnSlice.IsComplete l E T none M →
+      IsIso (adjunction.unit.app M)
+  /-- No boundedness or constructibility is assumed on a normalized tower. -/
+  counit_isIso : ∀ C : spDerivedCoefficientTowers l E T D,
+    IsSpNormalizedTower l E T D C → IsIso (adjunction.counit.app C)
+  /-- Only the constructible restriction assumes that T is Noetherian. The two
+  equalities say that these are precisely the restrictions of reduction and total limit. -/
+  restriction : IsNoetherian T →
+    ∃ e : WeilConjectures.sfIntegralConstructibleCategory l E T ≌
+        spNormalizedConstructibleTorTowerCategory l E T D,
+      e.functor ⋙ (spNormalizedConstructibleTorTowers l E T D).ι =
+        (WeilConjectures.sfIntegralConstructible l E T).ι ⋙ spCompletedReduction l E T D R ∧
+      e.inverse ⋙ (WeilConjectures.sfIntegralConstructible l E T).ι =
+        (spNormalizedConstructibleTorTowers l E T D).ι ⋙ spCompletedTotalLimit l E T D
 
 end AlgebraicGeometry.ProEtale

@@ -175,6 +175,15 @@ def insertion {k : Type u} [Field k] [IsAlgClosed k]
       Functor.mapDerivedCategoryNatIso (upperStarIsoIdOfIsSepClosed Λ b) ≪≫
       Functor.mapDerivedCategoryIdIso _).symm) _
 
+/-- Canonical cancellation Lh* L(h^-1)* ≅ id, with the pullback compositor.
+Source: the inverse-compatibility clause of the node.
+(blueprint: lem-weil-condensed-isomorphism-cohomology-transport) -/
+def cancel {T' T : Scheme.{u}} (h : T' ≅ T) :
+    L Λ h.hom ⋙ L Λ h.inv ≅ 𝟭 (D Λ T) :=
+  (leftDerivedUpperStarComp Λ h.inv h.hom).symm ≪≫
+    eqToIso (congrArg (fun f : T ⟶ T ↦ L Λ f) h.inv_hom_id) ≪≫
+    leftDerivedUpperStarId Λ T
+
 /-- Transport of a compactification along the two scheme isomorphisms; its middle
 scheme is unchanged, j'=h;j and g'=g;b^-1. This is an actual construction.
 Source: blueprint, compactification reindexing along b.

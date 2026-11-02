@@ -70,6 +70,7 @@ public import Mathlib.CategoryTheory.Localization.DerivabilityStructure.Derives
 public import Mathlib.Algebra.BigOperators.Ring.Finset
 
 import all WeilConjectures.AlgebraicGeometry.Smooth.SmoothPurityCoefficientTowersAbelian
+public import WeilConjectures.ProperBaseChange.RingedStrictTowerHomotopyLimitIndependentCoefficients
 
 /-!
 # Completed evaluations and the canonical tower reconstruction map
@@ -238,6 +239,82 @@ def spDerivedCompletedEvaluation (n : ℕ) : spDerivedCoefficientTowers l E T D 
     DerivedCategory (WeilConjectures.scalarReductionSource.{u, u} l E T) :=
   spDerivedCoefficientEvaluation l E T D n ⋙
     (spCompletedEllRestriction l E T n).mapDerivedCategory
+
+/-- The canonical comparison between derived and termwise completed evaluation.
+Source: blueprint, proof step 2 (blueprint: def-sp-tower-reconstruction-data). -/
+def spCompletedEvaluationFactors (n : ℕ) :
+    @DerivedCategory.Q (spCoefficientTowers l E T) _ _ D.hasDerived ⋙
+        spDerivedCompletedEvaluation l E T D n ≅
+      (spCompletedEvaluation l E T D n).mapHomologicalComplex (.up ℤ) ⋙
+        DerivedCategory.Q :=
+  letI := D.hasDerived
+  letI := D.equivalenceAdditive
+  letI := D.evaluationLimits n
+  letI := D.evaluationColimits n
+  letI : (spCoefficientEvaluation l E T D.equivalence n).Additive :=
+    Functor.additive_of_preserves_binary_products _
+  Functor.isoWhiskerRight (spCoefficientEvaluation l E T D.equivalence n).mapDerivedCategoryFactors
+      (spCompletedEllRestriction l E T n).mapDerivedCategory ≪≫
+    Functor.isoWhiskerLeft
+      ((spCoefficientEvaluation l E T D.equivalence n).mapHomologicalComplex (.up ℤ))
+      (spCompletedEllRestriction l E T n).mapDerivedCategoryFactors
+
+/-- The unique derived transition induced by the actual ordinary transition.
+Source: blueprint, proof step 2 (blueprint: def-sp-tower-reconstruction-data).
+Proof: the ordinary square is natural and therefore descends through localization,
+since both evaluation functors preserve quasi-isomorphisms. The displayed comparison
+formula fixes the transition on every localized complex. Essential surjectivity of
+the localization and naturality then prove uniqueness on the whole derived category. -/
+theorem spDerivedCompletedTransition_existsUnique (n : ℕ) :
+    ∃! τ : spDerivedCompletedEvaluation l E T D (n + 1) ⟶
+        spDerivedCompletedEvaluation l E T D n,
+      ∀ P : CochainComplex (spCoefficientTowers l E T) ℤ,
+        τ.app (@DerivedCategory.Q (spCoefficientTowers l E T) _ _ D.hasDerived |>.obj P) ≫
+            (spCompletedEvaluationFactors l E T D n).hom.app P =
+          (spCompletedEvaluationFactors l E T D (n + 1)).hom.app P ≫
+            DerivedCategory.Q.map
+              ((NatTrans.mapHomologicalComplex (spCompletedTransition l E T D n)
+                (.up ℤ)).app P) := by
+  let := D.hasDerived
+  let Q := @DerivedCategory.Q (spCoefficientTowers l E T) _ _ D.hasDerived
+  let W := HomologicalComplex.quasiIso (spCoefficientTowers l E T) (.up ℤ)
+  let F := fun n : ℕ ↦
+    (spCompletedEvaluation l E T D n).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q
+  let G := spDerivedCompletedEvaluation l E T D
+  let : Localization.Lifting Q W (F n) (G n) :=
+    ⟨spCompletedEvaluationFactors l E T D n⟩
+  let : Localization.Lifting Q W (F (n + 1)) (G (n + 1)) :=
+    ⟨spCompletedEvaluationFactors l E T D (n + 1)⟩
+  let t : F (n + 1) ⟶ F n := Functor.whiskerRight
+    (NatTrans.mapHomologicalComplex (spCompletedTransition l E T D n) (.up ℤ))
+    DerivedCategory.Q
+  let τ := Localization.liftNatTrans Q W (F (n + 1)) (F n) (G (n + 1)) (G n) t
+  have ht (P : CochainComplex (spCoefficientTowers l E T) ℤ) :
+      τ.app (Q.obj P) ≫ (spCompletedEvaluationFactors l E T D n).hom.app P =
+        (spCompletedEvaluationFactors l E T D (n + 1)).hom.app P ≫
+          DerivedCategory.Q.map
+            ((NatTrans.mapHomologicalComplex (spCompletedTransition l E T D n)
+              (.up ℤ)).app P) := by
+    dsimp only [τ]
+    rw [Localization.liftNatTrans_app]
+    change ((spCompletedEvaluationFactors l E T D (n + 1)).hom.app P ≫
+      t.app P ≫ (spCompletedEvaluationFactors l E T D n).inv.app P) ≫ _ = _
+    simp only [Category.assoc, Iso.inv_hom_id_app]
+    dsimp only [t, Functor.whiskerRight_app]
+    rw [Category.comp_id]
+  refine ⟨τ, ht, ?_⟩
+  intro σ hσ
+  apply Localization.natTrans_ext Q W
+  intro P
+  apply (cancel_mono ((spCompletedEvaluationFactors l E T D n).hom.app P)).1
+  exact (hσ P).trans (ht P).symm
+
+/-- The canonical derived transition; it retains the strict tower's specified maps.
+Source: blueprint, proof step 2 (blueprint: def-sp-tower-reconstruction-data). -/
+def spDerivedCompletedTransition (n : ℕ) :
+    spDerivedCompletedEvaluation l E T D (n + 1) ⟶
+      spDerivedCompletedEvaluation l E T D n :=
+  (spDerivedCompletedTransition_existsUnique l E T D n).exists.choose
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
