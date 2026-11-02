@@ -271,18 +271,260 @@ end DerivedPull
 
 end OrdinaryPull
 
+section GenericRhoPull
+
+set_option linter.unusedVariables false in
+/-- The compatibility of a reduction comparison with pullback, for abstract exact functors
+and derived reduction models. The concrete statement `rho_reductionTowerPullbackIso` is meant
+to be its instance at the strict pro-étale towers. Its proof is checked generically, so the
+kernel never unfolds the concrete derived-category instances here. -/
+theorem rho_pull_generic
+    {BV BU CV CU TBV TBU TCV TCU : Type*}
+    {iBV : Category BV} {iBU : Category BU} {iCV : Category CV} {iCU : Category CU}
+    {iTBV : Category TBV} {iTBU : Category TBU} {iTCV : Category TCV} {iTCU : Category TCU}
+    {aBV : Abelian BV} {aBU : Abelian BU} {aCV : Abelian CV} {aCU : Abelian CU}
+    {aTBV : Abelian TBV} {aTBU : Abelian TBU} {aTCV : Abelian TCV} {aTCU : Abelian TCU}
+    {hBV : HasDerivedCategory BV} {hBU : HasDerivedCategory BU}
+    {hCV : HasDerivedCategory CV} {hCU : HasDerivedCategory CU}
+    {hTBV : HasDerivedCategory TBV} {hTBU : HasDerivedCategory TBU}
+    {hTCV : HasDerivedCategory TCV} {hTCU : HasDerivedCategory TCU}
+    {pS : BV ⥤ BU} {pC : CV ⥤ CU} {rV : BV ⥤ CV} {rU : BU ⥤ CU}
+    {tP : TBV ⥤ TBU} {tRV : TBV ⥤ TCV} {tRU : TBU ⥤ TCU} {tC : TCV ⥤ TCU}
+    [pS.Additive] [PreservesFiniteLimits pS] [PreservesFiniteColimits pS]
+    [pC.Additive] [PreservesFiniteLimits pC] [PreservesFiniteColimits pC]
+    [rV.Additive] [PreservesFiniteLimits rV] [PreservesFiniteColimits rV]
+    [rU.Additive] [PreservesFiniteLimits rU] [PreservesFiniteColimits rU]
+    [tP.Additive] [PreservesFiniteLimits tP] [PreservesFiniteColimits tP]
+    [tRV.Additive] [PreservesFiniteLimits tRV] [PreservesFiniteColimits tRV]
+    [tRU.Additive] [PreservesFiniteLimits tRU] [PreservesFiniteColimits tRU]
+    [tC.Additive] [PreservesFiniteLimits tC] [PreservesFiniteColimits tC]
+    {RV : BV ⥤ TBV} {RU : BU ⥤ TBU} [RV.Additive] [RU.Additive]
+    {redV : CV ⥤ TCV} {redU : CU ⥤ TCU} [redV.Additive] [redU.Additive]
+    {PV : CochainComplex CV ℤ → Prop} {PU : CochainComplex CU ℤ → Prop}
+    (DV : DerivedReductionModelData redV PV) (DU : DerivedReductionModelData redU PU)
+    {CRV : DerivedCategory BV ⥤ DerivedCategory TBV}
+    {CRU : DerivedCategory BU ⥤ DerivedCategory TBU}
+    (cV : ∀ P : CochainComplex BV ℤ, CRV.obj (DerivedCategory.Q.obj P) ⟶
+      DerivedCategory.Q.obj ((RV.mapHomologicalComplex (.up ℤ)).obj P))
+    (cU : ∀ P : CochainComplex BU ℤ, CRU.obj (DerivedCategory.Q.obj P) ⟶
+      DerivedCategory.Q.obj ((RU.mapHomologicalComplex (.up ℤ)).obj P))
+    (oρV : rV ⋙ redV ≅ RV ⋙ tRV) (oρU : rU ⋙ redU ≅ RU ⋙ tRU)
+    (ρV : CRV ⋙ tRV.mapDerivedCategory ≅ rV.mapDerivedCategory ⋙ DV.reduction)
+    (ρU : CRU ⋙ tRU.mapDerivedCategory ≅ rU.mapDerivedCategory ⋙ DU.reduction)
+    (eσ : RV ⋙ tP ≅ pS ⋙ RU)
+    (σ : CRV ⋙ tP.mapDerivedCategory ≅ pS.mapDerivedCategory ⋙ CRU)
+    (eα : pS ⋙ rU ≅ rV ⋙ pC) (eRP : tP ⋙ tRU ≅ tRV ⋙ tC) (eτ : redV ⋙ tC ≅ pC ⋙ redU)
+    (τ : DV.reduction ⋙ tC.mapDerivedCategory ≅ pC.mapDerivedCategory ⋙ DU.reduction)
+    {QV₁ QV₂ QS : CochainComplex BV ℤ → Prop} {QU₁ QU₂ : CochainComplex BU ℤ → Prop}
+    (G : CochainComplex BV ℤ → Prop)
+    (hres : ∀ M : DerivedCategory BV, ∃ L : CochainComplex BV ℤ, G L ∧
+      Nonempty (DerivedCategory.Q.obj L ≅ M))
+    (hgood : ∀ L, G L → QV₁ L ∧ QV₂ L ∧ QS L ∧ QU₁ ((pS.mapHomologicalComplex (.up ℤ)).obj L) ∧
+      QU₂ ((pS.mapHomologicalComplex (.up ℤ)).obj L) ∧
+      PV ((rV.mapHomologicalComplex (.up ℤ)).obj L) ∧
+      PU ((pC.mapHomologicalComplex (.up ℤ)).obj ((rV.mapHomologicalComplex (.up ℤ)).obj L)))
+    (hρV : ∀ L, QV₁ L → QV₂ L →
+      ρV.hom.app (DerivedCategory.Q.obj L) ≫
+          DV.reduction.map (rV.mapDerivedCategoryFactors.hom.app L) ≫
+          DV.complexCounit ((rV.mapHomologicalComplex (.up ℤ)).obj L) =
+        tRV.mapDerivedCategory.map (cV L) ≫
+          tRV.mapDerivedCategoryFactors.hom.app ((RV.mapHomologicalComplex (.up ℤ)).obj L) ≫
+          DerivedCategory.Q.map ((NatIso.mapHomologicalComplex oρV.symm (.up ℤ)).hom.app L))
+    (hρU : ∀ P, QU₁ P → QU₂ P →
+      ρU.hom.app (DerivedCategory.Q.obj P) ≫
+          DU.reduction.map (rU.mapDerivedCategoryFactors.hom.app P) ≫
+          DU.complexCounit ((rU.mapHomologicalComplex (.up ℤ)).obj P) =
+        tRU.mapDerivedCategory.map (cU P) ≫
+          tRU.mapDerivedCategoryFactors.hom.app ((RU.mapHomologicalComplex (.up ℤ)).obj P) ≫
+          DerivedCategory.Q.map ((NatIso.mapHomologicalComplex oρU.symm (.up ℤ)).hom.app P))
+    (hσ : ∀ L, QS L →
+      σ.hom.app (DerivedCategory.Q.obj L) ≫
+          CRU.map (pS.mapDerivedCategoryFactors.hom.app L) ≫
+          cU ((pS.mapHomologicalComplex (.up ℤ)).obj L) =
+        tP.mapDerivedCategory.map (cV L) ≫
+          tP.mapDerivedCategoryFactors.hom.app ((RV.mapHomologicalComplex (.up ℤ)).obj L) ≫
+          DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex eσ.hom (.up ℤ)).app L))
+    (hτ : ∀ K, PV K →
+      τ.hom.app (DerivedCategory.Q.obj K) ≫
+          DU.reduction.map (pC.mapDerivedCategoryFactors.hom.app K) ≫
+          DU.complexCounit ((pC.mapHomologicalComplex (.up ℤ)).obj K) =
+        tC.mapDerivedCategory.map (DV.complexCounit K) ≫
+          tC.mapDerivedCategoryFactors.hom.app ((redV.mapHomologicalComplex (.up ℤ)).obj K) ≫
+          DerivedCategory.Q.map ((NatIso.mapHomologicalComplex eτ (.up ℤ)).hom.app K))
+    (hcore : ∀ N : BV, tRU.map (eσ.hom.app N) ≫ oρU.inv.app (pS.obj N) ≫
+        redU.map (eα.hom.app N) =
+      eRP.hom.app (RV.obj N) ≫ tC.map (oρV.inv.app N) ≫ eτ.hom.app (rV.obj N))
+    (M : DerivedCategory BV) :
+    tRU.mapDerivedCategory.map (σ.hom.app M) ≫ ρU.hom.app (pS.mapDerivedCategory.obj M) ≫
+        DU.reduction.map ((Functor.mapDerivedCategorySquareIso eα).hom.app M) =
+      (Functor.mapDerivedCategorySquareIso eRP).hom.app (CRV.obj M) ≫
+        tC.mapDerivedCategory.map (ρV.hom.app M) ≫
+        τ.hom.app (rV.mapDerivedCategory.obj M) := by
+  obtain ⟨L, hL, ⟨e⟩⟩ := hres M
+  have hg := hgood L hL
+  have key : tRU.mapDerivedCategory.map (σ.hom.app (DerivedCategory.Q.obj L)) ≫
+        ρU.hom.app (pS.mapDerivedCategory.obj (DerivedCategory.Q.obj L)) ≫
+        DU.reduction.map ((Functor.mapDerivedCategorySquareIso eα).hom.app
+          (DerivedCategory.Q.obj L)) =
+      (Functor.mapDerivedCategorySquareIso eRP).hom.app (CRV.obj (DerivedCategory.Q.obj L)) ≫
+        tC.mapDerivedCategory.map (ρV.hom.app (DerivedCategory.Q.obj L)) ≫
+        τ.hom.app (rV.mapDerivedCategory.obj (DerivedCategory.Q.obj L)) := by
+    have hi : IsIso (DU.complexCounit ((pC.mapHomologicalComplex (.up ℤ)).obj
+        ((rV.mapHomologicalComplex (.up ℤ)).obj L))) := DU.complexCounit_isIso _ hg.2.2.2.2.2.2
+    rw [← cancel_mono (DU.reduction.map (pC.mapDerivedCategory.map
+        (rV.mapDerivedCategoryFactors.hom.app L)) ≫
+      DU.reduction.map (pC.mapDerivedCategoryFactors.hom.app
+        ((rV.mapHomologicalComplex (.up ℤ)).obj L)) ≫
+      DU.complexCounit ((pC.mapHomologicalComplex (.up ℤ)).obj
+        ((rV.mapHomologicalComplex (.up ℤ)).obj L)))]
+    simp only [Category.assoc]
+    -- left side
+    have hα := mapDerivedCategorySquareIso_hom_app_Q eα L
+    have e1 : DU.reduction.map ((Functor.mapDerivedCategorySquareIso eα).hom.app
+          (DerivedCategory.Q.obj L)) ≫
+        DU.reduction.map (pC.mapDerivedCategory.map (rV.mapDerivedCategoryFactors.hom.app L)) ≫
+        DU.reduction.map (pC.mapDerivedCategoryFactors.hom.app
+          ((rV.mapHomologicalComplex (.up ℤ)).obj L)) =
+      DU.reduction.map (rU.mapDerivedCategory.map (pS.mapDerivedCategoryFactors.hom.app L)) ≫
+        DU.reduction.map (rU.mapDerivedCategoryFactors.hom.app
+          ((pS.mapHomologicalComplex (.up ℤ)).obj L)) ≫
+        DU.reduction.map (DerivedCategory.Q.map
+          ((NatTrans.mapHomologicalComplex eα.hom (.up ℤ)).app L)) := by
+      simp only [← Functor.map_comp, hα]
+    rw [reassoc_of% e1]
+    have n := ρU.hom.naturality (pS.mapDerivedCategoryFactors.hom.app L)
+    dsimp only [Functor.comp_map, Functor.comp_obj] at n
+    rw [← reassoc_of% n]
+    have c : DU.reduction.map (DerivedCategory.Q.map
+          ((NatTrans.mapHomologicalComplex eα.hom (.up ℤ)).app L)) ≫
+        DU.complexCounit ((pC.mapHomologicalComplex (.up ℤ)).obj
+          ((rV.mapHomologicalComplex (.up ℤ)).obj L)) =
+      DU.complexCounit ((rU.mapHomologicalComplex (.up ℤ)).obj
+          ((pS.mapHomologicalComplex (.up ℤ)).obj L)) ≫
+        DerivedCategory.Q.map ((redU.mapHomologicalComplex (.up ℤ)).map
+          ((NatTrans.mapHomologicalComplex eα.hom (.up ℤ)).app L)) :=
+      complexCounit_naturality DU _
+    rw [c, reassoc_of% (hρU _ hg.2.2.2.1 hg.2.2.2.2.1)]
+    have e2 : tRU.mapDerivedCategory.map (σ.hom.app (DerivedCategory.Q.obj L)) ≫
+        tRU.mapDerivedCategory.map (CRU.map (pS.mapDerivedCategoryFactors.hom.app L)) ≫
+        tRU.mapDerivedCategory.map (cU ((pS.mapHomologicalComplex (.up ℤ)).obj L)) =
+      tRU.mapDerivedCategory.map (tP.mapDerivedCategory.map (cV L)) ≫
+        tRU.mapDerivedCategory.map (tP.mapDerivedCategoryFactors.hom.app
+          ((RV.mapHomologicalComplex (.up ℤ)).obj L)) ≫
+        tRU.mapDerivedCategory.map (DerivedCategory.Q.map
+          ((NatTrans.mapHomologicalComplex eσ.hom (.up ℤ)).app L)) := by
+      simp only [← Functor.map_comp, hσ L hg.2.2.1]
+    rw [reassoc_of% e2]
+    have t : tRU.mapDerivedCategory.map (DerivedCategory.Q.map
+          ((NatTrans.mapHomologicalComplex eσ.hom (.up ℤ)).app L)) ≫
+        tRU.mapDerivedCategoryFactors.hom.app ((RU.mapHomologicalComplex (.up ℤ)).obj
+          ((pS.mapHomologicalComplex (.up ℤ)).obj L)) =
+      tRU.mapDerivedCategoryFactors.hom.app ((tP.mapHomologicalComplex (.up ℤ)).obj
+          ((RV.mapHomologicalComplex (.up ℤ)).obj L)) ≫
+        DerivedCategory.Q.map ((tRU.mapHomologicalComplex (.up ℤ)).map
+          ((NatTrans.mapHomologicalComplex eσ.hom (.up ℤ)).app L)) :=
+      tRU.mapDerivedCategoryFactors.hom.naturality _
+    rw [reassoc_of% t]
+    -- right side
+    have m := τ.hom.naturality (rV.mapDerivedCategoryFactors.hom.app L)
+    dsimp only [Functor.comp_map, Functor.comp_obj] at m
+    rw [← reassoc_of% m, hτ _ hg.2.2.2.2.2.1]
+    have e3 : tC.mapDerivedCategory.map (ρV.hom.app (DerivedCategory.Q.obj L)) ≫
+        tC.mapDerivedCategory.map (DV.reduction.map (rV.mapDerivedCategoryFactors.hom.app L)) ≫
+        tC.mapDerivedCategory.map (DV.complexCounit ((rV.mapHomologicalComplex (.up ℤ)).obj L)) =
+      tC.mapDerivedCategory.map (tRV.mapDerivedCategory.map (cV L)) ≫
+        tC.mapDerivedCategory.map (tRV.mapDerivedCategoryFactors.hom.app
+          ((RV.mapHomologicalComplex (.up ℤ)).obj L)) ≫
+        tC.mapDerivedCategory.map (DerivedCategory.Q.map
+          ((NatIso.mapHomologicalComplex oρV.symm (.up ℤ)).hom.app L)) := by
+      simp only [← Functor.map_comp, hρV L hg.1 hg.2.1]
+    rw [reassoc_of% e3]
+    have m1 := (Functor.mapDerivedCategorySquareIso eRP).hom.naturality (cV L)
+    dsimp only [Functor.comp_map, Functor.comp_obj] at m1
+    rw [← reassoc_of% m1]
+    have tc : tC.mapDerivedCategory.map (DerivedCategory.Q.map
+          ((NatIso.mapHomologicalComplex oρV.symm (.up ℤ)).hom.app L)) ≫
+        tC.mapDerivedCategoryFactors.hom.app ((redV.mapHomologicalComplex (.up ℤ)).obj
+          ((rV.mapHomologicalComplex (.up ℤ)).obj L)) =
+      tC.mapDerivedCategoryFactors.hom.app ((tRV.mapHomologicalComplex (.up ℤ)).obj
+          ((RV.mapHomologicalComplex (.up ℤ)).obj L)) ≫
+        DerivedCategory.Q.map ((tC.mapHomologicalComplex (.up ℤ)).map
+          ((NatIso.mapHomologicalComplex oρV.symm (.up ℤ)).hom.app L)) :=
+      tC.mapDerivedCategoryFactors.hom.naturality _
+    rw [reassoc_of% tc, reassoc_of% (mapDerivedCategorySquareIso_hom_app_Q eRP
+      ((RV.mapHomologicalComplex (.up ℤ)).obj L))]
+    have hQ : DerivedCategory.Q.map ((tRU.mapHomologicalComplex (.up ℤ)).map
+          ((NatTrans.mapHomologicalComplex eσ.hom (.up ℤ)).app L)) ≫
+        DerivedCategory.Q.map ((NatIso.mapHomologicalComplex oρU.symm (.up ℤ)).hom.app
+          ((pS.mapHomologicalComplex (.up ℤ)).obj L)) ≫
+        DerivedCategory.Q.map ((redU.mapHomologicalComplex (.up ℤ)).map
+          ((NatTrans.mapHomologicalComplex eα.hom (.up ℤ)).app L)) =
+      DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex eRP.hom (.up ℤ)).app
+          ((RV.mapHomologicalComplex (.up ℤ)).obj L)) ≫
+        DerivedCategory.Q.map ((tC.mapHomologicalComplex (.up ℤ)).map
+          ((NatIso.mapHomologicalComplex oρV.symm (.up ℤ)).hom.app L)) ≫
+        DerivedCategory.Q.map ((NatIso.mapHomologicalComplex eτ (.up ℤ)).hom.app
+          ((rV.mapHomologicalComplex (.up ℤ)).obj L)) := by
+      simp only [← Functor.map_comp]
+      congr 1
+      ext i
+      simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
+        NatTrans.mapHomologicalComplex_app_f, NatIso.mapHomologicalComplex_hom_app_f, Iso.symm_hom]
+      exact hcore (L.X i)
+    rw [hQ]
+  rw [← cancel_epi (tRU.mapDerivedCategory.map (tP.mapDerivedCategory.map (CRV.map e.hom)))]
+  have n1 := σ.hom.naturality e.hom
+  have n2 := ρU.hom.naturality (pS.mapDerivedCategory.map e.hom)
+  have n3 := (Functor.mapDerivedCategorySquareIso eα).hom.naturality e.hom
+  have m1 := (Functor.mapDerivedCategorySquareIso eRP).hom.naturality (CRV.map e.hom)
+  have m2 := ρV.hom.naturality e.hom
+  have m3 := τ.hom.naturality (rV.mapDerivedCategory.map e.hom)
+  dsimp only [Functor.comp_map, Functor.comp_obj] at n1 n2 n3 m1 m2 m3
+  rw [← Functor.map_comp_assoc, n1, Functor.map_comp_assoc, reassoc_of% n2,
+    ← Functor.map_comp, n3, Functor.map_comp, reassoc_of% key]
+  rw [reassoc_of% m1, ← Functor.map_comp_assoc, m2, Functor.map_comp_assoc, m3]
+
+end GenericRhoPull
+
+/-- `ordinaryRho_pull` at all levels at once, as an equation of strict towers. -/
+theorem ordinaryRho_pull_tower {U V : Scheme.{t}} (u : U ⟶ V)
+    (N : reductionModules V (d.completedRing V)) :
+    (exchangeTowerModuleRes d U).map ((stratumModuleReductionIso d u).hom.app N) ≫
+        (ordinaryRho d U).inv.app ((stratumModulePull d u).obj N) ≫
+        (reductionModule d U).map ((exchangeOrdinaryResPull d u).hom.app N) =
+      (exchangeModuleResPull d u).hom.app ((completedReductionModuleTowerFunctor V d).obj N) ≫
+        (exchangeTowerModulePull u (exchangeConstantRing V A) (exchangeConstantRing U A)
+          (exchangeConstantIso u A)).map ((ordinaryRho d V).inv.app N) ≫
+        (ordinaryReductionPullIso d u).hom.app
+          ((reductionRestrict V (exchangeScalar d V)).obj N) := by
+  apply NatTrans.ext
+  funext n
+  simp only [NatTrans.comp_app]
+  exact ordinaryRho_pull d u N n.unop
+
 /-- Restriction of the strict reduction comparison `rho` is compatible with pullback.
 Source: Stacks 099M, 0D6D (blueprint: def-weil-pbc-ordered-coefficient-comparison-data).
-Proof plan (ordinary core `ordinaryRho_pull` is proved above): reduce to `Q L` for a
-flat-term K-flat `L`; postcompose with the invertible map
-`red(pull(resF L)) ≫ red(pullF(res L)) ≫ reductionComplexCounit`; expand both sides by
-`RhoNormalization` (at `L` and at `pull L`), `StratumReductionFormula`,
-`ReductionPullNormalized`, and `mapDerivedCategorySquareIso_hom_app_Q` for `alpha` and
-`exchangeResPull`; both become `Π ≫ Q.map _` with the chain maps identified by
-`ordinaryRho_pull`. Attempted: all the normalization facts elaborate, but applying the
-square formula to `exchangeModuleResPull` costs about 60 s of kernel checking and the
-assembled proof exceeds the memory limit (instance-path mismatch between the tower
-derived-category instances), so it is left as a separate statement. -/
+Proof plan: this is the instance of `rho_pull_generic` (proved above) at
+`reductionData`, `completedReductionTowerComplexCounit`, `ordinaryRho`, `rho`,
+`stratumModuleReductionIso`, `reductionTowerPullbackIso`, `exchangeOrdinaryResPull`,
+`exchangeModuleResPull`, `ordinaryReductionPullIso` and `reductionPullIso`, with
+`G L` := flat-term K-flat. The hypotheses are `flatKFlatResolution` (for `hres`);
+`stratumPull_flatKFlat'`, `isKFlat_restrictScalars_of_flat` with `scalarFlat` and
+`pullback_kFlat` (for `hgood`); the `choose_spec`s of `rho_existsUnique` (at `V` and `U`),
+`completedReductionPullbackIso_existsUnique` and `reductionPullIso_existsUnique`; and
+`ordinaryRho_pull_tower`.
+Status: this `exact` elaborates in 2 s, and the conclusion matches the goal in the kernel
+in 40 ms. But the kernel needs 11-50 s per hypothesis to match the generic binder types
+against the source definitions (`RhoNormalization`, `StratumReductionFormula`,
+`ModelPullNormalized`). Those definitions use other instance paths: for example
+`SemilinearSections.moduleAbelian` against `SheafOfModules.instAbelian`, and
+`reductionTowerHasDerivedCategory` against `exchangeTowers_hasDerived`. Each instance
+equality is cheap by itself (a few ms by `rfl`), so the cost comes from the kernel's
+unfolding order inside the large terms. The module then built in 153 s, but the Lean
+process peaked above 6 GB (the baseline module is 2.6 GB), so the `exact` is not committed.
+Next step: state each hypothesis instance as its own lemma, so that kernel memory peaks per
+declaration. Alternatively, add instance-equality hypotheses to `rho_pull_generic`, so that
+the binder types are written with the source instance paths. -/
 theorem rho_reductionTowerPullbackIso {U V : Scheme.{t}} (u : U ⟶ V) (M : d.derived V) :
     (exchangeTowerRes d U).map ((d.reductionTowerPullbackIso u).hom.app M) ≫
         (rho d U).hom.app ((d.pull u).obj M) ≫
