@@ -350,7 +350,7 @@ theorem rationalRestrictionGlue
     · exact Or.inr (Or.inr (Or.inr (Or.inl h)))
     · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr h))))
   have htor (T : Scheme.{u}) [CompactSpace T] [QuasiSeparatedSpace T] :
-      (constantModelBoundedConstructible Λ T ⊓ DerivedCategory.finiteTorAmplitude _) =
+      (constantModelBoundedConstructible Λ T ⊓ _root_.DerivedCategory.finiteTorAmplitude _) =
         constantModelBoundedConstructible Λ T := by
     apply (localizingClosure_ctf_equals_bc ℓ T Λ ?_).1.2.2.1
     rcases hcoeff with ⟨E, hE⟩ | h
@@ -360,7 +360,7 @@ theorem rationalRestrictionGlue
       constantModelBoundedConstructible Λ T ≤ localizingClosureProEtale Λ T := by
     intro K hK P _ hP
     apply hP K
-    change (constantModelBoundedConstructible Λ T ⊓ DerivedCategory.finiteTorAmplitude _) K
+    change (constantModelBoundedConstructible Λ T ⊓ _root_.DerivedCategory.finiteTorAmplitude _) K
     rwa [htor T]
   have hX := hbc X
   have hY := hbc Y
@@ -369,7 +369,7 @@ theorem rationalRestrictionGlue
         ((rightDerivedLowerShriekOfCompactification Λ c.obj.obj).obj A) := by
     intro A hA
     apply ((compactification_localizing Λ ℓ k f c hadm).2.2.2 A ?_).1
-    change (constantModelBoundedConstructible Λ X ⊓ DerivedCategory.finiteTorAmplitude _) A
+    change (constantModelBoundedConstructible Λ X ⊓ _root_.DerivedCategory.finiteTorAmplitude _) A
     rwa [htor X]
   have hG : ∀ K : (localizingClosureProEtale Λ Y).FullSubcategory,
       constantModelBoundedConstructible Λ Y K.obj →

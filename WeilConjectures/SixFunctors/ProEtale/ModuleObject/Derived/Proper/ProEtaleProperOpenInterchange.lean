@@ -549,7 +549,7 @@ private theorem properOpenInterchange_localizing
   let F := J ⋙ R ⋙ V
   let S : ObjectProperty (DerivedCategory (CategoryTheory.Mod
       (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) :=
-    constantModelBoundedConstructible Λ X ⊓ fun K ↦ DerivedCategory.finiteTorAmplitude _ K
+    constantModelBoundedConstructible Λ X ⊓ fun K ↦ _root_.DerivedCategory.finiteTorAmplitude _ K
   have hloc := (localizingClosure_exists Λ X S).2.2.2.1
   have : CompactSpace Ybar :=
     QuasiCompact.compactSpace_of_compactSpace (Ybar ↘ Spec (.of k))

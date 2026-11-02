@@ -539,9 +539,9 @@ private theorem projection_localizing_of_interfaces
     {X Y : Scheme.{u}} (p : X ⟶ Y)
     (hbcX : constantModelBoundedConstructible Λ X = boundedConstructible (condensedRingObj Λ X))
     (hbcY : constantModelBoundedConstructible Λ Y = boundedConstructible (condensedRingObj Λ Y))
-    (hctfX : (constantModelBoundedConstructible Λ X ⊓ DerivedCategory.finiteTorAmplitude _) =
+    (hctfX : (constantModelBoundedConstructible Λ X ⊓ _root_.DerivedCategory.finiteTorAmplitude _) =
       constantModelBoundedConstructible Λ X)
-    (hctfY : (constantModelBoundedConstructible Λ Y ⊓ DerivedCategory.finiteTorAmplitude _) =
+    (hctfY : (constantModelBoundedConstructible Λ Y ⊓ _root_.DerivedCategory.finiteTorAmplitude _) =
       constantModelBoundedConstructible Λ Y)
     (hp : ProperLocalizingHypotheses Λ p)
     (hpull : ∀ K, constantModelBoundedConstructible Λ Y K →
@@ -619,8 +619,8 @@ private theorem projection_localizing_of_interfaces
     rw [heqX] at hK
     rw [heqY]
     have h := localizingClosure_map
-      (constantModelBoundedConstructible Λ X ⊓ DerivedCategory.finiteTorAmplitude _)
-      (constantModelBoundedConstructible Λ Y ⊓ DerivedCategory.finiteTorAmplitude _)
+      (constantModelBoundedConstructible Λ X ⊓ _root_.DerivedCategory.finiteTorAmplitude _)
+      (constantModelBoundedConstructible Λ Y ⊓ _root_.DerivedCategory.finiteTorAmplitude _)
       (lowerStar Λ p).rightDerivedFunctor (fun K hK ↦ hp.1 ⟨K, hK⟩) hp.2
     rw [hctfX, hctfY] at h
     exact h K hK
@@ -831,7 +831,7 @@ theorem isIso_projectionMate_localizing_finiteExtension
   have hctf (T : Scheme.{u}) [T.Over (Spec (.of k))]
       [LocallyOfFiniteType (T ↘ Spec (.of k))] [QuasiCompact (T ↘ Spec (.of k))]
       [IsSeparated (T ↘ Spec (.of k))] :
-      (constantModelBoundedConstructible Λ T ⊓ DerivedCategory.finiteTorAmplitude _) =
+      (constantModelBoundedConstructible Λ T ⊓ _root_.DerivedCategory.finiteTorAmplitude _) =
         constantModelBoundedConstructible Λ T := by
     have : CompactSpace T := QuasiCompact.compactSpace_of_compactSpace (T ↘ Spec (.of k))
     have : QuasiSeparatedSpace T := quasiSeparatedSpace_of_quasiSeparated (T ↘ Spec (.of k))
@@ -991,7 +991,7 @@ theorem isIso_projectionMate_localizing_padicAlgCl
   have hctf (T : Scheme.{u}) [T.Over (Spec (.of k))]
       [LocallyOfFiniteType (T ↘ Spec (.of k))] [QuasiCompact (T ↘ Spec (.of k))]
       [IsSeparated (T ↘ Spec (.of k))] :
-      (constantModelBoundedConstructible Λ T ⊓ DerivedCategory.finiteTorAmplitude _) =
+      (constantModelBoundedConstructible Λ T ⊓ _root_.DerivedCategory.finiteTorAmplitude _) =
         constantModelBoundedConstructible Λ T := by
     have : CompactSpace T := QuasiCompact.compactSpace_of_compactSpace (T ↘ Spec (.of k))
     have : QuasiSeparatedSpace T := quasiSeparatedSpace_of_quasiSeparated (T ↘ Spec (.of k))

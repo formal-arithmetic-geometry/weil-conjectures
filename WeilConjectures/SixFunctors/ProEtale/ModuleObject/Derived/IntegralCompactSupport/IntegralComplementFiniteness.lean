@@ -171,7 +171,7 @@ theorem integralComplementFiniteness
     Or.inr (Or.inr (Or.inl ⟨E, Or.inl ⟨Iso.refl _⟩⟩))
   have heq := (localizingClosure_ctf_equals_bc ℓ U Λ hΛ).1.2.2.1
   have hJT : (constantModelBoundedConstructible Λ U ⊓
-      DerivedCategory.finiteTorAmplitude _) ((upperStar Λ j).mapDerivedCategory.obj K) := by
+      _root_.DerivedCategory.finiteTorAmplitude _) ((upperStar Λ j).mapDerivedCategory.obj K) := by
     rw [heq]
     exact hJ
   exact (integralOpenDirectImage ℓ E k j ⟨_, hJT⟩).1

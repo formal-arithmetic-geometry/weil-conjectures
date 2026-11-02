@@ -109,7 +109,8 @@ private theorem ambientExchange_of_preservation
     (hp : ProperLocalizingHypotheses Λ p) (hp' : ProperLocalizingHypotheses Λ p')
     (hg : UnboundedLocalizingPullback Λ g) (hg' : UnboundedLocalizingPullback Λ g')
     (hgen : ∀ M, (constantModelBoundedConstructible Λ B M ∧
-      DerivedCategory.finiteTorAmplitude _ M) → IsIso ((condensedAmbientExchange Λ sq).app M))
+      _root_.DerivedCategory.finiteTorAmplitude _ M) →
+        IsIso ((condensedAmbientExchange Λ sq).app M))
     (K : DerivedCategory
       (Mod (Sheaf (Scheme.ProEt.topology B) Ab.{u + 1}) (condensedRingObj Λ B)))
     (hK : localizingClosureProEtale Λ B K) :
@@ -118,7 +119,7 @@ private theorem ambientExchange_of_preservation
   exact extend_iso _
     (localizingClosure_exists Λ B
       (constantModelBoundedConstructible Λ B ⊓ fun M ↦
-        DerivedCategory.finiteTorAmplitude _ M)).2.2.2.1
+        _root_.DerivedCategory.finiteTorAmplitude _ M)).2.2.2.1
     _ _ (condensedAmbientExchange Λ sq) (composite_sums Λ hp hp' hg hg') hgen K hK
 
 private theorem properExchange_admissible

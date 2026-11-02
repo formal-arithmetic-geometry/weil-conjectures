@@ -1141,7 +1141,7 @@ private theorem standardBoundaryVanishing
     (K : DerivedCategory
       (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)))
     (hK : constantModelBoundedConstructible Λ X K ∧
-      DerivedCategory.finiteTorAmplitude _ K) :
+      _root_.DerivedCategory.finiteTorAmplitude _ K) :
     IsZero ((upperStar Λ c.obj.obj.obj.i.closedComplement).mapDerivedCategory.obj
       ((lowerStar Λ r.hom.hom.hom.hom).rightDerivedFunctor.obj
         ((openImmersionLowerShriek Λ d.obj.obj.obj.i).mapDerivedCategory.obj K))) := by
@@ -1287,7 +1287,7 @@ theorem localizingRefinement_coherence
     let : F.IsTriangulated := inferInstance
     let S : ObjectProperty (DerivedCategory
         (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) :=
-      constantModelBoundedConstructible Λ X ⊓ fun L ↦ DerivedCategory.finiteTorAmplitude _ L
+      constantModelBoundedConstructible Λ X ⊓ fun L ↦ _root_.DerivedCategory.finiteTorAmplitude _ L
     have hloc := (ProEtale.localizingClosure_exists Λ X S).2.2.2.1
     let cr : Compactification c.obj.obj.obj.i :=
       { Z := d.obj.obj.obj.Z

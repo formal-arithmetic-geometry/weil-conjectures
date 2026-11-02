@@ -48,7 +48,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
 local notation "S(" T ")" =>
-  (constantModelBoundedConstructible Λ T ⊓ fun K ↦ DerivedCategory.finiteTorAmplitude _ K)
+  (constantModelBoundedConstructible Λ T ⊓ fun K ↦ _root_.DerivedCategory.finiteTorAmplitude _ K)
 local notation "L(" T ")" => localizingClosureProEtale Λ T
 
 /-- For coefficients `E` (a finite extension of `ℚ_ℓ` in `Q̄_ℓ`) or `Q̄_ℓ`, the compactly

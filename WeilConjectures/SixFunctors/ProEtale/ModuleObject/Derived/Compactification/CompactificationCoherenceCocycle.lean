@@ -335,7 +335,7 @@ private theorem boundaryVanishing_of_dense
     (K : DerivedCategory
       (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)))
     (hK : constantModelBoundedConstructible Λ X K ∧
-      DerivedCategory.finiteTorAmplitude _ K) :
+      _root_.DerivedCategory.finiteTorAmplitude _ K) :
     IsZero ((upperStar Λ c.obj.obj.i.closedComplement).mapDerivedCategory.obj
       ((lowerStar Λ r.hom.hom.hom).rightDerivedFunctor.obj
         ((openImmersionLowerShriek Λ d.obj.obj.i).mapDerivedCategory.obj K))) := by
@@ -396,7 +396,7 @@ private theorem refinementMap_isIso
   let : F.IsTriangulated := inferInstance
   let S : ObjectProperty (DerivedCategory
       (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) :=
-    constantModelBoundedConstructible Λ X ⊓ fun L ↦ DerivedCategory.finiteTorAmplitude _ L
+    constantModelBoundedConstructible Λ X ⊓ fun L ↦ _root_.DerivedCategory.finiteTorAmplitude _ L
   have hloc := (ProEtale.localizingClosure_exists Λ X S).2.2.2.1
   let cr : Compactification c.obj.obj.i :=
     { Z := d.obj.obj.Z
@@ -419,7 +419,9 @@ private theorem refinementMap_isIso
     · intro I L hL
       have : PreservesColimit L (J ⋙ R) := hsums I L hL
       change PreservesColimit L ((J ⋙ R) ⋙ V)
-      infer_instance
+      have : PreservesColimit (L ⋙ J ⋙ R) V :=
+        adj.leftAdjoint_preservesColimits.preservesColimitsOfShape.preservesColimit
+      exact comp_preservesColimit (J ⋙ R) V
     · intro L hL
       exact boundaryVanishing_of_dense Λ ℓ k (admissible_standard Λ ℓ hΛ)
         f hd r L hL

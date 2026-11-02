@@ -82,7 +82,7 @@ private theorem selected_projection_isIso
   have hctf (T : Scheme.{u}) [T.Over (Spec (.of k))]
       [LocallyOfFiniteType (T ↘ Spec (.of k))] [QuasiCompact (T ↘ Spec (.of k))]
       [IsSeparated (T ↘ Spec (.of k))] :
-      (constantModelBoundedConstructible Λ T ⊓ DerivedCategory.finiteTorAmplitude _) =
+      (constantModelBoundedConstructible Λ T ⊓ _root_.DerivedCategory.finiteTorAmplitude _) =
         constantModelBoundedConstructible Λ T := by
     have : CompactSpace T := QuasiCompact.compactSpace_of_compactSpace (T ↘ Spec (.of k))
     have : QuasiSeparatedSpace T := quasiSeparatedSpace_of_quasiSeparated (T ↘ Spec (.of k))

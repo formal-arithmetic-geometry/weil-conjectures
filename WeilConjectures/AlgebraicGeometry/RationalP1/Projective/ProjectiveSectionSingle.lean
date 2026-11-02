@@ -9,12 +9,14 @@ public import WeilConjectures.CategoryTheory.Right.RightDerivedSingleH0
 import WeilConjectures.CategoryTheory.Adjunction.SmoothPurity.RightDerivedSingleCounit
 import WeilConjectures.AlgebraicGeometry.RationalP1.Projective.ProjectivePullSectionSingle
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Localizing
+import WeilConjectures.SixFunctors.Supporting.ModCondensedCachedInstances
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option Elab.async false
 universe u
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 open scoped CategoryTheory.Obj CategoryTheory.Functor
+open scoped AlgebraicGeometry.ProEtale.CondensedRing.CachedModInstances
 namespace CategoryTheory.Adjunction
 section SingleCounit
 variable {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]

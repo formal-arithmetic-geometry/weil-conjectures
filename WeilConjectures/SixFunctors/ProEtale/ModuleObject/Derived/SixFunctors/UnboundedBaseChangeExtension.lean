@@ -108,7 +108,7 @@ def UnboundedBaseChangeExtension
     [MonObj Λ] [IsCommMonObj Λ] (sq : ChosenCartesianSquare g' p' p g) : Prop :=
   (∀ K : DerivedCategory
       (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)),
-    (constantModelBoundedConstructible Λ X K ∧ DerivedCategory.finiteTorAmplitude _ K) →
+    (constantModelBoundedConstructible Λ X K ∧ _root_.DerivedCategory.finiteTorAmplitude _ K) →
       IsIso ((termwiseCondensedAmbientExchange Λ sq).app K)) →
   ∀ K : DerivedCategory
       (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)),
@@ -241,7 +241,7 @@ private theorem extension_of_preservation
     (composite_sums Λ hp hp' hg hg') (fun M hM ↦ (he M).1 (h M hM)) K hK
   exact (localizingClosure_exists Λ X
     (constantModelBoundedConstructible Λ X ⊓ fun M ↦
-      DerivedCategory.finiteTorAmplitude _ M)).2.2.2.1
+      _root_.DerivedCategory.finiteTorAmplitude _ M)).2.2.2.1
 
 /-- Proper base change extends from Dctf to its localizing closure, for every admissible
 coefficient in the source's list. The last coefficient is specifically the ring of

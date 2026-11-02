@@ -235,7 +235,7 @@ private noncomputable def coefficientDerived
 
 private def coefficientGenerators (T : Scheme.{u}) :
     ObjectProperty (DerivedCategory (FormalSupportModules Λ T)) :=
-  constantModelBoundedConstructible Λ T ⊓ DerivedCategory.finiteTorAmplitude _
+  constantModelBoundedConstructible Λ T ⊓ _root_.DerivedCategory.finiteTorAmplitude _
 
 private theorem localizing_replete (T : Scheme.{u}) :
     (localizingClosureProEtale Λ T).IsClosedUnderIsomorphisms := by

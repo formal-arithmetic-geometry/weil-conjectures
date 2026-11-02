@@ -22,6 +22,7 @@ Source: blueprint det-sf-mate-open-restriction, proof (2), and
 -/
 
 @[expose] public noncomputable section
+set_option linter.privateModule false
 
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048

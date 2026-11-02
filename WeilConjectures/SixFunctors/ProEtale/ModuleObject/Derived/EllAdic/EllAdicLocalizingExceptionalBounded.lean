@@ -609,9 +609,7 @@ private theorem mem_lift_integers
     [FiniteDimensional ℚ_[ℓ] (ULift.{u} E)] (x : ULift.{u} E) :
     x ∈ Padic.coefficientExtensionIntegers ℓ (ULift.{u} E) ↔
       x.down ∈ PadicAlgCl.integers ℓ E := by
-  have h := (Padic.extension_integers_dvr ℓ (ULift.{u} E)
-    (Padic.coefficientExtensionAbsoluteValue ℓ (ULift.{u} E))
-    (spectralNorm_extends (K := ℚ_[ℓ]) (L := ULift.{u} E))).choose_spec.choose_spec.1 x
+  have h := (Padic.coefficientExtensionIntegers_dvr ℓ (ULift.{u} E)).choose_spec.1 x
   rw [spectral_embedded_norm ℓ E x] at h
   exact h.trans (by
     rw [PadicAlgCl.mem_integers_iff, ← NNReal.coe_le_coe]
@@ -712,7 +710,7 @@ private theorem certified_comparison
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] [IsLocallyNoetherian X]
     [TopologicalSpace.NoetherianSpace X] :
     IsLocalizingAdmissibleCoefficient ℓ Λ ∧
-      (constantModelBoundedConstructible Λ X ⊓ DerivedCategory.finiteTorAmplitude _) =
+      (constantModelBoundedConstructible Λ X ⊓ _root_.DerivedCategory.finiteTorAmplitude _) =
         boundedConstructible (condensedRingObj Λ X) := by
   cases hΛ with
   | continuous E =>
@@ -750,7 +748,7 @@ private theorem hull_eq
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (T : Scheme.{u})
     (heq : (constantModelBoundedConstructible Λ T ⊓
-      DerivedCategory.finiteTorAmplitude _) = boundedConstructible (condensedRingObj Λ T)) :
+      _root_.DerivedCategory.finiteTorAmplitude _) = boundedConstructible (condensedRingObj Λ T)) :
     localizingClosureProEtale Λ T = boundedConstructibleLocalizingClosure Λ T := by
   unfold localizingClosureProEtale
   rw [heq]
@@ -798,9 +796,9 @@ private def ExceptionalKey : Prop :=
       Nonempty (localizingLowerShriek Λ (compactificationOverField g) h ⊣ H) ∧
       ∀ N : (localizingClosureProEtale Λ Y.left).FullSubcategory,
         (constantModelBoundedConstructible Λ Y.left ⊓
-          DerivedCategory.finiteTorAmplitude _) N.obj →
+          _root_.DerivedCategory.finiteTorAmplitude _) N.obj →
         (constantModelBoundedConstructible Λ Z.left ⊓
-          DerivedCategory.finiteTorAmplitude _) (H.obj N).obj
+          _root_.DerivedCategory.finiteTorAmplitude _) (H.obj N).obj
 
 /-- The data for `E` and `Q̄_ℓ`, from Brown representability and the rational restriction
 theorem alone (blueprint: sk-thm-restriction). -/
@@ -886,13 +884,13 @@ private theorem canonical_isBounded_of_key (hkey : ExceptionalKey Λ g)
   let N : LY.FullSubcategory := ⟨K.obj, (le_of_eq eY.symm) _
     (boundedConstructible_le_localizingClosure Λ Y.left K.obj K.property)⟩
   have hN : (constantModelBoundedConstructible Λ Y.left ⊓
-      DerivedCategory.finiteTorAmplitude _) N.obj := (congrFun hY K.obj).mpr K.property
+      _root_.DerivedCategory.finiteTorAmplitude _) N.obj := (congrFun hY K.obj).mpr K.property
   have hGK := hG N hN
   have hJK : (constantModelBoundedConstructible Λ Z.left ⊓
-      DerivedCategory.finiteTorAmplitude _) (J.obj N).obj := by
+      _root_.DerivedCategory.finiteTorAmplitude _) (J.obj N).obj := by
     have hprop := (constantModelConstructibleFiniteTor_wellDefined Λ Z.left).2.1
     exact (constantModelBoundedConstructible Λ Z.left ⊓
-      DerivedCategory.finiteTorAmplitude _).prop_of_iso (LX.ι.mapIso (eg.app N)) hGK
+      _root_.DerivedCategory.finiteTorAmplitude _).prop_of_iso (LX.ι.mapIso (eg.app N)) hGK
   have hbnd := hJK.1.1
   change (∃ a, _) ∧ (∃ b, _) at hbnd
   obtain ⟨⟨a, ha⟩, ⟨b, hb⟩⟩ := hbnd

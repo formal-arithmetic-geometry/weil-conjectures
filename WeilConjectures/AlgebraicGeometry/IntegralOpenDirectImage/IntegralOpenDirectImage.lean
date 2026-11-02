@@ -262,8 +262,7 @@ private theorem unique_mate
     simp only [a, IsIso.hom_inv_id_assoc]
 
 private theorem residue_killed : (l : Padic.coefficientExtensionRing l E 1) = 0 := by
-  have h := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
+  have h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   have hgen : Ideal.span {Padic.coefficientExtensionUniformizer l E} =
       Padic.coefficientExtensionMaximalIdeal l E :=
     h.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
@@ -286,8 +285,7 @@ private theorem residue_discrete :
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
   let I := Padic.coefficientExtensionIdeal l E 1
   apply QuotientAddGroup.discreteTopology (N := I.toAddSubgroup)
-  have h := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
+  have h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   have hgen : Ideal.span {Padic.coefficientExtensionUniformizer l E} =
       Padic.coefficientExtensionMaximalIdeal l E :=
     h.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
@@ -314,11 +312,11 @@ private theorem residue_open_image
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})
       (condensedRingObj (DerivedNakayama.quotientRing l E 1) U)))
     (hK : constantModelBoundedConstructible (DerivedNakayama.quotientRing l E 1) U K)
-    (hTor : DerivedCategory.finiteTorAmplitude _ K) :
+    (hTor : _root_.DerivedCategory.finiteTorAmplitude _ K) :
     constantModelBoundedConstructible (DerivedNakayama.quotientRing l E 1) X
       ((CondensedRing.moduleObjectDerivedPushforward
         (DerivedNakayama.quotientRing l E 1) j).obj K) ∧
-    DerivedCategory.finiteTorAmplitude _
+    _root_.DerivedCategory.finiteTorAmplitude _
       ((CondensedRing.moduleObjectDerivedPushforward
         (DerivedNakayama.quotientRing l E 1) j).obj K) := by
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
@@ -415,7 +413,7 @@ theorem integral_open_direct_image
           K) ∧
       constantModelBoundedConstructible (DerivedNakayama.integerRing l E) X =
         (constantModelBoundedConstructible (DerivedNakayama.integerRing l E) X ⊓
-          DerivedCategory.finiteTorAmplitude (AdicCompletion.Modules l E X)) := by
+          _root_.DerivedCategory.finiteTorAmplitude (AdicCompletion.Modules l E X)) := by
   let : IsLocallyNoetherian U := LocallyOfFiniteType.isLocallyNoetherian
     (U ↘ Spec (.of k))
   let : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian
@@ -456,6 +454,6 @@ theorem integral_open_direct_image
   exact (houtput _).mpr ⟨hcomplete',
     (constantModelBoundedConstructible (DerivedNakayama.quotientRing l E 1) X).prop_of_iso
       e.symm hfinite.1,
-    (DerivedCategory.finiteTorAmplitude _).prop_of_iso e.symm hfinite.2⟩
+    (_root_.DerivedCategory.finiteTorAmplitude _).prop_of_iso e.symm hfinite.2⟩
 
 end AlgebraicGeometry.ProEtale.IntegralOpenDirectImage

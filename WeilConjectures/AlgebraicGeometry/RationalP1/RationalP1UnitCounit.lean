@@ -139,7 +139,7 @@ private theorem exchange_isIso_of_extension
     {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : ChosenCartesianSquare g' f' f g)
     (he : UnboundedBaseChangeExtension Λ sq)
     (hgen : ∀ A, (constantModelBoundedConstructible Λ X A ∧
-      DerivedCategory.finiteTorAmplitude _ A) →
+      _root_.DerivedCategory.finiteTorAmplitude _ A) →
         IsIso ((condensedAmbientExchange Λ sq).app A))
     (A : DerivedCategory (Modules Λ X)) (hA : localizingClosureProEtale Λ X A) :
     IsIso ((condensedAmbientExchange Λ sq).app A) := by

@@ -234,6 +234,6 @@ theorem integralLocalizing_properBaseChange
         (Profinite.padicIntegersRingObj ℓ E) hadm k p g sq M hM) K hK'
     exact (localizingClosure_exists (Profinite.padicIntegersRingObj ℓ E) X
       (constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E) X ⊓
-        fun M ↦ DerivedCategory.finiteTorAmplitude _ M)).2.2.2.1
+        fun M ↦ _root_.DerivedCategory.finiteTorAmplitude _ M)).2.2.2.1
 
 end AlgebraicGeometry.ProEtale.CondensedRing

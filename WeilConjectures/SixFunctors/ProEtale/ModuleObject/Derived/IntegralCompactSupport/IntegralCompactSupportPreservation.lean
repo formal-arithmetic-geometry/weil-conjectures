@@ -83,7 +83,7 @@ private theorem preservation_of_equal_generators
     exact h.2.2.1 I F (fun i ↦ (congrFun (he X.obj.left) _).mpr (hF i))
   · intro K hK
     have hctf : (constantModelBoundedConstructible Λ X.obj.left ⊓
-        DerivedCategory.finiteTorAmplitude _) K :=
+        _root_.DerivedCategory.finiteTorAmplitude _) K :=
       (congrFun (ht X.obj.left).2.2.1 K).mpr hK
     exact (h.2.2.2 K hctf).1
 

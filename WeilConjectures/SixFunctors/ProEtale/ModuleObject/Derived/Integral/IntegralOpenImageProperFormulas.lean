@@ -87,7 +87,7 @@ theorem integralOpenDirectImage (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact 
     (K : ConstantModelConstructibleFiniteTor (Profinite.padicIntegersRingObj ℓ E.val) U) :
     constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.val) X
         ((moduleObjectDerivedPushforward (Profinite.padicIntegersRingObj ℓ E.val) j).obj K.obj) ∧
-      DerivedCategory.finiteTorAmplitude _
+      _root_.DerivedCategory.finiteTorAmplitude _
         ((moduleObjectDerivedPushforward
           (Profinite.padicIntegersRingObj ℓ E.val) j).obj K.obj)   := by
   let : FiniteDimensional ℚ_[ℓ] (ULift.{u} E.val) :=
@@ -128,7 +128,7 @@ theorem integralOpenDirectImage (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact 
     (Profinite.padicIntegersRingObj ℓ E.val)
     (Or.inr (Or.inr (Or.inl ⟨E, Or.inl ⟨Iso.refl _⟩⟩)))).1.2.2.1
   change (constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.val) X ⊓
-    DerivedCategory.finiteTorAmplitude _) _
+    _root_.DerivedCategory.finiteTorAmplitude _) _
   rw [heq]
   exact hbc
 

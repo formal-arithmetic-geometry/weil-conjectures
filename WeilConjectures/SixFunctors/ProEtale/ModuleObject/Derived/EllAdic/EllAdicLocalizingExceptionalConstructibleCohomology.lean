@@ -118,13 +118,13 @@ private theorem homology_constructible_of_key (hkey : ExceptionalKey Λ g)
   let N : LY.FullSubcategory := ⟨K.obj, (le_of_eq eY.symm) _
     (boundedConstructible_le_localizingClosure Λ Y.left K.obj K.property)⟩
   have hN : (constantModelBoundedConstructible Λ Y.left ⊓
-      DerivedCategory.finiteTorAmplitude _) N.obj := (congrFun hY K.obj).mpr K.property
+      _root_.DerivedCategory.finiteTorAmplitude _) N.obj := (congrFun hY K.obj).mpr K.property
   have hHN := hH N hN
   have hJN : (constantModelBoundedConstructible Λ Z.left ⊓
-      DerivedCategory.finiteTorAmplitude _) (J.obj N).obj := by
+      _root_.DerivedCategory.finiteTorAmplitude _) (J.obj N).obj := by
     have := (constantModelConstructibleFiniteTor_wellDefined Λ Z.left).2.1
     exact (constantModelBoundedConstructible Λ Z.left ⊓
-      DerivedCategory.finiteTorAmplitude _).prop_of_iso (LX.ι.mapIso (eg.app N)) hHN
+      _root_.DerivedCategory.finiteTorAmplitude _).prop_of_iso (LX.ι.mapIso (eg.app N)) hHN
   have hbounded : boundedConstructible (condensedRingObj Λ Z.left) (J.obj N).obj :=
     (congrFun hX _).mp hJN
   exact hbounded.2

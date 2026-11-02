@@ -238,7 +238,7 @@ theorem closedAdjointConstructibleYoneda
     intro K hK P _ hP
     apply hP K
     change (constantModelBoundedConstructible Λ T ⊓
-      DerivedCategory.finiteTorAmplitude _) K
+      _root_.DerivedCategory.finiteTorAmplitude _) K
     rwa [heq]
   have hpres : ∀ K, constantModelBoundedConstructible Λ X K →
       constantModelBoundedConstructible Λ Z
