@@ -206,14 +206,6 @@ variable {C D D' E E' : Type*}
 
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-omit [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory D'] [HasDerivedCategory E]
-  [HasDerivedCategory E']
-  [PreservesFiniteLimits F] [PreservesFiniteColimits F] [PreservesFiniteLimits F']
-    [PreservesFiniteColimits F'] [PreservesFiniteLimits a] [PreservesFiniteColimits a]
-    [PreservesFiniteLimits p] [PreservesFiniteColimits p] [PreservesFiniteLimits q]
-    [PreservesFiniteColimits q] [PreservesFiniteLimits h] [PreservesFiniteColimits h] in
 end
 
 section
@@ -230,12 +222,6 @@ variable {C D E E' : Type*}
   [PreservesFiniteLimits h] [PreservesFiniteColimits h]
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-omit [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E] [HasDerivedCategory E']
-  [PreservesFiniteLimits F] [PreservesFiniteColimits F] [PreservesFiniteLimits p]
-    [PreservesFiniteColimits p] [PreservesFiniteLimits q] [PreservesFiniteColimits q]
-    [PreservesFiniteLimits h] [PreservesFiniteColimits h] in
 end
 
 section

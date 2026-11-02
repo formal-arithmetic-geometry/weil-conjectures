@@ -9,6 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.Supported.SupportedExteriorProdu
 
 /-! # Quotient normalization determines the ordinary coefficient tensor square -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
@@ -22,11 +25,18 @@ variable (A : Type uA) [Category.{u + 1} A] [Abelian A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A] [UpperStarPreservesFlat A]
 
+private instance evaluationMonoidal {C A : Type*} [Category C] [Category A]
+    [MonoidalCategory A] (U : C) : ((evaluation C A).obj U).Monoidal :=
+  Functor.CoreMonoidal.toMonoidal { εIso := Iso.refl _, μIso _ _ := Iso.refl _ }
+
 section
 variable {C A : Type*} [Category C] [Category A] [MonoidalCategory A]
   (J : GrothendieckTopology C) [(J.W (A := A)).IsMonoidal] [HasWeakSheafify J A]
   {T : C} (hT : IsTerminal T)
 attribute [local instance] Sheaf.monoidalCategory
+
+private noncomputable instance sectionsMonoidal : ((sheafSections J A).obj (op T)).LaxMonoidal :=
+  inferInstanceAs (sheafToPresheaf J A ⋙ (evaluation Cᵒᵖ A).obj (op T)).LaxMonoidal
 
 private instance constantPresheafAdj_monoidal : (constantPresheafAdj A hT).IsMonoidal := by
   constructor
@@ -51,6 +61,18 @@ attribute [local instance] Sheaf.monoidalCategory
 private noncomputable def precomposeEvaluationIso (T : C) :
     (Functor.whiskeringLeft Cᵒᵖ Dᵒᵖ A).obj F.op ⋙ (evaluation Cᵒᵖ A).obj (op T) ≅
       (evaluation Dᵒᵖ A).obj (op (F.obj T)) := Iso.refl _
+
+private instance precomposeEvaluation_monoidal (T : C) : NatTrans.IsMonoidal
+    (precomposeEvaluationIso (A := A) F T).hom where
+  unit := by simp [precomposeEvaluationIso,
+    Functor.LaxMonoidal.ε]
+  tensor P Q := by simp [precomposeEvaluationIso,
+    Functor.LaxMonoidal.μ]
+
+private instance sheafSectionsNatIsoEvaluation_monoidal {T : C} : NatTrans.IsMonoidal
+    (sheafSectionsNatIsoEvaluation J A (X := T)).hom := by
+  change NatTrans.IsMonoidal (𝟙 (sheafToPresheaf J A ⋙ (evaluation Cᵒᵖ A).obj (op T)))
+  infer_instance
 
 private noncomputable def pushforwardSectionsIso (T : C) :
     F.sheafPushforwardContinuous A J K ⋙ (sheafSections J A).obj (op T) ≅
@@ -92,10 +114,6 @@ attribute [local instance] Sheaf.monoidalCategory
 
 end SectionMaps
 
-omit [HasSmallSiteSheafify A] [MonoidalPreadditive A]
-  [Abelian.HasFunctorialFlatResolution A] [UpperStarPreservesFlat A] in
-omit [HasSmallSiteSheafify A] [MonoidalPreadditive A]
-  [Abelian.HasFunctorialFlatResolution A] [UpperStarPreservesFlat A] in
 end ConstantMonoidal
 
 private theorem coefficientQuotient_epi

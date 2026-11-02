@@ -73,7 +73,6 @@ private def complexCounit
     Functor.whiskerLeft (F.mapHomologicalComplex (.up ℤ))
       (DerivedCategory.quotientCompQhIso D).hom
 attribute [-instance] CategoryTheory.catToReflQuiver in
-attribute [-instance] CategoryTheory.catToReflQuiver in
 private theorem finiteSourceModel_isIso (n : ℕ)
     (P : CochainComplex (pbcModules U (pbcAdicCompletion U d)) ℤ)
     (hP : CochainComplex.IsKFlatIndependentCoefficients (R := pbcAdicCompletion U d) P) :

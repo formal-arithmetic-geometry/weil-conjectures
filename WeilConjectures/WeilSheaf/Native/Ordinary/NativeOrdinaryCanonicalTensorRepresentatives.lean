@@ -90,7 +90,7 @@ theorem native_ordinary_canonical_tensor_representatives (l : ℕ) [Fact l.Prime
           (GenericOrdinaryTensor.ordinaryTotalIso P Q).hom.f n).hom = _
     rw [GenericOrdinaryTensor.ordinaryTotalIso_ι]
     simp only [Units.smul_def, Mod.zsmul_hom, Mod.comp_hom', Preadditive.comp_zsmul,
-      ← Category.assoc, NativeAux.tensorComponent_π]
+      ← Category.assoc, PrecompositionAux.tensorComponent_π]
   · intro P Q hP hQ
     rfl
 

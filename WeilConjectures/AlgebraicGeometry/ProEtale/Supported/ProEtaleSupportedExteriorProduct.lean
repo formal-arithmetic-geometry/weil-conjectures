@@ -214,19 +214,13 @@ private meta def supportedStructureCongr : Nat → MVarId → TacticM Unit
       else
         g.assign (← synthInstance ty)
 
-attribute [-instance] supportedSheaf_isMonoidal supportedSheaf_monoidalPreadditive
+attribute [-instance] supportedSheaf_monoidalPreadditive
   supportedSheaf_isMonoidalGeneric supportedSheaf_monoidalPreadditiveGeneric
   supportedSheaf_smallColimitsGeneric supportedSheaf_intColimitsGeneric in
 private theorem normalization_tensorHom_eq (T : Scheme.{u})
     (S M N : DerivedCategory (Sheaf (Scheme.ProEt.topology T) C)) :
     (S ⟶ M ⊗ N) = (S ⟶ ((derivedTensor C T).obj M).obj N) := rfl
 
-attribute [-instance] supportedSheaf_isMonoidal supportedSheaf_monoidalPreadditive
-  supportedSheaf_isMonoidalGeneric supportedSheaf_monoidalPreadditiveGeneric
-  supportedSheaf_smallColimitsGeneric supportedSheaf_intColimitsGeneric in
-attribute [-instance] supportedSheaf_isMonoidal supportedSheaf_monoidalPreadditive
-  supportedSheaf_isMonoidalGeneric supportedSheaf_monoidalPreadditiveGeneric
-  supportedSheaf_smallColimitsGeneric supportedSheaf_intColimitsGeneric in
 end ExternalProductProof
 
 attribute [local irreducible] HomologicalComplex₂.total
@@ -359,6 +353,13 @@ private lemma aux_isIso_of_isIso_left {V W : X.ProEt} (f : V ⟶ W)
   infer_instance
 
 variable {U : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
+
+/-- The counit `U ×_X U ⟶ U` at `U` of the adjunction between composition with and base change
+along the open immersion `j` is an isomorphism, `j` being a monomorphism. -/
+private theorem aux_isIso_mapPullbackAdj_counit_app_mk :
+    IsIso ((MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ j inferInstance trivial).counit.app
+      (Scheme.ProEt.mk j)) :=
+  aux_isIso_of_isIso_left _ (inferInstanceAs (IsIso (pullback.fst j j)))
 
 attribute [local instance] aux_isIso_mapPullbackAdj_counit_app_mk
 

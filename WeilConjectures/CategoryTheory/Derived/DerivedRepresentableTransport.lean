@@ -86,23 +86,6 @@ private lemma transport_fac
       representableTransportUnit L S S' tau := by
   exact S.rightDerivedFunctorPlus.rightDerived_fac _ _ _ _
 
-omit [EnoughInjectives A] in
-omit [EnoughInjectives A] [HasDerivedCategory AddCommGrpCat] in
-omit [EnoughInjectives A] [HasDerivedCategory AddCommGrpCat] in
-omit [EnoughInjectives A] [EnoughInjectives B] [HasDerivedCategory AddCommGrpCat] in
-omit [EnoughInjectives A] [HasDerivedCategory A] [HasDerivedCategory AddCommGrpCat] in
-omit [EnoughInjectives B] [HasDerivedCategory AddCommGrpCat] in
-omit [EnoughInjectives A] [HasDerivedCategory A]
-  [EnoughInjectives B] [HasDerivedCategory AddCommGrpCat] in
-omit [EnoughInjectives A] [HasDerivedCategory AddCommGrpCat] in
-omit [EnoughInjectives A] [EnoughInjectives B]
-  [HasDerivedCategory A] [HasDerivedCategory B] [HasDerivedCategory AddCommGrpCat] in
-omit [EnoughInjectives A] [EnoughInjectives B]
-  [HasDerivedCategory A] [HasDerivedCategory B] in
-omit [EnoughInjectives A] [EnoughInjectives B] [HasDerivedCategory AddCommGrpCat] in
-omit [EnoughInjectives A] [EnoughInjectives B] [HasDerivedCategory AddCommGrpCat] in
-omit [EnoughInjectives A] [EnoughInjectives B]
-  [HasDerivedCategory A] [HasDerivedCategory B] [HasDerivedCategory AddCommGrpCat] in
 variable {C : Type u₃} [Category.{v} C] [Abelian C] [EnoughInjectives C]
   [HasDerivedCategory.{w₃} C]
 

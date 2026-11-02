@@ -473,8 +473,6 @@ def SystemResolutionCocycleFor : Prop :=
           DerivedCategory.Q.map (((F ⋙ G).mapHomologicalComplex (.up ℤ)).map t₀₂) ∧
       DerivedCategory.Q.map (((F ⋙ G).mapHomologicalComplex (.up ℤ)).map t₀₀) = 𝟙 _
 
-omit [HasDerivedCategory B] [Abelian.HasKInjectiveResolutions B]
-  [PreservesFiniteLimits F] [PreservesFiniteColimits F] in
 variable [Abelian.HasKInjectiveResolutions A]
 
 end GenericProperties

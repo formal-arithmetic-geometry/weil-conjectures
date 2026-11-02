@@ -142,9 +142,15 @@ private theorem fixedConstructible_of_models (T : Scheme.{u})
   obtain ⟨S, hS⟩ := h
   by_cases hn : 0 < S.n
   · refine ⟨S, hn, S.isConstructible_stratum, fun i ↦ ⟨?_, ?_⟩⟩
-    · obtain ⟨I, U, f, hf, he⟩ := ProEtale.finiteModels_over R _ (hS i)
+    · obtain ⟨I, U, f, hf, he⟩ := ProEtale.finiteModels_over R _ (by
+        obtain ⟨ι, W, g, hg, hM⟩ := hS i
+        exact ⟨ι, W, g, hg, fun j ↦ (hM j).imp fun _ h ↦
+          ⟨by have := h.1; exact Module.finite_of_finite R, h.2⟩⟩)
       exact ⟨I, U, f, hf, fun j ↦ ⟨(he j).choose, (he j).choose_spec.2⟩⟩
-    · exact ProEtale.finite_geometricStalk_of_finite_models R _ (hS i)
+    · exact ProEtale.finite_geometricStalk_of_finite_models R _ (by
+        obtain ⟨ι, W, g, hg, hM⟩ := hS i
+        exact ⟨ι, W, g, hg, fun j ↦ (hM j).imp fun _ h ↦
+          ⟨by have := h.1; exact Module.finite_of_finite R, h.2⟩⟩)
   · have hz : S.n = 0 := Nat.eq_zero_of_not_pos hn
     have : IsEmpty T := ⟨fun x ↦ by
       have hx : x ∈ ⋃ i, S.stratum i := S.iUnion_stratum_eq_univ.symm ▸ Set.mem_univ x
@@ -163,7 +169,10 @@ private theorem fixedConstructible_of_models (T : Scheme.{u})
           exact ⟨fun ⟨i⟩ ↦ i.down.elim, False.elim⟩
         rw [hempty]
         exact Scheme.bot_mem_propQCPrecoverage T
-      obtain ⟨I, U, f, hf, he⟩ := ProEtale.finiteModels_over R G he
+      obtain ⟨I, U, f, hf, he⟩ := ProEtale.finiteModels_over R G (by
+        obtain ⟨ι, W, g, hg, hM⟩ := he
+        exact ⟨ι, W, g, hg, fun j ↦ (hM j).imp fun _ h ↦
+          ⟨by have := h.1; exact Module.finite_of_finite R, h.2⟩⟩)
       exact ⟨I, U, f, hf, fun j ↦ ⟨(he j).choose, (he j).choose_spec.2⟩⟩
     · intro Ω _ _ x
       exact isEmptyElim ((show Spec (.of Ω) ⟶ T from x) (IsLocalRing.closedPoint Ω))

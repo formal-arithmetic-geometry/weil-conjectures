@@ -99,9 +99,9 @@ private noncomputable def ordinaryBicomplexIso (P Q : CochainComplex (Mod C R) �
         (.up ℤ) (.up ℤ)).obj P).obj Q) :=
   HomologicalComplex.Hom.isoOfComponents
     (fun p ↦ HomologicalComplex.Hom.isoOfComponents
-      (fun q ↦ NativeAux.tensorComponent (Q.X q) (P.X p)) (by
+      (fun q ↦ PrecompositionAux.tensorComponent (Q.X q) (P.X p)) (by
         intro q q' h
-        exact ((NativeAux.tensorIso (P.X p)).hom.naturality (Q.d q q')).symm))
+        exact ((PrecompositionAux.tensorIso (P.X p)).hom.naturality (Q.d q q')).symm))
     (by
       intro p p' h
       apply HomologicalComplex.Hom.ext
@@ -120,7 +120,7 @@ private theorem ordinaryTotalIso_ι (P Q : CochainComplex (Mod C R) ℤ)
     (p q n : ℤ) (hpq : p + q = n) :
     HomologicalComplex.ιMapBifunctor P Q (ordinaryBifunctor)
         (.up ℤ) p q n hpq ≫ (ordinaryTotalIso P Q).hom.f n =
-      (p * q).negOnePow • ((NativeAux.tensorComponent (Q.X q) (P.X p)).hom ≫
+      (p * q).negOnePow • ((PrecompositionAux.tensorComponent (Q.X q) (P.X p)).hom ≫
         HomologicalComplex.ιTensorObj Q P q p n (by omega)) := by
   simp only [ordinaryTotalIso, Iso.trans_hom, HomologicalComplex.comp_f,
     ← Category.assoc]
@@ -128,7 +128,7 @@ private theorem ordinaryTotalIso_ι (P Q : CochainComplex (Mod C R) ℤ)
     (.up ℤ)).f n) ≫ _ = _
   rw [HomologicalComplex₂.ιTotal_map]
   dsimp only [ordinaryBicomplexIso, HomologicalComplex.Hom.isoOfComponents]
-  change ((NativeAux.tensorComponent (Q.X q) (P.X p)).hom ≫
+  change ((PrecompositionAux.tensorComponent (Q.X q) (P.X p)).hom ≫
     HomologicalComplex.ιMapBifunctor P Q
       (curriedTensor (Mod C R)).flip (.up ℤ) p q n hpq) ≫ _ = _
   rw [Category.assoc, HomologicalComplex.ι_mapBifunctorFlipIso_hom]
@@ -145,16 +145,16 @@ private theorem ordinaryTotalIso_naturality
   have hc (p q : ℤ) :
       (Mod.tensorLeftMap (f.f p)).app (Q.X q) ≫
           (Mod.tensorLeft (P'.X p)).map (g.f q) ≫
-            (NativeAux.tensorComponent (Q'.X q) (P'.X p)).hom =
-        (NativeAux.tensorComponent (Q.X q) (P.X p)).hom ≫ (g.f q ⊗ₘ f.f p) := by
+            (PrecompositionAux.tensorComponent (Q'.X q) (P'.X p)).hom =
+        (PrecompositionAux.tensorComponent (Q.X q) (P.X p)).hom ≫ (g.f q ⊗ₘ f.f p) := by
     have h₁ : (Mod.tensorLeftMap (f.f p)).app (Q.X q) ≫
-        (NativeAux.tensorComponent (Q.X q) (P'.X p)).hom =
-      (NativeAux.tensorComponent (Q.X q) (P.X p)).hom ≫ Q.X q ◁ f.f p :=
+        (PrecompositionAux.tensorComponent (Q.X q) (P'.X p)).hom =
+      (PrecompositionAux.tensorComponent (Q.X q) (P.X p)).hom ≫ Q.X q ◁ f.f p :=
         NatTrans.congr_app (OrdinaryModuleHom.tensorRightIso_naturality (f.f p)) (Q.X q)
     have h₂ : (Mod.tensorLeft (P'.X p)).map (g.f q) ≫
-        (NativeAux.tensorComponent (Q'.X q) (P'.X p)).hom =
-      (NativeAux.tensorComponent (Q.X q) (P'.X p)).hom ≫ g.f q ▷ P'.X p :=
-        (NativeAux.tensorIso (P'.X p)).hom.naturality (g.f q)
+        (PrecompositionAux.tensorComponent (Q'.X q) (P'.X p)).hom =
+      (PrecompositionAux.tensorComponent (Q.X q) (P'.X p)).hom ≫ g.f q ▷ P'.X p :=
+        (PrecompositionAux.tensorIso (P'.X p)).hom.naturality (g.f q)
     rw [h₂, ← Category.assoc, h₁, Category.assoc, ← tensorHom_def']
   ext n : 1
   apply HomologicalComplex.mapBifunctor.hom_ext
@@ -217,7 +217,7 @@ private theorem ordinaryTotalIso_inv_ι (P Q : CochainComplex (Mod C R) ℤ)
     (p q n : ℤ) (hqp : q + p = n) :
     HomologicalComplex.ιTensorObj Q P q p n hqp ≫
         (ordinaryTotalIso P Q).inv.f n =
-      (p * q).negOnePow • ((NativeAux.tensorComponent (Q.X q) (P.X p)).inv ≫
+      (p * q).negOnePow • ((PrecompositionAux.tensorComponent (Q.X q) (P.X p)).inv ≫
         HomologicalComplex.ιMapBifunctor P Q (ordinaryBifunctor)
           (.up ℤ) p q n (by change p + q = n; omega)) := by
   simp only [ordinaryTotalIso, Iso.trans_inv, HomologicalComplex.comp_f,
@@ -238,8 +238,8 @@ private theorem ordinarySwap_ι (P Q : CochainComplex (Mod C R) ℤ)
     (p q n : ℤ) (hpq : p + q = n) :
     HomologicalComplex.ιMapBifunctor P Q (ordinaryBifunctor)
         (.up ℤ) p q n hpq ≫ (ordinarySwap P Q).hom.f n =
-      (p * q).negOnePow • ((NativeAux.tensorComponent (Q.X q) (P.X p)).hom ≫
-        (β_ (Q.X q) (P.X p)).hom ≫ (NativeAux.tensorComponent (P.X p) (Q.X q)).inv ≫
+      (p * q).negOnePow • ((PrecompositionAux.tensorComponent (Q.X q) (P.X p)).hom ≫
+        (β_ (Q.X q) (P.X p)).hom ≫ (PrecompositionAux.tensorComponent (P.X p) (Q.X q)).inv ≫
           HomologicalComplex.ιMapBifunctor Q P (ordinaryBifunctor)
             (.up ℤ) q p n (by change q + p = n; omega)) := by
   simp only [ordinarySwap, Iso.trans_hom, Iso.symm_hom, HomologicalComplex.comp_f,
@@ -263,9 +263,9 @@ private theorem ordinarySwap_signed :
     ordinarySigned (ordinarySwap (C := C) (R := R)) := by
   intro P Q p q n hpq hqp
   have hi : Mod.tensorObjπ (P.X p) (Q.X q) ≫
-      (NativeAux.tensorComponent (P.X p) (Q.X q)).inv.hom =
+      (PrecompositionAux.tensorComponent (P.X p) (Q.X q)).inv.hom =
         Mod.tensorπ (P.X p) (Q.X q) := by
-    rw [← NativeAux.tensorComponent_π, Category.assoc, ← Mod.comp_hom',
+    rw [← PrecompositionAux.tensorComponent_π, Category.assoc, ← Mod.comp_hom',
       Iso.hom_inv_id, Mod.id_hom', Category.comp_id]
   change Mod.tensorπ (Q.X q) (P.X p) ≫
     (HomologicalComplex.ιMapBifunctor P Q (ordinaryBifunctor)
@@ -273,7 +273,7 @@ private theorem ordinarySwap_signed :
   rw [ordinarySwap_ι]
   simp only [Units.smul_def, Mod.zsmul_hom, Mod.comp_hom', Preadditive.comp_zsmul,
     ← Category.assoc]
-  rw [NativeAux.tensorComponent_π]
+  rw [PrecompositionAux.tensorComponent_π]
   rw [Mod.braiding_hom_hom, Mod.tensorObjπ_braidingHomX]
   simp only [Category.assoc]
   rw [← Category.assoc (Mod.tensorObjπ (P.X p) (Q.X q)), hi]

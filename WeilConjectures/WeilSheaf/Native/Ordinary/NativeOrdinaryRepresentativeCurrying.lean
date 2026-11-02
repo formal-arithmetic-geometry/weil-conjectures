@@ -560,7 +560,7 @@ private instance gradedTensorRight (X Y Z : GradedObject ℤ (Mod C B)) :
 private noncomputable abbrev ordinaryBifunctor : Mod C B ⥤ Mod C B ⥤ Mod C B :=
   GenericOrdinaryTensor.ordinaryBifunctor
 
-private noncomputable abbrev ordinaryH : (Mod C B)ᵒᵖ ⥤ Mod C B ⥤ Mod C B := NativeAux.H
+private noncomputable abbrev ordinaryH : (Mod C B)ᵒᵖ ⥤ Mod C B ⥤ Mod C B := PrecompositionAux.H
 
 private noncomputable abbrev ordinaryTotal (P Q : CochainComplex (Mod C B) ℤ) :=
   GenericOrdinaryTensor.ordinaryTotal P Q

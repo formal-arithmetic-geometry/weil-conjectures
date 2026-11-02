@@ -62,13 +62,5 @@ private def comparisonNat
       t M N ≫ (F₁.mapDerivedCategory.map a ▷ F₂.mapDerivedCategory.obj N)
     simpa only [tensorHom_id, CategoryTheory.Functor.map_id] using ht M M' N N a (𝟙 N)
 
-omit [HasDerivedCategory C] [Abelian.HasFunctorialFlatResolution C]
-  [HasDerivedCategory D] [Abelian.HasFunctorialFlatResolution D]
-  [PreservesFiniteLimits G] [PreservesFiniteColimits G]
-  [PreservesFiniteLimits F₁] [PreservesFiniteColimits F₁]
-  [PreservesFiniteLimits F₂] [PreservesFiniteColimits F₂]
-  [PreservesFiniteLimits G'] [PreservesFiniteColimits G']
-  [PreservesFiniteLimits F₁'] [PreservesFiniteColimits F₁']
-  [PreservesFiniteLimits F₂'] [PreservesFiniteColimits F₂'] in
 end Tensor
 end AlgebraicGeometry.Etale

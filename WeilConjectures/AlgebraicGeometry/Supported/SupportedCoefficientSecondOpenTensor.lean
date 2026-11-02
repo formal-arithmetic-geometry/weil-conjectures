@@ -105,8 +105,6 @@ private theorem exactMap_fac {F' : C ⥤ D} [F'.Additive]
   rw [factorsh_quotient, factorsh_quotient] at h
   exact h
 
-omit [HasDerivedCategory C] [HasDerivedCategory D]
-  [PreservesFiniteLimits F] [PreservesFiniteColimits F] in
 end ExactFactors
 
 section TensorFactors
