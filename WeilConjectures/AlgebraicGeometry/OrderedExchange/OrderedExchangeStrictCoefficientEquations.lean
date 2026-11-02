@@ -11,6 +11,7 @@ import all WeilConjectures.AlgebraicGeometry.OrderedExchange.ProEtaleConstantRed
 import all WeilConjectures.AlgebraicGeometry.Stratum.StratumCompletionUnitRestriction
 import WeilConjectures.AlgebraicGeometry.Completed.CompletedReductionUnit
 import WeilConjectures.AlgebraicGeometry.CompletedConstantAlgebraFlatQuotients
+import WeilConjectures.AlgebraicGeometry.OrderedExchange.OrderedExchangeTowerExchange
 
 /-! # strictCoefficientEquations -/
 
@@ -445,18 +446,119 @@ theorem exchangeRealizationH_beta (K : d.derived X) :
   erw [CategoryTheory.Functor.map_id, Category.id_comp]
   rw [reassoc_of% hR]
 
+/-- The expanded form of `towerV'_delta`, after cancelling the strict projection `towerH`.
+Source: Stacks 099M, 0E48 (blueprint: lem-weil-pbc-ordered-strict-coefficient-equations). -/
+theorem towerV'_delta_expanded (sq : ChosenCartesianSquare g' f' f g) (K : d.derived X) :
+    (exchangeTowerRes d Y').map ((d.reductionTowerPullbackIso g).hom.app ((d.push f).obj K)) ≫
+      (exchangeTowerRes d Y').map
+        ((completedReductionTower Y' d).map ((d.integralExchange sq).app K)) ≫
+      (exchangeTowerRes d Y').map (d.towerProjection f' ((d.pull g').obj K)) ≫
+      (exchangeTowerRes d Y').map
+        ((d.towerPush f').map ((d.reductionTowerPullbackIso g').inv.app K)) ≫
+      (exchangeResPush d f').hom.app ((d.towerPull g').obj ((completedReductionTower X d).obj K)) ≫
+      (exchangeConstantPush (A := A) f').map
+        ((exchangeResPull d g').hom.app ((completedReductionTower X d).obj K)) ≫
+      (exchangeConstantPush (A := A) f').map
+        ((exchangeConstantPull (A := A) g').map ((rho d X).hom.app K)) =
+    (exchangeTowerRes d Y').map ((d.towerPull g).map (d.towerProjection f K)) ≫
+      (exchangeResPull d g).hom.app ((d.towerPush f).obj ((completedReductionTower X d).obj K)) ≫
+      (exchangeConstantPull (A := A) g).map
+        ((exchangeResPush d f).hom.app ((completedReductionTower X d).obj K)) ≫
+      (exchangeConstantPull (A := A) g).map
+        ((exchangeConstantPush (A := A) f).map ((rho d X).hom.app K)) ≫
+      (exchangeConstantSquare (A := A) sq).exchangeTowerMate.app
+        ((reduction d X).obj ((res d X).obj K)) := by
+  have hG := restriction_strictExchange d sq K
+  have h1 := rho_reductionTowerPullbackIso d g ((d.push f).obj K)
+  have h2 := rho_reductionTowerPullbackIso d g' K
+  have h3 := rho_towerProjection d f K
+  have h4 := rho_towerProjection d f' ((d.pull g').obj K)
+  have hrho := (rho d Y').hom.naturality ((d.integralExchange sq).app K)
+  have hN := (exchangeResPull d g).hom.naturality (d.towerProjection f K)
+  have hE := (exchangeResPush d f').hom.naturality
+    ((d.reductionTowerPullbackIso g').inv.app K)
+  dsimp only [Functor.comp_map, Functor.comp_obj] at hrho hN hE
+  have h1' : (exchangeResPull d g).hom.app ((completedReductionTower Y d).obj ((d.push f).obj K)) ≫
+      (exchangeConstantPull (A := A) g).map ((rho d Y).hom.app ((d.push f).obj K)) =
+    (exchangeTowerRes d Y').map ((d.reductionTowerPullbackIso g).hom.app ((d.push f).obj K)) ≫
+      (rho d Y').hom.app ((d.pull g).obj ((d.push f).obj K)) ≫
+      (reduction d Y').map ((alpha d g).hom.app ((d.push f).obj K)) ≫
+      (reductionPullIso d g).inv.app ((res d Y).obj ((d.push f).obj K)) := by
+    rw [reassoc_of% h1, Iso.hom_inv_id_app]
+    erw [Category.comp_id]
+  have h2' : (exchangeTowerRes d X').map ((d.reductionTowerPullbackIso g').inv.app K) ≫
+      (exchangeResPull d g').hom.app ((completedReductionTower X d).obj K) ≫
+      (exchangeConstantPull (A := A) g').map ((rho d X).hom.app K) =
+    (rho d X').hom.app ((d.pull g').obj K) ≫ (reduction d X').map ((alpha d g').hom.app K) ≫
+      (reductionPullIso d g').inv.app ((res d X).obj K) := by
+    rw [← cancel_epi ((exchangeTowerRes d X').map ((d.reductionTowerPullbackIso g').hom.app K)),
+      ← Functor.map_comp_assoc, Iso.hom_inv_id_app]
+    erw [CategoryTheory.Functor.map_id, Category.id_comp]
+    rw [reassoc_of% h2, Iso.hom_inv_id_app]
+    erw [Category.comp_id]
+  have h3' := congrArg (exchangeConstantPull (A := A) g).map h3
+  have h2'' := congrArg (exchangeConstantPush (A := A) f').map h2'
+  simp only [Functor.map_comp] at h3' h2''
+  have hL : (exchangeTowerRes d Y').map
+        ((d.reductionTowerPullbackIso g).hom.app ((d.push f).obj K)) ≫
+      (exchangeTowerRes d Y').map
+        ((completedReductionTower Y' d).map ((d.integralExchange sq).app K)) ≫
+      (exchangeTowerRes d Y').map (d.towerProjection f' ((d.pull g').obj K)) ≫
+      (exchangeTowerRes d Y').map
+        ((d.towerPush f').map ((d.reductionTowerPullbackIso g').inv.app K)) ≫
+      (exchangeResPush d f').hom.app ((d.towerPull g').obj ((completedReductionTower X d).obj K)) ≫
+      (exchangeConstantPush (A := A) f').map
+        ((exchangeResPull d g').hom.app ((completedReductionTower X d).obj K)) ≫
+      (exchangeConstantPush (A := A) f').map
+        ((exchangeConstantPull (A := A) g').map ((rho d X).hom.app K)) =
+      (exchangeTowerRes d Y').map
+        ((d.reductionTowerPullbackIso g).hom.app ((d.push f).obj K)) ≫
+      (rho d Y').hom.app ((d.pull g).obj ((d.push f).obj K)) ≫
+      (reduction d Y').map ((res d Y').map ((d.integralExchange sq).app K)) ≫
+      (reduction d Y').map ((chi d f').hom.app ((d.pull g').obj K)) ≫
+      projection d f' ((res d X').obj ((d.pull g').obj K)) ≫
+      (exchangeConstantPush (A := A) f').map ((reduction d X').map ((alpha d g').hom.app K)) ≫
+      (exchangeConstantPush (A := A) f').map
+        ((reductionPullIso d g').inv.app ((res d X).obj K)) := by
+    rw [reassoc_of% hE, h2'', reassoc_of% h4, reassoc_of% hrho]
+  have hR : (exchangeTowerRes d Y').map ((d.towerPull g).map (d.towerProjection f K)) ≫
+      (exchangeResPull d g).hom.app ((d.towerPush f).obj ((completedReductionTower X d).obj K)) ≫
+      (exchangeConstantPull (A := A) g).map
+        ((exchangeResPush d f).hom.app ((completedReductionTower X d).obj K)) ≫
+      (exchangeConstantPull (A := A) g).map
+        ((exchangeConstantPush (A := A) f).map ((rho d X).hom.app K)) =
+      (exchangeTowerRes d Y').map
+        ((d.reductionTowerPullbackIso g).hom.app ((d.push f).obj K)) ≫
+      (rho d Y').hom.app ((d.pull g).obj ((d.push f).obj K)) ≫
+      (reduction d Y').map ((alpha d g).hom.app ((d.push f).obj K)) ≫
+      (reductionPullIso d g).inv.app ((res d Y).obj ((d.push f).obj K)) ≫
+      (exchangeConstantPull (A := A) g).map ((reduction d Y).map ((chi d f).hom.app K)) ≫
+      (exchangeConstantPull (A := A) g).map (projection d f ((res d X).obj K)) := by
+    rw [reassoc_of% hN, h3', reassoc_of% h1']
+  rw [hL, reassoc_of% hR, hG]
+
 /-- The third strict coefficient equation: restriction of the strict exchange `towerV'`
 is the constant strict tower mate, conjugated by `beta` and `delta`.
 Source: Stacks 099M, 0E48 (blueprint: lem-weil-pbc-ordered-strict-coefficient-equations).
-Needs, beyond `rho_reductionTowerPullbackIso` and `rho_towerProjection`, the compatibility of
-restriction with the ambient exchange `integralExchange` (via `alpha`, `chi` and the
-composite pullback isomorphisms); not attempted in detail. -/
+Proof: cancel the strict projection `towerH`, move `rho` through both corners with
+`rho_reductionTowerPullbackIso` and `rho_towerProjection`, and conclude with the ambient
+equation `restriction_strictExchange` (whose two inputs are still open). -/
 theorem towerV'_delta (sq : ChosenCartesianSquare g' f' f g) (K : d.derived X) :
     (exchangeTowerRes d Y').map (d.towerV' sq K) ≫ (delta (f' := f') (g' := g') d K).hom =
       (beta (f := f) (g := g) d K).hom ≫
         (exchangeConstantSquare (A := A) sq).exchangeTowerMate.app
           ((reduction d X).obj ((res d X).obj K)) := by
-  sorry
+  rw [← cancel_epi ((exchangeTowerRes d Y').map ((d.towerPull g).map (d.towerProjection f K)))]
+  simp only [AdicCoefficientDatum.towerV', AdicCoefficientDatum.towerV,
+    AdicCoefficientDatum.towerH, AdicCoefficientDatum.towerH', beta, delta, exchangeCornerB,
+    exchangeCornerD, Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Functor.mapIso_hom,
+    Functor.mapIso_inv, asIso_hom, asIso_inv, NatTrans.comp_app,
+    Functor.associator_hom_app, Functor.associator_inv_app, Functor.isoWhiskerLeft_hom,
+    Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.map_comp, Category.id_comp, Category.comp_id, Category.assoc]
+  erw [← Functor.map_comp_assoc, ← Functor.map_comp (d.towerPull g), IsIso.hom_inv_id,
+    CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id, Category.id_comp]
+  exact towerV'_delta_expanded d sq K
 
 set_option linter.unusedVariables false in
 /-- strictCoefficientEquations: the indicated part of the ordered comparison argument.
