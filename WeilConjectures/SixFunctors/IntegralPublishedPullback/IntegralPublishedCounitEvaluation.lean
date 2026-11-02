@@ -75,6 +75,8 @@ private theorem evaluated_counit_adjunct (W : Scheme.{u})
   rw [← hn, Category.assoc, Adjunction.homEquiv_naturality_left,
     T.counit_projection]
 
+set_option maxHeartbeats 400000 in
+-- The finite evaluation unfolds the published pullback model and its counit.
 /-- Finite evaluation of reduction of the published pullback model followed by the counit.
 Source: Stacks 0941 and 099N. Choose the prescribed ordinary quotient presentation;
 its normalization and finite evaluation determine the finite pullback component.

@@ -268,7 +268,7 @@ theorem geometry {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     simp [a]
   refine ⟨?_, ?_, ha, ?_, ?_, ?_⟩
   · apply IsPullback.mk'
-    · apply pullback.hom_ext <;> simp [pullback.map, i, a, s, pullback.condition]
+    · apply pullback.hom_ext <;> simp [pullback.map, i, a, s]
     · intro T x y h _
       apply pullback.hom_ext
       · simpa [pullback.map, i] using h =≫ pullback.fst (f ≫ g) (f ≫ g)
@@ -410,8 +410,6 @@ def kappa (P : PurityFiniteSetting.{u})
         (sigma Λ P d (a f g) (pullback.fst (f ≫ g) g)
             (pullback.fst (f ≫ g) (f ≫ g) ≫ (f ≫ g) ≫ aZ) ≪≫
           dualizingCongr Λ P (geometry f g).2.2.1)
-
-attribute [instance] noetherianPullback
 
 /-- Affine r-space, with the explicit size lift of its finite coordinate set.
 Source: blueprint proof Step 8 (blueprint: lem-pur-diagonal-section-pasting). -/
