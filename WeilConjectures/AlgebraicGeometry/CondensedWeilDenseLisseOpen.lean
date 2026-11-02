@@ -256,6 +256,45 @@ private theorem geometricFrobenius_projection
       pullback.fst Y₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) :=
   (D.galoisMap_projections Y₀.hom _).1
 
+/-- Descend a generic lisse open with the geometric scheme and projection abstract. -/
+private theorem lisse_model_open
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {G Y : Scheme.{u}} (p : G ⟶ Y)
+    (hdesc : ∀ U : G.Opens, genericPoints G ⊆ (U : Set G) →
+      ∃ U₀ : Y.Opens, Dense (U₀ : Set Y) ∧
+        Set.range (pullback.snd U₀.ι p) ⊆ Set.range U.ι)
+    (M : Mod (Sheaf (Scheme.ProEt.topology G) Ab.{u + 1}) (condensedRingObj Λ G))
+    (hgeneric : ∃ U : G.Opens, genericPoints G ⊆ (U : Set G) ∧
+      IsLisseCoefficientModule Λ ((CondensedRing.upperStar Λ U.ι).obj M)) :
+    ∃ U₀ : Y.Opens, Dense (U₀ : Set Y) ∧
+      IsLisseCoefficientModule Λ ((CondensedRing.upperStar Λ
+        (pullback.snd U₀.ι p)).obj M) := by
+  refine combine_choices hgeneric (fun U hU ↦ hdesc U hU.1) ?_
+  intro U hU U₀ hU₀
+  exact ⟨U₀, hU₀.1, lisse_of_range_subset Λ U _ hU₀.2 M hU.2⟩
+
+/-- Add Frobenius with the geometric scheme, projection and automorphism abstract. -/
+private theorem dense_lisse_from_generic
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {G Y : Scheme.{u}}
+    (p : G ⟶ Y) (Φ : G ⟶ G) [IsIso Φ] (hΦ : Φ ≫ p = p)
+    (hdesc : ∀ U : G.Opens, genericPoints G ⊆ (U : Set G) →
+      ∃ U₀ : Y.Opens, Dense (U₀ : Set Y) ∧
+        Set.range (pullback.snd U₀.ι p) ⊆ Set.range U.ι)
+    (M : Mod (Sheaf (Scheme.ProEt.topology G) Ab.{u + 1}) (condensedRingObj Λ G))
+    (hgeneric : ∃ U : G.Opens, genericPoints G ⊆ (U : Set G) ∧
+      IsLisseCoefficientModule Λ ((CondensedRing.upperStar Λ U.ι).obj M)) :
+    ∃ (U₀ : Scheme.{u}) (j₀ : U₀ ⟶ Y),
+      IsOpenImmersion j₀ ∧ Dense (Set.range j₀.base) ∧
+      IsOpenImmersion (pullback.snd j₀ p) ∧
+      ∃ φ : pullback j₀ p ⟶ pullback j₀ p,
+        IsIso φ ∧ ∃ _hφ : φ ≫ pullback.snd j₀ p = pullback.snd j₀ p ≫ Φ,
+          IsLisseCoefficientModule Λ
+            ((CondensedRing.upperStar Λ (pullback.snd j₀ p)).obj M) := by
+  exact open_with_automorphism p Φ hΦ
+    (fun V j ↦ IsLisseCoefficientModule Λ ((CondensedRing.upperStar Λ
+      (pullback.snd j p)).obj M)) (lisse_model_open Λ p hdesc M hgeneric)
+
 /-- The finite-type geometric fibre is Noetherian. -/
 private theorem geometricFiber_noetherian
     (D : WeilConjectures.FiniteFieldDatum.{u})
@@ -297,6 +336,108 @@ private theorem generic_property_apply
     ∃ U : X.Opens, genericPoints X ⊆ (U : Set X) ∧
       IsLisseCoefficientModule Λ ((CondensedRing.upperStar Λ U.ι).obj M) :=
   hP inferInstance M hM
+
+/-- Unbundle the generic-lissity property before supplying a module argument. -/
+private theorem generic_property_unbundle
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ]
+    (X : Scheme.{u}) (hP : GenericLisseProperty (Mon.mk Λ) X) :
+    GenericLisseObjectProperty Λ X :=
+  hP
+
+/-- Keep the unbundled coefficient object and geometric scheme abstract through assembly. -/
+private theorem exists_dense_lisse_open_monoid
+    (ℓ : ℕ) [Fact ℓ.Prime]
+    (L : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})
+    (hL : L = Profinite.padicAlgClCondensedRing ℓ)
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] (hA : Mon.mk Λ = Mon.mk (coefficientHeartRingObj L))
+    {G Y : Scheme.{u}} [IsNoetherian G]
+    (p : G ⟶ Y) (Φ : G ⟶ G) [IsIso Φ] (hΦ : Φ ≫ p = p)
+    (hdesc : ∀ U : G.Opens, genericPoints G ⊆ (U : Set G) →
+      ∃ U₀ : Y.Opens, Dense (U₀ : Set Y) ∧
+        Set.range (pullback.snd U₀.ι p) ⊆ Set.range U.ι)
+    (M : Mod (Sheaf (Scheme.ProEt.topology G) Ab.{u + 1}) (condensedRingObj Λ G))
+    (hM : IsConstantModelConstructible Λ G M) :
+    ∃ (U₀ : Scheme.{u}) (j₀ : U₀ ⟶ Y),
+      IsOpenImmersion j₀ ∧ Dense (Set.range j₀.base) ∧
+      IsOpenImmersion (pullback.snd j₀ p) ∧
+      ∃ φ : pullback j₀ p ⟶ pullback j₀ p,
+        IsIso φ ∧ ∃ _hφ : φ ≫ pullback.snd j₀ p = pullback.snd j₀ p ≫ Φ,
+          IsLisseCoefficientModule Λ
+            ((CondensedRing.upperStar Λ (pullback.snd j₀ p)).obj M) := by
+  exact dense_lisse_from_generic Λ p Φ hΦ hdesc M
+    (generic_property_apply Λ G M hM
+      (generic_property_unbundle Λ G
+        (generic_property_transport (Mon.mk Λ) (Mon.mk (coefficientHeartRingObj L)) hA G
+          (generic_lisse_property_model ℓ L hL G))))
+
+-- Keep the original public binder names, including the existential square witness.
+
+/-- A constructible condensed Weil module is lisse on a dense open descending to the
+finite-field model, and its Weil isomorphism restricts to that open.
+Source: literature/blueprint/latest/blueprint/part-weights-riemann-hypothesis/
+`sec-deligne-laumon-general/sec-reduction-to-the-relative-affine-line/`
+`sk-prop-wgen-relative-line/thm-zl-relative-line-stratification.proof.md`,
+paragraphs 1 and 4 (blueprint: lem-zl-condensed-weil-dense-lisse-open).
+
+The pullback `pullback j₀ p` is the geometric base change of the open immersion
+`j₀ : U₀ ⟶ T₀`; its second projection is the open immersion `j : U ⟶ T`.
+The morphism `φ` records the induced geometric Frobenius on this pullback by its
+commuting square with the geometric Frobenius of `T`. The square `hφ` is exactly
+the datum of `restrictedWeilIso`: the restricted Weil isomorphism of the node is
+`restrictedWeilIso Λ hφ θ : φ^* j^* M ≅ j^* M`, the restriction of the given `θ`
+(not an arbitrary isomorphism).
+
+Proof: (1) The stratified-lissity criterion gives a finite lisse stratification.
+Choose an open neighborhood of each component generic point inside its stratum image.
+The actual pullback to the stratum is a surjective closed immersion. Descend lissity
+through this immersion, then glue over the union U of the neighborhoods.
+(2) The geometric base-change projection p is closed because the field extension
+is algebraic. Define U₀ as the complement of p(X \ U).
+(3) Every point in the fibre of a geometric generic point is another generic point:
+Galois transitivity of the fibre identifies them by a scheme automorphism. Therefore
+p⁻¹(U₀) contains all geometric generic points and is dense. Surjectivity and continuity
+of p imply that U₀ is dense.
+(4) The geometric pullback of U₀ factors through U, so the restricted module is lisse.
+(5) Geometric Frobenius fixes p. The universal property of the pullback constructs
+its restriction and inverse. The resulting square defines `restrictedWeilIso Λ hφ θ`.
+All constructions include the empty scheme.
+-/
+theorem exists_dense_lisse_open_of_constructible_weil
+    (D : WeilConjectures.FiniteFieldDatum.{u})
+    (ℓ : ℕ) [Fact ℓ.Prime] (_hℓ : ℓ ≠ D.p)
+    (Y₀ : Over (Spec (CommRingCat.of D.k₀)))
+    [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]
+    [IsSeparated Y₀.hom] [IsReduced Y₀.left]
+    (M : Mod (Sheaf (Scheme.ProEt.topology (D.geometricFiber Y₀).left) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) (D.geometricFiber Y₀).left))
+    (_hM : IsConstantModelConstructible
+      (Profinite.padicAlgClRingObj ℓ)
+      (D.geometricFiber Y₀).left M)
+    (θ : (CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ)
+      (D.geometricFrobenius Y₀).hom).obj M ≅ M) :
+    let p : (D.geometricFiber Y₀).left ⟶ Y₀.left :=
+      pullback.fst Y₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))
+    ∃ (U₀ : Scheme.{u}) (j₀ : U₀ ⟶ Y₀.left),
+      IsOpenImmersion j₀ ∧ Dense (Set.range j₀.base) ∧
+      IsOpenImmersion (pullback.snd j₀ p) ∧
+      ∃ φ : pullback j₀ p ⟶
+          pullback j₀ p,
+        IsIso φ ∧
+        ∃ hφ : φ ≫ pullback.snd j₀ p =
+          pullback.snd j₀ p ≫
+            (D.geometricFrobenius Y₀).hom,
+        IsLisseCoefficientModule (Profinite.padicAlgClRingObj ℓ)
+          ((CondensedRing.upperStar (Profinite.padicAlgClRingObj ℓ)
+            (pullback.snd j₀ p)).obj M) := by
+  clear θ
+  let : IsNoetherian (D.geometricFiber Y₀).left := geometricFiber_noetherian D Y₀
+  exact exists_dense_lisse_open_monoid ℓ (Profinite.padicAlgClCondensedRing ℓ) rfl
+    (Profinite.padicAlgClRingObj ℓ) rfl
+    (G := (D.geometricFiber Y₀).left) (Y := Y₀.left)
+    (pullback.fst Y₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))))
+    (D.geometricFrobenius Y₀).hom (geometricFrobenius_projection D Y₀)
+    (dense_model_open D Y₀) M _hM
 
 set_option linter.unusedVariables false in
 end AlgebraicGeometry.ProEtale

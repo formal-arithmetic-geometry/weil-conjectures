@@ -672,27 +672,6 @@ def unitComparison (E : ∀ T : Scheme.{u}, Encoding A T) (T : Scheme.{u}) :
   letI := FiniteNativeTensor.encodingMonoidal A T (E T)
   exact (Functor.Monoidal.εIso (N A E T)).symm
 
-/-- The native tensor map is its standing Hom transpose, using native projection,
-Koszul symmetry, the actual counit at the native unit, and the left unitor.
-Source: defining theta transpose (blueprint: lem-pur-composition-tensor-mate). -/
-def nativeTheta (E : ∀ T : Scheme.{u}, Encoding A T)
-    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] [CompactSpace Y]
-    (K : Native A Y) : (nativePull A f).obj K ⊗ nativeOmega A E f ⟶
-      (exceptional A E f).obj K :=
-  open Classical in
-  let M := (nativePull A f).obj K ⊗ nativeOmega A E f
-  if hK : _root_.DerivedCategory.TStructure.t.plus ((N A E Y).obj K) then
-    if hM : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} (ULift.{u + 1} A)) X
-        ((N A E X).obj M) then
-      exceptionalHomEquiv A E f M K hM hK
-        ((nativeSupport A f).map
-            (derivedTensorKoszulSymmetry (Internal A X)
-              ((nativePull A f).obj K) (nativeOmega A E f)).hom ≫
-          inverseOnDomain (nativeProjection A f (nativeOmega A E f) K) ≫
-          nativeEpsilon A E f (𝟙_ (Native A Y)) ▷ K ≫ (λ_ K).hom)
-    else 0
-  else 0
-
 /-- The actual native projection arrow recorded by def-exchange-projection.
 Source: specified projection (blueprint: lem-pur-composition-tensor-mate). -/
 abbrev nativeProjection {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
@@ -705,32 +684,6 @@ Source: omega_h (blueprint: lem-pur-composition-tensor-mate). -/
 def nativeOmega (E : ∀ T : Scheme.{u}, Encoding A T)
     {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] : Native A X :=
   (exceptional A E f).obj (𝟙_ (Native A Y))
-
-/-- The native exceptional compositor is the specified successive Hom transpose of
-nativeAlpha followed by nativeEpsilon. Thus its adjunction normalization is fixed.
-Source: pur9-def-upper-shriek-composition (blueprint: lem-pur-composition-tensor-mate). -/
-def nativeC (E : ∀ T : Scheme.{u}, Encoding A T)
-    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
-    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
-    [QuasiCompact f] [QuasiCompact g] [CompactSpace Y] [CompactSpace Z]
-    (K : Native A Z) : (exceptional A E (f ≫ g)).obj K ⟶
-      (exceptional A E f).obj ((exceptional A E g).obj K) :=
-  open Classical in
-  let M := (exceptional A E (f ≫ g)).obj K
-  if hK : _root_.DerivedCategory.TStructure.t.plus ((N A E Z).obj K) then
-    if hM : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} (ULift.{u + 1} A)) X
-        ((N A E X).obj M) then
-      if hF : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} (ULift.{u + 1} A)) Y
-          ((N A E Y).obj ((nativeSupport A f).obj M)) then
-        if hG : _root_.DerivedCategory.TStructure.t.plus
-            ((N A E Y).obj ((exceptional A E g).obj K)) then
-          (exceptionalHomEquiv A E g _ K hF hK).trans
-            (exceptionalHomEquiv A E f M _ hM hG)
-            (nativeAlpha A E f g M ≫ nativeEpsilon A E (f ≫ g) K)
-        else 0
-      else 0
-    else 0
-  else 0
 
 /-- The native compact-support compositor is the unique preimage of the actual fixed
 compositor under the normalized coefficient equivalence, with the specified boundary maps.
@@ -746,20 +699,6 @@ def nativeAlpha (E : ∀ T : Scheme.{u}, Encoding A T)
       (F (ULift.{u + 1} A) g).map ((canonicalSupport A E f).hom.app M) ≫
       alpha (ULift.{u + 1} A) f g ((N A E X).obj M) ≫
       (canonicalSupport A E (f ≫ g)).inv.app M)
-
-/-- The native standing counit is the inverse Hom image of the identity. The guarded
-zero extension is outside the bounded-below domains only, as in the fixed coordinates.
-Source: standing counit (blueprint: lem-pur-composition-tensor-mate). -/
-def nativeEpsilon (E : ∀ T : Scheme.{u}, Encoding A T)
-    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] [CompactSpace Y]
-    (K : Native A Y) : (nativeSupport A f).obj ((exceptional A E f).obj K) ⟶ K :=
-  open Classical in
-  if hK : _root_.DerivedCategory.TStructure.t.plus ((N A E Y).obj K) then
-    if hM : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} (ULift.{u + 1} A)) X
-        ((N A E X).obj ((exceptional A E f).obj K)) then
-      (exceptionalHomEquiv A E f _ K hM hK).symm (𝟙 _)
-    else 0
-  else 0
 
 /-- Transport the normalized standing finite Hom bijection through the specified
 compact-support comparison and coefficient equivalences. All maps are given data.
@@ -821,6 +760,67 @@ abbrev N (E : ∀ T : Scheme.{u}, Encoding A T) (T : Scheme.{u}) :=
 /-- The published internal-module derived category over Lambda_T.
 Source: finite coefficient convention (blueprint: lem-pur-composition-tensor-mate). -/
 abbrev Native (T : Scheme.{u}) := _root_.DerivedCategory (Internal A T)
+
+/-- The native tensor map is its standing Hom transpose, using native projection,
+Koszul symmetry, the actual counit at the native unit, and the left unitor.
+Source: defining theta transpose (blueprint: lem-pur-composition-tensor-mate). -/
+def nativeTheta (E : ∀ T : Scheme.{u}, Encoding A T)
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] [CompactSpace Y]
+    (K : Native A Y) : (nativePull A f).obj K ⊗ nativeOmega A E f ⟶
+      (exceptional A E f).obj K :=
+  open Classical in
+  let M := (nativePull A f).obj K ⊗ nativeOmega A E f
+  if hK : _root_.DerivedCategory.TStructure.t.plus ((N A E Y).obj K) then
+    if hM : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} (ULift.{u + 1} A)) X
+        ((N A E X).obj M) then
+      exceptionalHomEquiv A E f M K hM hK
+        ((nativeSupport A f).map
+            (derivedTensorKoszulSymmetry (Internal A X)
+              ((nativePull A f).obj K) (nativeOmega A E f)).hom ≫
+          inverseOnDomain (nativeProjection A f (nativeOmega A E f) K) ≫
+          nativeEpsilon A E f (𝟙_ (Native A Y)) ▷ K ≫ (λ_ K).hom)
+    else 0
+  else 0
+
+/-- The native exceptional compositor is the specified successive Hom transpose of
+nativeAlpha followed by nativeEpsilon. Thus its adjunction normalization is fixed.
+Source: pur9-def-upper-shriek-composition (blueprint: lem-pur-composition-tensor-mate). -/
+def nativeC (E : ∀ T : Scheme.{u}, Encoding A T)
+    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    [QuasiCompact f] [QuasiCompact g] [CompactSpace Y] [CompactSpace Z]
+    (K : Native A Z) : (exceptional A E (f ≫ g)).obj K ⟶
+      (exceptional A E f).obj ((exceptional A E g).obj K) :=
+  open Classical in
+  let M := (exceptional A E (f ≫ g)).obj K
+  if hK : _root_.DerivedCategory.TStructure.t.plus ((N A E Z).obj K) then
+    if hM : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} (ULift.{u + 1} A)) X
+        ((N A E X).obj M) then
+      if hF : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} (ULift.{u + 1} A)) Y
+          ((N A E Y).obj ((nativeSupport A f).obj M)) then
+        if hG : _root_.DerivedCategory.TStructure.t.plus
+            ((N A E Y).obj ((exceptional A E g).obj K)) then
+          (exceptionalHomEquiv A E g _ K hF hK).trans
+            (exceptionalHomEquiv A E f M _ hM hG)
+            (nativeAlpha A E f g M ≫ nativeEpsilon A E (f ≫ g) K)
+        else 0
+      else 0
+    else 0
+  else 0
+
+/-- The native standing counit is the inverse Hom image of the identity. The guarded
+zero extension is outside the bounded-below domains only, as in the fixed coordinates.
+Source: standing counit (blueprint: lem-pur-composition-tensor-mate). -/
+def nativeEpsilon (E : ∀ T : Scheme.{u}, Encoding A T)
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] [CompactSpace Y]
+    (K : Native A Y) : (nativeSupport A f).obj ((exceptional A E f).obj K) ⟶ K :=
+  open Classical in
+  if hK : _root_.DerivedCategory.TStructure.t.plus ((N A E Y).obj K) then
+    if hM : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} (ULift.{u + 1} A)) X
+        ((N A E X).obj ((exceptional A E f).obj K)) then
+      (exceptionalHomEquiv A E f _ K hM hK).symm (𝟙 _)
+    else 0
+  else 0
 
 end Maps
 
