@@ -701,8 +701,6 @@ def finiteBalancing (W : Scheme.{u}) (e : ℕ)
 
 attribute [local irreducible] finiteBalancing
 
-attribute [local irreducible] sourceEvaluation
-
 /-- Positive-exponent evaluation, retaining the exponent rather than renaming its
 predecessor. Source: Stacks 0940
 (blueprint: def-pur-strict-scalar-mate-evaluation-data). -/
@@ -725,7 +723,5 @@ def subsequenceEvaluation (W : Scheme.{u}) (e n : ℕ) :
   (Functor.mapDerivedCategoryCompIso (ordinarySubsequence l F W e)
     ((evaluation ℕᵒᵖ
       (Modules (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) W)).obj (op n))).symm
-
-attribute [local irreducible] targetEvaluation
 
 end WeilConjectures.PurStrictScalar
