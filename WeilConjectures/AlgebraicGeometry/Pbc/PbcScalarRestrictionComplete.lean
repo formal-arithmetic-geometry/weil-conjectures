@@ -111,7 +111,8 @@ private def scalarImageSection (U : W.ProEt)
       CategoryTheory.forget CommRingCat).sections :=
   (Functor.sectionsFunctor _).map (Functor.whiskerRight
     ((WeilConjectures.IntegralOnSlice.restrict.{u, u} W (some U)).map
-      (WeilConjectures.completedCoefficientMap l E F i W)).hom (CategoryTheory.forget CommRingCat)) s
+      (WeilConjectures.completedCoefficientMap l E F i W)).hom
+      (CategoryTheory.forget CommRingCat)) s
 
 /-- The scalar inclusion sends the source uniformizer to a multiple of the target one.
 Source: Bhatt--Scholze, Lemma 6.8.2(1) (blueprint: lem-pbc-scalar-restriction-complete).
@@ -126,7 +127,8 @@ private theorem scalarUniformizer_dvd (V : W.ProEtᵒᵖ) :
   obtain ⟨a, e, he, hπ⟩ := WeilConjectures.integral_ramification l E F i
   obtain ⟨k, rfl⟩ : ∃ k, e = k + 1 := ⟨e - 1, by omega⟩
   refine ⟨WeilConjectures.scalarValue l F W V
-    ((a : Padic.coefficientExtensionIntegers l F) * Padic.coefficientExtensionUniformizer l F ^ k), ?_⟩
+    ((a : Padic.coefficientExtensionIntegers l F) *
+      Padic.coefficientExtensionUniformizer l F ^ k), ?_⟩
   have h := WeilConjectures.scalarValue_map l E W F i V (Padic.coefficientExtensionUniformizer l E)
   change _ = WeilConjectures.scalarValue l F W V (Padic.coefficientExtensionUniformizer l F) * _
   erw [h, hπ, ← map_mul]
@@ -164,7 +166,14 @@ section. Source: Stacks Tags 0999 and 0A6A
 (blueprint: lem-pbc-scalar-restriction-complete).
 Proof: derived Hom out of the localization by a section, into a restriction of scalars,
 is the restriction of derived Hom out of the scalar extension of that localization; the
-latter is the localization at the image section, scalar extension being flat. -/
+latter is the localization at the image section, scalar extension being flat.
+The small-site version of exactly this statement is
+`restrictScalars_completeElement_iff` (`RestrictionSectionCompleteness`), for
+`IsRingedSiteCompleteElement` on a `SmallCategory` with coefficients in the site universe.
+Not yet formalized here: transport to `W.ProEt` through `AsSmall` (as
+`NativeRestriction.smallModelComplete` does for `principalLocallyComplete`), and the
+identification of a slice section of `R.over U` with an element of `R(U)`, which turns
+`localTest` into the `IsRingedSiteCompleteElement` test. -/
 private theorem scalarLocalTest_restrict
     (M : DerivedCategory (WeilConjectures.scalarReductionSource.{u, u} l F W)) (U : W.ProEt)
     (s : ((WeilConjectures.IntegralOnSlice.ring l E W (some U)).obj ⋙
