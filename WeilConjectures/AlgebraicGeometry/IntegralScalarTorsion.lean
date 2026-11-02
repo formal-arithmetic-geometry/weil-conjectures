@@ -177,8 +177,7 @@ theorem integralScalarDualTensor_torsionBound
     ∃ e : ℕ, ∀ x : (internalPerfectScalarDualTensor l E P).homology 1,
       x ∈ Submodule.torsion (Padic.coefficientExtensionIntegers l E) _ →
         Padic.coefficientExtensionUniformizer l E ^ e • x = 0 := by
-  have h := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
+  have h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   rcases h with ⟨hO, hm, hu, hlocal, hmax, huniq, hfrac, hdvr, hpid, hm0,
     hprime, hfinite, hr, hgen, hrest⟩
   let A := Padic.coefficientExtensionIntegers l E

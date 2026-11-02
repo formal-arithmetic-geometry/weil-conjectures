@@ -63,6 +63,8 @@ end AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
+variable {Λ Λ' Λ'' : ScalarSixRing.{u}} {X Y U : Scheme.{u}}
+
 /-- The normalized scalar comparison data. Its `thetaNormalization` fixes every hom
 component to `scalarSixPullHom`, hence fixes its inverse and the entire data uniquely.
 This choice therefore selects no arbitrary comparison.
