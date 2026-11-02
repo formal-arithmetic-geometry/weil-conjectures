@@ -415,6 +415,10 @@ end GenericOrdinary
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
+private theorem finiteHomCommSheafify (T : Scheme.{u}) :
+    HasSheafify (ProEt.topology T) CommRingCat.{u + 1} :=
+  integralCoefficientRingSheafify.{u, u} T
+
 private theorem finiteHomAbSheafify (T : Scheme.{u}) :
     HasSheafify (ProEt.topology T) AddCommGrpCat.{u + 1} :=
   integralCoefficientAbSheafify.{u, u} T

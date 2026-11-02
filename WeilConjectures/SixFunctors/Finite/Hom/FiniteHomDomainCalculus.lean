@@ -363,7 +363,6 @@ end PullbackCompatibility
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 include D hl hXover hXsep hXft hXqc in
-include D hl hXover hXsep hXft hXqc in
 /-- The canonical tensor and constant-unit comparisons make ambient coefficient change
 strong symmetric monoidal, for the actual signed tensor and Koszul braiding.
 Source: blueprint opening proof paragraph; Stacks 07A4 and 0FPT
@@ -391,14 +390,10 @@ theorem finiteHomDomain_monoidal {n m : ℕ} (h : m ≤ n) :
       (Etale.ExceptionalCoefficients.unitIso (finiteHomQuotient l E h) X) ∧
     Etale.ExceptionalCoefficients.TensorNormalization (finiteHomQuotient l E h) X
       (Etale.ExceptionalCoefficients.tensorIso (finiteHomQuotient l E h) X) := by
-  exact domainMonoidalProof D l hl E X h
-
-include D hl hXover hXsep hXft hXqc in
-attribute [local implicit_reducible] CategoryTheory.catToReflQuiver
-
-attribute [local irreducible] finiteHomEtaleData finiteHomEtaleClosed finiteHomEtaleTensor
-  Etale.derivedHom coefficientBaseChangeHom
-  CoefficientClosedStructure.tensor CoefficientClosedStructure.evaluation
-  CoefficientClosedStructure.transpose
+  exact ⟨(finiteHomScalar_monoidal (finiteHomDomainCoeff l E n) (finiteHomDomainCoeff l E m)
+      (finiteHomQuotient l E h) X).1,
+    (finiteHomEtaleData_existsUnique l E X).choose_spec.1.tensor n m h,
+    (finiteHomScalar_monoidal (finiteHomDomainCoeff l E n) (finiteHomDomainCoeff l E m)
+      (finiteHomQuotient l E h) X).2⟩
 
 end WeilConjectures
