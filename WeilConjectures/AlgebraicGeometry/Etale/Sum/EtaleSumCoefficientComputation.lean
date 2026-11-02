@@ -322,6 +322,6 @@ private theorem paste_coefficient_squares {D : Type*} [Category D]
   rw [reassoc_of% hn, ho', reassoc_of% hp, ← reassoc_of% ha,
     reassoc_of% hs, reassoc_of% hg]
 
-attribute [local irreducible] etaleSumScalarSheafIso etaleSumSheetMap etaleScalarPureTensor
+attribute [local irreducible] etaleSumScalarSheafIso
 
 end AlgebraicGeometry.Etale

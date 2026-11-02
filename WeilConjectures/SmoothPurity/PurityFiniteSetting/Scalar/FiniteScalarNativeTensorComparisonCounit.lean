@@ -56,6 +56,10 @@ variable {C : Type u₁} [Category.{u + 1} C] [Abelian C] [IsGrothendieckAbelian
 section CachedMonoidalStructures
 
 -- Cache the canonical structures. All public signatures are outside this section.
+private noncomputable abbrev complexMonoidalC : MonoidalCategory (CochainComplex C ℤ) :=
+  inferInstance
+private noncomputable abbrev complexMonoidalD : MonoidalCategory (CochainComplex D ℤ) :=
+  inferInstance
 private noncomputable abbrev homotopyMonoidalC :
     MonoidalCategory (HomotopyCategory C (.up ℤ)) := inferInstance
 private noncomputable abbrev homotopyMonoidalD :
@@ -84,6 +88,17 @@ private lemma finiteScalar_tensorator_Q (P Q : CochainComplex C ℤ) :
   rfl
 
 attribute [local irreducible] DerivedCategory.Q DerivedCategory.Qh
+
+private lemma finiteScalar_comparison_naturality_tensorHom {K₁ K₂ M₁ M₂ : DerivedCategory C}
+    (f : K₁ ⟶ K₂) (g : M₁ ⟶ M₂) :
+    F.leftDerivedFunctor.map (f ⊗ₘ g) ≫
+        (F.leftDerivedTensorComparison.app K₂).app M₂ =
+      (F.leftDerivedTensorComparison.app K₁).app M₁ ≫
+        (F.leftDerivedFunctor.map f ⊗ₘ F.leftDerivedFunctor.map g) := by
+  have h₁ := congr_app (F.leftDerivedTensorComparison.naturality f) M₁
+  have h₂ := (F.leftDerivedTensorComparison.app K₂).naturality g
+  dsimp at h₁ h₂
+  rw [tensorHom_def, Functor.map_comp, Category.assoc, h₂, reassoc_of% h₁, tensorHom_def]
 
 private lemma finiteScalar_comparison_cochain (P Q : CochainComplex C ℤ) :
     F.leftDerivedFunctor.map (LaxMonoidal.μ (DerivedCategory.Q (C := C)) P Q) ≫

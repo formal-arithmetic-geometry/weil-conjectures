@@ -29,13 +29,10 @@ open CategoryTheory CategoryTheory.Functor
 open AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry.ProEtale.CoefficientCompatibility
 
-attribute [local irreducible] transportedRecordedReductionDirectImageComparison
-  compactSupportSiteComparison comparisonUpperStar pbcComparisonReduction
-  Etale.compactScalarMap Functor.mapDerivedCategory Functor.rightDerivedFunctor
-  Functor.leftDerivedFunctor pbcFixedScalarExtension DerivedCategory
+attribute [local irreducible] compactSupportSiteComparison comparisonUpperStar
+  pbcComparisonReduction Etale.compactScalarMap Functor.mapDerivedCategory
+  Functor.rightDerivedFunctor Functor.leftDerivedFunctor pbcFixedScalarExtension DerivedCategory
   HasDerivedCategory.ofIsGrothendieckAbelian DerivedCategory.TStructure.t
-
-attribute [local instance] proEtEssentiallySmall
 
 -- The bounded-below compact comparison uses the same ambient proper counit mate.
 end AlgebraicGeometry.ProEtale.CoefficientCompatibility

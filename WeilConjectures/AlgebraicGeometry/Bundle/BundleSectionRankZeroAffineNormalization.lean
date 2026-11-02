@@ -34,7 +34,6 @@ attribute [local irreducible] rightDerivedLowerShriek rightDerivedUpperShriek up
 set_option allowUnsafeReducibility true in
 attribute [local reducible] Scheme.Modules affineTraceTower affineTraceProjection
   affineLinearBaseCoefficient bundleSectionObject bundleSectionOmega
-attribute [local implicit_reducible] bundleSectionChartZero
 
 private lemma iso_id_map {C : Type*} [Category C] {F : C ⥤ C}
     (e : F ≅ 𝟭 C) (K : C) : e.hom.app (F.obj K) = F.map (e.hom.app K) := by
