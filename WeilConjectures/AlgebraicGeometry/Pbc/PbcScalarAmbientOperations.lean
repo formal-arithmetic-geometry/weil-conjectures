@@ -638,6 +638,119 @@ theorem pbcScalarOrdinaryRestrictionPull_eq :
     (pbcActualModuleAdjunction g dF) adjS (pbcModulePull_eq g dF)
     (pbcModuleAdjunction_unit_compat g dF) δ.hom
 
+-- Counit of a derived adjunction from its unit normalization on a representative.
+private theorem counit_of_unit {C₁ C₂ : Type*} [Category C₁] [Category C₂] {L : C₁ ⥤ C₂}
+    {R : C₂ ⥤ C₁} (adj : L ⊣ R) {k : C₂} {p : C₁} {q : C₂} {rq : C₁} (f : R.obj k ⟶ p)
+    (hf : IsIso f) (c : L.obj p ⟶ q) (fq : R.obj q ⟶ rq) (u : p ⟶ rq) (ε : q ⟶ k) (r : rq ⟶ p)
+    (hu : adj.unit.app p ≫ R.map c ≫ fq = u) (hn : R.map ε ≫ f = fq ≫ r) (ht : u ≫ r = 𝟙 _) :
+    adj.counit.app k = L.map f ≫ c ≫ ε := by
+  have := hf
+  apply (adj.homEquiv _ _).injective
+  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit, Adjunction.right_triangle_components]
+  simp only [Functor.map_comp]
+  rw [adj.unit_naturality_assoc]
+  have h2 : R.map ε = fq ≫ r ≫ inv f := by
+    rw [← reassoc_of% hn]; simp
+  rw [h2, reassoc_of% hu, reassoc_of% ht]; simp
+
+-- The diagram chase computing a mate from normalized units, counits and comparisons.
+private theorem scalarPullMate_generic {C₁ C₂ D₁ D₂ : Type*} [Category C₁] [Category C₂]
+    [Category D₁] [Category D₂]
+    {EY : C₁ ⥤ C₂} {RY : C₂ ⥤ C₁} (adjY : EY ⊣ RY)
+    {EX : D₁ ⥤ D₂} {RX : D₂ ⥤ D₁} (adjX : EX ⊣ RX)
+    {LA : C₁ ⥤ D₁} {LB : C₂ ⥤ D₂} (e : EY ⋙ LB ≅ LA ⋙ EX)
+    {k : C₂} {p : C₁} {q : C₂} {m : D₁} {n : D₂} {s t : D₂} {z rn : D₁}
+    (f : RY.obj k ⟶ p) (cY : EY.obj p ⟶ q) (ε : q ⟶ k)
+    (hcounit : adjY.counit.app k = EY.map f ≫ cY ≫ ε)
+    (cA : LA.obj p ⟶ m) (cBk : LB.obj k ⟶ t) (cBq : LB.obj q ⟶ s) (Pε : s ⟶ t)
+    (hnatB : LB.map ε ≫ cBk = cBq ≫ Pε)
+    (cX : EX.obj m ⟶ n) (oh : s ⟶ n) (oi : n ⟶ s) (hoi : oh ≫ oi = 𝟙 _)
+    (he : e.hom.app p ≫ EX.map cA ≫ cX = LB.map cY ≫ cBq ≫ oh)
+    (fXt : RX.obj t ⟶ z) (fXn : RX.obj n ⟶ rn) (ηM : m ⟶ rn)
+    (hu : adjX.unit.app m ≫ RX.map cX ≫ fXn = ηM)
+    (R' : rn ⟶ z) (hfac : RX.map oi ≫ RX.map Pε ≫ fXt = fXn ≫ R')
+    (om : m ⟶ z) (hmate : ηM ≫ R' = om) :
+    LA.map f ≫ cA ≫ om =
+      (mateEquiv adjY adjX (TwoSquare.mk _ _ _ _ e.inv)).natTrans.app k ≫ RX.map cBk ≫ fXt := by
+  have he' : e.inv.app p ≫ LB.map cY ≫ cBq = EX.map cA ≫ cX ≫ oi := by
+    rw [← cancel_epi (e.hom.app p), Iso.hom_inv_id_app_assoc, reassoc_of% he, hoi]
+    simp
+  have hm : (mateEquiv adjY adjX (TwoSquare.mk _ _ _ _ e.inv)).natTrans.app k =
+      adjX.unit.app _ ≫ RX.map (e.inv.app _) ≫ RX.map (LB.map (adjY.counit.app k)) := by
+    simp [mateEquiv]
+  have huX {a b : D₁} (g : a ⟶ b) : adjX.unit.app a ≫ RX.map (EX.map g) = g ≫ adjX.unit.app b :=
+    (adjX.unit.naturality g).symm
+  rw [hm, hcounit]
+  simp only [Functor.map_comp, Category.assoc]
+  have hn : e.inv.app _ ≫ LB.map (EY.map f) = EX.map (LA.map f) ≫ e.inv.app p :=
+    (e.inv.naturality f).symm
+  rw [← RX.map_comp_assoc (e.inv.app _), hn, RX.map_comp_assoc, reassoc_of% (huX (LA.map f))]
+  rw [← RX.map_comp_assoc, ← RX.map_comp_assoc, ← RX.map_comp_assoc, Category.assoc,
+    Category.assoc, hnatB, reassoc_of% he']
+  simp only [Functor.map_comp, Category.assoc]
+  rw [reassoc_of% (huX cA), hfac, reassoc_of% hu, hmate]
+
+-- Naturality of a universal derived counit written on cochain representatives.
+private theorem complexCounit_naturality {C D : Type*} [Category C] [Category D]
+    [Abelian C] [Abelian D] [HasDerivedCategory C] [HasDerivedCategory D]
+    (F : C ⥤ D) [F.Additive] (LF : DerivedCategory C ⥤ DerivedCategory D)
+    (eps : DerivedCategory.Qh ⋙ LF ⟶ F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    {K L : CochainComplex C ℤ} (a : K ⟶ L) :
+    LF.map (DerivedCategory.Q.map a) ≫
+      (LF.map ((DerivedCategory.quotientCompQhIso C).inv.app L) ≫
+        eps.app ((HomotopyCategory.quotient _ _).obj L) ≫
+        DerivedCategory.Qh.map ((F.mapHomotopyCategoryFactors (.up ℤ)).hom.app L) ≫
+        (DerivedCategory.quotientCompQhIso D).hom.app ((F.mapHomologicalComplex (.up ℤ)).obj L)) =
+      (LF.map ((DerivedCategory.quotientCompQhIso C).inv.app K) ≫
+        eps.app ((HomotopyCategory.quotient _ _).obj K) ≫
+        DerivedCategory.Qh.map ((F.mapHomotopyCategoryFactors (.up ℤ)).hom.app K) ≫
+        (DerivedCategory.quotientCompQhIso D).hom.app ((F.mapHomologicalComplex (.up ℤ)).obj K)) ≫
+      DerivedCategory.Q.map ((F.mapHomologicalComplex (.up ℤ)).map a) :=
+  (whiskerRight (DerivedCategory.quotientCompQhIso C).inv LF ≫
+    whiskerLeft (HomotopyCategory.quotient C (.up ℤ)) eps ≫
+    whiskerRight (F.mapHomotopyCategoryFactors (.up ℤ)).hom DerivedCategory.Qh ≫
+    whiskerLeft (F.mapHomologicalComplex (.up ℤ))
+      (DerivedCategory.quotientCompQhIso D).hom).naturality a
+
+-- Two naturality squares of the derived-functor factorization.
+private theorem mapDerivedCategoryFactors_two {C D : Type*} [Category C] [Category D]
+    [Abelian C] [Abelian D] [HasDerivedCategory C] [HasDerivedCategory D]
+    (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    {K L N : CochainComplex C ℤ} (a : K ⟶ L) (b : L ⟶ N) :
+    F.mapDerivedCategory.map (DerivedCategory.Q.map a) ≫
+      F.mapDerivedCategory.map (DerivedCategory.Q.map b) ≫ F.mapDerivedCategoryFactors.hom.app N =
+    F.mapDerivedCategoryFactors.hom.app K ≫
+      (DerivedCategory.Q.map ((F.mapHomologicalComplex (.up ℤ)).map a) ≫
+        DerivedCategory.Q.map ((F.mapHomologicalComplex (.up ℤ)).map b)) := by
+  rw [F.mapDerivedCategoryFactors_hom_naturality, F.mapDerivedCategoryFactors_hom_naturality_assoc]
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+-- The published pullback preserves flat-term K-flat complexes.
+private theorem pbcPull_flatKFlat {A : Type (u + 1)} [CommRing A] (dA : AdicCoefficientDatum A)
+    (P : CochainComplex (pbcModules Y (pbcAdicCompletion Y dA)) ℤ) (hp : PbcFlatKFlat Y dA P) :
+    PbcFlatKFlat X dA (((pbcActualModulePull g dA).mapHomologicalComplex (.up ℤ)).obj P) := by
+  obtain ⟨I, hI⟩ := proEtaleAlgebraicInverseImage_exists g (pbcAdicCompletion Y dA)
+  have : PreservesFiniteLimits (proEtaleSheafInverseImage g (Type (u + 1))) :=
+    (AlgebraicGeometry.ProEtale.toposFunctorialityInverseImage g (𝟙 Y)).2.2.2.1
+  have : (I.modules ⋙ reductionChange X (completedCoefficientMap g dA)).Additive := by
+    rw [hI]
+    exact completedModulePullback_additive g dA
+  have ho := (reductionChangeExistence X (completedCoefficientMap g dA)).choose_spec.choose
+  have hpres := SheafOfModules.isKFlat_ringedToposPullback
+    (proEtaleSheafInverseImage g (Type (u + 1)))
+    (proEtaleSheafDirectImage g (Type (u + 1)))
+    (proEtaleSheafAdjunction g (Type (u + 1))) I (completedCoefficientMap g dA)
+    (I.modules ⋙ reductionChange X (completedCoefficientMap g dA))
+    (fun M ↦ ho (I.modules.obj M))
+    (fun a ↦
+      (reductionChangeExistence X (completedCoefficientMap g dA)).choose_spec.choose_spec.choose
+        (I.modules.map a)) P hp.1 hp.2
+  simpa only [hI, pbcActualModulePull, completedModulePullback, PbcFlatKFlat] using hpres
+
+set_option linter.unusedVariables false in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The derived scalar mate is the localized ordinary scalar mate on flat-term K-flat
 complexes with flat-term K-flat restriction.
 Source: Stacks Tags 03EK, 06YY and 07A6
@@ -666,7 +779,67 @@ theorem pbcScalarPullMate_app
         (pbcActualPullComplexCounit g (pbcIntegralDatum l F) K) ≫
       (pbcRestrict (pbcScalarCoefficientMap l E F i X)).mapDerivedCategoryFactors.hom.app
         (((pbcActualModulePull g (pbcIntegralDatum l F)).mapHomologicalComplex (.up ℤ)).obj K) := by
-  sorry
+  let φY := pbcScalarCoefficientMap l E F i Y
+  let φX := pbcScalarCoefficientMap l E F i X
+  let P := ((pbcRestrict φY).mapHomologicalComplex (.up ℤ)).obj K
+  let M := ((pbcActualModulePull g (pbcIntegralDatum l E)).mapHomologicalComplex (.up ℤ)).obj P
+  let εK : ((pbcExtend φY).mapHomologicalComplex (.up ℤ)).obj P ⟶ K :=
+    (NatTrans.mapHomologicalComplex (pbcScalarAdjunction φY).counit (.up ℤ)).app K
+  let cI := pbcActualScalarOrdinaryPullComplexIso g (pbcIntegralDatum l E) (pbcIntegralDatum l F)
+    φY φX (pbcScalarCoefficientStructureSquare l E F i g)
+  have hM : PbcFlatKFlat X (pbcIntegralDatum l E) M := pbcPull_flatKFlat g _ P hR
+  have ht : (NatTrans.mapHomologicalComplex (pbcScalarAdjunction φY).unit (.up ℤ)).app P ≫
+      ((pbcRestrict φY).mapHomologicalComplex (.up ℤ)).map εK = 𝟙 P := by
+    apply HomologicalComplex.hom_ext
+    intro n
+    exact (pbcScalarAdjunction φY).right_triangle_components (K.X n)
+  have hcounit := counit_of_unit (pbcDerivedScalarAdjunction φY)
+    ((pbcRestrict φY).mapDerivedCategoryFactors.hom.app K)
+    ((pbcRestrict φY).mapDerivedCategoryFactors.app K).isIso_hom (pbcComplexCounit φY P)
+    ((pbcRestrict φY).mapDerivedCategoryFactors.hom.app
+      (((pbcExtend φY).mapHomologicalComplex (.up ℤ)).obj P))
+    (DerivedCategory.Q.map
+      ((NatTrans.mapHomologicalComplex (pbcScalarAdjunction φY).unit (.up ℤ)).app P))
+    (DerivedCategory.Q.map εK)
+    (DerivedCategory.Q.map (((pbcRestrict φY).mapHomologicalComplex (.up ℤ)).map εK))
+    ((pbcDerivedScalarAdjunction_exists φY).exists.choose_spec P hR.1)
+    ((pbcRestrict φY).mapDerivedCategoryFactors_hom_naturality εK)
+    ((DerivedCategory.Q.map_comp _ _).symm.trans
+      ((congrArg DerivedCategory.Q.map ht).trans (DerivedCategory.Q.map_id _)))
+  have he : (pbcScalarOrdinaryPullIso l E F i g).hom.app (DerivedCategory.Q.obj P) ≫
+      (pbcDerivedExtend φX).map (pbcActualPullComplexCounit g (pbcIntegralDatum l E) P) ≫
+      pbcComplexCounit φX M =
+      (pbcActualDerivedPull g (pbcIntegralDatum l F)).map (pbcComplexCounit φY P) ≫
+        pbcActualPullComplexCounit g (pbcIntegralDatum l F)
+          (((pbcExtend φY).mapHomologicalComplex (.up ℤ)).obj P) ≫
+        DerivedCategory.Q.map (cI.hom.app P) := by
+    unfold pbcScalarOrdinaryPullIso
+    exact (pbcActualScalarDerivedPullIso_exists g _ _ φY φX _).exists.choose_spec P hR.1 hR.2
+  have hoi : DerivedCategory.Q.map (cI.hom.app P) ≫ DerivedCategory.Q.map (cI.inv.app P) = 𝟙 _ := by
+    rw [← DerivedCategory.Q.map_comp, Iso.hom_inv_id_app, DerivedCategory.Q.map_id]
+  have hmate : (NatTrans.mapHomologicalComplex (pbcScalarAdjunction φX).unit (.up ℤ)).app M ≫
+      ((pbcRestrict φX).mapHomologicalComplex (.up ℤ)).map (cI.inv.app P) ≫
+      ((pbcRestrict φX).mapHomologicalComplex (.up ℤ)).map
+        (((pbcActualModulePull g (pbcIntegralDatum l F)).mapHomologicalComplex (.up ℤ)).map εK) =
+      (NatTrans.mapHomologicalComplex (pbcScalarOrdinaryRestrictionPull l E F i g)
+        (.up ℤ)).app K := by
+    apply HomologicalComplex.hom_ext
+    intro n
+    simp only [comp_obj, HomologicalComplex.comp_f, NatTrans.mapHomologicalComplex_app_f,
+      mapHomologicalComplex_map_f]
+    rfl
+  exact scalarPullMate_generic (pbcDerivedScalarAdjunction φY) (pbcDerivedScalarAdjunction φX)
+    (pbcScalarOrdinaryPullIso l E F i g) _ (pbcComplexCounit φY P) (DerivedCategory.Q.map εK)
+    hcounit (pbcActualPullComplexCounit g (pbcIntegralDatum l E) P)
+    (pbcActualPullComplexCounit g (pbcIntegralDatum l F) K)
+    (pbcActualPullComplexCounit g (pbcIntegralDatum l F) _)
+    (DerivedCategory.Q.map
+      (((pbcActualModulePull g (pbcIntegralDatum l F)).mapHomologicalComplex (.up ℤ)).map εK))
+    (complexCounit_naturality _ _ _ εK) (pbcComplexCounit φX M) _ _ hoi he _ _ _
+    ((pbcDerivedScalarAdjunction_exists φX).exists.choose_spec M hM.1) _
+    (mapDerivedCategoryFactors_two (pbcRestrict φX) (cI.inv.app P) _) _
+    (by rw [← hmate]; exact ((DerivedCategory.Q.map_comp _ _).trans
+      (congrArg (_ ≫ ·) (DerivedCategory.Q.map_comp _ _))).symm)
 
 -- The factorization chase for the termwise restriction/pullback comparison.
 private theorem scalarRestrictionPullback_chase {C : Type*} [Category C]
