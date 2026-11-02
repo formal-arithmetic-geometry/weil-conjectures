@@ -50,6 +50,8 @@ import Mathlib.RingTheory.Flat.Localization
 import Mathlib.Topology.ContinuousMap.Units
 import Mathlib.RingTheory.RingHom.Flat
 
+set_option linter.privateModule false
+
 /-! # Exact rationalization of integral continuous coefficient modules
 
 Source: Bhatt--Scholze, Lemma 6.8.2(2).

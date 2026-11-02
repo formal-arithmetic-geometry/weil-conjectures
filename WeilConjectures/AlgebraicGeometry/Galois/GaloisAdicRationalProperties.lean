@@ -17,6 +17,8 @@ import WeilConjectures.AlgebraicGeometry.Lisse.LisseScalarFiberMaps
 import WeilConjectures.AlgebraicGeometry.Etale.EtaleStalkTensorScalar
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
 
+set_option linter.privateModule false
+
 /-! # Integral and rational clauses of the adic correspondence -/
 
 @[expose] public section

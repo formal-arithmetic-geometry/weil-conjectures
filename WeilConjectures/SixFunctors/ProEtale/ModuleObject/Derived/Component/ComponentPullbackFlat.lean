@@ -10,6 +10,8 @@ public import WeilConjectures.CategoryTheory.Abelian.Flat.PreservesFlat
 import WeilConjectures.CategoryTheory.SiteInverseImageModuleFlat.SiteInverseImageModuleFlat
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Component.ComponentTensorNormalization
 
+set_option linter.privateModule false
+
 /-! # Flatness of component module pullback
 
 Source: Hemo--Richarz--Scholbach, Construction (4.1) and Proposition 4.3(3).

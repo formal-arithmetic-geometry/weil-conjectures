@@ -18,6 +18,8 @@ import Mathlib.CategoryTheory.Sites.PreservesLimits
 import WeilConjectures.Mathlib.CategoryTheory.Limits.MorphismProperty
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
 
+set_option linter.privateModule false
+
 /-!
 # Galois representations attached to lisse sheaves
 
@@ -81,7 +83,6 @@ section ScalarComposition
 
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
-attribute [local instance] galoisModuleSmallLimits
 
 end ScalarComposition
 

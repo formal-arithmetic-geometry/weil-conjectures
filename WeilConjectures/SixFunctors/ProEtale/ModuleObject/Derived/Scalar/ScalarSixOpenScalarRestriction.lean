@@ -10,6 +10,8 @@ import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 import all WeilConjectures.AlgebraicGeometry.LocallyClosedExtensionData.LocallyClosedExtensionCoherence
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedSupportDerivedLocalization
 
+set_option linter.privateModule false
+
 /-! # Restriction of the specified open scalar comparison -/
 
 @[expose] public noncomputable section

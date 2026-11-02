@@ -30,10 +30,8 @@ namespace AlgebraicGeometry.Scheme
 variable (l : ℕ) [Fact l.Prime] (Y : Scheme.{u})
   [IsNoetherian Y] [Y.IsSeparated] [∀ x : Y, Invertible (l : Y.residueField x)]
   (Q : Type (u + 1)) [Field Q] [Algebra ℚ_[l] Q] [IsAlgClosure ℚ_[l] Q]
-  (i : IntegralFibrePathTransport l Y Q)
   {Ωy : Type u} [Field Ωy] [IsAlgClosed Ωy] (y : Spec (.of Ωy) ⟶ Y)
   {Ωz : Type u} [Field Ωz] [IsAlgClosed Ωz] (z : Spec (.of Ωz) ⟶ Y)
-  (t : flcFiber y ≅ flcFiber z) (E L : Padic.FiniteCoefficientFields l Q) (h : E ≤ L)
 
 attribute [local irreducible] GrothendieckTopology.Point.sheafFiber
   GrothendieckTopology.Point.presheafFiber lisseRationalFiberFunctor

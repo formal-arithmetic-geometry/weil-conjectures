@@ -8,6 +8,8 @@ public import WeilConjectures.AlgebraicGeometry.IntegralResidueDerivedMonoidal
 public import WeilConjectures.CategoryTheory.Exact.ExactClosedDerivedHom
 import Mathlib.CategoryTheory.Monoidal.NaturalTransformation
 import all WeilConjectures.CategoryTheory.ExactMonoidalEquivalenceDerived
+
+set_option linter.privateModule false
 /-! # Tensor compatibility of a square of exact derived functors -/
 @[expose] public noncomputable section
 set_option autoImplicit false

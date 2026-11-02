@@ -12,6 +12,8 @@ import WeilConjectures.AlgebraicGeometry.Galois.GaloisAdicDataFromFinite
 import Mathlib.CategoryTheory.Abelian.Transfer
 import WeilConjectures.CategoryTheory.Monoidal.PrescribedMonoidal
 
+set_option linter.privateModule false
+
 /-! # Algebraic and coefficient clauses of the adic correspondence -/
 
 @[expose] public section

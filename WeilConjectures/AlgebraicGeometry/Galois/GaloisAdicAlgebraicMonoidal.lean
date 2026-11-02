@@ -10,6 +10,8 @@ import WeilConjectures.AlgebraicGeometry.Galois.GaloisAdicRationalProperties
 import WeilConjectures.AlgebraicGeometry.Galois.GaloisAdicDataFromFinite
 import Mathlib.LinearAlgebra.TensorProduct.Tower
 
+set_option linter.privateModule false
+
 /-! # Tensor and unit comparisons for algebraic l-adic sheaves -/
 
 @[expose] public section

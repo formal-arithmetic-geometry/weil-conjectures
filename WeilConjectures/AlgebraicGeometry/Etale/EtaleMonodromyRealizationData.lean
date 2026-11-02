@@ -32,9 +32,6 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.PreGaloisCategory Oppos
 
 namespace AlgebraicGeometry.Scheme
 
-attribute [instance] SfMonodromyPoint.field SfMonodromyPoint.closed
-  SfMonodromyPoint.actions SfMonodromyPoint.fundamental
-
 variable (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 

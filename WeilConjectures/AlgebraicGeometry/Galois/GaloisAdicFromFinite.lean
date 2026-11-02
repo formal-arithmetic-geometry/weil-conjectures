@@ -10,6 +10,8 @@ import WeilConjectures.AlgebraicGeometry.Galois.GaloisAdicDataFromFinite
 import WeilConjectures.AlgebraicGeometry.Galois.GaloisAdicRationalProperties
 import WeilConjectures.AlgebraicGeometry.Galois.GaloisAdicAlgebraicProperties
 
+set_option linter.privateModule false
+
 /-! # Adic reconstruction from finite Galois modules -/
 
 @[expose] public section

@@ -16,6 +16,8 @@ public import WeilConjectures.AlgebraicGeometry.Lisse.LisseAdicSheaves
 public import Mathlib.CategoryTheory.Conj
 public import WeilConjectures.AlgebraicGeometry.Lisse.LisseAdicFiberFunctors
 import WeilConjectures.AlgebraicGeometry.Lisse.LisseRationalScalarFiberMaps
+
+set_option linter.privateModule false
 /-! # Rationalization of integral fibre paths
 
 Source: Deligne, Weil II (1.1.1) c), p.147.
