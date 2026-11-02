@@ -258,7 +258,8 @@ private theorem epsilon_app_Q (L : integralTowerModules l E X) [L.IsFiniteLocall
       evaluationComplex l E X L m K := by
     apply HomologicalComplex.hom_ext
     intro i
-    simp [evaluationComplex]
+    simp only [evaluationComplex]
+    exact Category.id_comp _
   have he : (epsilon l E X L m).hom.app (DerivedCategory.Q.obj K) =
       (Functor.mapDerivedCategoryCompIso (sheaf l E X L m) (sheaf l E X L (-m))).inv.app
           (DerivedCategory.Q.obj K) ≫
@@ -266,10 +267,36 @@ private theorem epsilon_app_Q (L : integralTowerModules l E X) [L.IsFiniteLocall
           (DerivedCategory.Q.obj K) ≫
         (Functor.mapDerivedCategoryIdIso (integralTowerModules l E X)).hom.app
           (DerivedCategory.Q.obj K) := rfl
-  rw [he, h3, h2, ← h1, ← h4]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc, Functor.map_comp]
+  have h23 : (Functor.mapDerivedCategoryNatIso (evaluation l E X L m)).hom.app
+        (DerivedCategory.Q.obj K) ≫
+      (Functor.mapDerivedCategoryIdIso (integralTowerModules l E X)).hom.app
+        (DerivedCategory.Q.obj K) =
+      (sheaf l E X L m ⋙ sheaf l E X L (-m)).mapDerivedCategoryFactors.hom.app K ≫
+        DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex (evaluation l E X L m).hom
+          (ComplexShape.up ℤ)).app K) := by
+    rw [h3]
+    exact h2
+  rw [he, h23, ← h1, ← h4]
+  simp only [Category.assoc, Functor.map_comp]
+  erw [Iso.inv_hom_id_app_assoc]
   rfl
 
+set_option backward.isDefEq.respectTransparency false in
+/-- Components of the termwise ordinary comparison.
+Source: Stacks 06YY (blueprint: lem-pur-completed-line-ordinary-evaluation). -/
+private theorem comparisonComplex_hom_f (L : integralTowerModules l E X)
+    [L.IsFiniteLocallyFreeOfRank 1] (N : integralTowerModules l F X)
+    [N.IsFiniteLocallyFreeOfRank 1] (m : ℤ)
+    (e : sheaf l E X L m ⋙ completedOrdinaryScalarExtension l E F ι X ≅
+      completedOrdinaryScalarExtension l E F ι X ⋙ sheaf l F X N m)
+    (c : CochainComplex (integralTowerModules l E X) ℤ) (i : ℤ) :
+    ((comparisonComplex l E X F ι L N m e).hom.app c).f i = e.hom.app (c.X i) := by
+  first
+  | rfl
+  | (unfold comparisonComplex; rfl)
+  | simp [comparisonComplex]
+
+set_option backward.isDefEq.respectTransparency false in
 /-- Termwise ordinary comparisons commute with termwise evaluation.
 Source: Stacks 03EO (blueprint: lem-pur-completed-line-ordinary-evaluation). -/
 private theorem chain_square (L : integralTowerModules l E X)
@@ -287,6 +314,8 @@ private theorem chain_square (L : integralTowerModules l E X)
     (completedOrdinaryScalarComplex l E F ι X).map (evaluationComplex l E X L m K) := by
   apply HomologicalComplex.hom_ext
   intro i
+  simp only [HomologicalComplex.comp_f]
+  rw [comparisonComplex_hom_f]
   exact sheaf_square l E X F ι L N b d hd m (K.X i)
 
 set_option backward.isDefEq.respectTransparency false in
@@ -428,7 +457,99 @@ theorem ordinary_evaluation_compatibility (L : integralTowerModules l E X)
         ((d.ordinary m).hom.app K) ≫
       (epsilon l F X N m).hom.app ((completedDerivedScalarExtension l E F ι X).obj K) =
     (completedDerivedScalarExtension l E F ι X).map
-      ((epsilon l E X L m).hom.app K) := by sorry
+      ((epsilon l E X L m).hom.app K) := by
+  classical
+  let C := completedDerivedScalarExtension l E F ι X
+  let κ := completedScalarCounit l E F ι X
+  let O := completedOrdinaryScalarComplex l E F ι X
+  let T := tensor l E X L
+  let T' := tensor l F X N
+  let Q := DerivedCategory.Q (C := integralTowerModules l E X)
+  let Q' := DerivedCategory.Q (C := integralTowerModules l F X)
+  have hgood : ∀ c : CochainComplex (integralTowerModules l E X) ℤ,
+      CochainComplex.IsKFlatIndependentCoefficients
+        (J := AlgebraicGeometry.Scheme.ProEt.topology X)
+        (R := completedIntegralCommRingSheafUnrestricted l E X) c →
+      (d.ordinary (-m)).hom.app ((T m).obj (Q.obj c)) ≫
+        (T' (-m)).map ((d.ordinary m).hom.app (Q.obj c)) ≫
+        (epsilon l F X N m).hom.app (C.obj (Q.obj c)) =
+      C.map ((epsilon l E X L m).hom.app (Q.obj c)) := by
+    intro c hc
+    have := counit_isIso l E X F ι c hc
+    rw [← cancel_mono (κ c)]
+    symm
+    rw [epsilon_app_Q l E X L m c]
+    simp only [Functor.map_comp, Category.assoc]
+    rw [counit_naturality l E X F ι (evaluationComplex l E X L m c),
+      ← chain_square l E X F ι L N b d hd m c]
+    simp only [Functor.map_comp, Category.assoc]
+    rw [reassoc_of% (pair_counit l E X F ι L N b d hd (-m) ((complex l E X L m).obj c))]
+    have nf : (factors l F X N (-m)).hom.app (O.obj ((complex l E X L m).obj c)) ≫
+        Q'.map ((complex l F X N (-m)).map
+          ((comparisonComplex l E X F ι L N m (d.ordinarySheaf m)).hom.app c)) =
+        (T' (-m)).map (Q'.map ((comparisonComplex l E X F ι L N m (d.ordinarySheaf m)).hom.app c)) ≫
+          (factors l F X N (-m)).hom.app ((complex l F X N m).obj (O.obj c)) :=
+      ((factors l F X N (-m)).hom.naturality _).symm
+    rw [reassoc_of% nf]
+    have nΩ : C.map ((T (-m)).map ((factors l E X L m).hom.app c)) ≫
+        (d.ordinary (-m)).hom.app (Q.obj ((complex l E X L m).obj c)) =
+        (d.ordinary (-m)).hom.app ((T m).obj (Q.obj c)) ≫
+          (T' (-m)).map (C.map ((factors l E X L m).hom.app c)) :=
+      (d.ordinary (-m)).hom.naturality _
+    rw [reassoc_of% nΩ]
+    have hm : (T' (-m)).map (C.map ((factors l E X L m).hom.app c)) ≫
+        (T' (-m)).map (κ ((complex l E X L m).obj c)) ≫
+        (T' (-m)).map (Q'.map ((comparisonComplex l E X F ι L N m (d.ordinarySheaf m)).hom.app c)) =
+        (T' (-m)).map ((d.ordinary m).hom.app (Q.obj c)) ≫
+          (T' (-m)).map ((T' m).map (κ c)) ≫
+          (T' (-m)).map ((factors l F X N m).hom.app (O.obj c)) := by
+      simp only [← Functor.map_comp]
+      rw [pair_counit l E X F ι L N b d hd m c]
+    rw [reassoc_of% hm]
+    have hε2 : (T' (-m)).map ((factors l F X N m).hom.app (O.obj c)) ≫
+        (factors l F X N (-m)).hom.app ((complex l F X N m).obj (O.obj c)) ≫
+        Q'.map (evaluationComplex l F X N m (O.obj c)) =
+        (epsilon l F X N m).hom.app (Q'.obj (O.obj c)) :=
+      (epsilon_app_Q l F X N m (O.obj c)).symm
+    rw [hε2]
+    have hn : (T' (-m)).map ((T' m).map (κ c)) ≫ (epsilon l F X N m).hom.app (Q'.obj (O.obj c)) =
+        (epsilon l F X N m).hom.app (C.obj (Q.obj c)) ≫ κ c :=
+      (epsilon l F X N m).hom.naturality (κ c)
+    rw [hn]
+  have hess : (integralOperationsGoodLocalization l E X).EssSurj :=
+    Localization.essSurj _ ((HomologicalComplex.quasiIso (integralTowerModules l E X)
+      (.up ℤ)).inverseImage (integralOperationsGoodComplex l E X).ι)
+  let P := (integralOperationsGoodLocalization l E X).objPreimage K
+  let e : DerivedCategory.Q.obj P.obj ≅ K :=
+    (integralOperationsGoodLocalization l E X).objObjPreimageIso K
+  have h := hgood P.obj P.property.1
+  simp only [C, T, T', Q] at h
+  rw [← cancel_epi ((completedDerivedScalarExtension l E F ι X).map
+    ((tensor l E X L (-m)).map ((tensor l E X L m).map e.hom)))]
+  have n1 : (completedDerivedScalarExtension l E F ι X).map
+        ((tensor l E X L (-m)).map ((tensor l E X L m).map e.hom)) ≫
+      (d.ordinary (-m)).hom.app ((tensor l E X L m).obj K) =
+      (d.ordinary (-m)).hom.app ((tensor l E X L m).obj (DerivedCategory.Q.obj P.obj)) ≫
+        (tensor l F X N (-m)).map ((completedDerivedScalarExtension l E F ι X).map
+          ((tensor l E X L m).map e.hom)) :=
+    (d.ordinary (-m)).hom.naturality _
+  have n2 : (completedDerivedScalarExtension l E F ι X).map ((tensor l E X L m).map e.hom) ≫
+      (d.ordinary m).hom.app K =
+      (d.ordinary m).hom.app (DerivedCategory.Q.obj P.obj) ≫
+        (tensor l F X N m).map ((completedDerivedScalarExtension l E F ι X).map e.hom) :=
+    (d.ordinary m).hom.naturality _
+  have n3 : (tensor l F X N (-m)).map ((tensor l F X N m).map
+        ((completedDerivedScalarExtension l E F ι X).map e.hom)) ≫
+      (epsilon l F X N m).hom.app ((completedDerivedScalarExtension l E F ι X).obj K) =
+      (epsilon l F X N m).hom.app ((completedDerivedScalarExtension l E F ι X).obj
+        (DerivedCategory.Q.obj P.obj)) ≫ (completedDerivedScalarExtension l E F ι X).map e.hom :=
+    (epsilon l F X N m).hom.naturality _
+  have n4 : (tensor l E X L (-m)).map ((tensor l E X L m).map e.hom) ≫
+      (epsilon l E X L m).hom.app K =
+      (epsilon l E X L m).hom.app (DerivedCategory.Q.obj P.obj) ≫ e.hom :=
+    (epsilon l E X L m).hom.naturality _
+  rw [reassoc_of% n1, ← Functor.map_comp_assoc, n2, Functor.map_comp, Category.assoc,
+    reassoc_of% n3, ← Functor.map_comp, n4, Functor.map_comp, ← reassoc_of% h]
 
 end CompletedLineTensor
 end WeilConjectures

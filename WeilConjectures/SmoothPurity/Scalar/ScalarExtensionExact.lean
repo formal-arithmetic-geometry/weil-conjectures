@@ -32,6 +32,41 @@ variable (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
   (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]
   (ι : E →ₐ[Padic l] L)
 
+section CommShiftHelpers
+
+variable {C' D' : Type*} [Category* C'] [Category* D'] {A : Type*} [AddMonoid A]
+  [HasShift C' A] [HasShift D' A]
+
+/-- Two shift comparisons with the same components coincide.
+Source: blueprint order 1883 (blueprint: lem-weil-scalar-extension-exact-triangulated). -/
+private theorem commShift_ext {G : C' ⥤ D'} (c₁ c₂ : G.CommShift A)
+    (h : ∀ (a : A) (X : C'), (G.commShiftIso (self := c₁) a).hom.app X =
+      (G.commShiftIso (self := c₂) a).hom.app X) : c₁ = c₂ := by
+  cases c₁
+  cases c₂
+  congr
+  funext a
+  ext X
+  exact h a X
+
+/-- A shift comparison compatible with an isomorphism is the conjugated one.
+Source: blueprint order 1883 (blueprint: lem-weil-scalar-extension-exact-triangulated). -/
+private theorem commShiftIso_hom_app_of_natTrans {F G : C' ⥤ D'} (e : F ≅ G)
+    [F.CommShift A] [c : G.CommShift A] [h : NatTrans.CommShift e.hom A] (a : A) (X : C') :
+    (G.commShiftIso a).hom.app X =
+      e.inv.app (X⟦a⟧) ≫ (F.commShiftIso a).hom.app X ≫ (e.hom.app X)⟦a⟧' := by
+  rw [← cancel_epi (e.hom.app (X⟦a⟧)), ← NatTrans.shift_app_comm, e.hom_inv_id_app_assoc]
+
+end CommShiftHelpers
+
+section SubcategoryShift
+
+attribute [local semireducible] ObjectProperty.hasShift ObjectProperty.commShiftι
+
+private theorem ι_commShiftIso_hom_app {C' : Type*} [Category* C'] [HasShift C' ℤ]
+    (R : ObjectProperty C') [R.IsStableUnderShift ℤ] (n : ℤ) (X : R.FullSubcategory) :
+    (R.ι.commShiftIso n).hom.app X = 𝟙 _ := rfl
+
 /-- The full subcategory inherits the ordinary derived tensor shift comparison.
 Source: blueprint order 1883 (blueprint: lem-weil-scalar-extension-exact-triangulated).
 Proof: the ambient termwise exact tensor functor has its canonical derived shift
@@ -45,7 +80,29 @@ theorem integralConstructibleScalarCommShift_existsUnique :
           HEq (((integralConstructibleScalarExtension D l hl E L ι Y).commShiftIso n).hom.app K).hom
             (((integralOrdinaryDerivedScalar l E L ι Y).commShiftIso n).hom.app K.obj))
         (commInst := c) := by
-  sorry
+  let P := boundedConstructibleDerivedCompleteIntegral D l hl L Y
+  let Q := boundedConstructibleDerivedCompleteIntegral D l hl E Y
+  let G := integralOrdinaryDerivedScalar l E L ι Y
+  have hF : ∀ K : Q.FullSubcategory, P ((Q.ι ⋙ G).obj K) :=
+    fun K ↦ integralOrdinaryDerivedScalar_constructible D l hl E L ι Y K.obj K.property
+  let c : (integralConstructibleScalarExtension D l hl E L ι Y).CommShift ℤ :=
+    (inferInstance : (P.lift (Q.ι ⋙ G) hF).CommShift ℤ)
+  refine existsUnique_of_exists_of_unique ⟨c, ?_⟩ ?_
+  · intro n K
+    have h := NatTrans.shift_app_comm (P.liftCompιIso (Q.ι ⋙ G) hF).hom n K
+    rw [Functor.commShiftIso_comp_hom_app, Functor.commShiftIso_comp_hom_app,
+      ι_commShiftIso_hom_app, ι_commShiftIso_hom_app] at h
+    apply heq_of_eq
+    simp only [ObjectProperty.liftCompιIso, Iso.refl_hom, NatTrans.id_app, Functor.map_id,
+      Category.comp_id, Category.id_comp, ObjectProperty.ι_map] at h
+    exact h
+  · intro c₁ c₂ h₁ h₂
+    apply commShift_ext
+    intro n K
+    apply ObjectProperty.hom_ext
+    exact eq_of_heq ((h₁ n K).trans (h₂ n K).symm)
+
+end SubcategoryShift
 
 /-- The uniquely normalized integral shift comparison.
 Source: blueprint order 1883 (blueprint: lem-weil-scalar-extension-exact-triangulated). -/
@@ -91,7 +148,14 @@ theorem rationalConstructibleScalarCommShift_existsUnique :
       (fun [commInst : (rationalScalarExtension D l hl E Y L ι).CommShift ℤ] ↦
         NatTrans.CommShift (rationalOrdinaryComparison D l hl E Y L ι).hom ℤ)
         (commInst := c) := by
-  sorry
+  let e := rationalOrdinaryComparison D l hl E Y L ι
+  refine existsUnique_of_exists_of_unique
+    ⟨Functor.CommShift.ofIso e ℤ, Functor.CommShift.ofIso_compatibility e ℤ⟩ ?_
+  intro c₁ c₂ h₁ h₂
+  apply commShift_ext
+  intro n K
+  exact (commShiftIso_hom_app_of_natTrans (c := c₁) (h := h₁) e n K).trans
+    (commShiftIso_hom_app_of_natTrans (c := c₂) (h := h₂) e n K).symm
 
 /-- The shift comparison transported through the canonical completion comparison.
 Source: blueprint order 1883 (blueprint: lem-weil-scalar-extension-exact-triangulated). -/
