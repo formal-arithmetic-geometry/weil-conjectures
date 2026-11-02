@@ -48,7 +48,4 @@ private def scalarIso
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{u})
 
-set_option maxRecDepth 100000 in
-set_option maxHeartbeats 0 in
--- Kernel checking the concrete sheaf and tower transports needs additional heartbeats.
 end AlgebraicGeometry.ProEtale

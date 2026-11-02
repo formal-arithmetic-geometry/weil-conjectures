@@ -390,8 +390,6 @@ def ComparisonNatural
 variable [PreservesFiniteLimits (sections.{t, u} k B α)]
   [PreservesFiniteColimits (sections.{t, u} k B α)]
 
-omit [PreservesFiniteLimits (sections.{t, u} k B α)]
-  [PreservesFiniteColimits (sections.{t, u} k B α)] in
 section Coefficients
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]

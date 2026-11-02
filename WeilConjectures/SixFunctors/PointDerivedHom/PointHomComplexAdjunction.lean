@@ -58,5 +58,4 @@ private theorem fan_projection_bijective.{w} {ι : Type} {X : ι → Type w}
   rw [hf]
   exact e.toEquiv.bijective
 
-set_option backward.isDefEq.respectTransparency true in
 end WeilConjectures.PointDerivedHom

@@ -22,10 +22,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite WeilConjectures
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
-set_option synthInstance.maxHeartbeats 100000 in
--- The canonical sheaf tensor instances require additional elaboration fuel.
-set_option maxHeartbeats 1200000 in
--- The canonical sheaf tensor instances require additional elaboration fuel.
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)] {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   (b : NativeWeilTensorRingedBridge k₀ l X)
@@ -36,8 +32,4 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   (adj : T ⊣₂ ihomBifunctor k₀ l X)
   (A : NativeWeilRingedTensorComplexes b T adj)
 
-set_option maxHeartbeats 1200000 in
--- The mapped total-complex instances require additional elaboration fuel.
-set_option synthInstance.maxHeartbeats 100000 in
--- The mapped total-complex instances require additional elaboration fuel.
 end AlgebraicGeometry.ProEtaleWeilSheaf

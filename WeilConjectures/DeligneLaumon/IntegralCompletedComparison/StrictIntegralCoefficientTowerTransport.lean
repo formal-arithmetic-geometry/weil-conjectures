@@ -48,5 +48,5 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 -- The existential projection property retains the named goodness hypothesis,
 -- although its displayed equality does not depend on the proof of goodness.
-set_option linter.unusedVariables false in
+
 end WeilConjectures.IntegralCompletedComparison

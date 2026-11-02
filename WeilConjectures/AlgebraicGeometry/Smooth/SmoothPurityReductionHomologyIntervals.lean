@@ -24,6 +24,4 @@ namespace AlgebraicGeometry.ProEtale
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{u})
 
-attribute [-instance] WeilConjectures.integralOperationsSiteSmall
-  WeilConjectures.integralReductionSiteEssentiallySmall in
 end AlgebraicGeometry.ProEtale

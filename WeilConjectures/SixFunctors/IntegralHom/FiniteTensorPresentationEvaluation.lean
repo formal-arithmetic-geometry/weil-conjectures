@@ -167,7 +167,5 @@ private theorem evaluation_for_adj
       (fun f ↦ T.comparison.inv.app (⟨P, hP⟩, ⟨S', hS⟩) ≫ f)
       (DerivedCategory.Q.map_comp s.hom a)).trans h
 
-set_option maxHeartbeats 800000 in
--- Elaborate the representative comparison with independent site and coefficient universes.
 end Representatives
 end WeilConjectures.IntegralHom

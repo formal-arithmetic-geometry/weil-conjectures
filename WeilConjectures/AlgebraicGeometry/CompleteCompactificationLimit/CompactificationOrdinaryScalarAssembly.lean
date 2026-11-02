@@ -22,6 +22,4 @@ namespace AlgebraicGeometry.ProEtale.CompleteCompactificationLimit
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-set_option maxHeartbeats 2000000 in
--- The nested evaluation isomorphisms require additional elaboration heartbeats.
 end AlgebraicGeometry.ProEtale.CompleteCompactificationLimit

@@ -239,6 +239,4 @@ def spDerivedCompletedEvaluation (n : ℕ) : spDerivedCoefficientTowers l E T D 
   spDerivedCoefficientEvaluation l E T D n ⋙
     (spCompletedEllRestriction l E T n).mapDerivedCategory
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end AlgebraicGeometry.ProEtale

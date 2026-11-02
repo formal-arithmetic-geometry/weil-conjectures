@@ -114,6 +114,4 @@ variable {X Y : Scheme.{t}} (g : X ⟶ Y)
 
 attribute [local irreducible] isoComposite
 
-set_option maxHeartbeats 800000 in
--- Explicit transposition and localization need this heartbeat budget.
 end WeilConjectures.FinitePullbackStrictTower

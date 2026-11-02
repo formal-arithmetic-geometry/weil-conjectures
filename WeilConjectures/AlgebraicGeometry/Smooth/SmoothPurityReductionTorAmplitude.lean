@@ -154,8 +154,4 @@ private theorem integral_coefficient_iso :
     Sheaf.isMonHom_sheafCompose_map (coherentTopology Profinite.{u}) q.hom
   exact ⟨F, ⟨Mon.mkIso' (G.mapIso q)⟩⟩
 
-attribute [-instance] WeilConjectures.integralOperationsSiteSmall
-  WeilConjectures.integralReductionSiteEssentiallySmall in
-attribute [-instance] WeilConjectures.integralOperationsSiteSmall
-  WeilConjectures.integralReductionSiteEssentiallySmall in
 end AlgebraicGeometry.ProEtale

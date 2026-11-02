@@ -115,7 +115,5 @@ variable (L : Type u) [Field L] [Algebra ℚ_[l] L]
 
 attribute [local irreducible] scalarIntegralClosed scalarClosedTensor scalarHomOrdinary
 
-set_option maxHeartbeats 600000 in
--- Bound elaboration of the normalized scalar model and its two adjunctions.
 end FiniteScalar
 end WeilConjectures.PodCoefficientDescent

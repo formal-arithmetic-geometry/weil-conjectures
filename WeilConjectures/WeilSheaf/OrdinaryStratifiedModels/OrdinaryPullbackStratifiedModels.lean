@@ -903,5 +903,4 @@ def localComparison {X Y S : Scheme.{u}} (f : X ⟶ Y) (i : S ⟶ Y)
     DerivedCategory.Q.map
       ((modelPullbackComplex l E (pullback.snd (pullback.snd f i) U.hom)).hom.app L)
 
-set_option linter.unusedVariables false in
 end WeilConjectures.OrdinaryStratifiedModels

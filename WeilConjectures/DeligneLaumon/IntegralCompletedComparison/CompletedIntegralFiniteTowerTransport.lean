@@ -47,5 +47,4 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   {X Y : Scheme.{u}} (g : X ⟶ Y)
 
-set_option linter.unusedVariables false in
 end WeilConjectures.IntegralCompletedComparison

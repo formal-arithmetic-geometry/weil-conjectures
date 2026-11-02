@@ -207,6 +207,4 @@ attribute [local semireducible] completedIntegralCoefficientSheafUnrestricted
 
 attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
 
-set_option maxHeartbeats 600000 in
--- Compare exact derived functors without unfolding their localization constructions.
 end WeilConjectures

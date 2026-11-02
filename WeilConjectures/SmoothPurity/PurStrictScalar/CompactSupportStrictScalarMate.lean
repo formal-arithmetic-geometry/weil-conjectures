@@ -68,12 +68,6 @@ def strictScalarPull {Z W : Scheme.{u}} (g : Z ⟶ W) :
       ((scalarAdj l E F i W).comp
         (adj (ULift.{u + 1} (Padic.coefficientExtensionIntegers l F)) g))
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-attribute [local irreducible] WeilConjectures.PurCompactSupport.openAdjunction
-  AlgebraicGeometry.Scheme.proEtaleRingRestrictionPullbackInv in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
 section BasisTransport
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
@@ -90,8 +84,6 @@ set_option backward.isDefEq.respectTransparency.types true
 
 end MateInvertibility
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
 section FiniteField
 variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
   {X Y : Scheme.{u}}
@@ -104,9 +96,6 @@ variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
   [fs : IsSeparated f] [fft : LocallyOfFiniteType f] [fqc : QuasiCompact f]
 include D hl Xbase Ybase Xft Xqc Xs Yft Yqc Ys fbase fs fft fqc
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-set_option linter.unusedSectionVars false in
 end FiniteField
 
 end WeilConjectures.PurStrictScalar

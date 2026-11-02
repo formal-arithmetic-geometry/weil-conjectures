@@ -84,8 +84,6 @@ include h hb in
 include h hb in
 attribute [local irreducible] transportRawApp
 
-include h hb in
-include h hb in
 end TensorTransport
 
 end WeilConjectures

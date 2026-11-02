@@ -193,8 +193,4 @@ private theorem ordinary_reduction_isIso
     ← SheafOfModules.comp_val, (level m).inv_hom_id_app,
     SheafOfModules.id_val, PresheafOfModules.id_app, ModuleCat.id_apply] using he
 
-set_option maxHeartbeats 800000 in
--- Kernel checking the concrete coefficient-sheaf comparisons exceeds the default budget.
-set_option linter.unusedVariables false in
--- The fixed interface includes universal and evaluation; this proof only needs computes.
 end AlgebraicGeometry.ProEtale

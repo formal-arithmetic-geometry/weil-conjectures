@@ -187,9 +187,6 @@ variable (L : Type u) [Field L] [Algebra ℚ_[l] L]
 
 attribute [local irreducible] scalarIntegralClosed scalarClosedTensor scalarHomOrdinary
 
-open SheafOfModules in
-set_option maxHeartbeats 600000 in
--- Bound elaboration of the normalized scalar model and its two adjunctions.
 end FiniteScalar
 
 /-- Completed evaluation in the recorded full constructible category.
@@ -1178,8 +1175,6 @@ end CommonCompositorProof
 attribute [local irreducible] shiftedPullbackInput rationalDerivedPullback
   rationalDerivedInternalHom
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end CommonStage
 
 end WeilConjectures.PodCoefficientDescent

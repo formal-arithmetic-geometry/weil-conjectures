@@ -197,8 +197,6 @@ set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 attribute [local irreducible] scalarRoosTensor
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
 section Augmentation
 
 set_option backward.isDefEq.respectTransparency true

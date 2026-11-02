@@ -107,16 +107,4 @@ theorem zeroSection_spec :
   have : IsClosedImmersion (zeroSection i ≫ projection i) := hs ▸ inferInstance
   exact ⟨hs, IsClosedImmersion.of_comp (zeroSection i) (projection i)⟩
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end AlgebraicGeometry.PurityNormalBundle

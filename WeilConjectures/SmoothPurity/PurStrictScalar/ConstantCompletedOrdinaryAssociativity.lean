@@ -108,6 +108,4 @@ variable (l : ℕ) [Fact l.Prime]
 attribute [local irreducible] ordinaryScalarAssociator scalarCompletionOrdinary
   reductionChange completedAdicChange
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
 end WeilConjectures.PurStrictScalar

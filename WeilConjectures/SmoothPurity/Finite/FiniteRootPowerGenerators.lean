@@ -431,7 +431,5 @@ private theorem first_rootLocalSpan (U : X.ProEtᵒᵖ)
 end RootFormulas
 
 -- Keep the original generator-family binder names, including the implicit scalar binder.
-set_option linter.unusedVariables false in
-set_option maxHeartbeats 1600000 in
--- The generator induction compares recursive tensor and scalar-extension wrappers.
+
 end WeilConjectures

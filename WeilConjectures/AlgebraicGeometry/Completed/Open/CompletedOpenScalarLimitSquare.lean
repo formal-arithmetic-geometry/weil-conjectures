@@ -97,8 +97,7 @@ private def limitMap {E E' : Type*} [Category E] [Abelian E] [HasLimits E]
     (TwoSquare.mk _ _ _ _ (UnboundedExactTower.constantInterchange V).inv)).natTrans
 
 attribute [local instance] Functor.additive_of_preserves_binary_products
-omit [Abelian.HasKInjectiveResolutions A] [Abelian.HasKInjectiveResolutions B]
-  [Abelian.HasKInjectiveResolutions C] [Abelian.HasKInjectiveResolutions D] in
+
 end CategoryTheory
 
 namespace AlgebraicGeometry.Scheme

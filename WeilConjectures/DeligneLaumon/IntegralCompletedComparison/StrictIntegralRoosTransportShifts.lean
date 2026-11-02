@@ -213,6 +213,4 @@ attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimi
 
 end
 
-set_option maxHeartbeats 1200000 in
--- Recoding compares two concrete presentations of the same exact coefficient restriction.
 end WeilConjectures.IntegralCompletedComparison

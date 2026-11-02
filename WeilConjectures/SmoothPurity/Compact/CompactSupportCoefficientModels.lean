@@ -194,6 +194,4 @@ set_option backward.isDefEq.respectTransparency.types false
 attribute [local irreducible] sfQcqsCompactSupportRealizationMap
   sfQcqsCompactSupportRealization
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
 end WeilConjectures

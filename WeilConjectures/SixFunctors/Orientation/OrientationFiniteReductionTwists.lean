@@ -35,8 +35,6 @@ variable {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B]
   (a : F ⊣ R) (L : DerivedCategory A ⥤ DerivedCategory B)
   (b : L ⊣ R.mapDerivedCategory)
 
-omit [HasDerivedCategory A] [HasDerivedCategory B]
-  [PreservesFiniteLimits R] [PreservesFiniteColimits R] in
 end SingleAdjunction
 
 section ReductionProof
@@ -82,8 +80,6 @@ private def finiteQuotient (d : ℕ) :
 
 variable [∀ x : X, Invertible (l : X.residueField x)]
 
-set_option maxHeartbeats 1600000 in
--- Elaborating the unit identity compares the fixed, large coefficient categories.
 end ReductionProof
 
 /-- Use the published positive-quotient finiteness witness.

@@ -188,10 +188,6 @@ private def singleTensorIso (M N : C) (p q : ℤ) :
   have : IsIso f := HomologicalComplex.Hom.isIso_of_components f
   exact (asIso f).symm
 
-omit [HasCountableCoproducts C] in
-omit [HasCountableCoproducts C] in
-omit [HasCountableCoproducts C] in
-omit [HasCountableCoproducts C] in
 end SingleTensor
 
 section RootTensor
