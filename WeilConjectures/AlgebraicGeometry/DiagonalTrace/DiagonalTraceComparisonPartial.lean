@@ -27,6 +27,15 @@ open CategoryTheory CategoryTheory.Abelian CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 
 open SpTowerClasses
+section PartialPresentation
+
+-- The fixed-coefficient zero morphisms differ from those of the abelian structure used by
+-- `DerivedCategory.Q`; unifying the two unfolds both abelian structures in the kernel.
+attribute [-instance] CategoryTheory.ConstantScalarRestriction.ringPreadditive
+  CategoryTheory.ConstantScalarRestriction.fixedPreadditive
+  CategoryTheory.ConstantScalarRestriction.ringZeroMorphisms
+  CategoryTheory.ConstantScalarRestriction.fixedZeroMorphisms
+
 
 /-- The comparison data before the two derived-limit invertibility assertions.
 
@@ -93,6 +102,8 @@ structure PartialPresentation (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     (diagonalCompletedRestriction l X) (diagonalCompletedRestriction l S)
     Rc Rf completedOrdinary
   limits : LimitSquare l f LX LS Rf Rt
+
+end PartialPresentation
 
 private theorem normalizedOnKInjective
     {A B C D : Type a} [Category.{v} A] [Category.{v} B]
