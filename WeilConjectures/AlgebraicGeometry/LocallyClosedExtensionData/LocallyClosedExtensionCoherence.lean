@@ -39,6 +39,7 @@ All derived functors are the exact termwise localizations of these same functors
 
 @[expose] public noncomputable section
 
+set_option linter.privateModule false
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
 
