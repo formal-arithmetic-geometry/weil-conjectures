@@ -71,4 +71,22 @@ def source (c : Coefficient ell) {X Y : Scheme.{u}} (f : X ⟶ Y) (d : ℕ)
   (property ell c X).lift ((property ell c Y).ι ⋙ c.smoothSource ell f d)
     (fun K ↦ preserves K.obj K.property)
 
+/-- The exceptional inverse image is the restriction of the actual localizing
+right adjoint, through the canonical full inclusion.
+Source: sk-prop-sf-existence (blueprint: def-pur-transport-adjunction-restrictions). -/
+def exceptional (c : Coefficient ell) {X Y : Scheme.{u}}
+    (G : (localizing ell c Y).FullSubcategory ⥤ (localizing ell c X).FullSubcategory)
+    (preserves : ∀ K : c.ctf ell Y,
+      property ell c X (G.obj ((inclusion ell c Y).obj K)).obj) :
+    c.ctf ell Y ⥤ c.ctf ell X :=
+  (property ell c X).lift
+    (inclusion ell c Y ⋙ G ⋙ (localizing ell c X).ι) preserves
+
+/-- The counit equation selecting gamma, in Lean's diagrammatic order.
+Source: the uniqueness clause (blueprint: def-pur-transport-adjunction-restrictions). -/
+def CounitCompatible {A B : Type (u + 2)} [Category A] [Category B]
+    {F : A ⥤ B} {J G : B ⥤ A} (a : F ⊣ J) (b : F ⊣ G)
+    (gamma : J ≅ G) : Prop :=
+  ∀ K : B, F.map (gamma.hom.app K) ≫ b.counit.app K = a.counit.app K
+
 end AlgebraicGeometry.ProEtale.PurityTransport

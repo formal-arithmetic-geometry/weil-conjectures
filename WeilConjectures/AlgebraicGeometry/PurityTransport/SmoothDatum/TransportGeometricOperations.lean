@@ -21,6 +21,33 @@ open AlgebraicGeometry AlgebraicGeometry.Scheme
 open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.PurityTransport
 
+/-- Base change retains the literal fibre product and its recorded compactification.
+Source: base-change clause (blueprint: def-pur-transport-geometric-base-change). -/
+def SmoothDatum.baseChange {D : WeilConjectures.FiniteFieldDatum.{u}}
+    (s : SmoothDatum D) (Y' : Over (Spec (.of D.k)))
+    [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
+    (v : Y'.left ⟶ s.Y.left) [v.IsOver (Spec (.of D.k))] : SmoothDatum D := by
+  let f' := pullback.snd s.map v
+  letI : (pullback s.map v).Over (Spec (.of D.k)) := ⟨f' ≫ (Y'.left ↘ Spec (.of D.k))⟩
+  letI : f'.IsOver (Spec (.of D.k)) := ⟨rfl⟩
+  let X' : Over (Spec (.of D.k)) :=
+    Over.mk (f' ≫ Y'.hom)
+  letI : LocallyOfFiniteType X'.hom := by
+    change LocallyOfFiniteType (f' ≫ Y'.hom)
+    infer_instance
+  letI : QuasiCompact X'.hom := by
+    change QuasiCompact (f' ≫ Y'.hom)
+    infer_instance
+  letI : IsSeparated X'.hom := by
+    change IsSeparated (f' ≫ Y'.hom)
+    infer_instance
+  exact
+    { X := X'
+      Y := Y'
+      map := f'
+      dim := s.dim
+      compactification := s.compactification.baseChange v }
+
 /-- Composition retains its specified proper/open compactification model.
 Source: composition clause (blueprint: def-pur-transport-geometric-base-change). -/
 def SmoothDatum.comp {D : WeilConjectures.FiniteFieldDatum.{u}}

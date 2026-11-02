@@ -115,4 +115,38 @@ def lowerComp
     (Functor.mapDerivedCategoryNatIso (CondensedRing.upperStarComp R f g) ≪≫
       Functor.mapDerivedCategoryCompIso _ _).symm
 
+/-- The canonical open-extension compositor is fixed by its two adjunctions.
+Source: compact-support composition (blueprint: def-pur-transport-compact-support-coordinates). -/
+def openComp
+    (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    {X Y Z : Scheme.{u}} (j : X ⟶ Y) (i : Y ⟶ Z)
+    [IsOpenImmersion j] [IsOpenImmersion i] :=
+  Adjunction.leftAdjointUniq
+    ((CondensedRing.derivedOpenImmersionLowerShriekUpperStarAdjunction R j).comp
+      (CondensedRing.derivedOpenImmersionLowerShriekUpperStarAdjunction R i))
+    ((CondensedRing.derivedOpenImmersionLowerShriekUpperStarAdjunction R (j ≫ i)).ofNatIsoRight
+      (Functor.mapDerivedCategoryNatIso (CondensedRing.upperStarComp R j i) ≪≫
+        Functor.mapDerivedCategoryCompIso _ _))
+
+/-- Pointwise proper/open model compositor at a normalized interchange.
+Source: compact-support composition (blueprint: def-pur-transport-compact-support-coordinates). -/
+def supportComp
+    (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
+    (cf : Compactification f) (cg : Compactification g)
+    (cr : Compactification.BoundaryCompactification (cf.g ≫ cg.i))
+    (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj R X)))
+    (m : (CondensedRing.openImmersionLowerShriek R cg.i).mapDerivedCategory.obj
+        ((CondensedRing.lowerStar R cf.g).rightDerivedFunctor.obj
+          ((CondensedRing.openImmersionLowerShriek R cf.i).mapDerivedCategory.obj K)) ⟶
+      (CondensedRing.lowerStar R cr.obj.obj.g).rightDerivedFunctor.obj
+        ((CondensedRing.openImmersionLowerShriek R cr.obj.obj.i).mapDerivedCategory.obj
+          ((CondensedRing.openImmersionLowerShriek R cf.i).mapDerivedCategory.obj K))) :=
+  (CondensedRing.lowerStar R cg.g).rightDerivedFunctor.map m ≫
+    (lowerComp R cr.obj.obj.g cg.g).inv.app
+      ((CondensedRing.openImmersionLowerShriek R cr.obj.obj.i).mapDerivedCategory.obj
+        ((CondensedRing.openImmersionLowerShriek R cf.i).mapDerivedCategory.obj K)) ≫
+    (CondensedRing.lowerStar R (cr.obj.obj.g ≫ cg.g)).rightDerivedFunctor.map
+      ((openComp R cf.i cr.obj.obj.i).hom.app K)
+
 end AlgebraicGeometry.ProEtale.PurityTransport

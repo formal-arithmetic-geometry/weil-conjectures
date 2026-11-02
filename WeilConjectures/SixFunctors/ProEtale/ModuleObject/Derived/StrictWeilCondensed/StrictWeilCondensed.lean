@@ -407,6 +407,15 @@ abbrev dual {T : Scheme.{u}} (K : DerivedCategory
     (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))) :=
   (ihom K).obj (𝟙_ _)
 
+/-- The tensorator is included in the tensor of two ambient Weil data.
+Source: latest blueprint, twisted-dual composite (blueprint: sk-def-sf-weil-complexes). -/
+def tensorDatum {T : Scheme.{u}} (g : T ≅ T)
+    {K L : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))}
+    (phi : (action Λ g).obj K ≅ K) (psi : (action Λ g).obj L ≅ L) :
+    (action Λ g).obj (K ⊗ L) ≅ K ⊗ L :=
+  (Functor.Monoidal.μIso (action Λ g) K L).symm ≪≫ tensorIso phi psi
+
 /-- The actual signed Tate sheaf from the recorded `sk-def-sp-tate-twist` node.
 The coefficient line is the specified `c.firstLine`; no replacement line is introduced.
 Source: latest blueprint, actual signed Tate sheaves

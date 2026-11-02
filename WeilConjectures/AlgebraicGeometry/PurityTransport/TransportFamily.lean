@@ -28,4 +28,29 @@ fixed field. Source: smooth purity (blueprint: def-pur-transport-adjunction-fami
 abbrev AdjunctionFamily (D : WeilConjectures.FiniteFieldDatum.{u}) :=
   ∀ (c : Coefficient ell) (s : SmoothDatum D), ExplicitAdjunction ell D c s
 
+/-- The natural isomorphism with every specified Brown adjoint restriction,
+uniquely characterized by its counit equation. The same explicit adjunction from
+the family occurs in that equation.
+Source: uniqueness clause (blueprint: def-pur-transport-adjunction-family). -/
+def BrownComparison (D : WeilConjectures.FiniteFieldDatum.{u})
+    (a : AdjunctionFamily ell D) : Prop :=
+  ∀ (c : Coefficient ell) (s : SmoothDatum D)
+    (hL : ∀ K, localizing ell c s.X.left K → localizing ell c s.Y.left
+      ((CondensedRing.rightDerivedLowerShriekOfCompactification
+        (c.obj ell) s.compactification).obj K))
+    (G : (localizing ell c s.Y.left).FullSubcategory ⥤
+      (localizing ell c s.X.left).FullSubcategory)
+    (b : (localizing ell c s.Y.left).lift
+      ((localizing ell c s.X.left).ι ⋙
+        CondensedRing.rightDerivedLowerShriekOfCompactification (c.obj ell) s.compactification)
+      (fun K ↦ hL K.obj K.property) ⊣ G),
+    ∃ hG : ∀ K : c.ctf ell s.Y.left,
+      property ell c s.X.left (G.obj ((inclusion ell c s.Y.left).obj K)).obj,
+    ∃ bctf : support ell c s.compactification (a c s).support_closed ⊣ exceptional ell c G hG,
+      (∀ K : c.ctf ell s.Y.left,
+        HEq (bctf.counit.app K).hom
+          (b.counit.app ((inclusion ell c s.Y.left).obj K)).hom) ∧
+      ∃! gamma : source ell c s.map s.dim (a c s).source_closed ≅ exceptional ell c G hG,
+        CounitCompatible (a c s).adjunction bctf gamma
+
 end AlgebraicGeometry.ProEtale.PurityTransport
