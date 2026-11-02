@@ -109,7 +109,6 @@ lemma Adjunction.map_comp_counit_eq_of_mate {CV CW CU CY CX : Type*} [Category C
   simp only [Functor.comp_map, Functor.map_comp, Category.assoc] at hl ⊢
   rw [hl]
 
-
 end TransposeAbstract
 
 end CategoryTheory
@@ -240,8 +239,8 @@ theorem sourceExchange_rightTranspose [IsProper (r ≫ h).left]
               (Functor.Monoidal.μIso (boundedConstructibleUpperStar _ ℓ (r ≫ h)) _ _).inv ≫
               (prodUpperStarCounit ℓ wq₁ K ⊗ₘ prodUpperStarCounit ℓ wq₂
                 ((boundedConstructibleUpperShriek ℓ (f ≫ aY)).obj (𝟙_ _))))) ≫
-      (boundedConstructibleLowerShriekComp_padicAlgCl ℓ r zX).inv.app _ ≫ e :=
-  Adjunction.map_comp_counit_eq_of_mate
+      (boundedConstructibleLowerShriekComp_padicAlgCl ℓ r zX).inv.app _ ≫ e := by
+  have key := Adjunction.map_comp_counit_eq_of_mate
     (boundedConstructibleUpperStarLowerStarAdjunction ℓ (r ≫ h))
     (boundedConstructibleUpperStarLowerStarAdjunction ℓ f)
     (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ (r ≫ h))
@@ -255,11 +254,14 @@ theorem sourceExchange_rightTranspose [IsProper (r ≫ h).left]
     (boundedConstructibleLowerShriekComp_padicAlgCl ℓ r h).inv
     (boundedConstructibleLowerShriekComp_padicAlgCl ℓ r zX).inv
     ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hA).app _)
-    ((boundedConstructibleUpperStarComp _ ℓ r h).inv.app _) _ e
+    ((boundedConstructibleUpperStarComp _ ℓ r h).inv.app _)
+    ((Functor.Monoidal.μIso (boundedConstructibleUpperStar _ ℓ (r ≫ h)) _ _).inv ≫
+      (prodUpperStarCounit ℓ wq₁ K ⊗ₘ prodUpperStarCounit ℓ wq₂
+        ((boundedConstructibleUpperShriek ℓ (f ≫ aY)).obj (𝟙_ _)))) e
     (fun _ ↦ rfl) rfl (upperStarLowerShriekAdjunction_unit_app_comp ℓ r h _)
     (lowerShriek_map_unit_comp_squareIso_hom_app ℓ hA _)
     (lowerShriek_map_lowerShriekComp_inv_app_comp_squareIso ℓ r h π₁ zX f hA.w wq₁ _)
-
+  exact key
 
 end Transpose
 
