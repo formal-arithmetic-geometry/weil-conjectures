@@ -76,7 +76,7 @@ theorem coefficientIsKFlat_of_iso {n : ℕ}
     CochainComplex.IsKFlatIndependentCoefficients
       (R := integralCoefficientCommRingSheaf l E W n) C := by
   intro Z hZ i
-  exact ((hD Z hZ) i).of_iso ((coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
+  exact ((hD Z hZ) i).of_iso ((coefficientTotalTensor.{u, t + 1, t} (Scheme.ProEt.topology W)
     (integralCoefficientCommRingSheaf l E W n)).mapIso ((Iso.refl Z).prod e)).symm
 
 namespace OrdinaryQuotient

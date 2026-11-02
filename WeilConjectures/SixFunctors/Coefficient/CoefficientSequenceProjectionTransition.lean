@@ -301,11 +301,11 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 private theorem projectionComp {m n : ℕ} (h : n ≤ m) :
     (sheafCompose (Scheme.ProEt.topology W)
-        (forget₂ CommRingCat.{max u (t+1)} RingCat.{max u (t+1)})).map
+        (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).map
         (completedIntegralCommRingProjectionUnrestricted l E W m) ≫
       normalizedDVRQuotient l E W h =
     (sheafCompose (Scheme.ProEt.topology W)
-        (forget₂ CommRingCat.{max u (t+1)} RingCat.{max u (t+1)})).map
+        (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).map
       (completedIntegralCommRingProjectionUnrestricted l E W n) :=
   limit.w (integralCoefficientSheafSystem l E W) (homOfLE h).op
 
@@ -313,11 +313,11 @@ private abbrev compO {m n : ℕ} (h : n ≤ m) :
     normalizedDVRModuleRes l E W h ⋙ scalarReductionRestriction l E W m ≅
       scalarReductionRestriction l E W n :=
   restrictCompIso ((sheafCompose (Scheme.ProEt.topology W)
-      (forget₂ CommRingCat.{max u (t+1)} RingCat.{max u (t+1)})).map
+      (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).map
         (completedIntegralCommRingProjectionUnrestricted l E W m))
     (normalizedDVRQuotient l E W h)
     ((sheafCompose (Scheme.ProEt.topology W)
-      (forget₂ CommRingCat.{max u (t+1)} RingCat.{max u (t+1)})).map
+      (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).map
         (completedIntegralCommRingProjectionUnrestricted l E W n))
     (projectionComp l E W h)
 
@@ -335,11 +335,11 @@ private theorem restrictedTransition (M : coefficientSequenceModules l E W)
   intro U
   have hτ := restrictionComposite_heq
     ((sheafCompose (Scheme.ProEt.topology W)
-      (forget₂ CommRingCat.{max u (t+1)} RingCat.{max u (t+1)})).map
+      (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).map
         (completedIntegralCommRingProjectionUnrestricted l E W m))
     (normalizedDVRQuotient l E W h)
     ((sheafCompose (Scheme.ProEt.topology W)
-      (forget₂ CommRingCat.{max u (t+1)} RingCat.{max u (t+1)})).map
+      (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).map
         (completedIntegralCommRingProjectionUnrestricted l E W n))
     (projectionComp l E W h)
     ((coefficientSequenceTransition l E W h).app M) U

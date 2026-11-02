@@ -292,7 +292,7 @@ def systemLimitUnit (M : OrdinaryModel l E W)
 private instance systemKInjectives :
     Abelian.HasKInjectiveResolutions (coefficientSequenceModules l E W) := by
   have : LocallySmall.{max u (t + 1)} W.ProEt := locallySmall_max.{max u (t + 1), t, t + 1}
-  let : IsGrothendieckAbelian.{max u (t+1)} (coefficientSequenceModules l E W) :=
+  let : IsGrothendieckAbelian.{max u (t + 1)} (coefficientSequenceModules l E W) :=
     (SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses
       (coefficientSequenceTopology (Scheme.ProEt.topology W))
       (coefficientSequenceCommRingSheaf l E W)).1
