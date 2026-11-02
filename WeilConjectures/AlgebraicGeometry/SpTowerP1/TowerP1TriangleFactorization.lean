@@ -40,7 +40,4 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
   {S : Scheme.{u}} {hS : IsUnit (l : Γ(S, ⊤))}
 
-attribute [local irreducible] unitInsertion unitTail contractionTail Presentation.pushSwap
-  rightPullComparison diagonalInsertion expandedContraction
-
 end AlgebraicGeometry.ProEtale.SpTowerP1
