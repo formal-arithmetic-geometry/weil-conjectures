@@ -209,8 +209,8 @@ theorem quotientAssociation_degreeData_exists
   obtain ⟨f₀⟩ := coefficientExtensionFiniteAssociation_exists l E E (AlgHom.id ℚ_[l] E) W A₀
   obtain ⟨β₀, hβ₀⟩ := chainSection l E E (AlgHom.id ℚ_[l] E) W A₀ M ρ₀ hρ₀ f₀.association
     f₀.association_section d0.direct d0.directEvaluation d0.direct_transition
-  let _ := coefficientScalarModelZero A₁.scalar
-  let _ := coefficientScalarModelZero A₀.scalar
+  letI := coefficientScalarModelZero A₁.scalar
+  letI := coefficientScalarModelZero A₀.scalar
   let Q := (M.quotient l E W).obj K.obj
   have hQ₀ := mapHomologicalComplex_obj_eq hA₀ Q
   have hQ₁ := (mapHomologicalComplex_obj_eq hA₁ Q).symm
@@ -245,10 +245,12 @@ theorem quotientAssociation_degreeData_exists
     rw [HomologicalComplex.eqToHom_f]
     exact eq_of_heq ((OrdinaryScalarTowerProof.eqToHom_section _ V _).trans
       (hT₀ (Q.X i) V a q).symm)
-  have hγ : ((γ.hom).f i).val.app V s₀ = a • q :=
-    (congrArg (fun z ↦ ((((scalarUnit l E W).hom.app Q).f i).val.app V z))
-      ((congrArg (fun z ↦ ((eqToHom hQ₀).f i).val.app V z) hinv).trans he₀)).trans
-      (scalar_unit_section l E W (Q.X i) V a q)
+  have hγ : ((γ.hom).f i).val.app V s₀ = a • q := by
+    simp only [γ, Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv, eqToIso.hom,
+      HomologicalComplex.comp_f, SheafOfModules.comp_val, PresheafOfModules.comp_app,
+      ModuleCat.comp_apply]
+    erw [hinv, he₀]
+    exact scalar_unit_section l E W (Q.X i) V a q
   -- the scalar side
   have he₁ : ((eqToHom hQ₁).f i).val.app V
       (integralComparisonSequenceTensorSection l E L ι W (Q.X i) V
