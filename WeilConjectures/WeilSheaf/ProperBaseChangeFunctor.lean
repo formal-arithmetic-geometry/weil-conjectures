@@ -71,8 +71,10 @@ theorem WeilComplex.nonempty_derivedLowerStar_comp_upperStar_iso_of_isProper
       hom_snd := h.isoPullback_hom_snd }
   obtain ⟨e⟩ := nativeWeil_proper_natural_baseChange k₀ l g' f' f g sq
   let P := WeilComplex.objectProperty k₀ l Y'
-  let ef : WeilComplex.derivedLowerStar (k₀ := k₀) (l := l) f ⋙ (WeilComplex.objectProperty k₀ l Y).ι ≅
-      (WeilComplex.objectProperty k₀ l X).ι ⋙ (ProEtaleWeilSheaf.lowerStar k₀ l f).rightDerivedFunctor :=
+  let ef : WeilComplex.derivedLowerStar (k₀ := k₀) (l := l) f ⋙
+      (WeilComplex.objectProperty k₀ l Y).ι ≅
+      (WeilComplex.objectProperty k₀ l X).ι ⋙
+        (ProEtaleWeilSheaf.lowerStar k₀ l f).rightDerivedFunctor :=
     ObjectProperty.liftFullSubcategoryCompιIso _ _ _ _
   let ef' : WeilComplex.derivedLowerStar (k₀ := k₀) (l := l) f' ⋙ P.ι ≅
       (WeilComplex.objectProperty k₀ l X').ι ⋙
