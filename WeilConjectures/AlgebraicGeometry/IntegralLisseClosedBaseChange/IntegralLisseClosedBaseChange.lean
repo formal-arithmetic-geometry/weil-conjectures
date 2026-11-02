@@ -266,6 +266,16 @@ def exchange {X U T Z : Scheme.{u}} {q : X ⟶ U} {s : Z ⟶ U}
       pull Λ h ⋙ CondensedRing.moduleObjectDerivedPushforward Λ qZ :=
   Adjunction.squareExchange (adj Λ q) (adj Λ qZ) (pull Λ s) (pull Λ h) (square Λ w)
 
+/-- Exact restriction of scalars on the ordinary unbounded derived category.
+Source: the scalar-restriction clause of the node
+(blueprint: lem-sfb-integral-lisse-closed-base-change). -/
+def restrict (X : Scheme.{u}) :
+    DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ' X)) ⥤
+    DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)) :=
+  (Mod.comap (coefficientMap c X)).mapDerivedCategory
+
 section Coefficients
 
 variable {Λ}

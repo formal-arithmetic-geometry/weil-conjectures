@@ -35,6 +35,10 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
 
 variable [HasDerivedCategory.{w} (Modules.{c, v, r} J R)]
 
+/-- The native ringed module category.
+(blueprint: lem-sfb-ringed-tensor-signed-cancellation-Y2). -/
+abbrev Modules := RingedDerivedNative.Modules.{c, v, r} J R
+
 /-- The closed structure uses exactly the native monoidal structure.
 (blueprint: lem-sfb-ringed-tensor-signed-cancellation-Y2). -/
 theorem nativeClosed_monoidal :

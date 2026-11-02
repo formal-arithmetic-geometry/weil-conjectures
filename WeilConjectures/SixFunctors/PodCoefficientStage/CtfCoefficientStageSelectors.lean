@@ -75,6 +75,27 @@ def operations (s : PodCoefficientStage) :
   | .rational => S.higher.rational
   | .common => S.closure.commonStage
 
+/-- The recorded tensor with its second argument restricted to finite Tor.
+At finite coefficients this is the canonical projection module's partial tensor.
+Source: the tensor-Hom domain and projection formula
+(blueprint: def-sf-ctf-coefficient-stage-selectors). -/
+def tensor (s : PodCoefficientStage) (X : SixFunctorSpace D) :
+    category (_S := S) s X ⥤ (domain S s X).FullSubcategory ⥤ category (_S := S) s X :=
+  match s with
+  | .finite => CompactSupportFiniteProjection.partialTensor S.toSixFunctorFiniteOperations X ⋙
+      (Functor.whiskeringLeft _ _ _).obj
+        ((finiteTorConstructible C.l E n hn X.obj.left).lift
+          ((domain S .finite X).ι ⋙
+            (AlgebraicGeometry.Scheme.intrinsicFiniteTorsionConstructible
+              C.l E n hn X.obj.left).ι)
+          (fun K ↦ K.property))
+  | .integral => S.higher.integralTensor X ⋙
+      (Functor.whiskeringLeft _ _ _).obj (domain S .integral X).ι
+  | .rational => S.higher.rationalTensor X ⋙
+      (Functor.whiskeringLeft _ _ _).obj (domain S .rational X).ι
+  | .common => S.closure.commonStageTensor X ⋙
+      (Functor.whiskeringLeft _ _ _).obj (domain S .common X).ι
+
 end PodCoefficientStage
 
 end WeilConjectures

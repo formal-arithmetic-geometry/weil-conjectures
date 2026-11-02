@@ -437,6 +437,12 @@ theorem square (J : Finset (Fin r)) (P : Profinite.{u}) :
   dsimp only [towerProjection, faceProjection]
   rw [← Category.assoc, testMap_snd, Category.assoc, h, Category.assoc]
 
+/-- The internal-module category over the specified pulled-back coefficient ring.
+Source: direct-image proof (3), Mod(C_(F,X))
+(blueprint: lem-sfb-root-tower-coordinate-face). -/
+abbrev Modules (X : Scheme.{u}) :=
+  Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)
+
 /-- Exact coefficient pullback on the ordinary unbounded derived category.
 Source: direct-image proof (3), g_J^* (blueprint: lem-sfb-root-tower-coordinate-face). -/
 abbrev upper {X Y : Scheme.{u}} (f : X ⟶ Y) :=
@@ -460,6 +466,14 @@ def upperComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     upper Λ (f ≫ g) ≅ upper Λ g ⋙ upper Λ f :=
   Functor.mapDerivedCategoryNatIso (CondensedRing.upperStarComp Λ f g) ≪≫
     Functor.mapDerivedCategoryCompIso _ _
+
+/-- The adjunction-normalized composite direct image; no arbitrary isomorphism is chosen.
+Source: direct-image proof (3), canonical composition identification
+(blueprint: lem-sfb-root-tower-coordinate-face). -/
+def lowerComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
+    lower Λ (f ≫ g) ≅ lower Λ f ⋙ lower Λ g :=
+  conjugateIsoEquiv (adjunction Λ (f ≫ g))
+    ((adjunction Λ g).comp (adjunction Λ f)) (upperComp Λ f g).symm
 
 /-- The pullback identification for a commuting square, without a cartesianness assumption.
 Source: direct-image proof (3), q_J^* g_J^* = e_J^* q^*
