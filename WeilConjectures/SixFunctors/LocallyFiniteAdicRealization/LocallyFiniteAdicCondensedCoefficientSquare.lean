@@ -155,6 +155,8 @@ private theorem integralCoefficientSquare (F : Type u) [Field F] [Algebra ℚ_[l
   exact (A.integral_normalization n.unop U s x).trans
     (C.integral_residues n.unop U s x).symm
 
+-- The section topology on `Coefficient` is the normed one, not the transferred `Shrink` one.
+attribute [-instance] Shrink.instTopologicalSpace in
 /-- The two maps out of the raw completed coefficient ring agree before passing to
 module categories. This is a statement only about coefficient ring sheaves.
 
