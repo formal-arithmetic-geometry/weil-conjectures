@@ -23,9 +23,7 @@ open SpTowerClasses WeilConjectures
 
 private theorem integral_mem (l : ℕ) [Fact l.Prime] (x : ULift.{u} (Padic l)) :
     x ∈ Padic.coefficientExtensionIntegers l (ULift.{u} (Padic l)) ↔ ‖x.down‖ ≤ 1 := by
-  have h := (Padic.extension_integers_dvr l (ULift.{u} (Padic l))
-    (Padic.coefficientExtensionAbsoluteValue l (ULift.{u} (Padic l)))
-    (spectralNorm_extends (K := Padic l) (L := ULift.{u} (Padic l)))).choose_spec.choose_spec.1 x
+  have h := (Padic.coefficientExtensionIntegers_dvr l (ULift.{u} (Padic l))).choose_spec.1 x
   refine h.trans ?_
   have he := spectralNorm_extends (K := Padic l) (L := ULift.{u} (Padic l)) x.down
   change spectralNorm (Padic l) (ULift.{u} (Padic l)) x ≤ 1 ↔ ‖x.down‖ ≤ 1

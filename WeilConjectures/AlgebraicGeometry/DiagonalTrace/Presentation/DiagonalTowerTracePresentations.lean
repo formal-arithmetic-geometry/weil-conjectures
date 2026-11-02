@@ -32,6 +32,15 @@ namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 
 open SpTowerClasses WeilConjectures
 
+section Presentation
+
+-- The fixed-coefficient zero morphisms differ from those of the abelian structure used by
+-- `DerivedCategory.Q`; unifying the two unfolds both abelian structures in the kernel.
+attribute [-instance] CategoryTheory.ConstantScalarRestriction.ringPreadditive
+  CategoryTheory.ConstantScalarRestriction.fixedPreadditive
+  CategoryTheory.ConstantScalarRestriction.ringZeroMorphisms
+  CategoryTheory.ConstantScalarRestriction.fixedZeroMorphisms
+
 /-- A presentation of the canonical trace construction. These are specified derived
 functors and normalized comparisons, not arbitrary arrows with specified level values.
 Source: blueprint trace proof steps 1--8
@@ -97,6 +106,8 @@ structure Presentation (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   limits : LimitSquare l f LX LS Rf Rt
   unit_limit : IsIso (coefficientsS.unitMap l E LS)
   line_limit : IsIso (coefficientsX.lineMap l E LX)
+
+end Presentation
 
 /-- The unit-plus-section splitting, as a morphism of strict constant-coefficient
 systems. The biproduct comparison is the canonical one for the exact restriction.
