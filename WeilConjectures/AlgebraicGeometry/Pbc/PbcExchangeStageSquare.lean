@@ -100,6 +100,12 @@ theorem eq_inv_comp_comp_inv {C : Type*} [Category C] {s t r v : C} (u₁ : s �
   rw [← h]
   simp
 
+/-- Solve `b ≫ u.hom = X` for `b`. -/
+theorem eq_comp_inv_of_comp_hom {C : Type*} [Category C] {t r v : C} (b : t ⟶ r) (u : r ≅ v)
+    (X : t ⟶ v) (h : b ≫ u.hom = X) : b = X ≫ u.inv := by
+  rw [← h]
+  simp
+
 /-- Move two invertible end factors across an equation. -/
 theorem comp_comp_hom_eq_hom_comp {C : Type*} [Category C] {a b c c' d e : C} (p : a ≅ b)
     (q : c ≅ d) (A : a ⟶ c') (B : c' ⟶ c) (R : b ⟶ e) (T : e ⟶ d)
@@ -187,12 +193,11 @@ Formalized below (before the `sorry`):
 * The direct-image equations are solved for `β ≫ Rf_F.map SIC` by `Iso.inv_comp_eq`.
 * The pullback equations are solved for `β.inv` by `eq_inv_comp_comp_inv`, with the outer
   isomorphisms passed explicitly. A direct `rw` with `Functor.mapIso_inv` timed out.
-The goal is now restated by `show` (it needs `maxHeartbeats 1000000`) and flipped by
+The goal is now restated by `change` (it needs `maxHeartbeats 1000000`) and flipped by
 `comp_comp_hom_eq_hom_comp`, so the two pullback comparisons appear as `β.inv`.
-Their solved forms `βLg_inv` and `βLg'_inv` are substituted by `erw`. Next: in the
-goal, `βRf.hom` (under `Lg_F.map`) and `βRf'.hom` are not followed by
-`Rf_F.map SIC.hom`. So multiply by the comparisons (as in `eq_inv_comp_comp_inv`) before
-using `eRf` and `eRf'`.
+The direct-image comparisons are solved for `β.hom` by `eq_comp_inv_of_comp_hom`. All four
+solved forms are substituted by `erw`, so every β is now a localized ambient scalar
+comparison conjugated by `pbcScalarIntegralComparison` and `eqToHom`s.
 Earlier attempt, before `show`: moving `Lg.β` and `Rf'_F.map Lg'.β` across the goal with a
 generic two-sided lemma
 (`p.inv ≫ A ≫ B = R ≫ T ≫ q.inv → A ≫ B ≫ q.hom = p.hom ≫ R ≫ T`), applied by `refine`
@@ -356,7 +361,15 @@ theorem pbcExchangeStageSquare_integral
     ((βLg h).app ((pbcDescentDirectImage l Ω f presRf E).obj ⟨K⟩))
     ((pbcDescentDirectImage l Ω f' presRf' F).mapIso ((βLg' h).app ⟨K⟩)) _ _ _ _ ?_
   simp only [Iso.app_inv, Functor.mapIso_inv]
-  erw [βLg_inv, βLg'_inv]
+  have βRf_hom := eq_comp_inv_of_comp_hom _
+    ((pbcDescentDirectImage l Ω f presRf F).mapIso
+      ((pbcScalarIntegralComparison l Ω X dX.out iX.out h).app K)) _ eRf
+  have βRf'_hom := eq_comp_inv_of_comp_hom _
+    ((pbcDescentDirectImage l Ω f' presRf' F).mapIso
+      ((pbcScalarIntegralComparison l Ω X' dX'.out iX'.out h).app
+        ((pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)
+          (pbcActualCompletedPull g' (pbcStageDatum.{u} l Ω E)) (presLg' E)).obj K))) _ eRf'
+  erw [βLg_inv, βLg'_inv, βRf_hom, βRf'_hom]
   sorry
 
 /-- The prescribed localized actual exchange components satisfy the scalar
