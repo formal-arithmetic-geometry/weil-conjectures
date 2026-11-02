@@ -15,6 +15,8 @@ import WeilConjectures.SmoothPurity.Integral.Comparison.IntegralComparisonPullba
 import WeilConjectures.SmoothPurity.Integral.Comparison.IntegralComparisonScalarRealizationShifts
 import WeilConjectures.SmoothPurity.Integral.Comparison.IntegralComparisonSequenceScalarPullbackShifts
 
+set_option linter.privateModule false
+
 /-!
 # The normalized completed pullback scalar comparison commutes with shifts
 

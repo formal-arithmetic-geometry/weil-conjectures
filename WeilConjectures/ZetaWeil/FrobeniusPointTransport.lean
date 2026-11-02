@@ -42,6 +42,20 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry AlgebraicGe
 open AlgebraicGeometry.ProEtale
 namespace WeilConjectures
 
+/-- Spec of the geometric field Frobenius, with its prescribed inverse.
+Source: Deligne, Weil II (1.1.7) (blueprint: def-weil-frobenius-point-transport). -/
+def frobeniusPointIso (D : FiniteFieldDatum.{u}) : Spec (.of D.k) ≅ Spec (.of D.k) :=
+  letI : Fintype D.k₀ := Fintype.ofFinite D.k₀
+  Scheme.Spec.mapIso
+    (FiniteField.geometricFrobeniusAlgEquivOfAlgebraic D.k₀ D.k).toRingEquiv.toCommRingCatIso.op
+
+/-- The arrow (s,g_s) to (s,id) of the small pro-etale site.
+Source: blueprint restriction formula (blueprint: def-weil-frobenius-point-transport). -/
+def frobeniusPointRestriction (D : FiniteFieldDatum.{u}) :
+    (proEtaleIsoPostcompose (frobeniusPointIso D).hom).obj
+        (ProEt.mk (𝟙 (Spec (.of D.k)))) ⟶ ProEt.mk (𝟙 (Spec (.of D.k))) :=
+  (ProEt.forget (Spec (.of D.k))).preimage (Over.homMk (frobeniusPointIso D).hom)
+
 attribute [local irreducible] frobeniusPointIso frobeniusPointRestriction
 
 variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
@@ -76,30 +90,6 @@ def frobeniusPointPrimeInvertible (x : Spec (.of D.k)) :
     Invertible (l : (Spec (.of D.k)).residueField x) :=
   (frobeniusPointPrimeResidueUnit D l hl x).invertible
 
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
-  WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective in
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
-  WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective in
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
-  WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective in
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
-  WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective in
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
-  WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective in
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
-  WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective in
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
-  WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective in
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
-  WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective in
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
-  WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective in
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
-  WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective in
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
-  WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective in
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
-  WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective in
 variable (Ω : Type u) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
 
 end WeilConjectures

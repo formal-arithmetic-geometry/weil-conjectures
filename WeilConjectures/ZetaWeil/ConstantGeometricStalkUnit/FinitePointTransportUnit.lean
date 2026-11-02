@@ -204,12 +204,4 @@ private theorem chain_unit (D : FiniteFieldDatum.{u}) (m : ℕ) :
     (pointConstantSectionMap D.k (Padic.coefficientExtensionRing l E (m + 1)) a))
       (IsIso.inv_hom_id (inverseImageFiniteCoefficientMap l E g m)))
 
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
-  WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective
-  coefficientComplexModuleDerived pointScalarModuleDerived pointCompletedSheafDerived
-  pointScalarAbSheafify pointScalarAbLocallyBijective
-  coefficientComplexIntegralAdditive coefficientComplexIntegralLimits
-  coefficientComplexIntegralColimits coefficientComplexRationalAdditive
-  coefficientComplexRationalLimits coefficientComplexRationalColimits
-  coefficientComplexFieldAdditive coefficientComplexFieldLimits coefficientComplexFieldColimits in
 end WeilConjectures.ConstantGeometricStalkUnit

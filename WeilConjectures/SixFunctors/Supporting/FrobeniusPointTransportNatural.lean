@@ -124,12 +124,4 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
   WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective in
 attribute [local irreducible] pointFibreSizeDescent pointFibreSizeLift
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
-  WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
-  WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective in
 end WeilConjectures

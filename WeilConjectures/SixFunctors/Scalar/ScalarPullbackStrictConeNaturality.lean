@@ -13,6 +13,8 @@ import WeilConjectures.SixFunctors.Scalar.ScalarPullbackUniqueDerivedDescent
 import all WeilConjectures.SixFunctors.Scalar.ScalarRoosComparison
 import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSupplement
 
+set_option linter.privateModule false
+
 /-! # Assembly and derived descent of the normalized strict scalar pullback map -/
 
 @[expose] public noncomputable section
@@ -120,16 +122,4 @@ private theorem product_roos_isIso (F : A ⥤ B) [F.Additive]
 
 end ProductComparison
 
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
-  CategoryTheory.GrothendieckTopology.hasSheafify_proEtTopology
-  WeilConjectures.integralOperationsAbSheafify
-  WeilConjectures.integralOperationsAbLocallyBijective
-  WeilConjectures.integralOperationsSiteSmall
-  WeilConjectures.integralOperationsCommHasDerivedCategory in
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
-  CategoryTheory.GrothendieckTopology.hasSheafify_proEtTopology
-  WeilConjectures.integralOperationsAbSheafify
-  WeilConjectures.integralOperationsAbLocallyBijective
-  WeilConjectures.integralOperationsSiteSmall
-  WeilConjectures.integralOperationsCommHasDerivedCategory in
 end WeilConjectures
