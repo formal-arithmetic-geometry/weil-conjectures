@@ -240,6 +240,7 @@ set_option genCtorIdx false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 attribute [-instance] WeilConjectures.CompletedCoefficientPushforward.modAbelian
+attribute [-instance] CategoryTheory.SignedDoubleHomCone.moduleBinaryBiproducts
   WeilConjectures.CompletedCoefficientPushforward.hasDerived
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated Opposite

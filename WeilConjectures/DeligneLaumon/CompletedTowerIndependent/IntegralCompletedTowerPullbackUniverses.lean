@@ -1022,7 +1022,8 @@ private theorem pull_quasiIso
   let φ : R ⟶ (U.sheafPushforwardContinuous CommRingCat.{max u (t + 1)} J K).obj S :=
     (sheafCompose J (forget₂ CommRingCat.{max u (t + 1)}
       RingCat.{max u (t + 1)})).preimage (directRingMap l E g)
-  have hφ : (sheafCompose J (forget₂ CommRingCat RingCat)).map φ = directRingMap l E g :=
+  have hφ : (sheafCompose J (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).map φ =
+      directRingMap l E g :=
     Functor.map_preimage _ _
   obtain ⟨c, hc⟩ := IndependentSite.siteStructuralMap_exists U L adj S R φ RI I
   obtain ⟨am⟩ := IndependentSite.supplied_adjunction U L adj S R φ RI I c hc
