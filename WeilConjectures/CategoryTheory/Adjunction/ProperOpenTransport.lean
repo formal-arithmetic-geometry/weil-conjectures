@@ -5,7 +5,7 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.CategoryTheory.Adjunction.MateTransport
+public import WeilConjectures.CategoryTheory.Adjunction.MateComparisonTransport
 public import Mathlib.CategoryTheory.Adjunction.Whiskering
 
 /-!

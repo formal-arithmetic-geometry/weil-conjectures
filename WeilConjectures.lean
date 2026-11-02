@@ -11135,6 +11135,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.LiftsGroupRingObjects
 public import WeilConjectures.CategoryTheory.Adjunction.MateBiproduct
 public import WeilConjectures.CategoryTheory.Adjunction.MateComp
 public import WeilConjectures.CategoryTheory.Adjunction.MateCompCoherence
+public import WeilConjectures.CategoryTheory.Adjunction.MateComparisonTransport
 public import WeilConjectures.CategoryTheory.Adjunction.MateCompose
 public import WeilConjectures.CategoryTheory.Adjunction.MateCounitIsIso
 public import WeilConjectures.CategoryTheory.Adjunction.MateCube

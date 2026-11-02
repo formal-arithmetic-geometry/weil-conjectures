@@ -44,11 +44,11 @@ def _root_.CategoryTheory.Functor.sectionsEquivOfIsTerminal {C : Type*} [Categor
   left_inv s := Functor.sections_ext_of_isTerminal hT (by
     change P.map (hT.from T).op (s.1 (op T)) = s.1 (op T)
     rw [hT.hom_ext (hT.from T) (𝟙 T)]
-    exact FunctorToTypes.map_id_apply P _)
+    rw [op_id, P.map_id]; rfl)
   right_inv x := by
     change P.map (hT.from T).op x = x
     rw [hT.hom_ext (hT.from T) (𝟙 T)]
-    exact FunctorToTypes.map_id_apply P _
+    rw [op_id, P.map_id]; rfl
 
 variable {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
   {T S : Scheme.{u}} (g : S ⟶ T)
@@ -66,7 +66,8 @@ private def integralConstantFreeHomEquiv (r : ℕ)
     (((integralAdj T d (⊤_ T.ProEt) terminalIsTerminal).homEquiv _ _).trans
       ((ModuleCat.homEquiv.trans (Finsupp.lift _ A (Fin r)).toEquiv.symm).trans
         ((Equiv.arrowCongr Equiv.ulift.symm
-          (Functor.sectionsEquivOfIsTerminal (P := M.val.presheaf ⋙ CategoryTheory.forget _) hW).symm))))
+          (Functor.sectionsEquivOfIsTerminal
+            (P := M.val.presheaf ⋙ CategoryTheory.forget _) hW).symm))))
 
 
 private theorem sectionsMap_sectionsEquivOfIsTerminal_symm
@@ -124,7 +125,8 @@ theorem exists_basis_pullback_integralConstantModule_free (r : ℕ) :
         ((integralConstantModule T d).obj (ModuleCat.of A (Fin r →₀ A))) ≅ F) :=
   ⟨_, fun U ↦ ⟨(Module.Basis.ofEquivFun
       (SheafOfModules.freeSectionsLinearEquiv (R := (adicLisseForget S).obj
-        ((adicTowerInverseImage g).obj (pbcAdicCompletion T d))) (ULift.{u + 1} (Fin r)) U)).reindex Equiv.ulift⟩,
+        ((adicTowerInverseImage g).obj (pbcAdicCompletion T d))) (ULift.{u + 1} (Fin r))
+          U)).reindex Equiv.ulift⟩,
     ⟨integralConstantFreePullbackIso d g r⟩⟩
 
 end AlgebraicGeometry.Scheme

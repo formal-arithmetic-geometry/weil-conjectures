@@ -75,7 +75,7 @@ theorem pbcIntegralRing_isDomain : IsDomain (PbcIntegralRing l E) :=
 theorem pbcIntegralRing_isDiscreteValuationRing :
     @IsDiscreteValuationRing (PbcIntegralRing l E) _ (pbcIntegralRing_isDomain l E) ∧
       Irreducible (pbcUniformizer l E) := by
-  letI := pbcIntegralRing_isDomain l E
+  let := pbcIntegralRing_isDomain l E
   have h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   have : IsDiscreteValuationRing (Padic.coefficientExtensionIntegers l E) :=
     h.2.2.2.2.2.2.2.1
@@ -106,7 +106,8 @@ def chartHomologyIso (T : Scheme.{u}) {S : Scheme.{u}} (g : S ⟶ T)
         (Iso.refl _)).obj ((DerivedCategory.homologyFunctor _ q).obj K) ≅
       (proEtaleRingModulePullback g (pbcAdicCompletion T (pbcIntegralDatum l E)) _
         (Iso.refl _)).obj ((integralConstantModule T (pbcIntegralDatum l E)).obj
-          ((DerivedCategory.homologyFunctor (ModuleCat.{u + 1} (PbcIntegralRing l E)) q).obj C)) := by
+          ((DerivedCategory.homologyFunctor (ModuleCat.{u + 1} (PbcIntegralRing l E)) q).obj
+            C)) := by
   let : PreservesFiniteLimits (integralConstantModule T (pbcIntegralDatum l E)) :=
     (integralConstantModule_exact T (pbcIntegralDatum l E)).1
   let : PreservesFiniteColimits (integralConstantModule T (pbcIntegralDatum l E)) :=
@@ -199,7 +200,7 @@ theorem chart_tor_epi (T : Scheme.{u}) {S : Scheme.{u}} (g : S ⟶ T)
     ((adicTowerInverseImage g).obj ((pbcAdicRings T d).obj (op n)))
     (pbcAdicProjection T d n) ((adicTowerInverseImage g).map (pbcAdicProjection T d n))
     (Iso.refl _) (Iso.refl _) (by simp)
-  haveI := proEtaleRingRestrictionPullbackInv_isIso g (pbcAdicCompletion T d)
+  have := proEtaleRingRestrictionPullbackInv_isIso g (pbcAdicCompletion T d)
     ((pbcAdicRings T d).obj (op n)) ((adicTowerInverseImage g).obj (pbcAdicCompletion T d))
     ((adicTowerInverseImage g).obj ((pbcAdicRings T d).obj (op n)))
     (pbcAdicProjection T d n) ((adicTowerInverseImage g).map (pbcAdicProjection T d n))
@@ -251,9 +252,9 @@ theorem torsion_normal_form_chart (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
             (Iso.refl _)).obj (tor n)) ⟶ cokernel f,
           Epi t := by
   intro d B tor B' P
-  letI := pbcIntegralRing_isDomain l E
+  let := pbcIntegralRing_isDomain l E
   obtain ⟨hdvr, hπ⟩ := pbcIntegralRing_isDiscreteValuationRing l E
-  letI : IsNoetherianRing (PbcIntegralRing l E) := d.noetherian
+  let : IsNoetherianRing (PbcIntegralRing l E) := d.noetherian
   have : Module.Finite (PbcIntegralRing l E)
       ((DerivedCategory.homologyFunctor (ModuleCat.{u + 1} (PbcIntegralRing l E)) q).obj C) :=
     perfect_finite_homology C hC q
@@ -266,10 +267,10 @@ theorem torsion_normal_form_chart (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     ε.toModuleIso ≪≫ (ModuleCat.biprodIsoProd
       (ModuleCat.of (PbcIntegralRing l E) (Fin r →₀ PbcIntegralRing l E)) N₀').symm
   let G := integralConstantModule T d ⋙ P
-  haveI : PreservesFiniteLimits (integralConstantModule T d) :=
+  have : PreservesFiniteLimits (integralConstantModule T d) :=
     (integralConstantModule_exact T d).1
-  haveI : PreservesFiniteLimits G := comp_preservesFiniteLimits _ _
-  haveI := preservesBinaryBiproducts_of_preservesBinaryProducts G
+  have : PreservesFiniteLimits G := comp_preservesFiniteLimits _ _
+  have := preservesBinaryBiproducts_of_preservesBinaryProducts G
   obtain ⟨F, hF, ⟨eF⟩⟩ := chart_free_sheaf (l := l) (E := E) T g r
   let φ : End N₀' := ModuleCat.ofHom (pbcUniformizer l E • LinearMap.id)
   refine ⟨r, F, G.obj N₀', hF, ⟨chartHomologyIso T g K q C e ≪≫ G.mapIso ε' ≪≫

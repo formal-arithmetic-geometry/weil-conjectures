@@ -28,9 +28,10 @@ variable {R : Type u} [CommRing R] [IsDomain R] [IsDiscreteValuationRing R]
 /-- Over a discrete valuation ring, a finite direct sum of quotients by powers of
 irreducible elements is killed by a power of any uniformizer. -/
 theorem pow_smul_eq_zero_of_directSum {ϖ : R} (hϖ : Irreducible ϖ)
-    {ι : Type u} [Fintype ι] (p : ι → R) (hp : ∀ i, Irreducible (p i)) (e : ι → ℕ) :
+    {ι : Type u} [Finite ι] (p : ι → R) (hp : ∀ i, Irreducible (p i)) (e : ι → ℕ) :
     ∃ k : ℕ, ∀ x : ⨁ i : ι, R ⧸ R ∙ p i ^ e i, ϖ ^ k • x = 0 := by
   classical
+  cases nonempty_fintype ι
   refine ⟨∑ i, e i, fun x ↦ ?_⟩
   ext i
   rw [DirectSum.smul_apply, DirectSum.zero_apply]
