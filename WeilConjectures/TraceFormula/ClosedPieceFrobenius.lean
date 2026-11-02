@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.LocalizationFrobenius
+public import WeilConjectures.TraceFormula.ClosedPieceOperator
 
 /-!
 

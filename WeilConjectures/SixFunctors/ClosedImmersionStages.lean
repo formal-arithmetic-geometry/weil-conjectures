@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalCoefficient
 public import WeilConjectures.CategoryTheory.DerivedCategory.RationalizationMap
-public import WeilConjectures.EtaleCohomology.PoincareDuality.PointPerfect
+public import WeilConjectures.SixFunctors.Etale.Derived.BoundedConstructibleIntegral
 public import WeilConjectures.Mathlib.CategoryTheory.Idempotents.FunctorExtension
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ClosedImmersion

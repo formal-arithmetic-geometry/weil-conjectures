@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
+public import WeilConjectures.AlgebraicGeometry.EtaleCoordinateTraceData
 public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteDiagonalChartExchange
 import WeilConjectures.AlgebraicGeometry.FiniteShiftedLineSquare
 import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1DiagonalIntegral

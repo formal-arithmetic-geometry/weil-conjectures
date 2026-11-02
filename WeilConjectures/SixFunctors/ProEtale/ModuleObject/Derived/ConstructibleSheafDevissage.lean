@@ -4,10 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Claude
 -/
 module
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenClosedTriangle
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerStarComp
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.HomFilteredColimitConstructible
 
 /-!
 # Dévissage of constructible sheaves to extensions by zero of lisse sheaves

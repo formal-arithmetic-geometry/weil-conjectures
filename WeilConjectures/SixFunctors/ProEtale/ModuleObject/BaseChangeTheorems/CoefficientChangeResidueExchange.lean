@@ -8,6 +8,7 @@ module
 public import WeilConjectures.Tactic.TransportModProofs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ResidueFieldTransportDerivedBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushResidueFinal
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.NonFlatPullCube
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChangeIntegralRational
 
 /-!
