@@ -9,6 +9,7 @@ import Mathlib.LinearAlgebra.Basis.Prod
 import Mathlib.LinearAlgebra.SymmetricAlgebra.Basis
 
 set_option linter.privateModule false
+
 /-! # Frame charts for a presented vector-bundle completion
 
 Source: Stacks Project, Constructions, Tags 01OA, 01OE and 01NG.
@@ -28,7 +29,5 @@ private local instance restrictedSectionsModule (S : Scheme.{u}) (F : S.Modules)
     (U : V.toScheme.Opens) : Module Γ(V.toScheme, U) Γ(F, V.ι ''ᵁ U) := by
   change Module Γ(S, V.ι ''ᵁ U) Γ(F, V.ι ''ᵁ U)
   infer_instance
-
-set_option backward.isDefEq.respectTransparency false in
 
 end AlgebraicGeometry.VectorProjectiveCompletion

@@ -8,13 +8,13 @@ module
 public import WeilConjectures.SmoothPurity.PurityFiniteSetting.Supported.SupportedCupFunctorialityModels
 import WeilConjectures.SmoothPurity.PurityFiniteSetting.Supported.SupportedCupFunctorialityModels
 
-set_option linter.privateModule false
-
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConstantSheafEnd
 import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 import Mathlib.Combinatorics.Quiver.ReflQuiver
 import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
+
+set_option linter.privateModule false
 
 /-! # Localization part of supported cup functoriality
 

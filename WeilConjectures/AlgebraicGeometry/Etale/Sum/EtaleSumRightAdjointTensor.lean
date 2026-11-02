@@ -823,8 +823,4 @@ theorem etaleSumRightAdjointTensor
   · simpa only [etaleTensorTau, etaleTensorInverseTranspose, P, constantComplex,
       asIso_inv] using h.2
 
-attribute [local irreducible] etaleTensorPullbackSquare
-
-attribute [local irreducible] etaleTensorRestrictionIso
-
 end AlgebraicGeometry.Etale

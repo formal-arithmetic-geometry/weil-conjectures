@@ -8,12 +8,12 @@ module
 public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.SixFunctors.Etale.Derived.IntegralCoefficients
 
-set_option linter.privateModule false
-
 import WeilConjectures.AlgebraicGeometry.Principal.PrincipalDualizingReduction
 import WeilConjectures.AlgebraicGeometry.Principal.PrincipalQuotientInternalHom
 import WeilConjectures.SixFunctors.Etale.Derived.RestrictScalarsTorAmplitude
 import WeilConjectures.SixFunctors.Etale.Derived.VerdierBiduality
+
+set_option linter.privateModule false
 
 /-! # Finite reduction of the specified integral Verdier bidual map -/
 

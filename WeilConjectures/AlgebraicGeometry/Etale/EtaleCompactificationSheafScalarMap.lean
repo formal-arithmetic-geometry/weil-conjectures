@@ -182,6 +182,10 @@ attribute [local irreducible] upperStar ProEtale.etaleSheafExtendScalars
   upperStarLowerStarAdjunction ProEtale.etaleSheafExtendScalarsAdjunction
   Sheaf.monoidalCategory
 
+private theorem cached_groth (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) :
+    IsGrothendieckAbelian.{u + 1}
+      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) := inferInstance
+
 attribute [local instance] cached_groth supportedHasSheafify
 
 private def sum_scalar_iso

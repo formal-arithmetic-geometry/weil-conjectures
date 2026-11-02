@@ -25,8 +25,6 @@ public import WeilConjectures.AlgebraicGeometry.QuasiFinite.QuasiFiniteCompactSu
 public import WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedEtaleCompactSupportComparisonsSupplement
 public import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeModules
 
-set_option linter.privateModule false
-
 public import WeilConjectures.AlgebraicGeometry.Etale.Sum.EtaleSumRightAdjointCoherenceSupplement
 public import WeilConjectures.AlgebraicGeometry.Etale.Support.EtaleSupportMapCompatibility
 public import WeilConjectures.Algebra.Homology.CanonicalTensorPullbackOfUniverses.RingedTopoiCanonicalTensorPullbackOfUniverses
@@ -34,6 +32,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.BaseChange
 
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionExchange
+
+set_option linter.privateModule false
 
 /-! # Refinement and open coherence of normalized etale tensor families
 

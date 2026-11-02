@@ -8,8 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.SixFunctors.Etale.Derived.IntegralCoefficients
 
-set_option linter.privateModule false
-
 import WeilConjectures.AlgebraicGeometry.DerivedCategories
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 import WeilConjectures.Algebra.Homology.ProperBaseChange.ConstantCoefficientScalarExtensionPresentations
@@ -23,6 +21,8 @@ import WeilConjectures.AlgebraicGeometry.Etale.Open.EtaleOpenTensorDefs
 import WeilConjectures.AlgebraicGeometry.Pur.PurEtaleScalarMateProjection
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 import WeilConjectures.Algebra.Homology.SixFunctors.OrdinaryDerivedChangeOfRings
+
+set_option linter.privateModule false
 
 /-! # Dualizing objects under a regular principal coefficient quotient -/
 

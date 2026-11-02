@@ -52,7 +52,7 @@ private theorem finiteClosedProEtInjectives (A : Type (u + 1)) [CommRing A]
     Abelian.HasKInjectiveResolutions (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} A)) :=
   inferInstance
 
-  finiteClosedEtSheafify finiteClosedProEtInjectives
+attribute [local instance] finiteClosedEtSheafify finiteClosedProEtInjectives
 
 namespace WeilConjectures
 
@@ -91,10 +91,5 @@ def finiteClosedDirectInverse
   if h : IsIso (ProEtale.finiteCoefficientChangeDirectImageMap φ i N) then
     @inv _ _ _ _ (ProEtale.finiteCoefficientChangeDirectImageMap φ i N) h
   else 0
-
-attribute [local irreducible] finiteClosedCounit finiteClosedShriekMap finiteClosedComposition
-  finiteClosedDirectInverse
-
-attribute [local irreducible] finiteClosedScalarPullIso finiteClosedOpenScalarIso
 
 end WeilConjectures

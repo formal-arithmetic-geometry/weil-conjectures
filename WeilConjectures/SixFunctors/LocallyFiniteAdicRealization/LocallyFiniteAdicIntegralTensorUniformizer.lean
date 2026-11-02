@@ -56,11 +56,10 @@ private instance adicLinear :
 private theorem uniformizer_divides_l (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
     Padic.coefficientExtensionUniformizer l E ∣ (l : Padic.coefficientExtensionIntegers l E) := by
-  let H := Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))
-  let O := H.choose
-  let m := H.choose_spec.choose
-  have HS := H.choose_spec.choose_spec
+  let H := Padic.coefficientExtensionIntegers_dvr l E
+  let O := Padic.coefficientExtensionIntegers l E
+  let m := H.choose
+  have HS := H.choose_spec
   rcases HS with ⟨hO, hm, hu, hlocal, hmax, hmax_unique, hfrac, hdvr,
     hpid, hm0, hprime, hfinite, hr, hgen, hassoc, hexists⟩
   have hl : (l : O) ∈ m := by

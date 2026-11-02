@@ -13,8 +13,6 @@ public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionFinite
 public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionSupplement
 public import Mathlib.RingTheory.Ideal.Quotient.Index
 
-set_option linter.privateModule false
-
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantRingOperations
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Intrinsic.ProEtaleIntrinsicExtensionByZero
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcActualRingedExchange
@@ -28,6 +26,8 @@ import all WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedExchangeAgrees
 import all WeilConjectures.AlgebraicGeometry.Compact.CompactSupportProperFactor
 import all WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedEtaleCompactSupportComparisonsSupplement
 import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleCompositionTowerDefinitions
+
+set_option linter.privateModule false
 
 /-!
 # Normalization on a compatible pro-etale compactification tower

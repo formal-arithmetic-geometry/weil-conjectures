@@ -93,6 +93,10 @@ private theorem coeffRingSheafify (X : Scheme.{u}) :
     HasSheafify (ProEt.topology X) CommRingCat.{u + 1} :=
   WeilConjectures.integralCoefficientRingSheafify.{u, 0} X
 
+private theorem coeffAbSheafify (X : Scheme.{u}) :
+    HasSheafify (ProEt.topology X) AddCommGrpCat.{u + 1} :=
+  WeilConjectures.integralCoefficientAbSheafify.{u, 0} X
+
 private theorem coeffAbLocallyBijective (X : Scheme.{u}) :
     (ProEt.topology X).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
   WeilConjectures.integralCoefficientAbLocallyBijective.{u, 0} X

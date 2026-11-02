@@ -7,9 +7,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Vector.VectorBundleIntegrationCharts
 
-set_option linter.privateModule false
-
 import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
+
+set_option linter.privateModule false
 
 /-! # Rank-zero chart coefficient normalization
 

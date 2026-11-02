@@ -52,9 +52,3 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 open CategoryTheory.RingedCoefficientCounit
 
-namespace CategoryTheory
-
-attribute [instance] RingedSheafSliceOrdinaryComparison.pullbackAdditive
-  RingedSheafSliceOrdinaryComparison.slicePullbackAdditive
-
-end CategoryTheory

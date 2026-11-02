@@ -20,8 +20,6 @@ public import WeilConjectures.AlgebraicGeometry.SmoothPurity.CompactifiableCompa
 public import WeilConjectures.AlgebraicGeometry.SmoothPurity.CompactifiableOverField
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Finite.ProEtaleFiniteModulesSupplement
 
-set_option linter.privateModule false
-
 public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Extension.ProEtaleExtensionZeroComparison
@@ -62,6 +60,8 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Comp
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 import Mathlib.CategoryTheory.Adjunction.CompositionIso
 import WeilConjectures.Compactification.CategoryBaseChange
+
+set_option linter.privateModule false
 
 /-! # Finite-ring compact-support site coherence
 

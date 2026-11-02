@@ -41,8 +41,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUn
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 
-set_option linter.privateModule false
-
 import WeilConjectures.AlgebraicGeometry.ProperBaseChange.LatticeCoefficientPullbackIso
 import WeilConjectures.AlgebraicGeometry.Integral.IntegralModelOpenClosedBasic
 import Mathlib.AlgebraicGeometry.Noetherian
@@ -65,6 +63,8 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUn
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
+
+set_option linter.privateModule false
 
 /-!
 # Integral models of the open and closed pieces

@@ -10,8 +10,6 @@ public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.AlgebraicGeometry.Etale.Closed.EtaleClosedAmbientAdjoint
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 
-set_option linter.privateModule false
-
 import WeilConjectures.AlgebraicGeometry.Finite.FiniteCohomologicalDimensionDirectImageCoproducts
 import WeilConjectures.AlgebraicGeometry.Etale.Closed.EtaleClosedAmbientAdjoint
 import WeilConjectures.AlgebraicGeometry.DerivedCategories
@@ -32,6 +30,8 @@ import WeilConjectures.SixFunctors.OpenClosed.ClosedImmersion
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
 import Mathlib.CategoryTheory.Triangulated.Pretriangulated
+
+set_option linter.privateModule false
 
 /-!
 # Residue tensor bound for closed support

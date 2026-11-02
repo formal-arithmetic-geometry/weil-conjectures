@@ -130,8 +130,7 @@ private theorem integral_exact (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
   let := coefficientExtensionNormedField l E
   let A := Padic.coefficientExtensionIntegers l E
   have hA : ∀ x : E, x ∈ A ↔ ‖x‖ ≤ 1 :=
-    (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-      (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec.1
+    (Padic.coefficientExtensionIntegers_dvr l E).choose_spec.1
   have : IsUltrametricDist E :=
     IsUltrametricDist.isUltrametricDist_of_isNonarchimedean_norm
       (isNonarchimedean_spectralNorm (K := ℚ_[l]) (L := E))

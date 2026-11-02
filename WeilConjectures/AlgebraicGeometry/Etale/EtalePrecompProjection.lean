@@ -11,13 +11,13 @@ public import WeilConjectures.AlgebraicGeometry.Etale.Sum.EtaleSumExtensionTenso
 public import WeilConjectures.AlgebraicGeometry.Etale.EtaleAmbientAdjointLocality
 public import WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedEtaleCompactSupportComparisonsSupplement
 
-set_option linter.privateModule false
-
 import all WeilConjectures.AlgebraicGeometry.Etale.Sum.EtaleSumRightAdjointTensor
 import all WeilConjectures.AlgebraicGeometry.Etale.EtaleAmbientLeftComparisonBaseChange
 import all WeilConjectures.AlgebraicGeometry.Etale.Support.EtaleSupportMapCompatibility
 import all WeilConjectures.AlgebraicGeometry.Etale.Sum.EtaleSumExtensionTensor
 import all WeilConjectures.AlgebraicGeometry.SmoothPurity.ShriekTensorCompositionSupplement
+
+set_option linter.privateModule false
 
 /-! # The normalized projection square for etale precomposition
 

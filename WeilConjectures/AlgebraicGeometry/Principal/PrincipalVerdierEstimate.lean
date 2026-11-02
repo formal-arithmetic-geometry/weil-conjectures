@@ -8,11 +8,11 @@ module
 public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.SixFunctors.Etale.Derived.IntegralCoefficients
 
-set_option linter.privateModule false
-
 import WeilConjectures.AlgebraicGeometry.Principal.PrincipalDualizingReduction
 import WeilConjectures.SixFunctors.Etale.Derived.RestrictScalarsTorAmplitude
 import WeilConjectures.SixFunctors.Etale.Derived.Stability.VerdierDualBound
+
+set_option linter.privateModule false
 
 /-! # One finite-level Verdier estimate for integral coefficients -/
 
