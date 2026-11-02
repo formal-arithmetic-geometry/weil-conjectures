@@ -249,7 +249,7 @@ theorem quotientAssociation_degreeData_exists
     simp only [γ, Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv, eqToIso.hom,
       HomologicalComplex.comp_f, SheafOfModules.comp_val, PresheafOfModules.comp_app,
       ModuleCat.comp_apply]
-    rw [hinv, he₀]
+    erw [hinv, he₀]
     exact scalar_unit_section l E W (Q.X i) V a q
   -- the scalar side
   have he₁ : ((eqToHom hQ₁).f i).val.app V
