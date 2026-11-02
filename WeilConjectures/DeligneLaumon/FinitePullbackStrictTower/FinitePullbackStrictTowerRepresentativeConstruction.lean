@@ -86,10 +86,9 @@ universe t u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 open WeilConjectures.CompletedTowerIndependent
 namespace WeilConjectures.FinitePullbackStrictTower
-attribute [local implicit_reducible] comparisonZQ
-  KoszulNormalization BalancedNormalization ReductionNormalization
-attribute [local irreducible] comparisonKoszulIso comparisonBalancedIso
-  comparisonKoszulDiagramIso comparisonBalancedDiagramIso
+attribute [local implicit_reducible] KoszulNormalization BalancedNormalization
+  ReductionNormalization
+attribute [local irreducible] comparisonKoszulDiagramIso comparisonBalancedDiagramIso
 attribute [local implicit_reducible] asIso
 attribute [local implicit_reducible] H tensorReduction augmentation G diagramPull
   finiteComplex pulledReduction transpose PrincipalQuotientCompletion.transpose
@@ -111,7 +110,5 @@ attribute [local irreducible] CompletedTowerIndependent.reductionPair
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 variable {X Y : Scheme.{t}} (g : X ⟶ Y)
-
-attribute [local irreducible] isoComposite
 
 end WeilConjectures.FinitePullbackStrictTower

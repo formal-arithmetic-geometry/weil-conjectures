@@ -32,6 +32,5 @@ open AlgebraicGeometry.ProEtale.StrictTower
 namespace WeilConjectures.PurStrictScalar
 variable (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
-attribute [local irreducible] scalarRoosRestriction
 
 end WeilConjectures.PurStrictScalar
