@@ -132,7 +132,7 @@ private theorem generator_smul_right
   unfold signedGenerator
   let J := AlgebraicGeometry.Scheme.ProEt.topology Y
   let adj := PresheafOfModules.sheafificationAdjunction.{max u (t + 1)}
-    (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).obj)
+    (𝟙 ((sheafCompose J (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj R).obj)
   let F := ((((adj.unit.app ((P.X a).val ⊗ (Q.X b).val) ≫
     (SheafOfModules.tensorObjIsoSheafification (R := R) (P.X a) (Q.X b)).inv.val).app U) ≫
       (HomologicalComplex.ιMapBifunctor P Q (curriedTensor (Modules.{t, u} Y R))
