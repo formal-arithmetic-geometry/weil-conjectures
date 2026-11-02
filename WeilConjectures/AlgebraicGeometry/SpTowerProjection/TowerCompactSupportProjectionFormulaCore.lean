@@ -184,14 +184,14 @@ def finiteOpenMap (b : Base l E) (o : Operations l E b)
 
 section ProperEvaluation
 
-attribute [local irreducible] realization constructibleTor properMap openMap source middle
+attribute [local irreducible] realization properMap openMap source middle
   openSource levelPullTensor finiteProperMap finiteOpenMap
 
 end ProperEvaluation
 
 section OpenEvaluation
 
-attribute [local irreducible] realization constructibleTor properMap openMap source middle
+attribute [local irreducible] realization properMap openMap source middle
   openSource levelPullTensor finiteProperMap finiteOpenMap
   Functor.mapDerivedCategory Functor.rightDerivedFunctor
 
