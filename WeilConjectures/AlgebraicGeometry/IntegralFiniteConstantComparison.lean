@@ -414,22 +414,15 @@ needed for this comparison of exact functors.
 Source: Stacks Tags 03CY and 093J; blueprint integral local structure, proof step 2
 (blueprint: lem-pe-integral-finite-constant-comparison).
 
-Proof: first compare the ordinary functors. The section-action encoding of a scalar
-model has the original module as underlying constant sections. Normalization of the
-coefficient ring isomorphism makes the actions identical on constant scalar sections.
-Local surjectivity of sheafification extends this identity to all scalar sections.
-The AsSmall sheaf equivalence and inverse constant-scalar restriction therefore carry
-the internal scalar model to the recorded constant module functor. Universe lift and
-restriction along the lifted-ring equivalence identify the two scalar presentations.
-For scheme restriction, identify the composite direct images on sections and their
-constant scalar actions; uniqueness of left adjoints gives the inverse-image comparison.
-The AsSmall equivalence identifies its localized site with the slice over W, including
-the canonical equivalence maps. These natural isomorphisms are between exact additive
-functors, so termwise extension descends through quasi-isomorphisms. Apply the resulting
-derived square to the given scalar isomorphism and local constant marking. The normalized
-encoding is an equivalence and reflects isomorphisms; undo it to obtain the asserted
-internal isomorphism. The argument is valid for arbitrary unbounded complexes and for
-empty W and zero coefficients. -/
+Proof: apply the global constant-encoding comparison to the specified small realization.
+The unit of the derived equivalence for lifted-ring scalar restriction transports the
+given scalar presentation to an isomorphism with S. Restrict the global comparison and
+compose it with the given slice marking. The natural square of the slice encoding
+identifies this with an isomorphism between encoded internal inverse images. Reflect
+it through that equivalence. Finally the ordinary point-module pullback comparison,
+whiskered by the scalar construction and passed through exact-derived composition,
+identifies inverse image of the global realization with the realization on W.left.
+The argument includes empty W and never infers smallness from a slice marking. -/
 theorem integralFiniteConstant_comparison
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] :
@@ -462,6 +455,28 @@ theorem integralFiniteConstant_comparison
       Nonempty
         ((integralFiniteScalarRealization l E W.left n).obj M ≅
           (CondensedRing.upperStar (DerivedNakayama.quotientRing l E (n + 1))
-            W.hom).mapDerivedCategory.obj L) := by sorry
+            W.hom).mapDerivedCategory.obj L) := by
+  intro n X W e L M S hMS hSL
+  obtain ⟨hMS⟩ := hMS
+  obtain ⟨hSL⟩ := hSL
+  obtain ⟨c⟩ := integralFinite_constant_encoding l E n X e
+  obtain ⟨F, hF, ⟨b⟩⟩ := integralFinite_slice_encoding_equivalence l E n X W e
+  let : F.IsEquivalence := hF
+  let A := Padic.coefficientExtensionRing l E (n + 1)
+  let q : ULift.{u + 1} A ≃+* A := ULift.ringEquiv
+  let D := (ModuleCat.restrictScalarsEquivalenceOfRingEquiv q.symm :
+    ModuleCat.{u + 1} (ULift.{u + 1} A) ≌ ModuleCat.{u + 1} A).mapDerivedCategory
+  let U := (ModuleCat.uliftFunctor.{u + 1, u} A).mapDerivedCategory
+  let C := commutativeSiteDerivedConstantModuleFunctor
+    (Scheme.coefficientProEtaleModelTopology.{u, u} X) (ULift.{u + 1} A)
+  let R := Scheme.adicResidueRestriction
+    (ConstantCompletion.constant (Scheme.coefficientProEtaleModelTopology.{u, u} X)
+      (ULift.{u + 1} A)) (AsSmall.up.obj W)
+  have s : D.inverse.obj (U.obj M) ≅ S :=
+    D.inverse.mapIso hMS ≪≫ (D.unitIso.app S).symm
+  have a := R.mapIso (c.app M ≪≫ C.mapIso s)
+  have t := F.preimageIso (b.app ((integralFiniteScalarRealization l E X n).obj M) ≪≫
+    a ≪≫ hSL ≪≫ (b.app L).symm)
+  exact ⟨((finiteScalarPullbackComparison l E n X W).app M).symm ≪≫ t⟩
 
 end AlgebraicGeometry.ProEtale

@@ -45,6 +45,8 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 import WeilConjectures.AlgebraicGeometry.Cohomological.CohomologicalDimension
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedPullbackCoherence
+public import WeilConjectures.AlgebraicGeometry.Cartesian.CartesianCoefficients
+public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionSupplement
 
 /-!
 # Condensed coefficient coherence of the canonical Frobenius comparison
@@ -86,15 +88,17 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 Its coefficient map is the pullback-from-point comparison by FrobeniusPoint.
 Source: absolute-Frobenius normalization, Stacks 0F6W
 (blueprint: lem-pur-condensed-frobenius-comparison-coherence). -/
-def condensedAbsoluteFrobeniusTrivialization (D : WeilConjectures.FiniteFieldDatum.{u})
-    (Λ : ScalarSixRing.{u}) (T₀ : Over (Spec (CommRingCat.of D.k₀))) :
-    scalarSixPull Λ (D.purityAbsoluteFrobenius T₀) ≅ 𝟭 _ :=
-  Functor.mapDerivedCategoryNatIso
-    (G := 𝟭 (ModuleRingedComparison.internalModules Λ.X (D.purityFrobeniusFiber T₀).left))
+def condensedAbsoluteFrobeniusTrivialization
+    (D : WeilConjectures.FiniteFieldDatum.{u}) (Λ : ScalarSixRing.{u})
+    (T₀ : Over (Spec (CommRingCat.of D.k₀))) :
+    scalarSixPull Λ (D.purityAbsoluteFrobenius T₀) ≅
+      𝟭 (DerivedCategory (ModuleRingedComparison.internalModules
+        Λ.X (D.purityFrobeniusFiber T₀).left)) :=
+  (leftDerivedUpperStarIsoMapDerivedCategory Λ.X (D.purityAbsoluteFrobenius T₀)).symm ≪≫
+    Functor.leftDerivedFunctorIdIso
     (upperStarIterateFrobeniusIso Λ.X D.prime
       (D.model_characteristic (pullback.fst T₀.hom
-        (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) ≫ T₀.hom)) D.a) ≪≫
-    Functor.mapDerivedCategoryIdIso _
+        (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) ≫ T₀.hom)) D.a)
 
 /-- The specified kappa: factor Phi as absolute Frobenius followed by geometric
 Galois, apply the canonical module compositor, then the canonical trivialization.

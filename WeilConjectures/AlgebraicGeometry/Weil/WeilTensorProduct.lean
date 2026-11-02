@@ -1408,6 +1408,23 @@ Source: latest blueprint, geometric Frobenius pullback
 (blueprint: def-wf-tensor-product). -/
 abbrev wfCondensedFrobenius := (CondensedRing.upperStar Λ g).mapDerivedCategory
 
+/-- The existing counit-normalized pullback comparison in uncurried form.
+Source: latest blueprint, monoidal comparison (blueprint: def-wf-tensor-product). -/
+def wfCondensedDerivedTensorPullback :
+    wfCondensedTensor Λ Y ⋙ (CondensedRing.upperStar Λ g).leftDerivedFunctor ≅
+      (((CondensedRing.upperStar Λ g).leftDerivedFunctor).prod
+        ((CondensedRing.upperStar Λ g).leftDerivedFunctor)) ⋙ wfCondensedTensor Λ Y :=
+  NatIso.ofComponents
+    (fun MN ↦ ((CondensedRing.leftDerivedUpperStarTensorIso Λ g).app MN.1).app MN.2)
+    (by
+      intro MN PQ f
+      have h := (Functor.uncurry.mapIso
+        (CondensedRing.leftDerivedUpperStarTensorIso Λ g)).hom.naturality f
+      dsimp [CondensedRing.leftDerivedUpperStarTensorLeft,
+        CondensedRing.leftDerivedUpperStarTensorRight, wfCondensedTensor,
+        CondensedRing.derivedTensor] at h ⊢
+      simpa only [Functor.map_comp] using h)
+
 /-- The counit-normalized derived tensor comparison, transported along the canonical
 identification of left-derived pullback with exact termwise pullback.
 Source: latest blueprint, second sentence (blueprint: def-wf-tensor-product). -/
@@ -1421,6 +1438,26 @@ def wfCondensedTensorPullback
   (ε.app ((wfCondensedTensor Λ Y).obj (M, N))).symm ≪≫
     ((CondensedRing.leftDerivedUpperStarTensorIso Λ g).app M).app N ≪≫
       (wfCondensedTensor Λ Y).mapIso (Iso.prod (ε.app M) (ε.app N))
+
+/-- Naturality of the specified exact pullback comparison in both variables.
+Source: latest blueprint, monoidal comparison (blueprint: def-wf-tensor-product).
+Proof: whisker the exact-derived comparison on the tensor argument, then the native
+derived tensor comparison, then the tensor of its two exact-derived comparisons.
+Naturality of their composite is the stated square. -/
+theorem wfCondensedTensorPullback_naturality
+    {M N M' N' : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))}
+    (f : M ⟶ M') (h : N ⟶ N') :
+    (wfCondensedFrobenius Λ g).map ((wfCondensedTensor Λ Y).map (Prod.mkHom f h)) ≫
+        (wfCondensedTensorPullback Λ g M' N').hom =
+      (wfCondensedTensorPullback Λ g M N).hom ≫
+        (wfCondensedTensor Λ Y).map (Prod.mkHom
+          ((wfCondensedFrobenius Λ g).map f) ((wfCondensedFrobenius Λ g).map h)) := by
+  let ε := CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ g
+  let μ := Functor.isoWhiskerLeft (wfCondensedTensor Λ Y) ε.symm ≪≫
+    wfCondensedDerivedTensorPullback Λ g ≪≫
+      Functor.isoWhiskerRight (NatIso.prod ε ε) (wfCondensedTensor Λ Y)
+  exact μ.hom.naturality (Prod.mkHom f h)
 
 /-- A strict Weil pair on the actual condensed derived category, in the exact-functor
 convention of def-weil-weil-sheaf-complex. Specialize g to geometric Frobenius.

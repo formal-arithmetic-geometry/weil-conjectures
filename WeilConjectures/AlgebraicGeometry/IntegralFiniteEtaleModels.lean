@@ -1068,6 +1068,11 @@ theorem integralFiniteEtale_models
               f).mapDerivedCategory.obj
                 ((AdicCompletion.derivedReduction l E X n).obj K)) ≅
           (Scheme.adicFinitePullback.{u, u} Y
-            (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))).obj (C n)) := by sorry
+            (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))).obj (C n)) := by
+  let _ := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
+  obtain ⟨e, C, hC, henc⟩ := integralFiniteEtale_level_models l E f K a b hab hlevels hlisse
+  have hβ := integralFiniteEtale_level_compatibility
+    l E f K a b hab hlevels hlisse e C hC henc
+  exact ⟨e, C, hC, hβ, henc⟩
 
 end AlgebraicGeometry.ProEtale

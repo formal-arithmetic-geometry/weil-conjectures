@@ -192,6 +192,8 @@ public import WeilConjectures.AlgebraicGeometry.PurityTransport.TransportPull
 public import WeilConjectures.AlgebraicGeometry.RationalP1.Tate.RationalTateLineComposition
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsComapUnit
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixTensorComparison
+public import WeilConjectures.AlgebraicGeometry.PurityTransport.Transport
+public import WeilConjectures.SixFunctors.ScalarOpenCompositorCoherence
 
 /-! # The normalized smooth trace at the coefficient unit
 
@@ -223,6 +225,26 @@ open PurityTransport
 
 variable (ell : ℕ) [Fact ell.Prime] (Λ : ScalarSixRing.{u}) (c : Coefficient ell)
   (e : c.bundled.{u} ell ≅ Λ)
+
+/-- The coefficient unit belongs to the stated finite-Tor constructible domain.
+Source: latest blueprint, smooth trace at the unit (blueprint: sk-def-sp-trace).
+Proof: the regular coefficient module is free of rank one. The one-stratum
+stratification and identity pro-etale cover give its finite constant local model.
+Its degree-zero complex is bounded, has only the regular module as nonzero
+cohomology, and tensoring with it is the identity, so it has Tor amplitude [0,0].
+This includes the zero coefficient ring and the empty scheme. -/
+theorem smoothTraceUnit_mem (c : Coefficient ell) (Y : Scheme.{u}) :
+    property ell c Y (𝟙_ (c.derived ell Y)) := by
+  sorry
+
+/-- The unit normalization of the source of the existing smooth trace. It uses
+only the specified pullback unit comparison and the native left unitor.
+Source: latest blueprint, smooth trace domain (blueprint: sk-def-sp-trace). -/
+def smoothTraceUnitSource (c : Coefficient ell) (D : WeilConjectures.FiniteFieldDatum.{u})
+    (s : SmoothDatum D) :
+    (c.smoothSource ell s.map s.dim).obj (𝟙_ _) ≅ c.derivedLine ell s.X.left s.dim :=
+  tensorIso (CondensedRing.leftDerivedUpperStarUnitIso (c.obj ell) s.map) (Iso.refl _) ≪≫
+    λ_ _
 
 /-- The native positive Tate line in arbitrary isomorphic coefficient coordinates.
 Scalar extension along the displayed ring isomorphism is exact and strong monoidal;

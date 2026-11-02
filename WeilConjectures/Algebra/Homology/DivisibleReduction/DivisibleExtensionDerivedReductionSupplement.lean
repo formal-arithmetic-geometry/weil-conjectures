@@ -112,6 +112,8 @@ import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingCl
 import WeilConjectures.CategoryTheory.SixFunctors.CokernelAdjointExchange
 import WeilConjectures.CategoryTheory.Normalized.NormalizedScalarBoundaryNaturality
 public import WeilConjectures.AlgebraicGeometry.DivisibleExtensionDerivedReduction
+public import WeilConjectures.AlgebraicGeometry.Picard.DerivedAdjunctionCompatibility
+public import WeilConjectures.AlgebraicGeometry.Picard.KFlatResolutionIndependentCoefficients
 
 /-!
 # Derived reduction of an extension by a divisible sheaf
@@ -1234,6 +1236,19 @@ private theorem multiplication_triangle [NeZero n] (A : Integral J) :
   exact unit_triangle D.E R a D.T ad D.ε n P K p
     (multiplication_complex_zero n D.E a P)
     (multiplication_complex_shortExact n D.E a P hm) hnormal
+
+/-- The reduced extension boundary, with the canonical comparison [1][1] = [2].
+Source: Cartier proof, paragraph 4
+(blueprint: lem-sfb-divisible-extension-derived-reduction). -/
+noncomputable def boundary [HasTerminal C] (hn : 1 ≤ n) (P : Presentation (J := J) n) :
+    (DerivedCategory.singleFunctor (Residue J n) 0).obj P.Q ⟶
+      ((DerivedCategory.singleFunctor (Residue J n) 0).obj P.H)⟦(2 : ℤ)⟧ :=
+  (identifications n D hn P).alphaF.inv ≫ D.T.map P.exact.singleδ ≫
+    (D.T.commShiftIso (1 : ℤ)).hom.app
+      ((DerivedCategory.singleFunctor (Integral J) 0).obj P.S.X₁) ≫
+    (identifications n D hn P).alphaB.hom⟦(1 : ℤ)⟧' ≫
+    (shiftFunctorAdd (DerivedCategory (Residue J n)) (1 : ℤ) 1).inv.app
+      ((DerivedCategory.singleFunctor (Residue J n) 0).obj P.H)
 
 set_option backward.isDefEq.respectTransparency true in
 attribute [local irreducible] identifications

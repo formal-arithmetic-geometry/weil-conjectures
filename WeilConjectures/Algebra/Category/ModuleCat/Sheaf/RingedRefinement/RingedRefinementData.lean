@@ -454,4 +454,25 @@ structure FiniteComparison {T : Scheme.{u}} (P : Package .systems T)
         (P.operations.operation j (finiteRing B T)).left.map ((shriekIso j).hom.app M) =
       (P.operations.openAdjunction j (finiteRing B T)).unit.app ((e U).derived.obj M)
 
+/-- The finite comparison identifies the actual normalized strict-tower refinement
+mate, including the identity proper map on X; it is not another copy of the square.
+Source: Bhatt--Scholze 6.7.6--6.7.7 and the proper/open strict-tower calculus
+(blueprint: lem-pur-ringed-refinement-coefficient-square). -/
+def FiniteNormalization {T : Scheme.{u}} (P : Package .systems T)
+    (B : Type (u + 1)) [CommRing B] [Finite B]
+    (e : ∀ W : Over T, FiniteRealization P B W) (k : FiniteComparison P B e) : Prop :=
+  ∀ {X Y Z : Over T} (u : Y ⟶ Z) (j₁ : X ⟶ Y) (j₂ : X ⟶ Z)
+    [IsProper u.left] [IsOpenImmersion j₁.left] [IsOpenImmersion j₂.left]
+    [QuasiCompact j₁.left] [QuasiCompact j₂.left] (h : j₁ ≫ u = j₂)
+    (d : Shape u j₁ j₂) (M : ProEtale.StrictTower.Derived.{u} B X.left),
+    (e Z).derived.map
+        ((ProEtale.StrictTower.J.{u} B j₂.left).map
+          ((ProEtale.StrictTower.rId.{u} B X.left).inv.app M) ≫
+          (ProEtale.StrictTower.gamma.{u} B j₁.left (𝟙 X.left) u.left j₂.left
+            ((congrArg (fun f ↦ f.left) h).trans (Category.id_comp j₂.left).symm)).app M) ≫
+        (k.push u).hom.app ((ProEtale.StrictTower.J.{u} B j₁.left).obj M) ≫
+        (P.operations.operation u (finiteRing B T)).right.map ((k.shriekIso j₁).hom.app M) =
+      (k.shriekIso j₂).hom.app M ≫
+        (P.refinements.map u j₁ j₂ h d (finiteRing B T)).app ((e X).derived.obj M)
+
 end SheafOfModules.RingedRefinement
