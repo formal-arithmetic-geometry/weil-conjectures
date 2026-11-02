@@ -8,9 +8,11 @@ module
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarStages
 import all WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarTensor
 import WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarCompletedObjectComplete
+import WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarCoefficientFiniteFree
 import WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarRestrictionComplete
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChangeAdjunctionSupplement
 import WeilConjectures.AlgebraicGeometry.FiniteFreeDirectImage.FiniteFreeDirectImageCoherence
+import Mathlib.CategoryTheory.Preadditive.Biproducts
 
 /-! # Ambient operation comparisons for finite scalar extension
 
@@ -225,21 +227,6 @@ abbrev pbcScalarRestrictionDirectImage :=
     (pbcCompletedCoefficientIso g (pbcIntegralDatum l F))
     (pbcScalarCoefficientInverseSquare l E F i g)
 
-/-- The completed target integral coefficients are finite free over the source ones.
-Source: Bhatt--Scholze, Lemma 6.8.2(1)
-(blueprint: lem-pbc-scalar-ambient-operation-comparisons).
-Proof: an integral basis of the target valuation ring is a basis of every finite
-quotient, compatibly with the transitions; pass to the limit. -/
-theorem pbcScalarCoefficient_finiteFree (T : Scheme.{u}) :
-    ∃ d : ℕ, Nonempty ((proEtaleRingRestrictScalars (pbcScalarCoefficientMap l E F i T)).obj
-        (SheafOfModules.unit ((sheafCompose (ProEt.topology T)
-          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
-            (pbcAdicCompletion T (pbcIntegralDatum l F)))) ≅
-      SheafOfModules.free (R := (sheafCompose (ProEt.topology T)
-        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
-          (pbcAdicCompletion T (pbcIntegralDatum l E))) (ULift.{u + 1} (Fin d))) := by
-  sorry
-
 /-- The scalar mate of the direct-image comparison is the canonical inverse
 restriction/direct-image comparison.
 Source: Stacks Tags 03EL, 0D6D, 0D6E and 07A6
@@ -298,7 +285,15 @@ use the finite perfect projection formula and the tensor-unit normalization. -/
 @[instance] theorem pbcScalarDirectImageMap_isIso :
     IsIso (pbcScalarDirectImageMap l E F i g) := by
   classical
-  obtain ⟨d, hfree⟩ := pbcScalarCoefficient_finiteFree l E F i Y
+  obtain ⟨d, ⟨b⟩⟩ := pbcScalarCoefficient_finiteFree l E F i Y
+  let RE := (adicLisseForget Y).obj (pbcAdicCompletion Y (pbcIntegralDatum l E))
+  let N := SheafOfModules.unit RE
+  let : HasBiproduct (fun _ : Fin d ↦ N) := HasBiproduct.of_hasProduct _
+  let e : (∏ᶜ fun _ : Fin d ↦ N) ≅
+      SheafOfModules.free (R := RE) (ULift.{u + 1} (Fin d)) :=
+    (biproduct.isoProduct (fun _ : Fin d ↦ N)).symm ≪≫
+      biproduct.isoCoproduct (fun _ : Fin d ↦ N) ≪≫
+        Sigma.whiskerEquiv (Equiv.ulift.{u + 1, 0}).symm (fun _ ↦ Iso.refl N)
   let R' : FiniteFreeDirectImage.Coefficients g :=
     ⟨pbcAdicCompletion Y (pbcIntegralDatum l E), pbcAdicCompletion X (pbcIntegralDatum l E),
       pbcCompletedCoefficientIso g (pbcIntegralDatum l E)⟩
@@ -309,7 +304,7 @@ use the finite perfect projection formula and the tensor-unit normalization. -/
     ⟨pbcScalarCoefficientMap l E F i Y, pbcScalarCoefficientMap l E F i X,
       pbcScalarCoefficientInverseSquare l E F i g⟩
   obtain ⟨sY, sX, _, _, hi, _⟩ := FiniteFreeDirectImage.finiteFreeDirectImageCoherence g
-  have : IsIso (FiniteFreeDirectImage.comparison sY sX a') := (hi R' S' a' d hfree).1
+  have : IsIso (FiniteFreeDirectImage.comparison sY sX a') := (hi R' S' a' d ⟨b ≪≫ e⟩).1
   let δ := pbcScalarRestrictionDirectImage l E F i g
   have hm : (mateEquiv (sX.adjunction a'.source) (sY.adjunction a'.target)
       (TwoSquare.mk _ _ _ _ (FiniteFreeDirectImage.comparison sY sX a'))).natTrans =

@@ -7928,6 +7928,7 @@ public import WeilConjectures.AlgebraicGeometry.Pbc.PbcRationalAutomorphismScala
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcRationalCategory
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarAmbientOperations
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarAmbientShift
+public import WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarCoefficientFiniteFree
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarCompletedObjectComplete
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarComposition
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarExtension
