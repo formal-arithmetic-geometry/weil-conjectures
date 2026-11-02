@@ -7,6 +7,12 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicMarkedOrigin
 public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicScalarCoherence
+public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicQuotientTransition
+import WeilConjectures.CategoryTheory.DerivedCategory.AsFunctorLocalization
+public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryStrictSquare
+import WeilConjectures.CategoryTheory.Comma.StructuredArrowUniversalIso
+import WeilConjectures.Algebra.Homology.ProperBaseChange.KFlatResolutionGeneral
+import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
 
 /-! # The normalized tower in pro-etale quotient coordinates
 
@@ -18,10 +24,203 @@ Source: Stacks Project, Tags 06YY and 09C6.
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
 universe t
-open CategoryTheory CategoryTheory.Limits Opposite
+open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
 namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectAdicAlgebraDerived
 attribute [local instance] finitePerfectModelsAbLocallyBijective
+
+
+/-- Inverse image along a weakly etale chart commutes with restriction of fixed scalars; this
+is the ordinary comparison localized in `localIsomorphismProEtaleCoefficients`.
+Source: Stacks Tag 03DA. -/
+def finitePerfectAdicPullbackRestrictIso {Y Z : Scheme.{t}} (g : Z ⟶ Y)
+    {R S : Type (t + 1)} [CommRing R] [CommRing S] (q : R →+* S) :
+    sheafCompose (ProEt.topology Y) (ModuleCat.restrictScalars.{t + 1, t + 1, t + 1} q) ⋙
+        ProEtale.upperStar (ModuleCat.{t + 1} R) g ≅
+      ProEtale.upperStar (ModuleCat.{t + 1} S) g ⋙
+        sheafCompose (ProEt.topology Z) (ModuleCat.restrictScalars.{t + 1, t + 1, t + 1} q) :=
+  letI := ProEt.isContinuous_overPullback g
+  normalizationPullbackIso (ProEt.topology Y)
+    (MorphismProperty.Over.pullback @WeaklyEtale ⊤ g) (ProEt.topology Z) q
+
+/-- The localization of a termwise consecutive arrow of fixed-scalar coordinates, as an arrow
+to derived restriction of scalars. -/
+def finitePerfectAdicStrictLocalizedArrow
+    (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
+    (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶
+      completedAdicFiniteCommRing X d n)
+    (V : X.Etale) (n : ℕ)
+    (δ : finitePerfectAdicQuotientStrictCoordinates X d φ V (n + 1) ⟶
+      finitePerfectAdicQuotientStrictCoordinates X d φ V n ⋙
+        finitePerfectAdicStepRestrict X d V n)
+    (P : CochainComplex (CompletedAdicModules X d) ℤ) :
+    DerivedCategory.Q.obj (((finitePerfectAdicQuotientStrictCoordinates X d φ V
+        (n + 1)).mapHomologicalComplex (ComplexShape.up ℤ)).obj P) ⟶
+      (normalizationRestrict (ProEt.topology V.left)
+        (RingHom.ulift.{t + 1, t + 1} (Ideal.Quotient.factorPowSucc d.ideal (n + 1)))).obj
+        (DerivedCategory.Q.obj
+          (((finitePerfectAdicQuotientStrictCoordinates X d φ V n).mapHomologicalComplex
+            (ComplexShape.up ℤ)).obj P)) :=
+  Functor.strictSquareArrow (finitePerfectAdicQuotientStrictCoordinates X d φ V (n + 1))
+    (finitePerfectAdicQuotientStrictCoordinates X d φ V n)
+    (finitePerfectAdicStepRestrict X d V n) δ P
+
+private theorem homotopyModelIso
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    (E : C ⥤ D) [E.Additive] (L : DerivedCategory C ⥤ DerivedCategory D)
+    (ε : DerivedCategory.Qh ⋙ L ⟶ E.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (P : CochainComplex C ℤ)
+    (hε : IsIso (ε.app ((HomotopyCategory.quotient C (.up ℤ)).obj P))) :
+    Nonempty (L.obj (DerivedCategory.Q.obj P) ≅
+      DerivedCategory.Q.obj ((E.mapHomologicalComplex (.up ℤ)).obj P)) := by
+  have := hε
+  exact ⟨L.mapIso ((DerivedCategory.quotientCompQhIso C).app P).symm ≪≫
+    asIso (ε.app ((HomotopyCategory.quotient C (.up ℤ)).obj P)) ≪≫
+    DerivedCategory.Qh.mapIso ((E.mapHomotopyCategoryFactors (.up ℤ)).app P) ≪≫
+    (DerivedCategory.quotientCompQhIso D).app _⟩
+
+/-- Derived scalar extension is computed termwise on K-flat complexes. -/
+theorem completedAdicDerivedChange_kFlat_iso
+    (X : Scheme.{t}) {R S : Sheaf (ProEt.topology X) CommRingCat.{t + 1}}
+    (φ : R ⟶ S)
+    (P : CochainComplex (SheafOfModules.{t + 1}
+      ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj R)) ℤ)
+    (hk : CochainComplex.IsKFlatIndependentCoefficients (R := R) P) :
+    Nonempty ((completedAdicDerivedChange X φ).obj (DerivedCategory.Q.obj P) ≅
+      DerivedCategory.Q.obj (((completedAdicChange X φ).mapHomologicalComplex (.up ℤ)).obj P)) := by
+  let E := completedAdicChange X φ
+  let L := completedAdicDerivedChange X φ
+  have hEAdd : E.Additive := inferInstance
+  obtain ⟨ε, hu, ht, hc⟩ :=
+    (completedAdicChangeData X φ).choose_spec.choose_spec.choose_spec.choose_spec.2.2.choose_spec
+  change DerivedCategory.Qh ⋙ L ⟶ E.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh at ε
+  have hε : IsIso (ε.app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) := hc P hk
+  change Nonempty (L.obj (DerivedCategory.Q.obj P) ≅
+    DerivedCategory.Q.obj ((E.mapHomologicalComplex (.up ℤ)).obj P))
+  clear hu ht hc
+  clear_value E L
+  as_aux_lemma => exact homotopyModelIso E L ε P hε
+
+/-- The ordinary quotient arrow localizes, on every K-flat complex, to a universal arrow for
+derived restriction of scalars along the consecutive quotient map.
+Source: Stacks Project, Tag 06YY (tensor balancing) and Tag 09C6.
+
+Proof sketch: scalar extension along the finite projection preserves K-flatness, and since `φ`
+is an isomorphism the terms of the fixed-scalar coordinates are flat over the constant ring.
+Derived extension of scalars along the quotient map is therefore computed termwise, and the
+transpose of the localized arrow is the balancing isomorphism
+`A_n ⊗ (P ⊗ R_(n+1)) ≅ P ⊗ R_n`. -/
+theorem finitePerfectAdic_quotient_transition_universal
+    (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
+    (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶
+      completedAdicFiniteCommRing X d n)
+    (hφ : ∀ n : ℕ, IsIso (φ n)) (hcompat : FinitePerfectModelsCompatible X d φ)
+    (V : X.Etale) (n : ℕ)
+    (δ : finitePerfectAdicQuotientStrictCoordinates X d φ V (n + 1) ⟶
+      finitePerfectAdicQuotientStrictCoordinates X d φ V n ⋙
+        finitePerfectAdicStepRestrict X d V n)
+    (hδ : FinitePerfectAdicQuotientTransition X d φ V n δ)
+    (P : CochainComplex (CompletedAdicModules X d) ℤ)
+    (hP : CochainComplex.IsAcyclicTensorKFlat (R := completedAdicCommRing X d) P) :
+    Nonempty (StructuredArrow.IsUniversal (StructuredArrow.mk
+      (finitePerfectAdicStrictLocalizedArrow X d φ V n δ P))) := by
+  sorry
+
+/-- The explicit scalar realizations carry the fixed-scalar coordinates to the strict ordinary
+tensor tower restricted to `W`, and the ordinary quotient arrows to its transition maps,
+compatibly with the inverse-image comparison and the ordinary scalar compositor.
+Source: Stacks Project, Tags 03CY, 03DA and 09C6.
+
+Proof sketch: restriction to `W` of the fixed-scalar coordinates of `N`, followed by
+associated module sheafification for the canonical constant scalars, is identified with the
+restriction of the ordinary scalar extension of `N` by the counit of associated module
+sheafification, since `φ` is the canonical comparison; forgetting along the finite projection
+gives `N ⊗ R_n`. On sections both composites of the square send `b ⊗ x` to `q(b) ⊗ x`. -/
+theorem finitePerfectAdic_quotient_strict_realization
+    (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
+    (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶
+      completedAdicFiniteCommRing X d n)
+    (hφ : ∀ n : ℕ, IsIso (φ n)) (hcompat : FinitePerfectModelsCompatible X d φ)
+    (V : X.Etale)
+    (δ : ∀ n : ℕ, finitePerfectAdicQuotientStrictCoordinates X d φ V (n + 1) ⟶
+      finitePerfectAdicQuotientStrictCoordinates X d φ V n ⋙
+        finitePerfectAdicStepRestrict X d V n)
+    (hδ : ∀ n : ℕ, FinitePerfectAdicQuotientTransition X d φ V n (δ n))
+    (U : V.left.ProEt) (W : X.ProEt) (f : W ⟶ finitePerfectAdicChartObject V U) :
+    ∃ B : ∀ n : ℕ, finitePerfectAdicQuotientStrictCoordinates X d φ V n ⋙
+        ProEtale.upperStar (ModuleCat.{t + 1} (ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1))))
+          U.hom ⋙ finitePerfectAdicScalarModules X d V U W f n ≅
+        completedAdicOrdinaryTower X d ⋙
+          (CategoryTheory.evaluation ℕᵒᵖ (CompletedAdicModules X d)).obj (op n) ⋙
+          SheafOfModules.overFunctor (completedAdicRing X d) W,
+      ∀ (n : ℕ) (N : CompletedAdicModules X d),
+        (finitePerfectAdicScalarModules X d V U W f (n + 1)).map
+            ((ProEtale.upperStar
+              (ModuleCat.{t + 1} (ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1 + 1)))) U.hom).map
+                ((δ n).app N) ≫
+              (finitePerfectAdicPullbackRestrictIso U.hom (RingHom.ulift.{t + 1, t + 1}
+                (Ideal.Quotient.factorPowSucc d.ideal (n + 1)))).hom.app
+                ((finitePerfectAdicQuotientStrictCoordinates X d φ V n).obj N)) ≫
+          (finitePerfectAdicScalarModulesCoherence X d V U W f n).hom.app
+            ((ProEtale.upperStar
+              (ModuleCat.{t + 1} (ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1)))) U.hom).obj
+                ((finitePerfectAdicQuotientStrictCoordinates X d φ V n).obj N)) ≫
+          (B n).hom.app N =
+        (B (n + 1)).hom.app N ≫
+          (SheafOfModules.overFunctor (completedAdicRing X d) W).map
+            (((completedAdicOrdinaryTower X d).obj N).map (homOfLE (Nat.le_succ n)).op) := by
+  sorry
+
+/-- The strict finite quotient tower in fixed-scalar chart coordinates. There are consecutive
+semilinear arrows `δ n` between the ordinary fixed-scalar coordinates, whose localizations on
+K-flat complexes are universal for derived restriction of scalars, and which are carried by the
+explicit scalar realizations to the strict ordinary tensor tower restricted to every `W`,
+compatibly with the ordinary scalar compositor and the inverse-image comparison.
+
+Source: Stacks Project, Tag 09C6, the quotient arrows; Tag 06YY, tensor balancing;
+Tags 03CY and 03DA.
+
+Proof: combine the ordinary quotient arrows with their universality and realization. -/
+theorem finitePerfectAdic_quotient_strict_tower
+    (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
+    (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶
+      completedAdicFiniteCommRing X d n)
+    (hφ : ∀ n : ℕ, IsIso (φ n)) (hcompat : FinitePerfectModelsCompatible X d φ)
+    (V : X.Etale) :
+    ∃ δ : ∀ n : ℕ, finitePerfectAdicQuotientStrictCoordinates X d φ V (n + 1) ⟶
+        finitePerfectAdicQuotientStrictCoordinates X d φ V n ⋙
+          finitePerfectAdicStepRestrict X d V n,
+      (∀ (n : ℕ) (P : CochainComplex (CompletedAdicModules X d) ℤ),
+        CochainComplex.IsAcyclicTensorKFlat (R := completedAdicCommRing X d) P →
+        Nonempty (StructuredArrow.IsUniversal (StructuredArrow.mk
+          (finitePerfectAdicStrictLocalizedArrow X d φ V n (δ n) P)))) ∧
+      ∀ (U : V.left.ProEt) (W : X.ProEt) (f : W ⟶ finitePerfectAdicChartObject V U),
+        ∃ B : ∀ n : ℕ, finitePerfectAdicQuotientStrictCoordinates X d φ V n ⋙
+            ProEtale.upperStar (ModuleCat.{t + 1} (ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1))))
+              U.hom ⋙ finitePerfectAdicScalarModules X d V U W f n ≅
+            completedAdicOrdinaryTower X d ⋙
+              (CategoryTheory.evaluation ℕᵒᵖ (CompletedAdicModules X d)).obj (op n) ⋙
+              SheafOfModules.overFunctor (completedAdicRing X d) W,
+          ∀ (n : ℕ) (N : CompletedAdicModules X d),
+            (finitePerfectAdicScalarModules X d V U W f (n + 1)).map
+                ((ProEtale.upperStar
+                  (ModuleCat.{t + 1} (ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1 + 1)))) U.hom).map
+                    ((δ n).app N) ≫
+                  (finitePerfectAdicPullbackRestrictIso U.hom (RingHom.ulift.{t + 1, t + 1}
+                    (Ideal.Quotient.factorPowSucc d.ideal (n + 1)))).hom.app
+                    ((finitePerfectAdicQuotientStrictCoordinates X d φ V n).obj N)) ≫
+              (finitePerfectAdicScalarModulesCoherence X d V U W f n).hom.app
+                ((ProEtale.upperStar
+                  (ModuleCat.{t + 1} (ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1)))) U.hom).obj
+                    ((finitePerfectAdicQuotientStrictCoordinates X d φ V n).obj N)) ≫
+              (B n).hom.app N =
+            (B (n + 1)).hom.app N ≫
+              (SheafOfModules.overFunctor (completedAdicRing X d) W).map
+                (((completedAdicOrdinaryTower X d).obj N).map (homOfLE (Nat.le_succ n)).op) := by
+  choose δ hδ using finitePerfectAdic_quotient_transition_exists X d φ hcompat V
+  exact ⟨δ, fun n P hP ↦ finitePerfectAdic_quotient_transition_universal X d φ hφ hcompat V n
+    (δ n) (hδ n) P hP, finitePerfectAdic_quotient_strict_realization X d φ hφ hcompat V δ hδ⟩
 
 /-- The actual quotient coordinates admit normalized consecutive arrows and a joint
 scalar realization of the strict completed quotient tower. No etale origins are chosen.
@@ -90,6 +289,111 @@ theorem finitePerfectAdic_quotient_coordinate_tower
         (actualJ U W f (n + 1)).hom ≫
           (finitePerfectAdicRestrictedTower X d W
             ((completedAdicReduction X d).obj M)).map
-              (homOfLE (Nat.le_succ n)).op := by sorry
+              (homOfLE (Nat.le_succ n)).op := by
+  classical
+  obtain ⟨δ, hδ, hB⟩ := finitePerfectAdic_quotient_strict_tower X d φ hφ hcompat V
+  -- a K-flat representative of `M`
+  obtain ⟨P, s, hP, -, hs, -⟩ := CochainComplex.exists_isKFlatResolutionGeneral
+    (R := completedAdicCommRing X d) (DerivedCategory.Q.objPreimage M)
+  have hPi : CochainComplex.IsKFlatIndependentCoefficients (R := completedAdicCommRing X d) P :=
+    (CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat P).mpr hP
+  have : IsIso (DerivedCategory.Q.map s) := by
+    rw [DerivedCategory.isIso_Q_map_iff_quasiIso]
+    exact hs
+  let eP : DerivedCategory.Q.obj P ≅ M :=
+    asIso (DerivedCategory.Q.map s) ≪≫ DerivedCategory.Q.objObjPreimageIso M
+  -- the quotient coordinates are computed by the strict coordinates of `P`
+  have hJ (n : ℕ) : Nonempty (finitePerfectAdicQuotientCoordinates X d φ M V n ≅
+      DerivedCategory.Q.obj (((finitePerfectAdicQuotientStrictCoordinates X d φ V
+        n).mapHomologicalComplex (ComplexShape.up ℤ)).obj P)) := by
+    obtain ⟨e⟩ := completedAdicDerivedChange_kFlat_iso X (completedAdicCommProjection X d n) P hPi
+    let SR := finiteCoefficientSliceRestriction X (A ⧸ d.ideal ^ (n + 1))
+      (completedAdicFiniteCommRing X d n) (φ n) V
+    exact ⟨SR.mapDerivedCategory.mapIso
+      ((completedAdicQuotientReduction X d n).mapIso eP.symm ≪≫ e) ≪≫
+      SR.mapDerivedCategoryFactors.app _ ≪≫
+      DerivedCategory.Q.mapIso ((Functor.mapHomologicalComplexCompIso
+        (F := completedAdicChange X (completedAdicCommProjection X d n)) (G := SR)
+        (Iso.refl _) (ComplexShape.up ℤ)).app P)⟩
+  let εJ (n : ℕ) := (hJ n).some
+  -- the reduction tower is computed by the strict tower of `P`
+  have hT : Nonempty (DerivedCategory.Q.obj
+      (DerivedCategory.Q.objPreimage ((completedAdicReduction X d).obj M)) ≅
+      DerivedCategory.Q.obj (((completedAdicOrdinaryTower X d).mapHomologicalComplex
+        (ComplexShape.up ℤ)).obj P)) := by
+    have := (completedAdicReductionData X d).complexCounit_isIso P hP
+    exact ⟨DerivedCategory.Q.objObjPreimageIso _ ≪≫
+      (completedAdicReduction X d).mapIso eP.symm ≪≫
+      asIso ((completedAdicReductionData X d).complexCounit P)⟩
+  let εT := hT.some
+  refine ⟨fun n ↦ (εJ (n + 1)).hom ≫ Functor.strictSquareArrow
+      (finitePerfectAdicQuotientStrictCoordinates X d φ V (n + 1))
+      (finitePerfectAdicQuotientStrictCoordinates X d φ V n)
+      (finitePerfectAdicStepRestrict X d V n) (δ n) P ≫
+    (normalizationRestrict (ProEt.topology V.left) (RingHom.ulift.{t + 1, t + 1}
+      (Ideal.Quotient.factorPowSucc d.ideal (n + 1)))).map (εJ n).inv, fun n ↦ ?_, ?_⟩
+  · obtain ⟨h⟩ := hδ n P hP
+    exact StructuredArrow.IsUniversal.nonempty_iso_comp (εJ (n + 1)) _ (εJ n).symm h
+  choose B hBsq using hB
+  have hO₁ : ∀ W : X.ProEt, (SheafOfModules.overFunctor (completedAdicRing X d) W).Additive :=
+    fun W ↦ (ringedOverFunctor_exactGeneral (completedAdicRing X d) W).1
+  have hO₂ : ∀ W : X.ProEt,
+      PreservesFiniteLimits (SheafOfModules.overFunctor (completedAdicRing X d) W) :=
+    fun W ↦ (ringedOverFunctor_exactGeneral (completedAdicRing X d) W).2.1
+  have hO₃ : ∀ W : X.ProEt,
+      PreservesFiniteColimits (SheafOfModules.overFunctor (completedAdicRing X d) W) :=
+    fun W ↦ (ringedOverFunctor_exactGeneral (completedAdicRing X d) W).2.2
+  have hS₁ : ∀ (U : V.left.ProEt) (W : X.ProEt) (f : W ⟶ finitePerfectAdicChartObject V U)
+      (n : ℕ), (finitePerfectAdicScalarModules X d V U W f n).Additive :=
+    fun U W f n ↦ (finitePerfectAdicScalarModules_exact X d V U W f n).1
+  have hS₂ : ∀ (U : V.left.ProEt) (W : X.ProEt) (f : W ⟶ finitePerfectAdicChartObject V U)
+      (n : ℕ), PreservesFiniteLimits (finitePerfectAdicScalarModules X d V U W f n) :=
+    fun U W f n ↦ (finitePerfectAdicScalarModules_exact X d V U W f n).2.1
+  have hS₃ : ∀ (U : V.left.ProEt) (W : X.ProEt) (f : W ⟶ finitePerfectAdicChartObject V U)
+      (n : ℕ), PreservesFiniteColimits (finitePerfectAdicScalarModules X d V U W f n) :=
+    fun U W f n ↦ (finitePerfectAdicScalarModules_exact X d V U W f n).2.2
+  let RT (W : X.ProEt) :=
+    Functor.isoWhiskerRight (HomologicalComplex.asFunctorCompQIsoOfIso εT)
+      (ringedDerivedRestrictionGeneral.{t + 1, t, t + 1, t + 1} (completedAdicRing X d) W)
+  refine ⟨fun U W f n ↦ (finitePerfectAdicScalarRealization X d V U W f n).mapIso
+      ((ProEtale.upperStar (ModuleCat.{t + 1} (ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1))))
+        U.hom).mapDerivedCategory.mapIso (εJ n)) ≪≫
+      Functor.strictSquareRealization
+        (τ := completedAdicOrdinaryTower X d ⋙
+          (CategoryTheory.evaluation ℕᵒᵖ (CompletedAdicModules X d)).obj (op n))
+        (o := SheafOfModules.overFunctor (completedAdicRing X d) W) (B U W f n) P ≪≫
+        ((RT W).app (op n)).symm, ?_⟩
+  intro U W f n
+  let u₁ := ProEtale.upperStar (ModuleCat.{t + 1} (ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1 + 1))))
+    U.hom
+  let u₀ := ProEtale.upperStar (ModuleCat.{t + 1} (ULift.{t + 1} (A ⧸ d.ideal ^ (n + 1))))
+    U.hom
+  let r' := sheafCompose (ProEt.topology U.left)
+    (ModuleCat.restrictScalars.{t + 1, t + 1, t + 1}
+      (RingHom.ulift.{t + 1, t + 1} (Ideal.Quotient.factorPowSucc d.ideal (n + 1))))
+  have hsq := Functor.strictSquare_localized
+    (τ₁ := completedAdicOrdinaryTower X d ⋙
+      (CategoryTheory.evaluation ℕᵒᵖ (CompletedAdicModules X d)).obj (op (n + 1)))
+    (τ₀ := completedAdicOrdinaryTower X d ⋙
+      (CategoryTheory.evaluation ℕᵒᵖ (CompletedAdicModules X d)).obj (op n))
+    (r := finitePerfectAdicStepRestrict X d V n) (u₁ := u₁) (u₀ := u₀) (r' := r')
+    (o := SheafOfModules.overFunctor (completedAdicRing X d) W)
+    (δ n) (finitePerfectAdicPullbackRestrictIso U.hom
+      (RingHom.ulift.{t + 1, t + 1} (Ideal.Quotient.factorPowSucc d.ideal (n + 1))))
+    (finitePerfectAdicScalarModulesCoherence X d V U W f n) (B U W f (n + 1)) (B U W f n)
+    (Functor.whiskerLeft (completedAdicOrdinaryTower X d)
+      ((CategoryTheory.evaluation ℕᵒᵖ (CompletedAdicModules X d)).map
+        (homOfLE (Nat.le_succ n)).op)) (hBsq U W f n)
+    (localIsomorphismProEtaleCoefficients U.hom
+      (RingHom.ulift.{t + 1, t + 1} (Ideal.Quotient.factorPowSucc d.ideal (n + 1)))) rfl
+    (finitePerfectAdicScalarCoherence X d V U W f n) rfl P
+  exact Functor.strictSquare_transport
+    (localIsomorphismProEtaleCoefficients U.hom
+      (RingHom.ulift.{t + 1, t + 1} (Ideal.Quotient.factorPowSucc d.ideal (n + 1))))
+    (finitePerfectAdicScalarCoherence X d V U W f n) (εJ (n + 1)) (εJ n) _ _ _ _
+    ((RT W).app (op (n + 1))).symm ((RT W).app (op n)).symm _ hsq
+    ((RT W).inv.naturality (homOfLE (Nat.le_succ n)).op)
+
+
 
 end AlgebraicGeometry.Scheme
