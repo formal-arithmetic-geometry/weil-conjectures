@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.Algebra.Homology.Ringed.RingedDerivedSliceData
+import WeilConjectures.Algebra.Homology.Ringed.RingedSliceDerivedMate
 import WeilConjectures.CategoryTheory.RingedToposDerivedPushforwardComposition
 import WeilConjectures.CategoryTheory.Ringed.RingedToposMorphismSupplement
 import WeilConjectures.CategoryTheory.RingedSiteModules

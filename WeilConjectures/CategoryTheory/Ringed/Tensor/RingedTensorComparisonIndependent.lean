@@ -16,13 +16,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import Mathlib.CategoryTheory.Functor.Derived.RightDerived
-import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
-import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
-import Mathlib.CategoryTheory.Yoneda
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
-import Mathlib.CategoryTheory.Generator.Basic
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
+import WeilConjectures.CategoryTheory.RingedToposMorphism.RingedToposDerivedAdjunctionOfUniverses
 import all WeilConjectures.CategoryTheory.RingedToposKFlatPullback
 import all WeilConjectures.CategoryTheory.Ringed.RingedToposMorphismSupplement
 import all WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement

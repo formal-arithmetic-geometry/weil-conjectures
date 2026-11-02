@@ -74,11 +74,7 @@ public import Mathlib.CategoryTheory.Functor.Derived.RightDerived
 
 import Mathlib.CategoryTheory.Adjunction.Unique
 import WeilConjectures.CategoryTheory.Augmented.AugmentedCechTensorPullback
-import WeilConjectures.Algebra.Homology.SmoothPurity.KFlatSupplement
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
-import WeilConjectures.CategoryTheory.RingedDerivedRestriction
-import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
+import WeilConjectures.CategoryTheory.RingedToposMorphism.RingedToposDerivedAdjunctionOfUniverses
 import WeilConjectures.CategoryTheory.Ringed.RingedDerivedClosedSymmetricMonoidal
 
 -- The successor-universe sheafification instance gets stuck on coefficient-universe goals.

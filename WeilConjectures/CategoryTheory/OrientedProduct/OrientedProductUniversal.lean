@@ -31,8 +31,7 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf
 import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import Mathlib.CategoryTheory.Sites.Sheafification
-import Mathlib.CategoryTheory.Sites.Hypercover.Zero
-import Mathlib.CategoryTheory.Sites.Canonical
+import WeilConjectures.CategoryTheory.Sheaf.SheafSubcategoryComparison
 import Mathlib.CategoryTheory.Sites.LeftExact
 
 /-!

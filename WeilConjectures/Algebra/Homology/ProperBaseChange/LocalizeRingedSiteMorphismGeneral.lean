@@ -14,8 +14,9 @@ public import Mathlib.Algebra.Category.Ring.FilteredColimits
 public import Mathlib.CategoryTheory.Sites.Limits
 public import Mathlib.CategoryTheory.Sites.Pullback
 import WeilConjectures.CategoryTheory.Localized.LocalizedSheavesOverRepresentable
-import Mathlib.CategoryTheory.Sites.Over
-import Mathlib.CategoryTheory.Adjunction.Mates
+import WeilConjectures.CategoryTheory.Localized.LocalizedSetPullbackComparison
+import WeilConjectures.CategoryTheory.Localized.LocalizedCommRingPullbackComparison
+import WeilConjectures.Algebra.Homology.ProperBaseChange.LocalizedModulePullbackComparison
 
 /-!
 # Localization of ringed-site morphisms without extra covering axioms

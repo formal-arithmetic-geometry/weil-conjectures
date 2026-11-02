@@ -8,8 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Bounded.BoundedConstructibleTowerSupplement
 public import WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicCompletion
 public import WeilConjectures.AlgebraicGeometry.DeligneLaumon.SequentialDerivedInverseLimit
-public import WeilConjectures.CategoryTheory.ProperBaseChange.SmallModuleDiagramsGrothendieck
-public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import WeilConjectures.CategoryTheory.ProperBaseChange.SequentialTowerEvaluationFull
 public import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
 public import WeilConjectures.CategoryTheory.RingedStrictTowerHomotopyLimit
 public import WeilConjectures.CategoryTheory.RingedSiteModules
