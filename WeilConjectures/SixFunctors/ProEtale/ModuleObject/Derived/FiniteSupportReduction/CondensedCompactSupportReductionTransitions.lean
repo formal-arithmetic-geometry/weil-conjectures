@@ -217,4 +217,49 @@ def quotient {m n : ℕ} (h : n ≤ m) : ring.{u} ell E π m ⟶ ring.{u} ell E 
         ((QuotientRing.isOpenQuotientMap_mk ((Ideal.span {π}) ^ (m + 1))).isQuotientMap
           |>.continuous_iff.mpr continuous_quot_mk))⟩⟩
 
+/-- The canonical quotient identities needed for typed scalar transports.
+Source: blueprint quotient maps and their associativity, proof step 1.
+(blueprint: lem-coef-compact-support-normalized-realization).
+
+Proof: Evaluate on a profinite set and on a continuous function. Quotient induction
+reduces each equation to the identity on the integers of E. For the first equation use
+Ideal.Quotient.factor_eq, for the second use factor_comp, and for the third use
+factor_comp_mk. Postcomposition and passage to the underlying ring objects preserve
+these equations. These are equations of the specified maps, not chosen comparisons. -/
+theorem coefficientLaws :
+    (∀ n : ℕ, quotient.{u} ell E π (le_refl n) = 𝟙 (ring.{u} ell E π n)) ∧
+    (∀ (r m n : ℕ) (hrm : m ≤ r) (hmn : n ≤ m),
+      quotient.{u} ell E π hrm ≫ quotient.{u} ell E π hmn = quotient.{u} ell E π (hmn.trans hrm)) ∧
+    (∀ (m n : ℕ) (h : n ≤ m),
+      reduction.{u} ell E π m ≫ quotient.{u} ell E π h = reduction.{u} ell E π n) := by
+  refine ⟨?_, ?_, ?_⟩
+  · intro n
+    apply CommMon.hom_ext
+    change (sheafCompose (coherentTopology Profinite.{u})
+      (forget₂ RingCat.{u + 1} Ab.{u + 1})).map _ = 𝟙 _
+    simp only [Ideal.Quotient.factorPow, Ideal.Quotient.factor_eq,
+      Profinite.continuousMapRingSheafMap_id]
+    exact (sheafCompose (coherentTopology Profinite.{u})
+      (forget₂ RingCat.{u + 1} Ab.{u + 1})).map_id _
+  · intro r m n hrm hmn
+    apply CommMon.hom_ext
+    change (sheafCompose (coherentTopology Profinite.{u})
+      (forget₂ RingCat.{u + 1} Ab.{u + 1})).map _ ≫
+      (sheafCompose (coherentTopology Profinite.{u})
+        (forget₂ RingCat.{u + 1} Ab.{u + 1})).map _ = _
+    rw [← Functor.map_comp, ← Profinite.continuousMapRingSheafMap_comp]
+    congr 2
+    exact Ideal.Quotient.factor_comp _ _
+  · intro m n h
+    apply CommMon.hom_ext
+    change (sheafCompose (coherentTopology Profinite.{u})
+      (forget₂ RingCat.{u + 1} Ab.{u + 1})).map _ ≫
+      (sheafCompose (coherentTopology Profinite.{u})
+        (forget₂ RingCat.{u + 1} Ab.{u + 1})).map _ =
+      (sheafCompose (coherentTopology Profinite.{u})
+        (forget₂ RingCat.{u + 1} Ab.{u + 1})).map (completedReduction ell E π n)
+    unfold completedReduction
+    rw [← Functor.map_comp, ← Profinite.continuousMapRingSheafMap_comp]
+    congr 2
+
 end AlgebraicGeometry.ProEtale.CondensedRing.FiniteSupportReduction
