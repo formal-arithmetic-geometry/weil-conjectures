@@ -65,6 +65,8 @@ complex. This is the local coordinate form of tensoring with that line and shift
 
 @[expose] public noncomputable section
 
+set_option linter.privateModule false
+
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
 
@@ -75,7 +77,7 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
-private theorem ordinary_constructible_iff (A : Type u) [CommRing A]
+private theorem ordinary_constructible_iff (A : Type u) [CommRing A] [Finite A]
     (T : Scheme.{u}) [CompactSpace T] [QuasiSeparatedSpace T]
     (M : Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1} A))) :
     FiniteDiscreteOrdinary.ordinaryConstructible A T M ↔
@@ -93,14 +95,16 @@ private theorem ordinary_constructible_iff (A : Type u) [CommRing A]
         convert C.mem₀ using 1
         exact le_antisymm (fun _ _ ⟨i⟩ ↦ ⟨i.down⟩)
           (fun _ _ ⟨i⟩ ↦ ⟨(ULift.up i : ULift.{u + 1} C.I₀)⟩),
-      fun i ↦ hC i.down⟩
+      fun i ↦ (hC i.down).imp fun _ hP ↦
+        ⟨by have := hP.1; exact Module.Finite.of_finite, hP.2⟩⟩
   · rintro ⟨I, W, g, hg, h⟩
     let C : Scheme.Cover.{u + 1} Scheme.proetalePrecoverage (S.domain a) :=
       ⟨⟨I, W, g⟩, hg⟩
     have : Precoverage.Small.{u} Scheme.proetalePrecoverage :=
       inferInstanceAs (Precoverage.Small.{u} (Scheme.propQCPrecoverage @WeaklyEtale))
     exact ⟨C.restrictIndexOfSmall.{u}, fun i ↦
-      h (Precoverage.ZeroHypercover.Small.restrictFun.{u} C i)⟩
+      (h (Precoverage.ZeroHypercover.Small.restrictFun.{u} C i)).imp fun _ hP ↦
+        ⟨by have := hP.1; exact Module.finite_of_finite (ULift.{u + 1} A), hP.2⟩⟩
 
 private theorem ordinary_ctf_iff (A : Type u) [CommRing A] [Finite A]
     (T : Scheme.{u}) [CompactSpace T] [QuasiSeparatedSpace T]
