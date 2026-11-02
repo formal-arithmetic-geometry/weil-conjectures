@@ -238,6 +238,40 @@ theorem pbcExchangeStageSquare_integral
           (Lg.Φ F).map ((Rf.β h).hom.app (ScalarLocalization.mk K)) ≫
           (τ F).app
             (((pbcScalarSystem l Ω X dX.out iX.out).T h).obj (ScalarLocalization.mk K)) := by
+  intro E F h K
+  obtain ⟨ΦRf, βRf, cohRf⟩ := Rf
+  obtain ⟨ΦRf', βRf', cohRf'⟩ := Rf'
+  obtain ⟨ΦLg, βLg, cohLg⟩ := Lg
+  obtain ⟨ΦLg', βLg', cohLg'⟩ := Lg'
+  obtain rfl : ΦRf = _ := funext hRf
+  obtain rfl : ΦRf' = _ := funext hRf'
+  obtain rfl : ΦLg = _ := funext hLg
+  obtain rfl : ΦLg' = _ := funext hLg'
+  -- The four BetaSpec identities, transported to homogeneous equations.
+  have bRf₀ := bRf h rfl rfl K
+  have bRf'₀ := bRf' h rfl rfl ((pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)
+    (pbcActualCompletedPull g' (pbcStageDatum.{u} l Ω E)) (presLg' E)).obj K)
+  have bLg₀ := bLg h rfl rfl ((pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)
+    (pbcActualDerivedPush f (pbcStageDatum.{u} l Ω E)) (presRf E)).obj K)
+  have bLg'₀ := bLg' h rfl rfl K
+  simp only [eqToIso_refl, Iso.refl_symm, Functor.isoWhiskerRight_refl,
+    Functor.isoWhiskerLeft_refl, Iso.refl_trans, Iso.trans_refl] at bRf₀ bRf'₀ bLg₀ bLg'₀
+  have eRf := hom_eq_of_heq_objects ?x₁ ?y₁ bRf₀
+  rotate_left
+  · simp only [Functor.comp_obj]; rw [pbcIntegralScalarExtension_eq_tensor]; rfl
+  · simp only [Functor.comp_obj]; rw [pbcIntegralScalarExtension_eq_tensor]; rfl
+  have eRf' := hom_eq_of_heq_objects ?x₂ ?y₂ bRf'₀
+  rotate_left
+  · simp only [Functor.comp_obj]; rw [pbcIntegralScalarExtension_eq_tensor]; rfl
+  · simp only [Functor.comp_obj]; rw [pbcIntegralScalarExtension_eq_tensor]; rfl
+  have eLg := hom_eq_of_heq_objects ?x₃ ?y₃ bLg₀
+  rotate_left
+  · simp only [Functor.comp_obj]; rw [pbcIntegralScalarExtension_eq_tensor]; rfl
+  · simp only [Functor.comp_obj]; rw [pbcIntegralScalarExtension_eq_tensor]; rfl
+  have eLg' := hom_eq_of_heq_objects ?x₄ ?y₄ bLg'₀
+  rotate_left
+  · simp only [Functor.comp_obj]; rw [pbcIntegralScalarExtension_eq_tensor]; rfl
+  · simp only [Functor.comp_obj]; rw [pbcIntegralScalarExtension_eq_tensor]; rfl
   sorry
 
 /-- The prescribed localized actual exchange components satisfy the scalar
