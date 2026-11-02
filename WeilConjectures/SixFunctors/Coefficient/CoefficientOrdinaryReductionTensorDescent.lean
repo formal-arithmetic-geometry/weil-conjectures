@@ -47,7 +47,7 @@ abbrev flatTermKFlat : ObjectProperty (CochainComplex (scalarReductionSource l E
   fun X ↦ X.IsKFlatIndependentCoefficients ∧ ∀ p : ℤ, (X.X p).IsFlatOnSite
 
 private theorem coefficient_total_eq :
-    coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
+    coefficientTotalTensor.{u, t + 1, t} (Scheme.ProEt.topology W)
         (completedIntegralCommRingSheafUnrestricted l E W) =
       SheafOfModules.KFlatTotalTensorModel.total
         (completedIntegralCommRingSheafUnrestricted l E W) := by
@@ -57,9 +57,9 @@ private theorem coefficient_total_eq :
 Source: Stacks 06YN, 07A4. -/
 theorem flatTermKFlat_totalTensor (P Q : CochainComplex (scalarReductionSource l E W) ℤ)
     (hP : flatTermKFlat l E W P) (hQ : flatTermKFlat l E W Q) :
-    flatTermKFlat l E W ((coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
+    flatTermKFlat l E W ((coefficientTotalTensor.{u, t + 1, t} (Scheme.ProEt.topology W)
       (completedIntegralCommRingSheafUnrestricted l E W)).obj (P, Q)) := by
-  refine ⟨coefficientTotalTensor_isKFlat.{u, t+1, t} _ _ P Q hP.1 hQ.1, ?_⟩
+  refine ⟨coefficientTotalTensor_isKFlat.{u, t + 1, t} _ _ P Q hP.1 hQ.1, ?_⟩
   rw [coefficient_total_eq]
   exact (SheafOfModules.KFlatTotalTensorModel.kFlat_total_tensor_model
     (completedIntegralCommRingSheafUnrestricted l E W) P Q hP.1 hQ.1 hP.2 hQ.2).2.1
@@ -75,10 +75,10 @@ theorem reductionTensor_descent (M : OrdinaryModel l E W)
     (hε : ∀ Q : CochainComplex (scalarReductionSource l E W) ℤ,
       Q.IsKFlatIndependentCoefficients → (∀ p : ℤ, (Q.X p).IsFlatOnSite) →
         IsIso (ε.app Q))
-    (b : coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
+    (b : coefficientTotalTensor.{u, t + 1, t} (Scheme.ProEt.topology W)
         (completedIntegralCommRingSheafUnrestricted l E W) ⋙ M.quotient l E W ≅
       (M.quotient l E W).prod (M.quotient l E W) ⋙
-        coefficientTotalTensor.{u, t+1, t} (coefficientSequenceTopology (Scheme.ProEt.topology W))
+        coefficientTotalTensor.{u, t + 1, t} (coefficientSequenceTopology (Scheme.ProEt.topology W))
           (coefficientSequenceCommRingSheaf l E W))
     (hpres : ∀ P : CochainComplex (scalarReductionSource l E W) ℤ,
       P.IsKFlatIndependentCoefficients → (∀ p : ℤ, (P.X p).IsFlatOnSite) →
@@ -120,14 +120,14 @@ theorem reductionTensor_descent (M : OrdinaryModel l E W)
   let G : PR.FullSubcategory ⥤ PK.FullSubcategory := ObjectProperty.ιOfLE (fun _ h ↦ h.1)
   let G' : PS.FullSubcategory ⥤ PS.FullSubcategory := 𝟭 _
   let r : (PR.ι.prod PR.ι) ⋙
-      coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
+      coefficientTotalTensor.{u, t + 1, t} (Scheme.ProEt.topology W)
         (completedIntegralCommRingSheafUnrestricted l E W) ⋙ DerivedCategory.Q ≅
       ((PR.ι ⋙ DerivedCategory.Q).prod (PR.ι ⋙ DerivedCategory.Q)) ⋙
         T.integralClosed.tensor :=
     NatIso.ofComponents (fun X ↦ T.integralTensorModel.comparison.app (G.obj X.1, G.obj X.2))
       (fun f ↦ T.integralTensorModel.comparison.hom.naturality (Prod.mkHom (G.map f.1) (G.map f.2)))
   let r' : (PS.ι.prod PS.ι) ⋙
-      coefficientTotalTensor.{u, t+1, t} (coefficientSequenceTopology (Scheme.ProEt.topology W))
+      coefficientTotalTensor.{u, t + 1, t} (coefficientSequenceTopology (Scheme.ProEt.topology W))
         (coefficientSequenceCommRingSheaf l E W) ⋙ DerivedCategory.Q ≅
       ((PS.ι ⋙ DerivedCategory.Q).prod (PS.ι ⋙ DerivedCategory.Q)) ⋙
         T.systemClosed.tensor :=
@@ -136,9 +136,9 @@ theorem reductionTensor_descent (M : OrdinaryModel l E W)
         (Prod.mkHom (G'.map f.1) (G'.map f.2)))
   obtain ⟨μ, hμ, _⟩ := tensorComparisonDescent DerivedCategory.Q DerivedCategory.Q
     (M.quotient l E W) L ε PR PS (fun P hP ↦ hpres P hP.1 hP.2) ff'
-    (coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
+    (coefficientTotalTensor.{u, t + 1, t} (Scheme.ProEt.topology W)
       (completedIntegralCommRingSheafUnrestricted l E W))
-    (coefficientTotalTensor.{u, t+1, t} (coefficientSequenceTopology (Scheme.ProEt.topology W))
+    (coefficientTotalTensor.{u, t + 1, t} (coefficientSequenceTopology (Scheme.ProEt.topology W))
       (coefficientSequenceCommRingSheaf l E W))
     T.integralClosed.tensor T.systemClosed.tensor r r' b
     (fun P hP ↦ hε P hP.1 hP.2)

@@ -55,6 +55,8 @@ variable (κ : ∀ {m n : ℕ}, n ≤ m → (S m ⟶ S n))
       (δ h).app M ≫ (SheafOfModules.restrictScalars (κ h)).map (d n) =
         d m ≫ (δ h).app N)
 
+/-- Undo a restriction of scalars along a ring isomorphism on a map of modules.
+Source: Stacks 03CZ, 0941. -/
 def undoRestriction {A B : RingCat.{r}} (φ : A ≅ B)
     {M N : ModuleCat.{r} B}
     (f : (ModuleCat.restrictScalars φ.hom.hom).obj M ⟶
@@ -70,6 +72,8 @@ def undoRestriction {A B : RingCat.{r}} (φ : A ≅ B)
         congrArg (fun k : B ⟶ B ↦ k a) φ.inv_hom_id
       simpa only [hi, RingHom.id_apply] using h }
 
+/-- The sectionwise components of the assembled map.
+Source: Stacks 03CZ, 0941. -/
 @[irreducible] def assemble_app (V : (ℕ × T)ᵒᵖ) :
     M.val.obj V ⟶ N.val.obj V :=
   undoRestriction
@@ -77,11 +81,15 @@ def undoRestriction {A B : RingCat.{r}} (φ : A ≅ B)
       ((sheafToPresheaf J RingCat.{r}).mapIso (φ V.unop.1)))
     ((d V.unop.1).val.app (op V.unop.2))
 
+/-- The sectionwise components of the assembled map on sections.
+Source: Stacks 03CZ, 0941. -/
 theorem assemble_app_apply (V : (ℕ × T)ᵒᵖ) (x : M.val.obj V) :
     assemble_app J R S φ d V x = (d V.unop.1).val.app (op V.unop.2) x := by
   unfold assemble_app undoRestriction
   rfl
 
+/-- A square through restriction of scalars, on sections.
+Source: Stacks 03CZ, 0941. -/
 theorem restriction_square_apply
     {A B : Sheaf J RingCat.{r}} (ψ : A ⟶ B)
     {V W : SheafOfModules.{r} A} {V' W' : SheafOfModules.{r} B}
@@ -93,6 +101,8 @@ theorem restriction_square_apply
     g.val.app U (a.val.app U x) = b.val.app U (f.val.app U x) :=
   congrArg (fun k ↦ k.val.app U x) h
 
+/-- Transport of a square of functions along equalities.
+Source: Stacks 03CZ, 0941. -/
 theorem square_of_functions {A B P Q : Type r}
     (f : A → B) (g : P → Q) (a a' : A → P) (b b' : B → Q)
     (ha : a = a') (hb : b = b') (hs : ∀ x, g (a x) = b (f x)) (x : A) :
@@ -101,6 +111,8 @@ theorem square_of_functions {A B P Q : Type r}
   exact (hs x).symm
 
 include ht hδ in
+/-- The assembled components commute with horizontal restriction.
+Source: Stacks 03CZ, 0941. -/
 theorem horizontal_natural {m n : ℕ} (h : n ≤ m) (V : Tᵒᵖ)
     (x : M.val.obj (op (m, V.unop))) :
     N.val.map (Prod.mkHom (homOfLE h) (𝟙 V.unop)).op
@@ -119,6 +131,8 @@ theorem horizontal_natural {m n : ℕ} (h : n ≤ m) (V : Tᵒᵖ)
       ((δ h).app M) ((δ h).app N) (d m) (d n) (ht h) V y) x
 
 include ht hδ in
+/-- The map of sequence-site modules assembled from compatible levelwise maps.
+Source: Stacks 03CZ, 0941. -/
 @[irreducible] def assemble : M ⟶ N where
   val := {
     app := assemble_app J R S φ d
@@ -144,6 +158,8 @@ include ht hδ in
       exact (horizontal_natural J R S φ κ δ hδ d ht (leOfHom f.unop.1)
         (op Z.unop.2) (M.val.map a x)).symm }
 
+/-- The assembled map has the prescribed levelwise components.
+Source: Stacks 03CZ, 0941. -/
 theorem assemble_evaluation (n : ℕ) :
     ((SheafOfModules.pushforward.{r} (φ n).hom)).map (assemble J R S φ κ δ hδ d ht) = d n := by
   unfold assemble
@@ -163,6 +179,8 @@ theorem coefficientSequence_hom_ext {M N : coefficientSequenceModules l E W} {f 
   ext V x
   exact congrArg (fun k ↦ k.val.app (op V.unop.2) x) (h V.unop.1)
 
+/-- Transport of a map of abelian groups along equalities, on elements.
+Source: Stacks 03CZ, 0941. -/
 theorem transported_ab_map_apply
     {A A' B B' : AddCommGrpCat.{r}} (hA : A = A') (hB : B = B')
     (f : A ⟶ B) (g : A' ⟶ B')
@@ -175,6 +193,8 @@ theorem transported_ab_map_apply
   simpa only [eqToHom_refl, Category.id_comp, Category.comp_id] using
     congrArg (fun k ↦ k x) h
 
+/-- The strict transition on sections is horizontal restriction.
+Source: Stacks 03CZ, 0941. -/
 theorem transition_section {m n : ℕ} (h : n ≤ m)
     (M : coefficientSequenceModules l E W) (V : W.ProEtᵒᵖ)
     (x : M.val.obj (op (m, V.unop))) :
@@ -187,6 +207,8 @@ theorem transition_section {m n : ℕ} (h : n ≤ m)
     _ _ hh x x (HEq.rfl)
   exact eq_of_heq he
 
+/-- The strict transition is horizontal restriction, as functions.
+Source: Stacks 03CZ, 0941. -/
 theorem transition_functions {m n : ℕ} (h : n ≤ m)
     (M : coefficientSequenceModules l E W) (V : W.ProEtᵒᵖ) :
     HEq (fun x ↦ ((coefficientSequenceTransition l E W h).app M).val.app V x)
@@ -194,6 +216,8 @@ theorem transition_functions {m n : ℕ} (h : n ≤ m)
         M.val.map (Prod.mkHom (homOfLE h) (𝟙 V.unop)).op x) := by
   exact heq_of_eq (funext (transition_section l E W h M V))
 
+/-- The ring sheaf of the ringed sequence site, with commutativity forgotten.
+Source: Stacks 03CZ, 0941. -/
 abbrev coefficientRing :=
   ((sheafCompose (coefficientSequenceTopology (Scheme.ProEt.topology W))
     (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj

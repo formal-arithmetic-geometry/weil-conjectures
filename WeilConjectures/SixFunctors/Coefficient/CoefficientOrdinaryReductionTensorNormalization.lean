@@ -322,11 +322,12 @@ theorem coefficientEvaluationTensorIso_inv_generator (n : ℕ)
 
 attribute [local irreducible] coefficientTotalTensor coefficientTensorGenerator
 
+set_option maxHeartbeats 400000 in
+-- Generator calculus on both total tensors needs extra elaboration.
 attribute [local irreducible] coefficientEvaluationTensorIso
   coefficientSequenceEvaluation coefficientSequenceCommRingSheaf
   coefficientSequenceCommRingPresheaf coefficientSequenceCommRingSystem
   coefficientSequenceTopology SheafOfModules.monoidalCategory in
-set_option maxHeartbeats 400000 in
 /-- The prescribed evaluation tensor isomorphisms are natural in both complexes.
 Source: Stacks 07A4, 03EK. -/
 theorem coefficientEvaluationTensorIso_naturality (n : ℕ)
@@ -542,7 +543,8 @@ theorem coefficientSystemTensorModelIso_naturality (S : CoefficientDerivedSystem
         (coefficientSequenceCommRingSheaf l E W)).map (Prod.mkHom f g)) ≫
         (coefficientSystemTensorModelIso l E W S P' Q' hP' hQ').hom =
       (coefficientSystemTensorModelIso l E W S P Q hP hQ).hom ≫
-        S.systemClosed.tensor.map (Prod.mkHom (DerivedCategory.Q.map f) (DerivedCategory.Q.map g)) := by
+        S.systemClosed.tensor.map
+          (Prod.mkHom (DerivedCategory.Q.map f) (DerivedCategory.Q.map g)) := by
   have h := S.systemTensorModel.comparison.hom.naturality
     (Prod.mkHom (ObjectProperty.homMk (X := ⟨P, hP⟩) (Y := ⟨P', hP'⟩) f)
       (ObjectProperty.homMk (X := ⟨Q, hQ⟩) (Y := ⟨Q', hQ'⟩) g))

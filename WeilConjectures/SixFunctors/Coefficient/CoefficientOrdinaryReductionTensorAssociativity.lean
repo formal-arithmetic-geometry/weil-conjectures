@@ -29,7 +29,7 @@ set_option backward.isDefEq.respectTransparency.types false
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 
-universe t u w
+universe t u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 
 namespace WeilConjectures
@@ -250,37 +250,7 @@ theorem scalarExtension_tripleTensor_hom_ext (n : ℕ)
   intro p q r i k hpq hik V x y z
   exact h p q r i k hpq hik V x y z
 
-/-- An isomorphism of complexes of module sheaves is inverse to its inverse on sections.
-Source: Stacks 03CZ. -/
-theorem cochainIso_hom_inv_section
-    {C : Type*} [Category* C] {J : GrothendieckTopology C} {R : Sheaf J RingCat.{w}}
-    {P Q : CochainComplex (SheafOfModules.{w} R) ℤ} (e : P ≅ Q) (k : ℤ) (U : Cᵒᵖ)
-    (y : (Q.X k).val.obj U) : (e.hom.f k).val.app U ((e.inv.f k).val.app U y) = y :=
-  congrArg (fun z : Q ⟶ Q ↦ (z.f k).val.app U y) e.inv_hom_id
-
-/-- An isomorphism of complexes of module sheaves is inverse to its inverse on sections.
-Source: Stacks 03CZ. -/
-theorem cochainIso_inv_hom_section
-    {C : Type*} [Category* C] {J : GrothendieckTopology C} {R : Sheaf J RingCat.{w}}
-    {P Q : CochainComplex (SheafOfModules.{w} R) ℤ} (e : P ≅ Q) (k : ℤ) (U : Cᵒᵖ)
-    (x : (P.X k).val.obj U) : (e.inv.f k).val.app U ((e.hom.f k).val.app U x) = x :=
-  congrArg (fun z : P ⟶ P ↦ (z.f k).val.app U x) e.hom_inv_id
-
 namespace OrdinaryQuotient
-
-/-- An isomorphism of complexes of finite-level modules is inverse to its inverse on sections.
-Source: Stacks 03CZ. -/
-@[simp] theorem normalizedDVRComplexIso_inv_hom_section (n : ℕ)
-    {P Q : CochainComplex (normalizedDVRModules l E W n) ℤ} (e : P ≅ Q) (k : ℤ) (U : W.ProEtᵒᵖ)
-    (x : (P.X k).val.obj U) : (e.inv.f k).val.app U ((e.hom.f k).val.app U x) = x :=
-  congrArg (fun z : P ⟶ P ↦ (z.f k).val.app U x) e.hom_inv_id
-
-/-- An isomorphism of complexes of finite-level modules is inverse to its inverse on sections.
-Source: Stacks 03CZ. -/
-@[simp] theorem normalizedDVRComplexIso_hom_inv_section (n : ℕ)
-    {P Q : CochainComplex (normalizedDVRModules l E W n) ℤ} (e : P ≅ Q) (k : ℤ) (U : W.ProEtᵒᵖ)
-    (y : (Q.X k).val.obj U) : (e.hom.f k).val.app U ((e.inv.f k).val.app U y) = y :=
-  congrArg (fun z : Q ⟶ Q ↦ (z.f k).val.app U y) e.inv_hom_id
 
 attribute [local irreducible] coefficientTotalTensor coefficientTensorGenerator
   coefficientEvaluationTensorIso coefficientScalarTensorIso coefficientUniqueComparisonChoice
@@ -308,12 +278,14 @@ comparisons, reassociates finite tensor generators.
 Source: Stacks 03EK, 07A4, 0941. -/
 theorem evaluatedAssociator_generator (n : ℕ)
     (X Y Z : CochainComplex (coefficientSequenceModules l E W) ℤ)
-    (b' : (coefficientTotalTensor.{u, t+1, t} (coefficientSequenceTopology (Scheme.ProEt.topology W))
+    (b' : (coefficientTotalTensor.{u, t+1, t}
+        (coefficientSequenceTopology (Scheme.ProEt.topology W))
         (coefficientSequenceCommRingSheaf l E W)).obj
         ((coefficientTotalTensor.{u, t+1, t}
           (coefficientSequenceTopology (Scheme.ProEt.topology W))
           (coefficientSequenceCommRingSheaf l E W)).obj (X, Y), Z) ≅
-      (coefficientTotalTensor.{u, t+1, t} (coefficientSequenceTopology (Scheme.ProEt.topology W))
+      (coefficientTotalTensor.{u, t+1, t}
+        (coefficientSequenceTopology (Scheme.ProEt.topology W))
         (coefficientSequenceCommRingSheaf l E W)).obj
         (X, (coefficientTotalTensor.{u, t+1, t}
           (coefficientSequenceTopology (Scheme.ProEt.topology W))
@@ -355,18 +327,21 @@ theorem evaluatedAssociator_generator (n : ℕ)
   let T := coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
     (integralCoefficientCommRingSheaf l E W n)
   let T' := coefficientTotalTensor.{u, t+1, t}
-    (coefficientSequenceTopology (Scheme.ProEt.topology W)) (coefficientSequenceCommRingSheaf l E W)
+    (coefficientSequenceTopology (Scheme.ProEt.topology W))
+    (coefficientSequenceCommRingSheaf l E W)
   let Ev := (coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)
   let σ := fun (M : coefficientSequenceModules l E W) (w : M.val.obj (op (n, U.unop))) ↦
     coefficientEvaluationSection l E W M n U w
   let g := coefficientTensorGenerator.{u, t+1, t} (Scheme.ProEt.topology W)
     (integralCoefficientCommRingSheaf l E W n)
   let g' := coefficientTensorGenerator.{u, t+1, t}
-    (coefficientSequenceTopology (Scheme.ProEt.topology W)) (coefficientSequenceCommRingSheaf l E W)
+    (coefficientSequenceTopology (Scheme.ProEt.topology W))
+    (coefficientSequenceCommRingSheaf l E W)
   have s1 : ((T.map (Prod.mkHom (coefficientEvaluationTensorIso l E W n X Y).inv
       (𝟙 (Ev.obj Z)))).f k).val.app U
         (g _ _ pq r k hk U (g _ _ p q pq hpq U (σ _ x) (σ _ y)) (σ _ z)) =
-      g (Ev.obj (T'.obj (X, Y))) (Ev.obj Z) pq r k hk U (σ _ (g' X Y p q pq hpq _ x y)) (σ _ z) := by
+      g (Ev.obj (T'.obj (X, Y))) (Ev.obj Z) pq r k hk U (σ _ (g' X Y p q pq hpq _ x y))
+        (σ _ z) := by
     rw [normalizedDVR_tensorGenerator_map, coefficientEvaluationTensorIso_inv_generator]
     rfl
   have s2 := coefficientEvaluationTensorIso_inv_generator l E W n (T'.obj (X, Y)) Z pq r k hk U
@@ -392,6 +367,8 @@ theorem evaluatedAssociator_generator (n : ℕ)
         k).val.app U w) s1).trans s2)).trans (s3.trans
       (congrArg (σ _) s4)))).trans s5)).trans s6
 
+set_option maxHeartbeats 1600000 in
+-- The unit-section comparison elaborates several large nested generator terms.
 attribute [local semireducible] coefficientSequenceEvaluation in
 /-- The scalar-coordinate form of tensor associativity for the quotient system: on unit
 insertions of triple generators both composites are the reassociated generator.
@@ -408,13 +385,15 @@ theorem OrdinaryModel.scalarTensorAssociativity (M : OrdinaryModel l E W) (n : �
           (completedIntegralCommRingSheafUnrestricted l E W)).obj (Q, N)))
     (ha : CoefficientComplexAssociatorFormula (Scheme.ProEt.topology W)
       (completedIntegralCommRingSheafUnrestricted l E W) P Q N a)
-    (b' : (coefficientTotalTensor.{u, t+1, t} (coefficientSequenceTopology (Scheme.ProEt.topology W))
+    (b' : (coefficientTotalTensor.{u, t+1, t}
+        (coefficientSequenceTopology (Scheme.ProEt.topology W))
         (coefficientSequenceCommRingSheaf l E W)).obj
         ((coefficientTotalTensor.{u, t+1, t}
           (coefficientSequenceTopology (Scheme.ProEt.topology W))
           (coefficientSequenceCommRingSheaf l E W)).obj
           ((M.quotient l E W).obj P, (M.quotient l E W).obj Q), (M.quotient l E W).obj N) ≅
-      (coefficientTotalTensor.{u, t+1, t} (coefficientSequenceTopology (Scheme.ProEt.topology W))
+      (coefficientTotalTensor.{u, t+1, t}
+        (coefficientSequenceTopology (Scheme.ProEt.topology W))
         (coefficientSequenceCommRingSheaf l E W)).obj
         ((M.quotient l E W).obj P, (coefficientTotalTensor.{u, t+1, t}
           (coefficientSequenceTopology (Scheme.ProEt.topology W))
@@ -427,7 +406,8 @@ theorem OrdinaryModel.scalarTensorAssociativity (M : OrdinaryModel l E W) (n : �
     let T := coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
       (integralCoefficientCommRingSheaf l E W n)
     let T' := coefficientTotalTensor.{u, t+1, t}
-      (coefficientSequenceTopology (Scheme.ProEt.topology W)) (coefficientSequenceCommRingSheaf l E W)
+      (coefficientSequenceTopology (Scheme.ProEt.topology W))
+      (coefficientSequenceCommRingSheaf l E W)
     let tA := coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
       (completedIntegralCommRingSheafUnrestricted l E W)
     let Ev := (coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)
@@ -444,7 +424,7 @@ theorem OrdinaryModel.scalarTensorAssociativity (M : OrdinaryModel l E W) (n : �
       (e (K.obj P) (T'.obj (K.obj Q, K.obj N))).hom ≫
       T.map (Prod.mkHom (𝟙 (Ev.obj (K.obj P))) (e (K.obj Q) (K.obj N)).hom) ≫
       T.map (Prod.mkHom (θ.hom.app P) (T.map (Prod.mkHom (θ.hom.app Q) (θ.hom.app N)))) := by
-  intro T T' tA Ev F K θ e s
+  dsimp only
   apply scalarExtension_tripleTensor_hom_ext l E W n P Q N
   intro p q r i k hpq hik V x y z
   let g := coefficientTensorGenerator.{u, t+1, t} (Scheme.ProEt.topology W)
@@ -455,26 +435,117 @@ theorem OrdinaryModel.scalarTensorAssociativity (M : OrdinaryModel l E W) (n : �
   have L1 := coefficientIntegralScalarUnitSection_naturality l E W n (a.hom.f k) V
     (g _ N i r k hik V (g P Q p q i hpq V x y) z)
   have L2 := ha p q r i (q + r) k hpq rfl hik hk' V x y z
-  have L3 := coefficientScalarTensorIso_hom_unitSection l E W n P (tA.obj (Q, N)) p (q + r) k hk' V
+  have L3 := coefficientScalarTensorIso_hom_unitSection l E W n P
+    ((coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
+      (completedIntegralCommRingSheafUnrestricted l E W)).obj (Q, N))
+    p (q + r) k hk' V
     x (g Q N q r (q + r) rfl V y z)
-  have L4 := OrdinaryQuotient.normalizedDVR_tensorGenerator_map l E W n (𝟙 (F.obj P)) (s Q N).hom
+  have L4 := OrdinaryQuotient.normalizedDVR_tensorGenerator_map l E W n
+    (𝟙 (((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).obj P))
+    (coefficientScalarTensorIso l E W n Q N).hom
     p (q + r) k hk' V (u _ x) (u _ (g Q N q r (q + r) rfl V y z))
   rw [coefficientScalarTensorIso_hom_unitSection] at L4
-  have R1 := coefficientScalarTensorIso_hom_unitSection l E W n (tA.obj (P, Q)) N i r k hik V
+  have R1 := coefficientScalarTensorIso_hom_unitSection l E W n
+    ((coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
+      (completedIntegralCommRingSheafUnrestricted l E W)).obj (P, Q))
+    N i r k hik V
     (g P Q p q i hpq V x y) z
-  have R2 := OrdinaryQuotient.normalizedDVR_tensorGenerator_map l E W n (s P Q).hom (𝟙 (F.obj N))
+  have R2 := OrdinaryQuotient.normalizedDVR_tensorGenerator_map l E W n
+    (coefficientScalarTensorIso l E W n P Q).hom
+    (𝟙 (((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).obj N))
     i r k hik V (u _ (g P Q p q i hpq V x y)) (u _ z)
   rw [coefficientScalarTensorIso_hom_unitSection] at R2
   let w := fun (X : scalarReductionSource l E W) (v : X.val.obj V) ↦
     ((M.adjunction.unit.app X ≫
       limit.π ((coefficientSequenceRestriction l E W).obj (M.tensor.obj X)) (op n) ≫
-      (eqToIso (coefficientSequenceRestriction_evaluation l E W n)).hom.app (M.tensor.obj X)).val.app
-        V v : (M.tensor.obj X).val.obj (op (n, V.unop)))
+      (eqToIso (coefficientSequenceRestriction_evaluation l E W n)).hom.app
+        (M.tensor.obj X)).val.app V v : (M.tensor.obj X).val.obj (op (n, V.unop)))
   have hθ (X : CochainComplex (scalarReductionSource l E W) ℤ) (j : ℤ) (v : (X.X j).val.obj V) :
-      ((θ.hom.app X).f j).val.app V (coefficientEvaluationSection l E W _ n V (w _ v)) = u _ v :=
+      (((NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).hom.app X).f j).val.app V
+        (coefficientEvaluationSection l E W _ n V (w _ v)) = u _ v :=
     congrArg (fun f ↦ f.val.app V v) (M.unit_projection l E W (X.X j) n)
-  trace_state
-  sorry
+  have hθ' (X : CochainComplex (scalarReductionSource l E W) ℤ) (j : ℤ) (v : (X.X j).val.obj V) :
+      (((NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).inv.app X).f j).val.app V
+        (u _ v) = coefficientEvaluationSection l E W _ n V (w _ v) := by
+    rw [← hθ X j v]
+    exact congrArg (fun φ ↦ (φ.f j).val.app V (coefficientEvaluationSection l E W _ n V (w _ v)))
+      ((NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).hom_inv_id_app X)
+  have R3a := OrdinaryQuotient.normalizedDVR_tensorGenerator_map l E W n
+    ((NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).inv.app P)
+    ((NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).inv.app Q) p q i hpq V
+    (u _ x) (u _ y)
+  rw [hθ', hθ'] at R3a
+  have R3b := OrdinaryQuotient.normalizedDVR_tensorGenerator_map l E W n
+    ((coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
+      (integralCoefficientCommRingSheaf l E W n)).map
+        (Prod.mkHom ((NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).inv.app P)
+          ((NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).inv.app Q)))
+    ((NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).inv.app N) i r k hik V
+    (coefficientTensorGenerator.{u, t+1, t} (Scheme.ProEt.topology W)
+      (integralCoefficientCommRingSheaf l E W n) _ _ p q i hpq V (u _ x) (u _ y)) (u _ z)
+  rw [hθ'] at R3b
+  have R4 := OrdinaryQuotient.evaluatedAssociator_generator l E W n ((M.quotient l E W).obj P)
+    ((M.quotient l E W).obj Q) ((M.quotient l E W).obj N)
+    b' hb' p q r i (q + r) k hpq rfl hik hk' V (w _ x) (w _ y) (w _ z)
+  have R5a := OrdinaryQuotient.normalizedDVR_tensorGenerator_map l E W n
+    ((NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).hom.app Q)
+    ((NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).hom.app N) q r (q + r) rfl V
+    (coefficientEvaluationSection l E W _ n V (w _ y))
+    (coefficientEvaluationSection l E W _ n V (w _ z))
+  rw [hθ, hθ] at R5a
+  have R5b := OrdinaryQuotient.normalizedDVR_tensorGenerator_map l E W n
+    ((NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).hom.app P)
+    ((coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
+      (integralCoefficientCommRingSheaf l E W n)).map
+        (Prod.mkHom ((NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).hom.app Q)
+          ((NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).hom.app N))) p (q + r) k hk' V
+    (coefficientEvaluationSection l E W _ n V (w _ x))
+    (coefficientTensorGenerator.{u, t+1, t} (Scheme.ProEt.topology W)
+      (integralCoefficientCommRingSheaf l E W n) _ _ q r (q + r) rfl V
+      (coefficientEvaluationSection l E W _ n V (w _ y))
+      (coefficientEvaluationSection l E W _ n V (w _ z)))
+  rw [hθ] at R5b
+  have c2 := R3b.trans (congrArg (fun v ↦ coefficientTensorGenerator.{u, t+1, t}
+    (Scheme.ProEt.topology W) (integralCoefficientCommRingSheaf l E W n) _
+      (((M.tensor ⋙ coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).obj N)
+      i r k hik V v (coefficientEvaluationSection l E W (M.tensor.obj (N.X r)) n V (w _ z))) R3a)
+  have c4 := R5b.trans (congrArg (fun v ↦ coefficientTensorGenerator.{u, t+1, t}
+    (Scheme.ProEt.topology W) (integralCoefficientCommRingSheaf l E W n)
+      (((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).obj P) _
+      p (q + r) k hk' V (u _ x) v) R5a)
+  have c1 := (congrArg (fun v ↦ ((((coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
+    (integralCoefficientCommRingSheaf l E W n)).map (Prod.mkHom
+      (coefficientScalarTensorIso l E W n P Q).hom
+      (𝟙 (((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).obj N)))).f k).val.app
+        V v)) R1).trans R2
+  have cL1 := L1.trans (congrArg (coefficientIntegralScalarUnitSection l E W n _ V) L2)
+  have cL2 := (congrArg (fun v ↦ (((coefficientScalarTensorIso l E W n P
+    ((coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
+      (completedIntegralCommRingSheafUnrestricted l E W)).obj (Q, N))).hom.f k).val.app V v))
+    cL1).trans L3
+  have cL := (congrArg (fun v ↦ ((((coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
+    (integralCoefficientCommRingSheaf l E W n)).map (Prod.mkHom
+      (𝟙 (((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).obj P))
+      (coefficientScalarTensorIso l E W n Q N).hom)).f k).val.app V v)) cL2).trans L4
+  let T := coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
+    (integralCoefficientCommRingSheaf l E W n)
+  let T' := coefficientTotalTensor.{u, t+1, t}
+    (coefficientSequenceTopology (Scheme.ProEt.topology W))
+    (coefficientSequenceCommRingSheaf l E W)
+  let Ev := (coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)
+  let K := M.quotient l E W
+  let θ := NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)
+  let e := coefficientEvaluationTensorIso l E W n
+  let m3 := T.map (Prod.mkHom (T.map (Prod.mkHom (θ.inv.app P) (θ.inv.app Q))) (θ.inv.app N))
+  let mΞ := T.map (Prod.mkHom (e (K.obj P) (K.obj Q)).inv (𝟙 (Ev.obj (K.obj N)))) ≫
+    (e (T'.obj (K.obj P, K.obj Q)) (K.obj N)).inv ≫ Ev.map b'.hom ≫
+    (e (K.obj P) (T'.obj (K.obj Q, K.obj N))).hom ≫
+    T.map (Prod.mkHom (𝟙 (Ev.obj (K.obj P))) (e (K.obj Q) (K.obj N)).hom)
+  let m9 := T.map (Prod.mkHom (θ.hom.app P) (T.map (Prod.mkHom (θ.hom.app Q) (θ.hom.app N))))
+  have cR := (congrArg (fun v ↦ (m9.f k).val.app V ((mΞ.f k).val.app V ((m3.f k).val.app V v)))
+    c1).trans ((congrArg (fun v ↦ (m9.f k).val.app V ((mΞ.f k).val.app V v)) c2).trans
+      ((congrArg (fun v ↦ (m9.f k).val.app V v) R4).trans c4))
+  exact cL.trans cR.symm
 
 end OrdinaryQuotient
 

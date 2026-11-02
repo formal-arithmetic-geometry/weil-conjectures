@@ -123,7 +123,10 @@ theorem strictReductionTensorPresentation (M : OrdinaryModel l E W)
             (.up ℤ)).app C =
           (NatTrans.mapHomologicalComplex (lim.π (op n)) (.up ℤ)).app I := by
         ext p : 1
-        simp [Functor.mapHomologicalComplexCompIso, I, C]
+        simp only [Functor.comp_obj, Functor.mapHomologicalComplexCompIso,
+          HomologicalComplex.comp_f,
+          NatIso.mapHomologicalComplex_hom_app_f, Iso.refl_hom, NatTrans.id_app, lim_obj,
+          NatTrans.mapHomologicalComplex_app_f, Functor.whiskerLeft_app, lim.π_app, C, I]
         exact Category.id_comp _
       simp only [Category.assoc] at hu ⊢
       rw [reassoc_of% hπ2, reassoc_of% hcπ]

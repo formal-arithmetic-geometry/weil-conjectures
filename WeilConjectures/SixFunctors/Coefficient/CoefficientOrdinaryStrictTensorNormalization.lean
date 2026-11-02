@@ -45,22 +45,22 @@ the simultaneous representative normalization.
 Source: Stacks 07A4, proof of lemma-pullback-tensor-product, and 0941. -/
 theorem reductionTensorNormalization_of_quotientTensor (M : OrdinaryModel l E W)
     (R : CoefficientDerivedSystemReduction l E W)
-    (b : coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
+    (b : coefficientTotalTensor.{u, t + 1, t} (Scheme.ProEt.topology W)
         (completedIntegralCommRingSheafUnrestricted l E W) ⋙ M.quotient l E W ≅
       (M.quotient l E W).prod (M.quotient l E W) ⋙
-        coefficientTotalTensor.{u, t+1, t} (coefficientSequenceTopology (Scheme.ProEt.topology W))
+        coefficientTotalTensor.{u, t + 1, t} (coefficientSequenceTopology (Scheme.ProEt.topology W))
           (coefficientSequenceCommRingSheaf l E W))
     (hb : ∀ (n : ℕ) (P Q : CochainComplex (scalarReductionSource l E W) ℤ),
       ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).map
           (b.hom.app (P, Q)) ≫
         (coefficientEvaluationTensorIso l E W n ((M.quotient l E W).obj P)
           ((M.quotient l E W).obj Q)).hom ≫
-        (coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
+        (coefficientTotalTensor.{u, t + 1, t} (Scheme.ProEt.topology W)
           (integralCoefficientCommRingSheaf l E W n)).map
           (Prod.mkHom ((NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).hom.app P)
             ((NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).hom.app Q)) =
       (NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).hom.app
-          ((coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
+          ((coefficientTotalTensor.{u, t + 1, t} (Scheme.ProEt.topology W)
             (completedIntegralCommRingSheafUnrestricted l E W)).obj (P, Q)) ≫
         (coefficientScalarTensorIso l E W n P Q).hom)
     (hpres : ∀ P : CochainComplex (scalarReductionSource l E W) ℤ,
