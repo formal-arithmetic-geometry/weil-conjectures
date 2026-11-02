@@ -100,6 +100,14 @@ theorem eq_inv_comp_comp_inv {C : Type*} [Category C] {s t r v : C} (u₁ : s �
   rw [← h]
   simp
 
+/-- Move two invertible end factors across an equation. -/
+theorem comp_comp_hom_eq_hom_comp {C : Type*} [Category C] {a b c c' d e : C} (p : a ≅ b)
+    (q : c ≅ d) (A : a ⟶ c') (B : c' ⟶ c) (R : b ⟶ e) (T : e ⟶ d)
+    (h : p.inv ≫ A ≫ B = R ≫ T ≫ q.inv) : A ≫ B ≫ q.hom = p.hom ≫ R ≫ T := by
+  rw [← cancel_epi p.inv, ← cancel_mono q.inv]
+  simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id, Iso.inv_hom_id_assoc]
+  exact h
+
 /-- A heterogeneous equality of morphisms over equalities of their endpoints. -/
 theorem hom_eq_of_heq_objects {C : Type*} [Category C] {x x' y y' : C}
     (hx : x = x') (hy : y = y') {a : x ⟶ y} {b : x' ⟶ y'} (h : HEq a b) :
@@ -157,6 +165,8 @@ variable (X Y X' Y' : Scheme.{u})
   [dY' : Fact (∃ n : ℕ, topologicalKrullDim Y' ≤ (n : WithBot ℕ∞))]
   [iY' : Fact (∀ t : Y', IsUnit (l : Y'.presheaf.stalk t))]
 
+set_option maxHeartbeats 1000000 in
+-- the restated goal unfolds the concrete stage functors
 /-- `pbcExchangeStageSquare` on integral objects, with the composite comparisons of
 `StageSystem.Morphism.comp` expanded.
 Source: blueprint main-20261015, order 1312, final exchange sentence and the
@@ -177,7 +187,9 @@ Formalized below (before the `sorry`):
 * The direct-image equations are solved for `β ≫ Rf_F.map SIC` by `Iso.inv_comp_eq`.
 * The pullback equations are solved for `β.inv` by `eq_inv_comp_comp_inv`, with the outer
   isomorphisms passed explicitly. A direct `rw` with `Functor.mapIso_inv` timed out.
-Tried next: moving `Lg.β` and `Rf'_F.map Lg'.β` across the goal with a generic two-sided
+The goal is now restated by `show` (it needs `maxHeartbeats 1000000`) and flipped by
+`comp_comp_hom_eq_hom_comp`, so the two pullback comparisons appear as `β.inv`.
+Earlier attempt, before `show`: moving `Lg.β` and `Rf'_F.map Lg'.β` across the goal with a generic two-sided
 lemma (`p.inv ≫ A ≫ B = R ≫ T ≫ q.inv → A ≫ B ≫ q.hom = p.hom ≫ R ≫ T`), applied by `refine`
 with `p`, `q` given explicitly. Unifying it with the goal times out at `whnf`, even after
 `dsimp only`. The goal should first be restated with `show` in the substituted form.
@@ -329,6 +341,15 @@ theorem pbcExchangeStageSquare_integral
     ((pbcScalarIntegralComparison l Ω X' dX'.out iX'.out h).app
       ((pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)
         (pbcActualCompletedPull g' (pbcStageDatum.{u} l Ω E)) (presLg' E)).obj K)) _ eLg'
+  show ((pbcScalarSystem l Ω Y' dY'.out iY'.out).T h).map ((τ E).app ⟨K⟩) ≫
+      (βRf' h).hom.app ((pbcDescentPullback l Ω g' presLg' E).obj ⟨K⟩) ≫
+      (pbcDescentDirectImage l Ω f' presRf' F).map ((βLg' h).hom.app ⟨K⟩) =
+    (βLg h).hom.app ((pbcDescentDirectImage l Ω f presRf E).obj ⟨K⟩) ≫
+      (pbcDescentPullback l Ω g presLg F).map ((βRf h).hom.app ⟨K⟩) ≫
+      (τ F).app (((pbcScalarSystem l Ω X dX.out iX.out).T h).obj ⟨K⟩)
+  refine comp_comp_hom_eq_hom_comp
+    ((βLg h).app ((pbcDescentDirectImage l Ω f presRf E).obj ⟨K⟩))
+    ((pbcDescentDirectImage l Ω f' presRf' F).mapIso ((βLg' h).app ⟨K⟩)) _ _ _ _ ?_
   sorry
 
 /-- The prescribed localized actual exchange components satisfy the scalar
