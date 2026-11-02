@@ -154,7 +154,7 @@ theorem constructibleFiniteTor_tateTwist (m : ℤ)
   obtain ⟨hbc, a, b, hta⟩ := hK
   obtain ⟨G, hG, ⟨e⟩⟩ := (DerivedCategory.boundedConstructible_iff _ _ K).1 hbc
   have hGt : Etale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b G :=
-    DerivedCategory.torAmplitudeIn_of_mapDerivedCategory Λ
+    DerivedCategory.torAmplitudeIn_of_mapDerivedCategory_comparisonUpperStar Λ
       ((DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b).prop_of_iso e.symm hta)
   exact (DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X).prop_of_iso
     (tateTwistComparisonIso Λ m G e)
@@ -175,7 +175,7 @@ theorem torAmplitudeIn_tateTwist (m : ℤ) {a b : ℤ}
         (D(ν^*(X)[ModuleCat.{u + 1} Λ]).obj (Etale.tateTwistObject Λ X m))) := by
   obtain ⟨G, -, ⟨e⟩⟩ := (DerivedCategory.boundedConstructible_iff _ _ K).1 hK
   have hGt : Etale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b G :=
-    DerivedCategory.torAmplitudeIn_of_mapDerivedCategory Λ
+    DerivedCategory.torAmplitudeIn_of_mapDerivedCategory_comparisonUpperStar Λ
       ((DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b).prop_of_iso e.symm hta)
   exact (DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b).prop_of_iso
     (tateTwistComparisonIso Λ m G e)

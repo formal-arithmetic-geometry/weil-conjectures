@@ -64,6 +64,14 @@ import WeilConjectures.Algebra.Homology.ChangeOfRingsTensorComparison
 import WeilConjectures.Algebra.Homology.RingedTensorCorner.ProjectionMateExact
 import WeilConjectures.Algebra.Homology.RingedTensorSquare.RingedExchangeTensorCoherence
 import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
+import WeilConjectures.AlgebraicGeometry.ProEtale.Fixed.ProEtaleFixedScalarRestrictionDirectImageGeneral
+import WeilConjectures.CategoryTheory.Adjunction.UniversalArrowMate
+import WeilConjectures.CategoryTheory.Adjunction.MateIterated
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.LowerShriek
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.OpenImmersion
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.LowerStar
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.RestrictScalarsMate
 
 /-!
 # Change of finite coefficients for compact support
@@ -140,7 +148,19 @@ theorem pullback_universal
     Sheaf.IsDerivedBaseChange
       ((L((g)^*[ModuleCat.{u + 1} A])).map M.unit ≫
         (fixedScalarRestrictionPullback φ g).hom.app M.obj) := by
-  sorry
+  intro N
+  have := isIso_fixedScalarRestrictionDirectImageMap φ g
+  rw [fixedScalarRestrictionDirectImageMap_eq] at this
+  exact Adjunction.bijective_comp_map_of_unit_comp_map
+    (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} B) g)
+    (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) g)
+    (fixedScalarRestrictionPullback φ g).hom
+    (mateEquiv (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} B) g)
+      (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) g)
+      (fixedScalarRestrictionPullback φ g).hom)
+    (fun K ↦ (unit_mateEquiv (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} B) g)
+      (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) g)
+      (fixedScalarRestrictionPullback φ g).hom K).symm) M.unit M.universal N
 
 /-- The canonical pullback of a tensor presentation, with its normalized universal arrow.
 Source: Stacks Tag 07A4 (blueprint: lem-fix-compact-support-coefficient-change). -/
@@ -156,6 +176,102 @@ noncomputable def pullback
   universal := M.pullback_universal g
 
 end CoefficientTensorModel
+
+/-- The unit of derived extension of scalars exhibits a derived base change.
+Source: Stacks Tag 07A6 (blueprint: lem-fix-compact-support-coefficient-change). -/
+theorem isDerivedBaseChange_leftDerivedSheafExtendScalarsAdjunction_unit
+    (R S : Type (u + 1)) [CommRing R] [CommRing S] [Algebra R S] (X : Scheme.{u})
+    (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R))) :
+    Sheaf.IsDerivedBaseChange (f := algebraMap R S)
+      ((leftDerivedSheafExtendScalarsAdjunction R S X).unit.app K) := fun N ↦ by
+  convert ((leftDerivedSheafExtendScalarsAdjunction R S X).homEquiv K N).bijective using 1
+  ext g
+  exact ((leftDerivedSheafExtendScalarsAdjunction R S X).homEquiv_unit K N g).symm
+
+/-- The open restriction comparison is the mate, along derived extension of scalars, of the
+commutation of scalar extension with extension by zero.
+Source: Stacks Tags 03DI and 07A6 (blueprint: lem-fix-compact-support-coefficient-change). -/
+theorem mateEquiv_openImmersionLowerShriekExtendScalarsIso_hom
+    (R S : Type (u + 1)) [CommRing R] [CommRing S] [Algebra R S] [IsNoetherianRing R]
+    {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
+    mateEquiv (leftDerivedSheafExtendScalarsAdjunction R S U)
+        (leftDerivedSheafExtendScalarsAdjunction R S X)
+        (openImmersionLowerShriekExtendScalarsIso R S j).hom =
+      fixedScalarRestrictionOpenMap (algebraMap R S) j := by
+  rw [fixedScalarRestrictionOpenMap, Equiv.eq_symm_apply]
+  have h := iterated_mateEquiv_conjugateEquiv
+    (leftDerivedSheafExtendScalarsAdjunction R S U)
+    (leftDerivedSheafExtendScalarsAdjunction R S X)
+    (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction (ModuleCat.{u + 1} R) j)
+    (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction (ModuleCat.{u + 1} S) j)
+    (openImmersionLowerShriekExtendScalarsIso R S j).hom
+  rw [openImmersionLowerShriekExtendScalarsIso, conjugateIsoEquiv_symm_apply_hom,
+    Equiv.apply_symm_apply] at h
+  exact h
+
+/-- Compact support carries derived base changes of bounded constructible complexes of finite
+Tor amplitude to derived base changes, through the canonical restriction comparison.
+Source: Stacks Tags 0GL5, 0GL6 and 07A6
+(blueprint: lem-fix-compact-support-coefficient-change).
+Proof: write the universal arrow as the unit of derived extension of scalars followed by an
+isomorphism. The open and proper restriction comparisons are the mates of the commutations of
+scalar extension with extension by zero and with inverse image, so compact support of the unit
+followed by the restriction comparison is the unit followed by the restriction of the
+scalar-extension exchange map, which is invertible on such complexes. -/
+theorem isDerivedBaseChange_compactSupport_map_comp
+    {R S : Type (u + 1)} [CommRing R] [CommRing S] [Algebra R S] [Finite R] [Finite S]
+    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
+    {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R))}
+    (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} R) X K)
+    {K' : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} S))}
+    {η : K ⟶ (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X) (algebraMap R S)).obj K'}
+    (hη : Sheaf.IsDerivedBaseChange η) :
+    Sheaf.IsDerivedBaseChange ((Rf_!(c)[ModuleCat.{u + 1} R]).map η ≫
+      (compactSupportRestrictionIso (algebraMap R S) c).hom.app K') := by
+  let adjX := leftDerivedSheafExtendScalarsAdjunction R S X
+  let adjZ := leftDerivedSheafExtendScalarsAdjunction R S c.Z
+  let adjY := leftDerivedSheafExtendScalarsAdjunction R S Y
+  let ψ := (adjX.homEquiv K K').symm η
+  have hψ : adjX.unit.app K ≫
+      (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X) (algebraMap R S)).map ψ = η :=
+    (adjX.homEquiv_unit K K' ψ).symm.trans ((adjX.homEquiv K K').apply_symm_apply η)
+  have : IsIso ψ := Sheaf.IsDerivedBaseChange.isIso
+    (isDerivedBaseChange_leftDerivedSheafExtendScalarsAdjunction_unit R S X K) hη ψ hψ
+  have := isIso_rightDerivedLowerShriekOfCompactificationExtendScalarsMap_app R S c hK
+  have h1 := unit_mateEquiv adjX adjZ (openImmersionLowerShriekExtendScalarsIso R S c.i).hom K
+  rw [mateEquiv_openImmersionLowerShriekExtendScalarsIso_hom] at h1
+  have h2 := Adjunction.unit_app_comp_map_mateEquiv_app adjY adjZ
+    (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} R) c.g)
+    (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} S) c.g)
+    (leftDerivedUpperStarExtendScalarsIso R S c.g) _
+    (mateEquiv_leftDerivedUpperStarExtendScalarsIso_inv R S c.g)
+    (fixedScalarRestrictionDirectImage (algebraMap R S) c.g)
+    (by rw [fixedScalarRestrictionDirectImage_inv, fixedScalarRestrictionDirectImageMap_eq])
+    (D((c.i)_!open[ModuleCat.{u + 1} R]).obj K)
+  have hd := (fixedScalarRestrictionDirectImage (algebraMap R S) c.g).hom.naturality
+    ((openImmersionLowerShriekExtendScalarsIso R S c.i).hom.app K)
+  have hnat := (compactSupportRestrictionIso (algebraMap R S) c).hom.naturality ψ
+  simp only [Functor.comp_map] at hd
+  have key : (Rf_!(c)[ModuleCat.{u + 1} R]).map (adjX.unit.app K) ≫
+      (compactSupportRestrictionIso (algebraMap R S) c).hom.app
+        ((L(sheafExtendScalars (algebraMap R S) X)).obj K) =
+      adjY.unit.app ((Rf_!(c)[ModuleCat.{u + 1} R]).obj K) ≫
+        (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology Y) (algebraMap R S)).map
+          ((rightDerivedLowerShriekOfCompactificationExtendScalarsMap R S c).app K) := by
+    rw [rightDerivedLowerShriekOfCompactificationExtendScalarsMap_app, Functor.map_comp]
+    simp only [compactSupportRestrictionIso, fixedScalarRestrictionOpen, Iso.trans_hom,
+      NatTrans.comp_app, Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
+      Functor.whiskerRight_app, Functor.whiskerLeft_app, Functor.associator_hom_app,
+      Functor.associator_inv_app, Iso.symm_hom, asIso_hom, Category.id_comp,
+      Category.comp_id, Functor.comp_map]
+    erw [← Functor.map_comp_assoc, h1, Functor.map_comp_assoc, hd, ← reassoc_of% h2]
+    rfl
+  rw [← hψ, Functor.map_comp, Category.assoc]
+  erw [hnat]
+  rw [← Category.assoc, key, Category.assoc, Functor.comp_map, ← Functor.map_comp]
+  exact (isDerivedBaseChange_leftDerivedSheafExtendScalarsAdjunction_unit R S Y _).comp_map_iso
+    (asIso ((rightDerivedLowerShriekOfCompactificationExtendScalarsMap R S c).app K ≫
+      (Rf_!(c)[ModuleCat.{u + 1} S]).map ψ))
 
 /-- The canonical B-linear coefficient comparison. It is the unique arrow whose
 restriction, composed with the source tensor unit, is compact support of the input
@@ -272,6 +388,15 @@ theorem finiteReductionCompactSupportComparison_isIso
       ((Rf_!(c)[ModuleCat.{u + 1}
         (ULift.{u + 1} (Padic.coefficientExtensionRing l E n))]).obj K)) :
     IsIso (finiteReductionCompactSupportComparison l E m n hm hmn c M N) := by
-  sorry
+  have : Finite (ULift.{u + 1} (Padic.coefficientExtensionRing l E n)) :=
+    Equiv.ulift.finite_iff.mpr (Padic.finite_coefficientExtensionRing l E n (hm.trans hmn))
+  have : Finite (ULift.{u + 1} (Padic.coefficientExtensionRing l E m)) :=
+    Equiv.ulift.finite_iff.mpr (Padic.finite_coefficientExtensionRing l E m hm)
+  let := (RingHom.ulift.{u + 1, u + 1} (Ideal.Quotient.factor
+    (S := Padic.coefficientExtensionIdeal l E n)
+    (T := Padic.coefficientExtensionIdeal l E m) (Ideal.pow_le_pow_right hmn))).toAlgebra
+  exact Sheaf.IsDerivedBaseChange.isIso N.universal
+    (isDerivedBaseChange_compactSupport_map_comp c _hK M.universal) _
+    ((Equiv.ofBijective _ (N.universal _)).apply_symm_apply _)
 
 end AlgebraicGeometry.ProEtale

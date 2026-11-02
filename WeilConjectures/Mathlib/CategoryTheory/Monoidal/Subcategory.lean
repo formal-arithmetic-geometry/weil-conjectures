@@ -14,7 +14,8 @@ Let `P` and `Q` be monoidal properties of objects of monoidal categories `C` and
 `F : C ⥤ D` a strong monoidal functor sending objects satisfying `P` to objects satisfying `Q`.
 The restriction `Q.lift (P.ι ⋙ F) hF : P.FullSubcategory ⥤ Q.FullSubcategory` is then strong
 monoidal, with the comparison isomorphisms of `F`. The file also records the underlying
-morphisms of whiskerings and associators in a full monoidal subcategory.
+morphisms of the tensor comparisons of such a restriction, and of tensor products of morphisms,
+whiskerings, associators and braidings in a full monoidal subcategory.
 
 ## Main definitions
 
@@ -47,6 +48,13 @@ noncomputable instance monoidalLift : (Q.lift (P.ι ⋙ F) hF).Monoidal :=
       left_unitality X := hom_ext _ (left_unitality F X.obj)
       right_unitality X := hom_ext _ (right_unitality F X.obj) }
 
+/-- The underlying morphism of the tensor comparison `δ` of the restriction `monoidalLift` of a
+strong monoidal functor is the tensor comparison of the functor. -/
+lemma monoidalLift_δ_hom (X Y : P.FullSubcategory) :
+    (Functor.OplaxMonoidal.δ (Q.lift (P.ι ⋙ F) hF) X Y).hom =
+      Functor.OplaxMonoidal.δ F X.obj Y.obj :=
+  rfl
+
 end CategoryTheory.ObjectProperty
 
 namespace CategoryTheory.ObjectProperty
@@ -73,6 +81,19 @@ lemma associator_hom_hom (X Y Z : P.FullSubcategory) :
 /-- The underlying morphism of the inverse associator in a full monoidal subcategory. -/
 lemma associator_inv_hom (X Y Z : P.FullSubcategory) :
     (α_ X Y Z).inv.hom = (α_ X.obj Y.obj Z.obj).inv :=
+  rfl
+
+variable {P} in
+/-- The underlying morphism of a tensor product of morphisms in a full monoidal subcategory. -/
+lemma tensorHom_hom' {A B A' B' : P.FullSubcategory} (a : A ⟶ A') (b : B ⟶ B') :
+    (a ⊗ₘ b).hom = a.hom ⊗ₘ b.hom :=
+  rfl
+
+variable {P} in
+/-- The underlying morphism of the braiding of a full braided subcategory is the braiding. -/
+lemma fullBraidedSubcategory_braiding_hom_hom [BraidedCategory C] (X Y : P.FullSubcategory) :
+    (@BraidedCategory.braiding _ _ _ (fullBraidedSubcategory P) X Y).hom.hom =
+      (β_ X.obj Y.obj).hom :=
   rfl
 
 end CategoryTheory.ObjectProperty
