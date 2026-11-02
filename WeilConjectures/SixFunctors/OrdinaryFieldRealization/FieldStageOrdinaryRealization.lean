@@ -44,6 +44,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Linear
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomModule
+import WeilConjectures.AlgebraicGeometry.Adic.ReductionDerivedChangeCoherence
 
 /-! # Ordinary discrete constant-field realization
 
@@ -330,6 +331,16 @@ theorem coefficientMap_comp (Y : Scheme.{u}) {A B C : Type u}
   rw [← Functor.map_comp]
   congr 1
 
+/-- Constant sheafification sends the identity coefficient homomorphism to the identity.
+Source: blueprint identity-inclusion coherence
+(blueprint: lem-sf-field-stage-ordinary-realization).
+Proof: the lifted identity homomorphism is the identity; apply constantSheaf.map_id. -/
+theorem coefficientMap_id (Y : Scheme.{u}) (A : Type u) [CommRing A] :
+    coefficientMap Y (RingHom.id A) = 𝟙 (constantRing Y A) := by
+  unfold coefficientMap
+  rw [← CategoryTheory.Functor.map_id]
+  congr 1
+
 /-- The ordinary derived scalar associator is uniquely fixed by balancing on K-flat models.
 Source: Stacks Tag 06YY; blueprint coefficient tower coherence
 (blueprint: lem-sf-field-stage-ordinary-realization).
@@ -352,8 +363,9 @@ theorem extendComp_existsUnique (Y : Scheme.{u}) {A B C : Type u}
               (C := reductionModules Y (constantRing Y C))).map
               (reductionBalance Y (coefficientMap Y f)
               (coefficientMap Y g) (coefficientMap Y (g.comp f))
-              (coefficientMap_comp Y f g) P) := by
-  sorry
+              (coefficientMap_comp Y f g) P) :=
+  reductionDerivedChange_comp_existsUnique Y (coefficientMap Y f) (coefficientMap Y g)
+    (coefficientMap Y (g.comp f)) (coefficientMap_comp Y f g)
 
 /-- The counit-normalized ordinary derived tensor associator.
 Source: blueprint coefficient tower coherence
@@ -384,8 +396,9 @@ theorem extendUnit_existsUnique (Y : Scheme.{u}) (A : Type u) [CommRing A] :
           (C := reductionModules Y (constantRing Y A))).obj P) =
             reductionScalarComplexCounit Y (coefficientMap Y (RingHom.id A)) P ≫
               (DerivedCategory.Q
-                (C := reductionModules Y (constantRing Y A))).map μ := by
-  sorry
+                (C := reductionModules Y (constantRing Y A))).map μ :=
+  reductionDerivedChange_id_existsUnique Y (coefficientMap Y (RingHom.id A))
+    (coefficientMap_id Y A)
 
 /-- The multiplication-normalized identity comparison.
 Source: blueprint identity-inclusion coherence
