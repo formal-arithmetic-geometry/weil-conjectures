@@ -193,8 +193,9 @@ Their solved forms `βLg_inv` and `βLg'_inv` are substituted by `erw`. Next: in
 goal, `βRf.hom` (under `Lg_F.map`) and `βRf'.hom` are not followed by
 `Rf_F.map SIC.hom`. So multiply by the comparisons (as in `eq_inv_comp_comp_inv`) before
 using `eRf` and `eRf'`.
-Earlier attempt, before `show`: moving `Lg.β` and `Rf'_F.map Lg'.β` across the goal with a generic two-sided
-lemma (`p.inv ≫ A ≫ B = R ≫ T ≫ q.inv → A ≫ B ≫ q.hom = p.hom ≫ R ≫ T`), applied by `refine`
+Earlier attempt, before `show`: moving `Lg.β` and `Rf'_F.map Lg'.β` across the goal with a
+generic two-sided lemma
+(`p.inv ≫ A ≫ B = R ≫ T ≫ q.inv → A ≫ B ≫ q.hom = p.hom ≫ R ≫ T`), applied by `refine`
 with `p`, `q` given explicitly. Unifying it with the goal times out at `whnf`, even after
 `dsimp only`. The goal should first be restated with `show` in the substituted form.
 Still to do:
@@ -345,7 +346,7 @@ theorem pbcExchangeStageSquare_integral
     ((pbcScalarIntegralComparison l Ω X' dX'.out iX'.out h).app
       ((pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)
         (pbcActualCompletedPull g' (pbcStageDatum.{u} l Ω E)) (presLg' E)).obj K)) _ eLg'
-  show ((pbcScalarSystem l Ω Y' dY'.out iY'.out).T h).map ((τ E).app ⟨K⟩) ≫
+  change ((pbcScalarSystem l Ω Y' dY'.out iY'.out).T h).map ((τ E).app ⟨K⟩) ≫
       (βRf' h).hom.app ((pbcDescentPullback l Ω g' presLg' E).obj ⟨K⟩) ≫
       (pbcDescentDirectImage l Ω f' presRf' F).map ((βLg' h).hom.app ⟨K⟩) =
     (βLg h).hom.app ((pbcDescentDirectImage l Ω f presRf E).obj ⟨K⟩) ≫
