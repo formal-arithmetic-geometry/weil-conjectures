@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Lisse.Tower.LisseTowerLocalizationTransport
+import WeilConjectures.AlgebraicGeometry.Lisse.Tower.LisseTowerLocalizationCoherence
 
 /-! # The coefficient component of the finite inverse-image composition comparison
 
@@ -80,6 +81,8 @@ theorem lisseTower_localization_base {X Z S T : Scheme.{u}}
               (pbcAdicQuotient X d (n + 1) n (Nat.le_succ n)))
             (constantAdicFiniteProjection s d n)
             (constantAdicFiniteProjection_comp s d (n + 1) n (Nat.le_succ n))).hom.app
-              ((adicTowerPullback s ((pbcAdicRings X d).obj (op n))).obj N) := by sorry
+              ((adicTowerPullback s ((pbcAdicRings X d).obj (op n))).obj N) := by
+  subst h
+  exact ⟨lisseTowerChainLevel t b a d, fun n N ↦ lisseTowerChainLevel_scalar t b a d n N⟩
 
 end AlgebraicGeometry.Scheme

@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerivedSystemEvaluationData
 public import WeilConjectures.SixFunctors.Coefficient.Tensor.CoefficientTensorAssociativityModelData
+import WeilConjectures.SixFunctors.Coefficient.CoefficientOrdinaryReductionTensor
+import WeilConjectures.SixFunctors.Coefficient.CoefficientOrdinaryQuotientTensorAssociativity
 
 /-! # A functorial strict complex model of normalized coefficient reduction
 
@@ -113,6 +115,25 @@ applies to the zero complex and the empty scheme. -/
 theorem coefficientStrictReductionFunctorModel
     (R : CoefficientDerivedSystemReduction l E W)
     (hR : CoefficientReductionTensorNormalization l E W R) :
-    Nonempty (CoefficientStrictReductionFunctorModel l E W R) := by sorry
+    Nonempty (CoefficientStrictReductionFunctorModel l E W R) := by
+  obtain ⟨M⟩ := OrdinaryQuotient.ordinaryModel_exists l E W
+  obtain ⟨b, hb⟩ := OrdinaryQuotient.OrdinaryModel.quotientTensor_exists l E W M
+  have hb' : M.TensorEvaluation l E W b := by
+    intro n P Q
+    have h := hb n P Q
+    unfold CoefficientComparisonEquation at h
+    exact h
+  obtain ⟨ε, -, hcomp, hhom⟩ :=
+    OrdinaryQuotient.reductionComparison_exists l E W M R.reduction R.adjunction
+  exact ⟨{
+    complexFunctor := M.quotient l E W
+    comparison := ε
+    computes := hcomp
+    preserves := OrdinaryQuotient.OrdinaryModel.quotient_isKFlat l E W M
+    tensor := b
+    associativity := M.quotientTensor_associativity l E W b hb'
+    normalization := fun P Q hP hQ fP fQ ↦
+      M.reductionTensor_normalization l E W R hR ε hcomp hhom b hb'
+        (OrdinaryQuotient.OrdinaryModel.quotient_isKFlat l E W M) P Q hP hQ fP fQ }⟩
 
 end WeilConjectures
