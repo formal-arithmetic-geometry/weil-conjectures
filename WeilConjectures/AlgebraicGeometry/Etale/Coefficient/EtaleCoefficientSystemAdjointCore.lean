@@ -707,30 +707,6 @@ private theorem mate_identity
 
 end CategoryTheory
 
-namespace AlgebraicGeometry
-attribute [local irreducible] coefficientQuotientSheaf CategoryTheory.sheafCompose
-  SheafOfModules.siteTensorUnitUnderlying
-
-end AlgebraicGeometry
-namespace AlgebraicGeometry
-attribute [local irreducible] strictIdentityLevel
-
-attribute [local irreducible] strictIdentityOrdinary
-
-attribute [local irreducible] strictIdentityDerived
-
-end AlgebraicGeometry
-namespace AlgebraicGeometry
-attribute [local irreducible] strictIdentityLevel strictIdentityOrdinary strictIdentityDerived
-
-end AlgebraicGeometry
-
-namespace AlgebraicGeometry
-end AlgebraicGeometry
-
-namespace AlgebraicGeometry
-
-end AlgebraicGeometry
 end IdentityTransportProof
 
 namespace CategoryTheory
