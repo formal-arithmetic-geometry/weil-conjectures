@@ -10,6 +10,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Skyscraper
 public import WeilConjectures.SixFunctors.Etale.DivisorComplementDirectImage
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ClosedImmersion
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
+public import WeilConjectures.SixFunctors.OpenClosed.ClosedImmersion
 
 /-!
 # Stalks of the direct images from the complement of a divisor

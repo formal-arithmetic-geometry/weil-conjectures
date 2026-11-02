@@ -5,13 +5,10 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Descent
 public import WeilConjectures.AlgebraicGeometry.Modules.FpqcSections
-public import WeilConjectures.AlgebraicGeometry.Picard.NormalizedDescent
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.Descent.IsPrestack
-public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import WeilConjectures.AlgebraicGeometry.Modules.Endomorphism
+public import WeilConjectures.AlgebraicGeometry.Picard.NormalizedDescent.Modules
 
 /-!
 # Homomorphisms and isomorphisms of modules on the small étale site

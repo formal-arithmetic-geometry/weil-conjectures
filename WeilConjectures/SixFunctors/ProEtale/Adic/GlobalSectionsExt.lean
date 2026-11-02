@@ -7,9 +7,11 @@ module
 
 public import Mathlib.Algebra.Category.Grp.ForgetCorepresentable
 public import Mathlib.CategoryTheory.Sites.GlobalSections
-public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantCohomologyBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.ForgetModuleCohomology
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GlobalSectionsComm
+public import Mathlib.NumberTheory.Padics.Complex
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheaf
 
 /-!
 # Global sections of sheaves of `ℚ̄_ℓ`-modules as morphisms out of `ℤ`

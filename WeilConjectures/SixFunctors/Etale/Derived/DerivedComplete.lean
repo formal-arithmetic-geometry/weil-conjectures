@@ -9,7 +9,8 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralCo
 public import WeilConjectures.SixFunctors.Etale.Derived.Invertible
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
-public import WeilConjectures.SixFunctors.Etale.Derived.Perfect
+public import WeilConjectures.SixFunctors.Etale.Derived.Hom
+public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.Dual
 
 /-!
 # Derived completeness and the six operations

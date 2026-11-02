@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import WeilConjectures.AlgebraicGeometry.AdicConstructibleFiniteReductions
 public import WeilConjectures.CategoryTheory.LocallyConstantFiniteTypeModules
 import WeilConjectures.AlgebraicGeometry.ConstantCoefficientScalarEquivalence
 import WeilConjectures.AlgebraicGeometry.NilpotentReductionLissity
 import all WeilConjectures.AlgebraicGeometry.NilpotentReductionStep
 import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
+public import WeilConjectures.Algebra.Homology.KFlatResolutionIndependentCoefficients
+public import WeilConjectures.AlgebraicGeometry.AdicFiniteReductionData
 
 /-! # Lissity reflected by a nilpotent surjection of constant coefficients
 

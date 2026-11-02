@@ -8,7 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineVanishing
 
 /-! # Quasi-coherent cohomology under a scheme isomorphism
 

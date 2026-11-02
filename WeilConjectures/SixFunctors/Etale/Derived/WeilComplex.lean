@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius
 public import WeilConjectures.SixFunctors.Etale.Derived.AlgClosedField
-public import WeilConjectures.SixFunctors.Etale.Derived.Stability
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion
 
 /-!
 

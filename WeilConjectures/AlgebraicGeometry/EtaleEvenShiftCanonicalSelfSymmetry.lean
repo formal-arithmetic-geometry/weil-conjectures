@@ -4,7 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import WeilConjectures.AlgebraicGeometry.EtaleCoordinateTraceData
+public import Mathlib.Algebra.Group.Action.Defs
+public import Mathlib.Algebra.Group.Even
+public import Mathlib.Algebra.Group.Units.Defs
+public import Mathlib.Algebra.Homology.Bifunctor
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.Algebra.Homology.Monoidal
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
+public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
+public import Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import Mathlib.CategoryTheory.Monoidal.Preadditive
+public import WeilConjectures.AlgebraicGeometry.EtaleDerivedTensorSymmetry
 
 /-! # Identity derived self symmetry of an even shifted flat object
 

@@ -7,14 +7,9 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.AlternatingCechTotalComplex
-public import WeilConjectures.AlgebraicGeometry.Coherent
 import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 import WeilConjectures.AlgebraicGeometry.AffineOpenSectionsResolutionQuasiIso
 import Mathlib.Algebra.Category.ModuleCat.Products
-import WeilConjectures.Algebra.Homology.KInjectiveRestrictOpen
-import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalence
-import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
-import WeilConjectures.AlgebraicGeometry.QCohAcyclicDerivedSectionsComparison
 
 /-! # Čech totalization of a quasi-coherent resolution
 

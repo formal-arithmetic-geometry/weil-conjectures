@@ -6,8 +6,10 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.FixedScheme
-public import WeilConjectures.SixFunctors.Etale.Derived.GlobalDuality
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriek
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import WeilConjectures.Compactification.Defs
+public import WeilConjectures.SixFunctors.Etale.Derived.Identity
 
 /-!
 # Cohomological correspondences

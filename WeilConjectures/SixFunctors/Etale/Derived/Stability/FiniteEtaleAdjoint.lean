@@ -5,7 +5,13 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.CategoryTheory.Abelian.Basic
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
+public import Mathlib.CategoryTheory.Monoidal.Preadditive
+public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
+public import WeilConjectures.Compactification.Defs
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 
 /-!
 # The right adjoint of the direct image along a finite étale morphism

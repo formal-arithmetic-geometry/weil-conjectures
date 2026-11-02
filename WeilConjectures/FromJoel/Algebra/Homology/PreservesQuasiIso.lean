@@ -9,7 +9,6 @@ public import Mathlib.Algebra.Homology.Localization
 public import Mathlib.Algebra.Homology.HomotopyCategory
 public import WeilConjectures.FromJoel.Algebra.Homology.DoubleHomology
 public import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
-public import WeilConjectures.FromJoel.CategoryTheory.Limits.ExactFunctor
 public import WeilConjectures.FromJoel.CategoryTheory.Localization.LocalizerMorphism
 public import Mathlib.CategoryTheory.ObjectProperty.ContainsZero
 

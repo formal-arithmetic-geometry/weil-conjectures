@@ -4,7 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import WeilConjectures.AlgebraicGeometry.ContinuousIntegralCoefficients
+public import Mathlib.Algebra.Category.Grp.Basic
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.Sites.Proetale
+public import Mathlib.Analysis.Normed.Field.Basic
+public import Mathlib.Analysis.Normed.Module.Basic
+public import Mathlib.CategoryTheory.Monoidal.Mod
+public import Mathlib.CategoryTheory.Sites.Coherent.Basic
+public import Mathlib.Topology.Category.Profinite.Basic
+public import WeilConjectures.AlgebraicGeometry.ContinuousIntegralCoefficientData
 
 /-! # Interface for coherent integral residue comparisons
 

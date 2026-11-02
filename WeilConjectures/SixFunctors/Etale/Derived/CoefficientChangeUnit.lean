@@ -5,8 +5,6 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeUnitBaseChange
-public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeUnitRefinement
 
 /-!
 # Coefficient comparisons, units of derived adjunctions and the exchange maps

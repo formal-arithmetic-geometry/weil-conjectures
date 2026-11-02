@@ -8,6 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.AdicResidueLiftComparisons
 import WeilConjectures.AlgebraicGeometry.AdicFiniteReductionModelFamily
 import all WeilConjectures.AlgebraicGeometry.AdicPerfectModelCompleteReduction
 import WeilConjectures.AlgebraicGeometry.AdicResidueSliceCompleteness
+public import WeilConjectures.CategoryTheory.LocallyConstantFiniteTypeModules
 
 /-! # Finite-level local models in the general adic lifting argument
 

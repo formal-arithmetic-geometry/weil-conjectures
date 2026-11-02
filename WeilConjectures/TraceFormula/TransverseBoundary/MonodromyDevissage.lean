@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.GaloisCoverConn
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.VerdierDual
 public import WeilConjectures.TraceFormula.TransverseBoundary.DevissageStep
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.KunnethMap
 
 /-!
 # Dévissage of complexes with finite `ℓ`-group monodromy

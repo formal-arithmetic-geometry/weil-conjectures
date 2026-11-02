@@ -6,9 +6,9 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.BaseChange
-public import WeilConjectures.WeilObject.Sheaf.Stalk
 public import WeilConjectures.TraceFormula.FrobeniusIterate
-public import WeilConjectures.TraceFormula.BaseChange.StalkTrace
+public import WeilConjectures.TraceFormula.BaseChange.Coherence
+public import WeilConjectures.TraceFormula.CategoricalTrace
 
 /-!
 # Stalks of Weil sheaves with structure through the identity

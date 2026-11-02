@@ -9,6 +9,7 @@ import WeilConjectures.AlgebraicGeometry.IntegralResidueTensorPresentation
 import all WeilConjectures.AlgebraicGeometry.NormalizedScalarRestrictionPush
 import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapDualizable
 import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.DualizableShortExact
+public import WeilConjectures.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
 
 /-! # The finite direct-image projection as a map of scalar cone triangles
 

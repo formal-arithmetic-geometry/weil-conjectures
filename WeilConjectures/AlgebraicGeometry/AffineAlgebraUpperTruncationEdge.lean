@@ -16,7 +16,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
 import WeilConjectures.AlgebraicGeometry.QCohAcyclicDerivedPushforwardCohomology
 import WeilConjectures.AlgebraicGeometry.DerivedLowerTruncationCycleFormula
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty

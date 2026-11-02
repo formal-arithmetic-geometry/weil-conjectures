@@ -6,7 +6,6 @@ Authors: Christian Merten
 module
 
 public import Mathlib.Topology.Category.TopCat.Limits.Pullbacks
-public import WeilConjectures.Mathlib.Topology.Separation.Hausdorff
 
 /-!
 # Pullbacks

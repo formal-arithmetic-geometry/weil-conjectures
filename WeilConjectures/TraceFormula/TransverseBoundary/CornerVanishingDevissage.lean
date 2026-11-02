@@ -14,6 +14,7 @@ public import WeilConjectures.TraceFormula.TransverseBoundary.CornerConnected
 public import WeilConjectures.TraceFormula.TransverseBoundary.CornerVanishingConstant
 public import WeilConjectures.TraceFormula.TransverseBoundary.MonodromyDevissage
 public import WeilConjectures.TraceFormula.TransverseBoundary.MonodromyPullback
+public import WeilConjectures.EtaleCohomology.TateTwist.KummerClass.Basic
 
 /-!
 # Vanishing at the transverse corner, assuming the constant case

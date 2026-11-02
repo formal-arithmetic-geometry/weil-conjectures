@@ -5,8 +5,12 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.DerivedCategory.FlatExtendScalars
 public import WeilConjectures.NumberTheory.Padics.IntegersModPow
+public import Mathlib.Algebra.Module.Torsion.Basic
+public import Mathlib.RingTheory.DedekindDomain.Basic
+public import Mathlib.RingTheory.Flat.TorsionFree
+public import Mathlib.RingTheory.RingHom.Flat
+public import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!
 

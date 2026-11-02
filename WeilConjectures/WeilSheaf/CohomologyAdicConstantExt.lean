@@ -12,6 +12,7 @@ public import WeilConjectures.WeilSheaf.CohomologyResolution
 public import WeilConjectures.WeilSheaf.Constant
 public import WeilConjectures.CategoryTheory.Sites.SheafSmul
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ExtFrobenius
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantCohomologyBaseChange
 
 /-!
 # Weil cohomology of the constant sheaf as pro-étale `Ext`

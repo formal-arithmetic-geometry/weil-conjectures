@@ -7,6 +7,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.IntegralResidueTensorPullPresentation
 public import WeilConjectures.AlgebraicGeometry.RestrictedCoefficientPullbackData
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.SingleFunctor
+public import WeilConjectures.AlgebraicGeometry.IntegralResidueTensorPresentation
 
 /-! # Computation normalization of the canonical coefficient tensor presentation
 

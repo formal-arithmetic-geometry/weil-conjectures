@@ -13,6 +13,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.ForgetUpperStar
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseGaloisDescent
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldLinear
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 
 /-!
 # The Galois tower of a Galois extension of fields

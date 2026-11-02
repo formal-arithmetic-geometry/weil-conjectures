@@ -10,6 +10,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMon.KFlat
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.FlatModuleCat
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ExtendScalarsFlat
 
 /-!
 # Derived extension of scalars on the pro-étale site

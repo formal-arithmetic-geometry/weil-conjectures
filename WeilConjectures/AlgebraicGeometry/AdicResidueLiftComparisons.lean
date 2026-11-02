@@ -4,11 +4,6 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import WeilConjectures.AlgebraicGeometry.AdicConstructibleFiniteReductions
-public import WeilConjectures.AlgebraicGeometry.ScalarExtensionBinaryCoherence
-public import WeilConjectures.AlgebraicGeometry.StrictPerfectPackageOnSite
-public import WeilConjectures.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
-public import WeilConjectures.CategoryTheory.LocallyConstantFiniteTypeModules
 public import WeilConjectures.CategoryTheory.SiteConstantModuleHom
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.RingTheory.Noetherian.Defs
@@ -20,6 +15,8 @@ public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.Algebra.Homology.BifunctorShift
+public import Mathlib.CategoryTheory.Functor.OfSequence
+public import WeilConjectures.AlgebraicGeometry.AdicFiniteReductionData
 
 /-! # Coefficient comparisons for local adic perfect lifting
 

@@ -8,6 +8,8 @@ module
 public import WeilConjectures.TraceFormula.Specialization.TraitBaseChangeModelAutGalois
 public import WeilConjectures.FieldTheory.TameLaurentSeries
 public import WeilConjectures.RepresentationTheory.ProPGroupPadicMatrix
+-- provides an instance needed for the compactness of `Gal(Ω/F)` below
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactConstructibleEllAdic
 
 /-!
 

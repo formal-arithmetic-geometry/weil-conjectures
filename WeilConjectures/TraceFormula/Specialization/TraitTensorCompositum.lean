@@ -6,7 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism.Algebra
-public import WeilConjectures.TraceFormula.Specialization.TraitSliceGaloisCompositum
+public import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
+public import WeilConjectures.RingTheory.ProEtale.WeakDimension
 
 /-!
 

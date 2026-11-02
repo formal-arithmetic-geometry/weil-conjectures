@@ -20,6 +20,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
 public import Mathlib.Topology.Connected.Basic
 import Mathlib.CategoryTheory.Limits.Preserves.Filtered
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import WeilConjectures.CategoryTheory.LocallyConstantFiniteTypeModules
 
 /-! # A single lisse complex on a connected component
 

@@ -6,10 +6,10 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicIntModuleOfTorsion
-public import WeilConjectures.SixFunctors.ProEtale.Comparison
 public import WeilConjectures.CategoryTheory.Abelian.AdicTowerStructure
 public import WeilConjectures.CategoryTheory.Sites.SheafComposeMonoidal
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Whiskering
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.Defs
 
 /-!
 # From étale towers of `ℓ`-torsion sheaves to pro-étale towers of `ℤ_ℓ,X`-modules

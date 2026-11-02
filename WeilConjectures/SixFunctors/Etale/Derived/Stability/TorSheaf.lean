@@ -10,14 +10,9 @@ public import Mathlib.CategoryTheory.Abelian.Projective.Extend
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.CategoryTheory.Sites.ConstantSheafMonoidal
 public import WeilConjectures.ConstructibleSheaf.FiniteEtalePushforward
-public import WeilConjectures.ConstructibleSheaf.GenericConstancy
-public import WeilConjectures.ConstructibleSheaf.Monoidal
-public import WeilConjectures.ConstructibleSheaf.Refinement
-public import WeilConjectures.FromJoel.Algebra.Homology.PreservesQuasiIso
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.FiniteProjectiveResolution
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.SixFunctors.Etale.Derived.InvertibleRestriction
-public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
+public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-!
 # Tor sheaves of constructible sheaves

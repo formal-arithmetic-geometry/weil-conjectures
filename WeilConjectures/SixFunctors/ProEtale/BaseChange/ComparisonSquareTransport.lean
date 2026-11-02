@@ -9,6 +9,7 @@ public import WeilConjectures.SixFunctors.ProEtale.BaseChange.ComparisonSquarePa
 public import WeilConjectures.AlgebraicGeometry.ComparisonPullbackCoherence
 import WeilConjectures.SixFunctors.ProEtale.BaseChange.ComparisonSquareEtalePathNormalization
 import WeilConjectures.SixFunctors.ProEtale.BaseChange.ComparisonSquareProEtalePathNormalization
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
 
 /-! # Derived transport of a coherent comparison square
 

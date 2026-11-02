@@ -11,6 +11,7 @@ import WeilConjectures.AlgebraicGeometry.CoefficientEtaleDerivedChartAtlas
 public import Mathlib.Topology.Connected.Basic
 import Mathlib.CategoryTheory.Sites.Equivalence
 import Mathlib.AlgebraicGeometry.PullbackCarrier
+public import WeilConjectures.CategoryTheory.LocallyConstantFiniteTypeModules
 
 /-! # Local models given by a specified geometric stalk on a connected component
 

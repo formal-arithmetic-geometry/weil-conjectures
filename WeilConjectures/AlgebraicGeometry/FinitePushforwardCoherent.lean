@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.AlgebraicGeometry.Coherent
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineVanishing
 
 /-! # Coherence of finite direct images
 

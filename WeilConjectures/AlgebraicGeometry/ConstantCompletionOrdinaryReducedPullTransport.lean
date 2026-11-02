@@ -5,7 +5,6 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.ConstantCompletionDerivedPull
-import WeilConjectures.AlgebraicGeometry.ConstantCompletionOrdinaryReducedPullTargetIso
 import WeilConjectures.AlgebraicGeometry.ConstantCompletionOrdinaryReducedPullTransportEquation
 
 /-! # Ordinary finite transport for constant-completion pullback

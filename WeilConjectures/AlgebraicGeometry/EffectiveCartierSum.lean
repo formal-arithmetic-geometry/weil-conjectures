@@ -5,7 +5,6 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.Blowup.BlowupUniversal
 
 
 public import WeilConjectures.AlgebraicGeometry.FiniteOverField

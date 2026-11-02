@@ -6,12 +6,12 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedAdjoint
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import WeilConjectures.AlgebraicGeometry.DerivedPullbackComposition
 import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 import WeilConjectures.AlgebraicGeometry.TensorPullbackKFlatQuasiIso
-import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
+public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 
 /-!
  # The derived base-change morphism of O-modules

@@ -6,11 +6,9 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CompExact
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.AlgebraicGeometry.Sites.LerayVanishing
-public import WeilConjectures.AlgebraicGeometry.Sites.ZariskiSite
-public import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Injective
+public import WeilConjectures.Topology.Sheaves.GrothendieckVanishing
 
 /-!
 # Comparison of the étale and the Zariski site

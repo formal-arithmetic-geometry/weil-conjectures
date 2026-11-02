@@ -6,8 +6,11 @@ Authors: Weil conjectures project
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependenceUnbounded
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Comp
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+public import WeilConjectures.Compactification.Defs
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
 /-!
 

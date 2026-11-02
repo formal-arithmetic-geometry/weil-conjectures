@@ -5,7 +5,19 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.Etale.Derived.GlobalDuality
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
+public import Mathlib.CategoryTheory.Monoidal.Preadditive
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Coefficients
+public import WeilConjectures.Compactification.Defs
+public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
+public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
+public import WeilConjectures.SixFunctors.Etale.Derived.HomShift
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjection
+public import WeilConjectures.SixFunctors.Etale.Derived.TensorHom
 
 /-!
 # The Verdier-duality exchange as a natural isomorphism

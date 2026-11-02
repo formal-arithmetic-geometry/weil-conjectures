@@ -5,9 +5,13 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.DerivedCategory.PrincipalIdealDevissage
 public import WeilConjectures.CategoryTheory.DerivedCategory.ProjectiveSingle
 public import WeilConjectures.CategoryTheory.Preadditive.FinitePowerCokernel
+public import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
+public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-!
 # Bounded complexes with projective cohomology split

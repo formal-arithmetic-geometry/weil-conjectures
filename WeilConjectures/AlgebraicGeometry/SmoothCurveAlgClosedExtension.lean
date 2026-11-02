@@ -6,7 +6,6 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.AlgClosedExtension
 
 /-! # Canonical declarations
 

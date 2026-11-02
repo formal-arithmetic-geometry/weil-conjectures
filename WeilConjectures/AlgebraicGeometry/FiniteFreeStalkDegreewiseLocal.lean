@@ -7,8 +7,6 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.StalkRestrictionComplexIso
 import WeilConjectures.AlgebraicGeometry.FiniteFreeStalkMapLocal
-import WeilConjectures.AlgebraicGeometry.DerivedPullback
-import WeilConjectures.Topology.PresheafModuleStalkFunctor
 @[expose] public section
 set_option autoImplicit false
 universe u

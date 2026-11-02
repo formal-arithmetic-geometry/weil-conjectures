@@ -8,6 +8,7 @@ module
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ClosedSupport
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ExtensionByZero
+public import WeilConjectures.SixFunctors.ClosedImmersionStages
 
 /-!
 # The direct image along a closed immersion on `Dᵇc(-, ℚ̄_ℓ)`

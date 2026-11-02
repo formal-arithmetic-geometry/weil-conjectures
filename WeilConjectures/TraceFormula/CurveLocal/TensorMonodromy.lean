@@ -14,6 +14,7 @@ public import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
 public import WeilConjectures.CategoryTheory.Sites.ConstantSheafMonoidal
 public import WeilConjectures.AlgebraicGeometry.Morphisms.GaloisCoverProd
 public import WeilConjectures.AlgebraicGeometry.Morphisms.GaloisCoverPullback
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 
 /-!
 # Finite `ℓ`-group monodromy of the tensor product of two lisse complexes

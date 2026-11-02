@@ -5,9 +5,20 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ConstructibleDirectImage
-public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
+public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.CategoryTheory.Abelian.RightDerived
+public import Mathlib.CategoryTheory.Sites.GlobalSections
+public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.LeftTExact
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
 /-!
 # The first cohomology of a bounded below complex

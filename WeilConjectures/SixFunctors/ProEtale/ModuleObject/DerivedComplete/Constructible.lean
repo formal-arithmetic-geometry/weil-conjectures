@@ -6,11 +6,9 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.CenterTowerDerived
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ConstructibleNakayama
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleInduction
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.Basic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.IntegersPowShift
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ReductionConstructible
 public import WeilConjectures.TraceFormula.OpenCover
 
 /-!

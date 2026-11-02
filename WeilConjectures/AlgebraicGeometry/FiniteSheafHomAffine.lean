@@ -10,10 +10,9 @@ public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import WeilConjectures.AlgebraicGeometry.SheafCoinductionAdjunction
 import WeilConjectures.AlgebraicGeometry.AffineInternalHomEvaluationBijective
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineVanishing
 
 /-!
 # Affine sheaf-Hom is right adjoint to restriction

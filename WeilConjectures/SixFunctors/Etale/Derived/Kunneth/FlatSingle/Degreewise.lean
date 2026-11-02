@@ -15,9 +15,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.SingleReduction
 public import WeilConjectures.ConstructibleSheaf.FilteredColimit
 public import WeilConjectures.ConstructibleSheaf.FiniteMorphism
 public import WeilConjectures.ConstructibleSheaf.Monoidal
-public import WeilConjectures.ConstructibleSheaf.FiniteDirectImageKunneth
-public import WeilConjectures.CategoryTheory.DerivedCategory.ConstructibleTorsion
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.Biproducts
+public import WeilConjectures.ConstructibleSheaf.SpecializationCriterion
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Linear
 
 /-!
 # Dévissage of the degree-wise base change maps

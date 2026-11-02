@@ -7,6 +7,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.CoefficientAffineConstructibleProEtaleModules
 import WeilConjectures.AlgebraicGeometry.ProEtale.ClosedSiteAdjunction
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Detection
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Pullback
 
 /-! The canonical coefficient-sized closed localization unit.
 

@@ -6,7 +6,15 @@ Authors: Claude
 module
 
 public import WeilConjectures.FromJoel.Algebra.Homology.LeftResolution.CochainComplexMinus
-public import WeilConjectures.SixFunctors.Etale.Derived.TensorResolution
+public import Mathlib.Algebra.Homology.LeftResolution.Reduced
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
+public import Mathlib.CategoryTheory.Monoidal.Preadditive
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfShape
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
+public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
+public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 
 /-!
 # Functorial bounded above flat replacements of complexes of étale sheaves

@@ -7,8 +7,6 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionUpperShriek
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition
 public import WeilConjectures.TateTwist.ProEtale
 public import WeilConjectures.TateTwist.LocallyFree
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyFreeConstructible

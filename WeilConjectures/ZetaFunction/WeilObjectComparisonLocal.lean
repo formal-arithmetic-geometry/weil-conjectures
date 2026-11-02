@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.ZetaFunction.WeilObjectComparisonDevissage
+public import WeilConjectures.TraceFormula.Statement
 
 /-!
 # The local comparison of Weil complexes with Weil objects

@@ -12,6 +12,7 @@ import WeilConjectures.AlgebraicGeometry.DiscreteFieldTorAmplitude
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeMapDerivedCategory
 import WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal
+public import WeilConjectures.CategoryTheory.ModuleObjects.FinitelyPresentedComap
 
 /-! # Actual residue reduction under constant scalar restriction
 

@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.TraceFormula.GraphPieces
 public import WeilConjectures.TraceFormula.LocalTerm
+public import WeilConjectures.TraceFormula.TraceClass
+public import WeilConjectures.TraceFormula.TraceClassAdditivity
 
 /-!
 

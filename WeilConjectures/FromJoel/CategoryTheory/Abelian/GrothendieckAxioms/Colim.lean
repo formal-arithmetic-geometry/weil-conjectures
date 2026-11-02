@@ -8,7 +8,6 @@ module
 public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Colim
 public import WeilConjectures.FromJoel.Algebra.Homology.PreservesQuasiIso
 public import WeilConjectures.FromJoel.Algebra.Homology.HomologicalComplexFunctorEquiv
-public import WeilConjectures.FromJoel.Algebra.Homology.HomologicalComplexLimits
 
 /-!
 # Exact colimits and quasi-isomorphisms

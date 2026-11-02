@@ -14,6 +14,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Eta
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Localizing
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.LowerStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.UpperStarDerived
+public import WeilConjectures.Algebra.Homology.HomotopyCategory.Products
 
 /-!
 # Detection of pro-étale complexes supported at closed points

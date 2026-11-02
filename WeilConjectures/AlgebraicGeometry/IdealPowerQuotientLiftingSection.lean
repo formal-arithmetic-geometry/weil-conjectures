@@ -6,7 +6,6 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import WeilConjectures.AlgebraicGeometry.IdealPowerQuotientAffineLiftingSection
@@ -14,9 +13,7 @@ import WeilConjectures.AlgebraicGeometry.IdealPowerLocalMapsEventuallyAgree
 import WeilConjectures.AlgebraicGeometry.FormalPolynomialPowerLifts
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentCokernel
 import WeilConjectures.Topology.GlueSheavesOfModules
-import WeilConjectures.AlgebraicGeometry.IdealPowerEvaluationEventuallyZero
-import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
-import WeilConjectures.AlgebraicGeometry.QcqsSchemeCofinalFiniteCoverings
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-! # Lifting sections into ideal-power annihilator quotients
 

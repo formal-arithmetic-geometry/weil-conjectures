@@ -10,6 +10,7 @@ import WeilConjectures.AlgebraicGeometry.AdicCompleteResidueConservative
 import WeilConjectures.AlgebraicGeometry.AdicPerfectReductionHomML
 import WeilConjectures.AlgebraicGeometry.AdicResidueFiniteLocalModels
 import Mathlib.CategoryTheory.Limits.Types.Images
+public import WeilConjectures.CategoryTheory.LocallyConstantFiniteTypeModules
 
 /-!
 # Local perfect lifting from lisse residue complexes

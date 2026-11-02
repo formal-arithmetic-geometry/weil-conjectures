@@ -8,10 +8,10 @@ module
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-public import WeilConjectures.SixFunctors.ClosedImmersionStages
-public import WeilConjectures.SixFunctors.ProEtale.Adic.OpenImmersion
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.CategoryTheory.Monoidal.Mod
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ClosedImmersion
 
 /-!
 # Sheaves supported on a closed subscheme, with `ℓ`-adic coefficients

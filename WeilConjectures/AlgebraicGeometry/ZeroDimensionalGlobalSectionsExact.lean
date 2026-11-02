@@ -15,9 +15,6 @@ import Mathlib.AlgebraicGeometry.AlgClosed.Basic
 import Mathlib.AlgebraicGeometry.Artinian
 import WeilConjectures.Mathlib.CategoryTheory.Limits.FunctorCategory.Shapes.Products
 import WeilConjectures.AlgebraicGeometry.ZeroDimensionalEtaleCohomologyIso
-import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
-import WeilConjectures.AlgebraicGeometry.StrictlyHenselianSectionsStalk
-import WeilConjectures.AlgebraicGeometry.UniversalHomeomorphismInvariance
 
 @[expose] public section
 

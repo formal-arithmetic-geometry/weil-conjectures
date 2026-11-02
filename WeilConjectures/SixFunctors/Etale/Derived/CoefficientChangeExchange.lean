@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeOpenImmersion
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeUnit
+public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeUnitBaseChange
+public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeUnitRefinement
 
 /-!
 # Coefficient comparisons and the compact-support exchange map

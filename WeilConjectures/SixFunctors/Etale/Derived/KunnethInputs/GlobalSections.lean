@@ -6,11 +6,9 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusComp
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
-public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ConstructibleDirectImage
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.SixFunctors.Finite.Exact
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.LeftTExact
 
 /-!
 # Unbounded derived global sections and the Leray isomorphisms

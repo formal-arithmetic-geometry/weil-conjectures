@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.ProEtaleSmallModelComparison
 import WeilConjectures.AlgebraicGeometry.CoefficientComparisonPresentationSheafification
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 
 /-! # Reflection of one constant comparison chart
 

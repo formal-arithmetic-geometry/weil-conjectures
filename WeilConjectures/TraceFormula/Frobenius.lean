@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.FrobeniusFixedPointsCount
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Frobenius
 public import WeilConjectures.TraceFormula.Basic
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Coherent.Etale
 
 /-!
 

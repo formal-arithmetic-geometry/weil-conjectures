@@ -10,6 +10,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheore
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.SmoothPadicAlgCl
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.Constructible
 public import WeilConjectures.TraceFormula.Specialization.NormalizePrecoherent
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ReductionConstructible
 
 /-!
 # Smooth base change with integral coefficients for quasi-compact quasi-separated pushforward

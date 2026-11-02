@@ -6,10 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.FrobeniusFixedPointsEquiv
-public import WeilConjectures.TraceFormula.Statement
 public import WeilConjectures.TraceFormula.WeilTraceSplitTriangle
-public import WeilConjectures.WeilSheaf.AlgClosedCoefficientCohomology
-public import WeilConjectures.WeilSheaf.Stalk
 public import WeilConjectures.WeilSheaf.ShiftedSheaf
 public import WeilConjectures.WeilSheaf.TraceFunctionOps
 public import WeilConjectures.WeilSheaf.TraceTriangleAdditivity

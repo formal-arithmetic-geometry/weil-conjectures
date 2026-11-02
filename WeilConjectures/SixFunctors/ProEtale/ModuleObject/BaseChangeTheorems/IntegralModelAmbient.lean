@@ -5,7 +5,16 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChangeRestricted
+public import Mathlib.Algebra.Category.Grp.Basic
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Sites.Proetale
+public import Mathlib.CategoryTheory.Monoidal.Mod
+public import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicIntegralModel
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.Basic
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.Constructible
+public import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 # Integral models in the ambient derived category

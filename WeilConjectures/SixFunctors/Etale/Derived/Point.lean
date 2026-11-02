@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-public import WeilConjectures.AlgebraicGeometry.Sites.PointCohomology
 public import WeilConjectures.AlgebraicGeometry.Sites.PointConstantSheaf
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.CategoryTheory.DerivedCategory.HomSingleProjective
@@ -16,8 +15,10 @@ public import WeilConjectures.CategoryTheory.Sites.ConstantSheafMonoidal
 public import WeilConjectures.CategoryTheory.Sites.Point.Flat
 public import WeilConjectures.ConstructibleSheaf.Monoidal
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
-public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
-public import WeilConjectures.SixFunctors.Etale.Derived.Perfect
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Field
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.Dual
+public import WeilConjectures.SixFunctors.Etale.Derived.SepClosedCohomology
 
 /-!
 # The point category

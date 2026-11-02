@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.Adic.GeometricFrobenius
 public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.GeometricFrobenius
 public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.ScalarExtension
+public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-!
 # Extension of scalars to `ℚ̄_ℓ` is exact and preserves constructibility

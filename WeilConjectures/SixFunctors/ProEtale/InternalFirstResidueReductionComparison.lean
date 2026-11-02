@@ -11,6 +11,8 @@ import all WeilConjectures.AlgebraicGeometry.ConstantCompletionCore
 import all WeilConjectures.AlgebraicGeometry.IntegralCoefficientSquareNormalization
 import all WeilConjectures.CategoryTheory.InternalSectionTensorComparison
 import WeilConjectures.SixFunctors.ProEtale.InternalFirstResidueOrdinaryComparison
+public import WeilConjectures.AlgebraicGeometry.ContinuousCoefficientModuleEncoding
+public import WeilConjectures.CategoryTheory.ModuleObjects.FinitelyPresentedComap
 
 /-! # The common first quotient in the internal coefficient presentation
 

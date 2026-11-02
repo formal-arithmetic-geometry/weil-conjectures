@@ -6,13 +6,15 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
 import WeilConjectures.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
 import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import WeilConjectures.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
 import WeilConjectures.AlgebraicGeometry.Modules.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
+public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 
 /-! # Image of an ideal power after closed pushforward
 

@@ -5,16 +5,13 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.ModuleObjects.FinitelyPresentedComap
-public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.IsoClosed
-public import WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Stability
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FinitelyPresentedStalk
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.ConstantRegular
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.Derived
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.LowerStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.UpperStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Constructible
+public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 
 /-!
 # The condensed reading of constructible étale sheaves and complexes

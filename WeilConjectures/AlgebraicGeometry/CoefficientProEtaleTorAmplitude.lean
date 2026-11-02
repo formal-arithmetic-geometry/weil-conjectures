@@ -25,6 +25,7 @@ public import WeilConjectures.CategoryTheory.FlatScalarKoszulTowerComparison
 public import WeilConjectures.CategoryTheory.NatTransFromResolvingClass
 public import WeilConjectures.CategoryTheory.RingedToposKFlatPullback
 public import WeilConjectures.SecSmoothPurity.CochainTensorCoherenceData
+public import WeilConjectures.CategoryTheory.Sites.RGammaDerivedLimit
 
 /-! # Tor amplitude with independent coefficient size
 

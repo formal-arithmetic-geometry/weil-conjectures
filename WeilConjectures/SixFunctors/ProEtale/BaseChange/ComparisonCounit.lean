@@ -5,8 +5,19 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.BaseChange.ComparisonSquarePaths
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBaseChange
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
+public import WeilConjectures.SixFunctors.ProEtale.Comparison
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.Defs
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStar
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar
 
 /-! # Compatibility of canonical derived site comparisons
 

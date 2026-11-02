@@ -5,7 +5,17 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.Etale.Derived.Stalks.Basic
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Field
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
+public import WeilConjectures.SixFunctors.OpenClosed.Conservative
 
 /-!
 # Vanishing of geometric stalks under change of the geometric point

@@ -4,11 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import WeilConjectures.AlgebraicGeometry.ContinuousIntegralLocalization
-public import WeilConjectures.AlgebraicGeometry.ContinuousIntegralScalarExact
-public import WeilConjectures.AlgebraicGeometry.ProEtaleFiniteReductionPullback
-public import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization
-import WeilConjectures.CategoryTheory.SiteCoveringAxioms
+public import Mathlib.Algebra.Algebra.Defs
+public import Mathlib.Algebra.Field.Defs
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.CategoryTheory.Monoidal.Mon
+public import Mathlib.NumberTheory.Padics.PadicNumbers
+public import Mathlib.Topology.Category.Profinite.Basic
+public import WeilConjectures.AlgebraicGeometry.CompletedIntegralCoefficients
+public import WeilConjectures.AlgebraicGeometry.ProEtaleIntegralCoefficientData
 
 /-!
 # Inverse image of the three coefficient comparisons

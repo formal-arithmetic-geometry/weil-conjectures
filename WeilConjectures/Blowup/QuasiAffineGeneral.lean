@@ -5,9 +5,10 @@ Authors: Christian Merten
 -/
 module
 
-public import WeilConjectures.Blowup.EliminationOfIndeterminacy
 public import WeilConjectures.Blowup.QuasiAffineGeneralReduction
 public import WeilConjectures.Mathlib.Topology.Constructions
+public import WeilConjectures.Blowup.EliminationOfIndeterminacy.Lift
+public import WeilConjectures.Blowup.EliminationOfIndeterminacy.QuasiAffineHom
 
 /-!
 

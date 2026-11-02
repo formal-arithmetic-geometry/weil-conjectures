@@ -5,7 +5,21 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.QuotPowHigherDirectImage
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.Algebra.GroupWithZero.NonZeroDivisors
+public import Mathlib.Algebra.Homology.ShortComplex.Basic
+public import Mathlib.Algebra.Homology.ShortComplex.Exact
+public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.CategoryTheory.Abelian.ShortExact
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RestrictScalars
+public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Defs
+public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.QuotPowTriangle
+public import WeilConjectures.ConstructibleSheaf.Defs
+public import WeilConjectures.ConstructibleSheaf.KernelCokernel
+public import WeilConjectures.ConstructibleSheaf.RestrictScalars
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 
 /-!
 # Extensions of finite locally constant sheaves killed by an ideal of finite index

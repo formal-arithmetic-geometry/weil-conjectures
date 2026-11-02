@@ -7,9 +7,14 @@ module
 
 public import Mathlib.Algebra.BigOperators.Intervals
 public import Mathlib.CategoryTheory.CofilteredSystem
-public import WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimit
-public import WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimitHomology
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Exact
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.Algebra.Category.ModuleCat.EpiMono
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
+public import WeilConjectures.Algebra.Homology.DerivedCategory.Ext.TowerLimit
+public import WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimitMilnor
 
 /-!
 # Mittag-Leffler towers have vanishing `lim¹`

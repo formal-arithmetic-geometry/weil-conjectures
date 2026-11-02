@@ -6,6 +6,12 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.CoefficientAffineCechSystem
 import WeilConjectures.AlgebraicGeometry.CechNervePresentationConstruction
+public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import WeilConjectures.AlgebraicGeometry.Morphisms.ProAffineEtale
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
+public import WeilConjectures.CategoryTheory.Sites.CechComplexRelativeLimit
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStar
 
 /-! # Geometric presentations of coefficient-site finite Čech nerves
 

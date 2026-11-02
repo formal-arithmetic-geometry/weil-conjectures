@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushIntegralQuotient
+public import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!
 # The derived (Push) comparison along `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`

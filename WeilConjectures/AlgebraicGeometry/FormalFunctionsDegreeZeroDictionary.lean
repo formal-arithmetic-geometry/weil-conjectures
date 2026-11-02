@@ -7,11 +7,6 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.FormalFibreCohomology
-import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
-import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMapBasicProperties
-import WeilConjectures.AlgebraicGeometry.HigherDirectImagePresheaf
-import WeilConjectures.AlgebraicGeometry.FormalFunctionsDegreeZeroStalkIso
-import WeilConjectures.AlgebraicGeometry.FormalFunctionsDegreeZeroSystemIso
 import WeilConjectures.AlgebraicGeometry.FormalFunctionsDegreeZeroCompatibility
 
 /-! # Degree-zero identifications for the formal fibre system

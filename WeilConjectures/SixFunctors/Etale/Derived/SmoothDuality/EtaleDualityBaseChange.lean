@@ -6,7 +6,16 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionTensorMapIsoUnit
-public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.BaseChange
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.Algebra.Category.ModuleCat.Colimits
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import WeilConjectures.Compactification.Defs
+public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionExchange
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMaps
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMapsCoherence
 
 /-!
 # Base change reflects the invertibility of tensor maps

@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.PointComplement
-public import WeilConjectures.TraceFormula.TraceClassAdditivity
+public import WeilConjectures.PoincareDuality.Verdier
 
 /-!
 

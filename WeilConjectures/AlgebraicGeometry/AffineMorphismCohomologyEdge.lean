@@ -7,11 +7,11 @@ Authors: Bin Wu
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
-public import WeilConjectures.AlgebraicGeometry.Coherent
-public import WeilConjectures.AlgebraicGeometry.PQFCohomology
 public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMapBasicProperties
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineVanishing
 
 /-! # Cohomology along an affine morphism
 

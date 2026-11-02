@@ -5,7 +5,6 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.IntegralResidueOrdinaryTensorSquare
-public import WeilConjectures.AlgebraicGeometry.IntegralResidueTensorModel
 
 /-! # Ordinary pullback data and the derived residue tensor square
 

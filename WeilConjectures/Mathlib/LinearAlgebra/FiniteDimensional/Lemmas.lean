@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
-public import WeilConjectures.Mathlib.Algebra.Module.Submodule.Defs
 
 /-!
 # Finitely many coordinates detect a finite-dimensional space of functions

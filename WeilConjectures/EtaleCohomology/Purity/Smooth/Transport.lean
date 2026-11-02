@@ -5,8 +5,15 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalCoefficient
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.Basic
+public import Mathlib.Algebra.Algebra.Defs
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Sites.Etale
+public import Mathlib.NumberTheory.Padics.Complex
+public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralCoefficient
+public import WeilConjectures.Compactification.Defs
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
 /-!
 # Smooth purity over `𝒪_E`, `E` and `ℚ̄_ℓ`

@@ -5,7 +5,6 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.WeilTrace
 public import WeilConjectures.WeilObject.Sheaf.StalkFiniteFree
 
 /-!

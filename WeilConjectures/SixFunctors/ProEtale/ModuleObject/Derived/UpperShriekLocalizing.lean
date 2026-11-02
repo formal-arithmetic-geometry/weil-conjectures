@@ -8,16 +8,11 @@ module
 public import WeilConjectures.CategoryTheory.DerivedCategory.BoundedEssentiallySmall
 public import WeilConjectures.CategoryTheory.DerivedCategory.Coproducts
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
-public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.CategoryTheory.Triangulated.BrownRepresentability.RightAdjoint
 public import WeilConjectures.CategoryTheory.Triangulated.CompactObjExtension
 public import WeilConjectures.CategoryTheory.Triangulated.LocalizingClosureGeneration
-public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.IsoClosed
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ConstructibleEmbedding
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactConstructibleEllAdic
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Constructible
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleStratum
 
 /-!
 # The exceptional inverse image on `Loc(Dᵇc)`, `ℓ`-adic coefficients

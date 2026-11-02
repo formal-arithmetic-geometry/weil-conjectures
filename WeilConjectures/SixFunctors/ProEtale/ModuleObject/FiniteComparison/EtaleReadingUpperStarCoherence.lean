@@ -10,6 +10,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Com
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.PullbackSquareComparison
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.DerivedBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReadingUpperStar
+public import WeilConjectures.CategoryTheory.PullbackFamily
 
 /-!
 # The pullback comparisons of the étale reading: composition and pullback squares

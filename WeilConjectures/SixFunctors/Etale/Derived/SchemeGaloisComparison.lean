@@ -8,7 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.GeometricFiberFrobenius
 public import WeilConjectures.SixFunctors.Etale.Derived.AbsoluteFrobenius
 public import WeilConjectures.SixFunctors.Etale.Derived.PullbackComparison
-public import WeilConjectures.SixFunctors.Etale.Derived.WeilComplex
 
 /-!
 # Comparison of the scheme and the Galois Frobenius pullbacks

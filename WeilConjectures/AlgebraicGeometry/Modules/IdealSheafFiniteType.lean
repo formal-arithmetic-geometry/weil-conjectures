@@ -5,13 +5,13 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Curve.DivisorIdealSheaf
 
 
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import WeilConjectures.Compactification.FiniteTypeDirected
 public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 
 /-!
 # Ideal sheaves of finite type as sheaves of modules

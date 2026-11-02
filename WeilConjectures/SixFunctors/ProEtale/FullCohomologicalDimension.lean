@@ -11,6 +11,7 @@ public import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.ExceptionalAdjoint
+public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 
 /-!
 # The cohomological-dimension bound on the étale-origin class

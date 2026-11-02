@@ -9,6 +9,7 @@ import all WeilConjectures.AlgebraicGeometry.ConstantCoefficientLocalModelsCompa
 import all WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
 import all WeilConjectures.AlgebraicGeometry.ProEtaleFinitelyPresentedLocalModelsComparison
 import WeilConjectures.ConstructibleSheaf.Pullback
+public import WeilConjectures.CategoryTheory.LocallyConstantFiniteTypeModules
 
 /-! # Finite lisse sheaves in the explicit etale coefficient model
 

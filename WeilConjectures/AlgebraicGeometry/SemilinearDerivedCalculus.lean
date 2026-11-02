@@ -7,6 +7,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.SemilinearSystemModels
 public import WeilConjectures.CategoryTheory.LocalizedModuleExactForSystems
 public import WeilConjectures.CategoryTheory.SiteCoveringAxioms
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.PushforwardZeroMonoidal
 
 /-! # Ordinary derived semilinear sections
 

@@ -7,8 +7,10 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.KFlatAcyclic
 public import WeilConjectures.CategoryTheory.Sites.ReductionFlat
-public import WeilConjectures.FromJoel.Algebra.Homology.ShortComplex.HomologicalComplex
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FiniteCoefficients.Defs
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
+public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
+public import WeilConjectures.SixFunctors.Etale.Derived.RestrictScalarsLowerStar
 
 /-!
 # Residue scalar extension

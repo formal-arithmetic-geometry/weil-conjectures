@@ -6,19 +6,9 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
-public import WeilConjectures.AlgebraicGeometry.StrictHenselization
 
 
 public import WeilConjectures.SixFunctors.Finite.Stalk
-import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
-import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
-import WeilConjectures.AlgebraicGeometry.SetsPushforwardStalkStrictHenselization
-import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
-import WeilConjectures.AlgebraicGeometry.StrictlyHenselianOpenSectionsStalk
-import WeilConjectures.AlgebraicGeometry.StrictHenselizationFunctoriality
-import WeilConjectures.RingTheory.FiniteOverHenselianLocalProduct
-import WeilConjectures.Mathlib.RingTheory.Henselian
 import WeilConjectures.AlgebraicGeometry.FinitePushforwardSetStalkAux
 import WeilConjectures.AlgebraicGeometry.FinitePushforwardSetStalkFiberFinite
 

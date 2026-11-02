@@ -5,10 +5,10 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Derived
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Comparison
 public import WeilConjectures.AlgebraicGeometry.ComparisonPullbackCoherence
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 
 /-! # The two ordinary comparison paths and their common derived endpoints
 -/

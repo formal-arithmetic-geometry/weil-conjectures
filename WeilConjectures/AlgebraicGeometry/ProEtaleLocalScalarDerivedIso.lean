@@ -12,6 +12,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtaleAlgebraicInverseImage
 import WeilConjectures.AlgebraicGeometry.ProEtaleLocalScalarOrdinaryComparison
 import all WeilConjectures.AlgebraicGeometry.ProEtaleOperations
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import WeilConjectures.CategoryTheory.Sites.RGammaDerivedLimit
 
 /-! # Local invariance of derived extension to constant coefficients
 

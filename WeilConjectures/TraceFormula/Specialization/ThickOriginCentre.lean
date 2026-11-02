@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 public import WeilConjectures.AlgebraicGeometry.PolynomialAffineHyperplane
 public import WeilConjectures.TraceFormula.Specialization.Defect
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Coherent.Etale
 
 /-!
 

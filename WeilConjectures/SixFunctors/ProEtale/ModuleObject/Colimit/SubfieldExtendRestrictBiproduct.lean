@@ -9,6 +9,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryBiproductPow
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsComapBiproduct
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldFiniteFree
+public import WeilConjectures.CategoryTheory.ModuleObjects.FinitelyPresentedComap
 
 /-!
 # Derived extension followed by restriction of scalars along `E_X ⟶ F_X`

@@ -11,14 +11,9 @@ public import Mathlib.Data.ZMod.Basic
 public import Mathlib.Algebra.Ring.ULift
 import WeilConjectures.AlgebraicGeometry.KilledSheafModuleLift
 import WeilConjectures.AlgebraicGeometry.ConstructibleModuleSheafColimit
-import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparisonExtension
 import WeilConjectures.AlgebraicGeometry.Curve.ModuleSheafUnderlyingColimit
 import WeilConjectures.AlgebraicGeometry.Curve.EtaleSheafHLargeFilteredColimit
-import WeilConjectures.AlgebraicGeometry.EtaleCohomologyFilteredColimit
-import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageColimits
-import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+public import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 
 /-! # Constructible approximation for one prime and one pullback -/
 

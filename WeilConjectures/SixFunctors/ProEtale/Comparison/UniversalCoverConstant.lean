@@ -9,8 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.EtaleModuleSetPullbackComparison
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.LocallyConstantEquivalence
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.UniversalCover
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.LocallyConstantSections
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
-public import WeilConjectures.SixFunctors.ProEtale.Comparison.LocallyConstantWContractible
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.ConstantSheaf
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.SectionsFunctor
 
 /-!
 # Finite locally constant sheaves are constant on the universal cover

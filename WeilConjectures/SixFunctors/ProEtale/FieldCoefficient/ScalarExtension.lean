@@ -10,6 +10,9 @@ public import WeilConjectures.CategoryTheory.Sites.SheafComposeMonoidalPresheaf
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionMonoidal
+public import WeilConjectures.RingTheory.ProEtale.WeakDimension
+-- provides the instance priorities that keep `GrothendieckTopology.W` instance search fast
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 
 /-!
 # Extension of scalars from a finite extension `E` of `ℚ_ℓ` to `ℚ̄_ℓ`

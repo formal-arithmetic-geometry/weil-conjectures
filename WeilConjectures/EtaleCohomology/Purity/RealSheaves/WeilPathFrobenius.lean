@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilPath
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FrobeniusTransport
 
 /-!
 # The Frobenius lift of base point data

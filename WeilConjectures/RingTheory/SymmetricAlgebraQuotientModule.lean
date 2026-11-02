@@ -8,7 +8,6 @@ module
 
 public import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
-import WeilConjectures.LinearAlgebra.SymmetricAlgebra.DegreeExact
 import WeilConjectures.RingTheory.SymmetricAlgebraQuotientModuleKernel
 
 /-!

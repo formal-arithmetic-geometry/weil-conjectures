@@ -8,6 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.ClassicalContinuityMap
 public import WeilConjectures.AlgebraicGeometry.ProEtaleSmallModelComparison
 import WeilConjectures.AlgebraicGeometry.CoefficientComparisonPresentationSheafification
 import WeilConjectures.AlgebraicGeometry.CoefficientComparisonRepresentableContinuity
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.Continuity
 
 /-! # Affine continuity of coefficient-sized etale inverse images
 

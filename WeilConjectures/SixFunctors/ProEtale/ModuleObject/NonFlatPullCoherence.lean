@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedPullIsoCoherenceProof
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.NonFlatPullCube
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MonoidalStructure
 
 /-!
 # Coherence of the derived (Pull) isomorphism for an arbitrary coefficient change

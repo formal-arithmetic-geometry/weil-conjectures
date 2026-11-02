@@ -10,6 +10,8 @@ public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarProjComparison
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionFlat
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionMonoidal
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekProjection
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ProjectionFormula
 
 /-!
 # Extension of scalars and the projection map of `Rg_*` on the pro-étale site

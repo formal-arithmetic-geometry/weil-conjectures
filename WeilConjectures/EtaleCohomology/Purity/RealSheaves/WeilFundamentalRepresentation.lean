@@ -14,6 +14,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.ForgetCoherence
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromy
 public import WeilConjectures.WeilSheaf.Dual
 public import WeilConjectures.WeilSheaf.StalkFrobenius
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 
 /-!
 # The Weil fundamental representation of a lisse Weil sheaf

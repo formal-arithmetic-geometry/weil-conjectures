@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.HomologyTensorColimit
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ForgetAbRightDerivedLowerStar
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleOriginUpperStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.Monoidal
 
 /-!

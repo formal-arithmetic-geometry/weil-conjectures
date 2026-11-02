@@ -9,6 +9,9 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction
 public import WeilConjectures.CategoryTheory.Monoidal.Conjugate
 public import WeilConjectures.CategoryTheory.Sites.SheafComposePushforwardMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtension
+public import Mathlib.CategoryTheory.Sites.Point.IsMonoidalW
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal
 
 /-!
 # Extension of scalars of pro-étale sheaves is monoidal

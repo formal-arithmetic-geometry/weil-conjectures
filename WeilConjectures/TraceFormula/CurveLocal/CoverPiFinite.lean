@@ -6,6 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.CurveLocal.CoverPuncturedFactors
+public import WeilConjectures.AlgebraicGeometry.Sites.StrictLocalizationFiniteBaseChange
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.CospecializationSections
 
 /-!
 

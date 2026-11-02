@@ -10,6 +10,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.DualizableDetection
 public import WeilConjectures.CategoryTheory.Monoidal.Dualizable
 public import WeilConjectures.CategoryTheory.Triangulated.IdempotentCompleteOfCoproducts
 public import WeilConjectures.TraceFormula.ConstructibleGeneration
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactConstructible
 
 /-!
 # Bounded constructible complexes on a field are dualizable

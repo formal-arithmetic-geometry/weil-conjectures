@@ -10,6 +10,7 @@ import WeilConjectures.AlgebraicGeometry.CoefficientConnectedContractibleCover
 import WeilConjectures.AlgebraicGeometry.CoefficientConnectedStalkConstant
 import WeilConjectures.AlgebraicGeometry.CoefficientEtaleStalkScalarExtension
 import all WeilConjectures.AlgebraicGeometry.NilpotentCoefficientLissity
+public import WeilConjectures.CategoryTheory.LocallyConstantFiniteTypeModules
 
 /-! # Algebraic levels of a normalized etale quotient system
 

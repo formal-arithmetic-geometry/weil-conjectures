@@ -9,21 +9,15 @@ public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleExtendScalar
 public import WeilConjectures.CategoryTheory.FilteredTwoColimit
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.DerivedExtendScalars
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.PadicAlgClFaithful
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimitEssSurj
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimitHomSurj
 
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
-import WeilConjectures.AlgebraicGeometry.SplitCoefficientDerivedFaithful
-import WeilConjectures.AlgebraicGeometry.CondensedDerivedTensorComparison
 import all WeilConjectures.AlgebraicGeometry.CondensedFiniteModelProofAPI
-import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
 import WeilConjectures.CategoryTheory.HomColimitExtension
 import WeilConjectures.CategoryTheory.DirectedTriangulatedImage
 import WeilConjectures.AlgebraicGeometry.BoundedConstructibleDevissage
 import WeilConjectures.AlgebraicGeometry.CondensedFinitePresentationDescent
 import WeilConjectures.AlgebraicGeometry.CondensedSheafExtContinuity
 import WeilConjectures.AlgebraicGeometry.CondensedCoefficientComplexPresentation
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimitEssSurjGenerators
 /-!
 
 # The bounded constructible `ℚ̄_ℓ`-complexes as the 2-colimit over the finite subextensions

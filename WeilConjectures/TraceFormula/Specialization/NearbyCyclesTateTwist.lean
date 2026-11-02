@@ -10,6 +10,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocallyF
 public import WeilConjectures.TateTwist.LocallyFree
 public import WeilConjectures.TraceFormula.Specialization.NearbyDuality
 public import WeilConjectures.TraceFormula.Specialization.TraitNearbyMonoidal
+public import WeilConjectures.SmoothPurity.TateTwistBoundedConstructible
 
 /-!
 

@@ -9,6 +9,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RestrictCoextendS
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMap
 public import WeilConjectures.CategoryTheory.Adjunction.UnitProjection
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionMonoidal
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 
 /-!
 # Extension of scalars of pro-étale sheaves as a tensor product

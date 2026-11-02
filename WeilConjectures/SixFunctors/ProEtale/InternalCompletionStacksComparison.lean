@@ -8,6 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.IntegralConstantModelRealization
 public import WeilConjectures.AlgebraicGeometry.IntegralModelsStacksData
 import WeilConjectures.SixFunctors.ProEtale.InternalConstantResidueGenerator
 import WeilConjectures.SixFunctors.ProEtale.InternalQuotientKoszulUnitComparison
+public import WeilConjectures.CategoryTheory.ModuleObjects.FinitelyPresentedComap
 
 /-! # Actual Roos completeness and constant-coefficient completeness
 

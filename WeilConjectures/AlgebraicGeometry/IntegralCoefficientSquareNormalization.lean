@@ -4,16 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import WeilConjectures.AlgebraicGeometry.AdmissibleScalarRealizationExact
-public import WeilConjectures.AlgebraicGeometry.CartesianCoefficientTwists
 public import WeilConjectures.AlgebraicGeometry.CompletedConstantAlgebraFlatQuotients
 public import WeilConjectures.AlgebraicGeometry.KFlatRingedToposPullback
-public import WeilConjectures.NumberTheory.Padics.IntegersAlgebra
-public import WeilConjectures.NumberTheory.Padics.IntegersFinite
 import all WeilConjectures.AlgebraicGeometry.CompletedConstantAlgebraFlatQuotients
 import all WeilConjectures.AlgebraicGeometry.KFlatRingedToposPullback
-import WeilConjectures.AlgebraicGeometry.ContinuousCoefficientModuleEncoding
-import WeilConjectures.AlgebraicGeometry.SectionModuleAlgebraicInverseImage
 import WeilConjectures.CategoryTheory.InternalSectionModuleFlat
 import all WeilConjectures.CategoryTheory.InternalSectionTensorComparison
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
@@ -21,9 +15,10 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 public import Mathlib.Algebra.Homology.HomologicalComplex
 public import Mathlib.Algebra.Homology.BifunctorShift
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
-import WeilConjectures.CategoryTheory.ModuleObjects.ChangeOfScalarsSquare
+public import Mathlib.CategoryTheory.Sites.Coherent.Basic
+public import Mathlib.Topology.Category.Profinite.Basic
+public import WeilConjectures.AlgebraicGeometry.FiniteConstantModelResolution
+public import WeilConjectures.AlgebraicGeometry.SfIntegralReductionTower
 
 set_option linter.privateModule false
 

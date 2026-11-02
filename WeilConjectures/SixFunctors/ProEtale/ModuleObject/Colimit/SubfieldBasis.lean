@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicIntSheafLinear
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralFlat
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMapMulLeft
 
 /-!
 

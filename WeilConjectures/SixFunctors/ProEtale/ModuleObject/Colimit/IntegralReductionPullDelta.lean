@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalarsTriangleShortExact
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralReductionPullUnit
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShortcutInstances
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Localizing
 
 /-!
 

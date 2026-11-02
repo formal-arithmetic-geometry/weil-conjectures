@@ -6,6 +6,9 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.QuotPowExtension
+public import WeilConjectures.ConstructibleSheaf.OpenClosed
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.LocallyConstantTower
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.QuotPowHigherDirectImage
 
 /-!
 # Uniform finite local constancy of the tower `Hᵏ(Rg_* (Λ ⧸ Iⁿ))` on a stratum

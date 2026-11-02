@@ -5,7 +5,15 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.StalkFrobeniusOfId
+public import Mathlib.Algebra.Category.Grp.Basic
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.Sites.Proetale
+public import Mathlib.CategoryTheory.Monoidal.Mod
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Sections
+public import WeilConjectures.WeilObject.Sheaf.Stalk
 
 /-!
 # The Galois action on sections of module objects

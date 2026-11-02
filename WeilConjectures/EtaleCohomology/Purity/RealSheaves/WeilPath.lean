@@ -5,10 +5,10 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FrobeniusTransport
 public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.PathTransport
-public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius.Points
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Basic
+public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.GeometricFiber
+public import WeilConjectures.Mathlib.CategoryTheory.Galois.Prorepresentability
 
 /-!
 # Base points for the Weil fundamental representation

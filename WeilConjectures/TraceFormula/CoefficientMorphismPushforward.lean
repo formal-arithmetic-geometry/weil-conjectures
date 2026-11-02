@@ -8,6 +8,7 @@ module
 public import WeilConjectures.TraceFormula.CoefficientMorphismBasic
 public import WeilConjectures.TraceFormula.FibreModel
 public import WeilConjectures.TraceFormula.RelativeFrobeniusIterate
+public import WeilConjectures.AlgebraicGeometry.OverPullbackFiniteType
 
 /-!
 

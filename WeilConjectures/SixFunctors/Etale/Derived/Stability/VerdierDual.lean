@@ -5,15 +5,10 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Dualizable
-public import WeilConjectures.CategoryTheory.Sites.ConstantSheafMonoidal
-public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import WeilConjectures.SixFunctors.Etale.Derived.AdjunctionShift
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
-public import WeilConjectures.SixFunctors.Etale.Derived.Stability.FiniteEtaleAdjoint
-public import WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriek
-public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
-public import WeilConjectures.SixFunctors.Etale.Derived.TensorHom
+public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 
 /-!
 # The Tor amplitude of the Verdier dual

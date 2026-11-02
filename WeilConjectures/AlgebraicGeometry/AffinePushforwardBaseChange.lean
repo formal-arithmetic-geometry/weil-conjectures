@@ -14,15 +14,11 @@ public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.RingTheory.TensorProduct.Basic
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapAlgebra
 import WeilConjectures.AlgebraicGeometry.AffinePushforwardBaseChangeIsIso
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
 import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapPasting
-import WeilConjectures.AlgebraicGeometry.QuasicoherentPushforwardQcqs
-import WeilConjectures.AlgebraicGeometry.TensorPullbackTilde
 import WeilConjectures.AlgebraicGeometry.AffineBaseChangeTensorComparisons
-import WeilConjectures.AlgebraicGeometry.TensorPullback
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineVanishing
 
 /-! # Affine pushforward and arbitrary base change
 

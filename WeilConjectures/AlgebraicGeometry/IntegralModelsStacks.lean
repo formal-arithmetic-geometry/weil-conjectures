@@ -14,6 +14,7 @@ import WeilConjectures.AlgebraicGeometry.IntegralModelsStacksBasic
 import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Equivalence
 import WeilConjectures.SixFunctors.ProEtale.InternalCompletionStacksComparison
 import WeilConjectures.SixFunctors.ProEtale.InternalResidueStacksComparison
+public import WeilConjectures.CategoryTheory.ModuleObjects.FinitelyPresentedComap
 
 /-! # Integral models and Stacks adic constructibility
 

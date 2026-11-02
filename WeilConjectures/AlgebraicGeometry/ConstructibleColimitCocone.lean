@@ -12,9 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import Mathlib.CategoryTheory.Generator.Basic
 import WeilConjectures.AlgebraicGeometry.ConstructibleSheafGeneration
 import WeilConjectures.AlgebraicGeometry.ConstructibleColimitFactorization
-import WeilConjectures.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
-import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import WeilConjectures.ConstructibleSheaf.FinitePushforward
 
 @[expose] public section
 

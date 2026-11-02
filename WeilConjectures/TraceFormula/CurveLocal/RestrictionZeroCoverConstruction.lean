@@ -6,9 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.ReducedClosedSubscheme
-public import WeilConjectures.AlgebraicGeometry.Sites.StrictLocalizationFiniteBaseChange
-public import WeilConjectures.TraceFormula.CurveLocal.BlowupRestriction
 public import WeilConjectures.TraceFormula.CurveLocal.RestrictionZeroCoverDatum
+public import WeilConjectures.AlgebraicGeometry.Sites.StrictLocalizationMap
 
 /-!
 

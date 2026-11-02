@@ -12,6 +12,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.ProperBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ResidueFieldTransport
+public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeGE
 
 /-!
 # Stability of module complexes of étale origin

@@ -10,6 +10,7 @@ public import WeilConjectures.CategoryTheory.CommutativeSiteDerivedConstantModul
 import WeilConjectures.AlgebraicGeometry.CoefficientRestrictedTensorFlatModel
 import all WeilConjectures.AlgebraicGeometry.NilpotentReductionStep
 import all WeilConjectures.AlgebraicGeometry.ProEtaleRestrictedTensorFiniteLocalConstancy
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.FiniteLimits
 
 /-! # The local constant tensor calculation on coefficient-sized sites
 

@@ -7,6 +7,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.ClassicalContinuityMap
 public import WeilConjectures.AlgebraicGeometry.ProEtaleSmallModelComparison
 import WeilConjectures.RingTheory.IndEtaleSmallIndex
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
 
 /-! # Sheafification on affine etale presentations
 

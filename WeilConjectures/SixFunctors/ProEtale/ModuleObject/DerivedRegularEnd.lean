@@ -5,7 +5,20 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.RegularEndConstructible
+public import Mathlib.Algebra.Homology.Additive
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
+public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
+public import Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import Mathlib.CategoryTheory.Monoidal.Mod
+public import Mathlib.CategoryTheory.Monoidal.Preadditive
+public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
+public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalarsTriangle
+public import WeilConjectures.CategoryTheory.ModuleObjects.FinitelyPresentedComap
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushResidueIsoReduction
 
 /-!
 # The action of a regular endomorphism on the derived category

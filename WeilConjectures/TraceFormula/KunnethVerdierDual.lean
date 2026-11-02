@@ -9,7 +9,15 @@ public import Mathlib.CategoryTheory.Monoidal.Closed.InternalCurrying
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.ExternalIhom
 public import WeilConjectures.CategoryTheory.Triangulated.IsoLocusContravariant
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
-public import WeilConjectures.TraceFormula.KunnethVerdierShift
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import WeilConjectures.CategoryTheory.Monoidal.Closed.ExternalHom
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
+public import WeilConjectures.PoincareDuality.Biduality.Constructible
+public import WeilConjectures.TraceFormula.Dualizing
+public import WeilConjectures.TraceFormula.KunnethVerdier
 
 /-!
 # The Künneth–Verdier map in the dualized variable
