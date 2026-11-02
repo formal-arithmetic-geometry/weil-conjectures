@@ -20,6 +20,9 @@ Source: Stacks 09AF, 099R and 0D6E.
 (blueprint: lem-sf-proper-restriction-site-square).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 universe u

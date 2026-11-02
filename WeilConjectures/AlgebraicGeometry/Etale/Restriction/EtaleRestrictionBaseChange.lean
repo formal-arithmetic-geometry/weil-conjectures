@@ -18,6 +18,9 @@ Source: Stacks Project, Tags 0F7J and 0GL6.
 (blueprint: lem-sf-etale-restriction-open-base-change).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 set_option autoImplicit false
 universe u

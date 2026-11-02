@@ -34,6 +34,9 @@ The third components are the supported exterior products on the actual open prod
 schemes, transported through the canonical ambient and coefficient comparisons.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false

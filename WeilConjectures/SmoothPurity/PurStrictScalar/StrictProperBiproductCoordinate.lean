@@ -19,6 +19,9 @@ Source: Stacks 0B56, 0940, 0944.
 (blueprint: lem-pur-compact-support-strict-scalar-mate-strict-coordinate)
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096

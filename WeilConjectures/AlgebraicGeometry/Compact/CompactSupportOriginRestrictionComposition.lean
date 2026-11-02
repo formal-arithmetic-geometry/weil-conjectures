@@ -20,6 +20,9 @@ Source: Stacks Project, Tags 09AF, 099R, 0F7J and 0GL6
 (blueprint: lem-sf-origin-compact-restriction-composition).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 set_option autoImplicit false
 set_option maxRecDepth 4096
@@ -45,12 +48,6 @@ attribute [local irreducible] HasDerivedCategory.standard
 
 attribute [local irreducible] originCompositionAmbient originCompositionModel
 
-attribute [local irreducible] realizedEtaleCompositor
-
-attribute [local irreducible] realizedCompositor
-
 attribute [local irreducible] compactSupportRestrictionIso
-
-attribute [local irreducible] restrictionCompositorLeft
 
 end AlgebraicGeometry.ProEtale

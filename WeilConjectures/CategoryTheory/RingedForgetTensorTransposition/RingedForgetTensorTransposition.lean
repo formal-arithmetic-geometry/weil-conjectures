@@ -43,6 +43,9 @@ The auxiliary data below specify the comparisons on actual total-tensor summands
 The double-dual arrow is the transpose of symmetric evaluation, with no invertibility claim.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 
 set_option autoImplicit false

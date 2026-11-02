@@ -26,7 +26,7 @@ open CategoryTheory CategoryTheory.Functor
 open AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry.ProEtale.CoefficientCompatibility
 
-attribute [local irreducible] transportedRecordedReductionDirectImageComparison
+attribute [local irreducible]
   Functor.mapDerivedCategory Functor.rightDerivedFunctor Functor.leftDerivedFunctor
   sfIntrinsicModuleEquivalence scalarPresentation directImagePresentation
   Functor.mapDerivedCategoryCompIso Functor.mapDerivedCategoryNatIso

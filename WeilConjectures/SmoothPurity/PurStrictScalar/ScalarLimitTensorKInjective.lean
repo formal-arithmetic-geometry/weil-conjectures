@@ -104,9 +104,7 @@ theorem scalarTensor_preservesKInjective (W : Scheme.{u}) :
     WeilConjectures.liftedBasis.{u, u} b
   have : Module.Free A B := Module.Free.of_basis b'
   have : Module.Finite A B := Module.Finite.of_basis b'
-  have hF := (Padic.extension_integers_dvr l F
-    (Padic.coefficientExtensionAbsoluteValue l F)
-    (spectralNorm_extends (K := ℚ_[l]) (L := F))).choose_spec.choose_spec
+  have hF := (Padic.coefficientExtensionIntegers_dvr l F).choose_spec
   have : IsPrincipalIdealRing (Padic.coefficientExtensionIntegers l F) :=
     hF.2.2.2.2.2.2.2.2.1
   have : IsPrincipalIdealRing B := IsPrincipalIdealRing.of_surjective

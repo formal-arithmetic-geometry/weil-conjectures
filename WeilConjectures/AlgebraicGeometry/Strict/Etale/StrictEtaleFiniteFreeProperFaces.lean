@@ -14,6 +14,9 @@ import all WeilConjectures.CategoryTheory.ToposFiniteFreeCompact.ToposFiniteFree
 import WeilConjectures.AlgebraicGeometry.Strict.Etale.StrictEtaleFiniteFreeScalarExact
 import WeilConjectures.AlgebraicGeometry.Strict.Etale.StrictEtaleFiniteFreeProperMateColumns
 /-! Finite-free proper projection face for strict étale systems. -/
+
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option genInjectivity false

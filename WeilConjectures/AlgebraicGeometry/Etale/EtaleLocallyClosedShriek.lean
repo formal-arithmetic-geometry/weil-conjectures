@@ -204,8 +204,7 @@ private lemma coefficient_isUnit_characteristic
     (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (n : ℕ) : IsUnit (D.p : ULift.{u + 1} (Padic.coefficientExtensionRing l E n)) := by
-  have h := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
+  have h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   have hv : Padic.coefficientExtensionAbsoluteValue l E (D.p : E) = 1 := by
     have he := spectralNorm_extends (K := Padic l) (L := E) (D.p : Padic l)
     have hn : ‖(D.p : Padic l)‖ = 1 := Padic.norm_natCast_eq_one_iff.2

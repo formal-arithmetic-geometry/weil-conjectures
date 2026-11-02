@@ -10,6 +10,9 @@ import all WeilConjectures.AlgebraicGeometry.Supported.SupportedExteriorProduct
 import all WeilConjectures.AlgebraicGeometry.Supported.SupportedCoefficientDerivedOpenMate
 /-! # Supported exterior products and maps of supports -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
