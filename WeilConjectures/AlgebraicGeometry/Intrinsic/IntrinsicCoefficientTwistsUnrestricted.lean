@@ -173,6 +173,13 @@ def twistIntegralToRational : twistIntegralRing l E ⟶ twistRationalRing l E :=
   letI := spectralNorm.normedField ℚ_[l] E
   twistContinuousMap (Padic.coefficientExtensionIntegers l E).subtype continuous_subtype_val
 
+/-- The specified coefficient morphism preserves the ring structure.
+Source: coefficient maps (blueprint: def-coefficient-twists-detailed).
+Proof: it is induced by a continuous unital ring homomorphism. -/
+instance twistIntegralToRational_isMonHom : IsMonHom (twistIntegralToRational l E) := by
+  unfold twistIntegralToRational
+  infer_instance
+
 variable (X : Scheme.{u})
 
 /-- The root presentation at exponent r+1 of the positive quotient A_E,n+1.
