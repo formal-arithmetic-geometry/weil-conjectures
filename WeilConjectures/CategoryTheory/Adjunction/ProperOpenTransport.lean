@@ -244,13 +244,13 @@ theorem alphaApp_transport
     rw [Functor.map_inv, IsIso.inv_eq_of_hom_inv_id]
     rw [← cancel_epi ((openComparison adjFst adjFst' φfst).app (Psnd.obj x))]
     rw [reassoc_of% hb]
-    simp [← Functor.map_comp, ← Functor.map_comp_assoc]
+    simp [-Functor.map_comp, ← Functor.map_comp_assoc]
   have hp := clopenProjection_transport adjS adjPs adjS' adjPs' φs (Psnd.obj x)
   have he' : Ps'.map (φsnd.inv.app x) ≫ φs.inv.app (Psnd.obj x) ≫ ΦV.map (e.hom.app x) =
       e'.hom.app (ΦS.obj x) ≫ φr.inv.app x := by
     rw [← cancel_mono (φr.hom.app x)]
     simp only [Category.assoc, Iso.inv_hom_id_app, he]
-    simp [← Functor.map_comp, ← Functor.map_comp_assoc]
+    simp [-Functor.map_comp, ← Functor.map_comp_assoc]
   have n1 := ((openComparison adjFst adjFst' φfst).naturality
     ((clopenProjection adjS adjPs).app (Psnd.obj x))).symm
   have n2 := (compositeOpenComparison adjFst adjS c adjFst' adjS' c' φfst φs).inv.naturality
@@ -283,5 +283,43 @@ theorem alphaApp_transport
   rw [← Jk'.map_comp_assoc, Category.assoc, he', Jk'.map_comp_assoc]
 
 end Alpha
+
+section AbstractAlpha
+
+variable {DS DT DW DV DP : Type*} [Category DS] [Category DT] [Category DW] [Category DV]
+  [Category DP]
+  {Ji : DS ⥤ DT} {Pp : DT ⥤ DW} {Psnd : DS ⥤ DP} {Jfst : DP ⥤ DW} {Ps : DP ⥤ DV}
+  {Js : DV ⥤ DP} {Jk Jsf : DV ⥤ DW} {Pr Psr : DS ⥤ DV}
+
+/-- The proper/open comparison, as a composite of whiskered natural transformations. -/
+def absAlpha (β : Ji ⋙ Pp ≅ Psnd ⋙ Jfst) (π : 𝟭 DP ⟶ Ps ⋙ Js) (jc : Js ⋙ Jfst ≅ Jsf)
+    (jq : Jsf ≅ Jk) (gc : Psr ≅ Psnd ⋙ Ps) (gq : Psr ≅ Pr) : Ji ⋙ Pp ⟶ Pr ⋙ Jk :=
+  β.hom ≫ Functor.whiskerRight (Functor.whiskerLeft Psnd π) Jfst ≫
+    Functor.whiskerRight (Functor.associator Psnd Ps Js).inv Jfst ≫
+    (Functor.associator (Psnd ⋙ Ps) Js Jfst).hom ≫
+    Functor.whiskerLeft (Psnd ⋙ Ps) (jc.hom ≫ jq.hom) ≫
+    Functor.whiskerRight (gc.inv ≫ gq.hom) Jk
+
+theorem absAlpha_app (β : Ji ⋙ Pp ≅ Psnd ⋙ Jfst) (π : 𝟭 DP ⟶ Ps ⋙ Js)
+    (jc : Js ⋙ Jfst ≅ Jsf) (jq : Jsf ≅ Jk) (gc : Psr ≅ Psnd ⋙ Ps) (gq : Psr ≅ Pr) (x : DS) :
+    (absAlpha β π jc jq gc gq).app x =
+      β.hom.app x ≫ Jfst.map (π.app (Psnd.obj x)) ≫ jc.hom.app (Ps.obj (Psnd.obj x)) ≫
+        jq.hom.app (Ps.obj (Psnd.obj x)) ≫ Jk.map (gc.inv.app x ≫ gq.hom.app x) := by
+  simp [absAlpha]
+
+variable {Pi : DT ⥤ DS} (adjI : Ji ⊣ Pi) {Pfst : DW ⥤ DP} (adjFst : Jfst ⊣ Pfst)
+  {Rs : DV ⥤ DP} (adjS : Js ⊣ Ps) (adjPs : Ps ⊣ Rs)
+  [IsIso adjS.unit] [IsIso (openToPush adjS adjPs)]
+  (sq : Pp ⋙ Pfst ≅ Pi ⋙ Psnd) [∀ x, IsIso (betaInvApp adjI adjFst sq x)]
+
+theorem absAlpha_app_eq_alphaApp (β : Ji ⋙ Pp ≅ Psnd ⋙ Jfst)
+    (hβ : ∀ x, β.hom.app x = inv (betaInvApp adjI adjFst sq x))
+    (jc : Js ⋙ Jfst ≅ Jsf) (jq : Jsf ≅ Jk) (gc : Psr ≅ Psnd ⋙ Ps) (gq : Psr ≅ Pr) (x : DS) :
+    (absAlpha β (clopenProjection adjS adjPs) jc jq gc gq).app x =
+      alphaApp adjI adjFst adjS adjPs sq (jc ≪≫ jq) (gc.symm ≪≫ gq) x := by
+  rw [absAlpha_app, hβ]
+  simp [alphaApp]
+
+end AbstractAlpha
 
 end CategoryTheory.ProperOpenTransport
