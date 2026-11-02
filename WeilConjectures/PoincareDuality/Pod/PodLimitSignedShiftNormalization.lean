@@ -106,8 +106,64 @@ attribute [local irreducible] CategoryTheory.RoosConeCalculus.roosCommShift
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{u})
 
+/-- The localization functor of strict coefficient-system complexes. -/
+private abbrev coefficientQ :
+    CochainComplex (coefficientSequenceModules l E W) ℤ ⥤ coefficientSequenceDerived l E W :=
+  DerivedCategory.Q
+
+/-- The natural limit-to-Roos comparison, assembled from the exact restriction
+comparison and the normalized Roos comparison composed with the native Roos functor. -/
+private def nativeLimitIso (ρ : IntegralComparisonRoosModel l E W) :
+    coefficientQ l E W ⋙ coefficientSequenceLimit l E W ≅
+      (coefficientSequenceRestriction l E W).mapHomologicalComplex (.up ℤ) ⋙
+        roosF ⋙ DerivedCategory.Q :=
+  (Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerRight
+      (coefficientSequenceRestriction l E W).mapDerivedCategoryFactors
+      (coefficientConstantTowerLimit l E W) ≪≫
+    Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft _ (ρ.comparison ≪≫
+      Functor.isoWhiskerRight podNativeRoosIso DerivedCategory.Q)
+
+/-- The native Roos comparison has identity components. -/
+private theorem podNativeRoosIso_hom_app
+    (X : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ) :
+    (podNativeRoosIso (A := scalarReductionSource l E W)).hom.app X = 𝟙 _ :=
+  rfl
+
+private theorem nativeLimitIso_hom_app (ρ : IntegralComparisonRoosModel l E W)
+    (C : CochainComplex (coefficientSequenceModules l E W) ℤ) :
+    (nativeLimitIso l E W ρ).hom.app C = (podLimitRoos l E ρ C).hom := by
+  dsimp only [nativeLimitIso, podLimitRoos]
+  erw [Iso.trans_hom, Iso.trans_hom, NatTrans.comp_app, NatTrans.comp_app, NatTrans.comp_app,
+    NatTrans.comp_app, Functor.associator_inv_app, Functor.whiskerRight_app,
+    Functor.associator_hom_app, Functor.whiskerLeft_app, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app, Category.id_comp, Category.id_comp,
+    podNativeRoosIso_hom_app, CategoryTheory.Functor.map_id, Category.comp_id]
+  rfl
+
 attribute [local instance] CategoryTheory.RoosConeCalculus.roosCommShift
-attribute [local instance] nativeLimitIso_commShift
+
+private instance nativeLimitIso_commShift (ρ : IntegralComparisonRoosModel l E W) :
+    NatTrans.CommShift (nativeLimitIso l E W ρ).hom ℤ := by
+  have := podNormalizedRoosComparisonCommShift l E W ρ _
+    CategoryTheory.RoosConeCalculus.shift_augmentation
+  have h1 : NatTrans.CommShift (Functor.associator (coefficientQ l E W)
+      (coefficientSequenceDerivedRestriction l E W) (coefficientConstantTowerLimit l E W)).inv ℤ :=
+    inferInstance
+  have h2 : NatTrans.CommShift (Functor.whiskerRight
+      (coefficientSequenceRestriction l E W).mapDerivedCategoryFactors.hom
+      (coefficientConstantTowerLimit l E W)) ℤ := inferInstance
+  have h3 : NatTrans.CommShift (Functor.associator
+      ((coefficientSequenceRestriction l E W).mapHomologicalComplex (.up ℤ))
+      DerivedCategory.Q (coefficientConstantTowerLimit l E W)).hom ℤ := inferInstance
+  have h4 : NatTrans.CommShift (Functor.whiskerLeft
+      ((coefficientSequenceRestriction l E W).mapHomologicalComplex (.up ℤ))
+      (ρ.comparison ≪≫ Functor.isoWhiskerRight podNativeRoosIso DerivedCategory.Q).hom) ℤ :=
+    inferInstance
+  have h34 := @NatTrans.CommShift.comp _ _ _ _ _ _ _ _ _ ℤ _ _ _ _ _ _ h3 h4
+  have h234 := @NatTrans.CommShift.comp _ _ _ _ _ _ _ _ _ ℤ _ _ _ _ _ _ h2 h34
+  exact @NatTrans.CommShift.comp _ _ _ _ _ _ _ _ _ ℤ _ _ _ _ _ _ h1 h234
 
 private theorem normalization_native_square
     (ρ : IntegralComparisonRoosModel l E W)
@@ -140,10 +196,11 @@ private theorem normalization_native_square
   simp only [← Category.assoc, ← CategoryTheory.Functor.map_comp,
     Iso.inv_hom_id_app, CategoryTheory.Functor.map_id, Category.id_comp] at h'
   have hm := podNativeRoosMap_eq ((R.commShiftIso r).hom.app C)
-  rw [← hm] at h'
-  erw [DerivedCategory.Q.map_comp] at h'
-  simp only [Category.assoc] at h'
-  with_unfolding_all exact h'
+  rw [Category.assoc] at h'
+  intro _
+  dsimp only [podRestrictionShift, Functor.mapIso_hom, Iso.app_hom]
+  erw [hm]
+  exact h'
 
 /-- The K-injective-normalized Roos comparison has the prescribed signed shift.
 Source: Stacks 0941, the shifted K-injective calculation, and 011G, signed shifts
