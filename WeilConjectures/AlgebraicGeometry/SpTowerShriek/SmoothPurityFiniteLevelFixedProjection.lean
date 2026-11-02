@@ -17,6 +17,7 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Projection
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option linter.privateModule false
 set_option Elab.async false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency true

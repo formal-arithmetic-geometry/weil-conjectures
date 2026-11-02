@@ -14,6 +14,7 @@ import WeilConjectures.AlgebraicGeometry.SpTowerShriek.SmoothPurityStrictFiniteO
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option linter.privateModule false
 set_option synthInstance.maxSize 4096
 universe u v
 open CategoryTheory CategoryTheory.Limits

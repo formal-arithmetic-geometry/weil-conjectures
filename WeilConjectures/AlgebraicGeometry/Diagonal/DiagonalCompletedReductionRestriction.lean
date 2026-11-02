@@ -459,7 +459,7 @@ private theorem reductionComparison
     Category.comp_id, Category.assoc] using congrArg (fun t ↦ t.app P) hτσ
 
 private theorem ringRegularResolution
-    {C : Type*} [Category C] [EssentiallySmall.{v} C]
+    {C : Type*} [Category* C] [EssentiallySmall.{v} C]
     {J : GrothendieckTopology C}
     [J.HasSheafCompose (forget₂ CommRingCat.{v} RingCat.{v})]
     [J.WEqualsLocallyBijective AddCommGrpCat.{v}] [HasSheafify J AddCommGrpCat.{v}]

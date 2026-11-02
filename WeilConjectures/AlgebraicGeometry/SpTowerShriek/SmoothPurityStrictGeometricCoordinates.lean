@@ -39,6 +39,7 @@ Source: Zheng Construction 4.1 and Lemma 4.10; blueprint operations proof (2).
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option linter.privateModule false
 set_option synthInstance.maxSize 4096
 universe u c v r
 open CategoryTheory CategoryTheory.Limits
