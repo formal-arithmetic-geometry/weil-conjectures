@@ -326,8 +326,8 @@ private theorem smooth_prime_property
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-/-- Blueprint `lem-asd-smooth-generic-direct-image`: A smooth source with locally constant
-coefficients.
+/-- A smooth source with finite locally constant coefficients.
+(blueprint: lem-fin-smooth-generic-direct-image-finite-ring)
 
 For a separated smooth morphism of finite type `a : X ⟶ S` to an integral scheme of finite type
 over a field on which the exponent of `Λ` is invertible, and a finite locally constant sheaf `F`
