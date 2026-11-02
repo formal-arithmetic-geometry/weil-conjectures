@@ -51,15 +51,5 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 open AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry.ProEtale
-attribute [local irreducible] SheafOfModules.monoidalCategory
-
-attribute [local irreducible] scalarTensorChainIso scalarExtensionFunctorCounit
-  scalarMateDerivedTensorIso proEtaleCanonicalTensorComparison
-  scalarMateDerivedCoefficientPullback
-
-attribute [local implicit_reducible] CategoryTheory.Functor.map₂HomologicalComplex
-attribute [local irreducible] proEtaleTensorPullbackTotalIso
-  proEtaleRingDerivedPullbackFactors CategoryTheory.Functor.mapDerivedCategory
-  HomologicalComplex₂.total CategoryTheory.Functor.leftAdjoint
 
 end AlgebraicGeometry.ProEtale

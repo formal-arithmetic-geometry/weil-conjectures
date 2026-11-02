@@ -359,9 +359,7 @@ private theorem mem_lift_integers
     [FiniteDimensional ℚ_[ℓ] (ULift.{u} E.val)] (x : ULift.{u} E.val) :
     x ∈ Padic.coefficientExtensionIntegers ℓ (ULift.{u} E.val) ↔
       x.down ∈ PadicAlgCl.integers ℓ E.val := by
-  have h := (Padic.extension_integers_dvr ℓ (ULift.{u} E.val)
-    (Padic.coefficientExtensionAbsoluteValue ℓ (ULift.{u} E.val))
-    (spectralNorm_extends (K := ℚ_[ℓ]) (L := ULift.{u} E.val))).choose_spec.choose_spec.1 x
+  have h := (Padic.coefficientExtensionIntegers_dvr ℓ (ULift.{u} E.val)).choose_spec.1 x
   exact h.trans (by
     rw [spectral_embedded_norm ℓ E x, PadicAlgCl.mem_integers_iff, ← NNReal.coe_le_coe]
     rfl)

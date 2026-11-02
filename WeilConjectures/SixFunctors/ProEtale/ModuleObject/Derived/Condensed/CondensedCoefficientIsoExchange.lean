@@ -94,7 +94,7 @@ private theorem scalar_coefficientIso_ctf
     [MonObj R] [IsCommMonObj R] [MonObj S] [IsCommMonObj S]
     (e : Mon.mk R ≅ Mon.mk S) (Z : Scheme.{u})
     (K : ConstantModelConstructibleFiniteTor R Z) :
-    (constantModelBoundedConstructible S Z ⊓ DerivedCategory.finiteTorAmplitude _)
+    (constantModelBoundedConstructible S Z ⊓ _root_.DerivedCategory.finiteTorAmplitude _)
       ((D e.hom.hom Z).obj K.obj) := by
   have : IsIso e.hom.hom := inferInstanceAs (IsIso ((Mon.forget _).map e.hom))
   have : (extension e.hom.hom Z).IsEquivalence := scalar_extension_equivalence _ _

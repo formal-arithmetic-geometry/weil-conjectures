@@ -64,9 +64,6 @@ private theorem compactSupport_isIso [Finite A] [Finite B]
   infer_instance
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
-attribute [-instance] CategoryTheory.catToReflQuiver in
-attribute [-instance] CategoryTheory.catToReflQuiver in
-attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- Scalar transport of the dualizing complex, obtained by evaluating the exceptional
 mate at the coefficient unit and then identifying that unit after extension of scalars.
 Source: blueprint compatibilities (3)
@@ -106,7 +103,6 @@ def tensorDomainMap [Finite A] [Finite B] {X Y : Scheme.{u}}
         ((scalarExtension φ Y).obj K))).map
       (dualizingScalarMap φ f)
 
-attribute [-instance] CategoryTheory.catToReflQuiver in
 attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- The mixed square on the actual Cartesian pullback. Both paths have source
 S_X' g'^* G_A K and target G'_B g^* S_Y K; beta is the recorded counit transpose.
@@ -235,19 +231,6 @@ private theorem mate_cocycle_at
   exact Category.assoc _ _ _
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
-attribute [-instance] CategoryTheory.catToReflQuiver in
-attribute [-instance] CategoryTheory.catToReflQuiver in
-attribute [-instance] CategoryTheory.catToReflQuiver in
-attribute [-instance] CategoryTheory.catToReflQuiver in
-attribute [irreducible] orderedProjectionIso
-
-attribute [-instance] CategoryTheory.catToReflQuiver in
-attribute [-instance] CategoryTheory.catToReflQuiver in
-attribute [-instance] CategoryTheory.catToReflQuiver in
-attribute [-instance] CategoryTheory.catToReflQuiver in
-attribute [-instance] CategoryTheory.catToReflQuiver in
-attribute [-instance] CategoryTheory.catToReflQuiver in
-attribute [-instance] CategoryTheory.catToReflQuiver in
 private theorem mateMap_counit [Finite A] [Finite B]
     {X Y : Scheme.{u}} [IsNoetherian Y] (f : X ⟶ Y) [HasCompactification f]
     (K : DerivedCategoryModule A Y) :
@@ -300,13 +283,6 @@ private theorem tensor_unit_counit [Finite A] [Finite B]
     (chosenCompactSupportIso φ f)
     (mateMap φ f) (mateMap_counit φ f) (unitIso φ Y).hom
 
-attribute [-instance] CategoryTheory.catToReflQuiver in
-attribute [-instance] CategoryTheory.catToReflQuiver in
-attribute [-instance] CategoryTheory.catToReflQuiver in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-attribute [local irreducible] tensorDomainMap in
-attribute [-instance] CategoryTheory.catToReflQuiver in
 attribute [-instance] CategoryTheory.catToReflQuiver in
 private theorem compact_scalar_exchange_left [Finite A] [Finite B]
     {X X' Y Y' : Scheme.{u}}

@@ -204,6 +204,7 @@ import WeilConjectures.AlgebraicGeometry.Bounded.BoundedConstructibleDevissageSu
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedSupportProjectionFormula
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.DetectionAb
 
 /-!
 # Operations on bounded constructible integral coefficient complexes
@@ -293,7 +294,7 @@ private theorem tensor_single_noetherian
       (hM : ∀ a : Fin S.n, IsZero ((H a).obj M)) : IsZero M := by
     rw [IsZero.iff_id_eq_zero]
     apply Mod.hom_ext
-    apply abDetectMaps S.immersion
+    apply eq_zero_of_forall_upperStar_map_eq_zero_addCommGrp S.immersion
     · intro x
       obtain ⟨a, ha⟩ := Set.mem_iUnion.mp (S.iUnion_stratum_eq_univ.symm ▸ Set.mem_univ x)
       exact ⟨a, S.range_immersion a |>.symm ▸ ha⟩
