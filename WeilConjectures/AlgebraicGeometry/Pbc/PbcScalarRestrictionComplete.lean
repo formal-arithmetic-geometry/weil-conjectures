@@ -8,7 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarTensor
 import all WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarCompletedObjectComplete
 import all WeilConjectures.ProperBaseChange.IntegralCoefficientCompletenessTransportSupplement
-import WeilConjectures.TraceFormula.Supporting.FiniteFreeCompletedScalarComparison
+import all WeilConjectures.TraceFormula.Supporting.FiniteFreeCompletedScalarComparison
+import all WeilConjectures.SmoothPurity.Completed.CompletedIntegralFiniteFree
 import WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarExtension
 import all WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarInternalHomComplete
 import WeilConjectures.SmoothPurity.IntegralPrincipalCone.IntegralPrincipalConeLocalCriterion
@@ -122,7 +123,15 @@ private theorem scalarUniformizer_dvd (V : W.ProEtᵒᵖ) :
       (WeilConjectures.completedCoefficientMap l E F i W).hom.app V
           (WeilConjectures.integralCompletionScalarValue l E W V) =
         WeilConjectures.integralCompletionScalarValue l F W V * c := by
-  sorry
+  obtain ⟨a, e, he, hπ⟩ := WeilConjectures.integral_ramification l E F i
+  obtain ⟨k, rfl⟩ : ∃ k, e = k + 1 := ⟨e - 1, by omega⟩
+  refine ⟨WeilConjectures.scalarValue l F W V
+    ((a : Padic.coefficientExtensionIntegers l F) * Padic.coefficientExtensionUniformizer l F ^ k), ?_⟩
+  have h := WeilConjectures.scalarValue_map l E W F i V (Padic.coefficientExtensionUniformizer l E)
+  change _ = WeilConjectures.scalarValue l F W V (Padic.coefficientExtensionUniformizer l F) * _
+  erw [h, hπ, ← map_mul]
+  congr 1
+  ring
 
 /-- Local divisibility by the source uniformizer passes to the image section. -/
 private theorem scalarImageSection_divisible (U : W.ProEt)
