@@ -541,6 +541,9 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Coefficient.ProEtaleCoefficien
 import WeilConjectures.AlgebraicGeometry.Strict.Tower.StrictTowerOperationsSupplement
 import WeilConjectures.AlgebraicGeometry.Continuous.ContinuousIntegralCoefficientComparison
 import WeilConjectures.CategoryTheory.ProEtaleCoefficients.SectionActionInternal
+public import WeilConjectures.AlgebraicGeometry.IntegralContinuousEncodingConstructible
+public import WeilConjectures.AlgebraicGeometry.Continuous.ContinuousIntegralSliceModelComparison
+public import WeilConjectures.AlgebraicGeometry.Integral.IntegralLfpConstantModelComparison
 
 /-! # Constructibility under continuous integral section encoding
 
@@ -639,6 +642,26 @@ private theorem integral_internal_constant_models
   have h := integralLfpConstantModelComparison l E X ((Mod.comap ψ).obj M)
   exact (constantModel_comap_iff φ X M).mp
     (h.mp (_root_.constructible_comap ψ hM))
+
+/-- A covering sieve supplies a covering family with the same local models. -/
+private theorem localModels_of_coveringSieve
+    {C : Type u₁} [Category.{v₁} C] (J : GrothendieckTopology C)
+    [HasTerminal C] (R : Sheaf J RingCat.{u + 1}) {A : Type*}
+    (P : A → Prop) (G : A → SheafOfModules.{u + 1} R)
+    (M : SheafOfModules.{u + 1} R)
+    (h : ∃ V : Sieve (⊤_ C), V ∈ J (⊤_ C) ∧
+      ∀ (U : C) (f : U ⟶ ⊤_ C), V f →
+        ∃ a, P a ∧ Nonempty (M.over U ≅ (G a).over U)) :
+    ∃ (I : Type (max u₁ v₁)) (V : I → C), J.CoversTop V ∧
+      ∀ i, ∃ a, P a ∧ Nonempty (M.over (V i) ≅ (G a).over (V i)) := by
+  obtain ⟨V, hV, hs⟩ := h
+  let I := Σ U : C, {f : U ⟶ ⊤_ C // V f}
+  let W : I → C := fun i ↦ i.1
+  refine ⟨I, W, ?_, fun i ↦ hs i.1 i.2.val i.2.property⟩
+  apply (J.coversTop_iff_of_isTerminal _ terminalIsTerminal W).mpr
+  apply J.superset_covering _ hV
+  intro U f hf
+  exact ⟨⟨U, f, hf⟩, ⟨𝟙 U⟩⟩
 
 private theorem normalized_transport {C : Type*} [Category C]
     {A B D Z : C} (d : A ⟶ B) (di : B ⟶ A)
@@ -869,17 +892,31 @@ theorem integralContinuousEncoding_constructible
         (CondensedRing.reconstructedRingIso X R).symm
         (f.map (CondensedRing.sectionRingMap X chart.inv)) hc (F.obj M)
   have ecomp : W ≅ B := eA ≪≫ ec ≪≫ eB.symm
-  have hB := Scheme.fp_iso X (Scheme.pbcIntegralDatum l E) ecomp hmodels
-  obtain ⟨S, hS⟩ := hB
+  obtain ⟨S, hS⟩ := hmodels
+  have hB : ∀ i, ∃ V : Sieve (⊤_ (S.domain i).ProEt),
+      V ∈ Scheme.ProEt.topology (S.domain i) (⊤_ (S.domain i).ProEt) ∧
+        ∀ (U : (S.domain i).ProEt) (g : U ⟶ ⊤_ (S.domain i).ProEt), V g →
+          ∃ L : ModuleCat.{u + 1} (Scheme.PbcIntegralRing l E),
+            Module.FinitePresentation (Scheme.PbcIntegralRing l E) L ∧
+            Nonempty (((Scheme.proEtaleModuleInverseImage (S.immersion i) _).obj B).over U ≅
+              ((Scheme.proEtaleModuleInverseImage (S.immersion i) _).obj
+                ((Scheme.integralConstantModule X
+                  (Scheme.pbcIntegralDatum l E)).obj L)).over U) := by
+    intro i
+    obtain ⟨V, hV, hv⟩ := hS i
+    refine ⟨V, hV, fun U g hg ↦ ?_⟩
+    obtain ⟨L, hL, ⟨eL⟩⟩ := hv U g hg
+    exact ⟨L, hL, ⟨(SheafOfModules.overFunctor _ U).mapIso
+      ((Scheme.proEtaleModuleInverseImage (S.immersion i) _).mapIso ecomp.symm) ≪≫ eL⟩⟩
   refine ⟨S, fun i ↦ ?_⟩
-  obtain ⟨V, hV, hv⟩ := hS i
-  apply (localModels_cover_iff_sieve
+  obtain ⟨V, hV, hv⟩ := hB i
+  apply (localModels_of_coveringSieve
     (Scheme.ProEt.topology (S.domain i))
     (latticeModuleRing (S.domain i) (latticeCoefficientIntegers l E))
     (fun P : ModuleCat.{u + 1} (ULift.{u + 1} (latticeCoefficientIntegers l E)) ↦
       Module.FinitePresentation _ P)
     (continuousCoefficientModule (S.domain i) (latticeCoefficientIntegers l E))
-    (continuousModulePullback (S.immersion i) (latticeCoefficientIntegers l E) Q)).mpr
+    (continuousModulePullback (S.immersion i) (latticeCoefficientIntegers l E) Q))
   exact ⟨V, hV, fun U g hg ↦
     (continuousIntegralSliceModelComparison X l E s c₀ hc₀
       (S.immersion i) Q U).mpr (hv U g hg)⟩
