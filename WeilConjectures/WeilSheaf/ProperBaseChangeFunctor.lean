@@ -7,6 +7,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.WeilSheaf.LowerStar
+import Mathlib.AlgebraicGeometry.Noetherian
+import WeilConjectures.AlgebraicGeometry.Native.NativeProperNaturalBaseChange
 
 /-!
 # Proper base change for Weil complexes, as an isomorphism of functors
@@ -21,9 +23,8 @@ Y' --g---> Y
 ```
 with `f` proper, the base change morphism `g^* Rf_* ⟶ Rf'_* g'^*` of Weil complexes is a natural
 isomorphism (blueprint `thm-weil-pbc-qbar`, the base change morphism being a morphism of Weil
-complexes by `prop-weil-operations`). This theorem of the proper base change section is stated
-here with `sorry`, as the existence of a natural isomorphism, in the form needed for the
-compatibilities of the direct image with compact support
+complexes by `prop-weil-operations`). It is stated as the existence of a natural isomorphism, in
+the form needed for the compatibilities of the direct image with compact support
 (`WeilConjectures.WeilSheaf.LowerShriekIndependence`); the objectwise statement is
 `AlgebraicGeometry.WeilComplex.nonempty_upperStar_derivedLowerStar_iso_of_isProper`.
 -/
@@ -57,7 +58,39 @@ complexes on `X`. -/
 theorem WeilComplex.nonempty_derivedLowerStar_comp_upperStar_iso_of_isProper
     (hf : IsProper f) (h : IsPullback g' f' f g) :
     Nonempty (WeilComplex.derivedLowerStar (k₀ := k₀) (l := l) f ⋙ WeilComplex.upperStar g ≅
-      WeilComplex.upperStar g' ⋙ WeilComplex.derivedLowerStar f') :=
-  sorry
+      WeilComplex.upperStar g' ⋙ WeilComplex.derivedLowerStar f') := by
+  let : IsProper f := hf
+  have : IsLocallyNoetherian Y :=
+    LocallyOfFiniteType.isLocallyNoetherian (Y ↘ Spec (CommRingCat.of k₀))
+  have : IsLocallyNoetherian Y' :=
+    LocallyOfFiniteType.isLocallyNoetherian (Y' ↘ Spec (CommRingCat.of k₀))
+  let sq : ChosenCartesianSquare g' f' f g :=
+    { toCommSq := h.toCommSq
+      isoPullback := h.isoPullback
+      hom_fst := h.isoPullback_hom_fst
+      hom_snd := h.isoPullback_hom_snd }
+  obtain ⟨e⟩ := nativeWeil_proper_natural_baseChange k₀ l g' f' f g sq
+  let P := WeilComplex.objectProperty k₀ l Y'
+  let ef : WeilComplex.derivedLowerStar (k₀ := k₀) (l := l) f ⋙ (WeilComplex.objectProperty k₀ l Y).ι ≅
+      (WeilComplex.objectProperty k₀ l X).ι ⋙ (ProEtaleWeilSheaf.lowerStar k₀ l f).rightDerivedFunctor :=
+    ObjectProperty.liftFullSubcategoryCompιIso _ _ _ _
+  let ef' : WeilComplex.derivedLowerStar (k₀ := k₀) (l := l) f' ⋙ P.ι ≅
+      (WeilComplex.objectProperty k₀ l X').ι ⋙
+        (ProEtaleWeilSheaf.lowerStar k₀ l f').rightDerivedFunctor :=
+    ObjectProperty.liftFullSubcategoryCompιIso _ _ _ _
+  let eg : WeilComplex.upperStar (k₀ := k₀) (l := l) g ⋙ P.ι ≅
+      (WeilComplex.objectProperty k₀ l Y).ι ⋙
+        (ProEtaleWeilSheaf.upperStar k₀ l g).mapDerivedCategory :=
+    ObjectProperty.liftFullSubcategoryCompιIso _ _ _ _
+  let eg' : WeilComplex.upperStar (k₀ := k₀) (l := l) g' ⋙ (WeilComplex.objectProperty k₀ l X').ι ≅
+      (WeilComplex.objectProperty k₀ l X).ι ⋙
+        (ProEtaleWeilSheaf.upperStar k₀ l g').mapDerivedCategory :=
+    ObjectProperty.liftFullSubcategoryCompιIso _ _ _ _
+  refine ⟨(P.fullyFaithfulι.whiskeringRight _).preimageIso ?_⟩
+  exact Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft _ eg ≪≫
+    (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight ef _ ≪≫
+    Functor.associator _ _ _ ≪≫ e ≪≫ (Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerRight eg'.symm _ ≪≫ Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft _ ef'.symm ≪≫ (Functor.associator _ _ _).symm
 
 end AlgebraicGeometry
