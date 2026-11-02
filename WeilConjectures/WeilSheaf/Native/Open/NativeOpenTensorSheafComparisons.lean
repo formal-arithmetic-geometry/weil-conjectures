@@ -9,6 +9,8 @@ public import WeilConjectures.WeilSheaf.Native.Open.NativeOpenTensorComparisonDa
 import WeilConjectures.WeilSheaf.Native.Open.NativeOpenSheafProjectionTensor
 import all WeilConjectures.Algebra.Homology.Ringed.RingedOpenTotalTensorKFlat
 
+set_option linter.privateModule false
+
 /-! # Native open tensor comparisons on complexes
 
 Source: Stacks 0GL1, 012Z and 0E8I; native open tensor proof steps 3--4.

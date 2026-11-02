@@ -11,6 +11,8 @@ import WeilConjectures.CategoryTheory.DeligneLaumon.CompletedRlimRoosComparison
 import WeilConjectures.DeligneLaumon.IntegralCompletedComparison.IntegralRoosFiniteTowerShift
 import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSupplement
 
+set_option linter.privateModule false
+
 /-! # Integral Roos realization through the finite-tower derived pair
 
 Source: Stacks Project, sites-cohomology.tex, Tag 0941, and proetale.tex, Tag 099N(5).

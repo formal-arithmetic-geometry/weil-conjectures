@@ -20,6 +20,8 @@ public import Mathlib.CategoryTheory.Abelian.FunctorCategory
 public import WeilConjectures.CategoryTheory.Limits.TowerTransitionEndomorphism
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
 
+set_option linter.privateModule false
+
 /-! # Shift compatibility of a counit-normalized integral Roos comparison
 
 Source: Stacks Project, sites-cohomology.tex, Tag 0941, and derived.tex, Tag 014E.

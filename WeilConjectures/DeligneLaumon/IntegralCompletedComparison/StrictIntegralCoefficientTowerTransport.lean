@@ -12,6 +12,8 @@ import WeilConjectures.DeligneLaumon.IntegralCompletedComparison.IntegralPullbac
 import WeilConjectures.DeligneLaumon.IntegralCompletedComparison.StrictIntegralRoosTransportProjections
 import WeilConjectures.DeligneLaumon.IntegralCompletedComparison.StrictIntegralRoosTransportShifts
 
+set_option linter.privateModule false
+
 /-! # Coefficient transport before the completeness restriction
 
 Source: Stacks Project, sites-modules.tex, Tags 03EK/03EL; proetale.tex, Tag 099N(5).

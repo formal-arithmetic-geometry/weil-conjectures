@@ -11,6 +11,8 @@ import WeilConjectures.CategoryTheory.ProductShift.ProductCommShift
 import WeilConjectures.CategoryTheory.SignedCoconeShift.SignedMappingCoconeShift
 import all WeilConjectures.SmoothPurity.Completed.CompletedScalarShiftDescent
 
+set_option linter.privateModule false
+
 /-! # Signed shifts for integral pullback
 
 Source: Stacks Project, Tags 011G, 014E, 06YS, 06YT and 0941.

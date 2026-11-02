@@ -25,6 +25,8 @@ import WeilConjectures.ProperBaseChange.IntegralCoefficientCompletenessTransport
 import WeilConjectures.DeligneLaumon.IntegralCompletedComparison.IntegralPullbackSignedShift
 import WeilConjectures.DeligneLaumon.IntegralCompletedComparison.CompletedIntegralFiniteTowerTransport
 
+set_option linter.privateModule false
+
 /-! # Integral and strict-tower completed pullback
 
 Source: Stacks Project, proetale.tex, Tag 099N(5), with sites-cohomology.tex,

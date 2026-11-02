@@ -10,6 +10,8 @@ public import WeilConjectures.Algebra.Homology.ScalarHomOrdinary.ScalarHomOrdina
 import all WeilConjectures.Algebra.Homology.ScalarHomOrdinary.ScalarHomOrdinaryTensorComparisonSupplement
 import WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionBinaryCoherenceSupplement
 
+set_option linter.privateModule false
+
 /-! # Multiplication of unshifted positive root powers
 
 Source: coefficient-twist tensor-power conventions and orientation comparison conventions.

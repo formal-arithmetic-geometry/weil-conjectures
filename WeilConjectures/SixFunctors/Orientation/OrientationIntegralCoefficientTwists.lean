@@ -59,6 +59,8 @@ import Mathlib.LinearAlgebra.TensorProduct.Finiteness
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 
+set_option linter.privateModule false
+
 /-! # Canonical positive coefficient-line comparisons
 
 Source: main-20261015, def-coefficient-twists-detailed, completed tensor and

@@ -13,6 +13,8 @@ import all WeilConjectures.AlgebraicGeometry.Pbc.PbcCompletedPullbackActualSuppl
 import all WeilConjectures.AlgebraicGeometry.Completed.CompletedTowerPullbackSupplement
 import all WeilConjectures.AlgebraicGeometry.ImmersionCompletedPullback.SfImmersionCompletedPullbackComparison
 
+set_option linter.privateModule false
+
 /-! # Coefficient transport of the published completed pullback tower
 
 Source: Stacks Project, sites-modules.tex, Tags 03EK/03EL; proetale.tex, Tag 099N(5).
