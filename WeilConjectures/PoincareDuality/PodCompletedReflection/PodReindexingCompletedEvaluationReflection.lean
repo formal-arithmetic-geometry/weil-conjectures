@@ -743,6 +743,15 @@ private theorem ordinary_exact {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
       PreservesFiniteColimits (isoReductionIntegralInverse l E g) :=
   (ordinary_reindex_eq l E g) ▸ reindex_exact l E g
 
+private theorem reindex_additive {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
+    (podReindexingFunctor l E g none).Additive := (reindex_exact l E g).1
+
+private theorem reindex_limits {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
+    PreservesFiniteLimits (podReindexingFunctor l E g none) := (reindex_exact l E g).2.1
+
+private theorem reindex_colimits {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
+    PreservesFiniteColimits (podReindexingFunctor l E g none) := (reindex_exact l E g).2.2
+
 private theorem ordinary_additive {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
     (isoReductionIntegralInverse l E g).Additive := (ordinary_exact l E g).1
 
