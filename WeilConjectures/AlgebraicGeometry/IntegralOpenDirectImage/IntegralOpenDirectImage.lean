@@ -188,6 +188,8 @@ import WeilConjectures.AlgebraicGeometry.Integral.IntegralModels
 import WeilConjectures.AlgebraicGeometry.Integral.Residue.IntegralResidueCriterion
 import WeilConjectures.AlgebraicGeometry.Integral.IntegralDirectImageLimits
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteOpenDirectImageCtf
+public import WeilConjectures.AlgebraicGeometry.Finite.Etale.FiniteEtaleOpenUniformTorImage
+public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinary.FiniteCtfInternalEtaleRealization
 
 /-!
 # Integral open direct image preserves constructibility
@@ -321,19 +323,67 @@ private theorem residue_open_image
     DerivedCategory.finiteTorAmplitude _
       ((CondensedRing.moduleObjectDerivedPushforward
         (DerivedNakayama.quotientRing l E 1) j).obj K) := by
+  classical
   let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
-  let : Finite (Padic.coefficientExtensionRing l E 1) :=
-    Padic.finite_coefficientExtensionRing l E 1 le_rfl
-  have := residue_discrete l E
+  let A := Padic.coefficientExtensionRing l E 1
+  let : Finite A := Padic.finite_coefficientExtensionRing l E 1 le_rfl
+  have : DiscreteTopology A := residue_discrete l E
   obtain ⟨a, b, ht⟩ := hTor
+  let a' := min a b
+  let b' := max b a
+  have hab : a' ≤ b' := by dsimp [a', b']; omega
   have ht' := ht.mono (min_le_left a b) (le_max_left b a)
-  have hp : 0 < ringChar k := (Fact.out : (ringChar k).Prime).pos
-  have hne : ringChar k ≠ l := Fact.out
-  obtain ⟨d, _, hd⟩ := CondensedRing.finiteOpenDirectImage_constantModel_torAmplitude
-    l (ringChar k) k hp hne (Padic.coefficientExtensionRing l E 1)
-    ⟨1, le_rfl, by simpa only [pow_one] using residue_killed l E⟩ j
-  obtain ⟨hbc, hta⟩ := hd (min a b) (max b a) (by omega) K hK ht'
-  exact ⟨hbc, min a b, max b a + d, hta⟩
+  let enc (T : Scheme.{u}) := (FiniteDiscreteOrdinary.encoding_exists A T).some
+  obtain ⟨hreal, hpush⟩ := FiniteDiscreteOrdinary.finiteCtfInternalEtaleRealization
+    l (ringChar k) k (Fact.out : (ringChar k).Prime).pos (Fact.out : ringChar k ≠ l)
+    A enc
+  have hA : ∃ n : ℕ, 1 ≤ n ∧ (l : ULift.{u + 1} A) ^ n = 0 := by
+    refine ⟨1, le_rfl, ?_⟩
+    apply ULift.ext
+    change (l : A) ^ 1 = 0
+    simpa only [pow_one] using residue_killed l E
+  obtain ⟨d, _, _, hd⟩ := Etale.finiteEtaleOpen_uniformTorImage
+    l (ringChar k) k (Fact.out : (ringChar k).Prime).pos
+    (Ne.symm (Fact.out : ringChar k ≠ l)) (ULift.{u + 1} A) hA j
+  let V : Over (Spec (.of k)) := Over.mk (U ↘ Spec (.of k))
+  let T : Over (Spec (.of k)) := Over.mk (X ↘ Spec (.of k))
+  have : LocallyOfFiniteType V.hom :=
+    inferInstanceAs (LocallyOfFiniteType (U ↘ Spec (.of k)))
+  have : QuasiCompact V.hom := inferInstanceAs (QuasiCompact (U ↘ Spec (.of k)))
+  have : IsSeparated V.hom := inferInstanceAs (IsSeparated (U ↘ Spec (.of k)))
+  have : LocallyOfFiniteType T.hom :=
+    inferInstanceAs (LocallyOfFiniteType (X ↘ Spec (.of k)))
+  have : QuasiCompact T.hom := inferInstanceAs (QuasiCompact (X ↘ Spec (.of k)))
+  have : IsSeparated T.hom := inferInstanceAs (IsSeparated (X ↘ Spec (.of k)))
+  let f : V ⟶ T := j.asOver (Spec (.of k))
+  obtain ⟨eU, ⟨heU⟩⟩ := hreal V a' b' hab
+  let L := eU.inverse.obj ⟨K, hK, ht'⟩
+  let eL : (FiniteDiscreteOrdinary.internalEtaleRealization A U (enc U)).obj L.obj ≅ K :=
+    (heU.app L).symm ≪≫ (ObjectProperty.ι _).mapIso
+      (eU.counitIso.app ⟨K, hK, ht'⟩)
+  obtain ⟨_, hQ, htQ⟩ := hd a' b' hab L.obj L.property.1 L.property.2
+  have habd : a' ≤ b' + (d : ℤ) := le_trans hab
+    (le_add_of_nonneg_right (Int.natCast_nonneg d))
+  obtain ⟨eX, ⟨heX⟩⟩ := hreal T a' (b' + (d : ℤ)) habd
+  let Q := eX.functor.obj ⟨_, hQ, htQ⟩
+  have hplus : ∃ n : ℤ, L.obj.IsGE n := by
+    obtain ⟨c, e, hce⟩ := L.property.1.2
+    exact ⟨c, (DerivedCategory.isGE_iff _ _).2 fun i hi ↦ hce.2 i (Or.inl hi)⟩
+  have : QuasiCompact f.left := inferInstanceAs (QuasiCompact j)
+  have : QuasiSeparated f.left := inferInstanceAs (QuasiSeparated j)
+  obtain ⟨epush⟩ := hpush V T f
+  let eQ := (heX.app ⟨_, hQ, htQ⟩) ≪≫ epush.app ⟨L.obj, hplus⟩ ≪≫
+    (CondensedRing.moduleObjectDerivedPushforward
+      (FiniteDiscreteOrdinary.coefficient A) j).mapIso eL
+  have : (constantModelBoundedConstructible
+      (FiniteDiscreteOrdinary.coefficient A) X).IsClosedUnderIsomorphisms :=
+    (constantModelConstructibleFiniteTor_wellDefined
+      (FiniteDiscreteOrdinary.coefficient A) X).2.1
+  exact ⟨(constantModelBoundedConstructible
+      (FiniteDiscreteOrdinary.coefficient A) X).prop_of_iso eQ Q.property.1,
+    a', b' + (d : ℤ),
+    (DerivedCategory.torAmplitudeIn (FiniteDiscreteOrdinary.Internal A X)
+      a' (b' + (d : ℤ))).prop_of_iso eQ Q.property.2⟩
 
 set_option maxHeartbeats 800000 in
 -- Normalize the two scalar adjunctions and the internal coefficient module categories.

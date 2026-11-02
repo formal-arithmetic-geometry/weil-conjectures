@@ -149,6 +149,8 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsFlat
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedSupportDerivedLocalization
 import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import Mathlib.AlgebraicGeometry.Noetherian
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ClosedImmersionTensorProjection
+public import WeilConjectures.SixFunctors.ScalarOpenCompositorCoherence
 
 /-! # Normalized immersion projection and scalar comparison
 
@@ -288,5 +290,17 @@ theorem immersionOpenProjection_isIso (Λ : ScalarSixRing.{u}) (k : Type u) [Fie
       (adj.unit.app ((scalarSixPull Λ j.left).obj D ⊗ L))
       ((upperStar Λ.X j.left).mapDerivedCategory.map (immersionOpenProjection Λ j.left L D))
     exact hi
+
+/-- The supplied open/closed factorization as an actual compactification.
+Source: locally closed paragraph of the source
+(blueprint: lem-sfb-immersion-projection-scalar-normalization). -/
+def immersionCompactification {S Z X : Scheme.{u}} (j : S ⟶ Z) (i : Z ⟶ X)
+    [IsOpenImmersion j] [IsClosedImmersion i] : Compactification (j ≫ i) where
+  Z := Z
+  i := j
+  g := i
+  comm := rfl
+  isOpenImmersion := inferInstance
+  isProper := inferInstance
 
 end AlgebraicGeometry.ProEtale.CondensedRing
