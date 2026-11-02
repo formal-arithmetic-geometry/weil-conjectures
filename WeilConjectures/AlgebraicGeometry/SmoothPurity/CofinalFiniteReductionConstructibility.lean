@@ -150,12 +150,4 @@ open AlgebraicGeometry.Scheme
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (T : Scheme.{u})
 
-section
-attribute [-instance] WeilConjectures.integralCoefficientAbLocallyBijective
-  WeilConjectures.integralCoefficientAbSheafify WeilConjectures.integralCoefficientRingSheafify
-
-attribute [local instance] cofinalSiteSmall
-
-end
-
 end AlgebraicGeometry.ProEtale

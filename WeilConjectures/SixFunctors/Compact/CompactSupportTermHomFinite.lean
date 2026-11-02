@@ -161,7 +161,7 @@ private theorem coefficient_has_invertible_exponent
       (Spec (.of K₀)) := by
   let v := Padic.coefficientExtensionAbsoluteValue l E
   have hv := spectralNorm_extends (K := Padic l) (L := E)
-  have h := (Padic.extension_integers_dvr l E v hv).choose_spec.choose_spec
+  have h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   have hm : (l : Padic.coefficientExtensionIntegers l E) ∈
       Padic.coefficientExtensionMaximalIdeal l E := by
     apply (h.2.1 _).2
