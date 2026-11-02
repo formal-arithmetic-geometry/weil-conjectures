@@ -24,6 +24,7 @@ Source: Bhatt--Scholze, Proposition 6.6.11 and Lemma 6.3.14(1)
 set_option autoImplicit false
 
 attribute [-instance] CategoryTheory.flatConstantModulesAbelian
+  AlgebraicGeometry.ProEtale.surjectiveTower_wEqualsLocallyBijective
 
 set_option synthInstance.maxSize 4096
 universe u

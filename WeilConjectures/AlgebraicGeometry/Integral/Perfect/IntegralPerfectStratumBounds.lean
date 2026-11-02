@@ -23,6 +23,7 @@ Source: Bhatt--Scholze, Lemma 6.3.14, exact open and closed extensions
 set_option autoImplicit false
 
 attribute [-instance] CategoryTheory.flatConstantModulesAbelian
+  AlgebraicGeometry.ProEtale.surjectiveTower_wEqualsLocallyBijective
 
 universe u
 open CategoryTheory CategoryTheory.Limits
