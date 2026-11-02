@@ -12,6 +12,8 @@ import all WeilConjectures.SixFunctors.Compact.CompactSupportInputTowerCompatibi
 import all WeilConjectures.SixFunctors.IntegralSystemRealization.Pull.IntegralPullEvaluationQuotientSquare
 import all WeilConjectures.SixFunctors.IntegralSystemRealization.Pull.IntegralPullEvaluationDirectTransitionSquare
 
+set_option linter.privateModule false
+
 /-! # Finite direct-image transition transport -/
 
 @[expose] public noncomputable section

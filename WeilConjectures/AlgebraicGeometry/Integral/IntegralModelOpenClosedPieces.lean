@@ -41,6 +41,8 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUn
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 
+set_option linter.privateModule false
+
 import WeilConjectures.AlgebraicGeometry.ProperBaseChange.LatticeCoefficientPullbackIso
 import WeilConjectures.AlgebraicGeometry.Integral.IntegralModelOpenClosedBasic
 import Mathlib.AlgebraicGeometry.Noetherian

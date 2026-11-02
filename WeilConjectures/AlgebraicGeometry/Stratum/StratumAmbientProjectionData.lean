@@ -163,6 +163,8 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.FullyFaithful
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Complement
 
+set_option linter.privateModule false
+
 /-! The canonical comparison underlying the pro-etale stratum internal-Hom map. -/
 
 @[expose] public section

@@ -9,6 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.Projective.ProjectiveBundleFrame
 import WeilConjectures.AlgebraicGeometry.Projective.ProjectiveBundleTautologicalData
 import WeilConjectures.AlgebraicGeometry.Projective.ProjectiveBundleBaseChangeTheta
 
+set_option linter.privateModule false
+
 /-! # Per-morphism normalized projective-bundle base-change data
 Source: Stacks Project, Constructions, Tag 01O3.
 (blueprint: lem-pur-projective-bundle-base-change-family). -/

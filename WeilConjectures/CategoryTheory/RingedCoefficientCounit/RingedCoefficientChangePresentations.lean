@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.CategoryTheory.RingedCoefficientCounit.RingedCoefficientCounitPresentations
 
+set_option linter.privateModule false
+
 /-!
 # Coefficient changes of normalized counit diagrams
 

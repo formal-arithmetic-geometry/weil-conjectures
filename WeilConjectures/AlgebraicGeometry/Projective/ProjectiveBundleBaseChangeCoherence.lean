@@ -12,6 +12,8 @@ import WeilConjectures.AlgebraicGeometry.Projective.ProjectiveBundleTautological
 import WeilConjectures.AlgebraicGeometry.Projective.ProjectiveBundleQuotientEpi
 import WeilConjectures.AlgebraicGeometry.Projective.ProjectiveBundlePullbackUnitLaws
 
+set_option linter.privateModule false
+
 /-! # Coherence of projective-bundle base change
 
 Source: Stacks Project, Tags 01OB, 01O3, 01OE.

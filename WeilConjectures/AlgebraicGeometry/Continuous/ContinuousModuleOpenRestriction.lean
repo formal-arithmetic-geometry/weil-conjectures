@@ -9,6 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.Integral.IntegralModelOpenClosed
 import all WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSupplement
 import WeilConjectures.AlgebraicGeometry.Integral.IntegralModelOpenClosedBasic
 
+set_option linter.privateModule false
+
 /-!
 # Continuous-coefficient restriction on the localized pro-etale site
 

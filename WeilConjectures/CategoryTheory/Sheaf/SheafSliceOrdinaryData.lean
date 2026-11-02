@@ -29,6 +29,8 @@ public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
 public import Mathlib.CategoryTheory.Comma.Over.Pullback
 public import Mathlib.CategoryTheory.Adjunction.Mates
 
+set_option linter.privateModule false
+
 /-! # Ordinary comparison data for arbitrary sheaf slices
 
 The ordinary ringed square and its canonical normalizations, separated from the

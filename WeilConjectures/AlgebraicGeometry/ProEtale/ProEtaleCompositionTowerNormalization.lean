@@ -13,6 +13,8 @@ public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionFinite
 public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionSupplement
 public import Mathlib.RingTheory.Ideal.Quotient.Index
 
+set_option linter.privateModule false
+
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantRingOperations
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Intrinsic.ProEtaleIntrinsicExtensionByZero
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcActualRingedExchange

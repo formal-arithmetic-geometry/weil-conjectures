@@ -144,6 +144,8 @@ import all Mathlib.CategoryTheory.Functor.Derived.Adjunction
 import all Mathlib.CategoryTheory.Functor.KanExtension.Preserves
 import all WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedPointwiseKanBridge
 
+set_option linter.privateModule false
+
 /-!
 # Existence of normalized derived coefficient presentations
 

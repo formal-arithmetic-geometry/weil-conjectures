@@ -7,6 +7,8 @@ module
 public import WeilConjectures.SixFunctors.IntegralSystemRealization.Canonical.IntegralSystemCanonicalBridge
 import all WeilConjectures.SmoothPurity.Coefficient.CoefficientSequenceRoosModel
 
+set_option linter.privateModule false
+
 /-! # Normalized tower transition evaluation core -/
 
 @[expose] public noncomputable section

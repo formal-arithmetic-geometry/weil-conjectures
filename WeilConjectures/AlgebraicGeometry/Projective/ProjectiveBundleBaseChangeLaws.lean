@@ -9,6 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.Projective.ProjectiveBundleBaseC
 import WeilConjectures.AlgebraicGeometry.Projective.ProjectiveBundlePullbackUnitLaws
 import Mathlib.CategoryTheory.Adjunction.Mates
 
+set_option linter.privateModule false
+
 /-! # Coherence laws for normalized projective-bundle base-change data
 Source: Stacks Project, Constructions, Tag 01O3.
 (blueprint: lem-pur-projective-bundle-base-change-laws). -/

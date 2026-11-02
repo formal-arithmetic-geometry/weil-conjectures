@@ -49,6 +49,8 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 import Mathlib.CategoryTheory.ShrinkYoneda
 
+set_option linter.privateModule false
+
 /-!
 # Derived ringed-topos counit under coefficient restriction
 

@@ -27,6 +27,8 @@ import WeilConjectures.AlgebraicGeometry.SpTowerShriek.SmoothPurityStrictFiniteW
 import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantModuleConstructibility
 import WeilConjectures.AlgebraicGeometry.SpTowerShriek.SmoothPurityFiniteLevelProjectionTransport
 
+set_option linter.privateModule false
+
 /-! Finite-level comparison and conservativity for compact-support projection.
 
 Source: paragraph (3) of

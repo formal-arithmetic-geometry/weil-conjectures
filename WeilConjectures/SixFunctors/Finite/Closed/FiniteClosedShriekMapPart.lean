@@ -64,6 +64,8 @@ import all WeilConjectures.SixFunctors.Finite.Closed.FiniteClosedRealizationDoma
 import WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicTorAmplitudeTransport
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LocalizationFiniteTor
 
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 

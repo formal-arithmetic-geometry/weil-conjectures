@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.SmoothPurity.PurityFiniteSetting.Supported.SupportedCupFunctorialityModels
 
+set_option linter.privateModule false
+
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Comparison
 import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map

@@ -20,6 +20,8 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModuleAdjunction
 import Mathlib.Algebra.Category.Ring.FilteredColimits
 import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
 
+set_option linter.privateModule false
+
 /-! # Ordinary coefficient-tower inverse-image ingredients -/
 
 @[expose] public noncomputable section

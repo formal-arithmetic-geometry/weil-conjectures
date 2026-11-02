@@ -28,6 +28,8 @@ import WeilConjectures.SixFunctors.Etale.Derived.Stability.Reduction
 import WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicTorAmplitudeTransport
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LocalizationFiniteTor
 import all WeilConjectures.AlgebraicGeometry.Finite.Compact.FiniteCompactSupportConstructibility
+
+set_option linter.privateModule false
 /-!
 # Unit and coefficient associativity for a fixed compactification
 Source: Stacks Project, sites-cohomology.tex, Tags 0B56 and 0GL1;

@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.ContinuousRational.ContinuousRationalRealizationData
 
+set_option linter.privateModule false
+
 /-! # Ordinary normalized rational pullback before completion
 
 Source: Bhatt--Scholze, Remark 6.8.15; Stacks 03EL and 06YY

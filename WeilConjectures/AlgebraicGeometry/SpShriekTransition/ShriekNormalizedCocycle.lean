@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.SpShriekTransition.ShriekNormalizedTransitionData
 
+set_option linter.privateModule false
+
 /-! # Cocycle of normalized scalar transitions -/
 
 @[expose] public noncomputable section

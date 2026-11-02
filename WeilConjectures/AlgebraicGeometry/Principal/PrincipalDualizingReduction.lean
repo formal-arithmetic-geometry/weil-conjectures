@@ -8,6 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.SixFunctors.Etale.Derived.IntegralCoefficients
 
+set_option linter.privateModule false
+
 import WeilConjectures.AlgebraicGeometry.DerivedCategories
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 import WeilConjectures.Algebra.Homology.ProperBaseChange.ConstantCoefficientScalarExtensionPresentations

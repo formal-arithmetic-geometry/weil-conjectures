@@ -37,6 +37,8 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfShape
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory
 
+set_option linter.privateModule false
+
 /-! # Bounded models for an etale compactification
 
 Source: Stacks Project, Tag 0GL6, bounded-model preparation using the prescribed

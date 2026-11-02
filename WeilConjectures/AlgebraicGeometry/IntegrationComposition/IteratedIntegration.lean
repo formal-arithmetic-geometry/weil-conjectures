@@ -10,6 +10,8 @@ import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionAssoc
 import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Braided
 
+set_option linter.privateModule false
+
 /-! # Composition of ordered compact-support integrations
 
 Source: blueprint sec-smooth-purity/sk-prop-an,

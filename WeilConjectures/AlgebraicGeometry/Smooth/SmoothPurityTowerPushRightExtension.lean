@@ -9,6 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.Smooth.SmoothPurityTowerInjectiv
 public import WeilConjectures.AlgebraicGeometry.Smooth.SmoothPurityTowerEvaluationAdjoint
 import Mathlib.CategoryTheory.Monad.Adjunction
 
+set_option linter.privateModule false
+
 /-! # Ordinary coefficient-tower inverse-image ingredients -/
 
 @[expose] public noncomputable section

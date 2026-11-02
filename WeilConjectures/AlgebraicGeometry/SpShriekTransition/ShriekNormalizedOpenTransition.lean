@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.SpShriekTransition.ShriekNormalizedTransitionData
 
+set_option linter.privateModule false
+
 /-! # The normalized transition of one geometric operation -/
 
 @[expose] public noncomputable section

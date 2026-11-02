@@ -11,6 +11,8 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Ringed.ProEtaleRingedClosedKer
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 
+set_option linter.privateModule false
+
 /-! # Ambient pro-etale adjunction for the actual constant coefficient sheaf
 
 Source: Weil blueprint, smooth purity, order 1859; Stacks Project, Tags 09BM and 09AH

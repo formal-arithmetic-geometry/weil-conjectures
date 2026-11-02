@@ -33,6 +33,8 @@ public import Mathlib.Algebra.Category.ModuleCat.AB
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMapProjection
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Pullback
 
+set_option linter.privateModule false
+
 /-! # Normalization of the étale projection comparison
 
 Source: Stacks Project, Tag 0GKF.

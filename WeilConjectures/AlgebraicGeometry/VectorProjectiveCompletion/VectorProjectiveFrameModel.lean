@@ -7,6 +7,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.VectorProjectiveCompletion.VectorProjectiveCompletionData
 import Mathlib.LinearAlgebra.Basis.Prod
 import Mathlib.LinearAlgebra.SymmetricAlgebra.Basis
+
+set_option linter.privateModule false
 /-! # Frame charts for a presented vector-bundle completion
 
 Source: Stacks Project, Constructions, Tags 01OA, 01OE and 01NG.

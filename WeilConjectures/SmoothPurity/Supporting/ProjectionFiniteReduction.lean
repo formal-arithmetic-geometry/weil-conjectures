@@ -8,6 +8,8 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Reduction
 public import WeilConjectures.SixFunctors.IntegralHom.Reduction.IntegralHomReductionModels
 
+set_option linter.privateModule false
+
 /-!
 # Projection formula and finite coefficient reduction
 

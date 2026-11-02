@@ -8,6 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.Projective.ProjectiveBundleTautologicalData
 import WeilConjectures.AlgebraicGeometry.Projective.ProjectiveBundleRealizationPullbackAtlas
 
+set_option linter.privateModule false
+
 /-! # Quotient-line comparison along normalized projective-bundle base change
 Source: Stacks Project, Constructions, Tag 01O3.
 (blueprint: lem-pur-projective-bundle-base-change-theta). -/

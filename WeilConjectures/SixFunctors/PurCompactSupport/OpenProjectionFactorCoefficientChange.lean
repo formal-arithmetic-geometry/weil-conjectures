@@ -9,6 +9,8 @@ public import WeilConjectures.SixFunctors.PurCompactSupport.IntegralCompactSuppo
 import WeilConjectures.SixFunctors.PurCompactSupport.OpenProjectionIsoCoefficientChange
 import WeilConjectures.SixFunctors.PurCompactSupport.OpenProjectionFactorCompositorTransport
 
+set_option linter.privateModule false
+
 /-! # Coefficient compatibility of the open projection factor
 
 Source: Stacks Project, Tags 0E8I, 07A6 and 0D6D.

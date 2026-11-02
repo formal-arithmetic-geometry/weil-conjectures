@@ -10,6 +10,8 @@ import WeilConjectures.SixFunctors.PurCompactSupport.ScalarPullTensorCoefficient
 import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChangeAdjunctionSupplement
 import WeilConjectures.CategoryTheory.Exact.ExactLocalizationInverseMate
 
+set_option linter.privateModule false
+
 /-! The open projection square before the compactification pullback compositor.
 (blueprint: lem-sf-open-projection-iso-coefficient-change).
 -/

@@ -8,6 +8,8 @@ public import WeilConjectures.AlgebraicGeometry.Projective.ProjectiveBundleTauto
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Zero
 import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 
+set_option linter.privateModule false
+
 /-! # Rank-zero projective bundles
 
 The sole normalized coordinate is a global free generator on each frame open.

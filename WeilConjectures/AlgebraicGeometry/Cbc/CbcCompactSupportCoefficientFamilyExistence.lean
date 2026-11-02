@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Normalized.NormalizedCoefficientFamilies
 
+set_option linter.privateModule false
+
 /-! # Normalized compact-support families
 
 Source: current blueprint, compact-support scalar comparison.

@@ -38,6 +38,8 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleSiteComparisonSuppleme
 import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleSiteComparisonFiniteLevel
 import WeilConjectures.SmoothPurity.Sf.SfIntegralConstructibleTriangulated
 
+set_option linter.privateModule false
+
 /-!
 # Exact equivalences given by the four geometric-point fibre functors
 

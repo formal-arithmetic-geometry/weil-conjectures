@@ -106,6 +106,8 @@ import all WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionBinaryCoherenc
 import all WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import all WeilConjectures.Algebra.Homology.Scalar.ScalarDualEvaluationDescent
 
+set_option linter.privateModule false
+
 /-! # Transport of normalized matrix cokernels to constant scalar models
 
 Source: Stacks Project, Tags 03CY, 03EI and 03EK; Bhatt--Scholze,

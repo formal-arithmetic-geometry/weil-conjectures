@@ -8,6 +8,8 @@ public import WeilConjectures.SixFunctors.IntegralSystemRealization.Canonical.In
 import WeilConjectures.SixFunctors.IntegralSystemRealization.Proper.IntegralProperTowerTransitionCore
 import WeilConjectures.SixFunctors.IntegralSystemRealization.Proper.IntegralProperTowerTransitionDirect
 
+set_option linter.privateModule false
+
 /-! # Proper realization and its defining projections -/
 
 @[expose] public noncomputable section

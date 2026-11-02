@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.ContinuousRational.ContinuousRationalRealizationData
 
+set_option linter.privateModule false
+
 /-! # Normalized continuous tensor coherence
 
 Source: Bhatt--Scholze, Proposition 6.8.14(2) and Remark 6.8.15

@@ -11,6 +11,8 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.Algebra.Homology.Single
 
+set_option linter.privateModule false
+
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.CategoryTheory.RingedSiteModules
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian

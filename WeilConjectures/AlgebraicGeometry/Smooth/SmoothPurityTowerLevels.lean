@@ -18,6 +18,8 @@ import Mathlib.CategoryTheory.Functor.ReflectsIso.Limits
 import WeilConjectures.AlgebraicGeometry.Smooth.SmoothPurityLevelPullbackExact
 import WeilConjectures.AlgebraicGeometry.Smooth.SmoothPurityTowerPushRightExtension
 
+set_option linter.privateModule false
+
 /-!
 # Levels of the smooth-purity tower direct image
 

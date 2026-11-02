@@ -10,6 +10,8 @@ import all WeilConjectures.AlgebraicGeometry.Etale.EtaleGenericStratumMate
 import WeilConjectures.AlgebraicGeometry.StratumHomComparisonMate.Etale.StratumHomComparisonData
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 
+set_option linter.privateModule false
+
 /-! # Construction of the normalized stratum Hom isomorphisms
 
 Source: Weil blueprint, latest, finite-duality site-comparison proof, second paragraph

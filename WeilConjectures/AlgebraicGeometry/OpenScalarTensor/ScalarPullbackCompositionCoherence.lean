@@ -12,6 +12,8 @@ import all WeilConjectures.AlgebraicGeometry.Ordinary.OrdinaryRestrictionPullbac
 import all WeilConjectures.AlgebraicGeometry.ProEtale.Derived.ProEtaleDerivedPullbackCoherence
 import all WeilConjectures.AlgebraicGeometry.ProEtale.Canonical.ProEtaleCanonicalDerivedPullbackNormalization
 
+set_option linter.privateModule false
+
 /-! # Geometric composition of the scalar/pullback comparison
 
 Source: Stacks Project, Tag 0D6D; the geometric composition clause of

@@ -152,6 +152,8 @@ import Mathlib.Algebra.Category.Grp.Abelian
 import Mathlib.CategoryTheory.Sites.Abelian
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 
+set_option linter.privateModule false
+
 /-!
 # Naturality of normalized coefficient changes
 

@@ -10,6 +10,8 @@ import all WeilConjectures.Algebra.Homology.RingedTensorSquare.RingedExchangeTen
 import WeilConjectures.SixFunctors.PurCompactSupport.ScalarPullTensorCoefficientCoherence
 import WeilConjectures.SixFunctors.PurCompactSupport.OpenProjectionFactorCoefficientChange
 
+set_option linter.privateModule false
+
 /-! # Coefficient compatibility of the ordinary compact-support projection
 
 Source: Stacks Project, Tags 07A4, 0D6D, 0E48 and 0E8I; the actual-map reduction

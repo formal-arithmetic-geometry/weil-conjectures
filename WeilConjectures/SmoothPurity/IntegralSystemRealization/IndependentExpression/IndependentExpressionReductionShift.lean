@@ -8,6 +8,8 @@ module
 public import WeilConjectures.SmoothPurity.IntegralSystemRealization.IndependentExpression.IndependentExpressionShiftNaturality
 import Mathlib.CategoryTheory.Comma.Arrow
 
+set_option linter.privateModule false
+
 /-! # Pointwise reduction and independent expression shifts
 
 Source: blueprint purity transport, Step 2
