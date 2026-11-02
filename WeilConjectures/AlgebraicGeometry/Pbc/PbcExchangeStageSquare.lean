@@ -314,7 +314,8 @@ theorem pbcExchangeStageSquare_integral
   rw [rLg'₁] at eLg'
   rw [← Iso.app_inv, Iso.inv_comp_eq] at eRf eRf'
   have βLg_inv := eq_inv_comp_comp_inv
-    ((pbcDescentPullback l Ω g presLg F).mapIso ((pbcScalarIntegralComparison l Ω Y dY.out iY.out h).app
+    ((pbcDescentPullback l Ω g presLg F).mapIso
+      ((pbcScalarIntegralComparison l Ω Y dY.out iY.out h).app
       ((pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)
         (pbcActualDerivedPush f (pbcStageDatum.{u} l Ω E)) (presRf E)).obj K)).symm) _
     ((pbcScalarIntegralComparison l Ω Y' dY'.out iY'.out h).app
