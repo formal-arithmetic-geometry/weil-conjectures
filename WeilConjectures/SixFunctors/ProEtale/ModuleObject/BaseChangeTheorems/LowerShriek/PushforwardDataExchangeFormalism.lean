@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.ExchangeFormalism
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.PushforwardData
+-- keeps instance search for `GrothendieckTopology.W.IsMonoidal` fast
+public import WeilConjectures.SixFunctors.ClosedImmersionStages
 
 /-!
 # The exchange formalism of a pushforward datum
