@@ -54,6 +54,25 @@ attribute [local irreducible] scalarDerivedAdjunctionData
 
 attribute [local irreducible] scalarDerivedAdjunction ordinaryExtension ordinaryAdjunction
 
+/-- Sheafified sectionwise extension of scalars.
+Source: Stacks 03EK (blueprint: def-sp-coefficient-scalar-representatives). -/
+def ordinaryExtension : Sheaf J (ModuleCat.{u + 1} A) ⥤
+    Sheaf J (ModuleCat.{u + 1} B) :=
+  Sheaf.composeAndSheafify J (ModuleCat.extendScalars.{u + 1, u + 1, u + 1} a)
+
+/-- The actual ordinary extension/restriction adjunction, normalized by its tensor unit.
+Source: Stacks 03EK (blueprint: def-sp-coefficient-scalar-representatives). -/
+def ordinaryAdjunction : ordinaryExtension J a ⊣ Sheaf.restrictScalars J a :=
+  Sheaf.adjunction J (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} a)
+
+private noncomputable def scalarDerivedAdjunctionData
+    {R S : Type (u + 1)} [CommRing R] [CommRing S]
+    (K : GrothendieckTopology C) (φ : R →+* S) :=
+  normalizedDerivedAdjunction
+    (A := Sheaf K (ModuleCat.{u + 1} R)) (B := Sheaf K (ModuleCat.{u + 1} S))
+    (E := ordinaryExtension K φ) (U := Sheaf.restrictScalars K φ)
+    (ordinaryAdjunction K φ)
+
 /-- The fixed derived scalar extension, selected by its uniquely determined adjunction.
 Source: Stacks 06YY (blueprint: def-sp-coefficient-scalar-representatives). -/
 def extension : DerivedCategory (Sheaf J (ModuleCat.{u + 1} A)) ⥤
@@ -64,6 +83,25 @@ def extension : DerivedCategory (Sheaf J (ModuleCat.{u + 1} A)) ⥤
 Source: Stacks 06YY (blueprint: def-sp-coefficient-scalar-representatives). -/
 def adjunction : extension J a ⊣ Sheaf.derivedRestrictScalars J a :=
   Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars J a)
+
+/-- The canonical representative arrow: transpose the localized ordinary scalar unit.
+Source: Stacks 03EK and 06YY (blueprint: def-sp-coefficient-scalar-representatives). -/
+def representative
+    (P : CochainComplex (Sheaf J (ModuleCat.{u + 1} A)) ℤ) :
+    (extension J a).obj (DerivedCategory.Q.obj P) ⟶
+      DerivedCategory.Q.obj (((ordinaryExtension J a).mapHomologicalComplex (.up ℤ)).obj P) :=
+  let PE : CochainComplex (Sheaf J (ModuleCat.{u + 1} B)) ℤ :=
+    ((ordinaryExtension J a).mapHomologicalComplex (.up ℤ)).obj P
+  ((adjunction J a).homEquiv (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj PE)).symm
+    (DerivedCategory.Q.map
+      (show P ⟶ ((Sheaf.restrictScalars J a).mapHomologicalComplex (.up ℤ)).obj PE from
+        (Functor.mapHomologicalComplexIdIso
+          (Sheaf J (ModuleCat.{u + 1} A)) (.up ℤ)).inv.app P ≫
+          (NatTrans.mapHomologicalComplex (ordinaryAdjunction J a).unit (.up ℤ)).app P ≫
+          (Functor.mapHomologicalComplexCompIso
+            (F := ordinaryExtension J a) (G := Sheaf.restrictScalars J a)
+            (Iso.refl _) (.up ℤ)).inv.app P) ≫
+      (Sheaf.restrictScalars J a).mapDerivedCategoryFactors.inv.app PE)
 
 end Site
 

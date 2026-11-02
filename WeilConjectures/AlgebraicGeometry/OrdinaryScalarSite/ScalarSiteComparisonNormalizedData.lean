@@ -48,6 +48,27 @@ abbrev scalar {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
     (J : GrothendieckTopology C) {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (a : A →+* B) := CoefficientScalarRepresentatives.extension J a
 
+/-- The forward etale comparison is the inverse of the published scalar mate,
+transported through the specified exact geometric comparisons.
+Source: Stacks 06YY, 07A4
+(blueprint: lem-sfb-scalar-site-comparison-normalized-data). -/
+def etaleIso {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    (a : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    scalar Y.smallEtaleTopology a ⋙
+        (Etale.upperStar (ModuleCat.{u + 1} B) f).mapDerivedCategory ≅
+      (Etale.upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategory ⋙
+        scalar X.smallEtaleTopology a :=
+  Functor.isoWhiskerLeft _
+      (Etale.leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} B) f).symm ≪≫
+    (@asIso _ _ _ _
+      (((mateEquiv
+        (CoefficientScalarRepresentatives.adjunction Y.smallEtaleTopology a)
+        (CoefficientScalarRepresentatives.adjunction X.smallEtaleTopology a)).symm
+          (TwoSquare.mk _ _ _ _ (Etale.scalarRestrictionPullbackIso a f).hom)).natTrans)
+      (CoefficientScalarRepresentatives.etaleScalarPullbackMate_isIso a f)).symm ≪≫
+    Functor.isoWhiskerRight
+      (Etale.leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) f) _
+
 /-- The forward pro-etale comparison is the inverse of the published scalar mate,
 transported through the specified exact geometric comparisons.
 Source: Stacks 06YY, 07A4

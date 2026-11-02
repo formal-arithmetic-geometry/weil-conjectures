@@ -29,6 +29,17 @@ abbrev delta {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (a : A →+* B) (T : Scheme.{u}) :=
   CoefficientScalarRepresentatives.comparisonIso T a
 
+/-- The scalar direct-image mate on the etale site. Its transpose is scalar
+extension of the counit after the normalized pullback/tensor comparison.
+Source: det-prop-scalar-six-direct-image, Formal properties; Stacks 07A7
+(blueprint: def-sfb-ordinary-scalar-site-comparisons). -/
+def etaleGamma {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    (a : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y) :=
+  (mateEquiv
+    (Etale.mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)
+    (Etale.mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f)
+    (etaleIso a f).hom).natTrans
+
 /-- The scalar direct-image mate on the pro-etale site. This construction does
 not invert the mate. Source: det-prop-scalar-six-direct-image; Stacks 07A7
 (blueprint: def-sfb-ordinary-scalar-site-comparisons). -/
