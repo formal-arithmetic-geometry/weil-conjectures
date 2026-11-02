@@ -304,9 +304,10 @@ private theorem kFlat_representative (X : D J R) :
     (DerivedCategory.isIso_Q_map_iff_quasiIso _ f).2 hf
   exact ⟨K, hK, ⟨asIso (DerivedCategory.Q.map f) ≪≫ DerivedCategory.Q.objObjPreimageIso X⟩⟩
 
+omit [HasDerivedCategory (Modules J R)] in
 private theorem resolution_isKInjective (M : CochainComplex (Modules J R) ℤ) :
     ((WeilConjectures.coefficientHomResolution.{u, u, u} J R).obj M).IsKInjective := by
-  letI := (SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses.{
+  let := (SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses.{
     u, u, u} J R).1
   exact CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{u} _ M
 
@@ -331,9 +332,11 @@ private theorem homRepresentative_surjective (P L M : CochainComplex (Modules J 
   obtain ⟨φ, rfl⟩ := (HomotopyCategory.quotient (Modules J R) (.up ℤ)).map_surjective f
   refine ⟨φ, ?_⟩
   have hn := DerivedCategory.quotientCompQhIso_hom_naturality (C := Modules J R) φ
-  rw [hf, Category.assoc, Category.assoc, Iso.inv_hom_id_app, Category.comp_id] at hn
+  rw [hf] at hn
+  simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id] at hn
   rw [← (cancel_epi _).1 hn, Category.assoc, Iso.hom_inv_id, Category.comp_id]
 
+omit [HasDerivedCategory (Modules J R)] in
 attribute [local irreducible] SheafOfModules.monoidalCategory in
 private theorem totalTensor_ext (P L I : CochainComplex (Modules J R) ℤ)
     (f g : (WeilConjectures.coefficientTotalTensor.{u, u, u} J R).obj (P, L) ⟶ I)
@@ -400,7 +403,7 @@ private theorem adjunction_eq_of_representatives
         (adj₂ (DerivedCategory.Q.obj L)).counit.app Y := by
     let e := DerivedCategory.Q.objObjPreimageIso Y
     apply (cancel_epi ((hom J R (DerivedCategory.Q.obj L) ⋙
-      tensorRight (DerivedCategory.Q.obj L)).map e.inv)).1
+      tensorRight (DerivedCategory.Q.obj L)).map e.hom)).1
     rw [(adj₁ _).counit.naturality, (adj₂ _).counit.naturality, hQ L hL]
   funext P
   apply Adjunction.ext_counit
@@ -412,14 +415,16 @@ private theorem adjunction_eq_of_representatives
   exact (cancel_epi ((tensorLeft ((homFunctor J R).obj (op P, Y))).map eP.hom)).1
     (h₁.symm.trans h₂)
 
-private theorem comparison_hom_eq {X Y Z : D J R} (x₁ x₂ : X ⟶ Y) [IsIso x₁] [IsIso x₂]
-    (y₁ y₂ : Y ⟶ Z) (hy : y₁ = y₂) (h₁ : x₁ ≫ y₁ = 𝟙 X) (h₂ : x₂ ≫ y₂ = 𝟙 X) :
+private theorem comparison_hom_eq {X Y : D J R} {x₁ x₂ : X ⟶ Y} [IsIso x₁] [IsIso x₂]
+    {y₁ y₂ : Y ⟶ X} (h₁ : x₁ ≫ y₁ = 𝟙 X) (h₂ : x₂ ≫ y₂ = 𝟙 X) (hy : y₁ = y₂) :
     x₁ = x₂ := by
   subst hy
   have h := IsIso.eq_inv_of_hom_inv_id h₂
   calc x₁ = (x₁ ≫ y₁) ≫ x₂ := by rw [h, Category.assoc, IsIso.inv_hom_id, Category.comp_id]
     _ = x₂ := by rw [h₁, Category.id_comp]
 
+set_option maxHeartbeats 1000000 in
+-- Substituting the derived monoidal structure into both closed structures is expensive.
 private theorem normalizedAdjunction_unique
     (S₁ S₂ : WeilConjectures.CoefficientClosedStructure (homFunctor J R))
     (hS₁ : ∃ (h : S₁.monoidal = derivedMonoidal J R)
@@ -455,7 +460,7 @@ private theorem normalizedAdjunction_unique
       (g₂ a b (a + b) rfl (add_comm b a) U x y).symm)
   have hc : (M₁.comparison.app (⟨P, hP⟩, ⟨L, hL⟩)).hom =
       (M₂.comparison.app (⟨P, hP⟩, ⟨L, hL⟩)).hom :=
-    comparison_hom_eq J R _ _ _ _ rfl (c₁ ⟨P, hP⟩ ⟨L, hL⟩) (c₂ ⟨P, hP⟩ ⟨L, hL⟩)
+    comparison_hom_eq J R (c₁ ⟨P, hP⟩ ⟨L, hL⟩) (c₂ ⟨P, hP⟩ ⟨L, hL⟩) rfl
   apply (cancel_epi (M₁.comparison.hom.app (⟨P, hP⟩, ⟨L, hL⟩))).1
   refine e₁.trans ?_
   rw [hψ]
@@ -487,8 +492,8 @@ theorem normalizedAdjunction_existsUnique :
             (DerivedCategory.Q.obj P.obj) (DerivedCategory.Q.obj L.obj)) h) ≫
           Functor.LaxMonoidal.μ DerivedCategory.Q P.obj L.obj ≫
           DerivedCategory.Q.map (totalTensorNativeIso J R P.obj L.obj).inv = 𝟙 _ := by
-  obtain ⟨S, hS⟩ := normalizedAdjunction_exists J R
-  exact ⟨S, hS, fun S' hS' ↦ normalizedAdjunction_unique J R S' S hS' hS⟩
+  exact (normalizedAdjunction_exists J R).elim fun S hS ↦
+    ExistsUnique.intro S hS fun S' hS' ↦ normalizedAdjunction_unique J R S' S hS' hS
 
 end Normalization
 

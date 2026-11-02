@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.VaryingRing.SemilinearScalarAdjunctions
+import WeilConjectures.AlgebraicGeometry.StrictTower.TowerOpenBetaNormalization
+import WeilConjectures.AlgebraicGeometry.StrictTower.ProperOpenClopenProjector
 
 /-! # Scalar restriction and proper/open coherence
 
@@ -20,6 +22,8 @@ set_option backward.isDefEq.respectTransparency.types false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 open WeilConjectures.SemilinearSections
+
+attribute [-instance] CategoryTheory.catToReflQuiver
 
 namespace AlgebraicGeometry.ProEtale.VaryingRing
 
@@ -120,6 +124,331 @@ structure OrdinaryScalarProperOpen (C : OrdinaryScalarRestriction R φ B ψ)
       (G.b p).hom.app ((extension R φ i).obj M) ≫
         (StrictTower.towerPullback B p).map ((G.a i).hom.app M) ≫
         (alpha k r p i h).app ((C.rho S).obj M)
+
+section Comparison
+
+variable {A₀ A₁ A₂ D₀ D₁ D₂ : Type*} [Category* A₀] [Category* A₁] [Category* A₂]
+  [Category* D₀] [Category* D₁] [Category* D₂]
+  {L₀₁ : A₀ ⥤ A₁} {L₁₂ : A₁ ⥤ A₂} {L₀₂ : A₀ ⥤ A₂}
+  {R₁₀ : A₁ ⥤ A₀} {R₂₁ : A₂ ⥤ A₁} {R₂₀ : A₂ ⥤ A₀}
+  {L₀₁' : D₀ ⥤ D₁} {L₁₂' : D₁ ⥤ D₂} {L₀₂' : D₀ ⥤ D₂}
+  {R₁₀' : D₁ ⥤ D₀} {R₂₁' : D₂ ⥤ D₁} {R₂₀' : D₂ ⥤ D₀}
+
+/-- The left composite comparison is unit-normalized against the right comparison.
+Source: Stacks 0D6D (blueprint: lem-sf-semilinear-scalar-proper-open). -/
+private theorem leftAdjointCompIso_unit
+    (adj₀₁ : L₀₁ ⊣ R₁₀) (adj₁₂ : L₁₂ ⊣ R₂₁) (adj₀₂ : L₀₂ ⊣ R₂₀)
+    (e : R₂₁ ⋙ R₁₀ ≅ R₂₀) (X : A₀) :
+    adj₀₂.unit.app X ≫ e.inv.app (L₀₂.obj X) =
+      adj₀₁.unit.app X ≫ R₁₀.map (adj₁₂.unit.app (L₀₁.obj X)) ≫
+        R₁₀.map (R₂₁.map ((Adjunction.leftAdjointCompIso adj₀₁ adj₁₂ adj₀₂ e).hom.app X)) := by
+  have h := unit_conjugateEquiv_symm adj₀₂ (adj₀₁.comp adj₁₂) e.inv X
+  rw [h, Adjunction.leftAdjointCompIso_hom]
+  simp [Adjunction.leftAdjointCompNatTrans]
+
+/-- Compatible comparisons of three adjunctions carry a unit-normalized left composite
+to a unit-normalized left composite.
+Source: Stacks 0D6D (blueprint: lem-sf-semilinear-scalar-proper-open).
+Proof: transpose under the composite adjunction and use the three unit equations. -/
+private theorem leftComposite_comparison
+    (adj₀₁ : L₀₁ ⊣ R₁₀) (adj₁₂ : L₁₂ ⊣ R₂₁) (adj₀₂ : L₀₂ ⊣ R₂₀)
+    (adj₀₁' : L₀₁' ⊣ R₁₀') (adj₁₂' : L₁₂' ⊣ R₂₁') (adj₀₂' : L₀₂' ⊣ R₂₀')
+    (ρ₀ : A₀ ⥤ D₀) (ρ₁ : A₁ ⥤ D₁) (ρ₂ : A₂ ⥤ D₂)
+    (l₀₁ : L₀₁ ⋙ ρ₁ ≅ ρ₀ ⋙ L₀₁') (l₁₂ : L₁₂ ⋙ ρ₂ ≅ ρ₁ ⋙ L₁₂')
+    (l₀₂ : L₀₂ ⋙ ρ₂ ⟶ ρ₀ ⋙ L₀₂')
+    (r₁₀ : R₁₀ ⋙ ρ₀ ⟶ ρ₁ ⋙ R₁₀') (r₂₁ : R₂₁ ⋙ ρ₁ ⟶ ρ₂ ⋙ R₂₁')
+    (r₂₀ : R₂₀ ⋙ ρ₀ ⟶ ρ₂ ⋙ R₂₀')
+    (h₀₁ : ∀ X, ρ₀.map (adj₀₁.unit.app X) ≫ r₁₀.app (L₀₁.obj X) ≫
+      R₁₀'.map (l₀₁.hom.app X) = adj₀₁'.unit.app (ρ₀.obj X))
+    (h₁₂ : ∀ Y, ρ₁.map (adj₁₂.unit.app Y) ≫ r₂₁.app (L₁₂.obj Y) ≫
+      R₂₁'.map (l₁₂.hom.app Y) = adj₁₂'.unit.app (ρ₁.obj Y))
+    (h₀₂ : ∀ X, ρ₀.map (adj₀₂.unit.app X) ≫ r₂₀.app (L₀₂.obj X) ≫
+      R₂₀'.map (l₀₂.app X) = adj₀₂'.unit.app (ρ₀.obj X))
+    (e : R₂₁ ⋙ R₁₀ ≅ R₂₀) (e' : R₂₁' ⋙ R₁₀' ≅ R₂₀')
+    (he : ∀ Z, ρ₀.map (e.hom.app Z) ≫ r₂₀.app Z =
+      r₁₀.app (R₂₁.obj Z) ≫ R₁₀'.map (r₂₁.app Z) ≫ e'.hom.app (ρ₂.obj Z))
+    (c : L₀₁ ⋙ L₁₂ ⟶ L₀₂)
+    (hc : ∀ X, adj₀₂.unit.app X ≫ e.inv.app (L₀₂.obj X) =
+      adj₀₁.unit.app X ≫ R₁₀.map (adj₁₂.unit.app (L₀₁.obj X)) ≫
+        R₁₀.map (R₂₁.map (c.app X)))
+    (c' : L₀₁' ⋙ L₁₂' ⟶ L₀₂')
+    (hc' : ∀ X, adj₀₂'.unit.app X ≫ e'.inv.app (L₀₂'.obj X) =
+      adj₀₁'.unit.app X ≫ R₁₀'.map (adj₁₂'.unit.app (L₀₁'.obj X)) ≫
+        R₁₀'.map (R₂₁'.map (c'.app X)))
+    (X : A₀) :
+    ρ₂.map (c.app X) ≫ l₀₂.app X =
+      l₁₂.hom.app (L₀₁.obj X) ≫ L₁₂'.map (l₀₁.hom.app X) ≫ c'.app (ρ₀.obj X) := by
+  have key : L₁₂'.map (l₀₁.inv.app X) ≫ l₁₂.inv.app (L₀₁.obj X) ≫ ρ₂.map (c.app X) ≫
+      l₀₂.app X = c'.app (ρ₀.obj X) := by
+    apply ((adj₀₁'.comp adj₁₂').homEquiv _ _).injective
+    simp only [Adjunction.homEquiv_unit, Adjunction.comp_unit_app, Functor.comp_map,
+      Functor.map_comp, Category.assoc]
+    rw [← hc', ← h₀₂, ← h₀₁]
+    have s1 : R₁₀'.map (l₀₁.hom.app X) ≫
+        R₁₀'.map (adj₁₂'.unit.app (L₀₁'.obj (ρ₀.obj X))) ≫
+        R₁₀'.map (R₂₁'.map (L₁₂'.map (l₀₁.inv.app X))) =
+        R₁₀'.map (adj₁₂'.unit.app (ρ₁.obj (L₀₁.obj X))) := by
+      have n1 := adj₁₂'.unit.naturality (l₀₁.inv.app X)
+      simp only [Functor.id_map, Functor.comp_map, Functor.comp_obj, Functor.id_obj] at n1
+      simp only [← Functor.map_comp, ← n1, Iso.hom_inv_id_app_assoc]
+    have s2 : R₁₀'.map (adj₁₂'.unit.app (ρ₁.obj (L₀₁.obj X))) ≫
+        R₁₀'.map (R₂₁'.map (l₁₂.inv.app (L₀₁.obj X))) =
+        R₁₀'.map (ρ₁.map (adj₁₂.unit.app (L₀₁.obj X))) ≫
+          R₁₀'.map (r₂₁.app (L₁₂.obj (L₀₁.obj X))) := by
+      rw [← h₁₂]
+      simp only [Functor.map_comp, Category.assoc]
+      rw [← R₁₀'.map_comp (R₂₁'.map _), ← R₂₁'.map_comp]
+      simp
+    have s3 := r₁₀.naturality (adj₁₂.unit.app (L₀₁.obj X))
+    have s4 := r₂₁.naturality (c.app X)
+    have s5 := r₁₀.naturality (R₂₁.map (c.app X))
+    have s6 := e'.inv.naturality (l₀₂.app X)
+    have s7 : ρ₀.map (e.inv.app (L₀₂.obj X)) ≫ r₁₀.app (R₂₁.obj (L₀₂.obj X)) ≫
+        R₁₀'.map (r₂₁.app (L₀₂.obj X)) =
+        r₂₀.app (L₀₂.obj X) ≫ e'.inv.app (ρ₂.obj (L₀₂.obj X)) := by
+      rw [← cancel_epi (ρ₀.map (e.hom.app (L₀₂.obj X))), ← Functor.map_comp_assoc,
+        Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.id_comp, reassoc_of% (he _)]
+      simp
+    have h5 : ρ₀.map (adj₀₂.unit.app X) ≫ ρ₀.map (e.inv.app (L₀₂.obj X)) =
+        ρ₀.map (adj₀₁.unit.app X) ≫ ρ₀.map (R₁₀.map (adj₁₂.unit.app (L₀₁.obj X))) ≫
+          ρ₀.map (R₁₀.map (R₂₁.map (c.app X))) := by
+      simpa only [Functor.map_comp, Category.assoc] using congrArg ρ₀.map (hc X)
+    simp only [Functor.comp_obj, Functor.comp_map, Functor.id_obj] at s3 s4 s5 s6 s7
+    simp only [Category.assoc]
+    rw [reassoc_of% s1, reassoc_of% s2, ← reassoc_of% s3]
+    have s4' := congrArg R₁₀'.map s4
+    simp only [Functor.map_comp] at s4'
+    rw [← reassoc_of% s4', ← reassoc_of% s5]
+    rw [← reassoc_of% h5, reassoc_of% s7, s6]
+  rw [← key]
+  simp only [← Functor.map_comp_assoc, Iso.hom_inv_id_app]
+  simp
+
+end Comparison
+
+/-- The termwise section-normalized direct-image compositor on strict towers.
+Source: Stacks 0D6D (blueprint: lem-sf-semilinear-scalar-proper-open). -/
+private def towerRComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
+    StrictTower.towerDirectImage B f ⋙ StrictTower.towerDirectImage B g ≅
+      StrictTower.towerDirectImage B (f ≫ g) :=
+  Functor.whiskeringRightObjCompIso _ _ ≪≫
+    (Functor.whiskeringRight ℕᵒᵖ _ _).mapIso (StrictTower.moduleRComp B f g)
+
+/-- The tower pullback compositor is unit-normalized against `towerRComp`.
+Source: Stacks 0D6D (blueprint: lem-sf-semilinear-scalar-proper-open). -/
+private theorem towerGComp_unit {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    (T : StrictTower.Towers B Z) :
+    (scalarTowerAdj B (f ≫ g)).unit.app T ≫
+        (towerRComp B f g).inv.app ((StrictTower.towerPullback B (f ≫ g)).obj T) =
+      (scalarTowerAdj B g).unit.app T ≫
+        (StrictTower.towerDirectImage B g).map
+          ((scalarTowerAdj B f).unit.app ((StrictTower.towerPullback B g).obj T)) ≫
+        (StrictTower.towerDirectImage B g).map ((StrictTower.towerDirectImage B f).map
+          ((StrictTower.towerGComp B f g).inv.app T)) := by
+  apply NatTrans.ext
+  funext n
+  have h := leftAdjointCompIso_unit
+    (Scheme.proEtaleRingModuleAdjunction g (StrictTower.coefficients B Z)
+      (StrictTower.coefficients B Y) (StrictTower.constantRingIso B g))
+    (Scheme.proEtaleRingModuleAdjunction f (StrictTower.coefficients B Y)
+      (StrictTower.coefficients B X) (StrictTower.constantRingIso B f))
+    (Scheme.proEtaleRingModuleAdjunction (f ≫ g) (StrictTower.coefficients B Z)
+      (StrictTower.coefficients B X) (StrictTower.constantRingIso B (f ≫ g)))
+    (StrictTower.moduleRComp B f g) (T.obj n)
+  simp [scalarTowerAdj, towerRComp, StrictTower.towerGComp, StrictTower.moduleGComp]
+  exact h
+
+/-- Scalar restriction is the original section map at every level.
+Source: Stacks 03CZ (blueprint: lem-sf-semilinear-scalar-proper-open). -/
+private theorem rho_map_heq (C : OrdinaryScalarRestriction R φ B ψ) {X : Scheme.{u}}
+    {M M' : Modules R φ X} (q : M ⟶ M') (n : ℕ) (H : X.ProEtᵒᵖ)
+    (x : (((C.rho X).obj M).obj (op n)).val.obj H) (y : M.val.obj (op (n, H.unop)))
+    (hxy : HEq x y) :
+    HEq ((((C.rho X).map q).app (op n)).val.app H x) (q.val.app (op (n, H.unop)) y) := by
+  have h := congrArg (fun t ↦ t.val.app H x) ((C.level X n).hom.naturality q)
+  simp only [Functor.comp_map, SheafOfModules.comp_val, PresheafOfModules.comp_app,
+    ModuleCat.comp_apply] at h
+  have h1 := C.level_sections X n M' H ((((C.rho X).map q).app (op n)).val.app H x)
+  have h3 : ((C.level X n).hom.app M).val.app H x = y :=
+    eq_of_heq ((C.level_sections X n M H x).trans hxy)
+  subst h3
+  exact h1.symm.trans (heq_of_eq h)
+
+/-- Restriction maps of scalar restriction are the original restriction maps.
+Source: Stacks 03CZ (blueprint: lem-sf-semilinear-scalar-proper-open). -/
+private theorem rho_restrict_heq (C : OrdinaryScalarRestriction R φ B ψ) {X : Scheme.{u}}
+    (M : Modules R φ X) (n : ℕ) {V V' : X.ProEt} (ρ : V ⟶ V')
+    (z : (((C.rho X).obj M).obj (op n)).val.obj (op V')) (w : M.val.obj (op (n, V')))
+    (hzw : HEq z w) :
+    HEq ((((C.rho X).obj M).obj (op n)).val.map ρ.op z)
+      (M.val.map (Prod.mkHom (𝟙 n) ρ).op w) := by
+  have h := PresheafOfModules.naturality_apply ((C.level X n).hom.app M).val ρ.op z
+  have h1 := C.level_sections X n M (op V) ((((C.rho X).obj M).obj (op n)).val.map ρ.op z)
+  have h3 : ((C.level X n).hom.app M).val.app (op V') z = w :=
+    eq_of_heq ((C.level_sections X n M (op V') z).trans hzw)
+  subst h3
+  exact h1.symm.trans (heq_of_eq h)
+
+/-- Restriction carries the section-normalized system direct-image compositor to the
+section-normalized tower compositor.
+Source: Stacks 0D6D (blueprint: lem-sf-semilinear-scalar-proper-open).
+Proof: all comparison maps are the identity on sections, and both compositors restrict
+along the same fibre-product pasting isomorphism. -/
+private theorem d_pComp (C : OrdinaryScalarRestriction R φ B ψ)
+    (G : OrdinaryScalarAdjunctions R φ B ψ C) {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    (K : Modules R φ X) :
+    (C.rho Z).map ((modulePComp R φ f g).hom.app K) ≫ (G.d (f ≫ g)).hom.app K =
+      (G.d g).hom.app ((push R φ f).obj K) ≫
+        (StrictTower.towerDirectImage B g).map ((G.d f).hom.app K) ≫
+        (towerRComp B f g).hom.app ((C.rho X).obj K) := by
+  apply NatTrans.ext
+  funext n
+  induction n with | op n => ?_
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro H
+  induction H with | op H => ?_
+  ext x
+  simp only [NatTrans.comp_app, SheafOfModules.comp_val, PresheafOfModules.comp_app,
+    ModuleCat.comp_apply]
+  apply eq_of_heq
+  have hx := C.level_sections Z n ((push R φ g).obj ((push R φ f).obj K)) (op H) x
+  have hl := (G.d_sections (f ≫ g) K n (op H) _).trans
+    (rho_map_heq R φ B ψ C ((modulePComp R φ f g).hom.app K) n (op H) x _ hx.symm)
+  have hp : ((modulePComp R φ f g).hom.app K).val.app (op (n, H))
+      (((C.level Z n).hom.app ((push R φ g).obj ((push R φ f).obj K))).val.app (op H) x) =
+      K.val.map (Prod.mkHom (𝟙 n)
+        ((MorphismProperty.Over.pullbackComp f g).hom.app H)).op
+        (((C.level Z n).hom.app ((push R φ g).obj ((push R φ f).obj K))).val.app (op H) x) := by
+    unfold modulePComp
+    exact (modulePComp_existsUnique R φ f g).choose_spec.1 K n H _
+  rw [hp] at hl
+  refine hl.trans ?_
+  have ht : ((towerRComp B f g).hom.app ((C.rho X).obj K)).app (op n) =
+      (StrictTower.moduleRComp B f g).hom.app (((C.rho X).obj K).obj (op n)) := by
+    simp [towerRComp]
+  rw [ht]
+  have hr := (Classical.choose_spec (StrictTower.moduleRComp_existsUnique B f g)).1
+    (((C.rho X).obj K).obj (op n)) H
+  refine HEq.trans ?_ (heq_of_eq (hr _).symm)
+  have hm := (G.d_sections f K n (op ((Scheme.proEtaleBaseChange g).obj H)) _).trans
+    ((G.d_sections g ((push R φ f).obj K) n (op H) x).trans hx.symm)
+  exact (rho_restrict_heq R φ B ψ C K n _ _ _ hm).symm
+
+/-- Restriction preserves the unit-normalized inverse-image compositor.
+Source: Stacks 0D6D (blueprint: lem-sf-semilinear-scalar-proper-open).
+Proof: the inverse-image compositors are the left-adjoint comparisons of the
+section-normalized direct-image compositors, which restriction preserves. -/
+private theorem b_gComp (C : OrdinaryScalarRestriction R φ B ψ)
+    (G : OrdinaryScalarAdjunctions R φ B ψ C) {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    (M : Modules R φ Z) :
+    (C.rho X).map ((moduleGComp R φ f g).inv.app M) ≫ (G.b (f ≫ g)).hom.app M =
+      (G.b f).hom.app ((pull R φ g).obj M) ≫
+        (StrictTower.towerPullback B f).map ((G.b g).hom.app M) ≫
+        (StrictTower.towerGComp B f g).inv.app ((C.rho Z).obj M) :=
+  leftComposite_comparison (moduleAdj R φ g) (moduleAdj R φ f) (moduleAdj R φ (f ≫ g))
+    (scalarTowerAdj B g) (scalarTowerAdj B f) (scalarTowerAdj B (f ≫ g))
+    (C.rho Z) (C.rho Y) (C.rho X) (G.b g) (G.b f) (G.b (f ≫ g)).hom
+    (G.d g).hom (G.d f).hom (G.d (f ≫ g)).hom
+    (OrdinaryScalarAdjunctions.unit R φ B ψ C G g)
+    (OrdinaryScalarAdjunctions.unit R φ B ψ C G f)
+    (OrdinaryScalarAdjunctions.unit R φ B ψ C G (f ≫ g))
+    (modulePComp R φ f g) (towerRComp B f g) (d_pComp R φ B ψ C G f g)
+    (moduleGComp R φ f g).inv (fun X ↦ leftAdjointCompIso_unit _ _ _ _ X)
+    (StrictTower.towerGComp B f g).inv (towerGComp_unit B f g) M
+
+/-- Restriction preserves the unit-normalized open-extension compositor.
+Source: Stacks 03DI and 0F7D (blueprint: lem-sf-semilinear-scalar-proper-open). -/
+private theorem a_jComp (C : OrdinaryScalarRestriction R φ B ψ)
+    (G : OrdinaryScalarAdjunctions R φ B ψ C) {U V X : Scheme.{u}} (i : U ⟶ V) (j : V ⟶ X)
+    [IsOpenImmersion i] [IsOpenImmersion j] (N : Modules R φ U) :
+    (C.rho X).map ((moduleJComp R φ i j).hom.app N) ≫ (G.a (i ≫ j)).hom.app N =
+      (G.a j).hom.app ((extension R φ i).obj N) ≫
+        (StrictTower.towerJ B j).map ((G.a i).hom.app N) ≫
+        (scalarTowerOpenComp B i j).hom.app ((C.rho U).obj N) :=
+  leftComposite_comparison (moduleJAdj R φ i) (moduleJAdj R φ j) (moduleJAdj R φ (i ≫ j))
+    (scalarTowerOpenAdj B i) (scalarTowerOpenAdj B j) (scalarTowerOpenAdj B (i ≫ j))
+    (C.rho U) (C.rho V) (C.rho X) (G.a i) (G.a j) (G.a (i ≫ j)).hom
+    (G.b i).hom (G.b j).hom (G.b (i ≫ j)).hom
+    (G.open_unit i) (G.open_unit j) (G.open_unit (i ≫ j))
+    (moduleGComp R φ i j).symm (StrictTower.towerGComp B i j).symm
+    (fun Z ↦ b_gComp R φ B ψ C G i j Z)
+    (moduleJComp R φ i j).hom (fun X ↦ leftAdjointCompIso_unit _ _ _ _ X)
+    (scalarTowerOpenComp B i j).hom (fun X ↦ leftAdjointCompIso_unit _ _ _ _ X) N
+
+/-- The inverse-image comparison respects equality transport of scheme maps.
+Source: Stacks 03D7 (blueprint: lem-sf-semilinear-scalar-proper-open). -/
+private theorem b_congr (C : OrdinaryScalarRestriction R φ B ψ)
+    (G : OrdinaryScalarAdjunctions R φ B ψ C) {X Y : Scheme.{u}} {f f' : X ⟶ Y}
+    (h : f = f') (M : Modules R φ Y) :
+    (C.rho X).map ((eqToIso (congrArg (pull R φ) h)).hom.app M) ≫ (G.b f').hom.app M =
+      (G.b f).hom.app M ≫
+        (eqToIso (congrArg (StrictTower.towerPullback B) h)).hom.app ((C.rho Y).obj M) := by
+  subst h
+  simp
+
+/-- The open-extension comparison respects equality transport of open immersions.
+Source: Stacks 03DI (blueprint: lem-sf-semilinear-scalar-proper-open). -/
+private theorem a_congr (C : OrdinaryScalarRestriction R φ B ψ)
+    (G : OrdinaryScalarAdjunctions R φ B ψ C) {U X : Scheme.{u}} {f f' : U ⟶ X}
+    [IsOpenImmersion f] [IsOpenImmersion f'] (h : f = f') (N : Modules R φ U) :
+    (C.rho X).map ((moduleJCongr R φ h).hom.app N) ≫ (G.a f').hom.app N =
+      (G.a f).hom.app N ≫ (eqToIso (scalarTowerOpen_congr B h)).hom.app ((C.rho U).obj N) := by
+  subst h
+  simp [moduleJCongr]
+
+/-- The forward form of `b_gComp`.
+Source: Stacks 0D6D (blueprint: lem-sf-semilinear-scalar-proper-open). -/
+private theorem b_gComp_hom (C : OrdinaryScalarRestriction R φ B ψ)
+    (G : OrdinaryScalarAdjunctions R φ B ψ C) {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    (M : Modules R φ Z) :
+    (C.rho X).map ((moduleGComp R φ f g).hom.app M) ≫
+        (G.b f).hom.app ((pull R φ g).obj M) ≫
+        (StrictTower.towerPullback B f).map ((G.b g).hom.app M) =
+      (G.b (f ≫ g)).hom.app M ≫
+        (StrictTower.towerGComp B f g).hom.app ((C.rho Z).obj M) := by
+  have h := b_gComp R φ B ψ C G f g M
+  rw [← Iso.comp_inv_eq, Category.assoc, Category.assoc, ← h, ← Functor.map_comp_assoc,
+    Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.id_comp]
+
+/-- The square comparison of systems as a composite.
+Source: Stacks 07A7 (blueprint: lem-sf-semilinear-scalar-proper-open). -/
+private theorem moduleSquareG_hom_app {V W S T : Scheme.{u}}
+    (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T) (h : k ≫ p = r ≫ i)
+    (M : Modules R φ T) :
+    (moduleSquareG R φ k r p i h).hom.app M =
+      (moduleGComp R φ r i).inv.app M ≫
+        (eqToIso (congrArg (pull R φ) h.symm)).hom.app M ≫
+        (moduleGComp R φ k p).hom.app M := by
+  rw [moduleSquareG_eq]
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app]
+
+/-- The square comparison of towers as a composite.
+Source: Stacks 07A7 (blueprint: lem-sf-semilinear-scalar-proper-open). -/
+private theorem scalarTowerSquare_hom_app {V W S T : Scheme.{u}}
+    (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T) (h : k ≫ p = r ≫ i)
+    (M : StrictTower.Towers B T) :
+    (scalarTowerSquare B k r p i h).hom.app M =
+      (StrictTower.towerGComp B r i).inv.app M ≫
+        (eqToIso (congrArg (StrictTower.towerPullback B) h.symm)).hom.app M ≫
+        (StrictTower.towerGComp B k p).hom.app M := by
+  simp only [scalarTowerSquare, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app]
+
+/-- Restriction preserves the canonical pullback-square comparison.
+Source: Stacks 07A7 (blueprint: lem-sf-semilinear-scalar-proper-open). -/
+private theorem b_square (C : OrdinaryScalarRestriction R φ B ψ)
+    (G : OrdinaryScalarAdjunctions R φ B ψ C) {V W S T : Scheme.{u}}
+    (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T) (h : k ≫ p = r ≫ i)
+    (M : Modules R φ T) :
+    (C.rho V).map ((moduleSquareG R φ k r p i h).hom.app M) ≫
+        (G.b k).hom.app ((pull R φ p).obj M) ≫
+        (StrictTower.towerPullback B k).map ((G.b p).hom.app M) =
+      (G.b r).hom.app ((pull R φ i).obj M) ≫
+        (StrictTower.towerPullback B r).map ((G.b i).hom.app M) ≫
+        (scalarTowerSquare B k r p i h).hom.app ((C.rho T).obj M) := by
+  rw [moduleSquareG_hom_app, scalarTowerSquare_hom_app, Functor.map_comp, Functor.map_comp,
+    Category.assoc, Category.assoc, b_gComp_hom R φ B ψ C G k p M,
+    reassoc_of% (b_congr R φ B ψ C G h.symm M), reassoc_of% (b_gComp R φ B ψ C G r i M)]
 
 /-- The normalized adjunction comparisons preserve beta, the clopen projector and alpha.
 Source: Stacks 03D8, 03DI and 0F7B; blueprint fix-prop-coherence
