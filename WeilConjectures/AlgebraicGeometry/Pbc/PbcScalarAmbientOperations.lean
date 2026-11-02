@@ -485,7 +485,25 @@ private theorem pbcModuleAdjunction_unit_compat {A : Type (u + 1)} [CommRing A]
         (pbcCompletedCoefficientIso g d)).unit.app M ≫
       (pbcActualModulePush g d).map ((eqToHom (pbcModulePull_eq g d)).app M) =
       (pbcActualModuleAdjunction g d).unit.app M := by
-  sorry
+  obtain ⟨k, hk, he⟩ := (Classical.choose_spec (proEtaleRingModuleAdjunction_existsUnique g
+    (pbcAdicCompletion Y d) (pbcAdicCompletion X d) (pbcCompletedCoefficientIso g d))).1 M _ (𝟙 _)
+  rw [Adjunction.homEquiv_id] at he
+  have h2 := (pbcActualModuleAdjunction_exists g d).exists.choose_spec M
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro U
+  ext x
+  have h1 := (he U x).trans (hk (Opposite.op (AsSmall.up.obj ((proEtaleBaseChange g).obj U.unop)))
+    _)
+  change _ = ((pbcActualModuleAdjunction g d).unit.app M).val.app U x
+  refine Eq.trans ?_ (h2 U.unop x).symm
+  change ((pbcActualModulePush g d).map ((eqToHom (pbcModulePull_eq g d)).app M)).val.app U
+    (((proEtaleRingModuleAdjunction g (pbcAdicCompletion Y d) (pbcAdicCompletion X d)
+        (pbcCompletedCoefficientIso g d)).unit.app M).val.app U x) = _
+  refine (congrArg (fun z ↦ ((pbcActualModulePush g d).map
+    ((eqToHom (pbcModulePull_eq g d)).app M)).val.app U z) h1).trans ?_
+  rw [eqToHom_app]
+  rfl
 
 /-- The ordinary scalar mate is the identity-on-sections restriction/pullback comparison.
 Source: Stacks Tags 03EK and 03EL (blueprint: lem-pbc-scalar-ambient-operation-comparisons).
