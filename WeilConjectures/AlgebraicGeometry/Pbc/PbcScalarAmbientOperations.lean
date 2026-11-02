@@ -248,6 +248,91 @@ abbrev pbcScalarRestrictionPullback :=
     (pbcCompletedCoefficientIso g (pbcIntegralDatum l F))
     (pbcScalarCoefficientInverseSquare l E F i g)
 
+/-- Flat-term K-flat complexes over the completed coefficients, the resolving class on
+which the derived scalar and pullback functors are computed termwise.
+Source: Stacks Tag 06YY (blueprint: lem-pbc-scalar-ambient-operation-comparisons). -/
+def PbcFlatKFlat (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
+    (K : CochainComplex (pbcModules T (pbcAdicCompletion T d)) ℤ) : Prop :=
+  CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}
+      (R := pbcAdicCompletion T d) K ∧
+    ∀ n : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1}
+      (R := pbcAdicCompletion T d) (K.X n)
+
+/-- Every complex has a flat-term K-flat resolution.
+Source: Stacks Tag 06YY (blueprint: lem-pbc-scalar-ambient-operation-comparisons). -/
+theorem pbcFlatKFlat_resolution (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
+    (d : AdicCoefficientDatum A) (K : CochainComplex (pbcModules T (pbcAdicCompletion T d)) ℤ) :
+    ∃ (L : CochainComplex (pbcModules T (pbcAdicCompletion T d)) ℤ) (s : L ⟶ K),
+      QuasiIso s ∧ PbcFlatKFlat T d L := by
+  let : EssentiallySmall.{u + 1} T.ProEt := essentiallySmallSelf.{0} _
+  let : HasSheafify (ProEt.topology T) AddCommGrpCat.{u + 1} :=
+    GrothendieckTopology.hasSheafify_proEtTopology AddCommGrpCat.{u + 1} T
+  let : (ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
+    GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall.{u, u + 1,
+      u + 1, u + 2, u + 1} _
+  obtain ⟨L, s, hl, hf, hs, _⟩ :=
+    CochainComplex.exists_isKFlatResolutionIndependentCoefficients.{u + 1, u + 1, u}
+      (C := T.ProEt) (J := ProEt.topology T) (R := pbcAdicCompletion T d) K
+  refine ⟨L, s, hs, hl, fun n ↦ ?_⟩
+  exact (exactFunctor _ _).prop_of_iso
+    (SheafOfModules.siteSheafTensorRightIso (pbcAdicCompletion T d) (L.X n)).symm (hf n)
+
+/-- Restriction along the completed scalar inclusion preserves flat-term K-flat complexes.
+Source: Stacks Tags 06YY and 0943 (blueprint: lem-pbc-scalar-ambient-operation-comparisons).
+Proof: the target coefficients are finite free over the source coefficients
+(`pbcScalarCoefficient_finiteFree`). A flat target module is therefore flat over the
+source. For K-flatness, the source tensor of the restriction with a complex M is the
+target tensor of the complex with the scalar extension of M, which is a finite sum of
+copies of M and hence acyclic when M is. -/
+theorem pbcScalarRestrict_flatKFlat (T : Scheme.{u})
+    (K : CochainComplex (pbcModules T (pbcAdicCompletion T (pbcIntegralDatum l F))) ℤ)
+    (hK : PbcFlatKFlat T (pbcIntegralDatum l F) K) :
+    PbcFlatKFlat T (pbcIntegralDatum l E)
+      (((pbcRestrict (pbcScalarCoefficientMap l E F i T)).mapHomologicalComplex (.up ℤ)).obj K) := by
+  sorry
+
+/-- The restriction/pullback mate identity on a flat-term K-flat representative whose
+restriction is again flat-term K-flat.
+Source: Stacks Tags 03EK, 06YY, 0D6D and 07A6
+(blueprint: lem-pbc-scalar-ambient-operation-comparisons).
+Proof: on such a representative the scalar unit and counit, both pullback counits and
+both pullback comparisons are localizations of the ordinary maps, and the normalized
+pullback comparison is the localized balanced ordinary comparison. The ordinary scalar
+mate of that comparison is the identity-on-sections restriction/pullback comparison by
+the ordinary iterated-mates identity, which is the termwise comparison localized. -/
+theorem pbcScalarPullMate_restriction_app
+    (K : CochainComplex (pbcModules Y (pbcAdicCompletion Y (pbcIntegralDatum l F))) ℤ)
+    (hK : PbcFlatKFlat Y (pbcIntegralDatum l F) K)
+    (hR : PbcFlatKFlat Y (pbcIntegralDatum l E)
+      (((pbcRestrict (pbcScalarCoefficientMap l E F i Y)).mapHomologicalComplex (.up ℤ)).obj K)) :
+    (whiskerLeft (pbcDerivedRestrict (pbcScalarCoefficientMap l E F i Y))
+        (pbcPullComparison g (pbcIntegralDatum l E)) ≫
+      (mateEquiv (pbcDerivedScalarAdjunction (pbcScalarCoefficientMap l E F i Y))
+        (pbcDerivedScalarAdjunction (pbcScalarCoefficientMap l E F i X))
+        (TwoSquare.mk _ _ _ _ (pbcScalarOrdinaryPullIso l E F i g).inv)).natTrans).app
+        (DerivedCategory.Q.obj K) =
+    ((pbcScalarRestrictionPullback l E F i g).inv ≫
+      whiskerRight (pbcPullComparison g (pbcIntegralDatum l F))
+        (pbcDerivedRestrict (pbcScalarCoefficientMap l E F i X))).app
+        (DerivedCategory.Q.obj K) := by
+  sorry
+
+-- Natural transformations out of a derived category agree once they agree on a
+-- resolving class of complexes.
+private theorem scalarNatTrans_ext_of_resolutions {C D : Type*} [Category C] [Abelian C]
+    [HasDerivedCategory C] [Category D]
+    {G H : DerivedCategory C ⥤ D} (f f' : G ⟶ H) (P : CochainComplex C ℤ → Prop)
+    (hres : ∀ K, ∃ (L : CochainComplex C ℤ) (s : L ⟶ K), QuasiIso s ∧ P L)
+    (h : ∀ K, P K → f.app (DerivedCategory.Q.obj K) = f'.app (DerivedCategory.Q.obj K)) :
+    f = f' := by
+  ext N
+  obtain ⟨K, ⟨e⟩⟩ : ∃ K, Nonempty (DerivedCategory.Q.obj K ≅ N) :=
+    ⟨_, ⟨DerivedCategory.Q.objObjPreimageIso N⟩⟩
+  obtain ⟨L, s, hs, hL⟩ := hres K
+  have hK : f.app (DerivedCategory.Q.obj K) = f'.app (DerivedCategory.Q.obj K) := by
+    rw [← cancel_epi (G.map (DerivedCategory.Q.map s)), f.naturality, f'.naturality, h L hL]
+  rw [← cancel_epi (G.map e.hom), f.naturality, f'.naturality, hK]
+
 /-- The scalar mate of the inverse normalized pullback comparison is the termwise
 restriction/pullback comparison, after the canonical pullback comparisons.
 Source: Stacks Tags 03EK, 06YY, 0D6D and 07A6
@@ -268,7 +353,11 @@ theorem pbcScalarPullMate_restriction :
     (pbcScalarRestrictionPullback l E F i g).inv ≫
       whiskerRight (pbcPullComparison g (pbcIntegralDatum l F))
         (pbcDerivedRestrict (pbcScalarCoefficientMap l E F i X)) := by
-  sorry
+  apply scalarNatTrans_ext_of_resolutions _ _
+    (fun K ↦ PbcFlatKFlat Y (pbcIntegralDatum l F) K) (pbcFlatKFlat_resolution Y _)
+  intro K hK
+  exact pbcScalarPullMate_restriction_app l E F i g K hK
+    (pbcScalarRestrict_flatKFlat l E F i Y K hK)
 
 -- Mates are unchanged when the left adjoints are replaced through conjugates of identities.
 private theorem scalarMate_change_left
