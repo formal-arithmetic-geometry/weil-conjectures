@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.CategoryTheory.Adjunction.MateTransport
+public import Mathlib.CategoryTheory.Adjunction.Whiskering
 
 /-!
 # Transport of open base change and clopen projections
@@ -45,6 +46,40 @@ theorem unit_comp_map_betaInvApp {PgU : U ⥤ U'} {Jj : U ⥤ X} {Pj : X ⥤ U} 
   have := (adjJ'.homEquiv _ _).apply_symm_apply
     (PgU.map (adjJ.unit.app M) ≫ sq.inv.app (Jj.obj M))
   rwa [Adjunction.homEquiv_unit] at this
+
+/-- The open base-change comparison as a natural transformation, transposed for the
+whiskered open adjunction. -/
+def betaInvNat {PgU : U ⥤ U'} {Jj : U ⥤ X} {Pj : X ⥤ U} (adjJ : Jj ⊣ Pj)
+    {Jj' : U' ⥤ X'} {Pj' : X' ⥤ U'} (adjJ' : Jj' ⊣ Pj') {Pg : X ⥤ X'}
+    (sq : Pg ⋙ Pj' ≅ Pj ⋙ PgU) : PgU ⋙ Jj' ⟶ Jj ⋙ Pg :=
+  (((adjJ'.whiskerRight U).homEquiv _ _).symm
+    ((Functor.leftUnitor PgU).inv ≫ Functor.whiskerRight adjJ.unit PgU ≫
+      (Functor.associator Jj Pj PgU).hom ≫ Functor.whiskerLeft Jj sq.inv ≫
+      (Functor.associator Jj Pg Pj').inv))
+
+theorem betaInvNat_app {PgU : U ⥤ U'} {Jj : U ⥤ X} {Pj : X ⥤ U} (adjJ : Jj ⊣ Pj)
+    {Jj' : U' ⥤ X'} {Pj' : X' ⥤ U'} (adjJ' : Jj' ⊣ Pj') {Pg : X ⥤ X'}
+    (sq : Pg ⋙ Pj' ≅ Pj ⋙ PgU) (M : U) :
+    (betaInvNat adjJ adjJ' sq).app M = betaInvApp adjJ adjJ' sq M := by
+  unfold betaInvNat betaInvApp
+  rw [Adjunction.homEquiv_counit, Adjunction.homEquiv_counit]
+  simp
+
+theorem betaInvApp_isIso_of_betaInvNat {PgU : U ⥤ U'} {Jj : U ⥤ X} {Pj : X ⥤ U}
+    (adjJ : Jj ⊣ Pj) {Jj' : U' ⥤ X'} {Pj' : X' ⥤ U'} (adjJ' : Jj' ⊣ Pj') {Pg : X ⥤ X'}
+    (sq : Pg ⋙ Pj' ≅ Pj ⋙ PgU) [IsIso (betaInvNat adjJ adjJ' sq)] (M : U) :
+    IsIso (betaInvApp adjJ adjJ' sq M) := by
+  rw [← betaInvNat_app]
+  infer_instance
+
+theorem inv_betaInvNat_app {PgU : U ⥤ U'} {Jj : U ⥤ X} {Pj : X ⥤ U}
+    (adjJ : Jj ⊣ Pj) {Jj' : U' ⥤ X'} {Pj' : X' ⥤ U'} (adjJ' : Jj' ⊣ Pj') {Pg : X ⥤ X'}
+    (sq : Pg ⋙ Pj' ≅ Pj ⋙ PgU) [IsIso (betaInvNat adjJ adjJ' sq)] (M : U) :
+    haveI := betaInvApp_isIso_of_betaInvNat adjJ adjJ' sq M
+    (inv (betaInvNat adjJ adjJ' sq)).app M = inv (betaInvApp adjJ adjJ' sq M) := by
+  haveI := betaInvApp_isIso_of_betaInvNat adjJ adjJ' sq M
+  rw [NatIso.isIso_inv_app]
+  exact IsIso.inv_eq_inv.mpr (betaInvNat_app adjJ adjJ' sq M)
 
 /-- The open extension comparison: the left mate of an inverse-image comparison. -/
 abbrev openComparison {Jj : U ⥤ X} {Pj : X ⥤ U} (adjJ : Jj ⊣ Pj)
