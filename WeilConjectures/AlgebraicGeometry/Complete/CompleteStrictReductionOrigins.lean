@@ -152,11 +152,31 @@ theorem cbcFiniteScalarMap_comparison (V : Scheme.{t}) (n : ℕ) :
         toSheafify (ProEt.topology V) ((Functor.const V.ProEtᵒᵖ).obj
           (CommRingCat.of (A ⧸ d.ideal ^ (n + 1)))) :=
     (toSheafify_naturality _ _).symm
-  have h3 := congrArg (fun k ↦ Functor.whiskerRight k (forget₂ CommRingCat.{t + 1} RingCat.{t + 1}) ≫
+  have h3 := congrArg (fun k ↦
+    Functor.whiskerRight k (forget₂ CommRingCat.{t + 1} RingCat.{t + 1}) ≫
     Functor.whiskerRight (pbcLevelConstantComparison V d n).hom.hom
       (forget₂ CommRingCat RingCat)) h2
   simp only [Functor.whiskerRight_comp, Category.assoc] at h3 ⊢
   exact h3.symm
+
+/-- Restriction of module scalars along a composite of ring sheaf maps.
+Source: Stacks 03DA (blueprint: thm-cbc-complete-proetale). -/
+def cbcSheafRestrictScalarsComp {C : Type*} [Category C] {J : GrothendieckTopology C}
+    {R R' R'' : Sheaf J RingCat.{t + 1}} (α : R ⟶ R') (β : R' ⟶ R'') :
+    SheafOfModules.restrictScalars.{t + 1} (α ≫ β) ≅
+      SheafOfModules.restrictScalars.{t + 1} β ⋙ SheafOfModules.restrictScalars.{t + 1} α :=
+  NatIso.ofComponents (fun M ↦ (SheafOfModules.fullyFaithfulForget _).preimageIso
+    (PresheafOfModules.isoMk (fun X ↦ ModuleCat.restrictScalarsComp'App _ _ _ rfl _)
+      (by intros; ext; rfl))) (by intros; ext; rfl)
+
+/-- Restriction of module presheaf scalars along the identity of a constant ring.
+Source: Stacks 03DA (blueprint: thm-cbc-complete-proetale). -/
+def cbcConstRestrictScalarsId {C : Type*} [Category C] (Λ : Type (t + 1)) [CommRing Λ] :
+    PresheafOfModules.restrictScalars.{t + 1}
+        ((Functor.const Cᵒᵖ).map (RingCat.ofHom (RingHom.id Λ))) ≅ 𝟭 _ :=
+  NatIso.ofComponents (fun M ↦ PresheafOfModules.isoMk
+    (fun X ↦ ModuleCat.restrictScalarsId'App _ rfl _) (by intros; ext; rfl))
+    (by intros; ext; rfl)
 
 attribute [local instance] ProEtale.StrictTower.finiteRestriction_finiteLimits
   ProEtale.StrictTower.finiteRestriction_finiteColimits
@@ -186,7 +206,28 @@ theorem cbcFiniteRealizationRestrictIso (V : Scheme.{t}) (n : ℕ) :
           (Ideal.Quotient.mk _) ≅
       pbcFunctionRealization V d n ⋙ reductionRestrict V (completedReductionProjection V d n) ⋙
         proEtaleRingRestrictScalars (exchangeScalar d V)) := by
-  sorry
+  let J := ProEt.topology V
+  let Λ := ProEtale.PbcQuotient d n
+  let α := ProEtale.finiteCoefficientScalarMap V Λ
+  let β := pbcFunctionScalars V d n
+  let a := (AdicCoefficients.finiteRingComparison V Λ).inv
+  have ha : (Functor.const V.ProEtᵒᵖ).map (RingCat.ofHom (RingHom.id Λ)) ≫ β = α ≫ a.hom :=
+    Category.id_comp _
+  let P := sheafToPresheaf J (ModuleCat.{t + 1} Λ) ⋙
+    ProEtale.finiteCoefficientModulePresheaf V.ProEt Λ
+  let raw := CoefficientSheafificationSquare.rawIso J (RingHom.id Λ) a α β ha
+  let i₁ : ProEtale.finiteCoefficientRealization V Λ ≅
+      pbcFunctionRealization V d n ⋙ SheafOfModules.restrictScalars.{t + 1} a :=
+    Functor.isoWhiskerLeft P ((Functor.leftUnitor _).symm ≪≫
+      Functor.isoWhiskerRight (cbcConstRestrictScalarsId Λ).symm _ ≪≫ raw)
+  let f := ProEtale.StrictTower.finiteScalarMap A V Λ (Ideal.Quotient.mk (d.ideal ^ (n + 1)))
+  let i₂ := (cbcSheafRestrictScalarsComp f a).symm
+  let i₃ := eqToIso (congrArg (fun z ↦ SheafOfModules.restrictScalars.{t + 1} z)
+    ((cbcFiniteScalarMap_comparison d V n).trans (Functor.map_comp _ _ _)))
+  let i₄ := cbcSheafRestrictScalarsComp ((adicLisseForget V).map (exchangeScalar d V))
+    ((adicLisseForget V).map (completedReductionProjection V d n))
+  exact ⟨Functor.isoWhiskerRight i₁ _ ≪≫ Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft _ (i₂ ≪≫ i₃ ≪≫ i₄)⟩
 
 /-- The n-th level of the restricted strict reduction tower of K is the constant-coefficient
 restriction of the realized n-th witnessed level, given an identification of that realized
