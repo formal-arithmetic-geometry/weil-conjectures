@@ -827,7 +827,6 @@ public import WeilConjectures.Algebra.Homology.Ringed.RingedSiteEquivalenceTenso
 public import WeilConjectures.Algebra.Homology.Ringed.RingedSiteFiniteRetractDualExact
 public import WeilConjectures.Algebra.Homology.Ringed.RingedSliceDerivedAdjunction
 public import WeilConjectures.Algebra.Homology.Ringed.RingedSliceDerivedComparisons
-public import WeilConjectures.Algebra.Homology.Ringed.RingedSliceDerivedMate
 public import WeilConjectures.Algebra.Homology.Ringed.RingedSliceLocalizationModel
 public import WeilConjectures.Algebra.Homology.Ringed.RingedSliceTensorGenerators
 public import WeilConjectures.Algebra.Homology.Ringed.RingedSquareModuleTensorCompatibility

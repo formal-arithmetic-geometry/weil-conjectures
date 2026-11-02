@@ -157,6 +157,40 @@ Source: ILO XI §1.3, §4.3 (blueprint: def-trf-oriented-nearby-cycles). -/
 abbrev second {T B : Scheme.{u}} (f : T ⟶ B) :=
   OrientedProduct.second (etaleBaseChange.{u, v} f) (𝟭 (EtaleSite.{u, v} B))
 
+/-- The projection site functors are continuous and preserve finite limits.
+Source: ILO XI §1.3 (blueprint: def-trf-oriented-nearby-cycles).
+Proof: finite limits are componentwise in the triple category. The first two
+covering generators contain the images of the corresponding étale covering families.
+Thus the two projection functors preserve finite limits and covers. -/
+theorem projection_properties {T B : Scheme.{u}} (f : T ⟶ B) :
+    (first.{u, v} f).IsContinuous (etaleTopology T) (vanishingTopology f) ∧
+    PreservesFiniteLimits (first.{u, v} f) ∧
+    (second.{u, v} f).IsContinuous (etaleTopology B) (vanishingTopology f) ∧
+    PreservesFiniteLimits (second.{u, v} f) := by
+  sorry
+
+/-- Continuity of the first projection's site functor.
+Source: ILO XI §1.3 (blueprint: def-trf-oriented-nearby-cycles). -/
+instance first_continuous {T B : Scheme.{u}} (f : T ⟶ B) :
+    (first.{u, v} f).IsContinuous (etaleTopology T) (vanishingTopology f) :=
+  (projection_properties f).1
+
+/-- Finite-limit preservation of the first projection's site functor.
+Source: ILO XI §1.3 (blueprint: def-trf-oriented-nearby-cycles). -/
+instance first_finiteLimits {T B : Scheme.{u}} (f : T ⟶ B) :
+    PreservesFiniteLimits (first.{u, v} f) := (projection_properties f).2.1
+
+/-- Continuity of the second projection's site functor.
+Source: ILO XI §1.3 (blueprint: def-trf-oriented-nearby-cycles). -/
+instance second_continuous {T B : Scheme.{u}} (f : T ⟶ B) :
+    (second.{u, v} f).IsContinuous (etaleTopology B) (vanishingTopology f) :=
+  (projection_properties f).2.2.1
+
+/-- Finite-limit preservation of the second projection's site functor.
+Source: ILO XI §1.3 (blueprint: def-trf-oriented-nearby-cycles). -/
+instance second_finiteLimits {T B : Scheme.{u}} (f : T ⟶ B) :
+    PreservesFiniteLimits (second.{u, v} f) := (projection_properties f).2.2.2
+
 /-- The first projection from the actual vanishing topos.
 Source: ILO XI §1.3 (blueprint: def-trf-oriented-nearby-cycles). -/
 def p₁ {T B : Scheme.{u}} (f : T ⟶ B) :=
