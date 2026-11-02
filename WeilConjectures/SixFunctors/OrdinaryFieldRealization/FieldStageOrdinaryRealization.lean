@@ -44,6 +44,8 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Linear
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomModule
+import WeilConjectures.AlgebraicGeometry.Adic.ReductionDerivedChangeCoherence
+import WeilConjectures.SixFunctors.Supporting.IntrinsicQbarCategory
 
 /-! # Ordinary discrete constant-field realization
 
@@ -330,6 +332,16 @@ theorem coefficientMap_comp (Y : Scheme.{u}) {A B C : Type u}
   rw [← Functor.map_comp]
   congr 1
 
+/-- Constant sheafification sends the identity coefficient homomorphism to the identity.
+Source: blueprint identity-inclusion coherence
+(blueprint: lem-sf-field-stage-ordinary-realization).
+Proof: the lifted identity homomorphism is the identity; apply constantSheaf.map_id. -/
+theorem coefficientMap_id (Y : Scheme.{u}) (A : Type u) [CommRing A] :
+    coefficientMap Y (RingHom.id A) = 𝟙 (constantRing Y A) := by
+  unfold coefficientMap
+  rw [← CategoryTheory.Functor.map_id]
+  congr 1
+
 /-- The ordinary derived scalar associator is uniquely fixed by balancing on K-flat models.
 Source: Stacks Tag 06YY; blueprint coefficient tower coherence
 (blueprint: lem-sf-field-stage-ordinary-realization).
@@ -352,8 +364,9 @@ theorem extendComp_existsUnique (Y : Scheme.{u}) {A B C : Type u}
               (C := reductionModules Y (constantRing Y C))).map
               (reductionBalance Y (coefficientMap Y f)
               (coefficientMap Y g) (coefficientMap Y (g.comp f))
-              (coefficientMap_comp Y f g) P) := by
-  sorry
+              (coefficientMap_comp Y f g) P) :=
+  reductionDerivedChange_comp_existsUnique Y (coefficientMap Y f) (coefficientMap Y g)
+    (coefficientMap Y (g.comp f)) (coefficientMap_comp Y f g)
 
 /-- The counit-normalized ordinary derived tensor associator.
 Source: blueprint coefficient tower coherence
@@ -384,8 +397,9 @@ theorem extendUnit_existsUnique (Y : Scheme.{u}) (A : Type u) [CommRing A] :
           (C := reductionModules Y (constantRing Y A))).obj P) =
             reductionScalarComplexCounit Y (coefficientMap Y (RingHom.id A)) P ≫
               (DerivedCategory.Q
-                (C := reductionModules Y (constantRing Y A))).map μ := by
-  sorry
+                (C := reductionModules Y (constantRing Y A))).map μ :=
+  reductionDerivedChange_id_existsUnique Y (coefficientMap Y (RingHom.id A))
+    (coefficientMap_id Y A)
 
 /-- The multiplication-normalized identity comparison.
 Source: blueprint identity-inclusion coherence
@@ -455,6 +469,7 @@ def stageSmul (A B : GeneralAlgebraicallyClosedCoefficients.Pair l Ω Y)
   letI := stageHomModule l Y Ω A B L
   a • f
 
+set_option linter.unusedVariables false in
 /-- E-linearity in the common-stage category is the scalar action on a common finite
 representative. Every scalar of Ω occurs in such a finite stage. The equality displayed
 here uniquely fixes the entire linear structure; it is not an arbitrary action.
@@ -480,7 +495,75 @@ theorem pairLinear_existsUnique :
             GeneralAlgebraicallyClosedCoefficients.ofHom A B L hA hB
               (stageSmul l Y Ω A B ⟨L, hA, hB⟩ a f))
         (lin := s) := by
-  sorry
+  classical
+  let S := GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω Y
+  have hS : StageSystem.QbarScalarCompatible l Ω S := intrinsicQbarScalarCompatible l Ω Y
+  -- The finite-stage action is the localized action through the field identification.
+  have hstage (L : Index l Ω) (A B : GeneralAlgebraicallyClosedCoefficients.Pair l Ω Y)
+      (hA : A.stage ≤ L) (hB : B.stage ≤ L) (f : A.toStage hA ⟶ B.toStage hB)
+      (a : Coefficient.{u} l Ω L) :
+      stageSmul l Y Ω A B ⟨L, hA, hB⟩ a f = (Shrink.algEquiv (Padic l) L.val a) • f := by
+    change (((sfRationalCoefficientEquiv l (Coefficient.{u} l Ω L)).symm a) • 𝟙 _) ≫ f =
+        ((intrinsicQbarStageFieldEquiv.{u} l Ω L).symm (Shrink.algEquiv (Padic l) L.val a)) • f
+    rw [Linear.smul_comp, Category.id_comp,
+      show (intrinsicQbarStageFieldEquiv.{u} l Ω L).symm (Shrink.algEquiv (Padic l) L.val a) =
+        (sfRationalCoefficientEquiv l (Coefficient.{u} l Ω L)).symm a by
+          simp [intrinsicQbarStageFieldEquiv]]
+  -- The closure action through intrinsicQbarLinear.
+  let φ : Closure.{u} l Ω →+* CatCenter (GeneralAlgebraicallyClosedCoefficients.Pair l Ω Y) :=
+    (Linear.toCatCenter Ω (generalAlgebraicallyClosedConstructibleCategory l Ω Y)).comp
+      (closureEquiv.{u} l Ω).toRingHom
+  let s : Linear (Closure.{u} l Ω) (GeneralAlgebraicallyClosedCoefficients.Pair l Ω Y) :=
+    Linear.ofRingMorphism φ
+  have hs (A B : GeneralAlgebraicallyClosedCoefficients.Pair l Ω Y) (c : Closure.{u} l Ω)
+      (f : A ⟶ B) :
+      (letI := s; c • f) = intrinsicQbarScalarAction l Ω Y (closureEquiv.{u} l Ω c) f := by
+    change (closureEquiv.{u} l Ω c • 𝟙 A) ≫ f = _
+    rw [Linear.smul_comp, Category.id_comp]
+    exact (intrinsicQbarLinear_existsUnique l Ω Y).exists.choose_spec A B _ f
+  -- The scalar formula at a stage containing the scalar.
+  have hform (A B : GeneralAlgebraicallyClosedCoefficients.Pair l Ω Y)
+      (L : Index l Ω) (hA : A.stage ≤ L) (hB : B.stage ≤ L)
+      (f : GeneralAlgebraicallyClosedCoefficients.StageHom A B ⟨L, hA, hB⟩)
+      (a : Coefficient.{u} l Ω L) :
+      (letI := s; closureInclusion l Ω L a •
+          GeneralAlgebraicallyClosedCoefficients.ofHom A B L hA hB f) =
+        GeneralAlgebraicallyClosedCoefficients.ofHom A B L hA hB
+          (stageSmul l Y Ω A B ⟨L, hA, hB⟩ a f) := by
+    rw [hs]
+    have hmem : closureEquiv.{u} l Ω (closureInclusion l Ω L a) ∈ L.val := by
+      simp [closureInclusion]
+    unfold intrinsicQbarScalarAction
+    rw [StageSystem.qbarScalarHom_mkHom l Ω S hS _ L hA hB f L le_rfl hmem]
+    have hself : S.tr (le_refl L) f = f :=
+      (GeneralAlgebraicallyClosedCoefficients.transportSystem A B).map_self
+        (i := ⟨L, hA, hB⟩) f
+    rw [hself, hstage]
+    congr 2
+    apply Subtype.ext
+    simp [closureInclusion]
+  refine ⟨s, hform, ?_⟩
+  intro t ht
+  apply constantLinear_ext t s
+  intro A B c f
+  obtain ⟨L, hA, hB, u, rfl⟩ :=
+    (GeneralAlgebraicallyClosedCoefficients.representatives A B).1 f
+  obtain ⟨M, hM⟩ := (Padic.finiteCoefficientFields_properties l Ω).2.1
+    (closureEquiv.{u} l Ω c)
+  let N := Padic.finiteCoefficientCompositum l Ω L M
+  have hLN : L ≤ N := ((Padic.finiteCoefficientFields_properties l Ω).1 L M).1
+  have hMN : M ≤ N := ((Padic.finiteCoefficientFields_properties l Ω).1 L M).2
+  let a : Coefficient.{u} l Ω N :=
+    (Shrink.algEquiv (Padic l) N.val).symm ⟨closureEquiv.{u} l Ω c, hMN hM⟩
+  have hc : closureInclusion l Ω N a = c := by
+    apply (closureEquiv.{u} l Ω).injective
+    simp [closureInclusion, a]
+  have hu : GeneralAlgebraicallyClosedCoefficients.ofHom A B L hA hB u =
+      GeneralAlgebraicallyClosedCoefficients.ofHom A B N (hA.trans hLN) (hB.trans hLN)
+        (S.tr hLN u) :=
+    (StageSystem.PairCategory.mkHom_tr hLN u).symm
+  rw [hu, ← hc]
+  exact (ht A B N _ _ _ a).trans (hform A B N _ _ _ a).symm
 
 /-- The unique common-stage scalar action determined by finite representatives.
 Source: blueprint Qbar-linearity clause

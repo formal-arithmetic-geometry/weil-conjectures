@@ -37,11 +37,12 @@ variable [∀ Y : Scheme.{u},
 
 section Helpers
 
-local instance (Y : Scheme.{u}) : Category Y.Modules :=
+local instance squareSectionUnitForwardCategory (Y : Scheme.{u}) : Category Y.Modules :=
   inferInstanceAs (Category (SheafOfModules.{u} (moduleRings Y.toRingedSpace)))
-local instance (Y : Scheme.{u}) : Abelian Y.Modules :=
+local instance squareSectionUnitForwardAbelian (Y : Scheme.{u}) : Abelian Y.Modules :=
   inferInstanceAs (Abelian (SheafOfModules.{u} (moduleRings Y.toRingedSpace)))
-local instance (Y : Scheme.{u}) : HasDerivedCategory.{w} Y.Modules :=
+local instance squareSectionUnitForwardHasDerivedCategory (Y : Scheme.{u}) :
+    HasDerivedCategory.{w} Y.Modules :=
   inferInstanceAs (HasDerivedCategory.{w}
     (SheafOfModules.{u} (moduleRings Y.toRingedSpace)))
 
