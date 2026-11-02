@@ -421,23 +421,6 @@ theorem pbcActualPullComplexCounit_isIso {A : Type (u + 1)} [CommRing A]
   dsimp only [pbcActualPullComplexCounit]
   infer_instance
 
-/-- The canonical pullback comparison is the localized termwise identification on
-flat-term K-flat complexes.
-Source: Stacks Tags 06YY and 0D6D (blueprint: lem-pbc-scalar-ambient-operation-comparisons).
-Proof: both derived adjunctions have units computed on K-flat complexes by the same
-ordinary unit after the identification; conjugating the identity of direct image
-therefore gives the localized identification. -/
-theorem pbcPullComparison_app {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
-    (P : CochainComplex (pbcModules Y (pbcAdicCompletion Y d)) ℤ)
-    (hp : PbcFlatKFlat Y d P) :
-    (pbcPullComparison g d).app (DerivedCategory.Q.obj P) ≫
-        pbcActualPullComplexCounit g d P =
-      (proEtaleRingModulePullback g (pbcAdicCompletion Y d) (pbcAdicCompletion X d)
-          (pbcCompletedCoefficientIso g d)).mapDerivedCategoryFactors.hom.app P ≫
-        DerivedCategory.Q.map
-          ((NatTrans.mapHomologicalComplex (pbcModulePullIso g d).hom (.up ℤ)).app P) := by
-  sorry
-
 /-- The ordinary scalar mate of the inverse ordinary pullback comparison.
 Source: Stacks Tag 03EL (blueprint: lem-pbc-scalar-ambient-operation-comparisons). -/
 def pbcScalarOrdinaryRestrictionPull :
@@ -504,6 +487,82 @@ private theorem pbcModuleAdjunction_unit_compat {A : Type (u + 1)} [CommRing A]
     ((eqToHom (pbcModulePull_eq g d)).app M)).val.app U z) h1).trans ?_
   rw [eqToHom_app]
   rfl
+
+/-- Conjugating the identity between two derived adjunctions whose units are the localized
+units of two equal ordinary left adjoints with compatible units gives the localized
+termwise identification. -/
+private theorem derivedConjugate_transport {C₁ C₂ : Type*} [Category C₁] [Category C₂]
+    [Abelian C₁] [Abelian C₂] [HasDerivedCategory C₁] [HasDerivedCategory C₂]
+    {G G' : C₁ ⥤ C₂} {F : C₂ ⥤ C₁} [G.Additive] [G'.Additive] [F.Additive]
+    [PreservesFiniteLimits G'] [PreservesFiniteColimits G']
+    (adj : G ⊣ F) (adj' : G' ⊣ F) (h : G' = G)
+    (hu : ∀ M, adj'.unit.app M ≫ F.map ((eqToHom h).app M) = adj.unit.app M)
+    {LA : DerivedCategory C₁ ⥤ DerivedCategory C₂} {FD : DerivedCategory C₂ ⥤ DerivedCategory C₁}
+    (adjD : LA ⊣ FD) (adjD' : G'.mapDerivedCategory ⊣ FD)
+    (αA : DerivedCategory.Qh ⋙ LA ⟶ G.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (β : F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh ⟶ DerivedCategory.Qh ⋙ FD)
+    (hη : ∀ X, adjD.unit.app (DerivedCategory.Qh.obj X) ≫ FD.map (αA.app X) =
+      DerivedCategory.Qh.map ((adj.mapHomotopyCategory (.up ℤ)).unit.app X) ≫
+        β.app ((G.mapHomotopyCategory (.up ℤ)).obj X))
+    (hη' : ∀ X, adjD'.unit.app (DerivedCategory.Qh.obj X) ≫
+        FD.map (G'.mapDerivedCategoryFactorsh.hom.app X) =
+      DerivedCategory.Qh.map ((adj'.mapHomotopyCategory (.up ℤ)).unit.app X) ≫
+        β.app ((G'.mapHomotopyCategory (.up ℤ)).obj X))
+    (P : CochainComplex C₁ ℤ) :
+    ((conjugateEquiv adjD adjD').symm (𝟙 _)).app (DerivedCategory.Q.obj P) ≫
+        (LA.map ((DerivedCategory.quotientCompQhIso C₁).inv.app P) ≫
+          αA.app ((HomotopyCategory.quotient _ _).obj P) ≫
+          DerivedCategory.Qh.map ((G.mapHomotopyCategoryFactors (.up ℤ)).hom.app P) ≫
+          (DerivedCategory.quotientCompQhIso C₂).hom.app _) =
+      G'.mapDerivedCategoryFactors.hom.app P ≫
+        DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex (eqToHom h) (.up ℤ)).app P) := by
+  subst h
+  obtain rfl : adj' = adj := Adjunction.ext (by ext M; simpa using hu M)
+  set cmp := (conjugateEquiv adjD adjD').symm (𝟙 _)
+  have hcmp (X : HomotopyCategory C₁ (.up ℤ)) :
+      cmp.app (DerivedCategory.Qh.obj X) ≫ αA.app X =
+        G'.mapDerivedCategoryFactorsh.hom.app X := by
+    apply (adjD'.homEquiv _ _).injective
+    simp only [Adjunction.homEquiv_unit, Functor.map_comp]
+    rw [← Category.assoc, ← unit_conjugateEquiv_symm]
+    refine Eq.trans ?_ ((hη X).trans (hη' X).symm)
+    exact congrArg (· ≫ FD.map (αA.app X)) (Category.comp_id _)
+  rw [← NatTrans.naturality_assoc]
+  erw [reassoc_of% hcmp ((HomotopyCategory.quotient _ _).obj P)]
+  rw [Functor.mapDerivedCategoryFactorsh_hom_app]
+  simp only [Category.assoc, eqToHom_refl, NatTrans.mapHomologicalComplex_id, NatTrans.id_app,
+    CategoryTheory.Functor.map_id]
+  rw [← CategoryTheory.Functor.map_comp_assoc, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id,
+    Category.id_comp]
+  rw [← CategoryTheory.Functor.map_comp_assoc, Iso.inv_hom_id_app]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp]
+  exact congrArg (_ ≫ ·) ((DerivedCategory.quotientCompQhIso C₂).inv_hom_id_app _)
+
+set_option linter.unusedVariables false in
+/-- The canonical pullback comparison is the localized termwise identification on
+flat-term K-flat complexes.
+Source: Stacks Tags 06YY and 0D6D (blueprint: lem-pbc-scalar-ambient-operation-comparisons).
+Proof: both derived adjunctions have units computed on K-flat complexes by the same
+ordinary unit after the identification; conjugating the identity of direct image
+therefore gives the localized identification. -/
+theorem pbcPullComparison_app {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
+    (P : CochainComplex (pbcModules Y (pbcAdicCompletion Y d)) ℤ)
+    (hp : PbcFlatKFlat Y d P) :
+    (pbcPullComparison g d).app (DerivedCategory.Q.obj P) ≫
+        pbcActualPullComplexCounit g d P =
+      (proEtaleRingModulePullback g (pbcAdicCompletion Y d) (pbcAdicCompletion X d)
+          (pbcCompletedCoefficientIso g d)).mapDerivedCategoryFactors.hom.app P ≫
+        DerivedCategory.Q.map
+          ((NatTrans.mapHomologicalComplex (pbcModulePullIso g d).hom (.up ℤ)).app P) := by
+  dsimp only [pbcPullComparison, pbcActualPullComplexCounit, pbcModulePullIso, eqToIso.hom]
+  exact derivedConjugate_transport (pbcActualModuleAdjunction g d)
+    (proEtaleRingModuleAdjunction g (pbcAdicCompletion Y d) (pbcAdicCompletion X d)
+      (pbcCompletedCoefficientIso g d)) (pbcModulePull_eq g d)
+    (pbcModuleAdjunction_unit_compat g d) (pbcActualDerivedAdjunction g d)
+    (proEtaleRingDerivedAdjunction g (pbcAdicCompletion Y d) (pbcAdicCompletion X d)
+      (pbcCompletedCoefficientIso g d)) (pbcActualPullCounit g d) (pbcActualPushUnit g d)
+    (fun X ↦ Adjunction.derivedη_fac_app _ (HomotopyCategory.quasiIso _ _) _ _ X)
+    (fun X ↦ Adjunction.derivedη_fac_app _ (HomotopyCategory.quasiIso _ _) _ _ X) P
 
 /-- The ordinary scalar mate is the identity-on-sections restriction/pullback comparison.
 Source: Stacks Tags 03EK and 03EL (blueprint: lem-pbc-scalar-ambient-operation-comparisons).
