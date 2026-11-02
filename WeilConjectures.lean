@@ -266,6 +266,7 @@ public import WeilConjectures.Algebra.Homology.ChangeOfRingsAcyclicKFlat
 public import WeilConjectures.Algebra.Homology.ChangeOfRingsComplex
 public import WeilConjectures.Algebra.Homology.ChangeOfRingsKFlat
 public import WeilConjectures.Algebra.Homology.ChangeOfRingsKFlatAllIndependentCoefficients
+public import WeilConjectures.Algebra.Homology.ChangeOfRingsKFlatGeneral
 public import WeilConjectures.Algebra.Homology.ChangeOfRingsKFlatIndependentCoefficients
 public import WeilConjectures.Algebra.Homology.ChangeOfRingsKFlatQuasiIso
 public import WeilConjectures.Algebra.Homology.ChangeOfRingsTensorAcyclic
@@ -800,6 +801,7 @@ public import WeilConjectures.Algebra.Homology.ResidueKernelUnitMinorMatrixCore
 public import WeilConjectures.Algebra.Homology.ResidueKernelUnitMinorPivot
 public import WeilConjectures.Algebra.Homology.ResidueKernelUnitMinorQuotient
 public import WeilConjectures.Algebra.Homology.ResolutionByClass
+public import WeilConjectures.Algebra.Homology.RestrictScalarsIsoKFlat
 public import WeilConjectures.Algebra.Homology.RestrictedComplementaryTruncationComparison
 public import WeilConjectures.Algebra.Homology.RestrictedTowerResolution.RestrictedTowerResolutionAcyclicity
 public import WeilConjectures.Algebra.Homology.RestrictionCompositeHomology
@@ -11649,6 +11651,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.SmoothPurity.Derive
 public import WeilConjectures.CategoryTheory.DerivedCategory.SmoothPurity.FlatScalarExtensionFiniteCohomology
 public import WeilConjectures.CategoryTheory.DerivedCategory.SmoothPurity.GrothendieckDerivedCoproductsColimit
 public import WeilConjectures.CategoryTheory.DerivedCategory.StandardQuotientsPerfect
+public import WeilConjectures.CategoryTheory.DerivedCategory.StrictSquareArrowUniversal
 public import WeilConjectures.CategoryTheory.DerivedCategory.Telescope
 public import WeilConjectures.CategoryTheory.DerivedCategory.TelescopeFlat
 public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitude
@@ -17872,6 +17875,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Ext
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.UpperStarCoherence
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.WeilDatum
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalarsQuotient
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalarsStrictArrow
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtensionZeroLimits
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExternalProduct
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Finiteness

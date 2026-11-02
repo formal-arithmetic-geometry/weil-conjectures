@@ -57,7 +57,23 @@ henselization of `v T₁ ×_{v T} v T₂`, not the product itself. So this simpl
 hypercover, and its acyclicity is a genuine geometric statement. It is not available in this
 library and may be false when the closed fibre has dimension at least `2`. The following
 routes fail: `i^*` preserving injectives, the evaluation formula `(i^* F)(T) = F(v T)` for
-affine `T` that are not weakly contractible, and Čech arguments on the cover `{v T_a}`. -/
+affine `T` that are not weakly contractible, and Čech arguments on the cover `{v T_a}`.
+
+Further analysis, with no counterexample found. If every term of the Čech nerve of `U` on the
+closed fibre is weakly contractible, the Čech complex is `Hom(Λ[v Č_•], I)`. So exactness for
+all injective `I` is equivalent to acyclicity in positive degrees of the free complex
+`Λ[v Č_•]`. At a geometric point `x` of the open complement its stalk is `Λ` on the discrete
+sets of `x`-points of `v Č_•`. Gabber's theorem for étale injectives gives only a profinite
+version: when the terms of `v Č_•` are cofiltered limits of étale `B`-schemes, the colimit over
+finite étale levels of the cohomology of the finite fibre sets vanishes. If the normalized nerve
+has dimension at most `1`, this rules out discrete cycles. An example is a cover by the two local
+rings of a semilocal Bézout domain whose fraction field is algebraically closed. Such covers
+therefore give no counterexample. In general the gap between the profinite and discrete
+statements is the phenomenon of `proper_closed_lift_local_chains_nhds`: points joined by limits
+of finite chains need not be joined by a finite chain. For a nodal loop `N` in the closed fibre
+this should make the left adjoint of `i^*` on sheaves of sets differ from `h_{v N}` at a
+geometric point (a failure in degree `0`). No cover was found that turns this into a failure in
+positive degree. -/
 theorem exactAt_closedCechCoefficientFunctor_obj_of_injective
     (A : Type u) [CommRing A] [Finite A] {B O : Scheme.{u}}
     (b : O ⟶ B) [IsOpenImmersion b] [QuasiCompact b]
