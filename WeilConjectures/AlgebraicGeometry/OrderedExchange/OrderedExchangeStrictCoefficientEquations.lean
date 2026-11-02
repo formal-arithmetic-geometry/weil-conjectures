@@ -7,6 +7,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.OrderedExchange.OrderedExchangeCoefficientData
 import all WeilConjectures.AlgebraicGeometry.Strict.Tower.StrictTowerExchangeMateNormalization
+import all WeilConjectures.AlgebraicGeometry.OrderedExchange.ProEtaleConstantReductionModels
+import all WeilConjectures.AlgebraicGeometry.Stratum.StratumCompletionUnitRestriction
+import WeilConjectures.AlgebraicGeometry.Completed.CompletedReductionUnit
 
 /-! # strictCoefficientEquations -/
 
@@ -21,6 +24,113 @@ namespace AlgebraicGeometry.Scheme.OrderedExchange
 variable {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 variable {X' X Y' Y : Scheme.{t}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
   {f : X ⟶ Y} {g : Y' ⟶ Y}
+
+section OrdinaryPull
+
+/-- The ordinary constant augmentation followed by `ordinaryRho` is the restricted completed
+quotient unit, at every level. Source: Stacks 099M
+(blueprint: def-weil-pbc-ordered-coefficient-comparison-data). -/
+theorem ordinaryAugmentation_ordinaryRho (T : Scheme.{t})
+    (N : reductionModules T (d.completedRing T)) (n : ℕ) :
+    ((ordinaryAugmentation d T).app ((reductionRestrict T (exchangeScalar d T)).obj N)).app
+        (op n) ≫ ((ordinaryRho d T).hom.app N).app (op n) =
+      (reductionRestrict T (exchangeScalar d T)).map
+        (((completedReductionModuleUnit d T).app N).app (op n)) := by
+  ext U x
+  change (((ordinaryRho d T).hom.app N).app (op n)).val.app U
+      ((((ordinaryAugmentation d T).app
+        ((reductionRestrict T (exchangeScalar d T)).obj N)).app (op n)).val.app U x) =
+    (((completedReductionModuleUnit d T).app N).app (op n)).val.app U x
+  have h1 : ((((ordinaryAugmentation d T).app
+      ((reductionRestrict T (exchangeScalar d T)).obj N)).app (op n)).val.app U x) =
+      reductionTensorSection T (quotient d T n)
+        ((reductionRestrict T (exchangeScalar d T)).obj N) U 1 x :=
+    (ordinaryAugmentation_existsUnique d T).exists.choose_spec _ n U x
+  have h2 := (completedReductionModuleUnit_exists d T).exists.choose_spec N n U x
+  rw [h1]
+  exact ((ordinaryRho_existsUnique d T).exists.choose_spec N n U 1 x).trans h2.symm
+
+theorem ordinaryAugmentation_eq_unit (T : Scheme.{t})
+    (L : reductionModules T (exchangeConstantRing T A)) (n : ℕ) :
+    ((ordinaryAugmentation d T).app L).app (op n) =
+      (proEtaleRingExtensionAdjunction (quotient d T n)).unit.app L := by
+  ext W x
+  have h1 : (((ordinaryAugmentation d T).app L).app (op n)).val.app W x =
+      reductionTensorSection T (quotient d T n) L W 1 x :=
+    (ordinaryAugmentation_existsUnique d T).exists.choose_spec L n W x
+  rw [h1]
+  exact ((pbcScalarAdjunction_exists (quotient d T n)).exists.choose_spec L W x).symm
+
+/-- The ordinary constant reduction/pullback comparison preserves the ordinary augmentation.
+Source: Stacks 099M, 0D6D (blueprint: lem-sp-completion-mate-comparison). -/
+theorem ordinaryAugmentation_ordinaryReductionPullIso {U V : Scheme.{t}} (u : U ⟶ V)
+    (L : reductionModules V (exchangeConstantRing V A)) (n : ℕ) :
+    (proEtaleRingModulePullback u (exchangeConstantRing V A) (exchangeConstantRing U A)
+        (exchangeConstantIso u A)).map (((ordinaryAugmentation d V).app L).app (op n)) ≫
+      ((ordinaryReductionPullIso d u).hom.app L).app (op n) =
+    ((ordinaryAugmentation d U).app ((proEtaleRingModulePullback u (exchangeConstantRing V A)
+        (exchangeConstantRing U A) (exchangeConstantIso u A)).obj L)).app (op n) := by
+  rw [ordinaryAugmentation_eq_unit, ordinaryAugmentation_eq_unit]
+  exact levelPullIso_unit d u n L
+
+/-- The ordinary core of the compatibility of `rho` with pullback, at one tower level.
+Source: Stacks 099M, 0D6D (blueprint: def-weil-pbc-ordered-coefficient-comparison-data). -/
+theorem ordinaryRho_pull {U V : Scheme.{t}} (u : U ⟶ V)
+    (M : reductionModules V (d.completedRing V)) (n : ℕ) :
+    (reductionRestrict U (exchangeScalar d U)).map
+        (((stratumModuleReductionIso d u).hom.app M).app (op n)) ≫
+      ((ordinaryRho d U).inv.app ((stratumModulePull d u).obj M)).app (op n) ≫
+      ((reductionModule d U).map ((exchangeOrdinaryResPull d u).hom.app M)).app (op n) =
+    (exchangeOrdinaryResPull d u).hom.app
+        (((completedReductionModuleTowerFunctor V d).obj M).obj (op n)) ≫
+      (proEtaleRingModulePullback u (exchangeConstantRing V A) (exchangeConstantRing U A)
+        (exchangeConstantIso u A)).map (((ordinaryRho d V).inv.app M).app (op n)) ≫
+      ((ordinaryReductionPullIso d u).hom.app
+        ((reductionRestrict V (exchangeScalar d V)).obj M)).app (op n) := by
+  have hε : Epi ((reductionRestrict U (exchangeScalar d U)).map
+      ((stratumModulePull d u).map (((completedReductionModuleUnit d V).app M).app (op n)))) := by
+    have := stratumModuleUnit_epi d V M n
+    infer_instance
+  apply (cancel_epi ((reductionRestrict U (exchangeScalar d U)).map
+    ((stratumModulePull d u).map (((completedReductionModuleUnit d V).app M).app (op n))))).1
+  have hs := congrArg (fun k ↦ k.app (op n))
+    ((stratumModuleReductionIso_exists d u).exists.choose_spec M)
+  dsimp only [NatTrans.comp_app] at hs
+  have hc : ((d.constantPullbackIso u).hom.app M).app (op n) = 𝟙 _ := rfl
+  erw [hc, Category.id_comp] at hs
+  have hρU := ordinaryAugmentation_ordinaryRho d U ((stratumModulePull d u).obj M) n
+  have hρV := ordinaryAugmentation_ordinaryRho d V M n
+  have hρU' : (reductionRestrict U (exchangeScalar d U)).map
+      (((completedReductionModuleUnit d U).app ((stratumModulePull d u).obj M)).app (op n)) ≫
+      ((ordinaryRho d U).inv.app ((stratumModulePull d u).obj M)).app (op n) =
+      ((ordinaryAugmentation d U).app ((reductionRestrict U (exchangeScalar d U)).obj
+        ((stratumModulePull d u).obj M))).app (op n) := by
+    rw [← hρU, Category.assoc, Iso.hom_inv_id_app_app]
+    erw [Category.comp_id]
+  have hρV' : (reductionRestrict V (exchangeScalar d V)).map
+      (((completedReductionModuleUnit d V).app M).app (op n)) ≫
+      ((ordinaryRho d V).inv.app M).app (op n) =
+      ((ordinaryAugmentation d V).app ((reductionRestrict V (exchangeScalar d V)).obj M)).app
+        (op n) := by
+    rw [← hρV, Category.assoc, Iso.hom_inv_id_app_app]
+    erw [Category.comp_id]
+  have hA := congrArg (fun k ↦ k.app (op n))
+    ((ordinaryAugmentation d U).naturality ((exchangeOrdinaryResPull d u).hom.app M))
+  dsimp only [NatTrans.comp_app] at hA
+  have hE := (exchangeOrdinaryResPull d u).hom.naturality
+    (((completedReductionModuleUnit d V).app M).app (op n))
+  dsimp only [Functor.comp_map] at hE
+  have hO := ordinaryAugmentation_ordinaryReductionPullIso d u
+    ((reductionRestrict V (exchangeScalar d V)).obj M) n
+  rw [← Functor.map_comp_assoc]
+  erw [hs]
+  rw [reassoc_of% hρU']
+  erw [← hA, reassoc_of% hE]
+  rw [← Functor.map_comp_assoc]
+  erw [hρV', hO]
+  rfl
+
+end OrdinaryPull
 
 /-- Restriction of the strict reduction comparison `rho` is compatible with pullback.
 Source: Stacks 099M, 0D6D (blueprint: def-weil-pbc-ordered-coefficient-comparison-data). -/
