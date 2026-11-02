@@ -353,6 +353,17 @@ def inverseImageFiniteComparisonComplex (n : ℕ)
     (K : CochainComplex (integralOperationsFiniteModules l E Y n) ℤ) :=
   (inverseImageFiniteComparison_existsUnique l E g n K).exists.choose
 
+/-- The finite-level derived category, on the unfolded constant-coefficient presentation
+used as the source and target of `integralOperationsLevelPullback`.
+Source: Stacks Tag 05RU (auxiliary; not a blueprint node). -/
+@[instance_reducible]
+noncomputable def levelPullbackHasDerivedCategory
+    (W : Scheme.{t}) (R : Sheaf (ProEt.topology W) RingCat.{max u (t + 1)}) :
+    HasDerivedCategory (SheafOfModules.{max u (t + 1)} R) :=
+  HasDerivedCategory.standard _
+
+attribute [local instance] levelPullbackHasDerivedCategory
+
 /-- Finite comparison in the derived category: the class of the sheafified tensor-unit
 chain map, with the canonical exact-functor localization comparisons on both sides.
 Source: Stacks Tag 03D6 (blueprint: def-weil-inverse-image-pullback-comparison). -/
