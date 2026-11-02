@@ -26492,6 +26492,8 @@ public import WeilConjectures.WeilSheaf.ProperCohomology
 public import WeilConjectures.WeilSheaf.ProperCohomology.LowerShriek
 public import WeilConjectures.WeilSheaf.ProperCohomology.OpenImmersion
 public import WeilConjectures.WeilSheaf.RealPurity
+public import WeilConjectures.WeilSheaf.RealSheaves.Setup.RealSheavesSetup
+public import WeilConjectures.WeilSheaf.RealSheaves.Setup.RealWeilSheaves
 public import WeilConjectures.WeilSheaf.Realizable
 public import WeilConjectures.WeilSheaf.ShiftedSheaf
 public import WeilConjectures.WeilSheaf.SixFunctors.CanonicalOrdinaryRingedTensorCoherence

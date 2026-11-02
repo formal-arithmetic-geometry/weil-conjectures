@@ -116,6 +116,10 @@ def baseInvertible (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime]
         X.scheme.Γevaluation x).hom
   exact h.invertible
 
+/-- The raw source category. Source: BS 6.8.14
+(blueprint: def-real-lisse-realization-data). -/
+abbrev Raw (X : Base D l hl) := sfRationalConstructibleCategory l E X.scheme
+
 attribute [instance] baseInvertible
 
 variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
@@ -128,6 +132,35 @@ abbrev Modules (X : Base D l hl) := pbcModules X.scheme (rationalCoefficientShea
 /-- The recorded coefficient unit. Source: BS 6.8.15
 (blueprint: def-real-lisse-realization-data). -/
 abbrev unit (X : Base D l hl) := pullbackTensorRationalUnit l E X.scheme
+
+/-- The rational point as a finite-type base, with its identity structure map.
+Source: BS 6.8 and the blueprint geometric point convention
+(blueprint: def-real-lisse-realization-data). -/
+def point : Base D l hl := ⟨Spec (.of D.k)⟩
+
+/-- Constants acting on ordinary sections at the geometric point. Source: BS 6.8.1
+(blueprint: def-real-lisse-realization-data). -/
+def pointConstants : E →+*
+    (rationalCoefficientSheaf l (Spec (.of D.k)) E).obj.obj
+      (op (ProEt.mk (𝟙 (Spec (.of D.k))))) :=
+  { toFun := fun a ↦ (ContinuousRational.scalarSections l E (Spec (.of D.k)) a).val _
+    map_one' := rfl
+    map_mul' := fun _ _ ↦ rfl
+    map_zero' := rfl
+    map_add' := fun _ _ ↦ rfl }
+
+/-- Ordinary sheaf sections, with coefficients restricted along constant rational functions.
+Source: BS 6.8.1 (blueprint: def-real-lisse-realization-data). -/
+def sections : Modules D l hl E (point D l hl) ⥤ ModuleCat.{u + 1} E :=
+  AlgebraicGeometry.ProEtale.pointModuleSections D.k
+    (rationalCoefficientSheaf l (Spec (.of D.k)) E) ⋙
+      ModuleCat.restrictScalars (pointConstants D l E)
+
+/-- The actual recorded point fibre, lifted only in carrier size. Source: blueprint order 1509
+(blueprint: def-real-lisse-realization-data). -/
+def fibre : Raw D l hl E (point D l hl) ⥤ ModuleCat.{u + 1} E :=
+  pointRationalFibre D l hl E ⋙ (DerivedCategory.pointFiniteDimensional E).ι ⋙
+    DerivedCategory.homologyFunctor.{u} (ModuleCat.{u} E) 0 ⋙ ModuleCat.uliftFunctor.{u + 1, u} E
 
 attribute [instance] At.additive
 
