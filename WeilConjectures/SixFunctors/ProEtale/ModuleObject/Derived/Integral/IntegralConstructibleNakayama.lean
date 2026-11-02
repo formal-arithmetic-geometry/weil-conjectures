@@ -359,7 +359,7 @@ theorem integralConstructible_isZero_of_isIso_nsmul (X : Scheme.{u})
     exact this
   apply (IsZero.iff_id_eq_zero _).2
   apply Mod.hom_ext
-  apply abDetectMaps S.immersion
+  apply ProEtale.eq_zero_of_forall_upperStar_map_eq_zero_addCommGrp S.immersion
     (fun x ↦ ?_) (𝟙 M.X)
   · intro a
     exact congrArg Mod.Hom.hom ((hzero a).eq_of_src

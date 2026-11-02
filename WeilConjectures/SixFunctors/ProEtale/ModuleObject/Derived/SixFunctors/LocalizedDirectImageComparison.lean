@@ -114,13 +114,12 @@ private theorem localization_comparison_zero (ℓ : ℕ)
     (g : UY.obj (LY.obj (G.obj K)) ⟶ G.obj (UX.obj (LX.obj K)))
     (hg : adjY.unit.app (G.obj K) ≫ g = G.map (adjX.unit.app K)) :
     (scalarLocalizationUnitCocone ℓ adjY (G.obj K)).ι.app 0 ≫ g =
-      ((Cocone.precompose (integralLocalizationSequenceMapIso ℓ G K).inv).obj
+      ((Cocone.precompose (Mod.smulSequenceCompIso G K ℓ).inv).obj
         (G.mapCocone (scalarLocalizationUnitCocone ℓ adjX K))).ι.app 0 := by
-  simp only [scalarLocalizationUnitCocone, Functor.comp_obj, Functor.const_obj_obj,
-    NatTrans.ofSequence_app, pow_zero, End.one_def, CategoryTheory.Functor.map_id,
-    Category.comp_id, integralLocalizationSequenceMapIso, asIso_inv, Cocone.precompose_obj_pt,
-    Functor.mapCocone_pt, Cocone.precompose_obj_ι, NatTrans.comp_app, NatIso.isIso_inv_app,
-    IsIso.inv_id, Functor.mapCocone_ι_app]
+  simp only [scalarLocalizationUnitCocone, Functor.comp_obj, Functor.const_obj_obj, pow_zero,
+    End.one_def, CategoryTheory.Functor.map_id, Category.comp_id, Mod.smulSequenceCompIso,
+    NatIso.ofComponents_inv_app, Iso.refl_inv, Cocone.precompose_obj_pt, Functor.mapCocone_pt,
+    Cocone.precompose_obj_ι, NatTrans.comp_app, Functor.mapCocone_ι_app]
   change adjY.unit.app (G.obj K) ≫ g = 𝟙 _ ≫ G.map (adjX.unit.app K)
   exact hg.trans (Category.id_comp (G.map (adjX.unit.app K))).symm
 
@@ -183,7 +182,7 @@ private theorem bounded_integralScalarPushHom_isIso (ℓ : ℕ) [Fact ℓ.Prime]
       ((lowerStar (integralCoeff ℓ E) f).rightDerivedFunctorPlus.obj ⟨K, hK⟩).property
   let cX := integralLocalizationCocone ℓ E X K
   let cY := integralLocalizationCocone ℓ E Y (G.obj K)
-  let σ := integralLocalizationSequenceMapIso ℓ G K
+  let σ := Mod.smulSequenceCompIso G K ℓ
   let d := (Cocone.precompose σ.inv).obj (G.mapCocone cX)
   let g : cY.pt ⟶ d.pt := U.map β ≫ κ.hom.app (LX.obj K)
   have : IsIso (ℓ • 𝟙 d.pt) := by
@@ -231,14 +230,14 @@ private theorem bounded_integralScalarPushHom_isIso (ℓ : ℕ) [Fact ℓ.Prime]
       apply hd.ofIsoColimit
       exact Cocone.ext (Iso.refl _) (by
         intro n
-        simp only [Functor.comp_obj, integralLocalizationSequenceMapIso,
-          Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom, asIso_hom, asIso_inv,
+        simp only [Functor.comp_obj, Mod.smulSequenceCompIso, NatIso.ofComponents_hom_app,
+          Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
           Cocone.precompose_obj_pt, Functor.mapCocone_pt, Cocone.whisker_pt,
           Functor.mapCocone_ι_app, Functor.comp_map, Iso.refl_hom, Category.comp_id,
           Cocone.precompose_obj_ι, NatTrans.comp_app, Functor.const_obj_obj,
-          Functor.whiskerRight_app, Functor.whiskerLeft_app, NatTrans.ofSequence_app,
+          Functor.whiskerRight_app, Functor.whiskerLeft_app,
           CategoryTheory.Functor.map_id, Cocone.whisker_ι, Functor.whiskerLeft_comp,
-          NatIso.isIso_inv_app, IsIso.inv_id, Functor.map_comp, e, σ, d]
+          Functor.map_comp, e, σ, d]
         change H.map (G.map (cX.ι.app n.down)) =
           𝟙 _ ≫ H.map (𝟙 _) ≫ H.map (G.map (cX.ι.app n.down))
         rw [H.map_id, Category.id_comp, Category.id_comp])

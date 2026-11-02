@@ -21,6 +21,9 @@ set_option autoImplicit false
 universe u c v r
 open CategoryTheory CategoryTheory.Limits Opposite
 
+attribute [-instance] CategoryTheory.flatConstantModulesAbelian
+  AlgebraicGeometry.ProEtale.surjectiveTower_wEqualsLocallyBijective
+
 namespace AlgebraicGeometry.Scheme
 
 private def restrictionUnitIso (X : Scheme.{u})

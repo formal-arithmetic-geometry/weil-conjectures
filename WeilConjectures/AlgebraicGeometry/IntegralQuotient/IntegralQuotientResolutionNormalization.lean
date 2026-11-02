@@ -247,15 +247,13 @@ abbrev resolutionConstantRing (T : Scheme.{u}) :=
 
 private theorem coefficient_noetherian :
     IsNoetherianRing (Padic.coefficientExtensionIntegers l E) := by
-  have h := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
+  have h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   let : IsPrincipalIdealRing (Padic.coefficientExtensionIntegers l E) :=
     h.2.2.2.2.2.2.2.2.1
   infer_instance
 
 private theorem uniformizer_ne_zero : Padic.coefficientExtensionUniformizer l E ≠ 0 := by
-  have h := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
+  have h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   have hgen : Ideal.span ({Padic.coefficientExtensionUniformizer l E} :
       Set (Padic.coefficientExtensionIntegers l E)) =
         Padic.coefficientExtensionMaximalIdeal l E :=
@@ -278,7 +276,8 @@ private theorem point_zero (n : ℕ) : multiplicationPoint l E n ≫ reduction l
   let := spectralNorm.normedField (Padic l) E
   ext S a
   apply ULift.ext
-  ext x
+  apply ContinuousMap.ext
+  intro x
   change Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1))
     (Padic.coefficientExtensionUniformizer l E ^ (n + 1) * a.down x) = 0
   apply (coefficient_exact l E n _).2

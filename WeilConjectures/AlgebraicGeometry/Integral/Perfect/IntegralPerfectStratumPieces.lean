@@ -20,6 +20,9 @@ Source: Bhatt--Scholze, Lemma 6.3.14, final devissage, and Lemma 6.8.12
 set_option autoImplicit false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
+
+attribute [-instance] CategoryTheory.flatConstantModulesAbelian
+
 namespace AlgebraicGeometry.Scheme
 
 /-- A bounded-above locally perfect complex on one scheme. The covering models

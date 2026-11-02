@@ -22,7 +22,7 @@ open CategoryTheory Limits MonoidalCategory
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 attribute [local irreducible] Functor.leftDerivedFunctor Functor.mapDerivedCategory
 namespace AlgebraicGeometry.ProEtale.CondensedRing
-attribute [local irreducible] Functor.leftDerivedTensorComparison Functor.tensorModelMap
+attribute [local irreducible] Functor.leftDerivedTensorComparison
   DerivedCategory.monoidalClosed Mod.monoidalClosed
   AlgebraicGeometry.ProEtale.upperStarFromPoint Mod.extendScalars
 attribute [local irreducible] Functor.residueDerivedMonoidal

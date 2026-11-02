@@ -29,6 +29,7 @@ Mathlib spectralNorm_unique_field_norm_ext and the definition of finite constant
 @[expose] public section
 
 set_option autoImplicit false
+set_option linter.privateModule false
 
 universe u
 
@@ -66,13 +67,9 @@ private theorem mem_lift_integers
     [FiniteDimensional ℚ_[ℓ] (ULift.{u} E.val)] (x : ULift.{u} E.val) :
     x ∈ Padic.coefficientExtensionIntegers ℓ (ULift.{u} E.val) ↔
       x.down ∈ PadicAlgCl.integers ℓ E.val := by
-  have h := (Padic.extension_integers_dvr ℓ (ULift.{u} E.val)
-    (Padic.coefficientExtensionAbsoluteValue ℓ (ULift.{u} E.val))
-    (spectralNorm_extends (K := ℚ_[ℓ]) (L := ULift.{u} E.val))).choose_spec.choose_spec.1 x
-  rw [spectral_embedded_norm ℓ E x] at h
-  exact h.trans (by
-    rw [PadicAlgCl.mem_integers_iff, ← NNReal.coe_le_coe]
-    rfl)
+  change Padic.coefficientExtensionAbsoluteValue ℓ (ULift.{u} E.val) x ≤ 1 ↔ _
+  rw [spectral_embedded_norm ℓ E x, PadicAlgCl.mem_integers_iff, ← NNReal.coe_le_coe]
+  rfl
 private noncomputable def integerLiftEquiv
     (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ))

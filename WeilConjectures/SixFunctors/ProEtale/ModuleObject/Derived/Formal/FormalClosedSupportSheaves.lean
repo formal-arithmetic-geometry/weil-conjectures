@@ -368,7 +368,7 @@ theorem formal_closed_support_sheaves
   have : TopologicalSpace.NoetherianSpace V :=
     j.isOpenEmbedding.isEmbedding.isInducing.noetherianSpace
   have : QuasiCompact j := inferInstance
-  obtain ⟨hAb, hAbsupport⟩ := ProEtale.abelian_closed_support i j hij
+  obtain ⟨hAb, hAbsupport⟩ := ProEtale.abelian_closed_support_counit_and_unit i j hij
   have hi := moduleCounitOfAbelian Λ i hAb
   have hzero := openRestrictionPushforwardZero Λ i j hij
   have hsupport : ∀ M : pulledBackModuleObjects Λ X,

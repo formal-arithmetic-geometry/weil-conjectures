@@ -242,6 +242,15 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 attribute [local irreducible] DerivedCategory.TStructure.t
 
+private lemma locallyFinitelyPresented_of_isZero {X : Scheme.{u}}
+    (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R]
+    {M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R} (hM : IsZero M) :
+    IsLocallyFinitelyPresented R M := by
+  refine ⟨.singleton (𝟙 X) (Precoverage.mem_coverings_of_isIso _), fun i ↦ ?_⟩
+  refine ⟨0, 0, 𝟙 _, ⟨?_⟩⟩
+  exact (((ProEtale.upperStar Ab.{u + 1} _).mapMod R).map_isZero hM).iso
+    (isZero_cokernel_of_epi (𝟙 _))
+
 private theorem integral_tensor_single
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E]
     [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]

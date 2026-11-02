@@ -495,9 +495,7 @@ private theorem coefficientSmallIso (l : ℕ) [Fact l.Prime] (E : Type u) [Field
     exact norm_smul_le a (e x)⟩
   let : FiniteDimensional ℚ_[l] F := e.symm.toLinearEquiv.finiteDimensional
   refine ⟨F, inferInstance, inferInstance, inferInstance, ?_⟩
-  have hm (x : E) : x ∈ Padic.coefficientExtensionIntegers l E ↔ ‖x‖ ≤ 1 := by
-    exact (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-      (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec.1 x
+  have hm (x : E) : x ∈ Padic.coefficientExtensionIntegers l E ↔ ‖x‖ ≤ 1 := Iff.rfl
   have hmem (x : F) : x ∈ continuousIntegers l F ↔ e x ∈
       Padic.coefficientExtensionIntegers l E := by
     rw [hm]
