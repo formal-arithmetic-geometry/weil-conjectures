@@ -8,6 +8,7 @@ module
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 public import Mathlib.Algebra.Homology.QuasiIso
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
 
 /-!
 # Functorial complex embeddings through injective subobjects
@@ -52,7 +53,11 @@ theorem exists_functorial_injective_complex_embedding
       ∀ (M : CochainComplex C ℤ),
         (∀ (n : ℤ), Mono ((j.app M).f n)) ∧ QuasiIso (j.app M) ∧
           ∀ (n : ℤ), ∃ (I : C) (a : M.X n ⟶ I) (b : I ⟶ (N.obj M).X n),
-            Injective I ∧ Mono b ∧ a ≫ b = (j.app M).f n := by
-  sorry
+            Injective I ∧ Mono b ∧ a ≫ b = (j.app M).f n :=
+  ⟨kInjectiveResolutionFunctor.{v} C, toKInjectiveResolution.{v} C, fun M ↦
+    have h := monoQuasiIso_toKInjectiveResolution_app.{v} C M
+    have := h.1
+    ⟨fun _ ↦ inferInstance, h.2, fun _ ↦
+      ⟨_, _, 𝟙 _, inferInstance, inferInstance, Category.comp_id _⟩⟩⟩
 
 end CochainComplex

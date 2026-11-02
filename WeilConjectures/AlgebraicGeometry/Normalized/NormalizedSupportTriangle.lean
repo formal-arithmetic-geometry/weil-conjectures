@@ -14,7 +14,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 public import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
-import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.UnboundedDerivedBoundary
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.UnboundedDerivedBoundary
 import WeilConjectures.AlgebraicGeometry.Sites.UpperStarSections
 import Mathlib.AlgebraicGeometry.PullbackCarrier
 import Mathlib.CategoryTheory.Sites.MayerVietorisSquare
