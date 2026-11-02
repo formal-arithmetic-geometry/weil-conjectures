@@ -218,6 +218,54 @@ Source: the source proof, paragraph 1
       openSquare := c.isPullback_i_ofIsPullback (IsPullback.of_hasPullback f v)
       properSquare := (IsPullback.of_hasPullback c.g v).toCommSq }
 
+/-- The two monoidal input comparisons used in the compact-support projection square.
+Source: the source proof, paragraph 3
+(blueprint: lem-fix-condensed-compactification-reindexing). -/
+def tensorInput {X Y Y' : Scheme.{u}} {f : X ⟶ Y} (v : Y' ⟶ Y)
+    (K : D Λ X) (L : D Λ Y) :
+    (P Λ (pullback.fst f v)).obj (K ⊗ (P Λ f).obj L) ⟶
+      (P Λ (pullback.fst f v)).obj K ⊗
+        (P Λ (pullback.snd f v)).obj ((P Λ v).obj L) :=
+  ((leftDerivedUpperStarTensor Λ (pullback.fst f v)).app K).app ((P Λ f).obj L) ≫
+    (𝟙 _ ⊗ₘ (pullbackSquareComparison Λ
+      (IsPullback.of_hasPullback f v).toCommSq).inv.app L)
+
+private theorem directExchange_isIso {X Y X' Y' : Scheme.{u}}
+    {f : X ⟶ Y} {f' : X' ⟶ Y'} {w : X' ⟶ X} {v : Y' ⟶ Y}
+    [IsIso w] [IsIso v] (sq : CommSq w f' f v) :
+    IsIso (baseChangeMap Λ sq) := by
+  have : (P Λ w).IsEquivalence := inferInstance
+  have : (P Λ v).IsEquivalence := inferInstance
+  exact Adjunction.isIso_exchangeRight_of_isEquivalence
+    (derivedUpperStarLowerStarAdjunction Λ f)
+    (derivedUpperStarLowerStarAdjunction Λ f') (pullbackSquareComparison Λ sq)
+
+/-- Isomorphism squares have invertible native exchanges on all ambient inputs.
+Together with the identity and pasting equations this identifies the exchange of
+the inverse diagram with the inverse exchange, not merely some inverse map.
+Source: the source proof, paragraph 1
+(blueprint: lem-fix-condensed-compactification-reindexing).
+Proof: paste the diagram with its scheme-theoretic inverse in both orders. The
+identity and pasting equations show that its specified inverse exchange is both a
+left and a right inverse, after the native identity/composition identifications. -/
+theorem square_isIso {X Y X' Y' : Scheme.{u}}
+    {f : X ⟶ Y} {f' : X' ⟶ Y'} {c : Compactification f} {c' : Compactification f'}
+    {w : X' ⟶ X} {v : Y' ⟶ Y} [IsIso w] [IsIso v]
+    (s : Square c c' w v) [IsIso s.middle]
+    (sq : CommSq w f' f v) :
+    IsIso (baseChangeMap Λ sq) ∧ IsIso (squareExchange Λ s) := by
+  refine ⟨directExchange_isIso Λ sq, ?_⟩
+  have : (P Λ v).IsEquivalence := inferInstance
+  have : (P Λ s.middle).IsEquivalence := inferInstance
+  have := isIso_mateEquiv_of_isEquivalence
+    (derivedUpperStarLowerStarAdjunction Λ c.g)
+    (derivedUpperStarLowerStarAdjunction Λ c'.g)
+    (TwoSquare.mk (P Λ v) (P Λ c.g) (P Λ c'.g) (P Λ s.middle)
+      (pullbackSquareComparison Λ s.properSquare).hom)
+  unfold squareExchange
+    CategoryTheory.SuppliedExchangeProjection.compactificationExchangeFromData
+  infer_instance
+
 set_option maxHeartbeats 1600000 in
 -- Native derived functor endpoint comparisons exceed the default heartbeat allowance.
 /-- The section of the pullback of the target open along a proper refinement.
@@ -377,6 +425,41 @@ theorem direct_cube {X Y X' Y' A B A' B' : Scheme.{u}}
         (P Λ v₀).map ((baseChangeMap Λ left).app K) ≫
         (baseChangeMap Λ back).app ((P Λ a).obj K) := by
   sorry
+
+/-- The literal pullback of the ambient map of a refinement.
+Source: the source proof, paragraph 3
+(blueprint: lem-fix-condensed-compactification-reindexing). -/
+def refinementBaseMap {X Y Y' : Scheme.{u}} {f : X ⟶ Y}
+    {c₁ c₂ : Compactification f} (u : c₁.Refinement c₂) (v : Y' ⟶ Y) :
+    (c₁.baseChange v).Z ⟶ (c₂.baseChange v).Z :=
+  pullback.lift (pullback.fst c₁.g v ≫ u.hom) (pullback.snd c₁.g v)
+    (by rw [Category.assoc, u.hom_g, pullback.condition])
+
+/-- The pulled-back ambient map obeys both refinement triangles.
+Source: the source proof, paragraph 3
+(blueprint: lem-fix-condensed-compactification-reindexing).
+Proof: compose each triangle with the two pullback projections. The first projection
+uses the original refinement triangle and the second is the identity over the base.
+The universal property of the pullback gives the required equality. -/
+theorem refinementBaseMap_triangles {X Y Y' : Scheme.{u}} {f : X ⟶ Y}
+    {c₁ c₂ : Compactification f} (u : c₁.Refinement c₂) (v : Y' ⟶ Y) :
+    (c₁.baseChange v).i ≫ refinementBaseMap u v = (c₂.baseChange v).i ∧
+      refinementBaseMap u v ≫ (c₂.baseChange v).g = (c₁.baseChange v).g := by
+  constructor
+  · apply pullback.hom_ext
+    · simp [refinementBaseMap, Category.assoc, u.i_hom]
+    · simp [refinementBaseMap, Category.assoc]
+  · simp [refinementBaseMap]
+
+/-- Base change of a proper refinement, without a boundary-preservation condition.
+Source: the source proof, paragraph 3
+(blueprint: lem-fix-condensed-compactification-reindexing). -/
+def refinementBaseChange {X Y Y' : Scheme.{u}} {f : X ⟶ Y}
+    {c₁ c₂ : Compactification f} (u : c₁.Refinement c₂) (v : Y' ⟶ Y) :
+    (c₁.baseChange v).Refinement (c₂.baseChange v) where
+  hom := refinementBaseMap u v
+  i_hom := (refinementBaseMap_triangles u v).1
+  hom_g := (refinementBaseMap_triangles u v).2
 
 set_option maxHeartbeats 1600000 in
 -- The endpoints of the native derived adjunctions require additional unification time.
