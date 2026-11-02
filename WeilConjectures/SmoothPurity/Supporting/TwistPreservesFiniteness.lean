@@ -595,8 +595,8 @@ private def freeUnitIso (R : C) [MonObj R] : (free R).obj (𝟙_ C) ≅ regular 
     rw [Category.assoc, rightUnitor_naturality]
     monoidal)
 
-variable [HasCoequalizers C] [∀ X : C, PreservesColimitsOfSize.{0, 0} (tensorLeft X)]
-  [∀ X : C, PreservesColimitsOfSize.{0, 0} (tensorRight X)] [BraidedCategory C]
+variable [HasCoequalizers C] [∀ X : C, PreservesColimitsOfSize.{0, 0} (MonoidalCategory.tensorLeft X)]
+  [∀ X : C, PreservesColimitsOfSize.{0, 0} (MonoidalCategory.tensorRight X)] [BraidedCategory C]
   {R S : C} [MonObj R] [MonObj S] [IsCommMonObj R] (φ : R ⟶ S) [IsMonHom φ]
 
 private noncomputable def extendFreeIso : free R ⋙ extendScalars φ ≅ free S :=
