@@ -51,12 +51,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   (X : AlgebraicGeometry.Scheme.{t}) (U : Option X.ProEt)
 
-section ScalarLinear
-
-attribute [local instance] moduleLinear
-
-end ScalarLinear
-
 set_option linter.unusedVariables false in
 /-- The coefficient sheaf in degree zero. Source: Stacks 08JD
 (blueprint: lem-sf-rational-thick-evaluation). -/
