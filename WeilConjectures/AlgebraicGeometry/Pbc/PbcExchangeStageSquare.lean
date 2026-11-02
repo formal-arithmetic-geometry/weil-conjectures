@@ -269,6 +269,32 @@ theorem pbcScalarCompletedExchange (K : PbcCompletedDerived X (pbcIntegralDatum 
         ((pbcEmbeddingAmbientTensor l E F i X).obj K) := by
   sorry
 
+
+/-- The scalar exchange equation conjugated by `eqToHom`s, with the middle exchange
+components given up to `eqToHom`s; this is the shape of the `E ≠ F` exchange branch. -/
+theorem pbcScalarCompletedExchange_eqToHom_square
+    (K : PbcCompletedDerived X (pbcIntegralDatum l E))
+    {s t m₀ m₁ x₀ x₁ : PbcCompletedDerived Y' (pbcIntegralDatum l F)}
+    (M : m₀ ⟶ m₁) (Xm : x₀ ⟶ x₁)
+    (h₀ : s = _) (h₁ : _ = m₀) (h₂ : m₁ = _) (h₃ : _ = t)
+    (k₀ : s = _) (k₁ : _ = x₀) (k₂ : x₁ = _) (k₃ : _ = t)
+    (hM : M = eqToHom h₁.symm ≫ (pbcEmbeddingAmbientTensor l E F i Y').map
+      ((pbcActualCompletedExchange (pbcIntegralDatum l E) sq).app K) ≫ eqToHom h₂.symm)
+    (hX : Xm = eqToHom k₁.symm ≫ (pbcActualCompletedExchange (pbcIntegralDatum l F) sq).app
+      ((pbcEmbeddingAmbientTensor l E F i X).obj K) ≫ eqToHom k₂.symm) :
+    eqToHom h₀ ≫ ((pbcScalarCompletedPullIso l E F i g).hom.app
+        ((pbcActualDerivedPush f (pbcIntegralDatum l E)).obj K) ≫ eqToHom h₁ ≫ M ≫
+        eqToHom h₂ ≫ (pbcScalarDirectImageIso l E F i f').hom.app
+          ((pbcActualCompletedPull g' (pbcIntegralDatum l E)).obj K)) ≫ eqToHom h₃ =
+      eqToHom k₀ ≫ ((pbcActualCompletedPull g (pbcIntegralDatum l F)).map
+          ((pbcScalarDirectImageIso l E F i f).hom.app K) ≫ eqToHom k₁ ≫ Xm ≫
+          eqToHom k₂ ≫ (pbcActualDerivedPush f' (pbcIntegralDatum l F)).map
+            ((pbcScalarCompletedPullIso l E F i g').hom.app K)) ≫ eqToHom k₃ :=
+  eqToHom_square_of_inv_square _ _ M _ _ _ Xm _ _ _ h₀ h₁ h₂ h₃ k₀ k₁ k₂ k₃
+    (Iso.hom_inv_id_app _ _)
+    (by rw [← Functor.map_comp, Iso.inv_hom_id_app]; exact CategoryTheory.Functor.map_id _ _) hM hX
+    (pbcScalarCompletedExchange l E F i sq K)
+
 end ScalarExchange
 
 omit [IsAlgClosure ℚ_[l] Ω] in
@@ -572,7 +598,7 @@ theorem pbcExchangeStageSquare_integral
   simp only [eqToHom_localization_map, localization_map_comp_eqToHom]
   congr 1
   ext
-  simp only [ObjectProperty.FullSubcategory.comp_hom]
+  simp only [ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.eqToHom_hom]
   sorry
 
 /-- The prescribed localized actual exchange components satisfy the scalar
