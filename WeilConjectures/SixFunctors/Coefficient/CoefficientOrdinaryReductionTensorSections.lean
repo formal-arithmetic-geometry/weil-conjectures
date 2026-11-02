@@ -138,8 +138,7 @@ theorem coefficientQuotientNatTrans_unitSection {A Bm Bn : Sheaf J RingCat.{r}}
 
 end Generic
 
-set_option diagnostics true in
-set_option diagnostics.threshold 500 in
+set_option trace.Meta.isDefEq true in
 /-- The strict quotient map sends unit sections to unit sections.
 Source: Stacks 06YY, 0941. -/
 theorem coefficientOrdinaryQuotient_unitSection {m n : ℕ} (h : n ≤ m)
@@ -155,7 +154,8 @@ theorem coefficientOrdinaryQuotient_unitSection {m n : ℕ} (h : n ≤ m)
   rw [hq]
   unfold coefficientOrdinaryQuotientComponent coefficientOrdinaryQuotientNaturalTransformation
     coefficientIntegralScalarUnitSection
-  exact coefficientQuotientNatTrans_unitSection
+  exact coefficientQuotientNatTrans_unitSection (Bm := integralCoefficientSheaf l E W m)
+    (Bn := integralCoefficientSheaf l E W n)
     ((sheafCompose (Scheme.ProEt.topology W)
       (forget₂ CommRingCat.{max u (t+1)} RingCat.{max u (t+1)})).map
         (completedIntegralCommRingProjectionUnrestricted l E W m))
@@ -165,7 +165,8 @@ theorem coefficientOrdinaryQuotient_unitSection {m n : ℕ} (h : n ≤ m)
     (normalizedDVRQuotient l E W h)
     (coefficientOrdinaryScalarAdjunction l E W m) (coefficientOrdinaryScalarAdjunction l E W n)
     (eqToIso (coefficientRestrictionComp l E W h))
-    (restrictScalars_eqToIso_inv_section _ _ _ (coefficientRestrictionComp l E W h)) X V x
+    (restrictScalars_eqToIso_inv_section (Bm := integralCoefficientSheaf l E W m)
+      (Bn := integralCoefficientSheaf l E W n) _ _ _ (coefficientRestrictionComp l E W h)) X V x
 
 end
 end WeilConjectures
