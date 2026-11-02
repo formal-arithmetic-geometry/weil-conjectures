@@ -73,8 +73,8 @@ theorem isIso_pushforwardExchange_app_of_isProper_finiteCoefficient (φ : M.Hom 
     (plusEtaleOrigin_finiteCoefficientDerivedEquivalence_leftDerivedUpperStar_obj T M.ε hK)
   have h₃ := isIso_baseChangeMap_app_of_isProper_finiteCoefficient T hi _ h₂
   have key := φ.isIso_pushforwardExchange_app_of_isIso_baseChangeMap
-    (Profinite.continuousMapRingObj T) K (by cast_proofs h₁) (by cast_proofs h₃)
-  cast_proofs key
+    (Profinite.continuousMapRingObj T) K (by exact_mod_proofs h₁) (by exact_mod_proofs h₃)
+  exact_mod_proofs key
 
 end NearbyCyclesModel.Hom
 
