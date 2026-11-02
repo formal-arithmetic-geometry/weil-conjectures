@@ -547,6 +547,76 @@ theorem OrdinaryModel.scalarTensorAssociativity (M : OrdinaryModel l E W) (n : �
       ((congrArg (fun v ↦ (m9.f k).val.app V v) R4).trans c4))
   exact cL.trans cR.symm
 
+set_option maxHeartbeats 800000 in
+-- Instantiating the formal composites elaborates the concrete evaluated tensor terms.
+/-- The ordinary tensor comparison of the quotient system is compatible with the native
+total associators: both composites agree after every finite evaluation, where they become
+the reassociation of the scalar tensor comparisons.
+Source: Stacks 03EK, 07A4, 0941. -/
+theorem OrdinaryModel.quotientTensor_associativity (M : OrdinaryModel l E W)
+    (b : coefficientTotalTensor.{u, t + 1, t} (Scheme.ProEt.topology W)
+        (completedIntegralCommRingSheafUnrestricted l E W) ⋙ M.quotient l E W ≅
+      (M.quotient l E W).prod (M.quotient l E W) ⋙
+        coefficientTotalTensor.{u, t + 1, t} (coefficientSequenceTopology (Scheme.ProEt.topology W))
+          (coefficientSequenceCommRingSheaf l E W))
+    (hb : M.TensorEvaluation l E W b) :
+    CoefficientComplexTensorAssociativity (Scheme.ProEt.topology W)
+      (completedIntegralCommRingSheafUnrestricted l E W)
+      (coefficientSequenceTopology (Scheme.ProEt.topology W))
+      (coefficientSequenceCommRingSheaf l E W) (M.quotient l E W) b := by
+  intro P Q N a b' ha hb'
+  apply coefficientSequenceComplex_hom_ext
+  intro n
+  let T := coefficientTotalTensor.{u, t + 1, t} (Scheme.ProEt.topology W)
+    (integralCoefficientCommRingSheaf l E W n)
+  let T' := coefficientTotalTensor.{u, t + 1, t}
+    (coefficientSequenceTopology (Scheme.ProEt.topology W))
+    (coefficientSequenceCommRingSheaf l E W)
+  let tA := coefficientTotalTensor.{u, t + 1, t} (Scheme.ProEt.topology W)
+    (completedIntegralCommRingSheafUnrestricted l E W)
+  let Ev := (coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)
+  let F := (scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)
+  let K := M.quotient l E W
+  let θ := NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)
+  let e := coefficientEvaluationTensorIso l E W n
+  let s := coefficientScalarTensorIso l E W n
+  have he : ∀ {X X' Y Y' : CochainComplex (coefficientSequenceModules l E W) ℤ}
+      (f : X ⟶ X') (g : Y ⟶ Y'),
+      Ev.map (T'.map (Prod.mkHom f g)) ≫ (e X' Y').hom =
+        (e X Y).hom ≫ T.map (Prod.mkHom (Ev.map f) (Ev.map g)) :=
+    fun f g ↦ coefficientEvaluationTensorIso_naturality l E W n f g
+  have hκ : ∀ P Q : CochainComplex (scalarReductionSource l E W) ℤ,
+      Ev.map (b.hom.app (P, Q)) ≫ (e (K.obj P) (K.obj Q)).hom ≫
+          T.map (Prod.mkHom (θ.hom.app P) (θ.hom.app Q)) =
+        θ.hom.app (tA.obj (P, Q)) ≫ (s P Q).hom := fun P Q ↦ hb n P Q
+  let Z := (e (K.obj P) (T'.obj (K.obj Q, K.obj N))).hom ≫
+    T.map (Prod.mkHom (𝟙 _) (e (K.obj Q) (K.obj N)).hom) ≫
+    T.map (Prod.mkHom (θ.hom.app P) (T.map (Prod.mkHom (θ.hom.app Q) (θ.hom.app N))))
+  have hL := evaluated_tensor_left_composite' tA T' T K Ev F θ b e s he hκ P Q N a.hom
+  have hR := evaluated_tensor_right_composite' tA T' T K Ev F θ b e s he hκ P Q N
+    (Ev.map b'.hom ≫ Z)
+  have hA := M.scalarTensorAssociativity l E W n P Q N a ha b' hb'
+  have key : θ.inv.app (tA.obj (tA.obj (P, Q), N)) ≫
+      Ev.map (K.map a.hom ≫ b.hom.app (P, tA.obj (Q, N)) ≫
+        T'.map (Prod.mkHom (𝟙 (K.obj P)) (b.hom.app (Q, N)))) ≫ Z =
+      θ.inv.app (tA.obj (tA.obj (P, Q), N)) ≫
+      Ev.map (b.hom.app (tA.obj (P, Q), N) ≫
+        T'.map (Prod.mkHom (b.hom.app (P, Q)) (𝟙 (K.obj N))) ≫ b'.hom) ≫ Z := by
+    have h1 := hL.trans (hA.trans hR.symm)
+    simp only [Z, Functor.map_comp, Category.assoc] at h1 ⊢
+    exact h1
+  have : IsIso Z := by
+    have : IsIso (T.map (Prod.mkHom (θ.hom.app Q) (θ.hom.app N))) :=
+      isIso_bifunctor_map_mkHom T _ _
+    have : IsIso (T.map (Prod.mkHom (θ.hom.app P)
+        (T.map (Prod.mkHom (θ.hom.app Q) (θ.hom.app N))))) :=
+      isIso_bifunctor_map_mkHom T _ _
+    have : IsIso (T.map (Prod.mkHom (𝟙 (Ev.obj (K.obj P))) (e (K.obj Q) (K.obj N)).hom)) :=
+      isIso_bifunctor_map_mkHom T _ _
+    dsimp only [Z]
+    infer_instance
+  exact (cancel_mono Z).mp ((cancel_epi (θ.inv.app _)).mp key)
+
 end OrdinaryQuotient
 
 end WeilConjectures
