@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarRationalShift
 import all WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarRationalShift
 import all WeilConjectures.Algebra.Homology.SuccessiveDerivedQuotientNormalization
+import all WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarTensor
 
 /-! # Normalized finite-field stages and their coherence
 
@@ -116,6 +117,56 @@ theorem pbcAmbientScalarComp_assoc (i : E →ₐ[Padic l] F) (j : F →ₐ[Padic
   exact pbcReductionNormalization_assoc _ _ _ _ _ _ _ _ _ _ M
 
 end AmbientAssoc
+
+section RationalAssoc
+attribute [-instance] ULift.module
+
+variable (l : ℕ) [Fact l.Prime]
+variable (E F G H : Type u) [Field E] [Field F] [Field G] [Field H]
+variable [Algebra (Padic l) E] [Algebra (Padic l) F] [Algebra (Padic l) G]
+variable [Algebra (Padic l) H]
+variable [FiniteDimensional (Padic l) E] [FiniteDimensional (Padic l) F]
+variable [FiniteDimensional (Padic l) G] [FiniteDimensional (Padic l) H]
+variable (T : Scheme.{u}) [IsNoetherian T] (hDim : ∃ n : ℕ, topologicalKrullDim T ≤ n)
+variable (hInv : ∀ t : T, IsUnit (l : T.presheaf.stalk t))
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+/-- Rational scalar extension sends a localized integral morphism to the localization
+of its integral scalar extension.
+Source: blueprint order 1307 (blueprint: lem-pbc-scalar-stage-coherence). -/
+theorem pbcRationalScalarExtension_map_rationalization (i : E →ₐ[Padic l] F)
+    {K L : PbcIntegralCategory l E T hDim hInv} (g : K ⟶ L) :
+    (pbcRationalScalarExtension l E F i T hDim hInv).map
+        ((pbcRationalization T (pbcIntegralDatum l E) (pbcUniformizer l E)).map g) =
+      (pbcRationalization T (pbcIntegralDatum l F) (pbcUniformizer l F)).map
+        ((pbcEmbeddingIntegralTensor l E F i T hDim hInv).map g) := by
+  change pbcRationalScalarHom l E F i T hDim hInv K L (1 ⊗ₜ[PbcIntegralRing l E] g) =
+    (1 : Localization.Away (pbcUniformizer l F)) ⊗ₜ[PbcIntegralRing l F] _
+  rw [pbcRationalScalarHom_tmul]
+  simp only [map_one]
+
+/-- The rational balancing comparisons satisfy the pentagon (associativity) law.
+Source: blueprint order 1307 (blueprint: lem-pbc-scalar-stage-coherence). -/
+theorem pbcRationalScalarComp_assoc (i : E →ₐ[Padic l] F) (j : F →ₐ[Padic l] G)
+    (k : G →ₐ[Padic l] H) (K : PbcRationalDerivedCategory l E T hDim hInv) :
+    (pbcRationalScalarExtension l G H k T hDim hInv).map
+        ((pbcRationalScalarComp l E F G i j T hDim hInv).hom.app K) ≫
+      (pbcRationalScalarComp l E G H (j.comp i) k T hDim hInv).hom.app K =
+    (pbcRationalScalarComp l F G H j k T hDim hInv).hom.app
+        ((pbcRationalScalarExtension l E F i T hDim hInv).obj K) ≫
+      (pbcRationalScalarComp l E F H i (k.comp j) T hDim hInv).hom.app K := by
+  unfold pbcRationalScalarComp
+  simp only [NatIso.ofComponents_hom_app]
+  unfold pbcRationalScalarCompComponent
+  simp only [Functor.mapIso_hom]
+  erw [pbcRationalScalarExtension_map_rationalization]
+  refine ((Functor.map_comp _ _ _).symm.trans ?_).trans (Functor.map_comp _ _ _)
+  congr 1
+  apply ObjectProperty.hom_ext
+  exact pbcAmbientScalarComp_assoc l E F G H i j k T K.obj.obj
+
+end RationalAssoc
 
 section NestedFields
 attribute [local irreducible] pbcRationalScalarHom
