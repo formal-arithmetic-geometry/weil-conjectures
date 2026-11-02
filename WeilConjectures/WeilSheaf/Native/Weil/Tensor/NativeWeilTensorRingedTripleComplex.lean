@@ -90,6 +90,12 @@ def nativeRingedAssociatorComplex (P Q N : CochainComplex (ProEtaleWeilSheaf k�
   letI := SheafOfModules.monoidalCategory b.R
   letI : ∀ W X Y Z : GradedObject ℤ (RingedTensorModules.{u + 1, u + 1, u + 1} b.J b.R),
       GradedObject.HasTensor₄ObjExt W X Y Z := fun _ _ _ _ ↦ inferInstance
+  letI : ∀ Y Z : GradedObject ℤ (RingedTensorModules.{u + 1, u + 1, u + 1} b.J b.R),
+      Y.HasTensor Z := fun _ _ ↦ inferInstance
+  letI : ∀ W Y Z : GradedObject ℤ (RingedTensorModules.{u + 1, u + 1, u + 1} b.J b.R),
+      GradedObject.HasGoodTensor₁₂Tensor W Y Z := fun _ _ _ ↦ inferInstance
+  letI : ∀ W Y Z : GradedObject ℤ (RingedTensorModules.{u + 1, u + 1, u + 1} b.J b.R),
+      GradedObject.HasGoodTensorTensor₂₃ W Y Z := fun _ _ _ ↦ inferInstance
   (b.native.functor.mapHomologicalComplex (.up ℤ)).preimageIso
     (nativeRingedTripleLeft b T adj A P Q N ≪≫
       (α_
