@@ -43,6 +43,10 @@ import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerCoefficients
 import Mathlib.CategoryTheory.Sites.PreservesSheafification
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 import WeilConjectures.SixFunctors.Finite.BaseChange
+public import WeilConjectures.AlgebraicGeometry.Curve.ExtensionPresentationShortExact
+public import WeilConjectures.AlgebraicGeometry.Curve.RelativeTorsorExtension
+public import WeilConjectures.SmoothPurity.EtaleTorsorExtensionPresentationExists
+public import WeilConjectures.SmoothPurity.OpenClosedIntegralSections
 
 /-! # Relative torsor extensions and normalized supported cohomology
 
@@ -203,6 +207,45 @@ def relativeExtension {T Z : Scheme.{u}}
     (P : Sheaf.Torsor.WithSection G (Scheme.Etale.mk i.openComplement.ι)) :
     Ext.{u + 1} ((lowerStar AddCommGrpCat.{u + 1} i).obj (supportedIntegralConstant Z)) G 1 :=
   Classical.choose (relativeExtension_existsUnique i P)
+
+/-- Cocycle normalization of the integral supported-Hom comparison in every degree.
+The first equation evaluates precomposition with p at one; the second says that the
+open cone coordinate is zero. Thus these equations specify the kernel inclusion,
+not an arbitrary isomorphism. The shift coordinate is valid also in degree zero.
+Source: Stacks Tags 06XR and 0A45
+(blueprint: lem-pur-relative-extension-cohomology-normalization). -/
+structure RelativeExtensionComparisonNormalization {T Z : Scheme.{u}}
+    [HasExt.{u + 1} (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})] (i : Z ⟶ T)
+    [IsClosedImmersion i] (G : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})
+    (I : InjectiveResolution G)
+    (e : ∀ q : ℕ, Ext.{u + 1}
+      ((lowerStar AddCommGrpCat.{u + 1} i).obj (supportedIntegralConstant Z)) G q ≃+
+        relativeCohomology T (Scheme.Etale.mk i.openComplement.ι) I q) : Prop where
+  onCocycle : ∀ (q : ℕ)
+    (k : (lowerStar AddCommGrpCat.{u + 1} i).obj (supportedIntegralConstant Z) ⟶
+      I.cocomplex.X q) (hk : k ≫ I.cocomplex.d q (q + 1) = 0)
+    (z : (relativeSectionComplex T (Scheme.Etale.mk i.openComplement.ι)
+      I.cocomplex).cycles (q : ℤ)),
+    (relativeForgetComplex T (Scheme.Etale.mk i.openComplement.ι) I.cocomplex).f q
+      ((relativeSectionComplex T (Scheme.Etale.mk i.openComplement.ι)
+        I.cocomplex).iCycles q z) =
+      (HomologicalComplex.extendXIso
+        (((etaleSectionFunctor (Scheme.Etale.mk (𝟙 T))).mapHomologicalComplex (.up ℕ)).obj
+          I.cocomplex) ComplexShape.embeddingUpNat (rfl : (q : ℤ) = q)).inv
+          (k.hom.app (op (Scheme.Etale.mk (𝟙 T)))
+            ((supportedIntegralUnit i).hom.app (op (Scheme.Etale.mk (𝟙 T)))
+              (supportedIntegralOne T))) →
+    (((CochainComplex.mappingCone (relativeSectionRestriction T
+        (Scheme.Etale.mk i.openComplement.ι) I.cocomplex)).shiftFunctorObjXIso
+        (-1) (q : ℤ) ((q : ℤ) + -1) rfl).hom ≫
+      HomologicalComplex.homotopyCofiber.sndX
+        (relativeSectionRestriction T (Scheme.Etale.mk i.openComplement.ι) I.cocomplex)
+        ((q : ℤ) + -1))
+      ((relativeSectionComplex T (Scheme.Etale.mk i.openComplement.ι)
+        I.cocomplex).iCycles q z) = 0 →
+    e q (I.extMk k (q + 1) rfl hk) =
+      (relativeSectionComplex T (Scheme.Etale.mk i.openComplement.ι)
+        I.cocomplex).homologyπ q z
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -367,6 +410,290 @@ private lemma integerSectionEquiv_restrict (T : Scheme.{u})
     hn.symm
   rw [hn'] at h
   exact h
+
+private theorem integralSupportedHomIso {T Z : Scheme.{u}} (i : Z ⟶ T)
+    [IsClosedImmersion i] :
+    let j := (MorphismProperty.Over.mkIdTerminal @Etale T).from
+      (Scheme.Etale.mk i.openComplement.ι)
+    ∃ e : preadditiveCoyoneda.obj (op ((lowerStar AddCommGrpCat.{u + 1} i).obj
+        (supportedIntegralConstant Z))) ≅
+          Sheaf.supportedSectionsFunctor T.smallEtaleTopology AddCommGrpCat.{u + 1} j,
+      ∀ (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})
+        (k : (lowerStar AddCommGrpCat.{u + 1} i).obj (supportedIntegralConstant Z) ⟶ F),
+        kernel.ι (F.obj.map j.op) (e.hom.app F k) =
+          integerSectionEquiv T F (supportedIntegralUnit i ≫ k) := by
+  intro j
+  obtain ⟨L, t, ht, hT, η, hη, hηt⟩ :=
+    exists_integral_openClosed_sections i i.openComplement rfl
+  have hp : Epi (supportedIntegralUnit i) := hT.epi_g
+  have hzero (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})
+      (a : supportedIntegralConstant T ⟶ F) :
+      F.obj.map j.op (integerSectionEquiv T F a) = η F (t ≫ a) := by
+    rw [hη, hηt]
+    exact (integerSectionEquiv_restrict T F a _).symm
+  let α : preadditiveCoyoneda.obj (op ((lowerStar AddCommGrpCat.{u + 1} i).obj
+      (supportedIntegralConstant Z))) ⟶ etaleSectionFunctor (Scheme.Etale.mk (𝟙 T)) :=
+    { app F := AddCommGrpCat.ofHom
+        { toFun k := integerSectionEquiv T F (supportedIntegralUnit i ≫ k)
+          map_zero' := by simp
+          map_add' k l := by
+            change integerSectionEquiv T F (supportedIntegralUnit i ≫ (k + l)) = _
+            rw [Preadditive.comp_add, map_add] }
+      naturality F F' f := by
+        ext k
+        simp only [integerSectionEquiv_eval]
+        rfl }
+  have hα (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) :
+      α.app F ≫ F.obj.map j.op = 0 := by
+    ext k
+    change F.obj.map j.op (integerSectionEquiv T F (supportedIntegralUnit i ≫ k)) = 0
+    rw [hzero, ← Category.assoc]
+    change t ≫ supportedIntegralUnit i = 0 at ht
+    rw [ht, zero_comp]
+    exact (η F).map_zero
+  let β : preadditiveCoyoneda.obj (op ((lowerStar AddCommGrpCat.{u + 1} i).obj
+      (supportedIntegralConstant Z))) ⟶
+        Sheaf.supportedSectionsFunctor T.smallEtaleTopology AddCommGrpCat.{u + 1} j :=
+    { app F := kernel.lift _ (α.app F) (hα F)
+      naturality F F' f := by
+        apply (cancel_mono (kernel.ι (F'.obj.map j.op))).1
+        simp only [Sheaf.supportedSectionsFunctor, Category.assoc, kernel.lift_ι,
+          kernel.lift_ι_assoc]
+        exact α.naturality f }
+  have hβ (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) :
+      Function.Bijective (β.app F) := by
+    have hi : Function.Injective (kernel.ι (F.obj.map j.op)) :=
+      (AddCommGrpCat.mono_iff_injective _).mp inferInstance
+    have he (k) : kernel.ι (F.obj.map j.op) (β.app F k) =
+        integerSectionEquiv T F (supportedIntegralUnit i ≫ k) :=
+      ConcreteCategory.congr_hom (kernel.lift_ι _ _ _) k
+    constructor
+    · intro k l hkl
+      apply (cancel_epi (supportedIntegralUnit i)).1
+      apply (integerSectionEquiv T F).injective
+      rw [← he, ← he, hkl]
+    · intro x
+      let a := (integerSectionEquiv T F).symm (kernel.ι (F.obj.map j.op) x)
+      have ha : t ≫ a = 0 := by
+        apply (η F).injective
+        rw [← hzero, AddEquiv.apply_symm_apply, map_zero]
+        exact ConcreteCategory.congr_hom (kernel.condition (F.obj.map j.op)) x
+      let k := hT.gIsCokernel.desc (CokernelCofork.ofπ a ha)
+      have hk : supportedIntegralUnit i ≫ k = a :=
+        hT.gIsCokernel.fac _ WalkingParallelPair.one
+      exact ⟨k, hi ((he k).trans
+        ((congrArg (integerSectionEquiv T F) hk).trans
+          ((integerSectionEquiv T F).apply_symm_apply _)))⟩
+  have : IsIso β := by
+    have : ∀ F, IsIso (β.app F) := fun F ↦
+      (ConcreteCategory.isIso_iff_bijective _).mpr (hβ F)
+    exact NatIso.isIso_of_isIso_app β
+  refine Exists.intro (asIso β) ?_
+  intro F k
+  change kernel.ι (F.obj.map j.op) (β.app F k) = _
+  exact ConcreteCategory.congr_hom (kernel.lift_ι (F.obj.map j.op) (α.app F) (hα F)) k
+
+private lemma cone_projection_f {A B : CochainComplex AddCommGrpCat.{u + 1} ℤ}
+    (r : A ⟶ B) (p : ℤ) :
+    (RelativeCone.projection r).f p =
+      ((CochainComplex.mappingCone r).shiftFunctorObjXIso (-1) p (p - 1) (by omega)).hom ≫
+      homotopyCofiber.fstX r (p - 1) p (by change p - 1 + 1 = p; omega) := by
+  simp [RelativeCone.projection, CochainComplex.HomComplex.Cocycle.equivHomShift_symm_apply,
+    CochainComplex.shiftFunctorAdd_inv_app_f, CochainComplex.shiftFunctorZero_hom_app_f,
+    CochainComplex.mappingCone.fst,
+    CochainComplex.HomComplex.Cochain.rightShift_v]
+  rfl
+
+private lemma cone_element_ext {A B : CochainComplex AddCommGrpCat.{u + 1} ℤ}
+    (r : A ⟶ B) (p : ℤ) (x y : ((CochainComplex.mappingCone r)⟦(-1 : ℤ)⟧).X p)
+    (h₁ : (RelativeCone.projection r).f p x = (RelativeCone.projection r).f p y)
+    (h₂ : (((CochainComplex.mappingCone r).shiftFunctorObjXIso
+      (-1) p (p - 1) (by omega)).hom ≫ homotopyCofiber.sndX r (p - 1)) x =
+      (((CochainComplex.mappingCone r).shiftFunctorObjXIso
+      (-1) p (p - 1) (by omega)).hom ≫ homotopyCofiber.sndX r (p - 1)) y) : x = y := by
+  let a := (CochainComplex.mappingCone r).shiftFunctorObjXIso
+    (-1) p (p - 1) (by omega)
+  let b := homotopyCofiber.XIsoBiprod r (p - 1) p
+    (by change p - 1 + 1 = p; omega)
+  let e := a ≪≫ b ≪≫ AddCommGrpCat.biprodIsoProd (A.X p) (B.X (p - 1))
+  apply e.addCommGroupIsoToAddEquiv.injective
+  apply Prod.ext
+  · change (e.hom ≫ AddCommGrpCat.ofHom (AddMonoidHom.fst _ _)) x =
+      (e.hom ≫ AddCommGrpCat.ofHom (AddMonoidHom.fst _ _)) y
+    dsimp only [e, Iso.trans_hom]
+    rw [← AddCommGrpCat.biprodIsoProd_inv_comp_fst]
+    simp only [Category.assoc, Iso.hom_inv_id_assoc]
+    rw [cone_projection_f] at h₁
+    exact h₁
+  · have hb : b.hom ≫ biprod.snd = homotopyCofiber.sndX r (p - 1) := by
+      apply homotopyCofiber.ext_from_X r p (p - 1) (by change p - 1 + 1 = p; omega)
+        <;> simp [b]
+    change (e.hom ≫ AddCommGrpCat.ofHom (AddMonoidHom.snd _ _)) x =
+      (e.hom ≫ AddCommGrpCat.ofHom (AddMonoidHom.snd _ _)) y
+    dsimp only [e, Iso.trans_hom]
+    rw [← AddCommGrpCat.biprodIsoProd_inv_comp_snd]
+    simp only [Category.assoc, Iso.hom_inv_id_assoc]
+    rw [hb]
+    exact h₂
+
+/-- The normalized comparison exists and is unique, in all nonnegative degrees.
+Source: Stacks Tags 06XR and 0A45, integral supported-Hom comparison
+(blueprint: lem-pur-relative-extension-cohomology-normalization).
+Proof: Hom from i_*Z_Z into each injective term identifies by precomposition with
+p and evaluation at one with the kernel of restriction to the complementary open.
+Its inclusion into the shifted cone is a quasi-isomorphism, as in the supported
+relative-cone theorem. Compute Ext by I and take homology of that inclusion to
+obtain the additive equivalences. The cocycle roof identifies I.extMk with this
+resolution computation, so the displayed normalization holds. Every Ext class
+has such a cocycle representative and its kernel inclusion is a cycle in the
+cone. Consequently the normalization determines the equivalences uniquely. -/
+theorem relativeExtensionComparison_existsUnique {T Z : Scheme.{u}}
+    [HasExt.{u + 1} (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})] (i : Z ⟶ T)
+    [IsClosedImmersion i] (G : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})
+    (I : InjectiveResolution G) :
+    ∃! e : ∀ q : ℕ, Ext.{u + 1}
+      ((lowerStar AddCommGrpCat.{u + 1} i).obj (supportedIntegralConstant Z)) G q ≃+
+        relativeCohomology T (Scheme.Etale.mk i.openComplement.ι) I q,
+      RelativeExtensionComparisonNormalization i G I e := by
+  classical
+  let U := Scheme.Etale.mk i.openComplement.ι
+  let j := (MorphismProperty.Over.mkIdTerminal @Etale T).from U
+  let H := Sheaf.supportedSectionsFunctor T.smallEtaleTopology AddCommGrpCat.{u + 1} j
+  obtain ⟨η, hη⟩ := integralSupportedHomIso i
+  obtain ⟨x, hx⟩ := exists_ext_rightDerived_cocycle_comparison _ H η
+  obtain ⟨E, _, _, _⟩ := relativeConeSupportComparison T i G I
+  obtain ⟨R⟩ : Nonempty (RelativeCone.Realization T.smallEtaleTopology j I) :=
+    ⟨E.realization j (by change IsOpenImmersion i.openComplement.ι; infer_instance) I⟩
+  let K := (H.mapHomologicalComplex (.up ℕ)).obj I.cocomplex
+  let L := K.extend ComplexShape.embeddingUpNat
+  let F := relativeSectionComplex T U I.cocomplex
+  let A := ((etaleSectionFunctor (Scheme.Etale.mk (𝟙 T))).mapHomologicalComplex
+    (.up ℕ)).obj I.cocomplex
+  obtain ⟨m, hm, hmq⟩ : ∃ m : L ⟶ F,
+      m = R.kernelIso.hom ≫ R.κ ∧ QuasiIso m := by
+    have : QuasiIso R.κ := R.κ_quasiIso
+    exact ⟨R.kernelIso.hom ≫ R.κ, rfl, inferInstance⟩
+  have : QuasiIso m := hmq
+  obtain ⟨e, he⟩ : ∃ e : ∀ q : ℕ, Ext.{u + 1}
+      ((lowerStar AddCommGrpCat.{u + 1} i).obj (supportedIntegralConstant Z)) G q ≃+
+        relativeCohomology T U I q,
+      ∀ q : ℕ, e q =
+        (((x q).symm.app G ≪≫ RelativeCone.computation T.smallEtaleTopology H I q) ≪≫
+          asIso (homologyMap m (q : ℤ))).addCommGroupIsoToAddEquiv :=
+    ⟨fun q ↦
+      (((x q).symm.app G ≪≫ RelativeCone.computation T.smallEtaleTopology H I q) ≪≫
+        asIso (homologyMap m (q : ℤ))).addCommGroupIsoToAddEquiv, fun _ ↦ rfl⟩
+  let fst (q : ℕ) := (relativeForgetComplex T U I.cocomplex).f (q : ℤ)
+  let snd (q : ℕ) :=
+    ((CochainComplex.mappingCone (relativeSectionRestriction T U I.cocomplex)).shiftFunctorObjXIso
+      (-1) (q : ℤ) ((q : ℤ) - 1) (by omega)).hom ≫
+        homotopyCofiber.sndX (relativeSectionRestriction T U I.cocomplex) ((q : ℤ) - 1)
+  have hm₁ (q : ℕ) : m.f q ≫ fst q =
+      (K.extendXIso ComplexShape.embeddingUpNat rfl).hom ≫
+        kernel.ι ((I.cocomplex.X q).obj.map j.op) ≫
+          (A.extendXIso ComplexShape.embeddingUpNat rfl).inv := by
+    rw [hm]
+    have hh := congrArg (fun t ↦ R.kernelIso.hom.f (q : ℤ) ≫ t) (R.κ_components q).2
+    have hh' : (R.kernelIso.hom ≫ R.κ).f q ≫ fst q =
+        R.kernelIso.hom.f q ≫ (kernel.ι
+          (RelativeCone.restrictionComplex T.smallEtaleTopology j I.cocomplex)).f q := by
+      change R.kernelIso.hom.f q ≫ R.κ.f q ≫ (RelativeCone.projection _).f q = _
+      rw [cone_projection_f]
+      simpa only [Category.assoc] using hh
+    exact hh'.trans (R.kernel_components q)
+  have hm₂ (q : ℕ) : m.f q ≫ snd q = 0 := by
+    rw [hm]
+    have hh := congrArg (fun t ↦ R.kernelIso.hom.f (q : ℤ) ≫ t) (R.κ_components q).1
+    change R.kernelIso.hom.f q ≫ R.κ.f q ≫
+      (((CochainComplex.mappingCone
+        (RelativeCone.restrictionComplex T.smallEtaleTopology j I.cocomplex)).shiftFunctorObjXIso
+          (-1) (q : ℤ) ((q : ℤ) - 1) (by omega)).hom ≫
+        homotopyCofiber.sndX
+          (RelativeCone.restrictionComplex T.smallEtaleTopology j I.cocomplex) ((q : ℤ) - 1)) = 0
+    exact hh.trans (comp_zero)
+  have hrep (q : ℕ)
+      (k : (lowerStar AddCommGrpCat.{u + 1} i).obj (supportedIntegralConstant Z) ⟶
+        I.cocomplex.X q) (hk : k ≫ I.cocomplex.d q (q + 1) = 0) :
+      ∃ z : F.cycles (q : ℤ),
+        fst q (F.iCycles q z) =
+          (A.extendXIso ComplexShape.embeddingUpNat rfl).inv
+            (k.hom.app (op (Scheme.Etale.mk (𝟙 T)))
+              ((supportedIntegralUnit i).hom.app (op (Scheme.Etale.mk (𝟙 T)))
+                (supportedIntegralOne T))) ∧
+        snd q (F.iCycles q z) = 0 ∧
+        e q (I.extMk k (q + 1) rfl hk) = F.homologyπ q z := by
+    have hz : K.d q (q + 1) (η.hom.app (I.cocomplex.X q) k) = 0 := by
+      have hn := ConcreteCategory.congr_hom (η.hom.naturality (I.cocomplex.d q (q + 1))) k
+      change η.hom.app _ (k ≫ I.cocomplex.d q (q + 1)) = _ at hn
+      simp only [ConcreteCategory.comp_apply] at hn
+      rw [hk, map_zero] at hn
+      exact hn.symm
+    let c : K.cycles q := K.cyclesMk (η.hom.app (I.cocomplex.X q) k) (q + 1) (by simp) hz
+    have hc : K.iCycles q c = η.hom.app (I.cocomplex.X q) k := K.i_cyclesMk _ _ _ _
+    let w : L.cycles (q : ℤ) := (K.extendCyclesIso ComplexShape.embeddingUpNat rfl).inv c
+    have hw : L.iCycles q w = (K.extendXIso ComplexShape.embeddingUpNat rfl).inv
+        (η.hom.app (I.cocomplex.X q) k) := by
+      have h := ConcreteCategory.congr_hom
+        (K.extendCyclesIso_inv_iCycles ComplexShape.embeddingUpNat (j := q) rfl) c
+      simp only [ConcreteCategory.comp_apply, hc] at h
+      exact h
+    obtain ⟨z, hzi⟩ : ∃ z : F.cycles (q : ℤ),
+        F.iCycles q z = m.f q (L.iCycles q w) :=
+      ⟨cyclesMap m (q : ℤ) w, ConcreteCategory.congr_hom (cyclesMap_i m (q : ℤ)) w⟩
+    refine Exists.intro z (And.intro ?_ (And.intro ?_ ?_))
+    · rw [hzi, ← ConcreteCategory.comp_apply, hm₁]
+      change (A.extendXIso ComplexShape.embeddingUpNat rfl).inv
+        (kernel.ι ((I.cocomplex.X q).obj.map j.op)
+          ((K.extendXIso ComplexShape.embeddingUpNat rfl).hom (L.iCycles q w))) = _
+      rw [hw, Iso.inv_hom_id_apply, hη, integerSectionEquiv_eval]
+      rfl
+    · rw [hzi]
+      exact ConcreteCategory.congr_hom (hm₂ q) (L.iCycles q w)
+    · rw [he q]
+      change homologyMap m (q : ℤ)
+        ((K.extendHomologyIso ComplexShape.embeddingUpNat rfl).inv
+          ((I.isoRightDerivedObj H q).hom
+            ((x q).inv.app G (I.extMk k (q + 1) rfl hk)))) = _
+      rw [hx G I q k hk c hc]
+      have hp := ConcreteCategory.congr_hom
+        (K.homologyπ_extendHomologyIso_inv ComplexShape.embeddingUpNat (j := q) rfl) c
+      rw [ConcreteCategory.comp_apply, ConcreteCategory.comp_apply] at hp
+      rw [hp]
+      have hn := ConcreteCategory.congr_hom (homologyπ_naturality m (q : ℤ)) w
+      simp only [ConcreteCategory.comp_apply] at hn
+      have hzmap : cyclesMap m (q : ℤ) w = z := by
+        apply (AddCommGrpCat.mono_iff_injective (F.iCycles (q : ℤ))).mp inferInstance
+        exact (ConcreteCategory.congr_hom (cyclesMap_i m (q : ℤ)) w).trans hzi.symm
+      exact hn.trans (congrArg (F.homologyπ q) hzmap)
+  refine ExistsUnique.intro e ?_ ?_
+  · constructor
+    intro q k hk z h₁ h₂
+    obtain ⟨w, hw₁, hw₂, hw₃⟩ := hrep q k hk
+    have he : z = w := by
+      apply (AddCommGrpCat.mono_iff_injective (F.iCycles (q : ℤ))).mp inferInstance
+      apply cone_element_ext (relativeSectionRestriction T U I.cocomplex) (q : ℤ)
+      · exact h₁.trans hw₁.symm
+      · exact h₂.trans hw₂.symm
+    exact hw₃.trans (congrArg (F.homologyπ q) he.symm)
+  · intro e' he'
+    funext q
+    apply AddEquiv.ext
+    intro α
+    obtain ⟨k, hk, rfl⟩ := I.extMk_surjective α (q + 1) rfl
+    obtain ⟨z, hz₁, hz₂, hz₃⟩ := hrep q k hk
+    exact (he'.onCocycle q k hk z hz₁ hz₂).trans hz₃.symm
+
+/-- The supported-Hom comparison determined by the kernel inclusion and evaluation at one.
+Source: Stacks Tags 06XR and 0A45
+(blueprint: lem-pur-relative-extension-cohomology-normalization). -/
+def relativeExtensionComparison {T Z : Scheme.{u}}
+    [HasExt.{u + 1} (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})]
+    (i : Z ⟶ T) [IsClosedImmersion i]
+    (G : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) (I : InjectiveResolution G)
+    (q : ℕ) : Ext.{u + 1}
+      ((lowerStar AddCommGrpCat.{u + 1} i).obj (supportedIntegralConstant Z)) G q ≃+
+        relativeCohomology T (Scheme.Etale.mk i.openComplement.ι) I q :=
+  Classical.choose (relativeExtensionComparison_existsUnique i G I) q
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
