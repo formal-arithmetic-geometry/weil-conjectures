@@ -185,7 +185,8 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry SheafOfModu
 namespace WeilConjectures
 
 -- Since build 2026-10-28 `Scheme.ProjectionRestriction.derived`
--- (with `SemilinearSections.moduleAbelian`) is also in scope for the strict levels; keep the instances these statements were written against
+-- (with `SemilinearSections.moduleAbelian`) is also in scope for the strict levels; keep the
+-- instances these statements were written against
 -- (those of StrictEtaleSystemInterfaces, which the strict-system fields carry).
 attribute [local instance 5000] AlgebraicGeometry.strictEtaleSystemDerived
   AlgebraicGeometry.strictEtaleLevelDerived
