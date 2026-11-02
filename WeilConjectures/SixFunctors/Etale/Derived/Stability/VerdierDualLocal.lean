@@ -11,6 +11,8 @@ public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.SixFunctors.Etale.Derived.BoundaryDuality
 public import WeilConjectures.SixFunctors.Etale.Derived.InvertibleRestriction
 import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
+import WeilConjectures.CategoryTheory.Monoidal.Dualizable
+import WeilConjectures.ConstructibleSheaf.EtaleDescent
 
 /-!
 # The Verdier dual of a complex of lisse sheaves on a smooth scheme
