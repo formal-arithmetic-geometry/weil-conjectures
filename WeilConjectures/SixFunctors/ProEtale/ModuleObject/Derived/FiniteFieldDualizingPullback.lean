@@ -118,6 +118,8 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.AdjunctionShift
 import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleObjectInverseImageRestrictionSupplement
 import WeilConjectures.CategoryTheory.RingedHomUniverses.RingedInternalHomShiftOfUniversesSupplement
 import WeilConjectures.AlgebraicGeometry.ModuleObjectRingedComparison.ModuleObjectRingedSiteDerivedComparison
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.FiniteFieldDualizingPullbackCore
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.FiniteFieldDualizingPullbackHom
 
 /-!
 # Finite-field dualizing-object pullback
@@ -184,5 +186,33 @@ noncomputable def finiteFieldDerivedBraiding
   @BraidedCategory.braiding _ _ _
     (DerivedCategory.braidedCategory'
       (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ.X X))) K L
+
+end AlgebraicGeometry.ProEtale.CondensedRing
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+/-- Triangulatedness component of the finite-field comparison: the derived coefficient pullback
+`G = L(g^*)` along `g : T ×_k k̄ → T` is triangulated.
+Source: latest blueprint `det-pd-biduality-coefficients.proof.md`, (i), finite-field paragraph
+(exactness of `G`).
+
+Proof: module pullback is exact [det-prop-sfb-module-pullback-exact-main], so `L(g^*)` is
+isomorphic to the levelwise functor `D(g^*)` [prop-sfb-module-left-derived-upper-star-levelwise],
+which is triangulated; the published instance of `UpperStarShift` transports this structure.
+(blueprint: new-lem-sf-finite-field-dualizing-pullback-triangulated) -/
+theorem finiteField_dualizing_pullback_triangulated
+    (p ell : ℕ) [Fact p.Prime] [Fact ell.Prime] (hell : p ≠ ell)
+    (k : Type u) [Field k] [Finite k] [CharP k p]
+    (kbar : Type u) [Field kbar] [Algebra k kbar] [IsAlgClosure k kbar]
+    (E : Type u) [Field E] [Algebra ℚ_[ell] E] [FiniteDimensional ℚ_[ell] E]
+    (n : ℕ) (hn : 1 ≤ n)
+    (T : Scheme.{u}) (a : T ⟶ Spec (.of k))
+    [LocallyOfFiniteType a] [QuasiCompact a] [IsSeparated a] :
+    (detSfDerivedPullback (finiteFieldDualizingCoefficient ell E n).X
+      (pullback.fst a (Spec.map (CommRingCat.ofHom (algebraMap k kbar))))).IsTriangulated := by
+  -- Preserve the comparison API although exact pullback needs neither condition.
+  have _ := hell
+  have _ := hn
+  infer_instance
 
 end AlgebraicGeometry.ProEtale.CondensedRing
