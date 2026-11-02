@@ -22,7 +22,8 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 variable (X : Scheme.{u})
 
 -- The ordinary and derived square arguments follow the proved private helpers in
--- WeilConjectures.AlgebraicGeometry.Normalized.NormalizedOriginComparisonCoherence, specialized here without changing its API.
+-- WeilConjectures.AlgebraicGeometry.Normalized.NormalizedOriginComparisonCoherence,
+-- specialized here without changing its API.
 open AlgebraicGeometry.ProEtale in
 set_option backward.defeqAttrib.useBackward true in
 private theorem fd_ordinaryRestrictionComp (T : Scheme.{u})

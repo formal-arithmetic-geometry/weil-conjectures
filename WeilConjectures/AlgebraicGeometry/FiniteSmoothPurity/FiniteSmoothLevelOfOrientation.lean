@@ -21,6 +21,9 @@ sk-lem-sp-reduction/compatibilities (blueprint: lem-pur-finite-smooth-level-of-o
 -/
 
 @[expose] public noncomputable section
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 set_option autoImplicit false
 universe u u' w
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory AlgebraicGeometry

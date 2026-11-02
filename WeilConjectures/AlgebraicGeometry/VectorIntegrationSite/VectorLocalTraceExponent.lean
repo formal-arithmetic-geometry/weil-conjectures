@@ -19,6 +19,9 @@ Source: vector-bundle integration, local chart construction; Stacks 03PK.
 -/
 
 @[expose] public noncomputable section
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 set_option autoImplicit false
 universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry

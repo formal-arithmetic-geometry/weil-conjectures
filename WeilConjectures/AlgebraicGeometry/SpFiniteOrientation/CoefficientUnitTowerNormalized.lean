@@ -43,6 +43,9 @@ Source: tower-geometric gamma proof (1) and (3), the coefficient unit's actual r
 -/
 
 @[expose] public noncomputable section
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
 

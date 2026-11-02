@@ -15,6 +15,9 @@ import WeilConjectures.LinearAlgebra.SymmetricAlgebra.Graded
 Source: Stacks Project, Constructions, Tags 01OA, 01OB and 01OE.
 (blueprint: lem-amb-vector-projective-presentation). -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 set_option autoImplicit false
 universe u

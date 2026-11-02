@@ -14,6 +14,9 @@ import all Mathlib.Logic.Small.Defs
 /-! # Local normalization of the identity-adjunction comparison in rank zero -/
 
 @[expose] public noncomputable section
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 set_option autoImplicit false
 set_option maxRecDepth 2048
 universe u

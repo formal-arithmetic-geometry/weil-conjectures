@@ -24,6 +24,9 @@ The étale calculus is constructed independently of any compactification composi
 -/
 
 @[expose] public noncomputable section
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
 section

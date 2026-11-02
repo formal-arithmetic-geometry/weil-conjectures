@@ -126,6 +126,9 @@ Source: blueprint sec-smooth-purity/sk-thm-smooth-purity, tensor mate formula
 -/
 
 @[expose] public noncomputable section
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 set_option autoImplicit false
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory AlgebraicGeometry

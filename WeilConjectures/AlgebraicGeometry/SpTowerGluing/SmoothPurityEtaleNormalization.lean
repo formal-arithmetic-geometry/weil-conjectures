@@ -40,6 +40,4 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (b : SpTowerShriek.Base l E) (o : SpTowerShriek.Operations l E b)
   (q : SpTowerCalculus.Coordinates l E b)
 
-attribute [instance] GraphCoordinates.additive GraphCoordinates.inverseAdditive
-
 end AlgebraicGeometry.ProEtale.SpTowerGluing

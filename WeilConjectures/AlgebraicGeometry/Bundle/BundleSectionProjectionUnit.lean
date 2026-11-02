@@ -194,6 +194,9 @@ thm-amb-vector-bundle-purity, opening paragraph.
 -/
 
 @[expose] public noncomputable section
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 set_option autoImplicit false
 universe u v
 open CategoryTheory MonoidalCategory

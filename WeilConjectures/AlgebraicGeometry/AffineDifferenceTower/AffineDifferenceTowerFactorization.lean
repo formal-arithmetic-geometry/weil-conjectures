@@ -383,7 +383,7 @@ theorem factorization {k : Type u} [Field k]
   have : Etale (differenceTotal d e f g cf cg) := by rw [← hF]; infer_instance
   have hpI : IsPullback (i f g) (pullback.fst f f) (a f g) (s f g) := by
     apply IsPullback.mk'
-    · apply pullback.hom_ext <;> simp [i, a, s, pullback.condition]
+    · apply pullback.hom_ext <;> simp [i, a, s]
     · intro L φ ψ h₁ h₂
       apply pullback.hom_ext
       · exact h₂

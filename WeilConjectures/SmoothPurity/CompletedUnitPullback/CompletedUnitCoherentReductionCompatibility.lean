@@ -199,7 +199,6 @@ theorem completedUnit_coherentReduction_compatibility {X Y : Scheme.{u}} (f : X 
       · simpa only [δ, H, I, J, ν, Functor.comp_obj,
           Iso.trans_hom, Functor.mapIso_hom, Iso.prod_hom,
           Iso.refl_hom, Iso.app_hom, Category.comp_id, Category.assoc] using (hS (R.obj M)).2.symm
-
   have heq : ε = (pullbackTensorIntegralUnitCoherence l E f).exists.choose :=
     (pullbackTensorIntegralUnitCoherence l E f).unique hεlaws
       (pullbackTensorIntegralUnitCoherence l E f).exists.choose_spec

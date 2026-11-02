@@ -16,6 +16,9 @@ Source: Stacks Project, Tags 06YY, 03S5 and 0GL6
 -/
 
 @[expose] public noncomputable section
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 set_option autoImplicit false
 set_option Elab.async false
 set_option backward.defeqAttrib.useBackward true

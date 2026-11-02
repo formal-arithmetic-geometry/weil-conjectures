@@ -33,6 +33,9 @@ Stacks Project, etale-cohomology.tex, Tag 03S3
 (blueprint: lem-sp-etale-sum-counit-scalar).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 set_option autoImplicit false

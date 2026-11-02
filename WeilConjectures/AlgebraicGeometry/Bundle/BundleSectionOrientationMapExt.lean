@@ -32,6 +32,9 @@ import WeilConjectures.SixFunctors.Etale.Derived.Shift
 Source: orientation-charts Step 4, expanded in the parent orientation node.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 set_option autoImplicit false
 universe u

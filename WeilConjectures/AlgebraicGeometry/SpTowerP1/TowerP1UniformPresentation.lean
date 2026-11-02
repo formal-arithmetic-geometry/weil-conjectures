@@ -16,6 +16,9 @@ sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-p1.proof.md
 -/
 
 @[expose] public noncomputable section
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 set_option autoImplicit false
 set_option Elab.async false
 set_option genSizeOf false

@@ -36,6 +36,9 @@ outputs below are the clauses of this bridge. No projection map is assumed inver
 -/
 
 @[expose] public noncomputable section
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 set_option Elab.async false
 set_option autoImplicit false
 set_option relaxedAutoImplicit false

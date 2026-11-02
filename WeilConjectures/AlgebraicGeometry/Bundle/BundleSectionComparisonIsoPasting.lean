@@ -164,6 +164,9 @@ import all WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedEtaleCompactSupp
 
 /-! # Pasting a section comparison with an isomorphism of its ambient scheme -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 set_option autoImplicit false
 universe u
