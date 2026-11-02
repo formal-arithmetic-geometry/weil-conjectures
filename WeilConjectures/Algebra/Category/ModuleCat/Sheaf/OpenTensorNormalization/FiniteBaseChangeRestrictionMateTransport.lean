@@ -95,7 +95,62 @@ private theorem transport_from_unit
   rw [hβ, hγ'] at h
   exact h.symm
 
-set_option maxHeartbeats 4000000 in
+set_option maxHeartbeats 400000 in
+-- The functors are abstracted so the kernel never unfolds the concrete sheaf functors.
+/-- `finite_base_change_restriction_mate_transport` with all functors, adjunctions and
+comparison isomorphisms abstracted; the hypotheses copy the shapes of the pinned records. -/
+private theorem mate_transport_abstract
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {U' U X' X : Scheme.{u}} (gU : U' ⟶ U) (j' : U' ⟶ X')
+    (j : U ⟶ X) (g : X' ⟶ X) (sq : OpenImmersionSquare gU j' j g)
+    [IsOpenImmersion j] [IsOpenImmersion j']
+    {t : SiteSquare (finiteInput A gU j' j g sq)}
+    (o : Operations (finiteInput A gU j' j g sq) t)
+    (e : FiniteComparisons A o)
+    {P : type_of% (ProEtale.upperStar (ModuleCat.{u + 1} A) j)}
+    {Q : type_of% (ProEtale.upperStar (ModuleCat.{u + 1} A) j')}
+    {J : type_of% (ProEtale.upperStar (ModuleCat.{u + 1} A) g)}
+    {Uf : type_of% (ProEtale.lowerStar (ModuleCat.{u + 1} A) g)}
+    {J' : type_of% (ProEtale.upperStar (ModuleCat.{u + 1} A) gU)}
+    {Uf' : type_of% (ProEtale.lowerStar (ModuleCat.{u + 1} A) gU)}
+    (adj : J ⊣ Uf) (adj' : J' ⊣ Uf') (β : P ⋙ J' ≅ J ⋙ Q)
+    {Pb : type_of% (restrict .ordinary j (finiteInput A gU j' j g sq).R)}
+    {Qb : type_of% (restrict .ordinary j' (finiteInput A gU j' j g sq).S)}
+    {Ub : type_of% (direct .ordinary g _ _
+      (proEtaleConstantDirectImageMap g CommRingCat.{u + 1} (CommRingCat.of A)))}
+    {Ub' : type_of% (direct .ordinary gU _ _ (cornerCoefficient t))}
+    {Jb : type_of% o.gPull.ordinary} {Jb' : type_of% o.gUPull.ordinary}
+    (adjb : Jb ⊣ Ub) (adjb' : Jb' ⊣ Ub')
+    (bb : Ub ⋙ Pb ≅ Qb ⋙ Ub') (θ : Jb ⋙ Qb ≅ Pb ⋙ Jb')
+    (r : Uf ⋙ e.realizeX.equivalence.functor ≅ e.realizeX'.equivalence.functor ⋙ Ub)
+    (r' : Uf' ⋙ e.realizeU.equivalence.functor ≅ e.realizeU'.equivalence.functor ⋙ Ub')
+    (jj : J ⋙ e.realizeX'.equivalence.functor ≅ e.realizeX.equivalence.functor ⋙ Jb)
+    (jj' : J' ⋙ e.realizeU'.equivalence.functor ≅ e.realizeU.equivalence.functor ⋙ Jb')
+    (p : P ⋙ e.realizeU.equivalence.functor ≅ e.realizeX.equivalence.functor ⋙ Pb)
+    (q : Q ⋙ e.realizeU'.equivalence.functor ≅ e.realizeX'.equivalence.functor ⋙ Qb)
+    (hj : ∀ M : FiniteModules A X,
+      e.realizeX.equivalence.functor.map (adj.unit.app M) ≫ r.hom.app (J.obj M) =
+        adjb.unit.app (e.realizeX.equivalence.functor.obj M) ≫ Ub.map (jj.inv.app M))
+    (hj' : ∀ M : FiniteModules A U,
+      e.realizeU.equivalence.functor.map (adj'.unit.app M) ≫ r'.hom.app (J'.obj M) =
+        adjb'.unit.app (e.realizeU.equivalence.functor.obj M) ≫ Ub'.map (jj'.inv.app M))
+    (hγ : ∀ M,
+      adjb'.homEquiv _ _ (θ.inv.app M) = Pb.map (adjb.unit.app M) ≫ bb.hom.app (Jb.obj M))
+    (h : ∀ M : FiniteModules A X',
+      p.hom.app (Uf.obj M) ≫ Pb.map (r.hom.app M) ≫
+        bb.hom.app (e.realizeX'.equivalence.functor.obj M) =
+      e.realizeU.equivalence.functor.map ((mateEquiv adj adj' β.hom).natTrans.app M) ≫
+        r'.hom.app (Q.obj M) ≫ Ub'.map (q.hom.app M))
+    (N : FiniteModules A X) :
+    jj'.hom.app (P.obj N) ≫ Jb'.map (p.hom.app N) ≫
+      θ.inv.app (e.realizeX.equivalence.functor.obj N) =
+    e.realizeU'.equivalence.functor.map (β.hom.app N) ≫ q.hom.app (J.obj N) ≫
+      Qb.map (jj.hom.app N) :=
+  transport_from_unit e.realizeX.equivalence e.realizeX'.equivalence
+    e.realizeU.equivalence e.realizeU'.equivalence adj adj' adjb adjb' r r' jj jj' hj hj'
+    P Q Pb Qb p q β.hom θ.inv bb.hom hγ h N
+
+set_option maxHeartbeats 400000 in
 -- The concrete finite specialization elaborates through four equivalence records.
 /-- Transport the right-adjoint square through the four finite comparison pins.
 Source: third step of `lem-sf-finite-base-change-restriction-ordinary-pin-mate`.
@@ -140,42 +195,13 @@ theorem finite_base_change_restriction_mate_transport
       e.open'_pin.star.hom.app ((ProEtale.upperStar (ModuleCat.{u + 1} A) g).obj N) ≫
       (restrict .ordinary j' (finiteInput A gU j' j g sq).S).map
         (e.pull_pin.ordinary.hom.app N) := by
-  exact transport_from_unit
-    (A := FiniteModules A X) (B := FiniteModules A X')
-    (C := FiniteModules A U) (D := FiniteModules A U')
-    (Ab := Mod ((constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).obj
-      (CommRingCat.of A)))
-    (Bb := Mod ((constantSheaf (ProEt.topology X') CommRingCat.{u + 1}).obj
-      (CommRingCat.of A)))
-    (Cb := Mod (restrictRing .ordinary j
-      ((constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).obj (CommRingCat.of A))))
-    (Db := Mod (restrictRing .ordinary j'
-      ((constantSheaf (ProEt.topology X') CommRingCat.{u + 1}).obj (CommRingCat.of A))))
-    (EA := e.realizeX.equivalence)
-    (EB := e.realizeX'.equivalence)
-    (EC := e.realizeU.equivalence)
-    (ED := e.realizeU'.equivalence)
-    (adj := ProEtale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) g)
-    (adj' := ProEtale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) gU)
-    (adjb := o.gPull.adjunction)
-    (adjb' := o.gUPull.adjunction)
-    (r := e.pull_pin.right)
-    (r' := e.pullU_pin.right)
-    (j := e.pull_pin.ordinary)
-    (j' := e.pullU_pin.ordinary)
-    (hj := e.pull_pin.mate)
-    (hj' := e.pullU_pin.mate)
-    (P := ProEtale.upperStar (ModuleCat.{u + 1} A) j)
-    (Q := ProEtale.upperStar (ModuleCat.{u + 1} A) j')
-    (Pb := restrict .ordinary j (finiteInput A gU j' j g sq).R)
-    (Qb := restrict .ordinary j' (finiteInput A gU j' j g sq).S)
-    (p := e.open_pin.star)
-    (q := e.open'_pin.star)
-    (β := (ProEtale.upperStarCompIso (ModuleCat.{u + 1} A) sq.toCommSq.w).hom)
-    (γ := o.ordinaryTheta.inv)
-    (bb := o.rightSquare.hom)
-    (hγ := o.ordinaryTheta_mate)
-    (hb := h)
-    N
+  exact mate_transport_abstract A gU j' j g sq o e
+    (ProEtale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) g)
+    (ProEtale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) gU)
+    (ProEtale.upperStarCompIso (ModuleCat.{u + 1} A) sq.toCommSq.w)
+    o.gPull.adjunction o.gUPull.adjunction o.rightSquare o.ordinaryTheta
+    e.pull_pin.right e.pullU_pin.right e.pull_pin.ordinary e.pullU_pin.ordinary
+    e.open_pin.star e.open'_pin.star e.pull_pin.mate e.pullU_pin.mate
+    o.ordinaryTheta_mate h N
 
 end SheafOfModules.OpenTensorNormalization
