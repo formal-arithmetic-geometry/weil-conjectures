@@ -10,6 +10,7 @@ import all WeilConjectures.AlgebraicGeometry.Strict.Tower.StrictTowerExchangeMat
 import all WeilConjectures.AlgebraicGeometry.OrderedExchange.ProEtaleConstantReductionModels
 import all WeilConjectures.AlgebraicGeometry.Stratum.StratumCompletionUnitRestriction
 import WeilConjectures.AlgebraicGeometry.Completed.CompletedReductionUnit
+import WeilConjectures.AlgebraicGeometry.CompletedConstantAlgebraFlatQuotients
 
 /-! # strictCoefficientEquations -/
 
@@ -24,6 +25,68 @@ namespace AlgebraicGeometry.Scheme.OrderedExchange
 variable {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 variable {X' X Y' Y : Scheme.{t}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
   {f : X ⟶ Y} {g : Y' ⟶ Y}
+
+section DerivedSquares
+
+variable {C₁ C₂ C₃ C₄ : Type*} [Category C₁] [Category C₂] [Category C₃] [Category C₄]
+  [Abelian C₁] [Abelian C₂] [Abelian C₃] [Abelian C₄]
+  [HasDerivedCategory C₁] [HasDerivedCategory C₂] [HasDerivedCategory C₃]
+  [HasDerivedCategory C₄]
+
+/-- The derived square induced by an isomorphism of exact composites, evaluated on the
+localization of a complex. -/
+private theorem mapDerivedCategorySquareIso_hom_app_Q
+    {F₁ : C₁ ⥤ C₂} {F₂ : C₂ ⥤ C₄} {G₁ : C₁ ⥤ C₃} {G₂ : C₃ ⥤ C₄}
+    [F₁.Additive] [PreservesFiniteLimits F₁] [PreservesFiniteColimits F₁]
+    [F₂.Additive] [PreservesFiniteLimits F₂] [PreservesFiniteColimits F₂]
+    [G₁.Additive] [PreservesFiniteLimits G₁] [PreservesFiniteColimits G₁]
+    [G₂.Additive] [PreservesFiniteLimits G₂] [PreservesFiniteColimits G₂]
+    (e : F₁ ⋙ F₂ ≅ G₁ ⋙ G₂) (K : CochainComplex C₁ ℤ) :
+    (Functor.mapDerivedCategorySquareIso e).hom.app (DerivedCategory.Q.obj K) ≫
+        G₂.mapDerivedCategory.map (G₁.mapDerivedCategoryFactors.hom.app K) ≫
+        G₂.mapDerivedCategoryFactors.hom.app ((G₁.mapHomologicalComplex (.up ℤ)).obj K) =
+      F₂.mapDerivedCategory.map (F₁.mapDerivedCategoryFactors.hom.app K) ≫
+        F₂.mapDerivedCategoryFactors.hom.app ((F₁.mapHomologicalComplex (.up ℤ)).obj K) ≫
+        DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex e.hom (.up ℤ)).app K) := by
+  have hG := Functor.mapDerivedCategoryCompIso_fac G₁ G₂ K
+  have hF := Functor.mapDerivedCategoryCompIso_fac F₁ F₂ K
+  have hN := Functor.mapDerivedCategoryNatIso_fac e K
+  have hcF : (Functor.mapHomologicalComplexCompIso (Iso.refl (F₁ ⋙ F₂)) (.up ℤ)).hom.app K =
+      𝟙 _ := by
+    ext i
+    rfl
+  have hcG : (Functor.mapHomologicalComplexCompIso (Iso.refl (G₁ ⋙ G₂)) (.up ℤ)).hom.app K =
+      𝟙 _ := by
+    ext i
+    rfl
+  rw [hcF] at hF
+  erw [CategoryTheory.Functor.map_id, Category.comp_id] at hF
+  rw [hcG] at hG
+  erw [CategoryTheory.Functor.map_id, Category.comp_id] at hG
+  simp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom,
+    NatTrans.comp_app, Category.assoc]
+  rw [hG, hN, ← hF]
+  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+
+/-- The universal counit of a derived reduction model is natural in chain maps. -/
+private theorem complexCounit_naturality {B C : Type*} [Category B] [Abelian B]
+    [Category C] [Abelian C] [HasDerivedCategory B] [HasDerivedCategory C]
+    {F : B ⥤ C} [F.Additive] {P : CochainComplex B ℤ → Prop}
+    (D : DerivedReductionModelData F P) {K K' : CochainComplex B ℤ} (φ : K ⟶ K') :
+    D.reduction.map (DerivedCategory.Q.map φ) ≫ D.complexCounit K' =
+      D.complexCounit K ≫ DerivedCategory.Q.map ((F.mapHomologicalComplex (.up ℤ)).map φ) := by
+  have h1 := (DerivedCategory.quotientCompQhIso B).inv.naturality φ
+  have h2 := D.counit.naturality ((HomotopyCategory.quotient _ (.up ℤ)).map φ)
+  have h3 := (F.mapHomotopyCategoryFactors (.up ℤ)).hom.naturality φ
+  have h4 := (DerivedCategory.quotientCompQhIso C).hom.naturality
+      ((F.mapHomologicalComplex (.up ℤ)).map φ)
+  dsimp only [Functor.comp_map, Functor.comp_obj, Functor.id_obj, Functor.id_map] at h1 h2 h3 h4
+  unfold DerivedReductionModelData.complexCounit
+  rw [← Functor.map_comp_assoc, h1, Functor.map_comp_assoc, reassoc_of% h2,
+    ← Functor.map_comp_assoc, h3, Functor.map_comp_assoc, h4]
+  simp only [Category.assoc]
+
+end DerivedSquares
 
 section OrdinaryPull
 
@@ -129,6 +192,81 @@ theorem ordinaryRho_pull {U V : Scheme.{t}} (u : U ⟶ V)
   rw [← Functor.map_comp_assoc]
   erw [hρV', hO]
   rfl
+
+/-- The universal counit of the constant reduction is natural in chain maps. -/
+theorem reductionComplexCounit_naturality (T : Scheme.{t})
+    {K K' : CochainComplex (reductionModules T (exchangeConstantRing T A)) ℤ} (φ : K ⟶ K') :
+    (reduction d T).map (DerivedCategory.Q.map φ) ≫ reductionComplexCounit d T K' =
+      reductionComplexCounit d T K ≫
+        DerivedCategory.Q.map (((reductionModule d T).mapHomologicalComplex (.up ℤ)).map φ) := by
+  exact complexCounit_naturality (reductionData d T) φ
+
+section DerivedPull
+
+private theorem orderedAbSheafify' (T : Scheme.{t}) :
+    HasSheafify (ProEt.topology T) AddCommGrpCat.{t + 1} :=
+  WeilConjectures.integralCoefficientAbSheafify.{t, 0} T
+
+private theorem orderedAbLocallyBijective' (T : Scheme.{t}) :
+    (ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{t + 1} :=
+  WeilConjectures.integralCoefficientAbLocallyBijective.{t, 0} T
+
+
+private theorem scalarFlat (T : Scheme.{t}) :
+    SheafOfModules.IsFlatOnSite.{t + 1, t, t + 1, t + 1}
+      ((SheafOfModules.restrictScalars ((adicLisseForget T).map (exchangeScalar d T))).obj
+        (SheafOfModules.unit ((adicLisseForget T).obj (d.completedRing T)))) := by
+  let := d.noetherian
+  have hc : ∀ n : ℕ, exchangeScalar d T ≫ (pbcCompletedComparison T d).inv ≫
+      limit.π (adicLisseRingSystem T d.ideal) (op n) =
+        (constantSheaf (ProEt.topology T) CommRingCat.{t + 1}).map
+          (CommRingCat.ofHom (Ideal.Quotient.mk (d.ideal ^ (n + 1)))) := by
+    intro n
+    dsimp only [exchangeScalar]
+    simp only [Category.assoc, Iso.hom_inv_id_assoc]
+    exact (adicDatumScalar_exists T
+      { toCompleteCoefficientDatum := d.toCompleteCoefficientDatum,
+        quotientFinite := d.quotientFinite }).exists.choose_spec n
+  exact (completed_constant_algebra_flat_quotients T d.ideal _
+    (pbcCompletedComparison T d) (exchangeScalar d T) hc).1
+
+/-- Pullback with the completed coefficient transport preserves flat-term K-flat complexes. -/
+private theorem stratumPull_flatKFlat' {U V : Scheme.{t}} (u : U ⟶ V)
+    (P : CochainComplex (reductionModules V (d.completedRing V)) ℤ)
+    (hP : P.IsKFlatIndependentCoefficients)
+    (hflat : ∀ n, SheafOfModules.IsFlatOnSite (J := ProEt.topology V)
+        (R := d.completedRing V) (P.X n)) :
+    CochainComplex.IsKFlatIndependentCoefficients (R := d.completedRing U)
+      (((stratumModulePull d u).mapHomologicalComplex (.up ℤ)).obj P) ∧
+    ∀ n, SheafOfModules.IsFlatOnSite (J := ProEt.topology U) (R := d.completedRing U)
+      ((((stratumModulePull d u).mapHomologicalComplex (.up ℤ)).obj P).X n) := by
+  obtain ⟨I, hI⟩ := proEtaleAlgebraicInverseImage_exists u (d.completedRing V)
+  rcases I with ⟨r, ra, rm, rz, ro, L, e, ea, ez, es⟩
+  dsimp only at hI
+  subst L
+  let I : SheafOfModules.AlgebraicInverseImage
+      (proEtaleSheafInverseImage u (Type (t + 1))) (d.completedRing V)
+      ((proEtaleSheafInverseImage u CommRingCat.{t + 1}).obj (d.completedRing V)) :=
+    ⟨r, ra, rm, rz, ro, proEtaleModuleInverseImage u (d.completedRing V), e, ea, ez, es⟩
+  have : PreservesFiniteLimits (proEtaleSheafInverseImage u (Type (t + 1))) :=
+    (AlgebraicGeometry.ProEtale.toposFunctorialityInverseImage u (𝟙 V)).2.2.2.1
+  have hobj (M) : (stratumModulePull d u).obj M =
+      SheafOfModules.changeOfRings.{t, t + 1, t + 1}
+        (d.integralRingIso u).hom (I.modules.obj M) := rfl
+  have hmap : ∀ {M N} (g : M ⟶ N), (stratumModulePull d u).map g =
+      eqToHom (hobj M) ≫
+        SheafOfModules.changeOfRingsHom.{t, t + 1, t + 1} (d.integralRingIso u).hom
+          (I.modules.obj M) (I.modules.map g) ≫ eqToHom (hobj N).symm := by
+    intro M N g
+    simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
+    rfl
+  exact SheafOfModules.isKFlat_ringedToposPullback
+    (proEtaleSheafInverseImage u (Type (t + 1)))
+    (proEtaleSheafDirectImage u (Type (t + 1)))
+    (proEtaleSheafAdjunction u (Type (t + 1))) I (d.integralRingIso u).hom
+    (stratumModulePull d u) hobj hmap P hP hflat
+
+end DerivedPull
 
 end OrdinaryPull
 
