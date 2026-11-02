@@ -12,6 +12,8 @@ import WeilConjectures.AlgebraicGeometry.CompleteCompactificationLimit.Compactif
 import WeilConjectures.AlgebraicGeometry.CompleteCompactificationLimit.CompactificationLimitPresentation
 import WeilConjectures.AlgebraicGeometry.CompleteCompactificationLimit.CompactificationScalarTransitionAcyclicity
 
+set_option linter.privateModule false
+
 /-! # Normalized scalar data for strict compactification systems
 Source: blueprint direct-image proof, paragraph (2).
 (blueprint: lem-sp-compactification-scalar-data).

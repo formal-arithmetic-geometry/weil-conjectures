@@ -8,6 +8,8 @@ module
 public import WeilConjectures.SixFunctors.PointDerivedHom.PointDerivedHomModels
 import WeilConjectures.Algebra.Homology.HomComplexComponents
 
+set_option linter.privateModule false
+
 /-! # The Hom-complex adjunction for extension from a point
 
 Source: Stacks Project, Tags 0A8X and 04TT.

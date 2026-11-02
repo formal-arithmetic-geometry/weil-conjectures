@@ -9,6 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.Strict.Tower.StrictTowerRealizat
 import all WeilConjectures.CategoryTheory.UnboundedExactTower.UnboundedExactAdjunctionSquare
 import WeilConjectures.AlgebraicGeometry.Ringed.RingedOpenScalarLimitCoherence
 
+set_option linter.privateModule false
+
 /-! Coherence of exact functors with the constant-diagram mate. -/
 
 @[expose] public noncomputable section

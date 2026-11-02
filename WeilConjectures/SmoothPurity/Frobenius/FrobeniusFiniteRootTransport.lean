@@ -15,6 +15,8 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleIsomorphismInverse
 import all WeilConjectures.AlgebraicGeometry.ProEtale.Module.ProEtaleModulePullbackComposition
 import WeilConjectures.SmoothPurity.Frobenius.FrobeniusScalarTensorTransport
 
+set_option linter.privateModule false
+
 /-! # Transport of the first finite root line
 
 Source: expanded DAG def-weil-frobenius-coefficient-twists, clause 2.

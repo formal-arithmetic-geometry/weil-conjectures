@@ -13,6 +13,8 @@ import all WeilConjectures.SmoothPurity.IntegralOnSlice.IntegralDerivedOperation
 import WeilConjectures.SecSmoothPurity.ModuleTensorGenerators
 import WeilConjectures.SecSmoothPurity.CochainCoefficientArrowsSupplement
 
+set_option linter.privateModule false
+
 /-! # Scalar normalization of the strict finite reduction tower
 
 Source: Stacks, Tags 03EK, 06YT and 06YU.

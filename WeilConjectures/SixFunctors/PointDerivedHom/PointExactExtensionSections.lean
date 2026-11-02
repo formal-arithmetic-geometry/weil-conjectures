@@ -12,6 +12,8 @@ public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionSupplement
 public import Mathlib.RingTheory.Ideal.Quotient.Index
 public import Mathlib.Algebra.Homology.Homotopy
 
+set_option linter.privateModule false
+
 import WeilConjectures.AlgebraicGeometry.SixFunctors.PointProEtaleSectionsExactOfUniverses
 import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 import WeilConjectures.SixFunctors.IntegralPointCoefficientAdjunction.IntegralPointCoefficientAdjunction

@@ -70,6 +70,8 @@ import Mathlib.CategoryTheory.Sites.Abelian
 import Mathlib.Algebra.Homology.Functor
 import WeilConjectures.Algebra.Homology.HomComplexComponents
 
+set_option linter.privateModule false
+
 /-! # Derived Hom and evaluation at a pro-etale point
 
 Source: Stacks Project, Tags 0A8X, 08J7, 08BJ and 0G7E.

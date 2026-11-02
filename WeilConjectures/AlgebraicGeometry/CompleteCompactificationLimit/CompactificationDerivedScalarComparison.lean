@@ -8,6 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.CompleteCompactificationLimit.CompleteCompactificationLimitSupport
 import all WeilConjectures.CategoryTheory.Diagram.DiagramRingRestrictionPushforward
 
+set_option linter.privateModule false
+
 /-! # Deriving a normalized strict scalar direct-image square
 Source: blueprint direct-image proof, paragraph (2).
 (blueprint: lem-sp-compactification-scalar-data).

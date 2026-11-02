@@ -36,6 +36,8 @@ import WeilConjectures.AlgebraicGeometry.Smooth.SmoothPurityReductionTowerAdjunc
 import WeilConjectures.AlgebraicGeometry.Smooth.SmoothPurityReductionTorIntervals
 import WeilConjectures.AlgebraicGeometry.Smooth.SmoothPurityReductionLevelConstructible
 
+set_option linter.privateModule false
+
 /-! # The reduction tower is normalized
 
 Source: blueprint latest, sec-smooth-purity, normalized-towers-reduction

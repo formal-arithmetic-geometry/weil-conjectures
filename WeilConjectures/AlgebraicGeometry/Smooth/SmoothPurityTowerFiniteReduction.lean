@@ -29,6 +29,8 @@ import Mathlib.CategoryTheory.Sites.Abelian
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
 
+set_option linter.privateModule false
+
 /-! # Finite reduction of the projection from a normalized tower limit
 
 Source: current blueprint, sec-smooth-purity/sk-lem-sp-tower, finite-reduction paragraph.

@@ -9,6 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.CompleteCompactificationLimit.Co
 import WeilConjectures.AlgebraicGeometry.Completed.CompletedIntegralFiniteQuotientHomExt
 import all WeilConjectures.SmoothPurity.PurCompactSupport.IntegralCompactSupportCoefficientData
 
+set_option linter.privateModule false
+
 /-! # Completed coefficient projection squares
 Source: blueprint direct-image proof, paragraph (2).
 (blueprint: lem-sp-compactification-scalar-data).

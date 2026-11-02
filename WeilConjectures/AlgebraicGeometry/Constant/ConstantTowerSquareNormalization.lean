@@ -9,6 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.Strict.Tower.StrictTowerExchange
 public import WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerProperOpenArrows
 import all WeilConjectures.AlgebraicGeometry.Strict.Tower.StrictTowerRealizationComparisons
 
+set_option linter.privateModule false
+
 /-! # Constant-coefficient normalization of the ringed tower square
 
 The section-normalized ringed compositor agrees with the fixed constant-coefficient

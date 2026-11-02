@@ -44,6 +44,8 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
 import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 
+set_option linter.privateModule false
+
 /-! # Computing integral reduction on an arbitrary representative
 
 Source: the finite-free quotient resolution in paragraph 1 of the current blueprint
