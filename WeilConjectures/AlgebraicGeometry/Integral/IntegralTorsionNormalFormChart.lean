@@ -13,6 +13,7 @@ public import Mathlib.CategoryTheory.Limits.Shapes.BinaryBiproducts
 public import WeilConjectures.Mathlib.Algebra.Module.PID
 import WeilConjectures.AlgebraicGeometry.Integral.IntegralConstantFreeChart
 import WeilConjectures.AlgebraicGeometry.Integral.IntegralTorsionTorTransport
+import WeilConjectures.AlgebraicGeometry.Integral.IntegralTorsionTorConstant
 
 /-!
 # Torsion normal form on a perfect chart
@@ -159,7 +160,59 @@ theorem tor_const_epi (T : Scheme.{u}) (q : ℤ)
         cokernel ((integralConstantModule T d).map
           (ModuleCat.ofHom (pbcUniformizer l E • LinearMap.id : N₀ →ₗ[_] N₀))),
       Epi t := by
-  sorry
+  intro d
+  let := pbcIntegralRing_isDomain l E
+  obtain ⟨hdvr, hπ⟩ := pbcIntegralRing_isDiscreteValuationRing l E
+  obtain ⟨P, a, b, ha, hb, hP, ⟨e⟩⟩ := hC
+  let εP : P.homology q ≅ ModuleCat.of (PbcIntegralRing l E)
+      (Fin r →₀ PbcIntegralRing l E) ⊞ N₀ :=
+    ((DerivedCategory.homologyFunctorFactors (ModuleCat.{u + 1} (PbcIntegralRing l E))
+      q).app P).symm ≪≫ (DerivedCategory.homologyFunctor _ q).mapIso e.symm ≪≫ ε
+  have hk' : ∀ x ∈ d.ideal ^ (k + 1 + 1), ∀ y : N₀, x • y = 0 := by
+    intro x hx y
+    change x ∈ Ideal.span {pbcUniformizer l E} ^ (k + 1 + 1) at hx
+    rw [Ideal.span_singleton_pow, Ideal.mem_span_singleton] at hx
+    obtain ⟨c, rfl⟩ := hx
+    rw [mul_comm, mul_smul, show k + 1 + 1 = (2 : ℕ) + k by omega, pow_add, mul_smul, hk,
+      smul_zero, smul_zero]
+  obtain ⟨s, r', hsr⟩ := exists_homology_reduction_retraction d.ideal (k + 1 + 1) P hP q _ N₀
+    εP hk'
+  obtain ⟨eH⟩ := nonempty_reduction_homology_iso T d q C P a b ha hb hP e (k + 1)
+  obtain ⟨eT⟩ := nonempty_tor_constant_iso T d k (((((ModuleCat.extendScalars.{u + 1, u + 1, u + 1}
+    (Ideal.Quotient.mk (d.ideal ^ (k + 1 + 1)))).mapHomologicalComplex (.up ℤ)).obj
+      P).homology q))
+  have hk1 : ∀ x : N₀, pbcUniformizer l E ^ (k + 1) • x = 0 := by
+    intro x
+    rw [pow_succ, mul_comm, mul_smul, hk, smul_zero]
+  obtain ⟨t, ht⟩ := exists_levelTor_epi d.ideal k (pbcUniformizer l E) hπ.ne_zero rfl _ N₀ s r'
+    hsr hk1
+  let φ := ModuleCat.ofHom (pbcUniformizer l E • LinearMap.id : N₀ →ₗ[PbcIntegralRing l E] N₀)
+  have hX : ∀ x ∈ d.ideal ^ (k + 1),
+      ∀ y : (cokernel φ : ModuleCat.{u + 1} (PbcIntegralRing l E)), x • y = 0 := by
+    intro x hx y
+    change x ∈ Ideal.span {pbcUniformizer l E} ^ (k + 1) at hx
+    rw [Ideal.span_singleton_pow, Ideal.mem_span_singleton] at hx
+    obtain ⟨c, rfl⟩ := hx
+    have hy : pbcUniformizer l E • y = 0 := by
+      obtain ⟨z, rfl⟩ := (ModuleCat.epi_iff_surjective (cokernel.π φ)).1 inferInstance y
+      rw [← map_smul]
+      change (φ ≫ cokernel.π φ).hom z = 0
+      rw [cokernel.condition, ModuleCat.hom_zero, LinearMap.zero_apply]
+    rw [mul_comm, mul_smul, pow_succ, mul_smul, hy, smul_zero, smul_zero]
+  obtain ⟨eR⟩ := nonempty_restrict_level_constant_iso T d k (cokernel φ) hX
+  let : PreservesFiniteColimits (integralConstantModule T d) :=
+    (integralConstantModule_exact T d).2
+  refine ⟨k, (pbcRestrict (pbcAdicProjection T d k)).map
+    ((DerivedCategory.homologyFunctor _ (-1)).map
+      ((pbcDerivedExtend (pbcAdicQuotient T d (k + 1) k (Nat.le_succ k))).map
+        ((DerivedCategory.singleFunctor _ 0).map eH.hom)) ≫ eT.hom ≫
+      (pbcRestrict (pbcLevelConstantComparison T d k).inv).map
+        ((adicLisseConstantModules T _).map t)) ≫ eR.hom ≫
+    (PreservesCokernel.iso (integralConstantModule T d) φ).hom, ?_⟩
+  have := (adicLisseConstantModules_exact T (PbcIntegralRing l E ⧸ d.ideal ^ (k + 1))).2
+  have e1 : Epi ((pbcRestrict (pbcLevelConstantComparison T d k).inv).map
+      ((adicLisseConstantModules T _).map t)) := Functor.map_epi _ _
+  exact epi_comp _ _
 
 /-- On a perfect chart, the consecutive-quotient Tor sheaf surjects onto the cokernel of
 the uniformizer on the realization of the torsion summand of the cohomology module.
