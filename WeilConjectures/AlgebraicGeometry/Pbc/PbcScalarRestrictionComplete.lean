@@ -6,20 +6,112 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarTensor
+import all WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarCompletedObjectComplete
+import all WeilConjectures.ProperBaseChange.IntegralCoefficientCompletenessTransportSupplement
+import WeilConjectures.TraceFormula.Supporting.FiniteFreeCompletedScalarComparison
+import WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarExtension
 
 /-! # Exact coefficient restriction preserves intrinsic completeness.
 -/
 
-@[expose] public section
+@[expose] public noncomputable section
 set_option autoImplicit false
+set_option synthInstance.maxSize 4096
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 universe u
 open CategoryTheory AlgebraicGeometry
+attribute [-instance] WeilConjectures.integralOperationsAbSheafify
+attribute [-instance] WeilConjectures.integralOperationsAbLocallyBijective
+attribute [-instance] WeilConjectures.integralOperationsSiteSmall
+attribute [-instance] WeilConjectures.integralOperationsCommHasDerivedCategory
 namespace AlgebraicGeometry.Scheme
 
 variable (l : ℕ) [Fact l.Prime]
     (E F : Type u) [Field E] [Field F] [Algebra ℚ_[l] E] [Algebra ℚ_[l] F]
     [FiniteDimensional ℚ_[l] E] [FiniteDimensional ℚ_[l] F] (i : E →ₐ[ℚ_[l]] F)
     (W : Scheme.{u})
+
+/-- The completed scalar inclusion in the published coefficient presentation.
+Source: Bhatt--Scholze, Lemma 6.8.2(1)
+(blueprint: lem-pbc-scalar-restriction-complete). -/
+private theorem pbcScalarModelCoefficientSquare :
+    WeilConjectures.completedCoefficientMap l E F i W ≫
+        (WeilConjectures.purCoefficientIso l F W).inv =
+      (WeilConjectures.purCoefficientIso l E W).inv ≫ pbcScalarCoefficientMap l E F i W := by
+  let eR := WeilConjectures.purCoefficientIso l E W
+  let eS := WeilConjectures.purCoefficientIso l F W
+  have hmap : WeilConjectures.integralCompletedScalarMap l E F i W =
+      WeilConjectures.completedCoefficientMap l E F i W := by
+    apply (WeilConjectures.completedCoefficientMap_existsUnique l E F i W).unique
+    · exact (WeilConjectures.integralCompletedScalarMap_existsUnique l E F i W).exists.choose_spec
+    · exact (WeilConjectures.completedCoefficientMap_existsUnique l E F i W).exists.choose_spec
+  have hsq := scalarComplete_coefficientScalar_square l E F i W
+  rw [hmap] at hsq
+  change eR.hom ≫ _ = pbcScalarCoefficientMap l E F i W ≫ eS.hom at hsq
+  apply (Iso.comp_inv_eq eS).mpr
+  rw [Category.assoc]
+  exact ((Iso.inv_comp_eq eR).mpr hsq.symm).symm
+
+/-- Restriction along the two composites of the coefficient square agree, by the identity
+on sections.
+Source: Stacks Tag 03DA (blueprint: lem-pbc-scalar-restriction-complete). -/
+private def scalarRestrictionCompose {C : Type*} [Category C] {J : GrothendieckTopology C}
+    {R S T : Sheaf J RingCat.{u + 1}} (f : R ⟶ S) (g : S ⟶ T) :
+    SheafOfModules.restrictScalars.{u + 1} g ⋙ SheafOfModules.restrictScalars f ≅
+      SheafOfModules.restrictScalars (f ≫ g) :=
+  NatIso.ofComponents (fun M ↦ (SheafOfModules.fullyFaithfulForget R).preimageIso
+    (PresheafOfModules.isoMk (fun U ↦
+      (ModuleCat.restrictScalarsComp'App (f.hom.app U).hom (g.hom.app U).hom
+        ((f ≫ g).hom.app U).hom rfl (M.val.obj U)).symm)
+      (by intro U V h; ext x; rfl)))
+    (by intro M N h; ext U x; rfl)
+
+private def pbcScalarModelRestrictionIso :
+    pbcRestrict (pbcScalarCoefficientMap l E F i W) ⋙
+        pbcRestrict (WeilConjectures.purCoefficientIso l E W).inv ≅
+      pbcRestrict (WeilConjectures.purCoefficientIso l F W).inv ⋙
+        pbcRestrict (WeilConjectures.completedCoefficientMap l E F i W) := by
+  let FC := adicLisseForget W
+  have h : FC.map (WeilConjectures.purCoefficientIso l E W).inv ≫
+      FC.map (pbcScalarCoefficientMap l E F i W) =
+      FC.map (WeilConjectures.completedCoefficientMap l E F i W) ≫
+        FC.map (WeilConjectures.purCoefficientIso l F W).inv := by
+    rw [← FC.map_comp, ← FC.map_comp, pbcScalarModelCoefficientSquare]
+  exact scalarRestrictionCompose _ _ ≪≫
+    eqToIso (congrArg SheafOfModules.restrictScalars.{u + 1} h) ≪≫
+    (scalarRestrictionCompose _ _).symm
+
+/-- Derived restriction in the published model commutes with the scalar restriction.
+Source: Stacks Tag 03DA (blueprint: lem-pbc-scalar-restriction-complete). -/
+private def pbcScalarModelDerivedRestrictionIso (K : PbcCompletedDerived W (pbcIntegralDatum l F)) :
+    (pbcDerivedRestrict (WeilConjectures.purCoefficientIso l E W).inv).obj
+        ((pbcDerivedRestrict (pbcScalarCoefficientMap l E F i W)).obj K) ≅
+      (pbcDerivedRestrict (WeilConjectures.completedCoefficientMap l E F i W)).obj
+        ((pbcDerivedRestrict (WeilConjectures.purCoefficientIso l F W).inv).obj K) :=
+  (Functor.mapDerivedCategoryCompIso (pbcRestrict (pbcScalarCoefficientMap l E F i W))
+      (pbcRestrict (WeilConjectures.purCoefficientIso l E W).inv)).symm.app K ≪≫
+    (Functor.mapDerivedCategoryNatIso (pbcScalarModelRestrictionIso l E F i W)).app K ≪≫
+    (Functor.mapDerivedCategoryCompIso
+      (pbcRestrict (WeilConjectures.purCoefficientIso l F W).inv)
+      (pbcRestrict (WeilConjectures.completedCoefficientMap l E F i W))).app K
+
+/-- Restriction along the completed scalar inclusion preserves derived completeness in
+the published coefficient model.
+Source: Stacks Tags 0999, 099B and 0A0E (blueprint: lem-pbc-scalar-restriction-complete).
+Proof: the source uniformizer maps to a unit times a positive power of the target
+uniformizer, so their powers are cofinal and completeness for the target uniformizer is
+completeness for the image of the source uniformizer. Restriction is exact, preserves
+products, and detects acyclicity; it carries the local Koszul completion criterion for
+that image to the source ring (`restrictScalars_locallyDerivedComplete_iff` on a small
+model of the site). The remaining work is the transfer of that small-site statement to
+`W.ProEt` and its comparison with the Roos predicate `IsSfDerivedComplete`. -/
+private theorem pbcScalarModelRestrictionComplete
+    (M : DerivedCategory (WeilConjectures.scalarReductionSource.{u, u} l F W))
+    (hM : WeilConjectures.IsSfDerivedComplete l F W M) :
+    WeilConjectures.IsSfDerivedComplete l E W
+      ((pbcDerivedRestrict (WeilConjectures.completedCoefficientMap l E F i W)).obj M) := by
+  sorry
 
 /-- Exact coefficient restriction preserves intrinsic completeness.
 Source: Stacks Project, Tags 099B and 0A0E; the restriction and unit-power argument
@@ -42,6 +134,11 @@ argument uses no scalar/completion isomorphism and no constructibility assumptio
 theorem pbcScalarRestrictionComplete (K : PbcCompletedDerived W (pbcIntegralDatum l F))
     (hK : PbcIsIntrinsicallyComplete W (pbcIntegralDatum l F) K) :
     PbcIsIntrinsicallyComplete W (pbcIntegralDatum l E)
-      ((pbcDerivedRestrict (pbcScalarCoefficientMap l E F i W)).obj K) := by sorry
+      ((pbcDerivedRestrict (pbcScalarCoefficientMap l E F i W)).obj K) := by
+  have hc := (WeilConjectures.purCoefficientModel_predicates l F W K).2.mp hK
+  have hB := pbcScalarModelRestrictionComplete l E F i W _ hc
+  apply (WeilConjectures.purCoefficientModel_predicates l E W _).2.mpr
+  exact WeilConjectures.complete_of_iso l E W
+    (pbcScalarModelDerivedRestrictionIso l E F i W K).symm hB
 
 end AlgebraicGeometry.Scheme
