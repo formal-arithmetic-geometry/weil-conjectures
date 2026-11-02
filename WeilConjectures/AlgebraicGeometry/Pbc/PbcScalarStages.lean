@@ -130,6 +130,76 @@ theorem pbcReductionNormalization_assoc {T : Scheme.{u}}
     Functor.associator_inv_app, Category.id_comp] at hx
   simpa only [pbcReductionNormalization_hom_eq] using hx.symm
 
+/-- Restriction along an identity followed by another restriction is the whiskered
+identity comparison, when both are the identity on sections. -/
+theorem pbcRestrictComp_id_left {T : Scheme.{u}}
+    {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (ψ : R ⟶ S) (h : 𝟙 R ≫ ψ = ψ)
+    (e : pbcRestrict (𝟙 R) ≅ 𝟭 _)
+    (he : ∀ (M : pbcModules T R) (U : T.ProEtᵒᵖ) (x : M.val.obj U),
+      (e.hom.app M).val.app U x = x) :
+    pbcRestrictComp (𝟙 R) ψ ψ h = isoWhiskerLeft (pbcRestrict ψ) e ≪≫ rightUnitor _ := by
+  apply Iso.ext
+  ext M U x
+  change ((pbcRestrictComp (𝟙 R) ψ ψ h).hom.app M).val.app U x =
+    (e.hom.app ((pbcRestrict ψ).obj M)).val.app U x
+  erw [he]
+  exact (pbcRestrictComp_exists (𝟙 R) ψ ψ h).exists.choose_spec M U x
+
+/-- A restriction followed by restriction along an identity is the whiskered identity
+comparison, when both are the identity on sections. -/
+theorem pbcRestrictComp_id_right {T : Scheme.{u}}
+    {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (φ : R ⟶ S) (h : φ ≫ 𝟙 S = φ)
+    (e : pbcRestrict (𝟙 S) ≅ 𝟭 _)
+    (he : ∀ (M : pbcModules T S) (U : T.ProEtᵒᵖ) (x : M.val.obj U),
+      (e.hom.app M).val.app U x = x) :
+    pbcRestrictComp φ (𝟙 S) φ h = isoWhiskerRight e (pbcRestrict φ) ≪≫ leftUnitor _ := by
+  apply Iso.ext
+  ext M U x
+  change ((pbcRestrictComp φ (𝟙 S) φ h).hom.app M).val.app U x =
+    ((pbcRestrict φ).map (e.hom.app M)).val.app U x
+  erw [he]
+  exact (pbcRestrictComp_exists φ (𝟙 S) φ h).exists.choose_spec M U x
+
+/-- Derived version of `pbcRestrictComp_id_left`. -/
+theorem pbcDerivedRestrictComp_id_left {T : Scheme.{u}}
+    {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (ψ : R ⟶ S) (h : 𝟙 R ≫ ψ = ψ)
+    (e : pbcRestrict (𝟙 R) ≅ 𝟭 _)
+    (he : ∀ (M : pbcModules T R) (U : T.ProEtᵒᵖ) (x : M.val.obj U),
+      (e.hom.app M).val.app U x = x) :
+    pbcDerivedRestrictComp (𝟙 R) ψ ψ h = isoWhiskerLeft (pbcDerivedRestrict ψ)
+      (Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryIdIso _) ≪≫
+        rightUnitor _ := by
+  apply Iso.ext
+  unfold pbcDerivedRestrictComp pbcDerivedRestrict
+  rw [pbcRestrictComp_id_left ψ h e he, Iso.trans_hom, Iso.symm_hom, Iso.inv_comp_eq,
+    Functor.mapDerivedCategoryNatIso_trans]
+  simp only [Iso.trans_hom, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_comp,
+    Category.assoc]
+  rw [← reassoc_of% (Functor.mapDerivedCategoryNatIso_isoWhiskerLeft (pbcRestrict ψ) e),
+    reassoc_of% (Functor.mapDerivedCategoryCompIso_comp_id (pbcRestrict ψ))]
+  congr 1
+  exact Functor.mapDerivedCategoryNatIso_refl
+
+/-- Derived version of `pbcRestrictComp_id_right`. -/
+theorem pbcDerivedRestrictComp_id_right {T : Scheme.{u}}
+    {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (φ : R ⟶ S) (h : φ ≫ 𝟙 S = φ)
+    (e : pbcRestrict (𝟙 S) ≅ 𝟭 _)
+    (he : ∀ (M : pbcModules T S) (U : T.ProEtᵒᵖ) (x : M.val.obj U),
+      (e.hom.app M).val.app U x = x) :
+    pbcDerivedRestrictComp φ (𝟙 S) φ h = isoWhiskerRight
+      (Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryIdIso _)
+        (pbcDerivedRestrict φ) ≪≫ leftUnitor _ := by
+  apply Iso.ext
+  unfold pbcDerivedRestrictComp pbcDerivedRestrict
+  rw [pbcRestrictComp_id_right φ h e he, Iso.trans_hom, Iso.symm_hom, Iso.inv_comp_eq,
+    Functor.mapDerivedCategoryNatIso_trans]
+  simp only [Iso.trans_hom, Functor.isoWhiskerRight_hom, Functor.whiskerRight_comp,
+    Category.assoc]
+  rw [← reassoc_of% (Functor.mapDerivedCategoryNatIso_isoWhiskerRight e (pbcRestrict φ)),
+    reassoc_of% (Functor.mapDerivedCategoryCompIso_id_comp (pbcRestrict φ))]
+  congr 1
+  exact Functor.mapDerivedCategoryNatIso_refl
+
 variable (l : ℕ) [Fact l.Prime]
 variable (E F G H : Type u) [Field E] [Field F] [Field G] [Field H]
 variable [Algebra (Padic l) E] [Algebra (Padic l) F] [Algebra (Padic l) G]
