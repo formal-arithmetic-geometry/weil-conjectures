@@ -18,6 +18,9 @@ public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraAdjunction
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.ExceptionalInverseImageExistence
 import WeilConjectures.AlgebraicGeometry.IntegralCtfEqualsBc
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperLowerShriek
+public import Mathlib.AlgebraicGeometry.PullbackCarrier
+public import WeilConjectures.CategoryTheory.Triangulated.Recollement
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedSupportDerivedLocalization
 
 /-! # Closed-support localization with condensed coefficients
 
@@ -131,5 +134,80 @@ Source: descended immersion pair in the Weil paragraph
 def localizationFiberMap (D : WeilConjectures.FiniteFieldDatum.{u})
     {S T : Over (Spec (.of D.k₀))} (f : S ⟶ T) :=
   ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map f).left
+
+private theorem localizationAction_equivalence {T : Scheme.{u}} (g : T ≅ T) :
+    (localizationAction Λ g).IsEquivalence := by
+  obtain ⟨⟨a⟩, ⟨b⟩⟩ := StrictWeil.action_inverse Λ g
+  let P := constantModelBoundedConstructible Λ T
+  let F := localizationAction Λ g
+  let G := localizationAction Λ g.symm
+  let aa : F ⋙ G ≅ 𝟭 _ :=
+    (P.fullyFaithfulι.whiskeringRight _).preimageIso (Functor.isoWhiskerLeft P.ι a)
+  let bb : G ⋙ F ≅ 𝟭 _ :=
+    (P.fullyFaithfulι.whiskeringRight _).preimageIso (Functor.isoWhiskerLeft P.ι b)
+  exact Functor.IsEquivalence.mk' G aa.symm bb
+
+private theorem localizationFiberCartesian (D : WeilConjectures.FiniteFieldDatum.{u})
+    {S T : Over (Spec (.of D.k₀))} (f : S ⟶ T) :
+    IsPullback
+      (pullback.fst S.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))))
+      (localizationFiberMap D f) f.left
+      (pullback.fst T.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))) := by
+  refine IsPullback.of_bot ?_ ?_ (IsPullback.of_hasPullback T.hom _)
+  · convert IsPullback.of_hasPullback S.hom
+      (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) using 1 <;>
+      simp [localizationFiberMap, Over.pullback]
+  · simp [localizationFiberMap, Over.pullback]
+
+private theorem localization_open_unit (L : ClosedLocalization Λ i j)
+    (K : ConstantModelBoundedConstructible Λ X) :
+    (L.openPullPushAdjunction.unit.app K).hom =
+      (derivedUpperStarLowerStarAdjunction Λ j).unit.app K.obj := by
+  change (constantModelBoundedConstructible Λ X).ι.map
+    (L.openPullPushAdjunction.unit.app K) = _
+  dsimp only [ClosedLocalization.openPullPushAdjunction]
+  rw [Adjunction.map_restrictFullyFaithful_unit_app]
+  simp
+
+private theorem localization_orthogonal {X Z U : Scheme.{u}}
+    (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j]
+    [QuasiCompact j] (hij : Set.range i.base = (Set.range j.base)ᶜ)
+    (P : DerivedCategory (supportModules Λ Z))
+    (G : DerivedCategory (supportModules Λ U)) (m : ℤ) :
+    Subsingleton (((moduleObjectDerivedPushforward Λ i).obj P) ⟦m⟧ ⟶
+      (moduleObjectDerivedPushforward Λ j).obj G) := by
+  let := closedSupport_lowerStarExact Λ i j hij
+  let I := (lowerStar Λ i).mapDerivedCategory
+  let J := (supportPullback Λ j).mapDerivedCategory
+  have hz := (condensedSupportDerivedLocalization Λ i j hij).2.2.2.2.1
+  have : Subsingleton ((shiftFunctor _ m).obj (I.obj P) ⟶
+      (moduleObjectDerivedPushforward Λ j).obj G) :=
+    Recollement.subsingleton_hom_shift I J (closedSupportOpenDerivedAdjunction Λ j)
+      hz P G m
+  let eI := (lowerStar Λ i).rightDerivedFunctorIsoMapDerivedCategory.app P
+  exact (((shiftFunctor _ m).mapIso eI).homCongr
+    (Iso.refl ((moduleObjectDerivedPushforward Λ j).obj G))).subsingleton
+
+private theorem localization_triangle_iso
+    {C : Type*} [Category C] [Preadditive C] [HasZeroObject C]
+    [HasShift C ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+    (F : C ⥤ C) [F.CommShift ℤ] [F.IsTriangulated]
+    (T : Triangle C) (hT : T ∈ distTriang C)
+    (e₁ : F.obj T.obj₁ ≅ T.obj₁) (e₂ : F.obj T.obj₂ ≅ T.obj₂)
+    (e₃ : F.obj T.obj₃ ≅ T.obj₃)
+    (h₁ : F.map T.mor₁ ≫ e₂.hom = e₁.hom ≫ T.mor₁)
+    (h₂ : F.map T.mor₂ ≫ e₃.hom = e₂.hom ≫ T.mor₂)
+    (hsub : Subsingleton (T.obj₁⟦(1 : ℤ)⟧ ⟶ T.obj₃)) :
+    ∃ e : F.mapTriangle.obj T ≅ T,
+      e.hom.hom₁ = e₁.hom ∧ e.hom.hom₂ = e₂.hom ∧ e.hom.hom₃ = e₃.hom := by
+  have := hsub
+  obtain ⟨c, hc₂, hc₃⟩ := complete_distinguished_triangle_morphism
+    (F.mapTriangle.obj T) T (F.map_distinguished T hT) hT e₁.hom e₂.hom h₁
+  have : Subsingleton ((F.mapTriangle.obj T).obj₁⟦(1 : ℤ)⟧ ⟶ T.obj₃) :=
+    (((shiftFunctor C (1 : ℤ)).mapIso e₁).homCongr (Iso.refl T.obj₃)).subsingleton
+  have hc : c = e₃.hom := Triangle.cancel_mor₂_of_subsingleton
+    (F.map_distinguished T hT) (hc₂.trans h₂.symm)
+  rw [hc] at hc₃
+  exact ⟨Triangle.isoMk _ _ e₁ e₂ e₃ h₁ h₂ hc₃, rfl, rfl, rfl⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing

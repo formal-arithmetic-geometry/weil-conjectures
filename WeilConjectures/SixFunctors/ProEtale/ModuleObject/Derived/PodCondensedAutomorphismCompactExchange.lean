@@ -155,6 +155,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Mathlib.AlgebraicGeometry.OpenImmersion
 import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraAdjunction
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import WeilConjectures.CategoryTheory.Adjunction.CondensedSixOperationPreservation
 
 /-! # Concrete geometric-Frobenius compact-support exchange
 
@@ -213,6 +215,87 @@ def podGeometricCompactification (D : WeilConjectures.FiniteFieldDatum.{u})
     _ c.overI c.isOpenImmersion
   isProper := MorphismProperty.overPullbackMap (P := @IsProper)
     _ c.overG c.isProper
+
+/-- Concrete exchange data for the pulled-back condensed coefficient categories.
+Source: latest blueprint prop-weil-operations.proof.md, sentence 2, and
+lem-fix-weil-operations.proof.md, paragraphs 1--3
+(blueprint: lem-pod-condensed-automorphism-compact-exchange). -/
+abbrev podBCX (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ]
+    (D : WeilConjectures.FiniteFieldDatum.{u}) (X : Over (Spec (.of D.k₀))) :=
+  BoundedConstructible (condensedRingObj Λ ((podGeometricBaseChange D).obj X).left)
+
+/-- The target bounded constructible category.
+Source: the node’s constructible operations clause
+(blueprint: lem-pod-condensed-automorphism-compact-exchange). -/
+abbrev podBCY (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ]
+    (D : WeilConjectures.FiniteFieldDatum.{u}) (Y : Over (Spec (.of D.k₀))) :=
+  BoundedConstructible (condensedRingObj Λ ((podGeometricBaseChange D).obj Y).left)
+
+/-- The actual compactification functor restricted to constructibles.
+Source: the node’s constructible operations clause
+(blueprint: lem-pod-condensed-automorphism-compact-exchange). -/
+abbrev podF (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ]
+    (D : WeilConjectures.FiniteFieldDatum.{u}) {X Y : Over (Spec (.of D.k₀))}
+    (f : X ⟶ Y) (c : Compactification f.left)
+    [LocallyOfFiniteType X.hom] [LocallyOfFiniteType Y.hom]
+    [LocallyOfFiniteType f.left]
+    (h : ∀ K : podBCX Λ D X,
+      boundedConstructible (condensedRingObj Λ ((podGeometricBaseChange D).obj Y).left)
+        ((F Λ (podGeometricCompactification D c)).obj K.obj)) :
+    podBCX Λ D X ⥤ podBCY Λ D Y :=
+  (boundedConstructible (condensedRingObj Λ ((podGeometricBaseChange D).obj Y).left)).lift
+    ((boundedConstructible (condensedRingObj Λ ((podGeometricBaseChange D).obj X).left)).ι ⋙
+    F Λ (podGeometricCompactification D c)) h
+
+/-- Geometric-Frobenius pullback restricted on the source.
+Source: the node’s constructible operations clause
+(blueprint: lem-pod-condensed-automorphism-compact-exchange). -/
+abbrev podPX (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ]
+    (D : WeilConjectures.FiniteFieldDatum.{u}) (X : Over (Spec (.of D.k₀)))
+    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
+    (h : ∀ K : podBCX Λ D X,
+      boundedConstructible (condensedRingObj Λ ((podGeometricBaseChange D).obj X).left)
+        ((P Λ (D.geometricFrobenius X).hom).obj K.obj)) :
+    podBCX Λ D X ⥤ podBCX Λ D X :=
+  (boundedConstructible (condensedRingObj Λ ((podGeometricBaseChange D).obj X).left)).lift
+    ((boundedConstructible (condensedRingObj Λ ((podGeometricBaseChange D).obj X).left)).ι ⋙
+      P Λ (D.geometricFrobenius X).hom) h
+
+/-- Geometric-Frobenius pullback restricted on the target.
+Source: the node’s constructible operations clause
+(blueprint: lem-pod-condensed-automorphism-compact-exchange). -/
+abbrev podPY (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ]
+    (D : WeilConjectures.FiniteFieldDatum.{u}) (Y : Over (Spec (.of D.k₀)))
+    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
+    (h : ∀ K : podBCY Λ D Y,
+      boundedConstructible (condensedRingObj Λ ((podGeometricBaseChange D).obj Y).left)
+        ((P Λ (D.geometricFrobenius Y).hom).obj K.obj)) :
+    podBCY Λ D Y ⥤ podBCY Λ D Y :=
+  (boundedConstructible (condensedRingObj Λ ((podGeometricBaseChange D).obj Y).left)).lift
+    ((boundedConstructible (condensedRingObj Λ ((podGeometricBaseChange D).obj Y).left)).ι ⋙
+      P Λ (D.geometricFrobenius Y).hom) h
+
+/-- The localizing exceptional adjunction and its normalized constructible restriction.
+Source: the preservation clause used in proof steps 1 and 10
+(blueprint: lem-pod-condensed-automorphism-compact-exchange). -/
+def PodPreservationAdjunction
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) : Prop :=
+  ∃ (h : ∀ K, localizingClosureProEtale Λ X K →
+      localizingClosureProEtale Λ Y ((F Λ c).obj K))
+    (_hCX : boundedConstructible (condensedRingObj Λ X) ≤ localizingClosureProEtale Λ X)
+    (_hCY : boundedConstructible (condensedRingObj Λ Y) ≤ localizingClosureProEtale Λ Y),
+    ∃ (G : (localizingClosureProEtale Λ Y).FullSubcategory ⥤
+        (localizingClosureProEtale Λ X).FullSubcategory)
+      (adj : localizingLowerShriek Λ c h ⊣ G),
+      adj.RestrictsWithOriginalHomEquiv
+        (fun K ↦ boundedConstructible (condensedRingObj Λ X) K.obj)
+        (fun L ↦ boundedConstructible (condensedRingObj Λ Y) L.obj)
 
 private theorem pod_compactification_exists
     (D : WeilConjectures.FiniteFieldDatum.{u})
