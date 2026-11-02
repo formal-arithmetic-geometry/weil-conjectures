@@ -78,6 +78,13 @@ attribute [local implicit_reducible]
   CategoryTheory.uniformProd CategoryTheory.prod CategoryTheory.prod'
   CategoryTheory.catToReflQuiver CoefficientClosedStructure.tensor
 
+private theorem finiteChange_isIso_prod
+    {C : Type a} {D : Type b} [Category.{c} C] [Category.{d} D]
+    {X Y : C} {U V : D} (f : X ⟶ Y) (g : U ⟶ V) [IsIso f] [IsIso g] :
+    IsIso (Prod.mkHom f g) :=
+  (isIso_prod_iff (f := Prod.mkHom f g)).mpr ⟨inferInstance, inferInstance⟩
+
+
 attribute [local instance] finiteChange_isIso_prod
 
 private theorem finiteChangeEvaluation_naturality
