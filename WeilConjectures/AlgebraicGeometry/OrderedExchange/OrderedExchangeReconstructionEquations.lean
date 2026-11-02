@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.OrderedExchange.OrderedExchangeC
 import WeilConjectures.AlgebraicGeometry.OrderedExchange.OrderedExchangeStrictCoefficientEquations
 import WeilConjectures.AlgebraicGeometry.Stratum.StratumCompletionUnitRestriction
 import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedDirectImageLimits
+import WeilConjectures.AlgebraicGeometry.OrderedExchange.OrderedExchangeLambdaDirectImage
 
 /-! # reconstructionCoefficientEquations -/
 
@@ -89,17 +90,17 @@ theorem phi_eq_completedPullResIso : phi d u = completedPullResIso d u :=
 
 /-- Restriction commutes with the two direct-image/derived-limit comparisons.
 Source: Stacks 0A07, 0E48 (blueprint: lem-weil-pbc-ordered-reconstruction-equations).
-All five maps are adjunction conjugates or unit-normalized comparisons; a proof needs
-`lambda` as the mate of `scalarDiagonal` (not yet available) or a K-injective computation.
-Not attempted in detail. -/
+Proof: all five maps are adjunction mates of exact descents of ordinary identity-component
+squares. Transposing along the constant-diagram and tower-pullback adjunctions reduces the
+equation to a cube of such squares, which commutes on complexes. -/
 theorem lambda_directImageRlimIso (Z : DerivedCategory (d.towers U)) :
     (res d V).map ((d.directImageRlimIso u).hom.app Z) ≫
         (lambda d V).hom.app ((d.towerPush u).obj Z) ≫
         (rlim (A := A) V).map ((exchangeResPush d u).hom.app Z) =
       (chi d u).hom.app ((completedRlim U (d.completedRing U)).obj Z) ≫
         (push (A := A) u).map ((lambda d U).hom.app Z) ≫
-        (directLimitIso (A := A) u).hom.app ((exchangeTowerRes d U).obj Z) := by
-  sorry
+        (directLimitIso (A := A) u).hom.app ((exchangeTowerRes d U).obj Z) :=
+  lambda_directImageRlimIso_aux d u Z
 
 end Helpers
 
