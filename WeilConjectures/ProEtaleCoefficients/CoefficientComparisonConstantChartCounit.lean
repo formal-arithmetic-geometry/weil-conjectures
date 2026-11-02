@@ -113,6 +113,8 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 Source: Stacks Project, Tags 099R, 099T and 099Y, comparison and localization.
 -/
 
+set_option linter.privateModule false
+
 @[expose] public section
 
 set_option autoImplicit false

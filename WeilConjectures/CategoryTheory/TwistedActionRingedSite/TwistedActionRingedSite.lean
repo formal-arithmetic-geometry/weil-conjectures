@@ -39,7 +39,6 @@ variable {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (a : (s.inverse.sheafPushforwardContinuous CommRingCat.{u} J J).obj R ≅ R)
 
 omit [s.functor.IsContinuous J J] in
-
 /-- Canonical small-limit lifting for the module translation forgetful functor.
 
 Source: step 2 of the action-site assembly (step 5 of the detailed proof below), in
@@ -76,6 +75,7 @@ noncomputable instance translationForgetCreatesColimits [(sigma J s R a).IsEquiv
       Endofunctor.Algebra.forget (sigma J s R a))
   exact ⟨fun {_} _ ↦ inferInstance⟩
 
+omit [s.functor.IsContinuous J J] in
 private theorem addLimits (P : RestrictionPresentation J s R a) :
     Nonempty (ModulePresentation J s R a) := by
   have : (sigma J s R a).IsEquivalence := by

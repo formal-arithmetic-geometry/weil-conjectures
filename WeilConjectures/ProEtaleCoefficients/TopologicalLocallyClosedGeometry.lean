@@ -26,6 +26,6 @@ theorem exists_open_closed_factorization {T X : Scheme.{u}}
     [TopologicalSpace.NoetherianSpace X] (f : T ⟶ X) [IsImmersion f] :
     ∃ (Z : Scheme.{u}) (j : T ⟶ Z) (i : Z ⟶ X),
       IsOpenImmersion j ∧ IsClosedImmersion i ∧ j ≫ i = f := by
-  letI : TopologicalSpace.NoetherianSpace T := f.isEmbedding.isInducing.noetherianSpace
-  letI : QuasiCompact f := inferInstance
+  let : TopologicalSpace.NoetherianSpace T := f.isEmbedding.isInducing.noetherianSpace
+  let : QuasiCompact f := inferInstance
   exact IsImmersion.isImmersion_iff_exists_of_quasiCompact.mp inferInstance

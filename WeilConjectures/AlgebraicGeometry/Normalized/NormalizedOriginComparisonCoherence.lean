@@ -135,7 +135,7 @@ private theorem ordinaryRestrictionUnit (T : Scheme.{u}) (R : Type (u + 1)) [Com
     Functor.leftUnitor_hom_app, Functor.rightUnitor_inv_app,
     Category.id_comp, Category.assoc]
   dsimp only [b, c, normalizedOriginRestrictionUnit, Sheaf.restrictCoextendScalarsAdj]
-  simp only [Functor.comp_obj, sheafCompose_obj_obj, Functor.id_obj,
+  simp only [Functor.comp_obj, Functor.id_obj,
     conjugateEquiv_apply_app, Adjunction.id_unit, NatTrans.id_app, Functor.id_map,
     Category.id_comp, Functor.map_comp, Adjunction.id_counit, CategoryTheory.Functor.map_id,
     Category.comp_id, Category.assoc, ObjectProperty.FullSubcategory.comp_hom,
