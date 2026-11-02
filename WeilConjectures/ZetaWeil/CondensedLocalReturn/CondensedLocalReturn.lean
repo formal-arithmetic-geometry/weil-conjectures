@@ -74,4 +74,12 @@ abbrev fibre (k : Type u) [Field k] {X : Scheme.{u}} (z : Spec (.of k) ⟶ X) :
     Modules Λ X ⥤ ModuleCat.{u + 1} (Γ Λ) :=
   CondensedRing.upperStar Λ z ⋙ sections Λ k
 
+/-- The actual local cohomology vector space, without a finite-stage model.
+Source: blueprint fibre/cohomology convention (blueprint: def-weil-local-frobenius-trace). -/
+@[irreducible] def cohomology (k : Type u) [Field k] [IsSepClosed k] {X : Scheme.{u}}
+    (K : DerivedCategory (Modules Λ X)) (z : Spec (.of k) ⟶ X) (j : ℤ) :
+    ModuleCat.{u + 1} (Γ Λ) :=
+  (DerivedCategory.homologyFunctor (ModuleCat.{u + 1} (Γ Λ)) j).obj
+    ((fibre Λ k z).mapDerivedCategory.obj K)
+
 end WeilConjectures.CondensedLocalReturn

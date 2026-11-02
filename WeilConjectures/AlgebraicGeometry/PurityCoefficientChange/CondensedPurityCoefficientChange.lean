@@ -274,6 +274,11 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Tate.ProEtaleTateTwists
 import WeilConjectures.AlgebraicGeometry.Tate.TateTwistLocallyFree
 import WeilConjectures.AlgebraicGeometry.Cartesian.CartesianCoefficientTwistsSupplement
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteLocalizingExceptionalPreservation
+public import WeilConjectures.AlgebraicGeometry.PurityTransport.Transport
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ClosedImmersionTensorProjection
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixTensorComparison
+
+public import WeilConjectures.SixFunctors.ScalarOpenCompositorCoherence
 
 /-! # Purity, counit and smooth trace under change of condensed coefficients
 
@@ -314,5 +319,107 @@ structure Coordinates where
   line : ∀ {c c' : Coefficient ell}
     (a : c.bundled.{u} ell ⟶ c'.bundled ell) (ha : ListedScalarChange ell a)
     (X : Scheme.{u}), ScalarLineCoordinates ell a (integral a ha) X
+
+/-- Multiplication by q^d on the existing Tate line.
+Source: canonical Tate scalar normalization
+(blueprint: lem-pur-condensed-purity-coefficient-change). -/
+def powerScalar (c : Coefficient ell) (X : Scheme.{u}) (d : ℕ) :
+    End (c.line.{u} ell X d) :=
+  (D.q ^ d) • (𝟙 (c.line.{u} ell X d))
+
+/-- Multiplication by q^(-d) on the actual Tate line. Ring.inverse of the
+q^d-multiplication endomorphism is its canonical unit inverse. Invertibility is
+asserted below, rather than supplied as an arbitrary Frobenius parameter.
+Source: canonical tau_d normalization, proof Step 8
+(blueprint: lem-pur-condensed-purity-coefficient-change). -/
+def tau (c : Coefficient ell) (X : Scheme.{u}) (d : ℕ) : End (c.line.{u} ell X d) :=
+  Ring.inverse (powerScalar ell D c X d)
+
+/-- The scalar q^d is a unit on every coefficient Tate line.
+Source: proof Step 8 (blueprint: lem-pur-condensed-purity-coefficient-change). -/
+def TateUnitInvertible : Prop :=
+  ∀ (c : Coefficient ell) (X : Scheme.{u}) (d : ℕ), IsIso (powerScalar ell D c X d)
+
+/-- The actual shifted derived Tate datum used in the source comparison.
+Source: proof Step 8 (blueprint: lem-pur-condensed-purity-coefficient-change). -/
+def derivedTau (c : Coefficient ell) (X : Scheme.{u}) (d : ℕ) :
+    End (c.derivedLine ell X d) :=
+  (shiftFunctor _ (2 * (d : ℤ))).map
+    ((DerivedCategory.singleFunctor _ 0).map (tau ell D c X d))
+
+/-- The specified balanced, shifted Tate comparison intertwines the canonical datum.
+Source: proof Steps 7--8 (blueprint: lem-pur-condensed-purity-coefficient-change). -/
+def TateScalarFrobenius (P : Coordinates.{u} ell) : Prop :=
+  ∀ (c c' : Coefficient ell) (a : c.bundled.{u} ell ⟶ c'.bundled ell)
+    (ha : ListedScalarChange ell a) (X : Scheme.{u}) (d : ℕ),
+    (scalarSixChange a X).map (derivedTau ell D c X d) ≫
+        scalarLineMap ell a X d ((P.line a ha X).power d) =
+      scalarLineMap ell a X d ((P.line a ha X).power d) ≫ derivedTau ell D c' X d
+
+/-- Every root-normalized pullback comparison intertwines the same datum.
+Source: Tate pullback sentence, proof Steps 7--8
+(blueprint: lem-pur-condensed-purity-coefficient-change). -/
+def TatePullbackFrobenius : Prop :=
+  ∀ (c : Coefficient ell) (X Y : Scheme.{u}) (f : X ⟶ Y)
+    (p : LinePullCoordinates ell c f) (d : ℕ),
+    (CondensedRing.upperStar (c.obj ell) f).map (tau ell D c Y d) ≫ (p.power d).hom =
+      (p.power d).hom ≫ tau ell D c X d
+
+/-- The Tate comparison preserves q^(-d), including its pullback identifications,
+zero tensor power, integral coefficients and nonflat finite reduction.
+Source: Tate Frobenius sentence, proof Steps 7--8
+(blueprint: lem-pur-condensed-purity-coefficient-change). -/
+def FrobeniusCompatible (P : Coordinates.{u} ell) : Prop :=
+  TateUnitInvertible ell D ∧ TateScalarFrobenius ell D P ∧ TatePullbackFrobenius ell D
+
+/-- The canonical purity family has the stated purity, counit and smooth-trace
+coefficient equations, Tate Frobenius compatibility, and identity/composition laws.
+The first five predicates retain exactly the normalization and geometric
+compatibilities of the imported smooth_purity_transport family, so the gamma
+appearing in Equations is the specified purity, not a new orientation.
+
+Source: latest blueprint sk-thm-purity-transport-coefficient-change (1)--(3),
+including ramified pi-power reduction
+(blueprint: lem-pur-condensed-purity-coefficient-change).
+
+Proof, following the accepted DAG split:
+1. Transpose T(epsilon) b^(-1) using det-prop-scalar-six-exceptional. Its counit
+identity gives the second displayed equation after precomposition by b.
+2. The exact finite section-action equivalence transports the diagonal/DNC
+adjunction of det-sp-finite-general-ring. Its counit is epsilon F(gamma).
+Uniqueness of right adjoints identifies its orientation with the canonical one.
+3. Apply det-sp-reduction-compatibilities to every finite ring map, without a
+flatness assumption, and identify its b,c,s by their mates and balanced tensors.
+4. For integral field extension use lem-pur-transport-integral-counit-realization;
+identify the actual tower support and source maps by
+lem-pur-native-transition-comparison-identification. Counit transposition then
+identifies its exceptional comparison with the published c.
+5. Apply prop-pur-condensed-purity-coefficient-change to quotient reduction,
+localization, finite field extension and the algebraic closure. The same native
+transition identification and counit uniqueness give the specified comparisons.
+This includes every positive uniformizer quotient, also when E is ramified.
+6. Apply functoriality and naturality of b to epsilon F(gamma), then substitute
+the purity and counit equations, obtaining the displayed trace equation.
+7. In the common compatible root frame, the Tate coefficient map sends
+x tensor y to t(x)y; tensor powers, shifts, localization and common finite stages
+preserve this formula. Cartesian pullback preserves the same frames.
+8. Since q is a power of p distinct from ell, q is a coefficient unit. The
+previous balanced map intertwines multiplication by q^(-d), as does pullback.
+9. The native scalar associators identify both evaluations of iterated balanced
+tensors; mates give the support and exceptional composition equations. The
+identity maps are the scalar unitors. In particular O_E to O_E/ell^m to
+O_E/pi_E^n agrees with direct reduction whenever ell^m lies in (pi_E^n).
+The listed-map predicate supplies no reduction from E or the algebraic closure
+to a finite ring. All equations take place in the ordinary uncompleted derived
+categories, on their full bounded constructible finite-Tor subcategories. -/
+theorem condensed_purity_coefficient_change :
+    ∃ A : AdjunctionFamily ell D,
+      BrownComparison ell D A ∧ ScalarCompatible ell D A ∧
+      BaseChangeCompatible ell D A ∧ CompositionCompatible ell D hEll A ∧
+      AffineNormalized ell D A ∧
+      ∃ P : Coordinates.{u} ell,
+        Equations ell D hEll A P ∧ FrobeniusCompatible ell D P ∧
+        CompositionCoherent ell D hEll P ∧ IdentityCoherent ell D hEll P := by
+  sorry
 
 end AlgebraicGeometry.ProEtale.PurityCoefficientChange
