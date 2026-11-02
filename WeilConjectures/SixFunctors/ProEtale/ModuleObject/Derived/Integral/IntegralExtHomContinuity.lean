@@ -432,7 +432,7 @@ private theorem constructible_hom_continuity
   let c := DerivedCategory.Q.mapCocone (colimit.cocone K)
   let : ObjectProperty.IsClosedUnderIsomorphisms
       (IsConstructibleModuleObject (condensedRingObj Λ X)) :=
-    ⟨fun e h ↦ constructible_of_iso _ e h⟩
+    ⟨fun e h ↦ _root_.constructible_of_iso e h⟩
   apply homColimit_bounded D c (IsConstructibleModuleObject (condensedRingObj Λ X))
   · intro M hM
     obtain ⟨r, hr⟩ := exists_condensedLocallyClosed_extension_tower X Λ M hM

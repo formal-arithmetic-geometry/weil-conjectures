@@ -103,6 +103,7 @@ open scoped CategoryTheory.Obj TensorProduct
 
 namespace AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary
 
+attribute [local instance] Sheaf.monoidalCategory Sheaf.symmetricCategory
 attribute [local instance 20000] sheafBraidedCategory
 attribute [local irreducible] Mod.monoidalClosed
 attribute [local irreducible] Sheaf.monoidalCategory SheafOfModules.monoidalCategory

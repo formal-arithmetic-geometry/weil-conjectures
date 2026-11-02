@@ -819,6 +819,14 @@ def thetaH (hq : QuotientCompatibility d g) (b a : ℕ) (h : a ≤ b) :
 
 attribute [local irreducible] thetaH
 
+/-- The specified normalization is an isomorphism of functors.
+Source: blueprint order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
+@[instance]
+private theorem completedReductionDerivedNormalization_isIso (T : Scheme.{t})
+    (b a : ℕ) (h : a ≤ b) :
+    IsIso (completedReductionDerivedNormalization T d b a h) :=
+  (completedReductionDerivedNormalization_exists T d b a h).choose_spec.1.1
+
 private theorem thetaH_isIso (hq : QuotientCompatibility d g) (b a : ℕ) (h : a ≤ b) :
     IsIso (thetaH d g hq b a h) := by
   have := proEtaleReductionPullbackInv_isIso g (d.finiteRing Y b) (d.finiteRing Y a)
@@ -1043,6 +1051,8 @@ structure Comparison where
 attribute [local irreducible] HasDerivedCategory.standard
 
 -- Prefer the original site's fixed universe to imported universe-raising instances.
+private theorem originalSiteSmall (T : Scheme.{t}) : EssentiallySmall.{t + 1} T.ProEt :=
+  essentiallySmallSelf.{0} T.ProEt
 attribute [local instance 2000] originalSiteSmall
 
 private theorem completed_flat (T : Scheme.{t}) :

@@ -366,6 +366,9 @@ theorem integralReduction_boundedConstructible (X : Scheme.{u})
     (integralConstructible_serre ℓ E X).2.2
   let : (boundedConstructible R).IsTriangulated :=
     isTriangulated_boundedConstructible_of_serre R
+      (fun _ _ f hM hN ↦ ⟨ObjectProperty.prop_kernel _ f hM hN,
+        ObjectProperty.prop_cokernel _ f hM hN⟩)
+      (fun _ hS h₁ h₃ ↦ ObjectProperty.prop_X₂_of_shortExact _ hS h₁ h₃)
   have : (boundedConstructible R).IsClosedUnderIsomorphisms :=
     ⟨fun e h ↦ ⟨(DerivedCategory.TStructure.t.bounded).prop_of_iso e h.1,
       fun n ↦ _root_.constructible_of_iso
