@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Complete.CompleteProperOpenGamma
+public import WeilConjectures.AlgebraicGeometry.Complete.CompleteProperOpenGammaIsIso
 public import WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientDatumSupplement
 public import WeilConjectures.Compactification.BaseChange
 public import WeilConjectures.AlgebraicGeometry.Projection.ProjectionCompactification
@@ -70,6 +71,55 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 variable {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
+section RefinementGamma
+
+-- Keep the module-category instances of the proper/open comparisons, so that the
+-- components below are syntactically those of `cbcProperOpenGamma`.
+attribute [-instance] WeilConjectures.SemilinearSections.moduleAbelian
+  WeilConjectures.SemilinearSections.hasDerived flatConstantModulesAbelian
+
+/-- The proper/open gamma of a refinement, for the identity on the open part.
+Source: blueprint proof step 8, C_u (blueprint: thm-cbc-complete-proetale). -/
+@[irreducible]
+def cbcRefinementGamma {X Y : Scheme.{t}} {f : X ⟶ Y} [QuasiCompact f]
+    {c₁ c₂ : Compactification f} (u : c₁.Refinement c₂) :=
+  letI : QuasiCompact c₁.i := c₁.quasiCompact_openImmersion inferInstance
+  letI : QuasiCompact c₂.i := c₂.quasiCompact_openImmersion inferInstance
+  cbcProperOpenGamma d c₁.i (𝟙 X) u.hom c₂.i (u.i_hom.trans (Category.id_comp _).symm)
+
+/-- The refinement gamma preceded by the inverse proper identity comparison.
+Source: blueprint proof step 8, C_u (blueprint: thm-cbc-complete-proetale). -/
+@[irreducible]
+def cbcRefinementGammaComp {X Y : Scheme.{t}} {f : X ⟶ Y} [QuasiCompact f]
+    {c₁ c₂ : Compactification f} (u : c₁.Refinement c₂) :=
+  Functor.whiskerRight (d.pushId X).inv (cbcJ d c₂.i) ≫ cbcRefinementGamma d u
+
+private theorem cbcIsIso_app_comp {C E : Type*} [Category C] [Category E] {F G H : C ⥤ E}
+    (α : F ⟶ G) (β : G ⟶ H) (x : C) (hα : IsIso (α.app x)) (hβ : IsIso (β.app x)) :
+    IsIso ((α ≫ β).app x) := by
+  rw [NatTrans.comp_app]
+  exact IsIso.comp_isIso' hα hβ
+
+private theorem cbcIsIso_whiskerRight_app {C D E : Type*} [Category C] [Category D]
+    [Category E] {F G : C ⥤ D} (α : F ⟶ G) (P : D ⥤ E) (x : C) (hα : IsIso (α.app x)) :
+    IsIso ((Functor.whiskerRight α P).app x) := by
+  rw [Functor.whiskerRight_app]
+  exact Functor.map_isIso P _
+
+private theorem cbcIsIso_app_of_isIso {C E : Type*} [Category C] [Category E] {F G : C ⥤ E}
+    (α : F ⟶ G) [IsIso α] (x : C) : IsIso (α.app x) := inferInstance
+
+/-- Precomposing the refinement gamma with the proper identity comparison keeps it invertible.
+Source: blueprint proof step 8, C_u (blueprint: thm-cbc-complete-proetale). -/
+theorem cbcRefinementGammaComp_app_isIso {X Y : Scheme.{t}} {f : X ⟶ Y} [QuasiCompact f]
+    {c₁ c₂ : Compactification f} (u : c₁.Refinement c₂) (K : d.derived X)
+    (h : IsIso ((cbcRefinementGamma d u).app K)) :
+    IsIso ((cbcRefinementGammaComp d u).app K) := by
+  unfold cbcRefinementGammaComp
+  exact cbcIsIso_app_comp _ _ _ (cbcIsIso_app_of_isIso _ _) h
+
+end RefinementGamma
+
 
 
 section
@@ -88,14 +138,9 @@ Source: blueprint proof step 8, C_u; Stacks 0F7B and 0F7C
 def cbcRefinementTransformation
     {X Y : Scheme.{t}} {f : X ⟶ Y} [QuasiCompact f]
     {c₁ c₂ : Compactification f} (u : c₁.Refinement c₂) :
-    cbcSupport d c₂ ⟶ cbcSupport d c₁ := by
-  let : QuasiCompact c₁.i := c₁.quasiCompact_openImmersion inferInstance
-  let : QuasiCompact c₂.i := c₂.quasiCompact_openImmersion inferInstance
-  let e₁ := Functor.whiskerRight (d.pushId X).inv (cbcJ d c₂.i)
-  let e₂ := cbcProperOpenGamma d c₁.i (𝟙 X) u.hom c₂.i
-    (u.i_hom.trans (Category.id_comp _).symm)
-  exact Functor.whiskerRight (Functor.leftUnitor (cbcJ d c₂.i)).inv (d.push c₂.g) ≫
-    Functor.whiskerRight (e₁ ≫ e₂) (d.push c₂.g) ≫
+    cbcSupport d c₂ ⟶ cbcSupport d c₁ :=
+  Functor.whiskerRight (Functor.leftUnitor (cbcJ d c₂.i)).inv (d.push c₂.g) ≫
+    Functor.whiskerRight (cbcRefinementGammaComp d u) (d.push c₂.g) ≫
     (Functor.associator (cbcJ d c₁.i) (d.push u.hom) (d.push c₂.g)).hom ≫
     Functor.whiskerLeft (cbcJ d c₁.i) (d.pushComp u.hom c₂.g).hom ≫
     Functor.whiskerLeft (cbcJ d c₁.i)
@@ -110,6 +155,18 @@ def cbcRefinementMap {X Y : Scheme.{t}} {f : X ⟶ Y} [qf : QuasiCompact f]
     {c₁ c₂ : Compactification f} (u : c₁.Refinement c₂) (K : d.derived X) :
     (cbcSupport d c₂).obj K ⟶ (cbcSupport d c₁).obj K :=
   (cbcRefinementTransformation d u).app K
+
+/-- The refinement map is invertible as soon as its proper/open gamma component is.
+The remaining factors are proper pushforward and the identity and composition comparisons.
+Source: blueprint proof step 8, C_u (blueprint: thm-cbc-complete-proetale). -/
+theorem cbcRefinementMap_isIso_of_gamma {X Y : Scheme.{t}} {f : X ⟶ Y} [QuasiCompact f]
+    {c₁ c₂ : Compactification f} (u : c₁.Refinement c₂) (K : d.derived X)
+    (h : IsIso ((cbcRefinementGamma d u).app K)) :
+    IsIso (cbcRefinementMap d u K) := by
+  unfold cbcRefinementMap cbcRefinementTransformation
+  exact cbcIsIso_app_comp _ _ _ (cbcIsIso_app_of_isIso _ _) (cbcIsIso_app_comp _ _ _
+    (cbcIsIso_whiskerRight_app _ _ _ (cbcRefinementGammaComp_app_isIso d u K h))
+    (cbcIsIso_app_of_isIso _ _))
 
 /-- The compatible-tower compact-support composition map. Its middle factor is the
 specified proper/open gamma, so this is not an arbitrary isomorphism of the endpoints.
@@ -197,7 +254,9 @@ theorem cbcRefinementMap_isIso
     (K : (cbcCompleteProperty d X r a ha).FullSubcategory)
     (_origins : PbcHasCompatibleEtaleOrigins X d K.obj) :
     IsIso (cbcRefinementMap d u K.obj) := by
-  sorry
+  apply cbcRefinementMap_isIso_of_gamma
+  unfold cbcRefinementGamma
+  exact @cbcProperOpenGamma_app_isIso _ _ d _ _ _ _ _ _ _ _ _ _ ?_ ?_ _ _ _ r a ha K _origins
 
 /-- The canonical compactification comparison through any supplied common refinement.
 Its factors are the specified proper/open refinement maps, not chosen endpoint isos.
