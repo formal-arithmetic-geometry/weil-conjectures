@@ -588,6 +588,8 @@ import WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.InternalHom
 import WeilConjectures.AlgebraicGeometry.Compact.CompactInternalAdjunctionMateIdentificationSupplement
 public import WeilConjectures.AlgebraicGeometry.SmoothCompactDualModel
 
+set_option linter.privateModule false
+
 /-! # A compact dual model for smooth ordinary direct images
 
 Source: blueprint lem-asd-smooth-generic-direct-image, construction of the compact

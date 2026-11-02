@@ -38,12 +38,4 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.FiniteReduction
 
-by
-  let i := (S.comparison r m h).app K₀
-  let j := (S.proetale r m h).functor.mapIso e
-  exact { hom := i.hom ≫ j.hom
-          inv := j.inv ≫ i.inv
-          hom_inv_id := by simp
-          inv_hom_id := by simp }
-
 end AlgebraicGeometry.FiniteReduction
