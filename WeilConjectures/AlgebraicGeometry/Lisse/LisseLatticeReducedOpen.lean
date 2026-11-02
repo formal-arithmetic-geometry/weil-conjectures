@@ -548,6 +548,7 @@ first paragraph, and Stacks Tag 03S0.
 set_option backward.isDefEq.respectTransparency false
 set_option backward.defeqAttrib.useBackward true
 set_option autoImplicit false
+set_option linter.privateModule false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 
@@ -557,11 +558,11 @@ attribute [local irreducible] Scheme.proEtaleRingModuleAdjunction
   CondensedRing.pullIso CondensedRing.upperStarComp
   CondensedRing.integralScalarMap
 
-attribute [local instance] baseChange_cont
+private theorem baseChange_cont {X Y : Scheme.{u}} (f : Y ⟶ X) :
+    (Scheme.proEtaleBaseChange f).IsContinuous (Scheme.ProEt.topology X)
+      (Scheme.ProEt.topology Y) := AlgebraicGeometry.Scheme.ProEt.isContinuous_overPullback f
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-attribute [local irreducible] continuous_restriction_adjunction
+attribute [local instance] baseChange_cont
 
 private theorem exists_small_coefficient (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
@@ -619,7 +620,16 @@ private theorem field_inverse_locallyFree (l : ℕ) [Fact l.Prime] (K : Type)
   exact (continuousRing_locallyFree_iff X K
     (F.inverse.obj (H.inverse.obj M))).mpr inferInstance
 
-open CondensedRing in
+private noncomputable def continuousMapRingEquiv {K E : Type*}
+    [CommRing K] [CommRing E] [TopologicalSpace K] [TopologicalSpace E]
+    [IsTopologicalRing K] [IsTopologicalRing E]
+    (e : K ≃+* E) (he : Continuous e) (hi : Continuous e.symm)
+    (V : Type*) [TopologicalSpace V] : C(V, K) ≃+* C(V, E) :=
+  { e.toRingHom.compLeftContinuous V he with
+    invFun := e.symm.toRingHom.compLeftContinuous V hi
+    left_inv f := by ext x; exact e.symm_apply_apply (f x)
+    right_inv f := by ext x; exact e.apply_symm_apply (f x) }
+
 section CoefficientTransport
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -650,7 +660,8 @@ private def nativeIntegerRingEquiv :
   (nativeFieldRingEquiv l E K e).restrict _ _ (by
     intro x
     change x.ofAbs ∈ Padic.coefficientExtensionIntegers l E ↔ _
-    rw [coefficientIntegers_mem, coefficientIntegers_mem, coefficient_absolute l E K e]
+    rw [Padic.mem_coefficientExtensionIntegers, Padic.mem_coefficientExtensionIntegers,
+      coefficient_absolute l E K e]
     rfl)
 
 private def nativeFieldIso (X : Scheme.{u}) :
@@ -749,5 +760,3 @@ attribute [local semireducible] CondensedRing.ringModuleEquivalenceOfIso
   CondensedRing.continuousFieldModuleEquivalence CondensedRing.upperStar
 
 end AlgebraicGeometry.ProEtale
-
-#print axioms AlgebraicGeometry.ProEtale.exists_lisse_lattice_reduced_open

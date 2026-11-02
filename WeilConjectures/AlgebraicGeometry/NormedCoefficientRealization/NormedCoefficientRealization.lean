@@ -215,8 +215,7 @@ private theorem integers_norm (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type u) [NormedField E] [Algebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
     (hE : ∀ x : ℚ_[ℓ], ‖algebraMap ℚ_[ℓ] E x‖ = ‖x‖) (x : E) :
     x ∈ Padic.coefficientExtensionIntegers ℓ E ↔ ‖x‖ ≤ 1 := by
-  have h := (Padic.extension_integers_dvr ℓ E (Padic.coefficientExtensionAbsoluteValue ℓ E)
-    (spectralNorm_extends (K := ℚ_[ℓ]) (L := E))).choose_spec.choose_spec.1 x
+  have h := Padic.mem_coefficientExtensionIntegers ℓ E x
   change x ∈ Padic.coefficientExtensionIntegers ℓ E ↔ spectralNorm ℚ_[ℓ] E x ≤ 1 at h
   rw [← norm_spectral ℓ E hE x] at h
   exact h

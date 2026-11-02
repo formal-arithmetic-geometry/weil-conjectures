@@ -55,6 +55,21 @@ theorem condensedCoefficientMap_id
   change coefficientMap (Profinite.padicSubfieldRingObjMap ℓ (le_refl E)) T = _
   rw [Profinite.padicSubfieldRingObjMap_id, coefficientMap_id]
 
+/-- Exactness of the composite finite coefficient extension.
+Source: TwoColimit.lean, ExtendScalars
+(blueprint: def-weil-pbc-condensed-coefficient-comparisons).
+Proof: composition identifies this ring map with the direct coefficient inclusion.
+Transport its exactness through `Mod.extendScalarsIsoOfEq`; the direct inclusion is
+exact by Compatibility.lean, Flat. This fixes only a proof, not any comparison data. -/
+theorem condensedCoefficientCompositeExact
+    {E F G : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)}
+    (h : E ≤ F) (k : F ≤ G) :
+    PreservesFiniteLimits
+      (Mod.extendScalars (padicSubfieldRingObjMap T ℓ h ≫
+        padicSubfieldRingObjMap T ℓ k)) := by
+  exact preservesFiniteLimits_of_natIso
+    (Mod.extendScalarsIsoOfEq (condensedCoefficientMap_comp T ℓ h k)).symm
+
 attribute [instance] condensedCoefficientCompositeExact
 
 /-- The canonical derived multiplication comparison for three finite coefficient fields.
