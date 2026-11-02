@@ -38,6 +38,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.BalancedTensorCon
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.BalancedTensorOriginalSectionsExt
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Bidual
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsAdjunction
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsTensorTransition
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsTransition
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainInverseComparison
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainModuleAdjunction
@@ -4906,7 +4907,10 @@ public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfec
 public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicQuotientCoordinateTower
 public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicQuotientDiagram
 public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicQuotientStrictRealization
+public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicQuotientStrictRealizationData
+public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicQuotientStrictRealizationSquare
 public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicQuotientTransition
+public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicQuotientTransitionUnique
 public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicQuotientTransitionUniversal
 public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicRealization
 public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicScalarCoherence
@@ -4921,6 +4925,7 @@ public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfec
 public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicSourcePresentation
 public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicStalkModels
 public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicStalkReduction
+public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicStrictRealizationComparison
 public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicTowerData
 public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicTowerExtraction
 public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicTowerLimit

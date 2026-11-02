@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicMarkedOrigin
 public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicScalarCoherence
 public import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicQuotientTransition
+import WeilConjectures.AlgebraicGeometry.Finite.Perfect.Adic.FinitePerfectAdicQuotientStrictRealizationSquare
 import WeilConjectures.CategoryTheory.DerivedCategory.AsFunctorLocalization
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryStrictSquare
 import WeilConjectures.CategoryTheory.Comma.StructuredArrowUniversalIso
@@ -84,6 +85,9 @@ theorem finitePerfectAdic_quotient_strict_realization
         (B (n + 1)).hom.app N ≫
           (SheafOfModules.overFunctor (completedAdicRing X d) W).map
             (((completedAdicOrdinaryTower X d).obj N).map (homOfLE (Nat.le_succ n)).op) := by
-  sorry
+  -- The finite comparisons are determined by their compatibility, so `hφ` is not needed.
+  have _ := hφ
+  exact ⟨finitePerfectAdicQuotientStrictRealizationIso X d φ hcompat V U W f,
+    fun n N ↦ finitePerfectAdicQuotientStrictRealizationIso_square X d φ hcompat V δ hδ U W f n N⟩
 
 end AlgebraicGeometry.Scheme
