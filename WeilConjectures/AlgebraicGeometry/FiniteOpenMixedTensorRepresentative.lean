@@ -5,67 +5,38 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMon.Comparison
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMon.Derived
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.FlatModuleCat
-public import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
+public import WeilConjectures.AlgebraicGeometry.MixedRepForward.MixedRepresentationGeneral
+import WeilConjectures.AlgebraicGeometry.MixedRepForward.ForwardTransportGeneral
 import WeilConjectures.CategoryTheory.FiniteOpenMixedTensorRepresentativeCounit
-import WeilConjectures.AlgebraicGeometry.MixedRepForward.FiniteOpenMixedTensorRepresentativeForward
-import WeilConjectures.CategoryTheory.FiniteOpenMixedTensorRepresentativeInverse
 
 /-!
 # Counit and cochain representative equations for the published mixed open tensor comparison
 
 Source: Stacks Project, sites-cohomology.tex, Tag 07A4 (lemma-pullback-tensor-product)
 (blueprint: lem-sf-finite-open-mixed-tensor-representative).
+The statement is given for an arbitrary coefficient category; the finite coefficient
+case `Mod_A` is obtained by instantiation.
 -/
 
 @[expose] public section
 set_option autoImplicit false
 
-universe u
+universe u' u
 
 open CategoryTheory Limits MonoidalCategory
 open scoped CategoryTheory.Functor
-
-private theorem mixedRep_cochain_tensor_obj
-    {C : Type*} [Category.{u + 1} C] [Abelian C]
-    [IsGrothendieckAbelian.{u + 1} C]
-    [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
-    (P Q : CochainComplex C ℤ) :
-    P ⊗ Q = HomologicalComplex.mapBifunctor P Q (curriedTensor C) (.up ℤ) := rfl
 
 namespace AlgebraicGeometry.ProEtale
 
 open AlgebraicGeometry Scheme
 
-variable {A : Type (u + 1)} [CommRing A] [Finite A]
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A] [ProEtale.UpperStarPreservesFlat A]
 variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 
-/-- The coefficient category `Sh(Y_proét, Mod_A)` on the small pro-étale site of `Y`.
-Source: Stacks Project, sites-cohomology.tex, Tag 07A4
-(blueprint: lem-sf-finite-open-mixed-tensor-representative). -/
-noncomputable abbrev FiniteCoeffSheaf (Y : Scheme.{u}) :=
-  Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} A)
-
-/-- The published pro-étale pullback `j^*` on `Mod_A`-valued sheaves.
-Source: Stacks Project, sites-cohomology.tex, Tag 07A4
-(blueprint: lem-sf-finite-open-mixed-tensor-representative). -/
-noncomputable abbrev FiniteCoeffUpperStar (j : U ⟶ X) :=
-  (j)^*[ModuleCat.{u + 1} A]
-
-/-- The curried sheaf tensor product of `Sh(Y_proét, Mod_A)`, whose `mapBifunctor` is the
-signed direct-sum total tensor of cochain complexes.
-Source: Stacks Project, sites-cohomology.tex, Tag 07A4
-(blueprint: lem-sf-finite-open-mixed-tensor-representative). -/
-noncomputable abbrev FiniteCoeffCoTensor (Y : Scheme.{u}) :=
-  curriedTensor (FiniteCoeffSheaf (A := A) Y)
-
-set_option maxHeartbeats 1000000 in
--- Checking the concrete native sheaf tensor instances requires a larger kernel budget.
-/-- For a finite commutative ring `A` and an open immersion `j : U ⟶ X`, with
-`F = j^*` on pro-étale `Mod_A`-sheaves, `κ : LF ≅ DF`, `a : DF ∘ Q_X ≅ Q_U ∘ F_c`, `φ` the
+/-- For a coefficient category `A` and an open immersion `j : U ⟶ X`, with
+`F = j^*` on pro-étale `A`-valued sheaves, `κ : LF ≅ DF`, `a : DF ∘ Q_X ≅ Q_U ∘ F_c`, `φ` the
 published left-derived tensor comparison, `μ` the native lax tensorators of the cochain
 localizations and `c` the signed total of the oplax tensorator of `F`:
 (1) the left-derived counit at the homotopy image of `P`, transported along
@@ -96,102 +67,79 @@ Step 4. Naturality of `κ` gives `κ ≫ DF(μ^X) = LF(μ^X) ≫ κ`, so the lef
 (blueprint: lem-sf-finite-open-mixed-tensor-representative)
 -/
 theorem finiteOpenMixedTensorRepresentative
-    (P Q : CochainComplex (FiniteCoeffSheaf (A := A) X) ℤ) :
-    L(FiniteCoeffUpperStar (A := A) j).map
-        ((DerivedCategory.quotientCompQhIso (FiniteCoeffSheaf (A := A) X)).inv.app P) ≫
-      (FiniteCoeffUpperStar (A := A) j).leftDerivedFunctorCounit.app
+    (P Q : CochainComplex (Sheaf (Scheme.ProEt.topology X) A) ℤ) :
+    L((j)^*[A]).map
+        ((DerivedCategory.quotientCompQhIso (Sheaf (Scheme.ProEt.topology X) A)).inv.app P) ≫
+      (j)^*[A].leftDerivedFunctorCounit.app
         ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ≫
       DerivedCategory.Qh.map
-        (((FiniteCoeffUpperStar (A := A) j).mapHomotopyCategoryFactors (.up ℤ)).inv.app P) ≫
-      (DerivedCategory.quotientCompQhIso (FiniteCoeffSheaf (A := A) U)).hom.app
-        (((FiniteCoeffUpperStar (A := A) j).mapHomologicalComplex (.up ℤ)).obj P) =
-      (FiniteCoeffUpperStar (A := A) j).leftDerivedFunctorIsoMapDerivedCategory.hom.app
-        ((DerivedCategory.Q (C := FiniteCoeffSheaf (A := A) X)).obj P) ≫
-        (FiniteCoeffUpperStar (A := A) j).mapDerivedCategoryFactors.hom.app P ∧
+        (((j)^*[A].mapHomotopyCategoryFactors (.up ℤ)).inv.app P) ≫
+      (DerivedCategory.quotientCompQhIso (Sheaf (Scheme.ProEt.topology U) A)).hom.app
+        (((j)^*[A].mapHomologicalComplex (.up ℤ)).obj P) =
+      (j)^*[A].leftDerivedFunctorIsoMapDerivedCategory.hom.app
+        ((DerivedCategory.Q (C := Sheaf (Scheme.ProEt.topology X) A)).obj P) ≫
+        (j)^*[A].mapDerivedCategoryFactors.hom.app P ∧
     ((AlgebraicGeometry.ProEtale.leftDerivedUpperStarTensorNatIso
-      (ModuleCat.{u + 1} A) j).hom.app
-      ((DerivedCategory.Q (C := FiniteCoeffSheaf (A := A) X)).obj P)).app
-      ((DerivedCategory.Q (C := FiniteCoeffSheaf (A := A) X)).obj Q) ≫
-      ((FiniteCoeffUpperStar (A := A) j).leftDerivedFunctorIsoMapDerivedCategory.hom.app
-        ((DerivedCategory.Q (C := FiniteCoeffSheaf (A := A) X)).obj P) ≫
-        (FiniteCoeffUpperStar (A := A) j).mapDerivedCategoryFactors.hom.app P ⊗ₘ
-       (FiniteCoeffUpperStar (A := A) j).leftDerivedFunctorIsoMapDerivedCategory.hom.app
-        ((DerivedCategory.Q (C := FiniteCoeffSheaf (A := A) X)).obj Q) ≫
-        (FiniteCoeffUpperStar (A := A) j).mapDerivedCategoryFactors.hom.app Q) ≫
+      A j).hom.app
+      ((DerivedCategory.Q (C := Sheaf (Scheme.ProEt.topology X) A)).obj P)).app
+      ((DerivedCategory.Q (C := Sheaf (Scheme.ProEt.topology X) A)).obj Q) ≫
+      ((j)^*[A].leftDerivedFunctorIsoMapDerivedCategory.hom.app
+        ((DerivedCategory.Q (C := Sheaf (Scheme.ProEt.topology X) A)).obj P) ≫
+        (j)^*[A].mapDerivedCategoryFactors.hom.app P ⊗ₘ
+       (j)^*[A].leftDerivedFunctorIsoMapDerivedCategory.hom.app
+        ((DerivedCategory.Q (C := Sheaf (Scheme.ProEt.topology X) A)).obj Q) ≫
+        (j)^*[A].mapDerivedCategoryFactors.hom.app Q) ≫
       (Functor.LaxMonoidal.μ (DerivedCategory.Q
-        (C := FiniteCoeffSheaf (A := A) U))
-        (((FiniteCoeffUpperStar (A := A) j).mapHomologicalComplex (.up ℤ)).obj P)
-        (((FiniteCoeffUpperStar (A := A) j).mapHomologicalComplex (.up ℤ)).obj Q)) =
-      L(FiniteCoeffUpperStar (A := A) j).map
-        (Functor.LaxMonoidal.μ (DerivedCategory.Q (C := FiniteCoeffSheaf (A := A) X)) P Q) ≫
-      ((FiniteCoeffUpperStar (A := A) j).leftDerivedFunctorIsoMapDerivedCategory.hom.app
-        ((DerivedCategory.Q (C := FiniteCoeffSheaf (A := A) X)).obj
+        (C := Sheaf (Scheme.ProEt.topology U) A))
+        (((j)^*[A].mapHomologicalComplex (.up ℤ)).obj P)
+        (((j)^*[A].mapHomologicalComplex (.up ℤ)).obj Q)) =
+      L((j)^*[A]).map
+        (Functor.LaxMonoidal.μ (DerivedCategory.Q (C := Sheaf (Scheme.ProEt.topology X) A)) P Q) ≫
+      ((j)^*[A].leftDerivedFunctorIsoMapDerivedCategory.hom.app
+        ((DerivedCategory.Q (C := Sheaf (Scheme.ProEt.topology X) A)).obj
           (HomologicalComplex.mapBifunctor P Q
-            (FiniteCoeffCoTensor (A := A) X) (.up ℤ))) ≫
-        (FiniteCoeffUpperStar (A := A) j).mapDerivedCategoryFactors.hom.app
+            (curriedTensor (Sheaf (Scheme.ProEt.topology X) A)) (.up ℤ))) ≫
+        (j)^*[A].mapDerivedCategoryFactors.hom.app
           (HomologicalComplex.mapBifunctor P Q
-            (FiniteCoeffCoTensor (A := A) X) (.up ℤ))) ≫
-      (DerivedCategory.Q (C := FiniteCoeffSheaf (A := A) U)).map
+            (curriedTensor (Sheaf (Scheme.ProEt.topology X) A)) (.up ℤ))) ≫
+      (DerivedCategory.Q (C := Sheaf (Scheme.ProEt.topology U) A)).map
         (((Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans (.up ℤ)
-          (FiniteCoeffUpperStar (A := A) j)).app P).app Q) ∧
-    (((FiniteCoeffUpperStar (A := A) j).leftDerivedFunctorIsoMapDerivedCategory.inv.app
-        ((DerivedCategory.Q (C := FiniteCoeffSheaf (A := A) X)).obj P)) ⊗ₘ 𝟙 _) ≫
+          (j)^*[A]).app P).app Q) ∧
+    (((j)^*[A].leftDerivedFunctorIsoMapDerivedCategory.inv.app
+        ((DerivedCategory.Q (C := Sheaf (Scheme.ProEt.topology X) A)).obj P)) ⊗ₘ 𝟙 _) ≫
       ((AlgebraicGeometry.ProEtale.leftDerivedUpperStarTensorNatIso
-        (ModuleCat.{u + 1} A) j).inv.app
-        ((DerivedCategory.Q (C := FiniteCoeffSheaf (A := A) X)).obj P)).app
-        ((DerivedCategory.Q (C := FiniteCoeffSheaf (A := A) X)).obj Q) ≫
-      (FiniteCoeffUpperStar (A := A) j).leftDerivedFunctorIsoMapDerivedCategory.hom.app
-        (((-⊗ᴸ-(X)[ModuleCat.{u + 1} A]).obj
-          ((DerivedCategory.Q (C := FiniteCoeffSheaf (A := A) X)).obj P)).obj
-          ((DerivedCategory.Q (C := FiniteCoeffSheaf (A := A) X)).obj Q)) ≫
-      (FiniteCoeffUpperStar (A := A) j).mapDerivedCategory.map
-        (Functor.LaxMonoidal.μ (DerivedCategory.Q (C := FiniteCoeffSheaf (A := A) X)) P Q) ≫
-      (FiniteCoeffUpperStar (A := A) j).mapDerivedCategoryFactors.hom.app
+        A j).inv.app
+        ((DerivedCategory.Q (C := Sheaf (Scheme.ProEt.topology X) A)).obj P)).app
+        ((DerivedCategory.Q (C := Sheaf (Scheme.ProEt.topology X) A)).obj Q) ≫
+      (j)^*[A].leftDerivedFunctorIsoMapDerivedCategory.hom.app
+        (((-⊗ᴸ-(X)[A]).obj
+          ((DerivedCategory.Q (C := Sheaf (Scheme.ProEt.topology X) A)).obj P)).obj
+          ((DerivedCategory.Q (C := Sheaf (Scheme.ProEt.topology X) A)).obj Q)) ≫
+      (j)^*[A].mapDerivedCategory.map
+        (Functor.LaxMonoidal.μ (DerivedCategory.Q (C := Sheaf (Scheme.ProEt.topology X) A)) P Q) ≫
+      (j)^*[A].mapDerivedCategoryFactors.hom.app
         (HomologicalComplex.mapBifunctor P Q
-          (FiniteCoeffCoTensor (A := A) X) (.up ℤ)) =
-      ((FiniteCoeffUpperStar (A := A) j).mapDerivedCategoryFactors.hom.app P ⊗ₘ
-        ((FiniteCoeffUpperStar (A := A) j).leftDerivedFunctorIsoMapDerivedCategory.hom.app
-          ((DerivedCategory.Q (C := FiniteCoeffSheaf (A := A) X)).obj Q) ≫
-          (FiniteCoeffUpperStar (A := A) j).mapDerivedCategoryFactors.hom.app Q)) ≫
+          (curriedTensor (Sheaf (Scheme.ProEt.topology X) A)) (.up ℤ)) =
+      ((j)^*[A].mapDerivedCategoryFactors.hom.app P ⊗ₘ
+        ((j)^*[A].leftDerivedFunctorIsoMapDerivedCategory.hom.app
+          ((DerivedCategory.Q (C := Sheaf (Scheme.ProEt.topology X) A)).obj Q) ≫
+          (j)^*[A].mapDerivedCategoryFactors.hom.app Q)) ≫
       (Functor.LaxMonoidal.μ (DerivedCategory.Q
-        (C := FiniteCoeffSheaf (A := A) U))
-        (((FiniteCoeffUpperStar (A := A) j).mapHomologicalComplex (.up ℤ)).obj P)
-        (((FiniteCoeffUpperStar (A := A) j).mapHomologicalComplex (.up ℤ)).obj Q)) ≫
-      inv ((DerivedCategory.Q (C := FiniteCoeffSheaf (A := A) U)).map
+        (C := Sheaf (Scheme.ProEt.topology U) A))
+        (((j)^*[A].mapHomologicalComplex (.up ℤ)).obj P)
+        (((j)^*[A].mapHomologicalComplex (.up ℤ)).obj Q)) ≫
+      inv ((DerivedCategory.Q (C := Sheaf (Scheme.ProEt.topology U) A)).map
         (((Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans (.up ℤ)
-          (FiniteCoeffUpperStar (A := A) j)).app P).app Q)) := by
-  constructor
-  · have h := CategoryTheory.Functor.leftDerivedFactors_eq_counit
-      (FiniteCoeffUpperStar (A := A) j) P
-    rw [h]
-    dsimp only [DerivedCategory.quotientCompQhIso,
-      HomologicalComplexUpToQuasiIso.quotientCompQhIso,
-      Quotient.lift.isLift_hom, Quotient.lift.isLift_inv,
-      CategoryTheory.Functor.mapHomotopyCategoryFactors]
-    erw [CategoryTheory.Functor.map_id, Category.id_comp,
-      CategoryTheory.Functor.map_id, Category.comp_id, Category.comp_id]
-  · have hf := MixedRepForward.forward_transport j P Q
-    refine ⟨hf, ?_⟩
-    apply CategoryTheory.mixedTensor_inverse_transport
-      L(FiniteCoeffUpperStar (A := A) j)
-      (FiniteCoeffUpperStar (A := A) j).mapDerivedCategory
-      (FiniteCoeffUpperStar (A := A) j).leftDerivedFunctorIsoMapDerivedCategory
-      (((leftDerivedUpperStarTensorNatIso (ModuleCat.{u + 1} A) j).app
-        (DerivedCategory.Q.obj P)).app (DerivedCategory.Q.obj Q))
-      (Functor.LaxMonoidal.μ (DerivedCategory.Q (C := FiniteCoeffSheaf (A := A) X)) P Q)
-      ((FiniteCoeffUpperStar (A := A) j).mapDerivedCategoryFactors.hom.app P)
-      ((FiniteCoeffUpperStar (A := A) j).mapDerivedCategoryFactors.hom.app Q)
-      ((FiniteCoeffUpperStar (A := A) j).mapDerivedCategoryFactors.hom.app
-        (HomologicalComplex.mapBifunctor P Q (FiniteCoeffCoTensor (A := A) X) (.up ℤ)))
-      (Functor.LaxMonoidal.μ (DerivedCategory.Q (C := FiniteCoeffSheaf (A := A) U))
-        (((FiniteCoeffUpperStar (A := A) j).mapHomologicalComplex (.up ℤ)).obj P)
-        (((FiniteCoeffUpperStar (A := A) j).mapHomologicalComplex (.up ℤ)).obj Q))
-      (asIso ((DerivedCategory.Q (C := FiniteCoeffSheaf (A := A) U)).map
-        (((Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans (.up ℤ)
-          (FiniteCoeffUpperStar (A := A) j)).app P).app Q)))
-    simpa only [FiniteCoeffUpperStar, FiniteCoeffCoTensor, derivedTensor,
-      leftDerivedUpperStarDerivedTensor, Functor.postcompose₂_obj_obj_obj_obj,
-      MonoidalCategory.curriedTensor_obj_obj, mixedRep_cochain_tensor_obj,
-      Category.assoc, Iso.app_hom, asIso_hom] using hf
+          (j)^*[A]).app P).app Q)) := by
+  refine ⟨?_, MixedRepForward.forward_transport_general A j P Q,
+    MixedRepForward.mixed_inverse_transport_general A j P Q⟩
+  have h := CategoryTheory.Functor.leftDerivedFactors_eq_counit ((j)^*[A]) P
+  rw [h]
+  dsimp only [DerivedCategory.quotientCompQhIso,
+    HomologicalComplexUpToQuasiIso.quotientCompQhIso,
+    Quotient.lift.isLift_hom, Quotient.lift.isLift_inv,
+    CategoryTheory.Functor.mapHomotopyCategoryFactors]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp,
+    CategoryTheory.Functor.map_id, Category.comp_id, Category.comp_id]
 
 end AlgebraicGeometry.ProEtale

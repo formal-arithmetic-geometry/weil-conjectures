@@ -5,89 +5,46 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriekProj
-public import WeilConjectures.AlgebraicGeometry.FiniteOpenMixedTensorRepresentative
+public import WeilConjectures.AlgebraicGeometry.MixedRepForward.MixedRepresentationGeneral
 
-/-! Mixed localization representative normalization. -/
+/-! Mixed localization representative normalization, for an arbitrary coefficient category. -/
 
-@[expose] public noncomputable section
+@[expose] public section
 set_option autoImplicit false
-universe u
+universe u' u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
 open AlgebraicGeometry AlgebraicGeometry.Scheme
+open scoped AlgebraicGeometry.ProEtale CategoryTheory.Functor
 namespace SheafOfModules.OpenTensorNormalization
 
-set_option maxHeartbeats 2000000 in
--- Normalize only the published mixed comparison components.
-/-- Normalizes the published mixed tensor representative equation to the finite model
-aliases used by the restriction square. Source: Stacks Tag 07A4, clause (3) of
-`finiteOpenMixedTensorRepresentative`. The proof expands the finite total and the
-canonical map-derived tensor comparison, transports the inverse of the oplax map by
-`Functor.map_inv`, and identifies the derived tensor map with tensoring by the identity.
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A] [ProEtale.UpperStarPreservesFlat A]
+
+/-- Normalizes the published mixed tensor representative equation to the model aliases used
+by the restriction square. Source: Stacks Tag 07A4, clause (3) of
+`finiteOpenMixedTensorRepresentative`. The proof expands the canonical map-derived tensor
+comparison, transports the inverse of the oplax map by `Functor.map_inv`, and identifies the
+derived tensor map with tensoring by the identity; see `mixed_representation_general`.
 (blueprint: lem-sf-mixed-representation-normalized) -/
 theorem mixed_representation_normalized
-    (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
-    (P Q : CochainComplex (ProEtale.FiniteCoeffSheaf (A := A) X) ℤ) :
-    let F := ProEtale.FiniteCoeffUpperStar (A := A) j
+    (P Q : CochainComplex (Sheaf (Scheme.ProEt.topology X) A) ℤ) :
+    let F := (j)^*[A]
     let a := F.mapDerivedCategoryFactors.hom
     let muX := Functor.LaxMonoidal.μ
-      (DerivedCategory.Q (C := ProEtale.FiniteCoeffSheaf (A := A) X)) P Q
+      (DerivedCategory.Q (C := Sheaf (Scheme.ProEt.topology X) A)) P Q
     let fc := F.mapHomologicalComplex (.up ℤ)
-    let muU := Functor.LaxMonoidal.μ (DerivedCategory.Q (C := ProEtale.FiniteCoeffSheaf (A := A) U))
+    let muU := Functor.LaxMonoidal.μ (DerivedCategory.Q (C := Sheaf (Scheme.ProEt.topology U) A))
       (fc.obj P) (fc.obj Q)
     let c := ((Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans (.up ℤ) F).app P).app Q
-    let delta := ((ProEtale.mapDerivedCategoryUpperStarDerivedTensorIso
-      (ModuleCat.{u + 1} A) j).hom.app (DerivedCategory.Q.obj P)).app
-        (DerivedCategory.Q.obj Q)
+    let delta := ((ProEtale.mapDerivedCategoryUpperStarDerivedTensorIso A j).hom.app
+      (DerivedCategory.Q.obj P)).app (DerivedCategory.Q.obj Q)
     let n := a.app P ⊗ₘ (F.leftDerivedFunctorIsoMapDerivedCategory.hom.app
       (DerivedCategory.Q.obj Q) ≫ a.app Q)
     delta ≫ F.mapDerivedCategory.map muX ≫ a.app (HomologicalComplex.mapBifunctor P Q
-      (ProEtale.FiniteCoeffCoTensor (A := A) X) (.up ℤ)) =
-      n ≫ muU ≫ DerivedCategory.Q.map (inv c) := by
-  dsimp only
-  let F := ProEtale.FiniteCoeffUpperStar (A := A) j
-  let a := F.mapDerivedCategoryFactors.hom
-  let muX := Functor.LaxMonoidal.μ
-    (DerivedCategory.Q (C := ProEtale.FiniteCoeffSheaf (A := A) X)) P Q
-  let fc := F.mapHomologicalComplex (.up ℤ)
-  let muU := Functor.LaxMonoidal.μ (DerivedCategory.Q (C := ProEtale.FiniteCoeffSheaf (A := A) U))
-    (fc.obj P) (fc.obj Q)
-  let c := ((Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans (.up ℤ) F).app P).app Q
-  let delta := ((ProEtale.mapDerivedCategoryUpperStarDerivedTensorIso
-    (ModuleCat.{u + 1} A) j).hom.app (DerivedCategory.Q.obj P)).app (DerivedCategory.Q.obj Q)
-  let n := a.app P ⊗ₘ (F.leftDerivedFunctorIsoMapDerivedCategory.hom.app
-    (DerivedCategory.Q.obj Q) ≫ a.app Q)
-  have hdelta : delta =
-      ((ProEtale.derivedTensor (ModuleCat.{u + 1} A) U).map
-        ((ProEtale.leftDerivedUpperStarIsoMapDerivedCategory
-          (ModuleCat.{u + 1} A) j).inv.app (DerivedCategory.Q.obj P))).app
-          (F.leftDerivedFunctor.obj (DerivedCategory.Q.obj Q)) ≫
-      ((ProEtale.leftDerivedUpperStarTensorNatIso
-        (ModuleCat.{u + 1} A) j).inv.app (DerivedCategory.Q.obj P)).app
-        (DerivedCategory.Q.obj Q) ≫
-      (ProEtale.leftDerivedUpperStarIsoMapDerivedCategory
-        (ModuleCat.{u + 1} A) j).hom.app
-        (((ProEtale.derivedTensor (ModuleCat.{u + 1} A) X).obj
-          (DerivedCategory.Q.obj P)).obj (DerivedCategory.Q.obj Q)) := by
-    rfl
-  have hdelta' : delta =
-      (F.leftDerivedFunctorIsoMapDerivedCategory.inv.app (DerivedCategory.Q.obj P) ⊗ₘ
-        𝟙 (F.leftDerivedFunctor.obj (DerivedCategory.Q.obj Q))) ≫
-      ((ProEtale.leftDerivedUpperStarTensorNatIso
-        (ModuleCat.{u + 1} A) j).inv.app (DerivedCategory.Q.obj P)).app
-        (DerivedCategory.Q.obj Q) ≫
-      F.leftDerivedFunctorIsoMapDerivedCategory.hom.app
-        (DerivedCategory.Q.obj P ⊗ DerivedCategory.Q.obj Q) := by
-    rw [hdelta]
-    simp only [ProEtale.leftDerivedUpperStarIsoMapDerivedCategory,
-      ProEtale.derivedTensor, curriedTensor_map_app, tensorHom_id]
-    rfl
-  change delta ≫ F.mapDerivedCategory.map muX ≫ a.app (HomologicalComplex.mapBifunctor P Q
-      (ProEtale.FiniteCoeffCoTensor (A := A) X) (.up ℤ)) =
-    n ≫ muU ≫ DerivedCategory.Q.map (inv c)
-  rw [hdelta', Functor.map_inv]
-  simp only [Category.assoc]
-  exact (ProEtale.finiteOpenMixedTensorRepresentative (A := A) j P Q).2.2
+      (curriedTensor (Sheaf (Scheme.ProEt.topology X) A)) (.up ℤ)) =
+      n ≫ muU ≫ DerivedCategory.Q.map (inv c) :=
+  AlgebraicGeometry.ProEtale.MixedRepForward.mixed_representation_general A j P Q
 
 end SheafOfModules.OpenTensorNormalization
