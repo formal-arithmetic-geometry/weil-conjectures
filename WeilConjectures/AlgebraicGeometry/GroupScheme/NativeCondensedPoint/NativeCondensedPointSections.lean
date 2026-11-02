@@ -66,4 +66,35 @@ def sections (k : Type u) [Field k] :
   preadditiveCoyonedaObj (𝟙_ (Modules Λ (Spec (.of k)))) ⋙
     ModuleCat.restrictScalars (scalarsOp Λ k)
 
+/-- Exactness of terminal scalar sections at an algebraically closed point.
+Source: Stacks 03CW, 0946 (blueprint: lem-weil-point-proetale-sections-exact).
+Proof: every cover of the algebraically closed point has a section, since that affine
+point is weakly contractible. Thus local lifts of a section through an epimorphism glue
+via a chosen section of the cover to a global lift. Kernels are computed sectionwise.
+Hom from the regular module is terminal module evaluation, and restricting the scalar
+action preserves both kernels and cokernels. Hence the displayed functor is exact. -/
+theorem sections_exact (k : Type u) [Field k] [IsAlgClosed k] :
+    PreservesFiniteLimits (sections Λ k) ∧ PreservesFiniteColimits (sections Λ k) := by
+  let F := sections Λ k
+  have : F.Additive := by
+    unfold F sections
+    infer_instance
+  have hlim : PreservesFiniteLimits F := by
+    refine ⟨fun J _ _ ↦ ?_⟩
+    have : PreservesLimitsOfShape J (F ⋙
+        forget₂ (ModuleCat.{u + 1} (MonObj.Γ Λ)) Ab.{u + 1}) :=
+      inferInstanceAs (PreservesLimitsOfShape J
+        (preadditiveCoyonedaObj
+          (Mod.regular (condensedRingObj Λ (Spec (.of k)))) ⋙ forget₂ _ Ab.{u + 1}))
+    exact preservesLimitsOfShape_of_reflects_of_preserves F
+      (forget₂ (ModuleCat.{u + 1} (MonObj.Γ Λ)) Ab.{u + 1})
+  have : F.PreservesEpimorphisms := ⟨fun {M N} f hf ↦ by
+    apply (ModuleCat.epi_iff_surjective (F.map f)).2
+    intro x
+    obtain ⟨y, hy⟩ := Projective.factors
+      (show Mod.regular (condensedRingObj Λ (Spec (.of k))) ⟶ N from x) f
+    exact ⟨y, hy⟩⟩
+  have : F.PreservesHomology := Functor.preservesHomology_of_preservesEpis_and_kernels F
+  exact ⟨hlim, Functor.preservesFiniteColimits_of_preservesHomology F⟩
+
 end WeilConjectures.NativeCondensedPoint
