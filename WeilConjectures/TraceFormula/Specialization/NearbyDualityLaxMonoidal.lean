@@ -394,15 +394,6 @@ noncomputable abbrev boundedConstructibleLowerStarLaxMonoidal :
     (boundedConstructibleLowerStar ℓ f).LaxMonoidal :=
   (boundedConstructibleUpperStarLowerStarAdjunction ℓ f).rightAdjointLaxMonoidal
 
-set_option maxHeartbeats 1000000 in
--- the concrete ℚ̲̄_ℓ-coefficient functors are unfolded when matching the generic statements
-/-- The comparison `δ` of the restricted pullback is that of the ambient derived pullback. -/
-lemma δ_boundedConstructibleUpperStar_hom' (A B : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (Functor.OplaxMonoidal.δ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f) A
-        B).hom =
-      Functor.OplaxMonoidal.δ L((f.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧) A.obj B.obj :=
-  rfl
-
 end LaxMonoidal
 
 end AlgebraicGeometry.ProEtale.CondensedRing
