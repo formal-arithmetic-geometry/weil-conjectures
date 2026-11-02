@@ -14,14 +14,14 @@ import WeilConjectures.SmoothPurity.IntegralSystemRealization.IntegralTensorRigh
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-universe u t
+universe u
 open CategoryTheory AlgebraicGeometry
 namespace WeilConjectures.IntegralSystemRealization
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-private theorem roosShiftOnSite_hom_app (W : AlgebraicGeometry.Scheme.{t}) (r : ℤ)
+private theorem roosShiftOnSite_hom_app (W : AlgebraicGeometry.Scheme.{u}) (r : ℤ)
     (β : finiteShiftIsoType l E W r) (P Q : CochainComplex (integralTowerModules l E W) ℤ) :
     (roosShiftOnSite l E W r β).hom.app (P, Q) =
       (completedTensorShiftRoosIso

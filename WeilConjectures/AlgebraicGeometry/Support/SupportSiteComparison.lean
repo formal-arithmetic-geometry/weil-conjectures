@@ -255,7 +255,7 @@ set_option backward.defeqAttrib.useBackward true
 
 namespace CachedConstantCoherence
 section
-attribute [-instance] supportedSheaf_isMonoidal supportedSheaf_monoidalPreadditive
+attribute [-instance] supportedSheaf_monoidalPreadditive
   supportedSheaf_isMonoidalGeneric supportedSheaf_monoidalPreadditiveGeneric
 private noncomputable def constantComparison (D : Type v₁) [Category.{u + 1} D] [Abelian D]
     [IsGrothendieckAbelian.{u + 1} D]
@@ -651,7 +651,7 @@ set_option backward.isDefEq.respectTransparency.types true
 set_option backward.defeqAttrib.useBackward true
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 attribute [local instance] supportedCoefficients_isLeftAdjoint
-attribute [-instance] supportedSheaf_isMonoidal supportedSheaf_monoidalPreadditive
+attribute [-instance] supportedSheaf_monoidalPreadditive
   supportedSheaf_isMonoidalGeneric supportedSheaf_monoidalPreadditiveGeneric
 
 open MonoidalCategory

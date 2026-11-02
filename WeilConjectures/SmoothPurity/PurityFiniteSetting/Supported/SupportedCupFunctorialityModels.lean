@@ -267,6 +267,10 @@ abbrev functorialCupSheaves (P : PurityFiniteSetting.{u}) (pro : Bool) (X : Sche
     Scheme.{u}) :
     Category.{u + 1} (P.functorialCupSheaves pro X) := inferInstance
 
+instance functorialCupTopologySheafify (P : PurityFiniteSetting.{u}) (pro : Bool)
+    (X : Scheme.{u}) : HasSheafify (functorialCupTopology pro X)
+      (ModuleCat.{u + 1} P.Coefficient) := by cases pro <;> infer_instance
+
 @[reducible] instance functorialCupAbelian (P : PurityFiniteSetting.{u}) (pro : Bool) (X :
     Scheme.{u}) :
     Abelian (P.functorialCupSheaves pro X) := inferInstance

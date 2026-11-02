@@ -185,6 +185,7 @@ import all Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 import all Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 import all WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionBinaryCoherenceSupplement
 import all WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import all WeilConjectures.CategoryTheory.ConstantScalarTowerComparison
 
 /-! # Rational finite free models on the original strata
 
@@ -488,21 +489,8 @@ variable {D : Type (u + 1)} [Category.{u} D] {J : GrothendieckTopology D}
 private abbrev Rings := Sheaf J CommRingCat.{u + 1}
 private abbrev Modules (R : Sheaf J CommRingCat.{u + 1}) :=
   SheafOfModules.{u + 1} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)
-attribute [local irreducible] scalarCongrIso
-
-attribute [local irreducible] towerSquare
-
 end GenericTowers
 end
-
-section Coefficients
-variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
-  [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
-
-attribute [local irreducible] GenericTowers.towerSquare GenericTowers.scalarCongrIso
-attribute [local irreducible] inverseSquareIso
-
-end Coefficients
 
 section Coefficients
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
