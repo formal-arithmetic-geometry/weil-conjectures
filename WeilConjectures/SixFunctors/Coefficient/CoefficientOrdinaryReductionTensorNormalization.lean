@@ -482,40 +482,6 @@ theorem isIso_bifunctor_map_mkHom {A B : Type*} [Category* A] [Category* B] (T :
     rw [bifunctor_map_mkHom_comp, IsIso.inv_hom_id, IsIso.inv_hom_id, ← T.map_id]
     rfl⟩
 
-section ModelNaturality
-universe c v r d
-variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
-  [HasSheafify J AddCommGrpCat.{max c v r}]
-  [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}]
-  (R : Sheaf J CommRingCat.{max c v r})
-  [HasDerivedCategory.{d} (RingedTensorModules.{c, v, r} J R)]
-  (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, r, d} J R))
-  (T : CoefficientTensorModels.{r, c, v, d} J R S)
-
-/-- The K-flat tensor model comparison is natural in both inputs.
-Source: Stacks 06YU. -/
-theorem CoefficientTensorModels.iso_naturality
-    {P Q P' Q' : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ}
-    (hP : CochainComplex.IsKFlatIndependentCoefficients (R := R) P)
-    (hQ : CochainComplex.IsKFlatIndependentCoefficients (R := R) Q)
-    (hP' : CochainComplex.IsKFlatIndependentCoefficients (R := R) P')
-    (hQ' : CochainComplex.IsKFlatIndependentCoefficients (R := R) Q')
-    (f : P ⟶ P') (g : Q ⟶ Q') :
-    DerivedCategory.Q.map ((coefficientTotalTensor.{r, c, v} J R).map (Prod.mkHom f g)) ≫
-        (T.iso J R S P' Q' hP' hQ').hom =
-      (T.iso J R S P Q hP hQ).hom ≫
-        S.tensor.map (Prod.mkHom (DerivedCategory.Q.map f) (DerivedCategory.Q.map g)) := by
-  have h := T.comparison.hom.naturality
-    (Prod.mkHom (ObjectProperty.homMk (X := ⟨P, hP⟩) (Y := ⟨P', hP'⟩) f)
-      (ObjectProperty.homMk (X := ⟨Q, hQ⟩) (Y := ⟨Q', hQ'⟩) g))
-  unfold CoefficientTensorModels.iso
-  dsimp only [coefficientKFlatInclusion, Iso.app_hom,
-    Functor.comp_map, Functor.prod_map, Prod.mkHom, ObjectProperty.ι,
-    inducedFunctor, ObjectProperty.homMk] at h ⊢
-  exact h
-
-end ModelNaturality
-
 namespace OrdinaryQuotient
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
