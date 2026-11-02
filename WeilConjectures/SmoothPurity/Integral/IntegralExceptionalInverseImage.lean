@@ -228,9 +228,7 @@ private theorem exceptionalStages :
       (integralExceptionalIntegers l E) (integralExceptionalUniformizer l E) n) = 0) := by
   let O := Padic.coefficientExtensionIntegers l E
   let t := Padic.coefficientExtensionUniformizer l E
-  have hdvr := (Padic.extension_integers_dvr l E
-    (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  have hdvr := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   have : IsLocalRing O := hdvr.2.2.2.1
   have : IsDiscreteValuationRing O := hdvr.2.2.2.2.2.2.2.1
   have hgen : Ideal.span ({t} : Set O) = IsLocalRing.maximalIdeal O :=

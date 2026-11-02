@@ -83,6 +83,9 @@ Lemma 5.16; Stacks Project, Tag 0GL6
 -/
 
 @[expose] public noncomputable section
+
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false

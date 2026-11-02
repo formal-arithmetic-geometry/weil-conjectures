@@ -76,6 +76,9 @@ projection and the identity/composition theorems are in
 compile limit).
 -/
 @[expose] public noncomputable section
+
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
 set_option autoImplicit false
 set_option Elab.async true
 set_option linter.all false

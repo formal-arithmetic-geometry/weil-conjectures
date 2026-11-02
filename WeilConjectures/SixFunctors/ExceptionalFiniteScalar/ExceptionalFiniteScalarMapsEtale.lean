@@ -427,9 +427,7 @@ private theorem coefficient_annihilator (ell : ℕ) [Fact ell.Prime]
       (Padic.coefficientExtensionRing ell F (n + 1))) = 0 := by
   let O := Padic.coefficientExtensionIntegers ell F
   let m := Padic.coefficientExtensionMaximalIdeal ell F
-  have hs := (Padic.extension_integers_dvr ell F
-    (Padic.coefficientExtensionAbsoluteValue ell F)
-    (spectralNorm_extends (K := Padic ell) (L := F))).choose_spec.choose_spec
+  have hs := (Padic.coefficientExtensionIntegers_dvr ell F).choose_spec
   have hm : (ell : O) ∈ m := by
     apply (hs.2.1 (ell : O)).2
     have he := spectralNorm_extends (K := Padic ell) (L := F) (ell : Padic ell)

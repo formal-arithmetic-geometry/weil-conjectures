@@ -21,6 +21,9 @@ Source: blueprint fix-prop-coherence, basic structural maps
 -/
 
 @[expose] public noncomputable section
+
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
 set_option autoImplicit false
 set_option genSizeOfSpec false
 set_option genInjectivity false

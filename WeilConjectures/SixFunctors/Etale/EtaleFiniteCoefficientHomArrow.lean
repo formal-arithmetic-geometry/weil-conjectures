@@ -171,6 +171,15 @@ abbrev finiteHomEtaleCochainGeneral
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
+/-- The native category on the shared cochain type.
+Source: Stacks 06YN (blueprint: def-sf-etale-finite-coefficient-hom-arrow). -/
+@[instance_reducible] def finiteHomEtaleCochainCategoryGeneral
+    (A : Type a) [Category.{u + 1} A] [Abelian A]
+    [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
+    [SymmetricCategory A] [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
+    (W : Scheme.{u}) : Category.{u + 1} (finiteHomEtaleCochainGeneral A W) :=
+  (finiteHomEtaleTensorSourceGeneral A W).cochainCategory
+
 attribute [instance] finiteHomEtaleCochainCategoryGeneral
 
 set_option backward.isDefEq.respectTransparency true in

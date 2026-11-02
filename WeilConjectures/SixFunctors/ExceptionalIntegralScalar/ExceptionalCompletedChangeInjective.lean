@@ -42,9 +42,7 @@ theorem completedChange_injective (l : ℕ) [Fact l.Prime]
     rw [← scalarValue_map l E.carrier W L.carrier i,
       ← scalarValue_map l E.carrier W L.carrier j, hmap]
   let O := Padic.coefficientExtensionIntegers l E.carrier
-  have hO := (Padic.extension_integers_dvr l E.carrier
-    (Padic.coefficientExtensionAbsoluteValue l E.carrier)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E.carrier))).choose_spec.choose_spec
+  have hO := (Padic.coefficientExtensionIntegers_dvr l E.carrier).choose_spec
   have : IsFractionRing O E.carrier := hO.2.2.2.2.2.2.1
   apply AlgHom.coe_ringHom_injective
   apply IsLocalization.ringHom_ext (nonZeroDivisors O)

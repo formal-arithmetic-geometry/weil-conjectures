@@ -26,6 +26,9 @@ The data declarations are reexported from
 -/
 
 @[expose] public noncomputable section
+
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
 universe u

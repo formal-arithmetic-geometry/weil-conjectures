@@ -12,6 +12,9 @@ import WeilConjectures.SixFunctors.GeneratorReduction.GeneratorReductionData
 Source: the open-adjunction and clopen expansion of the coherence proof.
 -/
 @[expose] public noncomputable section
+
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false

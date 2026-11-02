@@ -367,12 +367,8 @@ on E. The integer rings are their unit balls, so the embedding preserves members
 theorem strictEtaleIntegerMap_mem (i : E →ₐ[Padic l] F)
     (x : Padic.coefficientExtensionIntegers l E) :
     i (x : E) ∈ Padic.coefficientExtensionIntegers l F := by
-  have hE := (Padic.extension_integers_dvr l E
-    (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
-  have hF := (Padic.extension_integers_dvr l F
-    (Padic.coefficientExtensionAbsoluteValue l F)
-    (spectralNorm_extends (K := Padic l) (L := F))).choose_spec.choose_spec
+  have hE := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
+  have hF := (Padic.coefficientExtensionIntegers_dvr l F).choose_spec
   apply (hF.1 _).mpr
   change spectralNorm (Padic l) F (i (x : E)) ≤ 1
   have hmap : spectralNorm (Padic l) F (i (x : E)) =

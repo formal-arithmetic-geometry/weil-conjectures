@@ -13,6 +13,9 @@ import all WeilConjectures.CategoryTheory.Finite.FiniteFreeExceptionalMate
 import WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor
 /-! # Finite-free strict etale scalar comparison -/
 @[expose] public noncomputable section
+
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
 set_option autoImplicit false
 set_option genInjectivity false
 set_option genSizeOfSpec false
@@ -106,8 +109,8 @@ private theorem transportBasis
       rw [he]
       infer_instance
     exact IsIso.of_isIso_comp_right _ (beta.hom.app (L.obj M))
-  have := Functor.isIso_map_biproductDesc F
-    (φ := fun i : Fin r ↦ adj.unit.app M ≫ R.map (coeff i • 𝟙 _))
+  have := (Functor.isIso_map_biproductDesc F
+    (fun i : Fin r ↦ adj.unit.app M ≫ R.map (coeff i • 𝟙 _))).2 this
   exact isIso_of_reflects_iso _ F
 
 private theorem scalarBasis

@@ -19,6 +19,9 @@ Source: Bhatt--Scholze 6.7.2, 6.8.14(2), Remark 6.8.15.
 -/
 
 @[expose] public noncomputable section
+
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false

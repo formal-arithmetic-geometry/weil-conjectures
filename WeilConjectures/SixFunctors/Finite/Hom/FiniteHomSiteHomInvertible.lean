@@ -158,8 +158,7 @@ theorem finiteHomSiteHomInvertible
   let : TopologicalSpace (ULift.{u + 1, u} A) := ⊥
   let : DiscreteTopology (ULift.{u + 1, u} A) := ⟨rfl⟩
   have hnil : ∃ r : ℕ, (l : ULift.{u + 1, u} A) ^ r = 0 := by
-    have hs := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-      (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+    have hs := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
     have hlmem : (l : Padic.coefficientExtensionIntegers l E) ∈
         Padic.coefficientExtensionMaximalIdeal l E := by
       apply (hs.2.1 _).mpr

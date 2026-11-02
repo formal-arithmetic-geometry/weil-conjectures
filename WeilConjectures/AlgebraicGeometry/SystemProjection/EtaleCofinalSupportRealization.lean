@@ -17,6 +17,9 @@ Source: Zheng, Construction 4.1 and the paragraph preceding Lemma 4.10.
 -/
 
 @[expose] public noncomputable section
+
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
 universe u a av b bv c cv d dv e ev g gv

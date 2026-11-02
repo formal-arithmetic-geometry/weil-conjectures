@@ -152,8 +152,7 @@ private theorem coefficient_invertibleExponent
   let : CharP D.k₀ D.p := charP_of_card_eq_prime_pow
     ((Nat.card_eq_fintype_card.symm.trans D.card_base).trans D.cardinality_eq)
   let : CharP D.k D.p := charP_of_injective_algebraMap' D.k₀ D.p
-  have h := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
+  have h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   have habv : Padic.coefficientExtensionAbsoluteValue l E (l : E) < 1 := by
     calc
       Padic.coefficientExtensionAbsoluteValue l E (l : E) = ‖(l : Padic l)‖ := by

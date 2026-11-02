@@ -37,6 +37,9 @@ Source: smooth-purity localization support paragraphs
 -/
 
 @[expose] public noncomputable section
+
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
 set_option autoImplicit false
 attribute [-instance] WeilConjectures.CompletedCoefficientPushforward.modAbelian
   WeilConjectures.CompletedCoefficientPushforward.hasDerived

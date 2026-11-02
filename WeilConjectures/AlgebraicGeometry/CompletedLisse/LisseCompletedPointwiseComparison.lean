@@ -19,6 +19,9 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 /-! # The comparison at one coefficient field and one scheme. -/
 
 @[expose] public noncomputable section
+
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option synthInstance.maxSize 2048
