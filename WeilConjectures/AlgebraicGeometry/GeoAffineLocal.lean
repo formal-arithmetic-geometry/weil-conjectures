@@ -482,7 +482,7 @@ localizations. Transport every construction and equation through the specified c
 -/
 theorem geoAffineLocal
     (ell : ℕ) [Fact ell.Prime]
-    (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ell)]
+    (k : Type u) [Field k] [Fact (ringChar k ≠ ell)]
     (hbase : Finite k ∨ IsAlgClosed k)
     (A : Type (u + 1)) [CommRing A] [Finite A] [TopologicalSpace A] [DiscreteTopology A]
     (S : Scheme.{u}) [S.Over (Spec (CommRingCat.of k))]

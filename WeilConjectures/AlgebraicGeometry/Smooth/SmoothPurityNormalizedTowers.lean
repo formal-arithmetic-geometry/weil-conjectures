@@ -144,4 +144,10 @@ def spNormalizedConstructibleTorTowers (D : SpCoefficientTowersAbelian l E T) :
     ObjectProperty (spDerivedCoefficientTowers l E T D) :=
   fun C ↦ spConstructibleTorTowers l E T D C ∧ IsSpNormalizedTower l E T D C
 
+/-- Dctf(T,O_E/ell^bullet)_norm. Fullness retains exactly the ambient morphisms,
+rather than replacing them by families of maps between evaluated derived objects.
+Source: blueprint, final sentence (blueprint: sk-def-sp-normalized-towers). -/
+abbrev spNormalizedConstructibleTorTowerCategory (D : SpCoefficientTowersAbelian l E T) :=
+  (spNormalizedConstructibleTorTowers l E T D).FullSubcategory
+
 end AlgebraicGeometry.ProEtale

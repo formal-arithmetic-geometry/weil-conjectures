@@ -255,6 +255,24 @@ private theorem model_transport
   obtain ⟨T, mT, hT, ⟨eT⟩, hf⟩ := h
   exact ⟨T, mT, hT, ⟨e ≪≫ eT⟩, hf⟩
 
+private theorem rational_formula
+    (R : Mon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}))
+    [IsCommMonObj R.X]
+    (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
+    [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+    {X Y : Over (Spec (.of k))}
+    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+    (p : X ⟶ Y) [IsProper p.left]
+    (hR : (∃ F : PadicAlgCl.FiniteIntermediateField ℓ,
+      R = Mon.mk (Profinite.continuousMapRingObj F)) ∨
+        R = Mon.mk (Profinite.padicAlgClRingObj ℓ)) :
+    HasProjectionModel R.X p.left := by
+  refine ⟨R.X, (by infer_instance), (by infer_instance), ⟨Iso.refl _⟩, ?_⟩
+  constructor
+  intro A B hA hB
+  exact isIso_properProjectionMap_boundedConstructible_rational ℓ p R hR A B hA hB
+
 private theorem integral_formula
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
@@ -278,6 +296,19 @@ private theorem integral_formula
   intro A B hA hB
   exact (integralProperDirectImageAndFormulas ℓ E k p).2.2.2 A B
     (hPX A hA) (hPY B hB)
+
+private theorem continuous_model
+    (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E]
+    [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
+    (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+    {X Y : Over (Spec (.of k))}
+    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+    (p : X ⟶ Y) [IsProper p.left] :
+    HasProjectionModel (Profinite.continuousMapRingObj.{u} E) p.left := by
+  obtain ⟨F, ⟨e⟩⟩ := field_realization.{u} ℓ E
+  exact model_transport e (rational_formula (Mon.mk (Profinite.continuousMapRingObj F))
+    ℓ k p (Or.inl ⟨F, rfl⟩))
 
 private theorem unitBall_model
     (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E]
