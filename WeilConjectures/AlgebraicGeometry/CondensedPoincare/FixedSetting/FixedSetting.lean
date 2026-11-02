@@ -10,6 +10,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condense
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.NativeCondensedOperations
 public import WeilConjectures.AlgebraicGeometry.Base.BaseFieldCohomologicalDimension
 public import WeilConjectures.AlgebraicGeometry.BaseFieldFiniteCD.FiniteCohomologicalDimensionHypothesis
+public import Mathlib.Algebra.CharP.CharAndCard
 
 /-! # The fixed condensed setting for Poincare duality
 
@@ -53,7 +54,16 @@ Proof: the closure field `D.k` carries the existing `IsAlgClosed D.k` instance i
 theorem FixedSetting.fieldScope
     (D : WeilConjectures.FiniteFieldDatum.{u}) :
     Finite D.k ∨ IsAlgClosed D.k := by
-  sorry
+  exact Or.inr (IsAlgClosure.isAlgClosed D.k₀)
+
+private theorem fixedSetting_ringChar
+    (D : WeilConjectures.FiniteFieldDatum.{u}) : ringChar D.k = D.p := by
+  let : Fintype D.k₀ := Fintype.ofFinite _
+  let : Fact D.p.Prime := ⟨D.prime⟩
+  let : CharP D.k₀ D.p := charP_of_card_eq_prime_pow (by
+    rw [← Nat.card_eq_fintype_card, D.card_base, D.cardinality_eq])
+  let : CharP D.k D.p := charP_of_injective_algebraMap' D.k₀ D.p
+  exact ringChar.eq D.k D.p
 
 /-- The characteristic of the chosen algebraic closure is prime.
 Source: the finite-field datum and its characteristic transport in
@@ -62,7 +72,8 @@ Proof: transport the prime characteristic equation from the finite-field datum t
 its chosen algebraic closure and apply the existing prime-characteristic lemma. -/
 theorem FixedSetting.fieldCharPrime
     (D : WeilConjectures.FiniteFieldDatum.{u}) : (ringChar D.k).Prime := by
-  sorry
+  rw [fixedSetting_ringChar D]
+  exact D.prime
 
 /-- The coefficient prime is distinct from the characteristic of the chosen
 algebraic closure. Source: `hEll` and characteristic transport in
@@ -72,7 +83,8 @@ same characteristic transport to obtain the stated inequality. -/
 theorem FixedSetting.fieldCharNe
     (D : WeilConjectures.FiniteFieldDatum.{u}) (hEll : ell ≠ D.p) :
     ringChar D.k ≠ ell := by
-  sorry
+  rw [fixedSetting_ringChar D]
+  exact hEll.symm
 
 /-- The canonical finite `ell`-cohomological-dimension bound for the chosen
 closure.
@@ -82,7 +94,8 @@ Proof: apply `BaseFieldFiniteCD.of_isAlgClosed` to the canonical
 theorem FixedSetting.baseFieldFiniteCD
     (D : WeilConjectures.FiniteFieldDatum.{u}) :
     AlgebraicGeometry.ProEtale.BaseFieldFiniteCD ell D.k := by
-  sorry
+  let : IsAlgClosed D.k := IsAlgClosure.isAlgClosed D.k₀
+  exact BaseFieldFiniteCD.of_isAlgClosed ell D.k
 
 /-- The fixed finite-field, coefficient-stage and geometric setting used throughout
 Poincare duality.  The function `coefficients` lists the finite, integral, rational,
@@ -119,9 +132,22 @@ theorem FixedSetting.coefficientAdmissible
     (n : ℕ) (hn : 1 ≤ n) (d : ℕ)
     (S : FixedSetting ell D hEll E π hπ n hn d) (i : Stage) :
     IsLocalizingAdmissibleCoefficient ell ((coefficient ell E π hπ n hn i).obj ell) := by
-  sorry
-
-
+  cases S
+  cases i with
+  | finite =>
+      let A := PadicAlgCl.integers ell E ⧸ (Ideal.span ({π} : Set _)) ^ n
+      let : TopologicalSpace A := ⊥
+      let : DiscreteTopology A := discreteTopology_bot A
+      refine Or.inl ⟨A, inferInstance, inferInstance, inferInstance, inferInstance,
+        residueFinite ell E π hπ n, ⟨n + 1, ?_⟩, ⟨Iso.refl _⟩⟩
+      intro a
+      rw [nsmul_eq_mul, Nat.cast_pow, residueAnnihilator ell E π hπ n, zero_mul]
+  | integral =>
+      exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inl ⟨E, ⟨Iso.refl _⟩⟩))))
+  | rational =>
+      exact Or.inr (Or.inr (Or.inr (Or.inl ⟨E, ⟨Iso.refl _⟩⟩)))
+  | closure =>
+      exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr ⟨Iso.refl _⟩))))
 
 /-- Forgetting the operation system and retaining one stage gives the older
 `CondensedPoincare.Setting` declaration.  `FixedSetting` is its complete refinement:
@@ -200,7 +226,9 @@ theorem FixedSetting.compactificationFacts
       LocallyOfFiniteType (𝟙 S.s) ∧
       QuasiCompact (𝟙 S.s) ∧
       IsSeparated (𝟙 S.s) := by
-  sorry
+  dsimp only [FixedSetting.aX, PoincareDualitySetting.structureMorphism]
+  exact ⟨inferInstance, inferInstance, inferInstance,
+    inferInstance, inferInstance, inferInstance⟩
 
 /-- Source: geometric finiteness and separatedness in `sk-def-set` (blueprint: sk-def-set). -/
 noncomputable instance FixedSetting.X_over
