@@ -7,6 +7,9 @@ module
 
 public import WeilConjectures.FourierTransform.FdIntegralScalarLiftProperty
 import all WeilConjectures.FourierTransform.FdIntegralScalarPresentationForward.DerivedCoherence
+import all WeilConjectures.FourierTransform.FdIntegralScalarPresentationForward.DerivedCocycle
+import all WeilConjectures.FourierTransform.FdIntegralScalarPresentationForward.AmbientAssociator
+import all WeilConjectures.FourierTransform.FdIntegralScalarPresentationForward.OrdinaryCocycle
 import WeilConjectures.FourierTransform.FdIntegralScalarPresentationForward.AbstractAssembly
 import all WeilConjectures.AlgebraicGeometry.Finite.FiniteStagePairCategory
 import WeilConjectures.DeligneLaumon.SfScalarExtensionComposition
@@ -140,7 +143,7 @@ theorem fdIntegralScalarPresentationForward
       (pbcIntegralScalarUnit l Ω T dT.out iT.out E).hom.app
         ((I l Ω T stage E).obj K)) := by
   refine ⟨fun {E L M} h k K ↦ ?_, fun E K ↦ ?_⟩
-  · exact FdIntegralScalarForward.assoc_assembly_of_spec
+  · exact FdIntegralScalarForward.assoc_assembly_full
       (sfIntegralConstructible l (pbcFiniteField.{u} l Ω E) T)
       (sfIntegralConstructible l (pbcFiniteField.{u} l Ω L) T)
       (sfIntegralConstructible l (pbcFiniteField.{u} l Ω M) T)
@@ -164,8 +167,6 @@ theorem fdIntegralScalarPresentationForward
       (sfIntegralOrdinaryComparison l _ _ (pbcFiniteFieldInclusion l Ω (h.trans k)) T)
       (lift_formula l Ω T stage ordinary b hlift h) (lift_formula l Ω T stage ordinary b hlift k)
       (lift_formula l Ω T stage ordinary b hlift (h.trans k))
-      (FdIntegralScalarForward.eD_cocycle l Ω T h k (ordinary h) (ordinary k)
-        (ordinary (h.trans k)))
       _ _ (congrArg (fun κ ↦ integralScalarExtension l (pbcFiniteField.{u} l Ω E)
         (pbcFiniteField.{u} l Ω M) κ T) (FdIntegralScalarForward.inclusion_comp l Ω h k))
       (sfIntegralScalarComp l _ _ (pbcFiniteFieldInclusion l Ω h) T 0
@@ -181,7 +182,27 @@ theorem fdIntegralScalarPresentationForward
       (ordinaryComparison_heq l T _ _ _ _ (FdIntegralScalarForward.inclusion_comp l Ω h k).symm)
       (fun K ↦ (sfIntegralScalarComp_existsUnique l _ _ (pbcFiniteFieldInclusion l Ω h) T 0
         (Nat.Prime.ne_zero (Fact.out : l.Prime)) _
-        (pbcFiniteFieldInclusion l Ω k)).exists.choose_spec K) K
+        (pbcFiniteFieldInclusion l Ω k)).exists.choose_spec K)
+      DerivedCategory.Q DerivedCategory.Q DerivedCategory.Q _ _ _ _ _ _ _ _ _ _ _ _
+      _ _ _ (fdCoefficientTransportFactors l _ T) (fdCoefficientTransportFactors l _ T)
+      (fdCoefficientTransportFactors l _ T)
+      (FdIntegralScalarForward.pbcCounitNT _) (FdIntegralScalarForward.pbcCounitNT _)
+      (FdIntegralScalarForward.pbcCounitNT _)
+      (FdIntegralOrdinaryScalarModel.ordinaryTransportComplex l Ω T h (ordinary h))
+      (FdIntegralOrdinaryScalarModel.ordinaryTransportComplex l Ω T k (ordinary k))
+      (FdIntegralOrdinaryScalarModel.ordinaryTransportComplex l Ω T (h.trans k)
+        (ordinary (h.trans k))) _ _
+      (FdIntegralScalarForward.eD_heh l Ω T h (ordinary h))
+      (FdIntegralScalarForward.eD_heh l Ω T k (ordinary k))
+      (FdIntegralScalarForward.eD_heh l Ω T (h.trans k) (ordinary (h.trans k)))
+      -- `FdIntegralScalarForward.ODcomp_fac l Ω T h k` proves this equation, but its instance
+      -- paths differ from the ones fixed here and the kernel conversion times out.
+      sorry
+      (FdIntegralScalarForward.pbcDerivedComp_counit _ _ _
+        (pbcCompletedScalarMap_comp l Ω T h k))
+      (FdIntegralScalarForward.chain_cocycle l Ω T h k (ordinary h) (ordinary k)
+        (ordinary (h.trans k)))
+      (fun P ↦ FdIntegralScalarForward.counit_isIso l Ω T (h.trans k) _) K
   · exact FdIntegralScalarForward.unit_assembly_of_spec
       (sfIntegralConstructible l (pbcFiniteField.{u} l Ω E) T) _ (I l Ω T stage E)
       (integralDetailedTransport T l _) (eqToIso (stage E).integral_identity)
