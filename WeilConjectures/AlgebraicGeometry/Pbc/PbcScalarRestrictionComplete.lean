@@ -13,6 +13,8 @@ import all WeilConjectures.SmoothPurity.Completed.CompletedIntegralFiniteFree
 import WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarExtension
 import all WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarInternalHomComplete
 import WeilConjectures.SmoothPurity.IntegralPrincipalCone.IntegralPrincipalConeLocalCriterion
+import all WeilConjectures.Algebra.Homology.PrincipalConeExactEquivalence
+import all WeilConjectures.SixFunctors.Supporting.RoosIntrinsicCompletenessEquivalence
 
 /-! # Exact coefficient restriction preserves intrinsic completeness.
 -/
@@ -23,7 +25,7 @@ set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 universe u
-open CategoryTheory AlgebraicGeometry
+open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 attribute [-instance] WeilConjectures.integralOperationsAbSheafify
 attribute [-instance] WeilConjectures.integralOperationsAbLocallyBijective
 attribute [-instance] WeilConjectures.integralOperationsSiteSmall
@@ -98,21 +100,76 @@ private def pbcScalarModelDerivedRestrictionIso (K : PbcCompletedDerived W (pbcI
       (pbcRestrict (WeilConjectures.purCoefficientIso l F W).inv)
       (pbcRestrict (WeilConjectures.completedCoefficientMap l E F i W))).app K
 
+
+private theorem scalarPrincipalMap
+    {A B : Type*} [Category* A] [Category* B] [Abelian A] [Abelian B]
+    (F : A ⥤ B) [F.Additive] [HasCountableProducts A] [HasCountableProducts B]
+    [PreservesLimitsOfShape (Discrete ℕ) F]
+    {P : CochainComplex A ℤ} (μ : End P) :
+    ∃ c : (F.mapHomologicalComplex (.up ℤ)).obj
+        (CochainComplex.PrincipalCone.completion μ) ≅
+          CochainComplex.PrincipalCone.completion
+            (End.of ((F.mapHomologicalComplex (.up ℤ)).map μ)),
+      (F.mapHomologicalComplex (.up ℤ)).map (CochainComplex.PrincipalCone.unit μ) ≫
+        c.hom = CochainComplex.PrincipalCone.unit
+          (End.of ((F.mapHomologicalComplex (.up ℤ)).map μ)) := by
+  classical
+  let G := F.mapHomologicalComplex (.up ℤ)
+  let ν := End.of (G.map μ)
+  let K := fun n ↦ CochainComplex.PrincipalCone.level μ n
+  let L := fun n ↦ CochainComplex.PrincipalCone.level ν n
+  let e := CochainComplex.principalLevelIso F μ
+  let p : G.obj (∏ᶜ K) ≅ ∏ᶜ L := PreservesProduct.iso G K ≪≫ Pi.mapIso e
+  have hp (n : ℕ) : p.hom ≫ Pi.π L n = G.map (Pi.π K n) ≫ (e n).hom := by
+    simp [p, PreservesProduct.iso_hom, Category.assoc]
+  let f := CochainComplex.PrincipalCone.step μ
+  let g := CochainComplex.PrincipalCone.step ν
+  have hsq : G.map (towerTransitionEndomorphism f) ≫ p.hom =
+      p.hom ≫ towerTransitionEndomorphism g := by
+    apply Pi.hom_ext
+    intro n
+    rw [Category.assoc, hp, ← G.map_comp_assoc]
+    simp only [towerTransitionEndomorphism, Preadditive.sub_comp,
+      Category.id_comp, towerProductShift, Pi.lift_π, G.map_sub,
+      Preadditive.sub_comp, G.map_comp, Category.assoc,
+      Preadditive.comp_sub, Category.comp_id, hp]
+    rw [← Category.assoc p.hom, hp, Category.assoc]
+    rw [← G.map_comp_assoc, Pi.lift_π, G.map_comp, Category.assoc,
+      CochainComplex.principalLevelIso_step F μ n]
+  have hu : G.map (CochainComplex.PrincipalCone.productUnit μ) ≫ p.hom =
+      CochainComplex.PrincipalCone.productUnit ν := by
+    apply Pi.hom_ext
+    intro n
+    rw [Category.assoc, hp, ← G.map_comp_assoc]
+    change G.map ((Pi.lift _) ≫ Pi.π K n) ≫ (e n).hom = _
+    rw [Pi.lift_π]
+    change G.map _ ≫ (e n).hom = (Pi.lift _) ≫ Pi.π L n
+    rw [Pi.lift_π]
+    exact CochainComplex.principalLevelIso_inr F μ n
+  let c := CochainComplex.coneSquareIso (G.map (towerTransitionEndomorphism f))
+    (towerTransitionEndomorphism g) p p hsq
+  let i := CochainComplex.mapCoconeIso F (towerTransitionEndomorphism f) ≪≫
+    (shiftFunctor _ (-1 : ℤ)).mapIso c
+  refine ⟨i, ?_⟩
+  change G.map _ ≫ (CochainComplex.mapCoconeIso F _).hom ≫ _ = _
+  unfold CochainComplex.PrincipalCone.unit
+  rw [← Category.assoc, CochainComplex.mapCoconeIso_lift F _ _
+    (CochainComplex.PrincipalCone.productUnit_comp μ)]
+  have hz : G.map (CochainComplex.PrincipalCone.productUnit μ) ≫
+      G.map (towerTransitionEndomorphism f) = 0 := by
+    rw [← G.map_comp]
+    change G.map (CochainComplex.PrincipalCone.productUnit μ ≫
+      CochainComplex.PrincipalCone.oneSubShift μ) = 0
+    rw [CochainComplex.PrincipalCone.productUnit_comp, G.map_zero]
+  exact (completedCoconeLift_natural B _ _ p.hom p.hom hsq (𝟙 _)
+    (G.map (CochainComplex.PrincipalCone.productUnit μ))
+    (CochainComplex.PrincipalCone.productUnit ν) hz
+    (CochainComplex.PrincipalCone.productUnit_comp ν)
+    (by simpa using hu.symm)).symm.trans (Category.id_comp _)
+
 section LocalCriterion
-open CategoryTheory.Limits Opposite
 attribute [local instance] WeilConjectures.IntegralOnSlice.siteCategory
   WeilConjectures.IntegralOnSlice.hasDerived
-
-/-- The image of a slice section of the source coefficients under the scalar inclusion. -/
-private def scalarImageSection (U : W.ProEt)
-    (s : ((WeilConjectures.IntegralOnSlice.ring l E W (some U)).obj ⋙
-      CategoryTheory.forget CommRingCat).sections) :
-    ((WeilConjectures.IntegralOnSlice.ring l F W (some U)).obj ⋙
-      CategoryTheory.forget CommRingCat).sections :=
-  (Functor.sectionsFunctor _).map (Functor.whiskerRight
-    ((WeilConjectures.IntegralOnSlice.restrict.{u, u} W (some U)).map
-      (WeilConjectures.completedCoefficientMap l E F i W)).hom
-      (CategoryTheory.forget CommRingCat)) s
 
 /-- The scalar inclusion sends the source uniformizer to a multiple of the target one.
 Source: Bhatt--Scholze, Lemma 6.8.2(1) (blueprint: lem-pbc-scalar-restriction-complete).
@@ -135,55 +192,6 @@ private theorem scalarUniformizer_dvd (V : W.ProEtᵒᵖ) :
   congr 1
   ring
 
-/-- Local divisibility by the source uniformizer passes to the image section. -/
-private theorem scalarImageSection_divisible (U : W.ProEt)
-    (s : ((WeilConjectures.IntegralOnSlice.ring l E W (some U)).obj ⋙
-      CategoryTheory.forget CommRingCat).sections)
-    (hs : ∃ S : Sieve U, S ∈ ProEt.topology W U ∧
-      ∀ (V : W.ProEt) (f : V ⟶ U), S f →
-        ∃ c : (WeilConjectures.completedIntegralCoefficientSheafUnrestricted l E W).obj.obj
-            (op V),
-          s.val (op (Over.mk f)) = WeilConjectures.integralCompletionScalarValue l E W (op V) * c) :
-    ∃ S : Sieve U, S ∈ ProEt.topology W U ∧
-      ∀ (V : W.ProEt) (f : V ⟶ U), S f →
-        ∃ c : (WeilConjectures.completedIntegralCoefficientSheafUnrestricted l F W).obj.obj
-            (op V),
-          (scalarImageSection l E F i W U s).val (op (Over.mk f)) =
-            WeilConjectures.integralCompletionScalarValue l F W (op V) * c := by
-  obtain ⟨S, hS, h⟩ := hs
-  refine ⟨S, hS, fun V f hf ↦ ?_⟩
-  obtain ⟨c, hc⟩ := h V f hf
-  obtain ⟨d, hd⟩ := scalarUniformizer_dvd l E F i W (op V)
-  refine ⟨d * (show (WeilConjectures.completedIntegralCoefficientSheafUnrestricted l F W).obj.obj
-    (op V) from ConcreteCategory.hom
-      ((WeilConjectures.completedCoefficientMap l E F i W).hom.app (op V)) c), ?_⟩
-  change (WeilConjectures.completedCoefficientMap l E F i W).hom.app (op V)
-    (s.val (op (Over.mk f))) = _
-  rw [hc, map_mul, hd, mul_assoc]
-
-/-- The local test of a restriction is the restriction of the local test at the image
-section. Source: Stacks Tags 0999 and 0A6A
-(blueprint: lem-pbc-scalar-restriction-complete).
-Proof: derived Hom out of the localization by a section, into a restriction of scalars,
-is the restriction of derived Hom out of the scalar extension of that localization; the
-latter is the localization at the image section, scalar extension being flat.
-The small-site version of exactly this statement is
-`restrictScalars_completeElement_iff` (`RestrictionSectionCompleteness`), for
-`IsRingedSiteCompleteElement` on a `SmallCategory` with coefficients in the site universe.
-Not yet formalized here: transport to `W.ProEt` through `AsSmall` (as
-`NativeRestriction.smallModelComplete` does for `principalLocallyComplete`), and the
-identification of a slice section of `R.over U` with an element of `R(U)`, which turns
-`localTest` into the `IsRingedSiteCompleteElement` test. -/
-private theorem scalarLocalTest_restrict
-    (M : DerivedCategory (WeilConjectures.scalarReductionSource.{u, u} l F W)) (U : W.ProEt)
-    (s : ((WeilConjectures.IntegralOnSlice.ring l E W (some U)).obj ⋙
-      CategoryTheory.forget CommRingCat).sections)
-    (h : IsZero (WeilConjectures.IntegralPrincipalCone.localTest l F W M U
-      (scalarImageSection l E F i W U s))) :
-    IsZero (WeilConjectures.IntegralPrincipalCone.localTest l E W
-      ((pbcDerivedRestrict (WeilConjectures.completedCoefficientMap l E F i W)).obj M) U s) := by
-  sorry
-
 end LocalCriterion
 
 /-- Restriction along the completed scalar inclusion preserves derived completeness in
@@ -205,10 +213,63 @@ private theorem pbcScalarModelRestrictionComplete
     (hM : WeilConjectures.IsSfDerivedComplete l F W M) :
     WeilConjectures.IsSfDerivedComplete l E W
       ((pbcDerivedRestrict (WeilConjectures.completedCoefficientMap l E F i W)).obj M) := by
+  classical
   rw [WeilConjectures.scalarSfLocalIff] at hM ⊢
-  intro U s hs
-  exact scalarLocalTest_restrict l E F i W M U s
-    (hM U _ (scalarImageSection_divisible l E F i W U s hs))
+  let φ' := WeilConjectures.completedCoefficientMap l E F i W
+  let G := pbcRestrict φ'
+  let σE := WeilConjectures.integralCompletionScalarValue l E W
+  let σ' : ∀ V : W.ProEtᵒᵖ,
+      (WeilConjectures.completedIntegralCoefficientSheafUnrestricted l F W).obj.obj V :=
+    fun V ↦ ConcreteCategory.hom (φ'.hom.app V) (σE V)
+  have hσ' : ∀ {U V : W.ProEtᵒᵖ} (g : U ⟶ V),
+      (WeilConjectures.completedIntegralCoefficientSheafUnrestricted l F W).obj.map g (σ' U) =
+        σ' V := by
+    sorry
+  have hloc : WeilConjectures.IntegralPrincipalCone.locallyComplete l F W σ' M := by
+    intro U s hs
+    apply hM U s
+    obtain ⟨S, hS, h⟩ := hs
+    refine ⟨S, hS, fun V f hf ↦ ?_⟩
+    obtain ⟨c, hc⟩ := h V f hf
+    obtain ⟨d, hd⟩ := scalarUniformizer_dvd l E F i W (op V)
+    refine ⟨d * c, ?_⟩
+    rw [hc]
+    show σ' (op V) * c = _
+    rw [show σ' (op V) = _ from hd, mul_assoc]
+  let Q := DerivedCategory.Q.objPreimage M
+  let e : DerivedCategory.Q.obj Q ≅ M := DerivedCategory.Q.objObjPreimageIso M
+  obtain ⟨μ, hμ⟩ : ∃ μ : End Q, ∀ (q : ℤ) (U : W.ProEtᵒᵖ) (x : (Q.X q).val.obj U),
+      (μ.f q).val.app U x = σ' U • x := by
+    sorry
+  have hF := (WeilConjectures.IntegralPrincipalCone.localCriterion l F W σ' hσ' Q μ hμ M e).2.mp
+    hloc
+  have hu : IsIso (DerivedCategory.Q.map (CochainComplex.PrincipalCone.unit μ)) :=
+    IsIso.of_isIso_comp_left e.inv _
+  have := (pbcScalarAdjunction φ').rightAdjoint_preservesLimits
+  obtain ⟨c, hc⟩ := scalarPrincipalMap G μ
+  let ν := End.of ((G.mapHomologicalComplex (.up ℤ)).map μ)
+  have hG : IsIso (DerivedCategory.Q.map
+      ((G.mapHomologicalComplex (.up ℤ)).map (CochainComplex.PrincipalCone.unit μ))) := by
+    have h := G.mapDerivedCategoryFactors.hom.naturality (CochainComplex.PrincipalCone.unit μ)
+    have h' : DerivedCategory.Q.map
+        ((G.mapHomologicalComplex (.up ℤ)).map (CochainComplex.PrincipalCone.unit μ)) =
+        inv (G.mapDerivedCategoryFactors.hom.app Q) ≫
+          G.mapDerivedCategory.map (DerivedCategory.Q.map (CochainComplex.PrincipalCone.unit μ)) ≫
+          G.mapDerivedCategoryFactors.hom.app _ := by
+      rw [IsIso.eq_inv_comp]
+      exact h.symm
+    rw [h']
+    infer_instance
+  have hν : IsIso (DerivedCategory.Q.map (CochainComplex.PrincipalCone.unit ν)) := by
+    rw [← hc, Functor.map_comp]
+    infer_instance
+  let e' : DerivedCategory.Q.obj ((G.mapHomologicalComplex (.up ℤ)).obj Q) ≅
+      G.mapDerivedCategory.obj M :=
+    (G.mapDerivedCategoryFactors.app Q).symm ≪≫ G.mapDerivedCategory.mapIso e
+  apply (WeilConjectures.IntegralPrincipalCone.localCriterion l E W σE
+    (WeilConjectures.integralScalar_natural l E W) ((G.mapHomologicalComplex (.up ℤ)).obj Q) ν
+    (fun q U x ↦ hμ q U x) _ e').2.mpr
+  infer_instance
 
 /-- Exact coefficient restriction preserves intrinsic completeness.
 Source: Stacks Project, Tags 099B and 0A0E; the restriction and unit-power argument
