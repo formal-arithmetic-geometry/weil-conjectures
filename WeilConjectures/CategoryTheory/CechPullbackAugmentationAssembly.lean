@@ -28,6 +28,9 @@ public import Mathlib.CategoryTheory.Endomorphism
 public import Mathlib.CategoryTheory.Functor.OfSequence
 public import Mathlib.Algebra.Homology.Functor
 public import WeilConjectures.CategoryTheory.Ringed.RingedToposMorphismSupplement
+public import WeilConjectures.CategoryTheory.CechPullbackAugmentedTensorStep
+public import WeilConjectures.CategoryTheory.CechPullbackNormalizedCoherence
+public import WeilConjectures.CategoryTheory.RingedKoszulSystem
 
 /-!
 # Assembly of the Cech pullback comparison
@@ -109,6 +112,19 @@ theorem cech_pullback_augmentation_assembly
             (SheafOfModules.unit
               ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ≫
           (HomologicalComplex.single _ (.up ℤ) 0).map v.hom := by
-  sorry
+  obtain ⟨t, ht, hu⟩ := cech_pullback_normalized_coherence R S h F hF v coh
+  induction r with
+  | zero =>
+    let l := (HomologicalComplex.singleMapHomologicalComplex F (.up ℤ) 0).app
+      (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ≪≫
+      (HomologicalComplex.single _ (.up ℤ) 0).mapIso v
+    refine ⟨l, ?_⟩
+    change l.hom ≫ 𝟙 _ = _
+    simp [l, ringedExtendedCech]
+  | succ r ih =>
+    obtain ⟨ly, hy⟩ := ih (fun i ↦ b i.succ) (fun i ↦ c i.succ)
+      (fun i ↦ hscalar i.succ) (fun i ↦ hfactor i.succ)
+    exact cech_pullback_augmented_tensor_step R S h F hF v t ht hu r b c
+      (hfactor 0) ly hy
 
 end CategoryTheory

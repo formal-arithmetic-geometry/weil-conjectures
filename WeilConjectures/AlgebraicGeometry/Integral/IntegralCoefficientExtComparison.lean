@@ -168,6 +168,8 @@ private noncomputable def integerRingSheafIso
     ext t
     rfl
 
+private noncomputable def pointTransport := Mod.comapEquivalenceOfIsIso e.inv
+
 variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
   (e : Λ ≅ Λ') [IsMonHom e.hom]

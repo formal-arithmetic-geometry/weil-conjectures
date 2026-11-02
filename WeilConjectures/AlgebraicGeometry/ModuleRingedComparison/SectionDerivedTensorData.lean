@@ -78,6 +78,13 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.
 public import WeilConjectures.Algebra.Homology.CanonicalTensorPullbackOfUniverses.RingedTopoiCanonicalTensorPullbackOfUniverses
 public import Mathlib.CategoryTheory.Monoidal.Transport
 public import WeilConjectures.Algebra.Homology.RingedTensorCorner.ProjectionMateExact
+public import WeilConjectures.AlgebraicGeometry.SectionDerivedTensorData
+public import WeilConjectures.Algebra.Homology.HomotopyCategory.DerivabilityStructure
+public import WeilConjectures.AlgebraicGeometry.ModuleRingedComparison.SectionCochainTensorComparison
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
+public import WeilConjectures.CategoryTheory.ProEtaleCoefficients.PreservesTotalTensorKFlatQuasiIsoSupplement
+public import WeilConjectures.FromJoel.Algebra.Homology.Bifunctor
+public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 
 /-! # Canonical derived section-module tensor data
 
@@ -267,6 +274,13 @@ Source: Stacks 07A4 and 06YU, fixed equivalence transport
 (blueprint: def-pd-section-derived-tensor-data). -/
 theorem monoidal_eq (e : C ≌ D) : monoidal e = Monoidal.transport e :=
   monoidal_ext _ _ (struct_eq e)
+/-- The existing internal derived open extension, with category arguments fixed.
+Source: Stacks 03DJ (blueprint: def-pd-section-derived-tensor-data). -/
+@[implicit_reducible]
+def internalDerivedExtension {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
+    DerivedCategory (internalModules Λ U) ⥤ DerivedCategory (internalModules Λ X) :=
+  ((CondensedRing.openImmersionLowerShriek Λ j) : internalModules Λ U ⥤
+    internalModules Λ X).mapDerivedCategory
 
 end TensorFunctorTransport
 end ResolvingOplaxConstraints

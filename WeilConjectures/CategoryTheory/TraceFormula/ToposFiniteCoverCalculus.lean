@@ -328,6 +328,10 @@ theorem topos_finite_cover_calculus
       (Y : Sheaf J (Type (max u v w))) (f : ∀ i, X i ⟶ Y),
       (∀ i, IsQuasiCompactObject.{max u v w} (X i)) → Epi (Sigma.desc f) →
         IsQuasiCompactObject.{max u v w} Y) := by
-  sorry
+  refine ⟨family_local_iff J, family_pullback_epi J, single_pullback_epi J,
+    product_family_epi (family_pullback_epi J), quasiCompact_of_epi J, quasiCompact_coproduct J, ?_⟩
+  intro I _ X Y f hX hf
+  exact quasiCompact_of_epi J (∐ X) Y (Sigma.desc f) hf
+    (quasiCompact_coproduct J I X hX)
 
 end CategoryTheory

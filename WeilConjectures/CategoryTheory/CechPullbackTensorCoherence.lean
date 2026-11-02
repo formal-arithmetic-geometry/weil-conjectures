@@ -123,6 +123,30 @@ theorem cech_pullback_tensor_coherence
       (SheafOfModules.monoidalCategory R) (SheafOfModules.monoidalCategory S) F
       (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
       (SheafOfModules.unit ((sheafCompose K (forget₂ CommRingCat RingCat)).obj S)) v) := by
-  sorry
+  let := SheafOfModules.monoidalCategory R
+  let := SheafOfModules.monoidalCategory S
+  let := h.leftExact
+  obtain ⟨RI, ⟨I⟩⟩ := algebraic_image J K h.inverse h.direct h.adj R
+  obtain ⟨c, hc⟩ := structural_map K J S R h RI I
+  let G := I.modules ⋙ SheafOfModules.tensorFunctor c
+  obtain ⟨hG⟩ : Nonempty (G ⊣ h.modules) := supplied_adjunction h RI I c hc
+  have hobj : ∀ M, G.obj M = SheafOfModules.changeOfRings c (I.modules.obj M) :=
+    fun _ ↦ rfl
+  have hmap : ∀ {M N} (f : M ⟶ N), G.map f = eqToHom (hobj M) ≫
+      SheafOfModules.changeOfRingsHom c (I.modules.obj M) (I.modules.map f) ≫
+        eqToHom (hobj N).symm := by
+    intro M N f
+    simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
+    rfl
+  obtain ⟨k⟩ := SheafOfModules.canonicalRingedTensorComparison_nonempty
+    R S RI h.inverse I c G hobj h.direct h.adj hmap
+  let e := Adjunction.leftAdjointUniq hF hG
+  let kg : tensor _ ⋙ G ≅ G.prod G ⋙ tensor _ :=
+    NatIso.ofComponents (fun MN ↦ k.mu MN.1 MN.2) (fun f ↦ k.naturality f.1 f.2)
+  let tf : tensor _ ⋙ F ≅ F.prod F ⋙ tensor _ :=
+    Functor.isoWhiskerLeft (tensor _) e ≪≫ kg ≪≫
+      (Functor.isoWhiskerRight (NatIso.prod e e) (tensor _)).symm
+  exact tensorCoherence_of_comparison F (fun X Y ↦ tf.app (X, Y))
+    (fun f g ↦ tf.hom.naturality (show (_, _) ⟶ (_, _) from (f, g))) v
 
 end CategoryTheory

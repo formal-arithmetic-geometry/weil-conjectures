@@ -58,6 +58,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension
 public import Mathlib.CategoryTheory.Sites.LocalSite
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ProfiniteCondensedRing
 
 /-! # Evaluation and connected components of lisse condensed sheaves
 
@@ -198,6 +199,47 @@ Source: HRS Section 3 (blueprint: def-zl-condensed-lisse-evaluation-model). -/
 instance profiniteCoefficientComm (S : Profinite.{u}) :
     IsCommMonObj (profiniteCoefficient Λ S) :=
   Functor.isCommMonObj_obj
+
+/-- The ring of sections of the restricted coefficient is canonically Λ(S).
+The comparison uses the monoidal restriction isomorphism, preserving multiplication and unit.
+Source: HRS Section 3 (blueprint: def-zl-condensed-lisse-evaluation-model). -/
+def profiniteSectionRingIso (S : Profinite.{u}) :
+    (condensedSectionRing Λ).obj.obj (op S) ≅
+      Evaluation.A ((coherentTopology Profinite.{u}).over S)
+        (profiniteCoefficient Λ S) (Over.mk (𝟙 S)) := by
+  let J := coherentTopology Profinite.{u}
+  let e := Functor.sheafPullbackConstruction.sheafToPresheafCompWhiskeringLeftIsoPushforward
+    (Over.forget S) Ab.{u + 1} (J.over S) J
+  let z := ((Functor.mapCommMonCompIso (F := sheafToPresheaf J Ab.{u + 1})
+      (G := (Functor.whiskeringLeft _ _ Ab.{u + 1}).obj (Over.forget S).op)).symm ≪≫
+    Functor.mapCommMonNatIso e ≪≫
+    Functor.mapCommMonCompIso (F := J.overPullback Ab.{u + 1} S)
+      (G := sheafToPresheaf (J.over S) Ab.{u + 1})).app (CommMon.mk Λ)
+  let w := (Monoidal.commMonFunctorCategoryEquivalence (Over S)ᵒᵖ Ab.{u + 1}).functor.mapIso z
+  exact InternalAbelianSheafModule.commMonToRing.mapIso (w.app (op (Over.mk (𝟙 S))))
+
+/-- The scalar restriction R → Γ(S,Λ) is restriction along the unique map S → *.
+Source: HRS Section 3 (blueprint: def-zl-condensed-lisse-evaluation-model). -/
+def profiniteScalarMap (S : Profinite.{u}) : condensedScalarRing Λ →+*
+    Evaluation.A ((coherentTopology Profinite.{u}).over S)
+      (profiniteCoefficient Λ S) (Over.mk (𝟙 S)) :=
+  ((condensedSectionRing Λ).obj.map (terminal.from S).op ≫
+    (profiniteSectionRingIso Λ S).hom).hom
+
+/-- Realization from R on the profinite slice uses restriction of the actual realization
+on the point. All module operations are induced by the coefficient inverse image.
+Source: HRS Definition 3.5 (blueprint: def-zl-condensed-lisse-evaluation-model). -/
+def profiniteScalarRealization (S : Profinite.{u}) :
+    DerivedCategory (ModuleCat.{u + 1} (condensedScalarRing Λ)) ⥤
+      Evaluation.D ((coherentTopology Profinite.{u}).over S) (profiniteCoefficient Λ S) :=
+  let e := InternalAbelianSheafModule.sectionModuleEquivalence
+    (coherentTopology Profinite.{u}) Λ
+  letI := Functor.additive_of_preserves_binary_products e.inverse
+  let f := ((coherentTopology Profinite.{u}).overPullback Ab.{u + 1} S).mapMod Λ
+  letI := Functor.additive_of_preserves_binary_products f
+  commutativeSiteDerivedConstantModuleFunctor (coherentTopology Profinite.{u})
+      (condensedScalarRing Λ) ⋙
+    (condensedScalarExtensionModel Λ).T ⋙ e.inverse.mapDerivedCategory ⋙ f.mapDerivedCategory
 
 /-- The relative test functor characterized by the recorded component universal property.
 Its value and all projections are unique up to their unique compatible isomorphism.

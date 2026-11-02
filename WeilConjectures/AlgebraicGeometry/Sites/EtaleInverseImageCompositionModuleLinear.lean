@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+public import WeilConjectures.AlgebraicGeometry.Etale.EtaleInverseImageCompositionModuleLinearCore
 
 /-!
 # Linearity of the composition comparisons on constant-ring etale modules
@@ -187,6 +188,18 @@ theorem etaleInverseImageCompositionModuleLinear
       (toSheafify (Y.smallGrothendieckTopology @Etale) ((Functor.const Y.Etaleᵒᵖ).obj R))
       (toSheafify (Z.smallGrothendieckTopology @Etale) ((Functor.const Z.Etaleᵒᵖ).obj R))
  := by
-  sorry
+  dsimp
+  intros gammaU gammaV gammaUV hU hV hUV LU eU aU hLU LV eV aV hLV LUV eUV aUV hLUV
+  obtain ⟨d, c, hd, hc, hu⟩ :=
+    etaleInverseImageCompositionModuleLinearCore X Y Z uMap vMap R
+      gammaU gammaV gammaUV hU hV hUV LU eU aU hLU LV eV aV hLV LUV eUV aUV hLUV
+  refine ⟨d, c, hd, hc, hu, ?_⟩
+  intro c' hc'
+  apply Iso.ext
+  apply NatTrans.ext
+  funext G
+  apply ((aU.comp aV).homEquiv G (LUV.obj G)).injective
+  rw [Adjunction.homEquiv_apply, Adjunction.homEquiv_apply]
+  exact (hc' G).trans (hu G).symm
 
 end AlgebraicGeometry

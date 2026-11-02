@@ -156,6 +156,77 @@ private def square (A : Type u) [CommRing A]
         sq.w).trans
           (heq_of_eq (Scheme.proEtaleConstantRingCompositeCoefficients_eq f' g A)).symm))
 
+/-- The coefficient pullback square, over fixed category and functor instances.
+Keeping this equation as one predicate gives concrete derived applications the same
+implicit instance arguments as the abstract mate theorem.
+Source: adjunction mate calculus, Bhatt--Scholze Lemma 6.5.9(3).
+(blueprint: lem-pe-constant-exchange-encoding). -/
+private def coefficientPullbackSquare
+    (θ : G ⋙ V ⟶ U ⋙ H) (θe : Ge ⋙ Ve ⟶ Ue ⋙ He)
+    (αU : U ⋙ T₂ ≅ T₁ ⋙ Ue) (αV : V ⋙ T₄ ≅ T₃ ⋙ Ve)
+    (αG : G ⋙ T₃ ⟶ T₁ ⋙ Ge) (αH : H ⋙ T₄ ⟶ T₂ ⋙ He)
+    (M : C₁) : Prop :=
+  T₄.map (θ.app M) ≫ αH.app (U.obj M) ≫ He.map (αU.hom.app M) =
+    αV.hom.app (G.obj M) ≫ Ve.map (αG.app M) ≫ θe.app (T₁.obj M)
+
+/-- Pointwise coefficient transport requires the pull-comparison cube only at `R.obj K`.
+The exchange maps and push comparisons satisfy their two counit mate equations.
+
+Source: Mathlib's adjunction mates and Bhatt--Scholze, Lemma 6.5.9(3).
+(blueprint: lem-pe-constant-exchange-encoding)
+
+Proof. Apply injectivity of the second target adjunction's inverse Hom equivalence.
+Replace both exchange maps by their adjuncts. Naturality of the target square moves
+its first push comparison past the square map; its mate equation replaces the result.
+Naturality of the target counit and the second mate equation rewrite the other side.
+Move the mapped source exchange past the inverse pull comparison by naturality and
+replace its adjunct. Naturality of the remaining horizontal comparison leaves the
+pull-comparison cube precomposed and postcomposed with inverse vertical comparisons.
+Cancel these isomorphisms. The resulting equality is the desired Hom-equivalence
+image equality, hence the original coefficient/exchange equality. No map B or Be is
+assumed invertible. -/
+private theorem coefficient_exchange_of_counit_at
+    (θ : G ⋙ V ⟶ U ⋙ H) (θe : Ge ⋙ Ve ⟶ Ue ⋙ He)
+    (K : C₂)
+    (B : (R ⋙ G).obj K ⟶ (H ⋙ S).obj K)
+    (Be : (Re ⋙ Ge).obj (T₂.obj K) ⟶ (He ⋙ Se).obj (T₂.obj K))
+    (hB : V.map B ≫ b.counit.app (H.obj K) =
+      θ.app (R.obj K) ≫ H.map (a.counit.app K))
+    (hBe : Ve.map Be ≫ be.counit.app (He.obj (T₂.obj K)) =
+      θe.app (Re.obj (T₂.obj K)) ≫ He.map (ae.counit.app (T₂.obj K)))
+    (αU : U ⋙ T₂ ≅ T₁ ⋙ Ue) (αV : V ⋙ T₄ ≅ T₃ ⋙ Ve)
+    (αG : G ⋙ T₃ ⟶ T₁ ⋙ Ge) (αH : H ⋙ T₄ ⟶ T₂ ⋙ He)
+    (δ : T₁.obj (R.obj K) ⟶ Re.obj (T₂.obj K))
+    (δ' : T₃.obj (S.obj (H.obj K)) ⟶ Se.obj (T₄.obj (H.obj K)))
+    (hδ : Ue.map δ ≫ ae.counit.app (T₂.obj K) =
+      αU.inv.app (R.obj K) ≫ T₂.map (a.counit.app K))
+    (hδ' : Ve.map δ' ≫ be.counit.app (T₄.obj (H.obj K)) =
+      αV.inv.app (S.obj (H.obj K)) ≫ T₄.map (b.counit.app (H.obj K)))
+    (hcube : coefficientPullbackSquare θ θe αU αV αG αH (R.obj K)) :
+    αG.app (R.obj K) ≫ Ge.map δ ≫ Be =
+      T₃.map B ≫ δ' ≫ Se.map (αH.app K) := by
+  unfold coefficientPullbackSquare at hcube
+  apply (be.homEquiv _ _).symm.injective
+  simp only [Adjunction.homEquiv_symm_apply, Functor.map_comp, Category.assoc]
+  rw [hBe]
+  have hn := θe.naturality (δ)
+  rw [reassoc_of% hn, ← Functor.map_comp, hδ]
+  have hn' := be.counit.naturality (αH.app K)
+  dsimp only [Functor.comp_map, Functor.comp_obj, Functor.id_map] at hn'
+  rw [hn', reassoc_of% (hδ')]
+  rw [reassoc_of% (αV.inv.naturality (B)), ← Functor.map_comp_assoc, hB]
+  simp only [Functor.map_comp, Category.assoc]
+  have hnH := αH.naturality (a.counit.app K)
+  dsimp only [Functor.comp_map, Functor.comp_obj, Functor.id_map, Functor.id_obj] at hnH
+  rw [hnH]
+  have hc := congrArg (fun z ↦ αV.inv.app (G.obj (R.obj K)) ≫ z ≫
+    He.map (αU.inv.app (R.obj K))) hcube
+  simp only [Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app] at hc
+  simp only [← Category.assoc, Iso.inv_hom_id_app, Category.id_comp] at hc
+  simp only [Functor.comp_obj] at hc
+  simpa only [Category.assoc, He.map_id, Category.id_comp] using congrArg
+    (fun z ↦ z ≫ He.map (T₂.map (a.counit.app K))) hc.symm
+
 /-- Exact constant-section restriction identifies the ringed and fixed-scalar mates.
 No properness, torsion, classicality or boundedness assumption enters this comparison.
 Source: Stacks Tag 07A7, and blueprint sk-thm-properbasechange, module and pro-etale

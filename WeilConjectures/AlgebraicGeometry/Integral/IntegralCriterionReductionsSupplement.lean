@@ -235,6 +235,12 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Bounded.ProEtaleBoundedConstru
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.AlgebraicGeometry.IntegralCriterionReductions
+public import Mathlib.CategoryTheory.EssentiallySmall
+public import WeilConjectures.AlgebraicGeometry.AdicCompletion.InternalRoosCompleteness
+public import WeilConjectures.AlgebraicGeometry.Morphisms.ProAffineEtale
+public import WeilConjectures.CategoryTheory.Grothendieck.GrothendieckTopos
+public import WeilConjectures.CategoryTheory.SiteCoveringAxioms
+public import WeilConjectures.ProEtaleCoefficients.DerivedNakayamaResolution
 
 /-!
 # Constructibility of all integral reductions from the first
@@ -566,6 +572,13 @@ private theorem reductionAbLocallyBijective (X : Scheme.{u}) :
 
 private theorem reductionSiteSmall (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.ProEt :=
   essentiallySmallSelf.{0, u, u + 1} _
+
+private abbrev finiteScalarRestriction (X : Scheme.{u})
+    {A B : Type u} [CommRing A] [CommRing B] (a : A →+* B) :=
+  Scheme.proEtaleRingRestrictScalars
+    ((constantSheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}).map
+      (CommRingCat.ofHom (R := ULift.{u + 1, u} A)
+        (S := ULift.{u + 1, u} B) a.ulift.{u + 1, u + 1}))
 
 attribute [local instance] reductionSiteSmall
 

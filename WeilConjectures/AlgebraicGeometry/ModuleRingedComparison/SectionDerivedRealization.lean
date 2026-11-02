@@ -92,6 +92,12 @@ import all Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
 import WeilConjectures.CategoryTheory.Tensor.TensorPullbackRepresentativeDescent
 import WeilConjectures.CategoryTheory.ProperBaseChange.ResolvingRepresentativeWhiskeringSupplement
+public import WeilConjectures.Algebra.Homology.HomotopyCategory.DerivabilityStructure
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
+public import WeilConjectures.CategoryTheory.ProEtaleCoefficients.PreservesTotalTensorKFlatQuasiIsoSupplement
+public import WeilConjectures.CategoryTheory.Tensor.TensorPullbackRepresentativeDescent
+public import WeilConjectures.FromJoel.Algebra.Homology.Bifunctor
+public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 /-! # Canonical derived section-module realization
 
 Source: Stacks Project, Sites, Tag 00YV; Modules on Sites, Tags 03EK, 03EL,
@@ -950,6 +956,16 @@ Source: Stacks 03DJ (blueprint: def-pd-section-derived-realization). -/
 def derivedExtension {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     DerivedCategory (modules Λ U) ⥤ DerivedCategory (modules Λ X) :=
   (extension Λ j).mapDerivedCategory
+
+/-- Localization of the specified levelwise extension comparison.
+Source: Stacks 03DJ (blueprint: def-pd-section-derived-realization). -/
+def derivedExtensionComparison {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
+    (internalDerivedExtension Λ j) ⋙
+        (derivedEquivalence Λ X).functor ≅
+      (derivedEquivalence Λ U).functor ⋙ derivedExtension Λ j :=
+  Functor.mapDerivedCategorySquareIso
+    (F₁ := CondensedRing.openImmersionLowerShriek Λ j) (F₂ := (equivalence Λ X).functor)
+    (G₁ := (equivalence Λ U).functor) (G₂ := extension Λ j) (extensionComparison Λ j)
 
 /-- The ringed open adjunction is the localization of the specified ordinary adjunction.
 Source: Stacks 03DJ (blueprint: def-pd-section-derived-realization). -/

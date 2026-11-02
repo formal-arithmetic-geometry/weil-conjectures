@@ -64,6 +64,8 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 import Mathlib.Algebra.Category.ModuleCat.AB
 import Mathlib.CategoryTheory.Limits.Preserves.Limits
 import WeilConjectures.CategoryTheory.Ringed.RingedConstantTowerPushforwardNormalization
+public import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.DirectImageRoosProjectionCompatibility
+public import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.DirectImageRoosProjectionData
 
 /-!
 # Roos limit data for complete direct images
@@ -137,8 +139,8 @@ it commutes with `1-T` because `T` is a product of transition maps and the compa
 natural in each factor. Finally `pushLimitIso` is the conjugate of the constant/pullback
 comparison, so it is compatible with the counits of the two constant-limit adjunctions;
 composing with `pushEvaluationMap` gives the level-projection square. The normalized
-direct-image Roos comparison lem-weil-pbc-direct-image-roos-normalization packages the
-product, `1-T` and connecting-morphism squares. -/
+two projection normalization lemmas supply the canonical Roos first map and the
+level-projection square; the product and `1-T` clauses are proved directly. -/
 theorem directImage_roos_limit_data :
     (∀ n : ℕ, IsIso (pushEvaluationMap l E f n)) ∧
     (∃ (_ : HasCountableProducts (DerivedCategory (AdicCompletion.Modules l E X)))
@@ -160,6 +162,25 @@ theorem directImage_roos_limit_data :
             (levelProjection l E Y n).app ((rpush l E f).obj M) ≫
             (pushEvaluationMap l E f n).app M =
           (rpushModule l E f).map ((levelProjection l E X n).app M)) := by
-  sorry
+  have h := completeDerivedCompletion l E Y X f
+  constructor
+  · rcases h.2.2.2.1 with ⟨_, _, _, ⟨β, hβ, _⟩⟩
+    intro n
+    rw [← hβ n]
+    infer_instance
+  · obtain ⟨hPX, hX⟩ := directImage_roos_projection_data l E X
+    obtain ⟨hPY, hY⟩ := directImage_roos_projection_data l E Y
+    let := (moduleAdjunction l E f).isRightAdjoint
+    refine ⟨hPX, hPY, fun M ↦ ?_⟩
+    refine ⟨hX M, hY ((rpush l E f).obj M), ?_, ?_, ?_⟩
+    · infer_instance
+    · apply Pi.hom_ext
+      intro n
+      simp only [Category.assoc, piComparison_comp_π, towerTransitionEndomorphism,
+        towerProductShift, Preadditive.comp_sub, Preadditive.sub_comp,
+        Category.comp_id, Pi.lift_π, Functor.map_sub]
+      rw [← Category.assoc, piComparison_comp_π, ← Functor.map_comp]
+      rw [← Functor.map_comp, Pi.lift_π, Category.id_comp, Functor.map_comp]
+    · exact directImage_roos_projection_compatibility l E f M
 
 end AlgebraicGeometry.ProEtale.CompleteDerivedCompletion

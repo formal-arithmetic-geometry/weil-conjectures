@@ -14,6 +14,18 @@ public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapMate
 import WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinary.FiniteCoefficientHeartEncoding
 import WeilConjectures.CategoryTheory.SixFunctors.Monoidal
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarProjComparison
+public import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinary.FiniteCtfInternalEtaleRealization
+public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinary.FiniteDiscreteEncodingCompactification
+public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinary.FiniteDiscreteEncodingConstructibility
+public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinary.FiniteDiscreteEncodingTensorTor
+public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinary.FiniteDiscreteOrdinaryEncodingSupplement
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
+public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory
+public import WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ConstructibleIntrinsic
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomComparison
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Perfect
 
 /-! # Tensor and pullback comparisons for normalized finite coefficients
 
@@ -327,6 +339,159 @@ private instance internalFlatResolution (T : Scheme.{u}) :
     Abelian.HasFunctorialFlatResolution
       (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj R T)) :=
   Mod.hasFunctorialFlatResolution
+
+/-- Finite internal-etale realization restricts to an equivalence for every ordered
+Tor interval and commutes naturally with the specified unbounded total direct images
+on all bounded-below etale inputs. The encodings are normalized section-action
+encodings; thus the assertion applies to each choice of the equivalence in the node.
+
+Source: literature/blueprint/latest/blueprint/part-six-operations/
+sec-six-functors-basics/sec-ctf-finite-foundations/sk-prop-ctf-finite-proper/
+sk-prop-ctf-finite-proper.proof.md, comparison paragraph;
+Stacks 09AL, 09C2, 09A6; Bhatt--Scholze, Lemma 5.4.3
+(blueprint: lem-sfb-finite-ctf-internal-etale-realization-all-char).
+
+Proof:
+1. The standing geometric hypotheses make T qcqs. Match the ordinary fixed-scalar
+constructibility convention with the source's finite-stratification convention by resizing
+cover indices; the etale boundedness conventions agree by isGE_iff and isLE_iff.
+2. Apply the existing fixed-module bounded constructible descent theorem to the
+constructible cohomology sheaves. Bounded-below derived Hom bijectivity gives full
+faithfulness on the etale source subcategory.
+3. The existing fixed-module Tor comparison preserves and reflects each interval.
+4. encoding_constructibility and encoding_tensor_tor give the same two identifications
+for every supplied normalized encoding E T. Lift the composite of site comparison and
+its inverse encoding to the two full subcategories. The counit proves membership;
+descent and the unit prove essential surjectivity. Its ambient functor is definitionally
+the specified realization.
+5. Reuse encodingDerivedPushforwardIso, the proved comparison of the separately specified
+unbounded direct images. It derives the normalized sectionwise action comparison by
+exact-equivalence transport through K-injective resolutions.
+6. Apply the existing fixed-module bounded-below direct-image comparison, then use
+rightDerivedFunctorPlusCompatibility and mapDerivedCategoryPlusCompatibility to view it
+in the full unbounded derived categories.
+7. None of these comparisons uses the characteristic of the ground field.
+Conjugate step 5 by the inverse encodings and compose it with step 6. All factors are
+natural isomorphisms. Zero rings, empty schemes and degenerate intervals need no exclusions.
+-/
+theorem finiteCtfInternalEtaleRealization_allChar
+    (k : Type u) [Field k]
+    (A : Type u) [CommRing A] [Finite A]
+    [TopologicalSpace A] [DiscreteTopology A] [IsTopologicalRing A]
+    (E : ∀ T : Scheme.{u}, Encoding A T) :
+    (∀ (T : Over (Spec (.of k)))
+      [LocallyOfFiniteType T.hom] [QuasiCompact T.hom] [IsSeparated T.hom]
+      (a b : ℤ), a ≤ b →
+      ∃ e : ObjectProperty.FullSubcategory
+        (fun K ↦ Etale.DerivedCategory.isBoundedConstructible
+          (ULift.{u + 1} A) T.left K ∧
+          Etale.DerivedCategory.hasTorAmplitudeIn (ULift.{u + 1} A) T.left a b K) ≌
+        ObjectProperty.FullSubcategory
+          (fun (K : DerivedCategory (Internal A T.left)) ↦
+            constantModelBoundedConstructible (coefficient A) T.left K ∧
+            _root_.DerivedCategory.torAmplitudeIn (Internal A T.left) a b K),
+        Nonempty (e.functor ⋙ ObjectProperty.ι (fun (K : DerivedCategory (Internal A T.left)) ↦
+            constantModelBoundedConstructible (coefficient A) T.left K ∧
+              _root_.DerivedCategory.torAmplitudeIn (Internal A T.left) a b K) ≅
+          ObjectProperty.ι (fun K ↦ Etale.DerivedCategory.isBoundedConstructible
+              (ULift.{u + 1} A) T.left K ∧
+            Etale.DerivedCategory.hasTorAmplitudeIn (ULift.{u + 1} A) T.left a b K) ⋙
+              internalEtaleRealization A T.left (E T.left))) ∧
+    (∀ (V T : Over (Spec (.of k)))
+      [LocallyOfFiniteType V.hom] [QuasiCompact V.hom] [IsSeparated V.hom]
+      [LocallyOfFiniteType T.hom] [QuasiCompact T.hom] [IsSeparated T.hom]
+      (f : V ⟶ T) [QuasiCompact f.left] [QuasiSeparated f.left],
+      Nonempty (DerivedCategory.Plus.ι ⋙
+          (Etale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) f.left).rightDerivedFunctor ⋙
+            internalEtaleRealization A T.left (E T.left) ≅
+        DerivedCategory.Plus.ι ⋙ internalEtaleRealization A V.left (E V.left) ⋙
+          CondensedRing.moduleObjectDerivedPushforward (coefficient A) f.left)) := by
+  classical
+  constructor
+  · intro T _ _ _ a b hab
+    have : CompactSpace T.left := QuasiCompact.compactSpace_of_compactSpace T.hom
+    have : QuasiSeparatedSpace T.left := quasiSeparatedSpace_of_quasiSeparated T.hom
+    let C := comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) T.left
+    let e := (E T.left).fixedDerived
+    let P : ObjectProperty (Etale.DerivedCategoryModule (ULift.{u + 1} A) T.left) :=
+      fun K ↦ Etale.DerivedCategory.isBoundedConstructible (ULift.{u + 1} A) T.left K ∧
+        Etale.DerivedCategory.hasTorAmplitudeIn (ULift.{u + 1} A) T.left a b K
+    let Q : ObjectProperty (DerivedCategory (Internal A T.left)) := fun K ↦
+      constantModelBoundedConstructible (coefficient A) T.left K ∧
+        _root_.DerivedCategory.torAmplitudeIn (Internal A T.left) a b K
+    have hb := (encoding_constructibility A T.left (E T.left)).2
+    have ht := (encoding_tensor_tor A T.left (E T.left)).2.2
+    have htC (K : Etale.DerivedCategoryModule (ULift.{u + 1} A) T.left) :
+        Etale.DerivedCategory.hasTorAmplitudeIn (ULift.{u + 1} A) T.left a b K ↔
+          _root_.DerivedCategory.torAmplitudeIn _ a b (C.mapDerivedCategory.obj K) :=
+      Etale.DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn.trans
+        (DerivedCategory.torAmplitudeIn_mapDerivedCategory_iff a b K).symm
+    let F := P.ι ⋙ C.mapDerivedCategory
+    have hplus (K : P.FullSubcategory) : DerivedCategory.TStructure.t.plus K.obj := by
+      obtain ⟨c, d, _, hv⟩ := K.property.1.2
+      exact ⟨c, (DerivedCategory.isGE_iff K.obj c).2 fun i hi ↦ hv i (Or.inl hi)⟩
+    have : F.Full := ⟨fun {K L} f ↦ by
+      obtain ⟨g, hg⟩ := (bijective_comparisonUpperStar_mapDerivedCategory_map
+        K.obj L.obj (hplus L)).2 f
+      exact ⟨ObjectProperty.homMk g, hg⟩⟩
+    have : F.Faithful := ⟨fun {K L} f g h ↦ ObjectProperty.hom_ext _
+      ((bijective_comparisonUpperStar_mapDerivedCategory_map
+        K.obj L.obj (hplus L)).1 h)⟩
+    let R := Q.lift (F ⋙ e.inverse) (fun K ↦ by
+      have hbc := DerivedCategory.boundedConstructible_comparisonUpperStar_mapDerivedCategory_obj
+        ((etaleBC_iff A T.left _).mp K.property.1)
+      have htor := (htC K.obj).mp K.property.2
+      have he := e.counitIso.app (C.mapDerivedCategory.obj K.obj)
+      exact ⟨(hb _).mpr ((ordinaryBC_iff A T.left _).mpr
+        ((DerivedCategory.boundedConstructible _ _).prop_of_iso he.symm
+          hbc)),
+        (ht _ a b hab).mpr ((_root_.DerivedCategory.torAmplitudeIn _ a b).prop_of_iso
+          he.symm htor)⟩)
+    have : R.Full := by dsimp [R]; infer_instance
+    have : R.Faithful := by dsimp [R]; infer_instance
+    have : R.EssSurj := by
+      constructor
+      intro K
+      obtain ⟨L, hL, ⟨j⟩⟩ := (ordinaryBC_iff A T.left _).mp ((hb K.obj).mp K.property.1)
+      have htor := (_root_.DerivedCategory.torAmplitudeIn _ a b).prop_of_iso j.symm
+        ((ht K.obj a b hab).mp K.property.2)
+      let L' : P.FullSubcategory :=
+        ⟨L, (etaleBC_iff A T.left L).mpr hL, (htC L).mpr htor⟩
+      exact ⟨L', ⟨Q.isoMk (e.inverse.mapIso j ≪≫ (e.unitIso.app K.obj).symm)⟩⟩
+    have : R.IsEquivalence := {}
+    exact ⟨R.asEquivalence, ⟨Iso.refl _⟩⟩
+  · intro V T _ _ _ _ _ _ f _ _
+    let C := ModuleCat.{u + 1} (ULift.{u + 1} A)
+    let g := Etale.lowerStar C f.left
+    let h := lowerStar C f.left
+    let v := comparisonUpperStar C V.left
+    let t := comparisonUpperStar C T.left
+    let eV := (E V.left).fixedDerived
+    let eT := (E T.left).fixedDerived
+    obtain ⟨c⟩ := nonempty_iso_comparisonUpperStar_comp_rightDerivedLowerStar C f.left
+    let j : DerivedCategory.Plus.ι ⋙ g.rightDerivedFunctor ⋙ t.mapDerivedCategory ≅
+        DerivedCategory.Plus.ι ⋙ v.mapDerivedCategory ⋙ h.rightDerivedFunctor :=
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight g.rightDerivedFunctorPlusCompatibility.symm
+        t.mapDerivedCategory ≪≫ Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft g.rightDerivedFunctorPlus
+        t.mapDerivedCategoryPlusCompatibility.symm ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight c DerivedCategory.Plus.ι ≪≫
+      Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft v.mapDerivedCategoryPlus h.rightDerivedFunctorPlusCompatibility ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight v.mapDerivedCategoryPlusCompatibility h.rightDerivedFunctor ≪≫
+      Functor.associator _ _ _
+    let d := encodingDerivedPushforwardIso A f.left (E T.left) (E V.left)
+    let di := Iso.inverseCompIso (G := eV)
+      (Iso.isoCompInverse (H := eT) d ≪≫ Functor.associator _ _ _)
+    exact ⟨Functor.isoWhiskerLeft DerivedCategory.Plus.ι
+        (Functor.associator _ _ _).symm ≪≫
+      (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight j eT.inverse ≪≫
+      Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft DerivedCategory.Plus.ι
+        (Functor.isoWhiskerLeft v.mapDerivedCategory di.symm)⟩
 
 private instance internalGoodTensorLeft (T : Scheme.{u})
     (P Q S : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
