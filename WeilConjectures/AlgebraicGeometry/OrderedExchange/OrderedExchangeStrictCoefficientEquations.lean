@@ -271,7 +271,17 @@ end DerivedPull
 end OrdinaryPull
 
 /-- Restriction of the strict reduction comparison `rho` is compatible with pullback.
-Source: Stacks 099M, 0D6D (blueprint: def-weil-pbc-ordered-coefficient-comparison-data). -/
+Source: Stacks 099M, 0D6D (blueprint: def-weil-pbc-ordered-coefficient-comparison-data).
+Proof plan (ordinary core `ordinaryRho_pull` is proved above): reduce to `Q L` for a
+flat-term K-flat `L`; postcompose with the invertible map
+`red(pull(resF L)) ≫ red(pullF(res L)) ≫ reductionComplexCounit`; expand both sides by
+`RhoNormalization` (at `L` and at `pull L`), `StratumReductionFormula`,
+`ReductionPullNormalized`, and `mapDerivedCategorySquareIso_hom_app_Q` for `alpha` and
+`exchangeResPull`; both become `Π ≫ Q.map _` with the chain maps identified by
+`ordinaryRho_pull`. Attempted: all the normalization facts elaborate, but applying the
+square formula to `exchangeModuleResPull` costs about 60 s of kernel checking and the
+assembled proof exceeds the memory limit (instance-path mismatch between the tower
+derived-category instances), so it is left as a separate statement. -/
 theorem rho_reductionTowerPullbackIso {U V : Scheme.{t}} (u : U ⟶ V) (M : d.derived V) :
     (exchangeTowerRes d U).map ((d.reductionTowerPullbackIso u).hom.app M) ≫
         (rho d U).hom.app ((d.pull u).obj M) ≫
@@ -437,7 +447,10 @@ theorem exchangeRealizationH_beta (K : d.derived X) :
 
 /-- The third strict coefficient equation: restriction of the strict exchange `towerV'`
 is the constant strict tower mate, conjugated by `beta` and `delta`.
-Source: Stacks 099M, 0E48 (blueprint: lem-weil-pbc-ordered-strict-coefficient-equations). -/
+Source: Stacks 099M, 0E48 (blueprint: lem-weil-pbc-ordered-strict-coefficient-equations).
+Needs, beyond `rho_reductionTowerPullbackIso` and `rho_towerProjection`, the compatibility of
+restriction with the ambient exchange `integralExchange` (via `alpha`, `chi` and the
+composite pullback isomorphisms); not attempted in detail. -/
 theorem towerV'_delta (sq : ChosenCartesianSquare g' f' f g) (K : d.derived X) :
     (exchangeTowerRes d Y').map (d.towerV' sq K) ≫ (delta (f' := f') (g' := g') d K).hom =
       (beta (f := f) (g := g) d K).hom ≫

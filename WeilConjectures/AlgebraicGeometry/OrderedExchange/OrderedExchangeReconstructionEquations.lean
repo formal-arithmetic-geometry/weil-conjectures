@@ -88,7 +88,10 @@ theorem phi_eq_completedPullResIso : phi d u = completedPullResIso d u :=
     (completedPullResIso_unit d u)
 
 /-- Restriction commutes with the two direct-image/derived-limit comparisons.
-Source: Stacks 0A07, 0E48 (blueprint: lem-weil-pbc-ordered-reconstruction-equations). -/
+Source: Stacks 0A07, 0E48 (blueprint: lem-weil-pbc-ordered-reconstruction-equations).
+All five maps are adjunction conjugates or unit-normalized comparisons; a proof needs
+`lambda` as the mate of `scalarDiagonal` (not yet available) or a K-injective computation.
+Not attempted in detail. -/
 theorem lambda_directImageRlimIso (Z : DerivedCategory (d.towers U)) :
     (res d V).map ((d.directImageRlimIso u).hom.app Z) ≫
         (lambda d V).hom.app ((d.towerPush u).obj Z) ≫
