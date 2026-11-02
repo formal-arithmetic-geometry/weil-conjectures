@@ -55,6 +55,7 @@ theorem integral_site_pullback_units_endpoint_canonical {X Y : Scheme.{u}} (f : 
     (lowerStarCompComparisonLowerStarIso f AddCommGrpCat.{u + 1}).symm
   simp only [Scheme.upperStarGmSheafToGmSheaf, cartierUnitsComparison,
     towerIntegral_unitsSheafPull, Equiv.apply_symm_apply]
+  erw [Equiv.apply_symm_apply, Equiv.apply_symm_apply]
   ext U x
   simp [unitsDirect, lowerStarCompComparisonLowerStarIso, comparisonLowerStar,
     Etale.lowerStar, ProEtale.lowerStar, toProEtCompOverPullbackIso,

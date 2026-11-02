@@ -36,6 +36,7 @@ coefficient towers. Its natural index n denotes the positive exponent n+1.
 @[expose] public noncomputable section
 
 set_option autoImplicit false
+set_option linter.privateModule false
 set_option relaxedAutoImplicit false
 set_option synthInstance.maxSize 4096
 
