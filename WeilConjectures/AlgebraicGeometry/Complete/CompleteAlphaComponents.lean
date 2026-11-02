@@ -59,8 +59,8 @@ theorem beta_hom_app {U' U X' X : Scheme.{u}}
     haveI := betaInvApp_isIso B gU j' j g h hsq M
     (beta B gU j' j g h hsq).hom.app M =
       inv (ProperOpenTransport.betaInvApp (jAdj B j) (jAdj B j') (squareG B gU j' j g h) M) := by
-  haveI := betaInv_isIso B gU j' j g h hsq
-  haveI := betaInvApp_isIso B gU j' j g h hsq M
+  have := betaInv_isIso B gU j' j g h hsq
+  have := betaInvApp_isIso B gU j' j g h hsq M
   change (inv (betaInv B gU j' j g h)).app M = _
   rw [NatIso.isIso_inv_app]
   congr 1
@@ -86,5 +86,35 @@ theorem alpha_eq_absAlpha {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
       (jComp B (squareLift k r p i h) (pullback.fst p i)) (jCongr B (pullback.lift_fst k r h))
       (gComp B (squareLift k r p i h) (pullback.snd p i))
       (eqToIso (congrArg (G B) (pullback.lift_snd k r h))) := rfl
+
+/-- The strict proper/open gamma is the proper-adjunction mate of alpha. -/
+theorem gamma_eq_mateEquiv {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
+    (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
+    [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
+    (h : k ≫ p = r ≫ i) :
+    gamma B k r p i h = mateEquiv (adj B r) (adj B p) (alpha B k r p i h) := rfl
+
+/-- The strict proper/open comparison, componentwise, is the abstract one. -/
+theorem alpha_app_eq_alphaApp {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
+    (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
+    [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
+    (h : k ≫ p = r ≫ i)
+    [IsIso (jAdj B (squareLift k r p i h)).unit]
+    [IsIso (ProperOpenTransport.openToPush (jAdj B (squareLift k r p i h))
+      (adj B (squareLift k r p i h)))]
+    [∀ x, IsIso (ProperOpenTransport.betaInvApp (jAdj B i) (jAdj B (pullback.fst p i))
+      (squareG B (pullback.snd p i) (pullback.fst p i) i p pullback.condition.symm) x)]
+    (x : Derived B S) :
+    (alpha B k r p i h).app x = ProperOpenTransport.alphaApp
+      (jAdj B i) (jAdj B (pullback.fst p i)) (jAdj B (squareLift k r p i h))
+      (adj B (squareLift k r p i h))
+      (squareG B (pullback.snd p i) (pullback.fst p i) i p pullback.condition.symm)
+      (jComp B (squareLift k r p i h) (pullback.fst p i) ≪≫ jCongr B (pullback.lift_fst k r h))
+      ((gComp B (squareLift k r p i h) (pullback.snd p i)).symm ≪≫
+        eqToIso (congrArg (G B) (pullback.lift_snd k r h))) x := by
+  rw [alpha_eq_absAlpha]
+  refine ProperOpenTransport.absAlpha_app_eq_alphaApp_of_eq _ _ _ _ _ _ (fun x ↦ ?_) _
+    (pi_eq_clopenProjection B _) _ _ _ _ x
+  rw [beta_hom_app]
 
 end AlgebraicGeometry.ProEtale.StrictTower

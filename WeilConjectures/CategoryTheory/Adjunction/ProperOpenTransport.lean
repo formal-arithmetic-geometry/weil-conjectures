@@ -77,7 +77,7 @@ theorem inv_betaInvNat_app {PgU : U ⥤ U'} {Jj : U ⥤ X} {Pj : X ⥤ U}
     (sq : Pg ⋙ Pj' ≅ Pj ⋙ PgU) [IsIso (betaInvNat adjJ adjJ' sq)] (M : U) :
     haveI := betaInvApp_isIso_of_betaInvNat adjJ adjJ' sq M
     (inv (betaInvNat adjJ adjJ' sq)).app M = inv (betaInvApp adjJ adjJ' sq M) := by
-  haveI := betaInvApp_isIso_of_betaInvNat adjJ adjJ' sq M
+  have := betaInvApp_isIso_of_betaInvNat adjJ adjJ' sq M
   rw [NatIso.isIso_inv_app]
   exact IsIso.inv_eq_inv.mpr (betaInvNat_app adjJ adjJ' sq M)
 
@@ -321,8 +321,8 @@ end Alpha
 
 section AbstractAlpha
 
-variable {DS DT DW DV DP : Type*} [Category DS] [Category DT] [Category DW] [Category DV]
-  [Category DP]
+variable {DS DT DW DV DP : Type*} [iDS : Category DS] [iDT : Category DT] [iDW : Category DW]
+  [iDV : Category DV] [iDP : Category DP]
   {Ji : DS ⥤ DT} {Pp : DT ⥤ DW} {Psnd : DS ⥤ DP} {Jfst : DP ⥤ DW} {Ps : DP ⥤ DV}
   {Js : DV ⥤ DP} {Jk Jsf : DV ⥤ DW} {Pr Psr : DS ⥤ DV}
 
@@ -354,6 +354,15 @@ theorem absAlpha_app_eq_alphaApp (β : Ji ⋙ Pp ≅ Psnd ⋙ Jfst)
       alphaApp adjI adjFst adjS adjPs sq (jc ≪≫ jq) (gc.symm ≪≫ gq) x := by
   rw [absAlpha_app, hβ]
   simp [alphaApp]
+
+theorem absAlpha_app_eq_alphaApp_of_eq (β : Ji ⋙ Pp ≅ Psnd ⋙ Jfst)
+    (hβ : ∀ x, β.hom.app x = inv (betaInvApp adjI adjFst sq x)) (π : 𝟭 DP ⟶ Ps ⋙ Js)
+    (hπ : π = clopenProjection adjS adjPs)
+    (jc : Js ⋙ Jfst ≅ Jsf) (jq : Jsf ≅ Jk) (gc : Psr ≅ Psnd ⋙ Ps) (gq : Psr ≅ Pr) (x : DS) :
+    (absAlpha β π jc jq gc gq).app x =
+      alphaApp adjI adjFst adjS adjPs sq (jc ≪≫ jq) (gc.symm ≪≫ gq) x := by
+  subst hπ
+  exact absAlpha_app_eq_alphaApp adjI adjFst adjS adjPs sq β hβ jc jq gc gq x
 
 end AbstractAlpha
 
@@ -387,5 +396,91 @@ theorem square_transport (cri : Pri ≅ Pi ⋙ Pr) (ckp : Pkp ≅ Pp ⋙ Pk) (E 
   simp
 
 end Square
+
+section Gamma
+
+variable {DS DT DW DV DP : Type*} [iDS : Category DS] [iDT : Category DT] [iDW : Category DW]
+  [iDV : Category DV] [iDP : Category DP]
+  {Ji : DS ⥤ DT} {Pi : DT ⥤ DS} (adjI : Ji ⊣ Pi) {Pp : DT ⥤ DW} {Rp : DW ⥤ DT}
+  (adjP : Pp ⊣ Rp) {Psnd : DS ⥤ DP}
+  {Jfst : DP ⥤ DW} {Pfst : DW ⥤ DP} (adjFst : Jfst ⊣ Pfst)
+  {Js : DV ⥤ DP} {Ps : DP ⥤ DV} {Rs : DV ⥤ DP} (adjS : Js ⊣ Ps) (adjPs : Ps ⊣ Rs)
+  [IsIso adjS.unit] [IsIso (openToPush adjS adjPs)]
+  {Jk : DV ⥤ DW} {Pr : DS ⥤ DV} {Rr : DV ⥤ DS} (adjR : Pr ⊣ Rr)
+  (sq : Pp ⋙ Pfst ≅ Pi ⋙ Psnd) [∀ x, IsIso (betaInvApp adjI adjFst sq x)]
+  (c : Js ⋙ Jfst ≅ Jk) (e : Psnd ⋙ Ps ≅ Pr)
+  {DS' DT' DW' DV' DP' : Type*} [iDS' : Category DS'] [iDT' : Category DT']
+  [iDW' : Category DW'] [iDV' : Category DV'] [iDP' : Category DP']
+  {Ji' : DS' ⥤ DT'} {Pi' : DT' ⥤ DS'} (adjI' : Ji' ⊣ Pi') {Pp' : DT' ⥤ DW'}
+  {Rp' : DW' ⥤ DT'} (adjP' : Pp' ⊣ Rp')
+  {Psnd' : DS' ⥤ DP'} {Jfst' : DP' ⥤ DW'} {Pfst' : DW' ⥤ DP'} (adjFst' : Jfst' ⊣ Pfst')
+  {Js' : DV' ⥤ DP'} {Ps' : DP' ⥤ DV'} {Rs' : DV' ⥤ DP'} (adjS' : Js' ⊣ Ps')
+  (adjPs' : Ps' ⊣ Rs') [IsIso adjS'.unit] [IsIso (openToPush adjS' adjPs')]
+  {Jk' : DV' ⥤ DW'} {Pr' : DS' ⥤ DV'} {Rr' : DV' ⥤ DS'} (adjR' : Pr' ⊣ Rr')
+  (sq' : Pp' ⋙ Pfst' ≅ Pi' ⋙ Psnd') [∀ x, IsIso (betaInvApp adjI' adjFst' sq' x)]
+  (c' : Js' ⋙ Jfst' ≅ Jk') (e' : Psnd' ⋙ Ps' ≅ Pr')
+  {ΦS : DS ⥤ DS'} {ΦT : DT ⥤ DT'} {ΦW : DW ⥤ DW'} {ΦV : DV ⥤ DV'} {ΦP : DP ⥤ DP'}
+  (φi : Pi ⋙ ΦS ≅ ΦT ⋙ Pi') (φp : Pp ⋙ ΦW ≅ ΦT ⋙ Pp')
+  (φsnd : Psnd ⋙ ΦP ≅ ΦS ⋙ Psnd') (φfst : Pfst ⋙ ΦP ≅ ΦW ⋙ Pfst')
+  (φs : Ps ⋙ ΦV ≅ ΦP ⋙ Ps') (φr : Pr ⋙ ΦV ≅ ΦS ⋙ Pr')
+  [IsIso (openComparison adjI adjI' φi)] [IsIso (openComparison adjFst adjFst' φfst)]
+  [IsIso (openComparison adjS adjS' φs)]
+  [IsIso (mateEquiv adjR adjR' φr.inv)] [IsIso (mateEquiv adjP adjP' φp.inv)]
+
+/-- The proper-adjunction mate of the proper/open comparison is conjugate to its counterpart
+along comparisons of inverse images compatible with the base-change square and the
+inverse-image compositor, provided the open-extension and direct-image mates of these
+comparisons are invertible. -/
+theorem gammaApp_transport (α : Ji ⋙ Pp ⟶ Pr ⋙ Jk) (α' : Ji' ⋙ Pp' ⟶ Pr' ⋙ Jk')
+    (hα : ∀ x, α.app x = alphaApp adjI adjFst adjS adjPs sq c e x)
+    (hα' : ∀ x, α'.app x = alphaApp adjI' adjFst' adjS' adjPs' sq' c' e' x)
+    (hsq : ∀ x : DT, ΦP.map (sq.inv.app x) ≫ φfst.hom.app (Pp.obj x) ≫
+        Pfst'.map (φp.hom.app x) =
+      φsnd.hom.app (Pi.obj x) ≫ Psnd'.map (φi.hom.app x) ≫ sq'.inv.app (ΦT.obj x))
+    (he : ∀ x : DS, ΦV.map (e.hom.app x) ≫ φr.hom.app x =
+      φs.hom.app (Psnd.obj x) ≫ Ps'.map (φsnd.hom.app x) ≫ e'.hom.app (ΦS.obj x))
+    (γ : Rr ⋙ Ji ⟶ Jk ⋙ Rp) (γ' : Rr' ⋙ Ji' ⟶ Jk' ⋙ Rp')
+    (hγ : γ = mateEquiv adjR adjP α) (hγ' : γ' = mateEquiv adjR' adjP' α')
+    (y : DV) :
+    ∃ (e₁ : ΦT.obj (Ji.obj (Rr.obj y)) ≅ Ji'.obj (Rr'.obj (ΦV.obj y)))
+      (e₂ : ΦT.obj (Rp.obj (Jk.obj y)) ≅ Rp'.obj (Jk'.obj (ΦV.obj y))),
+      ΦT.map (γ.app y) =
+        e₁.hom ≫ γ'.app (ΦV.obj y) ≫ e₂.inv := by
+  subst hγ hγ'
+  let θG : Ji ⋙ ΦT ≅ ΦS ⋙ Ji' := (asIso (openComparison adjI adjI' φi)).symm
+  let θH := compositeOpenComparison adjFst adjS c adjFst' adjS' c' φfst φs
+  have ht := mateEquiv_app_transport adjR adjP adjR' adjP' α α' φr φp θG θH (fun x ↦ by
+    rw [hα, hα', alphaApp_transport adjI adjFst adjS adjPs sq c e adjI' adjFst' adjS' adjPs'
+      sq' c' e' φi φp φsnd φfst φs φr hsq he x]
+    congr 2
+    simp [θG]) y
+  refine ⟨θG.app (Rr.obj y) ≪≫ Ji'.mapIso (asIso ((mateEquiv adjR adjR' φr.inv).app y)),
+    asIso ((mateEquiv adjP adjP' φp.inv).app (Jk.obj y)) ≪≫ Rp'.mapIso (θH.app y), ?_⟩
+  rw [← cancel_mono ((mateEquiv adjP adjP' φp.inv).app (Jk.obj y)), ht]
+  simp [← Functor.map_comp]
+
+/-- `gammaApp_transport`, with the mates given as natural transformations between arbitrary
+functors equal to the composites. -/
+theorem gammaApp_transport' (α : Ji ⋙ Pp ⟶ Pr ⋙ Jk) (α' : Ji' ⋙ Pp' ⟶ Pr' ⋙ Jk')
+    (hα : ∀ x, α.app x = alphaApp adjI adjFst adjS adjPs sq c e x)
+    (hα' : ∀ x, α'.app x = alphaApp adjI' adjFst' adjS' adjPs' sq' c' e' x)
+    (hsq : ∀ x : DT, ΦP.map (sq.inv.app x) ≫ φfst.hom.app (Pp.obj x) ≫
+        Pfst'.map (φp.hom.app x) =
+      φsnd.hom.app (Pi.obj x) ≫ Psnd'.map (φi.hom.app x) ≫ sq'.inv.app (ΦT.obj x))
+    (he : ∀ x : DS, ΦV.map (e.hom.app x) ≫ φr.hom.app x =
+      φs.hom.app (Psnd.obj x) ≫ Ps'.map (φsnd.hom.app x) ≫ e'.hom.app (ΦS.obj x))
+    {F G : DV ⥤ DT} {F' G' : DV' ⥤ DT'} (hF : Rr ⋙ Ji = F) (hG : Jk ⋙ Rp = G)
+    (hF' : Rr' ⋙ Ji' = F') (hG' : Jk' ⋙ Rp' = G')
+    (γ : F ⟶ G) (γ' : F' ⟶ G')
+    (hγ : HEq γ (mateEquiv adjR adjP α)) (hγ' : HEq γ' (mateEquiv adjR' adjP' α'))
+    (y : DV) :
+    ∃ (e₁ : ΦT.obj (F.obj y) ≅ F'.obj (ΦV.obj y)) (e₂ : ΦT.obj (G.obj y) ≅ G'.obj (ΦV.obj y)),
+      ΦT.map (γ.app y) = e₁.hom ≫ γ'.app (ΦV.obj y) ≫ e₂.inv := by
+  subst hF hG hF' hG'
+  exact gammaApp_transport adjI adjP adjFst adjS adjPs adjR sq c e adjI' adjP' adjFst' adjS'
+    adjPs' adjR' sq' c' e' φi φp φsnd φfst φs φr α α' hα hα' hsq he γ γ' (eq_of_heq hγ)
+    (eq_of_heq hγ') y
+
+end Gamma
 
 end CategoryTheory.ProperOpenTransport
