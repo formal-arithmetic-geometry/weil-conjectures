@@ -121,17 +121,49 @@ Source: blueprint step 8 (blueprint: thm-cbc-complete-proetale). -/
 abbrev cbcStrictReduction (T : Scheme.{t}) : d.derived T ⥤ ProEtale.StrictTower.Derived A T :=
   completedReductionTower T d ⋙ exchangeTowerRes d T
 
+/-- Quotient-tower completeness implies intrinsic completeness.
+Source: blueprint order 1587 (blueprint: thm-cbc-complete-proetale). -/
+theorem cbcCompleteProperty_of_towerComplete (T : Scheme.{t})
+    (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal)
+    (K : d.derived T) (hK : d.TowerComplete T K) :
+    cbcCompleteProperty d T r a ha K := by
+  obtain ⟨c, hc⟩ := completedKoszulQuotientComparison T d r a ha K
+    (DerivedCategory.Q.objPreimage K) (DerivedCategory.Q.objObjPreimageIso K)
+  change IsIso (d.completionUnit T K) at hK
+  change IsIso (intrinsicCompletionUnit T d r a ha K
+    (DerivedCategory.Q.objPreimage K) (DerivedCategory.Q.objObjPreimageIso K))
+  change intrinsicCompletionUnit T d r a ha K
+    (DerivedCategory.Q.objPreimage K) (DerivedCategory.Q.objObjPreimageIso K) ≫
+      c.hom = d.completionUnit T K at hc
+  have : IsIso (intrinsicCompletionUnit T d r a ha K
+      (DerivedCategory.Q.objPreimage K) (DerivedCategory.Q.objObjPreimageIso K) ≫ c.hom) := by
+    rw [hc]
+    exact hK
+  exact IsIso.of_isIso_comp_right _ c.hom
+
+/-- The trivial Cartesian square of an open immersion over the identity.
+Source: Stacks 01JR (blueprint: thm-cbc-complete-proetale). -/
+def cbcIdOpenImmersionSquare {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j] :
+    OpenImmersionSquare (𝟙 U) j j (𝟙 T) :=
+  let sq : IsPullback (𝟙 U) j j (𝟙 T) := IsPullback.of_horiz_isIso ⟨by simp⟩
+  { w := by simp
+    isoPullback := sq.isoPullback
+    hom_fst := sq.isoPullback_hom_fst
+    hom_snd := sq.isoPullback_hom_snd
+    isOpenImmersion := inferInstance
+    isOpenImmersion' := inferInstance }
+
 /-- Extension by zero along a quasi-compact open immersion preserves quotient-tower
-completeness. Source: blueprint lem-cbc-completed-extension-zero-comparison, Stacks 099N
-(blueprint: thm-cbc-complete-proetale).
-Proof sketch: for quasi-compact j, recollement writes j_! as the kernel of two
-product-preserving functors, so j_! commutes with countable products and hence with Rlim;
-it also commutes with strict quotient reduction (cbcRingedOpenStrictReduction). Thus the
-completion unit of j_! M is j_! of that of M, up to these isomorphisms. -/
+completeness. This is the completeness assertion of `completedExtensionZeroComparison`.
+Source: blueprint lem-cbc-completed-extension-zero-comparison, Stacks 099N
+(blueprint: thm-cbc-complete-proetale). -/
 theorem cbcJ_towerComplete {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j]
-    [QuasiCompact j] (M : d.derived U) (hM : d.TowerComplete U M) :
+    [QuasiCompact j] (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal)
+    (M : d.derived U) (hM : d.TowerComplete U M) :
     d.TowerComplete T ((cbcJ d j).obj M) := by
-  sorry
+  have hc := ((completedExtensionZeroComparison d (cbcIdOpenImmersionSquare j) r a ha).2
+    ⟨M, cbcCompleteProperty_of_towerComplete d U r a ha M hM⟩).1
+  exact cbcTowerComplete_of_completeProperty d T r a ha _ hc
 
 /-- After strict reduction and constant-coefficient restriction, the completed proper/open
 gamma is conjugate to the strict-tower proper/open gamma.
@@ -190,9 +222,9 @@ theorem cbcProperOpenGamma_app_isIso {V W S T : Scheme.{t}} (k : V ⟶ W) (r : V
   have hK : d.TowerComplete V K.obj :=
     cbcTowerComplete_of_completeProperty d V n a ha K.obj K.property
   have hs : d.TowerComplete T ((cbcJ d i).obj ((d.push r).obj K.obj)) :=
-    cbcJ_towerComplete d i _ (d.push_complete r K.obj hK)
+    cbcJ_towerComplete d i n a ha _ (d.push_complete r K.obj hK)
   have ht : d.TowerComplete T ((d.push p).obj ((cbcJ d k).obj K.obj)) :=
-    d.push_complete p _ (cbcJ_towerComplete d k _ hK)
+    d.push_complete p _ (cbcJ_towerComplete d k n a ha _ hK)
   refine isIso_of_reductionTower_isIso d T _ hs ht ?_
   rw [← exchangeTowerRes_isIso_iff]
   obtain ⟨e₁, e₂, he⟩ := cbcProperOpenGamma_strictConjugate d k r p i h K.obj
