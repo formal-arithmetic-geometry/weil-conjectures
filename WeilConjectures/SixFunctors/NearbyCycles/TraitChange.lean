@@ -5,7 +5,12 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.NearbyCycles.HomComp
+public import WeilConjectures.SixFunctors.NearbyCycles.OpenExchange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChangeRestricted
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension
+public import WeilConjectures.RingTheory.ProEtale.StrictlyHenselianRetraction
 public import WeilConjectures.SixFunctors.NearbyCycles.TraitChangeInduction.Basic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.ResidueFieldEtaleOrigin
 public import WeilConjectures.Tactic.TransportExact
