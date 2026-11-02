@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.ZetaWeil.ConstantGeometricStalkUnit.CoefficientPullbackUnitCoordinates
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.SingleFunctor
 import WeilConjectures.TraceFormula.Integral.IntegralPullbackComposition
 import all WeilConjectures.ZetaWeil.ConstantGeometricStalkUnit.CoefficientPullbackUnitCoordinates
 import all WeilConjectures.SmoothPurity.Supporting.ConstantWeilStructure
@@ -87,6 +88,7 @@ private theorem finite_coordinate_unit {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ
   simpa only [ConstantPullbackUnitQuasiIsomorphism.stalkFinitePullbackRegularIso,
     asIso_hom] using WeilConjectures.ConstantGeometricStalkUnit.finiteUnitHom_tensor l E f n
 
+
 private def finiteChainUnit {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
   ((integralOperationsLevelPullback l E f n).mapHomologicalComplex (.up ℤ)).map
       (WeilConjectures.finiteSingleRegularIso l E Y n).hom ≫
@@ -94,6 +96,59 @@ private def finiteChainUnit {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
       (SheafOfModules.unit (integralCoefficientSheaf l E Y n)) ≫
     (CochainComplex.singleFunctor _ 0).map
       (ConstantPullbackUnitQuasiIsomorphism.stalkFinitePullbackRegularIso l E f n).hom
+
+/-- The identification `(F X)[0] ≅ F (X[0])` is natural in the additive functor `F`. -/
+private theorem mapCochainComplexSingleFunctor_naturality {C D : Type*} [Category C]
+    [Category D] [Preadditive C] [HasZeroObject C] [Abelian D] {F G : C ⥤ D} [F.Additive]
+    [G.Additive] (e : F ⟶ G) (M : C) :
+    (NatTrans.mapHomologicalComplex e (.up ℤ)).app ((CochainComplex.singleFunctor C 0).obj M) ≫
+        (G.mapCochainComplexSingleFunctor 0).hom.app M =
+      (F.mapCochainComplexSingleFunctor 0).hom.app M ≫
+        (CochainComplex.singleFunctor D 0).map (e.app M) := by
+  ext i
+  by_cases hi : i = 0
+  · subst hi
+    simp [Functor.mapCochainComplexSingleFunctor, CochainComplex.singleFunctor,
+      CochainComplex.singleFunctors, HomologicalComplex.single_map_f_self]
+  · exact (HomologicalComplex.isZero_single_obj_X _ _ _ _ hi).eq_of_tgt _ _
+
+private theorem finite_chain_model {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
+    DerivedCategory.Q.map
+        ((NatIso.mapHomologicalComplex (integralFinitePullbackModel l E f n)
+          (ComplexShape.up ℤ)).hom.app
+            ((unrestrictedIntegralFiniteComplex l E Y n).obj
+              (constantWeilIntegralGood l E Y).obj)) ≫
+      (proEtaleConstantRingPullback (Padic.coefficientExtensionRing l E (n + 1))
+        f).mapDerivedCategoryFactors.inv.app
+          ((unrestrictedIntegralFiniteComplex l E Y n).obj (constantWeilIntegralGood l E Y).obj) ≫
+        (proEtaleConstantRingPullback (Padic.coefficientExtensionRing l E (n + 1))
+          f).mapDerivedCategory.map
+            (DerivedCategory.Q.map (WeilConjectures.finiteSingleRegularIso l E Y n).hom) ≫
+          (finiteRingUnit l E f n).hom =
+      DerivedCategory.Q.map (finiteChainUnit l E f n) := by
+  let := Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_pos n)
+  let F := proEtaleConstantRingPullback (Padic.coefficientExtensionRing l E (n + 1)) f
+  let s := WeilConjectures.finiteSingleRegularIso l E Y n
+  have h1 := F.mapDerivedCategoryFactors.inv.naturality s.hom
+  have h2 := (NatTrans.mapHomologicalComplex (integralFinitePullbackModel l E f n).hom
+    (.up ℤ)).naturality s.hom
+  simp only [Functor.comp_map] at h1 h2
+  erw [← reassoc_of% h1, ← DerivedCategory.Q.map_comp_assoc, ← h2]
+  rw [finiteRingUnit, finiteChainUnit]
+  simp only [Functor.map_comp, Category.assoc]
+  refine congrArg (_ ≫ ·) ?_
+  simp only [Iso.trans_hom, Iso.app_hom, openSquareDerivedPullbackModel, finiteUnit,
+    Functor.mapIso_hom, asIso_hom]
+  have h3 := Functor.mapDerivedCategoryNatIso_hom_app_singleFunctor
+    (openSquarePullbackModel (Padic.coefficientExtensionRing l E (n + 1)) f)
+    (SheafOfModules.unit (integralCoefficientSheaf l E Y n))
+  erw [reassoc_of% h3,
+    F.mapDerivedCategoryFactors_inv_app_mapDerivedCategorySingleFunctor_hom_app_assoc,
+    ← DerivedCategory.Q.map_comp_assoc,
+    mapCochainComplexSingleFunctor_naturality (integralFinitePullbackModel l E f n).hom,
+    ← finite_coordinate_unit l E f n]
+  simp only [Functor.map_comp, Category.assoc]
+  rfl
 
 attribute [local irreducible] finiteChainUnit
 
