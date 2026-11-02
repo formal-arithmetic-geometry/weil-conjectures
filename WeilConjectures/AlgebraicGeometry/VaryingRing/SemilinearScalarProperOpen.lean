@@ -6,8 +6,6 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.VaryingRing.SemilinearScalarAdjunctions
-import WeilConjectures.AlgebraicGeometry.StrictTower.TowerOpenBetaNormalization
-import WeilConjectures.AlgebraicGeometry.StrictTower.ProperOpenClopenProjector
 
 /-! # Scalar restriction and proper/open coherence
 
@@ -22,8 +20,6 @@ set_option backward.isDefEq.respectTransparency.types false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 open WeilConjectures.SemilinearSections
-
-attribute [-instance] CategoryTheory.catToReflQuiver
 
 namespace AlgebraicGeometry.ProEtale.VaryingRing
 
