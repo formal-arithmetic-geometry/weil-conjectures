@@ -22,7 +22,6 @@ public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChangeAdjunctionSupplement
 import all WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientDatumSupplement
 import all WeilConjectures.AlgebraicGeometry.OrderedExchange.ProEtaleConstantReductionModels
-import WeilConjectures.AlgebraicGeometry.OrderedExchange.OrderedExchangeRhoComparison
 import all WeilConjectures.AlgebraicGeometry.CompletedConstantAlgebraFlatQuotients
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
@@ -588,31 +587,6 @@ def ordinaryRho (T : Scheme.{t}) :
       completedReductionModuleTowerFunctor T d ⋙ exchangeTowerModuleRes d T :=
   (ordinaryRho_existsUnique d T).exists.choose
 
-/-- Restriction followed by constant strict reduction preserves quasi-isomorphisms
-between flat-term K-flat complexes over the completed coefficients. -/
-private theorem restrictReduction_quasiIso (T : Scheme.{t})
-    {P Q : CochainComplex (reductionModules T (d.completedRing T)) ℤ} (a : P ⟶ Q)
-    (hP : CochainComplex.IsKFlatIndependentCoefficients.{t + 1, t, t + 1}
-      (R := d.completedRing T) P)
-    (hQ : CochainComplex.IsKFlatIndependentCoefficients.{t + 1, t, t + 1}
-      (R := d.completedRing T) Q) (ha : QuasiIso a) :
-    QuasiIso (((reductionRestrict T (exchangeScalar d T) ⋙
-      reductionModule d T).mapHomologicalComplex
-      (.up ℤ)).map a) := by
-  have hflat := orderedScalarFlat d T
-  have hrP := SheafOfModules.isKFlat_restrictScalars_of_flat (exchangeScalar d T) hflat P hP
-  have hrQ := SheafOfModules.isKFlat_restrictScalars_of_flat (exchangeScalar d T) hflat Q hQ
-  have hra : QuasiIso (((reductionRestrict T (exchangeScalar d T)).mapHomologicalComplex
-      (.up ℤ)).map a) := inferInstance
-  rw [HomologicalComplex.quasiIso_iff_evaluation]
-  intro n
-  let φ := quotient d T n.unop
-  have hchange := scalarChangeQuasiIso T φ _ hrP.1 hrQ.1 hra
-  change QuasiIso (((reductionRestrict T φ).mapHomologicalComplex (.up ℤ)).map
-    (((reductionChange T φ).mapHomologicalComplex (.up ℤ)).map
-      (((reductionRestrict T (exchangeScalar d T)).mapHomologicalComplex (.up ℤ)).map a)))
-  infer_instance
-
 attribute [local irreducible] ordinaryRho reductionModule completedReductionModuleTowerFunctor
   completedReductionCoefficient constantSheaf AdicCoefficients.coefficientRing
   SheafOfModules.monoidalCategory
@@ -642,7 +616,98 @@ def RhoNormalization (T : Scheme.{t})
               ((NatIso.mapHomologicalComplex (ordinaryRho d T).symm (.up ℤ)).hom.app P)
 
 attribute [local irreducible] RhoNormalization
+/-- The complex-level counit of a derived functor equipped with a homotopy-level counit,
+as a natural transformation. -/
+def complexCounitNatTrans
+    {B : Type*} [Category B] [Abelian B] [HasDerivedCategory B]
+    {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
+    (E : B ⥤ C) [E.Additive] (L : DerivedCategory B ⥤ DerivedCategory C)
+    (ε : DerivedCategory.Qh ⋙ L ⟶ E.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh) :
+    DerivedCategory.Q ⋙ L ⟶ E.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q :=
+  Functor.whiskerRight (DerivedCategory.quotientCompQhIso B).inv L ≫
+    Functor.whiskerLeft (HomotopyCategory.quotient B (.up ℤ)) ε ≫
+    Functor.whiskerRight (E.mapHomotopyCategoryFactors (.up ℤ)).inv DerivedCategory.Qh ≫
+    Functor.whiskerLeft (E.mapHomologicalComplex (.up ℤ))
+      (DerivedCategory.quotientCompQhIso C).hom
 
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+/-- A functor with a complex-level comparison to an additive functor, invertible on a
+resolving class, is isomorphic to the chosen left derived model, compatibly with the
+complex counits. -/
+theorem _root_.AlgebraicGeometry.Scheme.DerivedReductionModelData.exists_iso_of_complexCounit
+    {B C : Type*} [Category B] [Abelian B] [HasDerivedCategory B]
+    [Category C] [Abelian C] [HasDerivedCategory C]
+    {E : B ⥤ C} [E.Additive] {S : CochainComplex B ℤ → Prop}
+    (D : DerivedReductionModelData E S)
+    (hres : ∀ K : CochainComplex B ℤ, ∃ (L : CochainComplex B ℤ) (s : L ⟶ K),
+      S L ∧ QuasiIso s)
+    (G : DerivedCategory B ⥤ DerivedCategory C)
+    (α : DerivedCategory.Q ⋙ G ⟶ E.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)
+    (hα : ∀ K, S K → IsIso (α.app K)) :
+    ∃ β : G ≅ D.reduction, ∀ K : CochainComplex B ℤ,
+      β.hom.app (DerivedCategory.Q.obj K) ≫ D.complexCounit K = α.app K := by
+  let W := HomotopyCategory.quasiIso B (.up ℤ)
+  let : D.reduction.IsLeftDerivedFunctor D.counit W := D.isLeftDerived
+  let τ : HomotopyCategory.quotient B (.up ℤ) ⋙ (DerivedCategory.Qh ⋙ G) ⟶
+      HomotopyCategory.quotient B (.up ℤ) ⋙
+        (E.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh) :=
+    Functor.whiskerRight (DerivedCategory.quotientCompQhIso B).hom G ≫ α ≫
+      Functor.whiskerLeft (E.mapHomologicalComplex (.up ℤ))
+        (DerivedCategory.quotientCompQhIso C).inv ≫
+      Functor.whiskerRight (E.mapHomotopyCategoryFactors (.up ℤ)).hom DerivedCategory.Qh
+  let αh : DerivedCategory.Qh ⋙ G ⟶ E.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh :=
+    Quotient.natTransLift _ τ
+  let β := D.reduction.leftDerivedLift D.counit W G αh
+  have hβ (K : CochainComplex B ℤ) :
+      β.app (DerivedCategory.Q.obj K) ≫ D.complexCounit K = α.app K := by
+    have hf := D.reduction.leftDerived_fac_app D.counit W G αh
+      ((HomotopyCategory.quotient B (.up ℤ)).obj K)
+    have hF : (E.mapHomotopyCategoryFactors (.up ℤ)).hom.app K =
+        𝟙 ((HomotopyCategory.quotient C (.up ℤ)).obj
+          ((E.mapHomologicalComplex (.up ℤ)).obj K)) := rfl
+    have hτ : αh.app ((HomotopyCategory.quotient B (.up ℤ)).obj K) =
+        G.map ((DerivedCategory.quotientCompQhIso B).hom.app K) ≫ α.app K ≫
+          (DerivedCategory.quotientCompQhIso C).inv.app
+            ((E.mapHomologicalComplex (.up ℤ)).obj K) ≫
+          DerivedCategory.Qh.map ((E.mapHomotopyCategoryFactors (.up ℤ)).hom.app K) := rfl
+    have hf' : β.app ((HomotopyCategory.quotient B (.up ℤ) ⋙ DerivedCategory.Qh).obj K) ≫
+        D.counit.app ((HomotopyCategory.quotient B (.up ℤ)).obj K) =
+        G.map ((DerivedCategory.quotientCompQhIso B).hom.app K) ≫ α.app K ≫
+          (DerivedCategory.quotientCompQhIso C).inv.app
+            ((E.mapHomologicalComplex (.up ℤ)).obj K) ≫
+          DerivedCategory.Qh.map ((E.mapHomotopyCategoryFactors (.up ℤ)).hom.app K) :=
+      hf.trans hτ
+    have hF' : DerivedCategory.Qh.map ((E.mapHomotopyCategoryFactors (.up ℤ)).hom.app K) =
+        𝟙 _ :=
+      (congrArg DerivedCategory.Qh.map hF).trans (DerivedCategory.Qh.map_id _)
+    unfold DerivedReductionModelData.complexCounit
+    rw [hF']
+    erw [Category.id_comp]
+    erw [hF', Category.comp_id] at hf'
+    rw [← β.naturality_assoc]
+    erw [reassoc_of% hf']
+    erw [Category.assoc, Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
+    rw [← G.map_comp_assoc, Iso.inv_hom_id_app, G.map_id, Category.id_comp]
+  have hiso (Y : DerivedCategory B) : IsIso (β.app Y) := by
+    obtain ⟨L, s, hL, hs⟩ := hres (DerivedCategory.Q.objPreimage Y)
+    let eY : DerivedCategory.Q.obj L ≅ Y :=
+      asIso (DerivedCategory.Q.map s) ≪≫ DerivedCategory.Q.objObjPreimageIso Y
+    have : IsIso (D.complexCounit L) := D.complexCounit_isIso L hL
+    have : IsIso (α.app L) := hα L hL
+    have : IsIso (β.app (DerivedCategory.Q.obj L)) := by
+      have h : β.app (DerivedCategory.Q.obj L) = α.app L ≫ inv (D.complexCounit L) := by
+        rw [← hβ L, Category.assoc, IsIso.hom_inv_id, Category.comp_id]
+      rw [h]
+      infer_instance
+    have : IsIso (G.map eY.hom ≫ β.app Y) := by
+      rw [β.naturality]
+      infer_instance
+    exact IsIso.of_isIso_comp_left (G.map eY.hom) (β.app Y)
+  have : IsIso β := NatIso.isIso_of_isIso_app β
+  exact ⟨asIso β, hβ⟩
+
+attribute [local semireducible] reduction in
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The derived strict-tower comparison is fixed on K-flat representatives before evaluation.
@@ -657,24 +722,105 @@ theorem rho_exists_core (T : Scheme.{t}) :
     ∃ e : completedReductionTower T d ⋙ exchangeTowerRes d T ≅
         res d T ⋙ reduction d T, RhoNormalization d T e := by
   have hflat := orderedScalarFlat d T
-  obtain ⟨e, he⟩ := reductionComposite_normalized_iso_of_data
-    (reductionRestrict T (exchangeScalar d T))
-    (exchangeTowerModuleRes d T) (completedReductionModuleTowerFunctor T d) (reductionModule d T)
-    (completedReductionTower T d) (coherenceReductionTowerCounit T d) (ordinaryRho d T)
-    (reductionData d T)
-    (fun P ↦ CochainComplex.IsKFlatIndependentCoefficients.{t + 1, t, t + 1}
+  let c := exchangeScalar d T
+  let E := completedReductionModuleTowerFunctor T d ⋙ exchangeTowerModuleRes d T
+  let S : CochainComplex (reductionModules T (d.completedRing T)) ℤ → Prop := fun P ↦
+    CochainComplex.IsKFlatIndependentCoefficients.{t + 1, t, t + 1}
         (R := d.completedRing T) P ∧
       ∀ n : ℤ, SheafOfModules.IsFlatOnSite.{t + 1, t, t + 1, t + 1}
-        (R := d.completedRing T) (P.X n))
-    (fun X ↦ by
-      obtain ⟨L, f, hL, hf⟩ := flatKFlatResolution T (d.completedRing T) X
-      exact ⟨L, f, hL, hf⟩)
-    (fun a hP hQ ha ↦ restrictReduction_quasiIso d T a hP.1 hQ.1 ha)
-    (fun P hP ↦ (completedReductionTower_properties T d).2.2 P hP.1)
-    (fun P hP ↦
-      (SheafOfModules.isKFlat_restrictScalars_of_flat (exchangeScalar d T) hflat P hP.1).1)
-  unfold RhoNormalization reduction reductionComplexCounit
-  exact ⟨e, fun P hP hPf ↦ he P ⟨hP, hPf⟩⟩
+        (R := d.completedRing T) (P.X n)
+  have hres (K : CochainComplex (reductionModules T (d.completedRing T)) ℤ) :
+      ∃ (L : CochainComplex (reductionModules T (d.completedRing T)) ℤ) (s : L ⟶ K),
+        S L ∧ QuasiIso s :=
+    flatKFlatResolution T (d.completedRing T) K
+  let α₁ : DerivedCategory.Q ⋙ (completedReductionTower T d ⋙ exchangeTowerRes d T) ⟶
+      E.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q :=
+    Functor.whiskerRight (complexCounitNatTrans (completedReductionModuleTowerFunctor T d)
+        (completedReductionTower T d) (coherenceReductionTowerCounit T d))
+        (exchangeTowerRes d T) ≫
+      Functor.whiskerLeft
+        ((completedReductionModuleTowerFunctor T d).mapHomologicalComplex (.up ℤ))
+        (exchangeTowerModuleRes d T).mapDerivedCategoryFactors.hom
+  let α₂ : DerivedCategory.Q ⋙ (res d T ⋙ reduction d T) ⟶
+      E.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q :=
+    Functor.whiskerRight (reductionRestrict T c).mapDerivedCategoryFactors.hom
+        (reduction d T) ≫
+      Functor.whiskerLeft ((reductionRestrict T c).mapHomologicalComplex (.up ℤ))
+        (complexCounitNatTrans (reductionModule d T) (reduction d T)
+          (reductionData d T).counit) ≫
+      Functor.whiskerRight (NatIso.mapHomologicalComplex (ordinaryRho d T) (.up ℤ)).hom
+        DerivedCategory.Q
+  have hα₁ (P : CochainComplex (reductionModules T (d.completedRing T)) ℤ) :
+      α₁.app P = (exchangeTowerRes d T).map (completedReductionTowerComplexCounit T d P) ≫
+        (exchangeTowerModuleRes d T).mapDerivedCategoryFactors.hom.app
+          ((completedReductionComplexTowerFunctor T d).obj P) := rfl
+  have hα₂ (P : CochainComplex (reductionModules T (d.completedRing T)) ℤ) :
+      α₂.app P = (reduction d T).map
+          ((reductionRestrict T c).mapDerivedCategoryFactors.hom.app P) ≫
+        reductionComplexCounit d T
+          (((reductionRestrict T c).mapHomologicalComplex (.up ℤ)).obj P) ≫
+        DerivedCategory.Q.map
+          ((NatIso.mapHomologicalComplex (ordinaryRho d T) (.up ℤ)).hom.app P) := rfl
+  have hiso₁ (P : CochainComplex (reductionModules T (d.completedRing T)) ℤ) (hP : S P) :
+      IsIso (α₁.app P) := by
+    have h := (completedReductionTower_properties T d).2.2 P hP.1
+    have : IsIso (completedReductionTowerComplexCounit T d P) := by
+      unfold completedReductionTowerComplexCounit Scheme.reductionComplexCounit
+      exact IsIso.comp_isIso' inferInstance (IsIso.comp_isIso' h inferInstance)
+    rw [hα₁]
+    exact IsIso.comp_isIso' inferInstance (Iso.isIso_hom
+      ((exchangeTowerModuleRes d T).mapDerivedCategoryFactors.app
+        ((completedReductionComplexTowerFunctor T d).obj P)))
+  have hiso₂ (P : CochainComplex (reductionModules T (d.completedRing T)) ℤ) (hP : S P) :
+      IsIso (α₂.app P) := by
+    have hr := SheafOfModules.isKFlat_restrictScalars_of_flat c hflat P hP.1
+    have hi := (reductionData d T).complexCounit_isIso
+      (((reductionRestrict T c).mapHomologicalComplex (.up ℤ)).obj P) hr.1
+    have hi' : IsIso (reductionComplexCounit d T
+        (((reductionRestrict T c).mapHomologicalComplex (.up ℤ)).obj P)) := by
+      simpa only [reductionComplexCounit, reduction] using hi
+    rw [hα₂]
+    exact IsIso.comp_isIso' inferInstance (IsIso.comp_isIso' hi' (Iso.isIso_hom
+      (DerivedCategory.Q.mapIso ((NatIso.mapHomologicalComplex (ordinaryRho d T) (.up ℤ)).app P))))
+  have hinv {K L : CochainComplex (reductionModules T (d.completedRing T)) ℤ}
+      (s : K ⟶ L) (hK : S K) (hL : S L) (hs : QuasiIso s) :
+      QuasiIso ((E.mapHomologicalComplex (.up ℤ)).map s) := by
+    have := hiso₁ K hK
+    have := hiso₁ L hL
+    have hn := α₁.naturality s
+    rw [← DerivedCategory.isIso_Q_map_iff_quasiIso]
+    have h : DerivedCategory.Q.map ((E.mapHomologicalComplex (.up ℤ)).map s) =
+        inv (α₁.app K) ≫ (completedReductionTower T d ⋙ exchangeTowerRes d T).map
+          (DerivedCategory.Q.map s) ≫ α₁.app L := by
+      rw [IsIso.eq_inv_comp]
+      exact hn.symm
+    rw [h]
+    infer_instance
+  let D := Classical.choice (leftDerivedModels E S hres hinv)
+  obtain ⟨β₁, hβ₁⟩ := D.exists_iso_of_complexCounit hres _ α₁ hiso₁
+  obtain ⟨β₂, hβ₂⟩ := D.exists_iso_of_complexCounit hres _ α₂ hiso₂
+  refine ⟨β₁ ≪≫ β₂.symm, ?_⟩
+  unfold RhoNormalization
+  intro P _ _
+  have key : (β₁ ≪≫ β₂.symm).hom.app (DerivedCategory.Q.obj P) ≫ α₂.app P = α₁.app P := by
+    simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
+    rw [← hβ₂ P, Iso.inv_hom_id_app_assoc, hβ₁ P]
+  rw [hα₁, hα₂] at key
+  have hρ : DerivedCategory.Q.map
+        ((NatIso.mapHomologicalComplex (ordinaryRho d T) (.up ℤ)).hom.app P) ≫
+      DerivedCategory.Q.map
+        ((NatIso.mapHomologicalComplex (ordinaryRho d T).symm (.up ℤ)).hom.app P) = 𝟙 _ := by
+    rw [← Functor.map_comp]
+    have h : (NatIso.mapHomologicalComplex (ordinaryRho d T) (.up ℤ)).hom.app P ≫
+        (NatIso.mapHomologicalComplex (ordinaryRho d T).symm (.up ℤ)).hom.app P = 𝟙 _ :=
+      (NatIso.mapHomologicalComplex (ordinaryRho d T) (.up ℤ)).hom_inv_id_app P
+    rw [h, CategoryTheory.Functor.map_id]
+  have key' := key =≫ DerivedCategory.Q.map
+    ((NatIso.mapHomologicalComplex (ordinaryRho d T).symm (.up ℤ)).hom.app P)
+  simp only [Category.assoc] at key'
+  erw [hρ, Category.comp_id] at key'
+  exact key'.trans (Category.assoc _ _ _)
+
 
 theorem rho_unique_core (T : Scheme.{t})
     {e₁ e₂ : completedReductionTower T d ⋙ exchangeTowerRes d T ≅
