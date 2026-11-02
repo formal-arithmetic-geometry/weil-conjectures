@@ -5,7 +5,6 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.TraceFormula.CurveLocal.FrobeniusGraphSquare
 public import WeilConjectures.TraceFormula.CurveLocal.ReductionExternalProduct
 
 /-!
