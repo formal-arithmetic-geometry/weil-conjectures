@@ -167,6 +167,10 @@ def DirectImageCompositionAssociative {X Y Z T : Scheme.{u}}
       (directImageComposition Λ f (g ≫ h)).hom ≫
       whiskerLeft (lowerStar Λ f).rightDerivedFunctor (directImageComposition Λ g h).hom
 
+-- Use the same `EssentiallySmall` instance as the derived functors themselves, so that the
+-- kernel can match the `representative` field against them
+-- (see `DerivedOpenRestrictionNormalization`).
+attribute [-instance] InternalAbelianSheafModule.comparison_essentiallySmall in
 /-- Open restriction is invertible and is the class of the degreewise canonical underived
 restriction comparison on every K-injective representative. No boundedness is imposed.
 Source: Stacks Tags 08BJ, 070I and 070Y

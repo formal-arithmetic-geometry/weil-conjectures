@@ -222,6 +222,9 @@ private theorem normalized_mate_isIso
 attribute [local semireducible] directImageOpenRestriction derivedDirectImageOpenRestriction
   openCoherencePullbackSquare
 
+-- Instance search must find the same `EssentiallySmall` proof as `normalized_mate_maps` does;
+-- otherwise the kernel check of the instantiated equation times out.
+attribute [-instance] InternalAbelianSheafModule.comparison_essentiallySmall in
 private theorem representative_normalization
     {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {j : Y' ⟶ Y}
     {f' : X' ⟶ Y'} {i : X' ⟶ X} [IsOpenImmersion j] [IsOpenImmersion i]
