@@ -6,9 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedPullIsoCoherenceProof
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsPullComp
-public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MonoidalStructure
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.NonFlatPullCube
 
 /-!
 # Coherence of the derived (Pull) isomorphism for an arbitrary coefficient change
