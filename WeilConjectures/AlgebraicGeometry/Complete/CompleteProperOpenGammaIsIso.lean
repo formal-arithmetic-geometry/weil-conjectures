@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Complete.CompleteProperOpenGamma
+public import WeilConjectures.AlgebraicGeometry.Complete.CompleteStrictComparisons
 public import WeilConjectures.AlgebraicGeometry.Strict.Tower.StrictTowerExchangeMateNormalization
 public import WeilConjectures.AlgebraicGeometry.Completed.Koszul.CompletedKoszulQuotientComparison
 public import WeilConjectures.AlgebraicGeometry.Bounded.BoundedConstructibleCompleteSupplement
@@ -115,12 +116,6 @@ theorem cbcTowerComplete_of_completeProperty (T : Scheme.{t})
       c.hom = d.completionUnit T K at hc
   rw [← hc]
   infer_instance
-
-/-- Strict reduction followed by constant-coefficient restriction: the comparison of
-completed-ring objects with derived strict towers of constant-coefficient modules.
-Source: blueprint step 8 (blueprint: thm-cbc-complete-proetale). -/
-abbrev cbcStrictReduction (T : Scheme.{t}) : d.derived T ⥤ ProEtale.StrictTower.Derived A T :=
-  completedReductionTower T d ⋙ exchangeTowerRes d T
 
 /-- Quotient-tower completeness implies intrinsic completeness.
 Source: blueprint order 1587 (blueprint: thm-cbc-complete-proetale). -/
