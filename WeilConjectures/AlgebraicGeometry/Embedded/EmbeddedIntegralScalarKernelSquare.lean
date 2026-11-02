@@ -23,6 +23,8 @@ open WeilConjectures.SixFunctors
 open scoped CategoryTheory.Obj TensorProduct
 namespace AlgebraicGeometry.ProEtale
 
+attribute [local instance] Sheaf.monoidalCategory
+
 attribute [-instance] integralModel_coefficientMonObj
 
 attribute [local irreducible] upperStarFromPoint upperStarFromPointComp
@@ -228,9 +230,7 @@ private theorem residueIdeal (ℓ : ℕ) [Fact ℓ.Prime]
     (Ideal.span {π}) ^ (0 + 1) =
       Ideal.map f.toRingHom (Padic.coefficientExtensionIdeal ℓ (ULift.{u} E.val) 1) := by
   let A := Padic.coefficientExtensionIntegers ℓ (ULift.{u} E.val)
-  have h := (Padic.extension_integers_dvr ℓ (ULift.{u} E.val)
-    (Padic.coefficientExtensionAbsoluteValue ℓ (ULift.{u} E.val))
-    (spectralNorm_extends (K := ℚ_[ℓ]) (L := ULift.{u} E.val))).choose_spec.choose_spec
+  have h := (Padic.coefficientExtensionIntegers_dvr ℓ (ULift.{u} E.val)).choose_spec
   let : IsLocalRing A := h.2.2.2.1
   have hgen : Ideal.span ({Padic.coefficientExtensionUniformizer ℓ (ULift.{u} E.val)} :
       Set A) = Padic.coefficientExtensionMaximalIdeal ℓ (ULift.{u} E.val) :=

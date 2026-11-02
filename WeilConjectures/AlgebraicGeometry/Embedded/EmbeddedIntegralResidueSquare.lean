@@ -25,6 +25,8 @@ open WeilConjectures.SixFunctors
 open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
+attribute [local instance] Sheaf.monoidalCategory
+
 private def ringSheafMap
     {C : Type*} [Category C] (J : GrothendieckTopology C)
     [HasWeakSheafify J Ab.{u + 1}] [(J.W (A := Ab.{u + 1})).IsMonoidal]
@@ -305,9 +307,7 @@ theorem embeddedIntegralResidueSquare
     mS.toPseudoMetricSpace.toUniformSpace.toTopologicalSpace
   let R := PadicAlgCl.integers ℓ E.val
   let S := Padic.coefficientExtensionIntegers ℓ (ULift.{u} E.val)
-  have hdata := (Padic.extension_integers_dvr ℓ (ULift.{u} E.val)
-    (Padic.coefficientExtensionAbsoluteValue ℓ (ULift.{u} E.val))
-    (spectralNorm_extends (K := ℚ_[ℓ]) (L := ULift.{u} E.val))).choose_spec.choose_spec
+  have hdata := (Padic.coefficientExtensionIntegers_dvr ℓ (ULift.{u} E.val)).choose_spec
   have : IsLocalRing S := hdata.2.2.2.1
   have hmax : Padic.coefficientExtensionMaximalIdeal ℓ (ULift.{u} E.val) =
       IsLocalRing.maximalIdeal S := IsLocalRing.eq_maximalIdeal hdata.2.2.2.2.1

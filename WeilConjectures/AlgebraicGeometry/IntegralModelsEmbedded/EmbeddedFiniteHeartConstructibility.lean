@@ -159,7 +159,8 @@ theorem finiteHeartConstructibility
     constructor
     · rintro ⟨C, hC⟩
       refine ⟨ULift.{u + 1} C.I₀, (fun j ↦ C.X j.down),
-        (fun j ↦ C.f j.down), ?_, fun j ↦ hC j.down⟩
+        (fun j ↦ C.f j.down), ?_, fun j ↦ (hC j.down).imp fun _ hP ↦
+          ⟨by have := hP.1; exact Module.Finite.of_finite, hP.2⟩⟩
       change Presieve.ofArrows (C.X ∘ ULift.down)
         (fun j : ULift.{u + 1} C.I₀ ↦ C.f j.down) ∈ _
       rw [Presieve.ofArrows_comp_eq_of_surjective C.f
@@ -172,7 +173,8 @@ theorem finiteHeartConstructibility
       let : Precoverage.Small.{u} Scheme.proetalePrecoverage :=
         inferInstanceAs (Precoverage.Small.{u} (Scheme.propQCPrecoverage @WeaklyEtale))
       exact ⟨C.restrictIndexOfSmall.{u}, fun j ↦
-        h (Precoverage.ZeroHypercover.Small.restrictFun C j)⟩
+        (h (Precoverage.ZeroHypercover.Small.restrictFun C j)).imp fun _ hM ↦
+          ⟨by have := hM.1; exact Module.finite_of_finite (ULift.{u + 1} B), hM.2⟩⟩
   let U₁ := sheafCompose (Scheme.ProEt.topology X)
     (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} B)) Ab.{u + 1})
   have ep : U₁.obj P ≅ M.X := by
