@@ -404,6 +404,13 @@ def projectiveBundlePositivePullbackRaw (A : Type (u + 1)) [CommRing A] (m : ℕ
         (Etale.ordinaryFiniteShiftedLinePullback A m
           hA t f hT)
 
+/-- The constant finite coefficient complex in comparison coordinates on the actual
+small pro-etale site. Source: blueprint sk-prop-an, A_P
+(blueprint: thm-pur-projective-bundle-formula). -/
+def projectiveBundleUnit (P : PurityFiniteSetting.{u}) (T : Scheme.{u}) :=
+  (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) T).mapDerivedCategory.obj
+    (Etale.ordinaryFiniteUnit P.Coefficient T)
+
 /-- Constant-coefficient pullback, using the canonical site-comparison square and the
 ordinary unit comparison. Source: blueprint sk-prop-an, proper base-change target
 (blueprint: thm-pur-projective-bundle-formula). -/
@@ -426,13 +433,6 @@ def projectiveBundleChern (P : PurityFiniteSetting.{u}) {B : Scheme.{u}}
   Etale.kummerFirstChern P.Coefficient P.diagonalExponent P.diagonalExponent_annihilates
     D.A.data.relProj (P.diagonalExponent_isUnit (D.A.data.relProjHom ≫ b))
       (Scheme.Pic.ofIsInvertible D.L)
-
-/-- The constant finite coefficient complex in comparison coordinates on the actual
-small pro-etale site. Source: blueprint sk-prop-an, A_P
-(blueprint: thm-pur-projective-bundle-formula). -/
-def projectiveBundleUnit (P : PurityFiniteSetting.{u}) (T : Scheme.{u}) :=
-  (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) T).mapDerivedCategory.obj
-    (Etale.ordinaryFiniteUnit P.Coefficient T)
 
 /-- Pullback of the positive shifted Tate powers: the unit comparison, followed
 recursively by tensor pullback and the root-normalized line comparison.

@@ -35,6 +35,7 @@ import WeilConjectures.SixFunctors.AdicSmoothDualizing.AdicSmoothDualizingFinite
 import WeilConjectures.SixFunctors.Etale.Derived.InvertibleSheafPowers
 import WeilConjectures.EtaleCohomology.Purity.Smooth.Coprojection
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperShriekPreservation
+public import WeilConjectures.AlgebraicGeometry.AffineZeroPurity.CoordinateZeroBaseChange
 
 /-! # Zero-section purity for affine space
 
@@ -133,6 +134,23 @@ private theorem section_normalization
     (sectionAdjunct P n B aB r) _ _ _ _ hu
     (CoordinateSectionCoordinates.sectionAdjunct_coordinates P n B aB r hI hT hpf)
     (CoordinateSectionCoordinates.lineContraction_coordinates P n B aB r hM hplus hunit) he
+
+/-- Pull back a supported product using the actual closed exchange map, exact
+inverse image, and the canonical ordered Tate-line pullback identification.
+Its exceptional transpose is the closed exceptional base-change mate.
+Source: proof Step 7 (blueprint: cor-pur-affine-space-zero-section-purity). -/
+@[irreducible]
+def classBaseChange (P : PurityFiniteSetting.{u}) (n : ℕ)
+    {B' B : Scheme.{u}} (g : B' ⟶ B) (aB : B ⟶ Spec (.of P.field.k)) (c : ℕ)
+    (α : (cupSingle (setting P n) (iteratedAffineLine B c)).obj
+      ((lowerStar (ModuleCat.{u + 1} (setting P n).Coefficient) (zero B c)).obj
+        ((setting P n).constant B)) ⟶ target P n (iteratedAffineLine B c) c) :
+    (cupSingle (setting P n) (iteratedAffineLine B' c)).obj
+      ((lowerStar (ModuleCat.{u + 1} (setting P n).Coefficient) (zero B' c)).obj
+        ((setting P n).constant B')) ⟶ target P n (iteratedAffineLine B' c) c :=
+  (coordinateSourcePullback P n g c).inv ≫
+    (AffineSpacePurity.inverseImage (setting P n).Coefficient (spaceMap g c)).map α ≫
+    (targetPullbackIso P n (spaceMap g c) (AffineSpacePurity.towerBase aB c) c).hom
 
 attribute [local irreducible] rightDerivedUpperShriek rightDerivedLowerShriek
   originCompositionAmbient derivedComparisonAdjunction identityUnit
