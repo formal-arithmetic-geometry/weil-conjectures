@@ -78,6 +78,13 @@ def pbcStageTransition {E F : Padic.FiniteCoefficientFields l Ω} (h : E ≤ F) 
   exact if e : E = F then e ▸ 𝟭 (pbcCoefficientStage l Ω T E)
     else pbcStageRaw l Ω T h
 
+/-- The stage transition along a reflexive inclusion is the literal identity functor.
+Source: blueprint order 1307 (blueprint: lem-pbc-scalar-stage-coherence). -/
+theorem pbcStageTransition_refl (E : Padic.FiniteCoefficientFields l Ω) :
+    pbcStageTransition l Ω T (le_refl E) = 𝟭 _ := by
+  unfold pbcStageTransition
+  rw [dif_pos rfl]
+
 /-- Normalization uses precisely the ordinary tensor multiplication unit.
 Source: blueprint order 1307 (blueprint: lem-pbc-scalar-stage-coherence). -/
 @[irreducible] def pbcStageNormalization {E F : Padic.FiniteCoefficientFields l Ω} (h : E ≤ F) :
