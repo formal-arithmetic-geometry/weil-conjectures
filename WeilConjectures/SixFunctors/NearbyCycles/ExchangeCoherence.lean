@@ -433,7 +433,11 @@ lemma pullbackExchange_square (φ₀ : P.Hom M f₀ f₀') (ψ : M.Hom M₁ g g'
         (ψ'.pullbackExchange Λ).app (L((e)^*⟦Λ⟧).obj C) ≫
         (P.nearbyCycles Λ).map
           ((pullbackSquareComparison Λ (⟨hb⟩ : CommSq f₀ k g e)).hom.app C) := by
-  have h := pullbackExchange_square_aux (derivedUpperStarLowerStarAdjunction Λ M₁.j)
+  -- the left adjoints are given in the form of `pullbackSquareComparison_cube` (cached instances
+  -- of `Derived.Localizing`); unifying them with those of the adjunctions inside the cube
+  -- identities unfolds the derived functors
+  have h := pullbackExchange_square_aux (jM1 := L((M₁.j)^*⟦Λ⟧)) (jM := L((M.j)^*⟦Λ⟧))
+    (jP1 := L((P₁.j)^*⟦Λ⟧)) (jP := L((P.j)^*⟦Λ⟧)) (derivedUpperStarLowerStarAdjunction Λ M₁.j)
     (derivedUpperStarLowerStarAdjunction Λ M.j) (derivedUpperStarLowerStarAdjunction Λ P₁.j)
     (derivedUpperStarLowerStarAdjunction Λ P.j)
     (pullbackSquareComparison Λ ψ.commSq_ε).hom (pullbackSquareComparison Λ φ₀.commSq_ε).hom

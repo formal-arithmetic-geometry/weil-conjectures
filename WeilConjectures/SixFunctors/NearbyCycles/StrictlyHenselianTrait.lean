@@ -177,8 +177,8 @@ theorem isIso_pullbackExchange_ofTraitHom_app (a₁ : R₁ →+* Ω₁) (b₁ : 
     (by simp) _ hL'
   have key := Hom.isIso_pullbackExchange_app_of_isIso_map_baseChangeMap_app
     (Profinite.continuousMapRingObj T) (ofTraitHom a₁ b₁ a₂ b₂ ι c d hc hd) L
-    (by exact_mod_proofs h)
-  exact_mod_proofs key
+    (by cast_proofs h)
+  cast_proofs key
 
 end Exchange
 

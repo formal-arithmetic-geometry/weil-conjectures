@@ -99,7 +99,10 @@ lemma Hom.autAction_comp_of_eq (σ τ χ : M.Hom M (𝟙 X) (𝟙 X'))
   have hd := leftDerivedUpperStarCompOfEq_hom_app_comp_leftDerivedUpperStarId Λ
     (Category.id_comp (𝟙 X')) ((M.nearbyCycles Λ).obj C)
   rw [eqToHom_refl] at hc hd
-  exact autAction_comp_aux (leftDerivedUpperStarId Λ X) (leftDerivedUpperStarId Λ X')
+  -- the left adjoints `L₀`, `L` are pinned (cached instances of `Derived.Localizing` in
+  -- `leftDerivedUpperStarCompOfEq`); unifying the two forms unfolds the derived functors
+  exact autAction_comp_aux (L₀ := L((𝟙 X)^*⟦Λ⟧)) (L := L((𝟙 X')^*⟦Λ⟧))
+    (leftDerivedUpperStarId Λ X) (leftDerivedUpperStarId Λ X')
     (M.nearbyCycles Λ) (σ.pullbackExchange Λ) (τ.pullbackExchange Λ) (χ.pullbackExchange Λ)
     (leftDerivedUpperStarCompOfEq Λ (Category.id_comp (𝟙 X))).hom
     (leftDerivedUpperStarCompOfEq Λ (Category.id_comp (𝟙 X'))).hom C hx hc hd

@@ -172,7 +172,11 @@ theorem nonempty_arrowIso_derivedReduction_boundedConstructibleBaseChange
   have : K₀.obj.IsGE K₀.property.1.1.choose := ha
   have e := nonempty_arrowIso_derivedReduction_map_exchangeRight ℓ E hsq.toCommSq K₀.obj
     K₀.property.1.1.choose
+  -- the left adjoints are given in the form of `pullbackSquareComparison` (cached instances of
+  -- `Derived.Localizing`); unifying them with those of the adjunctions unfolds the derived functors
   exact Adjunction.nonempty_arrowIso_map_ι_map_app_of_eq_exchangeRight
+    (lf := Functor.leftDerivedFunctor ((f.left)^*⟦Profinite.padicIntegersRingObj ℓ E⟧))
+    (lf' := Functor.leftDerivedFunctor ((f'.left)^*⟦Profinite.padicIntegersRingObj ℓ E⟧))
     (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E) f.left)
     (derivedUpperStarLowerStarAdjunction (Profinite.padicIntegersRingObj ℓ E) f'.left)
     (pullbackSquareComparison (Profinite.padicIntegersRingObj ℓ E) hsq.toCommSq)
