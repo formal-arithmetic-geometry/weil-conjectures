@@ -217,6 +217,13 @@ def ComparisonLawsFor (k : Type u) [Field k]
 set_option maxHeartbeats 2000000 in
 -- The simultaneous coherence predicate elaborates many nested derived-functor comparisons.
 
+/-- Turn a Cartesian square into the published square with its canonical pullback identification.
+Source: blueprint composition/base change, Cartesian squares
+(blueprint: sk-thm-sf-comp-composition). -/
+def square {A B C D : Scheme.{u}} {a : A ⟶ B} {b : A ⟶ C}
+    {f : B ⟶ D} {v : C ⟶ D} (h : IsPullback a b f v) : ChosenCartesianSquare a b f v :=
+  ⟨h.toCommSq, h.isoPullback, h.isoPullback_hom_fst, h.isoPullback_hom_snd⟩
+
 /-- The open compositor is the canonical uniqueness-of-left-adjoint comparison.
 Source: blueprint composition, consecutive open factors
 (blueprint: sk-thm-sf-comp-composition). -/
@@ -249,6 +256,22 @@ def middle {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
   comm := T.isPullback.w
   isProper := inferInstance
   isOpenImmersion := inferInstance
+
+/-- The canonical open inverse-exchange map for an arbitrary Cartesian base square.
+Source: blueprint base change, open-adjunction transpose of the identity on the open
+(blueprint: sk-thm-sf-comp-composition). -/
+@[irreducible] def openExchange {X X' Y Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}
+    {a : X' ⟶ X} {v : Y' ⟶ Y} (sq : IsPullback a f' f v)
+    (c : Compactification f) :
+    moduleObjectDerivedPullback Λ a ⋙ D(((c.ofIsPullback sq).i)_!open⟦Λ⟧) ⟶
+      D((c.i)_!open⟦Λ⟧) ⋙
+        moduleObjectDerivedPullback Λ (pullback.fst c.g v) :=
+  Adjunction.exchangeLeft
+    ((derivedOpenImmersionLowerShriekUpperStarAdjunction Λ c.i).ofNatIsoRight
+      (leftDerivedUpperStarIsoMapDerivedCategory Λ c.i).symm)
+    ((derivedOpenImmersionLowerShriekUpperStarAdjunction Λ (c.ofIsPullback sq).i).ofNatIsoRight
+      (leftDerivedUpperStarIsoMapDerivedCategory Λ (c.ofIsPullback sq).i).symm)
+    (condensedAmbientPullbackComparison Λ (square (c.isPullback_i_ofIsPullback sq))).symm
 
 /-- The canonical identity comparison for the identity compactification.
 Source: blueprint composition, identity normalization
