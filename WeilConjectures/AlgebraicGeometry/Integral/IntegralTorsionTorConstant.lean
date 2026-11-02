@@ -7,8 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcRationalCategory
 public import WeilConjectures.AlgebraicGeometry.Integral.IntegralStratifiedPerfectModelsSupplement
-public import Mathlib.CategoryTheory.Abelian.Projective.Extend
-public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import WeilConjectures.RingTheory.QuotientLevelTor
 import all WeilConjectures.AlgebraicGeometry.CompletedConstantReduction.CompletedConstantSheafReductionSupplement
 import all WeilConjectures.AlgebraicGeometry.Perfect.PerfectChartTensorComparison
 import all WeilConjectures.AlgebraicGeometry.Integral.IntegralCompletedLocalPerfectCriterion
@@ -43,50 +42,6 @@ namespace AlgebraicGeometry.Scheme
 
 -- `surjectiveTower_wEqualsLocallyBijective` leaves its coefficient universe free
 attribute [-instance] AlgebraicGeometry.ProEtale.surjectiveTower_wEqualsLocallyBijective
-
-section Module
-
-variable {A : Type (u + 1)} [CommRing A] (I : Ideal A) (n : ℕ)
-
-/-- The module-level consecutive-quotient Tor: the degree `-1` homology of a projective
-resolution of an `A/I^{n+2}`-module, reduced to `A/I^{n+1}`. -/
-def levelTor (M : ModuleCat.{u + 1} (A ⧸ I ^ (n + 1 + 1))) :
-    ModuleCat.{u + 1} (A ⧸ I ^ (n + 1)) :=
-  (((ModuleCat.extendScalars.{u + 1, u + 1, u + 1}
-    (Ideal.Quotient.factorPowSucc I (n + 1))).mapHomologicalComplex (.up ℤ)).obj
-      (projectiveResolution M).cochainComplex).homology (-1)
-
-
-/-- Universal coefficients over a principal ideal domain, split form: a direct summand `N₀`
-of `H^q(P)` killed by `I^m` is a retract of `H^q(P ⊗ A/I^m)`, for a bounded complex of
-finite projective modules `P`. -/
-theorem exists_homology_reduction_retraction [IsDomain A] [IsPrincipalIdealRing A] (m : ℕ)
-    (P : CochainComplex (ModuleCat.{u + 1} A) ℤ)
-    (hP : ∀ i, Module.Projective A (P.X i) ∧ Module.Finite A (P.X i)) (q : ℤ)
-    (F N₀ : ModuleCat.{u + 1} A) (ε : P.homology q ≅ F ⊞ N₀)
-    (hk : ∀ a ∈ I ^ m, ∀ x : N₀, a • x = 0) :
-    ∃ (s : N₀ →ₗ[A] (ModuleCat.restrictScalars.{u + 1} (Ideal.Quotient.mk (I ^ m))).obj
-        ((((ModuleCat.extendScalars.{u + 1, u + 1, u + 1}
-          (Ideal.Quotient.mk (I ^ m))).mapHomologicalComplex (.up ℤ)).obj P).homology q))
-      (r : (ModuleCat.restrictScalars.{u + 1} (Ideal.Quotient.mk (I ^ m))).obj
-        ((((ModuleCat.extendScalars.{u + 1, u + 1, u + 1}
-          (Ideal.Quotient.mk (I ^ m))).mapHomologicalComplex (.up ℤ)).obj P).homology q) →ₗ[A]
-          N₀), ∀ x, r (s x) = x := by
-  sorry
-
-/-- The module-level consecutive-quotient Tor of a module containing a retract `N₀` killed
-by `π^{n+1}` surjects onto `N₀/πN₀`. -/
-theorem exists_levelTor_epi [IsDomain A] (π : A) (hπ : π ≠ 0) (hI : I = Ideal.span {π})
-    (M : ModuleCat.{u + 1} (A ⧸ I ^ (n + 1 + 1))) (N₀ : ModuleCat.{u + 1} A)
-    (s : N₀ →ₗ[A] (ModuleCat.restrictScalars.{u + 1} (Ideal.Quotient.mk (I ^ (n + 1 + 1)))).obj M)
-    (r : (ModuleCat.restrictScalars.{u + 1} (Ideal.Quotient.mk (I ^ (n + 1 + 1)))).obj M →ₗ[A] N₀)
-    (hrs : ∀ x, r (s x) = x) (hk : ∀ x : N₀, π ^ (n + 1) • x = 0) :
-    ∃ t : levelTor I n M ⟶ (ModuleCat.extendScalars.{u + 1, u + 1, u + 1}
-        (Ideal.Quotient.mk (I ^ (n + 1)))).obj
-          (cokernel (ModuleCat.ofHom (π • LinearMap.id : N₀ →ₗ[A] N₀))), Epi t := by
-  sorry
-
-end Module
 
 section Sheaf
 
@@ -181,7 +136,8 @@ theorem nonempty_tor_constant_iso (n : ℕ) (M : ModuleCat.{u + 1} (A ⧸ d.idea
             ((pbcRestrict (pbcLevelConstantComparison T d (n + 1)).inv).obj
               ((adicLisseConstantModules T (A ⧸ d.ideal ^ (n + 1 + 1))).obj M)))) ≅
       (pbcRestrict (pbcLevelConstantComparison T d n).inv).obj
-        ((adicLisseConstantModules T (A ⧸ d.ideal ^ (n + 1))).obj (levelTor d.ideal n M))) := by
+        ((adicLisseConstantModules T (A ⧸ d.ideal ^ (n + 1))).obj
+          (ModuleCat.levelTor d.ideal n M))) := by
   classical
   let := (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1}
     (Ideal.Quotient.factorPowSucc d.ideal (n + 1))).left_adjoint_additive
@@ -233,7 +189,7 @@ theorem nonempty_tor_constant_iso (n : ℕ) (M : ModuleCat.{u + 1} (A ⧸ d.idea
       (pbcDerivedExtend β).mapIso (((restrictIsoAsExtend j₁).app X).symm ≪≫ e₁) ≪≫
       constantTensorIso T (Ideal.Quotient.factorPowSucc d.ideal (n + 1)) R.cochainComplex 0 hR
   let eH : (pbcRestrict j.hom).obj ((DerivedCategory.homologyFunctor _ (-1)).obj Z) ≅
-      Fn.obj (levelTor d.ideal n M) :=
+      Fn.obj (ModuleCat.levelTor d.ideal n M) :=
     ((pbcRestrict j.hom).mapDerivedCategoryHomologyFunctorIso (-1)).app Z ≪≫
       (DerivedCategory.homologyFunctor _ (-1)).mapIso eZ ≪≫
       (DerivedCategory.homologyFunctorFactors _ (-1)).app _ ≪≫
@@ -241,7 +197,14 @@ theorem nonempty_tor_constant_iso (n : ℕ) (M : ModuleCat.{u + 1} (A ⧸ d.idea
   exact ⟨eq.unitIso.app _ ≪≫ (pbcRestrict j.inv).mapIso eH⟩
 
 /-- Restricting the constant sheaf of `A/I^{n+1} ⊗ X` to the completed coefficients gives
-the completed realization of `X`, when `I^{n+1}` kills `X`. -/
+the completed realization of `X`, when `I^{n+1}` kills `X`.
+
+Proof sketch: by `restrictionIso` (constant sheaves commute with restriction of scalars) and
+`ordinaryConstantModel`, both sides are `M` and `B ⊗_{A_T} (pbcRestrict c) M` for the
+`B`-module `M` on the left, with `B` the completed ring; the counit of `pbcExtend c ⊣
+pbcRestrict c` compares them. Both sides are right exact in the `A/I^{n+1}`-module, so it
+suffices to treat `A/I^{n+1}` itself, which is the quotient statement of
+`completed_constant_algebra_flat_quotients`. -/
 theorem nonempty_restrict_level_constant_iso (n : ℕ) (X : ModuleCat.{u + 1} A)
     (hX : ∀ a ∈ d.ideal ^ (n + 1), ∀ x : X, a • x = 0) :
     Nonempty ((pbcRestrict (pbcAdicProjection T d n)).obj

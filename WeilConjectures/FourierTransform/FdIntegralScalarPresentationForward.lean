@@ -26,6 +26,24 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Sc
 open WeilConjectures.FdRawLocalization
 namespace WeilConjectures
 
+private theorem eqToIso_trans_heq {C D : Type*} [Category C] [Category D] {F F' G : C ⥤ D}
+    (h : F = F') (a : F' ≅ G) : (eqToIso h ≪≫ a) ≍ a := by
+  subst h
+  simp
+
+private theorem trans_eqToIso_heq {C D : Type*} [Category C] [Category D] {F G G' : C ⥤ D}
+    (a : F ≅ G) (h : G = G') : (a ≪≫ eqToIso h) ≍ a := by
+  subst h
+  simp
+
+private theorem ordinaryComparison_heq (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
+    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+    (M : Type u) [Field M] [Algebra ℚ_[l] M] [FiniteDimensional ℚ_[l] M]
+    (κ κ' : E →ₐ[ℚ_[l]] M) (h : κ = κ') :
+    sfIntegralOrdinaryComparison l E M κ T ≍ sfIntegralOrdinaryComparison l E M κ' T := by
+  subst h
+  rfl
+
 section Atoms
 
 variable (l : ℕ) [Fact l.Prime]
@@ -52,42 +70,16 @@ private theorem lift_formula
           ((sfIntegralOrdinaryComparison l _ _ (pbcFiniteFieldInclusion l Ω h) T).hom.app K) := by
   sorry
 
-omit [AlgebraicGeometry.IsNoetherian T] dT iT in
-/-- The completed associator through the ordinary-to-completed comparisons. -/
-private theorem integralAssoc_hom {E L M : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L)
-    (k : L ≤ M) (K : sfIntegralConstructibleCategory l (pbcFiniteField.{u} l Ω E) T) :
-    ((integralAssoc l Ω T h k).hom.app K).hom =
-      (sfIntegralOrdinaryComparison l _ _ (pbcFiniteFieldInclusion l Ω k) T).inv.app
-          ((U l Ω T h).obj K) ≫
-        (integralOrdinaryDerivedScalar l _ _ (pbcFiniteFieldInclusion l Ω k) T).map
-          ((sfIntegralOrdinaryComparison l _ _ (pbcFiniteFieldInclusion l Ω h) T).inv.app K) ≫
-        (FdIntegralScalarForward.ODcomp l Ω T h k).hom.app K.obj ≫
-        (sfIntegralOrdinaryComparison l _ _ (pbcFiniteFieldInclusion l Ω (h.trans k)) T).hom.app
-          K := by
-  sorry
-
-omit [AlgebraicGeometry.IsNoetherian T] dT iT in
-/-- The completed unit through the ordinary-to-completed comparison. -/
-private theorem integralUnit_hom (E : Padic.FiniteCoefficientFields l Ω)
-    (K : sfIntegralConstructibleCategory l (pbcFiniteField.{u} l Ω E) T) :
-    ((integralUnit l Ω T E).hom.app K).hom =
-      (sfIntegralOrdinaryComparison l _ _ (pbcFiniteFieldInclusion l Ω (le_refl E)) T).inv.app
-          K ≫
-        (eqToIso (congrArg (fun ι ↦ integralOrdinaryDerivedScalar l (pbcFiniteField.{u} l Ω E)
-          (pbcFiniteField.{u} l Ω E) ι T) (FdIntegralScalarForward.inclusion_id l Ω E)) ≪≫
-          integralOrdinaryDerivedScalarUnit l (pbcFiniteField.{u} l Ω E) T).hom.app K.obj := by
-  sorry
-
 /-- The normalized derived ordinary square is compatible with the units. -/
 private theorem eD_unit (E : Padic.FiniteCoefficientFields l Ω)
     (o : FdOrdinaryScalarTransport l Ω T (le_refl E))
     (Y : DerivedCategory (integralTowerModules l (pbcFiniteField.{u} l Ω E) T)) :
     (FdIntegralScalarForward.eD l Ω T (le_refl E) o).inv.app Y ≫
         (integralDetailedTransport T l _).map
-          ((eqToIso (congrArg (fun ι ↦ integralOrdinaryDerivedScalar l
+          (eqToHom (Functor.congr_obj (congrArg (fun ι ↦ integralOrdinaryDerivedScalar l
             (pbcFiniteField.{u} l Ω E) (pbcFiniteField.{u} l Ω E) ι T)
-            (FdIntegralScalarForward.inclusion_id l Ω E)) ≪≫
-            integralOrdinaryDerivedScalarUnit l (pbcFiniteField.{u} l Ω E) T).hom.app Y) =
+            (FdIntegralScalarForward.inclusion_id l Ω E).symm).symm Y) ≫
+            (integralOrdinaryDerivedScalarUnit l (pbcFiniteField.{u} l Ω E) T).hom.app Y) =
       (pbcAmbientScalarUnit l Ω T E).hom.app ((integralDetailedTransport T l _).obj Y) := by
   sorry
 
@@ -148,7 +140,7 @@ theorem fdIntegralScalarPresentationForward
       (pbcIntegralScalarUnit l Ω T dT.out iT.out E).hom.app
         ((I l Ω T stage E).obj K)) := by
   refine ⟨fun {E L M} h k K ↦ ?_, fun E K ↦ ?_⟩
-  · exact FdIntegralScalarForward.assoc_assembly
+  · exact FdIntegralScalarForward.assoc_assembly_of_spec
       (sfIntegralConstructible l (pbcFiniteField.{u} l Ω E) T)
       (sfIntegralConstructible l (pbcFiniteField.{u} l Ω L) T)
       (sfIntegralConstructible l (pbcFiniteField.{u} l Ω M) T)
@@ -172,22 +164,44 @@ theorem fdIntegralScalarPresentationForward
       (sfIntegralOrdinaryComparison l _ _ (pbcFiniteFieldInclusion l Ω (h.trans k)) T)
       (lift_formula l Ω T stage ordinary b hlift h) (lift_formula l Ω T stage ordinary b hlift k)
       (lift_formula l Ω T stage ordinary b hlift (h.trans k))
-      (integralAssoc_hom l Ω T h k)
       (FdIntegralScalarForward.eD_cocycle l Ω T h k (ordinary h) (ordinary k)
-        (ordinary (h.trans k))) K
-  · exact FdIntegralScalarForward.unit_assembly
+        (ordinary (h.trans k)))
+      _ _ (congrArg (fun κ ↦ integralScalarExtension l (pbcFiniteField.{u} l Ω E)
+        (pbcFiniteField.{u} l Ω M) κ T) (FdIntegralScalarForward.inclusion_comp l Ω h k))
+      (sfIntegralScalarComp l _ _ (pbcFiniteFieldInclusion l Ω h) T 0
+        (Nat.Prime.ne_zero (Fact.out : l.Prime)) _ (pbcFiniteFieldInclusion l Ω k))
+      (by unfold integralAssoc; exact trans_eqToIso_heq _ _)
+      _ (congrArg (fun κ ↦ integralOrdinaryDerivedScalar l (pbcFiniteField.{u} l Ω E)
+        (pbcFiniteField.{u} l Ω M) κ T) (FdIntegralScalarForward.inclusion_comp l Ω h k))
+      (integralOrdinaryDerivedScalarComp l _ _ (pbcFiniteFieldInclusion l Ω h) T _
+        (pbcFiniteFieldInclusion l Ω k))
+      (by unfold FdIntegralScalarForward.ODcomp; exact trans_eqToIso_heq _ _)
+      (sfIntegralOrdinaryComparison l _ _
+        ((pbcFiniteFieldInclusion l Ω k).comp (pbcFiniteFieldInclusion l Ω h)) T)
+      (ordinaryComparison_heq l T _ _ _ _ (FdIntegralScalarForward.inclusion_comp l Ω h k).symm)
+      (fun K ↦ (sfIntegralScalarComp_existsUnique l _ _ (pbcFiniteFieldInclusion l Ω h) T 0
+        (Nat.Prime.ne_zero (Fact.out : l.Prime)) _
+        (pbcFiniteFieldInclusion l Ω k)).exists.choose_spec K) K
+  · exact FdIntegralScalarForward.unit_assembly_of_spec
       (sfIntegralConstructible l (pbcFiniteField.{u} l Ω E) T) _ (I l Ω T stage E)
       (integralDetailedTransport T l _) (eqToIso (stage E).integral_identity)
       _ _ (pbcAmbientScalarExtension l Ω T (le_refl E)) _ (b (le_refl E))
       (integralUnit l Ω T E) (pbcIntegralScalarUnit l Ω T dT.out iT.out E)
       (pbcAmbientScalarUnit l Ω T E) (pbcIntegralScalarUnit_hom l Ω T dT.out iT.out E) _
-      (fun Y ↦
-      (eqToIso (congrArg (fun ι ↦ integralOrdinaryDerivedScalar l (pbcFiniteField.{u} l Ω E)
-          (pbcFiniteField.{u} l Ω E) ι T) (FdIntegralScalarForward.inclusion_id l Ω E)) ≪≫
-        integralOrdinaryDerivedScalarUnit l (pbcFiniteField.{u} l Ω E) T).hom.app Y)
       (FdIntegralScalarForward.eD l Ω T (le_refl E) (ordinary (le_refl E)))
       (sfIntegralOrdinaryComparison l _ _ (pbcFiniteFieldInclusion l Ω (le_refl E)) T)
-      (lift_formula l Ω T stage ordinary b hlift (le_refl E)) (integralUnit_hom l Ω T E)
+      (lift_formula l Ω T stage ordinary b hlift (le_refl E))
+      _ _ (congrArg (fun ι ↦ integralScalarExtension l (pbcFiniteField.{u} l Ω E)
+        (pbcFiniteField.{u} l Ω E) ι T) (FdIntegralScalarForward.inclusion_id l Ω E).symm)
+      (sfIntegralScalarUnit l _ T 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)))
+      (by unfold integralUnit; exact eqToIso_trans_heq _ _)
+      _ (congrArg (fun ι ↦ integralOrdinaryDerivedScalar l (pbcFiniteField.{u} l Ω E)
+        (pbcFiniteField.{u} l Ω E) ι T) (FdIntegralScalarForward.inclusion_id l Ω E).symm)
+      (sfIntegralOrdinaryComparison l _ _ (AlgHom.id ℚ_[l] (pbcFiniteField.{u} l Ω E)) T)
+      (ordinaryComparison_heq l T _ _ _ _ (FdIntegralScalarForward.inclusion_id l Ω E))
+      (fun Y ↦ (integralOrdinaryDerivedScalarUnit l (pbcFiniteField.{u} l Ω E) T).hom.app Y)
+      (fun K ↦ (sfIntegralScalarUnit_existsUnique l _ T 0
+        (Nat.Prime.ne_zero (Fact.out : l.Prime))).exists.choose_spec K)
       (eD_unit l Ω T E (ordinary (le_refl E))) K
 
 end WeilConjectures

@@ -741,6 +741,7 @@ public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.Resolving
 public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.RestrictionSquare.Assemble
 public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.RestrictionSquare.Left
 public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.RestrictionSquare.LeftEq
+public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.RestrictionSquare.MixedFinite
 public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.RestrictionSquare.Right
 public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.RestrictionSquare.RightEq
 public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.RestrictionSquare.SquareEq
@@ -16073,6 +16074,7 @@ public import WeilConjectures.RingTheory.QuotientAssociatedPrimesFlatBaseChange
 public import WeilConjectures.RingTheory.QuotientAwayClearing
 public import WeilConjectures.RingTheory.QuotientGRing
 public import WeilConjectures.RingTheory.QuotientHenselianPair
+public import WeilConjectures.RingTheory.QuotientLevelTor
 public import WeilConjectures.RingTheory.QuotientSectionFactorTransfer
 public import WeilConjectures.RingTheory.ReducedNoetherianTotalRingFractions
 public import WeilConjectures.RingTheory.ReducedNormalIffIntegrallyClosedTotalFractions

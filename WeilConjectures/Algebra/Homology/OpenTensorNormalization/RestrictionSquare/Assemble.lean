@@ -39,6 +39,6 @@ theorem squareEq_of_halves (P Q : CochainComplex (FiniteModules A X) ℤ)
     SquareEq A gU j' j g sq o e P Q := by
   haveI := suffix_isIso A gU j' j g sq o e P Q hp hq
   exact ⟨(cancel_mono (suffix A gU j' j g sq o e P Q hp hq)).1 (hL.eq.trans
-    ((congrArg (fun z ↦ transport A gU j' j g sq o e P Q ≫ DerivedCategory.Q.map z) ht.eq).trans hR.eq.symm))⟩
+    ((congrArg (fun z ↦ restrictionTransport% ≫ DerivedCategory.Q.map z) ht.eq).trans hR.eq.symm))⟩
 
 end SheafOfModules.OpenTensorNormalization.RestrictionSquare
