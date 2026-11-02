@@ -334,7 +334,8 @@ theorem exists_isHomotopyLimit_dualizing :
         Nonempty ((R((aX)_*[ModuleCat.{u + 1} Λ])).obj
             (((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).obj ω.pt) ≅
           ((derivedHom (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj
-            (op ((R(aX)_![ModuleCat.{u + 1} Λ]).obj K))).obj (constantComplex Λ (Spec (.of k)))) := by
+            (op ((R(aX)_![ModuleCat.{u + 1} Λ]).obj K))).obj
+              (constantComplex Λ (Spec (.of k)))) := by
   classical
   have hϖ : ϖ ∈ nonZeroDivisors Λ :=
     mem_nonZeroDivisors_of_ne_zero (nonZeroDivisors.ne_zero hϖ)

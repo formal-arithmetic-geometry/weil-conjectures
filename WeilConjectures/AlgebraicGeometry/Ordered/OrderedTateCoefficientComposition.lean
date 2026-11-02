@@ -175,7 +175,8 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 open scoped CategoryTheory.Functor
 
 -- The following local calculations reuse the proof in
--- WeilConjectures.AlgebraicGeometry.Ordered.OrderedTateExactOpenComposition (SHEAF groups Q1 and H4).
+-- WeilConjectures.AlgebraicGeometry.Ordered.OrderedTateExactOpenComposition
+-- (SHEAF groups Q1 and H4).
 namespace AlgebraicGeometry.Scheme
 
 private noncomputable def muHomEquiv (T : Scheme.{u}) (N : ℕ) (A : Type (u + 1)) [CommRing A]

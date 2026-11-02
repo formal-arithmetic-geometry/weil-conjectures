@@ -33,7 +33,8 @@ variable [IsCommMonObj (abRing l X)] [(sections l X).Additive]
 integral scalar associator, to the direct comparison. The associator `assoc` is pinned by
 `hassoc` to `sfIntegralScalarComp` followed by equality transport along the
 field-inclusion composition law (this is `integralTensorAssociator` of the item's module
-`WeilConjectures.SixFunctors.LocallyFiniteAdicRealization.LocallyFiniteAdicIntegralTensorCoherence`, which imports this module, with
+`WeilConjectures.SixFunctors.LocallyFiniteAdicRealization.LocallyFiniteAdicIntegralTensorCoherence`,
+which imports this module, with
 `hassoc` its defining equation `integralTensorAssociator_eq`); for an arbitrary `assoc`
 the equation would be false.
 

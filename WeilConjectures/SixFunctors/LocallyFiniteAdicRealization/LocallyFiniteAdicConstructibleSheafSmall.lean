@@ -53,8 +53,8 @@ subcover of its open stratified-lisse neighborhoods. Replace each open by its di
 with the preceding opens and intersect its strata with this piece. This produces one
 finite locally closed stratification of X and a finite-presentation cover on each
 stratum. The construction uses only quasi-compactness and Noetherianity, not dimension
-or invertibility. In Lean this equivalence is the normalized native encoding NativeEncoding.encoding,
-and encoding_constructible_iff is the constructibility comparison on Noetherian X.
+or invertibility. In Lean this equivalence is the normalized native encoding
+NativeEncoding.encoding, and encoding_constructible_iff is the constructibility comparison on Noetherian X.
 Apply constructibleModuleObjects_essentiallySmall to the resulting
 constructible modules over abRing. A fully faithful functor into that essentially small
 full subcategory makes the native full subcategory essentially small. Equivalently,
