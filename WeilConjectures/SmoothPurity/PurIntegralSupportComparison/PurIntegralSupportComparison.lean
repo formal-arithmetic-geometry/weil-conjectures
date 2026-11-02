@@ -11,6 +11,7 @@ public import WeilConjectures.SmoothPurity.Integral.IntegralExceptionalInverseIm
 public import WeilConjectures.SmoothPurity.PurIntegralSupportComparison.PurIntegralSupportComparisonData
 import WeilConjectures.SmoothPurity.PurIntegralSupportComparison.PurIntegralSupportOrdinaryComparison
 import WeilConjectures.SmoothPurity.PurIntegralSupportComparison.PurIntegralSupportDerivedComparison
+public import WeilConjectures.AlgebraicGeometry.CondensedSupportCoordinateComparison
 
 /-! # Canonical compact-support comparison in strict quotient coordinates
 
@@ -91,16 +92,27 @@ Source: blueprint integral Hom display
 def normalized : Normalized l E S G H D :=
   (normalized_existsUnique l E S G H D).choose
 
-/-- Beta is the proper/open paste of the uniquely normalized comparisons, in that
-order. It is not an existential choice of an isomorphism with these endpoints.
-Source: blueprint integral Hom display; Zheng 5.15
+/-- Compatibility alias to the current native condensed support comparison.
+Source: the native comparison anchored by
+`def-pur-integral-support-coordinate-comparison`
+(blueprint: def-pur-integral-support-coordinate-comparison).
+
+The current anchor constructs this comparison from the fixed ordinary and derived
+section-operation maps.  This alias exposes that same comparison through the
+historical module without reintroducing the withdrawn quotient-coordinate model.
+-/
+def beta (c : Compactification f) :
+    CondensedRing.rightDerivedLowerShriekOfCompactification Λ c ⋙
+        (derivedEquivalence Λ Y).functor ≅
+      (derivedEquivalence Λ X).functor ⋙
+        AlgebraicGeometry.ProEtale.ModuleRingedComparison.sectionSupport Λ c :=
+  AlgebraicGeometry.ProEtale.ModuleRingedComparison.supportCoordinateComparison Λ c
+
+/-- The compatibility alias is definitionally the current DAG anchor.
 (blueprint: def-pur-integral-support-coordinate-comparison). -/
-def beta : (coordinates l E X).functor ⋙ D.compact.functor ≅
-    systemSupport l E c ⋙ (coordinates l E Y).functor :=
-  Functor.isoWhiskerRight (normalized l E S G H D).derived.derivedOpen
-      D.compact.properDerived.direct ≪≫
-    Functor.isoWhiskerLeft
-      (SemilinearProperOpen.J (quotientRings l E) (quotientMaps l E) c.i)
-      (normalized l E S G H D).derived.derivedProper
+theorem beta_eq_supportCoordinateComparison (c : Compactification f) :
+    beta Λ c = AlgebraicGeometry.ProEtale.ModuleRingedComparison.supportCoordinateComparison
+      Λ c := by
+  rfl
 
 end WeilConjectures.PurIntegralSupportComparison

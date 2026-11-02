@@ -159,6 +159,19 @@ import all WeilConjectures.Algebra.Homology.ProperBaseChange.OpenImmersionTensor
 import all WeilConjectures.AlgebraicGeometry.RelativeCompactSupport.RelativeCompactSupportPasting
 import all WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerProperOpenArrows
 import all WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingRestrictionSquare
+public import WeilConjectures.AlgebraicGeometry.CompletedOpenAdjunction.CbcOpenAdjunctionBase
+import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedPullback
+import WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicCompletion
+import WeilConjectures.AlgebraicGeometry.Completed.CompletedExtensionZeroComparison
+import WeilConjectures.AlgebraicGeometry.Open.OpenImmersionSquare
+import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+import WeilConjectures.CategoryTheory.LocalizedModuleExactForSystems
+import Mathlib.CategoryTheory.Limits.Preserves.Limits
+import WeilConjectures.CategoryTheory.ProperBaseChange.ExchangeMateCube
+import WeilConjectures.CategoryTheory.Derived.DerivedExactCube
+import WeilConjectures.AlgebraicGeometry.Ringed.RingedOpenStrictReduction
+import WeilConjectures.AlgebraicGeometry.StrictTower.ConstantNormalization.ConstantTowerDirectImageNormalization
+import WeilConjectures.CategoryTheory.Exact.ExactLocalizationInverseMate
 
 /-!
 # Canonical comparisons for strict-tower realization
@@ -508,7 +521,8 @@ def cbcRealizationOpenAdj {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j] :
       proEtaleRingModulePullback j (d.completedRing T) (d.completedRing U)
         (d.integralRingIso j) :=
   Adjunction.ofNatIsoRight (cbcOpenAdjunction d j inferInstance)
-    (@asIso _ _ _ _ (cbcPullToRestriction d j) (cbcPullToRestriction_isIso d j)).symm
+    (@asIso _ _ _ _ (CompletedOpenAdjunction.cbcPullToRestriction d j)
+      (CompletedOpenAdjunction.cbcPullToRestriction_isIso d j)).symm
 
 /-- Termwise completed open extension on strict towers, retaining every transition.
 Source: Stacks 03DI (blueprint: lem-cbc-complete-proetale-strict-tower-realization). -/
@@ -537,7 +551,8 @@ def cbcRealizationReductionInv {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion
     (cbcRealizationJ d j).obj ((completedReductionTower U d).obj K) ⟶
       (completedReductionTower T d).obj ((cbcDerivedOpenShriek d j inferInstance).obj K) :=
   ((cbcRealizationTowerAdj d j).homEquiv _ _).symm
-    ((completedReductionTower U d).map ((cbcDerivedOpenAdjunction d j).unit.app K) ≫
+    ((completedReductionTower U d).map
+        ((CompletedOpenAdjunction.cbcDerivedOpenAdjunction d j).unit.app K) ≫
       (d.reductionTowerPullbackIso j).inv.app
         ((cbcDerivedOpenShriek d j inferInstance).obj K))
 
@@ -584,7 +599,7 @@ theorem cbcRealizationReductionInv_properties {U T : Scheme.{t}} (j : U ⟶ T)
           cbcRealizationReductionInv d j K ≫
             (completedReductionTower T d).map
               ((cbcDerivedOpenShriek d j inferInstance).map k) := by
-  let a := cbcDerivedOpenAdjunction d j
+  let a := CompletedOpenAdjunction.cbcDerivedOpenAdjunction d j
   let a' := cbcEndpointDerivedOpenAdj d j
   let b := cbcRealizationTowerAdj d j
   let b' := cbcEndpointTowerOpenAdj d j
@@ -610,7 +625,7 @@ theorem cbcRealizationReductionInv_properties {U T : Scheme.{t}} (j : U ⟶ T)
     apply ((cbcRealizationTowerAdj d j).homEquiv _ _).injective
     rw [Adjunction.homEquiv_naturality_left, Adjunction.homEquiv_naturality_right]
     simp only [cbcRealizationReductionInv, Equiv.apply_symm_apply]
-    have hu := (cbcDerivedOpenAdjunction d j).unit.naturality k
+    have hu := (CompletedOpenAdjunction.cbcDerivedOpenAdjunction d j).unit.naturality k
     dsimp only [Functor.comp_map, Functor.id_map] at hu
     have he := (d.reductionTowerPullbackIso j).inv.naturality
       ((cbcDerivedOpenShriek d j inferInstance).map k)

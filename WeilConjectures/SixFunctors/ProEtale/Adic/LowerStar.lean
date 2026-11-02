@@ -26,6 +26,10 @@ import WeilConjectures.Compactification.ProjectiveSpace
 import WeilConjectures.AlgebraicGeometry.Adic.AdicDenseOpenImmersionFiniteness
 import WeilConjectures.AlgebraicGeometry.Adic.AdicClosedImmersionFiniteness
 import WeilConjectures.AlgebraicGeometry.Adic.AdicProjectiveSpaceFiniteness
+public import WeilConjectures.AlgebraicGeometry.Native.NativeAdicConstructibilityEncoding
+public import WeilConjectures.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstructibleHeart
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarEllAdic
 
 /-!
 # Finiteness for the pushforward of constructible `ℓ`-adic sheaves
@@ -405,6 +409,67 @@ lemma FiniteFor.of_quasiSeparatedSpace [IsLocallyNoetherian Y] {T : Scheme.{u}} 
   exact FiniteFor.of_top g (FiniteFor.congr_opens g hS
     (FiniteFor.finsetSup g P hP hPF S fun O hO ↦ ⟨(hSa O hO).isCompact, O, hSa O hO, le_rfl⟩))
 
+/-- The projective input to affine direct-image finiteness, using condensed coefficients.
+
+Source: current blueprint `def-weil-ordinary-compact-cohomology` and
+`sk-thm-sfb-proper-base-change`.
+(blueprint: lem-sf-adic-affine-direct-image-finiteness)
+
+Proof: encode the constructible sheaf in degree zero by the exact native equivalence.
+The proper condensed direct-image theorem gives bounded constructible cohomology.
+The normalized derived pushforward comparison identifies this object with the encoding
+of the native direct image. Exact faithfulness reflects boundedness, and the homology
+comparison and constructibility equivalence reflect constructible cohomology. -/
+private theorem local_bounded_constructible_projectiveSpace
+    {l : ℕ} [Fact l.Prime] {K : Type u} [Field K] [IsAlgClosed K]
+    (hK : ringChar K ≠ l) {W : Scheme.{u}} [IsAffine W]
+    (t : W ⟶ Spec (.of K)) [LocallyOfFiniteType t] (n : Type u) [Finite n]
+    (F : AdicSheaf l ℙ(Option n; W)) (hF : IsAdicConstructibleSheaf F) :
+    (_root_.DerivedCategory.TStructure.t.bounded ⊓
+      _root_.DerivedCategory.homologyProperty (adicConstructibleSheaf l W))
+      ((ℙ(Option n; W) ↘ W)_*ᵃ[l].rightDerivedFunctor.obj
+        ((_root_.DerivedCategory.singleFunctor _ 0).obj F)) := by
+  classical
+  have : Fact (ringChar K ≠ l) := ⟨hK⟩
+  have : IsLocallyNoetherian W := LocallyOfFiniteType.isLocallyNoetherian t
+  have : IsNoetherian W := {}
+  have : IsNoetherian ℙ(Option n; W) :=
+    isNoetherian_of_locallyOfFiniteType (ℙ(Option n; W) ↘ W)
+  let A := (_root_.DerivedCategory.singleFunctor _ 0).obj F
+  let p := ℙ(Option n; W) ↘ W
+  have hA := (DerivedCategory.adicConstructibleHeart_singleFunctor_obj hF).1.1
+  have hX := NativeEncoding.encoding_exact_derived l ℙ(Option n; W)
+  have hY := NativeEncoding.encoding_exact_derived l W
+  let := hX.1
+  let := hX.2.1
+  let := hY.1
+  let := hY.2.1
+  have hencoded : boundedConstructible
+      (condensedRingObj (Profinite.padicAlgClRingObj l) ℙ(Option n; W))
+      ((NativeEncoding.derivedEncoding l ℙ(Option n; W)).obj A) := by
+    refine ⟨(NativeEncoding.encoding l _).bounded_mapDerivedCategory_obj hA.1, ?_⟩
+    intro q
+    exact constructible_of_iso
+      (((NativeEncoding.encoding l _).mapDerivedCategoryHomologyFunctorIso q).app A)
+      ((encoding_constructible_iff _).mp (hA.2 q))
+  have hp :=
+    CondensedRing.boundedConstructible_rightDerivedLowerStar_obj_of_isProper_padicAlgClRingObj
+      l t p _ hencoded
+  have himage : boundedConstructible
+      (condensedRingObj (Profinite.padicAlgClRingObj l) W)
+      ((NativeEncoding.derivedEncoding l W).obj ((adicLowerStar l p).rightDerivedFunctor.obj A)) :=
+    ⟨(_root_.DerivedCategory.TStructure.t.bounded).prop_of_iso
+      ((NativeEncoding.derivedPushComparison l p).app A).symm hp.1,
+      fun q ↦ constructible_of_iso
+        ((_root_.DerivedCategory.homologyFunctor _ q).mapIso
+          ((NativeEncoding.derivedPushComparison l p).app A).symm) (hp.2 q)⟩
+  refine ⟨(NativeEncoding.encoding l W).bounded_of_bounded_mapDerivedCategory_obj himage.1,
+    fun q ↦ ?_⟩
+  apply (encoding_constructible_iff _).mpr
+  exact constructible_of_iso
+    (((NativeEncoding.encoding l W).mapDerivedCategoryHomologyFunctorIso q).app
+      ((adicLowerStar l p).rightDerivedFunctor.obj A)).symm (himage.2 q)
+
 end CoverInduction
 
 section Finiteness
@@ -447,7 +512,7 @@ theorem finiteLowerStar_singleFunctor_of_isAffine (hK : ringChar K ≠ l) [Local
     j.imageι _ h₁.1 h₁.2
   have : IsLocallyNoetherian Y := LocallyOfFiniteType.isLocallyNoetherian s
   have h₃ := finiteLowerStar_of_bounded p (fun F hF ↦
-    bounded_constructible_rightDerivedFunctor_adicLowerStar_projectiveSpace hK s
+    local_bounded_constructible_projectiveSpace hK s
       (ULift.{u} (Fin n)) F hF) _ h₂.1 h₂.2
   change (DerivedCategory.TStructure.t.bounded ⊓
     _root_.DerivedCategory.homologyProperty (adicConstructibleSheaf l Y)) _

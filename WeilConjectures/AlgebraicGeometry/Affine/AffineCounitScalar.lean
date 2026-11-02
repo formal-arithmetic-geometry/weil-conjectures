@@ -16,6 +16,10 @@ import WeilConjectures.AlgebraicGeometry.Affine.AffineCompactificationComparison
 import WeilConjectures.AlgebraicGeometry.Ordered.OrderedAffineTraceNormalForm
 import WeilConjectures.AlgebraicGeometry.Affine.Space.AffineSpaceTopTrace
 import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantModuleConstructibility
+public import WeilConjectures.AlgebraicGeometry.Reduction.ReductionExceptionalChart
+public import WeilConjectures.AlgebraicGeometry.Reduction.ReductionExceptionalConservativity
+public import WeilConjectures.AlgebraicGeometry.Reduction.ReductionExceptionalRealization
 
 /-! # The ordered affine counit under coefficient extension
 
@@ -116,7 +120,8 @@ private theorem tower_counit_scalar {C C' : ℕ → Type*}
     rw [ih, ← Functor.map_comp]
 
 private theorem affine_right_domain (ell : ℕ) [Fact ell.Prime]
-    (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ell)]
+    (k : Type u) [Field k] (hk : Finite k ∨ IsAlgClosed k)
+    [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ell)]
     (A : Type (u + 1)) [CommRing A] [Finite A] (n : ℕ)
     (hA : ((ell ^ n : ℕ) : A) = 0) (S : Scheme.{u})
     [S.Over (Spec (.of k))] [LocallyOfFiniteType (S ↘ Spec (.of k))]
@@ -148,8 +153,8 @@ private theorem affine_right_domain (ell : ℕ) [Fact ell.Prime]
     have : IsSeparated (X ↘ Spec (.of k)) := by
       change IsSeparated (affineTraceProjection S (d + 1) ≫ (S ↘ Spec (.of k)))
       infer_instance
-    have h := (ProEtale.AdjunctionTransfer.etaleCtfChartDomain ell k A n hA
-      (𝟙 S) (Compactification.ofIsProper (𝟙 S))
+    have h := (ProEtale.AdjunctionTransfer.etaleCtfChartDomain ell k hk
+      (Fact.out : ringChar k ≠ ell) A n hA (𝟙 S) (Compactification.ofIsProper (𝟙 S))
       (affineTraceProjection S (d + 1))).2.2.2.1
         (d + 1) (2 * ((d + 1 : ℕ) : ℤ)) K hK
     let e := (orderedAffineRightIso A (ell ^ n)
@@ -212,7 +217,7 @@ private theorem ordered_coefficient_map_eq
 
 private theorem affine_tower_scalar
     (ell p n : ℕ) [Fact ell.Prime] (hp : 0 < p) (hEll : p ≠ ell)
-    (k : Type u) [Field k] [CharP k p]
+    (k : Type u) [Field k] [CharP k p] (hk : Finite k ∨ IsAlgClosed k)
     [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ell)]
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) (hA : ((ell ^ n : ℕ) : A) = 0) (hB : ((ell ^ n : ℕ) : B) = 0)
@@ -270,7 +275,7 @@ private theorem affine_tower_scalar
   rw [← coefficient_map_eq]
   exact affineLineCanonicalScalarCounit ell p n hp hEll k φ hA hB T
     (affineTraceInvertible _ S hS r) _ _ _ _ _
-    (affine_right_domain ell k A n hA S hS r K hK)
+    (affine_right_domain ell k hk A n hA S hS r K hK)
 
 private theorem compactification_counit_transport
     {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]

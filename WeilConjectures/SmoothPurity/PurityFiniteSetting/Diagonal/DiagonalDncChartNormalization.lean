@@ -1072,6 +1072,109 @@ theorem chartGamma_counit_normalization
   exact (transport _ _ (ht d)).trans
     (chartGamma_eq_inverseOrientation F C E n Y aY d).symm
 
+/-- Relative Spec of the canonical symmetric comparison, followed by the normalized
+Rees comparison, from the actual cone to its conormal vector bundle. Its homogeneous
+normalization fixes every ideal class, so it contains no arbitrary bundle automorphism.
+Source: chart proof, Step 2 (blueprint: lem-pur-diagonal-dnc-chart-normalization). -/
+def chartNormalModelRaw {U V : Scheme.{u}} [IsNoetherian U]
+    (d : ℕ) (h : U ⟶ V) [IsSeparated h] [SmoothOfRelativeDimension d h]
+    [QuasiCompact h] :
+    letI := (chartDiagonalNormalBundle d h).1
+    (pullback.diagonal h).ker.normalCone ≅ VectorBundleZeroSection.scheme U d
+      (ConormalGradedAlgebra.piece (pullback.diagonal h) 1) :=
+  letI := (chartDiagonalNormalBundle d h).1
+  let e : VectorBundleZeroSection.algebraObject U d
+        (ConormalGradedAlgebra.piece (pullback.diagonal h) 1) ≅
+      PurityNormalBundle.algebraObject (pullback.diagonal h) :=
+    ObjectProperty.isoMk _ (@asIso _ _ _ _
+      (ConormalGradedAlgebra.symmetricComparison (pullback.diagonal h))
+      (chartDiagonalNormalBundle d h).2)
+  let eOver := (ObjectProperty.ι (fun Y : Over U ↦ IsAffineHom Y.hom)).mapIso
+    (((VectorBundleZeroSection.antiEquivalence U).inverse.mapIso e).unop)
+  (Etale.FiniteSmoothPurity.reesConeComparison_exists (pullback.diagonal h)).choose ≪≫
+    (Over.forget U).mapIso eOver
+
+/-- The conormal vector-bundle model exists for the actual diagonal normal cone,
+with its actual projection and zero section. This makes the preceding universal
+presentation equation nonvacuous also in rank zero.
+Source: chart proof, Step 2 (blueprint: lem-pur-diagonal-dnc-chart-normalization).
+
+Proof: take the inverse of chartNormalModelRaw. Its specified value gives uniqueness.
+chartDiagonalNormalBundle gives finite local freeness and invertibility
+of the canonical symmetric comparison. Apply the relative Spec anti-equivalence
+and compose with the homogeneous-normalized Rees comparison. Both algebra maps
+preserve constants and augmentation, so projection and zero commute. Their
+coordinate formulas identify this with the differential normal-bundle map. -/
+theorem chartNormal_model_exists {U V : Scheme.{u}} [IsNoetherian U]
+    (d : ℕ) (h : U ⟶ V) [IsSeparated h] [SmoothOfRelativeDimension d h]
+    [QuasiCompact h] :
+    letI := (chartDiagonalNormalBundle d h).1
+    ∃! e : VectorBundleZeroSection.scheme U d
+        (ConormalGradedAlgebra.piece (pullback.diagonal h) 1) ≅
+          (pullback.diagonal h).ker.normalCone,
+      e = (chartNormalModelRaw d h).symm ∧
+      e.hom ≫ Scheme.Hom.normalConeProj (pullback.fst h h) (pullback.diagonal h) =
+        VectorBundleZeroSection.π U d (ConormalGradedAlgebra.piece (pullback.diagonal h) 1) ∧
+      VectorBundleZeroSection.zero U d (ConormalGradedAlgebra.piece (pullback.diagonal h) 1) ≫
+        e.hom = (pullback.diagonal h).normalConeZeroSection := by
+  let := (chartDiagonalNormalBundle d h).1
+  let := (chartDiagonalNormalBundle d h).2
+  let δ := pullback.diagonal h
+  let E := VectorBundleZeroSection.antiEquivalence U
+  let A := VectorBundleZeroSection.algebraObject U d (ConormalGradedAlgebra.piece δ 1)
+  let B := PurityNormalBundle.algebraObject δ
+  let e : A ≅ B := ObjectProperty.isoMk _
+    (asIso (ConormalGradedAlgebra.symmetricComparison δ))
+  let eOver := (ObjectProperty.ι (fun Y : Over U ↦ IsAffineHom Y.hom)).mapIso
+    ((E.inverse.mapIso e).unop)
+  let j := (Over.forget U).mapIso eOver
+  have hjp : j.hom ≫ VectorBundleZeroSection.π U d
+      (ConormalGradedAlgebra.piece δ 1) = PurityNormalBundle.projection δ :=
+    Over.w eOver.hom
+  have ha : E.inverse.map e.inv ≫
+      E.functor.preimage ((E.counitIso.app A).hom ≫
+        ObjectProperty.homMk (VectorBundleZeroSection.augmentationToBase U
+          (ConormalGradedAlgebra.piece δ 1))) =
+      E.functor.preimage ((E.counitIso.app B).hom ≫
+        ObjectProperty.homMk (PurityNormalBundle.augmentationToBase δ)) := by
+    apply E.functor.map_injective
+    simp only [Functor.map_comp, Functor.map_preimage]
+    have hn := E.counitIso.hom.naturality e.inv
+    dsimp only [Functor.comp_map, Functor.id_map] at hn
+    refine ((Category.assoc _ _ _).symm.trans
+      ((congrArg (fun q ↦ q ≫ _) hn).trans (Category.assoc _ _ _))).trans ?_
+    apply congrArg (fun q ↦ (E.counitIso.app B).hom ≫ q)
+    apply ObjectProperty.hom_ext
+    change inv (ConormalGradedAlgebra.symmetricComparison δ) ≫
+      VectorBundleZeroSection.augmentationToBase U (ConormalGradedAlgebra.piece δ 1) = _
+    rw [← PurityNormalBundle.augmentation_comparison δ, IsIso.inv_hom_id_assoc]
+    all_goals rfl
+  have hjz : VectorBundleZeroSection.zero U d
+      (ConormalGradedAlgebra.piece δ 1) ≫ j.inv = PurityNormalBundle.zeroSection δ :=
+    congrArg (fun q ↦ q.unop.hom.left) ha
+  have hR := (Etale.FiniteSmoothPurity.reesConeComparison_exists δ).choose_spec
+  have hp : (chartNormalModelRaw d h).hom ≫
+      VectorBundleZeroSection.π U d (ConormalGradedAlgebra.piece δ 1) =
+      Scheme.Hom.normalConeProj (pullback.fst h h) δ := by
+    unfold chartNormalModelRaw
+    change (Etale.FiniteSmoothPurity.reesConeComparison_exists δ).choose.hom ≫
+      j.hom ≫ _ = _
+    rw [hjp, hR.1]
+    exact Scheme.Hom.purityNormalProjection_eq δ (pullback.fst h h)
+      (pullback.diagonal_fst h)
+  have hz : δ.normalConeZeroSection ≫ (chartNormalModelRaw d h).hom =
+      VectorBundleZeroSection.zero U d (ConormalGradedAlgebra.piece δ 1) := by
+    unfold chartNormalModelRaw
+    change δ.normalConeZeroSection ≫
+      (Etale.FiniteSmoothPurity.reesConeComparison_exists δ).choose.hom ≫ j.hom = _
+    rw [← Category.assoc, hR.2.1, ← hjz, Category.assoc, Iso.inv_hom_id,
+      Category.comp_id]
+  refine ⟨(chartNormalModelRaw d h).symm, ⟨rfl, ?_, ?_⟩, fun _ he ↦ he.1⟩
+  · change (chartNormalModelRaw d h).inv ≫ _ = _
+    exact (Iso.inv_comp_eq _).mpr hp.symm
+  · change _ ≫ (chartNormalModelRaw d h).inv = _
+    exact (Iso.comp_inv_eq _).mpr hz.symm
+
 /-- The affine counit mate is invertible at every finite coefficient stage.
 Source: chart proof, Step 4; projection-purity-agreement
 (blueprint: lem-pur-diagonal-dnc-chart-normalization).
@@ -1174,6 +1277,18 @@ def chartEtaleIdentification (P : PurityFiniteSetting.{u})
         (asIso ((ProEtale.derivedComparisonAdjunction A X).unit.app K)).symm ≪≫
         ρ.app K ≪≫ (Etale.leftDerivedUpperStarIsoMapDerivedCategory A u).symm.app K) ≪≫
     (Dnc.pullComparison P u K).symm
+
+/-- The conormal model with its value fixed by relative Spec and homogeneous Rees
+coordinates. The equality in chartNormal_model_exists determines the selected object.
+Source: chart proof, Step 2 (blueprint: lem-pur-diagonal-dnc-chart-normalization). -/
+def chartNormalModel {U V : Scheme.{u}} [IsNoetherian U]
+    (d : ℕ) (h : U ⟶ V) [IsSeparated h] [SmoothOfRelativeDimension d h]
+    [QuasiCompact h] :
+    letI := (chartDiagonalNormalBundle d h).1
+    VectorBundleZeroSection.scheme U d
+      (ConormalGradedAlgebra.piece (pullback.diagonal h) 1) ≅
+        (pullback.diagonal h).ker.normalCone :=
+  (chartNormal_model_exists d h).exists.choose
 
 attribute [local irreducible] affineTraceTower affineTraceProjection
 

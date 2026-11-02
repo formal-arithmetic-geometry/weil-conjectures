@@ -44,6 +44,10 @@ public import WeilConjectures.AlgebraicGeometry.Compactification.Compactificatio
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperShriekPreservation
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperShriekFiniteness
 public import Mathlib.CategoryTheory.Adjunction.Unique
+public import WeilConjectures.AlgebraicGeometry.Finite.Compact.FiniteCompactSupportConstructibility
+public import WeilConjectures.AlgebraicGeometry.ProEtaleCoefficients.LocalizingClosureCtfEqualsBc
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ExceptionalInverseImageCurrent
+public import WeilConjectures.SmoothPurity.CurrentExceptionalAdjointAdmissibility
 
 /-! # Exceptional inverse image in the current field scope
 
@@ -91,7 +95,11 @@ instance and apply `BaseFieldFiniteCD.of_finite`; in the algebraically closed br
 its `IsAlgClosed k` instance and apply `BaseFieldFiniteCD.of_isAlgClosed`. -/
 theorem exceptionalCurrentFieldCD (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
     (_hk : Finite k ∨ IsAlgClosed k) : BaseFieldFiniteCD ℓ k := by
-  sorry
+  rcases _hk with hk | hk
+  · let := hk
+    exact BaseFieldFiniteCD.of_finite ℓ k
+  · let := hk
+    exact BaseFieldFiniteCD.of_isAlgClosed ℓ k
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]

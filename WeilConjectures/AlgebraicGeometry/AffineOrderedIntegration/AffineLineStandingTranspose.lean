@@ -8,6 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.AffineLineEvaluation.AffineLineCompositeTranspose
 import WeilConjectures.AlgebraicGeometry.SpecifiedExceptionalStandingIso
 import WeilConjectures.AlgebraicGeometry.AffineSpacePurity.AffineSpacePurityComparison
+public import WeilConjectures.AlgebraicGeometry.FiniteCompactSupportComparisonAgreement
+public import WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedEtaleCompactSupportComparisonsSupplement
 
 /-! # Counit normalization of the standing affine-line comparison
 
@@ -80,13 +82,10 @@ theorem lineComparison_counit_expanded
     affineLinePurityComparison, comparisonFromOrigin, Functor.map_comp, Category.assoc]
     using ht'
 
-/-- Cancel a source-coordinate isomorphism after compact-support transport.
-Source: source-coordinate cancellation in the inverse-transpose calculation
-(blueprint: lem-route-line-comparison-counit). -/
 private theorem source_transport_cancel
-    {C D : Type*} [Category* C] [Category* D] (F G : C ⥤ D)
-    {V M N : C} {K : D} (e : V ≅ M) (w : N ≅ M)
-    (c : F.obj N ⟶ G.obj N) (a : G.obj M ⟶ K) :
+    {C D : Type*} [Category C] [Category D] (F G : C ⥤ D)
+    {X Y Z : C} {T : D} (e : X ≅ Y) (w : Z ≅ Y)
+    (c : F.obj Z ⟶ G.obj Z) (a : G.obj Y ⟶ T) :
     F.map (e.hom ≫ w.inv) ≫ c ≫ G.map w.hom ≫ a =
       (F.map (w ≪≫ e.symm).inv ≫ c ≫ G.map (w ≪≫ e.symm).hom) ≫
         G.map e.hom ≫ a := by
@@ -106,11 +105,14 @@ lem-pur-projection-purity-agreement.proof.md, final paragraph, and the expanded
 ordered-transpose proof, Steps 3--4
 (blueprint: lem-route-line-comparison-counit).
 
-Proof: the expanded counit identity gives the fixed change of compactification
-followed by augmentation. Unfold standingEvaluation, its retained origin, and its
-chart evaluation. The source-coordinate isomorphism and its inverse cancel, so the
-result is exactly the expanded identity. The normalized representing-object comparison
-in lineComparison accounts for the standing counit's site-comparison normalization. -/
+Proof: the expanded calculation cancels the chart Hom chain using ordinary
+right-adjoint uniqueness. Restrict the ordinary compactification comparison to D+
+using unboundedEtaleCompactSupport_comparison_plus. The published standing site
+comparison agrees with the specified one by finiteCompactSupportComparisonAgreement,
+since the upstream proper factor is now the canonical derived mate. These identify
+the three middle factors with fixedCompactSupportOriginIso. Finally unfold the
+standing evaluation and cancel its source-coordinate transport with its inverse.
+This gives the same augmentation after the same compactification comparison. -/
 theorem lineComparison_counit
     (P : WeilConjectures.PurityFiniteSetting.{u})
     (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of P.field.k))
@@ -124,9 +126,53 @@ theorem lineComparison_counit
       AffineLineEvaluation.counit P aY (AffineSpace PUnit.{u + 1} Y ↘ Y) K =
     AffineLineEvaluation.standingEvaluation P Y aY K.obj Ke hKe eK := by
   let : IsNoetherian Y := isNoetherian_of_locallyOfFiniteType aY
-  rw [lineComparison_counit_expanded]
+  let q := AffineSpace PUnit.{u + 1} Y ↘ Y
+  let c := affineTraceLineCompactification Y
+  let c₀ := HasCompactification.compactification q
+  let A := Ring P
   let W := sourceWitness P.coefficients.l P.extension (P.level - 1) Y P.level
     (annihilates P) K.obj Ke hKe eK
+  let : IsNoetherian (AffineSpace PUnit.{u + 1} Y) :=
+    isNoetherian_of_locallyOfFiniteType q
+  have ht : (Etale.rightDerivedLowerShriekOfCompactificationPlusιIso A c c₀).hom.app
+      W.complex = (Etale.rightDerivedLowerShriekIso A c).hom.app W.complex.obj := by
+    have h := Etale.unboundedEtaleCompactSupport_comparison_plus A q c c₀ W.complex
+    apply (cancel_epi
+      ((Etale.rightDerivedLowerShriekOfCompactificationPlusCompatibility
+        (ModuleCat.{u + 1} A) c).hom.app W.complex)).1
+    simpa only [Etale.rightDerivedLowerShriekOfCompactificationPlusιIso,
+      Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+      Functor.whiskerRight_app, Category.assoc, Iso.hom_inv_id_app_assoc,
+      Etale.rightDerivedLowerShriekIso, c₀, Functor.comp_obj,
+      DerivedCategory.Plus.ι, ObjectProperty.ι_obj] using h
+  have hi : (Etale.rightDerivedLowerShriekOfCompactificationPlusιIso A c₀ c).hom.app
+      W.complex = (Etale.rightDerivedLowerShriekOfCompactificationPlusιIso A c c₀).inv.app
+        W.complex := by
+    change ((Etale.rightDerivedLowerShriekOfCompactificationPlusιIso A c₀ c).symm).inv.app
+      W.complex = _
+    simp only [Etale.rightDerivedLowerShriekOfCompactificationPlusιIso, Iso.trans_symm,
+      Functor.isoWhiskerRight_symm, Iso.symm_symm_eq,
+      Etale.rightDerivedLowerShriekOfCompactificationPlusIso_symm, Iso.trans_assoc]
+  have hτ : (Etale.rightDerivedLowerShriekOfCompactificationPlusιIso A c₀ c).hom.app
+      W.complex = (Etale.rightDerivedLowerShriekIso A c).inv.app W.complex.obj := by
+    have he : (Etale.rightDerivedLowerShriekOfCompactificationPlusιIso A c c₀).app
+        W.complex = (Etale.rightDerivedLowerShriekIso A c).app W.complex.obj :=
+      Iso.ext ht
+    exact hi.trans (congrArg Iso.inv he)
+  have hk := (finiteCompactSupportComparisonAgreement P.field.k (q ≫ aY) aY q A c₀ c).1
+  have hc : (rightDerivedLowerShriekComparisonIso (ModuleCat.{u + 1} A) q).hom.app
+        W.complex ≫
+      (comparison A Y).map ((Etale.rightDerivedLowerShriekIso A c).inv.app W.complex.obj) ≫
+      (fixedCompactSupportComparisonIso A c).inv.app W.complex =
+      (fixedCompactSupportOriginIso A c₀ c).hom.app W.complex := by
+    simp only [fixedCompactSupportOriginIso, Iso.trans_hom, Iso.symm_hom,
+      NatTrans.comp_app, Functor.isoWhiskerRight_hom, Functor.whiskerRight_app]
+    rw [hτ]
+    rw [rightDerivedLowerShriekComparisonIso, hk]
+    rfl
+  rw [lineComparison_counit_expanded]
+  change _ = AffineLineEvaluation.standingEvaluation P Y aY K.obj Ke hKe eK
+  erw [reassoc_of% hc]
   have h := source_transport_cancel
     (rightDerivedLowerShriek (ModuleCat.{u + 1} (Ring P))
       (AffineSpace PUnit.{u + 1} Y ↘ Y))
