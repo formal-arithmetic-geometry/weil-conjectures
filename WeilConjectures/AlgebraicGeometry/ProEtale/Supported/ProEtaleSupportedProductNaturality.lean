@@ -13,6 +13,9 @@ Source: blueprint `lem-pur-kunneth-supported`, witness-transport paragraph.
 (blueprint: lem-pur-proetale-supported-product-naturality).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 set_option autoImplicit false
 set_option Elab.async false

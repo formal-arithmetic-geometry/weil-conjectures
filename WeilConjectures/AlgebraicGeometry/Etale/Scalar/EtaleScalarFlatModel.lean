@@ -13,6 +13,7 @@ import WeilConjectures.AlgebraicGeometry.Etale.EtaleFlatConstructibleModel
 import WeilConjectures.AlgebraicGeometry.Constructible.ConstructibleCoefficientSiteSquare
 import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionConstructible
 import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
 
 /-! # Constructible flat models under arbitrary finite scalar extension
 
