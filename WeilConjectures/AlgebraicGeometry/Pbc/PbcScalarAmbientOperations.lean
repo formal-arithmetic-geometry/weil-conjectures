@@ -451,6 +451,42 @@ def pbcScalarOrdinaryRestrictionPull :
       (pbcScalarCoefficientMap l E F i X)
       (pbcScalarCoefficientStructureSquare l E F i g)).inv)).natTrans
 
+/-- Transport of an iterated mate along an equality of left adjoints with compatible units. -/
+private theorem iteratedMate_transport {C₁ C₂ D₁ D₂ : Type*} [Category C₁] [Category C₂]
+    [Category D₁] [Category D₂]
+    {ExtY : C₁ ⥤ C₂} {ResY : C₂ ⥤ C₁} (aY : ExtY ⊣ ResY)
+    {ExtX : D₁ ⥤ D₂} {ResX : D₂ ⥤ D₁} (aX : ExtX ⊣ ResX)
+    {LE LE' : C₁ ⥤ D₁} {PE : D₁ ⥤ C₁} (adjE : LE ⊣ PE) (adjE' : LE' ⊣ PE) (hE : LE' = LE)
+    (huE : ∀ M, adjE'.unit.app M ≫ PE.map ((eqToHom hE).app M) = adjE.unit.app M)
+    {LF LF' : C₂ ⥤ D₂} {PF : D₂ ⥤ C₂} (adjF : LF ⊣ PF) (adjF' : LF' ⊣ PF) (hF : LF' = LF)
+    (huF : ∀ M, adjF'.unit.app M ≫ PF.map ((eqToHom hF).app M) = adjF.unit.app M)
+    (δ : PF ⋙ ResY ⟶ ResX ⋙ PE) :
+    whiskerLeft ResY (eqToHom hE) ≫ (mateEquiv aY aX (TwoSquare.mk _ _ _ _
+        ((conjugateEquiv (aY.comp adjF) (adjE.comp aX)).symm δ))).natTrans =
+      ((mateEquiv adjF' adjE').symm (TwoSquare.mk _ _ _ _ δ)).natTrans ≫
+        whiskerRight (eqToHom hF) ResX := by
+  subst hE hF
+  obtain rfl : adjE' = adjE := Adjunction.ext (by ext M; simpa using huE M)
+  obtain rfl : adjF' = adjF := Adjunction.ext (by ext M; simpa using huF M)
+  simp only [eqToHom_refl, Functor.whiskerLeft_id', Functor.whiskerRight_id', Category.id_comp,
+    Category.comp_id]
+  have h := iterated_mateEquiv_conjugateEquiv aY aX adjE' adjF'
+    (TwoSquare.mk _ _ _ _ ((conjugateEquiv (aY.comp adjF') (adjE'.comp aX)).symm δ))
+  have h' : mateEquiv adjF' adjE' (mateEquiv aY aX
+      (TwoSquare.mk _ _ _ _ ((conjugateEquiv (aY.comp adjF') (adjE'.comp aX)).symm δ))) =
+      TwoSquare.mk _ _ _ _ δ :=
+    h.trans (Equiv.apply_symm_apply (conjugateEquiv (aY.comp adjF') (adjE'.comp aX)) δ)
+  exact congrArg TwoSquare.natTrans ((Equiv.eq_symm_apply _).2 h')
+
+/-- The ring-module and published module adjunctions have compatible units. -/
+private theorem pbcModuleAdjunction_unit_compat {A : Type (u + 1)} [CommRing A]
+    (d : AdicCoefficientDatum A) (M : pbcModules Y (pbcAdicCompletion Y d)) :
+    (proEtaleRingModuleAdjunction g (pbcAdicCompletion Y d) (pbcAdicCompletion X d)
+        (pbcCompletedCoefficientIso g d)).unit.app M ≫
+      (pbcActualModulePush g d).map ((eqToHom (pbcModulePull_eq g d)).app M) =
+      (pbcActualModuleAdjunction g d).unit.app M := by
+  sorry
+
 /-- The ordinary scalar mate is the identity-on-sections restriction/pullback comparison.
 Source: Stacks Tags 03EK and 03EL (blueprint: lem-pbc-scalar-ambient-operation-comparisons).
 Proof: the ordinary pullback comparison is the conjugate of the identity-on-sections
@@ -470,7 +506,60 @@ theorem pbcScalarOrdinaryRestrictionPull_eq :
         (pbcScalarCoefficientInverseSquare l E F i g) ≫
       whiskerRight (pbcModulePullIso g (pbcIntegralDatum l F)).hom
         (pbcRestrict (pbcScalarCoefficientMap l E F i X)) := by
-  sorry
+  let φY := pbcScalarCoefficientMap l E F i Y
+  let φX := pbcScalarCoefficientMap l E F i X
+  let dE := pbcIntegralDatum l E
+  let dF := pbcIntegralDatum l F
+  let hφ := pbcScalarCoefficientStructureSquare l E F i g
+  let δ := pbcActualScalarRightIso g dE dF φY φX hφ
+  let adjS := proEtaleRingModuleAdjunction g (pbcAdicCompletion Y dF) (pbcAdicCompletion X dF)
+    (pbcCompletedCoefficientIso g dF)
+  let adjR := proEtaleRingModuleAdjunction g (pbcAdicCompletion Y dE) (pbcAdicCompletion X dE)
+    (pbcCompletedCoefficientIso g dE)
+  let dd := proEtaleRingRestrictionDirectImage g
+    (pbcAdicCompletion Y dE) (pbcAdicCompletion Y dF)
+    (pbcAdicCompletion X dE) (pbcAdicCompletion X dF) φY φX
+    (pbcCompletedCoefficientIso g dE) (pbcCompletedCoefficientIso g dF)
+    (pbcScalarCoefficientInverseSquare l E F i g)
+  have hdd : dd.hom = δ.hom := by
+    ext N W n
+    exact ((Classical.choose_spec (proEtaleRingRestrictionDirectImage_existsUnique g
+      (pbcAdicCompletion Y dE) (pbcAdicCompletion Y dF)
+      (pbcAdicCompletion X dE) (pbcAdicCompletion X dF) φY φX
+      (pbcCompletedCoefficientIso g dE) (pbcCompletedCoefficientIso g dF)
+      (pbcScalarCoefficientInverseSquare l E F i g))).1 N W n).trans
+      ((pbcActualScalarRightIso_exists g dE dF φY φX hφ).exists.choose_spec N W n).symm
+  have hinv : proEtaleRingRestrictionPullbackInv g
+      (pbcAdicCompletion Y dE) (pbcAdicCompletion Y dF)
+      (pbcAdicCompletion X dE) (pbcAdicCompletion X dF) φY φX
+      (pbcCompletedCoefficientIso g dE) (pbcCompletedCoefficientIso g dF)
+      (pbcScalarCoefficientInverseSquare l E F i g) =
+      ((mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ dd.hom)).natTrans := by
+    apply NatTrans.ext
+    funext M
+    let s := (mateEquiv adjS adjR).symm (TwoSquare.mk _ _ _ _ dd.hom)
+    change proEtaleRingRestrictionPullbackApp g
+      (pbcAdicCompletion Y dE) (pbcAdicCompletion Y dF)
+      (pbcAdicCompletion X dE) (pbcAdicCompletion X dF) φY φX
+      (pbcCompletedCoefficientIso g dE) (pbcCompletedCoefficientIso g dF)
+      (pbcScalarCoefficientInverseSquare l E F i g) M = s.app M
+    symm
+    simp only [s, mateEquiv_symm_apply, TwoSquare.mk, NatTrans.comp_app,
+      Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.comp_obj,
+      Functor.associator_hom_app, Functor.associator_inv_app,
+      Functor.leftUnitor_inv_app, Functor.rightUnitor_hom_app,
+      Category.id_comp]
+    dsimp only [TwoSquare.natTrans, Functor.comp_map]
+    try simp only [CategoryTheory.Functor.map_id, Category.id_comp]
+    unfold proEtaleRingRestrictionPullbackApp
+    rfl
+  rw [hinv, hdd]
+  simp only [pbcModulePullIso, eqToIso.hom]
+  exact iteratedMate_transport (pbcScalarAdjunction φY) (pbcScalarAdjunction φX)
+    (pbcActualModuleAdjunction g dE) adjR (pbcModulePull_eq g dE)
+    (pbcModuleAdjunction_unit_compat g dE)
+    (pbcActualModuleAdjunction g dF) adjS (pbcModulePull_eq g dF)
+    (pbcModuleAdjunction_unit_compat g dF) δ.hom
 
 /-- The derived scalar mate is the localized ordinary scalar mate on flat-term K-flat
 complexes with flat-term K-flat restriction.
