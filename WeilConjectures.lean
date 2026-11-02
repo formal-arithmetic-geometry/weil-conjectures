@@ -8324,6 +8324,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Clopen.ProEtaleClopenSt
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Clopen.ProEtaleClopenStructuralData
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Clopen.ProEtaleClopenTotalTensorComparison
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Clopen.ProEtaleClopenTotalTensorKFlatDetection
+public import WeilConjectures.AlgebraicGeometry.ProEtale.ClopenPartition
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Closed.ProEtaleClosedAbelianFilteredColimits
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Closed.ProEtaleClosedAbelianProductsOfUniverses
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Closed.ProEtaleClosedAffineCechClosedExact
@@ -13869,6 +13870,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.Grp.Injective
 public import WeilConjectures.Mathlib.Algebra.Category.Grp.Preadditive
 public import WeilConjectures.Mathlib.Algebra.Category.Grp.ZModuleEquivalence
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Adjunctions
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Basic
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Colimits
@@ -14306,6 +14308,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafHom
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sheafification
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Sieves
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Subcanonical
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Whiskering
 public import WeilConjectures.Mathlib.CategoryTheory.Skeletal
 public import WeilConjectures.Mathlib.CategoryTheory.SmallObject.TransfiniteIteration
