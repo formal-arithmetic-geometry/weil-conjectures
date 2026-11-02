@@ -189,6 +189,10 @@ Formalized below (before the `sorry`):
   isomorphisms passed explicitly. A direct `rw` with `Functor.mapIso_inv` timed out.
 The goal is now restated by `show` (it needs `maxHeartbeats 1000000`) and flipped by
 `comp_comp_hom_eq_hom_comp`, so the two pullback comparisons appear as `β.inv`.
+Their solved forms `βLg_inv` and `βLg'_inv` are substituted by `erw`. Next: in the
+goal, `βRf.hom` (under `Lg_F.map`) and `βRf'.hom` are not followed by
+`Rf_F.map SIC.hom`. So multiply by the comparisons (as in `eq_inv_comp_comp_inv`) before
+using `eRf` and `eRf'`.
 Earlier attempt, before `show`: moving `Lg.β` and `Rf'_F.map Lg'.β` across the goal with a generic two-sided
 lemma (`p.inv ≫ A ≫ B = R ≫ T ≫ q.inv → A ≫ B ≫ q.hom = p.hom ≫ R ≫ T`), applied by `refine`
 with `p`, `q` given explicitly. Unifying it with the goal times out at `whnf`, even after
@@ -350,6 +354,8 @@ theorem pbcExchangeStageSquare_integral
   refine comp_comp_hom_eq_hom_comp
     ((βLg h).app ((pbcDescentDirectImage l Ω f presRf E).obj ⟨K⟩))
     ((pbcDescentDirectImage l Ω f' presRf' F).mapIso ((βLg' h).app ⟨K⟩)) _ _ _ _ ?_
+  simp only [Iso.app_inv, Functor.mapIso_inv]
+  erw [βLg_inv, βLg'_inv]
   sorry
 
 /-- The prescribed localized actual exchange components satisfy the scalar
