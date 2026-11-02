@@ -9,6 +9,8 @@ public import WeilConjectures.SixFunctors.CoefficientClosedStructure.Coefficient
 public import WeilConjectures.CategoryTheory.Ringed.RingedDerivedClosedSymmetricMonoidal
 import WeilConjectures.SixFunctors.IntegralHom.IntegralHomRepresentativeUncurry
 
+set_option linter.privateModule false
+
 /-! # Signed evaluation for finite tensor presentations
 
 The normalized left-tensor adjunction and its representative evaluation are

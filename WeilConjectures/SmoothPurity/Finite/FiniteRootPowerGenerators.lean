@@ -8,6 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.Finite.Tate.FiniteTateSiteDescentDefinitions
 import WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionBinaryCoherenceSupplement
 
+set_option linter.privateModule false
+
 /-! # Local generation of finite root powers
 
 Source: Stacks, Modules on Sites, Tag 03EK, and coefficient-twist clause 3.

@@ -88,6 +88,8 @@ import WeilConjectures.AlgebraicGeometry.Finite.Ring.FiniteRingConstructibleDeri
 import WeilConjectures.SmoothPurity.Sf.SfIntegralConstructibleTriangulated
 import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
 
+set_option linter.privateModule false
+
 /-! # Finite Hom groups into finite compact-support terms
 
 Source: the finite-coefficient finiteness argument in the integral realization step

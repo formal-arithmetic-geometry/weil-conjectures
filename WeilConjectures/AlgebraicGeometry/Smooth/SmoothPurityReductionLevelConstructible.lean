@@ -15,6 +15,8 @@ import WeilConjectures.AlgebraicGeometry.SmoothPurity.CofinalCoefficientProjecti
 import all WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinary.FiniteCoefficientModelComparison
 import all WeilConjectures.AlgebraicGeometry.ProEtale.Bounded.ProEtaleBoundedConstructibleTriangulated
 
+set_option linter.privateModule false
+
 /-! # Constructible cohomology of the evaluated strict reductions
 
 Source: blueprint latest, normalized-towers-reduction, constructibility paragraph;

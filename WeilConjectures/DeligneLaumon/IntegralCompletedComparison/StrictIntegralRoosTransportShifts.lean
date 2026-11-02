@@ -15,6 +15,8 @@ import all WeilConjectures.Algebra.Homology.RingedCoefficientProjection.RingedCo
 import WeilConjectures.CategoryTheory.DerivedCategory.Shift.IdIso
 import all WeilConjectures.AlgebraicGeometry.ImmersionCompletedPullback.SfImmersionCompletedPullbackComparison
 
+set_option linter.privateModule false
+
 /-! # Signed shifts of the recoded strict Roos comparison
 
 Source: Stacks Project, sites-modules.tex, Tags 03EK/03EL; proetale.tex, Tag 099N(5).

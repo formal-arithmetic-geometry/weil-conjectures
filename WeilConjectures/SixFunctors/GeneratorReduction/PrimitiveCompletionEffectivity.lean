@@ -14,6 +14,8 @@ import WeilConjectures.SixFunctors.Supporting.RoosIntrinsicCompletenessEquivalen
 import all WeilConjectures.SmoothPurity.IntegralOnSlice.IntegralDerivedOperationsOnSlices
 import all WeilConjectures.SmoothPurity.Supporting.Coefficient.ConstantCoefficientObjectsConstructible
 
+set_option linter.privateModule false
+
 /-! # Primitive completion effectivity
 
 Source: current blueprint fix-prop-coherence, primitive realization step.

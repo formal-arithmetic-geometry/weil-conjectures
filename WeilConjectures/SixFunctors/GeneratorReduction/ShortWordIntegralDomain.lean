@@ -12,6 +12,8 @@ import WeilConjectures.SmoothPurity.Sf.SfDerivedCompleteLegacyComparison
 import WeilConjectures.AlgebraicGeometry.ProEtale.Bounded.ProEtaleBoundedConstructibleTriangulated
 import all WeilConjectures.SixFunctors.GeneratorReduction.OpenReconstructionEffectivity
 
+set_option linter.privateModule false
+
 /-! # Integral intermediate domains
 
 Source: current blueprint fix-prop-coherence, primitive realization step.

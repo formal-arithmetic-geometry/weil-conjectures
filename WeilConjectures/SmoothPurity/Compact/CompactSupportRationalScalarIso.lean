@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.SmoothPurity.Compact.CompactSupportCoefficientAction
 
+set_option linter.privateModule false
+
 /-! # A step of normalized compact-support scalar comparison
 
 Source: lem-fix-operation-reduction, compact-support and final paragraphs.

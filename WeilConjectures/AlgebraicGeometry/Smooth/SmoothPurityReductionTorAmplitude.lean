@@ -63,6 +63,8 @@ import WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 import all WeilConjectures.AlgebraicGeometry.Scalar.ScalarExtensionFunctor
 
+set_option linter.privateModule false
+
 /-! Tor-amplitude transport for the normalized smooth-purity reduction tower.
 Source: blueprint latest, normalized-towers, uniform Tor and cohomological bounds.
 (blueprint: lem-sp-reduction-tower-tor-intervals).

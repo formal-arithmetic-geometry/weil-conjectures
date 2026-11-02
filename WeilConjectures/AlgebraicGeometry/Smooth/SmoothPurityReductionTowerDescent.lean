@@ -11,6 +11,8 @@ import all WeilConjectures.AlgebraicGeometry.StrictCoefficientTensor.StrictCoeff
 import all WeilConjectures.Algebra.Homology.SequenceProjection.SequenceProjectionDerivedAdjunction
 import all WeilConjectures.CategoryTheory.Constant.ConstantTowerNormalization
 
+set_option linter.privateModule false
+
 /-! # Strict reduction in the chosen coefficient-tower presentation
 
 Source: blueprint latest, normalized-towers-reduction, construction paragraph;

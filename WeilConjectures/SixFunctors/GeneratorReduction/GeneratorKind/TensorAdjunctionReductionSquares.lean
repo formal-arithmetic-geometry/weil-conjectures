@@ -12,6 +12,8 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 import Mathlib.Algebra.CharP.CharAndCard
 import WeilConjectures.SixFunctors.GeneratorReduction.CanonicalReductionPullComposition
 
+set_option linter.privateModule false
+
 /-! # Tensor, composition and adjunction reduction squares
 
 Source: blueprint main-20261015, fix-prop-coherence.proof.md, the maps-used sentence

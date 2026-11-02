@@ -39,6 +39,8 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
 import WeilConjectures.Algebra.Homology.SmoothPurity.ChangeOfRingsTensorCancellationIndependentCoefficientsSupplement
 
+set_option linter.privateModule false
+
 /-! # Invertibility of the specified reduction adjuncts
 
 Source: blueprint latest, normalized-towers-reduction, normalization paragraph;

@@ -10,6 +10,8 @@ public import WeilConjectures.SixFunctors.CoefficientClosedStructure.Coefficient
 import WeilConjectures.SixFunctors.IntegralHom.Reduction.IntegralHomReductionModels
 import all WeilConjectures.DeligneLaumon.QuotientTensorScalarTowerComparison
 
+set_option linter.privateModule false
+
 /-! # Inverse tensor-unit maps on local sections
 
 Source: the finite-free quotient resolution in the first paragraph of the current
