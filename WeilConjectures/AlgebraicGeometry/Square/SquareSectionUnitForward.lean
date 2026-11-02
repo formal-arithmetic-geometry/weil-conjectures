@@ -39,9 +39,10 @@ section Helpers
 
 local instance (Y : Scheme.{u}) : Category Y.Modules :=
   inferInstanceAs (Category (SheafOfModules.{u} (moduleRings Y.toRingedSpace)))
-local instance (Y : Scheme.{u}) : Abelian Y.Modules :=
+local instance squareSectionAbelian (Y : Scheme.{u}) : Abelian Y.Modules :=
   inferInstanceAs (Abelian (SheafOfModules.{u} (moduleRings Y.toRingedSpace)))
-local instance (Y : Scheme.{u}) : HasDerivedCategory.{w} Y.Modules :=
+local instance squareSectionHasDerivedCategory (Y : Scheme.{u}) :
+    HasDerivedCategory.{w} Y.Modules :=
   inferInstanceAs (HasDerivedCategory.{w}
     (SheafOfModules.{u} (moduleRings Y.toRingedSpace)))
 
