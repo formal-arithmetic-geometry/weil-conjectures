@@ -93,6 +93,13 @@ theorem iso_app_of_heq_functor {A B C : Type*} [Category A] [Category B] [Catego
   rw [eq_of_heq h]
   simp
 
+/-- Solve `u₁ ≫ b ≫ u₃ = X` for the middle factor when the outer factors are invertible. -/
+theorem eq_inv_comp_comp_inv {C : Type*} [Category C] {s t r v : C} (u₁ : s ≅ t)
+    (b : t ⟶ r) (u₃ : r ≅ v) (X : s ⟶ v) (h : u₁.hom ≫ b ≫ u₃.hom = X) :
+    b = u₁.inv ≫ X ≫ u₃.inv := by
+  rw [← h]
+  simp
+
 /-- A heterogeneous equality of morphisms over equalities of their endpoints. -/
 theorem hom_eq_of_heq_objects {C : Type*} [Category C] {x x' y y' : C}
     (hx : x = x') (hy : y = y') {a : x ⟶ y} {b : x' ⟶ y'} (h : HEq a b) :
@@ -168,10 +175,13 @@ Formalized below (before the `sorry`):
 * The four `pbcScalar*_rational` specs and `hτ E K` are made homogeneous with `rfl`
   endpoints and substituted into them.
 * The direct-image equations are solved for `β ≫ Rf_F.map SIC` by `Iso.inv_comp_eq`.
-The same rewrite for the pullback equations (`← Functor.mapIso_inv, Iso.inv_comp_eq`)
-times out at `whnf`, so it is left out.
+* The pullback equations are solved for `β.inv` by `eq_inv_comp_comp_inv`, with the outer
+  isomorphisms passed explicitly. A direct `rw` with `Functor.mapIso_inv` timed out.
+Tried next: moving `Lg.β` and `Rf'_F.map Lg'.β` across the goal with a generic two-sided
+lemma (`p.inv ≫ A ≫ B = R ≫ T ≫ q.inv → A ≫ B ≫ q.hom = p.hom ≫ R ≫ T`), applied by `refine`
+with `p`, `q` given explicitly. Unifying it with the goal times out at `whnf`, even after
+`dsimp only`. The goal should first be restated with `show` in the substituted form.
 Still to do:
-* Solve the pullback equations in another way, for example by `cancel_epi`.
 * For `E ≠ F`, rewrite the comparison components as `eqToHom`s with
   `pbcScalarIntegralComparison_ne`, `iso_app_of_heq_functor` and
   `pbcScalarExtension_eq_rational`. `E = F` needs `pbcIntegralScalarUnit` instead.
@@ -303,6 +313,21 @@ theorem pbcExchangeStageSquare_integral
   rw [rLg₁] at eLg
   rw [rLg'₁] at eLg'
   rw [← Iso.app_inv, Iso.inv_comp_eq] at eRf eRf'
+  have βLg_inv := eq_inv_comp_comp_inv
+    ((pbcDescentPullback l Ω g presLg F).mapIso ((pbcScalarIntegralComparison l Ω Y dY.out iY.out h).app
+      ((pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)
+        (pbcActualDerivedPush f (pbcStageDatum.{u} l Ω E)) (presRf E)).obj K)).symm) _
+    ((pbcScalarIntegralComparison l Ω Y' dY'.out iY'.out h).app
+      ((pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)
+        (pbcActualCompletedPull g (pbcStageDatum.{u} l Ω E)) (presLg E)).obj
+        ((pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)
+          (pbcActualDerivedPush f (pbcStageDatum.{u} l Ω E)) (presRf E)).obj K))) _ eLg
+  have βLg'_inv := eq_inv_comp_comp_inv
+    ((pbcDescentPullback l Ω g' presLg' F).mapIso
+      ((pbcScalarIntegralComparison l Ω X dX.out iX.out h).app K).symm) _
+    ((pbcScalarIntegralComparison l Ω X' dX'.out iX'.out h).app
+      ((pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)
+        (pbcActualCompletedPull g' (pbcStageDatum.{u} l Ω E)) (presLg' E)).obj K)) _ eLg'
   sorry
 
 /-- The prescribed localized actual exchange components satisfy the scalar
