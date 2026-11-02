@@ -27,6 +27,10 @@ set_option synthInstance.maxSize 4096
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 attribute [-instance] WeilConjectures.coefficientSequenceEssentiallySmall
 attribute [local irreducible] WeilConjectures.integralComparisonSequenceScalarModel
+attribute [local irreducible] WeilConjectures.completedIntegralCommRingSheafUnrestricted
+  WeilConjectures.integralScalarReduction WeilConjectures.scalarReductionExtension
+  WeilConjectures.coefficientSequenceRestriction
+  WeilConjectures.completedIntegralCommRingProjectionUnrestricted CategoryTheory.constantSheaf
 universe u
 open CategoryTheory Opposite AlgebraicGeometry
 namespace WeilConjectures.ScalarExtensionTower
@@ -86,8 +90,6 @@ private theorem chainSection (W : Scheme.{u})
   intro K n i U c x
   let X := K.obj.X i
   let q := CoefficientExtensionAssociation.quotientUnitSection l E W M X n U x
-  let z := c • CoefficientExtensionAssociation.evaluatedUnitSection l E L ι W A ρ
-    (M.tensor.obj X) n U q
   have hu := OrdinaryScalarTowerProof.evaluatedUnit_smul_raw l E L ι W A ρ hρ
     (M.tensor.obj X) n U c q
   have hf := OrdinaryScalarTowerProof.finiteComparison_unit l E L ι W A M ρ association
@@ -101,20 +103,25 @@ private theorem chainSection (W : Scheme.{u})
         ((coefficientSequenceEvaluation l L W n).map ((β.hom.app K).f i) ≫
           ((directEvaluation n).hom.app K).f i) ≫ ((directEvaluation n).inv.app K).f i := by
       rw [Category.assoc, ← HomologicalComplex.comp_f, Iso.hom_inv_id_app,
-        HomologicalComplex.id_f, Category.comp_id]
+        HomologicalComplex.id_f]
+      exact (Category.comp_id _).symm
     rw [h1, hi]
     unfold coefficientExtensionAssociationChain
     rfl
-  have hz : ((β.hom.app K).f i).val.app (op (n, U.unop))
-      (c • (show (A.scalar.model.E.obj (M.tensor.obj X)).val.obj (op (n, U.unop)) from
-        (A.scalar.ordinaryAdjunction.unit.app (M.tensor.obj X)).val.app (op (n, U.unop)) q)) =
-      ((coefficientSequenceEvaluation l L W n).map ((β.hom.app K).f i)).val.app U z := by
-    have h := eq_of_heq hu
-    exact congrArg (fun y ↦ ((β.hom.app K).f i).val.app (op (n, U.unop)) y) h
-  rw [hz, hm]
-  simp only [SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply]
-  rw [hf]
-  exact eq_of_heq (OrdinaryScalarTowerProof.sequenceSection_heq l L W _ n U _).symm
+  let y : (A.scalar.model.E.obj (M.tensor.obj X)).val.obj (op (n, U.unop)) :=
+    c • (show (A.scalar.model.E.obj (M.tensor.obj X)).val.obj (op (n, U.unop)) from
+      (A.scalar.ordinaryAdjunction.unit.app (M.tensor.obj X)).val.app (op (n, U.unop)) q)
+  have hy : coefficientEvaluationSection l L W (A.scalar.model.E.obj (M.tensor.obj X)) n U y =
+      c • CoefficientExtensionAssociation.evaluatedUnitSection l E L ι W A ρ
+        (M.tensor.obj X) n U q :=
+    eq_of_heq ((OrdinaryScalarTowerProof.evaluation_section_heq l L _ n U y).trans hu)
+  have hmap := OrdinaryScalarTowerProof.evaluation_map_section l L ((β.hom.app K).f i) n U y
+  rw [hy, hm] at hmap
+  simp only [SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply] at hmap
+  rw [hf] at hmap
+  exact eq_of_heq ((OrdinaryScalarTowerProof.evaluation_section_heq l L _ n U _).symm.trans
+    ((heq_of_eq hmap.symm).trans
+      (OrdinaryScalarTowerProof.sequenceSection_heq l L W _ n U _).symm))
 
 /-- Equal zero-preserving functors give equal termwise images of a cochain complex.
 Source: functoriality of termwise application (blueprint:
