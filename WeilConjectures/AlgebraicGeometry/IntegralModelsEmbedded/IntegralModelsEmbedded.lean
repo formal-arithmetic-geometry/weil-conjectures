@@ -353,7 +353,7 @@ def residueConstructible (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteInte
     (discreteObj (completedResidue ℓ E π 0)) X
       ((DerivedCategory.homologyFunctor _ n).obj
         ((Mod.extendScalars (residueMap ℓ E π X)).leftDerivedFunctor.obj L))) ∧
-  DerivedCategory.finiteTorAmplitude _
+  _root_.DerivedCategory.finiteTorAmplitude _
     ((Mod.extendScalars (residueMap ℓ E π X)).leftDerivedFunctor.obj L)
 
 /-- The Stacks constant-coefficient adic constructible category: completeness,
@@ -368,7 +368,7 @@ def stacksConstructible (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteInter
     (discreteObj (completedResidue ℓ E π 0)) X
       ((DerivedCategory.homologyFunctor _ n).obj
         ((Mod.extendScalars (residueMap ℓ E π X)).leftDerivedFunctor.obj L))) ∧
-  DerivedCategory.finiteTorAmplitude _
+  _root_.DerivedCategory.finiteTorAmplitude _
     ((Mod.extendScalars (residueMap ℓ E π X)).leftDerivedFunctor.obj L)
 
 end AlgebraicGeometry.ProEtale.IntegralModelsEmbedded

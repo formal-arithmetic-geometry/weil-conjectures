@@ -195,6 +195,7 @@ theorem compactification_localizing
       preservesColimit_of_iso_diagram G
         ((localizingClosureProEtale Λ c₀.Z).liftCompιIso (K ⋙ F)
           (fun i ↦ hi ⟨K.obj i, hK i.as⟩))
+    have := hopen.2.1 I
     exact comp_preservesColimit F G
   · intro K hK
     exact hproper.1 ⟨_, hopen.1 ⟨K, hK⟩⟩

@@ -319,8 +319,15 @@ structure ExactSquareOfUniverses
           ((NatTrans.mapHomologicalComplex ordinary.hom (.up ℤ)).app P) ≫
         RG.η.app ((U.mapHomologicalComplex (.up ℤ)).obj P)
 
--- Elaborating the structure fields unfolds the derived-category instances of the systems.
-set_option maxHeartbeats 400000 in
+section LimitSquare
+
+-- The fixed-coefficient zero morphisms differ from those of the abelian structure used by
+-- `DerivedCategory.Q`; unifying the two unfolds both abelian structures in the kernel.
+attribute [-instance] CategoryTheory.ConstantScalarRestriction.ringPreadditive
+  CategoryTheory.ConstantScalarRestriction.fixedPreadditive
+  CategoryTheory.ConstantScalarRestriction.ringZeroMorphisms
+  CategoryTheory.ConstantScalarRestriction.fixedZeroMorphisms
+
 /-- The canonical direct-image/limit comparison, fixed by its common derived unit.
 The projection equation retains the level maps, rather than only its object values.
 Source: blueprint trace proof step 5; Stacks 0A07
@@ -346,6 +353,8 @@ structure LimitSquare (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}} (f : X ⟶ S)
           ((NatTrans.mapHomologicalComplex ordinary.hom (.up ℤ)).app P) ≫
         LS.η.app (((diagonalTraceSystemPush l f).mapHomologicalComplex (.up ℤ)).obj P) ≫
         LS.R.map (Rt.η.app P)
+
+end LimitSquare
 
 end AlgebraicGeometry.ProEtale.DiagonalTrace
 namespace AlgebraicGeometry.ProEtale
