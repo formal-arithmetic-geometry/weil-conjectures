@@ -320,7 +320,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [∀ x : X, Invertible (l : X.residueField x)]
   [∀ y : Y, Invertible (l : Y.residueField y)]
 
-set_option linter.unusedSectionVars false in
 end IntegralShiftCoherence
 
 section IntegralComposition
@@ -396,7 +395,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 variable [∀ x : X, Invertible (l : X.residueField x)]
   [∀ y : Y, Invertible (l : Y.residueField y)]
 
-set_option linter.unusedSectionVars false in
 end SystemFibers
 
 section ArgumentFirstStages

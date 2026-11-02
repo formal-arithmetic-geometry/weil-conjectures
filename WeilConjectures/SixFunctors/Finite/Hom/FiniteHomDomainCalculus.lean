@@ -358,7 +358,6 @@ section Pullback
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
-include D hl hXover hXsep hXft hXqc in
 end Pullback
 end PullbackCompatibility
 set_option backward.isDefEq.respectTransparency true in
@@ -402,7 +401,4 @@ attribute [local irreducible] finiteHomEtaleData finiteHomEtaleClosed finiteHomE
   CoefficientClosedStructure.tensor CoefficientClosedStructure.evaluation
   CoefficientClosedStructure.transpose
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-include D hl hXover hXsep hXft hXqc in
 end WeilConjectures

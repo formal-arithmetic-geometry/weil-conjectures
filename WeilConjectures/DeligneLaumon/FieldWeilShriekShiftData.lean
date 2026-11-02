@@ -839,8 +839,6 @@ def fieldWeilShriekExchange (f₀ : X₀ ⟶ Y₀) (c : Compactification f₀.le
 set_option allowUnsafeReducibility true in
 attribute [local semireducible] FiniteFieldDatum.geometricFiber zlFiberMap
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end Finite
 
 set_option allowUnsafeReducibility true in

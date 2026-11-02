@@ -192,7 +192,6 @@ variable {Y : Scheme.{u}} [IsNoetherian Y]
   [Fact (∃ n : ℕ, topologicalKrullDim Y ≤ n)]
   [Fact (∀ y : Y, IsUnit (l : Y.presheaf.stalk y))]
 
-set_option linter.unusedSectionVars false in
 variable (G : Type u) [Field G] [Algebra ℚ_[l] G] [FiniteDimensional ℚ_[l] G]
 variable (j : F →ₐ[ℚ_[l]] G)
 

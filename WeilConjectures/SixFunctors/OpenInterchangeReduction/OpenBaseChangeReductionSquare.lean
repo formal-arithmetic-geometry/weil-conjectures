@@ -27,13 +27,4 @@ attribute [local irreducible] pullbackTensorCalculus
   Functor.mapDerivedCategory Functor.rightDerivedFunctor
   IntegralSystemRealization.ringedPullComp
 
-open IntegralSystemRealization in
-open IntegralSystemRealization in
-open IntegralSystemRealization in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-open IntegralSystemRealization in
--- Parameterizing the restriction squares avoids expanding their equality transports.
-open IntegralSystemRealization in
-open IntegralSystemRealization in
 end WeilConjectures.OpenInterchangeReduction

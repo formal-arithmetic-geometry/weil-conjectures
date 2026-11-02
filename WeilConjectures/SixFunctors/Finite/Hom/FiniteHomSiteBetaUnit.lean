@@ -18,6 +18,4 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
   [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})
 
-set_option maxHeartbeats 0 in
--- The chosen normalized restriction comparison makes kernel checking expensive.
 end WeilConjectures

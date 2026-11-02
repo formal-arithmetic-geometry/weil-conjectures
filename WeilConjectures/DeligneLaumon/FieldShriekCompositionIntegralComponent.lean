@@ -77,10 +77,4 @@ def SfIntegralCompositionComponentSpec
         sfCompletedCompositionOnTower l E d e K.obj hη hLambda ≫ ρfg.hom ≫
         (sfQcqsCompactSupportRealization l E D.k (coefficientPrimeUnit l D hl) cfg).hom.app K
 
-omit [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]
-  [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]
-  [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]
-  [f.IsOver (Spec (.of D.k))] [g.IsOver (Spec (.of D.k))] in
-include D in
-include D hl in
 end WeilConjectures

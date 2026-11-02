@@ -46,6 +46,4 @@ end FormalMate
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
 end AlgebraicGeometry.Etale.SystemProjection

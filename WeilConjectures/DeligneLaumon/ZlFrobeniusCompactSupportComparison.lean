@@ -300,5 +300,4 @@ def zlCompactSupportFrobenius :
     Functor.isoWhiskerRight (asIso (zlFrobeniusOpenMate D f₀ c₀ l E)).symm _ ≪≫
     Functor.associator _ _ _
 
-set_option linter.unusedSectionVars false in
 end WeilConjectures

@@ -861,5 +861,4 @@ attribute [local irreducible] integralJ rationalJ WeilUnit ScalarLaws
   FiniteScalarCompatibility CommonStageCompatibility
   EmptyFibre IntegralUnitNormalization Rationalization
 
-set_option linter.unusedSectionVars false in
 end WeilConjectures.ZlOpenUnit

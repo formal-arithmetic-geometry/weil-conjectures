@@ -159,8 +159,4 @@ variable {X Y Z : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] [IsNoetherian Z]
   [Fact (∀ y : Y, IsUnit (l : Y.presheaf.stalk y))]
   [Fact (∀ z : Z, IsUnit (l : Z.presheaf.stalk z))]
 
-omit [IsNoetherian X] [Fact (∃ n : ℕ, topologicalKrullDim X ≤ n)] in
-omit [IsNoetherian X] [Fact (∃ n : ℕ, topologicalKrullDim X ≤ n)] in
-set_option maxHeartbeats 800000 in
--- Nested chart conversions arise in the explicit tensor-section normalization.
 end AlgebraicGeometry.Scheme

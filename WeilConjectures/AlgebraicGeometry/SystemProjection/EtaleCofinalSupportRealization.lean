@@ -36,7 +36,6 @@ variable {A : Type a} [Category.{av} A] {B : Type b} [Category.{bv} B]
 
 end Pushforward
 
-set_option linter.unusedVariables false in
 section Comparison
 variable {A : Type a} [Category.{av} A] {B : Type b} [Category.{bv} B]
     {C : Type c} [Category.{cv} C] {D : Type d} [Category.{dv} D]

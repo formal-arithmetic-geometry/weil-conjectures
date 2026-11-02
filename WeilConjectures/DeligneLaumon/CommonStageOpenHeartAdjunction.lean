@@ -247,14 +247,6 @@ variable {A : Type uA} [Category.{vA} A] [Preadditive A] [HasZeroObject A]
   [IsTriangulated B] (t : TStructure A) (s : TStructure B)
   (G : A ⥤ B) [G.CommShift ℤ] [G.IsTriangulated] [G.Additive]
 
-attribute [-instance] WeilConjectures.CompletedCoefficientPushforward.modAbelian
-  WeilConjectures.CompletedCoefficientPushforward.hasDerived
-  SheafOfModules.localizedSystemExtensionAdditive
-  SheafOfModules.localizedSystemExtensionLimits
-  SheafOfModules.localizedSystemExtensionColimits
-  SheafOfModules.localizedSystemRestrictionAdditive
-  SheafOfModules.localizedSystemRestrictionLimits
-  SheafOfModules.localizedSystemRestrictionColimits in
 end HeartExact
 
 namespace StageLeftAdjunction
@@ -342,22 +334,6 @@ private def family
     rw [coherenceInv R L a b hb]
     simp
 
-attribute [-instance] WeilConjectures.CompletedCoefficientPushforward.modAbelian
-  WeilConjectures.CompletedCoefficientPushforward.hasDerived
-  SheafOfModules.localizedSystemExtensionAdditive
-  SheafOfModules.localizedSystemExtensionLimits
-  SheafOfModules.localizedSystemExtensionColimits
-  SheafOfModules.localizedSystemRestrictionAdditive
-  SheafOfModules.localizedSystemRestrictionLimits
-  SheafOfModules.localizedSystemRestrictionColimits in
-attribute [-instance] WeilConjectures.CompletedCoefficientPushforward.modAbelian
-  WeilConjectures.CompletedCoefficientPushforward.hasDerived
-  SheafOfModules.localizedSystemExtensionAdditive
-  SheafOfModules.localizedSystemExtensionLimits
-  SheafOfModules.localizedSystemExtensionColimits
-  SheafOfModules.localizedSystemRestrictionAdditive
-  SheafOfModules.localizedSystemRestrictionLimits
-  SheafOfModules.localizedSystemRestrictionColimits in
 end StageLeftAdjunction
 
 set_option backward.isDefEq.respectTransparency false in
@@ -425,15 +401,6 @@ variable {A B C D' : Type*} [Category A] [Category B] [Category C] [Category D']
   (S : A ⥤ C) (T' : B ⥤ D') (g : P ⋙ S ≅ T' ⋙ P')
   (e : L ⋙ T' ≅ S ⋙ L')
 
-include e in
-attribute [-instance] WeilConjectures.CompletedCoefficientPushforward.modAbelian
-  WeilConjectures.CompletedCoefficientPushforward.hasDerived
-  SheafOfModules.localizedSystemExtensionAdditive
-  SheafOfModules.localizedSystemExtensionLimits
-  SheafOfModules.localizedSystemExtensionColimits
-  SheafOfModules.localizedSystemRestrictionAdditive
-  SheafOfModules.localizedSystemRestrictionLimits
-  SheafOfModules.localizedSystemRestrictionColimits in
 end LeftMate
 
 variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
@@ -444,18 +411,6 @@ variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
   [qcT : QuasiCompact (T ↘ Spec (.of D.k))]
   (j : U ⟶ T) [oj : IsOpenImmersion j] [overj : j.IsOver (Spec (.of D.k))]
 
-omit [U.Over (Spec (.of D.k))]
-  [LocallyOfFiniteType (U ↘ Spec (.of D.k))] [QuasiCompact (U ↘ Spec (.of D.k))]
-  [j.IsOver (Spec (.of D.k))] in
-include baseT ftT qcT in
-attribute [-instance] WeilConjectures.CompletedCoefficientPushforward.modAbelian
-  WeilConjectures.CompletedCoefficientPushforward.hasDerived
-  SheafOfModules.localizedSystemExtensionAdditive
-  SheafOfModules.localizedSystemExtensionLimits
-  SheafOfModules.localizedSystemExtensionColimits
-  SheafOfModules.localizedSystemRestrictionAdditive
-  SheafOfModules.localizedSystemRestrictionLimits
-  SheafOfModules.localizedSystemRestrictionColimits in
 variable [qj : QuasiCompact j]
   (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
@@ -542,38 +497,6 @@ private theorem reduction_isIso
   rw [V.map_comp]
   infer_instance
 
-attribute [-instance] WeilConjectures.CompletedCoefficientPushforward.modAbelian
-  WeilConjectures.CompletedCoefficientPushforward.hasDerived
-  SheafOfModules.localizedSystemExtensionAdditive
-  SheafOfModules.localizedSystemExtensionLimits
-  SheafOfModules.localizedSystemExtensionColimits
-  SheafOfModules.localizedSystemRestrictionAdditive
-  SheafOfModules.localizedSystemRestrictionLimits
-  SheafOfModules.localizedSystemRestrictionColimits in
-attribute [-instance] WeilConjectures.CompletedCoefficientPushforward.modAbelian
-  WeilConjectures.CompletedCoefficientPushforward.hasDerived
-  SheafOfModules.localizedSystemExtensionAdditive
-  SheafOfModules.localizedSystemExtensionLimits
-  SheafOfModules.localizedSystemExtensionColimits
-  SheafOfModules.localizedSystemRestrictionAdditive
-  SheafOfModules.localizedSystemRestrictionLimits
-  SheafOfModules.localizedSystemRestrictionColimits in
-attribute [-instance] WeilConjectures.CompletedCoefficientPushforward.modAbelian
-  WeilConjectures.CompletedCoefficientPushforward.hasDerived
-  SheafOfModules.localizedSystemExtensionAdditive
-  SheafOfModules.localizedSystemExtensionLimits
-  SheafOfModules.localizedSystemExtensionColimits
-  SheafOfModules.localizedSystemRestrictionAdditive
-  SheafOfModules.localizedSystemRestrictionLimits
-  SheafOfModules.localizedSystemRestrictionColimits in
-attribute [-instance] WeilConjectures.CompletedCoefficientPushforward.modAbelian
-  WeilConjectures.CompletedCoefficientPushforward.hasDerived
-  SheafOfModules.localizedSystemExtensionAdditive
-  SheafOfModules.localizedSystemExtensionLimits
-  SheafOfModules.localizedSystemExtensionColimits
-  SheafOfModules.localizedSystemRestrictionAdditive
-  SheafOfModules.localizedSystemRestrictionLimits
-  SheafOfModules.localizedSystemRestrictionColimits in
 variable (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
   [∀ x : U, Invertible (l : U.residueField x)]
   [∀ y : T, Invertible (l : T.residueField y)]
@@ -590,26 +513,6 @@ set_option allowUnsafeReducibility true in
 attribute [local irreducible] stageSystem commonStageDerivedPullback
   sfCompactSupportFiniteFunctor rationalDerivedPullback
 
-include D hl baseU ftU qcU baseT ftT qcT oj overj qj in
-attribute [-instance] WeilConjectures.CompletedCoefficientPushforward.modAbelian
-  WeilConjectures.CompletedCoefficientPushforward.hasDerived
-  SheafOfModules.localizedSystemExtensionAdditive
-  SheafOfModules.localizedSystemExtensionLimits
-  SheafOfModules.localizedSystemExtensionColimits
-  SheafOfModules.localizedSystemRestrictionAdditive
-  SheafOfModules.localizedSystemRestrictionLimits
-  SheafOfModules.localizedSystemRestrictionColimits in
-set_option Elab.async false in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
 end CommonOpenHeartProof
 
-attribute [-instance] WeilConjectures.CompletedCoefficientPushforward.modAbelian
-  WeilConjectures.CompletedCoefficientPushforward.hasDerived
-  SheafOfModules.localizedSystemExtensionAdditive
-  SheafOfModules.localizedSystemExtensionLimits
-  SheafOfModules.localizedSystemExtensionColimits
-  SheafOfModules.localizedSystemRestrictionAdditive
-  SheafOfModules.localizedSystemRestrictionLimits
-  SheafOfModules.localizedSystemRestrictionColimits in
 end WeilConjectures

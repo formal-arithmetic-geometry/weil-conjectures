@@ -207,6 +207,4 @@ private theorem scalar_unit_normalization {n m : ℕ} (h : m ≤ n)
       (Etale.ExceptionalCoefficients.mapComplex_unit_formula
         (ProEtale.etaleSheafExtendScalarsAdjunction (finiteHomQuotient l E h) X) P).symm))
 
-attribute [local irreducible] HasDerivedCategory.standard
-  HasDerivedCategory.ofHasKInjectiveResolutions in
 end WeilConjectures

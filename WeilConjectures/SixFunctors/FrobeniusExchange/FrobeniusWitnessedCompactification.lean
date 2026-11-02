@@ -678,7 +678,6 @@ end Geometry
 section EtaleOrigin
 variable (A : Type u) [CommRing A] [Finite A]
 
-set_option linter.unusedSectionVars false in
 end EtaleOrigin
 
 section CompactificationTransport

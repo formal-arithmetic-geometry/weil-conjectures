@@ -291,14 +291,8 @@ theorem rationalMixedGeometricComposition
           ((pbcDerivedExtend (rationalBalancedCoefficient l E F i Y)).obj K) := by
   sorry
 
-set_option maxHeartbeats 800000 in
--- The normalized compositor witnesses involve large dependent functor types.
 end GeometricCoherence
 
-set_option maxHeartbeats 800000 in
--- Adjunction generators involve nested dependent scalar and inverse-image functors.
-set_option maxHeartbeats 800000 in
--- Adjunction generators involve nested dependent scalar and inverse-image functors.
 section CoefficientCoherence
 variable (G : Type u) [Field G] [Algebra ℚ_[l] G] [FiniteDimensional ℚ_[l] G]
   (j : F →ₐ[ℚ_[l]] G)
@@ -352,6 +346,4 @@ variable (G H : Type u) [Field G] [Field H]
 
 end Pentagon
 
-set_option maxHeartbeats 800000 in
--- The normalization compares large dependent functor types.
 end AlgebraicGeometry.Scheme

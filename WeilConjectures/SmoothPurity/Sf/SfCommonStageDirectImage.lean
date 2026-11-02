@@ -235,6 +235,4 @@ variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
   [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]
   [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end WeilConjectures

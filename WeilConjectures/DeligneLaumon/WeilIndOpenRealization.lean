@@ -46,16 +46,6 @@ set_option allowUnsafeReducibility true in
 attribute [local irreducible] stageSystem commonStageDerivedPullback
   sfCompactSupportFiniteFunctor rationalDerivedPullback
 
-attribute [-instance] WeilConjectures.CompletedCoefficientPushforward.modAbelian
-  WeilConjectures.CompletedCoefficientPushforward.hasDerived
-  SheafOfModules.localizedSystemExtensionAdditive
-  SheafOfModules.localizedSystemExtensionLimits
-  SheafOfModules.localizedSystemExtensionColimits
-  SheafOfModules.localizedSystemRestrictionAdditive
-  SheafOfModules.localizedSystemRestrictionLimits
-  SheafOfModules.localizedSystemRestrictionColimits in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
 end CommonStageModel
 
 end WeilConjectures

@@ -307,8 +307,6 @@ private theorem finiteHomTorOfIso (T : Scheme.{u}) (A : Type u) [CommRing A]
   intro L R hL f hf hR M i hi
   exact hP.2 L R (hL.map (fun eL ↦ eL ≪≫ e.symm)) f hf hR M i hi
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
 section ScalarMonoidal
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
@@ -320,17 +318,10 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   {R S : Sheaf J CommRingCat.{max c v r}} (φ : R ⟶ S)
   [HasDerivedCategory.{w} (RingedTensorModules.{c, v, r} J R)]
   [HasDerivedCategory.{w} (RingedTensorModules.{c, v, r} J S)]
-set_option maxHeartbeats 5000000 in
--- Comparing the fixed and localized tensor structures needs a larger unification budget.
-attribute [local irreducible] CategoryTheory.Localization.lift
-  CategoryTheory.MorphismProperty.instCategoryLocalization
-  _root_.instCategoryDerivedCategory in
 end ScalarMonoidal
 section
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
-set_option maxHeartbeats 5000000 in
--- The native quotient and ringed-site models have separately recorded instances.
 end
 
 end WeilConjectures

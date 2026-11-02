@@ -109,7 +109,7 @@ def coefficientOperationMateEquations : Prop :=
 comparison composition laws.  They include naturality, identity and tower
 compatibility through `comparison_composition` and `comparison_identity`.
 Source: Stacks Tags 07A6, 0E8I (blueprint: lem-fix-operation-reduction). -/
-def compactSupportScalarExtensionLaws : Prop :=
+def purCompactSupportScalarExtensionLaws : Prop :=
   ∀ {R S T : PurCompactSupport.Coefficients.{u}}
     (a : PurCompactSupport.Change R S) (b : PurCompactSupport.Change S T)
     (d : PurCompactSupport.Change R T)

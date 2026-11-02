@@ -669,7 +669,6 @@ private theorem systemHom_ext {M N : CoefficientSystem (J := J) O ell}
 end SheafOfModules
 
 namespace CategoryTheory
-set_option backward.isDefEq.respectTransparency false in
 end CategoryTheory
 
 namespace CategoryTheory

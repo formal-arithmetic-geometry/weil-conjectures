@@ -36,9 +36,6 @@ variable (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω
   (α : ∀ (E : FieldStage.{u} l) (K : (sequenceProperty l E X).FullSubcategory),
     (d.F E).obj K ≅ (d.F E).obj K)
 
-omit α in
-omit α in
-omit α in
 end Conjugation
 
 /- STATEMENT-DISPUTED: `TransportCoreData.F` is an arbitrary functor supplied with

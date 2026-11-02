@@ -212,10 +212,6 @@ private theorem pod_map_heq
 attribute [local irreducible] Preadditive.homGroup
   ScalarLocalization.category ScalarLocalization.linear
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
 end CompositionElaboration
 
 variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
