@@ -107,10 +107,8 @@ private theorem coefficientModel_mem (l : ℕ) [Fact l.Prime]
     (E : Index l (PadicAlgCl l)) (x : Coefficient.{u} l (PadicAlgCl l) E) :
     x ∈ Padic.coefficientExtensionIntegers l (Coefficient.{u} l (PadicAlgCl l) E) ↔
       Shrink.algEquiv ℚ_[l] E.1 x ∈ PadicAlgCl.integers l E.1 := by
-  have h := (Padic.extension_integers_dvr l (Coefficient.{u} l (PadicAlgCl l) E)
-    (Padic.coefficientExtensionAbsoluteValue l (Coefficient.{u} l (PadicAlgCl l) E))
-    (spectralNorm_extends (K := ℚ_[l])
-      (L := Coefficient.{u} l (PadicAlgCl l) E))).choose_spec.choose_spec.1 x
+  have h :=
+    (Padic.coefficientExtensionIntegers_dvr l (Coefficient.{u} l (PadicAlgCl l) E)).choose_spec.1 x
   rw [coefficientModel_norm l E] at h
   exact h.trans (by
     rw [PadicAlgCl.mem_integers_iff, ← NNReal.coe_le_coe]
