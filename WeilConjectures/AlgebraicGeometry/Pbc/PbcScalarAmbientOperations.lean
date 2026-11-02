@@ -9,6 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarStages
 import all WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarTensor
 import WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarCompletedObjectComplete
 import WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarRestrictionComplete
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChangeAdjunctionSupplement
+import WeilConjectures.AlgebraicGeometry.FiniteFreeDirectImage.FiniteFreeDirectImageCoherence
 
 /-! # Ambient operation comparisons for finite scalar extension
 
@@ -146,6 +148,146 @@ Source: blueprint order 1307 (blueprint: lem-pbc-scalar-ambient-operation-compar
     (pbcScalarCoefficientMap l E F i Y) (pbcScalarCoefficientMap l E F i X)
     (pbcScalarCoefficientStructureSquare l E F i g)
 
+/-- The actual completed coefficient comparison is the canonical profinite comparison.
+Source: blueprint order 1307 (blueprint: lem-pbc-scalar-ambient-operation-comparisons).
+Proof: both maps have the same finite projections. -/
+theorem pbcCompletedCoefficientMap_eq {A : Type (u + 1)} [CommRing A]
+    (d : AdicCoefficientDatum A) :
+    completedCoefficientMap g d = (d.integralRingIso g).hom := by
+  apply limit.hom_ext
+  intro n
+  change completedCoefficientMap g d ≫ d.projection X n.unop =
+    (d.integralRingIso g).hom ≫ d.projection X n.unop
+  calc
+    _ = completedCoefficientComponent g d n.unop := limit.lift_π _ n
+    _ = _ := by
+      rw [d.projection_comm]
+      rfl
+
+/-- The completed coefficient comparison as an isomorphism, with the actual forward map.
+Source: blueprint order 1307 (blueprint: lem-pbc-scalar-ambient-operation-comparisons). -/
+def pbcCompletedCoefficientIso {A : Type (u + 1)} [CommRing A]
+    (d : AdicCoefficientDatum A) :
+    (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj (pbcAdicCompletion Y d) ≅
+      pbcAdicCompletion X d where
+  hom := completedCoefficientMap g d
+  inv := (d.integralRingIso g).inv
+  hom_inv_id := by
+    rw [pbcCompletedCoefficientMap_eq]
+    exact (d.integralRingIso g).hom_inv_id
+  inv_hom_id := by
+    rw [pbcCompletedCoefficientMap_eq]
+    exact (d.integralRingIso g).inv_hom_id
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+/-- The scalar inclusion commutes with the inverse-image coefficient comparisons.
+Source: blueprint order 1307 (blueprint: lem-pbc-scalar-ambient-operation-comparisons).
+Proof: apply every finite target projection, as in the structure-map square. -/
+theorem pbcScalarCoefficientInverseSquare :
+    (pbcCompletedCoefficientIso g (pbcIntegralDatum l E)).hom ≫
+        pbcScalarCoefficientMap l E F i X =
+      (proEtaleSheafInverseImage g CommRingCat.{u + 1}).map
+          (pbcScalarCoefficientMap l E F i Y) ≫
+        (pbcCompletedCoefficientIso g (pbcIntegralDatum l F)).hom := by
+  let dE := pbcIntegralDatum l E
+  let dF := pbcIntegralDatum l F
+  let c (T : Scheme.{u}) := pbcScalarCoefficientMap l E F i T
+  let L := proEtaleSheafInverseImage g CommRingCat.{u + 1}
+  have hc (T : Scheme.{u}) (n : ℕ) :
+      c T ≫ pbcAdicProjection T dF n = pbcAdicProjection T dE n ≫
+        AdicCoefficients.coefficientMap T (pbcScalarQuotientMap l E F i n) :=
+    (pbcScalarCoefficientMap_exists l E F i T).exists.choose_spec n
+  change completedCoefficientMap g dE ≫ c X = L.map (c Y) ≫ completedCoefficientMap g dF
+  symm
+  apply limit.hom_ext
+  intro n
+  change (L.map (c Y) ≫ completedCoefficientMap g dF) ≫
+      pbcAdicProjection X dF n.unop =
+    (completedCoefficientMap g dE ≫ c X) ≫ pbcAdicProjection X dF n.unop
+  simp only [Category.assoc, hc]
+  rw [scalarCompletedCoefficientMap_projection]
+  rw [← Category.assoc (completedCoefficientMap g dE), scalarCompletedCoefficientMap_projection]
+  rw [← L.map_comp_assoc, hc, L.map_comp, Category.assoc]
+  simpa only [Category.assoc] using congrArg
+    (fun k ↦ L.map (pbcAdicProjection Y dE n.unop) ≫ k)
+    (scalarFiniteCoefficientMap_naturality g dE dF n.unop
+      (pbcScalarQuotientMap l E F i n.unop))
+
+/-- The canonical derived restriction/direct-image comparison for the scalar inclusion.
+Source: Stacks Tag 0D6E (blueprint: lem-pbc-scalar-ambient-operation-comparisons). -/
+abbrev pbcScalarRestrictionDirectImage :=
+  proEtaleRingRestrictionDerivedDirectImage g
+    (pbcAdicCompletion Y (pbcIntegralDatum l E)) (pbcAdicCompletion Y (pbcIntegralDatum l F))
+    (pbcAdicCompletion X (pbcIntegralDatum l E)) (pbcAdicCompletion X (pbcIntegralDatum l F))
+    (pbcScalarCoefficientMap l E F i Y) (pbcScalarCoefficientMap l E F i X)
+    (pbcCompletedCoefficientIso g (pbcIntegralDatum l E))
+    (pbcCompletedCoefficientIso g (pbcIntegralDatum l F))
+    (pbcScalarCoefficientInverseSquare l E F i g)
+
+/-- The completed target integral coefficients are finite free over the source ones.
+Source: Bhatt--Scholze, Lemma 6.8.2(1)
+(blueprint: lem-pbc-scalar-ambient-operation-comparisons).
+Proof: an integral basis of the target valuation ring is a basis of every finite
+quotient, compatibly with the transitions; pass to the limit. -/
+theorem pbcScalarCoefficient_finiteFree (T : Scheme.{u}) :
+    ∃ d : ℕ, Nonempty ((proEtaleRingRestrictScalars (pbcScalarCoefficientMap l E F i T)).obj
+        (SheafOfModules.unit ((sheafCompose (ProEt.topology T)
+          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+            (pbcAdicCompletion T (pbcIntegralDatum l F)))) ≅
+      SheafOfModules.free (R := (sheafCompose (ProEt.topology T)
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+          (pbcAdicCompletion T (pbcIntegralDatum l E))) (ULift.{u + 1} (Fin d))) := by
+  sorry
+
+/-- The scalar mate of the direct-image comparison is the canonical inverse
+restriction/direct-image comparison.
+Source: Stacks Tags 03EL, 0D6D, 0D6E and 07A6
+(blueprint: lem-pbc-scalar-ambient-operation-comparisons).
+Proof: by the iterated-mates identity the left side is the conjugate of the
+normalized derived pullback comparison. Both that comparison and the conjugate of
+the restriction/direct-image comparison are computed on flat-term K-flat
+representatives by the ordinary balanced comparison, so they agree. -/
+theorem pbcScalarDirectImageMap_scalarMate :
+    (mateEquiv (pbcDerivedScalarAdjunction (pbcScalarCoefficientMap l E F i X))
+        (pbcDerivedScalarAdjunction (pbcScalarCoefficientMap l E F i Y))
+        (TwoSquare.mk _ _ _ _ (pbcScalarDirectImageMap l E F i g))).natTrans =
+      (pbcScalarRestrictionDirectImage l E F i g).inv := by
+  sorry
+
+private theorem scalarInverseMate_isIso_of_isIso
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    {L₁ L₁' : A ⥤ B} {R₁ : B ⥤ A} {L₂ L₂' : C ⥤ D} {R₂ : D ⥤ C}
+    {G : A ⥤ C} {H : B ⥤ D}
+    (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂) (b₁ : L₁' ⊣ R₁) (b₂ : L₂' ⊣ R₂)
+    (β : TwoSquare R₁ H G R₂)
+    (hb : IsIso (((mateEquiv b₁ b₂).symm β).natTrans)) :
+    IsIso (((mateEquiv a₁ a₂).symm β).natTrans) := by
+  let e₁ : L₁' ≅ L₁ := (conjugateIsoEquiv a₁ b₁).symm (Iso.refl R₁)
+  let e₂ : L₂' ≅ L₂ := (conjugateIsoEquiv a₂ b₂).symm (Iso.refl R₂)
+  have h₁ : conjugateEquiv a₁ b₁ e₁.hom = 𝟙 R₁ :=
+    (conjugateEquiv a₁ b₁).apply_symm_apply (𝟙 R₁)
+  have h₂ : conjugateEquiv a₂ b₂ e₂.hom = 𝟙 R₂ :=
+    (conjugateEquiv a₂ b₂).apply_symm_apply (𝟙 R₂)
+  let w := (mateEquiv a₁ a₂).symm β
+  let w' := (mateEquiv b₁ b₂).symm β
+  have h : w'.whiskerLeft e₁.hom = w.whiskerRight e₂.hom := by
+    apply (mateEquiv a₁ b₂).injective
+    rw [conjugateEquiv_mateEquiv_vcomp a₁ b₁ b₂ e₁.hom w',
+      mateEquiv_conjugateEquiv_vcomp a₁ a₂ b₂ w e₂.hom]
+    simp only [w, w', Equiv.apply_symm_apply, h₁, h₂]
+    ext X
+    simp [TwoSquare.whiskerTop, TwoSquare.whiskerBottom]
+  let : ∀ X, IsIso (w.natTrans.app X) := fun X ↦ by
+    have hc := congrArg (fun t ↦ t.natTrans.app X) h
+    change w'.app X ≫ H.map (e₁.hom.app X) = e₂.hom.app (G.obj X) ≫ w.app X at hc
+    have : IsIso (w'.app X) := NatIso.isIso_app_of_isIso _ X
+    have : IsIso (e₂.hom.app (G.obj X) ≫ w.app X) := by
+      rw [← hc]
+      infer_instance
+    exact IsIso.of_isIso_comp_left (e₂.hom.app (G.obj X)) (w.app X)
+  exact NatIso.isIso_of_isIso_app _
+
 /-- The canonical scalar/direct-image mate is invertible for finite coefficient extensions.
 Source: blueprint order 1307 (blueprint: lem-pbc-scalar-ambient-operation-comparisons).
 Proof: the target valuation ring is finite free over the source. Locally choose a
@@ -155,7 +297,53 @@ tensor formula as the mate, so descends independently of that basis. Equivalentl
 use the finite perfect projection formula and the tensor-unit normalization. -/
 @[instance] theorem pbcScalarDirectImageMap_isIso :
     IsIso (pbcScalarDirectImageMap l E F i g) := by
-  sorry
+  classical
+  obtain ⟨d, hfree⟩ := pbcScalarCoefficient_finiteFree l E F i Y
+  let R' : FiniteFreeDirectImage.Coefficients g :=
+    ⟨pbcAdicCompletion Y (pbcIntegralDatum l E), pbcAdicCompletion X (pbcIntegralDatum l E),
+      pbcCompletedCoefficientIso g (pbcIntegralDatum l E)⟩
+  let S' : FiniteFreeDirectImage.Coefficients g :=
+    ⟨pbcAdicCompletion Y (pbcIntegralDatum l F), pbcAdicCompletion X (pbcIntegralDatum l F),
+      pbcCompletedCoefficientIso g (pbcIntegralDatum l F)⟩
+  let a' : FiniteFreeDirectImage.CoefficientMap R' S' :=
+    ⟨pbcScalarCoefficientMap l E F i Y, pbcScalarCoefficientMap l E F i X,
+      pbcScalarCoefficientInverseSquare l E F i g⟩
+  obtain ⟨sY, sX, _, _, hi, _⟩ := FiniteFreeDirectImage.finiteFreeDirectImageCoherence g
+  have : IsIso (FiniteFreeDirectImage.comparison sY sX a') := (hi R' S' a' d hfree).1
+  let δ := pbcScalarRestrictionDirectImage l E F i g
+  have hm : (mateEquiv (sX.adjunction a'.source) (sY.adjunction a'.target)
+      (TwoSquare.mk _ _ _ _ (FiniteFreeDirectImage.comparison sY sX a'))).natTrans =
+      δ.inv := by
+    rw [FiniteFreeDirectImage.comparison, iterated_mateEquiv_conjugateEquiv]
+    exact (conjugateEquiv _ _).apply_symm_apply δ.inv
+  have he : ((mateEquiv (sX.adjunction a'.source) (sY.adjunction a'.target)).symm
+      (TwoSquare.mk _ _ _ _ δ.inv)).natTrans =
+        FiniteFreeDirectImage.comparison sY sX a' := by
+    apply congrArg TwoSquare.natTrans
+    apply (mateEquiv (sX.adjunction a'.source) (sY.adjunction a'.target)).injective
+    rw [Equiv.apply_symm_apply]
+    ext K
+    exact (NatTrans.congr_app hm K).symm
+  have : IsIso (((mateEquiv (sX.adjunction a'.source)
+      (sY.adjunction a'.target)).symm (TwoSquare.mk _ _ _ _ δ.inv)).natTrans) := by
+    rw [he]
+    infer_instance
+  have hiso := scalarInverseMate_isIso_of_isIso
+    (pbcDerivedScalarAdjunction (pbcScalarCoefficientMap l E F i X))
+    (pbcDerivedScalarAdjunction (pbcScalarCoefficientMap l E F i Y))
+    (sX.adjunction a'.source) (sY.adjunction a'.target) (TwoSquare.mk _ _ _ _ δ.inv) this
+  have hs : mateEquiv (pbcDerivedScalarAdjunction (pbcScalarCoefficientMap l E F i X))
+      (pbcDerivedScalarAdjunction (pbcScalarCoefficientMap l E F i Y))
+      (TwoSquare.mk _ _ _ _ (pbcScalarDirectImageMap l E F i g)) =
+        TwoSquare.mk _ _ _ _ δ.inv := by
+    ext K
+    exact NatTrans.congr_app (pbcScalarDirectImageMap_scalarMate l E F i g) K
+  have hμ := congrArg TwoSquare.natTrans (((mateEquiv
+    (pbcDerivedScalarAdjunction (pbcScalarCoefficientMap l E F i X))
+    (pbcDerivedScalarAdjunction (pbcScalarCoefficientMap l E F i Y))).eq_symm_apply).2 hs)
+  change IsIso (TwoSquare.mk _ _ _ _ (pbcScalarDirectImageMap l E F i g)).natTrans
+  rw [hμ]
+  exact hiso
 
 /-- The canonical invertible direct-image comparison, with its mate definition retained.
 Source: blueprint order 1307 (blueprint: lem-pbc-scalar-ambient-operation-comparisons). -/
