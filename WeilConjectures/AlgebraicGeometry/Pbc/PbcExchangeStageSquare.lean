@@ -272,6 +272,30 @@ theorem pbcExchangeStageSquare_integral
   rotate_left
   · simp only [Functor.comp_obj]; rw [pbcIntegralScalarExtension_eq_tensor]; rfl
   · simp only [Functor.comp_obj]; rw [pbcIntegralScalarExtension_eq_tensor]; rfl
+  -- The localized ambient comparisons characterizing the four chosen rational ones.
+  have rRf := (pbcScalarDirectImage_rational l (pbcFiniteField.{u} l Ω E)
+    (pbcFiniteField.{u} l Ω F) (pbcFiniteFieldInclusion l Ω h) f
+    dX.out dY.out iX.out iY.out (presRf E) (presRf F)).exists.choose_spec ⟨K⟩
+  have rRf' := (pbcScalarDirectImage_rational l (pbcFiniteField.{u} l Ω E)
+    (pbcFiniteField.{u} l Ω F) (pbcFiniteFieldInclusion l Ω h) f'
+    dX'.out dY'.out iX'.out iY'.out (presRf' E) (presRf' F)).exists.choose_spec
+      ⟨(pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)
+        (pbcActualCompletedPull g' (pbcStageDatum.{u} l Ω E)) (presLg' E)).obj K⟩
+  have rLg := (pbcScalarCompletedPull_rational l (pbcFiniteField.{u} l Ω E)
+    (pbcFiniteField.{u} l Ω F) (pbcFiniteFieldInclusion l Ω h) g
+    dY'.out dY.out iY'.out iY.out (presLg E) (presLg F)).exists.choose_spec
+      ⟨(pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)
+        (pbcActualDerivedPush f (pbcStageDatum.{u} l Ω E)) (presRf E)).obj K⟩
+  have rLg' := (pbcScalarCompletedPull_rational l (pbcFiniteField.{u} l Ω E)
+    (pbcFiniteField.{u} l Ω F) (pbcFiniteFieldInclusion l Ω h) g'
+    dX'.out dX.out iX'.out iX.out (presLg' E) (presLg' F)).exists.choose_spec ⟨K⟩
+  have hτE := hτ E K
+  have rRf₁ := hom_eq_of_heq_objects rfl rfl rRf
+  have rRf'₁ := hom_eq_of_heq_objects rfl rfl rRf'
+  have rLg₁ := hom_eq_of_heq_objects rfl rfl rLg
+  have rLg'₁ := hom_eq_of_heq_objects rfl rfl rLg'
+  have hτE₁ := hom_eq_of_heq_objects rfl rfl hτE
+  simp only [eqToHom_refl, Category.id_comp, Category.comp_id] at rRf₁ rRf'₁ rLg₁ rLg'₁ hτE₁
   sorry
 
 /-- The prescribed localized actual exchange components satisfy the scalar
