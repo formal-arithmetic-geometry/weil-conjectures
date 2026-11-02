@@ -1,0 +1,140 @@
+/-
+Copyright (c) 2026 Bin Wu. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Bin Wu
+-/
+module
+
+public import WeilConjectures.AlgebraicGeometry.Pbc.PbcRationalCategory
+public import WeilConjectures.AlgebraicGeometry.Integral.IntegralStratifiedPerfectModelsSupplement
+public import Mathlib.CategoryTheory.Abelian.Projective.Extend
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+import all WeilConjectures.AlgebraicGeometry.CompletedConstantReduction.CompletedConstantSheafReductionSupplement
+
+/-!
+# The consecutive-quotient Tor sheaf of a constant perfect complex
+
+For a perfect complex `C` over the valuation ring `A`, the degree-`q` cohomology of the
+`n+1`-st reduction of its constant realization is the constant sheaf of the module
+`M = H^q(C ⊗ A/π^{n+2})`, and the consecutive-quotient Tor sheaf of a constant sheaf is
+the constant sheaf of the module-level Tor. A torsion summand `N₀` of `H^q(C)` is a retract
+of `M`, which gives the surjection onto `N₀/πN₀`.
+
+Source: Bhatt--Scholze, Proposition 6.6.11; step 5 of
+`lem-weil-pbc-adic-tor-implies-flat-cohomology`
+(blueprint: lem-weil-pbc-integral-cohomology-torsion-normal-form).
+-/
+
+@[expose] public noncomputable section
+
+set_option autoImplicit false
+set_option synthInstance.maxSize 2048
+
+universe u
+
+open CategoryTheory CategoryTheory.Limits Opposite
+
+namespace AlgebraicGeometry.Scheme
+
+-- `surjectiveTower_wEqualsLocallyBijective` leaves its coefficient universe free
+attribute [-instance] AlgebraicGeometry.ProEtale.surjectiveTower_wEqualsLocallyBijective
+
+section Module
+
+variable {A : Type (u + 1)} [CommRing A] (I : Ideal A) (n : ℕ)
+
+/-- The module-level consecutive-quotient Tor: the degree `-1` homology of a projective
+resolution of an `A/I^{n+2}`-module, reduced to `A/I^{n+1}`. -/
+def levelTor (M : ModuleCat.{u + 1} (A ⧸ I ^ (n + 1 + 1))) :
+    ModuleCat.{u + 1} (A ⧸ I ^ (n + 1)) :=
+  (((ModuleCat.extendScalars.{u + 1, u + 1, u + 1}
+    (Ideal.Quotient.factorPowSucc I (n + 1))).mapHomologicalComplex (.up ℤ)).obj
+      (projectiveResolution M).cochainComplex).homology (-1)
+
+
+/-- Universal coefficients over a principal ideal domain, split form: a direct summand `N₀`
+of `H^q(P)` killed by `I^m` is a retract of `H^q(P ⊗ A/I^m)`, for a bounded complex of
+finite projective modules `P`. -/
+theorem exists_homology_reduction_retraction [IsDomain A] [IsPrincipalIdealRing A] (m : ℕ)
+    (P : CochainComplex (ModuleCat.{u + 1} A) ℤ)
+    (hP : ∀ i, Module.Projective A (P.X i) ∧ Module.Finite A (P.X i)) (q : ℤ)
+    (F N₀ : ModuleCat.{u + 1} A) (ε : P.homology q ≅ F ⊞ N₀)
+    (hk : ∀ a ∈ I ^ m, ∀ x : N₀, a • x = 0) :
+    ∃ (s : N₀ →ₗ[A] (ModuleCat.restrictScalars.{u + 1} (Ideal.Quotient.mk (I ^ m))).obj
+        ((((ModuleCat.extendScalars.{u + 1, u + 1, u + 1}
+          (Ideal.Quotient.mk (I ^ m))).mapHomologicalComplex (.up ℤ)).obj P).homology q))
+      (r : (ModuleCat.restrictScalars.{u + 1} (Ideal.Quotient.mk (I ^ m))).obj
+        ((((ModuleCat.extendScalars.{u + 1, u + 1, u + 1}
+          (Ideal.Quotient.mk (I ^ m))).mapHomologicalComplex (.up ℤ)).obj P).homology q) →ₗ[A]
+          N₀), ∀ x, r (s x) = x := by
+  sorry
+
+/-- The module-level consecutive-quotient Tor of a module containing a retract `N₀` killed
+by `π^{n+1}` surjects onto `N₀/πN₀`. -/
+theorem exists_levelTor_epi [IsDomain A] (π : A) (hπ : π ≠ 0) (hI : I = Ideal.span {π})
+    (M : ModuleCat.{u + 1} (A ⧸ I ^ (n + 1 + 1))) (N₀ : ModuleCat.{u + 1} A)
+    (s : N₀ →ₗ[A] (ModuleCat.restrictScalars.{u + 1} (Ideal.Quotient.mk (I ^ (n + 1 + 1)))).obj M)
+    (r : (ModuleCat.restrictScalars.{u + 1} (Ideal.Quotient.mk (I ^ (n + 1 + 1)))).obj M →ₗ[A] N₀)
+    (hrs : ∀ x, r (s x) = x) (hk : ∀ x : N₀, π ^ (n + 1) • x = 0) :
+    ∃ t : levelTor I n M ⟶ (ModuleCat.extendScalars.{u + 1, u + 1, u + 1}
+        (Ideal.Quotient.mk (I ^ (n + 1)))).obj
+          (cokernel (ModuleCat.ofHom (π • LinearMap.id : N₀ →ₗ[A] N₀))), Epi t := by
+  sorry
+
+end Module
+
+section Sheaf
+
+variable (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
+
+omit [CommRing A] in
+/-- The constant module sheaf functor is exact. -/
+theorem adicLisseConstantModules_exact (B : Type (u + 1)) [CommRing B] :
+    PreservesFiniteLimits (adicLisseConstantModules T B) ∧
+      PreservesFiniteColimits (adicLisseConstantModules T B) :=
+  CompletedConstantReduction.constant_exact T B
+
+/-- The cohomology of a finite reduction of the constant realization of a perfect complex is
+the constant sheaf of the cohomology of the reduced complex. -/
+theorem nonempty_reduction_homology_iso (q : ℤ)
+    (C : completedConstantDerived (ModuleCat.{u + 1} A))
+    (P : CochainComplex (ModuleCat.{u + 1} A) ℤ) (a b : ℤ) (ha : P.IsStrictlyGE a)
+    (hb : P.IsStrictlyLE b)
+    (hP : ∀ i, Module.Projective A (P.X i) ∧ Module.Finite A (P.X i))
+    (e : C ≅ (completedConstantQ (ModuleCat.{u + 1} A)).obj P) (n : ℕ) :
+    Nonempty ((DerivedCategory.homologyFunctor _ q).obj
+        ((pbcCompletedReduction T d n).obj ((integralConstantDerived T d).obj C)) ≅
+      (pbcRestrict (pbcLevelConstantComparison T d n).inv).obj
+        ((adicLisseConstantModules T (A ⧸ d.ideal ^ (n + 1))).obj
+          ((((ModuleCat.extendScalars.{u + 1, u + 1, u + 1}
+            (Ideal.Quotient.mk (d.ideal ^ (n + 1)))).mapHomologicalComplex (.up ℤ)).obj
+              P).homology q))) := by
+  sorry
+
+/-- The consecutive-quotient Tor sheaf of a constant sheaf is the constant sheaf of the
+module-level Tor. -/
+theorem nonempty_tor_constant_iso (n : ℕ) (M : ModuleCat.{u + 1} (A ⧸ d.ideal ^ (n + 1 + 1))) :
+    Nonempty ((DerivedCategory.homologyFunctor _ (-1)).obj
+        ((pbcDerivedExtend (pbcAdicQuotient T d (n + 1) n (Nat.le_succ n))).obj
+          ((DerivedCategory.singleFunctor _ 0).obj
+            ((pbcRestrict (pbcLevelConstantComparison T d (n + 1)).inv).obj
+              ((adicLisseConstantModules T (A ⧸ d.ideal ^ (n + 1 + 1))).obj M)))) ≅
+      (pbcRestrict (pbcLevelConstantComparison T d n).inv).obj
+        ((adicLisseConstantModules T (A ⧸ d.ideal ^ (n + 1))).obj (levelTor d.ideal n M))) := by
+  sorry
+
+/-- Restricting the constant sheaf of `A/I^{n+1} ⊗ X` to the completed coefficients gives
+the completed realization of `X`, when `I^{n+1}` kills `X`. -/
+theorem nonempty_restrict_level_constant_iso (n : ℕ) (X : ModuleCat.{u + 1} A)
+    (hX : ∀ a ∈ d.ideal ^ (n + 1), ∀ x : X, a • x = 0) :
+    Nonempty ((pbcRestrict (pbcAdicProjection T d n)).obj
+        ((pbcRestrict (pbcLevelConstantComparison T d n).inv).obj
+          ((adicLisseConstantModules T (A ⧸ d.ideal ^ (n + 1))).obj
+            ((ModuleCat.extendScalars.{u + 1, u + 1, u + 1}
+              (Ideal.Quotient.mk (d.ideal ^ (n + 1)))).obj X))) ≅
+      (integralConstantModule T d).obj X) := by
+  sorry
+
+end Sheaf
+
+end AlgebraicGeometry.Scheme

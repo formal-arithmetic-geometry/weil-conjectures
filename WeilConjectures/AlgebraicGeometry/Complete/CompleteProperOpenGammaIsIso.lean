@@ -11,6 +11,8 @@ public import WeilConjectures.AlgebraicGeometry.Strict.Tower.StrictTowerExchange
 public import WeilConjectures.AlgebraicGeometry.Completed.Koszul.CompletedKoszulQuotientComparison
 public import WeilConjectures.AlgebraicGeometry.Bounded.BoundedConstructibleCompleteSupplement
 public import WeilConjectures.AlgebraicGeometry.Complete.CompleteStrictReductionOrigins
+public import WeilConjectures.AlgebraicGeometry.Complete.CompleteAlphaComponents
+public import WeilConjectures.AlgebraicGeometry.Complete.CompleteCompletedAlphaComponents
 
 /-!
 # Invertibility of the completed proper/open gamma
@@ -36,6 +38,14 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 variable {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
+
+attribute [-instance] WeilConjectures.SemilinearSections.moduleAbelian
+  WeilConjectures.SemilinearSections.hasDerived flatConstantModulesAbelian
+  SheafOfModules.RingedCoefficientProjection.cachedSheafifyModules
+  SheafOfModules.RingedCoefficientProjection.cachedLocalEquivalences
+
+attribute [local instance 100000] SheafOfModules.hasSheafify_coefficientUniverse
+  SheafOfModules.wEqualsLocallyBijective_coefficientUniverse
 
 section Reflection
 
@@ -161,6 +171,7 @@ theorem cbcJ_towerComplete {U T : Scheme.{t}} (j : U ⟶ T) [IsOpenImmersion j]
     ⟨M, cbcCompleteProperty_of_towerComplete d U r a ha M hM⟩).1
   exact cbcTowerComplete_of_completeProperty d T r a ha _ hc
 
+
 /-- After strict reduction and constant-coefficient restriction, the completed proper/open
 gamma is conjugate to the strict-tower proper/open gamma.
 Source: blueprint step 8 (blueprint: thm-cbc-complete-proetale).
@@ -185,7 +196,75 @@ theorem cbcProperOpenGamma_strictConjugate {V W S T : Scheme.{t}} (k : V ⟶ W) 
       (cbcStrictReduction d T).map ((cbcProperOpenGamma d k r p i h).app K) =
         e₁.hom ≫ (ProEtale.StrictTower.gamma A k r p i h).app
           ((cbcStrictReduction d V).obj K) ≫ e₂.inv := by
-  sorry
+  let s := ProEtale.StrictTower.squareLift k r p i h
+  have hpb : IsPullback (pullback.snd p i) (pullback.fst p i) i p :=
+    (IsPullback.of_hasPullback p i).flip
+  have hsu := cbcOpenUnit_isIso d s
+  have hsp : IsIso (ProperOpenTransport.openToPush (cbcDerivedOpenAdjunction d s)
+      (cbcPullPushAdjunction d s)) := cbcOpenToPush_abstract_isIso d s
+  have hsu' := ProEtale.StrictTower.jAdj_unit_isIso A s
+  have hsp' : IsIso (ProperOpenTransport.openToPush (ProEtale.StrictTower.jAdj A s)
+      (ProEtale.StrictTower.adj A s)) := ProEtale.StrictTower.openToPush_isIso A s
+  have hb (x) : IsIso (ProperOpenTransport.betaInvApp (cbcDerivedOpenAdjunction d i)
+      (cbcDerivedOpenAdjunction d (pullback.fst p i))
+      (cbcSquarePull d (pullback.snd p i) (pullback.fst p i) i p pullback.condition.symm) x) := by
+    have := cbcBetaInvNat_isIso d (pullback.snd p i) (pullback.fst p i) i p
+      pullback.condition.symm hpb
+    exact ProperOpenTransport.betaInvApp_isIso_of_betaInvNat _ _ _ x
+  have hb' (x) : IsIso (ProperOpenTransport.betaInvApp (ProEtale.StrictTower.jAdj A i)
+      (ProEtale.StrictTower.jAdj A (pullback.fst p i))
+      (ProEtale.StrictTower.squareG A (pullback.snd p i) (pullback.fst p i) i p
+        pullback.condition.symm) x) :=
+    ProEtale.StrictTower.betaInvApp_isIso A _ _ _ _ pullback.condition.symm hpb x
+  have hoi := cbcStrictOpen_isIso d i
+  have hof := cbcStrictOpen_isIso d (pullback.fst p i)
+  have hos := cbcStrictOpen_isIso d s
+  have hpr := cbcStrictPush_isIso d r
+  have hpp := cbcStrictPush_isIso d p
+  have H := fun hα hα' hsq he ↦
+    ProperOpenTransport.gammaApp_transport'
+    (DS := DerivedCategory (proEtaleRingModules S (d.completedRing S)))
+    (DT := DerivedCategory (proEtaleRingModules T (d.completedRing T)))
+    (DW := DerivedCategory (proEtaleRingModules W (d.completedRing W)))
+    (DV := DerivedCategory (proEtaleRingModules V (d.completedRing V)))
+    (DP := DerivedCategory (proEtaleRingModules (pullback p i) (d.completedRing (pullback p i))))
+    (iDS := instCategoryDerivedCategory _) (iDT := instCategoryDerivedCategory _)
+    (iDW := instCategoryDerivedCategory _)
+    (iDV := instCategoryDerivedCategory _) (iDP := instCategoryDerivedCategory _)
+    (DS' := ProEtale.StrictTower.Derived A S) (DT' := ProEtale.StrictTower.Derived A T)
+    (DW' := ProEtale.StrictTower.Derived A W) (DV' := ProEtale.StrictTower.Derived A V)
+    (DP' := ProEtale.StrictTower.Derived A (pullback p i))
+    (iDS' := instCategoryDerivedCategory _) (iDT' := instCategoryDerivedCategory _)
+    (iDW' := instCategoryDerivedCategory _)
+    (iDV' := instCategoryDerivedCategory _) (iDP' := instCategoryDerivedCategory _)
+    (cbcDerivedOpenAdjunction d i)
+    (cbcPullPushAdjunction d p) (cbcDerivedOpenAdjunction d (pullback.fst p i))
+    (cbcDerivedOpenAdjunction d s) (cbcPullPushAdjunction d s) (cbcPullPushAdjunction d r)
+    (cbcSquarePull d (pullback.snd p i) (pullback.fst p i) i p pullback.condition.symm)
+    (cbcJComp d s (pullback.fst p i) ≪≫ cbcJCongr d (pullback.lift_fst k r h))
+    ((d.pullComp s (pullback.snd p i)).symm ≪≫
+      eqToIso (congrArg (fun f ↦ d.pull f) (pullback.lift_snd k r h)))
+    (ProEtale.StrictTower.jAdj A i) (ProEtale.StrictTower.adj A p)
+    (ProEtale.StrictTower.jAdj A (pullback.fst p i)) (ProEtale.StrictTower.jAdj A s)
+    (ProEtale.StrictTower.adj A s) (ProEtale.StrictTower.adj A r)
+    (ProEtale.StrictTower.squareG A (pullback.snd p i) (pullback.fst p i) i p
+      pullback.condition.symm)
+    (ProEtale.StrictTower.jComp A s (pullback.fst p i) ≪≫
+      ProEtale.StrictTower.jCongr A (pullback.lift_fst k r h))
+    ((ProEtale.StrictTower.gComp A s (pullback.snd p i)).symm ≪≫
+      eqToIso (congrArg (ProEtale.StrictTower.G A) (pullback.lift_snd k r h)))
+    (cbcStrictPull d i) (cbcStrictPull d p) (cbcStrictPull d (pullback.snd p i))
+    (cbcStrictPull d (pullback.fst p i)) (cbcStrictPull d s) (cbcStrictPull d r)
+    (cbcProperOpenAlpha d k r p i h) (ProEtale.StrictTower.alpha A k r p i h) hα hα' hsq he
+    rfl rfl rfl rfl (cbcProperOpenGamma d k r p i h) (ProEtale.StrictTower.gamma A k r p i h)
+    (heq_of_eq (cbcProperOpenGamma_eq_mateEquiv d k r p i h))
+    (heq_of_eq (ProEtale.StrictTower.gamma_eq_mateEquiv A k r p i h)) K
+  refine H ?_ ?_ ?_ ?_
+  · exact cbcProperOpenAlpha_app_eq_alphaApp d k r p i h
+  · exact ProEtale.StrictTower.alpha_app_eq_alphaApp A k r p i h
+  · exact cbcStrictPull_square d (pullback.snd p i) (pullback.fst p i) i p
+      pullback.condition.symm
+  · exact cbcStrictPull_comp_hom d s (pullback.snd p i) (pullback.lift_snd k r h)
 
 /-- Compatible etale origins of a completed object give finite constant-coefficient etale
 origins of every level of its restricted strict reduction tower.

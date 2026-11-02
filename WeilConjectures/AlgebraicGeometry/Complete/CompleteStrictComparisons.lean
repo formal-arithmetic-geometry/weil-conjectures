@@ -111,9 +111,22 @@ theorem cbcStrictPull_comp_eq {X Y Z : Scheme.{t}} (f : X ⟶ Y) (g : Y ⟶ Z) {
     ← Category.assoc ((cbcStrictReduction d X).map _), hc]
   simp
 
-/-- The comparisons are compatible with the inverse-image square of a commutative square.
--/
+/-- The comparison for a composite, with the compositors packaged as isomorphisms. -/
+theorem cbcStrictPull_comp_hom {X Y Z : Scheme.{t}} (f : X ⟶ Y) (g : Y ⟶ Z) {q : X ⟶ Z}
+    (e : f ≫ g = q) (M : d.derived Z) :
+    (cbcStrictReduction d X).map (((d.pullComp f g).symm ≪≫
+        eqToIso (congrArg (fun f ↦ d.pull f) e)).hom.app M) ≫
+          (cbcStrictPull d q).hom.app M =
+      (cbcStrictPull d f).hom.app ((d.pull g).obj M) ≫
+        (ProEtale.StrictTower.G A f).map ((cbcStrictPull d g).hom.app M) ≫
+          ((ProEtale.StrictTower.gComp A f g).symm ≪≫
+            eqToIso (congrArg (ProEtale.StrictTower.G A) e)).hom.app
+              ((cbcStrictReduction d Z).obj M) := by
+  subst e
+  have hc := cbcStrictPull_comp_eq d f g rfl M
+  simpa using hc
 
+/-- The comparisons are compatible with the inverse-image square of a commutative square. -/
 theorem cbcStrictPull_square {V W S T : Scheme.{t}} (k : V ⟶ W) (r : V ⟶ S)
     (p : W ⟶ T) (i : S ⟶ T) (h : k ≫ p = r ≫ i) (x : d.derived T) :
     (cbcStrictReduction d V).map ((cbcSquarePull d k r p i h).inv.app x) ≫
