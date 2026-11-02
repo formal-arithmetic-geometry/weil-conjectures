@@ -227,20 +227,44 @@ abbrev pbcScalarRestrictionDirectImage :=
     (pbcCompletedCoefficientIso g (pbcIntegralDatum l F))
     (pbcScalarCoefficientInverseSquare l E F i g)
 
+/-- The normalized derived pullback comparison is the conjugate of the canonical
+inverse restriction/direct-image comparison.
+Source: Stacks Tags 03EL, 0D6D, 0D6E and 07A6
+(blueprint: lem-pbc-scalar-ambient-operation-comparisons).
+Proof: the derived scalar adjunctions have the tensor-unit normalization on flat-term
+K-flat complexes. Hence the scalar mate of the inverse pullback comparison is
+computed on such representatives by the ordinary scalar mate of the balanced ordinary
+comparison, which is the termwise restriction/pullback comparison. Its pullback mate
+is the canonical restriction/direct-image comparison by its unit normalization. -/
+theorem pbcScalarOrdinaryPullIso_conjugate :
+    conjugateEquiv ((pbcActualDerivedAdjunction g (pbcIntegralDatum l E)).comp
+        (pbcDerivedScalarAdjunction (pbcScalarCoefficientMap l E F i X)))
+      ((pbcDerivedScalarAdjunction (pbcScalarCoefficientMap l E F i Y)).comp
+        (pbcActualDerivedAdjunction g (pbcIntegralDatum l F)))
+      (pbcScalarOrdinaryPullIso l E F i g).hom =
+    (pbcScalarRestrictionDirectImage l E F i g).inv := by
+  sorry
+
 /-- The scalar mate of the direct-image comparison is the canonical inverse
 restriction/direct-image comparison.
 Source: Stacks Tags 03EL, 0D6D, 0D6E and 07A6
 (blueprint: lem-pbc-scalar-ambient-operation-comparisons).
 Proof: by the iterated-mates identity the left side is the conjugate of the
-normalized derived pullback comparison. Both that comparison and the conjugate of
-the restriction/direct-image comparison are computed on flat-term K-flat
-representatives by the ordinary balanced comparison, so they agree. -/
+normalized derived pullback comparison, which is computed above. -/
 theorem pbcScalarDirectImageMap_scalarMate :
     (mateEquiv (pbcDerivedScalarAdjunction (pbcScalarCoefficientMap l E F i X))
         (pbcDerivedScalarAdjunction (pbcScalarCoefficientMap l E F i Y))
         (TwoSquare.mk _ _ _ _ (pbcScalarDirectImageMap l E F i g))).natTrans =
       (pbcScalarRestrictionDirectImage l E F i g).inv := by
-  sorry
+  have h := iterated_mateEquiv_conjugateEquiv
+    (pbcActualDerivedAdjunction g (pbcIntegralDatum l E))
+    (pbcActualDerivedAdjunction g (pbcIntegralDatum l F))
+    (pbcDerivedScalarAdjunction (pbcScalarCoefficientMap l E F i Y))
+    (pbcDerivedScalarAdjunction (pbcScalarCoefficientMap l E F i X))
+    (TwoSquare.mk _ _ _ _ (pbcScalarOrdinaryPullIso l E F i g).hom)
+  rw [← pbcScalarOrdinaryPullIso_conjugate]
+  refine Eq.trans ?_ (congrArg TwoSquare.natTrans h)
+  simp only [pbcScalarDirectImageMap, pbcActualScalarDirectImageMap, pbcScalarOrdinaryPullIso]
 
 private theorem scalarInverseMate_isIso_of_isIso
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
