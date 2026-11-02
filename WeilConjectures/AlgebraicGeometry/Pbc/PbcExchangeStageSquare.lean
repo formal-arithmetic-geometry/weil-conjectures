@@ -36,6 +36,62 @@ theorem iso_app_of_heq_functor {A B C : Type*} [Category A] [Category B] [Catego
   rw [eq_of_heq h]
   simp
 
+/-- Scalar transport of a localized integral morphism is the localization of its image. -/
+theorem transport_map_localization_map {R : Type*} [CommRing R] (p : R) {C D : Type*}
+    [Category C] [Preadditive C] [Linear R C] [Category D] [Preadditive D] [Linear R D]
+    (F : C ⥤ D) [F.Additive] [F.Linear R] {K L : C} (f : K ⟶ L) :
+    (ScalarLocalization.transport R p F).map ((ScalarLocalization.localization R C p).map f) =
+      (ScalarLocalization.localization R D p).map (F.map f) := by
+  exact LinearMap.baseChange_tmul (F.mapLinearMap R) (1 : Localization.Away p) f
+
+section LocalizationMerge
+set_option backward.isDefEq.respectTransparency false
+variable {R : Type*} [CommRing R] {p : R} {C : Type*} [Category C] [Preadditive C] [Linear R C]
+
+/-- Merge two localized arrows across an `eqToHom`. -/
+theorem localization_map_eqToHom_map {a b c e : C} (u : a ⟶ b)
+    (h : (ScalarLocalization.localization R C p).obj b =
+      (ScalarLocalization.localization R C p).obj c) (v : c ⟶ e) :
+    (ScalarLocalization.localization R C p).map u ≫ eqToHom h ≫
+        (ScalarLocalization.localization R C p).map v =
+      (ScalarLocalization.localization R C p).map
+        (u ≫ eqToHom (congrArg ScalarLocalization.obj h) ≫ v) := by
+  obtain rfl : b = c := congrArg ScalarLocalization.obj h
+  simp
+
+/-- Merge two localized arrows across an `eqToHom`, followed by a further arrow. -/
+theorem localization_map_eqToHom_map_assoc {a b c e : C} {Z : ScalarLocalization R C p}
+    (u : a ⟶ b) (h : (ScalarLocalization.localization R C p).obj b =
+      (ScalarLocalization.localization R C p).obj c) (v : c ⟶ e)
+    (w : (ScalarLocalization.localization R C p).obj e ⟶ Z) :
+    (ScalarLocalization.localization R C p).map u ≫ eqToHom h ≫
+        (ScalarLocalization.localization R C p).map v ≫ w =
+      (ScalarLocalization.localization R C p).map
+        (u ≫ eqToHom (congrArg ScalarLocalization.obj h) ≫ v) ≫ w := by
+  rw [← localization_map_eqToHom_map, Category.assoc, Category.assoc]
+
+/-- Absorb a leading `eqToHom` into a localized arrow. -/
+theorem eqToHom_localization_map {a b e : C}
+    (h : (ScalarLocalization.localization R C p).obj a =
+      (ScalarLocalization.localization R C p).obj b) (v : b ⟶ e) :
+    eqToHom h ≫ (ScalarLocalization.localization R C p).map v =
+      (ScalarLocalization.localization R C p).map
+        (eqToHom (congrArg ScalarLocalization.obj h) ≫ v) := by
+  obtain rfl : a = b := congrArg ScalarLocalization.obj h
+  simp
+
+/-- Absorb a trailing `eqToHom` into a localized arrow. -/
+theorem localization_map_comp_eqToHom {a b c : C} (u : a ⟶ b)
+    (h : (ScalarLocalization.localization R C p).obj b =
+      (ScalarLocalization.localization R C p).obj c) :
+    (ScalarLocalization.localization R C p).map u ≫ eqToHom h =
+      (ScalarLocalization.localization R C p).map
+        (u ≫ eqToHom (congrArg ScalarLocalization.obj h)) := by
+  obtain rfl : b = c := congrArg ScalarLocalization.obj h
+  simp
+
+end LocalizationMerge
+
 /-- Solve `u₁ ≫ b ≫ u₃ = X` for the middle factor when the outer factors are invertible. -/
 theorem eq_inv_comp_comp_inv {C : Type*} [Category C] {s t r v : C} (u₁ : s ≅ t)
     (b : t ⟶ r) (u₃ : r ≅ v) (X : s ⟶ v) (h : u₁.hom ≫ b ≫ u₃.hom = X) :
@@ -196,6 +252,44 @@ theorem pbcScalarCompletedExchange (K : PbcCompletedDerived X (pbcIntegralDatum 
   sorry
 
 end ScalarExchange
+
+omit [IsAlgClosure ℚ_[l] Ω] in
+/-- The rational direct image of a localized integral arrow is the localized direct image. -/
+theorem pbcDescentDirectImage_map_homMk {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (presRf : ∀ (E : Padic.FiniteCoefficientFields l Ω) (K : pbcIntegralStage l Ω X E),
+      PbcIsBoundedConstructibleComplete Y (pbcStageDatum.{u} l Ω E)
+        ((pbcActualDerivedPush f (pbcStageDatum.{u} l Ω E)).obj K.obj))
+    (E : Padic.FiniteCoefficientFields l Ω) {K L : pbcIntegralStage l Ω X E}
+    (φ : K.obj ⟶ L.obj) :
+    (pbcDescentDirectImage l Ω f presRf E).map
+        ((pbcStageLocalization l Ω X E).map (ObjectProperty.homMk φ)) =
+      (pbcStageLocalization l Ω Y E).map
+        (ObjectProperty.homMk
+          (X := (pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)
+            (pbcActualDerivedPush f (pbcStageDatum.{u} l Ω E)) (presRf E)).obj K)
+          (Y := (pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)
+            (pbcActualDerivedPush f (pbcStageDatum.{u} l Ω E)) (presRf E)).obj L)
+          ((pbcActualDerivedPush f (pbcStageDatum.{u} l Ω E)).map φ)) :=
+  transport_map_localization_map _ _ _
+
+omit [IsAlgClosure ℚ_[l] Ω] in
+/-- The rational pullback of a localized integral arrow is the localized pullback. -/
+theorem pbcDescentPullback_map_homMk {X Y : Scheme.{u}} (g : X ⟶ Y)
+    (presLg : ∀ (E : Padic.FiniteCoefficientFields l Ω) (K : pbcIntegralStage l Ω Y E),
+      PbcIsBoundedConstructibleComplete X (pbcStageDatum.{u} l Ω E)
+        ((pbcActualCompletedPull g (pbcStageDatum.{u} l Ω E)).obj K.obj))
+    (E : Padic.FiniteCoefficientFields l Ω) {K L : pbcIntegralStage l Ω Y E}
+    (φ : K.obj ⟶ L.obj) :
+    (pbcDescentPullback l Ω g presLg E).map
+        ((pbcStageLocalization l Ω Y E).map (ObjectProperty.homMk φ)) =
+      (pbcStageLocalization l Ω X E).map
+        (ObjectProperty.homMk
+          (X := (pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)
+            (pbcActualCompletedPull g (pbcStageDatum.{u} l Ω E)) (presLg E)).obj K)
+          (Y := (pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)
+            (pbcActualCompletedPull g (pbcStageDatum.{u} l Ω E)) (presLg E)).obj L)
+          ((pbcActualCompletedPull g (pbcStageDatum.{u} l Ω E)).map φ)) :=
+  transport_map_localization_map _ _ _
 
 variable (X Y X' Y' : Scheme.{u})
   [IsNoetherian X]
@@ -449,6 +543,18 @@ theorem pbcExchangeStageSquare_integral
   erw [natTrans_app_eq_eqToHom (τ F) e₅, hτF₁, hτE₁]
   erw [map_map_eq_of_comp_eq (pbcScalarExtension_eq_rational l Ω Y' dY'.out iY'.out h hEF)
     (pbcStageLocalization_comp_rationalScalarExtension l Ω Y' dY'.out iY'.out h)]
+  set_option backward.isDefEq.respectTransparency false in
+  simp only [Functor.map_comp, eqToHom_map, Category.comp_id,
+    Category.assoc, eqToHom_trans, eqToHom_trans_assoc]
+  set_option backward.isDefEq.respectTransparency false in
+  simp only [pbcDescentPullback_map_homMk, pbcDescentDirectImage_map_homMk]
+  set_option backward.isDefEq.respectTransparency false in
+  simp only [localization_map_eqToHom_map_assoc]
+  set_option backward.isDefEq.respectTransparency false in
+  simp only [eqToHom_localization_map, localization_map_comp_eqToHom]
+  congr 1
+  ext
+  simp only [ObjectProperty.FullSubcategory.comp_hom]
   sorry
 
 /-- The prescribed localized actual exchange components satisfy the scalar
