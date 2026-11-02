@@ -35,9 +35,10 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry Scheme
 open scoped CategoryTheory.Functor CategoryTheory.Obj
 attribute [local instance] Sheaf.monoidalCategory Sheaf.braidedCategory
 
-local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
+local instance admissibleGeneratorsEssentiallySmall : EssentiallySmall.{u + 1} Profinite.{u} :=
+  essentiallySmallSelf.{0} _
 
-noncomputable local instance :
+noncomputable local instance admissibleGeneratorsMonoidal :
     MonoidalCategory (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) :=
   Sheaf.monoidalCategory _ _
 

@@ -36,9 +36,10 @@ open scoped CategoryTheory.Functor CategoryTheory.Obj
 attribute [local instance] Sheaf.monoidalCategory Sheaf.braidedCategory
 attribute [local instance] finiteProperCache2 finiteProperCache3 finiteProperCache4
 
-local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
+local instance essentiallySmallProfinite : EssentiallySmall.{u + 1} Profinite.{u} :=
+  essentiallySmallSelf.{0} _
 
-noncomputable local instance :
+noncomputable local instance condensedAbMonoidalCategory :
     MonoidalCategory (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) :=
   Sheaf.monoidalCategory _ _
 
