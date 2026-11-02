@@ -7,6 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import Mathlib.CategoryTheory.Whiskering
+public import Mathlib.CategoryTheory.EqToHom
 
 /-! # Assembly of the forward coherence from the representative formula
 
@@ -194,5 +195,35 @@ theorem assoc_assembly_of_spec
   exact assoc_assembly SE SL SM PE PL PM IE IL IM TE TL TM θE θL θM Sh Sk Shk0 hSh hSk hShk
     Xh Xk Xhk hXh hXk hXhk bh bk bhk _ aC A hA Oh Ok Ohk0 _ eh ek ehk ωh ωk _ Gh Gk Ghk
     hU0 hD K
+
+/-- `unit_assembly`, with the completed unit given through its normalization at the identity
+inclusion and equality transports. -/
+theorem unit_assembly_of_spec
+    (SE : ObjectProperty DE) (PE : ObjectProperty AE)
+    (IE : SE.FullSubcategory ⥤ PE.FullSubcategory) (TE : DE ⥤ AE)
+    (θE : IE ⋙ PE.ι ≅ SE.ι ⋙ TE)
+    (Sr : DE ⥤ DE) (hSr : ∀ K, SE ((SE.ι ⋙ Sr).obj K))
+    (Xr : AE ⥤ AE) (hXr : ∀ K, PE ((PE.ι ⋙ Xr).obj K))
+    (br : IE ⋙ PE.lift (PE.ι ⋙ Xr) hXr ≅ SE.lift (SE.ι ⋙ Sr) hSr ⋙ IE)
+    (uU : SE.lift (SE.ι ⋙ Sr) hSr ≅ 𝟭 _) (uC : PE.lift (PE.ι ⋙ Xr) hXr ≅ 𝟭 _)
+    (Xu : Xr ≅ 𝟭 AE) (hC : ∀ X, (uC.hom.app X).hom = Xu.hom.app X.obj)
+    (Or : DE ⥤ DE) (er : Or ⋙ TE ≅ TE ⋙ Xr)
+    (ωr : SE.ι ⋙ Or ≅ SE.ι ⋙ Sr)
+    (Gr : ∀ K, (br.hom.app K).hom ≫ θE.hom.app ((SE.lift (SE.ι ⋙ Sr) hSr).obj K) =
+      Xr.map (θE.hom.app K) ≫ er.inv.app K.obj ≫ TE.map (ωr.hom.app K))
+    (Sr0 : DE ⥤ DE) (hSr0 : ∀ K, SE ((SE.ι ⋙ Sr0).obj K)) (eS : Sr0 = Sr)
+    (uU0 : SE.lift (SE.ι ⋙ Sr0) hSr0 ≅ 𝟭 _) (haU : uU ≍ uU0)
+    (Or0 : DE ⥤ DE) (eO : Or0 = Or) (ωr0 : SE.ι ⋙ Or0 ≅ SE.ι ⋙ Sr0) (hω : ωr ≍ ωr0)
+    (ou0 : ∀ Y, Or0.obj Y ⟶ Y)
+    (hU0 : ∀ K, (uU0.hom.app K).hom = ωr0.inv.app K ≫ ou0 K.obj)
+    (hD : ∀ Y, er.inv.app Y ≫ TE.map (eqToHom (Functor.congr_obj eO.symm Y) ≫ ou0 Y) =
+      Xu.hom.app (TE.obj Y))
+    (K : SE.FullSubcategory) :
+    br.hom.app K ≫ IE.map (uU.hom.app K) = uC.hom.app (IE.obj K) := by
+  subst eS eO
+  cases haU
+  cases hω
+  exact unit_assembly SE PE IE TE θE Sr0 hSr Xr hXr br _ uC Xu hC Or0 ou0 er _ Gr hU0
+    (fun Y ↦ by simpa using hD Y) K
 
 end WeilConjectures.FdIntegralScalarForward
