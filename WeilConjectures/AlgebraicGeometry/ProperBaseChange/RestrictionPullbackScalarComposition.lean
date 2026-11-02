@@ -72,6 +72,21 @@ private theorem mate_naturality
   rw [← p.naturality_assoc]
   exact congrArg (fun z ↦ G.map (a.unit.app M) ≫ z) (h (L.obj M))
 
+variable {X Y : Scheme.{u}} (f : Y ⟶ X)
+    (RX SX TX : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
+    (RY SY TY : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
+    (aX : RX ⟶ SX) (bX : SX ⟶ TX) (cX : RX ⟶ TX) (hX : aX ≫ bX = cX)
+    (aY : RY ⟶ SY) (bY : SY ⟶ TY) (cY : RY ⟶ TY) (hY : aY ≫ bY = cY)
+    (eR : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj RX ≅ RY)
+    (eS : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj SX ≅ SY)
+    (eT : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj TX ≅ TY)
+    (ha : eR.hom ≫ aY =
+      (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map aX ≫ eS.hom)
+    (hb : eS.hom ≫ bY =
+      (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map bX ≫ eT.hom)
+    (hc : eR.hom ≫ cY =
+      (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map cX ≫ eT.hom)
+
 /-- Pullback commutes coherently with successive exact scalar restrictions.
 Source: Stacks Project, Tags 03EL, 03DA and 06YY
 (blueprint: lem-weil-pbc-restriction-pullback-scalar-composition).
@@ -188,20 +203,5 @@ theorem proEtaleRestrictionPullback_scalarComposition
     NatTrans.comp_app, Category.assoc, LT, LS, LR, ηX, ηY,
     proEtaleRingDerivedPullback, pbcRestrict, reductionRestrict,
     proEtaleRingRestrictScalars] using hder.symm
-
-variable {X Y : Scheme.{u}} (f : Y ⟶ X)
-    (RX SX TX : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
-    (RY SY TY : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
-    (aX : RX ⟶ SX) (bX : SX ⟶ TX) (cX : RX ⟶ TX) (hX : aX ≫ bX = cX)
-    (aY : RY ⟶ SY) (bY : SY ⟶ TY) (cY : RY ⟶ TY) (hY : aY ≫ bY = cY)
-    (eR : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj RX ≅ RY)
-    (eS : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj SX ≅ SY)
-    (eT : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj TX ≅ TY)
-    (ha : eR.hom ≫ aY =
-      (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map aX ≫ eS.hom)
-    (hb : eS.hom ≫ bY =
-      (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map bX ≫ eT.hom)
-    (hc : eR.hom ≫ cY =
-      (proEtaleSheafInverseImage f CommRingCat.{u + 1}).map cX ≫ eT.hom)
 
 end AlgebraicGeometry.Scheme

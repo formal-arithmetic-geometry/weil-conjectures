@@ -46,18 +46,7 @@ variable {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V)
     (hk : ckR.hom ≫ aW = (proEtaleSheafInverseImage k CommRingCat.{u + 1}).map aV ≫ ckS.hom)
     (hh : chR.hom ≫ aZ = (proEtaleSheafInverseImage h CommRingCat.{u + 1}).map aW ≫ chS.hom)
 
-end
-
-variable {X' X Y' Y : Scheme.{t}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
-  {f : X ⟶ Y} {g : Y' ⟶ Y} {sq : ChosenCartesianSquare g' f' f g}
-
-set_option linter.defProp false in
-attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
-
-end AlgebraicGeometry.Scheme
-
-namespace AlgebraicGeometry.Scheme
-
+include hk hh in
 private theorem restrictionComposite_comm :
     (proEtaleRingCompositeCoefficients h k RV RW RZ ckR chR).hom ≫ aZ =
       (proEtaleSheafInverseImage (h ≫ k) CommRingCat.{u + 1}).map aV ≫
@@ -234,6 +223,14 @@ private theorem compatible_sigma_eq {ι : Type*} {B C : ι → Type*}
   cases hb
   cases hc
   rfl
+
+end
+
+variable {X' X Y' Y : Scheme.{t}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
+  {f : X ⟶ Y} {g : Y' ⟶ Y} {sq : ChosenCartesianSquare g' f' f g}
+
+set_option linter.defProp false in
+attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
 /-- Restriction of compatible coefficient systems respects the normalized ordinary
 pullback-square compositor. This involves neither derived functors nor exchange mates.

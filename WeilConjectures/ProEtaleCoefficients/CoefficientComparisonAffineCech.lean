@@ -105,6 +105,7 @@ public import WeilConjectures.Algebra.Homology.Strict.StrictPerfectCoefficientPa
 public import WeilConjectures.AlgebraicGeometry.Sf.SfIntrinsicRealizationTransport
 public import WeilConjectures.CategoryTheory.SiteCechComplex
 public import WeilConjectures.AlgebraicGeometry.Morphisms.ProAffineEtale
+public import WeilConjectures.AlgebraicGeometry.CoefficientAffineCechSystem
 
 import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleSiteComparisonSupplement
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
@@ -212,6 +213,8 @@ import Mathlib.Algebra.Homology.ShortComplex.Ab
 
 Source: Stacks Project, Tag 099U, the two finite Čech limit reductions.
 -/
+
+set_option linter.privateModule false
 
 @[expose] public section
 end
