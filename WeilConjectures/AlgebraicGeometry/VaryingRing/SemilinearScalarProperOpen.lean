@@ -408,8 +408,15 @@ private theorem b_gComp_hom (C : OrdinaryScalarRestriction R φ B ψ)
       (G.b (f ≫ g)).hom.app M ≫
         (StrictTower.towerGComp B f g).hom.app ((C.rho Z).obj M) := by
   have h := b_gComp R φ B ψ C G f g M
-  rw [← Iso.comp_inv_eq, Category.assoc, Category.assoc, ← h, ← Functor.map_comp_assoc,
-    Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.id_comp]
+  calc _ = (C.rho X).map ((moduleGComp R φ f g).hom.app M) ≫
+        ((G.b f).hom.app ((pull R φ g).obj M) ≫
+          (StrictTower.towerPullback B f).map ((G.b g).hom.app M) ≫
+          (StrictTower.towerGComp B f g).inv.app ((C.rho Z).obj M)) ≫
+        (StrictTower.towerGComp B f g).hom.app ((C.rho Z).obj M) := by
+        simp only [Functor.comp_obj, Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
+    _ = _ := by
+        rw [← h, ← Category.assoc, ← Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app,
+          CategoryTheory.Functor.map_id, Category.id_comp]
 
 /-- The square comparison of systems as a composite.
 Source: Stacks 07A7 (blueprint: lem-sf-semilinear-scalar-proper-open). -/
@@ -432,7 +439,11 @@ private theorem scalarTowerSquare_hom_app {V W S T : Scheme.{u}}
       (StrictTower.towerGComp B r i).inv.app M ≫
         (eqToIso (congrArg (StrictTower.towerPullback B) h.symm)).hom.app M ≫
         (StrictTower.towerGComp B k p).hom.app M := by
-  simp only [scalarTowerSquare, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app]
+  have e : (scalarTowerSquare B k r p i h).hom = (StrictTower.towerGComp B r i).inv ≫
+      (eqToIso (congrArg (StrictTower.towerPullback B) h.symm)).hom ≫
+        (StrictTower.towerGComp B k p).hom := rfl
+  refine (congrArg (fun τ ↦ τ.app M) e).trans ?_
+  simp only [NatTrans.comp_app]
 
 /-- Restriction preserves the canonical pullback-square comparison.
 Source: Stacks 07A7 (blueprint: lem-sf-semilinear-scalar-proper-open). -/
@@ -449,6 +460,274 @@ private theorem b_square (C : OrdinaryScalarRestriction R φ B ψ)
   rw [moduleSquareG_hom_app, scalarTowerSquare_hom_app, Functor.map_comp, Functor.map_comp,
     Category.assoc, Category.assoc, b_gComp_hom R φ B ψ C G k p M,
     reassoc_of% (b_congr R φ B ψ C G h.symm M), reassoc_of% (b_gComp R φ B ψ C G r i M)]
+
+/-- The termwise beta of strict towers has the specified open-unit transpose.
+Source: Stacks 09AE (blueprint: lem-sf-semilinear-scalar-proper-open). -/
+private theorem towerBeta_unit {U' U X' X : Scheme.{u}} (gU : U' ⟶ U) (j' : U' ⟶ X')
+    (j : U ⟶ X) (g : X' ⟶ X) [IsOpenImmersion j] [IsOpenImmersion j']
+    (h : gU ≫ j = j' ≫ g) (hsq : IsPullback gU j' j g) (M : StrictTower.Towers B U) :
+    ((scalarTowerOpenAdj B j').homEquiv _ _)
+        ((StrictTower.openBetaTower B gU j' j g h hsq).inv.app M) =
+      (StrictTower.towerPullback B gU).map ((scalarTowerOpenAdj B j).unit.app M) ≫
+        (scalarTowerSquare B gU j' j g h).inv.app ((StrictTower.towerJ B j).obj M) := by
+  apply NatTrans.ext
+  funext n
+  have h1 := (StrictTower.openBetaModule_normalized B gU j' j g h hsq).2 (M.obj n)
+  rw [StrictTower.moduleSquareG_eq] at h1
+  simp only [Adjunction.homEquiv_unit] at h1 ⊢
+  simp only [scalarTowerOpenAdj, StrictTower.openBetaTower, scalarTowerSquare,
+    StrictTower.towerGComp, Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app] at h1 ⊢
+  simpa using h1
+
+/-- The clopen open-to-direct comparison, termwise on strict towers.
+Source: Stacks 03DI (blueprint: lem-sf-semilinear-scalar-proper-open). -/
+private def towerClopen {U X : Scheme.{u}} (s : U ⟶ X) [IsOpenImmersion s]
+    [IsClosedImmersion s] : StrictTower.towerJ B s ≅ StrictTower.towerDirectImage B s :=
+  (Functor.whiskeringRight ℕᵒᵖ _ _).mapIso
+    (@asIso _ _ _ _ (StrictTower.clopenModuleToDirect B s)
+      (StrictTower.clopenModuleToDirect_isIso B s))
+
+/-- The tower clopen comparison is normalized by the inverse open unit.
+Source: Stacks 03DI (blueprint: lem-sf-semilinear-scalar-proper-open). -/
+private theorem towerClopen_unit {U X : Scheme.{u}} (s : U ⟶ X) [IsOpenImmersion s]
+    [IsClosedImmersion s] (N : StrictTower.Towers B U) :
+    (scalarTowerOpenAdj B s).unit.app N ≫
+      ((scalarTowerAdj B s).homEquiv _ _).symm ((towerClopen B s).hom.app N) = 𝟙 N := by
+  have := StrictTower.clopenModule_openUnit_isIso B s
+  apply NatTrans.ext
+  funext n
+  have hm : ((StrictTower.clopenModuleAdj B s).homEquiv _ _).symm
+      ((StrictTower.clopenModuleToDirect B s).app (N.obj n)) =
+      (inv (StrictTower.moduleJAdj B s).unit).app (N.obj n) := by
+    rw [Equiv.symm_apply_eq, Adjunction.homEquiv_unit]
+    simp [StrictTower.clopenModuleToDirect]
+  simp only [Adjunction.homEquiv_counit] at hm ⊢
+  simp only [scalarTowerOpenAdj, scalarTowerAdj, towerClopen, NatTrans.comp_app,
+    NatTrans.id_app] at hm ⊢
+  simp only [Adjunction.whiskerRight, Functor.whiskeringRight_obj_map,
+    Functor.mapIso_hom, asIso_hom] at hm ⊢
+  simp at hm ⊢
+  rw [hm]
+  exact IsIso.hom_inv_id_app _ _
+
+/-- Restriction carries the system open-to-direct map to the tower clopen comparison.
+Source: Stacks 03DI (blueprint: lem-sf-semilinear-scalar-proper-open).
+Proof: transpose under the direct-image adjunction; both transposes invert the
+restricted open unit. -/
+private theorem toP_comparison (C : OrdinaryScalarRestriction R φ B ψ)
+    (G : OrdinaryScalarAdjunctions R φ B ψ C) {U X : Scheme.{u}} (s : U ⟶ X)
+    [IsOpenImmersion s] [IsClosedImmersion s] (N : Modules R φ U) :
+    (G.a s).hom.app N ≫ (towerClopen B s).hom.app ((C.rho U).obj N) =
+      (C.rho X).map ((moduleOpenToP R φ s).app N) ≫ (G.d s).hom.app N := by
+  have := moduleJAdj_unit_isIso R φ s
+  let E := (extension R φ s).obj N
+  apply ((scalarTowerAdj B s).homEquiv _ _).symm.injective
+  rw [Adjunction.homEquiv_naturality_left_symm]
+  have hd := (G.d s).hom.naturality ((inv (moduleJAdj R φ s).unit).app N)
+  have hu := OrdinaryScalarAdjunctions.unit R φ B ψ C G s E
+  have hr : (C.rho X).map ((moduleOpenToP R φ s).app N) ≫ (G.d s).hom.app N =
+      (scalarTowerAdj B s).unit.app ((C.rho X).obj E) ≫
+        (StrictTower.towerDirectImage B s).map ((G.b s).inv.app E ≫
+          (C.rho U).map ((inv (moduleJAdj R φ s).unit).app N)) := by
+    simp only [Functor.comp_map] at hd
+    simp only [moduleOpenToP, NatTrans.comp_app, Functor.rightUnitor_inv_app,
+      Functor.whiskerLeft_app, Functor.associator_inv_app, Functor.whiskerRight_app,
+      Functor.leftUnitor_hom_app, Category.id_comp, Category.comp_id, Functor.map_comp,
+      Category.assoc]
+    rw [hd, ← hu]
+    simp only [Category.assoc, ← Functor.map_comp_assoc, ← Functor.map_comp]
+    simp
+  rw [hr, ← Adjunction.homEquiv_unit, Equiv.symm_apply_apply]
+  rw [← cancel_epi ((C.rho U).map ((moduleJAdj R φ s).unit.app N) ≫ (G.b s).hom.app E)]
+  have ho := G.open_unit s N
+  have hc := towerClopen_unit B s ((C.rho U).obj N)
+  simp only [Category.assoc]
+  rw [reassoc_of% ho, hc, Iso.hom_inv_id_app_assoc, ← Functor.map_comp,
+    IsIso.hom_inv_id_app, CategoryTheory.Functor.map_id]
+
+/-- Restriction preserves the intrinsic clopen projector.
+Source: Stacks 03DI and 0F7B (blueprint: lem-sf-semilinear-scalar-proper-open). -/
+private theorem towerPi_comparison (C : OrdinaryScalarRestriction R φ B ψ)
+    (G : OrdinaryScalarAdjunctions R φ B ψ C) {U X : Scheme.{u}} (s : U ⟶ X)
+    [IsOpenImmersion s] [IsClosedImmersion s] (M : Modules R φ X) :
+    (C.rho X).map ((modulePi R φ s).app M) ≫
+        (G.a s).hom.app ((pull R φ s).obj M) ≫
+        (StrictTower.towerJ B s).map ((G.b s).hom.app M) =
+      (scalarOrdinaryPi B (fun s ↦ towerClopen B s) s).app ((C.rho X).obj M) := by
+  have := moduleOpenToP_isIso R φ s
+  let N := (pull R φ s).obj M
+  have ht := toP_comparison R φ B ψ C G s N
+  have ht' : (C.rho X).map ((inv (moduleOpenToP R φ s)).app N) ≫ (G.a s).hom.app N =
+      (G.d s).hom.app N ≫ (towerClopen B s).inv.app ((C.rho U).obj N) := by
+    rw [← cancel_epi ((C.rho X).map ((moduleOpenToP R φ s).app N)), ← Functor.map_comp_assoc,
+      IsIso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.id_comp,
+      ← reassoc_of% ht, Iso.hom_inv_id_app, Category.comp_id]
+  have hn := (towerClopen B s).inv.naturality ((G.b s).hom.app M)
+  have hu := OrdinaryScalarAdjunctions.unit R φ B ψ C G s M
+  simp only [modulePi, scalarOrdinaryPi, NatTrans.comp_app, Functor.whiskerLeft_app,
+    Functor.map_comp, Category.assoc]
+  rw [reassoc_of% ht', ← hn]
+  rw [reassoc_of% hu]
+  rfl
+
+/-- Restriction preserves the canonical cartesian open comparison beta.
+Source: Stacks 09AE (blueprint: lem-sf-semilinear-scalar-proper-open).
+Proof: invert both sides and compare their open-unit transposes, using the open-unit
+normalizations and the square compatibility of the inverse-image comparison. -/
+private theorem towerBeta_comparison (C : OrdinaryScalarRestriction R φ B ψ)
+    (G : OrdinaryScalarAdjunctions R φ B ψ C) {U' U X' X : Scheme.{u}} (gU : U' ⟶ U)
+    (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X) [IsOpenImmersion j] [IsOpenImmersion j']
+    (h : gU ≫ j = j' ≫ g) (hsq : IsPullback gU j' j g) (M : Modules R φ U) :
+    (C.rho X').map ((moduleBeta R φ gU j' j g h hsq).hom.app M) ≫
+        (G.a j').hom.app ((pull R φ gU).obj M) ≫
+        (StrictTower.towerJ B j').map ((G.b gU).hom.app M) =
+      (G.b g).hom.app ((extension R φ j).obj M) ≫
+        (StrictTower.towerPullback B g).map ((G.a j).hom.app M) ≫
+        (StrictTower.openBetaTower B gU j' j g h hsq).hom.app ((C.rho U).obj M) := by
+  let E := (extension R φ j).obj M
+  have key : (StrictTower.towerJ B j').map ((G.b gU).inv.app M) ≫
+      (G.a j').inv.app ((pull R φ gU).obj M) ≫
+      (C.rho X').map ((moduleBetaInv R φ gU j' j g h).app M) =
+      (StrictTower.openBetaTower B gU j' j g h hsq).inv.app ((C.rho U).obj M) ≫
+        (StrictTower.towerPullback B g).map ((G.a j).inv.app M) ≫
+        (G.b g).inv.app E := by
+    apply ((scalarTowerOpenAdj B j').homEquiv _ _).injective
+    rw [Adjunction.homEquiv_naturality_left, Adjunction.homEquiv_naturality_right,
+      towerBeta_unit, Adjunction.homEquiv_unit]
+    have ho' := G.open_unit j' ((pull R φ gU).obj M)
+    have ho := G.open_unit j M
+    have hb := (G.b j').hom.naturality ((moduleBetaInv R φ gU j' j g h).app M)
+    have hbu := (G.b gU).inv.naturality ((moduleJAdj R φ j).unit.app M)
+    have hsT := (scalarTowerSquare B gU j' j g h).inv.naturality ((G.a j).hom.app M)
+    have hs := b_square R φ B ψ C G gU j' j g h E
+    have hβ : (moduleJAdj R φ j').unit.app ((pull R φ gU).obj M) ≫
+        (pull R φ j').map ((moduleBetaInv R φ gU j' j g h).app M) =
+        (pull R φ gU).map ((moduleJAdj R φ j).unit.app M) ≫
+          (moduleSquareG R φ gU j' j g h).inv.app E := by
+      rw [← Adjunction.homEquiv_unit]
+      exact Equiv.apply_symm_apply _ _
+    sorry
+  sorry
+
+/-- The constant-tower alpha: beta, the clopen projector and the canonical compositors.
+Source: Stacks 0F7B (blueprint: lem-sf-semilinear-scalar-proper-open). -/
+private def towerAlpha {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T)
+    (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k]
+    [QuasiCompact i] [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i) :
+    StrictTower.towerJ B i ⋙ StrictTower.towerPullback B p ⟶
+      StrictTower.towerPullback B r ⋙ StrictTower.towerJ B k :=
+  (StrictTower.openBetaTower B (pullback.snd p i) (pullback.fst p i) i p
+      pullback.condition.symm (IsPullback.of_hasPullback p i).flip).hom ≫
+    Functor.whiskerRight (Functor.whiskerLeft (StrictTower.towerPullback B (pullback.snd p i))
+      (scalarOrdinaryPi B (fun s ↦ towerClopen B s) (StrictTower.squareLift k r p i h)))
+      (StrictTower.towerJ B (pullback.fst p i)) ≫
+    Functor.whiskerRight (Functor.associator _ _ _).inv
+      (StrictTower.towerJ B (pullback.fst p i)) ≫
+    (Functor.associator _ _ _).hom ≫
+    Functor.whiskerLeft (StrictTower.towerPullback B (pullback.snd p i) ⋙
+        StrictTower.towerPullback B (StrictTower.squareLift k r p i h))
+      ((scalarTowerOpenComp B (StrictTower.squareLift k r p i h) (pullback.fst p i)).hom ≫
+        (eqToIso (scalarTowerOpen_congr B (pullback.lift_fst k r h))).hom) ≫
+    Functor.whiskerRight
+      ((StrictTower.towerGComp B (StrictTower.squareLift k r p i h) (pullback.snd p i)).inv ≫
+        (eqToIso (congrArg (StrictTower.towerPullback B) (pullback.lift_snd k r h))).hom)
+      (StrictTower.towerJ B k)
+
+/-- The components of the tower alpha are its defining word.
+Source: Stacks 0F7B (blueprint: lem-sf-semilinear-scalar-proper-open). -/
+private theorem towerAlpha_app {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T)
+    (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k]
+    [QuasiCompact i] [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i)
+    (M : StrictTower.Towers B S) :
+    (towerAlpha B k r p i h).app M =
+      (StrictTower.openBetaTower B (pullback.snd p i) (pullback.fst p i) i p
+        pullback.condition.symm (IsPullback.of_hasPullback p i).flip).hom.app M ≫
+      (StrictTower.towerJ B (pullback.fst p i)).map
+        ((scalarOrdinaryPi B (fun s ↦ towerClopen B s) (StrictTower.squareLift k r p i h)).app
+          ((StrictTower.towerPullback B (pullback.snd p i)).obj M)) ≫
+      (scalarTowerOpenComp B (StrictTower.squareLift k r p i h) (pullback.fst p i)).hom.app
+        ((StrictTower.towerPullback B (StrictTower.squareLift k r p i h)).obj
+          ((StrictTower.towerPullback B (pullback.snd p i)).obj M)) ≫
+      (eqToIso (scalarTowerOpen_congr B (pullback.lift_fst k r h))).hom.app
+        ((StrictTower.towerPullback B (StrictTower.squareLift k r p i h)).obj
+          ((StrictTower.towerPullback B (pullback.snd p i)).obj M)) ≫
+      (StrictTower.towerJ B k).map
+        ((StrictTower.towerGComp B (StrictTower.squareLift k r p i h)
+          (pullback.snd p i)).inv.app M ≫
+          (eqToIso (congrArg (StrictTower.towerPullback B) (pullback.lift_snd k r h))).hom.app M) := by
+  simp only [towerAlpha, NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    Functor.associator_inv_app, Functor.associator_hom_app, CategoryTheory.Functor.map_id,
+    Category.id_comp, Category.assoc]
+
+/-- Restriction preserves the intrinsic proper/open alpha.
+Source: Stacks 0F7B (blueprint: lem-sf-semilinear-scalar-proper-open).
+Proof: move the coefficient comparisons through beta, the clopen projector and the
+two compositors, using their preservation statements and naturality. -/
+private theorem towerAlpha_comparison (C : OrdinaryScalarRestriction R φ B ψ)
+    (G : OrdinaryScalarAdjunctions R φ B ψ C) {V W S T : Scheme.{u}} (k : V ⟶ W)
+    (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
+    [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
+    (h : k ≫ p = r ≫ i) (M : Modules R φ S) :
+    (C.rho W).map ((moduleAlpha R φ k r p i h).app M) ≫
+        (G.a k).hom.app ((pull R φ r).obj M) ≫
+        (StrictTower.towerJ B k).map ((G.b r).hom.app M) =
+      (G.b p).hom.app ((extension R φ i).obj M) ≫
+        (StrictTower.towerPullback B p).map ((G.a i).hom.app M) ≫
+        (towerAlpha B k r p i h).app ((C.rho S).obj M) := by
+  have hb := towerBeta_comparison R φ B ψ C G (pullback.snd p i) (pullback.fst p i) i p
+    pullback.condition.symm (IsPullback.of_hasPullback p i).flip M
+  have hπ := towerPi_comparison R φ B ψ C G (StrictTower.squareLift k r p i h)
+    ((pull R φ (pullback.snd p i)).obj M)
+  have hJ := a_jComp R φ B ψ C G (StrictTower.squareLift k r p i h) (pullback.fst p i)
+    ((pull R φ (StrictTower.squareLift k r p i h)).obj ((pull R φ (pullback.snd p i)).obj M))
+  have hJc := a_congr R φ B ψ C G (pullback.lift_fst k r h)
+    ((pull R φ (StrictTower.squareLift k r p i h)).obj ((pull R φ (pullback.snd p i)).obj M))
+  have hG := b_gComp R φ B ψ C G (StrictTower.squareLift k r p i h) (pullback.snd p i) M
+  have hGc := b_congr R φ B ψ C G (pullback.lift_snd k r h) M
+  have n1 := (G.a k).hom.naturality
+    ((eqToIso (congrArg (pull R φ) (pullback.lift_snd k r h))).hom.app M)
+  have n2 := (G.a k).hom.naturality
+    ((moduleGComp R φ (StrictTower.squareLift k r p i h) (pullback.snd p i)).inv.app M)
+  have n3 := (G.a (pullback.fst p i)).hom.naturality
+    ((modulePi R φ (StrictTower.squareLift k r p i h)).app ((pull R φ (pullback.snd p i)).obj M))
+  have hk0 : (C.rho V).map
+      ((moduleGComp R φ (StrictTower.squareLift k r p i h) (pullback.snd p i)).inv.app M) ≫
+      (C.rho V).map ((eqToIso (congrArg (pull R φ) (pullback.lift_snd k r h))).hom.app M) ≫
+      (G.b r).hom.app M =
+      (G.b (StrictTower.squareLift k r p i h)).hom.app ((pull R φ (pullback.snd p i)).obj M) ≫
+        (StrictTower.towerPullback B (StrictTower.squareLift k r p i h)).map
+          ((G.b (pullback.snd p i)).hom.app M) ≫
+        (StrictTower.towerGComp B (StrictTower.squareLift k r p i h)
+          (pullback.snd p i)).inv.app ((C.rho S).obj M) ≫
+        (eqToIso (congrArg (StrictTower.towerPullback B) (pullback.lift_snd k r h))).hom.app
+          ((C.rho S).obj M) := by
+    rw [hGc, reassoc_of% hG]
+  have hk := congrArg (StrictTower.towerJ B k).map hk0
+  have n4 := (scalarTowerOpenComp B (StrictTower.squareLift k r p i h)
+    (pullback.fst p i)).hom.naturality
+      ((G.b (StrictTower.squareLift k r p i h)).hom.app ((pull R φ (pullback.snd p i)).obj M))
+  have n5 := (eqToIso (scalarTowerOpen_congr B (pullback.lift_fst k r h))).hom.naturality
+      ((G.b (StrictTower.squareLift k r p i h)).hom.app ((pull R φ (pullback.snd p i)).obj M))
+  have n6 := (scalarTowerOpenComp B (StrictTower.squareLift k r p i h)
+    (pullback.fst p i)).hom.naturality
+      ((StrictTower.towerPullback B (StrictTower.squareLift k r p i h)).map
+        ((G.b (pullback.snd p i)).hom.app M))
+  have n7 := (eqToIso (scalarTowerOpen_congr B (pullback.lift_fst k r h))).hom.naturality
+      ((StrictTower.towerPullback B (StrictTower.squareLift k r p i h)).map
+        ((G.b (pullback.snd p i)).hom.app M))
+  have hπ' := congrArg (StrictTower.towerJ B (pullback.fst p i)).map hπ
+  have n8 := (scalarOrdinaryPi B (fun s ↦ towerClopen B s)
+    (StrictTower.squareLift k r p i h)).naturality ((G.b (pullback.snd p i)).hom.app M)
+  have n8' := congrArg (StrictTower.towerJ B (pullback.fst p i)).map n8
+  simp only [Functor.comp_map, Functor.id_map, Functor.map_comp] at n1 n2 n3 hk n4 n5 n6 n7
+    hπ' n8 n8'
+  rw [towerAlpha_app]
+  simp only [moduleAlpha, NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    Functor.associator_inv_app, Functor.associator_hom_app, CategoryTheory.Functor.map_id,
+    Category.id_comp, Functor.map_comp, Category.assoc]
+  rw [reassoc_of% n1, reassoc_of% n2, reassoc_of% hJc, reassoc_of% hJ, reassoc_of% n3,
+    reassoc_of% hk, ← reassoc_of% n5, ← reassoc_of% n4, ← reassoc_of% n7,
+    ← reassoc_of% n6, reassoc_of% hπ', ← reassoc_of% n8', reassoc_of% hb]
 
 /-- The normalized adjunction comparisons preserve beta, the clopen projector and alpha.
 Source: Stacks 03D8, 03DI and 0F7B; blueprint fix-prop-coherence
