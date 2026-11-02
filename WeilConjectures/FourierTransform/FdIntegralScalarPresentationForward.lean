@@ -123,7 +123,7 @@ pbcIntegralScalarUnit. This argument includes zero objects and repeated fields;
 no strict-inclusion assumption is used.
 -/
 theorem fdIntegralScalarPresentationForward
-    (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
+    (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)
     (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
     (T : Scheme.{u}) [IsNoetherian T]
     [dT : Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]

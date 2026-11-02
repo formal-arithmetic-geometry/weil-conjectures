@@ -147,23 +147,14 @@ theorem pbcAmbientScalarAssociator_eq_derivedComp {E L M : Padic.FiniteCoefficie
     pbcAmbientScalarAssociator l Ω T h k =
       pbcDerivedComp _ _ _ (pbcCompletedScalarMap_comp l Ω T h k) := rfl
 
-private theorem eD_cocycle_Q {E L M : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L)
-    (k : L ≤ M)
-    (oh : FdOrdinaryScalarTransport l Ω T h) (ok : FdOrdinaryScalarTransport l Ω T k)
-    (ohk : FdOrdinaryScalarTransport l Ω T (h.trans k))
-    (P : CochainComplex (integralTowerModules l (pbcFiniteField.{u} l Ω E) T) ℤ) :
-    (integralDetailedTransport T l (pbcFiniteField.{u} l Ω M)).map
-        ((ODcomp l Ω T h k).hom.app (DerivedCategory.Q.obj P)) ≫
-        (eD l Ω T (h.trans k) ohk).hom.app (DerivedCategory.Q.obj P) =
-      (eD l Ω T k ok).hom.app ((𝒪 h).mapDerivedCategory.obj (DerivedCategory.Q.obj P)) ≫
-        (pbcAmbientScalarExtension l Ω T k).map
-          ((eD l Ω T h oh).hom.app (DerivedCategory.Q.obj P)) ≫
-        (pbcDerivedComp _ _ _ (pbcCompletedScalarMap_comp l Ω T h k)).hom.app
-          ((integralDetailedTransport T l (pbcFiniteField.{u} l Ω E)).obj
-            (DerivedCategory.Q.obj P)) := by
-  sorry
+/-- The normalized derived ordinary square satisfies the cocycle equation.
 
-/-- The normalized derived ordinary square satisfies the cocycle equation. -/
+Proof sketch: on `DerivedCategory.Q.obj P` this is `derived_cocycle` applied to `eD_heh`,
+`ODcomp_fac`, `pbcDerivedComp_counit`, `chain_cocycle` and `counit_isIso`; `cocycle_of_essSurj`
+extends it to all objects. Restating that instance here currently fails with a kernel
+deterministic timeout: the abstract conclusion and this statement carry different instance
+paths (`ProEt.sections_module_abelian`/`SheafOfModules.instAbelian`, and
+`integralOperationsCommHasDerivedCategory`/`scalarReductionSourceDerived`). -/
 private theorem eD_cocycle {E L M : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L)
     (k : L ≤ M)
     (oh : FdOrdinaryScalarTransport l Ω T h) (ok : FdOrdinaryScalarTransport l Ω T k)
