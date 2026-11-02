@@ -371,9 +371,7 @@ private theorem base_admissible (n : ℕ) :
     Ideal.span ({(l : Padic.coefficientExtensionIntegers l H) ^ (n + 1)} :
       Set (Padic.coefficientExtensionIntegers l H)) ≤
         Padic.coefficientExtensionIdeal l H (n + 1) := by
-  have h := (Padic.extension_integers_dvr l H
-    (Padic.coefficientExtensionAbsoluteValue l H)
-    (spectralNorm_extends (K := ℚ_[l]) (L := H))).choose_spec.choose_spec
+  have h := (Padic.coefficientExtensionIntegers_dvr l H).choose_spec
   have hm : (l : Padic.coefficientExtensionIntegers l H) ∈
       Padic.coefficientExtensionMaximalIdeal l H := by
     apply (h.2.1 _).2
@@ -508,12 +506,8 @@ private theorem integral_inclusion (iota : H →ₐ[Padic l] F) :
         (Padic.coefficientExtensionIdeal l F (n + 1)).comap f := by
   let R := Padic.coefficientExtensionIntegers l H
   let S := Padic.coefficientExtensionIntegers l F
-  have hR := (Padic.extension_integers_dvr l H
-    (Padic.coefficientExtensionAbsoluteValue l H)
-    (spectralNorm_extends (K := ℚ_[l]) (L := H))).choose_spec.choose_spec
-  have hS := (Padic.extension_integers_dvr l F
-    (Padic.coefficientExtensionAbsoluteValue l F)
-    (spectralNorm_extends (K := ℚ_[l]) (L := F))).choose_spec.choose_spec
+  have hR := (Padic.coefficientExtensionIntegers_dvr l H).choose_spec
+  have hS := (Padic.coefficientExtensionIntegers_dvr l F).choose_spec
   have hn (x : H) : spectralNorm ℚ_[l] F (iota x) = spectralNorm ℚ_[l] H x := by
     unfold spectralNorm
     rw [minpoly.algHom_eq iota iota.injective]

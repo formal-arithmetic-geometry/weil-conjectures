@@ -588,9 +588,10 @@ private def coefficientCone :
         (limit.π (integralCoefficientSheafSystem l E W) (op (n + 1))).hom.app V ≫
           (integralCoefficientSheafTransition l E W n).hom.app V
       have h := congrArg (fun k ↦ k.hom.app V)
-        (limit.w (integralCoefficientSheafSystem l E W) (homOfLE (Nat.le_succ n)).op)
-      simpa only [integralCoefficientSheafSystem, Functor.ofOpSequence_map_homOfLE_succ,
-        ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app] using h.symm)
+        (limit.w (integralCoefficientSheafSystem l E W) (homOfLE (Nat.le_add_right n 1)).op)
+      simp only [integralCoefficientSheafSystem, Functor.ofOpSequence_map_homOfLE_succ,
+        ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app] at h
+      exact h.symm)
 
 private abbrev strictEquivalence :=
   (SheafOfModules.strictSystemSequenceEquivalence (coefficientSequenceCommRingSystem l E W)).symm

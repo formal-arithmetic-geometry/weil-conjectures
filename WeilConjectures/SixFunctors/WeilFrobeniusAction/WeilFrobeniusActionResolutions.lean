@@ -312,6 +312,12 @@ Source: native action-site proof, step 3
 instance pullbackAdditive {T : Scheme.{u}} {l : ℕ} [Fact l.Prime] {g : T ≅ T}
     (D : Realization T l g) : (pullback D).Additive := D.sigmaAdditive
 
+/-- Pullback is the autoequivalence asserted in the realization.
+Source: native action-site proof, step 3
+(blueprint: lem-sf-weil-frobenius-action-resolutions). -/
+instance pullbackEquivalence {T : Scheme.{u}} {l : ℕ} [Fact l.Prime] {g : T ≅ T}
+    (D : Realization T l g) : (pullback D).IsEquivalence := D.sigmaEquivalence
+
 /-- The recorded fixed-pair category for the explicit module pullback.
 Source: native action-site proof, step 3
 (blueprint: lem-sf-weil-frobenius-action-resolutions). -/

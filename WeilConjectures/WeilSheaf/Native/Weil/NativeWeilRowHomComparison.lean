@@ -173,7 +173,7 @@ private noncomputable def sliceModel
     change (e J').inv ≫ D.map ((E.functor.map f).op, 𝟙 L) =
       (G.map f).unop ≫ (e J).inv
     apply (cancel_epi (e J').hom).1
-    apply (cancel_mono (e J).hom).1
+    apply (Iso.cancel_iso_hom_right _ _ (e J)).1
     simp only [Category.assoc, Iso.hom_inv_id_assoc, Iso.inv_hom_id, Category.comp_id]
     let a := (DerivedCategory.quotientCompQhIso B).app J.obj.as
     let b := (DerivedCategory.quotientCompQhIso B).app J'.obj.as
