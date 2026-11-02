@@ -13,6 +13,8 @@ import WeilConjectures.SixFunctors.IntegralHom.KInjectivePrincipalTensor
 import WeilConjectures.SixFunctors.IntegralHom.IntegralHomKInjectiveDiagram
 import Mathlib.CategoryTheory.WithTerminal.Basic
 
+set_option linter.privateModule false
+
 /-! # Unit-normalized tensor representatives of integral reduction towers
 
 Source: the finite-free quotient resolution in the first paragraph of the current
@@ -148,6 +150,8 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   (Y : AlgebraicGeometry.Scheme.{t}) (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
 
+set_option maxHeartbeats 400000 in
+-- The final unit normalization unifies the bundled and unrestricted coefficient sheaves.
 /-- The two reduction towers have separate tensor models preserving their units.
 This asserts no isomorphism between Hom tensor Q_n and Hom into tensor Q_n.
 The only comparison normalization is at the coefficient unit B=R[0].
