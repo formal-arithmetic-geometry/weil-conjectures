@@ -39,7 +39,7 @@ private theorem abZeroDetect
     (F : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
     (hi : IsZero ((upperStar Ab.{u + 1} i).obj F))
     (hj : IsZero ((upperStar Ab.{u + 1} j).obj F)) : IsZero F := by
-  have := (abelian_closed_support i j hU).2 F hj
+  have := abelian_closed_support i j hU F hj
   exact ((lowerStar Ab.{u + 1} i).map_isZero hi).of_iso
     (asIso ((upperStarLowerStarAdjunction Ab.{u + 1} i).unit.app F))
 private theorem modZeroDetect
