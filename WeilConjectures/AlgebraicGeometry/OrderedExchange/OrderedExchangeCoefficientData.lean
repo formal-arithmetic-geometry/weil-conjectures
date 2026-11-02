@@ -70,6 +70,7 @@ import all WeilConjectures.AlgebraicGeometry.Strict.Tower.StrictTowerExchangeMat
 import all WeilConjectures.CategoryTheory.FlatScalarTowerLimit.FlatScalarTowerLimitSquare
 import all WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedPullbackReflection
 import WeilConjectures.AlgebraicGeometry.Stratum.StratumCompletionUnitRestriction
+import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeUnitDerived
 
 /-! # Coefficient normalization of the raw ordered completed exchange
 
@@ -574,6 +575,154 @@ def scalarDiagonal (T : Scheme.{t}) :
     Functor.mapDerivedCategoryNatIso (ordinaryScalarDiagonal d T) ≪≫
       Functor.mapDerivedCategoryCompIso _ _
 
+set_option linter.flexible false in
+private theorem ordinaryLambda_unit (T : Scheme.{t})
+    (N : reductionModules T (d.completedRing T)) :
+    (reductionRestrict T (exchangeScalar d T)).map
+        ((constLimAdj : (Functor.const ℕᵒᵖ) ⊣
+          completedTowerLimit T (d.completedRing T)).unit.app N) ≫
+      (ordinaryLambda d T).hom.app ((Functor.const ℕᵒᵖ).obj N) =
+    (constLimAdj : (Functor.const ℕᵒᵖ) ⊣
+        completedTowerLimit T (exchangeConstantRing T A)).unit.app
+        ((reductionRestrict T (exchangeScalar d T)).obj N) ≫
+      (completedTowerLimit T (exchangeConstantRing T A)).map
+        ((ordinaryScalarDiagonal d T).symm.hom.app N) := by
+  apply limit.hom_ext
+  intro n
+  have hl : (ordinaryLambda d T).hom.app ((Functor.const ℕᵒᵖ).obj N) ≫
+      limit.π ((exchangeTowerModuleRes d T).obj ((Functor.const ℕᵒᵖ).obj N)) n =
+      (reductionRestrict T (exchangeScalar d T)).map (limit.π ((Functor.const ℕᵒᵖ).obj N) n) := by
+    unfold ordinaryLambda
+    exact (ordinaryLambda_existsUnique d T).exists.choose_spec ((Functor.const ℕᵒᵖ).obj N) n.unop
+  simp only [Category.assoc]
+  erw [hl]
+  simp [constLimAdj, ordinaryScalarDiagonal]
+  rw [← Functor.map_comp, limit.lift_π]
+  exact (reductionRestrict T (exchangeScalar d T)).map_id N
+
+
+private theorem factorsh_hom_quotient {B E : Type*} [Category B] [Category E]
+    [Abelian B] [Abelian E] [HasDerivedCategory B] [HasDerivedCategory E]
+    (F : B ⥤ E) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    (K : CochainComplex B ℤ) :
+    F.mapDerivedCategoryFactorsh.hom.app ((HomotopyCategory.quotient _ _).obj K) =
+      F.mapDerivedCategoryFactors.hom.app K := by
+  rw [Functor.mapDerivedCategoryFactorsh_hom_app]
+  have h1 : (DerivedCategory.quotientCompQhIso B).hom.app K = 𝟙 _ := rfl
+  have h2 : (DerivedCategory.quotientCompQhIso E).inv.app
+      ((F.mapHomologicalComplex (.up ℤ)).obj K) = 𝟙 _ := rfl
+  have h3 : (F.mapHomotopyCategoryFactors (.up ℤ)).inv.app K = 𝟙 _ := rfl
+  rw [h1, h2, h3]
+  simp
+
+private theorem factorsh_inv_quotient {B E : Type*} [Category B] [Category E]
+    [Abelian B] [Abelian E] [HasDerivedCategory B] [HasDerivedCategory E]
+    (F : B ⥤ E) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    (K : CochainComplex B ℤ) :
+    F.mapDerivedCategoryFactorsh.inv.app ((HomotopyCategory.quotient _ _).obj K) =
+      F.mapDerivedCategoryFactors.inv.app K := by
+  have h := factorsh_hom_quotient F K
+  apply (cancel_epi (F.mapDerivedCategoryFactorsh.hom.app
+    ((HomotopyCategory.quotient _ _).obj K))).mp
+  rw [Iso.hom_inv_id_app]
+  erw [h, Iso.hom_inv_id_app]
+  rfl
+
+private theorem limitComplexUnit_eq (T : Scheme.{t})
+    (R : Sheaf (ProEt.topology T) CommRingCat.{t + 1})
+    (P : CochainComplex (exchangeTowers T R) ℤ) :
+    limitComplexUnit T R P =
+      (completedTowerLimit T R).rightDerivedFunctorUnit.app
+        ((HomotopyCategory.quotient _ _).obj P) := by
+  unfold limitComplexUnit
+  have h1 : (DerivedCategory.quotientCompQhIso (reductionModules T R)).inv.app
+      (((completedTowerLimit T R).mapHomologicalComplex (.up ℤ)).obj P) = 𝟙 _ := rfl
+  have h2 : ((completedTowerLimit T R).mapHomotopyCategoryFactors (.up ℤ)).inv.app P =
+      𝟙 _ := rfl
+  have h3 : (DerivedCategory.quotientCompQhIso (exchangeTowers T R)).hom.app P = 𝟙 _ := rfl
+  rw [h1, h2, h3]
+  simp
+
+
+private theorem towerRes_unit_isIso (T : Scheme.{t}) :
+    ∀ (K : CochainComplex (d.towers T) ℤ) [K.IsKInjective],
+      IsIso ((completedTowerLimit T (exchangeConstantRing T A)).rightDerivedFunctorUnit.app
+        ((HomotopyCategory.quotient _ (.up ℤ)).obj
+          (((exchangeTowerModuleRes d T).mapHomologicalComplex (.up ℤ)).obj K))) := by
+  have := exchangeTowerModuleRes_kinjective d T
+  intro K _
+  infer_instance
+
+/-- The comparison of derived limits induced by the ordinary limit comparison. -/
+private def lambdaIso (T : Scheme.{t}) :
+    exchangeTowerRes d T ⋙ rlim (A := A) T ≅
+      completedRlim T (d.completedRing T) ⋙ res d T :=
+  (Functor.mapDerivedCategoryCompRightDerivedFunctorIsoOfIsIso (exchangeTowerModuleRes d T)
+      (completedTowerLimit T (exchangeConstantRing T A)) (towerRes_unit_isIso d T)).symm ≪≫
+    Functor.rightDerivedFunctorNatIso (ordinaryLambda d T).symm ≪≫
+    Functor.rightDerivedFunctorCompMapDerivedCategoryIso (completedTowerLimit T (d.completedRing T))
+      (reductionRestrict T (exchangeScalar d T))
+
+private theorem lambdaIso_normalization (T : Scheme.{t}) :
+    LambdaNormalization d T (lambdaIso d T).symm := by
+  unfold LambdaNormalization
+  intro P
+  have hR := Functor.map_rightDerivedFunctorUnit_app_comp_restrictIso_inv_app
+    (P₁ := reductionRestrict T (exchangeScalar d T)) (P₂ := exchangeTowerModuleRes d T)
+    (F := completedTowerLimit T (exchangeConstantRing T A))
+    (F' := completedTowerLimit T (d.completedRing T))
+    (ordinaryLambda d T) (towerRes_unit_isIso d T) ((HomotopyCategory.quotient _ _).obj P)
+  rw [limitComplexUnit_eq, limitComplexUnit_eq]
+  simp only [Iso.symm_hom]
+  rw [NatTrans.mapHomotopyCategorySquare_app_quotient_obj] at hR
+  erw [factorsh_hom_quotient, factorsh_inv_quotient] at hR
+  have hR' := congrArg (fun z ↦ z ≫ (rlim (A := A) T).map
+    ((exchangeTowerModuleRes d T).mapDerivedCategoryFactors.hom.app P)) hR
+  simp only [Category.assoc] at hR'
+  erw [hR']
+  rw [← Functor.map_comp, Iso.inv_hom_id_app]
+  erw [CategoryTheory.Functor.map_id, Category.comp_id]
+  rfl
+
+
+private theorem lambda_eq_lambdaIso (T : Scheme.{t}) : lambda d T = (lambdaIso d T).symm :=
+  (lambda_existsUnique d T).unique (lambda_existsUnique d T).exists.choose_spec
+    (lambdaIso_normalization d T)
+
+private theorem lambda_mate (T : Scheme.{t}) :
+    mateEquiv (d.constantRlimAdjunction T) (diagonalAdjunction (A := A) T)
+        (Functor.mapDerivedCategorySquareIso (ordinaryScalarDiagonal d T).symm).hom =
+      (lambda d T).hom := by
+  rw [lambda_eq_lambdaIso]
+  exact Adjunction.mateEquiv_mapDerivedCategoryRightDerivedAdjunction_restrict
+    (constLimAdj : (Functor.const ℕᵒᵖ) ⊣ completedTowerLimit T (exchangeConstantRing T A))
+    (constLimAdj : (Functor.const ℕᵒᵖ) ⊣ completedTowerLimit T (d.completedRing T))
+    (ordinaryScalarDiagonal d T).symm (ordinaryLambda d T) (ordinaryLambda_unit d T)
+    (towerRes_unit_isIso d T)
+
+/-- Restriction carries the completed constant-tower adjunction unit to the constant one. -/
+private theorem lambda_unit (T : Scheme.{t}) (K : d.derived T) :
+    (res d T).map ((d.constantRlimAdjunction T).unit.app K) ≫
+        (lambda d T).hom.app ((d.derivedConstantTower T).obj K) ≫
+        (rlim (A := A) T).map ((scalarDiagonal d T).hom.app K) =
+      (diagonalAdjunction (A := A) T).unit.app ((res d T).obj K) := by
+  rw [← lambda_mate]
+  have h := unit_mateEquiv (d.constantRlimAdjunction T) (diagonalAdjunction (A := A) T)
+    (Functor.mapDerivedCategorySquareIso (ordinaryScalarDiagonal d T).symm).hom K
+  rw [← Category.assoc]
+  erw [h]
+  rw [Category.assoc, ← Functor.map_comp]
+  have hs : (Functor.mapDerivedCategorySquareIso (ordinaryScalarDiagonal d T).symm).hom.app K ≫
+      (scalarDiagonal d T).hom.app K = 𝟙 _ := by
+    have hsy := Functor.mapDerivedCategoryNatIso_symm (ordinaryScalarDiagonal d T)
+    simp only [Functor.mapDerivedCategorySquareIso, scalarDiagonal, Iso.trans_hom, Iso.symm_hom,
+      NatTrans.comp_app, Category.assoc, Iso.hom_inv_id_app_assoc]
+    rw [hsy]
+    simp
+  erw [hs, CategoryTheory.Functor.map_id, Category.comp_id]
+  rfl
+
+
 /-- Restriction respects the strict quotient unit, not just its evaluations.
 Source: Stacks 099M (blueprint: def-weil-pbc-ordered-coefficient-comparison-data).
 Proof: on an ordinary flat-term K-flat model both augmentations send x to 1 tensor x
@@ -602,7 +751,22 @@ theorem rho_unit_second (T : Scheme.{t}) (K : d.derived T) :
         (lambda d T).hom.app ((completedReductionTower T d).obj K) ≫
         (rlim (A := A) T).map ((rho d T).hom.app K) =
       (unit d T).app ((res d T).obj K) := by
-  sorry
+  have hn := (lambda d T).hom.naturality ((completedReductionAugmentation d T).app K)
+  have h1 := rho_unit_first d T K
+  have h2 := lambda_unit d T K
+  simp only [Functor.comp_map] at hn
+  have key : (res d T).map ((d.constantRlimAdjunction T).unit.app K) ≫
+      (res d T).map ((completedRlim T (d.completedRing T)).map
+        ((completedReductionAugmentation d T).app K)) ≫
+      (lambda d T).hom.app ((completedReductionTower T d).obj K) ≫
+      (rlim (A := A) T).map ((rho d T).hom.app K) =
+      (diagonalAdjunction (A := A) T).unit.app ((res d T).obj K) ≫
+        (rlim (A := A) T).map ((augmentation d T).app ((res d T).obj K)) := by
+    rw [reassoc_of% hn, ← Functor.map_comp, h1, Functor.map_comp, ← h2]
+    simp only [Category.assoc]
+  unfold AdicCoefficientDatum.completionUnit
+  erw [Functor.map_comp, Category.assoc]
+  exact key
 
 theorem rho_unit (T : Scheme.{t}) (K : d.derived T) :
     (exchangeTowerRes d T).map ((completedReductionAugmentation d T).app K) ≫
