@@ -466,6 +466,24 @@ theorem stageAssociatorRep_tr (tower : StageTensorTower S T c)
   rw [← RT, Iso.map_inv_hom_id_assoc,
     reassoc_of% hA, ← hn, reassoc_of% LT]
 
+theorem stageEndpoint_hom_eq {p q s : I} (hp : p ≤ s) (hq : q ≤ s) (x : C p) (y : C q) {L : I}
+    (h : s ≤ L) :
+    (stageEndpoint S T c hp hq x y h).hom =
+      (c h).hom.app ((S.T hp).obj x, (S.T hq).obj y) ≫
+        (T L).map (Prod.mkHom ((S.assoc hp h).hom.app x) ((S.assoc hq h).hom.app y)) := rfl
+
+theorem stageLeftNested_hom_eq {m₁ m₂ m₃ s₁ s₂ : I} (h₁ : m₁ ≤ s₁) (h₂ : m₂ ≤ s₁)
+    (g₁ : s₁ ≤ s₂) (g₃ : m₃ ≤ s₂) (x : C m₁) (y : C m₂) (z : C m₃) {L : I} (h : s₂ ≤ L) :
+    (stageLeftNested S T c h₁ h₂ g₁ g₃ x y z h).hom =
+      (stageEndpoint S T c g₁ g₃ _ z h).hom ≫
+        (T L).map (Prod.mkHom (stageEndpoint S T c h₁ h₂ x y (g₁.trans h)).hom (𝟙 _)) := rfl
+
+theorem stageRightNested_hom_eq {m₁ m₂ m₃ t₁ t₂ : I} (f₂ : m₂ ≤ t₁) (f₃ : m₃ ≤ t₁)
+    (f₁ : m₁ ≤ t₂) (e₁ : t₁ ≤ t₂) (x : C m₁) (y : C m₂) (z : C m₃) {L : I} (h : t₂ ≤ L) :
+    (stageRightNested S T c f₂ f₃ f₁ e₁ x y z h).hom =
+      (stageEndpoint S T c f₁ e₁ x _ h).hom ≫
+        (T L).map (Prod.mkHom (𝟙 _) (stageEndpoint S T c f₂ f₃ y z (e₁.trans h)).hom) := rfl
+
 end
 
 end WeilConjectures
