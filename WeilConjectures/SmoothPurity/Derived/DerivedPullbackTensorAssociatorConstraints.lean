@@ -28,6 +28,7 @@ normalized constraints and the directed-stage representative calculation.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option linter.unusedSimpArgs false
 set_option linter.unusedSectionVars false
 set_option linter.unusedVariables false
 set_option linter.privateModule false
@@ -404,21 +405,30 @@ theorem rationalScalarAssociatorSquare
   let U := constructibleIntegralTensor l E W
   let V := constructibleIntegralTensor l L W
   let μ := integralTensorScalarComparison l E L ι W
-  have hG (K : sfRationalConstructibleCategory l E W) : (sfRationalScalarExtension l E W 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).obj K = Q.obj (S.obj K.obj) :=
+  have hG (K : sfRationalConstructibleCategory l E W) :
+      (sfRationalScalarExtension l E W 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).obj K =
+        Q.obj (S.obj K.obj) :=
     sfRationalScalarExtension_obj l E W 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι K
-  have hTE (MN) : (rationalDerivedTensor l E W).obj MN = QE.obj (U.obj (MN.1.obj, MN.2.obj)) :=
-    (scalarAssoc_chosen_spec (rationalDerivedTensor_existsUnique l E W) (rationalDerivedTensor l E W) rfl).1 MN
-  have hTL (MN) : (rationalDerivedTensor l L W).obj MN = Q.obj (V.obj (MN.1.obj, MN.2.obj)) :=
-    (scalarAssoc_chosen_spec (rationalDerivedTensor_existsUnique l L W) (rationalDerivedTensor l L W) rfl).1 MN
+  have hTE (MN) :
+      (rationalDerivedTensor l E W).obj MN = QE.obj (U.obj (MN.1.obj, MN.2.obj)) :=
+    (scalarAssoc_chosen_spec (rationalDerivedTensor_existsUnique l E W)
+      (rationalDerivedTensor l E W) rfl).1 MN
+  have hTL (MN) :
+      (rationalDerivedTensor l L W).obj MN = Q.obj (V.obj (MN.1.obj, MN.2.obj)) :=
+    (scalarAssoc_chosen_spec (rationalDerivedTensor_existsUnique l L W)
+      (rationalDerivedTensor l L W) rfl).1 MN
   have hc (A B : sfRationalConstructibleCategory l E W) :
       HEq ((rationalTensorScalarComparison l E L ι W).hom.app (A, B))
         (Q.map (μ A.obj B.obj).hom) :=
     scalarAssoc_chosen_spec (rationalTensorScalarComparison_existsUnique l E L ι W)
       (rationalTensorScalarComparison l E L ι W) rfl A B
-  have hbase (K : sfRationalConstructibleCategory l E W) : ((sfRationalScalarExtension l E W 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).obj K).obj = S.obj K.obj := by
+  have hbase (K : sfRationalConstructibleCategory l E W) :
+      ((sfRationalScalarExtension l E W 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).obj
+        K).obj = S.obj K.obj := by
     rw [hG]; rfl
   have hid (K : sfRationalConstructibleCategory l E W) :
-      HEq (𝟙 ((sfRationalScalarExtension l E W 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).obj K)) (Q.map (𝟙 (S.obj K.obj))) := by
+      HEq (𝟙 ((sfRationalScalarExtension l E W 0 (Nat.Prime.ne_zero (Fact.out : l.Prime))
+        L ι).obj K)) (Q.map (𝟙 (S.obj K.obj))) := by
     have hh {A : sfRationalConstructibleCategory l L W}
         {B : sfIntegralConstructibleCategory l L W} (h : A = Q.obj B) :
         HEq (𝟙 A) (Q.map (𝟙 B)) := by subst A; simp
@@ -429,13 +439,15 @@ theorem rationalScalarAssociatorSquare
       (hC : C = Q.obj C') (hD : D = Q.obj D')
       (a : A ⟶ B) (b : C ⟶ D) (a' : A' ⟶ B') (b' : C' ⟶ D')
       (ha : HEq a (Q.map a')) (hb : HEq b (Q.map b')) :
-      HEq ((rationalDerivedTensor l L W).map (Prod.mkHom a b)) (Q.map (V.map (Prod.mkHom a' b'))) := by
+      HEq ((rationalDerivedTensor l L W).map (Prod.mkHom a b))
+        (Q.map (V.map (Prod.mkHom a' b'))) := by
     subst A B C D
     have ha' := eq_of_heq ha
     have hb' := eq_of_heq hb
     subst a b
     obtain ⟨bil, hbil, hbil'⟩ :=
-      (scalarAssoc_chosen_spec (rationalDerivedTensor_existsUnique l L W) (rationalDerivedTensor l L W) rfl).2
+      (scalarAssoc_chosen_spec (rationalDerivedTensor_existsUnique l L W)
+        (rationalDerivedTensor l L W) rfl).2
         (Q.obj A') (Q.obj B') (Q.obj C') (Q.obj D')
     rw [hbil]
     convert hbil' a' b' 1 1 using 1
@@ -445,13 +457,15 @@ theorem rationalScalarAssociatorSquare
       {A' B' : sfIntegralConstructibleCategory l E W}
       (hA : A = QE.obj A') (hB : B = QE.obj B')
       (a : A ⟶ B) (b : A' ⟶ B') (hab : HEq a (QE.map b)) :
-      HEq ((sfRationalScalarExtension l E W 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).map a) (Q.map (S.map b)) := by
+      HEq ((sfRationalScalarExtension l E W 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).map
+        a) (Q.map (S.map b)) := by
     subst A B
     have hab' := eq_of_heq hab
     subst a
     have h := sfRationalScalarExtension_map_tmul l E W 0
       (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι A' B' b 1
-    have h1 : (sfRationalCoefficientEquiv l L).symm (ι (sfRationalCoefficientEquiv l E 1)) = 1 := by
+    have h1 :
+        (sfRationalCoefficientEquiv l L).symm (ι (sfRationalCoefficientEquiv l E 1)) = 1 := by
       simp only [map_one]
     rw [h1] at h
     exact h
@@ -465,27 +479,45 @@ theorem rationalScalarAssociatorSquare
     subst hA hB hC; rfl
   have hTEobj (A B : sfRationalConstructibleCategory l E W) :
       ((rationalDerivedTensor l E W).obj (A, B)).obj = U.obj (A.obj, B.obj) := by rw [hTE]; rfl
-  have h1 := hmap (A := (rationalDerivedTensor l E W).obj ((rationalDerivedTensor l E W).obj (M, N), P)) (B := (rationalDerivedTensor l E W).obj (M, (rationalDerivedTensor l E W).obj (N, P)))
-    (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL] <;> rfl) (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL] <;> rfl) _ _
+  have h1 := hmap
+    (A := (rationalDerivedTensor l E W).obj ((rationalDerivedTensor l E W).obj (M, N), P))
+    (B := (rationalDerivedTensor l E W).obj (M, (rationalDerivedTensor l E W).obj (N, P)))
+    (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL]; rfl)
+    (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL]; rfl) _ _
     (pullbackTensorRationalAssociator_existsUnique l E W M N P).exists.choose_spec
   have h2 := (hc M ((rationalDerivedTensor l E W).obj (N, P))).trans (hμ rfl (hTEobj N P))
-  have h3 := htmap (hG M) (hG M) (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL] <;> rfl)
-    (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL] <;> rfl) (𝟙 _) ((rationalTensorScalarComparison l E L ι W).hom.app (N, P))
+  have h3 := htmap (hG M) (hG M)
+    (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL]; rfl)
+    (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL]; rfl) (𝟙 _)
+    ((rationalTensorScalarComparison l E L ι W).hom.app (N, P))
     (𝟙 _) (μ N.obj P.obj).hom (hid M) (hc N P)
   have h4 := (hc ((rationalDerivedTensor l E W).obj (M, N)) P).trans (hμ (hTEobj M N) rfl)
-  have h5 := htmap (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL] <;> rfl) (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL] <;> rfl)
+  have h5 := htmap
+    (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL]; rfl)
+    (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL]; rfl)
     (hG P) (hG P) ((rationalTensorScalarComparison l E L ι W).hom.app (M, N)) (𝟙 _)
     (μ M.obj N.obj).hom (𝟙 _) (hc M N) (hid P)
-  have h6 := (pullbackTensorRationalAssociator_existsUnique l L W ((sfRationalScalarExtension l E W 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).obj M) ((sfRationalScalarExtension l E W 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).obj N)
-    ((sfRationalScalarExtension l E W 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).obj P)).exists.choose_spec.trans (hαL (hbase M) (hbase N) (hbase P))
-  have hl := heq_comp (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL] <;> rfl) (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL] <;> rfl)
-    (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL] <;> rfl) h1
-    (heq_comp (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL] <;> rfl) (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL] <;> rfl)
-      (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL] <;> rfl) h2 h3)
-  have hr := heq_comp (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL] <;> rfl) (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL] <;> rfl)
-    (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL] <;> rfl) h4
-    (heq_comp (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL] <;> rfl) (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL] <;> rfl)
-      (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL] <;> rfl) h5 h6)
+  have h6 := (pullbackTensorRationalAssociator_existsUnique l L W
+    ((sfRationalScalarExtension l E W 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).obj M)
+    ((sfRationalScalarExtension l E W 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).obj N)
+    ((sfRationalScalarExtension l E W 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).obj
+      P)).exists.choose_spec.trans (hαL (hbase M) (hbase N) (hbase P))
+  have hl := heq_comp
+    (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL]; rfl)
+    (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL]; rfl)
+    (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL]; rfl) h1
+    (heq_comp
+      (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL]; rfl)
+      (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL]; rfl)
+      (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL]; rfl) h2 h3)
+  have hr := heq_comp
+    (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL]; rfl)
+    (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL]; rfl)
+    (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL]; rfl) h4
+    (heq_comp
+      (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL]; rfl)
+      (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL]; rfl)
+      (by simp only [Functor.comp_obj, Functor.prod_obj, hG, hTE, hTL]; rfl) h5 h6)
   apply eq_of_heq
   refine hl.trans ((heq_of_eq ?_).trans hr.symm)
   have h := congrArg Q.map (integralScalarAssociatorSquare l E L ι W M.obj N.obj P.obj)
@@ -617,7 +649,8 @@ private theorem scalarAssoc_commonStageTensorComparison_endpoint (W : Scheme.{u}
         (fun i ↦ rationalDerivedTensor l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω i) W)
         (fun h ↦ rationalTensorStageComparison l Ω W h)
         ((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).1
-        ((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).2 P.obj Q.obj h).hom := by
+        ((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).2
+        P.obj Q.obj h).hom := by
   have hh := scalarAssoc_tensorStageComparison_endpoint
     (rationalDerivedTensor l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω
       (Padic.finiteCoefficientCompositum l Ω P.stage Q.stage)) W)
@@ -687,6 +720,7 @@ private theorem ca_hAS (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueFie
   fun h X Y Z ↦ commonScalarAssociator l Ω W h X Y Z
 
 set_option maxHeartbeats 400000 in
+-- assembling the common-stage associator unfolds long composites of stage comparisons
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 private theorem pullbackTensorCommonAssociator_exists_aux (W : Scheme.{u})
@@ -744,7 +778,8 @@ private theorem pullbackTensorCommonAssociator_exists_aux (W : Scheme.{u})
     rw [hTc.1 N P, hTc.1]
   have hL (L : AlgebraicallyClosedCoefficients.Index l Ω) (hS : A.stage ≤ L) :
       (pullbackTensorCommonLeft l Ω W M N P L hS).hom =
-        (stageLeftNested S (caT l Ω W) (fun h ↦ cac l Ω W h) h₁ h₂ g₁ g₃ M.obj N.obj P.obj hS).hom := by
+        (stageLeftNested S (caT l Ω W) (fun h ↦ cac l Ω W h) h₁ h₂ g₁ g₃
+          M.obj N.obj P.obj hS).hom := by
     have e₂ := scalarAssoc_commonStageTensorComparison_endpoint l Ω W MN P L hS
     have e₁ := scalarAssoc_commonStageTensorComparison_endpoint l Ω W M N L (g₁.trans hS)
     unfold pullbackTensorCommonLeft
@@ -752,7 +787,8 @@ private theorem pullbackTensorCommonAssociator_exists_aux (W : Scheme.{u})
       (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) W).map (Prod.mkHom b (𝟙 _))) e₂ e₁
   have hR (L : AlgebraicallyClosedCoefficients.Index l Ω) (hT : B.stage ≤ L) :
       (pullbackTensorCommonRight l Ω W M N P L hT).hom =
-        (stageRightNested S (caT l Ω W) (fun h ↦ cac l Ω W h) f₂ f₃ f₁ e₁ M.obj N.obj P.obj hT).hom := by
+        (stageRightNested S (caT l Ω W) (fun h ↦ cac l Ω W h) f₂ f₃ f₁ e₁
+          M.obj N.obj P.obj hT).hom := by
     have e₂ := scalarAssoc_commonStageTensorComparison_endpoint l Ω W M NP L hT
     have e₁ := scalarAssoc_commonStageTensorComparison_endpoint l Ω W N P L (e₁.trans hT)
     unfold pullbackTensorCommonRight
