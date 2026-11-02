@@ -68,7 +68,52 @@ theorem det_tf_fixed_point_algebra_points
             (algebraMap D.k₀ (MvPolynomial (Fin r) D.k₀ ⧸ a))))),
       ∀ φ : D.relationModelPoints m hm r a,
         (e φ).left = Spec.map (CommRingCat.ofHom φ.toRingHom) := by
-  sorry
+  let : Algebra D.k₀ (D.extensionSubfield m hm) :=
+    (D.extensionEmbedding m hm).toAlgebra
+  let O :=
+    (Over.mk (Spec.map (CommRingCat.ofHom (D.extensionEmbedding m hm))) ⟶
+      Over.mk (Spec.map (CommRingCat.ofHom
+        (algebraMap D.k₀ (MvPolynomial (Fin r) D.k₀ ⧸ a)))))
+  let toOver : D.relationModelPoints m hm r a → O := fun φ ↦
+    Over.homMk (Spec.map (CommRingCat.ofHom φ.toRingHom)) (by
+      have hφ :
+          CommRingCat.ofHom (φ.toRingHom.comp (algebraMap D.k₀
+            (MvPolynomial (Fin r) D.k₀ ⧸ a))) =
+            CommRingCat.ofHom (D.extensionEmbedding m hm) :=
+        congrArg CommRingCat.ofHom φ.comp_algebraMap
+      change Spec.map (CommRingCat.ofHom φ.toRingHom) ≫
+          Spec.map (CommRingCat.ofHom (algebraMap D.k₀
+            (MvPolynomial (Fin r) D.k₀ ⧸ a))) =
+        Spec.map (CommRingCat.ofHom (D.extensionEmbedding m hm))
+      rw [← Spec.map_comp, ← CommRingCat.ofHom_comp]
+      exact congrArg Spec.map hφ)
+  let fromOver : O → D.relationModelPoints m hm r a := fun g ↦
+    { toRingHom := (Spec.preimage g.left).hom
+      commutes' := by
+        have hw := congrArg Spec.preimage g.w
+        dsimp at hw
+        rw [Spec.preimage_comp, Spec.preimage_map, Spec.preimage_map] at hw
+        have hw' := congrArg CommRingCat.Hom.hom hw
+        intro x
+        exact congrArg (fun f ↦ f x) hw' }
+  have hfrom (g : O) : toOver (fromOver g) = g := by
+    apply Over.OverMorphism.ext
+    exact Spec.map_preimage g.left
+  have hto (φ : D.relationModelPoints m hm r a) : fromOver (toOver φ) = φ := by
+    apply AlgHom.ext
+    intro x
+    change (Spec.preimage (Spec.map (CommRingCat.ofHom φ.toRingHom))).hom x = φ.toRingHom x
+    have hh := congrArg (fun f : CommRingCat.Hom _ _ => f.hom x)
+      (Spec.preimage_map (CommRingCat.ofHom φ.toRingHom))
+    change (Spec.preimage (Spec.map (CommRingCat.ofHom φ.toRingHom))).hom x =
+      (CommRingCat.ofHom φ.toRingHom).hom x
+    exact hh
+  let e : D.relationModelPoints m hm r a ≃ O :=
+    { toFun := toOver, invFun := fromOver, left_inv := hto, right_inv := hfrom }
+  refine ⟨e, ?_⟩
+  intro φ
+  change (toOver φ).left = Spec.map (CommRingCat.ofHom φ.toRingHom)
+  rfl
 
 private theorem affine_polynomial_model (D : FiniteFieldDatum.{u})
     (X₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType X₀.hom]
@@ -258,5 +303,137 @@ private theorem affine_fixed_decomposition
   · have : IsReduced (∐ C) :=
       isReduced_of_isOpenImmersion (sigmaSpec (fun _ : P ↦ CommRingCat.of D.k))
     exact isReduced_of_isOpenImmersion e.inv
+
+/-- The affine Frobenius fixed scheme is the coproduct of the geometric scalar extensions
+of its extension-valued points, and is finite and reduced over the fixed closure. The two
+projection equations specify the summand labelled by a rational point, rather than merely
+asserting an abstract isomorphism of schemes. For every affine open immersion, the last
+square identifies restriction with inclusion of the corresponding rational-point summands.
+The finite-type instances express the standing finite-type convention for `X₀`; affineness
+is the affine case of the node, with no smoothness, reducedness or nonemptiness assumed.
+
+Source: latest blueprint `sec-trace-formula/sk-lem-tf-fixed-points/`
+`det-tf-fixed-point-algebra.md`, consequence and affine-open compatibility
+(blueprint: det-tf-fixed-point-algebra).
+
+Proof: present the affine finite-type model as a quotient of a polynomial algebra by an
+arbitrary ideal. The fixed-point-equations lemma identifies its geometric fixed scheme
+with the quotient by the extended model ideal and the equations `t_i^(q^m) - t_i`.
+Each equation has distinct roots, precisely the specified finite subfield, since its
+derivative is -1. The Chinese remainder theorem in each variable, followed by tensoring,
+gives the first evaluation product. In this product each model relation ideal is zero
+on a tuple satisfying all relations and is the unit ideal otherwise. Quotienting therefore
+retains precisely the extension-valued points and gives the second evaluation product;
+these are exactly the two isomorphisms of `finite_field_relations_evaluation`.
+Taking Spec of this finite product gives the asserted coproduct. Evaluation of pure
+tensors identifies both projections of each summand with the scalar extension of its
+labelled rational point. A finite product of copies of the field is a finite-dimensional
+reduced algebra, proving finiteness and reducedness, including the empty product.
+For an affine open immersion, the restriction part of the fixed-point-equations lemma
+identifies the induced map of the quotient algebras. Its evaluation on each rational
+point is evaluation after composing that point with the immersion. Consequently the
+canonical idempotents restrict to exactly the surviving summands, which proves the
+last square. The equalizer universal property determines its map `f` by its composite
+with the equalizer inclusion.
+
+The Lean proof applies `fixedPointEquations` to a finite polynomial presentation and
+`finite_field_relations_evaluation` to its quotient. The fixed scheme in that statement is
+the chosen Mathlib equalizer. The normalized summand
+projections prove the open-restriction square directly by pullback uniqueness. -/
+theorem det_tf_fixed_point_algebra
+    (D : FiniteFieldDatum.{u}) (m : ℕ) (hm : 1 ≤ m)
+    (X₀ : Over (Spec (CommRingCat.of D.k₀)))
+    [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] [IsAffine X₀.left] :
+    let X := D.geometricFiber X₀
+    let Φ := (End.of (D.relativeFrobenius X₀)) ^ m
+    let F := equalizer Φ (𝟙 X.left)
+    let ι := equalizer.ι Φ (𝟙 X.left)
+    let P := D.extensionPoints X₀ m hm
+    let C := fun _ : P ↦ Spec (CommRingCat.of D.k)
+    Finite P ∧
+      ∃ e : (∐ C) ≅ F,
+        (∀ x : P,
+          Sigma.ι C x ≫ e.hom ≫ ι ≫
+              pullback.fst X₀.hom
+                (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) =
+            Spec.map (CommRingCat.ofHom (D.extensionSubfield m hm).subtype) ≫ x.left) ∧
+        (∀ x : P, Sigma.ι C x ≫ e.hom ≫ ι ≫ X.hom = 𝟙 _) ∧
+        IsFinite (ι ≫ X.hom) ∧ IsReduced F ∧
+        (∀ (U₀ : Over (Spec (CommRingCat.of D.k₀)))
+          [LocallyOfFiniteType U₀.hom] [QuasiCompact U₀.hom] [IsAffine U₀.left]
+          (j : U₀ ⟶ X₀), IsOpenImmersion j.left →
+          let U := D.geometricFiber U₀
+          let Ψ := (End.of (D.relativeFrobenius U₀)) ^ m
+          let G := equalizer Ψ (𝟙 U.left)
+          let κ := equalizer.ι Ψ (𝟙 U.left)
+          let Q := D.extensionPoints U₀ m hm
+          let B := fun _ : Q ↦ Spec (CommRingCat.of D.k)
+          ∃ eU : (∐ B) ≅ G,
+            (∀ y : Q,
+              Sigma.ι B y ≫ eU.hom ≫ κ ≫
+                  pullback.fst U₀.hom
+                    (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) =
+                Spec.map (CommRingCat.ofHom (D.extensionSubfield m hm).subtype) ≫
+                  y.left) ∧
+            (∀ y : Q, Sigma.ι B y ≫ eU.hom ≫ κ ≫ U.hom = 𝟙 _) ∧
+            ∃ f : G ⟶ F,
+              IsOpenImmersion f ∧
+              f ≫ ι = κ ≫
+                ((Over.pullback
+                  (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map j).left ∧
+              eU.hom ≫ f = Sigma.desc (fun y : Q ↦ Sigma.ι C (y ≫ j)) ≫ e.hom) := by
+  classical
+  obtain ⟨hfinite, e, hfst, hbase, hfin, hred⟩ := affine_fixed_decomposition D m hm X₀
+  refine ⟨hfinite, e, hfst, hbase, hfin, hred, ?_⟩
+  intro U₀ _ _ _ j hj
+  have := hj
+  obtain ⟨_, eU, hUfst, hUbase, _, _⟩ := affine_fixed_decomposition D m hm U₀
+  refine ⟨eU, hUfst, hUbase, ?_⟩
+  let C := fun _ : D.extensionPoints X₀ m hm ↦ Spec (CommRingCat.of D.k)
+  let B := fun _ : D.extensionPoints U₀ m hm ↦ Spec (CommRingCat.of D.k)
+  let s : (∐ B) ⟶ ∐ C := Sigma.desc (fun y ↦ Sigma.ι C (y ≫ j))
+  have hinj : Function.Injective (fun y : D.extensionPoints U₀ m hm ↦ y ≫ j) := by
+    intro y z hyz
+    apply Over.OverMorphism.ext
+    exact (cancel_mono j.left).mp (congrArg Over.Hom.left hyz)
+  have hs : IsOpenImmersion s := by
+    apply isOpenImmersion_sigmaDesc B
+    intro y z hyz
+    simpa [Function.onFun_apply, disjoint_iff, TopologicalSpace.Opens.ext_iff] using
+      disjoint_opensRange_sigmaι C (y ≫ j) (z ≫ j) (fun h ↦ hyz (hinj h))
+  let t := ((Over.pullback
+    (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map j).left
+  have htbase : t ≫ (D.geometricFiber X₀).hom = (D.geometricFiber U₀).hom :=
+    Over.w _
+  have htfst : t ≫ pullback.fst X₀.hom
+      (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) =
+      pullback.fst U₀.hom
+        (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) ≫ j.left := by
+    simp [t, Over.pullback_map_left]
+  have hcomm : s ≫ e.hom ≫ equalizer.ι _ _ =
+      eU.hom ≫ equalizer.ι _ _ ≫ t := by
+    apply Sigma.hom_ext
+    intro y
+    apply pullback.hom_ext
+    · simp only [Category.assoc, s, Sigma.ι_desc_assoc, htfst]
+      dsimp only [C, B]
+      rw [hfst, reassoc_of% hUfst]
+      rfl
+    · change (Sigma.ι B y ≫ s ≫ e.hom ≫ equalizer.ι _ _) ≫
+          (D.geometricFiber X₀).hom =
+        (Sigma.ι B y ≫ eU.hom ≫ equalizer.ι _ _ ≫ t) ≫
+          (D.geometricFiber X₀).hom
+      simpa only [Category.assoc, s, Sigma.ι_desc_assoc, htbase, B, C] using
+        (hbase (y ≫ j)).trans (hUbase y).symm
+  let f := eU.inv ≫ s ≫ e.hom
+  refine ⟨f, inferInstance, ?_, ?_⟩
+  · change f ≫ equalizer.ι _ _ = equalizer.ι _ _ ≫ t
+    dsimp only [f]
+    simp only [Category.assoc]
+    rw [hcomm]
+    simp only [Iso.inv_hom_id_assoc]
+  · change eU.hom ≫ f = s ≫ e.hom
+    dsimp only [f]
+    simp only [Iso.hom_inv_id_assoc]
 
 end WeilConjectures
