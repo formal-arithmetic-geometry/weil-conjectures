@@ -171,4 +171,117 @@ theorem clopenProjection_transport [IsIso (openToPush adjJ adjP)]
 
 end OpenToPush
 
+section Alpha
+
+variable {DS DT DW DV DP : Type*} [Category DS] [Category DT] [Category DW] [Category DV]
+  [Category DP]
+  {Ji : DS ⥤ DT} {Pi : DT ⥤ DS} (adjI : Ji ⊣ Pi) {Pp : DT ⥤ DW} {Psnd : DS ⥤ DP}
+  {Jfst : DP ⥤ DW} {Pfst : DW ⥤ DP} (adjFst : Jfst ⊣ Pfst)
+  {Js : DV ⥤ DP} {Ps : DP ⥤ DV} {Rs : DV ⥤ DP} (adjS : Js ⊣ Ps) (adjPs : Ps ⊣ Rs)
+  [IsIso adjS.unit] [IsIso (openToPush adjS adjPs)]
+  {Jk : DV ⥤ DW} {Pr : DS ⥤ DV}
+  (sq : Pp ⋙ Pfst ≅ Pi ⋙ Psnd) [∀ x, IsIso (betaInvApp adjI adjFst sq x)]
+  (c : Js ⋙ Jfst ≅ Jk) (e : Psnd ⋙ Ps ≅ Pr)
+
+/-- The proper/open comparison of a commutative square, in components: the inverse open
+base change, the clopen projection of the lift and the open and inverse-image compositors. -/
+def alphaApp (x : DS) : Pp.obj (Ji.obj x) ⟶ Jk.obj (Pr.obj x) :=
+  inv (betaInvApp adjI adjFst sq x) ≫
+    Jfst.map ((clopenProjection adjS adjPs).app (Psnd.obj x)) ≫
+      c.hom.app (Ps.obj (Psnd.obj x)) ≫ Jk.map (e.hom.app x)
+
+variable {DS' DT' DW' DV' DP' : Type*} [Category DS'] [Category DT'] [Category DW']
+  [Category DV'] [Category DP']
+  {Ji' : DS' ⥤ DT'} {Pi' : DT' ⥤ DS'} (adjI' : Ji' ⊣ Pi') {Pp' : DT' ⥤ DW'}
+  {Psnd' : DS' ⥤ DP'} {Jfst' : DP' ⥤ DW'} {Pfst' : DW' ⥤ DP'} (adjFst' : Jfst' ⊣ Pfst')
+  {Js' : DV' ⥤ DP'} {Ps' : DP' ⥤ DV'} {Rs' : DV' ⥤ DP'} (adjS' : Js' ⊣ Ps')
+  (adjPs' : Ps' ⊣ Rs') [IsIso adjS'.unit] [IsIso (openToPush adjS' adjPs')]
+  {Jk' : DV' ⥤ DW'} {Pr' : DS' ⥤ DV'}
+  (sq' : Pp' ⋙ Pfst' ≅ Pi' ⋙ Psnd') [∀ x, IsIso (betaInvApp adjI' adjFst' sq' x)]
+  (c' : Js' ⋙ Jfst' ≅ Jk') (e' : Psnd' ⋙ Ps' ≅ Pr')
+  {ΦS : DS ⥤ DS'} {ΦT : DT ⥤ DT'} {ΦW : DW ⥤ DW'} {ΦV : DV ⥤ DV'} {ΦP : DP ⥤ DP'}
+  (φi : Pi ⋙ ΦS ≅ ΦT ⋙ Pi') (φp : Pp ⋙ ΦW ≅ ΦT ⋙ Pp')
+  (φsnd : Psnd ⋙ ΦP ≅ ΦS ⋙ Psnd') (φfst : Pfst ⋙ ΦP ≅ ΦW ⋙ Pfst')
+  (φs : Ps ⋙ ΦV ≅ ΦP ⋙ Ps') (φr : Pr ⋙ ΦV ≅ ΦS ⋙ Pr')
+  [IsIso (openComparison adjI adjI' φi)] [IsIso (openComparison adjFst adjFst' φfst)]
+  [IsIso (openComparison adjS adjS' φs)]
+
+/-- The comparison of the composite open extensions, built from the comparisons of the
+two open factors. -/
+def compositeOpenComparison : Jk ⋙ ΦW ≅ ΦV ⋙ Jk' :=
+  (Functor.isoWhiskerRight c ΦW).symm ≪≫ Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft Js (asIso (openComparison adjFst adjFst' φfst)).symm ≪≫
+    (Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerRight (asIso (openComparison adjS adjS' φs)).symm Jfst' ≪≫
+    Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft ΦV c'
+
+omit [IsIso adjS.unit] [IsIso adjS'.unit] in
+theorem compositeOpenComparison_inv_app (y : DV) :
+    (compositeOpenComparison adjFst adjS c adjFst' adjS' c' φfst φs).inv.app y =
+      c'.inv.app (ΦV.obj y) ≫ Jfst'.map ((openComparison adjS adjS' φs).app y) ≫
+        (openComparison adjFst adjFst' φfst).app (Js.obj y) ≫ ΦW.map (c.hom.app y) := by
+  simp [compositeOpenComparison]
+
+/-- The proper/open comparison is transported along comparisons of inverse images that are
+compatible with the base-change square and the inverse-image compositor. -/
+theorem alphaApp_transport
+    (hsq : ∀ x : DT, ΦP.map (sq.inv.app x) ≫ φfst.hom.app (Pp.obj x) ≫
+        Pfst'.map (φp.hom.app x) =
+      φsnd.hom.app (Pi.obj x) ≫ Psnd'.map (φi.hom.app x) ≫ sq'.inv.app (ΦT.obj x))
+    (he : ∀ x : DS, ΦV.map (e.hom.app x) ≫ φr.hom.app x =
+      φs.hom.app (Psnd.obj x) ≫ Ps'.map (φsnd.hom.app x) ≫ e'.hom.app (ΦS.obj x))
+    (x : DS) :
+    ΦW.map (alphaApp adjI adjFst adjS adjPs sq c e x) =
+      φp.hom.app (Ji.obj x) ≫ Pp'.map (inv ((openComparison adjI adjI' φi).app x)) ≫
+        alphaApp adjI' adjFst' adjS' adjPs' sq' c' e' (ΦS.obj x) ≫ Jk'.map (φr.inv.app x) ≫
+          (compositeOpenComparison adjFst adjS c adjFst' adjS' c' φfst φs).inv.app
+            (Pr.obj x) := by
+  have hb := betaInvApp_transport adjI adjFst sq adjI' adjFst' sq' φsnd φi φfst φp hsq x
+  have hb' : ΦW.map (inv (betaInvApp adjI adjFst sq x)) =
+      φp.hom.app (Ji.obj x) ≫ Pp'.map (inv ((openComparison adjI adjI' φi).app x)) ≫
+        inv (betaInvApp adjI' adjFst' sq' (ΦS.obj x)) ≫ Jfst'.map (φsnd.inv.app x) ≫
+          (openComparison adjFst adjFst' φfst).app (Psnd.obj x) := by
+    rw [Functor.map_inv, IsIso.inv_eq_of_hom_inv_id]
+    rw [← cancel_epi ((openComparison adjFst adjFst' φfst).app (Psnd.obj x))]
+    rw [reassoc_of% hb]
+    simp [← Functor.map_comp, ← Functor.map_comp_assoc]
+  have hp := clopenProjection_transport adjS adjPs adjS' adjPs' φs (Psnd.obj x)
+  have he' : Ps'.map (φsnd.inv.app x) ≫ φs.inv.app (Psnd.obj x) ≫ ΦV.map (e.hom.app x) =
+      e'.hom.app (ΦS.obj x) ≫ φr.inv.app x := by
+    rw [← cancel_mono (φr.hom.app x)]
+    simp only [Category.assoc, Iso.inv_hom_id_app, he]
+    simp [← Functor.map_comp, ← Functor.map_comp_assoc]
+  have n1 := ((openComparison adjFst adjFst' φfst).naturality
+    ((clopenProjection adjS adjPs).app (Psnd.obj x))).symm
+  have n2 := (compositeOpenComparison adjFst adjS c adjFst' adjS' c' φfst φs).inv.naturality
+    (e.hom.app x)
+  have n3 := (clopenProjection adjS' adjPs').naturality (φsnd.inv.app x)
+  have n4 := c'.hom.naturality (Ps'.map (φsnd.inv.app x) ≫ φs.inv.app (Psnd.obj x))
+  have hθ := compositeOpenComparison_inv_app adjFst adjS c adjFst' adjS' c' φfst φs
+    (Ps.obj (Psnd.obj x))
+  dsimp only [Functor.comp_obj, Functor.comp_map, Functor.id_obj, Functor.id_map] at n1 n2 n3 n4
+  unfold alphaApp
+  simp only [Functor.map_comp, Category.assoc]
+  rw [hb']
+  simp only [Category.assoc]
+  congr 3
+  have hθ' : Jfst'.map ((openComparison adjS adjS' φs).app (Ps.obj (Psnd.obj x))) ≫
+      (openComparison adjFst adjFst' φfst).app (Js.obj (Ps.obj (Psnd.obj x))) ≫
+        ΦW.map (c.hom.app (Ps.obj (Psnd.obj x))) =
+      c'.hom.app (ΦV.obj (Ps.obj (Psnd.obj x))) ≫
+        (compositeOpenComparison adjFst adjS c adjFst' adjS' c' φfst φs).inv.app
+          (Ps.obj (Psnd.obj x)) := by
+    rw [hθ, Iso.hom_inv_id_app_assoc]
+  erw [reassoc_of% n1, hp]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [reassoc_of% hθ', ← n2]
+  rw [← Jfst'.map_comp_assoc, n3]
+  simp only [Functor.map_comp, Category.assoc]
+  congr 1
+  rw [← Jfst'.map_comp_assoc, ← Js'.map_comp, reassoc_of% n4]
+  congr 1
+  rw [← Jk'.map_comp_assoc, Category.assoc, he', Jk'.map_comp_assoc]
+
+end Alpha
+
 end CategoryTheory.ProperOpenTransport
