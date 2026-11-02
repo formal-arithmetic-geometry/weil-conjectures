@@ -14039,6 +14039,7 @@ public import WeilConjectures.Mathlib.Algebra.Lie.Semisimple.Lemmas
 public import WeilConjectures.Mathlib.Algebra.Lie.Solvable
 public import WeilConjectures.Mathlib.Algebra.Module.LocalizedModule.Basic
 public import WeilConjectures.Mathlib.Algebra.Module.LocalizedModule.Exact
+public import WeilConjectures.Mathlib.Algebra.Module.PID
 public import WeilConjectures.Mathlib.Algebra.Module.Presentation.Tensor
 public import WeilConjectures.Mathlib.Algebra.Module.SpanRankOperations
 public import WeilConjectures.Mathlib.Algebra.Module.StablyFree.Basic
