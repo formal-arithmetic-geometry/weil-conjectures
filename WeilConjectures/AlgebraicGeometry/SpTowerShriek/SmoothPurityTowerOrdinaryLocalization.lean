@@ -19,6 +19,7 @@ Source: Stacks 09AH and 09BM; blueprint operations proof (2c)
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option linter.privateModule false
 set_option synthInstance.maxSize 4096
 
 universe u

@@ -66,6 +66,4 @@ private theorem exact_derived_congr
   subst L'
   rfl
 
-set_option maxHeartbeats 1000000 in
--- The geometry records require many dependent category and instance checks.
 end AlgebraicGeometry.ProEtale.SpTowerShriek

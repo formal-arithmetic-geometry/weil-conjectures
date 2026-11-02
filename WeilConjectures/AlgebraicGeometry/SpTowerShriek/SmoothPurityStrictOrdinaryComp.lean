@@ -40,6 +40,4 @@ namespace AlgebraicGeometry.ProEtale.SpTowerShriek
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-set_option maxHeartbeats 2000000 in
--- Reducing the carriers here passes through two direct images and scalar restriction.
 end AlgebraicGeometry.ProEtale.SpTowerShriek

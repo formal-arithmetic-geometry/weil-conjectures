@@ -81,6 +81,7 @@ The interface is recorded by def-pur-algebra-diagram-pullback-data
 set_option autoImplicit false
 
 attribute [local instance 100000] CategoryTheory.hasSheafCompose_of_preservesLimitsOfSize
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 set_option genSizeOf false
 set_option genCtorIdx false
 set_option genInjectivity false

@@ -32,8 +32,6 @@ attribute [local irreducible] Functor.leftDerivedFunctor Functor.rightDerivedFun
   rightDerivedLowerStarProjectionMap derivedOpenImmersionLowerShriekProjectionIso
   leftDerivedUpperStarCompactificationIso projectionMapOfCompactification
 
-set_option maxHeartbeats 100000 in
--- Normalize the product endpoints before specializing the coefficient ring.
 end CoefficientCoordinates
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
@@ -220,6 +218,4 @@ private meta def coefficientInstanceCongr (cache : IO.Ref (Std.HashMap Lean.Expr
       let pf ← Lean.instantiateMVars (Lean.mkMVar g)
       cache.modify (·.insert t pf)
 
-set_option maxHeartbeats 1500000 in
--- Cached congruence compares dependent functor records and coefficient instances.
 end AlgebraicGeometry.ProEtale.SpTowerShriek

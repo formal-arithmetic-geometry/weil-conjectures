@@ -19,6 +19,7 @@ ordinary open-unit evaluation and termwise localization in SpTowerShriek.Open.
 @[expose] public noncomputable section
 
 set_option autoImplicit false
+set_option linter.privateModule false
 set_option synthInstance.maxSize 4096
 
 attribute [local irreducible] CategoryTheory.Functor.mapDerivedCategory

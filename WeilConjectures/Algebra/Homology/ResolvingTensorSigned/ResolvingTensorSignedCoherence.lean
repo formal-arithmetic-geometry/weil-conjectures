@@ -58,22 +58,6 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{r} C]
   [PreservesFiniteLimits f.L] [PreservesFiniteColimits f.L]
   (L : DerivedCategory (Modules R) ⥤ DerivedCategory (Modules S))
 
-attribute [-instance] CategoryTheory.hasSheafCompose_of_preservesMulticospan in
-attribute [local irreducible] transportedComparison
-
-section
-
-open CategoryTheory.MonoidalCategory
-attribute [local instance 4000] SheafOfModules.monoidalCategory
-  HomologicalComplex.monoidalCategoryStruct HomologicalComplex.monoidalCategory
-
-set_option maxHeartbeats 1600000 in
--- Comparing the two tensor presentations needs additional elaboration heartbeats.
-attribute [-instance] CategoryTheory.hasSheafCompose_of_preservesMulticospan in
-set_option maxHeartbeats 1600000 in
--- Comparing the two tensor presentations needs additional elaboration heartbeats.
-end
-
 variable (k : Comparison.{r, uC, vC, uD, vD} f)
   (epsilon : DerivedCategory.Q ⋙ L ⟶ pull.{r, uC, vC, uD, vD} f ⋙ DerivedCategory.Q)
   [L.CommShift ℤ] [NatTrans.CommShift epsilon ℤ]

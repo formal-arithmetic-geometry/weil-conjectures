@@ -154,6 +154,4 @@ private meta def coefficientInstanceCongr (cache : IO.Ref (Std.HashMap Lean.Expr
       let pf ← Lean.instantiateMVars (Lean.mkMVar g)
       cache.modify (·.insert t pf)
 
-set_option maxHeartbeats 2000000 in
--- Checking the concrete quotient-ring projection endpoints needs additional kernel reductions.
 end AlgebraicGeometry.ProEtale.SpTowerShriek

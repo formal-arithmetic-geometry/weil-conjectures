@@ -150,7 +150,7 @@ private def moduleComparison {X Y : Scheme.{u}} (f : X ⟶ Y) (R : SiteRings.{u}
           SemilinearSections.underlying.{u + 1, u, u + 1} (ProEt.topology X)
             (ProEtaleTensorComparison.inverseRing.{u} f R) :=
     NatIso.ofComponents (fun M ↦ moduleSetsIdentification f M)
-      (fun k ↦ moduleSetsIdentification_naturality f k)
+      (fun k ↦ ProEtaleTensorComparison.moduleSetsIdentification_naturality f k)
   let scal : proEtaleRingModulePullback f R S c ⋙
       SemilinearSections.underlying.{u + 1, u, u + 1} (ProEt.topology X) S ≅
         ProEtaleTensorComparison.inverse.{u} f R ⋙
@@ -206,29 +206,30 @@ private def finiteInverseImage {X Y : Scheme.{u}} (f : X ⟶ Y) (R : SiteRings.{
     moduleZero := ?_
     moduleSMul := ?_ }
   · intro T a b t ht
-    exact transport_binary f eR eR eR
+    exact ProEtaleTensorComparison.transport_binary f eR eR eR
       (fun U x y ↦ @Add.add (R.obj.obj U) inferInstance x y)
       (fun V x y ↦ @Add.add (S.obj.obj V) inferInstance x y)
       (fun i x y ↦ ((S.obj.map i).hom.map_add x y).symm)
       (by intro U x y; rw [hr, hr, hr]; exact (ru U).map_add x y) T a b t ht
   · intro T a b t ht
-    exact transport_binary f eR eR eR
+    exact ProEtaleTensorComparison.transport_binary f eR eR eR
       (fun U x y ↦ @Mul.mul (R.obj.obj U) inferInstance x y)
       (fun V x y ↦ @Mul.mul (S.obj.obj V) inferInstance x y)
       (fun i x y ↦ ((S.obj.map i).hom.map_mul x y).symm)
       (by intro U x y; rw [hr, hr, hr]; exact (ru U).map_mul x y) T a b t ht
   · intro T a ha
-    exact transport_binary f eR eR eR (fun U _ _ ↦ (0 : R.obj.obj U))
+    exact ProEtaleTensorComparison.transport_binary f eR eR eR (fun U _ _ ↦ (0 : R.obj.obj U))
       (fun V _ _ ↦ (0 : S.obj.obj V))
       (fun i _ _ ↦ (S.obj.map i).hom.map_zero.symm)
       (by intro U x y; rw [hr]; exact (ru U).map_zero) T a a a ha
   · intro T a ha
-    exact transport_binary f eR eR eR (fun U _ _ ↦ (1 : R.obj.obj U))
+    exact ProEtaleTensorComparison.transport_binary f eR eR eR (fun U _ _ ↦ (1 : R.obj.obj U))
       (fun V _ _ ↦ (1 : S.obj.obj V))
       (fun i _ _ ↦ (S.obj.map i).hom.map_one.symm)
       (by intro U x y; rw [hr]; exact (ru U).map_one) T a a a ha
   · intro M T a b t ht
-    exact transport_binary f (eM.app M).symm (eM.app M).symm (eM.app M).symm
+    exact ProEtaleTensorComparison.transport_binary f
+      (eM.app M).symm (eM.app M).symm (eM.app M).symm
       (fun U x y ↦ @Add.add (M.val.obj U) inferInstance x y)
       (fun V x y ↦ @Add.add
         (((proEtaleRingModulePullback f R S c).obj M).val.obj V) inferInstance x y)
@@ -240,7 +241,8 @@ private def finiteInverseImage {X Y : Scheme.{u}} (f : X ⟶ Y) (R : SiteRings.{
         exact ((theta ((ProEtaleTensorComparison.inverse.{u} f R).obj M)).inv.val.app
           ((proEtaleBaseChange f).op.obj U)).hom.map_add _ _) T a b t ht
   · intro M T a ha
-    exact transport_binary f (eM.app M).symm (eM.app M).symm (eM.app M).symm
+    exact ProEtaleTensorComparison.transport_binary f
+      (eM.app M).symm (eM.app M).symm (eM.app M).symm
       (fun U _ _ ↦ (0 : M.val.obj U))
       (fun V _ _ ↦ (0 : ((proEtaleRingModulePullback f R S c).obj M).val.obj V))
       (fun i _ _ ↦
@@ -260,7 +262,7 @@ private def finiteInverseImage {X Y : Scheme.{u}} (f : X ⟶ Y) (R : SiteRings.{
         exact ((theta ((ProEtaleTensorComparison.inverse.{u} f R).obj M)).inv.val.app
           ((proEtaleBaseChange f).op.obj U)).hom.map_zero) T a a a ha
   · intro M T a b t ht
-    exact transport_binary f eR (eM.app M).symm (eM.app M).symm
+    exact ProEtaleTensorComparison.transport_binary f eR (eM.app M).symm (eM.app M).symm
       (fun U x y ↦ @SMul.smul (R.obj.obj U) (M.val.obj U) inferInstance x y)
       (fun V x y ↦ @SMul.smul (S.obj.obj V)
         (((proEtaleRingModulePullback f R S c).obj M).val.obj V) inferInstance x y)
@@ -288,7 +290,7 @@ private theorem ringComparison_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
     (AlgebraicGeometry.ProEtale.setPullback f).map (ProEtaleTensorComparison.ringMapSets.{u} a) ≫
         (ringComparison.{u} f R' S' d).hom =
       (ringComparison.{u} f R S c).hom ≫ ProEtaleTensorComparison.ringMapSets.{u} b := by
-  apply inverseImage_map_ext f
+  apply ProEtaleTensorComparison.inverseImage_map_ext f
   intro U r
   let eta := (AlgebraicGeometry.ProEtale.setPullbackAdjunction f).unit
   have ha := congrArg

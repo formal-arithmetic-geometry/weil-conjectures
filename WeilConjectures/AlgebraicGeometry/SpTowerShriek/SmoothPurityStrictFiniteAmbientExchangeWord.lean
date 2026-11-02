@@ -500,6 +500,4 @@ private theorem strictFiniteWitnessTransport (b : Base l E)
   exact (compactSupport_exchange_transport
     (ULift.{u + 1, u} (R l E n)) sq c).2 L N alpha
 
-set_option maxHeartbeats 2000000 in
--- Explicit comparison congruences are checked within this declaration.
 end AlgebraicGeometry.ProEtale.SpTowerShriek

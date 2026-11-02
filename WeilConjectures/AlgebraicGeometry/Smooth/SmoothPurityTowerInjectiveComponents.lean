@@ -67,6 +67,7 @@ map, so both coefficients and transitions are fixed, including for the identity 
 @[expose] public noncomputable section
 
 set_option autoImplicit false
+set_option linter.privateModule false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 2048
@@ -210,7 +211,6 @@ private theorem evaluatedProductRetract.{v, w, v', w'}
       (IsLimit.ofIsoLimit hP (Cone.ext (Iso.refl _) (by intro ⟨n⟩; simp [Fan.proj])))
   exact ⟨(s.map V).trans (Retract.ofIso (supportedProductIso Q hQ r hz))⟩
 
-attribute [local instance] levelPush_additive
 
 private theorem acyclic_of_finite_product_retract.{v, w, v', w'}
     {C : Type w} [Category.{v} C] {D : Type w'} [Category.{v'} D]

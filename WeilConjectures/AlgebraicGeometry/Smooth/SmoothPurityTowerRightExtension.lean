@@ -19,6 +19,7 @@ Index n represents the positive coefficient exponent n+1.
 @[expose] public noncomputable section
 
 set_option autoImplicit false
+set_option linter.privateModule false
 set_option synthInstance.maxSize 2048
 
 -- Elaborate with the existing transport to the full coefficient universe.
