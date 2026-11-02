@@ -101,7 +101,31 @@ with the extension of scalars is not yet formalized.
 
 -/
 
+attribute [local instance 20000]
+  CategoryTheory.Limits.PreservesColimitsOfShape.preservesColimit
+  CategoryTheory.Limits.PreservesColimitsOfSize.preservesColimitsOfShape
+
+set_option maxSynthPendingDepth 0
+
 @[expose] public section
+
+attribute [local instance 2000] CategoryTheory.Sheaf.instHasColimitsOfSize
+  CategoryTheory.Sheaf.instHasColimitsOfShape CategoryTheory.Sheaf.instHasFiniteColimits
+  CategoryTheory.Sheaf.hasLimitsOfSize CategoryTheory.Sheaf.instHasFiniteLimits
+
+attribute [local instance 2000] CategoryTheory.Mod.monoidalCategory
+  AlgebraicGeometry.ProEtale.sheafMonoidalCategory
+
+attribute [local instance 2000] CategoryTheory.Mod.monoidalClosed
+  CategoryTheory.Mod.hasFunctorialFlatResolution
+  AlgebraicGeometry.ProEtale.sheafMonoidalClosed
+  AlgebraicGeometry.ProEtale.hasFunctorialFlatResolution_sheaf
+
+attribute [local irreducible] AlgebraicGeometry.ProEtale.upperStarFromPoint
+  AlgebraicGeometry.ProEtale.upperStarFromPointComp
+  AlgebraicGeometry.ProEtale.monoidal_upperStarFromPoint
+  AlgebraicGeometry.ProEtale.monoidal_pointUpperStar
+  AlgebraicGeometry.ProEtale.oplaxMonoidal_pointUpperStar
 
 universe u
 
@@ -214,11 +238,6 @@ attribute [local instance 2000] CategoryTheory.Mod.monoidalClosed
   AlgebraicGeometry.ProEtale.sheafMonoidalClosed
   AlgebraicGeometry.ProEtale.hasFunctorialFlatResolution_sheaf
 
-attribute [local irreducible] AlgebraicGeometry.ProEtale.upperStarFromPoint
-  AlgebraicGeometry.ProEtale.upperStarFromPointComp
-  AlgebraicGeometry.ProEtale.monoidal_upperStarFromPoint
-  AlgebraicGeometry.ProEtale.monoidal_pointUpperStar
-  AlgebraicGeometry.ProEtale.oplaxMonoidal_pointUpperStar
 
 set_option backward.isDefEq.respectTransparency false
 

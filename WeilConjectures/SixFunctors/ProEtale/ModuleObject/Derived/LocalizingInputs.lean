@@ -7,10 +7,12 @@ module
 
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Localizing
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocalizingBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenLowerShriekLocalizing
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperNoetherianBase
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaPadicAlgCl
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionFormulaPadicIntegers
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperPadicSubfield
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperAmbientIntegral
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriekLocalizingEllAdic
 import WeilConjectures.Tactic.ExactModProofs
@@ -195,6 +197,8 @@ theorem localizingBoundedConstructible_rightDerivedLowerStar_padicIntegersRingOb
   localizingBoundedConstructible_rightDerivedLowerStar_of_properLowerStarHypotheses
     (properLowerStarHypotheses_padicIntegersRingObj ℓ E Y.hom p.left)
 
+omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+  [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom] in
 /-- Blueprint `det-proper-base-change-unbounded-extension`: Extending proper base change from
 `Dctf` to the localizing closure; the case `Λ = 𝒪̲_E` (for which `Dctf = Dbc`): for a cartesian
 square `g' ≫ p = p' ≫ g` with `p` proper, if the base change map `g^*Rp_*K ⟶ Rp'_*g'^*K` is an
@@ -208,8 +212,14 @@ theorem isIso_baseChangeMap_of_localizing_padicIntegersRingObj {p : X ⟶ Y} {g 
     {K : 𝔻[Profinite.padicIntegersRingObj.{u} ℓ E](X.left)}
     (hK : localizingBoundedConstructible (Profinite.padicIntegersRingObj ℓ E) X.left K) :
     IsIso ((baseChangeMap (Profinite.padicIntegersRingObj ℓ E)
-      ((Over.forget _).map_commSq sq.toCommSq)).app K) :=
-  sorry
+      ((Over.forget _).map_commSq sq.toCommSq)).app K) := by
+  have : IsProper p'.left :=
+    MorphismProperty.of_isPullback (P := @IsProper) (sq.map (Over.forget _)) ‹IsProper p.left›
+  have h₁ := (localizingBoundedConstructible_rightDerivedLowerStar_padicIntegersRingObj ℓ E p).2
+  have h₂ := (localizingBoundedConstructible_rightDerivedLowerStar_padicIntegersRingObj ℓ E p').2
+  exact isIso_baseChangeMap_of_localizingBoundedConstructible
+    (Profinite.padicIntegersRingObj ℓ E) ((Over.forget _).map_commSq sq.toCommSq) h₁ h₂
+    (fun K hK ↦ boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ g'.left K hK) h hK
 
 /-- Blueprint `sk-prop-open-coefficients`: Direct image along an open immersion; the case
 `Λ = 𝒪̲_E`: for a quasi-compact open immersion `j : U ⟶ X`, `Rj_*` maps `Dbc(U, 𝒪_E)` into
@@ -247,6 +257,8 @@ theorem boundedConstructible_tensor_continuousMapRingObj
     boundedConstructible (condensedRingObj 𝐄 X.left) (K ⊗ L) :=
   ObjectProperty.prop_tensor hK hL
 
+omit [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom]
+  [IsSeparated Y'.hom] in
 /-- Blueprint `det-thm-sfb-proper-base-change-rational`: Proper direct image, base change and
 projection formula for `E` and `ℚ̄_ℓ`; the case `Λ = E̲`. Let `p : X ⟶ Y` be proper.
 
@@ -276,8 +288,16 @@ theorem properDirectImage_baseChange_projectionFormula_continuousMapRingObj (p :
         IsIso ((baseChangeMap 𝐄 ((Over.forget _).map_commSq sq.toCommSq)).app K)) ∧
     (∀ (K : 𝔻[𝐄](X.left)) (M : 𝔻[𝐄](Y.left)), boundedConstructible (condensedRingObj 𝐄 X.left) K →
       boundedConstructible (condensedRingObj 𝐄 Y.left) M →
-        IsIso (((projectionMap 𝐄 p.left).app K).app M)) :=
-  sorry
+        IsIso (((projectionMap 𝐄 p.left).app K).app M)) := by
+  refine ⟨fun K hK ↦ ?_, fun {g p' g'} sq K hK ↦ ?_, fun K M hK hM ↦ ?_⟩
+  · exact ContinuousMapRingObj.boundedConstructible_rightDerivedLowerStar_obj ℓ E p ⟨K, hK⟩
+  · have : IsNoetherian ((Over.forget (Spec (.of k))).obj Y) := isNoetherian_left Y
+    have : IsNoetherian ((Over.forget (Spec (.of k))).obj Y') := isNoetherian_left Y'
+    have : IsProper ((Over.forget (Spec (.of k))).map p) := ‹IsProper p.left›
+    exact isIso_baseChangeMap_app_padicSubfield_of_isProper ℓ (Y := (Over.forget _).obj Y)
+      (Y' := (Over.forget _).obj Y') Y.hom Y'.hom ((Over.forget _).map_commSq sq.toCommSq)
+      (sq.map (Over.forget _)) E K hK
+  · exact isIso_projectionMap_continuousMapRingObj_of_boundedConstructible ℓ E p K M hK hM
 
 /-- Blueprint `sk-prop-proper-image-localizing`: Proper direct image and extension by zero;
 the case `Λ = E̲` (for which `Dctf = Dbc`). If `p : X ⟶ Y` is proper, `Rp_*` maps
@@ -312,8 +332,20 @@ isomorphism for every `K ∈ Loc(Dbc(X, Λ))`. -/
 theorem isIso_baseChangeMap_of_localizing_continuousMapRingObj {p : X ⟶ Y} {g : Y' ⟶ Y}
     {p' : X' ⟶ Y'} {g' : X' ⟶ X} [IsProper p.left] (sq : IsPullback g' p' p g)
     {K : 𝔻[𝐄](X.left)} (hK : localizingBoundedConstructible 𝐄 X.left K) :
-    IsIso ((baseChangeMap 𝐄 ((Over.forget _).map_commSq sq.toCommSq)).app K) :=
-  sorry
+    IsIso ((baseChangeMap 𝐄 ((Over.forget _).map_commSq sq.toCommSq)).app K) := by
+  have : IsProper p'.left :=
+    MorphismProperty.of_isPullback (P := @IsProper) (sq.map (Over.forget _)) ‹IsProper p.left›
+  have h₁ :=
+    ((localizingBoundedConstructible_lowerStar_lowerShriek_continuousMapRingObj (X' := X) ℓ E).1
+      p).2
+  have h₂ :=
+    ((localizingBoundedConstructible_lowerStar_lowerShriek_continuousMapRingObj (X' := X') ℓ E).1
+      p').2
+  exact isIso_baseChangeMap_of_localizingBoundedConstructible 𝐄
+    ((Over.forget _).map_commSq sq.toCommSq) h₁ h₂
+    (fun K hK ↦ boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ g'.left K hK)
+    (fun K hK ↦ (properDirectImage_baseChange_projectionFormula_continuousMapRingObj ℓ E p).2.1
+      sq K hK) hK
 
 /-- Blueprint `sk-prop-open-coefficients`: Direct image along an open immersion; the case
 `Λ = E̲`: for a quasi-compact open immersion `j : U ⟶ X`, `Rj_*` maps `Dbc(U, Λ)` into
@@ -424,8 +456,19 @@ isomorphism for every `K ∈ Loc(Dbc(X, Λ))`. -/
 theorem isIso_baseChangeMap_of_localizing_padicAlgClRingObj {p : X ⟶ Y} {g : Y' ⟶ Y}
     {p' : X' ⟶ Y'} {g' : X' ⟶ X} [IsProper p.left] (sq : IsPullback g' p' p g)
     {K : 𝔻[𝐐](X.left)} (hK : localizingBoundedConstructible 𝐐 X.left K) :
-    IsIso ((baseChangeMap 𝐐 ((Over.forget _).map_commSq sq.toCommSq)).app K) :=
-  sorry
+    IsIso ((baseChangeMap 𝐐 ((Over.forget _).map_commSq sq.toCommSq)).app K) := by
+  have : IsProper p'.left :=
+    MorphismProperty.of_isPullback (P := @IsProper) (sq.map (Over.forget _)) ‹IsProper p.left›
+  have h₁ :=
+    ((localizingBoundedConstructible_lowerStar_lowerShriek_padicAlgClRingObj (X' := X) ℓ).1 p).2
+  have h₂ :=
+    ((localizingBoundedConstructible_lowerStar_lowerShriek_padicAlgClRingObj (X' := X') ℓ).1
+      p').2
+  exact isIso_baseChangeMap_of_localizingBoundedConstructible 𝐐
+    ((Over.forget _).map_commSq sq.toCommSq) h₁ h₂
+    (fun K hK ↦ boundedConstructible_leftDerivedUpperStar_obj_of_scheme _ g'.left K hK)
+    (fun K hK ↦ (properDirectImage_baseChange_projectionFormula_padicAlgClRingObj ℓ p).2.1
+      sq K hK) hK
 
 /-- Blueprint `sk-prop-open-coefficients`: Direct image along an open immersion; the case
 `Λ = ℚ̲̄_ℓ`: for a quasi-compact open immersion `j : U ⟶ X`, `Rj_*` maps `Dbc(U, Λ)` into

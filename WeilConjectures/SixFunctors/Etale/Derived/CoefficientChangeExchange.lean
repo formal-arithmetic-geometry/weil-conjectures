@@ -9,6 +9,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeOpenImm
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeUnit
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeUnitBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeUnitRefinement
+public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeLowerStar
 
 /-!
 # Coefficient comparisons and the compact-support exchange map
@@ -184,6 +185,32 @@ end DerivedLift
 
 variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] (ρ : Λ →+* Λ')
 
+/-- The derived extension by zero along an open immersion carries derived base changes to
+derived base changes: if `η : K ⟶ Res K'` exhibits `K'` as `K ⊗ᴸ_Λ Λ'`, then `Dj_! η` followed
+by the comparison `Dj_! Res ≅ Res Dj_!` exhibits `Dj_! K'` as `Dj_! K ⊗ᴸ_Λ Λ'`. The extension by
+zero is left adjoint to the exact restriction `j^*`, which commutes with restriction of
+scalars. -/
+lemma isDerivedBaseChange_openImmersionLowerShriek_map_comp {U X : Scheme.{u}} (j : U ⟶ X)
+    [IsOpenImmersion j]
+    {K : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    {K' : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ'))}
+    {η : K ⟶ (Sheaf.derivedRestrictScalars U.smallEtaleTopology ρ).obj K'}
+    (hη : Sheaf.IsDerivedBaseChange η) :
+    Sheaf.IsDerivedBaseChange (D((j)_!open[ModuleCat.{u + 1} Λ]).map η ≫
+      (derivedRestrictScalarsCompOpenImmersionLowerShriekIso ρ j).hom.app K') := by
+  have (Γ : Type (u + 1)) [CommRing Γ] :
+      (openImmersionRestriction (ModuleCat.{u + 1} Γ) j).IsLeftAdjoint :=
+    (openImmersionRestrictionLowerStarAdjunction (ModuleCat.{u + 1} Γ) j).isLeftAdjoint
+  let adj (Γ : Type (u + 1)) [CommRing Γ] :=
+    (openImmersionLowerShriekAdjunction (ModuleCat.{u + 1} Γ) j).mapDerivedCategoryAdjunction
+  have hβ := Adjunction.mapDerivedCategoryAdjunction_mate
+      (openImmersionLowerShriekAdjunction (ModuleCat.{u + 1} Λ') j)
+      (openImmersionLowerShriekAdjunction (ModuleCat.{u + 1} Λ) j)
+      (Iso.refl _) (openImmersionLowerShriekRestrictScalarsIso ρ j)
+      (fun G ↦ (openImmersionLowerShriekAdjunction_unit_app_comp_openImmersionRestrictionMap
+        ρ j G).trans (Category.comp_id _).symm)
+  exact fun N ↦ Adjunction.bijective_comp_map_of_unit_comp_map (adj Λ') (adj Λ) _ _ hβ η hη N
+
 section Compactification
 
 variable [Finite Λ] {X Y : Scheme.{u}} {f : X ⟶ Y} [CompactSpace Y]
@@ -205,6 +232,26 @@ lemma derivedRestrictScalarsCompRightDerivedLowerShriekIso_eq (f : X ⟶ Y)
     derivedRestrictScalarsCompRightDerivedLowerShriekIso ρ f =
       compactificationRestrictScalarsIso ρ (HasCompactification.compactification f) :=
   rfl
+
+/-- The derived lower shriek along a compactification carries derived base changes to derived
+base changes, through the coefficient comparison
+`AlgebraicGeometry.Etale.compactificationRestrictScalarsIso`: so do the extension by zero
+(`AlgebraicGeometry.Etale.isDerivedBaseChange_openImmersionLowerShriek_map_comp`) and the proper
+direct image (`AlgebraicGeometry.Etale.isDerivedBaseChange_rightDerivedLowerStar_map_comp`). -/
+lemma isDerivedBaseChange_rightDerivedLowerShriekOfCompactification_map_comp
+    (c : Compactification f)
+    {K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+    {K' : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ'))}
+    {η : K ⟶ (Sheaf.derivedRestrictScalars X.smallEtaleTopology ρ).obj K'}
+    (hη : Sheaf.IsDerivedBaseChange η) :
+    Sheaf.IsDerivedBaseChange ((Rf_!(c)[ModuleCat.{u + 1} Λ]).map η ≫
+      (compactificationRestrictScalarsIso ρ c).hom.app K') := by
+  have := c.isProper
+  have := c.isOpenImmersion
+  rw [compactificationRestrictScalarsIso, pasteTwoSquaresIso_hom_app, Functor.comp_map,
+    ← Functor.map_comp_assoc]
+  exact isDerivedBaseChange_rightDerivedLowerStar_map_comp ρ c.g _ _
+    (isDerivedBaseChange_openImmersionLowerShriek_map_comp ρ c.i hη)
 
 end Compactification
 
@@ -376,6 +423,9 @@ lemma isCompactPullbackCompatible_compactlySupportedGlobalSectionsRestrictScalar
     (derivedRestrictScalarsCompRightDerivedGlobalSectionsIso_hom_app_globalSectionsTransport ρ h)
     (derivedRestrictScalarsCompRightDerivedLowerShriekIso_baseChangeMap ρ aX sq) K'
 
+-- The proof uses neither the surjectivity of `ρ` nor the finiteness of `Λ'`.
+set_option linter.unusedVariables false in
+set_option linter.unusedSectionVars false in
 /-- Blueprint `lem-fix-compact-support-coefficient-change` (subsection
 `sk-def-sfb-coefficient-comparisons`): for a surjection `ρ : Λ →+* Λ'` of finite rings whose
 exponent is invertible on the separably closed field `k` and a separated finite-type
@@ -388,8 +438,14 @@ theorem isCoefficientChange_compactlySupportedGlobalSectionsRestrictScalarsIso [
     (hρ : Function.Surjective ρ) :
     IsCoefficientChange ρ (compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) aX)
       (compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ') aX)
-      (compactlySupportedGlobalSectionsRestrictScalarsIso ρ aX) :=
-  sorry
+      (compactlySupportedGlobalSectionsRestrictScalarsIso ρ aX) := by
+  intro K K' η _ hη
+  unfold compactlySupportedGlobalSections
+  rw [compactlySupportedGlobalSectionsRestrictScalarsIso, pasteTwoSquaresIso_hom_app,
+    Functor.comp_map, ← Functor.map_comp_assoc,
+    derivedRestrictScalarsCompRightDerivedLowerShriekIso_eq]
+  exact isDerivedBaseChange_rightDerivedGlobalSections_map_comp ρ
+    (isDerivedBaseChange_rightDerivedLowerShriekOfCompactification_map_comp ρ _ hη)
 
 variable [LocallyOfFiniteType aX] [QuasiCompact aX] [IsSeparated aX]
 

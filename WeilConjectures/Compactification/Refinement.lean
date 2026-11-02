@@ -9,6 +9,9 @@ public import WeilConjectures.Compactification.CommonRefinement
 public import WeilConjectures.Compactification.Comp
 public import WeilConjectures.Compactification.Dense
 public import WeilConjectures.Compactification.Over
+import WeilConjectures.Compactification.CommonRefinement
+import WeilConjectures.Compactification.Comp
+import WeilConjectures.Compactification.Dense
 
 /-!
 
