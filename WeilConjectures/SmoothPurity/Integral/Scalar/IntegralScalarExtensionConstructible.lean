@@ -9,6 +9,7 @@ public import WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarExtensi
 public import WeilConjectures.SmoothPurity.Integral.IntegralConstructibleLinear
 
 import WeilConjectures.TraceFormula.Supporting.FiniteFreeCompletedScalarComparison
+import WeilConjectures.SmoothPurity.Integral.Scalar.IntegralOrdinaryDerivedScalarModel
 import WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarFiniteLevelBounds
 import WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarTowerEffectivity
 import WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
@@ -480,6 +481,39 @@ private theorem cocone_degree_ext
       rw [Preadditive.comp_add, Preadditive.comp_add, reassoc_of% hf, reassoc_of% hs]
     _ = g.f i := by rw [hi, Category.comp_id]
 
+/-- The ordinary-to-completed scalar map, normalized by the completed chain comparison and
+invertible on derived-complete objects.
+Source: Bhatt--Scholze, Proposition 3.5.1
+(blueprint: lem-weil-integral-scalar-extension-constructible). -/
+private theorem ordinaryScalarCompletion_exists :
+    ∃ χ : integralOrdinaryDerivedScalar l E L ι Y ⟶ integralScalarExtension l E L ι Y,
+      (∀ P : (integralOperationsGoodComplex l E Y).FullSubcategory,
+        χ.app (DerivedCategory.Q.obj P.obj) ≫
+            (integralScalarExtensionComparison l E L ι Y).hom.app P =
+          (integralOrdinaryScalar l E L ι Y).mapDerivedCategoryFactors.hom.app P.obj ≫
+            DerivedCategory.Q.map
+              ((NatIso.mapHomologicalComplex (ordinaryScalarModelIso l E L ι Y)
+                (.up ℤ)).hom.app P.obj ≫
+                (completedScalarChainComparison.{u, u} l E L ι Y).app P.obj)) ∧
+      (∀ K, IsDerivedCompleteUnrestricted l E Y K → IsIso (χ.app K)) := by
+  obtain ⟨e, he⟩ := integralOrdinaryDerivedScalar_completedModel l E L ι Y
+    (ordinaryScalarModelIso l E L ι Y)
+  let c : completedDerivedScalarExtension.{u, u} l E L ι Y ⟶
+      integralScalarExtension l E L ι Y := completedScalarComparison.{u, u} l E L ι Y
+  have hc (P : (integralOperationsGoodComplex l E Y).FullSubcategory) :
+      c.app (DerivedCategory.Q.obj P.obj) ≫
+          (integralScalarExtensionComparison l E L ι Y).hom.app P =
+        completedScalarCounit.{u, u} l E L ι Y P.obj ≫
+          DerivedCategory.Q.map ((completedScalarChainComparison.{u, u} l E L ι Y).app P.obj) :=
+    (completedScalarComparison_existsUnique.{u, u} l E L ι Y).exists.choose_spec P
+  refine ⟨e.hom ≫ c, fun P ↦ ?_, fun K hK ↦ ?_⟩
+  · rw [NatTrans.comp_app, Category.assoc, hc P, ← Category.assoc, he P.obj,
+      Category.assoc, Functor.map_comp]
+  · have : IsIso (c.app K) :=
+      ((finiteFreeCompletedScalarComparison.{u, u} l E L ι Y).2.1 K hK).1
+    rw [NatTrans.comp_app]
+    infer_instance
+
 /-- Finite free completed extension preserves bounded constructibility and completeness.
 Source: Bhatt--Scholze, Proposition 3.5.1
 (blueprint: lem-weil-integral-scalar-extension-constructible).
@@ -494,7 +528,11 @@ theorem integralOrdinaryDerivedScalar_constructible
     (hK : boundedConstructibleDerivedCompleteIntegral D l hl E Y K) :
     boundedConstructibleDerivedCompleteIntegral D l hl L Y
       ((integralOrdinaryDerivedScalar l E L ι Y).obj K) := by
-  sorry
+  obtain ⟨χ, -, hχ⟩ := ordinaryScalarCompletion_exists l E L ι Y
+  have : IsIso (χ.app K) :=
+    hχ K (isDerivedCompleteUnrestricted_of_boundedConstructible l E Y D hl K hK)
+  exact (boundedConstructibleDerivedCompleteIntegral D l hl L Y).prop_of_iso
+    (asIso (χ.app K)).symm (integralScalarExtension_constructible D l hl E L ι Y ⟨K, hK⟩)
 
 /-- Restriction of finite free completed tensor to the integral full subcategories.
 On complete objects its ordinary exact tensor model computes completed derived tensor.
@@ -678,7 +716,50 @@ theorem integralConstructibleScalarComparison_existsUnique :
             (integralScalarExtensionComparison l E L ι Y).hom.app P =
           (integralOrdinaryScalar l E L ι Y).mapDerivedCategoryFactors.hom.app P.obj ≫
             DerivedCategory.Q.map ((integralScalarCompletionChain l E L ι Y).app P.obj) := by
-  sorry
+  classical
+  obtain ⟨χ, hχn, hχ⟩ := ordinaryScalarCompletion_exists l E L ι Y
+  have hiso (K : boundedConstructibleDerivedCompleteIntegralCategory D l hl E Y) :
+      IsIso (χ.app K.obj) :=
+    hχ K.obj
+      (isDerivedCompleteUnrestricted_of_boundedConstructible l E Y D hl K.obj K.property)
+  refine existsUnique_of_exists_of_unique
+    ⟨NatIso.ofComponents (fun K ↦ ObjectProperty.isoMk _ (asIso (χ.app K.obj))) ?_, ?_⟩ ?_
+  · intro K K' f
+    apply ObjectProperty.hom_ext
+    exact χ.naturality f.hom
+  · intro P hP
+    change χ.app (DerivedCategory.Q.obj P.obj) ≫ _ = _
+    rw [hχn P, integralScalarCompletionChain_model]
+    rfl
+  · intro c₁ c₂ h₁ h₂
+    apply Iso.ext
+    apply NatTrans.ext
+    funext K
+    let : EssentiallySmall.{u + 1} Y.ProEt := essentiallySmallSelf.{0} _
+    let X := (DerivedCategory.Q (C := integralTowerModules l E Y)).objPreimage K.obj
+    let eX := (DerivedCategory.Q (C := integralTowerModules l E Y)).objObjPreimageIso K.obj
+    obtain ⟨V, f, hV, hf, hq, _⟩ :=
+      CochainComplex.exists_isKFlatResolutionIndependentCoefficients
+        (R := completedIntegralCommRingSheafUnrestricted l E Y) X
+    have hgood : integralOperationsGoodComplex l E Y V := by
+      refine ⟨hV, fun i ↦ ?_⟩
+      exact (exactFunctor _ _).prop_of_iso
+        (SheafOfModules.siteSheafTensorRightIso
+          (completedIntegralCommRingSheafUnrestricted l E Y) (V.X i)).symm (hf i)
+    let P : (integralOperationsGoodComplex l E Y).FullSubcategory := ⟨V, hgood⟩
+    let : QuasiIso f := hq
+    let e : DerivedCategory.Q.obj P.obj ≅ K.obj := asIso (DerivedCategory.Q.map f) ≪≫ eX
+    have hP := (boundedConstructibleDerivedCompleteIntegral D l hl E Y).prop_of_iso
+      e.symm K.property
+    let K' : boundedConstructibleDerivedCompleteIntegralCategory D l hl E Y :=
+      ⟨DerivedCategory.Q.obj P.obj, hP⟩
+    let e' : K' ≅ K := ObjectProperty.isoMk _ e
+    have hK' : c₁.hom.app K' = c₂.hom.app K' := by
+      apply ObjectProperty.hom_ext
+      exact (cancel_mono ((integralScalarExtensionComparison l E L ι Y).hom.app P)).mp
+        ((h₁ P hP).trans (h₂ P hP).symm)
+    rw [← cancel_epi ((integralConstructibleScalarExtension D l hl E L ι Y).map e'.hom),
+      c₁.hom.naturality, c₂.hom.naturality, hK']
 
 /-- The finite-free comparison with the canonical quotient completion normalization.
 Source: Bhatt--Scholze, Proposition 3.5.1

@@ -16,6 +16,8 @@ import WeilConjectures.SmoothPurity.Pur.PurNormalizedReconstructionAdjunctionCal
 import WeilConjectures.SmoothPurity.Supporting.Coefficient.ConstantCoefficientObjectsConstructible
 import WeilConjectures.SmoothPurity.Sf.SfDerivedCompleteLegacyComparison
 import WeilConjectures.AlgebraicGeometry.ProEtale.Bounded.ProEtaleBoundedConstructibleTriangulated
+import WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarTensorCoherentReduction
+import WeilConjectures.SmoothPurity.Supporting.Scalar.SystemScalarTensorUnit
 
 /-! # Normalized higher pullback tensor constraints
 
@@ -706,6 +708,219 @@ def pullbackTensorRationalRightUnitor (W : Scheme.{u})
     [hW : ∀ w : W, Invertible (l : W.residueField w)]
     (M : sfRationalConstructibleCategory l E W) :=
   ((@pullbackTensorRationalRightUnitor_existsUnique l _ E _ _ _ W hW) M).exists.choose
+
+-- Conjugating both inputs of a reduced tensor comparison respects its square.
+private theorem scalarConjugate_tensor_comparison
+    {C D S T : Type*} [Category* C] [Category* D] [Category* S] [Category* T]
+    (R : C ⥤ S) (Q : D ⥤ T) (F : C ⥤ D) (H : S ⥤ T)
+    (U : C × C ⥤ C) (V : D × D ⥤ D) (J : S × S ⥤ S) (I : T × T ⥤ T)
+    (a : U ⋙ R ≅ R.prod R ⋙ J) (b : V ⋙ Q ≅ Q.prod Q ⋙ I)
+    (p : F ⋙ Q ≅ R ⋙ H) (ν : J ⋙ H ≅ H.prod H ⋙ I)
+    (μ : ∀ M N, F.obj (U.obj (M, N)) ≅ V.obj (F.obj M, F.obj N))
+    (hμ : ∀ M N, Q.map (μ M N).hom ≫ b.hom.app (F.obj M, F.obj N) ≫
+      I.map (Prod.mkHom (p.hom.app M) (p.hom.app N)) =
+        p.hom.app (U.obj (M, N)) ≫ H.map (a.hom.app (M, N)) ≫
+          ν.hom.app (R.obj M, R.obj N))
+    (M N : C) (A B : D) (K L : S)
+    (d : F.obj M ≅ A) (e : F.obj N ≅ B)
+    (x : Q.obj A ≅ H.obj K) (y : Q.obj B ≅ H.obj L)
+    (r : R.obj M ≅ K) (s : R.obj N ≅ L)
+    (hd : Q.map d.hom ≫ x.hom = p.hom.app M ≫ H.map r.hom)
+    (he : Q.map e.hom ≫ y.hom = p.hom.app N ≫ H.map s.hom) :
+    Q.map ((μ M N).hom ≫ V.map (Prod.mkHom d.hom e.hom)) ≫
+        b.hom.app (A, B) ≫ I.map (Prod.mkHom x.hom y.hom) =
+      p.hom.app (U.obj (M, N)) ≫
+        H.map (a.hom.app (M, N) ≫ J.map (Prod.mkHom r.hom s.hom)) ≫
+        ν.hom.app (K, L) := by
+  have hb := b.hom.naturality (Prod.mkHom d.hom e.hom)
+  change Q.map (V.map (Prod.mkHom d.hom e.hom)) ≫ b.hom.app (A, B) =
+    b.hom.app (F.obj M, F.obj N) ≫
+      I.map (Prod.mkHom (Q.map d.hom) (Q.map e.hom)) at hb
+  rw [Q.map_comp]
+  simp only [Category.assoc]
+  rw [reassoc_of% hb, ← I.map_comp]
+  simp only [prod_comp, hd, he]
+  rw [← map_pair_comp I (p.hom.app M) (p.hom.app N)
+    (H.map r.hom) (H.map s.hom)]
+  rw [reassoc_of% (hμ M N)]
+  have hn := ν.hom.naturality (Prod.mkHom r.hom s.hom)
+  change H.map (J.map (Prod.mkHom r.hom s.hom)) ≫ ν.hom.app (K, L) =
+    ν.hom.app (R.obj M, R.obj N) ≫
+      I.map (Prod.mkHom (H.map r.hom) (H.map s.hom)) at hn
+  rw [← hn, H.map_comp]
+  simp only [Category.assoc]
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+/-- Integral scalar extension preserves the coefficient-ring unit, compatibly with both
+integral unitors and the prescribed integral scalar tensor comparison.
+Source: Stacks 03EL, 07A4, 0941; blueprint coefficient conventions
+(blueprint: lem-pur-derived-pullback-tensor-constraints). Proof: apply coherent reduction.
+The coherent scalar tensor normalization identifies the reduced tensor comparison with the
+whole-system scalar tensorator, whose unit equations are `systemScalarTensorUnit`. Insert the
+unit reductions and use full faithfulness of coherent reduction. -/
+theorem integralScalarTensorUnit_exists
+    (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]
+    (ι : E →ₐ[Padic l] L) (W : Scheme.{u})
+    [hW : ∀ w : W, Invertible (l : W.residueField w)] :
+    ∃ ε : (sfConstructibleIntegralScalarExtension 0 l (Nat.Prime.ne_zero (Fact.out : l.Prime))
+        E L ι W).obj (pullbackTensorIntegralUnit l E W) ≅ pullbackTensorIntegralUnit l L W,
+      ∀ M : sfIntegralConstructibleCategory l E W,
+        ((integralTensorScalarComparison l E L ι W (pullbackTensorIntegralUnit l E W) M).hom ≫
+          (constructibleIntegralTensor l L W).map (Prod.mkHom ε.hom (𝟙 _)) ≫
+          (pullbackTensorIntegralLeftUnitor l L W
+            ((sfConstructibleIntegralScalarExtension 0 l
+              (Nat.Prime.ne_zero (Fact.out : l.Prime)) E L ι W).obj M)).hom =
+        (sfConstructibleIntegralScalarExtension 0 l (Nat.Prime.ne_zero (Fact.out : l.Prime))
+          E L ι W).map (pullbackTensorIntegralLeftUnitor l E W M).hom) ∧
+        ((integralTensorScalarComparison l E L ι W M (pullbackTensorIntegralUnit l E W)).hom ≫
+          (constructibleIntegralTensor l L W).map (Prod.mkHom (𝟙 _) ε.hom) ≫
+          (pullbackTensorIntegralRightUnitor l L W
+            ((sfConstructibleIntegralScalarExtension 0 l
+              (Nat.Prime.ne_zero (Fact.out : l.Prime)) E L ι W).obj M)).hom =
+        (sfConstructibleIntegralScalarExtension 0 l (Nat.Prime.ne_zero (Fact.out : l.Prime))
+          E L ι W).map (pullbackTensorIntegralRightUnitor l E W M).hom) := by
+  have := (coherentReduction_fullyFaithful l L W).1
+  have := (coherentReduction_fullyFaithful l L W).2
+  let R := coherentReduction l E W
+  let Q := coherentReduction l L W
+  let F := sfConstructibleIntegralScalarExtension 0 l
+    (Nat.Prime.ne_zero (Fact.out : l.Prime)) E L ι W
+  let H := integralComparisonDerivedSequenceScalar l E L ι W
+  let U := constructibleIntegralTensor l E W
+  let V := constructibleIntegralTensor l L W
+  let J := (pullbackTensorCalculus l E W).systemClosed.tensor
+  let I := (pullbackTensorCalculus l L W).systemClosed.tensor
+  let a := reduction_tensor l E W
+  let b := reduction_tensor l L W
+  obtain ⟨p₀, hp₀⟩ := integralScalarTensorCoherentReduction l E L ι W
+  let p : F ⋙ Q ≅ R ⋙ H := p₀
+  let ν := ScalarExtensionTower.derivedSigma l E L ι W
+    (pullbackTensorCalculus l E W) (pullbackTensorCalculus l L W)
+  let μ := integralTensorScalarComparison l E L ι W
+  have hμ : ∀ M N, Q.map (μ M N).hom ≫ b.hom.app (F.obj M, F.obj N) ≫
+      I.map (Prod.mkHom (p.hom.app M) (p.hom.app N)) =
+        p.hom.app (U.obj (M, N)) ≫ H.map (a.hom.app (M, N)) ≫
+          ν.hom.app (R.obj M, R.obj N) := fun M N ↦ hp₀ M N
+  let UE := pullbackTensorIntegralUnit l E W
+  let UL := pullbackTensorIntegralUnit l L W
+  let eE := pullbackTensorIntegralUnitReduction l E W
+  let eL := pullbackTensorIntegralUnitReduction l L W
+  obtain ⟨εS, hS⟩ := systemScalarTensorUnit l E L ι W
+  let ε : F.obj UE ≅ UL := Q.preimageIso
+    (p.app UE ≪≫ H.mapIso eE ≪≫ εS ≪≫ eL.symm)
+  have hε : Q.map ε.hom ≫ (eL ≪≫ εS.symm).hom =
+      p.hom.app UE ≫ H.map eE.hom := by
+    dsimp only [ε, Functor.preimageIso]
+    rw [Functor.map_preimage]
+    simp only [Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom, Category.assoc,
+      Iso.inv_hom_id_assoc, Iso.hom_inv_id, Category.comp_id, Iso.app_hom]
+  refine ⟨ε, fun M ↦ ?_⟩
+  constructor
+  · let a₀ := a.app (UE, M) ≪≫ J.mapIso (Iso.prod eE (Iso.refl (R.obj M)))
+    let b₀ := b.app (UL, F.obj M) ≪≫
+      I.mapIso (Iso.prod (eL ≪≫ εS.symm) (p.app M))
+    let δ := I.mapIso (Iso.prod εS (Iso.refl (H.obj (R.obj M)))) ≪≫
+      (pullbackTensorCalculus l L W).systemClosed.monoidal.leftUnitor _
+    have hs := reduced_square R Q F H p a₀ (Iso.refl (R.obj M)) b₀ (p.app M)
+      (pullbackTensorIntegralLeftUnitor l E W M)
+      (pullbackTensorIntegralLeftUnitor l L W (F.obj M))
+      ((pullbackTensorCalculus l E W).systemClosed.monoidal.leftUnitor (R.obj M)) δ
+      (μ UE M ≪≫ V.mapIso (Iso.prod ε (Iso.refl (F.obj M))))
+      (Iso.refl (F.obj M)) (ν.app (_, R.obj M)) (Iso.refl (H.obj (R.obj M)))
+    have h := hs ?_ ?_ ?_ ?_ ?_
+    · simpa only [Iso.trans_hom, Functor.mapIso_hom, Iso.prod_hom, Iso.refl_hom,
+        Category.comp_id, Category.assoc] using h.symm
+    · simpa only [a₀, a, reduction_tensor, R, coherentReduction, UE, eE, J,
+        pullbackTensorIntegralLeftUnitor, Iso.trans_hom, Functor.mapIso_hom,
+        Iso.prod_hom, Iso.refl_hom, Iso.app_hom, Category.comp_id, Category.assoc,
+        Functor.comp_obj, Functor.comp_map, ObjectProperty.ι_obj, ObjectProperty.ι_map,
+        NatIso.ofComponents_hom_app] using
+        (pullbackTensorIntegralLeftUnitor_existsUnique l E W M).exists.choose_spec
+    · have hu : Q.map (pullbackTensorIntegralLeftUnitor l L W (F.obj M)).hom =
+          b.hom.app (UL, F.obj M) ≫ I.map (Prod.mkHom eL.hom (𝟙 _)) ≫
+            ((pullbackTensorCalculus l L W).systemClosed.monoidal.leftUnitor
+              (Q.obj (F.obj M))).hom :=
+        (pullbackTensorIntegralLeftUnitor_existsUnique l L W (F.obj M)).exists.choose_spec
+      let := (pullbackTensorCalculus l L W).systemClosed.monoidal
+      have hn : I.map (Prod.mkHom (𝟙 _) (p.hom.app M)) ≫
+          ((pullbackTensorCalculus l L W).systemClosed.monoidal.leftUnitor
+            (H.obj (R.obj M))).hom =
+          ((pullbackTensorCalculus l L W).systemClosed.monoidal.leftUnitor
+            (Q.obj (F.obj M))).hom ≫ p.hom.app M := by
+        simpa only [I, Q, R, F, H, Functor.comp_obj, MonoidalCategory.tensor_obj,
+          CoefficientClosedStructure.tensor, MonoidalCategory.tensor_map,
+          MonoidalCategory.id_tensorHom] using
+          MonoidalCategory.leftUnitor_naturality (p.hom.app M)
+      dsimp only [b₀, δ, Iso.trans_hom, Functor.mapIso_hom, Iso.prod_hom,
+        Iso.refl_hom, Iso.app_hom, Iso.symm_hom]
+      rw [hu]
+      simp only [Category.assoc]
+      rw [← hn]
+      simp only [← I.map_comp_assoc, prod_comp, Category.assoc, Category.id_comp,
+        Category.comp_id, Iso.inv_hom_id, H, R, Functor.comp_obj]
+    · simpa only [a₀, b₀, Iso.trans_hom, Functor.mapIso_hom, Iso.prod_hom,
+        Iso.refl_hom, Iso.app_hom, Category.assoc] using
+        scalarConjugate_tensor_comparison R Q F H U V J I a b p ν μ hμ
+          UE M UL (F.obj M) _ (R.obj M)
+          ε (Iso.refl _) (eL ≪≫ εS.symm) (p.app M) eE (Iso.refl _) hε
+          (by simp)
+    · simp
+    · simpa only [δ, H, I, J, ν, Functor.comp_obj,
+        Iso.trans_hom, Functor.mapIso_hom, Iso.prod_hom,
+        Iso.refl_hom, Iso.app_hom, Category.comp_id, Category.assoc] using (hS (R.obj M)).1.symm
+  · let a₀ := a.app (M, UE) ≪≫ J.mapIso (Iso.prod (Iso.refl (R.obj M)) eE)
+    let b₀ := b.app (F.obj M, UL) ≪≫
+      I.mapIso (Iso.prod (p.app M) (eL ≪≫ εS.symm))
+    let δ := I.mapIso (Iso.prod (Iso.refl (H.obj (R.obj M))) εS) ≪≫
+      (pullbackTensorCalculus l L W).systemClosed.monoidal.rightUnitor _
+    have hs := reduced_square R Q F H p a₀ (Iso.refl (R.obj M)) b₀ (p.app M)
+      (pullbackTensorIntegralRightUnitor l E W M)
+      (pullbackTensorIntegralRightUnitor l L W (F.obj M))
+      ((pullbackTensorCalculus l E W).systemClosed.monoidal.rightUnitor (R.obj M)) δ
+      (μ M UE ≪≫ V.mapIso (Iso.prod (Iso.refl (F.obj M)) ε))
+      (Iso.refl (F.obj M)) (ν.app (R.obj M, _)) (Iso.refl (H.obj (R.obj M)))
+    have h := hs ?_ ?_ ?_ ?_ ?_
+    · simpa only [Iso.trans_hom, Functor.mapIso_hom, Iso.prod_hom, Iso.refl_hom,
+        Category.comp_id, Category.assoc] using h.symm
+    · simpa only [a₀, a, reduction_tensor, R, coherentReduction, UE, eE, J,
+        pullbackTensorIntegralRightUnitor, Iso.trans_hom, Functor.mapIso_hom,
+        Iso.prod_hom, Iso.refl_hom, Iso.app_hom, Category.comp_id, Category.assoc,
+        Functor.comp_obj, Functor.comp_map, ObjectProperty.ι_obj, ObjectProperty.ι_map,
+        NatIso.ofComponents_hom_app] using
+        (pullbackTensorIntegralRightUnitor_existsUnique l E W M).exists.choose_spec
+    · have hu : Q.map (pullbackTensorIntegralRightUnitor l L W (F.obj M)).hom =
+          b.hom.app (F.obj M, UL) ≫ I.map (Prod.mkHom (𝟙 _) eL.hom) ≫
+            ((pullbackTensorCalculus l L W).systemClosed.monoidal.rightUnitor
+              (Q.obj (F.obj M))).hom :=
+        (pullbackTensorIntegralRightUnitor_existsUnique l L W (F.obj M)).exists.choose_spec
+      let := (pullbackTensorCalculus l L W).systemClosed.monoidal
+      have hn : I.map (Prod.mkHom (p.hom.app M) (𝟙 _)) ≫
+          ((pullbackTensorCalculus l L W).systemClosed.monoidal.rightUnitor
+            (H.obj (R.obj M))).hom =
+          ((pullbackTensorCalculus l L W).systemClosed.monoidal.rightUnitor
+            (Q.obj (F.obj M))).hom ≫ p.hom.app M := by
+        simpa only [I, Q, R, F, H, Functor.comp_obj, MonoidalCategory.tensor_obj,
+          CoefficientClosedStructure.tensor, MonoidalCategory.tensor_map,
+          MonoidalCategory.tensorHom_id] using
+          MonoidalCategory.rightUnitor_naturality (p.hom.app M)
+      dsimp only [b₀, δ, Iso.trans_hom, Functor.mapIso_hom, Iso.prod_hom,
+        Iso.refl_hom, Iso.app_hom, Iso.symm_hom]
+      rw [hu]
+      simp only [Category.assoc]
+      rw [← hn]
+      simp only [← I.map_comp_assoc, prod_comp, Category.assoc, Category.id_comp,
+        Category.comp_id, Iso.inv_hom_id, H, R, Functor.comp_obj]
+    · simpa only [a₀, b₀, Iso.trans_hom, Functor.mapIso_hom, Iso.prod_hom,
+        Iso.refl_hom, Iso.app_hom, Category.assoc] using
+        scalarConjugate_tensor_comparison R Q F H U V J I a b p ν μ hμ
+          M UE (F.obj M) UL (R.obj M) _
+          (Iso.refl _) ε (p.app M) (eL ≪≫ εS.symm) (Iso.refl _) eE
+          (by simp) hε
+    · simp
+    · simpa only [δ, H, I, J, ν, Functor.comp_obj,
+        Iso.trans_hom, Functor.mapIso_hom, Iso.prod_hom,
+        Iso.refl_hom, Iso.app_hom, Category.comp_id, Category.assoc] using (hS (R.obj M)).2.symm
 
 attribute [local irreducible] pullbackTensorIntegralUnit pullbackTensorRationalUnit
   pullbackTensorIntegralLeftUnitor pullbackTensorIntegralRightUnitor
