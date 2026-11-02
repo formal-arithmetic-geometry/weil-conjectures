@@ -6,6 +6,10 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.OrderedExchange.OrderedExchangeCoefficientData
+import all WeilConjectures.AlgebraicGeometry.Strict.Tower.StrictTowerExchangeMateNormalization
+import all WeilConjectures.AlgebraicGeometry.OrderedExchange.ProEtaleConstantReductionModels
+import all WeilConjectures.AlgebraicGeometry.Stratum.StratumCompletionUnitRestriction
+import WeilConjectures.AlgebraicGeometry.Completed.CompletedReductionUnit
 
 /-! # strictCoefficientEquations -/
 
@@ -20,6 +24,288 @@ namespace AlgebraicGeometry.Scheme.OrderedExchange
 variable {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 variable {X' X Y' Y : Scheme.{t}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
   {f : X ⟶ Y} {g : Y' ⟶ Y}
+
+section OrdinaryPull
+
+/-- The ordinary constant augmentation followed by `ordinaryRho` is the restricted completed
+quotient unit, at every level. Source: Stacks 099M
+(blueprint: def-weil-pbc-ordered-coefficient-comparison-data). -/
+theorem ordinaryAugmentation_ordinaryRho (T : Scheme.{t})
+    (N : reductionModules T (d.completedRing T)) (n : ℕ) :
+    ((ordinaryAugmentation d T).app ((reductionRestrict T (exchangeScalar d T)).obj N)).app
+        (op n) ≫ ((ordinaryRho d T).hom.app N).app (op n) =
+      (reductionRestrict T (exchangeScalar d T)).map
+        (((completedReductionModuleUnit d T).app N).app (op n)) := by
+  ext U x
+  change (((ordinaryRho d T).hom.app N).app (op n)).val.app U
+      ((((ordinaryAugmentation d T).app
+        ((reductionRestrict T (exchangeScalar d T)).obj N)).app (op n)).val.app U x) =
+    (((completedReductionModuleUnit d T).app N).app (op n)).val.app U x
+  have h1 : ((((ordinaryAugmentation d T).app
+      ((reductionRestrict T (exchangeScalar d T)).obj N)).app (op n)).val.app U x) =
+      reductionTensorSection T (quotient d T n)
+        ((reductionRestrict T (exchangeScalar d T)).obj N) U 1 x :=
+    (ordinaryAugmentation_existsUnique d T).exists.choose_spec _ n U x
+  have h2 := (completedReductionModuleUnit_exists d T).exists.choose_spec N n U x
+  rw [h1]
+  exact ((ordinaryRho_existsUnique d T).exists.choose_spec N n U 1 x).trans h2.symm
+
+theorem ordinaryAugmentation_eq_unit (T : Scheme.{t})
+    (L : reductionModules T (exchangeConstantRing T A)) (n : ℕ) :
+    ((ordinaryAugmentation d T).app L).app (op n) =
+      (proEtaleRingExtensionAdjunction (quotient d T n)).unit.app L := by
+  ext W x
+  have h1 : (((ordinaryAugmentation d T).app L).app (op n)).val.app W x =
+      reductionTensorSection T (quotient d T n) L W 1 x :=
+    (ordinaryAugmentation_existsUnique d T).exists.choose_spec L n W x
+  rw [h1]
+  exact ((pbcScalarAdjunction_exists (quotient d T n)).exists.choose_spec L W x).symm
+
+/-- The ordinary constant reduction/pullback comparison preserves the ordinary augmentation.
+Source: Stacks 099M, 0D6D (blueprint: lem-sp-completion-mate-comparison). -/
+theorem ordinaryAugmentation_ordinaryReductionPullIso {U V : Scheme.{t}} (u : U ⟶ V)
+    (L : reductionModules V (exchangeConstantRing V A)) (n : ℕ) :
+    (proEtaleRingModulePullback u (exchangeConstantRing V A) (exchangeConstantRing U A)
+        (exchangeConstantIso u A)).map (((ordinaryAugmentation d V).app L).app (op n)) ≫
+      ((ordinaryReductionPullIso d u).hom.app L).app (op n) =
+    ((ordinaryAugmentation d U).app ((proEtaleRingModulePullback u (exchangeConstantRing V A)
+        (exchangeConstantRing U A) (exchangeConstantIso u A)).obj L)).app (op n) := by
+  rw [ordinaryAugmentation_eq_unit, ordinaryAugmentation_eq_unit]
+  exact levelPullIso_unit d u n L
+
+/-- The ordinary core of the compatibility of `rho` with pullback, at one tower level.
+Source: Stacks 099M, 0D6D (blueprint: def-weil-pbc-ordered-coefficient-comparison-data). -/
+theorem ordinaryRho_pull {U V : Scheme.{t}} (u : U ⟶ V)
+    (M : reductionModules V (d.completedRing V)) (n : ℕ) :
+    (reductionRestrict U (exchangeScalar d U)).map
+        (((stratumModuleReductionIso d u).hom.app M).app (op n)) ≫
+      ((ordinaryRho d U).inv.app ((stratumModulePull d u).obj M)).app (op n) ≫
+      ((reductionModule d U).map ((exchangeOrdinaryResPull d u).hom.app M)).app (op n) =
+    (exchangeOrdinaryResPull d u).hom.app
+        (((completedReductionModuleTowerFunctor V d).obj M).obj (op n)) ≫
+      (proEtaleRingModulePullback u (exchangeConstantRing V A) (exchangeConstantRing U A)
+        (exchangeConstantIso u A)).map (((ordinaryRho d V).inv.app M).app (op n)) ≫
+      ((ordinaryReductionPullIso d u).hom.app
+        ((reductionRestrict V (exchangeScalar d V)).obj M)).app (op n) := by
+  have hε : Epi ((reductionRestrict U (exchangeScalar d U)).map
+      ((stratumModulePull d u).map (((completedReductionModuleUnit d V).app M).app (op n)))) := by
+    have := stratumModuleUnit_epi d V M n
+    infer_instance
+  apply (cancel_epi ((reductionRestrict U (exchangeScalar d U)).map
+    ((stratumModulePull d u).map (((completedReductionModuleUnit d V).app M).app (op n))))).1
+  have hs := congrArg (fun k ↦ k.app (op n))
+    ((stratumModuleReductionIso_exists d u).exists.choose_spec M)
+  dsimp only [NatTrans.comp_app] at hs
+  have hc : ((d.constantPullbackIso u).hom.app M).app (op n) = 𝟙 _ := rfl
+  erw [hc, Category.id_comp] at hs
+  have hρU := ordinaryAugmentation_ordinaryRho d U ((stratumModulePull d u).obj M) n
+  have hρV := ordinaryAugmentation_ordinaryRho d V M n
+  have hρU' : (reductionRestrict U (exchangeScalar d U)).map
+      (((completedReductionModuleUnit d U).app ((stratumModulePull d u).obj M)).app (op n)) ≫
+      ((ordinaryRho d U).inv.app ((stratumModulePull d u).obj M)).app (op n) =
+      ((ordinaryAugmentation d U).app ((reductionRestrict U (exchangeScalar d U)).obj
+        ((stratumModulePull d u).obj M))).app (op n) := by
+    rw [← hρU, Category.assoc, Iso.hom_inv_id_app_app]
+    erw [Category.comp_id]
+  have hρV' : (reductionRestrict V (exchangeScalar d V)).map
+      (((completedReductionModuleUnit d V).app M).app (op n)) ≫
+      ((ordinaryRho d V).inv.app M).app (op n) =
+      ((ordinaryAugmentation d V).app ((reductionRestrict V (exchangeScalar d V)).obj M)).app
+        (op n) := by
+    rw [← hρV, Category.assoc, Iso.hom_inv_id_app_app]
+    erw [Category.comp_id]
+  have hA := congrArg (fun k ↦ k.app (op n))
+    ((ordinaryAugmentation d U).naturality ((exchangeOrdinaryResPull d u).hom.app M))
+  dsimp only [NatTrans.comp_app] at hA
+  have hE := (exchangeOrdinaryResPull d u).hom.naturality
+    (((completedReductionModuleUnit d V).app M).app (op n))
+  dsimp only [Functor.comp_map] at hE
+  have hO := ordinaryAugmentation_ordinaryReductionPullIso d u
+    ((reductionRestrict V (exchangeScalar d V)).obj M) n
+  rw [← Functor.map_comp_assoc]
+  erw [hs]
+  rw [reassoc_of% hρU']
+  erw [← hA, reassoc_of% hE]
+  rw [← Functor.map_comp_assoc]
+  erw [hρV', hO]
+  rfl
+
+end OrdinaryPull
+
+/-- Restriction of the strict reduction comparison `rho` is compatible with pullback.
+Source: Stacks 099M, 0D6D (blueprint: def-weil-pbc-ordered-coefficient-comparison-data). -/
+theorem rho_reductionTowerPullbackIso {U V : Scheme.{t}} (u : U ⟶ V) (M : d.derived V) :
+    (exchangeTowerRes d U).map ((d.reductionTowerPullbackIso u).hom.app M) ≫
+        (rho d U).hom.app ((d.pull u).obj M) ≫
+        (reduction d U).map ((alpha d u).hom.app M) =
+      (exchangeResPull d u).hom.app ((completedReductionTower V d).obj M) ≫
+        (exchangeConstantPull (A := A) u).map ((rho d V).hom.app M) ≫
+        (reductionPullIso d u).hom.app ((res d V).obj M) := by
+  sorry
+
+/-- The adjunct of a whiskered mate: transposing `s.app M ≫ H.map t` under the second
+adjunction is `G` applied to the transpose of `t`, followed by the mate. -/
+private theorem mate_homEquiv
+    {A' B' C' D' : Type*} [Category A'] [Category B'] [Category C'] [Category D']
+    {L : A' ⥤ B'} {R : B' ⥤ A'} {L' : C' ⥤ D'} {R' : D' ⥤ C'}
+    {G : A' ⥤ C'} {H : B' ⥤ D'}
+    (adj : L ⊣ R) (adj' : L' ⊣ R') (s : TwoSquare G L L' H)
+    (M : A') (N : B') (t : L.obj M ⟶ N) :
+    adj'.homEquiv _ _ (s.app M ≫ H.map t) =
+      G.map (adj.homEquiv M N t) ≫ (mateEquiv adj adj' s).app N := by
+  simp only [Adjunction.homEquiv_unit, Functor.map_comp]
+  have hu := unit_mateEquiv adj adj' s M
+  dsimp only [Functor.id_obj] at hu
+  rw [← Category.assoc, ← hu, Category.assoc]
+  have hn := (mateEquiv adj adj' s).natTrans.naturality t
+  dsimp only [Functor.comp_map] at hn
+  rw [← hn, ← Category.assoc, ← G.map_comp]
+
+/-- The restriction/direct-image comparison of strict towers is the mate of the
+restriction/pullback comparison, in adjunct form.
+Source: Stacks 0D6D, 0D6E (blueprint: lem-weil-pbc-strict-tower-exchange-mate-normalization). -/
+theorem exchangeResPush_homEquiv {U V : Scheme.{t}} (u : U ⟶ V)
+    (Z : DerivedCategory (d.towers V)) (W : DerivedCategory (d.towers U))
+    (x : (d.towerPull u).obj Z ⟶ W) :
+    (exchangeTowerAdjunction u (exchangeConstantRing V A) (exchangeConstantRing U A)
+        (exchangeConstantIso u A)).homEquiv _ _
+        ((exchangeResPull d u).inv.app Z ≫ (exchangeTowerRes d U).map x) =
+      (exchangeTowerRes d V).map ((d.towerAdjunction u).homEquiv Z W x) ≫
+        (exchangeResPush d u).hom.app W := by
+  have heq := exactDerivedMate_eq (d.towerModuleAdjunction u)
+    (exchangeTowerModuleAdjunction u (exchangeConstantRing V A)
+      (exchangeConstantRing U A) (exchangeConstantIso u A))
+    (exchangeModuleResPull d u).symm (exchangeModuleResPush d u)
+    (exchangeModuleResPull_mate d u) (exchangeResPush d u)
+    (exchangeResPush_existsUnique d u).choose_spec.1
+  rw [heq, exactDerivedMate]
+  have hm := mate_homEquiv (d.towerAdjunction u)
+    (exchangeTowerAdjunction u (exchangeConstantRing V A)
+      (exchangeConstantRing U A) (exchangeConstantIso u A))
+    (TwoSquare.mk _ _ _ _
+      (Functor.mapDerivedCategorySquareIso (exchangeModuleResPull d u).symm).hom) Z W x
+  have hs : (Functor.mapDerivedCategorySquareIso (exchangeModuleResPull d u).symm).hom =
+      (exchangeResPull d u).inv := by
+    simp only [Functor.mapDerivedCategorySquareIso, exchangeResPull, Iso.trans_hom,
+      Iso.trans_inv, Iso.symm_hom, Iso.symm_inv, Category.assoc,
+      Functor.mapDerivedCategoryNatIso_symm]
+  rw [hs] at hm ⊢
+  exact hm
+
+/-- Restriction of the integral derived counit is the constant derived counit, conjugated by
+`alpha` and `chi`. Source: Stacks 0D6D, 0D6E
+(blueprint: lem-weil-pbc-ring-sheaf-change-adjunction). -/
+theorem res_counit {U V : Scheme.{t}} (u : U ⟶ V) (K : d.derived U) :
+    (res d U).map ((proEtaleRingDerivedAdjunction u (d.completedRing V) (d.completedRing U)
+        (d.integralRingIso u)).counit.app K) =
+      (alpha d u).hom.app ((d.push u).obj K) ≫ (pull (A := A) u).map ((chi d u).hom.app K) ≫
+        (proEtaleRingDerivedAdjunction u (exchangeConstantRing V A) (exchangeConstantRing U A)
+          (exchangeConstantIso u A)).counit.app ((res d U).obj K) := by
+  let aS := proEtaleRingDerivedAdjunction u (d.completedRing V) (d.completedRing U)
+    (d.integralRingIso u)
+  let aR := proEtaleRingDerivedAdjunction u (exchangeConstantRing V A)
+    (exchangeConstantRing U A) (exchangeConstantIso u A)
+  have h := (proEtaleRingSheafChangeAdjunction u (exchangeConstantRing V A) (d.completedRing V)
+    (exchangeConstantRing U A) (d.completedRing U) (exchangeScalar d V) (exchangeScalar d U)
+    (exchangeConstantIso u A) (d.integralRingIso u) (exchangeScalar_comm d u)).2.2
+      ((d.push u).obj K) K (aS.counit.app K)
+  have h1 : aS.homEquiv ((d.push u).obj K) K (aS.counit.app K) = 𝟙 _ := by
+    rw [Adjunction.homEquiv_unit]
+    exact aS.right_triangle_components K
+  erw [h1] at h
+  erw [CategoryTheory.Functor.map_id, Category.id_comp] at h
+  have h2 := congrArg (aR.homEquiv _ _).symm h
+  rw [Equiv.symm_apply_apply, Adjunction.homEquiv_counit] at h2
+  have h3 : (alpha d u).inv.app ((d.push u).obj K) ≫ (res d U).map (aS.counit.app K) =
+      (pull (A := A) u).map ((chi d u).hom.app K) ≫ aR.counit.app ((res d U).obj K) := h2
+  calc (res d U).map (aS.counit.app K)
+      = (alpha d u).hom.app ((d.push u).obj K) ≫
+          ((alpha d u).inv.app ((d.push u).obj K) ≫ (res d U).map (aS.counit.app K)) := by
+        rw [Iso.hom_inv_id_app_assoc]
+    _ = _ := by rw [h3]
+
+/-- Restriction of the strict reduction comparison `rho` is compatible with the strict
+projection formula maps. Source: Stacks 099M, 0D6E
+(blueprint: def-weil-pbc-ordered-coefficient-comparison-data). -/
+theorem rho_towerProjection {U V : Scheme.{t}} (u : U ⟶ V) (K : d.derived U) :
+    (exchangeTowerRes d V).map (d.towerProjection u K) ≫
+        (exchangeResPush d u).hom.app ((completedReductionTower U d).obj K) ≫
+        (exchangeConstantPush (A := A) u).map ((rho d U).hom.app K) =
+      (rho d V).hom.app ((d.push u).obj K) ≫
+        (reduction d V).map ((chi d u).hom.app K) ≫
+        projection d u ((res d U).obj K) := by
+  have hP := rho_reductionTowerPullbackIso d u ((d.push u).obj K)
+  have hc := res_counit d u K
+  have hres := exchangeResPush_homEquiv d u
+    ((completedReductionTower V d).obj ((d.push u).obj K)) ((completedReductionTower U d).obj K)
+    ((d.reductionTowerPullbackIso u).hom.app ((d.push u).obj K) ≫
+      (completedReductionTower U d).map ((proEtaleRingDerivedAdjunction u (d.completedRing V)
+        (d.completedRing U) (d.integralRingIso u)).counit.app K))
+  have hn := (rho d U).hom.naturality ((proEtaleRingDerivedAdjunction u (d.completedRing V)
+    (d.completedRing U) (d.integralRingIso u)).counit.app K)
+  have hR := (reductionPullIso d u).hom.naturality ((chi d u).hom.app K)
+  dsimp only [Functor.comp_map, Functor.comp_obj] at hn hR
+  have hP' : (exchangeResPull d u).inv.app ((completedReductionTower V d).obj ((d.push u).obj K)) ≫
+      (exchangeTowerRes d U).map ((d.reductionTowerPullbackIso u).hom.app ((d.push u).obj K)) ≫
+      (rho d U).hom.app ((d.pull u).obj ((d.push u).obj K)) ≫
+      (reduction d U).map ((alpha d u).hom.app ((d.push u).obj K)) =
+    (exchangeConstantPull (A := A) u).map ((rho d V).hom.app ((d.push u).obj K)) ≫
+      (reductionPullIso d u).hom.app ((res d V).obj ((d.push u).obj K)) := by
+    rw [hP, Iso.inv_hom_id_app_assoc]
+  unfold AdicCoefficientDatum.towerProjection projection
+  rw [← reassoc_of% hres, ← Adjunction.homEquiv_naturality_right]
+  erw [← Adjunction.homEquiv_naturality_left, ← Adjunction.homEquiv_naturality_left]
+  apply congrArg
+  simp only [Functor.map_comp, Category.assoc]
+  erw [hn]
+  rw [hc]
+  simp only [Functor.map_comp]
+  rw [reassoc_of% hP']
+  erw [reassoc_of% hR]
+
+/-- The second strict coefficient equation: restriction of the strict realization `H`
+followed by `beta` is `rhoM` followed by the constant `H`.
+Source: Stacks 099M, 0D6D, 0D6E
+(blueprint: lem-weil-pbc-ordered-strict-coefficient-equations). -/
+theorem exchangeRealizationH_beta (K : d.derived X) :
+    (exchangeTowerRes d Y').map (exchangeRealizationH (f := f) (g := g) d K).hom ≫
+        (beta (f := f) (g := g) d K).hom =
+      (rhoM (f := f) (g := g) d K).hom ≫ (H (f := f) (g := g) d ((res d X).obj K)).hom := by
+  let M := (d.push f).obj K
+  have hP := rho_reductionTowerPullbackIso d g M
+  have hQ := rho_towerProjection d f K
+  have hP' : (exchangeResPull d g).hom.app ((completedReductionTower Y d).obj M) ≫
+      (exchangeConstantPull (A := A) g).map ((rho d Y).hom.app M) =
+    (exchangeTowerRes d Y').map ((d.reductionTowerPullbackIso g).hom.app M) ≫
+      (rho d Y').hom.app ((d.pull g).obj M) ≫
+      (reduction d Y').map ((alpha d g).hom.app M) ≫
+      (reductionPullIso d g).inv.app ((res d Y).obj M) := by
+    rw [reassoc_of% hP, Iso.hom_inv_id_app]
+    erw [Category.comp_id]
+  have hN := (exchangeResPull d g).hom.naturality (d.towerProjection f K)
+  have hR := (reductionPullIso d g).inv.naturality ((chi d f).hom.app K)
+  dsimp only [Functor.comp_map, Functor.comp_obj] at hN hR
+  simp only [exchangeRealizationH, beta, rhoM, H, exchangeCornerB, Iso.trans_hom, Iso.symm_hom,
+    Iso.app_hom, Iso.app_inv, Functor.mapIso_hom, asIso_hom, NatTrans.comp_app,
+    Functor.associator_hom_app, Functor.associator_inv_app, Functor.isoWhiskerLeft_hom,
+    Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Iso.symm_inv, Functor.map_comp, Category.id_comp, Category.comp_id, Category.assoc]
+  rw [reassoc_of% hN]
+  rw [← Functor.map_comp, ← Functor.map_comp, hQ]
+  simp only [Functor.map_comp]
+  rw [reassoc_of% hP', ← Functor.map_comp_assoc, Iso.inv_hom_id_app]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp]
+  rw [reassoc_of% hR]
+
+/-- The third strict coefficient equation: restriction of the strict exchange `towerV'`
+is the constant strict tower mate, conjugated by `beta` and `delta`.
+Source: Stacks 099M, 0E48 (blueprint: lem-weil-pbc-ordered-strict-coefficient-equations). -/
+theorem towerV'_delta (sq : ChosenCartesianSquare g' f' f g) (K : d.derived X) :
+    (exchangeTowerRes d Y').map (d.towerV' sq K) ≫ (delta (f' := f') (g' := g') d K).hom =
+      (beta (f := f) (g := g) d K).hom ≫
+        (exchangeConstantSquare (A := A) sq).exchangeTowerMate.app
+          ((reduction d X).obj ((res d X).obj K)) := by
+  sorry
 
 /-- strictCoefficientEquations: the indicated part of the ordered comparison argument.
 Source: blueprint completed-exchange-coherence, second proof paragraph;
@@ -54,6 +340,13 @@ theorem strictCoefficientEquations (sq : ChosenCartesianSquare g' f' f g) :
           (delta (f' := f') (g' := g') d K).hom =
         (beta (f := f) (g := g) d K).hom ≫
           (exchangeConstantSquare (A := A) sq).exchangeTowerMate.app
-            ((reduction d X).obj ((res d X).obj K))) := by sorry
+            ((reduction d X).obj ((res d X).obj K))) := by
+  intro K _
+  refine ⟨?_, exchangeRealizationH_beta d K, towerV'_delta d sq K⟩
+  simp only [AdicCoefficientDatum.towerV', AdicCoefficientDatum.towerV,
+    exchangeRealizationH, exchangeRealizationHPrime, AdicCoefficientDatum.towerH,
+    AdicCoefficientDatum.towerH', Iso.trans_inv, Iso.trans_hom, Iso.symm_inv, Iso.app_hom,
+    Category.assoc]
+  rfl
 
 end AlgebraicGeometry.Scheme.OrderedExchange
