@@ -201,13 +201,13 @@ Proof: the source uniformizer maps to a unit times a positive power of the targe
 uniformizer, so their powers are cofinal and completeness for the target uniformizer is
 completeness for the image of the source uniformizer. Restriction is exact, preserves
 products, and detects acyclicity; it carries the local Koszul completion criterion for
-that image to the source ring (`restrictScalars_locallyDerivedComplete_iff`).
-Not yet formalized: that lemma is stated for a `SmallCategory` site with coefficients in
-the same universe, whereas `W.ProEt` has `Category.{u}` on `Type (u + 1)`, and it is
-phrased with `IsLocallyDerivedRingedIdealComplete`, not with the Roos predicate
-`IsSfDerivedComplete` used here. A proof needs (a) a small-model transfer of that lemma to
-`W.ProEt`, (b) the comparison of `IsSfDerivedComplete` with the local ideal criterion for
-the principal ideals of the two uniformizers, and (c) the unit-power cofinality step. -/
+that image to the source ring.
+Formally: rewrite completeness by the principal local criterion (`scalarSfLocalIff`).
+Completeness for the target uniformizer gives local completeness for the image of the
+source uniformizer (`scalarUniformizer_dvd`). By `IntegralPrincipalCone.localCriterion`
+this is invertibility of the principal-cone completion unit for multiplication by that
+image on a representative. Restriction carries this unit to the unit for multiplication
+by the source uniformizer (`scalarPrincipalMap`), and exactness preserves invertibility. -/
 private theorem pbcScalarModelRestrictionComplete
     (M : DerivedCategory (WeilConjectures.scalarReductionSource.{u, u} l F W))
     (hM : WeilConjectures.IsSfDerivedComplete l F W M) :
@@ -224,7 +224,11 @@ private theorem pbcScalarModelRestrictionComplete
   have hσ' : ∀ {U V : W.ProEtᵒᵖ} (g : U ⟶ V),
       (WeilConjectures.completedIntegralCoefficientSheafUnrestricted l F W).obj.map g (σ' U) =
         σ' V := by
-    sorry
+    intro U V g
+    have h1 := ConcreteCategory.congr_hom (φ'.hom.naturality g) (σE U)
+    have h2 := WeilConjectures.integralScalar_natural l E W g
+    change _ = ConcreteCategory.hom (φ'.hom.app V) (σE V)
+    exact h1.symm.trans (congrArg (ConcreteCategory.hom (φ'.hom.app V)) h2)
   have hloc : WeilConjectures.IntegralPrincipalCone.locallyComplete l F W σ' M := by
     intro U s hs
     apply hM U s
@@ -234,13 +238,40 @@ private theorem pbcScalarModelRestrictionComplete
     obtain ⟨d, hd⟩ := scalarUniformizer_dvd l E F i W (op V)
     refine ⟨d * c, ?_⟩
     rw [hc]
-    show σ' (op V) * c = _
+    change σ' (op V) * c = _
     rw [show σ' (op V) = _ from hd, mul_assoc]
   let Q := DerivedCategory.Q.objPreimage M
   let e : DerivedCategory.Q.obj Q ≅ M := DerivedCategory.Q.objObjPreimageIso M
   obtain ⟨μ, hμ⟩ : ∃ μ : End Q, ∀ (q : ℤ) (U : W.ProEtᵒᵖ) (x : (Q.X q).val.obj U),
       (μ.f q).val.app U x = σ' U • x := by
-    sorry
+    let μ : Q ⟶ Q :=
+      { f := fun q ↦
+          { val :=
+              { app := fun U ↦ ModuleCat.ofHom
+                  { toFun := fun x ↦ σ' U • x
+                    map_add' := fun x y ↦ smul_add _ x y
+                    map_smul' := fun a x ↦ by
+                      let : CommRing
+                          ((WeilConjectures.IntegralOnSlice.rings l F W none).obj.obj U) :=
+                        inferInstanceAs
+                          (CommRing ((WeilConjectures.IntegralOnSlice.ring l F W none).obj.obj U))
+                      let z : (WeilConjectures.IntegralOnSlice.rings l F W none).obj.obj U := σ' U
+                      change z • (a • x) = a • (z • x)
+                      rw [← mul_smul, ← mul_smul, mul_comm z a] }
+                naturality := by
+                  intro U V g
+                  ext x
+                  change σ' V • (Q.X q).val.map g x = (Q.X q).val.map g (σ' U • x)
+                  rw [PresheafOfModules.map_smul]
+                  erw [hσ' g] } }
+        comm' := by
+          intro a b _hab
+          apply SheafOfModules.hom_ext
+          apply PresheafOfModules.hom_ext
+          intro U
+          ext x
+          exact ((Q.d a b).val.app U).hom.map_smul (σ' U) x }
+    exact ⟨μ, fun q U x ↦ rfl⟩
   have hF := (WeilConjectures.IntegralPrincipalCone.localCriterion l F W σ' hσ' Q μ hμ M e).2.mp
     hloc
   have hu : IsIso (DerivedCategory.Q.map (CochainComplex.PrincipalCone.unit μ)) :=
