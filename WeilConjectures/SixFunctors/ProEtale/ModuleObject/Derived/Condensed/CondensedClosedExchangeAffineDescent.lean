@@ -43,6 +43,4 @@ attribute [local irreducible] upperStar lowerStar upperStarFromPoint
   ClosedTestDerivedExchangeModel.pull ClosedTestDerivedExchangeModel.sectionsOver
   ClosedTestDerivedExchangeModel.exchange
 
-attribute [local irreducible] exactSingleIso
-
 end AlgebraicGeometry.ProEtale.CondensedRing
