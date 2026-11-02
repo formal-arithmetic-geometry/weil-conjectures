@@ -49,7 +49,7 @@ structure LeftEq (P Q : CochainComplex (FiniteModules A X) ℤ)
             (ModuleCat.{u + 1} A) j).hom.app M).app N) ≫
         r.hom.app ((finiteTensor A X).obj (M, N)) ≫
         o.opens.jStar.map (e.tensorX.hom.app (M, N))) ≫ suffix A gU j' j g sq o e P Q hp hq =
-      transport A gU j' j g sq o e P Q ≫ DerivedCategory.Q.map
+      restrictionTransport% ≫ DerivedCategory.Q.map
         ((finiteComplexRealization e.realizeU).map
           (inv (((Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans (.up ℤ)
             (ProEtale.upperStar (ModuleCat.{u + 1} A) j)).app P).app Q)) ≫

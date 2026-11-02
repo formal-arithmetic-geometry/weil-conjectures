@@ -169,4 +169,70 @@ theorem representative_square_of_models
   simp only [Category.assoc]
   rw [hl, hrhs, htot]
 
+
+/-- The left half of `representative_square_of_models`: the left side followed by the
+cancellable suffix `k` is the transport prefix `tr` followed by the localized chain-level
+left side. Source: Stacks 07A4 and 0GL1
+(blueprint: lem-sf-finite-restriction-representative-square). -/
+theorem representative_square_left
+    {QX : KX ⥤ DX} {QU : KU ⥤ DU} {QR : KR ⥤ DR} {QS : KS ⥤ DS}
+    {fc : KX ⥤ KU} {xc : KX ⥤ KR} {uc : KU ⥤ KS} {lc : KR ⥤ KS}
+    {totR : KR × KR ⥤ KR}
+    {EXd : DX ⥤ DR} {EUd : DU ⥤ DS} {Fd FL : DX ⥤ DU} {J : DR ⥤ DS}
+    {TX : DX × DX ⥤ DX} {TU : DU × DU ⥤ DU} {TR : DR × DR ⥤ DR}
+    (x : QX ⋙ EXd ≅ xc ⋙ QR) (y : QU ⋙ EUd ≅ uc ⋙ QS) (a : QX ⋙ Fd ≅ fc ⋙ QU)
+    (b : QR ⋙ J ≅ lc ⋙ QS) (LIso : FL ≅ Fd) (oP : FL ⋙ EUd ≅ EXd ⋙ J)
+    (tXd : TX ⋙ EXd ≅ EXd.prod EXd ⋙ TR) (v : fc ⋙ uc ⟶ xc ⋙ lc)
+    (P Q TPQ : KX) (TUc : KU)
+    (muX : TX.obj (QX.obj P, QX.obj Q) ⟶ QX.obj TPQ)
+    (muU : TU.obj (QU.obj (fc.obj P), QU.obj (fc.obj Q)) ⟶ QU.obj TUc)
+    (c : fc.obj TPQ ⟶ TUc) [IsIso c]
+    (delta : TU.obj (Fd.obj (QX.obj P), FL.obj (QX.obj Q)) ⟶
+      Fd.obj (TX.obj (QX.obj P, QX.obj Q)))
+    (tiX : xc.obj TPQ ≅ totR.obj (xc.obj P, xc.obj Q))
+    (txI : QR.obj (totR.obj (xc.obj P, xc.obj Q)) ≅
+      TR.obj (QR.obj (xc.obj P), QR.obj (xc.obj Q)))
+    (k : J.obj ((EXd.prod EXd ⋙ TR).obj (QX.obj P, QX.obj Q)) ⟶
+      QS.obj (lc.obj (totR.obj (xc.obj P, xc.obj Q))))
+    (n : TU.obj (Fd.obj (QX.obj P), FL.obj (QX.obj Q)) ⟶
+      TU.obj (QU.obj (fc.obj P), QU.obj (fc.obj Q)))
+    (tr : EUd.obj (TU.obj (Fd.obj (QX.obj P), FL.obj (QX.obj Q))) ⟶ QS.obj (uc.obj TUc))
+    (hk : k = J.map (TR.map (Prod.mkHom (x.hom.app P) (x.hom.app Q)) ≫ txI.inv) ≫
+      b.hom.app (totR.obj (xc.obj P, xc.obj Q)))
+    (htr : tr = EUd.map (n ≫ muU) ≫ y.hom.app TUc)
+    (hx : HEq (EXd.map muX ≫ x.hom.app TPQ ≫ QR.map tiX.hom ≫ txI.hom)
+      (tXd.hom.app (QX.obj P, QX.obj Q) ≫ TR.map (Prod.mkHom (x.hom.app P) (x.hom.app Q))))
+    (hr : ∀ H : KX,
+      (Functor.isoWhiskerRight LIso.symm EUd ≪≫ oP).hom.app (QX.obj H) ≫
+          J.map (x.hom.app H) ≫ b.hom.app (xc.obj H) =
+        EUd.map (a.hom.app H) ≫ y.hom.app (fc.obj H) ≫ QS.map (v.app H))
+    (hm : delta ≫ Fd.map muX ≫ a.hom.app TPQ = n ≫ muU ≫ QU.map (inv c)) :
+    (EUd.map delta ≫
+        (Functor.isoWhiskerRight LIso.symm EUd ≪≫ oP).hom.app (TX.obj (QX.obj P, QX.obj Q)) ≫
+        J.map (tXd.hom.app (QX.obj P, QX.obj Q))) ≫ k =
+      tr ≫ QS.map (uc.map (inv c) ≫ v.app TPQ ≫ lc.map tiX.hom) := by
+  subst hk htr
+  set r := Functor.isoWhiskerRight LIso.symm EUd ≪≫ oP with hr_def
+  have hx' : tXd.hom.app (QX.obj P, QX.obj Q) ≫
+      TR.map (Prod.mkHom (x.hom.app P) (x.hom.app Q)) ≫ txI.inv =
+      EXd.map muX ≫ x.hom.app TPQ ≫ QR.map tiX.hom := by
+    rw [← Category.assoc, ← (eq_of_heq hx)]
+    simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
+  have e1 := r.hom.naturality muX
+  have e2 := b.hom.naturality tiX.hom
+  have e3 := y.hom.naturality (inv c)
+  have e4 := congrArg EUd.map hm
+  simp only [Functor.map_comp] at e4
+  dsimp only [Functor.comp_obj, Functor.comp_map] at e1 e2 e3
+  calc _ = EUd.map delta ≫ r.hom.app (TX.obj (QX.obj P, QX.obj Q)) ≫ J.map (EXd.map muX) ≫
+        J.map (x.hom.app TPQ) ≫ J.map (QR.map tiX.hom) ≫
+        b.hom.app (totR.obj (xc.obj P, xc.obj Q)) := by
+        simp only [← Functor.map_comp_assoc, Category.assoc, hx']
+    _ = EUd.map delta ≫ EUd.map (Fd.map muX) ≫ r.hom.app (QX.obj TPQ) ≫
+        J.map (x.hom.app TPQ) ≫ b.hom.app (xc.obj TPQ) ≫ QS.map (lc.map tiX.hom) := by
+        rw [e2, reassoc_of% e1]
+    _ = _ := by
+        rw [reassoc_of% (hr TPQ), reassoc_of% e4, reassoc_of% e3]
+        simp only [Functor.map_comp, Category.assoc]
+
 end SheafOfModules.OpenTensorNormalization

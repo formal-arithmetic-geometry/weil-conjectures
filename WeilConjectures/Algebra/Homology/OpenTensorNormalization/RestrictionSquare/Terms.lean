@@ -36,20 +36,21 @@ variable (A : Type (u + 1)) [CommRing A] [Finite A]
     (o : Operations (finiteInput A gU j' j g sq) t)
     (e : FiniteComparisons A o)
 
+set_option hygiene false in
 /-- The transport prefix: the derived tensorator on `U` followed by the realization
-factorization at the target of the oplax comparison. -/
-def transport (P Q : CochainComplex (FiniteModules A X) ℤ) :=
-  let F := ProEtale.upperStar (ModuleCat.{u + 1} A) j
-  let a := F.mapDerivedCategoryFactors.hom
-  let fc := F.mapHomologicalComplex (.up ℤ)
-  e.realizeU.derived.map
-      ((a.app P ⊗ₘ (F.leftDerivedFunctorIsoMapDerivedCategory.hom.app
-        (DerivedCategory.Q.obj Q) ≫ a.app Q)) ≫
+factorization at the target of the lax tensorator. It is a notation rather than a definition,
+so that its elaborated proof terms are syntactically those of the surrounding statement.
+It refers to the variables `A`, `U`, `j`, `e`, `P`, `Q` of the use site. -/
+scoped macro "restrictionTransport%" : term =>
+  `(e.realizeU.derived.map
+      (((ProEtale.upperStar (ModuleCat.{u + 1} A) j).mapDerivedCategoryFactors.hom.app P ⊗ₘ
+        ((ProEtale.upperStar (ModuleCat.{u + 1} A) j).leftDerivedFunctorIsoMapDerivedCategory.hom.app
+          (DerivedCategory.Q.obj Q) ≫
+          (ProEtale.upperStar (ModuleCat.{u + 1} A) j).mapDerivedCategoryFactors.hom.app Q)) ≫
         Functor.LaxMonoidal.μ (DerivedCategory.Q (C := FiniteModules A U))
-          (fc.obj P) (fc.obj Q)) ≫
-    e.realizeU.equivalence.functor.mapDerivedCategoryFactors.hom.app
-      (homSource (inv (((Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans (.up ℤ)
-        F).app P).app Q)))
+          (((ProEtale.upperStar (ModuleCat.{u + 1} A) j).mapHomologicalComplex (.up ℤ)).obj P)
+          (((ProEtale.upperStar (ModuleCat.{u + 1} A) j).mapHomologicalComplex (.up ℤ)).obj Q)) ≫
+    e.realizeU.equivalence.functor.mapDerivedCategoryFactors.hom.app _)
 
 /-- The cancellable suffix: restriction of the inverse ringed tensor representative
 followed by the restriction factorization. -/

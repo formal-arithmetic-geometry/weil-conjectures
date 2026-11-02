@@ -738,6 +738,7 @@ public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.Resolving
 public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.RestrictionSquare.Assemble
 public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.RestrictionSquare.Left
 public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.RestrictionSquare.LeftEq
+public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.RestrictionSquare.MixedFinite
 public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.RestrictionSquare.Right
 public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.RestrictionSquare.RightEq
 public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.RestrictionSquare.SquareEq

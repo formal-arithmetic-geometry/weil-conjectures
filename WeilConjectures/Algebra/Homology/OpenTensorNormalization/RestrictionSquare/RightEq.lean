@@ -50,7 +50,7 @@ structure RightEq (P Q : CochainComplex (FiniteModules A X) ℤ)
           (CategoryTheory.Prod.mkHom (r.hom.app M) (e.openPull.hom.app N)) ≫
         o.tensorComparison.comparison.inv.app
           (e.realizeX.derived.obj M, e.realizeX.derived.obj N)) ≫ suffix A gU j' j g sq o e P Q hp hq =
-      transport A gU j' j g sq o e P Q ≫ DerivedCategory.Q.map
+      restrictionTransport% ≫ DerivedCategory.Q.map
         ((e.tensorU_pin.totalIso (fc.obj P) (fc.obj Q)).hom ≫
         (total (restrictRing .ordinary j R)).map
           (Prod.mkHom (v.app P) (v.app Q)) ≫
