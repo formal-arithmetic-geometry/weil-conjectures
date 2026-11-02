@@ -641,9 +641,54 @@ private theorem scalarAssoc_commonStageTensorComparison_endpoint (W : Scheme.{u}
         _ ≪≫ _ from rfl]
   exact hh'.symm
 
+/-- Cached stagewise tensor functors. -/
+private abbrev caT (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)]
+    (i : AlgebraicallyClosedCoefficients.Index l Ω) :
+    Stage l Ω W i × Stage l Ω W i ⥤ Stage l Ω W i :=
+  rationalDerivedTensor l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω i) W
+
+/-- Cached stagewise tensor comparisons. -/
+private abbrev cac (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)]
+    {i j : AlgebraicallyClosedCoefficients.Index l Ω} (h : i ≤ j) :
+    caT l Ω W i ⋙ (stageSystem l Ω W).T h ≅
+      ((stageSystem l Ω W).T h).prod ((stageSystem l Ω W).T h) ⋙ caT l Ω W j :=
+  rationalTensorStageComparison l Ω W h
+
+/-- Cached stagewise associators. -/
+private abbrev caα (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)]
+    (i : AlgebraicallyClosedCoefficients.Index l Ω) (X Y Z : Stage l Ω W i) :
+    (caT l Ω W i).obj ((caT l Ω W i).obj (X, Y), Z) ≅
+      (caT l Ω W i).obj (X, (caT l Ω W i).obj (Y, Z)) :=
+  pullbackTensorRationalAssociator l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω i)
+    W X Y Z
+
+private theorem ca_tower (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)] :
+    StageTensorTower (stageSystem l Ω W) (caT l Ω W) (fun h ↦ cac l Ω W h) :=
+  fun h h' X Y ↦ rationalTensorStageComparison_coherent l Ω W h h' X Y
+
+private theorem ca_hα (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)] :
+    ∀ i {X X' Y Y' Z Z' : Stage l Ω W i} (f : X ⟶ X') (g : Y ⟶ Y') (h : Z ⟶ Z'),
+      (caT l Ω W i).map (Prod.mkHom ((caT l Ω W i).map (Prod.mkHom f g)) h) ≫
+          (caα l Ω W i X' Y' Z').hom =
+        (caα l Ω W i X Y Z).hom ≫ (caT l Ω W i).map (Prod.mkHom f
+          ((caT l Ω W i).map (Prod.mkHom g h))) :=
+  fun i _ _ _ _ _ _ f g h ↦ scalarAssoc_rationalAssociator_natural l _ W f g h
+
+private theorem ca_hAS (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)] :
+    ∀ {i j : AlgebraicallyClosedCoefficients.Index l Ω} (h : i ≤ j)
+      (X Y Z : Stage l Ω W i),
+      ((stageSystem l Ω W).T h).map (caα l Ω W i X Y Z).hom ≫
+        (cac l Ω W h).hom.app (X, (caT l Ω W i).obj (Y, Z)) ≫
+        (caT l Ω W j).map (Prod.mkHom (𝟙 _) ((cac l Ω W h).hom.app (Y, Z))) =
+      (cac l Ω W h).hom.app ((caT l Ω W i).obj (X, Y), Z) ≫
+        (caT l Ω W j).map (Prod.mkHom ((cac l Ω W h).hom.app (X, Y)) (𝟙 _)) ≫
+        (caα l Ω W j (((stageSystem l Ω W).T h).obj X) (((stageSystem l Ω W).T h).obj Y)
+          (((stageSystem l Ω W).T h).obj Z)).hom :=
+  fun h X Y Z ↦ commonScalarAssociator l Ω W h X Y Z
+
+set_option maxHeartbeats 400000 in
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-set_option maxHeartbeats 1000000 in
 private theorem pullbackTensorCommonAssociator_exists_aux (W : Scheme.{u})
     [hW : ∀ w : W, Invertible (l : W.residueField w)]
     (M N P : generalAlgebraicallyClosedConstructibleCategory l Ω W) :
@@ -671,29 +716,6 @@ private theorem pullbackTensorCommonAssociator_exists_aux (W : Scheme.{u})
             ((@pullbackTensorCommonRight l _ Ω _ _ _ W hW) M N P L hT).inv)) := by
   classical
   let S := stageSystem l Ω W
-  let T : ∀ i, Stage l Ω W i × Stage l Ω W i ⥤ Stage l Ω W i := fun i ↦
-    rationalDerivedTensor l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω i) W
-  let c : ∀ {i j : AlgebraicallyClosedCoefficients.Index l Ω} (h : i ≤ j),
-      T i ⋙ S.T h ≅ (S.T h).prod (S.T h) ⋙ T j := fun h ↦
-    rationalTensorStageComparison l Ω W h
-  let α : ∀ i (X Y Z : Stage l Ω W i), (T i).obj ((T i).obj (X, Y), Z) ≅
-      (T i).obj (X, (T i).obj (Y, Z)) := fun i X Y Z ↦
-    pullbackTensorRationalAssociator l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω i)
-      W X Y Z
-  have tower : StageTensorTower S T c := fun h h' X Y ↦
-    rationalTensorStageComparison_coherent l Ω W h h' X Y
-  have hα : ∀ i {X X' Y Y' Z Z' : Stage l Ω W i} (f : X ⟶ X') (g : Y ⟶ Y') (h : Z ⟶ Z'),
-      (T i).map (Prod.mkHom ((T i).map (Prod.mkHom f g)) h) ≫ (α i X' Y' Z').hom =
-        (α i X Y Z).hom ≫ (T i).map (Prod.mkHom f ((T i).map (Prod.mkHom g h))) :=
-    fun i _ _ _ _ _ _ f g h ↦ scalarAssoc_rationalAssociator_natural l _ W f g h
-  have hAS : ∀ {i j : AlgebraicallyClosedCoefficients.Index l Ω} (h : i ≤ j)
-      (X Y Z : Stage l Ω W i),
-      (S.T h).map (α i X Y Z).hom ≫ (c h).hom.app (X, (T i).obj (Y, Z)) ≫
-        (T j).map (Prod.mkHom (𝟙 _) ((c h).hom.app (Y, Z))) =
-      (c h).hom.app ((T i).obj (X, Y), Z) ≫
-        (T j).map (Prod.mkHom ((c h).hom.app (X, Y)) (𝟙 _)) ≫
-        (α j ((S.T h).obj X) ((S.T h).obj Y) ((S.T h).obj Z)).hom :=
-    fun h X Y Z ↦ commonScalarAssociator l Ω W h X Y Z
   let MN := commonStageTensorObject l Ω W M N
   let NP := commonStageTensorObject l Ω W N P
   let A := commonStageTensorObject l Ω W MN P
@@ -707,8 +729,10 @@ private theorem pullbackTensorCommonAssociator_exists_aux (W : Scheme.{u})
   have f₁ := ((Padic.finiteCoefficientFields_properties l Ω).1 M.stage NP.stage).1
   have e₁ := ((Padic.finiteCoefficientFields_properties l Ω).1 M.stage NP.stage).2
   obtain ⟨d, hd⟩ := pairCategory_exists_iso_of_tr₂ S (A := A) (B := B)
-    (fun hS hT ↦ stageAssociatorRep S T c α h₁ h₂ g₁ g₃ f₂ f₃ f₁ e₁ M.obj N.obj P.obj hS hT)
-    (fun hS hT k ↦ stageAssociatorRep_tr S T c tower α hα hAS h₁ h₂ g₁ g₃ f₂ f₃ f₁ e₁
+    (fun hS hT ↦ stageAssociatorRep S (caT l Ω W) (fun h ↦ cac l Ω W h) (caα l Ω W)
+      h₁ h₂ g₁ g₃ f₂ f₃ f₁ e₁ M.obj N.obj P.obj hS hT)
+    (fun hS hT k ↦ stageAssociatorRep_tr S (caT l Ω W) (fun h ↦ cac l Ω W h)
+      (ca_tower l Ω W) (caα l Ω W) (ca_hα l Ω W) (ca_hAS l Ω W) h₁ h₂ g₁ g₃ f₂ f₃ f₁ e₁
       M.obj N.obj P.obj hS hT k)
   have hTc := scalarAssoc_chosen_spec (commonStageDerivedTensor_existsUnique l Ω W)
     (commonStageDerivedTensor l Ω W) (by unfold commonStageDerivedTensor; rfl)
@@ -720,7 +744,7 @@ private theorem pullbackTensorCommonAssociator_exists_aux (W : Scheme.{u})
     rw [hTc.1 N P, hTc.1]
   have hL (L : AlgebraicallyClosedCoefficients.Index l Ω) (hS : A.stage ≤ L) :
       (pullbackTensorCommonLeft l Ω W M N P L hS).hom =
-        (stageLeftNested S T c h₁ h₂ g₁ g₃ M.obj N.obj P.obj hS).hom := by
+        (stageLeftNested S (caT l Ω W) (fun h ↦ cac l Ω W h) h₁ h₂ g₁ g₃ M.obj N.obj P.obj hS).hom := by
     have e₂ := scalarAssoc_commonStageTensorComparison_endpoint l Ω W MN P L hS
     have e₁ := scalarAssoc_commonStageTensorComparison_endpoint l Ω W M N L (g₁.trans hS)
     unfold pullbackTensorCommonLeft
@@ -728,7 +752,7 @@ private theorem pullbackTensorCommonAssociator_exists_aux (W : Scheme.{u})
       (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) W).map (Prod.mkHom b (𝟙 _))) e₂ e₁
   have hR (L : AlgebraicallyClosedCoefficients.Index l Ω) (hT : B.stage ≤ L) :
       (pullbackTensorCommonRight l Ω W M N P L hT).hom =
-        (stageRightNested S T c f₂ f₃ f₁ e₁ M.obj N.obj P.obj hT).hom := by
+        (stageRightNested S (caT l Ω W) (fun h ↦ cac l Ω W h) f₂ f₃ f₁ e₁ M.obj N.obj P.obj hT).hom := by
     have e₂ := scalarAssoc_commonStageTensorComparison_endpoint l Ω W M NP L hT
     have e₁ := scalarAssoc_commonStageTensorComparison_endpoint l Ω W N P L (e₁.trans hT)
     unfold pullbackTensorCommonRight
@@ -740,7 +764,7 @@ private theorem pullbackTensorCommonAssociator_exists_aux (W : Scheme.{u})
   dsimp only [GeneralAlgebraicallyClosedCoefficients.ofHom]
   apply congrArg (StageSystem.PairCategory.mkHom (X := A) (Y := B) L hS hT)
   have hR' := congrArg Iso.inv (Iso.ext (hR L hT))
-  simp only [hL L hS, hR'] <;> rfl
+  exact (congrArg₂ (fun a b ↦ a ≫ (caα l Ω W L _ _ _).hom ≫ b) (hL L hS) hR').symm
 
 end CommonAssociatorTransport
 

@@ -115,12 +115,17 @@ private theorem chainSection (W : Scheme.{u})
       c • CoefficientExtensionAssociation.evaluatedUnitSection l E L ι W A ρ
         (M.tensor.obj X) n U q :=
     eq_of_heq ((OrdinaryScalarTowerProof.evaluation_section_heq l L _ n U y).trans hu)
-  have hmap := OrdinaryScalarTowerProof.evaluation_map_section l L ((β.hom.app K).f i) n U y
+  have hmap : ((coefficientSequenceEvaluation l L W n).map ((β.hom.app K).f i)).val.app U
+        (coefficientEvaluationSection l L W (A.scalar.model.E.obj (M.tensor.obj X)) n U y) =
+      coefficientEvaluationSection l L W ((direct.obj K).X i) n U
+        (((β.hom.app K).f i).val.app (op (n, U.unop)) y) :=
+    OrdinaryScalarTowerProof.evaluation_map_section l L ((β.hom.app K).f i) n U y
   rw [hy, hm] at hmap
   simp only [SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply] at hmap
-  rw [hf] at hmap
+  have hmap2 := hmap.symm.trans
+    (congrArg (fun z ↦ ((((directEvaluation n).inv.app K).f i).val.app U) z) hf)
   exact eq_of_heq ((OrdinaryScalarTowerProof.evaluation_section_heq l L _ n U _).symm.trans
-    ((heq_of_eq hmap.symm).trans
+    ((heq_of_eq hmap2).trans
       (OrdinaryScalarTowerProof.sequenceSection_heq l L W _ n U _).symm))
 
 /-- Equal zero-preserving functors give equal termwise images of a cochain complex.
@@ -148,6 +153,8 @@ private theorem tensorSection_smul (W : Scheme.{u})
   rw [← TensorProduct.smul_tmul]
   rfl
 
+set_option maxHeartbeats 1600000 in
+-- Instantiating the glued chain at the identity coefficient field elaborates large types.
 /-- Degreewise normalized association datum for fixed strict quotient representatives.
 
 Source: Stacks Tags 03EL and 07A4; the finite balanced tensor association and its
@@ -228,7 +235,9 @@ theorem quotientAssociation_degreeData_exists
     have hc : (β₀.hom.app K).f i ≫ (β₀.inv.app K).f i = 𝟙 _ := by
       rw [← HomologicalComplex.comp_f, Iso.hom_inv_id_app, HomologicalComplex.id_f]
     refine (congrArg (fun y ↦ ((β₀.inv.app K).f i).val.app V y) h₀.symm).trans ?_
-    exact congrArg (fun g ↦ g.val.app V _) hc
+    exact congrArg (fun g ↦ g.val.app V (a • (show (A₀.scalar.model.E.obj
+      (M.tensor.obj (K.obj.X i))).val.obj V from
+        (A₀.scalar.ordinaryAdjunction.unit.app (M.tensor.obj (K.obj.X i))).val.app V q))) hc
   have he₀ : ((eqToHom hQ₀).f i).val.app V
       (a • (show (A₀.scalar.model.E.obj (M.tensor.obj (K.obj.X i))).val.obj V from
         (A₀.scalar.ordinaryAdjunction.unit.app (M.tensor.obj (K.obj.X i))).val.app V q)) =
@@ -237,7 +246,7 @@ theorem quotientAssociation_degreeData_exists
     exact eq_of_heq ((OrdinaryScalarTowerProof.eqToHom_section _ V _).trans
       (hT₀ (Q.X i) V a q).symm)
   have hγ : ((γ.hom).f i).val.app V s₀ = a • q := by
-    simp only [γ, Iso.trans_hom, Iso.symm_hom, Iso.app_hom, eqToIso.hom,
+    simp only [γ, Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv, eqToIso.hom,
       HomologicalComplex.comp_f, SheafOfModules.comp_val, PresheafOfModules.comp_app,
       ModuleCat.comp_apply]
     rw [hinv, he₀]
@@ -257,7 +266,7 @@ theorem quotientAssociation_degreeData_exists
   simp only [Δ, Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom, eqToIso.hom,
     HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
     SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply]
-  rw [scalar_section_naturality l E L ι W, hγ, tensorSection_smul l E L ι W, he₁]
+  erw [scalar_section_naturality l E L ι W, hγ, tensorSection_smul l E L ι W, he₁]
   exact hβ₁ K n i U _ x
 
 end WeilConjectures.ScalarExtensionTower
