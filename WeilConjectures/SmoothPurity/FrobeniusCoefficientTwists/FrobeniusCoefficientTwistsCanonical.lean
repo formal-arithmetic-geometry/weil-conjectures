@@ -80,6 +80,11 @@ attribute [-instance] WeilConjectures.scalarReductionSourceDerived
 attribute [-instance] WeilConjectures.scalarReductionTargetDerived
 attribute [-instance] WeilConjectures.integralOperationsCommHasDerivedCategory
 attribute [local instance 3000] WeilConjectures.integralTowerHasDerivedCategory
+
+/-- Every pro-étale site is essentially small one universe up. -/
+private theorem coefficientSiteSmall (W : Scheme.{u}) :
+    EssentiallySmall.{u + 1} W.ProEt := essentiallySmallSelf.{0} _
+
 attribute [local instance] coefficientSiteSmall
 
 /-- The existing nonnegative completed root powers.
@@ -362,8 +367,6 @@ attribute [local semireducible] constantSheaf
 
 end FinitePositiveProof
 
-attribute [local irreducible] finitePositiveLineMaps
-
 section AugmentationProof
 attribute [local instance 3000] WeilConjectures.integralTowerHasDerivedCategory
 attribute [local instance] coefficientSiteSmall
@@ -463,8 +466,6 @@ end AugmentationConstruction
 attribute [local irreducible] productAug chainAug augmentationPullIso augmentationComplexComparison
   augmentationTower
 
-attribute [local irreducible] finiteSignedLineMaps
-
 private def canonicalAugmentation (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {X Y : Scheme.{u}} (g : X ⟶ Y) :
@@ -511,6 +512,8 @@ def pullbackAugmentationNormalization (l : ℕ) [Fact l.Prime] (E : Type u) [Fie
                 ((integralOperationsPullbackTowerFunctor
                   l E g).obj C)))).v i (i - 1) (by omega) = 0
 
+-- `SignedDoubleHomCone.moduleBinaryBiproducts` leaves its universe free
+attribute [-instance] CategoryTheory.SignedDoubleHomCone.moduleBinaryBiproducts in
 private theorem canonicalAugmentation_spec (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {X Y : Scheme.{u}} (g : X ⟶ Y) :
@@ -820,8 +823,6 @@ def integralDerivedLineMap (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 attribute [local irreducible] integralDerivedLineMap
 
-attribute [local irreducible] finiteDerivedLineMap
-
 /-- The unchanged rational coefficient-line object is the localization of its
 specified complete integral representative.
 Source: definition clause 4
@@ -900,18 +901,6 @@ set_option allowUnsafeReducibility true in
 attribute [local irreducible] commonDerivedLineMap commonStageDerivedPullback
 attribute [local irreducible] commonStageDerivedTensor rationalDerivedTensor
 
-attribute [local irreducible] rationalTwistStructure
-
-attribute [local irreducible] commonTwistStructure
-
-attribute [local irreducible] rationalTwistCommutationComponent
-
-attribute [local irreducible] rationalTwistCommutation
-
-attribute [local irreducible] commonTwistCommutationComponent
-
-attribute [local irreducible] commonTwistCommutation
-
 /-- The rational coefficient Weil line, using the geometric semilinear Frobenius.
 Source: definition clauses 4--5
 (blueprint: def-weil-frobenius-coefficient-twists). -/
@@ -929,8 +918,6 @@ def rationalWeilLine (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l
 
 attribute [local irreducible] rationalWeilLine
 
-attribute [local irreducible] rationalWeilTwistingFunctor
-
 /-- The coefficient Weil line in the literal common-stage category.
 Source: definition clauses 4--5
 (blueprint: def-weil-frobenius-coefficient-twists). -/
@@ -947,8 +934,6 @@ def commonWeilLine (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l �
     (commonDerivedLineMap l Ω (D.geometricFrobenius Y₀).hom m)
 
 attribute [local irreducible] commonWeilLine
-
-attribute [local irreducible] commonWeilTwistingFunctor
 
 end FrobeniusCoefficientTwists
 
