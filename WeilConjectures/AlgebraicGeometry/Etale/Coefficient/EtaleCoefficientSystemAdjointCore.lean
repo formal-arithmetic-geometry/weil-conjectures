@@ -108,6 +108,15 @@ theorem strictEtaleProperInverseAdditive
     (S : StrictEtaleCompactSupport O ell c) (n : ℕ) :
     (S.val.properImage.lift n).modules.Additive := S.val.properImage.inverseAdditive n
 
+/-- Use the recorded proper direct-image additive witness at the strict site sizes.
+Source: Zheng, Construction 4.1 and Construction 5.15
+(blueprint: lem-pur-etale-coefficient-system-adjoint). -/
+theorem strictEtaleProperDirectAdditive
+    {O : Type (u + 1)} [CommRing O] {ell : O}
+    {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification f}
+    (S : StrictEtaleCompactSupport O ell c) (n : ℕ) :
+    (S.val.properImage.right n).Additive := S.val.properImage.rightAdditive n
+
 attribute [local instance 9000] strictEtaleProperInverseAdditive strictEtaleProperDirectAdditive
 
 section TransportTypes

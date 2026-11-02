@@ -661,7 +661,6 @@ def EmptyFibre (S : Action D l hl X₀ U₀ j₀ Ω)
             (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω N.stage)).obj N.obj)))
 
 attribute [local irreducible] rationalStageScalar sfIntegralConstructible
-  sfRationalStandardTStructure sfCommonStageStandardTStructure
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
@@ -856,9 +855,5 @@ def CommonStageCompatibility (S : Action D l hl X₀ U₀ j₀ Ω)
           (GeneralAlgebraicallyClosedCoefficients.inclusion E)
           (GeneralAlgebraicallyClosedCoefficients.inclusion E)
           (S.finite_eq E) (S.system.ιCompFunctorIso E).symm) a gU gX
-
-attribute [local irreducible] integralJ rationalJ WeilUnit ScalarLaws
-  FiniteScalarCompatibility CommonStageCompatibility
-  EmptyFibre IntegralUnitNormalization Rationalization
 
 end WeilConjectures.ZlOpenUnit
