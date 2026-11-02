@@ -507,7 +507,23 @@ private theorem ordinaryScalarCompletion_exists :
           DerivedCategory.Q.map ((completedScalarChainComparison.{u, u} l E L ι Y).app P.obj) :=
     (completedScalarComparison_existsUnique.{u, u} l E L ι Y).exists.choose_spec P
   refine ⟨e.hom ≫ c, fun P ↦ ?_, fun K hK ↦ ?_⟩
-  · rw [NatTrans.comp_app, Category.assoc, hc P, reassoc_of% (he P.obj), Functor.map_comp]
+  · let t := NatIso.mapHomologicalComplex (ordinaryScalarModelIso l E L ι Y) (.up ℤ)
+    let k := (completedScalarChainComparison.{u, u} l E L ι Y).app P.obj
+    calc
+      _ = e.hom.app _ ≫ (c.app _ ≫ (integralScalarExtensionComparison l E L ι Y).hom.app P) :=
+        Category.assoc _ _ _
+      _ = e.hom.app _ ≫ (completedScalarCounit.{u, u} l E L ι Y P.obj ≫
+          DerivedCategory.Q.map k) :=
+        congrArg (e.hom.app (DerivedCategory.Q.obj P.obj) ≫ ·) (hc P)
+      _ = (e.hom.app _ ≫ completedScalarCounit.{u, u} l E L ι Y P.obj) ≫
+          DerivedCategory.Q.map k :=
+        (Category.assoc _ _ _).symm
+      _ = ((integralOrdinaryScalar l E L ι Y).mapDerivedCategoryFactors.hom.app P.obj ≫
+          DerivedCategory.Q.map (t.hom.app P.obj)) ≫ DerivedCategory.Q.map k :=
+        congrArg (· ≫ DerivedCategory.Q.map k) (he P.obj)
+      _ = _ := (Category.assoc _ _ _).trans (congrArg
+          ((integralOrdinaryScalar l E L ι Y).mapDerivedCategoryFactors.hom.app P.obj ≫ ·)
+          (DerivedCategory.Q.map_comp _ _).symm)
   · have : IsIso (c.app K) :=
       ((finiteFreeCompletedScalarComparison.{u, u} l E L ι Y).2.1 K hK).1
     rw [NatTrans.comp_app]
@@ -722,7 +738,8 @@ theorem integralConstructibleScalarComparison_existsUnique :
     hχ K.obj
       (isDerivedCompleteUnrestricted_of_boundedConstructible l E Y D hl K.obj K.property)
   refine existsUnique_of_exists_of_unique
-    ⟨NatIso.ofComponents (fun K ↦ ObjectProperty.isoMk _ (@asIso _ _ _ _ (χ.app K.obj) (hiso K))) ?_, ?_⟩ ?_
+    ⟨NatIso.ofComponents (fun K ↦
+      ObjectProperty.isoMk _ (@asIso _ _ _ _ (χ.app K.obj) (hiso K))) ?_, ?_⟩ ?_
   · intro K K' f
     apply ObjectProperty.hom_ext
     exact χ.naturality f.hom

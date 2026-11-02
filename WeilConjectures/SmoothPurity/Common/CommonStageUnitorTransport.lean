@@ -232,6 +232,24 @@ theorem stageRightUnitorRep_tr (tower : StageTensorTower S T c)
   simp only [map_mkHom_comp_assoc', Category.id_comp, Category.comp_id]
   rw [h1, h2]
 
+theorem stageLeftUnitorRep_hom_eq (lu : ∀ i (X : C i), (T i).obj (Un i, X) ≅ X)
+    {b m s : I} (hb : b ≤ s) (hm : m ≤ s) (y : C m) {L : I} (h : s ≤ L) :
+    (stageLeftUnitorRep S T c Un e lu hb hm y h).hom =
+      ((c h).hom.app ((S.T hb).obj (Un b), (S.T hm).obj y) ≫
+        (T L).map (Prod.mkHom ((S.assoc hb h).hom.app (Un b)) ((S.assoc hm h).hom.app y))) ≫
+      (T L).map (Prod.mkHom (e (hb.trans h)).hom (𝟙 _)) ≫ (lu L _).hom := by
+  simp only [stageLeftUnitorRep, Iso.trans_hom, Functor.mapIso_hom, Iso.prod_hom, Iso.app_hom,
+    Category.assoc, map_mkHom_comp_assoc', Category.comp_id]
+
+theorem stageRightUnitorRep_hom_eq (ru : ∀ i (X : C i), (T i).obj (X, Un i) ≅ X)
+    {b m s : I} (hb : b ≤ s) (hm : m ≤ s) (y : C m) {L : I} (h : s ≤ L) :
+    (stageRightUnitorRep S T c Un e ru hb hm y h).hom =
+      ((c h).hom.app ((S.T hm).obj y, (S.T hb).obj (Un b)) ≫
+        (T L).map (Prod.mkHom ((S.assoc hm h).hom.app y) ((S.assoc hb h).hom.app (Un b)))) ≫
+      (T L).map (Prod.mkHom (𝟙 _) (e (hb.trans h)).hom) ≫ (ru L _).hom := by
+  simp only [stageRightUnitorRep, Iso.trans_hom, Functor.mapIso_hom, Iso.prod_hom, Iso.app_hom,
+    Category.assoc, map_mkHom_comp_assoc', Category.comp_id]
+
 /-- A transport-compatible family of stagewise isomorphisms defines an isomorphism of the pair
 category, represented at every stage by the given family. -/
 theorem pairCategory_exists_iso_of_tr [IsDirectedOrder I] {A M : S.PairCategory}

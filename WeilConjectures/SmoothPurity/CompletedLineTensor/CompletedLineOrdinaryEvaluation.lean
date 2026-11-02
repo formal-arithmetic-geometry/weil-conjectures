@@ -88,7 +88,6 @@ private theorem scalarAdjunction :
   with_unfolding_all exact h
 
 set_option backward.isDefEq.respectTransparency false in
-attribute [local semireducible] completedScalarTensorSection in
 /-- Coefficient scalars pass through the scalar-extension generator `1 ⊗ x`.
 Source: Stacks 03EK, balancing (blueprint: lem-pur-completed-line-ordinary-evaluation). -/
 private theorem scalarTensorSection_smul (M : integralTowerModules l E X) (U : X.ProEtᵒᵖ)
@@ -97,30 +96,10 @@ private theorem scalarTensorSection_smul (M : integralTowerModules l E X) (U : X
         ((completedCoefficientMap l E F ι X).hom.app U p)
         (completedScalarTensorSection l E F ι X M U 1 x) =
       completedScalarTensorSection l E F ι X M U 1 (smul l E X M U p x) := by
-  letI : Module ((completedIntegralCommRingSheafUnrestricted l E X).obj.obj U) (M.val.obj U) :=
-    (M.val.obj U).isModule
-  let η := ((PresheafOfModules.sheafificationAdjunction.{max u (t + 1)}
-    (R := (sheafCompose (AlgebraicGeometry.Scheme.ProEt.topology X)
-      (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj
-        (completedIntegralCommRingSheafUnrestricted l F X))
-    (𝟙 _)).unit.app
-    (SheafOfModules.changeOfRingsPresheaf.{t, t + 1, max u (t + 1)} (completedCoefficientMap l E F ι X) M)).app U
-  have h := η.hom.map_smul ((completedCoefficientMap l E F ι X).hom.app U p)
-    ((1 : (completedIntegralCommRingSheafUnrestricted l F X).obj.obj U) ⊗ₜ[
-      (completedIntegralCommRingSheafUnrestricted l E X).obj.obj U,
-      ((completedCoefficientMap l E F ι X).hom.app U).hom] x)
-  unfold smul completedScalarTensorSection
-  refine (LinearMap.map_smul _ _ _).symm.trans ?_
-  refine congrArg _ (h.symm.trans ?_)
-  refine congrArg _ ?_
-  show ((completedCoefficientMap l E F ι X).hom.app U p * 1) ⊗ₜ[
-      (completedIntegralCommRingSheafUnrestricted l E X).obj.obj U,
-      ((completedCoefficientMap l E F ι X).hom.app U).hom] x =
-    (1 : (completedIntegralCommRingSheafUnrestricted l F X).obj.obj U) ⊗ₜ[
-      (completedIntegralCommRingSheafUnrestricted l E X).obj.obj U,
-      ((completedCoefficientMap l E F ι X).hom.app U).hom] (p • x)
-  rw [TensorProduct.tmul_smul]
-  rfl
+  obtain ⟨a, ha⟩ := scalarAdjunction l E X F ι
+  have h := ((a.unit.app M).val.app U).hom.map_smul p x
+  rw [ha, ha] at h
+  exact h.symm
 
 /-- Normalized line comparisons multiply the signed pairing by the coefficient map.
 Source: Stacks 03EO; blueprint Proof (3), pairing clause of `IsPairNormalized`
@@ -277,10 +256,17 @@ private theorem epsilon_app_Q (L : integralTowerModules l E X) [L.IsFiniteLocall
         (Iso.refl (sheaf l E X L m ⋙ sheaf l E X L (-m))) (ComplexShape.up ℤ)).hom.app K ≫
       (NatTrans.mapHomologicalComplex (evaluation l E X L m).hom (ComplexShape.up ℤ)).app K =
       evaluationComplex l E X L m K := by
-    ext i
+    apply HomologicalComplex.hom_ext
+    intro i
     simp [evaluationComplex]
-  simp only [epsilon, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app]
-  rw [h3, h2, ← h1, ← h4]
+  have he : (epsilon l E X L m).hom.app (DerivedCategory.Q.obj K) =
+      (Functor.mapDerivedCategoryCompIso (sheaf l E X L m) (sheaf l E X L (-m))).inv.app
+          (DerivedCategory.Q.obj K) ≫
+        (Functor.mapDerivedCategoryNatIso (evaluation l E X L m)).hom.app
+          (DerivedCategory.Q.obj K) ≫
+        (Functor.mapDerivedCategoryIdIso (integralTowerModules l E X)).hom.app
+          (DerivedCategory.Q.obj K) := rfl
+  rw [he, h3, h2, ← h1, ← h4]
   simp only [Category.assoc, Iso.inv_hom_id_app_assoc, Functor.map_comp]
   rfl
 
@@ -299,9 +285,11 @@ private theorem chain_square (L : integralTowerModules l E X)
         ((comparisonComplex l E X F ι L N m (d.ordinarySheaf m)).hom.app K) ≫
       evaluationComplex l F X N m ((completedOrdinaryScalarComplex l E F ι X).obj K) =
     (completedOrdinaryScalarComplex l E F ι X).map (evaluationComplex l E X L m K) := by
-  ext i
+  apply HomologicalComplex.hom_ext
+  intro i
   exact sheaf_square l E X F ι L N b d hd m (K.X i)
 
+set_option backward.isDefEq.respectTransparency false in
 attribute [local semireducible] completedScalarCounit completedDerivedScalarExtension
   completedOrdinaryScalarComplex completedOrdinaryScalarExtension completedScalarChangeData in
 /-- Naturality of the universal counit for chain maps.
@@ -311,10 +299,14 @@ private theorem counit_naturality {K K' : CochainComplex (integralTowerModules l
     (completedDerivedScalarExtension l E F ι X).map (DerivedCategory.Q.map g) ≫
         completedScalarCounit l E F ι X K' =
       completedScalarCounit l E F ι X K ≫
-        DerivedCategory.Q.map ((completedOrdinaryScalarComplex l E F ι X).map g) :=
-  ((completedScalarChangeData l E F ι X).choose_spec.choose_spec.choose_spec.choose_spec.2.2
-    |>.choose_spec.choose).naturality ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).map g)
+        DerivedCategory.Q.map ((completedOrdinaryScalarComplex l E F ι X).map g) := by
+  simpa only [completedScalarCounit, completedOrdinaryScalarComplex] using
+    homotopyCounit_naturality (completedOrdinaryScalarExtension l E F ι X)
+      (completedDerivedScalarExtension l E F ι X)
+      ((completedScalarChangeData l E F ι X).choose_spec.choose_spec.choose_spec
+        |>.choose_spec.2.2.choose_spec.choose) g
 
+set_option backward.isDefEq.respectTransparency false in
 attribute [local semireducible] completedScalarCounit completedDerivedScalarExtension
   completedOrdinaryScalarComplex completedOrdinaryScalarExtension completedScalarChangeData in
 /-- The universal counit is invertible on K-flat complexes.
@@ -323,9 +315,9 @@ private theorem counit_isIso (K : CochainComplex (integralTowerModules l E X) �
     (hK : CochainComplex.IsKFlatIndependentCoefficients
       (J := AlgebraicGeometry.Scheme.ProEt.topology X)
       (R := completedIntegralCommRingSheafUnrestricted l E X) K) :
-    IsIso (completedScalarCounit l E F ι X K) :=
-  ((completedScalarChangeData l E F ι X).choose_spec.choose_spec.choose_spec.choose_spec.2.2
-    |>.choose_spec.choose_spec).2.2 K hK
+    IsIso (completedScalarCounit l E F ι X K) := by
+  rw [← completedScalarCochainModel_counit]
+  exact (completedScalarCochainModel l E F ι X).computes K hK
 
 /-- Every complex has a good quasi-isomorphic resolution.
 Source: Stacks 06YS (blueprint: lem-pur-completed-line-ordinary-evaluation). -/
@@ -338,6 +330,74 @@ private theorem good_resolution (c : CochainComplex (integralTowerModules l E X)
   exact (exactFunctor _ _).prop_of_iso
     (SheafOfModules.siteSheafTensorRightIso _ (Y.X n)).symm (hf n)
 
+
+/-- The counit normalization of `IsPairNormalized`, extended from good complexes to all
+complexes through good resolutions.
+Source: Stacks 06YY and 06YS (blueprint: lem-pur-completed-line-ordinary-evaluation).
+Proof: choose a good quasi-isomorphic resolution; every map in the square is natural
+for chain maps, and the derived image of the resolution is invertible. -/
+private theorem pair_counit (L : integralTowerModules l E X)
+    [L.IsFiniteLocallyFreeOfRank 1] (N : integralTowerModules l F X)
+    [N.IsFiniteLocallyFreeOfRank 1]
+    (b : SheafOfModules.changeOfRingsOfUniverses.{t, t + 1, max u (t + 1), max u (t + 1)}
+      (completedCoefficientMap l E F ι X) L ≅ N)
+    (d : PairData l E X F ι L N) (hd : IsPairNormalized l E X F ι L N b d)
+    (m : ℤ) (c : CochainComplex (integralTowerModules l E X) ℤ) :
+    (completedDerivedScalarExtension l E F ι X).map ((factors l E X L m).hom.app c) ≫
+        completedScalarCounit l E F ι X ((complex l E X L m).obj c) ≫
+        DerivedCategory.Q.map
+          ((comparisonComplex l E X F ι L N m (d.ordinarySheaf m)).hom.app c) =
+      (d.ordinary m).hom.app (DerivedCategory.Q.obj c) ≫
+        (tensor l F X N m).map (completedScalarCounit l E F ι X c) ≫
+        (factors l F X N m).hom.app ((completedOrdinaryScalarComplex l E F ι X).obj c) := by
+  obtain ⟨P, r, hr⟩ := good_resolution l E X c
+  have hP := eq_of_heq (hd.2.2.2 m P)
+  have : IsIso (DerivedCategory.Q.map r) := by
+    rw [DerivedCategory.isIso_Q_map_iff_quasiIso]
+    exact hr
+  let C := completedDerivedScalarExtension l E F ι X
+  let κ := completedScalarCounit l E F ι X
+  let O := completedOrdinaryScalarComplex l E F ι X
+  let Q := DerivedCategory.Q (C := integralTowerModules l E X)
+  let Q' := DerivedCategory.Q (C := integralTowerModules l F X)
+  rw [← cancel_epi (C.map ((tensor l E X L m).map (Q.map r)))]
+  have n1 : (tensor l E X L m).map (Q.map r) ≫ (factors l E X L m).hom.app c =
+      (factors l E X L m).hom.app P.obj ≫ Q.map ((complex l E X L m).map r) :=
+    (factors l E X L m).hom.naturality r
+  have n2 : C.map (Q.map ((complex l E X L m).map r)) ≫ κ ((complex l E X L m).obj c) =
+      κ ((complex l E X L m).obj P.obj) ≫ Q'.map (O.map ((complex l E X L m).map r)) :=
+    counit_naturality l E X F ι ((complex l E X L m).map r)
+  have n3 : O.map ((complex l E X L m).map r) ≫
+      (comparisonComplex l E X F ι L N m (d.ordinarySheaf m)).hom.app c =
+      (comparisonComplex l E X F ι L N m (d.ordinarySheaf m)).hom.app P.obj ≫
+        (complex l F X N m).map (O.map r) :=
+    (comparisonComplex l E X F ι L N m (d.ordinarySheaf m)).hom.naturality r
+  have n4 : C.map ((tensor l E X L m).map (Q.map r)) ≫ (d.ordinary m).hom.app (Q.obj c) =
+      (d.ordinary m).hom.app (Q.obj P.obj) ≫ (tensor l F X N m).map (C.map (Q.map r)) :=
+    (d.ordinary m).hom.naturality (Q.map r)
+  have n5 : C.map (Q.map r) ≫ κ c = κ P.obj ≫ Q'.map (O.map r) :=
+    counit_naturality l E X F ι r
+  have n6 : (tensor l F X N m).map (Q'.map (O.map r)) ≫ (factors l F X N m).hom.app (O.obj c) =
+      (factors l F X N m).hom.app (O.obj P.obj) ≫ Q'.map ((complex l F X N m).map (O.map r)) :=
+    (factors l F X N m).hom.naturality (O.map r)
+  have lhs : C.map ((tensor l E X L m).map (Q.map r)) ≫ C.map ((factors l E X L m).hom.app c) ≫
+      κ ((complex l E X L m).obj c) ≫
+        Q'.map ((comparisonComplex l E X F ι L N m (d.ordinarySheaf m)).hom.app c) =
+      (C.map ((factors l E X L m).hom.app P.obj) ≫ κ ((complex l E X L m).obj P.obj) ≫
+        Q'.map ((comparisonComplex l E X F ι L N m (d.ordinarySheaf m)).hom.app P.obj)) ≫
+        Q'.map ((complex l F X N m).map (O.map r)) := by
+    rw [← Functor.map_comp_assoc, n1, Functor.map_comp, Category.assoc, reassoc_of% n2,
+      ← Functor.map_comp, n3, Functor.map_comp]
+    simp only [Category.assoc]
+  have rhs : C.map ((tensor l E X L m).map (Q.map r)) ≫ (d.ordinary m).hom.app (Q.obj c) ≫
+      (tensor l F X N m).map (κ c) ≫ (factors l F X N m).hom.app (O.obj c) =
+      ((d.ordinary m).hom.app (Q.obj P.obj) ≫ (tensor l F X N m).map (κ P.obj) ≫
+        (factors l F X N m).hom.app (O.obj P.obj)) ≫
+        Q'.map ((complex l F X N m).map (O.map r)) := by
+    rw [reassoc_of% n4, ← Functor.map_comp_assoc, n5, Functor.map_comp, Category.assoc, n6]
+    simp only [Category.assoc]
+  refine lhs.trans (Eq.trans ?_ rhs.symm)
+  exact congrArg (fun z ↦ z ≫ Q'.map ((complex l F X N m).map (O.map r))) hP
 end DerivedSquare
 
 /-- The ordinary scalar comparison respects the specified signed-line evaluation.

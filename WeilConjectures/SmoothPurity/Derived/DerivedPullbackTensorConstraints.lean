@@ -10,6 +10,7 @@ public import WeilConjectures.TraceFormula.Integral.IntegralPullbackComposition
 public import WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorConstraintCore
 
 import all WeilConjectures.SmoothPurity.Pullback.PullbackTensorReductionCalculus
+import all WeilConjectures.CategoryTheory.BilinearCoefficientDescent.BilinearCoefficientDescent
 import WeilConjectures.SmoothPurity.Integral.IntegralSystemReductionFullyFaithful
 import WeilConjectures.SmoothPurity.CompletedOperations.NormalizedCompletedOperationModels
 import WeilConjectures.SmoothPurity.Pur.PurNormalizedReconstructionAdjunctionCalculus
@@ -18,6 +19,8 @@ import WeilConjectures.SmoothPurity.Sf.SfDerivedCompleteLegacyComparison
 import WeilConjectures.AlgebraicGeometry.ProEtale.Bounded.ProEtaleBoundedConstructibleTriangulated
 import WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarTensorCoherentReduction
 import WeilConjectures.SmoothPurity.Supporting.Scalar.SystemScalarTensorUnit
+import WeilConjectures.SmoothPurity.Common.CommonStageUnitorTransport
+import WeilConjectures.SmoothPurity.Rational.RationalTensorStageCoherence
 
 /-! # Normalized higher pullback tensor constraints
 
@@ -1194,6 +1197,100 @@ private theorem rationalScalarUnit_existsUnique_aux
     (G.obj U) (pullbackTensorRationalLeftUnitor l L W)
     (fun g ↦ scalarUnit_rationalLeftUnitor_natural l L W g) ε' ε ht
 
+-- Naturality in the first variable descends through the specified tensor and unit reductions.
+private theorem scalarUnit_reducedRightUnitor_natural
+    {C D : Type*} [Category* C] [Category* D]
+    (Q : C ⥤ D) [Q.Faithful] (T : C × C ⥤ C) (S : D × D ⥤ D)
+    (b : T ⋙ Q ≅ (Q.prod Q) ⋙ S) (U : C) (V : D) (e : Q.obj U ≅ V)
+    (ru : ∀ M, S.obj (M, V) ≅ M)
+    (hn : ∀ {M N} (f : M ⟶ N),
+      S.map (Prod.mkHom f (𝟙 V)) ≫ (ru N).hom = (ru M).hom ≫ f)
+    (ri : ∀ M, T.obj (M, U) ≅ M)
+    (hi : ∀ M, Q.map (ri M).hom = b.hom.app (M, U) ≫
+      S.map (Prod.mkHom (𝟙 _) e.hom) ≫ (ru (Q.obj M)).hom)
+    {M N : C} (f : M ⟶ N) :
+    T.map (Prod.mkHom f (𝟙 U)) ≫ (ri N).hom = (ri M).hom ≫ f := by
+  have hb := b.hom.naturality (Prod.mkHom f (𝟙 U))
+  change Q.map (T.map (Prod.mkHom f (𝟙 U))) ≫ b.hom.app (N, U) =
+    b.hom.app (M, U) ≫ S.map (Prod.mkHom (Q.map f) (Q.map (𝟙 U))) at hb
+  apply Q.map_injective
+  simp only [Functor.map_comp, hi, Category.assoc]
+  rw [← Category.assoc, hb, Q.map_id]
+  simp only [Category.assoc]
+  have hs : S.map (Prod.mkHom (Q.map f) (𝟙 (Q.obj U))) ≫
+      S.map (Prod.mkHom (𝟙 (Q.obj N)) e.hom) =
+    S.map (Prod.mkHom (𝟙 (Q.obj M)) e.hom) ≫
+      S.map (Prod.mkHom (Q.map f) (𝟙 V)) := by
+    simp only [← S.map_comp, prod_comp, Category.id_comp, Category.comp_id]
+  rw [reassoc_of% hs, hn]
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem scalarUnit_integralRightUnitor_natural (W : Scheme.{u})
+    [∀ w : W, Invertible (l : W.residueField w)]
+    {M N : sfIntegralConstructibleCategory l E W} (f : M ⟶ N) :
+    (constructibleIntegralTensor l E W).map
+        (Prod.mkHom f (𝟙 (pullbackTensorIntegralUnit l E W))) ≫
+        (pullbackTensorIntegralRightUnitor l E W N).hom =
+      (pullbackTensorIntegralRightUnitor l E W M).hom ≫ f := by
+  have := (coherentReduction_fullyFaithful l E W).2
+  apply scalarUnit_reducedRightUnitor_natural (coherentReduction l E W)
+    (constructibleIntegralTensor l E W) (pullbackTensorCalculus l E W).systemClosed.tensor
+    (reduction_tensor l E W) (pullbackTensorIntegralUnit l E W) _
+    (pullbackTensorIntegralUnitReduction l E W)
+    (pullbackTensorCalculus l E W).systemClosed.monoidal.rightUnitor
+  · intro M N f
+    let := (pullbackTensorCalculus l E W).systemClosed.monoidal
+    simpa only [CoefficientClosedStructure.tensor, MonoidalCategory.tensor_map,
+      MonoidalCategory.tensorHom_id] using MonoidalCategory.rightUnitor_naturality f
+  · intro M
+    exact (pullbackTensorIntegralRightUnitor_existsUnique l E W M).exists.choose_spec
+
+private theorem scalarUnit_rationalRightUnitor_natural (W : Scheme.{u})
+    [∀ w : W, Invertible (l : W.residueField w)]
+    {M N : sfRationalConstructibleCategory l E W} (f : M ⟶ N) :
+    (rationalDerivedTensor l E W).map
+        (Prod.mkHom f (𝟙 (pullbackTensorRationalUnit l E W))) ≫
+        (pullbackTensorRationalRightUnitor l E W N).hom =
+      (pullbackTensorRationalRightUnitor l E W M).hom ≫ f := by
+  let T := rationalDerivedTensor l E W
+  let I := constructibleIntegralTensor l E W
+  let R := Padic.coefficientExtensionIntegers l E
+  let p := Padic.coefficientExtensionUniformizer l E
+  let U := pullbackTensorRationalUnit l E W
+  let U₀ := pullbackTensorIntegralUnit l E W
+  have spec := scalarUnit_chosen_spec (rationalDerivedTensor_existsUnique l E W) T rfl
+  have ho (MN : sfRationalConstructibleCategory l E W ×
+      sfRationalConstructibleCategory l E W) :
+      T.obj MN = ScalarLocalization.mk (I.obj (MN.1.obj, MN.2.obj)) := spec.1 MN
+  obtain ⟨b, hb, hp⟩ := spec.2 M N U U
+  change T.map (Prod.mkHom f (𝟙 U)) ≫ _ = _
+  rw [hb]
+  induction f using TensorProduct.induction_on with
+  | zero => simp only [map_zero, LinearMap.zero_apply, Limits.zero_comp, Limits.comp_zero]
+  | add f g hf hg =>
+    change (b (f + g)) (𝟙 U) ≫ _ = _ ≫ (f + g)
+    rw [map_add, LinearMap.add_apply, Preadditive.add_comp]
+    rw [hf, hg]
+    exact (Preadditive.comp_add _ _ _
+      (pullbackTensorRationalRightUnitor l E W M).hom f g).symm
+  | tmul a f =>
+    have ht : HEq (b (a ⊗ₜ[R] f) (𝟙 U))
+        ((a * 1) ⊗ₜ[R] I.map (Prod.mkHom f (𝟙 U₀))) := hp f (𝟙 U₀) a 1
+    have hL := (pullbackTensorRationalRightUnitor_existsUnique l E W N).exists.choose_spec
+    have hM := (pullbackTensorRationalRightUnitor_existsUnique l E W M).exists.choose_spec
+    have hl := heq_comp (ho (M, U)) (ho (N, U)) rfl ht hL
+    have hr := heq_comp (ho (M, U)) rfl rfl hM (HEq.rfl (a := a ⊗ₜ[R] f))
+    apply eq_of_heq
+    refine hl.trans ((heq_of_eq ?_).trans hr.symm)
+    change ScalarLocalization.composition R _ p _ _ _
+        (1 ⊗ₜ[R] (pullbackTensorIntegralRightUnitor l E W N.obj).hom)
+        ((a * 1) ⊗ₜ[R] I.map (Prod.mkHom f (𝟙 U₀))) =
+      ScalarLocalization.composition R _ p _ _ _ (a ⊗ₜ[R] f)
+        (1 ⊗ₜ[R] (pullbackTensorIntegralRightUnitor l E W M.obj).hom)
+    simp only [ScalarLocalization.composition_tmul, one_mul, mul_one]
+    rw [scalarUnit_integralRightUnitor_natural l E W f]
+
 attribute [local irreducible] pullbackTensorIntegralUnit pullbackTensorRationalUnit
   pullbackTensorIntegralLeftUnitor pullbackTensorIntegralRightUnitor
   pullbackTensorRationalLeftUnitor pullbackTensorRationalRightUnitor
@@ -1273,6 +1370,335 @@ def pullbackTensorCommonUnitStage (W : Scheme.{u})
       (_root_.WeilConjectures.AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) _ _ _
         (_root_.WeilConjectures.AlgebraicallyClosedCoefficients.coefficientInclusion l Ω _ L h) W hW
 
+section CommonUnitorTransport
+
+-- Transport a unit square along an equality of the scalar functor.
+private theorem scalarUnit_leftSquare_of_eq {A B : Type*} [Category* A] [Category* B]
+    (TA : A × A ⥤ A) (TB : B × B ⥤ B) {G G' : A ⥤ B} (hG : G' = G)
+    (cG : TA ⋙ G ≅ G.prod G ⋙ TB) (c : TA ⋙ G' ≅ G'.prod G' ⋙ TB)
+    (hc : c = Functor.isoWhiskerLeft TA (eqToIso hG) ≪≫ cG ≪≫
+      Functor.isoWhiskerRight (NatIso.prod (eqToIso hG).symm (eqToIso hG).symm) TB)
+    (UA : A) (UB : B) (eG : G.obj UA ≅ UB)
+    (luA : ∀ X, TA.obj (UA, X) ≅ X) (luB : ∀ X, TB.obj (UB, X) ≅ X)
+    (h : ∀ X, cG.hom.app (UA, X) ≫ TB.map (Prod.mkHom eG.hom (𝟙 _)) ≫
+      (luB (G.obj X)).hom = G.map (luA X).hom) (X : A) :
+    c.hom.app (UA, X) ≫ TB.map (Prod.mkHom ((eqToIso hG).app UA ≪≫ eG).hom (𝟙 _)) ≫
+      (luB (G'.obj X)).hom = G'.map (luA X).hom := by
+  subst hG hc
+  simpa [Functor.isoWhiskerLeft, Functor.isoWhiskerRight, NatTrans.prod] using h X
+
+private theorem scalarUnit_rightSquare_of_eq {A B : Type*} [Category* A] [Category* B]
+    (TA : A × A ⥤ A) (TB : B × B ⥤ B) {G G' : A ⥤ B} (hG : G' = G)
+    (cG : TA ⋙ G ≅ G.prod G ⋙ TB) (c : TA ⋙ G' ≅ G'.prod G' ⋙ TB)
+    (hc : c = Functor.isoWhiskerLeft TA (eqToIso hG) ≪≫ cG ≪≫
+      Functor.isoWhiskerRight (NatIso.prod (eqToIso hG).symm (eqToIso hG).symm) TB)
+    (UA : A) (UB : B) (eG : G.obj UA ≅ UB)
+    (ruA : ∀ X, TA.obj (X, UA) ≅ X) (ruB : ∀ X, TB.obj (X, UB) ≅ X)
+    (h : ∀ X, cG.hom.app (X, UA) ≫ TB.map (Prod.mkHom (𝟙 _) eG.hom) ≫
+      (ruB (G.obj X)).hom = G.map (ruA X).hom) (X : A) :
+    c.hom.app (X, UA) ≫ TB.map (Prod.mkHom (𝟙 _) ((eqToIso hG).app UA ≪≫ eG).hom) ≫
+      (ruB (G'.obj X)).hom = G'.map (ruA X).hom := by
+  subst hG hc
+  simpa [Functor.isoWhiskerLeft, Functor.isoWhiskerRight, NatTrans.prod] using h X
+
+/-- The scalar unit comparison along a stage transition. -/
+private def commonScalarUnit (W : Scheme.{u})
+    [hW : ∀ w : W, Invertible (l : W.residueField w)] {i j : AlgebraicallyClosedCoefficients.Index l Ω} (h : i ≤ j) :
+    ((stageSystem l Ω W).T h).obj (pullbackTensorRationalUnit l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω i) W) ≅
+      pullbackTensorRationalUnit l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω j) W :=
+  (operationStageTransitionIso l Ω W i j h).app _ ≪≫
+    pullbackTensorRationalScalarUnit l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω i) (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω j)
+      (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω i j h) W
+
+attribute [local semireducible] operationStageTransitionIso in
+private theorem commonScalarUnit_left (W : Scheme.{u})
+    [hW : ∀ w : W, Invertible (l : W.residueField w)] {i j : AlgebraicallyClosedCoefficients.Index l Ω} (h : i ≤ j)
+    (X : Stage l Ω W i) :
+    (rationalTensorStageComparison l Ω W h).hom.app
+        (pullbackTensorRationalUnit l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω i) W, X) ≫
+      (rationalDerivedTensor l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω j) W).map
+        (Prod.mkHom (commonScalarUnit l Ω W h).hom (𝟙 _)) ≫
+      (pullbackTensorRationalLeftUnitor l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω j) W
+        (((stageSystem l Ω W).T h).obj X)).hom =
+    ((stageSystem l Ω W).T h).map
+      (pullbackTensorRationalLeftUnitor l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω i) W X).hom := by
+  have spec := (pullbackTensorRationalScalarUnit_existsUnique l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω i)
+    (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω j) (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω i j h) W).exists.choose_spec
+  exact scalarUnit_leftSquare_of_eq (rationalDerivedTensor l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω i) W)
+    (rationalDerivedTensor l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω j) W)
+    ((stageSystem_existsUnique l Ω W).exists.choose_spec.1 i j h)
+    (rationalTensorScalarComparison l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω i) (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω j)
+      (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω i j h) W)
+    (rationalTensorStageComparison l Ω W h) rfl _ _
+    (pullbackTensorRationalScalarUnit l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω i) (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω j)
+      (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω i j h) W)
+    (pullbackTensorRationalLeftUnitor l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω i) W)
+    (pullbackTensorRationalLeftUnitor l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω j) W)
+    (fun X ↦ (spec X).1) X
+
+attribute [local semireducible] operationStageTransitionIso in
+private theorem commonScalarUnit_right (W : Scheme.{u})
+    [hW : ∀ w : W, Invertible (l : W.residueField w)] {i j : AlgebraicallyClosedCoefficients.Index l Ω} (h : i ≤ j)
+    (X : Stage l Ω W i) :
+    (rationalTensorStageComparison l Ω W h).hom.app
+        (X, pullbackTensorRationalUnit l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω i) W) ≫
+      (rationalDerivedTensor l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω j) W).map
+        (Prod.mkHom (𝟙 _) (commonScalarUnit l Ω W h).hom) ≫
+      (pullbackTensorRationalRightUnitor l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω j) W
+        (((stageSystem l Ω W).T h).obj X)).hom =
+    ((stageSystem l Ω W).T h).map
+      (pullbackTensorRationalRightUnitor l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω i) W X).hom := by
+  have spec := (pullbackTensorRationalScalarUnit_existsUnique l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω i)
+    (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω j) (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω i j h) W).exists.choose_spec
+  exact scalarUnit_rightSquare_of_eq (rationalDerivedTensor l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω i) W)
+    (rationalDerivedTensor l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω j) W)
+    ((stageSystem_existsUnique l Ω W).exists.choose_spec.1 i j h)
+    (rationalTensorScalarComparison l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω i) (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω j)
+      (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω i j h) W)
+    (rationalTensorStageComparison l Ω W h) rfl _ _
+    (pullbackTensorRationalScalarUnit l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω i) (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω j)
+      (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω i j h) W)
+    (pullbackTensorRationalRightUnitor l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω i) W)
+    (pullbackTensorRationalRightUnitor l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω j) W)
+    (fun X ↦ (spec X).2) X
+
+/-- Reassociate the two input corrections through the bifunctor. -/
+private theorem scalarUnit_tensorStageComparison_endpoint
+    {C D : Type*} [Category* C] [Category* D]
+    (F : C × C ⥤ C) (G : D × D ⥤ D) {T R : C ⥤ D} (e : T ≅ R)
+    (c : F ⋙ R ≅ R.prod R ⋙ G) (X Y : C) {X' Y' : D}
+    (a : T.obj X ≅ X') (b : T.obj Y ≅ Y') :
+    ((Functor.isoWhiskerLeft F e ≪≫ c ≪≫
+        Functor.isoWhiskerRight (NatIso.prod e.symm e.symm) G).app (X, Y) ≪≫
+      G.mapIso (Iso.prod a b)) =
+    e.app (F.obj (X, Y)) ≪≫ c.app (X, Y) ≪≫
+      G.mapIso (Iso.prod ((e.app X).symm ≪≫ a) ((e.app Y).symm ≪≫ b)) := by
+  apply Iso.ext
+  dsimp only [Iso.trans_hom, Iso.symm_hom, Iso.app,
+    Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app, NatTrans.comp_app,
+    NatIso.prod_hom, NatTrans.prod, Iso.prod_hom, Functor.mapIso_hom]
+  simp only [Category.assoc, ← Functor.map_comp, prod_comp, Iso.prod_hom, Iso.trans_hom,
+    Iso.symm_hom, Iso.app_inv]
+
+attribute [local semireducible] operationStageTransitionIso commonStageTensorComparison in
+/-- The common-stage tensor comparison is the descent endpoint of the stage comparisons. -/
+private theorem commonStageTensorComparison_endpoint (W : Scheme.{u})
+    [hW : ∀ w : W, Invertible (l : W.residueField w)]
+    (P Q : generalAlgebraicallyClosedConstructibleCategory l Ω W)
+    (L : AlgebraicallyClosedCoefficients.Index l Ω) (h : (commonStageTensorObject l Ω W P Q).stage ≤ L) :
+    (commonStageTensorComparison l Ω W P Q L h).hom =
+      (rationalTensorStageComparison l Ω W h).hom.app
+        (P.toStage ((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).1,
+          Q.toStage ((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).2) ≫
+      (rationalDerivedTensor l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) W).map (Prod.mkHom
+        (((stageSystem l Ω W).assoc
+          ((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).1 h).hom.app P.obj)
+        (((stageSystem l Ω W).assoc
+          ((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).2 h).hom.app
+            Q.obj)) := by
+  have hh := scalarUnit_tensorStageComparison_endpoint
+    (rationalDerivedTensor l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω
+      (Padic.finiteCoefficientCompositum l Ω P.stage Q.stage)) W)
+    (rationalDerivedTensor l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) W)
+    (operationStageTransitionIso l Ω W _ L h)
+    (rationalTensorScalarComparison l
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω (Padic.finiteCoefficientCompositum l Ω P.stage Q.stage))
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω _ L h) W)
+    (P.toStage ((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).1)
+    (Q.toStage ((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).2)
+    (((stageSystem l Ω W).assoc
+      ((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).1 h).app P.obj)
+    (((stageSystem l Ω W).assoc
+      ((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).2 h).app Q.obj)
+  have hh' := congrArg Iso.hom hh
+  simp only [Iso.trans_hom, Functor.mapIso_hom, Iso.prod_hom, Iso.app_hom] at hh'
+  rw [show commonStageTensorComparison l Ω W P Q L h =
+      (operationStageTransitionIso l Ω W _ L h).app (commonStageTensorObject l Ω W P Q).obj ≪≫
+        _ ≪≫ _ from rfl]
+  exact hh'.symm
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+private theorem pullbackTensorCommonLeftUnitor_existsUnique_aux (W : Scheme.{u})
+    [hW : ∀ w : W, Invertible (l : W.residueField w)]
+    (M : generalAlgebraicallyClosedConstructibleCategory l Ω W) :
+    ∃! e : ((@commonStageDerivedTensor l _ Ω _ _ _ W hW)).obj
+        (((@pullbackTensorCommonUnit l _ Ω _ _ _ W hW)),M) ≅ M,
+      ∀ (L : AlgebraicallyClosedCoefficients.Index l Ω)
+        (h : (commonStageTensorObject l Ω W ((@pullbackTensorCommonUnit l _ Ω _ _ _ W hW)) M).stage
+          ≤ L),
+        HEq e.hom (ofHom (commonStageTensorObject l Ω W ((@pullbackTensorCommonUnit l _ Ω _ _ _ W
+          hW)) M) M L h
+          (((Padic.finiteCoefficientFields_properties l Ω).1 ((@pullbackTensorCommonUnit l _ Ω _ _ _
+            W hW)).stage
+          M.stage).2.trans h)
+          ((commonStageTensorComparison l Ω W ((@pullbackTensorCommonUnit l _ Ω _ _ _ W hW)) M L
+            h).hom ≫
+            ((@rationalDerivedTensor l _
+              (_root_.WeilConjectures.AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) _ _ _ W
+              hW)).map
+              (Prod.mkHom ((@pullbackTensorCommonUnitStage l _ Ω _ _ _ W hW) L
+                (((Padic.finiteCoefficientFields_properties l Ω).1 ((@pullbackTensorCommonUnit l _ Ω
+                  _ _ _ W hW)).stage M.stage).1.trans h)).hom (𝟙 _)) ≫
+            ((@pullbackTensorRationalLeftUnitor l _
+              (_root_.WeilConjectures.AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) _ _ _ W
+              hW)
+              (M.toStage (((Padic.finiteCoefficientFields_properties l Ω).1
+                ((@pullbackTensorCommonUnit l _ Ω _ _ _ W hW)).stage M.stage).2.trans h))).hom)) := by
+  classical
+  let S := stageSystem l Ω W
+  let T : ∀ i, Stage l Ω W i × Stage l Ω W i ⥤ Stage l Ω W i := fun i ↦
+    rationalDerivedTensor l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω i) W
+  let c : ∀ {i j : AlgebraicallyClosedCoefficients.Index l Ω} (h : i ≤ j),
+      T i ⋙ S.T h ≅ (S.T h).prod (S.T h) ⋙ T j := fun h ↦
+    rationalTensorStageComparison l Ω W h
+  let Un : ∀ i, Stage l Ω W i := fun i ↦
+    pullbackTensorRationalUnit l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω i) W
+  let e : ∀ {i j : AlgebraicallyClosedCoefficients.Index l Ω} (h : i ≤ j),
+      (S.T h).obj (Un i) ≅ Un j := fun h ↦ commonScalarUnit l Ω W h
+  let lu : ∀ i (X : Stage l Ω W i), (T i).obj (Un i, X) ≅ X := fun i X ↦
+    pullbackTensorRationalLeftUnitor l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω i) W X
+  let ru : ∀ i (X : Stage l Ω W i), (T i).obj (X, Un i) ≅ X := fun i X ↦
+    pullbackTensorRationalRightUnitor l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω i) W X
+  have tower : StageTensorTower S T c := fun h h' X Y ↦
+    rationalTensorStageComparison_coherent l Ω W h h' X Y
+  have hlu : ∀ i {X Y : Stage l Ω W i} (f : X ⟶ Y),
+      (T i).map (Prod.mkHom (𝟙 (Un i)) f) ≫ (lu i Y).hom = (lu i X).hom ≫ f :=
+    fun i X Y f ↦ scalarUnit_rationalLeftUnitor_natural l _ W f
+  have hru : ∀ i {X Y : Stage l Ω W i} (f : X ⟶ Y),
+      (T i).map (Prod.mkHom f (𝟙 (Un i))) ≫ (ru i Y).hom = (ru i X).hom ≫ f :=
+    fun i X Y f ↦ scalarUnit_rationalRightUnitor_natural l _ W f
+  have hL : ∀ {i j : AlgebraicallyClosedCoefficients.Index l Ω} (h : i ≤ j) (X : Stage l Ω W i),
+      (c h).hom.app (Un i, X) ≫ (T j).map (Prod.mkHom (e h).hom (𝟙 _)) ≫
+        (lu j ((S.T h).obj X)).hom = (S.T h).map (lu i X).hom :=
+    fun h X ↦ commonScalarUnit_left l Ω W h X
+  have hR : ∀ {i j : AlgebraicallyClosedCoefficients.Index l Ω} (h : i ≤ j) (X : Stage l Ω W i),
+      (c h).hom.app (X, Un i) ≫ (T j).map (Prod.mkHom (𝟙 _) (e h).hom) ≫
+        (ru j ((S.T h).obj X)).hom = (S.T h).map (ru i X).hom :=
+    fun h X ↦ commonScalarUnit_right l Ω W h X
+  have cocycle := fun {i j k : AlgebraicallyClosedCoefficients.Index l Ω}
+    (h : i ≤ j) (h' : j ≤ k) ↦ stageUnit_cocycle S T c Un e tower lu ru hlu hru hR h h'
+  let U := pullbackTensorCommonUnit l Ω W
+  let A := commonStageTensorObject l Ω W U M
+  have hb := ((Padic.finiteCoefficientFields_properties l Ω).1 U.stage M.stage).1
+  have hm := ((Padic.finiteCoefficientFields_properties l Ω).1 U.stage M.stage).2
+  obtain ⟨d, hd⟩ := pairCategory_exists_iso_of_tr S (A := A) (M := M) hm
+    (fun h ↦ stageLeftUnitorRep S T c Un e lu hb hm M.obj h)
+    (fun h k ↦ stageLeftUnitorRep_tr S T c Un e tower lu hlu hL cocycle hb hm M.obj h k)
+  have hTobj : (commonStageDerivedTensor l Ω W).obj (U, M) = A :=
+    (scalarUnit_chosen_spec (commonStageDerivedTensor_existsUnique l Ω W)
+      (commonStageDerivedTensor l Ω W) (by unfold commonStageDerivedTensor; rfl)).1 U M
+  have hspec : ∀ (L : AlgebraicallyClosedCoefficients.Index l Ω) (h : A.stage ≤ L),
+      HEq (eqToIso hTobj ≪≫ d).hom (ofHom A M L h (hm.trans h)
+        ((commonStageTensorComparison l Ω W U M L h).hom ≫
+          (rationalDerivedTensor l
+            (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) W).map
+            (Prod.mkHom (pullbackTensorCommonUnitStage l Ω W L (hb.trans h)).hom (𝟙 _)) ≫
+          (pullbackTensorRationalLeftUnitor l
+            (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) W
+            (M.toStage (hm.trans h))).hom)) := by
+    intro L h
+    rw [Iso.trans_hom, eqToIso.hom, hd L h]
+    refine (eqToHom_comp_heq _ _).trans (heq_of_eq ?_)
+    dsimp only [GeneralAlgebraicallyClosedCoefficients.ofHom]
+    apply congrArg (StageSystem.PairCategory.mkHom (X := A) (Y := M) L h (hm.trans h))
+    rw [commonStageTensorComparison_endpoint]
+    exact stageLeftUnitorRep_hom_eq S T c Un e lu hb hm M.obj h
+  exact ⟨eqToIso hTobj ≪≫ d, hspec, fun d' hd' ↦
+    Iso.ext (eq_of_heq ((hd' _ le_rfl).trans (hspec _ le_rfl).symm))⟩
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+private theorem pullbackTensorCommonRightUnitor_existsUnique_aux (W : Scheme.{u})
+    [hW : ∀ w : W, Invertible (l : W.residueField w)]
+    (M : generalAlgebraicallyClosedConstructibleCategory l Ω W) :
+    ∃! e : ((@commonStageDerivedTensor l _ Ω _ _ _ W hW)).obj
+        (M,((@pullbackTensorCommonUnit l _ Ω _ _ _ W hW))) ≅ M,
+      ∀ (L : AlgebraicallyClosedCoefficients.Index l Ω)
+        (h : (commonStageTensorObject l Ω W M ((@pullbackTensorCommonUnit l _ Ω _ _ _ W hW))).stage
+          ≤ L),
+        HEq e.hom (ofHom (commonStageTensorObject l Ω W M ((@pullbackTensorCommonUnit l _ Ω _ _ _ W
+          hW))) M L h
+          (((Padic.finiteCoefficientFields_properties l Ω).1 M.stage ((@pullbackTensorCommonUnit l _
+            Ω _ _ _ W hW)).stage).1.trans h)
+          ((commonStageTensorComparison l Ω W M ((@pullbackTensorCommonUnit l _ Ω _ _ _ W hW)) L
+            h).hom ≫
+            ((@rationalDerivedTensor l _
+              (_root_.WeilConjectures.AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) _ _ _ W
+              hW)).map
+              (Prod.mkHom (𝟙 _) ((@pullbackTensorCommonUnitStage l _ Ω _ _ _ W hW) L
+                (((Padic.finiteCoefficientFields_properties l Ω).1 M.stage
+                  ((@pullbackTensorCommonUnit l _ Ω _ _ _ W hW)).stage).2.trans h)).hom) ≫
+            ((@pullbackTensorRationalRightUnitor l _
+              (_root_.WeilConjectures.AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) _ _ _ W
+              hW)
+              (M.toStage (((Padic.finiteCoefficientFields_properties l Ω).1 M.stage
+                ((@pullbackTensorCommonUnit l _ Ω _ _ _ W hW)).stage).1.trans h))).hom)) := by
+  classical
+  let S := stageSystem l Ω W
+  let T : ∀ i, Stage l Ω W i × Stage l Ω W i ⥤ Stage l Ω W i := fun i ↦
+    rationalDerivedTensor l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω i) W
+  let c : ∀ {i j : AlgebraicallyClosedCoefficients.Index l Ω} (h : i ≤ j),
+      T i ⋙ S.T h ≅ (S.T h).prod (S.T h) ⋙ T j := fun h ↦
+    rationalTensorStageComparison l Ω W h
+  let Un : ∀ i, Stage l Ω W i := fun i ↦
+    pullbackTensorRationalUnit l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω i) W
+  let e : ∀ {i j : AlgebraicallyClosedCoefficients.Index l Ω} (h : i ≤ j),
+      (S.T h).obj (Un i) ≅ Un j := fun h ↦ commonScalarUnit l Ω W h
+  let lu : ∀ i (X : Stage l Ω W i), (T i).obj (Un i, X) ≅ X := fun i X ↦
+    pullbackTensorRationalLeftUnitor l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω i) W X
+  let ru : ∀ i (X : Stage l Ω W i), (T i).obj (X, Un i) ≅ X := fun i X ↦
+    pullbackTensorRationalRightUnitor l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω i) W X
+  have tower : StageTensorTower S T c := fun h h' X Y ↦
+    rationalTensorStageComparison_coherent l Ω W h h' X Y
+  have hlu : ∀ i {X Y : Stage l Ω W i} (f : X ⟶ Y),
+      (T i).map (Prod.mkHom (𝟙 (Un i)) f) ≫ (lu i Y).hom = (lu i X).hom ≫ f :=
+    fun i X Y f ↦ scalarUnit_rationalLeftUnitor_natural l _ W f
+  have hru : ∀ i {X Y : Stage l Ω W i} (f : X ⟶ Y),
+      (T i).map (Prod.mkHom f (𝟙 (Un i))) ≫ (ru i Y).hom = (ru i X).hom ≫ f :=
+    fun i X Y f ↦ scalarUnit_rationalRightUnitor_natural l _ W f
+  have hL : ∀ {i j : AlgebraicallyClosedCoefficients.Index l Ω} (h : i ≤ j) (X : Stage l Ω W i),
+      (c h).hom.app (Un i, X) ≫ (T j).map (Prod.mkHom (e h).hom (𝟙 _)) ≫
+        (lu j ((S.T h).obj X)).hom = (S.T h).map (lu i X).hom :=
+    fun h X ↦ commonScalarUnit_left l Ω W h X
+  have hR : ∀ {i j : AlgebraicallyClosedCoefficients.Index l Ω} (h : i ≤ j) (X : Stage l Ω W i),
+      (c h).hom.app (X, Un i) ≫ (T j).map (Prod.mkHom (𝟙 _) (e h).hom) ≫
+        (ru j ((S.T h).obj X)).hom = (S.T h).map (ru i X).hom :=
+    fun h X ↦ commonScalarUnit_right l Ω W h X
+  have cocycle := fun {i j k : AlgebraicallyClosedCoefficients.Index l Ω}
+    (h : i ≤ j) (h' : j ≤ k) ↦ stageUnit_cocycle S T c Un e tower lu ru hlu hru hR h h'
+  let U := pullbackTensorCommonUnit l Ω W
+  let A := commonStageTensorObject l Ω W M U
+  have hm := ((Padic.finiteCoefficientFields_properties l Ω).1 M.stage U.stage).1
+  have hb := ((Padic.finiteCoefficientFields_properties l Ω).1 M.stage U.stage).2
+  obtain ⟨d, hd⟩ := pairCategory_exists_iso_of_tr S (A := A) (M := M) hm
+    (fun h ↦ stageRightUnitorRep S T c Un e ru hb hm M.obj h)
+    (fun h k ↦ stageRightUnitorRep_tr S T c Un e tower ru hru hR cocycle hb hm M.obj h k)
+  have hTobj : (commonStageDerivedTensor l Ω W).obj (M, U) = A :=
+    (scalarUnit_chosen_spec (commonStageDerivedTensor_existsUnique l Ω W)
+      (commonStageDerivedTensor l Ω W) (by unfold commonStageDerivedTensor; rfl)).1 M U
+  have hspec : ∀ (L : AlgebraicallyClosedCoefficients.Index l Ω) (h : A.stage ≤ L),
+      HEq (eqToIso hTobj ≪≫ d).hom (ofHom A M L h (hm.trans h)
+        ((commonStageTensorComparison l Ω W M U L h).hom ≫
+          (rationalDerivedTensor l
+            (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) W).map
+            (Prod.mkHom (𝟙 _) (pullbackTensorCommonUnitStage l Ω W L (hb.trans h)).hom) ≫
+          (pullbackTensorRationalRightUnitor l
+            (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) W
+            (M.toStage (hm.trans h))).hom)) := by
+    intro L h
+    rw [Iso.trans_hom, eqToIso.hom, hd L h]
+    refine (eqToHom_comp_heq _ _).trans (heq_of_eq ?_)
+    dsimp only [GeneralAlgebraicallyClosedCoefficients.ofHom]
+    apply congrArg (StageSystem.PairCategory.mkHom (X := A) (Y := M) L h (hm.trans h))
+    rw [commonStageTensorComparison_endpoint]
+    exact stageRightUnitorRep_hom_eq S T c Un e ru hb hm M.obj h
+  exact ⟨eqToIso hTobj ≪≫ d, hspec, fun d' hd' ↦
+    Iso.ext (eq_of_heq ((hd' _ le_rfl).trans (hspec _ le_rfl).symm))⟩
+
+end CommonUnitorTransport
+
 attribute [local irreducible] pullbackTensorCommonUnitStage pullbackTensorCommonUnit
 
 set_option backward.isDefEq.respectTransparency true in
@@ -1312,7 +1738,7 @@ theorem pullbackTensorCommonLeftUnitor_existsUnique (W : Scheme.{u})
               (M.toStage (((Padic.finiteCoefficientFields_properties l Ω).1
                 ((@pullbackTensorCommonUnit l _ Ω _ _ _ W hW)).stage M.stage).2.trans h))).hom)) :=
                   by
-  sorry
+  exact pullbackTensorCommonLeftUnitor_existsUnique_aux l Ω W M
 
 /-- The common-stage class of the canonical rational left unitor.
 Source: Stacks 03EL, 07A4, 0941; blueprint coefficient conventions
@@ -1357,7 +1783,7 @@ theorem pullbackTensorCommonRightUnitor_existsUnique (W : Scheme.{u})
               hW)
               (M.toStage (((Padic.finiteCoefficientFields_properties l Ω).1 M.stage
                 ((@pullbackTensorCommonUnit l _ Ω _ _ _ W hW)).stage).1.trans h))).hom)) := by
-  sorry
+  exact pullbackTensorCommonRightUnitor_existsUnique_aux l Ω W M
 
 /-- The common-stage class of the canonical rational right unitor.
 Source: Stacks 03EL, 07A4, 0941; blueprint coefficient conventions
