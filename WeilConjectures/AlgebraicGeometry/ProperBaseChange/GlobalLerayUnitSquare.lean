@@ -13,6 +13,7 @@ import WeilConjectures.AlgebraicGeometry.Derived.DerivedSquareLocalClasses
 import WeilConjectures.AlgebraicGeometry.ProperBaseChange.LerayEdgeRestrictedResolution
 import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 import WeilConjectures.AlgebraicGeometry.RestrictedResolutionSectionsExist
+public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 
 /-! # The global cocycle square for an ordinary coefficient map
 
