@@ -38,6 +38,55 @@ namespace AlgebraicGeometry.Scheme
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
   [FiniteDimensional (Padic l) E]
 
+/-- The recorded intrinsic compact-support candidate specialized to the actual finite
+quotient, supplying its proved finiteness rather than asking for extra data.
+Source: blueprint, compactification formula preceding the proposition; Stacks Tag 0GL0
+(blueprint: prop-finite-compact-support-constructibility). -/
+abbrev finiteLevelCompactSupport (n : ℕ) (hn : 1 ≤ n)
+    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :=
+  @sfIntrinsicCompactSupport X Y f c (Padic.coefficientExtensionRing l E n) _
+    (Padic.finite_coefficientExtensionRing l E n hn)
+
+/-- The actual quotient map, sheafified on the original small pro-etale site.
+Source: blueprint, finite reduction clause; Stacks Tag 0GL6
+(blueprint: prop-finite-compact-support-constructibility). -/
+abbrev finiteLevelReductionMap (m n : ℕ) (hmn : m ≤ n) (T : Scheme.{u}) :=
+  (constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).map
+    (CommRingCat.ofHom (RingHom.ulift.{u + 1, u + 1} (Ideal.Quotient.factor
+      (S := Padic.coefficientExtensionIdeal l E n)
+      (T := Padic.coefficientExtensionIdeal l E m) (Ideal.pow_le_pow_right hmn))))
+
+/-- Ordinary unbounded derived extension along A_{E,n} to A_{E,m}.
+This specializes the published K-flat derived-change-of-rings construction, retaining
+its canonical universal counit and tensor-unit-normalized scalar adjunction.
+Source: Stacks Tags 06YY and 0GL6 (blueprint: prop-finite-compact-support-constructibility). -/
+abbrev finiteLevelDerivedReduction (m n : ℕ) (hmn : m ≤ n) (T : Scheme.{u}) :=
+  pbcDerivedExtend (finiteLevelReductionMap l E m n hmn T)
+
+/-- The canonical coefficient comparison is the scalar-adjunction transpose of
+compact support of the tensor unit followed by the specified restriction comparison.
+The latter is normalized on sections, on open adjunction units and on K-injectives.
+Source: Stacks Tag 0GL6 and the blueprint proof, Steps 6--7
+(blueprint: prop-finite-compact-support-constructibility). -/
+def finiteLevelCompactSupportReductionComparison
+    (m n : ℕ) (hm : 1 ≤ m) (hmn : m ≤ n)
+    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
+    (K : proEtaleDerivedCategory X (Padic.coefficientExtensionRing l E n)) :
+    (finiteLevelDerivedReduction l E m n hmn Y).obj
+        ((finiteLevelCompactSupport l E n (hm.trans hmn) c).obj K) ⟶
+      (finiteLevelCompactSupport l E m hm c).obj
+        ((finiteLevelDerivedReduction l E m n hmn X).obj K) :=
+  letI := Padic.finite_coefficientExtensionRing l E n (hm.trans hmn)
+  letI := Padic.finite_coefficientExtensionRing l E m hm
+  ((pbcDerivedScalarAdjunction (finiteLevelReductionMap l E m n hmn Y)).homEquiv _ _).symm
+    ((finiteLevelCompactSupport l E n (hm.trans hmn) c).map
+        ((pbcDerivedScalarAdjunction (finiteLevelReductionMap l E m n hmn X)).unit.app K) ≫
+      (sfCompactSupportRestriction c (Ideal.Quotient.factor
+        (S := Padic.coefficientExtensionIdeal l E n)
+        (T := Padic.coefficientExtensionIdeal l E m)
+        (Ideal.pow_le_pow_right hmn))).hom.app
+          ((finiteLevelDerivedReduction l E m n hmn X).obj K))
+
 private theorem finite_homology_support_iff
     {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
     (K : DerivedCategory C) :
@@ -59,6 +108,28 @@ private theorem finite_homology_support_iff
     intro i hi
     exact ⟨le_of_not_gt (fun hia ↦ hi (h i (Or.inl hia))),
       le_of_not_gt (fun hbi ↦ hi (h i (Or.inr hbi)))⟩
+
+private theorem intrinsic_bc_iff_etale_origin
+    (n : ℕ) (hn : 1 ≤ n) (T : Scheme.{u})
+    (K : proEtaleDerivedCategory T (Padic.coefficientExtensionRing l E n)) :
+    letI := Padic.finite_coefficientExtensionRing l E n hn
+    intrinsicFiniteTorsionConstructible l E n hn T K ↔
+      ∃ G : Etale.DerivedCategoryModule
+          (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) T,
+        Etale.DerivedCategory.isBoundedConstructible
+          (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) T G ∧
+        Nonempty ((ProEtale.finiteCoefficientIntrinsicDerivedComparison T
+          (Padic.coefficientExtensionRing l E n)).obj G ≅ K) := by
+  have := Padic.finite_coefficientExtensionRing l E n hn
+  have h := (finiteRing_constructibleDerived_origin T
+    (Padic.coefficientExtensionRing l E n)).2.2.1 K
+  rw [intrinsicFiniteTorsionConstructible, finite_homology_support_iff]
+  rw [and_comm, ← h]
+  constructor
+  · rintro ⟨G, ⟨e⟩⟩
+    exact ⟨G.obj, G.property, ⟨e⟩⟩
+  · rintro ⟨G, hG, ⟨e⟩⟩
+    exact ⟨⟨G, hG⟩, ⟨e⟩⟩
 
 private theorem coefficient_has_invertible_exponent
     (K₀ : Type u) [Field K₀] (hl : IsUnit (l : K₀)) (n : ℕ) (_hn : 1 ≤ n) :
@@ -92,5 +163,135 @@ private theorem coefficient_has_invertible_exponent
     simpa only [Nat.cast_pow] using hkill
   · have hu := (hl.pow n).map (Scheme.ΓSpecIso (.of K₀)).inv.hom
     simpa only [map_pow, map_natCast, Nat.cast_pow] using hu
+
+private theorem intrinsic_bc_iso
+    (n : ℕ) (hn : 1 ≤ n) (T : Scheme.{u})
+    {K L : proEtaleDerivedCategory T (Padic.coefficientExtensionRing l E n)}
+    (e : K ≅ L) (hK : intrinsicFiniteTorsionConstructible l E n hn T K) :
+    intrinsicFiniteTorsionConstructible l E n hn T L := by
+  have := Padic.finite_coefficientExtensionRing l E n hn
+  obtain ⟨G, hG, ⟨eG⟩⟩ := (intrinsic_bc_iff_etale_origin l E n hn T K).1 hK
+  exact (intrinsic_bc_iff_etale_origin l E n hn T L).2 ⟨G, hG, ⟨eG ≪≫ e⟩⟩
+
+private theorem finite_compact_support_triangulated
+    (n : ℕ) (hn : 1 ≤ n) {X Y : Scheme.{u}} {f : X ⟶ Y}
+    (c : Compactification f) : (finiteLevelCompactSupport l E n hn c).IsTriangulated := by
+  have := Padic.finite_coefficientExtensionRing l E n hn
+  change ((sfIntrinsicExtensionByZero c.i
+    (Padic.coefficientExtensionRing l E n)).mapDerivedCategory ⋙
+      proEtaleConstantDerivedDirectImage c.g
+        (Padic.coefficientExtensionRing l E n)).IsTriangulated
+  infer_instance
+
+/-- Finite-level compact support restricts to an exact triangulated functor on the
+intrinsic bounded constructible subcategories. The interval is chosen before both the
+compactification and the input. Reduction is asserted only when its actual derived
+scalar extension is bounded constructible; there is no finite-Tor-amplitude assumption.
+Both endpoints of the canonical comparison belong to Dbc. Its reduced output has the
+specified interval [c,d+2e], uniformly in the positive reduction level and compactification.
+The coherent candidate and its identity/cocycle comparisons are those of the recorded
+compactification-coherence theorem, restricted to these etale-origin objects.
+
+Source: blueprint prop-finite-compact-support-constructibility, statement and proof,
+Steps 1--7; Stacks Tags 0GL0, 095U and 0GL6
+(blueprint: prop-finite-compact-support-constructibility).
+
+Proof:
+1. The finite quotient is killed by a power of l, which is invertible on the schemes.
+   Every compactification is finite type over the field and hence Noetherian.
+2. Descend the bounded intrinsically constructible input to the etale site. Exact,
+   fully faithful comparison pullback commutes with cohomology and reflects its zero
+   objects, so it preserves and reflects the input interval.
+3. Exact etale extension by zero preserves constructible cohomology. Proper direct
+   image preserves bounded constructibility. The proper/open site comparison carries
+   this result back to the intrinsic pro-etale candidate.
+4. The finite-type compact-support vanishing theorem, applied to the original f,
+   gives [0,2e] for a constructible sheaf. Apply successive truncation triangles and
+   their cohomology long exact sequences to obtain [a,b+2e] for a complex in [a,b].
+   This does not transfer the fibre bound to the boundary of a compactification.
+5. The ambient candidate is triangulated. Preservation from Step 3 restricts this
+   exact functor to the full bounded constructible subcategories with induced triangles.
+   The recorded canonical refinement comparisons give the identity and cocycle laws.
+6. For ordinary derived scalar extension, proper torsion projection formula and the
+   open tensor comparison give the coefficient isomorphism on the etale site. Their
+   tensor-unit/counit normalizations identify it with the displayed scalar-adjunction
+   transpose. Restriction of scalars detects isomorphisms. No perfectness of B is used.
+7. Exact site comparison and its K-flat scalar comparison identify the reduced input.
+   Full faithfulness reflects constructibility and vanishing, so its assumed bounded
+   constructibility permits the comparisons at both coefficient levels. Transport
+   Step 6 back. Step 3 gives bounded constructibility of the target, and the isomorphism
+   gives it for the source. Step 4 at B yields [c,d+2e], uniformly in m and the candidate.
+   If c > d, the reduced input is zero, and its image satisfies every interval bound. -/
+theorem finiteCompactSupportConstructibility
+    (K₀ : Type u) [Field K₀] (hl : IsUnit (l : K₀))
+    (n : ℕ) (hn : 1 ≤ n) {X Y : Scheme.{u}}
+    [X.Over (Spec (.of K₀))] [Y.Over (Spec (.of K₀))]
+    [LocallyOfFiniteType (X ↘ Spec (.of K₀))] [QuasiCompact (X ↘ Spec (.of K₀))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of K₀))] [QuasiCompact (Y ↘ Spec (.of K₀))]
+    (f : X ⟶ Y) [f.IsOver (Spec (.of K₀))]
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] :
+    (∀ c : Compactification f,
+      (finiteLevelCompactSupport l E n hn c).IsTriangulated ∧
+      ∀ K : proEtaleDerivedCategory X (Padic.coefficientExtensionRing l E n),
+        intrinsicFiniteTorsionConstructible l E n hn X K →
+        intrinsicFiniteTorsionConstructible l E n hn Y
+          ((finiteLevelCompactSupport l E n hn c).obj K)) ∧
+    (∀ (a b : ℤ), a ≤ b → ∀ (e : ℕ),
+      (∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y),
+        topologicalKrullDim (Limits.pullback f s : Scheme.{u}) ≤ (e : WithBot ℕ∞)) →
+      ∃ a' b' : ℤ, a' ≤ b' ∧ ∀ (c : Compactification f)
+        (K : proEtaleDerivedCategory X (Padic.coefficientExtensionRing l E n)),
+        intrinsicFiniteTorsionConstructible l E n hn X K →
+        DerivedCategory.homologyConcentratedIn a b K →
+        intrinsicFiniteTorsionConstructible l E n hn Y
+            ((finiteLevelCompactSupport l E n hn c).obj K) ∧
+          DerivedCategory.homologyConcentratedIn a' b'
+            ((finiteLevelCompactSupport l E n hn c).obj K)) ∧
+    (∀ (m : ℕ) (hm : 1 ≤ m) (hmn : m ≤ n) (c : Compactification f)
+      (K : proEtaleDerivedCategory X (Padic.coefficientExtensionRing l E n)),
+      intrinsicFiniteTorsionConstructible l E n hn X K →
+      intrinsicFiniteTorsionConstructible l E m hm X
+        ((finiteLevelDerivedReduction l E m n hmn X).obj K) →
+      IsIso (finiteLevelCompactSupportReductionComparison l E m n hm hmn c K) ∧
+      intrinsicFiniteTorsionConstructible l E m hm Y
+        ((finiteLevelDerivedReduction l E m n hmn Y).obj
+          ((finiteLevelCompactSupport l E n hn c).obj K)) ∧
+      intrinsicFiniteTorsionConstructible l E m hm Y
+        ((finiteLevelCompactSupport l E m hm c).obj
+          ((finiteLevelDerivedReduction l E m n hmn X).obj K)) ∧
+      ∀ (e : ℕ),
+        (∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y),
+          topologicalKrullDim (Limits.pullback f s : Scheme.{u}) ≤ (e : WithBot ℕ∞)) →
+        ∀ (a b : ℤ),
+          DerivedCategory.homologyConcentratedIn a b
+            ((finiteLevelDerivedReduction l E m n hmn X).obj K) →
+          DerivedCategory.homologyConcentratedIn a (b + 2 * (e : ℤ))
+            ((finiteLevelCompactSupport l E m hm c).obj
+              ((finiteLevelDerivedReduction l E m n hmn X).obj K))) := by
+  refine ⟨?_, ?_, ?_⟩
+  · intro c
+    exact ⟨finite_compact_support_triangulated l E n hn c,
+      finite_compact_support_preserves l E K₀ hl n hn f c⟩
+  · intro a b hab e he
+    refine ⟨a, b + 2 * (e : ℤ), by omega, ?_⟩
+    intro c K hK hbound
+    exact ⟨finite_compact_support_preserves l E K₀ hl n hn f c K hK,
+      finite_compact_support_amplitude l E K₀ hl n hn f c e he a b K hK hbound⟩
+  · intro m hm hmn c K hK hKm
+    have hi : IsIso (finiteLevelCompactSupportReductionComparison l E m n hm hmn c K) := by
+      simpa only [finiteLevelCompactSupportReductionComparison, finiteLevelDerivedReduction,
+        finiteLevelReductionMap, finiteLevelCompactSupport, sfAmbientCompactSupportCandidate,
+        sfIntrinsicCompactSupport,
+        Functor.id_obj] using
+        finiteCompactSupportScalarComparison l E K₀ hl n hn m hm hmn f c K hK hKm
+    let := hi
+    have ht := finite_compact_support_preserves l E K₀ hl m hm f c
+      ((finiteLevelDerivedReduction l E m n hmn X).obj K) hKm
+    refine ⟨hi, ?_, ht, ?_⟩
+    · exact intrinsic_bc_iso l E m hm Y
+        (asIso (finiteLevelCompactSupportReductionComparison l E m n hm hmn c K)).symm ht
+    · intro e he a b hbound
+      exact finite_compact_support_amplitude l E K₀ hl m hm f c e he a b
+        ((finiteLevelDerivedReduction l E m n hmn X).obj K) hKm hbound
 
 end AlgebraicGeometry.Scheme

@@ -247,6 +247,11 @@ private theorem congr_eqToHom_inv {X Y : Scheme.{u}} {f g : X ⟶ Y}
   subst g
   simp [projectiveBundlePullbackCongr]
 
+private theorem congr_app_refl {X Y : Scheme.{u}} (f : X ⟶ Y) (F : Y.Modules)
+    (e : f = f) : (projectiveBundlePullbackCongr e).app F = Iso.refl _ := by
+  simp [projectiveBundlePullbackCongr]
+  rfl
+
 private theorem comp_assoc_inv {W X Y Z : Scheme.{u}}
     (f : W ⟶ X) (g : X ⟶ Y) (h : Y ⟶ Z) (F : Z.Modules) :
     (projectiveBundlePullbackComp (f ≫ g) h).inv.app F ≫

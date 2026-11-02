@@ -142,6 +142,20 @@ public import WeilConjectures.AlgebraicGeometry.EtaleFiniteTwistPullbackRest
 public import Mathlib.CategoryTheory.Abelian.Refinements
 public import Mathlib.Algebra.Homology.ShortComplex.Exact
 public import WeilConjectures.AlgebraicGeometry.Vector.VectorBundlePurity
+public import Mathlib.AlgebraicGeometry.AffineSpace
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Adjunction
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantModuleConstructibility
+public import WeilConjectures.AlgebraicGeometry.Reduction.ReductionExceptionalChart
+public import WeilConjectures.AlgebraicGeometry.Reduction.ReductionExceptionalRealization
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenCover
 
 /-! # Canonical data for finite general-ring smooth purity
 
@@ -159,6 +173,24 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory AlgebraicGeometry
 open AlgebraicGeometry.Scheme
 open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale
+
+/-- The comparison-origin unit. This is the actual constant A_T in degree zero.
+Source: general-ring purity, omega=f^!A_Y (blueprint: det-sp-finite-general-ring). -/
+def finiteGeneralRingUnit (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :=
+  (Etale.FiniteSmoothPurity.comparison A T).obj (Etale.ordinaryFiniteUnit A T)
+
+/-- The map from nu* of the ordinary dualizing complex to f^! of the comparison unit.
+Its formula uses the comparison-adjunction unit, so it is never an arbitrary iso.
+Source: finite exceptional inverse image (blueprint: det-sp-finite-general-ring). -/
+def finiteGeneralRingDualizingUnitMap (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] :
+    (Etale.FiniteSmoothPurity.comparison A X).obj
+        (Etale.dualizingComplex A f) ⟶
+      (Etale.FiniteSmoothPurity.exceptional A f).obj (finiteGeneralRingUnit A Y) :=
+  (Etale.FiniteSmoothPurity.comparison A X).map
+    ((Etale.rightDerivedUpperShriek A f).map
+      ((derivedComparisonAdjunction (ModuleCat.{u + 1} A) Y).unit.app
+        (Etale.ordinaryFiniteUnit A Y)))
 
 /-- Tensor a normalized Kummer sheaf comparison in the published ordered shifted model.
 The empty power is the identity on the coefficient unit. No orientation is chosen.

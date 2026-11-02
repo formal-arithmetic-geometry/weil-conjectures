@@ -166,6 +166,142 @@ def compactSupportCoefficientComparisonPlus
     (((rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} A) c).map M.unit ≫
       (compactSupportCoefficientRestrictionPlus φ c).hom.app M.obj).hom))
 
+private theorem universal_open_transport
+    {CA DA CB DB : Type*} [Category CA] [Category DA] [Category CB] [Category DB]
+    {JA : CA ⥤ DA} {RA : DA ⥤ CA} {JB : CB ⥤ DB} {RB : DB ⥤ CB}
+    (adjA : JA ⊣ RA) (adjB : JB ⊣ RB) (UX : CB ⥤ CA) (UZ : DB ⥤ DA)
+    (c : UX ⋙ JA ≅ JB ⋙ UZ) (t : RB ⋙ UX ≅ UZ ⋙ RA)
+    (hc : ∀ M, adjA.unit.app (UX.obj M) ≫ RA.map (c.hom.app M) =
+      UX.map (adjB.unit.app M) ≫ t.hom.app (JB.obj M))
+    {K : CA} {M : CB} (η : K ⟶ UX.obj M)
+    (hη : ∀ N, Function.Bijective fun g : M ⟶ N ↦ η ≫ UX.map g) (N : DB) :
+    Function.Bijective fun g : JB.obj M ⟶ N ↦
+      JA.map η ≫ c.hom.app M ≫ UZ.map g := by
+  have h := (adjA.homEquiv K (UZ.obj N)).symm.bijective.comp
+    (((t.app N).homToEquiv (Z := K)).bijective.comp
+      ((hη (RB.obj N)).comp (adjB.homEquiv M N).bijective))
+  convert h using 1
+  funext g
+  change JA.map η ≫ c.hom.app M ≫ UZ.map g =
+    (adjA.homEquiv K (UZ.obj N)).symm
+      ((η ≫ UX.map ((adjB.homEquiv M N) g)) ≫ (t.app N).hom)
+  apply (adjA.homEquiv K (UZ.obj N)).injective
+  rw [Equiv.apply_symm_apply]
+  simp only [Adjunction.homEquiv_unit, Functor.map_comp, Category.assoc]
+  rw [← reassoc_of% (adjA.unit.naturality η), reassoc_of% hc M]
+  have hn := t.hom.naturality g
+  dsimp only [Functor.comp_map] at hn
+  rw [← hn]
+  rfl
+
+private theorem openTensorUnit_universal
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] {φ : A →+* B}
+    {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]
+    {K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))}
+    (M : CoefficientTensorModel φ X K) :
+    Sheaf.IsDerivedBaseChange
+      (((openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapDerivedCategoryPlus.map M.unit ≫
+        (coefficientRestrictionOpenPlus φ j).hom.app M.obj).hom) := by
+  have := coefficientRestrictionOpenMap_isIso φ j
+  let β := asIso (coefficientRestrictionOpenMap φ j)
+  let τ := (asIso (upperStarRestrictScalars φ j).natTrans).symm
+  have hc (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)) :
+      (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j).unit.app
+          ((Sheaf.restrictScalars X.smallEtaleTopology φ).obj F) ≫
+        (upperStar (ModuleCat.{u + 1} A) j).map (β.hom.app F) =
+      (Sheaf.restrictScalars X.smallEtaleTopology φ).map
+          ((openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} B) j).unit.app F) ≫
+        τ.hom.app ((openImmersionLowerShriek (ModuleCat.{u + 1} B) j).obj F) := by
+    exact (unit_mateEquiv_symm
+      (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} B) j)
+      (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j) τ.hom F).symm
+  have hd := Adjunction.mapDerivedCategoryAdjunction_mate
+    (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} B) j)
+    (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j) τ β hc
+  intro N
+  have h := universal_open_transport
+    (derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j)
+    (derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} B) j)
+    (Sheaf.derivedRestrictScalars X.smallEtaleTopology φ)
+    (Sheaf.derivedRestrictScalars Z.smallEtaleTopology φ)
+    (Functor.mapDerivedCategorySquareIso β) (Functor.mapDerivedCategorySquareIso τ)
+    hd M.unit.hom M.universal N
+  have he : _root_.DerivedCategory.Plus.ι.map
+      ((coefficientRestrictionOpenPlus φ j).hom.app M.obj) =
+      (Functor.mapDerivedCategorySquareIso β).hom.app M.obj.obj := by
+    have hcomp : _root_.DerivedCategory.Plus.ι.mapIso
+        (((Sheaf.restrictScalars X.smallEtaleTopology φ).mapDerivedCategoryPlusCompIso
+          (openImmersionLowerShriek (ModuleCat.{u + 1} A) j)).app M.obj) =
+        (((Sheaf.restrictScalars X.smallEtaleTopology φ).mapDerivedCategoryCompIso
+          (openImmersionLowerShriek (ModuleCat.{u + 1} A) j)).app M.obj.obj) := by
+      apply Iso.ext
+      exact Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app _ _ _
+    simp only [coefficientRestrictionOpenPlus, Iso.trans_hom, Iso.symm_hom,
+      NatTrans.comp_app, Functor.map_comp]
+    have hinv := congrArg Iso.inv hcomp
+    change _root_.DerivedCategory.Plus.ι.map
+        (((Sheaf.restrictScalars X.smallEtaleTopology φ).mapDerivedCategoryPlusCompIso
+          (openImmersionLowerShriek (ModuleCat.{u + 1} A) j)).inv.app M.obj) =
+        (((Sheaf.restrictScalars X.smallEtaleTopology φ).mapDerivedCategoryCompIso
+          (openImmersionLowerShriek (ModuleCat.{u + 1} A) j)).inv.app M.obj.obj) at hinv
+    rw [hinv]
+    simp only [Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app,
+      Functor.ι_map_mapDerivedCategoryPlusNatIso_hom_app]
+    rfl
+  change Function.Bijective fun g ↦
+    ((openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapDerivedCategory.map M.unit.hom ≫
+      _root_.DerivedCategory.Plus.ι.map
+        ((coefficientRestrictionOpenPlus φ j).hom.app M.obj)) ≫
+      (Sheaf.derivedRestrictScalars Z.smallEtaleTopology φ).map g
+  rw [he]
+  convert h using 1
+  funext g
+  exact Category.assoc _ _ _
+
+/-- The canonical ordinary-etale coefficient comparison is invertible for finite rings.
+Source: Stacks Tags 0GL5 and 0GL6
+(blueprint: lem-fix-compact-support-coefficient-change).
+Proof: write compact support as the proper direct image after open extension. The
+open coefficient mate is an isomorphism by its unit normalization. For the proper
+factor use the torsion-ring unbounded proper projection formula, applied to the
+constant B-module; the canonical direct-image coefficient arrow is its counit mate.
+The universal tensor bijections identify this B-linear composite with the displayed
+comparison. Restricting back to the bounded-below full subcategory reflects its
+invertibility. This is the ordinary-etale part of the coefficient-change argument. -/
+theorem compactSupportCoefficientComparisonPlus_isIso
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
+    {φ : A →+* B} {X Y : Scheme.{u}} [CompactSpace Y] [QuasiSeparatedSpace Y]
+    {f : X ⟶ Y} (c : Compactification f)
+    {K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))}
+    (M : CoefficientTensorModel φ X K)
+    (N : CoefficientTensorModel φ Y
+      ((rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} A) c).obj K)) :
+    IsIso (compactSupportCoefficientComparisonPlus c M N) := by
+  let η := (openImmersionLowerShriek (ModuleCat.{u + 1} A)
+    c.i).mapDerivedCategoryPlus.map M.unit ≫
+      (coefficientRestrictionOpenPlus φ c.i).hom.app M.obj
+  have hη : Sheaf.IsDerivedBaseChange η.hom := openTensorUnit_universal c.i M
+  have hp := properCoefficientTensorUnit_universal φ c.g η hη
+  have htarget : Sheaf.IsDerivedBaseChange
+      (((rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} A) c).map M.unit ≫
+        (compactSupportCoefficientRestrictionPlus φ c).hom.app M.obj).hom) := by
+    simpa only [η, compactSupportCoefficientRestrictionPlus,
+      rightDerivedLowerShriekOfCompactificationPlus,
+      Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+      Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
+      Functor.whiskerRight_app, Functor.whiskerLeft_app,
+      Functor.associator_hom_app, Functor.associator_inv_app,
+      Category.id_comp, Category.comp_id, Functor.map_comp,
+      Functor.comp_map, Category.assoc] using hp
+  have hfac := (Equiv.ofBijective _ (N.universal _)).apply_symm_apply
+    (((rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} A) c).map M.unit ≫
+      (compactSupportCoefficientRestrictionPlus φ c).hom.app M.obj).hom)
+  have : IsIso (_root_.DerivedCategory.Plus.ι.map
+      (compactSupportCoefficientComparisonPlus c M N)) :=
+    N.universal.isIso htarget (compactSupportCoefficientComparisonPlus c M N).hom hfac
+  exact isIso_of_reflects_iso (compactSupportCoefficientComparisonPlus c M N)
+    _root_.DerivedCategory.Plus.ι
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency false in

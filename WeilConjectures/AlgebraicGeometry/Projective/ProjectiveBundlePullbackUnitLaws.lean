@@ -22,6 +22,63 @@ universe u
 open CategoryTheory
 namespace AlgebraicGeometry
 
+/-- Left unit law transported from the ordinary module-pullback pseudofunctor.
+Source: Stacks Project, Sheaves, Tag 0097; Constructions Tag 01O3
+(blueprint: lem-pur-projective-bundle-pullback-unit-laws). -/
+theorem projectiveBundlePullback_left_unitality
+    {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    (projectiveBundlePullbackComp f (𝟙 Y)).inv ≫
+      Functor.whiskerRight (projectiveBundlePullbackId Y).hom (Scheme.Modules.tensorPullback f) ≫
+        (Functor.leftUnitor _).hom = eqToHom (by simp) := by
+  unfold projectiveBundlePullbackComp projectiveBundlePullbackId
+  simp only [Iso.trans_inv, Iso.trans_hom, Iso.symm_inv,
+    Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_inv,
+    Functor.whiskerRight_comp, Category.assoc]
+  apply NatTrans.ext
+  funext F
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.leftUnitor_hom_app]
+  rw [← Functor.map_comp_assoc, Iso.inv_hom_id_app]
+  rw [CategoryTheory.Functor.map_id]
+  simp only [Category.id_comp]
+  rw [← (projectiveBundleTensorPullbackIso f).inv.naturality_assoc]
+  have h := congrArg (fun k ↦ k.app F) (Scheme.Modules.pseudofunctor_left_unitality f)
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.leftUnitor_hom_app] at h
+  rw [reassoc_of% h]
+  have hn := congrArg (fun k ↦ k.app F) (eqToHom_iso_hom_naturality
+    (fun g : X ⟶ Y ↦ projectiveBundleTensorPullbackIso g) (Category.comp_id f))
+  simp only [NatTrans.comp_app] at hn
+  rw [reassoc_of% hn]
+  simp
+
+/-- Right unit law transported from the ordinary module-pullback pseudofunctor.
+Source: Stacks Project, Sheaves, Tag 0097; Constructions Tag 01O3
+(blueprint: lem-pur-projective-bundle-pullback-unit-laws). -/
+theorem projectiveBundlePullback_right_unitality
+    {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    (projectiveBundlePullbackComp (𝟙 X) f).inv ≫
+      Functor.whiskerLeft (Scheme.Modules.tensorPullback f) (projectiveBundlePullbackId X).hom ≫
+        (Functor.rightUnitor _).hom = eqToHom (by simp) := by
+  unfold projectiveBundlePullbackComp projectiveBundlePullbackId
+  simp only [Iso.trans_inv, Iso.trans_hom, Iso.symm_inv,
+    Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_inv,
+    Functor.whiskerLeft_comp, Category.assoc]
+  apply NatTrans.ext
+  funext F
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.rightUnitor_hom_app]
+  rw [← (projectiveBundleTensorPullbackIso (𝟙 X)).inv.naturality_assoc]
+  simp only [Iso.inv_hom_id_app_assoc]
+  rw [(Scheme.Modules.pullbackId X).hom.naturality_assoc]
+  have h := congrArg (fun k ↦ k.app F) (Scheme.Modules.pseudofunctor_right_unitality f)
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.rightUnitor_hom_app] at h
+  rw [reassoc_of% h]
+  have hn := congrArg (fun k ↦ k.app F) (eqToHom_iso_hom_naturality
+    (fun g : X ⟶ Y ↦ projectiveBundleTensorPullbackIso g) (Category.id_comp f))
+  simp only [NatTrans.comp_app] at hn
+  rw [reassoc_of% hn]
+  simp
+
 /-- Associativity transported from the ordinary module-pullback pseudofunctor.
 Source: Stacks Project, Sheaves, Tag 0097; Constructions Tag 01O3
 (blueprint: lem-pur-projective-bundle-pullback-unit-laws). -/
