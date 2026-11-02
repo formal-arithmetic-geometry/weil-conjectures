@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Complete.CompleteProperOpenGamma
 public import WeilConjectures.AlgebraicGeometry.Strict.Tower.StrictTowerExchangeMateNormalization
 public import WeilConjectures.AlgebraicGeometry.Completed.Koszul.CompletedKoszulQuotientComparison
 public import WeilConjectures.AlgebraicGeometry.Bounded.BoundedConstructibleCompleteSupplement
+public import WeilConjectures.AlgebraicGeometry.Complete.CompleteStrictReductionOrigins
 
 /-!
 # Invertibility of the completed proper/open gamma
@@ -193,17 +194,12 @@ theorem cbcProperOpenGamma_strictConjugate {V W S T : Scheme.{t}} (k : V ⟶ W) 
 
 /-- Compatible etale origins of a completed object give finite constant-coefficient etale
 origins of every level of its restricted strict reduction tower.
-Source: blueprint def-weil-pbc-bounded-constructible-complete and
-def-cbc-finite-constant-coefficient-transport (blueprint: thm-cbc-complete-proetale).
-Proof sketch: at level n take Λ = A/I^(n+1), the quotient map A → Λ and the retained
-bounded-below etale origin of the n-th witnessed level; its realization is identified
-with the n-th completed reduction, which is the n-th level of the strict reduction tower,
-and restriction of scalars along A → Λ matches constant-coefficient restriction. -/
+Source: blueprint step 8 (blueprint: thm-cbc-complete-proetale). -/
 theorem cbcStrictReduction_scalarEtaleOrigin (V : Scheme.{t}) (K : d.derived V)
     (origins : PbcHasCompatibleEtaleOrigins V d K) (n : ℕ) :
     Nonempty (ProEtale.StrictTower.ScalarEtaleOrigin A V
-      ((ProEtale.StrictTower.ev A V n).obj ((cbcStrictReduction d V).obj K))) := by
-  sorry
+      ((ProEtale.StrictTower.ev A V n).obj ((cbcStrictReduction d V).obj K))) :=
+  cbcStrictReductionLevel_scalarEtaleOrigin d V K origins n
 
 /-- The proper/open gamma is invertible on complete objects with compatible etale origins.
 Source: blueprint proof step 8; Stacks 0F7B, 09C9 (blueprint: thm-cbc-complete-proetale).
