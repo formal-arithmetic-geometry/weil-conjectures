@@ -77,8 +77,6 @@ local instance finiteProperCache1 : CategoryTheory.EssentiallySmall.{u + 1} Prof
   CategoryTheory.essentiallySmallSelf.{0} _
 
 attribute [local instance] Sheaf.monoidalCategory Sheaf.braidedCategory
-attribute [-instance] CategoryTheory.sfbSheafTensor_monoidalPreadditive
-attribute [-instance] CategoryTheory.sfbSheafTensor_hasWeakSheafify
 
 local instance finiteProperCache2 : ∀ (F G : Profinite.{u}ᵒᵖ ⥤ Ab.{u + 1}),
     Enriched.FunctorCategory.HasEnrichedHom Ab.{u + 1} F G :=

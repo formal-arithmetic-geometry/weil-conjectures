@@ -28,6 +28,9 @@ Source: Bhatt--Scholze, Lemma 6.3.14, final paragraph, as used in Lemma 6.8.12
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+
+attribute [-instance] CategoryTheory.flatConstantModulesAbelian
+
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated Opposite
 open scoped ZeroObject

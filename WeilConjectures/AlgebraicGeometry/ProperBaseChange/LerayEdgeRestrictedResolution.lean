@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeOpenChoices
+public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 public import WeilConjectures.AlgebraicGeometry.LerayDegenerateSections
 import WeilConjectures.AlgebraicGeometry.RestrictedResolutionCohomology
 import WeilConjectures.AlgebraicGeometry.ProperBaseChange.LerayWholeOpenClass

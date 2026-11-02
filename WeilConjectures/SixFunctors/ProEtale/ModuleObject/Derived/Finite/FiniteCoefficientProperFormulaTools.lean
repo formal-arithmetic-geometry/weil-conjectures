@@ -213,8 +213,6 @@ attribute [local instance] finiteProperCache1 finiteProperCache2 finiteProperCac
   finiteProperCache4 finiteProperCache5 finiteProperCache6 finiteProperCache7
   finiteProperCache8 finiteProperCache9 finiteProperCache10 finiteProperCache11
   finiteProperCache12
-attribute [-instance] CategoryTheory.sfbSheafTensor_monoidalPreadditive
-attribute [-instance] CategoryTheory.sfbSheafTensor_hasWeakSheafify
 
 private instance sectionDerived
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

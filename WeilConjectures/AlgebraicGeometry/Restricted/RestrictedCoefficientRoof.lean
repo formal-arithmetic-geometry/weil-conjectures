@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Square.SquareResolutionRoofModels
+public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 import WeilConjectures.AlgebraicGeometry.Restricted.RestrictedCoefficientNatRoof
 import WeilConjectures.CategoryTheory.MapExtendHomology
 

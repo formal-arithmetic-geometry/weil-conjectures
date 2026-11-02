@@ -22,6 +22,9 @@ Source: Bhatt--Scholze, Proposition 6.6.11 and Lemma 6.3.14(1)
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+
+attribute [-instance] CategoryTheory.flatConstantModulesAbelian
+
 set_option synthInstance.maxSize 4096
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite

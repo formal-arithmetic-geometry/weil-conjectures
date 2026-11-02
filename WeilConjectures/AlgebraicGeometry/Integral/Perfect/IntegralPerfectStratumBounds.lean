@@ -21,6 +21,9 @@ Source: Bhatt--Scholze, Lemma 6.3.14, exact open and closed extensions
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+
+attribute [-instance] CategoryTheory.flatConstantModulesAbelian
+
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme

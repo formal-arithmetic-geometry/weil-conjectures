@@ -247,12 +247,12 @@ Source: Bhatt--Scholze, Proposition 6.8.14(2)
 (blueprint: lem-weil-pbc-condensed-e-realization). -/
 structure Base (k : Type u) [Field k] where
   scheme : Scheme.{u}
-  [over : scheme.Over (Spec (.of k))]
+  [«over» : scheme.Over (Spec (.of k))]
   [finiteType : LocallyOfFiniteType (scheme ↘ Spec (.of k))]
   [quasiCompact : QuasiCompact (scheme ↘ Spec (.of k))]
   [separated : IsSeparated (scheme ↘ Spec (.of k))]
 
-attribute [instance] Base.over Base.finiteType Base.quasiCompact Base.separated
+attribute [instance] Base.«over» Base.finiteType Base.quasiCompact Base.separated
 
 /-- The same geometric datum as a bundled scheme over its base field.
 Source: BS 6.8.14(2) (blueprint: lem-weil-pbc-condensed-e-realization). -/
