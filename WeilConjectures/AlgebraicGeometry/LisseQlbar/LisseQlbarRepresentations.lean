@@ -118,6 +118,27 @@ abbrev fibre {X : Scheme.{u}} {Ω : Type u} [Field Ω]
     CondensedRing.Evaluation.sections (Scheme.ProEt.topology (Spec (.of Ω)))
       (condensedRingObj Λ (Spec (.of Ω))) (Scheme.ProEt.mk (𝟙 _))
 
+/-- Sections of the ordinary inverse image of an abelian sheaf.
+Source: blueprint, Fibres (blueprint: thm-lisse-qlbar-representations). -/
+abbrev abFibre {X : Scheme.{u}} {Ω : Type u} [Field Ω]
+    (x : Spec (.of Ω) ⟶ X) :=
+  ProEtale.upperStar Ab.{u + 1} x ⋙
+    (sheafSections (Scheme.ProEt.topology (Spec (.of Ω))) Ab.{u + 1}).obj
+      (op (Scheme.ProEt.mk (𝟙 _)))
+
+/-- The canonical underlying-sheaf identification for the module fibre. Scalar
+extension along the invertible coefficient pullback map is restriction along its inverse.
+Source: blueprint, Fibres (blueprint: thm-lisse-qlbar-representations). -/
+@[irreducible] def fibreUnderlyingIso {X : Scheme.{u}} {Ω : Type u} [Field Ω]
+    (x : Spec (.of Ω) ⟶ X)
+    (L : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
+    AddCommGrpCat.of ((fibre Λ x).obj L) ≅ (abFibre x).obj L.X :=
+  ((sheafSections (Scheme.ProEt.topology (Spec (.of Ω))) Ab.{u + 1}).obj
+    (op (Scheme.ProEt.mk (𝟙 _)))).mapIso
+      ((Mod.forget _).mapIso ((Mod.extendScalarsIsoComapInv
+        (condensedPullbackHom Λ x)).app
+          (((ProEtale.upperStar Ab.{u + 1} x).mapMod (condensedRingObj Λ X)).obj L)))
+
 /-- An embedded lisse integral module whose given inclusion rationalizes to an isomorphism.
 Source: latest blueprint, thm-lisse-qlbar-representations.md, introductory lattice definition,
 and sk-lem-uniform-constructible-ext/_section.md, lattice antecedent
@@ -132,6 +153,26 @@ def hasLattice
     CondensedRing.LocallyFree (condensedRingObj Λ X) M ∧
     ∃ i : M ⟶ (Mod.comap (coefficientMap a X)).obj L,
       Mono i ∧ IsIso (((Mod.extendRestrictAdjunction (coefficientMap a X)).homEquiv M L).symm i)
+
+/-- Constant scalars as morphisms from the tensor unit, using the constant-sheaf
+adjunction. Source: blueprint, Fibres (blueprint: thm-lisse-qlbar-representations). -/
+@[irreducible] def constantSection (r : condensedScalarRing Λ) :
+    𝟙_ (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) ⟶ Λ :=
+  ((constantSheafAdj (coherentTopology Profinite.{u}) Ab.{u + 1}
+    terminalIsTerminal).homEquiv (𝟙_ Ab.{u + 1}) Λ).symm
+      (AddCommGrpCat.ofHom
+        (((AddMonoidHom.mulRight r).comp (Int.castAddHom (condensedScalarRing Λ))).comp
+          AddEquiv.ulift.toAddMonoidHom))
+
+/-- Multiplication by the specified ordinary scalar on an internal module.
+Source: blueprint, reductions in (1) (blueprint: thm-lisse-qlbar-representations). -/
+@[irreducible] def scalarEnd (X : Scheme.{u}) (r : condensedScalarRing Λ)
+    (L : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :
+    L.X ⟶ L.X :=
+  (λ_ L.X).inv ≫
+    ((Functor.LaxMonoidal.ε (upperStarFromPoint X) ≫
+      (upperStarFromPoint X).map (constantSection Λ r)) ▷ L.X) ≫
+    ModObj.smul (M := condensedRingObj Λ X) (X := L.X)
 
 /-- The finite-extension condensed coefficient ring with its inherited absolute-value topology.
 Source: latest blueprint, thm-lisse-qlbar-representations.md, coefficient convention
