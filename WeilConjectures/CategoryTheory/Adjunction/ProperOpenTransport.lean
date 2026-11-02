@@ -19,7 +19,7 @@ Source: Weil conjectures blueprint, node thm-cbc-complete-proetale, proof step 8
 (blueprint: thm-cbc-complete-proetale).
 -/
 
-@[expose] public section
+@[expose] public noncomputable section
 
 open CategoryTheory Functor
 
@@ -100,5 +100,75 @@ theorem betaInvApp_transport {PgU : U ⥤ U'} {Jj : U ⥤ X} {Pj : X ⥤ U} (adj
   rw [← PgU₁.map_comp_assoc, ← PgU₁.map_comp_assoc, unit_openComparison]
 
 end BetaInv
+
+section OpenToPush
+
+variable {U X U₁ X₁ : Type*} [Category U] [Category X] [Category U₁] [Category X₁]
+  {J : U ⥤ X} {P : X ⥤ U} {R : U ⥤ X} (adjJ : J ⊣ P) (adjP : P ⊣ R) [IsIso adjJ.unit]
+  {J₁ : U₁ ⥤ X₁} {P₁ : X₁ ⥤ U₁} {R₁ : U₁ ⥤ X₁} (adjJ₁ : J₁ ⊣ P₁) (adjP₁ : P₁ ⊣ R₁)
+  [IsIso adjJ₁.unit]
+
+/-- The comparison from open extension to direct image, fixed by the two units. -/
+def openToPush : J ⟶ R where
+  app M := adjP.unit.app (J.obj M) ≫ R.map ((inv adjJ.unit).app M)
+  naturality M N f := by
+    have h₁ := adjP.unit.naturality (J.map f)
+    have h₂ := (inv adjJ.unit).naturality f
+    dsimp only [Functor.comp_obj, Functor.comp_map, Functor.id_obj, Functor.id_map] at h₁ h₂ ⊢
+    rw [reassoc_of% h₁, ← R.map_comp, h₂, R.map_comp, Category.assoc]
+
+/-- The clopen projection: the direct-image unit followed by the inverse comparison. -/
+def clopenProjection [IsIso (openToPush adjJ adjP)] : 𝟭 X ⟶ P ⋙ J :=
+  adjP.unit ≫ Functor.whiskerLeft P (inv (openToPush adjJ adjP))
+
+variable {ΦU : U ⥤ U₁} {ΦX : X ⥤ X₁} (φ : P ⋙ ΦU ≅ ΦX ⋙ P₁)
+
+/-- The open-to-direct-image comparison is transported along a comparison of inverse images,
+open extensions and direct images being compared by its mates. -/
+theorem openToPush_transport (M : U) :
+    (openComparison adjJ adjJ₁ φ).app M ≫ ΦX.map ((openToPush adjJ adjP).app M) ≫
+        (mateEquiv adjP adjP₁ φ.inv).app M =
+      (openToPush adjJ₁ adjP₁).app (ΦU.obj M) := by
+  have hu := map_unit_comp_mateEquiv_app adjP adjP₁ φ (J.obj M)
+  have hn := (mateEquiv adjP adjP₁ φ.inv).naturality ((inv adjJ.unit).app M)
+  have hn' := adjP₁.unit.naturality ((openComparison adjJ adjJ₁ φ).app M)
+  have hc : P₁.map ((openComparison adjJ adjJ₁ φ).app M) ≫ φ.inv.app (J.obj M) ≫
+      ΦU.map ((inv adjJ.unit).app M) = (inv adjJ₁.unit).app (ΦU.obj M) := by
+    rw [← cancel_epi (adjJ₁.unit.app (ΦU.obj M)), ← Category.assoc,
+      ← unit_openComparison adjJ adjJ₁ φ M]
+    simp only [Category.assoc, Iso.hom_inv_id_app_assoc, ← ΦU.map_comp]
+    simp
+  dsimp only [Functor.comp_obj, Functor.comp_map, Functor.id_obj, Functor.id_map] at hn hn'
+  simp only [openToPush, Functor.map_comp, Category.assoc]
+  erw [hn, reassoc_of% hu, reassoc_of% hn']
+  rw [← R₁.map_comp, ← R₁.map_comp, ← hc]
+
+/-- The clopen projection is transported along a comparison of inverse images. -/
+theorem clopenProjection_transport [IsIso (openToPush adjJ adjP)]
+    [IsIso (openToPush adjJ₁ adjP₁)] [IsIso (openComparison adjJ adjJ₁ φ)] (M : X) :
+    ΦX.map ((clopenProjection adjJ adjP).app M) =
+      (clopenProjection adjJ₁ adjP₁).app (ΦX.obj M) ≫ J₁.map (φ.inv.app M) ≫
+        (openComparison adjJ adjJ₁ φ).app (P.obj M) := by
+  have ht := openToPush_transport adjJ adjP adjJ₁ adjP₁ φ (P.obj M)
+  have hu := map_unit_comp_mateEquiv_app adjP adjP₁ φ M
+  have hn := (openToPush adjJ₁ adjP₁).naturality (φ.inv.app M)
+  dsimp only [Functor.comp_obj, Functor.comp_map, Functor.id_obj, Functor.id_map] at hn
+  have : IsIso (ΦX.map ((openToPush adjJ adjP).app (P.obj M)) ≫
+      (mateEquiv adjP adjP₁ φ.inv).app (P.obj M)) := by
+    have : IsIso ((openComparison adjJ adjJ₁ φ).app (P.obj M) ≫
+        ΦX.map ((openToPush adjJ adjP).app (P.obj M)) ≫
+          (mateEquiv adjP adjP₁ φ.inv).app (P.obj M)) := by
+      rw [ht]; infer_instance
+    exact IsIso.of_isIso_comp_left ((openComparison adjJ adjJ₁ φ).app (P.obj M)) _
+  rw [← cancel_mono (ΦX.map ((openToPush adjJ adjP).app (P.obj M)) ≫
+    (mateEquiv adjP adjP₁ φ.inv).app (P.obj M))]
+  simp only [Category.assoc]
+  erw [ht]
+  simp only [clopenProjection, NatTrans.comp_app, Functor.whiskerLeft_app, Functor.map_comp,
+    Category.assoc, NatIso.isIso_inv_app, ← ΦX.map_comp_assoc, IsIso.inv_hom_id,
+    Functor.map_id, Category.id_comp]
+  erw [hu, hn, IsIso.inv_hom_id_assoc]
+
+end OpenToPush
 
 end CategoryTheory.ProperOpenTransport
