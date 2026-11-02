@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CompactlySupported
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructiblePullback
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek
 public import WeilConjectures.WeilObject.BoundedConstructible.Defs
 
@@ -40,12 +41,9 @@ The Frobenius square `e_X ≫ f = f ≫ e_Y` is cartesian, its horizontal maps b
   inverse of `b_!` for the adjunction `Rf_! ⊣ Rf^!` on both sides
   (`ProEtale.CondensedRing.weilUpperShriekComparison`).
 
-## Sorried input
-
-- `ProEtale.CondensedRing.isEquivalence_boundedConstructibleUpperStar_of_iso`: the Frobenius
-  pullback `Φ_X = Le_X^*` is an equivalence, with inverse the pullback along `e_X⁻¹`. Making it
-  precise needs the identity isomorphism `L(𝟙 X)^* ≅ 𝟭` of the derived pullback on module
-  objects, which is not yet available.
+The Frobenius pullback `Φ_X = Le_X^*` is an equivalence, with inverse the pullback along `e_X⁻¹`
+(`ProEtale.CondensedRing.isEquivalence_boundedConstructibleUpperStar_of_iso`), by the
+composition and identity isomorphisms of the derived pullback.
 
 That the mate `b^!` is an isomorphism (`ProEtale.CondensedRing.isIso_weilUpperShriekComparison`)
 follows: the mate of an isomorphism along equivalences is an isomorphism
@@ -85,11 +83,18 @@ variable {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom]
 /-- The derived pullback `Le^*` on bounded constructible `ℚ̄_ℓ`-sheaves along an automorphism
 `e` of a scheme over `Spec k` is an equivalence: its inverse is the pullback along `e⁻¹`, and
 the unit and counit are the composition isomorphisms `L(e⁻¹)^* ⋙ Le^* ≅ L(e ≫ e⁻¹)^* = L(𝟙)^*`
-and `Le^* ⋙ L(e⁻¹)^* ≅ L(𝟙)^*`, followed by the identity isomorphism `L(𝟙)^* ≅ 𝟭`. The identity
-isomorphism of the derived pullback on module objects is not yet available. -/
+and `Le^* ⋙ L(e⁻¹)^* ≅ L(𝟙)^*`, followed by the identity isomorphism `L(𝟙)^* ≅ 𝟭`
+(`boundedConstructibleUpperStarId`). -/
 instance isEquivalence_boundedConstructibleUpperStar_of_iso :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ e.hom).IsEquivalence :=
-  sorry
+  (CategoryTheory.Equivalence.mk
+    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ e.hom)
+    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ e.inv)
+    ((boundedConstructibleUpperStarId _ ℓ X).symm ≪≫ eqToIso (by rw [e.inv_hom_id]) ≪≫
+      boundedConstructibleUpperStarComp _ ℓ e.inv e.hom)
+    ((boundedConstructibleUpperStarComp _ ℓ e.hom e.inv).symm ≪≫
+      eqToIso (by rw [e.hom_inv_id]) ≪≫
+      boundedConstructibleUpperStarId _ ℓ X)).isEquivalence_functor
 
 end Equivalence
 

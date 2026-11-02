@@ -23,6 +23,7 @@ import WeilConjectures.AlgebraicGeometry.Finite.FiniteDiscreteCoefficientTriangu
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UnitBallRingObj.UnitBallLisseHypotheses
 
 /-!
 
@@ -422,12 +423,12 @@ instance isMonoidal_boundedConstructible
   · intro K L hK hL
     exact UnitBallRingObj.boundedConstructible_tensor_closure ℓ O K L hK hL
 
-omit [Fact (ringChar k).Prime] in
 /-- Internal Hom of two constructible `O̲`-sheaves in degree zero is bounded constructible, for the
-closed unit ball `O` of a finite normed extension `E` of `ℚ_ℓ` (blueprint: lem-sfb-dc-hom-single;
-SGA 4½ [Th. finitude], 1.6; Bhatt–Scholze, Remark 6.8.15). This is the `O̲` instance of the
-statement `ProEtale.CondensedRing.boundedConstructible_hom_single` of live, which is `sorry` there
-(stated for a general `Λ` under the removed class `IsEllAdicFinitenessCoefficient`). -/
+closed unit ball `O` of a finite normed extension `E` of `ℚ_ℓ` (SGA 4½ [Th. finitude], 1.6;
+Bhatt–Scholze, Remark 6.8.15). The coefficient ring `O̲` satisfies `LisseHypotheses`
+(`UnitBallRingObj.lisseHypotheses`), so `RHom` preserves bounded constructible complexes by
+noetherian induction (`boundedConstructible_ihom_of_over`), the pushforwards along open
+immersions preserving them by `boundedConstructible_rightDerivedLowerStar_obj`. -/
 theorem boundedConstructible_hom_single
     (F G : Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
       (condensedRingObj (Profinite.continuousMapRingObj O) X.left))
@@ -438,8 +439,11 @@ theorem boundedConstructible_hom_single
     boundedConstructible (condensedRingObj (Profinite.continuousMapRingObj O) X.left)
       (((derivedHom (Profinite.continuousMapRingObj O) X.left).obj
         (op ((DerivedCategory.singleFunctor _ 0).obj F))).obj
-        ((DerivedCategory.singleFunctor _ 0).obj G)) := by
-  sorry
+        ((DerivedCategory.singleFunctor _ 0).obj G)) :=
+  boundedConstructible_ihom_of_over (UnitBallRingObj.lisseHypotheses ℓ O) X
+    (fun _ _ _ _ _ _ _ _ j _ A hA ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ O j ⟨A, hA⟩)
+    (boundedConstructible_singleFunctor_obj _ X.left 0 F hF)
+    (boundedConstructible_singleFunctor_obj _ X.left 0 G hG)
 
 -- The hypotheses of the instance are restated as binders; they repeat section variables.
 -- The prime `ℓ` occurs only in the instance `NormedAlgebra ℚ_[ℓ] E`; it is found from the

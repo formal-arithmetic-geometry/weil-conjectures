@@ -5,6 +5,7 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.PrincipalTorsorComparisons.PrincipalTorsorSignTypes
+import WeilConjectures.AlgebraicGeometry.Principal.PrincipalTorsorSignedRepresentatives
 /-! Independent comparison result for the principal torsor sign calculation. -/
 @[expose] public section
 set_option autoImplicit false
@@ -22,5 +23,19 @@ give identical coordinates. Signed coordinates determine a cycle, hence its homo
 by the degreewise cone decomposition and the monomorphism of cycles into the complex.
 (blueprint: lem-pur-principal-torsor-normalized-natural). -/
 theorem principalTorsorNormalizedNatural
-    (C : PrincipalTorsorComparisons.{u}) (hC : C.Normalized) : C.Natural := by sorry
+    (C : PrincipalTorsorComparisons.{u}) (hC : C.Normalized) : C.Natural := by
+  refine ⟨?_, ?_⟩
+  · intro T Z i _ W h G G' a I J f hf q x
+    obtain ⟨z, hz, rfl⟩ := I.extMk_surjective x (q + 1 + 1) rfl
+    rw [InjectiveResolution.extMk_comp_mk₀ z _ rfl hz (⟨f, by simpa using hf⟩ : I.Hom J a)]
+    refine (hC.2.2 T Z i W h G' J q _ _).unique ?_
+    have hm := (hC.2.2 T Z i W h G I q z hz).map _ _ (relativeSectionMap_square T _ f)
+    rw [map_zero] at hm
+    exact hm
+  · intro T Z T' Z' v _ i _ i' _ w _ W h h' G G' I J f q z hz z' hz' hres
+    refine (hC.2.2 T' Z' i' (v ⁻¹ᵁ W) h' G' J q z' hz').unique ?_
+    rw [hres]
+    have hm := (hC.2.2 T Z i W h G I q z hz).map _ _ (relativeTransfer_square v W _ _ f)
+    rw [map_zero] at hm
+    exact hm
 end AlgebraicGeometry.Etale

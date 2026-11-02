@@ -36,6 +36,14 @@ public import WeilConjectures.CategoryTheory.Sites.CechComplexFunctor
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import WeilConjectures.CategoryTheory.SmoothPurity.ProEtaleClosedCechPresentation
+
+import WeilConjectures.AlgebraicGeometry.ProEtale.Closed.ProEtaleClosedCechClosedExact
+import WeilConjectures.AlgebraicGeometry.ProEtale.Proper.ProEtaleProperClosedCechOpenExact
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GlobalSections
+import WeilConjectures.CategoryTheory.Sites.CechComplexFunctorSection
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.ClosedImmersion
+import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
 /-! # The proper Čech step for a closed restriction of an injective
 
@@ -54,6 +62,107 @@ namespace AlgebraicGeometry.Scheme
 
 attribute [local instance] Over.ConstructProducts.over_finiteProducts_of_finiteWidePullbacks
 
+/-- Over the proper scheme `P = B ×_D W` itself, the closed Čech presentation of a finite
+cover with affine Čech intersections is exact.
+
+Source: the proper matching-relations part of Step 2 of
+`lem-sp-proetale-proper-closed-injective-cohomology`.
+
+Proof: as in `closedAffineCech_corepresentingShortComplex_exact`. The restrictions to the
+closed fibre (`closedCech_closed_restriction_exact`) and to the open complement
+(`properClosedCech_open_restriction_exact`) are exact, the inverse images are exact, and
+the two restrictions jointly detect zero objects. -/
+theorem properClosedCech_corepresentingShortComplex_exact
+    (A : Type u) [CommRing A] [Finite A]
+    {B D E : Scheme.{u}} (p : B ⟶ D) (i : E ⟶ D)
+    [IsProper p] [IsOpenImmersion i] [QuasiCompact i]
+    (W : D.ProEt) [IsAffine W.left]
+    (hW : ∀ (F G : Sheaf (ProEt.topology D) (Type (u + 1))) (e : F ⟶ G),
+      Epi e → Function.Surjective (e.hom.app (op W)))
+    (hspecializes : ∀ x : W.left, ∃ z : ↥(pullback W.hom i.closedComplement),
+      Specializes x ((pullback.fst W.hom i.closedComplement) z))
+    {n : ℕ} (U : Fin n → Over (ProEt.mk (𝟙 ((proEtaleBaseChange p).obj W).left)))
+    (hU : ∀ (k : ℕ) (y : Fin (k + 1) → Fin n),
+      IsAffine (Presheaf.cechNerveObj U y).left.left)
+    (hcover : Sieve.ofArrows (fun a ↦ (U a).left) (fun a ↦ (U a).hom) ∈
+      ProEt.topology ((proEtaleBaseChange p).obj W).left
+        (ProEt.mk (𝟙 ((proEtaleBaseChange p).obj W).left)))
+    (q : ℕ) (T : CochainCorepresentingShortComplex
+      (closedCechCoefficientFunctor A (pullback.fst p i) ((proEtaleBaseChange p).obj W)
+        (ProEt.mk (𝟙 ((proEtaleBaseChange p).obj W).left)) U) q) :
+    T.complex.Exact := by
+  let C := ModuleCat.{u + 1} (ULift.{u + 1, u} A)
+  let b := pullback.fst p i
+  let z := b.closedComplement
+  have hz := closedCech_closed_restriction_exact A b _ _ U q T
+  have hb := properClosedCech_open_restriction_exact A p i W hW hspecializes U hU hcover q T
+  have hpair : IsCompl (Set.range z.base) (Set.range b.base) := by
+    change IsCompl (Set.range b.closedComplement) (Set.range b)
+    rw [b.range_closedComplement]
+    exact isCompl_compl.symm
+  apply T.complex.exact_iff_isZero_homology.mpr
+  apply ProEtale.isZero_of_isZero_upperStar_of_isCompl z b hpair
+  · exact ((T.complex.map (ProEtale.upperStar C z)).exact_iff_isZero_homology.mp hz).of_iso
+      (T.complex.mapHomologyIso (ProEtale.upperStar C z)).symm
+  · exact ((T.complex.map (ProEtale.upperStar C b)).exact_iff_isZero_homology.mp hb).of_iso
+      (T.complex.mapHomologyIso (ProEtale.upperStar C b)).symm
+
+/-- The case of `exactAt_proper_closed_injective_cech` in which all Čech intersections
+are affine.
+
+Source: the proper matching-relations part of Step 2 of
+`lem-sp-proetale-proper-closed-injective-cohomology`.
+
+Proof: as in `exactAt_closed_injective_affine_cech`, using the corepresenting short
+complex of `exists_closedCech_corepresentingShortComplex`, its exactness
+`properClosedCech_corepresentingShortComplex_exact`, and injectivity of `I`. -/
+theorem exactAt_proper_closed_injective_cech_of_isAffine
+    (A : Type u) [CommRing A] [Finite A]
+    {B D E : Scheme.{u}} (p : B ⟶ D) (i : E ⟶ D)
+    [IsProper p] [IsOpenImmersion i] [QuasiCompact i]
+    (W : D.ProEt) [IsAffine W.left]
+    (hW : ∀ (F G : Sheaf (ProEt.topology D) (Type (u + 1))) (e : F ⟶ G),
+      Epi e → Function.Surjective (e.hom.app (op W)))
+    (hspecializes : ∀ x : W.left, ∃ z : ↥(pullback W.hom i.closedComplement),
+      Specializes x ((pullback.fst W.hom i.closedComplement) z))
+    (I : Sheaf (ProEt.topology B) (ModuleCat.{u + 1} (ULift.{u + 1, u} A))) [Injective I] :
+    let P := (proEtaleBaseChange p).obj W
+    let T : P.left.ProEt := ProEt.mk (𝟙 P.left)
+    let F := (ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) P.hom).obj
+      ((ProEtale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A))
+        (pullback.fst p i).closedComplement).obj
+        ((ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A))
+          (pullback.fst p i).closedComplement).obj I))
+    ∀ {n : ℕ} (U : Fin n → Over T),
+      (∀ (k : ℕ) (y : Fin (k + 1) → Fin n),
+        IsAffine (Presheaf.cechNerveObj U y).left.left) →
+      Sieve.ofArrows (fun a ↦ (U a).left) (fun a ↦ (U a).hom) ∈ ProEt.topology P.left T →
+      ∀ q : ℕ, ((cechComplexFunctor U).obj ((Over.forget T).op ⋙ F.obj)).ExactAt (q + 1) := by
+  dsimp only
+  intro n U hU hcover q
+  let H := closedCechCoefficientFunctor A (pullback.fst p i) ((proEtaleBaseChange p).obj W)
+    (ProEt.mk (𝟙 ((proEtaleBaseChange p).obj W).left)) U
+  obtain ⟨T⟩ := exists_closedCech_corepresentingShortComplex A (pullback.fst p i)
+    ((proEtaleBaseChange p).obj W) (ProEt.mk (𝟙 ((proEtaleBaseChange p).obj W).left)) U q
+  have hex := properClosedCech_corepresentingShortComplex_exact A p i W hW hspecializes U hU
+    hcover q T
+  change (H.obj I).ExactAt (q + 1)
+  rw [HomologicalComplex.exactAt_iff' (H.obj I) q (q + 1) (q + 2)
+    (by simp) (by simp)]
+  rw [ShortComplex.moduleCat_exact_iff]
+  intro c hc
+  let f := (T.middle I).symm c
+  have hf : T.complex.f ≫ f = 0 := by
+    apply (T.first I).injective
+    rw [map_zero, T.first_boundary]
+    change (H.obj I).d (q + 1) (q + 2) ((T.middle I) ((T.middle I).symm c)) = 0
+    rw [AddEquiv.apply_symm_apply]
+    exact hc
+  refine ⟨T.last I (hex.descToInjective f hf), ?_⟩
+  change (H.obj I).d q (q + 1) _ = c
+  rw [← T.last_boundary, hex.comp_descToInjective]
+  exact (T.middle I).apply_symm_apply c
+
 /-- Positive Čech exactness on the proper scheme over a boundary test object.
 Only the section complex of the given finite family is involved; no derived direct
 image or injective resolution occurs in this statement.
@@ -61,21 +170,14 @@ Source: the proper matching-relations part of Step 2 of
 `lem-sp-proetale-proper-closed-injective-cohomology`.
 (blueprint: lem-sp-proetale-proper-closed-injective-cech).
 
-Proof plan: on the closed fibre choose weakly contractible affine refinements of the
-finite intersection diagrams. Lift them by henselization on affine charts of the
-proper scheme. Properness lifts a specialization in W to the closure of each point
-of the proper scheme. Flatness of pro-étale maps then shows that a lifted family
-covering the closed fibre covers the whole proper scheme. Perform the principal-open
-and closed-localization refinements simultaneously on the finite matching diagrams,
-keeping all face equations. The augmented free-module resolution expresses those
-equations as a kernel, and injectivity of the ambient sheaf extends a functional
-from that kernel. Consequently a positive cocycle has a primitive compatible with
-all faces. The closed evaluation formula identifies this primitive with one in the
-displayed Čech complex. Refinement maps give the primitive for the original cover.
-An intersection equal to the whole proper scheme is retained as a terminal factor;
-its repeated factors have the usual degenerate contraction. Empty families and empty
-closed fibres give zero complexes. No assertion that henselization preserves fibre
-products is used: the finite matching diagrams are refined before applying Hom. -/
+Proof: if some Čech intersection is the whole proper scheme, then the member `U (y 0)`
+has a section over the terminal object, so the Čech complex of any presheaf is exact in
+positive degrees (`cechComplexFunctor_exactAt_succ_of_hom`). Otherwise all Čech
+intersections are affine, and `exactAt_proper_closed_injective_cech_of_isAffine` applies:
+the Čech cochains of three adjacent degrees are corepresented by a short complex, which is
+exact on the closed fibre (`closedCech_closed_restriction_exact`) and on the open
+complement (`properClosedCech_open_restriction_exact`), and injectivity of `I` turns its
+exactness into Čech exactness. -/
 theorem exactAt_proper_closed_injective_cech
     (A : Type u) [CommRing A] [Finite A]
     {B D E : Scheme.{u}} (p : B ⟶ D) (i : E ⟶ D)
@@ -98,7 +200,18 @@ theorem exactAt_proper_closed_injective_cech
         IsAffine (Presheaf.cechNerveObj U y).left.left ∨
           (Presheaf.cechNerveObj U y).left = T) →
       Sieve.ofArrows (fun a ↦ (U a).left) (fun a ↦ (U a).hom) ∈ ProEt.topology P.left T →
-      ∀ q : ℕ, ((cechComplexFunctor U).obj ((Over.forget T).op ⋙ F.obj)).ExactAt (q + 1) :=
-  by sorry
+      ∀ q : ℕ, ((cechComplexFunctor U).obj ((Over.forget T).op ⋙ F.obj)).ExactAt (q + 1) := by
+  dsimp only
+  intro n U hU hcover q
+  by_cases h : ∃ (k : ℕ) (y : Fin (k + 1) → Fin n),
+      (Presheaf.cechNerveObj U y).left = ProEt.mk (𝟙 ((proEtaleBaseChange p).obj W).left)
+  · obtain ⟨k, y, hy⟩ := h
+    have hs : eqToHom hy.symm ≫ (Presheaf.cechNerveObj U y).hom = 𝟙 _ :=
+      (ProEt.isTerminalMkId _).hom_ext _ _
+    exact cechComplexFunctor_exactAt_succ_of_hom U Over.mkIdTerminal
+      (Over.homMk (eqToHom hy.symm) hs ≫ Pi.π _ 0) _ q
+  · simp only [not_exists] at h
+    exact exactAt_proper_closed_injective_cech_of_isAffine A p i W hW hspecializes I U
+      (fun k y ↦ (hU k y).resolve_right (h k y)) hcover q
 
 end AlgebraicGeometry.Scheme
