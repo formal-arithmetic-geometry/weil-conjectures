@@ -357,4 +357,35 @@ theorem absAlpha_app_eq_alphaApp (β : Ji ⋙ Pp ≅ Psnd ⋙ Jfst)
 
 end AbstractAlpha
 
+section Square
+
+variable {CT CS CW CV CT' CS' CW' CV' : Type*} [Category CT] [Category CS] [Category CW]
+  [Category CV] [Category CT'] [Category CS'] [Category CW'] [Category CV']
+  {Pi : CT ⥤ CS} {Pr : CS ⥤ CV} {Pp : CT ⥤ CW} {Pk : CW ⥤ CV} {Pri Pkp : CT ⥤ CV}
+  {Pi' : CT' ⥤ CS'} {Pr' : CS' ⥤ CV'} {Pp' : CT' ⥤ CW'} {Pk' : CW' ⥤ CV'}
+  {Pri' Pkp' : CT' ⥤ CV'}
+  {ΦT : CT ⥤ CT'} {ΦS : CS ⥤ CS'} {ΦW : CW ⥤ CW'} {ΦV : CV ⥤ CV'}
+
+/-- Comparisons compatible with two factorizations of a composite are compatible with the
+resulting square of inverse images. -/
+theorem square_transport (cri : Pri ≅ Pi ⋙ Pr) (ckp : Pkp ≅ Pp ⋙ Pk) (E : Pri ≅ Pkp)
+    (cri' : Pri' ≅ Pi' ⋙ Pr') (ckp' : Pkp' ≅ Pp' ⋙ Pk') (E' : Pri' ≅ Pkp')
+    (φi : Pi ⋙ ΦS ≅ ΦT ⋙ Pi') (φr : Pr ⋙ ΦV ≅ ΦS ⋙ Pr') (φp : Pp ⋙ ΦW ≅ ΦT ⋙ Pp')
+    (φk : Pk ⋙ ΦV ≅ ΦW ⋙ Pk') (φri : Pri ⋙ ΦV ≅ ΦT ⋙ Pri')
+    (h₂ : ∀ x, ΦV.map (cri.hom.app x) ≫ φr.hom.app (Pi.obj x) ≫ Pr'.map (φi.hom.app x) =
+      φri.hom.app x ≫ cri'.hom.app (ΦT.obj x))
+    (h₁ : ∀ x, ΦV.map (ckp.inv.app x ≫ E.inv.app x) ≫ φri.hom.app x =
+      φk.hom.app (Pp.obj x) ≫ Pk'.map (φp.hom.app x) ≫ (ckp'.inv ≫ E'.inv).app (ΦT.obj x))
+    (x : CT) :
+    ΦV.map ((cri.symm ≪≫ E ≪≫ ckp).inv.app x) ≫ φr.hom.app (Pi.obj x) ≫
+        Pr'.map (φi.hom.app x) =
+      φk.hom.app (Pp.obj x) ≫ Pk'.map (φp.hom.app x) ≫
+        (cri'.symm ≪≫ E' ≪≫ ckp').inv.app (ΦT.obj x) := by
+  simp only [Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app, Functor.map_comp, Category.assoc]
+  rw [h₂, ← Category.assoc (ΦV.map (E.inv.app x)), ← Category.assoc (ΦV.map (ckp.inv.app x)),
+    ← Category.assoc (ΦV.map (ckp.inv.app x)), ← Functor.map_comp, h₁]
+  simp
+
+end Square
+
 end CategoryTheory.ProperOpenTransport
