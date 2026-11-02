@@ -251,17 +251,11 @@ universe w
 variable {C B : Type w} [SmallCategory C] [SmallCategory B]
   [Abelian C] [Abelian B]
 
-omit [Abelian C] in
-omit [Abelian B] in
-omit [Abelian B] in
-attribute [local irreducible] zlIndMap zlIndMapIso
-
 end IndExtension
 
 attribute [instance] Functor.hasLeftKanExtension_of_preserves
 attribute [instance] Functor.hasPointwiseLeftKanExtension_of_preserves
 attribute [instance] Functor.PreservesLeftKanExtension.preserves
-attribute [local irreducible] zlIndMap zlIndMapIso
 
 section FrobeniusEquivalence
 attribute [local irreducible] commonStageDerivedPullback rationalDerivedPullback

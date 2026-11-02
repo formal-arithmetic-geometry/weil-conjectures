@@ -185,8 +185,4 @@ def frameworkOpenPullRealization {U T : Scheme.{u}} (h : U ⟶ T)
     [∀ x : T, Invertible (l : T.residueField x)] :=
   (frameworkOpenPullRealization_existsUnique l E h).exists.choose
 
-variable (D : FiniteFieldDatum.{u}) (G : OpenDiagram D l)
-
-attribute [instance] frameworkModuleQuotientTower_additive
-
 end WeilConjectures.ZlFrameworkPbc
