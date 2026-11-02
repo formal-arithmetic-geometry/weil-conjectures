@@ -159,6 +159,44 @@ private lemma compatibility_fac (F : C ⥤ E) [F.Additive]
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
     NatTrans.id_app, Category.id_comp] using h
 
+private theorem compatibility_naturality
+    {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D]
+    [Abelian C] [Abelian D] [HasDerivedCategory C] [HasDerivedCategory D]
+    [EnoughInjectives C] [Abelian.HasKInjectiveResolutions C]
+    {F G : C ⥤ D} [F.Additive] [G.Additive] (τ : F ⟶ G) :
+    Functor.whiskerRight (Functor.rightDerivedFunctorPlusNatTrans τ) DerivedCategory.Plus.ι ≫
+      G.rightDerivedFunctorPlusCompatibility.hom =
+    F.rightDerivedFunctorPlusCompatibility.hom ≫
+      Functor.whiskerLeft DerivedCategory.Plus.ι (Functor.rightDerivedFunctorNatTrans τ) := by
+  refine Functor.rightDerived_ext (F.rightDerivedFunctorPlus ⋙ DerivedCategory.Plus.ι)
+    F.rightDerivedFunctorPlusιUnit (HomotopyCategory.Plus.quasiIso C) _ _ _ ?_
+  ext K : 2
+  simp only [Functor.rightDerivedFunctorPlusιUnit, NatTrans.comp_app,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app]
+  rw [← DerivedCategory.Plus.ι.map_comp_assoc,
+    Functor.rightDerivedFunctorPlusNatTrans_app, CategoryTheory.Functor.map_comp, Category.assoc]
+  have hc (H : C ⥤ D) [H.Additive] :
+      DerivedCategory.Plus.ι.map (H.rightDerivedFunctorPlusUnit.app K) ≫
+          H.rightDerivedFunctorPlusCompatibility.hom.app (DerivedCategory.Plus.Qh.obj K) =
+        H.rightDerivedFunctorUnit.app K.obj := by
+    have h := NatTrans.congr_app (Functor.rightDerivedNatTrans_fac
+      (H.rightDerivedFunctorPlus ⋙ DerivedCategory.Plus.ι)
+      (DerivedCategory.Plus.ι ⋙ H.rightDerivedFunctor)
+      H.rightDerivedFunctorPlusιUnit H.ιRightDerivedFunctorUnit
+      (HomotopyCategory.Plus.quasiIso C) (𝟙 _)) K
+    simpa only [Functor.rightDerivedFunctorPlusCompatibility,
+      Functor.rightDerivedUnique, Functor.rightDerivedNatIso_hom,
+      Iso.refl_hom, ObjectProperty.ι_obj,
+      Functor.rightDerivedFunctorPlusιUnit, Functor.ιRightDerivedFunctorUnit,
+      NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+      NatTrans.id_app, Category.id_comp] using h
+  rw [hc G, reassoc_of% hc F]
+  exact (Functor.rightDerivedNatTrans_app F.rightDerivedFunctor G.rightDerivedFunctor
+    F.rightDerivedFunctorUnit G.rightDerivedFunctorUnit
+    (HomotopyCategory.quasiIso C (ComplexShape.up ℤ))
+    (Functor.whiskerRight (NatTrans.mapHomotopyCategory τ (ComplexShape.up ℤ))
+      DerivedCategory.Qh) K.obj).symm
+
 section SupportDerivedNormalization
 
 variable {C : Type u₁} {D : Type u₂} {E : Type u₃}
@@ -349,6 +387,83 @@ private noncomputable def coefficientComparison (A : Type (u + 1)) [CommRing A] 
   let a : Etale.supportedCoefficients A i ⋙ comparisonUpperStar (ModuleCat.{u + 1} A) T ⊣
       supportSections i A := ae.comp (comparisonAdjunction (ModuleCat.{u + 1} A) T)
   exact a.leftAdjointUniq (supportedCoefficientAdjunction A i)
+
+private theorem comparisonMate_eq (A : Type (u + 1)) [CommRing A] [Finite A]
+    {C T : Scheme.{u}} (i : C ⟶ T) [IsClosedImmersion i] [IsLocallyNoetherian T] :
+    Etale.supportCoefficientMate (Etale.supportedCoefficientAdjunction A i)
+        (supportedCoefficientAdjunction A i) (comparisonUpperStar (ModuleCat.{u + 1} A) T)
+        ((supportKernelEvaluationIso A i).hom ≫ supportComparisonUnit A i) =
+      (coefficientComparison A i).inv := by
+  let ae : Etale.supportedCoefficients A i ⊣ etaleSupportKernel A i :=
+    (Etale.supportedCoefficientAdjunction A i).ofNatIsoRight (supportKernelEvaluationIso A i)
+  let ac := ae.comp (comparisonAdjunction (ModuleCat.{u + 1} A) T)
+  let ap := supportedCoefficientAdjunction A i
+  apply NatTrans.ext
+  funext M
+  apply (ap.homEquiv _ _).injective
+  rw [Etale.supportMate_unit]
+  have hn := Adjunction.homEquiv_leftAdjointUniq_hom_app ap ac M
+  rw [← Adjunction.leftAdjointUniq_inv_app] at hn
+  change ap.homEquiv _ _ ((coefficientComparison A i).inv.app M) = ac.unit.app M at hn
+  rw [hn]
+  change _ = ae.unit.app M ≫ (etaleSupportKernel A i).map
+    ((comparisonAdjunction (ModuleCat.{u + 1} A) T).unit.app
+      ((Etale.supportedCoefficients A i).obj M))
+  dsimp only [ae, Adjunction.ofNatIsoRight_unit, NatTrans.comp_app,
+    Functor.whiskerLeft_app]
+  rw [Category.assoc]
+  congr 1
+  apply (cancel_mono (kernel.ι
+    (((comparisonUpperStar (ModuleCat.{u + 1} A) T).obj
+      ((Etale.supportedCoefficients A i).obj M)).obj.map (supportRestrictionArrow i).op))).mp
+  simp only [Category.assoc]
+  erw [(supportComparisonUnit_existsUnique A i).choose_spec.1, kernel.lift_ι]
+  rfl
+
+private theorem quotient_mate
+    {B C D : Type*} [Category B] [Category C] [Category D]
+    {F : B ⥤ C} {R : C ⥤ B} {F' : B ⥤ D} {R' : D ⥤ B}
+    {G : B ⥤ C} {S : C ⥤ B} {G' : B ⥤ D} {S' : D ⥤ B}
+    (a : F ⊣ R) (a' : F' ⊣ R') (c : G ⊣ S) (c' : G' ⊣ S')
+    (H : C ⥤ D) (r : R ⟶ H ⋙ R') (s : S ⟶ H ⋙ S')
+    (ι : R ⟶ S) (ι' : R' ⟶ S')
+    (hr : r ≫ Functor.whiskerLeft H ι' = ι ≫ s)
+    (M : B) (q : G.obj M ⟶ F.obj M) (q' : G'.obj M ⟶ F'.obj M)
+    (hq : c.homEquiv _ _ q = a.unit.app M ≫ ι.app (F.obj M))
+    (hq' : ∀ K (f : F'.obj M ⟶ K),
+      c'.homEquiv _ _ (q' ≫ f) = a'.homEquiv _ _ f ≫ ι'.app K) :
+    q' ≫ (Etale.supportCoefficientMate a a' H r).app M =
+      (Etale.supportCoefficientMate c c' H s).app M ≫ H.map q := by
+  apply (c'.homEquiv _ _).injective
+  rw [hq', Etale.supportMate_unit]
+  erw [Etale.coefficientMate_transpose c c' H s q, hq]
+  simpa only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.comp_obj, Functor.id_obj,
+    Category.assoc] using
+    congrArg (fun t ↦ a.unit.app M ≫ t.app (F.obj M)) hr
+
+private theorem quotient_mate_normalized
+    {B C D : Type*} [Category B] [Category C] [Category D]
+    {F : B ⥤ C} {R : C ⥤ B} {F' : B ⥤ D} {R' : D ⥤ B}
+    {G : B ⥤ C} {S : C ⥤ B} {G' : B ⥤ D} {S' : D ⥤ B}
+    (a : F ⊣ R) (a' : F' ⊣ R') (c : G ⊣ S) (c' : G' ⊣ S')
+    (H : C ⥤ D) (r : R ⟶ H ⋙ R') (s : S ⟶ H ⋙ S')
+    (ι : R ⟶ S) (ι' : R' ⟶ S')
+    (hr : r ≫ Functor.whiskerLeft H ι' = ι ≫ s)
+    (M : B) (q : G.obj M ⟶ F.obj M) (q' : G'.obj M ⟶ F'.obj M)
+    (hq : ∀ K (f : M ⟶ R.obj K),
+      q ≫ (a.homEquiv _ _).symm f = (c.homEquiv _ _).symm (f ≫ ι.app K))
+    (hq' : ∀ K (f : M ⟶ R'.obj K),
+      q' ≫ (a'.homEquiv _ _).symm f = (c'.homEquiv _ _).symm (f ≫ ι'.app K)) :
+    q' ≫ (Etale.supportCoefficientMate a a' H r).app M =
+      (Etale.supportCoefficientMate c c' H s).app M ≫ H.map q := by
+  apply quotient_mate a a' c c' H r s ι ι' hr M q q'
+  · have h := hq (F.obj M) (a.unit.app M)
+    rw [Adjunction.homEquiv_symm_unit, Category.comp_id] at h
+    exact (congrArg (c.homEquiv _ _) h).trans (Equiv.apply_symm_apply _ _)
+  · intro K f
+    have h := hq' K (a'.homEquiv _ _ f)
+    rw [Equiv.symm_apply_apply] at h
+    exact (congrArg (c'.homEquiv _ _) h).trans (Equiv.apply_symm_apply _ _)
 
 end
 
@@ -750,6 +865,85 @@ private theorem constantComparisonTerminal_square (A : Type (u + 1)) [CommRing A
           ((Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} A) f).hom.app
             M) ≫ (constantComparisonTerminal A X).hom.app M := by
   exact CachedConstantCoherence.constantComparisonTerminal_square (ModuleCat.{u + 1} A) f M
+
+private noncomputable def globalComparisonUnit (A : Type (u + 1)) [CommRing A]
+    (T : Scheme.{u}) :
+    Sheaf.Γ T.smallEtaleTopology (ModuleCat.{u + 1} A) ⟶
+      comparisonUpperStar (ModuleCat.{u + 1} A) T ⋙
+        Sheaf.Γ (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A) :=
+  Functor.whiskerRight (comparisonAdjunction (ModuleCat.{u + 1} A) T).unit
+      (Sheaf.Γ T.smallEtaleTopology (ModuleCat.{u + 1} A)) ≫
+    Functor.whiskerLeft (comparisonUpperStar (ModuleCat.{u + 1} A) T)
+      (comparisonLowerStarCompGlobalSectionsIso (ModuleCat.{u + 1} A) T).hom
+
+private lemma constantComparisonMate_eq (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :
+    Etale.supportCoefficientMate
+        (constantSheafΓAdj T.smallEtaleTopology (ModuleCat.{u + 1} A))
+        (constantSheafΓAdj (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A))
+        (comparisonUpperStar (ModuleCat.{u + 1} A) T) (globalComparisonUnit A T) =
+      (constantComparison A T).inv := by
+  let ae := constantSheafΓAdj T.smallEtaleTopology (ModuleCat.{u + 1} A)
+  let ap := constantSheafΓAdj (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A)
+  let ac := (ae.comp (comparisonAdjunction (ModuleCat.{u + 1} A) T)).ofNatIsoRight
+    (comparisonLowerStarCompGlobalSectionsIso (ModuleCat.{u + 1} A) T)
+  apply NatTrans.ext
+  funext M
+  apply (ap.homEquiv _ _).injective
+  rw [Etale.supportMate_unit]
+  have hn := Adjunction.homEquiv_leftAdjointUniq_hom_app ap ac M
+  rw [← Adjunction.leftAdjointUniq_inv_app] at hn
+  change ap.homEquiv _ _ ((constantComparison A T).inv.app M) = ac.unit.app M at hn
+  rw [hn]
+  rfl
+
+private lemma comparison_support_forget (A : Type (u + 1)) [CommRing A]
+    {C T : Scheme.{u}} (i : C ⟶ T) [IsClosedImmersion i]
+    (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) :
+    (((supportKernelEvaluationIso A i).hom ≫ supportComparisonUnit A i).app F) ≫
+      (supportedModuleSectionsι A i).app
+        ((comparisonUpperStar (ModuleCat.{u + 1} A) T).obj F) =
+      (Etale.supportedEtaleSectionsι A T i.openComplement).app F ≫
+        (Sheaf.Γ T.smallEtaleTopology (ModuleCat.{u + 1} A)).map
+          ((comparisonAdjunction (ModuleCat.{u + 1} A) T).unit.app F) ≫
+        (comparisonLowerStarCompGlobalSectionsIso (ModuleCat.{u + 1} A) T).hom.app
+          ((comparisonUpperStar (ModuleCat.{u + 1} A) T).obj F) := by
+  have he := NatTrans.congr_app (supportKernelEvaluationIso_existsUnique A i).choose_spec.1 F
+  have hu := (supportComparisonUnit_existsUnique A i).choose_spec.1 F
+  dsimp only [NatTrans.comp_app] at he hu ⊢
+  change (supportKernelEvaluationIso A i).hom.app F ≫
+    (supportComparisonUnit A i).app F ≫ kernel.ι _ ≫ _ = _
+  erw [reassoc_of% hu, ← Category.assoc, he]
+  simp only [Category.assoc]
+  dsimp only [comparisonLowerStarCompGlobalSectionsIso, Iso.trans_hom, NatTrans.comp_app,
+    Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Iso.symm_hom]
+  congr 1
+  rw [← Category.assoc]
+  have hn := (Sheaf.ΓNatIsoSheafSections T.smallEtaleTopology (ModuleCat.{u + 1} A)
+    (Scheme.Etale.isTerminalMkId T)).hom.naturality
+      ((comparisonAdjunction (ModuleCat.{u + 1} A) T).unit.app F)
+  exact congrArg (fun t ↦ t ≫ _) hn.symm
+
+private lemma coefficientComparison_quotient (A : Type (u + 1)) [CommRing A] [Finite A]
+    {C T : Scheme.{u}} (i : C ⟶ T) [IsClosedImmersion i] [IsLocallyNoetherian T]
+    (M : ModuleCat.{u + 1} A) :
+    supportedCoefficientQuotient A i M ≫ (coefficientComparison A i).inv.app M =
+      (constantComparison A T).inv.app M ≫
+        (comparisonUpperStar (ModuleCat.{u + 1} A) T).map
+          (Etale.supportedCoefficientQuotient A i M) := by
+  rw [← comparisonMate_eq, ← constantComparisonMate_eq]
+  apply quotient_mate_normalized (Etale.supportedCoefficientAdjunction A i)
+    (supportedCoefficientAdjunction A i)
+    (constantSheafΓAdj T.smallEtaleTopology (ModuleCat.{u + 1} A))
+    (constantSheafΓAdj (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A))
+    (comparisonUpperStar (ModuleCat.{u + 1} A) T)
+    ((supportKernelEvaluationIso A i).hom ≫ supportComparisonUnit A i)
+    (globalComparisonUnit A T)
+    (Etale.supportedEtaleSectionsι A T i.openComplement) (supportedModuleSectionsι A i)
+  · apply NatTrans.ext
+    funext F
+    exact comparison_support_forget A i F
+  · exact (Etale.exists_unique_supportedCoefficientAdjunction A i).choose_spec.1 M
+  · exact (exists_unique_supportedCoefficientAdjunction A i).choose_spec.1 M
 
 end CoefficientNormalization
 

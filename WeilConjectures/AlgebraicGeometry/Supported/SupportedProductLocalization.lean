@@ -60,6 +60,24 @@ private theorem coefficientMate_counit
   simpa [supportCoefficientMate] using mateEquiv_counit_symm adj adj'
     (TwoSquare.mk _ _ _ _ ((Functor.rightUnitor R).hom ≫ r)) K
 
+private theorem coefficientMate_transpose
+    {B C D : Type*} [Category B] [Category C] [Category D]
+    {F : B ⥤ C} {R : C ⥤ B} {F' : B ⥤ D} {R' : D ⥤ B}
+    (adj : F ⊣ R) (adj' : F' ⊣ R') (H : C ⥤ D) (r : R ⟶ H ⋙ R')
+    {M : B} {K : C} (t : F.obj M ⟶ K) :
+    adj'.homEquiv _ _ ((supportCoefficientMate adj adj' H r).app M ≫ H.map t) =
+      adj.homEquiv _ _ t ≫ r.app K := by
+  apply (adj'.homEquiv _ _).symm.injective
+  rw [Equiv.symm_apply_apply, Adjunction.homEquiv_symm_apply, Functor.map_comp,
+    Category.assoc, coefficientMate_counit adj adj' H r K,
+    (supportCoefficientMate adj adj' H r).naturality_assoc]
+  change _ = (supportCoefficientMate adj adj' H r).app M ≫
+    H.map (F.map (adj.homEquiv _ _ t)) ≫ H.map (adj.counit.app K)
+  rw [← H.map_comp]
+  have ht := (adj.homEquiv M K).symm_apply_apply t
+  change F.map (adj.homEquiv M K t) ≫ adj.counit.app K = t at ht
+  rw [ht]
+
 private theorem evaluation_transport
     {B C C' D D' : Type*}
     [Category B] [Category C] [Category C'] [Category D] [Category D']

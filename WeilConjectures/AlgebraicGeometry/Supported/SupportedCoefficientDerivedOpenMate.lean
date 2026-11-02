@@ -56,6 +56,101 @@ private theorem exactMap_fac
   erw [Iso.inv_hom_id_app, Category.comp_id]
   rfl
 
+private theorem derivedMate_eq
+    {B C D : Type*} [Category B] [Category C] [Category D]
+    [Abelian B] [Abelian C] [Abelian D]
+    [HasDerivedCategory B] [HasDerivedCategory C] [HasDerivedCategory D]
+    [CategoryTheory.Abelian.HasKInjectiveResolutions C]
+    [CategoryTheory.Abelian.HasKInjectiveResolutions D]
+    {F : B ⥤ C} {R : C ⥤ B} {F' : B ⥤ D} {R' : D ⥤ B}
+    [F.Additive] [R.Additive] [F'.Additive] [R'.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits F'] [PreservesFiniteColimits F']
+    (adj : F ⊣ R) (adj' : F' ⊣ R') (H : C ⥤ D) [H.Additive]
+    [PreservesFiniteLimits H] [PreservesFiniteColimits H]
+    (r : R ⟶ H ⋙ R') :
+    supportCoefficientMate adj.mapDerivedCategoryRightDerivedAdjunction
+        adj'.mapDerivedCategoryRightDerivedAdjunction H.mapDerivedCategory
+        (Functor.rightDerivedPullback H r) =
+      Functor.exactDerivedMap (supportCoefficientMate adj adj' H r) ≫
+        (Functor.mapDerivedCategoryCompIso F H).hom := by
+  let σ := (mateEquiv adj adj').symm
+    (TwoSquare.mk _ _ _ _ ((Functor.rightUnitor R).hom ≫ r))
+  let α := supportCoefficientMate adj adj' H r
+  have hα : α = σ.natTrans := by
+    ext M
+    exact Category.id_comp _
+  let γ := Functor.exactDerivedMap α ≫ (Functor.mapDerivedCategoryCompIso F H).hom
+  let θ : TwoSquare (𝟭 B).mapDerivedCategory F.mapDerivedCategory F'.mapDerivedCategory
+      H.mapDerivedCategory := TwoSquare.mk _ _ _ _
+    (Functor.whiskerRight (Functor.mapDerivedCategoryIdIso B).hom F'.mapDerivedCategory ≫
+      (Functor.leftUnitor F'.mapDerivedCategory).hom ≫ γ)
+  have hθ (N : HomotopyCategory B (.up ℤ)) :
+      θ.natTrans.app (DerivedCategory.Qh.obj N) ≫
+          H.mapDerivedCategory.map (F.mapDerivedCategoryFactorsh.hom.app N) ≫
+          H.mapDerivedCategoryFactorsh.hom.app ((F.mapHomotopyCategory (.up ℤ)).obj N) =
+        F'.mapDerivedCategory.map ((𝟭 B).mapDerivedCategoryFactorsh.hom.app N) ≫
+          F'.mapDerivedCategoryFactorsh.hom.app (((𝟭 B).mapHomotopyCategory (.up ℤ)).obj N) ≫
+          DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory σ.natTrans (.up ℤ)).app N) := by
+    obtain ⟨N, rfl⟩ := HomotopyCategory.quotient_obj_surjective N
+    dsimp only [θ, γ, NatTrans.comp_app,
+      Functor.whiskerRight_app, Functor.leftUnitor_hom_app]
+    simp only [Category.assoc]
+    erw [Functor.mapDerivedCategoryCompIso_hom_app_factorsh, exactMap_fac,
+      Functor.mapDerivedCategoryIdIso_hom_app_Qh_obj]
+    congr 1
+    erw [Category.id_comp]
+    rw [hα]
+    congr 1
+  let β := (mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
+    adj'.mapDerivedCategoryRightDerivedAdjunction θ).natTrans
+  have hβ' : Functor.whiskerLeft R.rightDerivedFunctor
+      (Functor.mapDerivedCategoryIdIso B).inv ≫ β = Functor.rightDerivedPullback H r := by
+    apply R.rightDerivedFunctor.rightDerived_ext R.rightDerivedFunctorUnit
+      (HomotopyCategory.quasiIso C (.up ℤ))
+    ext K
+    have e := Adjunction.derivedExact_mateEquiv_app_fac adj adj' σ θ hθ K
+    have hm : (mateEquiv adj adj' σ).natTrans = (Functor.rightUnitor R).hom ≫ r := by
+      exact congrArg TwoSquare.natTrans ((mateEquiv adj adj').apply_symm_apply _)
+    rw [hm] at e
+    dsimp only [NatTrans.comp_app, Functor.whiskerLeft_app]
+    erw [(Functor.mapDerivedCategoryIdIso B).inv.naturality_assoc]
+    erw [e]
+    rw [← Functor.mapDerivedCategoryIdIso_hom_app_Qh_obj]
+    erw [Iso.inv_hom_id_app_assoc]
+    obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective K
+    rw [Functor.rightDerivedPullback_fac_app]
+    congr 2
+    change (HomotopyCategory.quotient B (.up ℤ)).map _ =
+      (HomotopyCategory.quotient B (.up ℤ)).map _
+    congr 1
+    ext n
+    change 𝟙 _ ≫ r.app (K.X n) = r.app (K.X n)
+    exact Category.id_comp _
+  have hβ : β = Functor.whiskerLeft R.rightDerivedFunctor
+      (Functor.mapDerivedCategoryIdIso B).hom ≫
+      Functor.rightDerivedPullback H r := by
+    rw [← hβ']
+    ext Z
+    simp
+  ext M
+  apply (adj'.mapDerivedCategoryRightDerivedAdjunction.homEquiv _ _).injective
+  have e := unit_mateEquiv adj.mapDerivedCategoryRightDerivedAdjunction
+    adj'.mapDerivedCategoryRightDerivedAdjunction θ M
+  change (𝟭 B).mapDerivedCategory.map
+      (adj.mapDerivedCategoryRightDerivedAdjunction.unit.app M) ≫ β.app _ = _ at e
+  rw [hβ] at e
+  dsimp only [θ, NatTrans.comp_app, Functor.whiskerRight_app,
+    Functor.whiskerLeft_app, Functor.leftUnitor_hom_app] at e
+  simp only [Functor.map_comp] at e
+  erw [(Functor.mapDerivedCategoryIdIso B).hom.naturality_assoc] at e
+  have hn := adj'.mapDerivedCategoryRightDerivedAdjunction.unit.naturality
+    ((Functor.mapDerivedCategoryIdIso B).hom.app M)
+  dsimp only [Functor.comp_map, Functor.id_map] at hn
+  erw [← reassoc_of% hn] at e
+  have e' := (cancel_epi ((Functor.mapDerivedCategoryIdIso B).hom.app M)).1 e
+  simpa [γ, α, supportCoefficientMate, Adjunction.homEquiv_apply] using e'
+
 private theorem composite_unit_eq
     {C C' D : Type*} [Category C] [Category C'] [Category D]
     [Abelian C] [Abelian C'] [Abelian D]

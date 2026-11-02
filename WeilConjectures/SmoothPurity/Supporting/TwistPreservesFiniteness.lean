@@ -637,4 +637,89 @@ private noncomputable def pullExtendIso
       ((upperStar Ab.{u + 1} f).map a) a
       (adj.unitAlgHom R) (adj.unitAlgHom S) (adj.unit.naturality a))
 
+private theorem scalarExtension_locally_trivial
+    {X : Scheme.{u}}
+    {R S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}}
+    [MonObj R] [MonObj S] [IsCommMonObj R] [IsCommMonObj S]
+    (a : R ⟶ S) [IsMonHom a]
+    (L : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R)
+    (hL : ∃ 𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ i : 𝒰.I₀,
+      Nonempty (((upperStar Ab.{u + 1} (𝒰.f i)).mapMod R).obj L ≅ 𝟙_ _)) :
+    ∃ 𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ i : 𝒰.I₀,
+      Nonempty (((upperStar Ab.{u + 1} (𝒰.f i)).mapMod S).obj
+        ((Mod.extendScalars a).obj L) ≅ 𝟙_ _) := by
+  obtain ⟨𝒰, h𝒰⟩ := hL
+  refine ⟨𝒰, fun i ↦ ?_⟩
+  let F := upperStar Ab.{u + 1} (𝒰.f i)
+  exact ⟨(pullExtendIso (𝒰.f i) a).symm.app L ≪≫
+    (Mod.extendScalars (F.map a)).mapIso (h𝒰 i).some ≪≫
+    CategoryTheory.Mod.extendRegularIso (F.map a)⟩
+
+/-- Actual condensed coefficient Tate twists preserve bounded constructibility,
+every cohomological and Tor interval, and constructibility with finite Tor amplitude;
+tensoring by the opposite twist gives the inverse equivalence on the ordinary
+unbounded derived category. This holds for every positive finite quotient, O_E, E,
+and the actual condensed algebraic closure, with no Noetherian hypothesis.
+Source: current blueprint prop-weil-twist-preserves
+(blueprint: prop-weil-twist-preserves).
+Proof: compatible roots trivialize the native finite lines. Their compatible
+coefficient-linear bases identify the integral root tower with the coefficient
+quotient tower, whose limit is the regular integral module. Scalar extension gives
+the rational line; the upstream integral Tate basis gives the algebraic-closure line.
+The signed local-line theorem supplies all powers, their dual evaluation and opposite
+cancellation. Locally free tensor is exact and preserves constructible modules;
+its K-flat single model identifies derived cohomology with ordinary tensor of
+cohomology. Flat amplitude [0,0] preserves each pair of cohomological and Tor
+endpoints. Derived cancellation gives the prescribed inverse tensor functors. -/
+theorem twist_preserves_native_finiteness
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
+    [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})
+    [∀ x : X, Invertible (l : X.residueField x)] :
+    (∀ n : ℕ, CondensedRing.NativeTwistFiniteness (twistFiniteRing l E n) X
+      (coefficientSignedTwist X _ (coefficientFiniteTwistOne l E X n))) ∧
+    CondensedRing.NativeTwistFiniteness (twistIntegralRing l E) X
+      (coefficientSignedTwist X _ (coefficientIntegralTwistOne l E X)) ∧
+    CondensedRing.NativeTwistFiniteness (twistRationalRing l E) X
+      (coefficientSignedTwist X _ (coefficientRationalTwistOne l E X)) ∧
+    CondensedRing.NativeTwistFiniteness (Profinite.padicAlgClRingObj l) X
+      (tateTwist X l) := by
+  have hl : IsUnit (l : Γ(X, ⊤)) := by
+    apply X.toRingedSpace.isUnit_of_isUnit_germ
+    intro x hx
+    have h : IsUnit (l : X.presheaf.stalk x) := by
+      apply (IsLocalRing.residue_ne_zero_iff_isUnit _).mp
+      change (X.residue x).hom (l : X.presheaf.stalk x) ≠ 0
+      simpa only [map_natCast] using
+        (isUnit_of_invertible (l : X.residueField x)).ne_zero
+    simpa only [map_natCast] using h
+  have hI := coefficientIntegralTwistOne_locally_trivial l E X hl
+  have hR := scalarExtension_locally_trivial
+    (coefficientMap (twistIntegralToRational l E) X) (coefficientIntegralTwistOne l E X) hI
+  have hQ := scalarExtension_locally_trivial
+    (coefficientMap (Profinite.padicIntRingObjToPadicAlgCl l) X) (tateModule X l)
+      (tateModule_locally_trivial X l hl)
+  refine ⟨fun n ↦ CondensedRing.nativeSignedLine_finiteness _ X _
+      (coefficientFiniteTwistOne_locally_trivial l E X hl n),
+    CondensedRing.nativeSignedLine_finiteness _ X _ hI,
+    CondensedRing.nativeSignedLine_finiteness _ X _ hR, ?_⟩
+  have hn (n : ℕ) : coefficientTwistNat X
+      (condensedRingObj (Profinite.padicAlgClRingObj l) X) (tateTwistOne X l) n =
+        tateTwistNat X l n := by
+    induction n with
+    | zero => rfl
+    | succ n ih => simp only [coefficientTwistNat, tateTwistNat, ih]
+  have hs : coefficientSignedTwist X
+      (condensedRingObj (Profinite.padicAlgClRingObj l) X) (tateTwistOne X l) =
+        tateTwist X l := by
+    funext m
+    cases m with
+    | ofNat n => exact hn n
+    | negSucc n =>
+      simp only [coefficientSignedTwist, tateTwist]
+      have h := hn (n + 1)
+      congr!
+  have hfin := CondensedRing.nativeSignedLine_finiteness _ X (tateTwistOne X l) hQ
+  rw [hs] at hfin
+  exact hfin
+
 end AlgebraicGeometry.ProEtale

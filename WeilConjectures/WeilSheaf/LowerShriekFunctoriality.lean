@@ -455,7 +455,7 @@ theorem exists_distTriang_derivedLowerShriek_openClosed (j : U ⟶ X) [IsOpenImm
       (ci.app _).symm⟩⟩
 
 /-- **Base change for the direct image with compact support** (blueprint: `prop-functor-package`,
-clause 4, `g^*Rf_! ≃ Rf'_!g'^*` for arbitrary base change): for a cartesian
+clause 4, `g^*Rf_! ≃ Rf'_!g'^*` for arbitrary base change, and `thm-cbc-qbar`): for a cartesian
 square
 ```
 X' --- g ---> X
@@ -499,11 +499,6 @@ theorem nonempty_upperStar_derivedLowerShriek_iso {X' Y' : Scheme.{u}}
       isoPullback := (Compactification.isPullback_g_ofIsPullback hH c).flip.isoPullback
       hom_fst := (Compactification.isPullback_g_ofIsPullback hH c).flip.isoPullback_hom_fst
       hom_snd := (Compactification.isPullback_g_ofIsPullback hH c).flip.isoPullback_hom_snd }
-  let sqi : ChosenCartesianSquare g c'.i c.i (pullback.fst c.g h) :=
-    { toCommSq := (Compactification.isPullback_i_ofIsPullback hH c).toCommSq
-      isoPullback := (Compactification.isPullback_i_ofIsPullback hH c).isoPullback
-      hom_fst := (Compactification.isPullback_i_ofIsPullback hH c).isoPullback_hom_fst
-      hom_snd := (Compactification.isPullback_i_ofIsPullback hH c).isoPullback_hom_snd }
   have : LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀)) := by
     rw [← comp_over f (Spec (CommRingCat.of k₀))]
     infer_instance
@@ -554,8 +549,9 @@ theorem nonempty_upperStar_derivedLowerShriek_iso {X' Y' : Scheme.{u}}
     exact ObjectProperty.liftFullSubcategoryCompιIso _ _ _ _
   obtain ⟨ep⟩ := nativeWeil_proper_natural_baseChange k₀ l
     (pullback.fst c.g h) c'.g c.g h sqg
-  obtain ⟨eo⟩ := nativeWeilOpenNaturalBaseChange k₀ l
-    g c'.i c.i (pullback.fst c.g h) sqi
+  let eo := ProEtaleWeilSheaf.mapDerivedCategoryExtensionByZeroUpperStarIso
+    k₀ l g c'.i c.i (pullback.fst c.g h)
+      (Compactification.isPullback_i_ofIsPullback hH c)
   obtain ⟨ec⟩ := (nativeWeilCompactificationModelComparison k₀ l f).2.2 c
   obtain ⟨ec'⟩ := (nativeWeilCompactificationModelComparison k₀ l f').2.2 c'
   have eamb : IX ⋙ J ⋙ R ⋙ U ≅ IX ⋙ V ⋙ J' ⋙ R' := by

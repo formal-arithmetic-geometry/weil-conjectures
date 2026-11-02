@@ -38,6 +38,14 @@ noncomputable def supportCoefficientMate
     ((mateEquiv adj adj').symm
       (TwoSquare.mk _ _ _ _ ((Functor.rightUnitor R).hom ≫ r))).natTrans
 
+private theorem supportMate_unit
+    {B C D : Type*} [Category B] [Category C] [Category D]
+    {F : B ⥤ C} {R : C ⥤ B} {F' : B ⥤ D} {R' : D ⥤ B}
+    (adj : F ⊣ R) (adj' : F' ⊣ R') (H : C ⥤ D) (r : R ⟶ H ⋙ R') (M : B) :
+    adj'.homEquiv _ _ ((supportCoefficientMate adj adj' H r).app M) =
+      adj.unit.app M ≫ r.app (F.obj M) := by
+  simp [supportCoefficientMate, Adjunction.homEquiv_apply]
+
 private lemma constantUnit_terminal
     (C : Type v) [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C] [HasSmallSiteSheafify C] {Z X : Scheme.{u}}
