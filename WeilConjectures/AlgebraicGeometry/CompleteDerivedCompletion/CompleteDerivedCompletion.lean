@@ -6,6 +6,9 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.CompleteDerivedCompletionDefs
+import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.CompleteDerivedCompletionBasic
+import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.CompleteDerivedCompletionPullback
+import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.CompleteDerivedCompletionLimit
 
 /-!
 # Towers and the derived completion
@@ -191,6 +194,17 @@ theorem completeDerivedCompletion
           (CompleteDerivedCompletion.completion l E T).obj M,
         AdicCompletion.completionMap l E T M P e ≫ ε.hom =
           (CompleteDerivedCompletion.kappa l E T).app M) := by
-  sorry
+  refine ⟨CompleteDerivedCompletion.towerGrothendieck l E T,
+    fun n ↦ CompleteDerivedCompletion.evaluation_properties l E T n,
+    fun a ↦ CompleteDerivedCompletion.dev_conservative l E T a,
+    CompleteDerivedCompletion.pullback_properties l E f,
+    CompleteDerivedCompletion.pushLimit_nonempty l E f,
+    ⟨CompleteDerivedCompletion.rlim_isTriangulated l E T,
+      fun e _ ↦ CompleteDerivedCompletion.rlim_equivalence l E e, ?_⟩,
+    ?_, ?_, ?_, ?_,
+    CompleteDerivedCompletion.constantLimit_unit_isIso l E T,
+    CompleteDerivedCompletion.rlim_isDerivedLimit l E T,
+    CompleteDerivedCompletion.rlim_roos l E T, ?_⟩
+  all_goals sorry
 
 end AlgebraicGeometry.ProEtale
