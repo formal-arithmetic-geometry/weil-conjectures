@@ -113,13 +113,16 @@ abbrev perverseHeart (D : FiniteFieldDatum.{u}) (ell : ℕ) [Fact ell.Prime]
       (condensedRingObj (coeff ell) (geomC D c)))
     (fun K : (AlgebraicGeometry.ProEtale.boundedConstructible
         (condensedRingObj (coeff ell) (geomC D c))).FullSubcategory ↦
-      CondensedRing.CondensedPerverseLEZero ell (D.geometricFiber c.C)
+      CondensedRing.CondensedPerverseLEZero ell
+        (CurvePerverseHeartStatement.closure_baseField D) (D.geometricFiber c.C)
         ⟨K.obj, K.property⟩)
     (fun K : (AlgebraicGeometry.ProEtale.boundedConstructible
         (condensedRingObj (coeff ell) (geomC D c))).FullSubcategory ↦
-      CondensedRing.CondensedPerverseGEZero ell (D.geometricFiber c.C)
+      CondensedRing.CondensedPerverseGEZero ell
+        (CurvePerverseHeartStatement.closure_baseField D) (D.geometricFiber c.C)
         ⟨K.obj, K.property⟩)
     K
+
 /-- The ordinary module direct image $A=j_*F$ (def-wf-middle-extension).
 Source: `rem-dl-a1-conventions.md`, ordinary direct-image paragraph
 (blueprint: lem-dl-a1-condensed-curve-intermediate-extension). -/

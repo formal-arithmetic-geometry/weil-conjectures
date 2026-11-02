@@ -97,6 +97,60 @@ def pointSections (l : ℕ) [Fact l.Prime] (k : Type u) [Field k] :
   preadditiveCoyonedaObj (𝟙_ (Modules l (Spec (.of k)))) ⋙
     ModuleCat.restrictScalars (pointScalarsOp l k)
 
+/-- The identity section of the coefficient unit.
+Source: latest blueprint, unit coefficient normalization
+(blueprint: def-weil-local-frobenius-trace). -/
+def pointSectionsUnit (l : ℕ) [Fact l.Prime] (k : Type u) [Field k] :
+    (pointSections l k).obj (𝟙_ (Modules l (Spec (.of k)))) := 𝟙 _
+
+/-- Scalar multiples of the identity exhaust the sections of the unit on Spec k.
+Source: latest blueprint, condensed point coefficient normalization
+(blueprint: def-weil-local-frobenius-trace).
+Proof: the pro-etale site of a separably closed point is the profinite-set site.
+Pullback of condensed modules is therefore an equivalence. Endomorphisms of the regular
+module are its global scalar sections. At the terminal profinite point these are exactly
+constant elements of Qbar_l; injectivity follows by evaluation there. The standard lift
+of the scalar universe is bijective, so the span of the identity is bijective. -/
+theorem pointSectionsUnit_bijective (l : ℕ) [Fact l.Prime] (k : Type u)
+    [Field k] [IsSepClosed k] :
+    Function.Bijective (LinearMap.toSpanSingleton (ULift.{u + 1} (PadicAlgCl l))
+      ((pointSections l k).obj (𝟙_ (Modules l (Spec (.of k))))) (pointSectionsUnit l k)) := by
+  let F := upperStarFromPoint (Spec (.of k))
+  have : F.IsEquivalence := inferInstance
+  have : PreservesColimits F := inferInstance
+  have : PreservesBinaryBiproducts F :=
+    preservesBinaryBiproducts_of_preservesBinaryCoproducts F
+  have : F.Additive := Functor.additive_of_preservesBinaryBiproducts F
+  have hΓ := F.bijective_regularEndRingHom_comp_mapFunctor
+    (Profinite.padicAlgClRingObj l) (Functor.FullyFaithful.ofFullyFaithful _)
+  have : Nontrivial (End (Mod.regular (Profinite.padicAlgClRingObj.{u} l))) :=
+    ⟨⟨1, 0, Profinite.PadicAlgCl.one_ne_zero_end_regular l⟩⟩
+  have hc : Function.Bijective (Profinite.PadicAlgCl.constRingHom.{u} l) := by
+    refine ⟨?_, Profinite.PadicAlgCl.constRingHom_surjective l⟩
+    intro a b hab
+    apply (Mod.regularEndRingHom.comp (Profinite.PadicAlgCl.constRingHom.{u} l)).injective
+    exact congrArg Mod.regularEndRingHom hab
+  have hb : Function.Bijective
+      (fun a : ULift.{u + 1} (PadicAlgCl l) ↦ pointUnitEndRingHom l k a.down) :=
+    hΓ.comp (hc.comp ULift.ringEquiv.bijective)
+  have heq : ⇑(LinearMap.toSpanSingleton (ULift.{u + 1} (PadicAlgCl l))
+      ((pointSections l k).obj (𝟙_ (Modules l (Spec (.of k))))) (pointSectionsUnit l k)) =
+      (fun a ↦ pointUnitEndRingHom l k a.down) := by
+    funext a
+    change pointUnitEndRingHom l k a.down ≫ 𝟙 _ = _
+    exact Category.comp_id _
+  rw [heq]
+  exact hb
+
+/-- The unique scalar-normalized identification of the unit sections with Qbar_l.
+Source: latest blueprint, coefficient-unit normalization
+(blueprint: def-weil-local-frobenius-trace). -/
+def pointSectionsUnitIso (l : ℕ) [Fact l.Prime] (k : Type u) [Field k] [IsSepClosed k] :
+    ModuleCat.of _ (ULift.{u + 1} (PadicAlgCl l)) ≅
+      (pointSections l k).obj (𝟙_ (Modules l (Spec (.of k)))) :=
+  (LinearEquiv.ofBijective (LinearMap.toSpanSingleton _ _ (pointSectionsUnit l k))
+    (pointSectionsUnit_bijective l k)).toModuleIso
+
 /-- Sections of the actual geometric-point pullback, with the standard scalar lift.
 Source: blueprint first paragraph, vector-space-fibre convention
 (blueprint: def-weil-local-frobenius-trace). -/
