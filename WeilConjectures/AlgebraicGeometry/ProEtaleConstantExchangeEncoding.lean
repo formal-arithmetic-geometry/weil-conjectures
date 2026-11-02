@@ -9,6 +9,12 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleConstantDerivedEncoding
 public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleAmbientRingedExchange
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantRingPullbackComparison
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Canonical.ProEtaleCanonicalDerivedPullbackNormalization
+public import WeilConjectures.AlgebraicGeometry.StrictTower.StrictConstantTowerOperationsSupplement
+public import WeilConjectures.CategoryTheory.Derived.DerivedExactCube
+public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+public import WeilConjectures.CategoryTheory.SixFunctors.MateIsoAlongEquivalences
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Coherence
 
 /-!
 # Constant scalar encoding preserves the ambient pro-etale exchange
@@ -22,6 +28,133 @@ set_option autoImplicit false
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
+
+/-- Inverse mates of isomorphisms are isomorphisms when the vertical functors are
+ equivalences. Source: the iterated-mate conjugation identity
+(blueprint: lem-pe-constant-exchange-encoding). -/
+private theorem inverseMate_isIso [G.IsEquivalence] [H.IsEquivalence]
+    (β : TwoSquare R₁ H G R₂) [IsIso β.natTrans] :
+    IsIso ((mateEquiv adj₁ adj₂).symm β).natTrans := by
+  let aG : G ⊣ G.asEquivalence.inverse := G.asEquivalence.toAdjunction
+  let aH : H ⊣ H.asEquivalence.inverse := H.asEquivalence.toAdjunction
+  have : IsIso aG.unit := by
+    simp only [aG, Equivalence.toAdjunction_unit]
+    infer_instance
+  have : IsIso aH.counit := by
+    simp only [aH, Equivalence.toAdjunction_counit]
+    infer_instance
+  have : IsIso β := by
+    change IsIso β.natTrans
+    infer_instance
+  have hβ : IsIso (mateEquiv aH aG β).natTrans := by
+    dsimp only [mateEquiv, Equiv.coe_fn_mk, TwoSquare.natTrans, TwoSquare.mk]
+    infer_instance
+  let α := (mateEquiv adj₁ adj₂).symm β
+  have hh := iterated_mateEquiv_conjugateEquiv adj₁ adj₂ aG aH α
+  have hα : mateEquiv adj₁ adj₂ α = β := Equiv.apply_symm_apply _ _
+  have : IsIso (conjugateEquiv (adj₁.comp aH) (aG.comp adj₂) α.natTrans) := by
+    rw [← hh, hα]
+    exact hβ
+  exact conjugateEquiv_of_iso (adj₁.comp aH) (aG.comp adj₂) α.natTrans
+
+private abbrev E (T : Scheme.{u}) := proEtaleModuleRestriction T A
+
+private abbrev L {X Y : Scheme.{u}} (f : X ⟶ Y) :=
+  StrictTower.modulePullback (ULift.{u + 1, u} A) f
+
+private abbrev R {X Y : Scheme.{u}} (f : X ⟶ Y) :=
+  StrictTower.moduleDirectImage (ULift.{u + 1, u} A) f
+
+private abbrev P {X Y : Scheme.{u}} (f : X ⟶ Y) :=
+  ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) f
+
+private abbrev S {X Y : Scheme.{u}} (f : X ⟶ Y) :=
+  ProEtale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) f
+
+private def adj {X Y : Scheme.{u}} (f : X ⟶ Y) : L A f ⊣ R A f :=
+  proEtaleRingModuleAdjunction f (proEtaleConstantRing Y A) (proEtaleConstantRing X A)
+    (proEtaleConstantRingComparison f A)
+
+private def adjFixed {X Y : Scheme.{u}} (f : X ⟶ Y) : P A f ⊣ S A f :=
+  ProEtale.upperStarLowerStarAdjunction _ f
+
+/-- The adjunct of the fixed constant-ring isomorphism preserves constant scalar sections. -/
+private theorem scalarSquare {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    proEtaleModuleScalarUnit Y A ≫
+        Functor.whiskerRight (proEtaleRingDirectImageMap f
+          (proEtaleConstantRing Y A) (proEtaleConstantRing X A)
+          (proEtaleConstantRingComparison f A)).hom
+          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}) =
+      Functor.whiskerLeft (proEtaleBaseChange f).op (proEtaleModuleScalarUnit X A) := by
+  have hc : proEtaleRingDirectImageMap f
+      (proEtaleConstantRing Y A) (proEtaleConstantRing X A)
+      (proEtaleConstantRingComparison f A) = proEtaleCoefficientDirectImageMap f A := by
+    exact (proEtaleSheafAdjunction f CommRingCat.{u + 1}).homEquiv _ _ |>.apply_symm_apply _
+  rw [hc]
+  have h := ((sheafificationAdjunction (ProEt.topology Y) CommRingCat.{u + 1}).homEquiv
+    ((Functor.const Y.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1, u} A)))
+    ((proEtaleSheafDirectImage f CommRingCat.{u + 1}).obj
+      (proEtaleConstantRing X A))).apply_symm_apply
+    (Functor.whiskerLeft (proEtaleBaseChange f).op
+      (toSheafify (ProEt.topology X)
+        ((Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1, u} A)))))
+  change toSheafify _ _ ≫ (proEtaleCoefficientDirectImageMap f A).hom = _ at h
+  exact congrArg (fun z ↦ Functor.whiskerRight z
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})) h
+
+/-- Direct image in both coefficient presentations has the same underlying sections. -/
+private def push {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    R A f ⋙ E A Y ≅ E A X ⋙ S A f := by
+  refine NatIso.ofComponents (fun M ↦ ?_) ?_
+  · refine ObjectProperty.isoMk _ (NatIso.ofComponents (fun U ↦ ?_) ?_)
+    · let e : ((R A f ⋙ E A Y).obj M).obj.obj U ≃ₗ[ULift.{u + 1, u} A]
+          ((E A X ⋙ S A f).obj M).obj.obj U :=
+        { toFun := fun x ↦ x
+          invFun := fun x ↦ x
+          left_inv := fun _ ↦ rfl
+          right_inv := fun _ ↦ rfl
+          map_add' := fun _ _ ↦ rfl
+          map_smul' := by
+            intro r m
+            have h := congrArg (fun t ↦ (t.app U).hom r) (scalarSquare A f)
+            exact congrArg (fun a ↦ a •
+              (show M.val.obj ((proEtaleBaseChange f).op.obj U) from m)) h }
+      exact e.toModuleIso
+    · intro U V g
+      ext x
+      rfl
+  · intro M N g
+    ext U x
+    rfl
+
+private def pull {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    L A f ⋙ E A X ≅ E A Y ⋙ P A f := by
+  let β : TwoSquare (R A f) (E A X) (E A Y) (S A f) := (push A f).hom
+  have : IsIso β.natTrans := inferInstanceAs (IsIso (push A f).hom)
+  have := inverseMate_isIso
+    (adj A f) (adjFixed A f) β
+  exact (asIso ((mateEquiv (adj A f) (adjFixed A f)).symm β).natTrans).symm
+
+private abbrev comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :=
+  StrictTower.moduleGComp (ULift.{u + 1, u} A) f g
+
+private abbrev LD {X Y : Scheme.{u}} (f : X ⟶ Y) := (L A f).mapDerivedCategory
+
+private def square (A : Type u) [CommRing A]
+    {X' X Y' Y : Scheme.{u}} {h : X' ⟶ X} {f' : X' ⟶ Y'}
+    {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : ChosenCartesianSquare h f' f g) :
+    LD A g ⋙ LD A f' ≅ LD A f ⋙ LD A h :=
+  Scheme.proEtaleAmbientRingedPullbackComparison sq
+    (Scheme.proEtaleConstantRing X A) (Scheme.proEtaleConstantRing Y A)
+    (Scheme.proEtaleConstantRing X' A) (Scheme.proEtaleConstantRing Y' A)
+    (Scheme.proEtaleConstantRingComparison f A)
+    (Scheme.proEtaleConstantRingComparison g A)
+    (Scheme.proEtaleConstantRingComparison h A)
+    (Scheme.proEtaleConstantRingComparison f' A)
+    ((heq_of_eq (Scheme.proEtaleConstantRingCompositeCoefficients_eq h f A)).trans
+      ((congr_arg_heq (fun q : X' ⟶ Y ↦ Scheme.proEtaleConstantRingComparison q A)
+        sq.w).trans
+          (heq_of_eq (Scheme.proEtaleConstantRingCompositeCoefficients_eq f' g A)).symm))
 
 /-- Exact constant-section restriction identifies the ringed and fixed-scalar mates.
 No properness, torsion, classicality or boundedness assumption enters this comparison.
