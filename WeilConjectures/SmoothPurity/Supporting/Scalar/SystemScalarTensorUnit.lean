@@ -668,9 +668,9 @@ theorem systemScalarTensorAssociativity
       ((pullbackTensorCalculus l L W).systemClosed.monoidal.associator
         (H.obj M) (H.obj N) (H.obj P)).hom := by
   intro H σ
-  letI : MonoidalCategory (coefficientSequenceDerived l E W) :=
+  let : MonoidalCategory (coefficientSequenceDerived l E W) :=
     (pullbackTensorCalculus l E W).systemClosed.monoidal
-  letI : MonoidalCategory (coefficientSequenceDerived l L W) :=
+  let : MonoidalCategory (coefficientSequenceDerived l L W) :=
     (pullbackTensorCalculus l L W).systemClosed.monoidal
   have res (X : coefficientSequenceDerived l E W) :
       ∃ P : ScalarExtensionTower.Complex l E W, ScalarExtensionTower.Good l E W P ∧
@@ -718,8 +718,9 @@ theorem systemScalarTensorUnitObject :
     ⟨Functor.whiskerRight (integralComparisonSequenceScalarMap.{u, u} l E L ι W).hom
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})⟩
   let adj : δ.E ⊣ SheafOfModules.pushforward φ := ScalarExtensionTower.scalar_adj l E L ι W
-  letI : (SheafOfModules.pushforward φ).IsRightAdjoint := adj.isRightAdjoint
-  let e₀ : δ.E.obj (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RE)) ≅
+  let : (SheafOfModules.pushforward φ).IsRightAdjoint := adj.isRightAdjoint
+  let e₀ : δ.E.obj (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat.{u + 1}
+      RingCat.{u + 1})).obj RE)) ≅
       SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj RL) :=
     (adj.leftAdjointUniq (SheafOfModules.pullbackPushforwardAdjunction φ)).app _ ≪≫
       asIso (SheafOfModules.pullbackObjUnitToUnit φ)
@@ -773,9 +774,9 @@ theorem systemScalarTensorUnit :
             (Prod.mkHom (𝟙 _) ε.hom) ≫
           ((pullbackTensorCalculus l L W).systemClosed.monoidal.rightUnitor (H.obj M)).hom =
         H.map ((pullbackTensorCalculus l E W).systemClosed.monoidal.rightUnitor M).hom) := by
-  letI : MonoidalCategory (coefficientSequenceDerived l E W) :=
+  let : MonoidalCategory (coefficientSequenceDerived l E W) :=
     (pullbackTensorCalculus l E W).systemClosed.monoidal
-  letI : MonoidalCategory (coefficientSequenceDerived l L W) :=
+  let : MonoidalCategory (coefficientSequenceDerived l L W) :=
     (pullbackTensorCalculus l L W).systemClosed.monoidal
   let H := integralComparisonDerivedSequenceScalar l E L ι W
   let σ := ScalarExtensionTower.derivedSigma l E L ι W
