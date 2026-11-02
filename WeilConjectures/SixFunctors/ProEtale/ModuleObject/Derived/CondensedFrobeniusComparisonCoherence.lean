@@ -82,6 +82,33 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
+/-- The canonical relative-Frobenius module trivialization, localized termwise.
+Its coefficient map is the pullback-from-point comparison by FrobeniusPoint.
+Source: absolute-Frobenius normalization, Stacks 0F6W
+(blueprint: lem-pur-condensed-frobenius-comparison-coherence). -/
+def condensedAbsoluteFrobeniusTrivialization (D : WeilConjectures.FiniteFieldDatum.{u})
+    (Λ : ScalarSixRing.{u}) (T₀ : Over (Spec (CommRingCat.of D.k₀))) :
+    scalarSixPull Λ (D.purityAbsoluteFrobenius T₀) ≅ 𝟭 _ :=
+  Functor.mapDerivedCategoryNatIso
+    (G := 𝟭 (ModuleRingedComparison.internalModules Λ.X (D.purityFrobeniusFiber T₀).left))
+    (upperStarIterateFrobeniusIso Λ.X D.prime
+      (D.model_characteristic (pullback.fst T₀.hom
+        (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) ≫ T₀.hom)) D.a) ≪≫
+    Functor.mapDerivedCategoryIdIso _
+
+/-- The specified kappa: factor Phi as absolute Frobenius followed by geometric
+Galois, apply the canonical module compositor, then the canonical trivialization.
+Source: specified comparison construction, Stacks 0F6W
+(blueprint: lem-pur-condensed-frobenius-comparison-coherence). -/
+def condensedFrobeniusComparison (D : WeilConjectures.FiniteFieldDatum.{u})
+    (Λ : ScalarSixRing.{u}) (T₀ : Over (Spec (CommRingCat.of D.k₀))) :
+    scalarSixPull Λ (D.puritySchemeFrobenius T₀) ≅
+      scalarSixPull Λ (D.purityGaloisMap T₀) :=
+  eqToIso (congrArg (scalarSixPull Λ) ((D.purityFrobenius_geometry).1 T₀)) ≪≫
+    scalarSixPullComp Λ (D.purityAbsoluteFrobenius T₀) (D.purityGaloisMap T₀) ≪≫
+    Functor.isoWhiskerLeft (scalarSixPull Λ (D.purityGaloisMap T₀))
+      (condensedAbsoluteFrobeniusTrivialization D Λ T₀) ≪≫ Functor.rightUnitor _
+
 /-- Commuting-square pullback comparison from inverse compositor, scheme equality,
 and compositor. Only commutativity is used.
 Source: canonical square comparisons
