@@ -424,10 +424,10 @@ theorem exchangeRealizationH_beta (K : d.derived X) :
   have hR := (reductionPullIso d g).inv.naturality ((chi d f).hom.app K)
   dsimp only [Functor.comp_map, Functor.comp_obj] at hN hR
   simp only [exchangeRealizationH, beta, rhoM, H, exchangeCornerB, Iso.trans_hom, Iso.symm_hom,
-    Iso.app_hom, Iso.app_inv, Functor.mapIso_hom, asIso_hom, NatTrans.comp_app,
+    Iso.app_hom, Functor.mapIso_hom, asIso_hom, NatTrans.comp_app,
     Functor.associator_hom_app, Functor.associator_inv_app, Functor.isoWhiskerLeft_hom,
     Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    Iso.symm_inv, Functor.map_comp, Category.id_comp, Category.comp_id, Category.assoc]
+    Functor.map_comp, Category.id_comp, Category.comp_id, Category.assoc]
   rw [reassoc_of% hN]
   rw [← Functor.map_comp, ← Functor.map_comp, hQ]
   simp only [Functor.map_comp]
@@ -445,6 +445,7 @@ theorem towerV'_delta (sq : ChosenCartesianSquare g' f' f g) (K : d.derived X) :
           ((reduction d X).obj ((res d X).obj K)) := by
   sorry
 
+set_option linter.unusedVariables false in
 /-- strictCoefficientEquations: the indicated part of the ordered comparison argument.
 Source: blueprint completed-exchange-coherence, second proof paragraph;
 Stacks Tags 099M, 099N, 0A07 and 0E48.
@@ -483,7 +484,7 @@ theorem strictCoefficientEquations (sq : ChosenCartesianSquare g' f' f g) :
   refine ⟨?_, exchangeRealizationH_beta d K, towerV'_delta d sq K⟩
   simp only [AdicCoefficientDatum.towerV', AdicCoefficientDatum.towerV,
     exchangeRealizationH, exchangeRealizationHPrime, AdicCoefficientDatum.towerH,
-    AdicCoefficientDatum.towerH', Iso.trans_inv, Iso.trans_hom, Iso.symm_inv, Iso.app_hom,
+    AdicCoefficientDatum.towerH', Iso.trans_inv, Iso.trans_hom,
     Category.assoc]
   rfl
 

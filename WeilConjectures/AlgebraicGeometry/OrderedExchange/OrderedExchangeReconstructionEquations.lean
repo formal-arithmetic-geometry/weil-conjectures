@@ -127,7 +127,7 @@ theorem lambda_rhoPull (K : d.derived X) (hK : d.TowerComplete X K) :
   dsimp only [Functor.comp_map, Functor.comp_obj] at hL
   simp only [phi_eq_completedPullResIso, completedPullResIso, reconstruction, rhoPull,
     Iso.trans_hom, Iso.app_hom, NatIso.ofComponents_hom_app, Functor.mapIso_hom, Iso.symm_hom,
-    Iso.app_inv, Functor.map_comp, Category.assoc]
+    Functor.map_comp, Category.assoc]
   have hP' : (exchangeResPull d g').hom.app ((completedReductionTower X d).obj K) ≫
       (exchangeConstantPull (A := A) g').map ((rho d X).hom.app K) =
     (exchangeTowerRes d X').map ((d.reductionTowerPullbackIso g').hom.app K) ≫
@@ -157,14 +157,14 @@ theorem sourceA_beta (K : d.derived X) (hK : d.TowerComplete X K) :
     ((d.towerPull g).map (d.towerProjection f K))
   dsimp only [Functor.comp_map, Functor.comp_obj] at hL hL'
   rw [← h1]
-  simp only [S, sourceA, sourceReconstruction, AdicCoefficientDatum.towerH, Iso.trans_hom,
+  simp only [S, sourceA, sourceReconstruction, AdicCoefficientDatum.towerH,
     Iso.app_hom, Functor.mapIso_hom, asIso_hom, Category.assoc]
   rw [reassoc_of% hL', reassoc_of% hL]
   refine congrArg ((lambda d Y').hom.app _ ≫ ·) ?_
   rw [← Functor.map_comp, ← Functor.map_comp, ← Functor.map_comp]
   refine congrArg (rlim (A := A) Y').map ?_
   rw [← h2]
-  simp only [exchangeRealizationH, Iso.trans_hom, Iso.symm_hom, Iso.app_inv, Iso.app_hom,
+  simp only [exchangeRealizationH, Iso.trans_hom, Iso.symm_hom, Iso.app_hom,
     Functor.mapIso_hom, asIso_hom, Functor.map_comp, Category.assoc]
   rw [← Functor.map_comp_assoc (exchangeTowerRes d Y'), Iso.hom_inv_id_app]
   erw [CategoryTheory.Functor.map_id, Category.id_comp]
@@ -183,7 +183,7 @@ theorem targetA_delta (K : d.derived X) (hK : d.TowerComplete X K) :
     ((d.towerPull g').obj ((completedReductionTower X d).obj K))
   simp only [targetA, delta, iotaT, T, exchangeCornerD, Iso.trans_hom, Iso.app_hom,
     Functor.mapIso_hom, NatTrans.comp_app, Functor.associator_hom_app,
-    Functor.associator_inv_app, Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
+    Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
     Functor.whiskerLeft_app, Functor.whiskerRight_app, Category.id_comp, Category.comp_id,
     Functor.map_comp, Category.assoc]
   have h2' : (push (A := A) f').map ((phi d g').hom.app ⟨K, hK⟩) ≫
@@ -203,6 +203,7 @@ theorem targetA_delta (K : d.derived X) (hK : d.TowerComplete X K) :
   simp only [Iso.symm_hom, Functor.associator_inv_app]
   erw [CategoryTheory.Functor.map_id, Category.id_comp]
 
+set_option linter.unusedVariables false in
 /-- reconstructionCoefficientEquations: the indicated part of the ordered comparison argument.
 Source: blueprint completed-exchange-coherence, second proof paragraph;
 Stacks Tags 099M, 099N, 0A07 and 0E48.
