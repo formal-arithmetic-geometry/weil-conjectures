@@ -524,7 +524,6 @@ set_option backward.isDefEq.respectTransparency true in
     CY.ε (inverseS g SY SX cS).mapDerivedCategoryFactors.hom
 
 set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency true in
 attribute [local irreducible] DerivedCategory.Q DerivedCategory.Qh
   proEtaleRingModulePullback Functor.mapDerivedCategory
 

@@ -46,15 +46,12 @@ namespace WeilConjectures
 -- imports the residue-lisse standard-size localization instance. This preference is file-local.
 attribute [local instance 2000] HasDerivedCategory.ofIsGrothendieckAbelian
 
-attribute [local irreducible] sfRationalStandardTStructure sfCommonStageStandardTStructure
-  pointRationalFibre
+attribute [local irreducible] pointRationalFibre
   DerivedCategory.TStructure.t ModuleCat.extendScalars
 
 variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
 
 -- This cached inverse intentionally stays folded during repeated instance comparisons.
-set_option warn.classDefReducibility false in
-attribute [local irreducible] constructiblePullbackResidueUnits
 
 open AlgebraicallyClosedCoefficients (Index Coefficient coefficientInclusion)
 open GeneralAlgebraicallyClosedCoefficients (Stage inclusion stageTransition)

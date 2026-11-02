@@ -35,8 +35,8 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
   WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective
   coefficientComplexModuleDerived pointScalarModuleDerived pointCompletedSheafDerived
-  pointScalarAbSheafify pointScalarAbLocallyBijective
-  coefficientComplexIntegralAdditive coefficientComplexIntegralLimits
+  pointScalarAbLocallyBijective
+  coefficientComplexIntegralLimits
   coefficientComplexIntegralColimits coefficientComplexRationalAdditive
   coefficientComplexRationalLimits coefficientComplexRationalColimits
   coefficientComplexFieldAdditive coefficientComplexFieldLimits coefficientComplexFieldColimits in
@@ -78,8 +78,8 @@ private theorem unit_generator {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
   WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective
   coefficientComplexModuleDerived pointScalarModuleDerived pointCompletedSheafDerived
-  pointScalarAbSheafify pointScalarAbLocallyBijective
-  coefficientComplexIntegralAdditive coefficientComplexIntegralLimits
+  pointScalarAbLocallyBijective
+  coefficientComplexIntegralLimits
   coefficientComplexIntegralColimits coefficientComplexRationalAdditive
   coefficientComplexRationalLimits coefficientComplexRationalColimits
   coefficientComplexFieldAdditive coefficientComplexFieldLimits coefficientComplexFieldColimits in
@@ -117,16 +117,8 @@ private theorem comparison_unit_apply {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
   WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective
   coefficientComplexModuleDerived pointScalarModuleDerived pointCompletedSheafDerived
-  pointScalarAbSheafify pointScalarAbLocallyBijective
-  coefficientComplexIntegralAdditive coefficientComplexIntegralLimits
-  coefficientComplexIntegralColimits coefficientComplexRationalAdditive
-  coefficientComplexRationalLimits coefficientComplexRationalColimits
-  coefficientComplexFieldAdditive coefficientComplexFieldLimits coefficientComplexFieldColimits in
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
-  WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective
-  coefficientComplexModuleDerived pointScalarModuleDerived pointCompletedSheafDerived
-  pointScalarAbSheafify pointScalarAbLocallyBijective
-  coefficientComplexIntegralAdditive coefficientComplexIntegralLimits
+  pointScalarAbLocallyBijective
+  coefficientComplexIntegralLimits
   coefficientComplexIntegralColimits coefficientComplexRationalAdditive
   coefficientComplexRationalLimits coefficientComplexRationalColimits
   coefficientComplexFieldAdditive coefficientComplexFieldLimits coefficientComplexFieldColimits in

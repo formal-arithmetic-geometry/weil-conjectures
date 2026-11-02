@@ -144,8 +144,6 @@ private theorem restrictionUnit_W (M : PresheafOfModules.{s} S.obj) :
 end SheafificationComparison
 
 omit [HasFiniteLimits C] in
-omit [HasFiniteLimits C] in
-omit [HasFiniteLimits C] in
 open Classical in
 private theorem extensionRestrict_of
     (Z : C) (F : SliceModules.{c, v, r} R Z) {X Y : Cᵒᵖ} (a : X ⟶ Y)

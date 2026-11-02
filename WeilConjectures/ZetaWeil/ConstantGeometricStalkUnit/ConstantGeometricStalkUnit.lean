@@ -64,8 +64,8 @@ open AlgebraicGeometry.Scheme AlgebraicGeometry.ProEtale
 namespace WeilConjectures.ConstantGeometricStalkUnit
 
 attribute [-instance] coefficientComplexModuleDerived pointScalarModuleDerived
-  pointCompletedSheafDerived pointScalarAbSheafify pointScalarAbLocallyBijective
-  coefficientComplexIntegralAdditive coefficientComplexIntegralLimits
+  pointCompletedSheafDerived pointScalarAbLocallyBijective
+  coefficientComplexIntegralLimits
   coefficientComplexIntegralColimits coefficientComplexRationalAdditive
   coefficientComplexRationalLimits coefficientComplexRationalColimits
   coefficientComplexFieldAdditive coefficientComplexFieldLimits coefficientComplexFieldColimits
@@ -78,7 +78,7 @@ variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
 variable (Y₀ : Over (Spec (.of D.k₀)))
   [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]
 
-attribute [local implicit_reducible] localPositivePower CategoryTheory.Aut
+attribute [local implicit_reducible] CategoryTheory.Aut
 
 section
 

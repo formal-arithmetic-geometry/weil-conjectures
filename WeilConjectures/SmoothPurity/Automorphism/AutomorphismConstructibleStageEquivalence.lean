@@ -464,8 +464,7 @@ set_option allowUnsafeReducibility true in
 attribute [local reducible] GeneralAlgebraicallyClosedCoefficients.Stage
   GeneralAlgebraicallyClosedCoefficients.stageCategory
   GeneralAlgebraicallyClosedCoefficients.stageShift
-attribute [local instance 5000] automorphismConstructibleStage_stageLinear
-  GeneralAlgebraicallyClosedCoefficients.stageCategory
+attribute [local instance 5000] GeneralAlgebraicallyClosedCoefficients.stageCategory
   GeneralAlgebraicallyClosedCoefficients.stagePreadditive
 
 set_option backward.isDefEq.respectTransparency false

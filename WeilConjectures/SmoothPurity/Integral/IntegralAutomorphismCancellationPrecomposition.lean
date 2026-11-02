@@ -44,14 +44,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 attribute [-instance] WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective in
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-attribute [-instance] WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective in
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-attribute [-instance] WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective in
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-attribute [-instance] WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective in
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-attribute [-instance] WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective in
 private def moduleTransport (X : Scheme.{u}) {f g : X ⟶ X}
     [IsIso f] [IsIso g] (w : f = g) :
     inverseImageIntegralModules l E f ≅ inverseImageIntegralModules l E g := by
@@ -60,10 +52,8 @@ private def moduleTransport (X : Scheme.{u}) {f g : X ⟶ X}
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 attribute [-instance] WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective in
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-attribute [-instance] WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective in
 set_option allowUnsafeReducibility true in
-attribute [local irreducible] moduleIdentity derivedIdentity moduleTransport derivedTransport
+attribute [local irreducible] derivedIdentity moduleTransport derivedTransport
   inverseImageCompletedCoefficientMap
 
 end WeilConjectures

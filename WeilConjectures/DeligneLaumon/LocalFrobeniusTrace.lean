@@ -78,7 +78,6 @@ variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
   (Y₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]
 
 set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 /-- Derived pullback of the underlying Weil complex at an arbitrary geometric point.
 Source: blueprint K_xbar (blueprint: def-weil-local-frobenius-trace). -/
 def localDerivedStalk (K : sfWeilComplex D l hl Y₀ E)
