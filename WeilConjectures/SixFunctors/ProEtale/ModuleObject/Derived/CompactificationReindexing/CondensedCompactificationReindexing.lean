@@ -461,6 +461,21 @@ def refinementBaseChange {X Y Y' : Scheme.{u}} {f : X ⟶ Y}
   i_hom := (refinementBaseMap_triangles u v).1
   hom_g := (refinementBaseMap_triangles u v).2
 
+/-- Identity and composition of refinements on the entire ambient category.
+Source: the source proof, paragraphs 1 and 3
+(blueprint: lem-fix-condensed-compactification-reindexing).
+Proof: under the open adjunction the defining map restricts to identity. For an
+identity refinement its clopen projector is identity. For two successive refinements,
+pasting and the adjunction triangles identify the composite transpose with the same
+normalized map for their composite. Uniqueness under the open Hom bijection gives
+both equations, and direct-image associativity gives the final support equations. -/
+theorem refinement_id_comp {X Y : Scheme.{u}} {f : X ⟶ Y}
+    (c : Compactification f) {c₀ c₁ c₂ : Compactification f}
+    (z : c₀.Refinement c₁) (u : c₁.Refinement c₂) :
+    refinement Λ (Compactification.Refinement.id c) = 𝟙 (F Λ c) ∧
+      refinement Λ (z.comp u) = refinement Λ u ≫ refinement Λ z := by
+  sorry
+
 set_option maxHeartbeats 1600000 in
 -- The endpoints of the native derived adjunctions require additional unification time.
 /-- A common-refinement comparison, using only inverses of refinement components.
