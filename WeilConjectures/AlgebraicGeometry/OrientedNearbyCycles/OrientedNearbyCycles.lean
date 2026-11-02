@@ -28,6 +28,7 @@ public import Mathlib.CategoryTheory.Functor.Derived.PointwiseRightDerived
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedPointwiseKanBridge
 public import WeilConjectures.CategoryTheory.DerivedCategory.DerivedAdjunctionCompatibility
 public import Mathlib.CategoryTheory.Functor.Derived.Adjunction
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Small
 public import Mathlib.CategoryTheory.Functor.KanExtension.Preserves
 public import WeilConjectures.Algebra.Homology.CanonicalTensorPullbackOfUniverses.RingedTopoiCanonicalTensorPullbackOfUniverses
 public import WeilConjectures.Algebra.Homology.Site.SiteTensorFunctorialitySupplement
@@ -79,8 +80,9 @@ Source: ILO XI §4.3 (blueprint: def-trf-oriented-nearby-cycles).
 Proof: transport the finite limits of `Scheme.Etale` along `AsSmall.equiv`.
 The equivalence identifies their cones and their universal properties. -/
 theorem etaleSite_hasFiniteLimits (X : Scheme.{u}) :
-    HasFiniteLimits (EtaleSite.{u, v} X) := by
-  sorry
+    HasFiniteLimits (EtaleSite.{u, v} X) :=
+  ⟨fun _ _ _ ↦ Adjunction.hasLimitsOfShape_of_equivalence
+    (AsSmall.equiv (C := X.Etale)).inverse⟩
 
 attribute [instance] etaleSite_hasFiniteLimits
 
@@ -96,7 +98,12 @@ Proof: scheme fibre products commute with finite limits in the slice. The equiva
 `AsSmall.equiv` preserve those limits. -/
 theorem etaleBaseChange_preservesFiniteLimits {T B : Scheme.{u}} (f : T ⟶ B) :
     PreservesFiniteLimits (etaleBaseChange.{u, v} f) := by
-  sorry
+  have : PreservesFiniteLimits (AsSmall.down : EtaleSite.{u, v} B ⥤ B.Etale) :=
+    inferInstanceAs (PreservesFiniteLimits (AsSmall.equiv (C := B.Etale)).inverse)
+  have : PreservesFiniteLimits (AsSmall.up : T.Etale ⥤ EtaleSite.{u, v} T) :=
+    inferInstanceAs (PreservesFiniteLimits (AsSmall.equiv (C := T.Etale)).functor)
+  have : PreservesFiniteLimits (MorphismProperty.Over.pullback @Etale ⊤ f) := inferInstance
+  exact comp_preservesFiniteLimits _ _
 
 attribute [instance] etaleBaseChange_preservesFiniteLimits
 
@@ -107,7 +114,23 @@ preserves the generating étale covers; finite-limit preservation gives continui
 Transport the covers through `AsSmall.equiv`. -/
 theorem etaleBaseChange_isContinuous {T B : Scheme.{u}} (f : T ⟶ B) :
     (etaleBaseChange.{u, v} f).IsContinuous (etaleTopology B) (etaleTopology T) := by
-  sorry
+  have : (AsSmall.down : EtaleSite.{u, v} B ⥤ B.Etale).IsContinuous (etaleTopology B)
+      B.smallEtaleTopology :=
+    inferInstanceAs ((AsSmall.equiv (C := B.Etale)).inverse.IsContinuous
+      ((AsSmall.equiv (C := B.Etale)).inverse.inducedTopology B.smallEtaleTopology)
+      B.smallEtaleTopology)
+  have : (AsSmall.up : T.Etale ⥤ EtaleSite.{u, v} T).IsContinuous T.smallEtaleTopology
+      (etaleTopology T) :=
+    inferInstanceAs ((AsSmall.equiv (C := T.Etale)).functor.IsContinuous T.smallEtaleTopology
+      ((AsSmall.equiv (C := T.Etale)).inverse.inducedTopology T.smallEtaleTopology))
+  have : (MorphismProperty.Over.pullback @Etale ⊤ f).IsContinuous B.smallEtaleTopology
+      T.smallEtaleTopology :=
+    Scheme.isContinuous_overPullback (P := @Etale) (Q := @Etale) le_rfl f
+  have := Functor.isContinuous_comp (MorphismProperty.Over.pullback @Etale ⊤ f) AsSmall.up
+    B.smallEtaleTopology T.smallEtaleTopology (etaleTopology T)
+  exact Functor.isContinuous_comp AsSmall.down
+    (MorphismProperty.Over.pullback @Etale ⊤ f ⋙ AsSmall.up) (etaleTopology B)
+    B.smallEtaleTopology (etaleTopology T)
 
 attribute [instance] etaleBaseChange_isContinuous
 
