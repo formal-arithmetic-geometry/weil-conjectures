@@ -63,9 +63,6 @@ variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
     [T.HasSheafCompose (CategoryTheory.forget CommRingCat.{u + 1})]
     [T.HasSheafCompose (CategoryTheory.forget AddCommGrpCat.{u + 1})]
 
-omit [HasWeakSheafify T (Type (u + 1))]
-    [T.HasSheafCompose (CategoryTheory.forget CommRingCat.{u + 1})]
-    [T.HasSheafCompose (CategoryTheory.forget AddCommGrpCat.{u + 1})] in
 end ScalarPreservation
 
 end Quotient

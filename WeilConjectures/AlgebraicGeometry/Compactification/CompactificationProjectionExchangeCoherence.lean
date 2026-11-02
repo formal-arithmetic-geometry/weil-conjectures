@@ -834,16 +834,3 @@ private noncomputable def compactificationBaseChangeMap
   pullback.fst c.g g
 
 end AlgebraicGeometry.ProEtale
-
-namespace AlgebraicGeometry.ProEtale
-attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint in
-attribute [local irreducible] AlgebraicGeometry.Compactification.ofIsPullback
-  compactificationBaseChangeMap
-
--- Use the Grothendieck-category colimit instances used in the generic calculation.
--- The native ModuleCat instances otherwise force large kernel comparisons after specialization.
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint
-  ModuleCat.hasColimitsOfShape ModuleCat.hasColimitsOfSize in
-end AlgebraicGeometry.ProEtale

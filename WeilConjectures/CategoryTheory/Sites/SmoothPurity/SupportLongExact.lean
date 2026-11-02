@@ -186,10 +186,6 @@ variable (A : Type a) [Category.{w} A] [Abelian A] [HasSheafify J A]
 variable [EnoughInjectives (Sheaf J A)] [HasDerivedCategory.{d} (Sheaf J A)]
 variable [HasDerivedCategory.{e} A] {V W : C} (j : W ⟶ V)
 
-omit [HasSheafify J A] [EnoughInjectives (Sheaf J A)]
-  [HasDerivedCategory.{d} (Sheaf J A)] [HasDerivedCategory.{e} A] in
-omit [HasSheafify J A] [EnoughInjectives (Sheaf J A)]
-  [HasDerivedCategory.{d} (Sheaf J A)] [HasDerivedCategory.{e} A] in
 end CategoryTheory.Sheaf
 
 namespace CategoryTheory
