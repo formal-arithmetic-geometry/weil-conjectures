@@ -291,6 +291,123 @@ theorem pbcScalarRestrict_flatKFlat (T : Scheme.{u})
       (((pbcRestrict (pbcScalarCoefficientMap l E F i T)).mapHomologicalComplex (.up ℤ)).obj K) := by
   sorry
 
+/-- The termwise pullback is the published module pullback.
+Source: Stacks Tag 03EK (blueprint: lem-pbc-scalar-ambient-operation-comparisons).
+Proof: both are inverse image followed by the specified sheafified tensor along the
+same completed coefficient map; the scalar-extension witness fixes objects and maps. -/
+theorem pbcModulePull_eq {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) :
+    proEtaleRingModulePullback g (pbcAdicCompletion Y d) (pbcAdicCompletion X d)
+        (pbcCompletedCoefficientIso g d) = pbcActualModulePull g d := by
+  symm
+  change completedModulePullback g d = _
+  unfold completedModulePullback
+  refine CategoryTheory.Functor.ext (fun M ↦
+    (completedAdicChangeData X (completedCoefficientMap g d)).choose_spec.choose
+      ((proEtaleModuleInverseImage g (pbcAdicCompletion Y d)).obj M)) ?_
+  intro M N f
+  exact (completedAdicChangeData X (completedCoefficientMap g d)).choose_spec.choose_spec.choose
+    ((proEtaleModuleInverseImage g (pbcAdicCompletion Y d)).map f)
+
+/-- The ordinary identification of the two module pullbacks.
+Source: Stacks Tag 03EK (blueprint: lem-pbc-scalar-ambient-operation-comparisons). -/
+def pbcModulePullIso {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) :
+    proEtaleRingModulePullback g (pbcAdicCompletion Y d) (pbcAdicCompletion X d)
+        (pbcCompletedCoefficientIso g d) ≅ pbcActualModulePull g d :=
+  eqToIso (pbcModulePull_eq g d)
+
+/-- The published pullback counit is invertible on K-flat complexes.
+Source: Stacks Tag 06YY (blueprint: lem-pbc-scalar-ambient-operation-comparisons). -/
+theorem pbcActualPullComplexCounit_isIso {A : Type (u + 1)} [CommRing A]
+    (d : AdicCoefficientDatum A)
+    (P : CochainComplex (pbcModules Y (pbcAdicCompletion Y d)) ℤ)
+    (hp : PbcFlatKFlat Y d P) : IsIso (pbcActualPullComplexCounit g d P) := by
+  have : IsIso ((pbcActualPullCounit g d).app
+      ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) := by
+    delta pbcActualPullCounit completedOrdinaryPullbackCounit completedOrdinaryPullback
+    exact (completedOrdinaryPullback_exists g d).choose_spec.choose_spec.2 P hp.1
+  dsimp only [pbcActualPullComplexCounit]
+  infer_instance
+
+/-- The canonical pullback comparison is the localized termwise identification on
+flat-term K-flat complexes.
+Source: Stacks Tags 06YY and 0D6D (blueprint: lem-pbc-scalar-ambient-operation-comparisons).
+Proof: both derived adjunctions have units computed on K-flat complexes by the same
+ordinary unit after the identification; conjugating the identity of direct image
+therefore gives the localized identification. -/
+theorem pbcPullComparison_app {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
+    (P : CochainComplex (pbcModules Y (pbcAdicCompletion Y d)) ℤ)
+    (hp : PbcFlatKFlat Y d P) :
+    (pbcPullComparison g d).app (DerivedCategory.Q.obj P) ≫
+        pbcActualPullComplexCounit g d P =
+      (proEtaleRingModulePullback g (pbcAdicCompletion Y d) (pbcAdicCompletion X d)
+          (pbcCompletedCoefficientIso g d)).mapDerivedCategoryFactors.hom.app P ≫
+        DerivedCategory.Q.map
+          ((NatTrans.mapHomologicalComplex (pbcModulePullIso g d).hom (.up ℤ)).app P) := by
+  sorry
+
+/-- The ordinary scalar mate of the inverse ordinary pullback comparison.
+Source: Stacks Tag 03EL (blueprint: lem-pbc-scalar-ambient-operation-comparisons). -/
+def pbcScalarOrdinaryRestrictionPull :
+    pbcRestrict (pbcScalarCoefficientMap l E F i Y) ⋙ pbcActualModulePull g (pbcIntegralDatum l E) ⟶
+      pbcActualModulePull g (pbcIntegralDatum l F) ⋙
+        pbcRestrict (pbcScalarCoefficientMap l E F i X) :=
+  (mateEquiv (pbcScalarAdjunction (pbcScalarCoefficientMap l E F i Y))
+    (pbcScalarAdjunction (pbcScalarCoefficientMap l E F i X))
+    (TwoSquare.mk _ _ _ _ (pbcActualScalarOrdinaryPullIso g (pbcIntegralDatum l E)
+      (pbcIntegralDatum l F) (pbcScalarCoefficientMap l E F i Y)
+      (pbcScalarCoefficientMap l E F i X) (pbcScalarCoefficientStructureSquare l E F i g)).inv)).natTrans
+
+/-- The ordinary scalar mate is the identity-on-sections restriction/pullback comparison.
+Source: Stacks Tags 03EK and 03EL (blueprint: lem-pbc-scalar-ambient-operation-comparisons).
+Proof: the ordinary pullback comparison is the conjugate of the identity-on-sections
+restriction/direct-image comparison; by the ordinary iterated-mates identity its scalar
+mate is the conjugate of that comparison under the module pullback adjunctions, which
+is the restriction/pullback comparison sending a local tensor to the same tensor. -/
+theorem pbcScalarOrdinaryRestrictionPull_eq :
+    whiskerLeft (pbcRestrict (pbcScalarCoefficientMap l E F i Y))
+        (pbcModulePullIso g (pbcIntegralDatum l E)).hom ≫
+      pbcScalarOrdinaryRestrictionPull l E F i g =
+    proEtaleRingRestrictionPullbackInv g
+        (pbcAdicCompletion Y (pbcIntegralDatum l E)) (pbcAdicCompletion Y (pbcIntegralDatum l F))
+        (pbcAdicCompletion X (pbcIntegralDatum l E)) (pbcAdicCompletion X (pbcIntegralDatum l F))
+        (pbcScalarCoefficientMap l E F i Y) (pbcScalarCoefficientMap l E F i X)
+        (pbcCompletedCoefficientIso g (pbcIntegralDatum l E))
+        (pbcCompletedCoefficientIso g (pbcIntegralDatum l F))
+        (pbcScalarCoefficientInverseSquare l E F i g) ≫
+      whiskerRight (pbcModulePullIso g (pbcIntegralDatum l F)).hom
+        (pbcRestrict (pbcScalarCoefficientMap l E F i X)) := by
+  sorry
+
+/-- The derived scalar mate is the localized ordinary scalar mate on flat-term K-flat
+complexes with flat-term K-flat restriction.
+Source: Stacks Tags 03EK, 06YY and 07A6
+(blueprint: lem-pbc-scalar-ambient-operation-comparisons).
+Proof: write the mate with the derived scalar unit at the pulled-back restriction and
+the derived scalar counit. Both arguments are K-flat, so the unit and counit are the
+localized ordinary ones, the pullback counits are invertible, and the normalized
+pullback comparison is the localized ordinary comparison. The localized ordinary mate
+formula gives the displayed equation. -/
+theorem pbcScalarPullMate_app
+    (K : CochainComplex (pbcModules Y (pbcAdicCompletion Y (pbcIntegralDatum l F))) ℤ)
+    (hK : PbcFlatKFlat Y (pbcIntegralDatum l F) K)
+    (hR : PbcFlatKFlat Y (pbcIntegralDatum l E)
+      (((pbcRestrict (pbcScalarCoefficientMap l E F i Y)).mapHomologicalComplex (.up ℤ)).obj K)) :
+    (pbcActualDerivedPull g (pbcIntegralDatum l E)).map
+        ((pbcRestrict (pbcScalarCoefficientMap l E F i Y)).mapDerivedCategoryFactors.hom.app K) ≫
+      pbcActualPullComplexCounit g (pbcIntegralDatum l E)
+        (((pbcRestrict (pbcScalarCoefficientMap l E F i Y)).mapHomologicalComplex (.up ℤ)).obj K) ≫
+      DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
+        (pbcScalarOrdinaryRestrictionPull l E F i g) (.up ℤ)).app K) =
+    (mateEquiv (pbcDerivedScalarAdjunction (pbcScalarCoefficientMap l E F i Y))
+        (pbcDerivedScalarAdjunction (pbcScalarCoefficientMap l E F i X))
+        (TwoSquare.mk _ _ _ _ (pbcScalarOrdinaryPullIso l E F i g).inv)).natTrans.app
+          (DerivedCategory.Q.obj K) ≫
+      (pbcDerivedRestrict (pbcScalarCoefficientMap l E F i X)).map
+        (pbcActualPullComplexCounit g (pbcIntegralDatum l F) K) ≫
+      (pbcRestrict (pbcScalarCoefficientMap l E F i X)).mapDerivedCategoryFactors.hom.app
+        (((pbcActualModulePull g (pbcIntegralDatum l F)).mapHomologicalComplex (.up ℤ)).obj K) := by
+  sorry
+
 /-- The restriction/pullback mate identity on a flat-term K-flat representative whose
 restriction is again flat-term K-flat.
 Source: Stacks Tags 03EK, 06YY, 0D6D and 07A6
