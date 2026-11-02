@@ -6,10 +6,12 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRestrict
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructiblePullback
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.PullbackSquareComparison
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SquareComparisonCoherence
-public import WeilConjectures.CategoryTheory.PullbackFamily
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChangeIntegralRational
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.NonFlatPullCube
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.NonFlatPullFac
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushResidueFinal
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ResidueFieldTransportDerivedBaseChange
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ResidueFieldTransportDerivedBaseChangeOfCommSq
 
 /-!
 # The integral base-change morphism and the derived reduction

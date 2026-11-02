@@ -8,7 +8,9 @@ module
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorLisse
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorLocal
 public import WeilConjectures.TraceFormula.Specialization.OpenExchange
-import WeilConjectures.TraceFormula.Specialization.DefectLocal
+public import WeilConjectures.TraceFormula.Specialization.DefectLocal
+public import WeilConjectures.TraceFormula.Specialization.TraitModelProperExchange
+public import WeilConjectures.TraceFormula.Specialization.SliceSupport
 
 /-!
 

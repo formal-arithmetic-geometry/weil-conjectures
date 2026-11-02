@@ -5,9 +5,12 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.NearbyCycles.ProperExchangeFinite
 public import WeilConjectures.TraceFormula.Specialization.ResidueConstantSmoothExchange
+public import WeilConjectures.TraceFormula.Specialization.ThickOrigin
 public import WeilConjectures.TraceFormula.Specialization.ThickOriginPowUnit
-import WeilConjectures.TraceFormula.Specialization.DefectLocal
+public import WeilConjectures.TraceFormula.Specialization.DefectLocal
+import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 
