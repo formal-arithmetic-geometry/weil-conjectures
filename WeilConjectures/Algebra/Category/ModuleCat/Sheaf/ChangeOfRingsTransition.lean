@@ -66,7 +66,8 @@ theorem exists_changeOfRingsTransitionMap (X : Cᵒᵖ) :
             β.hom.app X (α.hom.app X r) •
               ((1 : R₃.obj.obj X) ⊗ₜ[R₁.obj.obj X, (γ.hom.app X).hom] m)
           rw [hγ]
-          change (1 : R₃.obj.obj X) ⊗ₜ[R₁.obj.obj X] ((show R₁.obj.obj X from r) • (show M.val.obj X from m)) = _
+          change (1 : R₃.obj.obj X) ⊗ₜ[R₁.obj.obj X]
+            ((show R₁.obj.obj X from r) • (show M.val.obj X from m)) = _
           rw [TensorProduct.tmul_smul]
           rfl }
   refine ⟨ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars
@@ -179,6 +180,7 @@ theorem changeOfRingsHom_toSheafify {N : SheafOfModules.{u} (𝓡 R₁)} (a : M 
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The transition is natural in the module. -/
+@[reassoc]
 theorem changeOfRingsTransition_naturality {N : SheafOfModules.{u} (𝓡 R₁)} (a : M ⟶ N) :
     changeOfRingsHom α M a ≫ changeOfRingsTransition α β γ h N =
       changeOfRingsTransition α β γ h M ≫ (SheafOfModules.restrictScalars
@@ -194,13 +196,62 @@ theorem changeOfRingsTransition_naturality {N : SheafOfModules.{u} (𝓡 R₁)} 
   | add x y hx hy => simp only [map_add, hx, hy]
   | tmul s m =>
     change (changeOfRingsTransition α β γ h N).val.app X
-        ((changeOfRingsHom α M a).val.app X ((toSheafify J (changeOfRingsPresheaf α M).presheaf).app X
-          (s ⊗ₜ[R₁.obj.obj X, (α.hom.app X).hom] m))) =
+        ((changeOfRingsHom α M a).val.app X
+          ((toSheafify J (changeOfRingsPresheaf α M).presheaf).app X
+            (s ⊗ₜ[R₁.obj.obj X, (α.hom.app X).hom] m))) =
       (changeOfRingsHom γ M a).val.app X ((changeOfRingsTransition α β γ h M).val.app X
-        ((toSheafify J (changeOfRingsPresheaf α M).presheaf).app X (s ⊗ₜ[R₁.obj.obj X, (α.hom.app X).hom] m)))
+        ((toSheafify J (changeOfRingsPresheaf α M).presheaf).app X
+          (s ⊗ₜ[R₁.obj.obj X, (α.hom.app X).hom] m)))
     rw [changeOfRingsHom_toSheafify, changeOfRingsTransition_tmul]
     erw [ModuleCat.ExtendScalars.map_tmul]
     rw [changeOfRingsTransition_tmul, changeOfRingsHom_toSheafify]
     erw [ModuleCat.ExtendScalars.map_tmul]
+
+section OfEq
+
+variable {E₂ : SheafOfModules.{u} (𝓡 R₁) ⥤ SheafOfModules.{u} (𝓡 R₂)}
+  {E₃ : SheafOfModules.{u} (𝓡 R₁) ⥤ SheafOfModules.{u} (𝓡 R₃)}
+  (h₂ : ∀ M, E₂.obj M = changeOfRings α M)
+  (hm₂ : ∀ {M N : SheafOfModules.{u} (𝓡 R₁)} (a : M ⟶ N),
+    E₂.map a = eqToHom (h₂ M) ≫ changeOfRingsHom α M a ≫ eqToHom (h₂ N).symm)
+  (h₃ : ∀ M, E₃.obj M = changeOfRings γ M)
+  (hm₃ : ∀ {M N : SheafOfModules.{u} (𝓡 R₁)} (a : M ⟶ N),
+    E₃.map a = eqToHom (h₃ M) ≫ changeOfRingsHom γ M a ≫ eqToHom (h₃ N).symm)
+
+/-- The transition between functors which compute the changes of rings on objects and
+morphisms. -/
+noncomputable def changeOfRingsTransitionOfEq :
+    E₂ ⟶ E₃ ⋙ SheafOfModules.restrictScalars
+      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).map β) where
+  app M := eqToHom (h₂ M) ≫ changeOfRingsTransition α β γ h M ≫
+    (SheafOfModules.restrictScalars _).map (eqToHom (h₃ M).symm)
+  naturality M N a := by
+    rw [hm₂, Functor.comp_map, hm₃]
+    simp only [Category.assoc, eqToHom_trans_assoc, eqToHom_refl, Category.id_comp,
+      Functor.map_comp, eqToHom_map, changeOfRingsTransition_naturality_assoc]
+
+/-- The transition between functors computing the changes of rings, on sheafified pure
+tensors. -/
+theorem changeOfRingsTransitionOfEq_tmul (M : SheafOfModules.{u} (𝓡 R₁)) (X : Cᵒᵖ)
+    (s : R₂.obj.obj X) (m : M.val.obj X) :
+    ((changeOfRingsTransitionOfEq α β γ h h₂ hm₂ h₃ hm₃).app M).val.app X
+        ((eqToHom (h₂ M).symm).val.app X
+          ((toSheafify J (changeOfRingsPresheaf α M).presheaf).app X
+            (s ⊗ₜ[R₁.obj.obj X, (α.hom.app X).hom] m))) =
+      (eqToHom (h₃ M).symm).val.app X
+        ((toSheafify J (changeOfRingsPresheaf γ M).presheaf).app X
+          (β.hom.app X s ⊗ₜ[R₁.obj.obj X, (γ.hom.app X).hom] m)) := by
+  have e : (eqToHom (h₂ M).symm ≫ (changeOfRingsTransitionOfEq α β γ h h₂ hm₂ h₃ hm₃).app M) =
+      changeOfRingsTransition α β γ h M ≫
+        (SheafOfModules.restrictScalars _).map (eqToHom (h₃ M).symm) := by
+    simp [changeOfRingsTransitionOfEq]
+  have := congrArg (fun f ↦ f.val.app X
+    ((toSheafify J (changeOfRingsPresheaf α M).presheaf).app X
+      (s ⊗ₜ[R₁.obj.obj X, (α.hom.app X).hom] m))) e
+  refine this.trans ?_
+  change (eqToHom (h₃ M).symm).val.app X ((changeOfRingsTransition α β γ h M).val.app X _) = _
+  rw [changeOfRingsTransition_tmul]
+
+end OfEq
 
 end SheafOfModules
