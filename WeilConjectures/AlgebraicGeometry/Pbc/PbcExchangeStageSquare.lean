@@ -599,7 +599,11 @@ theorem pbcExchangeStageSquare_integral
   congr 1
   ext
   simp only [ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.eqToHom_hom]
-  sorry
+  refine pbcScalarCompletedExchange_eqToHom_square (l := l) (E := pbcFiniteField l Ω E)
+    (F := pbcFiniteField l Ω F) (i := pbcFiniteFieldInclusion l Ω h) (sq := sq) (K := K.obj)
+    (hM := ?_) (hX := ?_) ..
+  · sorry
+  · sorry
 
 /-- The prescribed localized actual exchange components satisfy the scalar
 square for already given normalized stage families. Existence and naturality of
