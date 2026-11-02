@@ -8,6 +8,7 @@ module
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import Mathlib.CategoryTheory.Whiskering
 public import Mathlib.CategoryTheory.EqToHom
+public import WeilConjectures.FourierTransform.FdIntegralScalarPresentationForward.AbstractDescent
 
 /-! # Assembly of the forward coherence from the representative formula
 
@@ -225,5 +226,108 @@ theorem unit_assembly_of_spec
   cases hω
   exact unit_assembly SE PE IE TE θE Sr0 hSr Xr hXr br _ uC Xu hC Or0 ou0 er _ Gr hU0
     (fun Y ↦ by simpa using hD Y) K
+
+theorem cocycle_ext {C : Type*} [Category C] (Q : C ⥤ DE) [Q.EssSurj]
+    (Oh : DE ⥤ DL) (Ok : DL ⥤ DM) (Ohk : DE ⥤ DM)
+    (TE : DE ⥤ AE) (TL : DL ⥤ AL) (TM : DM ⥤ AM)
+    (Xh : AE ⥤ AL) (Xk : AL ⥤ AM) (Xhk : AE ⥤ AM)
+    (eh : Oh ⋙ TL ≅ TE ⋙ Xh) (ek : Ok ⋙ TM ≅ TL ⋙ Xk) (ehk : Ohk ⋙ TM ≅ TE ⋙ Xhk)
+    (Oc : Oh ⋙ Ok ≅ Ohk) (A : Xh ⋙ Xk ≅ Xhk)
+    (h : ∀ P, TM.map (Oc.hom.app (Q.obj P)) ≫ ehk.hom.app (Q.obj P) =
+      ek.hom.app (Oh.obj (Q.obj P)) ≫ Xk.map (eh.hom.app (Q.obj P)) ≫
+        A.hom.app (TE.obj (Q.obj P))) (Y : DE) :
+    TM.map (Oc.hom.app Y) ≫ ehk.hom.app Y =
+      ek.hom.app (Oh.obj Y) ≫ Xk.map (eh.hom.app Y) ≫ A.hom.app (TE.obj Y) := by
+  let α : (Oh ⋙ Ok) ⋙ TM ⟶ TE ⋙ Xhk := Functor.whiskerRight Oc.hom TM ≫ ehk.hom
+  let β : (Oh ⋙ Ok) ⋙ TM ⟶ TE ⋙ Xhk :=
+    (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft Oh ek.hom ≫
+      (Functor.associator _ _ _).inv ≫ Functor.whiskerRight eh.hom Xk ≫
+      (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft TE A.hom
+  have key : ∀ P, α.app (Q.obj P) = β.app (Q.obj P) := fun P ↦ by simpa [α, β] using h P
+  let i := Q.objObjPreimageIso Y
+  have hα := α.naturality i.hom
+  have hβ := β.naturality i.hom
+  rw [key] at hα
+  have : α.app Y = β.app Y := by
+    rw [← cancel_epi (((Oh ⋙ Ok) ⋙ TM).map i.hom), hα, hβ]
+  simpa [α, β] using this
+
+/-- `assoc_assembly_of_spec`, with the derived cocycle obtained on representatives. -/
+theorem assoc_assembly_full
+    (SE : ObjectProperty DE) (SL : ObjectProperty DL) (SM : ObjectProperty DM)
+    (PE : ObjectProperty AE) (PL : ObjectProperty AL) (PM : ObjectProperty AM)
+    (IE : SE.FullSubcategory ⥤ PE.FullSubcategory)
+    (IL : SL.FullSubcategory ⥤ PL.FullSubcategory)
+    (IM : SM.FullSubcategory ⥤ PM.FullSubcategory)
+    (TE : DE ⥤ AE) (TL : DL ⥤ AL) (TM : DM ⥤ AM)
+    (θE : IE ⋙ PE.ι ≅ SE.ι ⋙ TE) (θL : IL ⋙ PL.ι ≅ SL.ι ⋙ TL)
+    (θM : IM ⋙ PM.ι ≅ SM.ι ⋙ TM)
+    (Sh : DE ⥤ DL) (Sk : DL ⥤ DM) (Shk : DE ⥤ DM)
+    (hSh : ∀ K, SL ((SE.ι ⋙ Sh).obj K)) (hSk : ∀ K, SM ((SL.ι ⋙ Sk).obj K))
+    (hShk : ∀ K, SM ((SE.ι ⋙ Shk).obj K))
+    (Xh : AE ⥤ AL) (Xk : AL ⥤ AM) (Xhk : AE ⥤ AM)
+    (hXh : ∀ K, PL ((PE.ι ⋙ Xh).obj K)) (hXk : ∀ K, PM ((PL.ι ⋙ Xk).obj K))
+    (hXhk : ∀ K, PM ((PE.ι ⋙ Xhk).obj K))
+    (bh : IE ⋙ PL.lift (PE.ι ⋙ Xh) hXh ≅ SL.lift (SE.ι ⋙ Sh) hSh ⋙ IL)
+    (bk : IL ⋙ PM.lift (PL.ι ⋙ Xk) hXk ≅ SM.lift (SL.ι ⋙ Sk) hSk ⋙ IM)
+    (bhk : IE ⋙ PM.lift (PE.ι ⋙ Xhk) hXhk ≅ SM.lift (SE.ι ⋙ Shk) hShk ⋙ IM)
+    (aU : SL.lift (SE.ι ⋙ Sh) hSh ⋙ SM.lift (SL.ι ⋙ Sk) hSk ≅ SM.lift (SE.ι ⋙ Shk) hShk)
+    (aC : PL.lift (PE.ι ⋙ Xh) hXh ⋙ PM.lift (PL.ι ⋙ Xk) hXk ≅
+      PM.lift (PE.ι ⋙ Xhk) hXhk)
+    (A : Xh ⋙ Xk ≅ Xhk) (hA : ∀ X, (aC.hom.app X).hom = A.hom.app X.obj)
+    (Oh : DE ⥤ DL) (Ok : DL ⥤ DM) (Ohk : DE ⥤ DM) (Oc : Oh ⋙ Ok ≅ Ohk)
+    (eh : Oh ⋙ TL ≅ TE ⋙ Xh) (ek : Ok ⋙ TM ≅ TL ⋙ Xk) (ehk : Ohk ⋙ TM ≅ TE ⋙ Xhk)
+    (ωh : SE.ι ⋙ Oh ≅ SE.ι ⋙ Sh) (ωk : SL.ι ⋙ Ok ≅ SL.ι ⋙ Sk)
+    (ωhk : SE.ι ⋙ Ohk ≅ SE.ι ⋙ Shk)
+    (Gh : ∀ K, (bh.hom.app K).hom ≫ θL.hom.app ((SL.lift (SE.ι ⋙ Sh) hSh).obj K) =
+      Xh.map (θE.hom.app K) ≫ eh.inv.app K.obj ≫ TL.map (ωh.hom.app K))
+    (Gk : ∀ K, (bk.hom.app K).hom ≫ θM.hom.app ((SM.lift (SL.ι ⋙ Sk) hSk).obj K) =
+      Xk.map (θL.hom.app K) ≫ ek.inv.app K.obj ≫ TM.map (ωk.hom.app K))
+    (Ghk : ∀ K, (bhk.hom.app K).hom ≫ θM.hom.app ((SM.lift (SE.ι ⋙ Shk) hShk).obj K) =
+      Xhk.map (θE.hom.app K) ≫ ehk.inv.app K.obj ≫ TM.map (ωhk.hom.app K))
+    (Shk0 : DE ⥤ DM) (hShk0 : ∀ K, SM ((SE.ι ⋙ Shk0).obj K)) (eS : Shk0 = Shk)
+    (aU0 : SL.lift (SE.ι ⋙ Sh) hSh ⋙ SM.lift (SL.ι ⋙ Sk) hSk ≅
+      SM.lift (SE.ι ⋙ Shk0) hShk0) (haU : aU ≍ aU0)
+    (Ohk0 : DE ⥤ DM) (eO : Ohk0 = Ohk) (Oc0 : Oh ⋙ Ok ≅ Ohk0) (hOc0 : Oc ≍ Oc0)
+    (ωhk0 : SE.ι ⋙ Ohk0 ≅ SE.ι ⋙ Shk0) (hω : ωhk ≍ ωhk0)
+    (hU0 : ∀ K, (aU0.hom.app K).hom = ωk.inv.app ((SL.lift (SE.ι ⋙ Sh) hSh).obj K) ≫
+      Ok.map (ωh.inv.app K) ≫ Oc0.hom.app K.obj ≫ ωhk0.hom.app K)
+    {KE KL KM CE CL CM : Type*} [Category KE] [Category KL] [Category KM] [Category CE]
+    [Category CL] [Category CM]
+    (QE : KE ⥤ DE) (QL : KL ⥤ DL) (QM : KM ⥤ DM) [QE.EssSurj]
+    (RE : CE ⥤ AE) (RL : CL ⥤ AL) (RM : CM ⥤ AM)
+    (oh : KE ⥤ KL) (ok : KL ⥤ KM) (ohk : KE ⥤ KM)
+    (tE : KE ⥤ CE) (tL : KL ⥤ CL) (tM : KM ⥤ CM)
+    (xh : CE ⥤ CL) (xk : CL ⥤ CM) (xhk : CE ⥤ CM)
+    (foh : QE ⋙ Oh ≅ oh ⋙ QL) (fok : QL ⋙ Ok ≅ ok ⋙ QM) (fohk : QE ⋙ Ohk ≅ ohk ⋙ QM)
+    (ftE : QE ⋙ TE ≅ tE ⋙ RE) (ftL : QL ⋙ TL ≅ tL ⋙ RL) (ftM : QM ⋙ TM ≅ tM ⋙ RM)
+    (εh : RE ⋙ Xh ⟶ xh ⋙ RL) (εk : RL ⋙ Xk ⟶ xk ⋙ RM) (εhk : RE ⋙ Xhk ⟶ xhk ⋙ RM)
+    (ch : oh ⋙ tL ≅ tE ⋙ xh) (ck : ok ⋙ tM ≅ tL ⋙ xk) (chk : ohk ⋙ tM ≅ tE ⋙ xhk)
+    (oc : oh ⋙ ok ≅ ohk) (xc : xh ⋙ xk ≅ xhk)
+    (heh : ∀ P, eh.hom.app (QE.obj P) ≫ Xh.map (ftE.hom.app P) ≫ εh.app (tE.obj P) =
+      TL.map (foh.hom.app P) ≫ ftL.hom.app (oh.obj P) ≫ RL.map (ch.hom.app P))
+    (hek : ∀ P, ek.hom.app (QL.obj P) ≫ Xk.map (ftL.hom.app P) ≫ εk.app (tL.obj P) =
+      TM.map (fok.hom.app P) ≫ ftM.hom.app (ok.obj P) ≫ RM.map (ck.hom.app P))
+    (hehk : ∀ P, ehk.hom.app (QE.obj P) ≫ Xhk.map (ftE.hom.app P) ≫ εhk.app (tE.obj P) =
+      TM.map (fohk.hom.app P) ≫ ftM.hom.app (ohk.obj P) ≫ RM.map (chk.hom.app P))
+    (hOc : ∀ P, Oc.hom.app (QE.obj P) ≫ fohk.hom.app P =
+      Ok.map (foh.hom.app P) ≫ fok.hom.app (oh.obj P) ≫ QM.map (oc.hom.app P))
+    (hA' : ∀ P, A.hom.app (RE.obj P) ≫ εhk.app P =
+      Xk.map (εh.app P) ≫ εk.app (xh.obj P) ≫ RM.map (xc.hom.app P))
+    (hc : ∀ P, ck.hom.app (oh.obj P) ≫ xk.map (ch.hom.app P) ≫ xc.hom.app (tE.obj P) =
+      tM.map (oc.hom.app P) ≫ chk.hom.app P)
+    (hiso : ∀ P, IsIso (εhk.app (tE.obj P)))
+    (K : SE.FullSubcategory) :
+    (PM.lift (PL.ι ⋙ Xk) hXk).map (bh.hom.app K) ≫
+        bk.hom.app ((SL.lift (SE.ι ⋙ Sh) hSh).obj K) ≫ IM.map (aU.hom.app K) =
+      aC.hom.app (IE.obj K) ≫ bhk.hom.app K :=
+  assoc_assembly_of_spec SE SL SM PE PL PM IE IL IM TE TL TM θE θL θM Sh Sk Shk hSh hSk hShk
+    Xh Xk Xhk hXh hXk hXhk bh bk bhk aU aC A hA Oh Ok Ohk Oc eh ek ehk ωh ωk ωhk Gh Gk Ghk
+    (cocycle_ext QE Oh Ok Ohk TE TL TM Xh Xk Xhk eh ek ehk Oc A (fun P ↦ by
+      have := hiso P
+      exact derived_cocycle QE QL QM RE RL RM oh ok ohk tE tL tM xh xk xhk Oh Ok Ohk TE TL TM
+        Xh Xk Xhk foh fok fohk ftE ftL ftM εh εk εhk ch ck chk oc xc eh ek ehk Oc A heh hek hehk
+        hOc hA' hc P))
+    Shk0 hShk0 eS aU0 haU Ohk0 eO Oc0 hOc0 ωhk0 hω hU0 K
 
 end WeilConjectures.FdIntegralScalarForward
