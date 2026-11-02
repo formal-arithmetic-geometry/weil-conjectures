@@ -200,7 +200,13 @@ lemma kunnethMap_comp_pushforwardExchange (φ₁ : P.Hom M f₁ f₁') (φ₂ : 
       ((P.nearbyCycles Λ).map x ⊗ₘ (P.nearbyCycles Λ).map y) ≫ P.tensorMap Λ U' V' =
         P.tensorMap Λ U V ≫ (P.nearbyCycles Λ).map (x ⊗ₘ y) :=
     fun x y ↦ P.tensorMap_natural Λ x y
-  have h := kunnethMap_comp_pushforwardExchange_aux (derivedUpperStarLowerStarAdjunction Λ g)
+  -- the left adjoints are given in the form of `pullbackSquareComparison` (cached instances of
+  -- `Derived.Localizing`); unifying them with those of the adjunctions unfolds the derived functors
+  have h := kunnethMap_comp_pushforwardExchange_aux (f₁ := L((f₁)^*⟦Λ⟧)) (f₂ := L((f₂)^*⟦Λ⟧))
+    (e₁ := L((e₁)^*⟦Λ⟧)) (e₂ := L((e₂)^*⟦Λ⟧)) (g := L((g)^*⟦Λ⟧)) (h := L((h)^*⟦Λ⟧))
+    (k := L((k)^*⟦Λ⟧)) (f₁' := L((f₁')^*⟦Λ⟧)) (f₂' := L((f₂')^*⟦Λ⟧))
+    (e₁' := L((e₁')^*⟦Λ⟧)) (e₂' := L((e₂')^*⟦Λ⟧)) (g' := L((g')^*⟦Λ⟧))
+    (h' := L((h')^*⟦Λ⟧)) (k' := L((k')^*⟦Λ⟧)) (derivedUpperStarLowerStarAdjunction Λ g)
     (derivedUpperStarLowerStarAdjunction Λ h) (derivedUpperStarLowerStarAdjunction Λ k)
     (derivedUpperStarLowerStarAdjunction Λ g') (derivedUpperStarLowerStarAdjunction Λ h')
     (derivedUpperStarLowerStarAdjunction Λ k') (P.tensorMap Λ) (P₁.tensorMap Λ) hμ

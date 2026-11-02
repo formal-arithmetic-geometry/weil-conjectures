@@ -123,7 +123,11 @@ theorem Hom.isIso_map_pullbackExchange_app_of_square (φ₀ : P.Hom M f₀ f₀'
     (hχ' : IsIso ((ψ'.pushforwardExchange Λ).app (L((f₀)^*⟦Λ⟧).obj A))) :
     IsIso (R((k')_*⟦Λ⟧).map ((φ₀.pullbackExchange Λ).app A)) := by
   have hSQ := fun C ↦ Hom.pullbackExchange_square Λ φ₀ ψ ψ' φ₁ htot hgen hb hs C
-  have key := pushforwardExchange_square_aux
+  -- the left adjoints are given in the form of `pullbackSquareComparison` (cached instances of
+  -- `Derived.Localizing`); unifying them with those of the adjunctions unfolds the derived functors
+  have key := pushforwardExchange_square_aux (f := L((f₀)^*⟦Λ⟧)) (e := L((e)^*⟦Λ⟧))
+    (g := L((g)^*⟦Λ⟧)) (k := L((k)^*⟦Λ⟧)) (f' := L((f₀')^*⟦Λ⟧)) (e' := L((e')^*⟦Λ⟧))
+    (g' := L((g')^*⟦Λ⟧)) (k' := L((k')^*⟦Λ⟧))
     (derivedUpperStarLowerStarAdjunction Λ g) (derivedUpperStarLowerStarAdjunction Λ k)
     (derivedUpperStarLowerStarAdjunction Λ g') (derivedUpperStarLowerStarAdjunction Λ k')
     (φ₀.pullbackExchange Λ) (φ₁.pullbackExchange Λ) (ψ.pullbackExchange Λ)
