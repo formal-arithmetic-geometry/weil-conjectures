@@ -35,6 +35,70 @@ attribute [local irreducible] DerivedCategory HasDerivedCategory.standard
   Functor.mapDerivedCategoryNatIso Functor.mapDerivedCategoryCompIso
   moduleObjectDerivedExchange condensedAmbientExchange
   pullbackSquareComparison derivedUpperStarLowerStarAdjunction
+-- Instance search must find the same sheafification and `EssentiallySmall` instances as the
+-- imported derived pullbacks and their coherences; otherwise unification and the kernel check
+-- of the instantiated cube time out.
+attribute [-instance] SheafOfModules.RingedCoefficientProjection.cachedSheafifyModules
+  SheafOfModules.RingedCoefficientProjection.cachedWeakSheafifyModules
+  InternalAbelianSheafModule.comparison_essentiallySmall
+
+/-! Cached instances for module objects over `Λ_Z`, used by every `L((f)^*⟦Λ⟧)` below.
+Searching them from the generic instances costs seconds per use. -/
+
+section CachedInstances
+
+variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+
+private local instance (priority := 2000) hasTensorFour_modCondensed (Z : Scheme.{u})
+    (A B C D : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
+      (condensedRingObj Λ Z))) : GradedObject.HasTensor₄ObjExt A B C D :=
+  inferInstance
+
+private local instance (priority := 2000) hasGoodTensor₁₂Tensor_modCondensed (Z : Scheme.{u})
+    (A B C : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
+      (condensedRingObj Λ Z))) : GradedObject.HasGoodTensor₁₂Tensor A B C :=
+  inferInstance
+
+private local instance (priority := 2000) hasGoodTensorTensor₂₃_modCondensed (Z : Scheme.{u})
+    (A B C : GradedObject ℤ (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
+      (condensedRingObj Λ Z))) : GradedObject.HasGoodTensorTensor₂₃ A B C :=
+  inferInstance
+
+private local instance (priority := 2000) hasColimitsOfShapeInt_modCondensed (Z : Scheme.{u}) :
+    HasColimitsOfShape ℤ
+      (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) :=
+  inferInstance
+
+private local instance (priority := 2000) hasExactColimitsOfShapeInt_modCondensed
+    (Z : Scheme.{u}) :
+    HasExactColimitsOfShape ℤ
+      (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) :=
+  inferInstance
+
+private local instance (priority := 2000) hasCountableCoproducts_modCondensed (Z : Scheme.{u}) :
+    HasCountableCoproducts
+      (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) :=
+  inferInstance
+
+private local instance (priority := 2000) preservesColimitsOfShapeInt_tensorLeft_modCondensed
+    (Z : Scheme.{u})
+    (M : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) :
+    PreservesColimitsOfShape ℤ ((MonoidalCategory.curriedTensor _).obj M) :=
+  inferInstance
+
+private local instance (priority := 2000) preservesColimitsOfShapeInt_tensorRight_modCondensed
+    (Z : Scheme.{u})
+    (M : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) :
+    PreservesColimitsOfShape ℤ ((MonoidalCategory.curriedTensor _).flip.obj M) :=
+  inferInstance
+
+private local instance (priority := 2000) hasFunctorialFlatResolution_modCondensed
+    (Z : Scheme.{u}) :
+    Abelian.HasFunctorialFlatResolution
+      (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)) :=
+  inferInstance
+
+end CachedInstances
 
 private theorem arrow_of_cube
     {A B C D A' B' C' D' : Type*}
@@ -273,6 +337,8 @@ private theorem total_exchange_closed_arrow
   exact Nonempty.map2 Iso.trans (totalDerivedExchange_exact_comparisonFor Λ sq K)
     ⟨arrow_of_eq (congr_app (exactExchange_eq_closed Λ sq) K)⟩
 
+set_option maxHeartbeats 400000 in
+-- Elaborating the twelve derived functors and four derived adjunctions is slow.
 -- Cache successive specializations to keep kernel conversions between the abstract
 -- cube and the concrete derived functors small.
 private theorem derived_cube_arrow

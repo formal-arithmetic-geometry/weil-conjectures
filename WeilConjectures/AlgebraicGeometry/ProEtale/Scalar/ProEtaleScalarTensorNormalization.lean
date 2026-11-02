@@ -87,8 +87,6 @@ namespace AlgebraicGeometry.ProEtale
 
 attribute [local irreducible] SheafOfModules.monoidalCategory
 
-attribute [local irreducible] scalarTensorChainIso scalarMateDerivedTensorIso
-  proEtaleCanonicalTensorComparison scalarExtensionFunctorCounit
 
 section
 

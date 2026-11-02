@@ -96,12 +96,14 @@ private theorem ambient_iso_of_residue_iso
 
 section ContinuousAmbient
 
--- Keep the concrete coefficient ring opaque, as in `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Bounded.BoundedExchangeAmbient`.
+-- Keep the concrete coefficient ring opaque, as in
+-- `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Bounded.BoundedExchangeAmbient`.
 attribute [local irreducible] Profinite.continuousMapRingSheaf
 
 set_option backward.defeqAttrib.useBackward true in
 /-- The bounded exchange for `E`-coefficients is the ambient adjunction mate; the `E` instance of
-the general identification of `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Bounded.BoundedExchangeAmbient`. -/
+the general identification of
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Bounded.BoundedExchangeAmbient`. -/
 private theorem continuous_baseChange_hom_eq_ambient
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
@@ -315,7 +317,7 @@ private def GeneratorProperty
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj R] [IsCommMonObj R] (Z : Scheme.{u}) :
     ObjectProperty (DerivedCategory (Modules R Z)) :=
-  fun K ↦ constantModelBoundedConstructible R Z K ∧ DerivedCategory.finiteTorAmplitude _ K
+  fun K ↦ constantModelBoundedConstructible R Z K ∧ _root_.DerivedCategory.finiteTorAmplitude _ K
 
 -- Package the exchange property before classifying coefficient presentations.
 private structure GeneratorExchange
@@ -601,7 +603,7 @@ theorem properBaseChange_admissible_generators
     {a : A ⟶ Z} {q' : A ⟶ Y'} (sq : ChosenCartesianSquare a q' q v)
     (K : DerivedCategory
       (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)))
-    (hK : constantModelBoundedConstructible Λ Z K ∧ DerivedCategory.finiteTorAmplitude _ K) :
+    (hK : constantModelBoundedConstructible Λ Z K ∧ _root_.DerivedCategory.finiteTorAmplitude _ K) :
     IsIso ((condensedAmbientExchange Λ sq).app K) := by
   have hP := admissible_coefficient_induction ℓ
     (fun R _ ↦ GeneratorExchange R.X sq)
@@ -634,7 +636,7 @@ theorem properBaseChange_admissible_generators
       run_tac coefficientCongrGoal) Λ hΛ
   have hfinal : ∀ J : DerivedCategory
       (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)),
-      (constantModelBoundedConstructible Λ Z J ∧ DerivedCategory.finiteTorAmplitude _ J) →
+      (constantModelBoundedConstructible Λ Z J ∧ _root_.DerivedCategory.finiteTorAmplitude _ J) →
       IsIso ((condensedAmbientExchange Λ sq).app J) := by
     refine Eq.mp ?_ hP.isIso
     run_tac coefficientCongrGoal
