@@ -507,8 +507,7 @@ private theorem ordinaryScalarCompletion_exists :
           DerivedCategory.Q.map ((completedScalarChainComparison.{u, u} l E L ι Y).app P.obj) :=
     (completedScalarComparison_existsUnique.{u, u} l E L ι Y).exists.choose_spec P
   refine ⟨e.hom ≫ c, fun P ↦ ?_, fun K hK ↦ ?_⟩
-  · rw [NatTrans.comp_app, Category.assoc, hc P, ← Category.assoc, he P.obj,
-      Category.assoc, Functor.map_comp]
+  · rw [NatTrans.comp_app, Category.assoc, hc P, reassoc_of% (he P.obj), Functor.map_comp]
   · have : IsIso (c.app K) :=
       ((finiteFreeCompletedScalarComparison.{u, u} l E L ι Y).2.1 K hK).1
     rw [NatTrans.comp_app]
@@ -723,7 +722,7 @@ theorem integralConstructibleScalarComparison_existsUnique :
     hχ K.obj
       (isDerivedCompleteUnrestricted_of_boundedConstructible l E Y D hl K.obj K.property)
   refine existsUnique_of_exists_of_unique
-    ⟨NatIso.ofComponents (fun K ↦ ObjectProperty.isoMk _ (asIso (χ.app K.obj))) ?_, ?_⟩ ?_
+    ⟨NatIso.ofComponents (fun K ↦ ObjectProperty.isoMk _ (@asIso _ _ _ _ (χ.app K.obj) (hiso K))) ?_, ?_⟩ ?_
   · intro K K' f
     apply ObjectProperty.hom_ext
     exact χ.naturality f.hom

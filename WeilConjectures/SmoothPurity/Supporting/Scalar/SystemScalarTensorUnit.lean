@@ -82,6 +82,24 @@ theorem systemScalarTensorUnitObject :
       (pullbackTensorCalculus l L W).systemClosed.monoidal.tensorUnit) := by
   sorry
 
+universe a b c d in
+private theorem scalarAssociativity_from_tensorHom
+    {C : Type a} [Category.{b} C] [MonoidalCategory C]
+    {D : Type c} [Category.{d} D] [MonoidalCategory D]
+    (F : C ⥤ D) (μ : tensor C ⋙ F ≅ F.prod F ⋙ tensor D)
+    (h : ∀ A B M : C,
+      F.map (α_ A B M).hom ≫ (μ.app (A, B ⊗ M)).hom ≫
+          (𝟙 (F.obj A) ⊗ₘ (μ.app (B, M)).hom) =
+        (μ.app (A ⊗ B, M)).hom ≫ ((μ.app (A, B)).hom ⊗ₘ 𝟙 (F.obj M)) ≫
+          (α_ (F.obj A) (F.obj B) (F.obj M)).hom) (A B M : C) :
+    F.map (α_ A B M).hom ≫ (μ.app (A, B ⊗ M)).hom ≫
+        F.obj A ◁ (μ.app (B, M)).hom =
+      (μ.app (A ⊗ B, M)).hom ≫ (μ.app (A, B)).hom ▷ F.obj M ≫
+        (α_ (F.obj A) (F.obj B) (F.obj M)).hom := by
+  have h' := h A B M
+  dsimp only [Functor.comp_obj, tensor_obj, Functor.prod_obj] at h' ⊢
+  simpa only [MonoidalCategory.id_tensorHom, MonoidalCategory.tensorHom_id] using h'
+
 /-- Both unit equations for the normalized whole-system scalar tensorator.
 
 Source: Stacks 03EL and 07A4.
@@ -106,24 +124,17 @@ theorem systemScalarTensorUnit :
             (Prod.mkHom (𝟙 _) ε.hom) ≫
           ((pullbackTensorCalculus l L W).systemClosed.monoidal.rightUnitor (H.obj M)).hom =
         H.map ((pullbackTensorCalculus l E W).systemClosed.monoidal.rightUnitor M).hom) := by
-  intro H σ
   letI : MonoidalCategory (coefficientSequenceDerived l E W) :=
     (pullbackTensorCalculus l E W).systemClosed.monoidal
   letI : MonoidalCategory (coefficientSequenceDerived l L W) :=
     (pullbackTensorCalculus l L W).systemClosed.monoidal
+  let H := integralComparisonDerivedSequenceScalar l E L ι W
+  let σ := ScalarExtensionTower.derivedSigma l E L ι W
+    (pullbackTensorCalculus l E W) (pullbackTensorCalculus l L W)
   obtain ⟨e⟩ := systemScalarTensorUnitObject l E L ι W
-  have hA : ∀ A B M : coefficientSequenceDerived l E W,
-      H.map (α_ A B M).hom ≫ (σ.app (A, B ⊗ M)).hom ≫
-          H.obj A ◁ (σ.app (B, M)).hom =
-        (σ.app (A ⊗ B, M)).hom ≫ (σ.app (A, B)).hom ▷ H.obj M ≫
-          (α_ (H.obj A) (H.obj B) (H.obj M)).hom := by
-    intro A B M
-    have h := systemScalarTensorAssociativity l E L ι W A B M
-    dsimp only [CoefficientClosedStructure.tensor] at h
-    simpa only [tensor_map, id_tensorHom, tensorHom_id, Iso.app_hom] using h
-  obtain ⟨ε, hL, hR⟩ := unit_from_tensor H σ e hA
-  refine ⟨ε, fun M ↦ ⟨?_, ?_⟩⟩
-  · simpa only [CoefficientClosedStructure.tensor, tensor_map, Iso.app_hom] using hL M
-  · simpa only [CoefficientClosedStructure.tensor, tensor_map, Iso.app_hom] using hR M
+  have hAssoc := scalarAssociativity_from_tensorHom H σ
+    (systemScalarTensorAssociativity l E L ι W)
+  obtain ⟨ε, hL, hR⟩ := unit_from_tensor H σ e hAssoc
+  exact ⟨ε, fun M ↦ ⟨hL M, hR M⟩⟩
 
 end WeilConjectures
