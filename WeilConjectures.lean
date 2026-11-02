@@ -21874,6 +21874,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UniformE
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UniformExtBoundUniversalHomeomorphism
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UnitBallRingObj.BoundedConstructibleTensorSingle
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UnitBallRingObj.FiniteDiscreteCoefficient
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UnitBallRingObj.UnitBallLisseHypotheses
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UnitTransportAcyclic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UnitTransportExtendScalars
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UniversalHomeomorphism
