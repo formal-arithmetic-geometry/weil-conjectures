@@ -203,18 +203,6 @@ lemma boundedConstructiblePullbackExchange_app_hom (K : Dᵇc(Y.left)⟦Profinit
 
 /-! ### The unit identity -/
 
-section GenericInstances
-
-/- The cached instances of `Derived.Localizing` give `L((f)^*⟦Λ⟧)` instance arguments differing
-from those of the ambient exchange maps and adjunctions of `NearbyCycles.Exchange` (elaborated
-without them); unifying the two unfolds the derived functors. They are erased in this section, as
-in `NearbyCycles.Exchange`. -/
-attribute [-instance] hasTensorFour_modCondensed
-  hasGoodTensor₁₂Tensor_modCondensed hasGoodTensorTensor₂₃_modCondensed
-  hasColimitsOfShapeInt_modCondensed hasExactColimitsOfShapeInt_modCondensed
-  hasCountableCoproducts_modCondensed preservesColimitsOfShapeInt_tensorLeft_modCondensed
-  preservesColimitsOfShapeInt_tensorRight_modCondensed hasFunctorialFlatResolution_modCondensed
-
 /-- The unit identity on bounded constructible complexes, for an arbitrary transformation `χ` and
 arbitrary adjunctions `adj`, `adj'` in place of the ambient pushforward exchange and of the
 adjunctions `Lf^* ⊣ Rf_*`, `Lf'^* ⊣ Rf'_*`, deduced from the ambient unit identity `hamb`. -/
@@ -282,8 +270,6 @@ lemma boundedConstructibleUnit_comp_map_unit_comp_pushforwardExchange_app :
     (boundedConstructibleUpperStarLowerStarAdjunction_unit_app_hom ℓ f (𝟙_ _))
     (boundedConstructibleUpperStarLowerStarAdjunction_unit_app_hom ℓ f' (𝟙_ _))
     (φ.unit_comp_map_unit_comp_pushforwardExchange_app (Profinite.padicAlgClRingObj ℓ))
-
-end GenericInstances
 
 /-! ### The mate relation -/
 
