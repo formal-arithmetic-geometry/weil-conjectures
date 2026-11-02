@@ -227,6 +227,121 @@ abbrev pbcScalarRestrictionDirectImage :=
     (pbcCompletedCoefficientIso g (pbcIntegralDatum l F))
     (pbcScalarCoefficientInverseSquare l E F i g)
 
+/-- The canonical comparison from termwise pullback to the published derived pullback,
+obtained by conjugating the identity of the common derived direct image.
+Source: Stacks Tag 0D6D (blueprint: lem-pbc-scalar-ambient-operation-comparisons). -/
+def pbcPullComparison {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) :
+    proEtaleRingDerivedPullback g (pbcAdicCompletion Y d) (pbcAdicCompletion X d)
+        (pbcCompletedCoefficientIso g d) ⟶ pbcActualDerivedPull g d :=
+  (conjugateEquiv (pbcActualDerivedAdjunction g d)
+    (proEtaleRingDerivedAdjunction g (pbcAdicCompletion Y d) (pbcAdicCompletion X d)
+      (pbcCompletedCoefficientIso g d))).symm (𝟙 _)
+
+/-- The canonical termwise restriction/pullback comparison for the scalar inclusion.
+Source: Stacks Tag 0D6D (blueprint: lem-pbc-scalar-ambient-operation-comparisons). -/
+abbrev pbcScalarRestrictionPullback :=
+  proEtaleRingRestrictionDerivedPullback g
+    (pbcAdicCompletion Y (pbcIntegralDatum l E)) (pbcAdicCompletion Y (pbcIntegralDatum l F))
+    (pbcAdicCompletion X (pbcIntegralDatum l E)) (pbcAdicCompletion X (pbcIntegralDatum l F))
+    (pbcScalarCoefficientMap l E F i Y) (pbcScalarCoefficientMap l E F i X)
+    (pbcCompletedCoefficientIso g (pbcIntegralDatum l E))
+    (pbcCompletedCoefficientIso g (pbcIntegralDatum l F))
+    (pbcScalarCoefficientInverseSquare l E F i g)
+
+/-- The scalar mate of the inverse normalized pullback comparison is the termwise
+restriction/pullback comparison, after the canonical pullback comparisons.
+Source: Stacks Tags 03EK, 06YY, 0D6D and 07A6
+(blueprint: lem-pbc-scalar-ambient-operation-comparisons).
+Proof: every derived object is represented by a flat-term K-flat complex. Since the
+target coefficients are finite free over the source ones, its restriction is again
+flat-term K-flat. On such representatives the scalar units, the scalar counits, the
+pullback counits and both pullback comparisons are localizations of the ordinary
+maps, and the normalized pullback comparison is the localized balanced ordinary
+comparison. The ordinary scalar mate of that comparison is the identity-on-sections
+restriction/pullback comparison, by the ordinary iterated-mates identity. -/
+theorem pbcScalarPullMate_restriction :
+    whiskerLeft (pbcDerivedRestrict (pbcScalarCoefficientMap l E F i Y))
+        (pbcPullComparison g (pbcIntegralDatum l E)) ≫
+      (mateEquiv (pbcDerivedScalarAdjunction (pbcScalarCoefficientMap l E F i Y))
+        (pbcDerivedScalarAdjunction (pbcScalarCoefficientMap l E F i X))
+        (TwoSquare.mk _ _ _ _ (pbcScalarOrdinaryPullIso l E F i g).inv)).natTrans =
+    (pbcScalarRestrictionPullback l E F i g).inv ≫
+      whiskerRight (pbcPullComparison g (pbcIntegralDatum l F))
+        (pbcDerivedRestrict (pbcScalarCoefficientMap l E F i X)) := by
+  sorry
+
+-- Mates are unchanged when the left adjoints are replaced through conjugates of identities.
+private theorem scalarMate_change_left
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    {L₁ L₁' : A ⥤ B} {R₁ : B ⥤ A} {L₂ L₂' : C ⥤ D} {R₂ : D ⥤ C}
+    {G : A ⥤ C} {H : B ⥤ D}
+    (a₁ : L₁ ⊣ R₁) (b₁ : L₁' ⊣ R₁) (a₂ : L₂ ⊣ R₂) (b₂ : L₂' ⊣ R₂)
+    (β : TwoSquare G L₁ L₂ H) (γ : TwoSquare G L₁' L₂' H)
+    (h : whiskerLeft G ((conjugateEquiv a₂ b₂).symm (𝟙 R₂)) ≫ β.natTrans =
+      γ.natTrans ≫ whiskerRight ((conjugateEquiv a₁ b₁).symm (𝟙 R₁)) H) :
+    (mateEquiv a₁ a₂ β).natTrans = (mateEquiv b₁ b₂ γ).natTrans := by
+  have h₁ := mateEquiv_conjugateEquiv_vcomp a₁ a₂ b₂ β ((conjugateEquiv a₂ b₂).symm (𝟙 R₂))
+  have h₂ := conjugateEquiv_mateEquiv_vcomp a₁ b₁ b₂ ((conjugateEquiv a₁ b₁).symm (𝟙 R₁)) γ
+  have hw : β.whiskerRight ((conjugateEquiv a₂ b₂).symm (𝟙 R₂)) =
+      γ.whiskerLeft ((conjugateEquiv a₁ b₁).symm (𝟙 R₁)) := by
+    ext K
+    exact NatTrans.congr_app h K
+  rw [hw, h₂, Equiv.apply_symm_apply, Equiv.apply_symm_apply] at h₁
+  ext K
+  have hk := NatTrans.congr_app (congrArg TwoSquare.natTrans h₁) K
+  simpa [TwoSquare.whiskerTop, TwoSquare.whiskerBottom] using hk.symm
+
+private theorem scalarMate_adjunct
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    {L : A ⥤ B} {R : B ⥤ A} {L' : C ⥤ D} {R' : D ⥤ C}
+    {G : A ⥤ C} {H : B ⥤ D}
+    (adj : L ⊣ R) (adj' : L' ⊣ R') (s : TwoSquare G L L' H)
+    (M : A) (N : B) (t : L.obj M ⟶ N) :
+    adj'.homEquiv _ _ (s.app M ≫ H.map t) =
+      G.map (adj.homEquiv M N t) ≫ (mateEquiv adj adj' s).app N := by
+  simp only [Adjunction.homEquiv_unit, Functor.map_comp]
+  have hu := unit_mateEquiv adj adj' s M
+  dsimp only [Functor.id_obj] at hu
+  rw [← Category.assoc, ← hu, Category.assoc]
+  have hn := (mateEquiv adj adj' s).natTrans.naturality t
+  dsimp only [Functor.comp_map] at hn
+  rw [← hn, ← Category.assoc, ← G.map_comp]
+
+/-- The canonical restriction/direct-image comparison is the pullback mate of the
+inverse termwise restriction/pullback comparison.
+Source: Stacks Tags 0D6D and 0D6E (blueprint: lem-pbc-scalar-ambient-operation-comparisons).
+Proof: specialize the adjunct identity of the ring-sheaf change adjunction to the
+counit, and compare with the adjunct formula for mates. -/
+theorem pbcScalarRestrictionDirectImage_mate :
+    (mateEquiv (proEtaleRingDerivedAdjunction g (pbcAdicCompletion Y (pbcIntegralDatum l F))
+        (pbcAdicCompletion X (pbcIntegralDatum l F))
+        (pbcCompletedCoefficientIso g (pbcIntegralDatum l F)))
+      (proEtaleRingDerivedAdjunction g (pbcAdicCompletion Y (pbcIntegralDatum l E))
+        (pbcAdicCompletion X (pbcIntegralDatum l E))
+        (pbcCompletedCoefficientIso g (pbcIntegralDatum l E)))
+      (TwoSquare.mk _ _ _ _ (pbcScalarRestrictionPullback l E F i g).inv)).natTrans =
+    (pbcScalarRestrictionDirectImage l E F i g).hom := by
+  let aS := proEtaleRingDerivedAdjunction g (pbcAdicCompletion Y (pbcIntegralDatum l F))
+    (pbcAdicCompletion X (pbcIntegralDatum l F))
+    (pbcCompletedCoefficientIso g (pbcIntegralDatum l F))
+  let aR := proEtaleRingDerivedAdjunction g (pbcAdicCompletion Y (pbcIntegralDatum l E))
+    (pbcAdicCompletion X (pbcIntegralDatum l E))
+    (pbcCompletedCoefficientIso g (pbcIntegralDatum l E))
+  ext N
+  have hcl := (proEtaleRingSheafChangeAdjunction g
+    (pbcAdicCompletion Y (pbcIntegralDatum l E)) (pbcAdicCompletion Y (pbcIntegralDatum l F))
+    (pbcAdicCompletion X (pbcIntegralDatum l E)) (pbcAdicCompletion X (pbcIntegralDatum l F))
+    (pbcScalarCoefficientMap l E F i Y) (pbcScalarCoefficientMap l E F i X)
+    (pbcCompletedCoefficientIso g (pbcIntegralDatum l E))
+    (pbcCompletedCoefficientIso g (pbcIntegralDatum l F))
+    (pbcScalarCoefficientInverseSquare l E F i g)).2.2 _ N (aS.counit.app N)
+  have hma := scalarMate_adjunct aS aR
+    (TwoSquare.mk _ _ _ _ (pbcScalarRestrictionPullback l E F i g).inv) _ N (aS.counit.app N)
+  have h1 : aS.homEquiv _ N (aS.counit.app N) = 𝟙 _ := by
+    simp [Adjunction.homEquiv_unit]
+  rw [h1, CategoryTheory.Functor.map_id, Category.id_comp] at hma hcl
+  exact hma.symm.trans hcl
+
 /-- The normalized derived pullback comparison is the conjugate of the canonical
 inverse restriction/direct-image comparison.
 Source: Stacks Tags 03EL, 0D6D, 0D6E and 07A6
@@ -243,7 +358,32 @@ theorem pbcScalarOrdinaryPullIso_conjugate :
         (pbcActualDerivedAdjunction g (pbcIntegralDatum l F)))
       (pbcScalarOrdinaryPullIso l E F i g).hom =
     (pbcScalarRestrictionDirectImage l E F i g).inv := by
-  sorry
+  let aPE := pbcActualDerivedAdjunction g (pbcIntegralDatum l E)
+  let aPF := pbcActualDerivedAdjunction g (pbcIntegralDatum l F)
+  let aY := pbcDerivedScalarAdjunction (pbcScalarCoefficientMap l E F i Y)
+  let aX := pbcDerivedScalarAdjunction (pbcScalarCoefficientMap l E F i X)
+  let aQE := proEtaleRingDerivedAdjunction g (pbcAdicCompletion Y (pbcIntegralDatum l E))
+    (pbcAdicCompletion X (pbcIntegralDatum l E))
+    (pbcCompletedCoefficientIso g (pbcIntegralDatum l E))
+  let aQF := proEtaleRingDerivedAdjunction g (pbcAdicCompletion Y (pbcIntegralDatum l F))
+    (pbcAdicCompletion X (pbcIntegralDatum l F))
+    (pbcCompletedCoefficientIso g (pbcIntegralDatum l F))
+  let α := pbcScalarOrdinaryPullIso l E F i g
+  let δ := pbcScalarRestrictionDirectImage l E F i g
+  have hi := iterated_mateEquiv_conjugateEquiv aY aX aPE aPF (TwoSquare.mk _ _ _ _ α.inv)
+  have hm := scalarMate_change_left aPF aQF aPE aQE
+    (mateEquiv aY aX (TwoSquare.mk _ _ _ _ α.inv))
+    (TwoSquare.mk _ _ _ _ (pbcScalarRestrictionPullback l E F i g).inv)
+    (pbcScalarPullMate_restriction l E F i g)
+  have hc' : conjugateEquiv (aY.comp aPF) (aPE.comp aX) α.inv = δ.hom :=
+    hi.symm.trans (hm.trans (pbcScalarRestrictionDirectImage_mate l E F i g))
+  have hcomp : conjugateEquiv (aPE.comp aX) (aY.comp aPF) α.hom ≫ δ.hom = 𝟙 _ := by
+    rw [← hc']
+    refine (conjugateEquiv_comp (aPE.comp aX) (aY.comp aPF) (aPE.comp aX) α.hom α.inv).trans ?_
+    rw [α.inv_hom_id]
+    exact conjugateEquiv_id (aPE.comp aX)
+  apply (cancel_mono δ.hom).1
+  exact hcomp.trans δ.inv_hom_id.symm
 
 /-- The scalar mate of the direct-image comparison is the canonical inverse
 restriction/direct-image comparison.
