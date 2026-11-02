@@ -64,6 +64,71 @@ private theorem pullback_flatTerms {V W Z : Scheme.{t}} (h : Z ⟶ W) (k : W ⟶
     proEtaleCanonicalPullbackComposition_existsUnique h k RV RW RZ ck ch _ rfl
   exact (hc K (kFlat_acyclicTensor K hK) hflat).2.1 n
 
+@[reassoc]
+private theorem reductionIso_level {U V : Scheme.{t}} (q : U ⟶ V)
+    (N : reductionModules V (d.completedRing V)) (n : ℕᵒᵖ) :
+    (stratumModulePull d q).map (((completedReductionModuleUnit d V).app N).app n) ≫
+      ((stratumModuleReductionIso d q).hom.app N).app n =
+    ((completedReductionModuleUnit d U).app ((stratumModulePull d q).obj N)).app n := by
+  have h := NatTrans.congr_app ((stratumModuleReductionIso_exists d q).exists.choose_spec N) n
+  simp only [NatTrans.comp_app, AdicCoefficientDatum.constantPullbackIso,
+    NatIso.ofComponents_hom_app, Iso.refl_hom, Category.id_comp] at h
+  exact h
+
+/-- The ordinary reduction comparisons paste along any isomorphism of composite
+module pullbacks: each is determined by its quotient augmentation. -/
+private theorem ordinaryReduction_square
+    (σ : stratumModulePull d g ⋙ stratumModulePull d f' ≅
+      stratumModulePull d f ⋙ stratumModulePull d g')
+    (M : reductionModules Y (d.completedRing Y)) (n : ℕᵒᵖ) :
+    (stratumModulePull d f').map (((stratumModuleReductionIso d g).hom.app M).app n) ≫
+      ((stratumModuleReductionIso d f').hom.app ((stratumModulePull d g).obj M)).app n ≫
+      ((completedReductionModuleTowerFunctor X' d).map (σ.hom.app M)).app n =
+    σ.hom.app (((completedReductionModuleTowerFunctor Y d).obj M).obj n) ≫
+      (stratumModulePull d g').map (((stratumModuleReductionIso d f).hom.app M).app n) ≫
+      ((stratumModuleReductionIso d g').hom.app ((stratumModulePull d f).obj M)).app n := by
+  have := stratumModuleUnit_epi d Y M n.unop
+  apply (cancel_epi ((stratumModulePull d f').map ((stratumModulePull d g).map
+    (((completedReductionModuleUnit d Y).app M).app n)))).1
+  rw [← Functor.map_comp_assoc, reductionIso_level d g M n,
+    reductionIso_level_assoc d f' ((stratumModulePull d g).obj M) n]
+  have hu : ((completedReductionModuleUnit d X').app
+        ((stratumModulePull d f').obj ((stratumModulePull d g).obj M))).app n ≫
+      ((completedReductionModuleTowerFunctor X' d).map (σ.hom.app M)).app n =
+    σ.hom.app M ≫ ((completedReductionModuleUnit d X').app
+        ((stratumModulePull d g').obj ((stratumModulePull d f).obj M))).app n :=
+    (NatTrans.congr_app ((completedReductionModuleUnit d X').naturality (σ.hom.app M)) n).symm
+  have hσ : (stratumModulePull d f').map ((stratumModulePull d g).map
+        (((completedReductionModuleUnit d Y).app M).app n)) ≫
+      σ.hom.app (((completedReductionModuleTowerFunctor Y d).obj M).obj n) =
+    σ.hom.app M ≫ (stratumModulePull d g').map ((stratumModulePull d f).map
+        (((completedReductionModuleUnit d Y).app M).app n)) :=
+    σ.hom.naturality _
+  rw [hu, reassoc_of% hσ, ← Functor.map_comp_assoc, reductionIso_level d f M n,
+    reductionIso_level d g' ((stratumModulePull d f).obj M) n]
+
+private theorem whiskeringRight_mapIso_hom_app_app {C D E : Type*} [Category C] [Category D]
+    [Category E] {F G : D ⥤ E} (σ : F ≅ G) (T : C ⥤ D) (n : C) :
+    (((Functor.whiskeringRight C D E).mapIso σ).hom.app T).app n = σ.hom.app (T.obj n) := rfl
+
+private theorem ordinaryReduction_square_tower
+    (σ : stratumModulePull d g ⋙ stratumModulePull d f' ≅
+      stratumModulePull d f ⋙ stratumModulePull d g')
+    (τ : d.towerModulePull g ⋙ d.towerModulePull f' ≅
+      d.towerModulePull f ⋙ d.towerModulePull g')
+    (hτ : ∀ T n, (τ.hom.app T).app n = σ.hom.app (T.obj n))
+    (M : reductionModules Y (d.completedRing Y)) :
+    (d.towerModulePull f').map ((stratumModuleReductionIso d g).hom.app M) ≫
+        (stratumModuleReductionIso d f').hom.app ((stratumModulePull d g).obj M) ≫
+        (completedReductionModuleTowerFunctor X' d).map (σ.hom.app M) =
+      τ.hom.app ((completedReductionModuleTowerFunctor Y d).obj M) ≫
+        (d.towerModulePull g').map ((stratumModuleReductionIso d f).hom.app M) ≫
+        (stratumModuleReductionIso d g').hom.app ((stratumModulePull d f).obj M) := by
+  apply NatTrans.ext
+  funext n
+  simp only [NatTrans.comp_app, hτ]
+  exact ordinaryReduction_square d σ M n
+
 /-- The normalized completed reduction comparisons respect the inverse-image square.
 This is an equation before taking mates and in the full derived diagram category.
 Source: blueprint completed-exchange-coherence, tensor/pullback coherence in its
@@ -105,6 +170,9 @@ theorem completedReductionPullback_square
       Functor.mapDerivedCategorySquareIso (d.integralTowerRingedSquare sq).exchangeModuleSquare :=
     (d.integralTowerRingedSquare sq).ambientSquare_localization
   rw [hamb]
+  let σ : stratumModulePull d g ⋙ stratumModulePull d f' ≅
+      stratumModulePull d f ⋙ stratumModulePull d g' :=
+    (d.integralTowerRingedSquare sq).exchangeModuleSquare
   let good : ObjectProperty (CochainComplex (reductionModules Y (d.completedRing Y)) ℤ) :=
     fun P ↦ P.IsKFlatIndependentCoefficients ∧
       ∀ n, SheafOfModules.IsFlatOnSite (J := ProEt.topology Y) (R := d.completedRing Y) (P.X n)
@@ -138,9 +206,8 @@ theorem completedReductionPullback_square
     (stratumModuleReductionIso d f) (stratumModuleReductionIso d g')
     (d.reductionTowerPullbackIso g) (d.reductionTowerPullbackIso f')
     (d.reductionTowerPullbackIso f) (d.reductionTowerPullbackIso g')
-    (d.integralTowerRingedSquare sq).exchangeModuleSquare
-    ((Functor.whiskeringRight ℕᵒᵖ _ _).mapIso
-      (d.integralTowerRingedSquare sq).exchangeModuleSquare)
+    σ ((Functor.whiskeringRight ℕᵒᵖ (reductionModules Y (d.completedRing Y))
+      (reductionModules X' (d.completedRing X'))).mapIso σ)
     good res ?_ ?_ ?_ ?_ ?_ ?_
   · intro P hP
     rw [hcounit, hcounit]
@@ -159,62 +226,8 @@ theorem completedReductionPullback_square
     exact towerCounit_isIso X' d _ (stratumPull_flatKFlat d g' _
       (stratumPull_flatKFlat d f P hP.1 hP.2) (hf_flat P hP))
   · intro M
-    have n_g : (d.towerModulePull g).map ((completedReductionModuleUnit d Y).app M) ≫
-        (stratumModuleReductionIso d g).hom.app M =
-      (d.constantPullbackIso g).hom.app M ≫
-        (completedReductionModuleUnit d Y').app ((stratumModulePull d g).obj M) :=
-      (stratumModuleReductionIso_exists d g).exists.choose_spec M
-    have n_f : (d.towerModulePull f).map ((completedReductionModuleUnit d Y).app M) ≫
-        (stratumModuleReductionIso d f).hom.app M =
-      (d.constantPullbackIso f).hom.app M ≫
-        (completedReductionModuleUnit d X).app ((stratumModulePull d f).obj M) :=
-      (stratumModuleReductionIso_exists d f).exists.choose_spec M
-    have n_f' : (d.towerModulePull f').map
-          ((completedReductionModuleUnit d Y').app ((stratumModulePull d g).obj M)) ≫
-        (stratumModuleReductionIso d f').hom.app ((stratumModulePull d g).obj M) =
-      (d.constantPullbackIso f').hom.app ((stratumModulePull d g).obj M) ≫
-        (completedReductionModuleUnit d X').app
-          ((stratumModulePull d f').obj ((stratumModulePull d g).obj M)) :=
-      (stratumModuleReductionIso_exists d f').exists.choose_spec _
-    have n_g' : (d.towerModulePull g').map
-          ((completedReductionModuleUnit d X).app ((stratumModulePull d f).obj M)) ≫
-        (stratumModuleReductionIso d g').hom.app ((stratumModulePull d f).obj M) =
-      (d.constantPullbackIso g').hom.app ((stratumModulePull d f).obj M) ≫
-        (completedReductionModuleUnit d X').app
-          ((stratumModulePull d g').obj ((stratumModulePull d f).obj M)) :=
-      (stratumModuleReductionIso_exists d g').exists.choose_spec _
-    have hlev : ∀ n : ℕᵒᵖ, Epi (((d.towerModulePull f').map ((d.towerModulePull g).map
-        ((completedReductionModuleUnit d Y).app M))).app n) := by
-      intro n
-      have := stratumModuleUnit_epi d Y M n.unop
-      change Epi ((stratumModulePull d f').map ((stratumModulePull d g).map
-        (((completedReductionModuleUnit d Y).app M).app n)))
-      infer_instance
-    have hepi := NatTrans.epi_of_epi_app ((d.towerModulePull f').map
-      ((d.towerModulePull g).map ((completedReductionModuleUnit d Y).app M)))
-    apply (cancel_epi ((d.towerModulePull f').map
-      ((d.towerModulePull g).map ((completedReductionModuleUnit d Y).app M)))).1
-    have hτ : (d.towerModulePull f').map ((d.towerModulePull g).map
-          ((completedReductionModuleUnit d Y).app M)) ≫
-        ((Functor.whiskeringRight ℕᵒᵖ _ _).mapIso
-          (d.integralTowerRingedSquare sq).exchangeModuleSquare).hom.app
-            ((completedReductionModuleTowerFunctor Y d).obj M) =
-      ((Functor.whiskeringRight ℕᵒᵖ _ _).mapIso
-          (d.integralTowerRingedSquare sq).exchangeModuleSquare).hom.app
-            ((completedTowerConstant d Y).obj M) ≫
-        (d.towerModulePull g').map ((d.towerModulePull f).map
-          ((completedReductionModuleUnit d Y).app M)) :=
-      ((Functor.whiskeringRight ℕᵒᵖ _ _).mapIso
-        (d.integralTowerRingedSquare sq).exchangeModuleSquare).hom.naturality _
-    have hu := (completedReductionModuleUnit d X').naturality
-      ((d.integralTowerRingedSquare sq).exchangeModuleSquare.hom.app M)
-    rw [← Functor.map_comp_assoc, n_g, Functor.map_comp, Category.assoc, reassoc_of% n_f']
-    erw [← hu]
-    rw [reassoc_of% hτ, ← Functor.map_comp_assoc, n_f, Functor.map_comp, Category.assoc, n_g']
-    simp only [← Category.assoc]
-    congr 1
-    ext n
-    trace_state
-    sorry
+    apply NatTrans.ext
+    funext n
+    exact ordinaryReduction_square d σ M n
 
 end AlgebraicGeometry.Scheme
