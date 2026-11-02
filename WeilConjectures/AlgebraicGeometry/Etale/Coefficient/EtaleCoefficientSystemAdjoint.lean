@@ -351,9 +351,6 @@ set_option backward.isDefEq.respectTransparency true
 attribute [local irreducible] SheafOfModules.coefficientQuotientMap
   AlgebraicGeometry.StrictEtaleCoefficientChange.sheaf
 
-attribute [local irreducible] adjointQuotientProjection
-  StrictEtaleQuotientProjection.projection
-
 end TransportAssembly
 
 section CofinalTransport
