@@ -134,6 +134,16 @@ theorem pbcScalarIntegralComparison_hom_app_ne (h : E ≤ F) (hEF : E ≠ F)
   rw [hs]
   exact Functor.congr_obj (pbcRationalScalarExtension_exists l Ω T hdim hl h).exists.choose_spec K
 
+
+/-- For distinct stages every inverse component of the scalar/integral comparison is an
+`eqToHom`. -/
+theorem pbcScalarIntegralComparison_inv_app_ne (h : E ≤ F) (hEF : E ≠ F)
+    (K : pbcIntegralStage l Ω T E) :
+    ∃ e, (pbcScalarIntegralComparison l Ω T hdim hl h).inv.app K = eqToHom e := by
+  obtain ⟨e, he⟩ := pbcScalarIntegralComparison_hom_app_ne l Ω T hdim hl h hEF K
+  refine ⟨e.symm, ?_⟩
+  rw [← cancel_epi ((pbcScalarIntegralComparison l Ω T hdim hl h).hom.app K), Iso.hom_inv_id_app,
+    he, eqToHom_trans, eqToHom_refl]
 end ScalarTransport
 
 section ScalarExchange
@@ -212,8 +222,10 @@ The direct-image comparisons are solved for `β.hom` by `eq_comp_inv_of_comp_hom
 solved forms are substituted by `erw`, so every β is now a localized ambient scalar
 comparison conjugated by `pbcScalarIntegralComparison` and `eqToHom`s.
 For `E ≠ F`, `pbcScalarIntegralComparison_hom_app_ne` shows that every comparison component
-is an `eqToHom`. Next: `by_cases E = F`; in the `E ≠ F` branch, `obtain` these for the
-components in the goal and rewrite; then do the τ-naturality step.
+is an `eqToHom`. The proof now does `by_cases E = F`. In the `E ≠ F` branch all six comparison
+components in the goal are rewritten to `eqToHom`s (`_hom_app_ne`, `_inv_app_ne`).
+Next in that branch: the τ-naturality step with `hτ F`, cancelling the `eqToHom`s and
+`pbcScalarCompletedExchange`. The `E = F` branch is open.
 Earlier attempt, before `show`: moving `Lg.β` and `Rf'_F.map Lg'.β` across the goal with a
 generic two-sided lemma
 (`p.inv ≫ A ≫ B = R ≫ T ≫ q.inv → A ≫ B ≫ q.hom = p.hom ≫ R ≫ T`), applied by `refine`
@@ -386,6 +398,28 @@ theorem pbcExchangeStageSquare_integral
         ((pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)
           (pbcActualCompletedPull g' (pbcStageDatum.{u} l Ω E)) (presLg' E)).obj K))) _ eRf'
   erw [βLg_inv, βLg'_inv, βRf_hom, βRf'_hom]
+  by_cases hEF : E = F
+  · sorry
+  simp only [Iso.app_hom, Iso.app_inv, Functor.mapIso_inv, Iso.symm_inv]
+  obtain ⟨_, h₁⟩ := pbcScalarIntegralComparison_hom_app_ne l Ω Y dY.out iY.out h hEF
+    ((pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)
+      (pbcActualDerivedPush f (pbcStageDatum.{u} l Ω E)) (presRf E)).obj K)
+  obtain ⟨_, h₄⟩ := pbcScalarIntegralComparison_inv_app_ne l Ω X' dX'.out iX'.out h hEF
+    ((pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)
+      (pbcActualCompletedPull g' (pbcStageDatum.{u} l Ω E)) (presLg' E)).obj K)
+  obtain ⟨_, h₅⟩ := pbcScalarIntegralComparison_hom_app_ne l Ω X dX.out iX.out h hEF K
+  obtain ⟨_, h₆⟩ := pbcScalarIntegralComparison_inv_app_ne l Ω X dX.out iX.out h hEF K
+  obtain ⟨_, h₇⟩ := pbcScalarIntegralComparison_inv_app_ne l Ω Y' dY'.out iY'.out h hEF
+    ((pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)
+      (pbcActualCompletedPull g (pbcStageDatum.{u} l Ω E)) (presLg E)).obj
+      ((pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)
+        (pbcActualDerivedPush f (pbcStageDatum.{u} l Ω E)) (presRf E)).obj K))
+  obtain ⟨_, h₈⟩ := pbcScalarIntegralComparison_hom_app_ne l Ω Y' dY'.out iY'.out h hEF
+    ((pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)
+      (pbcActualDerivedPush f' (pbcStageDatum.{u} l Ω E)) (presRf' E)).obj
+      ((pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)
+        (pbcActualCompletedPull g' (pbcStageDatum.{u} l Ω E)) (presLg' E)).obj K))
+  simp only [h₁, h₄, h₅, h₆, h₇, h₈]
   sorry
 
 /-- The prescribed localized actual exchange components satisfy the scalar
