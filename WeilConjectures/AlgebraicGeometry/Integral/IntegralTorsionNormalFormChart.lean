@@ -11,6 +11,7 @@ public import Mathlib.RingTheory.Nilpotent.Defs
 public import Mathlib.LinearAlgebra.Basis.Defs
 public import Mathlib.CategoryTheory.Limits.Shapes.BinaryBiproducts
 public import WeilConjectures.Mathlib.Algebra.Module.PID
+import WeilConjectures.AlgebraicGeometry.Integral.IntegralConstantFreeChart
 
 /-!
 # Torsion normal form on a perfect chart
@@ -130,7 +131,7 @@ theorem chart_free_sheaf (T : Scheme.{u}) {S : Scheme.{u}} (g : S ⟶ T) (r : �
       Nonempty ((proEtaleRingModulePullback g (pbcAdicCompletion T (pbcIntegralDatum l E)) _
         (Iso.refl _)).obj ((integralConstantModule T (pbcIntegralDatum l E)).obj
           (ModuleCat.of (PbcIntegralRing l E) (Fin r →₀ PbcIntegralRing l E))) ≅ F) := by
-  sorry
+  exact exists_basis_pullback_integralConstantModule_free (pbcIntegralDatum l E) g r
 
 /-- On a perfect chart, the consecutive-quotient Tor sheaf surjects onto the cokernel of
 the uniformizer on the realization of the torsion summand of the cohomology module.
