@@ -53,11 +53,4 @@ variable [ConnectedSpace Y] [IsTopologicalGroup G] [CompactSpace G]
   [IsFundamentalGroup (FiniteEtale.fiber y) G]
   (P : ProfiniteGrp.{u}) (δ : G ≃ₜ* P)
 
-omit [IsNoetherian Y] [Y.IsSeparated] [IsTopologicalGroup G] [CompactSpace G]
-  [IsFundamentalGroup (FiniteEtale.fiber y) G] in
-omit [ConnectedSpace Y] [IsNoetherian Y] [Y.IsSeparated] in
-omit [IsTopologicalGroup G] [CompactSpace G]
-  [IsFundamentalGroup (FiniteEtale.fiber y) G] in
-omit [ConnectedSpace Y] [IsTopologicalGroup G] [CompactSpace G]
-  [IsFundamentalGroup (FiniteEtale.fiber y) G] in
 end AlgebraicGeometry.Scheme

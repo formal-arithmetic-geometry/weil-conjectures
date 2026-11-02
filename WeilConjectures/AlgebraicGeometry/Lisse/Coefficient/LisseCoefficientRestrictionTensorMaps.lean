@@ -51,6 +51,8 @@ private def avgBilinear (f : V →ₗ[R] W) : S →ₗ[R] S →ₗ[R] (V →ₗ[
 
 private def avgRaw (f : V →ₗ[R] W) (t : TensorProduct R S S) : V →ₗ[R] W :=
   TensorProduct.lift (avgBilinear (S := S) f) t
+@[simp] private theorem avgRaw_zero (f : V →ₗ[R] W) : avgRaw (S := S) f 0 = 0 :=
+  map_zero _
 @[simp] private theorem avgRaw_add (f : V →ₗ[R] W) (t z : TensorProduct R S S) :
     avgRaw (S := S) f (t + z) = avgRaw (S := S) f t + avgRaw (S := S) f z :=
   (TensorProduct.lift (avgBilinear (S := S) f)).map_add _ _

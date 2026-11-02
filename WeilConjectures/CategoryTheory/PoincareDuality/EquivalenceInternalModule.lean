@@ -340,9 +340,6 @@ private def pointFst (X Y : ContAction FintypeCat.{u} G) : pointProd X Y ⟶ X :
   caHom (fun p ↦ p.1) (fun _ _ ↦ rfl)
 private def pointSnd (X Y : ContAction FintypeCat.{u} G) : pointProd X Y ⟶ Y :=
   caHom (fun p ↦ p.2) (fun _ _ ↦ rfl)
-private noncomputable def pairPoint (X Y : ContAction FintypeCat.{u} G)
-    (x : X.obj.V) (y : Y.obj.V) : (X ⨯ Y).obj.V :=
-  ev (prod.lift (pointFst X Y) (pointSnd X Y)) (x,y)
 
 private def pointUnit : ContAction FintypeCat.{u} G where
   obj := Action.trivial G (FintypeCat.of PUnit)

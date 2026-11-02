@@ -158,7 +158,7 @@ private lemma openImmersionLowerShriek_tor
     [IsSeparated (X ↘ Spec (.of k))]
     (j : U ⟶ X) [IsOpenImmersion j] [j.IsOver (Spec (.of k))] :
     ∀ K : ConstantModelConstructibleFiniteTor Λ U,
-      DerivedCategory.finiteTorAmplitude _
+      _root_.DerivedCategory.finiteTorAmplitude _
         ((CondensedRing.openImmersionLowerShriek Λ j).mapDerivedCategory.obj K.obj) := by
   intro K
   obtain ⟨a, b, hK⟩ := K.property.2
@@ -187,7 +187,7 @@ private lemma openImmersionLowerShriek_generators
     (j : U ⟶ X) [IsOpenImmersion j] [j.IsOver (Spec (.of k))] :
     ∀ K : ConstantModelConstructibleFiniteTor Λ U,
       (constantModelBoundedConstructible Λ X ⊓ fun L ↦
-        DerivedCategory.finiteTorAmplitude _ L)
+        _root_.DerivedCategory.finiteTorAmplitude _ L)
           ((CondensedRing.openImmersionLowerShriek Λ j).mapDerivedCategory.obj K.obj) := by
   intro K
   exact ⟨openImmersionLowerShriek_bounded ℓ k p _hp _hpℓ Λ _hΛ j K,
@@ -234,7 +234,7 @@ theorem openImmersionLowerShriek_localizing
     (j : U ⟶ X) [IsOpenImmersion j] [j.IsOver (Spec (.of k))] :
     (∀ K : ConstantModelConstructibleFiniteTor Λ U,
       (constantModelBoundedConstructible Λ X ⊓ fun L ↦
-        DerivedCategory.finiteTorAmplitude _ L)
+        _root_.DerivedCategory.finiteTorAmplitude _ L)
           ((CondensedRing.openImmersionLowerShriek Λ j).mapDerivedCategory.obj K.obj)) ∧
     (∀ I : Type (u + 1), PreservesColimitsOfShape (Discrete I)
       (CondensedRing.openImmersionLowerShriek Λ j).mapDerivedCategory) ∧
@@ -257,9 +257,9 @@ theorem openImmersionLowerShriek_localizing
   have hgenerators := openImmersionLowerShriek_generators ℓ k p _hp _hpℓ Λ _hΛ j
   refine ⟨hgenerators, hsums, ?_⟩
   let GU := constantModelBoundedConstructible Λ U ⊓ fun K ↦
-    DerivedCategory.finiteTorAmplitude _ K
+    _root_.DerivedCategory.finiteTorAmplitude _ K
   let GX := constantModelBoundedConstructible Λ X ⊓ fun K ↦
-    DerivedCategory.finiteTorAmplitude _ K
+    _root_.DerivedCategory.finiteTorAmplitude _ K
   let J := (CondensedRing.openImmersionLowerShriek Λ j).mapDerivedCategory
   have hU := (localizingClosure_exists Λ U GU).2.2.2.1
   have hX := (localizingClosure_exists Λ X GX).2.2.2.1

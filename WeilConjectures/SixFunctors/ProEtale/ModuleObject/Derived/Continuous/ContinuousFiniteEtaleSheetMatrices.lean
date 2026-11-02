@@ -15,6 +15,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import all WeilConjectures.AlgebraicGeometry.FiniteEtaleLocallyFreeModels
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 import all WeilConjectures.CategoryTheory.ModuleObjects.Free
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyFreeFiniteCover
 import all Mathlib.AlgebraicGeometry.Morphisms.Etale
 import all Mathlib.AlgebraicGeometry.Morphisms.Finite
 import all WeilConjectures.AlgebraicGeometry.FiniteEtaleEtaleLocalSplit
@@ -275,7 +276,7 @@ private theorem cover_free_composite
       Mod.IsFree (condensedRingObj Λ (D.X k)) ((upperStar Λ (D.f k ≫ g)).obj P) := by
   obtain ⟨D, hD⟩ := locallyFree_upperStar Λ g hP
   exact ⟨D, fun k ↦ free_over_comp Λ (D.f k) g P
-    (free_standardPullback Λ (D.f k) _ (hD k))⟩
+    (isFree_upperStar_of_isFree_mapMod (D.f k) (hD k))⟩
 
 /-- Simultaneously make a rational module and finitely many integral sheet modules free. -/
 private theorem simultaneous_free_cover

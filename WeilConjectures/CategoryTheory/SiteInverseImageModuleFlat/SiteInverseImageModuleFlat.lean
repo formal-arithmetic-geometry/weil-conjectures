@@ -662,7 +662,7 @@ private theorem isCommMonObj_of_isIso {C : Type*} [Category C] [MonoidalCategory
   mul_comm := by
     have h : μ[N] = (inv ρ ⊗ₘ inv ρ) ≫ μ[M] ≫ ρ := by
       rw [← IsMonHom.mul_hom_assoc, IsIso.inv_hom_id, Category.comp_id]
-    rw [h, BraidedCategory.braiding_naturality_assoc, IsCommMonObj.mul_comm_assoc]
+    rw [h, ← BraidedCategory.braiding_naturality_assoc, IsCommMonObj.mul_comm_assoc]
 
 private theorem inverseImageSectionModuleUnit_smul {X Y : Site.{u}} (f : Pullback X Y)
     (R : Sheaf Y.J Ab.{u + 1}) [MonObj R] [IsCommMonObj R]

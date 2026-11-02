@@ -47,6 +47,6 @@ namespace AlgebraicGeometry.Scheme
 variable {Y : Scheme.{u}}
 
 attribute [local irreducible] GrothendieckTopology.Point.sheafFiber
-  GrothendieckTopology.Point.presheafFiber pathUnderlyingStalk
+  GrothendieckTopology.Point.presheafFiber
 
 end AlgebraicGeometry.Scheme

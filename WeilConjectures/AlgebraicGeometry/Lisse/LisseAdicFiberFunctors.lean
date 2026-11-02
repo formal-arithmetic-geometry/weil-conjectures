@@ -193,6 +193,7 @@ noncomputable def lisseAlgebraicModelMap (E₀ : Padic.FiniteCoefficientFields l
       fiber := ((lisseCoefficientDiagramData l Y K).diagram.mapId ⟨E₀⟩).hom.toNatTrans.app _ ≫
         (eqToHom ((lisseCoefficientDiagramData l Y K).obj_eq E₀).symm).toFunctor.map f }
 
+omit [IsAlgClosure ℚ_[l] K] in
 /-- Fixed-model arrows preserve identities.
 Source: Weil II (1.1.1) d) (blueprint: def-pod-lisse-adic-fibre-functors).
 Proof: the Grothendieck identity is the pseudofunctor identity constraint itself;
@@ -205,6 +206,7 @@ theorem lisseAlgebraicModelMap_id (E₀ : Padic.FiniteCoefficientFields l K)
       (lisseCoefficientCocartesian l Y K).Q
   exact T.map_id F
 
+omit [IsAlgClosure ℚ_[l] K] in
 /-- Fixed-model arrows preserve composition.
 Source: Weil II (1.1.1) d) (blueprint: def-pod-lisse-adic-fibre-functors).
 Proof: the pseudofunctor triangle identity cancels its identity constraints in the
@@ -227,6 +229,7 @@ noncomputable def lisseAlgebraicModelFunctor (E₀ : Padic.FiniteCoefficientFiel
   map_id := lisseAlgebraicModelMap_id l Y K E₀
   map_comp := lisseAlgebraicModelMap_comp l Y K E₀
 
+omit [IsAlgClosure ℚ_[l] K] in
 /-- The fibre of a displayed rational model is its specified scalar extension.
 Source: Weil II (1.1.1) d) (blueprint: def-pod-lisse-adic-fibre-functors).
 Proof: the localization keeps objects. The coefficient pair of the model has base

@@ -43,7 +43,7 @@ private theorem supportedUnit {Z U X : Scheme.{u}} (i : Z ⟶ X) (j : U ⟶ X)
     rw [hij, compl_compl]
   have hb : IsZero ((ProEtale.upperStar Ab.{u + 1} j).obj M.X) :=
     (Mod.forget (condensedRingObj Λ U)).map_isZero h
-  have ha := (ProEtale.abelian_closed_support i j hj).2 M.X hb
+  have ha := ProEtale.abelian_closed_support i j hj M.X hb
   have hm : IsIso (((ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} i).mapModAdjunction
       (condensedRingObj Λ X)).unit.app M) := by
     have : IsIso ((Mod.forget (condensedRingObj Λ X)).map

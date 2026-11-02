@@ -147,7 +147,4 @@ private theorem derivedFactorsh_monoidal :
   apply NatTrans.IsMonoidal.comp
 variable {L : D ⥤ C} [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L]
   (adj : L ⊣ F) [∀ P : C, IsIso (Functor.LaxMonoidal.ihomComparison F P).natTrans]
-omit [PreservesFiniteLimits L] [PreservesFiniteColimits L]
-  [Abelian.HasFunctorialFlatResolution C] [Abelian.HasFunctorialFlatResolution D]
-  [PreservesFiniteLimits F] [PreservesFiniteColimits F] [F.PreservesFlat] in
 end CategoryTheory.Functor
