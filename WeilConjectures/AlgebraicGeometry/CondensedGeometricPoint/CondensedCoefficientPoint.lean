@@ -121,6 +121,33 @@ private theorem ring_equiv_flat {R S : Type*} [CommRing R] [CommRing S]
     (e : R ≃+* S) : e.toRingHom.Flat :=
   RingHom.Flat.of_bijective e.bijective
 
+/-- Canonical section coordinates of a ring sheaf's underlying internal ring.
+Source: latest blueprint def-weil-finite-coefficient-point, scalar identification
+(blueprint: def-weil-finite-coefficient-point). -/
+def ringSheafSectionCoordinates
+    (R : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})
+    [IsCommMonObj ((sheafCompose (coherentTopology Profinite.{u})
+      (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj R)] (S : Profinite.{u}) :
+    (condensedSectionRing ((sheafCompose (coherentTopology Profinite.{u})
+      (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj R)).obj.obj (op S) ≃+*
+      R.obj.obj (op S) := by
+  let T := coherentTopology Profinite.{u}
+  let A := (sheafCompose T (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj R
+  have hm : (sheafToPresheaf T Ab.{u + 1}).monObjObj A =
+      R.obj.monObjCompForget₂ := by
+    apply MonObj.ext
+    let : MonObj A.obj := R.obj.monObjCompForget₂
+    exact Sheaf.μ_comp_map_mul A
+  refine { toEquiv := Equiv.refl _
+           map_add' := fun _ _ ↦ rfl
+           map_mul' := ?_ }
+  intro a b
+  change (((sheafToPresheaf T Ab.{u + 1}).monObjObj A).mul.app (op S)).hom
+    (a ⊗ₜ[ℤ] b) = (show R.obj.obj (op S) from a) * (show R.obj.obj (op S) from b)
+  have h := congrArg (fun m : MonObj A.obj ↦ m.mul) hm
+  rw [h]
+  rfl
+
 private def section_coordinates
     (R : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})
     [IsCommMonObj ((sheafCompose (coherentTopology Profinite.{u})
@@ -148,7 +175,7 @@ private def section_coordinates
 private def continuous_scalar_coordinates
     (T : Type) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] :
     condensedScalarRing (Profinite.continuousMapRingObj.{u} T) ≃+* T :=
-  (section_coordinates (Profinite.continuousMapRingSheaf T) (⊤_ Profinite.{u})).trans
+  (ringSheafSectionCoordinates (Profinite.continuousMapRingSheaf T) (⊤_ Profinite.{u})).trans
     (ULift.ringEquiv.trans
       { toFun := fun f ↦ f default
         invFun := ContinuousMap.const _
@@ -166,7 +193,7 @@ private theorem continuous_scalar_flat
   let e := continuous_scalar_coordinates.{u} T
   let d : (condensedSectionRing (Profinite.continuousMapRingObj.{u} T)).obj.obj
       (op S) ≃+* ULift.{u + 1} C(S, T) :=
-    section_coordinates (Profinite.continuousMapRingSheaf T) S
+    ringSheafSectionCoordinates (Profinite.continuousMapRingSheaf T) S
   let a := CondensedRing.scalarSectionMap (Mon.mk (Profinite.continuousMapRingObj T)) S
   have ha : a = d.symm.toRingHom.comp
       ((ULift.ringEquiv.symm.toRingHom.comp ContinuousMap.C).comp e.toRingHom) := by
@@ -229,6 +256,21 @@ private theorem field_scalar_properties
   apply continuous_scalar_properties E
   intro S
   exact RingHom.Flat.of_isField (Field.toIsField E) _
+
+private def algClosure_scalar_coordinates (ℓ : ℕ) [Fact ℓ.Prime] :
+    condensedScalarRing (Profinite.padicAlgClRingObj.{u} ℓ) ≃+* PadicAlgCl ℓ :=
+  (ringSheafSectionCoordinates (Profinite.padicAlgClCondensedRing ℓ) (⊤_ Profinite.{u})).trans
+    { toFun := fun f ↦ f.down.val default
+      invFun := Profinite.PadicAlgCl.constSectionRingHom ℓ (op (⊤_ Profinite.{u}))
+      left_inv := fun f ↦ by
+        apply ULift.ext
+        apply Subtype.ext
+        apply ContinuousMap.ext
+        intro x
+        exact congrArg f.down.val (Subsingleton.elim _ _)
+      right_inv := fun _ ↦ rfl
+      map_add' := fun _ _ ↦ rfl
+      map_mul' := fun _ _ ↦ rfl }
 
 private theorem singleton_cover_id
     {S : Sieve (⊤_ Profinite.{u})} (hS : S ∈ coherentTopology Profinite.{u} _) :

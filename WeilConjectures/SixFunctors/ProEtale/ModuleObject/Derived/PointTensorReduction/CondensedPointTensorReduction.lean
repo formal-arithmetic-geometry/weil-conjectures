@@ -142,6 +142,32 @@ structure PointData where
       DerivedCategory.Q.map unitModel.hom =
     unitIso.hom ≫ Functor.LaxMonoidal.ε DerivedCategory.Q
 
+/-- The positive finite coefficient, using the recorded discrete uniformizer quotient.
+Index n denotes exponent n+1, including every positive exponent.
+Source: latest blueprint finite reduction; def-weil-finite-coefficient-point
+(blueprint: def-sf-point-fibre-tensor-reduction). -/
+abbrev finiteCoefficient (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
+    (π : PadicAlgCl.integers ℓ E) (n : ℕ) : ScalarSixRing.{u} :=
+  ⟨CondensedGeometricPoint.residueRingObj.{u} ℓ E π (n + 1)⟩
+
+/-- The actual quotient map of discrete condensed rings, applied sectionwise to
+continuous functions. In particular h : n ≤ m allows h = le_refl n.
+Source: latest blueprint finite reduction; Ideal.Quotient.factorPow
+(blueprint: def-sf-point-fibre-tensor-reduction). -/
+def finiteCoefficientMap (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
+    (π : PadicAlgCl.integers ℓ E) {m n : ℕ} (h : n ≤ m) :
+    finiteCoefficient.{u} ℓ E π m ⟶ finiteCoefficient.{u} ℓ E π n :=
+  let A := PadicAlgCl.integers ℓ E ⧸ (Ideal.span ({π} : Set _)) ^ (m + 1)
+  let B := PadicAlgCl.integers ℓ E ⧸ (Ideal.span ({π} : Set _)) ^ (n + 1)
+  letI : TopologicalSpace A := ⊥
+  letI : DiscreteTopology A := ⟨rfl⟩
+  letI : TopologicalSpace B := ⊥
+  letI : DiscreteTopology B := ⟨rfl⟩
+  ⟨⟨(sheafCompose (coherentTopology Profinite.{u})
+    (forget₂ RingCat.{u + 1} Ab.{u + 1})).map
+      (Profinite.continuousMapRingSheafMap
+        (Ideal.Quotient.factorPow (Ideal.span {π}) (Nat.add_le_add_right h 1))
+        continuous_of_discreteTopology)⟩⟩
 
 variable {Λ Λ' : ScalarSixRing.{u}}
 
