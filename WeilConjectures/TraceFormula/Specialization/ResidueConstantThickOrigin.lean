@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.TraceFormula.Specialization.ResidueConstantSmoothExchange
 public import WeilConjectures.TraceFormula.Specialization.ThickOriginPowUnit
+import WeilConjectures.TraceFormula.Specialization.DefectLocal
 
 /-!
 

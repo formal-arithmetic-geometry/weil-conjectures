@@ -11,6 +11,9 @@ public import WeilConjectures.SixFunctors.NearbyCycles.AutActionTrivial
 public import WeilConjectures.SixFunctors.NearbyCycles.InvariantRetraction
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.PadicAlgClNsmulCancel
 public import WeilConjectures.Tactic.ExactModProofs
+import WeilConjectures.TraceFormula.Specialization.NearbyKunnethGlobal
+import WeilConjectures.TraceFormula.Specialization.SliceSupport
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ResidueFieldTransportDerivedBaseChangeOfCommSq
 
 /-!
 
