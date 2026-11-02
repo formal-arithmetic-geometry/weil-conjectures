@@ -76,7 +76,8 @@ private theorem projection_eq_native
     (K : DerivedCategory (ModuleRingedComparison.internalModules Λ.X X)) :
     projection Λ f B P e K = (scalarFirstProjection Λ.X f K).app B ≫
       ((CondensedRing.lowerStar Λ.X f).rightDerivedFunctor).map
-        (((leftDerivedUpperStarIsoMapDerivedCategory Λ.X f).hom.app B ≫ e.hom) ▷ K) := by
+        (((CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ.X f).hom.app B ≫
+          e.hom) ▷ K) := by
   unfold projection tensorPull geometricAdjunction scalarFirstProjection
   apply scalarProjectionGeneric_transport
 
@@ -167,7 +168,8 @@ theorem finiteFreeScalarProjection_triangle
   let α := scalarFirstProjection Λ.X f K
   let F := projectionSource α
   let G := projectionTarget α
-  have : R.Additive := (derivedUpperStarLowerStarAdjunction Λ.X f).right_adjoint_additive
+  have : R.Additive :=
+    (CondensedRing.derivedUpperStarLowerStarAdjunction Λ.X f).right_adjoint_additive
   have : NatTrans.CommShift α ℤ := scalarProjection_commShift Λ.X f K
   let H := (pointPull Λ Y).mapHomologicalComplex (.up ℤ)
   let J := CochainComplex.singleFunctor (PointModules Λ) 0
@@ -191,7 +193,8 @@ theorem finiteFreeScalarProjection_triangle
   let V := G.mapTriangle.obj U
   let e : V.obj₃ ≅ R.obj (DerivedCategory.Q.obj (complex Λ S X) ⊗ K) :=
     R.mapIso (whiskerRightIso
-      ((leftDerivedUpperStarIsoMapDerivedCategory Λ.X f).app _ ≪≫ modelPull Λ S f) K)
+      ((CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ.X f).app _ ≪≫
+        modelPull Λ S f) K)
   let T' := replaceThird V e
   let φ : T ⟶ T' := triangleMap α U ≫ (replaceThirdIso V e).hom
   refine ⟨T, T', φ, F.map_distinguished U hU, ?_, rfl, rfl, ?_, ?_, ?_⟩

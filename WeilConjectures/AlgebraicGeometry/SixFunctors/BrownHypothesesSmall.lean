@@ -50,7 +50,7 @@ namespace AlgebraicGeometry.ProEtale
 
 set_option synthInstance.maxSize 2048 in
 open scoped CategoryTheory.Obj in
-private theorem ordinary_constructible_iff (A : Type u) [CommRing A]
+private theorem ordinary_constructible_iff (A : Type u) [CommRing A] [Finite A]
     (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X]
     (M : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1} A))) :
     FiniteDiscreteOrdinary.ordinaryConstructible A X M ↔
@@ -68,14 +68,16 @@ private theorem ordinary_constructible_iff (A : Type u) [CommRing A]
         convert C.mem₀ using 1
         exact le_antisymm (fun _ _ ⟨i⟩ ↦ ⟨i.down⟩)
           (fun _ _ ⟨i⟩ ↦ ⟨(ULift.up i : ULift.{u + 1} C.I₀)⟩),
-      fun i ↦ hC i.down⟩
+      fun i ↦ (hC i.down).imp fun _ hP ↦
+        ⟨by have := hP.1; exact Module.Finite.of_finite, hP.2⟩⟩
   · rintro ⟨I, W, g, hg, h⟩
     let C : Scheme.Cover.{u + 1} Scheme.proetalePrecoverage (S.domain a) :=
       ⟨⟨I, W, g⟩, hg⟩
     have : Precoverage.Small.{u} Scheme.proetalePrecoverage :=
       inferInstanceAs (Precoverage.Small.{u} (Scheme.propQCPrecoverage @WeaklyEtale))
     let D := C.restrictIndexOfSmall.{u}
-    exact ⟨D, fun i ↦ h (Precoverage.ZeroHypercover.Small.restrictFun.{u} C i)⟩
+    exact ⟨D, fun i ↦ (h (Precoverage.ZeroHypercover.Small.restrictFun.{u} C i)).imp
+      fun _ hP ↦ ⟨by have := hP.1; exact Module.finite_of_finite (ULift.{u + 1} A), hP.2⟩⟩
 
 set_option synthInstance.maxSize 2048 in
 open scoped CategoryTheory.Obj in

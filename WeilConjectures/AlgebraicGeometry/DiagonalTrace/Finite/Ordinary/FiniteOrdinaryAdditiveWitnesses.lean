@@ -45,6 +45,17 @@ attribute [local instance 100000] CategoryTheory.Abelian.toPreadditive
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
+/-- Exact realization is additive with the inherited abelian preadditive structures.
+Source: additivity of comparison and intrinsic realization
+(blueprint: lem-sfb-finite-ordinary-additive-witnesses). -/
+theorem finiteOrdinaryRealizationCompositeAdditive (n : ℕ)
+    [Finite (SpTowerShriek.R l E n)] (T : Scheme.{u}) :
+    (finiteOrdinaryComparison (FiniteRing l E n) T ⋙
+      finiteOrdinaryRealization l E n T).Additive := by
+  constructor
+  intro M N f g
+  simp only [Functor.comp_map, Functor.map_add]
+
 /-- Finite forgetting is additive with the inherited abelian preadditive structures.
 Source: the underlying additive sheaf map
 (blueprint: lem-sfb-finite-ordinary-additive-witnesses). -/

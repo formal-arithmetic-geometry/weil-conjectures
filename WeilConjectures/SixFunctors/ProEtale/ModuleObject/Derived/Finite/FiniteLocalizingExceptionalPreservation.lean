@@ -121,7 +121,5 @@ private theorem ordinary_ctf_iff (A : Type u) [CommRing A] [Finite A]
       exact ⟨hi.1, fun n ↦ (ordinary_constructible_iff A T _).mpr (hi.2 n)⟩
   exact and_congr hb Iff.rfl
 
-set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 2000000 in
 -- Transport through several concrete derived equivalences needs additional elaboration steps.
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -434,6 +434,5 @@ abbrev etaleTensor {A B : Type u} [CommRing A] [CommRing B]
   ((Etale.derivedTensor (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) Z).obj
     ((etaleOpen A j).obj L)).obj (Etale.scalarCoefficient (liftedHom f) Z)
 
-set_option linter.unusedVariables false in
 end SupportedEtaleTensorOrigin
 end AlgebraicGeometry.ProEtale

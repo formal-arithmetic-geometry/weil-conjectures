@@ -50,6 +50,8 @@ All coproducts and truncations are in the ordinary unbounded derived category.
 
 @[expose] public noncomputable section
 
+set_option linter.privateModule false
+
 set_option autoImplicit false
 
 universe w v u
@@ -211,6 +213,4 @@ private theorem compact_devissage_and_restrict
   have : IsCompactObject (F.obj K) := R.prop_of_iso e' hJ
   exact compact_reflects F K this
 
-open Classical in
-open Classical in
 end AlgebraicGeometry.ProEtale

@@ -103,10 +103,5 @@ private theorem scalarMateRestriction_reflectsIso
       (by rw [Functor.comp_map]; infer_instance)
   exact isIso_of_reflects_iso _ r
 
-set_option maxHeartbeats 18000 in
--- Diagnose elaboration without unfolding large derived-functor constructions indefinitely.
-set_option maxHeartbeats 12000 in
--- Keep categorical transport elaboration within a predictable resource bound.
-set_option maxHeartbeats 12000 in
 -- Keep categorical transport elaboration within a predictable resource bound.
 end AlgebraicGeometry.ProEtale

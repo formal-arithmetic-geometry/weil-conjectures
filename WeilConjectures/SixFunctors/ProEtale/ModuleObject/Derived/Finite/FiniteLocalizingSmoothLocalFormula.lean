@@ -129,6 +129,5 @@ private theorem ordinary_ctf_iff (A : Type u) [CommRing A] [Finite A]
       exact ⟨hi.1, fun n ↦ (ordinary_constructible_iff A T _).mpr (hi.2 n)⟩
   exact and_congr hb Iff.rfl
 
-set_option maxHeartbeats 400000 in
 -- The per-ring `Rf^!` of upstream PR #1694 makes the final transport heavier.
 end AlgebraicGeometry.ProEtale.CondensedRing

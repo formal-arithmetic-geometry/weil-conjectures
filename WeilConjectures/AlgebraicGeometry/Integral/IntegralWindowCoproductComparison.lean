@@ -25,6 +25,8 @@ sec-six-functors-basics/sk-prop-int-compactness/sk-prop-int-compactness-compact.
 
 @[expose] public noncomputable section
 
+set_option linter.privateModule false
+
 set_option autoImplicit false
 
 universe u v w
@@ -243,6 +245,4 @@ private lemma constantModelConstructible_of_isZero
   · exact fun U _ ↦ finiteConstantStratified_of_isZero Λ _ _
       ((CondensedRing.upperStar Λ U.ι).map_isZero hM)
 
-open Classical in
-open Classical in
 end AlgebraicGeometry.ProEtale

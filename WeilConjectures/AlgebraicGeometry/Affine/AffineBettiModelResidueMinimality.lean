@@ -181,7 +181,6 @@ theorem affine_betti_model_residue_minimality
       PresheafOfModules.evaluation, Functor.comp_map] at hc
     simp only [Algebra.smul_def]
     exact mul_eq_zero.mpr (Or.inl hc)
-
   · intro x y hx hy
     simp [map_add, hx, hy]
 

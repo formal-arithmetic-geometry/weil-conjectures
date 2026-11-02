@@ -66,9 +66,30 @@ noncomputable abbrev brownCriteriaModuleMonoidal
 
 attribute [local instance 30000] brownCriteriaModuleMonoidal
 
+/-- Cache the canonical derived tensor structure on pro-etale module objects. -/
+noncomputable abbrev brownCriteriaDerivedMonoidal
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) :
+    MonoidalCategory (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))) :=
+  inferInstance
+
 attribute [local instance 30000] brownCriteriaDerivedMonoidal
 
+/-- Exact countable products follow directly from repleteness and the exact forgetful
+functor on module objects. Keep this proof local to avoid importing proper direct images. -/
+private theorem brownHypotheses_countableAB4Star
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) :
+    CountableAB4Star (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)) :=
+  .of_epi_π_app_zero (Mod.epiπAppZeroOfEpi
+    Scheme.ProEt.epi_π_app_zero_of_epi_addCommGrpCat)
+
 attribute [local instance] brownHypotheses_countableAB4Star
+
+private theorem isZero_of_shifted_orthogonal
+    {C : Type*} [Category* C] [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
 
 private theorem isZero_of_shifted_orthogonal
     {C : Type*} [Category* C] [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
@@ -333,7 +354,4 @@ theorem brownHypothesesFor_iff_compact_of_noetherian
     exact (brownHypothesesFor_iff Λ X).mpr
       ⟨hsmall.1, hsmall.2.1, hsmall.2.2.1, hsmall.2.2.2, hc⟩
 
-open scoped CategoryTheory.Obj in
-open scoped CategoryTheory.Obj in
-open scoped CategoryTheory.Obj in
 end CategoryTheory

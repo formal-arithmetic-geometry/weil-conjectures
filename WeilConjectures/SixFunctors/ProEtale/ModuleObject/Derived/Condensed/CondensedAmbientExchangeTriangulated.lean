@@ -43,8 +43,6 @@ attribute [local instance] finiteProperCache1 finiteProperCache2 finiteProperCac
   cachedModuleClosed cachedModuleFlatResolution cachedDerivedTensorStructure
 
 attribute [local instance] Sheaf.monoidalCategory Sheaf.braidedCategory
-attribute [-instance] CategoryTheory.sfbSheafTensor_monoidalPreadditive
-attribute [-instance] CategoryTheory.sfbSheafTensor_hasWeakSheafify
 
 section TensorInstanceCache
 

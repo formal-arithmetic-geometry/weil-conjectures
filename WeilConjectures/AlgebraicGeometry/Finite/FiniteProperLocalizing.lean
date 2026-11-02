@@ -78,13 +78,6 @@ open scoped CategoryTheory.Functor CategoryTheory.Obj CategoryTheory.MonoidalClo
 
 namespace AlgebraicGeometry.ProEtale
 
--- Keep the recorded generating predicate abstract across the tensor-instance caches.
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
 end AlgebraicGeometry.ProEtale
 
 section PrivateComparisonProofs
@@ -417,14 +410,6 @@ attribute [local irreducible] FiniteDiscreteOrdinary.coefficientEncoding
   ProEtale.derivedBaseChangeMap ProEtale.upperStar ProEtale.lowerStar
   ProEtale.derivedUpperStarLowerStarAdjunction ProEtale.leftDerivedUpperStarComp
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
 end CondensedRing
 
 section Setting
@@ -583,13 +568,6 @@ theorem finiteProperLocalizing (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [IsProper
   · intro I D hD
     exact hsums I D (fun i ↦ hD i P hP hgen)
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-set_option maxHeartbeats 150000 in
--- Cache the full proof before exposing the public theorem.
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-set_option maxHeartbeats 150000 in
 -- Keep the canonical derived functors abstract during elaboration.
 end Setting
 

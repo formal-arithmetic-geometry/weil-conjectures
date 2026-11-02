@@ -29,6 +29,8 @@ power comparisons. All fraction equations are cross-multiplied on generator open
 
 @[expose] public section
 
+set_option linter.privateModule false
+
 set_option autoImplicit false
 set_option relaxedAutoImplicit false
 set_option backward.isDefEq.respectTransparency false

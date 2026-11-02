@@ -568,14 +568,6 @@ universe u
 attribute [local irreducible] upperStarFromPoint upperStarFromPointComp
   monoidal_upperStarFromPoint monoidal_pointUpperStar oplaxMonoidal_pointUpperStar
 
-/-- Canonical coefficient specialization used in the integral generator statement.
-Source: blueprint main-20261015, integral generators, clauses (1)--(3)
-(blueprint: det-lem-integral-models-generators). -/
-noncomputable instance integralModel_coefficientMonObj
-    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ]
-    (X : Scheme.{u}) : MonObj (condensedRingObj Λ X) :=
-  Functor.monObjObj (F := upperStarFromPoint X) Λ
-
 /-- Canonical extension of scalars from the integral coefficient ring to a finite subextension.
 
 Source: blueprint main-20261015, integral generators, clauses (1)--(3)
@@ -743,14 +735,6 @@ noncomputable abbrev integralModelReductionMap (X : Scheme.{u}) (ℓ : ℕ)
     [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (π : PadicAlgCl.integers ℓ E.1) (n : ℕ) :=
   completedCoefficientMap X (completedReduction ℓ E π (n - 1))
-
-/-- The pulled-back continuous quotient ring retains its commutative ring structure.
-Source: blueprint integral generators (3), the finite coefficient identification
-(blueprint: det-lem-integral-models-generators). -/
-noncomputable instance integralModelFiniteCoefficient_isComm (X : Scheme.{u}) (A : Type)
-    [CommRing A] [TopologicalSpace A] [IsTopologicalRing A] :
-    IsCommMonObj (completedCoefficient X (Profinite.continuousMapRingSheaf A)).X := by
-  exact Functor.isCommMonObj_obj (F := upperStarFromPoint X)
 
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Finite reductions of this very extension by zero are bounded constructible and have

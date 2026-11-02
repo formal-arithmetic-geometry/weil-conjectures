@@ -22,7 +22,8 @@ six-functor existence results built on it, assume cd_ℓ(k) < ∞ for the base f
 `BaseFieldFiniteCD ℓ k` is the hypothesis
 `cohomologicalDimension ℓ (Fact.out : ℓ.Prime) (Spec (.of k)) < ⊤` of `brownHypotheses`, as a
 definition whose body is not exposed. Statements carrying it then need only this module
-publicly, not `WeilConjectures.AlgebraicGeometry.Cohomological.CohomologicalDimension`, whose public imports make an
+publicly, not `WeilConjectures.AlgebraicGeometry.Cohomological.CohomologicalDimension`,
+whose public imports make an
 unqualified `rightDerivedLowerShriekOfCompactification` inside `AlgebraicGeometry.ProEtale`
 resolve to the finite-coefficient one in every importer. A file that passes it to
 `brownHypotheses` imports this module with `import all`.

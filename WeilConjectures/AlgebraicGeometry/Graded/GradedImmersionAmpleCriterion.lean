@@ -39,6 +39,8 @@ Constructions, Tag 01O9 (blueprint: lem-trf-graded-immersion-ample-criterion).
 
 @[expose] public section
 
+set_option linter.privateModule false
+
 set_option autoImplicit false
 
 universe u
