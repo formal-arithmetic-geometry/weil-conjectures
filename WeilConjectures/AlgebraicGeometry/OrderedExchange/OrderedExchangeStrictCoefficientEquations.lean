@@ -273,10 +273,34 @@ end OrdinaryPull
 
 section GenericRhoPull
 
+set_option linter.defProp false in
+/-- The complex-level normalization of a comparison `ρ` between a derived reduction tower
+followed by restriction and restriction followed by a derived reduction model, in the
+shape of `RhoNormalization`, for abstract categories and functors. -/
+def GenRhoNorm {B C T TC : Type*} [Category B] [Category C] [Category T] [Category TC]
+    [Abelian B] [Abelian C] [Abelian T] [Abelian TC]
+    [HasDerivedCategory B] [HasDerivedCategory C] [HasDerivedCategory T] [HasDerivedCategory TC]
+    (R : B ⥤ C) [R.Additive] [PreservesFiniteLimits R] [PreservesFiniteColimits R]
+    {red : C ⥤ TC} [red.Additive] {PC : CochainComplex C ℤ → Prop}
+    (D : DerivedReductionModelData red PC) (RT : B ⥤ T) [RT.Additive]
+    (tR : T ⥤ TC) [tR.Additive] [PreservesFiniteLimits tR] [PreservesFiniteColimits tR]
+    (CR : DerivedCategory B ⥤ DerivedCategory T)
+    (c : ∀ P : CochainComplex B ℤ, CR.obj (DerivedCategory.Q.obj P) ⟶
+      DerivedCategory.Q.obj ((RT.mapHomologicalComplex (.up ℤ)).obj P))
+    (oρ : R ⋙ red ≅ RT ⋙ tR) (ρ : CR ⋙ tR.mapDerivedCategory ≅ R.mapDerivedCategory ⋙ D.reduction)
+    (Q₁ Q₂ : CochainComplex B ℤ → Prop) : Prop :=
+  ∀ P, Q₁ P → Q₂ P →
+    ρ.hom.app (DerivedCategory.Q.obj P) ≫
+        D.reduction.map (R.mapDerivedCategoryFactors.hom.app P) ≫
+        D.complexCounit ((R.mapHomologicalComplex (.up ℤ)).obj P) =
+      tR.mapDerivedCategory.map (c P) ≫
+        tR.mapDerivedCategoryFactors.hom.app ((RT.mapHomologicalComplex (.up ℤ)).obj P) ≫
+        DerivedCategory.Q.map ((NatIso.mapHomologicalComplex oρ.symm (.up ℤ)).hom.app P)
+
 set_option linter.unusedVariables false in
 /-- The compatibility of a reduction comparison with pullback, for abstract exact functors
-and derived reduction models. The concrete statement `rho_reductionTowerPullbackIso` is meant
-to be its instance at the strict pro-étale towers. Its proof is checked generically, so the
+and derived reduction models. The concrete statement `rho_reductionTowerPullbackIso` is
+its instance at the strict pro-étale towers. Its proof is checked generically, so the
 kernel never unfolds the concrete derived-category instances here. -/
 theorem rho_pull_generic
     {BV BU CV CU TBV TBU TCV TCU : Type*}
@@ -323,34 +347,10 @@ theorem rho_pull_generic
       QU₂ ((pS.mapHomologicalComplex (.up ℤ)).obj L) ∧
       PV ((rV.mapHomologicalComplex (.up ℤ)).obj L) ∧
       PU ((pC.mapHomologicalComplex (.up ℤ)).obj ((rV.mapHomologicalComplex (.up ℤ)).obj L)))
-    (hρV : ∀ L, QV₁ L → QV₂ L →
-      ρV.hom.app (DerivedCategory.Q.obj L) ≫
-          DV.reduction.map (rV.mapDerivedCategoryFactors.hom.app L) ≫
-          DV.complexCounit ((rV.mapHomologicalComplex (.up ℤ)).obj L) =
-        tRV.mapDerivedCategory.map (cV L) ≫
-          tRV.mapDerivedCategoryFactors.hom.app ((RV.mapHomologicalComplex (.up ℤ)).obj L) ≫
-          DerivedCategory.Q.map ((NatIso.mapHomologicalComplex oρV.symm (.up ℤ)).hom.app L))
-    (hρU : ∀ P, QU₁ P → QU₂ P →
-      ρU.hom.app (DerivedCategory.Q.obj P) ≫
-          DU.reduction.map (rU.mapDerivedCategoryFactors.hom.app P) ≫
-          DU.complexCounit ((rU.mapHomologicalComplex (.up ℤ)).obj P) =
-        tRU.mapDerivedCategory.map (cU P) ≫
-          tRU.mapDerivedCategoryFactors.hom.app ((RU.mapHomologicalComplex (.up ℤ)).obj P) ≫
-          DerivedCategory.Q.map ((NatIso.mapHomologicalComplex oρU.symm (.up ℤ)).hom.app P))
-    (hσ : ∀ L, QS L →
-      σ.hom.app (DerivedCategory.Q.obj L) ≫
-          CRU.map (pS.mapDerivedCategoryFactors.hom.app L) ≫
-          cU ((pS.mapHomologicalComplex (.up ℤ)).obj L) =
-        tP.mapDerivedCategory.map (cV L) ≫
-          tP.mapDerivedCategoryFactors.hom.app ((RV.mapHomologicalComplex (.up ℤ)).obj L) ≫
-          DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex eσ.hom (.up ℤ)).app L))
-    (hτ : ∀ K, PV K →
-      τ.hom.app (DerivedCategory.Q.obj K) ≫
-          DU.reduction.map (pC.mapDerivedCategoryFactors.hom.app K) ≫
-          DU.complexCounit ((pC.mapHomologicalComplex (.up ℤ)).obj K) =
-        tC.mapDerivedCategory.map (DV.complexCounit K) ≫
-          tC.mapDerivedCategoryFactors.hom.app ((redV.mapHomologicalComplex (.up ℤ)).obj K) ≫
-          DerivedCategory.Q.map ((NatIso.mapHomologicalComplex eτ (.up ℤ)).hom.app K))
+    (hρV : GenRhoNorm rV DV RV tRV CRV cV oρV ρV QV₁ QV₂)
+    (hρU : GenRhoNorm rU DU RU tRU CRU cU oρU ρU QU₁ QU₂)
+    (hσ : ∀ L, QS L → DerivedReductionComparisonFormula pS tP RV RU CRV CRU cV cU eσ σ L)
+    (hτ : ModelPullNormalized redV redU pC tC DV DU eτ τ)
     (hcore : ∀ N : BV, tRU.map (eσ.hom.app N) ≫ oρU.inv.app (pS.obj N) ≫
         redU.map (eα.hom.app N) =
       eRP.hom.app (RV.obj N) ≫ tC.map (oρV.inv.app N) ≫ eτ.hom.app (rV.obj N))
@@ -360,6 +360,8 @@ theorem rho_pull_generic
       (Functor.mapDerivedCategorySquareIso eRP).hom.app (CRV.obj M) ≫
         tC.mapDerivedCategory.map (ρV.hom.app M) ≫
         τ.hom.app (rV.mapDerivedCategory.obj M) := by
+  unfold GenRhoNorm at hρV hρU
+  unfold ModelPullNormalized at hτ
   obtain ⟨L, hL, ⟨e⟩⟩ := hres M
   have hg := hgood L hL
   have key : tRU.mapDerivedCategory.map (σ.hom.app (DerivedCategory.Q.obj L)) ≫
@@ -413,7 +415,9 @@ theorem rho_pull_generic
           ((RV.mapHomologicalComplex (.up ℤ)).obj L)) ≫
         tRU.mapDerivedCategory.map (DerivedCategory.Q.map
           ((NatTrans.mapHomologicalComplex eσ.hom (.up ℤ)).app L)) := by
-      simp only [← Functor.map_comp, hσ L hg.2.2.1]
+      have hσL := hσ L hg.2.2.1
+      unfold DerivedReductionComparisonFormula at hσL
+      simp only [← Functor.map_comp, hσL]
     rw [reassoc_of% e2]
     have t : tRU.mapDerivedCategory.map (DerivedCategory.Q.map
           ((NatTrans.mapHomologicalComplex eσ.hom (.up ℤ)).app L)) ≫
@@ -502,29 +506,24 @@ theorem ordinaryRho_pull_tower {U V : Scheme.{t}} (u : U ⟶ V)
   simp only [NatTrans.comp_app]
   exact ordinaryRho_pull d u N n.unop
 
+/-- `RhoNormalization` of `rho`, in the generic shape used by `rho_pull_generic`. -/
+theorem rhoNorm_gen (T : Scheme.{t}) :
+    GenRhoNorm (reductionRestrict T (exchangeScalar d T)) (reductionData d T)
+      (completedReductionModuleTowerFunctor T d) (exchangeTowerModuleRes d T)
+      (completedReductionTower T d) (completedReductionTowerComplexCounit T d)
+      (ordinaryRho d T) (rho d T)
+      (fun P ↦ CochainComplex.IsKFlatIndependentCoefficients.{t + 1, t, t + 1}
+        (R := d.completedRing T) P)
+      (fun P ↦ ∀ n : ℤ, SheafOfModules.IsFlatOnSite.{t + 1, t, t + 1, t + 1}
+        (R := d.completedRing T) (P.X n)) :=
+  (rho_existsUnique d T).exists.choose_spec
+
 /-- Restriction of the strict reduction comparison `rho` is compatible with pullback.
 Source: Stacks 099M, 0D6D (blueprint: def-weil-pbc-ordered-coefficient-comparison-data).
-Proof plan: this is the instance of `rho_pull_generic` (proved above) at
-`reductionData`, `completedReductionTowerComplexCounit`, `ordinaryRho`, `rho`,
-`stratumModuleReductionIso`, `reductionTowerPullbackIso`, `exchangeOrdinaryResPull`,
-`exchangeModuleResPull`, `ordinaryReductionPullIso` and `reductionPullIso`, with
-`G L` := flat-term K-flat. The hypotheses are `flatKFlatResolution` (for `hres`);
-`stratumPull_flatKFlat'`, `isKFlat_restrictScalars_of_flat` with `scalarFlat` and
-`pullback_kFlat` (for `hgood`); the `choose_spec`s of `rho_existsUnique` (at `V` and `U`),
-`completedReductionPullbackIso_existsUnique` and `reductionPullIso_existsUnique`; and
-`ordinaryRho_pull_tower`.
-Status: this `exact` elaborates in 2 s, and the conclusion matches the goal in the kernel
-in 40 ms. But the kernel needs 11-50 s per hypothesis to match the generic binder types
-against the source definitions (`RhoNormalization`, `StratumReductionFormula`,
-`ModelPullNormalized`). Those definitions use other instance paths: for example
-`SemilinearSections.moduleAbelian` against `SheafOfModules.instAbelian`, and
-`reductionTowerHasDerivedCategory` against `exchangeTowers_hasDerived`. Each instance
-equality is cheap by itself (a few ms by `rfl`), so the cost comes from the kernel's
-unfolding order inside the large terms. The module then built in 153 s, but the Lean
-process peaked above 6 GB (the baseline module is 2.6 GB), so the `exact` is not committed.
-Next step: state each hypothesis instance as its own lemma, so that kernel memory peaks per
-declaration. Alternatively, add instance-equality hypotheses to `rho_pull_generic`, so that
-the binder types are written with the source instance paths. -/
+Proof: this is `rho_pull_generic` at the strict pro-étale towers. Its normalization
+hypotheses are `rhoNorm_gen` at `V` and `U`, the normalizations of
+`reductionTowerPullbackIso` and `reductionPullIso`, and `ordinaryRho_pull_tower`. Each
+heavy definitional comparison lives in its own declaration, which keeps the kernel cheap. -/
 theorem rho_reductionTowerPullbackIso {U V : Scheme.{t}} (u : U ⟶ V) (M : d.derived V) :
     (exchangeTowerRes d U).map ((d.reductionTowerPullbackIso u).hom.app M) ≫
         (rho d U).hom.app ((d.pull u).obj M) ≫
@@ -532,7 +531,31 @@ theorem rho_reductionTowerPullbackIso {U V : Scheme.{t}} (u : U ⟶ V) (M : d.de
       (exchangeResPull d u).hom.app ((completedReductionTower V d).obj M) ≫
         (exchangeConstantPull (A := A) u).map ((rho d V).hom.app M) ≫
         (reductionPullIso d u).hom.app ((res d V).obj M) := by
-  sorry
+  exact rho_pull_generic (reductionData d V) (reductionData d U)
+    (completedReductionTowerComplexCounit V d) (completedReductionTowerComplexCounit U d)
+    (ordinaryRho d V) (ordinaryRho d U) (rho d V) (rho d U)
+    (stratumModuleReductionIso d u) (d.reductionTowerPullbackIso u)
+    (exchangeOrdinaryResPull d u) (exchangeModuleResPull d u) (ordinaryReductionPullIso d u)
+    (reductionPullIso d u)
+    (fun L ↦ L.IsKFlatIndependentCoefficients ∧ ∀ n : ℤ, SheafOfModules.IsFlatOnSite
+      (J := ProEt.topology V) (R := d.completedRing V) (L.X n))
+    (fun M ↦ by
+      obtain ⟨L, s, hL, hs⟩ :=
+        flatKFlatResolution V (d.completedRing V) (DerivedCategory.Q.objPreimage M)
+      exact ⟨L, hL, ⟨asIso (DerivedCategory.Q.map s) ≪≫ DerivedCategory.Q.objObjPreimageIso M⟩⟩)
+    (fun L hL ↦ ⟨hL.1, hL.2, hL.1, (stratumPull_flatKFlat' d u L hL.1 hL.2).1,
+      (stratumPull_flatKFlat' d u L hL.1 hL.2).2,
+      (SheafOfModules.isKFlat_restrictScalars_of_flat (exchangeScalar d V) (scalarFlat d V)
+        L hL.1).1,
+      pullback_kFlat u _ _ (exchangeConstantIso u A) _
+        (SheafOfModules.isKFlat_restrictScalars_of_flat (exchangeScalar d V) (scalarFlat d V)
+          L hL.1).1
+        ((SheafOfModules.isKFlat_restrictScalars_of_flat (exchangeScalar d V) (scalarFlat d V)
+          L hL.1).2 hL.2)⟩)
+    (rhoNorm_gen d V) (rhoNorm_gen d U)
+    (completedReductionPullbackIso_existsUnique d u).choose_spec.1
+    (reductionPullIso_existsUnique d u).choose_spec.1
+    (ordinaryRho_pull_tower d u) M
 
 /-- The adjunct of a whiskered mate: transposing `s.app M ≫ H.map t` under the second
 adjunction is `G` applied to the transpose of `t`, followed by the mate. -/
