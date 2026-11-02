@@ -129,6 +129,10 @@ variable (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E
 (blueprint: def-real-lisse-realization-data). -/
 abbrev Modules (X : Base D l hl) := pbcModules X.scheme (rationalCoefficientSheaf l X.scheme E)
 
+/-- The exact recorded completed rational tensor. Source: BS 6.8.15
+(blueprint: def-real-lisse-realization-data). -/
+abbrev tensor (X : Base D l hl) := rationalDerivedTensor l E X.scheme
+
 /-- The recorded coefficient unit. Source: BS 6.8.15
 (blueprint: def-real-lisse-realization-data). -/
 abbrev unit (X : Base D l hl) := pullbackTensorRationalUnit l E X.scheme

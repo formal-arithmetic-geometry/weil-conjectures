@@ -7,6 +7,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Weil.WeilTensorProduct
 public import WeilConjectures.SmoothPurity.WeilSheafComplex
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.FieldCoefficientTensorHypotheses
 
 /-! # Tensor product of strict Weil complexes
 
@@ -24,6 +27,46 @@ universe u
 open CategoryTheory AlgebraicGeometry AlgebraicGeometry.ProEtale
 open scoped CategoryTheory.Obj
 namespace WeilConjectures
+
+private def tensorStrictPairs
+    {C : Type*} [Category C] (P : C ⥤ C) (T : C × C ⥤ C)
+    (δ : ∀ K L, P.obj (T.obj (K, L)) ≅ T.obj (P.obj K, P.obj L))
+    (hδ : ∀ {K L K' L'} (f : K ⟶ K') (g : L ⟶ L'),
+      P.map (T.map (Prod.mkHom f g)) ≫ (δ K' L').hom =
+        (δ K L).hom ≫ T.map (Prod.mkHom (P.map f) (P.map g)))
+    (Q : ObjectProperty C)
+    (hQ : ∀ K L, Q K → Q L → Q (T.obj (K, L))) :
+    ObjectProperty.FullSubcategory (fun K : Endofunctor.IsoAlgebra P ↦ Q K.carrier) ×
+      ObjectProperty.FullSubcategory (fun K : Endofunctor.IsoAlgebra P ↦ Q K.carrier) ⥤
+        ObjectProperty.FullSubcategory (fun K : Endofunctor.IsoAlgebra P ↦ Q K.carrier) where
+  obj KL := ⟨Endofunctor.IsoAlgebra.mk (T.obj (KL.1.obj.carrier, KL.2.obj.carrier))
+    (δ KL.1.obj.carrier KL.2.obj.carrier ≪≫
+      T.mapIso (Iso.prod KL.1.obj.str KL.2.obj.str)),
+    hQ _ _ KL.1.property KL.2.property⟩
+  map {KL MN} fg := ObjectProperty.homMk (ObjectProperty.homMk
+    { f := T.map (Prod.mkHom fg.1.hom.hom.f fg.2.hom.hom.f)
+      h := by
+        change P.map (T.map (Prod.mkHom fg.1.hom.hom.f fg.2.hom.hom.f)) ≫
+            ((δ MN.1.obj.carrier MN.2.obj.carrier).hom ≫
+              T.map (Prod.mkHom MN.1.obj.str.hom MN.2.obj.str.hom)) =
+          ((δ KL.1.obj.carrier KL.2.obj.carrier).hom ≫
+              T.map (Prod.mkHom KL.1.obj.str.hom KL.2.obj.str.hom)) ≫
+            T.map (Prod.mkHom fg.1.hom.hom.f fg.2.hom.hom.f)
+        rw [← Category.assoc, hδ, Category.assoc, ← T.map_comp,
+          Category.assoc, ← T.map_comp]
+        congr 2
+        exact Prod.ext fg.1.hom.hom.h fg.2.hom.hom.h })
+  map_id KL := by
+    apply ObjectProperty.hom_ext
+    apply ObjectProperty.hom_ext
+    apply Endofunctor.Algebra.ext
+    exact T.map_id _
+  map_comp fg gh := by
+    apply ObjectProperty.hom_ext
+    apply ObjectProperty.hom_ext
+    apply Endofunctor.Algebra.ext
+    exact T.map_comp (Prod.mkHom fg.1.hom.hom.f fg.2.hom.hom.f)
+      (Prod.mkHom gh.1.hom.hom.f gh.2.hom.hom.f)
 
 /-- The tensor bifunctor on strict bounded constructible Weil complexes, with its
 specified underlying objects, arrows and Frobenius, and exactness in each variable: for every
@@ -74,21 +117,19 @@ structure WfTensorWeilData
 
 /-- The specified derived tensor defines a bifunctor on strict Weil complexes over
 `E̲` or `ℚ̲̄_ℓ`, lying over the exact derived tensor on bounded constructible complexes.
-Source: latest blueprint, sec-purity-real-sheaves/sk-r-real-linear/lem-wf-tensor-weil.md,
+Source: latest blueprint, part-weights-riemann-hypothesis/sec-weights-deligne-theorem/
+sec-wdef-weights/sk-r-real-linear/lem-wf-tensor-weil.md,
 order 3982, entire statement, and companion proof (blueprint: lem-wf-tensor-weil).
 
 Proof (the node's six steps):
 1. Work with the recorded condensed coefficients on `X = X₀ × k`, strict pairs for
    geometric Frobenius, and the Layer B relative derived tensor computed by K-flat models.
-2. Finite type survives base change, so X is Noetherian and quasi-separated. Choose a
-   finite affine finite-type cover; each chart is separated over k, even when X is not.
-3. Exact restriction commutes with cohomology and derived tensor. Rational tensor closure
-   on each chart gives bounded constructibility locally. A common finite interval bounds
-   all charts, the sheaf axiom detects vanishing, and Zariski locality glues constructibility.
-   On empty X every module sheaf is zero, so no nonempty cover or interval is needed.
-4. A K-flat representative gives a shift-compatible triangulated tensor functor in one
-   variable; reversal gives the other variable. The bounded constructible full triangulated
-   subcategory inherits these comparisons and distinguished triangles.
+2. Finite type survives base change, so X is Noetherian.
+3. The existing native theorem `CondensedRing.boundedConstructible_tensorObj` proves
+   tensor closure on every scheme with Noetherian underlying space. Its coefficient
+   hypotheses hold for both E and Qbar. It includes empty and nonseparated schemes.
+4. The existing K-flat-derived shift and triangulated functor instances give exactness
+   in both variables on the ambient derived category, hence the exactness fields here.
 5. Compose the natural pullback/tensor isomorphism with the tensor of the two supplied
    Weil isomorphisms. Its inverse is the tensor of their inverses followed by the inverse
    comparison. This is exactly `wfCondensedGeometricTensorFrobenius`, with no cocycle datum.
@@ -101,6 +142,45 @@ theorem wf_tensor_weil_strict
     (X₀ : Over (Spec (CommRingCat.of D.k₀)))
     [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] (c : WeilCoefficient ell) :
     Nonempty (WfTensorWeilData D ell hell X₀ c) := by
-  sorry
+  let X := D.geometricFiber X₀
+  have : LocallyOfFiniteType X.hom := by
+    dsimp [X, FiniteFieldDatum.geometricFiber]
+    infer_instance
+  have : QuasiCompact X.hom := by
+    dsimp [X, FiniteFieldDatum.geometricFiber]
+    infer_instance
+  have : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
+  have : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
+  have : IsNoetherian X.left := ⟨⟩
+  let Λ := WeilCoefficient.ab.{u} c
+  let T := wfCondensedTensor Λ X.left
+  let P := wfCondensedFrobenius Λ (D.geometricFrobenius X₀).hom
+  let Q := boundedConstructible (condensedRingObj Λ X.left)
+  have hQ : ∀ K L, Q K → Q L → Q (T.obj (K, L)) := by
+    cases c with
+    | finite E =>
+      exact fun K L hK hL ↦ CondensedRing.boundedConstructible_tensorObj
+        (CondensedRing.tensorHypotheses_continuousMapRingObj ell E).lisseTensorHypotheses hK hL
+    | qbar =>
+      exact fun K L hK hL ↦ CondensedRing.boundedConstructible_tensorObj
+        (CondensedRing.tensorHypotheses_padicAlgClRingObj ell).lisseTensorHypotheses hK hL
+  refine ⟨{
+    tensor := tensorStrictPairs P T
+      (wfCondensedTensorPullback Λ (D.geometricFrobenius X₀).hom)
+      (fun f g ↦ wfCondensedTensorPullback_naturality Λ _ f g) Q hQ
+    carrier := fun _ _ ↦ rfl
+    frobenius := ?_
+    map := fun _ _ _ _ _ _ ↦ HEq.rfl
+    exact_left := ?_
+    exact_right := ?_ }⟩
+  · intro K L
+    apply heq_of_eq
+    exact Endofunctor.IsoAlgebra.mk_str _ _
+  · intro K _
+    refine ⟨inferInstanceAs (((MonoidalCategory.curriedTensor _).obj K).CommShift ℤ), ?_⟩
+    exact inferInstanceAs (((MonoidalCategory.curriedTensor _).obj K).IsTriangulated)
+  · intro L _
+    refine ⟨inferInstanceAs (((MonoidalCategory.curriedTensor _).flip.obj L).CommShift ℤ), ?_⟩
+    exact inferInstanceAs (((MonoidalCategory.curriedTensor _).flip.obj L).IsTriangulated)
 
 end WeilConjectures
