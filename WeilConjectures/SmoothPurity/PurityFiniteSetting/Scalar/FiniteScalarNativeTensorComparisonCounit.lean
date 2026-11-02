@@ -98,7 +98,8 @@ private lemma finiteScalar_comparison_naturality_tensorHom {K₁ K₂ M₁ M₂ 
   have h₁ := congr_app (F.leftDerivedTensorComparison.naturality f) M₁
   have h₂ := (F.leftDerivedTensorComparison.app K₂).naturality g
   dsimp at h₁ h₂
-  rw [tensorHom_def, Functor.map_comp, Category.assoc, h₂, reassoc_of% h₁, tensorHom_def]
+  rw [MonoidalCategory.tensorHom_def, Functor.map_comp, Category.assoc, h₂, reassoc_of% h₁,
+    MonoidalCategory.tensorHom_def]
 
 private lemma finiteScalar_comparison_cochain (P Q : CochainComplex C ℤ) :
     F.leftDerivedFunctor.map (LaxMonoidal.μ (DerivedCategory.Q (C := C)) P Q) ≫
