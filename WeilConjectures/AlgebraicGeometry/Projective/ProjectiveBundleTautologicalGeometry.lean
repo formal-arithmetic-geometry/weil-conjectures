@@ -48,8 +48,4 @@ attribute [local irreducible] Scheme.Modules.tensorPullback
   projectiveBundlePullbackCongr projectiveBundlePullbackAdjunction projectiveBundlePullbackUnitIso
   projectiveBundlePullbackSection
 
-set_option genInjectivity false in
-set_option genSizeOfSpec false in
-set_option genInjectivity false in
-set_option genSizeOfSpec false in
 end AlgebraicGeometry

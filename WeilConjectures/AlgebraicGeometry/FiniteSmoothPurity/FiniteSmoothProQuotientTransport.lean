@@ -231,5 +231,4 @@ private def transportedCoefficient
     (comparison B U).map (c ((origin A T).obj K) ≫
       G.map (originReductionMap φ T K))
 
-set_option linter.unusedVariables false in
 end AlgebraicGeometry.Etale.FiniteSmoothPurity

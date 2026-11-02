@@ -16,6 +16,9 @@ This comparison is entirely a statement about morphisms of schemes.
 -/
 
 @[expose] public noncomputable section
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 set_option autoImplicit false
 universe u
 open CategoryTheory CategoryTheory.Limits

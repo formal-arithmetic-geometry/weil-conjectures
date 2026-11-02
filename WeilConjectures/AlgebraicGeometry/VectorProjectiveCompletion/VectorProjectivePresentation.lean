@@ -33,8 +33,4 @@ private theorem symmetricCongr_ι {R M N : Type u} [CommRing R] [AddCommGroup M]
     symmetricCongr e (SymmetricAlgebra.ι R M m) = SymmetricAlgebra.ι R N (e m) := by
   exact SymmetricAlgebra.lift_ι_apply _ _
 
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
 end AlgebraicGeometry.VectorProjectiveCompletion

@@ -209,8 +209,6 @@ private theorem coefficientSquare
 
 namespace AlgebraicGeometry.ProEtale.SpTowerCalculus
 
-set_option maxHeartbeats 2000000 in
--- The derived counit comparisons require a larger elaboration budget.
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 

@@ -58,8 +58,7 @@ private theorem coefficient_power_zero (P : PurityFiniteSetting.{u}) :
   let l := P.coefficients.l
   let E := P.extension
   let n := P.level
-  have h := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
+  have h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   have habv : Padic.coefficientExtensionAbsoluteValue l E (l : E) < 1 := by
     calc
       Padic.coefficientExtensionAbsoluteValue l E (l : E) = ‖(l : Padic l)‖ := by

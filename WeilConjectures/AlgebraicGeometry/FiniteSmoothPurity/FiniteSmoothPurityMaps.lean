@@ -60,8 +60,6 @@ def proRootLine (ell n : ℕ) (T : Scheme.{u}) :
   (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (coefficient ell n)) T).obj
     (Scheme.finiteEtaleTateLine T (ell ^ n) (coefficient ell n) (CharP.cast_eq_zero _ _))
 
-set_option genSizeOf false in
-set_option genInjectivity false in
 variable (A : Type (u + 1)) [CommRing A]
 
 /-- The fixed-coefficient presentation of the small pro-etale derived category.

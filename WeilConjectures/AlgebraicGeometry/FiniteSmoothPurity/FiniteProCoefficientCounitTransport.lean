@@ -23,8 +23,4 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Algebr
 open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale.FiniteSmoothPurity
 
-attribute [-instance] CategoryTheory.catToReflQuiver in
-attribute [-instance] CategoryTheory.catToReflQuiver in
-attribute [-instance] CategoryTheory.catToReflQuiver in
-attribute [-instance] CategoryTheory.catToReflQuiver in
 end AlgebraicGeometry.Etale.FiniteSmoothPurity

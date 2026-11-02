@@ -24,6 +24,4 @@ variable [EssentiallySmall.{t + 1} Y.ProEt]
   [HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology Y) AddCommGrpCat.{max u (t + 1)}]
   [(AlgebraicGeometry.Scheme.ProEt.topology Y).WEqualsLocallyBijective
     AddCommGrpCat.{max u (t + 1)}]
-set_option maxHeartbeats 800000 in
--- The representative square elaborates independent site and coefficient universes.
 end WeilConjectures.IntegralHom

@@ -23,8 +23,7 @@ private lemma coefficient_hasInvertibleExponent_local
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (n : ℕ) (hn : 1 ≤ n) (T : Scheme.{u}) (aT : T ⟶ Spec (.of D.k)) :
     HasInvertibleExponent (coefficient l E ⟨n, hn⟩) T := by
-  have h := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
+  have h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   have hv : Padic.coefficientExtensionAbsoluteValue l E (D.p : E) = 1 := by
     have he := spectralNorm_extends (K := Padic l) (L := E) (D.p : Padic l)
     have hn' : ‖(D.p : Padic l)‖ = 1 := Padic.norm_natCast_eq_one_iff.2

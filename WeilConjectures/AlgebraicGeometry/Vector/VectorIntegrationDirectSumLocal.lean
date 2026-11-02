@@ -195,9 +195,4 @@ attribute [local irreducible] _root_.DerivedCategory.singleFunctors
   Functor.leftDerivedFunctor Functor.rightDerivedFunctor Functor.mapDerivedCategory
   derivedTensorSymmetry projectionMapOfCompactification
 
-set_option linter.unusedVariables false in
--- The original statement names equality witnesses for callers; its conclusion ignores them.
-set_option maxRecDepth 2048 in
-set_option maxHeartbeats 800000 in
--- The coefficient transports involve deeply nested derived-functor expressions.
 end AlgebraicGeometry.Etale

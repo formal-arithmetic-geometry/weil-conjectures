@@ -1068,11 +1068,6 @@ def pushEvaluation {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
       (StrictTower.constantRingIso (C n) f)).mapDerivedCategoryRightDerivedAdjunction
     (pullEvaluation C τ f n).inv
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-set_option synthInstance.maxSize 64 in
-set_option maxHeartbeats 800000 in
--- Transport the exact derived square, retaining its chosen adjoints and composition maps.
 section Finite
 
 variable (A : Type (u + 1)) [CommRing A] [Finite A]

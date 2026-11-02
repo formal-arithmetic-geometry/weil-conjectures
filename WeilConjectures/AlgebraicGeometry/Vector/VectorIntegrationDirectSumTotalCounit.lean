@@ -36,5 +36,4 @@ attribute [local irreducible] _root_.DerivedCategory.singleFunctors
   Functor.leftDerivedFunctor Functor.rightDerivedFunctor Functor.mapDerivedCategory
   derivedTensorSymmetry projectionMapOfCompactification
 
-set_option linter.unusedVariables false in
 end AlgebraicGeometry.Etale

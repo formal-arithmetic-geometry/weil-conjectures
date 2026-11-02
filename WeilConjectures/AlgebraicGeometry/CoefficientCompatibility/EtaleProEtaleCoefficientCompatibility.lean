@@ -320,8 +320,4 @@ def normalizedSumComparison (A : Type (u + 1)) [CommRing A]
   letI : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace (Y ↘ Spec (.of k))
   N.comparison e c
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 end AlgebraicGeometry.ProEtale.CoefficientCompatibility

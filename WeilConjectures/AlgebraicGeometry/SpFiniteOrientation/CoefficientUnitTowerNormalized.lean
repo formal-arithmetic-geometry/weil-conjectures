@@ -119,7 +119,6 @@ variable (hd : ∀ i (U : Cᵒᵖ) (x : (L.level i).val.obj U), HEq (d i U x) x)
 variable (he : ∀ i (U : Cᵒᵖ) (x : (L.level i).val.obj U),
       ((SheafOfModules.Hom.val (e i)).app U).hom x = ε.val.app (op (i, U.unop)) (d i U x))
 
-include N ε d hs ht hd he in
 end UnitCoordinates
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]

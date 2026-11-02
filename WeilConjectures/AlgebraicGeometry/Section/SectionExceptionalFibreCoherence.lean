@@ -156,9 +156,6 @@ noncomputable def sectionStructuralLocalityIso
       (rightDerivedUpperShriekAdjunction A f)
       (rightDerivedUpperShriekAdjunction A (h ≫ f)))).app (𝟙_ _)
 
-attribute [instance] ExceptionalSectionEtaleMap.etale ExceptionalSectionEtaleMap.separated
-  ExceptionalSectionEtaleMap.finite_type ExceptionalSectionEtaleMap.quasi_compact
-
 /-- Normalization of a family isomorphism at the one fibre, including the inverse-image
 unit compositor. Source: blueprint sk-thm-dnc, Local construction and Gluing
 (blueprint: lem-trf-section-exceptional-fibre-coherence). -/

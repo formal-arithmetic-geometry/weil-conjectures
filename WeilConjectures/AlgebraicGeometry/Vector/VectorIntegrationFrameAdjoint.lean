@@ -274,5 +274,4 @@ private theorem frame_mate_units
   rw [reassoc_of% hm, ← b.homEquiv_naturality_right]
   rw [Category.assoc, NatIso.isIso_inv_app, ht, b.homEquiv_naturality_left]
 
-set_option maxHeartbeats 800000 in
 end AlgebraicGeometry.Etale

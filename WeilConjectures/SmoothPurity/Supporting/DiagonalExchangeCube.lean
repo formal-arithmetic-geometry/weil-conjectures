@@ -78,7 +78,4 @@ namespace WeilConjectures
 attribute [local irreducible] Etale.rightDerivedLowerShriekBaseChangeMap
   Etale.rightDerivedUpperShriekBaseChangeMap Etale.leftDerivedUpperStarComp
 
-open AlgebraicGeometry.Etale CategoryTheory.MonoidalCategory in
-open AlgebraicGeometry.Etale CategoryTheory.MonoidalCategory in
-open AlgebraicGeometry.Etale in
 end WeilConjectures

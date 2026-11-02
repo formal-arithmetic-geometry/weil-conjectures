@@ -432,12 +432,10 @@ def vectorTraceSumTransport (A : Type (u + 1)) [CommRing A] (N : ℕ) (hA : (N :
     (by simpa only [Category.comp_id] using
       (VectorTraceGeometry.sumIso_isPullback S r s F G).w.symm)).symm.app _
 
-attribute [instance] vectorTrace_projection_isIso
-attribute [local instance 2000] compact_projection_isIso
 attribute [local irreducible] compactSupportProjectionMap
 
-attribute [local irreducible] vectorTraceSumDecomposition vectorTraceSumIntegration
-  vectorTraceSumTransport vectorTraceExchangeIso vectorTraceCoefficientBaseChange
+attribute [local irreducible] vectorTraceSumTransport vectorTraceExchangeIso
+  vectorTraceCoefficientBaseChange
 
 section DirectSumDescent
 

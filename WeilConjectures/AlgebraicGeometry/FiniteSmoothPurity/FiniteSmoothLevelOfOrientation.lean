@@ -118,6 +118,4 @@ set_option backward.isDefEq.respectTransparency.types false
 
 end
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end AlgebraicGeometry.Etale.FiniteSmoothPurity

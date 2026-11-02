@@ -116,11 +116,5 @@ private theorem heq_apply {A B A' B' : Type v} {f : A → B} {g : A' → B'}
   cases hx
   rfl
 
-set_option maxHeartbeats 4000000 in
--- Unfolding the coefficient presentations requires a larger elaboration budget.
-set_option maxHeartbeats 4000000 in
--- Unfolding the coefficient presentations requires a larger elaboration budget.
-set_option maxHeartbeats 4000000 in
--- The exact-functor calculation uses both large coefficient presentations.
 end AlgebraicGeometry.ProEtale.SpTowerCalculus
 attribute [instance high] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall

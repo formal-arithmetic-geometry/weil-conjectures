@@ -23,6 +23,9 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Canonical
 Source: Stacks Project, Constructions, Tags 01NG and 01MS.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 set_option autoImplicit false

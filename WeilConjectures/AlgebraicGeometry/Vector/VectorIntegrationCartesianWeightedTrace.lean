@@ -200,6 +200,9 @@ paragraph 2, simultaneous trivializations and ordered affine counits.
 -/
 
 @[expose] public noncomputable section
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 set_option autoImplicit false
 set_option backward.defeqAttrib.useBackward true
 set_option backward.isDefEq.respectTransparency true
@@ -258,5 +261,4 @@ private theorem tensor_zero {C D : Type*} [Category C] [Category D]
       rw [← CategoryTheory.Functor.map_comp_assoc, Iso.inv_hom_id,
         CategoryTheory.Functor.map_id, Category.id_comp]
 
-set_option maxRecDepth 4096 in
 end AlgebraicGeometry.Etale

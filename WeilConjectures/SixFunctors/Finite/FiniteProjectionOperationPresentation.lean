@@ -181,5 +181,4 @@ private theorem properToFixedCompactification
   let h₅ := mapArrowIso (sfIntrinsicDerivedEquivalence Y R).functor h₄
   exact ⟨h₂ ≪≫ h₃ ≪≫ h₅⟩
 
-attribute [-instance] WeilConjectures.IntegralHom.derivedCategory in
 end WeilConjectures
