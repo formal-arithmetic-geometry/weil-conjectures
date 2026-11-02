@@ -64,6 +64,8 @@ import WeilConjectures.Algebra.Homology.ChangeOfRingsTensorComparison
 import WeilConjectures.Algebra.Homology.RingedTensorCorner.ProjectionMateExact
 import WeilConjectures.Algebra.Homology.RingedTensorSquare.RingedExchangeTensorCoherence
 import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
+import WeilConjectures.AlgebraicGeometry.ProEtale.Fixed.ProEtaleFixedScalarRestrictionDirectImageGeneral
+import WeilConjectures.CategoryTheory.Adjunction.UniversalArrowMate
 
 /-!
 # Change of finite coefficients for compact support
@@ -140,7 +142,19 @@ theorem pullback_universal
     Sheaf.IsDerivedBaseChange
       ((L((g)^*[ModuleCat.{u + 1} A])).map M.unit ≫
         (fixedScalarRestrictionPullback φ g).hom.app M.obj) := by
-  sorry
+  intro N
+  have := isIso_fixedScalarRestrictionDirectImageMap φ g
+  rw [fixedScalarRestrictionDirectImageMap_eq] at this
+  exact Adjunction.bijective_comp_map_of_unit_comp_map
+    (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} B) g)
+    (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) g)
+    (fixedScalarRestrictionPullback φ g).hom
+    (mateEquiv (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} B) g)
+      (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) g)
+      (fixedScalarRestrictionPullback φ g).hom)
+    (fun K ↦ (unit_mateEquiv (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} B) g)
+      (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) g)
+      (fixedScalarRestrictionPullback φ g).hom K).symm) M.unit M.universal N
 
 /-- The canonical pullback of a tensor presentation, with its normalized universal arrow.
 Source: Stacks Tag 07A4 (blueprint: lem-fix-compact-support-coefficient-change). -/
