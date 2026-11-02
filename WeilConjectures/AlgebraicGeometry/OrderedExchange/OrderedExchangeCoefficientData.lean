@@ -676,6 +676,101 @@ theorem restriction_complete_iff (T : Scheme.{t}) :
       IsIso.of_isIso_comp_right _ q.hom
     exact isIso_of_reflects_iso (d.completionUnit T K) (res d T)
 
+/-- The completed quotient completion followed by restriction is the constant quotient
+completion of the restriction, through the specified comparisons lambda and rho. -/
+def completedComparison (T : Scheme.{t}) :
+    (completedReductionTower T d ⋙ completedRlim T (d.completedRing T)) ⋙ res d T ≅
+      res d T ⋙ completion d T :=
+  Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft (completedReductionTower T d) (lambda d T) ≪≫
+    (Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerRight (rho d T) (rlim (A := A) T) ≪≫ Functor.associator _ _ _
+
+theorem completedComparison_hom_app (T : Scheme.{t}) (K : d.derived T) :
+    (completedComparison d T).hom.app K =
+      (lambda d T).hom.app ((completedReductionTower T d).obj K) ≫
+        (rlim (A := A) T).map ((rho d T).hom.app K) := by
+  simp only [completedComparison, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    Functor.associator_hom_app, Functor.associator_inv_app, Functor.isoWhiskerLeft_hom,
+    Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Category.id_comp, Category.comp_id]
+
+/-- Restriction carries the completed completion unit to the constant completion unit. -/
+theorem completedComparison_unit (T : Scheme.{t}) (K : d.derived T) :
+    (res d T).map (d.completionUnit T K) ≫ (completedComparison d T).hom.app K =
+      (unit d T).app ((res d T).obj K) := by
+  rw [completedComparison_hom_app]
+  exact rho_unit_second d T K
+
+/-- The completed completion unit as a natural transformation. -/
+def completedUnitNatTrans (T : Scheme.{t}) :
+    𝟭 (d.derived T) ⟶ completedReductionTower T d ⋙ completedRlim T (d.completedRing T) :=
+  (d.constantRlimAdjunction T).unit ≫
+    Functor.whiskerRight (completedReductionAugmentation d T)
+      (completedRlim T (d.completedRing T))
+
+theorem completedUnitNatTrans_app (T : Scheme.{t}) (K : d.derived T) :
+    (completedUnitNatTrans d T).app K = d.completionUnit T K := rfl
+
+/-- The completed quotient completion inverts its own unit. -/
+theorem completion_map_completionUnit_isIso (T : Scheme.{t}) (K : d.derived T) :
+    IsIso ((completedReductionTower T d ⋙ completedRlim T (d.completedRing T)).map
+      (d.completionUnit T K)) := by
+  let C := completedReductionTower T d ⋙ completedRlim T (d.completedRing T)
+  have hr := quotient_reflection d T
+  have heq : C.map (d.completionUnit T K) = d.completionUnit T (C.obj K) := by
+    apply (hr.2 K (C.obj (C.obj K)) (hr.1 (C.obj K))).1
+    have hn := (completedUnitNatTrans d T).naturality (d.completionUnit T K)
+    simp only [Functor.id_map, completedUnitNatTrans_app] at hn
+    exact hn.symm
+  rw [heq]
+  exact hr.1 K
+
+/-- The constant completion of a restricted object is complete. -/
+theorem unit_completion_res_isIso (T : Scheme.{t}) (K : d.derived T) :
+    IsIso ((unit d T).app ((completion d T).obj ((res d T).obj K))) := by
+  let C := completedReductionTower T d ⋙ completedRlim T (d.completedRing T)
+  have : IsIso (d.completionUnit T (C.obj K)) := (quotient_reflection d T).1 K
+  have : IsIso ((unit d T).app ((res d T).obj (C.obj K))) := by
+    rw [← completedComparison_unit]
+    infer_instance
+  exact @unit_isIso_of_iso _ _ (completion d T) (unit d T) _ _
+    ((completedComparison d T).app K).symm this
+
+/-- The constant completion inverts the unit at a restricted object. -/
+theorem completion_map_unit_res_isIso (T : Scheme.{t}) (K : d.derived T) :
+    IsIso ((completion d T).map ((unit d T).app ((res d T).obj K))) := by
+  let C := completedReductionTower T d ⋙ completedRlim T (d.completedRing T)
+  have := completion_map_completionUnit_isIso d T K
+  rw [← completedComparison_unit, Functor.map_comp]
+  have hn := (completedComparison d T).hom.naturality (d.completionUnit T K)
+  have : IsIso ((C ⋙ res d T).map (d.completionUnit T K)) := by
+    rw [Functor.comp_map]
+    infer_instance
+  have : IsIso ((completedComparison d T).hom.app K ≫
+      (res d T ⋙ completion d T).map (d.completionUnit T K)) := by
+    rw [← hn]
+    infer_instance
+  have : IsIso ((res d T ⋙ completion d T).map (d.completionUnit T K)) :=
+    IsIso.of_isIso_comp_left ((completedComparison d T).hom.app K) _
+  have : IsIso ((completion d T).map ((res d T).map (d.completionUnit T K))) := by
+    rwa [Functor.comp_map] at this
+  infer_instance
+
+/-- Precomposition with a unit is injective into objects with invertible unit, once the
+endofunctor inverts the given unit. -/
+theorem precomp_unit_injective {C : Type*} [Category C] {G : C ⥤ C} (η : 𝟭 C ⟶ G)
+    {X Y : C} (hX : IsIso (G.map (η.app X))) (hY : IsIso (η.app Y))
+    {g₁ g₂ : G.obj X ⟶ Y} (h : η.app X ≫ g₁ = η.app X ≫ g₂) : g₁ = g₂ := by
+  have hG : G.map g₁ = G.map g₂ := by
+    apply (cancel_epi (G.map (η.app X))).mp
+    rw [← G.map_comp, ← G.map_comp, h]
+  apply (cancel_mono (η.app Y)).mp
+  have h₁ := η.naturality g₁
+  have h₂ := η.naturality g₂
+  simp only [Functor.id_map, Functor.id_obj] at h₁ h₂
+  rw [h₁, h₂, hG]
+
 /-- Restriction gives an equivalence on the two full complete subcategories.
 Source: Stacks Tags 099C, 099I and 099M
 (blueprint: lem-weil-pbc-ordered-complete-equivalence).
@@ -700,104 +795,18 @@ theorem restriction_complete (T : Scheme.{t}) :
           inclusion d T ⋙ res d T) := by
   exact ⟨restriction_complete_iff d T, restriction_complete_equiv d T⟩
 
-/-- The completed quotient completion unit as a natural transformation. -/
-private def completedUnitNat (T : Scheme.{t}) :
-    𝟭 (d.derived T) ⟶ completedReductionTower T d ⋙ completedRlim T (d.completedRing T) :=
-  (d.constantRlimAdjunction T).unit ≫
-    Functor.whiskerRight (completedReductionAugmentation d T) (completedRlim T (d.completedRing T))
-
-private theorem completedUnitNat_app (T : Scheme.{t}) (K : d.derived T) :
-    (completedUnitNat d T).app K = d.completionUnit T K := rfl
-
-/-- Restriction carries the completed quotient completion to the constant one. -/
-private def completionRes (T : Scheme.{t}) :
-    (completedReductionTower T d ⋙ completedRlim T (d.completedRing T)) ⋙ res d T ≅
-      res d T ⋙ completion d T :=
-  NatIso.ofComponents
-    (fun K ↦ (lambda d T).app ((completedReductionTower T d).obj K) ≪≫
-      (rlim (A := A) T).mapIso ((rho d T).app K))
-    (fun {K L} f ↦ by
-      have h1 := (lambda d T).hom.naturality ((completedReductionTower T d).map f)
-      have h2 := (rho d T).hom.naturality f
-      simp only [Functor.comp_map, Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom,
-        Category.assoc] at h1 h2 ⊢
-      rw [← Category.assoc, h1, Category.assoc, ← Functor.map_comp, h2, Functor.map_comp]
-      rfl)
-
-private theorem completionRes_unit (T : Scheme.{t}) (K : d.derived T) :
-    (res d T).map (d.completionUnit T K) ≫ (completionRes d T).hom.app K =
-      (unit d T).app ((res d T).obj K) :=
-  rho_unit_second d T K
-
-/-- The completed completion is idempotent: its map on the unit is invertible. -/
-private theorem completedUnit_map_isIso (T : Scheme.{t}) (K : d.derived T) :
-    IsIso ((completedReductionTower T d ⋙ completedRlim T (d.completedRing T)).map
-      (d.completionUnit T K)) := by
-  have hr := quotient_reflection d T
-  let C := completedReductionTower T d ⋙ completedRlim T (d.completedRing T)
-  have hn := (completedUnitNat d T).naturality (d.completionUnit T K)
-  simp only [Functor.id_map, completedUnitNat_app] at hn
-  have hCC : d.TowerComplete T (C.obj (C.obj K)) := hr.1 (C.obj K)
-  have heq : C.map (d.completionUnit T K) = d.completionUnit T (C.obj K) := by
-    apply (hr.2 K (C.obj (C.obj K)) hCC).1
-    exact hn.symm
-  change IsIso (C.map (d.completionUnit T K))
-  rw [heq]
-  exact hr.1 K
-
-/-- The constant completion of a restricted object is complete. -/
-private theorem completion_res_isComplete (T : Scheme.{t}) (X : d.derived T) :
-    IsIso ((unit d T).app ((completion d T).obj ((res d T).obj X))) := by
-  have hr := quotient_reflection d T
-  let C := completedReductionTower T d ⋙ completedRlim T (d.completedRing T)
-  have hc : IsComplete d T ((res d T).obj (C.obj X)) :=
-    (restriction_complete_iff d T (C.obj X)).1 (hr.1 X)
-  have : IsIso ((unit d T).app ((res d T).obj (C.obj X))) := hc
-  exact @unit_isIso_of_iso _ _ (completion d T) (unit d T) _ _ ((completionRes d T).app X).symm this
-
-/-- The constant completion inverts the unit of a restricted object. -/
-private theorem completion_map_unit_res_isIso (T : Scheme.{t}) (X : d.derived T) :
-    IsIso ((completion d T).map ((unit d T).app ((res d T).obj X))) := by
-  let C := completedReductionTower T d ⋙ completedRlim T (d.completedRing T)
-  have hn := (completionRes d T).hom.naturality (d.completionUnit T X)
-  have hC := completedUnit_map_isIso d T X
-  have h1 : IsIso ((completion d T).map ((res d T).map (d.completionUnit T X))) := by
-    have hC' : IsIso ((completedRlim T (d.completedRing T)).map
-        ((completedReductionTower T d).map (d.completionUnit T X))) := hC
-    have : IsIso ((completionRes d T).hom.app X ≫
-        (completion d T).map ((res d T).map (d.completionUnit T X))) := by
-      simp only [Functor.comp_map] at hn
-      rw [← hn]
-      infer_instance
-    exact IsIso.of_isIso_comp_left ((completionRes d T).hom.app X) _
-  rw [← completionRes_unit, Functor.map_comp]
-  infer_instance
-
-
-/-- Maps out of the constant completion of a restricted object into a complete object are
-determined by precomposition with the completion unit. -/
-private theorem completion_res_hom_ext (T : Scheme.{t}) {Y W : D (A := A) T}
-    (X : d.derived T) (e : Y ≅ (res d T).obj X) (hW : IsComplete d T W)
-    (f g : (completion d T).obj Y ⟶ W)
-    (h : (unit d T).app Y ≫ f = (unit d T).app Y ≫ g) : f = g := by
-  have hY : IsIso ((completion d T).map ((unit d T).app Y)) := by
-    have hn := (unit d T).naturality e.hom
-    have h0 := completion_map_unit_res_isIso d T X
-    simp only [Functor.id_map] at hn
-    have : IsIso ((completion d T).map ((unit d T).app Y) ≫
-        (completion d T).map ((completion d T).map e.hom)) := by
-      rw [← Functor.map_comp, ← hn, Functor.map_comp]
-      infer_instance
-    exact IsIso.of_isIso_comp_right _ ((completion d T).map ((completion d T).map e.hom))
-  have : IsIso ((unit d T).app W) := hW
-  have hc : (completion d T).map f = (completion d T).map g := by
-    apply (cancel_epi ((completion d T).map ((unit d T).app Y))).mp
-    rw [← Functor.map_comp, ← Functor.map_comp, h]
-  apply (cancel_mono ((unit d T).app W)).mp
-  have hf := (unit d T).naturality f
-  have hg := (unit d T).naturality g
-  simp only [Functor.id_map] at hf hg
-  rw [hf, hg, hc]
+/-- The ordinary-to-completed comparison is the completed completion unit of the ordinary
+pullback, through the canonical reduction-tower pullback comparison. -/
+theorem ordinaryToCompleted_stratum (K : d.derived V) :
+    d.ordinaryToCompleted u K ≫
+        (completedRlim U (d.completedRing U)).map ((stratumReductionIso d u).hom.app K) =
+      d.completionUnit U ((d.pull u).obj K) := by
+  let R := completedRlim U (d.completedRing U)
+  unfold AdicCoefficientDatum.ordinaryToCompleted AdicCoefficientDatum.completionUnit
+  rw [Category.assoc, ← R.map_comp, Category.assoc, stratumReduction_augmentation d u K]
+  rw [← Category.assoc, Iso.inv_hom_id_app]
+  simp only [Functor.comp_obj, Category.id_comp]
+  rfl
 
 /-- The scalar comparison for completed pullback is fixed by the actual completion units.
 Source: Stacks 099M, 099N
@@ -815,38 +824,20 @@ theorem phi_exists :
           (alpha d u).hom.app K.obj ≫
             (unit d U).app ((pull (A := A) u).obj ((res d V).obj K.obj)) := by
   let R := completedRlim U (d.completedRing U)
-  let τ := stratumReductionIso d u
-  have he (K : d.derived V) :
-      d.ordinaryToCompleted u K ≫ R.map (τ.hom.app K) =
-        d.completionUnit U ((d.pull u).obj K) := by
-    unfold AdicCoefficientDatum.ordinaryToCompleted AdicCoefficientDatum.completionUnit
-    rw [Category.assoc, ← R.map_comp, Category.assoc,
-      stratumReduction_augmentation d u K]
-    rw [← Category.assoc, Iso.inv_hom_id_app]
-    simp only [Functor.comp_obj, Category.id_comp]
-    rfl
-  let Rτ : d.completedPull u ≅ d.pull u ⋙ completedReductionTower U d ⋙ R :=
-    Functor.isoWhiskerRight τ R
-  let E : d.completedPull u ⋙ res d U ≅ res d V ⋙ completePull d u :=
-    Functor.isoWhiskerRight Rτ (res d U) ≪≫
-      Functor.isoWhiskerLeft (d.pull u) (completionRes d U) ≪≫
-      Functor.isoWhiskerRight (alpha d u) (completion d U)
-  let e := Functor.isoWhiskerLeft (inclusion d V) E
-  refine ⟨e, ?_⟩
-  intro K
-  have h0 := congrArg (res d U).map (he K.obj)
-  rw [Functor.map_comp] at h0
-  have h1 := completionRes_unit d U ((d.pull u).obj K.obj)
-  have h2 := (unit d U).naturality ((alpha d u).hom.app K.obj)
-  simp only [Functor.id_map] at h2
-  change (res d U).map (d.ordinaryToCompleted u K.obj) ≫
-      (res d U).map (R.map (τ.hom.app K.obj)) ≫
-      (completionRes d U).hom.app ((d.pull u).obj K.obj) ≫
-      (completion d U).map ((alpha d u).hom.app K.obj) = _
-  simp only [← Category.assoc]
-  erw [h0, h1]
-  exact h2.symm
-
+  let e : inclusion d V ⋙ d.completedPull u ⋙ res d U ≅
+      inclusion d V ⋙ res d V ⋙ completePull d u :=
+    Functor.isoWhiskerLeft (inclusion d V)
+      (Functor.isoWhiskerRight (Functor.isoWhiskerRight (stratumReductionIso d u) R)
+          (res d U) ≪≫
+        Functor.isoWhiskerLeft (d.pull u) (completedComparison d U) ≪≫
+        Functor.isoWhiskerRight (alpha d u) (completion d U))
+  refine ⟨e, fun K ↦ ?_⟩
+  simp only [e, Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
+    Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    ObjectProperty.ι_obj]
+  rw [← Category.assoc, ← Functor.map_comp, ordinaryToCompleted_stratum,
+    ← Category.assoc, completedComparison_unit]
+  exact ((unit d U).naturality ((alpha d u).hom.app K.obj)).symm
 
 /-- The completed pullback/scalar comparison is determined by its unit equation.
 Source: Stacks Tags 099M and 099N
@@ -874,34 +865,26 @@ theorem phi_unique
   apply Iso.ext
   apply NatTrans.ext
   funext K
-  let Y := (pull (A := A) u).obj ((res d V).obj K.obj)
-  let a := (alpha d u).app K.obj
-  have hW : IsComplete d U ((completion d U).obj Y) :=
-    @unit_isIso_of_iso _ _ (completion d U) (unit d U) _ _
-      ((completion d U).mapIso a.symm) (completion_res_isComplete d U ((d.pull u).obj K.obj))
-  have h : (unit d U).app Y ≫ (e₁.inv.app K ≫ e₂.hom.app K) =
-      (unit d U).app Y ≫ 𝟙 _ := by
-    apply (cancel_epi a.hom).mp
-    have h1 := h₁ K
-    have h2 := h₂ K
-    have h1' : a.hom ≫ (unit d U).app Y =
-        (res d U).map (d.ordinaryToCompleted u K.obj) ≫ e₁.hom.app K := h1.symm
-    have h2' : a.hom ≫ (unit d U).app Y =
-        (res d U).map (d.ordinaryToCompleted u K.obj) ≫ e₂.hom.app K := h2.symm
-    calc a.hom ≫ (unit d U).app Y ≫ e₁.inv.app K ≫ e₂.hom.app K
-        _ = (a.hom ≫ (unit d U).app Y) ≫ e₁.inv.app K ≫ e₂.hom.app K := by
-          rw [Category.assoc]
-        _ = ((res d U).map (d.ordinaryToCompleted u K.obj) ≫ e₁.hom.app K) ≫
-            e₁.inv.app K ≫ e₂.hom.app K := by erw [h1']
-        _ = (res d U).map (d.ordinaryToCompleted u K.obj) ≫ e₂.hom.app K := by
-          simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
-        _ = a.hom ≫ (unit d U).app Y := h2'.symm
-        _ = a.hom ≫ (unit d U).app Y ≫ 𝟙 _ := by rw [Category.comp_id]
-  have := completion_res_hom_ext d U ((d.pull u).obj K.obj) a.symm hW _ _ h
-  calc e₁.hom.app K = e₁.hom.app K ≫ (e₁.inv.app K ≫ e₂.hom.app K) := by
-        erw [this, Category.comp_id]
-    _ = e₂.hom.app K := by simp
-
+  let j : (res d U).obj ((d.completedPull u).obj K.obj) ≅
+      (completion d U).obj ((res d U).obj ((d.pull u).obj K.obj)) :=
+    (res d U).mapIso ((completedRlim U (d.completedRing U)).mapIso
+      ((stratumReductionIso d u).app K.obj)) ≪≫
+      (completedComparison d U).app ((d.pull u).obj K.obj)
+  have hj : (res d U).map (d.ordinaryToCompleted u K.obj) ≫ j.hom =
+      (unit d U).app ((res d U).obj ((d.pull u).obj K.obj)) := by
+    rw [← completedComparison_unit, ← ordinaryToCompleted_stratum d u K.obj, Functor.map_comp]
+    simp only [j, Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom, Category.assoc]
+  have hY : IsIso ((unit d U).app ((completePull d u).obj ((res d V).obj K.obj))) := by
+    have := unit_completion_res_isIso d U ((d.pull u).obj K.obj)
+    exact @unit_isIso_of_iso _ _ (completion d U) (unit d U) _ _
+      ((completion d U).mapIso ((alpha d u).app K.obj)).symm this
+  have key : j.inv ≫ e₁.hom.app K = j.inv ≫ e₂.hom.app K := by
+    apply precomp_unit_injective (unit d U)
+      (completion_map_unit_res_isIso d U ((d.pull u).obj K.obj)) hY
+    rw [← hj]
+    simp only [Category.assoc, Iso.hom_inv_id_assoc]
+    exact (h₁ K).trans (h₂ K).symm
+  exact (cancel_epi j.inv).mp key
 
 theorem phi_existsUnique :
     ∃! e : inclusion d V ⋙ d.completedPull u ⋙ res d U ≅
