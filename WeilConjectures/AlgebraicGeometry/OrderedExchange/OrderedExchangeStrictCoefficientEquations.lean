@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.OrderedExchange.OrderedExchangeCoefficientData
+import all WeilConjectures.AlgebraicGeometry.Strict.Tower.StrictTowerExchangeMateNormalization
 
 /-! # strictCoefficientEquations -/
 
@@ -32,6 +33,87 @@ theorem rho_reductionTowerPullbackIso {U V : Scheme.{t}} (u : U ⟶ V) (M : d.de
         (reductionPullIso d u).hom.app ((res d V).obj M) := by
   sorry
 
+/-- The adjunct of a whiskered mate: transposing `s.app M ≫ H.map t` under the second
+adjunction is `G` applied to the transpose of `t`, followed by the mate. -/
+private theorem mate_homEquiv
+    {A' B' C' D' : Type*} [Category A'] [Category B'] [Category C'] [Category D']
+    {L : A' ⥤ B'} {R : B' ⥤ A'} {L' : C' ⥤ D'} {R' : D' ⥤ C'}
+    {G : A' ⥤ C'} {H : B' ⥤ D'}
+    (adj : L ⊣ R) (adj' : L' ⊣ R') (s : TwoSquare G L L' H)
+    (M : A') (N : B') (t : L.obj M ⟶ N) :
+    adj'.homEquiv _ _ (s.app M ≫ H.map t) =
+      G.map (adj.homEquiv M N t) ≫ (mateEquiv adj adj' s).app N := by
+  simp only [Adjunction.homEquiv_unit, Functor.map_comp]
+  have hu := unit_mateEquiv adj adj' s M
+  dsimp only [Functor.id_obj] at hu
+  rw [← Category.assoc, ← hu, Category.assoc]
+  have hn := (mateEquiv adj adj' s).natTrans.naturality t
+  dsimp only [Functor.comp_map] at hn
+  rw [← hn, ← Category.assoc, ← G.map_comp]
+
+/-- The restriction/direct-image comparison of strict towers is the mate of the
+restriction/pullback comparison, in adjunct form.
+Source: Stacks 0D6D, 0D6E (blueprint: lem-weil-pbc-strict-tower-exchange-mate-normalization). -/
+theorem exchangeResPush_homEquiv {U V : Scheme.{t}} (u : U ⟶ V)
+    (Z : DerivedCategory (d.towers V)) (W : DerivedCategory (d.towers U))
+    (x : (d.towerPull u).obj Z ⟶ W) :
+    (exchangeTowerAdjunction u (exchangeConstantRing V A) (exchangeConstantRing U A)
+        (exchangeConstantIso u A)).homEquiv _ _
+        ((exchangeResPull d u).inv.app Z ≫ (exchangeTowerRes d U).map x) =
+      (exchangeTowerRes d V).map ((d.towerAdjunction u).homEquiv Z W x) ≫
+        (exchangeResPush d u).hom.app W := by
+  have heq := exactDerivedMate_eq (d.towerModuleAdjunction u)
+    (exchangeTowerModuleAdjunction u (exchangeConstantRing V A)
+      (exchangeConstantRing U A) (exchangeConstantIso u A))
+    (exchangeModuleResPull d u).symm (exchangeModuleResPush d u)
+    (exchangeModuleResPull_mate d u) (exchangeResPush d u)
+    (exchangeResPush_existsUnique d u).choose_spec.1
+  rw [heq, exactDerivedMate]
+  have hm := mate_homEquiv (d.towerAdjunction u)
+    (exchangeTowerAdjunction u (exchangeConstantRing V A)
+      (exchangeConstantRing U A) (exchangeConstantIso u A))
+    (TwoSquare.mk _ _ _ _
+      (Functor.mapDerivedCategorySquareIso (exchangeModuleResPull d u).symm).hom) Z W x
+  have hs : (Functor.mapDerivedCategorySquareIso (exchangeModuleResPull d u).symm).hom =
+      (exchangeResPull d u).inv := by
+    simp only [Functor.mapDerivedCategorySquareIso, exchangeResPull, Iso.trans_hom,
+      Iso.trans_inv, Iso.symm_hom, Iso.symm_inv, Category.assoc,
+      Functor.mapDerivedCategoryNatIso_symm]
+  rw [hs] at hm ⊢
+  exact hm
+
+/-- Restriction of the integral derived counit is the constant derived counit, conjugated by
+`alpha` and `chi`. Source: Stacks 0D6D, 0D6E
+(blueprint: lem-weil-pbc-ring-sheaf-change-adjunction). -/
+theorem res_counit {U V : Scheme.{t}} (u : U ⟶ V) (K : d.derived U) :
+    (res d U).map ((proEtaleRingDerivedAdjunction u (d.completedRing V) (d.completedRing U)
+        (d.integralRingIso u)).counit.app K) =
+      (alpha d u).hom.app ((d.push u).obj K) ≫ (pull (A := A) u).map ((chi d u).hom.app K) ≫
+        (proEtaleRingDerivedAdjunction u (exchangeConstantRing V A) (exchangeConstantRing U A)
+          (exchangeConstantIso u A)).counit.app ((res d U).obj K) := by
+  let aS := proEtaleRingDerivedAdjunction u (d.completedRing V) (d.completedRing U)
+    (d.integralRingIso u)
+  let aR := proEtaleRingDerivedAdjunction u (exchangeConstantRing V A)
+    (exchangeConstantRing U A) (exchangeConstantIso u A)
+  have h := (proEtaleRingSheafChangeAdjunction u (exchangeConstantRing V A) (d.completedRing V)
+    (exchangeConstantRing U A) (d.completedRing U) (exchangeScalar d V) (exchangeScalar d U)
+    (exchangeConstantIso u A) (d.integralRingIso u) (exchangeScalar_comm d u)).2.2
+      ((d.push u).obj K) K (aS.counit.app K)
+  have h1 : aS.homEquiv ((d.push u).obj K) K (aS.counit.app K) = 𝟙 _ := by
+    rw [Adjunction.homEquiv_unit]
+    exact aS.right_triangle_components K
+  erw [h1] at h
+  erw [CategoryTheory.Functor.map_id, Category.id_comp] at h
+  have h2 := congrArg (aR.homEquiv _ _).symm h
+  rw [Equiv.symm_apply_apply, Adjunction.homEquiv_counit] at h2
+  have h3 : (alpha d u).inv.app ((d.push u).obj K) ≫ (res d U).map (aS.counit.app K) =
+      (pull (A := A) u).map ((chi d u).hom.app K) ≫ aR.counit.app ((res d U).obj K) := h2
+  calc (res d U).map (aS.counit.app K)
+      = (alpha d u).hom.app ((d.push u).obj K) ≫
+          ((alpha d u).inv.app ((d.push u).obj K) ≫ (res d U).map (aS.counit.app K)) := by
+        rw [Iso.hom_inv_id_app_assoc]
+    _ = _ := by rw [h3]
+
 /-- Restriction of the strict reduction comparison `rho` is compatible with the strict
 projection formula maps. Source: Stacks 099M, 0D6E
 (blueprint: def-weil-pbc-ordered-coefficient-comparison-data). -/
@@ -42,7 +124,34 @@ theorem rho_towerProjection {U V : Scheme.{t}} (u : U ⟶ V) (K : d.derived U) :
       (rho d V).hom.app ((d.push u).obj K) ≫
         (reduction d V).map ((chi d u).hom.app K) ≫
         projection d u ((res d U).obj K) := by
-  sorry
+  have hP := rho_reductionTowerPullbackIso d u ((d.push u).obj K)
+  have hc := res_counit d u K
+  have hres := exchangeResPush_homEquiv d u
+    ((completedReductionTower V d).obj ((d.push u).obj K)) ((completedReductionTower U d).obj K)
+    ((d.reductionTowerPullbackIso u).hom.app ((d.push u).obj K) ≫
+      (completedReductionTower U d).map ((proEtaleRingDerivedAdjunction u (d.completedRing V)
+        (d.completedRing U) (d.integralRingIso u)).counit.app K))
+  have hn := (rho d U).hom.naturality ((proEtaleRingDerivedAdjunction u (d.completedRing V)
+    (d.completedRing U) (d.integralRingIso u)).counit.app K)
+  have hR := (reductionPullIso d u).hom.naturality ((chi d u).hom.app K)
+  dsimp only [Functor.comp_map, Functor.comp_obj] at hn hR
+  have hP' : (exchangeResPull d u).inv.app ((completedReductionTower V d).obj ((d.push u).obj K)) ≫
+      (exchangeTowerRes d U).map ((d.reductionTowerPullbackIso u).hom.app ((d.push u).obj K)) ≫
+      (rho d U).hom.app ((d.pull u).obj ((d.push u).obj K)) ≫
+      (reduction d U).map ((alpha d u).hom.app ((d.push u).obj K)) =
+    (exchangeConstantPull (A := A) u).map ((rho d V).hom.app ((d.push u).obj K)) ≫
+      (reductionPullIso d u).hom.app ((res d V).obj ((d.push u).obj K)) := by
+    rw [hP, Iso.inv_hom_id_app_assoc]
+  unfold AdicCoefficientDatum.towerProjection projection
+  rw [← reassoc_of% hres, ← Adjunction.homEquiv_naturality_right]
+  erw [← Adjunction.homEquiv_naturality_left, ← Adjunction.homEquiv_naturality_left]
+  apply congrArg
+  simp only [Functor.map_comp, Category.assoc]
+  erw [hn]
+  rw [hc]
+  simp only [Functor.map_comp]
+  rw [reassoc_of% hP']
+  erw [reassoc_of% hR]
 
 /-- The second strict coefficient equation: restriction of the strict realization `H`
 followed by `beta` is `rhoM` followed by the constant `H`.
