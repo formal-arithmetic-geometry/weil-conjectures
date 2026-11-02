@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcDescentInterfaces
+import all WeilConjectures.AlgebraicGeometry.Finite.FiniteStagePairCategory
+import all WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarTensor
 
 /-! # Scalar square for the prescribed finite-stage exchange
 
@@ -21,6 +23,118 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 variable (l : ℕ) [Fact l.Prime] (Ω : Type w)
   [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
+
+section ScalarTransport
+variable (T : Scheme.{u}) [IsNoetherian T] (hdim : ∃ m : ℕ, topologicalKrullDim T ≤ m)
+  (hl : ∀ t : T, IsUnit (l : T.presheaf.stalk t))
+  {E F : Padic.FiniteCoefficientFields l Ω}
+
+/-- Integral scalar extension of the stages is the embedding tensor of the small fields. -/
+theorem pbcIntegralScalarExtension_eq_tensor (h : E ≤ F) :
+    pbcIntegralScalarExtension l Ω T hdim hl h =
+      pbcEmbeddingIntegralTensor l (pbcFiniteField.{u} l Ω E) (pbcFiniteField.{u} l Ω F)
+        (pbcFiniteFieldInclusion l Ω h) T hdim hl :=
+  pbcIntegralScalarExtension_eq l Ω T hdim hl h
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+attribute [-instance] ULift.module in
+/-- The rational embedding tensor is compatible with localization, objectwise literally. -/
+theorem pbcStageLocalization_comp_rationalScalarExtension (h : E ≤ F) :
+    pbcStageLocalization l Ω T E ⋙ pbcRationalScalarExtension l (pbcFiniteField.{u} l Ω E)
+        (pbcFiniteField.{u} l Ω F) (pbcFiniteFieldInclusion l Ω h) T hdim hl =
+      pbcIntegralScalarExtension l Ω T hdim hl h ⋙ pbcStageLocalization l Ω T F := by
+  rw [pbcIntegralScalarExtension_eq l Ω T hdim hl h]
+  refine CategoryTheory.Functor.ext
+    (F := pbcStageLocalization l Ω T E ⋙ pbcRationalScalarExtension l (pbcFiniteField.{u} l Ω E)
+      (pbcFiniteField.{u} l Ω F) (pbcFiniteFieldInclusion l Ω h) T hdim hl)
+    (G := pbcEmbeddingIntegralTensor l (pbcFiniteField.{u} l Ω E)
+      (pbcFiniteField.{u} l Ω F) (pbcFiniteFieldInclusion l Ω h) T hdim hl ⋙
+        pbcStageLocalization l Ω T F) (fun _ ↦ rfl) ?_
+  intro K L f
+  simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
+  change pbcRationalScalarHom l (pbcFiniteField.{u} l Ω E) (pbcFiniteField.{u} l Ω F)
+    (pbcFiniteFieldInclusion l Ω h) T hdim hl K L (1 ⊗ₜ[_] f) = _
+  rw [pbcRationalScalarHom_tmul]
+  simp only [map_one]
+  rfl
+
+/-- For distinct stages the chosen scalar extension is the rational embedding tensor. -/
+theorem pbcScalarExtension_eq_rational (h : E ≤ F) (hEF : E ≠ F) :
+    pbcScalarExtension l Ω T hdim hl h =
+      pbcRationalScalarExtension l (pbcFiniteField.{u} l Ω E) (pbcFiniteField.{u} l Ω F)
+        (pbcFiniteFieldInclusion l Ω h) T hdim hl := by
+  have hs : pbcScalarExtension l Ω T hdim hl h =
+      (pbcRationalScalarExtension_exists l Ω T hdim hl h).exists.choose := by
+    simp [pbcScalarExtension, hEF]
+  rw [hs]
+  exact (pbcRationalScalarExtension_exists l Ω T hdim hl h).unique
+    (pbcRationalScalarExtension_exists l Ω T hdim hl h).exists.choose_spec
+    (pbcStageLocalization_comp_rationalScalarExtension l Ω T hdim hl h)
+
+/-- For distinct stages the scalar/integral comparison is the identity-component
+isomorphism given by the defining functor equality. -/
+theorem pbcScalarIntegralComparison_ne (h : E ≤ F) (hEF : E ≠ F) :
+    HEq (pbcScalarIntegralComparison l Ω T hdim hl h)
+      (eqToIso (pbcRationalScalarExtension_exists l Ω T hdim hl h).exists.choose_spec) :=
+  (pbcScalarIntegralComparison_exists l Ω T hdim hl h).exists.choose_spec.2 hEF
+
+end ScalarTransport
+
+section GenericTransport
+
+/-- A heterogeneous equality of comparisons `Q ⋙ S ≅ I ⋙ Q'`, over an equality of the
+middle functors, gives their components up to the induced `eqToHom`. -/
+theorem iso_app_of_heq_functor {A B C : Type*} [Category A] [Category B] [Category C]
+    (Q : A ⥤ B) (Q' : A ⥤ C) {S S' : B ⥤ C} (hS : S = S')
+    {c : Q ⋙ S ≅ Q'} {c' : Q ⋙ S' ≅ Q'} (h : HEq c c') (K : A) :
+    c.hom.app K = eqToHom (by rw [hS]) ≫ c'.hom.app K := by
+  subst hS
+  rw [eq_of_heq h]
+  simp
+
+/-- A heterogeneous equality of morphisms over equalities of their endpoints. -/
+theorem hom_eq_of_heq_objects {C : Type*} [Category C] {x x' y y' : C}
+    (hx : x = x') (hy : y = y') {a : x ⟶ y} {b : x' ⟶ y'} (h : HEq a b) :
+    a = eqToHom hx ≫ b ≫ eqToHom hy.symm := by
+  subst hx hy
+  simp [eq_of_heq h]
+
+end GenericTransport
+
+section ScalarExchange
+variable (E F : Type u) [Field E] [Field F] [Algebra ℚ_[l] E] [Algebra ℚ_[l] F]
+    [FiniteDimensional ℚ_[l] E] [FiniteDimensional ℚ_[l] F] (i : E →ₐ[ℚ_[l]] F)
+variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
+    {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : ChosenCartesianSquare g' f' f g)
+
+/-- The ambient scalar exchange equation: scalar extension along `i` carries the completed
+exchange at `E` to the completed exchange at `F`, through the scalar direct-image and
+completed-pullback comparisons.
+Source: blueprint main-20261015, order 1307 (scalar exchange equation)
+(blueprint: lem-weil-pbc-exchange-stage-square).
+Proof plan (not yet formalized): both exchanges are the completions of mates of the
+pullback squares `pbcActualCompletedPullSquareIso`. `pbcScalarDirectImageIso` is the mate of the
+inverse of the ordinary scalar/pullback comparison, and `pbcScalarCompletedPullIso` is that
+comparison followed by completion. By mate pasting, the equation reduces to the
+compatibility of the ordinary scalar/pullback comparison with
+`pbcActualDerivedPullCompIso`, plus the commutation of scalar extension with completion. -/
+theorem pbcScalarCompletedExchange (K : PbcCompletedDerived X (pbcIntegralDatum l E)) :
+    (pbcEmbeddingAmbientTensor l E F i Y').map
+        ((pbcActualCompletedExchange (pbcIntegralDatum l E) sq).app K) ≫
+      (pbcScalarDirectImageIso l E F i f').hom.app
+        ((pbcActualCompletedPull g' (pbcIntegralDatum l E)).obj K) ≫
+      (pbcActualDerivedPush f' (pbcIntegralDatum l F)).map
+        ((pbcScalarCompletedPullIso l E F i g').inv.app K) =
+    (pbcScalarCompletedPullIso l E F i g).inv.app
+        ((pbcActualDerivedPush f (pbcIntegralDatum l E)).obj K) ≫
+      (pbcActualCompletedPull g (pbcIntegralDatum l F)).map
+        ((pbcScalarDirectImageIso l E F i f).hom.app K) ≫
+      (pbcActualCompletedExchange (pbcIntegralDatum l F) sq).app
+        ((pbcEmbeddingAmbientTensor l E F i X).obj K) := by
+  sorry
+
+end ScalarExchange
 
 variable (X Y X' Y' : Scheme.{u})
   [IsNoetherian X]
@@ -41,25 +155,27 @@ variable (X Y X' Y' : Scheme.{u})
 Source: blueprint main-20261015, order 1312, final exchange sentence and the
 scalar exchange equation of order 1307
 (blueprint: lem-weil-pbc-exchange-stage-square).
-Proof plan (the reduction steps below are not yet formalized): destruct the four family
-records and substitute `Φ` by `funext hRf` etc. Then turn the four BetaSpec identities
-and `hτ` into equations of morphisms in the rational stage categories. Use naturality of
-`τ F` along `pbcScalarIntegralComparison` and of `pbcScalarIntegralComparison` along the
-integral exchange. What remains is the localization of the ambient scalar exchange
-equation, which has no Lean statement yet:
-`T_{Y'}(Ex_E K) ≫ D_{f'} ≫ Rf'_F(C_{g'}⁻¹) = C_g⁻¹ ≫ Lg_F(D_f) ≫ Ex_F(T_X K)`, with
-`D = pbcScalarDirectImageIso`, `C = pbcScalarCompletedPullIso` and
-`Ex = pbcActualCompletedExchange`.
-Obstacles: the BetaSpec and `pbcScalar*_rational` identities are heterogeneous
-equalities. Their sides have different types: `pbcScalarExtension` against
-`pbcRationalScalarExtension`, which agree only for `E ≠ F` and only through `choose_spec`,
-and `pbcIntegralScalarExtension` against `pbcEmbeddingIntegralTensor`, which agree by the
-private `pbcIntegralScalarExtension_eq`. Making them homogeneous needs these functor
-equalities as transports, with `E = F` treated separately.
-Tried: destructing the records, substituting `Φ` and simplifying the `eqToIso rfl`
-conjugations in `bRf h rfl rfl K` all elaborate. Applying `eq_of_heq` to the result
-times out at `whnf` (200000 heartbeats), because the two sides do not have
-definitionally equal types. -/
+Proof plan: destruct the four family records and substitute `Φ` by `funext hRf` etc.
+Then turn the four BetaSpec identities and `hτ` into equations of morphisms in the
+rational stage categories, as below. Use naturality of `τ F` along
+`pbcScalarIntegralComparison`, and of `pbcScalarIntegralComparison` along the integral
+exchange. What remains is the localization of `pbcScalarCompletedExchange` (stated
+above, not yet proved).
+Transport step, checked to elaborate after the destructuring and substitution:
+`have e := hom_eq_of_heq_objects ?hx ?hy (bRf h rfl rfl K)`, after
+`simp only [eqToIso_refl, Iso.refl_symm, Functor.isoWhiskerRight_refl,
+Functor.isoWhiskerLeft_refl, Iso.refl_trans, Iso.trans_refl]` on the BetaSpec. Both
+endpoint goals close by
+`simp only [Functor.comp_obj]; rw [pbcIntegralScalarExtension_eq_tensor]; rfl`.
+The result is
+`SIC_Y⁻¹ ≫ β ≫ Rf_F.map SIC_X = eqToHom _ ≫ ρ ≫ eqToHom _`, where `ρ` is the chosen
+`pbcScalarDirectImage_rational` comparison. This works for every `E ≤ F` and needs no
+`eq_of_heq` on concrete types; that call times out at `whnf`.
+Still to do: rewrite `ρ`, and the pullback analogues, with the HEq specs of
+`pbcScalar*_rational` by the same lemma. For `E ≠ F`, `pbcScalarIntegralComparison_ne`
+with `iso_app_of_heq_functor` and `pbcScalarExtension_eq_rational` show that the
+comparison components are `eqToHom`s; `E = F` needs `pbcIntegralScalarUnit` instead.
+Then cancel the `eqToHom`s and conclude from `pbcScalarCompletedExchange`. -/
 theorem pbcExchangeStageSquare_integral
     (f : X ⟶ Y) (f' : X' ⟶ Y') (g : Y' ⟶ Y) (g' : X' ⟶ X)
     (sq : ChosenCartesianSquare g' f' f g)
