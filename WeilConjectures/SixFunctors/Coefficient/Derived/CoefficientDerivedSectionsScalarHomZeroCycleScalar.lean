@@ -268,6 +268,7 @@ theorem coefficientScalarSectionsChainMap_unit (D : CoefficientDerivedSystemScal
       coefficientFiniteUnitSection l E W D n :=
   rfl
 
+set_option maxHeartbeats 1000000 in
 /-- The global cycles of the transported scalar unit and of the finite unit agree.
 Source: Stacks 03CZ, 08JA (auxiliary; not a blueprint node). -/
 theorem coefficientFiniteUnitComparison_cycles (D : CoefficientDerivedSystemScalarCoherence l E W)
@@ -318,9 +319,9 @@ theorem coefficientFiniteUnitComparison_cycles (D : CoefficientDerivedSystemScal
       (coefficientIntegralUnitComplex l E W))).f 0)) h2).trans ?_
   erw [coefficientUnitCycle_iCycles]
   rw [coefficientUnitCycle_iCycles]
-  exact (coefficientScalarSectionsChainMap_unit l E W D n).trans
-    (coefficientFiniteUnitComparison_unit l E W D n).symm
+  rw [coefficientScalarSectionsChainMap_unit, coefficientFiniteUnitComparison_unit]
 
+set_option maxHeartbeats 1000000 in
 /-- The finite scalar adjunction unit followed by the scalar-sections comparison sends
 the completed unit class to the finite unit class, along the transported scalar unit.
 Source: Stacks 03CZ, 079P, 08JA (auxiliary; not a blueprint node).
@@ -402,8 +403,8 @@ theorem coefficientFiniteAdjunction_unit_unitClass
       (@DerivedCategory.homologyFunctor AddCommGrpCat.{max u (t + 1)} _ _
         (HasDerivedCategory.standard _) 0).map hm)
     simp only [Functor.map_comp, ConcreteCategory.comp_apply] at hm' hnat ⊢
-    trace_state
-    sorry
+    refine (hm' _).trans ?_
+    exact congrArg _ hnat
   have e1 := ((coefficientFiniteSections l E W n ⋙
     (@DerivedCategory.homologyFunctor AddCommGrpCat.{max u (t + 1)} _ _
       (HasDerivedCategory.standard _) 0)).mapIso pU).hom_inv_id_apply

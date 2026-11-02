@@ -154,6 +154,40 @@ theorem comp_restrict_section {Bm Bn : Sheaf J RingCat.{r}} (q : Bm ⟶ Bn)
   subst h₁ h₂ h₃
   rfl
 
+/-- An eqToHom of abelian groups is surjective.
+Source: Stacks 0941. -/
+theorem eqToHom_surjective {A B : AddCommGrpCat.{r}} (h : A = B) :
+    Function.Surjective (eqToHom h) := by
+  subst B
+  exact fun x ↦ ⟨x, rfl⟩
+
+/-- Transport of a commuting square along identifications of abelian groups.
+Source: Stacks 0941. -/
+theorem transport_square {A B A' B' : AddCommGrpCat.{r}}
+    (hA : A' = A) (hB : B' = B) {f : A' ⟶ B'} {g : A ⟶ B}
+    (h : eqToHom hA.symm ≫ f ≫ eqToHom hB = g) (x : A) :
+    f (eqToHom hA.symm x) = eqToHom hB.symm (g x) := by
+  subst A
+  subst B
+  simpa only [eqToHom_refl, Category.id_comp, Category.comp_id,
+    ConcreteCategory.id_apply] using congrArg (fun f ↦ f x) h
+
+/-- A section formula for a transformation, transported along identifications of the
+underlying abelian groups. Source: Stacks 0941. -/
+theorem transported_transition_section {D : Type*} [Category D]
+    {R S : Sheaf J RingCat.{r}} (φ : R ⟶ S)
+    (Fm : D ⥤ SheafOfModules.{r} R) (Fn : D ⥤ SheafOfModules.{r} S)
+    (τ : Fm ⟶ Fn ⋙ SheafOfModules.restrictScalars φ) (M : D) (U : Cᵒᵖ)
+    {G H : AddCommGrpCat.{r}}
+    (ha : (Fm.obj M).val.presheaf.obj U = G) (hb : (Fn.obj M).val.presheaf.obj U = H)
+    (g : G ⟶ H)
+    (h : eqToHom ha.symm ≫
+      (forget₂ (ModuleCat.{r} (R.obj.obj U)) AddCommGrpCat.{r}).map
+        ((τ.app M).val.app U) ≫ eqToHom hb = g) (x : G) :
+    coefficientRestrictionSection φ (Fn.obj M) U ((τ.app M).val.app U (eqToHom ha.symm x)) =
+      eqToHom hb.symm (g x) := by
+  exact transport_square ha hb h x
+
 section Generators
 
 variable [HasSheafify J AddCommGrpCat.{max c v r}]
@@ -200,6 +234,81 @@ theorem generator_presheaf_restrict (R : Sheaf J CommRingCat.{max c v r})
 
 end Generators
 
+/-- Scalar extension of a map sends unit sections to unit sections.
+Source: Stacks 03CZ. -/
+theorem unit_map_section {A B : Sheaf J RingCat.{r}} (π : A ⟶ B)
+    {F : SheafOfModules.{r} A ⥤ SheafOfModules.{r} B}
+    (a : F ⊣ SheafOfModules.restrictScalars π) {X X' : SheafOfModules.{r} A} (φ : X ⟶ X')
+    (U : Cᵒᵖ) (x : X.val.obj U) :
+    (F.map φ).val.app U (coefficientRestrictionSection π (F.obj X) U ((a.unit.app X).val.app U x)) =
+      coefficientRestrictionSection π (F.obj X') U ((a.unit.app X').val.app U (φ.val.app U x)) :=
+  (congrArg (fun k ↦ k.val.app U x) (a.unit.naturality φ)).symm
+
+section ScalarNaturality
+
+variable [HasSheafify J AddCommGrpCat.{max c v r}]
+  [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}]
+
+attribute [local irreducible] coefficientTotalTensor coefficientTensorGenerator
+
+set_option maxHeartbeats 800000 in
+-- The section calculation passes through total tensor complexes and scalar restriction.
+/-- Scalar tensor comparisons characterized by the unit-section generator formula are
+natural in both complexes. Source: Stacks 03EK, 07A4. -/
+theorem scalarTensor_naturality {A B : Sheaf J CommRingCat.{max c v r}}
+    (π : (sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj A ⟶
+      (sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj B)
+    {F : SheafOfModules.{max c v r}
+        ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj A) ⥤
+      SheafOfModules.{max c v r}
+        ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj B)}
+    [hF : F.Additive] (a : F ⊣ SheafOfModules.restrictScalars π)
+    {P P' Q Q' : CochainComplex (SheafOfModules.{max c v r}
+      ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj A)) ℤ}
+    (f : P ⟶ P') (g : Q ⟶ Q')
+    (s : (F.mapHomologicalComplex (.up ℤ)).obj
+        ((coefficientTotalTensor.{r, c, v} J A).obj (P, Q)) ≅
+      (coefficientTotalTensor.{r, c, v} J B).obj
+        ((F.mapHomologicalComplex (.up ℤ)).obj P, (F.mapHomologicalComplex (.up ℤ)).obj Q))
+    (s' : (F.mapHomologicalComplex (.up ℤ)).obj
+        ((coefficientTotalTensor.{r, c, v} J A).obj (P', Q')) ≅
+      (coefficientTotalTensor.{r, c, v} J B).obj
+        ((F.mapHomologicalComplex (.up ℤ)).obj P', (F.mapHomologicalComplex (.up ℤ)).obj Q'))
+    (hs : CoefficientScalarTensorGenerators.{r, c, v} J A B F
+      (fun X U x ↦ coefficientRestrictionSection π (F.obj X) U ((a.unit.app X).val.app U x))
+      P Q s)
+    (hs' : CoefficientScalarTensorGenerators.{r, c, v} J A B F
+      (fun X U x ↦ coefficientRestrictionSection π (F.obj X) U ((a.unit.app X).val.app U x))
+      P' Q' s') :
+    (F.mapHomologicalComplex (.up ℤ)).map
+        ((coefficientTotalTensor.{r, c, v} J A).map (Prod.mkHom f g)) ≫ s'.hom =
+      s.hom ≫ (coefficientTotalTensor.{r, c, v} J B).map
+        (Prod.mkHom ((F.mapHomologicalComplex (.up ℤ)).map f)
+          ((F.mapHomologicalComplex (.up ℤ)).map g)) := by
+  have key (k : ℤ) : F.map (((coefficientTotalTensor.{r, c, v} J A).map (Prod.mkHom f g)).f k) ≫
+      s'.hom.f k = s.hom.f k ≫ ((coefficientTotalTensor.{r, c, v} J B).map
+        (Prod.mkHom ((F.mapHomologicalComplex (.up ℤ)).map f)
+          ((F.mapHomologicalComplex (.up ℤ)).map g))).f k := by
+    apply hom_ext_of_unit a
+    apply CategoryTheory.ScalarHomTensor.total_pure_hom_ext.{c, v, r} P Q k
+    intro p p' hpq V x y
+    apply restrictionSection_injective π _ V
+    erw [unit_comp_section, unit_comp_section, comp_section, comp_section, unit_map_section,
+      CategoryTheory.ScalarHomTensor.tensor_generator_map.{c, v, r}]
+    have h₁ := hs' p p' k hpq V ((f.f p).val.app V x) ((g.f p').val.app V y)
+    have h₂ := hs p p' k hpq V x y
+    beta_reduce at h₁ h₂
+    erw [h₁]
+    conv_rhs => erw [comp_section]
+    erw [h₂, CategoryTheory.ScalarHomTensor.tensor_generator_map.{c, v, r},
+      unit_map_section,
+      unit_map_section]
+  apply HomologicalComplex.Hom.ext
+  funext k
+  exact key k
+
+end ScalarNaturality
+
 section TensorTransition
 
 variable [HasSheafify J AddCommGrpCat.{max c v r}]
@@ -209,6 +318,8 @@ variable [HasSheafify J AddCommGrpCat.{max c v r}]
 
 attribute [local irreducible] coefficientTotalTensor coefficientTensorGenerator
 
+set_option maxHeartbeats 1600000 in
+-- The section calculation passes through several levels of composite functors.
 /-- The tensor product of two presentations of strict system complexes is again a
 presentation: its finite comparison commutes with the strict transitions.
 Source: Stacks 03EK, 07A4 and 0941. -/
@@ -232,7 +343,7 @@ theorem tensorPresentation_transition
         ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj A) ⥤
       SheafOfModules.{max c v r}
         ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj Bn)}
-    [Em.Additive] [En.Additive]
+    [hEm : Em.Additive] [hEn : En.Additive]
     (am : Em ⊣ SheafOfModules.restrictScalars pm) (an : En ⊣ SheafOfModules.restrictScalars pn)
     (quot : Em ⟶ En ⋙ SheafOfModules.restrictScalars q)
     (hquot : ∀ X, quot.app X = (coefficientQuotientNatTrans am an
@@ -245,7 +356,7 @@ theorem tensorPresentation_transition
         (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R) ⥤
       SheafOfModules.{max c v r}
         ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj Bn)}
-    [evm.Additive] [evn.Additive]
+    [hevm : evm.Additive] [hevn : evn.Additive]
     (τ : evm ⟶ evn ⋙ SheafOfModules.restrictScalars q)
     {m n : ℕ} (hmn : n ≤ m)
     (σm : ∀ (M : SheafOfModules.{max c v r} ((sheafCompose (coefficientSequenceTopology J)
@@ -330,19 +441,41 @@ theorem tensorPresentation_transition
     refine Eq.trans ?_ (quotientNatTrans_unitSection pm pn q hres am an quot hquot
       (((coefficientTotalTensor.{r, c, v} J A).obj (P, Q)).X k) V
       (coefficientTensorGenerator.{r, c, v} J A P Q p p' k hpq V x y)).symm
-    set_option trace.Meta.isDefEq true in
     obtain ⟨x0, hx0⟩ := hσm (CP.X p) V ((κPm.inv.f p).val.app V
       (coefficientRestrictionSection pm (Em.obj (P.X p)) V ((am.unit.app (P.X p)).val.app V x)))
     obtain ⟨y0, hy0⟩ := hσm (CQ.X p') V ((κQm.inv.f p').val.app V
       (coefficientRestrictionSection pm (Em.obj (Q.X p')) V ((am.unit.app (Q.X p')).val.app V y)))
-    have hb := comp_restrict_section q
-      ((evTm ≪≫ (coefficientTotalTensor.{r, c, v} J Bm).mapIso (κPm.prod κQm) ≪≫ sm.symm).inv.f k)
-      (τ.app (((coefficientTotalTensor.{r, c, v} (coefficientSequenceTopology J) R).obj
-          (CP, CQ)).X k))
-      ((evTn ≪≫ (coefficientTotalTensor.{r, c, v} J Bn).mapIso (κPn.prod κQn) ≪≫
-            sn.symm).hom.f k) V
-    done
-    done
+    refine comp_restrict_section q _ _ _ V _
+      (σm _ V (coefficientTensorGenerator.{r, c, v} (coefficientSequenceTopology J) R CP CQ
+        p p' k hpq (op (m, V.unop)) x0 y0))
+      (σn _ V (coefficientTensorGenerator.{r, c, v} (coefficientSequenceTopology J) R CP CQ
+        p p' k hpq (op (n, V.unop))
+        ((CP.X p).val.presheaf.map (Prod.mkHom (homOfLE hmn) (𝟙 V.unop)).op x0)
+        ((CQ.X p').val.presheaf.map (Prod.mkHom (homOfLE hmn) (𝟙 V.unop)).op y0))) _
+      ?_ ?_ ?_
+    · have hs := hsm p p' k hpq V x y
+      beta_reduce at hs
+      erw [trans_symm_inv_section, hs, mapIso_prod_inv_generator, ← hx0, ← hy0,
+        ← hevTm p p' k hpq V x0 y0, iso_hom_inv_section]
+    · rw [hτ, generator_presheaf_restrict]
+    · have hxn : (κPn.hom.f p).val.app V (σn (CP.X p) V ((CP.X p).val.presheaf.map
+          (Prod.mkHom (homOfLE hmn) (𝟙 V.unop)).op x0)) =
+          coefficientRestrictionSection pn (En.obj (P.X p)) V
+            ((an.unit.app (P.X p)).val.app V x) := by
+        erw [← hτ (CP.X p) V x0, ← restrict_map_section, ← comp_section, hP p, comp_section, hx0,
+          iso_inv_hom_section]
+        exact quotientNatTrans_unitSection pm pn q hres am an quot hquot (P.X p) V x
+      have hyn : (κQn.hom.f p').val.app V (σn (CQ.X p') V ((CQ.X p').val.presheaf.map
+          (Prod.mkHom (homOfLE hmn) (𝟙 V.unop)).op y0)) =
+          coefficientRestrictionSection pn (En.obj (Q.X p')) V
+            ((an.unit.app (Q.X p')).val.app V y) := by
+        erw [← hτ (CQ.X p') V y0, ← restrict_map_section, ← comp_section, hQ p', comp_section,
+          hy0, iso_inv_hom_section]
+        exact quotientNatTrans_unitSection pm pn q hres am an quot hquot (Q.X p') V y
+      have hs' := hsn p p' k hpq V x y
+      beta_reduce at hs'
+      erw [trans_symm_hom_section, hevTn, mapIso_prod_hom_generator, hxn, hyn, ← hs',
+        iso_hom_inv_section]
   refine (Iso.inv_comp_eq _).1 ?_
   apply HomologicalComplex.Hom.ext
   funext k

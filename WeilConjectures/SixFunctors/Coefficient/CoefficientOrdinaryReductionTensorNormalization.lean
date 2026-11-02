@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Coefficient.CoefficientOrdinaryReductionComparison
 import all WeilConjectures.SixFunctors.Coefficient.CoefficientOrdinaryReductionComparison
+import all WeilConjectures.CategoryTheory.Scalar.ScalarHomTensorCoherence
 
 /-! # Strict presentations of reduction through the ordinary quotient system
 
@@ -27,7 +28,7 @@ set_option backward.isDefEq.respectTransparency.types false
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 
-universe t u
+universe t u w
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 
 namespace WeilConjectures.OrdinaryQuotient
@@ -225,3 +226,425 @@ theorem exists_transpose_of_unitPresentation (M : OrdinaryModel l E W)
   rw [h1, hhom, Equiv.apply_symm_apply, M.systemLimitUnit_app l E W C]
 
 end WeilConjectures.OrdinaryQuotient
+
+namespace WeilConjectures
+
+variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+  [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
+
+/-- Chain maps of strict coefficient systems agree once all their finite evaluations agree.
+Source: Stacks 0941. -/
+theorem coefficientSequenceComplex_hom_ext
+    {X Y : CochainComplex (coefficientSequenceModules l E W) ℤ} {f g : X ⟶ Y}
+    (h : ∀ n : ℕ, ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).map f =
+      ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).map g) :
+    f = g := by
+  apply HomologicalComplex.hom_ext
+  intro p
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro U
+  ext x
+  exact congrArg (fun φ ↦ ((φ.f p).val.app (op U.unop.2)) x) (h U.unop.1)
+
+private theorem eqToHom_surjective {A B : AddCommGrpCat.{w}} (h : A = B) :
+    Function.Surjective (eqToHom h) := by
+  subst B
+  exact fun x ↦ ⟨x, rfl⟩
+
+/-- Every evaluated section is the transport of a section of the system.
+Source: Stacks 0941. -/
+theorem coefficientEvaluationSection_surjective
+    (M : coefficientSequenceModules l E W) (n : ℕ) (U : W.ProEtᵒᵖ) :
+    Function.Surjective (coefficientEvaluationSection l E W M n U) :=
+  eqToHom_surjective (coefficientSequenceEvaluationAb_eq l E W M n U).symm
+
+/-- Evaluation of a map acts on transported sections by the map at that level.
+Source: Stacks 0941. -/
+theorem coefficientEvaluationSection_map
+    {M N : coefficientSequenceModules l E W} (f : M ⟶ N) (n : ℕ) (U : W.ProEtᵒᵖ)
+    (x : M.val.obj (op (n, U.unop))) :
+    (((coefficientSequenceEvaluation l E W n).map f).val.app U)
+      (coefficientEvaluationSection l E W M n U x) =
+    coefficientEvaluationSection l E W N n U (f.val.app (op (n, U.unop)) x) := rfl
+
+private theorem cochainIso_inv_section
+    {C : Type*} [Category* C] {J : GrothendieckTopology C} {R : Sheaf J RingCat.{w}}
+    {P Q : CochainComplex (SheafOfModules.{w} R) ℤ} (e : P ≅ Q) (k : ℤ) (U : Cᵒᵖ)
+    (x : (P.X k).val.obj U) (y : (Q.X k).val.obj U)
+    (h : (e.hom.f k).val.app U x = y) : (e.inv.f k).val.app U y = x :=
+  (congrArg (fun z ↦ (e.inv.f k).val.app U z) h).symm.trans
+    (congrArg (fun z : P ⟶ P ↦ (z.f k).val.app U x) e.hom_inv_id)
+
+/-- The generator formula of the evaluation tensor comparison.
+Source: Stacks 03EK, 0941. -/
+theorem coefficientEvaluationTensorIso_hom_generator (n : ℕ)
+    (P Q : CochainComplex (coefficientSequenceModules l E W) ℤ)
+    (p q k : ℤ) (h : p + q = k) (U : W.ProEtᵒᵖ)
+    (x : (P.X p).val.obj (op (n, U.unop)))
+    (y : (Q.X q).val.obj (op (n, U.unop))) :
+    ((coefficientEvaluationTensorIso l E W n P Q).hom.f k).val.app U
+      (coefficientEvaluationSection l E W _ n U
+        (coefficientTensorGenerator.{u, t+1, t}
+          (coefficientSequenceTopology (Scheme.ProEt.topology W))
+          (coefficientSequenceCommRingSheaf l E W) P Q p q k h (op (n, U.unop)) x y)) =
+    coefficientTensorGenerator.{u, t+1, t} (Scheme.ProEt.topology W)
+      (integralCoefficientCommRingSheaf l E W n)
+      (((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).obj P)
+      (((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).obj Q)
+      p q k h U
+        (coefficientEvaluationSection l E W (P.X p) n U x)
+        (coefficientEvaluationSection l E W (Q.X q) n U y) :=
+  (coefficientEvaluationTensorIso_exists l E W n P Q).choose_spec.1 p q k h U x y
+
+/-- The inverse evaluation tensor comparison on generators.
+Source: Stacks 03EK, 0941. -/
+theorem coefficientEvaluationTensorIso_inv_generator (n : ℕ)
+    (P Q : CochainComplex (coefficientSequenceModules l E W) ℤ)
+    (p q k : ℤ) (h : p + q = k) (U : W.ProEtᵒᵖ)
+    (x : (P.X p).val.obj (op (n, U.unop)))
+    (y : (Q.X q).val.obj (op (n, U.unop))) :
+    ((coefficientEvaluationTensorIso l E W n P Q).inv.f k).val.app U
+      (coefficientTensorGenerator.{u, t+1, t} (Scheme.ProEt.topology W)
+        (integralCoefficientCommRingSheaf l E W n)
+        (((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).obj P)
+        (((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).obj Q)
+        p q k h U
+          (coefficientEvaluationSection l E W (P.X p) n U x)
+          (coefficientEvaluationSection l E W (Q.X q) n U y)) =
+    coefficientEvaluationSection l E W _ n U
+        (coefficientTensorGenerator.{u, t+1, t}
+          (coefficientSequenceTopology (Scheme.ProEt.topology W))
+          (coefficientSequenceCommRingSheaf l E W) P Q p q k h (op (n, U.unop)) x y) :=
+  cochainIso_inv_section _ k U _ _
+    (coefficientEvaluationTensorIso_hom_generator l E W n P Q p q k h U x y)
+
+attribute [local irreducible] coefficientTotalTensor coefficientTensorGenerator
+
+attribute [local irreducible] coefficientEvaluationTensorIso
+  coefficientSequenceEvaluation coefficientSequenceCommRingSheaf
+  coefficientSequenceCommRingPresheaf coefficientSequenceCommRingSystem
+  coefficientSequenceTopology SheafOfModules.monoidalCategory in
+set_option maxHeartbeats 400000 in
+/-- The prescribed evaluation tensor isomorphisms are natural in both complexes.
+Source: Stacks 07A4, 03EK. -/
+theorem coefficientEvaluationTensorIso_naturality (n : ℕ)
+    {P P' Q Q' : CochainComplex (coefficientSequenceModules l E W) ℤ}
+    (a : P ⟶ P') (b : Q ⟶ Q') :
+    ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).map
+        ((coefficientTotalTensor.{u, t+1, t}
+          (coefficientSequenceTopology (Scheme.ProEt.topology W))
+          (coefficientSequenceCommRingSheaf l E W)).map (Prod.mkHom a b)) ≫
+        (coefficientEvaluationTensorIso l E W n P' Q').hom =
+      (coefficientEvaluationTensorIso l E W n P Q).hom ≫
+        (coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
+          (integralCoefficientCommRingSheaf l E W n)).map
+          (Prod.mkHom
+            (((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).map a)
+            (((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).map b)) := by
+  let e := coefficientEvaluationTensorIso l E W n P Q
+  let e' := coefficientEvaluationTensorIso l E W n P' Q'
+  apply e.inv_comp_eq.mp
+  apply HomologicalComplex.hom_ext
+  intro k
+  apply CategoryTheory.ScalarHomTensor.total_pure_hom_ext.{t + 1, t, u}
+    (J := Scheme.ProEt.topology W) (R := integralCoefficientCommRingSheaf l E W n)
+    (((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).obj P)
+    (((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).obj Q) k _
+  intro p q hpq U x y
+  obtain ⟨x0, rfl⟩ := coefficientEvaluationSection_surjective l E W (P.X p) n U x
+  obtain ⟨y0, rfl⟩ := coefficientEvaluationSection_surjective l E W (Q.X q) n U y
+  have hi := coefficientEvaluationTensorIso_inv_generator l E W n P Q p q k hpq U x0 y0
+  change (e'.hom.f k).val.app U
+      (((coefficientSequenceEvaluation l E W n).map
+        (((coefficientTotalTensor.{u, t+1, t}
+          (coefficientSequenceTopology (Scheme.ProEt.topology W))
+          (coefficientSequenceCommRingSheaf l E W)).map (Prod.mkHom a b)).f k)).val.app U
+        ((e.inv.f k).val.app U _)) = _
+  erw [hi, coefficientEvaluationSection_map]
+  erw [CategoryTheory.ScalarHomTensor.tensor_generator_map.{t + 1, t, u}]
+  erw [coefficientEvaluationTensorIso_hom_generator l E W n P' Q']
+  erw [CategoryTheory.ScalarHomTensor.tensor_generator_map.{t + 1, t, u}]
+  erw [coefficientEvaluationSection_map, coefficientEvaluationSection_map]
+
+/-- Composition of product morphisms under a bifunctor.
+Source: Stacks 0011. -/
+theorem bifunctor_map_mkHom_comp {A B : Type*} [Category* A] [Category* B] (T : A × A ⥤ B)
+    {X X' X'' Y Y' Y'' : A} (a : X ⟶ X') (a' : X' ⟶ X'') (c : Y ⟶ Y') (c' : Y' ⟶ Y'') :
+    T.map (Prod.mkHom a c) ≫ T.map (Prod.mkHom a' c') = T.map (Prod.mkHom (a ≫ a') (c ≫ c')) := by
+  rw [← T.map_comp]
+  rfl
+
+namespace OrdinaryQuotient
+
+/-- The ordinary tensor comparison of the quotient system evaluates at every finite level
+to the normalized scalar tensor comparison.
+Source: Stacks 03EK, 07A4, 0941. -/
+def OrdinaryModel.TensorEvaluation (M : OrdinaryModel l E W)
+    (b : coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
+        (completedIntegralCommRingSheafUnrestricted l E W) ⋙ M.quotient l E W ≅
+      (M.quotient l E W).prod (M.quotient l E W) ⋙
+        coefficientTotalTensor.{u, t+1, t} (coefficientSequenceTopology (Scheme.ProEt.topology W))
+          (coefficientSequenceCommRingSheaf l E W)) : Prop :=
+  ∀ (n : ℕ) (P Q : CochainComplex (scalarReductionSource l E W) ℤ),
+    ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).map (b.hom.app (P, Q)) ≫
+      (coefficientEvaluationTensorIso l E W n ((M.quotient l E W).obj P)
+        ((M.quotient l E W).obj Q)).hom ≫
+      (coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
+        (integralCoefficientCommRingSheaf l E W n)).map
+        (Prod.mkHom ((NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).hom.app P)
+          ((NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).hom.app Q)) =
+    (NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).hom.app
+        ((coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
+          (completedIntegralCommRingSheafUnrestricted l E W)).obj (P, Q)) ≫
+      (coefficientScalarTensorIso l E W n P Q).hom
+
+/-- Strict comparison of tensor presentations: maps out of the quotient system whose finite
+evaluations are the normalized evaluation isomorphisms intertwine the ordinary tensor
+comparison with any strict tensor map having the scalar tensor evaluations.
+Source: Stacks 07A4, 0941. -/
+theorem OrdinaryModel.tensor_comp_map_eq (M : OrdinaryModel l E W)
+    (b : coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
+        (completedIntegralCommRingSheafUnrestricted l E W) ⋙ M.quotient l E W ≅
+      (M.quotient l E W).prod (M.quotient l E W) ⋙
+        coefficientTotalTensor.{u, t+1, t} (coefficientSequenceTopology (Scheme.ProEt.topology W))
+          (coefficientSequenceCommRingSheaf l E W))
+    (hb : M.TensorEvaluation l E W b)
+    (P Q : CochainComplex (scalarReductionSource l E W) ℤ)
+    {C D Z : CochainComplex (coefficientSequenceModules l E W) ℤ}
+    (κC : ∀ n : ℕ,
+      ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).obj C ≅
+        ((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).obj P)
+    (κD : ∀ n : ℕ,
+      ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).obj D ≅
+        ((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).obj Q)
+    (κZ : ∀ n : ℕ,
+      ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).obj Z ⟶
+        ((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).obj
+          ((coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
+            (completedIntegralCommRingSheafUnrestricted l E W)).obj (P, Q)))
+    (gC : (M.quotient l E W).obj P ⟶ C) (gD : (M.quotient l E W).obj Q ⟶ D)
+    (gZ : (M.quotient l E W).obj ((coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
+      (completedIntegralCommRingSheafUnrestricted l E W)).obj (P, Q)) ⟶ Z)
+    (hC : ∀ n : ℕ, ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).map gC ≫
+      (κC n).hom = (NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).hom.app P)
+    (hD : ∀ n : ℕ, ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).map gD ≫
+      (κD n).hom = (NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).hom.app Q)
+    (hZ : ∀ n : ℕ, ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).map gZ ≫
+      κZ n = (NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).hom.app _)
+    (ψ : Z ⟶ (coefficientTotalTensor.{u, t+1, t}
+        (coefficientSequenceTopology (Scheme.ProEt.topology W))
+        (coefficientSequenceCommRingSheaf l E W)).obj (C, D))
+    (hψ : ∀ n : ℕ,
+      ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).map ψ ≫
+        (coefficientEvaluationTensorIso l E W n C D).hom ≫
+        (coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
+          (integralCoefficientCommRingSheaf l E W n)).map (Prod.mkHom (κC n).hom (κD n).hom) =
+      κZ n ≫ (coefficientScalarTensorIso l E W n P Q).hom) :
+    b.hom.app (P, Q) ≫ (coefficientTotalTensor.{u, t+1, t}
+        (coefficientSequenceTopology (Scheme.ProEt.topology W))
+        (coefficientSequenceCommRingSheaf l E W)).map (Prod.mkHom gC gD) = gZ ≫ ψ := by
+  apply coefficientSequenceComplex_hom_ext
+  intro n
+  let T := coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
+    (integralCoefficientCommRingSheaf l E W n)
+  have : IsIso (T.map (Prod.mkHom (κC n).hom (κD n).hom)) := by
+    have hi : T.map (Prod.mkHom (κC n).hom (κD n).hom) ≫ T.map (Prod.mkHom (κC n).inv (κD n).inv)
+        = 𝟙 _ := by
+      rw [bifunctor_map_mkHom_comp, Iso.hom_inv_id, Iso.hom_inv_id, ← T.map_id]
+      rfl
+    have hi' : T.map (Prod.mkHom (κC n).inv (κD n).inv) ≫ T.map (Prod.mkHom (κC n).hom (κD n).hom)
+        = 𝟙 _ := by
+      rw [bifunctor_map_mkHom_comp, Iso.inv_hom_id, Iso.inv_hom_id, ← T.map_id]
+      rfl
+    exact ⟨_, hi, hi'⟩
+  rw [← cancel_mono ((coefficientEvaluationTensorIso l E W n C D).hom ≫
+    T.map (Prod.mkHom (κC n).hom (κD n).hom))]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [hψ, reassoc_of% (hZ n),
+    reassoc_of% (coefficientEvaluationTensorIso_naturality l E W n gC gD),
+    bifunctor_map_mkHom_comp]
+  simp only [hC, hD]
+  exact hb n P Q
+
+end OrdinaryQuotient
+
+/-- A bifunctor sends a pair of isomorphisms to an isomorphism.
+Source: Stacks 0011. -/
+theorem isIso_bifunctor_map_mkHom {A B : Type*} [Category* A] [Category* B] (T : A × A ⥤ B)
+    {X X' Y Y' : A} (f : X ⟶ X') (g : Y ⟶ Y') [IsIso f] [IsIso g] :
+    IsIso (T.map (Prod.mkHom f g)) :=
+  ⟨T.map (Prod.mkHom (inv f) (inv g)), by
+    rw [bifunctor_map_mkHom_comp, IsIso.hom_inv_id, IsIso.hom_inv_id, ← T.map_id]
+    rfl, by
+    rw [bifunctor_map_mkHom_comp, IsIso.inv_hom_id, IsIso.inv_hom_id, ← T.map_id]
+    rfl⟩
+
+section ModelNaturality
+universe c v r d
+variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
+  [HasSheafify J AddCommGrpCat.{max c v r}]
+  [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}]
+  (R : Sheaf J CommRingCat.{max c v r})
+  [HasDerivedCategory.{d} (RingedTensorModules.{c, v, r} J R)]
+  (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, r, d} J R))
+  (T : CoefficientTensorModels.{r, c, v, d} J R S)
+
+/-- The K-flat tensor model comparison is natural in both inputs.
+Source: Stacks 06YU. -/
+theorem CoefficientTensorModels.iso_naturality
+    {P Q P' Q' : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ}
+    (hP : CochainComplex.IsKFlatIndependentCoefficients (R := R) P)
+    (hQ : CochainComplex.IsKFlatIndependentCoefficients (R := R) Q)
+    (hP' : CochainComplex.IsKFlatIndependentCoefficients (R := R) P')
+    (hQ' : CochainComplex.IsKFlatIndependentCoefficients (R := R) Q')
+    (f : P ⟶ P') (g : Q ⟶ Q') :
+    DerivedCategory.Q.map ((coefficientTotalTensor.{r, c, v} J R).map (Prod.mkHom f g)) ≫
+        (T.iso J R S P' Q' hP' hQ').hom =
+      (T.iso J R S P Q hP hQ).hom ≫
+        S.tensor.map (Prod.mkHom (DerivedCategory.Q.map f) (DerivedCategory.Q.map g)) := by
+  have h := T.comparison.hom.naturality
+    (Prod.mkHom (ObjectProperty.homMk (X := ⟨P, hP⟩) (Y := ⟨P', hP'⟩) f)
+      (ObjectProperty.homMk (X := ⟨Q, hQ⟩) (Y := ⟨Q', hQ'⟩) g))
+  unfold CoefficientTensorModels.iso
+  dsimp only [coefficientKFlatInclusion, Iso.app_hom,
+    Functor.comp_map, Functor.prod_map, Prod.mkHom, ObjectProperty.ι,
+    inducedFunctor, ObjectProperty.homMk] at h ⊢
+  exact h
+
+end ModelNaturality
+
+namespace OrdinaryQuotient
+
+variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+  [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
+
+/-- The system K-flat tensor model comparison is natural in both inputs.
+Source: Stacks 06YU. -/
+theorem coefficientSystemTensorModelIso_naturality (S : CoefficientDerivedSystemTensors l E W)
+    {P Q P' Q' : CochainComplex (coefficientSequenceModules l E W) ℤ}
+    (hP : CochainComplex.IsKFlatIndependentCoefficients
+      (J := coefficientSequenceTopology (Scheme.ProEt.topology W))
+      (R := coefficientSequenceCommRingSheaf l E W) P)
+    (hQ : CochainComplex.IsKFlatIndependentCoefficients
+      (J := coefficientSequenceTopology (Scheme.ProEt.topology W))
+      (R := coefficientSequenceCommRingSheaf l E W) Q)
+    (hP' : CochainComplex.IsKFlatIndependentCoefficients
+      (J := coefficientSequenceTopology (Scheme.ProEt.topology W))
+      (R := coefficientSequenceCommRingSheaf l E W) P')
+    (hQ' : CochainComplex.IsKFlatIndependentCoefficients
+      (J := coefficientSequenceTopology (Scheme.ProEt.topology W))
+      (R := coefficientSequenceCommRingSheaf l E W) Q')
+    (f : P ⟶ P') (g : Q ⟶ Q') :
+    DerivedCategory.Q.map ((coefficientTotalTensor.{u, t+1, t}
+        (coefficientSequenceTopology (Scheme.ProEt.topology W))
+        (coefficientSequenceCommRingSheaf l E W)).map (Prod.mkHom f g)) ≫
+        (coefficientSystemTensorModelIso l E W S P' Q' hP' hQ').hom =
+      (coefficientSystemTensorModelIso l E W S P Q hP hQ).hom ≫
+        S.systemClosed.tensor.map (Prod.mkHom (DerivedCategory.Q.map f) (DerivedCategory.Q.map g)) := by
+  have h := S.systemTensorModel.comparison.hom.naturality
+    (Prod.mkHom (ObjectProperty.homMk (X := ⟨P, hP⟩) (Y := ⟨P', hP'⟩) f)
+      (ObjectProperty.homMk (X := ⟨Q, hQ⟩) (Y := ⟨Q', hQ'⟩) g))
+  unfold coefficientSystemTensorModelIso CoefficientTensorModels.iso
+  dsimp only [coefficientKFlatInclusion, Iso.app_hom,
+    Functor.comp_map, Functor.prod_map, Prod.mkHom, ObjectProperty.ι,
+    inducedFunctor, ObjectProperty.homMk] at h ⊢
+  exact h
+/-- The universal comparison of the ordinary quotient system realizes the binary tensor
+normalization of a derived reduction: on flat-term K-flat inputs, the ordinary tensor
+comparison `b` and the comparison `ε` fit into the normalized reduction tensor square.
+Source: Stacks 07A4, 0941.
+Proof: each presentation of `hR` is `ε` followed by the localized ordinary transpose of its
+strict unit map, whose finite evaluations are the normalized evaluation isomorphisms. These
+transposes intertwine `b` with the strict tensor map of `hR` before localization, and the
+square of `hR` transports along them. -/
+theorem OrdinaryModel.reductionTensor_normalization (M : OrdinaryModel l E W)
+    (R : CoefficientDerivedSystemReduction l E W)
+    (hR : CoefficientReductionTensorNormalization l E W R)
+    (ε : DerivedCategory.Q ⋙ R.reduction ⟶ M.quotient l E W ⋙ DerivedCategory.Q)
+    (hcomp : ∀ P : CochainComplex (scalarReductionSource l E W) ℤ,
+      P.IsKFlatIndependentCoefficients → (∀ p : ℤ, (P.X p).IsFlatOnSite) → IsIso (ε.app P))
+    (hhom : ∀ (Q : CochainComplex (scalarReductionSource l E W) ℤ)
+      (I : CochainComplex (coefficientSequenceModules l E W) ℤ)
+      (f : (M.quotient l E W).obj Q ⟶ I),
+      R.adjunction.homEquiv (DerivedCategory.Q.obj Q) (DerivedCategory.Q.obj I)
+          (ε.app Q ≫ DerivedCategory.Q.map f) =
+        DerivedCategory.Q.map
+            ((M.adjunction.mapHomologicalComplex (.up ℤ)).homEquiv Q I f) ≫
+          (systemLimitUnit l E W M (constantLimitUnit l E W)).app I)
+    (b : coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
+        (completedIntegralCommRingSheafUnrestricted l E W) ⋙ M.quotient l E W ≅
+      (M.quotient l E W).prod (M.quotient l E W) ⋙
+        coefficientTotalTensor.{u, t+1, t} (coefficientSequenceTopology (Scheme.ProEt.topology W))
+          (coefficientSequenceCommRingSheaf l E W))
+    (hb : M.TensorEvaluation l E W b)
+    (hpres : ∀ P : CochainComplex (scalarReductionSource l E W) ℤ,
+      P.IsKFlatIndependentCoefficients →
+      (∀ i : ℤ, SheafOfModules.IsFlatOnSite.{t+1, t, max u (t+1), max u (t+1)}
+        (R := completedIntegralCommRingSheafUnrestricted l E W) (P.X i)) →
+      CochainComplex.IsKFlatIndependentCoefficients
+        (R := coefficientSequenceCommRingSheaf l E W) ((M.quotient l E W).obj P))
+    (P Q : CochainComplex (scalarReductionSource l E W) ℤ)
+    (hP : P.IsKFlatIndependentCoefficients) (hQ : Q.IsKFlatIndependentCoefficients)
+    (fP : ∀ i : ℤ, SheafOfModules.IsFlatOnSite.{t+1, t, max u (t+1), max u (t+1)}
+      (R := completedIntegralCommRingSheafUnrestricted l E W) (P.X i))
+    (fQ : ∀ i : ℤ, SheafOfModules.IsFlatOnSite.{t+1, t, max u (t+1), max u (t+1)}
+      (R := completedIntegralCommRingSheafUnrestricted l E W) (Q.X i)) :
+    CoefficientTensorComparisonSquare R.integralClosed.tensor R.systemClosed.tensor
+      R.reduction DerivedCategory.Q
+      (coefficientIntegralTensorModelIso l E W R.toCoefficientDerivedSystemTensors
+        P Q hP hQ).hom R.reductionTensor.hom
+      (ε.app P) (ε.app Q) (ε.app _)
+      (b.hom.app (P, Q))
+      (coefficientSystemTensorModelIso l E W R.toCoefficientDerivedSystemTensors
+        ((M.quotient l E W).obj P) ((M.quotient l E W).obj Q)
+        (hpres P hP fP) (hpres Q hQ fQ)).hom := by
+  obtain ⟨C, D, Z, hC, hD, eC, eD, eZ, κC, κD, κZ, ψ, pC, pD, pZ, hψ, hsq⟩ :=
+    hR P Q hP hQ fP fQ
+  obtain ⟨gC, heC, hgC⟩ := exists_transpose_of_unitPresentation l E W M R.reduction
+    R.adjunction ε hhom P C eC κC pC.adjunction
+  obtain ⟨gD, heD, hgD⟩ := exists_transpose_of_unitPresentation l E W M R.reduction
+    R.adjunction ε hhom Q D eD κD pD.adjunction
+  obtain ⟨gZ, heZ, hgZ⟩ := exists_transpose_of_unitPresentation l E W M R.reduction
+    R.adjunction ε hhom _ Z eZ κZ pZ.adjunction
+  have hS := M.tensor_comp_map_eq l E W b hb P Q κC κD (fun n ↦ (κZ n).hom) gC gD gZ hgC hgD hgZ
+    ψ hψ
+  have := hcomp P hP fP
+  have := hcomp Q hQ fQ
+  have : IsIso (DerivedCategory.Q.map gC) := by
+    have : IsIso (ε.app P ≫ DerivedCategory.Q.map gC) := by
+      rw [← heC]
+      infer_instance
+    exact IsIso.of_isIso_comp_left (ε.app P) _
+  have : IsIso (DerivedCategory.Q.map gD) := by
+    have : IsIso (ε.app Q ≫ DerivedCategory.Q.map gD) := by
+      rw [← heD]
+      infer_instance
+    exact IsIso.of_isIso_comp_left (ε.app Q) _
+  have := isIso_bifunctor_map_mkHom R.systemClosed.tensor (DerivedCategory.Q.map gC)
+    (DerivedCategory.Q.map gD)
+  unfold CoefficientTensorComparisonSquare at hsq ⊢
+  rw [← cancel_mono (R.systemClosed.tensor.map
+    (Prod.mkHom (DerivedCategory.Q.map gC) (DerivedCategory.Q.map gD)))]
+  simp only [Category.assoc]
+  rw [bifunctor_map_mkHom_comp, ← heC, ← heD, hsq, heZ]
+  have key : DerivedCategory.Q.map gZ ≫ DerivedCategory.Q.map ψ ≫
+      (coefficientSystemTensorModelIso l E W R.toCoefficientDerivedSystemTensors C D hC hD).hom =
+      DerivedCategory.Q.map (b.hom.app (P, Q)) ≫
+        (coefficientSystemTensorModelIso l E W R.toCoefficientDerivedSystemTensors
+          ((M.quotient l E W).obj P) ((M.quotient l E W).obj Q)
+          (hpres P hP fP) (hpres Q hQ fQ)).hom ≫
+        R.systemClosed.tensor.map (Prod.mkHom (DerivedCategory.Q.map gC)
+          (DerivedCategory.Q.map gD)) := by
+    have hn := coefficientSystemTensorModelIso_naturality l E W R.toCoefficientDerivedSystemTensors
+      (hpres P hP fP) (hpres Q hQ fQ) hC hD gC gD
+    have hS' := congrArg (fun x ↦ DerivedCategory.Q.map x) hS
+    dsimp only at hS'
+    rw [Functor.map_comp, Functor.map_comp] at hS'
+    rw [← reassoc_of% hS']
+    sorry
+  sorry
+
+end OrdinaryQuotient
+
+end WeilConjectures

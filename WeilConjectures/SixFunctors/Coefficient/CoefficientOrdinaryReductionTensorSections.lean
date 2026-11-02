@@ -5,27 +5,28 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerivedSystemEvaluationData
-import all WeilConjectures.CategoryTheory.Scalar.ScalarHomTensorCoherence
+public import WeilConjectures.SixFunctors.Coefficient.CoefficientOrdinaryQuotientModel
+public import WeilConjectures.SixFunctors.Coefficient.CoefficientOrdinaryReductionTensorGeneric
 
-/-! # Generator calculus for ordinary coefficient reduction and tensor products
+/-! # Tensor presentations of the ordinary quotient system
 
 Source: Stacks 03EK, 07A4 and 0941.
 
-Maps out of an ordinary finite scalar extension are fixed by the unit sections, and
-maps out of a total tensor complex by its pure tensor generators. We record the
-resulting naturality of the ordinary scalar tensor comparison and its compatibility
-with the strict quotient maps.
+For an ordinary quotient-system model `M`, the finite evaluations of the system tensor
+product of `M.quotient P` and `M.quotient Q` are identified with the finite scalar
+extensions of the total tensor product of `P` and `Q`. These identifications commute
+with the strict transition maps. The section calculation is the generic
+`OrdinaryReductionTensor.tensorPresentation_transition`.
 -/
 
 @[expose] public section
 set_option autoImplicit false
-set_option Elab.async false
 set_option backward.defeqAttrib.useBackward true
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 universe t u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 namespace WeilConjectures
+namespace OrdinaryQuotient
 
 noncomputable section
 set_option synthInstance.maxSize 4096
@@ -49,124 +50,143 @@ attribute [local implicit_reducible] integralCoefficientSheaf
 
 attribute [local irreducible] coefficientTotalTensor coefficientTensorGenerator
 
-/-- Maps out of an ordinary finite scalar extension agree once they agree on unit sections.
-Source: Stacks 03CZ, 06YY. -/
-theorem coefficientOrdinaryExtension_hom_ext (n : ℕ) {X : scalarReductionSource l E W}
-    {Y : scalarReductionTarget l E W n} {f g : (scalarReductionExtension l E W n).obj X ⟶ Y}
-    (h : ∀ (V : W.ProEtᵒᵖ) (x : X.val.obj V),
-      f.val.app V (coefficientIntegralScalarUnitSection l E W n X V x) =
-        g.val.app V (coefficientIntegralScalarUnitSection l E W n X V x)) : f = g := by
-  apply ((coefficientOrdinaryScalarAdjunction l E W n).homEquiv X Y).injective
-  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
-  ext V x
-  exact h V x
+/-- The strict transition on sections is horizontal restriction.
+Source: Stacks 0941. -/
+theorem coefficientSequenceTransition_section {m n : ℕ} (h : n ≤ m)
+    (M : coefficientSequenceModules l E W) (U : W.ProEtᵒᵖ) (x : M.val.obj (op (m, U.unop))) :
+    coefficientRestrictionSection (normalizedDVRQuotient l E W h)
+      ((coefficientSequenceEvaluation l E W n).obj M) U
+      (((coefficientSequenceTransition l E W h).app M).val.app U
+        (coefficientEvaluationSection l E W M m U x)) =
+      coefficientEvaluationSection l E W M n U
+        (M.val.presheaf.map (Prod.mkHom (homOfLE h) (𝟙 U.unop)).op x) := by
+  have hh := (coefficientSequenceTransition_exists l E W h).exists.choose_spec M U
+  exact OrdinaryReductionTensor.transported_transition_section (normalizedDVRQuotient l E W h)
+    (coefficientSequenceEvaluation l E W m) (coefficientSequenceEvaluation l E W n)
+    (coefficientSequenceTransition l E W h) M U
+    (coefficientSequenceEvaluationAb_eq l E W M m U)
+    (coefficientSequenceEvaluationAb_eq l E W M n U) _ hh x
+
+/-- Evaluation sections exhaust the sections of a finite evaluation.
+Source: Stacks 0941. -/
+theorem coefficientEvaluationSection_surjective (M : coefficientSequenceModules l E W) (n : ℕ)
+    (U : W.ProEtᵒᵖ) : Function.Surjective (coefficientEvaluationSection l E W M n U) :=
+  OrdinaryReductionTensor.eqToHom_surjective
+    (coefficientSequenceEvaluationAb_eq l E W M n U).symm
+
+/-- The strict quotient map is the mate of the composition of restrictions.
+Source: Stacks 03D7, 06YY. -/
+theorem coefficientOrdinaryQuotient_app_eq {m n : ℕ} (h : n ≤ m)
+    (X : scalarReductionSource l E W) :
+    (coefficientOrdinaryQuotient l E W h).app X =
+      (coefficientQuotientNatTrans (coefficientOrdinaryScalarAdjunction l E W m)
+        (coefficientOrdinaryScalarAdjunction l E W n)
+        (normalizedDVRModuleRes l E W h)
+        (eqToIso (coefficientRestrictionComp l E W h))).app X := by
+  unfold coefficientOrdinaryQuotient
+  exact (coefficientOrdinaryQuotient_exists l E W h).choose_spec.1 X
 
 /-- The unit-section formula characterizing the ordinary scalar tensor comparison.
 Source: Stacks 03EK, 07A4. -/
-theorem coefficientScalarTensorIso_hom_generator (n : ℕ)
-    (P Q : CochainComplex (scalarReductionSource l E W) ℤ) (p q k : ℤ) (hpq : p + q = k)
-    (V : W.ProEtᵒᵖ) (x : (P.X p).val.obj V) (y : (Q.X q).val.obj V) :
-    ((coefficientScalarTensorIso l E W n P Q).hom.f k).val.app V
-      (coefficientIntegralScalarUnitSection l E W n _ V
-        (coefficientTensorGenerator.{u, t+1, t} (Scheme.ProEt.topology W)
-          (completedIntegralCommRingSheafUnrestricted l E W) P Q p q k hpq V x y)) =
+theorem coefficientScalarTensorIso_generators (n : ℕ)
+    (P Q : CochainComplex (scalarReductionSource l E W) ℤ) :
+    CoefficientScalarTensorGenerators.{u, t+1, t} (Scheme.ProEt.topology W)
+      (completedIntegralCommRingSheafUnrestricted l E W)
+      (integralCoefficientCommRingSheaf l E W n) (scalarReductionExtension l E W n)
+      (hF := coefficientFiniteExtensionAdditive l E W n)
+      (coefficientIntegralScalarUnitSection l E W n) P Q
+      (coefficientScalarTensorIso l E W n P Q) := by
+  unfold coefficientScalarTensorIso coefficientUniqueComparisonChoice
+  exact (coefficientScalarTensorIso_exists l E W n P Q).choose_spec.1
+
+/-- The generator formula characterizing the ordinary evaluation tensor comparison.
+Source: Stacks 03EK, 0941. -/
+theorem coefficientEvaluationTensorIso_generator (n : ℕ)
+    (P Q : CochainComplex (coefficientSequenceModules l E W) ℤ)
+    (p q k : ℤ) (h : p + q = k) (U : W.ProEtᵒᵖ)
+    (x : (P.X p).val.obj (op (n, U.unop))) (y : (Q.X q).val.obj (op (n, U.unop))) :
+    ((coefficientEvaluationTensorIso l E W n P Q).hom.f k).val.app U
+      (coefficientEvaluationSection l E W _ n U
+        (coefficientTensorGenerator.{u, t+1, t}
+          (coefficientSequenceTopology (Scheme.ProEt.topology W))
+          (coefficientSequenceCommRingSheaf l E W) P Q p q k h (op (n, U.unop)) x y)) =
       coefficientTensorGenerator.{u, t+1, t} (Scheme.ProEt.topology W)
         (integralCoefficientCommRingSheaf l E W n)
-        (((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).obj P)
-        (((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).obj Q) p q k hpq V
-        (coefficientIntegralScalarUnitSection l E W n _ V x)
-        (coefficientIntegralScalarUnitSection l E W n _ V y) := by
-  unfold coefficientScalarTensorIso coefficientUniqueComparisonChoice
-  exact (coefficientScalarTensorIso_exists l E W n P Q).choose_spec.1 p q k hpq V x y
+        (((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).obj P)
+        (((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).obj Q) p q k h U
+        (coefficientEvaluationSection l E W (P.X p) n U x)
+        (coefficientEvaluationSection l E W (Q.X q) n U y) := by
+  unfold coefficientEvaluationTensorIso coefficientUniqueComparisonChoice
+  exact (coefficientEvaluationTensorIso_exists l E W n P Q).choose_spec.1 p q k h U x y
 
-/-- Ordinary scalar extension of a map sends unit sections to unit sections.
-Source: Stacks 03CZ, 06YY. -/
-theorem coefficientIntegralScalarUnitSection_map (n : ℕ) {X X' : scalarReductionSource l E W}
-    (φ : X ⟶ X') (V : W.ProEtᵒᵖ) (x : X.val.obj V) :
-    ((scalarReductionExtension l E W n).map φ).val.app V
-        (coefficientIntegralScalarUnitSection l E W n X V x) =
-      coefficientIntegralScalarUnitSection l E W n X' V (φ.val.app V x) :=
-  (congrArg (fun k ↦ k.val.app V x)
-    ((coefficientOrdinaryScalarAdjunction l E W n).unit.naturality φ)).symm
+/-- The finite presentation of the system tensor product of two ordinary quotient systems.
+Source: Stacks 03EK, 07A4 and 0941. -/
+def OrdinaryModel.tensorPresentation (M : OrdinaryModel l E W) (n : ℕ)
+    (P Q : CochainComplex (scalarReductionSource l E W) ℤ) :
+    ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).obj
+        ((coefficientTotalTensor.{u, t+1, t}
+          (coefficientSequenceTopology (Scheme.ProEt.topology W))
+          (coefficientSequenceCommRingSheaf l E W)).obj
+            ((M.quotient l E W).obj P, (M.quotient l E W).obj Q)) ≅
+      ((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).obj
+        ((coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
+          (completedIntegralCommRingSheafUnrestricted l E W)).obj (P, Q)) :=
+  coefficientEvaluationTensorIso l E W n _ _ ≪≫
+    (coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
+      (integralCoefficientCommRingSheaf l E W n)).mapIso
+      (((NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).app P).prod
+        ((NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).app Q)) ≪≫
+    (coefficientScalarTensorIso l E W n P Q).symm
 
-section Generic
-universe c v r
-variable {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
-
-/-- An eqToHom of module sheaves is the identity on sections.
-Source: Stacks 03CZ. -/
-theorem sheafOfModules_eqToHom_section_heq {R : Sheaf J RingCat.{r}}
-    {M N : SheafOfModules.{r} R} (p : M = N) (U : Cᵒᵖ) (y : M.val.obj U) :
-    HEq ((eqToHom p).val.app U y) y := by
-  subst p
-  rfl
-
-/-- The comparison of composite restrictions given by an equality of functors is the
-identity on sections. Source: Stacks 03CZ. -/
-theorem restrictScalars_eqToIso_inv_section {A Bm Bn : Sheaf J RingCat.{r}}
-    (pm : A ⟶ Bm) (pn : A ⟶ Bn) (q : Bm ⟶ Bn)
-    (h : SheafOfModules.restrictScalars.{r} q ⋙ SheafOfModules.restrictScalars.{r} pm =
-      SheafOfModules.restrictScalars.{r} pn)
-    (N : SheafOfModules.{r} Bn) (U : Cᵒᵖ) (y : N.val.obj U) :
-    coefficientRestrictionSection q N U (coefficientRestrictionSection pm _ U
-      (((eqToIso h).inv.app N).val.app U y)) = coefficientRestrictionSection pn N U y := by
-  rw [eqToIso.inv, eqToHom_app]
-  exact eq_of_heq (sheafOfModules_eqToHom_section_heq (Functor.congr_obj h.symm N) U y)
-
-/-- The mate of a comparison of composite restrictions sends unit sections to unit sections.
-Source: Stacks 03CZ, 03D7. -/
-theorem coefficientQuotientNatTrans_unitSection {A Bm Bn : Sheaf J RingCat.{r}}
-    (pm : A ⟶ Bm) (pn : A ⟶ Bn) (q : Bm ⟶ Bn)
-    {Fm : SheafOfModules.{r} A ⥤ SheafOfModules.{r} Bm}
-    {Fn : SheafOfModules.{r} A ⥤ SheafOfModules.{r} Bn}
-    (am : Fm ⊣ SheafOfModules.restrictScalars pm) (an : Fn ⊣ SheafOfModules.restrictScalars pn)
-    (e : SheafOfModules.restrictScalars q ⋙ SheafOfModules.restrictScalars pm ≅
-      SheafOfModules.restrictScalars pn)
-    (he : ∀ (N : SheafOfModules.{r} Bn) (U : Cᵒᵖ) (y : N.val.obj U),
-      coefficientRestrictionSection q N U (coefficientRestrictionSection pm _ U
-        ((e.inv.app N).val.app U y)) = coefficientRestrictionSection pn N U y)
-    (M : SheafOfModules.{r} A) (U : Cᵒᵖ) (x : M.val.obj U) :
-    coefficientRestrictionSection q (Fn.obj M) U
-      (((coefficientQuotientNatTrans am an (SheafOfModules.restrictScalars q) e).app M).val.app U
-        (coefficientRestrictionSection pm (Fm.obj M) U ((am.unit.app M).val.app U x))) =
-      coefficientRestrictionSection pn (Fn.obj M) U ((an.unit.app M).val.app U x) := by
-  let t := an.unit.app M ≫ e.inv.app (Fn.obj M)
-  have ht : am.unit.app M ≫ (SheafOfModules.restrictScalars pm).map
-      ((am.homEquiv _ _).symm t) = t :=
-    (am.homEquiv_unit _ _ _).symm.trans (Equiv.apply_symm_apply _ _)
-  exact (congrArg (fun k ↦ k.val.app U x) ht).trans (he _ U _)
-
-end Generic
-
-set_option trace.Meta.isDefEq true in
-/-- The strict quotient map sends unit sections to unit sections.
-Source: Stacks 06YY, 0941. -/
-theorem coefficientOrdinaryQuotient_unitSection {m n : ℕ} (h : n ≤ m)
-    (X : scalarReductionSource l E W) (V : W.ProEtᵒᵖ) (x : X.val.obj V) :
-    coefficientRestrictionSection (normalizedDVRQuotient l E W h) _ V
-      (((coefficientOrdinaryQuotient l E W h).app X).val.app V
-        (coefficientIntegralScalarUnitSection l E W m X V x)) =
-      coefficientIntegralScalarUnitSection l E W n X V x := by
-  have hq : (coefficientOrdinaryQuotient l E W h).app X =
-      coefficientOrdinaryQuotientComponent l E W h X := by
-    unfold coefficientOrdinaryQuotient
-    exact (coefficientOrdinaryQuotient_exists l E W h).choose_spec.1 X
-  rw [hq]
-  unfold coefficientOrdinaryQuotientComponent coefficientOrdinaryQuotientNaturalTransformation
-    coefficientIntegralScalarUnitSection
-  exact coefficientQuotientNatTrans_unitSection (Bm := integralCoefficientSheaf l E W m)
-    (Bn := integralCoefficientSheaf l E W n)
+set_option maxHeartbeats 1600000 in
+-- Instantiating the generic calculation checks several large coefficient interfaces.
+/-- The finite presentations of a system tensor product commute with strict transitions.
+Source: Stacks 03EK, 07A4 and 0941. -/
+theorem OrdinaryModel.tensorPresentation_transition (M : OrdinaryModel l E W)
+    (P Q : CochainComplex (scalarReductionSource l E W) ℤ) {m n : ℕ} (h : n ≤ m) :
+    (NatTrans.mapHomologicalComplex (coefficientSequenceTransition l E W h) (.up ℤ)).app
+        ((coefficientTotalTensor.{u, t+1, t}
+          (coefficientSequenceTopology (Scheme.ProEt.topology W))
+          (coefficientSequenceCommRingSheaf l E W)).obj
+            ((M.quotient l E W).obj P, (M.quotient l E W).obj Q)) ≫
+      ((normalizedDVRModuleRes l E W h).mapHomologicalComplex (.up ℤ)).map
+        (M.tensorPresentation l E W n P Q).hom =
+    (M.tensorPresentation l E W m P Q).hom ≫
+      (NatTrans.mapHomologicalComplex (coefficientOrdinaryQuotient l E W h) (.up ℤ)).app
+        ((coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
+          (completedIntegralCommRingSheafUnrestricted l E W)).obj (P, Q)) := by
+  exact OrdinaryReductionTensor.tensorPresentation_transition
+    (hEm := coefficientFiniteExtensionAdditive l E W m)
+    (hEn := coefficientFiniteExtensionAdditive l E W n)
+    (hevm := coefficientSequenceEvaluation_additiveInstance l E W m)
+    (hevn := coefficientSequenceEvaluation_additiveInstance l E W n)
     ((sheafCompose (Scheme.ProEt.topology W)
       (forget₂ CommRingCat.{max u (t+1)} RingCat.{max u (t+1)})).map
         (completedIntegralCommRingProjectionUnrestricted l E W m))
     ((sheafCompose (Scheme.ProEt.topology W)
       (forget₂ CommRingCat.{max u (t+1)} RingCat.{max u (t+1)})).map
         (completedIntegralCommRingProjectionUnrestricted l E W n))
-    (normalizedDVRQuotient l E W h)
+    (normalizedDVRQuotient l E W h) (coefficientRestrictionComp l E W h)
     (coefficientOrdinaryScalarAdjunction l E W m) (coefficientOrdinaryScalarAdjunction l E W n)
-    (eqToIso (coefficientRestrictionComp l E W h))
-    (restrictScalars_eqToIso_inv_section (Bm := integralCoefficientSheaf l E W m)
-      (Bn := integralCoefficientSheaf l E W n) _ _ _ (coefficientRestrictionComp l E W h)) X V x
+    (coefficientOrdinaryQuotient l E W h) sorry
+    (coefficientSequenceTransition l E W h) h
+    (fun N U x ↦ coefficientEvaluationSection l E W N m U x)
+    (fun N U x ↦ coefficientEvaluationSection l E W N n U x)
+    (fun N U ↦ coefficientEvaluationSection_surjective l E W N m U)
+    sorry P Q
+    ((M.quotient l E W).obj P) ((M.quotient l E W).obj Q)
+    ((NatIso.mapHomologicalComplex (M.evaluation m) (.up ℤ)).app P)
+    ((NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).app P)
+    ((NatIso.mapHomologicalComplex (M.evaluation m) (.up ℤ)).app Q)
+    ((NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).app Q)
+    sorry sorry
+    (coefficientEvaluationTensorIso l E W m _ _)
+    sorry
+    (coefficientEvaluationTensorIso l E W n _ _)
+    sorry
+    (coefficientScalarTensorIso l E W m P Q) sorry
+    (coefficientScalarTensorIso l E W n P Q) sorry
 
 end
+end OrdinaryQuotient
 end WeilConjectures

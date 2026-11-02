@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerivedSectionsScalarHomZeroRepresentativeData
+import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerivedSectionsScalarHomZeroCycleUnitor
 
 @[expose] public section
 set_option autoImplicit false
@@ -58,6 +59,55 @@ theorem coefficientDerivedSectionsScalarHomZero_cycle_representative
         (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj M)).symm
         (coefficientIntegralHomEquiv l E W (DerivedCategory.Q.obj P)
           ((coefficientFiniteDerivedRestriction l E W n).obj (DerivedCategory.Q.obj M)) x) := by
+  have hUA := coefficientUnitComplex_isKFlat.{u} (Scheme.ProEt.topology W)
+    (completedIntegralCommRingSheafUnrestricted l E W)
+  let σ := coefficientHomUnitMapOfCycle.{u, t + 1, t} (Scheme.ProEt.topology W)
+    (completedIntegralCommRingSheafUnrestricted l E W) P N z
+  -- the class of `z` is the image of the unit class
+  have hcls : coefficientHomZeroClass.{u, t + 1, t, max (t + 2) (u + 1)} (Scheme.ProEt.topology W)
+      (completedIntegralCommRingSheafUnrestricted l E W) P N z =
+      (DerivedCategory.homologyFunctor AddCommGrpCat.{max u (t + 1)} 0).map
+        ((coefficientIntegralSections l E W).map
+          (DerivedCategory.Q.map σ ≫ (coefficientHomResolutionIso.{u, t + 1, t}
+            (Scheme.ProEt.topology W) (completedIntegralCommRingSheafUnrestricted l E W) P N).inv))
+        (coefficientUnitClass.{u} (Scheme.ProEt.topology W)
+          (completedIntegralCommRingSheafUnrestricted l E W)) := by
+    have h := coefficientHomZeroClass_cycleOfUnitMap.{u, t + 1, t} (Scheme.ProEt.topology W)
+      (completedIntegralCommRingSheafUnrestricted l E W) P N σ
+    rw [coefficientHomCycleOfUnitMap_unitMapOfCycle] at h
+    exact h
+  -- the H-zero class `x` as a morphism
+  have heA : coefficientIntegralHomEquiv l E W (DerivedCategory.Q.obj P)
+      ((coefficientFiniteDerivedRestriction l E W n).obj (DerivedCategory.Q.obj M)) x =
+      DerivedCategory.Q.map (coefficientUnitLeftUnitor.{u} (Scheme.ProEt.topology W)
+          (completedIntegralCommRingSheafUnrestricted l E W) P).inv ≫
+        (CoefficientTensorModels.iso.{u, t + 1, t} (Scheme.ProEt.topology W)
+          (completedIntegralCommRingSheafUnrestricted l E W) R.integralClosed
+          R.integralTensorModel (coefficientIntegralUnitComplex l E W) P hUA hP).hom ≫
+        (R.integralClosed.transpose _ _ _).symm
+          (DerivedCategory.Q.map σ ≫ (coefficientHomResolutionIso.{u, t + 1, t}
+            (Scheme.ProEt.topology W) (completedIntegralCommRingSheafUnrestricted l E W) P N).inv) ≫
+        eN.hom := by
+    have hn := (coefficientHomZeroEquiv_exists.{u, t + 1, t, max (t + 2) (u + 1)}
+      (Scheme.ProEt.topology W) (completedIntegralCommRingSheafUnrestricted l E W)).choose_spec.1.1
+        (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj N) (DerivedCategory.Q.obj P)
+        ((coefficientFiniteDerivedRestriction l E W n).obj (DerivedCategory.Q.obj M)) (𝟙 _) eN.hom
+        ((DerivedCategory.homologyFunctor AddCommGrpCat.{max u (t + 1)} 0).map
+          ((coefficientIntegralSections l E W).map
+            (DerivedCategory.Q.map σ ≫ (coefficientHomResolutionIso.{u, t + 1, t}
+              (Scheme.ProEt.topology W) (completedIntegralCommRingSheafUnrestricted l E W) P N).inv))
+          (coefficientUnitClass.{u} (Scheme.ProEt.topology W)
+            (completedIntegralCommRingSheafUnrestricted l E W)))
+    have h4 := coefficientHomZeroEquiv_unitClass_transpose.{u, t + 1, t} (Scheme.ProEt.topology W)
+      (completedIntegralCommRingSheafUnrestricted l E W) R.integralClosed R.integralTensorModel P N
+      hP ((R.integralClosed.transpose _ _ _).symm
+        (DerivedCategory.Q.map σ ≫ (coefficientHomResolutionIso.{u, t + 1, t}
+          (Scheme.ProEt.topology W) (completedIntegralCommRingSheafUnrestricted l E W) P N).inv))
+    rw [Equiv.apply_symm_apply] at h4
+    rw [← hx, hcls]
+    refine hn.trans ?_
+    rw [Category.id_comp]
+    exact congrArg (· ≫ eN.hom) h4
   sorry
 
 end WeilConjectures
