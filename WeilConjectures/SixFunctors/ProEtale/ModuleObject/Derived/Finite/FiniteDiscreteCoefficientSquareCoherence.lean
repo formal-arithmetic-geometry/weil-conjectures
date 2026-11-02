@@ -498,7 +498,7 @@ Source: Bhatt--Scholze, Lemma 5.4.1; Proposition 5.3.2
 (blueprint: lem-weil-pbc-finite-discrete-coefficient-square-coherence).
 
 Proof in words. Use finiteDiscreteCoefficientRestrictionIso_comp from
-WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteDiscreteCoefficientRestrictionCoherence for the specified restriction
+the module `FiniteDiscreteCoefficientRestrictionCoherence` for the specified restriction
 comparison. Its proof cancels the intermediate encoding isomorphism after forgetting
 module actions and uses naturality of restriction composition.
 Conjugate this identity through the adjunctions used

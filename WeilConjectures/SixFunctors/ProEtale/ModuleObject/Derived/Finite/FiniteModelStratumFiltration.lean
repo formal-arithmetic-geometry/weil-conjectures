@@ -402,6 +402,7 @@ pieces. Cokernels in the functor category express naturality with the opens fixe
 @[expose] public section
 
 set_option autoImplicit false
+set_option linter.privateModule false
 set_option backward.defeqAttrib.useBackward true
 
 universe u

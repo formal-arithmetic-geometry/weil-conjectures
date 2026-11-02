@@ -244,7 +244,6 @@ attribute [local irreducible] boundedConstructibleUpperStar boundedConstructible
   boundedConstructibleUpperStarLowerStarAdjunction boundedConstructiblePullbackSquareComparison
 
 variable {f g f' g'} in
-variable {f g f' g'} in
 /-- The base-change morphism `BC_sq` is the exchange morphism
 `CategoryTheory.Adjunction.exchangeRight` of the pullback comparison `θ_sq` under the
 adjunctions `Lf^* ⊣ Rf_*` and `Lf'^* ⊣ Rf'_*`. -/

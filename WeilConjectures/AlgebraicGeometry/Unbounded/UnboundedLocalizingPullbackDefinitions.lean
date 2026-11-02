@@ -22,7 +22,8 @@ Source: blueprint latest, sec-six-functors-basics/sk-prop-proper-base-change-unb
 sk-prop-proper-base-change-unbounded-pullback.proof.md, exactness, sums and localizing closures
 (blueprint: def-zl-unbounded-localizing-pullback).
 
-These two declarations are moved from `WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedLocalizingPullback` with their
+These two declarations are moved from
+`WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedLocalizingPullback` with their
 names, signatures, and bodies unchanged. The canonical shift is constructed from the
 existing exact-derived comparison; the proposition records the ambient and restricted
 preservation clauses without asserting them. The localizing hull and constant-model

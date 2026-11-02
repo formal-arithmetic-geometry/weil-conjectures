@@ -18,7 +18,8 @@ import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 /-! # The finite discrete coefficient realization and three-step comparisons
 
 The realization functor and the three-step diagram comparisons, split out of
-`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteDiscreteRealizationFunctor` so that they do not import the bounded
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteDiscreteRealizationFunctor`
+so that they do not import the bounded
 constructible six functors.
 -/
 

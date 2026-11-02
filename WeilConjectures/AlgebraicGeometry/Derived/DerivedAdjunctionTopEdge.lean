@@ -16,6 +16,7 @@ Source: Stacks, derived.tex, Tags 08J5 and 05TC; cohomology.tex, Tags 079W and 0
 
 @[expose] public section
 set_option autoImplicit false
+set_option linter.privateModule false
 set_option synthInstance.maxSize 2048
 universe u w
 open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite

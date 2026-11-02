@@ -58,7 +58,7 @@ def scalarRestrictionComp (a : Λ₀ ⟶ Λ₁) [IsMonHom a]
       ((Mod.comapComp (coefficientMap a T) (coefficientMap b T)).symm ≪≫
         Mod.comapCongr (coefficientMap_comp a b T).symm)
 
-attribute [local irreducible] scalarRestrictionComp scalarExtensionId
+attribute [local irreducible] scalarRestrictionComp
   scalarAdj Mod.extendRestrictAdjunction CondensedRing.upperStarLowerStarAdjunction
   Functor.leftDerivedFunctorCounit Functor.rightDerivedFunctorUnit
 
