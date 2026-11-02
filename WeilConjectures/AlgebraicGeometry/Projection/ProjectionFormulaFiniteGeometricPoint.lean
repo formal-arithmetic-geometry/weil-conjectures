@@ -23,6 +23,8 @@ import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapDualizable
 import Mathlib.CategoryTheory.MorphismProperty.Retract
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 
+set_option linter.privateModule false
+
 /-! # Proper projection formula over a geometric point
 
 Source: Stacks Project, Tags 0F0G and 0F12.
