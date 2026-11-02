@@ -13,6 +13,7 @@ import WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarRestrictionComplete
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChangeAdjunctionSupplement
 import WeilConjectures.AlgebraicGeometry.FiniteFreeDirectImage.FiniteFreeDirectImageCoherence
 import Mathlib.CategoryTheory.Preadditive.Biproducts
+import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsComapBiproduct
 
 /-! # Ambient operation comparisons for finite scalar extension
 
@@ -277,6 +278,48 @@ theorem pbcFlatKFlat_resolution (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
   exact (exactFunctor _ _).prop_of_iso
     (SheafOfModules.siteSheafTensorRightIso (pbcAdicCompletion T d) (L.X n)).symm (hf n)
 
+/-- Biproduct powers are exact: they are both `const ⋙ lim` and `const ⋙ colim`. -/
+private theorem finBiproductPow_exact {C : Type*} [Category C] [Preadditive C]
+    [HasFiniteBiproducts C] (d : ℕ) :
+    PreservesFiniteLimits (Functor.finBiproductPow C d) ∧
+    PreservesFiniteColimits (Functor.finBiproductPow C d) := by
+  let cL (X : C) : Cone ((Functor.const (Discrete (Fin d))).obj X) :=
+    ⟨⨁ fun _ : Fin d => X,
+      { app := fun j => biproduct.π (fun _ : Fin d => X) j.as
+        naturality := by rintro ⟨i⟩ ⟨j⟩ ⟨⟨rfl : i = j⟩⟩; simp }⟩
+  let iL (X : C) : (⨁ fun _ : Fin d => X) ≅ limit ((Functor.const (Discrete (Fin d))).obj X) :=
+    { hom := limit.lift _ (cL X)
+      inv := biproduct.lift fun j => limit.π ((Functor.const (Discrete (Fin d))).obj X) ⟨j⟩
+      hom_inv_id := biproduct.hom_ext _ _ fun j => by simp [cL]
+      inv_hom_id := limit.hom_ext fun ⟨j⟩ => by simp [cL] }
+  let eL : Functor.finBiproductPow C d ≅ (Functor.const (Discrete (Fin d)) : C ⥤ _) ⋙ lim :=
+    NatIso.ofComponents iL (by
+        intro X Y f
+        change (biproduct.map fun _ => f) ≫ limit.lift _ (cL Y) =
+          limit.lift _ (cL X) ≫ limMap ((Functor.const (Discrete (Fin d))).map f)
+        refine limit.hom_ext fun ⟨j⟩ => ?_
+        simp [cL])
+  let cC (X : C) : Cocone ((Functor.const (Discrete (Fin d))).obj X) :=
+    ⟨⨁ fun _ : Fin d => X,
+      { app := fun j => biproduct.ι (fun _ : Fin d => X) j.as
+        naturality := by rintro ⟨i⟩ ⟨j⟩ ⟨⟨rfl : i = j⟩⟩; simp }⟩
+  let iC (X : C) : (⨁ fun _ : Fin d => X) ≅ colimit ((Functor.const (Discrete (Fin d))).obj X) :=
+    { hom := biproduct.desc fun j => colimit.ι ((Functor.const (Discrete (Fin d))).obj X) ⟨j⟩
+      inv := colimit.desc _ (cC X)
+      hom_inv_id := biproduct.hom_ext' _ _ fun j => by simp [cC]
+      inv_hom_id := colimit.hom_ext fun ⟨j⟩ => by simp [cC] }
+  let eC : Functor.finBiproductPow C d ≅ (Functor.const (Discrete (Fin d)) : C ⥤ _) ⋙ colim :=
+    NatIso.ofComponents iC (by
+        intro X Y f
+        change (biproduct.map fun _ => f) ≫
+            biproduct.desc (fun j => colimit.ι ((Functor.const (Discrete (Fin d))).obj Y) ⟨j⟩) =
+          biproduct.desc (fun j => colimit.ι ((Functor.const (Discrete (Fin d))).obj X) ⟨j⟩) ≫
+            colimMap ((Functor.const (Discrete (Fin d))).map f)
+        refine biproduct.hom_ext' _ _ fun j => ?_
+        simp)
+  exact ⟨preservesFiniteLimits_of_natIso eL.symm, preservesFiniteColimits_of_natIso eC.symm⟩
+
+open MonoidalCategory in
 /-- The completed target integral coefficients are flat over the source ones.
 Source: Stacks Tag 03ER (blueprint: lem-pbc-scalar-ambient-operation-comparisons).
 Proof: by `pbcScalarCoefficient_finiteFree` the restricted unit is a finite product of
@@ -288,7 +331,40 @@ theorem pbcScalarCoefficient_flat (T : Scheme.{u}) :
       ((pbcRestrict (pbcScalarCoefficientMap l E F i T)).obj
         (SheafOfModules.unit ((adicLisseForget T).obj
           (pbcAdicCompletion T (pbcIntegralDatum l F))))) := by
-  sorry
+  classical
+  let : EssentiallySmall.{u + 1} T.ProEt := essentiallySmallSelf.{0} _
+  let : HasSheafify (ProEt.topology T) AddCommGrpCat.{u + 1} :=
+    GrothendieckTopology.hasSheafify_proEtTopology AddCommGrpCat.{u + 1} T
+  let : (ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
+    GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall.{u, u + 1,
+      u + 1, u + 2, u + 1} _
+  obtain ⟨d, ⟨b⟩⟩ := pbcScalarCoefficient_finiteFree l E F i T
+  let R := pbcAdicCompletion T (pbcIntegralDatum l E)
+  let := SheafOfModules.isMonoidal_W_independentCoefficients R
+  let := SheafOfModules.monoidalCategory R
+  let := SheafOfModules.symmetricCategory R
+  let 𝒜 := SheafOfModules.{u + 1} ((sheafCompose (ProEt.topology T)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)
+  have : MonoidalPreadditive 𝒜 := by
+    have (M : 𝒜) : (tensorLeft M).Additive := SheafOfModules.tensorLeft_additive_independent R M
+    have (M : 𝒜) : (tensorRight M).Additive :=
+      Functor.additive_of_iso (F := tensorLeft M) (BraidedCategory.tensorLeftIsoTensorRight M)
+    exact
+      { whiskerLeft_zero := fun {X Y Z} ↦ (tensorLeft X).map_zero Y Z
+        zero_whiskerRight := fun {X Y Z} ↦ (tensorRight X).map_zero Y Z
+        whiskerLeft_add := fun {X Y Z} f g ↦ (tensorLeft X).map_add (f := f) (g := g)
+        add_whiskerRight := fun {X Y Z} f g ↦ (tensorRight X).map_add (f := f) (g := g) }
+  let M : 𝒜 := (pbcRestrict (pbcScalarCoefficientMap l E F i T)).obj
+    (SheafOfModules.unit ((adicLisseForget T).obj
+      (pbcAdicCompletion T (pbcIntegralDatum l F))))
+  have : HasFiniteBiproducts 𝒜 := HasFiniteBiproducts.of_hasFiniteProducts
+  let e : M ≅ ⨁ fun _ : Fin d ↦ 𝟙_ 𝒜 := b ≪≫ (biproduct.isoProduct _).symm
+  let e₂ : tensorRight M ≅ Functor.finBiproductPow 𝒜 d :=
+    (BraidedCategory.tensorLeftIsoTensorRight M).symm ≪≫
+      MonoidalCategory.tensorLeftIsoOfIso e ≪≫ MonoidalCategory.tensorLeftBiproductPowUnitIso d
+  obtain ⟨h₁, h₂⟩ := finBiproductPow_exact (C := 𝒜) d
+  exact (exactFunctor _ _).prop_of_iso (SheafOfModules.siteSheafTensorRightIso R M ≪≫ e₂).symm
+    ((exactFunctor_iff _).2 ⟨h₁, h₂⟩)
 
 /-- Restriction along the completed scalar inclusion preserves flat-term K-flat complexes.
 Source: Stacks Tags 06YY and 0943 (blueprint: lem-pbc-scalar-ambient-operation-comparisons).
