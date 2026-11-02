@@ -278,10 +278,32 @@ flat-term K-flat `L`; postcompose with the invertible map
 `RhoNormalization` (at `L` and at `pull L`), `StratumReductionFormula`,
 `ReductionPullNormalized`, and `mapDerivedCategorySquareIso_hom_app_Q` for `alpha` and
 `exchangeResPull`; both become `Π ≫ Q.map _` with the chain maps identified by
-`ordinaryRho_pull`. Attempted: all the normalization facts elaborate, but applying the
-square formula to `exchangeModuleResPull` costs about 60 s of kernel checking and the
-assembled proof exceeds the memory limit (instance-path mismatch between the tower
-derived-category instances), so it is left as a separate statement. -/
+`ordinaryRho_pull`. The chain-map identity at degree `i` and level `n` is
+`ordinaryRho_pull` at `L.X i`.
+Attempted: all the normalization facts elaborate, but the kernel is too slow on the
+concrete derived-category terms. Measurements for the square formula at
+`exchangeModuleResPull` and a tower complex `Z`:
+* `have := mapDerivedCategorySquareIso_hom_app_Q (exchangeModuleResPull d u) Z` alone costs
+  55-65 s of kernel time. The same statement written directly in this file costs 4 s.
+* The cost is not the argument check: kernel `isDefEq` of each argument type with its
+  binder type, and a separate kernel check of each argument, are all under 0.3 s. Checking
+  application prefixes grows from 2 s to 10 s once the concrete `Abelian` arguments are
+  supplied. A subterm drill-down finds the expensive node in the instantiated statement:
+  `G₂.mapDerivedCategory.map (G₁.mapDerivedCategoryFactors.hom.app K) ≫
+  G₂.mapDerivedCategoryFactors.hom.app _` takes about 5 s, while each factor is cheap.
+  This suggests that matching the middle object, `(G₁.mapHomologicalComplex _ ⋙ Q).obj K`
+  against `Q.obj (G₁.mapHomologicalComplex _ |>.obj K)`, unfolds the concrete
+  `HasDerivedCategory.standard` instances.
+* Neither of these fixes helps: `attribute [-instance] SemilinearSections.moduleAbelian
+  SemilinearSections.hasDerived flatConstantModulesAbelian`, which makes the `Abelian`
+  instances agree up to proofs (61 s); and also passing `pbcTowers_hasDerivedCategory` and
+  `exchangeTowers_hasDerived` explicitly (107 s).
+* Rerunning the square-formula tactic proof on the concrete functors makes the kernel time
+  out deterministically after 350 s.
+Suggested route: state the whole argument as one generic lemma, with the categories,
+instances, functors and isomorphisms as variables and the normalization equations as
+hypotheses. Then close this goal with a single `exact`, so that no instantiated
+intermediate statement (a `have` type or a `rw` motive) is re-checked by the kernel. -/
 theorem rho_reductionTowerPullbackIso {U V : Scheme.{t}} (u : U ⟶ V) (M : d.derived V) :
     (exchangeTowerRes d U).map ((d.reductionTowerPullbackIso u).hom.app M) ≫
         (rho d U).hom.app ((d.pull u).obj M) ≫
