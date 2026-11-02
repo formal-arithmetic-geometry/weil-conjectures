@@ -12,6 +12,8 @@ import WeilConjectures.CategoryTheory.Ringed.RingedDerivedRestrictionGeneralSupp
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
 import Mathlib.CategoryTheory.Sites.LocalProperties
 
+set_option linter.privateModule false
+
 /-!
 # IntegralLisseTowerEffective
 
