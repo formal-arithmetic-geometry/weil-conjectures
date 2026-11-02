@@ -25,6 +25,7 @@ public import Mathlib.CategoryTheory.Sites.Equivalence
 public import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
 public import Mathlib.CategoryTheory.Limits.EssentiallySmall
 public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
+public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import WeilConjectures.AlgebraicGeometry.Etale.ProEtale.EtaleProEtaleScalarMate
 /-!
 # Canonical étale open tensor and coefficient comparison data

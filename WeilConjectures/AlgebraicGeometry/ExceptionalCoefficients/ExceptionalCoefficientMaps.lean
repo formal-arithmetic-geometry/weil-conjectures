@@ -13,6 +13,8 @@ public import WeilConjectures.AlgebraicGeometry.Pur.PurEtaleScalarMateProjection
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 public import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriek
+public import WeilConjectures.Algebra.Homology.HomotopyCategory.OplaxMonoidalUnit
 import WeilConjectures.Algebra.Category.ModuleCat.DerivedBaseChange
 import WeilConjectures.CategoryTheory.ExactRightDerivedAdjointKFlatRepresentative
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Monoidal

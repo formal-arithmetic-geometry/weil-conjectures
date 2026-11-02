@@ -15,6 +15,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleSiteComparisonFiniteLe
 import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.SixFunctors.Etale.Derived.Point
 import Mathlib.RingTheory.Finiteness.Cardinality
+import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 
 /-! Source: Weil blueprint, `def-weil-finite-coefficient-point`, order 1509
 (blueprint: lem-weil-point-sections-finite-torsion). -/

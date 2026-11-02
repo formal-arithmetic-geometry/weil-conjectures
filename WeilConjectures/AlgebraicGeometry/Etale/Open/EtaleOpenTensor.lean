@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Etale.Open.EtaleOpenTensorDefs
+public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 import WeilConjectures.AlgebraicGeometry.Etale.Open.EtaleOpenScalarCoherence
 import WeilConjectures.AlgebraicGeometry.Etale.Open.EtaleOpenKFlat
 import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMapProjection

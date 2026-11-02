@@ -10,6 +10,7 @@ import WeilConjectures.CategoryTheory.Adjunction.Derived.DerivedAdjointCochainCo
 import WeilConjectures.Algebra.Category.ModuleCat.DerivedBaseChange
 import WeilConjectures.CategoryTheory.Sites.ReductionFlat
 import WeilConjectures.CategoryTheory.DerivedCategory.KFlatAcyclic
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 
 /-! Existence of the normalized derived scalar/pullback comparison.
 

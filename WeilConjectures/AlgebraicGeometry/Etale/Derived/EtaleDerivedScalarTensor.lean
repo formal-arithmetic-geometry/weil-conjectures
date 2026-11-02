@@ -60,6 +60,7 @@ import Mathlib.CategoryTheory.Functor.Derived.PointwiseRightDerived
 import WeilConjectures.CategoryTheory.Sites.SheafAdjunctionUnitProjection
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction
 import WeilConjectures.CategoryTheory.DerivedCategory.KFlatAcyclic
+import Mathlib.CategoryTheory.Sites.Point.IsMonoidalW
 
 /-!
 # Ordinary derived scalar extension in the constant-coefficient presentation

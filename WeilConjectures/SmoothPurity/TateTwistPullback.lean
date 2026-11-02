@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SmoothPurity.TateTwistBoundedConstructible
 public import WeilConjectures.TateTwist.Pullback
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 
 /-!
 # Pullback of the bounded constructible Tate twists

@@ -14,6 +14,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import WeilConjectures.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageForgetComparison
 import WeilConjectures.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FilteredColimit
+import WeilConjectures.Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-!
 # Qcqs higher direct images preserve a fixed set of torsion primes

@@ -30,6 +30,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.DirectImageVanishing
 import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.CohomologicalDimension
 import Mathlib.RingTheory.Finiteness.Cardinality
 import WeilConjectures.SixFunctors.Etale.Derived.DirectImageAmplitude
+import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CoefficientDevissage
 
 /-!
 # Finite coefficient change for ordinary direct image

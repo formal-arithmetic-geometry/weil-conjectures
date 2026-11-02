@@ -16,6 +16,7 @@ public import WeilConjectures.SixFunctors.BaseChange.Square
 public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleSiteComparisonSupplement
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStar
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.SectionsFunctor
 import WeilConjectures.AlgebraicGeometry.Derived.DerivedScalarRestrictionPullbackMate
 import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapMate
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarProjComparison
