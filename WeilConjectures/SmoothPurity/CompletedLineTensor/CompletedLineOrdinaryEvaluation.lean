@@ -184,7 +184,7 @@ private theorem sheaf_square (L : integralTowerModules l E X)
       (sheaf l F X N (-m)).map ((d.ordinarySheaf m).hom.app M) ≫
       (evaluation l F X N m).hom.app ((completedOrdinaryScalarExtension l E F ι X).obj M) =
     (completedOrdinaryScalarExtension l E F ι X).map ((evaluation l E X L m).hom.app M) := by
-  letI : EssentiallySmall.{max u (t + 1)} X.ProEt := essentiallySmallSelf _
+  let : EssentiallySmall.{max u (t + 1)} X.ProEt := essentiallySmallSelf _
   obtain ⟨a, ha⟩ := scalarAdjunction l E X F ι
   apply (a.homEquiv _ _).injective
   obtain ⟨_, _, _, hext⟩ := SheafOfModules.tensor_trilinear_universal
@@ -195,7 +195,8 @@ private theorem sheaf_square (L : integralTowerModules l E X)
   let Z := (sheaf l E X L (-m)).obj ((sheaf l E X L m).obj M)
   let y : Z.val.obj U := tmul l E X L (-m) ((sheaf l E X L m).obj M) U (tmul l E X L m M U x p) q
   have key (T : integralTowerModules l F X) (f : O.obj Z ⟶ T) :
-      (a.homEquiv _ _ f).val.app U y = f.val.app U (completedScalarTensorSection l E F ι X Z U 1 y) := by
+      (a.homEquiv _ _ f).val.app U y =
+        f.val.app U (completedScalarTensorSection l E F ι X Z U 1 y) := by
     rw [Adjunction.homEquiv_unit]
     exact congrArg (fun z ↦ f.val.app U z) (ha Z U y)
   change (a.homEquiv _ _ _).val.app U y = (a.homEquiv _ _ _).val.app U y
@@ -277,11 +278,13 @@ private theorem epsilon_app_Q (L : integralTowerModules l E X) [L.IsFiniteLocall
     rw [h3]
     exact h2
   rw [he, h23, ← h1, ← h4]
-  simp only [Category.assoc, Functor.map_comp]
+  erw [Functor.map_comp]
+  simp only [Category.assoc]
   erw [Iso.inv_hom_id_app_assoc]
   rfl
 
 set_option backward.isDefEq.respectTransparency false in
+attribute [local semireducible] completedOrdinaryScalarComplex in
 /-- Components of the termwise ordinary comparison.
 Source: Stacks 06YY (blueprint: lem-pur-completed-line-ordinary-evaluation). -/
 private theorem comparisonComplex_hom_f (L : integralTowerModules l E X)
@@ -291,12 +294,10 @@ private theorem comparisonComplex_hom_f (L : integralTowerModules l E X)
       completedOrdinaryScalarExtension l E F ι X ⋙ sheaf l F X N m)
     (c : CochainComplex (integralTowerModules l E X) ℤ) (i : ℤ) :
     ((comparisonComplex l E X F ι L N m e).hom.app c).f i = e.hom.app (c.X i) := by
-  first
-  | rfl
-  | (unfold comparisonComplex; rfl)
-  | simp [comparisonComplex]
+  rfl
 
 set_option backward.isDefEq.respectTransparency false in
+attribute [local semireducible] completedOrdinaryScalarComplex in
 /-- Termwise ordinary comparisons commute with termwise evaluation.
 Source: Stacks 03EO (blueprint: lem-pur-completed-line-ordinary-evaluation). -/
 private theorem chain_square (L : integralTowerModules l E X)
@@ -482,12 +483,13 @@ theorem ordinary_evaluation_compatibility (L : integralTowerModules l E X)
     simp only [Functor.map_comp, Category.assoc]
     rw [counit_naturality l E X F ι (evaluationComplex l E X L m c),
       ← chain_square l E X F ι L N b d hd m c]
-    simp only [Functor.map_comp, Category.assoc]
+    simp only [Functor.map_comp]
     rw [reassoc_of% (pair_counit l E X F ι L N b d hd (-m) ((complex l E X L m).obj c))]
     have nf : (factors l F X N (-m)).hom.app (O.obj ((complex l E X L m).obj c)) ≫
         Q'.map ((complex l F X N (-m)).map
           ((comparisonComplex l E X F ι L N m (d.ordinarySheaf m)).hom.app c)) =
-        (T' (-m)).map (Q'.map ((comparisonComplex l E X F ι L N m (d.ordinarySheaf m)).hom.app c)) ≫
+        (T' (-m)).map (Q'.map
+          ((comparisonComplex l E X F ι L N m (d.ordinarySheaf m)).hom.app c)) ≫
           (factors l F X N (-m)).hom.app ((complex l F X N m).obj (O.obj c)) :=
       ((factors l F X N (-m)).hom.naturality _).symm
     rw [reassoc_of% nf]
@@ -499,7 +501,8 @@ theorem ordinary_evaluation_compatibility (L : integralTowerModules l E X)
     rw [reassoc_of% nΩ]
     have hm : (T' (-m)).map (C.map ((factors l E X L m).hom.app c)) ≫
         (T' (-m)).map (κ ((complex l E X L m).obj c)) ≫
-        (T' (-m)).map (Q'.map ((comparisonComplex l E X F ι L N m (d.ordinarySheaf m)).hom.app c)) =
+        (T' (-m)).map (Q'.map
+          ((comparisonComplex l E X F ι L N m (d.ordinarySheaf m)).hom.app c)) =
         (T' (-m)).map ((d.ordinary m).hom.app (Q.obj c)) ≫
           (T' (-m)).map ((T' m).map (κ c)) ≫
           (T' (-m)).map ((factors l F X N m).hom.app (O.obj c)) := by
@@ -516,6 +519,7 @@ theorem ordinary_evaluation_compatibility (L : integralTowerModules l E X)
         (epsilon l F X N m).hom.app (C.obj (Q.obj c)) ≫ κ c :=
       (epsilon l F X N m).hom.naturality (κ c)
     rw [hn]
+  have hloc := integralOperationsGoodLocalization_isLocalization l E X
   have hess : (integralOperationsGoodLocalization l E X).EssSurj :=
     Localization.essSurj _ ((HomologicalComplex.quasiIso (integralTowerModules l E X)
       (.up ℤ)).inverseImage (integralOperationsGoodComplex l E X).ι)
@@ -549,7 +553,7 @@ theorem ordinary_evaluation_compatibility (L : integralTowerModules l E X)
       (epsilon l E X L m).hom.app (DerivedCategory.Q.obj P.obj) ≫ e.hom :=
     (epsilon l E X L m).hom.naturality _
   rw [reassoc_of% n1, ← Functor.map_comp_assoc, n2, Functor.map_comp, Category.assoc,
-    reassoc_of% n3, ← Functor.map_comp, n4, Functor.map_comp, ← reassoc_of% h]
+    n3, ← Functor.map_comp, n4, Functor.map_comp, ← reassoc_of% h]
 
 end CompletedLineTensor
 end WeilConjectures

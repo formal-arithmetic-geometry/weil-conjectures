@@ -269,6 +269,203 @@ theorem pairCategory_exists_iso_of_tr [IsDirectedOrder I] {A M : S.PairCategory}
     change StageSystem.PairCategory.mkHom _ _ _ _ = _
     rw [← StageSystem.PairCategory.mkHom_tr h, htr]
 
+/-- A transport-compatible family of stagewise isomorphisms between two objects of the pair
+category, given at every stage above both of their stages, defines an isomorphism of the pair
+category represented at every such stage by the given family. -/
+theorem pairCategory_exists_iso_of_tr₂ [IsDirectedOrder I] {A B : S.PairCategory}
+    (rep : ∀ {L : I} (hA : A.stage ≤ L) (hB : B.stage ≤ L), A.toStage hA ≅ B.toStage hB)
+    (htr : ∀ {L L' : I} (hA : A.stage ≤ L) (hB : B.stage ≤ L) (k : L ≤ L'),
+      S.tr k (rep hA hB).hom = (rep (hA.trans k) (hB.trans k)).hom) :
+    ∃ d : A ≅ B, ∀ (L : I) (hA : A.stage ≤ L) (hB : B.stage ≤ L),
+      d.hom = StageSystem.PairCategory.mkHom L hA hB (rep hA hB).hom := by
+  obtain ⟨j, hAj, hBj⟩ := exists_ge_ge A.stage B.stage
+  have key : ∀ (L : I) (hA : A.stage ≤ L) (hB : B.stage ≤ L),
+      StageSystem.PairCategory.mkHom j hAj hBj (rep hAj hBj).hom =
+        StageSystem.PairCategory.mkHom L hA hB (rep hA hB).hom := by
+    intro L hA hB
+    obtain ⟨p, hjp, hLp⟩ := exists_ge_ge j L
+    rw [← StageSystem.PairCategory.mkHom_tr hjp, ← StageSystem.PairCategory.mkHom_tr hLp,
+      htr, htr]
+  refine ⟨⟨StageSystem.PairCategory.mkHom j hAj hBj (rep hAj hBj).hom,
+    StageSystem.PairCategory.mkHom j hBj hAj (rep hAj hBj).inv, ?_, ?_⟩, ?_⟩
+  · rw [StageSystem.PairCategory.mkHom_comp_mkHom, Iso.hom_inv_id,
+      ← StageSystem.PairCategory.id_eq_mkHom]
+  · rw [StageSystem.PairCategory.mkHom_comp_mkHom, Iso.inv_hom_id,
+      ← StageSystem.PairCategory.id_eq_mkHom]
+  · intro L hA hB
+    exact key L hA hB
+
+/-- The descent endpoint identifying the transition of a stagewise tensor with the tensor of
+the transitions. -/
+def stageEndpoint {p q s : I} (hp : p ≤ s) (hq : q ≤ s) (x : C p) (y : C q) {L : I}
+    (h : s ≤ L) :
+    (S.T h).obj ((T s).obj ((S.T hp).obj x, (S.T hq).obj y)) ≅
+      (T L).obj ((S.T (hp.trans h)).obj x, (S.T (hq.trans h)).obj y) :=
+  (c h).app _ ≪≫ (T L).mapIso (Iso.prod ((S.assoc hp h).app x) ((S.assoc hq h).app y))
+
+/-- Transport of the descent endpoint along a further stage transition. -/
+theorem stageEndpoint_transport (tower : StageTensorTower S T c)
+    {p q s : I} (hp : p ≤ s) (hq : q ≤ s) (x : C p) (y : C q) {L L' : I}
+    (h : s ≤ L) (k : L ≤ L') :
+    (S.T k).map (stageEndpoint S T c hp hq x y h).hom ≫
+      (c k).hom.app ((S.T (hp.trans h)).obj x, (S.T (hq.trans h)).obj y) ≫
+      (T L').map (Prod.mkHom ((S.assoc (hp.trans h) k).hom.app x)
+        ((S.assoc (hq.trans h) k).hom.app y)) =
+    (S.assoc h k).hom.app _ ≫ (stageEndpoint S T c hp hq x y (h.trans k)).hom := by
+  let G := S.T k
+  have hn : G.map ((T L).map (Prod.mkHom ((S.assoc hp h).hom.app x)
+      ((S.assoc hq h).hom.app y))) ≫
+      (c k).hom.app ((S.T (hp.trans h)).obj x, (S.T (hq.trans h)).obj y) =
+      (c k).hom.app ((S.T h).obj ((S.T hp).obj x), (S.T h).obj ((S.T hq).obj y)) ≫
+        (T L').map (Prod.mkHom (G.map ((S.assoc hp h).hom.app x))
+          (G.map ((S.assoc hq h).hom.app y))) :=
+    (c k).hom.naturality _
+  simp only [stageEndpoint, Iso.trans_hom, Functor.mapIso_hom, Iso.prod_hom, Iso.app_hom,
+    Functor.map_comp, Category.assoc]
+  rw [reassoc_of% hn, map_mkHom_comp, S.cocycle hp h k x, S.cocycle hq h k y,
+    ← map_mkHom_comp, reassoc_of% (tower h k ((S.T hp).obj x) ((S.T hq).obj y))]
+
+/-- The left-nested common-stage tensor identification at a stage `L`. -/
+def stageLeftNested {m₁ m₂ m₃ s₁ s₂ : I} (h₁ : m₁ ≤ s₁) (h₂ : m₂ ≤ s₁) (g₁ : s₁ ≤ s₂)
+    (g₃ : m₃ ≤ s₂) (x : C m₁) (y : C m₂) (z : C m₃) {L : I} (h : s₂ ≤ L) :
+    (S.T h).obj ((T s₂).obj ((S.T g₁).obj ((T s₁).obj ((S.T h₁).obj x, (S.T h₂).obj y)),
+      (S.T g₃).obj z)) ≅
+      (T L).obj ((T L).obj ((S.T (h₁.trans (g₁.trans h))).obj x,
+        (S.T (h₂.trans (g₁.trans h))).obj y), (S.T (g₃.trans h)).obj z) :=
+  stageEndpoint S T c g₁ g₃ _ z h ≪≫
+    (T L).mapIso (Iso.prod (stageEndpoint S T c h₁ h₂ x y (g₁.trans h)) (Iso.refl _))
+
+/-- The right-nested common-stage tensor identification at a stage `L`. -/
+def stageRightNested {m₁ m₂ m₃ t₁ t₂ : I} (f₂ : m₂ ≤ t₁) (f₃ : m₃ ≤ t₁) (f₁ : m₁ ≤ t₂)
+    (e₁ : t₁ ≤ t₂) (x : C m₁) (y : C m₂) (z : C m₃) {L : I} (h : t₂ ≤ L) :
+    (S.T h).obj ((T t₂).obj ((S.T f₁).obj x,
+      (S.T e₁).obj ((T t₁).obj ((S.T f₂).obj y, (S.T f₃).obj z)))) ≅
+      (T L).obj ((S.T (f₁.trans h)).obj x, (T L).obj ((S.T (f₂.trans (e₁.trans h))).obj y,
+        (S.T (f₃.trans (e₁.trans h))).obj z)) :=
+  stageEndpoint S T c f₁ e₁ x _ h ≪≫
+    (T L).mapIso (Iso.prod (Iso.refl _) (stageEndpoint S T c f₂ f₃ y z (e₁.trans h)))
+
+theorem stageLeftNested_transport (tower : StageTensorTower S T c)
+    {m₁ m₂ m₃ s₁ s₂ : I} (h₁ : m₁ ≤ s₁) (h₂ : m₂ ≤ s₁) (g₁ : s₁ ≤ s₂)
+    (g₃ : m₃ ≤ s₂) (x : C m₁) (y : C m₂) (z : C m₃) {L L' : I} (h : s₂ ≤ L) (k : L ≤ L') :
+    (S.T k).map (stageLeftNested S T c h₁ h₂ g₁ g₃ x y z h).hom ≫
+      (c k).hom.app ((T L).obj ((S.T (h₁.trans (g₁.trans h))).obj x,
+        (S.T (h₂.trans (g₁.trans h))).obj y), (S.T (g₃.trans h)).obj z) ≫
+      (T L').map (Prod.mkHom ((c k).hom.app ((S.T (h₁.trans (g₁.trans h))).obj x,
+        (S.T (h₂.trans (g₁.trans h))).obj y)) (𝟙 _)) ≫
+      (T L').map (Prod.mkHom ((T L').map (Prod.mkHom
+        ((S.assoc (h₁.trans (g₁.trans h)) k).hom.app x)
+        ((S.assoc (h₂.trans (g₁.trans h)) k).hom.app y)))
+        ((S.assoc (g₃.trans h) k).hom.app z)) =
+    (S.assoc h k).hom.app _ ≫ (stageLeftNested S T c h₁ h₂ g₁ g₃ x y z (h.trans k)).hom := by
+  let G := S.T k
+  have e₁ := stageEndpoint_transport S T c tower h₁ h₂ x y (g₁.trans h) k
+  have e₂ := stageEndpoint_transport S T c tower g₁ g₃ ((T s₁).obj ((S.T h₁).obj x,
+    (S.T h₂).obj y)) z h k
+  have hn : G.map ((T L).map (Prod.mkHom (stageEndpoint S T c h₁ h₂ x y (g₁.trans h)).hom
+      (𝟙 ((S.T (g₃.trans h)).obj z)))) ≫
+      (c k).hom.app ((T L).obj ((S.T (h₁.trans (g₁.trans h))).obj x,
+        (S.T (h₂.trans (g₁.trans h))).obj y), (S.T (g₃.trans h)).obj z) =
+      (c k).hom.app _ ≫ (T L').map (Prod.mkHom
+        (G.map (stageEndpoint S T c h₁ h₂ x y (g₁.trans h)).hom)
+        (G.map (𝟙 ((S.T (g₃.trans h)).obj z)))) :=
+    (c k).hom.naturality _
+  simp only [stageLeftNested, Iso.trans_hom, Functor.mapIso_hom, Iso.prod_hom, Iso.refl_hom,
+    Functor.map_comp, Category.assoc]
+  rw [reassoc_of% hn, map_mkHom_comp_assoc', map_mkHom_comp]
+  have hc1 := e₁
+  rw [← Category.assoc] at hc1
+  rw [hc1, Functor.map_id, Category.id_comp, Category.id_comp,
+    ← Category.comp_id ((S.assoc (g₃.trans h) k).hom.app z), ← map_mkHom_comp, reassoc_of% e₂]
+
+theorem stageRightNested_transport (tower : StageTensorTower S T c)
+    {m₁ m₂ m₃ t₁ t₂ : I} (f₂ : m₂ ≤ t₁) (f₃ : m₃ ≤ t₁) (f₁ : m₁ ≤ t₂)
+    (e₁ : t₁ ≤ t₂) (x : C m₁) (y : C m₂) (z : C m₃) {L L' : I} (h : t₂ ≤ L) (k : L ≤ L') :
+    (S.T k).map (stageRightNested S T c f₂ f₃ f₁ e₁ x y z h).hom ≫
+      (c k).hom.app ((S.T (f₁.trans h)).obj x, (T L).obj ((S.T (f₂.trans (e₁.trans h))).obj y,
+        (S.T (f₃.trans (e₁.trans h))).obj z)) ≫
+      (T L').map (Prod.mkHom (𝟙 _) ((c k).hom.app ((S.T (f₂.trans (e₁.trans h))).obj y,
+        (S.T (f₃.trans (e₁.trans h))).obj z))) ≫
+      (T L').map (Prod.mkHom ((S.assoc (f₁.trans h) k).hom.app x)
+        ((T L').map (Prod.mkHom
+        ((S.assoc (f₂.trans (e₁.trans h)) k).hom.app y)
+        ((S.assoc (f₃.trans (e₁.trans h)) k).hom.app z)))) =
+    (S.assoc h k).hom.app _ ≫ (stageRightNested S T c f₂ f₃ f₁ e₁ x y z (h.trans k)).hom := by
+  let G := S.T k
+  have e₁' := stageEndpoint_transport S T c tower f₂ f₃ y z (e₁.trans h) k
+  have e₂ := stageEndpoint_transport S T c tower f₁ e₁ x ((T t₁).obj ((S.T f₂).obj y,
+    (S.T f₃).obj z)) h k
+  have hn : G.map ((T L).map (Prod.mkHom (𝟙 ((S.T (f₁.trans h)).obj x))
+      (stageEndpoint S T c f₂ f₃ y z (e₁.trans h)).hom)) ≫
+      (c k).hom.app ((S.T (f₁.trans h)).obj x, (T L).obj ((S.T (f₂.trans (e₁.trans h))).obj y,
+        (S.T (f₃.trans (e₁.trans h))).obj z)) =
+      (c k).hom.app _ ≫ (T L').map (Prod.mkHom
+        (G.map (𝟙 ((S.T (f₁.trans h)).obj x)))
+        (G.map (stageEndpoint S T c f₂ f₃ y z (e₁.trans h)).hom)) :=
+    (c k).hom.naturality _
+  simp only [stageRightNested, Iso.trans_hom, Functor.mapIso_hom, Iso.prod_hom, Iso.refl_hom,
+    Functor.map_comp, Category.assoc]
+  rw [reassoc_of% hn, map_mkHom_comp_assoc', map_mkHom_comp]
+  have hc1 := e₁'
+  rw [← Category.assoc] at hc1
+  rw [hc1, Functor.map_id, Category.id_comp, Category.id_comp,
+    ← Category.comp_id ((S.assoc (f₁.trans h) k).hom.app x), ← map_mkHom_comp, reassoc_of% e₂]
+
+/-- The stagewise representative of the common-stage associator. -/
+def stageAssociatorRep
+    (α : ∀ i (X Y Z : C i), (T i).obj ((T i).obj (X, Y), Z) ≅ (T i).obj (X, (T i).obj (Y, Z)))
+    {m₁ m₂ m₃ s₁ s₂ t₁ t₂ : I} (h₁ : m₁ ≤ s₁) (h₂ : m₂ ≤ s₁) (g₁ : s₁ ≤ s₂) (g₃ : m₃ ≤ s₂)
+    (f₂ : m₂ ≤ t₁) (f₃ : m₃ ≤ t₁) (f₁ : m₁ ≤ t₂) (e₁ : t₁ ≤ t₂)
+    (x : C m₁) (y : C m₂) (z : C m₃) {L : I} (hS : s₂ ≤ L) (hT : t₂ ≤ L) :
+    (S.T hS).obj ((T s₂).obj ((S.T g₁).obj ((T s₁).obj ((S.T h₁).obj x, (S.T h₂).obj y)),
+      (S.T g₃).obj z)) ≅
+    (S.T hT).obj ((T t₂).obj ((S.T f₁).obj x,
+      (S.T e₁).obj ((T t₁).obj ((S.T f₂).obj y, (S.T f₃).obj z)))) :=
+  stageLeftNested S T c h₁ h₂ g₁ g₃ x y z hS ≪≫ α L _ _ _ ≪≫
+    (stageRightNested S T c f₂ f₃ f₁ e₁ x y z hT).symm
+
+/-- Transport of the stagewise associator representatives. -/
+theorem stageAssociatorRep_tr (tower : StageTensorTower S T c)
+    (α : ∀ i (X Y Z : C i), (T i).obj ((T i).obj (X, Y), Z) ≅ (T i).obj (X, (T i).obj (Y, Z)))
+    (hα : ∀ i {X X' Y Y' Z Z' : C i} (f : X ⟶ X') (g : Y ⟶ Y') (h : Z ⟶ Z'),
+      (T i).map (Prod.mkHom ((T i).map (Prod.mkHom f g)) h) ≫ (α i X' Y' Z').hom =
+        (α i X Y Z).hom ≫ (T i).map (Prod.mkHom f ((T i).map (Prod.mkHom g h))))
+    (hAS : ∀ {i j : I} (h : i ≤ j) (X Y Z : C i),
+      (S.T h).map (α i X Y Z).hom ≫ (c h).hom.app (X, (T i).obj (Y, Z)) ≫
+        (T j).map (Prod.mkHom (𝟙 _) ((c h).hom.app (Y, Z))) =
+      (c h).hom.app ((T i).obj (X, Y), Z) ≫ (T j).map (Prod.mkHom ((c h).hom.app (X, Y)) (𝟙 _)) ≫
+        (α j ((S.T h).obj X) ((S.T h).obj Y) ((S.T h).obj Z)).hom)
+    {m₁ m₂ m₃ s₁ s₂ t₁ t₂ : I} (h₁ : m₁ ≤ s₁) (h₂ : m₂ ≤ s₁) (g₁ : s₁ ≤ s₂) (g₃ : m₃ ≤ s₂)
+    (f₂ : m₂ ≤ t₁) (f₃ : m₃ ≤ t₁) (f₁ : m₁ ≤ t₂) (e₁ : t₁ ≤ t₂)
+    (x : C m₁) (y : C m₂) (z : C m₃) {L L' : I} (hS : s₂ ≤ L) (hT : t₂ ≤ L) (k : L ≤ L') :
+    S.tr k (stageAssociatorRep S T c α h₁ h₂ g₁ g₃ f₂ f₃ f₁ e₁ x y z hS hT).hom =
+      (stageAssociatorRep S T c α h₁ h₂ g₁ g₃ f₂ f₃ f₁ e₁ x y z (hS.trans k)
+        (hT.trans k)).hom := by
+  let G := S.T k
+  have LT := stageLeftNested_transport S T c tower h₁ h₂ g₁ g₃ x y z hS k
+  have RT := stageRightNested_transport S T c tower f₂ f₃ f₁ e₁ x y z hT k
+  have hA := hAS k ((S.T (h₁.trans (g₁.trans hS))).obj x)
+    ((S.T (h₂.trans (g₁.trans hS))).obj y) ((S.T (g₃.trans hS)).obj z)
+  have hn : (T L').map (Prod.mkHom ((T L').map (Prod.mkHom
+      ((S.assoc (h₁.trans (g₁.trans hS)) k).hom.app x)
+      ((S.assoc (h₂.trans (g₁.trans hS)) k).hom.app y))) ((S.assoc (g₃.trans hS) k).hom.app z)) ≫
+      (α L' ((S.T ((h₁.trans (g₁.trans hS)).trans k)).obj x)
+        ((S.T ((h₂.trans (g₁.trans hS)).trans k)).obj y)
+        ((S.T ((g₃.trans hS).trans k)).obj z)).hom =
+      (α L' ((S.T k).obj ((S.T (h₁.trans (g₁.trans hS))).obj x))
+        ((S.T k).obj ((S.T (h₂.trans (g₁.trans hS))).obj y))
+        ((S.T k).obj ((S.T (g₃.trans hS)).obj z))).hom ≫
+      (T L').map (Prod.mkHom ((S.assoc (h₁.trans (g₁.trans hS)) k).hom.app x)
+        ((T L').map (Prod.mkHom ((S.assoc (h₂.trans (g₁.trans hS)) k).hom.app y)
+          ((S.assoc (g₃.trans hS) k).hom.app z)))) := hα L' _ _ _
+  simp only [StageSystem.tr, stageAssociatorRep, Iso.trans_hom, Iso.symm_hom, Functor.map_comp,
+    Category.assoc]
+  rw [← cancel_epi ((S.assoc hS k).hom.app _), Iso.hom_inv_id_app_assoc]
+  rw [← cancel_mono (stageRightNested S T c f₂ f₃ f₁ e₁ x y z (hT.trans k)).hom]
+  simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+  rw [← RT, Iso.map_inv_hom_id_assoc,
+    reassoc_of% hA, ← hn, reassoc_of% LT]
+
 end
 
 end WeilConjectures

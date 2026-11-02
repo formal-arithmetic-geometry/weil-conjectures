@@ -93,9 +93,13 @@ theorem integralConstructibleScalarCommShift_existsUnique :
     rw [Functor.commShiftIso_comp_hom_app, Functor.commShiftIso_comp_hom_app,
       ι_commShiftIso_hom_app, ι_commShiftIso_hom_app] at h
     apply heq_of_eq
-    simp only [ObjectProperty.liftCompιIso, Iso.refl_hom, NatTrans.id_app, Functor.map_id,
-      Category.comp_id, Category.id_comp, ObjectProperty.ι_map] at h
-    exact h
+    simp only [ObjectProperty.liftCompιIso, Iso.refl_hom, NatTrans.id_app,
+      ObjectProperty.ι_map] at h
+    refine Eq.trans ?_ (h.trans ?_)
+    · erw [CategoryTheory.Functor.map_id, Category.comp_id, Category.comp_id]
+      try rfl
+    · erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.id_comp]
+      try rfl
   · intro c₁ c₂ h₁ h₂
     apply commShift_ext
     intro n K
