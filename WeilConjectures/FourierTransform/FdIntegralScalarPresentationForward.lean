@@ -6,6 +6,10 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.FourierTransform.FdIntegralScalarLiftProperty
+import all WeilConjectures.FourierTransform.FdIntegralScalarPresentationForward.DerivedCoherence
+import WeilConjectures.FourierTransform.FdIntegralScalarPresentationForward.AbstractAssembly
+import all WeilConjectures.AlgebraicGeometry.Finite.FiniteStagePairCategory
+import WeilConjectures.DeligneLaumon.SfScalarExtensionComposition
 
 /-! # Forward coherence of the integral scalar comparison
 
@@ -75,6 +79,42 @@ theorem fdIntegralScalarPresentationForward
       (b (le_refl E)).hom.app K ≫
         (I l Ω T stage E).map ((integralUnit l Ω T E).hom.app K) =
       (pbcIntegralScalarUnit l Ω T dT.out iT.out E).hom.app
-        ((I l Ω T stage E).obj K)) := by sorry
+        ((I l Ω T stage E).obj K)) := by
+  refine ⟨fun {E L M} h k K ↦ ?_, fun E K ↦ ?_⟩
+  · exact FdIntegralScalarForward.assoc_assembly
+      (sfIntegralConstructible l (pbcFiniteField.{u} l Ω E) T)
+      (sfIntegralConstructible l (pbcFiniteField.{u} l Ω L) T)
+      (sfIntegralConstructible l (pbcFiniteField.{u} l Ω M) T)
+      _ _ _ (I l Ω T stage E) (I l Ω T stage L) (I l Ω T stage M)
+      (integralDetailedTransport T l _) (integralDetailedTransport T l _)
+      (integralDetailedTransport T l _)
+      (eqToIso (stage E).integral_identity) (eqToIso (stage L).integral_identity)
+      (eqToIso (stage M).integral_identity)
+      _ _ _ _ _ _ (pbcAmbientScalarExtension l Ω T h) (pbcAmbientScalarExtension l Ω T k)
+      (pbcAmbientScalarExtension l Ω T (h.trans k)) _ _ _
+      (b h) (b k) (b (h.trans k)) (integralAssoc l Ω T h k)
+      (pbcIntegralScalarAssociator l Ω T dT.out iT.out h k)
+      (pbcAmbientScalarAssociator l Ω T h k)
+      (pbcIntegralScalarAssociator_hom l Ω T dT.out iT.out h k)
+      _ _ _ (FdIntegralScalarForward.ODcomp l Ω T h k)
+      (FdIntegralScalarForward.eD l Ω T h (ordinary h))
+      (FdIntegralScalarForward.eD l Ω T k (ordinary k))
+      (FdIntegralScalarForward.eD l Ω T (h.trans k) (ordinary (h.trans k)))
+      (sfIntegralOrdinaryComparison l _ _ (pbcFiniteFieldInclusion l Ω h) T)
+      (sfIntegralOrdinaryComparison l _ _ (pbcFiniteFieldInclusion l Ω k) T)
+      (sfIntegralOrdinaryComparison l _ _ (pbcFiniteFieldInclusion l Ω (h.trans k)) T)
+      sorry sorry sorry sorry sorry K
+  · exact FdIntegralScalarForward.unit_assembly
+      (sfIntegralConstructible l (pbcFiniteField.{u} l Ω E) T) _ (I l Ω T stage E)
+      (integralDetailedTransport T l _) (eqToIso (stage E).integral_identity)
+      _ _ (pbcAmbientScalarExtension l Ω T (le_refl E)) _ (b (le_refl E))
+      (integralUnit l Ω T E) (pbcIntegralScalarUnit l Ω T dT.out iT.out E)
+      (pbcAmbientScalarUnit l Ω T E) (pbcIntegralScalarUnit_hom l Ω T dT.out iT.out E) _
+      (eqToIso (congrArg (fun ι ↦ integralOrdinaryDerivedScalar l (pbcFiniteField.{u} l Ω E)
+          (pbcFiniteField.{u} l Ω E) ι T) (FdIntegralScalarForward.inclusion_id l Ω E)) ≪≫
+        integralOrdinaryDerivedScalarUnit l (pbcFiniteField.{u} l Ω E) T)
+      (FdIntegralScalarForward.eD l Ω T (le_refl E) (ordinary (le_refl E)))
+      (sfIntegralOrdinaryComparison l _ _ (pbcFiniteFieldInclusion l Ω (le_refl E)) T)
+      sorry sorry sorry K
 
 end WeilConjectures
