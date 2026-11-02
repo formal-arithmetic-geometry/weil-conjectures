@@ -714,10 +714,10 @@ private def towerAlpha {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S) (p : W
     Functor.whiskerRight (Functor.whiskerLeft (StrictTower.towerPullback B (pullback.snd p i))
       (scalarOrdinaryPi B (fun s ↦ towerClopen B s) (StrictTower.squareLift k r p i h)))
       (StrictTower.towerJ B (pullback.fst p i)) ≫
-    Functor.whiskerLeft (StrictTower.towerPullback B (pullback.snd p i) ⋙
-        StrictTower.towerPullback B (StrictTower.squareLift k r p i h))
-      ((scalarTowerOpenComp B (StrictTower.squareLift k r p i h) (pullback.fst p i)).hom ≫
-        (eqToIso (scalarTowerOpen_congr B (pullback.lift_fst k r h))).hom) ≫
+    Functor.whiskerLeft (StrictTower.towerPullback B (pullback.snd p i))
+      (Functor.whiskerLeft (StrictTower.towerPullback B (StrictTower.squareLift k r p i h))
+        ((scalarTowerOpenComp B (StrictTower.squareLift k r p i h) (pullback.fst p i)).hom ≫
+          (eqToIso (scalarTowerOpen_congr B (pullback.lift_fst k r h))).hom)) ≫
     Functor.whiskerRight
       ((StrictTower.towerGComp B (StrictTower.squareLift k r p i h) (pullback.snd p i)).inv ≫
         (eqToIso (congrArg (StrictTower.towerPullback B) (pullback.lift_snd k r h))).hom)
@@ -747,7 +747,6 @@ private theorem towerAlpha_app {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S
           (eqToIso (congrArg (StrictTower.towerPullback B) (pullback.lift_snd k r h))).hom.app M) := by
   simp only [towerAlpha, NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
     Category.assoc]
-  rfl
 
 /-- Restriction preserves the intrinsic proper/open alpha.
 Source: Stacks 0F7B (blueprint: lem-sf-semilinear-scalar-proper-open).
@@ -815,7 +814,7 @@ private theorem towerAlpha_comparison (C : OrdinaryScalarRestriction R φ B ψ)
     Functor.associator_inv_app, Functor.associator_hom_app, Functor.comp_obj,
     CategoryTheory.Functor.map_id, Category.id_comp, Functor.map_comp, Category.assoc]
   rw [reassoc_of% n1, reassoc_of% n2, reassoc_of% hJc, reassoc_of% hJ, reassoc_of% n3,
-    reassoc_of% hk, ← reassoc_of% n5, ← reassoc_of% n4, ← reassoc_of% n7,
+    hk, ← reassoc_of% n5, ← reassoc_of% n4, ← reassoc_of% n7,
     ← reassoc_of% n6, reassoc_of% hπ', ← reassoc_of% n8', reassoc_of% hb]
 
 /-- The normalized adjunction comparisons preserve beta, the clopen projector and alpha.
