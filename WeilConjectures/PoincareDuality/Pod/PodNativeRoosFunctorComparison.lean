@@ -97,7 +97,6 @@ end Pasting
 
 section Generic
 
-omit [HasCountableProducts A] in
 private theorem native_shift_asFunctor
     (C : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (r : ℤ) :
     (podNativeRoosShift.comparison C.asFunctor r).hom =

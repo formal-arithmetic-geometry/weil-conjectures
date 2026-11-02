@@ -150,8 +150,8 @@ theorem native_coherent_inverse_hom_square
   have csqinv (M : ProEtaleWeilSheaf k₀ l X) :
       (K.counitIso.inv.app M).hom.f ≫ A.E.functor.map (square.hom.app M) =
         A.E.counitIso.inv.app M.carrier := by
-    apply (cancel_mono (A.E.counitIso.hom.app M.carrier)).mp
-    rw [Category.assoc, sqc]
+    apply (Iso.cancel_iso_hom_right _ _ (A.E.counitIso.app M.carrier)).mp
+    rw [Iso.app_hom, Category.assoc, sqc]
     erw [Iso.inv_hom_id_app]
     exact congrArg (fun f ↦ f.hom.f) (K.counitIso.inv_hom_id_app M)
   refine ⟨square, nativeHom, ordinaryHom, hA, ?_⟩
