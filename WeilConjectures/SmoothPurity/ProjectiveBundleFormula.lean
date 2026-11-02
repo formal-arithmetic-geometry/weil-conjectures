@@ -312,6 +312,7 @@ import WeilConjectures.AlgebraicGeometry.Fixed.FixedEtaleOriginWitness
 import WeilConjectures.Algebra.Homology.SmoothPurity.ClosedSupportHom
 import WeilConjectures.Compactification.CategoryBaseChange
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+public import WeilConjectures.AlgebraicGeometry.KummerAdditivity
 
 /-!
 # The finite-coefficient projective-bundle formula
@@ -355,6 +356,108 @@ def projectiveBundleOrderedCup {C : Type v} [Category.{w} C]
   | 0 => k0.hom
   | a + 1 => delta ≫ (T.map (projectiveBundleOrderedCup T U L K k0 ks delta h a)).app U ≫
       (T.obj (K a)).map h ≫ (ks a).hom
+
+/-- The diagonal of the coefficient unit, expressed in the same tensor coordinates
+as the recorded Tate powers. Source: blueprint sk-prop-an, tensoring cup powers
+(blueprint: thm-pur-projective-bundle-formula). -/
+def projectiveBundleUnitDiagonal (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) :
+    Etale.ordinaryFiniteUnit A T ⟶
+      ((Etale.ordinaryFiniteTensor A T).obj (Etale.ordinaryFiniteUnit A T)).obj
+        (Etale.ordinaryFiniteUnit A T) :=
+  (Etale.derivedTensorSingleUnitIso
+    (Λ := A) (X := T) (Etale.ordinaryFiniteUnit A T)).inv
+
+/-- Ordered cup powers in the published positive shifted Tate model, for any finite
+coefficient ring. The zero power is the identity and the successor tensors with h.
+Source: blueprint sk-prop-an, cup powers (blueprint: thm-pur-projective-bundle-formula). -/
+def projectiveBundleCupPowerRaw (A : Type (u + 1)) [CommRing A] (m : ℕ)
+    (hA : (m : A) = 0) (T : Scheme.{u})
+    (h : Etale.ordinaryFiniteUnit A T ⟶
+      (Etale.ordinaryFiniteLine A m
+        hA T)⟦(2 : ℤ)⟧) :
+    (a : ℕ) → Etale.ordinaryFiniteUnit A T ⟶ (Etale.affineLinearBaseCoefficient A m hA) T a
+  := WeilConjectures.projectiveBundleOrderedCup
+    (Etale.ordinaryFiniteTensor A T)
+    (Etale.ordinaryFiniteUnit A T)
+    ((Etale.ordinaryFiniteLine A m
+      hA T)⟦(2 : ℤ)⟧)
+    ((Etale.affineLinearBaseCoefficient A m hA) T) (Iso.refl _) (fun _ ↦ Iso.refl _)
+    (WeilConjectures.projectiveBundleUnitDiagonal A T) h
+
+/-- Pullback of ordered positive powers using the unit, tensor comparison and the
+root-normalized shifted-line comparison. Source: blueprint sk-prop-an, base change
+(blueprint: thm-pur-projective-bundle-formula). -/
+def projectiveBundlePositivePullbackRaw (A : Type (u + 1)) [CommRing A] (m : ℕ) (hA : (m : A) = 0)
+    (t : Etale.OrdinaryFiniteTwistTransport A m
+      hA) {T T' : Scheme.{u}} (f : T' ⟶ T)
+    (hT : IsUnit (m : Γ(T, ⊤))) :
+    (a : ℕ) → (Etale.ordinaryFinitePullback A f).obj
+      ((Etale.affineLinearBaseCoefficient A m hA) T a) ≅
+      (Etale.affineLinearBaseCoefficient A m hA) T' a
+  | 0 => Etale.ordinaryFiniteUnitPullback A f
+  | a + 1 => Etale.ordinaryFiniteTensorPullback A f
+      ((Etale.affineLinearBaseCoefficient A m hA) T a)
+      ((Etale.ordinaryFiniteLine A m
+        hA T)⟦(2 : ℤ)⟧) ≪≫
+      Etale.ordinaryFiniteTensorRightMapIso A T'
+        (projectiveBundlePositivePullbackRaw A m hA t f hT a)
+        (Etale.ordinaryFiniteShiftedLinePullback A m
+          hA t f hT)
+
+/-- Constant-coefficient pullback, using the canonical site-comparison square and the
+ordinary unit comparison. Source: blueprint sk-prop-an, proper base-change target
+(blueprint: thm-pur-projective-bundle-formula). -/
+def projectiveBundleUnitPullback (P : PurityFiniteSetting.{u})
+    {T T' : Scheme.{u}} (f : T' ⟶ T) :
+    (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient) f).leftDerivedFunctor.obj
+      (P.projectiveBundleUnit T) ≅ P.projectiveBundleUnit T' :=
+  (ProEtale.leftDerivedUpperStarIsoMapDerivedCategory
+    (ModuleCat.{u + 1} P.Coefficient) f).app _ ≪≫
+    ProEtale.kummerCoefficientPullback P.Coefficient f _ _
+      (Etale.ordinaryFiniteUnitPullback P.Coefficient f)
+
+/-- The specified global Kummer class of the actual tautological degree-one twist.
+Source: blueprint sk-prop-an, h_F=c_1(O(1))
+(blueprint: thm-pur-projective-bundle-formula). -/
+def projectiveBundleChern (P : PurityFiniteSetting.{u}) {B : Scheme.{u}}
+    {F : B.Modules} (b : B ⟶ Spec (.of P.field.k))
+    (D : ProjectiveBundleRealization B F) (hL : D.L.IsInvertible) :=
+  letI := hL
+  Etale.kummerFirstChern P.Coefficient P.diagonalExponent P.diagonalExponent_annihilates
+    D.A.data.relProj (P.diagonalExponent_isUnit (D.A.data.relProjHom ≫ b))
+      (Scheme.Pic.ofIsInvertible D.L)
+
+/-- The constant finite coefficient complex in comparison coordinates on the actual
+small pro-etale site. Source: blueprint sk-prop-an, A_P
+(blueprint: thm-pur-projective-bundle-formula). -/
+def projectiveBundleUnit (P : PurityFiniteSetting.{u}) (T : Scheme.{u}) :=
+  (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) T).mapDerivedCategory.obj
+    (Etale.ordinaryFiniteUnit P.Coefficient T)
+
+/-- Pullback of the positive shifted Tate powers: the unit comparison, followed
+recursively by tensor pullback and the root-normalized line comparison.
+Source: blueprint sk-prop-an, base-change clause; Stacks Tag 03PK
+(blueprint: thm-pur-projective-bundle-formula). -/
+def projectiveBundlePositivePullback (P : PurityFiniteSetting.{u})
+    (t : Etale.OrdinaryFiniteTwistTransport P.Coefficient P.diagonalExponent
+      P.diagonalExponent_annihilates) {T T' : Scheme.{u}} (f : T' ⟶ T)
+    (hT : IsUnit (P.diagonalExponent : Γ(T, ⊤))) :
+    (a : ℕ) → (Etale.ordinaryFinitePullback P.Coefficient f).obj
+      (P.diagonalTwistEtale T a) ≅ P.diagonalTwistEtale T' a :=
+  WeilConjectures.projectiveBundlePositivePullbackRaw P.Coefficient P.diagonalExponent
+    P.diagonalExponent_annihilates t f hT
+
+/-- The cup powers of a specified Kummer class in the recorded ordered tensor-power
+presentation. Degree zero is the identity, and the successor tensors with the same class.
+Source: blueprint sk-prop-an, construction before taking fibres
+(blueprint: thm-pur-projective-bundle-formula). -/
+def projectiveBundleCupPower (P : PurityFiniteSetting.{u}) (T : Scheme.{u})
+    (h : Etale.ordinaryFiniteUnit P.Coefficient T ⟶
+      (Etale.ordinaryFiniteLine P.Coefficient P.diagonalExponent
+        P.diagonalExponent_annihilates T)⟦(2 : ℤ)⟧) :
+    (a : ℕ) → Etale.ordinaryFiniteUnit P.Coefficient T ⟶ P.diagonalTwistEtale T a :=
+  WeilConjectures.projectiveBundleCupPowerRaw P.Coefficient P.diagonalExponent
+    P.diagonalExponent_annihilates T h
 
 end WeilConjectures
 

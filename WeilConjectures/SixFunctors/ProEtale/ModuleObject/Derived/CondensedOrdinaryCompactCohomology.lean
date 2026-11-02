@@ -62,4 +62,47 @@ abbrev condensedRingCoefficientSections
   coyonedaSections ((Mod.regularEndRingHom.op).comp
     ((RingEquiv.toOpposite _).toRingHom.comp (condensedRingScalarSections Λ X)))
 
+/-- Ordinary coefficient complex, formed with the actual condensed derived direct image.
+Over the algebraically closed point the terminal evaluation is exact, so its right derived
+functor is the geometric-point evaluation on complexes. Any constructible complex, including
+constants, Tate twists and underlying complexes of Weil objects, is an input to this functor.
+Source: latest blueprint, RΓ(Y,K) = Fib_s(Ra_* K)
+(blueprint: def-weil-ordinary-compact-cohomology). -/
+def condensedRingOrdinaryCoefficientComplex
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (a : X ⟶ Y) :
+    DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+        (condensedRingObj Λ X)) ⥤ DerivedCategory (ModuleCat.{u + 1} (Γ Λ)) :=
+  (lowerStar Λ a).rightDerivedFunctor ⋙
+    (condensedRingCoefficientSections Λ Y).rightDerivedFunctor
+
+/-- Compact coefficient complex, formed with the actual compactification lower shriek.
+Source: latest blueprint, RΓ_c(Y,K) = Fib_s(Ra_! K)
+(blueprint: def-weil-ordinary-compact-cohomology). -/
+def condensedRingCompactCoefficientComplex
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} {a : X ⟶ Y}
+    (c : Compactification a) :
+    DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+        (condensedRingObj Λ X)) ⥤ DerivedCategory (ModuleCat.{u + 1} (Γ Λ)) :=
+  rightDerivedLowerShriekOfCompactification Λ c ⋙
+    (condensedRingCoefficientSections Λ Y).rightDerivedFunctor
+
+/-- Ordinary cohomology in every integer degree and with any condensed coefficient ring.
+Source: latest blueprint, H^i(Y,K) = H^i(RΓ(Y,K))
+(blueprint: def-weil-ordinary-compact-cohomology). -/
+def condensedRingOrdinaryCohomology
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (a : X ⟶ Y) (n : ℤ) :=
+  condensedRingOrdinaryCoefficientComplex Λ a ⋙ DerivedCategory.homologyFunctor _ n
+
+/-- Compact cohomology in every integer degree and with any condensed coefficient ring.
+Source: latest blueprint, H_c^i(Y,K) = H^i(RΓ_c(Y,K))
+(blueprint: def-weil-ordinary-compact-cohomology). -/
+def condensedRingCompactCohomology
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} {a : X ⟶ Y}
+    (c : Compactification a) (n : ℤ) :=
+  condensedRingCompactCoefficientComplex Λ c ⋙ DerivedCategory.homologyFunctor _ n
+
 end AlgebraicGeometry.ProEtale.CondensedRing

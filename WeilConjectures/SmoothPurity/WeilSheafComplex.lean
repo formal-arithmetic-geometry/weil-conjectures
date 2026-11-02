@@ -76,6 +76,24 @@ abbrev WeilCoefficient.ab {ell : ℕ} [Fact ell.Prime] (c : WeilCoefficient ell)
     Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1} :=
   coefficientHeartRingObj (WeilCoefficient.ring c)
 
+/-- The coefficient inclusion `E̲ → ℚ̲̄_ℓ`.
+Source: `def-weil-weil-sheaf-complex`, "Descent to a finite field of coefficients"
+(blueprint: def-weil-weil-sheaf-complex). -/
+noncomputable abbrev weilCoefficientToQbar {ell : ℕ} [Fact ell.Prime]
+    (E : PadicAlgCl.FiniteIntermediateField ell) :
+    WeilCoefficient.ab.{u} (.finite E) ⟶ WeilCoefficient.ab (WeilCoefficient.qbar (ell := ell)) :=
+  Profinite.padicSubfieldRingObjToPadicAlgCl ell E
+
+/-- The abelian category `Mod_W(Y, Λ)` of Weil `Λ_Y`-modules `(M, θ : g_Y^* M ≅ M)` on the
+geometric fibre `Y = Y₀ ×_{k₀} k`, for the geometric Frobenius `g_Y`.
+Source: `def-weil-weil-sheaf-complex`, "Weil sheaves", the displayed `θ`
+(blueprint: def-weil-weil-sheaf-complex). -/
+abbrev weilSheafModuleCategory
+    (D : FiniteFieldDatum.{u}) (ell : ℕ) [Fact ell.Prime] (_hell : ell ≠ D.p)
+    (Y₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]
+    (c : WeilCoefficient ell) : Type _ :=
+  condensedWeilModules (WeilCoefficient.ab c) (D.geometricFrobenius Y₀).hom
+
 /-! ### The categories -/
 
 /-- The category `D^b_{c,W}(Y, Λ)` of Weil complexes: the full subcategory of
@@ -106,6 +124,47 @@ noncomputable def weilComplexRealization
     (c : WeilCoefficient ell) :
     weilComplexCategory D ell _hell Y₀ c ⥤ strictWeilComplexCategory D ell _hell Y₀ c :=
   condensedWeilRealization (WeilCoefficient.ab c) (D.geometricFrobenius Y₀).hom
+
+/-- The derived (Pull) isomorphism `Ext_a ∘ Lg^* ≅ Lg^* ∘ Ext_a` on derived categories of
+modules, for an exact extension of scalars.
+Source: `def-weil-weil-sheaf-complex`, "Descent to a finite field of coefficients",
+"commutes with `g_Y^*`" (blueprint: def-weil-weil-sheaf-complex). -/
+noncomputable def weilDerivedPullExtendScalarsIso
+    {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ] [IsCommMonObj Λ]
+    [MonObj Λ'] [IsCommMonObj Λ'] (a : Λ ⟶ Λ') [IsMonHom a] {Y : Scheme.{u}} (g : Y ⟶ Y)
+    [Limits.PreservesFiniteLimits (Mod.extendScalars (coefficientMap a Y))] :
+    (Mod.extendScalars (coefficientMap a Y)).mapDerivedCategory ⋙
+        (CondensedRing.upperStar Λ' g).mapDerivedCategory ≅
+      (CondensedRing.upperStar Λ g).mapDerivedCategory ⋙
+        (Mod.extendScalars (coefficientMap a Y)).mapDerivedCategory :=
+  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    Functor.mapDerivedCategoryNatIso (CondensedRing.pullIso a g).symm ≪≫
+      Functor.mapDerivedCategoryCompIso _ _
+
+/-- Extension of scalars on strict pairs `(K, θ) ↦ (Λ'_Y ⊗ K, θ')`, the structure transported
+by the derived (Pull) isomorphism.
+Source: `def-weil-weil-sheaf-complex`, "Descent to a finite field of coefficients"
+(blueprint: def-weil-weil-sheaf-complex). -/
+noncomputable def weilStrictExtendScalars
+    {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ] [IsCommMonObj Λ]
+    [MonObj Λ'] [IsCommMonObj Λ'] (a : Λ ⟶ Λ') [IsMonHom a] {Y : Scheme.{u}} (g : Y ⟶ Y)
+    [Limits.PreservesFiniteLimits (Mod.extendScalars (coefficientMap a Y))] :
+    Endofunctor.IsoAlgebra (CondensedRing.upperStar Λ g).mapDerivedCategory ⥤
+      Endofunctor.IsoAlgebra (CondensedRing.upperStar Λ' g).mapDerivedCategory :=
+  Endofunctor.IsoAlgebra.mapOfNatIso (weilDerivedPullExtendScalarsIso a g)
+
+/-- Extension of scalars of strict pairs over `E̲` to strict pairs over `ℚ̲̄_ℓ`.
+Source: `def-weil-weil-sheaf-complex`, "Descent to a finite field of coefficients"
+(blueprint: def-weil-weil-sheaf-complex). -/
+noncomputable def weilStrictExtendToQbar
+    (D : FiniteFieldDatum.{u}) (ell : ℕ) [Fact ell.Prime] (_hell : ell ≠ D.p)
+    (Y₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]
+    (E : PadicAlgCl.FiniteIntermediateField ell) :
+    Endofunctor.IsoAlgebra (CondensedRing.upperStar (WeilCoefficient.ab (.finite E))
+        (D.geometricFrobenius Y₀).hom).mapDerivedCategory ⥤
+      Endofunctor.IsoAlgebra (CondensedRing.upperStar (WeilCoefficient.ab (WeilCoefficient.qbar (ell := ell)))
+        (D.geometricFrobenius Y₀).hom).mapDerivedCategory :=
+  weilStrictExtendScalars (weilCoefficientToQbar E) (D.geometricFrobenius Y₀).hom
 
 /-! ### Frobenius, Weil sheaves, Weil complexes -/
 
