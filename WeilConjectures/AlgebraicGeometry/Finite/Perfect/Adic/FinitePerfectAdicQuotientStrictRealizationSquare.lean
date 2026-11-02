@@ -57,7 +57,7 @@ theorem finitePerfectAdicQuotientStrictRealizationIso_square
     (finitePerfectAdicQuotientStrictRealizationIso X d φ hcompat V U W f (n + 1)).hom.app N ≫
       (SheafOfModules.overFunctor (completedAdicRing X d) W).map
         (((completedAdicOrdinaryTower X d).obj N).map (homOfLE (Nat.le_succ n)).op) := by
-  have hδe : δ n = finitePerfectAdicQuotientTransition X d φ hcompat V n :=
+  have hδe : δ n = finitePerfectAdicQuotientStrictTransition X d φ hcompat V n :=
     finitePerfectAdicQuotientTransition_unique X d φ V n _ _ (hδ n)
       (fun N _ b x ↦ completedAdicChangeQuotientTransition_tensor X d n N _ b x)
   rw [hδe]
@@ -91,7 +91,7 @@ theorem finitePerfectAdicQuotientStrictRealizationIso_square
     (completedAdicProjection_comp_quotientCommMap X d n)
     (finitePerfectAdicScalarModulesCoherence X d V U W f n) hcoh
     ((completedAdicChangeQuotientTransition X d n).app N)
-    ((finitePerfectAdicQuotientTransition X d φ hcompat V n).app N) (fun _ _ ↦ rfl)
+    ((finitePerfectAdicQuotientStrictTransition X d φ hcompat V n).app N) (fun _ _ ↦ rfl)
     ((finitePerfectAdicQuotientTensorIso X d (n + 1)).app N)
     ((finitePerfectAdicQuotientTensorIso X d n).app N) _
     (finitePerfectAdicQuotientTensorIso_transition X d n N)

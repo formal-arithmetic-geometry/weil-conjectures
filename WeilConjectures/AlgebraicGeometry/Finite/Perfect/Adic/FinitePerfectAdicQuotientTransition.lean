@@ -157,7 +157,7 @@ theorem finitePerfectAdic_quotientCommMap_scalar
 
 /-- The consecutive arrow of fixed-scalar coordinates induced by
 `completedAdicChangeQuotientTransition`. -/
-def finitePerfectAdicQuotientTransition
+def finitePerfectAdicQuotientStrictTransition
     (X : Scheme.{t}) {A : Type t} [CommRing A] (d : AdicCoefficientDatum A)
     (φ : ∀ n : ℕ, adicConstantRing X (A ⧸ d.ideal ^ (n + 1)) ⟶
       completedAdicFiniteCommRing X d n)
@@ -222,7 +222,7 @@ theorem finitePerfectAdic_quotient_transition_exists
         finitePerfectAdicQuotientStrictCoordinates X d φ V n ⋙
           finitePerfectAdicStepRestrict X d V n,
       FinitePerfectAdicQuotientTransition X d φ V n δ :=
-  ⟨finitePerfectAdicQuotientTransition X d φ hcompat V n, fun N _ b x ↦
+  ⟨finitePerfectAdicQuotientStrictTransition X d φ hcompat V n, fun N _ b x ↦
     completedAdicChangeQuotientTransition_tensor X d n N _ b x⟩
 
 end AlgebraicGeometry.Scheme
