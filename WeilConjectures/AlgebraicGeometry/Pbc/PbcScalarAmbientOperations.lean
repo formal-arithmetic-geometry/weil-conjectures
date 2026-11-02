@@ -277,6 +277,19 @@ theorem pbcFlatKFlat_resolution (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
   exact (exactFunctor _ _).prop_of_iso
     (SheafOfModules.siteSheafTensorRightIso (pbcAdicCompletion T d) (L.X n)).symm (hf n)
 
+/-- The completed target integral coefficients are flat over the source ones.
+Source: Stacks Tag 03ER (blueprint: lem-pbc-scalar-ambient-operation-comparisons).
+Proof: by `pbcScalarCoefficient_finiteFree` the restricted unit is a finite product of
+copies of the unit. Tensor with the unit is the identity functor, and tensor with a finite
+biproduct is the biproduct of the tensor functors, so tensor with it is exact. -/
+theorem pbcScalarCoefficient_flat (T : Scheme.{u}) :
+    SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1}
+      (R := pbcAdicCompletion T (pbcIntegralDatum l E))
+      ((pbcRestrict (pbcScalarCoefficientMap l E F i T)).obj
+        (SheafOfModules.unit ((adicLisseForget T).obj
+          (pbcAdicCompletion T (pbcIntegralDatum l F))))) := by
+  sorry
+
 /-- Restriction along the completed scalar inclusion preserves flat-term K-flat complexes.
 Source: Stacks Tags 06YY and 0943 (blueprint: lem-pbc-scalar-ambient-operation-comparisons).
 Proof: the target coefficients are finite free over the source coefficients
@@ -290,7 +303,10 @@ theorem pbcScalarRestrict_flatKFlat (T : Scheme.{u})
     PbcFlatKFlat T (pbcIntegralDatum l E)
       (((pbcRestrict (pbcScalarCoefficientMap l E F i T)).mapHomologicalComplex
         (.up ℤ)).obj K) := by
-  sorry
+  let : EssentiallySmall.{u + 1} T.ProEt := essentiallySmallSelf.{0} _
+  have h := SheafOfModules.isKFlat_restrictScalars_of_flat (pbcScalarCoefficientMap l E F i T)
+    (pbcScalarCoefficient_flat l E F i T) K hK.1
+  exact ⟨h.1, h.2 hK.2⟩
 
 /-- The termwise pullback is the published module pullback.
 Source: Stacks Tag 03EK (blueprint: lem-pbc-scalar-ambient-operation-comparisons).
