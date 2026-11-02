@@ -50,6 +50,7 @@ def finiteKummerSequenceComparison (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
           ((l ^ (n + 1)) • 𝟙 T.gmSheaf) ≫ cartierUnitsComparison T
       rw [CategoryTheory.Functor.map_nsmul, CategoryTheory.Functor.map_id]
       simp only [Scheme.proEtaleUnitsPower, Preadditive.nsmul_comp,
-        Preadditive.comp_nsmul, Category.id_comp, Category.comp_id] }
+        Preadditive.comp_nsmul, Category.id_comp]
+      exact Category.comp_id ((l ^ (n + 1)) • cartierUnitsComparison T) }
 
 end AlgebraicGeometry.ProEtale.SpTowerClasses
