@@ -21,6 +21,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Com
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Shift
 
 import Mathlib.AlgebraicGeometry.Noetherian
+import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
 import WeilConjectures.AlgebraicGeometry.Etale.EtaleFlatConstructibleModel
 import WeilConjectures.AlgebraicGeometry.Etale.Scalar.EtaleScalarFlatModel
 import WeilConjectures.AlgebraicGeometry.Etale.Compact.EtaleCompactSupportTorWindow

@@ -449,14 +449,6 @@ attribute [-instance] SemilinearSections.moduleAbelian SemilinearSections.hasDer
   ProjectionRestriction.derived SemilinearSections.abelianSheafify
   SemilinearSections.locallyBijective SemilinearSections.sequenceSmall
   SemilinearSections.sliceSmall in
-attribute [-instance] SemilinearSections.moduleAbelian SemilinearSections.hasDerived
-  ProjectionRestriction.derived SemilinearSections.abelianSheafify
-  SemilinearSections.locallyBijective SemilinearSections.sequenceSmall
-  SemilinearSections.sliceSmall in
-attribute [-instance] SemilinearSections.moduleAbelian SemilinearSections.hasDerived
-  ProjectionRestriction.derived SemilinearSections.abelianSheafify
-  SemilinearSections.locallyBijective SemilinearSections.sequenceSmall
-  SemilinearSections.sliceSmall in
 private theorem projection_iso_of_property
     (A : Type*) [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
@@ -468,28 +460,8 @@ private theorem projection_iso_of_property
     (h : ProEtale.HasProjectionFormulaOfCompactification A c K L) :
     IsIso (((ProEtale.projectionMapOfCompactification A c).app K).app L) := h
 
-attribute [-instance] SemilinearSections.moduleAbelian SemilinearSections.hasDerived
-  ProjectionRestriction.derived SemilinearSections.abelianSheafify
-  SemilinearSections.locallyBijective SemilinearSections.sequenceSmall
-  SemilinearSections.sliceSmall in
-attribute [-instance] SemilinearSections.moduleAbelian SemilinearSections.hasDerived
-  ProjectionRestriction.derived SemilinearSections.abelianSheafify
-  SemilinearSections.locallyBijective SemilinearSections.sequenceSmall
-  SemilinearSections.sliceSmall in
-attribute [-instance] SemilinearSections.moduleAbelian SemilinearSections.hasDerived
-  ProjectionRestriction.derived SemilinearSections.abelianSheafify
-  SemilinearSections.locallyBijective SemilinearSections.sequenceSmall
-  SemilinearSections.sliceSmall in
-attribute [-instance] SemilinearSections.moduleAbelian SemilinearSections.hasDerived
-  ProjectionRestriction.derived SemilinearSections.abelianSheafify
-  SemilinearSections.locallyBijective SemilinearSections.sequenceSmall
-  SemilinearSections.sliceSmall in
 attribute [local instance 100000] HasDerivedCategory.standard SheafOfModules.instAbelian
 
-attribute [-instance] SemilinearSections.moduleAbelian SemilinearSections.hasDerived
-  ProjectionRestriction.derived SemilinearSections.abelianSheafify
-  SemilinearSections.locallyBijective SemilinearSections.sequenceSmall
-  SemilinearSections.sliceSmall in
 open scoped CategoryTheory.Obj
 
 attribute [local instance 100] HasDerivedCategory.standard SheafOfModules.instAbelian

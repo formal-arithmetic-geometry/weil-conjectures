@@ -271,8 +271,8 @@ def sumCoefficientIso
     (Functor.mapDerivedCategorySquareIso
       (Etale.upperStarRestrictScalarsIsoSheaf φ e))).symm
 
-attribute [local irreducible] etaleCoefficientMap proEtaleCoefficientMap
-  ProEtale.pbcFixedScalarExtension compactSupportSiteComparison
+attribute [local irreducible] etaleCoefficientMap ProEtale.pbcFixedScalarExtension
+  compactSupportSiteComparison
   DerivedCategory.TStructure.t comparisonUpperStar pbcComparisonReduction
   HasDerivedCategory.ofIsGrothendieckAbelian DerivedCategory
   Functor.leftAdjoint Functor.rightAdjoint
@@ -293,12 +293,7 @@ private theorem etaleCoefficientMap_eq_compactScalarMap
   rfl
 
 set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 set_option maxRecDepth 2048 in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option maxRecDepth 2048 in
-set_option backward.isDefEq.respectTransparency false in
 /-- Evaluate the recorded normalized sum comparison, supplying the Noetherian and compact
 structures derived from finite type over the field. No extra scheme hypothesis is imposed.
 Source: SGA 4 XVII 6.2.11; blueprint etale-sum clause
