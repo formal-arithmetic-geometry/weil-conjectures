@@ -55,7 +55,6 @@ open CategoryTheory
 
 namespace Rep
 
-attribute [local irreducible] kernelFixedRepresentation kernelFixedDiscreteRep
-  discreteContinuousCohomologyFunctor
+attribute [local irreducible] discreteContinuousCohomologyFunctor
 
 end Rep

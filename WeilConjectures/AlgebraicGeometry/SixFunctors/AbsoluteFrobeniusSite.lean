@@ -112,11 +112,6 @@ private noncomputable def moduleRho {X Y : Scheme.{u}} (f : X ⟶ Y) (A : Type u
     (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})⟩
 
 set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-attribute [local irreducible] relativeFrobeniusMap
-
-set_option backward.isDefEq.respectTransparency false in
 private theorem rho_trivialization (A : Type u) [CommRing A]
     (X : Scheme.{u}) (f : X ⟶ X) (r : 𝟭 X.ProEt ≅ proEtaleBaseChange f) :
     coefficientDirectMap f A ≫
@@ -179,9 +174,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency false in
 attribute [local irreducible] conjugateIsoEquiv conjugateEquiv
-
-set_option backward.isDefEq.respectTransparency false in
-attribute [local irreducible] rightIsoMate
 
 section RingedProduct
 

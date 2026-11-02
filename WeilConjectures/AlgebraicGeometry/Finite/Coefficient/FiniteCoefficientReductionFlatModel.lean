@@ -173,16 +173,8 @@ noncomputable def flatModelReductionCoefficientMap :
     (Ideal.Quotient.factor (S := Padic.coefficientExtensionIdeal l E n)
       (T := Padic.coefficientExtensionIdeal l E m) (Ideal.pow_le_pow_right hmn))
 
-set_option linter.defProp false in
-attribute [local irreducible] flatModelReductionData
-
-set_option linter.defProp false in
-attribute [local irreducible] flatModelReductionDerivedData
-
 attribute [local irreducible] Functor.mapHomotopyCategory DerivedCategory.Qh DerivedCategory.Q
   SheafOfModules.changeOfRings SheafOfModules.changeOfRingsHom
-
-attribute [local irreducible] flatModelReductionChange flatModelReduction
 
 end AlgebraicGeometry.Scheme
 

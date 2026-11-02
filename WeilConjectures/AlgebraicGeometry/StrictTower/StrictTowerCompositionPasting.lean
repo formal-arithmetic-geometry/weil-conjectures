@@ -1082,7 +1082,6 @@ set_option backward.isDefEq.respectTransparency.types true
 attribute [local irreducible]
   compositionD compositionC compositionH compositionCommonComparison
 
-attribute [local irreducible] refinementComparison
 end CommonComparisonProof
 
 end AlgebraicGeometry.ProEtale.StrictTower

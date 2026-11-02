@@ -205,8 +205,6 @@ noncomputable def supportThirdModelComparison
     ((upperStar (ModuleCat.{u + 1} Λ) j).mapDerivedCategoryPlus.obj K)
     ((upperStar (ModuleCat.{u + 1} Λ) j).supportExactModelComparison I K eB)
 
-attribute [local irreducible] supportModelTriangle
-
 attribute [local irreducible] upperStar lowerStar upperStarLowerStarAdjunction
   finiteClosedUpperShriek
 

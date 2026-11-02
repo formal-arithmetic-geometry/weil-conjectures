@@ -123,6 +123,8 @@ noncomputable def completedTensorShiftRoosIso
     (shiftFunctorComm (CochainComplex A ℤ) r (-1 : ℤ)).app
       (CochainComplex.mappingCone (completedTensorShiftOneSub C))
 
+private theorem complexProducts : HasProductsOfShape ℕ (CochainComplex A ℤ) :=
+  inferInstance
 attribute [local instance] complexProducts
 
 private theorem productIso_π

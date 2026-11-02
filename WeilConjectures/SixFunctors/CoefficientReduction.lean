@@ -97,6 +97,11 @@ attribute [local instance 2000] CommRing.toRing
 attribute [local instance high] SymmetricCategory.toBraidedCategory
 
 omit [EssentiallySmall.{u + 1} C] in
+private lemma coefficientCountableCoproducts (R : Type (u + 1)) [CommRing R] :
+    HasCountableCoproducts (Sheaf J (ModuleCat.{u + 1} R)) :=
+  ⟨fun _ _ => (inferInstance : HasColimitsOfSize.{0, 0}
+    (Sheaf J (ModuleCat.{u + 1} R))).has_colimits_of_shape _⟩
+
 attribute [local instance] coefficientCountableCoproducts
 
 private lemma scalar_preservesKFlatQuasiIso :

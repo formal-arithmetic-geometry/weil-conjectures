@@ -42,6 +42,13 @@ open CategoryTheory CategoryTheory.Category CategoryTheory.Limits MonoidalCatego
 
 namespace AlgebraicGeometry.Etale
 
+/-- Cache the existing sheafification existence proof at the coefficient universe.
+Source: the small-etale sheafification API (blueprint: def-pur-supported-exterior-product). -/
+theorem supportedHasSheafify
+    (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) :
+    HasSheafify X.smallEtaleTopology (ModuleCat.{u + 1} A) :=
+  GrothendieckTopology.hasSheafify_smallEtaleTopology (ModuleCat.{u + 1} A) X
+
 /-- Cache the weak sheafification consequence of the existing exact sheafification.
 Source: the small-etale sheafification API (blueprint: def-pur-supported-exterior-product). -/
 theorem supportedHasWeakSheafify
@@ -273,6 +280,13 @@ private lemma aux_isIso_of_isIso_left {V W : X.Etale} (f : V ⟶ W)
   exact isIso_of_reflects_iso f (Scheme.Etale.forget X)
 
 variable {U : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
+
+/-- The counit `U ×_X U ⟶ U` at `U` of the adjunction between composition with and base change
+along the open immersion `j` is an isomorphism, `j` being a monomorphism. -/
+private theorem aux_isIso_mapPullbackAdj_counit_app_mk :
+    IsIso ((MorphismProperty.Over.mapPullbackAdj @Etale ⊤ j inferInstance trivial).counit.app
+      (Scheme.Etale.mk j)) :=
+  aux_isIso_of_isIso_left _ (inferInstanceAs (IsIso (pullback.fst j j)))
 
 attribute [local instance] aux_isIso_mapPullbackAdj_counit_app_mk
 
@@ -808,10 +822,6 @@ section ComparisonSpec
 
 attribute [local semireducible] supportedComplexComparisonHom
 
-omit [HasDerivedCategory.{u + 1} C] [Abelian.HasFunctorialFlatResolution C]
-  [PreservesFiniteLimits G] [PreservesFiniteColimits G]
-  [PreservesFiniteLimits F₁] [PreservesFiniteColimits F₁]
-  [PreservesFiniteLimits F₂] [PreservesFiniteColimits F₂] in
 end ComparisonSpec
 
 end SchemeComparisons

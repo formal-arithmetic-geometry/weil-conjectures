@@ -397,7 +397,6 @@ theorem scalarTowerExtension_exact (W : Scheme.{u})
   have := (finiteScalar_exact W a d e).2
   exact ⟨⟨fun _ _ _ ↦ inferInstance⟩, ⟨fun _ _ _ ↦ inferInstance⟩⟩
 
-attribute [local irreducible] finiteScalarTowerCounit
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
