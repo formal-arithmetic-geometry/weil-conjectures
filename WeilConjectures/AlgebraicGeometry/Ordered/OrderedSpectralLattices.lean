@@ -690,6 +690,10 @@ private def RawStratifiedLattices
               (coefficientMap a₀ (P.domain b))).homEquiv M
                 ((CondensedRing.upperStar B₀ (P.immersion b)).obj L₀)).symm ι)
 
+-- Instance search for the spectral norm must find the same `IsLocalRing`/`IsDomain` proofs as in
+-- `StratifiedLattice`; otherwise the kernel unfolds the coefficient topology and times out.
+attribute [-instance] IsRegularLocalRing.toIsLocalRing HenselianLocalRing.toIsLocalRing
+  IsDomain.of_isSimpleRing in
 private theorem small_spectral_raw_lattices
     (ℓ : ℕ) [Fact ℓ.Prime] (K : Type) [Field K] [Algebra ℚ_[ℓ] K]
     [FiniteDimensional ℚ_[ℓ] K] (p : ℕ) [Fact p.Prime]
