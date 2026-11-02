@@ -24,6 +24,48 @@ namespace AlgebraicGeometry.Scheme
 variable (l : ℕ) [Fact l.Prime] (Ω : Type w)
   [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
 
+section GenericTransport
+
+/-- A heterogeneous equality of comparisons `Q ⋙ S ≅ I ⋙ Q'`, over an equality of the
+middle functors, gives their components up to the induced `eqToHom`. -/
+theorem iso_app_of_heq_functor {A B C : Type*} [Category A] [Category B] [Category C]
+    (Q : A ⥤ B) (Q' : A ⥤ C) {S S' : B ⥤ C} (hS : S = S')
+    {c : Q ⋙ S ≅ Q'} {c' : Q ⋙ S' ≅ Q'} (h : HEq c c') (K : A) :
+    c.hom.app K = eqToHom (by rw [hS]) ≫ c'.hom.app K := by
+  subst hS
+  rw [eq_of_heq h]
+  simp
+
+/-- Solve `u₁ ≫ b ≫ u₃ = X` for the middle factor when the outer factors are invertible. -/
+theorem eq_inv_comp_comp_inv {C : Type*} [Category C] {s t r v : C} (u₁ : s ≅ t)
+    (b : t ⟶ r) (u₃ : r ≅ v) (X : s ⟶ v) (h : u₁.hom ≫ b ≫ u₃.hom = X) :
+    b = u₁.inv ≫ X ≫ u₃.inv := by
+  rw [← h]
+  simp
+
+/-- Solve `b ≫ u.hom = X` for `b`. -/
+theorem eq_comp_inv_of_comp_hom {C : Type*} [Category C] {t r v : C} (b : t ⟶ r) (u : r ≅ v)
+    (X : t ⟶ v) (h : b ≫ u.hom = X) : b = X ≫ u.inv := by
+  rw [← h]
+  simp
+
+/-- Move two invertible end factors across an equation. -/
+theorem comp_comp_hom_eq_hom_comp {C : Type*} [Category C] {a b c c' d e : C} (p : a ≅ b)
+    (q : c ≅ d) (A : a ⟶ c') (B : c' ⟶ c) (R : b ⟶ e) (T : e ⟶ d)
+    (h : p.inv ≫ A ≫ B = R ≫ T ≫ q.inv) : A ≫ B ≫ q.hom = p.hom ≫ R ≫ T := by
+  rw [← cancel_epi p.inv, ← cancel_mono q.inv]
+  simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id, Iso.inv_hom_id_assoc]
+  exact h
+
+/-- A heterogeneous equality of morphisms over equalities of their endpoints. -/
+theorem hom_eq_of_heq_objects {C : Type*} [Category C] {x x' y y' : C}
+    (hx : x = x') (hy : y = y') {a : x ⟶ y} {b : x' ⟶ y'} (h : HEq a b) :
+    a = eqToHom hx ≫ b ≫ eqToHom hy.symm := by
+  subst hx hy
+  simp [eq_of_heq h]
+
+end GenericTransport
+
 section ScalarTransport
 variable (T : Scheme.{u}) [IsNoetherian T] (hdim : ∃ m : ℕ, topologicalKrullDim T ≤ m)
   (hl : ∀ t : T, IsUnit (l : T.presheaf.stalk t))
@@ -79,49 +121,20 @@ theorem pbcScalarIntegralComparison_ne (h : E ≤ F) (hEF : E ≠ F) :
       (eqToIso (pbcRationalScalarExtension_exists l Ω T hdim hl h).exists.choose_spec) :=
   (pbcScalarIntegralComparison_exists l Ω T hdim hl h).exists.choose_spec.2 hEF
 
+/-- For distinct stages every component of the scalar/integral comparison is an `eqToHom`. -/
+theorem pbcScalarIntegralComparison_hom_app_ne (h : E ≤ F) (hEF : E ≠ F)
+    (K : pbcIntegralStage l Ω T E) :
+    ∃ e, (pbcScalarIntegralComparison l Ω T hdim hl h).hom.app K = eqToHom e := by
+  have hs : pbcScalarExtension l Ω T hdim hl h =
+      (pbcRationalScalarExtension_exists l Ω T hdim hl h).exists.choose := by
+    simp [pbcScalarExtension, hEF]
+  rw [iso_app_of_heq_functor _ _ hs (pbcScalarIntegralComparison_ne l Ω T hdim hl h hEF) K]
+  simp only [eqToIso.hom, eqToHom_app, eqToHom_trans]
+  refine ⟨?_, trivial⟩
+  rw [hs]
+  exact Functor.congr_obj (pbcRationalScalarExtension_exists l Ω T hdim hl h).exists.choose_spec K
+
 end ScalarTransport
-
-section GenericTransport
-
-/-- A heterogeneous equality of comparisons `Q ⋙ S ≅ I ⋙ Q'`, over an equality of the
-middle functors, gives their components up to the induced `eqToHom`. -/
-theorem iso_app_of_heq_functor {A B C : Type*} [Category A] [Category B] [Category C]
-    (Q : A ⥤ B) (Q' : A ⥤ C) {S S' : B ⥤ C} (hS : S = S')
-    {c : Q ⋙ S ≅ Q'} {c' : Q ⋙ S' ≅ Q'} (h : HEq c c') (K : A) :
-    c.hom.app K = eqToHom (by rw [hS]) ≫ c'.hom.app K := by
-  subst hS
-  rw [eq_of_heq h]
-  simp
-
-/-- Solve `u₁ ≫ b ≫ u₃ = X` for the middle factor when the outer factors are invertible. -/
-theorem eq_inv_comp_comp_inv {C : Type*} [Category C] {s t r v : C} (u₁ : s ≅ t)
-    (b : t ⟶ r) (u₃ : r ≅ v) (X : s ⟶ v) (h : u₁.hom ≫ b ≫ u₃.hom = X) :
-    b = u₁.inv ≫ X ≫ u₃.inv := by
-  rw [← h]
-  simp
-
-/-- Solve `b ≫ u.hom = X` for `b`. -/
-theorem eq_comp_inv_of_comp_hom {C : Type*} [Category C] {t r v : C} (b : t ⟶ r) (u : r ≅ v)
-    (X : t ⟶ v) (h : b ≫ u.hom = X) : b = X ≫ u.inv := by
-  rw [← h]
-  simp
-
-/-- Move two invertible end factors across an equation. -/
-theorem comp_comp_hom_eq_hom_comp {C : Type*} [Category C] {a b c c' d e : C} (p : a ≅ b)
-    (q : c ≅ d) (A : a ⟶ c') (B : c' ⟶ c) (R : b ⟶ e) (T : e ⟶ d)
-    (h : p.inv ≫ A ≫ B = R ≫ T ≫ q.inv) : A ≫ B ≫ q.hom = p.hom ≫ R ≫ T := by
-  rw [← cancel_epi p.inv, ← cancel_mono q.inv]
-  simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id, Iso.inv_hom_id_assoc]
-  exact h
-
-/-- A heterogeneous equality of morphisms over equalities of their endpoints. -/
-theorem hom_eq_of_heq_objects {C : Type*} [Category C] {x x' y y' : C}
-    (hx : x = x') (hy : y = y') {a : x ⟶ y} {b : x' ⟶ y'} (h : HEq a b) :
-    a = eqToHom hx ≫ b ≫ eqToHom hy.symm := by
-  subst hx hy
-  simp [eq_of_heq h]
-
-end GenericTransport
 
 section ScalarExchange
 variable (E F : Type u) [Field E] [Field F] [Algebra ℚ_[l] E] [Algebra ℚ_[l] F]
@@ -198,6 +211,9 @@ The goal is now restated by `change` (it needs `maxHeartbeats 1000000`) and flip
 The direct-image comparisons are solved for `β.hom` by `eq_comp_inv_of_comp_hom`. All four
 solved forms are substituted by `erw`, so every β is now a localized ambient scalar
 comparison conjugated by `pbcScalarIntegralComparison` and `eqToHom`s.
+For `E ≠ F`, `pbcScalarIntegralComparison_hom_app_ne` shows that every comparison component
+is an `eqToHom`. Next: `by_cases E = F`; in the `E ≠ F` branch, `obtain` these for the
+components in the goal and rewrite; then do the τ-naturality step.
 Earlier attempt, before `show`: moving `Lg.β` and `Rf'_F.map Lg'.β` across the goal with a
 generic two-sided lemma
 (`p.inv ≫ A ≫ B = R ≫ T ≫ q.inv → A ≫ B ≫ q.hom = p.hom ≫ R ≫ T`), applied by `refine`
