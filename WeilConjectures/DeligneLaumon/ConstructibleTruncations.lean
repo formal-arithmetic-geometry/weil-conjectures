@@ -15,7 +15,8 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-! # Constructible truncations and the retained localization compatibility API
 
 The current ordinary condensed-coefficient proposition is proved in
-`WeilConjectures.AlgebraicGeometry.Condensed.CondensedConstructibleTruncations`, publicly reexported here.
+`WeilConjectures.AlgebraicGeometry.Condensed.CondensedConstructibleTruncations`,
+publicly reexported here.
 
 The declarations below retain the previously proved rational/common-stage API for its
 existing consumers. Their coefficient categories come from the historical 2026-10-15

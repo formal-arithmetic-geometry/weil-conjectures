@@ -15,6 +15,8 @@ public import WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorHom
 import WeilConjectures.SixFunctors.Isomorphism.IsomorphismComparisonNatural
 import WeilConjectures.ZetaWeil.FrobeniusPointTransport
 
+set_option linter.privateModule false
+
 /-!
 # Naturality of Frobenius point transport
 
@@ -67,6 +69,19 @@ private theorem apply_heq.{v, w}
     {α γ : Sort w} {β : Sort v} {f : α → β} {g : γ → β}
     (h : HEq f g) {x : α} {y : γ} (hx : HEq x y) : HEq (f x) (g y) :=
   heq_of_eq (congr_heq h hx)
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
+  WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective in
+private theorem finiteSigma_apply
+    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime]
+    (E : Type u) [Field E] [Algebra ℚ_[l] E]
+    [FiniteDimensional ℚ_[l] E] (n : ℕ)
+    (K : CochainComplex (integralOperationsFiniteModules l E (Spec (.of D.k)) n) ℤ) (i : ℤ) :
+    HEq (fun x ↦ (frobeniusPointFiniteSigma D l E n K).f i x)
+      (fun x ↦ (K.X i).val.map (frobeniusPointRestriction D).op x) := by
+  exact (frobeniusPointFiniteSigma_existsUnique D l E n K).choose_spec.1 i
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

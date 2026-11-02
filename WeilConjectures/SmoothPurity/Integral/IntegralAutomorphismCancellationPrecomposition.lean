@@ -12,6 +12,8 @@ import WeilConjectures.TraceFormula.Supporting.NormalizedIntegralGeometricCohere
 import WeilConjectures.SixFunctors.Isomorphism.IsomorphismComparisonNatural
 import WeilConjectures.CategoryTheory.ExactDerivedPasting.Word.ExactDerivedTransformationPasting
 
+set_option linter.privateModule false
+
 /-!
 # Integral inverse cancellation after precomposition
 
@@ -53,7 +55,7 @@ private def moduleTransport (X : Scheme.{u}) {f g : X ⟶ X}
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 attribute [-instance] WeilConjectures.sfAbSheafify WeilConjectures.sfAbBijective in
 set_option allowUnsafeReducibility true in
-attribute [local irreducible] derivedIdentity moduleTransport derivedTransport
+attribute [local irreducible] moduleTransport
   inverseImageCompletedCoefficientMap
 
 end WeilConjectures

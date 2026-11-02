@@ -12,6 +12,8 @@ import all WeilConjectures.ZetaWeil.FrobeniusPointTransport
 import all WeilConjectures.AlgebraicGeometry.SixFunctors.InverseImagePullbackComparison
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.SingleFunctor
 
+set_option linter.privateModule false
+
 /-! # One-step point transport on the finite regular coefficient unit
 
 Source: the constant-sheaf clause of `prop-every-iterate-trace`, reviewed expansion
