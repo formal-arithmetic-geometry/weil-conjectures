@@ -65,6 +65,6 @@ theorem kummer_compared_boundary_formula (ℓ : ℕ) [Fact ℓ.Prime] (W : Schem
     (β.comp (Ext.mk₀ (cartierProRootMap (diagonalResidue.{u} ℓ n) (ℓ ^ (n + 1))
       (cartierResidue_cast ℓ (n + 1)) W (pow_pos (Fact.out : ℓ.Prime).pos _)
       (by simpa using hW.pow (n + 1)))) (add_zero 1)) (zero_add 1)).hom = _
-  rw [mk0_ext_mk0_hom, hb]
+  exact (mk0_ext_mk0_hom _ β _).trans (by rw [hb]; rfl)
 
 end AlgebraicGeometry.ProEtale

@@ -13,6 +13,7 @@ import WeilConjectures.AlgebraicGeometry.SpTowerShriek.SmoothPurityStrictFiniteO
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option linter.privateModule false
 set_option Elab.async false
 set_option synthInstance.maxSize 4096
 attribute [local instance 30000] SheafOfModules.instAbelian
