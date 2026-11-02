@@ -11,6 +11,8 @@ import WeilConjectures.WeilSheaf.Native.Weil.Tensor.NativeWeilTensorRingedBinary
 import WeilConjectures.CategoryTheory.SixFunctors.TransportedTensorComparison
 import all WeilConjectures.CategoryTheory.RingedForgetTensorTransposition.RingedForgetTensorSymmetryRepresentatives
 
+set_option linter.privateModule false
+
 /-! # The signed native chain swap represents the transported derived braiding
 
 Source: Stacks 06YU and 0FPT, the K-flat symmetry model.
