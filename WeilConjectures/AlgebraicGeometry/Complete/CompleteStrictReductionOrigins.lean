@@ -33,6 +33,131 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 variable {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
+/-- The constant-coefficient scalar map followed by the n-th projection is the constant
+quotient map followed by the canonical level comparison.
+Source: strict normalization, proof step 5; Stacks 099M (blueprint: thm-cbc-complete-proetale). -/
+theorem cbcExchangeScalar_projection (V : Scheme.{t}) (n : ℕ) :
+    exchangeScalar d V ≫ completedReductionProjection V d n =
+      (constantSheaf (ProEt.topology V) CommRingCat.{t + 1}).map
+          (CommRingCat.ofHom (Ideal.Quotient.mk (d.ideal ^ (n + 1)))) ≫
+        (pbcLevelConstantComparison V d n).hom := by
+  dsimp only [exchangeScalar, completedReductionProjection, pbcCompletedComparison]
+  rw [Category.assoc]
+  erw [HasLimit.isoOfNatIso_hom_π]
+  rw [← Category.assoc]
+  erw [(adicDatumScalar_exists V
+    { toCompleteCoefficientDatum := d.toCompleteCoefficientDatum,
+      quotientFinite := d.quotientFinite }).exists.choose_spec n]
+  rfl
+
+/-- The level comparison sends a constant section to the constant component function.
+Source: blueprint order 1250 (blueprint: thm-cbc-complete-proetale). -/
+theorem cbcLevelComparison_toSheafify (V : Scheme.{t}) (n : ℕ) :
+    toSheafify (ProEt.topology V) ((Functor.const V.ProEtᵒᵖ).obj
+        (CommRingCat.of (A ⧸ d.ideal ^ (n + 1)))) ≫
+      (pbcLevelConstantComparison V d n).hom.hom =
+    AdicCoefficients.constants V (A ⧸ d.ideal ^ (n + 1)) ≫
+      toSheafify (ProEt.topology V) (pbcQuotientPresheaf V d n) := by
+  ext U b
+  exact (pbcLevelConstantComparison_exists V d n).exists.choose_spec U b
+
+/-- The continuous-function presentation of constants is the level comparison on constants.
+Source: blueprint order 1300 (blueprint: thm-cbc-complete-proetale). -/
+theorem cbcPbcFunctionScalars_eq (V : Scheme.{t}) (n : ℕ) :
+    pbcFunctionScalars V d n =
+      Functor.whiskerRight (toSheafify (ProEt.topology V) ((Functor.const V.ProEtᵒᵖ).obj
+        (CommRingCat.of (A ⧸ d.ideal ^ (n + 1))))) (forget₂ CommRingCat RingCat) ≫
+        ((adicLisseForget V).map (pbcLevelConstantComparison V d n).hom).hom := by
+  have hη := (AdicCoefficients.finiteRingComparison_exists V
+    (ProEtale.PbcQuotient d n)).choose_spec.1.2
+  rw [show ((adicLisseForget V).map (pbcLevelConstantComparison V d n).hom).hom =
+    Functor.whiskerRight (pbcLevelConstantComparison V d n).hom.hom
+      (forget₂ CommRingCat RingCat) from rfl]
+  rw [← Functor.whiskerRight_comp, cbcLevelComparison_toSheafify, Functor.whiskerRight_comp]
+  unfold pbcFunctionScalars
+  change _ = _ ≫ Functor.whiskerRight (toSheafify (ProEt.topology V)
+    (AdicCoefficients.functionPresheaf V (ProEtale.PbcQuotient d n))) _
+  rw [← cancel_mono (AdicCoefficients.finiteRingComparison V (ProEtale.PbcQuotient d n)).hom.hom]
+  simp only [Category.assoc]
+  rw [← ObjectProperty.FullSubcategory.comp_hom, Iso.inv_hom_id]
+  erw [hη]
+  rfl
+
+/-- Ring maps out of the constant coefficient ring are determined on constant sections.
+Source: Stacks 00W1 (blueprint: thm-cbc-complete-proetale). -/
+theorem cbcConstRing_hom_ext (V : Scheme.{t}) {S : Sheaf (ProEt.topology V) RingCat.{t + 1}}
+    (f g : (adicLisseForget V).obj (exchangeConstantRing V A) ⟶ S)
+    (h : Functor.whiskerRight (toSheafify (ProEt.topology V)
+        ((Functor.const V.ProEtᵒᵖ).obj (CommRingCat.of A))) (forget₂ CommRingCat RingCat) ≫
+          f.hom =
+      Functor.whiskerRight (toSheafify (ProEt.topology V)
+        ((Functor.const V.ProEtᵒᵖ).obj (CommRingCat.of A))) (forget₂ CommRingCat RingCat) ≫
+          g.hom) : f = g := by
+  have hf := sheafComposeIso_hom_fac (ProEt.topology V) (forget₂ CommRingCat.{t + 1} RingCat)
+    ((Functor.const V.ProEtᵒᵖ).obj (CommRingCat.of A))
+  apply Sheaf.hom_ext
+  rw [← cancel_epi (sheafifyComposeIso (ProEt.topology V) (forget₂ CommRingCat.{t + 1} RingCat)
+    ((Functor.const V.ProEtᵒᵖ).obj (CommRingCat.of A))).hom]
+  apply sheafify_hom_ext _ _ _ S.property
+  simpa only [← Category.assoc, hf] using h
+
+/-- The finite scalar map on constant sections. Source: Stacks 03DA
+(blueprint: thm-cbc-complete-proetale). -/
+theorem cbcFiniteScalarMap_unit (X : Scheme.{t}) (Λ : Type (t + 1))
+    [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ] (φ : A →+* Λ) :
+    Functor.whiskerRight
+        (toSheafify (ProEt.topology X)
+          ((Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of A)))
+        (forget₂ CommRingCat.{t + 1} RingCat.{t + 1}) ≫
+      (ProEtale.StrictTower.finiteScalarMap A X Λ φ).hom =
+    (Functor.const X.ProEtᵒᵖ).map (RingCat.ofHom φ) ≫
+      ProEtale.finiteCoefficientScalarMap X Λ := by
+  change _ ≫ ((constantCommuteCompose (ProEt.topology X)
+    (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).hom.app (CommRingCat.of A)).hom ≫
+    sheafifyMap (ProEt.topology X)
+      ((Functor.const X.ProEtᵒᵖ).map (RingCat.ofHom φ)) ≫
+    (((sheafificationAdjunction (ProEt.topology X) RingCat.{t + 1}).homEquiv
+      _ _).symm (ProEtale.finiteCoefficientScalarMap X Λ)).hom = _
+  rw [constantCommuteCompose_hom_app_hom]
+  simp only [← Category.assoc, sheafComposeIso_inv_fac]
+  have hc : (Functor.constComp X.ProEtᵒᵖ (CommRingCat.of A)
+      (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).hom = 𝟙 _ := rfl
+  rw [hc, sheafifyMap_id, Category.comp_id, ← toSheafify_naturality, Category.assoc]
+  congr 1
+  exact Equiv.apply_symm_apply
+    ((sheafificationAdjunction (ProEt.topology X) RingCat.{t + 1}).homEquiv _ _)
+    (ProEtale.finiteCoefficientScalarMap X Λ)
+
+/-- The finite constant-coefficient scalar map, composed with the finite ring comparison,
+is the constant-coefficient scalar map followed by the n-th projection.
+Source: Stacks 03DA, 099M (blueprint: thm-cbc-complete-proetale). -/
+theorem cbcFiniteScalarMap_comparison (V : Scheme.{t}) (n : ℕ) :
+    ProEtale.StrictTower.finiteScalarMap A V (ProEtale.PbcQuotient d n)
+        (Ideal.Quotient.mk (d.ideal ^ (n + 1))) ≫
+      (AdicCoefficients.finiteRingComparison V (ProEtale.PbcQuotient d n)).inv =
+    (adicLisseForget V).map (exchangeScalar d V ≫ completedReductionProjection V d n) := by
+  apply cbcConstRing_hom_ext
+  simp only [ObjectProperty.FullSubcategory.comp_hom, ← Category.assoc]
+  erw [cbcFiniteScalarMap_unit]
+  have h1 : ProEtale.finiteCoefficientScalarMap V (ProEtale.PbcQuotient d n) ≫
+      (AdicCoefficients.finiteRingComparison V (ProEtale.PbcQuotient d n)).inv.hom =
+      pbcFunctionScalars V d n := rfl
+  erw [Category.assoc, h1, cbcPbcFunctionScalars_eq, cbcExchangeScalar_projection]
+  change _ = Functor.whiskerRight (toSheafify _ _) _ ≫
+    Functor.whiskerRight (sheafifyMap _ _ ≫ _) _
+  have h2 : toSheafify (ProEt.topology V) ((Functor.const V.ProEtᵒᵖ).obj (CommRingCat.of A)) ≫
+      sheafifyMap (ProEt.topology V) ((Functor.const V.ProEtᵒᵖ).map
+        (CommRingCat.ofHom (Ideal.Quotient.mk (d.ideal ^ (n + 1))))) =
+      (Functor.const V.ProEtᵒᵖ).map (CommRingCat.ofHom (Ideal.Quotient.mk (d.ideal ^ (n + 1)))) ≫
+        toSheafify (ProEt.topology V) ((Functor.const V.ProEtᵒᵖ).obj
+          (CommRingCat.of (A ⧸ d.ideal ^ (n + 1)))) :=
+    (toSheafify_naturality _ _).symm
+  have h3 := congrArg (fun k ↦ Functor.whiskerRight k (forget₂ CommRingCat.{t + 1} RingCat.{t + 1}) ≫
+    Functor.whiskerRight (pbcLevelConstantComparison V d n).hom.hom
+      (forget₂ CommRingCat RingCat)) h2
+  simp only [Functor.whiskerRight_comp, Category.assoc] at h3 ⊢
+  exact h3.symm
+
 attribute [local instance] ProEtale.StrictTower.finiteRestriction_finiteLimits
   ProEtale.StrictTower.finiteRestriction_finiteColimits
 
