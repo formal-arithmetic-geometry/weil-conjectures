@@ -37,6 +37,7 @@ public import Mathlib.CategoryTheory.Sites.Equivalence
 public import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
 public import Mathlib.CategoryTheory.Limits.EssentiallySmall
 public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
+public import WeilConjectures.AlgebraicGeometry.SmoothPurityReductionTowerIntegralHeart
 /-!
 # Integral compact support and its strict reduction tower
 
@@ -118,17 +119,53 @@ Source: blueprint, clause (3) (blueprint: det-sp-integral-direct-image-tower). -
 abbrev tensor (T : Scheme.{u}) : Integral l E T ⥤ Integral l E T ⥤ Integral l E T :=
   CondensedRing.derivedTensor (spIntegralCondensed l E) T
 
-/-- The canonical presentation data already supplied by the dependency nodes.
+/-- The canonical presentation data supplied by the current reduction construction.
+Reduction is defined below using `SpReductionTowerConstruction` and the current theorem;
+there is no supplied field asserting constructibility outside that theorem's hypotheses.
+`Presentation.ofOperations` assembles the remaining data without any reduction assumption.
 These are coefficient constructions, not hypotheses on a scheme or on an input.
 Source: blueprint, coefficient conventions and clause (1)
 (blueprint: det-sp-integral-direct-image-tower). -/
 structure Presentation where
   towers : ∀ T : Scheme.{u}, SpCoefficientTowersAbelian l E T
-  reduction : ∀ T : Scheme.{u}, SpReductionTower l E T (towers T)
   base : SpTowerShriek.Base l E
   operations : SpTowerShriek.Operations l E base
   exchange : SpTowerShriek.OpenExchange l E base operations
   laws : SpTowerShriek.Laws l E base operations exchange
+
+/-- A representative of the canonical reduction construction supplied by the current
+reduction theorem. Its coefficient normalization, quotient transitions, tensor-generator
+formulas and universal derived functor determine the construction up to the natural
+isomorphism used downstream. The condensed-source functor and its comparison are retained
+by `choose_spec`; constructibility is used only in the separated finite-type integral-heart
+setting over a field with l invertible, not for arbitrary Noetherian schemes;
+there is no independent or withdrawn constructibility assumption in `Presentation`.
+Source: latest blueprint, direct-image proof (1) and
+part-duality-trace-formula/sec-smooth-purity/sec-sp-grp-setup/sec-coefficients/
+sk-prop-sp-integral-towers/sk-prop-sp-integral-towers-reduction.md
+(blueprint: def-sp-integral-direct-image-tower-data). -/
+def Presentation.reduction {l : ℕ} [Fact l.Prime] {E : Type u} [Field E]
+    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+    (s : Presentation l E) (T : Scheme.{u}) :
+    SpReductionTowerConstruction l E T (s.towers T) :=
+  (sp_reduction_tower_integral_heart_statement l E T (s.towers T)).choose
+
+/-- Assemble the presentation from its already specified coefficient towers and geometric
+operations. Reduction is defined by the current canonical construction, rather than supplied
+as a field carrying the old qcqs constructibility assertion.
+Source: latest blueprint, direct-image proof (1)--(3)
+(blueprint: def-sp-integral-direct-image-tower-data). -/
+def Presentation.ofOperations
+    (towers : ∀ T : Scheme.{u}, SpCoefficientTowersAbelian l E T)
+    (base : SpTowerShriek.Base l E)
+    (operations : SpTowerShriek.Operations l E base)
+    (exchange : SpTowerShriek.OpenExchange l E base operations)
+    (laws : SpTowerShriek.Laws l E base operations exchange) : Presentation l E where
+  towers := towers
+  base := base
+  operations := operations
+  exchange := exchange
+  laws := laws
 
 /-- Reduction of internal integral modules, through the recorded section equivalence.
 Source: blueprint, red_T (blueprint: det-sp-integral-direct-image-tower). -/
@@ -263,6 +300,13 @@ def imageTower (s : Presentation l E) {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) (M : Integral l E X) :
     spDerivedCoefficientTowers l E Y (s.towers Y) :=
   (towerShriek l E s c).obj ((red l E s X).obj M)
+
+/-- One evaluated finite compact-support image, keeping the recorded scalar action.
+Source: blueprint, clause (1) (blueprint: det-sp-integral-direct-image-tower). -/
+def imageLevel (s : Presentation l E) {X Y : Scheme.{u}} {f : X ⟶ Y}
+    (c : Compactification f) (M : Integral l E X) (n : ℕ) :
+    Scheme.proEtaleDerivedCategory Y (SpTowerShriek.R l E n) :=
+  (spDerivedCoefficientEvaluation l E Y (s.towers Y) n).obj (imageTower l E s c M)
 
 /-- The natural comparison of whole strict towers on the bounded constructible domain.
 Source: blueprint, clause (2) (blueprint: det-sp-integral-direct-image-tower). -/
@@ -541,6 +585,28 @@ def finiteComparison (s : Presentation l E) (e : Evaluation l E s)
       (finiteShriek l E s c n)).symm ≪≫
     Functor.isoWhiskerRight (Evaluation.derived l E s e X n) (finiteShriek l E s c n)
 
+/-- The named integral-to-finite reduction mate: evaluate the constructed strict map
+and apply the transported Fcomparison. It is defined as a morphism, not as an iso field.
+Source: blueprint, clause (2) (blueprint: det-sp-integral-direct-image-tower). -/
+def finiteBaseChange (s : Presentation l E) (q : ReductionGeometry l E s)
+    (hq : OpenReductionIsIso l E s q)
+    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
+    (M : Integral l E X) (n : ℕ) :
+    (level l E s Y n).obj ((shriek l E c).obj M) ⟶
+      (finiteShriek l E s c n).obj ((level l E s X n).obj M) :=
+  (spDerivedCoefficientEvaluation l E Y (s.towers Y) n).map
+      (towerBaseChange l E s q hq c M) ≫
+    (finiteComparison l E s q.evaluation c n).hom.app ((red l E s X).obj M)
+
+/-- Whole-tower invertibility of the constructed mate on the constructible domain.
+The equality pins the entire arrow, including any morphisms invisible to evaluation.
+Source: blueprint, clause (2) (blueprint: det-sp-integral-direct-image-tower). -/
+structure CanonicalTowerComparison (s : Presentation l E) (q : ReductionGeometry l E s)
+    (hq : OpenReductionIsIso l E s q)
+    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) where
+  iso : TowerComparison l E s c
+  hom_eq : ∀ M : Constructible l E X, iso.hom.app M = towerBaseChange l E s q hq c M.obj
+
 /-- The canonical reconstruction arrow: the normalized completion unit followed by
 limit of the constructed proper/open mate. No isomorphism field defines this arrow.
 Source: blueprint, clause (2) and proof paragraphs (2)--(3)
@@ -603,5 +669,17 @@ def pullFactor {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
     pull l E f ≅ pull l E c.g ⋙ pull l E c.i :=
   eqToIso (congrArg (fun h ↦ pull l E h) c.comm) ≪≫
     CondensedRing.leftDerivedUpperStarComp (spIntegralCondensed l E) c.i c.g
+
+/-- The open projection mate, pushed forward properly, after the specified pullback
+factorization. Together with properProjection it is the canonical projection span
+Rf_!M tensor K -> Rp_*(j_!M tensor p^*K) <- Rf_!(M tensor f^*K).
+Source: blueprint, clause (3) (blueprint: det-sp-integral-direct-image-tower). -/
+def compactOpenProjection {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
+    (M : Integral l E X) (K : Integral l E Y) :
+    (shriek l E c).obj (((tensor l E X).obj M).obj ((pull l E f).obj K)) ⟶
+      projectionMiddle l E c M K :=
+  (shriek l E c).map (((tensor l E X).obj M).map ((pullFactor l E c).hom.app K)) ≫
+    (CondensedRing.lowerStar (spIntegralCondensed l E) c.g).rightDerivedFunctor.map
+      (openProjection l E c.i M ((pull l E c.g).obj K))
 
 end AlgebraicGeometry.ProEtale.IntegralDirectImageTower

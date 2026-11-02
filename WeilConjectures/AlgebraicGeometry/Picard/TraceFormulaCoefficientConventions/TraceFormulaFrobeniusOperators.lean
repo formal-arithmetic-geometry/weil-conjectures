@@ -11,6 +11,42 @@ public import WeilConjectures.AlgebraicGeometry.CondensedGeometricPoint.Condense
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.FrobeniusRationalPointFixed
 public import WeilConjectures.SixFunctors.Supporting.PullbackTorAmplitude
 public import WeilConjectures.SmoothPurity.CondensedOrdinaryCompactSections
+public import Mathlib.Algebra.Algebra.Subalgebra.Lattice
+public import Mathlib.Algebra.Ring.Subring.Defs
+public import Mathlib.AlgebraicGeometry.Morphisms.Constructors
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.CategoryTheory.MorphismProperty.Limits
+public import Mathlib.Data.Nat.Choose.Sum
+public import Mathlib.Data.Nat.Prime.Defs
+public import Mathlib.LinearAlgebra.TensorProduct.Tower
+public import Mathlib.RingTheory.Spectrum.Prime.Homeomorph
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Mathlib.RingTheory.TensorProduct.Maps
+public import Mathlib.RingTheory.WittVector.Frobenius
+public import Mathlib.Tactic.Ring
+public import Mathlib.Topology.Homeomorph.Defs
+public import WeilConjectures.AlgebraicGeometry.AbsoluteFrobenius
+public import WeilConjectures.AlgebraicGeometry.Morphisms.Frobenius
+public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism.Algebra
+public import WeilConjectures.AlgebraicGeometry.Picard.CondensedFrobeniusOperators.TraceFormulaIteratedWeil
+public import WeilConjectures.AlgebraicGeometry.Picard.CondensedFrobeniusOperators.TraceFormulaSchemeGaloisComparison
+public import WeilConjectures.AlgebraicGeometry.Picard.KFlatResolutionIndependentCoefficients
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Canonical.ProEtaleCanonicalPullbackComposition
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantExact
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantRingMap
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantRingOperations
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantRingPullbackComparison
+public import WeilConjectures.AlgebraicGeometry.SixFunctors.AbsoluteFrobeniusSite
+public import WeilConjectures.AlgebraicGeometry.SixFunctors.FrobeniusTrivializationPullback
+public import WeilConjectures.Compactification.FiniteFieldDatum.FiniteFieldFiberSupplement
+public import WeilConjectures.PoincareDuality.CondensedFrobeniusOperators.FiniteStrictWeilComplex.TraceFormulaFiniteStrictWeilComplex
+public import WeilConjectures.SixFunctors.CondensedFrobeniusOperators.TraceFormulaFiniteCompactTransport
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ModuleDerivedCategory
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CohomologyTransport.CondensedFiniteCohomologyTransport
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CohomologyTransport.CondensedGeometricFrobeniusTransport
+public import WeilConjectures.SmoothPurity.FiniteFieldDatum.FrobeniusFactorization
+public import WeilConjectures.SmoothPurity.FiniteFieldDatum.SchemeFrobenius
+public import WeilConjectures.TraceFormula.FrobeniusIterate
 
 /-! # Global and local finite-coefficient geometric Frobenius operators
 
@@ -101,3 +137,177 @@ def localFrobeniusAtRationalPoint (T : TraceFormulaCoefficientConventions.{u})
     (rationalPoint_schemeFrobenius_fixed T.datum T.X₀ m hm x)
 
 end WeilConjectures.TraceFormulaCoefficientConventions
+
+namespace WeilConjectures.CondensedFrobeniusOperators
+
+/-- The scheme-square for the `m`-th geometric-Frobenius power.  Its base map and
+middle map are the actual powers, so the compact transport below is `t_{c,g^m}`.
+
+Source: `literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/
+sec-sp-grp-trace/sec-the-trace-map/sk-cor-sp-all-coefficients/def-trf-frobenius-operators.md`
+(blueprint: def-trf-frobenius-operators).
+-/
+noncomputable def poweredGeometry
+    (F : WeilConjectures.FiniteFieldDatum.{u})
+    (Y₀ : Over (Spec (CommRingCat.of F.k₀))) [IsSeparated Y₀.hom]
+    [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] (m : ℕ) :
+    Geometry F.k := by
+  let q := geometricFrobeniusGeometry F Y₀
+  let g : q.X ≅ q.X :=
+    { hom := (F.geometricFrobenius Y₀).hom
+      inv := (F.geometricFrobenius Y₀).inv
+      hom_inv_id := (F.geometricFrobenius Y₀).hom_inv_id
+      inv_hom_id := (F.geometricFrobenius Y₀).inv_hom_id }
+  have hbase : g.hom ≫ q.a = q.a ≫ q.b.hom := by
+    simpa [q, g, geometricFrobeniusGeometry] using q.comm
+  exact
+    { X := q.X
+      X' := q.X
+      a := q.a
+      a' := q.a
+      b := q.b.pow m
+      h := g.pow m
+      comm := by
+        induction m with
+        | zero => simp
+        | succ m ih =>
+          rw [Iso.pow_succ, Iso.pow_succ, Iso.trans_hom, Iso.trans_hom]
+          simp only [Category.assoc]
+          rw [hbase]
+          simpa [Category.assoc] using congrArg (fun f => f ≫ q.b.hom) ih
+      separated := q.separated
+      finiteType := q.finiteType
+      quasiCompact := q.quasiCompact
+      separated' := q.separated
+      finiteType' := q.finiteType
+      quasiCompact' := q.quasiCompact }
+
+/-- The global geometric Frobenius operator
+`F^m_{c,K} = RΓ_c(φ^[m]) ∘ t_{c,g^m}`.
+
+Source: `literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/
+sec-sp-grp-trace/sec-the-trace-map/sk-cor-sp-all-coefficients/def-trf-frobenius-operators.md`
+(blueprint: def-trf-frobenius-operators).
+-/
+noncomputable def condensedGlobalFrobenius
+    (F : WeilConjectures.FiniteFieldDatum.{u})
+    (Y₀ : Over (Spec (CommRingCat.of F.k₀))) [IsSeparated Y₀.hom]
+    [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]
+    (ell : ℕ) [Fact ell.Prime] (hEll : ell ≠ F.p) (E : Type u) [Field E]
+    [Algebra (Padic ell) E] [FiniteDimensional (Padic ell) E]
+    (n : ℕ) (hn : 1 ≤ n)
+    (K : FiniteStrictWeilComplex F Y₀ ell E n hn)
+    (c : Compactification (geometricFrobeniusGeometry F Y₀).a) (m : ℕ) (_hm : 1 ≤ m) :
+    End ((Γ (finiteCoefficient ell E n) (Spec (.of F.k))).obj
+      ((C (finiteCoefficient ell E n) c).obj K.carrier.obj)) := by
+  let Λ := finiteCoefficient ell E n
+  let q := poweredGeometry F Y₀ m
+  let S := finiteTransportData F ell hEll E n hn
+  let hM := S.property.pull_constructible q K.carrier
+  exact
+    compactTransport Λ S.val q c c K.carrier hM ≫
+      (Γ Λ (Spec (.of F.k))).map
+        ((C Λ c).map (iteratedWeil F Y₀ ell E n hn K m).hom)
+
+/-- A rational point with its canonical geometric lift from the finite extension point.
+
+Source: `literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/
+sec-sp-grp-trace/sec-the-trace-map/sk-cor-sp-all-coefficients/def-trf-frobenius-operators.md`
+(blueprint: def-trf-frobenius-operators).
+-/
+structure FiniteFixedPoint
+    (F : WeilConjectures.FiniteFieldDatum.{u})
+    (Y₀ : Over (Spec (CommRingCat.of F.k₀))) [IsSeparated Y₀.hom]
+    [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] (m : ℕ) (hm : 1 ≤ m) where
+  x : F.extensionPoints Y₀ m hm
+
+/-- The geometric lift of `x ∈ X₀(F_(q^m))`, using the fixed inclusion into `k`.
+
+Source: `literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/
+sec-sp-grp-trace/sec-the-trace-map/sk-cor-sp-all-coefficients/def-trf-frobenius-operators.md`
+(blueprint: def-trf-frobenius-operators).
+-/
+noncomputable def FiniteFixedPoint.xbar
+    (F : WeilConjectures.FiniteFieldDatum.{u})
+    (Y₀ : Over (Spec (CommRingCat.of F.k₀))) [IsSeparated Y₀.hom]
+    [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] (m : ℕ) (hm : 1 ≤ m)
+    (P : FiniteFixedPoint F Y₀ m hm) : Spec (.of F.k) ⟶ (F.geometricFiber Y₀).left :=
+  localExtensionPoint F Y₀ m hm P.x
+
+/-- The canonical stalk transport before point evaluation. After applying `Γ`, this
+is `τ_{x,m} = Fib(Lx̄^*κ^(m)) ∘ ρ_{x,m}`. Its first two factors form `ρ` from
+the recorded fixed-point equality and pullback compositor; the last factor applies
+the normalized scheme/Galois comparison.
+
+Source: `literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/
+sec-sp-grp-trace/sec-the-trace-map/sk-cor-sp-all-coefficients/def-trf-frobenius-operators.md`
+(blueprint: def-trf-frobenius-operators).
+-/
+noncomputable def fixedPointReturn
+    (F : WeilConjectures.FiniteFieldDatum.{u})
+    (Y₀ : Over (Spec (CommRingCat.of F.k₀))) [IsSeparated Y₀.hom]
+    [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]
+    (ell : ℕ) [Fact ell.Prime] (hEll : ell ≠ F.p) (E : Type u) [Field E]
+    [Algebra (Padic ell) E] [FiniteDimensional (Padic ell) E]
+    (n : ℕ) (hn : 1 ≤ n) (m : ℕ) (hm : 1 ≤ m)
+    (P : FiniteFixedPoint F Y₀ m hm)
+    (K : FiniteStrictWeilComplex F Y₀ ell E n hn) :
+    (L (finiteCoefficient ell E n) (P.xbar F Y₀ m hm)).obj K.carrier.obj ≅
+      (L (finiteCoefficient ell E n) (P.xbar F Y₀ m hm)).obj
+        ((L (finiteCoefficient ell E n)
+          ((geometricFrobeniusGeometry F Y₀).h.pow m).hom).obj K.carrier.obj) := by
+  let Λ := finiteCoefficient ell E n
+  let xbar := P.xbar F Y₀ m hm
+  exact (eqToIso (congrArg (fun f => (L Λ f).obj K.carrier.obj)
+      (rationalPoint_schemeFrobenius_fixed F Y₀ m hm P.x))).symm ≪≫
+    (leftDerivedUpperStarComp Λ xbar (F.schemeFrobeniusIterate Y₀ m)).app
+      K.carrier.obj ≪≫
+    (L Λ xbar).mapIso (finiteSchemeGaloisComparison F Y₀ ell hEll E n hn K m hm)
+
+/-- The local geometric Frobenius operator
+`F_{x,m}=Fib(Lx̄^*φ^[m]) ∘ Fib(Lx̄^*κ^(m)) ∘ ρ_{x,m}`.
+The middle factor is the finite-coefficient scheme/Galois comparison represented by the
+powered condensed geometry; the final map is the iterated Weil isomorphism.
+
+Source: `literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/
+sec-sp-grp-trace/sec-the-trace-map/sk-cor-sp-all-coefficients/def-trf-frobenius-operators.md`
+(blueprint: def-trf-frobenius-operators).
+-/
+noncomputable def condensedLocalFrobenius
+    (F : WeilConjectures.FiniteFieldDatum.{u})
+    (Y₀ : Over (Spec (CommRingCat.of F.k₀))) [IsSeparated Y₀.hom]
+    [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]
+    (ell : ℕ) [Fact ell.Prime] (hEll : ell ≠ F.p) (E : Type u) [Field E]
+    [Algebra (Padic ell) E] [FiniteDimensional (Padic ell) E]
+    (n : ℕ) (hn : 1 ≤ n) (m : ℕ) (hm : 1 ≤ m)
+    (P : FiniteFixedPoint F Y₀ m hm)
+    (K : FiniteStrictWeilComplex F Y₀ ell E n hn) :
+    End ((Γ (finiteCoefficient ell E n) (Spec (.of F.k))).obj
+      ((L (finiteCoefficient ell E n) (P.xbar F Y₀ m hm)).obj K.carrier.obj)) := by
+  let Λ := finiteCoefficient ell E n
+  let G := Γ Λ (Spec (.of F.k))
+  let tau := fixedPointReturn F Y₀ ell hEll E n hn m hm P K
+  exact G.map tau.hom ≫
+    G.map ((L Λ (P.xbar F Y₀ m hm)).map
+      (iteratedWeil F Y₀ ell E n hn K m).hom)
+
+/-- The induced global operator on every integer compact cohomology group.
+Source: `literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/
+sec-sp-grp-trace/sec-the-trace-map/sk-cor-sp-all-coefficients/def-trf-frobenius-operators.md`
+(blueprint: def-trf-frobenius-operators). -/
+noncomputable def condensedGlobalFrobeniusCohomology
+    (F : WeilConjectures.FiniteFieldDatum.{u})
+    (Y₀ : Over (Spec (CommRingCat.of F.k₀))) [IsSeparated Y₀.hom]
+    [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]
+    (ell : ℕ) [Fact ell.Prime] (hEll : ell ≠ F.p) (E : Type u) [Field E]
+    [Algebra (Padic ell) E] [FiniteDimensional (Padic ell) E]
+    (n : ℕ) (hn : 1 ≤ n) (K : FiniteStrictWeilComplex F Y₀ ell E n hn)
+    (c : Compactification (geometricFrobeniusGeometry F Y₀).a) (m : ℕ) (hm : 1 ≤ m) (i : ℤ) :=
+  (@DerivedCategory.homologyFunctor.{u + 1, u + 1, u + 2}
+    (ModuleCat.{u + 1, u + 1} (condensedScalarRing (finiteCoefficient ell E n)))
+    inferInstance inferInstance
+    (HasDerivedCategory.ofIsGrothendieckAbelian
+      (ModuleCat.{u + 1, u + 1} (condensedScalarRing (finiteCoefficient ell E n)))) i).map
+    (condensedGlobalFrobenius F Y₀ ell hEll E n hn K c m hm)
+
+end WeilConjectures.CondensedFrobeniusOperators
