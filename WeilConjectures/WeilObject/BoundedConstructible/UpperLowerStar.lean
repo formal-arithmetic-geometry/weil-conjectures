@@ -9,7 +9,6 @@ public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRightPaste
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructiblePullback
 public import WeilConjectures.WeilObject.BoundedConstructible.Defs
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructiblePullback
 
 /-!
 
@@ -85,6 +84,7 @@ variable {X Y X' Y' : Over (Spec (.of k))}
   [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
   [IsSeparated X'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
+
 
 /-- The derived pullback `Lg^*` along an isomorphism `g` on bounded constructible complexes is an
 equivalence, with inverse `L(g⁻¹)^*`: the composition isomorphisms identify both composites with

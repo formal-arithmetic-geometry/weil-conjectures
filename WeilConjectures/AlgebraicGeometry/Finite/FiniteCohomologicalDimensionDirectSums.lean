@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Torsion.TorsionEtaleCohomologicalDimension
 import all WeilConjectures.CategoryTheory.CompactTestsRightAdjointCoproducts
 import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Coproducts
+import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.CohomologicalDimension
 import WeilConjectures.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageForgetComparison
 import WeilConjectures.AlgebraicGeometry.EtaleModuleCohomologyForget
 

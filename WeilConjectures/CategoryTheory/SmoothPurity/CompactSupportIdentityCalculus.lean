@@ -254,8 +254,6 @@ private def derivedIdentity {A : Type*} [Category A] [Abelian A] [HasDerivedCate
     (t : T ≅ 𝟭 A) : T.mapDerivedCategory ≅ 𝟭 _ :=
   Functor.mapDerivedCategoryNatIso t ≪≫ Functor.mapDerivedCategoryIdIso A
 
-omit [CategoryTheory.Abelian.HasKInjectiveResolutions C]
-  [R.PreservesKInjectiveComplexes] in
 end IdentitySquares
 end IdentityProofHelpers
 

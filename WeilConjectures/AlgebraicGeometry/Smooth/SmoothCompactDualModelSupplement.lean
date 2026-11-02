@@ -1489,9 +1489,4 @@ private theorem modelForFiniteField
   have hC := modelImage_bounded Λ k S aS X f N hNc
   exact ⟨modelFromDual Λ hfield f L N hN τ C ciso hC⟩
 
-attribute [local instance 2000] ModuleCat.hasColimitsOfShape
-  ModuleCat.hasColimitsOfSize in
-attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint in
-attribute [local instance] isIso_projectionMap_of_finite in
-attribute [local instance] isIso_rightDerivedLowerShriekBaseChangeMap in
 end AlgebraicGeometry.Etale

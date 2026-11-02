@@ -418,6 +418,8 @@ import Mathlib.CategoryTheory.Limits.FullSubcategory
 import WeilConjectures.AlgebraicGeometry.Finite.Comparison.FiniteComparisonPresentationSupplement
 import WeilConjectures.AlgebraicGeometry.Finite.Comparison.FiniteComparisonFaithful
 
+set_option linter.privateModule false
+
 /-!
 # Finite coefficient comparison on localizing closures
 

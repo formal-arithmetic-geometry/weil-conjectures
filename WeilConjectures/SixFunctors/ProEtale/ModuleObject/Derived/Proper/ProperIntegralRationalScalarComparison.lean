@@ -468,8 +468,6 @@ attribute [local irreducible] derivedPushHom derivedComapLowerStarIso
   Mod.extendScalars
 
 -- Apply the abstract pasting identity to the published coefficient comparisons.
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end CoefficientComposition
 
 end AlgebraicGeometry.ProEtale.CondensedRing
@@ -568,6 +566,4 @@ attribute [local irreducible] Mod.extendRestrictAdjunction
   properIntegralRationalScalarComparison
   integralRationalScalarPullIso
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end AlgebraicGeometry.ProEtale.CondensedRing

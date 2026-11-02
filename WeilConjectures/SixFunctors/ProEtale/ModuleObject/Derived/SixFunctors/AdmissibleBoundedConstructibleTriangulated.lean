@@ -14,6 +14,8 @@ import WeilConjectures.CategoryTheory.SmoothBaseChange.CohomologyInWeakSerreSubc
 import WeilConjectures.CategoryTheory.RingObjects.Condensed.BaseCoefficientCondensedIdentification
 import Mathlib.AlgebraicGeometry.Noetherian
 
+set_option linter.privateModule false
+
 /-! # Triangulated bounded constructibility
 
 Source: current blueprint, internal-Hom stability proof, Step 2.

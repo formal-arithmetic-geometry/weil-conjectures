@@ -353,7 +353,6 @@ private theorem projection_bounded (E : Type) [Field E]
     IsIso (moduleObjectProjectionMap (Profinite.padicIntegersRingObj.{u} ℓ E) p.left A M) := by
   exact projection_from_model ℓ k p (integral_model ℓ E k p) A M hA hM
 
-include ℓ k in
 namespace ContinuousMapRingObj
 
 end ContinuousMapRingObj

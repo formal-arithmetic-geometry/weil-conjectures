@@ -62,6 +62,4 @@ attribute [local irreducible] proEtaleTensorPullbackTotalIso
   proEtaleRingDerivedPullbackFactors CategoryTheory.Functor.mapDerivedCategory
   HomologicalComplex₂.total CategoryTheory.Functor.leftAdjoint
 
-set_option maxHeartbeats 1600000 in
--- Comparing total-tensor and localization models exceeds the default heartbeat budget.
 end AlgebraicGeometry.ProEtale

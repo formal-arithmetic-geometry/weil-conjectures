@@ -33,6 +33,30 @@ namespace AlgebraicGeometry.ProEtale
 variable (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})
 
+/-- Naturality of the canonical reduction projections on every module map. -/
+private theorem integralLisseCokernelCone_natural
+    {M N : ringedSiteModules.{u + 1} (integralLisseRing l E X)}
+    (f : M ⟶ N) (n : ℕ) :
+    f ≫ (integralLisseCokernelCone l E X N).app (op n) =
+      (integralLisseCokernelCone l E X M).app (op n) ≫
+        (integralLisseCokernelMap l E X f).app (op n) := by
+  simp [integralLisseCokernelCone, integralLisseCokernelMap, cokernel.map]
+
+/-- The concrete quotient-tower functor is additive. -/
+private instance integralLisseCokernelFunctor_additive :
+    (integralLisseCokernelFunctor l E X).Additive where
+  map_add {M N} f g := by
+    apply NatTrans.ext
+    funext n
+    apply (cancel_epi (cokernel.π _)).1
+    change (integralLisseCokernelCone l E X M).app n ≫
+        (integralLisseCokernelMap l E X (f + g)).app n = _
+    rw [← integralLisseCokernelCone_natural l E X (f + g) n.unop]
+    simp only [Preadditive.add_comp, Preadditive.comp_add, NatTrans.app_add]
+    rw [integralLisseCokernelCone_natural l E X f n.unop,
+      integralLisseCokernelCone_natural l E X g n.unop]
+    rfl
+
 /-- A section over an object defines compatible sections on its slice. -/
 def integralLisseSectionOver
     (M : ringedSiteModules.{u + 1} (integralLisseRing l E X)) (U : X.ProEt)

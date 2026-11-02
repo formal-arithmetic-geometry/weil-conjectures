@@ -58,6 +58,8 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUn
 import WeilConjectures.Algebra.Homology.DerivedTensorConstraints.DerivedTensorAdditiveConstraints
 import WeilConjectures.Algebra.Homology.ProjectionCoherence.RingedProjectionCoherenceData
 
+set_option linter.privateModule false
+
 /-! Canonical tensor constraints for arbitrary recorded representative models.
 (blueprint: lem-sfb-ringed-projection-tensor-constraints)
 -/
@@ -87,6 +89,4 @@ private theorem representativeArrow (X : RingedTensorCorner.{u, w})
   unfold SheafOfModules.KFlatFixedTensor.representativeIso
   rfl
 
-set_option maxHeartbeats 800000 in
--- The representative comparison and normalized derived constraints require this budget.
 end SheafOfModules.ProjectionCoherence

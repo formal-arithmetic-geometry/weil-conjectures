@@ -404,11 +404,6 @@ private theorem scalar_extension_plus_of_finiteTor
       ((scalarTensorIso φ T).app M).symm ht
   exact exactFaithful_reflects_plus U _ hres
 
-attribute [-instance] CategoryTheory.catToReflQuiver in
 end ExceptionalCoefficients
 
-attribute [-instance] CategoryTheory.catToReflQuiver in
-attribute [-instance] CategoryTheory.catToReflQuiver in
-attribute [-instance] CategoryTheory.catToReflQuiver in
-attribute [-instance] CategoryTheory.catToReflQuiver in
 end AlgebraicGeometry.Etale

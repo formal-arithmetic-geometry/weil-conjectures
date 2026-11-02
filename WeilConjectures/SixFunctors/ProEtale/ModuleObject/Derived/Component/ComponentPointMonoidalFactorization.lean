@@ -43,9 +43,4 @@ variable (T : Scheme.{u}) [IsAffine T]
   [PreservesFiniteLimits (componentInverse T)]
   [PreservesFiniteColimits (componentInverse T)]
 
-omit [(componentInverse T).Braided] [PreservesFiniteLimits (componentInverse T)]
-  [PreservesFiniteColimits (componentInverse T)] in
-omit [PreservesFiniteLimits (componentInverse T)]
-  [PreservesFiniteColimits (componentInverse T)] in
-set_option linter.unusedSectionVars false in
 end AlgebraicGeometry.ProEtale.CondensedRing

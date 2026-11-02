@@ -11,8 +11,8 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethClosure
 public import WeilConjectures.TraceFormula.Specialization.NearbyFiniteness
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethFiniteSupport
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethGlobal
-public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethProperReduction
-public import WeilConjectures.SixFunctors.Supporting.ModCondensedCachedInstances
+public import WeilConjectures.TraceFormula.Specialization.TraitModelRestrict
+public import WeilConjectures.TraceFormula.Specialization.TraitProductRestrict
 
 /-!
 
@@ -52,8 +52,6 @@ dimension, extending the coefficients by zero
 -/
 
 @[expose] public section
-
-open scoped AlgebraicGeometry.ProEtale.CondensedRing.CachedModInstances
 
 universe u
 

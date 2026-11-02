@@ -263,19 +263,4 @@ These statements are used by both compactification independence and lower-shriek
 composition; keeping one copy avoids duplicate propositions across the import closure. -/
 
 -- Exact derivation and restriction to a full subcategory preserve full faithfulness.
-open scoped CategoryTheory.Obj in
-open CategoryTheory.Limits in
-set_option backward.isDefEq.respectTransparency false in
-open scoped CategoryTheory.Obj in
-open CategoryTheory.Limits in
-open scoped CategoryTheory.Obj in
-open CategoryTheory.Limits in
-open scoped CategoryTheory.Obj in
-open CategoryTheory.Limits in
-open scoped CategoryTheory.Obj in
-open CategoryTheory.Limits in
-open scoped CategoryTheory.Obj in
-open CategoryTheory.Limits in
-open scoped CategoryTheory.Obj in
-open CategoryTheory.Limits in
 end AlgebraicGeometry.ProEtale.CondensedRing
