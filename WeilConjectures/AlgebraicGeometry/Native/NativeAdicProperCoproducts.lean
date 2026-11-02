@@ -61,7 +61,8 @@ colimits, so the original native functor preserves the coproduct. The argument
 includes the empty family and imposes no absolute separatedness. -/
 theorem nativeAdicProper_preservesCoproducts
     (k : Type u) [Field k] (l : ℕ) [Fact l.Prime] (hl : ringChar k ≠ l)
-    {Z Y : Scheme.{u}} (aY : Y ⟶ Spec (CommRingCat.of k)) [IsNoetherian Y]
+    {Z Y : Scheme.{u}} (aY : Y ⟶ Spec (CommRingCat.of k))
+    [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY] [IsNoetherian Y]
     (p : Z ⟶ Y) [IsProper p] (I : Type (u + 1)) :
     PreservesColimitsOfShape (Discrete I)
       ((DerivedCategory.boundedAdicConstructible l Z).localizingClosure.ι ⋙
