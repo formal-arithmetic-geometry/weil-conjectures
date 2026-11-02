@@ -140,4 +140,59 @@ theorem unit_assembly
   erw [reassoc_of% hn]
   simp
 
+/-- `assoc_assembly`, with the completed associator given through its normalization at the
+composite inclusion and equality transports. -/
+theorem assoc_assembly_of_spec
+    (SE : ObjectProperty DE) (SL : ObjectProperty DL) (SM : ObjectProperty DM)
+    (PE : ObjectProperty AE) (PL : ObjectProperty AL) (PM : ObjectProperty AM)
+    (IE : SE.FullSubcategory ⥤ PE.FullSubcategory)
+    (IL : SL.FullSubcategory ⥤ PL.FullSubcategory)
+    (IM : SM.FullSubcategory ⥤ PM.FullSubcategory)
+    (TE : DE ⥤ AE) (TL : DL ⥤ AL) (TM : DM ⥤ AM)
+    (θE : IE ⋙ PE.ι ≅ SE.ι ⋙ TE) (θL : IL ⋙ PL.ι ≅ SL.ι ⋙ TL)
+    (θM : IM ⋙ PM.ι ≅ SM.ι ⋙ TM)
+    (Sh : DE ⥤ DL) (Sk : DL ⥤ DM) (Shk : DE ⥤ DM)
+    (hSh : ∀ K, SL ((SE.ι ⋙ Sh).obj K)) (hSk : ∀ K, SM ((SL.ι ⋙ Sk).obj K))
+    (hShk : ∀ K, SM ((SE.ι ⋙ Shk).obj K))
+    (Xh : AE ⥤ AL) (Xk : AL ⥤ AM) (Xhk : AE ⥤ AM)
+    (hXh : ∀ K, PL ((PE.ι ⋙ Xh).obj K)) (hXk : ∀ K, PM ((PL.ι ⋙ Xk).obj K))
+    (hXhk : ∀ K, PM ((PE.ι ⋙ Xhk).obj K))
+    (bh : IE ⋙ PL.lift (PE.ι ⋙ Xh) hXh ≅ SL.lift (SE.ι ⋙ Sh) hSh ⋙ IL)
+    (bk : IL ⋙ PM.lift (PL.ι ⋙ Xk) hXk ≅ SM.lift (SL.ι ⋙ Sk) hSk ⋙ IM)
+    (bhk : IE ⋙ PM.lift (PE.ι ⋙ Xhk) hXhk ≅ SM.lift (SE.ι ⋙ Shk) hShk ⋙ IM)
+    (aU : SL.lift (SE.ι ⋙ Sh) hSh ⋙ SM.lift (SL.ι ⋙ Sk) hSk ≅ SM.lift (SE.ι ⋙ Shk) hShk)
+    (aC : PL.lift (PE.ι ⋙ Xh) hXh ⋙ PM.lift (PL.ι ⋙ Xk) hXk ≅
+      PM.lift (PE.ι ⋙ Xhk) hXhk)
+    (A : Xh ⋙ Xk ≅ Xhk) (hA : ∀ X, (aC.hom.app X).hom = A.hom.app X.obj)
+    (Oh : DE ⥤ DL) (Ok : DL ⥤ DM) (Ohk : DE ⥤ DM) (Oc : Oh ⋙ Ok ≅ Ohk)
+    (eh : Oh ⋙ TL ≅ TE ⋙ Xh) (ek : Ok ⋙ TM ≅ TL ⋙ Xk) (ehk : Ohk ⋙ TM ≅ TE ⋙ Xhk)
+    (ωh : SE.ι ⋙ Oh ≅ SE.ι ⋙ Sh) (ωk : SL.ι ⋙ Ok ≅ SL.ι ⋙ Sk)
+    (ωhk : SE.ι ⋙ Ohk ≅ SE.ι ⋙ Shk)
+    (Gh : ∀ K, (bh.hom.app K).hom ≫ θL.hom.app ((SL.lift (SE.ι ⋙ Sh) hSh).obj K) =
+      Xh.map (θE.hom.app K) ≫ eh.inv.app K.obj ≫ TL.map (ωh.hom.app K))
+    (Gk : ∀ K, (bk.hom.app K).hom ≫ θM.hom.app ((SM.lift (SL.ι ⋙ Sk) hSk).obj K) =
+      Xk.map (θL.hom.app K) ≫ ek.inv.app K.obj ≫ TM.map (ωk.hom.app K))
+    (Ghk : ∀ K, (bhk.hom.app K).hom ≫ θM.hom.app ((SM.lift (SE.ι ⋙ Shk) hShk).obj K) =
+      Xhk.map (θE.hom.app K) ≫ ehk.inv.app K.obj ≫ TM.map (ωhk.hom.app K))
+    (hD : ∀ Y, TM.map (Oc.hom.app Y) ≫ ehk.hom.app Y =
+      ek.hom.app (Oh.obj Y) ≫ Xk.map (eh.hom.app Y) ≫ A.hom.app (TE.obj Y))
+    (Shk0 : DE ⥤ DM) (hShk0 : ∀ K, SM ((SE.ι ⋙ Shk0).obj K)) (eS : Shk0 = Shk)
+    (aU0 : SL.lift (SE.ι ⋙ Sh) hSh ⋙ SM.lift (SL.ι ⋙ Sk) hSk ≅
+      SM.lift (SE.ι ⋙ Shk0) hShk0) (haU : aU ≍ aU0)
+    (Ohk0 : DE ⥤ DM) (eO : Ohk0 = Ohk) (Oc0 : Oh ⋙ Ok ≅ Ohk0) (hOc : Oc ≍ Oc0)
+    (ωhk0 : SE.ι ⋙ Ohk0 ≅ SE.ι ⋙ Shk0) (hω : ωhk ≍ ωhk0)
+    (hU0 : ∀ K, (aU0.hom.app K).hom = ωk.inv.app ((SL.lift (SE.ι ⋙ Sh) hSh).obj K) ≫
+      Ok.map (ωh.inv.app K) ≫ Oc0.hom.app K.obj ≫ ωhk0.hom.app K)
+    (K : SE.FullSubcategory) :
+    (PM.lift (PL.ι ⋙ Xk) hXk).map (bh.hom.app K) ≫
+        bk.hom.app ((SL.lift (SE.ι ⋙ Sh) hSh).obj K) ≫ IM.map (aU.hom.app K) =
+      aC.hom.app (IE.obj K) ≫ bhk.hom.app K := by
+  subst eS eO
+  cases haU
+  cases hOc
+  cases hω
+  exact assoc_assembly SE SL SM PE PL PM IE IL IM TE TL TM θE θL θM Sh Sk Shk0 hSh hSk hShk
+    Xh Xk Xhk hXh hXk hXhk bh bk bhk _ aC A hA Oh Ok Ohk0 _ eh ek ehk ωh ωk _ Gh Gk Ghk
+    hU0 hD K
+
 end WeilConjectures.FdIntegralScalarForward
