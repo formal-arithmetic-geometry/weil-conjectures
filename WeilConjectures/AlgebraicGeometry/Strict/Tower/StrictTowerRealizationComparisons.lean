@@ -772,6 +772,8 @@ private theorem cbcRealizationRestrictionForgetsProducts
     NatIso.ofComponents (fun M ↦ Iso.refl _) (fun f ↦ by rfl)
   exact preservesLimitsOfShape_of_natIso e.symm
 
+-- The cached universe-polymorphic sheafification instance gets stuck on the coefficient universe.
+attribute [-instance] SheafOfModules.RingedCoefficientProjection.cachedSheafifyModules in
 /-- Products are preserved by scalar restriction and by quasi-compact constant open extension.
 Source: Stacks 03D3, 09BP
 (blueprint: lem-cbc-complete-proetale-strict-tower-realization).
