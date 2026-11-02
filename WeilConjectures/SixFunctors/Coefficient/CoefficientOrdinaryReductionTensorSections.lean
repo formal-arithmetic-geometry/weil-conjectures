@@ -155,37 +155,7 @@ theorem OrdinaryModel.tensorPresentation_transition (M : OrdinaryModel l E W)
       (NatTrans.mapHomologicalComplex (coefficientOrdinaryQuotient l E W h) (.up ℤ)).app
         ((coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
           (completedIntegralCommRingSheafUnrestricted l E W)).obj (P, Q)) := by
-  exact OrdinaryReductionTensor.tensorPresentation_transition
-    (hEm := coefficientFiniteExtensionAdditive l E W m)
-    (hEn := coefficientFiniteExtensionAdditive l E W n)
-    (hevm := coefficientSequenceEvaluation_additiveInstance l E W m)
-    (hevn := coefficientSequenceEvaluation_additiveInstance l E W n)
-    ((sheafCompose (Scheme.ProEt.topology W)
-      (forget₂ CommRingCat.{max u (t+1)} RingCat.{max u (t+1)})).map
-        (completedIntegralCommRingProjectionUnrestricted l E W m))
-    ((sheafCompose (Scheme.ProEt.topology W)
-      (forget₂ CommRingCat.{max u (t+1)} RingCat.{max u (t+1)})).map
-        (completedIntegralCommRingProjectionUnrestricted l E W n))
-    (normalizedDVRQuotient l E W h) (coefficientRestrictionComp l E W h)
-    (coefficientOrdinaryScalarAdjunction l E W m) (coefficientOrdinaryScalarAdjunction l E W n)
-    (coefficientOrdinaryQuotient l E W h) sorry
-    (coefficientSequenceTransition l E W h) h
-    (fun N U x ↦ coefficientEvaluationSection l E W N m U x)
-    (fun N U x ↦ coefficientEvaluationSection l E W N n U x)
-    (fun N U ↦ coefficientEvaluationSection_surjective l E W N m U)
-    sorry P Q
-    ((M.quotient l E W).obj P) ((M.quotient l E W).obj Q)
-    ((NatIso.mapHomologicalComplex (M.evaluation m) (.up ℤ)).app P)
-    ((NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).app P)
-    ((NatIso.mapHomologicalComplex (M.evaluation m) (.up ℤ)).app Q)
-    ((NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).app Q)
-    sorry sorry
-    (coefficientEvaluationTensorIso l E W m _ _)
-    sorry
-    (coefficientEvaluationTensorIso l E W n _ _)
-    sorry
-    (coefficientScalarTensorIso l E W m P Q) sorry
-    (coefficientScalarTensorIso l E W n P Q) sorry
+  sorry
 
 end
 end OrdinaryQuotient

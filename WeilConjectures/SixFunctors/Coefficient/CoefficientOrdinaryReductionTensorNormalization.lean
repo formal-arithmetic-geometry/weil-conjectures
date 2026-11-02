@@ -319,6 +319,7 @@ theorem coefficientEvaluationTensorIso_inv_generator (n : ℕ)
   cochainIso_inv_section _ k U _ _
     (coefficientEvaluationTensorIso_hom_generator l E W n P Q p q k h U x y)
 
+
 attribute [local irreducible] coefficientTotalTensor coefficientTensorGenerator
 
 attribute [local irreducible] coefficientEvaluationTensorIso
@@ -550,6 +551,42 @@ theorem coefficientSystemTensorModelIso_naturality (S : CoefficientDerivedSystem
     Functor.comp_map, Functor.prod_map, Prod.mkHom, ObjectProperty.ι,
     inducedFunctor, ObjectProperty.homMk] at h ⊢
   exact h
+/-- Transport of a reduction tensor square along strict presentations: if each presentation
+is the comparison `ε` followed by a localized strict map, and the strict maps intertwine the
+strict tensor maps, the square for the presentations gives the square for `ε`.
+Source: Stacks 07A4. -/
+theorem tensorComparisonSquare_transport {A B K : Type*} [Category* A] [Category* B]
+    [Category* K] (T : A × A ⥤ A) (T' : B × B ⥤ B) (F : A ⥤ B) (Q : K ⥤ B)
+    {X Y Z : A} {XP XQ XZ C D Zc N N' : K}
+    (s : Z ⟶ T.obj (X, Y)) (μ : T ⋙ F ⟶ F.prod F ⋙ T')
+    (εP : F.obj X ⟶ Q.obj XP) (εQ : F.obj Y ⟶ Q.obj XQ) (εZ : F.obj Z ⟶ Q.obj XZ)
+    [IsIso εP] [IsIso εQ]
+    (eC : F.obj X ≅ Q.obj C) (eD : F.obj Y ≅ Q.obj D) (eZ : F.obj Z ≅ Q.obj Zc)
+    (gC : XP ⟶ C) (gD : XQ ⟶ D) (gZ : XZ ⟶ Zc)
+    (heC : eC.hom = εP ≫ Q.map gC) (heD : eD.hom = εQ ≫ Q.map gD)
+    (heZ : eZ.hom = εZ ≫ Q.map gZ)
+    (ψ : Zc ⟶ N') (b : XZ ⟶ N) (m : N ⟶ N') (hS : b ≫ m = gZ ≫ ψ)
+    (I : Q.obj N ⟶ T'.obj (Q.obj XP, Q.obj XQ)) (I' : Q.obj N' ⟶ T'.obj (Q.obj C, Q.obj D))
+    (hn : Q.map m ≫ I' = I ≫ T'.map (Prod.mkHom (Q.map gC) (Q.map gD)))
+    (hsq : CoefficientTensorComparisonSquare T T' F Q s μ eC.hom eD.hom eZ.hom ψ I') :
+    CoefficientTensorComparisonSquare T T' F Q s μ εP εQ εZ b I := by
+  have : IsIso (Q.map gC) := by
+    have : IsIso (εP ≫ Q.map gC) := by
+      rw [← heC]
+      infer_instance
+    exact IsIso.of_isIso_comp_left εP _
+  have : IsIso (Q.map gD) := by
+    have : IsIso (εQ ≫ Q.map gD) := by
+      rw [← heD]
+      infer_instance
+    exact IsIso.of_isIso_comp_left εQ _
+  have := isIso_bifunctor_map_mkHom T' (Q.map gC) (Q.map gD)
+  unfold CoefficientTensorComparisonSquare at hsq ⊢
+  rw [← cancel_mono (T'.map (Prod.mkHom (Q.map gC) (Q.map gD)))]
+  simp only [Category.assoc]
+  rw [bifunctor_map_mkHom_comp, ← heC, ← heD, hsq, heZ, ← hn, Category.assoc,
+    ← Q.map_comp_assoc, ← Q.map_comp_assoc, hS]
+
 /-- The universal comparison of the ordinary quotient system realizes the binary tensor
 normalization of a derived reduction: on flat-term K-flat inputs, the ordinary tensor
 comparison `b` and the comparison `ε` fit into the normalized reduction tensor square.
@@ -609,41 +646,12 @@ theorem OrdinaryModel.reductionTensor_normalization (M : OrdinaryModel l E W)
     R.adjunction ε hhom _ Z eZ κZ pZ.adjunction
   have hS := M.tensor_comp_map_eq l E W b hb P Q κC κD (fun n ↦ (κZ n).hom) gC gD gZ hgC hgD hgZ
     ψ hψ
+  have hn := coefficientSystemTensorModelIso_naturality l E W R.toCoefficientDerivedSystemTensors
+    (hpres P hP fP) (hpres Q hQ fQ) hC hD gC gD
   have := hcomp P hP fP
   have := hcomp Q hQ fQ
-  have : IsIso (DerivedCategory.Q.map gC) := by
-    have : IsIso (ε.app P ≫ DerivedCategory.Q.map gC) := by
-      rw [← heC]
-      infer_instance
-    exact IsIso.of_isIso_comp_left (ε.app P) _
-  have : IsIso (DerivedCategory.Q.map gD) := by
-    have : IsIso (ε.app Q ≫ DerivedCategory.Q.map gD) := by
-      rw [← heD]
-      infer_instance
-    exact IsIso.of_isIso_comp_left (ε.app Q) _
-  have := isIso_bifunctor_map_mkHom R.systemClosed.tensor (DerivedCategory.Q.map gC)
-    (DerivedCategory.Q.map gD)
-  unfold CoefficientTensorComparisonSquare at hsq ⊢
-  rw [← cancel_mono (R.systemClosed.tensor.map
-    (Prod.mkHom (DerivedCategory.Q.map gC) (DerivedCategory.Q.map gD)))]
-  simp only [Category.assoc]
-  rw [bifunctor_map_mkHom_comp, ← heC, ← heD, hsq, heZ]
-  have key : DerivedCategory.Q.map gZ ≫ DerivedCategory.Q.map ψ ≫
-      (coefficientSystemTensorModelIso l E W R.toCoefficientDerivedSystemTensors C D hC hD).hom =
-      DerivedCategory.Q.map (b.hom.app (P, Q)) ≫
-        (coefficientSystemTensorModelIso l E W R.toCoefficientDerivedSystemTensors
-          ((M.quotient l E W).obj P) ((M.quotient l E W).obj Q)
-          (hpres P hP fP) (hpres Q hQ fQ)).hom ≫
-        R.systemClosed.tensor.map (Prod.mkHom (DerivedCategory.Q.map gC)
-          (DerivedCategory.Q.map gD)) := by
-    have hn := coefficientSystemTensorModelIso_naturality l E W R.toCoefficientDerivedSystemTensors
-      (hpres P hP fP) (hpres Q hQ fQ) hC hD gC gD
-    have hS' := congrArg (fun x ↦ DerivedCategory.Q.map x) hS
-    dsimp only at hS'
-    rw [Functor.map_comp, Functor.map_comp] at hS'
-    rw [← reassoc_of% hS']
-    sorry
-  sorry
+  exact tensorComparisonSquare_transport _ _ _ _ _ _ _ _ _ _ _ _ gC gD gZ heC heD heZ ψ _ _ hS _ _
+    hn hsq
 
 end OrdinaryQuotient
 

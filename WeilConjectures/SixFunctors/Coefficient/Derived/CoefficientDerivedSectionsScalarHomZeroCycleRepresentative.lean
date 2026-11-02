@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerivedSectionsScalarHomZeroRepresentativeData
 import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerivedSectionsScalarHomZeroCycleUnitor
+import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerivedSectionsScalarHomZeroCycleFormal
 
 @[expose] public section
 set_option autoImplicit false
@@ -18,6 +19,8 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
 
+set_option maxHeartbeats 600000 in
+-- The assembly elaborates several large localized composites at once.
 /-- The scalar transpose formula for one explicit zero-cycle representative.
 Source: Stacks 03CZ, 079P and 08JA.
 Proof: apply the finite tensor comparison square to the fixed Hom-complex
@@ -61,8 +64,9 @@ theorem coefficientDerivedSectionsScalarHomZero_cycle_representative
           ((coefficientFiniteDerivedRestriction l E W n).obj (DerivedCategory.Q.obj M)) x) := by
   have hUA := coefficientUnitComplex_isKFlat.{u} (Scheme.ProEt.topology W)
     (completedIntegralCommRingSheafUnrestricted l E W)
-  let σ := coefficientHomUnitMapOfCycle.{u, t + 1, t} (Scheme.ProEt.topology W)
-    (completedIntegralCommRingSheafUnrestricted l E W) P N z
+  obtain ⟨σ, hσ⟩ : ∃ σ, σ = coefficientHomUnitMapOfCycle.{u, t + 1, t}
+    (Scheme.ProEt.topology W) (completedIntegralCommRingSheafUnrestricted l E W) P N z :=
+    ⟨_, rfl⟩
   -- the class of `z` is the image of the unit class
   have hcls : coefficientHomZeroClass.{u, t + 1, t, max (t + 2) (u + 1)} (Scheme.ProEt.topology W)
       (completedIntegralCommRingSheafUnrestricted l E W) P N z =
@@ -72,8 +76,11 @@ theorem coefficientDerivedSectionsScalarHomZero_cycle_representative
             (Scheme.ProEt.topology W) (completedIntegralCommRingSheafUnrestricted l E W) P N).inv))
         (coefficientUnitClass.{u} (Scheme.ProEt.topology W)
           (completedIntegralCommRingSheafUnrestricted l E W)) := by
+    subst hσ
     have h := coefficientHomZeroClass_cycleOfUnitMap.{u, t + 1, t} (Scheme.ProEt.topology W)
-      (completedIntegralCommRingSheafUnrestricted l E W) P N σ
+      (completedIntegralCommRingSheafUnrestricted l E W) P N
+      (coefficientHomUnitMapOfCycle.{u, t + 1, t} (Scheme.ProEt.topology W)
+        (completedIntegralCommRingSheafUnrestricted l E W) P N z)
     rw [coefficientHomCycleOfUnitMap_unitMapOfCycle] at h
     exact h
   -- the H-zero class `x` as a morphism
@@ -95,7 +102,8 @@ theorem coefficientDerivedSectionsScalarHomZero_cycle_representative
         ((DerivedCategory.homologyFunctor AddCommGrpCat.{max u (t + 1)} 0).map
           ((coefficientIntegralSections l E W).map
             (DerivedCategory.Q.map σ ≫ (coefficientHomResolutionIso.{u, t + 1, t}
-              (Scheme.ProEt.topology W) (completedIntegralCommRingSheafUnrestricted l E W) P N).inv))
+              (Scheme.ProEt.topology W) (completedIntegralCommRingSheafUnrestricted l E W)
+                P N).inv))
           (coefficientUnitClass.{u} (Scheme.ProEt.topology W)
             (completedIntegralCommRingSheafUnrestricted l E W)))
     have h4 := coefficientHomZeroEquiv_unitClass_transpose.{u, t + 1, t} (Scheme.ProEt.topology W)
@@ -103,11 +111,60 @@ theorem coefficientDerivedSectionsScalarHomZero_cycle_representative
       hP ((R.integralClosed.transpose _ _ _).symm
         (DerivedCategory.Q.map σ ≫ (coefficientHomResolutionIso.{u, t + 1, t}
           (Scheme.ProEt.topology W) (completedIntegralCommRingSheafUnrestricted l E W) P N).inv))
-    rw [Equiv.apply_symm_apply] at h4
+    erw [Equiv.apply_symm_apply] at h4
     rw [← hx, hcls]
     refine hn.trans ?_
     rw [Category.id_comp]
-    exact congrArg (· ≫ eN.hom) h4
-  sorry
+    refine (congrArg (· ≫ eN.hom) h4).trans ?_
+    simp only [Category.assoc]
+  have hU := coefficientFiniteAdjunction_unit_unitClass l E W D n
+  -- the class `x` is the image of the unit class
+  have hx' : x = (DerivedCategory.homologyFunctor AddCommGrpCat.{max u (t + 1)} 0).map
+      ((coefficientIntegralSections l E W).map
+        ((DerivedCategory.Q.map σ ≫ (coefficientHomResolutionIso.{u, t + 1, t}
+          (Scheme.ProEt.topology W) (completedIntegralCommRingSheafUnrestricted l E W) P N).inv) ≫
+          (coefficientIntegralInternalHom l E W).map
+            (Prod.mkHom (𝟙 (op (DerivedCategory.Q.obj P))) eN.hom)))
+      (coefficientUnitClass.{u} (Scheme.ProEt.topology W)
+        (completedIntegralCommRingSheafUnrestricted l E W)) := by
+    refine hx.symm.trans ((congrArg _ hcls).trans ?_)
+    refine (Functor.map_comp_apply_addCommGrp _ _ _ _).trans ?_
+    simp only [Functor.map_comp]
+    rfl
+  have hP' := (coefficientTensorModelPreservation l E W).1 P hP n
+  have hnat := (coefficientHomZeroEquiv_exists.{u, t + 1, t, max (t + 2) (u + 1)}
+    (Scheme.ProEt.topology W) (integralCoefficientCommRingSheaf l E W n)).choose_spec.1.1
+      ((coefficientFiniteDerivedExtension l E W n).obj (DerivedCategory.Q.obj P))
+      (DerivedCategory.Q.obj M)
+      (DerivedCategory.Q.obj (((scalarReductionExtension l E W n).mapHomologicalComplex
+        (.up ℤ)).obj P))
+      (DerivedCategory.Q.obj M) (coefficientFiniteReductionModel l E W P hP n).inv (𝟙 _)
+  have h4 := coefficientHomZeroEquiv_unitClass_transpose.{u, t + 1, t, max (t + 2) (u + 1)}
+    (Scheme.ProEt.topology W) (integralCoefficientCommRingSheaf l E W n) (R.finiteClosed n)
+    (R.finiteTensorModel n)
+    (((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).obj P) M hP'
+  have hW := coefficientFiniteTensor_unitLeftUnitor l E W R hF D n P hP
+  exact coefficientEnrichedAdjunctionMap_homZero R.integralClosed (R.finiteClosed n)
+    (coefficientFiniteDerivedExtension l E W n) (coefficientFiniteAdjunction l E W n)
+    (R.finiteTensor n) (coefficientIntegralSections l E W) (coefficientFiniteSections l E W n)
+    (DerivedCategory.homologyFunctor AddCommGrpCat.{max u (t + 1)} 0) (D.scalarSections n).hom
+    (fun X Y ↦ coefficientFiniteHomEquiv l E W n X Y) _ _ _ hU
+    (coefficientFiniteReductionModel l E W P hP n) hnat
+    (DerivedCategory.Q.map (coefficientUnitLeftUnitor.{u} (Scheme.ProEt.topology W)
+        (integralCoefficientCommRingSheaf l E W n)
+        (((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).obj P)).inv ≫
+      (CoefficientTensorModels.iso.{u, t + 1, t} (Scheme.ProEt.topology W)
+        (integralCoefficientCommRingSheaf l E W n) (R.finiteClosed n) (R.finiteTensorModel n)
+        (coefficientFiniteUnitComplex l E W n)
+        (((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).obj P)
+        (coefficientUnitComplex_isKFlat.{u} _ _) hP').hom)
+    (fun X ↦ (h4 X).trans (Category.assoc _ _ _).symm)
+    (DerivedCategory.Q.map (coefficientUnitLeftUnitor.{u} (Scheme.ProEt.topology W)
+        (completedIntegralCommRingSheafUnrestricted l E W) P).inv ≫
+      (CoefficientTensorModels.iso.{u, t + 1, t} (Scheme.ProEt.topology W)
+        (completedIntegralCommRingSheafUnrestricted l E W) R.integralClosed
+        R.integralTensorModel (coefficientIntegralUnitComplex l E W) P hUA hP).hom)
+    (by simpa only [Category.assoc] using hW) _ eN.hom x hx' _
+    (heA.trans (Category.assoc _ _ _).symm)
 
 end WeilConjectures

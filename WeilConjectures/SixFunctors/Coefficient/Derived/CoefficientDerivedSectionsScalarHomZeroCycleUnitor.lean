@@ -162,7 +162,7 @@ theorem coefficientUnitLeftUnitor_inv_scalarExtension
           (integralCoefficientCommRingSheaf l E W n) V 1)
         (coefficientIntegralScalarUnitSection l E W n (P.X q) V x) :=
     coefficientUnitLeftUnitor_inv_apply.{u} _ _ _ q V _
-  show (((coefficientTotalTensor.{u, t + 1, t} (Scheme.ProEt.topology W)
+  have key : (((coefficientTotalTensor.{u, t + 1, t} (Scheme.ProEt.topology W)
       (integralCoefficientCommRingSheaf l E W n)).map
         (Prod.mkHom (coefficientFiniteUnitComparison l E W D n) (𝟙 _))).f q).val.app V
       (((coefficientUnitLeftUnitor.{u} (Scheme.ProEt.topology W)
@@ -173,11 +173,12 @@ theorem coefficientUnitLeftUnitor_inv_scalarExtension
       P).hom.f q).val.app V
       (((scalarReductionExtension l E W n).map ((coefficientUnitLeftUnitor.{u}
         (Scheme.ProEt.topology W) (completedIntegralCommRingSheafUnrestricted l E W)
-          P).inv.f q)).val.app V (coefficientIntegralScalarUnitSection l E W n (P.X q) V x))
-  rw [s1, coefficientTotalTensor_map_tensorGenerator]
-  erw [coefficientFiniteUnitComparison_apply_one_unitSection]
-  rw [scalarReductionExtension_map_unitSection, coefficientUnitLeftUnitor_inv_apply]
-  exact hsti.symm
+          P).inv.f q)).val.app V (coefficientIntegralScalarUnitSection l E W n (P.X q) V x)) := by
+    rw [s1, coefficientTotalTensor_map_tensorGenerator]
+    erw [coefficientFiniteUnitComparison_apply_one_unitSection]
+    rw [scalarReductionExtension_map_unitSection, coefficientUnitLeftUnitor_inv_apply]
+    exact hsti.symm
+  exact key
 
 /-- The finite tensor comparison carries the scalar extension of the derived inverse left
 unitor on a K-flat complex to the finite derived inverse left unitor, along the
