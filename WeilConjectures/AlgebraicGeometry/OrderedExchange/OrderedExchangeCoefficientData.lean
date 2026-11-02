@@ -22,6 +22,7 @@ public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChangeAdjunctionSupplement
 import all WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientDatumSupplement
 import all WeilConjectures.AlgebraicGeometry.OrderedExchange.ProEtaleConstantReductionModels
+import WeilConjectures.AlgebraicGeometry.OrderedExchange.OrderedExchangeRhoComparison
 import all WeilConjectures.AlgebraicGeometry.CompletedConstantAlgebraFlatQuotients
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
@@ -587,6 +588,31 @@ def ordinaryRho (T : Scheme.{t}) :
       completedReductionModuleTowerFunctor T d ⋙ exchangeTowerModuleRes d T :=
   (ordinaryRho_existsUnique d T).exists.choose
 
+/-- Restriction followed by constant strict reduction preserves quasi-isomorphisms
+between flat-term K-flat complexes over the completed coefficients. -/
+private theorem restrictReduction_quasiIso (T : Scheme.{t})
+    {P Q : CochainComplex (reductionModules T (d.completedRing T)) ℤ} (a : P ⟶ Q)
+    (hP : CochainComplex.IsKFlatIndependentCoefficients.{t + 1, t, t + 1}
+      (R := d.completedRing T) P)
+    (hQ : CochainComplex.IsKFlatIndependentCoefficients.{t + 1, t, t + 1}
+      (R := d.completedRing T) Q) (ha : QuasiIso a) :
+    QuasiIso (((reductionRestrict T (exchangeScalar d T) ⋙
+      reductionModule d T).mapHomologicalComplex
+      (.up ℤ)).map a) := by
+  have hflat := orderedScalarFlat d T
+  have hrP := SheafOfModules.isKFlat_restrictScalars_of_flat (exchangeScalar d T) hflat P hP
+  have hrQ := SheafOfModules.isKFlat_restrictScalars_of_flat (exchangeScalar d T) hflat Q hQ
+  have hra : QuasiIso (((reductionRestrict T (exchangeScalar d T)).mapHomologicalComplex
+      (.up ℤ)).map a) := inferInstance
+  rw [HomologicalComplex.quasiIso_iff_evaluation]
+  intro n
+  let φ := quotient d T n.unop
+  have hchange := scalarChangeQuasiIso T φ _ hrP.1 hrQ.1 hra
+  change QuasiIso (((reductionRestrict T φ).mapHomologicalComplex (.up ℤ)).map
+    (((reductionChange T φ).mapHomologicalComplex (.up ℤ)).map
+      (((reductionRestrict T (exchangeScalar d T)).mapHomologicalComplex (.up ℤ)).map a)))
+  infer_instance
+
 attribute [local irreducible] ordinaryRho reductionModule completedReductionModuleTowerFunctor
   completedReductionCoefficient constantSheaf AdicCoefficients.coefficientRing
   SheafOfModules.monoidalCategory
@@ -630,7 +656,25 @@ of this kind, so the formula determines the natural isomorphism uniquely. -/
 theorem rho_exists_core (T : Scheme.{t}) :
     ∃ e : completedReductionTower T d ⋙ exchangeTowerRes d T ≅
         res d T ⋙ reduction d T, RhoNormalization d T e := by
-  sorry
+  have hflat := orderedScalarFlat d T
+  obtain ⟨e, he⟩ := reductionComposite_normalized_iso_of_data
+    (reductionRestrict T (exchangeScalar d T))
+    (exchangeTowerModuleRes d T) (completedReductionModuleTowerFunctor T d) (reductionModule d T)
+    (completedReductionTower T d) (coherenceReductionTowerCounit T d) (ordinaryRho d T)
+    (reductionData d T)
+    (fun P ↦ CochainComplex.IsKFlatIndependentCoefficients.{t + 1, t, t + 1}
+        (R := d.completedRing T) P ∧
+      ∀ n : ℤ, SheafOfModules.IsFlatOnSite.{t + 1, t, t + 1, t + 1}
+        (R := d.completedRing T) (P.X n))
+    (fun X ↦ by
+      obtain ⟨L, f, hL, hf⟩ := flatKFlatResolution T (d.completedRing T) X
+      exact ⟨L, f, hL, hf⟩)
+    (fun a hP hQ ha ↦ restrictReduction_quasiIso d T a hP.1 hQ.1 ha)
+    (fun P hP ↦ (completedReductionTower_properties T d).2.2 P hP.1)
+    (fun P hP ↦
+      (SheafOfModules.isKFlat_restrictScalars_of_flat (exchangeScalar d T) hflat P hP.1).1)
+  unfold RhoNormalization reduction reductionComplexCounit
+  exact ⟨e, fun P hP hPf ↦ he P ⟨hP, hPf⟩⟩
 
 theorem rho_unique_core (T : Scheme.{t})
     {e₁ e₂ : completedReductionTower T d ⋙ exchangeTowerRes d T ≅
