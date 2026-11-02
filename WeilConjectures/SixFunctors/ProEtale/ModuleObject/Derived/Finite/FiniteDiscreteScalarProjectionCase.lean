@@ -158,15 +158,15 @@ private theorem point_counit_isIso :
     IsIso ((constantSheafAdj (coherentTopology Profinite.{u}) Ab.{u + 1}
       Profinite.isTerminalPUnit).counit.app (coefficient A)) := by
   let J := coherentTopology Profinite.{u}
-  have hφ : J.W (A := Ab.{u + 1}) (pointConstants A) :=
-    J.W_of_isLocallyBijective (pointConstants A)
-  have : IsIso ((presheafToSheaf J Ab.{u + 1}).map (pointConstants A)) :=
+  have hφ : J.W (A := Ab.{u + 1}) (FiniteDiscreteOrdinary.pointConstants A) :=
+    J.W_of_isLocallyBijective (FiniteDiscreteOrdinary.pointConstants A)
+  have : IsIso ((presheafToSheaf J Ab.{u + 1}).map (FiniteDiscreteOrdinary.pointConstants A)) :=
     (J.W_iff _).mp hφ
   have h : IsIso ((constantSheaf J Ab.{u + 1}).map (scalarHom A) ≫
       (constantSheafAdj J Ab.{u + 1} Profinite.isTerminalPUnit).counit.app
         (coefficient A)) := by
     rw [pointScalar_counit A]
-    change IsIso ((presheafToSheaf J Ab.{u + 1}).map (pointConstants A) ≫
+    change IsIso ((presheafToSheaf J Ab.{u + 1}).map (FiniteDiscreteOrdinary.pointConstants A) ≫
       (sheafificationAdjunction J Ab.{u + 1}).counit.app (coefficient A))
     infer_instance
   exact (isIso_comp_left_iff _ _).mp h
@@ -328,7 +328,7 @@ theorem finiteDiscreteScalarProjectionCase
       ∀ K : DerivedCategory (ModuleRingedComparison.internalModules
           (cartesianFinitePointRing A) X.left),
       (constantModelBoundedConstructible (cartesianFinitePointRing A) X.left K ∧
-        DerivedCategory.finiteTorAmplitude _ K) →
+        _root_.DerivedCategory.finiteTorAmplitude _ K) →
       letI : IsMonHom a.hom.hom := a.hom.isMonHom_hom
       IsIso (QuotientChange.scalarProjection (Λ := cartesianFinitePointRing A)
         (Λ' := cartesianFinitePointRing B) a.hom.hom f.left K) := by
@@ -343,7 +343,7 @@ theorem finiteDiscreteScalarProjectionCase
   obtain ⟨P, ⟨eB⟩⟩ := encoded_restricted_regular A B a.hom.hom Y.left (E Y.left)
   obtain ⟨lo, hi, hTor⟩ := hK.2
   let lo' := min lo hi
-  have hTor' : DerivedCategory.torAmplitudeIn _ lo' hi K :=
+  have hTor' : _root_.DerivedCategory.torAmplitudeIn _ lo' hi K :=
     hTor.mono (min_le_left _ _) le_rfl
   obtain ⟨hreal, _⟩ := finiteCtfInternalEtaleRealization ell (ringChar k) k
     ((Fact.out : (ringChar k).Prime).pos) Fact.out A E
