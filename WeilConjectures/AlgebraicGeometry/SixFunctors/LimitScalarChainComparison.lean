@@ -10,6 +10,8 @@ public import WeilConjectures.SecSmoothPurity.CochainCoefficientArrowsSupplement
 public import Mathlib.Algebra.Category.Ring.Limits
 public import Mathlib.Algebra.Homology.Homotopy
 
+set_option linter.privateModule false
+
 /-! # Inverse-limit coefficient transport and scalar chain comparison
 
 Source: Stacks Project, sites-modules.tex, Tag 03EL, and the inverse-limit and

@@ -22,6 +22,8 @@ import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimit
 
+set_option linter.privateModule false
+
 /-!
 # Products and sequential derived limits of open extensions
 

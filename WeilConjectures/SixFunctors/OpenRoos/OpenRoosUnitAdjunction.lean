@@ -440,6 +440,8 @@ private theorem smallPrincipalHom
     (by simpa only [Functor.id_map, Iso.refl_hom, Category.id_comp] using he)
     (hb _ L ((principalLocallyComplete_iff R a L).mp hL))
 
+set_option maxHeartbeats 1000000 in
+-- On the rebased imports this proof needs more than the default heartbeat limit.
 private theorem principalHom (T : Scheme.{t})
     (σ : ∀ U : T.ProEtᵒᵖ, (completedIntegralCoefficientSheafUnrestricted l E T).obj.obj U)
     (hσ : ∀ {U V : T.ProEtᵒᵖ} (f : U ⟶ V),
@@ -776,8 +778,7 @@ private theorem coefficientFacts :
         (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1))) ∧
       Function.Surjective
         (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1)))) := by
-  have h := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  have h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   have : IsPrincipalIdealRing (Padic.coefficientExtensionIntegers l E) :=
     h.2.2.2.2.2.2.2.2.1
   have hf (n : ℕ) := Padic.finite_coefficientExtensionRing l E (n + 1) (by omega)

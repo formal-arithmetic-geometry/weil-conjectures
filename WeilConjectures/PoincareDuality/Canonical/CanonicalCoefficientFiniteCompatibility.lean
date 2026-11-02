@@ -11,6 +11,8 @@ import all WeilConjectures.PoincareDuality.Canonical.CanonicalCoefficientUnitNor
 import all WeilConjectures.PoincareDuality.Canonical.CanonicalCoefficientChainNormalization
 import all WeilConjectures.SmoothPurity.Supporting.ConstantWeilStructure
 
+set_option linter.privateModule false
+
 /-!
 # Compatibility of canonical finite coefficient projections
 

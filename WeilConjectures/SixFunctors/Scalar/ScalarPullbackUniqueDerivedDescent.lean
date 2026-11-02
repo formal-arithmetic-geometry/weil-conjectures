@@ -44,31 +44,4 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
   (ι : E →ₐ[ℚ_[l]] L)
 
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
-  CategoryTheory.GrothendieckTopology.hasSheafify_proEtTopology
-  WeilConjectures.PrincipalKoszulStrictReplacement.abSheafify
-  WeilConjectures.PrincipalKoszulStrictReplacement.abLocallyBijective
-  WeilConjectures.PrincipalKoszulStrictReplacement.siteSmall
-  WeilConjectures.integralOperationsAbSheafify
-  WeilConjectures.integralOperationsAbLocallyBijective
-  WeilConjectures.integralOperationsSiteSmall
-  WeilConjectures.integralOperationsCommHasDerivedCategory in
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
-  CategoryTheory.GrothendieckTopology.hasSheafify_proEtTopology
-  WeilConjectures.PrincipalKoszulStrictReplacement.abSheafify
-  WeilConjectures.PrincipalKoszulStrictReplacement.abLocallyBijective
-  WeilConjectures.PrincipalKoszulStrictReplacement.siteSmall
-  WeilConjectures.integralOperationsAbSheafify
-  WeilConjectures.integralOperationsAbLocallyBijective
-  WeilConjectures.integralOperationsSiteSmall
-  WeilConjectures.integralOperationsCommHasDerivedCategory in
-attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
-  CategoryTheory.GrothendieckTopology.hasSheafify_proEtTopology
-  WeilConjectures.PrincipalKoszulStrictReplacement.abSheafify
-  WeilConjectures.PrincipalKoszulStrictReplacement.abLocallyBijective
-  WeilConjectures.PrincipalKoszulStrictReplacement.siteSmall
-  WeilConjectures.integralOperationsAbSheafify
-  WeilConjectures.integralOperationsAbLocallyBijective
-  WeilConjectures.integralOperationsSiteSmall
-  WeilConjectures.integralOperationsCommHasDerivedCategory in
 end WeilConjectures

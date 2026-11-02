@@ -34,13 +34,4 @@ attribute [local irreducible] Module.Basis.baseChange ModuleCat.extendScalarsCom
 
 open scoped TensorProduct
 
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-attribute [local irreducible] normalizedTower
-
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
-attribute [local irreducible] finiteFieldMap
-
 end DerivedCategory

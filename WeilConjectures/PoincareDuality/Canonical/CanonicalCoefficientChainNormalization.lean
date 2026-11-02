@@ -10,6 +10,8 @@ import all WeilConjectures.PoincareDuality.Canonical.CanonicalCoefficientPullbac
 import all WeilConjectures.PoincareDuality.Canonical.CanonicalCoefficientUnitNormalization
 import all WeilConjectures.SmoothPurity.Supporting.ConstantWeilStructure
 
+set_option linter.privateModule false
+
 /-!
 # Normalization of the canonical regular coefficient chain maps
 

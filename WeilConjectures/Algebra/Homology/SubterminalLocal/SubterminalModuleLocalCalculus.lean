@@ -97,7 +97,6 @@ abbrev adj (Z : C) : jbang.{c, v, r} R Z ⊣ jstar.{c, v, r} R Z :=
   localizedSystemAdjunction.{c, v, r} R Z
 
 section LocalCalculusProof
-open Classical
 set_option backward.defeqAttrib.useBackward true
 
 section SheafificationComparison
