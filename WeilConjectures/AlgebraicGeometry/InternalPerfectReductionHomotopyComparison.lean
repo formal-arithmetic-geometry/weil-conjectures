@@ -18,9 +18,14 @@ universe u
 open CategoryTheory CategoryTheory.Limits MonoidalCategory Opposite
 namespace AlgebraicGeometry.ProEtale
 
+attribute [local instance] AdicCompletion.ringMonoidalObject AdicCompletion.ringCommutative
+  AdicCompletion.finiteRingMonoidalObject AdicCompletion.finiteRingCommutative
+
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
+set_option maxHeartbeats 1000000 in
+-- The balancing squares unfold the derived counits of successor extension.
 /-- The canonical levelwise derived-to-homotopy comparisons commute with successor
 scalar extension. The levelwise bijections themselves are already constructed and proved.
 No scalar Hom cohomology or locally constant functions enter this assertion.

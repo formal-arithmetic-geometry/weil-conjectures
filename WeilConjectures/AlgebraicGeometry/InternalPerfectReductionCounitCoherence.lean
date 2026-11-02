@@ -18,7 +18,7 @@ public import WeilConjectures.Tactic.ExactModProofs
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
-universe u
+universe u v w
 open CategoryTheory CategoryTheory.Limits MonoidalCategory Opposite
 namespace AlgebraicGeometry.ProEtale
 

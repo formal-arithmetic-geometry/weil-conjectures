@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Sites.Proetale
 import WeilConjectures.CategoryTheory.Sites.WeaklyContractibleOver
 import WeilConjectures.AlgebraicGeometry.ProEtaleCoefficientPullbackUniverses
 import WeilConjectures.SmoothPurity.ProEtaleWeaklyEtaleLocalization
+import WeilConjectures.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingInverseImage
 import WeilConjectures.SmoothPurity.Completed.CompletedIntegralCoefficientsSupplement
 

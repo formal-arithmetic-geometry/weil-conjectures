@@ -27,6 +27,9 @@ universe u
 open CategoryTheory CategoryTheory.Limits MonoidalCategory Opposite
 namespace AlgebraicGeometry.ProEtale
 
+attribute [local instance] AdicCompletion.ringMonoidalObject AdicCompletion.ringCommutative
+  AdicCompletion.finiteRingMonoidalObject AdicCompletion.finiteRingCommutative
+
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
@@ -63,7 +66,7 @@ private theorem cohomology_of_cochainComparison
           G.obj ((Q n).homology 0) := fun n ↦
     (HomologicalComplex.homologyFunctor _ _ 0).mapIso (comparison n).symm ≪≫
       ((Q n).sc 0).mapHomologyIso G
-  refine ⟨fun n ↦ (homologyHomEquiv _ _).trans
+  refine ⟨fun n ↦ (Scheme.homologyHomEquiv _ _).trans
     ((r n).addCommGroupIsoToAddEquiv.toEquiv.trans Equiv.ulift), ?_⟩
   intro n x
   obtain ⟨f, rfl⟩ := (HomotopyCategory.quotient _ (.up ℤ)).map_surjective x
@@ -89,13 +92,13 @@ private theorem cohomology_of_cochainComparison
     exact congrArg (fun k ↦ HomologicalComplex.homologyMap (comparison (n + 1)).inv 0 ≫ k)
       (ShortComplex.mapHomologyIso_hom_naturality
         ((HomologicalComplex.shortComplexFunctor _ _ 0).map τ) G)
-  have hh := homologyHomEquiv_scalar Φ α α f
-  change ((r n).hom (homologyHomEquiv _ _
+  have hh := Scheme.homologyHomEquiv_scalar Φ α α f
+  change ((r n).hom (Scheme.homologyHomEquiv _ _
       ((HomotopyCategory.quotient _ (.up ℤ)).map
         (α.inv ≫ (Φ.mapHomologicalComplex (.up ℤ)).map f ≫ α.hom)))).down = _
   rw [hh]
   change ((r n).hom (HomologicalComplex.homologyMap γ 0
-    (homologyHomEquiv _ _ ((HomotopyCategory.quotient _ (.up ℤ)).map f)))).down = _
+    (Scheme.homologyHomEquiv _ _ ((HomotopyCategory.quotient _ (.up ℤ)).map f)))).down = _
   rw [← AddCommGrpCat.comp_apply, hnat, AddCommGrpCat.comp_apply]
   rfl
 
