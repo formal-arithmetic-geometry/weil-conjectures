@@ -256,6 +256,9 @@ theorem integralReduction_reflects_isIso (X : Scheme.{u})
   let := (integralConstructible_serre ℓ E X).2.2
   let : (boundedConstructible (condensedRingObj (integralCoeff ℓ E) X)).IsTriangulated :=
     isTriangulated_boundedConstructible_of_serre _
+      (fun _ _ f hM hN ↦ ⟨ObjectProperty.prop_kernel _ f hM hN,
+        ObjectProperty.prop_cokernel _ f hM hN⟩)
+      (fun _ hS h₁ h₃ ↦ ObjectProperty.prop_X₂_of_shortExact _ hS h₁ h₃)
   obtain ⟨C, g, δ, hT⟩ := Pretriangulated.distinguished_cocone_triangle φ.hom
   obtain ⟨C', hC', ⟨e⟩⟩ := ObjectProperty.ext_of_isTriangulatedClosed₃'
     (boundedConstructible (condensedRingObj (integralCoeff ℓ E) X))
