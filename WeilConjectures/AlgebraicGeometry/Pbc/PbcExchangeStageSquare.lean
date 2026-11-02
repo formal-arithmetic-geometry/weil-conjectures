@@ -64,6 +64,23 @@ theorem hom_eq_of_heq_objects {C : Type*} [Category C] {x x' y y' : C}
   subst hx hy
   simp [eq_of_heq h]
 
+/-- Move a component of a natural transformation along an equality of objects. -/
+theorem natTrans_app_eq_eqToHom {C D : Type*} [Category C] [Category D] {G H : C ⥤ D}
+    (τ : G ⟶ H) {x y : C} (e : x = y) :
+    τ.app x = eqToHom (congrArg G.obj e) ≫ τ.app y ≫ eqToHom (congrArg H.obj e).symm := by
+  subst e
+  simp
+
+/-- A functor `S` equal to `S'` with `L ⋙ S' = I ⋙ L'` maps `L.map x` to `L'.map (I.map x)`
+up to `eqToHom`s. -/
+theorem map_map_eq_of_comp_eq {A B C D : Type*} [Category A] [Category B] [Category C]
+    [Category D] {L : A ⥤ B} {S S' : B ⥤ C} {I : A ⥤ D} {L' : D ⥤ C} (hS : S = S')
+    (h : L ⋙ S' = I ⋙ L') {a b : A} (x : a ⟶ b) :
+    S.map (L.map x) = eqToHom (by subst hS; exact Functor.congr_obj h a) ≫ L'.map (I.map x) ≫
+      eqToHom (by subst hS; exact (Functor.congr_obj h b).symm) := by
+  subst hS
+  simpa using Functor.congr_hom h x
+
 end GenericTransport
 
 section ScalarTransport
@@ -224,7 +241,11 @@ comparison conjugated by `pbcScalarIntegralComparison` and `eqToHom`s.
 For `E ≠ F`, `pbcScalarIntegralComparison_hom_app_ne` shows that every comparison component
 is an `eqToHom`. The proof now does `by_cases E = F`. In the `E ≠ F` branch all six comparison
 components in the goal are rewritten to `eqToHom`s (`_hom_app_ne`, `_inv_app_ne`).
-Next in that branch: the τ-naturality step with `hτ F`, cancelling the `eqToHom`s and
+Then `τ F` is moved along `e₅` by `natTrans_app_eq_eqToHom`, `hτ F` and `hτ E` are
+substituted, and the scalar extension of the localized `E`-exchange is rewritten by
+`map_map_eq_of_comp_eq` to the localization of its integral scalar extension.
+Next in that branch: commute `pbcDescentPullback`/`pbcDescentDirectImage` with the
+localized maps and rationalizations, cancel the `eqToHom`s, and conclude from
 `pbcScalarCompletedExchange`. The `E = F` branch is open.
 Earlier attempt, before `show`: moving `Lg.β` and `Rf'_F.map Lg'.β` across the goal with a
 generic two-sided lemma
@@ -401,25 +422,33 @@ theorem pbcExchangeStageSquare_integral
   by_cases hEF : E = F
   · sorry
   simp only [Iso.app_hom, Iso.app_inv, Functor.mapIso_inv, Iso.symm_inv]
-  obtain ⟨_, h₁⟩ := pbcScalarIntegralComparison_hom_app_ne l Ω Y dY.out iY.out h hEF
+  obtain ⟨e₁, h₁⟩ := pbcScalarIntegralComparison_hom_app_ne l Ω Y dY.out iY.out h hEF
     ((pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)
       (pbcActualDerivedPush f (pbcStageDatum.{u} l Ω E)) (presRf E)).obj K)
-  obtain ⟨_, h₄⟩ := pbcScalarIntegralComparison_inv_app_ne l Ω X' dX'.out iX'.out h hEF
+  obtain ⟨e₄, h₄⟩ := pbcScalarIntegralComparison_inv_app_ne l Ω X' dX'.out iX'.out h hEF
     ((pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)
       (pbcActualCompletedPull g' (pbcStageDatum.{u} l Ω E)) (presLg' E)).obj K)
-  obtain ⟨_, h₅⟩ := pbcScalarIntegralComparison_hom_app_ne l Ω X dX.out iX.out h hEF K
-  obtain ⟨_, h₆⟩ := pbcScalarIntegralComparison_inv_app_ne l Ω X dX.out iX.out h hEF K
-  obtain ⟨_, h₇⟩ := pbcScalarIntegralComparison_inv_app_ne l Ω Y' dY'.out iY'.out h hEF
+  obtain ⟨e₅, h₅⟩ := pbcScalarIntegralComparison_hom_app_ne l Ω X dX.out iX.out h hEF K
+  obtain ⟨e₆, h₆⟩ := pbcScalarIntegralComparison_inv_app_ne l Ω X dX.out iX.out h hEF K
+  obtain ⟨e₇, h₇⟩ := pbcScalarIntegralComparison_inv_app_ne l Ω Y' dY'.out iY'.out h hEF
     ((pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)
       (pbcActualCompletedPull g (pbcStageDatum.{u} l Ω E)) (presLg E)).obj
       ((pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)
         (pbcActualDerivedPush f (pbcStageDatum.{u} l Ω E)) (presRf E)).obj K))
-  obtain ⟨_, h₈⟩ := pbcScalarIntegralComparison_hom_app_ne l Ω Y' dY'.out iY'.out h hEF
+  obtain ⟨e₈, h₈⟩ := pbcScalarIntegralComparison_hom_app_ne l Ω Y' dY'.out iY'.out h hEF
     ((pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)
       (pbcActualDerivedPush f' (pbcStageDatum.{u} l Ω E)) (presRf' E)).obj
       ((pbcConditionalIntegral (pbcStageDatum.{u} l Ω E)
         (pbcActualCompletedPull g' (pbcStageDatum.{u} l Ω E)) (presLg' E)).obj K))
   simp only [h₁, h₄, h₅, h₆, h₇, h₈]
+  -- τ-naturality: move `τ F` to the localized integral scalar extension and use `hτ F`.
+  have hτF₁ := hom_eq_of_heq_objects rfl rfl
+    (hτ F ((pbcIntegralScalarExtension l Ω X dX.out iX.out h).obj K))
+  simp only [eqToHom_refl, Category.id_comp] at hτF₁
+  erw [Category.comp_id] at hτF₁ hτE₁
+  erw [natTrans_app_eq_eqToHom (τ F) e₅, hτF₁, hτE₁]
+  erw [map_map_eq_of_comp_eq (pbcScalarExtension_eq_rational l Ω Y' dY'.out iY'.out h hEF)
+    (pbcStageLocalization_comp_rationalScalarExtension l Ω Y' dY'.out iY'.out h)]
   sorry
 
 /-- The prescribed localized actual exchange components satisfy the scalar
