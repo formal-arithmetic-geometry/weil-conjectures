@@ -5,14 +5,9 @@ Authors: Claude
 -/
 module
 
--- Imported first: the instance order it gives keeps the elaboration of the proofs below within
--- the default heartbeats.
-public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethGlobal  -- shake: keep
-public import WeilConjectures.Compactification.AffineCharts
 public import WeilConjectures.TraceFormula.Specialization.CoordinateCompactificationProjective
-public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBaseSlice
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBaseSliceShrink
-import WeilConjectures.Tactic.TransportExact
+public import WeilConjectures.TraceFormula.Specialization.NearbyDualityTwistCompositionSlice
 
 /-!
 
@@ -138,6 +133,8 @@ variable [LocallyOfFiniteType (N.restrictSpecialFibre U).hom]
   [IsSeparated (baseChangeSpecial bW (traitSlice (traitSliceCoord k'))).hom]
   [IsProper (CondensedRing.toPoint (baseChangeSpecial bW (traitSlice (traitSliceCoord k')))).left]
 
+set_option maxHeartbeats 400000 in
+-- the twist equation is elaborated through long composites of exchange isomorphisms
 /-- **The twist equation for `W = b̄⁻¹(𝔸¹_S)`**: let `N` be a proper trait model over `(η, X̄₁, 𝟙)`
 with full geometric generic fibre and `b̄ : N ⟶ ℙ¹_S` a proper morphism of models whose maps of
 fibres are projective (`b̄₁ = i₁ ≫ p₁`, `b̄₂ = i₂ ≫ p₂`, closed immersions followed by smooth
