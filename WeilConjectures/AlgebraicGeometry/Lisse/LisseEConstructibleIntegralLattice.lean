@@ -146,6 +146,8 @@ import all Mathlib.Analysis.Normed.Field.Lemmas
 import all Mathlib.LinearAlgebra.Matrix.SchurComplement
 import all WeilConjectures.Mathlib.LinearAlgebra.Matrix.Rank
 import all WeilConjectures.Mathlib.LinearAlgebra.Matrix.SchurComplement
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyFreeConstructible
+import all WeilConjectures.AlgebraicGeometry.ContinuousConstructibleIntegralTransport
 import all WeilConjectures.AlgebraicGeometry.ContinuousConstructibleIntegralGluing
 import all WeilConjectures.AlgebraicGeometry.ContinuousIntegralScalarExact
 import all Mathlib.CategoryTheory.Monoidal.Closed.FunctorCategory.Complete
@@ -577,7 +579,7 @@ private theorem internal_lisse_model
     obtain ⟨M, hM, ⟨eM⟩⟩ := hS a
     exact CondensedRing.pullbackCoefficient_model (CondensedRing.integralCoeff l K)
       (Profinite.continuousMapRingObj K) (CondensedRing.integralScalarMap l K)
-      (X := T) (Y := S.domain a) (S.immersion a) P M hM eM
+      (X := T) (Y := S.domain a) (S.immersion a) P M hM.isConstructibleModuleObject eM
   exact CondensedRing.continuousConstructible_integral_gluing l K T P S hmodels
 
 /-- A lisse rational sheaf has a constructible integral model, with no global freeness

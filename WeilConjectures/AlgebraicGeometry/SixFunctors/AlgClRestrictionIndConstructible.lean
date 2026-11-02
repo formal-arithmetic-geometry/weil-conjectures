@@ -392,6 +392,20 @@ open AlgebraicGeometry AlgebraicGeometry.ProEtale
 
 namespace AlgebraicGeometry.ProEtale
 
+open MonoidalCategory MonObj in
+private lemma constructible_extend {X : Scheme.{u}}
+    (R S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+    [MonObj R] [MonObj S] [IsCommMonObj R] (φ : R ⟶ S) [IsMonHom φ]
+    {M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R}
+    (h : IsConstructibleModuleObject R M) :
+    IsConstructibleModuleObject S ((Mod.extendScalars φ).obj M) := by
+  rcases h with ⟨U, hU⟩
+  refine ⟨U, fun i ↦ ?_⟩
+  let F := upperStar Ab.{u + 1} (U.immersion i)
+  exact IsLocallyFinitelyPresented.of_iso
+    ((pullbackExtendScalarsComparison (U.immersion i) R S φ).app M).symm
+    (lfp_extend (F.obj R) (F.obj S) (F.map φ) (hU i))
+
 /-- A constructible algebraic-closure coefficient sheaf becomes ind-constructible
 when restricted to any finite coefficient field.
 

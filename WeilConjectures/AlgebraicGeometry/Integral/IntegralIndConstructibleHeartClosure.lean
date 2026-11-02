@@ -255,8 +255,12 @@ private theorem integral_sheaf_ext_continuity_noetherian
           (Opposite.op ((DerivedCategory.singleFunctor _ 0).obj C))).mapCocone c))) := by
   let A := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
     (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X)
+  have : HasColimitsOfSize.{u + 1, u + 1} A := IsGrothendieckAbelian.hasColimits A
+  have : HasColimitsOfShape I A := inferInstance
+  have : HasColimitsOfShape I (CochainComplex A ℤ) := inferInstance
   let S := CochainComplex.singleFunctor A 0
   let K := M ⋙ S
+  have : HasColimit K := inferInstance
   let G := DerivedCategory.Q ⋙ shiftFunctor _ q ⋙
     preadditiveCoyoneda.obj (Opposite.op ((DerivedCategory.singleFunctor A 0).obj C))
   have h := CondensedRing.integralExtHomContinuous_of_isNoetherian (E := E.val) X

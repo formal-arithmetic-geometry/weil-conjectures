@@ -101,6 +101,8 @@ variable {C : Type*} [Category.{u + 1} C] [Abelian C]
   [Abelian.HasFunctorialFlatResolution C]
 private noncomputable abbrev cachedComplexMonoidal :
     MonoidalCategory (CochainComplex C ℤ) := inferInstance
+private noncomputable abbrev cachedHomotopyMonoidal :
+    MonoidalCategory (HomotopyCategory C (.up ℤ)) := inferInstance
 private noncomputable abbrev cachedDerivedMonoidal :
     MonoidalCategory (DerivedCategory C) := inferInstance
 end CachedGenericStructures
