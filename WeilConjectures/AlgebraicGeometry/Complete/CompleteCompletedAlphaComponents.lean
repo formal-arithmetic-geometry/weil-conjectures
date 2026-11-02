@@ -98,9 +98,41 @@ theorem cbcBeta_hom {U' U T' T : Scheme.{t}}
     (cbcBeta d a j' j g h sq).hom =
       inv (ProperOpenTransport.betaInvNat (cbcDerivedOpenAdjunction d j)
         (cbcDerivedOpenAdjunction d j') (cbcSquarePull d a j' j g h)) := by
-  haveI := cbcBetaInv_isIso d a j' j g h sq
-  haveI := cbcBetaInvNat_isIso d a j' j g h sq
+  have := cbcBetaInv_isIso d a j' j g h sq
+  have := cbcBetaInvNat_isIso d a j' j g h sq
   change inv (cbcBetaInv d a j' j g h) = _
   exact IsIso.inv_eq_inv.mpr (cbcBetaInv_eq_betaInvNat d a j' j g h)
+
+/-- The completed proper/open gamma is the proper-adjunction mate of alpha. -/
+theorem cbcProperOpenGamma_eq_mateEquiv {V W S T : Scheme.{t}} (k : V ⟶ W) (r : V ⟶ S)
+    (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
+    [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
+    (h : k ≫ p = r ≫ i) :
+    cbcProperOpenGamma d k r p i h = mateEquiv (cbcPullPushAdjunction d r)
+      (cbcPullPushAdjunction d p) (cbcProperOpenAlpha d k r p i h) := rfl
+
+/-- The completed proper/open comparison, componentwise, is the abstract one. -/
+theorem cbcProperOpenAlpha_app_eq_alphaApp {V W S T : Scheme.{t}} (k : V ⟶ W) (r : V ⟶ S)
+    (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]
+    [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]
+    (h : k ≫ p = r ≫ i)
+    [IsIso (cbcDerivedOpenAdjunction d (ProEtale.StrictTower.squareLift k r p i h)).unit]
+    [IsIso (ProperOpenTransport.openToPush
+      (cbcDerivedOpenAdjunction d (ProEtale.StrictTower.squareLift k r p i h))
+      (cbcPullPushAdjunction d (ProEtale.StrictTower.squareLift k r p i h)))]
+    [∀ x, IsIso (ProperOpenTransport.betaInvApp (cbcDerivedOpenAdjunction d i)
+      (cbcDerivedOpenAdjunction d (pullback.fst p i))
+      (cbcSquarePull d (pullback.snd p i) (pullback.fst p i) i p pullback.condition.symm) x)]
+    (x : d.derived S) :
+    (cbcProperOpenAlpha d k r p i h).app x = ProperOpenTransport.alphaApp
+      (cbcDerivedOpenAdjunction d i) (cbcDerivedOpenAdjunction d (pullback.fst p i))
+      (cbcDerivedOpenAdjunction d (ProEtale.StrictTower.squareLift k r p i h))
+      (cbcPullPushAdjunction d (ProEtale.StrictTower.squareLift k r p i h))
+      (cbcSquarePull d (pullback.snd p i) (pullback.fst p i) i p pullback.condition.symm)
+      (cbcJComp d (ProEtale.StrictTower.squareLift k r p i h) (pullback.fst p i) ≪≫
+        cbcJCongr d (pullback.lift_fst k r h))
+      ((d.pullComp (ProEtale.StrictTower.squareLift k r p i h) (pullback.snd p i)).symm ≪≫
+        eqToIso (congrArg (fun f ↦ d.pull f) (pullback.lift_snd k r h))) x := by
+  sorry
 
 end AlgebraicGeometry.Scheme
