@@ -76,4 +76,25 @@ def pairingExactScalarPointCup : CategoryTheory.ExactSectionsDerivedCup
     (CohomologyTransport.sections Λ (Spec (.of k))) :=
   (pairingExactScalarPointCup_exists Λ k).choose
 
+/-- At the geometric point the normalized sections unit is the coefficient ring
+identification, so its derived map is invertible.
+Source: Stacks 03P2 and the point-coefficient identification
+(blueprint: lem-sf-exact-sections-derived-cup-map).
+Proof: the point coefficient theorem identifies evaluation of the pulled-back
+coefficient on each profinite test object with Lambda. In particular the normalized
+ordinary unit scalarMap on the terminal object is an isomorphism. The chain unit is
+this map in degree zero by chainUnit_zero. The unit_normalization square identifies
+the derived unit with its image under localization, hence it is invertible. -/
+theorem pairingExactScalarPointCup_unit_isIso :
+    IsIso (pairingExactScalarPointCup Λ k).derived.ε := by
+  sorry
+
+/-- The inverse unit comparison furnished by the actual point-coefficient map.
+Source: point coefficients and exact sections (blueprint: lem-sf-exact-sections-derived-cup-map). -/
+def pairingExactScalarPointCup_unitIso :
+    𝟙_ (DerivedCategory (ModuleCat.{u + 1} (condensedScalarRing Λ))) ≅
+      (CohomologyTransport.sections Λ (Spec (.of k))).mapDerivedCategory.obj (𝟙_ _) :=
+  @asIso _ _ _ _ (pairingExactScalarPointCup Λ k).derived.ε
+    (pairingExactScalarPointCup_unit_isIso Λ k)
+
 end AlgebraicGeometry.ProEtale.CondensedRing
