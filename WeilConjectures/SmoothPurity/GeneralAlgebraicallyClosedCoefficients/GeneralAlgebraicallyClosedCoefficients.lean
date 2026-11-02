@@ -296,6 +296,14 @@ private theorem sandwich_add {C : Type*} [Category C] [Preadditive C]
     a ≫ (f + g) ≫ b = a ≫ f ≫ b + a ≫ g ≫ b := by
   rw [Preadditive.add_comp, Preadditive.comp_add]
 
+section PairShiftNormalization
+
+variable {I : Type w} [Preorder I] [IsDirectedOrder I]
+  {C : I → Type u} [∀ i, Category.{v} (C i)] (S : StageSystem C)
+  [∀ i, HasShift (C i) ℤ]
+  [∀ (i j : I) (h : i ≤ j), (S.T h).CommShift ℤ]
+  [∀ (i j k : I) (h : i ≤ j) (k : j ≤ k), NatTrans.CommShift (S.assoc h k).hom ℤ]
+
 private theorem pairShift_unique
     (s : HasShift S.PairCategory ℤ)
     (hobj : ∀ n X, (@shiftFunctor S.PairCategory ℤ _ _ s n).obj X =
@@ -346,6 +354,9 @@ private theorem pairShift_transIso
   subst c
   exact StageSystem.transIso_commShift (S := S) (A := ℤ) h
 
+variable [∀ i, Preadditive (C i)]
+  [∀ i (n : ℤ), (shiftFunctor (C i) n).Additive] [Preadditive S.PairCategory]
+
 private theorem pairShift_additive
     (hadd : ∀ {X Y : S.PairCategory} {L : I} (hX : X.stage ≤ L) (hY : Y.stage ≤ L)
       (f g : X.toStage hX ⟶ Y.toStage hY),
@@ -371,6 +382,30 @@ private theorem pairShift_additive
     (Y := ⟨Y.stage, (shiftFunctor (C Y.stage) n).obj Y.obj⟩) L hX hY f)
     (by rw [Functor.map_add]; exact sandwich_add _ _ _ _)
 
+end PairShiftNormalization
+
+private theorem compIso_commShift_cast
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    [HasShift C ℤ] [HasShift D ℤ] [HasShift E ℤ]
+    (F F' : C ⥤ D) (G G' : D ⥤ E) (H H' : C ⥤ E)
+    (hF : F = F') (hG : G = G') (hH : H = H')
+    (cF : F'.CommShift ℤ) (cG : G'.CommShift ℤ) (cH : H'.CommShift ℤ)
+    (a : F ⋙ G ≅ H) (a' : F' ⋙ G' ≅ H') (ha : HEq a a')
+    (hc : letI := cF; letI := cG; letI := cH; NatTrans.CommShift a'.hom ℤ) :
+    letI := cast (congrArg (fun J : C ⥤ D ↦ J.CommShift ℤ) hF.symm) cF
+    letI := cast (congrArg (fun J : D ⥤ E ↦ J.CommShift ℤ) hG.symm) cG
+    letI := cast (congrArg (fun J : C ⥤ E ↦ J.CommShift ℤ) hH.symm) cH
+    NatTrans.CommShift a.hom ℤ := by
+  subst F'
+  subst G'
+  subst H'
+  obtain rfl := eq_of_heq ha
+  exact hc
+
+variable (l : ℕ) [Fact l.Prime]
+  (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
+  (Y : AlgebraicGeometry.Scheme.{u})
+
 private theorem stageAssociator_commShift (E L M : Index l Ω) (h : E ≤ L) (k : L ≤ M) :
     NatTrans.CommShift ((stageSystem l Ω Y).assoc h k).hom ℤ := by
   exact compIso_commShift_cast
@@ -386,9 +421,7 @@ private theorem stageAssociator_commShift (E L M : Index l Ω) (h : E ≤ L) (k 
     ((stageSystem_existsUnique l Ω Y).exists.choose_spec.2 E L M h k)
     (associator_commShift l Ω Y E L M h k)
 
-variable (l : ℕ) [Fact l.Prime]
-  (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
-  (Y : AlgebraicGeometry.Scheme.{u})
+attribute [local instance] stageAssociator_commShift
 
 attribute [local irreducible] stageCategory transition scalarAssociator associator
 
@@ -685,6 +718,7 @@ noncomputable def shiftRepresentative (n : ℤ) (A B : Pair l Ω Y)
     (shiftFunctor (Stage l Ω Y L) n).map f ≫
     ((stageTransition l Ω Y B.stage L hB).commShiftIso n).inv.app B.obj
 
+set_option linter.unusedVariables false in
 /-- The induced shift is specified on every object, representative and stage inclusion.
 Source: blueprint order 1462 (blueprint: def-weil-algebraically-closed-coefficients).
 Proof: shift each finite representative using shiftRepresentative. Exact scalar
