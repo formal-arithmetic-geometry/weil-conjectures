@@ -7,9 +7,8 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMon.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.FlatModuleCat
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TensorSheaf
-import WeilConjectures.CategoryTheory.FiniteOpenMixedTensorRepresentativeCounit
-import WeilConjectures.CategoryTheory.FiniteOpenMixedTensorRepresentativeCounitTransport
+import WeilConjectures.AlgebraicGeometry.MixedRepForward.ForwardTransportGeneral
+public import WeilConjectures.AlgebraicGeometry.MixedRepForward.FiniteCoefficientInstances
 
 /-!
 # The forward cochain tensor counit square
@@ -27,45 +26,6 @@ set_option autoImplicit false
 universe u
 open CategoryTheory Limits MonoidalCategory
 open scoped CategoryTheory.Functor
-section QuotientIdentities
-
-universe w
-
-private theorem quotient_tensor
-    {C : Type*} [Category.{w} C] [Abelian C] [IsGrothendieckAbelian.{w} C]
-    [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
-    (P Q : CochainComplex C ℤ) :
-    ((HomotopyCategory.quotient C (.up ℤ)).obj P ⊗
-      (HomotopyCategory.quotient C (.up ℤ)).obj Q) =
-      (HomotopyCategory.quotient C (.up ℤ)).obj (P ⊗ Q) := rfl
-
-private theorem cochain_tensor_obj
-    {C : Type*} [Category.{w} C] [Abelian C] [IsGrothendieckAbelian.{w} C]
-    [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
-    (P Q : CochainComplex C ℤ) :
-    P ⊗ Q = HomologicalComplex.mapBifunctor P Q (curriedTensor C) (.up ℤ) := rfl
-
-private theorem Qh_quotient_obj
-    {C : Type*} [Category.{w} C] [Abelian C] [IsGrothendieckAbelian.{w} C]
-    (P : CochainComplex C ℤ) :
-    DerivedCategory.Qh.obj ((HomotopyCategory.quotient C (.up ℤ)).obj P) =
-      DerivedCategory.Q.obj P := rfl
-
-private theorem Qh_quotient_map
-    {C : Type*} [Category.{w} C] [Abelian C] [IsGrothendieckAbelian.{w} C]
-    {P Q : CochainComplex C ℤ} (f : P ⟶ Q) :
-    DerivedCategory.Qh.map ((HomotopyCategory.quotient C (.up ℤ)).map f) =
-      DerivedCategory.Q.map f := rfl
-
-private theorem mapH_quotient
-    {C D : Type*} [Category.{w} C] [Category.{w} D] [Abelian C] [Abelian D]
-    (F : C ⥤ D) [F.Additive] (P : CochainComplex C ℤ) :
-    (F.mapHomotopyCategory (.up ℤ)).obj ((HomotopyCategory.quotient C (.up ℤ)).obj P) =
-      (HomotopyCategory.quotient D (.up ℤ)).obj
-        ((F.mapHomologicalComplex (.up ℤ)).obj P) := rfl
-
-end QuotientIdentities
-
 namespace AlgebraicGeometry.ProEtale
 open AlgebraicGeometry Scheme
 namespace MixedRepForward
@@ -75,8 +35,6 @@ local notation "ShX" => Sheaf (Scheme.ProEt.topology X) (ModuleCat A)
 local notation "ShU" => Sheaf (Scheme.ProEt.topology U) (ModuleCat A)
 local notation "pull" => (j)^*[ModuleCat A]
 
-set_option maxHeartbeats 1000000 in
--- Checking the concrete native sheaf tensor instances requires a larger kernel budget.
 /-- The published comparison satisfies its forward counit square on arbitrary complexes.
 
 Proof. Apply `leftDerivedUpperStarTensorComparison_app_app_fac` to the homotopy
@@ -114,23 +72,7 @@ theorem forward_transport
       (DerivedCategory.Q (C := ShU)).map
         (((Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans (.up ℤ)
           pull).app P).app Q) := by
-  rw [CategoryTheory.Functor.leftDerivedFactors_eq_counit,
-    CategoryTheory.Functor.leftDerivedFactors_eq_counit,
-    CategoryTheory.Functor.leftDerivedFactors_eq_counit]
-  rw [CategoryTheory.Functor.cochainLocalization_tensorator_eq,
-    CategoryTheory.Functor.cochainLocalization_tensorator_eq]
-  have h := leftDerivedUpperStarTensorComparison_app_app_fac
-    (A := ModuleCat.{u + 1} A) j
-    ((HomotopyCategory.quotient ShX (.up ℤ)).obj P)
-    ((HomotopyCategory.quotient ShX (.up ℤ)).obj Q)
-  rw [leftDerivedUpperStarDerivedTensorCounit_app_app,
-    derivedTensorLeftDerivedUpperStarCounit_app_app] at h
-  dsimp only [Functor.whiskeringLeft₂, Functor.postcompose₂,
-    Functor.whiskeringLeft, Functor.whiskeringRight, Functor.comp_obj] at h
-  simpa only [leftDerivedUpperStarTensorNatIso_hom, tensorHom_def,
-    mapH_quotient, quotient_tensor, cochain_tensor_obj,
-    Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans_app_app,
-    Qh_quotient_obj, Qh_quotient_map, Functor.comp_obj, Category.assoc] using h
+  exact forward_transport_general (ModuleCat.{u + 1} A) j P Q
 
 end MixedRepForward
 end AlgebraicGeometry.ProEtale
