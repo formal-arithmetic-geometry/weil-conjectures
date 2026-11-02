@@ -97,7 +97,7 @@ theorem presentation_degree_transition
         (κD m).hom.f i ≫ (coefficientOrdinaryQuotient l E W h).app (T.X i) :=
     congrArg (fun f ↦ f.f i) (hD h)
   apply (cancel_mono ((normalizedDVRModuleRes l E W h).map ((κD n).hom.f i))).1
-  simp only [HomologicalComplex.comp_f, Functor.map_comp, Category.assoc]
+  simp only [HomologicalComplex.comp_f, Category.assoc]
   erw [← Functor.map_comp, ← HomologicalComplex.comp_f, ← HomologicalComplex.comp_f,
     Category.assoc, Iso.inv_hom_id, Category.comp_id]
   have hDm : (κD m).inv.f i ≫ (κD m).hom.f i = 𝟙 _ := by
@@ -221,7 +221,8 @@ theorem coefficientEvaluationTensorIso_naturality (n : ℕ)
       (coefficientEvaluationTensorIso l E W n P Q).hom ≫
         (coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
           (integralCoefficientCommRingSheaf l E W n)).map
-          (Prod.mkHom (((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).map f)
+          (Prod.mkHom
+            (((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).map f)
             (((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).map g)) := by
   obtain ⟨β, hβ⟩ := coefficientNormalizedEvaluationTensorChain l E W n
   have h := β.hom.naturality (X := (P, Q)) (Y := (P', Q')) (Prod.mkHom f g)
@@ -296,23 +297,27 @@ theorem OrdinaryModel.tensorPresentation_naturality (M : OrdinaryModel l E W) (n
             ((M.quotient l E W).map f))
           (((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).map
             ((M.quotient l E W).map g))) ≫
-        (coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
-          (integralCoefficientCommRingSheaf l E W n)).map
+        ((coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
+          (integralCoefficientCommRingSheaf l E W n)).mapIso
           (((NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).app P').prod
-            ((NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).app Q')).hom =
-      (coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
-          (integralCoefficientCommRingSheaf l E W n)).map
+            ((NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).app Q'))).hom =
+      ((coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
+          (integralCoefficientCommRingSheaf l E W n)).mapIso
           (((NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).app P).prod
-            ((NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).app Q)).hom ≫
+            ((NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).app Q))).hom ≫
         (coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
           (integralCoefficientCommRingSheaf l E W n)).map
           (Prod.mkHom (((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).map f)
             (((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).map g)) := by
-    simp only [← Functor.map_comp]
-    exact congrArg _ (Prod.ext (hκ f) (hκ g))
-  simp only [OrdinaryModel.tensorPresentation, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom,
-    Category.assoc]
-  simp only [reassoc_of% e1, reassoc_of% e2, hs']
+    refine ((Functor.map_comp _ _ _).symm.trans ?_).trans (Functor.map_comp _ _ _)
+    congr 1
+    refine Prod.ext ?_ ?_
+    · exact hκ f
+    · exact hκ g
+  simp only [OrdinaryModel.tensorPresentation, Iso.trans_hom, Iso.symm_hom, Category.assoc]
+  simp only [reassoc_of% e1]
+  congr 1
+  exact ((reassoc_of% e2) _).trans ((Category.assoc _ _ _).trans (congrArg (fun x ↦ _ ≫ x) hs'))
 
 /-- The component of the tensor comparison for the ordinary quotient system: the strict
 comparison between the presentations of `M.quotient (P ⊗ Q)` and
@@ -346,6 +351,7 @@ theorem OrdinaryModel.quotientTensorApp_evaluation (M : OrdinaryModel l E W) (n 
   presentationHom_evaluation _ _ (fun h ↦ M.quotient_transition l E W _ h)
     (fun h ↦ M.tensorPresentation_transition l E W P Q h) n
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The tensor comparison for the ordinary quotient system.
 Source: Stacks 07A4 (lemma-pullback-tensor-product) and 0941. -/
 def OrdinaryModel.quotientTensor (M : OrdinaryModel l E W) :
@@ -367,6 +373,7 @@ def OrdinaryModel.quotientTensor (M : OrdinaryModel l E W) :
       simp only [Iso.inv_hom_id_assoc]
       exact (NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).hom.naturality _)
 
+set_option backward.isDefEq.respectTransparency false in
 /-- **Tensor comparison for the ordinary quotient system.** There is a natural isomorphism
 `M.quotient (P ⊗ Q) ≅ M.quotient P ⊗ M.quotient Q` whose finite evaluations are the
 ordinary scalar tensor comparisons, under the evaluation tensor comparisons.
@@ -397,8 +404,11 @@ theorem OrdinaryModel.quotientTensor_exists (M : OrdinaryModel l E W) :
   erw [M.quotientTensorApp_evaluation l E W n P Q]
   simp only [Category.assoc, OrdinaryModel.tensorPresentation, Iso.trans_inv, Iso.symm_inv,
     Functor.mapIso_inv, Iso.prod_inv]
-  erw [Iso.inv_hom_id_assoc, ← Functor.map_comp_assoc, prod_comp, Iso.inv_hom_id,
-    Iso.inv_hom_id]
+  erw [Iso.inv_hom_id_assoc]
+  congr 1
+  conv_rhs => rw [← Category.comp_id (coefficientScalarTensorIso l E W n P Q).hom]
+  congr 1
+  rw [← Functor.map_comp, prod_comp]
   simp
 
 end

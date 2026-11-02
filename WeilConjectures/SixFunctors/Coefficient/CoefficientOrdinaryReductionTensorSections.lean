@@ -86,6 +86,41 @@ theorem coefficientOrdinaryQuotient_app_eq {m n : ℕ} (h : n ≤ m)
   unfold coefficientOrdinaryQuotient
   exact (coefficientOrdinaryQuotient_exists l E W h).choose_spec.1 X
 
+/-- The completed coefficient projection, with its target the finite coefficient sheaf.
+Source: Stacks 0941. -/
+abbrev completedProjection (n : ℕ) :
+    SheafOfModules.derivedChangeRingIndependentCoefficients (Scheme.ProEt.topology W)
+      (completedIntegralCommRingSheafUnrestricted l E W) ⟶ integralCoefficientSheaf l E W n :=
+  (sheafCompose (Scheme.ProEt.topology W)
+    (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).map
+      (completedIntegralCommRingProjectionUnrestricted l E W n)
+
+/-- The strict quotient map is the mate of the composition of restrictions.
+Source: Stacks 03D7, 06YY. -/
+theorem coefficientOrdinaryQuotient_mateLaw {m n : ℕ} (h : n ≤ m) :
+    OrdinaryReductionTensor.QuotientMateLaw (coefficientOrdinaryScalarAdjunction l E W m)
+      (coefficientOrdinaryScalarAdjunction l E W n) (eqToIso (coefficientRestrictionComp l E W h))
+      (coefficientOrdinaryQuotient l E W h) :=
+  ⟨coefficientOrdinaryQuotient_app_eq l E W h⟩
+
+/-- The strict quotient map sends unit sections to unit sections.
+Source: Stacks 03D7, 06YY. -/
+theorem coefficientOrdinaryQuotient_unitLaw {m n : ℕ} (h : n ≤ m) :
+    OrdinaryReductionTensor.QuotientUnitLaw
+      ((sheafCompose (Scheme.ProEt.topology W)
+        (forget₂ CommRingCat.{max u (t+1)} RingCat.{max u (t+1)})).map
+          (completedIntegralCommRingProjectionUnrestricted l E W m))
+      ((sheafCompose (Scheme.ProEt.topology W)
+        (forget₂ CommRingCat.{max u (t+1)} RingCat.{max u (t+1)})).map
+          (completedIntegralCommRingProjectionUnrestricted l E W n))
+      (coefficientOrdinaryQuotient l E W h) (coefficientOrdinaryScalarAdjunction l E W m)
+      (coefficientOrdinaryScalarAdjunction l E W n) :=
+  OrdinaryReductionTensor.quotientUnitLaw_of_mateLaw (completedProjection l E W m)
+    (normalizedDVRQuotient l E W h) (completedProjection l E W n)
+    (coefficientRestrictionComp l E W h) (coefficientOrdinaryScalarAdjunction l E W m)
+    (coefficientOrdinaryScalarAdjunction l E W n) (coefficientOrdinaryQuotient l E W h)
+    (coefficientOrdinaryQuotient_mateLaw l E W h)
+
 /-- The unit-section formula characterizing the ordinary scalar tensor comparison.
 Source: Stacks 03EK, 07A4. -/
 theorem coefficientScalarTensorIso_generators (n : ℕ)
@@ -155,7 +190,37 @@ theorem OrdinaryModel.tensorPresentation_transition (M : OrdinaryModel l E W)
       (NatTrans.mapHomologicalComplex (coefficientOrdinaryQuotient l E W h) (.up ℤ)).app
         ((coefficientTotalTensor.{u, t+1, t} (Scheme.ProEt.topology W)
           (completedIntegralCommRingSheafUnrestricted l E W)).obj (P, Q)) := by
-  sorry
+  exact OrdinaryReductionTensor.tensorPresentation_transition
+    (hEm := coefficientFiniteExtensionAdditive l E W m)
+    (hEn := coefficientFiniteExtensionAdditive l E W n)
+    (hevm := coefficientSequenceEvaluation_additiveInstance l E W m)
+    (hevn := coefficientSequenceEvaluation_additiveInstance l E W n)
+    ((sheafCompose (Scheme.ProEt.topology W)
+      (forget₂ CommRingCat.{max u (t+1)} RingCat.{max u (t+1)})).map
+        (completedIntegralCommRingProjectionUnrestricted l E W m))
+    ((sheafCompose (Scheme.ProEt.topology W)
+      (forget₂ CommRingCat.{max u (t+1)} RingCat.{max u (t+1)})).map
+        (completedIntegralCommRingProjectionUnrestricted l E W n))
+    (normalizedDVRQuotient l E W h)
+    (coefficientOrdinaryScalarAdjunction l E W m) (coefficientOrdinaryScalarAdjunction l E W n)
+    (coefficientOrdinaryQuotient l E W h) (coefficientOrdinaryQuotient_unitLaw l E W h)
+    (coefficientSequenceTransition l E W h) h
+    (fun N U x ↦ coefficientEvaluationSection l E W N m U x)
+    (fun N U x ↦ coefficientEvaluationSection l E W N n U x)
+    (fun N U ↦ coefficientEvaluationSection_surjective l E W N m U)
+    (coefficientSequenceTransition_section l E W h) P Q
+    ((M.quotient l E W).obj P) ((M.quotient l E W).obj Q)
+    ((NatIso.mapHomologicalComplex (M.evaluation m) (.up ℤ)).app P)
+    ((NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).app P)
+    ((NatIso.mapHomologicalComplex (M.evaluation m) (.up ℤ)).app Q)
+    ((NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).app Q)
+    (fun p ↦ M.transition (P.X p) h) (fun p ↦ M.transition (Q.X p) h)
+    (coefficientEvaluationTensorIso l E W m _ _)
+    (coefficientEvaluationTensorIso_generator l E W m _ _)
+    (coefficientEvaluationTensorIso l E W n _ _)
+    (coefficientEvaluationTensorIso_generator l E W n _ _)
+    (coefficientScalarTensorIso l E W m P Q) (coefficientScalarTensorIso_generators l E W m P Q)
+    (coefficientScalarTensorIso l E W n P Q) (coefficientScalarTensorIso_generators l E W n P Q)
 
 end
 end OrdinaryQuotient

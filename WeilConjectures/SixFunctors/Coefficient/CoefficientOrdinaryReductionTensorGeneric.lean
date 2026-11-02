@@ -83,14 +83,6 @@ theorem iso_hom_inv_section {R : Sheaf J RingCat.{r}}
     (e.inv.f k).val.app U ((e.hom.f k).val.app U x) = x :=
   congrArg (fun (f : P ⟶ P) ↦ (f.f k).val.app U x) e.hom_inv_id
 
-/-- An eqToHom of module sheaves is the identity on sections.
-Source: Stacks 03CZ. -/
-theorem eqToHom_section_heq {R : Sheaf J RingCat.{r}}
-    {M N : SheafOfModules.{r} R} (p : M = N) (U : Cᵒᵖ) (y : M.val.obj U) :
-    HEq ((eqToHom p).val.app U y) y := by
-  subst p
-  rfl
-
 /-- Maps out of a left adjoint are determined by their composites with the unit.
 Source: Stacks 03CZ. -/
 theorem hom_ext_of_unit {X' Y' : Type*} [Category X'] [Category Y'] {F : X' ⥤ Y'}
@@ -100,31 +92,6 @@ theorem hom_ext_of_unit {X' Y' : Type*} [Category X'] [Category Y'] {F : X' ⥤ 
   rw [a.homEquiv_unit, a.homEquiv_unit]
   exact h
 
-/-- The mate of an equality of composite restrictions sends unit sections to unit sections.
-Source: Stacks 03CZ, 03D7. -/
-theorem quotientNatTrans_unitSection {A Bm Bn : Sheaf J RingCat.{r}}
-    (pm : A ⟶ Bm) (pn : A ⟶ Bn) (q : Bm ⟶ Bn)
-    (hres : SheafOfModules.restrictScalars.{r} q ⋙ SheafOfModules.restrictScalars.{r} pm =
-      SheafOfModules.restrictScalars.{r} pn)
-    {Fm : SheafOfModules.{r} A ⥤ SheafOfModules.{r} Bm}
-    {Fn : SheafOfModules.{r} A ⥤ SheafOfModules.{r} Bn}
-    (am : Fm ⊣ SheafOfModules.restrictScalars pm) (an : Fn ⊣ SheafOfModules.restrictScalars pn)
-    (quot : Fm ⟶ Fn ⋙ SheafOfModules.restrictScalars q)
-    (hquot : ∀ X, quot.app X = (coefficientQuotientNatTrans am an
-      (SheafOfModules.restrictScalars q) (eqToIso hres)).app X)
-    (X : SheafOfModules.{r} A) (U : Cᵒᵖ) (x : X.val.obj U) :
-    coefficientRestrictionSection q (Fn.obj X) U
-      ((quot.app X).val.app U
-        (coefficientRestrictionSection pm (Fm.obj X) U ((am.unit.app X).val.app U x))) =
-      coefficientRestrictionSection pn (Fn.obj X) U ((an.unit.app X).val.app U x) := by
-  let t := an.unit.app X ≫ (eqToIso hres).inv.app (Fn.obj X)
-  have ht : am.unit.app X ≫ (SheafOfModules.restrictScalars pm).map (quot.app X) = t := by
-    rw [hquot]
-    exact (am.homEquiv_unit _ _ _).symm.trans (Equiv.apply_symm_apply _ _)
-  refine (congrArg (fun k ↦ k.val.app U x) ht).trans ?_
-  dsimp only [t]
-  rw [comp_section, eqToIso.inv, eqToHom_app]
-  exact eq_of_heq (eqToHom_section_heq (Functor.congr_obj hres.symm (Fn.obj X)) U _)
 /-- Sections of the inverse of a threefold composite isomorphism ending in a symmetric one.
 Source: Stacks 03CZ. -/
 theorem trans_symm_inv_section {R : Sheaf J RingCat.{r}}
@@ -187,6 +154,56 @@ theorem transported_transition_section {D : Type*} [Category D]
     coefficientRestrictionSection φ (Fn.obj M) U ((τ.app M).val.app U (eqToHom ha.symm x)) =
       eqToHom hb.symm (g x) := by
   exact transport_square ha hb h x
+
+/-- A strict quotient transformation sends adjunction unit sections to adjunction unit
+sections. Packaging this as a structure keeps kernel checking at the level of its arguments.
+Source: Stacks 03CZ, 03D7. -/
+structure QuotientUnitLaw {R S T : Sheaf J RingCat.{r}} (pm : R ⟶ S) (pn : R ⟶ T)
+    {Em : SheafOfModules.{r} R ⥤ SheafOfModules.{r} S}
+    {En : SheafOfModules.{r} R ⥤ SheafOfModules.{r} T}
+    {Tf : SheafOfModules.{r} T ⥤ SheafOfModules.{r} S}
+    (quot : Em ⟶ En ⋙ Tf) (am : Em ⊣ SheafOfModules.restrictScalars pm)
+    (an : En ⊣ SheafOfModules.restrictScalars pn) : Prop where
+  unit : ∀ (X : SheafOfModules.{r} R) (U : Cᵒᵖ) (x : X.val.obj U),
+    HEq ((quot.app X).val.app U
+      (coefficientRestrictionSection pm (Em.obj X) U ((am.unit.app X).val.app U x)))
+      (coefficientRestrictionSection pn (En.obj X) U ((an.unit.app X).val.app U x))
+
+/-- A transformation agreeing with the mate of a composite of restrictions.
+Source: Stacks 03D7. -/
+structure QuotientMateLaw {A₀ : Type*} {B₀ : Type*} {C₀ : Type*} [Category A₀] [Category B₀]
+    [Category C₀] {Em : A₀ ⥤ B₀} {En : A₀ ⥤ C₀} {Gm : B₀ ⥤ A₀} {Gn : C₀ ⥤ A₀} {Tf : C₀ ⥤ B₀}
+    (am : Em ⊣ Gm) (an : En ⊣ Gn) (e : Tf ⋙ Gm ≅ Gn) (quot : Em ⟶ En ⋙ Tf) : Prop where
+  app_eq : ∀ X, quot.app X = (coefficientQuotientNatTrans am an Tf e).app X
+
+/-- The inverse of an equality of functors into module sheaves is the identity on sections.
+Source: Stacks 03CZ. -/
+theorem eqToIso_inv_section_heq {R : Sheaf J RingCat.{r}} {X : Type*} [Category X]
+    {F G : X ⥤ SheafOfModules.{r} R} (h : F = G) (N : X) (U : Cᵒᵖ)
+    (y : (G.obj N).val.obj U) : HEq (((eqToIso h).inv.app N).val.app U y) y := by
+  cases h
+  rfl
+
+/-- The mate of an equality of composite restrictions sends unit sections to unit sections.
+Source: Stacks 03CZ, 03D7. -/
+theorem quotientUnitLaw_of_mateLaw {R S T : Sheaf J RingCat.{r}} (f : R ⟶ S) (g : S ⟶ T)
+    (h : R ⟶ T)
+    (he : SheafOfModules.restrictScalars.{r} g ⋙ SheafOfModules.restrictScalars f =
+      SheafOfModules.restrictScalars h)
+    {F : SheafOfModules.{r} R ⥤ SheafOfModules.{r} S}
+    (adj : F ⊣ SheafOfModules.restrictScalars f)
+    {F' : SheafOfModules.{r} R ⥤ SheafOfModules.{r} T}
+    (adj' : F' ⊣ SheafOfModules.restrictScalars h)
+    (quot : F ⟶ F' ⋙ SheafOfModules.restrictScalars g)
+    (hq : QuotientMateLaw adj adj' (eqToIso he) quot) : QuotientUnitLaw f h quot adj adj' := by
+  constructor
+  intro M U x
+  have hu : adj.unit.app M ≫ (SheafOfModules.restrictScalars f).map (quot.app M) =
+      adj'.unit.app M ≫ (eqToIso he).inv.app (F'.obj M) := by
+    rw [hq.app_eq M]
+    exact (adj.homEquiv _ _).apply_symm_apply _
+  exact (heq_of_eq (congrArg (fun k ↦ k.val.app U x) hu)).trans
+    (eqToIso_inv_section_heq he (F'.obj M) U _)
 
 section Generators
 
@@ -332,9 +349,6 @@ theorem tensorPresentation_transition
       (sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj Bn)
     (q : (sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj Bm ⟶
       (sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj Bn)
-    (hres : SheafOfModules.restrictScalars.{max c v r} q ⋙
-      SheafOfModules.restrictScalars.{max c v r} pm =
-        SheafOfModules.restrictScalars.{max c v r} pn)
     {Em : SheafOfModules.{max c v r}
         ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj A) ⥤
       SheafOfModules.{max c v r}
@@ -346,8 +360,7 @@ theorem tensorPresentation_transition
     [hEm : Em.Additive] [hEn : En.Additive]
     (am : Em ⊣ SheafOfModules.restrictScalars pm) (an : En ⊣ SheafOfModules.restrictScalars pn)
     (quot : Em ⟶ En ⋙ SheafOfModules.restrictScalars q)
-    (hquot : ∀ X, quot.app X = (coefficientQuotientNatTrans am an
-      (SheafOfModules.restrictScalars q) (eqToIso hres)).app X)
+    (hquot : QuotientUnitLaw pm pn quot am an)
     {evm : SheafOfModules.{max c v r} ((sheafCompose (coefficientSequenceTopology J)
         (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R) ⥤
       SheafOfModules.{max c v r}
@@ -425,6 +438,13 @@ theorem tensorPresentation_transition
     (evTm ≪≫ (coefficientTotalTensor.{r, c, v} J Bm).mapIso (κPm.prod κQm) ≪≫ sm.symm).hom ≫
       (NatTrans.mapHomologicalComplex quot (.up ℤ)).app
         ((coefficientTotalTensor.{r, c, v} J A).obj (P, Q)) := by
+  have hq (X : SheafOfModules.{max c v r}
+      ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj A))
+      (U : Cᵒᵖ) (x : X.val.obj U) :
+      coefficientRestrictionSection q (En.obj X) U ((quot.app X).val.app U
+        (coefficientRestrictionSection pm (Em.obj X) U ((am.unit.app X).val.app U x))) =
+      coefficientRestrictionSection pn (En.obj X) U ((an.unit.app X).val.app U x) :=
+    eq_of_heq (hquot.unit X U x)
   have key (k : ℤ) :
       (evTm ≪≫ (coefficientTotalTensor.{r, c, v} J Bm).mapIso (κPm.prod κQm) ≪≫ sm.symm).inv.f k ≫
         τ.app (((coefficientTotalTensor.{r, c, v} (coefficientSequenceTopology J) R).obj
@@ -438,7 +458,7 @@ theorem tensorPresentation_transition
     apply restrictionSection_injective pm _ V
     erw [unit_comp_section, unit_comp_section]
     apply restrictionSection_injective q _ V
-    refine Eq.trans ?_ (quotientNatTrans_unitSection pm pn q hres am an quot hquot
+    refine Eq.trans ?_ (hq
       (((coefficientTotalTensor.{r, c, v} J A).obj (P, Q)).X k) V
       (coefficientTensorGenerator.{r, c, v} J A P Q p p' k hpq V x y)).symm
     obtain ⟨x0, hx0⟩ := hσm (CP.X p) V ((κPm.inv.f p).val.app V
@@ -464,14 +484,14 @@ theorem tensorPresentation_transition
             ((an.unit.app (P.X p)).val.app V x) := by
         erw [← hτ (CP.X p) V x0, ← restrict_map_section, ← comp_section, hP p, comp_section, hx0,
           iso_inv_hom_section]
-        exact quotientNatTrans_unitSection pm pn q hres am an quot hquot (P.X p) V x
+        exact hq (P.X p) V x
       have hyn : (κQn.hom.f p').val.app V (σn (CQ.X p') V ((CQ.X p').val.presheaf.map
           (Prod.mkHom (homOfLE hmn) (𝟙 V.unop)).op y0)) =
           coefficientRestrictionSection pn (En.obj (Q.X p')) V
             ((an.unit.app (Q.X p')).val.app V y) := by
         erw [← hτ (CQ.X p') V y0, ← restrict_map_section, ← comp_section, hQ p', comp_section,
           hy0, iso_inv_hom_section]
-        exact quotientNatTrans_unitSection pm pn q hres am an quot hquot (Q.X p') V y
+        exact hq (Q.X p') V y
       have hs' := hsn p p' k hpq V x y
       beta_reduce at hs'
       erw [trans_symm_hom_section, hevTn, mapIso_prod_hom_generator, hxn, hyn, ← hs',
