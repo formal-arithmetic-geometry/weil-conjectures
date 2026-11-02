@@ -211,6 +211,27 @@ def compactifiedProjectionReverse
       (compactifiedProjectionTheta d RY RZ RX cp cj b c E Q hα).inv ≫
     @inv _ _ _ _ (compactifiedProjectionPi d RY RZ RX cp cj a b E Q) hπ
 
+/-- The open-immersion projection map is invertible for arbitrary unbounded objects.
+Source: Stacks, Tags 03DI, 03EL and 07A4; Weil blueprint, proper base change, lemma 1269
+(blueprint: lemma-weil-pbc-projection-formula-compactified). -/
+theorem proEtaleOpenProjection_isIso
+    {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]
+    (R : Sheaf (ProEt.topology Z) CommRingCat.{u + 1})
+    (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
+    (c : (proEtaleSheafInverseImage j CommRingCat.{u + 1}).obj R ≅ S)
+    (a : ProEtaleTensorModel Z R) (b : ProEtaleTensorModel X S)
+    (E : DerivedCategory (proEtaleRingModules X S))
+    (M : DerivedCategory (proEtaleRingModules Z R)) :
+    IsIso (proEtaleOpenProjection j R S c a b E M) := by
+  sorry
+
+/-- The projection mate of the proper map is invertible at a site-perfect coefficient.
+Source: Stacks, Tags 0B54 and 08G5; Weil blueprint, proper base change, lemma 1271
+(blueprint: lemma-weil-pbc-projection-formula-compactified). -/
+theorem compactifiedProjectionPi_isIso (hQ : IsProEtaleSitePerfect Y RY Q) :
+    IsIso (compactifiedProjectionPi d RY RZ RX cp cj a b E Q) := by
+  sorry
+
 /-- The compactified perfect projection formula with its exact ordered inverse.
 The local strict-perfect normalization of rho is recorded below on canonical slice
 operations. No uniform bound, completion, constructibility or boundedness of E occurs.
@@ -242,6 +263,20 @@ theorem proEtaleProjectionFormula_compactified
       compactifiedProjectionForward d RY RZ RX cp cj a b c E Q hα ≫
         compactifiedProjectionReverse d RY RZ RX cp cj a b c E Q hα hπ = 𝟙 _ ∧
       compactifiedProjectionReverse d RY RZ RX cp cj a b c E Q hα hπ ≫
-        compactifiedProjectionForward d RY RZ RX cp cj a b c E Q hα = 𝟙 _ := sorry
+        compactifiedProjectionForward d RY RZ RX cp cj a b c E Q hα = 𝟙 _ := by
+  have hα := proEtaleOpenProjection_isIso d.i RZ RX cj b c E
+    ((proEtaleRingDerivedPullback d.g RY RZ cp).obj Q)
+  have hπ := compactifiedProjectionPi_isIso d RY RZ RX cp cj a b E Q hQ
+  refine ⟨hα, hπ, ?_, ?_, ?_⟩
+  · unfold compactifiedProjectionForward
+    infer_instance
+  · simp only [compactifiedProjectionForward, compactifiedProjectionReverse, Category.assoc]
+    rw [← Functor.map_comp_assoc, Iso.hom_inv_id]
+    rw [CategoryTheory.Functor.map_id]
+    rw [Category.id_comp,
+      IsIso.hom_inv_id]
+  · simp only [compactifiedProjectionForward, compactifiedProjectionReverse, Category.assoc]
+    rw [IsIso.inv_hom_id_assoc, ← Functor.map_comp, Iso.inv_hom_id]
+    exact CategoryTheory.Functor.map_id _ _
 
 end AlgebraicGeometry.Scheme

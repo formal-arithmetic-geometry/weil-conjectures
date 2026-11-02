@@ -92,6 +92,8 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 public import Mathlib.CategoryTheory.Adjunction.Unique
+import WeilConjectures.Algebra.Homology.RingedDerivedTensorHomAdjunction
+import WeilConjectures.Algebra.Homology.KInjectiveHomComplexOfUniverses
 
 /-! # Canonical closed calculus for the recorded ringed-site internal Hom
 
@@ -252,6 +254,217 @@ noncomputable def totalTensorNativeIso (P L : CochainComplex (Modules J R) ℤ) 
     (WeilConjectures.coefficientTotalTensor.{u, u, u} J R).obj (P, L) ≅ P ⊗ L :=
   eqToIso (totalTensor_eq_native J R P L)
 
+section Normalization
+
+private theorem nativeMonoidal_eq :
+    RingedDerivedNative.monoidal.{u, u, u, u} J R = derivedMonoidal J R := by
+  unfold RingedDerivedNative.monoidal derivedMonoidal
+  with_reducible_and_instances rfl
+
+set_option maxHeartbeats 1000000 in
+-- Checking the native closed structure against the displayed normalization is expensive.
+private theorem normalizedAdjunction_exists :
+    ∃ S : WeilConjectures.CoefficientClosedStructure (homFunctor J R),
+      ∃ (h : S.monoidal = derivedMonoidal J R)
+        (M : WeilConjectures.CoefficientTensorModels.{u, u, u, u} J R S),
+        ∀ P L, (M.comparison.app (P, L)).hom ≫
+          eqToHom (congrArg (fun (m : MonoidalCategory (D J R)) ↦
+            @MonoidalCategory.tensorObj (D J R) _ m.toMonoidalCategoryStruct
+            (DerivedCategory.Q.obj P.obj) (DerivedCategory.Q.obj L.obj)) h) ≫
+          Functor.LaxMonoidal.μ DerivedCategory.Q P.obj L.obj ≫
+          DerivedCategory.Q.map (totalTensorNativeIso J R P.obj L.obj).inv = 𝟙 _ := by
+  have h0 : ∃ S : WeilConjectures.CoefficientClosedStructure (homFunctor J R),
+      S.monoidal = RingedDerivedNative.monoidal.{u, u, u, u} J R ∧
+        ∃ T : WeilConjectures.CoefficientTensorModels.{u, u, u, u} J R S,
+          HEq T.comparison (RingedDerivedNative.comparison.{u, u, u, u} J R) :=
+    RingedDerivedNative.closedAdjunction.{u, u, u, u} J R
+  obtain ⟨S, hm, T, hT⟩ := h0
+  rw [nativeMonoidal_eq] at hm
+  rcases S with ⟨m, adj, ev⟩
+  dsimp only at hm
+  subst hm
+  refine ⟨⟨_, adj, ev⟩, rfl, T, ?_⟩
+  rcases T with ⟨comp, um⟩
+  have ht : comp = RingedDerivedNative.comparison.{u, u, u, u} J R := eq_of_heq hT
+  subst ht
+  intro P L
+  have := RingedDerivedNative.isIso_mu.{u, u, u, u} J R P.obj L.obj (Or.inl P.property)
+  change inv (Functor.LaxMonoidal.μ DerivedCategory.Q P.obj L.obj) ≫ 𝟙 _ ≫
+    Functor.LaxMonoidal.μ DerivedCategory.Q P.obj L.obj ≫ DerivedCategory.Q.map (𝟙 _) = 𝟙 _
+  rw [Category.id_comp, Functor.map_id, Category.comp_id, IsIso.inv_hom_id]
+
+private theorem kFlat_representative (X : D J R) :
+    ∃ L : CochainComplex (Modules J R) ℤ,
+      CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) L ∧
+        Nonempty (DerivedCategory.Q.obj L ≅ X) := by
+  obtain ⟨K, f, hK, -, hf, -⟩ :=
+    CochainComplex.exists_isKFlatResolutionIndependentCoefficients
+      (DerivedCategory.Q.objPreimage X)
+  have : IsIso (DerivedCategory.Q.map f) :=
+    (DerivedCategory.isIso_Q_map_iff_quasiIso _ f).2 hf
+  exact ⟨K, hK, ⟨asIso (DerivedCategory.Q.map f) ≪≫ DerivedCategory.Q.objObjPreimageIso X⟩⟩
+
+private theorem resolution_isKInjective (M : CochainComplex (Modules J R) ℤ) :
+    ((WeilConjectures.coefficientHomResolution.{u, u, u} J R).obj M).IsKInjective := by
+  letI := (SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses.{
+    u, u, u} J R).1
+  exact CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{u} _ M
+
+private theorem homRepresentative_surjective (P L M : CochainComplex (Modules J R) ℤ)
+    (hL : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) L)
+    (ξ : DerivedCategory.Q.obj P ⟶
+      (homFunctor J R).obj (op (DerivedCategory.Q.obj L), DerivedCategory.Q.obj M)) :
+    ∃ φ : P ⟶ homComplex (R := R) L
+        ((WeilConjectures.coefficientHomResolution.{u, u, u} J R).obj M),
+      DerivedCategory.Q.map φ ≫
+        (WeilConjectures.coefficientHomResolutionIso.{u, u, u, u} J R L M).inv = ξ := by
+  have := resolution_isKInjective J R M
+  have : (homComplex (R := R) L
+      ((WeilConjectures.coefficientHomResolution.{u, u, u} J R).obj M)).IsKInjective :=
+    CochainComplex.isKInjective_homComplex_of_isKFlatOfUniverses.{u, u, u}
+      (J := J) (R := R) L _ hL
+  obtain ⟨f, hf⟩ := (CochainComplex.IsKInjective.Qh_map_bijective
+    ((HomotopyCategory.quotient _ _).obj P) _).2
+      ((DerivedCategory.quotientCompQhIso (Modules J R)).hom.app P ≫ ξ ≫
+        (WeilConjectures.coefficientHomResolutionIso.{u, u, u, u} J R L M).hom ≫
+          (DerivedCategory.quotientCompQhIso (Modules J R)).inv.app _)
+  obtain ⟨φ, rfl⟩ := (HomotopyCategory.quotient (Modules J R) (.up ℤ)).map_surjective f
+  refine ⟨φ, ?_⟩
+  have hn := DerivedCategory.quotientCompQhIso_hom_naturality (C := Modules J R) φ
+  rw [hf, Category.assoc, Category.assoc, Iso.inv_hom_id_app, Category.comp_id] at hn
+  rw [← (cancel_epi _).1 hn, Category.assoc, Iso.hom_inv_id, Category.comp_id]
+
+attribute [local irreducible] SheafOfModules.monoidalCategory in
+private theorem totalTensor_ext (P L I : CochainComplex (Modules J R) ℤ)
+    (f g : (WeilConjectures.coefficientTotalTensor.{u, u, u} J R).obj (P, L) ⟶ I)
+    (h : ∀ (a b : ℤ) (U : Cᵒᵖ) (x : (P.X a).val.obj U) (y : (L.X b).val.obj U),
+      (f.f (a + b)).val.app U
+          (WeilConjectures.coefficientTensorGenerator.{u, u, u} J R P L a b (a + b) rfl U x y) =
+        (g.f (a + b)).val.app U
+          (WeilConjectures.coefficientTensorGenerator.{u, u, u} J R P L a b (a + b) rfl U x y)) :
+    f = g := by
+  apply HomologicalComplex.hom_ext
+  intro k
+  apply HomologicalComplex.mapBifunctor.hom_ext
+  intro a b hab
+  change a + b = k at hab
+  subst k
+  apply (cancel_epi (SheafOfModules.tensorObjIsoSheafification (R := R) (P.X a) (L.X b)).inv).1
+  apply ((PresheafOfModules.sheafificationAdjunction.{u}
+    (𝟙 ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R).obj)).homEquiv
+        ((P.X a).val ⊗ (L.X b).val) (I.X (a + b))).injective
+  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
+  apply PresheafOfModules.hom_ext
+  intro U
+  apply ModuleCat.MonoidalCategory.tensor_ext
+  exact h a b U
+
+/-- Two adjunction families with the same source-natural evaluations agree once they agree
+on the uncurried maps out of K-flat representatives. -/
+private theorem adjunction_eq_of_representatives
+    (adj₁ adj₂ : ∀ P : D J R, tensorRight P ⊣ hom J R P)
+    (ev₁ : ∀ (P P' Q : D J R) (f : P' ⟶ P),
+      (tensorRight P').map ((homFunctor J R).map (Prod.mkHom f.op (𝟙 Q))) ≫
+          (adj₁ P').counit.app Q =
+        (tensorLeft ((homFunctor J R).obj (op P, Q))).map f ≫ (adj₁ P).counit.app Q)
+    (ev₂ : ∀ (P P' Q : D J R) (f : P' ⟶ P),
+      (tensorRight P').map ((homFunctor J R).map (Prod.mkHom f.op (𝟙 Q))) ≫
+          (adj₂ P').counit.app Q =
+        (tensorLeft ((homFunctor J R).obj (op P, Q))).map f ≫ (adj₂ P).counit.app Q)
+    (gen : ∀ (P L M : CochainComplex (Modules J R) ℤ),
+      CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) P →
+      CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) L →
+      ∀ φ : P ⟶ homComplex (R := R) L
+          ((WeilConjectures.coefficientHomResolution.{u, u, u} J R).obj M),
+        ((adj₁ (DerivedCategory.Q.obj L)).homEquiv _ _).symm
+            (DerivedCategory.Q.map φ ≫
+              (WeilConjectures.coefficientHomResolutionIso.{u, u, u, u} J R L M).inv) =
+          ((adj₂ (DerivedCategory.Q.obj L)).homEquiv _ _).symm
+            (DerivedCategory.Q.map φ ≫
+              (WeilConjectures.coefficientHomResolutionIso.{u, u, u, u} J R L M).inv)) :
+    adj₁ = adj₂ := by
+  have hQ (L : CochainComplex (Modules J R) ℤ)
+      (hL : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) L)
+      (M : CochainComplex (Modules J R) ℤ) :
+      (adj₁ (DerivedCategory.Q.obj L)).counit.app (DerivedCategory.Q.obj M) =
+        (adj₂ (DerivedCategory.Q.obj L)).counit.app (DerivedCategory.Q.obj M) := by
+    obtain ⟨P, hP, ⟨σ⟩⟩ := kFlat_representative J R
+      ((hom J R (DerivedCategory.Q.obj L)).obj (DerivedCategory.Q.obj M))
+    obtain ⟨φ, hφ⟩ := homRepresentative_surjective J R P L M hL σ.hom
+    have h := gen P L M hP hL φ
+    rw [hφ, Adjunction.homEquiv_counit, Adjunction.homEquiv_counit] at h
+    exact (cancel_epi _).1 h
+  have hL (L : CochainComplex (Modules J R) ℤ)
+      (hL : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) L) (Y : D J R) :
+      (adj₁ (DerivedCategory.Q.obj L)).counit.app Y =
+        (adj₂ (DerivedCategory.Q.obj L)).counit.app Y := by
+    let e := DerivedCategory.Q.objObjPreimageIso Y
+    apply (cancel_epi ((hom J R (DerivedCategory.Q.obj L) ⋙
+      tensorRight (DerivedCategory.Q.obj L)).map e.inv)).1
+    rw [(adj₁ _).counit.naturality, (adj₂ _).counit.naturality, hQ L hL]
+  funext P
+  apply Adjunction.ext_counit
+  ext Y
+  obtain ⟨L, hL', ⟨eP⟩⟩ := kFlat_representative J R P
+  have h₁ := ev₁ P (DerivedCategory.Q.obj L) Y eP.hom
+  have h₂ := ev₂ P (DerivedCategory.Q.obj L) Y eP.hom
+  rw [hL L hL' Y] at h₁
+  exact (cancel_epi ((tensorLeft ((homFunctor J R).obj (op P, Y))).map eP.hom)).1
+    (h₁.symm.trans h₂)
+
+private theorem comparison_hom_eq {X Y Z : D J R} (x₁ x₂ : X ⟶ Y) [IsIso x₁] [IsIso x₂]
+    (y₁ y₂ : Y ⟶ Z) (hy : y₁ = y₂) (h₁ : x₁ ≫ y₁ = 𝟙 X) (h₂ : x₂ ≫ y₂ = 𝟙 X) :
+    x₁ = x₂ := by
+  subst hy
+  have h := IsIso.eq_inv_of_hom_inv_id h₂
+  calc x₁ = (x₁ ≫ y₁) ≫ x₂ := by rw [h, Category.assoc, IsIso.inv_hom_id, Category.comp_id]
+    _ = x₂ := by rw [h₁, Category.id_comp]
+
+private theorem normalizedAdjunction_unique
+    (S₁ S₂ : WeilConjectures.CoefficientClosedStructure (homFunctor J R))
+    (hS₁ : ∃ (h : S₁.monoidal = derivedMonoidal J R)
+        (M : WeilConjectures.CoefficientTensorModels.{u, u, u, u} J R S₁),
+        ∀ P L, (M.comparison.app (P, L)).hom ≫
+          eqToHom (congrArg (fun (m : MonoidalCategory (D J R)) ↦
+            @MonoidalCategory.tensorObj (D J R) _ m.toMonoidalCategoryStruct
+            (DerivedCategory.Q.obj P.obj) (DerivedCategory.Q.obj L.obj)) h) ≫
+          Functor.LaxMonoidal.μ DerivedCategory.Q P.obj L.obj ≫
+          DerivedCategory.Q.map (totalTensorNativeIso J R P.obj L.obj).inv = 𝟙 _)
+    (hS₂ : ∃ (h : S₂.monoidal = derivedMonoidal J R)
+        (M : WeilConjectures.CoefficientTensorModels.{u, u, u, u} J R S₂),
+        ∀ P L, (M.comparison.app (P, L)).hom ≫
+          eqToHom (congrArg (fun (m : MonoidalCategory (D J R)) ↦
+            @MonoidalCategory.tensorObj (D J R) _ m.toMonoidalCategoryStruct
+            (DerivedCategory.Q.obj P.obj) (DerivedCategory.Q.obj L.obj)) h) ≫
+          Functor.LaxMonoidal.μ DerivedCategory.Q P.obj L.obj ≫
+          DerivedCategory.Q.map (totalTensorNativeIso J R P.obj L.obj).inv = 𝟙 _) :
+    S₁ = S₂ := by
+  rcases S₁ with ⟨m₁, adj₁, ev₁⟩
+  rcases S₂ with ⟨m₂, adj₂, ev₂⟩
+  obtain ⟨h₁, M₁, c₁⟩ := hS₁
+  obtain ⟨h₂, M₂, c₂⟩ := hS₂
+  dsimp only at h₁ h₂
+  subst h₁ h₂
+  suffices adj₁ = adj₂ by subst this; rfl
+  apply adjunction_eq_of_representatives J R adj₁ adj₂ ev₁ ev₂
+  intro P L M hP hL φ
+  obtain ⟨ψ₁, g₁, e₁⟩ := M₁.uncurry_model ⟨P, hP⟩ ⟨L, hL⟩ M φ
+  obtain ⟨ψ₂, g₂, e₂⟩ := M₂.uncurry_model ⟨P, hP⟩ ⟨L, hL⟩ M φ
+  have hψ : ψ₁ = ψ₂ := totalTensor_ext J R P L _ ψ₁ ψ₂ (fun a b U x y ↦
+    (g₁ a b (a + b) rfl (add_comm b a) U x y).trans
+      (g₂ a b (a + b) rfl (add_comm b a) U x y).symm)
+  have hc : (M₁.comparison.app (⟨P, hP⟩, ⟨L, hL⟩)).hom =
+      (M₂.comparison.app (⟨P, hP⟩, ⟨L, hL⟩)).hom :=
+    comparison_hom_eq J R _ _ _ _ rfl (c₁ ⟨P, hP⟩ ⟨L, hL⟩) (c₂ ⟨P, hP⟩ ⟨L, hL⟩)
+  apply (cancel_epi (M₁.comparison.hom.app (⟨P, hP⟩, ⟨L, hL⟩))).1
+  refine e₁.trans ?_
+  rw [hψ]
+  refine e₂.symm.trans ?_
+  change (M₂.comparison.app (⟨P, hP⟩, ⟨L, hL⟩)).hom ≫ _ =
+    (M₁.comparison.app (⟨P, hP⟩, ⟨L, hL⟩)).hom ≫ _
+  rw [hc]
+  rfl
+
 /-- The tensor--Hom adjunction is uniquely fixed by ordinary evaluation on
 K-flat representatives, for the actual derived monoidal structure.
 Source: Stacks 08J9 (blueprint: lem-weil-pbc-ringed-internal-hom-exact-restriction).
@@ -274,7 +487,10 @@ theorem normalizedAdjunction_existsUnique :
             (DerivedCategory.Q.obj P.obj) (DerivedCategory.Q.obj L.obj)) h) ≫
           Functor.LaxMonoidal.μ DerivedCategory.Q P.obj L.obj ≫
           DerivedCategory.Q.map (totalTensorNativeIso J R P.obj L.obj).inv = 𝟙 _ := by
-  sorry
+  obtain ⟨S, hS⟩ := normalizedAdjunction_exists J R
+  exact ⟨S, hS, fun S' hS' ↦ normalizedAdjunction_unique J R S' S hS' hS⟩
+
+end Normalization
 
 /-- The unique evaluation-normalized adjunction, not an arbitrary chosen adjoint.
 Source: Stacks 08J9 (blueprint: lem-weil-pbc-ringed-internal-hom-exact-restriction). -/
