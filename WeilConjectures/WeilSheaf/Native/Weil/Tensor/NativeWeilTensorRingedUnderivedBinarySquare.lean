@@ -320,7 +320,8 @@ theorem native_weil_tensor_ringed_underived_binary_square
   erw [← Category.assoc, ht] at hv
   apply (cancel_epi (D.b.forget.map (D.A.underived P Q).inv)).1
   apply (cancel_mono (d.underived P.carrier Q.carrier).inv).1
-  apply (cancel_mono (D.b.ordinary.functor.map (D.e.inv.app (P, Q)))).1
+  apply (Iso.cancel_iso_hom_right _ _
+    (D.b.ordinary.functor.mapIso (D.e.app (P, Q)).symm)).mp
   simp only [Category.assoc, Iso.hom_inv_id_assoc]
   rw [← D.b.forget.map_comp_assoc, Iso.inv_hom_id, D.b.forget.map_id,
     Category.id_comp]

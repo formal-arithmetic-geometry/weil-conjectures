@@ -747,6 +747,8 @@ private theorem isIso_map_comp_map_iso
   rw [F.map_comp]
   infer_instance
 
+-- `flatConstantModulesAbelian` (universes `max u v`) leaves a universe metavariable unsolved.
+attribute [-instance] CategoryTheory.flatConstantModulesAbelian in
 /-- On the constructible finite-Tor domain the ordinary tensor is already complete.
 The map asserted invertible is the fixed strict quotient augmentation.
 Source: rational purity proof, completed tensor on integral representatives
