@@ -193,17 +193,13 @@ private theorem scalarTensor_preservesLimits (W : Scheme.{u})
   exact preservesLimitsOfShape_of_reflects_of_preserves _
     (pbcRestrict (constantMap l E F i W))
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-attribute [local irreducible] scalarRoosTensor
-
 section Augmentation
 
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
-attribute [local irreducible] scalarLimitAugmentation scalarLimitArrow
-  scalarLimitTensor scalarLimitCofinalInverse baseTensorCounit support arrow
+attribute [local irreducible] scalarLimitTensor scalarLimitCofinalInverse baseTensorCounit
+  support arrow
 
 end Augmentation
 
