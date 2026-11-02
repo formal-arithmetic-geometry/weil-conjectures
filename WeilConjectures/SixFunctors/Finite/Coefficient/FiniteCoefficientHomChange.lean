@@ -84,7 +84,6 @@ private theorem finiteChange_isIso_prod
     IsIso (Prod.mkHom f g) :=
   (isIso_prod_iff (f := Prod.mkHom f g)).mpr ⟨inferInstance, inferInstance⟩
 
-
 attribute [local instance] finiteChange_isIso_prod
 
 private theorem finiteChangeEvaluation_naturality
