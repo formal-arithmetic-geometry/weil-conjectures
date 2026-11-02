@@ -31,6 +31,41 @@ attribute [-instance] WeilConjectures.integralOperationsAbLocallyBijective
 attribute [-instance] WeilConjectures.integralOperationsSiteSmall
 attribute [-instance] WeilConjectures.integralOperationsCommHasDerivedCategory
 attribute [local irreducible] AlgebraicGeometry.Scheme.pbcRationalCoefficientEquiv
+namespace CategoryTheory.Functor
+
+/-- Associativity of comparison isomorphisms transfers along componentwise
+normalizations `N : R ≅ S` of all functors involved. -/
+theorem conjugateComp_assoc {C₀ C₁ C₂ C₃ : Type*} [Category C₀] [Category C₁]
+    [Category C₂] [Category C₃]
+    {R₀₁ S₀₁ : C₀ ⥤ C₁} {R₁₂ S₁₂ : C₁ ⥤ C₂} {R₂₃ S₂₃ : C₂ ⥤ C₃}
+    {R₀₂ S₀₂ : C₀ ⥤ C₂} {R₁₃ S₁₃ : C₁ ⥤ C₃} {R₀₃ S₀₃ : C₀ ⥤ C₃}
+    (N₀₁ : R₀₁ ≅ S₀₁) (N₁₂ : R₁₂ ≅ S₁₂) (N₂₃ : R₂₃ ≅ S₂₃) (N₀₂ : R₀₂ ≅ S₀₂)
+    (N₁₃ : R₁₃ ≅ S₁₃) (N₀₃ : R₀₃ ≅ S₀₃)
+    (c₀₁₂ : R₀₁ ⋙ R₁₂ ≅ R₀₂) (c₀₂₃ : R₀₂ ⋙ R₂₃ ≅ R₀₃) (c₁₂₃ : R₁₂ ⋙ R₂₃ ≅ R₁₃)
+    (c₀₁₃ : R₀₁ ⋙ R₁₃ ≅ R₀₃)
+    (h : ∀ K, R₂₃.map (c₀₁₂.hom.app K) ≫ c₀₂₃.hom.app K =
+      c₁₂₃.hom.app (R₀₁.obj K) ≫ c₀₁₃.hom.app K) (K : C₀) :
+    S₂₃.map ((isoWhiskerRight N₀₁.symm S₁₂ ≪≫ isoWhiskerLeft R₀₁ N₁₂.symm ≪≫
+        c₀₁₂ ≪≫ N₀₂).hom.app K) ≫
+      (isoWhiskerRight N₀₂.symm S₂₃ ≪≫ isoWhiskerLeft R₀₂ N₂₃.symm ≪≫
+        c₀₂₃ ≪≫ N₀₃).hom.app K =
+    (isoWhiskerRight N₁₂.symm S₂₃ ≪≫ isoWhiskerLeft R₁₂ N₂₃.symm ≪≫
+        c₁₂₃ ≪≫ N₁₃).hom.app (S₀₁.obj K) ≫
+      (isoWhiskerRight N₀₁.symm S₁₃ ≪≫ isoWhiskerLeft R₀₁ N₁₃.symm ≪≫
+        c₀₁₃ ≪≫ N₀₃).hom.app K := by
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, isoWhiskerRight_hom,
+    isoWhiskerLeft_hom, whiskerRight_app, whiskerLeft_app, Functor.map_comp,
+    Category.assoc]
+  rw [← S₂₃.map_comp_assoc (N₀₂.hom.app K), Iso.hom_inv_id_app, S₂₃.map_id,
+    Category.id_comp, NatTrans.naturality_assoc, reassoc_of% (h K),
+    ← N₁₃.hom.naturality_assoc, Iso.hom_inv_id_app_assoc,
+    ← c₁₂₃.hom.naturality_assoc, Functor.comp_map, ← N₂₃.inv.naturality_assoc,
+    ← S₂₃.map_comp_assoc (N₁₂.inv.app (S₀₁.obj K)), ← N₁₂.inv.naturality,
+    S₂₃.map_comp_assoc]
+  rfl
+
+end CategoryTheory.Functor
+
 namespace AlgebraicGeometry.Scheme
 section AmbientAssoc
 
@@ -166,6 +201,33 @@ theorem pbcRationalScalarComp_assoc (i : E →ₐ[Padic l] F) (j : F →ₐ[Padi
   apply ObjectProperty.hom_ext
   exact pbcAmbientScalarComp_assoc l E F G H i j k T K.obj.obj
 
+/-- Rational balancing associativity, with the composite embeddings named and the
+target identified by `eqToIso`.
+Source: blueprint order 1307 (blueprint: lem-pbc-scalar-stage-coherence). -/
+theorem pbcRationalScalarComp_eqToIso_assoc (i : E →ₐ[Padic l] F) (j : F →ₐ[Padic l] G)
+    (k : G →ₐ[Padic l] H) (ij : E →ₐ[Padic l] G) (jk : F →ₐ[Padic l] H)
+    (ijk : E →ₐ[Padic l] H) (hij : j.comp i = ij) (hjk : k.comp j = jk)
+    (hij_k : k.comp ij = ijk) (hi_jk : jk.comp i = ijk)
+    (K : PbcRationalDerivedCategory l E T hDim hInv) :
+    (pbcRationalScalarExtension l G H k T hDim hInv).map
+        ((pbcRationalScalarComp l E F G i j T hDim hInv ≪≫ eqToIso (congrArg
+          (fun a ↦ pbcRationalScalarExtension l E G a T hDim hInv) hij)).hom.app K) ≫
+      (pbcRationalScalarComp l E G H ij k T hDim hInv ≪≫ eqToIso (congrArg
+          (fun a ↦ pbcRationalScalarExtension l E H a T hDim hInv) hij_k)).hom.app K =
+    (pbcRationalScalarComp l F G H j k T hDim hInv ≪≫ eqToIso (congrArg
+          (fun a ↦ pbcRationalScalarExtension l F H a T hDim hInv) hjk)).hom.app
+        ((pbcRationalScalarExtension l E F i T hDim hInv).obj K) ≫
+      (pbcRationalScalarComp l E F H i jk T hDim hInv ≪≫ eqToIso (congrArg
+          (fun a ↦ pbcRationalScalarExtension l E H a T hDim hInv) hi_jk)).hom.app K := by
+  subst hij hjk hij_k
+  have e : (pbcRationalScalarComp l E F H i (k.comp j) T hDim hInv ≪≫ eqToIso (congrArg
+      (fun a ↦ pbcRationalScalarExtension l E H a T hDim hInv) hi_jk)).hom.app K =
+      (pbcRationalScalarComp l E F H i (k.comp j) T hDim hInv).hom.app K :=
+    Category.comp_id _
+  rw [e]
+  simp only [eqToIso_refl, Iso.trans_refl]
+  exact pbcRationalScalarComp_assoc l E F G H T hDim hInv i j k K
+
 end RationalAssoc
 
 section NestedFields
@@ -250,6 +312,43 @@ Source: blueprint order 1307 (blueprint: lem-pbc-scalar-stage-coherence). -/
     eqToIso (congrArg (fun i ↦ pbcRationalScalarExtension l E.val G.val i T dim.out inv.out)
       (pbcSubfieldInclusion_comp l Ω h h')) ≪≫
     pbcStageNormalization l Ω T (h.trans h')
+
+/-- The normalized stage associators satisfy the four-field pentagon.
+Source: blueprint order 1307 (blueprint: lem-pbc-scalar-stage-coherence). -/
+theorem pbcStageAssociator_assoc {E F G H : Padic.FiniteCoefficientFields l Ω}
+    (h : E ≤ F) (h' : F ≤ G) (h'' : G ≤ H) (K : pbcCoefficientStage l Ω T E) :
+    (pbcStageTransition l Ω T h'').map ((pbcStageAssociator l Ω T h h').hom.app K) ≫
+        (pbcStageAssociator l Ω T (h.trans h') h'').hom.app K =
+      (pbcStageAssociator l Ω T h' h'').hom.app ((pbcStageTransition l Ω T h).obj K) ≫
+        (pbcStageAssociator l Ω T h (h'.trans h'')).hom.app K := by
+  unfold pbcStageAssociator
+  have := Functor.conjugateComp_assoc (pbcStageNormalization l Ω T h)
+    (pbcStageNormalization l Ω T h') (pbcStageNormalization l Ω T h'')
+    (pbcStageNormalization l Ω T (h.trans h')) (pbcStageNormalization l Ω T (h'.trans h''))
+    (pbcStageNormalization l Ω T (h.trans (h'.trans h'')))
+    (pbcRationalScalarComp l E.val F.val G.val
+        (pbcSubfieldInclusion l Ω h) (pbcSubfieldInclusion l Ω h') T dim.out inv.out ≪≫
+      eqToIso (congrArg (fun i ↦ pbcRationalScalarExtension l E.val G.val i T dim.out inv.out)
+        (pbcSubfieldInclusion_comp l Ω h h')))
+    (pbcRationalScalarComp l E.val G.val H.val
+        (pbcSubfieldInclusion l Ω (h.trans h')) (pbcSubfieldInclusion l Ω h'') T dim.out
+          inv.out ≪≫
+      eqToIso (congrArg (fun i ↦ pbcRationalScalarExtension l E.val H.val i T dim.out inv.out)
+        (pbcSubfieldInclusion_comp l Ω (h.trans h') h'')))
+    (pbcRationalScalarComp l F.val G.val H.val
+        (pbcSubfieldInclusion l Ω h') (pbcSubfieldInclusion l Ω h'') T dim.out inv.out ≪≫
+      eqToIso (congrArg (fun i ↦ pbcRationalScalarExtension l F.val H.val i T dim.out inv.out)
+        (pbcSubfieldInclusion_comp l Ω h' h'')))
+    (pbcRationalScalarComp l E.val F.val H.val
+        (pbcSubfieldInclusion l Ω h) (pbcSubfieldInclusion l Ω (h'.trans h'')) T dim.out
+          inv.out ≪≫
+      eqToIso (congrArg (fun i ↦ pbcRationalScalarExtension l E.val H.val i T dim.out inv.out)
+        (pbcSubfieldInclusion_comp l Ω h (h'.trans h''))))
+    (pbcRationalScalarComp_eqToIso_assoc l E.val F.val G.val H.val T dim.out inv.out _ _ _
+      _ _ _ (pbcSubfieldInclusion_comp l Ω h h') (pbcSubfieldInclusion_comp l Ω h' h'')
+      (pbcSubfieldInclusion_comp l Ω (h.trans h') h'')
+      (pbcSubfieldInclusion_comp l Ω h (h'.trans h''))) K
+  simpa only [Iso.trans_assoc] using this
 
 /-- Normalized tensor balancing satisfies both units and the four-field pentagon.
 Source: blueprint order 1307 (blueprint: lem-pbc-scalar-stage-coherence).
