@@ -8,8 +8,11 @@ module
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarTensor
 import all WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarCompletedObjectComplete
 import all WeilConjectures.ProperBaseChange.IntegralCoefficientCompletenessTransportSupplement
-import WeilConjectures.TraceFormula.Supporting.FiniteFreeCompletedScalarComparison
+import all WeilConjectures.TraceFormula.Supporting.FiniteFreeCompletedScalarComparison
+import all WeilConjectures.SmoothPurity.Completed.CompletedIntegralFiniteFree
 import WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarExtension
+import all WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarInternalHomComplete
+import WeilConjectures.SmoothPurity.IntegralPrincipalCone.IntegralPrincipalConeLocalCriterion
 
 /-! # Exact coefficient restriction preserves intrinsic completeness.
 -/
@@ -95,6 +98,94 @@ private def pbcScalarModelDerivedRestrictionIso (K : PbcCompletedDerived W (pbcI
       (pbcRestrict (WeilConjectures.purCoefficientIso l F W).inv)
       (pbcRestrict (WeilConjectures.completedCoefficientMap l E F i W))).app K
 
+section LocalCriterion
+open CategoryTheory.Limits Opposite
+attribute [local instance] WeilConjectures.IntegralOnSlice.siteCategory
+  WeilConjectures.IntegralOnSlice.hasDerived
+
+/-- The image of a slice section of the source coefficients under the scalar inclusion. -/
+private def scalarImageSection (U : W.ProEt)
+    (s : ((WeilConjectures.IntegralOnSlice.ring l E W (some U)).obj ⋙
+      CategoryTheory.forget CommRingCat).sections) :
+    ((WeilConjectures.IntegralOnSlice.ring l F W (some U)).obj ⋙
+      CategoryTheory.forget CommRingCat).sections :=
+  (Functor.sectionsFunctor _).map (Functor.whiskerRight
+    ((WeilConjectures.IntegralOnSlice.restrict.{u, u} W (some U)).map
+      (WeilConjectures.completedCoefficientMap l E F i W)).hom
+      (CategoryTheory.forget CommRingCat)) s
+
+/-- The scalar inclusion sends the source uniformizer to a multiple of the target one.
+Source: Bhatt--Scholze, Lemma 6.8.2(1) (blueprint: lem-pbc-scalar-restriction-complete).
+Proof: the source uniformizer maps to a unit times a positive power of the target
+uniformizer in the valuation ring; constant sections and the completed coefficient
+map are compatible with this ring map on every finite quotient. -/
+private theorem scalarUniformizer_dvd (V : W.ProEtᵒᵖ) :
+    ∃ c : (WeilConjectures.completedIntegralCoefficientSheafUnrestricted l F W).obj.obj V,
+      (WeilConjectures.completedCoefficientMap l E F i W).hom.app V
+          (WeilConjectures.integralCompletionScalarValue l E W V) =
+        WeilConjectures.integralCompletionScalarValue l F W V * c := by
+  obtain ⟨a, e, he, hπ⟩ := WeilConjectures.integral_ramification l E F i
+  obtain ⟨k, rfl⟩ : ∃ k, e = k + 1 := ⟨e - 1, by omega⟩
+  refine ⟨WeilConjectures.scalarValue l F W V
+    ((a : Padic.coefficientExtensionIntegers l F) *
+      Padic.coefficientExtensionUniformizer l F ^ k), ?_⟩
+  have h := WeilConjectures.scalarValue_map l E W F i V (Padic.coefficientExtensionUniformizer l E)
+  change _ = WeilConjectures.scalarValue l F W V (Padic.coefficientExtensionUniformizer l F) * _
+  erw [h, hπ, ← map_mul]
+  congr 1
+  ring
+
+/-- Local divisibility by the source uniformizer passes to the image section. -/
+private theorem scalarImageSection_divisible (U : W.ProEt)
+    (s : ((WeilConjectures.IntegralOnSlice.ring l E W (some U)).obj ⋙
+      CategoryTheory.forget CommRingCat).sections)
+    (hs : ∃ S : Sieve U, S ∈ ProEt.topology W U ∧
+      ∀ (V : W.ProEt) (f : V ⟶ U), S f →
+        ∃ c : (WeilConjectures.completedIntegralCoefficientSheafUnrestricted l E W).obj.obj
+            (op V),
+          s.val (op (Over.mk f)) = WeilConjectures.integralCompletionScalarValue l E W (op V) * c) :
+    ∃ S : Sieve U, S ∈ ProEt.topology W U ∧
+      ∀ (V : W.ProEt) (f : V ⟶ U), S f →
+        ∃ c : (WeilConjectures.completedIntegralCoefficientSheafUnrestricted l F W).obj.obj
+            (op V),
+          (scalarImageSection l E F i W U s).val (op (Over.mk f)) =
+            WeilConjectures.integralCompletionScalarValue l F W (op V) * c := by
+  obtain ⟨S, hS, h⟩ := hs
+  refine ⟨S, hS, fun V f hf ↦ ?_⟩
+  obtain ⟨c, hc⟩ := h V f hf
+  obtain ⟨d, hd⟩ := scalarUniformizer_dvd l E F i W (op V)
+  refine ⟨d * (show (WeilConjectures.completedIntegralCoefficientSheafUnrestricted l F W).obj.obj
+    (op V) from ConcreteCategory.hom
+      ((WeilConjectures.completedCoefficientMap l E F i W).hom.app (op V)) c), ?_⟩
+  change (WeilConjectures.completedCoefficientMap l E F i W).hom.app (op V)
+    (s.val (op (Over.mk f))) = _
+  rw [hc, map_mul, hd, mul_assoc]
+
+/-- The local test of a restriction is the restriction of the local test at the image
+section. Source: Stacks Tags 0999 and 0A6A
+(blueprint: lem-pbc-scalar-restriction-complete).
+Proof: derived Hom out of the localization by a section, into a restriction of scalars,
+is the restriction of derived Hom out of the scalar extension of that localization; the
+latter is the localization at the image section, scalar extension being flat.
+The small-site version of exactly this statement is
+`restrictScalars_completeElement_iff` (`RestrictionSectionCompleteness`), for
+`IsRingedSiteCompleteElement` on a `SmallCategory` with coefficients in the site universe.
+Not yet formalized here: transport to `W.ProEt` through `AsSmall` (as
+`NativeRestriction.smallModelComplete` does for `principalLocallyComplete`), and the
+identification of a slice section of `R.over U` with an element of `R(U)`, which turns
+`localTest` into the `IsRingedSiteCompleteElement` test. -/
+private theorem scalarLocalTest_restrict
+    (M : DerivedCategory (WeilConjectures.scalarReductionSource.{u, u} l F W)) (U : W.ProEt)
+    (s : ((WeilConjectures.IntegralOnSlice.ring l E W (some U)).obj ⋙
+      CategoryTheory.forget CommRingCat).sections)
+    (h : IsZero (WeilConjectures.IntegralPrincipalCone.localTest l F W M U
+      (scalarImageSection l E F i W U s))) :
+    IsZero (WeilConjectures.IntegralPrincipalCone.localTest l E W
+      ((pbcDerivedRestrict (WeilConjectures.completedCoefficientMap l E F i W)).obj M) U s) := by
+  sorry
+
+end LocalCriterion
+
 /-- Restriction along the completed scalar inclusion preserves derived completeness in
 the published coefficient model.
 Source: Stacks Tags 0999, 099B and 0A0E (blueprint: lem-pbc-scalar-restriction-complete).
@@ -114,7 +205,10 @@ private theorem pbcScalarModelRestrictionComplete
     (hM : WeilConjectures.IsSfDerivedComplete l F W M) :
     WeilConjectures.IsSfDerivedComplete l E W
       ((pbcDerivedRestrict (WeilConjectures.completedCoefficientMap l E F i W)).obj M) := by
-  sorry
+  rw [WeilConjectures.scalarSfLocalIff] at hM ⊢
+  intro U s hs
+  exact scalarLocalTest_restrict l E F i W M U s
+    (hM U _ (scalarImageSection_divisible l E F i W U s hs))
 
 /-- Exact coefficient restriction preserves intrinsic completeness.
 Source: Stacks Project, Tags 099B and 0A0E; the restriction and unit-power argument
