@@ -1,0 +1,319 @@
+/-
+Copyright (c) 2026 Bin Wu. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Bin Wu
+-/
+module
+
+public import WeilConjectures.SmoothPurity.Supporting.Coefficient.IntrinsicCoefficientTwists
+public import WeilConjectures.AlgebraicGeometry.Pbc.PbcCoefficientTwists
+public import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientTwistAnnihilator
+public import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientFreeTensorLinear
+public import WeilConjectures.TateTwist.ProEtale
+public import WeilConjectures.AlgebraicGeometry.ContinuousCoefficientCommRing
+public import WeilConjectures.AlgebraicGeometry.ContinuousCoefficientUniverse
+public import Mathlib.Topology.Category.Profinite.EffectiveEpi
+public import WeilConjectures.CategoryTheory.RingObjects.ContinuousMap
+public import Mathlib.Condensed.TopComparison
+public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionSupplement
+import WeilConjectures.NumberTheory.Padics.IntegersCosetBasis
+import WeilConjectures.NumberTheory.Padics.CoefficientExtensionSupplement
+import Mathlib.Topology.Bases
+import Mathlib.Topology.MetricSpace.Pseudo.Defs
+import Mathlib.Analysis.SpecificLimits.Basic
+
+import Mathlib.Data.Nat.Prime.Infinite
+
+/-! # Intrinsic coefficient twists without an auxiliary finite field
+
+Source: current blueprint, coefficient twists, order 1251
+(blueprint: def-coefficient-twists-detailed).
+
+The condensed coefficient constructions below implement the current blueprint.
+The legacy signed lines, exact tensor, rational tensor and common-stage tensor are
+retained for compatibility with existing consumers. These interfaces remove only
+the unused finite-field proof parameters from the completed line and its field images.
+The previously recorded interfaces of this node (the intrinsic, fixed finite positive and PBC
+coordinate twists) remain publicly imported.
+
+The primary coefficient interface uses continuous-function condensed rings for
+O_E and E and the discrete finite quotient ring at exponent n+1. Finite lines use
+the internal free-module functor on roots, equivalently their balanced tensor
+with A_E,n+1 over Z/l^(n+1), since the quotient is annihilated by l^(n+1).
+The integral transitions reduce coefficients and take l-th powers of roots.
+The limit is taken in O_E,S-modules, so its scalar action is coordinatewise.
+Signed powers use the internal Hom into the coefficient unit at negative degrees.
+Tensoring their degree-zero objects uses the actual unbounded derived tensor.
+For Qbar, the publicly imported upstream tateTwist and tateTwistFunctor are used.
+
+## Main definitions
+* `AlgebraicGeometry.ProEtale.coefficientFiniteTwistOne`
+* `AlgebraicGeometry.ProEtale.coefficientIntegralTwistOne`
+* `AlgebraicGeometry.ProEtale.coefficientRationalTwistOne`
+* `AlgebraicGeometry.ProEtale.coefficientSignedTwist`
+* `AlgebraicGeometry.ProEtale.coefficientTwistFunctor`
+* `sfIntegralTwistingObject`
+* `sfIntegralTwistingFunctor`
+* `sfRationalTwistingFunctor`
+* `sfQbarTwistingFunctor`
+-/
+
+@[expose] public noncomputable section
+set_option autoImplicit false
+universe u
+open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
+open scoped CategoryTheory.Obj CategoryTheory.MonObj
+
+namespace AlgebraicGeometry.ProEtale
+
+/-- Postcomposition by a continuous ring homomorphism, in the coefficient universe.
+Source: pulled-back coefficients (blueprint: def-coefficient-twists-detailed). -/
+def twistContinuousRingMap {A B : Type u} [CommRing A] [CommRing B]
+    [TopologicalSpace A] [TopologicalSpace B] [IsTopologicalRing A] [IsTopologicalRing B]
+    (f : A →+* B) (hf : Continuous f) :
+    Profinite.continuousCoefficientRingSheaf A ⟶
+      Profinite.continuousCoefficientRingSheaf B :=
+  ⟨{ app := fun T ↦ RingCat.ofHom
+        (ULift.ringEquiv.symm.toRingHom.comp
+          ((f.compLeftContinuous T.unop hf).comp ULift.ringEquiv.toRingHom))
+     naturality := fun _ _ _ ↦ rfl }⟩
+
+/-- The same continuous coefficient map on abelian ring objects.
+Source: pulled-back coefficients (blueprint: def-coefficient-twists-detailed). -/
+abbrev twistContinuousMap {A B : Type u} [CommRing A] [CommRing B]
+    [TopologicalSpace A] [TopologicalSpace B] [IsTopologicalRing A] [IsTopologicalRing B]
+    (f : A →+* B) (hf : Continuous f) :=
+  (sheafCompose (coherentTopology Profinite.{u})
+    (forget₂ RingCat.{u + 1} Ab.{u + 1})).map (twistContinuousRingMap f hf)
+
+/-- A continuous ring map preserves the pulled-back ring operations.
+Source: pulled-back coefficients (blueprint: def-coefficient-twists-detailed).
+Proof: forgetting a sheaf morphism of unital rings gives a morphism of ring objects. -/
+instance twistContinuousMap_isMonHom {A B : Type u} [CommRing A] [CommRing B]
+    [TopologicalSpace A] [TopologicalSpace B] [IsTopologicalRing A] [IsTopologicalRing B]
+    (f : A →+* B) (hf : Continuous f) : IsMonHom (twistContinuousMap f hf) := by
+  dsimp only [twistContinuousMap]
+  infer_instance
+
+variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
+  [FiniteDimensional ℚ_[l] E]
+
+/-- The continuous-function condensed integer coefficient ring.
+Source: integral coefficient paragraph (blueprint: def-coefficient-twists-detailed). -/
+abbrev twistIntegralRing : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1} :=
+  letI := spectralNorm.normedField ℚ_[l] E
+  Profinite.continuousCoefficientRingObj (Padic.coefficientExtensionIntegers l E)
+
+/-- The discrete condensed finite quotient at positive exponent n+1.
+Source: A_E,n paragraph (blueprint: def-coefficient-twists-detailed). -/
+abbrev twistFiniteRing (n : ℕ) : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1} :=
+  letI : TopologicalSpace (Padic.coefficientExtensionRing l E (n + 1)) := ⊥
+  letI : DiscreteTopology (Padic.coefficientExtensionRing l E (n + 1)) := ⟨rfl⟩
+  Profinite.continuousCoefficientRingObj (Padic.coefficientExtensionRing l E (n + 1))
+
+/-- The quotient is continuous because uniformizer cosets are neighbourhoods.
+Source: integral coefficient topology (blueprint: def-coefficient-twists-detailed).
+Proof: each positive uniformizer coset is a member of the neighbourhood basis
+at its centre. Thus the quotient map is locally constant, hence continuous into
+the discrete quotient. This also covers ramified finite extensions. -/
+theorem twistReduction_continuous (n : ℕ) :
+    letI := spectralNorm.normedField ℚ_[l] E
+    letI : TopologicalSpace (Padic.coefficientExtensionRing l E (n + 1)) := ⊥
+    Continuous (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1))) := by
+  let := spectralNorm.normedField ℚ_[l] E
+  let : TopologicalSpace (Padic.coefficientExtensionRing l E (n + 1)) := ⊥
+  apply IsLocallyConstant.continuous
+  apply (IsLocallyConstant.iff_eventually_eq _).mpr
+  intro x
+  exact (Padic.coefficientExtension_integers_coset_basis l E x).mem_of_mem
+    (i := n) trivial
+
+/-- The actual quotient coefficient map on condensed rings.
+Source: integral transition paragraph (blueprint: def-coefficient-twists-detailed). -/
+def twistReduction (n : ℕ) : twistIntegralRing l E ⟶ twistFiniteRing l E n :=
+  letI := spectralNorm.normedField ℚ_[l] E
+  letI : TopologicalSpace (Padic.coefficientExtensionRing l E (n + 1)) := ⊥
+  letI : DiscreteTopology (Padic.coefficientExtensionRing l E (n + 1)) := ⟨rfl⟩
+  twistContinuousMap (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1)))
+    (twistReduction_continuous l E n)
+
+/-- The specified coefficient morphism preserves the ring structure.
+Source: coefficient maps (blueprint: def-coefficient-twists-detailed).
+Proof: it is induced by a continuous unital ring homomorphism. -/
+instance twistReduction_isMonHom (n : ℕ) : IsMonHom (twistReduction l E n) := by
+  unfold twistReduction
+  infer_instance
+
+/-- The actual consecutive finite coefficient reduction.
+Source: integral transition paragraph (blueprint: def-coefficient-twists-detailed). -/
+def twistFiniteReduction (n : ℕ) : twistFiniteRing l E (n + 1) ⟶ twistFiniteRing l E n :=
+  letI : TopologicalSpace (Padic.coefficientExtensionRing l E (n + 2)) := ⊥
+  letI : DiscreteTopology (Padic.coefficientExtensionRing l E (n + 2)) := ⟨rfl⟩
+  letI : TopologicalSpace (Padic.coefficientExtensionRing l E (n + 1)) := ⊥
+  letI : DiscreteTopology (Padic.coefficientExtensionRing l E (n + 1)) := ⟨rfl⟩
+  twistContinuousMap (Padic.coefficientExtensionTransition l E (n + 1))
+    continuous_of_discreteTopology
+
+/-- The specified coefficient morphism preserves the ring structure.
+Source: coefficient maps (blueprint: def-coefficient-twists-detailed).
+Proof: it is induced by a continuous unital ring homomorphism. -/
+instance twistFiniteReduction_isMonHom (n : ℕ) : IsMonHom (twistFiniteReduction l E n) := by
+  unfold twistFiniteReduction
+  infer_instance
+
+variable (X : Scheme.{u})
+
+/-- The root presentation at exponent r+1 of the positive quotient A_E,n+1.
+When l^(r+1) annihilates the quotient this is its tensor over (Z/l^(r+1))_X.
+Source: L_n,r display (blueprint: def-coefficient-twists-detailed). -/
+def coefficientFiniteRootLine (n r : ℕ) :
+    Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (twistFiniteRing l E n) X) :=
+  (Mod.freeFunctor _).obj (rootsOfUnitySheaf X (l ^ (r + 1)))
+
+/-- A_E,n+1(1) with the fixed exponent n+1 and its actual quotient coefficient action.
+Source: finite twist display (blueprint: def-coefficient-twists-detailed). -/
+abbrev coefficientFiniteTwistOne (n : ℕ) := coefficientFiniteRootLine l E X n n
+
+/-- Read the same finite line as an integral module through the quotient map.
+Source: integral limit display (blueprint: def-coefficient-twists-detailed). -/
+def coefficientIntegralTwistLevel (n : ℕ) :
+    Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (twistIntegralRing l E) X) :=
+  (Mod.comap (coefficientMap (twistReduction l E n) X)).obj
+    (coefficientFiniteTwistOne l E X n)
+
+/-- The reduction coefficient square commutes before and after pullback.
+Source: integral limit transitions (blueprint: def-coefficient-twists-detailed).
+Proof: on every continuous function, both composites apply the same quotient
+homomorphism O_E -> O_E/pi^(n+1). The point pullback is a functor. -/
+theorem twistReduction_comp (n : ℕ) :
+    coefficientMap (twistReduction l E (n + 1)) X ≫
+      coefficientMap (twistFiniteReduction l E n) X =
+        coefficientMap (twistReduction l E n) X := by
+  rw [← coefficientMap_comp]
+  apply congrArg (fun f ↦ coefficientMap f X)
+  ext T a
+  rfl
+
+/-- Consecutive Tate levels: reduce coefficients and raise the root to its l-th power.
+Source: integral transition formula (blueprint: def-coefficient-twists-detailed). -/
+def coefficientIntegralTwistTransition (n : ℕ) :
+    coefficientIntegralTwistLevel l E X (n + 1) ⟶ coefficientIntegralTwistLevel l E X n :=
+  (coefficientFreeTensor_linear
+    (coefficientMap (twistReduction l E (n + 1)) X)
+    (coefficientMap (twistReduction l E n) X)
+    (coefficientMap (twistFiniteReduction l E n) X) (twistReduction_comp l E X n)
+    (eqToHom (by rw [pow_succ'] :
+      rootsOfUnitySheaf X (l ^ (n + 2)) = rootsOfUnitySheaf X (l * l ^ (n + 1))) ≫
+        rootsOfUnitySheafPow X (l ^ (n + 1)) l)).exists.choose
+
+/-- The positive finite Tate tower, in integral coefficient modules.
+Source: integral limit display (blueprint: def-coefficient-twists-detailed). -/
+def coefficientIntegralTwistSystem :
+    ℕᵒᵖ ⥤ Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (twistIntegralRing l E) X) :=
+  Functor.ofOpSequence (coefficientIntegralTwistTransition l E X)
+
+end AlgebraicGeometry.ProEtale
+
+@[expose] public noncomputable section
+set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
+universe v
+open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
+namespace WeilConjectures
+
+variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
+  [FiniteDimensional (Padic l) E] (S : Scheme.{u})
+  [∀ x : S, Invertible (l : S.residueField x)]
+
+/-- The published completed signed line in degree zero, with no finite-field datum.
+Source: blueprint coefficient twists, integral paragraph
+(blueprint: def-coefficient-twists-detailed). -/
+abbrev sfIntegralTwistingObject (m : ℤ) : DerivedCategory (scalarReductionSource l E S) :=
+  (DerivedCategory.singleFunctor _ 0).obj (integralTwistLine l E S m)
+
+/-- Intrinsic membership of the published completed signed line.
+Source: blueprint coefficient twists, integral paragraph
+(blueprint: def-coefficient-twists-detailed).
+Proof: the root tower supplies the completed rank-one first line and its finite
+reductions. Trivialize that line on a pro-etale cover. Every tensor power and
+internal dual is the coefficient unit there; reduction of powers commutes with
+this trivialization, and reduction of the dual is characterized by evaluation.
+Thus all positive reductions are finite locally constant in degree zero, with
+one support interval [0,0]. The compatible root tower recovers the completed
+line; tensor by a rank-one line preserves products, so the canonical reduction
+units give its distinguished augmented Roos triangle. These are exactly
+IsSfDerivedComplete and the uniform constructible-reduction clauses of
+sfIntegralConstructible. No characteristic or structure map of S is used. -/
+theorem sfIntegralTwistingObject_mem (m : ℤ) :
+    sfIntegralConstructible l E S (sfIntegralTwistingObject l E S m) := by
+  obtain ⟨p, hlp, hp⟩ := Nat.exists_infinite_primes (l + 1)
+  have : Fact p.Prime := ⟨hp⟩
+  let D : FiniteFieldDatum.{0} :=
+    { p := p
+      a := 1
+      q := p
+      prime := hp
+      exponent_pos := le_rfl
+      cardinality_eq := by simp
+      k₀ := ZMod p
+      card_base := by simp [Nat.card_eq_fintype_card]
+      k := AlgebraicClosure (ZMod p) }
+  have hl : l ≠ D.p := Nat.ne_of_lt (Nat.lt_of_succ_le hlp)
+  exact intrinsicIntegralCoefficientTwist_mem D l hl E S m
+
+/-- The same signed line as an object of the recorded intrinsic full subcategory.
+Source: blueprint coefficient twists, integral paragraph
+(blueprint: def-coefficient-twists-detailed). -/
+def sfIntegralTwistingCoefficient (m : ℤ) : sfIntegralConstructibleCategory l E S :=
+  ⟨sfIntegralTwistingObject l E S m, sfIntegralTwistingObject_mem l E S m⟩
+
+/-- The recorded exact tensor on completed module sheaves, descended termwise.
+Source: blueprint coefficient twists, formula K(m)
+(blueprint: def-coefficient-twists-detailed). -/
+abbrev sfIntegralTwistingFunctor (m : ℤ) :=
+  (integralSheafTwist l E S m).mapDerivedCategory
+
+/-- The image of the signed integral line under the recorded raw rationalization.
+Source: blueprint coefficient twists, rational paragraph
+(blueprint: def-coefficient-twists-detailed). -/
+def sfRationalTwistingCoefficient (m : ℤ) : sfRationalConstructibleCategory l E S :=
+  (sfRationalConstructibleLocalization l E S).obj (sfIntegralTwistingCoefficient l E S m)
+
+/-- Tensor by that image, using the unique bilinear intrinsic rational tensor.
+Objects are the integral tensor representatives; localized arrows are sent by
+(a tensor f, b tensor g) to ab tensor (f tensor g), as specified by rationalDerivedTensor.
+Source: blueprint coefficient twists, formula K(m)
+(blueprint: def-coefficient-twists-detailed). -/
+def sfRationalTwistingFunctor (m : ℤ) :
+    sfRationalConstructibleCategory l E S ⥤ sfRationalConstructibleCategory l E S :=
+  (𝟭 (sfRationalConstructibleCategory l E S)).prod'
+    ((Functor.const (sfRationalConstructibleCategory l E S)).obj
+      (sfRationalTwistingCoefficient l E S m)) ⋙ rationalDerivedTensor l E S
+
+variable (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
+
+/-- The same line represented at the least finite coefficient stage.
+Source: blueprint coefficient twists, common-stage paragraph
+(blueprint: def-coefficient-twists-detailed). -/
+def sfQbarTwistingCoefficient (m : ℤ) :
+    generalAlgebraicallyClosedConstructibleCategory l Ω S :=
+  ⟨Padic.finiteCoefficientBase l Ω,
+    sfRationalTwistingCoefficient l
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω
+        (Padic.finiteCoefficientBase l Ω)) S m⟩
+
+/-- The recorded common-stage tensor with the same signed line. Its arrows and
+scalar comparisons are exactly those of commonStageDerivedTensor.
+Source: blueprint coefficient twists, formula K(m)
+(blueprint: def-coefficient-twists-detailed). -/
+def sfQbarTwistingFunctor (m : ℤ) :
+    generalAlgebraicallyClosedConstructibleCategory l Ω S ⥤
+      generalAlgebraicallyClosedConstructibleCategory l Ω S :=
+  (𝟭 (generalAlgebraicallyClosedConstructibleCategory l Ω S)).prod'
+    ((Functor.const (generalAlgebraicallyClosedConstructibleCategory l Ω S)).obj
+      (sfQbarTwistingCoefficient l S Ω m)) ⋙ commonStageDerivedTensor l Ω S
+
+end WeilConjectures

@@ -270,7 +270,7 @@ private lemma map_μ_comp_liftExchange_app_aux
   apply ObjectProperty.hom_ext
   simp only [ObjectProperty.FullSubcategory.comp_hom, boundedConstructibleUpperStar_map_hom,
     μ_boundedConstructibleUpperStarOfMap, ObjectProperty.homMk_hom,
-    boundedConstructibleUpperStarOfMap_map, δ_boundedConstructibleUpperStar_hom',
+    boundedConstructibleUpperStarOfMap_map, boundedConstructibleUpperStar_δ_hom,
     ObjectProperty.tensorHom_hom', NearbyCyclesModel.liftExchange_app_hom]
   exact Functor.map_μ_comp_app_comp_map_δ_of_δ θ U.obj V.obj (hθ U.obj V.obj)
 

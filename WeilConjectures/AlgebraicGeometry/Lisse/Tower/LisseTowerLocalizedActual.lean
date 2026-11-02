@@ -1,0 +1,106 @@
+/-
+Copyright (c) 2026 Bin Wu. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Bin Wu
+-/
+module
+
+public import WeilConjectures.AlgebraicGeometry.Lisse.Tower.LisseTowerPulledScalar
+import WeilConjectures.AlgebraicGeometry.Lisse.Tower.LisseTowerLocalizedActualNormalized
+
+/-! # Transport of an actual descended semilinear tower
+
+Source: Stacks Project, Tags 03CY, 03DA and 06YY. This is the actual-level part of
+localized realization; it has no constant-model comparison or algebraic-arrow assertion.
+-/
+
+@[expose] public noncomputable section
+set_option autoImplicit false
+set_option Elab.async false
+universe u
+open CategoryTheory CategoryTheory.Limits Opposite
+namespace AlgebraicGeometry.Scheme
+attribute [local irreducible] HasDerivedCategory.standard pbcDerivedRestrict
+  lisseTowerFixedRealization constantAdicQuotientRealization constantAdicFiniteRealization
+  constantAdicQuotientRightIso constantAdicFiniteProjection
+  localProEtaleNormalization normalizationConstantArrow lisseTowerAlgebraArrow
+
+/-- Transport the supplied actual comparisons and descent equations to one further
+pro-etale localization, using the constructed scalar comparison.
+
+Source: Stacks Project, Modules on Sites, Tags 03CY and 03DA; Cohomology on Sites,
+Tag 06YY. These are the actual-level parts of steps 1 and 2 of
+lem-weil-pbc-lisse-tower-localized-realization.
+(blueprint: lem-weil-pbc-lisse-tower-localized-actual).
+
+Proof: let a = f.left followed by V.hom, from W.left to U.left. On ordinary module
+sheaves, associated-module-sheafification and inverse image have canonically isomorphic
+composites: the map is induced by identity on pulled presheaf sections, and its inverse
+is determined by the same sheafification adjunction. Apply this to the locally
+bijective finite scalar presentations lisseTowerFiniteScalarMap. The resulting
+comparison identifies fixed realization after inverse image along a with module
+inverse image after fixed realization on U.left. Localize this exact comparison and
+paste the inverse-image compositors for f.left, V.hom and U.hom followed by g.
+The equation f.w gives a followed by U.hom = W.hom, so applying this comparison,
+inverse image of the specified e_n, and the actual module inverse-image compositor
+gives actual_n. This construction works for every n without boundedness assumptions.
+
+For consecutive levels, the ordinary coefficient-interchange cube commutes: after
+forgetting to abelian sheaves all of its maps are induced by the same identity on
+pulled sections. The supplied hc_n and
+lisseTowerNormalizedScalarSquare_sections at W fix the two ordinary scalar faces,
+so faithfulness of forgetting modules proves the cube before localization. Localize
+it, retaining mapDerivedCategoryCompIso and the two restriction compositors rather
+than replacing them by arbitrary isomorphisms. Apply inverse image to hdelta_n.
+Naturality of the level comparisons moves e_n and e_(n+1) through the cube. Composition
+coherence for inverse image identifies the transported actual transition with
+adicTowerRestrictedTransition at W.hom followed by g. Its further restriction to
+completion coefficients is exactly constantAdicRestrictedStep, by that definition
+and constantAdicFiniteProjection_comp. Cancelling the common invertible comparison
+factors gives the displayed equation. The construction uses no constant algebraic
+models and no choices of local markings, and works on zero objects and empty bases. -/
+theorem lisseTower_localized_actual
+    (X Y : Scheme.{u}) (g : Y ⟶ X)
+    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (M : AdicTower X d)
+    (U : Y.ProEt) (V : U.left.ProEt) (W : Y.ProEt)
+    (f : W ⟶ ProEt.mk (V.hom ≫ U.hom))
+    (D : ∀ n : ℕ, DerivedCategory
+      (Sheaf U.left.smallEtaleTopology (ModuleCat.{u + 1} (lisseTowerEtaleRing d n))))
+    (c : ∀ n : ℕ, LisseTowerScalarSquare (U.hom ≫ g) d n)
+    (hc : ∀ n : ℕ, LisseTowerScalarSquareSections (U.hom ≫ g) d n (c n))
+    (δ : ∀ n : ℕ, D (n + 1) ⟶
+      (normalizationRestrict U.left.smallEtaleTopology (lisseTowerEtaleQuotient d n)).obj
+        (D n))
+    (e : ∀ n : ℕ, (lisseTowerEtaleRealization (U.hom ≫ g) d n).obj (D n) ≅
+      (adicTowerPullback (U.hom ≫ g) ((pbcAdicRings X d).obj (op n))).obj (M.level n))
+    (hδ : ∀ n : ℕ,
+      (lisseTowerEtaleRealization (U.hom ≫ g) d (n + 1)).map (δ n) ≫
+          (lisseTowerEtaleScalarIso (U.hom ≫ g) d n (c n)).hom.app (D n) ≫
+          (pbcDerivedRestrict ((adicTowerInverseImage (U.hom ≫ g)).map
+            (pbcAdicQuotient X d (n + 1) n (Nat.le_succ n)))).map (e n).hom =
+        (e (n + 1)).hom ≫
+          adicTowerRestrictedTransition d (U.hom ≫ g) M (n + 1) n (Nat.le_succ n)) :
+    let L (j : ℕ) := (ProEtale.upperStar
+      (ModuleCat.{u + 1} (lisseTowerEtaleRing d j)) f.left).mapDerivedCategory ⋙
+        lisseTowerFixedRealization (W.hom ≫ g) d j
+    ∃ actual : ∀ (n : ℕ),
+    (L n).obj
+      ((localProEtaleComparison V.hom (lisseTowerEtaleRing d n)).obj (D n)) ≅
+      (adicTowerPullback (W.hom ≫ g) ((pbcAdicRings X d).obj (op n))).obj (M.level n),
+    ∀ (n : ℕ),
+    let H (k : ℕ) := pbcDerivedRestrict (constantAdicFiniteProjection (W.hom ≫ g) d k)
+    (H (n + 1)).map ((L (n + 1)).map
+      (localProEtaleNormalization V.hom (lisseTowerEtaleQuotient d n) (δ n))) ≫
+      (lisseTowerPulledScalarIso (W.hom ≫ g) f.left d n).hom.app
+        ((localProEtaleComparison V.hom (lisseTowerEtaleRing d n)).obj (D n)) ≫
+      (H n).map (actual n).hom =
+    (H (n + 1)).map (actual (n + 1)).hom ≫
+      constantAdicRestrictedStep (W.hom ≫ g) d M n := by
+  obtain ⟨cmp⟩ := lisseTower_localization_comparisons X Y g d U V W f
+  let actual (j : ℕ) := (cmp.level j).app (D j) ≪≫
+    (cmp.pull j).mapIso (e j) ≪≫ (cmp.base j).app (M.level j)
+  refine ⟨actual, ?_⟩
+  intro n
+  exact lisseTower_localized_actual_normalized X Y g d M U V W f cmp D c hc δ e hδ n
+
+end AlgebraicGeometry.Scheme

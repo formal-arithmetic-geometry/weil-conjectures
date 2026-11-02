@@ -112,6 +112,10 @@ sheaf categories (`AlgebraicGeometry.ProEtale.hasFunctorialFlatResolution_sheaf`
 -/
 
 @[expose] public section
+set_option maxSynthPendingDepth 10
+set_option backward.isDefEq.respectTransparency.types false
+
+attribute [local instance 20000] AlgebraicGeometry.ProEtale.sheafBraidedCategory
 
 attribute [local instance 20000] AlgebraicGeometry.ProEtale.sheafBraidedCategory
 

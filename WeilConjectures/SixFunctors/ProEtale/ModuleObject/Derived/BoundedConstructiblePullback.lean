@@ -6,6 +6,13 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleIhom
+public import WeilConjectures.AlgebraicGeometry.Bounded.BoundedConstructibleDevissageSupplement
+public import WeilConjectures.AlgebraicGeometry.FiniteTypeDirectImageSingleBound
+public import WeilConjectures.AlgebraicGeometry.FiniteTypeDirectImageSingleConstructible
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleLowerStar
 
@@ -152,7 +159,6 @@ lemma transport
   simp only [Functor.map_comp]
   rw [app_map_eqToHom_right_assoc UWX UXX cWX x hc K, eqToHom_trans_assoc, eqToHom_trans_assoc,
     eqToHom_trans_assoc]
-
 
 include cWW cWX cXX ιW in
 /-- The transport step `CategoryTheory.PullbackFamily.transport`, for maps defined on an object
