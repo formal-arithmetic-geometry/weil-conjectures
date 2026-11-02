@@ -54,4 +54,14 @@ def Pure (M : WeilModule D l X₀) (iota : PadicAlgCl l →+* ℂ) (w : ℝ) : P
     Module.End.HasEigenvalue (closedOperator D l X₀ M x i hi).hom α →
       ‖iota α.down‖ = (Nat.card (X₀.left.residueField x.val) : ℝ) ^ (w / 2)
 
+/-- A finite filtration by constructible Weil subsheaves with pure successive quotients.
+Source: latest blueprint, mixed-weight filtration (blueprint: def-weil-punctual-weights). -/
+def Mixed (M : WeilModule D l X₀) (iota : PadicAlgCl l →+* ℂ) (w : ℝ) : Prop :=
+  ∃ (n : ℕ) (G : Fin (n + 1) → WeilModule D l X₀)
+    (φ : ∀ i : Fin n, G i.castSucc ⟶ G i.succ),
+    (∀ i, IsConstantModelConstructible (Profinite.padicAlgClRingObj l)
+      (D.geometricFiber X₀).left (G i).carrier) ∧
+    IsZero (G 0) ∧ Nonempty (G (Fin.last n) ≅ M) ∧ (∀ i, Mono (φ i)) ∧
+      ∀ i : Fin n, ∃ v : ℝ, v ≤ w ∧ Pure D l X₀ (cokernel (φ i)) iota v
+
 end WeilConjectures.NativeL2
