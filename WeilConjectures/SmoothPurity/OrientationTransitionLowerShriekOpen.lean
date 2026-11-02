@@ -39,7 +39,7 @@ namespace CategoryTheory
 composites `δ = s ≫ u ≫ l` and `rδ = r₁ ≫ r₂ ≫ r₃`, one has `t₁ ≫ rδ ≫ κ = δ ≫ d`, given a
 naturality square `t₁ ≫ r₁ = s ≫ t₂`, the square `lt ≫ lur ≫ r₂⁻¹ = u⁻¹ ≫ t₂`, the identity
 `lur ≫ r₃ ≫ κ = l'` and a naturality square `lt ≫ l' = l ≫ d`. -/
-theorem comp_comp_eq_comp_of_comp_eq {C : Type*} [Category C] {A A₁ A₂ B B₁ B₂ E F G P : C}
+theorem comp_comp_eq_comp_of_retractions {C : Type*} [Category C] {A A₁ A₂ B B₁ B₂ E F G P : C}
     (t₁ : A ⟶ B) (rδ : B ⟶ E) (κ : E ⟶ F) (δ : A ⟶ G) (d : G ⟶ F)
     (r₁ : B ⟶ B₁) (r₂ : B₁ ⟶ B₂) (r₃ : B₂ ⟶ E) (hr : rδ = r₁ ≫ r₂ ≫ r₃)
     (s : A ⟶ A₁) (u : A₁ ⟶ A₂) (l : A₂ ⟶ G) (hδ : δ = s ≫ u ≫ l)
@@ -147,7 +147,7 @@ theorem etaleReductionUpperStarIsoOfIsOpenImmersion_restrictScalars
           ((etaleReductionUpperStarIso ℓ E n j).hom.app N) = 𝟙 _ := by
     rw [← Functor.map_comp, Iso.inv_hom_id_app]
     exact CategoryTheory.Functor.map_id _ _
-  exact comp_comp_eq_comp_of_comp_eq _ _ _ _ _
+  exact comp_comp_eq_comp_of_retractions _ _ _ _ _
     ((Sheaf.derivedRestrictScalars U.left.smallEtaleTopology
       (integersModPowCoeffTransition ℓ E n)).map ((etaleReduction ℓ E n U).map
         ((boundedConstructibleUpperShriekIsoUpperStar_padicIntegers ℓ E j).hom.app N))) _ _

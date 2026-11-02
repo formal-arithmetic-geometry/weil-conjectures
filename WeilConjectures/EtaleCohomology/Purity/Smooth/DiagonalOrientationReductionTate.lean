@@ -19,7 +19,7 @@ Tate twists `Λ_X(1) ⟶ Res Λ'_X(1)` (the `k`-th power map) is adjoint to an i
 monoidal and the Tate twists form coherent integer tensor families, `σ_X` extends uniquely to a
 multiplicative family `Ψ(Λ_X(m)) ≅ Λ'_X(m)` (`AlgebraicGeometry.Etale.reductionTateTwistIso`),
 and, shifting, to the Tate data `Ψ(Λ_X(m)[2m]) ≅ Λ'_X(m)[2m]` of the reduction
-(`AlgebraicGeometry.Etale.reductionTateShiftData`, blueprint `det-sp-purity-coefficient-change`).
+(`AlgebraicGeometry.Etale.reductionTateData`, blueprint `det-sp-purity-coefficient-change`).
 -/
 
 @[expose] public section
@@ -138,7 +138,7 @@ theorem reductionTateShiftIso_pullback
 **The Tate data of the reduction of coefficients** attached to a family of identifications
 `σ_{X,m} : Ψ(Λ_X(m)) ≅ Λ'_X(m)` compatible with the derived pullbacks: the identifications
 `Ψ(Λ_X(m)[2m]) ≅ Λ'_X(m)[2m]` (`AlgebraicGeometry.Etale.reductionTateShiftIso`). -/
-noncomputable def reductionTateShiftData
+noncomputable def reductionTateData
     (hσ : ∀ {U X : Scheme.{u}} [HasInvertibleExponent Λ U] [HasInvertibleExponent Λ X]
       [HasInvertibleExponent Λ' U] [HasInvertibleExponent Λ' X] (e : U ⟶ X) (m : ℤ),
       (derivedExtendScalars hρ ha U).map (leftDerivedUpperStarTateObjectIso e m).hom ≫
@@ -150,13 +150,13 @@ noncomputable def reductionTateShiftData
   iso X _ _ m := reductionTateShiftIso hρ ha σ X m
   map_leftDerivedUpperStarTateShiftIso e m := reductionTateShiftIso_pullback hρ ha σ hσ e m
 
-/-- In degree one, the Tate data `reductionTateShiftData` are the commutation of `Ψ` with the
+/-- In degree one, the Tate data `reductionTateData` are the commutation of `Ψ` with the
 shift followed by the shift of `σ_{X,1}`; for `σ_{X,1} = σ_X`
 (`AlgebraicGeometry.Etale.reductionTateTwistOneIso`) this is the formula
 `(τ.iso X 1).hom = (Ψ.commShiftIso (2 * 1)).hom.app _ ≫ (σ X).hom⟦2 * 1⟧'`. -/
 lemma reductionTateShiftData_iso_hom (hσ) (X : Scheme.{u}) [HasInvertibleExponent Λ X]
     [HasInvertibleExponent Λ' X] (m : ℤ) :
-    ((reductionTateShiftData hρ ha σ hσ).iso X m).hom =
+    ((reductionTateData hρ ha σ hσ).iso X m).hom =
       ((derivedExtendScalars hρ ha X).commShiftIso (2 * m)).hom.app _ ≫ (σ X m).hom⟦2 * m⟧' :=
   rfl
 
@@ -164,7 +164,7 @@ lemma reductionTateShiftData_iso_hom (hσ) (X : Scheme.{u}) [HasInvertibleExpone
 variable [Finite Λ] [Finite Λ'] in
 /-- The hypothesis `hunit` of
 `AlgebraicGeometry.Etale.MonoidalSupportedCoefficientChange.preservesKummerBoundaries` for the
-reduction of coefficients with the Tate data `reductionTateShiftData`, provided `σ_{U,0}` is,
+reduction of coefficients with the Tate data `reductionTateData`, provided `σ_{U,0}` is,
 through `Λ(0) ≅ Λ`, the identification `Ψ Λ_U ≅ Λ'_U`. -/
 theorem reductionSupportedCoefficientChange_unit (hσ)
     (hσ₀ : ∀ (U : Scheme.{u}) [HasInvertibleExponent Λ U] [HasInvertibleExponent Λ' U],
@@ -172,13 +172,13 @@ theorem reductionSupportedCoefficientChange_unit (hσ)
           (derivedExtendScalarsConstantComplexIso hρ ha U).hom =
         (σ U 0).hom ≫ (HasTateTwist.twistObjectZeroIso (Λ := Λ') U).hom)
     (U : Scheme.{u}) [HasInvertibleExponent Λ U] [HasInvertibleExponent Λ' U] :
-    ((reductionSupportedCoefficientChange hρ ha (reductionTateShiftData hρ ha σ hσ)).functor U).map
+    ((reductionSupportedCoefficientChange hρ ha (reductionTateData hρ ha σ hσ)).functor U).map
         ((HasTateTwist.twistObjectZeroIso (Λ := Λ) U).inv ≫
           (shiftFunctorZero' _ (2 * (0 : ℤ)) (by simp)).inv.app _) ≫
         ((reductionSupportedCoefficientChange hρ ha
-          (reductionTateShiftData hρ ha σ hσ)).tateShiftIso U 0).hom =
+          (reductionTateData hρ ha σ hσ)).tateShiftIso U 0).hom =
       ((reductionSupportedCoefficientChange hρ ha
-          (reductionTateShiftData hρ ha σ hσ)).constantComplexIso U).hom ≫
+          (reductionTateData hρ ha σ hσ)).constantComplexIso U).hom ≫
         (HasTateTwist.twistObjectZeroIso (Λ := Λ') U).inv ≫
           (shiftFunctorZero' _ (2 * (0 : ℤ)) (by simp)).inv.app _ := by
   have h₀ : (derivedExtendScalars hρ ha U).map (HasTateTwist.twistObjectZeroIso (Λ := Λ) U).inv ≫

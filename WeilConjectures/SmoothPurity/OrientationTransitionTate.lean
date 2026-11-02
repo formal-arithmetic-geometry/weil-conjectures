@@ -70,7 +70,7 @@ noncomputable def integersModPowReductionTateTwistIso (d : ℕ) :
 /-- In degree zero, the reduction of the integral Tate twist is, through `Λ(0) ≅ Λ`, the unit
 comparison of `Ψ`. -/
 lemma integersModPowReductionTateTwistIso_zero :
-    letI := Etale.derivedExtendScalarsMonoidal (integersModPowCoeffTransition_surjective ℓ E n)
+    letI := Etale.extendScalarsDerivedMonoidal (integersModPowCoeffTransition_surjective ℓ E n)
       (ker_integersModPowCoeffTransition ℓ E n) X.left
     (integersModPowReductionTateTwistIso ℓ E n X 0).hom ≫
         (Etale.HasTateTwist.twistObjectZeroIso (Λ := integersModPowCoeff.{u} ℓ E n) X.left).hom =
@@ -78,7 +78,7 @@ lemma integersModPowReductionTateTwistIso_zero :
           (Etale.HasTateTwist.twistObjectZeroIso
             (Λ := integersModPowCoeff.{u} ℓ E (n + 1)) X.left).hom ≫
         Functor.OplaxMonoidal.η (integersModPowDerivedExtendScalars ℓ E n X.left) := by
-  let _ := Etale.derivedExtendScalarsMonoidal (integersModPowCoeffTransition_surjective ℓ E n)
+  let _ := Etale.extendScalarsDerivedMonoidal (integersModPowCoeffTransition_surjective ℓ E n)
     (ker_integersModPowCoeffTransition ℓ E n) X.left
   have hβ := (etaleReductionExtendScalarsIso ℓ E n X).hom.naturality
     (integralTateTwistBoundedConstructibleNatZeroIso ℓ E X).hom
@@ -131,7 +131,7 @@ lemma integersModPowReductionTateTwistIso_one :
 extension of its degree-one part (`IntTensorFamily.iso_step`): it is compatible with the
 multiplications `Λ_X(1) ⊗ᴸ Λ_X(d) ≅ Λ_X(d + 1)`, through the monoidal structure of `Ψ`. -/
 lemma integersModPowReductionTateTwistIso_step (d : ℕ) :
-    letI := Etale.derivedExtendScalarsMonoidal (integersModPowCoeffTransition_surjective ℓ E n)
+    letI := Etale.extendScalarsDerivedMonoidal (integersModPowCoeffTransition_surjective ℓ E n)
       (ker_integersModPowCoeffTransition ℓ E n) X.left
     (((Etale.tateTwistIntTensorFamily (integersModPowCoeff.{u} ℓ E (n + 1)) X.left).map
         (integersModPowDerivedExtendScalars ℓ E n X.left)).step d).hom ≫
@@ -139,7 +139,7 @@ lemma integersModPowReductionTateTwistIso_step (d : ℕ) :
       ((integersModPowReductionTateTwistIso ℓ E n X 1).hom ⊗ₘ
           (integersModPowReductionTateTwistIso ℓ E n X d).hom) ≫
         ((Etale.tateTwistIntTensorFamily (integersModPowCoeff.{u} ℓ E n) X.left).step d).hom := by
-  let _ := Etale.derivedExtendScalarsMonoidal (integersModPowCoeffTransition_surjective ℓ E n)
+  let _ := Etale.extendScalarsDerivedMonoidal (integersModPowCoeffTransition_surjective ℓ E n)
     (ker_integersModPowCoeffTransition ℓ E n) X.left
   have hs : ((Etale.tateTwistIntTensorFamily (integersModPowCoeff.{u} ℓ E (n + 1)) X.left).step
       d).hom = ((etaleReductionIntegralTateTwistIso ℓ E (n + 1) X 1).inv ⊗ₘ
@@ -167,7 +167,7 @@ isomorphism `Ψ(Λ_X(d)) ≅ Λ'_X(d)` induced by `β` and `etaleReductionIntegr
 theorem integersModPowReductionTateTwistIso_eq (d : ℕ) :
     integersModPowReductionTateTwistIso ℓ E n X d =
       integersModPowCanonicalTateTwistIso ℓ E n X d := by
-  let _ := Etale.derivedExtendScalarsMonoidal (integersModPowCoeffTransition_surjective ℓ E n)
+  let _ := Etale.extendScalarsDerivedMonoidal (integersModPowCoeffTransition_surjective ℓ E n)
     (ker_integersModPowCoeffTransition ℓ E n) X.left
   induction d with
   | zero =>

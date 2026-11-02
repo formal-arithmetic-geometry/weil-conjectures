@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RestrictCoextendScalars
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.UnitRetraction
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReadingReductionComparison
@@ -135,39 +136,6 @@ lemma mateEquiv_comparisonAdjunction_restrictScalarsCompComparisonUpperStar :
       (restrictScalarsCompComparisonUpperStar φ X)).natTrans = 𝟙 _ := by
   rw [restrictScalarsCompComparisonUpperStar, iterated_mateEquiv_conjugateEquiv]
   exact Equiv.apply_symm_apply _ _
-
-section
-
-variable {C : Type*} [Category C] (J : GrothendieckTopology C) {R S : Type (u + 1)} [CommRing R]
-  [CommRing S] (f : R →+* S)
-
-lemma _root_.CategoryTheory.Sheaf.restrictCoextendScalarsAdj_unit_app_hom_app
-    (F : Sheaf J (ModuleCat.{u + 1} S)) (U : Cᵒᵖ) :
-    ((Sheaf.restrictCoextendScalarsAdj J f).unit.app F).hom.app U =
-      (ModuleCat.restrictCoextendScalarsAdj.{u + 1} f).unit.app (F.obj.obj U) := by
-  have h := NatTrans.congr_app (Adjunction.map_restrictFullyFaithful_unit_app
-    ((ModuleCat.restrictCoextendScalarsAdj.{u + 1} f).whiskerRight Cᵒᵖ)
-    (fullyFaithfulSheafToPresheaf J _) (fullyFaithfulSheafToPresheaf J _)
-    (L := Sheaf.restrictScalars J f) (R := sheafCompose J (ModuleCat.coextendScalars f))
-    (Iso.refl _)
-    (Iso.refl _) F) U
-  simpa [Sheaf.restrictCoextendScalarsAdj] using h
-
-lemma _root_.CategoryTheory.Sheaf.restrictCoextendScalarsAdj_counit_app_hom_app
-    (F : Sheaf J (ModuleCat.{u + 1} R)) (U : Cᵒᵖ) :
-    ((Sheaf.restrictCoextendScalarsAdj J f).counit.app F).hom.app U =
-      (ModuleCat.restrictCoextendScalarsAdj.{u + 1} f).counit.app (F.obj.obj U) := by
-  have h := NatTrans.congr_app (Adjunction.map_restrictFullyFaithful_counit_app
-    ((ModuleCat.restrictCoextendScalarsAdj.{u + 1} f).whiskerRight Cᵒᵖ)
-    (fullyFaithfulSheafToPresheaf J _) (fullyFaithfulSheafToPresheaf J _)
-    (L := Sheaf.restrictScalars J f) (R := sheafCompose J (ModuleCat.coextendScalars f))
-    (Iso.refl _)
-    (Iso.refl _) F) U
-  refine h.trans ?_
-  erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.id_comp]
-  rfl
-
-end
 
 /-- The mate, under the restriction–coextension adjunctions, of the identity of `ν_* Res = Res ν_*`
 is the identity of `ν_* Coext = Coext ν_*`: all four functors are computed sectionwise, and this is

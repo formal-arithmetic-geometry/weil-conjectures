@@ -152,7 +152,7 @@ for `red_n`, through the monoidal structure of `Ψ`. Everything is in degree zer
 Tate twists are flat. -/
 @[reassoc]
 lemma map_etaleReductionIntegralTateTwistMulIso_hom_comp (d : ℕ) :
-    letI := Etale.derivedExtendScalarsMonoidal (integersModPowCoeffTransition_surjective ℓ E n)
+    letI := Etale.extendScalarsDerivedMonoidal (integersModPowCoeffTransition_surjective ℓ E n)
       (ker_integersModPowCoeffTransition ℓ E n) X.left
     (integersModPowDerivedExtendScalars ℓ E n X.left).map
         (etaleReductionIntegralTateTwistMulIso ℓ E X (n + 1) d).hom ≫

@@ -16,7 +16,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Monoidal.Restri
 
 Let `Ψ` be the derived extension of scalars along a surjective morphism `ρ : Λ →+* Λ'` of
 finite rings with principal kernel. With the tensor comparisons `δ : Ψ(M ⊗ᴸ N) ≅ Ψ M ⊗ᴸ Ψ N`
-of its monoidal structure (`AlgebraicGeometry.Etale.derivedExtendScalarsMonoidal`), the change
+of its monoidal structure (`AlgebraicGeometry.Etale.extendScalarsDerivedMonoidal`), the change
 of coefficients with supports `AlgebraicGeometry.Etale.reductionSupportedCoefficientChange` is a
 monoidal change of coefficients
 (`AlgebraicGeometry.Etale.reductionMonoidalSupportedCoefficientChange`, blueprint
@@ -56,51 +56,51 @@ variable (X : Scheme.{u})
 
 /-- The tensor comparison `Ψ(M ⊗ᴸ N) ≅ Ψ M ⊗ᴸ Ψ N` of the derived extension of scalars, the
 inverse of the comparison `μ` of its monoidal structure
-(`AlgebraicGeometry.Etale.derivedExtendScalarsMonoidal`). -/
-noncomputable def derivedExtendScalarsDerivedTensorIso (M N : 𝐃(X, Λ)) :
+(`AlgebraicGeometry.Etale.extendScalarsDerivedMonoidal`). -/
+noncomputable def derivedExtendScalarsTensorObjIso (M N : 𝐃(X, Λ)) :
     (derivedExtendScalars hρ ha X).obj (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj M).obj N) ≅
       ((derivedTensor (ModuleCat.{u + 1} Λ') X).obj
         ((derivedExtendScalars hρ ha X).obj M)).obj ((derivedExtendScalars hρ ha X).obj N) :=
-  letI := derivedExtendScalarsMonoidal hρ ha X
+  letI := extendScalarsDerivedMonoidal hρ ha X
   (Functor.Monoidal.μIso (derivedExtendScalars hρ ha X) M N).symm
 
 /-- The tensor comparison of `Ψ` is the comparison `δ` of its monoidal structure. -/
-lemma derivedExtendScalarsDerivedTensorIso_hom (M N : 𝐃(X, Λ)) :
-    letI := derivedExtendScalarsMonoidal hρ ha X
-    (derivedExtendScalarsDerivedTensorIso hρ ha X M N).hom = δ (derivedExtendScalars hρ ha X) M N :=
+lemma derivedExtendScalarsTensorObjIso_hom (M N : 𝐃(X, Λ)) :
+    letI := extendScalarsDerivedMonoidal hρ ha X
+    (derivedExtendScalarsTensorObjIso hρ ha X M N).hom = δ (derivedExtendScalars hρ ha X) M N :=
   rfl
 
 /-- Naturality of the tensor comparison of `Ψ` in the first variable. -/
-lemma derivedExtendScalarsDerivedTensorIso_hom_naturality_left {M M' : 𝐃(X, Λ)} (φ : M ⟶ M')
+lemma derivedExtendScalarsTensorObjIso_hom_naturality_left {M M' : 𝐃(X, Λ)} (φ : M ⟶ M')
     (N : 𝐃(X, Λ)) :
     (derivedExtendScalars hρ ha X).map (((derivedTensor (ModuleCat.{u + 1} Λ) X).map φ).app N) ≫
-        (derivedExtendScalarsDerivedTensorIso hρ ha X M' N).hom =
-      (derivedExtendScalarsDerivedTensorIso hρ ha X M N).hom ≫
+        (derivedExtendScalarsTensorObjIso hρ ha X M' N).hom =
+      (derivedExtendScalarsTensorObjIso hρ ha X M N).hom ≫
         ((derivedTensor (ModuleCat.{u + 1} Λ') X).map
           ((derivedExtendScalars hρ ha X).map φ)).app _ :=
-  letI := derivedExtendScalarsMonoidal hρ ha X
+  letI := extendScalarsDerivedMonoidal hρ ha X
   (δ_natural_left (derivedExtendScalars hρ ha X) φ N).symm
 
 /-- Naturality of the tensor comparison of `Ψ` in the second variable. -/
-lemma derivedExtendScalarsDerivedTensorIso_hom_naturality_right (M : 𝐃(X, Λ)) {N N' : 𝐃(X, Λ)}
+lemma derivedExtendScalarsTensorObjIso_hom_naturality_right (M : 𝐃(X, Λ)) {N N' : 𝐃(X, Λ)}
     (ψ : N ⟶ N') :
     (derivedExtendScalars hρ ha X).map (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj M).map ψ) ≫
-        (derivedExtendScalarsDerivedTensorIso hρ ha X M N').hom =
-      (derivedExtendScalarsDerivedTensorIso hρ ha X M N).hom ≫
+        (derivedExtendScalarsTensorObjIso hρ ha X M N').hom =
+      (derivedExtendScalarsTensorObjIso hρ ha X M N).hom ≫
         ((derivedTensor (ModuleCat.{u + 1} Λ') X).obj _).map
           ((derivedExtendScalars hρ ha X).map ψ) :=
-  letI := derivedExtendScalarsMonoidal hρ ha X
+  letI := extendScalarsDerivedMonoidal hρ ha X
   (δ_natural_right (derivedExtendScalars hρ ha X) M ψ).symm
 
 /-- The tensor comparison of `Ψ` is compatible with the left unitors, through
 `Ψ Λ_X ≅ Λ'_X`. -/
 lemma derivedExtendScalars_map_derivedTensorLeftUnitor (M : 𝐃(X, Λ)) :
     (derivedExtendScalars hρ ha X).map (derivedTensorLeftUnitor (ModuleCat.{u + 1} Λ) X M).hom =
-      (derivedExtendScalarsDerivedTensorIso hρ ha X (constantComplex Λ X) M).hom ≫
+      (derivedExtendScalarsTensorObjIso hρ ha X (constantComplex Λ X) M).hom ≫
         ((derivedTensor (ModuleCat.{u + 1} Λ') X).map
           (derivedExtendScalarsConstantComplexIso hρ ha X).hom).app _ ≫
           (derivedTensorLeftUnitor (ModuleCat.{u + 1} Λ') X _).hom :=
-  letI := derivedExtendScalarsMonoidal hρ ha X
+  letI := extendScalarsDerivedMonoidal hρ ha X
   (left_unitality_hom (derivedExtendScalars hρ ha X) M).symm
 
 omit hρ ha in
@@ -127,11 +127,11 @@ lemma sheafExtendScalars_map_braiding_comp_δ
 
 /-- The braided structure of the derived extension of scalars `Ψ`, for the derived braidings
 `DerivedCategory.braidedCategory'` (`CategoryTheory.Functor.leftDerivedFunctorBraided`). Its
-monoidal structure is `AlgebraicGeometry.Etale.derivedExtendScalarsMonoidal`
+monoidal structure is `AlgebraicGeometry.Etale.extendScalarsDerivedMonoidal`
 (`AlgebraicGeometry.Etale.derivedExtendScalarsMonoidal_eq_toMonoidal`). -/
 @[instance_reducible]
 noncomputable def derivedExtendScalarsBraided :
-    letI := derivedExtendScalarsMonoidal hρ ha X
+    letI := extendScalarsDerivedMonoidal hρ ha X
     letI := DerivedCategory.braidedCategory' (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     letI := DerivedCategory.braidedCategory' (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ'))
     (derivedExtendScalars hρ ha X).Braided :=
@@ -140,11 +140,11 @@ noncomputable def derivedExtendScalarsBraided :
     (sheafExtendScalars_map_braiding_comp_δ X)
 
 /-- The monoidal structure underlying `AlgebraicGeometry.Etale.derivedExtendScalarsBraided` is
-`AlgebraicGeometry.Etale.derivedExtendScalarsMonoidal`. -/
+`AlgebraicGeometry.Etale.extendScalarsDerivedMonoidal`. -/
 lemma derivedExtendScalarsMonoidal_eq_toMonoidal :
     letI := DerivedCategory.braidedCategory' (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     letI := DerivedCategory.braidedCategory' (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ'))
-    derivedExtendScalarsMonoidal hρ ha X = (derivedExtendScalarsBraided hρ ha X).toMonoidal :=
+    extendScalarsDerivedMonoidal hρ ha X = (derivedExtendScalarsBraided hρ ha X).toMonoidal :=
   rfl
 
 /-- The comparison `δ` of the braided structure
@@ -166,13 +166,13 @@ lemma derivedExtendScalarsBraided_map_braiding_comp_δ (M N : 𝐃(X, Λ)) :
 lemma derivedExtendScalars_map_derivedTensorBraidingIso (M N : 𝐃(X, Λ)) :
     (derivedExtendScalars hρ ha X).map
         (derivedTensorBraidingIso (ModuleCat.{u + 1} Λ) X M N).hom ≫
-        (derivedExtendScalarsDerivedTensorIso hρ ha X N M).hom =
-      (derivedExtendScalarsDerivedTensorIso hρ ha X M N).hom ≫
+        (derivedExtendScalarsTensorObjIso hρ ha X N M).hom =
+      (derivedExtendScalarsTensorObjIso hρ ha X M N).hom ≫
         (derivedTensorBraidingIso (ModuleCat.{u + 1} Λ') X _ _).hom := by
   have h := derivedExtendScalarsBraided_map_braiding_comp_δ hρ ha X M N
   rw [← derivedExtendScalarsMonoidal_eq_toMonoidal] at h
   rw [derivedTensorBraidingIso_hom_eq, derivedTensorBraidingIso_hom_eq,
-    derivedExtendScalarsDerivedTensorIso_hom, derivedExtendScalarsDerivedTensorIso_hom]
+    derivedExtendScalarsTensorObjIso_hom, derivedExtendScalarsTensorObjIso_hom]
   exact h
 
 variable {X} in
@@ -181,13 +181,13 @@ variable {X} in
 lemma map_derivedTensorHom_comp_derivedExtendScalarsDerivedTensorIso_hom {K K₁ M M₁ : 𝐃(X, Λ)}
     (f : K ⟶ K₁) (g : M ⟶ M₁) :
     (derivedExtendScalars hρ ha X).map (derivedTensorHom (ModuleCat.{u + 1} Λ) f g) ≫
-        (derivedExtendScalarsDerivedTensorIso hρ ha X K₁ M₁).hom =
-      (derivedExtendScalarsDerivedTensorIso hρ ha X K M).hom ≫
+        (derivedExtendScalarsTensorObjIso hρ ha X K₁ M₁).hom =
+      (derivedExtendScalarsTensorObjIso hρ ha X K M).hom ≫
         derivedTensorHom (ModuleCat.{u + 1} Λ') ((derivedExtendScalars hρ ha X).map f)
           ((derivedExtendScalars hρ ha X).map g) := by
   rw [derivedTensorHom, Functor.map_comp, Category.assoc,
-    derivedExtendScalarsDerivedTensorIso_hom_naturality_right,
-    reassoc_of% (derivedExtendScalarsDerivedTensorIso_hom_naturality_left hρ ha X f M),
+    derivedExtendScalarsTensorObjIso_hom_naturality_right,
+    reassoc_of% (derivedExtendScalarsTensorObjIso_hom_naturality_left hρ ha X f M),
     derivedTensorHom]
 
 end Tensor
@@ -231,16 +231,16 @@ lemma derivedExtendScalars_map_constantComplexDiagonal
       (r 0).hom ≫ (HasTateTwist.twistObjectZeroIso (Λ := Λ') U).hom)
     (hμ : (derivedExtendScalars hρ ha U).map
           (HasTateTwist.twistObjectAddIso (Λ := Λ) U 0 0).hom ≫ (r (0 + 0)).hom =
-      (derivedExtendScalarsDerivedTensorIso hρ ha U _ _).hom ≫
+      (derivedExtendScalarsTensorObjIso hρ ha U _ _).hom ≫
         derivedTensorHom (ModuleCat.{u + 1} Λ') (r 0).hom (r 0).hom ≫
           (HasTateTwist.twistObjectAddIso (Λ := Λ') U 0 0).hom) :
     (derivedExtendScalars hρ ha U).map (constantComplexDiagonal Λ U) ≫
-        (derivedExtendScalarsDerivedTensorIso hρ ha U _ _).hom ≫
+        (derivedExtendScalarsTensorObjIso hρ ha U _ _).hom ≫
           derivedTensorHom (ModuleCat.{u + 1} Λ')
             (derivedExtendScalarsConstantComplexIso hρ ha U).hom
             (derivedExtendScalarsConstantComplexIso hρ ha U).hom =
       (derivedExtendScalarsConstantComplexIso hρ ha U).hom ≫ constantComplexDiagonal Λ' U := by
-  have hμ' : (derivedExtendScalarsDerivedTensorIso hρ ha U _ _).hom ≫
+  have hμ' : (derivedExtendScalarsTensorObjIso hρ ha U _ _).hom ≫
       derivedTensorHom (ModuleCat.{u + 1} Λ') (r 0).hom (r 0).hom =
       (derivedExtendScalars hρ ha U).map (HasTateTwist.twistObjectAddIso (Λ := Λ) U 0 0).hom ≫
         (r (0 + 0)).hom ≫ (HasTateTwist.twistObjectAddIso (Λ := Λ') U 0 0).inv := by
@@ -275,8 +275,8 @@ lemma derivedExtendScalars_map_rightDerivedUpperShriekTensorMap {Z X : Scheme.{u
     (derivedExtendScalars hρ ha Z).map (rightDerivedUpperShriekTensorMap i M N) ≫
         (derivedExtendScalarsUpperShriekMap hρ ha i).app
           (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj M).obj N) ≫
-          (R(i)^![Λ']).map (derivedExtendScalarsDerivedTensorIso hρ ha X M N).hom =
-      (derivedExtendScalarsDerivedTensorIso hρ ha Z ((R(i)^![Λ]).obj M)
+          (R(i)^![Λ']).map (derivedExtendScalarsTensorObjIso hρ ha X M N).hom =
+      (derivedExtendScalarsTensorObjIso hρ ha Z ((R(i)^![Λ]).obj M)
           ((L((i)^*[ModuleCat.{u + 1} Λ])).obj N)).hom ≫
         ((derivedTensor (ModuleCat.{u + 1} Λ') Z).map
           ((derivedExtendScalarsUpperShriekMap hρ ha i).app M)).app _ ≫
@@ -300,11 +300,11 @@ noncomputable def reductionMonoidalSupportedCoefficientChange
     (τ : DerivedExtendScalarsTateShiftData Λ Λ' hρ ha) :
     MonoidalSupportedCoefficientChange Λ Λ' where
   toSupportedCoefficientChange := reductionSupportedCoefficientChange hρ ha τ
-  tensorIso X M N := derivedExtendScalarsDerivedTensorIso hρ ha X M N
+  tensorIso X M N := derivedExtendScalarsTensorObjIso hρ ha X M N
   tensorIso_hom_naturality_left X _ _ φ N :=
-    derivedExtendScalarsDerivedTensorIso_hom_naturality_left hρ ha X φ N
+    derivedExtendScalarsTensorObjIso_hom_naturality_left hρ ha X φ N
   tensorIso_hom_naturality_right X M _ _ ψ :=
-    derivedExtendScalarsDerivedTensorIso_hom_naturality_right hρ ha X M ψ
+    derivedExtendScalarsTensorObjIso_hom_naturality_right hρ ha X M ψ
   map_derivedTensorLeftUnitor X M := derivedExtendScalars_map_derivedTensorLeftUnitor hρ ha X M
   map_derivedTensorBraidingIso X M N :=
     derivedExtendScalars_map_derivedTensorBraidingIso hρ ha X M N
@@ -337,7 +337,7 @@ lemma reductionMonoidalSupportedCoefficientChange_constantComplexDiagonal (U : S
   derivedExtendScalars_map_constantComplexDiagonal hρ ha U (reductionTateTwistIso hρ ha k hk U)
     (map_twistObjectZeroIso_hom_comp_derivedExtendScalarsConstantComplexIso_hom hρ ha k hk U)
     (by
-      let := derivedExtendScalarsMonoidal hρ ha U
+      let := extendScalarsDerivedMonoidal hρ ha U
       rw [reductionTateTwistIso_mul, MonoidalCategory.tensorHom_def]
       rfl)
 

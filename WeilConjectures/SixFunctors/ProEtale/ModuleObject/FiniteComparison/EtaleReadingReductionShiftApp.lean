@@ -36,7 +36,9 @@ section Equivalence
 variable (X : Scheme.{u}) (T : Type) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T]
   [DiscreteTopology T] [Finite T]
 
-noncomputable instance commShift_finiteCoefficientDerivedEquivalence_inverse :
+/-- The inverse of the identification of the two derived models of finite coefficients commutes
+with the shifts, for any finite discrete coefficient ring. -/
+noncomputable instance commShift_finiteCoefficientDerivedEquivalence_inverse_of_commRing :
     (finiteCoefficientDerivedEquivalence X T).inverse.CommShift ℤ :=
   inferInstanceAs (D((finiteCoefficientModEquivalence X T).inverse).CommShift ℤ)
 

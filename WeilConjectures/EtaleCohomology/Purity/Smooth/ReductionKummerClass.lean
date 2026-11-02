@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ReductionKummerTranspose
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ReductionTateTwist
+public import WeilConjectures.EtaleCohomology.TateTwist.KummerBoundaryCoefficientChange
 
 /-!
 # The Kummer boundaries under the reduction of coefficients
@@ -41,46 +42,7 @@ open CategoryTheory Limits
 
 open scoped CategoryTheory.Functor
 
-namespace CategoryTheory.ShortComplex
-
-variable {C : Type*} [Category* C] [Abelian C]
-
-/-- The morphism `S.pullback φ ⟶ S'.pullback φ'` of pulled back short complexes induced by a
-morphism `f : S ⟶ S'` with `φ ≫ f.τ₃ = φ'`; it is `f.τ₁` on the first terms and the identity on
-the third terms. -/
-@[simps]
-noncomputable def pullbackMapOfHom {S S' : ShortComplex C} (f : S ⟶ S') {Y : C} (φ : Y ⟶ S.X₃)
-    (φ' : Y ⟶ S'.X₃) (h : φ ≫ f.τ₃ = φ') : S.pullback φ ⟶ S'.pullback φ' where
-  τ₁ := f.τ₁
-  τ₂ := Limits.pullback.lift (Limits.pullback.fst _ _ ≫ f.τ₂) (Limits.pullback.snd _ _)
-    (by rw [Category.assoc, f.comm₂₃, Limits.pullback.condition_assoc, h])
-  τ₃ := 𝟙 Y
-  comm₁₂ := by
-    apply Limits.pullback.hom_ext <;> simp [ShortComplex.pullback, f.comm₁₂]
-  comm₂₃ := by simp [ShortComplex.pullback]
-
-end CategoryTheory.ShortComplex
-
 namespace AlgebraicGeometry
-
-namespace Scheme
-
-variable {X : Scheme.{u}}
-
-/-- The morphism of Kummer sequences `(μ_c ⟶ 𝔾ₘ ⟶ 𝔾ₘ) ⟶ (μ_a ⟶ 𝔾ₘ ⟶ 𝔾ₘ)`, for `c = a b`, given
-by the `b`-th power maps `μ_c ⟶ μ_a` and `𝔾ₘ ⟶ 𝔾ₘ` and the identity of the last term. -/
-@[simps]
-noncomputable def kummerSequencePowMap (a b c : ℕ) (h : c = a * b) :
-    X.kummerSequence c ⟶ X.kummerSequence a where
-  τ₁ := rootsOfUnityPow a b c h
-  τ₂ := b • 𝟙 X.gmSheaf
-  τ₃ := 𝟙 _
-  comm₁₂ := rootsOfUnityPow_ι a b c h
-  comm₂₃ := by
-    simp only [kummerSequence, Category.comp_id]
-    rw [nsmul_id_comp_nsmul_id, h]
-
-end Scheme
 
 namespace Etale
 
