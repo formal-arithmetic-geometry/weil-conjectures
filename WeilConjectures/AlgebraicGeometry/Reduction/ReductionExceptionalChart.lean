@@ -12,6 +12,9 @@ import WeilConjectures.AlgebraicGeometry.Reduction.ReductionExceptionalOrdinaryC
 import all WeilConjectures.AlgebraicGeometry.AdjunctionTransfer.EtaleCtfChartDomain
 import all WeilConjectures.AlgebraicGeometry.AdjunctionTransfer.EtaleProEtaleAdjunctionTransfer
 public import WeilConjectures.AlgebraicGeometry.Reduction.ReductionSiteScalarPullback
+public import WeilConjectures.AlgebraicGeometry.Etale.Derived.EtaleDerivedScalarTensor
+public import WeilConjectures.AlgebraicGeometry.Reduction.ReductionSiteScalarPullback
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Canonical chart equation for the exceptional coefficient transpose -/
 
@@ -189,6 +192,20 @@ theorem reductionExceptional_chartEquation
       (AdjunctionTransfer.scalar_preserves_etale _ Y _
         ⟨(AdjunctionTransfer.boundedConstructible_iff _ Y _).2
           (RA.origin_ctf K).1, (RA.origin_ctf K).2⟩).1).1
+  have hF (K) : _root_.DerivedCategory.TStructure.t.plus (F.obj K) := by
+    have hM : AdjunctionTransfer.etaleProperty (ULift.{u + 1, u} A) Y (RA.origin.obj K) :=
+      ⟨(AdjunctionTransfer.boundedConstructible_iff _ Y _).2
+        (RA.origin_ctf K).1, (RA.origin_ctf K).2⟩
+    obtain ⟨a, b, hTor⟩ := hM.2
+    refine ⟨a, (_root_.DerivedCategory.isGE_iff _ a).mpr (fun q hq ↦ ?_)⟩
+    apply Functor.isZero_homologyFunctor_of_isZero_homologyFunctor_mapDerivedCategory_obj
+      (Sheaf.restrictScalars Y.smallEtaleTopology (RingHom.ulift.{u + 1, u + 1, u, u} φ))
+    exact ((_root_.DerivedCategory.isGE_iff _ a).1
+      (hTor (Etale.scalarCoefficientSheaf (RingHom.ulift.{u + 1, u + 1, u, u} φ) Y)).1
+        q hq).of_iso
+      ((_root_.DerivedCategory.homologyFunctor _ q).mapIso
+        ((Etale.scalarTensorIso (RingHom.ulift.{u + 1, u + 1, u, u} φ) Y).app
+          (RA.origin.obj K)))
   have hH (K) : _root_.DerivedCategory.TStructure.t.plus (H.obj K) :=
     (RB.origin_ctf ((reductionCtfScalar φ Y hSY).obj K)).1.1.1
   let Fp := ObjectProperty.lift _ F hF

@@ -200,10 +200,9 @@ def chartZeroUnitIso (R : Type (u + 1)) [CommRing R] (T : Scheme.{u})
         Functor.mapDerivedCategoryIdIso _).app K)) ≪≫
     λ_ K
 
-/-- Canonical scalar reassociation on every etale smooth chart over a finite or algebraically
-closed field, in the full intrinsic bounded constructible finite-Tor subcategory; naturality
-and the unit normalization specify the actual arrow, not just the existence of some
-isomorphism.
+/-- Canonical scalar reassociation on every etale smooth chart, in the full intrinsic
+bounded constructible finite-Tor subcategory; naturality and the unit normalization
+specify the actual arrow, not just the existence of some isomorphism.
 
 Source: literature/blueprint/latest/blueprint/sec-smooth-purity/
 sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md, Charts;
@@ -232,8 +231,7 @@ Proof:
    through chartZeroUnitIso, namely the specified tensor-unit identification. -/
 theorem chartScalarReassociation
     (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
-    (hbase : Finite k ∨ IsAlgClosed k) [Fact (ringChar k).Prime]
-    [Fact (ringChar k ≠ ℓ)]
+    (hbase : Finite k ∨ IsAlgClosed k) (hchar : ringChar k ≠ ℓ)
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) (n : ℕ) (hA : ((ℓ ^ n : ℕ) : A) = 0)
     (hB : ((ℓ ^ n : ℕ) : B) = 0)

@@ -49,6 +49,13 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 
 namespace AlgebraicGeometry.ProEtale
 
+/-- The recorded positive-level coefficient ring, lifted to the common site universe.
+Source: blueprint finite-coefficient transport paragraph; Stacks Tag 09AL
+(blueprint: lem-sf-proetale-pf-admissible-models). -/
+abbrev pfModelCoefficients (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ+) : Type (u + 1) :=
+  ULift.{u + 1} (Padic.coefficientExtensionRing l E n)
+
 /-- For fixed etale antecedents, every cohomological support interval admits the
 simultaneous bounded models needed for the proper comparison. The `letI` declarations
 in this definition only install the existing sheaf tensor, with its original data.
@@ -90,6 +97,28 @@ def pfAdmissibleModelAssertions (A : Type (u + 1)) [CommRing A]
       _root_.DerivedCategory.TStructure.t.plus M0 ∧
       _root_.DerivedCategory.TStructure.t.plus Q0 ∧
       QuasiCompact r ∧ QuasiSeparated r
+
+/-- Origin existence with the original Tor intervals, and the same model assertions
+for every supplied pair of bounded constructible origins and specified isomorphisms.
+Source: Stacks Tags 09AL and 08G1; blueprint finite-coefficient transport paragraph
+(blueprint: lem-sf-proetale-pf-admissible-models). -/
+def pfAdmissibleOriginAssertions (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] (r : Z ⟶ Y)
+    (K : _root_.DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X)
+      (ModuleCat.{u + 1} A)))
+    (L : _root_.DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology Y)
+      (ModuleCat.{u + 1} A))) (c0 d0 a b : ℤ) : Prop :=
+  (∃ (eK : Scheme.FixedEtaleOriginWitness X A K) (eL : Scheme.FixedEtaleOriginWitness Y A L),
+    Etale.DerivedCategory.isBoundedConstructible A X eK.complex.obj ∧
+    Etale.DerivedCategory.isBoundedConstructible A Y eL.complex.obj ∧
+    Etale.DerivedCategory.hasTorAmplitudeIn A X c0 d0 eK.complex.obj ∧
+    Etale.DerivedCategory.hasTorAmplitudeIn A Y a b eL.complex.obj) ∧
+  ∀ (eK : Scheme.FixedEtaleOriginWitness X A K) (eL : Scheme.FixedEtaleOriginWitness Y A L),
+    Etale.DerivedCategory.isBoundedConstructible A X eK.complex.obj →
+    Etale.DerivedCategory.isBoundedConstructible A Y eL.complex.obj →
+    Etale.DerivedCategory.hasTorAmplitudeIn A X c0 d0 eK.complex.obj ∧
+    Etale.DerivedCategory.hasTorAmplitudeIn A Y a b eL.complex.obj ∧
+    pfAdmissibleModelAssertions A j r eK.complex.obj eL.complex.obj a b
 
 /-- Assemble the literal bounded models using flat resolutions and exact localization. -/
 private theorem admissible_models_of_tor (A : Type (u + 1)) [CommRing A]
@@ -191,5 +220,68 @@ private theorem bounded_origin (A : Type (u + 1)) [CommRing A] [Finite A]
   · exact (_root_.DerivedCategory.isGE_iff Ke a).1 ha i
       (lt_of_lt_of_le hi (min_le_left _ _))
   · exact (_root_.DerivedCategory.isLE_iff Ke b).1 hb i hi
+
+/-- Bounded constructible pro-etale inputs of the prescribed Tor intervals have
+etale origins with the same intervals, and every specified pair has admissible models.
+Source: Stacks Tags 09AL, 08G1, 06YQ, 03DJ and 06YU; blueprint finite-coefficient
+transport paragraph (blueprint: lem-sf-proetale-pf-admissible-models).
+
+Proof plan:
+1. On each intrinsic constructible stratum use finite lisse models, then the
+fixed-module constructible-origin and bounded-constructible-origin comparison theorems.
+Convert the etale constructibility predicate using the recorded comparison lemma.
+The lower bounds package the origins as the specified D+ witnesses.
+2. For every supplied witness, transport the pro-etale Tor test through its iso;
+comparison reflects exactly the same interval on the etale antecedent.
+3. The bounded-representative theorem applied to the cohomological support [u0,v0]
+gives C with strict support there, including the zero and singleton cases.
+4. The generic Tor-amplitude flat-model theorem gives P with flat terms and strict
+support [a,b]. A bounded-above flat complex is K-flat.
+5. Literal termwise inverse image preserves flat terms and zero terms; it is again
+bounded-above flat and K-flat. Exact-functor localization identifies its Q image with RL0.
+6. Exact open extension preserves the support of C. Its localization factorization
+identifies Q(JC) with M0, so M0 is bounded below.
+7. The right-factor K-flat tensor comparison identifies Q(Tot(JC tensor RP)) with Q0.
+A nonzero summand in degree m has u0 <= i <= v0, a <= h <= b and i+h=m,
+so the signed total tensor vanishes outside [u0+a,v0+b]. Thus Q0 is bounded below.
+8. Properness of r gives quasi-compactness; its separated diagonal is quasi-compact,
+giving quasi-separatedness. These are the required bounded-below comparison inputs.
+-/
+theorem proEtale_pf_admissible_models (D : WeilConjectures.FiniteFieldDatum.{u})
+    (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E]
+    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ+)
+    {X Y Z : Scheme.{u}}
+    [X.Over (Spec (CommRingCat.of D.k))] [Y.Over (Spec (CommRingCat.of D.k))]
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of D.k))]
+    [QuasiCompact (X ↘ Spec (CommRingCat.of D.k))]
+    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of D.k))]
+    [QuasiCompact (Y ↘ Spec (CommRingCat.of D.k))]
+    (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of D.k))]
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    (j : X ⟶ Z) [IsOpenImmersion j] (r : Z ⟶ Y) [IsProper r] (_hjr : j ≫ r = f)
+    (K : _root_.DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X)
+      (ModuleCat.{u + 1} (pfModelCoefficients l E n))))
+    (L : _root_.DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology Y)
+      (ModuleCat.{u + 1} (pfModelCoefficients l E n))))
+    (_hKb : _root_.DerivedCategory.TStructure.t.bounded K.obj)
+    (_hLb : _root_.DerivedCategory.TStructure.t.bounded L.obj)
+    (_hKc : ∀ i : ℤ, Scheme.IsConstructibleProEtaleFixedModuleSheaf X
+      (pfModelCoefficients l E n) ((_root_.DerivedCategory.homologyFunctor _ i).obj K.obj))
+    (_hLc : ∀ i : ℤ, Scheme.IsConstructibleProEtaleFixedModuleSheaf Y
+      (pfModelCoefficients l E n) ((_root_.DerivedCategory.homologyFunctor _ i).obj L.obj))
+    (c0 d0 a b : ℤ) (_hcd : c0 ≤ d0) (_hab : a ≤ b)
+    (_hKTor : Scheme.HasFixedCoefficientProEtaleTorAmplitude X
+      (pfModelCoefficients l E n) K.obj c0 d0)
+    (_hLTor : Scheme.HasFixedCoefficientProEtaleTorAmplitude Y
+      (pfModelCoefficients l E n) L.obj a b) :
+    pfAdmissibleOriginAssertions (pfModelCoefficients l E n) j r K L c0 d0 a b := by
+  obtain ⟨eK, heK⟩ := bounded_origin (pfModelCoefficients l E n) X K _hKb _hKc
+  obtain ⟨eL, heL⟩ := bounded_origin (pfModelCoefficients l E n) Y L _hLb _hLc
+  have hKT := origin_tor (pfModelCoefficients l E n) X K c0 d0 _hKTor
+  have hLT := origin_tor (pfModelCoefficients l E n) Y L a b _hLTor
+  refine ⟨⟨eK, eL, heK, heL, hKT eK, hLT eL⟩, ?_⟩
+  intro eK eL _ _
+  exact ⟨hKT eK, hLT eL,
+    admissible_models_of_tor (pfModelCoefficients l E n) j r _ _ a b (hLT eL)⟩
 
 end AlgebraicGeometry.ProEtale

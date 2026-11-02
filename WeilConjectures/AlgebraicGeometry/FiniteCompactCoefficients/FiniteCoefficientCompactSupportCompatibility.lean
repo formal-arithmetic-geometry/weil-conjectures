@@ -55,6 +55,23 @@ Source: Stacks 099R (blueprint: lem-sp-et-proet-coefficient-compatibility). -/
 abbrev nu (R : Type (u + 1)) [CommRing R] (X : Scheme.{u}) :=
   (comparisonUpperStar (ModuleCat.{u + 1} R) X).mapDerivedCategory
 
+/-- The open scalar comparison fixed by its actual scalar and open adjunction units.
+Source: Stacks 03S2, 06YY (blueprint: lem-sp-et-proet-coefficient-compatibility). -/
+def etOpen {A B : Type (u + 1)} [CommRing A] [CommRing B] (a : A →+* B)
+    {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] :
+    (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapDerivedCategory ⋙
+        scalar Z.smallEtaleTopology a ≅
+      scalar X.smallEtaleTopology a ⋙
+        (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} B) j).mapDerivedCategory :=
+  ((Adjunction.mapDerivedCategoryAdjunction
+      (Etale.openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) j)).comp
+        (CoefficientScalarRepresentatives.adjunction Z.smallEtaleTopology a)).ofNatIsoRight
+    (Functor.mapDerivedCategorySquareIso (Etale.upperStarRestrictScalarsIsoSheaf a j))
+    |>.leftAdjointUniq
+      ((CoefficientScalarRepresentatives.adjunction X.smallEtaleTopology a).comp
+        (Adjunction.mapDerivedCategoryAdjunction
+          (Etale.openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} B) j)))
+
 /-- The same unit-normalized open scalar comparison on the pro-etale site.
 Source: Stacks 03S2, 06YY (blueprint: lem-sp-et-proet-coefficient-compatibility). -/
 def proOpen {A B : Type (u + 1)} [CommRing A] [CommRing B] (a : A →+* B)
@@ -71,6 +88,17 @@ def proOpen {A B : Type (u + 1)} [CommRing A] [CommRing B] (a : A →+* B)
       ((CoefficientScalarRepresentatives.adjunction (Scheme.ProEt.topology X) a).comp
         (Adjunction.mapDerivedCategoryAdjunction
           (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} B) j)))
+
+/-- Proper counit mate followed by extension by zero's tensor identification: beta.
+Source: Stacks 0GL6 (blueprint: lem-sp-et-proet-coefficient-compatibility). -/
+def beta {A B : Type (u + 1)} [CommRing A] [CommRing B] (a : A →+* B)
+    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
+    et A c ⋙ scalar Y.smallEtaleTopology a ⟶ scalar X.smallEtaleTopology a ⋙ et B c :=
+  Functor.whiskerLeft
+      (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i).mapDerivedCategory
+      (etaleGamma a c.g) ≫
+    Functor.whiskerRight (etOpen a c.i).hom
+      (Etale.lowerStar (ModuleCat.{u + 1} B) c.g).rightDerivedFunctor
 
 /-- The intrinsic pro-etale coefficient map b, using the geometric B-linear counit mate.
 Source: Charts (blueprint: lem-sp-et-proet-coefficient-compatibility). -/

@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.CoordinateLine.CoordinateLineAdjunctionMaps
 public import WeilConjectures.AlgebraicGeometry.AffineCoefficientCounit.AffineCoefficientCounitMaps
 public import WeilConjectures.AlgebraicGeometry.NativeCoordinateLine.NativeCoordinateLineConjugateExponents
+public import WeilConjectures.AlgebraicGeometry.CoordinateLine.CoordinateLineSourceComparisonTransport
 
 /-! Source-comparison transport for coordinate-line exponent changes.
 
@@ -101,6 +102,9 @@ theorem coordinate_line_source_comparison_naturality
     (sourceComparison P.coefficients.l P.extension (P.level - 1) T r hA K.obj Ke eK).inv ≫
       (VectorIntegrationSite.comparison (Ring P) (AffineSpace PUnit.{u + 1} T)).map
         (coordinate_line_ordinary_source_transition P T aT r r' hA hA' Ke).hom := by
-  sorry
+  let q := coordinate_line_ordinary_source_transition P T aT r r' hA hA' Ke
+  have hc := coordinate_line_coefficient_twist_compatibility P T aT r r' hA hA' hP hX
+  exact coordinate_line_source_comparison_transport P T aT r r' hA hA' hP hX K Ke hKe eK
+    q rfl hc
 
 end AlgebraicGeometry.ProEtale.CoordinateLine

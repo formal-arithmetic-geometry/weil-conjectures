@@ -158,6 +158,11 @@ public import WeilConjectures.SixFunctors.BaseChange.Square
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
 public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
 public import WeilConjectures.AlgebraicGeometry.Finite.General.FiniteGeneralRingLocalTraceAffineHelper
+public import WeilConjectures.AlgebraicGeometry.FiniteGeneralRingLevelPowerPullback
+public import WeilConjectures.AlgebraicGeometry.FiniteGeneralRingLocalTracePrefixPreCompact
+public import WeilConjectures.AlgebraicGeometry.FiniteGeneralRingLocalTracePrefixPreCompactTransition
+public import WeilConjectures.AlgebraicGeometry.Ordered.OrderedCompactificationScalarSquare
+public import WeilConjectures.AlgebraicGeometry.Ordered.OrderedTateCoefficientComposition
 
 /-! # Frame-prefix Kummer transition
 
@@ -261,6 +266,26 @@ theorem finiteGeneralRingLocalTraceExponent_prefix
           (finiteGeneralRingAffineTransition A M N hM hN V.toScheme
             (by simpa using hS.map V.ι.appTop.hom)
             (by simpa using hS'.map V.ι.appTop.hom) bV tM tN d) := by
-  sorry
+  have _ := DN
+  have _ := DM
+  obtain ⟨qV, bV, -, hbline, hbV⟩ :=
+    finiteGeneralRingKummerComparison_restrict A M N hMpos hNpos hM hN S hS hS'
+      d F q b hb tN tM V
+  refine ⟨qV, bV, hbV, ?_⟩
+  have hlevel := finiteGeneralRingLevelPower_pullback A M N hM hN V.ι hS hS' b tM tN d
+  rw [← hbline] at hlevel
+  have hp := finiteGeneralRingLocalTracePrefix_preCompact_transition A M N hMpos hNpos
+    hdiv hM hN S hS hS' d F b V bV tN tM eV hlevel hbline
+  have hc := finiteGeneralRingLocalTracePrefix_compact_naturality A M N hMpos hNpos
+    hM hN V.toScheme
+    (by simpa using hS.map V.ι.appTop.hom)
+    (by simpa using hS'.map V.ι.appTop.hom) bV tM tN d
+  have h := congrArg (fun f ↦ f ≫
+      (Etale.affineLinearCompactComparison N hNpos A hN V.toScheme
+        (by simpa using hS'.map V.ι.appTop.hom) d).inv) hp
+  simp only [Category.assoc] at h
+  rw [hc] at h
+  simpa only [finiteGeneralRingLocalTracePrefix,
+    finiteGeneralRingLocalTracePrefixPreCompact, Category.assoc] using h
 
 end AlgebraicGeometry.ProEtale

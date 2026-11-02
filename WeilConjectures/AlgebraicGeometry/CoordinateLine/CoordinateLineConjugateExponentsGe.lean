@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.CoordinateLine.CoordinateLineConjugateExponentsLe
+public import WeilConjectures.AlgebraicGeometry.CoordinateLine.CoordinateLineAdjunctionCounitTransition
 
 /-! Ordinary conjugate transport and inversion for coordinate-line exponents. -/
 
@@ -74,6 +75,45 @@ theorem coordinate_line_ordinary_conjugate_transport
           (comparison (Ring P) (P.coefficients.l ^ (r + 1)) hA T
             (pow_pos (Fact.out : P.coefficients.l.Prime).pos _)
             (by simpa only [Nat.cast_pow] using (primeUnit P T aT).pow (r + 1))).hom.app Ke) := by
-  sorry
+  let A := Ring P
+  let Nr := P.coefficients.l ^ (r + 1)
+  let Ns := P.coefficients.l ^ (r' + 1)
+  let hr : 0 < Nr := pow_pos (Fact.out : P.coefficients.l.Prime).pos _
+  let hs : 0 < Ns := pow_pos (Fact.out : P.coefficients.l.Prime).pos _
+  let hTr : IsUnit (Nr : Γ(T, ⊤)) := by
+    simpa only [Nr, Nat.cast_pow] using (primeUnit P T aT).pow (r + 1)
+  let hTs : IsUnit (Ns : Γ(T, ⊤)) := by
+    simpa only [Ns, Nat.cast_pow] using (primeUnit P T aT).pow (r' + 1)
+  let q := coordinate_line_ordinary_source_transition P T aT r r' hA hA' Ke
+  let u : (right A Nr hA T).obj Ke ⟶ (right A Ns hA' T).obj Ke :=
+    (sourceCoordinates P T r hA Ke).inv ≫ q.hom ≫
+      (sourceCoordinates P T r' hA' Ke).hom
+  have hu : q.hom ≫ (sourceCoordinates P T r' hA' Ke).hom =
+      (sourceCoordinates P T r hA Ke).hom ≫ u := by
+    simp only [u, Iso.hom_inv_id_assoc]
+  have hc (N : ℕ) (hN : (N : A) = 0) (hpos : 0 < N)
+      (hunit : IsUnit (N : Γ(T, ⊤))) :
+      (Etale.affineTraceLineLeft A T).map
+          ((comparison A N hN T hpos hunit).hom.app Ke) ≫
+        (exceptionalAdjunction A T).counit.app Ke =
+      (adjunction A N hN T hpos hunit).counit.app Ke := by
+    unfold comparison
+    simpa using conjugateEquiv_counit (adjunction A N hN T hpos hunit)
+      (exceptionalAdjunction A T) (𝟙 _) Ke
+  have hAdj := coordinate_line_adjunction_counit_transition P T aT r r' hA hA' Ke
+  have hcomp : u ≫ (comparison A Ns hA' T hs hTs).hom.app Ke =
+      (comparison A Nr hA T hr hTr).hom.app Ke := by
+    apply ((exceptionalAdjunction A T).homEquiv _ Ke).symm.injective
+    rw [Adjunction.homEquiv_counit, Adjunction.homEquiv_counit]
+    rw [Functor.map_comp]
+    rw [Category.assoc, hc Ns hA' hs hTs, hAdj, ← hc Nr hA hr hTr]
+  have hordinary : q.hom ≫ (sourceCoordinates P T r' hA' Ke).hom ≫
+        (comparison A Ns hA' T hs hTs).hom.app Ke =
+      (sourceCoordinates P T r hA Ke).hom ≫
+        (comparison A Nr hA T hr hTr).hom.app Ke := by
+    rw [← Category.assoc, hu, Category.assoc, hcomp]
+  simpa only [Functor.map_comp, Category.assoc, A, Nr, Ns, hr, hs, hTr, hTs, q] using
+    congrArg (fun z ↦
+      (VectorIntegrationSite.comparison A (AffineSpace PUnit.{u + 1} T)).map z) hordinary
 
 end AlgebraicGeometry.ProEtale.CoordinateLine

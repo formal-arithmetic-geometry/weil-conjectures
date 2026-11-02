@@ -26,6 +26,9 @@ public import WeilConjectures.SmoothPurity.CondensedOrdinaryCompactSections
 public import WeilConjectures.SixFunctors.CommonStageCompactWeilCohomology
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.Compactification.Dense
+public import WeilConjectures.Compactification.NagataCompactification
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleStratum
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CondensedOrdinaryCompactCohomology
 
 /-! # Native condensed conventions for weight theory
 
@@ -71,6 +74,12 @@ structure CondensedTwConventions where
   [quasi_compact : QuasiCompact X.hom]
   [separated : IsSeparated X.hom]
 
+/-- The chosen algebraic closure of the finite field is algebraically closed.
+Source: latest blueprint, def-tw-conventions, algebraic closure
+(blueprint: def-tw-conventions). -/
+instance isAlgClosed (T : CondensedTwConventions.{u}) : IsAlgClosed T.datum.k :=
+  IsAlgClosure.isAlgClosed T.datum.k₀
+
 attribute [instance] CondensedTwConventions.prime CondensedTwConventions.finite_type
   CondensedTwConventions.quasi_compact CondensedTwConventions.separated
 
@@ -86,7 +95,7 @@ abbrev geometricBaseChange (T : CondensedTwConventions.{u}) :=
 Source: latest blueprint, def-tw-conventions, separated finite-type hypothesis
 (blueprint: def-tw-conventions). -/
 instance geometricFiniteType (T : CondensedTwConventions.{u}) :
-    LocallyOfFiniteType T.geometricBaseChange.hom :=
+    LocallyOfFiniteType (T.geometricBaseChange.left ↘ Spec (.of T.datum.k)) :=
   inferInstanceAs (LocallyOfFiniteType (pullback.snd T.X.hom
     (Spec.map (CommRingCat.ofHom (algebraMap T.datum.k₀ T.datum.k)))))
 
@@ -94,7 +103,7 @@ instance geometricFiniteType (T : CondensedTwConventions.{u}) :
 Source: latest blueprint, def-tw-conventions, finite-type hypothesis
 (blueprint: def-tw-conventions). -/
 instance geometricQuasiCompact (T : CondensedTwConventions.{u}) :
-    QuasiCompact T.geometricBaseChange.hom :=
+    QuasiCompact (T.geometricBaseChange.left ↘ Spec (.of T.datum.k)) :=
   inferInstanceAs (QuasiCompact (pullback.snd T.X.hom
     (Spec.map (CommRingCat.ofHom (algebraMap T.datum.k₀ T.datum.k)))))
 
@@ -102,15 +111,58 @@ instance geometricQuasiCompact (T : CondensedTwConventions.{u}) :
 Source: latest blueprint, def-tw-conventions, separated hypothesis
 (blueprint: def-tw-conventions). -/
 instance geometricSeparated (T : CondensedTwConventions.{u}) :
-    IsSeparated T.geometricBaseChange.hom :=
+    IsSeparated (T.geometricBaseChange.left ↘ Spec (.of T.datum.k)) :=
   inferInstanceAs (IsSeparated (pullback.snd T.X.hom
     (Spec.map (CommRingCat.ofHom (algebraMap T.datum.k₀ T.datum.k)))))
+
+/-- Separatedness, stated for the structure morphism of the geometric fibre.
+Source: latest blueprint, def-tw-conventions, separated hypothesis
+(blueprint: def-tw-conventions). -/
+instance geometricSeparatedHom (T : CondensedTwConventions.{u}) :
+    IsSeparated T.geometricBaseChange.hom := by
+  change IsSeparated (T.geometricBaseChange.left ↘ Spec (.of T.datum.k))
+  infer_instance
+
+/-- Local finite type, stated for the structure morphism of the geometric fibre.
+Source: latest blueprint, def-tw-conventions, finite-type hypothesis
+(blueprint: def-tw-conventions). -/
+instance geometricFiniteTypeHom (T : CondensedTwConventions.{u}) :
+    LocallyOfFiniteType T.geometricBaseChange.hom := by
+  change LocallyOfFiniteType (T.geometricBaseChange.left ↘ Spec (.of T.datum.k))
+  infer_instance
+
+/-- Quasi-compactness, stated for the structure morphism of the geometric fibre.
+Source: latest blueprint, def-tw-conventions, finite-type hypothesis
+(blueprint: def-tw-conventions). -/
+instance geometricQuasiCompactHom (T : CondensedTwConventions.{u}) :
+    QuasiCompact T.geometricBaseChange.hom := by
+  change QuasiCompact (T.geometricBaseChange.left ↘ Spec (.of T.datum.k))
+  infer_instance
 
 /-- The pulled-back finite-subextension-valued condensed Qbar ring on `X_kbar`.
 Source: latest blueprint, def-tw-conventions, def-sf-setting coefficient convention
 (blueprint: def-tw-conventions). -/
 abbrev coefficientRing (T : CondensedTwConventions.{u}) :=
   ProEtale.condensedRingObj (Profinite.padicAlgClRingObj T.ell) T.geometricBaseChange.left
+
+/-- The ordinary scalar ring `Qbar(*)` of singleton sections of the condensed Qbar ring.
+Source: latest blueprint, def-tw-conventions, Qbar-coefficient cohomology
+(blueprint: def-tw-conventions). -/
+abbrev scalarRing (T : CondensedTwConventions.{u}) :=
+  MonObj.Γ (Profinite.padicAlgClRingObj T.ell)
+
+/-- The derived category of scalar modules exists (Grothendieck abelian category).
+Source: latest blueprint, def-tw-conventions, Qbar-coefficient cohomology
+(blueprint: def-tw-conventions). -/
+instance scalarHasDerived (T : CondensedTwConventions.{u}) :
+    HasDerivedCategory (ModuleCat T.scalarRing) :=
+  HasDerivedCategory.ofIsGrothendieckAbelian _
+
+/-- The derived category of `Qbar(*)`-modules, where cohomology complexes take values.
+Source: latest blueprint, def-tw-conventions, Qbar-coefficient cohomology
+(blueprint: def-tw-conventions). -/
+abbrev scalarDerived (T : CondensedTwConventions.{u}) :=
+  DerivedCategory (ModuleCat T.scalarRing)
 
 /-- The ordinary unbounded derived category of modules over the condensed coefficient ring.
 Source: latest blueprint, def-tw-conventions, displayed ambient derived category
@@ -139,31 +191,52 @@ Source: latest blueprint, def-tw-conventions, constant-coefficient compact cohom
 abbrev coefficientObject (T : CondensedTwConventions.{u}) : T.ambientCategory :=
   (DerivedCategory.singleFunctor _ 0).obj (Mod.regular T.coefficientRing)
 
-/-- A compactification supplied by separated finite type over the geometric field.
-This selects the existing compactification presentation, rather than adding a hypothesis.
-Source: latest blueprint, def-tw-conventions, compact-support convention
+/-- `Fib_s`: the derived terminal sections over the geometric point `Spec kbar`, with the
+scalar action of the condensed Qbar ring (`condensedRingCoefficientSections`).
+Source: latest blueprint, def-weil-ordinary-compact-cohomology, Fib_s
 (blueprint: def-tw-conventions). -/
-def compactification (T : CondensedTwConventions.{u}) :
-    Compactification T.geometricBaseChange.hom :=
-  letI := hasCompactification_of_finiteType_over_field T.datum.k
-    T.geometricBaseChange.left (Spec (.of T.datum.k)) T.geometricBaseChange.hom
-  HasCompactification.compactification T.geometricBaseChange.hom
+abbrev pointFiber (T : CondensedTwConventions.{u}) :
+    DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology (Spec (.of T.datum.k)))
+      Ab.{u + 1})
+      (ProEtale.condensedRingObj (Profinite.padicAlgClRingObj T.ell)
+        (Spec (.of T.datum.k)))) ⥤ T.scalarDerived :=
+  (AlgebraicGeometry.ProEtale.CondensedRing.condensedRingCoefficientSections
+    (Profinite.padicAlgClRingObj T.ell) (Spec (.of T.datum.k))).rightDerivedFunctor
 
-/-- Compact-support sections are the recorded `Fib_s` after the condensed lower shriek.
-Source: latest blueprint, def-tw-conventions, compact-support convention, and
- def-weil-ordinary-compact-cohomology, displayed RΓc formula
+/-- The Nagata compactification of the geometric structure map, used for compact support.
+Source: latest blueprint, def-weil-ordinary-compact-cohomology, compactification in RΓ_c
 (blueprint: def-tw-conventions). -/
-abbrev compactSections (T : CondensedTwConventions.{u}) :=
-  condensedQbarCompactSections T.ell T.datum.k T.compactification
+abbrev compactification (T : CondensedTwConventions.{u}) :
+    Compactification T.geometricBaseChange.hom :=
+  NagataCompactification T.geometricBaseChange.hom
+
+/-- `RΓ(X_kbar, -) = Fib_s ∘ Ra_*`: the ordinary coefficient complex of
+def-weil-ordinary-compact-cohomology for the Qbar ring and the geometric structure map.
+Source: latest blueprint, def-weil-ordinary-compact-cohomology, RΓ formula
+(blueprint: def-tw-conventions). -/
+abbrev ordinaryCoefficientComplex (T : CondensedTwConventions.{u}) :
+    T.ambientCategory ⥤ T.scalarDerived.{u} :=
+  AlgebraicGeometry.ProEtale.CondensedRing.condensedRingOrdinaryCoefficientComplex
+    (Profinite.padicAlgClRingObj T.ell) T.geometricBaseChange.hom
+
+/-- `RΓ_c(X_kbar, -) = Fib_s ∘ Ra_!`: the compact coefficient complex of
+def-weil-ordinary-compact-cohomology on the Nagata compactification.
+Source: latest blueprint, def-tw-conventions, compact-support convention, and
+def-weil-ordinary-compact-cohomology, displayed RΓ_c formula
+(blueprint: def-tw-conventions). -/
+abbrev compactSections (T : CondensedTwConventions.{u}) :
+    T.ambientCategory ⥤ T.scalarDerived.{u} :=
+  AlgebraicGeometry.ProEtale.CondensedRing.condensedRingCompactCoefficientComplex
+    (Profinite.padicAlgClRingObj T.ell) T.compactification
 
 /-- Compactly supported cohomology of the constant condensed Qbar coefficient object,
-in every integer degree, with coefficients in Qbar itself.
+in every integer degree, over the ordinary scalar ring Qbar(*).
 Source: latest blueprint, def-tw-conventions, final clause, and
- def-weil-ordinary-compact-cohomology, displayed Hc formula
+def-weil-ordinary-compact-cohomology, displayed Hc formula
 (blueprint: def-tw-conventions). -/
 abbrev compactlySupportedCohomology (T : CondensedTwConventions.{u}) (i : ℤ) :=
-  (DerivedCategory.homologyFunctor (ModuleCat.{u + 1} (PadicAlgCl T.ell)) i).obj
-    (T.compactSections.obj T.coefficientObject)
+  (AlgebraicGeometry.ProEtale.CondensedRing.condensedRingCompactCohomology
+    (Profinite.padicAlgClRingObj T.ell) T.compactification i).obj T.coefficientObject
 
 end CondensedTwConventions
 end WeilConjectures

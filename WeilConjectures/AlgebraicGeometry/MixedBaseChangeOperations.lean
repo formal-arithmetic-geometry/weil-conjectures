@@ -123,4 +123,14 @@ def mixedCompactSupportExchange (A : Type u) [CommRing A] [Finite A]
       (mixedOpenBaseChangeIso A h cp.i c.i (pullback.fst c.g g)
         (c.isPullback_i_ofIsPullback hp)).hom (directImageConstantPush A cp.g)
 
+/-- Pullback on the full intrinsic Dctf categories; the certificate affects only membership.
+Source: blueprint mixed-base-change proof Steps 4 and 6
+(blueprint: det-sp-mixed-base-change). -/
+def mixedCtfPullback (A : Type u) [CommRing A] [Finite A]
+    {U V : Scheme.{u}} (g : U ⟶ V)
+    (hg : ∀ K : spFiniteConstructibleTorCategory V A,
+      spFiniteConstructibleTor U A ((proEtaleConstantRingDerivedPullback A g).obj K.obj)) :=
+  (spFiniteConstructibleTor U A).lift
+    ((spFiniteConstructibleTor V A).ι ⋙ proEtaleConstantRingDerivedPullback A g) hg
+
 end AlgebraicGeometry.ProEtale

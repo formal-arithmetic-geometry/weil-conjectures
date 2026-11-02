@@ -157,6 +157,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.BaseChange.Square
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
 public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
+public import WeilConjectures.AlgebraicGeometry.AffineSuccessorPasting
+public import WeilConjectures.AlgebraicGeometry.FiniteGeneralRingLocalTraceAffineSuccessorFactor
 
 /-! # Successor step for the ordered affine Kummer counit
 
@@ -241,7 +243,29 @@ theorem finiteGeneralRingLocalTraceExponent_affine_successor
     (Etale.affineTraceLeft A T (d + 1)).map
           eSucc ≫
         Etale.affineTraceCounit A N hN tN DN T hNunit (d + 1) =
-      Etale.affineTraceCounit A M hM tM DM T hMunit (d + 1) := by
-  sorry
+      Etale.affineTraceCounit A M hM tM DM T hMunit (d + 1)  := by
+  let := affineTraceNoetherian T d
+  have hf := finiteGeneralRingLocalTraceExponent_affine_successor_factor
+    A M N hMpos hNpos hM hN T hMunit hNunit q b hb tN DN tM DM d eD heD eSucc
+    heSucc eLine heLine hline
+  let L := fun r ↦ Etale.affineTraceLineLeft A (affineTraceTower T r)
+  let R := fun r ↦ Etale.affineTraceLineRight A M hM (affineTraceTower T r)
+  let R' := fun r ↦ Etale.affineTraceLineRight A N hN (affineTraceTower T r)
+  let a := fun r ↦ Etale.affineTraceLineAdjunction A M hM tM
+    (affineTraceTower T r) (affineTraceInvertible M T hMunit r)
+    (@DM (affineTraceTower T r) (affineTraceNoetherian T r)
+      (affineTraceInvertible M T hMunit r))
+  let a' := fun r ↦ Etale.affineTraceLineAdjunction A N hN tN
+    (affineTraceTower T r) (affineTraceInvertible N T hNunit r)
+    (@DN (affineTraceTower T r) (affineTraceNoetherian T r)
+      (affineTraceInvertible N T hNunit r))
+  have hp := Etale.affine_successor_pasting (C := fun r ↦
+      Etale.DerivedCategoryModule A (affineTraceTower T r))
+    (L := L) (R := R) (R' := R') a a' d (Etale.ordinaryFiniteUnit A T)
+    eD eSucc hf (by
+      simpa [L, a, a', Etale.affineTraceCounit, Etale.affineTraceAdjunction,
+        Etale.affineTraceLeft] using ih)
+  simpa only [L, R, R', a, a', Etale.affineTraceCounit,
+    Etale.affineTraceAdjunction, Etale.affineTraceLeft] using hp
 
 end AlgebraicGeometry.ProEtale

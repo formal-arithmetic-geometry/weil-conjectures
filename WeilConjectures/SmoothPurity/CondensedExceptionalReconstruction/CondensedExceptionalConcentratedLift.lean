@@ -6,6 +6,12 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SmoothPurity.CondensedExceptionalReconstruction.Datum.ExceptionalReconstructionComparison
+import WeilConjectures.SmoothPurity.PurIntegralSupportComparison.PurIntegralSupportComparison
+import WeilConjectures.AlgebraicGeometry.ProEtale.Fixed.ProEtaleFixedModuleConstructible
+import WeilConjectures.CategoryTheory.DerivedCategory.SmoothPurity.GoodTruncationNormalization
+import WeilConjectures.AlgebraicGeometry.BrownTowerComparison.BrownTowerRealization
+import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Recognition steps for supplied strict coefficient systems
 
@@ -68,6 +74,61 @@ theorem condensed_exceptional_concentrated_lift
       ((P.source.proEtaleEvaluation.evaluation n).obj d.tower).IsLE r) :
     ∃ theta : d.tower ≅ brownTower l k P d.L,
       ∀ n : ℕ, (P.source.proEtaleEvaluation.evaluation n).map theta.hom =
-        (d.toBrown l k n).hom := by sorry
+        (d.toBrown l k n).hom := by
+  classical
+  let E := P.source.proEtaleEvaluation
+  let N := brownTower l k P d.L
+  have hN (n : ℕ) : ((E.evaluation n).obj N).IsGE r ∧
+      ((E.evaluation n).obj N).IsLE r := by
+    let := (hdeg n).1
+    let := (hdeg n).2
+    exact ⟨DerivedCategory.TStructure.t.isGE_of_iso (d.toBrown l k n) r,
+      DerivedCategory.TStructure.t.isLE_of_iso (d.toBrown l k n) r⟩
+  obtain ⟨hVge, hVle⟩ := concentrated_of_evaluations
+    (W := X.scheme) (O := clopenSystemRing l (Field.{u} l))
+    (t := clopenSystemUniformizer l (Field.{u} l)) E d.tower r hdeg
+  obtain ⟨hNge, hNle⟩ := concentrated_of_evaluations
+    (W := X.scheme) (O := clopenSystemRing l (Field.{u} l))
+    (t := clopenSystemUniformizer l (Field.{u} l)) E N r hN
+  let := hVge
+  let := hVle
+  let := hNge
+  let := hNle
+  obtain ⟨deltaV, _⟩ := normalized_single_iso d.tower r
+  obtain ⟨deltaN, _⟩ := normalized_single_iso N r
+  let p (n : ℕ) := (E.evaluation n).map deltaV.inv ≫ (d.toBrown l k n).hom ≫
+    (E.evaluation n).map deltaN.hom
+  have hp (m n : ℕ) (h : n ≤ m) :
+      (E.transition h).app _ ≫ (E.scalar h).restriction.map (p n) =
+        p m ≫ (E.transition h).app _ := by
+    dsimp only [p]
+    simp only [Functor.map_comp, Category.assoc]
+    have hv := (E.transition h).naturality deltaV.inv
+    have hn := (E.transition h).naturality deltaN.hom
+    dsimp only [Functor.comp_map] at hv hn
+    rw [← reassoc_of% hv]
+    change _ ≫ ((E.transition h).app d.tower ≫ _ ≫ _) = _
+    rw [reassoc_of% (ht h)]
+    rw [hn]
+  obtain ⟨a, ha⟩ := lift_single_family
+    (W := X.scheme) (O := clopenSystemRing l (Field.{u} l))
+    (t := clopenSystemUniformizer l (Field.{u} l)) E r
+    ((DerivedCategory.homologyFunctor _ r).obj d.tower)
+    ((DerivedCategory.homologyFunctor _ r).obj N) p hp
+  let b := deltaV.hom ≫ (DerivedCategory.singleFunctor _ r).map a ≫ deltaN.inv
+  have hb (n : ℕ) : (E.evaluation n).map b = (d.toBrown l k n).hom := by
+    dsimp only [b]
+    rw [Functor.map_comp, Functor.map_comp, ha]
+    simp only [p, Category.assoc]
+    rw [← Functor.map_comp, deltaN.hom_inv_id,
+      CategoryTheory.Functor.map_id, Category.comp_id]
+    rw [← Functor.map_comp_assoc, deltaV.hom_inv_id,
+      CategoryTheory.Functor.map_id, Category.id_comp]
+  have : IsIso b := by
+    apply (P.source.derived.detectsIso b).2
+    intro n
+    rw [hb n]
+    infer_instance
+  exact ⟨asIso b, hb⟩
 
 end WeilConjectures.CondensedExceptionalReconstruction

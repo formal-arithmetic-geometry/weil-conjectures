@@ -14,6 +14,9 @@ public import WeilConjectures.Algebra.Homology.SixFunctors.OrdinaryDerivedChange
 public import WeilConjectures.Algebra.Homology.CanonicalTensorPullbackOfUniverses.RingedTopoiCanonicalTensorPullbackOfUniverses
 public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleTorAmplitudePresentations
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+public import WeilConjectures.AlgebraicGeometry.FiniteAffineScalarChartPresentation
+public import WeilConjectures.AlgebraicGeometry.FiniteAffineScalarNormalFormStep
+public import WeilConjectures.AlgebraicGeometry.FiniteAffineTateScalarNormalization
 
 /-! # Ordered affine scalar exchange and its single normal form
 
@@ -187,6 +190,30 @@ def finiteAffineChartNormalIso
               ((leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A)
                 (e ≫ affineTraceProjection S d)).app K))
 
+private theorem finiteAffineNormalScalarMap_isIso
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
+    (φ : A →+* B) (N : ℕ) (hN : 0 < N)
+    (hA : (N : A) = 0) (hB : (N : B) = 0)
+    {X S : Scheme.{u}} (f : X ⟶ S) (hX : IsUnit (N : Γ(X, ⊤)))
+    (d : ℕ) (b : ℤ) (K : DerivedCategoryModule A S) :
+    IsIso (finiteAffineNormalScalarMap φ N hA hB f d b K) := by
+  have := (finiteAffineTateScalar_normalization φ X N hN hA hB hX).2.2.1 d
+  unfold finiteAffineNormalScalarMap derivedTensorHom
+  infer_instance
+
+private theorem finiteAffineOrderedScalarMap_isIso
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
+    (φ : A →+* B) (N : ℕ) (hN : 0 < N)
+    (hA : (N : A) = 0) (hB : (N : B) = 0)
+    (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤)))
+    (d : ℕ) (K : DerivedCategoryModule A S) :
+    IsIso (finiteAffineOrderedScalarMap φ N hA hB S d K) := by
+  cases d with
+  | zero => exact IsIso.id _
+  | succ d =>
+    exact finiteAffineNormalScalarMap_isIso φ N hN hA hB _
+      (affineTraceInvertible N S hS (d + 1)) _ _ K
+
 /-- The ordered coordinate exchange agrees with the independently constructed
 single scalar reassociation after the specified ordered normal forms.
 
@@ -219,6 +246,102 @@ theorem finiteAffineRightScalarNormalForm
         (scalarExtension φ (affineTraceTower S d)).map
             ((orderedAffineRightIso A N hN hA S hS d).hom.app K) ≫
           finiteAffineOrderedScalarMap φ N hA hB S d K := by
-  sorry
+  have h : ∀ n : ℕ, ∀ L : DerivedCategoryModule A S,
+      (ProEtale.reductionEtaleAffineScalarIso φ S N hA hB hS n L).hom ≫
+          (orderedAffineRightIso B N hN hB S hS n).hom.app ((scalarExtension φ S).obj L) =
+        (scalarExtension φ (affineTraceTower S n)).map
+            ((orderedAffineRightIso A N hN hA S hS n).hom.app L) ≫
+          finiteAffineOrderedScalarMap φ N hA hB S n L := by
+    intro n
+    induction n with
+    | zero =>
+      intro L
+      simp [ProEtale.reductionEtaleAffineScalarIso, orderedAffineRightIso,
+        finiteAffineOrderedScalarMap, affineTraceTower]
+    | succ n ih =>
+      intro L
+      have hi : (scalarExtension φ (affineTraceTower S n)).map
+            ((orderedAffineRightIso A N hN hA S hS n).hom.app L) ≫
+          finiteAffineOrderedScalarMap φ N hA hB S n L ≫
+          (orderedAffineRightIso B N hN hB S hS n).inv.app ((scalarExtension φ S).obj L) =
+          (ProEtale.reductionEtaleAffineScalarIso φ S N hA hB hS n L).hom := by
+        rw [← Category.assoc, ← ih L, Category.assoc, Iso.hom_inv_id_app,
+          Category.comp_id]
+      have hs := finiteAffineScalarNormalForm_step φ N hN hA hB S hS n L
+      rw [hi] at hs
+      simpa only [ProEtale.reductionEtaleAffineScalarIso, Iso.trans_hom,
+        Functor.mapIso_hom, Category.assoc] using hs
+  exact ⟨finiteAffineOrderedScalarMap_isIso φ N hN hA hB S hS d K, h d K⟩
+
+private theorem scalarChart_transport
+    {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]
+    (P : C ⥤ E) (Q : D ⥤ F) (T : C ⥤ D) (U : E ⥤ F)
+    (γ : P ⋙ U ≅ T ⋙ Q) {G N : C} {H M : D} {V : E} {W : F}
+    (i : G ≅ N) (j : H ≅ M) (a : T.obj G ⟶ H) (n : T.obj N ⟶ M)
+    (c : P.obj G ≅ V) (d : Q.obj H ≅ W) (r : U.obj V ⟶ W)
+    (hn : a ≫ j.hom = T.map i.hom ≫ n)
+    (h : γ.hom.app N ≫ Q.map n ≫ Q.map j.inv ≫ d.hom =
+      U.map (P.map i.inv ≫ c.hom) ≫ r) :
+    γ.hom.app G ≫ Q.map a ≫ d.hom = U.map c.hom ≫ r := by
+  have hh := congrArg (fun z ↦ U.map (P.map i.hom) ≫ z) h
+  have hγ := γ.hom.naturality i.hom
+  dsimp only [Functor.comp_map] at hγ
+  simp only [← Category.assoc] at hh
+  rw [hγ] at hh
+  have heq : T.map i.hom ≫ n ≫ j.inv = a := by
+    rw [← Category.assoc, ← hn, Category.assoc, j.hom_inv_id, Category.comp_id]
+  have hQ := congrArg Q.map heq
+  simp only [Functor.map_comp] at hQ
+  simp only [Category.assoc] at hh
+  rw [reassoc_of% hQ] at hh
+  simpa only [← U.map_comp_assoc, ← U.map_comp, ← P.map_comp_assoc,
+    i.hom_inv_id, P.map_id, Category.id_comp] using hh
+
+/-- Restricting the ordered equation to any separated etale finite-type chart gives
+its single canonical reassociation. The chart normal form uses canonical unit maps
+also when d=0. Source: Charts, retained Steps 10--11
+(blueprint: lem-sp-finite-affine-right-scalar-normal-form).
+Proof: compose the ordered equation with the inverse scalar/pullback comparison for e.
+Use its composition law for e and p_d and the tensor/pullback comparison. The Tate
+pullback and ordinary balancing square agree on root/coefficient sections; shift
+compatibility preserves the even accumulated shift. The resulting composite is
+finiteAffineChartScalarMap. The canonical symmetry only converts the published chart
+notation from right Tate to left Tate, and does not permute the ordered Tate factors. -/
+theorem finiteAffineRightScalarNormalForm_chart
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
+    (φ : A →+* B) (N : ℕ) (hN : 0 < N)
+    (hA : (N : A) = 0) (hB : (N : B) = 0)
+    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)
+    {U : Scheme.{u}} [IsNoetherian U] (e : U ⟶ affineTraceTower S d)
+    [AlgebraicGeometry.Etale e] [IsSeparated e] [LocallyOfFiniteType e] [QuasiCompact e]
+    (K : DerivedCategoryModule A S)
+    (_hBounded : _root_.DerivedCategory.TStructure.t.bounded K)
+    (_hConstructible : ∀ i : ℤ, Scheme.IsConstructibleEtaleModuleSheaf
+      ((_root_.DerivedCategory.homologyFunctor
+        (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} A)) i).obj K))
+    (_hTor : ∃ a b : ℤ, a ≤ b ∧ _root_.DerivedCategory.torAmplitudeIn
+      (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} A)) a b K) :
+    (ProEtale.reductionEtaleChartScalarIso φ N hA hB hS d e K).hom ≫
+        (finiteAffineChartNormalIso B N hN hB S hS d e ((scalarExtension φ S).obj K)).hom =
+      (scalarExtension φ U).map (finiteAffineChartNormalIso A N hN hA S hS d e K).hom ≫
+        finiteAffineChartScalarMap φ N hA hB (e ≫ affineTraceProjection S d)
+          d (2 * (d : ℤ)) K := by
+  have hm := (finiteAffineRightScalarNormalForm φ N hN hA hB S hS d K
+    _hBounded _hConstructible _hTor).2
+  have h := scalarChart_transport
+    (ordinaryFinitePullback A e) (ordinaryFinitePullback B e)
+    (scalarExtension φ (affineTraceTower S d)) (scalarExtension φ U)
+    (scalarPullbackIso φ e).symm
+    ((orderedAffineRightIso A N hN hA S hS d).app K)
+    ((orderedAffineRightIso B N hN hB S hS d).app ((scalarExtension φ S).obj K))
+    (ProEtale.reductionEtaleAffineScalarIso φ S N hA hB hS d K).hom
+    (finiteAffineOrderedScalarMap φ N hA hB S d K)
+    (finiteAffineChartNormalIso A N hN hA S hS d e K)
+    (finiteAffineChartNormalIso B N hN hB S hS d e ((scalarExtension φ S).obj K))
+    (finiteAffineChartScalarMap φ N hA hB (e ≫ affineTraceProjection S d)
+      d (2 * (d : ℤ)) K) hm
+    (finiteAffineScalar_chartPresentation φ N hN hA hB S hS d e K)
+  simpa only [ProEtale.reductionEtaleChartScalarIso, Iso.trans_hom,
+    Iso.symm_hom, Iso.app_hom, Functor.mapIso_hom, Category.assoc] using h
 
 end AlgebraicGeometry.Etale

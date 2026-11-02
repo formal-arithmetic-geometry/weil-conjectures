@@ -103,21 +103,14 @@ private theorem pro_computed_iso
     Functor.mapDerivedCategoryNatIso_symm, Iso.trans_hom, Iso.trans_inv,
     Iso.symm_hom, Iso.symm_inv, hs, Category.assoc] using h
 
-/-- The inverse scalar mate on the small pro-etale site is invertible for every ring map.
-Source: scalar-six pullback proof (1), Stacks 06YY, 07A4 and 0G7E
+/-- The pro-etale inverse scalar mate is invertible for arbitrary coefficient maps.
+Source: Stacks 07A4 and 0G7E
 (blueprint: lem-sfb-proetale-scalar-pullback-mate-invertible).
-
-Proof: the ordinary restriction/pullback square is conjugate to the sectionwise
-coextension/direct-image identity. Iterated mates and the restriction/coextension
-triangle identify its inverse scalar mate with the canonical ordinary tensor
-comparison, which is invertible. Pullback preserves flat-term K-flat resolutions
-by the local relation criterion under representably flat base change. Compute
-the derived mate on these resolutions with the ordinary scalar unit used in
-representative. The ordinary tensor comparison and the scalar computation arrows
-are invertible there. Uniqueness of scalar left adjoints and the exact geometric
-derived comparison transport invertibility to the fixed scalar adjunctions
-appearing below. Every unbounded object has such a resolution. No coefficient
-flatness, finiteness, or boundedness assumption is needed. -/
+Proof: the ordinary left mate is invertible by iterated mates and pointwise
+restriction/coextension. Representably flat base change preserves the local relation
+criterion for flat sheaves. The resulting flat K-flat resolutions compute the
+left derived scalar mate. Finally transport the mate across uniqueness of scalar
+left adjoints and the canonical exact geometric comparison. -/
 theorem proEtaleScalarPullbackMate_isIso
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (a : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -126,21 +119,27 @@ theorem proEtaleScalarPullbackMate_isIso
       (adjunction (Scheme.ProEt.topology X) a)).symm
       (TwoSquare.mk _ _ _ _
         (ProEtale.leftDerivedUpperStarRestrictScalarsIso a f).hom)).natTrans) := by
-  sorry
+  have := pro_computed_iso a f
+  have := isIso_left_mate_change_adjunction
+    (adjunction (Scheme.ProEt.topology Y) a)
+    (adjunction (Scheme.ProEt.topology X) a)
+    (scalarDerivedAdjunctionData (Scheme.ProEt.topology Y) a).adjunction
+    (scalarDerivedAdjunctionData (Scheme.ProEt.topology X) a).adjunction
+    (Functor.mapDerivedCategorySquareIso (upperStarRestrictScalarsIso a f)).hom
+  exact transport_left_mate
+    (adjunction (Scheme.ProEt.topology Y) a)
+    (adjunction (Scheme.ProEt.topology X) a)
+    (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) f)
+    (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} B) f)
+    (Functor.mapDerivedCategorySquareIso (upperStarRestrictScalarsIso a f)).hom
 
-/-- The same canonical inverse scalar mate on the small etale site is invertible.
-Source: scalar-six pullback proof (1), Stacks 06YY, 07A4 and 0G7E
+/-- The etale inverse scalar mate is invertible for arbitrary coefficient maps.
+Source: Stacks 07A4 and 0G7E
 (blueprint: lem-sfb-proetale-scalar-pullback-mate-invertible).
-
-Proof: conjugate the ordinary restriction/pullback square to the pointwise
-coextension/direct-image identity and apply the iterated mate identities and
-restriction/coextension triangle. The resulting ordinary scalar mate is the
-canonical tensor/pullback isomorphism. Etale pullback preserves flat-term K-flat
-resolutions, as can be checked stalkwise. Compute the derived mate there with
-the specified scalar unit. Its representative is the ordinary invertible mate.
-Transport through uniqueness of scalar left adjoints and the canonical exact
-geometric derived comparisons. This proves invertibility on every unbounded
-object, for arbitrary coefficient homomorphisms. -/
+Proof: apply the ordinary restriction/direct-image mate identity, then the flat
+resolution comparison. Etale pullback preserves flatness stalkwise. Uniqueness of
+left adjoints and the exact geometric comparison transport invertibility to the
+specified scalar adjunction. -/
 theorem etaleScalarPullbackMate_isIso
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (a : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -148,7 +147,19 @@ theorem etaleScalarPullbackMate_isIso
       (adjunction Y.smallEtaleTopology a)
       (adjunction X.smallEtaleTopology a)).symm
       (TwoSquare.mk _ _ _ _ (Etale.scalarRestrictionPullbackIso a f).hom)).natTrans) := by
-  sorry
+  have := et_computed_iso a f
+  have := isIso_left_mate_change_adjunction
+    (adjunction Y.smallEtaleTopology a)
+    (adjunction X.smallEtaleTopology a)
+    (scalarDerivedAdjunctionData Y.smallEtaleTopology a).adjunction
+    (scalarDerivedAdjunctionData X.smallEtaleTopology a).adjunction
+    (Functor.mapDerivedCategorySquareIso (Etale.upperStarRestrictScalarsIsoSheaf a f)).hom
+  exact transport_left_mate
+    (adjunction Y.smallEtaleTopology a)
+    (adjunction X.smallEtaleTopology a)
+    (Etale.leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) f)
+    (Etale.leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} B) f)
+    (Functor.mapDerivedCategorySquareIso (Etale.upperStarRestrictScalarsIsoSheaf a f)).hom
 
 private theorem et_computed_iso
     {A B : Type (u + 1)} [CommRing A] [CommRing B]

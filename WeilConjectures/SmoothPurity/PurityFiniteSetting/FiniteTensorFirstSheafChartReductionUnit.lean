@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SmoothPurity.PurityFiniteSetting.Positive.FinitePositiveRootCharts
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Intrinsic.ProEtaleIntrinsicSectionCoordinates
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.FiniteTensorFirstSheafChartReductionRootTransport
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -44,5 +46,38 @@ theorem finiteTensorFirstSheafChart_reduction_unit_on_coordinate
         (ModuleCat.{u + 1} (P.finiteReductionSetting m hm).Coefficient))).app
           (Opposite.op V)
           (1 : (P.finiteReductionSetting m hm).Coefficient) := by
-  sorry
+  have _ := hy
+  have hs := finiteTensorFirstSheafChart_reduction_root_transport
+    P m hm hmn T c hc ζ hζ η hη hroot V x₁ he₁
+  let Q := P.finiteReductionSetting m hm
+  let y := (P.finiteTensorFixedLineMap m hm hmn T c 1).hom.app
+    (Opposite.op V) x₁
+  let y₀ := (Q.finiteTensorFirstSheafChart T η hη).inv.hom.app
+    (Opposite.op V)
+      ((Functor.LaxMonoidal.ε (sheafToPresheaf (ProEt.topology T)
+        (ModuleCat.{u + 1} Q.Coefficient))).app (Opposite.op V) (1 : Q.Coefficient))
+  have hs' : Q.finiteTensorSection T 1 V y = Q.finiteTensorSection T 1 V y₀ := by
+    exact hs
+  have hyeq : y = y₀ := by
+    let : Finite Q.Ring := Padic.finite_coefficientExtensionRing
+      Q.coefficients.l Q.extension Q.level Q.level_pos
+    exact (sfIntrinsicSectionEquiv Q.Ring T (Q.finiteTensorLine T 1)
+      (Opposite.op V)).injective hs'
+  have hnorm : (Q.finiteTensorFirstSheafChart T η hη).hom.hom.app
+      (Opposite.op V) y₀ =
+      (Functor.LaxMonoidal.ε (sheafToPresheaf (ProEt.topology T)
+        (ModuleCat.{u + 1} Q.Coefficient))).app (Opposite.op V) (1 : Q.Coefficient) := by
+    have h := congrArg (fun f ↦ f.hom.app (Opposite.op V))
+      (Q.finiteTensorFirstSheafChart T η hη).inv_hom_id
+    change (Q.finiteTensorFirstSheafChart T η hη).inv.hom.app (Opposite.op V) ≫
+        (Q.finiteTensorFirstSheafChart T η hη).hom.hom.app (Opposite.op V) = _ at h
+    have hv := ConcreteCategory.congr_hom h
+      ((Functor.LaxMonoidal.ε (sheafToPresheaf (ProEt.topology T)
+        (ModuleCat.{u + 1} Q.Coefficient))).app (Opposite.op V) (1 : Q.Coefficient))
+    convert hv using 1 <;> rfl
+  change (Q.finiteTensorFirstSheafChart T η hη).hom.hom.app
+      (Opposite.op V) y = _
+  rw [hyeq]
+  exact hnorm
+
 end WeilConjectures.PurityFiniteSetting

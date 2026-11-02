@@ -461,7 +461,12 @@ theorem etaleProEtaleCoefficientCompatibility
   have hdom := finiteCompactSupportDomains ell p _hp _hEll.symm k f c hRA hRB ψ L.obj
     (etaleProperty_bounded RA X L.obj _hL) _hL.1.1
     (etaleProperty_tor RA X L.obj _hL)
-  have hLB := (hdom.2.1 ⟨X, (Etale.scalarExtension ψ X).obj L.obj⟩ (by simp)).1.1
+  have hLB : DerivedCategory.TStructure.t.plus
+      ((Etale.scalarExtension ψ X).obj L.obj) := by
+    first
+    | exact (hdom.2.2.1 ⟨X, (Etale.scalarExtension ψ X).obj L.obj⟩
+        List.mem_cons_self).1.2.2.2
+    | exact (hdom.2.1 ⟨X, (Etale.scalarExtension ψ X).obj L.obj⟩ (by simp)).2.2.2.1
   let : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian
     (X ↘ Spec (.of k))
   let : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
@@ -780,18 +785,31 @@ theorem etaleProEtaleCoefficientCompatibility_composition
     have hdom := finiteCompactSupportDomains ell p _hp _hEll.symm k f c hRA hRB ψ L.obj
       (etaleProperty_bounded RA X L.obj _hL) _hL.1.1
       (etaleProperty_tor RA X L.obj _hL)
-    have hFA := hdom.1
-      ((Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} RA) c).obj
-        L.obj) (by simp)
-    have hFAB := hdom.2.1
-      ⟨Y, (Etale.scalarExtension ψ Y).obj
+    first
+    | exact
+        let hFA := hdom.1
+        let hFAB := (hdom.2.2.1
+          ⟨Y, (Etale.scalarExtension ψ Y).obj
+            ((Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} RA) c).obj
+              L.obj)⟩ (List.mem_cons_of_mem _ List.mem_cons_self)).1
+        let hFB := (hdom.2.2.1
+          ⟨Y, (Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} RB) c).obj
+            ((Etale.scalarExtension ψ X).obj L.obj)⟩
+          (List.mem_cons_of_mem _ (List.mem_cons_of_mem _ List.mem_cons_self))).1
+        ⟨hFA.2.2.2, hFAB.2.2.2, hFB.2.2.2,
+          etaleProperty_of_domain RA Y _ hFA.1 hFA.2.1 hFA.2.2.1⟩
+    | have hFA := hdom.1
         ((Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} RA) c).obj
-          L.obj)⟩ (by simp)
-    have hFB := hdom.2.1
-      ⟨Y, (Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} RB) c).obj
-        ((Etale.scalarExtension ψ X).obj L.obj)⟩ (by simp)
-    exact ⟨hFA.1.1, hFAB.1.1, hFB.1.1,
-      etaleProperty_of_domain RA Y _ hFA.1 hFA.2.1 hFA.2.2.1⟩
+          L.obj) (by simp)
+      have hFAB := hdom.2.1
+        ⟨Y, (Etale.scalarExtension ψ Y).obj
+          ((Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} RA) c).obj
+            L.obj)⟩ (by simp)
+      have hFB := hdom.2.1
+        ⟨Y, (Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} RB) c).obj
+          ((Etale.scalarExtension ψ X).obj L.obj)⟩ (by simp)
+      exact ⟨hFA.2.2.2.1, hFAB.2.2.2.1, hFB.2.2.2.1,
+        etaleProperty_of_domain RA Y _ hFA.1 hFA.2.1 hFA.2.2.1⟩
   let FL : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} RA)) :=
     ⟨_, hFL⟩
   let LB : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} RB)) :=

@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.SmoothPurity.PurityFiniteSetting.Coordinate.CoordinateLocalizationSplice
 public import WeilConjectures.SmoothPurity.PurityFiniteSetting.Coordinate.CoordinateBoundaryGeometricPullback
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.CoordinateLocalizationEtaleIdentification
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.CoordinateLocalizationEtaleNormalizedSplice
 
 /-! # Etale supported-Hom realization of the coordinate localization splice
 
@@ -45,6 +47,8 @@ theorem coordinateLocalization_spliceSupportClass_etale (P : PurityFiniteSetting
     M.chiEtale.chi (P.coordinateEtaleInput h (Line T)) 2
         (-M.alphaEtale P h aT) =
       (-P.coordinateLocalizationClass h T aT).hom := by
-  sorry
+  obtain ⟨N, hN⟩ := coordinateLocalization_etale_identification_normalization P T M
+  rw [hN (P.coordinateEtaleInput h (Line T)) 2]
+  exact coordinateLocalization_etale_normalized_splice P h T aT M N
 
 end WeilConjectures.PurityFiniteSetting

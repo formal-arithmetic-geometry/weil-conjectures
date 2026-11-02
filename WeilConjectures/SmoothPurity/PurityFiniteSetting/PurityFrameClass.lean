@@ -326,5 +326,23 @@ def frameBoundaryProduct (P : PurityFiniteSetting.{u}) (X : Scheme.{u})
         ((cupSingle P X).obj (P.frameTwist X c)) (2 * (c : ℤ))
   := frameFold (fun f ↦ P.frameEmptyClass X f)
     (fun _d f k ↦ f k.castSucc) (fun d f α ↦ P.frameCupNext X a d f α)
+/-- The class of the existing scheme-theoretic etale frame. The isPullback field
+identifies the displayed zero subscheme with Z times_V U; e is merely etale and
+is not required to be an open immersion. Smoothness and the pointwise Krull
+codimension are the precise hypotheses of the node. The ambient relative dimension d
+is independent of the coefficient level n; neither the dimension nor the smoothness
+witnesses enter the boundary product. The dimension d is explicit: the
+instance argument alone cannot determine it (its search would be stuck on d).
+Source: blueprint main-20261015, def-pur-frame-class, displayed definition
+(blueprint: def-pur-frame-class). -/
+def frameClass (P : PurityFiniteSetting.{u}) {B V Z : Scheme.{u}}
+    (b : B ⟶ Spec (.of P.field.k)) (v : V ⟶ B)
+    (d : ℕ) [SmoothOfRelativeDimension d v] (i : Z ⟶ V) [IsClosedImmersion i]
+    [Smooth (i ≫ v)] (c : ℕ)
+    (_hcodim : ∀ z : Z, ringKrullDim (V.presheaf.stalk (i z)) =
+      ringKrullDim (Z.presheaf.stalk z) + (c : WithBot ℕ∞)) (F : i.EtaleFrame c) :
+    cupSupportedHom P (F.U.zeroLocusSubschemeι (Set.range F.f))
+      ((cupSingle P F.U).obj (P.frameTwist F.U c)) (2 * (c : ℤ)) :=
+  P.frameBoundaryProduct F.U (F.e ≫ v ≫ b) c F.f
 
 end WeilConjectures.PurityFiniteSetting

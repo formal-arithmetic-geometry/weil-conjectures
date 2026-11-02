@@ -6,6 +6,9 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SmoothPurity.PurityFiniteSetting.Coordinate.CoordinateOrdinaryGysinRealizationData
+public import Mathlib.Logic.Small.Defs
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.CoordinateBoundaryImageHomComparison
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.CoordinateOrdinaryBoundaryAntecedent
 
 /-! # Counit transport for ordinary coordinate Gysin evaluation
 
@@ -29,20 +32,15 @@ Source: current blueprint, cor-pur-affine-space-zero-section-purity.proof.md, fi
 etale-origin transport paragraph; Milne, Etale Cohomology, Section 9, Example 9.5
 (blueprint: lem-pur-coordinate-ordinary-gysin-support-evaluation-realization).
 
-Proof: by `R.evaluation` the left side is the inverse single comparison, followed by
-closed direct image of `coordinateOrdinaryToGysin` of the ordinary derived
-realization of `c`, followed by `R.epsilon`.  By the adjunct-counit identity the
-inverse closed adjunct of that realization is closed direct image of its transpose
-followed by the ordinary exceptional counit.  Transport this through the canonical
-closed image mate `R.d` (`R.d_spec`) and the exceptional comparison `R.eK`
-(`R.eK_spec`); `R.counit_eq` replaces `R.d.hom ≫ map R.eK.hom ≫ R.epsilon` by the
-comparison image of the ordinary counit followed by the shift map.  The
-single-functor, exceptional-shift and site-shift comparisons and the shifted
-`boundedSiteRho` that make up `coordinateOrdinaryToGysin` cancel against these by
-naturality, the triangle identity and `boundedSiteAdjunctionTranspose`.  What is left
-is the comparison pullback of `c.hom` precomposed with the closed comparison, which
-is `v.homMap` by its definition and the specifications `constantIso_spec`,
-`closedIso_spec` of `v`.
+Proof: `coordinateOrdinary_boundaryAntecedent` supplies b whose exceptional
+comparison is the coordinate transpose and whose ordinary counit evaluation is
+c.hom. Substitute the first equality into `R.evaluation`, using `R.eK_spec`.
+Apply `coordinateBoundaryImageHomComparison` to b and postcompose its equation
+with the closed image of `R.eK.hom` and `R.epsilon`. By `R.d_spec` and
+`R.counit_eq`, the last three factors become the comparison image of the ordinary
+counit followed by the site shift comparison. Functoriality combines the two
+ordinary images; substitute the second equation for b. Expanding `v.homMap`
+gives exactly the remaining composite.
 -/
 theorem coordinateOrdinary_gysinSupportEvaluation_realization
     (P : PurityFiniteSetting.{u}) (h : P.ramificationIndex ∣ P.level)
@@ -61,6 +59,30 @@ theorem coordinateOrdinary_gysinSupportEvaluation_realization
               (P.constantEtale T) (P.twistEtale h (Line T)) c)))) =
       v.homMap (hB := Scheme.isContinuous_toProEt (Line T))
         (P.coordinateEtaleInput h (Line T)) 2 c.hom := by
-  sorry
+  obtain ⟨b, hm, hb⟩ := coordinateOrdinary_boundaryAntecedent P h T aT c
+  rw [← R.eK_spec] at hm
+  erw [R.evaluation, hm]
+  have hB := coordinateBoundaryImageHomComparison P T v
+    ⟨P.boundaryEtaleValue h T, R.hb⟩ b
+  have hB' := congrArg (fun q ↦ q ≫
+    (lowerStar (Modules P) (zeroSection T)).mapDerivedCategory.map R.eK.hom ≫
+      R.epsilon) hB
+  simp only [Category.assoc] at hB'
+  rw [← R.d_spec, R.counit_eq] at hB'
+  erw [← (nu P (Line T)).map_comp_assoc] at hB'
+  have hb' := (Category.assoc
+    (((Etale.lowerStar (Modules P) (zeroSection T)).mapDerivedCategorySingleFunctor
+      0).inv.app (P.constantEtale T))
+    ((Etale.lowerStar (Modules P) (zeroSection T)).mapDerivedCategory.map b)
+    (P.boundaryEtaleCounit h T)).trans hb
+  erw [hb'] at hB'
+  let F := (lowerStar (Modules P) (zeroSection T)).mapDerivedCategory
+  let a := ((comparisonUpperStar (Modules P) T).mapDerivedCategorySingleFunctor
+    0).inv.app (P.constantEtale T)
+  let t := (nu P T).map b
+  erw [← Category.assoc a t R.eK.hom, F.map_comp (a ≫ t) R.eK.hom,
+    Category.assoc (F.map (a ≫ t)) (F.map R.eK.hom) R.epsilon]
+  erw [hB']
+  rfl
 
 end WeilConjectures.PurityFiniteSetting

@@ -105,20 +105,21 @@ concerns ordinary complexes only and makes no assertion about derived reductions
 Source: Stacks Tags 09C5, 09C6 and 0A8H; blueprint Compatible isomorphisms.
 (blueprint: lem-pe-internal-perfect-ordinary-hom-cohomology).
 
-Proof: identify maps modulo homotopy with degree-zero cohomology of the signed Hom
-complex. Fix a finite basis in each nonzero integral term. After finite quotient scalar
-extension the terms are finite constant free modules. On the weakly contractible slice,
-exact sections identify the internal Hom entries with locally constant finite matrices.
-Only finitely many source degrees occur, so finite products commute with scalar quotient.
-The resulting cochain identification sends the differential to d f minus the signed f d,
-and identifies the Hom cochain complex with sections of the constant scalar quotient of
-moduleHomComplex P P. Exact constant realization and exact sections commute with homology.
-Sections of the finite constant cohomology module are locally constant functions on the
-connected components of W. Passing to degree-zero homology gives the asserted equivalence.
-Use the same integral bases at both levels: scalar extension reduces every matrix entry,
-and the ordinary balancing map multiplies the adjacent scalars. This proves compatibility
-on chain maps and on homotopies, hence on all homotopy classes. The finite zero module,
-the empty scheme, and the zero complex yield singleton sets on both sides. -/
+Proof: identify maps modulo homotopy with degree-zero homology of the signed Hom
+complex. Fix finite integral bases in every degree and extend these same bases to
+all ordinary quotient levels. Finite matrix evaluation identifies internal Hom
+cochains with locally constant scalar quotient cochains. Degreewise bijectivity
+uses finite support, basis coordinates and the actual cokernel projection.
+Integral scalar normalization identifies the realized differentials with their
+constant residue matrices; the signed matrix formula then proves that evaluation
+is a chain map. Locally constant module-valued functions preserve exactness:
+choose preimages of their values, so the resulting functions remain locally
+constant. Their homology comparison and the signed Hom equivalence give the
+asserted equivalence. Normalized coefficient-section naturality and composition
+of the fixed free-basis comparisons prove compatibility with actual successor
+scalar extension and balancing. Homology naturality gives the asserted formula.
+The zero complex, rank-zero terms, empty intervals and the empty scheme require
+no separate nonemptiness choices. -/
 theorem internalPerfectOrdinary_homCohomology
     (X : Scheme.{u}) (W : X.ProEt) (_hAffine : IsAffine W.left)
     (_hweak : (Scheme.ProEt.topology X).IsWeaklyContractible.{u + 1} W)
@@ -137,6 +138,36 @@ theorem internalPerfectOrdinary_homCohomology
             (Padic.scalarQuotientTransition (Padic.coefficientExtensionUniformizer l E)
               (CochainComplex.moduleHomComplex P P) (n + 2) (n + 1)
               (Nat.succ_le_succ (Nat.le_succ n))) 0) (e (n + 1) x) := by
-  sorry
+  let C := fun n : ℕ ↦ CochainComplex.HomComplex
+    (internalPerfectOrdinaryReduction l E W.left P n)
+    (internalPerfectOrdinaryReduction l E W.left P n)
+  let D := InternalPerfectMatrix.quotientCochains l E W.left P
+  have hd : ∀ (n : ℕ) (i j : ℤ),
+      InternalPerfectMatrix.evaluationHom l E W.left P _hfree n i ≫ (C n).d i j =
+        (D n).d i j ≫ InternalPerfectMatrix.evaluationHom l E W.left P _hfree n j := fun n i j ↦
+    InternalPerfectMatrix.evaluation_differential l E W.left P _hfree n i j
+  have hs : ∀ (n : ℕ) (q : ℤ),
+      InternalPerfectMatrix.evaluationHom l E W.left P _hfree (n + 1) q ≫
+          (InternalPerfectMatrix.successorMap l E W.left P n).f q =
+        (InternalPerfectMatrix.quotientStep l E W.left P n).f q ≫
+          InternalPerfectMatrix.evaluationHom l E W.left P _hfree n q := fun n q ↦
+    InternalPerfectMatrix.evaluation_successor_of_squares l E W.left P _hfree n
+      (InternalPerfectMatrix.coefficientEnd_step l E W.left n)
+      (InternalPerfectMatrix.quotientIso_successor l E W.left P _hfree n) q
+  let comparison : ∀ n : ℕ, D n ≅ C n := fun n ↦ by
+    let f : D n ⟶ C n :=
+      { f := fun q ↦ InternalPerfectMatrix.evaluationHom l E W.left P _hfree n q
+        comm' := fun i j _ ↦ hd n i j }
+    haveI (q : ℤ) : IsIso (f.f q) :=
+      (ConcreteCategory.isIso_iff_bijective _).2
+        (InternalPerfectMatrix.evaluation_bijective l E W.left P _hfree a b q _ha _hb n)
+    haveI : IsIso f := HomologicalComplex.Hom.isIso_of_components f
+    exact asIso f
+  apply cohomology_of_cochainComparison l E X W _hAffine _hweak P a b _ha _hb
+    _hfree comparison
+  intro n
+  apply HomologicalComplex.hom_ext
+  intro q
+  exact hs n q
 
 end AlgebraicGeometry.ProEtale

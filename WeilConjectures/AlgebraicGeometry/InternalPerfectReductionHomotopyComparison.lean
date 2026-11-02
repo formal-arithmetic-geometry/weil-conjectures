@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.InternalPerfectReductionHomEquiv
+public import WeilConjectures.AlgebraicGeometry.InternalPerfectOrdinaryStepCounitChain
+public import WeilConjectures.AlgebraicGeometry.InternalPerfectReductionCounitCoherence
 
 /-! # Actual derived reductions and ordinary homotopy endomorphisms -/
 
@@ -59,6 +61,59 @@ theorem internalPerfectReduction_homotopyComparison
           (internalPerfectScalarModel l E W.left P)).map (homOfLE (Nat.le_succ n)).op x) =
       internalPerfectOrdinaryHomStep l E W.left P n
         (internalPerfectReductionHomEquiv l E X W _hweak P a b _ha _hb _hfree (n + 1) x) := by
-  sorry
+  intro n x
+  let F := Mod.extendScalars (AdicCompletion.transition l E W.left n)
+  let T := internalPerfectScalarModel l E W.left P
+  let α := AdicCompletion.reductionComp l E W.left n
+  let γ := internalPerfectReductionOrdinaryIso l E W.left P a b _ha _hb _hfree
+  let ε := F.leftDerivedFunctorCounit.app
+    ((HomotopyCategory.quotient _ (.up ℤ)).obj
+      (internalPerfectOrdinaryReduction l E W.left P (n + 1)))
+  let H := HomotopyCategory.quotient
+    (Mod (Sheaf (Scheme.ProEt.topology W.left) Ab.{u + 1})
+      (AdicCompletion.finiteRing l E W.left n)) (.up ℤ)
+  let a₀ := internalPerfectOrdinaryReductionStep l E W.left P n
+  let δ := ε ≫ DerivedCategory.Qh.map (H.map a₀.hom)
+  have hγ (k : ℕ) : (γ k).hom =
+      (Mod.extendScalars (AdicCompletion.quotient l E W.left k)).leftDerivedFunctorCounit.app
+        ((HomotopyCategory.quotient _ (.up ℤ)).obj
+          (internalPerfectIntegralComplex l E W.left P)) := by
+    change (AdicCompletion.derivedReduction l E W.left k).map (𝟙 _) ≫ _ = _
+    rw [CategoryTheory.Functor.map_id, Category.id_comp]
+    rfl
+  have hs : α.hom.app T ≫ (γ n).hom =
+      F.leftDerivedFunctor.map (γ (n + 1)).hom ≫ δ := by
+    simpa only [F, T, α, γ, ε, H, a₀, δ] using
+      internalPerfectReduction_counit_coherence l E W.left P a b _ha _hb _hfree n
+  let f := internalPerfectReductionHomEquiv l E X W _hweak P a b _ha _hb _hfree (n + 1) x
+  let H₁ := HomotopyCategory.quotient
+    (Mod (Sheaf (Scheme.ProEt.topology W.left) Ab.{u + 1})
+      (AdicCompletion.finiteRing l E W.left (n + 1))) (.up ℤ)
+  obtain ⟨g, hg⟩ := H₁.map_surjective f
+  have hf : f = H₁.map g := hg.symm
+  have hx : x ≫ (γ (n + 1)).hom = (γ (n + 1)).hom ≫ DerivedCategory.Qh.map f := by
+    rw [internalPerfectReductionHomEquiv_localize]
+    simp only [γ, Iso.hom_inv_id_assoc]
+  have hn : F.leftDerivedFunctor.map (DerivedCategory.Qh.map f) ≫ δ =
+      δ ≫ DerivedCategory.Qh.map (internalPerfectOrdinaryHomStep l E W.left P n f) := by
+    rw [hf]
+    rw [internalPerfectOrdinaryHomStep_map]
+    simpa only [δ, ε, F, H, H₁, a₀, Category.assoc,
+      Functor.mapHomotopyCategory_map, Functor.map_comp] using
+      internalPerfectOrdinaryStepCounit_chain l E W.left P n g
+  let := internalPerfectOrdinaryReduction_kprojective l E W.left
+    (Scheme.ProEt.isWeaklyContractible_self_of_object X W _hweak) P b _hb _hfree n
+  apply (CochainComplex.IsKProjective.Qh_map_bijective
+    (internalPerfectOrdinaryReduction l E W.left P n) _).1
+  rw [internalPerfectReductionHomEquiv_localize]
+  simp only [internalReductionHomTower, CategoryTheory.Functor.ofOpSequence_map_homOfLE_succ]
+  change (γ n).inv ≫ (α.inv.app T ≫ F.leftDerivedFunctor.map x ≫ α.hom.app T) ≫
+    (γ n).hom = DerivedCategory.Qh.map (internalPerfectOrdinaryHomStep l E W.left P n f)
+  apply (cancel_epi (α.hom.app T ≫ (γ n).hom)).mp
+  simp only [Category.assoc, Iso.hom_inv_id_assoc, Iso.hom_inv_id_app_assoc]
+  rw [hs, reassoc_of% hs]
+  rw [← F.leftDerivedFunctor.map_comp_assoc, hx, F.leftDerivedFunctor.map_comp]
+  simpa only [Category.assoc] using
+    congrArg (fun z ↦ F.leftDerivedFunctor.map (γ (n + 1)).hom ≫ z) hn
 
 end AlgebraicGeometry.ProEtale

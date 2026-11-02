@@ -156,6 +156,8 @@ import Mathlib.LinearAlgebra.Finsupp.LinearCombination
 import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.FunctorCategory
 import Mathlib.CategoryTheory.Adjunction.Evaluation
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+public import WeilConjectures.ProperBaseChange.RingedStrictTowerHomotopyLimitIndependentCoefficients
+public import WeilConjectures.SmoothPurity.ProEtaleWeaklyEtaleLocalization
 /-!
 # Scalar and normalized inverse-limit coherence for ringed open extension
 
@@ -476,6 +478,21 @@ private theorem exactProducts_of_epi {A : Type u} [Category.{v} A] [Abelian A]
     infer_instance
   ⟩
   exact hasExactLimitsOfShape_of_preservesEpi A (Discrete ℕ)
+
+private theorem countableComparison {A : Type u} [Category.{v} A]
+    {B : Type u'} [Category.{v'} B] [HasProducts.{v} A] [HasProducts.{v} B]
+    (F : A ⥤ B) (h : ∀ (I : Type v) (N : I → A), IsIso (piComparison F N))
+    (N : ℕ → A) : IsIso (piComparison F N) := by
+  let : ∀ (N : ULift.{v} ℕ → A), PreservesLimit (Discrete.functor N) F :=
+    fun N ↦ by
+      have := h (ULift.{v} ℕ) N
+      exact PreservesProduct.of_iso_comparison F N
+  let : PreservesLimitsOfShape (Discrete (ULift.{v} ℕ)) F :=
+    preservesLimitsOfShape_of_discrete F
+  let : PreservesLimitsOfShape (Discrete ℕ) F :=
+    preservesLimitsOfShape_of_equiv
+      (Discrete.equivalence (Equiv.ulift : ULift.{v} ℕ ≃ ℕ)) F
+  infer_instance
 
 private theorem towerGrothendieck {A : Type u} [Category.{v} A] [Abelian A]
     [IsGrothendieckAbelian.{v} A] :
