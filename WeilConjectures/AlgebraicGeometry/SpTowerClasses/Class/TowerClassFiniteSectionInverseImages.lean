@@ -237,7 +237,7 @@ private def finiteInverseImage {X Y : Scheme.{u}} (f : X ⟶ Y) (R : SiteRings.{
         ((((proEtaleRingModulePullback f R S c).obj M).val.map i).hom.map_add x y).symm)
       (by
         intro U x y
-        erw [hm, hm, hm, inverseSection_add]
+        erw [hm, hm, hm, ProEtaleTensorComparison.inverseSection_add]
         exact ((theta ((ProEtaleTensorComparison.inverse.{u} f R).obj M)).inv.val.app
           ((proEtaleBaseChange f).op.obj U)).hom.map_add _ _) T a b t ht
   · intro M T a ha
@@ -270,7 +270,7 @@ private def finiteInverseImage {X Y : Scheme.{u}} (f : X ⟶ Y) (R : SiteRings.{
         (((proEtaleRingModulePullback f R S c).obj M).val.map_smul i x y).symm)
       (by
         intro U r m
-        erw [hm, hr, hm, inverseSection_smul]
+        erw [hm, hr, hm, ProEtaleTensorComparison.inverseSection_smul]
         let V := (proEtaleBaseChange f).op.obj U
         let s := ((ringAdjunction.{u} f).unit.app R).hom.app U r
         have hs :=

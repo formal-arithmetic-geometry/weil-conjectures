@@ -143,7 +143,8 @@ private theorem kummer_comparison (A : Type (u + 1)) [CommRing A] (n : ℕ)
         change a ≫ Scheme.proEtaleUnitsPower Z n = F.map (n • 𝟙 Z.gmSheaf) ≫ a
         rw [F.map_nsmul, F.map_id]
         simp only [Scheme.proEtaleUnitsPower, Preadditive.nsmul_comp,
-          Preadditive.comp_nsmul, Category.id_comp, Category.comp_id] }
+          Preadditive.comp_nsmul, Category.id_comp]
+        exact Category.comp_id (n • a) }
   have hnat := ShortComplex.ShortExact.extClass_naturality
     ((Z.kummerSequence_shortExact n hZ).map_of_exact F)
     (cartierProKummer_exact Z n hn hZ) ψ

@@ -128,19 +128,16 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{r} C]
 local instance (priority := 20000) : J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r}) :=
   inferInstance
 
-attribute [-instance] CategoryTheory.hasSheafCompose_of_preservesMulticospan in
 /-- Evaluation of the existing K-flat-derived tensor, without changing its data.
 Source: Stacks 06YU (blueprint: lem-pur-exact-pullback-signed-comparison). -/
 abbrev tensor (A B : DerivedCategory (Modules R)) := ((derivedTensor R).obj A).obj B
 
-attribute [-instance] CategoryTheory.hasSheafCompose_of_preservesMulticospan in
 /-- The existing derived bifunctor applied to a pair of morphisms.
 Source: Stacks 06YU (blueprint: lem-pur-exact-pullback-signed-comparison). -/
 def tensorMap {A A' B B' : DerivedCategory (Modules R)} (a : A ⟶ A') (b : B ⟶ B') :
     tensor R A B ⟶ tensor R A' B' :=
   (Functor.uncurry.obj (derivedTensor R)).map (Prod.mkHom a b)
 
-attribute [-instance] CategoryTheory.hasSheafCompose_of_preservesMulticospan in
 attribute [local irreducible] tensorMap
 
 set_option backward.defeqAttrib.useBackward true
@@ -158,16 +155,6 @@ attribute [local irreducible] DerivedCategory.Q DerivedCategory.Qh
 
 attribute [local irreducible] IsFlatOnSite CochainComplex.IsKFlatIndependentCoefficients
 
-attribute [-instance] CategoryTheory.hasSheafCompose_of_preservesMulticospan in
-attribute [-instance] CategoryTheory.hasSheafCompose_of_preservesMulticospan in
-set_option genSizeOf false in
-set_option genCtorIdx false in
-set_option genInjectivity false in
-attribute [-instance] CategoryTheory.hasSheafCompose_of_preservesMulticospan in
-attribute [-instance] CategoryTheory.hasSheafCompose_of_preservesMulticospan in
-attribute [-instance] CategoryTheory.hasSheafCompose_of_preservesMulticospan in
-attribute [-instance] CategoryTheory.hasSheafCompose_of_preservesMulticospan in
-attribute [-instance] CategoryTheory.hasSheafCompose_of_preservesMulticospan in
 variable {R}
   {D : Type uD} [Category.{vD} D] [EssentiallySmall.{r} D]
   {K : GrothendieckTopology D} {S : Sheaf K CommRingCat.{r}}
@@ -179,12 +166,7 @@ variable {R}
 local instance (priority := 20000) : K.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r}) :=
   inferInstance
 
-attribute [-instance] CategoryTheory.hasSheafCompose_of_preservesMulticospan in
-attribute [-instance] CategoryTheory.hasSheafCompose_of_preservesMulticospan in
 variable (L : DerivedCategory (Modules R) ⥤ DerivedCategory (Modules S))
   (epsilon : DerivedCategory.Q ⋙ L ⟶ pull.{r, uC, vC, uD, vD} f ⋙ DerivedCategory.Q)
-
-attribute [-instance] CategoryTheory.hasSheafCompose_of_preservesMulticospan in
-attribute [local irreducible] IsNormalizedIdentification tensorShift
 
 end SheafOfModules.ExactPullbackSigned

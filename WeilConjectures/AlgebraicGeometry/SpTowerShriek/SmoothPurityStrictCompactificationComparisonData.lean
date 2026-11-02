@@ -42,6 +42,7 @@ attribute [local irreducible] CategoryTheory.Functor.mapDerivedCategory
   HasDerivedCategory.standard
   Padic Padic.coefficientExtensionIntegers
   SheafOfModules.OpenTensorNormalization.finiteTensor
+attribute [local instance 100] HasDerivedCategory.standard
 
 universe u c₁ c₂ c₃ c₄ v₁ v₂ v₃ v₄
 
