@@ -19198,6 +19198,8 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Com
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.CompactifFiniteTor
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ComparisonBaseChangeMate
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ComparisonClosedSupport
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ComparisonDualizable
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ComparisonLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ComparisonLowerStarCanonical
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ComparisonMonoidal
@@ -19245,7 +19247,9 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Fin
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.FlatModel
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.GeometricStalk
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Hom
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomAdjunction
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomComparison
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomTriangulated
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Localization
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LocalizationFiniteTor
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LocalizeConstructible
