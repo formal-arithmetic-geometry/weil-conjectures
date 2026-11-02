@@ -169,9 +169,7 @@ theorem internalPerfectScalarDualTensor_finite
   let R := Padic.coefficientExtensionIntegers l E
   let D := CochainComplex.moduleHomComplex P
     ((CochainComplex.singleFunctor _ 0).obj (ModuleCat.of R R))
-  have hcoeff := (Padic.extension_integers_dvr l E
-    (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
+  have hcoeff := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   have : IsPrincipalIdealRing R := hcoeff.2.2.2.2.2.2.2.2.1
   have hDzero (p : ℤ) (hp : p < -b ∨ -a < p) : IsZero (D.X p) := by
     apply dualTerm_zero

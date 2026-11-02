@@ -16,7 +16,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocallyFreeTens
 import WeilConjectures.AlgebraicGeometry.ContinuousIntegralUnderivedPushComparison
 import WeilConjectures.AlgebraicGeometry.ContinuousIntegralModuleTelescope
 import WeilConjectures.AlgebraicGeometry.ContinuousIntegralLocalizationLegs
-public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.ContinuousLatticeIntersectionSupplement
 
 /-! # Finite-sheet coordinates for the two canonical adjunction maps -/
 
@@ -79,57 +78,6 @@ private theorem weaklyEtaleUnit_mono
   have : T.Faithful := by dsimp [T]; infer_instance
   have : (upperStar Λ p).Faithful := Functor.Faithful.of_iso
     (Functor.isoWhiskerLeft _ (Mod.extendScalarsIsoComapInv (condensedPullbackHom Λ p))).symm
-  infer_instance
-
-private lemma freeAt_refine {X Y Z : Scheme.{u}} (f : Z ⟶ Y) (g : Y ⟶ X)
-    {R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}} [MonObj R] [IsCommMonObj R]
-    {M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R}
-    (h : FreeAt R M g) : FreeAt R M (f ≫ g) :=
-  (ProEtale.free_pullback_comp_iff f g M).mpr (free_pullback f h)
-
-private theorem commonCompactFreeCover
-    {X : Scheme.{u}}
-    {R S Q : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}}
-    [MonObj R] [IsCommMonObj R] [MonObj S] [IsCommMonObj S]
-    [MonObj Q] [IsCommMonObj Q]
-    (A : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R)
-    (B : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) S)
-    (D : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) Q)
-    (hA : ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X,
-      ∀ s : C.I₀, FreeAt R A (C.f s))
-    (hB : ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X,
-      ∀ s : C.I₀, FreeAt S B (C.f s))
-    (hD : ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X,
-      ∀ s : C.I₀, FreeAt Q D (C.f s)) :
-    ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ s : C.I₀,
-      CompactSpace (C.X s) ∧ FreeAt R A (C.f s) ∧ FreeAt S B (C.f s) ∧
-        FreeAt Q D (C.f s) := by
-  obtain ⟨C₁, h₁⟩ := hA
-  obtain ⟨C₂, h₂⟩ := hB
-  obtain ⟨C₃, h₃⟩ := hD
-  let C₁₂ := C₁.bind (fun i ↦ C₂.pullback₁ (C₁.f i))
-  have h₁₂ (s : C₁₂.I₀) : FreeAt R A (C₁₂.f s) ∧ FreeAt S B (C₁₂.f s) := by
-    rcases s with ⟨i, j⟩
-    constructor
-    · exact freeAt_refine _ _ (h₁ i)
-    · change FreeAt S B (pullback.fst (C₁.f i) (C₂.f j) ≫ C₁.f i)
-      rw [pullback.condition]
-      exact freeAt_refine _ _ (h₂ j)
-  let C₁₂₃ := C₁₂.bind (fun i ↦ C₃.pullback₁ (C₁₂.f i))
-  have h₁₂₃ (s : C₁₂₃.I₀) :
-      FreeAt R A (C₁₂₃.f s) ∧ FreeAt S B (C₁₂₃.f s) ∧ FreeAt Q D (C₁₂₃.f s) := by
-    rcases s with ⟨i, j⟩
-    refine ⟨freeAt_refine _ _ (h₁₂ i).1, freeAt_refine _ _ (h₁₂ i).2, ?_⟩
-    change FreeAt Q D (pullback.fst (C₁₂.f i) (C₃.f j) ≫ C₁₂.f i)
-    rw [pullback.condition]
-    exact freeAt_refine _ _ (h₃ j)
-  let C := C₁₂₃.bind (fun i ↦
-    (C₁₂₃.X i).affineCover.weaken Scheme.zariskiPrecoverage_le_proetalePrecoverage)
-  refine ⟨C, fun s ↦ ?_⟩
-  rcases s with ⟨i, j⟩
-  refine ⟨?_, freeAt_refine _ _ (h₁₂₃ i).1,
-    freeAt_refine _ _ (h₁₂₃ i).2.1, freeAt_refine _ _ (h₁₂₃ i).2.2⟩
-  change CompactSpace (((C₁₂₃.X i).affineCover).X j)
   infer_instance
 
 /-- Freeness of `g^* M` is inherited by `(f ≫ g)^* M`. -/

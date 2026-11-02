@@ -11,6 +11,7 @@ import Mathlib.CategoryTheory.Triangulated.Subcategory
 import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
 import all WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinary.FiniteCoefficientModelComparison
 import WeilConjectures.AlgebraicGeometry.ProEtale.Finite.ProEtaleFiniteScalarRestrictionConstructible
+import WeilConjectures.AlgebraicGeometry.ConstantModelTorAmplitude
 
 /-! # Bounded constructibility under normalized finite scalar restriction -/
 
