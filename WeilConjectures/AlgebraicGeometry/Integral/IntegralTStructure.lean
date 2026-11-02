@@ -65,6 +65,7 @@ def pbcIntegralTStructure :=
     (PbcIsBoundedConstructibleComplete T (pbcIntegralDatum l E))
     (pbcAmbientTStructure T l E)
 
+set_option linter.unnecessarySimpa false in
 /-- The inherited shifts are linear for the actual constant-section scalar action.
 Source: order 1431 (blueprint: prop-weil-pbc-integral-tstructure).
 Proof: the full inclusion is faithful and linear, its comparison with shift is induced
