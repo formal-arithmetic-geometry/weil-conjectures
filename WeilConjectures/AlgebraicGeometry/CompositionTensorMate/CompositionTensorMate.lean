@@ -45,6 +45,13 @@ import WeilConjectures.Compactification.NagataCompactification
 import WeilConjectures.AlgebraicGeometry.ProperBaseChange.CompatibleCompactificationTriangle
 import WeilConjectures.AlgebraicGeometry.CompactCompositionProjection.CompositionProjectionMate
 import WeilConjectures.SecSmoothPurity.CompositeTensorLocalData.CompositeTensorTranspose
+public import WeilConjectures.AlgebraicGeometry.Finite.Coefficient.FiniteCoefficientTensorCtf
+public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinary.FiniteDiscreteOrdinaryEncodingSupplement
+public import WeilConjectures.AlgebraicGeometry.FiniteNativeTensor.FiniteNativeTensorComparison
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedFiniteTorConstructible
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ExchangeProjection
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarCoherence
+public import WeilConjectures.SmoothPurity.ExceptionalInverseImage
 
 /-! # Composition and the dualizing tensor mate
 
@@ -586,6 +593,234 @@ def Package {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
   MateClause Λ f g ∧ SigmaIsoClause Λ f g ∧ UnitTransposeClause Λ f g ∧
   ∀ K : D Λ Z, DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Z K →
     InputClause Λ f g K
+
+/-- Finite-Tor preservation and invertibility of the evaluation-normalized internal-Hom
+comparison. The comparison is literally the tensor-Hom transpose of the encoded evaluation
+using the recorded encodingMonoidal tensorator. No isomorphism is chosen.
+Source: derived tensor-Hom adjunction (blueprint: lem-pur-composition-tensor-mate). -/
+def Objects (E : ∀ T : Scheme.{u}, Encoding A T) (T : Scheme.{u}) : Prop :=
+    (∀ K : Native A T,
+      CondensedRing.condensedConstructibleFiniteTor (coefficient A) T K ↔
+        DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} (ULift.{u + 1} A)) T
+          ((N A E T).obj K)) ∧
+    (∀ K L : Native A T,
+      letI := FiniteNativeTensor.encodingMonoidal A T (E T)
+      let H := ((CondensedRing.derivedHom (coefficient A) T).obj (Opposite.op K)).obj L
+      IsIso ((ProEtale.derivedTensorHomAdjunction
+        (ModuleCat.{u + 1} (ULift.{u + 1} A)) ((N A E T).obj K)).homEquiv _ _
+          ((Functor.Monoidal.μIso (N A E T) K H).hom ≫
+            (N A E T).map
+              ((CondensedRing.derivedTensorHomAdjunction (coefficient A) K).counit.app L))))
+
+/-- Generator equations for the specified native-to-fixed transport. Every tensorator
+is encodingMonoidal, every pullback component is encodingDerivedPull inverse, and every
+support component is compactEncoding. The Hom, counit and theta equations fix adjunction
+data and their tensor mates, not only the exceptional functor's isomorphism class.
+Source: finite coefficient identification and defining transposes
+(blueprint: lem-pur-composition-tensor-mate). -/
+structure Arrow (E : ∀ T : Scheme.{u}, Encoding A T)
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] [CompactSpace Y] : Prop where
+  projection : ∀ (M : Native A X) (K : Native A Y),
+    letI := FiniteNativeTensor.encodingMonoidal A X (E X)
+    letI := FiniteNativeTensor.encodingMonoidal A Y (E Y)
+    (Functor.Monoidal.μIso (N A E Y) ((nativeSupport A f).obj M) K).hom ≫
+      (N A E Y).map (nativeProjection A f M K) ≫
+      (canonicalSupport A E f).hom.app (M ⊗ (nativePull A f).obj K) ≫
+      (F (ULift.{u + 1} A) f).map
+        ((Functor.Monoidal.μIso (N A E X) M ((nativePull A f).obj K)).inv ≫
+          (N A E X).obj M ◁ (FiniteNativeTensor.encodingDerivedPull A E f).inv.app K) =
+    (canonicalSupport A E f).hom.app M ▷ (N A E Y).obj K ≫
+      ((projectionMap (ModuleCat.{u + 1} (ULift.{u + 1} A)) f).app
+        ((N A E X).obj M)).app ((N A E Y).obj K)
+  hom : ∀ (M : Native A X) (K : Native A Y)
+    (hM : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} (ULift.{u + 1} A)) X
+      ((N A E X).obj M))
+    (hK : _root_.DerivedCategory.TStructure.t.plus ((N A E Y).obj K))
+    (b : (nativeSupport A f).obj M ⟶ K),
+    (N A E X).map (exceptionalHomEquiv A E f M K hM hK b) ≫
+      (exceptionalComparison A E f K).hom =
+    standingExceptionalHomEquiv (ULift.{u + 1} A) f hM hK
+      ((canonicalSupport A E f).inv.app M ≫ (N A E Y).map b)
+  counit : ∀ K : Native A Y,
+    _root_.DerivedCategory.TStructure.t.plus ((N A E Y).obj K) →
+    (N A E Y).map (nativeEpsilon A E f K) =
+      (canonicalSupport A E f).hom.app _ ≫
+        (F (ULift.{u + 1} A) f).map (exceptionalComparison A E f K).hom ≫
+        epsilon (ULift.{u + 1} A) f ((N A E Y).obj K)
+  theta : ∀ K : Native A Y,
+    CondensedRing.condensedConstructibleFiniteTor (coefficient A) Y K →
+    letI := FiniteNativeTensor.encodingMonoidal A X (E X)
+    (N A E X).map (nativeTheta A E f K) ≫ (exceptionalComparison A E f K).hom =
+      (Functor.Monoidal.μIso (N A E X) ((nativePull A f).obj K)
+        (nativeOmega A E f)).inv ≫
+        ((FiniteNativeTensor.encodingDerivedPull A E f).inv.app K ⊗ₘ
+          (omegaComparison A E f).hom) ≫ theta (ULift.{u + 1} A) f ((N A E Y).obj K)
+
+/-- The dualizing comparison includes the monoidal unit comparison, not an arbitrary
+isomorphism of dualizing objects.
+Source: omega definition and coefficient unit (blueprint: lem-pur-composition-tensor-mate). -/
+def omegaComparison (E : ∀ T : Scheme.{u}, Encoding A T)
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] :
+    (N A E X).obj (nativeOmega A E f) ≅ omega (ULift.{u + 1} A) f :=
+  exceptionalComparison A E f _ ≪≫
+    (G (ULift.{u + 1} A) f).mapIso (unitComparison A E Y)
+
+/-- The coefficient unit comparison of the recorded monoidal encoding.
+Source: def-sf-finite-realization-monoidal (blueprint: lem-pur-composition-tensor-mate). -/
+def unitComparison (E : ∀ T : Scheme.{u}, Encoding A T) (T : Scheme.{u}) :
+    (N A E T).obj (𝟙_ (Native A T)) ≅ unit (ULift.{u + 1} A) T := by
+  letI := FiniteNativeTensor.encodingMonoidal A T (E T)
+  exact (Functor.Monoidal.εIso (N A E T)).symm
+
+/-- The native tensor map is its standing Hom transpose, using native projection,
+Koszul symmetry, the actual counit at the native unit, and the left unitor.
+Source: defining theta transpose (blueprint: lem-pur-composition-tensor-mate). -/
+def nativeTheta (E : ∀ T : Scheme.{u}, Encoding A T)
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] [CompactSpace Y]
+    (K : Native A Y) : (nativePull A f).obj K ⊗ nativeOmega A E f ⟶
+      (exceptional A E f).obj K :=
+  open Classical in
+  let M := (nativePull A f).obj K ⊗ nativeOmega A E f
+  if hK : _root_.DerivedCategory.TStructure.t.plus ((N A E Y).obj K) then
+    if hM : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} (ULift.{u + 1} A)) X
+        ((N A E X).obj M) then
+      exceptionalHomEquiv A E f M K hM hK
+        ((nativeSupport A f).map
+            (derivedTensorKoszulSymmetry (Internal A X)
+              ((nativePull A f).obj K) (nativeOmega A E f)).hom ≫
+          inverseOnDomain (nativeProjection A f (nativeOmega A E f) K) ≫
+          nativeEpsilon A E f (𝟙_ (Native A Y)) ▷ K ≫ (λ_ K).hom)
+    else 0
+  else 0
+
+/-- The actual native projection arrow recorded by def-exchange-projection.
+Source: specified projection (blueprint: lem-pur-composition-tensor-mate). -/
+abbrev nativeProjection {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
+    (M : Native A X) (K : Native A Y) :=
+  (CondensedRing.exchangeProjectionData (coefficient A)
+    (HasCompactification.compactification f) (𝟙 Y)).projection M K
+
+/-- The native dualizing object is the exceptional image of the native tensor unit.
+Source: omega_h (blueprint: lem-pur-composition-tensor-mate). -/
+def nativeOmega (E : ∀ T : Scheme.{u}, Encoding A T)
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] : Native A X :=
+  (exceptional A E f).obj (𝟙_ (Native A Y))
+
+/-- The native exceptional compositor is the specified successive Hom transpose of
+nativeAlpha followed by nativeEpsilon. Thus its adjunction normalization is fixed.
+Source: pur9-def-upper-shriek-composition (blueprint: lem-pur-composition-tensor-mate). -/
+def nativeC (E : ∀ T : Scheme.{u}, Encoding A T)
+    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    [QuasiCompact f] [QuasiCompact g] [CompactSpace Y] [CompactSpace Z]
+    (K : Native A Z) : (exceptional A E (f ≫ g)).obj K ⟶
+      (exceptional A E f).obj ((exceptional A E g).obj K) :=
+  open Classical in
+  let M := (exceptional A E (f ≫ g)).obj K
+  if hK : _root_.DerivedCategory.TStructure.t.plus ((N A E Z).obj K) then
+    if hM : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} (ULift.{u + 1} A)) X
+        ((N A E X).obj M) then
+      if hF : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} (ULift.{u + 1} A)) Y
+          ((N A E Y).obj ((nativeSupport A f).obj M)) then
+        if hG : _root_.DerivedCategory.TStructure.t.plus
+            ((N A E Y).obj ((exceptional A E g).obj K)) then
+          (exceptionalHomEquiv A E g _ K hF hK).trans
+            (exceptionalHomEquiv A E f M _ hM hG)
+            (nativeAlpha A E f g M ≫ nativeEpsilon A E (f ≫ g) K)
+        else 0
+      else 0
+    else 0
+  else 0
+
+/-- The native compact-support compositor is the unique preimage of the actual fixed
+compositor under the normalized coefficient equivalence, with the specified boundary maps.
+Source: compact-support composition (blueprint: lem-pur-composition-tensor-mate). -/
+def nativeAlpha (E : ∀ T : Scheme.{u}, Encoding A T)
+    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
+    [QuasiCompact f] [QuasiCompact g] (M : Native A X) :
+    (nativeSupport A g).obj ((nativeSupport A f).obj M) ⟶
+      (nativeSupport A (f ≫ g)).obj M :=
+  (N A E Z).preimage
+    ((canonicalSupport A E g).hom.app _ ≫
+      (F (ULift.{u + 1} A) g).map ((canonicalSupport A E f).hom.app M) ≫
+      alpha (ULift.{u + 1} A) f g ((N A E X).obj M) ≫
+      (canonicalSupport A E (f ≫ g)).inv.app M)
+
+/-- The native standing counit is the inverse Hom image of the identity. The guarded
+zero extension is outside the bounded-below domains only, as in the fixed coordinates.
+Source: standing counit (blueprint: lem-pur-composition-tensor-mate). -/
+def nativeEpsilon (E : ∀ T : Scheme.{u}, Encoding A T)
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] [CompactSpace Y]
+    (K : Native A Y) : (nativeSupport A f).obj ((exceptional A E f).obj K) ⟶ K :=
+  open Classical in
+  if hK : _root_.DerivedCategory.TStructure.t.plus ((N A E Y).obj K) then
+    if hM : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} (ULift.{u + 1} A)) X
+        ((N A E X).obj ((exceptional A E f).obj K)) then
+      (exceptionalHomEquiv A E f _ K hM hK).symm (𝟙 _)
+    else 0
+  else 0
+
+/-- Transport the normalized standing finite Hom bijection through the specified
+compact-support comparison and coefficient equivalences. All maps are given data.
+Source: finite comparison adjunction (blueprint: lem-pur-composition-tensor-mate). -/
+def exceptionalHomEquiv (E : ∀ T : Scheme.{u}, Encoding A T)
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] [CompactSpace Y]
+    (M : Native A X) (K : Native A Y)
+    (hM : DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} (ULift.{u + 1} A)) X
+      ((N A E X).obj M))
+    (hK : _root_.DerivedCategory.TStructure.t.plus ((N A E Y).obj K)) :
+    ((nativeSupport A f).obj M ⟶ K) ≃ (M ⟶ (exceptional A E f).obj K) :=
+  (E Y).fixedDerived.fullyFaithfulFunctor.homEquiv.trans
+    (((canonicalSupport A E f).app M).homFromEquiv.trans
+      ((standingExceptionalHomEquiv (ULift.{u + 1} A) f hM hK).trans
+        ((E X).fixedDerived.toAdjunction.homEquiv M _)))
+
+/-- The actual specified coefficient-equivalence counit at the exceptional value.
+Source: coefficient coordinate cancellation (blueprint: lem-pur-composition-tensor-mate). -/
+def exceptionalComparison (E : ∀ T : Scheme.{u}, Encoding A T)
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] (K : Native A Y) :
+    (N A E X).obj ((exceptional A E f).obj K) ≅
+      (G (ULift.{u + 1} A) f).obj ((N A E Y).obj K) :=
+  (E X).fixedDerived.counitIso.app _
+
+/-- The finite comparison exceptional operation in the internal coefficient presentation.
+Its functor is the conjugate of the published nu^* f^times Rnu_* composite. The Hom
+normalization is specified below, so this is not an arbitrary right-adjoint identification.
+Source: finite paragraph of def-weil-exceptional-inverse-image
+(blueprint: lem-pur-composition-tensor-mate). -/
+def exceptional (E : ∀ T : Scheme.{u}, Encoding A T)
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] :
+    Native A Y ⥤ Native A X :=
+  (E Y).fixedDerived.functor ⋙ G (ULift.{u + 1} A) f ⋙ (E X).fixedDerived.inverse
+
+/-- Reuse the recorded open/proper encoding paste for the very same compactification.
+Source: def-pur-finite-compact-support-encoding
+(blueprint: lem-pur-composition-tensor-mate). -/
+abbrev canonicalSupport (E : ∀ T : Scheme.{u}, Encoding A T)
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] :=
+  FiniteNativeTensor.compactEncoding A E (HasCompactification.compactification f)
+
+/-- The existing native proper/open compact-support composite.
+Source: compact-support convention (blueprint: lem-pur-composition-tensor-mate). -/
+abbrev nativeSupport {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] :=
+  CondensedRing.CompactificationReindexing.F (coefficient A)
+    (HasCompactification.compactification f)
+
+/-- The existing native derived inverse image, without a replacement construction.
+Source: derived operations (blueprint: lem-pur-composition-tensor-mate). -/
+abbrev nativePull {X Y : Scheme.{u}} (f : X ⟶ Y) :=
+  CondensedRing.CompactificationReindexing.P (coefficient A) f
+
+/-- The recorded normalized derived coefficient encoding.
+Source: def-pe-finite-discrete-presentation-encoding
+(blueprint: lem-pur-composition-tensor-mate). -/
+abbrev N (E : ∀ T : Scheme.{u}, Encoding A T) (T : Scheme.{u}) :=
+  (E T).fixedDerived.functor
+
+/-- The published internal-module derived category over Lambda_T.
+Source: finite coefficient convention (blueprint: lem-pur-composition-tensor-mate). -/
+abbrev Native (T : Scheme.{u}) := _root_.DerivedCategory (Internal A T)
 
 end Maps
 

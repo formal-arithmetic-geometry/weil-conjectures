@@ -120,6 +120,7 @@ import WeilConjectures.CategoryTheory.RingedHomUniverses.RingedInternalHomShiftO
 import WeilConjectures.AlgebraicGeometry.ModuleObjectRingedComparison.ModuleObjectRingedSiteDerivedComparison
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.FiniteFieldDualizingPullbackCore
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.FiniteFieldDualizingPullbackHom
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactSupportComposition.CondensedCompactSupportCompositionData
 
 /-!
 # Finite-field dualizing-object pullback
@@ -186,6 +187,57 @@ noncomputable def finiteFieldDerivedBraiding
   @BraidedCategory.braiding _ _ _
     (DerivedCategory.braidedCategory'
       (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ.X X))) K L
+
+/-- The finite-field comparison conclusions, expressed with categorical parameters so that
+large derived-functor constructions are instantiated only once. In the theorem below every
+category, functor, object property, braiding, and exchange is the specified published one.
+The representing bijections specify the values of the constructible exceptional adjoints.
+Source: blueprint finite-field paragraph, all displayed comparisons
+(blueprint: lem-sf-finite-field-dualizing-pullback). -/
+structure FiniteFieldDualizingPullbackData
+    {C : Type uC} {D : Type uD} {B : Type uB} {B' : Type uB'}
+    [Category.{vC} C] [Category.{vD} D] [Category.{vB} B] [Category.{vB'} B']
+    [MonoidalCategory C] [MonoidalCategory D] [MonoidalCategory B] [MonoidalCategory B']
+    [MonoidalClosed C] [MonoidalClosed D]
+    (constructible : ObjectProperty C) (ctf : ObjectProperty C) (ctfBar : ObjectProperty D)
+    (G : C ⥤ D) [G.Monoidal] (H : B ⥤ B')
+    (unitIso : H.obj (𝟙_ B) ≅ 𝟙_ B')
+    (braid : ∀ K L : C, K ⊗ L ≅ L ⊗ K)
+    (braidBar : ∀ K L : D, K ⊗ L ≅ L ⊗ K)
+    (R : C ⥤ B) (Rbar : D ⥤ B') (alpha : R ⋙ H ⟶ G ⋙ Rbar) where
+  W : C
+  Wbar : D
+  W_ctf : ctf W
+  Wbar_ctf : ctfBar Wbar
+  counit : R.obj W ⟶ 𝟙_ B
+  counitBar : Rbar.obj Wbar ⟶ 𝟙_ B'
+  represents : ∀ P : ctf.FullSubcategory,
+    Function.Bijective (fun f : P.obj ⟶ W ↦ R.map f ≫ counit)
+  representsBar : ∀ P : ctfBar.FullSubcategory,
+    Function.Bijective (fun f : P.obj ⟶ Wbar ↦ Rbar.map f ≫ counitBar)
+  symmetry : ∀ K L : C,
+    Functor.LaxMonoidal.μ G K L ≫ G.map (braid K L).hom =
+      (braidBar (G.obj K) (G.obj L)).hom ≫ Functor.LaxMonoidal.μ G L K
+  preserves_ctf : ∀ K : ctf.FullSubcategory, ctfBar (G.obj K.obj)
+  conservative : ∀ (K L : C) (f : K ⟶ L),
+    constructible K → constructible L → IsIso (G.map f) → IsIso f
+  exchange_iso : ∀ K : ctf.FullSubcategory, IsIso (alpha.app K.obj)
+  dualizingIso : G.obj W ≅ Wbar
+  counit_normalization : alpha.app W ≫ Rbar.map dualizingIso.hom ≫ counitBar =
+    H.map counit ≫ unitIso.hom
+  beta_iso : ∀ K : ctf.FullSubcategory,
+    IsIso ((Functor.LaxMonoidal.ihomComparison G K.obj).natTrans.app W)
+  comparison_iso : ∀ K : ctf.FullSubcategory,
+    IsIso (finiteFieldDualizingHomComparison G K.obj W Wbar dualizingIso)
+  comparison_natural : ∀ (K L : ctf.FullSubcategory) (f : L.obj ⟶ K.obj),
+    G.map ((MonoidalClosed.pre f).app W) ≫
+      finiteFieldDualizingHomComparison G L.obj W Wbar dualizingIso =
+    finiteFieldDualizingHomComparison G K.obj W Wbar dualizingIso ≫
+      (MonoidalClosed.pre (G.map f)).app Wbar
+  evaluation : ∀ K : ctf.FullSubcategory,
+    G.obj K.obj ◁ finiteFieldDualizingHomComparison G K.obj W Wbar dualizingIso ≫
+      (ihom.ev (G.obj K.obj)).app Wbar =
+    Functor.LaxMonoidal.μ G K.obj _ ≫ G.map ((ihom.ev K.obj).app W) ≫ dualizingIso.hom
 
 end AlgebraicGeometry.ProEtale.CondensedRing
 

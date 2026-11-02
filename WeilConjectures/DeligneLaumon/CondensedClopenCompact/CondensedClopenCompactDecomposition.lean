@@ -122,11 +122,149 @@ open scoped CategoryTheory.Obj
 
 namespace WeilConjectures.CondensedClopenCompact
 
+/-- Ordinary unbounded derived modules over the recorded pulled-back condensed Qbar ring.
+Source: the node's coefficient convention
+(blueprint: lem-zl-condensed-clopen-compact-decomposition). -/
+abbrev DMod (ell : ℕ) [Fact ell.Prime] (X : Scheme.{u}) :=
+  DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+    (ProEtale.condensedRingObj (Profinite.padicAlgClRingObj ell) X))
+
 /-- Exact pullback, with the canonical condensed scalar comparison.
 Source: the node's restriction convention
 (blueprint: lem-zl-condensed-clopen-compact-decomposition). -/
 abbrev pull (ell : ℕ) [Fact ell.Prime] {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   (ProEtale.CondensedRing.upperStar (Profinite.padicAlgClRingObj ell) f).mapDerivedCategory
+
+/-- Total derived proper direct image, computed on K-injective resolutions.
+Source: the compact-support construction in the node's proof, step 4
+(blueprint: lem-zl-condensed-clopen-compact-decomposition). -/
+abbrev push (ell : ℕ) [Fact ell.Prime] {X Y : Scheme.{u}} (f : X ⟶ Y) :=
+  (ProEtale.CondensedRing.lowerStar (Profinite.padicAlgClRingObj ell) f).rightDerivedFunctor
+
+/-- Exact extension by zero on all integer-indexed complexes.
+Source: the node's proof, step 3
+(blueprint: lem-zl-condensed-clopen-compact-decomposition). -/
+abbrev extension (ell : ℕ) [Fact ell.Prime] {X Y : Scheme.{u}}
+    (j : X ⟶ Y) [IsOpenImmersion j] :=
+  (ProEtale.CondensedRing.openImmersionLowerShriek
+    (Profinite.padicAlgClRingObj ell) j).mapDerivedCategory
+
+/-- Composition of exact derived pullbacks, retaining the published scalar normalization.
+Source: the node's proof, steps 3 and 6
+(blueprint: lem-zl-condensed-clopen-compact-decomposition). -/
+def pullComp (ell : ℕ) [Fact ell.Prime] {X Y Z : Scheme.{u}}
+    (f : X ⟶ Y) (g : Y ⟶ Z) :
+    pull ell (f ≫ g) ≅ pull ell g ⋙ pull ell f :=
+  Functor.mapDerivedCategoryNatIso
+    (ProEtale.CondensedRing.upperStarComp (Profinite.padicAlgClRingObj ell) f g) ≪≫
+  Functor.mapDerivedCategoryCompIso _ _
+
+/-- The exact-derived open adjunction is the published levelwise adjunction.
+Source: the node's proof, step 3
+(blueprint: lem-zl-condensed-clopen-compact-decomposition). -/
+abbrev openAdj (ell : ℕ) [Fact ell.Prime] {X Y : Scheme.{u}}
+    (j : X ⟶ Y) [IsOpenImmersion j] : extension ell j ⊣ pull ell j :=
+  ProEtale.CondensedRing.derivedOpenImmersionLowerShriekUpperStarAdjunction
+    (Profinite.padicAlgClRingObj ell) j
+
+/-- The square comparison is induced by the two composition isomorphisms.
+Source: the node's proof, step 6
+(blueprint: lem-zl-condensed-clopen-compact-decomposition). -/
+def pullSquare (ell : ℕ) [Fact ell.Prime] {X' X Y' Y : Scheme.{u}}
+    {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
+    (h : g' ≫ f = f' ≫ g) :
+    pull ell g ⋙ pull ell f' ≅ pull ell f ⋙ pull ell g' :=
+  (pullComp ell f' g).symm ≪≫
+    eqToIso (congrArg (fun a ↦ pull ell a) h.symm) ≪≫ pullComp ell g' f
+
+/-- The exact-derived pullback/total-derived pushforward adjunction.
+Source: the node's proof, steps 4 and 6
+(blueprint: lem-zl-condensed-clopen-compact-decomposition). -/
+def pullPushAdj (ell : ℕ) [Fact ell.Prime] {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    pull ell f ⊣ push ell f :=
+  (ProEtale.CondensedRing.derivedUpperStarLowerStarAdjunction
+    (Profinite.padicAlgClRingObj ell) f).ofNatIsoLeft
+      (ProEtale.CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory
+        (Profinite.padicAlgClRingObj ell) f)
+
+/-- The proper exchange is precisely the unit--square--counit mate.
+Source: the node's proof, step 6
+(blueprint: lem-zl-condensed-clopen-compact-decomposition). -/
+def properExchange (ell : ℕ) [Fact ell.Prime] {X Y : Scheme.{u}}
+    (f : X ⟶ Y) (gx : X ⟶ X) (gy : Y ⟶ Y) (h : gx ≫ f = f ≫ gy) :
+    push ell f ⋙ pull ell gy ⟶ pull ell gx ⋙ push ell f :=
+  Adjunction.squareExchange (pullPushAdj ell f) (pullPushAdj ell f)
+    (pull ell gy) (pull ell gx) (pullSquare ell h)
+
+/-- A point transport in the fixed Qbar coordinates is the actual section comparison.
+The equality specifies its underlying additive map after the canonical scalar cancellation.
+Source: the node's proof, step 7; geometric-field evaluation and its scalar-linearity theorem
+(blueprint: lem-zl-condensed-clopen-compact-decomposition). -/
+structure PointTransport (ell : ℕ) [Fact ell.Prime]
+    (k : Type u) [Field k] [IsAlgClosed k] (sigma : k ≃+* k) where
+  ordinary : ProEtale.CondensedQbarGeometricEvaluation.fieldFiber k ell ≅
+    ProEtale.CondensedRing.upperStar (Profinite.padicAlgClRingObj ell)
+      (Spec.map (CommRingCat.ofHom sigma.toRingHom)) ⋙
+        ProEtale.CondensedQbarGeometricEvaluation.fieldFiber k ell
+  normalization : ∀ M,
+    ((ordinary.hom.app M ≫
+      (ProEtale.CondensedQbarGeometricEvaluation.fieldFiber k ell).map
+        ((Mod.extendScalarsIsoComapInv (ProEtale.condensedPullbackHom
+          (Profinite.padicAlgClRingObj ell) (Spec.map (CommRingCat.ofHom sigma.toRingHom)))).hom.app
+            (((ProEtale.upperStar Ab.{u + 1} (Spec.map (CommRingCat.ofHom sigma.toRingHom))).mapMod
+              (ProEtale.condensedRingObj (Profinite.padicAlgClRingObj ell)
+                (Spec (.of k)))).obj M)))).hom.toAddMonoidHom =
+      ((ProEtale.geometricFieldEvaluationComparison
+        (Spec.map (CommRingCat.ofHom sigma.toRingHom)) Ab.{u + 1}).app M.X).hom
+
+/-- The open exchange is fixed by its mate under the actual open adjunction.
+Source: the node's proof, step 6; the mate equality includes its unit/counit normalization
+(blueprint: lem-zl-condensed-clopen-compact-decomposition). -/
+structure OpenTransport (ell : ℕ) [Fact ell.Prime]
+    {X Z : Scheme.{u}} (i : X ⟶ Z) [IsOpenImmersion i]
+    (gx : X ⟶ X) (gz : Z ⟶ Z) (h : gx ≫ i = i ≫ gz) where
+  exchange : extension ell i ⋙ pull ell gz ≅ pull ell gx ⋙ extension ell i
+  normalization : Adjunction.squareExchange (openAdj ell i) (openAdj ell i)
+    (pull ell gx) (pull ell gz) exchange.symm = (pullSquare ell h).inv
+
+/-- The compact-support transport is point transport, the proper mate, then open exchange.
+Source: the node's proof, steps 6--7
+(blueprint: lem-zl-condensed-clopen-compact-decomposition). -/
+def compactTransport {ell : ℕ} [Fact ell.Prime]
+    {k : Type u} [Field k] [IsAlgClosed k] {sigma : k ≃+* k}
+    (t : PointTransport ell k sigma) {X : Scheme.{u}}
+    {a : X ⟶ Spec (.of k)} (c : Compactification a)
+    (gx : X ⟶ X) (gz : c.Z ⟶ c.Z)
+    (hg : gz ≫ c.g = c.g ≫ Spec.map (CommRingCat.ofHom sigma.toRingHom))
+    {hi : gx ≫ c.i = c.i ≫ gz} (e : OpenTransport ell c.i gx gz hi) :
+    condensedQbarCompactSections ell k c ⟶ pull ell gx ⋙ condensedQbarCompactSections ell k c :=
+  Functor.whiskerLeft (extension ell c.i ⋙ push ell c.g) t.derived.hom ≫
+    Functor.whiskerRight
+      (Functor.whiskerLeft (extension ell c.i)
+        (properExchange ell c.g gz (Spec.map (CommRingCat.ofHom sigma.toRingHom)) hg))
+          (condensedQbarDerivedPointSections ell k) ≫
+    Functor.whiskerRight (Functor.whiskerRight e.exchange.hom (push ell c.g))
+      (condensedQbarDerivedPointSections ell k)
+
+/-- Geometric Frobenius on compact cohomology is induced by the specified Weil isomorphism.
+Source: the node's displayed definition of F_X and its proof, step 7
+(blueprint: lem-zl-condensed-clopen-compact-decomposition). -/
+def action {ell : ℕ} [Fact ell.Prime] {k : Type u} [Field k] [IsAlgClosed k]
+    {sigma : k ≃+* k} (t : PointTransport ell k sigma) {X : Scheme.{u}}
+    {a : X ⟶ Spec (.of k)} (c : Compactification a)
+    (gx : X ⟶ X) (gz : c.Z ⟶ c.Z)
+    (hg : gz ≫ c.g = c.g ≫ Spec.map (CommRingCat.ofHom sigma.toRingHom))
+    {hi : gx ≫ c.i = c.i ≫ gz} (e : OpenTransport ell c.i gx gz hi)
+    (K : DMod ell X) (theta : (pull ell gx).obj K ≅ K) :
+    End ((condensedQbarCompactSections ell k c).obj K) :=
+  (compactTransport t c gx gz hg e).app K ≫ (condensedQbarCompactSections ell k c).map theta.hom
+
+/-- The fixed geometric field automorphism used by the recorded scheme Frobenius.
+Source: def-weil-frobenius-detailed, geometric Frobenius convention
+(blueprint: lem-zl-condensed-clopen-compact-decomposition). -/
+def fieldFrobenius (D : FiniteFieldDatum.{u}) : D.k ≃+* D.k := by
+  letI := Fintype.ofFinite D.k₀
+  exact (FiniteField.geometricFrobeniusAlgEquivOfAlgebraic D.k₀ D.k).toRingEquiv
 
 /-- The same geometric Frobenius map, using the recorded Galois construction directly.
 This presentation also applies before installing the inherited finite-type instances.

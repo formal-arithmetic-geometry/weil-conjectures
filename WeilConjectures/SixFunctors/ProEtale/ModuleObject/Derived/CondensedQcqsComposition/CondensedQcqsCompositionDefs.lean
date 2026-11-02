@@ -97,6 +97,14 @@ abbrev System.support {X Y : Scheme.{u}} {f : X ⟶ Y} (S : System ℓ f)
   (bc ℓ Y).lift ((bc ℓ X).ι ⋙
     rightDerivedLowerShriekOfCompactification (Profinite.padicAlgClRingObj ℓ) c) (S.preserves c)
 
+/-- The exact derived inverse image along a scheme automorphism, restricted to Dbc.
+The preservation proof is precisely the existing reindexing theorem of strict Weil complexes.
+Source: source proof, Step 4 (blueprint: lem-zl-condensed-shriek-composition-qcqs). -/
+abbrev pull {X : Scheme.{u}} (a : X ≅ X) : C ℓ X ⥤ C ℓ X :=
+  (bc ℓ X).lift ((bc ℓ X).ι ⋙ StrictWeilCondensed.action (Profinite.padicAlgClRingObj ℓ) a)
+    (fun K ↦ ((StrictWeilCondensed.action_preserves (Profinite.padicAlgClRingObj ℓ) a K.obj).1).2
+      K.property)
+
 /-- The specified compositor on a compatible compactification tower. Its middle map
 is the unique identity-on-open normalized proper/open interchange, not an arbitrary map.
 Source: source proof, Step 2 (blueprint: lem-zl-condensed-shriek-composition-qcqs). -/
@@ -123,6 +131,13 @@ def TowerNormalized {X Z Y : Scheme.{u}} {h : X ⟶ Z} {g : Z ⟶ Y}
       (fun M m ↦ compositionInterchangeIsNormalized (Profinite.padicAlgClRingObj ℓ) T.cf.g T.cg.i
         (detSfBoundaryCompactification (middle T)) M m)
       K.obj ((α T.cf T.cg T.cfg).hom.app K).hom
+
+/-- The map on geometric fibres is the actual base-change functor's map.
+Source: finite-field geometric-fibre convention and source proof, Step 1
+(blueprint: lem-zl-condensed-shriek-composition-qcqs). -/
+def modelMap (D : WeilConjectures.FiniteFieldDatum.{u})
+    {X₀ Y₀ : Over (Spec (.of D.k₀))} (f₀ : X₀ ⟶ Y₀) :=
+  ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map f₀).left
 
 end
 

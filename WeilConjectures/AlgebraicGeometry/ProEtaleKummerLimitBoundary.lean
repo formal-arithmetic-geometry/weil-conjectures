@@ -158,6 +158,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsMonoidal
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalarsComp
 public import WeilConjectures.SixFunctors.ProEtale.GaloisEvaluation
 import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
+public import WeilConjectures.AlgebraicGeometry.CompatibleKummerCoefficients.CompatibleKummerCoefficientData
 
 /-! # The compatible-root pro-etale Kummer boundary
 
@@ -192,6 +193,179 @@ open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale
 
 variable {T : Scheme.{u}} (ell : ℕ) [Fact ell.Prime]
+
+/-- The inverse system of actual units with successive power maps.
+Source: Stacks 03PL and the blueprint compatible-root construction
+(blueprint: lem-pur-proetale-kummer-limit-boundary). -/
+abbrev compatibleUnitsTower (T : Scheme.{u}) : ℕᵒᵖ ⥤
+    Sheaf (ProEt.topology T) AddCommGrpCat.{u + 1} :=
+  SpTowerClasses.powerUnits ell T
+
+/-- The inverse system of root-of-unity sheaves.
+Source: Stacks 03PL and the blueprint compatible-root construction
+(blueprint: lem-pur-proetale-kummer-limit-boundary). -/
+abbrev compatibleRootsTower (T : Scheme.{u}) : ℕᵒᵖ ⥤
+    Sheaf (ProEt.topology T) AddCommGrpCat.{u + 1} :=
+  SpTowerClasses.roots ell T
+
+/-- The categorical inverse limit of the actual unit tower.
+Source: Stacks 03PL and the blueprint compatible-root construction
+(blueprint: lem-pur-proetale-kummer-limit-boundary). -/
+abbrev compatibleUnits (T : Scheme.{u}) :
+    Sheaf (ProEt.topology T) AddCommGrpCat.{u + 1} :=
+  limit (compatibleUnitsTower ell T)
+
+/-- The categorical inverse limit of the root tower.
+Source: Stacks 03PL and the blueprint compatible-root construction
+(blueprint: lem-pur-proetale-kummer-limit-boundary). -/
+abbrev compatibleRoots (T : Scheme.{u}) :
+    Sheaf (ProEt.topology T) AddCommGrpCat.{u + 1} :=
+  limit (compatibleRootsTower ell T)
+
+/-- Projection of the root limit to its `(n+1)`-st root sheaf.
+Source: Stacks 03PL and the blueprint compatible-root construction
+(blueprint: lem-pur-proetale-kummer-limit-boundary). -/
+noncomputable def compatibleRootsCoordinate (T : Scheme.{u}) (n : ℕ) :
+    compatibleRoots ell T ⟶
+      Scheme.proEtaleRootsOfUnitySheaf T (ell ^ (n + 1)) :=
+  limit.π (compatibleRootsTower ell T) (op n)
+
+/-- Projection of the unit limit to the zeroth unit sheaf.
+Source: Stacks 03PL and the blueprint compatible-root construction
+(blueprint: lem-pur-proetale-kummer-limit-boundary). -/
+noncomputable def compatibleUnitsProjection (T : Scheme.{u}) :
+    compatibleUnits ell T ⟶ Scheme.proEtaleUnitsSheaf T :=
+  limit.π (compatibleUnitsTower ell T) (op 0)
+
+/-- The canonical inclusion of compatible roots into compatible units.
+Source: Stacks 03PL and the blueprint compatible-root construction
+(blueprint: lem-pur-proetale-kummer-limit-boundary). -/
+structure CompatibleRootInclusion (T : Scheme.{u}) where
+  hom : compatibleRoots ell T ⟶ compatibleUnits ell T
+  zeroth : hom ≫ compatibleUnitsProjection ell T = 0
+  positive : ∀ (n : ℕ),
+    hom ≫ limit.π (compatibleUnitsTower ell T) (op (n + 1)) =
+      limit.π (compatibleRootsTower ell T) (op n) ≫
+        Scheme.proEtaleRootsOfUnityInclusion T (ell ^ (n + 1))
+
+/-- The coordinates `(1,z₁,z₂,…)`, in additive notation.
+Source: Stacks 03PL and the blueprint compatible-root construction
+(blueprint: lem-pur-proetale-kummer-limit-boundary). -/
+def compatibleRootComponent (T : Scheme.{u}) :
+    ℕ → (compatibleRoots ell T ⟶ Scheme.proEtaleUnitsSheaf T)
+  | 0 => 0
+  | n + 1 => compatibleRootsCoordinate ell T n ≫
+      Scheme.proEtaleRootsOfUnityInclusion T (ell ^ (n + 1))
+
+/-- Adjacent coordinates of the root inclusion are compatible.
+Source: Stacks 03PL (blueprint: lem-pur-proetale-kummer-limit-boundary).
+Proof: at zero use the root kernel equation; at a successor use the limit
+cone equation and the defining prime-power root transition. -/
+theorem compatibleRootComponent_transition (T : Scheme.{u}) (n : ℕ) :
+    ((Functor.const ℕᵒᵖ).obj (compatibleRoots ell T)).map
+      (homOfLE (Nat.le_succ n)).op ≫ compatibleRootComponent ell T n =
+        compatibleRootComponent ell T (n + 1) ≫
+          (compatibleUnitsTower ell T).map (homOfLE (Nat.le_succ n)).op := by
+  simp only [Functor.const_obj_map]
+  cases n with
+  | zero =>
+      have hi : Scheme.proEtaleRootsOfUnityInclusion T (ell ^ (0 + 1)) ≫
+          (compatibleUnitsTower ell T).map (homOfLE (Nat.le_succ 0)).op = 0 := by
+        simp only [compatibleUnitsTower, SpTowerClasses.powerUnits,
+          Functor.ofOpSequence_map_homOfLE_succ]
+        rw [show ell ^ (0 + 1) = ell from pow_one ell]
+        exact kernel.condition (Scheme.proEtaleUnitsPower T ell)
+      change 0 = (compatibleRootsCoordinate ell T 0 ≫
+        Scheme.proEtaleRootsOfUnityInclusion T (ell ^ (0 + 1))) ≫
+          (compatibleUnitsTower ell T).map (homOfLE (Nat.le_succ 0)).op
+      calc
+        0 = compatibleRootsCoordinate ell T 0 ≫ 0 := (comp_zero).symm
+        _ = compatibleRootsCoordinate ell T 0 ≫
+            (Scheme.proEtaleRootsOfUnityInclusion T (ell ^ (0 + 1)) ≫
+              (compatibleUnitsTower ell T).map (homOfLE (Nat.le_succ 0)).op) :=
+          congrArg (fun f ↦ compatibleRootsCoordinate ell T 0 ≫ f) hi.symm
+        _ = (compatibleRootsCoordinate ell T 0 ≫
+            Scheme.proEtaleRootsOfUnityInclusion T (ell ^ (0 + 1))) ≫
+              (compatibleUnitsTower ell T).map (homOfLE (Nat.le_succ 0)).op :=
+          (Category.assoc _ _ _).symm
+  | succ n =>
+      have ht : (compatibleRootsTower ell T).map (homOfLE (Nat.le_succ n)).op ≫
+          Scheme.proEtaleRootsOfUnityInclusion T (ell ^ (n + 1)) =
+        Scheme.proEtaleRootsOfUnityInclusion T (ell ^ (n + 1 + 1)) ≫
+          (compatibleUnitsTower ell T).map (homOfLE (Nat.le_succ (n + 1))).op := by
+        dsimp only [compatibleRootsTower, SpTowerClasses.roots,
+          Scheme.proEtaleRootsOfUnityTower, compatibleUnitsTower, SpTowerClasses.powerUnits]
+        rw [Functor.ofOpSequence_map_homOfLE_succ, Functor.ofOpSequence_map_homOfLE_succ]
+        ext U x
+        exact Scheme.proEtaleRootsOfUnityTransition_prime T ell (Fact.out : ell.Prime)
+          n U x
+      have h := limit.w (compatibleRootsTower ell T) (homOfLE (Nat.le_succ n)).op
+      change compatibleRootsCoordinate ell T (n + 1) ≫
+        (compatibleRootsTower ell T).map (homOfLE (Nat.le_succ n)).op =
+          compatibleRootsCoordinate ell T n at h
+      change compatibleRootsCoordinate ell T n ≫
+          Scheme.proEtaleRootsOfUnityInclusion T (ell ^ (n + 1)) =
+        (compatibleRootsCoordinate ell T (n + 1) ≫
+          Scheme.proEtaleRootsOfUnityInclusion T (ell ^ (n + 1 + 1))) ≫
+            (compatibleUnitsTower ell T).map (homOfLE (Nat.le_succ (n + 1))).op
+      exact (congrArg (fun f ↦ f ≫
+        Scheme.proEtaleRootsOfUnityInclusion T (ell ^ (n + 1))) h.symm).trans
+        ((Category.assoc _ _ _).trans
+          ((congrArg (fun f ↦ compatibleRootsCoordinate ell T (n + 1) ≫ f) ht).trans
+            (Category.assoc _ _ _).symm))
+
+/-- The componentwise cone, without choosing any limit map.
+Source: Stacks 03PL and the blueprint compatible-root construction
+(blueprint: lem-pur-proetale-kummer-limit-boundary). -/
+def compatibleRootCone (T : Scheme.{u}) : Cone (compatibleUnitsTower ell T) :=
+  Cone.mk (compatibleRoots ell T)
+    (NatTrans.ofOpSequence (compatibleRootComponent ell T)
+      (compatibleRootComponent_transition ell T))
+
+/-- The inclusion is the universal `limit.lift` of the componentwise cone.
+Source: Stacks 03PL and the blueprint compatible-root construction
+(blueprint: lem-pur-proetale-kummer-limit-boundary). -/
+noncomputable def compatibleRootInclusion (T : Scheme.{u}) :
+    CompatibleRootInclusion ell T where
+  hom := limit.lift (compatibleUnitsTower ell T) (compatibleRootCone ell T)
+  zeroth := limit.lift_π (compatibleRootCone ell T) (op 0)
+  positive n := limit.lift_π (compatibleRootCone ell T) (op (n + 1))
+
+/-- The coordinate-zero root inclusion composes to zero.
+Source: Stacks 03PK (blueprint: lem-pur-proetale-kummer-limit-boundary).
+Proof: this is the zeroth-coordinate normalization of `compatibleRootInclusion`. -/
+theorem compatibleRootZero (T : Scheme.{u}) :
+    (compatibleRootInclusion ell T).hom ≫ compatibleUnitsProjection ell T = 0 := by
+  exact (compatibleRootInclusion ell T).zeroth
+
+/-- The componentwise root inclusion is uniquely determined by its zeroth and positive coordinates.
+Source: Stacks Project, Tag 03PK (blueprint: `lem-pur-proetale-kummer-limit-boundary`).
+Proof: the zero coordinate is forced to be one, and the successor coordinates are the
+actual root inclusions; `proEtaleRootsOfUnityTransition_prime` gives compatibility. -/
+theorem compatibleRootInclusion_existsUnique (T : Scheme.{u}) :
+    ∃! q : CompatibleRootInclusion ell T,
+      q.hom ≫ compatibleUnitsProjection ell T = 0 ∧
+        ∀ (n : ℕ),
+          q.hom ≫ limit.π (compatibleUnitsTower ell T) (op (n + 1)) =
+            limit.π (compatibleRootsTower ell T) (op n) ≫
+              Scheme.proEtaleRootsOfUnityInclusion T (ell ^ (n + 1)) := by
+  let q := compatibleRootInclusion ell T
+  refine ⟨q, ⟨q.zeroth, q.positive⟩, ?_⟩
+  intro q' hq'
+  have hh : q'.hom = q.hom := by
+    apply limit.hom_ext
+    rintro ⟨n⟩
+    cases n with
+    | zero =>
+        exact hq'.1.trans q.zeroth.symm
+    | succ n =>
+        exact (hq'.2 n).trans (q.positive n).symm
+  have hext : ∀ a b : CompatibleRootInclusion ell T, a.hom = b.hom → a = b := by
+    rintro ⟨a, ha, hpa⟩ ⟨b, hb, hpb⟩ h
+    change a = b at h
+    cases h
+    rfl
+  exact hext q' q hh
 
 /-- The upstream coefficient map with its native coefficient endpoints explicit.
 Source: blueprint coefficient-change Step 8
