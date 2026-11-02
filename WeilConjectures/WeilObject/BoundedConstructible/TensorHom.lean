@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 public import WeilConjectures.WeilObject.BoundedConstructible.Defs
+public import WeilConjectures.WeilObject.BoundedConstructible.LowerUpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleLowerStar
 
 /-!
@@ -36,17 +37,12 @@ The tensor product is defined for every endomorphism `Φ`; the internal hom for 
   ```
   (`ProEtale.CondensedRing.weilHom`), with the inverse of `φ_K` in the contravariant variable.
 
-## Sorried input
-
-- the naturality of `weilTensorComparison`: the naturality of `leftDerivedUpperStarTensorIso`
-  and of the compatibility isomorphisms of the restricted functors with the inclusions.
-- `ProEtale.CondensedRing.weilHomComparisonApp_naturality`: the naturality of `h` in both
-  variables, from the naturality of `m`, of the evaluation and of the adjunction.
-- `ProEtale.CondensedRing.isIso_weilHomComparisonApp`: `h` is an isomorphism. `Φ` is an
-  equivalence (`isEquivalence_boundedConstructibleUpperStar_of_iso`) and `m` an isomorphism, so
-  for every `M` the composite
-  `Hom(M, Φ RHom(K, L)) ≅ Hom(Φ⁻¹ M ⊗ᴸ K, L) ≅ Hom(M ⊗ᴸ Φ K, Φ L) ≅ Hom(M, RHom(Φ K, Φ L))`
-  is induced by `h`, and Yoneda applies. No dualizability of `K` is needed.
+The inverse of `m` is the tensorator of the strong monoidal functor `Φ`
+(`ProEtale.CondensedRing.weilTensorComparison_inv_app`), so `h` is the internal-hom comparison
+map `CategoryTheory.Functor.LaxMonoidal.ihomComparison` of `Φ`
+(`ProEtale.CondensedRing.weilHomComparisonApp_eq`). It is therefore natural in both variables,
+and it is an isomorphism because `Φ` is a strong monoidal equivalence
+(`isEquivalence_boundedConstructibleUpperStar_of_iso`). No dualizability of `K` is needed.
 
 ## Main definitions
 
@@ -105,7 +101,28 @@ noncomputable def weilTensorComparison :
         ((curriedTensor _).obj _).mapIso
           ((boundedConstructibleUpperStarCompatibility (Profinite.padicAlgClRingObj ℓ) ℓ
             Φ).app KL.2).symm))
-    sorry
+    (by
+      rintro ⟨K₁, L₁⟩ ⟨K₂, L₂⟩ ⟨φ, ψ⟩
+      ext1
+      have h₁ := NatTrans.congr_app
+        ((leftDerivedUpperStarTensorIso (Profinite.padicAlgClRingObj ℓ) Φ.left).hom.naturality
+          φ.hom) L₁.obj
+      have h₂ := ((leftDerivedUpperStarTensorIso (Profinite.padicAlgClRingObj ℓ) Φ.left).hom.app
+          K₂.obj).naturality ψ.hom
+      dsimp [leftDerivedUpperStarTensorLeft, leftDerivedUpperStarTensorRight] at h₁ h₂
+      simp only [boundedConstructibleTensor, boundedConstructibleUpperStar, Functor.comp_obj,
+        Functor.uncurry_obj_obj, curriedTensor_obj_obj, ObjectProperty.lift_obj_obj,
+        ObjectProperty.ι_obj, ObjectProperty.tensorObj_obj, Functor.prod_obj, Functor.comp_map,
+        Functor.uncurry_obj_map, curriedTensor_map_app, ObjectProperty.whiskerRight_def,
+        curriedTensor_obj_map, ObjectProperty.whiskerLeft_def, ObjectProperty.lift_map,
+        ObjectProperty.ι_map, ObjectProperty.FullSubcategory.comp_hom, ObjectProperty.homMk_hom,
+        Functor.map_comp, boundedConstructibleUpperStarCompatibility, ObjectProperty.liftCompιIso,
+        Functor.mapIso_symm, Functor.FullyFaithful.preimageIso_hom, Iso.trans_hom, Iso.app_hom,
+        Iso.refl_hom, NatTrans.id_app, Iso.symm_hom, Functor.mapIso_inv, Iso.app_inv, Iso.refl_inv,
+        CategoryTheory.Functor.map_id, whiskerLeft_id, Category.comp_id, Category.id_comp,
+        Category.assoc,
+        reassoc_of% h₂, reassoc_of% h₁, Functor.prod_map]
+      exact congrArg (_ ≫ ·) (Category.id_comp _).symm)
 
 /-- The derived tensor product of Weil objects: a pair of Weil objects `(K, φ_K)` and `(L, φ_L)`
 for `Φ` is sent to `K ⊗ᴸ L` with the structure isomorphism
@@ -122,6 +139,24 @@ lemma weilTensor_obj_obj_carrier (K L : WeilBoundedConstructible ℓ Φ) :
     (((weilTensor ℓ Φ).obj K).obj L).carrier =
       ((boundedConstructibleTensor ℓ X).obj K.carrier).obj
         L.carrier :=
+  rfl
+
+/-- The inverse of the comparison `m_{K,L}` is the tensorator of the strong monoidal functor
+`LΦ^*` on `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` (`monoidal_boundedConstructibleUpperStar`). -/
+lemma weilTensorComparison_inv_app (K L : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (weilTensorComparison ℓ Φ).inv.app (K, L) =
+      Functor.LaxMonoidal.μ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ)
+        K L := by
+  ext1
+  simp only [Functor.comp_obj, Functor.prod_obj, Functor.uncurry_obj_obj, weilTensorComparison,
+    ObjectProperty.ι_obj, boundedConstructibleUpperStarCompatibility, ObjectProperty.liftCompιIso,
+    curriedTensor_obj_obj, Functor.mapIso_symm, NatIso.ofComponents_inv_app,
+    Functor.FullyFaithful.preimageIso_inv, Iso.trans_inv, Iso.symm_inv, Functor.mapIso_hom,
+    Iso.app_hom, Iso.refl_hom, NatTrans.id_app, ObjectProperty.lift_obj_obj, curriedTensor_obj_map,
+    Iso.app_inv, curriedTensor_map_app, Category.assoc, Iso.refl_inv, Category.comp_id,
+    ObjectProperty.homMk_hom]
+  erw [MonoidalCategory.whiskerLeft_id, MonoidalCategory.id_whiskerRight, Category.id_comp,
+    Category.id_comp]
   rfl
 
 end Tensor
@@ -165,6 +200,15 @@ noncomputable def weilHomComparisonApp (K L : Dᵇc(X.left)⟦Profinite.padicAlg
     ((weilTensorComparison ℓ e.hom).inv.app (K, ((weilRHom ℓ).obj (Opposite.op K)).obj L) ≫
       (weilFrobenius ℓ e).map (weilEv ℓ K L))
 
+/-- The comparison `h_{K,L}` is the comparison map `Φ RHom(K, L) ⟶ RHom(Φ K, Φ L)` of the strong
+monoidal functor `Φ` (`CategoryTheory.Functor.LaxMonoidal.ihomComparison`). -/
+lemma weilHomComparisonApp_eq (K L : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    weilHomComparisonApp ℓ e K L =
+      (Functor.LaxMonoidal.ihomComparison (weilFrobenius ℓ e) K).natTrans.app L := by
+  rw [Functor.LaxMonoidal.ihomComparison_app_eq_curry, weilHomComparisonApp,
+    weilTensorComparison_inv_app]
+  rfl
+
 /-- The comparison `h_{K,L}` is natural in `K` (contravariantly) and in `L`. -/
 lemma weilHomComparisonApp_naturality {K K' L L' : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
     (φ : K' ⟶ K) (ψ : L ⟶ L') :
@@ -175,14 +219,19 @@ lemma weilHomComparisonApp_naturality {K K' L L' : Dᵇc(X.left)⟦Profinite.pad
         (((weilRHom ℓ).map ((weilFrobenius ℓ e).map φ).op).app
             ((weilFrobenius ℓ e).obj L) ≫
           ((weilRHom ℓ).obj (Opposite.op ((weilFrobenius ℓ e).obj K'))).map
-            ((weilFrobenius ℓ e).map ψ)) :=
-  sorry
+            ((weilFrobenius ℓ e).map ψ)) := by
+  have h₁ := (Functor.LaxMonoidal.ihomComparison (weilFrobenius ℓ e) K').natTrans.naturality ψ
+  have h₂ := Functor.LaxMonoidal.map_pre_app_comp_ihomComparison_app (weilFrobenius ℓ e) φ L
+  simp only [weilHomComparisonApp_eq, Functor.map_comp, Category.assoc]
+  erw [h₁, reassoc_of% h₂]
+  rfl
 
 /-- The comparison `h_{K,L}` is an isomorphism: `Φ` is a strong monoidal equivalence. See the
 module docstring. -/
 instance isIso_weilHomComparisonApp (K L : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    IsIso (weilHomComparisonApp ℓ e K L) :=
-  sorry
+    IsIso (weilHomComparisonApp ℓ e K L) := by
+  rw [weilHomComparisonApp_eq]
+  infer_instance
 
 /-- The comparison `h : Φ RHom(K, L) ≅ RHom(Φ K, Φ L)` as an isomorphism of functors
 `Dᵇc(X)ᵒᵖ × Dᵇc(X) ⥤ Dᵇc(X)`, for the endofunctor `Φ.op × Φ` of the source. -/

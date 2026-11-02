@@ -13,6 +13,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TorAmplitude
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomComparison
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarEtaleOrigin
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImage
 public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageCohomologicalDimension
@@ -78,25 +79,6 @@ namespace AlgebraicGeometry
 open Scheme
 
 namespace ProEtale
-
-section Comparison
-
-variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-  {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
-
-/-- For `f` quasi-compact and quasi-separated and a bounded below complex `K'` of étale sheaves,
-the pro-étale direct image of `ν^* K'` is `ν^* Rf_* K'`: the component at `K'` of the comparison
-isomorphism `AlgebraicGeometry.ProEtale.rightDerivedLowerStarComparisonIso'` (blueprint
-`prop-weil-pbc-comparison-direct-image`). -/
-noncomputable def rightDerivedLowerStarMapDerivedCategoryObjIso
-    (K' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
-    (hK' : _root_.DerivedCategory.TStructure.t.plus K') :
-    (R(ProEtale.lowerStar A f)).obj (D(ν^*(X)[A]).obj K') ≅
-      D(ν^*(Y)[A]).obj ((R(Etale.lowerStar A f)).obj K') :=
-  ((rightDerivedLowerStarComparisonIso' f A).app ⟨K', hK'⟩).symm ≪≫
-    D(ν^*(Y)[A]).mapIso ((Etale.lowerStar A f).rightDerivedFunctorPlusCompatibility.app ⟨K', hK'⟩)
-
-end Comparison
 
 section Pullback
 

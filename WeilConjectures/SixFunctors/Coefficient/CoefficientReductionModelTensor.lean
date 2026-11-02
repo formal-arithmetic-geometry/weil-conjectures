@@ -6,6 +6,9 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerivedSystemEvaluationData
+import WeilConjectures.SixFunctors.Coefficient.CoefficientOrdinaryReductionTensor
+import WeilConjectures.SixFunctors.Coefficient.CoefficientOrdinaryReductionTensorDescent
+import WeilConjectures.SixFunctors.Coefficient.CoefficientOrdinaryReductionComparison
 
 /-! # Tensor comparison from the strict K-flat reduction model
 
@@ -54,7 +57,13 @@ theorem coefficientReductionModelTensor_exists
     (adj : L ⊣ coefficientSequenceLimit l E W)
     (ρ : ∀ n : ℕ, L ⋙ coefficientSequenceDerivedEvaluation l E W n ≅
       coefficientFiniteDerivedExtension l E W n)
-    (hL : CoefficientReductionModels l E W L ρ) :
-    Nonempty (T.integralClosed.tensor ⋙ L ≅ L.prod L ⋙ T.systemClosed.tensor) := by sorry
+    (_hL : CoefficientReductionModels l E W L ρ) :
+    Nonempty (T.integralClosed.tensor ⋙ L ≅ L.prod L ⋙ T.systemClosed.tensor) := by
+  obtain ⟨M⟩ := OrdinaryQuotient.ordinaryModel_exists l E W
+  obtain ⟨b, -⟩ := OrdinaryQuotient.OrdinaryModel.quotientTensor_exists l E W M
+  obtain ⟨ε, -, hε, -⟩ := OrdinaryQuotient.reductionComparison_exists l E W M L adj
+  obtain ⟨μ, -⟩ := OrdinaryQuotient.reductionTensor_descent l E W M T L ε hε b
+    (OrdinaryQuotient.OrdinaryModel.quotient_isKFlat l E W M)
+  exact ⟨μ⟩
 
 end WeilConjectures
