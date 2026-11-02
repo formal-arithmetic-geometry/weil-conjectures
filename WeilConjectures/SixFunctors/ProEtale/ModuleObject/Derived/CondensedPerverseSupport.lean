@@ -11,6 +11,10 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleGeometricStalk
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.DeligneLaumon.Sheaf.DeligneLaumon.CondensedStructuralExceptionalDual
+public import WeilConjectures.AlgebraicGeometry.BaseFieldFiniteCD.FiniteCohomologicalDimensionHypothesis
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CondensedCoefficientUnit
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CondensedSixOperations
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 
 /-!
 # Support conditions for ordinary condensed algebraic ell-adic complexes
@@ -69,43 +73,72 @@ def CondensedSupportCondition (ℓ : ℕ) [Fact ℓ.Prime] {X : Scheme.{u}}
     (K : BoundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X)) : Prop :=
   CondensedAmbientSupportCondition (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X) K.obj
 
-/-- The actual relative derived internal Hom into the exceptional image of the coefficient
-unit, for a chosen compactification. Choices are extracted only from a restriction of the
-specified compact-support functor, its right adjoint, and an object isomorphic to the unit;
-these universal properties determine the resulting dual up to isomorphism.
-Source: Bhatt--Scholze, Lemmas 6.7.13 and 6.7.19, Remark 6.8.15; latest blueprint,
-order 4191 (blueprint: def-per-support-condition). -/
+/-- A finite field, or an algebraic closure of a finite field, has finite `ℓ`-cohomological
+dimension: `cd_ℓ ≤ 1` for a finite field and `cd_ℓ = 0` for an algebraically closed field.
+This is the hypothesis of the constructible exceptional adjoint of det-def-sf-operations.
+Source: blueprint sk-def-cd (blueprint: def-per-support-condition). -/
+theorem baseFieldFiniteCD_of_finite_or_closure (ℓ : ℕ) [Fact ℓ.Prime]
+    {k : Type u} [Field k]
+    (hk : (Finite k ∨ IsAlgClosed k) ∧ ∀ x : k, x ≠ 0 → IsOfFinOrder x) :
+    BaseFieldFiniteCD ℓ k :=
+  hk.1.elim (fun h ↦ by have := h; exact BaseFieldFiniteCD.of_finite ℓ k)
+    (fun h ↦ by have := h; exact BaseFieldFiniteCD.of_isAlgClosed ℓ k)
+
+/-- The dualizing complex `ω_X = Ra_X^! Ω_s[0]` of a separated finite-type scheme over a finite
+field or an algebraic closure of a finite field, as an object of the ambient derived category of
+`Ω_X`-modules: the constructible exceptional inverse image of det-def-sf-operations along
+`a_X : X → Spec k`, applied to the coefficient unit of `Spec k` (which lies in `D_ctf` by
+lem-per-condensed-coefficient-unit). This is the dualizing complex of def-trf-dualizing-complex
+with coefficients `Ω = Qbar_ℓ`, and the one used by sk-thm-pd-verdier-duality.
+Source: latest blueprint, order 4191 (blueprint: def-per-support-condition). -/
+def condensedDualizingObject (ℓ : ℕ) [Fact ℓ.Prime]
+    {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+    (hk : (Finite k ∨ IsAlgClosed k) ∧ ∀ x : k, x ≠ 0 → IsOfFinOrder x)
+    (X : Over (Spec (.of k)))
+    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] :
+    DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)) :=
+  letI : LocallyOfFiniteType (Over.mk (𝟙 (Spec (.of k)))).hom :=
+    inferInstanceAs (LocallyOfFiniteType (𝟙 (Spec (.of k))))
+  letI : QuasiCompact (Over.mk (𝟙 (Spec (.of k)))).hom :=
+    inferInstanceAs (QuasiCompact (𝟙 (Spec (.of k))))
+  letI : IsSeparated (Over.mk (𝟙 (Spec (.of k)))).hom :=
+    inferInstanceAs (IsSeparated (𝟙 (Spec (.of k))))
+  ((ctfExceptionalInverseImage (Profinite.padicAlgClRingObj ℓ) ℓ k
+      (baseFieldFiniteCD_of_finite_or_closure ℓ hk) (Over.mkIdTerminal.from X)
+      (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr ⟨Iso.refl _⟩)))))).obj
+    ⟨𝟙_ _, condensedCoefficientUnit_mem (Profinite.padicAlgClRingObj ℓ) (Spec (.of k))⟩).obj
+
+/-- The Verdier dual `D_X K = RHom_{Ω_X}(K, ω_X)`, the actual relative derived internal Hom into
+the dualizing complex `condensedDualizingObject`.
+Source: latest blueprint, order 4191 (blueprint: def-per-support-condition). -/
 def condensedPerverseDual (ℓ : ℕ) [Fact ℓ.Prime]
-    {k : Type u} [Field k] [Invertible (ℓ : k)]
+    {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+    (hk : (Finite k ∨ IsAlgClosed k) ∧ ∀ x : k, x ≠ 0 → IsOfFinOrder x)
     (X : Over (Spec (.of k)))
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
-    (c : Compactification X.hom)
     (K : BoundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)) :
-    BoundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left) :=
-  let h := Sheaf.DeligneLaumon.condensedStructuralExceptionalDual ℓ X
-  let U := h.choose
-  let hF := h.choose_spec.2 c
-  let hG := hF.choose_spec
-  let G := hG.choose
-  ⟨((derivedHom (Profinite.padicAlgClRingObj ℓ) X.left).obj (op K.obj)).obj
-      (G.obj U).obj, hG.choose_spec.2.2 K⟩
+    DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)) :=
+  ((derivedHom (Profinite.padicAlgClRingObj ℓ) X.left).obj (op K.obj)).obj
+    (condensedDualizingObject ℓ hk X)
 
-/-- `CosuppCon(K)` is precisely `SuppCon(D_X K)` for the constructible condensed exceptional
-Verdier dual, with no characteristic or cohomological-dimension restriction on the base field.
+/-- `CosuppCon(K)` is precisely `SuppCon(D_X K)` for the Verdier dual into the dualizing
+complex `Ra_X^! Ω_s[0]`, over a finite field or an algebraic closure of a finite field.
 
 Construction, following the node's steps. First, the ambient category, cohomology sheaves and
-closed supports are those of `CondensedSupportCondition`. Second, the structure morphism is
-separated of finite type, so a compactification `c` is given; the constructible exceptional
-adjoint of `condensedStructuralExceptionalDual` applied to the coefficient unit is `ω_X`, and the
-actual relative derived internal Hom `RHom(K, ω_X)` is bounded constructible by the same theorem;
-this is `condensedPerverseDual`. Third, the support predicate is applied to this dual.
+closed supports are those of `CondensedSupportCondition`. Second, the dualizing complex is the
+constructible exceptional inverse image of the coefficient unit along `a_X`
+(`condensedDualizingObject`, det-def-sf-operations), and `D_X K` is the actual relative derived
+internal Hom into it (`condensedPerverseDual`). Third, the support predicate is applied to `D_X K`.
 Source: latest blueprint, order 4191 (blueprint: def-per-support-condition). -/
 def CondensedCosupportCondition (ℓ : ℕ) [Fact ℓ.Prime]
-    {k : Type u} [Field k] [Invertible (ℓ : k)]
+    {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+    (hk : (Finite k ∨ IsAlgClosed k) ∧ ∀ x : k, x ≠ 0 → IsOfFinOrder x)
     (X : Over (Spec (.of k)))
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
-    (c : Compactification X.hom)
     (K : BoundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)) : Prop :=
-  CondensedSupportCondition ℓ (condensedPerverseDual ℓ X c K)
+  CondensedAmbientSupportCondition (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)
+    (condensedPerverseDual ℓ hk X K)
 
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -99,4 +99,22 @@ abbrev cohomology (C : Scheme.{u})
     (t : TStructure (ConstantModelBoundedConstructible Λ C)) (n : ℤ) :=
   shiftFunctor (ConstantModelBoundedConstructible Λ C) n ⋙ t.homology₀
 
+/-- Perverse Weil sheaves are the full subcategory of the recorded strict Weil pairs
+whose underlying geometric complex lies in the perverse heart.
+Source: current blueprint sk-lem-wft-curve-heart, Weil definition paragraph
+(blueprint: sk-lem-wft-curve-heart). -/
+abbrev WeilHeart {C : Scheme.{u}} (g : C ≅ C) :=
+  ObjectProperty.FullSubcategory
+    (fun K : Endofunctor.IsoAlgebra (CondensedRing.upperStar Λ g.hom).mapDerivedCategory ↦
+      heart Λ C K.carrier)
+
+/-- The canonical forgetful functor retains the carrier and its geometric derived arrow.
+The defining carrier property supplies exactly bounded constructibility and the
+geometric perverse conditions. Source: current blueprint sk-lem-wft-curve-heart, final paragraph
+(blueprint: sk-lem-wft-curve-heart). -/
+def forget {C : Scheme.{u}} (g : C ≅ C) :
+    WeilHeart Λ g ⥤ (heart Λ C).FullSubcategory where
+  obj K := ⟨K.obj.carrier, K.property⟩
+  map f := ObjectProperty.homMk f.hom.hom.f
+
 end AlgebraicGeometry.ProEtale.CondensedCurvePerverse

@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.ExplicitSmoothComparison.ExplicitSmoothAdjunctionData
 public import WeilConjectures.AlgebraicGeometry.PurityTransport.TransportAdjunctions
 public import Mathlib.CategoryTheory.Adjunction.Unique
+public import Mathlib.CategoryTheory.Adjunction.Restrict
 
 /-! # Identification with the restricted Brown adjoint
 
@@ -94,6 +95,36 @@ theorem comparisonBrownUnique
           (brown.counit.app ((inclusion ell c s.Y).obj K)).hom) ∧
       ∃! gamma : source ell c s.map s.dim a.source_closed ≅ exceptional ell c G hG,
         CounitCompatible a.adjunction brownCtf gamma := by
-  sorry
+  let iX := inclusion ell c s.X
+  let iY := inclusion ell c s.Y
+  let hiX : iX.FullyFaithful := by
+    dsimp only [iX, PurityTransport.inclusion]
+    exact ObjectProperty.fullyFaithfulιOfLE _
+  let hiY : iY.FullyFaithful := by
+    dsimp only [iY, PurityTransport.inclusion]
+    exact ObjectProperty.fullyFaithfulιOfLE _
+  let b : support ell c s.compactification a.support_closed ⊣ exceptional ell c G hG :=
+    brown.restrictFullyFaithful hiX hiY (Iso.refl _) (Iso.refl _)
+  refine ⟨b, ?_, a.adjunction.rightAdjointUniq b, ?_, ?_⟩
+  · intro K
+    have h := brown.map_restrictFullyFaithful_counit_app hiX hiY
+      (L := support ell c s.compactification a.support_closed)
+      (R := exceptional ell c G hG) (Iso.refl _) (Iso.refl _) K
+    have h' := congrArg (fun f ↦ f.hom) h
+    change (b.counit.app K).hom = 𝟙 _ ≫
+      (CondensedRing.rightDerivedLowerShriekOfCompactification
+        (c.obj ell) s.compactification).map (𝟙 _) ≫
+      (brown.counit.app (iY.obj K)).hom at h'
+    exact heq_of_eq (by
+      simpa only [CategoryTheory.Functor.map_id, CategoryTheory.Category.id_comp] using h')
+  · intro K
+    exact a.adjunction.rightAdjointUniq_hom_app_counit b K
+  · intro gamma hgamma
+    apply Iso.ext
+    apply NatTrans.ext
+    funext K
+    apply (b.homEquiv _ K).symm.injective
+    simpa only [Adjunction.homEquiv_counit,
+      Adjunction.rightAdjointUniq_hom_app_counit] using hgamma K
 
 end AlgebraicGeometry.ProEtale.ExplicitSmoothComparison

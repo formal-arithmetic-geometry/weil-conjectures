@@ -65,6 +65,11 @@ theorem action_inverse {T : Scheme.{u}} (g : T ≅ T) :
     Nonempty (action Λ g.symm ⋙ action Λ g ≅ 𝟭 _) := by
   sorry
 
+/-- The faithful forgetful functor of strict pairs.
+Source: latest blueprint, pair category paragraph (blueprint: sk-def-sf-weil-complexes). -/
+abbrev forget {T : Scheme.{u}} (g : T ≅ T) :=
+  CategoryTheory.Endofunctor.IsoAlgebra.forget (smallAction Λ g)
+
 section Native
 
 open CategoryTheory.Endofunctor.IsoAlgebra

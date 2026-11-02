@@ -106,6 +106,19 @@ def finiteCoverHigherImage (f : X ⟶ Y) (U : X.Opens) (q : ℕ) :
   upperStar (ModuleCat.{u + 1} B) U.ι ⋙
     (lowerStar (ModuleCat.{u + 1} B) (U.ι ≫ f)).rightDerived q
 
+/-- The canonical comparison computed on the restriction of an injective resolution.
+The restriction is exact and preserves injectives; no choice of a comparison map occurs.
+Source: Stacks 03AZ and 04JC
+(blueprint: lem-per-finite-open-cover-direct-image-spectral-sequence). -/
+def finiteCoverDerivedComparisonApp (f : X ⟶ Y) (U : X.Opens) (q : ℕ)
+    (M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)) :
+    ((finiteCoverOpenImage B f U).rightDerived q).obj M ≅
+      (finiteCoverHigherImage B f U q).obj M :=
+  Functor.compRightDerivedObjIso _ _ (fun I _ ↦ by
+    have := injective_upperStar_obj_of_etale B U.ι I
+    exact Functor.rightAcyclic_of_injective
+      ((upperStar (ModuleCat.{u + 1} B) U.ι).obj I)) q M
+
 /-- Canonical restriction from the image over U to that over V contained in U.
 It is the inverse/direct-image adjunction unit, followed by the canonical composition
 isomorphisms; on sections this is ordinary restriction, with its B-action.
@@ -437,6 +450,45 @@ def finiteOpenCoverRowAugmentation
   { f := fun q => finiteOpenCoverRowMap B f U J hB hId hComp q
     comm' := fun q r hqr ↦ hAug q r hqr }
 
+/-- The total augmentation `f_* J ⟶ Tot D`, by inclusion in bidegree `(0, q)`.
+Source: Stacks 03AZ, relative ordered variant, and homology.tex Tag 0133, step 6
+(blueprint: lem-per-finite-open-cover-direct-image-spectral-sequence). -/
+noncomputable def finiteOpenCoverTotalAugmentation
+    (f : X ⟶ Y) (m : ℕ) (U : Fin m → X.Opens)
+    (J : CochainComplex
+      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B) ⥤
+        Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)) ℕ)
+    (hB : ∀ p q : ℕ, HasBiproduct
+      (fun a : Fin (p + 1) ↪o Fin m ↦
+        J.X q ⋙ finiteCoverOpenImage B f (finiteCoverIntersection U a)))
+    (hId : ∀ V : X.Opens,
+      finiteOpenCoverColumnMap B f (V := V) (W := V) le_rfl J = 𝟙 _)
+    (hComp : ∀ (V W Z : X.Opens) (hVW : V ≤ W) (hWZ : W ≤ Z),
+      finiteOpenCoverColumnMap B f (V := V) (W := Z) (hVW.trans hWZ) J =
+        finiteOpenCoverColumnMap B f (V := W) (W := Z) hWZ J ≫
+          finiteOpenCoverColumnMap B f (V := V) (W := W) hVW J)
+    (hComm : ∀ (p q r : ℕ) (hqr : (ComplexShape.up ℕ).Rel q r),
+      finiteOpenCoverOrderedHorizontal B f U J hB p q ≫
+          ((finiteOpenCoverOrderedColumn B f U J hB (p + 1)).d q r) =
+        ((finiteOpenCoverOrderedColumn B f U J hB p).d q r) ≫
+          finiteOpenCoverOrderedHorizontal B f U J hB p r)
+    (hSq : ∀ p : ℕ,
+      finiteOpenCoverOrderedHorizontalHom B f U J hB hComm p ≫
+          finiteOpenCoverOrderedHorizontalHom B f U J hB hComm (p + 1) = 0)
+    (hAug : ∀ q r : ℕ, (ComplexShape.up ℕ).Rel q r →
+      finiteOpenCoverRowMap B f U J hB hId hComp q ≫
+          ((finiteOpenCoverOrderedColumn B f U J hB 0).d q r) =
+        (finiteOpenCoverSource B f J hId hComp).d q r ≫
+          finiteOpenCoverRowMap B f U J hB hId hComp r)
+    (hε : finiteOpenCoverRowAugmentation B f m U J hB hId hComp hComm hSq hAug ≫
+        (finiteOpenCoverResolutionDoubleComplex B f m U J hB hComm hSq).d 0 1 = 0) :
+    finiteOpenCoverSource B f J hId hComp ⟶
+      (finiteOpenCoverResolutionDoubleComplex B f m U J hB hComm hSq).total
+        (ComplexShape.up ℕ) :=
+  HomologicalComplex₂.toTotalOfAugmentation
+    (finiteOpenCoverResolutionDoubleComplex B f m U J hB hComm hSq)
+    (finiteOpenCoverRowAugmentation B f m U J hB hId hComp hComm hSq hAug) hε
+
 /-- Coherence data for the ordered Cech/injective-resolution construction: finite biproducts,
 functoriality of the restrictions, the double-complex equations and the row augmentation
 equations. All fields are propositions.
@@ -471,6 +523,34 @@ structure finiteOpenCoverOrderedData
         finiteOpenCoverRowMap B f U J hB hId hComp r
   hEps : finiteOpenCoverRowAugmentation B f m U J hB hId hComp hComm hSq hAug ≫
       (finiteOpenCoverResolutionDoubleComplex B f m U J hB hComm hSq).d 0 1 = 0
+
+/-- The step-6 row argument for the named ordered double complex.
+(blueprint: new-finite-open-cover-total-augmentation) -/
+theorem finite_open_cover_augmentation_quasiIso
+    (f : X ⟶ Y) (m : ℕ) (hm : 1 ≤ m) (U : Fin m → X.Opens) (hU : iSup U = ⊤)
+    (J : CochainComplex
+      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B) ⥤
+        Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)) ℕ)
+    (data : finiteOpenCoverOrderedData B f m U J)
+    (h₀ : ∀ q, Mono ((finiteOpenCoverRowAugmentation B f m U J data.hB data.hId
+      data.hComp data.hComm data.hSq data.hAug).f q))
+    (h₁ : ∀ q, (ShortComplex.mk
+      ((finiteOpenCoverRowAugmentation B f m U J data.hB data.hId data.hComp
+        data.hComm data.hSq data.hAug).f q)
+      (((finiteOpenCoverResolutionDoubleComplex B f m U J data.hB data.hComm data.hSq).d 0 1).f q)
+      (by rw [← HomologicalComplex.comp_f, data.hEps, HomologicalComplex.zero_f])).Exact)
+    (hrow : ∀ (p q : ℕ), (ShortComplex.mk
+      (((finiteOpenCoverResolutionDoubleComplex B f m U J data.hB data.hComm data.hSq).d p (p + 1)).f q)
+      (((finiteOpenCoverResolutionDoubleComplex B f m U J data.hB data.hComm data.hSq).d (p + 1) (p + 2)).f q)
+      (by rw [← HomologicalComplex.comp_f, HomologicalComplex.d_comp_d,
+        HomologicalComplex.zero_f])).Exact) :
+    QuasiIso (finiteOpenCoverTotalAugmentation B f m U J data.hB data.hId data.hComp
+      data.hComm data.hSq data.hAug data.hEps) := by
+  apply (finiteOpenCoverResolutionDoubleComplex B f m U J data.hB data.hComm
+    data.hSq).quasiIso_toTotalOfAugmentation
+  · exact h₀
+  · exact h₁
+  · exact hrow
 
 set_option maxHeartbeats 1200000 in
 -- The normalized first-page differential has several dependent functor-category composites.
@@ -975,5 +1055,326 @@ private def finiteCoverSourceHomologyIso (f : X ⟶ Y)
       inv_hom_id := by rw [← NatTrans.rightDerived_comp, e.hom_inv_id,
         NatTrans.rightDerived_id] }
   exact finiteCoverColumnHomologyIso B f ⊤ n ≪≫ e'
+
+/-- Core page data for the named ordered Cech double complex.
+The proof chooses an injective resolution, constructs the open-dependent coefficient and
+ordered biproduct rows, and applies the first-quadrant spectral-sequence comparison; the
+vertical comparison is the canonical restricted-resolution map and the horizontal map is
+the alternating deletion sum.
+(blueprint: new-finite-open-cover-page-data) -/
+theorem finite_open_cover_page_core
+    (f : X ⟶ Y) (m : ℕ) (hm : 1 ≤ m) (U : Fin m → X.Opens) (hU : iSup U = ⊤) :
+    ∃ (J : CochainComplex
+        (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B) ⥤
+          Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)) ℕ)
+      (data : finiteOpenCoverOrderedData B f m U J)
+      (c : ∀ (p q : ℕ) (a : Fin (p + 1) ↪o Fin m),
+        (finiteCoverOpenImage B f (finiteCoverIntersection U a)).rightDerived q ≅
+          finiteCoverHigherImage B f (finiteCoverIntersection U a) q)
+      (E : CohomologicalSpectralSequenceNat
+        (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B) ⥤
+          Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} B)) 1)
+      (e₁ : ∀ p q : ℕ, (E.page 1).X (p, q) ≅ finiteCoverPageOne B f U p q),
+      (∀ n : ℕ, Nonempty ((finiteOpenCoverSource B f J data.hId data.hComp).homology n ≅
+        (lowerStar (ModuleCat.{u + 1} B) f).rightDerived n)) ∧
+      (∀ q, Mono ((finiteOpenCoverRowAugmentation B f m U J data.hB data.hId
+        data.hComp data.hComm data.hSq data.hAug).f q)) ∧
+      (∀ q, (ShortComplex.mk
+        ((finiteOpenCoverRowAugmentation B f m U J data.hB data.hId data.hComp
+          data.hComm data.hSq data.hAug).f q)
+        (((finiteOpenCoverResolutionDoubleComplex B f m U J data.hB data.hComm data.hSq).d 0 1).f q)
+        (by rw [← HomologicalComplex.comp_f, data.hEps, HomologicalComplex.zero_f])).Exact) ∧
+      (∀ (p q : ℕ), (ShortComplex.mk
+        (((finiteOpenCoverResolutionDoubleComplex B f m U J data.hB data.hComm data.hSq).d
+        p (p + 1)).f q)
+        (((finiteOpenCoverResolutionDoubleComplex B f m U J data.hB data.hComm data.hSq).d
+        (p + 1) (p + 2)).f q)
+        (by rw [← HomologicalComplex.comp_f, HomologicalComplex.d_comp_d,
+          HomologicalComplex.zero_f])).Exact) ∧
+      CategoryTheory.SimplicialSlice.augmentationPagesFromTwo E =
+          HomologicalComplex₂.firstSpectralSequence
+            (finiteOpenCoverResolutionDoubleComplex B f m U J data.hB data.hComm data.hSq) ∧
+      (∀ (p q : ℕ) (a : Fin (p + 1) ↪o Fin m)
+        (M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)),
+        (c p q a).hom.app M =
+          (finiteCoverDerivedComparisonApp B f (finiteCoverIntersection U a) q M).hom) ∧
+      (∀ (p q : ℕ) (a : Fin (p + 2) ↪o Fin m),
+        (e₁ p q).inv ≫ (E.page 1).d (p, q) (p + 1, q) ≫ (e₁ (p + 1) q).hom ≫
+          finiteCoverPageOneProjection B f U (p + 1) q a =
+        ∑ j : Fin (p + 2), (-1 : ℤ) ^ (j : ℕ) •
+          (finiteCoverPageOneProjection B f U p q (j.succAboveOrderEmb.trans a) ≫
+            finiteCoverHigherRestriction B f
+              (U := finiteCoverIntersection U (j.succAboveOrderEmb.trans a))
+              (V := finiteCoverIntersection U a)
+              (le_iInf fun k ↦ iInf_le (fun l ↦ U (a l)) (j.succAbove k)) q
+              (c p q (j.succAboveOrderEmb.trans a)) (c (p + 1) q a))) := by
+  let J := finiteCoverInjectiveComplex (X := X) B
+  let data := finiteOpenCoverOrderedDataOfRestrictions B f U J
+    (finiteCoverImageRestriction_id B f) (finiteCoverImageRestriction_comp B f)
+  let c := fun p q (a : Fin (p + 1) ↪o Fin m) ↦
+    finiteCoverDerivedComparison B f (finiteCoverIntersection U a) q
+  let D := finiteOpenCoverResolutionDoubleComplex B f m U J data.hB data.hComm data.hSq
+  let E := D.firstSpectralSequenceFromOne
+  let e₁ := finiteCoverPageOneIso B f U data
+  have hI (q : ℕ) (M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)) :
+      Injective ((J.X q).obj M) := by
+    change Injective
+      (((𝟭 (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B))).nonnegativeInjectiveSyzygy
+        q).injectiveExtension.obj M)
+    infer_instance
+  obtain ⟨h₀, h₁⟩ := finite_open_cover_row_descent B f m hm U hU J data
+  have hrow := finite_open_cover_positive_rows_exact B f m hm U hU J hI data
+  refine ⟨J, data, c, E, e₁, ?_, h₀, h₁, hrow, ?_, ?_, ?_⟩
+  · intro n
+    exact ⟨finiteCoverSourceHomologyIso B f data.hId data.hComp n⟩
+  · rfl
+  · intro p q a M
+    rfl
+  · exact finiteCoverPageOneIso_d B f U data
+
+private lemma isZero_biproduct_of_isEmpty {C : Type*} [Category C] [Preadditive C]
+    {ι : Type*} {F : ι → C} [HasBiproduct F] [IsEmpty ι] : IsZero (⨁ F) := by
+  rw [IsZero.iff_id_eq_zero]
+  apply biproduct.hom_ext'
+  intro i
+  exact isEmptyElim i
+
+private lemma finiteCoverPageOne_isZero
+    (f : X ⟶ Y) {m : ℕ} (U : Fin m → X.Opens) (p q : ℕ) (hmp : m ≤ p) :
+    IsZero (finiteCoverPageOne B f U p q) := by
+  letI : IsEmpty (Fin (p + 1) ↪o Fin m) := by
+    constructor
+    intro a
+    have hc := Fintype.card_le_of_injective (a : Fin (p + 1) → Fin m) a.injective
+    simp only [Fintype.card_fin] at hc
+    omega
+  exact isZero_biproduct_of_isEmpty
+
+/-- Finite-column support for the named page data.
+The proof uses the absence of increasing tuples of length p+1 for p≥m and the
+first-quadrant page recursion, after transporting along e₁ and hE to the named complex.
+(blueprint: new-finite-open-cover-page-support) -/
+theorem finite_open_cover_page_support
+    (f : X ⟶ Y) (m : ℕ) (U : Fin m → X.Opens)
+    (J : CochainComplex
+      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B) ⥤
+        Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)) ℕ)
+    (data : finiteOpenCoverOrderedData B f m U J)
+    (E : CohomologicalSpectralSequenceNat
+      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B) ⥤
+        Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} B)) 1)
+    (e₁ : ∀ p q : ℕ, (E.page 1).X (p, q) ≅ finiteCoverPageOne B f U p q)
+    (hE : CategoryTheory.SimplicialSlice.augmentationPagesFromTwo E =
+      HomologicalComplex₂.firstSpectralSequence
+        (finiteOpenCoverResolutionDoubleComplex B f m U J data.hB data.hComm data.hSq)) :
+    (∀ (p q : ℕ) (r : ℤ) (hr : 1 ≤ r), m ≤ p →
+      IsZero ((E.page r hr).X (p, q))) ∧
+    (∀ (p q : ℕ) (r : ℤ) (hr : 1 ≤ r), max (p : ℤ) ((q : ℤ) + 1) < r →
+      Nonempty ((E.page r hr).X (p, q) ≅
+        (CategoryTheory.SimplicialSlice.augmentationPagesFromTwo E).pageInfinity
+          (p, q))) := by
+  let D := finiteOpenCoverResolutionDoubleComplex B f m U J data.hB data.hComm data.hSq
+  have hDcol (p q : ℕ) (hmp : m ≤ p) : IsZero (D.X p |>.X q) := by
+    dsimp [D, finiteOpenCoverResolutionDoubleComplex, finiteOpenCoverOrderedColumn]
+    letI := data.hB p q
+    letI : IsEmpty (Fin (p + 1) ↪o Fin m) := by
+      constructor
+      intro a
+      have hc := Fintype.card_le_of_injective (a : Fin (p + 1) → Fin m) a.injective
+      simp only [Fintype.card_fin] at hc
+      omega
+    exact isZero_biproduct_of_isEmpty
+  have hDpage2 (p q : ℕ) (hmp : m ≤ p) :
+      IsZero ((D.firstSpectralSequence.page 2).X (p, q)) := by
+    let H := (((HomologicalComplex.homologyFunctor
+      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B) ⥤
+        Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} B)) (ComplexShape.up ℕ) q).mapHomologicalComplex
+          (ComplexShape.up ℕ)).obj D)
+    have hH : IsZero (H.X p) := by
+      dsimp [H]
+      exact (HomologicalComplex.ExactAt.of_isZero (hDcol p q hmp)).isZero_homology
+    have hHH : IsZero (H.homology p) := (H.sc p).isZero_homology_of_isZero_X₂ hH
+    convert hHH.of_iso (D.firstSpectralSequencePageTwoIso p q) using 1
+  constructor
+  · intro p q r hr hmp
+    by_cases h1 : r = 1
+    · subst r
+      simpa using (finiteCoverPageOne_isZero B f U p q hmp).of_iso (e₁ p q)
+    · have hr2 : 2 ≤ r := by omega
+      change IsZero (((CategoryTheory.SimplicialSlice.augmentationPagesFromTwo E).page r hr2).X
+        (p, q))
+      rw [hE]
+      exact SpectralSequence.isZero_page_of_isZero_page_two
+        (hDpage2 p q hmp) r hr2
+  · intro p q r hr hbound
+    have hr2 : 2 ≤ r := by omega
+    change Nonempty (((CategoryTheory.SimplicialSlice.augmentationPagesFromTwo E).page r hr2).X
+        (p, q) ≅ (CategoryTheory.SimplicialSlice.augmentationPagesFromTwo E).pageInfinity (p, q))
+    rw [hE]
+    change Nonempty ((D.firstSpectralSequence.page r _).X (p, q) ≅
+      D.firstSpectralSequence.pageInfinity (p, q))
+    change Nonempty (((D.extendNat.columnFiltration.exactCouple.firstQuadrantSpectralSequence
+      D.extendNat_columnFiltration_isFirstQuadrant).page r hr2).X (p, q) ≅
+      (D.extendNat.columnFiltration.exactCouple.firstQuadrantSpectralSequence
+        D.extendNat_columnFiltration_isFirstQuadrant).pageInfinity (p, q))
+    rw [ExactCouple.firstQuadrantSpectralSequence_page_X
+      D.extendNat.columnFiltration.exactCouple
+      D.extendNat_columnFiltration_isFirstQuadrant r hr2]
+    rw [SpectralSequence.pageInfinity]
+    simp only [Prod.fst, Prod.snd]
+    norm_num
+    rw [ExactCouple.firstQuadrantSpectralSequence_page_X
+      D.extendNat.columnFiltration.exactCouple
+      D.extendNat_columnFiltration_isFirstQuadrant (↑(p + q + 2) : ℤ) (by omega)]
+    have hrnonneg : 0 ≤ r - 1 := by omega
+    let N₀ := max p (q + 1)
+    have hN' : ((N₀ : ℕ) : ℤ) ≤ r - 1 := by
+      dsimp [N₀]
+      omega
+    have hN : N₀ ≤ (r - 1).toNat := by
+      have hN'' : ((N₀ : ℕ) : ℤ) ≤ ((r - 1).toNat : ℤ) := by
+        rw [Int.toNat_of_nonneg hrnonneg]
+        exact hN'
+      exact_mod_cast hN''
+    have hNinf : N₀ ≤ p + q + 1 := by
+      dsimp [N₀]
+      omega
+    obtain ⟨eᵣ⟩ := D.extendNat.columnFiltration.exactCouple.nonempty_derivedIter_E_iso_of_isFirstQuadrant
+      D.extendNat_columnFiltration_isFirstQuadrant p (p + q) N₀
+      (by dsimp [N₀]; omega) (by dsimp [N₀]; omega) (r - 1).toNat hN
+    have heq : ((↑(p + q + 2) : ℤ) - 1).toNat = p + q + 1 := by
+      have heq' : ((((↑(p + q + 2) : ℤ) - 1).toNat : ℤ)) = p + q + 1 := by
+        rw [Int.toNat_of_nonneg (by omega)]
+        omega
+      exact_mod_cast heq'
+    obtain ⟨einf⟩ := D.extendNat.columnFiltration.exactCouple.nonempty_derivedIter_E_iso_of_isFirstQuadrant
+      D.extendNat_columnFiltration_isFirstQuadrant p (p + q) N₀
+      (by dsimp [N₀]; omega) (by dsimp [N₀]; omega)
+      ((↑(p + q + 2) : ℤ) - 1).toNat (by
+        have hsum : ((↑p + ↑q + 2 : ℤ).toNat) = p + q + 2 := by
+          have hsum' : ((((↑p + ↑q + 2 : ℤ).toNat : ℤ))) = p + q + 2 := by
+            rw [Int.toNat_of_nonneg (by omega)]
+          exact_mod_cast hsum'
+        simpa [hsum] using hNinf)
+    apply Nonempty.intro
+    simpa [Prod.fst, Prod.snd] using (eᵣ ≪≫ einf.symm)
+
+/-- Transport homology across the total augmentation of the named complex: a
+quasi-isomorphism `f_* J ⟶ Tot D` and `H^n(f_* J) ≅ R^n f_*` give `H^n(Tot D) ≅ R^n f_*`.
+Source: homology.tex Tag 0133, step 6
+(blueprint: lem-per-finite-open-cover-direct-image-spectral-sequence). -/
+theorem finite_open_cover_total_augmentation
+    (f : X ⟶ Y) (m : ℕ) (hm : 1 ≤ m) (U : Fin m → X.Opens) (hU : iSup U = ⊤)
+    (J : CochainComplex
+      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B) ⥤
+        Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)) ℕ)
+    (data : finiteOpenCoverOrderedData B f m U J)
+    (hAug : QuasiIso (finiteOpenCoverTotalAugmentation B f m U J data.hB data.hId
+      data.hComp data.hComm data.hSq data.hAug data.hEps))
+    (hSource : ∀ n : ℕ, Nonempty ((finiteOpenCoverSource B f J data.hId data.hComp).homology n ≅
+      (lowerStar (ModuleCat.{u + 1} B) f).rightDerived n)) :
+    ∀ n : ℕ, Nonempty ((((finiteOpenCoverResolutionDoubleComplex B f m U J data.hB
+      data.hComm data.hSq).total (ComplexShape.up ℕ)).homology n) ≅
+      (lowerStar (ModuleCat.{u + 1} B) f).rightDerived n) := by
+  intro n
+  letI := hAug
+  exact ⟨(isoOfQuasiIsoAt
+      (finiteOpenCoverTotalAugmentation B f m U J data.hB data.hId data.hComp
+        data.hComm data.hSq data.hAug data.hEps) n).symm ≪≫ (hSource n).some⟩
+
+private theorem finite_open_cover_abutment_of_total
+    (f : X ⟶ Y)
+    (m : ℕ) (U : Fin m → X.Opens)
+    (D : HomologicalComplex₂
+      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B) ⥤
+        Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} B))
+      (ComplexShape.up ℕ) (ComplexShape.up ℕ))
+    (E : CohomologicalSpectralSequenceNat
+      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B) ⥤
+        Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} B)) 1)
+    (hE : CategoryTheory.SimplicialSlice.augmentationPagesFromTwo E =
+      HomologicalComplex₂.firstSpectralSequence
+        D)
+    (hTot : ∀ n : ℕ, Nonempty (((D.total
+      (ComplexShape.up ℕ)).homology n) ≅
+      (lowerStar (ModuleCat.{u + 1} B) f).rightDerived n)) :
+    (CategoryTheory.SimplicialSlice.augmentationPagesFromTwo E).AbutsTo
+      (fun n : ℕ ↦ (lowerStar (ModuleCat.{u + 1} B) f).rightDerived n) := by
+  rw [hE]
+  exact (HomologicalComplex₂.firstSpectralSequence_abutsTo D).of_nonempty_iso hTot
+
+/-- The functorial ordered finite-open-cover direct-image spectral sequence, with its
+canonical first page, alternating differential, vanishing range and finite convergence.
+Source: Stacks 03AZ (relative ordered variant), 03FB, 03FC, 01FJ, 01FM and
+homology.tex, Tags 0130, 0132 and 0133
+(blueprint: lem-per-finite-open-cover-direct-image-spectral-sequence).
+
+Proof:
+1. Choose a nonnegative injective resolution M -> J in the Grothendieck category
+   of B-module etale sheaves, with coefficients in the universe of the site skeleton.
+2. Restriction to each intersection is exact and preserves injectives by etale
+   extension by zero. It therefore gives an injective resolution of the restriction.
+3. Form D^(p,q) = direct-sum_I (f_I)_*(J^q|_I), using increasing (p+1)-tuples.
+   Horizontal maps are alternating restrictions, and vertical maps come from J.
+   Double omissions cancel, giving a double complex with total differential
+   d_h + (-1)^p d_v, naturally on the target etale site and in B-modules.
+4. Exact module sheafification makes the underlying module presheaf of J^q
+   injective, by the exact-left-adjoint criterion. No forgetting of B is used.
+5. At V etale over Y, the pulled-back opens cover X x_Y V. Injective presheaf
+   Cech cocycle lifting and the all-tuple/ordered comparison give row exactness
+   in positive degrees. In degree zero use sheaf gluing. All products are finite.
+6. Kernels are sectionwise, so these are exact augmented sheaf rows. The column
+   augmentation f_*J -> Tot D is a quasi-isomorphism, with sign +1 in column zero.
+   Hence total cohomology is R^n f_*M.
+7. The column spectral sequence has the displayed E1. Finite sums commute with
+   cohomology. The restricted-resolution comparison is exactly the specified
+   comparison, and identifies d1 with alternating canonical restrictions.
+8. The double-complex spectral sequence gives stabilization and the finite image
+   filtration, with associated quotients E_infinity. Columns outside 0 <= p < m
+   vanish; the subsequent-page recursion preserves this vanishing.
+9. Lift M -> N to injective resolutions. Two lifts are homotopic; their column
+   maps agree on E1. The total homotopy in column p is (-1)^p times the restricted
+   homotopy; its horizontal terms cancel. It preserves the column filtration.
+   Comparisons between resolutions and composition of lifts give functoriality
+   of pages, identifications, abutment and filtration in M.
+-/
+theorem finite_open_cover_direct_image_spectral_sequence
+    (f : X ⟶ Y) (m : ℕ) (hm : 1 ≤ m) (U : Fin m → X.Opens) (hU : iSup U = ⊤) :
+    ∃ (c : ∀ (p q : ℕ) (a : Fin (p + 1) ↪o Fin m),
+        (finiteCoverOpenImage B f (finiteCoverIntersection U a)).rightDerived q ≅
+          finiteCoverHigherImage B f (finiteCoverIntersection U a) q)
+      (E : CohomologicalSpectralSequenceNat
+        (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B) ⥤
+          Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} B)) 1)
+      (e₁ : ∀ p q : ℕ, (E.page 1).X (p, q) ≅ finiteCoverPageOne B f U p q),
+      (∀ (p q : ℕ) (a : Fin (p + 1) ↪o Fin m)
+        (M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)),
+        (c p q a).hom.app M =
+          (finiteCoverDerivedComparisonApp B f (finiteCoverIntersection U a) q M).hom) ∧
+      (∀ (p q : ℕ) (a : Fin (p + 2) ↪o Fin m),
+        (e₁ p q).inv ≫ (E.page 1).d (p, q) (p + 1, q) ≫ (e₁ (p + 1) q).hom ≫
+          finiteCoverPageOneProjection B f U (p + 1) q a =
+        ∑ j : Fin (p + 2), (-1 : ℤ) ^ (j : ℕ) •
+          (finiteCoverPageOneProjection B f U p q (j.succAboveOrderEmb.trans a) ≫
+            finiteCoverHigherRestriction B f
+              (U := finiteCoverIntersection U (j.succAboveOrderEmb.trans a))
+              (V := finiteCoverIntersection U a)
+              (le_iInf fun k ↦ iInf_le (fun l ↦ U (a l)) (j.succAbove k)) q
+              (c p q (j.succAboveOrderEmb.trans a)) (c (p + 1) q a))) ∧
+      (∀ (p q : ℕ) (r : ℤ) (hr : 1 ≤ r), m ≤ p →
+        IsZero ((E.page r hr).X (p, q))) ∧
+      (∀ (p q : ℕ) (r : ℤ) (hr : 1 ≤ r), max (p : ℤ) ((q : ℤ) + 1) < r →
+        Nonempty ((E.page r hr).X (p, q) ≅
+          (CategoryTheory.SimplicialSlice.augmentationPagesFromTwo E).pageInfinity (p, q))) ∧
+      (CategoryTheory.SimplicialSlice.augmentationPagesFromTwo E).AbutsTo
+        (fun n : ℕ ↦ (lowerStar (ModuleCat.{u + 1} B) f).rightDerived n) := by
+  obtain ⟨J, data, c, E, e₁, hSource, h₀, h₁, hrow, hE, hc, hd⟩ :=
+    finite_open_cover_page_core B f m hm U hU
+  obtain ⟨hz, hs⟩ := finite_open_cover_page_support B f m U J data E e₁ hE
+  have hQ := finite_open_cover_augmentation_quasiIso B f m hm U hU J data h₀ h₁ hrow
+  have hTot := finite_open_cover_total_augmentation B f m hm U hU J data hQ hSource
+  have hab := finite_open_cover_abutment_of_total B f m U
+    (finiteOpenCoverResolutionDoubleComplex B f m U J data.hB data.hComm data.hSq) E hE hTot
+  exact ⟨c, E, e₁, hc, hd, hz, hs, hab⟩
 
 end AlgebraicGeometry.Etale

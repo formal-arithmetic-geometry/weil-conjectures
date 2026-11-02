@@ -39,6 +39,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.B
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
 public import WeilConjectures.AlgebraicGeometry.Adic.AdicConstructibilityPredicateComparison
 
+public import WeilConjectures.AlgebraicGeometry.TwistModelComparison
+
 /-! # Strict Weil complexes with actual condensed coefficients
 
 Source: latest blueprint, part-duality-trace-formula/
@@ -108,6 +110,16 @@ theorem action_mem {T : Scheme.{u}} (g : T ≅ T)
     (K : ConstantModelConstructibleFiniteTor Λ T) :
     (constantModelBoundedConstructible Λ T ⊓ fun L ↦
       DerivedCategory.finiteTorAmplitude _ L) ((action Λ g).obj K.obj) := by
+  sorry
+
+/-- The inverse of the exact derived action is pullback by the inverse automorphism.
+Source: latest blueprint, inverse and monoidal equivalence clauses
+(blueprint: sk-def-sf-weil-complexes).
+Proof: inverse image composition and identity comparisons give both functor isomorphisms
+on modules. Exact-functor localization descends them to the ordinary derived categories. -/
+theorem action_inverse {T : Scheme.{u}} (g : T ≅ T) :
+    Nonempty (action Λ g ⋙ action Λ g.symm ≅ 𝟭 _) ∧
+    Nonempty (action Λ g.symm ⋙ action Λ g ≅ 𝟭 _) := by
   sorry
 
 /-- Frobenius pullback as an endofunctor of the actual Dctf full subcategory.
@@ -279,6 +291,21 @@ def nativeComparison (ell : ℕ) [Fact ell.Prime] [IsNoetherian T]
         h := ObjectProperty.hom_ext _
           ((WeilConjectures.condensedWeilDerivedStructure Λ g.hom).hom.naturality f.hom) } }
 
+/-- Geometric Frobenius on the geometric point, written directly with Spec.
+Source: latest blueprint, point example (blueprint: sk-def-sf-weil-complexes). -/
+def pointFrobenius (D : WeilConjectures.FiniteFieldDatum.{u}) :
+    Aut (Spec (.of D.k)) :=
+  letI := Fintype.ofFinite D.k₀
+  Scheme.Spec.mapIso
+    (FiniteField.geometricFrobeniusAlgEquivOfAlgebraic D.k₀ D.k).toRingEquiv.toCommRingCatIso.op
+
+/-- The ordinary coefficient unit with its coefficient-unit Weil structure.
+Source: latest blueprint, phi_Lambda and the point example
+(blueprint: sk-def-sf-weil-complexes). -/
+def unitWeilModule {T : Scheme.{u}} (g : T ≅ T) : WeilModule Λ g :=
+  CategoryTheory.Endofunctor.IsoAlgebra.mk (𝟙_ _)
+    (Functor.Monoidal.εIso (upperStar Λ g.hom)).symm
+
 /-- The ambient comparison is exactly the dependency's realization after its inclusion.
 Source: latest blueprint, K maps to (For K, theta_K)
 (blueprint: sk-def-sf-weil-complexes). -/
@@ -424,6 +451,49 @@ def tateLine (T : Scheme.{u}) (r : ℤ) :
     Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj (c.obj ell) T) :=
   spInternalSignedTwist T (condensedRingObj (c.obj ell) T) (c.firstLine ell T) r
 
+/-- Multiplication by q is invertible on the coefficient unit in every admissible stage.
+Source: latest blueprint, q inverse in Z_ell units (blueprint: sk-def-sf-weil-complexes).
+Proof: ell differs from p and q is a power of p, so q is an ell-adic unit.
+Its inverse passes through each specified integral coefficient map, including a finite
+quotient and the zero ring, and gives a two-sided inverse to scalar multiplication. -/
+theorem cardinal_scalar_isIso (D : WeilConjectures.FiniteFieldDatum.{u})
+    (hEll : ell ≠ D.p) (T : Scheme.{u}) :
+    IsIso (D.q • 𝟙 (𝟙_ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
+      (condensedRingObj (c.obj ell) T)))) := by
+  sorry
+
+/-- The scalar q^(-r) on the coefficient unit, using the actual inverse of multiplication q.
+Source: latest blueprint, signed normalization (blueprint: sk-def-sf-weil-complexes). -/
+def cardinalScalar (D : WeilConjectures.FiniteFieldDatum.{u})
+    (hEll : ell ≠ D.p) (T : Scheme.{u}) (r : ℤ) :
+    Aut (𝟙_ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
+      (condensedRingObj (c.obj ell) T))) :=
+  letI := cardinal_scalar_isIso ell c D hEll T
+  let a : Aut (𝟙_ (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
+      (condensedRingObj (c.obj ell) T))) := asIso (D.q • 𝟙 _)
+  a ^ (-r)
+
+/-- In any root-line frame over the geometric point the specified datum has scalar q^(-r).
+The unit power has scalar 1 and the negative power has the inverse scalar.
+Source: latest blueprint, Tate normalization paragraph
+(blueprint: sk-def-sf-weil-complexes).
+Proof: geometric field Frobenius is the inverse q-power automorphism; hence on each
+ell-power root it is the inverse q-power map. The projection normalization of
+integralTatePull passes these equalities to the inverse limit. Scalar extension retains
+them. Tensor powers multiply scalars, while the inverse in the contravariant Hom slot
+inverts them on the dual. Zero uses exactly the coefficient-unit isomorphism. Every
+change of root frame is coefficient-linear with Frobenius-fixed coefficient, so the
+same scalar equation holds in any frame. -/
+theorem tatePull_scalar (D : WeilConjectures.FiniteFieldDatum.{u})
+    (hEll : ell ≠ D.p)
+    [∀ x : Spec (.of D.k), Invertible (ell : (Spec (.of D.k)).residueField x)]
+    (r : ℤ) (e : tateLine ell c (Spec (.of D.k)) r ≅ 𝟙_ _) :
+    tatePull ell c (pointFrobenius D) r =
+      (upperStar (c.obj ell) (pointFrobenius D).hom).mapIso e ≪≫
+        (Functor.Monoidal.εIso (upperStar (c.obj ell) (pointFrobenius D).hom)).symm ≪≫
+        cardinalScalar ell c D hEll (Spec (.of D.k)) r ≪≫ e.symm := by
+  sorry
+
 /-- The actual Tate sheaf placed in degree zero.
 Source: latest blueprint, Tate sheaves in degree zero (blueprint: sk-def-sf-weil-complexes). -/
 def derivedTateLine (T : Scheme.{u}) (r : ℤ) : c.derived ell T :=
@@ -437,6 +507,28 @@ def tateDatum {T : Scheme.{u}} (g : T ≅ T)
     (action (c.obj ell) g).obj (derivedTateLine ell c T r) ≅ derivedTateLine ell c T r :=
   ((upperStar (c.obj ell) g.hom).mapDerivedCategorySingleFunctor 0).app _ ≪≫
     (DerivedCategory.singleFunctor _ 0).mapIso (tatePull ell c g r)
+
+/-- The signed Tate line in degree zero belongs to the actual Dctf.
+Source: latest blueprint, Tate sheaves with their canonical Weil structures
+(blueprint: sk-def-sf-weil-complexes).
+Proof: a compatible primitive-root cover trivializes the first integral line and
+all its finite, integral, rational and Qbar scalar extensions. The same cover
+trivializes the unit, tensor powers and duals. The signed line is thus locally free
+of rank one, constructible and flat; its degree-zero complex has Tor interval [0,0]. -/
+theorem tate_mem (T : Scheme.{u})
+    [∀ x : T, Invertible (ell : T.residueField x)] (r : ℤ) :
+    (constantModelBoundedConstructible (c.obj ell) T ⊓ fun L ↦
+      DerivedCategory.finiteTorAmplitude _ L) (derivedTateLine ell c T r) := by
+  sorry
+
+/-- The actual signed Tate sheaf with its root-normalized strict Weil structure.
+Source: latest blueprint, tau_r on the Tate sheaf
+(blueprint: sk-def-sf-weil-complexes). -/
+def tateComplex {T : Scheme.{u}} (g : T ≅ T)
+    [∀ x : T, Invertible (ell : T.residueField x)] (r : ℤ) : Complex (c.obj ell) g :=
+  CategoryTheory.Endofunctor.IsoAlgebra.mk
+    ⟨derivedTateLine ell c T r, tate_mem ell c T r⟩
+    (ObjectProperty.isoMk _ (tateDatum ell c g r))
 
 end AlgebraicGeometry.ProEtale.CondensedRing.StrictWeilCondensed
 
