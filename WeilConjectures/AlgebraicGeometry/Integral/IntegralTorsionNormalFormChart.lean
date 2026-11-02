@@ -12,6 +12,7 @@ public import Mathlib.LinearAlgebra.Basis.Defs
 public import Mathlib.CategoryTheory.Limits.Shapes.BinaryBiproducts
 public import WeilConjectures.Mathlib.Algebra.Module.PID
 import WeilConjectures.AlgebraicGeometry.Integral.IntegralConstantFreeChart
+import WeilConjectures.AlgebraicGeometry.Integral.IntegralTorsionTorTransport
 
 /-!
 # Torsion normal form on a perfect chart
@@ -133,6 +134,32 @@ theorem chart_free_sheaf (T : Scheme.{u}) {S : Scheme.{u}} (g : S ⟶ T) (r : �
           (ModuleCat.of (PbcIntegralRing l E) (Fin r →₀ PbcIntegralRing l E))) ≅ F) := by
   exact exists_basis_pullback_integralConstantModule_free (pbcIntegralDatum l E) g r
 
+/-- On the base, the consecutive-quotient Tor sheaf of the realization of a perfect complex
+surjects, after restriction of scalars, onto the cokernel of the uniformizer on the
+realization of the torsion summand of its degree-`q` cohomology.
+Source: Bhatt--Scholze, Proposition 6.6.11; step 5 of
+`lem-weil-pbc-adic-tor-implies-flat-cohomology`
+(blueprint: lem-weil-pbc-integral-cohomology-torsion-normal-form). -/
+theorem tor_const_epi (T : Scheme.{u}) (q : ℤ)
+    (C : completedConstantDerived (ModuleCat.{u + 1} (PbcIntegralRing l E)))
+    (hC : @DerivedCategory.IsPerfectRingComplex _ _ (HasDerivedCategory.standard _) C)
+    (r : ℕ) (N₀ : ModuleCat.{u + 1} (PbcIntegralRing l E))
+    (ε : (DerivedCategory.homologyFunctor (ModuleCat.{u + 1} (PbcIntegralRing l E)) q).obj C ≅
+      ModuleCat.of (PbcIntegralRing l E) (Fin r →₀ PbcIntegralRing l E) ⊞ N₀)
+    (k : ℕ) (hk : ∀ x : N₀, pbcUniformizer l E ^ k • x = 0) :
+    let d := pbcIntegralDatum l E
+    ∃ n : ℕ, ∃ t : (pbcRestrict (pbcAdicProjection T d n)).obj
+        ((DerivedCategory.homologyFunctor _ (-1)).obj
+          ((pbcDerivedExtend (pbcAdicQuotient T d (n + 1) n (Nat.le_succ n))).obj
+            ((DerivedCategory.singleFunctor _ 0).obj
+              ((DerivedCategory.homologyFunctor _ q).obj
+                ((pbcCompletedReduction T d (n + 1)).obj
+                  ((integralConstantDerived T d).obj C)))))) ⟶
+        cokernel ((integralConstantModule T d).map
+          (ModuleCat.ofHom (pbcUniformizer l E • LinearMap.id : N₀ →ₗ[_] N₀))),
+      Epi t := by
+  sorry
+
 /-- On a perfect chart, the consecutive-quotient Tor sheaf surjects onto the cokernel of
 the uniformizer on the realization of the torsion summand of the cohomology module.
 Source: Bhatt--Scholze, Proposition 6.6.11; step 5 of
@@ -164,7 +191,24 @@ theorem chart_tor_epi (T : Scheme.{u}) {S : Scheme.{u}} (g : S ⟶ T)
         cokernel (P.map ((integralConstantModule T d).map
           (ModuleCat.ofHom (pbcUniformizer l E • LinearMap.id : N₀ →ₗ[_] N₀)))),
       Epi t := by
-  sorry
+  intro d tor P
+  obtain ⟨n, t₀, ht₀⟩ := tor_const_epi T q C hC r N₀ ε k hk
+  obtain ⟨eT⟩ := nonempty_pullback_tor_iso d g q n e
+  let a := proEtaleRingRestrictionPullbackInv g (pbcAdicCompletion T d)
+    ((pbcAdicRings T d).obj (op n)) ((adicTowerInverseImage g).obj (pbcAdicCompletion T d))
+    ((adicTowerInverseImage g).obj ((pbcAdicRings T d).obj (op n)))
+    (pbcAdicProjection T d n) ((adicTowerInverseImage g).map (pbcAdicProjection T d n))
+    (Iso.refl _) (Iso.refl _) (by simp)
+  haveI := proEtaleRingRestrictionPullbackInv_isIso g (pbcAdicCompletion T d)
+    ((pbcAdicRings T d).obj (op n)) ((adicTowerInverseImage g).obj (pbcAdicCompletion T d))
+    ((adicTowerInverseImage g).obj ((pbcAdicRings T d).obj (op n)))
+    (pbcAdicProjection T d n) ((adicTowerInverseImage g).map (pbcAdicProjection T d n))
+    (Iso.refl _) (Iso.refl _) (by simp)
+  let φ := (integralConstantModule T d).map
+    (ModuleCat.ofHom (pbcUniformizer l E • LinearMap.id : N₀ →ₗ[_] N₀))
+  refine ⟨n, (pbcRestrict _).map eT.hom ≫ inv (a.app _) ≫ P.map t₀ ≫
+    (PreservesCokernel.iso P φ).hom, ?_⟩
+  infer_instance
 
 end Helpers
 
