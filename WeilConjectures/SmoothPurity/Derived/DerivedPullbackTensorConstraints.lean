@@ -1589,24 +1589,16 @@ private theorem pullbackTensorCommonLeftUnitor_existsUnique_aux (W : Scheme.{u})
   have hTobj : (commonStageDerivedTensor l Ω W).obj (U, M) = A :=
     (scalarUnit_chosen_spec (commonStageDerivedTensor_existsUnique l Ω W)
       (commonStageDerivedTensor l Ω W) (by unfold commonStageDerivedTensor; rfl)).1 U M
-  have hspec : ∀ (L : AlgebraicallyClosedCoefficients.Index l Ω) (h : A.stage ≤ L),
-      HEq (eqToIso hTobj ≪≫ d).hom (ofHom A M L h (hm.trans h)
-        ((commonStageTensorComparison l Ω W U M L h).hom ≫
-          (rationalDerivedTensor l
-            (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) W).map
-            (Prod.mkHom (pullbackTensorCommonUnitStage l Ω W L (hb.trans h)).hom (𝟙 _)) ≫
-          (pullbackTensorRationalLeftUnitor l
-            (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) W
-            (M.toStage (hm.trans h))).hom)) := by
-    intro L h
+  apply existsUnique_of_exists_of_unique
+  · refine ⟨eqToIso hTobj ≪≫ d, fun L h ↦ ?_⟩
     rw [Iso.trans_hom, eqToIso.hom, hd L h]
     refine (eqToHom_comp_heq _ _).trans (heq_of_eq ?_)
     dsimp only [GeneralAlgebraicallyClosedCoefficients.ofHom]
     apply congrArg (StageSystem.PairCategory.mkHom (X := A) (Y := M) L h (hm.trans h))
     rw [commonStageTensorComparison_endpoint]
     exact stageLeftUnitorRep_hom_eq S T c Un e lu hb hm M.obj h
-  exact ⟨eqToIso hTobj ≪≫ d, hspec, fun d' hd' ↦
-    Iso.ext (eq_of_heq ((hd' _ le_rfl).trans (hspec _ le_rfl).symm))⟩
+  · intro y₁ y₂ h₁ h₂
+    exact Iso.ext (eq_of_heq ((h₁ _ le_rfl).trans (h₂ _ le_rfl).symm))
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
@@ -1678,24 +1670,16 @@ private theorem pullbackTensorCommonRightUnitor_existsUnique_aux (W : Scheme.{u}
   have hTobj : (commonStageDerivedTensor l Ω W).obj (M, U) = A :=
     (scalarUnit_chosen_spec (commonStageDerivedTensor_existsUnique l Ω W)
       (commonStageDerivedTensor l Ω W) (by unfold commonStageDerivedTensor; rfl)).1 M U
-  have hspec : ∀ (L : AlgebraicallyClosedCoefficients.Index l Ω) (h : A.stage ≤ L),
-      HEq (eqToIso hTobj ≪≫ d).hom (ofHom A M L h (hm.trans h)
-        ((commonStageTensorComparison l Ω W M U L h).hom ≫
-          (rationalDerivedTensor l
-            (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) W).map
-            (Prod.mkHom (𝟙 _) (pullbackTensorCommonUnitStage l Ω W L (hb.trans h)).hom) ≫
-          (pullbackTensorRationalRightUnitor l
-            (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) W
-            (M.toStage (hm.trans h))).hom)) := by
-    intro L h
+  apply existsUnique_of_exists_of_unique
+  · refine ⟨eqToIso hTobj ≪≫ d, fun L h ↦ ?_⟩
     rw [Iso.trans_hom, eqToIso.hom, hd L h]
     refine (eqToHom_comp_heq _ _).trans (heq_of_eq ?_)
     dsimp only [GeneralAlgebraicallyClosedCoefficients.ofHom]
     apply congrArg (StageSystem.PairCategory.mkHom (X := A) (Y := M) L h (hm.trans h))
     rw [commonStageTensorComparison_endpoint]
     exact stageRightUnitorRep_hom_eq S T c Un e ru hb hm M.obj h
-  exact ⟨eqToIso hTobj ≪≫ d, hspec, fun d' hd' ↦
-    Iso.ext (eq_of_heq ((hd' _ le_rfl).trans (hspec _ le_rfl).symm))⟩
+  · intro y₁ y₂ h₁ h₂
+    exact Iso.ext (eq_of_heq ((h₁ _ le_rfl).trans (h₂ _ le_rfl).symm))
 
 end CommonUnitorTransport
 
