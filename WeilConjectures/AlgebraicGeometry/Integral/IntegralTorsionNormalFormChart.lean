@@ -175,7 +175,8 @@ theorem tor_const_epi (T : Scheme.{u}) (q : ℤ)
     obtain ⟨c, rfl⟩ := hx
     rw [mul_comm, mul_smul, show k + 1 + 1 = (2 : ℕ) + k by omega, pow_add, mul_smul, hk,
       smul_zero, smul_zero]
-  obtain ⟨s, r', hsr⟩ := exists_homology_reduction_retraction d.ideal (k + 1 + 1) P hP q _ N₀
+  obtain ⟨s, r', hsr⟩ :=
+    ModuleCat.exists_homology_reduction_retraction d.ideal (k + 1 + 1) P hP q _ N₀
     εP hk'
   obtain ⟨eH⟩ := nonempty_reduction_homology_iso T d q C P a b ha hb hP e (k + 1)
   obtain ⟨eT⟩ := nonempty_tor_constant_iso T d k (((((ModuleCat.extendScalars.{u + 1, u + 1, u + 1}
@@ -184,7 +185,8 @@ theorem tor_const_epi (T : Scheme.{u}) (q : ℤ)
   have hk1 : ∀ x : N₀, pbcUniformizer l E ^ (k + 1) • x = 0 := by
     intro x
     rw [pow_succ, mul_comm, mul_smul, hk, smul_zero]
-  obtain ⟨t, ht⟩ := exists_levelTor_epi d.ideal k (pbcUniformizer l E) hπ.ne_zero rfl _ N₀ s r'
+  obtain ⟨t, ht⟩ :=
+    ModuleCat.exists_levelTor_epi d.ideal k (pbcUniformizer l E) hπ.ne_zero rfl _ N₀ s r'
     hsr hk1
   let φ := ModuleCat.ofHom (pbcUniformizer l E • LinearMap.id : N₀ →ₗ[PbcIntegralRing l E] N₀)
   have hX : ∀ x ∈ d.ideal ^ (k + 1),
@@ -215,7 +217,7 @@ theorem tor_const_epi (T : Scheme.{u}) (q : ℤ)
   exact epi_comp _ _
 
 /-- On a perfect chart, the consecutive-quotient Tor sheaf surjects onto the cokernel of
-the uniformizer on the realization of the torsion summand of the cohomology module.
+the uniformizer on the realization of the torsion summand of its cohomology module.
 Source: Bhatt--Scholze, Proposition 6.6.11; step 5 of
 `lem-weil-pbc-adic-tor-implies-flat-cohomology`
 (blueprint: lem-weil-pbc-integral-cohomology-torsion-normal-form). -/

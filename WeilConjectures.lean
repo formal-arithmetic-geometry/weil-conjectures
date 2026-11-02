@@ -16073,6 +16073,7 @@ public import WeilConjectures.RingTheory.QuotientAssociatedPrimesFlatBaseChange
 public import WeilConjectures.RingTheory.QuotientAwayClearing
 public import WeilConjectures.RingTheory.QuotientGRing
 public import WeilConjectures.RingTheory.QuotientHenselianPair
+public import WeilConjectures.RingTheory.QuotientLevelTor
 public import WeilConjectures.RingTheory.QuotientSectionFactorTransfer
 public import WeilConjectures.RingTheory.ReducedNoetherianTotalRingFractions
 public import WeilConjectures.RingTheory.ReducedNormalIffIntegrallyClosedTotalFractions
