@@ -17,6 +17,12 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Low
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TorAmplitude
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ConstructibleUpperShriek
 
+import WeilConjectures.AlgebraicGeometry.EtaleRestrictScalarsFunctorComparisons
+import WeilConjectures.AlgebraicGeometry.Compact.CompactSupportCoefficientChange
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MonoidalStructure
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriek
+import WeilConjectures.AlgebraicGeometry.CoefficientChange.CoefficientTransformationComparisons
+
 /-!
 # The basic operations and reduction of the coefficients
 
@@ -71,11 +77,50 @@ independently elaborated instances, which does not terminate in practice.
 
 @[expose] public section
 
+-- Elaborate the derived-category helpers sequentially to bound memory use.
+set_option Elab.async false
+
 universe u
 
 open CategoryTheory Opposite
 
 open scoped CategoryTheory.Functor
+
+noncomputable section
+open CategoryTheory.Limits CategoryTheory.MonoidalCategory
+namespace CategoryTheory.Sheaf
+variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
+  (J : GrothendieckTopology C) {A B : Type (u + 1)} [CommRing A] [CommRing B]
+  (φ : A →+* B)
+
+attribute [local instance 2000] CommRing.toRing
+attribute [local instance high] SymmetricCategory.toBraidedCategory
+
+omit [EssentiallySmall.{u + 1} C] in
+private lemma coefficientCountableCoproducts (R : Type (u + 1)) [CommRing R] :
+    HasCountableCoproducts (Sheaf J (ModuleCat.{u + 1} R)) :=
+  ⟨fun _ _ => (inferInstance : HasColimitsOfSize.{0, 0}
+    (Sheaf J (ModuleCat.{u + 1} R))).has_colimits_of_shape _⟩
+
+attribute [local instance] coefficientCountableCoproducts
+
+private lemma scalar_preservesKFlatQuasiIso :
+    (extendScalars J φ).PreservesKFlatQuasiIso := by
+  let : Algebra A B := φ.toAlgebra
+  have := reflectsIsomorphisms_restrictScalars J φ
+  exact ⟨fun hK hL f _ => CochainComplex.quasiIso_map_of_iso_tensorRight _ _
+    (extendScalarsCompRestrictScalarsIso J A B) f hK hL⟩
+
+@[irreducible] private noncomputable def scalarDerivedAdjunction :
+    have := scalar_preservesKFlatQuasiIso J φ
+    (extendScalars J φ).leftDerivedFunctor ⊣ derivedRestrictScalars J φ :=
+  have := scalar_preservesKFlatQuasiIso J φ
+  (extendScalarsAdjunction J φ).derivedAdjunction.ofNatIsoRight
+    (restrictScalars J φ).rightDerivedFunctorIsoMapDerivedCategory
+
+end CategoryTheory.Sheaf
+
+end
 
 namespace AlgebraicGeometry
 
@@ -534,6 +579,256 @@ structure CoefficientChangeCompatibility : Prop where
     [FiniteDimensional ℚ_[l] E] [Algebra ℚ_[l] E'] [IsScalarTower ℚ_[l] E' (PadicAlgCl l)]
     [FiniteDimensional ℚ_[l] E'] [Small.{u + 1} E] [Small.{u + 1} E'] :
     ProEtale.ScalarExtensionCompatibility.{u} l E E'
+
+section CoefficientProofs
+
+-- Keep derived-functor constructions folded while checking their comparisons.
+attribute [local irreducible] Functor.leftDerivedFunctor Functor.rightDerivedFunctor
+  Functor.mapDerivedCategory
+
+-- Elaborate each large proof before starting the next one.
+set_option Elab.async false
+
+open CategoryTheory.Limits CategoryTheory.MonoidalCategory
+
+ -- Use the generic commutative coefficient ring instance in proof constructions.
+attribute [local instance 2000] CommRing.toRing
+
+private lemma coefficientUnit
+    {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
+    (J : GrothendieckTopology C)
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
+    {S : DerivedCategory (Sheaf J (ModuleCat.{u + 1} A)) ⥤
+      DerivedCategory (Sheaf J (ModuleCat.{u + 1} B))}
+    (ad : S ⊣ Sheaf.derivedRestrictScalars J φ)
+    (K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} A))) :
+    Sheaf.IsDerivedBaseChange (ad.unit.app K) := by
+  intro N
+  convert (ad.homEquiv K N).bijective using 1
+  funext g
+  exact (ad.homEquiv_unit K N g).symm
+
+private lemma coefficientIso
+    {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
+    (J : GrothendieckTopology C)
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
+    {S : DerivedCategory (Sheaf J (ModuleCat.{u + 1} A)) ⥤
+      DerivedCategory (Sheaf J (ModuleCat.{u + 1} B))}
+    (ad : S ⊣ Sheaf.derivedRestrictScalars J φ)
+    {K : DerivedCategory (Sheaf J (ModuleCat.{u + 1} A))}
+    {K' : DerivedCategory (Sheaf J (ModuleCat.{u + 1} B))}
+    {η : K ⟶ (Sheaf.derivedRestrictScalars J φ).obj K'}
+    (hη : Sheaf.IsDerivedBaseChange η) : Nonempty (S.obj K ≅ K') := by
+  have := (coefficientUnit J φ ad K).isIso hη ((ad.homEquiv K K').symm η)
+    ((ad.homEquiv_unit K K' _).symm.trans ((ad.homEquiv K K').apply_symm_apply η))
+  exact ⟨asIso ((ad.homEquiv K K').symm η)⟩
+
+private lemma coefficientArrow
+    {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
+    (J : GrothendieckTopology C)
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
+    {S : DerivedCategory (Sheaf J (ModuleCat.{u + 1} A)) ⥤
+      DerivedCategory (Sheaf J (ModuleCat.{u + 1} B))}
+    (ad : S ⊣ Sheaf.derivedRestrictScalars J φ)
+    {K L : DerivedCategory (Sheaf J (ModuleCat.{u + 1} A))} (a : K ⟶ L)
+    {K' L' : DerivedCategory (Sheaf J (ModuleCat.{u + 1} B))} (b : K' ⟶ L')
+    (e : Nonempty (Arrow.mk (S.map a) ≅ Arrow.mk b)) :
+    ∃ (θ₁ : K ⟶ (Sheaf.derivedRestrictScalars J φ).obj K')
+      (θ₂ : L ⟶ (Sheaf.derivedRestrictScalars J φ).obj L'),
+      Sheaf.IsDerivedBaseChange θ₁ ∧ Sheaf.IsDerivedBaseChange θ₂ ∧
+      θ₁ ≫ (Sheaf.derivedRestrictScalars J φ).map b = a ≫ θ₂ := by
+  obtain ⟨e⟩ := e
+  let l : S.obj K ≅ K' := Arrow.leftFunc.mapIso e
+  let r : S.obj L ≅ L' := Arrow.rightFunc.mapIso e
+  let R := Sheaf.derivedRestrictScalars J φ
+  refine ⟨ad.unit.app K ≫ R.map l.hom, ad.unit.app L ≫ R.map r.hom,
+    (coefficientUnit J φ ad K).comp_map_iso l,
+    (coefficientUnit J φ ad L).comp_map_iso r, ?_⟩
+  have he : l.hom ≫ b = S.map a ≫ r.hom := e.hom.w
+  have hu : ad.unit.app K ≫ R.map (S.map a) = a ≫ ad.unit.app L := by
+    simpa only [Functor.id_map, Functor.comp_map] using (ad.unit.naturality a).symm
+  rw [Category.assoc, ← R.map_comp, he, R.map_comp, ← Category.assoc, hu,
+    Category.assoc]
+
+namespace Etale
+
+attribute [local instance 2000] CommRing.toRing
+
+-- Keep the two complex-composition comparisons explicit before specializing the sites.
+@[irreducible] private noncomputable def cochainSquareIso
+    {C₁ C₂ C₃ C₄ : Type*} [Category C₁] [Category C₂] [Category C₃] [Category C₄]
+    [Preadditive C₁] [Preadditive C₂] [Preadditive C₃] [Preadditive C₄]
+    (F : C₁ ⥤ C₂) (G : C₂ ⥤ C₄) (H : C₁ ⥤ C₃) (I : C₃ ⥤ C₄)
+    [F.Additive] [G.Additive] [H.Additive] [I.Additive] (e : F ⋙ G ≅ H ⋙ I) :
+    F.mapHomologicalComplex (.up ℤ) ⋙ G.mapHomologicalComplex (.up ℤ) ≅
+      H.mapHomologicalComplex (.up ℤ) ⋙ I.mapHomologicalComplex (.up ℤ) :=
+  Functor.mapHomologicalComplexCompIso e (.up ℤ) ≪≫
+    (Functor.mapHomologicalComplexCompIso (Iso.refl (H ⋙ I)) (.up ℤ)).symm
+
+private noncomputable def cochainCounit
+    {C D : Type*} [Category.{u + 1} C] [Category.{u + 1} D]
+    [Abelian C] [Abelian D] [IsGrothendieckAbelian.{u + 1} C]
+    [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
+    [Abelian.HasFunctorialFlatResolution C]
+    [HasDerivedCategory.{u + 1} C] [HasDerivedCategory.{u + 1} D]
+    (F : C ⥤ D) [F.Additive] [F.PreservesKFlatQuasiIso] :
+    _root_.DerivedCategory.Q ⋙ F.leftDerivedFunctor ⟶
+      F.mapHomologicalComplex (.up ℤ) ⋙ _root_.DerivedCategory.Q :=
+  Functor.whiskerLeft (HomotopyCategory.quotient _ (.up ℤ)) F.leftDerivedFunctorCounit ≫
+    Functor.whiskerRight (F.mapHomotopyCategoryFactors (.up ℤ)).hom _root_.DerivedCategory.Qh
+
+private lemma cochainCounit_isIso
+    {C D : Type*} [Category.{u + 1} C] [Category.{u + 1} D]
+    [Abelian C] [Abelian D] [IsGrothendieckAbelian.{u + 1} C]
+    [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
+    [Abelian.HasFunctorialFlatResolution C]
+    [HasDerivedCategory.{u + 1} C] [HasDerivedCategory.{u + 1} D]
+    (F : C ⥤ D) [F.Additive] [F.PreservesKFlatQuasiIso]
+    (P : CochainComplex C ℤ) (hP : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat P) :
+    IsIso ((cochainCounit F).app P) := by
+  have := F.isIso_leftDerivedFunctorCounit_app_of_kFlat P hP
+  dsimp only [cochainCounit, NatTrans.comp_app, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app]
+  infer_instance
+
+private lemma comparisonFromResolution
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    (Q : C ⥤ D) (W : MorphismProperty C) [Q.IsLocalization W]
+    (F G : D ⥤ E) (H : C ⥤ E) (s : Q ⋙ G ⟶ H) (t : Q ⋙ F ⟶ H)
+    (R : C ⥤ C) (π : R ⟶ 𝟭 C)
+    (hπ : ∀ X, IsIso (Q.map (π.app X)))
+    (hs : ∀ X, IsIso (s.app (R.obj X)))
+    (ht : ∀ X, IsIso (t.app (R.obj X))) : Nonempty (F ≅ G) := by
+  let : ∀ X, IsIso (Q.map (π.app X)) := hπ
+  let : ∀ X, IsIso (s.app (R.obj X)) := hs
+  let : ∀ X, IsIso (t.app (R.obj X)) := ht
+  have : IsIso (Functor.whiskerRight π (Q ⋙ F)) := by
+    apply (NatTrans.isIso_iff_isIso_app _).2
+    intro X
+    dsimp only [Functor.whiskerRight_app, Functor.comp_map]
+    infer_instance
+  have : IsIso (Functor.whiskerRight π (Q ⋙ G)) := by
+    apply (NatTrans.isIso_iff_isIso_app _).2
+    intro X
+    dsimp only [Functor.whiskerRight_app, Functor.comp_map]
+    infer_instance
+  have : IsIso (Functor.whiskerLeft R s) := by
+    apply (NatTrans.isIso_iff_isIso_app _).2
+    exact hs
+  have : IsIso (Functor.whiskerLeft R t) := by
+    apply (NatTrans.isIso_iff_isIso_app _).2
+    exact ht
+  let e : Q ⋙ F ≅ Q ⋙ G :=
+    (asIso (Functor.whiskerRight π (Q ⋙ F))).symm ≪≫
+      asIso (Functor.whiskerLeft R t) ≪≫
+      (asIso (Functor.whiskerLeft R s)).symm ≪≫
+      asIso (Functor.whiskerRight π (Q ⋙ G))
+  exact ⟨Localization.liftNatIso Q W (Q ⋙ F) (Q ⋙ G) F G e⟩
+
+-- Prove the resolution comparison with abstract categories, before choosing the sites.
+private lemma leftDerivedSquare
+    {C D E F : Type*}
+    [Category.{u + 1} C] [Category.{u + 1} D]
+    [Category.{u + 1} E] [Category.{u + 1} F]
+    [Abelian C] [Abelian D] [Abelian E] [Abelian F]
+    [IsGrothendieckAbelian.{u + 1} C] [IsGrothendieckAbelian.{u + 1} D]
+    [IsGrothendieckAbelian.{u + 1} F]
+    [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
+    [MonoidalCategory D] [MonoidalPreadditive D] [MonoidalClosed D] [BraidedCategory D]
+    [MonoidalCategory F] [MonoidalPreadditive F] [MonoidalClosed F] [BraidedCategory F]
+    [Abelian.HasFunctorialFlatResolution C] [Abelian.HasFunctorialFlatResolution D]
+    [Abelian.HasFunctorialFlatResolution F]
+    [HasDerivedCategory.{u + 1} C] [HasDerivedCategory.{u + 1} D]
+    [HasDerivedCategory.{u + 1} E] [HasDerivedCategory.{u + 1} F]
+    (FA : C ⥤ D) (EX : D ⥤ E) (EY : C ⥤ F) (FB : F ⥤ E)
+    [FA.Additive] [EX.Additive] [EY.Additive] [FB.Additive]
+    [FA.PreservesKFlatQuasiIso] [EX.PreservesKFlatQuasiIso]
+    [EY.PreservesKFlatQuasiIso] [FB.PreservesKFlatQuasiIso]
+    [FA.PreservesFlat] [EY.PreservesFlat]
+    [PreservesColimitsOfShape ℤ FA] [PreservesColimitsOfShape ℤ EY]
+    (e : EY ⋙ FB ≅ FA ⋙ EX) :
+    Nonempty (EY.leftDerivedFunctor ⋙ FB.leftDerivedFunctor ≅
+      FA.leftDerivedFunctor ⋙ EX.leftDerivedFunctor) := by
+  let eC := cochainSquareIso EY FB FA EX e
+  let F := EY.leftDerivedFunctor ⋙ FB.leftDerivedFunctor
+  let G := FA.leftDerivedFunctor ⋙ EX.leftDerivedFunctor
+  let H := FA.mapHomologicalComplex (.up ℤ) ⋙ EX.mapHomologicalComplex (.up ℤ) ⋙
+    _root_.DerivedCategory.Q
+  let s : _root_.DerivedCategory.Q ⋙ G ⟶ H :=
+    Functor.whiskerRight (cochainCounit FA) EX.leftDerivedFunctor ≫
+      Functor.whiskerLeft (FA.mapHomologicalComplex (.up ℤ)) (cochainCounit EX)
+  let t : _root_.DerivedCategory.Q ⋙ F ⟶ H :=
+    Functor.whiskerRight (cochainCounit EY) FB.leftDerivedFunctor ≫
+      Functor.whiskerLeft (EY.mapHomologicalComplex (.up ℤ)) (cochainCounit FB) ≫
+      Functor.whiskerRight eC.hom _root_.DerivedCategory.Q
+  let Λ : Abelian.LeftResolution (ObjectProperty.flat.ι : _ ⥤ C) := Classical.arbitrary _
+  have hs : ∀ K, IsIso (s.app (Λ.reduced.resolutionFunctor.obj K)) := by
+    intro K
+    have hF := FA.kFlat_mapHomologicalComplex_obj_resolutionFunctor_obj Λ.reduced
+      ObjectProperty.flat.essImage_ι_le K
+    have := cochainCounit_isIso EX _ hF
+    have := cochainCounit_isIso FA _
+      (Λ.reduced.kFlat_resolutionFunctor_obj ObjectProperty.flat.essImage_ι_le K)
+    dsimp only [s, NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
+    infer_instance
+  have ht : ∀ K, IsIso (t.app (Λ.reduced.resolutionFunctor.obj K)) := by
+    intro K
+    have := cochainCounit_isIso EY _
+      (Λ.reduced.kFlat_resolutionFunctor_obj ObjectProperty.flat.essImage_ι_le K)
+    have hE := EY.kFlat_mapHomologicalComplex_obj_resolutionFunctor_obj Λ.reduced
+      ObjectProperty.flat.essImage_ι_le K
+    have := cochainCounit_isIso FB _ hE
+    dsimp only [t, NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
+    infer_instance
+  exact comparisonFromResolution _root_.DerivedCategory.Q
+    (HomologicalComplex.quasiIso _ (.up ℤ)) F G H s t
+    Λ.reduced.resolutionFunctor Λ.reduced.resolutionNatTrans (fun _ => inferInstance) hs ht
+
+private lemma scalarPullback
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
+    {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    have := Sheaf.scalar_preservesKFlatQuasiIso Y.smallEtaleTopology φ
+    have := Sheaf.scalar_preservesKFlatQuasiIso X.smallEtaleTopology φ
+    Nonempty ((Sheaf.extendScalars Y.smallEtaleTopology φ).leftDerivedFunctor ⋙ L(upperStar
+      (ModuleCat.{u + 1} B) f) ≅
+      L(upperStar (ModuleCat.{u + 1} A) f) ⋙ (Sheaf.extendScalars X.smallEtaleTopology
+        φ).leftDerivedFunctor) := by
+  let FA := upperStar (ModuleCat.{u + 1} A) f
+  let FB := upperStar (ModuleCat.{u + 1} B) f
+  let EY := Sheaf.extendScalars Y.smallEtaleTopology φ
+  let EX := Sheaf.extendScalars X.smallEtaleTopology φ
+  let : EY.PreservesKFlatQuasiIso := Sheaf.scalar_preservesKFlatQuasiIso Y.smallEtaleTopology φ
+  let : EX.PreservesKFlatQuasiIso := Sheaf.scalar_preservesKFlatQuasiIso X.smallEtaleTopology φ
+  have := Sheaf.preservesFlat_extendScalars Y.smallEtaleTopology (f := φ)
+  let e : EY ⋙ FB ≅ FA ⋙ EX :=
+    (conjugateIsoEquiv
+      ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f).comp
+        (Sheaf.extendScalarsAdjunction X.smallEtaleTopology φ))
+      ((Sheaf.extendScalarsAdjunction Y.smallEtaleTopology φ).comp
+        (upperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f))).symm
+      (lowerStarRestrictScalarsIso φ f).symm
+  exact leftDerivedSquare FA EX EY FB e
+
+end Etale
+
+namespace Etale
+-- Match the monoidal structures of the public etale tensor and internal Hom.
+attribute [local instance high] SymmetricCategory.toBraidedCategory
+attribute [local instance 20000] AlgebraicGeometry.Etale.sheafBraidedCategory
+end Etale
+
+namespace Etale
+end Etale
+
+namespace ProEtale
+end ProEtale
+
+attribute [local irreducible] ProEtale.pbcFixedScalarExtension Etale.projectionMap
+  ProEtale.rightDerivedLowerShriekOfCompactificationBaseChangeMap
+
+-- Auxiliary field proofs avoid repeating their large elaborated instance arguments.
+
+end CoefficientProofs
 
 /-- Blueprint `lem-fix-operation-reduction`: Basic operations and coefficient reduction.
 
