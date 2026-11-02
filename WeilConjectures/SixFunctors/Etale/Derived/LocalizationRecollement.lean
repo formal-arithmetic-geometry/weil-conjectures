@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.Triangulated.Recollement
 public import WeilConjectures.SixFunctors.ClosedImmersionStages
+public import WeilConjectures.SixFunctors.Etale.Derived.Localization
 
 /-!
 # The ambient recollement data on `D(X_ét, Λ)`
