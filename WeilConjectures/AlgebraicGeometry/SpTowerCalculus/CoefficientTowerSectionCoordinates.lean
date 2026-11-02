@@ -14,6 +14,8 @@ Source: blueprint Local pairs and Levels, coefficient tower shriek calculus.
 -/
 
 @[expose] public noncomputable section
+
+set_option linter.privateModule false
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency false

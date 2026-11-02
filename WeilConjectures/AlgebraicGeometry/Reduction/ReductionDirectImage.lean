@@ -37,6 +37,8 @@ comparison. All categories are ordinary uncompleted module derived categories.
 -/
 
 @[expose] public noncomputable section
+
+set_option linter.privateModule false
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
 set_option linter.unusedVariables false
