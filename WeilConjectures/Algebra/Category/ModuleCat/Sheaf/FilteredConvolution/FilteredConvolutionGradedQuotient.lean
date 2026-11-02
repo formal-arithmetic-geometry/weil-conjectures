@@ -13,6 +13,10 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniv
 public import WeilConjectures.Algebra.Homology.FilteredComplexSubquotients
 public import WeilConjectures.CategoryTheory.FiniteFiltrationInductionExtension
 public import WeilConjectures.Algebra.Homology.KFlatCoefficientUniverse
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FilteredConvolutionCore.FilteredConvolutionCanonicalComparisonIso
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FilteredConvolutionCore.FilteredConvolutionCanonicalComparisonUnique
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FilteredConvolutionCore.FilteredConvolutionFiltration
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FilteredConvolutionCore.FilteredConvolutionGradedQuotientCore
 
 /-! # Graded quotients of the convolution tensor filtration
 
@@ -55,12 +59,23 @@ Source: latest blueprint, sk-i-additivity.proof.md, Filtered operations
 (blueprint: lem-trf-filtered-convolution-graded-quotient). -/
 abbrev Complex (R : Sheaf J CommRingCat.{w}) := CochainComplex (Modules R) ℤ
 
+/-- The convolution filtration level. -/
+abbrev level {P Q : Complex R} (F : DecreasingFiltration P)
+    (G : DecreasingFiltration Q) (r : ℤ) : Subobject (P ⊗ Q) :=
+  FilteredConvolutionCore.level F G r
+
 /-- The direct sum of tensor products of the existing graded quotient complexes.
 Source: latest blueprint, sk-i-additivity.proof.md, Filtered operations, third graded identity
 (blueprint: lem-trf-filtered-convolution-graded-quotient). -/
 abbrev gradedSource {P Q : Complex R} (F : DecreasingFiltration P) (G : DecreasingFiltration Q)
     (r : ℤ) : Complex R :=
   ∐ (fun p : ℤ ↦ F.gradedPiece p ⊗ G.gradedPiece (r - p))
+
+/-- The canonical comparison predicate. -/
+abbrev IsCanonical {P Q : Complex R} (F : DecreasingFiltration P)
+    (G : DecreasingFiltration Q) (H : DecreasingFiltration (P ⊗ Q)) (r : ℤ)
+    (α : gradedSource F G r ⟶ H.gradedPiece r) : Prop :=
+  FilteredConvolutionCore.IsCanonical F G H r α
 
 set_option maxHeartbeats 800000 in
 -- Elaborating the total-tensor quotient diagram exceeds the default heartbeat limit.
