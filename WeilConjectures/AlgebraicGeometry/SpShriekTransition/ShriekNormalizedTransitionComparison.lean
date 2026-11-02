@@ -63,13 +63,4 @@ def actual {m n : ℕ} (h : m ≤ n) (C : SpTowerShriek.D l E X) :
     ((SpTowerShriek.Fcomparison l E b o c m).app C)
     (rho l E b Y h ((SpTowerShriek.F l E b o c).obj C))
 
-attribute [-instance] CategoryTheory.catToReflQuiver in
-attribute [-instance] CategoryTheory.catToReflQuiver in
-attribute [-instance] CategoryTheory.catToReflQuiver in
-attribute [-instance] CategoryTheory.catToReflQuiver in
-attribute [-instance] CategoryTheory.catToReflQuiver in
-attribute [-instance] CategoryTheory.catToReflQuiver in
-attribute [-instance] CategoryTheory.catToReflQuiver in
-set_option linter.unusedVariables false in
-attribute [-instance] CategoryTheory.catToReflQuiver in
 end AlgebraicGeometry.ProEtale.SpShriekTransition

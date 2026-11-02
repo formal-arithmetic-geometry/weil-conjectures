@@ -63,5 +63,4 @@ private theorem uniq_eq_conjugate
   ext X
   simp [Adjunction.leftAdjointUniq, conjugateIsoEquiv, conjugateEquiv_symm_apply_app]
 
-set_option linter.unusedVariables false in
 end AlgebraicGeometry.Etale

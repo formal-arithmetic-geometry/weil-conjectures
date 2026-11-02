@@ -24,9 +24,4 @@ namespace WeilConjectures.IntegralSystemRealization
 
 attribute [local irreducible] Expression.SlotContext.shift IndependentExpression.shift
 
-open Classical in
-open Classical in
-open Classical in
-open Classical in
-open Classical in
 end WeilConjectures.IntegralSystemRealization

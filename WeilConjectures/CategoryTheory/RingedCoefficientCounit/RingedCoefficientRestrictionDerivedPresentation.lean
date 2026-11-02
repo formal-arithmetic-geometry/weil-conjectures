@@ -310,11 +310,4 @@ variable {C D : Type u} [Category.{v} C] [Category.{v} D]
     (constantRing JY A) (constantRing JX A))
   (IR : SheafOfModules.AlgebraicInverseImage inverse RY RI) (c : RI ⟶ RX)
 
--- Preserve the original compatibility hypotheses, although the ordinary presentation
--- already supplies all comparison maps needed by this construction.
-set_option linter.unusedSectionVars false in
-set_option linter.unusedVariables false in
-set_option maxHeartbeats 2000000 in
--- The construction checks several universal properties and their representative formulas.
-include leftExact in
 end CategoryTheory.RingedCoefficientCounit

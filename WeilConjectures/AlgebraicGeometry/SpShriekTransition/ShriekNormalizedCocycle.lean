@@ -47,6 +47,4 @@ private theorem transport_cocycle
 private abbrev nativeHom {A : Type*} [categoryA : Category A] (X Y : A) :=
   @Quiver.Hom A (@ReflQuiver.toQuiver A (@catToReflQuiver A categoryA)) X Y
 
-attribute [-instance] CategoryTheory.catToReflQuiver in
-attribute [-instance] CategoryTheory.catToReflQuiver in
 end AlgebraicGeometry.ProEtale.SpShriekTransition

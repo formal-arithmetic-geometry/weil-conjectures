@@ -230,8 +230,6 @@ private theorem tower_etale_normalization
     ObjectProperty.ι_obj] at h ⊢
   convert! h.symm using 1
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
 end TowerCalculation
 
 omit [Finite R] in

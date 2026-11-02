@@ -610,6 +610,5 @@ private theorem constantSquare (S : Scheme.{u}) :
   rw [Equiv.apply_symm_apply]
   rfl
 
-set_option backward.isDefEq.respectTransparency false in
 end Coefficients
 end AlgebraicGeometry.ProEtale.RationalStratum

@@ -320,7 +320,6 @@ theorem etaleHorizontalDoubleCounit_exchange :
         (IsPullback.of_iso_pullback sq.toCommSq
           sq.isoPullback sq.hom_fst sq.hom_snd)).inv) K).symm
 
-set_option backward.isDefEq.respectTransparency false in
 end Square
 
 end AlgebraicGeometry.Etale

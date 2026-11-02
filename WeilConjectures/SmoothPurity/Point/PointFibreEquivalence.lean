@@ -102,8 +102,6 @@ attribute [local instance] pointFiniteConstant_additive
 omit [IsAlgClosed k] [Finite B] in
 attribute [local instance] pointFiniteConstant_colimits
 
-omit [IsAlgClosed k] in
-omit [IsAlgClosed k] in
 end FiniteReconstruction
 
 attribute [local instance] pointFiniteSheafifyProEt
@@ -117,10 +115,4 @@ attribute [local instance] pointFiniteConstant_colimits
 attribute [local irreducible] pointStageFibre pointStageFibreScalarIso pointQbarFibre
   Functor.mapDerivedCategory DerivedCategory.pointFdQbarStageComp
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
 end WeilConjectures

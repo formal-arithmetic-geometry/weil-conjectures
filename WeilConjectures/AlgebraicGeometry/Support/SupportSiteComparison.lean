@@ -82,33 +82,10 @@ variable {C : Type u₁} {D : Type u₂} {E : Type u₃}
   [L.Additive] [G.Additive] [H.Additive]
   [PreservesFiniteLimits L] [PreservesFiniteColimits L]
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types true in
-set_option backward.defeqAttrib.useBackward true in
 variable (R : D ⥤ C) [R.Additive] [R.PreservesInjectiveObjects] (adj : L ⊣ R)
 
-omit [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
-    [EnoughInjectives C] [EnoughInjectives D]
-    [PreservesFiniteLimits L] [PreservesFiniteColimits L]
-    [R.PreservesInjectiveObjects] in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types true in
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types true in
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types true in
-set_option backward.defeqAttrib.useBackward true in
 variable [Abelian.HasKInjectiveResolutions C] [Abelian.HasKInjectiveResolutions D]
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types true in
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types true in
-set_option backward.defeqAttrib.useBackward true in
-omit [EnoughInjectives C] [EnoughInjectives D] in
 end SupportDerivedNormalization
 
 set_option backward.isDefEq.respectTransparency false in
@@ -787,8 +764,6 @@ set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 end
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
 end ExteriorComparisonProof
 end AlgebraicGeometry.ProEtale
 
@@ -861,20 +836,12 @@ private lemma constantMap_comp
     (constantMap_unit D g M) (constantMap_unit D h M)
     (constantMap_unit D (g ≫ h) M) (globalSectionsLowerStarIso_comp D g h _)
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types true in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types true in
 end OpenConstantProof
 
 variable (A : Type (u + 1)) [CommRing A] [Finite A] {C T U : Scheme.{u}}
   [IsLocallyNoetherian T] [IsLocallyNoetherian U]
   (i : C ⟶ T) [IsClosedImmersion i] (v : U ⟶ T) [IsOpenImmersion v]
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types true in
-set_option backward.defeqAttrib.useBackward true in
-set_option linter.unusedSectionVars false in
 end ProEtale
 
 namespace ProEtale

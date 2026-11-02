@@ -90,12 +90,4 @@ private lemma projection_tensor_unit (A : Type (u + 1)) [CommRing A]
   rw [he, R.map_id]
   exact Category.comp_id _
 
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 800000 in
--- The composite involves two sheafification monoidal comparisons and adjunction units.
-set_option backward.defeqAttrib.useBackward true in
-set_option backward.isDefEq.respectTransparency false in
 end AlgebraicGeometry.Etale

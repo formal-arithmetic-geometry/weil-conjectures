@@ -44,6 +44,5 @@ variable {Λ : Type (u + 1)} [CommRing Λ]
   (ht : DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b
     ((reductionModIdeal Λ X (Ideal.span {r ^ m})).obj K))
 
-include hr eW hbc ht in
 end IntegralVerdierFiniteSteps
 end AlgebraicGeometry.Etale

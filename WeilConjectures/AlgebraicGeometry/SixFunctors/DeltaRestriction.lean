@@ -69,9 +69,6 @@ def restrictionDualDelta {C : Type z} [Category.{v} C]
   (adj ((H.obj (op K)).obj Ω)).homEquiv K Ω
     (restrictionDualEvaluation T H adj b Ω K)
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 end CategoryTheory
 
 open CategoryTheory.MonoidalClosed
@@ -99,21 +96,16 @@ namespace Etale
 
 section
 attribute [local instance] _root_.DerivedCategory.braidedCategory'
-set_option backward.isDefEq.respectTransparency false in
 end
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-set_option backward.isDefEq.respectTransparency false in
 end Etale
 
 namespace ProEtale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 end ProEtale
 
 end AlgebraicGeometry

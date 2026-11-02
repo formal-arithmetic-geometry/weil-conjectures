@@ -185,6 +185,4 @@ private theorem finiteExactCoordinates_total (S : SixFunctorFiniteOperations D C
     Functor.map_comp, Category.assoc]
   rfl
 
-set_option maxHeartbeats 800000 in
--- The comparison rewrites retain several large derived-category endpoint types.
 end WeilConjectures.CompactSupportFiniteProjection

@@ -143,11 +143,4 @@ private def matrixIso (n : ℕ) (P : Matrix.GeneralLinearGroup (Fin n) R) : Pow 
     (extensionFunctor J R B σ).mapIso
       (Matrix.GeneralLinearGroup.toLin P).toLinearEquiv.toModuleIso ≪≫ beta J R B σ n
 
-omit [J.WEqualsLocallyBijective AddCommGrpCat.{max u v}]
-  [HasWeakSheafify J AddCommGrpCat.{max u v}] [HasWeakSheafify J RingCat.{max u v}] in
-omit [J.WEqualsLocallyBijective AddCommGrpCat.{max u v}]
-  [HasWeakSheafify J AddCommGrpCat.{max u v}] [HasWeakSheafify J RingCat.{max u v}] in
-set_option linter.unusedSectionVars false in
-omit [J.WEqualsLocallyBijective AddCommGrpCat.{max u v}]
-  [HasWeakSheafify J AddCommGrpCat.{max u v}] [HasWeakSheafify J RingCat.{max u v}] in
 end CategoryTheory.ConstantFiniteFreePresentationExtension

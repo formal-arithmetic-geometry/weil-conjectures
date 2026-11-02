@@ -359,5 +359,4 @@ private theorem evaluation_eq
         ((derivedTensorHomAdjunction₂ (ModuleCat.{u + 1} A) T).adj P).counit.app M := by
   rfl
 
-set_option Elab.async false in
 end AlgebraicGeometry.Etale

@@ -102,15 +102,4 @@ private theorem ordinaryTranspose
   rw [Iso.inv_hom_id_app_assoc]
   exact (o.adjRFormula M N h).symm
 
-omit [UnivLE.{max u v, r}] [HasSheafify JY AddCommGrpCat.{r}]
-  [JY.WEqualsLocallyBijective AddCommGrpCat.{r}] leftExact in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-omit [UnivLE.{max u v, r}] leftExact in
-set_option maxHeartbeats 800000 in
--- The representative formula elaborates several composites of module-sheaf functors.
-omit [UnivLE.{max u v, r}] leftExact in
-omit leftExact in
-omit leftExact in
-include leftExact in
 end CategoryTheory.RingedCoefficientCounit

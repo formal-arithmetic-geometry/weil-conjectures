@@ -61,8 +61,4 @@ private theorem completedComp_eq (W : Scheme.{u})
 
 attribute [local instance] normalizedDVRModuleRes_limits normalizedDVRModuleRes_colimits
 
-set_option maxHeartbeats 1600000 in
--- Transport between the concrete coefficient categories needs extra kernel heartbeats.
-set_option maxHeartbeats 1600000 in
--- Checking the section-normalized comparison unfolds the concrete sheaf functors.
 end WeilConjectures.IntegralSystemRealization

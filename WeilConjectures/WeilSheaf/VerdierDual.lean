@@ -56,7 +56,6 @@ open CategoryTheory Limits Opposite Pretriangulated
 
 namespace AlgebraicGeometry
 
-open Pretriangulated.Opposite in
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
 open MonoidalCategory Functor.LaxMonoidal in

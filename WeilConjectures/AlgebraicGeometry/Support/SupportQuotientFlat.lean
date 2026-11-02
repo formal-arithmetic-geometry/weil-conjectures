@@ -111,24 +111,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-set_option backward.isDefEq.respectTransparency true in
 variable (A : Type u) [CommRing A] [Finite A]
   {C T : Scheme.{u}} (a : C ⟶ T) [IsClosedImmersion a]
 
-omit [Finite A] in
-set_option backward.isDefEq.respectTransparency true in
-omit [Finite A] in
-set_option backward.isDefEq.respectTransparency true in
-omit [Finite A] in
-omit [Finite A] in
-set_option backward.isDefEq.respectTransparency false in
-omit [Finite A] in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency false in
-omit [Finite A] in
-set_option backward.isDefEq.respectTransparency true in
-omit [Finite A] in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency true in
 end AlgebraicGeometry.Scheme

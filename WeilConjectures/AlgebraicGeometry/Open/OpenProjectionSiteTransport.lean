@@ -78,6 +78,4 @@ noncomputable def openProjectionRestrictionComparison (Λ : Type (u + 1)) [CommR
     Functor.isoWhiskerLeft _
       (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) j).symm
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end AlgebraicGeometry.ProEtale

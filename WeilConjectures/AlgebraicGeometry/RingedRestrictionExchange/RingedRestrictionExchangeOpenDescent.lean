@@ -358,10 +358,6 @@ theorem open_comparison (r : StrictTowerRingedSquare sq) [IsOpenImmersion g] :
 
 section OpenSectionwise
 
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
 end OpenSectionwise
 
 variable {U : Scheme.{u}} {j : U ⟶ Y}

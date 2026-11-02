@@ -237,8 +237,6 @@ variable (A : Type u) [CommRing A]
 
 variable [Finite A]
 
-omit [Finite A] in
-omit [Finite A] in
 end Construction
 
 end AlgebraicGeometry.Scheme

@@ -82,5 +82,4 @@ noncomputable def tensorMateEtalePrecompLocalityIso
       (HasCompactification.compactification f)
       (HasCompactification.compactification (u ≫ f)))).symm
 
-set_option maxRecDepth 4096 in
 end AlgebraicGeometry.Etale

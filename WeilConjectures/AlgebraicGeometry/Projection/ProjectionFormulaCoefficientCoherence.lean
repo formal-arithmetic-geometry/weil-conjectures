@@ -76,14 +76,6 @@ variable {C D : Type*} [Category.{u + 1} C] [Abelian C]
   [Limits.PreservesFiniteColimits F] [F.Monoidal]
 open _root_.DerivedCategory
 
-omit [MonoidalCategory D] [MonoidalPreadditive D] [SymmetricCategory D]
-  [MonoidalClosed D] [Abelian.HasFunctorialFlatResolution D] in
-omit [MonoidalCategory C] [MonoidalPreadditive C] [SymmetricCategory C]
-  [MonoidalClosed C] [Abelian.HasFunctorialFlatResolution C]
-  [MonoidalCategory D] [MonoidalPreadditive D] [SymmetricCategory D]
-  [MonoidalClosed D] [Abelian.HasFunctorialFlatResolution D] [F.Monoidal] in
-omit [Abelian.HasFunctorialFlatResolution C] [Abelian.HasFunctorialFlatResolution D]
-  [Limits.PreservesFiniteLimits F] [Limits.PreservesFiniteColimits F] in
 end FunctorUnit
 
 section Conjugate
@@ -103,7 +95,6 @@ private theorem conjugate_unit (e : S.obj (𝟙_ T) ⟶ 𝟙_ C) (M : C)
   congr 1
   rw [← BraidedCategory.braiding_naturality_left_assoc, braiding_rightUnitor]
 
-omit [SymmetricCategory C] [SymmetricCategory T] in
 end Conjugate
 
 section FiniteDomains
@@ -134,12 +125,7 @@ variable (A : Type v) [Category.{u + 1} A] [Abelian A]
   (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
   (c : Compactification f)
 
-omit [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] in
-omit [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] in
-omit [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] in
-omit [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] in
 end NativeAction
 
-omit [UpperStarPreservesFlat V] in
 end Arrows
 end AlgebraicGeometry.ProEtale

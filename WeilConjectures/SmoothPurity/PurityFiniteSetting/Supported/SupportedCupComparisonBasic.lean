@@ -28,8 +28,4 @@ set_option allowUnsafeReducibility true in
 attribute [local reducible] functorialCupSingle functorialCupSourceObject functorialCupTarget
   functorialCupConstant functorialCupComparisonFunctor constant constantEtale
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 end WeilConjectures.PurityFiniteSetting

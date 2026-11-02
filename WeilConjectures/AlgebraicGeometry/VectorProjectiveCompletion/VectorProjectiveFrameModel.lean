@@ -29,6 +29,4 @@ private local instance restrictedSectionsModule (S : Scheme.{u}) (F : S.Modules)
 
 set_option backward.isDefEq.respectTransparency false in
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 end AlgebraicGeometry.VectorProjectiveCompletion

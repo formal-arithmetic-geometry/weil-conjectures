@@ -33,6 +33,4 @@ variable {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 
 attribute [local irreducible] RingedRestrictionExchange.ordinary purReindexingModuleMate
 
-set_option maxHeartbeats 800000 in
--- The mate and unit formulas contain large sheaf and category expressions.
 end AlgebraicGeometry.Scheme

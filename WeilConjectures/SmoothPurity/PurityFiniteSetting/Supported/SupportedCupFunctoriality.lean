@@ -95,5 +95,4 @@ private theorem restriction_full (P : PurityFiniteSetting.{u}) (pro : Bool)
               hn.symm
       _ = _ := by rw [Iso.hom_inv_id_assoc]; rfl
 
-set_option backward.isDefEq.respectTransparency false in
 end WeilConjectures.PurityFiniteSetting

@@ -323,8 +323,4 @@ private theorem map_isIso_of_proof
   letI := hf
   exact F.map_isIso f
 
--- Reuse congruence proofs at repeated instance boundaries. This constructs ordinary
--- equality proofs; the kernel checks the resulting projection-coordinate comparison.
-set_option maxHeartbeats 1500000 in
--- The congruence proof compares dependent functor records and canonical instance arguments.
 end AlgebraicGeometry.ProEtale.SpTowerProjection

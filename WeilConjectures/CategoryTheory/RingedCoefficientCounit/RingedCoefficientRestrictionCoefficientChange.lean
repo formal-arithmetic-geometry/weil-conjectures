@@ -184,5 +184,4 @@ variable {C D : Type u} [Category.{v} C] [Category.{v} D]
     (constantRing JY A) (constantRing JX A))
   (IR : SheafOfModules.AlgebraicInverseImage inverse RY RI) (c : RI ⟶ RX)
 
-include leftExact in
 end CategoryTheory.RingedCoefficientCounit

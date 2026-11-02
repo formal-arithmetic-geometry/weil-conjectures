@@ -23,5 +23,4 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 attribute [local irreducible] scalarCoordinates quotientMap
   Functor.mapDerivedCategory Functor.rightDerivedFunctor
 
-attribute [-instance] CategoryTheory.catToReflQuiver in
 end AlgebraicGeometry.ProEtale.SpShriekTransition
