@@ -83,10 +83,6 @@ private abbrev sectionMap
   c.unit.inv ≫ (InternalBar.free R).map
     (terminal.from (𝟙_ Sets.{u}) ≫ pointTuple X e)
 
-omit [IsCommMonObj R.X] in
-omit [IsCommMonObj R.X] in
-omit [IsCommMonObj R.X] in
-omit [IsCommMonObj R.X] in
 end Proof
 
 end Profinite.CondensedAction.PointedDeletion

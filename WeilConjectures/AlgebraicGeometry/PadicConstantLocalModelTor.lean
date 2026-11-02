@@ -91,6 +91,14 @@ private noncomputable def continuousScalarEquiv
   map_mul' _ _ := rfl
   map_add' _ _ := rfl
 
+section CounitScalar
+
+variable {C D : Type*} [Category C] [Category D] [MonoidalCategory C] [MonoidalCategory D]
+  [HasCoequalizers D] [∀ X : D, PreservesColimitsOfSize.{0, 0} (tensorLeft X)]
+  [∀ X : D, PreservesColimitsOfSize.{0, 0} (tensorRight X)] [BraidedCategory D]
+  {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G) [F.Monoidal] [G.LaxMonoidal] [adj.IsMonoidal]
+  (S : D) [MonObj S] [IsCommMonObj (F.obj (G.obj S))]
+
 /-- Extending constant scalar modules along the counit is left adjoint to sections.
 Source: blueprint local boundary duality, Step 5, scalar extension adjunction.
 Proof: compose the module lift of the monoidal adjunction with extension/restriction
@@ -110,6 +118,8 @@ def counitScalarAdjunction :
       ((Mod.comapComp (adj.unitAlgHom (G.obj S)) (G.map (adj.counitAlgHom S))).symm ≪≫
         Mod.comapCongr (adj.right_triangle_components S) ≪≫ Mod.comapId (G.obj S)) ≪≫
     Functor.rightUnitor (G.mapMod S)
+
+end CounitScalar
 
 private instance constantScalarSheaf_laxBraided :
     (constantSheaf (coherentTopology Profinite.{u}) Ab.{u + 1}).LaxBraided := by
@@ -225,6 +235,11 @@ private noncomputable def constantExtensionCompIso
     Functor.isoWhiskerLeft (C.mapMod R) (pointExtensionMapIso X _ _ ε) ≪≫
     (Functor.associator _ _ _).symm
 
+section PointAdjunction
+
+variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+  (k : Type u) [Field k] [IsSepClosed k]
+
 /-- The scalar module sections transported along the geometric-point equivalence.
 Source: blueprint local boundary duality, Step 5, sections adjunction
 (blueprint: lem-a1-condensed-point-scalar-adjunction). -/
@@ -255,8 +270,10 @@ theorem finiteConstantPointAdjunction :
   let a : C ⊣ G := constantSheafAdj (coherentTopology Profinite.{u}) Ab.{u + 1}
     Profinite.isTerminalPUnit
   let E := ((upperStarFromPoint (Spec (.of k))).mapMod Λ).asEquivalence
-  exact ⟨((a.counitScalarAdjunction Λ).comp E.toAdjunction).ofNatIsoLeft
+  exact ⟨((counitScalarAdjunction a Λ).comp E.toAdjunction).ofNatIsoLeft
     (constantExtensionCompIso Λ (Spec (.of k))).symm⟩
+
+end PointAdjunction
 
 attribute [local irreducible] scalarConstant pointExtensionMapIso constantExtensionCompIso
 

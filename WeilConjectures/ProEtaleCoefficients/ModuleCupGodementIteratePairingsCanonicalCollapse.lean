@@ -71,7 +71,5 @@ private theorem map_comp (X : Scheme.{u}) {F G H : X.Modules}
   rw [Category.assoc, proj_map, proj_map, comp_toSkyscraper, stalk_comp,
     LinearMap.comp_assoc, LinearMap.comp_assoc, eval_map]
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end
 end AlgebraicGeometry.Scheme.Modules

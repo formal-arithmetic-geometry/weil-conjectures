@@ -66,6 +66,52 @@ def restrictionModules {U V : Option X.ProEt} (a : RestrictionArrow X U V) :
   | some _, some _, a => SheafOfModules.overMap (rings l E X none) a
 
 set_option backward.isDefEq.respectTransparency false in
+/-- Sectionwise restriction is additive and exact, including relocalization.
+Source: Stacks 03DJ (blueprint: lem-sf-rational-slice-completed-evaluation).
+Proof: restriction preserves kernels and products sectionwise. Coverings of an object
+of an over-site are exactly coverings of its domain with the same structural arrow;
+hence local lifts of cokernel sections restrict, proving preservation of cokernels.
+Addition is sectionwise. The same argument applies to Over.map and the identity. -/
+theorem restrictionModules_exact {U V : Option X.ProEt} (a : RestrictionArrow X U V) :
+    (restrictionModules l E X a).Additive ∧
+      PreservesFiniteLimits (restrictionModules l E X a) ∧
+      PreservesFiniteColimits (restrictionModules l E X a) := by
+  cases U with
+  | none =>
+    cases V with
+    | none =>
+      change (𝟭 (Mod l E X none)).Additive ∧
+        PreservesFiniteLimits (𝟭 (Mod l E X none)) ∧
+        PreservesFiniteColimits (𝟭 (Mod l E X none))
+      exact ⟨inferInstance, inferInstance, inferInstance⟩
+    | some B =>
+      exact ⟨SheafOfModules.sitePerfectOverFunctor_additive (rings l E X none) B,
+        SheafOfModules.overFunctor_exact_ofUniverses (rings l E X none) B⟩
+  | some B =>
+    cases V with
+    | none => exact PEmpty.elim a
+    | some C =>
+      exact ⟨SheafOfModules.sitePerfectOverMap_additive (rings l E X none) a,
+        SheafOfModules.overMap_exact_ofUniverses (rings l E X none) a⟩
+
+/-- The additive structure supplied by exact sectionwise restriction.
+Source: Stacks 03DJ (blueprint: lem-sf-rational-slice-completed-evaluation). -/
+instance restrictionModulesAdditive {U V : Option X.ProEt} (a : RestrictionArrow X U V) :
+    (restrictionModules l E X a).Additive := (restrictionModules_exact l E X a).1
+
+/-- The finite-limit structure supplied by exact sectionwise restriction.
+Source: Stacks 03DJ (blueprint: lem-sf-rational-slice-completed-evaluation). -/
+instance restrictionModulesLimits {U V : Option X.ProEt} (a : RestrictionArrow X U V) :
+    PreservesFiniteLimits (restrictionModules l E X a) :=
+  (restrictionModules_exact l E X a).2.1
+
+/-- The finite-colimit structure supplied by exact sectionwise restriction.
+Source: Stacks 03DJ (blueprint: lem-sf-rational-slice-completed-evaluation). -/
+instance restrictionModulesColimits {U V : Option X.ProEt} (a : RestrictionArrow X U V) :
+    PreservesFiniteColimits (restrictionModules l E X a) :=
+  (restrictionModules_exact l E X a).2.2
+
+set_option backward.isDefEq.respectTransparency false in
 /-- Restrict the actual complexes term by term.
 Source: Stacks 03DJ (blueprint: lem-sf-rational-slice-completed-evaluation). -/
 def restrictionComplex {U V : Option X.ProEt} (a : RestrictionArrow X U V) :
@@ -76,6 +122,22 @@ def restrictionComplex {U V : Option X.ProEt} (a : RestrictionArrow X U V) :
 Source: Stacks 03DJ (blueprint: lem-sf-rational-slice-completed-evaluation). -/
 def restrictionDerived {U V : Option X.ProEt} (a : RestrictionArrow X U V) :
     D l E X U ⥤ D l E X V := (restrictionModules l E X a).mapDerivedCategory
+
+set_option backward.isDefEq.respectTransparency false in
+/-- The termwise additive functor remains additive after quasi-isomorphism localization.
+Source: Stacks 03DJ (blueprint: lem-sf-rational-slice-completed-evaluation).
+Proof: termwise restriction preserves sums of chain maps. The additive localization
+universal property descends this identity, equivalently use the derived adjunction
+with exact extension by zero. Thus the induced derived functor preserves addition. -/
+theorem restrictionDerived_additive {U V : Option X.ProEt} (a : RestrictionArrow X U V) :
+    (restrictionDerived l E X a).Additive := by
+  change (restrictionModules l E X a).mapDerivedCategory.Additive
+  exact Functor.additive_of_preserves_binary_products _
+
+/-- The additive structure from termwise restriction and additive localization.
+Source: Stacks 03DJ (blueprint: lem-sf-rational-slice-completed-evaluation). -/
+instance restrictionDerivedAdditive {U V : Option X.ProEt} (a : RestrictionArrow X U V) :
+    (restrictionDerived l E X a).Additive := restrictionDerived_additive l E X a
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Comparison data for the actual restriction functor. The generator and two
@@ -139,7 +201,4 @@ def CompletedRestrictionComparisons.GlobalModel (B : X.ProEt)
     (∀ L M : D l E X none, d.ordinaryTensorIso.hom.app (L, M) = (e.rho L M).hom) ∧
     (∀ L M : D l E X none, d.homIso.hom.app (op L, M) = (e.eta L M).hom)
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency false in
 end WeilConjectures.IntegralOnSlice

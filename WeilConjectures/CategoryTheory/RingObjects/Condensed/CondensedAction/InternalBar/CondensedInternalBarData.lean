@@ -61,6 +61,8 @@ namespace Profinite.CondensedAction.InternalBar
 
 variable (R : Profinite.CondensedRing.{u}) [IsCommMonObj R.X]
 
+variable (G : Type u) [TopologicalSpace G] [Group G] [IsTopologicalGroup G]
+  [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]
 
 /-- The profinite space of tuples, including the one-point space in arity zero.
 Source: the objects in the homogeneous bar construction
@@ -114,8 +116,5 @@ Source: step 3, the augmentation [g] ↦ 1
 def regularOne (S : Profinite.{u}) : sectionModule R (Mod.regular R.X) S :=
   (1 : (InternalAbelianSheafModule.sectionRings
     (coherentTopology Profinite.{u}) R.X).obj (op S))
-
-variable (G : Type u) [TopologicalSpace G] [Group G] [IsTopologicalGroup G]
-  [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]
 
 end Profinite.CondensedAction.InternalBar
