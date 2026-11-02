@@ -892,6 +892,14 @@ private theorem ordinary_unit_tensor
   exact (congrArg (fun f ↦ f.val.app V x)
     (ordinary_projection_unit_fixed l E W M n)).trans (finite_unit_tensor l E W M n V x)
 
+section CanonicalComparisons
+
+/-- The cone of ordinary inverse-limit projections in each degree. Source: Stacks 0941. -/
+def termwiseLimitCone
+    (Z : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ) : Cone Z.asFunctor where
+  pt := ((lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤
+    scalarReductionSource l E W).mapHomologicalComplex (.up ℤ)).obj Z
+  π :=
     { app := fun n ↦ (NatTrans.mapHomologicalComplex (lim.π n) (.up ℤ)).app Z
       naturality := by
         intro n m f
@@ -900,26 +908,31 @@ private theorem ordinary_unit_tensor
           limit.π (Z.X p) n ≫ (Z.X p).map f
         exact (Category.id_comp _).trans (limit.w (Z.X p) f).symm }
 
-private def termwiseLimitConeIsLimit
+/-- Limits of complexes are computed degreewise. Source: Stacks 0941. -/
+def termwiseLimitConeIsLimit
     (Z : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ) :
     IsLimit (termwiseLimitCone l E W Z) :=
   HomologicalComplex.isLimitOfEval Z.asFunctor (termwiseLimitCone l E W Z)
     (fun p ↦ limit.isLimit (Z.X p))
 
-private def termwiseLimitComparisonComponent
+/-- The degreewise limit comparison at one complex. Source: Stacks 0941. -/
+def termwiseLimitComparisonComponent
     (Z : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ) :
     ((lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤
       scalarReductionSource l E W).mapHomologicalComplex (.up ℤ)).obj Z ≅
         limit Z.asFunctor :=
   (termwiseLimitConeIsLimit l E W Z).conePointUniqueUpToIso (limit.isLimit _)
 
-private theorem termwiseLimitComparisonComponent_projection
+/-- Projections of the degreewise limit comparison. Source: Stacks 0941. -/
+theorem termwiseLimitComparisonComponent_projection
     (Z : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ) (n : ℕ) :
     (termwiseLimitComparisonComponent l E W Z).hom ≫ limit.π Z.asFunctor (op n) =
       (NatTrans.mapHomologicalComplex (lim.π (op n)) (.up ℤ)).app Z :=
   IsLimit.conePointUniqueUpToIso_hom_comp _ _ _
 
-private def termwiseLimitComparison :
+/-- The termwise inverse limit of a complex of towers is the limit of complexes.
+Source: Stacks 0941. -/
+def termwiseLimitComparison :
     (lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤
       scalarReductionSource l E W).mapHomologicalComplex (.up ℤ) ≅
         roosLimitFunctor (A := scalarReductionSource l E W) :=
@@ -940,28 +953,15 @@ private def termwiseLimitComparison :
     ext p : 1
     exact limMap_π (f.f p) n)
 
-private theorem termwiseLimitComparison_projection
+/-- The termwise limit comparison has the ordinary limit projections in each degree.
+Source: Stacks 0941. -/
+theorem termwiseLimitComparison_projection
     (Z : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ) (n : ℕ) (p : ℤ) :
     ((termwiseLimitComparison l E W).hom.app Z ≫ limit.π Z.asFunctor (op n)).f p =
       limit.π (Z.X p) (op n) :=
   congrArg (fun f ↦ f.f p) (termwiseLimitComparisonComponent_projection l E W Z n)
 
 end CanonicalComparisons
-
-/-- The ordinary quotient tensor and limit admit the prescribed sectionwise adjunction.
-This statement involves no derived coefficient calculus or derived comparison.
-
-Source: Stacks, sites-modules.tex, lemma-adjoint-pullback-pushforward-modules (03D7),
-and sites-cohomology.tex, lemma-derived-limit-is-ok (0941); coefficient specialization
-of step 1 of lem-trf-completion-unit-canonical-models.
-(blueprint: lem-trf-completion-unit-ordinary-adjunction).
-
-Proof: Apply the sequence-projection construction to the completion ring sheaf and
-its tower of positive quotients. Transfer the resulting strict systems to modules
-on the coefficient sequence site. At level n identify the tensor functor with the
-fixed scalarReductionExtension using the uniquely normalized scalar adjunctions.
-Their units send x to 1 tensor x, so their mates give exactly
-coefficientOrdinaryQuotient at every transition n <= m. The Hom bijection sends a
 
 /-- The ordinary quotient tensor and limit admit the prescribed sectionwise adjunction.
 This statement involves no derived coefficient calculus or derived comparison.
@@ -975,7 +975,7 @@ Limits of complexes are computed degreewise. -/
 theorem ordinaryModel_exists : Nonempty (OrdinaryModel l E W) := by
   refine ⟨{
     tensor := ordinaryExtension l E W
-    additive := seqExtension_additive (baseTopology W) (finiteRings l E W)
+    additive := SemilinearSections.seqExtension_additive (baseTopology W) (finiteRings l E W)
       (finiteMaps l E W) (completionCone l E W)
     evaluation := ordinaryTensor l E W
     transition := fun M {m n} h ↦ ordinary_transition l E W M m n h

@@ -101,6 +101,18 @@ theorem sheafOfModules_eqToHom_section_heq {R : Sheaf J RingCat.{r}}
   subst p
   rfl
 
+/-- The comparison of composite restrictions given by an equality of functors is the
+identity on sections. Source: Stacks 03CZ. -/
+theorem restrictScalars_eqToIso_inv_section {A Bm Bn : Sheaf J RingCat.{r}}
+    (pm : A ⟶ Bm) (pn : A ⟶ Bn) (q : Bm ⟶ Bn)
+    (h : SheafOfModules.restrictScalars.{r} q ⋙ SheafOfModules.restrictScalars.{r} pm =
+      SheafOfModules.restrictScalars.{r} pn)
+    (N : SheafOfModules.{r} Bn) (U : Cᵒᵖ) (y : N.val.obj U) :
+    coefficientRestrictionSection q N U (coefficientRestrictionSection pm _ U
+      (((eqToIso h).inv.app N).val.app U y)) = coefficientRestrictionSection pn N U y := by
+  rw [eqToIso.inv, eqToHom_app]
+  exact eq_of_heq (sheafOfModules_eqToHom_section_heq (Functor.congr_obj h.symm N) U y)
+
 /-- The mate of a comparison of composite restrictions sends unit sections to unit sections.
 Source: Stacks 03CZ, 03D7. -/
 theorem coefficientQuotientNatTrans_unitSection {A Bm Bn : Sheaf J RingCat.{r}}
@@ -111,7 +123,8 @@ theorem coefficientQuotientNatTrans_unitSection {A Bm Bn : Sheaf J RingCat.{r}}
     (e : SheafOfModules.restrictScalars q ⋙ SheafOfModules.restrictScalars pm ≅
       SheafOfModules.restrictScalars pn)
     (he : ∀ (N : SheafOfModules.{r} Bn) (U : Cᵒᵖ) (y : N.val.obj U),
-      (e.inv.app N).val.app U y = y)
+      coefficientRestrictionSection q N U (coefficientRestrictionSection pm _ U
+        ((e.inv.app N).val.app U y)) = coefficientRestrictionSection pn N U y)
     (M : SheafOfModules.{r} A) (U : Cᵒᵖ) (x : M.val.obj U) :
     coefficientRestrictionSection q (Fn.obj M) U
       (((coefficientQuotientNatTrans am an (SheafOfModules.restrictScalars q) e).app M).val.app U
@@ -125,6 +138,8 @@ theorem coefficientQuotientNatTrans_unitSection {A Bm Bn : Sheaf J RingCat.{r}}
 
 end Generic
 
+set_option diagnostics true in
+set_option diagnostics.threshold 500 in
 /-- The strict quotient map sends unit sections to unit sections.
 Source: Stacks 06YY, 0941. -/
 theorem coefficientOrdinaryQuotient_unitSection {m n : ℕ} (h : n ≤ m)
@@ -138,7 +153,9 @@ theorem coefficientOrdinaryQuotient_unitSection {m n : ℕ} (h : n ≤ m)
     unfold coefficientOrdinaryQuotient
     exact (coefficientOrdinaryQuotient_exists l E W h).choose_spec.1 X
   rw [hq]
-  have key := coefficientQuotientNatTrans_unitSection
+  unfold coefficientOrdinaryQuotientComponent coefficientOrdinaryQuotientNaturalTransformation
+    coefficientIntegralScalarUnitSection
+  exact coefficientQuotientNatTrans_unitSection
     ((sheafCompose (Scheme.ProEt.topology W)
       (forget₂ CommRingCat.{max u (t+1)} RingCat.{max u (t+1)})).map
         (completedIntegralCommRingProjectionUnrestricted l E W m))
@@ -146,8 +163,9 @@ theorem coefficientOrdinaryQuotient_unitSection {m n : ℕ} (h : n ≤ m)
       (forget₂ CommRingCat.{max u (t+1)} RingCat.{max u (t+1)})).map
         (completedIntegralCommRingProjectionUnrestricted l E W n))
     (normalizedDVRQuotient l E W h)
-    (Fm := scalarReductionExtension l E W m) (Fn := scalarReductionExtension l E W n)
-  sorry
+    (coefficientOrdinaryScalarAdjunction l E W m) (coefficientOrdinaryScalarAdjunction l E W n)
+    (eqToIso (coefficientRestrictionComp l E W h))
+    (restrictScalars_eqToIso_inv_section _ _ _ (coefficientRestrictionComp l E W h)) X V x
 
 end
 end WeilConjectures
