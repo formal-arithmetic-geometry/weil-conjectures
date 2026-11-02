@@ -214,6 +214,10 @@ private theorem chainComparison_isKInjective
     chainComparison F I = (F.rightDerivedFunctorObjQIso I).inv := by
   exact F.rightDerivedFunctorUnitQ_eq I
 
+-- State the chain with the instance used by `exchange`, matching `exchange_chainUnit`.
+section ExchangeChain
+attribute [local instance 40000] completedConstantAbLocallyBijective
+
 private theorem exchange_chain (r : StrictTowerRingedSquare sq)
     (K : CochainComplex (proEtaleRingModules X r.RX) ℤ) :
     (basePull r).mapDerivedCategory.map (chainComparison (verticalPush r) K) ≫
@@ -226,6 +230,7 @@ private theorem exchange_chain (r : StrictTowerRingedSquare sq)
         chainComparison (targetPush r)
           (((upperPull r).mapHomologicalComplex (.up ℤ)).obj K) := by
   exact exchange_chainUnit r K
+end ExchangeChain
 
 attribute [local irreducible] ordinary proEtaleAmbientRingedExchange
 
@@ -311,6 +316,8 @@ end OpenComparisonTransfer
 
 -- Specialize the category instances before substituting the ringed functors.
 section SchemeOpenComparisonTransfer
+-- Same locally bijective instance as in `exchange`, so the chain types agree syntactically.
+attribute [local instance 40000] completedConstantAbLocallyBijective
 variable (r : StrictTowerRingedSquare sq)
   (F : proEtaleRingModules X r.RX ⥤ proEtaleRingModules Y r.RY)
   (G : proEtaleRingModules Y r.RY ⥤ proEtaleRingModules Y' r.RY')
@@ -335,8 +342,6 @@ private theorem scheme_derived_iso_of_chain (e : F ⋙ G ⟶ H ⋙ J) [IsIso e]
   exact derived_iso_of_chain F G H J e δ hδ
 end SchemeOpenComparisonTransfer
 
--- The kernel re-checks the ringed derived-functor instances of the exchange chain.
-set_option maxHeartbeats 1000000 in
 /-- The open comparison is the specified derived mate and is an isomorphism.
 Source: Stacks 08FI, 09A5 and 00XZ
 (blueprint: lem-sf-ringed-restriction-exchange-open-descent).
