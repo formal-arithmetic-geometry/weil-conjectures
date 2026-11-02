@@ -120,7 +120,8 @@ theorem constructibleToQbar_baseChange_compatibility [IsProper f]
   intro K
   have := hpush K
   have : IsIso (constructibleToQbarPushHom ℓ k E f'
-      ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g'.asOver (Spec (.of k)))).obj K)) :=
+      ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ
+        (g'.asOver (Spec (.of k)))).obj K)) :=
     hpush' _
   constructor
   · dsimp [constructibleToQbarSourceHom]

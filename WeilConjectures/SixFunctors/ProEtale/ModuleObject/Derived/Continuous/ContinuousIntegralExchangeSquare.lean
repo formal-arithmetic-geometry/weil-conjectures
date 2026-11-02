@@ -11,6 +11,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Continuo
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.FiniteDiscreteRingObj.FiniteDiscreteCoefficientBaseChange
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Continuous.ContinuousIntegralPushComparisonSupplement
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Continuous.ContinuousIntegralExchangeEquality
+import WeilConjectures.AlgebraicGeometry.ContinuousIntegralPushComparison
 
 /-! # Scalar localization comparison for the specified proper exchange -/
 
@@ -67,18 +68,26 @@ abbrev continuousIntegralExchangeSquareStatement
       (condensedRingObj (Profinite.continuousMapRingObj E) X) :=
       ⟨(integralScalarExtension ℓ E X).obj M.obj, hM⟩
     ∃ (s : (integralScalarExtension ℓ E Y').obj
-          (((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f.asOver (Spec (.of k))) ⋙
-            boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g.asOver (Spec (.of k)))).obj M).obj) ≅
+          (((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E)
+              (f.asOver (Spec (.of k))) ⋙
+            boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ
+              (g.asOver (Spec (.of k)))).obj M).obj) ≅
         ((ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E (f.asOver (Spec (.of k))) ⋙
-          boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g.asOver (Spec (.of k)))).obj N).obj)
+          boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ
+            (g.asOver (Spec (.of k)))).obj N).obj)
       (t : (integralScalarExtension ℓ E Y').obj
           (((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g'.asOver (Spec (.of k))) ⋙
-            UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E) (f'.asOver (Spec (.of k)))).obj M).obj) ≅
-        ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ (g'.asOver (Spec (.of k))) ⋙
-          ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E (f'.asOver (Spec (.of k)))).obj N).obj),
-      s.hom ≫ ((ContinuousMapRingObj.boundedConstructibleBaseChange ℓ E (sq.toCommSq.asOver (Spec (.of k)))).app N).hom =
+            UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E)
+              (f'.asOver (Spec (.of k)))).obj M).obj) ≅
+        ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ
+            (g'.asOver (Spec (.of k))) ⋙
+          ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E
+            (f'.asOver (Spec (.of k)))).obj N).obj),
+      s.hom ≫ ((ContinuousMapRingObj.boundedConstructibleBaseChange ℓ E
+          (sq.toCommSq.asOver (Spec (.of k)))).app N).hom =
         (integralScalarExtension ℓ E Y').map
-          ((UnitBallRingObj.boundedConstructibleBaseChange ℓ (continuousIntegers ℓ E) (sq.toCommSq.asOver (Spec (.of k)))).app M).hom ≫
+          ((UnitBallRingObj.boundedConstructibleBaseChange ℓ (continuousIntegers ℓ E)
+            (sq.toCommSq.asOver (Spec (.of k)))).app M).hom ≫
             t.hom
 
 /-- Source and target comparisons identify the specified integral and E exchange maps.
@@ -112,7 +121,8 @@ theorem continuousIntegral_exchange_square [IsProper f]
     refine (ObjectProperty.isIso_hom_iff _).1 ?_
     run_tac exactLocalByKernel `h
   have hf' : IsIso (integralConstructiblePushHom ℓ E k f'
-      ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g'.asOver (Spec (.of k)))).obj M)) := by
+      ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ
+        (g'.asOver (Spec (.of k)))).obj M)) := by
     have h := integralScalarPushHom_isIso ℓ E f'
       ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g'.asOver (Spec (.of k)))).obj M)
     refine (ObjectProperty.isIso_hom_iff _).1 ?_

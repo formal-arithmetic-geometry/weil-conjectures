@@ -130,17 +130,17 @@ private theorem quotient_formulas
       (sq : ChosenCartesianSquare g' p' p g)
       (K : DerivedCategory (Modules (IntegralQuotient.integral l E) X)),
       (constantModelBoundedConstructible (IntegralQuotient.finite l E 0) X ⊓
-        DerivedCategory.finiteTorAmplitude _)
+        _root_.DerivedCategory.finiteTorAmplitude _)
           ((D (IntegralQuotient.reduction l E 0) X).obj K) →
       IsIso ((D (IntegralQuotient.reduction l E 0) Y').map
         ((condensedAmbientExchange (IntegralQuotient.integral l E) sq).app K))) ∧
     (∀ (K : DerivedCategory (Modules (IntegralQuotient.integral l E) X))
       (M : DerivedCategory (Modules (IntegralQuotient.integral l E) Y)),
       (constantModelBoundedConstructible (IntegralQuotient.finite l E 0) X ⊓
-        DerivedCategory.finiteTorAmplitude _)
+        _root_.DerivedCategory.finiteTorAmplitude _)
           ((D (IntegralQuotient.reduction l E 0) X).obj K) →
       (constantModelBoundedConstructible (IntegralQuotient.finite l E 0) Y ⊓
-        DerivedCategory.finiteTorAmplitude _)
+        _root_.DerivedCategory.finiteTorAmplitude _)
           ((D (IntegralQuotient.reduction l E 0) Y).obj M) →
       IsIso ((D (IntegralQuotient.reduction l E 0) Y).map
         (moduleObjectProjectionMap (IntegralQuotient.integral l E) p K M))) := by
@@ -165,7 +165,7 @@ private theorem quotient_formulas
       (fun f ↦ b f 0) (fun f ↦ hb f 0) sq
     have hactual :
         (constantModelBoundedConstructible (IntegralQuotient.finite l E 0) X ⊓
-          DerivedCategory.finiteTorAmplitude _)
+          _root_.DerivedCategory.finiteTorAmplitude _)
             ((D (IntegralQuotient.reduction l E 0) X).obj K) →
         IsIso ((condensedAmbientExchange (IntegralQuotient.finite l E 0) sq).app
           ((D (IntegralQuotient.reduction l E 0) X).obj K)) := by
@@ -178,10 +178,10 @@ private theorem quotient_formulas
   · intro K M hK hM
     have hfinite :
         (constantModelBoundedConstructible (IntegralQuotient.finite l E 0) X ⊓
-          DerivedCategory.finiteTorAmplitude _)
+          _root_.DerivedCategory.finiteTorAmplitude _)
             ((D (IntegralQuotient.reduction l E 0) X).obj K) →
         (constantModelBoundedConstructible (IntegralQuotient.finite l E 0) Y ⊓
-          DerivedCategory.finiteTorAmplitude _)
+          _root_.DerivedCategory.finiteTorAmplitude _)
             ((D (IntegralQuotient.reduction l E 0) Y).obj M) →
         IsIso (moduleObjectProjectionMap (IntegralQuotient.finite l E 0) p
           ((D (IntegralQuotient.reduction l E 0) X).obj K)
@@ -281,8 +281,7 @@ private theorem data_eq (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 private theorem residue_torsion (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] :
     ∃ r : ℕ, (l ^ r : ℕ) • (1 : Padic.coefficientExtensionRing l E 1) = 0 := by
-  have h := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
+  have h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   have hgen : Ideal.span {Padic.coefficientExtensionUniformizer l E} =
       Padic.coefficientExtensionMaximalIdeal l E :=
     h.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
@@ -311,14 +310,14 @@ private def reducedFormulas (d : ReductionData.{u})
     (∀ {X' Y' : Scheme.{u}} (g : Y' ⟶ Y) (p' : X' ⟶ Y') (g' : X' ⟶ X)
       (sq : ChosenCartesianSquare g' p' p g)
       (K : DerivedCategory (QuotientChange.Modules d.R.X X)),
-      (constantModelBoundedConstructible d.S.X X ⊓ DerivedCategory.finiteTorAmplitude _)
+      (constantModelBoundedConstructible d.S.X X ⊓ _root_.DerivedCategory.finiteTorAmplitude _)
         ((red X).obj K) →
       IsIso ((red Y').map ((condensedAmbientExchange d.R.X sq).app K))) ∧
     (∀ (K : DerivedCategory (QuotientChange.Modules d.R.X X))
       (M : DerivedCategory (QuotientChange.Modules d.R.X Y)),
-      (constantModelBoundedConstructible d.S.X X ⊓ DerivedCategory.finiteTorAmplitude _)
+      (constantModelBoundedConstructible d.S.X X ⊓ _root_.DerivedCategory.finiteTorAmplitude _)
         ((red X).obj K) →
-      (constantModelBoundedConstructible d.S.X Y ⊓ DerivedCategory.finiteTorAmplitude _)
+      (constantModelBoundedConstructible d.S.X Y ⊓ _root_.DerivedCategory.finiteTorAmplitude _)
         ((red Y).obj M) →
       IsIso ((red Y).map (moduleObjectProjectionMap d.R.X p K M)))
 
@@ -380,17 +379,17 @@ theorem integralResidueProperFormulas
       (sq : ChosenCartesianSquare g' p' p g)
       (K : DerivedCategory (AdicCompletion.Modules l E X)),
       (constantModelBoundedConstructible (DerivedNakayama.quotientRing l E 1) X ⊓
-        DerivedCategory.finiteTorAmplitude _)
+        _root_.DerivedCategory.finiteTorAmplitude _)
           ((AdicCompletion.derivedReduction l E X 0).obj K) →
       IsIso ((AdicCompletion.derivedReduction l E Y' 0).map
         ((condensedAmbientExchange (DerivedNakayama.integerRing l E) sq).app K))) ∧
     (∀ (K : DerivedCategory (AdicCompletion.Modules l E X))
       (M : DerivedCategory (AdicCompletion.Modules l E Y)),
       (constantModelBoundedConstructible (DerivedNakayama.quotientRing l E 1) X ⊓
-        DerivedCategory.finiteTorAmplitude _)
+        _root_.DerivedCategory.finiteTorAmplitude _)
           ((AdicCompletion.derivedReduction l E X 0).obj K) →
       (constantModelBoundedConstructible (DerivedNakayama.quotientRing l E 1) Y ⊓
-        DerivedCategory.finiteTorAmplitude _)
+        _root_.DerivedCategory.finiteTorAmplitude _)
           ((AdicCompletion.derivedReduction l E Y 0).obj M) →
       IsIso ((AdicCompletion.derivedReduction l E Y 0).map
         (moduleObjectProjectionMap (DerivedNakayama.integerRing l E) p K M))) := by
