@@ -335,6 +335,8 @@ private theorem scheme_derived_iso_of_chain (e : F ⋙ G ⟶ H ⋙ J) [IsIso e]
   exact derived_iso_of_chain F G H J e δ hδ
 end SchemeOpenComparisonTransfer
 
+-- The kernel re-checks the ringed derived-functor instances of the exchange chain.
+set_option maxHeartbeats 1000000 in
 /-- The open comparison is the specified derived mate and is an isomorphism.
 Source: Stacks 08FI, 09A5 and 00XZ
 (blueprint: lem-sf-ringed-restriction-exchange-open-descent).

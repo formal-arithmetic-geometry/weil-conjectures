@@ -26,6 +26,4 @@ namespace AlgebraicGeometry.Scheme.ContinuousRational
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-attribute [instance] OrdinaryPullback.ordinaryAdditive
-
 end AlgebraicGeometry.Scheme.ContinuousRational

@@ -398,7 +398,7 @@ section CoefficientProof
 set_option backward.isDefEq.respectTransparency false
 
 set_option allowUnsafeReducibility true in
-attribute [local reducible] functorialCupHasDerived functorialCupDerivedMonoidal
+attribute [local reducible] functorialCupHasDerived
   functorialCupMonoidal functorialCupAbelian functorialCupCategory
   functorialCupMonoidalPreadditive functorialCupSymmetric functorialCupClosed
   functorialCupFlatResolutions functorialCupMultiplication functorialCupSource
@@ -567,6 +567,11 @@ def functorialCupSupportMap (P : PurityFiniteSetting.{u}) (pro : Bool)
     [IsClosedImmersion i] [IsClosedImmersion j] (g : D ⟶ C) (h : g ≫ i = j) :
     P.functorialCupSource pro i ⟶ P.functorialCupSource pro j :=
   (P.functorialCupSupportMap_existsUnique pro i j g h).choose
+
+/-- Ext smallness cached before evaluating the fixed coefficient lines. -/
+theorem functorialCupHasExt (P : PurityFiniteSetting.{u}) (pro : Bool) (X : Scheme.{u}) :
+    HasExt.{u + 1} (P.functorialCupSheaves pro X) :=
+  hasExt_of_hasDerivedCategory _
 
 attribute [local instance] functorialCupHasExt
 

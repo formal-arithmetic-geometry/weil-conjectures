@@ -75,44 +75,13 @@ variable {C : Type*} {C' : Type*} [Category C] [Category C'] [Abelian C] [Abelia
   [L.Additive] [R.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L]
   [PreservesFiniteLimits R] [PreservesFiniteColimits R]
 
-attribute [local instance] pointExactDerivedSquare
-
 end ExactAdjunction
 
 section FiniteReconstruction
 
 variable (k B : Type u) [Field k] [IsAlgClosed k] [CommRing B] [Finite B]
 
-omit [IsAlgClosed k] [Finite B] in
-attribute [local instance] pointFiniteSheafifyProEt
-
-omit [IsAlgClosed k] [Finite B] in
-attribute [local instance] pointFiniteSheafifyEtale
-
-omit [Finite B] in
-attribute [local instance] pointFiniteConstant_full
-
-omit [Finite B] in
-attribute [local instance] pointFiniteConstant_faithful
-
-omit [IsAlgClosed k] [Finite B] in
-attribute [local instance] pointFiniteConstant_limits
-
-omit [IsAlgClosed k] [Finite B] in
-attribute [local instance] pointFiniteConstant_additive
-
-omit [IsAlgClosed k] [Finite B] in
-attribute [local instance] pointFiniteConstant_colimits
-
 end FiniteReconstruction
-
-attribute [local instance] pointFiniteSheafifyProEt
-attribute [local instance] pointFiniteSheafifyEtale
-attribute [local instance] pointFiniteConstant_full
-attribute [local instance] pointFiniteConstant_faithful
-attribute [local instance] pointFiniteConstant_limits
-attribute [local instance] pointFiniteConstant_additive
-attribute [local instance] pointFiniteConstant_colimits
 
 attribute [local irreducible] pointStageFibre pointStageFibreScalarIso pointQbarFibre
   Functor.mapDerivedCategory DerivedCategory.pointFdQbarStageComp
