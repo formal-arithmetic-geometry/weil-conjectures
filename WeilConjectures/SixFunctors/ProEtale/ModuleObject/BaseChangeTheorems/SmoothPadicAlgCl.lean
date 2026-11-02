@@ -59,6 +59,15 @@ end CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
+/- The cached instances of `Derived.Localizing` give `L((f)^*⟦Λ⟧)` instance arguments differing
+from those this file was written against; unifying the two unfolds the derived functors. They are
+erased here, as in `NearbyCycles.Exchange`. -/
+attribute [-instance] hasTensorFour_modCondensed
+  hasGoodTensor₁₂Tensor_modCondensed hasGoodTensorTensor₂₃_modCondensed
+  hasColimitsOfShapeInt_modCondensed hasExactColimitsOfShapeInt_modCondensed
+  hasCountableCoproducts_modCondensed preservesColimitsOfShapeInt_tensorLeft_modCondensed
+  preservesColimitsOfShapeInt_tensorRight_modCondensed hasFunctorialFlatResolution_modCondensed
+
 open Scheme PadicAlgCl
 
 section Flat

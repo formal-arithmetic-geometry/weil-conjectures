@@ -87,9 +87,10 @@ The helper `rationalCoefficientPushforwardPreservation` supplies the existing pr
 proof by the displayed ring equality; it introduces no preservation assumption.
 
 For compile time the module is split: clauses 1--2 are in
-`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Proper.ProperBaseChangeRationalPushforward`, proper base change is in
-`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Proper.ProperBaseChangeRationalExchange`, and this module (projection formula) imports
-both publicly.
+`Derived.Proper.ProperBaseChangeRationalPushforward`,
+proper base change is in
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Proper.ProperBaseChangeRationalExchange`,
+and this module (projection formula) imports both publicly.
 -/
 
 @[expose] public noncomputable section

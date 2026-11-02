@@ -66,7 +66,9 @@ Source: blueprint main-20261015, sec-six-functors-basics,
 sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.md, clause 3, proper base
 change (blueprint: det-thm-sfb-proper-base-change-rational).
 
-Split off from `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Proper.ProperBaseChangeRational` for compile time. The recorded
+Split off from
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Proper.ProperBaseChangeRational`
+for compile time. The recorded
 unit--square--counit base-change map with the named rational preservation proof is invertible.
 -/
 
