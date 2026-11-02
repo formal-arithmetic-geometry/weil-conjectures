@@ -114,12 +114,12 @@ theorem unit_assembly
     (br : IE ⋙ PE.lift (PE.ι ⋙ Xr) hXr ≅ SE.lift (SE.ι ⋙ Sr) hSr ⋙ IE)
     (uU : SE.lift (SE.ι ⋙ Sr) hSr ≅ 𝟭 _) (uC : PE.lift (PE.ι ⋙ Xr) hXr ≅ 𝟭 _)
     (Xu : Xr ≅ 𝟭 AE) (hC : ∀ X, (uC.hom.app X).hom = Xu.hom.app X.obj)
-    (Or : DE ⥤ DE) (Ou : Or ≅ 𝟭 DE) (er : Or ⋙ TE ≅ TE ⋙ Xr)
+    (Or : DE ⥤ DE) (ou : ∀ Y, Or.obj Y ⟶ Y) (er : Or ⋙ TE ≅ TE ⋙ Xr)
     (ωr : SE.ι ⋙ Or ≅ SE.ι ⋙ Sr)
     (Gr : ∀ K, (br.hom.app K).hom ≫ θE.hom.app ((SE.lift (SE.ι ⋙ Sr) hSr).obj K) =
       Xr.map (θE.hom.app K) ≫ er.inv.app K.obj ≫ TE.map (ωr.hom.app K))
-    (hU : ∀ K, (uU.hom.app K).hom = ωr.inv.app K ≫ Ou.hom.app K.obj)
-    (hD : ∀ Y, er.inv.app Y ≫ TE.map (Ou.hom.app Y) = Xu.hom.app (TE.obj Y))
+    (hU : ∀ K, (uU.hom.app K).hom = ωr.inv.app K ≫ ou K.obj)
+    (hD : ∀ Y, er.inv.app Y ≫ TE.map (ou Y) = Xu.hom.app (TE.obj Y))
     (K : SE.FullSubcategory) :
     br.hom.app K ≫ IE.map (uU.hom.app K) = uC.hom.app (IE.obj K) := by
   have hIE : ∀ {X Y : SE.FullSubcategory} (f : X ⟶ Y),
