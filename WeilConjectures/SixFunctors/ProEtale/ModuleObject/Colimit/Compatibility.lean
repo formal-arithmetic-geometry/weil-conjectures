@@ -15,12 +15,6 @@ import WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
 import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
 import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextensionBasis
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushFiniteFree
-public import Mathlib.Algebra.Homology.HomologicalComplexLimits
-public import Mathlib.CategoryTheory.Limits.Shapes.Products
-public import WeilConjectures.CategoryTheory.CoefficientPushCopowerCriterion
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive
-public import WeilConjectures.CategoryTheory.DerivedModuleDirectSums
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 
 /-!
 
