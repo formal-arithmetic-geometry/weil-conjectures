@@ -11,10 +11,13 @@ public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.ProEtaleCoefficients.ModuleCupGodementBetaExists
 public import WeilConjectures.ProEtaleCoefficients.ModuleCupGodementPairingsFromBeta
+import WeilConjectures.AlgebraicGeometry.ModuleCupGodementModel
 
 /-! # Collapse compatibility for the canonical recursively generated pairing -/
 
 @[expose] public section
+-- This module keeps only private proof helpers.
+set_option linter.privateModule false
 universe u
 set_option autoImplicit false
 open CategoryTheory CategoryTheory.MonoidalCategory

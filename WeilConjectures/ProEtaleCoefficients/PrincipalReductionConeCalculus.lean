@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.AdicCompletion.DerivedCompletion
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 public import Mathlib.Algebra.Homology.HomotopyCategory.Pretriangulated
-import WeilConjectures.ProEtaleCoefficients.DerivedNakayamaResolution
+import all WeilConjectures.ProEtaleCoefficients.DerivedNakayamaResolution
 import WeilConjectures.AlgebraicGeometry.AdicCompletion.DerivedCompletionSupplement
 import Mathlib.Algebra.Homology.HomotopyCategory.Pretriangulated
 import WeilConjectures.ProEtaleCoefficients.PrincipalConeTensorNormalization
@@ -33,6 +33,7 @@ including its quotient transitions and its specified reduction coaugmentations.
 -/
 
 @[expose] public noncomputable section
+set_option linter.privateModule false
 
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
@@ -54,7 +55,6 @@ variable {A : Type u} [Category.{vS} A] [Preadditive A] [HasBinaryBiproducts A]
 variable {C : Type aS} [Category.{bS} C]
 variable [HasShift C ℤ] {F G : C ⥤ CochainComplex A ℤ}
   [F.CommShift ℤ] [G.CommShift ℤ] (τ : F ⟶ G) [NatTrans.CommShift τ ℤ]
-omit [HasBinaryBiproducts A] in
 end PrincipalConeShift
 
 section StrictCones
@@ -81,7 +81,6 @@ private local instance chainAction_commShift (μ : 𝟭 C ⟶ 𝟭 C) :
     ext M i
     simp [chainAction, CochainComplex.shiftFunctor_map_f']
 
-omit [Preadditive C] [HasBinaryBiproducts C] in
 end StrictCones
 
 namespace PrincipalReduction
@@ -95,7 +94,7 @@ private abbrev action (d : End (Mod.regular (DerivedNakayama.integerRing l E))) 
     𝟭 (CochainComplex (Modules l E X) ℤ) ⟶ 𝟭 _ :=
   chainAction (DerivedNakayama.scalarOnModules l E X d)
 
-attribute [local irreducible] DerivedNakayama.scalarOnModules uniformizerEnd
+attribute [local irreducible] DerivedNakayama.scalarOnModules DerivedNakayama.uniformizerEnd
 
 end PrincipalReduction
 end AlgebraicGeometry.ProEtale

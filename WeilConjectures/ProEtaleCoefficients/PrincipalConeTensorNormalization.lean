@@ -22,6 +22,7 @@ Source: blueprint, derived Nakayama resolution, On X paragraph.
 -/
 
 @[expose] public noncomputable section
+set_option linter.privateModule false
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option synthInstance.maxSize 4096
@@ -40,12 +41,14 @@ open Category BraidedCategory
 namespace UnitEndScalars
 variable (A : Type u) [Category.{v} A] [Preadditive A]
   [MonoidalCategory A] [MonoidalPreadditive A]
+@[instance_reducible] private def scalarRing : CommRing (End (𝟙_ A)) :=
+  { (inferInstance : Ring (End (𝟙_ A))) with
+    mul_comm := fun a b ↦ by
+      have h := unitEndAction_naturality a b
+      simpa only [End.mul_def, unitEndAction_unit] using h }
 private def Scalars := End (𝟙_ A)
 private instance : CommRing (Scalars A) := scalarRing A
 variable [BraidedCategory A]
-omit [Preadditive A] [MonoidalPreadditive A] [BraidedCategory A] in
-omit [Preadditive A] [MonoidalPreadditive A] in
-omit [Preadditive A] [MonoidalPreadditive A] in
 end UnitEndScalars
 end ScalarTools
 
@@ -63,8 +66,6 @@ variable {A : Type*} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A]
   {B : Type z} [CommRing B] [Linear B A] [MonoidalLinear B A]
 local instance : HasColimitsOfSize.{0, 0} A := hasColimitsOfSizeShrink A
 
-omit [IsGrothendieckAbelian A] [MonoidalCategory A] [MonoidalClosed A]
-    [MonoidalPreadditive A] [BraidedCategory A] [Abelian.HasFunctorialFlatResolution A] in
 end Generic
 
 end AlgebraicGeometry.ProEtale.PrincipalNormalization

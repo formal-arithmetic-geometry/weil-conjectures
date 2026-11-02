@@ -90,20 +90,6 @@ variable {C : Type*} [Category C] [MonoidalCategory C]
   {R S : C} [MonObj R] [MonObj S]
   (a : R ⟶ S) [IsMonHom a]
 
-private theorem additive_mapMod : (F.mapMod R).Additive where
-  map_add := hom_ext _ _ F.map_add
-
-private noncomputable def mapRegularIso :
-    (F.mapMod R).obj (regular R) ≅ regular (F.obj R) :=
-  isoMk (Iso.refl _) (by simp only [Iso.refl_hom, Category.comp_id,
-    MonoidalCategory.whiskerLeft_id, Category.id_comp])
-
-private noncomputable def mapFiniteFreeIso (n : ℕ) :
-    (F.mapMod R).obj (finiteFree R n) ≅ finiteFree (F.obj R) n := by
-  have : (F.mapMod R).Additive := additive_mapMod F
-  exact (F.mapMod R).mapBiproduct (fun _ : Fin n ↦ regular R) ≪≫
-    biproduct.mapIso (fun _ ↦ mapRegularIso F)
-
 private noncomputable def mapRestrictedRegularIso :
     (F.mapMod R).obj ((comap a).obj (regular S)) ≅
       (comap (F.map a)).obj (regular (F.obj S)) :=
