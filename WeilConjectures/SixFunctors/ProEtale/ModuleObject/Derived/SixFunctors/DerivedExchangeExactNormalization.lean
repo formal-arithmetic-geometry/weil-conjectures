@@ -321,6 +321,27 @@ local notation "ambientMate" =>
 
 set_option linter.unusedSectionVars false
 
+private theorem exchange_triangle
+    [NatTrans.CommShift (moduleObjectDerivedExchange Λ
+      (show CommSq g'.left p'.left p.left g.left from
+          (Over.forget _).map_commSq sq)) ℤ]
+    (T : Triangle (DerivedCategory (Mod
+        (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1}) (condensedRingObj Λ X.left)))) :
+      ∃ b : (moduleObjectDerivedPushforward Λ p.left ⋙
+          moduleObjectDerivedPullback Λ g.left).mapTriangle.obj T ⟶
+        (moduleObjectDerivedPullback Λ g'.left ⋙
+          moduleObjectDerivedPushforward Λ p'.left).mapTriangle.obj T,
+        b.hom₁ = (moduleObjectDerivedExchange Λ
+          (show CommSq g'.left p'.left p.left g.left from
+          (Over.forget _).map_commSq sq)).app T.obj₁ ∧
+        b.hom₂ = (moduleObjectDerivedExchange Λ
+          (show CommSq g'.left p'.left p.left g.left from
+          (Over.forget _).map_commSq sq)).app T.obj₂ ∧
+        b.hom₃ = (moduleObjectDerivedExchange Λ
+          (show CommSq g'.left p'.left p.left g.left from
+          (Over.forget _).map_commSq sq)).app T.obj₃ :=
+  triangle_morphism_of_shift _ _ _ T
+
 /-- The ambient exchange has the prescribed counit normalization, both ambient functors
 are exact with their fixed canonical shifts, and the exchange commutes with every integer
 shift. No cartesian hypothesis is imposed.
@@ -387,14 +408,6 @@ theorem moduleObjectDerivedExchange_exact_normalization :
         b.hom₃ = (moduleObjectDerivedExchange Λ
           (show CommSq g'.left p'.left p.left g.left from
           (Over.forget _).map_commSq sq)).app T.obj₃) := by
-  generalize hE : moduleObjectDerivedExchange Λ
-    (show CommSq g'.left p'.left p.left g.left from
-      (Over.forget _).map_commSq sq) = B
-  have hcanonical : B = ambientMate :=
-    hE.symm.trans (exchange_eq_mate Λ
-      (show CommSq g'.left p'.left p.left g.left from
-        (Over.forget _).map_commSq sq))
-  rw [hcanonical]
   have hP (A B : Scheme.{u}) (f : A ⟶ B) := pullback_triangulated Λ f
   have hG (A B : Scheme.{u}) (f : A ⟶ B) :
       (moduleObjectDerivedPushforward Λ f).IsTriangulated :=
@@ -403,18 +416,19 @@ theorem moduleObjectDerivedExchange_exact_normalization :
   have := hP _ _ g'.left
   have := hG _ _ p.left
   have := hG _ _ p'.left
-  have hB : NatTrans.CommShift
-      (ambientMate) ℤ :=
-    exchange_shift Λ (show CommSq g'.left p'.left p.left g.left from
-          (Over.forget _).map_commSq sq)
-  refine ⟨?_, inferInstance, inferInstance, hB, ?_⟩
-  · intro K
-    simp only [mateEquiv_counit]
-  · intro T _
-    exact triangle_morphism_of_shift
-      (moduleObjectDerivedPushforward Λ p.left ⋙ moduleObjectDerivedPullback Λ g.left)
-      (moduleObjectDerivedPullback Λ g'.left ⋙ moduleObjectDerivedPushforward Λ p'.left)
-      (ambientMate) T
+  have hB := exchange_shift Λ (show CommSq g'.left p'.left p.left g.left from
+    (Over.forget _).map_commSq sq)
+  refine ⟨?_, inferInstance, inferInstance, hB, fun T _ ↦ exchange_triangle Λ ℓ sq T⟩
+  generalize hE : moduleObjectDerivedExchange Λ
+    (show CommSq g'.left p'.left p.left g.left from
+      (Over.forget _).map_commSq sq) = B
+  have hcanonical : B = ambientMate :=
+    hE.symm.trans (exchange_eq_mate Λ
+      (show CommSq g'.left p'.left p.left g.left from
+        (Over.forget _).map_commSq sq))
+  rw [hcanonical]
+  intro K
+  simp only [mateEquiv_counit]
 
 set_option allowUnsafeReducibility true in
 attribute [local reducible] PreservesBoundedConstructiblePushforwards

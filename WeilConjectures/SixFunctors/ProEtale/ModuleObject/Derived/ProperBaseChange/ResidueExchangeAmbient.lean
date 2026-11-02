@@ -13,8 +13,8 @@ public import WeilConjectures.CategoryTheory.ProperBaseChange.TransportedComposi
 /-! # The ambient residue exchange square and its mate
 
 The pullback-square comparison and the exchange mate on the ambient residue categories, split
-out of `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Bounded.BoundedExchangeAmbient` so that they do not import the bounded constructible
-six functors.
+out of `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Bounded.BoundedExchangeAmbient`
+so that they do not import the bounded constructible six functors.
 -/
 
 set_option backward.defeqAttrib.useBackward true

@@ -55,7 +55,9 @@ Source: current blueprint, sec-six-functors-basics,
 sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.md, clauses 1--2
 (blueprint: det-thm-sfb-proper-base-change-rational).
 
-The first part of `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Proper.ProperBaseChangeRational`, split off for compile time: the
+The first part of
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Proper.ProperBaseChangeRational`,
+split off for compile time: the
 canonical rationalization push comparison, the named preservation proofs for the two rational
 coefficient cases, the three bounded-below coefficient comparisons of clause 1 and preservation
 of bounded constructibility (clause 2).

@@ -279,7 +279,8 @@ private theorem module_classical_reflect_closed
     (hij : Set.range j = (Set.range i)ᶜ)
     (M : pulledBackModuleObjects Λ Z)
     (hM : IsClassicalAbelian ((lowerStar Λ i).obj M).X) : IsClassicalAbelian M.X := by
-  have := moduleCounitOfAbelian Λ i (ProEtale.abelian_closed_support i j hij).1
+  have := moduleCounitOfAbelian Λ i
+    (ProEtale.abelian_closed_support_counit_and_unit i j hij).1
   apply ab_classical_iso ((Mod.forget (condensedRingObj Λ Z)).mapIso
     (asIso ((upperStarLowerStarAdjunction Λ i).counit.app M)))
   exact module_classical_pullback Λ i _ hM
@@ -290,8 +291,7 @@ private theorem quotient_annihilator
     (l ^ n : Padic.coefficientExtensionRing l E n) = 0 := by
   let O := Padic.coefficientExtensionIntegers l E
   let π := Padic.coefficientExtensionUniformizer l E
-  have h := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
+  have h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   have hgen : Ideal.span ({π} : Set O) = Padic.coefficientExtensionMaximalIdeal l E :=
     h.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
   have hval : Padic.coefficientExtensionAbsoluteValue l E (l : E) < 1 := by
@@ -531,7 +531,8 @@ private theorem window_support_bound
       adj.leftAdjoint_preservesColimits
     infer_instance
   obtain ⟨δ, hδ⟩ := htri
-  have hcounit := moduleCounitOfAbelian Λ i (ProEtale.abelian_closed_support i j hij).1
+  have hcounit := moduleCounitOfAbelian Λ i
+    (ProEtale.abelian_closed_support_counit_and_unit i j hij).1
   have ff := (upperStarLowerStarAdjunction Λ i).fullyFaithfulROfIsIsoCounit
   have := ff.faithful
   intro q hq
