@@ -318,11 +318,7 @@ lemma pushforwardExchange_comp_app_of_eq {fg : X ⟶ Z} {fg' : X' ⟶ Z'} (χ : 
             (leftDerivedUpperStarCompOfEq Λ h).symm).hom.app E) ≫
         (ψ.pushforwardExchange Λ).app (R((f)_*⟦Λ⟧).obj E) ≫
         R((g')_*⟦Λ⟧).map ((φ.pushforwardExchange Λ).app E) :=
-  -- the left adjoints are given in the form of `pullbackSquareComparison` (cached instances of
-  -- `Derived.Localizing`); unifying them with those of the adjunctions unfolds the derived functors
-  mateEquiv_comp_aux (L₁ := L((g)^*⟦Λ⟧)) (L₂ := L((f)^*⟦Λ⟧)) (L₃ := L((fg)^*⟦Λ⟧))
-    (L₁' := L((g')^*⟦Λ⟧)) (L₂' := L((f')^*⟦Λ⟧)) (L₃' := L((fg')^*⟦Λ⟧))
-    (derivedUpperStarLowerStarAdjunction Λ g)
+  mateEquiv_comp_aux (derivedUpperStarLowerStarAdjunction Λ g)
     (derivedUpperStarLowerStarAdjunction Λ f) (derivedUpperStarLowerStarAdjunction Λ fg)
     (derivedUpperStarLowerStarAdjunction Λ g') (derivedUpperStarLowerStarAdjunction Λ f')
     (derivedUpperStarLowerStarAdjunction Λ fg') (leftDerivedUpperStarCompOfEq Λ h)
@@ -349,11 +345,7 @@ lemma pushforwardExchange_comp_app
             (leftDerivedUpperStarComp Λ f g).symm).hom.app E) ≫
         (ψ.pushforwardExchange Λ).app (R((f)_*⟦Λ⟧).obj E) ≫
         R((g')_*⟦Λ⟧).map ((φ.pushforwardExchange Λ).app E) :=
-  -- the left adjoints are given in the form of `pullbackSquareComparison` (cached instances of
-  -- `Derived.Localizing`); unifying them with those of the adjunctions unfolds the derived functors
-  mateEquiv_comp_aux (L₁ := L((g)^*⟦Λ⟧)) (L₂ := L((f)^*⟦Λ⟧)) (L₃ := L((f ≫ g)^*⟦Λ⟧))
-    (L₁' := L((g')^*⟦Λ⟧)) (L₂' := L((f')^*⟦Λ⟧)) (L₃' := L((f' ≫ g')^*⟦Λ⟧))
-    (derivedUpperStarLowerStarAdjunction Λ g)
+  mateEquiv_comp_aux (derivedUpperStarLowerStarAdjunction Λ g)
     (derivedUpperStarLowerStarAdjunction Λ f) (derivedUpperStarLowerStarAdjunction Λ (f ≫ g))
     (derivedUpperStarLowerStarAdjunction Λ g') (derivedUpperStarLowerStarAdjunction Λ f')
     (derivedUpperStarLowerStarAdjunction Λ (f' ≫ g')) (leftDerivedUpperStarComp Λ f g)
