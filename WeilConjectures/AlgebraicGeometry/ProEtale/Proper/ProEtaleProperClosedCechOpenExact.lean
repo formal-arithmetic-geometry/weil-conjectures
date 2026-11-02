@@ -37,10 +37,19 @@ Remarks: by the corepresenting property and `b^* ⊣ b_*`, this is equivalent to
 `z^* b_* J` on the closed fibre `P_Z`, an instance of proper base change for the henselian
 pair `(Γ(W), J_W)`; this is why properness, `hW` and `hspecializes` are needed.
 
-Proof plan: as for `closedAffineCech_open_restriction_exact`, use the retained lift
-presentation of the three degrees and contract the lifted nerve locally by insertion of a
-chosen local lift. Properness and `hspecializes` show that every point of `P` specializes
-into the closed fibre, so henselian lifts of a cover of the closed fibre cover `P`. -/
+Status: not proved here. With `j` the open complement of `z` on `P`, it amounts to
+`H^m(P, j_! j^* I) = 0` for `m ≥ 2` and injective `I`. This is proper base change for the
+henselian pair `(Γ(W), J_W)` and arbitrary pro-étale sheaves, not only those coming from the
+étale site. Approaches that do not suffice:
+* dimension shifting with the degree-zero statement `proper_closed_injective_sections_epi`
+  only reproduces this statement;
+* `z^*` does not preserve injectives;
+* the earlier plan compared with the Čech complex of `I` on henselian lifts of the closed
+  fibres. It fails because fibre products over `P` of henselian lifts are not henselian lifts:
+  they acquire clopen parts with empty closed fibre, from distinct branches over the open part;
+* iterating `closedLiftGeneratorAugmentation` needs the higher analogue of
+  `proper_closedLift_relations_generated` and the affine statement
+  `exactAt_closedCechCoefficientFunctor_obj_of_injective`. -/
 theorem properClosedCech_open_restriction_exact
     (A : Type u) [CommRing A] [Finite A]
     {B D E : Scheme.{u}} (p : B ⟶ D) (i : E ⟶ D)
