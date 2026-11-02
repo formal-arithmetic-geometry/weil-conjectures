@@ -72,6 +72,7 @@ import all WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedPullb
 import WeilConjectures.AlgebraicGeometry.Stratum.StratumCompletionUnitRestriction
 import WeilConjectures.AlgebraicGeometry.BoundedConstructibleTower
 import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeUnitDerived
+import WeilConjectures.AlgebraicGeometry.Derived.DerivedReductionAugmentationCompatibility
 
 /-! # Coefficient normalization of the raw ordered completed exchange
 
@@ -1055,6 +1056,57 @@ private theorem lambda_unit (T : Scheme.{t}) (K : d.derived T) :
   rfl
 
 
+section RhoUnitFirst
+
+attribute [local semireducible] completedReductionCoefficient constantSheaf
+  AdicCoefficients.coefficientRing
+
+/-- The derived quotient augmentation on a complex, through the reduction counit. -/
+theorem augmentation_complexCounit (T : Scheme.{t})
+    (P : CochainComplex (reductionModules T (exchangeConstantRing T A)) ℤ) :
+    (augmentation d T).app (DerivedCategory.Q.obj P) ≫ reductionComplexCounit d T P =
+      (Functor.const ℕᵒᵖ).mapDerivedCategoryFactors.hom.app P ≫
+        DerivedCategory.Q.map
+          ((NatTrans.mapHomologicalComplex (ordinaryAugmentation d T) (.up ℤ)).app P) := by
+  let := (reductionData d T).isLeftDerived
+  unfold augmentation
+  with_unfolding_all exact (lift_complex_fac (Functor.const ℕᵒᵖ) (reductionModule d T)
+    (reductionData d T).reduction (reductionData d T).counit (ordinaryAugmentation d T)
+    (canonicalModelAugmentation (Functor.const ℕᵒᵖ) (reductionModule d T)
+      (reductionData d T) (ordinaryAugmentation d T))
+    (fun K ↦ (reductionData d T).reduction.leftDerived_fac_app (reductionData d T).counit
+      (HomotopyCategory.quasiIso _ (.up ℤ)) _ _ K) P)
+
+/-- The ordinary balancing comparison preserves the quotient augmentations. -/
+theorem ordinaryRho_augmentation (T : Scheme.{t}) (M : reductionModules T (d.completedRing T)) :
+    (exchangeTowerModuleRes d T).map ((completedReductionModuleUnit d T).app M) ≫
+        (ordinaryRho d T).symm.hom.app M =
+      (ordinaryScalarDiagonal d T).hom.app M ≫
+        (ordinaryAugmentation d T).app ((reductionRestrict T (exchangeScalar d T)).obj M) := by
+  have hρ := (ordinaryRho_existsUnique d T).exists.choose_spec
+  rw [Iso.symm_hom, ← Iso.app_inv, Iso.comp_inv_eq, Iso.app_hom]
+  apply NatTrans.ext
+  funext n
+  obtain ⟨n⟩ := n
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro U
+  apply ModuleCat.hom_ext
+  apply LinearMap.ext
+  intro x
+  have hu := (completedReductionModuleUnit_exists d T).exists.choose_spec M n U x
+  have ha := (ordinaryAugmentation_existsUnique d T).exists.choose_spec
+    ((reductionRestrict T (exchangeScalar d T)).obj M) n U x
+  change ((((completedReductionModuleUnit d T).app M).app (op n)).val.app U x) =
+    (((ordinaryRho d T).hom.app M).app (op n)).val.app U
+      ((((ordinaryAugmentation d T).app
+        ((reductionRestrict T (exchangeScalar d T)).obj M)).app (op n)).val.app U x)
+  unfold ordinaryAugmentation ordinaryRho completedReductionModuleUnit
+  rw [ha, hρ, hu]
+  rfl
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
 /-- Restriction respects the strict quotient unit, not just its evaluations.
 Source: Stacks 099M (blueprint: def-weil-pbc-ordered-coefficient-comparison-data).
 Proof: on an ordinary flat-term K-flat model both augmentations send x to 1 tensor x
@@ -1065,7 +1117,47 @@ theorem rho_unit_first (T : Scheme.{t}) (K : d.derived T) :
     (exchangeTowerRes d T).map ((completedReductionAugmentation d T).app K) ≫
         (rho d T).hom.app K =
       (scalarDiagonal d T).hom.app K ≫ (augmentation d T).app ((res d T).obj K) := by
-  sorry
+  have hflat := orderedScalarFlat d T
+  let c := exchangeScalar d T
+  let good : ObjectProperty (CochainComplex (reductionModules T (d.completedRing T)) ℤ) :=
+    fun P ↦ P.IsKFlatIndependentCoefficients ∧
+      ∀ n, SheafOfModules.IsFlatOnSite.{t + 1, t, t + 1, t + 1}
+        (R := d.completedRing T) (P.X n)
+  have hkflat (P : CochainComplex (reductionModules T (d.completedRing T)) ℤ) (hP : good P) :=
+    (SheafOfModules.isKFlat_restrictScalars_of_flat c hflat P hP.1).1
+  have hiso (P : CochainComplex (reductionModules T (d.completedRing T)) ℤ) (hP : good P) :
+      IsIso (reductionComplexCounit d T
+        (((reductionRestrict T c).mapHomologicalComplex (.up ℤ)).obj P)) := by
+    have hi := (reductionData d T).complexCounit_isIso _ (hkflat P hP)
+    simpa only [reductionComplexCounit, reduction] using hi
+  have hnorm : RhoNormalization d T (rho d T) := (rho_existsUnique d T).exists.choose_spec
+  unfold RhoNormalization at hnorm
+  exact derivedReduction_augmentationOfCounits (reductionRestrict T c)
+    (exchangeTowerModuleRes d T)
+    (completedReductionModuleTowerFunctor T d) (d.constantTower T)
+    (reductionModule d T) (Functor.const ℕᵒᵖ)
+    (completedReductionTower T d) (reduction d T)
+    (completedReductionTowerComplexCounit T d) (reductionComplexCounit d T)
+    (completedReductionModuleUnit d T) (ordinaryAugmentation d T)
+    (completedReductionAugmentation d T) (augmentation d T)
+    (ordinaryRho d T).symm (ordinaryScalarDiagonal d T) (rho d T)
+    good (flatKFlatResolution T (d.completedRing T)) hiso
+    (fun P hP ↦ by
+      unfold DerivedReductionComparisonFormula
+      exact hnorm P hP.1 hP.2)
+    (fun P hP ↦ by
+      have h := (completedReductionTowerUnit_exists d T).exists.choose_spec P hP.1
+      unfold completedReductionTowerComplexCounit Scheme.reductionComplexCounit
+      change _ ≫ ((completedReductionTower T d).map (𝟙 _) ≫
+        (coherenceReductionTowerCounit T d).app ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ≫
+          DerivedCategory.Qh.map (𝟙 _) ≫ 𝟙 _) = _
+      erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id, Category.id_comp,
+        Category.comp_id, Category.comp_id]
+      exact h)
+    (fun P _ ↦ augmentation_complexCounit d T _)
+    (ordinaryRho_augmentation d T) K
+
+end RhoUnitFirst
 
 /-- The normalized strict-tower comparison preserves the actual completion units.
 Source: Stacks Tags 099M, 0941 and 0A07
