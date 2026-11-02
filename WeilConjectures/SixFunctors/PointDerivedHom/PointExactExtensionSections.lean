@@ -12,8 +12,6 @@ public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionSupplement
 public import Mathlib.RingTheory.Ideal.Quotient.Index
 public import Mathlib.Algebra.Homology.Homotopy
 
-set_option linter.privateModule false
-
 import WeilConjectures.AlgebraicGeometry.SixFunctors.PointProEtaleSectionsExactOfUniverses
 import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 import WeilConjectures.SixFunctors.IntegralPointCoefficientAdjunction.IntegralPointCoefficientAdjunction
@@ -56,6 +54,8 @@ import all Mathlib.RingTheory.Flat.CategoryTheory
 import all WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import all Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits
+
+set_option linter.privateModule false
 
 /-! # Exact completed extension and sections at a point
 
