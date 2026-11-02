@@ -161,8 +161,8 @@ theorem isIso_pullbackExchange_deformationModel_app_of_smooth_finiteCoefficient
     fun n ↦ isIso_baseChangeMap_affineSpace_deformationModel_app_finiteCoefficient k' T I n hT hK
   rw [Subsingleton.elim hj.toCommSq φ.commSq_j] at h₂
   have key := φ.isIso_pullbackExchange_app_of_isIso_baseChangeMap_app
-    (Profinite.continuousMapRingObj.{u} T) K (by cast_proofs h₂)
-  cast_proofs key
+    (Profinite.continuousMapRingObj.{u} T) K (by exact_mod_proofs h₂)
+  exact_mod_proofs key
 
 /-- The unit of the derived category of module objects on any scheme is bounded constructible,
 and so is its derived pullback along any morphism. -/
