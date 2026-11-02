@@ -107,28 +107,6 @@ private theorem ordinaryReduction_square
   rw [hu, reassoc_of% hσ, ← Functor.map_comp_assoc, reductionIso_level d f M n,
     reductionIso_level d g' ((stratumModulePull d f).obj M) n]
 
-private theorem whiskeringRight_mapIso_hom_app_app {C D E : Type*} [Category C] [Category D]
-    [Category E] {F G : D ⥤ E} (σ : F ≅ G) (T : C ⥤ D) (n : C) :
-    (((Functor.whiskeringRight C D E).mapIso σ).hom.app T).app n = σ.hom.app (T.obj n) := rfl
-
-private theorem ordinaryReduction_square_tower
-    (σ : stratumModulePull d g ⋙ stratumModulePull d f' ≅
-      stratumModulePull d f ⋙ stratumModulePull d g')
-    (τ : d.towerModulePull g ⋙ d.towerModulePull f' ≅
-      d.towerModulePull f ⋙ d.towerModulePull g')
-    (hτ : ∀ T n, (τ.hom.app T).app n = σ.hom.app (T.obj n))
-    (M : reductionModules Y (d.completedRing Y)) :
-    (d.towerModulePull f').map ((stratumModuleReductionIso d g).hom.app M) ≫
-        (stratumModuleReductionIso d f').hom.app ((stratumModulePull d g).obj M) ≫
-        (completedReductionModuleTowerFunctor X' d).map (σ.hom.app M) =
-      τ.hom.app ((completedReductionModuleTowerFunctor Y d).obj M) ≫
-        (d.towerModulePull g').map ((stratumModuleReductionIso d f).hom.app M) ≫
-        (stratumModuleReductionIso d g').hom.app ((stratumModulePull d f).obj M) := by
-  apply NatTrans.ext
-  funext n
-  simp only [NatTrans.comp_app, hτ]
-  exact ordinaryReduction_square d σ M n
-
 /-- The normalized completed reduction comparisons respect the inverse-image square.
 This is an equation before taking mates and in the full derived diagram category.
 Source: blueprint completed-exchange-coherence, tensor/pullback coherence in its
@@ -170,9 +148,8 @@ theorem completedReductionPullback_square
       Functor.mapDerivedCategorySquareIso (d.integralTowerRingedSquare sq).exchangeModuleSquare :=
     (d.integralTowerRingedSquare sq).ambientSquare_localization
   rw [hamb]
-  let σ : stratumModulePull d g ⋙ stratumModulePull d f' ≅
-      stratumModulePull d f ⋙ stratumModulePull d g' :=
-    (d.integralTowerRingedSquare sq).exchangeModuleSquare
+  unfold StrictTowerRingedSquare.exchangeTowerSquare
+  generalize (d.integralTowerRingedSquare sq).exchangeModuleSquare = σ
   let good : ObjectProperty (CochainComplex (reductionModules Y (d.completedRing Y)) ℤ) :=
     fun P ↦ P.IsKFlatIndependentCoefficients ∧
       ∀ n, SheafOfModules.IsFlatOnSite (J := ProEt.topology Y) (R := d.completedRing Y) (P.X n)
@@ -192,10 +169,15 @@ theorem completedReductionPullback_square
   have hf_flat (P) (hP : good P) (n : ℤ) := pullback_flatTerms g' f
     (d.completedRing Y) (d.completedRing X) (d.completedRing X')
     (d.integralRingIso f) (d.integralRingIso g') P hP.1 hP.2 n
-  refine derivedReductionSquare_paste
-    (stratumModulePull d g) (stratumModulePull d f') (stratumModulePull d f)
-    (stratumModulePull d g')
-    (d.towerModulePull g) (d.towerModulePull f') (d.towerModulePull f) (d.towerModulePull g')
+  refine derivedReductionTowerSquare_paste
+    (stratumModulePull d g : reductionModules Y (d.completedRing Y) ⥤
+      reductionModules Y' (d.completedRing Y'))
+    (stratumModulePull d f' : reductionModules Y' (d.completedRing Y') ⥤
+      reductionModules X' (d.completedRing X'))
+    (stratumModulePull d f : reductionModules Y (d.completedRing Y) ⥤
+      reductionModules X (d.completedRing X))
+    (stratumModulePull d g' : reductionModules X (d.completedRing X) ⥤
+      reductionModules X' (d.completedRing X'))
     (completedReductionModuleTowerFunctor Y d) (completedReductionModuleTowerFunctor Y' d)
     (completedReductionModuleTowerFunctor X d) (completedReductionModuleTowerFunctor X' d)
     (completedReductionTower Y d) (completedReductionTower Y' d)
@@ -206,8 +188,7 @@ theorem completedReductionPullback_square
     (stratumModuleReductionIso d f) (stratumModuleReductionIso d g')
     (d.reductionTowerPullbackIso g) (d.reductionTowerPullbackIso f')
     (d.reductionTowerPullbackIso f) (d.reductionTowerPullbackIso g')
-    σ ((Functor.whiskeringRight ℕᵒᵖ (reductionModules Y (d.completedRing Y))
-      (reductionModules X' (d.completedRing X'))).mapIso σ)
+    σ
     good res ?_ ?_ ?_ ?_ ?_ ?_
   · intro P hP
     rw [hcounit, hcounit]
@@ -225,9 +206,9 @@ theorem completedReductionPullback_square
     rw [stratumComplexCounit_app]
     exact towerCounit_isIso X' d _ (stratumPull_flatKFlat d g' _
       (stratumPull_flatKFlat d f P hP.1 hP.2) (hf_flat P hP))
-  · intro M
-    apply NatTrans.ext
-    funext n
-    exact ordinaryReduction_square d σ M n
+  · intro M n
+    refine Eq.trans ?_ ((ordinaryReduction_square d σ M n).trans ?_)
+    · sorry
+    · rfl
 
 end AlgebraicGeometry.Scheme
