@@ -38,7 +38,8 @@ attribute [local irreducible] quotientLine quotientLineMap derivedScalars
   QuotientLineRealization
 
 /-- The norm-ball argument of integralModel_residue_discrete in
-WeilConjectures.SixFunctors.Integral.IntegralModelsGenerators, specialized to the present quotient. -/
+WeilConjectures.SixFunctors.Integral.IntegralModelsGenerators, specialized to the present
+quotient. -/
 private theorem finiteModels_residue_discrete (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ) (π : PadicAlgCl.integers ℓ E.1)
     (hπ : Ideal.span {π} = IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E.1))
