@@ -8,7 +8,7 @@ module
 public import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerivedSystemEvaluationData
 public import WeilConjectures.SixFunctors.Coefficient.Tensor.CoefficientTensorAssociativityModelData
 import WeilConjectures.SixFunctors.Coefficient.CoefficientOrdinaryReductionTensor
-import WeilConjectures.SixFunctors.Coefficient.CoefficientOrdinaryReductionTensorAssociativity
+import WeilConjectures.SixFunctors.Coefficient.CoefficientOrdinaryQuotientTensorAssociativity
 
 /-! # A functorial strict complex model of normalized coefficient reduction
 

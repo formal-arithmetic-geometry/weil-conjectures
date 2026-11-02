@@ -254,6 +254,40 @@ theorem coefficientScalarTensorIso_naturality (n : ℕ)
     (coefficientScalarTensorIso_generators l E W n P Q)
     (coefficientScalarTensorIso_generators l E W n P' Q')
 
+/-- A presentation of a tensor product, assembled from natural evaluation and scalar tensor
+comparisons and a natural comparison `θ`, is natural in both inputs.
+Source: Stacks 07A4. -/
+theorem evaluated_tensor_presentation_naturality {A S L : Type*} [Category* A] [Category* S]
+    [Category* L] (tA : A × A ⥤ A) (tS : S × S ⥤ S) (tL : L × L ⥤ L) (K : A ⥤ S)
+    (Ev : S ⥤ L) (F : A ⥤ L) (θ : K ⋙ Ev ≅ F)
+    (e : ∀ X Y : S, Ev.obj (tS.obj (X, Y)) ≅ tL.obj (Ev.obj X, Ev.obj Y))
+    (s : ∀ P Q : A, F.obj (tA.obj (P, Q)) ≅ tL.obj (F.obj P, F.obj Q))
+    (he : ∀ {X X' Y Y' : S} (f : X ⟶ X') (g : Y ⟶ Y'),
+      Ev.map (tS.map (Prod.mkHom f g)) ≫ (e X' Y').hom =
+        (e X Y).hom ≫ tL.map (Prod.mkHom (Ev.map f) (Ev.map g)))
+    (hs : ∀ {P P' Q Q' : A} (f : P ⟶ P') (g : Q ⟶ Q'),
+      F.map (tA.map (Prod.mkHom f g)) ≫ (s P' Q').hom =
+        (s P Q).hom ≫ tL.map (Prod.mkHom (F.map f) (F.map g)))
+    {P P' Q Q' : A} (f : P ⟶ P') (g : Q ⟶ Q') :
+    Ev.map (tS.map (Prod.mkHom (K.map f) (K.map g))) ≫
+        (e (K.obj P') (K.obj Q') ≪≫ tL.mapIso ((θ.app P').prod (θ.app Q')) ≪≫
+          (s P' Q').symm).hom =
+      (e (K.obj P) (K.obj Q) ≪≫ tL.mapIso ((θ.app P).prod (θ.app Q)) ≪≫
+          (s P Q).symm).hom ≫ F.map (tA.map (Prod.mkHom f g)) := by
+  have hθ : tL.map (Prod.mkHom (Ev.map (K.map f)) (Ev.map (K.map g))) ≫
+      tL.map (Prod.mkHom (θ.hom.app P') (θ.hom.app Q')) =
+      tL.map (Prod.mkHom (θ.hom.app P) (θ.hom.app Q)) ≫
+        tL.map (Prod.mkHom (F.map f) (F.map g)) := by
+    rw [← tL.map_comp, ← tL.map_comp]
+    congr 1
+    exact Prod.ext (θ.hom.naturality f) (θ.hom.naturality g)
+  have hs' : tL.map (Prod.mkHom (F.map f) (F.map g)) ≫ (s P' Q').inv =
+      (s P Q).inv ≫ F.map (tA.map (Prod.mkHom f g)) := by
+    rw [Iso.comp_inv_eq, Category.assoc, hs, Iso.inv_hom_id_assoc]
+  simp only [Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom, Iso.prod_hom, Iso.app_hom,
+    Category.assoc]
+  rw [reassoc_of% (he (K.map f) (K.map g)), reassoc_of% hθ, hs']
+
 /-- The finite presentations of system tensor products are natural.
 Source: Stacks 03EK, 07A4 and 0941. -/
 theorem OrdinaryModel.tensorPresentation_naturality (M : OrdinaryModel l E W) (n : ℕ)
@@ -267,57 +301,21 @@ theorem OrdinaryModel.tensorPresentation_naturality (M : OrdinaryModel l E W) (n
       (M.tensorPresentation l E W n P Q).hom ≫
         ((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).map
           ((coefficientTotalTensor.{u, t + 1, t} (Scheme.ProEt.topology W)
-            (completedIntegralCommRingSheafUnrestricted l E W)).map (Prod.mkHom f g)) := by
-  have hκ {X Y : CochainComplex (scalarReductionSource l E W) ℤ} (φ : X ⟶ Y) :
-      ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).map
-          ((M.quotient l E W).map φ) ≫
-        ((NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).app Y).hom =
-      ((NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).app X).hom ≫
-        ((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).map φ :=
-    (NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).hom.naturality φ
-  have hs := coefficientScalarTensorIso_naturality l E W n f g
-  have hs' : (coefficientTotalTensor.{u, t + 1, t} (Scheme.ProEt.topology W)
-      (integralCoefficientCommRingSheaf l E W n)).map
-        (Prod.mkHom (((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).map f)
-          (((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).map g)) ≫
-        (coefficientScalarTensorIso l E W n P' Q').inv =
-      (coefficientScalarTensorIso l E W n P Q).inv ≫
-        ((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).map
-          ((coefficientTotalTensor.{u, t + 1, t} (Scheme.ProEt.topology W)
-            (completedIntegralCommRingSheafUnrestricted l E W)).map (Prod.mkHom f g)) := by
-    have h := congrArg (fun x ↦ (coefficientScalarTensorIso l E W n P Q).inv ≫ x ≫
-      (coefficientScalarTensorIso l E W n P' Q').inv) hs
-    simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id, Iso.inv_hom_id_assoc] at h
-    exact h.symm
-  have e1 := coefficientEvaluationTensorIso_naturality l E W n
-    ((M.quotient l E W).map f) ((M.quotient l E W).map g)
-  have e2 : (coefficientTotalTensor.{u, t + 1, t} (Scheme.ProEt.topology W)
-      (integralCoefficientCommRingSheaf l E W n)).map
-        (Prod.mkHom (((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).map
-            ((M.quotient l E W).map f))
-          (((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).map
-            ((M.quotient l E W).map g))) ≫
-        ((coefficientTotalTensor.{u, t + 1, t} (Scheme.ProEt.topology W)
-          (integralCoefficientCommRingSheaf l E W n)).mapIso
-          (((NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).app P').prod
-            ((NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).app Q'))).hom =
-      ((coefficientTotalTensor.{u, t + 1, t} (Scheme.ProEt.topology W)
-          (integralCoefficientCommRingSheaf l E W n)).mapIso
-          (((NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).app P).prod
-            ((NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).app Q))).hom ≫
-        (coefficientTotalTensor.{u, t + 1, t} (Scheme.ProEt.topology W)
-          (integralCoefficientCommRingSheaf l E W n)).map
-          (Prod.mkHom (((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).map f)
-            (((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ)).map g)) := by
-    refine ((Functor.map_comp _ _ _).symm.trans ?_).trans (Functor.map_comp _ _ _)
-    congr 1
-    refine Prod.ext ?_ ?_
-    · exact hκ f
-    · exact hκ g
-  simp only [OrdinaryModel.tensorPresentation, Iso.trans_hom, Iso.symm_hom, Category.assoc]
-  simp only [reassoc_of% e1]
-  congr 1
-  exact ((reassoc_of% e2) _).trans ((Category.assoc _ _ _).trans (congrArg (fun x ↦ _ ≫ x) hs'))
+            (completedIntegralCommRingSheafUnrestricted l E W)).map (Prod.mkHom f g)) :=
+  evaluated_tensor_presentation_naturality
+    (coefficientTotalTensor.{u, t + 1, t} (Scheme.ProEt.topology W)
+      (completedIntegralCommRingSheafUnrestricted l E W))
+    (coefficientTotalTensor.{u, t + 1, t}
+      (coefficientSequenceTopology (Scheme.ProEt.topology W))
+      (coefficientSequenceCommRingSheaf l E W))
+    (coefficientTotalTensor.{u, t + 1, t} (Scheme.ProEt.topology W)
+      (integralCoefficientCommRingSheaf l E W n))
+    (M.quotient l E W) ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ))
+    ((scalarReductionExtension l E W n).mapHomologicalComplex (.up ℤ))
+    (NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ))
+    (coefficientEvaluationTensorIso l E W n) (coefficientScalarTensorIso l E W n)
+    (fun f g ↦ coefficientEvaluationTensorIso_naturality l E W n f g)
+    (fun f g ↦ coefficientScalarTensorIso_naturality l E W n f g) f g
 
 /-- The component of the tensor comparison for the ordinary quotient system: the strict
 comparison between the presentations of `M.quotient (P ⊗ Q)` and
