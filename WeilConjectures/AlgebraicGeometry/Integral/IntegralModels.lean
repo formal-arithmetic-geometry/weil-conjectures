@@ -269,7 +269,7 @@ theorem integral_models
     (π : PadicAlgCl.integers ℓ E.1)
     (hπ : Ideal.span {π} = IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E.1)) :
     ((constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.1) X ⊓
-        DerivedCategory.finiteTorAmplitude _) =
+        _root_.DerivedCategory.finiteTorAmplitude _) =
       constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.1) X) ∧
     (∃ e : ObjectProperty.FullSubcategory (IntegralModelsEmbedded.completedComplete ℓ E π X) ≌
         ObjectProperty.FullSubcategory (IntegralModelsEmbedded.constantComplete ℓ E π X),

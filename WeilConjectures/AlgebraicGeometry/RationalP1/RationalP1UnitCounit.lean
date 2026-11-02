@@ -450,6 +450,4 @@ subsingleton; rescaling one comparison by a nontrivial scalar changes the
 required natural-transformation square.  Therefore the stated universal claim
 cannot be proved without fixing the canonical shift structures. -/
 
-set_option maxHeartbeats 800000 in
--- The explicit restriction witnesses require extra elaboration heartbeats.
 end AlgebraicGeometry.ProEtale.RationalP1

@@ -517,6 +517,4 @@ private theorem bundled_projection
 
 attribute [local irreducible] CondensedRing.leftDerivedUpperStarTensor
 attribute [local irreducible] ForwardTensorSquare
-attribute [local instance 30000] internalMonoidal in
--- Normalize the native tensor structures before comparing the mate components.
 end AlgebraicGeometry.ProEtale.RationalP1

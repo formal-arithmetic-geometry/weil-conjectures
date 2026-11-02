@@ -209,8 +209,4 @@ theorem mateOpenImmersion
       exact heq N).trans
         (adjG.homEquiv_symm_rightAdjointUniq_hom_app adjT N).symm
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 800000 in
--- Elaborating the restricted composite adjunctions requires additional heartbeats.
 end AlgebraicGeometry.ProEtale.CondensedRing

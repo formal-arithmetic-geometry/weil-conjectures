@@ -59,7 +59,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField �
 
 attribute [local irreducible] integerRingSheafIso
 
-omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] in
 section OpenImage
 
 variable {U X : Scheme.{u}} [U.Over (Spec (.of k))] [X.Over (Spec (.of k))]
@@ -144,7 +143,6 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
   [IsSeparated (Y ↘ Spec (.of k))]
   (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [IsProper f]
 
-include k in
 end ProperFormulas
 
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -46,6 +46,4 @@ private theorem inverse_mate_eq
   simp only [Adjunction.homEquiv_unit]
   exact (unit_mateEquiv_symm a b (TwoSquare.mk _ _ _ _ θ.hom) M).symm.trans (he M).symm
 
-set_option maxHeartbeats 800000 in
--- Concrete derived mate comparisons require extra elaboration heartbeats.
 end AlgebraicGeometry.ProEtale.CondensedRing

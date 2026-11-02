@@ -63,6 +63,4 @@ private noncomputable def space (k : Type u) [Field k] (T : Scheme.{u}) [T.Over 
       inferInstanceAs (LocallyOfFiniteType (T ↘ Spec (.of k))),
       inferInstanceAs (QuasiCompact (T ↘ Spec (.of k)))⟩⟩
 
-set_option maxHeartbeats 800000 in
--- The affine presentation and five full-subcategory lifts elaborate in one proof.
 end AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport

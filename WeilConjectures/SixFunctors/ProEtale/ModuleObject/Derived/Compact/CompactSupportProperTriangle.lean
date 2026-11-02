@@ -211,6 +211,4 @@ private theorem triangle_assoc {A B C D : Scheme.{u}}
   erw [Category.comp_id] at hh
   exact hh.symm
 
-set_option maxHeartbeats 1000000 in
--- Derived-functor instance synthesis and kernel conversion need a higher limit.
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -150,8 +150,4 @@ private theorem properExchange_admissible
 attribute [local irreducible] detSfCompactSupportBaseChangeComposite
   detSfCanonicalCompactificationComparison
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end AlgebraicGeometry.ProEtale.CondensedRing

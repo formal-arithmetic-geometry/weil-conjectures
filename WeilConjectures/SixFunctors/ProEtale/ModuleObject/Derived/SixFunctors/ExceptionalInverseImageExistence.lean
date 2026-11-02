@@ -94,8 +94,4 @@ local notation "S(" T ")" =>
   (constantModelBoundedConstructible Λ T ⊓ fun K ↦ DerivedCategory.finiteTorAmplitude _ K)
 local notation "L(" T ")" => localizingClosureProEtale Λ T
 
-set_option linter.unusedVariables false in
--- The statement names dependent structure witnesses which are used through typeclass inference.
-set_option maxHeartbeats 800000 in
--- Assemble dependent Brown structures and coefficient transports without unfolding them.
 end AlgebraicGeometry.ProEtale.CondensedRing

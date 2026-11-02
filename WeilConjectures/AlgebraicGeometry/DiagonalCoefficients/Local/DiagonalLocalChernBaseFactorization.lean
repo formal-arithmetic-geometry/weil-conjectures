@@ -204,8 +204,7 @@ private theorem base_factor_completed (l : ℕ) [Fact l.Prime]
   have hX : IsUnit (l : Γ(X, ⊤)) := by
     simpa only [map_natCast] using hS.map f.appTop.hom
   let L := (fromSkeleton S.Modules).obj M.val
-  let : SheafOfModules.IsInvertible L := M.isInvertible
-  let : Scheme.Modules.IsInvertible L := Scheme.Modules.IsInvertible.of_sheafOfModules L
+  let : Scheme.Modules.IsInvertible L := Scheme.Pic.isInvertible_fromSkeleton M
   have hL : Scheme.Pic.ofIsInvertible L = M := by
     apply Scheme.Pic.ext
     exact toSkeleton_fromSkeleton_obj M.val

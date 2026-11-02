@@ -1098,7 +1098,4 @@ private meta def structuralComparisonCongr
       rest := rest ++ (← structuralComparisonCongr cache fixIdentical n h)
     return rest
 
-set_option backward.defeqAttrib.useBackward true in
-set_option maxHeartbeats 3000000 in
--- Specialize natural coherence before taking its component.
 end AlgebraicGeometry.ProEtale.CondensedRing

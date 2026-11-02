@@ -26,6 +26,7 @@ Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
 -/
 
 @[expose] public noncomputable section
+set_option linter.privateModule false
 set_option autoImplicit false
 set_option Elab.async false
 set_option genSizeOf false
@@ -53,11 +54,8 @@ attribute [local implicit_reducible] sheafMonoidalCategory
   Sheaf.symmetricCategory Sheaf.braidedCategory
   Localization.Monoidal.instSymmetricCategoryLocalizedMonoidal SymmetricCategory.ofCurried
 
-attribute [local instance 100002] transpose_sheaf_symmetric
-
 attribute [local irreducible] upperStarFromPoint
 
-attribute [local instance 1000000] source_symmetric_comm
 attribute [local instance] isCommMonObj_condensedRingObj
   comp_preservesFiniteLimits comp_preservesFiniteColimits
 attribute [local irreducible] Functor.mapDerivedCategory
@@ -211,9 +209,4 @@ private theorem geometric_shift
   rw [he]
   exact (CondensedRing.module_derived_functors_exact_and_comparison_shifts R f).2.2.1
 
-omit [IsCommMonObj R] [IsCommMonObj T] in
-set_option maxHeartbeats 1600000 in
--- The source adjunction and the named extension functor share large instance arguments.
-set_option maxHeartbeats 1600000 in
--- The adjunction normalizations compare large, fixed derived-functor instances.
 end AlgebraicGeometry.ProEtale.DiagonalCoefficients

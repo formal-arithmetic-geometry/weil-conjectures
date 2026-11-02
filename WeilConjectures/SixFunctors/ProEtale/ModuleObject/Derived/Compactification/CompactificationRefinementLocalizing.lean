@@ -1310,7 +1310,9 @@ theorem localizingRefinement_coherence
       · intro I L hL
         have : PreservesColimit L (J ⋙ R) := hsums I L hL
         change PreservesColimit L ((J ⋙ R) ⋙ V)
-        infer_instance
+        have : PreservesColimit (L ⋙ J ⋙ R) V :=
+          adj.leftAdjoint_preservesColimits.preservesColimitsOfShape.preservesColimit
+        exact comp_preservesColimit (J ⋙ R) V
       · intro L hL
         exact standardBoundaryVanishing Λ ℓ k p _hp _hpℓ (admissible_standard Λ ℓ _hΛ)
           f c d r L hL

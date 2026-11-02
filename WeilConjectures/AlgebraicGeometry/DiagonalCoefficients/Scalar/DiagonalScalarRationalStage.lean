@@ -58,8 +58,4 @@ attribute [local irreducible] scalar_pullback derivedUpper derivedLower derivedS
 attribute [local semireducible] ProEtale.upperStar
 attribute [local irreducible] RationalP1.adicComparison
 
-set_option maxHeartbeats 1000000 in
--- Epic cancellation identifies the supplied map with the normalized natural map.
-set_option maxHeartbeats 2000000 in
--- Check the scalar construction with its fixed endpoint instances.
 end AlgebraicGeometry.ProEtale.DiagonalCoefficients

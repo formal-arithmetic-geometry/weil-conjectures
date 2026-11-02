@@ -233,6 +233,4 @@ noncomputable def detSfCompactSupportBaseChangeComposite
         detSfCompactSupport Λ (c.baseChange v)) :=
   (detSfCompactSupportExchangeData Λ f v c o).map
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 end AlgebraicGeometry.ProEtale.CondensedRing

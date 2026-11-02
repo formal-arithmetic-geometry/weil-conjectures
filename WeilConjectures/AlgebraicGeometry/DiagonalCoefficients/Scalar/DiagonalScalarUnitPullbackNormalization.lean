@@ -30,10 +30,4 @@ attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimi
 
 attribute [local irreducible] Functor.mapDerivedCategory Functor.leftDerivedFunctor
 
-set_option maxHeartbeats 1600000 in
--- Explicit comparison expressions require additional definitional-equality checking.
-set_option maxHeartbeats 1600000 in
--- Cancellation compares the large exact-derived single-functor expressions.
-set_option maxHeartbeats 800000 in
--- Matching the scalar-adjunction normalizations unfolds large functor expressions.
 end AlgebraicGeometry.ProEtale.DiagonalCoefficients

@@ -10,6 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.Canonical.CanonicalDiagonalRight
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Proper.ProperIntegralRationalScalarComparison
 import all WeilConjectures.AlgebraicGeometry.Cartesian.CartesianCoefficientsFiniteFree
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
+import all WeilConjectures.AlgebraicGeometry.Condensed.CondensedFlatCoefficientCalculus
+import all WeilConjectures.AlgebraicGeometry.QlbarDirectImageComparison
+import all WeilConjectures.AlgebraicGeometry.CondensedQbarScalarBasisSections
+import all WeilConjectures.AlgebraicGeometry.CondensedQbarScalarBasisUnitOfSections
 import WeilConjectures.CategoryTheory.RingObjects.Condensed.BaseCoefficientCondensedIdentification
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.LocalizedDirectImageComparison
 
@@ -30,6 +34,86 @@ set_option synthInstance.maxSize 4096
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 open scoped CategoryTheory.Obj CategoryTheory.Functor
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+open Scheme PadicAlgCl MonObj
+
+set_option maxHeartbeats 400000 in
+-- The generic mate comparison elaborates several derived adjunctions.
+/-- A finite point copower gives finite scalar units on schemes; the mate criterion then
+reduces coefficient pushforward to additivity of the derived direct image. -/
+private theorem finitePush_of_pointCopower {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj R] [MonObj S] [IsCommMonObj R] [IsCommMonObj S]
+    (a : R ⟶ S) [IsMonHom a]
+    [∀ Z : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coefficientMap a Z))]
+    (I : Type (u + 1)) [Finite I]
+    [HasCoproducts.{u + 1} (Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) R)]
+    (e : (∐ fun _ : I ↦ Mod.regular R) ≅ (Mod.comap a).obj (Mod.regular S)) :
+    IsIso (derivedPushHom a f) := by
+  classical
+  obtain ⟨b, hb, hflat, hunit⟩ := scheme_basis_from_point R S a I e
+  have hderived (Z : Scheme.{u})
+      (M : DerivedCategory (Mod (Sheaf (ProEt.topology Z) Ab.{u + 1})
+        (condensedRingObj R Z))) [HasCoproduct (fun _ : I ↦ M)] :
+      IsIso (Sigma.desc fun i ↦ Mod.qbar_scalarUnitLeg
+        (coefficientMap a Z) (b Z i) M) := by
+    let : HasColimitsOfSize.{u + 1, u + 1}
+        (Mod (Sheaf (ProEt.topology Z) Ab.{u + 1}) (condensedRingObj R Z)) :=
+      IsGrothendieckAbelian.hasColimits _
+    let : HasCoproducts.{u + 1}
+        (Mod (Sheaf (ProEt.topology Z) Ab.{u + 1}) (condensedRingObj R Z)) :=
+      fun J ↦ HasColimitsOfShape.of_small.{u + 1, u + 1} _ (Discrete J)
+    exact qbar_isIso_unit _ (b Z) (fun N ↦ hunit Z N) M
+  have hcomp (M : DerivedCategory
+      (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj R X))) :
+      IsIso ((derivedPushHom a f).app M) := by
+    have : HasCoproduct (fun _ : I ↦ M) :=
+      (coefficientDerivedCoproducts R X I).has_colimit _
+    have : HasCoproduct (fun _ : I ↦ R((f)_*⟦R⟧).obj M) :=
+      (coefficientDerivedCoproducts R Y I).has_colimit _
+    have : (Mod.comap (D := Sheaf (ProEt.topology Y) Ab.{u + 1})
+        (coefficientMap a Y)).ReflectsIsomorphisms :=
+      Mod.restrictionReflectsIsomorphisms _
+    have : (Mod.comap (D := Sheaf (ProEt.topology Y) Ab.{u + 1})
+        (coefficientMap a
+          Y)).mapDerivedCategory.ReflectsIsomorphisms := reflectsDerivedIsomorphisms _
+    have hκ : IsIso (mateEquiv
+        (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap
+          a X))
+        (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap
+          a Y))
+        (derivedPushHom a f)) := by
+      unfold derivedPushHom
+      exact Adjunction.isIso_mate_pushHomOfComapIso _ _ _
+    refine centralUnitCopowerExplicit
+      (G := R((f)_*⟦R⟧))
+      (G' := R((f)_*⟦S⟧))
+      (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap
+        a X))
+      (Mod.derivedExtendMapDerivedCategoryAdjunction (coefficientMap
+        a Y))
+      (derivedPushHom a f) hκ M I
+      (fun i ↦ qbar_derivedCenter (Mod.qbar_scalarNatEndo (b X i)))
+      (fun i ↦ qbar_derivedCenter (Mod.qbar_scalarNatEndo (b Y i))) ?_ ?_ ?_ ?_
+    · intro i K
+      exact qbar_lowerStar_derivedScalarEndo_of_eq f (b X i) (b Y i) (hb f i) K
+    · simpa only [Mod.qbar_scalarUnitLeg_eq] using hderived X M
+    · simpa only [Mod.qbar_scalarUnitLeg_eq] using
+        hderived Y (R((f)_*⟦R⟧).obj M)
+    · have : Finite I := inferInstance
+      have : R((f)_*⟦R⟧).Additive := inferInstance
+      have : PreservesFiniteCoproducts R((f)_*⟦R⟧) :=
+        inferInstance
+      have : PreservesColimitsOfShape (Discrete I)
+          R((f)_*⟦R⟧) := inferInstance
+      exact inferInstanceAs (IsIso (sigmaComparison
+        R((f)_*⟦R⟧) (fun _ : I ↦ M)))
+  exact NatIso.isIso_of_isIso_app _
+
+end AlgebraicGeometry.ProEtale.CondensedRing
+
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
 attribute [local irreducible] RestrictionSquare.mate
