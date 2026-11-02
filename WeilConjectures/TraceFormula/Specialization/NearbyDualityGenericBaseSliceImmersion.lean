@@ -5,9 +5,14 @@ Authors: Claude
 -/
 module
 
+-- Imported first: the instance order it gives keeps the elaboration of the proofs below within
+-- the default heartbeats.
+public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethGlobal  -- shake: keep
+public import WeilConjectures.Compactification.AffineCharts
 public import WeilConjectures.TraceFormula.Specialization.CoordinateCompactificationProjective
+public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBaseSlice
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBaseSliceShrink
-public import WeilConjectures.TraceFormula.Specialization.NearbyDualityTwistCompositionSlice
+import WeilConjectures.Tactic.TransportExact
 
 /-!
 
