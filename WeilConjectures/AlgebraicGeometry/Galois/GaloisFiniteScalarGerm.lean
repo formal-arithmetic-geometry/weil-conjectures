@@ -18,6 +18,4 @@ open AlgebraicGeometry Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-attribute [local instance] scalarModuleSmallLimits
-
 end AlgebraicGeometry.Scheme

@@ -690,6 +690,8 @@ private def RawStratifiedLattices
               (coefficientMap a₀ (P.domain b))).homEquiv M
                 ((CondensedRing.upperStar B₀ (P.immersion b)).obj L₀)).symm ι)
 
+set_option maxHeartbeats 1000000 in
+-- the kernel check unfolds the coefficient rings of the base lattice theorem
 private theorem small_spectral_raw_lattices
     (ℓ : ℕ) [Fact ℓ.Prime] (K : Type) [Field K] [Algebra ℚ_[ℓ] K]
     [FiniteDimensional ℚ_[ℓ] K] (p : ℕ) [Fact p.Prime]

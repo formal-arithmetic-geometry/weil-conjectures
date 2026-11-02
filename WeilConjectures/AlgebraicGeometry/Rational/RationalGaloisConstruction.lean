@@ -56,6 +56,5 @@ variable {Y : Scheme.{u}} [ConnectedSpace Y]
   (l : ℕ) [Fact l.Prime] [IsNoetherian Y] [Y.IsSeparated]
   [∀ x : Y, Invertible (l : Y.residueField x)]
   (E : Type (u + 1)) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
-  (i : IntegralGaloisConstruction y G c P δ l E)
 
 end AlgebraicGeometry.Scheme

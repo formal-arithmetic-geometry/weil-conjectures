@@ -256,11 +256,10 @@ private theorem representative_normalization
         ((lowerStar Λ f').rightDerivedFunctorObjQIso
         (((upperStar Λ i).mapHomologicalComplex (.up ℤ)).obj I)).inv := by
   intro I hI
-  have h := normalized_mate_maps (upperStarLowerStarAdjunction Λ f)
+  exact normalized_mate_maps (upperStarLowerStarAdjunction Λ f)
     (upperStarLowerStarAdjunction Λ f') (openCoherencePullbackSquare Λ sq.toCommSq)
     (directImageOpenRestriction Λ sq.toCommSq)
     (derivedDirectImageOpenRestriction Λ sq.toCommSq) rfl rfl I
-  convert h using 2
 
 private theorem derived_invertible
     {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {j : Y' ⟶ Y}

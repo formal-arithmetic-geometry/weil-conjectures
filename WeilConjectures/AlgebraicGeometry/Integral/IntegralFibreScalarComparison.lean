@@ -52,6 +52,6 @@ end AlgebraicGeometry.Scheme
 namespace AlgebraicGeometry.Scheme
 
 attribute [local irreducible] GrothendieckTopology.Point.sheafFiber
-  GrothendieckTopology.Point.presheafFiber pathUnderlyingStalk
+  GrothendieckTopology.Point.presheafFiber
 
 end AlgebraicGeometry.Scheme
