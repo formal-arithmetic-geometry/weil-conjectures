@@ -53,9 +53,7 @@ private theorem pbcScalarModelCoefficientSquare :
   rw [Category.assoc]
   exact ((Iso.inv_comp_eq eR).mpr hsq.symm).symm
 
-/-- Restriction along the two composites of the coefficient square agree, by the identity
-on sections.
-Source: Stacks Tag 03DA (blueprint: lem-pbc-scalar-restriction-complete). -/
+-- Restriction along a composite is the composite of restrictions (identity on sections).
 private def scalarRestrictionCompose {C : Type*} [Category C] {J : GrothendieckTopology C}
     {R S T : Sheaf J RingCat.{u + 1}} (f : R ⟶ S) (g : S ⟶ T) :
     SheafOfModules.restrictScalars.{u + 1} g ⋙ SheafOfModules.restrictScalars f ≅
@@ -67,6 +65,7 @@ private def scalarRestrictionCompose {C : Type*} [Category C] {J : GrothendieckT
       (by intro U V h; ext x; rfl)))
     (by intro M N h; ext U x; rfl)
 
+-- Restriction along the two composites of the coefficient square agree.
 private def pbcScalarModelRestrictionIso :
     pbcRestrict (pbcScalarCoefficientMap l E F i W) ⋙
         pbcRestrict (WeilConjectures.purCoefficientIso l E W).inv ≅
@@ -103,9 +102,13 @@ Proof: the source uniformizer maps to a unit times a positive power of the targe
 uniformizer, so their powers are cofinal and completeness for the target uniformizer is
 completeness for the image of the source uniformizer. Restriction is exact, preserves
 products, and detects acyclicity; it carries the local Koszul completion criterion for
-that image to the source ring (`restrictScalars_locallyDerivedComplete_iff` on a small
-model of the site). The remaining work is the transfer of that small-site statement to
-`W.ProEt` and its comparison with the Roos predicate `IsSfDerivedComplete`. -/
+that image to the source ring (`restrictScalars_locallyDerivedComplete_iff`).
+Not yet formalized: that lemma is stated for a `SmallCategory` site with coefficients in
+the same universe, whereas `W.ProEt` has `Category.{u}` on `Type (u + 1)`, and it is
+phrased with `IsLocallyDerivedRingedIdealComplete`, not with the Roos predicate
+`IsSfDerivedComplete` used here. A proof needs (a) a small-model transfer of that lemma to
+`W.ProEt`, (b) the comparison of `IsSfDerivedComplete` with the local ideal criterion for
+the principal ideals of the two uniformizers, and (c) the unit-power cofinality step. -/
 private theorem pbcScalarModelRestrictionComplete
     (M : DerivedCategory (WeilConjectures.scalarReductionSource.{u, u} l F W))
     (hM : WeilConjectures.IsSfDerivedComplete l F W M) :
