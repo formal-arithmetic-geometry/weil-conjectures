@@ -13808,6 +13808,7 @@ public import WeilConjectures.CategoryTheory.Sites.TorsorExtensionPresentation
 public import WeilConjectures.CategoryTheory.Sites.TorsorExtensionPushforward
 public import WeilConjectures.CategoryTheory.Sites.TorsorGluing
 public import WeilConjectures.CategoryTheory.Sites.TorsorH1BoundaryRepresentative
+public import WeilConjectures.CategoryTheory.Sites.TraceFormula.ZModModuleLift
 public import WeilConjectures.CategoryTheory.Sites.TransfinitePlus
 public import WeilConjectures.CategoryTheory.Sites.TransfinitePlusSheaf
 public import WeilConjectures.CategoryTheory.Sites.UnitHomEval
@@ -19787,6 +19788,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SquareCo
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.TopologicalInvariance
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Trace.TraceBaseChangeFirst
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.TraceFormula.OrdinaryKunnethClosedComposite
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UniformExtBoundEllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UniformExtBoundIntegers
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UniformExtBoundPadicAlgCl
