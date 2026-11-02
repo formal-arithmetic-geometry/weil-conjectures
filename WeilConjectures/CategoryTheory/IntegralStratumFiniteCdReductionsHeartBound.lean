@@ -9,6 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.IntegralQuotient.IntegralQuotien
 public import WeilConjectures.AlgebraicGeometry.ProEtaleCoefficients.ProfiniteFiniteConstantLocalModel
 public import WeilConjectures.AlgebraicGeometry.Cohomological.CohomologicalDimension
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntegralStratumHomFormula
+public import WeilConjectures.CategoryTheory.IntegralStratumFiniteCdReductionsHeartData
+public import WeilConjectures.CategoryTheory.IntegralStratumFiniteCdReductionsSectionsFromData
 
 /-! Heart-level section bound for the continuous integral coefficient.
 (blueprint: lem-sfb-integral-stratum-finite-cd-reductions-heart-bound).
@@ -49,9 +51,8 @@ heart object preserves the hypotheses of `integral_dual_torsion_heart_sections`.
 That theorem gives vanishing below degree zero and above `s+1`; the bound on
 `cohomologicalDimension` supplies the displayed value `s`.  Descent along the
 finite local model transports the chartwise estimate to `stratumModuleDerivedSections`.
-The continuous coefficient/action comparison needed to identify its underlying
-ring with the normalized integral model is the remaining coefficient-interface
-argument.
+The continuous coefficient/action comparison is realized by equality of the bundled
+ring presentations, obtained from the equality of their coefficient topologies.
 -/
 theorem integralStratumFiniteCdReductions_heart_bound
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
@@ -73,6 +74,10 @@ theorem integralStratumFiniteCdReductions_heart_bound
         ((stratumModuleDerivedSections (IntegralQuotient.integral l E) S).obj
           (((derivedTensor (IntegralQuotient.integral l E) S).obj D).obj
             ((DerivedCategory.singleFunctor _ 0).obj F)))) := by
-  sorry
+  subst D
+  obtain ⟨hTor, hcoh⟩ := integralStratumFiniteCdReductions_heart_data
+    l E S L hL F hF
+  exact integralStratumFiniteCdReductions_sections_from_data
+    l E S _ s hs F hTor hcoh
 
 end CategoryTheory

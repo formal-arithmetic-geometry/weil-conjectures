@@ -313,6 +313,31 @@ identity-section equivalence. Source: blueprint operations proof (2)
 abbrev comparisonFiniteRealization (b : Base l E) (T : Scheme.{u}) (n : ℕ) :=
   (sfIntrinsicModuleEquivalence T (R l E n)).functor.mapDerivedCategory
 
+/-- The canonical underlying-sheaf comparison for intrinsic finite realization.
+Its component is the additive sheafification counit, hence its inverse is the
+sheafification unit on the original module sections. This fixes the comparison
+itself, including its scalar normalization, rather than only its endpoints.
+Source: Stacks 00YV; blueprint operations proof (2)
+(blueprint: def-sp-strict-compactification-comparison-interfaces). -/
+def comparisonFiniteUnderlying (b : Base l E) (T : Scheme.{u}) (n : ℕ) :
+    (sfIntrinsicModuleEquivalence T (R l E n)).functor ⋙
+        SheafOfModules.toSheaf ((sheafCompose (Scheme.ProEt.topology T)
+          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (B l E T n)) ≅
+      sheafCompose (Scheme.ProEt.topology T)
+        (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n)))
+          AddCommGrpCat.{u + 1}) :=
+  NatIso.ofComponents
+    (fun M ↦ asIso ((sheafificationAdjunction (Scheme.ProEt.topology T)
+      AddCommGrpCat.{u + 1}).counit.app
+        ((sheafCompose (Scheme.ProEt.topology T)
+          (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n)))
+            AddCommGrpCat.{u + 1})).obj M)))
+    (fun f ↦ (sheafificationAdjunction (Scheme.ProEt.topology T)
+      AddCommGrpCat.{u + 1}).counit.naturality
+        ((sheafCompose (Scheme.ProEt.topology T)
+          (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1, u} (R l E n)))
+            AddCommGrpCat.{u + 1})).map f))
+
 /-- The ordinary pullback square in the fixed-scalar realization. Its only
 extra factor is the realization unit, so the square fixes the actual scalar
 and section action. Source: blueprint operations proof (2)
@@ -446,6 +471,35 @@ def StrictFiniteExchangeComparisons (b : Base l E) (o : Operations l E b)
         ((comparisonFiniteF l E b a c n).hom.app N) ≫
       (comparisonLevelExchange l E b o levels sq c n).app
         ((comparisonFiniteRealization l E b X n).obj N))
+
+/-- The actual constant-section map into the coefficient ring sheaf.
+Source: blueprint coefficient convention and operations proof (2)
+(blueprint: def-sp-strict-compactification-comparison-interfaces). -/
+def comparisonFiniteConstantSection (T : Scheme.{u}) (n : ℕ) :
+    (Functor.const T.ProEtᵒᵖ (C := CommRingCat.{u + 1})).obj
+      (CommRingCat.of.{u + 1} (ULift.{u + 1, u} (R l E n))) ⟶ (B l E T n).obj :=
+  @toSheafify.{u, u + 1, u + 1, u + 2} T.ProEt _ (Scheme.ProEt.topology T)
+    CommRingCat.{u + 1} _ (integralCoefficientRingSheafify.{u, u} T).isRightAdjoint
+    ((Functor.const T.ProEtᵒᵖ (C := CommRingCat.{u + 1})).obj
+      (CommRingCat.of.{u + 1} (ULift.{u + 1, u} (R l E n))))
+
+/-- The finite tensor model uses the very representative comparison of the
+recorded semilinear calculus, restricted to its flat K-flat resolving pairs.
+Source: blueprint operations proof (2), evaluation on signed total complexes
+(blueprint: def-sp-strict-compactification-comparison-interfaces). -/
+def ComparisonFiniteTensorRepresentative (b : Base l E) (T : Scheme.{u}) (n : ℕ)
+    (t : AlgebraicGeometry.Scheme.ProjectionRestriction.TensorModel.{u} (B l E T n)) :
+    Prop :=
+  ∀ (P Q : CochainComplex (proEtaleRingModules T
+      (proEtaleConstantRing T (R l E n))) ℤ)
+    (hp : AlgebraicGeometry.Scheme.ProjectionRestriction.resolving (B l E T n) P)
+    (hq : AlgebraicGeometry.Scheme.ProjectionRestriction.resolving (B l E T n) Q)
+    (hp' : CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}
+      (J := Scheme.ProEt.topology T) (R := B l E T n) P)
+    (hq' : CochainComplex.IsKFlatIndependentCoefficients.{u + 1, u, u + 1}
+      (J := Scheme.ProEt.topology T) (R := B l E T n) Q),
+    HEq (t.representative.hom.app (⟨P, hp⟩, ⟨Q, hq⟩))
+      (((b.calculus T).levelTensorModels n).comparison.hom.app (⟨P, hp'⟩, ⟨Q, hq'⟩))
 
 /-- The published finite projection word with product tensor endpoints made explicit.
 Only the currying wrappers are expanded; the actual projection map is retained.

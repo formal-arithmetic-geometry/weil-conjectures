@@ -129,6 +129,28 @@ private lemma beta_pasting
   rw [p.hom_inv_id, hi, q.hom_inv_id]
   all_goals rfl
 
+/-- The coordinate-normalized square of abelian inverse images and coefficients.
+Source: HRS (4.1) (blueprint: lem-zl-component-ordinary-abelian-square). -/
+structure NormalizedAbelianSquare (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
+    {X Y : Scheme.{u}} [IsAffine X] [IsAffine Y] (f : Y ⟶ X)
+    (sX : Corner Λ X) (sY : Corner Λ Y) (sh : Slice Λ (affineComponentMap f)) where
+  tests : CondensedRing.componentTests X ⋙ Scheme.proEtaleBaseChange f ≅
+    Over.pullback (affineComponentMap f) ⋙ CondensedRing.componentTests Y
+  tests_eq : ∀ E : Over (affineComponentSpace X),
+    (tests.hom.app E).left = ((component_lift_base_change.choose f).hom.app E).left
+  abelian : sX.inverse ⋙ upperStar Ab.{u + 1} f ≅ sh.inverse ⋙ sY.inverse
+  [monoidal : NatTrans.IsMonoidal abelian.hom]
+  abelian_mate : ∀ (G : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (E : Over (affineComponentSpace X)),
+    (((conjugateIsoEquiv
+      (sh.adjunction.comp sY.adjunction)
+      (sX.adjunction.comp (upperStarLowerStarAdjunction Ab.{u + 1} f))
+      abelian).hom.app G).hom.app (op E)) = G.obj.map (tests.hom.app E).op
+  coefficient :
+    (upperStar Ab.{u + 1} f).map sX.coefficient.hom.hom ≫ condensedPullbackHom Λ.X f =
+      abelian.hom.app (CondensedRing.profiniteCoefficient Λ.X (affineComponentSpace X)) ≫
+        sY.inverse.map sh.coefficient.hom.hom ≫ sY.coefficient.hom.hom
+
 namespace AlgebraicGeometry.ProEtale.ComponentDerivedSquare
 
 attribute [instance] NormalizedAbelianSquare.monoidal
@@ -139,6 +161,12 @@ private def testComparison {X Y : Scheme.{u}} [IsAffine X] [IsAffine Y]
       Over.pullback (affineComponentMap f) ⋙ CondensedRing.componentTests Y :=
   ((Scheme.ProEt.forgetFullyFaithful Y).whiskeringRight _).preimageIso
     (component_lift_base_change.choose f)
+
+private lemma testComparison_eq {X Y : Scheme.{u}} [IsAffine X] [IsAffine Y]
+    (f : Y ⟶ X) (E : Over (affineComponentSpace X)) :
+    ((testComparison f).hom.app E).left =
+      ((component_lift_base_change.choose f).hom.app E).left := by
+  rfl
 
 private def directComparison
     (Λ : Profinite.CondensedRing.{u}) {X Y : Scheme.{u}}
@@ -159,6 +187,20 @@ private def directComparison
     (Functor.sheafPushforwardContinuousComp'
       (Iso.refl (CondensedRing.componentTests X ⋙ Scheme.proEtaleBaseChange f))
       Ab.{u + 1} _ _ _).symm
+
+private lemma directComparison_app
+    (Λ : Profinite.CondensedRing.{u}) {X Y : Scheme.{u}}
+    [IsAffine X] [IsAffine Y] (f : Y ⟶ X) (sX : Corner Λ X) (sY : Corner Λ Y)
+    (G : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+    (E : Over (affineComponentSpace X)) :
+    (((directComparison Λ f sX sY).hom.app G).hom.app (op E)) =
+      G.obj.map ((testComparison f).hom.app E).op := by
+  simp only [Functor.comp_obj, directComparison, Iso.trans_hom, Iso.symm_hom,
+    NatTrans.comp_app, ObjectProperty.FullSubcategory.comp_hom,
+    Functor.sheafPushforwardContinuousComp'_hom_app_hom_app, Iso.symm_inv,
+    Functor.sheafPushforwardContinuousComp'_inv_app_hom_app, Iso.refl_hom,
+    NatTrans.id_app, op_id, CategoryTheory.Functor.map_id]
+  exact Category.comp_id _
 
 private lemma directComparison_inv_app
     (Λ : Profinite.CondensedRing.{u}) {X Y : Scheme.{u}}
@@ -393,6 +435,32 @@ private lemma absolute_test_square
             exact (ConcreteCategory.congr_hom (starPullback_inv_coordinate h S) _).symm
     · exact hQ
 
+private lemma cornerAdjunctionMonoidal
+    (Λ : Profinite.CondensedRing.{u}) (X : Scheme.{u}) [IsAffine X]
+    (s : Corner Λ X) : s.adjunction.IsMonoidal := by
+  constructor
+  · have h := @Adjunction.IsMonoidal.leftAdjoint_ε _ _ _ _ _ _ _ _ s.adjunction
+      s.adjunction.leftAdjointOplaxMonoidal _ (by infer_instance)
+    simpa only [Adjunction.leftAdjointOplaxMonoidal_η, ← s.unit_canonical] using h
+  · intro A B
+    have h := @Adjunction.IsMonoidal.leftAdjoint_μ _ _ _ _ _ _ _ _ s.adjunction
+      s.adjunction.leftAdjointOplaxMonoidal _ (by infer_instance) A B
+    rw [s.tensor_canonical]
+    exact h
+
+private lemma sliceAdjunctionMonoidal
+    (Λ : Profinite.CondensedRing.{u}) {P Q : Profinite.{u}} (h : Q ⟶ P)
+    (s : Slice Λ h) : s.adjunction.IsMonoidal := by
+  constructor
+  · have h := @Adjunction.IsMonoidal.leftAdjoint_ε _ _ _ _ _ _ _ _ s.adjunction
+      s.adjunction.leftAdjointOplaxMonoidal _ (by infer_instance)
+    simpa only [Adjunction.leftAdjointOplaxMonoidal_η, ← s.unit_canonical] using h
+  · intro A B
+    have h := @Adjunction.IsMonoidal.leftAdjoint_μ _ _ _ _ _ _ _ _ s.adjunction
+      s.adjunction.leftAdjointOplaxMonoidal _ (by infer_instance) A B
+    rw [s.tensor_canonical]
+    exact h
+
 private lemma coefficient_right_mates_app
     (Λ : Profinite.CondensedRing.{u}) {X Y : Scheme.{u}} [IsAffine X] [IsAffine Y]
     (f : Y ⟶ X) (sX : Corner Λ X) (sY : Corner Λ Y)
@@ -498,5 +566,57 @@ private lemma coefficient_naturality
   have he := beta_pasting aP aQ sX.adjunction sY.adjunction sh.adjunction af ax ay
     sX.beta sY.beta sh.beta a (upperStarFromPointComp f) (by rw [ha]; exact hn)
   exact congr_app he M
+
+/-- The normalized abelian component square, prior to scalar transport.
+
+Source: Hemo--Richarz--Scholbach, construction (4.1), pp. 8--9 and the naturality
+used in Corollary 4.4(2)
+(blueprint: lem-zl-component-ordinary-abelian-square).
+
+Proof: lift the relative-test base-change isomorphism through the fully faithful
+pro-étale forgetful functor; this fixes tests and tests_eq. Restriction of sheaves
+along tests gives the right-adjoint isomorphism whose sections are G applied to
+tests.hom.op. Take its adjunction mate for abelian. The canonical tensor and unit
+equations on the given edges identify their monoidal adjunction structures, so
+monoidality of pointwise restriction implies monoidality of abelian by monoidality
+of conjugate comparisons. On absolute tests P × S and Q × S the base-change map
+preserves both coordinates. Thus its pasting with the two absolute-test
+identifications and the slice product identification is the structural scheme
+pullback comparison. Equality follows on both projections by the universal
+property of the relative component lift. Restricting and taking mates preserves
+this equality. Evaluation at Λ, followed by Corner.coefficient_eq and
+Slice.coefficient_eq, is exactly the coefficient equation displayed above.
+This is only one square of abelian sheaves and asserts neither module transport
+nor identity/composition coherence of the resulting squares. -/
+theorem component_ordinary_abelian_square
+    (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
+    {X Y : Scheme.{u}} [IsAffine X] [IsAffine Y] (f : Y ⟶ X)
+    (sX : Corner Λ X) (sY : Corner Λ Y) (sh : Slice Λ (affineComponentMap f)) :
+    Nonempty (NormalizedAbelianSquare Λ f sX sY sh) := by
+  let a := abelianComparison Λ f sX sY sh
+  refine ⟨{
+    tests := testComparison f
+    tests_eq := testComparison_eq f
+    abelian := a
+    monoidal := ?_
+    abelian_mate := ?_
+    coefficient := ?_ }⟩
+  · let := sX.continuous
+    let := sY.continuous
+    let := cornerAdjunctionMonoidal Λ X sX
+    let := cornerAdjunctionMonoidal Λ Y sY
+    let := sliceAdjunctionMonoidal Λ (affineComponentMap f) sh
+    have hd : NatTrans.IsMonoidal (directComparison Λ f sX sY).hom := by
+      dsimp only [directComparison, Iso.trans_hom, Iso.symm_hom]
+      infer_instance
+    exact isMonoidal_conjugateEquiv_symm _ _ _
+  · intro G E
+    change (((conjugateIsoEquiv _ _
+      ((conjugateIsoEquiv _ _).symm (directComparison Λ f sX sY))).hom.app G).hom.app
+        (op E)) = _
+    rw [Equiv.apply_symm_apply]
+    exact directComparison_app Λ f sX sY G E
+  · rw [sX.coefficient_eq, sY.coefficient_eq, sh.coefficient_eq]
+    exact coefficient_naturality Λ f sX sY sh Λ.X
 
 end AlgebraicGeometry.ProEtale.ComponentDerivedSquare

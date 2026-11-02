@@ -55,6 +55,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryC
 public import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.MonoidalModule
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryBraided
+public import WeilConjectures.ProperBaseChange.CondensedFieldContinuousRealization
 
 /-! # Data for the component square on ordinary unbounded derived categories
 
@@ -650,5 +651,46 @@ structure System (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X] where
   schemeDuals : ∀ (X Y : Scheme.{u}) [IsAffine X] [IsAffine Y] (f : Y ⟶ X)
       (K : CondensedRing.Evaluation.D (Scheme.ProEt.topology X) (condensedRingObj Λ.X X)),
     IsDualizable K → IsDualizable ((CondensedRing.upperStar Λ.X f).mapDerivedCategory.obj K)
+
+/-- The coefficient-normalized component square before localization, including its
+ordinary identity and composition equations. These equations precede all derived tensor data.
+Source: HRS construction (4.1), pp. 8--9
+(blueprint: def-zl-component-derived-square-data). -/
+structure OrdinarySystem (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X] where
+  corner : ∀ (X : Scheme.{u}) [IsAffine X], Corner Λ X
+  slice : ∀ {X Y : Scheme.{u}} [IsAffine X] [IsAffine Y] (f : Y ⟶ X),
+    Slice Λ (affineComponentMap f)
+  square : ∀ {X Y : Scheme.{u}} [IsAffine X] [IsAffine Y] (f : Y ⟶ X),
+    Square Λ f (corner X) (corner Y) (slice f)
+  sliceIdentity : ∀ (X : Scheme.{u}) [IsAffine X], SliceIdentity Λ X (slice (𝟙 X))
+  sliceComposition : ∀ {X Y Z : Scheme.{u}} [IsAffine X] [IsAffine Y] [IsAffine Z]
+    (f : Y ⟶ X) (g : Z ⟶ Y),
+    SliceComposition Λ f g (slice f) (slice g) (slice (g ≫ f))
+  identity : ∀ (X : Scheme.{u}) [IsAffine X],
+    squareIdentity ((corner X).modules Λ X)
+      (CondensedRing.upperStar Λ.X (𝟙 X)) ((slice (𝟙 X)).modules Λ)
+      (square (𝟙 X)).ordinary (sliceIdentity X).ordinary (CondensedRing.upperStarId Λ.X X)
+  composition : ∀ (X Y Z : Scheme.{u}) [IsAffine X] [IsAffine Y] [IsAffine Z]
+      (f : Y ⟶ X) (g : Z ⟶ Y),
+    squareComposition ((corner X).modules Λ X) ((corner Y).modules Λ Y)
+      ((corner Z).modules Λ Z) (CondensedRing.upperStar Λ.X f)
+      (CondensedRing.upperStar Λ.X g) (CondensedRing.upperStar Λ.X (g ≫ f))
+      ((slice f).modules Λ) ((slice g).modules Λ) ((slice (g ≫ f)).modules Λ)
+      (square f).ordinary (square g).ordinary (square (g ≫ f)).ordinary
+      (CondensedRing.upperStarComp Λ.X g f) (sliceComposition f g).ordinary
+
+/-- The normalized derived tensors on the edges of an already specified ordinary square.
+This adds only tensor data and its compatibility; it contains no coherence or duality fields.
+Source: HRS Section 3 and construction (4.1)
+(blueprint: def-zl-component-derived-square-data). -/
+structure TensorSystem (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
+    (s : OrdinarySystem Λ) where
+  corner : ∀ (X : Scheme.{u}) [IsAffine X], TensorLift ((s.corner X).modules Λ X)
+  slice : ∀ {X Y : Scheme.{u}} [IsAffine X] [IsAffine Y] (f : Y ⟶ X),
+    TensorLift ((s.slice f).modules Λ)
+  scheme : ∀ {X Y : Scheme.{u}} [IsAffine X] [IsAffine Y] (f : Y ⟶ X),
+    TensorLift (CondensedRing.upperStar Λ.X f)
+  monoidal : ∀ {X Y : Scheme.{u}} [IsAffine X] [IsAffine Y] (f : Y ⟶ X),
+    (s.square f).monoidal Λ (corner X) (corner Y) (scheme f) (slice f)
 
 end AlgebraicGeometry.ProEtale.ComponentDerivedSquare

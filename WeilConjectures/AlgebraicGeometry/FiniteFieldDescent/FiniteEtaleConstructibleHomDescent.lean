@@ -129,6 +129,32 @@ noncomputable def finiteStageHomLeg {L : Type u} [Field L] [Algebra K L]
       (pull f Λ (IntermediateField.val E.1)).map u ≫
     (pullValCompIso f E.property.1 Λ).inv.app Q₀
 
+/-- A concrete pullback Hom cocone over all finite stages above `E₀`.
+Source: Stacks Lemma 09YU (3), blueprint `lem-sfb-finite-etale-constructible-hom-descent`. -/
+structure FiniteStageHomSystem {L : Type u} [Field L] [Algebra K L]
+    (Λ : Type (u + 1)) [CommRing Λ]
+    {E₀ : IntermediateField K L}
+    (P₀ Q₀ : DerivedCategoryModule Λ (scheme f E₀)) where
+  F : finiteStageIndex E₀ ⥤ Type (u + 1)
+  objEquiv : ∀ E, F.obj E ≃
+    ((pull f Λ (IntermediateField.inclusion E.property.1)).obj P₀ ⟶
+      (pull f Λ (IntermediateField.inclusion E.property.1)).obj Q₀)
+  map_eq : ∀ {E E'} (h : E ⟶ E') (x : F.obj E),
+    objEquiv E' (F.map h x) =
+      finiteStageHomTransition f Λ (leOfHom h) (objEquiv E x)
+  c : Cocone F
+  vertexEquiv : c.pt ≃
+    ((pull f Λ (IntermediateField.val E₀)).obj P₀ ⟶
+      (pull f Λ (IntermediateField.val E₀)).obj Q₀)
+  leg_eq : ∀ (E) (x : F.obj E),
+    vertexEquiv (c.ι.app E x) = finiteStageHomLeg f Λ (objEquiv E x)
+
+/-- The bounded constructible finite-Tor property at one finite stage.
+Source: Stacks Lemma 09YU (3) (blueprint: lem-sfb-finite-etale-constructible-hom-descent). -/
+abbrev ctf (Λ : Type (u + 1)) [CommRing Λ] {A : Type u} [Field A] [Algebra K A]
+    (P : DerivedCategoryModule Λ (scheme f A)) : Prop :=
+  DerivedCategory.boundedConstructibleFiniteTor Λ (scheme f A) P
+
 end AlgebraicGeometry.Etale.FiniteFieldDescent
 
 namespace AlgebraicGeometry.Etale.FiniteFieldDescent
@@ -155,5 +181,80 @@ private theorem finiteStageHomTransition_map {L : Type u} [Field L] [Algebra K L
   dsimp only
   rw [← Functor.comp_map, ← NatTrans.naturality_assoc]
   simp
+
+/-- Finite-stage descent and Hom continuity. The first three clauses are essential surjectivity,
+descent of morphisms, and eventual equality; the last is the filtered-colimit Hom comparison.
+Proof steps: (1) finite intermediate fields give a filtered affine finite-etale system; (2) bounded
+finite-flat constructible models and their differentials descend simultaneously; (3) internal-Hom
+and derived-cohomology continuity gives finite-stage representatives; (4) injectivity of that
+continuity gives eventual equality of morphisms; (5) the concrete `FiniteStageHomSystem` has
+objects the finite-stage Hom sets, transitions `finiteStageHomTransition`, and legs
+`finiteStageHomLeg`, and its cocone is colimiting. Source: Stacks Lemma 09YU (3)
+(blueprint: lem-sfb-finite-etale-constructible-hom-descent). -/
+theorem finiteEtaleConstructibleHomDescent
+    {L : Type u} [Field L] [Algebra K L] [Algebra.IsAlgebraic K L]
+    [Algebra.IsSeparable K L] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated f]
+    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    (P : DerivedCategoryModule Λ (scheme f L)) (hP : ctf f Λ P) :
+    (∃ (E : IntermediateField K L), FiniteDimensional K E ∧
+      ∃ (P_E : DerivedCategoryModule Λ (scheme f E)), ctf f Λ P_E ∧
+        Nonempty ((pull f Λ (IntermediateField.val E)).obj P_E ≅ P)) ∧
+    (∀ (E : IntermediateField K L) (hE : FiniteDimensional K E)
+      (P_E Q_E : DerivedCategoryModule Λ (scheme f E)),
+      ctf f Λ P_E → ctf f Λ Q_E →
+      ∀ (u : (pull f Λ (IntermediateField.val E)).obj P_E ⟶
+        (pull f Λ (IntermediateField.val E)).obj Q_E),
+      ∃ (E' : IntermediateField K L) (hEE' : E ≤ E'),
+        FiniteDimensional K E' ∧
+        ctf f Λ ((pull f Λ (IntermediateField.inclusion hEE')).obj P_E) ∧
+        ctf f Λ ((pull f Λ (IntermediateField.inclusion hEE')).obj Q_E) ∧
+        ∃ (v : (pull f Λ (IntermediateField.inclusion hEE')).obj P_E ⟶
+          (pull f Λ (IntermediateField.inclusion hEE')).obj Q_E),
+          (pullValCompIso f hEE' Λ).hom.app P_E ≫
+              (pull f Λ (IntermediateField.val E')).map v ≫
+            (pullValCompIso f hEE' Λ).inv.app Q_E = u) ∧
+    (∀ (E : IntermediateField K L) (hE : FiniteDimensional K E)
+      (P_E Q_E : DerivedCategoryModule Λ (scheme f E)),
+      ctf f Λ P_E → ctf f Λ Q_E →
+      ∀ (u v : P_E ⟶ Q_E),
+        (pull f Λ (IntermediateField.val E)).map u =
+          (pull f Λ (IntermediateField.val E)).map v →
+        ∃ (E' : IntermediateField K L) (hEE' : E ≤ E'),
+          FiniteDimensional K E' ∧
+          (pull f Λ (IntermediateField.inclusion hEE')).map u =
+            (pull f Λ (IntermediateField.inclusion hEE')).map v) ∧
+    (∀ (E₀ : IntermediateField K L) (hE₀ : FiniteDimensional K E₀)
+      (P₀ Q₀ : DerivedCategoryModule Λ (scheme f E₀)),
+      ctf f Λ P₀ → ctf f Λ Q₀ →
+      ∃ (H : FiniteStageHomSystem f Λ P₀ Q₀), Nonempty (IsColimit H.c)) := by
+  refine ⟨finiteEtaleConstructibleObjectDescent f Λ P hP, ?_, ?_, ?_⟩
+  · intro E hE P_E Q_E hPE hQE u
+    obtain ⟨H, ⟨hH⟩⟩ := finiteEtaleConstructibleHomContinuity f Λ E hE P_E Q_E hPE hQE
+    obtain ⟨E', x, hx⟩ := Types.jointly_surjective_of_isColimit hH (H.vertexEquiv.symm u)
+    refine ⟨E'.val, E'.property.1, E'.property.2, ?_, ?_, H.objEquiv E' x, ?_⟩
+    · exact constructibleFiniteTor_leftDerivedUpperStar (ModuleCat.{u + 1} Λ)
+        (projection f (IntermediateField.inclusion E'.property.1)) hPE
+    · exact constructibleFiniteTor_leftDerivedUpperStar (ModuleCat.{u + 1} Λ)
+        (projection f (IntermediateField.inclusion E'.property.1)) hQE
+    · change finiteStageHomLeg f Λ (H.objEquiv E' x) = u
+      rw [← H.leg_eq, hx, Equiv.apply_symm_apply]
+  · intro E hE P_E Q_E hPE hQE u v huv
+    obtain ⟨H, ⟨hH⟩⟩ := finiteEtaleConstructibleHomContinuity f Λ E hE P_E Q_E hPE hQE
+    let i : finiteStageIndex E := ⟨E, le_rfl, hE⟩
+    let x : H.F.obj i := (H.objEquiv i).symm
+      ((pull f Λ (IntermediateField.inclusion i.property.1)).map u)
+    let y : H.F.obj i := (H.objEquiv i).symm
+      ((pull f Λ (IntermediateField.inclusion i.property.1)).map v)
+    have hxy : H.c.ι.app i x = H.c.ι.app i y := by
+      apply H.vertexEquiv.injective
+      simp only [H.leg_eq, x, y, Equiv.apply_symm_apply, finiteStageHomLeg_map]
+      exact huv
+    obtain ⟨j, a, ha⟩ :=
+      (Types.FilteredColimit.isColimit_eq_iff' hH x y).1 hxy
+    refine ⟨j.val, j.property.1, j.property.2, ?_⟩
+    have ht := congrArg (H.objEquiv j) ha
+    rw [H.map_eq, H.map_eq] at ht
+    simpa only [x, y, Equiv.apply_symm_apply, finiteStageHomTransition_map] using ht
+  · exact finiteEtaleConstructibleHomContinuity f Λ
 
 end AlgebraicGeometry.Etale.FiniteFieldDescent

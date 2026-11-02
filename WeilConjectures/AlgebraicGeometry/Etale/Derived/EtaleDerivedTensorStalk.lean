@@ -228,4 +228,34 @@ instance geometricStalk_preservesFlat
     (((pointSmallEtale t).uliftSheafFiberIso.{u + 1} (ModuleCat.{u + 1} A)).app M)
     ((flat_iff_forall_flat_sheafFiber_obj M).1 hM t)⟩
 
+/-- Geometric stalks commute canonically with the unbounded K-flat derived tensor, naturally
+in both arguments. The equation specifies the comparison by the ordinary total-complex
+stalk comparison and the localization counits; thus the existential isomorphism is the
+canonical comparison, rather than an unspecified isomorphism between objects.
+Source: Stacks Project, Tag 0DEN, clause (1), Tags 06YS, 06YT, 06YU and 07A4
+(blueprint: lem-sfb-etale-derived-tensor-stalk).
+
+Proof.
+1. The exact geometric stalk functor is additive, strong monoidal and a left adjoint.
+The geometric-fiber criterion for flat module sheaves shows that it preserves flat
+objects; the canonical universe-lift comparison identifies the two stalk functors.
+2. Apply the source library's `Functor.leftDerivedTensorComparison`. Its construction
+uses flat resolutions whose images are K-flat, and its components are isomorphisms.
+The source API supplies both tensor naturality and the comparison's counit square.
+3. Transport this comparison along `leftDerivedFunctorIsoMapDerivedCategory`.
+Naturality of that isomorphism gives naturality in both arguments. Its compatibility
+with the localization counits turns the source counit square into exactly the displayed
+normalization equation. No boundedness or finiteness hypothesis is used. -/
+theorem exists_derivedTensor_stalk_iso
+    (A : Type (u + 1)) [CommRing A] {T : Scheme.{u}}
+    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ T) :
+    ExactFunctorTensorComparison
+      ((pointSmallEtale t).sheafFiber (A := ModuleCat.{u + 1} A)) := by
+  let F := (pointSmallEtale t).sheafFiber (A := ModuleCat.{u + 1} A)
+  have : F.PreservesFlat := ⟨fun {M} hM ↦
+    ObjectProperty.prop_of_iso ObjectProperty.flat
+      (((pointSmallEtale t).uliftSheafFiberIso.{u + 1} (ModuleCat.{u + 1} A)).app M)
+      ((flat_iff_forall_flat_sheafFiber_obj M).1 hM t)⟩
+  exact exactFunctor_tensor_comparison F
+
 end AlgebraicGeometry.Etale

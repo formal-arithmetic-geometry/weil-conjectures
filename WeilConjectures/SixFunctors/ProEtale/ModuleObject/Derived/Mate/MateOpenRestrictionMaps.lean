@@ -79,6 +79,19 @@ def mateOpenExtensionComp {U X Z : Scheme.{u}} (j : U ⟶ X) (i : X ⟶ Z)
       (Functor.mapDerivedCategoryNatIso (upperStarComp Λ j i) ≪≫
         Functor.mapDerivedCategoryCompIso (upperStar Λ i) (upperStar Λ j)))
 
+/-- The lower-shriek compositor when the first morphism is open, computed in the
+compactification with the same proper map. This fixes the source comparison's normalization.
+Source: blueprint det-sf-mate-open-restriction (2)
+(blueprint: def-sfb-mate-open-restriction-maps). -/
+def mateOpenSourceLowerShriek {U X Y : Scheme.{u}} {f : X ⟶ Y}
+    (c : Compactification f) (j : U ⟶ X) [IsOpenImmersion j] :
+    (openImmersionLowerShriek Λ j).mapDerivedCategory ⋙
+        rightDerivedLowerShriekOfCompactification Λ c ≅
+      rightDerivedLowerShriekOfCompactification Λ (c.precomp j) :=
+  (Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerRight (mateOpenExtensionComp Λ j c.i)
+      (lowerStar Λ c.g).rightDerivedFunctor
+
 /-- The canonical identification of compact-support image for the trivial open
 compactification (j,id) with levelwise extension by zero. The identity direct-image
 identification is the derived one normalized on ordinary module sheaves.

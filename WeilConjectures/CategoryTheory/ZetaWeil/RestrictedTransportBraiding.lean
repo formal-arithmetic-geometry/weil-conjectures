@@ -41,3 +41,18 @@ set_option autoImplicit false
 set_option synthInstance.maxSize 4096
 
 end CategoryTheory
+
+namespace CategoryTheory
+
+private theorem restricted_tensor_projection (M N : Mod C A) :
+    Mod.tensorObjπ ((F.mapMod A ⋙ Mod.comap a).obj M)
+        ((F.mapMod A ⋙ Mod.comap a).obj N) ≫
+      (Functor.LaxMonoidal.μ (F.mapMod A ⋙ Mod.comap a) M N).hom =
+    Functor.LaxMonoidal.μ F M.X N.X ≫ F.map (Mod.tensorObjπ M N) := by
+  simp only [Functor.LaxMonoidal.comp_μ, Mod.comp_hom']
+  change Mod.tensorObjπ _ _ ≫ (Mod.comapTensorIso a _ _).hom.hom ≫
+    (F.mapModTensorIso M N).hom.hom = _
+  rw [Mod.tensorπ_comapTensorIso_hom_hom_assoc]
+  exact F.tensorπ_mapModTensorIso_hom_hom M N
+
+end CategoryTheory

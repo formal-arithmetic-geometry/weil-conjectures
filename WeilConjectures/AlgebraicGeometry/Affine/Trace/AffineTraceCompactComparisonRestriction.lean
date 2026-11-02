@@ -7,6 +7,10 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Affine.Trace.AffineTraceConstruction
 public import WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedEtaleCompactSupportComparisonsSupplement
+public import WeilConjectures.SixFunctors.Etale.Derived.Invertible
+public import WeilConjectures.SixFunctors.Etale.Derived.TensorRightUnitor
+public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 
 /-! # Restriction of the unbounded affine compact-support comparison
 
@@ -29,7 +33,7 @@ attribute [local irreducible] rightDerivedLowerShriekOfCompactificationIso
 /-- Construct the unbounded tower comparison from the compact-support identity,
 the standard affine-line compactifications and the compact-support compositor.
 Source: blueprint sec-smooth-purity/sk-prop-an, vector integration overlap calculation.
-(blueprint: lem-amb-affine-trace-compact-comparison-restriction). -/
+(blueprint: def-sfb-affine-trace-comparison-constructions). -/
 def affineTraceUnboundedCompactComparison (A : Type (u + 1)) [CommRing A] [Finite A]
     (S : Scheme.{u}) [IsNoetherian S] : (d : ℕ) →
     affineTraceLeft A S d ≅
@@ -45,7 +49,6 @@ def affineTraceUnboundedCompactComparison (A : Type (u + 1)) [CommRing A] [Finit
         (AffineSpace PUnit.{u + 1} (affineTraceTower S d) ↘ affineTraceTower S d)
         (affineTraceProjection S d)
 
--- Composition compatibility forces the identity comparison to preserve its unit.
 private lemma restriction_identity
     {C D : Type*} [Category C] [Category D] (I : C ⥤ D)
     {Pp : C ⥤ C} {P : D ⥤ D} (ep : Pp ≅ 𝟭 C) (e : P ≅ 𝟭 D)

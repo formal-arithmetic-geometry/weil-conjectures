@@ -65,6 +65,28 @@ private theorem paste_horizontal_aux {C : Type*} [Category C]
   rw [reassoc_of% ha, reassoc_of% hb, reassoc_of% hc, hm]
   simp
 
+/-- Identity vertical arrows give the identity pullback comparison after the canonical
+identity-functor comparisons.
+
+Source: the cited blueprint proof, paragraphs 2–3
+(blueprint: lem-fix-condensed-pullback-coherence).
+Proof: expand `pullbackSquareComparison` into the two native compositors and transport.
+The left and right unit laws `leftDerivedUpperStarComp_id_left_app` and
+`leftDerivedUpperStarComp_id_right_app` identify the two boundary expansions with the
+canonical identity comparison. Cancel the inverse compositor. -/
+theorem pullbackSquareComparison_identity {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (K : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))) :
+    (pullbackSquareComparison Λ
+      (CommSq.mk ((Category.id_comp f).trans (Category.comp_id f).symm))).hom.app K ≫
+        (leftDerivedUpperStarId Λ X).hom.app (L((f)^*⟦Λ⟧).obj K) =
+      L((f)^*⟦Λ⟧).map ((leftDerivedUpperStarId Λ Y).hom.app K) := by
+  rw [← cancel_epi ((leftDerivedUpperStarComp Λ f (𝟙 Y)).hom.app K)]
+  rw [pullbackSquareComparison_hom_app]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
+  rw [leftDerivedUpperStarComp_id_left_app, leftDerivedUpperStarComp_id_right_app]
+  simp
+
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
 set_option maxHeartbeats 20000000 in

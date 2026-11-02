@@ -144,5 +144,65 @@ Source: Stacks 07A4, 09AF and 0H7J
           (coefficientComparison f Z)) ≪≫
     ((ProEtale.derivedTensor (ModuleCat.{u + 1} A) Z).mapIso (openComparison A j L M e)).app _
 
+/-- A bounded intrinsically constructible complex has a bounded constructible etale
+origin. For every such origin both open extensions are bounded. The canonical c_e and
+unbounded t_e are constructed above, with exactly their prescribed composites.
+Source: Stacks 09AK, 09AL, 09AF, 03DJ and 07A4
+(blueprint: lem-sp-supported-constructible-origin-comparison).
+
+Proof: on every stratum of each cohomology sheaf of M, lem-sf-proetale-lisse-finite-models
+turns local constancy with finite geometric stalks into finite constant models, so each
+cohomology sheaf is constructible in the fixed-module sense; by
+lem-weil-pbc-fixed-module-constructible-origin it is the comparison image of a constructible
+etale sheaf, and lem-weil-pbc-fixed-module-bounded-constructible-origin gives a bounded
+constructible etale L with an isomorphism e of its comparison image with M; the cohomology
+predicate is converted by lem-weil-pbc-constructible-etale-module-sheaf-comparison.
+For every chosen pair exact extension by zero commutes with cohomology, so the bounds
+of L and M give the bounds of K and N. Descend the sheaf isomorphism of
+lem-cbc-proetale-extension-zero-comparison termwise using
+lem-sf-exact-functor-derived-triangulated; compose with j_!(e), as in openComparison.
+The constant-sheaf adjunction on terminal sections identifies pulled-back constant B
+with constant B and preserves its A-action. Derived tensor pullback for the exact
+monoidal comparison is the canonical unbounded comparison of Tag 07A4. Compose it with
+the degree-zero coefficient identification
+and c_e tensor 1, as in tensorComparison. No finite Tor amplitude, flatness of B,
+or boundedness of H enters any construction. -/
+theorem supported_constructible_origin_comparison
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {U Z : Scheme.{u}} (j : U ⟶ Z) [IsOpenImmersion j]
+    (M : DerivedCategory (Sheaf (Scheme.ProEt.topology U) (ModuleCat.{u + 1} A)))
+    (hM : _root_.DerivedCategory.TStructure.t.bounded M)
+    (hc : ∀ q : ℤ, Scheme.IsConstructibleProEtaleFixedModuleSheaf U A
+      ((_root_.DerivedCategory.homologyFunctor _ q).obj M)) :
+    (∃ L : Etale.DerivedCategoryModule A U,
+      _root_.DerivedCategory.TStructure.t.bounded L ∧
+      (∀ q : ℤ, Scheme.IsConstructibleEtaleModuleSheaf
+        ((_root_.DerivedCategory.homologyFunctor _ q).obj L)) ∧
+      Nonempty ((comparisonUpperStar (ModuleCat.{u + 1} A) U).mapDerivedCategory.obj L ≅ M)) ∧
+    (∀ L : Etale.DerivedCategoryModule A U,
+      _root_.DerivedCategory.TStructure.t.bounded L →
+      (∀ q : ℤ, Scheme.IsConstructibleEtaleModuleSheaf
+        ((_root_.DerivedCategory.homologyFunctor _ q).obj L)) →
+      ((comparisonUpperStar (ModuleCat.{u + 1} A) U).mapDerivedCategory.obj L ≅ M) →
+      _root_.DerivedCategory.TStructure.t.bounded
+        ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapDerivedCategory.obj L) ∧
+      _root_.DerivedCategory.TStructure.t.bounded
+        ((ProEtale.openImmersionLowerShriek
+          (ModuleCat.{u + 1} A) j).mapDerivedCategory.obj M)) := by
+  constructor
+  · have hH (q : ℤ) : IsConstructible A
+        ((_root_.DerivedCategory.homologyFunctor _ q).obj M) := by
+      obtain ⟨S, _, _, hS⟩ := hc q
+      exact ⟨S, fun i ↦ Scheme.finite_models_of_fixed_lisse (S.domain i) A _ (hS i)⟩
+    obtain ⟨L, hL, e⟩ := DerivedCategory.boundedConstructible_of_homology A hM
+      (fun q ↦ exists_isConstructibleSheaf_iso_comparisonUpperStar_obj A (hH q))
+    exact ⟨L, hL.1, fun q ↦
+      (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mpr (hL.2 q), e⟩
+  · intro L hL _ _
+    exact ⟨Functor.bounded_mapDerivedCategory_obj
+        (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} A) j) hL,
+      Functor.bounded_mapDerivedCategory_obj
+        (ProEtale.openImmersionLowerShriek (ModuleCat.{u + 1} A) j) hM⟩
+
 end SupportedConstructibleOriginComparison
 end AlgebraicGeometry.ProEtale

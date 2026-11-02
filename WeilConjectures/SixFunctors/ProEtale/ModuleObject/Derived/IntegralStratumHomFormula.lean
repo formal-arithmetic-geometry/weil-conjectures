@@ -43,6 +43,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteCo
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherence
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.AlgebraicGeometry.IntegralHeartLocalDualityDescent
+public import WeilConjectures.AlgebraicGeometry.FiniteLocallyClosedStratification
 
 /-!
 # Integral stratum filtrations and the global derived Hom formula
@@ -341,6 +342,21 @@ def stratumModuleDualTensor
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (S : Scheme.{u}) (L : supportModules Λ S) :=
   (derivedTensor Λ S).obj (stratumModuleDual Λ S L)
+
+/-- Full derived sections, computed by the canonical K-injective replacement, before
+applying any homology functor. Source: blueprint det-lem-int-ext-formula, opening convention;
+Stacks Project, Section 07A5 (blueprint: det-lem-int-ext-formula). -/
+def integralStratumDerivedSections (X : Scheme.{u}) :
+    integralDerived l E X ⥤ DerivedCategory Ab.{u + 1} :=
+  stratumModuleDerivedSections (integralCoefficientRing l E) X
+
+/-- Tensoring by the recorded derived dual, using the existing uncompleted relative tensor.
+Source: blueprint det-lem-int-ext-formula, clause (2)
+(blueprint: det-lem-int-ext-formula). -/
+def integralStratumDualTensor (S : Scheme.{u})
+    (L : pulledBackModuleObjects (integralCoefficientRing l E) S) :
+    integralDerived l E S ⥤ integralDerived l E S :=
+  stratumModuleDualTensor (integralCoefficientRing l E) S L
 
 private theorem monoidalRootEq
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

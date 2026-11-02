@@ -27,6 +27,7 @@ import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Normalized.NormalizedKum
 import WeilConjectures.AlgebraicGeometry.SpTowerClasses.Chern.TowerChernScalarUnit
 import WeilConjectures.AlgebraicGeometry.Scalar.ScalarDataExistence
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
+public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.DiagonalReducedBoundaryPullback
 
 /-! # The normalized comparison diagram for completed diagonal pullback
 
@@ -47,6 +48,15 @@ open DiagonalTrace
 
 attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
   Functor.leftDerivedFunctor Functor.rightDerivedFunctor diagonalCompletedSource
+
+/-- The regular module has its canonical pullback endpoint.
+Source: blueprint coefficient changes (3), coefficient unit
+(blueprint: def-diagonal-class-pullback-frame). -/
+def diagonalClassUnitEndpoint
+    (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
+    {X S : Scheme.{u}} (f : X ⟶ S) : UnitPullEndpoint R f where
+  iso := (Functor.Monoidal.εIso (CondensedRing.upperStar R f)).symm
+  normalization := CondensedRing.homEquiv_εIso_inv_hom R f
 
 /-- Realization of the supported completed source, with the exact single comparison.
 Source: blueprint coefficient changes (3)
@@ -390,6 +400,22 @@ theorem diagonalClassPullbackFrame_exists (l : ℕ) [Fact l.Prime]
     realization := real
     realization_mate := hreal }, rfl⟩
 
+/-- The actual mate of the normalized constant/limit adjunctions.
+Source: blueprint coefficient changes (3)
+(blueprint: def-diagonal-class-pullback-frame). -/
+def DiagonalClassPullbackFrame.limitComparison
+    (f : DiagonalClassPullbackFrame l g d d' e e') :=
+  diagonalClassLimitMate l (baseW g) d'.L d.L f.adj' f.adj
+
+/-- Localization of the normalized completed scalar square.
+Source: blueprint coefficient changes (3)
+(blueprint: def-diagonal-class-pullback-frame). -/
+def DiagonalClassPullbackFrame.scalarComparison
+    (f : DiagonalClassPullbackFrame l g d d' e e') :=
+  diagonalClassExactSquare (diagonalCompletedRestriction l (diagonalSurface Y))
+    (diagonalClassPull l (baseW g)) (diagonalRealizationPull l (baseW g))
+    (diagonalCompletedRestriction l (diagonalSurface Y')) f.scalar
+
 section Comparisons
 variable {l : ℕ} [Fact l.Prime] {Y Y' : Scheme.{u}} {g : Y' ⟶ Y}
   [DiagonalTraceLocalizations l (diagonalSurface Y)]
@@ -432,6 +458,18 @@ def DiagonalClassPullbackFrame.systemTarget
     (f : DiagonalClassPullbackFrame l g d d' e e') :=
   f.reduction.hom.app (((DerivedCategory.singleFunctor _ 0).obj
     (diagonalComparisonUnits Y))⟦(1 : ℤ)⟧) ≫ D'.T.map (diagonalClassIntegralTarget g)
+
+/-- The frame carries the entire boundary square, before finite evaluation.
+Source: blueprint coefficient changes (3)
+(blueprint: def-diagonal-class-pullback-frame).
+Proof: apply naturality of reduced positive Cartier pullback to the frame's
+reduction comparison. Its endpoints are exactly systemSource and systemTarget. -/
+theorem DiagonalClassPullbackFrame.boundary
+    (f : DiagonalClassPullbackFrame l g d d' e e') :
+    (diagonalClassTowerPull l (baseW g)).mapDerivedCategory.map
+        (D.T.map (diagonalIntegralBoundary Y).hom) ≫ f.systemTarget =
+      f.systemSource ≫ D'.T.map (diagonalIntegralBoundary Y').hom := by
+  exact diagonalReducedBoundary_pullback l g D D' f.reduction.hom
 
 /-- Transport the prescribed condensed supported-source endpoint through the
 realization equivalence. This construction uses no completed diagonal arrow.

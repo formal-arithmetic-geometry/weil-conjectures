@@ -258,6 +258,46 @@ def Pseudofunctor.normalizedGrothendieckFiberFunctor {B : Type*} [Preorder B]
         congrArg (fun k ↦ (e f.base).hom.app X.fiber ≫ k ≫ (J Z.base).map g.fiber)
           ((e g.base).hom.naturality f.fiber).symm }
 
+/-- Inclusion of a coefficient category into the category of coefficient pairs.
+Source: Weil II (1.1.1) d), pp.146-147.
+(blueprint: new-e5-normalized-fibre-comparisons). -/
+def Pseudofunctor.coefficientFiberInclusion {B : Type*} [Category B]
+    (P : Pseudofunctor (LocallyDiscrete B) Cat.{d + 1, d + 2}) (b : B) :
+    P.obj ⟨b⟩ ⥤ Pseudofunctor.Grothendieck P where
+  obj X := ⟨b, X⟩
+  map {X Z} f := { base := 𝟙 b, fiber := (P.mapId ⟨b⟩).hom.toNatTrans.app X ≫ f }
+  map_id X := by
+    refine Pseudofunctor.Grothendieck.Hom.ext _ _ rfl ?_
+    simp
+  map_comp {X Z W} f g := by
+    refine Pseudofunctor.Grothendieck.Hom.ext _ _ (by simp) ?_
+    simp [P.mapComp_id_left_hom_app, Bicategory.Strict.leftUnitor_eqToIso,
+      PrelaxFunctor.map₂_eqToHom]
+
+/-- The normalized coefficient functor restricts to the supplied fibre functor,
+with identity components.
+Source: Weil II (1.1.1) d), pp.146-147.
+(blueprint: new-e5-normalized-fibre-comparisons).
+Proof: on arrows in one coefficient category, the normalization identity cancels
+exactly the pseudofunctor identity constraint used by its inclusion. -/
+def Pseudofunctor.normalizedGrothendieckFiberFunctor_restrict
+    {B : Type*} [Preorder B] (b₀ : B) (hb : ∀ b : B, b₀ ≤ b)
+    (P : Pseudofunctor (LocallyDiscrete B) Cat.{d + 1, d + 2})
+    {A : Type*} [Category A] (J : ∀ b : B, P.obj ⟨b⟩ ⥤ A)
+    (a : ∀ {b c : B} (f : b ⟶ c), J b ≅ (P.map f.toLoc).toFunctor ⋙ J c)
+    (h : ∀ b : B, Function.Bijective (fun u : J b ⟶ J b ↦
+      whiskerLeft (P.map (homOfLE (hb b)).toLoc).toFunctor u)) (b : B) :
+    Pseudofunctor.coefficientFiberInclusion P b ⋙
+        Pseudofunctor.normalizedGrothendieckFiberFunctor b₀ hb P J a h ≅ J b := by
+  unfold Pseudofunctor.normalizedGrothendieckFiberFunctor
+  refine NatIso.ofComponents (fun _ ↦ Iso.refl _) ?_
+  intro X Y f
+  dsimp only [Pseudofunctor.coefficientFiberInclusion, Functor.comp_map,
+    NatTrans.id_app, Iso.refl_hom]
+  rw [Functor.map_comp, ← Category.assoc,
+    (Pseudofunctor.normalizedFiberComparisons_spec b₀ hb P J a h).1]
+  simp only [Category.id_comp, Category.comp_id]
+
 end
 
 end CategoryTheory

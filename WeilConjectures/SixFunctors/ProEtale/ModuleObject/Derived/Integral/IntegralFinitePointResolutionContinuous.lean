@@ -16,6 +16,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
 public import Mathlib.Algebra.Category.Grp.Zero
 public import Mathlib.Combinatorics.Quiver.ReflQuiver
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntegralFinitePointResolutionContinuousRealization
 
 /-! The sectionwise realization of an ordinary finite point resolution. -/
 
@@ -77,6 +78,20 @@ theorem integralFinitePointResolution_continuous
               (fun _ : Fin r ↦ Mod.regular (Profinite.padicIntegersRingObj ell E.1))) ∧
             Nonempty (P.X₃ ≅ (Mod.comap a.hom.hom).obj
               (Mod.regular (cartesianFinitePointRing A))) := by
-  sorry
+  dsimp
+  letI : TopologicalSpace A := ⊥
+  letI : DiscreteTopology A := discreteTopology_bot A
+  letI : IsTopologicalRing A := inferInstance
+  intro φ hφ hsection
+  letI : Module (PadicAlgCl.integers ell E.1) A := Module.compHom A φ
+  let φ' : PadicAlgCl.integers ell E.1 →+* ULift.{u + 1} A :=
+    ULift.ringEquiv.symm.toRingHom.comp φ
+  letI : Module (PadicAlgCl.integers ell E.1) (ULift.{u + 1} A) :=
+    Module.compHom (ULift.{u + 1} A) φ'
+  intro r f g hf hfg hg
+  have hsec := integralFinitePointResolution_continuous_sections
+    ell E A φ hφ r f g hf hfg hg
+  exact integralFinitePointResolution_continuous_realization
+    ell E A a φ hφ hsection r f g hf hfg hg hsec
 
 end AlgebraicGeometry.ProEtale.CondensedRing

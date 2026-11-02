@@ -154,6 +154,10 @@ import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.AlgebraicGeometry.ProEtaleModuleConstructibleExtensionByZero
 import WeilConjectures.ConstructibleSheaf.OpenClosed
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
+public import WeilConjectures.AlgebraicGeometry.IntegralModelsEmbedded.IntegralModelsEmbedded
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarComp
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperLowerShriek
 
 /-!
 # Integral inverse image and uncompleted tensor
@@ -226,22 +230,21 @@ def IntegralPullbackIsCompleted {X Y : Scheme.{u}} (g : X ⟶ Y)
 /-- Integral inverse image, its completed comparison, uncompleted tensor, extension by
 zero for a quasi-compact open immersion, and closed direct image preserve Dbc.
 
-Source: blueprint main-20261015, sk-lem-int-tensor; Stacks 09BP, 09BM and 09AA
+Source: literature/blueprint/latest/blueprint/part-six-operations/
+sec-constructibility-upper-shriek/sec-ladic-summary/sec-i-heart/sk-lem-int-tensor/_section.md;
+Stacks 09BP, 09BM and 09AA
 (blueprint: sk-lem-int-tensor).
 
-Proof:
-1. The existing exact derived inverse-image preservation theorem gives bounded
-constructibility. The coefficient-predicate comparison identifies this with finite
-constant-model constructibility. Clause (2) of integral_models then gives intrinsic
-derived completeness of the image, for a generator of the maximal ideal. The
-canonical completion criterion in IntegralPullbackIsCompleted identifies this with
-the completed inverse image, retaining the canonical quotient unit.
-2. Apply the existing integral instance of boundedConstructible_tensor_closure,
-which proves closure for the ambient uncompleted derived tensor by finite devissage.
-3. Apply the exact open-extension preservation theorem.
-4. For a closed immersion, condensed open-closed recollement supplies exactness.
-The exact derived homology comparisons and constructible closed-image theorem give
-bounded constructibility. Identify the exact and right-derived presentations.
+Proof (the two steps of the current blueprint proof):
+1. Apply the operations part of `integral_models` (3), with identity factors for the
+inverse-image, tensor, open-extension, and closed-direct-image special cases. The
+identity `adicConstructibilityPredicateComparison` transports each constant-model
+predicate to `boundedConstructible`.
+2. For the comparison, use the completeness direction of `integral_models` (2) for
+the inverse image and the predicate `IntegralPullbackIsCompleted`. This is the
+canonical finite-local-model and Roos comparison specified by step 2 of
+`det-lem-int-tensor-pullback`; no arbitrary comparison map is selected here. The zero,
+empty, and identity cases are included.
 -/
 theorem integralTensorInverseImage (k : Type u) [Field k]
     [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
@@ -281,69 +284,65 @@ theorem integralTensorInverseImage (k : Type u) [Field k]
   have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace
     (X ↘ Spec (.of k))
   have : IsNoetherian X := ⟨⟩
-  have : LocallyOfFiniteType (Over.mk (X ↘ Spec (.of k))).hom := by
-    change LocallyOfFiniteType (X ↘ Spec (.of k))
-    infer_instance
-  have : QuasiCompact (Over.mk (X ↘ Spec (.of k))).hom := by
-    change QuasiCompact (X ↘ Spec (.of k))
-    infer_instance
-  have : IsSeparated (Over.mk (X ↘ Spec (.of k))).hom := by
-    change IsSeparated (X ↘ Spec (.of k))
-    infer_instance
-  have : LocallyOfFiniteType (Over.mk (Y ↘ Spec (.of k))).hom := by
-    change LocallyOfFiniteType (Y ↘ Spec (.of k))
-    infer_instance
-  have : QuasiCompact (Over.mk (Y ↘ Spec (.of k))).hom := by
-    change QuasiCompact (Y ↘ Spec (.of k))
-    infer_instance
-  have : IsSeparated (Over.mk (Y ↘ Spec (.of k))).hom := by
-    change IsSeparated (Y ↘ Spec (.of k))
-    infer_instance
+  have : IsLocallyNoetherian Y :=
+    LocallyOfFiniteType.isLocallyNoetherian (Y ↘ Spec (.of k))
+  have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace
+    (Y ↘ Spec (.of k))
+  have : IsNoetherian Y := ⟨⟩
+  obtain ⟨π, hπ⟩ := PadicAlgCl.isPrincipal_maximalIdeal_integers ℓ E.val
+  have hπ' : Ideal.span {π} =
+      IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E.val) := hπ.symm
+  have hmX := integral_models.{u} k (ringChar k) ℓ
+    (Ne.symm (Fact.out : ringChar k ≠ ℓ)) X E π hπ'
+  have hmY := integral_models.{u} k (ringChar k) ℓ
+    (Ne.symm (Fact.out : ringChar k ≠ ℓ)) Y E π hπ'
+  have heqX := (adicConstructibilityPredicateComparison ℓ X Λ
+    (IsEllAdicCoefficient.integral E.val)).2
+  have heqY := (adicConstructibilityPredicateComparison ℓ Y Λ
+    (IsEllAdicCoefficient.integral E.val)).2
+  have hbcIso := (constantModelConstructibleFiniteTor_wellDefined Λ Y).2.1
   refine ⟨?_, ?_, ?_, ?_⟩
   · intro K hK
-    have hpull := boundedConstructible_leftDerivedUpperStar_obj Λ ℓ
-      (X := Over.mk (X ↘ Spec (.of k))) (Y := Over.mk (Y ↘ Spec (.of k)))
-      (Over.homMk g (CategoryTheory.comp_over g (Spec (.of k)))) ⟨K, hK⟩
-    refine ⟨hpull, ?_⟩
-    obtain ⟨π, hπ⟩ := PadicAlgCl.isPrincipal_maximalIdeal_integers ℓ E.val
-    have hπ' : Ideal.span {π} =
-        IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E.val) := hπ.symm
-    refine ⟨π, hπ', ?_⟩
-    have heq := (adicConstructibilityPredicateComparison ℓ X Λ
-      (IsEllAdicCoefficient.integral E.val)).2
-    have hconstant : constantModelBoundedConstructible Λ X
-        (((upperStar Λ g).leftDerivedFunctor).obj K) := by
-      rw [← heq]
-      exact hpull
-    exact (((integral_models k (ringChar k) ℓ (Ne.symm (Fact.out : ringChar k ≠ ℓ))
-      X E π hπ').2.2.1 _).2.mp hconstant).1
+    have hconstantY : constantModelBoundedConstructible Λ Y K := by
+      rw [← heqY]
+      exact hK
+    have hconstantX := hmX.2.2.2.1 Y g K hconstantY
+    refine ⟨?_, π, hπ', ?_⟩
+    · rw [heqX]
+      exact hconstantX
+    · exact ((hmX.2.2.1 _).2.mp hconstantX).1
   · intro K L hK hL
-    exact PadicIntegersRingObj.boundedConstructible_tensor_closure
-      (X := Over.mk (X ↘ Spec (.of k))) ℓ E.val K L hK hL
+    have hK' : constantModelBoundedConstructible Λ X K := by
+      rw [← heqX]
+      exact hK
+    have hL' : constantModelBoundedConstructible Λ X L := by
+      rw [← heqX]
+      exact hL
+    rw [heqX]
+    exact hmX.2.2.2.2.1 K L hK' hL'
   · intro j _ _ _ K hK
-    have : IsOpenImmersion (Over.homMk j (CategoryTheory.comp_over j
-        (Spec (.of k))) : Over.mk (X ↘ Spec (.of k)) ⟶
-          Over.mk (Y ↘ Spec (.of k))).left := by
-      change IsOpenImmersion j
-      infer_instance
-    exact boundedConstructible_openImmersionLowerShriek_obj Λ ℓ
-      (U := Over.mk (X ↘ Spec (.of k))) (X := Over.mk (Y ↘ Spec (.of k)))
-      (Over.homMk j (CategoryTheory.comp_over j (Spec (.of k)))) ⟨K, hK⟩
+    have hK' : constantModelBoundedConstructible Λ X K := by
+      rw [← heqX]
+      exact hK
+    have h := hmY.2.2.2.2.2.1 X Y j (𝟙 Y) K hK'
+    let ePush := (Functor.rightDerivedFunctorNatIso (lowerStarId Λ Y) ≪≫
+      Functor.rightDerivedFunctorIdIso _).app
+        ((openImmersionLowerShriek Λ j).mapDerivedCategory.obj K)
+    have h' : constantModelBoundedConstructible Λ Y
+        ((openImmersionLowerShriek Λ j).mapDerivedCategory.obj K) :=
+      hbcIso.of_iso ePush h
+    rw [heqY]
+    exact h'
   · intro i _ _ K hK
-    have : IsLocallyNoetherian Y :=
-      LocallyOfFiniteType.isLocallyNoetherian (Y ↘ Spec (.of k))
-    have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace
-      (Y ↘ Spec (.of k))
-    have : IsNoetherian Y := ⟨⟩
-    let U : Y.Opens := ⟨(Set.range i)ᶜ, i.isClosedEmbedding.isClosed_range.isOpen_compl⟩
-    obtain ⟨hex, _⟩ := condensed_open_closed_recollement Λ i U.ι U.range_ι
-    let := hex
-    let e := (lowerStar Λ i).rightDerivedFunctorIsoMapDerivedCategory.app K
-    refine ⟨(DerivedCategory.TStructure.t.bounded).prop_of_iso e.symm
-      ((lowerStar Λ i).bounded_mapDerivedCategory_obj hK.1), fun n ↦ ?_⟩
-    exact _root_.constructible_of_iso ((DerivedCategory.homologyFunctor _ n).mapIso e.symm)
-      (_root_.constructible_of_iso
-        (((lowerStar Λ i).mapDerivedCategoryHomologyFunctorIso n).app K)
-        ((constructible_open_closed_images Λ U.ι i U.range_ι).2 _ (hK.2 n)))
+    have hK' : constantModelBoundedConstructible Λ X K := by
+      rw [← heqX]
+      exact hK
+    have h := hmY.2.2.2.2.2.1 X X (𝟙 X) i K hK'
+    let eOpen := (derivedOpenImmersionLowerShriekId Λ X).app K
+    have h' := hbcIso.of_iso ((moduleObjectDerivedPushforward Λ i).mapIso eOpen) h
+    change constantModelBoundedConstructible Λ Y
+      ((lowerStar Λ i).rightDerivedFunctor.obj K) at h'
+    rw [heqY]
+    exact h'
 
 end AlgebraicGeometry.ProEtale.CondensedRing

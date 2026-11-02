@@ -350,6 +350,20 @@ theorem lisseAlgebraicFiberFunctor_obj (F : LisseAlgebraicSheaf l Y K) :
     ModuleCat.of K (TensorProduct (lisseAlgebraicPair l Y K F).base.val K V))
       (lisseRationalFiberFunctor_obj l (lisseAlgebraicPair l Y K F).base.val Y y _)
 
+private noncomputable def canonicalCoefficientFunctor_restrict
+    (E₀ : Padic.FiniteCoefficientFields l K) :
+    grothendieckFiberInclusion (lisseCoefficientDiagramData l Y K).diagram E₀ ⋙
+        lisseCanonicalCoefficientFiberFunctor l Y y K ≅
+      lisseCanonicalCoefficientModelFiberFunctor l Y y K E₀ := by
+  unfold lisseCanonicalCoefficientFiberFunctor
+  exact Pseudofunctor.normalizedGrothendieckFiberFunctor_restrict
+    (Padic.finiteCoefficientBase l K)
+    (fun E₀ ↦ show (⊥ : IntermediateField ℚ_[l] K) ≤ E₀.val from bot_le)
+    (lisseCoefficientDiagramData l Y K).diagram
+    (lisseCanonicalCoefficientModelFiberFunctor l Y y K)
+    (fun {_ _} f ↦ lisseCanonicalRawCoefficientComparison l Y y K f)
+    (lisseCanonicalCoefficientEndomorphisms l Y y K) E₀
+
 attribute [local semireducible] lisseCanonicalCoefficientFiberFunctor
   Pseudofunctor.normalizedGrothendieckFiberFunctor
 

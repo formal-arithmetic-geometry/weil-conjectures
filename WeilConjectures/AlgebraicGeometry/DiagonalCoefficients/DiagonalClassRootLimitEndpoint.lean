@@ -6,6 +6,8 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.DiagonalClassPullbackFrame
+public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.DiagonalClassKummerRootNaturality
+public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.DiagonalClassRootConeTransport
 
 /-! # The Kummer root-line limit endpoint
 Source: the latest blueprint, diagonal coefficient changes, paragraph (3).
@@ -27,7 +29,8 @@ attribute [local irreducible] DerivedCategory Functor.mapDerivedCategory
 /-- Root-limit and degree-two shift normalization for the pulled Kummer endpoint.
 This is independent of the supported source and of any completed class arrow.
 
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
+Source: literature/blueprint/latest/blueprint/part-six-operations/
+sec-constructibility-upper-shriek/sec-ladic-summary/sec-late-coefficients/
 sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.proof.md, paragraph (3),
 Cartesian roots, the entire Kummer system, and the root-line limit endpoint.
 (blueprint: lem-diagonal-class-root-limit-endpoint).
@@ -79,6 +82,12 @@ theorem diagonalClassRootLimitEndpoint (l : ℕ) [Fact l.Prime]
     (e : CompletedRealization l (diagonalSurface Y))
     (e' : CompletedRealization l (diagonalSurface Y'))
     (frame : DiagonalClassPullbackFrame l g d d' e e') :
-    DiagonalClassLineEndpoint frame := by sorry
+    DiagonalClassLineEndpoint frame := by
+  constructor
+  apply (cancel_mono (d'.L.R.map d'.b.hom)).mp
+  simp only [Category.assoc, ← d'.L.R.map_comp]
+  rw [diagonalClassKummerRootNaturality frame, d'.L.R.map_comp]
+  simpa only [diagonalClassRootLimitEndpointRhs, Category.assoc] using
+    diagonalClassRootConeTransport frame
 
 end AlgebraicGeometry.ProEtale.DiagonalCoefficients

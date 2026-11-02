@@ -29,6 +29,7 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Glo
 import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Colim
 import Mathlib.CategoryTheory.Limits.FullSubcategory
 import Mathlib.CategoryTheory.Category.ULift
+public import WeilConjectures.CategoryTheory.InternalAbelianSheafModuleEquivalence
 
 /-!
 # The sections bound for the integral derived dual on classical torsion sheaves
@@ -503,5 +504,56 @@ private theorem sections_bound_of_tor_and_classical_cohomology
       exact module_sections_bound l hl Λ S s hs _ (hcoh r).1 (hcoh r).2 i hi)
   intro q hq
   exact hbound q (by rcases hq with hq | hq <;> omega)
+
+/-- On a classical prime-power torsion heart object, tensor by the derived dual of a
+finite constant integral local model followed by derived sections has amplitude `[0,s+1]`.
+The target sheaf need not be constructible or annihilated by one uniform prime power.
+
+Source: blueprint `sk-lem-int-ext.proof.md`, paragraph (2), second and third bullets;
+`lem-sf-integral-stratum-reduction-ext-bound`, steps 4 and 8--9;
+Stacks Tags 08JJ, 099Y and 08J5.
+(blueprint: lem-route-integral-dual-torsion-heart-sections).
+
+Proof: the local two-term resolution of L makes each local single L dualizable of
+Tor amplitude [-1,0]; proetale descent and the exact dual pairing give Tor amplitude
+[0,1] for the derived dual, so K = L-dual tensor F[0] has cohomology only in [0,1].
+For every r the kernel F_r of l^r on F is classical (classical sheaves are the essential
+image of comparison inverse image, closed under kernels) and killed by l^(r+1), so the
+finite-level dual-classicality theorem makes every cohomology sheaf of L-dual tensor
+F_r[0] classical. Local torsion writes F as the filtered colimit of the F_r; a K-flat
+model of the dual and exact filtered colimits show that each fixed-degree cohomology of
+L-dual tensor (-)[0] preserves this colimit, so the cohomology sheaves of K are classical
+(closure of the essential image under colimits) and l-power torsion (an additive functor
+preserving the kernel colimit preserves local torsion). Module sections agree with
+abelian proetale sections through the internal/sectionwise module equivalence and the
+ringed-site evaluation comparison (transported along ULiftHom); the definition of cd_l
+and s = cd_l bound them in [0,s]. Bounded-heart amplitude for the triangulated derived
+sections functor gives [0,s+1]. -/
+theorem integral_dual_torsion_heart_sections
+    (l : ℕ) [Fact l.Prime]
+    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+    (S : Scheme.{u}) [IsNoetherian S]
+    (L : pulledBackModuleObjects (integralCoefficientRing l E) S)
+    (hmodel : HasFiniteConstantLocalModel (integralCoefficientRing l E) S L)
+    (s : ℕ)
+    (hs : (s : WithTop ℕ) = cohomologicalDimension l (Fact.out : l.Prime) S)
+    (F : pulledBackModuleObjects (integralCoefficientRing l E) S)
+    (hF : IsClassicalAbelian F.X)
+    (htors : IsEllPowerTorsion l (Fact.out : l.Prime) F.X) :
+    ∀ q : ℤ, q < 0 ∨ (s : ℤ) + 1 < q →
+      IsZero ((DerivedCategory.homologyFunctor Ab.{u + 1} q).obj
+        ((integralStratumDerivedSections l E S).obj
+          ((integralStratumDualTensor l E S L).obj
+            ((DerivedCategory.singleFunctor _ 0).obj F)))) := by
+  exact sections_bound_of_tor_and_classical_cohomology l (Fact.out : l.Prime)
+    (integralCoefficientRing l E) S s hs
+    (stratumModuleDual (integralCoefficientRing l E) S L) F
+    (dual_data (integralCoefficientRing l E) S L
+      (integral_constantModel_localResolution l E S L hmodel))
+    (tensor_cohomology_classical_torsion l (Fact.out : l.Prime)
+      (integralCoefficientRing l E) S (stratumModuleDual (integralCoefficientRing l E) S L)
+      (fun M hM n hn hk q ↦
+        (integral_finite_level_dual_classical l E S L hmodel M hM n hn hk q).1)
+      F hF htors)
 
 end AlgebraicGeometry.ProEtale.CondensedRing

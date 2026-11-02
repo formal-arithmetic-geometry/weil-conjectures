@@ -84,6 +84,17 @@ def etaleLowerShriek {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c)
     (fun K ↦ h K.obj K.property)
 
+/-- The same chosen compactification in the ordinary pro-etale coefficient presentation.
+Source: blueprint det-sp-et-proet-adjunction-transfer, Rf_!
+(blueprint: det-sp-et-proet-adjunction-transfer). -/
+def proEtaleLowerShriek {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
+    (h : ∀ K, proEtaleProperty A X K → proEtaleProperty A Y
+      ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).obj K)) :
+    (proEtaleProperty A X).FullSubcategory ⥤ (proEtaleProperty A Y).FullSubcategory :=
+  (proEtaleProperty A Y).lift ((proEtaleProperty A X).ι ⋙
+    rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c)
+    (fun K ↦ h K.obj K.property)
+
 /-- Inclusion of the generators in their recorded localizing closure.
 Source: blueprint det-sp-et-proet-adjunction-transfer, Brown restriction
 (blueprint: det-sp-et-proet-adjunction-transfer). -/
@@ -105,6 +116,18 @@ def localizingLowerShriek {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification
     ((CategoryTheory.localizingClosure (proEtaleProperty A X)).ι ⋙
       rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c)
     (fun K ↦ h K.obj K.property)
+
+/-- Restrict a Brown right adjoint without changing its ambient objects or morphisms.
+Source: blueprint det-sp-et-proet-adjunction-transfer, final conclusion
+(blueprint: det-sp-et-proet-adjunction-transfer). -/
+def brownRestriction {X Y : Scheme.{u}}
+    (J : (CategoryTheory.localizingClosure (proEtaleProperty A Y)).FullSubcategory ⥤
+      (CategoryTheory.localizingClosure (proEtaleProperty A X)).FullSubcategory)
+    (h : ∀ N : (proEtaleProperty A Y).FullSubcategory,
+      proEtaleProperty A X ((J.obj ((toLocalizing A Y).obj N)).obj)) :
+    (proEtaleProperty A Y).FullSubcategory ⥤ (proEtaleProperty A X).FullSubcategory :=
+  (proEtaleProperty A X).lift
+    (toLocalizing A Y ⋙ J ⋙ (CategoryTheory.localizingClosure (proEtaleProperty A X)).ι) h
 
 /-- Orthogonality to every shifted generator detects zero in its localizing closure.
 The left orthogonal of the right orthogonal of the shift closure is localizing,
@@ -259,5 +282,153 @@ private theorem boundedConstructible_iff (A : Type (u + 1)) [CommRing A] [Finite
     rcases hi with hi | hi
     · exact (DerivedCategory.isGE_iff K a).1 ha i (lt_of_lt_of_le hi (min_le_left _ _))
     · exact (DerivedCategory.isLE_iff K b).1 hb i hi
+
+private theorem proEtaleProperty_iff (A : Type (u + 1)) [CommRing A] [Finite A] (T : Scheme.{u})
+    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A))) :
+    ProEtale.AdjunctionTransfer.proEtaleProperty A T K ↔
+      ProEtale.DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} A) T K := by
+  constructor
+  · rintro ⟨⟨L, hL, e⟩, hTor⟩
+    exact ⟨⟨L, (boundedConstructible_iff A T L).1 hL, e⟩, hTor⟩
+  · rintro ⟨⟨L, hL, e⟩, hTor⟩
+    exact ⟨⟨L, (boundedConstructible_iff A T L).2 hL, e⟩, hTor⟩
+
+private theorem proEtaleProperty_stableUnderShift
+    (A : Type (u + 1)) [CommRing A] [Finite A] (T : Scheme.{u}) :
+    (ProEtale.AdjunctionTransfer.proEtaleProperty A T).IsStableUnderShift ℤ := by
+  refine ⟨fun n ↦ ⟨fun K hK ↦ ?_⟩⟩
+  exact (proEtaleProperty_iff A T _).2
+    (ProEtale.DerivedCategory.constructibleFiniteTor.shift ((proEtaleProperty_iff A T K).1 hK) n)
+
+/-- Transfer an adjunction across the specified comparison equivalences and comparison iso.
+The construction retains the quasi-inverse and actual counit, and restricts any Brown
+adjunction to the generator subcategories with its unique counit-preserving comparison.
+Source: blueprint det-sp-et-proet-adjunction-transfer, categorical proof paragraphs 1--3
+(blueprint: det-sp-et-proet-adjunction-transfer). -/
+theorem etaleProEtaleAdjunctionTransferOfComparison
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
+    (hX : ∀ K, etaleProperty A X K → proEtaleProperty A X
+      ((comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory.obj K))
+    (hY : ∀ K, etaleProperty A Y K → proEtaleProperty A Y
+      ((comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory.obj K))
+    (eX : (etaleProperty A X).FullSubcategory ≌ (proEtaleProperty A X).FullSubcategory)
+    (eY : (etaleProperty A Y).FullSubcategory ≌ (proEtaleProperty A Y).FullSubcategory)
+    (_heX : eX.functor = comparison A X hX) (_heY : eY.functor = comparison A Y hY)
+    (hEt : ∀ K, etaleProperty A X K → etaleProperty A Y
+      ((Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).obj K))
+    (hPro : ∀ K, proEtaleProperty A X K → proEtaleProperty A Y
+      ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).obj K))
+    (cf : etaleLowerShriek A c hEt ⋙ eY.functor ≅
+      eX.functor ⋙ proEtaleLowerShriek A c hPro)
+    (G : (etaleProperty A Y).FullSubcategory ⥤ (etaleProperty A X).FullSubcategory)
+    (adjEt : etaleLowerShriek A c hEt ⊣ G) :
+    ∃ adjPro : proEtaleLowerShriek A c hPro ⊣ (eY.inverse ⋙ G ⋙ eX.functor),
+      (∀ N : (etaleProperty A Y).FullSubcategory,
+        (adjPro.counit.app (eY.functor.obj N)) =
+          (proEtaleLowerShriek A c hPro).map
+              (eX.functor.map (G.map (eY.unitIso.inv.app N))) ≫
+            cf.inv.app (G.obj N) ≫ eY.functor.map (adjEt.counit.app N)) ∧
+      (∀ (hLoc : ∀ K, CategoryTheory.localizingClosure (proEtaleProperty A X) K →
+          CategoryTheory.localizingClosure (proEtaleProperty A Y)
+            ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).obj K))
+        (J : (CategoryTheory.localizingClosure (proEtaleProperty A Y)).FullSubcategory ⥤
+          (CategoryTheory.localizingClosure (proEtaleProperty A X)).FullSubcategory)
+        (adjBrown : localizingLowerShriek A c hLoc ⊣ J),
+        ∃ hJ : ∀ N : (proEtaleProperty A Y).FullSubcategory,
+            proEtaleProperty A X ((J.obj ((toLocalizing A Y).obj N)).obj),
+          ∃! γ : (eY.inverse ⋙ G ⋙ eX.functor) ≅ brownRestriction A J hJ,
+            ∀ N : (proEtaleProperty A Y).FullSubcategory,
+              (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).map
+                  ((γ.hom.app N).hom) ≫
+                (adjBrown.counit.app ((toLocalizing A Y).obj N)).hom =
+              (adjPro.counit.app N).hom) := by
+  classical
+  let e := eX
+  let ac : (etaleLowerShriek A c hEt) ⋙ eY.functor ⊣ eY.inverse ⋙ G :=
+    adjEt.comp eY.toAdjunction
+  let j : e.inverse ⋙ ((etaleLowerShriek A c hEt) ⋙ eY.functor) ≅
+      proEtaleLowerShriek A c hPro :=
+    Functor.isoWhiskerLeft e.inverse cf ≪≫
+      (Functor.associator e.inverse e.functor (proEtaleLowerShriek A c hPro)).symm ≪≫
+      Functor.isoWhiskerRight e.counitIso (proEtaleLowerShriek A c hPro) ≪≫
+      Functor.leftUnitor (proEtaleLowerShriek A c hPro)
+  let adjPro : proEtaleLowerShriek A c hPro ⊣
+      eY.inverse ⋙ G ⋙ eX.functor :=
+    (e.symm.toAdjunction.comp ac).ofNatIsoLeft j
+  refine ⟨adjPro, ?_, ?_⟩
+  · intro N
+    rw [Adjunction.ofNatIsoLeft_counit]
+    change j.inv.app (eX.functor.obj (G.obj (eY.inverse.obj (eY.functor.obj N)))) ≫
+      (e.symm.toAdjunction.comp ac).counit.app (eY.functor.obj N) = _
+    rw [Adjunction.comp_counit_app]
+    change j.inv.app _ ≫
+      ((etaleLowerShriek A c hEt) ⋙ eY.functor).map (e.unitIso.inv.app _) ≫
+      ac.counit.app (eY.functor.obj N) = _
+    dsimp [j]
+    simp only [Category.id_comp, Category.comp_id, Category.assoc]
+    change (proEtaleLowerShriek A c hPro).map (e.counitIso.inv.app _) ≫
+      cf.inv.app _ ≫ ((etaleLowerShriek A c hEt) ⋙ eY.functor).map
+        (e.unitIso.inv.app _) ≫ ac.counit.app _ = _
+    rw [← cf.inv.naturality_assoc]
+    simp only [Functor.comp_map]
+    rw [← Functor.map_comp_assoc]
+    simp only [e, Equivalence.counitIso_functor_comp, Functor.id_obj]
+    rw [(proEtaleLowerShriek A c hPro).map_id, Category.id_comp]
+    dsimp [ac]
+    rw [Adjunction.comp_counit_app]
+    change cf.inv.app _ ≫ eY.functor.map (adjEt.counit.app _) ≫
+      eY.counitIso.hom.app (eY.functor.obj N) = _
+    rw [eY.counit_app_functor]
+    rw [← eY.functor.map_comp]
+    have hn := adjEt.counit.naturality (eY.unitIso.inv.app N)
+    dsimp only [Functor.id_map, Functor.comp_map] at hn
+    erw [← hn]
+    rw [eY.functor.map_comp]
+    erw [← cf.inv.naturality_assoc]
+    rfl
+  · intro hLoc J adjBrown
+    have hJ : ∀ N : (proEtaleProperty A Y).FullSubcategory,
+        proEtaleProperty A X ((J.obj ((toLocalizing A Y).obj N)).obj) := by
+      have : (proEtaleProperty A X).IsStableUnderShift ℤ := proEtaleProperty_stableUnderShift A X
+      exact rightAdjoint_preserves_generators (proEtaleProperty A X) (proEtaleProperty A Y)
+        (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c)
+        hPro hLoc (eY.inverse ⋙ G ⋙ eX.functor) adjPro J adjBrown
+    let commL : toLocalizing A X ⋙ localizingLowerShriek A c hLoc ≅
+        proEtaleLowerShriek A c hPro ⋙ toLocalizing A Y := Iso.refl _
+    let commR : toLocalizing A Y ⋙ J ≅ brownRestriction A J hJ ⋙ toLocalizing A X :=
+      Iso.refl _
+    let adjSmall : proEtaleLowerShriek A c hPro ⊣ brownRestriction A J hJ :=
+      adjBrown.restrictFullyFaithful
+        (ObjectProperty.fullyFaithfulιOfLE _)
+        (ObjectProperty.fullyFaithfulιOfLE _) commL commR
+    have hc (N : (proEtaleProperty A Y).FullSubcategory) :
+        (adjSmall.counit.app N).hom =
+          (adjBrown.counit.app ((toLocalizing A Y).obj N)).hom := by
+      have hh := adjBrown.map_restrictFullyFaithful_counit_app
+        (ObjectProperty.fullyFaithfulιOfLE _)
+        (ObjectProperty.fullyFaithfulιOfLE _) commL commR N
+      change (toLocalizing A Y).map (adjSmall.counit.app N) =
+        𝟙 _ ≫ (localizingLowerShriek A c hLoc).map (𝟙 _) ≫
+          adjBrown.counit.app ((toLocalizing A Y).obj N) at hh
+      rw [(localizingLowerShriek A c hLoc).map_id] at hh
+      simp only [Category.id_comp] at hh
+      exact congrArg (fun g ↦ g.hom) hh
+    refine ⟨hJ, adjPro.rightAdjointUniq adjSmall, ?_, ?_⟩
+    · intro N
+      rw [← hc]
+      exact congrArg (fun g ↦ g.hom)
+        (adjPro.rightAdjointUniq_hom_app_counit adjSmall N)
+    · intro γ hγ
+      apply Iso.ext
+      apply NatTrans.ext
+      funext N
+      apply (adjSmall.homEquiv _ _).symm.injective
+      rw [Adjunction.homEquiv_symm_rightAdjointUniq_hom_app]
+      apply (proEtaleProperty A Y).ι.map_injective
+      change (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).map
+        ((γ.hom.app N).hom) ≫ (adjSmall.counit.app N).hom = _
+      rw [hc]
+      exact hγ N
 
 end AlgebraicGeometry.ProEtale.AdjunctionTransfer
