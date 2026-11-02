@@ -105,6 +105,8 @@ lemma upperStarTensorHomotopyHom_braiding
           ((HomotopyCategory.quotient _ _).obj A) :=
   quotient_map_upperStarTensorComplexHom_braiding Λ f A B
 
+set_option maxHeartbeats 1000000 in
+-- the module objects of the homotopy category are unfolded
 /-- The comparison `upperStarTensorHomotopyHom` is an isomorphism on images of complexes. -/
 instance isIso_upperStarTensorHomotopyHom
     (A B : CochainComplex
