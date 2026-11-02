@@ -25,6 +25,11 @@ set_option synthInstance.maxSize 4096
 universe u w
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Scheme Opposite
 namespace WeilConjectures.ZlFrameworkPbc
+
+-- `SignedDoubleHomCone.moduleBinaryBiproducts` leaves its universe free and gets stuck
+-- against the biproducts of the completed integral sheaf modules.
+attribute [-instance] CategoryTheory.SignedDoubleHomCone.moduleBinaryBiproducts
+
 open PurCompactSupport
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

@@ -45,7 +45,4 @@ universe uC vC
 open AlgebraicGeometry AlgebraicGeometry.Scheme
 open WeilConjectures.PurCompactSupport
 
-attribute [local irreducible] sfRationalStandardTStructure sfCommonStageStandardTStructure
-
--- Retain the published names of the dependent instance binders in this statement.
 end WeilConjectures

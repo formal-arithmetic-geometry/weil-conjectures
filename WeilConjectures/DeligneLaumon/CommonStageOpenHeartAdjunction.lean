@@ -446,22 +446,6 @@ attribute [-instance] WeilConjectures.CompletedCoefficientPushforward.modAbelian
   SheafOfModules.localizedSystemRestrictionAdditive
   SheafOfModules.localizedSystemRestrictionLimits
   SheafOfModules.localizedSystemRestrictionColimits in
-attribute [-instance] WeilConjectures.CompletedCoefficientPushforward.modAbelian
-  WeilConjectures.CompletedCoefficientPushforward.hasDerived
-  SheafOfModules.localizedSystemExtensionAdditive
-  SheafOfModules.localizedSystemExtensionLimits
-  SheafOfModules.localizedSystemExtensionColimits
-  SheafOfModules.localizedSystemRestrictionAdditive
-  SheafOfModules.localizedSystemRestrictionLimits
-  SheafOfModules.localizedSystemRestrictionColimits in
-attribute [-instance] WeilConjectures.CompletedCoefficientPushforward.modAbelian
-  WeilConjectures.CompletedCoefficientPushforward.hasDerived
-  SheafOfModules.localizedSystemExtensionAdditive
-  SheafOfModules.localizedSystemExtensionLimits
-  SheafOfModules.localizedSystemExtensionColimits
-  SheafOfModules.localizedSystemRestrictionAdditive
-  SheafOfModules.localizedSystemRestrictionLimits
-  SheafOfModules.localizedSystemRestrictionColimits in
 private theorem reduction_isIso
     [∀ x : U, Invertible (l : U.residueField x)]
     [∀ y : T, Invertible (l : T.residueField y)] (K : sfIntegralConstructibleCategory l E U) :
