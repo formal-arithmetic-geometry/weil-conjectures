@@ -149,6 +149,7 @@ Source: Bhatt--Scholze, Proposition 6.8.14(2) and Remark 6.8.15.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option linter.privateModule false
 universe u
 namespace WeilConjectures
 

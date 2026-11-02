@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Derived.DerivedSquareLocalClassModels
 public import WeilConjectures.AlgebraicGeometry.Derived.DerivedSquareUnitMap
+public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 import WeilConjectures.AlgebraicGeometry.Square.SquareInjectiveRoofAction
 import WeilConjectures.AlgebraicGeometry.Restricted.RestrictedCoefficientRoof
 import all WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap

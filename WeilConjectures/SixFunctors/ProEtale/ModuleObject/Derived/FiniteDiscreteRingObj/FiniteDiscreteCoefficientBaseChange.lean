@@ -14,7 +14,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UnitBall
 
 This file is the counterpart of
 `WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs` for the two
-coefficient rings of `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UnitBallRingObj.FiniteDiscreteCoefficient`:
+coefficient rings of
+the module `UnitBallRingObj.FiniteDiscreteCoefficient`:
 `T̲ = Profinite.continuousMapRingObj T` for a finite discrete ring `T` in which `ℓ` is nilpotent
 (namespace `ProEtale.CondensedRing.FiniteDiscreteRingObj`), and
 `O̲ = Profinite.continuousMapRingObj O` for the closed unit ball `O` of a finite normed extension

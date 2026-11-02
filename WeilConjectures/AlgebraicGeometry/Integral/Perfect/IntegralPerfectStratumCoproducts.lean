@@ -25,6 +25,10 @@ Source: Bhatt--Scholze, Lemma 6.3.14(1)--(4), including its closed-stratum argum
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+
+attribute [-instance] CategoryTheory.flatConstantModulesAbelian
+  AlgebraicGeometry.ProEtale.surjectiveTower_wEqualsLocallyBijective
+
 set_option synthInstance.maxSize 4096
 universe u c v r w
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
