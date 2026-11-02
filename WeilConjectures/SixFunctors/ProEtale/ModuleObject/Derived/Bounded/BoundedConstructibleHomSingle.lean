@@ -10,6 +10,7 @@ public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 import WeilConjectures.AlgebraicGeometry.Constructible.ConstructibleShiftSingle
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleIhom
 public import WeilConjectures.AlgebraicGeometry.Bounded.BoundedConstructibleDevissageSupplement
@@ -92,7 +93,8 @@ namespace ContinuousMapRingObj
 subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` (blueprint: lem-sfb-dc-hom-single; see the `ℚ̄_ℓ` version for the
 sources and the proof sketch). -/
 theorem boundedConstructible_hom_single
-    (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) {k : Type u} [Field k] [Fact (ringChar k).Prime]
+    (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) {k : Type u} [Field k]
+    [Fact (ringChar k).Prime]
     (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom]
     [QuasiCompact X.hom] [IsSeparated X.hom] [Fact (ringChar k ≠ ℓ)]
     (F G : Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})

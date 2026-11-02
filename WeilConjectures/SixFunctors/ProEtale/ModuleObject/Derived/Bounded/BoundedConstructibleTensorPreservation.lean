@@ -90,7 +90,7 @@ theorem boundedConstructible_tensor_unit :
         refine ⟨1, 0, 0, ⟨e'.symm ≪≫ e1 ≪≫ ?_⟩⟩
         exact (cokernelZeroIsoTarget (X := Mod.finiteFree (H.obj F) 0)
           (Y := Mod.finiteFree (H.obj F) 1)).symm⟩
-    exact constructible_of_iso (condensedRingObj Λ X.left) e.symm hr
+    exact constructible_of_iso e.symm hr
   · by_cases hneg : n < 0
     · have hz := DerivedCategory.isZero_of_isGE U 0 n hneg
       exact constructible_of_isZero (condensedRingObj Λ X.left) hz
@@ -149,7 +149,7 @@ theorem boundedConstructible_tensor_closure
   have := isNoetherian_left (X := X)
   boundedConstructible_tensor_closure_of _ X
     (isTriangulated_boundedConstructible_ellAdic_padicAlgCl X.left ℓ)
-    (fun F G hF hG ↦ boundedConstructible_tensor_single ℓ F G hF hG) K L hK hL
+    (fun F G hF hG ↦ boundedConstructible_tensor_single ℓ X F G hF hG) K L hK hL
 
 namespace ContinuousMapRingObj
 
@@ -167,7 +167,8 @@ theorem boundedConstructible_tensor_closure
   have := isNoetherian_left (X := X)
   boundedConstructible_tensor_closure_of _ X
     (isTriangulated_boundedConstructible_ellAdic_continuous X.left ℓ E)
-    (fun F G hF hG ↦ ContinuousMapRingObj.boundedConstructible_tensor_single ℓ E F G hF hG)
+    (fun F G hF hG ↦
+      ContinuousMapRingObj.boundedConstructible_tensor_single ℓ E X F G hF hG)
     K L hK hL
 
 end ContinuousMapRingObj
@@ -190,7 +191,8 @@ theorem boundedConstructible_tensor_closure
   have := isNoetherian_left (X := X)
   boundedConstructible_tensor_closure_of _ X
     (isTriangulated_boundedConstructible_ellAdic_padicIntegers X.left ℓ E)
-    (fun F G hF hG ↦ PadicIntegersRingObj.boundedConstructible_tensor_single ℓ E F G hF hG)
+    (fun F G hF hG ↦
+      PadicIntegersRingObj.boundedConstructible_tensor_single ℓ E X F G hF hG)
     K L hK hL
 
 end PadicIntegersRingObj

@@ -16,8 +16,9 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheore
 
 /-! # Specified condensed finite-to-Qbar comparison maps
 
-The four comparison constructions are moved verbatim from
-`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedQbarBaseChangeCompatibility`, so the exchange coherence lemma can use them
+The four comparison constructions are moved verbatim from the module
+`CondensedQbarBaseChangeCompatibility` (in `WeilConjectures.SixFunctors.ProEtale.ModuleObject`),
+so the exchange coherence lemma can use them
 without an import cycle (blueprint: def-weil-pbc-qbar-condensed-comparisons).
 -/
 
