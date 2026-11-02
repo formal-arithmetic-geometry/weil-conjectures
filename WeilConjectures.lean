@@ -13965,6 +13965,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.Localization
 public import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 public import WeilConjectures.Mathlib.Algebra.Homology.MonoidalShift
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Ab
+public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Abelian
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Exact
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ModuleCat
