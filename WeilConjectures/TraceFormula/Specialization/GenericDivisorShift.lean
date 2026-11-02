@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.NearbyCycles.Exchange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.AdjunctionShift
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocalizingBaseChange
 public import WeilConjectures.Mathlib.CategoryTheory.Shift.Adjunction
 
 /-!
@@ -17,12 +18,12 @@ The nearby cycles `Ψ = Li^* Rj_* Lε^*` of a model
 (`AlgebraicGeometry.ProEtale.CondensedRing.NearbyCyclesModel.nearbyCycles`) are a composite of
 derived pullbacks and pushforwards, hence commute with the shifts and are triangulated. This
 file shows that the pullback exchange `α_f : Lf'^* Ψ_N ⟶ Ψ_M Lf^*` of a morphism of models
-(`NearbyCyclesModel.Hom.pullbackExchange`) commutes with the shifts.
+(`NearbyCyclesModel.Hom.pullbackExchange`) commutes with the shifts, using that the pullback
+comparison of a commutative square does
+(`ProEtale.CondensedRing.commShift_pullbackSquareComparison_hom`).
 
 ## Main results
 
-- `ProEtale.CondensedRing.commShift_pullbackSquareComparison_hom`: the pullback comparison of a
-  commutative square commutes with the shifts.
 - `ProEtale.CondensedRing.NearbyCyclesModel.Hom.commShift_pullbackExchange`: the pullback
   exchange commutes with the shifts.
 
@@ -89,40 +90,7 @@ private lemma commShift_exchange_aux
   rw [e]
   infer_instance
 
-private lemma commShift_symm_trans_eqToIso_trans_hom_aux {C D : Type*} [Category C] [Category D]
-    [HasShift C ℤ] [HasShift D ℤ] {F₁ F₂ F₃ F₄ : C ⥤ D} [F₁.CommShift ℤ] [F₂.CommShift ℤ]
-    [F₃.CommShift ℤ] [F₄.CommShift ℤ] (c₁ : F₂ ≅ F₁) (c₂ : F₃ ≅ F₄) (e : F₂ = F₃)
-    [NatTrans.CommShift c₁.hom ℤ] [NatTrans.CommShift c₂.hom ℤ]
-    [NatTrans.CommShift (eqToHom e) ℤ] :
-    NatTrans.CommShift (c₁.symm ≪≫ eqToIso e ≪≫ c₂).hom ℤ :=
-  inferInstanceAs (NatTrans.CommShift (c₁.inv ≫ eqToHom e ≫ c₂.hom) ℤ)
-
 end Abstract
-
-/-! ### The pullback comparison of a square -/
-
-section PullbackSquareComparison
-
-variable {X Y X' Y' : Scheme.{u}}
-
-/-- The transport `L(a)^* = L(b)^*` along an equality `a = b` commutes with the shifts. -/
-lemma commShift_eqToHom_leftDerivedUpperStar {a b : X ⟶ Y} (h : a = b)
-    (e : L((a)^*⟦Λ⟧) = L((b)^*⟦Λ⟧)) : NatTrans.CommShift (eqToHom e) ℤ := by
-  subst h
-  exact inferInstanceAs (NatTrans.CommShift (𝟙 _) ℤ)
-
-variable {p : X ⟶ Y} {g : Y' ⟶ Y} {p' : X' ⟶ Y'} {g' : X' ⟶ X}
-
-/-- The pullback comparison `Lg^* ⋙ Lp'^* ≅ Lp^* ⋙ Lg'^*` of a commutative square commutes with
-the shifts. -/
-instance commShift_pullbackSquareComparison_hom (sq : CommSq g' p' p g) :
-    NatTrans.CommShift (pullbackSquareComparison Λ sq).hom ℤ := by
-  obtain e : L((p' ≫ g)^*⟦Λ⟧) = L((g' ≫ p)^*⟦Λ⟧) := by rw [sq.w]
-  have := commShift_eqToHom_leftDerivedUpperStar Λ sq.w.symm e
-  rw [pullbackSquareComparison_eq_trans Λ sq e]
-  exact commShift_symm_trans_eqToIso_trans_hom_aux _ _ e
-
-end PullbackSquareComparison
 
 namespace NearbyCyclesModel
 
