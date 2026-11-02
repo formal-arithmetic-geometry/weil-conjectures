@@ -308,6 +308,7 @@ theorem Xcomp_tensor {E L M : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L) 
       pbcTensorSection (pbcCompletedScalarMap l Ω T (h.trans k)) N U 1 x :=
   pbcExtendComp_tensor _ _ _ _ N U x
 
+omit [AlgebraicGeometry.IsNoetherian T] in
 /-- Tensor-normalized comparisons are compatible with tensor balancing. The comparisons and
 balancing maps are arbitrary isomorphisms characterized on unit tensors. -/
 theorem comparison_cocycle {E L M : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L) (k : L ≤ M)
@@ -350,7 +351,7 @@ theorem comparison_cocycle {E L M : Padic.FiniteCoefficientFields l Ω} (h : E �
     ((hOc N U x).trans ((congrArg (fun y ↦ (chk.inv.app N).val.app U y)
       (hXc _ U x)).trans (hchk N U x)).symm))
 
-omit [IsNoetherian T] in
+omit [AlgebraicGeometry.IsNoetherian T] in
 /-- Tensor-normalized comparisons are compatible with the multiplication units. -/
 theorem comparison_unit (E : Padic.FiniteCoefficientFields l Ω)
     (c : 𝒪 (le_refl E) ⋙ 𝓉 E ≅ 𝓉 E ⋙ 𝒳 (le_refl E)) (Ou : 𝒪 (le_refl E) ≅ 𝟭 _)
