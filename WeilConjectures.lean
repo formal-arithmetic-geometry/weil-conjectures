@@ -12560,6 +12560,7 @@ public import WeilConjectures.CategoryTheory.ScalarInverseImageIndependent
 public import WeilConjectures.CategoryTheory.ScalarKoszulTransport.KoszulScalarTransport
 public import WeilConjectures.CategoryTheory.ScalarLocalization.BilinearScalarLocalization
 public import WeilConjectures.CategoryTheory.ScalarLocalization.PbcRationalTransport
+public import WeilConjectures.CategoryTheory.ScalarLocalization.RationalizationLocalization
 public import WeilConjectures.CategoryTheory.ScalarLocalization.ScalarLocalization
 public import WeilConjectures.CategoryTheory.ScalarLocalization.ScalarLocalizationComponentIso
 public import WeilConjectures.CategoryTheory.ScalarLocalization.ScalarLocalizationTriangulated
@@ -12598,6 +12599,7 @@ public import WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresRing
 public import WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresRingCore
 public import WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresRingMorphism
 public import WeilConjectures.CategoryTheory.Shift.AdjunctionHomEquiv
+public import WeilConjectures.CategoryTheory.Shift.CommShiftExt
 public import WeilConjectures.CategoryTheory.Shift.ConnectingLift
 public import WeilConjectures.CategoryTheory.Shift.RestrictFullyFaithful
 public import WeilConjectures.CategoryTheory.Shift.ShiftDecomposition
@@ -14131,6 +14133,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Endofunctor.Algebra
 public import WeilConjectures.Mathlib.CategoryTheory.Endomorphism
 public import WeilConjectures.Mathlib.CategoryTheory.Enriched.FunctorCategory
 public import WeilConjectures.Mathlib.CategoryTheory.EpiMono
+public import WeilConjectures.Mathlib.CategoryTheory.EqToHom
 public import WeilConjectures.Mathlib.CategoryTheory.Equivalence
 public import WeilConjectures.Mathlib.CategoryTheory.EssentialImage
 public import WeilConjectures.Mathlib.CategoryTheory.Extensive
@@ -14241,6 +14244,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FiniteProduc
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Kernels
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Orthogonal
+public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Shift
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.ShiftAdditive
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.SmallSubobject
 public import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.WeakSerreCoproductClosure
@@ -18743,6 +18747,7 @@ public import WeilConjectures.SmoothPurity.Common.CommonStageTensorEndpoint
 public import WeilConjectures.SmoothPurity.Common.CommonStageTensorLineCoherence
 public import WeilConjectures.SmoothPurity.Common.CommonStageTensorLineCoherenceNaturality
 public import WeilConjectures.SmoothPurity.Common.CommonStageTensorRightUnitorNaturality
+public import WeilConjectures.SmoothPurity.Common.CommonStageUnitorTransport
 public import WeilConjectures.SmoothPurity.CommonStageInternalHom.CommonStageInternalHomCoherence
 public import WeilConjectures.SmoothPurity.CommonStageInternalHom.CommonStageInternalHomCoherenceLemmas
 public import WeilConjectures.SmoothPurity.CommonStageInternalHom.CommonStageInternalHomRepresentative
@@ -19190,6 +19195,7 @@ public import WeilConjectures.SmoothPurity.Supporting.ReducedIntegralBraidingSca
 public import WeilConjectures.SmoothPurity.Supporting.Scalar.OrdinaryScalarEvaluationUnit
 public import WeilConjectures.SmoothPurity.Supporting.Scalar.OrdinaryScalarTensorLineTransport
 public import WeilConjectures.SmoothPurity.Supporting.Scalar.SystemScalarTensorBraiding
+public import WeilConjectures.SmoothPurity.Supporting.Scalar.SystemScalarTensorUnit
 public import WeilConjectures.SmoothPurity.Supporting.Scalar.SystemScalarTransitionComparison
 public import WeilConjectures.SmoothPurity.Supporting.SignedLineTensorEquivalence
 public import WeilConjectures.SmoothPurity.Supporting.Tensor.CoherentTensorRoosComparison
