@@ -21,7 +21,6 @@ set_option synthInstance.maxSize 2048
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite SheafOfModules
 namespace AlgebraicGeometry.ProEtale
-attribute [-instance] spCoefficientModulesAbelian
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 attribute [local irreducible] WeilConjectures.completedIntegralCoefficientSheafUnrestricted
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]

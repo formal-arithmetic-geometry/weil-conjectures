@@ -140,7 +140,6 @@ attribute [local instance high] HasDerivedCategory.standard
 
 namespace AlgebraicGeometry.ProEtale
 
-attribute [-instance] spCoefficientModulesAbelian
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{u})
   (D : SpCoefficientTowersAbelian l E T)

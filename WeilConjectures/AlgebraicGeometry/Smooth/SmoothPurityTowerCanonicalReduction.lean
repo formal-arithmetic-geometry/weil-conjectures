@@ -16,7 +16,6 @@ set_option synthInstance.maxSize 2048
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite SheafOfModules
 namespace AlgebraicGeometry.ProEtale
-attribute [-instance] spCoefficientModulesAbelian
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{u})
   (D : SpCoefficientTowersAbelian l E T)
