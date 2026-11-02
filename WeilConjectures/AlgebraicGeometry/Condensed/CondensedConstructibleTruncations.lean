@@ -170,6 +170,7 @@ import WeilConjectures.CategoryTheory.ModuleObjects.Free
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleUpperStar
 import WeilConjectures.ConstructibleSheaf.ProEtaleModule.IsoClosed
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
+public import WeilConjectures.ProperBaseChange.CondensedConstructibleSerre
 
 /-! # Standard truncations on the ordinary bounded constructible derived category
 
@@ -192,6 +193,27 @@ def constructibleTruncationCohomology
     [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
     (t : TStructure C) (i : ℤ) : C ⥤ C :=
   (t.truncLE i ⋙ t.truncGE i) ⋙ shiftFunctor C i
+
+/-- The compatibility clause, including the characterizing counit and unit equations.
+Uniqueness fixes the comparisons and hence their coherence with scalar tower associators.
+This is a package of the proposition's clauses, not a new truncation construction.
+Source: blueprint prop-constructible-truncations, scalar and automorphism paragraphs
+(blueprint: prop-constructible-truncations). -/
+def ConstructibleTruncationCompatibility
+    {C : Type uC} [Category.{vC} C] [Preadditive C] [HasZeroObject C] [HasShift C ℤ]
+    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+    {B : Type uB} [Category.{vB} B] [Preadditive B] [HasZeroObject B] [HasShift B ℤ]
+    [∀ n : ℤ, (shiftFunctor B n).Additive] [Pretriangulated B]
+    (t : TStructure C) (s : TStructure B) (F : C ⥤ B) : Prop :=
+  (∀ m : ℤ,
+    (∃! α : t.truncLE m ⋙ F ≅ F ⋙ s.truncLE m,
+      ∀ K : C, α.hom.app K ≫ (s.truncLEι m).app (F.obj K) =
+        F.map ((t.truncLEι m).app K)) ∧
+    (∃! α : t.truncGE m ⋙ F ≅ F ⋙ s.truncGE m,
+      ∀ K : C, F.map ((t.truncGEπ m).app K) ≫ α.hom.app K =
+        (s.truncGEπ m).app (F.obj K))) ∧
+  ∀ i : ℤ, Nonempty (constructibleTruncationCohomology t i ⋙ F ≅
+    F ⋙ constructibleTruncationCohomology s i)
 
 end WeilConjectures
 
@@ -332,6 +354,19 @@ private theorem ordinary_exists [(boundedConstructible R).IsTriangulated] :
     infer_instance
   obtain ⟨ht, t, h⟩ := restricted_standard (IsConstructibleModuleObject R)
   exact ⟨t, h⟩
+
+/-- The restriction of an ambient functor commutes with the standard truncations and
+cohomology by the counit and unit characterizations. Source: current blueprint
+prop-constructible-truncations, scalar and automorphism sentences
+(blueprint: prop-constructible-truncations). -/
+def OrdinaryConstructibleExchange
+    (G : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) ⥤
+      DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) S)) : Prop :=
+  ∃ hG : ∀ K : BoundedConstructible R, boundedConstructible S (G.obj K.obj),
+    ∀ (t : TStructure (BoundedConstructible R)) (s : TStructure (BoundedConstructible S)),
+      OrdinaryConstructibleTruncations R t → OrdinaryConstructibleTruncations S s →
+      WeilConjectures.ConstructibleTruncationCompatibility t s
+        ((boundedConstructible S).lift ((boundedConstructible R).ι ⋙ G) hG)
 
 omit [IsCommMonObj R] in
 end Ordinary

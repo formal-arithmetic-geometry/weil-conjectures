@@ -250,6 +250,23 @@ def CoefficientLineComparison.tensorPower {phi : A →+* B} {N M : ℕ}
     (ordinaryScalar phi T).obj (line A N hA T i) ≅ line B M hB T i)
     (scalarZeroLineIso phi N M hA hB T) (fun i previous ↦ e.tensorPowerStep i previous) d
 
+/-- Lambda is scalar/tensor balancing, scalar/pullback balancing, then the normalized
+root-line reduction. Source: sk-lem-sp-reduction/compatibilities (3)
+(blueprint: def-pur-finite-smooth-coefficient-arrows). -/
+def pullbackTwistComparison {phi : A →+* B} {N M : ℕ}
+    {hA : (N : A) = 0} {hB : (M : B) = 0} {X Y : Scheme.{u}}
+    (f : X ⟶ Y) (d : ℕ) (e : CoefficientLineComparison phi N M hA hB X)
+    (K : DerivedCategoryModule A Y) :
+    (ordinaryScalar phi X).obj ((puritySource A f (line A N hA X d)).obj K) ≅
+      (puritySource B f (line B M hB X d)).obj ((ordinaryScalar phi Y).obj K) :=
+  (ExceptionalCoefficients.tensorIso phi X).app
+      ((ordinaryFinitePullback A f).obj K, line A N hA X d) ≪≫
+    ((derivedTensor (ModuleCat.{u + 1} B) X).mapIso
+      (((scalarPullbackIso phi f).app K).symm)).app _ ≪≫
+    ((derivedTensor (ModuleCat.{u + 1} B) X).obj
+      ((ordinaryFinitePullback B f).obj
+        ((ordinaryScalar phi Y).obj K))).mapIso (e.tensorPower d)
+
 /-- Coefficient extension on the pro-etale site, fixed by its adjunction to restriction.
 Source: Stacks 06YY (blueprint: def-pur-finite-smooth-coefficient-arrows). -/
 def proScalar (phi : A →+* B) (T : Scheme.{u}) :

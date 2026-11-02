@@ -27,6 +27,7 @@ import WeilConjectures.AlgebraicGeometry.Affine.Trace.AffineTraceCompactComparis
 import WeilConjectures.AlgebraicGeometry.VectorTraceScalar.VectorTraceScalarAffineCompactCompatibility
 import all WeilConjectures.AlgebraicGeometry.CoefficientCompatibility.EtaleProEtaleCoefficientCompatibility
 import Mathlib.AlgebraicGeometry.Noetherian
+public import WeilConjectures.AlgebraicGeometry.Finite.General.FiniteGeneralRingLocalTraceAffineHelper
 
 /-! # The ordered coefficient square for a specified compactification
 
@@ -193,6 +194,39 @@ private theorem comparison_eq
     rightDerivedLowerShriekPlusCompatibility, Functor.comp_obj,
     ObjectProperty.ι_obj, Category.assoc] using hh
 
+/-- Naturality square for the bounded compact-support comparison.
+
+This is the second independent stage: the affine transition is moved across the two
+compact-support comparison isomorphisms.
+
+Source: general-ring smooth purity, proof (3), local frame calculation.
+(blueprint: lem-sp-general-ring-integration-exponent-local-trace-prefix-compact-naturality).
+
+Proof: the bounded comparison `affineLinearCompactComparison` is the component of the
+unbounded comparison `affineTraceUnboundedCompactComparison` at the right-tower object
+(`affineTraceUnboundedCompactComparison_restriction`); the square is then the naturality
+of the inverse of the unbounded comparison. -/
+theorem finiteGeneralRingLocalTracePrefix_compact_naturality
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    (M N : ℕ) (hMpos : 0 < M) (hNpos : 0 < N)
+    (hM : (M : A) = 0) (hN : (N : A) = 0)
+    (T : Scheme.{u}) [IsNoetherian T]
+    (hMunit : IsUnit (M : Γ(T, ⊤))) (hNunit : IsUnit (N : Γ(T, ⊤)))
+    (bV : Scheme.finiteEtaleTateLine T M A hM ≅
+      Scheme.finiteEtaleTateLine T N A hN)
+    (tM : Etale.OrdinaryFiniteTwistTransport A M hM)
+    (tN : Etale.OrdinaryFiniteTwistTransport A N hN)
+    (d : ℕ) :
+    (Etale.rightDerivedLowerShriek (ModuleCat.{u + 1} A)
+      (affineTraceProjection T d)).map
+        (finiteGeneralRingAffineTransition A M N hM hN T hMunit hNunit bV tM tN d) ≫
+      (Etale.affineLinearCompactComparison N hNpos A hN T hNunit d).inv =
+      (Etale.affineLinearCompactComparison M hMpos A hM T hMunit d).inv ≫
+      (Etale.affineTraceLeft A T d).map
+        (finiteGeneralRingAffineTransition A M N hM hN T hMunit hNunit bV tM tN d) := by
+  rw [Etale.comparison_eq, Etale.comparison_eq]
+  exact (Etale.affineTraceUnboundedCompactComparison A T d).inv.naturality _
+
 private theorem comparison_via
     (R : Type (u + 1)) [CommRing R] [Finite R] (k : Type u) [Field k]
     (S : Scheme.{u}) [S.Over (Spec (.of k))]
@@ -303,11 +337,17 @@ theorem orderedCompactification_scalar_square
     show QuasiCompact (affineTraceProjection S d ≫ (S ↘ Spec (.of k))) from inferInstance
   have : IsSeparated (affineTraceTower S d ↘ Spec (.of k)) :=
     show IsSeparated (affineTraceProjection S d ≫ (S ↘ Spec (.of k))) from inferInstance
-  have hB := (etaleCtfChartScalarDomain ℓ k φ n _hA _hB (affineTraceTower S d)).1 M.obj _hM
-  obtain ⟨a, b, _, hz⟩ := hB.1.2
   have hMB : _root_.DerivedCategory.TStructure.t.plus
       ((scalarExtension φ (affineTraceTower S d)).obj M.obj) :=
-    ⟨a, (_root_.DerivedCategory.isGE_iff _ a).2 (fun i hi ↦ hz i (.inl hi))⟩
+    by
+      obtain ⟨a, b, hTor⟩ := _hM.2
+      refine ⟨a, (_root_.DerivedCategory.isGE_iff _ a).mpr (fun q hq ↦ ?_)⟩
+      apply Functor.isZero_homologyFunctor_of_isZero_homologyFunctor_mapDerivedCategory_obj
+        (Sheaf.restrictScalars (affineTraceTower S d).smallEtaleTopology φ)
+      exact ((_root_.DerivedCategory.isGE_iff _ a).1
+        (hTor (scalarCoefficientSheaf φ (affineTraceTower S d))).1 q hq).of_iso
+        ((_root_.DerivedCategory.homologyFunctor _ q).mapIso
+          ((scalarTensorIso φ (affineTraceTower S d)).app M.obj))
   refine ⟨hMB, ?_, fun c' e r s ↦ ⟨comparison_via A k S d c c' e r s M,
     comparison_via B k S d c c' e r s ⟨_, hMB⟩⟩⟩
   rw [comparison_eq A k S d c M, comparison_eq B k S d c ⟨_, hMB⟩,

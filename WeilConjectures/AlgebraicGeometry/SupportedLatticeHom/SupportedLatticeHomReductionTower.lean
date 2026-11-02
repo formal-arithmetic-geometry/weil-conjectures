@@ -124,6 +124,25 @@ abbrev extension (M : AdicCompletion.Modules l E T) : AdicCompletion.Modules l E
   (CondensedRing.lowerStar (DerivedNakayama.integerRing l E) h).obj
     ((CondensedRing.openImmersionLowerShriek (DerivedNakayama.integerRing l E) v).obj M)
 
+/-- The supported ordinary quotient, before forgetting its finite coefficient action.
+Source: blueprint, N-barₙ=b_!(M₀/πⁿ)
+(blueprint: lem-sfb-lattice-supported-hom-reduction-tower). -/
+abbrev finiteExtension (M : AdicCompletion.Modules l E T) (n : ℕ) :=
+  (CondensedRing.lowerStar (DerivedNakayama.quotientRing l E (n + 1)) h).obj
+    ((CondensedRing.openImmersionLowerShriek (DerivedNakayama.quotientRing l E (n + 1)) v).obj
+      (finiteQuotient l E T M n))
+
+/-- Canonical coefficient restriction commutes with h_*v_!, including quotient actions.
+Source: blueprint, Lattices, Nₙ=Resₙ N-barₙ
+(blueprint: lem-sfb-lattice-supported-hom-reduction-tower). -/
+def restrictionIso (M : AdicCompletion.Modules l E T) (n : ℕ) :
+    (Mod.comap (AdicCompletion.quotient l E X n)).obj
+        (finiteExtension l E h v M n) ≅ extension l E h v (quotient l E T M n) :=
+  (CondensedRing.comapLowerStarIso (DerivedNakayama.reductionRing l E (n + 1)) h).app _ ≪≫
+    (CondensedRing.lowerStar (DerivedNakayama.integerRing l E) h).mapIso
+      ((CondensedRing.comapOpenImmersionLowerShriekIso
+        (DerivedNakayama.reductionRing l E (n + 1)) v).app _)
+
 /-- N in degree zero in the ordinary unbounded integral category.
 Source: blueprint, Integral targets (blueprint: lem-sfb-lattice-supported-hom-reduction-tower). -/
 abbrev target (M : AdicCompletion.Modules l E T) :=
@@ -134,6 +153,26 @@ abbrev target (M : AdicCompletion.Modules l E T) :=
 Source: blueprint, Integral targets (blueprint: lem-sfb-lattice-supported-hom-reduction-tower). -/
 abbrev level (M : AdicCompletion.Modules l E T) (n : ℕ) :=
   target l E h v (quotient l E T M n)
+
+/-- The finite-coefficient supported quotient in degree zero.
+Source: blueprint, definition of N-barₙ
+(blueprint: lem-sfb-lattice-supported-hom-reduction-tower). -/
+abbrev finiteDerivedExtension (M : AdicCompletion.Modules l E T) (n : ℕ) :
+    AdicCompletion.FiniteDerived l E X n :=
+  (DerivedCategory.singleFunctor
+    (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (AdicCompletion.finiteRing l E X n)) 0).obj (finiteExtension l E h v M n)
+
+/-- The canonical identification Nₙ=Resₙ N-barₙ in the unbounded derived category.
+Source: blueprint, defining the supported reduction tower
+(blueprint: lem-sfb-lattice-supported-hom-reduction-tower). -/
+def levelRestrictionIso (M : AdicCompletion.Modules l E T) (n : ℕ) :
+    (AdicCompletion.restrict l E X n).obj (finiteDerivedExtension l E h v M n) ≅
+      level l E h v M n :=
+  ((Mod.comap (AdicCompletion.quotient l E X n)).mapDerivedCategorySingleFunctor 0).app
+      (finiteExtension l E h v M n) ≪≫
+    (DerivedCategory.singleFunctor (AdicCompletion.Modules l E X) 0).mapIso
+      (restrictionIso l E h v M n)
 
 /-- The quotient transition after supported extension and degree-zero inclusion.
 Source: blueprint, Integral targets (blueprint: lem-sfb-lattice-supported-hom-reduction-tower). -/

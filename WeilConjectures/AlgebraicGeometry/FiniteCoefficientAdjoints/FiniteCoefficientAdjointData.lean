@@ -194,6 +194,13 @@ Source: blueprint field-extension towers
 def Arrow.ringMap {s t : Stage l E} (a : Arrow s t) : s.ring →+* t.ring :=
   Ideal.quotientMap t.ideal (strictEtaleIntegerMap l a.embedding) a.ideal_le
 
+/-- Finite-free means actual finite and free modules for the quotient algebra map.
+Source: blueprint coefficient extensions
+(blueprint: lem-pur-finite-coefficient-adjoint-comparisons). -/
+def Arrow.IsFiniteFree {s t : Stage l E} (a : Arrow s t) : Prop :=
+  letI := a.ringMap.toAlgebra
+  Module.Finite s.ring t.ring ∧ Module.Free s.ring t.ring
+
 /-- Ordinary pro-etale derived category in the fixed-module presentation.
 Source: blueprint finite coefficient categories
 (blueprint: lem-pur-finite-coefficient-adjoint-comparisons). -/
@@ -533,6 +540,49 @@ theorem finiteTypeNoetherian (k : Type u) [Field k] (T : Scheme.{u})
     QuasiCompact.compactSpace_of_compactSpace (T ↘ Spec (.of k))
   exact ⟨⟩
 
+/-- A k-morphism between the schemes in the statement has the morphism properties
+used by compact support, without additional hypotheses on that morphism.
+Source: node proof step 1 (blueprint: lem-pur-finite-coefficient-adjoint-comparisons).
+Proof: rewrite f followed by the target structure morphism as the source structure
+morphism using IsOver. Separatedness and local finite type descend from this composite.
+The source is quasi-compact and the target is quasi-separated, so f is quasi-compact. -/
+theorem finiteTypeMorphismProperties (k : Type u) [Field k] {X Y : Scheme.{u}}
+    [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
+    [IsSeparated (X ↘ Spec (.of k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
+    [IsSeparated (Y ↘ Spec (.of k))]
+    (f : X ⟶ Y) [f.IsOver (Spec (.of k))] :
+    IsSeparated f ∧ LocallyOfFiniteType f ∧ QuasiCompact f := by
+  have hcomp : f ≫ (Y ↘ Spec (.of k)) = (X ↘ Spec (.of k)) := by
+    simp
+  have : IsSeparated (f ≫ (Y ↘ Spec (.of k))) := by rw [hcomp]; infer_instance
+  have : LocallyOfFiniteType (f ≫ (Y ↘ Spec (.of k))) := by
+    rw [hcomp]
+    infer_instance
+  have : IsNoetherian X := finiteTypeNoetherian k X
+  have : IsNoetherian Y := finiteTypeNoetherian k Y
+  exact ⟨IsSeparated.of_comp f (Y ↘ Spec (.of k)),
+    locallyOfFiniteType_of_comp f (Y ↘ Spec (.of k)), inferInstance⟩
+
+/-- The system over separated finite-type k-schemes, installing only the Noetherian
+instances implied by those hypotheses. Source: blueprint finite operations
+(blueprint: lem-pur-finite-coefficient-adjoint-comparisons). -/
+def FiniteTypeSystem (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E]
+    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+    (k : Type u) [Field k] {X Y : Scheme.{u}}
+    [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
+    [IsSeparated (X ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))]
+    (f : X ⟶ Y) [f.IsOver (Spec (.of k))] :=
+  letI := finiteTypeNoetherian k X
+  letI := finiteTypeNoetherian k Y
+  letI := (finiteTypeMorphismProperties k f).1
+  letI := (finiteTypeMorphismProperties k f).2.1
+  letI := (finiteTypeMorphismProperties k f).2.2
+  System l E f
+
 /-- Ramification and cofinality for the actual base-uniformizer stage.
 Source: the coefficient setting and field-extension tower in the current blueprint;
 DVR expansion, node lem-weil-l-adic-extension-integers-dvr.
@@ -604,5 +654,73 @@ theorem stage_ramification (s : Stage l E) :
   · intro r
     refine ⟨⟨r + 1, Nat.succ_pos _⟩, ?_⟩
     exact (Nat.le_succ r).trans (by simpa using Nat.mul_le_mul_right (r + 1) he)
+
+/-- Same-level arrows are finite free over the actual quotient coefficient rings.
+Source: the field-extension tower in the current blueprint, and integral closure
+of a complete discretely valued field in a finite extension.
+(blueprint: lem-pur-stage-same-level-finite-free).
+Proof: put the upper field over the lower field using the recorded embedding.
+Its integer ring is the integral closure of the lower integer ring, hence finite.
+It is torsion-free as a subring of a field; a finite torsion-free module over the
+lower DVR is free. Base change by the principal-power quotient is therefore
+finite free. Compatibility of the embedding with the base parameter identifies
+the base-changed ideal with the upper stage ideal. Transport through the standard
+tensor/quotient equivalence to obtain the claimed quotient module. -/
+theorem stage_finiteFree {s t : Stage l E} (a : Arrow s t)
+    (h : s.exponent = t.exponent) : a.IsFiniteFree := by
+  classical
+  let R := s.integers
+  let S := t.integers
+  let φ : R →+* S := strictEtaleIntegerMap l a.embedding
+  let : Algebra s.field t.field := a.embedding.toRingHom.toAlgebra
+  let : Algebra R t.field := (a.embedding.toRingHom.comp R.subtype).toAlgebra
+  let : Algebra R S := φ.toAlgebra
+  have : IsScalarTower R s.field t.field := IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
+  have : IsScalarTower R S t.field := IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
+  have : IsScalarTower (Padic l) s.field t.field :=
+    IsScalarTower.of_algebraMap_eq fun x ↦ (a.embedding.commutes x).symm
+  have : FiniteDimensional s.field t.field :=
+    Module.Finite.of_restrictScalars_finite (Padic l) s.field t.field
+  have hs := (Padic.extension_integers_dvr l s.field
+    (Padic.coefficientExtensionAbsoluteValue l s.field)
+    (spectralNorm_extends (K := Padic l) (L := s.field))).choose_spec.choose_spec
+  have : IsFractionRing R s.field := hs.2.2.2.2.2.2.1
+  have : IsPrincipalIdealRing R := hs.2.2.2.2.2.2.2.2.1
+  have : CharZero s.field :=
+    charZero_of_injective_algebraMap (algebraMap (Padic l) s.field).injective
+  have : IsIntegralClosure S R t.field := by
+    refine ⟨Subtype.val_injective, ?_⟩
+    intro x
+    change x ∈ integralClosure R t.field ↔ ∃ y : S, (y : t.field) = x
+    rw [← Padic.padic_integers_integralClosure l s.field t.field a.embedding x]
+    exact ⟨fun hx ↦ ⟨⟨x, hx⟩, rfl⟩, fun ⟨y, hy⟩ ↦ hy ▸ y.property⟩
+  have : Module.Finite R S := IsIntegralClosure.finite R s.field t.field S
+  have : Module.IsTorsionFree R t.field := by
+    apply Module.isTorsionFree_iff_smul_eq_zero.mpr
+    intro r x hx
+    change (a.embedding r) * x = 0 at hx
+    rcases mul_eq_zero.mp hx with hr | hx
+    · left
+      apply Subtype.ext
+      exact a.embedding.injective (hr.trans (map_zero a.embedding).symm)
+    · exact Or.inr hx
+  have : Module.Free R S := IsIntegralClosure.module_free R s.field t.field S
+  have hparam : φ s.parameter = t.parameter := by
+    apply Subtype.ext
+    exact DFunLike.congr_fun a.over_base _
+  have hJ : s.ideal.map (algebraMap R S) = t.ideal := by
+    change s.ideal.map φ = t.ideal
+    simp only [Stage.ideal, Ideal.map_pow, Ideal.map_span, Set.image_singleton, h]
+    rw [hparam]
+  let : Algebra s.ring t.ring := a.ringMap.toAlgebra
+  let e : (S ⧸ s.ideal.map (algebraMap R S)) ≃ₗ[s.ring] t.ring :=
+    (Ideal.quotEquivOfEq hJ).toAddEquiv.toLinearEquiv (by
+      intro x y
+      obtain ⟨x, rfl⟩ := Ideal.Quotient.mk_surjective x
+      obtain ⟨y, rfl⟩ := Ideal.Quotient.mk_surjective y
+      rfl)
+  let e' := (Algebra.TensorProduct.quotIdealMapEquivQuotTensor S s.ideal).symm.toLinearEquiv
+    |>.trans e
+  exact ⟨Module.Finite.equiv e', Module.Free.of_equiv e'⟩
 
 end AlgebraicGeometry.FiniteCoefficientAdjoints

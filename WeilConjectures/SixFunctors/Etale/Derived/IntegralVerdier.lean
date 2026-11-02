@@ -289,6 +289,13 @@ private lemma iv_bijective_comp {Λ : Type (u + 1)} [CommRing Λ] {X : Scheme.{u
   exact ObjectProperty.bijective_comp_of_distinguished hT
     (isIso_smul_id_of_isZero_reductionModIdeal hϖ C hC) hW
 
+/-- Transfer the map-isomorphism proof before specializing the coefficient category. -/
+private lemma iv_map_doubleDual {C : Type v} [Category.{w} C]
+    (E : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤ C)
+    (W K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (h : IsIso (E.map ((derivedHomToIhomIhomNatTrans A X W).app K))) :
+    IsIso (E.map (derivedHomDoubleDual A X W K)) := h
+
 universe v w
 
 section IntegralVerdierHomNotation
@@ -335,7 +342,6 @@ theorem exists_isHomotopyLimit_dualizing :
             (((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).obj ω.pt) ≅
           ((derivedHom (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj
             (op ((R(aX)_![ModuleCat.{u + 1} Λ]).obj K))).obj (constantComplex Λ (Spec (.of k)))) :=
-  sorry
 
 by
   classical
@@ -449,8 +455,98 @@ theorem boundedConstructibleIntegral_derivedHom_dualizing {K : 𝐃(X, Λ)}
           (-b - 2 * (d : ℤ) - 1) (-a - 1)
           ((reductionModIdeal Λ X (I ^ (n + 1))).obj
             (((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).obj ωX.pt))) ∧
-      IsIso (derivedHomDoubleDual (ModuleCat.{u + 1} Λ) X ωX.pt K) :=
-  sorry
+      IsIso (derivedHomDoubleDual (ModuleCat.{u + 1} Λ) X ωX.pt K) := by
+  classical
+  let G := (R(aX)_![ModuleCat.{u + 1} Λ]).rightAdjoint
+  let adj := Adjunction.ofIsLeftAdjoint (R(aX)_![ModuleCat.{u + 1} Λ])
+  let : G.CommShift ℤ := adj.rightAdjointCommShift ℤ
+  have := adj.commShift_of_leftAdjoint ℤ
+  have : G.IsTriangulated := adj.isTriangulated_rightAdjoint
+  have : G.Additive := adj.right_adjoint_additive
+  have : G.Linear Λ := adj.right_adjoint_linear
+  have hc : _root_.DerivedCategory.derivedComplete X.smallEtaleTopology I ωX.pt :=
+    _root_.DerivedCategory.derivedComplete_of_rightOrthogonal hϖ hI
+      (iv_quotPow_orthogonal (by rw [hI]; exact Ideal.mem_span_singleton_self ϖ) G hωX)
+  obtain ⟨c, hc₀, ⟨ec⟩⟩ := iv_point_quotPowLimit (k := k) I
+  obtain ⟨eL, _⟩ := hωX.exists_iso (hc₀.map G)
+  let eW : ωX.pt ≅ G.obj (constantComplex Λ (Spec (.of k))) := eL ≪≫ G.mapIso ec
+  have hωred (n : ℕ) : Nonempty ((reductionModIdeal Λ X (I ^ n)).obj ωX.pt ≅
+      G.obj ((DerivedCategory.quotPowFunctor (Spec (.of k)).smallEtaleTopology I).obj (op n))) := by
+    obtain ⟨e₁⟩ := nonempty_iso_map_reductionModIdeal G hϖ n (constantComplex Λ (Spec (.of k)))
+    obtain ⟨e₂⟩ := iv_reduction_constant (Spec (.of k)) (I ^ n)
+    exact ⟨(reductionModIdeal Λ X _).mapIso eW ≪≫
+      (by simpa only [← hI] using e₁.symm) ≪≫ G.mapIso e₂⟩
+  have estimate (d : ℕ) (hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞))
+      (a b : ℤ)
+      (ht : ∀ n : ℕ, DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b
+        ((reductionModIdeal Λ X (I ^ (n + 1))).obj K)) (n : ℕ) :
+      DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X
+          ((reductionModIdeal Λ X (I ^ (n + 1))).obj
+            (((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).obj ωX.pt)) ∧
+        DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X
+          (-b - 2 * (d : ℤ) - 1) (-a - 1)
+          ((reductionModIdeal Λ X (I ^ (n + 1))).obj
+            (((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).obj ωX.pt)) := by
+    subst hI
+    let m := n + 1
+    have : Finite (Λ ⧸ Ideal.span {ϖ ^ m}) := by
+      have := Ideal.finite_quotient_pow (IsNoetherian.noetherian (Ideal.span {ϖ})) m
+      simpa only [Ideal.span_singleton_pow] using this
+    have : HasInvertibleExponent (Λ ⧸ Ideal.span {ϖ ^ m}) (Spec (.of k)) := by
+      exact (congrArg (fun J : Ideal Λ ↦
+        HasInvertibleExponent (Λ ⧸ J) (Spec (.of k)))
+          (Ideal.span_singleton_pow ϖ m)).mp
+            (iv_quotientPow_exponent (Ideal.span {ϖ}) (Spec (.of k)) m)
+    obtain ⟨a₀, b₀, hab⟩ := hK.2
+    have hbcn : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X
+        ((reductionModIdeal Λ X (Ideal.span {ϖ ^ m})).obj K) := by
+      simpa only [Ideal.span_singleton_pow] using (hab n).1
+    have htn : DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b
+        ((reductionModIdeal Λ X (Ideal.span {ϖ ^ m})).obj K) := by
+      simpa only [Ideal.span_singleton_pow] using ht n
+    let P (J : Ideal Λ) (L : 𝐃(X, Λ)) : Prop :=
+      DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X
+          ((reductionModIdeal Λ X J).obj L) ∧
+        DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X
+          (-b - 2 * (d : ℤ) - 1) (-a - 1) ((reductionModIdeal Λ X J).obj L)
+    let DK := ((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).obj ωX.pt
+    have hi : P (Ideal.span {ϖ ^ m}) DK :=
+      principalVerdierEstimate hϖ m aX ωX.pt eW hbcn htn d hd
+    exact (congrArg (fun J : Ideal Λ ↦ P J DK)
+      (Ideal.span_singleton_pow ϖ (n + 1))).mpr hi
+  obtain ⟨d₀, hd₀⟩ := exists_topologicalKrullDim_le aX
+  obtain ⟨a₀, b₀, hab₀⟩ := hK.2
+  refine ⟨⟨derivedComplete_derivedHom I hϖ hI hc,
+    -b₀ - 2 * (d₀ : ℤ) - 1, -a₀ - 1,
+    fun n ↦ estimate d₀ hd₀ a₀ b₀ (fun m ↦ (hab₀ m).2) n⟩, ?_,
+    fun d hd a b ht n ↦ (estimate d hd a b ht n).2, ?_⟩
+  · intro n
+    obtain ⟨en⟩ := hωred n
+    obtain ⟨eH⟩ := nonempty_iso_reductionModIdeal_derivedHom_obj hϖ n K ωX.pt
+    exact ⟨(by simpa only [← hI] using eH) ≪≫
+      ((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).mapIso en⟩
+  · subst hI
+    obtain ⟨a, b, hab⟩ := hK.2
+    have : Finite (Λ ⧸ Ideal.span {ϖ ^ 1}) := by simpa only [pow_one] using
+      (inferInstance : Finite (Λ ⧸ Ideal.span {ϖ}))
+    have : HasInvertibleExponent (Λ ⧸ Ideal.span {ϖ ^ 1}) (Spec (.of k)) := by
+      exact (congrArg (fun r : Λ ↦
+        HasInvertibleExponent (Λ ⧸ Ideal.span {r}) (Spec (.of k))) (pow_one ϖ)).mpr
+          (inferInstance : HasInvertibleExponent (Λ ⧸ Ideal.span {ϖ}) (Spec (.of k)))
+    apply isIso_of_derivedComplete_of_isIso_reductionModIdeal hϖ _ hK.1
+      (derivedComplete_derivedHom (Ideal.span {ϖ}) hϖ rfl hc)
+    have hbcn : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X
+        ((reductionModIdeal Λ X (Ideal.span {ϖ ^ 1})).obj K) := by
+      simpa only [zero_add, pow_one] using (hab 0).1
+    have htn : DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b
+        ((reductionModIdeal Λ X (Ideal.span {ϖ ^ 1})).obj K) := by
+      simpa only [zero_add, pow_one] using (hab 0).2
+    have hδ := iv_map_doubleDual (ModuleCat.{u + 1} Λ) X
+      (reductionModIdeal Λ X (Ideal.span {ϖ ^ 1})) ωX.pt K
+      (principalVerdierBidualReduction hϖ 1 (by omega) aX ωX.pt eW hbcn htn)
+    exact (congrArg (fun J : Ideal Λ ↦ IsIso ((reductionModIdeal Λ X J).map
+      (derivedHomDoubleDual (ModuleCat.{u + 1} Λ) X ωX.pt K)))
+        (congrArg (fun r : Λ ↦ Ideal.span {r}) (pow_one ϖ))).mp hδ
 
 include hϖ hI hωX in
 /-- Blueprint `thm-sf-biduality-class`: Verdier biduality on the coefficient class, at the

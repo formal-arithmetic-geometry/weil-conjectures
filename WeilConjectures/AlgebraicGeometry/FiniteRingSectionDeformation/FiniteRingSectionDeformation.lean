@@ -281,6 +281,28 @@ theorem existsUnique_normalized (N : ℕ) (hN : 0 < N)
     (asIso (atOne A g s hs)) cover localIso hn
   exact ⟨κ, hκ, huniq⟩
 
+/-- The inverse zero restriction is delta, using the two prescribed fibre identifications.
+Source: sk-thm-dnc, final formula (blueprint: lem-trf-finite-ring-section-deformation).
+Proof: Step 11 restricts kappa at zero, inverts it, and composes with the canonical
+atZero mate. The inverse-image section compositor identifies i0*a* with the identity.
+The two fibre maps are invertible by lines_and_fibres, as is every factor of kappa.
+Thus the concrete specialization formula is an isomorphism with the stated direction. -/
+theorem isIso_specialization (N : ℕ) (hN : 0 < N)
+    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
+    {V S : Scheme.{u}} [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤)))
+    (d : ℕ) (g : V ⟶ S) [SmoothOfRelativeDimension d g] [IsSeparated g]
+    [QuasiCompact g] [HasCompactification g] (s : S ⟶ V) [IsClosedImmersion s]
+    (hs : s ≫ g = 𝟙 S) [Geometry d g s]
+    (κ : family A g s ≅
+      (upperStar (ModuleCat.{u + 1} A)
+        (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)).leftDerivedFunctor.obj
+          (sectionInvariant A g s)) (hκ : Normalized A g s hs κ) :
+    IsIso (specialization A g s κ) := by
+  have _hκ := hκ
+  have : IsIso (atZero A g s) := (lines_and_fibres N hN A hA hS d g s hs).2.2.2
+  unfold specialization
+  infer_instance
+
 private theorem sectionPullback_endpoint
     (A : Type (u + 1)) [CommRing A]
     {B B' X X' : Scheme.{u}} (v : B' ⟶ B) (i : B ⟶ X) (i' : B' ⟶ X')
@@ -397,6 +419,53 @@ def bundleSectionAdjoint (N : ℕ) (hN : 0 < N)
     (VectorBundleZeroSection.zero_spec S d M).1).inv.app _ ≫
       (ordinaryFinitePullback A (VectorBundleZeroSection.zero S d M)).map
         (bundleAdjoint N hN A hA S hS d M)
+
+/-- The affine-glued adjoint and its zero-section restriction are invertible for arbitrary
+finite A. This asserts only the orientation needed here, independently of the valuation
+coefficient restriction in the full vector-bundle-purity theorem.
+Source: sk-thm-dnc, normal-bundle orientation
+(blueprint: lem-trf-finite-ring-section-deformation).
+Proof: Step 16 restricts to each linear trivialization. Integration is the specified
+affine trace there by VectorIntegrationNormalization. Its adjunct is the affine adjoint
+orientation, which is invertible by the affine-space adjunction and uniqueness of right
+adjoints respecting counits. Linear trace invariance identifies these orientations on
+overlaps; full faithfulness of shifted degree-zero sheaves and sheaf-Hom gluing give
+the global orientation. Etale inverse image preserves its inverse, giving the zero-section
+assertion. The zero-fold tensor and zero-variable adjunction give the d=0 normalization. -/
+theorem bundleAdjoint_isIso (N : ℕ) (hN : 0 < N)
+    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
+    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)
+    (M : S.Modules) [M.IsFiniteLocallyFreeOfRank d] :
+    IsIso (bundleAdjoint N hN A hA S hS d M) ∧
+    IsIso (bundleSectionAdjoint N hN A hA S hS d M) := by
+  let := (vectorIntegration_geometry S d M).1
+  let := (vectorIntegration_geometry S d M).2.1
+  have h : IsIso (bundleAdjoint N hN A hA S hS d M) := by
+    unfold bundleAdjoint vectorBundlePurityAdjunction
+    exact integration_unit_adjunct_isIso N hN A hA S hS d M
+  refine ⟨h, ?_⟩
+  let e := (leftDerivedUpperStarCompSectionIso (ModuleCat.{u + 1} A)
+    (VectorBundleZeroSection.zero S d M) (VectorBundleZeroSection.π S d M)
+    (VectorBundleZeroSection.zero_spec S d M).1).app
+      (affineLinearBaseCoefficient A N hA S d)
+  let F := ordinaryFinitePullback A (VectorBundleZeroSection.zero S d M)
+  let m := bundleAdjoint N hN A hA S hS d M
+  letI : IsIso m := h
+  exact IsIso.comp_isIso' (Iso.isIso_inv e) (Functor.map_isIso F m)
+
+/-- The normal-bundle orientation, the inverse of the affine-glued adjoint restricted
+to zero. Its target is the existing ordered tensor model of A_S(d)[2d], with the empty
+tensor equal to A_S. Source: sk-thm-dnc, final orientation
+(blueprint: lem-trf-finite-ring-section-deformation). -/
+def bundleOrientation (N : ℕ) (hN : 0 < N)
+    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
+    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)
+    (M : S.Modules) [M.IsFiniteLocallyFreeOfRank d] :
+    (ordinaryFinitePullback A (VectorBundleZeroSection.zero S d M)).obj
+        ((bundleRight A S d M).obj (ordinaryFiniteUnit A S)) ≅
+      affineLinearBaseCoefficient A N hA S d :=
+  letI := (bundleAdjoint_isIso N hN A hA S hS d M).2
+  (asIso (bundleSectionAdjoint N hN A hA S hS d M)).symm
 
 /-- The standard zero section in the fixed coordinate-tower presentation.
 Source: sk-thm-dnc, bundle frames (blueprint: lem-trf-finite-ring-section-deformation). -/

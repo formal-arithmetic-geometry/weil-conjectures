@@ -310,6 +310,12 @@ abbrev nu (R : Type (u + 1)) [CommRing R] (T : Scheme.{u}) :
     DerivedCategory (Et R T) ⥤ DerivedCategory (Pro R T) :=
   (comparisonUpperStar (ModuleCat.{u + 1} R) T).leftDerivedFunctor
 
+/-- Scheme inverse image on ordinary etale complexes. Source: Stacks, Tag 0D6D
+(blueprint: lem-sp-etale-chart-comparison-isos). -/
+abbrev etPull (R : Type (u + 1)) [CommRing R] {T T' : Scheme.{u}} (v : T' ⟶ T) :
+    DerivedCategory (Et R T) ⥤ DerivedCategory (Et R T') :=
+  (Etale.upperStar (ModuleCat.{u + 1} R) v).leftDerivedFunctor
+
 /-- Scheme inverse image on ordinary pro-etale complexes. Source: Stacks, Tag 0D6D
 (blueprint: lem-sp-etale-chart-comparison-isos). -/
 abbrev proPull (R : Type (u + 1)) [CommRing R] {T T' : Scheme.{u}} (v : T' ⟶ T) :
@@ -343,6 +349,26 @@ def scalarSheafIso {A B : Type (u + 1)} [CommRing A] [CommRing B]
     ((comparisonAdjunction (ModuleCat.{u + 1} A) T).comp
       (Sheaf.adjunction (Scheme.ProEt.topology T)
         (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1} f)))
+
+/-- The usual inverse-image square with its fixed coefficient source and target exposed.
+Source: Stacks, 0GLZ (blueprint: lem-sp-etale-chart-comparison-isos). -/
+def schemeSheafIso (R : Type (u + 1)) [CommRing R]
+    {T T' : Scheme.{u}} (v : T' ⟶ T) :
+    Etale.upperStar (ModuleCat.{u + 1} R) v ⋙
+        comparisonUpperStar (ModuleCat.{u + 1} R) T' ≅
+      comparisonUpperStar (ModuleCat.{u + 1} R) T ⋙
+        AlgebraicGeometry.ProEtale.upperStar (ModuleCat.{u + 1} R) v :=
+  supportSiteComparisonCoefficientPullbackIso (ModuleCat.{u + 1} R) v
+
+/-- The specified inverse-image square, exactly localized from the site square.
+Source: Stacks, Tags 0GLZ and 0D6D (blueprint: lem-sp-etale-chart-comparison-isos). -/
+def schemeIso (R : Type (u + 1)) [CommRing R] {T T' : Scheme.{u}} (v : T' ⟶ T) :
+    etPull R v ⋙ nu R T' ≅ nu R T ⋙ proPull R v :=
+  Functor.leftDerivedFunctorCompNatIso
+    (comparisonUpperStar (ModuleCat.{u + 1} R) T)
+    (AlgebraicGeometry.ProEtale.upperStar (ModuleCat.{u + 1} R) v)
+    (Etale.upperStar (ModuleCat.{u + 1} R) v)
+    (comparisonUpperStar (ModuleCat.{u + 1} R) T') (schemeSheafIso R v)
 
 attribute [local irreducible] scalarSheafIso
 

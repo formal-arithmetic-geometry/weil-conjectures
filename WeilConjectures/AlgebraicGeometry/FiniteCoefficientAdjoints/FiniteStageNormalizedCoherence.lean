@@ -145,6 +145,21 @@ private theorem lowerRefinement_normalization
         simp only [← (lower A c).map_comp_assoc, Iso.hom_inv_id,
           CategoryTheory.Functor.map_id, Category.id_comp]
 
+private theorem counit_injective
+    {A : Type (u + 1)} [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
+    {f : X ⟶ Y} {c : Compactification f} (d : AdjointDatum A c)
+    (K : (ctf A X).FullSubcategory) (L : (ctf A Y).FullSubcategory)
+    (a b : K.obj ⟶ (upper A c).obj L.obj)
+    (h : (lower A c).map a ≫ d.counit L = (lower A c).map b ≫ d.counit L) :
+    a = b := by
+  with_unfolding_all
+    have h' : (d.adjunction.homEquiv K L).symm (ObjectProperty.homMk a) =
+        (d.adjunction.homEquiv K L).symm (ObjectProperty.homMk b) := by
+      apply ObjectProperty.hom_ext
+      exact h
+    exact congrArg InducedCategory.Hom.hom ((d.adjunction.homEquiv K L).symm.injective h')
+
 private def lowerRefinementRestricted
     {A : Type (u + 1)} [CommRing A] [Finite A]
     {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
@@ -173,6 +188,31 @@ private def canonicalRefinement
       exact congrArg InducedCategory.Hom.hom
         (conjugateEquiv_counit dd.adjunction dc.adjunction
           (lowerRefinementRestricted r dc dd).hom K)
+
+private theorem refinement_unique
+    {A : Type (u + 1)} [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
+    {f : X ⟶ Y} [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    {c d : Compactification f} {r : c.Refinement d}
+    {dc : AdjointDatum A c} {dd : AdjointDatum A d}
+    (a b : RefinementDatum r dc dd) : a = b := by
+  with_unfolding_all
+    have hl : a.lowerIso = b.lowerIso := by
+      apply Iso.ext
+      ext K
+      exact (a.lower_normalization K (coherenceOrigin A X K)).trans
+        (b.lower_normalization K (coherenceOrigin A X K)).symm
+    have hu : a.upperIso = b.upperIso := by
+      apply Iso.ext
+      ext K
+      apply counit_injective dc
+        ⟨(upper A d).obj K.obj, dd.upper_preserves K.obj K.property⟩ K
+      erw [a.upper_normalization, b.upper_normalization, hl]
+    cases a
+    cases b
+    cases hl
+    cases hu
+    rfl
 
 private theorem projection_transport
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
@@ -388,5 +428,370 @@ private theorem projection_refinement
       coherenceOrigin, ObjectProperty.ι_obj] using congrArg
       (fun v ↦ (tensor φ Y).map ((lowerRealization A c).hom.app K) ≫ v ≫
         (lowerRealization B d).inv.app KB) hmid
+
+private theorem projection_identity
+    {A : Type (u + 1)} [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
+    {f : X ⟶ Y} {c : Compactification f} (d : AdjointDatum A c)
+    (φ : A →+* A) (hφ : φ = RingHom.id A) (q : Change φ c d d)
+    (K : (ctf A X).FullSubcategory) :
+    q.projection.hom.app K ≫ (lower A c).map
+        ((ProEtale.normalizedOriginScalarUnit (Scheme.ProEt.topology X) φ hφ).hom.app
+          K.obj) =
+      (ProEtale.normalizedOriginScalarUnit (Scheme.ProEt.topology Y) φ hφ).hom.app
+        ((lower A c).obj K.obj) := by
+  with_unfolding_all
+    subst φ
+    let SX := tensor (RingHom.id A) X
+    let SY := tensor (RingHom.id A) Y
+    let UX := ProEtale.normalizedOriginScalarUnit (Scheme.ProEt.topology X)
+      (RingHom.id A) rfl
+    let UY := ProEtale.normalizedOriginScalarUnit (Scheme.ProEt.topology Y)
+      (RingHom.id A) rfl
+    let L : (ctf A X).FullSubcategory :=
+      ⟨SX.obj K.obj, q.tensor_preserves_X K.obj K.property⟩
+    have hx : UX.hom.app (SX.obj K.obj) = SX.map (UX.hom.app K.obj) := by
+      apply (cancel_mono (UX.hom.app K.obj)).1
+      exact (UX.hom.naturality (UX.hom.app K.obj)).symm
+    have hn := q.projection.hom.naturality
+      (ObjectProperty.homMk (UX.hom.app K.obj) : L ⟶ K)
+    change SY.map ((lower A c).map (UX.hom.app K.obj)) ≫ q.projection.hom.app K =
+      q.projection.hom.app L ≫ (lower A c).map (SX.map (UX.hom.app K.obj)) at hn
+    have hp := projection_comp d d d (RingHom.id A) (RingHom.id A)
+      (RingHom.id A) (by ext; rfl) q q q K
+    rw [WeilConjectures.scalar_comp_unit, WeilConjectures.scalar_comp_unit] at hp
+    dsimp only [Iso.trans_hom, Functor.isoWhiskerLeft_hom, NatTrans.comp_app,
+      Functor.whiskerLeft_app, Functor.rightUnitor_hom_app, Functor.comp_obj,
+      Functor.id_obj] at hp
+    erw [Category.comp_id, Category.comp_id] at hp
+    change SY.map (q.projection.hom.app K) ≫ q.projection.hom.app L ≫
+        (lower A c).map (UX.hom.app (SX.obj K.obj)) =
+      UY.hom.app (SY.obj ((lower A c).obj K.obj)) ≫ q.projection.hom.app K at hp
+    rw [hx, ← hn, ← SY.map_comp_assoc] at hp
+    have hc := (cancel_mono (q.projection.hom.app K)).1 hp
+    have hu := UY.hom.naturality
+      (q.projection.hom.app K ≫ (lower A c).map (UX.hom.app K.obj))
+    change SY.map (q.projection.hom.app K ≫ (lower A c).map (UX.hom.app K.obj)) ≫
+        UY.hom.app ((lower A c).obj K.obj) =
+      UY.hom.app (SY.obj ((lower A c).obj K.obj)) ≫
+        (q.projection.hom.app K ≫ (lower A c).map (UX.hom.app K.obj)) at hu
+    rw [hc] at hu
+    exact ((cancel_epi (UY.hom.app (SY.obj ((lower A c).obj K.obj)))).1 hu).symm
+
+private theorem mate_unit_of_projection
+    {A : Type (u + 1)} [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
+    {f : X ⟶ Y} {c : Compactification f}
+    (d : AdjointDatum A c) (φ : A →+* A) (hφ : φ = RingHom.id A)
+    (q : Change φ c d d)
+    (hp : ∀ L : (ctf A X).FullSubcategory,
+      q.projection.hom.app L ≫ (lower A c).map
+          ((ProEtale.normalizedOriginScalarUnit (Scheme.ProEt.topology X) φ hφ).hom.app
+            L.obj) =
+        (ProEtale.normalizedOriginScalarUnit (Scheme.ProEt.topology Y) φ hφ).hom.app
+          ((lower A c).obj L.obj))
+    (K : (ctf A Y).FullSubcategory) :
+    q.mate.hom.app K ≫ (upper A c).map
+        ((ProEtale.normalizedOriginScalarUnit (Scheme.ProEt.topology Y) φ hφ).hom.app
+          K.obj) =
+      (ProEtale.normalizedOriginScalarUnit (Scheme.ProEt.topology X) φ hφ).hom.app
+        ((upper A c).obj K.obj) := by
+  with_unfolding_all
+    let UX := ProEtale.normalizedOriginScalarUnit (Scheme.ProEt.topology X) φ hφ
+    let UY := ProEtale.normalizedOriginScalarUnit (Scheme.ProEt.topology Y) φ hφ
+    let L : (ctf A X).FullSubcategory :=
+      ⟨(upper A c).obj K.obj, d.upper_preserves K.obj K.property⟩
+    have hi : q.projection.inv.app L ≫ UY.hom.app ((lower A c).obj L.obj) =
+        (lower A c).map (UX.hom.app L.obj) := by
+      erw [← hp L, ← Category.assoc, Iso.inv_hom_id_app, Category.id_comp]
+    apply counit_injective d
+      ⟨(tensor φ X).obj L.obj, q.tensor_preserves_X L.obj L.property⟩ K
+    simp only [Functor.map_comp, Category.assoc]
+    have hn := d.adjunction.counit.naturality
+      (ObjectProperty.homMk (UY.hom.app K.obj) :
+        ⟨(tensor φ Y).obj K.obj, q.tensor_preserves_Y K.obj K.property⟩ ⟶ K)
+    have hn' := congrArg InducedCategory.Hom.hom hn
+    change (lower A c).map ((upper A c).map (UY.hom.app K.obj)) ≫ d.counit K =
+      d.counit ⟨(tensor φ Y).obj K.obj, q.tensor_preserves_Y K.obj K.property⟩ ≫
+        UY.hom.app K.obj at hn'
+    erw [hn', reassoc_of% (q.counit_equation K)]
+    have hu := UY.hom.naturality (d.counit K)
+    change (tensor φ Y).map (d.counit K) ≫ UY.hom.app K.obj =
+      UY.hom.app ((lower A c).obj L.obj) ≫ d.counit K at hu
+    erw [hu, reassoc_of% hi]
+    rfl
+
+private theorem mate_refinement_of_projection
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
+    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
+    {f : X ⟶ Y} [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    {c d : Compactification f} (r : c.Refinement d)
+    (Ac : AdjointDatum A c) (Ad : AdjointDatum A d)
+    (Bc : AdjointDatum B c) (Bd : AdjointDatum B d)
+    (φ : A →+* B) (qc : Change φ c Ac Bc) (qd : Change φ d Ad Bd)
+    (ra : RefinementDatum r Ac Ad) (rb : RefinementDatum r Bc Bd)
+    (hp : ∀ L : (ctf A X).FullSubcategory,
+      (tensor φ Y).map (ra.lowerIso.hom.app L) ≫ qd.projection.hom.app L =
+        qc.projection.hom.app L ≫ rb.lowerIso.hom.app
+          ⟨(tensor φ X).obj L.obj, qc.tensor_preserves_X L.obj L.property⟩)
+    (K : (ctf A Y).FullSubcategory) :
+    (tensor φ X).map (ra.upperIso.hom.app K) ≫ qc.mate.hom.app K =
+      qd.mate.hom.app K ≫ rb.upperIso.hom.app
+        ⟨(tensor φ Y).obj K.obj, qc.tensor_preserves_Y K.obj K.property⟩ := by
+  with_unfolding_all
+    let L : (ctf A X).FullSubcategory :=
+      ⟨(upper A d).obj K.obj, Ad.upper_preserves K.obj K.property⟩
+    let M : (ctf A X).FullSubcategory :=
+      ⟨(upper A c).obj K.obj, Ac.upper_preserves K.obj K.property⟩
+    let N : (ctf B Y).FullSubcategory :=
+      ⟨(tensor φ Y).obj K.obj, qc.tensor_preserves_Y K.obj K.property⟩
+    have hi : qc.projection.inv.app L ≫ (tensor φ Y).map (ra.lowerIso.hom.app L) =
+        rb.lowerIso.hom.app
+          ⟨(tensor φ X).obj L.obj, qc.tensor_preserves_X L.obj L.property⟩ ≫
+            qd.projection.inv.app L := by
+      apply (cancel_mono (qd.projection.hom.app L)).1
+      simp only [Category.assoc, Iso.inv_hom_id_app]
+      erw [hp L, ← Category.assoc, Iso.inv_hom_id_app, Category.id_comp]
+      erw [Category.comp_id]
+    apply counit_injective Bc
+      ⟨(tensor φ X).obj L.obj, qd.tensor_preserves_X L.obj L.property⟩ N
+    simp only [Functor.map_comp, Category.assoc]
+    erw [qc.counit_equation, rb.upper_normalization]
+    have hq := qc.projection.inv.naturality
+      (ObjectProperty.homMk (ra.upperIso.hom.app K) : L ⟶ M)
+    dsimp only [Functor.comp_map, ObjectProperty.ι_map] at hq
+    erw [reassoc_of% hq, ← (tensor φ Y).map_comp, ra.upper_normalization]
+    simp only [Functor.map_comp]
+    erw [reassoc_of% hi]
+    have hr := rb.lowerIso.hom.naturality
+      (ObjectProperty.homMk (qd.mate.hom.app K) :
+        ⟨(tensor φ X).obj L.obj, qd.tensor_preserves_X L.obj L.property⟩ ⟶
+          ⟨(upper B d).obj N.obj, Bd.upper_preserves N.obj N.property⟩)
+    dsimp only [Functor.comp_map, ObjectProperty.ι_map] at hr
+    erw [reassoc_of% hr, qd.counit_equation]
+
+private theorem mate_comp_of_projection
+    {A B C : Type (u + 1)} [CommRing A] [CommRing B] [CommRing C]
+    [Finite A] [Finite B] [Finite C]
+    {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
+    {f : X ⟶ Y} {c : Compactification f}
+    (dA : AdjointDatum A c) (dB : AdjointDatum B c) (dC : AdjointDatum C c)
+    (φ : A →+* B) (ψ : B →+* C) (χ : A →+* C) (hχ : χ = ψ.comp φ)
+    (qab : Change φ c dA dB) (qbc : Change ψ c dB dC) (qac : Change χ c dA dC)
+    (hp : ∀ L : (ctf A X).FullSubcategory,
+      (tensor ψ Y).map (qab.projection.hom.app L) ≫
+        qbc.projection.hom.app
+          ⟨(tensor φ X).obj L.obj, qab.tensor_preserves_X L.obj L.property⟩ ≫
+        (lower C c).map ((ProEtale.pbcFixedScalarExtensionComp
+          (Scheme.ProEt.topology X) φ ψ χ hχ).hom.app L.obj) =
+      (ProEtale.pbcFixedScalarExtensionComp (Scheme.ProEt.topology Y) φ ψ χ hχ).hom.app
+        ((lower A c).obj L.obj) ≫ qac.projection.hom.app L)
+    (K : (ctf A Y).FullSubcategory) :
+    (tensor ψ X).map (qab.mate.hom.app K) ≫
+        qbc.mate.hom.app
+          ⟨(tensor φ Y).obj K.obj, qab.tensor_preserves_Y K.obj K.property⟩ ≫
+        (upper C c).map ((ProEtale.pbcFixedScalarExtensionComp
+          (Scheme.ProEt.topology Y) φ ψ χ hχ).hom.app K.obj) =
+      (ProEtale.pbcFixedScalarExtensionComp (Scheme.ProEt.topology X) φ ψ χ hχ).hom.app
+        ((upper A c).obj K.obj) ≫ qac.mate.hom.app K := by
+  with_unfolding_all
+    let SX := ProEtale.pbcFixedScalarExtensionComp (Scheme.ProEt.topology X) φ ψ χ hχ
+    let SY := ProEtale.pbcFixedScalarExtensionComp (Scheme.ProEt.topology Y) φ ψ χ hχ
+    let L : (ctf A X).FullSubcategory :=
+      ⟨(upper A c).obj K.obj, dA.upper_preserves K.obj K.property⟩
+    let LB : (ctf B X).FullSubcategory :=
+      ⟨(tensor φ X).obj L.obj, qab.tensor_preserves_X L.obj L.property⟩
+    let KB : (ctf B Y).FullSubcategory :=
+      ⟨(tensor φ Y).obj K.obj, qab.tensor_preserves_Y K.obj K.property⟩
+    let LC : (ctf C X).FullSubcategory :=
+      ⟨(tensor ψ X).obj LB.obj, qbc.tensor_preserves_X LB.obj LB.property⟩
+    let KC : (ctf C Y).FullSubcategory :=
+      ⟨(tensor χ Y).obj K.obj, qac.tensor_preserves_Y K.obj K.property⟩
+    have hi : qbc.projection.inv.app LB ≫
+        (tensor ψ Y).map (qab.projection.inv.app L) ≫
+          SY.hom.app ((lower A c).obj L.obj) =
+        (lower C c).map (SX.hom.app L.obj) ≫ qac.projection.inv.app L := by
+      apply (cancel_mono (qac.projection.hom.app L)).1
+      simp only [Category.assoc, Iso.inv_hom_id_app]
+      erw [← (hp L)]
+      erw [← (tensor ψ Y).map_comp_assoc, Iso.inv_hom_id_app,
+        CategoryTheory.Functor.map_id, Category.id_comp]
+      erw [← Category.assoc, Iso.inv_hom_id_app, Category.id_comp, Category.comp_id]
+    apply counit_injective dC LC KC
+    simp only [Functor.map_comp, Category.assoc]
+    have hn := dC.adjunction.counit.naturality
+      (ObjectProperty.homMk (SY.hom.app K.obj) :
+        ⟨(tensor ψ Y).obj KB.obj, qbc.tensor_preserves_Y KB.obj KB.property⟩ ⟶ KC)
+    have hn' := congrArg InducedCategory.Hom.hom hn
+    change (lower C c).map ((upper C c).map (SY.hom.app K.obj)) ≫ dC.counit KC =
+      dC.counit ⟨(tensor ψ Y).obj KB.obj,
+        qbc.tensor_preserves_Y KB.obj KB.property⟩ ≫ SY.hom.app K.obj at hn'
+    erw [hn', reassoc_of% (qbc.counit_equation KB),
+      qac.counit_equation K]
+    have hq := qbc.projection.inv.naturality
+      (ObjectProperty.homMk (qab.mate.hom.app K) : LB ⟶
+        ⟨(upper B c).obj KB.obj, dB.upper_preserves KB.obj KB.property⟩)
+    change (lower C c).map ((tensor ψ X).map (qab.mate.hom.app K)) ≫
+        qbc.projection.inv.app
+          ⟨(upper B c).obj KB.obj, dB.upper_preserves KB.obj KB.property⟩ =
+      qbc.projection.inv.app LB ≫
+        (tensor ψ Y).map ((lower B c).map (qab.mate.hom.app K)) at hq
+    erw [reassoc_of% hq, ← (tensor ψ Y).map_comp_assoc, qab.counit_equation]
+    simp only [Functor.map_comp, Category.assoc]
+    have hs := SY.hom.naturality (dA.counit K)
+    change (tensor ψ Y).map ((tensor φ Y).map (dA.counit K)) ≫ SY.hom.app K.obj =
+      SY.hom.app ((lower A c).obj L.obj) ≫ (tensor χ Y).map (dA.counit K) at hs
+    erw [hs, reassoc_of% hi]
+    rfl
+
+/-- Normalized individual adjunctions and coefficient comparisons satisfy composition,
+identity, and compactification-refinement coherence.
+
+Source: current blueprint reduction-exceptional and field-extension towers;
+parent lem-pur-finite-coefficient-adjoint-comparisons, proof step 7.
+(blueprint: lem-pur-finite-stage-normalized-coherence).
+
+Proof: on a retained etale witness expand both coefficient composites using
+projection_normalization. Naturality moves the witness isomorphisms through the
+functors. The site/coefficient square cancels the middle site comparisons, and the
+ringed coefficient projection cocycle identifies both remaining maps with the
+extension to the composite coefficient ring of the same evaluation counit.
+Open extension gives the same equation termwise by tensor balancing. This proves
+projection_comp with the canonical scalar associators; the identity case gives
+projection_id with normalizedOriginScalarUnit. Define the refinement lower iso by
+transporting the specified ordinary etale proper/open refinement iso through the
+site comparison. Naturality shows its value is refinementAtWitness, independently
+of the witness. Its right-adjoint conjugate is the unique map with the stated
+upper_normalization, hence an iso. The site/coefficient refinement square proves
+projection_refinement. For mate_comp transpose the two proposed composites under
+the final adjunction: substitute each Change.counit_equation and then use the
+projection cocycle; both transposes are the scalar-extended initial counit preceded
+by the inverse composite projection. Injectivity gives mate_comp. The same
+argument with the scalar unit proves mate_id, and with the lower refinement
+square proves mate_refinement. Normalized projection and conjugate counit fix both
+refinement isomorphisms uniquely; proof irrelevance fixes their proof fields.
+No compatibility hypotheses on the input families are required, since every
+Change and AdjointDatum already carries the specified normalization. -/
+theorem finite_stage_normalized_coherence
+    (k : Type u) [Field k] (p l : ℕ) [CharP k p] (hp : 0 < p)
+    [Fact l.Prime] (hlp : l ≠ p)
+    (E : Type (u + 1)) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+    {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
+    [IsSeparated (X ↘ Spec (.of k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
+    [IsSeparated (Y ↘ Spec (.of k))]
+    (f : X ⟶ Y) [f.IsOver (Spec (.of k))] :
+    letI := finiteTypeNoetherian k X
+    letI := finiteTypeNoetherian k Y
+    letI := (finiteTypeMorphismProperties k f).1
+    letI := (finiteTypeMorphismProperties k f).2.1
+    letI := (finiteTypeMorphismProperties k f).2.2
+    ∀ (datum : ∀ (s : Stage l E) (c : Compactification f), AdjointDatum s.ring c)
+      (change : ∀ {s t : Stage l E} (a : Arrow s t) (c : Compactification f),
+    Change a.ringMap c (datum s c) (datum t c)),
+      ∃! refinement : ∀ (s : Stage l E) {c d : Compactification f} (r : c.Refinement d),
+    RefinementDatum r (datum s c) (datum s d),
+        (∀ {s t v : Stage l E} (a : Arrow s t) (b : Arrow t v)
+    (ab : Arrow s v) (h : ab.embedding = b.embedding.comp a.embedding)
+    (c : Compactification f) (K : (ctf s.ring X).FullSubcategory),
+    (tensor b.ringMap Y).map ((change a c).projection.hom.app K) ≫
+        (change b c).projection.hom.app
+          ⟨(tensor a.ringMap X).obj K.obj,
+            (change a c).tensor_preserves_X K.obj K.property⟩ ≫
+        (lower v.ring c).map
+          ((ProEtale.pbcFixedScalarExtensionComp (Scheme.ProEt.topology X)
+            a.ringMap b.ringMap ab.ringMap (Arrow.ringMap_comp a b ab h)).hom.app K.obj) =
+      (ProEtale.pbcFixedScalarExtensionComp (Scheme.ProEt.topology Y)
+          a.ringMap b.ringMap ab.ringMap (Arrow.ringMap_comp a b ab h)).hom.app
+            ((lower s.ring c).obj K.obj) ≫
+        (change ab c).projection.hom.app K) ∧
+        (∀ {s t v : Stage l E} (a : Arrow s t) (b : Arrow t v)
+    (ab : Arrow s v) (h : ab.embedding = b.embedding.comp a.embedding)
+    (c : Compactification f) (K : (ctf s.ring Y).FullSubcategory),
+    (tensor b.ringMap X).map ((change a c).mate.hom.app K) ≫
+        (change b c).mate.hom.app
+          ⟨(tensor a.ringMap Y).obj K.obj,
+            (change a c).tensor_preserves_Y K.obj K.property⟩ ≫
+        (upper v.ring c).map
+          ((ProEtale.pbcFixedScalarExtensionComp (Scheme.ProEt.topology Y)
+            a.ringMap b.ringMap ab.ringMap (Arrow.ringMap_comp a b ab h)).hom.app K.obj) =
+      (ProEtale.pbcFixedScalarExtensionComp (Scheme.ProEt.topology X)
+          a.ringMap b.ringMap ab.ringMap (Arrow.ringMap_comp a b ab h)).hom.app
+            ((upper s.ring c).obj K.obj) ≫
+        (change ab c).mate.hom.app K) ∧
+        (∀ (s : Stage l E) (a : Arrow s s)
+    (h : a.embedding = AlgHom.id (Padic l) s.field)
+    (c : Compactification f) (K : (ctf s.ring X).FullSubcategory),
+    (change a c).projection.hom.app K ≫
+        (lower s.ring c).map ((ProEtale.normalizedOriginScalarUnit
+          (Scheme.ProEt.topology X) a.ringMap (Arrow.ringMap_id a h)).hom.app K.obj) =
+      (ProEtale.normalizedOriginScalarUnit (Scheme.ProEt.topology Y)
+        a.ringMap (Arrow.ringMap_id a h)).hom.app ((lower s.ring c).obj K.obj)) ∧
+        (∀ (s : Stage l E) (a : Arrow s s)
+    (h : a.embedding = AlgHom.id (Padic l) s.field)
+    (c : Compactification f) (K : (ctf s.ring Y).FullSubcategory),
+    (change a c).mate.hom.app K ≫
+        (upper s.ring c).map ((ProEtale.normalizedOriginScalarUnit
+          (Scheme.ProEt.topology Y) a.ringMap (Arrow.ringMap_id a h)).hom.app K.obj) =
+      (ProEtale.normalizedOriginScalarUnit (Scheme.ProEt.topology X)
+        a.ringMap (Arrow.ringMap_id a h)).hom.app ((upper s.ring c).obj K.obj)) ∧
+        (∀ {s t : Stage l E} (a : Arrow s t)
+    {c d : Compactification f} (r : c.Refinement d) (K : (ctf s.ring X).FullSubcategory),
+    (tensor a.ringMap Y).map ((refinement s r).lowerIso.hom.app K) ≫
+        (change a d).projection.hom.app K =
+      (change a c).projection.hom.app K ≫
+        (refinement t r).lowerIso.hom.app
+          ⟨(tensor a.ringMap X).obj K.obj, (change a c).tensor_preserves_X K.obj K.property⟩) ∧
+        (∀ {s t : Stage l E} (a : Arrow s t)
+    {c d : Compactification f} (r : c.Refinement d) (K : (ctf s.ring Y).FullSubcategory),
+    (tensor a.ringMap X).map ((refinement s r).upperIso.hom.app K) ≫
+        (change a c).mate.hom.app K =
+      (change a d).mate.hom.app K ≫
+        (refinement t r).upperIso.hom.app
+          ⟨(tensor a.ringMap Y).obj K.obj,
+            (change a c).tensor_preserves_Y K.obj K.property⟩) := by
+  classical
+  have _ := hp
+  have _ := hlp
+  let := finiteTypeNoetherian k X
+  let := finiteTypeNoetherian k Y
+  let := (finiteTypeMorphismProperties k f).1
+  let := (finiteTypeMorphismProperties k f).2.1
+  let := (finiteTypeMorphismProperties k f).2.2
+  intro datum change
+  let refinement : ∀ (s : Stage l E) {c d : Compactification f} (r : c.Refinement d),
+      RefinementDatum r (datum s c) (datum s d) :=
+    fun s _ _ r ↦ canonicalRefinement r (datum s _) (datum s _)
+  refine ⟨refinement, ?_, ?_⟩
+  · refine ⟨?_, ?_, ?_, ?_, ?_, ?_⟩
+    · intro s t v a b ab h c K
+      exact projection_comp (datum s c) (datum t c) (datum v c)
+        a.ringMap b.ringMap ab.ringMap (Arrow.ringMap_comp a b ab h)
+        (change a c) (change b c) (change ab c) K
+    · intro s t v a b ab h c K
+      exact mate_comp_of_projection (datum s c) (datum t c) (datum v c)
+        a.ringMap b.ringMap ab.ringMap (Arrow.ringMap_comp a b ab h)
+        (change a c) (change b c) (change ab c)
+        (projection_comp (datum s c) (datum t c) (datum v c)
+          a.ringMap b.ringMap ab.ringMap (Arrow.ringMap_comp a b ab h)
+          (change a c) (change b c) (change ab c)) K
+    · intro s a h c K
+      exact projection_identity (datum s c) a.ringMap (Arrow.ringMap_id a h) (change a c) K
+    · intro s a h c K
+      exact mate_unit_of_projection (datum s c) a.ringMap (Arrow.ringMap_id a h) (change a c)
+        (projection_identity (datum s c) a.ringMap (Arrow.ringMap_id a h) (change a c)) K
+    · intro s t a c d r K
+      exact projection_refinement r (datum s c) (datum s d) (datum t c) (datum t d)
+        a.ringMap (change a c) (change a d) K
+    · intro s t a c d r K
+      exact mate_refinement_of_projection r (datum s c) (datum s d)
+        (datum t c) (datum t d) a.ringMap (change a c) (change a d)
+        (refinement s r) (refinement t r)
+        (projection_refinement r (datum s c) (datum s d) (datum t c) (datum t d)
+          a.ringMap (change a c) (change a d)) K
+  · intro other _
+    funext s c d r
+    exact refinement_unique (other s r) (refinement s r)
 
 end AlgebraicGeometry.FiniteCoefficientAdjoints

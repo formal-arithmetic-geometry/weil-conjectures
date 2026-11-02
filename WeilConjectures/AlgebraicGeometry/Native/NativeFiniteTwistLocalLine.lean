@@ -126,4 +126,35 @@ private theorem finiteRing_nsmul (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   change (l ^ (n + 1)) • 𝟙 ((upperStarFromPoint X).obj (twistFiniteRing l E n)) = 0
   rw [← CategoryTheory.Functor.map_id, ← Functor.map_nsmul, hp, Functor.map_zero]
 
+/-- The actual finite free-root construction is a local coefficient line.
+Source: current coefficient twist paragraph and compatible primitive root basis
+(blueprint: lem-twist-native-finite-local-line).
+Proof: use one compatible primitive-root cover. At exponent n+1 its root sheaf is
+locally the constant cyclic group. Free modules commute with inverse image by
+uniqueness of left adjoints. The free module on the constant cyclic group is the
+cokernel of multiplication by l^(n+1) on the regular coefficient module. This
+multiplication is zero: l lies in the uniformizer maximal ideal, so its (n+1)st
+power vanishes modulo pi^(n+1), including ramified extensions. The cokernel is thus
+the regular module. Pulling this isomorphism back and using the monoidal unit
+comparison proves the assertion. No nonemptiness hypothesis on X is used. -/
+theorem coefficientFiniteTwistOne_locally_trivial
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
+    [FiniteDimensional ℚ_[l] E] (X : Scheme.{u}) (hl : IsUnit (l : Γ(X, ⊤))) (n : ℕ) :
+    ∃ 𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ i : 𝒰.I₀,
+      Nonempty (((upperStar Ab.{u + 1} (𝒰.f i)).mapMod
+        (condensedRingObj (twistFiniteRing l E n) X)).obj
+          (coefficientFiniteTwistOne l E X n) ≅ 𝟙_ _) := by
+  obtain ⟨𝒰, h𝒰⟩ := exists_compatible_roots_diagram_basis X l hl
+  let R := condensedRingObj (twistFiniteRing l E n) X
+  let C := (constantTateResidueSystem X l).obj (op (n + 1))
+  let M := rootsOfUnitySheaf X (l ^ (n + 1))
+  refine ⟨𝒰, fun i ↦ ?_⟩
+  let F := upperStar Ab.{u + 1} (𝒰.f i)
+  obtain ⟨e⟩ := h𝒰 i
+  exact ⟨(freePullIso (𝒰.f i) R).app M ≪≫
+    (Mod.freeFunctor (F.obj R)).mapIso (e.app (op (n + 1))) ≪≫
+    ((freePullIso (𝒰.f i) R).app C).symm ≪≫
+    (F.mapMod R).mapIso (freeConstantResidueIso R (l ^ (n + 1))
+      (finiteRing_nsmul l E X n)) ≪≫ F.mapModUnitIso.symm⟩
+
 end AlgebraicGeometry.ProEtale

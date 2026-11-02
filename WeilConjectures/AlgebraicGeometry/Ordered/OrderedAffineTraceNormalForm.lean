@@ -60,4 +60,22 @@ def orderedAffineRightIso (A : Type (u + 1)) [CommRing A] [Finite A]
       (fun X hX e ↦ AlgebraicGeometry.Etale.twistSheafProduct A N hA
         (Scheme.finiteEtaleTwistPullbackData A N hN hA) X hX e) S hS (d + 1)
 
+/-- Degree-zero tensor multiplication of two consecutive finite Tate powers.
+Source: blueprint sk-prop-an, ordered Tate reassociation
+(blueprint: def-sp-ordered-affine-right-normal-form). -/
+@[irreducible]
+def orderedTateProductIso (A : Type (u + 1)) [CommRing A] [Finite A]
+    (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0) (T : Scheme.{u})
+    (hT : IsUnit (N : Γ(T, ⊤))) (d : ℕ) :
+    ((derivedTensor (ModuleCat.{u + 1} A) T).obj
+      ((_root_.DerivedCategory.singleFunctor _ 0).obj
+        (Scheme.finiteEtaleTateSheaf A N T hA (d : ℤ)))).obj
+      (ordinaryFiniteLine A N hA T) ≅
+    (_root_.DerivedCategory.singleFunctor _ 0).obj
+      (Scheme.finiteEtaleTateSheaf A N T hA ((d + 1 : ℕ) : ℤ)) :=
+  AlgebraicGeometry.Etale.singleProductGeneral (ModuleCat.{u + 1} A) T _ _ _
+    (AlgebraicGeometry.Etale.twistFlat A N hN hA T hT d)
+    (AlgebraicGeometry.Etale.twistSheafProduct A N hA
+      (Scheme.finiteEtaleTwistPullbackData A N hN hA) T hT d)
+
 end AlgebraicGeometry.Etale

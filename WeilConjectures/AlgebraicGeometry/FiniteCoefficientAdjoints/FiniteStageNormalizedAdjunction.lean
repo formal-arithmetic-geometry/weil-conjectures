@@ -175,6 +175,122 @@ private def normalizedAdjunction : restrict (lower A c) hL ⊣ restrict (upper A
         rw [← Category.assoc, he]
         rfl }
 
+private theorem normalizedAdjunction_counit (K : (ctf A Y).FullSubcategory) :
+    ((normalizedAdjunction A c hL hR hb).counit.app K).hom =
+      normalizedCounit A c hb K := by
+  change (lower A c).map (𝟙 ((upper A c).obj K.obj)) ≫ normalizedCounit A c hb K = _
+  rw [(lower A c).map_id, Category.id_comp]
+
+private theorem datum_unique (d e : AdjointDatum A c) : d = e := by
+  obtain ⟨hl, hr, a, hb, hc⟩ := d
+  obtain ⟨hl', hr', a', hb', hc'⟩ := e
+  have ha : a = a' := by
+    apply Adjunction.ext_counit
+    ext K
+    exact (hc K).trans (hc' K).symm
+  cases ha
+  rfl
+
+/-- A single compactification and coefficient stage have a unique adjunction with the
+specified transported geometric counit.
+
+Source: current blueprint reduction-exceptional, Locality and Charts; parent
+lem-pur-finite-coefficient-adjoint-comparisons, proof steps 1--4.
+(blueprint: lem-pur-finite-stage-normalized-adjunction).
+
+Proof: stage finiteness is already proved in the data module. Ramification identifies
+its defining ideal with an upper-uniformizer power. The DVR valuation criterion
+makes a power of l vanish in this quotient, while l is invertible over k, giving
+the exponent hypothesis for the native etale preservation theorems. Apply those
+theorems to the specified compactification; uniqueness of right adjoints identifies
+its chosen etale right adjoint with the global etale exceptional inverse image.
+For an etale-origin object K, reflect its Tor interval to an antecedent L and use
+the derived comparison unit to identify L with Rnu_* K. This proves preservation
+by the fixed upper functor and its etaleBound. The specified compact-support
+comparison is used in the Hom construction. The native pro-etale theorem supplies
+preservation by the lower functor directly.
+Define the counit as exactly the specified threefold composite. Naturality follows
+from that of its constituents. For a source nu L, composing the two adjunction Hom
+bijections with the compact-support comparison gives the map lower(g) followed by
+this counit. Full faithfulness of nu on the bounded-below upper value makes this a
+bijection; transport along an origin isomorphism treats every finite-Tor source.
+Restrict it to the full subcategories and construct the adjunction. Evaluating its
+inverse Hom map on the identity computes its counit. Finally normalization fixes
+all counit components, so Adjunction.ext_counit and proof irrelevance prove
+uniqueness of the entire datum. No nonemptiness or perfection assumption is used. -/
+theorem finite_stage_normalized_adjunction
+    (k : Type u) [Field k] (p l : ℕ) [CharP k p] (hp : 0 < p)
+    [Fact l.Prime] (hlp : l ≠ p)
+    (E : Type (u + 1)) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+    {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
+    [IsSeparated (X ↘ Spec (.of k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
+    [IsSeparated (Y ↘ Spec (.of k))]
+    (f : X ⟶ Y) [f.IsOver (Spec (.of k))]
+    (s : Stage l E) (c : Compactification f) :
+    letI := finiteTypeNoetherian k X
+    letI := finiteTypeNoetherian k Y
+    letI := (finiteTypeMorphismProperties k f).1
+    letI := (finiteTypeMorphismProperties k f).2.1
+    letI := (finiteTypeMorphismProperties k f).2.2
+    ∃! d : AdjointDatum s.ring c, True := by
+  classical
+  let := finiteTypeNoetherian k X
+  let := finiteTypeNoetherian k Y
+  let := (finiteTypeMorphismProperties k f).1
+  let := (finiteTypeMorphismProperties k f).2.1
+  let := (finiteTypeMorphismProperties k f).2.2
+  obtain ⟨e, z, hz, hideal, _⟩ := stage_ramification s
+  let n : ℕ := (e : ℕ) * (s.exponent : ℕ)
+  have hF := (Padic.extension_integers_dvr l s.field
+    (Padic.coefficientExtensionAbsoluteValue l s.field)
+    (spectralNorm_extends (K := Padic l) (L := s.field))).choose_spec.choose_spec
+  have hlmem : (l : s.integers) ∈
+      Ideal.span ({Padic.coefficientExtensionUniformizer l s.field} : Set s.integers) := by
+    have hgen : Ideal.span
+        ({Padic.coefficientExtensionUniformizer l s.field} : Set s.integers) =
+        Padic.coefficientExtensionMaximalIdeal l s.field :=
+      hF.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
+    rw [hgen]
+    apply (hF.2.1 _).mpr
+    change spectralNorm (Padic l) s.field (l : s.field) < 1
+    rw [← map_natCast (algebraMap (Padic l) s.field) l, spectralNorm_extends]
+    exact Padic.norm_p_lt_one
+  have hzero : (l : s.ring) ^ n = 0 := by
+    have hm : (l : s.integers) ^ n ∈ s.ideal := by
+      change _ ∈ Ideal.span ({s.parameter} : Set s.integers) ^ (s.exponent : ℕ)
+      rw [hideal]
+      exact Ideal.pow_mem_pow hlmem n
+    have hq := Ideal.Quotient.eq_zero_iff_mem.mpr hm
+    simpa only [map_pow, map_natCast] using hq
+  have hnonzero : (l : k) ≠ 0 :=
+    CharP.cast_ne_zero_of_ne_of_prime k (Fact.out : l.Prime) hlp.symm
+  let : HasInvertibleExponent s.ring (Spec (.of k)) :=
+    ⟨l ^ n, pow_pos (Fact.out : l.Prime).pos _, by simpa using hzero, by
+      have hu : IsUnit ((l ^ n : ℕ) : k) := by
+        rw [Nat.cast_pow]
+        exact isUnit_iff_ne_zero.mpr (pow_ne_zero n hnonzero)
+      simpa only [map_natCast] using hu.map (Scheme.ΓSpecIso (.of k)).inv.hom⟩
+  let : HasInvertibleExponent s.ring Y :=
+    HasInvertibleExponent.of_hom (Y ↘ Spec (.of k))
+  let hL : ∀ K, ctf s.ring X K → ctf s.ring Y ((lower s.ring c).obj K) :=
+    fun _ hK ↦ ProEtale.constructibleFiniteTor_rightDerivedLowerShriekOfCompactification
+      s.ring (Y ↘ Spec (.of k)) c hK
+  let hR := upper_preserves s.ring c k (Y ↘ Spec (.of k))
+  have hb : ∀ K, ctf s.ring Y K → DerivedCategory.TStructure.t.plus
+      ((etaleUpper s.ring c).obj ((rnu s.ring Y).obj K)) := by
+    intro K hK
+    exact (etale_preserves s.ring c k (Y ↘ Spec (.of k)) _
+      (rnu_ctf s.ring Y K hK)).1.1.1
+  let d : AdjointDatum s.ring c :=
+    { lower_preserves := hL
+      upper_preserves := hR
+      adjunction := normalizedAdjunction s.ring c hL hR hb
+      etaleBound := hb
+      counit_normalization := normalizedAdjunction_counit s.ring c hL hR hb }
+  exact ⟨d, trivial, fun d' _ ↦ datum_unique s.ring c d' d⟩
+
 end Construction
 
 set_option linter.unusedVariables false in

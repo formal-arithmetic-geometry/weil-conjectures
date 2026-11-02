@@ -196,7 +196,7 @@ private theorem injectiveHomMap_bijective [T.CommShift ℤ]
 Source: scope remark, consequences (ii) and (iii)
 (blueprint: lem-sf-derived-unbounded-cohomology-obstruction).
 
-Proof: In each degree the family of shifted single complexes has only one nonzero term,
+Proof: In each degree the family of shifted single complexes has at most one nonzero term,
 so its direct sum and product coincide. The Grothendieck derived coproduct theorem and
 exact-product localization identify them in the derived category. Exactness and shift
 compatibility give `shiftIdentification`. Applying degree-zero evaluated cohomology to
@@ -205,9 +205,9 @@ the two characterizations below check this on every summand and coordinate. Choo
 nonzero element in each cohomology module; the resulting infinite-support tuple proves
 that inclusion is not surjective. Thus `T` cannot preserve countable coproducts, and cannot
 be a left adjoint. For any injective cogenerator `J`, its image under the exact right
-adjoint `v` is injective. Localizing the exact adjunction and computing derived Hom into
-an injective single complex shows that the canonical map `injectiveHomMap` from the displayed
-derived Hom group to module Hom into `J` is bijective.
+adjoint `v` is injective. Computing derived Hom into its injective single complex, then
+applying the ordinary adjunction and the exact-functor homology comparison, shows that the
+canonical map `injectiveHomMap` to module Hom into `J` is bijective.
 They are nonzero by cogeneration. If the restriction to `D⁺` had a right adjoint `G`, these
 same groups would equal `Hom(F[n+1],G(v(J)[0]))`; bounded-below t-structure orthogonality
 makes these vanish for all sufficiently large `n`, a contradiction.
@@ -249,6 +249,174 @@ theorem obstruction
         Nontrivial (cohomology e T F n ⟶ J) ∧
         Nontrivial (T.obj (shifts F n) ⟶
           (DerivedCategory.singleFunctor B 0).obj (v.obj J)) := by
-  sorry
+  classical
+  let : Abelian.HasKInjectiveResolutions A :=
+    Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian.{vA}
+  let : Abelian.HasKInjectiveResolutions B :=
+    Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian.{vB}
+  let : HasFiniteBiproducts B := Abelian.hasFiniteBiproducts
+  let : CountableAB4Star B := CountableAB4Star.of_hasExactLimitsOfShape_nat B
+  obtain ⟨hP, hprod, hH⟩ := derivedCategory_countableProducts_core.{0} B
+  let : HasCountableProducts (DerivedCategory B) := hP
+  let := hH ℕ 0
+  have heN : PreservesColimitsOfShape (Discrete ℕ) e := by
+    let := he (ULift.{vB} ℕ)
+    exact preservesColimitsOfShape_of_equiv (Discrete.equivalence Equiv.ulift) e
+  let := heN
+  let : PreservesColimitsOfShape (Discrete ℕ) (evaluation e) :=
+    preservesColimitsOfShape_of_natIso (e.mapDerivedCategoryHomologyFunctorIso 0)
+  let : PreservesLimitsOfShape (Discrete ℕ) (evaluation e) :=
+    preservesLimitsOfShape_of_natIso (e.mapDerivedCategoryHomologyFunctorIso 0)
+  let M := cohomology e T F
+  let Y (n : ℕ) := T.obj (shifts F n)
+  let α : ModuleCat.of R (⨁ n : ℕ, M n) ≅ (evaluation e).obj (∐ Y) :=
+    (ModuleCat.coprodIsoDirectSum M).symm ≪≫
+      Sigma.mapIso (fun n ↦ (shiftIdentification e T F n).symm) ≪≫
+        asIso (sigmaComparison (evaluation e) Y)
+  have hα (n : ℕ) : ModuleCat.ofHom (DirectSum.lof R ℕ (fun j ↦ M j) n) ≫ α.hom =
+      (shiftIdentification e T F n).inv ≫ (evaluation e).map (Sigma.ι Y n) := by
+    simp only [α, Iso.trans_hom, Iso.symm_hom, asIso_hom]
+    rw [← Category.assoc, ModuleCat.lof_coprodIsoDirectSum_inv]
+    simp only [Sigma.ι_mapIso_hom_assoc, Iso.symm_hom]
+    exact congrArg (fun f ↦ (shiftIdentification e T F n).inv ≫ f)
+      (ι_comp_sigmaComparison (evaluation e) Y n)
+  obtain ⟨hK⟩ := shifts_sum_isLimit F
+  have hTY := isLimitFanMkObjOfIsLimit T (shifts F) (Sigma.π (shifts F)) hK
+  have hEY := isLimitFanMkObjOfIsLimit (evaluation e) Y
+    (fun n ↦ T.map (Sigma.π (shifts F) n)) hTY
+  let b : (evaluation e).obj (T.obj (∐ shifts F)) ⟶ ModuleCat.of R (∀ n, M n) :=
+    ModuleCat.ofHom (LinearMap.pi (fun n ↦
+      ((evaluation e).map (T.map (Sigma.π (shifts F) n)) ≫
+        (shiftIdentification e T F n).hom).hom))
+  have hb (n : ℕ) : b ≫ ModuleCat.ofHom (LinearMap.proj n) =
+      (evaluation e).map (T.map (Sigma.π (shifts F) n)) ≫
+        (shiftIdentification e T F n).hom := by
+    rfl
+  have hi : IsIso b := Fan.IsLimit.isIso_of_isos hEY (ModuleCat.productConeIsLimit M)
+    (fun n ↦ shiftIdentification e T F n) b hb
+  let β := asIso b
+  have hβ (n : ℕ) : β.hom ≫ ModuleCat.ofHom (LinearMap.proj n) =
+      (evaluation e).map (T.map (Sigma.π (shifts F) n)) ≫
+        (shiftIdentification e T F n).hom := hb n
+  have hc : α.hom ≫ (evaluation e).map (sigmaComparison T (shifts F)) ≫ β.hom =
+      ModuleCat.ofHom (DirectSum.coeFnLinearMap R (M := fun n ↦ M n)) := by
+    rw [← cancel_epi (ModuleCat.coprodIsoDirectSum M).hom]
+    apply Sigma.hom_ext
+    intro j
+    apply (ModuleCat.productConeIsLimit M).hom_ext
+    intro n
+    change _ ≫ (ModuleCat.ofHom (LinearMap.proj n.as) :
+      ModuleCat.of R (∀ n, M n) ⟶ M n.as) =
+      _ ≫ (ModuleCat.ofHom (LinearMap.proj n.as) :
+        ModuleCat.of R (∀ n, M n) ⟶ M n.as)
+    simp only [Category.assoc]
+    rw [hβ]
+    simp only [reassoc_of% (ModuleCat.ι_coprodIsoDirectSum_hom M j)]
+    rw [reassoc_of% (hα j)]
+    change (shiftIdentification e T F j).inv ≫ (evaluation e).map (Sigma.ι Y j) ≫
+      (evaluation e).map (sigmaComparison T (shifts F)) ≫
+      (evaluation e).map (T.map (Sigma.π (shifts F) n.as)) ≫
+      (shiftIdentification e T F n.as).hom = _
+    have hcmp : Sigma.ι Y j ≫ sigmaComparison T (shifts F) =
+        T.map (Sigma.ι (shifts F) j) := ι_comp_sigmaComparison T (shifts F) j
+    have hcoord : (evaluation e).map (Sigma.ι Y j) ≫
+        (evaluation e).map (sigmaComparison T (shifts F)) ≫
+        (evaluation e).map (T.map (Sigma.π (shifts F) n.as)) =
+        (evaluation e).map (T.map (Sigma.ι (shifts F) j ≫ Sigma.π (shifts F) n.as)) := by
+      rw [← Functor.map_comp_assoc, hcmp, ← Functor.map_comp, ← T.map_comp]
+    calc
+      _ = (shiftIdentification e T F j).inv ≫
+          (evaluation e).map (T.map (Sigma.ι (shifts F) j ≫ Sigma.π (shifts F) n.as)) ≫
+          (shiftIdentification e T F n.as).hom := by
+        dsimp only [evaluation, Functor.comp_map] at hcoord ⊢
+        rw [reassoc_of% hcoord]
+      _ = _ := by
+        by_cases h : j = n.as
+        · subst j
+          simp only [Sigma.ι_π_eq_id]
+          ext x
+          simp only [Functor.comp_obj, CategoryTheory.Functor.map_id, Functor.comp_map,
+            Category.id_comp, Iso.inv_hom_id, ModuleCat.hom_id, LinearMap.id_coe, id_eq,
+            Int.natCast_add, Int.cast_ofNat_Int, ModuleCat.of_coe, ModuleCat.hom_comp,
+            ConcreteCategory.hom_ofHom, LinearMap.coe_comp, Function.comp_apply,
+            DirectSum.coeFnLinearMap_apply]
+          change x = ((DirectSum.lof R ℕ (fun i ↦ M i) n.as) x) n.as
+          exact (DirectSum.lof_apply (M := fun i ↦ M i) R n.as x).symm
+        · simp only [Sigma.ι_π_of_ne _ h, Functor.map_zero, comp_zero, zero_comp]
+          ext x
+          change 0 = ((DirectSum.lof R ℕ (fun i ↦ M i) j) x) n.as
+          exact (DirectSum.of_eq_of_ne (β := fun i ↦ M i) j n.as x (Ne.symm h)).symm
+  have hn := directSum_not_surjective M hF
+  have hnp : ¬ PreservesColimitsOfShape (Discrete ℕ) T := by
+    intro h
+    let := h
+    have : IsIso (ModuleCat.ofHom (DirectSum.coeFnLinearMap R (M := fun n ↦ M n))) := by
+      rw [← hc]
+      infer_instance
+    exact hn (ConcreteCategory.bijective_of_isIso
+      (ModuleCat.ofHom (DirectSum.coeFnLinearMap R (M := fun n ↦ M n)))).2
+  have hnl : ¬ T.IsLeftAdjoint := by
+    intro h
+    let := h
+    exact hnp inferInstance
+  have hJ (J : ModuleCat.{max r m} R) (hj : Injective J) (hcJ : IsCoseparator J) :
+      Injective (v.obj J) ∧ ∀ n : ℕ,
+        Function.Bijective (injectiveHomMap e T a F n J) ∧
+        Nontrivial (cohomology e T F n ⟶ J) ∧
+        Nontrivial (T.obj (shifts F n) ⟶ (singleFunctor B 0).obj (v.obj J)) := by
+    let := hj
+    refine ⟨a.map_injective J hj, fun n ↦ ⟨injectiveHomMap_bijective e T v a F n J, ?_⟩⟩
+    have hm : Nontrivial (cohomology e T F n ⟶ J) := by
+      apply not_subsingleton_iff_nontrivial.mp
+      intro h
+      apply hF n
+      exact (IsZero.iff_id_eq_zero _).mpr (hcJ.def _ _ (fun f ↦ h.elim _ _))
+    refine ⟨hm, ?_⟩
+    exact (Equiv.ofBijective _ (injectiveHomMap_bijective e T v a F n J)).nontrivial
+  have hplus : ¬ Tplus.IsLeftAdjoint := by
+    intro h
+    let := h
+    let ad := Adjunction.ofIsLeftAdjoint Tplus
+    obtain ⟨J, hj, hcJ⟩ := Abelian.has_injective_coseparator
+      (ModuleCat.of R (Shrink.{max r m} R)) (ModuleCat.isSeparator R)
+    let I := (DerivedCategory.Plus.singleFunctor B 0).obj (v.obj J)
+    let L := Tplus.rightAdjoint.obj I
+    obtain ⟨k, hk⟩ := L.property
+    let := hk
+    let n : ℕ := (-k).toNat
+    let P := ((DerivedCategory.Plus.singleFunctor A 0).obj F)⟦((n + 1 : ℕ) : ℤ)⟧
+    let ki : DerivedCategory.Plus.ι.obj P ≅ shifts F n :=
+      (DerivedCategory.Plus.ι.commShiftIso ((n + 1 : ℕ) : ℤ)).app
+        ((DerivedCategory.Plus.singleFunctor A 0).obj F)
+    have hs : (DerivedCategory.TStructure.t (C := A)).IsLE (shifts F n)
+        (-((n + 1 : ℕ) : ℤ)) :=
+      DerivedCategory.TStructure.t.isLE_shift ((singleFunctor A 0).obj F) 0
+        ((n + 1 : ℕ) : ℤ) (-((n + 1 : ℕ) : ℤ)) (by omega)
+    let := hs
+    have hp := DerivedCategory.TStructure.t.isLE_of_iso ki.symm (-((n + 1 : ℕ) : ℤ))
+    let := hp
+    have hzero (g : P ⟶ L) : g = 0 := by
+      apply DerivedCategory.Plus.ι.map_injective
+      rw [Functor.map_zero]
+      exact DerivedCategory.TStructure.t.zero_of_isLE_of_isGE
+        (DerivedCategory.Plus.ι.map g) (-((n + 1 : ℕ) : ℤ)) k
+        (by dsimp [n]; omega) inferInstance hk
+    let ti : DerivedCategory.Plus.ι.obj (Tplus.obj P) ≅ T.obj (shifts F n) :=
+      compatibility.app P ≪≫ T.mapIso ki
+    have hnt := (hJ J hj hcJ).2 n |>.2.2
+    let := hnt
+    obtain ⟨f, hf⟩ := exists_ne
+      (0 : T.obj (shifts F n) ⟶ (singleFunctor B 0).obj (v.obj J))
+    let g : Tplus.obj P ⟶ I := DerivedCategory.Plus.ι.preimage (ti.hom ≫ f)
+    have hg : g = 0 := (ad.homEquiv P I).injective
+      ((hzero _).trans (hzero _).symm)
+    have hg' : ti.hom ≫ f = 0 := by
+      calc
+        ti.hom ≫ f = DerivedCategory.Plus.ι.map g :=
+          (Functor.map_preimage (X := Tplus.obj P) (Y := I)
+            DerivedCategory.Plus.ι (ti.hom ≫ f)).symm
+        _ = 0 := by rw [hg, Functor.map_zero]
+    exact hf ((cancel_epi ti.hom).mp (by simpa only [comp_zero] using hg'))
+  exact ⟨⟨hK⟩, ⟨α, β, hα, hβ, hc⟩, hn, hnp, hnl, hplus, hJ⟩
 
 end DerivedCategory.UnboundedCohomologyObstruction

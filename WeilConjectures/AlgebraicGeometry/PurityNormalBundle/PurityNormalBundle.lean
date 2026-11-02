@@ -22,6 +22,10 @@ import WeilConjectures.RingTheory.Regular.RegularSequenceGradedPolynomial
 import Mathlib.Algebra.MvPolynomial.Equiv
 import Mathlib.Topology.Sheaves.Stalks
 import WeilConjectures.AlgebraicGeometry.ProperBaseChange.QuasiCoherentSymmetricAlgebraCore
+public import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+public import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine
+public import WeilConjectures.AlgebraicGeometry.Morphisms.AffineModuleGermLocalization
+public import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 
 /-!
 # The normal cone, its augmentation section, and the regular normal bundle
@@ -106,6 +110,49 @@ theorem zeroSection_spec :
   have : IsAffineHom (projection i) := (over i).property
   have : IsClosedImmersion (zeroSection i ≫ projection i) := hs ▸ inferInstance
   exact ⟨hs, IsClosedImmersion.of_comp (zeroSection i) (projection i)⟩
+
+private theorem augmentation_inclusion :
+    (ConormalGradedAlgebra.presentation i).inclusion 1 ≫
+      (commAlgebraSheafModuleFunctor Z.sheaf).map
+        (ConormalGradedAlgebra.augmentation i) = 0 := by
+  let adj := (Scheme.Modules.exists_tensorPullbackAdjunction i).choose
+  apply (adj.homEquiv (ConormalGradedAlgebra.power i 1) _).injective
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro U
+  ext a
+  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
+  change (ConormalGradedAlgebra.augmentation i).right.hom.app (op (i ⁻¹ᵁ U.unop))
+    (ConormalGradedAlgebra.homogeneousClass i _ _ 1 U.unop a) = 0
+  have h := (ConormalGradedAlgebra.presentation i).augmentation.exists.choose_spec
+  simpa only [ConormalGradedAlgebra.augmentation, Nat.one_ne_zero, ↓reduceIte] using
+    h 1 U.unop a
+
+private theorem augmentation_comparison :
+    ConormalGradedAlgebra.symmetricComparison i ≫ augmentationToBase i =
+      VectorBundleZeroSection.augmentationToBase Z (ConormalGradedAlgebra.piece i 1) := by
+  apply ExistsUnique.unique (exists_quasiCoherentSymmetricAlgebra_core Z
+    (ConormalGradedAlgebra.piece i 1)
+    (((VectorBundleZeroSection.antiEquivalence Z).functor.obj
+      (op (VectorBundleZeroSection.baseObject Z))).obj) 0)
+  · intro U a
+    change (augmentationToBase i).right.hom.app (op U)
+      ((ConormalGradedAlgebra.symmetricComparison i).right.hom.app (op U)
+        ((SymmetricAlgebraSheaf.inclusion _).val.app (op U) a)) = 0
+    dsimp only [ConormalGradedAlgebra.symmetricComparison]
+    rw [(ConormalGradedAlgebra.presentation i).symmetricComparison.exists.choose_spec]
+    have h := congrArg (fun q ↦ q.val.app (op U) a) (augmentation_inclusion i)
+    change (((VectorBundleZeroSection.antiEquivalence Z).functor.obj
+      (op (VectorBundleZeroSection.baseObject Z))).obj.hom.hom.app (op U))
+        ((ConormalGradedAlgebra.augmentation i).right.hom.app (op U)
+          (((ConormalGradedAlgebra.presentation i).inclusion 1).val.app (op U) a)) = 0
+    change (ConormalGradedAlgebra.augmentation i).right.hom.app (op U)
+      (((ConormalGradedAlgebra.presentation i).inclusion 1).val.app (op U) a) = 0 at h
+    rw [h, map_zero]
+  · exact (exists_quasiCoherentSymmetricAlgebra_core Z
+      (ConormalGradedAlgebra.piece i 1)
+      (((VectorBundleZeroSection.antiEquivalence Z).functor.obj
+        (op (VectorBundleZeroSection.baseObject Z))).obj) 0).exists.choose_spec
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

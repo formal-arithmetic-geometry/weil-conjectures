@@ -70,6 +70,51 @@ def zeroSection (V : PurityVectorBundle P Z hZ c) : Z ⟶ V.E :=
   @VectorBundleZeroSection.zero Z (isNoetherian_of_locallyOfFiniteType hZ)
     c V.𝓔 V.locallyFree ≫ V.phi.inv
 
+/-- The augmentation zero section is a section and a closed immersion. On every affine
+open `U` its restriction, transported through `phi`, is the spectrum of the augmentation
+`Sym(F(U)) → O(U)` fixing constants and killing all degree-one generators.
+Source: blueprint, `sk-def-purity-conv`, order 1895; Stacks Tags 01M2 and 01LX
+(blueprint: def-pur-vector-bundle-zero-section).
+
+Proof: the unique extension of the zero linear map is the augmentation
+(`lem-weil-pbc-quasi-coherent-symmetric-algebra-core`), and it fixes constants as an
+algebra morphism. The relative-Spec anti-equivalence sends it to a morphism over the base
+(`lem-weil-pbc-affine-morphism-relative-spec`), giving the section identity. On affine
+opens the symmetric-algebra sheafification unit is an isomorphism
+(`lem-weil-pbc-quasi-coherent-symmetric-algebra-affine`). Under these charts the
+augmentation is `SymmetricAlgebra.algebraMapInv`: the identity on scalars and zero on
+linear generators. It is surjective since it fixes scalars, so the affine-cover
+criterion (`lem-weil-pbc-closed-immersion-affine-cover-criterion`) gives closedness.
+Finally transport all these conclusions through `phi`. Equivalently apply the existing
+`VectorBundleZeroSection.zero_spec` and `affineChart_spec` and compose with `phi.inv`. -/
+theorem zeroSection_spec (V : PurityVectorBundle P Z hZ c) :
+    V.zeroSection ≫ V.p = 𝟙 Z ∧ IsClosedImmersion V.zeroSection ∧
+    ∀ U : Z.affineOpens,
+      ∃ zU : U.1.toScheme ⟶
+          ((@VectorBundleZeroSection.π Z (isNoetherian_of_locallyOfFiniteType hZ)
+            c V.𝓔 V.locallyFree) ⁻¹ᵁ U.1).toScheme,
+        zU ≫ ((@VectorBundleZeroSection.π Z (isNoetherian_of_locallyOfFiniteType hZ)
+          c V.𝓔 V.locallyFree) ⁻¹ᵁ U.1).ι = U.1.ι ≫ V.zeroSection ≫ V.phi.hom ∧
+        zU ≫ @VectorBundleZeroSection.affineChart Z
+          (isNoetherian_of_locallyOfFiniteType hZ) c V.𝓔 V.locallyFree U =
+          U.2.isoSpec.hom ≫ Spec.map (CommRingCat.ofHom
+            (SymmetricAlgebra.algebraMapInv (R := Z.presheaf.obj (op U.1))
+              (M := V.𝓔.val.obj (op U.1))).toRingHom) := by
+  let : IsNoetherian Z := isNoetherian_of_locallyOfFiniteType hZ
+  let := V.locallyFree
+  obtain ⟨hsection, hclosed⟩ := VectorBundleZeroSection.zero_spec Z c V.𝓔
+  refine ⟨?_, ?_, ?_⟩
+  · rw [zeroSection, ← V.over_commutes]
+    simpa only [Category.assoc, Iso.inv_hom_id_assoc] using hsection
+  · let := hclosed
+    dsimp only [zeroSection]
+    infer_instance
+  · intro U
+    refine ⟨VectorBundleZeroSection.zeroRestricted Z c V.𝓔 U.1, ?_,
+      (VectorBundleZeroSection.affineChart_spec Z c V.𝓔 U).2.2⟩
+    simp only [zeroSection, Category.assoc, Iso.inv_hom_id, Category.comp_id]
+    exact Scheme.Hom.resLE_comp_ι _ _
+
 /-- An étale trivialization comprises an étale base change and a scheme isomorphism over
 its source from the pullback bundle to relative affine `c`-space. Surjectivity of the
 étale map and preservation of the zero section are not part of this definition.

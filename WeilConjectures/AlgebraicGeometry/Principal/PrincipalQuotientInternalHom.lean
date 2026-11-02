@@ -109,6 +109,8 @@ import Mathlib.Algebra.Category.Grp.AB
 import Mathlib.CategoryTheory.Monoidal.Preadditive
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
 import Mathlib.CategoryTheory.Triangulated.Pretriangulated
+public import WeilConjectures.CategoryTheory.SixFunctors.OrdinaryModuleDerivedInternalHom
+public import WeilConjectures.CategoryTheory.SmoothPurity.QuasiIsoHomComplexMapMixedUniverses
 
 /-! # Canonical internal Hom comparison for a regular principal quotient
 
@@ -152,5 +154,133 @@ local instance (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] :
     (ModuleCat.{u + 1} Λ))).has_colimits_of_shape _⟩
 
 variable {R : Type (u + 1)} [CommRing R] (r : R) (m : ℕ) (X : Scheme.{u})
+
+end AlgebraicGeometry.Etale
+
+namespace AlgebraicGeometry.Etale
+
+/-- The existing derived coefficient extension along R → R/(r^m).
+Source: Stacks 06YY, 08JF
+(blueprint: lem-sf-principal-quotient-internal-hom). -/
+abbrev principalExtension :
+    DerivedCategoryModule R X ⥤ DerivedCategoryModule (R ⧸ Ideal.span {r ^ m}) X :=
+  derivedExtendScalars (Ideal.Quotient.mk_surjective (I := Ideal.span {r ^ m}))
+    Ideal.mk_ker X
+
+/-- Exact termwise restriction along the same quotient map.
+Source: Stacks 07A6 (blueprint: lem-sf-principal-quotient-internal-hom). -/
+abbrev principalRestriction :
+    DerivedCategoryModule (R ⧸ Ideal.span {r ^ m}) X ⥤ DerivedCategoryModule R X :=
+  Sheaf.derivedRestrictScalars X.smallEtaleTopology (Ideal.Quotient.mk _)
+
+/-- The canonical strong tensor comparison `E(K ⊗ M) ≅ E K ⊗ E M` of the derived extension,
+natural in `M`: the component at `K` of the derived tensor comparison of the strong monoidal
+sheaf extension of scalars, transported to `principalExtension` by uniqueness of left derived
+functors (`Functor.leftDerivedTensorIsoOfIsLeftDerivedFunctor`). This is the canonical
+comparison, not the `Nonempty.some` of `derivedExtendScalarsTensorIso`.
+Source: Stacks 06YY, 08JF (blueprint: lem-sf-principal-quotient-internal-hom). -/
+def principalTensorIso (K : DerivedCategoryModule R X) :
+    (derivedTensor (ModuleCat.{u + 1} R) X).obj K ⋙ principalExtension r m X ≅
+      principalExtension r m X ⋙
+        (derivedTensor (ModuleCat.{u + 1} (R ⧸ Ideal.span {r ^ m})) X).obj
+          ((principalExtension r m X).obj K) :=
+  have := preservesKFlatQuasiIso_extendScalars
+    (Ideal.Quotient.mk_surjective (I := Ideal.span {r ^ m})) Ideal.mk_ker X
+  Functor.leftDerivedTensorIsoOfIsLeftDerivedFunctor
+    (Sheaf.extendScalars X.smallEtaleTopology (Ideal.Quotient.mk (Ideal.span {r ^ m})))
+    (principalExtension r m X)
+    (derivedExtendScalarsCounit (Ideal.Quotient.mk_surjective (I := Ideal.span {r ^ m}))
+      Ideal.mk_ker X) K
+
+/-- The actual tensor-Hom transpose of extended evaluation. Mathlib curries
+K tensor H(K,L) → L; symmetry identifies this with the right-evaluation convention.
+Source: Stacks 08JF (blueprint: lem-sf-principal-quotient-internal-hom). -/
+def principalHomComparison (K L : DerivedCategoryModule R X) :
+    (principalExtension r m X).obj ((ihom K).obj L) ⟶
+      (ihom ((principalExtension r m X).obj K)).obj ((principalExtension r m X).obj L) :=
+  MonoidalClosed.curry
+    ((principalTensorIso r m X K).inv.app ((ihom K).obj L) ≫
+      (principalExtension r m X).map ((ihom.ev K).app L))
+
+/-- Right evaluation, obtained from the existing evaluation counit by the canonical
+Koszul braiding of the derived tensor.
+Source: Stacks 08JF (blueprint: lem-sf-principal-quotient-internal-hom). -/
+def principalRightEvaluation {A : Type (u + 1)} [CommRing A]
+    (K L : DerivedCategoryModule A X) : (ihom K).obj L ⊗ K ⟶ L :=
+  ((derivedBraidedCategory A X).braiding _ _).hom ≫ (ihom.ev K).app L
+
+/-- The specified dual comparison, assembled from beta and the chosen dualizing isomorphism.
+Source: Stacks 08JF and the blueprint's double-transpose argument
+(blueprint: lem-sf-principal-quotient-internal-hom). -/
+def principalDualIso
+    (b : ∀ K L : DerivedCategoryModule R X,
+      (principalExtension r m X).obj ((ihom K).obj L) ≅
+        (ihom ((principalExtension r m X).obj K)).obj ((principalExtension r m X).obj L))
+    {W : DerivedCategoryModule R X}
+    {WB : DerivedCategoryModule (R ⧸ Ideal.span {r ^ m}) X}
+    (w : (principalExtension r m X).obj W ≅ WB) (K : DerivedCategoryModule R X) :
+    (principalExtension r m X).obj ((ihom K).obj W) ≅
+      (ihom ((principalExtension r m X).obj K)).obj WB :=
+  b K W ≪≫ (ihom ((principalExtension r m X).obj K)).mapIso w
+
+/-- Canonical Hom reduction, its evaluation normalization, naturality, and the actual
+biduality identity for every unbounded input and every choice of W, WB and w.
+Source: Stacks 08JF, 0BYU; current blueprint lem-coef-integral-hom-reduction proof
+(blueprint: lem-sf-principal-quotient-internal-hom).
+
+Proof:
+1. Injectivity of r gives the free two-term resolution [R --r^m--> R] of B.
+   Termwise constant realization preserves its quasi-isomorphism to B; bounded-flat
+   K-flatness and the tensor/cone comparison give the coefficient triangle for every M.
+2. The canonical tensor-Hom action is exact, including the connecting square, and is
+   the identity at the tensor unit. Two-out-of-three in the coefficient triangles makes
+   H(K,L) tensor B → H(K,L tensor B) an isomorphism, naturally in K and L.
+3. Scalar internal-Hom adjunction identifies the restriction of beta with that action:
+   both transposes evaluate H(K,L) against K and multiply the B coefficient. Restriction
+   is conservative, so beta is invertible. The representing adjunctions give naturality.
+4. The transpose definition gives the displayed right-evaluation equation after symmetry.
+5. Apply map_toIhomIhom_comp_dualComparison to coefficient extension and w. Its comparison
+   is alpha by evaluation normalization. Compose with precomposition by alpha inverse;
+   contravariant functoriality cancels alpha and gives the displayed bidual identity.
+No boundedness, Tor-amplitude, constructibility, completeness or perfectness is used. -/
+theorem principalQuotient_internalHom
+    (hr : Function.Injective (fun x : R ↦ r * x)) (hm : 1 ≤ m) :
+    ∃ b : ∀ K L : DerivedCategoryModule R X,
+      (principalExtension r m X).obj ((ihom K).obj L) ≅
+        (ihom ((principalExtension r m X).obj K)).obj ((principalExtension r m X).obj L),
+      (∀ K L, (b K L).hom = principalHomComparison r m X K L) ∧
+      (∀ K L,
+        ((b K L).hom ▷ (principalExtension r m X).obj K) ≫
+            principalRightEvaluation X ((principalExtension r m X).obj K)
+              ((principalExtension r m X).obj L) =
+          (principalTensorIso r m X ((ihom K).obj L)).inv.app K ≫
+            (principalExtension r m X).map (principalRightEvaluation X K L)) ∧
+      (∀ (K K' L L' : DerivedCategoryModule R X) (f : K' ⟶ K) (g : L ⟶ L'),
+        (principalExtension r m X).map
+            ((MonoidalClosed.pre f).app L ≫ (ihom K').map g) ≫ (b K' L').hom =
+          (b K L).hom ≫
+            (MonoidalClosed.pre ((principalExtension r m X).map f)).app
+              ((principalExtension r m X).obj L) ≫
+            (ihom ((principalExtension r m X).obj K')).map
+              ((principalExtension r m X).map g)) ∧
+      (∃ a : ∀ K : DerivedCategoryModule R X,
+        ihom K ⋙ principalExtension r m X ⋙ principalRestriction r m X ≅
+          principalExtension r m X ⋙ principalRestriction r m X ⋙ ihom K,
+        ∀ (K K' L : DerivedCategoryModule R X) (f : K' ⟶ K),
+          (principalRestriction r m X).map
+              ((principalExtension r m X).map ((MonoidalClosed.pre f).app L)) ≫
+              (a K').hom.app L =
+            (a K).hom.app L ≫ (MonoidalClosed.pre f).app
+              ((principalRestriction r m X).obj ((principalExtension r m X).obj L))) ∧
+      ∀ (W : DerivedCategoryModule R X)
+        (WB : DerivedCategoryModule (R ⧸ Ideal.span {r ^ m}) X)
+        (w : (principalExtension r m X).obj W ≅ WB) (K : DerivedCategoryModule R X),
+        (derivedHomToIhomIhomNatTrans (ModuleCat.{u + 1} (R ⧸ Ideal.span {r ^ m})) X WB).app
+            ((principalExtension r m X).obj K) =
+          (principalExtension r m X).map
+              ((derivedHomToIhomIhomNatTrans (ModuleCat.{u + 1} R) X W).app K) ≫
+            (principalDualIso r m X b w ((ihom K).obj W)).hom ≫
+            (MonoidalClosed.pre (principalDualIso r m X b w K).inv).app WB := by
+  sorry
 
 end AlgebraicGeometry.Etale

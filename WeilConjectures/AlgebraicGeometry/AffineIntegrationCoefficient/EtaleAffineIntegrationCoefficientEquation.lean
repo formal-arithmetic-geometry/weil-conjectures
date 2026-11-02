@@ -14,6 +14,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.AbelianConstant
 import WeilConjectures.AlgebraicGeometry.Sf.SfBcAdicRingDomain
 import WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriek
 import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+public import WeilConjectures.AlgebraicGeometry.EtaleChartComparison.EtaleChartComparisonIsos
 
 /-! # Coefficients and tensor-normalized affine integration
 
@@ -233,6 +234,7 @@ private theorem annihilator (ell : ℕ) [Fact ell.Prime]
   rw [pow_add, Nat.cast_mul, hz, zero_mul]
 
 private theorem domain (ell : ℕ) [Fact ell.Prime] (k : Type u) [Field k]
+    (hk : Finite k ∨ IsAlgClosed k)
     [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ell)]
     (R : Type (u + 1)) [CommRing R] [Finite R] (a : ℕ) (hR : ((ell ^ a : ℕ) : R) = 0)
     (S : Scheme.{u}) [IsNoetherian S] [S.Over (Spec (.of k))]
@@ -294,10 +296,10 @@ private theorem domain (ell : ℕ) [Fact ell.Prime] (k : Type u) [Field k]
         ((property_iff R _ _).1 hK)) ((property_iff R _ _).1 hW))
   · intro Z hZ
     rcases hZ with hZ | hZ <;> subst Z
-    · exact (ProEtale.AdjunctionTransfer.etaleCtfChartDomain ell k R a hR f c
-        (𝟙 S)).2.1
-    · exact (ProEtale.AdjunctionTransfer.etaleCtfChartDomain ell k R a hR f c
-        (𝟙 (affineTraceTower S d))).2.1
+    · exact (ProEtale.AdjunctionTransfer.etaleCtfChartDomain ell k hk
+        (Fact.out : ringChar k ≠ ell) R a hR f c (𝟙 S)).2.1
+    · exact (ProEtale.AdjunctionTransfer.etaleCtfChartDomain ell k hk
+        (Fact.out : ringChar k ≠ ell) R a hR f c (𝟙 (affineTraceTower S d))).2.1
 
 private theorem projection_iso (R : Type (u + 1)) [CommRing R] [Finite R]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
@@ -411,7 +413,7 @@ isomorphism families. Compact scalar coherence makes its comparison invertible; 
 with that comparison and cancel its inverse to obtain the second integration equation.
 Every coefficient operation is derived; no flatness is assumed. -/
 theorem equation (ell p : ℕ) [Fact ell.Prime] (_hp : 0 < p) (_hEll : p ≠ ell)
-    (k : Type u) [Field k] [CharP k p]
+    (k : Type u) [Field k] [CharP k p] (hk : Finite k ∨ IsAlgClosed k)
     (E F : Type u) [Field E] [Field F] [Algebra (Padic ell) E] [Algebra (Padic ell) F]
     [FiniteDimensional (Padic ell) E] [FiniteDimensional (Padic ell) F]
     (m n : ℕ) (φ : Scheme.finiteTateCoefficient ell E m →+*
@@ -432,7 +434,7 @@ theorem equation (ell p : ℕ) [Fact ell.Prime] (_hp : 0 < p) (_hEll : p ≠ ell
       (∀ Z : Scheme.{u}, Z = S ∨ Z = affineTraceTower S d → ∀ K,
         ProEtale.AdjunctionTransfer.etaleProperty (Scheme.finiteTateCoefficient ell E m) Z K →
         ProEtale.AdjunctionTransfer.etaleProperty (Scheme.finiteTateCoefficient ell F n) Z
-          ((scalarExtension φ Z).obj K)) ∧
+          ((CategoryTheory.fixedCoefficientDerivedExtension Z.smallEtaleTopology φ).obj K)) ∧
       @Equations.{u} _ (pow_pos (Fact.out : ell.Prime).pos _)
         (Scheme.finiteTateCoefficient ell E m) (Scheme.finiteTateCoefficient ell F n)
         _ _ _ _ φ hA hB S hNoeth hS d := by
@@ -441,7 +443,7 @@ theorem equation (ell p : ℕ) [Fact ell.Prime] (_hp : 0 < p) (_hEll : p ≠ ell
   let a := max (m + 1) (n + 1)
   have hA : ((ell ^ a : ℕ) : A) = 0 := annihilator ell E m a (le_max_left _ _)
   have hB : ((ell ^ a : ℕ) : B) = 0 := annihilator ell F n a (le_max_right _ _)
-  obtain ⟨hNoeth, hS, ht⟩ := affine_counit_scalar ell p _hp _hEll k A B φ a hA hB S d
+  obtain ⟨hNoeth, hS, ht⟩ := affine_counit_scalar ell p _hp _hEll k hk A B φ a hA hB S d
     (compactification S d) (ordinaryFiniteUnit A S) (unit_property A S)
   have := hNoeth
   have : Fact (ringChar k).Prime :=
@@ -453,11 +455,12 @@ theorem equation (ell p : ℕ) [Fact ell.Prime] (_hp : 0 < p) (_hEll : p ≠ ell
     have := QuasiCompact.compactSpace_of_compactSpace (compactification S d).g
     exact ⟨⟩
   refine ⟨hNoeth, hS, hA, hB, inferInstance, inferInstance, hX, hZ, ?_, ?_, ?_, ?_⟩
-  · exact domain ell k A a hA S hS d
-  · exact domain ell k B a hB S hS d
+  · exact domain ell k hk A a hA S hS d
+  · exact domain ell k hk B a hB S hS d
   · intro Z hZ
     rcases hZ with hZ | hZ <;> subst Z
-    · exact (ProEtale.AdjunctionTransfer.etaleCtfChartScalarDomain ell k φ a hA hB S).1
+    · exact (ProEtale.AdjunctionTransfer.etaleCtfChartScalarDomain ell k hk
+        (Fact.out : ringChar k ≠ ell) φ a hA hB S).1
     · let f := affineTraceProjection S d
       let : (affineTraceTower S d).Over (Spec (.of k)) :=
         OverClass.ofHom (f ≫ S ↘ Spec (.of k))
@@ -467,8 +470,8 @@ theorem equation (ell p : ℕ) [Fact ell.Prime] (_hp : 0 < p) (_hEll : p ≠ ell
         inferInstanceAs (QuasiCompact (f ≫ S ↘ Spec (.of k)))
       have : IsSeparated (affineTraceTower S d ↘ Spec (.of k)) :=
         inferInstanceAs (IsSeparated (f ≫ S ↘ Spec (.of k)))
-      exact (ProEtale.AdjunctionTransfer.etaleCtfChartScalarDomain ell k φ a hA hB
-        (affineTraceTower S d)).1
+      exact (ProEtale.AdjunctionTransfer.etaleCtfChartScalarDomain ell k hk
+        (Fact.out : ringChar k ≠ ell) φ a hA hB (affineTraceTower S d)).1
   · unfold Equations
     have := hX
     let hPA := fun K ↦ projection_iso A (compactification S d) K (coefficient A _ hA S d)

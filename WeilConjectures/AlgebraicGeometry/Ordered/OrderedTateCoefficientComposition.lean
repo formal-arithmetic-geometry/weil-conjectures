@@ -164,6 +164,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.SingleF
 import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comp
 import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 import Mathlib.CategoryTheory.Adjunction.Whiskering
+public import WeilConjectures.AlgebraicGeometry.Finite.General.FiniteGeneralRingData
+public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Data
+public import WeilConjectures.AlgebraicGeometry.Sites.RootsOfUnityPullback
 
 /-! # Composition of ordered Tate coefficient pullbacks -/
 
@@ -311,6 +314,112 @@ private lemma normalized_line_transpose (A : Type (u + 1)) [CommRing A] (N : ℕ
           (t.line v hT).hom)).hom.app W z) = _
   rw [Scheme.lineHomEquiv_generator, t.line_normalization, normalized_roots_eq]
   exact (Scheme.lineHomEquiv_generator T' N A hA P g _ _).symm
+
+/-- Restrict normalized Kummer data to a frame open.
+
+The two maps are the canonical transports obtained from the normalized inverse-image
+comparisons of the ordinary finite twists.  The conclusion records both their defining
+equalities and the Kummer comparison on the open.
+
+Source: general-ring smooth purity, proof (3), local frame calculation; the normalized
+inverse images of `μ_N` and of the finite Tate line (Stacks, Tags 03PK and 03Q1).
+(blueprint: lem-sp-general-ring-kummer-comparison-restrict).
+
+Proof: put `qV := ρ_M⁻¹ ≫ ι^*q ≫ ρ_N` and `bV := λ_M⁻¹ ≫ ι^*b ≫ λ_N`, where `ρ`, `λ` are the
+root and line transports of `tM`, `tN` along `V.ι`. Kernel clause: by root normalization
+`ρ_N ≫ ι_N = ι^*ι_N ≫ (ι^*G_m → G_m)`, so `qV ≫ ι_N = ρ_M⁻¹ ≫ ι^*(q ≫ ι_N) ≫ …`, which is
+`(M / N) • ρ_M⁻¹ ≫ ι^*ι_M ≫ … = (M / N) • ι_M` by the kernel clause on `S` and root
+normalization at `M`. Generator clause: a map out of the Tate line is determined by its
+values on the generators `1 ⊗ z` (sheafification and extension of scalars adjunctions);
+under the inverse-image adjunction, line normalization turns the generator values of `bV`
+into those of `b`, which the generator clause on `S` gives; `A`-linearity extends from
+`1 ⊗ z` to `a ⊗ z`. -/
+theorem finiteGeneralRingKummerComparison_restrict
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    (M N : ℕ) (hMpos : 0 < M) (hNpos : 0 < N)
+    (hM : (M : A) = 0) (hN : (N : A) = 0)
+    (S : Scheme.{u}) [IsNoetherian S]
+    (hS : IsUnit (M : Γ(S, ⊤))) (hS' : IsUnit (N : Γ(S, ⊤)))
+    (d : ℕ) (F : S.Modules) [F.IsFiniteLocallyFreeOfRank d]
+    (q : S.rootsOfUnitySheaf M ⟶ S.rootsOfUnitySheaf N)
+    (b : Scheme.finiteEtaleTateLine S M A hM ≅ Scheme.finiteEtaleTateLine S N A hN)
+    (hb : FiniteGeneralRingKummerComparison A M N hM hN S q b)
+    (tN : Etale.OrdinaryFiniteTwistTransport A N hN)
+    (tM : Etale.OrdinaryFiniteTwistTransport A M hM)
+    (V : S.Opens) :
+    ∃ qV : V.toScheme.rootsOfUnitySheaf M ⟶ V.toScheme.rootsOfUnitySheaf N,
+      ∃ bV : Scheme.finiteEtaleTateLine V.toScheme M A hM ≅
+        Scheme.finiteEtaleTateLine V.toScheme N A hN,
+      qV = (tM.roots V.ι hS).inv ≫
+          (Etale.upperStar AddCommGrpCat.{u + 1} V.ι).map q ≫
+          (tN.roots V.ι hS').hom ∧
+      bV = (tM.line V.ι hS).symm ≪≫
+          (Etale.upperStar (ModuleCat.{u + 1} A) V.ι).mapIso b ≪≫
+          (tN.line V.ι hS') ∧
+      FiniteGeneralRingKummerComparison A M N hM hN V.toScheme qV bV := by
+  have _ := hMpos
+  have _ := hNpos
+  let qV := (tM.roots V.ι hS).inv ≫
+    (Etale.upperStar AddCommGrpCat.{u + 1} V.ι).map q ≫ (tN.roots V.ι hS').hom
+  let bV := (tM.line V.ι hS).symm ≪≫
+    (Etale.upperStar (ModuleCat.{u + 1} A) V.ι).mapIso b ≪≫ (tN.line V.ι hS')
+  refine ⟨qV, bV, rfl, rfl, ?_⟩
+  have hrootsN : (tN.roots V.ι hS').hom =
+      Scheme.upperStarRootsOfUnitySheafToRootsOfUnitySheaf N V.ι := by
+    apply (cancel_mono (kernel.ι (N • 𝟙 V.toScheme.gmSheaf))).mp
+    rw [← tN.roots_normalization,
+      Scheme.upperStarRootsOfUnitySheafToRootsOfUnitySheaf_ι]
+  constructor
+  · dsimp [qV]
+    rw [hrootsN]
+    simp only [Category.assoc, upperStarRootsOfUnitySheafToRootsOfUnitySheaf_ι]
+    erw [← Functor.map_comp_assoc, hb.1]
+    simp only [Functor.map_nsmul]
+    rw [Preadditive.nsmul_comp, Preadditive.comp_nsmul]
+    change (M / N) • ((tM.roots V.ι hS).inv ≫
+      (Etale.upperStar AddCommGrpCat.{u + 1} V.ι).map (S.rootsOfUnitySheafι M) ≫
+      upperStarGmSheafToGmSheaf V.ι) = _
+    have hm' :
+        (Etale.upperStar AddCommGrpCat.{u + 1} V.ι).map (S.rootsOfUnitySheafι M) ≫
+          upperStarGmSheafToGmSheaf V.ι =
+        (tM.roots V.ι hS).hom ≫ kernel.ι (M • 𝟙 V.toScheme.gmSheaf) := by
+      exact tM.roots_normalization V.ι hS
+    change (M / N) • ((tM.roots V.ι hS).inv ≫
+      ((Etale.upperStar AddCommGrpCat.{u + 1} V.ι).map (S.rootsOfUnitySheafι M) ≫
+        upperStarGmSheafToGmSheaf V.ι)) = _
+    rw [hm']
+    simp only [Iso.inv_hom_id_assoc]
+  · have hgen : Scheme.lineHomEquiv V.toScheme M A hM _ bV.hom =
+        qV ≫ Scheme.lineHomEquiv V.toScheme N A hN _ (𝟙 _) := by
+      apply (cancel_epi (tM.roots V.ι hS).hom).mp
+      apply ((Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} V.ι).homEquiv
+        _ _).injective
+      rw [← Etale.normalized_line_transpose A M hM tM V.ι hS]
+      have he : (tM.line V.ι hS).hom ≫ bV.hom =
+          (Etale.upperStar (ModuleCat.{u + 1} A) V.ι).map b.hom ≫
+            (tN.line V.ι hS').hom := by
+        simp [bV]
+      rw [he, Adjunction.homEquiv_naturality_left]
+      have hq : (tM.roots V.ι hS).hom ≫ qV =
+          (Etale.upperStar AddCommGrpCat.{u + 1} V.ι).map q ≫
+            (tN.roots V.ι hS').hom := by
+        simp [qV]
+      rw [← Category.assoc, hq, Category.assoc, Adjunction.homEquiv_naturality_left]
+      rw [← Etale.normalized_line_transpose A N hN tN V.ι hS']
+      simp only [Category.comp_id]
+      ext W z
+      simp only [Scheme.lineHomEquiv_generator]
+      change (((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) V.ι).homEquiv
+        _ _ (tN.line V.ι hS').hom).hom.app W)
+          (b.hom.hom.app W (finiteEtaleTateOneGenerator A M S hM W 1 z)) = _
+      rw [hb.2]
+      rfl
+    intro W a z
+    have hz := congrArg (fun g ↦ g.hom.app W z) hgen
+    simp only [Scheme.lineHomEquiv_generator] at hz
+    change bV.hom.hom.app W (finiteEtaleTateOneGenerator A M V.toScheme hM W a z) = _
+    rw [Scheme.finiteEtaleGenerator_smul, _root_.map_smul, hz]
+    exact (Scheme.finiteEtaleGenerator_smul V.toScheme N A hN W a (qV.hom.app W z)).symm
 
 private lemma normalized_line_comp (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)

@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinary.FiniteDiscreteOrdinaryEncodingSupplement
 import all WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinary.FiniteDiscreteEncodingPullbackFixed
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedComp
+public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteCompactSupportEncoding
 
 /-! # Finite discrete coefficient comparison -/
 
@@ -101,6 +102,31 @@ private def encodingDerivedOpenShriekIso {T U : Scheme.{u}} (j : U ⟶ T)
   exact (Functor.mapDerivedCategoryCompIso F ET.functor).symm ≪≫
     Functor.mapDerivedCategoryNatIso (encodingOpenShriekIso A j eT eU) ≪≫
     Functor.mapDerivedCategoryCompIso EU.functor G
+
+/-- Public access to the canonical derived direct-image comparison under normalized
+finite-discrete encoding. The map is the derived underived sectionwise comparison.
+Source: finite coefficient comparison, steps 11--12
+(blueprint: lem-sf-finite-discrete-encoding-compactification). -/
+@[no_expose] def encodingDerivedPushforwardComparison {T U : Scheme.{u}} (f : U ⟶ T)
+    (eT : Encoding A T) (eU : Encoding A U) :
+    (CondensedRing.lowerStar (coefficient A) f).rightDerivedFunctor ⋙
+        eT.fixedDerived.functor ≅
+      eU.fixedDerived.functor ⋙
+        (lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) f).rightDerivedFunctor := by
+  exact encodingDerivedPushforwardIso A f eT eU
+
+/-- Public access to the canonical derived extension-by-zero comparison under
+normalized finite-discrete encoding. It is induced by uniqueness of left adjoints.
+Source: finite coefficient comparison, steps 11--12
+(blueprint: lem-sf-finite-discrete-encoding-compactification). -/
+@[no_expose] def encodingDerivedOpenShriekComparison {T U : Scheme.{u}} (j : U ⟶ T)
+    [IsOpenImmersion j] (eT : Encoding A T) (eU : Encoding A U) :
+    (CondensedRing.openImmersionLowerShriek (coefficient A) j).mapDerivedCategory ⋙
+        eT.fixedDerived.functor ≅
+      eU.fixedDerived.functor ⋙
+        (openImmersionLowerShriek
+          (ModuleCat.{u + 1} (ULift.{u + 1} A)) j).mapDerivedCategory := by
+  exact encodingDerivedOpenShriekIso A j eT eU
 
 /-- The two compactification composites agree under normalized coefficient encoding.
 Source: blueprint coefficient-identification proof, steps 11--12; Stacks Tags 015F and 03EK.

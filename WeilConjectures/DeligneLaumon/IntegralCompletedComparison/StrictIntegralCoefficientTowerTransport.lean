@@ -170,6 +170,113 @@ private theorem comparison_shift_pasting
       rw [← Category.assoc (D.map q) (b.hom.app Ps), b.hom.naturality q]
       simp only [Functor.comp_map, Category.assoc]
 
+/-- Shift square on good representatives for the normalized integral Roos comparison.
+Source: Stacks Project, sites-cohomology.tex, Tag 0941, shifted K-injective computation.
+(blueprint: lem-a1-integral-roos-finite-tower-shift-good).
+-/
+theorem integralRoosFiniteTower_commShift_good
+    (C : FinitePullbackStrictTower.Comparison.{u, u} l E g)
+    (e : roosF (A := integralTowerModules.{u, u} l E X) ⋙ DerivedCategory.Q ≅
+      DerivedCategory.Q ⋙
+        completedRlim X (completedIntegralCommRingSheafUnrestricted.{u, u} l E X))
+    (he : ∀ I : CochainComplex (ℕᵒᵖ ⥤ integralTowerModules.{u, u} l E X) ℤ,
+      DerivedCategory.Q.map (roosι I) ≫ e.hom.app I =
+        DerivedCategory.Q.map
+            ((limit.isoLimitCone ⟨HomologicalComplex.coneOfHasLimitEval I.asFunctor,
+              HomologicalComplex.isLimitConeOfHasLimitEval I.asFunctor⟩).hom) ≫
+          (completedTowerLimit X
+            (completedIntegralCommRingSheafUnrestricted.{u, u} l E X)).rightDerivedFunctorUnitQ I)
+    (b : integralDerivedPullback.{u, u} l E g ≅ C.B.functor ⋙
+      completedRlim X (completedIntegralCommRingSheafUnrestricted.{u, u} l E X))
+    (hb : ∀ (P : CochainComplex (integralTowerModules.{u, u} l E Y) ℤ)
+      (hP : integralOperationsGoodComplex.{u, u} l E Y P),
+      b.hom.app (DerivedCategory.Q.obj P) ≫
+          (completedRlim X (completedIntegralCommRingSheafUnrestricted.{u, u} l E X)).map
+            (C.B.counit.app P) =
+        (integralDerivedPullbackComparison.{u, u} l E g).hom.app ⟨P, hP⟩ ≫
+          e.hom.app ((FinitePullbackStrictTower.finiteComplex.{u, u} l E g).obj P))
+    (c : (integralOperationsPullbackComplexFunctor.{u, u} l E g).CommShift ℤ)
+    (hc : ShiftCoordinates l E g c)
+    (d : (integralDerivedPullback.{u, u} l E g).CommShift ℤ)
+    (hd : ShiftDescent l E g c d) :
+    letI := C.finiteShift
+    ∀ (P : CochainComplex (integralTowerModules.{u, u} l E Y) ℤ)
+      (hP : integralOperationsGoodComplex.{u, u} l E Y P) (r : ℤ),
+      (Functor.commShiftIso (integralDerivedPullback.{u, u} l E g)
+          (self := d) r).hom.app (DerivedCategory.Q.obj P) ≫
+        (b.hom.app (DerivedCategory.Q.obj P))⟦r⟧' =
+      b.hom.app ((DerivedCategory.Q.obj P)⟦r⟧) ≫
+        (Functor.commShiftIso (C.B.functor ⋙
+          completedRlim X (completedIntegralCommRingSheafUnrestricted.{u, u} l E X))
+          (self := Functor.CommShift.comp C.B.functor
+            (completedRlim X (completedIntegralCommRingSheafUnrestricted.{u, u} l E X))) r).hom.app
+          (DerivedCategory.Q.obj P) := by
+  let := completedAbelian l E X
+  let := completedAbelian l E Y
+  let := C.finiteShift
+  let := d
+  let R := completedRlim X (completedIntegralCommRingSheafUnrestricted.{u, u} l E X)
+  let S := FinitePullbackStrictTower.finiteComplex.{u, u} l E g
+  let D := integralDerivedPullback.{u, u} l E g
+  let : HasCountableProducts (integralTowerModules.{u, u} l E X) := products l E X
+  let := RoosConeCalculus.roosCommShift.{u + 2, u + 1}
+    (A := integralTowerModules.{u, u} l E X)
+  have : IsGrothendieckAbelian.{u + 1} (integralTowerModules.{u, u} l E X) :=
+    (grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses.{u + 1, u, 0}
+      (ProEt.topology X) (completedIntegralCommRingSheafUnrestricted.{u, u} l E X)).1
+  have : IsGrothendieckAbelian.{u + 1}
+      (ℕᵒᵖ ⥤ integralTowerModules.{u, u} l E X) := inferInstance
+  have : Abelian.HasKInjectiveResolutions (ℕᵒᵖ ⥤ integralTowerModules.{u, u} l E X) :=
+    Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian.{u + 1}
+  have : NatTrans.CommShift e.hom ℤ := normalized_roos_commShift e he
+  intro P hP r
+  obtain ⟨hPs, hds⟩ := hd ⟨P, hP⟩ r
+  have := C.B.computes P hP
+  have hfinite :
+      (Functor.commShiftIso C.B.functor (self := C.finiteShift) r).hom.app
+          (DerivedCategory.Q.obj P) ≫ (C.B.counit.app P)⟦r⟧' =
+        C.B.functor.map ((DerivedCategory.Q.commShiftIso r).inv.app P) ≫
+          C.B.counit.app (P⟦r⟧) ≫
+          DerivedCategory.Q.map ((Functor.commShiftIso S
+            (self := C.finiteChainShift) r).hom.app P) ≫
+          (DerivedCategory.Q.commShiftIso r).hom.app (S.obj P) := by
+    apply (cancel_epi (C.B.functor.map ((DerivedCategory.Q.commShiftIso r).hom.app P))).mp
+    erw [C.finiteShift_descent P r]
+    simp only [← C.B.functor.map_comp_assoc, Iso.hom_inv_id_app]
+    erw [C.B.functor.map_id, Category.id_comp]
+  let σ := DerivedCategory.Q.map ((Functor.commShiftIso S
+      (self := C.finiteChainShift) r).hom.app P) ≫
+    (DerivedCategory.Q.commShiftIso r).hom.app (S.obj P)
+  let γ := DerivedCategory.Q.map
+      ((Functor.commShiftIso (integralOperationsPullbackComplexFunctor l E g)
+        (self := c) r).hom.app P) ≫
+    (DerivedCategory.Q.commShiftIso r).hom.app (roosF.obj (S.obj P))
+  have eshift := NatTrans.shift_app_comm e.hom r (S.obj P)
+  simp only [Functor.commShiftIso_comp_hom_app, Category.assoc] at eshift
+  have enat := e.hom.naturality
+    ((Functor.commShiftIso S (self := C.finiteChainShift) r).hom.app P)
+  dsimp only [Functor.comp_map] at enat
+  have hE : γ ≫ (e.hom.app (S.obj P))⟦r⟧' =
+      e.hom.app (S.obj (P⟦r⟧)) ≫ R.map σ ≫
+        (R.commShiftIso r).hom.app (DerivedCategory.Q.obj (S.obj P)) := by
+    dsimp only [γ, σ]
+    erw [finite_roos_chain_shift l E g C c hc P r, DerivedCategory.Q.map_comp]
+    simp only [Category.assoc]
+    erw [eshift, reassoc_of% enat]
+    simp only [Functor.map_comp, Category.assoc]
+    rfl
+  exact comparison_shift_pasting C.B.functor D R b
+    (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj (P⟦r⟧)) r
+    ((DerivedCategory.Q.commShiftIso r).inv.app P)
+    (DerivedCategory.Q.obj (S.obj P)) (DerivedCategory.Q.obj (S.obj (P⟦r⟧)))
+    (C.B.counit.app P) (C.B.counit.app (P⟦r⟧)) σ
+    (DerivedCategory.Q.obj (roosF.obj (S.obj P)))
+    (DerivedCategory.Q.obj (roosF.obj (S.obj (P⟦r⟧))))
+    ((integralDerivedPullbackComparison l E g).hom.app ⟨P, hP⟩)
+    ((integralDerivedPullbackComparison l E g).hom.app ⟨P⟦r⟧, hPs⟩)
+    (e.hom.app (S.obj P)) (e.hom.app (S.obj (P⟦r⟧))) γ
+    (hb P hP) (hb (P⟦r⟧) hPs) hfinite hds hE
+
 private theorem finite_roos_chain_shift
     (C : FinitePullbackStrictTower.Comparison.{u, u} l E g)
     (c : (integralOperationsPullbackComplexFunctor.{u, u} l E g).CommShift ℤ)

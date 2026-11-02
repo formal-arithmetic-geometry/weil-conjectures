@@ -184,15 +184,34 @@ variable {Z Y : Scheme.{u}} [Z.Over (Spec (CommRingCat.of k₀))]
   [IsProper g] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
 
-/-- **The proper exceptional adjunction** (blueprint: `det-pd-biduality-coefficients`, "the
-constructible adjunction `Rf_! ⊣ Rf^!`", for a proper `f`, where `Rf_! = Rf_*`): for a proper
-morphism `g : Z ⟶ Y` of `k₀`-schemes, `Y` of finite type, the direct image `Rg_*` of Weil complexes
-has a right adjoint `Rg^!`. The general case
+/-- **The proper exceptional adjunction** (blueprint: `thm-coef-qbar-verdier`, "the constructible
+adjunction `Rf_! ⊣ Rf^!`", for a proper `f`, where `Rf_! = Rf_*`): for a proper morphism
+`g : Z ⟶ Y` of `k₀`-schemes, `Y` of finite type, the direct image `Rg_*` of Weil complexes has a
+right adjoint `Rg^!`. The general case
 `AlgebraicGeometry.WeilComplex.isLeftAdjoint_derivedLowerShriek` reduces to this one through a
 compactification. -/
 theorem isLeftAdjoint_derivedLowerStar_of_isProper :
-    (derivedLowerStar (k₀ := k₀) (l := l) g).IsLeftAdjoint :=
-  sorry
+    (derivedLowerStar (k₀ := k₀) (l := l) g).IsLeftAdjoint := by
+  have : IsLocallyNoetherian Y :=
+    LocallyOfFiniteType.isLocallyNoetherian (Y ↘ Spec (CommRingCat.of k₀))
+  have : QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀)) := inferInstance
+  have hZS : Z ↘ Spec (CommRingCat.of k₀) = g ≫ Y ↘ Spec (CommRingCat.of k₀) :=
+    (comp_over g (Spec (CommRingCat.of k₀))).symm
+  have : LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k₀)) := hZS ▸ inferInstance
+  have : QuasiCompact (Z ↘ Spec (CommRingCat.of k₀)) := hZS ▸ inferInstance
+  obtain ⟨h, hW, _, _, _, _, _, G, ⟨adj⟩, _⟩ :=
+    nativeWeil_localizing_brown_adjoints k₀ l g
+  let hZ := (nativeWeil_localizing_hulls k₀ l Z).2.2.2.2.1
+  let hY := (nativeWeil_localizing_hulls k₀ l Y).2.2.2.2.1
+  let iZ := ObjectProperty.ιOfLE hZ
+  let iY := ObjectProperty.ιOfLE hY
+  let R : WeilComplex k₀ l Y ⥤ WeilComplex k₀ l Z :=
+    (objectProperty k₀ l Z).lift (iY ⋙ G ⋙ (nativeWeilLocalizingHull k₀ l Z).ι)
+      (nativeBrownRight_preserves_weilComplex k₀ l g hW G adj)
+  let a : derivedLowerShriek k₀ l g ⊣ R :=
+    adj.restrictFullyFaithful (ObjectProperty.fullyFaithfulιOfLE hZ)
+      (ObjectProperty.fullyFaithfulιOfLE hY) (Iso.refl _) (Iso.refl _)
+  exact (a.ofNatIsoLeft (derivedLowerShriekIsoDerivedLowerStar g)).isLeftAdjoint
 
 end Proper
 

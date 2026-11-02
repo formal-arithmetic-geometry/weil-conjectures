@@ -161,6 +161,40 @@ noncomputable def supportSequenceModelBoundary (δ : SupportSequenceBoundary J A
     (δ q).app K ≫
     (supportSequenceModelIso J A (supportedSectionsFunctor J A j) I K.obj e (q + 1)).inv
 
+/-- The chain map on sections induced by an adjoint coefficient chain map `b` and
+restriction from `B(V)` to `V'`. For base change on scheme sites, this is precisely
+`I(V) → L(V ×_X X') → L(V')` in the proof of pair functoriality.
+Source: Milne, Section 9, Theorem 9.4; blueprint proof Step 7
+(blueprint: thm-pur-with-support-exactness). -/
+noncomputable def supportPairComplexSectionMap
+    (I : CochainComplex.Plus (Sheaf J A)) (L : CochainComplex.Plus (Sheaf J' A))
+    (b : I.obj ⟶ ((B.sheafPushforwardContinuous A J J').mapHomologicalComplex
+      (ComplexShape.up ℤ)).obj L.obj)
+    {V : C} {V' : D} (t : V' ⟶ B.obj V) :
+    (((sheafToPresheaf J A ⋙ (evaluation _ _).obj (op V)).mapHomologicalComplex
+      (ComplexShape.up ℤ)).obj I.obj) ⟶
+    (((sheafToPresheaf J' A ⋙ (evaluation _ _).obj (op V')).mapHomologicalComplex
+      (ComplexShape.up ℤ)).obj L.obj) :=
+  ((sheafToPresheaf J A ⋙ (evaluation _ _).obj (op V)).mapHomologicalComplex
+    (ComplexShape.up ℤ)).map b ≫
+    (NatTrans.mapHomologicalComplex ((sheafSections J' A).map t.op)
+      (ComplexShape.up ℤ)).app L.obj
+
+private theorem supportRow_zero :
+    supportedSectionsInclusion J A j ≫ (sheafSections J A).map j.op = 0 := by
+  ext I
+  exact kernel.condition _
+
+private theorem supportRow_shortExact
+    (h : ∀ (I : Sheaf J A) [Injective I], Epi (I.obj.map j.op))
+    (I : Sheaf J A) [Injective I] :
+    (ShortComplex.mk ((supportedSectionsInclusion J A j).app I)
+      (((sheafSections J A).map j.op).app I)
+      (NatTrans.congr_app (supportRow_zero J A j) I)).ShortExact where
+  exact := ShortComplex.kernelSequence_exact _
+  mono_f := by change Mono (kernel.ι _); infer_instance
+  epi_g := h I
+
 end CategoryTheory.Sheaf
 
 namespace CategoryTheory.Sheaf

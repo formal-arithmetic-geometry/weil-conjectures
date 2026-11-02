@@ -71,6 +71,7 @@ public import Mathlib.Algebra.BigOperators.Ring.Finset
 
 import all WeilConjectures.AlgebraicGeometry.Smooth.SmoothPurityCoefficientTowersAbelian
 public import WeilConjectures.ProperBaseChange.RingedStrictTowerHomotopyLimitIndependentCoefficients
+public import WeilConjectures.AlgebraicGeometry.Smooth.SmoothPurityReductionTowerData
 
 /-!
 # Completed evaluations and the canonical tower reconstruction map
@@ -118,9 +119,7 @@ Source: blueprint, coefficient setup (blueprint: def-sp-tower-reconstruction-dat
 def spCompletedEllCommProjection (n : ℕ) :
     WeilConjectures.completedIntegralCommRingSheafUnrestricted l E T ⟶
       (spCoefficientCommRings l E T).obj (op n) :=
-  (sheafCompose (Scheme.ProEt.topology T)
-    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).preimage
-      (spCompletedEllProjection.{u, u} l E T n)
+  spIntegralEllProjection l E T n
 
 /-- Exact restriction from the actual ell-power quotient to completed coefficients.
 Source: blueprint, restriction in proof step 2 (blueprint: def-sp-tower-reconstruction-data). -/
@@ -145,6 +144,12 @@ private theorem spCompletedEllProjection_comp {m n : ℕ} (h : m ≤ n) :
   unfold spCompletedEllProjection
   rw [Category.assoc, limit.w]
 
+/-- The canonical completed projections commute with the quotient transitions.
+Source: blueprint, coefficient setup and proof step 2
+(blueprint: def-sp-tower-reconstruction-data).
+Proof: apply the faithful forgetful functor to ring sheaves and unfold
+`spIntegralEllProjection`; both sides are the normalized coefficient-limit comparison
+followed by a limit projection, so the limit-cone condition `limit.w` gives the equality. -/
 private theorem spCompletedEllCommProjection_comp {m n : ℕ} (h : m ≤ n) :
     spCompletedEllCommProjection l E T n ≫
       (spCoefficientCommRings l E T).map (homOfLE h).op =
@@ -153,14 +158,15 @@ private theorem spCompletedEllCommProjection_comp {m n : ℕ} (h : m ≤ n) :
     (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})
   apply F.map_injective
   rw [F.map_comp]
-  simp only [spCompletedEllCommProjection]
+  simp only [spCompletedEllCommProjection, spIntegralEllProjection]
   dsimp only [F]
   rw [Functor.map_preimage, Functor.map_preimage]
   have hm : F.map ((spCoefficientCommRings l E T).map (homOfLE h).op) =
       (spCoefficientRings l E T).map (homOfLE h).op := by
     exact eq_of_heq (Functor.hcongr_hom (coefficientRings_eq l E T) (homOfLE h).op).symm
   rw [hm]
-  exact spCompletedEllProjection_comp l E T h
+  exact (Category.assoc _ _ _).trans
+    (congrArg (fun g ↦ _ ≫ g) (limit.w (spCoefficientRings l E T) (homOfLE h).op))
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

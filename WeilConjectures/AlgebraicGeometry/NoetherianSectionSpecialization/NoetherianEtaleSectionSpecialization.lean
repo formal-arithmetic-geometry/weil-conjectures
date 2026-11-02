@@ -37,6 +37,8 @@ public import WeilConjectures.AlgebraicGeometry.Smooth.SmoothDualityBaseChangeCo
 import WeilConjectures.AlgebraicGeometry.DerivedCategories
 import WeilConjectures.Compactification.NagataCompactification
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import WeilConjectures.AlgebraicGeometry.FiniteSmoothPurity.ReesConeNormalizedExistence
+public import WeilConjectures.RingTheory.SmoothPurity.ReesAssociatedGradedChart
 
 /-! # Normalized ordinary etale specialization along a smooth section
 
@@ -617,6 +619,41 @@ theorem existsUnique_normalized
       (line_shape A d S _ hlines.1) (line_shape A d _ _ hlines.2.1) theta cover
       normalized hnormalized).2.2
   exact ⟨kappa, hkappa, huniq⟩
+
+/-- The inverse zero restriction is an isomorphism from the original section line to
+the normal-bundle zero-section line, in its canonical Rees-cone presentation.
+Source: sk-thm-dnc, final specialization
+(blueprint: lem-pur-noetherian-etale-section-specialization).
+Proof: Step 9 restricts the global comparison at zero and inverts, then composes
+with the canonical zero-fibre base-change isomorphism. The inverse-image section
+compositor identifies i0*a* with the identity. Every factor is an isomorphism,
+as shown in lines_and_fibres, giving exactly delta=(i0*kappa)^(-1) under the stated
+fibre identifications. -/
+theorem isIso_specialization
+    (ell n : ℕ) [Fact ell.Prime] (hn : 1 ≤ n)
+    {V S : Scheme.{u}} [IsNoetherian V] [IsNoetherian S]
+    (hS : ∀ x : S, IsUnit (ell : S.presheaf.stalk x))
+    (hV : ∀ x : V, IsUnit (ell : V.presheaf.stalk x))
+    (d : ℕ) (g : V ⟶ S) [SmoothOfRelativeDimension d g]
+    [IsSeparated g] [QuasiCompact g] [HasCompactification g]
+    (s : S ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 S)
+    (hregular : ∀ x : S, ∃ U : V.affineOpens, s x ∈ U.1 ∧
+      ∃ r : Fin d → Γ(V, U.1),
+        RingTheory.Sequence.IsWeaklyRegular Γ(V, U.1) (List.ofFn r) ∧
+          Ideal.span (Set.range r) = s.ker.ideal U)
+    [HasCompactification (Scheme.Hom.normalConeProj g s)]
+    [HasCompactification (Scheme.Hom.deformationSpaceProj g s)]
+    [QuasiCompact (Scheme.Hom.normalConeProj g s)]
+    (κ : family (Coeff ell n) g s ≅
+      (upperStar (ModuleCat.{u + 1} (Coeff ell n))
+        (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)).leftDerivedFunctor.obj
+          (sectionInvariant (Coeff ell n) g s))
+    (hκ : Normalized (Coeff ell n) g s hs κ) :
+    IsIso (specialization (Coeff ell n) g s κ) := by
+  have _ := hκ
+  have := (lines_and_fibres ell n hn hS hV d g s hs hregular).2.2.2
+  unfold specialization
+  infer_instance
 
 /-- The zero-fibre maps commute with the fixed Rees base-change map. This is the
 well-definedness condition for the universal-property definition of normalMap.

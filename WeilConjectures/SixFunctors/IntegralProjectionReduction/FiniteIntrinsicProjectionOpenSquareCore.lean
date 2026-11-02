@@ -1636,7 +1636,7 @@ intrinsic map is invertible and inverseOnDomain is its inverse. Invert the equat
 use naturality in the two tensor inputs, first along k and then along the arbitrary b.
 There is no proper direct image, midpoint, beforeCompositor, or constructibility hypothesis
 in this equation. Zero inputs, empty and identity opens and m = 0 satisfy the same formulas. -/
-theorem finiteIntrinsicProjectionOpenSquareCore
+public theorem finiteIntrinsicProjectionOpenSquareCore
     {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
     {E : Type u} [Field E] [Algebra (Padic C.l) E]
     [FiniteDimensional (Padic C.l) E] (m : ℕ)
@@ -1676,6 +1676,89 @@ theorem finiteIntrinsicProjectionOpenSquareCore
         ej.hom.app (tx.obj (RX.inverse.obj U, RX.inverse.obj (P.obj N))) ≫
         RZ.functor.map (Jf.map (tx.map (Prod.mkHom (𝟙 _) (ep.hom.app N)))) ≫
         RZ.functor.map (Jf.map
-          (tx.map (Prod.mkHom (RX.inverse.map k.hom) (Pf.map b)))) := by sorry
+          (tx.map (Prod.mkHom (RX.inverse.map k.hom) (Pf.map b)))) := by
+  dsimp only
+  let A := Padic.coefficientExtensionRing C.l E (m + 1)
+  let B := ModuleCat.{u + 1} (ULift.{u + 1} A)
+  let Q := compactSupportProjectionSquare f c
+  let RX := realization (C := C) (E := E) (n := m + 1)
+    (hn := Nat.le_add_left 1 m) X
+  let RZ := realization (C := C) (E := E) (n := m + 1)
+    (hn := Nat.le_add_left 1 m) Q.Z
+  let J := (sfIntrinsicExtensionByZero c.i A).mapDerivedCategory
+  let P := finiteDerivedPullback C.l E m c.i
+  let Jf := (openImmersionLowerShriek B c.i).mapDerivedCategory
+  let Pe := (upperStar B c.i).mapDerivedCategory
+  let Pf := (upperStar B c.i).leftDerivedFunctor
+  let Tx := finiteIntrinsicDerivedTensor C.l E X.obj.left m
+  let Tz := finiteIntrinsicDerivedTensor C.l E c.Z m
+  let fx := derivedTensor B X.obj.left
+  let fz := derivedTensor B c.Z
+  let sx := canonicalTensorCoordinates (C := C) (E := E) m X
+  let sz := canonicalTensorCoordinates (C := C) (E := E) m Q.Z
+  let ej := FiniteIntrinsicRealization.openComparison (C := C) (E := E) m f c
+  let ep := FiniteIntrinsicRealization.inversePullback (C := C) (E := E) m Q.i
+  let beta := (FiniteIntrinsicRealization.inverseComparison RX RZ J Jf ej).symm
+  let tau := ep ≪≫ Functor.isoWhiskerLeft RZ.inverse
+    (leftDerivedUpperStarIsoMapDerivedCategory B c.i)
+  let ai := IntegralSystemRealization.finiteOpenAdj C.l E c.i m
+  let af := derivedOpenImmersionLowerShriekUpperStarAdjunction B c.i
+  letI := SystemProjectionFormula.residueInvertible C.l D C.different X.obj.left X.obj.hom
+  letI := SystemProjectionFormula.residueInvertible C.l D C.different c.Z (c.g ≫ Y.obj.hom)
+  let ti := curry_tensor_iso P Tz Tx (finitePullbackTensorConstructionIso C.l E c.i m)
+  let di := ti.inv
+  let df := (mapDerivedCategoryUpperStarDerivedTensorIso B c.i).hom
+  let qx := inverse_curried_tensor_coordinates RX fx Tx sx
+  let qz := inverse_curried_tensor_coordinates RZ fz Tz sz
+  rw [← canonicalTensorCoordinates_hom (C := C) (E := E) m Q.Z (J.obj U) N,
+    ← canonicalTensorCoordinates_hom (C := C) (E := E) m X U (P.obj N)]
+  apply open_square_of_inverse_coordinates RX RZ J P Jf Pf Tx Tz fx fz sx sz ej ep
+    (derivedOpenImmersionLowerShriekProjectionIso B c.i)
+    (fun K L ↦ SystemProjectionFormula.finiteOpenTensorInv C.l E D C.different c.i
+      X.obj.hom (c.g ≫ Y.obj.hom) m K L) ?_ U M N k W b
+  intro K L
+  have hu : ∀ K, af.unit.app (RX.inverse.obj K) ≫ Pe.map (beta.hom.app K) =
+      RX.inverse.map (ai.unit.app K) ≫ tau.hom.app (J.obj K) :=
+    finiteIntrinsicOpenUnit (C := C) (E := E) m f c
+  have ht : ∀ V W,
+      RX.inverse.map ((di.app V).app W) ≫ tau.hom.app (((Functor.curry.obj Tz).obj V).obj W) ≫
+        Pe.map ((qz.hom.app V).app W) =
+      (qx.hom.app (P.obj V)).app (P.obj W) ≫
+        (fx.map (tau.hom.app V)).app _ ≫
+        (fx.obj _).map (ep.hom.app W) ≫ (df.app (RZ.inverse.obj V)).app (RZ.inverse.obj W) := by
+    intro V W
+    have h := mixed_curry_tensor_square RZ RX P Pe Pf fz fx Tz Tx ep
+      (leftDerivedUpperStarIsoMapDerivedCategory B c.i)
+      (finitePullbackTensorConstructionIso C.l E c.i m)
+      (leftDerivedUpperStarTensorNatIso B c.i) qz qx
+      (finiteIntrinsicTensorCompatible (C := C) (E := E) m f c) V W
+    simpa only [di, ti, curry_tensor_iso_inv, df, tau,
+      mapDerivedCategoryUpperStarDerivedTensorIso, mixedTensor,
+      Pe, Pf, fx, fz, B, Functor.comp_obj, Functor.prod_obj,
+      Functor.curry_obj_obj_obj, Functor.whiskeringLeft₂_obj_obj_obj_obj_obj] using h
+  have h := inverse_projection_of_unit_tensor ai af RX.inverse RZ.inverse
+    (Functor.curry.obj Tx) (Functor.curry.obj Tz) fx fz di df qx qz tau ep beta
+    (derivedOpenImmersionLowerShriekProjectionIso B c.i)
+    (derivedOpenImmersionLowerShriekProjectionIso_hom B c.i) hu ht K L
+  have hp : ((ai.projectionMap P (Functor.curry.obj Tx) (Functor.curry.obj Tz) di).app K).app L =
+      SystemProjectionFormula.finiteOpenTensorInv C.l E D C.different c.i
+        X.obj.hom (c.g ≫ Y.obj.hom) m K L := by
+    change ((ai.projectionMap P (Functor.curry.obj Tx) (Functor.curry.obj Tz)
+      (curry_tensor_iso P Tz Tx (finitePullbackTensorConstructionIso C.l E c.i m)).inv).app
+        K).app L = _
+    exact projectionMap_curry_tensor ai Tx Tz
+      (finitePullbackTensorConstructionIso C.l E c.i m) K L
+  have hP := congrArg (fun v ↦ RZ.inverse.map
+    (SystemProjectionFormula.inverseOnDomain v) ≫
+      beta.inv.app (Tx.obj (K, P.obj L)) ≫
+      Jf.map ((qx.hom.app K).app (P.obj L)) ≫
+      Jf.map ((fx.obj (RX.inverse.obj K)).map (ep.hom.app L))) hp
+  have h' := h.trans hP
+  simpa only [J, Jf, P, qx, qz, inverse_curried_tensor_coordinates,
+    NatIso.ofComponents_hom_app,
+    Functor.uncurry_obj_map, CategoryTheory.Functor.map_id, Category.comp_id, Functor.id_obj,
+    Functor.prod_obj, Functor.comp_obj, Functor.map_comp, Category.id_comp,
+    NatTrans.id_app, Functor.curry_obj_obj_obj,
+    beta, Iso.symm_inv, Iso.symm_hom, Iso.app_hom, Category.assoc] using h'
 
 end WeilConjectures.IntegralProjectionReduction

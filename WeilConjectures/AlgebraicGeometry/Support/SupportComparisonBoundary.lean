@@ -123,6 +123,27 @@ noncomputable def finiteComparisonSection (T : Scheme.{u}) (A : Type (u + 1)) [R
       (β := comparisonUpperStar (ModuleCat.{u + 1} A) T)
       (γ := 𝟭 (ModuleCat.{u + 1} A)) (finiteComparisonSectionUnit T A V)
 
+/-- The canonical comparison on supported hypercohomology in each integer degree.
+Source: blueprint comparison map clause
+(blueprint: lem-pur-support-comparison-boundary).
+Proof: whisker the unit-normalized derived support comparison by the canonical
+integer homology functor. -/
+noncomputable def supportComparisonHypercohomology (A : Type (u + 1)) [CommRing A]
+    {Z T : Scheme.{u}} (i : Z ⟶ T) [IsClosedImmersion i] (q : ℤ) :
+    Sheaf.supportHypercohomologyFunctor T.smallEtaleTopology
+        (ModuleCat.{u + 1} A) (Etale.supportRestrictionArrow i) q ⟶
+      (comparisonUpperStar (ModuleCat.{u + 1} A) T).mapDerivedCategoryPlus ⋙
+        Sheaf.supportHypercohomologyFunctor (Scheme.ProEt.topology T)
+          (ModuleCat.{u + 1} A) (ProEtale.supportRestrictionArrow i) q :=
+  by
+    simpa [Sheaf.supportHypercohomologyFunctor, etaleSupportKernel, supportSections] using
+      (Functor.whiskerRight (supportComparison A i)
+        (DerivedCategory.Plus.homologyFunctor (ModuleCat.{u + 1} A) q) ≫
+        (Functor.associator
+          (comparisonUpperStar (ModuleCat.{u + 1} A) T).mapDerivedCategoryPlus
+          (supportSections i A).rightDerivedFunctorPlus
+          (DerivedCategory.Plus.homologyFunctor (ModuleCat.{u + 1} A) q)).hom)
+
 /-- The canonical degreewise comparison on sections over an etale object.
 Source: blueprint comparison-map clauses
 (blueprint: lem-pur-support-comparison-boundary).

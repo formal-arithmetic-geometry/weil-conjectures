@@ -39,6 +39,28 @@ variable (S F G : C ⥤ A) [S.Additive] [F.Additive] [G.Additive]
 
 omit [HasDerivedCategory C] [HasDerivedCategory A] [EnoughInjectives C] in
 omit [HasDerivedCategory C] [HasDerivedCategory A] [EnoughInjectives C] in
+
+/-- The row of section complexes associated to a natural three-term sequence.
+Source: Stacks, Tag 0117. -/
+def injectiveBoundaryRow (I : CochainComplex.Plus C) :
+    ShortComplex (CochainComplex A ℤ) :=
+  ShortComplex.mk ((NatTrans.mapHomologicalComplex ι (.up ℤ)).app I.obj)
+    ((NatTrans.mapHomologicalComplex π (.up ℤ)).app I.obj) (by
+      rw [← NatTrans.comp_app, ← NatTrans.mapHomologicalComplex_comp, w]
+      ext n
+      simp)
+
+/-- Termwise exactness on injectives gives a short exact row of complexes.
+Source: Stacks, Tag 0117, degreewise criterion. -/
+theorem injectiveBoundaryRow_shortExact
+    (h : ∀ (I : C) [Injective I], (ShortComplex.mk (ι.app I) (π.app I)
+      (NatTrans.congr_app w I)).ShortExact)
+    (I : CochainComplex.Plus C) [∀ n : ℤ, Injective (I.obj.X n)] :
+    (injectiveBoundaryRow S F G ι π w I).ShortExact := by
+  apply HomologicalComplex.shortExact_of_degreewise_shortExact
+  intro n
+  exact h (I.obj.X n)
+
 /-- Exactness transports through a specified commuting triple of isomorphisms.
 Source: Stacks, Tag 0117. -/
 theorem exact_transport {R : ShortComplex A} (hR : R.Exact)

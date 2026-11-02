@@ -307,8 +307,6 @@ theorem boundedConstructibleIntegral_derivedHom {X : Scheme.{u}} (aX : X ⟶ Spe
           (c - b - 2 * (d : ℤ)) (e - a + 2 * (d : ℤ))
           ((reductionModIdeal Λ X (I ^ (n + 1))).obj
             (((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).obj L)) :=
-  ⟨⟨derivedComplete_derivedHom I hϖ hI hL.1, sorry⟩,
-    fun n _ _ _ _ hη hη' ↦ nonempty_iso_reductionModIdeal_derivedHom I hϖ hI n hη hη', sorry⟩
 
 by
   obtain ⟨a₀, b₀, hKab⟩ := hK.2

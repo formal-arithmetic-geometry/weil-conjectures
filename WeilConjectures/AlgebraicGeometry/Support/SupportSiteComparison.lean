@@ -34,6 +34,8 @@ import WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtale
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.ClosedImmersion
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Conservative
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Restriction
+public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleSiteComparisonFiniteLevel
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 
 /-!
 # Comparison of ordinary supported sections between the two sites
@@ -70,6 +72,92 @@ Source: blueprint proof paragraph 1 (blueprint: lem-pur-support-site-comparison)
 noncomputable abbrev etaleSupportKernel :=
   Sheaf.supportedSectionsFunctor T.smallEtaleTopology (ModuleCat.{u + 1} A)
     (Etale.supportRestrictionArrow i)
+
+/-- The support comparison unit is uniquely normalized by the adjunction-unit
+map on sections and the kernel inclusion.
+Source: blueprint proof paragraph 1 (blueprint: lem-pur-support-site-comparison).
+Proof: sections identify with evaluation at the final object.  The comparison
+adjunction unit commutes with restriction, so it maps the etale support kernel
+into the pro-etale kernel.  The kernel universal property gives the map and its
+inclusion equation gives uniqueness. -/
+theorem supportComparisonUnit_existsUnique :
+    ∃! c : etaleSupportKernel A i ⟶
+      comparisonUpperStar (ModuleCat.{u + 1} A) T ⋙ supportSections i A,
+      ∀ F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A),
+        c.app F ≫ kernel.ι
+          (((comparisonUpperStar (ModuleCat.{u + 1} A) T).obj F).obj.map
+            (supportRestrictionArrow i).op) =
+        (Sheaf.supportedSectionsInclusion T.smallEtaleTopology
+          (ModuleCat.{u + 1} A) (Etale.supportRestrictionArrow i)).app F ≫
+          (((comparisonAdjunction (ModuleCat.{u + 1} A) T).unit.app F).hom.app
+            (op (Scheme.Etale.mk (𝟙 T)))) := by
+  let c : etaleSupportKernel A i ⟶
+      comparisonUpperStar (ModuleCat.{u + 1} A) T ⋙ supportSections i A :=
+    { app := fun F ↦ (etaleSupportKernel A i).map
+        ((comparisonAdjunction (ModuleCat.{u + 1} A) T).unit.app F)
+      naturality := by
+        intro F G f
+        change (etaleSupportKernel A i).map f ≫
+            (etaleSupportKernel A i).map
+              ((comparisonAdjunction (ModuleCat.{u + 1} A) T).unit.app G) =
+          (etaleSupportKernel A i).map
+              ((comparisonAdjunction (ModuleCat.{u + 1} A) T).unit.app F) ≫
+            (etaleSupportKernel A i).map
+              ((comparisonLowerStar (ModuleCat.{u + 1} A) T).map
+                ((comparisonUpperStar (ModuleCat.{u + 1} A) T).map f))
+        rw [← Functor.map_comp, ← Functor.map_comp]
+        exact congrArg (etaleSupportKernel A i).map
+          ((comparisonAdjunction (ModuleCat.{u + 1} A) T).unit.naturality f) }
+  refine ⟨c, ?_, ?_⟩
+  · intro F
+    exact kernel.lift_ι _ _ _
+  · intro c' hc'
+    apply NatTrans.ext
+    funext F
+    apply (cancel_mono (kernel.ι
+      (((comparisonUpperStar (ModuleCat.{u + 1} A) T).obj F).obj.map
+        (supportRestrictionArrow i).op))).mp
+    exact (hc' F).trans (kernel.lift_ι _ _ _).symm
+
+/-- The canonical ordinary support comparison unit.
+Source: blueprint proof paragraph 1 (blueprint: lem-pur-support-site-comparison). -/
+noncomputable def supportComparisonUnit :=
+  Classical.choose (supportComparisonUnit_existsUnique A i)
+
+/-- The canonical bounded-below derived support comparison induced by the unit.
+Source: blueprint proof paragraph 1 (blueprint: lem-pur-support-site-comparison).
+Proof: apply the right-derived-functor-plus base-change construction to the
+unit-normalized ordinary support map, inserting the canonical identity
+unitors and the derived-category-plus identity comparison. -/
+noncomputable def supportComparison :
+    (etaleSupportKernel A i).rightDerivedFunctorPlus ⟶
+      (comparisonUpperStar (ModuleCat.{u + 1} A) T).mapDerivedCategoryPlus ⋙
+        (supportSections i A).rightDerivedFunctorPlus :=
+  (Functor.rightUnitor _).inv ≫
+    (Functor.isoWhiskerLeft _ (Functor.mapDerivedCategoryPlusIdIso
+      (ModuleCat.{u + 1} A))).inv ≫
+    Functor.rightDerivedFunctorPlusBaseChange
+      (G := etaleSupportKernel A i) (G' := supportSections i A)
+      (β := comparisonUpperStar (ModuleCat.{u + 1} A) T)
+      (γ := 𝟭 (ModuleCat.{u + 1} A))
+      ((Functor.rightUnitor _).hom ≫ supportComparisonUnit A i)
+
+private lemma compatibility_fac (F : C ⥤ E) [F.Additive]
+    (K : HomotopyCategory.Plus C) :
+    DerivedCategory.Plus.ι.map (F.rightDerivedFunctorPlusUnit.app K) ≫
+        F.rightDerivedFunctorPlusCompatibility.hom.app (DerivedCategory.Plus.Qh.obj K) =
+      F.rightDerivedFunctorUnit.app K.obj := by
+  have h := NatTrans.congr_app (Functor.rightDerivedNatTrans_fac
+    (F.rightDerivedFunctorPlus ⋙ DerivedCategory.Plus.ι)
+    (DerivedCategory.Plus.ι ⋙ F.rightDerivedFunctor)
+    F.rightDerivedFunctorPlusιUnit F.ιRightDerivedFunctorUnit
+    (HomotopyCategory.Plus.quasiIso C) (𝟙 _)) K
+  simpa only [Functor.rightDerivedFunctorPlusCompatibility,
+    Functor.rightDerivedUnique, Functor.rightDerivedNatIso_hom,
+    Iso.refl_hom, ObjectProperty.ι_obj,
+    Functor.rightDerivedFunctorPlusιUnit, Functor.ιRightDerivedFunctorUnit,
+    NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    NatTrans.id_app, Category.id_comp] using h
 
 section SupportDerivedNormalization
 

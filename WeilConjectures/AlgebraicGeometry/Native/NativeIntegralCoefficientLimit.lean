@@ -117,6 +117,24 @@ def nativeCoefficientTransition (n : ℕ) :
 /-- The actual positive uniformizer quotient diagram. -/
 def nativeCoefficientSystem := Functor.ofOpSequence (nativeCoefficientTransition l E X)
 
+/-- The actual coefficient reduction, as a morphism from the regular module. -/
+def nativeCoefficientProjection (n : ℕ) :
+    Mod.regular (condensedRingObj (twistIntegralRing l E) X) ⟶
+      nativeCoefficientLevel l E X n :=
+  Mod.homMk (coefficientMap (twistReduction l E n) X) (by
+    change μ[_] ≫ coefficientMap (twistReduction l E n) X =
+      _ ◁ coefficientMap (twistReduction l E n) X ≫ (_ ▷ _) ≫ μ[_]
+    rw [IsMonHom.mul_hom, tensorHom_def', Category.assoc])
+
+/-- The coefficient cone with its prescribed quotient projections. -/
+def nativeCoefficientCone : Cone (nativeCoefficientSystem l E X) :=
+  ⟨Mod.regular _, NatTrans.ofOpSequence (nativeCoefficientProjection l E X) (by
+    intro n
+    simp only [Functor.const_obj_map, nativeCoefficientSystem,
+      Functor.ofOpSequence_map_homOfLE_succ]
+    apply Mod.hom_ext
+    exact (twistReduction_comp l E X n).symm)⟩
+
 private abbrev continuousAb (A : Type u) [CommRing A] [TopologicalSpace A]
     [IsTopologicalRing A] :=
   (sheafCompose (Scheme.ProEt.topology X) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj
@@ -183,5 +201,125 @@ private def continuousCone : Cone (continuousSequence l E X) := by
   rw [Functor.ofOpSequence_map_homOfLE_succ]
   ext U f
   rfl
+
+private theorem continuousCone_isLimit : Nonempty (IsLimit (continuousCone l E X)) := by
+  let := spectralNorm.normedField ℚ_[l] E
+  let : TopologicalSpace (Padic.coefficientExtensionPositiveLimit l E) :=
+    Padic.coefficientExtensionPositiveLimitTopology l E
+  obtain ⟨⟨e, he, htop⟩, _⟩ := Padic.coefficientExtension_integers_profinite_tower.{u, u} l E
+  have heci : Continuous e.symm :=
+    (e.toEquiv.toHomeomorphOfContinuousOpen htop.continuous htop.isOpenMap).symm.continuous
+  refine ⟨?_⟩
+  apply isLimitOfReflects (sheafToPresheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+  apply evaluationJointlyReflectsLimits
+  intro U
+  apply isLimitOfReflects (forget Ab.{u + 1})
+  apply Classical.choice
+  apply (Types.isLimit_iff_bijective_sectionOfCone _).mpr
+  constructor
+  · intro f g hfg
+    apply ULift.ext
+    apply ContinuousMap.ext
+    intro x
+    apply e.injective
+    apply Subtype.ext
+    funext n
+    rw [he, he]
+    exact congrArg (fun s ↦ (s.val (op n)).down x) hfg
+  · intro s
+    let t (n : ℕ) : @ContinuousMap U.unop.left
+        (Padic.coefficientExtensionRing l E (n + 1)) _ ⊥ := (s.val (op n)).down
+    let b (x : U.unop.left) : Padic.coefficientExtensionPositiveLimit l E :=
+      ⟨fun n ↦ t n x, by
+        apply Subring.mem_iInf.mpr
+        intro n
+        have hn := s.property (homOfLE n.le_succ).op
+        simp only [Functor.comp_map, continuousSequence,
+          Functor.ofOpSequence_map_homOfLE_succ] at hn
+        exact congrArg (fun f ↦ f.down x) hn⟩
+    have hb : Continuous b := by
+      apply (continuous_induced_rng
+        (f := fun x : Padic.coefficientExtensionPositiveLimit l E ↦ x.val)
+        (g := b) (t₂ := @Pi.topologicalSpace ℕ
+          (fun n ↦ Padic.coefficientExtensionRing l E (n + 1)) (fun _ ↦ ⊥))).mpr
+      apply (continuous_pi (T := fun _ ↦ ⊥))
+      intro n
+      exact @ContinuousMap.continuous _ _ _ ⊥ (t n)
+    refine ⟨ULift.up (⟨fun x ↦ e.symm (b x), heci.comp hb⟩ :
+      C(U.unop.left, Padic.coefficientExtensionIntegers l E)), ?_⟩
+    apply Subtype.ext
+    funext n
+    let : TopologicalSpace (Padic.coefficientExtensionRing l E (n.unop + 1)) := ⊥
+    apply ULift.ext
+    apply ContinuousMap.ext
+    intro x
+    change Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n.unop + 1))
+      (e.symm (b x)) = _
+    rw [← he]
+    exact congrArg (fun t : Padic.coefficientExtensionPositiveLimit l E ↦ t.val n.unop)
+      (e.apply_symm_apply (b x))
+
+private def realizationTower : nativeCoefficientSystem l E X ⋙
+    Mod.forget (condensedRingObj (twistIntegralRing l E) X) ≅ continuousSequence l E X := by
+  let e (n : ℕ) :=
+    letI : TopologicalSpace (Padic.coefficientExtensionRing l E (n + 1)) := ⊥
+    letI : DiscreteTopology (Padic.coefficientExtensionRing l E (n + 1)) := ⟨rfl⟩
+    ContinuousRingUniverse.comparison X (Padic.coefficientExtensionRing l E (n + 1))
+  have he (n : ℕ) : IsIso (e n) := by
+    let : TopologicalSpace (Padic.coefficientExtensionRing l E (n + 1)) := ⊥
+    let : DiscreteTopology (Padic.coefficientExtensionRing l E (n + 1)) := ⟨rfl⟩
+    exact ContinuousRingUniverse.comparison_isIso X _
+  let t : nativeCoefficientSystem l E X ⋙ Mod.forget _ ⟶ continuousSequence l E X :=
+    NatTrans.ofOpSequence e (by
+      intro n
+      simp only [nativeCoefficientSystem, continuousSequence, Functor.comp_map,
+        Functor.ofOpSequence_map_homOfLE_succ]
+      let : TopologicalSpace (Padic.coefficientExtensionRing l E (n + 2)) := ⊥
+      let : DiscreteTopology (Padic.coefficientExtensionRing l E (n + 2)) := ⟨rfl⟩
+      let : TopologicalSpace (Padic.coefficientExtensionRing l E (n + 1)) := ⊥
+      let : DiscreteTopology (Padic.coefficientExtensionRing l E (n + 1)) := ⟨rfl⟩
+      exact realization_natural X (Padic.coefficientExtensionTransition l E (n + 1))
+        continuous_of_discreteTopology)
+  have (n : ℕᵒᵖ) : IsIso (t.app n) := he n.unop
+  exact NatIso.ofComponents (fun n ↦ asIso (t.app n)) (fun f ↦ t.naturality f)
+
+/-- The actual native coefficient cone is a limit in integral modules.
+Source: integral coefficient comparison (blueprint: lem-twist-native-coefficient-limit).
+Proof: compatible continuous quotient functions give a continuous map into their
+product subspace. The profinite coefficient tower homeomorphism reconstructs the
+unique integral-valued continuous function. Evaluation and the sheaf forgetful
+functors reflect the resulting limit. The canonical point-pullback realization
+comparisons commute with the quotient maps by adjunction naturality and are
+isomorphisms for the totally disconnected integer and finite coefficient rings.
+Transport the continuous limit through these comparisons and reflect through the
+module forgetful functor. The projections remain the specified reductions. -/
+theorem nativeCoefficientCone_isLimit : Nonempty (IsLimit (nativeCoefficientCone l E X)) := by
+  refine ⟨?_⟩
+  let := spectralNorm.normedField ℚ_[l] E
+  have : TotallyDisconnectedSpace (Padic.coefficientExtensionIntegers l E) :=
+    (Padic.coefficientExtension_integers_profinite_tower.{u, u} l E).2.2.2.1
+  have : IsIso (ContinuousRingUniverse.comparison X
+      (Padic.coefficientExtensionIntegers l E)) :=
+    ContinuousRingUniverse.comparison_isIso X _
+  let e := asIso (ContinuousRingUniverse.comparison X
+    (Padic.coefficientExtensionIntegers l E))
+  let c := (Mod.forget (condensedRingObj (twistIntegralRing l E) X)).mapCone
+    (nativeCoefficientCone l E X)
+  have hc : IsLimit ((Cone.postcompose (realizationTower l E X).hom).obj c) := by
+    apply IsLimit.ofIsoLimit (continuousCone_isLimit l E X).some
+    refine Cone.ext e.symm ?_
+    intro n
+    change (continuousCone l E X).π.app n = e.inv ≫
+      ((Mod.forget _).map ((nativeCoefficientCone l E X).π.app n) ≫
+        (realizationTower l E X).hom.app n)
+    apply (cancel_epi e.hom).mp
+    simp only [Iso.hom_inv_id_assoc]
+    let : TopologicalSpace (Padic.coefficientExtensionRing l E (n.unop + 1)) := ⊥
+    let : DiscreteTopology (Padic.coefficientExtensionRing l E (n.unop + 1)) := ⟨rfl⟩
+    exact (realization_natural X
+      (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n.unop + 1)))
+      (twistReduction_continuous l E n.unop)).symm
+  exact isLimitOfReflects (Mod.forget _)
+    ((IsLimit.postcomposeHomEquiv (realizationTower l E X) c) hc)
 
 end AlgebraicGeometry.ProEtale

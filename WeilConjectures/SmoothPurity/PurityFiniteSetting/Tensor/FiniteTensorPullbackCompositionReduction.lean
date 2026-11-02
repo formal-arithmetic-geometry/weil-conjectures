@@ -101,3 +101,128 @@ set_option maxHeartbeats 2000000 in
 -- Normalize the coefficient alias before comparing the two realization presentations.
 attribute [local implicit_reducible] finiteReduction ProEtale.scalarExtensionFunctor
 end WeilConjectures.PurityFiniteSetting
+
+private theorem presentation_unit (e : C ≌ D) [e.functor.Additive] [e.inverse.Additive]
+    (L : C ⥤ E) (G : E ⥤ F) [L.Additive] [G.Additive]
+    [PreservesFiniteLimits L] [PreservesFiniteColimits L]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G] (K : DerivedCategory C) :
+    (Functor.mapDerivedCategoryCompIso (e.inverse ⋙ L) G ≪≫
+      Functor.isoWhiskerRight (Functor.mapDerivedCategoryCompIso e.inverse L)
+        G.mapDerivedCategory).hom.app
+        (e.functor.mapDerivedCategory.obj K) ≫
+      (L.mapDerivedCategory ⋙ G.mapDerivedCategory).map
+        (e.mapDerivedCategory.unitIso.inv.app K) =
+      (Functor.mapDerivedCategorySquareIso (e.funInvIdAssoc (L ⋙ G)).symm).inv.app K := by
+  have ha :
+      ((Functor.mapDerivedCategoryCompIso e.inverse (L ⋙ G)) ≪≫
+        Functor.isoWhiskerLeft _ (Functor.mapDerivedCategoryCompIso L G)).hom =
+      (Functor.mapDerivedCategoryCompIso (e.inverse ⋙ L) G ≪≫
+        Functor.isoWhiskerRight (Functor.mapDerivedCategoryCompIso e.inverse L)
+          G.mapDerivedCategory).hom := by
+    simpa only [Iso.trans_hom, Functor.isoWhiskerLeft_hom,
+      Functor.isoWhiskerRight_hom] using
+        Functor.mapDerivedCategoryCompIso_assoc e.inverse L G
+  rw [← ha]
+  let q := Functor.mapDerivedCategorySquareIso (e.funInvIdAssoc (L ⋙ G)).symm
+  apply (cancel_mono (q.hom.app K)).mp
+  change _ = q.inv.app K ≫ q.hom.app K
+  rw [Iso.inv_hom_id_app, Category.assoc]
+  erw [q.hom.naturality]
+  rw [← Category.assoc, derived_square_coherence e L G]
+  dsimp only [Functor.comp_map]
+  erw [e.mapDerivedCategory.counitInv_app_functor]
+  erw [← CategoryTheory.Functor.map_comp, ← CategoryTheory.Functor.map_comp,
+    Iso.hom_inv_id_app]
+  erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id]
+  rfl
+
+private theorem finiteTensorPullbackComparison_realize (P : PurityFiniteSetting.{u})
+    (m : ℕ) (hm : 1 ≤ m) (hmn : m ≤ P.level) {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (K : DerivedCategory (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} P.Coefficient))) :
+    (P.finiteReduction m hm hmn X).map ((rawRealizationSquare P.Ring f).hom.app K) ≫
+      (ProEtale.SupportedEtaleTensorOrigin.scalarPresentation
+        (P.finiteReductionRingHom m hm hmn) X).hom.app ((P.smoothPurityPullback f).obj K) ≫
+      (sfIntrinsicDerivedEquivalence X (P.finiteReductionSetting m hm).Ring).functor.map
+        (P.finiteTensorPullbackComparison m hm hmn f K).hom =
+    (ProEtale.tensorPullbackIso (P.finiteReductionRingHom m hm hmn) f).inv.app
+        ((sfIntrinsicDerivedEquivalence Y P.Ring).functor.obj K) ≫
+      (proEtaleConstantRingDerivedPullback (P.finiteReductionSetting m hm).Ring f).map
+        ((ProEtale.SupportedEtaleTensorOrigin.scalarPresentation
+          (P.finiteReductionRingHom m hm hmn) Y).hom.app K) ≫
+      (rawRealizationSquare (P.finiteReductionSetting m hm).Ring f).hom.app
+        ((P.finiteTensorReduction m hm hmn Y).obj K) := by
+  dsimp (config := { instances := true }) only [Coefficient, coefficientCommRing] at K ⊢
+  rw [← rawRealizationSquare_model P f K]
+  delta finiteTensorPullbackComparison
+  dsimp (config := { instances := true }) only [Coefficient, coefficientCommRing]
+  simp only [Functor.preimageIso_hom,
+    Functor.map_preimage, Iso.trans_hom, Iso.symm_hom, Iso.app_hom,
+    Functor.mapIso_hom, Functor.map_comp, Category.assoc,
+    Iso.hom_inv_id_app_assoc]
+  simp only [← (P.finiteReduction m hm hmn X).map_comp_assoc,
+    Iso.hom_inv_id, CategoryTheory.Functor.map_id, Category.id_comp]
+  delta finiteReductionPullbackComparison
+  dsimp (config := { instances := true }) only [Coefficient, coefficientCommRing]
+  simp only [Iso.trans_hom,
+    Functor.mapIso_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv,
+    Category.assoc]
+  simp only [← (P.finiteReduction m hm hmn X).map_comp_assoc,
+    Iso.hom_inv_id_app]
+  erw [CategoryTheory.Functor.map_id]
+  rw [Category.id_comp]
+  erw [← reassoc_of% (((P.finiteReductionSetting m hm).finiteReductionRawPullbackModel
+    f).hom.naturality ((ProEtale.SupportedEtaleTensorOrigin.scalarPresentation
+      (P.finiteReductionRingHom m hm hmn) Y).hom.app K))]
+  erw [rawRealizationSquare_model (P.finiteReductionSetting m hm) f
+    ((P.finiteTensorReduction m hm hmn Y).obj K)]
+  rfl
+
+private theorem rawRealizationSquare_model (P : PurityFiniteSetting.{u})
+    {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (K : DerivedCategory (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} P.Coefficient))) :
+    (P.finiteReductionRawPullbackModel f).hom.app
+        ((sfIntrinsicDerivedEquivalence Y P.Ring).functor.obj K) ≫
+      (P.finiteTensorPullbackModel f K).hom =
+    (rawRealizationSquare P.Ring f).hom.app K := by
+  dsimp (config := { instances := true }) only [Coefficient, coefficientCommRing] at K ⊢
+  let dY : HasDerivedCategory.{u + 1} (Sheaf (ProEt.topology Y)
+      (ModuleCat.{u + 1} (ULift.{u + 1} P.Ring))) :=
+    inferInstanceAs (HasDerivedCategory.{u + 1}
+      (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} P.Coefficient)))
+  let dX : HasDerivedCategory.{u + 1} (Sheaf (ProEt.topology X)
+      (ModuleCat.{u + 1} (ULift.{u + 1} P.Ring))) :=
+    inferInstanceAs (HasDerivedCategory.{u + 1}
+      (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} P.Coefficient)))
+  let := sfIntrinsicModuleEquivalence_functor_additive P.Ring X
+  let := sfIntrinsicModuleEquivalence_functor_additive P.Ring Y
+  have hp := presentation_unit (dC := dY) (dE := dX)
+    (dD := inferInstanceAs (HasDerivedCategory.{u + 2}
+      (proEtaleRingModules Y (proEtaleConstantRing Y P.Ring))))
+    (dF := inferInstanceAs (HasDerivedCategory.{u + 2}
+      (proEtaleRingModules X (proEtaleConstantRing X P.Ring))))
+    (sfIntrinsicModuleEquivalence Y P.Ring)
+    (ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} P.Ring)) f)
+    (sfIntrinsicModuleEquivalence X P.Ring).functor K
+  have hn : (P.finiteReductionPullbackPresentation f).choose =
+      P.finiteReductionPullbackPresentationNative f :=
+    eq_of_heq (P.finiteReductionPullbackPresentation f).choose_spec.1
+  simp only [finiteReductionRawPullbackModel, hn, Iso.trans_hom, NatTrans.comp_app,
+    rawRealizationSquare, Functor.isoWhiskerLeft_hom, Iso.symm_hom]
+  rw [Category.assoc]
+  congr 1
+
+private def rawRealizationSquare (A : Type u) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    (sfIntrinsicDerivedEquivalence Y A).functor ⋙ proEtaleConstantRingDerivedPullback A f ≅
+      ProEtale.sfFixedDerivedPullback A f ⋙ (sfIntrinsicDerivedEquivalence X A).functor :=
+  Functor.isoWhiskerLeft _ (openSquareDerivedPullbackModel A f) ≪≫
+    (exactRealizationSquare A f).symm
+
+private def exactRealizationSquare (A : Type u) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    ProEtale.sfFixedDerivedPullback A f ⋙ (sfIntrinsicDerivedEquivalence X A).functor ≅
+      (sfIntrinsicDerivedEquivalence Y A).functor ⋙ sfIntrinsicDerivedPullback A f :=
+  Functor.mapDerivedCategorySquareIso
+    ((sfIntrinsicModuleEquivalence Y A).funInvIdAssoc
+      (ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) f ⋙
+        (sfIntrinsicModuleEquivalence X A).functor)).symm

@@ -348,6 +348,23 @@ private def tensorPullIso {X Y : Scheme.{u}} (f : Y ⟶ X)
     ← Category.assoc, IsIso.hom_inv_id, Category.id_comp]
   exact (Functor.LaxMonoidal.μ_natural F (B.map g).hom (D.map g)).symm
 
+private def tensorDiagramIso {Y : Scheme.{u}}
+    (R : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) [MonObj R]
+    (B : ℕᵒᵖ ⥤ Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) R)
+    {D D' : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}} (e : D ≅ D') :
+    tensorDiagram R B D ≅ tensorDiagram R B D' := by
+  refine NatIso.ofComponents
+    (fun n ↦ (Mod.tensorRightMapIso (A := R) (e.app n)).app (B.obj n)) ?_
+  intro n m g
+  apply Mod.hom_ext
+  dsimp only [tensorDiagram, Functor.comp_map, Functor.prod'_map, externalTensor,
+    Mod.tensorRight, Mod.tensorRightMap, Mod.tensorRightMapIso]
+  simp only [Mod.comp_hom']
+  change ((B.map g).hom ▷ _ ≫ _ ◁ D.map g) ≫ _ ◁ e.hom.app m =
+    _ ◁ e.hom.app n ≫ ((B.map g).hom ▷ _ ≫ _ ◁ D'.map g)
+  rw [Category.assoc, ← whiskerLeft_comp, e.hom.naturality,
+    whiskerLeft_comp, ← whisker_exchange_assoc]
+
 private theorem weaklyEtale_preservesLimits {X Y : Scheme.{u}} (f : Y ⟶ X)
     [WeaklyEtale f] (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
     [MonObj R] [IsCommMonObj R] :
@@ -366,5 +383,51 @@ private theorem weaklyEtale_preservesLimits {X Y : Scheme.{u}} (f : Y ⟶ X)
       Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (F.obj R) ⥤ _) :=
     reflectsLimitsOfShape_of_reflectsIsomorphisms
   exact preservesLimitsOfShape_of_reflects_of_preserves (F.mapMod R) (Mod.forget (F.obj R))
+
+/-- The actual integral inverse limit of finite root lines is locally regular.
+Source: coefficient twist integral construction and compatible primitive roots
+(blueprint: lem-twist-native-integral-local-line).
+Proof: view each finite level as the ordinary tensor of its quotient coefficient
+module with the corresponding root group. On the compatible primitive-root cover,
+the root diagram becomes the constant cyclic residue diagram. Inverse image
+commutes with these tensors. Tensor with the constant cyclic group is the quotient
+by l^(n+1); that scalar annihilates the quotient coefficient. Its canonical generator
+therefore identifies each level with the coefficient module. The generator maps
+commute with reduction, so these isomorphisms form an isomorphism of diagrams, not
+just independent isomorphisms of their terms. Weakly etale restriction preserves
+countable limits. The native coefficient cone is a limit with regular apex. Taking
+limits of the diagram isomorphism gives the desired local regularity, with no
+assumption that X is nonempty or Noetherian. -/
+theorem coefficientIntegralTwistOne_locally_trivial
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
+    [FiniteDimensional ℚ_[l] E] (X : Scheme.{u}) (hl : IsUnit (l : Γ(X, ⊤))) :
+    ∃ 𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ i : 𝒰.I₀,
+      Nonempty (((upperStar Ab.{u + 1} (𝒰.f i)).mapMod
+        (condensedRingObj (twistIntegralRing l E) X)).obj
+          (coefficientIntegralTwistOne l E X) ≅ 𝟙_ _) := by
+  obtain ⟨𝒰, h𝒰⟩ := exists_compatible_roots_diagram_basis X l hl
+  refine ⟨𝒰, fun i ↦ ?_⟩
+  let R := condensedRingObj (twistIntegralRing l E) X
+  let F := upperStar Ab.{u + 1} (𝒰.f i)
+  let H := F.mapMod R
+  have : WeaklyEtale (𝒰.f i) :=
+    Scheme.proetalePrecoverage_le_precoverage_weaklyEtale _ 𝒰.mem₀ (.mk i)
+  have : PreservesLimitsOfShape ℕᵒᵖ H := weaklyEtale_preservesLimits (𝒰.f i) R
+  let σ := (Order.gc_pred_succ (α := ℕ)).monotone_u.functor.op
+  let eRoots : positiveRoots X l ⋙ F ≅ positiveConstants X l ⋙ F :=
+    Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft σ (h𝒰 i).some ≪≫
+      (Functor.associator _ _ _).symm
+  let e : coefficientIntegralTwistSystem l E X ⋙ H ≅
+      nativeCoefficientSystem l E X ⋙ H :=
+    Functor.isoWhiskerRight (rootTensorIso l E X) H ≪≫
+    tensorPullIso (𝒰.f i) R (nativeCoefficientSystem l E X) (positiveRoots X l) ≪≫
+    tensorDiagramIso (F.obj R) (nativeCoefficientSystem l E X ⋙ H) eRoots ≪≫
+    (tensorPullIso (𝒰.f i) R (nativeCoefficientSystem l E X) (positiveConstants X l)).symm ≪≫
+    Functor.isoWhiskerRight (constantTensorIso l E X).symm H
+  exact ⟨preservesLimitIso H (coefficientIntegralTwistSystem l E X) ≪≫
+    HasLimit.isoOfNatIso e ≪≫
+    (preservesLimitIso H (nativeCoefficientSystem l E X)).symm ≪≫
+    H.mapIso ((nativeCoefficientCone_isLimit l E X).some.conePointUniqueUpToIso
+      (limit.isLimit (nativeCoefficientSystem l E X))).symm ≪≫ F.mapModUnitIso.symm⟩
 
 end AlgebraicGeometry.ProEtale

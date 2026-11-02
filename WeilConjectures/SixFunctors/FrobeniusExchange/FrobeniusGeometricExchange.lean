@@ -124,6 +124,20 @@ theorem fiberMap_properties :
   · exact MorphismProperty.overPullbackMap (P := @LocallyOfFiniteType) _ f₀ inferInstance
   · exact MorphismProperty.overPullbackMap (P := @QuasiCompact) _ f₀ inferInstance
 
+/-- Install only the inherited proof instances used by the three integral stages.
+Source: blueprint geometric-fiber convention
+(blueprint: def-weil-frobenius-square-exchange). -/
+instance fiberLocallyFiniteType (T₀ : Over (Spec (.of D.k₀)))
+    [LocallyOfFiniteType T₀.hom] [QuasiCompact T₀.hom] :
+    LocallyOfFiniteType (D.geometricFiber T₀).hom := (fiber_finiteType D T₀).1
+
+/-- Quasi-compactness of the same actual geometric fiber.
+Source: blueprint geometric-fiber convention
+(blueprint: def-weil-frobenius-square-exchange). -/
+instance fiberQuasiCompact (T₀ : Over (Spec (.of D.k₀)))
+    [LocallyOfFiniteType T₀.hom] [QuasiCompact T₀.hom] :
+    QuasiCompact (D.geometricFiber T₀).hom := (fiber_finiteType D T₀).2
+
 /-- Direct integral Frobenius exchange with the finite-field and prime hypotheses.
 Source: blueprint `def:weil-direct-image-object`
 (blueprint: def-weil-frobenius-square-exchange). -/

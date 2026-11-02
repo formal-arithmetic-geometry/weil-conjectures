@@ -285,6 +285,16 @@ def sourceToOrigin [Finite A] {X Y : Scheme.{u}} (f : X ⟶ Y) (L : DerivedCateg
   (proSource A f L).map (originInverse A Y K) ≫
     (sourceAtOriginIso A f L ((origin A Y).obj K)).inv
 
+/-- The reverse source comparison, using the actual origin counit.
+Source: sk-thm-smooth-purity (blueprint: def-pur-finite-smooth-canonical-maps). -/
+def sourceFromOrigin [Finite A] {X Y : Scheme.{u}} (f : X ⟶ Y) (L : DerivedCategoryModule A X)
+    (K : proCategory A Y) :
+    (comparison A X).obj ((puritySource A f L).obj ((origin A Y).obj K)) ⟶
+      (proSource A f L).obj K :=
+  (sourceAtOriginIso A f L ((origin A Y).obj K)).hom ≫
+    (proSource A f L).map
+      ((ProEtale.derivedComparisonAdjunction (ModuleCat.{u + 1} A) Y).counit.app K)
+
 /-- The actual transported purity map on pro-etale complexes, with the actual derived
 pullback/tensor source and nu^* f^times Rnu_* target.
 Source: sk-thm-smooth-purity (blueprint: def-pur-finite-smooth-canonical-maps). -/

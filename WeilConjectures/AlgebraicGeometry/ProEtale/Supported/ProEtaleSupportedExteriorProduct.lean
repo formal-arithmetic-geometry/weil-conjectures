@@ -795,6 +795,15 @@ noncomputable abbrev supportedSectionsDerived
     (i : Z ⟶ X) [IsClosedImmersion i] :=
   (supportSections i A).rightDerivedFunctor
 
+/-- Derive the normalized ordinary adjunction with its exact left adjoint.
+Source: blueprint `def-pur-supported-exterior-product`, K-flat and injective derivation
+(blueprint: def-pur-proetale-supported-exterior-product). -/
+noncomputable def supportedCoefficientDerivedAdjunction
+    (A : Type (u + 1)) [CommRing A] [Finite A] {Z X : Scheme.{u}}
+    (i : Z ⟶ X) [IsClosedImmersion i] [IsLocallyNoetherian X] :
+    (supportedCoefficients A i).mapDerivedCategory ⊣ supportedSectionsDerived A i :=
+  (supportedCoefficientAdjunction A i).mapDerivedCategoryRightDerivedAdjunction
+
 /-- The pointwise constant-presheaf tensor comparison.
 Source: blueprint `def-pur-supported-exterior-product`, constant section tensor
 (blueprint: def-pur-proetale-supported-exterior-product). -/
