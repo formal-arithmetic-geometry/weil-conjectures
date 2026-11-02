@@ -408,6 +408,71 @@ theorem pbcScalarPullMate_app
         (((pbcActualModulePull g (pbcIntegralDatum l F)).mapHomologicalComplex (.up ℤ)).obj K) := by
   sorry
 
+/-- The termwise restriction/pullback comparison is the localized ordinary comparison.
+Source: Stacks Tag 06YY (blueprint: lem-pbc-scalar-ambient-operation-comparisons).
+Proof: unfold it into the two composition isomorphisms and the derived image of the
+ordinary comparison, and apply their factorization identities on complexes. -/
+theorem pbcScalarRestrictionPullback_app
+    (K : CochainComplex (pbcModules Y (pbcAdicCompletion Y (pbcIntegralDatum l F))) ℤ) :
+    (pbcScalarRestrictionPullback l E F i g).inv.app (DerivedCategory.Q.obj K) ≫
+        (pbcDerivedRestrict (pbcScalarCoefficientMap l E F i X)).map
+          ((proEtaleRingModulePullback g (pbcAdicCompletion Y (pbcIntegralDatum l F))
+            (pbcAdicCompletion X (pbcIntegralDatum l F))
+            (pbcCompletedCoefficientIso g (pbcIntegralDatum l F))).mapDerivedCategoryFactors.hom.app
+              K) ≫
+        (pbcRestrict (pbcScalarCoefficientMap l E F i X)).mapDerivedCategoryFactors.hom.app
+          (((proEtaleRingModulePullback g (pbcAdicCompletion Y (pbcIntegralDatum l F))
+            (pbcAdicCompletion X (pbcIntegralDatum l F))
+            (pbcCompletedCoefficientIso g (pbcIntegralDatum l F))).mapHomologicalComplex
+              (.up ℤ)).obj K) =
+      (proEtaleRingDerivedPullback g (pbcAdicCompletion Y (pbcIntegralDatum l E))
+          (pbcAdicCompletion X (pbcIntegralDatum l E))
+          (pbcCompletedCoefficientIso g (pbcIntegralDatum l E))).map
+          ((pbcRestrict (pbcScalarCoefficientMap l E F i Y)).mapDerivedCategoryFactors.hom.app K) ≫
+        (proEtaleRingModulePullback g (pbcAdicCompletion Y (pbcIntegralDatum l E))
+          (pbcAdicCompletion X (pbcIntegralDatum l E))
+          (pbcCompletedCoefficientIso g (pbcIntegralDatum l E))).mapDerivedCategoryFactors.hom.app
+            (((pbcRestrict (pbcScalarCoefficientMap l E F i Y)).mapHomologicalComplex
+              (.up ℤ)).obj K) ≫
+        DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
+          (proEtaleRingRestrictionPullbackInv g
+            (pbcAdicCompletion Y (pbcIntegralDatum l E))
+            (pbcAdicCompletion Y (pbcIntegralDatum l F))
+            (pbcAdicCompletion X (pbcIntegralDatum l E))
+            (pbcAdicCompletion X (pbcIntegralDatum l F))
+            (pbcScalarCoefficientMap l E F i Y) (pbcScalarCoefficientMap l E F i X)
+            (pbcCompletedCoefficientIso g (pbcIntegralDatum l E))
+            (pbcCompletedCoefficientIso g (pbcIntegralDatum l F))
+            (pbcScalarCoefficientInverseSquare l E F i g)) (.up ℤ)).app K) := by
+  sorry
+
+-- The final diagram chase, over an abstract category.
+private theorem scalarPullMate_chase {C : Type*} [Category C]
+    {O1 O2 O3 O4 O5 O6 O7 O8 O9 O10 O11 O12 : C}
+    (a : O1 ⟶ O2) (t : O2 ⟶ O3) (r : O1 ⟶ O4) (b : O4 ⟶ O3)
+    (fy1 : O1 ⟶ O6) (fy2 : O2 ⟶ O7) (eEP : O6 ⟶ O7) (cPE : O7 ⟶ O8)
+    (ΦE : O6 ⟶ O9) (ιE : O9 ⟶ O8) (θ0 : O8 ⟶ O5) (pb : O9 ⟶ O10) (rι : O10 ⟶ O5)
+    (ΦF : O4 ⟶ O11) (fXh2 : O11 ⟶ O10) (ιF : O11 ⟶ O12) (fXh1 : O12 ⟶ O5)
+    (cPF : O3 ⟶ O12) (hZ : Mono (cPF ≫ fXh1))
+    (hΘ : fy2 ≫ cPE ≫ θ0 = t ≫ cPF ≫ fXh1)
+    (hn : fy1 ≫ eEP = a ≫ fy2)
+    (hE : eEP ≫ cPE = ΦE ≫ ιE)
+    (hF : b ≫ cPF = ΦF ≫ ιF)
+    (hfX : ιF ≫ fXh1 = fXh2 ≫ rι)
+    (hρ : r ≫ ΦF ≫ fXh2 = fy1 ≫ ΦE ≫ pb)
+    (hord : ιE ≫ θ0 = pb ≫ rι) :
+    a ≫ t = r ≫ b := by
+  apply (cancel_mono (cPF ≫ fXh1)).1
+  calc (a ≫ t) ≫ cPF ≫ fXh1 = a ≫ fy2 ≫ cPE ≫ θ0 := by rw [Category.assoc, hΘ]
+    _ = fy1 ≫ eEP ≫ cPE ≫ θ0 := by rw [← Category.assoc a, ← hn, Category.assoc]
+    _ = fy1 ≫ ΦE ≫ ιE ≫ θ0 := by rw [← Category.assoc eEP, hE, Category.assoc]
+    _ = fy1 ≫ ΦE ≫ pb ≫ rι := by rw [hord]
+    _ = r ≫ ΦF ≫ fXh2 ≫ rι := by
+      simpa only [Category.assoc] using (congrArg (· ≫ rι) hρ).symm
+    _ = r ≫ ΦF ≫ ιF ≫ fXh1 := by rw [hfX]
+    _ = (r ≫ b) ≫ cPF ≫ fXh1 := by
+      rw [Category.assoc, ← Category.assoc b, hF, Category.assoc]
+
 /-- The restriction/pullback mate identity on a flat-term K-flat representative whose
 restriction is again flat-term K-flat.
 Source: Stacks Tags 03EK, 06YY, 0D6D and 07A6
@@ -432,7 +497,58 @@ theorem pbcScalarPullMate_restriction_app
       whiskerRight (pbcPullComparison g (pbcIntegralDatum l F))
         (pbcDerivedRestrict (pbcScalarCoefficientMap l E F i X))).app
         (DerivedCategory.Q.obj K) := by
-  sorry
+  let resY := pbcRestrict (pbcScalarCoefficientMap l E F i Y)
+  let resX := pbcRestrict (pbcScalarCoefficientMap l E F i X)
+  let dE := pbcIntegralDatum l E
+  let dF := pbcIntegralDatum l F
+  have := pbcActualPullComplexCounit_isIso g dF K hK
+  have hΘ := pbcScalarPullMate_app l E F i g K hK hR
+  have hE := pbcPullComparison_app g dE _ hR
+  have hF := congrArg resX.mapDerivedCategory.map (pbcPullComparison_app g dF K hK)
+  rw [Functor.map_comp, Functor.map_comp] at hF
+  have hρ := pbcScalarRestrictionPullback_app l E F i g K
+  have hn := (pbcPullComparison g dE).naturality (resY.mapDerivedCategoryFactors.hom.app K)
+  have hfX := resX.mapDerivedCategoryFactors.hom.naturality
+    ((NatTrans.mapHomologicalComplex (pbcModulePullIso g dF).hom (.up ℤ)).app K)
+  have hord : DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
+        (pbcModulePullIso g dE).hom (.up ℤ)).app ((resY.mapHomologicalComplex (.up ℤ)).obj K)) ≫
+      DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
+        (pbcScalarOrdinaryRestrictionPull l E F i g) (.up ℤ)).app K) =
+      DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex (proEtaleRingRestrictionPullbackInv g
+            (pbcAdicCompletion Y dE) (pbcAdicCompletion Y dF)
+            (pbcAdicCompletion X dE) (pbcAdicCompletion X dF)
+            (pbcScalarCoefficientMap l E F i Y) (pbcScalarCoefficientMap l E F i X)
+            (pbcCompletedCoefficientIso g dE) (pbcCompletedCoefficientIso g dF)
+            (pbcScalarCoefficientInverseSquare l E F i g)) (.up ℤ)).app K) ≫
+        DerivedCategory.Q.map ((resX.mapHomologicalComplex (.up ℤ)).map
+          ((NatTrans.mapHomologicalComplex (pbcModulePullIso g dF).hom (.up ℤ)).app K)) := by
+    have hc : (NatTrans.mapHomologicalComplex
+        (pbcModulePullIso g dE).hom (.up ℤ)).app ((resY.mapHomologicalComplex (.up ℤ)).obj K) ≫
+        (NatTrans.mapHomologicalComplex (pbcScalarOrdinaryRestrictionPull l E F i g) (.up ℤ)).app K =
+        (NatTrans.mapHomologicalComplex (proEtaleRingRestrictionPullbackInv g
+            (pbcAdicCompletion Y dE) (pbcAdicCompletion Y dF)
+            (pbcAdicCompletion X dE) (pbcAdicCompletion X dF)
+            (pbcScalarCoefficientMap l E F i Y) (pbcScalarCoefficientMap l E F i X)
+            (pbcCompletedCoefficientIso g dE) (pbcCompletedCoefficientIso g dF)
+            (pbcScalarCoefficientInverseSquare l E F i g)) (.up ℤ)).app K ≫
+          (resX.mapHomologicalComplex (.up ℤ)).map
+            ((NatTrans.mapHomologicalComplex (pbcModulePullIso g dF).hom (.up ℤ)).app K) := by
+      apply HomologicalComplex.hom_ext
+      intro n
+      exact NatTrans.congr_app (pbcScalarOrdinaryRestrictionPull_eq l E F i g) (K.X n)
+    have hq := congrArg DerivedCategory.Q.map hc
+    exact (DerivedCategory.Q.map_comp _ _).symm.trans (hq.trans (DerivedCategory.Q.map_comp _ _))
+  exact scalarPullMate_chase _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+    (by
+      have h1 := Functor.map_isIso (pbcDerivedRestrict (pbcScalarCoefficientMap l E F i X))
+        (pbcActualPullComplexCounit g (pbcIntegralDatum l F) K)
+      have h2 : Mono ((pbcRestrict (pbcScalarCoefficientMap l E F i X)).mapDerivedCategoryFactors.hom.app
+          (((pbcActualModulePull g (pbcIntegralDatum l F)).mapHomologicalComplex (.up ℤ)).obj K)) :=
+        inferInstanceAs (Mono ((pbcRestrict (pbcScalarCoefficientMap l E F i X)).mapDerivedCategoryFactors.app
+          (((pbcActualModulePull g (pbcIntegralDatum l F)).mapHomologicalComplex (.up ℤ)).obj K)).hom)
+      refine @mono_comp _ _ _ _ _ _ ?_ _ ?_
+      · infer_instance
+      · exact h2) hΘ hn hE hF hfX hρ hord
 
 -- Natural transformations out of a derived category agree once they agree on a
 -- resolving class of complexes.
