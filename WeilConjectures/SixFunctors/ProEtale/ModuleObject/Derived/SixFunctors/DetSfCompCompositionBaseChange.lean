@@ -39,6 +39,7 @@ condensed ring satisfying the published `IsLocalizingAdmissibleCoefficient â„“ Î
 -/
 
 @[expose] public section
+set_option linter.privateModule false
 
 set_option autoImplicit false
 set_option backward.defeqAttrib.useBackward true

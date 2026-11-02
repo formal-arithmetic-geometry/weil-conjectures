@@ -152,9 +152,9 @@ theorem mateOpenImmersion
   have hs : ∀ K : (localizingClosureProEtale Λ X).FullSubcategory,
       localizingClosureProEtale Λ U ((upperStar Λ j).mapDerivedCategory.obj K.obj) := by
     let F := (upperStar Λ j).mapDerivedCategory
-    have : F.IsLeftAdjoint :=
-      ((derivedUpperStarLowerStarAdjunction Λ j).ofNatIsoLeft
-        (leftDerivedUpperStarIsoMapDerivedCategory Λ j)).isLeftAdjoint
+    let adjF := (derivedUpperStarLowerStarAdjunction Λ j).ofNatIsoLeft
+      (leftDerivedUpperStarIsoMapDerivedCategory Λ j)
+    have : F.IsLeftAdjoint := adjF.isLeftAdjoint
     intro K P hP hS
     let := hP.1
     let := hP.2.1
@@ -162,6 +162,8 @@ theorem mateOpenImmersion
       refine ⟨inferInstance, inferInstance, ?_⟩
       intro I D hD hobj
       let := hD
+      have : PreservesColimit D F :=
+        adjF.leftAdjoint_preservesColimits.preservesColimitsOfShape.preservesColimit
       have : HasColimit (D ⋙ F) := inferInstance
       exact P.prop_of_iso (preservesColimitIso F D).symm
         (hP.2.2 (D ⋙ F) inferInstance hobj)

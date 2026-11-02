@@ -61,7 +61,8 @@ attribute [-instance] internalMonoidal internalTensorCommShift in
 private theorem native_unit_comparison
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (Y : Scheme.{u}) :
-    HEq (secondTraceUnitIso Λ Y) (leftDerivedUpperStarUnitIso Λ (ProjectiveLine Y ↘ Y)) := by
+    HEq (secondTraceUnitIso Λ Y)
+      (CondensedRing.leftDerivedUpperStarUnitIso Λ (ProjectiveLine Y ↘ Y)) := by
   unfold secondTraceUnitIso secondTracePullMonoidal internalMonoidal
     internalTensorBundle nativeTensorBundle moduleObjectDerivedPullback
   rfl
@@ -90,7 +91,7 @@ private theorem native_projection_evaluation
     moduleObjectProjectionMate Λ f M K ≫
       (moduleObjectDerivedPushforward Λ f).map
         (M ◁ ((moduleObjectDerivedPullback Λ f).map t ≫
-          (leftDerivedUpperStarUnitIso Λ f).hom) ≫ (ρ_ M).hom) =
+          (CondensedRing.leftDerivedUpperStarUnitIso Λ f).hom) ≫ (ρ_ M).hom) =
       ((moduleObjectDerivedPushforward Λ f).obj M ◁ t) ≫
         (ρ_ ((moduleObjectDerivedPushforward Λ f).obj M)).hom := by
   unfold moduleObjectDerivedPullback moduleObjectDerivedPushforward
@@ -99,7 +100,8 @@ private theorem native_projection_evaluation
     Functor.OplaxMonoidal.right_unitality_hom (CondensedRing.upperStar Λ f).leftDerivedFunctor N
   rw [leftDerivedUpperStarOplaxMonoidal_η] at hu
   exact scalar_evaluation_aux (CondensedRing.derivedUpperStarLowerStarAdjunction Λ f)
-    (moduleObjectDerivedTensorComparison Λ f) (leftDerivedUpperStarUnitIso Λ f).hom hu M K t
+    (moduleObjectDerivedTensorComparison Λ f) (CondensedRing.leftDerivedUpperStarUnitIso Λ f).hom
+    hu M K t
 
 end NativeProjection
 
@@ -111,7 +113,7 @@ private theorem normalized_projection_evaluation
     (U : (moduleObjectDerivedPullback Λ (ProjectiveLine Y ↘ Y)).obj
       (𝟙_ (DerivedCategory (Modules Λ Y))) ≅
       𝟙_ (DerivedCategory (Modules Λ (ProjectiveLine Y))))
-    (hU : HEq U (leftDerivedUpperStarUnitIso Λ (ProjectiveLine Y ↘ Y)))
+    (hU : HEq U (CondensedRing.leftDerivedUpperStarUnitIso Λ (ProjectiveLine Y ↘ Y)))
     (M : DerivedCategory (Modules Λ (ProjectiveLine Y)))
     (K : DerivedCategory (Modules Λ Y))
     (t : K ⟶ 𝟙_ (DerivedCategory (Modules Λ Y))) :
@@ -127,7 +129,8 @@ private theorem normalized_projection_evaluation
   have hm : a (ProjectiveLine Y ↘ Y) M K =
       moduleObjectProjectionMate Λ (ProjectiveLine Y ↘ Y) M K :=
     eq_of_heq (ha (ProjectiveLine Y ↘ Y) M K)
-  have hunit : U = leftDerivedUpperStarUnitIso Λ (ProjectiveLine Y ↘ Y) := eq_of_heq hU
+  have hunit : U = CondensedRing.leftDerivedUpperStarUnitIso Λ (ProjectiveLine Y ↘ Y) :=
+    eq_of_heq hU
   rw [hm, hunit]
   exact native_projection_evaluation Λ (ProjectiveLine Y ↘ Y) M K t
 

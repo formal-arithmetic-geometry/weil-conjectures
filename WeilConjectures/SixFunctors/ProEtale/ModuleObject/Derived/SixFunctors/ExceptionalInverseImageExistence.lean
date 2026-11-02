@@ -48,6 +48,7 @@ category, with the recorded finite constant-model constructibility convention.
 -/
 
 @[expose] public section
+set_option linter.privateModule false
 
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048

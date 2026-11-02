@@ -26,6 +26,7 @@ and sk-thm-int-restriction-glue.proof.md, paragraph (2).
 -/
 
 @[expose] public section
+set_option linter.privateModule false
 
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048

@@ -23,6 +23,7 @@ expanded by det-thm-int-restriction-glue.
 -/
 
 @[expose] public noncomputable section
+set_option linter.privateModule false
 
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048

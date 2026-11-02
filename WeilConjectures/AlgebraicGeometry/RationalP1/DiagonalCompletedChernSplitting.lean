@@ -46,6 +46,8 @@ private theorem map_split
   rw [he]
   infer_instance
 
+set_option maxHeartbeats 1000000 in
+-- The derived biproduct structure on completed coefficients is found by unfolding.
 /-- A normalized completed Chern adjunct is the second component of a splitting.
 
 Source: blueprint latest, diagonal-tower trace proof, paragraph (1).

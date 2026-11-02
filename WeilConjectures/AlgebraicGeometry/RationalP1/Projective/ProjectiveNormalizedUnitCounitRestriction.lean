@@ -34,6 +34,7 @@ Well-definedness (1)--(3)
 -/
 
 @[expose] public noncomputable section
+set_option linter.privateModule false
 
 set_option autoImplicit false
 set_option Elab.async false

@@ -21,6 +21,7 @@ Source: blueprint det-sf-comp-composition-base-change, proof (3), before applyin
 -/
 
 @[expose] public noncomputable section
+set_option linter.privateModule false
 set_option autoImplicit false
 universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry Scheme

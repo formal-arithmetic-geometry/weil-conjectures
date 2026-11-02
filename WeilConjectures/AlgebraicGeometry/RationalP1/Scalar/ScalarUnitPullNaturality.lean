@@ -200,7 +200,8 @@ attribute [-instance] internalMonoidal internalTensorCommShift in
 private theorem native_unit_comparison
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (Y : Scheme.{u}) :
-    HEq (secondTraceUnitIso Λ Y) (leftDerivedUpperStarUnitIso Λ (ProjectiveLine Y ↘ Y)) := by
+    HEq (secondTraceUnitIso Λ Y)
+      (CondensedRing.leftDerivedUpperStarUnitIso Λ (ProjectiveLine Y ↘ Y)) := by
   unfold secondTraceUnitIso secondTracePullMonoidal internalMonoidal
     internalTensorBundle nativeTensorBundle moduleObjectDerivedPullback
   rfl
@@ -283,7 +284,7 @@ private theorem scalar_unit_pull_adjunct
   erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
   unfold internalMonoidal internalTensorBundle nativeTensorBundle
     moduleObjectDerivedPullback at U hu_global
-  have hu' : U = leftDerivedUpperStarUnitIso Λ (ProjectiveLine Y ↘ Y) :=
+  have hu' : U = CondensedRing.leftDerivedUpperStarUnitIso Λ (ProjectiveLine Y ↘ Y) :=
     eq_of_heq hu_global
   erw [hU, hu']
   erw [CondensedRing.leftDerivedUpperStarUnitIso_hom_eq,
