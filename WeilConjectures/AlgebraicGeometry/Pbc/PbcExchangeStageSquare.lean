@@ -161,21 +161,23 @@ rational stage categories, as below. Use naturality of `τ F` along
 `pbcScalarIntegralComparison`, and of `pbcScalarIntegralComparison` along the integral
 exchange. What remains is the localization of `pbcScalarCompletedExchange` (stated
 above, not yet proved).
-Transport step, checked to elaborate after the destructuring and substitution:
-`have e := hom_eq_of_heq_objects ?hx ?hy (bRf h rfl rfl K)`, after
-`simp only [eqToIso_refl, Iso.refl_symm, Functor.isoWhiskerRight_refl,
-Functor.isoWhiskerLeft_refl, Iso.refl_trans, Iso.trans_refl]` on the BetaSpec. Both
-endpoint goals close by
-`simp only [Functor.comp_obj]; rw [pbcIntegralScalarExtension_eq_tensor]; rfl`.
-The result is
-`SIC_Y⁻¹ ≫ β ≫ Rf_F.map SIC_X = eqToHom _ ≫ ρ ≫ eqToHom _`, where `ρ` is the chosen
-`pbcScalarDirectImage_rational` comparison. This works for every `E ≤ F` and needs no
-`eq_of_heq` on concrete types; that call times out at `whnf`.
-Still to do: rewrite `ρ`, and the pullback analogues, with the HEq specs of
-`pbcScalar*_rational` by the same lemma. For `E ≠ F`, `pbcScalarIntegralComparison_ne`
-with `iso_app_of_heq_functor` and `pbcScalarExtension_eq_rational` show that the
-comparison components are `eqToHom`s; `E = F` needs `pbcIntegralScalarUnit` instead.
-Then cancel the `eqToHom`s and conclude from `pbcScalarCompletedExchange`. -/
+Formalized below (before the `sorry`):
+* The records are destructed and `Φ` substituted.
+* The four BetaSpec identities are made homogeneous by `hom_eq_of_heq_objects`. The
+  endpoint goals close by `pbcIntegralScalarExtension_eq_tensor`.
+* The four `pbcScalar*_rational` specs and `hτ E K` are made homogeneous with `rfl`
+  endpoints and substituted into them.
+* The direct-image equations are solved for `β ≫ Rf_F.map SIC` by `Iso.inv_comp_eq`.
+The same rewrite for the pullback equations (`← Functor.mapIso_inv, Iso.inv_comp_eq`)
+times out at `whnf`, so it is left out.
+Still to do:
+* Solve the pullback equations in another way, for example by `cancel_epi`.
+* For `E ≠ F`, rewrite the comparison components as `eqToHom`s with
+  `pbcScalarIntegralComparison_ne`, `iso_app_of_heq_functor` and
+  `pbcScalarExtension_eq_rational`. `E = F` needs `pbcIntegralScalarUnit` instead.
+* Move `τ F` along the comparison by naturality and use `hτ F` at the integral scalar
+  extension.
+* Cancel the `eqToHom`s and conclude from `pbcScalarCompletedExchange`. -/
 theorem pbcExchangeStageSquare_integral
     (f : X ⟶ Y) (f' : X' ⟶ Y') (g : Y' ⟶ Y) (g' : X' ⟶ X)
     (sq : ChosenCartesianSquare g' f' f g)
@@ -295,7 +297,12 @@ theorem pbcExchangeStageSquare_integral
   have rLg₁ := hom_eq_of_heq_objects rfl rfl rLg
   have rLg'₁ := hom_eq_of_heq_objects rfl rfl rLg'
   have hτE₁ := hom_eq_of_heq_objects rfl rfl hτE
-  simp only [eqToHom_refl, Category.id_comp, Category.comp_id] at rRf₁ rRf'₁ rLg₁ rLg'₁ hτE₁
+  simp only [eqToHom_refl, Category.id_comp] at rRf₁ rRf'₁ rLg₁ rLg'₁ hτE₁
+  rw [rRf₁] at eRf
+  rw [rRf'₁] at eRf'
+  rw [rLg₁] at eLg
+  rw [rLg'₁] at eLg'
+  rw [← Iso.app_inv, Iso.inv_comp_eq] at eRf eRf'
   sorry
 
 /-- The prescribed localized actual exchange components satisfy the scalar
