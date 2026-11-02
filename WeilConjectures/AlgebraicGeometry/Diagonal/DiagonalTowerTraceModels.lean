@@ -319,6 +319,8 @@ structure ExactSquareOfUniverses
           ((NatTrans.mapHomologicalComplex ordinary.hom (.up ℤ)).app P) ≫
         RG.η.app ((U.mapHomologicalComplex (.up ℤ)).obj P)
 
+-- Elaborating the structure fields unfolds the derived-category instances of the systems.
+set_option maxHeartbeats 400000 in
 /-- The canonical direct-image/limit comparison, fixed by its common derived unit.
 The projection equation retains the level maps, rather than only its object values.
 Source: blueprint trace proof step 5; Stacks 0A07

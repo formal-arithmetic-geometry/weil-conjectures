@@ -90,9 +90,6 @@ attribute [local instance] brownHypotheses_countableAB4Star
 
 private theorem isZero_of_shifted_orthogonal
     {C : Type*} [Category* C] [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
-
-private theorem isZero_of_shifted_orthogonal
-    {C : Type*} [Category* C] [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
     [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
     (S : ObjectProperty C) (K : C) (hK : localizingClosure S K)
     (horth : ∀ n : ℤ, S.rightOrthogonal (K⟦n⟧)) : IsZero K := by

@@ -537,6 +537,9 @@ import all WeilConjectures.AlgebraicGeometry.EtaleStratifiedFinite
 import all WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeartLisseExtensionConstructible
 import all WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeartLisseRestriction
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
+import all WeilConjectures.AlgebraicGeometry.ContinuousConstructibleIntegralTransport
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteDiscreteCoefficientEncodingDataSupplement
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocallyFreeTensor
 
 /-!
 # Integral generators and their finite reductions
@@ -1034,7 +1037,7 @@ private theorem integralModel_lisse_of_filtration
       (R.immersion b ≫ a).isEmbedding.isInducing.noetherianSpace
     have hf : CondensedRing.LocallyFree (condensedRingObj A (R.domain b)) (M b) := by
       obtain ⟨C, hC⟩ := (hM b).1
-      exact ⟨C, fun t ↦ (CondensedRing.freeAt_iff_standard A (C.f t) (M b)).mpr (hC t)⟩
+      exact ⟨C, fun t ↦ (CondensedRing.isFree_mapMod_iff A (C.f t) (M b)).mpr (hC t)⟩
     obtain ⟨e⟩ := hq b
     exact P.prop_of_iso ((DerivedCategory.singleFunctor _ 0).mapIso e).symm
       (hP (R.domain b) (R.immersion b ≫ a) inferInstance (M b) hf)
@@ -1094,7 +1097,7 @@ private theorem integralModel_lisse_transport
   let L' := (Mod.comap (coefficientMap (inv b) S)).obj L
   have hLF : CondensedRing.LocallyFree (condensedRingObj B S) L := by
     obtain ⟨C, hC⟩ := hL
-    exact ⟨C, fun t ↦ (CondensedRing.freeAt_iff_standard B (C.f t) L).mpr (hC t)⟩
+    exact ⟨C, fun t ↦ (CondensedRing.isFree_mapMod_iff B (C.f t) L).mpr (hC t)⟩
   have hL' : IsLisseCoefficientModule B' L' :=
     lisse_of_raw_free B' S L'
       (CondensedRing.locallyFree_comap (coefficientMap (inv b) S) hLF)
@@ -1201,9 +1204,7 @@ private theorem integralModel_liftIntegers (ℓ : ℕ) [Fact ℓ.Prime]
     { (inferInstance : NormedCommRing (ULift.{u} E.1)),
       (inferInstance : Field (ULift.{u} E.1)) with
       norm_mul a b := norm_mul a.down b.down }
-  have h := (Padic.extension_integers_dvr ℓ (ULift.{u} E.1)
-    (Padic.coefficientExtensionAbsoluteValue ℓ (ULift.{u} E.1))
-    (spectralNorm_extends (K := ℚ_[ℓ]) (L := ULift.{u} E.1))).choose_spec.choose_spec.1 x
+  have h := (Padic.coefficientExtensionIntegers_dvr ℓ (ULift.{u} E.1)).choose_spec.1 x
   change x ∈ Padic.coefficientExtensionIntegers ℓ (ULift.{u} E.1) ↔ _ at h
   rw [h]
   change spectralNorm ℚ_[ℓ] (ULift.{u} E.1) x ≤ 1 ↔ _
@@ -1450,7 +1451,7 @@ private theorem integralModel_open_closed_flat
       ObjectProperty.flat M →
         ObjectProperty.flat ((CondensedRing.openImmersionLowerShriek Λ j).obj M)) := by
   have hc := CondensedRing.moduleCounitOfAbelian Λ i
-    (ProEtale.abelian_closed_support i j hij).1
+    (ProEtale.abelian_closed_support_counit_and_unit i j hij).1
   have ho := CondensedRing.openUnitIsIso Λ j
   constructor
   · intro M hM
@@ -1477,7 +1478,7 @@ attribute [-instance] integralModel_coefficientMonObj in
     (Mod.extendScalars (coefficientMap c X)).obj ((CondensedRing.lowerStar A i).obj M) ≅
       (CondensedRing.lowerStar B i).obj ((Mod.extendScalars (coefficientMap c Z)).obj M) := by
   have hc := CondensedRing.moduleCounitOfAbelian A i
-    (ProEtale.abelian_closed_support i j hij).1
+    (ProEtale.abelian_closed_support_counit_and_unit i j hij).1
   let F := Mod.extendScalars (coefficientMap c X)
   have hz : IsZero ((CondensedRing.upperStar B j).obj
       (F.obj ((CondensedRing.lowerStar A i).obj M))) := by
@@ -1547,8 +1548,8 @@ private theorem integralModel_locallyFree_scalar
       ((Mod.extendScalars (coefficientMap c S)).obj M) := by
   obtain ⟨C, hC⟩ := hM
   refine ⟨C, fun a ↦ ?_⟩
-  apply (CondensedRing.freeAt_iff_standard B (C.f a) _).mpr
-  have h := (CondensedRing.freeAt_iff_standard A (C.f a) M).mp (hC a)
+  apply (CondensedRing.isFree_mapMod_iff B (C.f a) _).mpr
+  have h := (CondensedRing.isFree_mapMod_iff A (C.f a) M).mp (hC a)
   exact free_of_iso
     (free_map (Mod.extendScalars (coefficientMap c (C.X a)))
       (Mod.regularExtensionIso _) h)
@@ -1591,7 +1592,7 @@ private theorem integralModel_residue_discrete (ℓ : ℕ) [Fact ℓ.Prime]
   exact QuotientAddGroup.discreteTopology hopen
 
 private theorem integralModel_fixed_lisse_transfer
-    (B C : Type (u + 1)) [CommRing B] [CommRing C] [Finite C]
+    (B C : Type (u + 1)) [CommRing B] [CommRing C] [Finite B] [Finite C]
     (X : Scheme.{u})
     (M : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} B))
     (N : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} C))
@@ -1603,7 +1604,7 @@ private theorem integralModel_fixed_lisse_transfer
   have hl (a : I) : ProEtale.IsFiniteLocallyConstant C
       ((ProEtale.upperStar (ModuleCat.{u + 1} C) (f a)).obj N) := by
     obtain ⟨P, hP, ⟨eP⟩⟩ := h a
-    let := hP
+    have : Finite P := Module.finite_of_finite B
     apply Scheme.finiteConstantUnderlying_lisse (U a) C _ P
     exact (Scheme.fixedUnderlyingPullback (f a) C).app N ≪≫
       (Scheme.proEtaleSheafInverseImage (f a) (Type (u + 1))).mapIso e.symm ≪≫
@@ -1621,7 +1622,7 @@ private theorem integralModel_fixed_lisse_transfer
   exact ⟨P, hP, ⟨(ProEtale.upperStarComp _ (g a b) (f a)).app N ≪≫ eP⟩⟩
 
 private theorem integralModel_fixed_constructible_transfer
-    (B C : Type (u + 1)) [CommRing B] [CommRing C] [Finite C]
+    (B C : Type (u + 1)) [CommRing B] [CommRing C] [Finite B] [Finite C]
     (X : Scheme.{u})
     (M : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} B))
     (N : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} C))
