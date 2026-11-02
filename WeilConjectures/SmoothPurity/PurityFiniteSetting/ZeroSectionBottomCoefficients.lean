@@ -31,6 +31,21 @@ public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Generator
 public import Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
 public import Mathlib.CategoryTheory.Sites.Spaces
+public import WeilConjectures.Algebra.Homology.Ringed.RingedSiteFiniteRetractDualExact
+public import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeartLocallyClosedExtension
+public import WeilConjectures.AlgebraicGeometry.ProEtale.ClosedInverseImageLimits
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Open.ProEtaleOpenExtensionProducts
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafBaseChangeMates
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafClosedLocalization
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafOperations
+public import WeilConjectures.AlgebraicGeometry.Sites.EtaleZariskiComparison
+public import WeilConjectures.CategoryTheory.DerivedInternalHomSectionsModel.DerivedInternalHomSectionsModel
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
+public import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
+public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.FullyFaithful
 
 /-!
 # Bottom-degree zero-section support with native coefficients
@@ -208,5 +223,202 @@ def zeroBottomComparison (V : PurityVectorBundle P B hB r)
   zeroBottomEvaluate (c.obj P.coefficients.l) B
     ((DerivedCategory.homologyFunctor _ 0).obj (zeroBottomSupport V c)) U ∘
       zeroBottomMap V c U
+
+private theorem zeroBottomMap_bijective (V : PurityVectorBundle P B hB r)
+    (c : PurityTransport.Coefficient P.coefficients.l)
+    (hK : (zeroBottomSupport V c).IsGE 0) (U : B.Opens) :
+    Function.Bijective (zeroBottomMap V c U) := by
+  let := hK
+  let A := (zeroBottomFree (c.obj P.coefficients.l) B).obj ((zeroBottomOpens B).obj U)
+  let e := (DerivedCategory.singleFunctorCompHomologyFunctorIso _ 0).app A
+  have h := DerivedCategory.homologyFunctor_map_bijective_of_isLE_of_isGE
+    (X := (DerivedCategory.singleFunctor _ 0).obj A) (Y := zeroBottomSupport V c) 0
+  let adj := closedSupportDerivedAdjunction (c.obj P.coefficients.l) V.zeroSection
+    V.zeroSection.openComplement.ι V.zeroSection.range_eq_compl_range_openComplement_ι
+  exact ((Iso.homCongr e (Iso.refl _)).bijective.comp h).comp
+    (adj.homEquiv _ _).bijective
+
+private theorem zeroBottomEvaluate_bijective
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] (B : Scheme.{u}) (M : supportModules Λ B)
+    (U : B.Opens) : Function.Bijective (zeroBottomEvaluate Λ B M U) := by
+  let e := InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u}
+    (Scheme.ProEt.topology B) (condensedRingObj Λ B)
+  let R := InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}
+    (Scheme.ProEt.topology B) (condensedRingObj Λ B)
+  let S := (sheafCompose (Scheme.ProEt.topology B)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R
+  let a := PresheafOfModules.sheafificationAdjunction (R := S) (𝟙 _)
+  let T := (PresheafOfModules.free S.obj).obj
+    (uliftYoneda.{u + 1}.obj ((zeroBottomOpens B).obj U))
+  let b := e.symm.toAdjunction.homEquiv
+    ((PresheafOfModules.sheafification (R := S) (𝟙 _)).obj T) M
+  exact uliftYonedaEquiv.bijective.comp
+    (PresheafOfModules.freeHomEquiv.bijective.comp
+      ((a.homEquiv _ _).bijective.comp b.bijective))
+
+private theorem zeroBottomMap_naturality (V : PurityVectorBundle P B hB r)
+    (c : PurityTransport.Coefficient P.coefficients.l)
+    (U W : B.Opens) (f : U ⟶ W) (a : (zeroBottomHom V c).obj (op W)) :
+    zeroBottomMap V c U ((zeroBottomHom V c).map f.op a) =
+      (zeroBottomFree (c.obj P.coefficients.l) B).map ((zeroBottomOpens B).map f) ≫
+        zeroBottomMap V c W a := by
+  let g := (zeroBottomFree (c.obj P.coefficients.l) B).map ((zeroBottomOpens B).map f)
+  let H := DerivedCategory.homologyFunctor (supportModules (c.obj P.coefficients.l) B) 0
+  let S := DerivedCategory.singleFunctor (supportModules (c.obj P.coefficients.l) B) 0
+  let L := (lowerStar (c.obj P.coefficients.l) V.zeroSection).mapDerivedCategory
+  let adj := closedSupportDerivedAdjunction (c.obj P.coefficients.l) V.zeroSection
+    V.zeroSection.openComplement.ι V.zeroSection.range_eq_compl_range_openComplement_ι
+  let e := DerivedCategory.singleFunctorCompHomologyFunctorIso
+    (supportModules (c.obj P.coefficients.l) B) 0
+  change (L.obj (S.obj ((zeroBottomFree (c.obj P.coefficients.l) B).obj
+    ((zeroBottomOpens B).obj W))) ⟶ zeroBottomInput P c V.E r) at a
+  change e.inv.app _ ≫ H.map (adj.homEquiv _ _ (L.map (S.map g) ≫ a)) =
+    g ≫ e.inv.app _ ≫ H.map (adj.homEquiv _ _ a)
+  have h := adj.homEquiv_naturality_left (S.map g) a
+  have he := e.inv.naturality g
+  change g ≫ e.inv.app _ = e.inv.app _ ≫ H.map (S.map g) at he
+  calc
+    _ = e.inv.app _ ≫ H.map (S.map g ≫ adj.homEquiv _ _ a) :=
+      congrArg (fun k => e.inv.app _ ≫ H.map k) h
+    _ = (e.inv.app _ ≫ H.map (S.map g)) ≫ H.map (adj.homEquiv _ _ a) := by
+      rw [H.map_comp, Category.assoc]
+    _ = _ := by
+      convert! congrArg (fun k => k ≫ H.map (adj.homEquiv _ _ a)) he.symm using 1
+
+private theorem zeroBottomEvaluate_naturality
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] (B : Scheme.{u}) (M : supportModules Λ B)
+    (U W : B.Opens) (f : U ⟶ W)
+    (a : (zeroBottomFree Λ B).obj ((zeroBottomOpens B).obj W) ⟶ M) :
+    zeroBottomEvaluate Λ B M U
+      ((zeroBottomFree Λ B).map ((zeroBottomOpens B).map f) ≫ a) =
+      (zeroBottomSections Λ B M).map f.op (zeroBottomEvaluate Λ B M W a) := by
+  let e := InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u}
+    (Scheme.ProEt.topology B) (condensedRingObj Λ B)
+  let R := InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}
+    (Scheme.ProEt.topology B) (condensedRingObj Λ B)
+  let S := (sheafCompose (Scheme.ProEt.topology B)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R
+  let adj := ((PresheafOfModules.freeAdjunction S.obj).comp
+    (PresheafOfModules.sheafificationAdjunction (R := S) (𝟙 _))).comp
+      e.symm.toAdjunction
+  let F := (PresheafOfModules.free S.obj ⋙
+    PresheafOfModules.sheafification (R := S) (𝟙 _)) ⋙ e.inverse
+  let g := (zeroBottomOpens B).map f
+  change (F.obj (uliftYoneda.{u + 1}.obj ((zeroBottomOpens B).obj W)) ⟶ M) at a
+  change uliftYonedaEquiv.{u + 1} (adj.homEquiv _ _
+    (F.map (uliftYoneda.{u + 1}.map g) ≫ a)) =
+    (e.functor.obj M).val.presheaf.map g.op
+      (uliftYonedaEquiv.{u + 1} (adj.homEquiv _ _ a))
+  exact (congrArg uliftYonedaEquiv.{u + 1}
+    (adj.homEquiv_naturality_left (uliftYoneda.{u + 1}.map g) a)).trans
+      (uliftYonedaEquiv_naturality _ g.op).symm
+
+private def zeroBottomOpensEtale (X : Scheme.{u}) : X.Opens ⥤ X.Etale where
+  obj U := Scheme.opensEtale U
+  map f := MorphismProperty.Over.homMk (X.homOfLE f.le) (X.homOfLE_ι _) trivial
+  map_id _ := Scheme.opensEtale_hom_ext _ _
+  map_comp _ _ := Scheme.opensEtale_hom_ext _ _
+
+private instance zeroBottomOpensEtale_flat (X : Scheme.{u}) :
+    RepresentablyFlat (zeroBottomOpensEtale X) := by
+  constructor
+  intro A
+  refine @IsCofiltered.mk _ _ ?_ ?_
+  · constructor
+    · intro V W
+      have h : ∀ a, A.hom a ∈ V.right ⊓ W.right := fun a ↦
+        ⟨Scheme.mem_of_hom_opensEtale V.hom a, Scheme.mem_of_hom_opensEtale W.hom a⟩
+      exact ⟨StructuredArrow.mk (Y := V.right ⊓ W.right) (Scheme.opensEtaleLift h),
+        StructuredArrow.homMk (homOfLE inf_le_left) (Scheme.opensEtale_hom_ext _ _),
+        StructuredArrow.homMk (homOfLE inf_le_right) (Scheme.opensEtale_hom_ext _ _), trivial⟩
+    · exact fun _ _ _ _ ↦ ⟨_, 𝟙 _, by ext; exact Subsingleton.elim _ _⟩
+  · exact ⟨StructuredArrow.mk (Y := ⊤) (Scheme.opensEtaleLift (fun _ ↦ trivial))⟩
+
+private theorem zeroBottomOpensEtale_cover (X : Scheme.{u}) :
+    CoverPreserving (Opens.grothendieckTopology X) X.smallEtaleTopology
+      (zeroBottomOpensEtale X) where
+  cover_preserve {V S} hS := by
+    let ι := Σ W : X.Opens, {g : W ⟶ V // S g}
+    refine X.smallEtaleTopology.superset_covering ?_
+      ((Scheme.ofArrows_mem_smallEtaleTopology_iff
+        (fun i : ι ↦ (zeroBottomOpensEtale X).map i.2.1)).2 ?_)
+    · exact (Sieve.generate_le_iff _ _).2
+        (Presieve.ofArrows_le_iff.2 fun i ↦ Sieve.image_mem_functorPushforward _ _ i.2.2)
+    · ext y
+      simp only [Set.mem_iUnion, Set.mem_range, Set.mem_univ, iff_true]
+      obtain ⟨W, g, hg, hy⟩ := hS y.1 y.2
+      exact ⟨⟨W, g, hg⟩, ⟨y.1, hy⟩, Subtype.ext (X.homOfLE_apply g.le _)⟩
+
+private instance zeroBottomOpensEtale_continuous (X : Scheme.{u}) :
+    (zeroBottomOpensEtale X).IsContinuous (Opens.grothendieckTopology X)
+      X.smallEtaleTopology :=
+  Functor.isContinuous_of_coverPreserving (compatiblePreservingOfFlat _ _)
+    (zeroBottomOpensEtale_cover X)
+
+private instance zeroBottomOpens_continuous (X : Scheme.{u}) :
+    (zeroBottomOpens X).IsContinuous (Opens.grothendieckTopology X)
+      (Scheme.ProEt.topology X) := by
+  exact Functor.isContinuous_comp'
+    (NatIso.ofComponents (fun _ ↦ Iso.refl _) (by intros; rfl))
+    (Opens.grothendieckTopology X) X.smallEtaleTopology (Scheme.ProEt.topology X)
+    (F₁ := zeroBottomOpensEtale X) (F₂ := Scheme.toProEt X)
+
+private theorem zeroBottomSections_isSheaf
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] (B : Scheme.{u}) (M : supportModules Λ B) :
+    Presheaf.IsSheaf (Opens.grothendieckTopology B) (zeroBottomSections Λ B M)  := by
+  let e := InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u}
+    (Scheme.ProEt.topology B) (condensedRingObj Λ B)
+  have hM : Presheaf.IsSheaf (Scheme.ProEt.topology B)
+      ((e.functor.obj M).val.presheaf ⋙ forget Ab.{u + 1}) := by
+    exact Presheaf.isSheaf_comp_of_isSheaf
+      (J := Scheme.ProEt.topology B) (P := (e.functor.obj M).val.presheaf)
+      (forget Ab.{u + 1}) (e.functor.obj M).isSheaf
+  exact (zeroBottomOpens B).op_comp_isSheaf_of_isSheaf
+    (Opens.grothendieckTopology B) (Scheme.ProEt.topology B) _ hM
+
+/-- The bottom comparison is a natural isomorphism of Zariski presheaves whenever
+its actual closed-support object is connective. Source: Step 3, bottom-degree
+identification and gluing in the universal vector-bundle argument.
+Proof: closed-support adjunction and the derived heart-Hom theorem give the first
+bijection; free-module adjunction, sheafification and Yoneda give evaluation. Their
+naturality identifies the restrictions. The sections presheaf is a sheaf because the
+opens functor is continuous (factor it through the small etale site), so transport
+sheafhood along the resulting natural isomorphism.
+(blueprint: lem-pur-zero-bottom-connective-comparison). -/
+private theorem zeroBottomComparison_of_isGE (V : PurityVectorBundle P B hB r)
+    (c : PurityTransport.Coefficient P.coefficients.l)
+    (hK : (zeroBottomSupport V c).IsGE 0) :
+    (∀ U : B.Opens, Function.Bijective (zeroBottomComparison V c U)) ∧
+    (∀ (U W : B.Opens) (f : U ⟶ W) (a : (zeroBottomHom V c).obj (op W)),
+      zeroBottomComparison V c U ((zeroBottomHom V c).map f.op a) =
+        (zeroBottomSections (c.obj P.coefficients.l) B
+          ((DerivedCategory.homologyFunctor _ 0).obj (zeroBottomSupport V c))).map f.op
+            (zeroBottomComparison V c W a)) ∧
+    Presheaf.IsSheaf (Opens.grothendieckTopology B) (zeroBottomHom V c) := by
+  have hbij (U : B.Opens) : Function.Bijective (zeroBottomComparison V c U) :=
+    (zeroBottomEvaluate_bijective _ _ _ U).comp (zeroBottomMap_bijective V c hK U)
+  have hnat (U W : B.Opens) (f : U ⟶ W) (a : (zeroBottomHom V c).obj (op W)) :
+      zeroBottomComparison V c U ((zeroBottomHom V c).map f.op a) =
+        (zeroBottomSections (c.obj P.coefficients.l) B
+          ((DerivedCategory.homologyFunctor _ 0).obj (zeroBottomSupport V c))).map f.op
+            (zeroBottomComparison V c W a) := by
+    dsimp only [zeroBottomComparison, Function.comp_apply]
+    rw [zeroBottomMap_naturality]
+    exact zeroBottomEvaluate_naturality _ _ _ U W f _
+  let η : zeroBottomHom V c ⟶ zeroBottomSections (c.obj P.coefficients.l) B
+      ((DerivedCategory.homologyFunctor _ 0).obj (zeroBottomSupport V c)) :=
+    { app := fun U ↦ TypeCat.ofHom (zeroBottomComparison V c U.unop)
+      naturality := by
+        intro U W f
+        ext a
+        exact hnat W.unop U.unop f.unop a }
+  have (U : B.Opensᵒᵖ) : IsIso (η.app U) :=
+    (ConcreteCategory.isIso_iff_bijective _).2 (hbij U.unop)
+  have : IsIso η := NatIso.isIso_of_isIso_app η
+  exact ⟨hbij, hnat, (Presheaf.isSheaf_of_iso_iff (asIso η)).2
+    (zeroBottomSections_isSheaf _ _ _)⟩
 
 end WeilConjectures.PurityFiniteSetting
