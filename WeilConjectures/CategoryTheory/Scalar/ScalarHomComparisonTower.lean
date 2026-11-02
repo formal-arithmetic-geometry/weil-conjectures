@@ -325,6 +325,12 @@ private theorem scalarBaseChangeHom_identity
   congr 2
   ext <;> simp
 
+variable {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
+  [J.HasSheafCompose (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})]
+  [HasSheafify J AddCommGrpCat.{max c v r}]
+  [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}]
+  [∀ R : Sheaf J CommRingCat.{max c v r}, HasDerivedCategory.{w} (scalarModules J R)]
+
 /-- Evaluation-transpose scalar Hom maps are natural and respect coefficient towers
 and the identity coefficient map, without flatness or boundedness assumptions.
 Source: Stacks Project, sites-cohomology.tex, Tags 08J9 (equation-internal-hom)
@@ -427,11 +433,5 @@ theorem scalarHomComparisonTower
   · intro R P Q
     exact scalarBaseChangeHom_identity (M.closed R) (M.scalar (𝟙 R)).derived
       (μ (𝟙 R)).iso (scalarHomExtensionId M R) (hid R) P Q
-
-variable {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
-  [J.HasSheafCompose (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})]
-  [HasSheafify J AddCommGrpCat.{max c v r}]
-  [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}]
-  [∀ R : Sheaf J CommRingCat.{max c v r}, HasDerivedCategory.{w} (scalarModules J R)]
 
 end CategoryTheory
