@@ -83,7 +83,7 @@ private theorem ordinary_sheaf_tensor_supported
   let R := ProEtale.adicUpperStar l i.closedComplement
   apply ordinary_supported_of_complement_zero i
   let e : R.obj (E.obj M ⊗ N) ≅ (Mod.tensorLeft (R.obj N)).obj (R.obj (E.obj M)) :=
-    R.mapIso (NativeAux.tensorComponent (E.obj M) N).symm ≪≫
+    R.mapIso (PrecompositionAux.tensorComponent (E.obj M) N).symm ≪≫
       (ProEtale.adicUpperStarTensorLeftIso l i.closedComplement N).app (E.obj M)
   exact ((Mod.tensorLeft (R.obj N)).map_isZero
     (ProEtale.isZero_adicUpperStar_adicOpenImmersionLowerShriek i i.closedComplement

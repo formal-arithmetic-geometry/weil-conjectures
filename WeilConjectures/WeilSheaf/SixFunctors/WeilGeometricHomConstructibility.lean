@@ -21,6 +21,7 @@ import WeilConjectures.CategoryTheory.Monoidal.Conjugate
 import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.AlgebraicGeometry.Adic.AdicConstructibilityPredicateComparison
 import Mathlib.AlgebraicGeometry.Noetherian
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleIhom
 public import WeilConjectures.AlgebraicGeometry.Bounded.BoundedConstructibleDevissageSupplement
