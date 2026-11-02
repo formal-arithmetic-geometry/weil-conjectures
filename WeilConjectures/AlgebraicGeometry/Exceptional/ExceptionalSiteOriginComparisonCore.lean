@@ -41,6 +41,18 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor Opposite SheafOfModules
 namespace AlgebraicGeometry
 
+private theorem exceptionalEvaluationLimits
+    (O : Type (u + 1)) [CommRing O] (ell : O) (T : Scheme.{u}) (n : ℕ) :
+    PreservesFiniteLimits
+      (coefficientEvaluation (J := Scheme.ProEt.topology T) (O := O) (ell := ell) n) :=
+  (coefficientEvaluation_exact.{u + 1, u, u + 1} n).1
+
+private theorem exceptionalEvaluationColimits
+    (O : Type (u + 1)) [CommRing O] (ell : O) (T : Scheme.{u}) (n : ℕ) :
+    PreservesFiniteColimits
+      (coefficientEvaluation (J := Scheme.ProEt.topology T) (O := O) (ell := ell) n) :=
+  (coefficientEvaluation_exact.{u + 1, u, u + 1} n).2
+
 attribute [local instance] exceptionalEvaluationLimits exceptionalEvaluationColimits
 
 private def exceptionalEvaluationDerivedIso

@@ -75,7 +75,7 @@ import WeilConjectures.CategoryTheory.InverseMateEquivalence
 import WeilConjectures.AlgebraicGeometry.ProEtale.Replete
 import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Products
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Iso
-import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSupplement
+import all WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSupplement
 import WeilConjectures.AlgebraicGeometry.ProEtaleInverseImageLimitsZariskiLocal
 import Mathlib.CategoryTheory.Functor.ReflectsIso.Limits
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Sheaf

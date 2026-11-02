@@ -27,6 +27,8 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor Opposite SheafOfModules
 open scoped ZeroObject
 namespace AlgebraicGeometry
+private instance (priority := 20000) cachedEtaleSmall (T : Scheme.{u}) :
+    EssentiallySmall.{u + 1} T.Etale := Scheme.Etale.essentiallySmall T
 private instance (priority := 20000) cachedProSmall (T : Scheme.{u}) :
     EssentiallySmall.{u + 1} T.ProEt := essentiallySmallSelf.{0, u, u + 1} _
 attribute [local instance 20000] exceptionalTransportProEtaleCommRingSheafify
@@ -43,6 +45,14 @@ attribute [local irreducible] HasDerivedCategory.standard DerivedCategory.Q
 attribute [local instance 5000] strictEtaleSystemDerived strictEtaleLevelDerived
   exceptionalProSystemDerived exceptionalProLevelDerived
 
+private instance etaleProperSystemInverseAdditive
+    {O : Type (u + 1)} [CommRing O] {ell : O} {X Y : Scheme.{u}}
+    {f : X ⟶ Y} {c : Compactification f} (S : StrictEtaleCompactSupport O ell c) :
+    S.val.properImage.inverse.Additive := S.val.properImage.systemInverseAdditive
+private instance etaleProperSystemRightAdditive
+    {O : Type (u + 1)} [CommRing O] {ell : O} {X Y : Scheme.{u}}
+    {f : X ⟶ Y} {c : Compactification f} (S : StrictEtaleCompactSupport O ell c) :
+    S.val.properImage.rightSystem.Additive := S.val.properImage.systemRightAdditive
 attribute [local instance 20000] strictEtaleProperInverseAdditive strictEtaleProperDirectAdditive
 
 section Abstract
@@ -143,6 +153,10 @@ private theorem pro_evaluation_bound {T : Scheme.{u}}
 private instance siteLevelInverseAdditive {T : Scheme.{u}}
     {PE : StrictEtaleEvaluation T O ell} (C : ExceptionalSystemSiteComparison O ell T PE)
     (n : ℕ) : (C.ordinary.lift n).modules.Additive := C.ordinary.inverseAdditive n
+private instance siteLevelRightAdditive {T : Scheme.{u}}
+    {PE : StrictEtaleEvaluation T O ell} (C : ExceptionalSystemSiteComparison O ell T PE)
+    (n : ℕ) : (C.ordinary.right n).Additive := C.ordinary.rightAdditive n
+
 private theorem site_level_inverse_bound {T : Scheme.{u}}
     {PE : StrictEtaleEvaluation T O ell} (C : ExceptionalSystemSiteComparison O ell T PE)
     (n : ℕ) M (a : ℤ) (hM : M.IsGE a) : ((C.image.level n).inverse.obj M).IsGE a := by
