@@ -145,6 +145,8 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.B
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.FullyFaithful
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Complement
 
+set_option linter.privateModule false
+
 /-! Componentwise geometric inputs for cartesian extension by zero. -/
 
 @[expose] public section

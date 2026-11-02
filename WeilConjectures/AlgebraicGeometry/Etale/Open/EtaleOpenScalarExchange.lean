@@ -13,6 +13,8 @@ import all WeilConjectures.AlgebraicGeometry.Etale.Open.EtaleOpenTensorDefs
 import all WeilConjectures.AlgebraicGeometry.Etale.ProEtale.EtaleProEtaleScalarMate
 import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjectionBaseChange
 
+set_option linter.privateModule false
+
 /-! # Scalar extension respects ordinary étale open base change
 
 Source: Stacks Project, etale-cohomology.tex, Tag 03S6,

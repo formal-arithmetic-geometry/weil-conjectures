@@ -13,6 +13,8 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SquareCompariso
 import WeilConjectures.CategoryTheory.ProperBaseChange.ExchangeMateCube
 import Mathlib.CategoryTheory.Comma.Arrow
 
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 universe u

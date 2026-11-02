@@ -15,6 +15,8 @@ import all WeilConjectures.AlgebraicGeometry.Adic.AdicConstructibilityPredicateC
 import all WeilConjectures.AlgebraicGeometry.Integral.IntegralCoefficientExtComparison
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Proper.ProperBaseChangeRational
 
+set_option linter.privateModule false
+
 /-! Proper direct-image input to the exceptional projection formula. -/
 
 @[expose] public section

@@ -60,6 +60,8 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
+set_option linter.privateModule false
+
 /-! # Underlying tensor normalization of pro-etale scalar pullback
 
 Source: Stacks Project, sites-cohomology.tex, Tag 07A4, proof on flat K-flat
