@@ -52,7 +52,5 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 variable {X Y : Scheme.{t}} (g : X ⟶ Y)
 
-attribute [local implicit_reducible] comparisonAug comparisonZQ
-attribute [local irreducible] comparisonKoszulIso comparisonBalancedIso
 
 end WeilConjectures.FinitePullbackStrictTower

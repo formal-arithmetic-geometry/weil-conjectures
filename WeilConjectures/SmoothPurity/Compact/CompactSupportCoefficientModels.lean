@@ -89,6 +89,8 @@ variable (l : ℕ) [Fact l.Prime]
   (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
   (i : E →ₐ[ℚ_[l]] F)
 
+-- The universe-polymorphic site-size instance gets stuck on the coefficient universe.
+attribute [-instance] WeilConjectures.PrincipalKoszulStrictReplacement.siteSmall in
 /-- In the constant model completed scalar extension is ordinary tensor with B.
 Its normalization uses every local scalar, and is independent of the chosen basis.
 Source: Stacks 03EK, 099L; Bhatt--Scholze 6.8.2(1)
@@ -174,18 +176,15 @@ theorem compactSupportCoefficientModels_ordinary (W : Scheme.{u}) :
 set_option backward.defeqAttrib.useBackward true
 attribute [local irreducible] Padic.coefficientExtensionIntegers
   Padic.coefficientExtensionIdeal Padic.coefficientExtensionUniformizer
-attribute [local instance] coefficientSectionModule
 open CategoryTheory.MonoidalCategory
 
 set_option backward.isDefEq.respectTransparency.types false in
-attribute [local irreducible] compactSupportCoefficientQuotientSheaf
-  reductionChange reductionDerivedChange
+attribute [local irreducible] reductionChange reductionDerivedChange
   completedCoefficientMap
 
 attribute [local semireducible] Padic.coefficientExtensionIntegers
   Padic.coefficientExtensionIdeal Padic.coefficientExtensionUniformizer
-attribute [local semireducible] compactSupportCoefficientQuotientSheaf
-  reductionChange reductionDerivedChange
+attribute [local semireducible] reductionChange reductionDerivedChange
   completedAdicChangeData completedCoefficientMap
 
 set_option backward.isDefEq.respectTransparency false

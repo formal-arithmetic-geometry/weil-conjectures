@@ -76,8 +76,6 @@ attribute [local irreducible] AlgebraicGeometry.Scheme.proEtaleRingModuleAdjunct
 
 end BasisTransport
 
-attribute [local irreducible] pulledBasis
-
 section MateInvertibility
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
