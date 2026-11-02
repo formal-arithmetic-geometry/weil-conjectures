@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarRationalShift
 import all WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarRationalShift
+import all WeilConjectures.Algebra.Homology.SuccessiveDerivedQuotientNormalization
 
 /-! # Normalized finite-field stages and their coherence
 
@@ -30,6 +31,92 @@ attribute [-instance] WeilConjectures.integralOperationsSiteSmall
 attribute [-instance] WeilConjectures.integralOperationsCommHasDerivedCategory
 attribute [local irreducible] AlgebraicGeometry.Scheme.pbcRationalCoefficientEquiv
 namespace AlgebraicGeometry.Scheme
+section AmbientAssoc
+
+/-- The adjunction normalization of scalar extensions is
+`Adjunction.leftAdjointCompIso` evaluated at an object.
+Source: blueprint order 1307 (blueprint: lem-pbc-scalar-stage-coherence). -/
+theorem pbcReductionNormalization_hom_eq {T : Scheme.{u}}
+    {R S B : Sheaf (ProEt.topology T) CommRingCat.{u + 1}}
+    (φ : R ⟶ S) (ψ : S ⟶ B) (χ : R ⟶ B) (h : φ ≫ ψ = χ)
+    (M : DerivedCategory (pbcModules T R)) :
+    (pbcReductionNormalization φ ψ χ h M).hom =
+      (Adjunction.leftAdjointCompIso (pbcDerivedScalarAdjunction φ)
+        (pbcDerivedScalarAdjunction ψ) (pbcDerivedScalarAdjunction χ)
+        (pbcDerivedRestrictComp φ ψ χ h)).hom.app M := by
+  dsimp [pbcReductionNormalization, pbcReductionNormalizationHom, pbcReductionTransition]
+  simp only [asIso_hom, Adjunction.leftAdjointCompIso_hom_app,
+    Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
+
+/-- Adjunction normalizations of scalar extensions satisfy associativity.
+Source: blueprint order 1307 (blueprint: lem-pbc-scalar-stage-coherence).
+Proof: the ordinary restriction comparisons are associative on sections; exact
+derivation and the adjoint-composition associativity transport this. -/
+theorem pbcReductionNormalization_assoc {T : Scheme.{u}}
+    {R S B D : Sheaf (ProEt.topology T) CommRingCat.{u + 1}}
+    (a : R ⟶ S) (b : S ⟶ B) (c : B ⟶ D)
+    (ab : R ⟶ B) (bc : S ⟶ D) (abc : R ⟶ D)
+    (hab : a ≫ b = ab) (hbc : b ≫ c = bc)
+    (habc : a ≫ bc = abc) (hab_c : ab ≫ c = abc)
+    (M : DerivedCategory (pbcModules T R)) :
+    (pbcDerivedExtend c).map ((pbcReductionNormalization a b ab hab M).hom) ≫
+        (pbcReductionNormalization ab c abc hab_c M).hom =
+      (pbcReductionNormalization b c bc hbc ((pbcDerivedExtend a).obj M)).hom ≫
+        (pbcReductionNormalization a bc abc habc M).hom := by
+  let eab := pbcRestrictComp a b ab hab
+  let ebc := pbcRestrictComp b c bc hbc
+  let eabc := pbcRestrictComp a bc abc habc
+  let eab_c := pbcRestrictComp ab c abc hab_c
+  have he : Functor.isoWhiskerLeft (pbcRestrict c) eab ≪≫ eab_c =
+      (Functor.associator _ _ _).symm ≪≫
+        Functor.isoWhiskerRight ebc (pbcRestrict a) ≪≫ eabc := by
+    apply Iso.ext
+    ext M U x
+    change (eab_c.hom.app M).val.app U ((eab.hom.app ((pbcRestrict c).obj M)).val.app U x) =
+      (eabc.hom.app M).val.app U ((ebc.hom.app M).val.app U x)
+    erw [(pbcRestrictComp_exists a b ab hab).exists.choose_spec,
+      (pbcRestrictComp_exists ab c abc hab_c).exists.choose_spec,
+      (pbcRestrictComp_exists b c bc hbc).exists.choose_spec,
+      (pbcRestrictComp_exists a bc abc habc).exists.choose_spec]
+  have hd := SheafOfModules.SuccessiveDerivedQuotient.exactComp_assoc
+    (pbcRestrict a) (pbcRestrict b) (pbcRestrict c)
+    (pbcRestrict ab) (pbcRestrict bc) (pbcRestrict abc) eab ebc eabc eab_c he
+  have hh := Adjunction.leftAdjointCompIso_assoc
+    (pbcDerivedScalarAdjunction a) (pbcDerivedScalarAdjunction b)
+    (pbcDerivedScalarAdjunction c) (pbcDerivedScalarAdjunction ab)
+    (pbcDerivedScalarAdjunction bc) (pbcDerivedScalarAdjunction abc)
+    (pbcDerivedRestrictComp a b ab hab) (pbcDerivedRestrictComp b c bc hbc)
+    (pbcDerivedRestrictComp a bc abc habc) (pbcDerivedRestrictComp ab c abc hab_c) hd
+  have hx := congrArg (fun e ↦ e.hom.app M) hh
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
+    Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
+    Functor.associator_inv_app, Category.id_comp] at hx
+  simpa only [pbcReductionNormalization_hom_eq] using hx.symm
+
+variable (l : ℕ) [Fact l.Prime]
+variable (E F G H : Type u) [Field E] [Field F] [Field G] [Field H]
+variable [Algebra (Padic l) E] [Algebra (Padic l) F] [Algebra (Padic l) G]
+variable [Algebra (Padic l) H]
+variable [FiniteDimensional (Padic l) E] [FiniteDimensional (Padic l) F]
+variable [FiniteDimensional (Padic l) G] [FiniteDimensional (Padic l) H]
+
+/-- The ambient balancing comparisons satisfy the pentagon (associativity) law.
+Source: blueprint order 1307 (blueprint: lem-pbc-scalar-stage-coherence). -/
+theorem pbcAmbientScalarComp_assoc (i : E →ₐ[Padic l] F) (j : F →ₐ[Padic l] G)
+    (k : G →ₐ[Padic l] H) (T : Scheme.{u}) (M : PbcCompletedDerived T (pbcIntegralDatum l E)) :
+    (pbcEmbeddingAmbientTensor l G H k T).map
+        ((pbcAmbientScalarComp l E F G i j T).hom.app M) ≫
+      (pbcAmbientScalarComp l E G H (j.comp i) k T).hom.app M =
+    (pbcAmbientScalarComp l F G H j k T).hom.app
+        ((pbcEmbeddingAmbientTensor l E F i T).obj M) ≫
+      (pbcAmbientScalarComp l E F H i (k.comp j) T).hom.app M := by
+  unfold pbcAmbientScalarComp
+  simp only [NatIso.ofComponents_hom_app]
+  exact pbcReductionNormalization_assoc _ _ _ _ _ _ _ _ _ _ M
+
+end AmbientAssoc
+
 section NestedFields
 attribute [local irreducible] pbcRationalScalarHom
 variable (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]
