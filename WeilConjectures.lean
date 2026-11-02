@@ -1250,6 +1250,7 @@ public import WeilConjectures.AlgebraicGeometry.AbelianResolutionComparisonEvalu
 public import WeilConjectures.AlgebraicGeometry.AbelianStrictlyHenselianOpenGerm
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Basic
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.CoherentFiniteType
+public import WeilConjectures.AlgebraicGeometry.AbelianVariety.CommutativeProjectiveCube
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.ConnectiveRankOneModelStalk
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Cube
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Defs
@@ -16630,6 +16631,7 @@ public import WeilConjectures.DeligneLaumon.AffineLine.RealPushforward
 public import WeilConjectures.DeligneLaumon.AffineLine.RealifiedKernel
 public import WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy
 public import WeilConjectures.DeligneLaumon.AffineLine.Upper
+public import WeilConjectures.DeligneLaumon.AffineLine.UpperBoundStatement
 public import WeilConjectures.DeligneLaumon.AffineLine.UpperReduction
 public import WeilConjectures.DeligneLaumon.AffineLine.ZeroExtension
 public import WeilConjectures.DeligneLaumon.BalancedFiniteTower.BalancedFiniteTowerAugmentationGenerators
