@@ -19,7 +19,8 @@ HRS Proposition 5.2, Theorem 7.7 and Lemma 7.9
 (blueprint: lem-sf-adic-qbar-constructible-realization).
 
 The definitions `GeometricSpace`, `SpaceData`, `Family` are in
-`WeilConjectures.SixFunctors.AdicQbarRealization.AdicRealizationFamilyData` (blueprint: def-sf-adic-realization-isomorphism-data),
+`WeilConjectures.SixFunctors.AdicQbarRealization.AdicRealizationFamilyData`
+(blueprint: def-sf-adic-realization-isomorphism-data),
 re-exported here.
 
 ## Main statements

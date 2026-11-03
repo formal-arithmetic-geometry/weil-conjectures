@@ -85,14 +85,6 @@ namespace AlgebraicGeometry.ProEtaleWeilSheaf
 
 attribute [-instance] InternalAbelianSheafModule.comparison_essentiallySmall
   CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-attribute [-instance] InternalAbelianSheafModule.comparison_essentiallySmall
-  CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-attribute [-instance] InternalAbelianSheafModule.comparison_essentiallySmall
-  CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-attribute [-instance] InternalAbelianSheafModule.comparison_essentiallySmall
-  CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-attribute [-instance] InternalAbelianSheafModule.comparison_essentiallySmall
-  CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 private instance ordinary_forget_additive (l : ℕ) [Fact l.Prime] (Y : Scheme.{u}) :
     (ProEtale.AdicSheaf.forgetAb l Y).Additive where
   map_add := by
