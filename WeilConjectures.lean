@@ -15,6 +15,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.FilteredColimitFlat
 public import WeilConjectures.Algebra.Category.ModuleCat.FinitePresentationCokernel
 public import WeilConjectures.Algebra.Category.ModuleCat.FinitePresentationColimit
 public import WeilConjectures.Algebra.Category.ModuleCat.FlatLazard
+public import WeilConjectures.Algebra.Category.ModuleCat.FrobeniusExtendScalars
 public import WeilConjectures.Algebra.Category.ModuleCat.IhomComparison
 public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.Bidual
 public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.ExteriorPower
@@ -64,6 +65,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatCoproduct
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatEquationalCriterionOfUniverses
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatLocalRelationsOfUniverses
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FrobeniusChangeOfRings
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomFinitePresentationKernel
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomModule
@@ -22271,6 +22273,7 @@ public import WeilConjectures.SmoothPurity.Completed.CompletedConstantSquarePush
 public import WeilConjectures.SmoothPurity.Completed.CompletedIntegralCoefficientGerm
 public import WeilConjectures.SmoothPurity.Completed.CompletedIntegralCoefficientsSupplement
 public import WeilConjectures.SmoothPurity.Completed.CompletedIntegralFiniteFree
+public import WeilConjectures.SmoothPurity.Completed.CompletedIntegralFrobeniusSystem
 public import WeilConjectures.SmoothPurity.Completed.CompletedIntegralPrincipalUnitCriterion
 public import WeilConjectures.SmoothPurity.Completed.CompletedIntegralQuotientModelComparison
 public import WeilConjectures.SmoothPurity.Completed.CompletedIntegralScalarData

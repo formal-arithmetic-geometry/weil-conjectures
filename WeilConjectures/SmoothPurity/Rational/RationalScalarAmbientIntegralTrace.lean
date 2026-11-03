@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SmoothPurity.Sf.SfRationalizationKaroubi
 public import WeilConjectures.SmoothPurity.Rational.RationalScalarDerivedRestriction
 public import WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarExtension
+import WeilConjectures.SmoothPurity.Completed.CompletedIntegralFrobeniusSystem
 import WeilConjectures.SmoothPurity.Sf.SfDerivedCompleteLegacyComparison
 import WeilConjectures.Algebra.Homology.HomotopyCategory.MapHomotopyCategoryCongr
 import WeilConjectures.CategoryTheory.Adjunction.HomEquivCompAppOfIsIso
@@ -127,16 +128,14 @@ extension of scalars for sheaves of modules); the constant-coefficient analogue 
 `WeilConjectures.PurStrictScalar.scalarTensor_preservesKInjective`.
 (blueprint: new-sf-rational-scalar-ambient-integral-trace).
 
-This is a cross-section input from the pro-étale coefficient chapter: the project has the
-extension--restriction adjunction (`AlgebraicGeometry.Scheme.pbcScalarAdjunction`) and the
-Frobenius form adjunction for constant coefficient rings, but no coextension or
-restriction--extension adjunction for the completed coefficient sheaves. -/
+Proof: `integralOrdinaryScalar_restrictScalars_adjunction`, the Frobenius-system adjunction
+for the completed coefficient sheaves. -/
 theorem pbcRestrict_integralCompletedScalarMap_adjunction
     (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
     (ι : E →ₐ[ℚ_[l]] F) :
     Nonempty (AlgebraicGeometry.Scheme.pbcRestrict (integralCompletedScalarMap l E F ι W) ⊣
-      integralOrdinaryScalar l E F ι W) := by
-  sorry
+      integralOrdinaryScalar l E F ι W) :=
+  integralOrdinaryScalar_restrictScalars_adjunction l E F ι W
 
 /-- Integral trace data, before passing to the scalar-localized categories.
 Source: Bhatt--Scholze, Proposition 6.8.14(2), finite separable trace and
