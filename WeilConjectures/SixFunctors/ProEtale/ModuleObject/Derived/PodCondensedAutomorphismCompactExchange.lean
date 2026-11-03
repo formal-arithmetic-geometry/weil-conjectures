@@ -157,6 +157,8 @@ import Mathlib.AlgebraicGeometry.OpenImmersion
 import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraAdjunction
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.CategoryTheory.Adjunction.CondensedSixOperationPreservation
+public import WeilConjectures.ProEtaleCoefficients.BoundedConstructibleCounterexample.NonFiniteMultiplicationKernel
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.StrictWeil.CondensedStrictWeilComplex
 
 /-! # Concrete geometric-Frobenius compact-support exchange
 
@@ -215,6 +217,30 @@ def podGeometricCompactification (D : WeilConjectures.FiniteFieldDatum.{u})
     _ c.overI c.isOpenImmersion
   isProper := MorphismProperty.overPullbackMap (P := @IsProper)
     _ c.overG c.isProper
+
+/-- The complete normalization of a constructible adjunction, including the action on every
+Hom element and the actual unit and counit. `a` is diagrammatically PF -> FQ; `b` is QR -> RP.
+The existential isomorphism is pinned to the mate bijection, not chosen independently.
+Source: displayed b and the fixed-pair paragraph, proof steps 10--12
+(blueprint: lem-pod-condensed-automorphism-compact-exchange). -/
+def PodFixedPairAdjunctionNormalization
+    {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
+    {F : C ⥤ D} {R : D ⥤ C} {Q : C ⥤ C} {P : D ⥤ D}
+    (adj : F ⊣ R) (a : F ⋙ P ≅ Q ⋙ F) : Prop :=
+  ∃ b : R ⋙ Q ≅ P ⋙ R,
+    (mateEquiv adj adj (TwoSquare.mk _ _ _ _ a.inv)).natTrans = b.hom ∧
+    (∀ L : D, b.hom.app L = adj.unit.app (Q.obj (R.obj L)) ≫
+      R.map (a.inv.app (R.obj L)) ≫ R.map (P.map (adj.counit.app L))) ∧
+    (∀ (K : C) (θK : Q.obj K ≅ K) (L : D) (θL : P.obj L ≅ L)
+      (t : F.obj K ⟶ L),
+      adj.homEquiv K L (F.map θK.inv ≫ a.inv.app K ≫ P.map t ≫ θL.hom) =
+        θK.inv ≫ Q.map (adj.homEquiv K L t) ≫ b.hom.app L ≫ R.map θL.hom) ∧
+    (∀ (K : C) (θK : Q.obj K ≅ K),
+      Q.map (adj.unit.app K) ≫ b.hom.app (F.obj K) ≫
+          R.map (a.hom.app K ≫ F.map θK.hom) = θK.hom ≫ adj.unit.app K) ∧
+    (∀ (L : D) (θL : P.obj L ≅ L),
+      P.map (adj.counit.app L) ≫ θL.hom =
+        a.hom.app (R.obj L) ≫ F.map (b.hom.app L ≫ R.map θL.hom) ≫ adj.counit.app L)
 
 /-- Concrete exchange data for the pulled-back condensed coefficient categories.
 Source: latest blueprint prop-weil-operations.proof.md, sentence 2, and

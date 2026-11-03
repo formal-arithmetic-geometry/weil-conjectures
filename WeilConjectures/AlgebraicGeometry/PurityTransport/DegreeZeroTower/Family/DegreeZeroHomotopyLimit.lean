@@ -9,6 +9,12 @@ public import WeilConjectures.AlgebraicGeometry.PurityTransport.DvrCoefficients.
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.CategoryTheory.Limits.TowerTransitionEndomorphism
 public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCocone
+public import WeilConjectures.AlgebraicGeometry.PurityTransport.TraceCartierScalarCoordinates
+public import WeilConjectures.AlgebraicGeometry.PurityTransport.TransportScalarLines
+public import WeilConjectures.AlgebraicGeometry.PurityTransport.TransportUnits
+public import WeilConjectures.AlgebraicGeometry.Vector.VectorBundlePurity
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.IntegersModPow
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.CommonFieldLatticeGenerators
 
 /-! # Degree-zero reduction sequences, their homotopy limit and completion maps
 
@@ -186,7 +192,8 @@ theorem Family.kernel_comp_eq (Y : Family X rs) :
       CochainComplex.HomComplex.Cochain.ofHom
         ((HomologicalComplex.single (Modules ell c X) (ComplexShape.up ℤ) 0).map
             (kernel.ι (Y.oneSubShift rs)) ≫ Y.oneSubShiftComplex rs) = 0 := by
-  sorry
+  simp only [CochainComplex.HomComplex.δ_zero, zero_add, ← Functor.map_comp,
+    kernel.condition, Functor.map_zero, CochainComplex.HomComplex.Cochain.ofHom_zero]
 
 /-- The canonical comparison `lim_n Y_n = ker(1 - shift) → R lim_n Y_n`: the kernel sheaf in
 degree zero maps to the cocone by the kernel inclusion and the zero homotopy.
@@ -204,7 +211,10 @@ Proof: compose with each projection; `towerTransitionEndomorphism_eq_iff` reduce
 theorem Family.lift_oneSubShift (Y : Family X rs) {A : Modules ell c X}
     (g : ∀ n, A ⟶ Y.level rs n) (hg : ∀ n, g (n + 1) ≫ Y.levelStep rs n = g n) :
     Pi.lift g ≫ Y.oneSubShift rs = 0 := by
-  sorry
+  apply Pi.hom_ext
+  intro n
+  simp [Family.oneSubShift, towerTransitionEndomorphism, towerProductShift,
+    Preadditive.comp_sub, Category.assoc, hg]
 
 /-- The map `K → R lim_n Y_n` determined by a compatible family `g_n : H^0 K → H^0(Y_n)`, for
 `K` in degrees `≤ 0`: the unique map to the kernel sheaf in degree zero with `H^0` equal to the

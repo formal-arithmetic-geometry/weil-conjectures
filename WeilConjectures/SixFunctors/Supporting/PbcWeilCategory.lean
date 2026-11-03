@@ -16,6 +16,80 @@ import Mathlib.CategoryTheory.Preadditive.EndoFunctor
 import WeilConjectures.AlgebraicGeometry.FibreDimension
 import Mathlib.Algebra.CharP.CharAndCard
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.StrictWeilCondensed.StrictWeilCondensed
+public import Mathlib.Algebra.Category.ModuleCat.Projective
+public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
+public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+public import Mathlib.Algebra.Module.FinitePresentation
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Sites.QuasiCompact
+public import Mathlib.CategoryTheory.Adjunction.FullyFaithful
+public import Mathlib.CategoryTheory.Adjunction.Mates
+public import Mathlib.CategoryTheory.Monoidal.Mod
+public import Mathlib.CategoryTheory.ObjectProperty.Shift
+public import Mathlib.CategoryTheory.Triangulated.Adjunction
+public import Mathlib.CategoryTheory.Triangulated.Generators
+public import Mathlib.CategoryTheory.Triangulated.Subcategory
+public import Mathlib.Topology.Defs.Filter
+public import WeilConjectures.AlgebraicGeometry.Cartesian.CartesianCoefficientTwistsSupplement
+public import WeilConjectures.AlgebraicGeometry.Cartesian.CartesianCoefficients
+public import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeart
+public import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeartLocallyClosedExtension
+public import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeartSheafConeWitness
+public import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeartStratificationDefs
+public import WeilConjectures.AlgebraicGeometry.Condensed.CondensedCoefficientIsoConstructible
+public import WeilConjectures.AlgebraicGeometry.CondensedLocallyClosedExtensionTower
+public import WeilConjectures.AlgebraicGeometry.CondensedOpenClosedRecollement
+public import WeilConjectures.AlgebraicGeometry.ConstantModelTorAmplitude
+public import WeilConjectures.AlgebraicGeometry.Finite.Constant.FiniteConstantLocalModel
+public import WeilConjectures.AlgebraicGeometry.Flat.FlatModelGeneration
+public import WeilConjectures.AlgebraicGeometry.Integral.IntegralCoefficientExtComparison
+public import WeilConjectures.AlgebraicGeometry.Integral.IntegralLfpConstantModelComparison
+public import WeilConjectures.AlgebraicGeometry.InternalModuleAbEquivalence
+public import WeilConjectures.AlgebraicGeometry.InternalModuleOperations.InternalModuleOperationsTransportSupplement
+public import WeilConjectures.AlgebraicGeometry.Locally.LocallyPerfectScalarModel
+public import WeilConjectures.AlgebraicGeometry.ProEtaleCoefficients.PadicConstantLocalModelTor
+public import WeilConjectures.AlgebraicGeometry.ProEtaleCoefficients.ProfiniteFiniteConstantLocalModel
+public import WeilConjectures.AlgebraicGeometry.QuotientChange.InternalScalarPullbackNormalization
+public import WeilConjectures.AlgebraicGeometry.RootCoordinateFace.RootTowerCoordinateFace
+public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
+public import WeilConjectures.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
+public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeMapDerivedCategory
+public import WeilConjectures.CategoryTheory.ProEtaleCoefficients.LocalizingAdmissibleCoefficients
+public import WeilConjectures.CategoryTheory.Right.RightDerivedFunctorOfQuasiIsoResolutions
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.BaseCoefficientCondensedIdentification
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteDiscreteCondensedRing
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ProfiniteCondensedRing
+public import WeilConjectures.ConstructibleSheaf.OpenClosed
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
+public import WeilConjectures.ProperBaseChange.CondensedConstructibleSerre
+public import WeilConjectures.ProperBaseChange.IntegralLfpLocallyFreeResolution
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Compactification.CompactificationLocalizing
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedClosedSupportAdjunction
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.IntegralDerivedCoefficientData
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntegralConstantModelLocalResolution
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntegralLisseDerivedAux
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalLeftDerived
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Scalar.ScalarSixCtfGenerators
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Scalar.ScalarSixDefinitions
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Scalar.ScalarSixDerivedPullbackNormalization
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Scalar.ScalarSixFiniteEtaleExtensionIso
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Scalar.ScalarSixFiniteEtaleLisseModel
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Scalar.ScalarSixFiniteEtaleOrigin
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Scalar.ScalarSixImmersionComparison
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixAdmissibleThickness
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.ListedScalarCoefficientMaps
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.LocallyClosedGeneratorTensorIntersection
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.StrictWeil.CondensedStrictWeilComplex
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
+
+public import WeilConjectures.SixFunctors.Supporting.ModCondensedCachedInstances
 
 /-!
 # Completed coefficient transport and Weil categories
@@ -289,6 +363,84 @@ def weilCoefficientExtension {E F : Padic.FiniteCoefficientFields c.l c.Qbar}
   pbcScalarExtension c.l c.Qbar (D.geometricFiber X₀).left
     (weilGeometricFiber_coefficientHypotheses D c X₀).2.1
     (weilGeometricFiber_coefficientHypotheses D c X₀).2.2 h
+
+private instance condensedScalarRingComm (Λ : ScalarSixRing.{u}) :
+    IsCommMonObj (CommMon.toMon Λ).X :=
+  Λ.comm
+
+private instance condensedScalarMapMonHom {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ') :
+    IsMonHom a.hom.hom := a.hom.isMonHom_hom
+
+/-- The current condensed strict-pair Weil category at an admissible coefficient.
+Source: current blueprint (blueprint: def-wf-weil-category). -/
+abbrev condensedWeilD (D : FiniteFieldDatum.{u}) (c : D.CoefficientDatum)
+    (X₀ : Over (Spec (CommRingCat.of D.k₀)))
+    (Λ : ScalarSixRing.{u}) (hΛ : IsAdmissibleCoefficient Λ.X) : Type _ :=
+  AlgebraicGeometry.ProEtale.CondensedRing.StrictWeil.modelComplex Λ.X D c.l c.different hΛ X₀
+
+/-- The native algebraically closed condensed coefficient is admissible.
+Source: admissible coefficient list (blueprint: def-wf-weil-category). -/
+theorem qbar_isAdmissibleCoefficient (D : FiniteFieldDatum.{u})
+    (c : D.CoefficientDatum) :
+    IsAdmissibleCoefficient (Profinite.padicAlgClRingObj.{u} c.l) := by
+  unfold IsAdmissibleCoefficient
+  exact ⟨c.l, inferInstance, Or.inr (Or.inr (Or.inr (Or.inr (Or.inr
+    ⟨Iso.refl _⟩))))⟩
+
+/-- The strict Weil category over the native condensed algebraic closure.
+Source: current blueprint (blueprint: def-wf-weil-category). -/
+abbrev condensedWeilDQbar (D : FiniteFieldDatum.{u}) (c : D.CoefficientDatum)
+    (X₀ : Over (Spec (CommRingCat.of D.k₀))) :=
+  condensedWeilD D c X₀ (⟨Profinite.padicAlgClRingObj.{u} c.l⟩)
+    (qbar_isAdmissibleCoefficient D c)
+
+variable (D : FiniteFieldDatum.{u}) (c : D.CoefficientDatum)
+  (X₀ : Over (Spec (CommRingCat.of D.k₀)))
+  [hsep : IsSeparated X₀.hom] [hft : LocallyOfFiniteType X₀.hom]
+  [hqc : QuasiCompact X₀.hom]
+
+/- The following three declarations are the coefficient-change part of the
+  condensed Weil construction.  The comparison is the normalized one supplied
+  by `internal_scalar_pullback_normalization`; restricting its components to
+  the finite-Tor constructible subcategories is what makes the construction
+  independent of flatness of the coefficient map. -/
+
+noncomputable def condensedScalarChange
+    (D : FiniteFieldDatum.{u}) (c : D.CoefficientDatum)
+    (X₀ : Over (Spec (CommRingCat.of D.k₀)))
+    [hsep : IsSeparated X₀.hom] [hft : LocallyOfFiniteType X₀.hom]
+    [hqc : QuasiCompact X₀.hom]
+    {Λ Λ' : ScalarSixRing.{u}} (a : Λ ⟶ Λ')
+    (ha : IsListedScalarCoefficientMap c.l a) :
+    ConstantModelConstructibleFiniteTor Λ.X (D.geometricFiber X₀).left ⥤
+      ConstantModelConstructibleFiniteTor Λ'.X (D.geometricFiber X₀).left := by
+  letI : Fintype D.k₀ := Fintype.ofFinite D.k₀
+  letI : Fact D.p.Prime := ⟨D.prime⟩
+  have hcard : Fintype.card D.k₀ = D.p ^ D.a := by
+    simpa only [Nat.card_eq_fintype_card] using D.card_base.trans D.cardinality_eq
+  letI : CharP D.k₀ D.p := charP_of_card_eq_prime_pow hcard
+  letI : CharP D.k D.p := charP_of_injective_algebraMap' D.k₀ D.p
+  letI : Fact (ringChar D.k).Prime := ⟨by
+    rw [← Algebra.ringChar_eq D.k₀ D.k, ringChar.eq D.k₀ D.p]
+    exact D.prime⟩
+  letI : Fact (ringChar D.k ≠ c.l) := ⟨by
+    rw [← Algebra.ringChar_eq D.k₀ D.k, ringChar.eq D.k₀ D.p]
+    exact Ne.symm c.different⟩
+  letI : LocallyOfFiniteType (D.geometricFiber X₀).hom := by
+    let f := Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))
+    change LocallyOfFiniteType (pullback.snd X₀.hom f)
+    infer_instance
+  letI : QuasiCompact (D.geometricFiber X₀).hom := by
+    let f := Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))
+    change QuasiCompact (pullback.snd X₀.hom f)
+    infer_instance
+  letI : IsSeparated (D.geometricFiber X₀).hom := by
+    let f := Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))
+    change IsSeparated (pullback.snd X₀.hom f)
+    infer_instance
+  exact ObjectProperty.lift _
+    ((ObjectProperty.ι _ ⋙ scalarSixChange a (D.geometricFiber X₀).left))
+    (fun K ↦ (scalarSixCtf c.l D.k a ha (D.geometricFiber X₀)).2.2 K)
 
 /-- The canonical Frobenius/scalar comparison on the raw coefficient stages.
 Source: blueprint order 2106 (blueprint: def-wf-weil-category). -/

@@ -66,6 +66,16 @@ theorem action_inverse {T : Scheme.{u}} (g : T ≅ T) :
     Nonempty (action Λ g.symm ⋙ action Λ g ≅ 𝟭 _) := by
   sorry
 
+/-- The strict Weil category on any model over the stated global finite field.
+The admissibility witness is the recorded coefficient notion, not a new coefficient type.
+Smoothness of a morphism between models adds no datum to this category.
+Source: latest blueprint, definition and first context paragraph
+(blueprint: sk-def-sf-weil-complexes). -/
+abbrev modelComplex (D : WeilConjectures.FiniteFieldDatum.{u})
+    (ell : ℕ) [Fact ell.Prime] (_hEll : ell ≠ D.p)
+    (_hΛ : IsAdmissibleCoefficient Λ) (T₀ : Over (Spec (.of D.k₀))) :=
+  Complex Λ (modelFrobenius D T₀)
+
 /-- The faithful forgetful functor of strict pairs.
 Source: latest blueprint, pair category paragraph (blueprint: sk-def-sf-weil-complexes). -/
 abbrev forget {T : Scheme.{u}} (g : T ≅ T) :=
@@ -122,6 +132,13 @@ def nativeComparison (ell : ℕ) [Fact ell.Prime] [IsNoetherian T]
       (fun f ↦ ObjectProperty.hom_ext _
         ((cyclicDerivedStructure (upperStar Λ g.hom)).hom.naturality f.hom)))
 
+/-- The ordinary coefficient unit with its coefficient-unit Weil structure.
+Source: latest blueprint, phi_Lambda and the point example
+(blueprint: sk-def-sf-weil-complexes). -/
+def unitWeilModule {T : Scheme.{u}} (g : T ≅ T) : WeilModule Λ g :=
+  CategoryTheory.Endofunctor.IsoAlgebra.mk (𝟙_ _)
+    (Functor.Monoidal.εIso (upperStar Λ g.hom)).symm
+
 /-- The ambient dual is the recorded relative derived internal Hom into the coefficient unit.
 Source: latest blueprint, contragredient paragraph (blueprint: sk-def-sf-weil-complexes). -/
 abbrev dual {T : Scheme.{u}} (K : DerivedCategory
@@ -139,6 +156,15 @@ def dualDatum {T : Scheme.{u}} (g : T ≅ T)
   Functor.Monoidal.ihomObjIso (action Λ g) K (𝟙_ _) ≪≫
     (ihom ((action Λ g).obj K)).mapIso (Functor.Monoidal.εIso (action Λ g)).symm ≪≫
       (MonoidalClosed.internalHom.mapIso phi.symm.op).app (𝟙_ _)
+
+/-- Restrict a dual datum only with its stated domain condition.
+Source: latest blueprint, dual-domain qualification (blueprint: sk-def-sf-weil-complexes). -/
+def dualComplex {T : Scheme.{u}} (g : T ≅ T) (K : Complex Λ g)
+    (hK : (constantModelBoundedConstructible Λ T ⊓ fun L ↦
+      DerivedCategory.finiteTorAmplitude _ L) (dual Λ K.carrier.obj)) : Complex Λ g :=
+  CategoryTheory.Endofunctor.IsoAlgebra.mk ⟨dual Λ K.carrier.obj, hK⟩
+    (ObjectProperty.isoMk _ (dualDatum Λ g K.carrier.obj
+      ((ObjectProperty.ι _).mapIso K.str)))
 
 /-- The tensorator is included in the tensor of two ambient Weil data.
 Source: latest blueprint, twisted-dual composite (blueprint: sk-def-sf-weil-complexes). -/
