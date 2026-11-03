@@ -174,6 +174,7 @@ public import WeilConjectures.AlgebraicGeometry.Stratum.StratumScalarExtension
 public import WeilConjectures.AlgebraicGeometry.Tate.TateTwistFiniteLocallyFree
 public import WeilConjectures.AlgebraicGeometry.Tate.TateTwistIntegralLines
 public import WeilConjectures.SmoothPurity.Supporting.Coefficient.IntrinsicCoefficientTwists
+public import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Derived scalar extension on the small pro-etale site
 
@@ -354,7 +355,7 @@ private theorem scalarExtension_abstract_tor_iff
         IsZero ((DerivedCategory.homologyFunctor C i).obj
           (DerivedCategory.Q.obj (CochainComplex.mapBifunctor P
             ((HomologicalComplex.single C (.up ℤ) 0).obj M) (curriedTensor C))))) ↔
-      DerivedCategory.torAmplitudeIn C a b K := by
+      _root_.DerivedCategory.torAmplitudeIn C a b K := by
   have compare (L P : CochainComplex C ℤ) (eL : DerivedCategory.Q.obj L ≅ K)
       (f : P ⟶ L) (hf : QuasiIso f)
       (hP : ∀ V : CochainComplex C ℤ, V.Acyclic →
@@ -420,12 +421,12 @@ private theorem scalarExtension_tor_flat_model
   have : DerivedCategory.Qh.HasDerivedMonoidalCategory
       (HomotopyCategory.quasiIso C (.up ℤ)) := by infer_instance
   have htor : HasProEtaleTorAmplitude T A K a b ↔
-      DerivedCategory.torAmplitudeIn C a b K := by
+      _root_.DerivedCategory.torAmplitudeIn C a b K := by
     apply scalarExtension_abstract_tor_iff K a b hab
     intro L
     obtain ⟨P, f, hP, _, hf, _⟩ := CochainComplex.exists_isKFlatResolutionGeneral L
     exact ⟨P, f, hf, hP⟩
-  rw [htor, DerivedCategory.torAmplitudeIn_iff_exists_iso_Q_obj_flat]
+  rw [htor, _root_.DerivedCategory.torAmplitudeIn_iff_exists_iso_Q_obj_flat]
   have hflat (M : C) : CategoryTheory.ObjectProperty.flat M ↔
       SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1} (J := ProEt.topology T) (R := R) M := by
     refine ⟨fun h ↦ ?_, SheafOfModules.flat_to_cat R M⟩
@@ -498,14 +499,15 @@ private theorem scalarExtension_cochainModelIso
     {A B : Type u} [CommRing A] [CommRing B] (f : A →+* B) (T : Scheme.{u}) :
     Nonempty (scalarExtensionFunctor f T ≅
       SheafOfModules.constantCoefficientScalarExtensionOfUniverses.{u + 1, u, u + 1, u + 2, u + 2}
-        (ProEt.topology T) (A := ULift.{u + 1, u} A) (B := ULift.{u + 1, u} B)
-        (RingHom.ulift f)) := by
+        (ProEt.topology T)
+          ((ULift.ringEquiv : ULift.{u + 1, u} B ≃+* B).symm.toRingHom.comp
+            (f.comp (ULift.ringEquiv : ULift.{u + 1, u} A ≃+* A).toRingHom))) := by
   let α := proEtaleConstantRingMap (T := T) f
   let D := Classical.choice
     (SheafOfModules.nonempty_derivedChangeOfRingsCochainModel.{u + 1, u, u + 1, u + 2, u + 2} α)
-  let E := siteScalarChange T α
-  let F := siteScalarDerivedChange T α
-  let ε := siteScalarDerivedCounit T α
+  let E := reductionChange T α
+  let F := reductionDerivedChange T α
+  let ε := reductionDerivedCounit T α
   let c := complexCounitNat E F ε
   have : F.IsLeftDerivedFunctor c
       (HomologicalComplex.quasiIso (proEtaleRingModules T (proEtaleConstantRing T A)) (.up ℤ)) :=
@@ -514,10 +516,10 @@ private theorem scalarExtension_cochainModelIso
       (HomologicalComplex.quasiIso (proEtaleRingModules T (proEtaleConstantRing T A)) (.up ℤ)) :=
     D.universal
   let e : E ≅ D.E := NatIso.ofComponents
-    (fun M ↦ eqToIso ((siteScalarChange_obj_eq T α M).trans (D.obj_eq M).symm)) (by
+    (fun M ↦ eqToIso ((reductionChange_obj_eq T α M).trans (D.obj_eq M).symm)) (by
       intro M N g
       dsimp only [eqToIso.hom]
-      rw [siteScalarChange_map_eq, D.map_eq]
+      rw [reductionChange_map_eq, D.map_eq]
       simp only [Category.assoc, eqToHom_trans_assoc, eqToHom_trans])
   let d := Functor.isoWhiskerRight (NatIso.mapHomologicalComplex e (.up ℤ)) DerivedCategory.Q
   exact ⟨Functor.leftDerivedNatIso F D.T c D.ε
@@ -593,8 +595,44 @@ private theorem scalarExtension_constructible
       ((DerivedCategory.homologyFunctor
         (proEtaleRingModules T (proEtaleConstantRing T B)) i).obj
           ((scalarExtensionFunctor f T).obj K)) := by
+  classical
+  let H := fun j : ℤ ↦ (DerivedCategory.homologyFunctor
+    (proEtaleRingModules T (proEtaleConstantRing T A)) j).obj K
+  obtain ⟨S, hn, hS⟩ := common_stratification hbounded.toFinset T A H
+    (fun j _ ↦ hconstructible j)
+  have hKb : ∃ b : ℤ, ∀ j : ℤ, b < j → IsZero (H j) := by
+    obtain ⟨b, hb⟩ := hbounded.bddAbove
+    refine ⟨b, fun j hj ↦ ?_⟩
+    by_contra hz
+    exact (not_le_of_gt hj) (hb hz)
+  have hstratum (i : Fin S.n) (j : ℤ) :
+      IsLocallyConstantProEtaleModuleSheafOfUniverses.{u, u} (S.domain i) A
+        (proEtaleConstantModulePullback (S.immersion i) A (H j)) ∧
+      ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ S.domain i),
+        Finite (proEtaleGeometricModuleStalk x (proEtaleConstantRing (S.domain i) A)
+          (proEtaleConstantModulePullback (S.immersion i) A (H j))) := by
+    by_cases hz : IsZero (H j)
+    · have hzero := pullback_isZero (S.immersion i) A (H j) hz
+      refine ⟨?_, fun Ω _ _ x ↦ finite_stalk_of_isZero _ A _ hzero x⟩
+      obtain ⟨I, U, f, hf, hM⟩ := locallyConstant_of_isZero _ A _ hzero
+      exact ⟨I, U, f, hf, fun k ↦ ⟨(hM k).choose, trivial, (hM k).choose_spec⟩⟩
+    · obtain ⟨hl, hs⟩ := hS j (hbounded.mem_toFinset.mpr hz) i
+      obtain ⟨I, U, f, hf, hM⟩ := hl
+      exact ⟨⟨I, U, f, hf, fun k ↦ ⟨(hM k).choose, trivial, (hM k).choose_spec⟩⟩, hs⟩
   intro q
-  have hD := finiteScalarExtension_constructible f T K hbounded hconstructible q
+  let D :=
+    SheafOfModules.constantCoefficientScalarExtensionOfUniverses.{u + 1, u, u + 1, u + 2, u + 2}
+      (ProEt.topology T)
+      ((ULift.ringEquiv : ULift.{u + 1, u} B ≃+* B).symm.toRingHom.comp
+        (f.comp (ULift.ringEquiv : ULift.{u + 1, u} A ≃+* A).toRingHom))
+  have hD : IsConstructibleProEtaleModuleSheaf T B
+      ((DerivedCategory.homologyFunctor
+        (proEtaleRingModules T (proEtaleConstantRing T B)) q).obj (D.obj K)) := by
+    refine ⟨S, hn, fun i ↦ ?_⟩
+    exact scalarExtension_models_finiteLocal (S.domain i) B _
+      (restrictedScalarCohomology_finiteLocalModels.{u, u + 2, u + 2}
+        (S.immersion i) f K hKb
+        (hstratum i) q)
   obtain ⟨e⟩ := scalarExtension_cochainModelIso f T
   exact constructibleProEtale_of_iso T B
     ((DerivedCategory.homologyFunctor
@@ -1712,25 +1750,100 @@ private theorem scalarExtensionFunctor_composition_spec
               (scalarExtensionFunctor_ringMap_comp f g T) P) :=
   (scalarExtensionFunctor_composition_existsUnique f g T).exists.choose_spec
 
+private theorem reduction_identity_data (T : Scheme.{u})
+    (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) :
+    ∃ ε : reductionDerivedChange T (𝟙 R) ≅ 𝟭 _,
+      ∀ (P : CochainComplex (reductionModules T R) ℤ),
+        ∃ v : (reductionChangeComplex T (𝟙 R)).obj P ⟶ P,
+          (∀ (i : ℤ) (U : T.ProEtᵒᵖ) (s : R.obj.obj U) (x : (P.X i).val.obj U),
+            (v.f i).val.app U (reductionTensorSection T (𝟙 R) (P.X i) U s x) = s • x) ∧
+          ε.hom.app (DerivedCategory.Q.obj P) =
+            reductionScalarComplexCounit T (𝟙 R) P ≫ DerivedCategory.Q.map v := by
+  let C := reductionModules T R
+  let E := reductionChange T (𝟙 R)
+  let F := reductionDerivedChange T (𝟙 R)
+  let ε := reductionDerivedCounit T (𝟙 R)
+  obtain ⟨a, ha⟩ := ordinaryAdjunction_exists T (𝟙 R)
+  let r : reductionRestrict T (𝟙 R) ≅ 𝟭 C :=
+    NatIso.ofComponents (fun M ↦ {
+      hom := { val := {
+        app := fun U ↦ ModuleCat.ofHom {
+          toFun := fun x ↦ x
+          map_add' := fun _ _ ↦ rfl
+          map_smul' := fun _ _ ↦ rfl }
+        naturality := by intros; ext; rfl } }
+      inv := { val := {
+        app := fun U ↦ ModuleCat.ofHom {
+          toFun := fun x ↦ x
+          map_add' := fun _ _ ↦ rfl
+          map_smul' := fun _ _ ↦ rfl }
+        naturality := by intros; ext; rfl } }
+      hom_inv_id := by ext; rfl
+      inv_hom_id := by ext; rfl }) (by intros; ext; rfl)
+  let e : E ≅ 𝟭 C := (a.ofNatIsoRight r).leftAdjointUniq Adjunction.id
+  have he (M : C) (U : T.ProEtᵒᵖ) (s : R.obj.obj U) (x : M.val.obj U) :
+      (e.hom.app M).val.app U (reductionTensorSection T (𝟙 R) M U s x) = s • x := by
+    have hx := congrArg (fun f ↦ f.val.app U x)
+      (Adjunction.homEquiv_leftAdjointUniq_hom_app
+        (a.ofNatIsoRight r) Adjunction.id M)
+    change (a.homEquiv M M (e.hom.app M)).val.app U x = x at hx
+    have hx' := eq_of_heq (ha M M (e.hom.app M) U x)
+    have hone : (e.hom.app M).val.app U
+        (reductionTensorSection T (𝟙 R) M U 1 x) = x := hx'.symm.trans hx
+    have hs := tensorSection_smul T (𝟙 R) M U s 1 x
+    rw [mul_one] at hs
+    rw [← hs, (e.hom.app M).val.app U |>.hom.map_smul]
+    exact congrArg (fun z : M.val.obj U ↦ s • z) hone
+  let v := NatIso.mapHomologicalComplex e (.up ℤ) ≪≫
+    Functor.mapHomologicalComplexIdIso C (.up ℤ)
+  let d := Functor.isoWhiskerRight v DerivedCategory.Q ≪≫ DerivedCategory.Q.leftUnitor
+  let c := complexCounitNat E F ε
+  have : F.IsLeftDerivedFunctor c (HomologicalComplex.quasiIso C (.up ℤ)) :=
+    complexCounitNat_kan E F ε
+  let b : DerivedCategory.Q ⋙ 𝟭 (DerivedCategory C) ≅
+      E.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q :=
+    DerivedCategory.Q.rightUnitor ≪≫ d.symm
+  have : (𝟭 (DerivedCategory C)).IsLeftDerivedFunctor b.hom
+      (HomologicalComplex.quasiIso C (.up ℤ)) :=
+    Functor.isLeftDerivedFunctor_of_inverts _ _ b
+  let ε' : F ≅ 𝟭 (DerivedCategory C) :=
+    Functor.leftDerivedUnique (𝟭 _) F c b.hom (HomologicalComplex.quasiIso C (.up ℤ))
+  refine ⟨ε', fun P ↦ ⟨v.hom.app P, ?_, ?_⟩⟩
+  · intro i U s x
+    change (e.hom.app (P.X i)).val.app U
+      (reductionTensorSection T (𝟙 R) (P.X i) U s x) = s • x
+    exact he (P.X i) U s x
+  · have h := Functor.leftDerivedNatTrans_app F (𝟭 _) c b.hom
+      (HomologicalComplex.quasiIso C (.up ℤ)) (𝟙 _) P
+    change ε'.hom.app (DerivedCategory.Q.obj P) ≫ b.hom.app P = c.app P ≫ 𝟙 _ at h
+    rw [Category.comp_id] at h
+    apply (cancel_mono (b.hom.app P)).1
+    rw [h, Category.assoc]
+    have hd : DerivedCategory.Q.map (v.hom.app P) ≫ b.hom.app P = 𝟙 _ := by
+      change d.hom.app P ≫ d.inv.app P = 𝟙 _
+      exact d.hom_inv_id_app P
+    rw [hd, Category.comp_id]
+    exact complexCounitNat_app E F ε P
+
 private theorem scalarExtensionFunctor_identity_data
     {A : Type u} [CommRing A] (T : Scheme.{u}) :
     ∃ ε : scalarExtensionFunctor (RingHom.id A) T ≅ 𝟭 _,
       ∀ (P : CochainComplex (proEtaleRingModules T (proEtaleConstantRing T A)) ℤ),
-        ∃ v : (siteScalarChangeComplex T
+        ∃ v : (reductionChangeComplex T
             (proEtaleConstantRingMap (T := T) (RingHom.id A))).obj P ⟶ P,
           (∀ (i : ℤ) (U : T.ProEtᵒᵖ)
             (s : (proEtaleConstantRing T A).obj.obj U) (x : (P.X i).val.obj U),
-            (v.f i).val.app U (siteScalarTensorSection T
+            (v.f i).val.app U (reductionTensorSection T
               (proEtaleConstantRingMap (T := T) (RingHom.id A)) (P.X i) U s x) = s • x) ∧
           ε.hom.app (DerivedCategory.Q.obj P) =
             scalarExtensionFunctorCounit (RingHom.id A) T P ≫ DerivedCategory.Q.map v := by
-  have hi : proEtaleConstantRingMap (T := T) (RingHom.id A) =
-      𝟙 (proEtaleConstantRing T A) := by
+  have hα : proEtaleConstantRingMap (T := T) (RingHom.id A) = 𝟙 _ := by
     exact CategoryTheory.Functor.map_id (constantSheaf (ProEt.topology T) CommRingCat.{u + 1})
       (CommRingCat.of (ULift.{u + 1, u} A))
-  unfold scalarExtensionFunctor scalarExtensionFunctorCounit
-  rw [hi]
-  exact siteScalarIdentity_data T (proEtaleConstantRing T A)
+  simp only [scalarExtensionFunctor, scalarExtension, proEtaleRingDerivedExtension,
+    scalarExtensionFunctorCounit]
+  rw [hα]
+  exact reduction_identity_data T (proEtaleConstantRing T A)
 
 /-- The identity extension has a unique multiplication-normalized unitor.
 Source: blueprint proof (4), Stacks 06YY

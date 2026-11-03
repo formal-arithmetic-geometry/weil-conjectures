@@ -89,15 +89,19 @@ private theorem eq_of_good_complexes
     Localization.inverts DerivedCategory.Q (HomologicalComplex.quasiIso _ _) q hq
   let e : DerivedCategory.Q.obj Q ≅ M :=
     asIso (DerivedCategory.Q.map q) ≪≫ DerivedCategory.Q.objObjPreimageIso M
-  have : IsIso (F.map e.hom) := F.map_isIso e.hom
-  apply (cancel_epi (F.map e.hom)).1
   have hf : ∀ i : ℤ, SheafOfModules.IsFlatOnSite
       (J := ProEt.topology X)
       (R := completedIntegralCommRingSheafUnrestricted l E X) (Q.X i) := fun i ↦
     (exactFunctor _ _).prop_of_iso
       (SheafOfModules.siteSheafTensorRightIso.{t+1, t, max u (t+1)}
         (completedIntegralCommRingSheafUnrestricted l E X) (Q.X i)).symm (hflat i)
-  rw [a.naturality, b.naturality, h Q ⟨hQ, hf⟩]
+  have he : F.map e.hom ≫ a.app M = F.map e.hom ≫ b.app M := by
+    rw [a.naturality, b.naturality, h Q ⟨hQ, hf⟩]
+  have hc := congrArg (fun z ↦ F.map e.inv ≫ z) he
+  have hi : F.map e.inv ≫ F.map e.hom = 𝟙 (F.obj M) := by
+    rw [← F.map_comp, e.inv_hom_id]
+    exact F.map_id M
+  simpa only [← Category.assoc, hi, Category.id_comp] using hc
 
 private theorem eq_mate_of_counit_on_good_complexes
     (r : shriek l E j o ⋙ SX.reduction ≅ SU.reduction ⋙ J l E j o)

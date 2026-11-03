@@ -316,8 +316,9 @@ theorem fixedPointStalkTransport_add
   have hk : (κ (a + b) (by omega)).hom = cP.hom ≫
       Functor.whiskerLeft (L Λ (P a)) (κ b hb).hom ≫
       Functor.whiskerRight (κ a ha).hom (L Λ (G b)) ≫ cG.inv := by
-    simpa only [cP, cG, Iso.trans_hom, Iso.trans_inv, eqToIso.hom,
-      eqToIso.inv, Category.assoc] using hκ
+    simp only [cP, cG, Iso.trans_hom, Iso.trans_inv, eqToIso.hom,
+      eqToIso.inv, Category.assoc]
+    exact hκ
   exact transport_all_generic (L Λ z) (Γ Λ (Spec (.of F.k)))
     (L Λ (P a)) (L Λ (P b)) (L Λ (P (a + b)))
     (L Λ (G a)) (L Λ (G b)) (L Λ (G (a + b)))
