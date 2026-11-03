@@ -12653,6 +12653,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.SmoothPurity.SectionProj
 public import WeilConjectures.CategoryTheory.Adjunction.SquareCompatible
 public import WeilConjectures.CategoryTheory.Adjunction.SquareCompatibleMate
 public import WeilConjectures.CategoryTheory.Adjunction.TensorInvertible
+public import WeilConjectures.CategoryTheory.Adjunction.TowerTransitionTransport
 public import WeilConjectures.CategoryTheory.Adjunction.UnitBiproductDesc
 public import WeilConjectures.CategoryTheory.Adjunction.UnitProjection
 public import WeilConjectures.CategoryTheory.Adjunction.UniversalArrowMate
