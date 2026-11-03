@@ -24,7 +24,8 @@ namespace AlgebraicGeometry.SymmetricAlgebraSheaf
 
 open scoped TensorProduct
 
-private noncomputable def symmetricCongr {R M N : Type u}
+/-- The symmetric algebras of linearly equivalent modules are isomorphic. -/
+noncomputable def symmetricCongr {R M N : Type u}
     [CommRing R] [AddCommGroup M] [Module R M] [AddCommGroup N] [Module R N]
     (e : M ≃ₗ[R] N) : SymmetricAlgebra R M ≃ₐ[R] SymmetricAlgebra R N := by
   let f := SymmetricAlgebra.lift ((SymmetricAlgebra.ι R N).comp e.toLinearMap)
@@ -37,7 +38,8 @@ private noncomputable def symmetricCongr {R M N : Type u}
     ext x
     simp [f, g]
 
-private theorem symmetricCongr_ι {R M N : Type u}
+/-- `symmetricCongr` sends a generator to the generator of its image. -/
+theorem symmetricCongr_ι {R M N : Type u}
     [CommRing R] [AddCommGroup M] [Module R M] [AddCommGroup N] [Module R N]
     (e : M ≃ₗ[R] N) (m : M) :
     symmetricCongr e (SymmetricAlgebra.ι R M m) = SymmetricAlgebra.ι R N (e m) := by
