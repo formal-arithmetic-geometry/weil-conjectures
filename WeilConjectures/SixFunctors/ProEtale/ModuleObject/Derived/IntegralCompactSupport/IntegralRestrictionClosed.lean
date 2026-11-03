@@ -460,7 +460,7 @@ theorem integralRestrictionClosed (k : Type u) [Field k]
         (((closedModuleSectionsWithSupport Λ i i.openComplement.ι).rightDerivedFunctor ⋙
           (lowerStar Λ i).mapDerivedCategory).obj K) := by
       exact (generators Λ X).ext_of_isTriangulatedClosed₁ _ (hδ K) hK (hfin.2 K hK)
-    have hP := (integralModelsOperations ℓ E).1 i _ hF
+    have hP := (integralModels_operations ℓ E).1 i _ hF
     let eD := (Functor.mapDerivedCategoryCompIso (lowerStar Λ i) (upperStar Λ i)).symm ≪≫
       Functor.mapDerivedCategoryNatIso ei ≪≫ Functor.mapDerivedCategoryIdIso _
     exact (generators Λ Z).prop_of_iso (eD.app _) hP

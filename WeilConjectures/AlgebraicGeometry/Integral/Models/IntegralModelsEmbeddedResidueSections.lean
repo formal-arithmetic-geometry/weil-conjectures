@@ -263,6 +263,12 @@ theorem integralModelsEmbeddedResidueSections
   exact residue_sections_of_completion_exists
     (Scheme.coefficientProEtaleModelTopology.{u, u} X)
     (ULift.{u + 1} (PadicAlgCl.integers ℓ E.1)) (ULift.up π)
-    _ _ _ (integralModelsEmbeddedCompletionDiagram ℓ E π hπ X)
+    _ _ _ ⟨integralModelsEmbeddedConstantIso ℓ E X,
+      integralModelsEmbeddedCompletedIso ℓ E π hπ X,
+      integralModelsEmbeddedResidueIso ℓ E π X,
+      integralModelsEmbeddedReductionIso ℓ E π hπ X,
+      integralModelsEmbedded_scalar_square ℓ E π hπ X,
+      integralModelsEmbedded_residue_square ℓ E π X,
+      integralModelsEmbedded_reduction_square ℓ E π hπ X⟩
 
 end AlgebraicGeometry.ProEtale

@@ -197,7 +197,7 @@ private theorem native_section_unit {X S : Scheme.{u}} (g : X ⟶ S) (p : S ⟶ 
     s.hom.app (𝟙_ (DerivedCategory (Modules Λ X))) =
       Functor.OplaxMonoidal.η
         (moduleObjectDerivedPullback Λ p ⋙ moduleObjectDerivedPullback Λ g) := by
-  exact CondensedRing.canonicalDerivedPullbackSectionUnit Λ g p h s hs
+  exact CondensedRing.leftDerivedUpperStarSection_hom_app_unit Λ g p h s hs
 
 attribute [-instance] internalMonoidal in
 private theorem native_projective_unit (Y : Scheme.{u}) :

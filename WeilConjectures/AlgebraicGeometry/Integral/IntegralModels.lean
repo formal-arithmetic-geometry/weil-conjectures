@@ -349,16 +349,16 @@ theorem integral_models
     refine ⟨hs, hs.trans ?_⟩
     exact and_congr hc.symm (integralModelsEmbeddedResidueComparison ℓ E π hπ X K)
   · intro Y _ _ _ _ _ f _ K hK
-    have h := (CondensedRing.integralModelsOperations ℓ E).1 f K hK
+    have h := (CondensedRing.integralModels_operations ℓ E).1 f K hK
     let F := CondensedRing.upperStar (Profinite.padicIntegersRingObj ℓ E.1) f
     let := (constantModelConstructibleFiniteTor_wellDefined
       (Profinite.padicIntegersRingObj ℓ E.1) X).2.1
     exact ObjectProperty.prop_of_iso
       (constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.1) X)
       (F.leftDerivedFunctorIsoMapDerivedCategory.app K).symm h
-  · exact (CondensedRing.integralModelsOperations ℓ E).2.1 X
+  · exact (CondensedRing.integralModels_operations ℓ E).2.1 X
   · intro S V _ _ _ _ _ _ _ _ _ _ j i _ _ _ _ L hL
-    exact (CondensedRing.integralModelsOperations ℓ E).2.2.1 j i L hL
+    exact (CondensedRing.integralModels_operations ℓ E).2.2 j i L hL
   · intro K hK
     exact (integral_models_generators k p ℓ hℓp X E π hπ).1 K hK
   · intro K hK

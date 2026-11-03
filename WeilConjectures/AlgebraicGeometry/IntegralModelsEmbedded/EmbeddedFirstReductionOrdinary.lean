@@ -515,7 +515,12 @@ theorem embeddedFirstReductionOrdinary
   let : IsNoetherianRing A :=
     isNoetherianRing_of_ringEquiv (PadicAlgCl.integers ℓ E.1) ULift.ringEquiv.symm
   have hd := quotient_section_data J A (ULift.up π) φs qs ps
-    (integralModelsEmbeddedCompletionDiagram ℓ E π hπ X)
+    ⟨integralModelsEmbeddedConstantIso ℓ E X, integralModelsEmbeddedCompletedIso ℓ E π hπ X,
+      integralModelsEmbeddedResidueIso ℓ E π X,
+      integralModelsEmbeddedReductionIso ℓ E π hπ X,
+      integralModelsEmbedded_scalar_square ℓ E π hπ X,
+      integralModelsEmbedded_residue_square ℓ E π X,
+      integralModelsEmbedded_reduction_square ℓ E π hπ X⟩
   obtain ⟨i⟩ := smallQuotientComparisonIso X φ q e p
     (first_reduction_square ℓ E π X) hd.1 hd.2
   exact ⟨Functor.associator _ _ _ ≪≫

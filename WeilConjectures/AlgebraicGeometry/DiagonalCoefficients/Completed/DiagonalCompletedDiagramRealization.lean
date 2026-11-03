@@ -87,9 +87,10 @@ theorem diagonalCompletedDiagram_realization
     (hi₂ : DiagonalTrace.IsIntegration t₂.Rc.R a₂.hom t₂.trace δ) :
     ∃ d : Diagram (Profinite.continuousMapRingObj.{u} ℤ_[l]) Y (zlLine l),
       ∀ family : Family l Y, family.zl = d → Nonempty (Reference l Y δ family) := by
-  obtain ⟨rootsY⟩ := diagonalIntegralRoots_exists l Y (bottomField l)
-  obtain ⟨rootsP⟩ := diagonalIntegralRoots_exists l (ProjectiveLine Y) (bottomField l)
-  obtain ⟨rootsW⟩ := diagonalIntegralRoots_exists l (diagonalSurface Y) (bottomField l)
+  obtain ⟨rootsY⟩ := Nonempty.intro (diagonalIntegralRoots l Y (bottomField l))
+  obtain ⟨rootsP⟩ := Nonempty.intro (diagonalIntegralRoots l (ProjectiveLine Y) (bottomField l))
+  obtain ⟨rootsW⟩ :=
+    Nonempty.intro (diagonalIntegralRoots l (diagonalSurface Y) (bottomField l))
   obtain ⟨e⟩ := diagonalCompleted_frame l Y hY rootsY rootsP rootsW tq t₁ t₂ a₁ a₂
   let Rq := condensedDiagonalRightDerived l (ProjectiveLine Y ↘ Y)
   let R₁ := condensedDiagonalRightDerived l
