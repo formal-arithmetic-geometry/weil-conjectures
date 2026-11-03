@@ -75,7 +75,8 @@ Step 6 and exchange naturality therefore give the asserted summand formula.
 8. Apply the locally finite native compact-support coproduct theorem on the geometric
 fibres. Quasi-compact locally finite type schemes are finite type; these properties,
 properness and open immersion survive base change, and Z is finite type by composition.
-No absolute separatedness is needed. Step 1 places all PX^n A in LX. The summand formula
+Y is separated over k (blueprint standing convention). Step 1 places all PX^n A in LX.
+The summand formula
 identifies UY(kappa) followed by beta with the canonical F-coproduct comparison composed
 with the sum of the c_n. Both are invertible on LX. Conservativity of UY reflects this.
 -/
@@ -83,6 +84,7 @@ theorem nativeWeil_derived_induction_comparison
     [IsSeparated f] [QuasiCompact f] [LocallyOfFiniteType f]
     [LocallyOfFiniteType (Y ↘ Spec (.of k₀))]
     [QuasiCompact (Y ↘ Spec (.of k₀))] [QuasiSeparated (Y ↘ Spec (.of k₀))]
+    [IsSeparated (Y ↘ Spec (.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (.of k₀))] [QuasiCompact (X ↘ Spec (.of k₀))] :
     HeartProperties k₀ l X ∧ HeartProperties k₀ l Y ∧ HeartProperties k₀ l c.Z ∧
     (ordinaryImage k₀ l f c).IsTriangulated ∧

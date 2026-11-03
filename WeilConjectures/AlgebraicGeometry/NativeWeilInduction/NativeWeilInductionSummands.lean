@@ -270,6 +270,7 @@ private theorem ordinary_preserves_free_cofan
     [IsSeparated f] [QuasiCompact f] [LocallyOfFiniteType f]
     [LocallyOfFiniteType (Y ↘ Spec (.of k₀))]
     [QuasiCompact (Y ↘ Spec (.of k₀))] [QuasiSeparated (Y ↘ Spec (.of k₀))]
+    [IsSeparated (Y ↘ Spec (.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (.of k₀))] [QuasiCompact (X ↘ Spec (.of k₀))]
     (A : _root_.DerivedCategory
       (ProEtale.AdicSheaf l (X ↘ Spec (.of k₀)).geometricFiber))
@@ -311,6 +312,8 @@ private theorem ordinary_preserves_free_cofan
   have : LocallyOfFiniteType (aY.geometricFiber ↘ Spec (.of (AlgebraicClosure k₀))) :=
     MorphismProperty.pullback_snd _ _ inferInstance
   have : QuasiCompact (aY.geometricFiber ↘ Spec (.of (AlgebraicClosure k₀))) :=
+    MorphismProperty.pullback_snd _ _ inferInstance
+  have : IsSeparated (aY.geometricFiber ↘ Spec (.of (AlgebraicClosure k₀))) :=
     MorphismProperty.pullback_snd _ _ inferInstance
   obtain ⟨h, -, hpres⟩ := ProEtale.nativeAdicCompactSupport_localizing_preservesCoproducts
     k₀ (AlgebraicClosure k₀) l (Fact.out : ringChar k₀ ≠ l) fbar cbar
@@ -382,6 +385,7 @@ theorem nativeWeil_induction_summands
     [IsSeparated f] [QuasiCompact f] [LocallyOfFiniteType f]
     [LocallyOfFiniteType (Y ↘ Spec (.of k₀))]
     [QuasiCompact (Y ↘ Spec (.of k₀))] [QuasiSeparated (Y ↘ Spec (.of k₀))]
+    [IsSeparated (Y ↘ Spec (.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (.of k₀))] [QuasiCompact (X ↘ Spec (.of k₀))] :
     ∃ cN : ∀ (n : ℤ) (A : _root_.DerivedCategory
         (ProEtale.AdicSheaf l (X ↘ Spec (.of k₀)).geometricFiber)),

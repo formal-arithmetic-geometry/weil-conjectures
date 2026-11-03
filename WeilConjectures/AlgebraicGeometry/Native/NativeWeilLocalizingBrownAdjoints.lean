@@ -154,12 +154,8 @@ private theorem nativeWeil_heart
     [T.Over (Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (T ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (T ↘ Spec (CommRingCat.of k₀))] :
-    NativeWeilInduction.HeartProperties k₀ l T := by
-  have : IsLocallyNoetherian T :=
-    LocallyOfFiniteType.isLocallyNoetherian (T ↘ Spec (CommRingCat.of k₀))
-  have : QuasiSeparated (T ↘ Spec (CommRingCat.of k₀)) := by infer_instance
-  exact (NativeWeilInduction.nativeWeil_derived_induction_comparison k₀ l
-    (𝟙 T) (Compactification.ofIsProper (𝟙 T))).1
+    NativeWeilInduction.HeartProperties k₀ l T :=
+  NativeWeilInduction.nativeWeil_heart_properties k₀ l T
 
 private theorem nativeWeil_frobenius_powers
     (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
@@ -447,6 +443,7 @@ theorem nativeWeil_localizing_brown_adjoints
     [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
+    [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]
     (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of k₀))]
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] :
     ∃ (h : ∀ K, nativeWeilUnderlyingHull k₀ l X K →
