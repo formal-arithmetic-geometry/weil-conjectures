@@ -68,6 +68,7 @@ import WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
 import Mathlib.CategoryTheory.Adjunction.Additive
 import all WeilConjectures.AlgebraicGeometry.Strict.Tower.StrictTowerExchangeMateNormalization
 import all WeilConjectures.CategoryTheory.FlatScalarTowerLimit.FlatScalarTowerLimitSquare
+public import WeilConjectures.AlgebraicGeometry.CompleteDerivedCompletion.CompletePullbackReduction
 
 /-! # Coefficient normalization of the raw ordered completed exchange
 
@@ -950,3 +951,34 @@ def constantNormalized (sq : ChosenCartesianSquare g' f' f g) :
   naturality K L a := (normalized_naturality d sq K L a).2
 
 end AlgebraicGeometry.Scheme.OrderedExchange
+
+namespace AlgebraicGeometry.ProEtale.OrderedExchange
+
+private theorem unit_hom_ext {C : Type*} [Category C] (F : C ⥤ C)
+    (η : 𝟭 C ⟶ F) {M Q : C} [Epi (F.map (η.app M))] [Mono (η.app Q)]
+    {a b : F.obj M ⟶ Q} (h : η.app M ≫ a = η.app M ≫ b) : a = b := by
+  have hab : F.map a = F.map b := by
+    apply (cancel_epi (F.map (η.app M))).mp
+    simpa only [Functor.map_comp] using congrArg F.map h
+  apply (cancel_mono (η.app Q)).mp
+  calc
+    a ≫ η.app Q = η.app (F.obj M) ≫ F.map a := η.naturality a
+    _ = η.app (F.obj M) ≫ F.map b := congrArg (η.app (F.obj M) ≫ ·) hab
+    _ = b ≫ η.app Q := (η.naturality b).symm
+
+private theorem completion_hom_ext (T : Scheme.{t})
+    {M Q : DerivedCategory (AdicCompletion.Modules l E T)}
+    (hQ : IsDerivedComplete l E T Q)
+    {a b : (completion l E T).obj M ⟶ Q}
+    (h : (kappa l E T).app M ≫ a = (kappa l E T).app M ≫ b) : a = b := by
+  have hc := completeDerivedCompletion l E T T (𝟙 T)
+  have hfinite := hc.2.2.2.2.2.2.1
+  have hcriterion := hc.2.2.2.2.2.2.2.1
+  have : IsIso ((red l E T).map ((kappa l E T).app M)) := (hfinite M).2.1
+  have : IsIso ((completion l E T).map ((kappa l E T).app M)) :=
+    inferInstanceAs (IsIso ((rlim l E T).map
+      ((red l E T).map ((kappa l E T).app M))))
+  have : IsIso ((kappa l E T).app Q) := (hcriterion Q).mp hQ
+  exact unit_hom_ext (completion l E T) (kappa l E T) h
+
+end AlgebraicGeometry.ProEtale.OrderedExchange
