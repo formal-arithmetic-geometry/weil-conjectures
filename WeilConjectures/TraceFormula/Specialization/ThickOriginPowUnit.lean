@@ -11,9 +11,6 @@ public import WeilConjectures.TraceFormula.Specialization.ThickOriginPowFibre
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ResidueField
 public import WeilConjectures.TraceFormula.Specialization.ThickOriginReducedUnit
 public import WeilConjectures.TraceFormula.Specialization.ThickOriginRestrictedUnit
-public import WeilConjectures.PoincareDuality.Verdier
-public import WeilConjectures.TraceFormula.Specialization.ThickOrigin
-public import WeilConjectures.TraceFormula.Specialization.ThickOriginPow
 
 /-!
 

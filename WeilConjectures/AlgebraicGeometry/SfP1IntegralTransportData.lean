@@ -7,8 +7,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.FiniteP1KummerNaturality
 public import WeilConjectures.AlgebraicGeometry.FiniteP1UnitOnPullback
 public import WeilConjectures.AlgebraicGeometry.OrdinaryProperForgetComparison
-public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1DiagonalComponents
-public import WeilConjectures.AlgebraicGeometry.SfSupportedDiagonalData
 public import WeilConjectures.AlgebraicGeometry.SfDiagonalKernelIntegrals
 public import WeilConjectures.AlgebraicGeometry.SfP1SupportedExtMapData
 

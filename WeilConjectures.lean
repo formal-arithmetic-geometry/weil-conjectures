@@ -2805,7 +2805,6 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechSecti
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FibreDimension
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Field
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
-public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteSections
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.GeometricFibreRank
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.IsFlatOver
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.IsFlatOverLocal
@@ -19699,7 +19698,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LocalizationIntegral
 public import WeilConjectures.SixFunctors.Etale.Derived.LocalizationIntegralClosedSupport
 public import WeilConjectures.SixFunctors.Etale.Derived.LocalizationRational
 public import WeilConjectures.SixFunctors.Etale.Derived.LocalizationRationalWeil
-public import WeilConjectures.SixFunctors.Etale.Derived.LocalizationRecollement
 public import WeilConjectures.SixFunctors.Etale.Derived.LocallyConstantInvertible
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChange
@@ -21250,7 +21248,6 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.PadicAlg
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.PadicAlgClRetraction
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldBasis
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldBiproductUnit
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldComapConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldExtendRestrictBiproduct
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldFiniteFree
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldLinear

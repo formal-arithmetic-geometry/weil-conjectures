@@ -9,7 +9,6 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyDualityAveraging
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBaseSliceAveraging
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBaseSliceClosedHom
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBaseSliceDualizing
-public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBase
 
 /-!
 

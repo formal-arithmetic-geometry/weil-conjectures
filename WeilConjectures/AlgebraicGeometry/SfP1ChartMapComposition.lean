@@ -4,8 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionComp
-public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1DiagonalComponents
+public import WeilConjectures.AlgebraicGeometry.SfP1IntegralTransportData
 
 /-! # Direct-image composition in the projective-line chart
 

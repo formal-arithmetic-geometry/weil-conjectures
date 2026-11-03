@@ -7,8 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.IhomComparison
 public import WeilConjectures.SixFunctors.NearbyCycles.AutActionTensor
-public import WeilConjectures.TraceFormula.Specialization.NearbyDualityOpen
-public import WeilConjectures.TraceFormula.Specialization.TraitModelOfGenericBaseFiniteness
+public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBase
 
 /-!
 

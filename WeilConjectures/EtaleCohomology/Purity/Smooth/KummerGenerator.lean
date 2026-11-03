@@ -6,14 +6,10 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.ConstructibleTorsion
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineRelative
 public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
 public import WeilConjectures.SixFunctors.Etale.Derived.AlgClosedField
 import WeilConjectures.SixFunctors.Etale.Derived.Point
-public import WeilConjectures.CategoryTheory.DerivedCategory.HomSingleProjective
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Linear
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.KunnethMap
-public import WeilConjectures.SixFunctors.Etale.Derived.GeometricPoint
-public import WeilConjectures.AlgebraicGeometry.AffineSpace.PuncturedLine
 
 /-!
 # Detecting generators of direct images at geometric points

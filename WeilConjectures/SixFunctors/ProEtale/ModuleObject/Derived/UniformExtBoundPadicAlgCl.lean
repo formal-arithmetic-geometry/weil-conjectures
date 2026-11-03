@@ -9,7 +9,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.RestrictExtendScalars
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.ClosedImmersionExtendScalars
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.ExtendScalarsConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.LisseDescentFiniteSubfield
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldComapConstructible
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldRestrictScalars
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ConstructibleSheafDevissage
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.HomFilteredColimitEllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Constructible

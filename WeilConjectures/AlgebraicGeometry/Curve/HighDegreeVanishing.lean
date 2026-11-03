@@ -7,7 +7,6 @@ module
 
 public import Mathlib.AlgebraicGeometry.Limits
 public import WeilConjectures.AlgebraicGeometry.Curve
-public import WeilConjectures.AlgebraicGeometry.Sites.TorsionSheaf
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyFilteredColimit
 public import WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport
 public import WeilConjectures.AlgebraicGeometry.Sites.TorsionAcyclic

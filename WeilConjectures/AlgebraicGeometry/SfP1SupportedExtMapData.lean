@@ -5,12 +5,14 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
+public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1DiagonalComponents
+public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1KummerMaps
 public import WeilConjectures.AlgebraicGeometry.ProjectiveLineDiagonalCartier
+public import WeilConjectures.AlgebraicGeometry.ProjectiveLineTrace
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
 public import WeilConjectures.AlgebraicGeometry.SectionNonvanishingZeroLocus
 public import WeilConjectures.AlgebraicGeometry.SpecAlgClosedEtaleSheafConstant
 public import WeilConjectures.CategoryTheory.RingedToposDerivedPushforwardComposition
-public import WeilConjectures.AlgebraicGeometry.OrdinarySupportedKummerSystem
 
 /-! # The supported Ext representative for projective-line integral transport
 

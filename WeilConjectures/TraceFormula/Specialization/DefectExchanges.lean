@@ -14,6 +14,7 @@ public import WeilConjectures.TraceFormula.Specialization.NearbyProperExchange
 public import WeilConjectures.TraceFormula.Specialization.NearbySmoothExchange
 public import WeilConjectures.TraceFormula.Specialization.NormalizePrecoherent
 public import WeilConjectures.TraceFormula.Specialization.TraitModelInstances
+public import WeilConjectures.TraceFormula.Specialization.TraitModelProperExchange
 
 /-!
 

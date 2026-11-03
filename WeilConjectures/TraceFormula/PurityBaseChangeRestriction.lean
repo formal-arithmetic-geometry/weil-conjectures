@@ -8,9 +8,9 @@ module
 public import WeilConjectures.AlgebraicGeometry.OverPullbackFiniteType
 public import WeilConjectures.CategoryTheory.Monoidal.ExceptionalTensorMap
 public import WeilConjectures.TraceFormula.BaseChangeCoherence
+public import WeilConjectures.TraceFormula.ExceptionalKunnethFunctoriality
 public import WeilConjectures.TraceFormula.OpenPieceCoherence
 public import WeilConjectures.TraceFormula.PurityTensorMap
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition
 
 /-!
 

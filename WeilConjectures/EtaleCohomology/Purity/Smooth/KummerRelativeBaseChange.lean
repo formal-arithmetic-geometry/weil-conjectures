@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerOrientation
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineRelative
 
 /-!
 # Base change of the direct images of `Λ(1)` from `𝔸¹` and `𝔾ₘ`

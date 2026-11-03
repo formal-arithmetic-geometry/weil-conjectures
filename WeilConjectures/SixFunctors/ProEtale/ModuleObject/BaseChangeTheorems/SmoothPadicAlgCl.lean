@@ -5,10 +5,8 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChange
 public import WeilConjectures.Tactic.ExactModProofs
-public import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicIntegralModel
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChangeIntegralRational
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicSubfieldFinite
 
 /-!
 # The base change map on the ambient derived categories and the coefficient change `𝒪_E ⟶ ℚ̄_ℓ`

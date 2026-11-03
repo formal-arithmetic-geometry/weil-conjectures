@@ -15,7 +15,6 @@ public import WeilConjectures.Tactic.MatchTactic
 public import WeilConjectures.TraceFormula.Specialization.ComponentExchangeAssembly
 public import WeilConjectures.TraceFormula.Specialization.PointExchangeNormalForm
 public import WeilConjectures.TraceFormula.Specialization.SupportExchangeOnComponentBdc
-public import WeilConjectures.TraceFormula.Specialization.SupportIdentityAbstract
 public import WeilConjectures.TraceFormula.Specialization.FixedSquareClosedExchange
 
 /-!

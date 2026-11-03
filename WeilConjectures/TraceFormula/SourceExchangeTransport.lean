@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.TraceFormula.ProperKunneth
 public import WeilConjectures.TraceFormula.ClassTest
-public import WeilConjectures.PoincareDuality.ProjectionFormula
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.ExceptionalHom
 
 /-!
