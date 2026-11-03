@@ -83,6 +83,11 @@ import WeilConjectures.PoincareDuality.PodCoefficientDescent.PodCommonStageCompo
 import WeilConjectures.PoincareDuality.PodCoefficientDescent.PodFiniteScalarCoordinatesRealization
 import WeilConjectures.CategoryTheory.ScalarLocalization.ScalarLocalizationPullbackPairIso
 import WeilConjectures.SmoothPurity.Integral.IntegralCompletedTensorBilinear
+import WeilConjectures.PoincareDuality.PodCoefficientDescent.PodPairNatIsoDescent
+import WeilConjectures.SmoothPurity.Common.CommonStagePullbackDescent
+import WeilConjectures.ZetaWeil.SpecifiedHomScalarRationalNaturality
+import all WeilConjectures.SmoothPurity.CommonStageInternalHom.CommonStageInternalHomCoherenceLemmas
+import all WeilConjectures.SmoothPurity.CommonStageInternalHom.CommonStageInternalHomCoherence
 
 /-! # Scalar and localized descent of the reindexed internal Hom
 
@@ -1379,6 +1384,84 @@ def IsCommonNormalized
                 ((commonStagePullbackComparison l Ω g P.obj.1.unop L hM).hom).op
                 (commonStagePullbackComparison l Ω g P.obj.2 L hN).inv)) ≫
           (commonStageHomComparison l Ω X ((commonPair l Ω g).obj P) L h').inv)
+
+section CommonComparisonProof
+open CommonStageInternalHom
+open AlgebraicallyClosedCoefficients (coefficientInclusion)
+
+/-- Transition conjugates by the recorded stage identification.
+Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent). -/
+private theorem stageT_map (W : Scheme.{u}) {L M : Index l Ω} (k : L ≤ M)
+    {A B : Stage l Ω W L} (f : A ⟶ B) :
+    ((stageSystem l Ω W).T k).map f =
+      (operationStageTransitionIso l Ω W L M k).hom.app A ≫
+        (transition l Ω W L M k).map f ≫
+          (operationStageTransitionIso l Ω W L M k).inv.app B := by
+  rw [← Category.assoc, ← (operationStageTransitionIso l Ω W L M k).hom.naturality f,
+    Category.assoc, Iso.hom_inv_id_app, Category.comp_id]
+
+/-- The pullback comparison at a larger stage, through the scalar pullback comparison.
+Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent). -/
+private theorem pullbackComparison_hom_eq
+    (K : generalAlgebraicallyClosedConstructibleCategory l Ω Y)
+    (M : Index l Ω) (k : K.stage ≤ M) :
+    (commonStagePullbackComparison l Ω g K M k).hom =
+      (operationStageTransitionIso l Ω X K.stage M k).hom.app
+          ((rationalDerivedPullback l (Coefficient.{u} l Ω K.stage) g).obj K.obj) ≫
+        (rationalPullbackScalarComparison l (Coefficient.{u} l Ω K.stage)
+          (Coefficient.{u} l Ω M) (coefficientInclusion l Ω K.stage M k) g).hom.app K.obj ≫
+        (rationalDerivedPullback l (Coefficient.{u} l Ω M) g).map
+          ((operationStageTransitionIso l Ω Y K.stage M k).inv.app K.obj) := by
+  unfold commonStagePullbackComparison
+  rfl
+
+/-- Cancel the stage identification in the pullback coherence equation.
+Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent). -/
+private theorem step_algebra {C D : Type*} [Category* C] [Category* D] (R : D ⥤ C)
+    {U V W W' Z₀ : C} {x y z : D} (e0 : U ≅ V) (s : V ⟶ W) (e1 : W' ≅ W)
+    (ρ : W ⟶ R.obj x) (ey : x ≅ y) (ay : y ≅ z) (aX : U ⟶ Z₀) (cM : Z₀ ⟶ R.obj z)
+    (hc : (e0.hom ≫ s ≫ e1.inv) ≫ (e1.hom ≫ ρ ≫ R.map ey.hom) ≫ R.map ay.hom =
+      aX ≫ cM) :
+    s ≫ ρ ≫ R.map (ey ≪≫ ay).hom = e0.inv ≫ aX ≫ cM := by
+  rw [← hc]
+  simp
+
+set_option maxHeartbeats 1000000 in
+-- reason: the stage-system coherence equation has large functor-object types
+/-- The pullback comparisons are compatible with one further transition.
+Source: blueprint Step 5 (blueprint: lem-pod-reindexing-hom-coefficient-descent). -/
+private theorem pullback_step (K : generalAlgebraicallyClosedConstructibleCategory l Ω Y)
+    {L M : Index l Ω} (h : K.stage ≤ L) (k : L ≤ M) :
+    (transition l Ω X L M k).map (commonStagePullbackComparison l Ω g K L h).hom ≫
+      (rationalPullbackScalarComparison l (Coefficient.{u} l Ω L) (Coefficient.{u} l Ω M)
+        (coefficientInclusion l Ω L M k) g).hom.app (K.toStage h) ≫
+      (rationalDerivedPullback l (Coefficient.{u} l Ω M) g).map
+        (inputStep l Ω Y K h k).hom =
+    (operationStageTransitionIso l Ω X L M k).inv.app (((stageSystem l Ω X).T h).obj
+        ((rationalDerivedPullback l (Coefficient.{u} l Ω K.stage) g).obj K.obj)) ≫
+      ((stageSystem l Ω X).assoc h k).hom.app
+        ((rationalDerivedPullback l (Coefficient.{u} l Ω K.stage) g).obj K.obj) ≫
+      (commonStagePullbackComparison l Ω g K M (h.trans k)).hom := by
+  obtain ⟨b, hb, hcoh⟩ := commonStagePullback_comparison_data l Ω g
+  have h1 : (b h).hom.app K.obj = (commonStagePullbackComparison l Ω g K L h).hom :=
+    eq_of_heq (hb h K.obj).1
+  have h2 : (b (h.trans k)).hom.app K.obj =
+      (commonStagePullbackComparison l Ω g K M (h.trans k)).hom :=
+    eq_of_heq (hb (h.trans k) K.obj).1
+  have h3 : (b k).hom.app (K.toStage h) =
+      (commonStagePullbackComparison l Ω g ⟨L, K.toStage h⟩ M k).hom :=
+    eq_of_heq (hb k (K.toStage h)).1
+  have hc := hcoh h k K.obj
+  rw [h1, h2, h3, pullbackComparison_hom_eq l Ω g ⟨L, K.toStage h⟩ M k] at hc
+  erw [stageT_map l Ω X k (commonStagePullbackComparison l Ω g K L h).hom] at hc
+  unfold inputStep
+  exact step_algebra (rationalDerivedPullback l (Coefficient.{u} l Ω M) g)
+    ((operationStageTransitionIso l Ω X L M k).app _) _
+    ((operationStageTransitionIso l Ω X L M k).app _) _
+    ((operationStageTransitionIso l Ω Y L M k).app (K.toStage h)).symm
+    (((stageSystem l Ω Y).assoc h k).app K.obj) _ _ hc
+
+end CommonComparisonProof
 
 /-- The same evaluation-normalized comparison descends uniquely to actual common-stage classes.
 Source: blueprint Step 5; Stacks 08J9
