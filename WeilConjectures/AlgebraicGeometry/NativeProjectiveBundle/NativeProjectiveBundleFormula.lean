@@ -385,6 +385,20 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Localizing
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Mathlib.CategoryTheory.Comma.Over.Basic
 import WeilConjectures.SmoothPurity.CondensedOrdinaryCompactSections
+public import WeilConjectures.Algebra.Homology.SiteTensorHom.SiteTensorHomEquiv
+public import WeilConjectures.AlgebraicGeometry.Integral.IntegralTateBasis
+public import WeilConjectures.AlgebraicGeometry.KummerAdditivity
+
+public import WeilConjectures.CategoryTheory.Constant.ConstantScalarRestrictionTensorSupplement
+public import WeilConjectures.CategoryTheory.DerivedCategory.CondensedDualSingle
+public import WeilConjectures.CategoryTheory.InternalSectionModuleFlat
+public import WeilConjectures.CategoryTheory.InternalSectionTensorComparison
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence
+public import WeilConjectures.ProEtaleCoefficients.BoundedConstructibleCounterexample.NonFiniteMultiplicationKernel
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.Monoidal
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ClosedImmersionTensorProjection
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CondensedConstructiblePointDetection
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyFreeDualizable
 
 /-! # The native projective-bundle formula
 Source: latest blueprint, thm-pur-projective-bundle-formula, Step 2.
@@ -467,6 +481,19 @@ def component {T B : Scheme.{u}} (f : T ⟶ B)
   (CondensedRing.derivedUpperStarLowerStarAdjunction (c.obj ell) f).homEquiv _ _
     (summandPullback ell c f p a ≫ evaluate ell c T h a)
 
+/-- The zeroth component is the adjunction unit with the canonical unit comparison.
+Source: blueprint Step 2, the zeroth cup power
+(blueprint: thm-pur-projective-bundle-formula). -/
+theorem component_zero {T B : Scheme.{u}} (f : T ⟶ B)
+    (p : PurityTransport.LinePullCoordinates ell c f)
+    (h : (𝟙_ (c.derived ell T)) ⟶ c.derivedLine ell T 1) :
+    component ell c f p h 0 =
+      (CondensedRing.derivedUpperStarLowerStarAdjunction (c.obj ell) f).unit.app (𝟙_ _) ≫
+        (CondensedRing.lowerStar (c.obj ell) f).rightDerivedFunctor.map
+          (CondensedRing.leftDerivedUpperStarUnitIso (c.obj ell) f).hom := by
+  simp only [component, summandPullback, evaluate, Category.comp_id]
+  exact (CondensedRing.derivedUpperStarLowerStarAdjunction (c.obj ell) f).homEquiv_unit _ _ _
+
 /-- The actual finite coproduct map with the specified adjoint components.
 Source: blueprint displayed map (blueprint: thm-pur-projective-bundle-formula). -/
 def bundleMap {T B : Scheme.{u}} (f : T ⟶ B)
@@ -487,6 +514,173 @@ def targetBaseChange {T B T' B' : Scheme.{u}} {f : T ⟶ B} {f' : T' ⟶ B'}
     (CondensedRing.lowerStar (c.obj ell) f').rightDerivedFunctor.map
       (CondensedRing.leftDerivedUpperStarUnitIso (c.obj ell) v).hom
 
+private def sectionPower : ∀ n, (sectionModuleEquivalence.{u + 1, u + 1, u}
+    (Scheme.ProEt.topology X) (condensedRingObj (c.obj.{u} ell) X)).functor.obj
+      (c.line ell X n) ≅
+    spSignedTwist X (condensedRingObj (c.obj.{u} ell) X) (c.firstLine ell X) (n : ℤ) := by
+  let E := (sectionModuleEquivalence.{u + 1, u + 1, u}
+    (Scheme.ProEt.topology X) (condensedRingObj (c.obj.{u} ell) X)).functor
+  intro n
+  change E.obj (c.line ell X n) ≅ SheafOfModules.scalarTensorPower
+    (sectionRingSheaf.{u + 1, u + 1, u}
+      (Scheme.ProEt.topology X) (condensedRingObj (c.obj.{u} ell) X))
+    (E.obj (c.firstLine ell X)) n
+  induction n with
+  | zero => exact comparison_unitIso (Scheme.ProEt.topology X) (condensedRingObj (c.obj.{u} ell) X)
+  | succ n ih =>
+    cases n with
+    | zero => exact E.mapIso (λ_ (c.firstLine ell X))
+    | succ n =>
+      let S := sectionRingSheaf.{u + 1, u + 1, u}
+        (Scheme.ProEt.topology X) (condensedRingObj (c.obj.{u} ell) X)
+      let F := SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}
+        (A := S) (E.obj (c.firstLine ell X))
+      let t : E.obj (c.line ell X (n + 1) ⊗ c.firstLine ell X) ≅
+          F.obj (E.obj (c.line ell X (n + 1))) :=
+        (sheafTensorIso.{u + 1, u + 1, u} (Scheme.ProEt.topology X)
+          (condensedRingObj (c.obj.{u} ell) X)
+          (c.line ell X (n + 1)) (c.firstLine ell X)).symm
+      exact t ≪≫ F.mapIso ih
+
+private abbrev sectionEncoding := sectionModuleEquivalence.{u + 1, u + 1, u}
+  (Scheme.ProEt.topology X) (condensedRingObj (c.obj.{u} ell) X)
+
+private abbrev sectionCoefficient : Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1} :=
+  sectionRingSheaf.{u + 1, u + 1, u}
+  (Scheme.ProEt.topology X) (condensedRingObj (c.obj.{u} ell) X)
+
+private def sectionHomAdj (M : SheafOfModules.{u + 1}
+    ((sheafCompose (Scheme.ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+      (sectionCoefficient ell c X))) :
+    SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}
+      (A := sectionCoefficient ell c X) M ⊣
+      (SheafOfModules.homFunctor.{u + 1, u, u + 1, u + 1}
+        (sectionCoefficient ell c X)).obj (op M) := by
+  refine Adjunction.mkOfHomEquiv
+    { homEquiv := fun P N ↦ SheafOfModules.SiteTensorHom.equiv.{u + 1, u, u + 1, u + 1} P M N
+      homEquiv_naturality_left_symm := ?_
+      homEquiv_naturality_right := ?_ }
+  · intro P P' N f g
+    change (SheafOfModules.SiteTensorHom.equiv.{u + 1, u, u + 1, u + 1} P M N).symm (f ≫ g) =
+      (SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}
+        (A := sectionCoefficient ell c X) M).map f ≫
+        (SheafOfModules.SiteTensorHom.equiv.{u + 1, u, u + 1, u + 1} P' M N).symm g
+    apply (SheafOfModules.SiteTensorHom.equiv.{u + 1, u, u + 1, u + 1} P M N).injective
+    exact ((SheafOfModules.SiteTensorHom.equiv.{u + 1, u, u + 1, u + 1}
+      P M N).apply_symm_apply (f ≫ g)).trans
+      ((congrArg (fun z ↦ f ≫ z)
+        ((SheafOfModules.SiteTensorHom.equiv.{u + 1, u, u + 1, u + 1}
+          P' M N).apply_symm_apply g)).symm.trans
+          (SheafOfModules.SiteTensorHom.equiv_naturality.{u + 1, u, u + 1, u + 1} f _).symm)
+  · intro P N N' f g
+    ext
+    rfl
+
+private def encodeHom
+    (M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (c.obj.{u} ell) X)) :
+    (sectionEncoding ell c X).functor.obj ((ihom M).obj N) ≅
+      SheafOfModules.homObj.{u + 1, u, u + 1, u + 1} ((sectionEncoding ell c X).functor.obj M)
+        ((sectionEncoding ell c X).functor.obj N) := by
+  let E := sectionEncoding ell c X
+  let H := SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1} (E.functor.obj M)
+  let r := (ihom.adjunction M).ofNatIsoLeft (BraidedCategory.tensorLeftIsoTensorRight M)
+  let a := (E.symm.toAdjunction.comp r).comp E.toAdjunction
+  let t : (E.inverse ⋙ tensorRight M) ⋙ E.functor ≅ H :=
+    Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft E.inverse
+        (tensorRightComparison (Scheme.ProEt.topology X)
+          (condensedRingObj (c.obj.{u} ell) X) M).symm
+      ≪≫ (Functor.associator _ _ _).symm ≪≫
+        Functor.isoWhiskerRight E.counitIso H ≪≫ Functor.leftUnitor H
+  exact E.functor.mapIso ((ihom M).mapIso (E.unitIso.app N)) ≪≫
+    ((a.ofNatIsoLeft t).rightAdjointUniq
+      (sectionHomAdj ell c X (E.functor.obj M))).app (E.functor.obj N)
+
+private def negativeLine (n : ℕ) :
+    (ihom (c.line ell X (n + 1))).obj (𝟙_ _) ≅
+      spInternalSignedTwist X (condensedRingObj (c.obj.{u} ell) X)
+        (c.firstLine ell X) (.negSucc n) := by
+  let E := sectionEncoding ell c X
+  let R := sectionCoefficient ell c X
+  let P := spSignedTwist X (condensedRingObj (c.obj.{u} ell) X)
+    (c.firstLine ell X) ((n + 1 : ℕ) : ℤ)
+  let e : E.functor.obj ((ihom (c.line ell X (n + 1))).obj (𝟙_ _)) ≅
+      SheafOfModules.homObj.{u + 1, u, u + 1, u + 1} P (SheafOfModules.unit
+        ((sheafCompose (Scheme.ProEt.topology X)
+          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)) :=
+    encodeHom ell c X _ _ ≪≫
+      ((SheafOfModules.homFunctor.{u + 1, u, u + 1, u + 1} R).mapIso
+        (sectionPower ell c X (n + 1)).symm.op).app _ ≪≫
+      ((SheafOfModules.homFunctor.{u + 1, u, u + 1, u + 1} R).obj (op P)).mapIso
+        (comparison_unitIso (Scheme.ProEt.topology X) (condensedRingObj (c.obj.{u} ell) X))
+  exact E.unitIso.app _ ≪≫ E.inverse.mapIso e
+
+private theorem lineDualizable [∀ x : X, Invertible (ell : X.residueField x)]
+    (n : ℕ) : IsDualizable (c.line ell X n) := by
+  have hInv : IsUnit (ell : Γ(X, ⊤)) := by
+    apply X.toRingedSpace.isUnit_of_isUnit_germ
+    intro x hx
+    change IsUnit ((X.presheaf.germ ⊤ x hx).hom (ell : Γ(X, ⊤)))
+    rw [map_natCast]
+    apply (isUnit_map_iff (IsLocalRing.residue (X.presheaf.stalk x)) _).mp
+    simpa only [map_natCast] using isUnit_of_invertible (ell : X.residueField x)
+  obtain ⟨C, hC⟩ := tateModule_locally_trivial X ell hInv
+  have hT : IsLocallyFree
+      (condensedRingObj (Profinite.continuousMapRingObj ℤ_[ell]) X) (tateModule X ell) := by
+    refine ⟨C, fun i ↦ ?_⟩
+    obtain ⟨e⟩ := hC i
+    exact ⟨1, ⟨e ≪≫ (biproductUniqueIso (fun _ : Fin 1 ↦ 𝟙_ _)).symm⟩⟩
+  let E := Mod.extendScalars (coefficientMap (c.integralMap ell) X)
+  let _ : E.Monoidal := Mod.extendScalarsMonoidal _
+  have hL : IsDualizable (c.firstLine ell X) := hT.isDualizable.map E
+  induction n with
+  | zero => exact isDualizable_unit
+  | succ n hn => exact hn.tensorObj hL
+
+private def positiveDerivedIso [∀ x : X, Invertible (ell : X.residueField x)] :
+    ∀ n, positive ell c X n ≅ c.derivedLine ell X n := by
+  intro n
+  induction n with
+  | zero =>
+    exact (DerivedCategory.singleFunctorObjUnitIso _).symm ≪≫
+      ((shiftFunctorZero _ ℤ).app _).symm
+  | succ n hn => exact tensorIso hn (Iso.refl _) ≪≫ PurityTransport.derivedProduct ell c X n 1
+
+private theorem dualPositive [∀ x : X, Invertible (ell : X.residueField x)] (n : ℕ) :
+    Nonempty ((ihom (positive ell c X (n + 1))).obj (𝟙_ _) ≅
+      ((DerivedCategory.singleFunctor _ 0).obj
+        (spInternalSignedTwist X (condensedRingObj (c.obj.{u} ell) X)
+          (c.firstLine ell X) (.negSucc n)))⟦-(2 * ((n + 1 : ℕ) : ℤ))⟧) := by
+  let L := c.line ell X (n + 1)
+  let m : ℤ := 2 * ((n + 1 : ℕ) : ℤ)
+  let e : positive ell c X (n + 1) ≅ (DerivedCategory.singleFunctor _ (-m)).obj L :=
+    positiveDerivedIso ell c X (n + 1) ≪≫
+      ((DerivedCategory.singleFunctors _).shiftIso m (-m) 0 (by simp)).app L
+  obtain ⟨ed⟩ := DerivedCategory.nonempty_ihom_single_unit L
+    (lineDualizable ell c X (n + 1)) (-m)
+  refine ⟨(MonoidalClosed.internalHom.mapIso e.symm.op).app (𝟙_ _) ≪≫ ed ≪≫ ?_⟩
+  exact (DerivedCategory.singleFunctor _ (-(-m))).mapIso (negativeLine ell c X n) ≪≫
+    ((DerivedCategory.singleFunctors _).shiftIso (-m) (-(-m)) 0 (by simp)).symm.app _
+
+private def zeroLine : (𝟙_ _) ≅
+    spInternalSignedTwist X (condensedRingObj (c.obj.{u} ell) X) (c.firstLine ell X) 0 :=
+  (sectionEncoding ell c X).unitIso.app _ ≪≫
+    (sectionEncoding ell c X).inverse.mapIso (sectionPower ell c X 0)
+
+private theorem zeroSummand : Nonempty ((𝟙_ (c.derived ell X)) ≅
+    ((DerivedCategory.singleFunctor _ 0).obj
+      (spInternalSignedTwist X (condensedRingObj (c.obj.{u} ell) X)
+        (c.firstLine ell X) (-(0 : ℤ))))⟦-(2 * (0 : ℤ))⟧) := by
+  simpa only [mul_zero, neg_zero] using
+    (show Nonempty ((𝟙_ (c.derived ell X)) ≅
+      ((DerivedCategory.singleFunctor _ 0).obj
+        (spInternalSignedTwist X (condensedRingObj (c.obj.{u} ell) X)
+          (c.firstLine ell X) 0))⟦(0 : ℤ)⟧) from
+      ⟨(DerivedCategory.singleFunctorObjUnitIso _).symm ≪≫
+        (DerivedCategory.singleFunctor _ 0).mapIso (zeroLine ell c X) ≪≫
+        ((shiftFunctorZero _ ℤ).app _).symm⟩)
+
 /-- Identify the constructed inverse shifted power with the recorded signed Tate line.
 Source: blueprint displayed source and sk-def-sp-tate-twist
 (blueprint: thm-pur-projective-bundle-formula).
@@ -503,7 +697,9 @@ theorem summand_signedTwist (T : Scheme.{u})
       ((DerivedCategory.singleFunctor _ 0).obj
         (spInternalSignedTwist T (condensedRingObj (c.obj ell) T)
           (c.firstLine ell T) (-(a : ℤ))))⟦-(2 * (a : ℤ))⟧) := by
-  sorry
+  cases a with
+  | zero => exact zeroSummand ell c T
+  | succ a => exact dualPositive ell c T a
 
 end AlgebraicGeometry.ProEtale.NativeProjectiveBundle
 

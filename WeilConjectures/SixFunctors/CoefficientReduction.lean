@@ -22,6 +22,214 @@ import WeilConjectures.AlgebraicGeometry.Compact.CompactSupportCoefficientChange
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MonoidalStructure
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriek
 import WeilConjectures.AlgebraicGeometry.CoefficientChange.CoefficientTransformationComparisons
+public import Mathlib.Algebra.Category.ModuleCat.Projective
+public import Mathlib.Algebra.CharP.CharAndCard
+public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
+public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+public import Mathlib.Algebra.Module.FinitePresentation
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Sites.QuasiCompact
+public import Mathlib.Analysis.Normed.Module.FiniteDimension
+public import Mathlib.CategoryTheory.Adjunction.CompositionIso
+public import Mathlib.CategoryTheory.Adjunction.FullyFaithful
+public import Mathlib.CategoryTheory.Adjunction.Mates
+public import Mathlib.CategoryTheory.Adjunction.Restrict
+public import Mathlib.CategoryTheory.Monoidal.Mod
+public import Mathlib.CategoryTheory.ObjectProperty.ColimitsOfShape
+public import Mathlib.CategoryTheory.ObjectProperty.Shift
+public import Mathlib.CategoryTheory.Triangulated.Adjunction
+public import Mathlib.CategoryTheory.Triangulated.Generators
+public import Mathlib.CategoryTheory.Triangulated.Subcategory
+public import Mathlib.Topology.Defs.Filter
+public import WeilConjectures.Algebra.Homology.CanonicalTensorPullbackOfUniverses.RingedTopoiCanonicalTensorPullbackOfUniverses
+public import WeilConjectures.Algebra.Homology.HomotopyCategory.MapMonoidalComp
+public import WeilConjectures.Algebra.Homology.RingedTensorCorner.ProjectionMateExact
+public import WeilConjectures.AlgebraicGeometry.AdicCompletion.DerivedCompletionSupplement
+public import WeilConjectures.AlgebraicGeometry.BaseFieldFiniteCD.FiniteCohomologicalDimensionHypothesis
+public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
+public import WeilConjectures.AlgebraicGeometry.Cartesian.CartesianCoefficientTwistsSupplement
+public import WeilConjectures.AlgebraicGeometry.Cartesian.CartesianCoefficients
+public import WeilConjectures.AlgebraicGeometry.Cartesian.CartesianCoefficientsFiniteFree
+public import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeart
+public import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeartLocallyClosedExtension
+public import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeartSheafConeWitness
+public import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeartStratificationDefs
+public import WeilConjectures.AlgebraicGeometry.Compactification.CompactificationOverField
+public import WeilConjectures.AlgebraicGeometry.Condensed.CondensedCoefficientIsoConstructible
+public import WeilConjectures.AlgebraicGeometry.Condensed.CondensedConstantConstructibilitySupplement
+public import WeilConjectures.AlgebraicGeometry.CondensedIntegralCriterion
+public import WeilConjectures.AlgebraicGeometry.CondensedLocallyClosedExtensionTower
+public import WeilConjectures.AlgebraicGeometry.CondensedOpenClosedRecollement
+public import WeilConjectures.AlgebraicGeometry.ConstantModelTorAmplitude
+public import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalTowerLimit
+public import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalTowerTrace
+public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.DiagonalTowerCoefficients
+public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.ScalarPullbackMateInverseNormalized
+public import WeilConjectures.AlgebraicGeometry.Finite.Comparison.FiniteComparisonLocalizing
+public import WeilConjectures.AlgebraicGeometry.Finite.Comparison.FiniteComparisonPresentationSupplement
+public import WeilConjectures.AlgebraicGeometry.Finite.Constant.FiniteConstantLocalModel
+public import WeilConjectures.AlgebraicGeometry.Finite.Ring.FiniteRingEtaleCompactGenerators
+public import WeilConjectures.AlgebraicGeometry.Flat.FlatModelGeneration
+public import WeilConjectures.AlgebraicGeometry.Geo.GeoCartierCycleClass
+public import WeilConjectures.AlgebraicGeometry.Integral.Constant.IntegralConstantModelRealizationSupplement
+public import WeilConjectures.AlgebraicGeometry.Integral.IntegralCoefficientExtComparison
+public import WeilConjectures.AlgebraicGeometry.Integral.IntegralLfpConstantModelComparison
+public import WeilConjectures.AlgebraicGeometry.IntegralFiniteScalar.FiniteFreeScalarDerivedComparison
+public import WeilConjectures.AlgebraicGeometry.InternalModuleAbEquivalence
+public import WeilConjectures.AlgebraicGeometry.InternalModuleOperations.InternalModuleOperationsTransportSupplement
+public import WeilConjectures.AlgebraicGeometry.Locally.LocallyPerfectScalarModel
+public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Adjunction
+public import WeilConjectures.AlgebraicGeometry.PrincipalCoefficient.PrincipalCoefficientExceptional
+public import WeilConjectures.AlgebraicGeometry.PrincipalCoefficientTransport
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Open.ProEtaleOpenClosedSequenceRingSheaf
+public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleLocallyConstantSheaf
+public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSupplement
+public import WeilConjectures.AlgebraicGeometry.ProEtaleCoefficients.LocalizingClosureCtfEqualsBc
+public import WeilConjectures.AlgebraicGeometry.ProEtaleCoefficients.PadicConstantLocalModelTor
+public import WeilConjectures.AlgebraicGeometry.ProEtaleCoefficients.ProfiniteFiniteConstantLocalModel
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+public import WeilConjectures.AlgebraicGeometry.Proper.Open.ProperOpenCoefficientRefinement
+public import WeilConjectures.AlgebraicGeometry.QuotientChange.InternalScalarMateProjection
+public import WeilConjectures.AlgebraicGeometry.QuotientChange.InternalScalarPullbackNormalization
+public import WeilConjectures.AlgebraicGeometry.QuotientChange.InternalScalarRestrictionMateNormalization
+public import WeilConjectures.AlgebraicGeometry.QuotientChange.ScalarGeometricExchangeRectangle
+public import WeilConjectures.AlgebraicGeometry.QuotientChange.ScalarPullbackSquareCoherence
+public import WeilConjectures.AlgebraicGeometry.Rational.RationalOpenDirectImageConstructible
+public import WeilConjectures.AlgebraicGeometry.RationalP1.RationalP1Triangle
+public import WeilConjectures.AlgebraicGeometry.RationalP1.RationalP1UnitCounit
+public import WeilConjectures.AlgebraicGeometry.RootCoordinateFace.RootTowerCoordinateFace
+public import WeilConjectures.AlgebraicGeometry.Smooth.SmoothPurityReductionTowerData
+public import WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedLocalizingPullback
+public import WeilConjectures.CategoryTheory.AdjunctionSquareComposition
+public import WeilConjectures.CategoryTheory.CompactGeneratorsBuildObjects
+public import WeilConjectures.CategoryTheory.CompactObject
+public import WeilConjectures.CategoryTheory.DerivedCategory.Bounded.BoundedDualizableIndependent
+public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.DualizableProjectiveUnit
+public import WeilConjectures.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.CompConjugate
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedComp
+public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeMapDerivedCategory
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
+public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
+public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalarsAdjunctionQh
+public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsMonoidalComp
+public import WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
+public import WeilConjectures.CategoryTheory.Monoidal.Closed.ExternalIhom
+public import WeilConjectures.CategoryTheory.Monoidal.Conjugate
+public import WeilConjectures.CategoryTheory.ProEtaleCoefficients.LocalizingAdmissibleCoefficients
+public import WeilConjectures.CategoryTheory.Right.RightDerivedFunctorOfQuasiIsoResolutions
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.BaseCoefficientCondensedIdentification
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteDiscreteCondensedRing
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ProfiniteCondensedRing
+public import WeilConjectures.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
+public import WeilConjectures.CategoryTheory.Sites.FixedCoefficientDerivedChangeOfRings
+public import WeilConjectures.Compactification.BaseChange
+public import WeilConjectures.Compactification.FiniteFieldDatum.FiniteFieldFiberSupplement
+public import WeilConjectures.Compactification.Over
+public import WeilConjectures.ConstructibleSheaf.OpenClosed
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
+public import WeilConjectures.Mathlib.CategoryTheory.Functor.Derived.Adjunction
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import WeilConjectures.ProperBaseChange.CondensedConstructibleSerre
+public import WeilConjectures.ProperBaseChange.IntegralLfpLocallyFreeResolution
+public import WeilConjectures.SixFunctors.Etale.Derived.EtaleTorAmplitude
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion
+public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ComparisonMonoidal
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsMate
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ClosedImmersionTensorProjection
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.CoefficientProjectionSquare
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Compactification.CompactificationCoherenceCocycle
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Compactification.CompactificationLocalizing
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Compactification.CompactificationRefinementLocalizing
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedAmbientExchange
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedClosedSupportAdjunction
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedModuleDerivedPushpull
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteCoefficientSmallCarrierComparison
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteDiscreteScalarProjectionCase
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteOpenDirectImageCtf
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Formal.FormalClosedSupportDerived
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.IntegralDerivedCoefficientData
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.IntegralFinitePointResolution
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.IntegralModelsOperations
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.IntegralOpenImageProperFormulas
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntegralConstantModelLocalResolution
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntegralLisseDerivedAux
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerStarComp
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Mate.MateOpenRestriction
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Mate.MateOpenRestrictionMaps
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalLeftDerived
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Open.OpenExtensionConstructibleFiniteTor
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Open.OpenImmersionTensorProjection
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Proper.ProEtaleProperOpenInterchange
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Proper.ProperLocalizingAdmissibleCoefficients
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Scalar.ScalarSixCtfGenerators
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Scalar.ScalarSixDefinitions
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Scalar.ScalarSixDerivedPullbackNormalization
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Scalar.ScalarSixFiniteEtaleExtensionIso
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Scalar.ScalarSixFiniteEtaleLisseModel
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Scalar.ScalarSixFiniteEtaleOrigin
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Scalar.ScalarSixImmersionComparison
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixAdmissibleThickness
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixTensorComparison
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixTensorHom
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.DetSfCompBaseChangeDefs
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.ExceptionalInverseImageExistence
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.FieldTensor
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.ListedCoefficientMaps
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.ListedScalarCoefficientMaps
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.LocalizingExceptionalAdjoint
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.LocalizingLowerShriekCompositionModel
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.LocallyClosedGeneratorTensorIntersection
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.QlbarDirectImageComparison
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SmoothPurity.SitePerfectComplex
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarCoherence
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushIntegralDerivedIso
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherence
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.ScalarOpenCompositorCoherence
+
+public import WeilConjectures.SixFunctors.Supporting.ModCondensedCachedInstances
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.ModuleObjectProjectionMap
+import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsFlat
+import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsMonoidal
+import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryBraided
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionProjection
+import WeilConjectures.PoincareDuality.ProjectionFormula
+import WeilConjectures.AlgebraicGeometry.QuotientTensorFlatModel.QuotientTensorLeftFlatComputation
+import WeilConjectures.AlgebraicGeometry.QuotientTensorFlatModel.QuotientTensorRightFlatComputation
+import WeilConjectures.AlgebraicGeometry.QuotientSectionTensor.QuotientScalarTensorCanonical
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PullIsoMonoidal
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalBraided
+import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapMate
+import Mathlib.AlgebraicGeometry.Sites.Proetale
+import WeilConjectures.NumberTheory.Padics.CoefficientExtensionFinite
+import WeilConjectures.AlgebraicGeometry.QuotientChange.InternalPullNormalizationExistence
+import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapCompat
+public import WeilConjectures.TraceFormula.CategoricalTraceBiproduct
 
 /-!
 # The basic operations and reduction of the coefficients
@@ -531,49 +739,13 @@ structure ScalarExtensionCompatibility (l : ℕ) [Fact l.Prime] (E E' : Type) [F
 
 end ProEtale
 
-/-- The statement of blueprint `lem-fix-operation-reduction`, assembled from its parts:
-
-* `reduction`, `proEtaleReduction`: for a nonzerodivisor `ϖ` of `Λ` (for `Λ = 𝒪_E` a
-  uniformizer, so that `Λ → Λ ⧸ (ϖ)ⁿ` is `𝒪_E → A_{E,n}`), reduction modulo `(ϖ)ⁿ` commutes with
-  derived pullback, derived tensor product, ordinary and compact-support direct image, internal
-  Hom with arbitrary first variable and the exceptional inverse image `Rf^!`, in the étale and
-  in the pro-étale model; it is compatible with the projection map, with the unit and counit of
-  `Rf_! ⊣ Rf^!` (étale) and with the compact-support exchange map (pro-étale);
-* `finiteReduction`, `proEtaleFiniteReduction`: the reduction `Λ ⧸ (ϖ)ⁿ → Λ ⧸ (ϖ)ᵐ` between
-  finite quotients commutes with derived pullback, tensor product and compact-support direct
-  image on `Dctf`, compatibly with the projection map (étale) and the exchange map
-  (pro-étale), and with internal Hom for site-perfect first variable (étale);
-* `scalarExtension`, `proEtaleScalarExtension`: the common-stage scalar extension
-  `𝒪_E → 𝒪_{E'}` commutes with the same operations, the projection map (étale) and the exchange
-  map (pro-étale), and, in the étale model, also after rationalization. -/
-structure CoefficientChangeCompatibility : Prop where
-  /-- Reduction `Λ → Λ ⧸ (ϖ)ⁿ` and the étale operations. -/
-  reduction {Λ : Type (u + 1)} [CommRing Λ] {ϖ : Λ} (hϖ : ϖ ∈ nonZeroDivisors Λ) (n : ℕ) :
-    Etale.ReductionCompatibility.{u} Λ (Ideal.span {ϖ}) n
-  /-- Reduction `Λ → Λ ⧸ (ϖ)ⁿ` and the pro-étale operations. -/
-  proEtaleReduction {Λ : Type (u + 1)} [CommRing Λ] {ϖ : Λ} (hϖ : ϖ ∈ nonZeroDivisors Λ)
-    (n : ℕ) : ProEtale.ReductionCompatibility.{u} Λ (Ideal.span {ϖ}) n
-  /-- Reduction `Λ ⧸ (ϖ)ⁿ → Λ ⧸ (ϖ)ᵐ` between finite quotients and the étale operations. -/
-  finiteReduction {Λ : Type (u + 1)} [CommRing Λ] {ϖ : Λ} (hϖ : ϖ ∈ nonZeroDivisors Λ)
-    {m n : ℕ} (h : m ≤ n) : Etale.FiniteReductionCompatibility.{u} Λ (Ideal.span {ϖ}) h
-  /-- Common-stage scalar extension `𝒪_E → 𝒪_{E'}`, and rationalization. -/
-  scalarExtension (l : ℕ) [Fact l.Prime] (E E' : Type) [Field E] [Field E']
-    [Algebra E (PadicAlgCl l)] [Algebra E' (PadicAlgCl l)] [Algebra E E']
-    [IsScalarTower E E' (PadicAlgCl l)] [Algebra ℚ_[l] E] [IsScalarTower ℚ_[l] E (PadicAlgCl l)]
-    [FiniteDimensional ℚ_[l] E] [Algebra ℚ_[l] E'] [IsScalarTower ℚ_[l] E' (PadicAlgCl l)]
-    [FiniteDimensional ℚ_[l] E'] [Small.{u + 1} E] [Small.{u + 1} E'] :
-    Etale.ScalarExtensionCompatibility.{u} l E E'
-  /-- Reduction `Λ ⧸ (ϖ)ⁿ → Λ ⧸ (ϖ)ᵐ` between finite quotients and the pro-étale operations. -/
-  proEtaleFiniteReduction {Λ : Type (u + 1)} [CommRing Λ] {ϖ : Λ}
-    (hϖ : ϖ ∈ nonZeroDivisors Λ) {m n : ℕ} (h : m ≤ n) :
-    ProEtale.FiniteReductionCompatibility.{u} Λ (Ideal.span {ϖ}) h
-  /-- Common-stage scalar extension `𝒪_E → 𝒪_{E'}` and the pro-étale operations. -/
-  proEtaleScalarExtension (l : ℕ) [Fact l.Prime] (E E' : Type) [Field E] [Field E']
-    [Algebra E (PadicAlgCl l)] [Algebra E' (PadicAlgCl l)] [Algebra E E']
-    [IsScalarTower E E' (PadicAlgCl l)] [Algebra ℚ_[l] E] [IsScalarTower ℚ_[l] E (PadicAlgCl l)]
-    [FiniteDimensional ℚ_[l] E] [Algebra ℚ_[l] E'] [IsScalarTower ℚ_[l] E' (PadicAlgCl l)]
-    [FiniteDimensional ℚ_[l] E'] [Small.{u + 1} E] [Small.{u + 1} E'] :
-    ProEtale.ScalarExtensionCompatibility.{u} l E E'
+/-- The current condensed coefficient-reduction statement.
+Source: latest blueprint lem-fix-operation-reduction. -/
+abbrev CoefficientChangeCompatibility (ell : ℕ) [Fact ell.Prime]
+    (k : Type u) [Field k] [Fact (ringChar k).Prime]
+    [Fact (ringChar k ≠ ell)]
+    (hcd : ProEtale.BaseFieldFiniteCD ell k) : Prop :=
+  ProEtale.CondensedRing.BasicOperationsCoefficientReduction ell k hcd
 
 section CoefficientProofs
 
@@ -870,7 +1042,7 @@ For a nonzerodivisor `ϖ` of `Λ`, `f : X ⟶ Y` admitting a compactification, `
 arrow to the restriction of scalars of the projection map `PF_{f, K_n, L_n}` over `Λ ⧸ (ϖ)ⁿ`.
 It is the reduction square that Step 1 of `sk-thm-sf-pf-adic` cites from
 `sk-prop-sf-pf-reduction`, a consequence of
-`AlgebraicGeometry.coefficientChangeCompatibility`. -/
+the fixed principal comparison. -/
 theorem exists_isDerivedBaseChange_arrowIso_reductionModIdeal_projectionMap
     (hϖ : ϖ ∈ nonZeroDivisors Λ) (n : ℕ) (f : X ⟶ Y) [HasCompactification f]
     (K : 𝐃(X, Λ)) (L : 𝐃(Y, Λ)) :
@@ -882,11 +1054,15 @@ theorem exists_isDerivedBaseChange_arrowIso_reductionModIdeal_projectionMap
         Nonempty (Arrow.mk ((reductionModIdeal Λ Y (Ideal.span {ϖ} ^ n)).map
             (projectionMapApp Λ f K L)) ≅
           Arrow.mk ((derivedRestrictScalars (Ideal.Quotient.mk (Ideal.span {ϖ} ^ n)) Y).map
-            (projectionMapApp (Λ ⧸ Ideal.span {ϖ} ^ n) f Kn Ln))) := by
-  have h := coefficientChangeCompatibility.reduction hϖ n
-  obtain ⟨Kn, η, hη⟩ := h.exists_isDerivedBaseChange X K
-  obtain ⟨Ln, η', hη'⟩ := h.exists_isDerivedBaseChange Y L
-  exact ⟨Kn, η, Ln, η', hη, hη', h.projectionMap f K L Kn η Ln η' hη hη'⟩
+            (projectionMapApp (Λ ⧸ Ideal.span {ϖ} ^ n) f Kn Ln)))  := by
+  let φ := Ideal.Quotient.mk (Ideal.span {ϖ} ^ n)
+  let SX := extension X.smallEtaleTopology φ
+  let SY := extension Y.smallEtaleTopology φ
+  let adX := scalarAdjunction X.smallEtaleTopology φ
+  let adY := scalarAdjunction Y.smallEtaleTopology φ
+  exact ⟨SX.obj K, adX.unit.app K, SY.obj L, adY.unit.app L,
+    coefficientUnit _ _ adX K, coefficientUnit _ _ adY L,
+    principalProjection hϖ n f K L⟩
 
 end Etale
 
@@ -914,7 +1090,7 @@ derived base change `η : K ⟶ Res K_n`, `CategoryTheory.Sheaf.IsDerivedBaseCha
 reduction modulo `Iⁿ` of the compact-support exchange map `Ex_!(c) : Lg^* Rf_!(c) K ⟶
 Rf'_!(c') Lg'^* K` over `Λ` is isomorphic, as an arrow, to the restriction of scalars of the
 exchange map `Ex_!(c)` over `Λ/Iⁿ` at `K_n`. It is a consequence of
-`AlgebraicGeometry.coefficientChangeCompatibility`. -/
+the fixed principal comparison. -/
 theorem nonempty_arrowIso_reductionModIdeal_rightDerivedLowerShriekOfCompactificationBaseChangeMap
     (hI : ∃ ϖ ∈ nonZeroDivisors Λ, I = Ideal.span {ϖ})
     (n : ℕ) (sq : IsPullback g' f' f g) (c : Compactification f) (K : 𝐃(X, Λ))
@@ -924,9 +1100,15 @@ theorem nonempty_arrowIso_reductionModIdeal_rightDerivedLowerShriekOfCompactific
         ((rightDerivedLowerShriekOfCompactificationBaseChangeMap (ModuleCat.{u + 1} Λ) sq
           c).app K)) ≅
       Arrow.mk (𝐑𝐞𝐬[Y', n].map ((rightDerivedLowerShriekOfCompactificationBaseChangeMap
-        (ModuleCat.{u + 1} (Λ ⧸ I ^ n)) sq c).app Kn))) := by
+        (ModuleCat.{u + 1} (Λ ⧸ I ^ n)) sq c).app Kn)))  := by
   obtain ⟨ϖ, hϖ, rfl⟩ := hI
-  exact (coefficientChangeCompatibility.proEtaleReduction hϖ n).exchange sq c K Kn η hη
+  let φ := Ideal.Quotient.mk (Ideal.span {ϖ} ^ n)
+  obtain ⟨e⟩ := principalExchange hϖ n sq c K
+  obtain ⟨eK⟩ := coefficientIso (Scheme.ProEt.topology X) φ
+    (scalarAdjunction _ φ) (η := η) hη
+  exact ⟨e ≪≫ (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology Y') φ).mapArrow.mapIso
+    (coefficientArrowUnary (rightDerivedLowerShriekOfCompactificationBaseChangeMap
+      (ModuleCat.{u + 1} (Λ ⧸ Ideal.span {ϖ} ^ n)) sq c) eK)⟩
 
 end ProEtale
 
