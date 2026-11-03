@@ -997,21 +997,21 @@ theorem residual_mate_transport
             (normalizedDVRRes l L X h).map
               ((scalarReductionDerivedExtension l L X n).map (completion l E L ι X K hK).inv ≫
                 (quotientResidual l E L ι X K n).hom)) := by
-  have ht := transported_transpose_named
+  rw [residualTransportMap.eq_1]
+  refine transported_transpose_named
     (normalizedDVRIntegralAdjunction l L X m) (normalizedDVRIntegralAdjunction l L X n)
     (normalizedDVRRes l L X h) (normalizedDVRResCompletedComp l L X D hl h)
-    (completion l E L ι X K hK).inv
-    ((quotientResidual l E L ι X K m).hom ≫
-      (pbcDerivedExtend (integralScalarQuotientSheafMap l E L ι X m)).map
-        (normalizedDVRReductionTransition l E X D hl h K) ≫
-      (scalarReductionExchange l E L ι X h).app
-        ((scalarReductionDerivedExtension l E X n).obj K))
+    (completion l E L ι X K hK).inv _
     (quotientResidual l E L ι X K n).hom
     (normalizedDVRReductionTransition l L X D hl h
       ((pbcDerivedExtend (completedCoefficientMap l E L ι X)).obj K))
-    (reductionTransition_eq l L X D hl h _)
-    (quotientResidual_square l E L ι X D hl K h)
-  exact ht
+    (reductionTransition_eq l L X D hl h _) ?_
+  -- Abstract the exchange transformation: otherwise the kernel unfolds `NatTrans.app` of it
+  -- when the two composites differ only in how their implicit categories are presented.
+  have q := quotientResidual_square l E L ι X D hl K h
+  obtain ⟨ex, hex⟩ : ∃ ex, scalarReductionExchange l E L ι X h = ex := ⟨_, rfl⟩
+  rw [hex] at q ⊢
+  exact q
 
 /-- The residual transpose identity used by the scalar quotient transition theorem.
 
@@ -1052,7 +1052,11 @@ theorem quotient_reduction_transition_transpose_core
                 (quotientResidual l E L ι X K n).hom)) := by
   rw [← Category.assoc]
   rw [← (normalizedDVRIntegralAdjunction l L X m).homEquiv_naturality_left]
-  simpa only [residualTransportMap, Category.assoc] using
-    (residual_mate_transport l E L ι X D hl K hK h)
+  have q := residual_mate_transport l E L ι X D hl K hK h
+  rw [residualTransportMap.eq_1] at q
+  -- As above, keep the exchange transformation opaque for the kernel.
+  obtain ⟨ex, hex⟩ : ∃ ex, scalarReductionExchange l E L ι X h = ex := ⟨_, rfl⟩
+  rw [hex] at q ⊢
+  simpa only [Category.assoc] using q
 
 end WeilConjectures.IntegralFiniteExtension
