@@ -32,10 +32,10 @@ private theorem single_adjunct
     (S : C ⥤ D) (R : D ⥤ C) (Q : E ⥤ F) (V : F ⥤ E)
     (i : C ⥤ E) (j : D ⥤ F) (a : S ⊣ R) (b : Q ⊣ V)
     (c : j ⋙ V ≅ R ⋙ i) (M : C) (P : D) (g : S.obj M ⟶ P) :
-    WeilConjectures.PurityFiniteSetting.purityAdjunctionSingleMap
+    AlgebraicGeometry.Etale.purityAdjunctionSingleMap
         S R Q V i j a b c M ≫ j.map g =
       (b.homEquiv _ _).symm (i.map (a.homEquiv _ _ g) ≫ c.inv.app P) := by
-  unfold WeilConjectures.PurityFiniteSetting.purityAdjunctionSingleMap
+  unfold AlgebraicGeometry.Etale.purityAdjunctionSingleMap
   rw [← b.homEquiv_naturality_right_symm]
   congr 1
   rw [Adjunction.homEquiv_unit, Functor.map_comp, Category.assoc]
@@ -49,7 +49,7 @@ private theorem single_insertion_abstract
     [PreservesFiniteLimits U] [PreservesFiniteColimits U]
     (a : E ⊣ U) {L : DerivedCategory C ⥤ DerivedCategory D}
     (ad : L ⊣ U.mapDerivedCategory) (M : C) (P : D) (g : E.obj M ⟶ P) :
-    WeilConjectures.PurityFiniteSetting.purityAdjunctionSingleMap E U L
+    AlgebraicGeometry.Etale.purityAdjunctionSingleMap E U L
         U.mapDerivedCategory (DerivedCategory.singleFunctor C 0)
         (DerivedCategory.singleFunctor D 0) a ad (U.mapDerivedCategorySingleFunctor 0) M ≫
       (DerivedCategory.singleFunctor D 0).map g =

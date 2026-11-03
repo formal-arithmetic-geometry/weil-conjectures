@@ -170,7 +170,7 @@ theorem scalarSingleMap_cochain
       DerivedCategory.Q.map
         ((HomologicalComplex.singleMapHomologicalComplex E (.up ℤ) 0).hom.app M) ≫
       (DerivedCategory.singleFunctorIsoCompQ D 0).inv.app (E.obj M) =
-    WeilConjectures.PurityFiniteSetting.purityAdjunctionSingleMap E U L
+    AlgebraicGeometry.Etale.purityAdjunctionSingleMap E U L
       U.mapDerivedCategory (DerivedCategory.singleFunctor C 0)
       (DerivedCategory.singleFunctor D 0) a ad (U.mapDerivedCategorySingleFunctor 0) M := by
   change L.map (𝟙 _) ≫ _ ≫ _ ≫ 𝟙 _ = _
@@ -179,7 +179,7 @@ theorem scalarSingleMap_cochain
     rhs
     rw [Category.comp_id]
   rw [← AlgebraicGeometry.Etale.mapComplex_unit_formula]
-  unfold WeilConjectures.PurityFiniteSetting.purityAdjunctionSingleMap
+  unfold AlgebraicGeometry.Etale.purityAdjunctionSingleMap
   have h := cochainSingleAdjunct E U a ad M
   dsimp only [Functor.id_obj, Functor.comp_obj] at h
   with_unfolding_all exact h
@@ -193,7 +193,7 @@ def scalarSingleMap (phi : A →+* B) (T : Scheme.{u})
     (ordinaryScalar phi T).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj M) ⟶
       (_root_.DerivedCategory.singleFunctor _ 0).obj
         ((ProEtale.etaleSheafExtendScalars phi T).obj M) :=
-  WeilConjectures.PurityFiniteSetting.purityScalarSingleMap phi T M
+  AlgebraicGeometry.Etale.purityScalarSingleMap phi T M
 
 /-- The root-line reduction, fixed on the root power map and every scalar/root generator.
 The derived isomorphism is the actual scalar counit followed by that sheaf map.
