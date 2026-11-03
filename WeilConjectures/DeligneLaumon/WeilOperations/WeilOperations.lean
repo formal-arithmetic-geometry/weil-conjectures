@@ -55,6 +55,11 @@ public import WeilConjectures.SixFunctors.FrobeniusSquareExchange.FrobeniusSquar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ExchangeProjection
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Open.DerivedOpenRestrictionNormalization
 public import WeilConjectures.SmoothPurity.CurrentExceptionalAdjointAdmissibility
+public import Mathlib.CategoryTheory.Adjunction.Basic
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.SingleFunctor
+public import WeilConjectures.CategoryTheory.Endofunctor.FixedPairRestrictedAdjunction
+public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebra
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Canonical Weil structures on operations and their algebraic maps
 
@@ -232,6 +237,62 @@ Source: lem-fix-weil-operations.proof.md, paragraph 1, inverse-square argument
 theorem compactFrobenius_isIso (f₀ : X₀ ⟶ Y₀) (c₀ : Compactification f₀.left) :
     IsIso (compactFrobenius (D := D) (c := c) f₀ c₀) := by
   exact FrobeniusSquareExchange.compact_isIso _ _ _ _
+
+/-- Compact support on pairs in the underlying condensed derived category. The
+Frobenius comparison is the specified Ex_! transported through the exact comparison.
+Source: lem-fix-weil-operations.proof.md, automorphism-square paragraph
+(blueprint: lem-sf-condensed-pair-exceptional-adjunction). -/
+def pairCompactComparison (f₀ : X₀ ⟶ Y₀) (c₀ : Compactification f₀.left) :
+    CondensedRing.rightDerivedLowerShriekOfCompactification (WeilCoefficient.ab c)
+        (geometricCompactification (D := D) f₀ c₀) ⋙
+      (CondensedRing.upperStar (WeilCoefficient.ab c)
+        (D.geometricFrobenius Y₀).hom).mapDerivedCategory ≅
+    (CondensedRing.upperStar (WeilCoefficient.ab c)
+        (D.geometricFrobenius X₀).hom).mapDerivedCategory ⋙
+      CondensedRing.rightDerivedLowerShriekOfCompactification (WeilCoefficient.ab c)
+        (geometricCompactification (D := D) f₀ c₀) := by
+  letI := compactFrobenius_isIso (D := D) (c := c) f₀ c₀
+  let F := CondensedRing.rightDerivedLowerShriekOfCompactification (WeilCoefficient.ab c)
+    (geometricCompactification (D := D) f₀ c₀)
+  exact Functor.isoWhiskerLeft F
+      (CondensedRing.modulePullbackExactComparison (WeilCoefficient.ab c)
+        (D.geometricFrobenius Y₀).hom).symm ≪≫
+    asIso (compactFrobenius (D := D) (c := c) f₀ c₀) ≪≫
+    Functor.isoWhiskerRight
+      (CondensedRing.modulePullbackExactComparison (WeilCoefficient.ab c)
+        (D.geometricFrobenius X₀).hom) F
+
+/-- The exceptional Frobenius mate uses exactly the inverse Ex_! mate after
+transporting between total and exact derived Frobenius.
+Source: lem-fix-weil-operations.proof.md, exceptional-adjoint paragraph
+(blueprint: lem-sf-condensed-pair-exceptional-adjunction).
+
+Proof: apply the mate-transport identity to the specified compact exchange and
+the two canonical exact/total comparisons. Naturality of the unit and counit gives
+the two displayed boundary comparisons, with no change to the intervening mate. -/
+theorem pairExceptionalMate_normalization (f₀ : X₀ ⟶ Y₀)
+    (c₀ : Compactification f₀.left)
+    (G : nativeWeilDerivedCategory ell c (D.geometricFiber Y₀).left ⥤
+      nativeWeilDerivedCategory ell c (D.geometricFiber X₀).left)
+    (a : CondensedRing.rightDerivedLowerShriekOfCompactification (WeilCoefficient.ab c)
+      (geometricCompactification (D := D) f₀ c₀) ⊣ G)
+    (N : nativeWeilDerivedCategory ell c (D.geometricFiber Y₀).left) :
+    let := compactFrobenius_isIso (D := D) (c := c) f₀ c₀
+    (mateEquiv a a (TwoSquare.mk _ _ _ _
+      (pairCompactComparison (D := D) (c := c) f₀ c₀).inv)).natTrans.app N =
+      (CondensedRing.modulePullbackExactComparison (WeilCoefficient.ab c)
+        (D.geometricFrobenius X₀).hom).inv.app (G.obj N) ≫
+      (mateEquiv a a (TwoSquare.mk _ _ _ _
+        (asIso (compactFrobenius (D := D) (c := c) f₀ c₀)).inv)).natTrans.app N ≫
+      G.map ((CondensedRing.modulePullbackExactComparison (WeilCoefficient.ab c)
+        (D.geometricFrobenius Y₀).hom).hom.app N) := by
+  let := compactFrobenius_isIso (D := D) (c := c) f₀ c₀
+  exact Endofunctor.IsoAlgebra.mateComparison_transport a
+    (asIso (compactFrobenius (D := D) (c := c) f₀ c₀))
+    (CondensedRing.modulePullbackExactComparison (WeilCoefficient.ab c)
+      (D.geometricFrobenius X₀).hom)
+    (CondensedRing.modulePullbackExactComparison (WeilCoefficient.ab c)
+      (D.geometricFrobenius Y₀).hom) N
 
 /-- Canonical forgetting of compact support, assembled from exact open forgetting and
 unit-normalized proper forgetting in the displayed order. Source:

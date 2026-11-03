@@ -13,6 +13,11 @@ public import Mathlib.AlgebraicGeometry.OpenImmersion
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
 import WeilConjectures.AlgebraicGeometry.Native.NativeBasicComparisons
 import WeilConjectures.WeilSheaf.Native.Open.NativeOpenProperInterchange
+public import WeilConjectures.AlgebraicGeometry.ConstantModelTorAmplitude
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import WeilConjectures.SixFunctors.FiniteFieldDatum.FrobeniusSquareCartesian
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CondensedQcqsComposition.CondensedQcqsCompositionDefs
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.StrictWeilCondensed.StrictWeilCondensed
 
 /-! # Native Weil calculation on a compatible proper/open tower
 
@@ -33,6 +38,76 @@ universe u
 open CategoryTheory Limits
 
 namespace AlgebraicGeometry.WeilComplex
+
+/-- Strict pairs on condensed Dbc, with the recorded exact automorphism action.
+For the field coefficient this is the Dbc presentation of the strict complexes in
+`def-weil-weil-sheaf-complex`; no derived category of equivariant sheaves occurs.
+Source: the pair definition (blueprint: lem-sf-native-weil-compatible-tower-calculation). -/
+abbrev TowerPair {X : Scheme.{u}} (a : X ≅ X) := Endofunctor.IsoAlgebra (pull ℓ a)
+
+/-- Compact support on strict pairs, using the specified normalized proper/open exchange.
+The carrier is precisely Rp_* j_!, and its structure is exchange followed by Rp_* j_!(phi).
+Source: normalized exchange (blueprint: lem-sf-native-weil-compatible-tower-calculation). -/
+def towerPairSupport {X Y : Scheme.{u}} {f : X ⟶ Y} {S : System ℓ f}
+    {a : X ≅ X} {b : Y ≅ Y} {sq : IsPullback a.hom f f b.hom}
+    (E : Exchange ℓ S a b sq) (c : Compactification f) :
+    TowerPair ℓ a ⥤ TowerPair ℓ b :=
+  Endofunctor.IsoAlgebra.mapOfNatIso (E.iso c)
+
+/-- The normalized compositor lifts to strict pairs. Its carrier is the original
+compositor, rather than a newly chosen isomorphism of endpoint objects.
+Source: composition--exchange equation and naturality, Stacks 0F7J
+(blueprint: lem-sf-native-weil-compatible-tower-calculation). -/
+def towerPairCompositor {X Z Y : Scheme.{u}} {h : X ⟶ Z} {g : Z ⟶ Y}
+    (H : Comparisons ℓ h g) (a : X ≅ X) (b : Z ≅ Z) (v : Y ≅ Y)
+    (shsq : IsPullback a.hom h h b.hom) (sgsq : IsPullback b.hom g g v.hom)
+    (c : Compactification h) (d : Compactification g) (e : Compactification (h ≫ g)) :
+    towerPairSupport ℓ (H.exchange a b v shsq sgsq).1 c ⋙
+        towerPairSupport ℓ (H.exchange a b v shsq sgsq).2.1 d ≅
+      towerPairSupport ℓ (H.exchange a b v shsq sgsq).2.2 e := by
+  refine NatIso.ofComponents (fun K ↦ ObjectProperty.isoMk _
+    (Endofunctor.Algebra.isoMk ((H.alpha c d e).app K.carrier) ?_)) ?_
+  · change (pull ℓ v).map ((H.alpha c d e).hom.app K.carrier) ≫
+        ((H.exchange a b v shsq sgsq).2.2.iso e).hom.app K.carrier ≫
+          (H.sgh.support ℓ e).map K.str.hom =
+      (((H.exchange a b v shsq sgsq).2.1.iso d).hom.app
+          ((H.sh.support ℓ c).obj K.carrier) ≫
+        (H.sg.support ℓ d).map
+          (((H.exchange a b v shsq sgsq).1.iso c).hom.app K.carrier ≫
+            (H.sh.support ℓ c).map K.str.hom)) ≫ (H.alpha c d e).hom.app K.carrier
+    rw [← Category.assoc, H.comp_exchange a b v shsq sgsq]
+    simpa only [Functor.comp_map, Functor.map_comp, Category.assoc] using
+      congrArg (fun t ↦
+        ((H.exchange a b v shsq sgsq).2.1.iso d).hom.app
+            ((H.sh.support ℓ c).obj K.carrier) ≫
+          (H.sg.support ℓ d).map
+            (((H.exchange a b v shsq sgsq).1.iso c).hom.app K.carrier) ≫ t)
+        ((H.alpha c d e).hom.naturality K.str.hom).symm
+  · intro K L f
+    apply ObjectProperty.hom_ext
+    apply Endofunctor.Algebra.Hom.ext
+    exact (H.alpha c d e).hom.naturality f.hom.f
+
+/-- A quasi-compact open extension preserves the recorded bounded constructible property,
+even when the schemes are not separated over the field.
+Source: the open compactification case of condensedShriekBoundedQcqs, Stacks 0F7J
+(blueprint: lem-sf-native-weil-compatible-tower-calculation).
+Proof: use the compactification (j, id) and cancel the canonical identity direct image. -/
+private theorem towerOpen_preserves (k : Type u) [Field k]
+    [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+    {U X : Over (Spec (.of k))}
+    [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [QuasiSeparated U.hom]
+    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [QuasiSeparated X.hom]
+    (j : U ⟶ X) [IsOpenImmersion j.left] [QuasiCompact j.left]
+    (K : C ℓ U.left) :
+    bc ℓ X.left ((CondensedOpenProper.J (Profinite.padicAlgClRingObj ℓ) j.left).obj K.obj) := by
+  obtain ⟨_, _, _, hpres, _⟩ := condensedShriekBoundedQcqs ℓ k j
+  have : (bc ℓ X.left).IsClosedUnderIsomorphisms :=
+    (constantModelConstructibleFiniteTor_wellDefined (Profinite.padicAlgClRingObj ℓ) X.left).2.1
+  have hK := hpres (Compactification.ofIsOpenImmersion j.left) K
+  exact (bc ℓ X.left).prop_of_iso
+    ((CondensedOpenProper.rId (Profinite.padicAlgClRingObj ℓ) X.left).app
+      ((CondensedOpenProper.J (Profinite.padicAlgClRingObj ℓ) j.left).obj K.obj)) hK
 
 /-- The compatible-tower calculation, on bounded constructible native Weil complexes.
 The first conjunct says that `J_s` preserves the bounded constructible object property.

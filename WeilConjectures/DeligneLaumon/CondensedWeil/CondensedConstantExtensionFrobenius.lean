@@ -150,6 +150,61 @@ private local instance constantExtensionModel_lft_local (e : ℕ) (he : 1 ≤ e)
 include hsep hl hc hlis he
 
 omit hl hc in
+
+/-- Direct geometric-point insertion in the ordinary derived coefficient category.
+It derives the specified point trivialization and applies a given functor out of the
+derived category of the point (below: derived geometric evaluation).
+Source: latest blueprint, second proof paragraph
+(blueprint: lem-zl-condensed-constant-extension-frobenius). -/
+def derivedPointInsertion (l : ℕ) [Fact l.Prime]
+    (K : Type u) [Field K] [IsAlgClosed K] (d : Spec (.of K) ⟶ Spec (.of K))
+    {C : Type v} [Category.{w} C]
+    (F : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology (Spec (.of K))) Ab.{u + 1})
+        (condensedRingObj (Profinite.padicAlgClRingObj l) (Spec (.of K)))) ⥤ C) :
+    F ≅ (CondensedRing.upperStar (Profinite.padicAlgClRingObj l) d).mapDerivedCategory ⋙ F :=
+  (Functor.leftUnitor _).symm ≪≫
+    Functor.isoWhiskerRight
+      (Functor.mapDerivedCategoryNatIso
+        (CondensedRing.upperStarIsoIdOfIsSepClosed (Profinite.padicAlgClRingObj l) d) ≪≫
+          Functor.mapDerivedCategoryIdIso _).symm F
+
+/-- A positive power is invertible by iterated composition of the given inverse.
+Source: latest blueprint, geometric Frobenius powers
+(blueprint: lem-zl-condensed-constant-extension-frobenius). -/
+instance positiveIso {X : Scheme.{u}} (a : X ≅ X) :
+    (n : ℕ) → IsIso (localPositivePower a.hom n)
+  | 0 => a.isIso_hom
+  | n + 1 => IsIso.comp_isIso' (positiveIso a n) a.isIso_hom
+
+/-- The automorphism with the literal positive-power morphism as its hom.
+Source: latest blueprint, geometric Frobenius powers
+(blueprint: lem-zl-condensed-constant-extension-frobenius). -/
+def positiveAut {X : Scheme.{u}} (a : X ≅ X) (n : ℕ) : X ≅ X :=
+  @asIso _ _ _ _ (localPositivePower a.hom n) (positiveIso a n)
+
+/-- Actual constant extension, along the canonical geometric-fibre identification.
+Source: blueprint constant-extension paragraph, theta^[e]
+(blueprint: lem-zl-condensed-constant-extension-frobenius). -/
+@[irreducible] def extend (e : ℕ) (he : 1 ≤ e)
+    (M : WeilModule D l X₀) :
+    WeilModule (constantExtensionDatum D e he) l (constantExtensionModel D e he X₀) :=
+  (CategoryTheory.Endofunctor.IsoAlgebra.mapOfNatIso
+    (CondensedRing.upperStarSquareComparison (Profinite.padicAlgClRingObj l)
+      (CommSq.mk (constantExtensionFiber_return D e he X₀))).symm).obj
+        (CategoryTheory.Endofunctor.IsoAlgebra.mk M.carrier
+          (iterate (Profinite.padicAlgClRingObj l) _ M.carrier M.str (e - 1)))
+
+/-- Restriction of the actual Weil module along a morphism of models.
+Source: blueprint restriction to open and closed constant-field components
+(blueprint: lem-zl-condensed-constant-extension-frobenius). -/
+@[irreducible] def restrict {U₀ : Over (Spec (.of D.k₀))}
+    [LocallyOfFiniteType U₀.hom] [QuasiCompact U₀.hom] (j : U₀ ⟶ X₀)
+    (M : WeilModule D l X₀) : WeilModule D l U₀ :=
+  (CategoryTheory.Endofunctor.IsoAlgebra.mapOfNatIso
+    (CondensedRing.upperStarSquareComparison (Profinite.padicAlgClRingObj l)
+      (CommSq.mk (zlFrobenius_naturality D j))).symm).obj M
+
 /-- Punctual purity is preserved for every field embedding and every real weight.
 Source: latest blueprint, second paragraph
 (blueprint: lem-zl-condensed-constant-extension-frobenius).
@@ -219,5 +274,29 @@ theorem constantExtension_pure (iota : PadicAlgCl l →+* ℂ) (w : ℝ) :
   obtain ⟨β, hβ, rfl⟩ := hpow.exists_pow_eq hf
   rw [map_pow, norm_pow, hp x ix hix β hβ, hcard, Nat.cast_pow]
   exact Real.rpow_pow_comm (Nat.cast_nonneg _) _ _
+
+/-- Restriction to an open and closed subscheme over the extended finite field
+preserves lissity and every specified punctual weight.
+Source: latest blueprint, second paragraph
+(blueprint: lem-zl-condensed-constant-extension-frobenius).
+
+Proof: restrict a finite-free pro-etale trivializing cover. A clopen subscheme is
+Frobenius-stable. Its closed points are closed in the ambient model with identical
+residue fields. Pullback composition identifies their local returns, so the purity
+equations are unchanged. The empty subscheme and rank zero have zero stalks. -/
+theorem constantExtension_clopen_restriction
+    (V₀ : Over (Spec (.of (constantExtensionDatum D e he).k₀)))
+    [LocallyOfFiniteType V₀.hom] [QuasiCompact V₀.hom]
+    (j : V₀ ⟶ constantExtensionModel D e he X₀)
+    [IsOpenImmersion j.left] [IsClosedImmersion j.left]
+    (iota : PadicAlgCl l →+* ℂ) (w : ℝ) :
+    IsLisseCoefficientModule (Profinite.padicAlgClRingObj l)
+      (restrict (constantExtensionDatum D e he) l (constantExtensionModel D e he X₀)
+        j (extend D l X₀ e he M)).carrier ∧
+      (Pure (constantExtensionDatum D e he) l (constantExtensionModel D e he X₀)
+          (extend D l X₀ e he M) iota w →
+        Pure (constantExtensionDatum D e he) l V₀
+          (restrict (constantExtensionDatum D e he) l (constantExtensionModel D e he X₀)
+            j (extend D l X₀ e he M)) iota w) := by sorry
 
 end WeilConjectures.CondensedWeil
