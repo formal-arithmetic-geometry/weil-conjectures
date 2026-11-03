@@ -73,6 +73,17 @@ theorem span_coefficientExtensionUniformizer_eq_maximalIdeal (E : Type v) [Field
       coefficientExtensionMaximalIdeal l E :=
   (coefficientExtensionIntegers_dvr l E).choose_spec.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
 
+/-- The chosen uniformizer is nonzero, since the maximal ideal is nonzero.
+(auxiliary; not a blueprint node). -/
+theorem coefficientExtensionUniformizer_ne_zero (E : Type v) [Field E]
+    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
+    coefficientExtensionUniformizer l E ≠ 0 := by
+  intro h
+  have hm : coefficientExtensionMaximalIdeal l E ≠ ⊥ :=
+    (coefficientExtensionIntegers_dvr l E).choose_spec.2.2.2.2.2.2.2.2.2.1
+  apply hm
+  rw [← span_coefficientExtensionUniformizer_eq_maximalIdeal, h, Ideal.span_singleton_eq_bot]
+
 /-- Any ring isomorphism of valuation rings identifies the uniformizer ideals, since these
 are the unique maximal ideals. (auxiliary; not a blueprint node). -/
 theorem map_span_coefficientExtensionUniformizer

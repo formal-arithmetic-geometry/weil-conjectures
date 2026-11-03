@@ -12,6 +12,8 @@ import WeilConjectures.AlgebraicGeometry.Integral.IntegralStratifiedPerfectChara
 import WeilConjectures.AlgebraicGeometry.Integral.IntegralStratifiedPerfectCharts
 import WeilConjectures.AlgebraicGeometry.Integral.IntegralStratifiedPerfectRingEquiv
 import WeilConjectures.NumberTheory.Padics.CoefficientExtensionAlgEquiv
+import WeilConjectures.AlgebraicGeometry.Pbc.PbcUniformLocalModelCohomology
+import WeilConjectures.AlgebraicGeometry.Pbc.PbcUniformReductionCriterion
 
 /-! # Perfect charts for the actual unlifted Padic datum
 
@@ -87,9 +89,14 @@ theorem pbc_adic_unlifted_perfect_charts
   have hl' : IsUnit (l : Γ(T, ⊤)) :=
     T.toRingedSpace.isUnit_of_isUnit_germ ⊤ (l : Γ(T, ⊤)) (fun x _ ↦ by
       simpa only [map_natCast] using hl x)
+  have hπ : Padic.coefficientExtensionUniformizer l E ≠ 0 :=
+    Padic.coefficientExtensionUniformizer_ne_zero l E
+  have hp := pbcUniformLocalModelCohomology_of_principal d
+    (Padic.coefficientExtensionUniformizer l E) rfl hπ T K.obj ⟨K.property.2.1, K.property.2.2⟩
   have hK := isIntegralStratifiedPerfect_of_ringEquiv T d (pbcIntegralDatum l E₀) φ hφ
-    (fun K' hK' ↦ ((integralStratifiedPerfectCharacterization T l E₀ hdim hl' K').1).mp hK')
-    K.obj K.property
+    (fun K' hc' hp' ↦ ((integralStratifiedPerfectCharacterization T l E₀ hdim hl' K').1).mp
+      ⟨hc', pbcUniformReductionCriterion_backward l E₀ T K' hp'⟩)
+    K.obj K.property.1 hp
   exact IsIntegralStratifiedPerfect.exists_cover_charts T d K.obj hK
 
 end AlgebraicGeometry.Scheme
