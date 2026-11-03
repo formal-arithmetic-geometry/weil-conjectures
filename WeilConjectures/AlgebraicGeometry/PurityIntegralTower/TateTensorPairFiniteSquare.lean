@@ -55,48 +55,4 @@ private theorem single_transition_assembly
     _ = pb ≫ F.map cb ≫ F.map t := by
       rw [← F.map_comp, hord, F.map_comp]
 
-/-- The finite scalar/Tate transition square on any compatible ordinary models.
-
-Source: det-sp-scalar-extension-functor (3), ordinary Tate base change and exponent
-independence; sk-thm-purity-transport, Step 1.
-(blueprint: lem-sp-finite-tate-transition-model-square)
-Proof: the derived finite transition theorem gives the square on the canonical
-Tate single models. Compose with the lower chosen model. The assumed ordinary
-model square, carried through the single functor, rewrites the result as the upper
-chosen model followed by the single of the model transition. This is the same
-single-transition assembly used for the previous presentation. -/
-theorem finite_transition_square
-    {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B]
-    (f : A →+* B) (T : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
-    [∀ x : T, Invertible (ℓ : T.residueField x)]
-    (m n : ℕ) (hmn : m ≤ n) (a : ZMod (ℓ ^ (m + 1)) →+* A) (r : ℤ)
-    {Mb Ma : proEtaleRingModules T (proEtaleConstantRing T B)}
-    (cb : scalarExtensionTateLine T ℓ B n
-      (f.comp (a.comp (ZMod.castHom (pow_dvd_pow ℓ (Nat.succ_le_succ hmn))
-        (ZMod (ℓ ^ (m + 1)))))) r ≅ Mb)
-    (ca : scalarExtensionTateLine T ℓ B m (f.comp a) r ≅ Ma)
-    (t : Mb ⟶ Ma)
-    (ht : (scalarExtensionTateLevelIso T ℓ B m n hmn (f.comp a) r).hom ≫ ca.hom =
-      cb.hom ≫ t) :
-    (scalarExtensionFunctor f T).map
-        ((DerivedCategory.singleFunctor _ 0).map
-          (scalarExtensionTateLevelIso T ℓ A m n hmn a r).hom) ≫
-      (finiteEvaluationModel f T ℓ m a r ca).hom =
-    (finiteEvaluationModel f T ℓ n
-        (a.comp (ZMod.castHom (pow_dvd_pow ℓ (Nat.succ_le_succ hmn))
-          (ZMod (ℓ ^ (m + 1))))) r cb).hom ≫
-      (DerivedCategory.singleFunctor _ 0).map t := by
-  have h := single_transition_assembly (DerivedCategory.singleFunctor _ 0)
-    (scalarExtensionTateLevelIso T ℓ B m n hmn (f.comp a) r).hom cb.hom ca.hom t
-    (scalarExtensionFunctorTateIso f T ℓ n
-      (a.comp (ZMod.castHom (pow_dvd_pow ℓ (Nat.succ_le_succ hmn))
-        (ZMod (ℓ ^ (m + 1))))) r).hom
-    (scalarExtensionFunctorTateIso f T ℓ m a r).hom
-    ((scalarExtensionFunctor f T).map
-      ((DerivedCategory.singleFunctor _ 0).map
-        (scalarExtensionTateLevelIso T ℓ A m n hmn a r).hom))
-    (finiteTateTensor_transition_model f T ℓ m n hmn a r) ht
-  simpa only [finiteEvaluationModel, Iso.trans_hom, Functor.mapIso_hom,
-    Category.assoc] using h
-
 end AlgebraicGeometry.ProEtale
