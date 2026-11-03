@@ -20,7 +20,8 @@ universe u wB wC
 open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 namespace AlgebraicGeometry.ProEtale
 
-private theorem projection_surjective (ℓ n : ℕ) [Fact ℓ.Prime] :
+/-- The residue projection is onto by natural representatives. -/
+theorem diagonalResidueProjection_surjective (ℓ n : ℕ) [Fact ℓ.Prime] :
     Function.Surjective (diagonalResidueProjection.{u} ℓ n) := by
   intro x
   refine ⟨ULift.up (x.down.val : ℤ_[ℓ]), ?_⟩
@@ -28,7 +29,8 @@ private theorem projection_surjective (ℓ n : ℕ) [Fact ℓ.Prime] :
   change PadicInt.toZModPow (n + 1) (x.down.val : ℤ_[ℓ]) = x.down
   rw [map_natCast, ZMod.natCast_zmod_val]
 
-private theorem projection_kernel (ℓ n : ℕ) [Fact ℓ.Prime] :
+/-- The kernel of the residue projection Z_ℓ → Z/ℓ^(n+1) is (ℓ^(n+1)). -/
+theorem diagonalResidueProjection_ker (ℓ n : ℕ) [Fact ℓ.Prime] :
     RingHom.ker (diagonalResidueProjection.{u} ℓ n) =
       Ideal.span {((ℓ ^ (n + 1) : ℕ) : ULift.{u + 1} ℤ_[ℓ])} := by
   ext x
@@ -59,7 +61,8 @@ private theorem ordinary_residue_factorization (ℓ n : ℕ) [Fact ℓ.Prime] (W
   let : L.Additive := scalarExtension_additive ℓ W
   let q := diagonalResidueProjection.{u} ℓ n
   let a : ULift.{u + 1} ℤ_[ℓ] := (ℓ ^ (n + 1) : ℕ)
-  let rd := Sheaf.reductionDatum J q (projection_surjective ℓ n) a (projection_kernel ℓ n)
+  let rd := Sheaf.reductionDatum J q (diagonalResidueProjection_surjective ℓ n) a
+    (diagonalResidueProjection_ker ℓ n)
   let E := L ⋙ rd.Φ
   have hσ (M : DiagonalMod ℓ W) :
       (Sheaf.smulNatTrans J a).app M = ℓ ^ (n + 1) • 𝟙 M := by
@@ -200,7 +203,7 @@ theorem diagonal_residue_derived_factorization (ℓ : ℕ) [Fact ℓ.Prime] (W :
   let : F.Full := by
     unfold F diagonalFiniteToPadic
     exact Sheaf.restrictScalars_full (Scheme.ProEt.topology W)
-      (diagonalResidueProjection.{u} ℓ n) (projection_surjective ℓ n)
+      (diagonalResidueProjection.{u} ℓ n) (diagonalResidueProjection_surjective ℓ n)
   have : F.Faithful := by unfold F diagonalFiniteToPadic; infer_instance
   let good : CochainComplex (DiagonalAb W) ℤ → Prop := fun P ↦
     ∀ (m : ℕ) (i : ℤ), Mono (ℓ ^ (m + 1) • 𝟙 (P.X i))

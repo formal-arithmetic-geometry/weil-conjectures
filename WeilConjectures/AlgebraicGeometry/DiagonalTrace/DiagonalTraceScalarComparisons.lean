@@ -54,7 +54,7 @@ private theorem derivesOnKInjectives
   change IsIso (DerivedCategory.Q.map ((F.mapHomologicalComplex (.up ℤ)).map f.hom))
   infer_instance
 
-private theorem squareOfAcyclic
+private def squareOfAcyclic
     {A B C D : Type a} [Category.{v} A] [Category.{v} B]
     [Category.{v} C] [Category.{v} D] [Abelian A] [Abelian B] [Abelian C] [Abelian D]
     [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} B]
@@ -68,7 +68,7 @@ private theorem squareOfAcyclic
     (ordinary : F ⋙ V ≅ U ⋙ G)
     (hacyc : ∀ I : CochainComplex A ℤ, I.IsKInjective →
       IsIso (RG.η.app ((U.mapHomologicalComplex (.up ℤ)).obj I))) :
-    Nonempty (ExactSquareOfUniverses F G U V RF RG ordinary) := by
+    ExactSquareOfUniverses F G U V RF RG ordinary := by
   let Fc := F.mapHomologicalComplex (.up ℤ)
   let Uc := U.mapHomologicalComplex (.up ℤ)
   let cc := NatIso.mapHomologicalComplex ordinary (.up ℤ)
@@ -99,7 +99,7 @@ private theorem squareOfAcyclic
     infer_instance
   let e := Functor.rightDerivedUnique (RF.R ⋙ V.mapDerivedCategory)
     (U.mapDerivedCategory ⋙ RG.R) etaL etaR (HomologicalComplex.quasiIso A (.up ℤ))
-  refine ⟨⟨e, ?_⟩⟩
+  refine ⟨e, ?_⟩
   intro P
   have he := Functor.rightDerivedNatTrans_app (RF.R ⋙ V.mapDerivedCategory)
     (U.mapDerivedCategory ⋙ RG.R) etaL etaR
@@ -200,7 +200,7 @@ theorem exists_diagonalTraceScalarComparisons (l : ℕ) [Fact l.Prime]
   let := rX.limits
   let := rX.colimits
   obtain ⟨hv, hc⟩ := diagonalTrace_restrictedPush_acyclic l f rX Rf Rt
-  obtain ⟨varying⟩ := squareOfAcyclic g.push (diagonalTraceSystemPush l f)
+  let varying := squareOfAcyclic g.push (diagonalTraceSystemPush l f)
     rX.F rS.F (canonicalDiagonalRightDerived g.push) Rt vo hv
   have hGroth : IsGrothendieckAbelian.{u + 1} (DiagonalCompleted l X) :=
     (SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses.{u + 1,
@@ -208,7 +208,7 @@ theorem exists_diagonalTraceScalarComparisons (l : ℕ) [Fact l.Prime]
       (Scheme.ProEt.topology X) (Scheme.purTwistZlCompletion X l)).1
   let := hGroth
   let Rc := canonicalDiagonalRightDerived (diagonalTracePush l f)
-  obtain ⟨completed⟩ := squareOfAcyclic (diagonalTracePush l f)
+  let completed := squareOfAcyclic (diagonalTracePush l f)
     (lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[l])) f)
     (diagonalCompletedRestriction l X) (diagonalCompletedRestriction l S)
     Rc Rf co hc

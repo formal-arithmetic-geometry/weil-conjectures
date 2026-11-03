@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.IntegralFiniteScalar.IntegralFin
 import all WeilConjectures.AlgebraicGeometry.ModuleRingedComparison.ProEtaleSectionModuleFunctors
 import WeilConjectures.AlgebraicGeometry.InverseImageModuleFlat
 import all WeilConjectures.SixFunctors.Finite.Scalar.Fixed.FiniteScalarFixedTensorPullbackNormalization
+import all WeilConjectures.AlgebraicGeometry.SectionDerivedRepresentativeSquare
 
 /-! # Computing the tensor pullback comparison on cochain representatives
 
@@ -69,7 +70,7 @@ private theorem exactTensorComparison
       DerivedCategory.Q.map
         (((Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans (.up ℤ) F).app A).app B) := by
   simp only [tensorHom_comp_tensorHom_assoc, hf]
-  rw [WeilConjectures.cochain_tensor_comparison F A B, ← hf]
+  rw [ModuleRingedComparison.DerivedRepresentativeSquare.cochain_tensor_comparison F A B, ← hf]
   simp only [Category.assoc]
   erw [NatTrans.naturality_assoc, Iso.inv_hom_id_app_assoc]
 
