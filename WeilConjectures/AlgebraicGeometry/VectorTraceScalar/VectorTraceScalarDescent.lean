@@ -121,8 +121,8 @@ private theorem projective_splitting_square (N : ℕ) (hN : 0 < N) (φ : A →+*
 private theorem projective_trace_square (N : ℕ) (hN : 0 < N) (φ : A →+* B)
     (hA : (N : A) = 0) (hB : (N : B) = 0)
     (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) :
-    projective φ N hN hA hB S hS ≫ projectiveLineTrace N hN B hB S hS =
-      (scalarExtension φ S).map (projectiveLineTrace N hN A hA S hS) ≫ unit φ S := by
+    projective φ N hN hA hB S hS ≫ ordinaryFiniteProjectiveLineTrace N hN B hB S hS =
+      (scalarExtension φ S).map (ordinaryFiniteProjectiveLineTrace N hN A hA S hS) ≫ unit φ S := by
   exact trace_square (scalarExtension φ S)
     (projectiveLineTraceDatum N hN A hA S hS).decomposition
     (projectiveLineTraceDatum N hN B hB S hS).decomposition
@@ -184,8 +184,8 @@ theorem vectorTraceScalarDescent (N : ℕ) (hN : 0 < N) (φ : A →+* B)
     ((scalarExtension φ S).map (projectiveLineTraceDatum N hN A hA S hS).decomposition.hom ≫
       projective φ N hN hA hB S hS =
       sum φ N hN hA hB S hS ≫ (projectiveLineTraceDatum N hN B hB S hS).decomposition.hom) ∧
-    (projective φ N hN hA hB S hS ≫ projectiveLineTrace N hN B hB S hS =
-      (scalarExtension φ S).map (projectiveLineTrace N hN A hA S hS) ≫ unit φ S) ∧
+    (projective φ N hN hA hB S hS ≫ ordinaryFiniteProjectiveLineTrace N hN B hB S hS =
+      (scalarExtension φ S).map (ordinaryFiniteProjectiveLineTrace N hN A hA S hS) ≫ unit φ S) ∧
     (∀ d : ℕ, affine φ N hN hA hB S hS d ≫ affineTrace N hN B hB S hS d =
       (scalarExtension φ S).map (affineTrace N hN A hA S hS d) ≫ unit φ S) ∧
     (vector φ N hN hA hB S hS r F ≫ vectorBundleIntegration N hN B hB S hS r F =

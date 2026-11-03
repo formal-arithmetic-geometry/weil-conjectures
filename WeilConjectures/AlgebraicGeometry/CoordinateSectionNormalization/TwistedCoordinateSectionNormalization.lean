@@ -137,9 +137,9 @@ theorem twistedCoordinateSectionNormalization
           CoordinateLine.integration (Ring P) N hA T hN hT =
         Etale.ordinaryFiniteP1ChernPushforward (Ring P) N hA T
           (Etale.projectiveLineTraceDatum N hN (Ring P) hA T hT).chern ≫
-          Etale.projectiveLineTrace N hN (Ring P) hA T hT := by
+          Etale.ordinaryFiniteProjectiveLineTrace N hN (Ring P) hA T hT := by
       simpa only [CoordinateLine.integration, Category.assoc] using
-        congrArg (fun f ↦ f ≫ Etale.projectiveLineTrace N hN (Ring P) hA T hT) hchern
+        congrArg (fun f ↦ f ≫ Etale.ordinaryFiniteProjectiveLineTrace N hN (Ring P) hA T hT) hchern
     have hscalar :
         (sectionComposition (Ring P) T).inv.app (Etale.ordinaryFiniteUnit (Ring P) T) ≫
           (compact (Ring P) T).map (restrictedSupported (Ring P) T N hN hA hT hI) ≫

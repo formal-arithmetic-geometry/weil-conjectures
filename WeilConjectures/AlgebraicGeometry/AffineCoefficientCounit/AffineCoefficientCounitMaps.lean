@@ -98,6 +98,22 @@ def lineCounit (A : Type (u + 1)) [CommRing A] [Finite A]
     (Etale.affineTraceLineAdjunction A N hA (Etale.projectiveLineTraceTransport N hN A hA)
       Y hY (Etale.projectiveLineTraceDatum N hN A hA Y hY)).counit.app H
 
+/-- The actual open-counit restriction of the normalized projective trace.
+Source: I_S display (blueprint: def-pur-affine-coefficient-counit-coordinate-maps). -/
+@[irreducible]
+def lineTrace (A : Type (u + 1)) [CommRing A] [Finite A]
+    (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
+    (Y : Scheme.{u}) [IsNoetherian Y] (hY : IsUnit (N : Γ(Y, ⊤)))
+    (W : Etale.DerivedCategoryModule A (AffineSpace PUnit.{u + 1} Y))
+    (eW : W ≅ (Etale.ordinaryFinitePullback A (ProjectiveLine.affineChart Y)).obj
+      ((Etale.ordinaryFiniteLine A N hA (ProjectiveLine Y))⟦(2 : ℤ)⟧)) :
+    (Etale.affineTraceLineLeft A Y).obj W ⟶ Etale.ordinaryFiniteUnit A Y :=
+  (Etale.affineTraceLineLeft A Y).map eW.hom ≫
+    (Etale.ordinaryFinitePushforward A (ProjectiveLine Y ↘ Y)).map
+      ((Etale.affineTraceOpenAdjunction A Y).counit.app
+        ((Etale.ordinaryFiniteLine A N hA (ProjectiveLine Y))⟦(2 : ℤ)⟧)) ≫
+    Etale.ordinaryFiniteProjectiveLineTrace N hN A hA Y hY
+
 /-- Canonical coefficient-first projection, in the fixed line compactification.
 Source: inverse Pi in the line counit formula
 (blueprint: def-pur-affine-coefficient-counit-coordinate-maps). -/

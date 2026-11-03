@@ -23,6 +23,12 @@ import WeilConjectures.SixFunctors.Completed.CompletedTensorScalarLinearity
 import WeilConjectures.CategoryTheory.ScalarLocalization.SemilinearScalarLocalization
 public import WeilConjectures.AlgebraicGeometry.Native.NativeSignedLine
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
+public import Mathlib.Tactic.CongrExclamation
+public import WeilConjectures.AlgebraicGeometry.Integral.IntegralTateBasis
+public import WeilConjectures.AlgebraicGeometry.Native.NativeFiniteTwistLocalLine
+public import WeilConjectures.AlgebraicGeometry.Native.NativeIntegralTwistLocalLine
+public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsRegularEnd
+public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryBraided
 
 /-! # Tate twists are well defined and locally free of rank one
 
@@ -231,6 +237,66 @@ structure CondensedTateLineProperties
         (condensedRingObj Λ X)),
       e.functor = tensorRight ((DerivedCategory.singleFunctor _ 0).obj (T m)) ∧
       e.inverse = tensorRight ((DerivedCategory.singleFunctor _ 0).obj (T (-m)))
+
+private theorem tateSignedLine_properties
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u})
+    (L : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
+    (hL : ∃ 𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ i : 𝒰.I₀,
+      Nonempty (((upperStar Ab.{u + 1} (𝒰.f i)).mapMod
+        (condensedRingObj Λ X)).obj L ≅ 𝟙_ _)) :
+    CondensedTateLineProperties Λ X
+      (coefficientSignedTwist X (condensedRingObj Λ X) L) := by
+  obtain ⟨hl, hf, hv, hd, he⟩ := nativeSignedLine (condensedRingObj Λ X) L hL
+  refine ⟨hl, hf, hv, hd, he, fun m ↦ ?_⟩
+  let := _root_.DerivedCategory.braidedCategory'
+    (C := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
+  let e := (hf m).singleFunctorTensorObjIso
+      (coefficientSignedTwist X (condensedRingObj Λ X) L (-m)) 0 ≪≫
+    (DerivedCategory.singleFunctor _ 0).mapIso (he m).some ≪≫
+    DerivedCategory.singleFunctorObjUnitIso _
+  exact ⟨tensorRightEquivalenceOfTensorIso e (β_ _ _ ≪≫ e), rfl, rfl⟩
+
+private noncomputable def tatePullExtendIso
+    {X Y : Scheme.{u}} (f : Y ⟶ X)
+    {R S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}}
+    [MonObj R] [MonObj S] [IsCommMonObj R] [IsCommMonObj S]
+    (a : R ⟶ S) [IsMonHom a] :
+    (upperStar Ab.{u + 1} f).mapMod R ⋙
+        Mod.extendScalars ((upperStar Ab.{u + 1} f).map a) ≅
+      Mod.extendScalars a ⋙ (upperStar Ab.{u + 1} f).mapMod S := by
+  let adj := upperStarLowerStarAdjunction Ab.{u + 1} f
+  letI : (upperStar Ab.{u + 1} f).OplaxMonoidal := Functor.Monoidal.toOplaxMonoidal
+  letI : adj.IsMonoidal := by
+    constructor
+    · exact (isMonoidal_upperStarLowerStarAdjunction Ab.{u + 1} f).leftAdjoint_ε
+    · intro A B
+      exact (isMonoidal_upperStarLowerStarAdjunction Ab.{u + 1} f).leftAdjoint_μ A B
+  exact Adjunction.pullIsoOfComapIso
+    (Mod.extendRestrictAdjunction ((upperStar Ab.{u + 1} f).map a))
+    (Mod.extendRestrictAdjunction a)
+    (adj.mapModAdjunction R) (adj.mapModAdjunction S)
+    (Mod.comapMapModComapIso (lowerStar Ab.{u + 1} f)
+      ((upperStar Ab.{u + 1} f).map a) a
+      (adj.unitAlgHom R) (adj.unitAlgHom S) (adj.unit.naturality a))
+
+private theorem scalarExtension_locally_trivial
+    {X : Scheme.{u}}
+    {R S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}}
+    [MonObj R] [MonObj S] [IsCommMonObj R] [IsCommMonObj S]
+    (a : R ⟶ S) [IsMonHom a]
+    (L : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R)
+    (hL : ∃ 𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ i : 𝒰.I₀,
+      Nonempty (((upperStar Ab.{u + 1} (𝒰.f i)).mapMod R).obj L ≅ 𝟙_ _)) :
+    ∃ 𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ i : 𝒰.I₀,
+      Nonempty (((upperStar Ab.{u + 1} (𝒰.f i)).mapMod S).obj
+        ((Mod.extendScalars a).obj L) ≅ 𝟙_ _) := by
+  obtain ⟨𝒰, h𝒰⟩ := hL
+  refine ⟨𝒰, fun i ↦ ?_⟩
+  let F := upperStar Ab.{u + 1} (𝒰.f i)
+  exact ⟨(tatePullExtendIso (𝒰.f i) a).symm.app L ≪≫
+    (Mod.extendScalars (F.map a)).mapIso (h𝒰 i).some ≪≫
+    Mod.extendScalarsObjRegularIso (F.map a)⟩
 
 private theorem nativeTwistFiniteness_properties
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

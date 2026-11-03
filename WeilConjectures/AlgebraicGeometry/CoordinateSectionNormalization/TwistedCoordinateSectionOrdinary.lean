@@ -88,7 +88,7 @@ def OrdinaryNormalization (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
       CoordinateLine.integration A N hA T hN hT =
     Etale.ordinaryFiniteP1ChernPushforward A N hA T
         (Etale.projectiveLineTraceDatum N hN A hA T hT).chern ≫
-      Etale.projectiveLineTrace N hN A hA T hT) ∧
+      Etale.ordinaryFiniteProjectiveLineTrace N hN A hA T hT) ∧
   ((sectionComposition A T).inv.app (Etale.ordinaryFiniteUnit A T) ≫
     (compact A T).map (restrictedSupported A T N hN hA hT hI) ≫
       CoordinateLine.integration A N hA T hN hT = 𝟙 _) ∧

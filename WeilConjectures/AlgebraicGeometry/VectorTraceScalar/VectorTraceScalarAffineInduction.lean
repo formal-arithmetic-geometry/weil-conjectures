@@ -211,8 +211,8 @@ private theorem compose_counit_scalar
 private theorem p1_counit_from_trace
     (φ : A →+* B) (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0) (hB : (N : B) = 0)
     (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤)))
-    (ht : projective φ N hN hA hB S hS ≫ projectiveLineTrace N hN B hB S hS =
-      (scalarExtension φ S).map (projectiveLineTrace N hN A hA S hS) ≫ unit φ S)
+    (ht : projective φ N hN hA hB S hS ≫ ordinaryFiniteProjectiveLineTrace N hN B hB S hS =
+      (scalarExtension φ S).map (ordinaryFiniteProjectiveLineTrace N hN A hA S hS) ≫ unit φ S)
     (K : DerivedCategoryModule A S) :
     (scalarMate φ (ProjectiveLine S ↘ S)).app
         ((ordinaryFiniteP1Right A N hA S).obj K) ≫
@@ -247,7 +247,7 @@ private theorem p1_counit_from_trace
       (ordinaryFinitePushforward B q).map (projectiveSource φ N hN hA hB S hS K))
     ((projectiveLineTraceDatum N hN A hA S hS).adjunction.counit.app K)
     ((projectiveLineTraceDatum N hN B hB S hS).adjunction.counit.app KB)
-    (projectiveLineTrace N hN A hA S hS) (projectiveLineTrace N hN B hB S hS)
+    (ordinaryFiniteProjectiveLineTrace N hN A hA S hS) (ordinaryFiniteProjectiveLineTrace N hN B hB S hS)
     (projective φ N hN hA hB S hS) (unit φ S)
     (derivedTensorSingleUnitIso K).hom (derivedTensorSingleUnitIso KB).hom
   · simpa only [projectiveSource, projective, ordinaryFiniteP1Right, ordinaryFiniteTwistedPullback,
@@ -262,8 +262,8 @@ private theorem p1_counit_from_trace
 private theorem line_counit_from_trace
     (φ : A →+* B) (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0) (hB : (N : B) = 0)
     (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤)))
-    (ht : projective φ N hN hA hB S hS ≫ projectiveLineTrace N hN B hB S hS =
-      (scalarExtension φ S).map (projectiveLineTrace N hN A hA S hS) ≫ unit φ S)
+    (ht : projective φ N hN hA hB S hS ≫ ordinaryFiniteProjectiveLineTrace N hN B hB S hS =
+      (scalarExtension φ S).map (ordinaryFiniteProjectiveLineTrace N hN A hA S hS) ≫ unit φ S)
     (K : DerivedCategoryModule A S) :
     (compactScalarMap φ (affineTraceLineCompactification S)).app
         ((affineTraceLineRight A N hA S).obj K) ≫
@@ -298,8 +298,8 @@ private theorem line_counit_from_trace
 private theorem tower_counit_from_trace
     (φ : A →+* B) (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0) (hB : (N : B) = 0)
     (hp : ∀ (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (N : Γ(T, ⊤))),
-      projective φ N hN hA hB T hT ≫ projectiveLineTrace N hN B hB T hT =
-        (scalarExtension φ T).map (projectiveLineTrace N hN A hA T hT) ≫ unit φ T)
+      projective φ N hN hA hB T hT ≫ ordinaryFiniteProjectiveLineTrace N hN B hB T hT =
+        (scalarExtension φ T).map (ordinaryFiniteProjectiveLineTrace N hN A hA T hT) ≫ unit φ T)
     (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤)))
     (d : ℕ) (K : DerivedCategoryModule A S) :
     (towerLeft φ S d).app ((affineTraceRight A N hA S d).obj K) ≫
@@ -428,8 +428,8 @@ and empty schemes are included.
 theorem affine_of_projective (N : ℕ) (hN : 0 < N) (φ : A →+* B)
     (hA : (N : A) = 0) (hB : (N : B) = 0)
     (hp : ∀ (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (N : Γ(T, ⊤))),
-      projective φ N hN hA hB T hT ≫ projectiveLineTrace N hN B hB T hT =
-        (scalarExtension φ T).map (projectiveLineTrace N hN A hA T hT) ≫ unit φ T)
+      projective φ N hN hA hB T hT ≫ ordinaryFiniteProjectiveLineTrace N hN B hB T hT =
+        (scalarExtension φ T).map (ordinaryFiniteProjectiveLineTrace N hN A hA T hT) ≫ unit φ T)
     (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) :
     ∀ d : ℕ, affine φ N hN hA hB S hS d ≫ affineTrace N hN B hB S hS d =
         (scalarExtension φ S).map (affineTrace N hN A hA S hS d) ≫ unit φ S := by

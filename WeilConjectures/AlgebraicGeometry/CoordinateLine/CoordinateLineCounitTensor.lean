@@ -303,7 +303,7 @@ private theorem integration_line_expansion
     (B : Scheme.{u}) [IsNoetherian B] (hN : 0 < N) (hB : IsUnit (N : Γ(B, ⊤))) :
     integration A N hA B hN hB =
       (Etale.ordinaryFinitePushforward A (ProjectiveLine B ↘ B)).map
-        (open_line_restriction A N hA B) ≫ Etale.projectiveLineTrace N hN A hA B hB := by
+        (open_line_restriction A N hA B) ≫ Etale.ordinaryFiniteProjectiveLineTrace N hN A hA B hB := by
   unfold integration open_line_restriction
   rfl
 
@@ -417,7 +417,7 @@ private theorem projection_counit
     (projection_naturality_wrapped A q
       (open_line_restriction A N hA B) K) hd
   simpa -implicitDefEqProofs only [Etale.ordinaryFiniteProjection,
-    Etale.projectiveLineTrace,
+    Etale.ordinaryFiniteProjectiveLineTrace,
     Etale.ordinaryFiniteTensor, Etale.ordinaryFinitePullback,
     Etale.affineTraceOpenLeft, Functor.comp_obj, Functor.id_obj,
     j, q, J, Q, L, V, D, Category.assoc] using hn

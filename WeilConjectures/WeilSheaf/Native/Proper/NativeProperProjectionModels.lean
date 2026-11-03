@@ -115,6 +115,83 @@ private theorem models_of_kflat_tensor_square
     (nativeDerivedTensor k₀ l Y) (nativeDerivedTensor k₀ l Z)
     B.closed.tensor A.closed.tensor balanced.mu TZ.tensor TY.tensor J.pull C.tensor hb
 
+/-- The tensor part of the native proper-projection resolution calculation.
+Source: Stacks 07A4, 0G7E and BS 6.8.14--6.8.15; native proper-projection model
+proof, step 4 (blueprint: lem-sf-native-proper-section-tensor-models).
+
+Proof: construct the section tensor comparison on sheaves from the identity on
+underlying balanced tensors. For complexes, take the direct sum of these maps on
+all (i,j) summands. Its generator formula is precisely ProperSectionTensor.generators;
+both differentials are d tensor 1 plus (-1)^i 1 tensor d. The inverse is obtained
+by the same underlying tensor universal property. The exact section equivalence
+and the exact orbit-induction adjunction transfer both quasi-isomorphism tests for
+K-flatness. Forgetting native K-flat complexes is K-flat: test against an ordinary
+acyclic complex Q by its exact orbit induction, whose underlying complex is the
+direct sum of all Frobenius translates of Q. The ordinary tensor with Q is the
+split degree-zero summand of the forgotten acyclic total tensor. Thus it too is
+acyclic. Apply the same argument in the other tensor variable. Tensor descent
+therefore gives TZ and TY, with the stated representative equation on every
+K-flat pair, by uniqueness of the tensor-Hom adjunction comparisons.
+
+For p, use the balanced sheaf maps b tensor (x tensor y) maps to
+(b tensor x) tensor (1 tensor y), and the inverse multiplies coefficients.
+They commute with Frobenius by the coefficient precomposition equation. Their
+termwise totalizations retain each summand insertion. For arbitrary K-flat inputs,
+use the enough-points stalk criterion and
+the inverse-image theorem for ringed sites with enough points; the small pro-etale
+site has enough points. The flat-term preservation theorem applies separately to
+the chosen flat-term resolutions. The ordinary section coordinates and exact
+forgetting identify the required native K-flat tests. Localization constructs
+balanced with its presentation, compatibility,
+sheaf_forget and representative normalizations. Compute the square on simultaneous
+K-flat resolutions. C.representative and TZ.representative and TY.representative
+identify its four sides with these same balanced sheaf maps; no extra signs appear.
+The pull in J is the canonical one: pushSections and pushRepresentative fix its
+right comparison on K-injectives, and J.counit fixes its left adjoint mate. Thus it
+is this localized sheaf pull comparison. The two insertion formulas agree on every
+pure tensor, proving the square; localization and naturality give it for arbitrary
+M and N. Empty sites, zero inputs and identity p use the same formulas. -/
+private theorem native_proper_section_tensor_models_legacy
+    (J : NativeProperSectionAdjunctionModels k₀ l p R S O)
+    (hR : (sectionFunctor l (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber R).IsEquivalence)
+    (hS : (sectionFunctor l (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber S).IsEquivalence) :
+    ∃ (TZ : ProperSectionTensor k₀ l Z R A) (TY : ProperSectionTensor k₀ l Y S B)
+      (balanced : NativeProjectionTensorComparison k₀ l p),
+    ∀ M N,
+    (properSectionDerived k₀ l Z R).map (balanced.mu.hom.app (M, N)) ≫
+      TZ.tensor.hom.app
+        ((nativeOpenPull k₀ l p).obj M, (nativeOpenPull k₀ l p).obj N) ≫
+      A.closed.tensor.map (Prod.mkHom (J.pull.hom.app M) (J.pull.hom.app N)) =
+    J.pull.hom.app ((nativeDerivedTensor k₀ l Y).obj (M, N)) ≫
+      (ContinuousRational.derivedPull
+        (NativeBaseChange.geometricMap k₀ p) O.coefficient).map
+          (TY.tensor.hom.app (M, N)) ≫
+      C.tensor.hom.app
+        ((properSectionDerived k₀ l Y S).obj M,
+          (properSectionDerived k₀ l Y S).obj N) := by
+  have hz : Nonempty (ProperSectionTensor k₀ l Z R A) := by
+    obtain ⟨cochain, tensor, generators, representative⟩ :=
+      native_proper_section_tensor_descent_legacy k₀ l Z R A hR
+    exact ⟨{
+      cochain := cochain
+      generators := generators
+      kflat := native_two_sided_kflat_sections k₀ l Z R
+      tensor := tensor
+      representative := representative }⟩
+  have hy : Nonempty (ProperSectionTensor k₀ l Y S B) := by
+    obtain ⟨cochain, tensor, generators, representative⟩ :=
+      native_proper_section_tensor_descent_legacy k₀ l Y S B hS
+    exact ⟨{
+      cochain := cochain
+      generators := generators
+      kflat := native_two_sided_kflat_sections k₀ l Y S
+      tensor := tensor
+      representative := representative }⟩
+  obtain ⟨rho, hrho⟩ := native_pull_sheaf_tensor k₀ l p
+  exact models_of_kflat_tensor_square k₀ l p R S O A B C J hz hy
+    (fun TZ TY ↦ native_proper_kflat_pull_tensor_square
+      k₀ l p R S O A B C J hR hS rho hrho TZ TY)
+
 /-- Resolution and tensor comparison data before taking the projection mate.
 Source: Steps 1--4 of lem-sf-native-proper-projection-realization;
 BS 6.8.14--6.8.15 and Stacks 08BJ, 07A4, 0G7E
@@ -304,7 +381,7 @@ theorem native_proper_projection_models [IsProper p] :
   obtain ⟨N⟩ := native_proper_section_adjunction_models k₀ l p
     (F.data Zg).realization (F.data Yg).realization C.operations
     (F.data Zg).presentation (F.data Yg).presentation
-  obtain ⟨TZ, TY, balanced, hTensor⟩ := native_proper_section_tensor_models k₀ l p
+  obtain ⟨TZ, TY, balanced, hTensor⟩ := native_proper_section_tensor_models_legacy k₀ l p
     (F.data Zg).realization (F.data Yg).realization C.operations
     (F.data Zg).tensor (F.data Yg).tensor C.tensor N
     (F.data Zg).presentation (F.data Yg).presentation

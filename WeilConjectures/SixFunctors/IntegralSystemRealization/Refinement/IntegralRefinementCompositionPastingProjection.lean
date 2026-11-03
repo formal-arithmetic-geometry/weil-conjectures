@@ -8,6 +8,8 @@ public import WeilConjectures.SixFunctors.IntegralSystemRealization.Refinement.I
 import WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralNormalizedRefinementPasting
 import WeilConjectures.SixFunctors.IntegralSystemRealization.Finite.IntegralFiniteTorRefinementDiagram
 public import WeilConjectures.SixFunctors.IntegralSystemRealization.Refinement.IntegralRefinementTransposeRealization
+public import WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralNormalizedRefinementData
+public import WeilConjectures.SixFunctors.IntegralSystemRealization.Refinement.IntegralRefinementDiagramAdmissibility
 
 /-! # The composition component of normalized integral refinement pasting -/
 
