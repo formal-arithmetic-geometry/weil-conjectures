@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.StructureSheafCohomologyPullback
 public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
-import WeilConjectures.AlgebraicGeometry.Module.ModuleCohomologyExtHMap
+public import WeilConjectures.AlgebraicGeometry.Module.ModuleCohomologyExtHMap
 
 /-! The module-to-abelian comparison for structure modules.
 
@@ -28,35 +28,37 @@ universe v
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
+/-- The fixed injective-resolution comparison between degree-one structure-module
+cohomology and abelian sheaf cohomology of the structure sheaf. -/
+noncomputable def structureModuleAbelianEquiv
+    [∀ Y : Scheme.{v},
+      HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]
+    (Y : Scheme.{v}) :
+    (RingedSpace.moduleCohomology Y.toRingedSpace 1).obj
+        (SheafOfModules.unit Y.ringCatSheaf) ≃+
+      Sheaf.H (structureSheafAb Y) 1 :=
+  Modules.moduleCohomologyExtResolutionEquiv Y (SheafOfModules.unit Y.ringCatSheaf) 1
+
 set_option maxHeartbeats 800000 in
 -- Transporting the fixed resolution comparison through the module aliases is expensive.
-/-- The fixed resolution comparison identifies structure-module cohomology with abelian
-sheaf cohomology and respects every structure h-map.
+/-- The fixed resolution comparison `structureModuleAbelianEquiv` respects every structure
+h-map.
 Source: Stacks Project, Tags 03FD (comparison) and 01FB (coefficient factorization).
 (blueprint: new-structure-derived-image-module-abelian-compatibility).
 
-Proof: At each scheme use moduleCohomologyExtResolutionEquiv for the structure module.
-Apply moduleCohomologyExtResolutionEquiv_hmap to unitToPushforwardObjUnit. Its underlying
-abelian coefficient and inverse-image Ext formula are definitionally those defining
-structureSheafCohomologyPullback. These choices work also for empty schemes and zero
-cohomology groups. -/
+Proof: Apply moduleCohomologyExtResolutionEquiv_hmap to unitToPushforwardObjUnit. Its
+underlying abelian coefficient and inverse-image Ext formula are definitionally those
+defining structureSheafCohomologyPullback. -/
 theorem structure_module_abelian_comparison
     [∀ Y : Scheme.{v},
-      HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))] :
-    ∃ e : ∀ (Y : Scheme.{v}),
-        (RingedSpace.moduleCohomology Y.toRingedSpace 1).obj
-          (SheafOfModules.unit Y.ringCatSheaf) ≃+
-            Sheaf.H (structureSheafAb Y) 1,
-      ∀ {X Y : Scheme.{v}} (g : Y ⟶ X) (x :
-        (RingedSpace.moduleCohomology X.toRingedSpace 1).obj
-          (SheafOfModules.unit X.ringCatSheaf)),
-        e Y (Modules.moduleCohomologyFMap g
-          (SheafOfModules.unitToPushforwardObjUnit g.toRingCatSheafHom) 1 x) =
-          structureSheafCohomologyPullback g 1 (e X x) := by
+      HasDerivedCategory.{v + 1} (SheafOfModules.{v} (moduleRings Y.toRingedSpace))]
+    {X Y : Scheme.{v}} (g : Y ⟶ X) (x :
+      (RingedSpace.moduleCohomology X.toRingedSpace 1).obj
+        (SheafOfModules.unit X.ringCatSheaf)) :
+    structureModuleAbelianEquiv Y (Modules.moduleCohomologyFMap g
+        (SheafOfModules.unitToPushforwardObjUnit g.toRingCatSheafHom) 1 x) =
+      structureSheafCohomologyPullback g 1 (structureModuleAbelianEquiv X x) := by
   classical
-  refine ⟨fun Y ↦ Modules.moduleCohomologyExtResolutionEquiv Y
-    (SheafOfModules.unit Y.ringCatSheaf) 1, ?_⟩
-  intro X Y g x
   exact Modules.moduleCohomologyExtResolutionEquiv_hmap g
     (SheafOfModules.unit X.ringCatSheaf) (SheafOfModules.unit Y.ringCatSheaf)
     (SheafOfModules.unitToPushforwardObjUnit g.toRingCatSheafHom) 1 x

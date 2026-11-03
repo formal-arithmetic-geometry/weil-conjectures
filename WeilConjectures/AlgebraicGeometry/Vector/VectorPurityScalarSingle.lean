@@ -119,7 +119,7 @@ def purityScalarTensor {A B : Type (u + 1)} [CommRing A] [CommRing B]
 
 end AlgebraicGeometry.Etale
 
-namespace WeilConjectures.PurityFiniteSetting
+namespace AlgebraicGeometry.Etale
 
 /-- Factor the scalar/single adjunction transpose in abstract categories, sharing its
 functor endpoints before specializing to coefficient sheaves. This is the same unit
@@ -179,7 +179,7 @@ def purityRepresentativeSingleMap (M : C) :
 
 end RepresentativeSingle
 
-end WeilConjectures.PurityFiniteSetting
+end AlgebraicGeometry.Etale
 
 namespace CategoryTheory
 variable {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
@@ -229,12 +229,12 @@ private theorem single_adjunction_formula (M : C) :
 /-- The adjunction and representative single comparisons agree.
 Source: Stacks 06YY, 07A6 (blueprint: def-pur-vector-purity-scalar-single). -/
 theorem purityAdjunctionSingleMap_eq_representative (M : C) :
-    WeilConjectures.PurityFiniteSetting.purityAdjunctionSingleMap E U L U.mapDerivedCategory
+    AlgebraicGeometry.Etale.purityAdjunctionSingleMap E U L U.mapDerivedCategory
       (DerivedCategory.singleFunctor C 0) (DerivedCategory.singleFunctor D 0)
       adj ad (U.mapDerivedCategorySingleFunctor 0) M =
-    WeilConjectures.PurityFiniteSetting.purityRepresentativeSingleMap E U adj L ad M := by
-  unfold WeilConjectures.PurityFiniteSetting.purityRepresentativeSingleMap
-    WeilConjectures.PurityFiniteSetting.puritySingleFromRepresentativeMap
+    AlgebraicGeometry.Etale.purityRepresentativeSingleMap E U adj L ad M := by
+  unfold AlgebraicGeometry.Etale.purityRepresentativeSingleMap
+    AlgebraicGeometry.Etale.puritySingleFromRepresentativeMap
     Etale.scalarAdjunctionRepresentativeMap
   rw [← AlgebraicGeometry.Etale.mapComplex_unit_formula]
   simp only [DerivedCategory.singleFunctorIsoCompQ, Iso.refl_hom, Iso.refl_inv,
@@ -243,7 +243,7 @@ theorem purityAdjunctionSingleMap_eq_representative (M : C) :
   exact single_adjunction_formula E U adj L ad M
 end CategoryTheory
 
-namespace WeilConjectures.PurityFiniteSetting
+namespace AlgebraicGeometry.Etale
 
 /-- The comparison on a sheaf in degree zero is the scalar transpose of the ordinary
 scalar-unit map, followed by the exact restriction/single comparison.
@@ -276,4 +276,4 @@ def purityScalarUnitMap {A A' : Type (u + 1)} [CommRing A] [CommRing A']
     (Etale.singleFunctorObjUnitIso (ModuleCat.{u + 1} A') T).symm
     (Etale.ExceptionalCoefficients.unitIso φ T).hom
 
-end WeilConjectures.PurityFiniteSetting
+end AlgebraicGeometry.Etale

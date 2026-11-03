@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalTowerTraceModels
 import all WeilConjectures.AlgebraicGeometry.DiagonalTrace.Coefficient.DiagonalTraceCoefficientIdentification
+import all WeilConjectures.AlgebraicGeometry.SpTowerClasses.TowerForgetEvaluation
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 
@@ -161,28 +162,34 @@ comparison from the scalar-extended root module to c.rootModule. Compose with
 c.rootForget. The unitor equation on pure tensors gives the formula below.
 This uses only the ordinary scalar model; no completed root-limit projection or
 derived trace is used. -/
-theorem exists_diagonalTraceLineIdentification (l : ℕ) [Fact l.Prime]
+@[no_expose] def diagonalTraceLineIdentification (l : ℕ) [Fact l.Prime]
     (T : Scheme.{u}) (c : Chern l (ULift.{u} (Padic l)) T)
     (r : Restriction l (ULift.{u} (Padic l)) T) :
-    ∃ e : r.F.obj (lineModule l (ULift.{u} (Padic l)) c) ⋙
-        diagonalForget l T ≅ roots l T,
-      ∀ (n : ℕ) (U : T.ProEtᵒᵖ)
-        (x : c.rootModule.val.obj (op (n, U.unop)))
-        (x' : ((c.reduction.forget.F.obj c.rootModule).obj (op n)).obj.obj U)
-        (v : ((r.F.obj (lineModule l (ULift.{u} (Padic l)) c)).obj (op n)).obj.obj U),
-        HEq x x' →
-        HEq v (SemilinearSections.scalarExtensionSection.{u + 1, u, u + 1}
-          (coefficientSystemMap l (ULift.{u} (Padic l)) T) c.scalar c.rootModule
-          (op (n, U.unop)) x) →
-        (e.hom.app (op n)).hom.app U v =
-          (c.rootForget.hom.app (op n)).hom.app U x'  := by
+    r.F.obj (lineModule l (ULift.{u} (Padic l)) c) ⋙ diagonalForget l T ≅ roots l T :=
+  haveI := scalarUnit_iso l T c
+  underlyingTowerIso l T c r (lineModule l (ULift.{u} (Padic l)) c) ≪≫
+    (c.reduction.forget.F.mapIso
+      (asIso (c.scalar.ordinaryAdjunction.unit.app c.rootModule))).symm ≪≫ c.rootForget
+
+/-- The line identification sends the scalar extension of a root section `x` to the image
+of `x` under `c.rootForget`. -/
+theorem diagonalTraceLineIdentification_hom_app_hom_app (l : ℕ) [Fact l.Prime]
+    (T : Scheme.{u}) (c : Chern l (ULift.{u} (Padic l)) T)
+    (r : Restriction l (ULift.{u} (Padic l)) T)
+    (n : ℕ) (U : T.ProEtᵒᵖ)
+    (x : c.rootModule.val.obj (op (n, U.unop)))
+    (x' : ((c.reduction.forget.F.obj c.rootModule).obj (op n)).obj.obj U)
+    (v : ((r.F.obj (lineModule l (ULift.{u} (Padic l)) c)).obj (op n)).obj.obj U)
+    (hx : HEq x x')
+    (hv : HEq v (SemilinearSections.scalarExtensionSection.{u + 1, u, u + 1}
+      (coefficientSystemMap l (ULift.{u} (Padic l)) T) c.scalar c.rootModule
+      (op (n, U.unop)) x)) :
+    ((diagonalTraceLineIdentification l T c r).hom.app (op n)).hom.app U v =
+      (c.rootForget.hom.app (op n)).hom.app U x' := by
   let η := c.scalar.ordinaryAdjunction.unit.app c.rootModule
   have : IsIso η := scalarUnit_iso l T c
   let a := c.reduction.forget.F.mapIso (asIso η)
   let b := underlyingTowerIso l T c r (lineModule l (ULift.{u} (Padic l)) c)
-  let e := b ≪≫ a.symm ≪≫ c.rootForget
-  refine ⟨e, ?_⟩
-  intro n U x x' v hx hv
   let y := ((c.reduction.forget.F.map η).app (op n)).hom.app U x'
   have hy : HEq y (η.val.app (op (n, U.unop)) x) := by
     apply transport_apply

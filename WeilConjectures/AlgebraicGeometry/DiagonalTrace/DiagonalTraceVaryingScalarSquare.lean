@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalTowerTraceModels
 import WeilConjectures.AlgebraicGeometry.SpTowerShriek.SmoothPurityTowerOrdinaryUnitEvaluation
+import all WeilConjectures.AlgebraicGeometry.SpTowerShriek.SmoothPurityStrictOpenTensorCoordinates
+import all WeilConjectures.AlgebraicGeometry.SpTowerClasses.TowerForgetEvaluation
 
 /-! # Scalar restriction and direct image of strict finite systems -/
 
@@ -189,19 +191,6 @@ private theorem push_sections {X S : Scheme.{u}} {f : X ⟶ S}
 
 end AlgebraicGeometry.ProEtale.DiagonalTrace
 
-private def restrictedSection {C : Type*} [Category C] [EssentiallySmall.{v} C]
-    {J : GrothendieckTopology C}
-    {R S : Sheaf J CommRingCat.{v}} (φ : R ⟶ S)
-    (M : SemilinearSections.Mod.{_, _, v} J S) (U : Cᵒᵖ) :
-    ((SemilinearSections.res.{_, _, v} φ).obj M).val.obj U → M.val.obj U :=
-  fun x ↦ x
-
-private theorem restrictedSection_heq {C : Type*} [Category C] [EssentiallySmall.{v} C]
-    {J : GrothendieckTopology C} {R S : Sheaf J CommRingCat.{v}} (φ : R ⟶ S)
-    (M : SemilinearSections.Mod.{_, _, v} J S) (U : Cᵒᵖ)
-    (x : ((SemilinearSections.res.{_, _, v} φ).obj M).val.obj U) :
-    HEq (restrictedSection φ M U x) x := by rfl
-
 private def restrictedAddHom {C : Type c} [Category.{w} C] [EssentiallySmall.{v} C]
     {J : GrothendieckTopology C} {R S : Sheaf J CommRingCat.{v}} (φ : R ⟶ S)
     {M : SemilinearSections.Mod.{c, w, v} J R}
@@ -231,29 +220,7 @@ private theorem transition_addHom {C : Type c} [Category.{w} C]
   exact congrFun (eq_of_heq
     ((SemilinearSections.transition_exists.{c, w, v} J B τ h).exists.choose_spec M U)) x
 
-private theorem restrict_map_heq {C : Type*} [Category C] [EssentiallySmall.{v} C]
-    {J : GrothendieckTopology C} {R S : Sheaf J CommRingCat.{v}} (φ : R ⟶ S)
-    {M N : SemilinearSections.Mod.{_, _, v} J S} (a : M ⟶ N) (U : Cᵒᵖ)
-    (x : ((SemilinearSections.res.{_, _, v} φ).obj M).val.obj U)
-    (y : M.val.obj U) (h : HEq x y) :
-    HEq (((SemilinearSections.res.{_, _, v} φ).map a).val.app U x)
-      (a.val.app U y) := by
-  have hx : x = y := eq_of_heq h
-  cases hx
-  rfl
-
 namespace AlgebraicGeometry.ProEtale.DiagonalTrace
-private def pushSection (A : Type u) [CommRing A] {X S : Scheme.{u}} (f : X ⟶ S)
-    (M : Scheme.proEtaleRingModules X (Scheme.proEtaleConstantRing X A))
-    (U : S.ProEtᵒᵖ) :
-    ((Scheme.proEtaleConstantRingPushforward A f).obj M).val.obj U →
-      M.val.obj (chart f U) := fun x ↦ x
-
-private theorem pushSection_heq (A : Type u) [CommRing A] {X S : Scheme.{u}}
-    (f : X ⟶ S) (M : Scheme.proEtaleRingModules X (Scheme.proEtaleConstantRing X A))
-    (U : S.ProEtᵒᵖ) (x : ((Scheme.proEtaleConstantRingPushforward A f).obj M).val.obj U) :
-    HEq (pushSection A f M U x) x := by rfl
-
 private def pushAddHom (A : Type u) [CommRing A] {X S : Scheme.{u}}
     (f : X ⟶ S) {M : Scheme.proEtaleRingModules S (Scheme.proEtaleConstantRing S A)}
     {N : Scheme.proEtaleRingModules X (Scheme.proEtaleConstantRing X A)}
@@ -261,167 +228,11 @@ private def pushAddHom (A : Type u) [CommRing A] {X S : Scheme.{u}}
     AddCommGrpCat.of (M.val.obj U) ⟶ AddCommGrpCat.of (N.val.obj (chart f U)) :=
   AddCommGrpCat.ofHom (a.val.app U).hom.toAddMonoidHom
 
-private theorem pushSection_map (A : Type u) [CommRing A] {X S : Scheme.{u}}
-    (f : X ⟶ S) {M N : Scheme.proEtaleRingModules X (Scheme.proEtaleConstantRing X A)}
-    (a : M ⟶ N) (U : S.ProEtᵒᵖ)
-    (x : ((Scheme.proEtaleConstantRingPushforward A f).obj M).val.obj U) :
-    pushSection A f N U (((Scheme.proEtaleConstantRingPushforward A f).map a).val.app U x) =
-      a.val.app (chart f U) (pushSection A f M U x) := by rfl
-private theorem pushSection_comp (A : Type u) [CommRing A] {X S : Scheme.{u}}
-    (f : X ⟶ S) {M N : Scheme.proEtaleRingModules X (Scheme.proEtaleConstantRing X A)}
-    {P : Scheme.proEtaleRingModules S (Scheme.proEtaleConstantRing S A)}
-    (a : P ⟶ (Scheme.proEtaleConstantRingPushforward A f).obj M) (b : M ⟶ N)
-    (U : S.ProEtᵒᵖ) (x : P.val.obj U) :
-    pushSection A f N U ((a ≫ (Scheme.proEtaleConstantRingPushforward A f).map b).val.app U x) =
-      b.val.app (chart f U) (pushSection A f M U (a.val.app U x)) := by rfl
-
-end AlgebraicGeometry.ProEtale.DiagonalTrace
-
-private theorem counit_evaluation
-    {C D A B : Type*} [Category C] [Category D] [Category A] [Category B]
-    {F : C ⥤ D} {G : D ⥤ C} (a : F ⊣ G)
-    {L : A ⥤ B} {R : B ⥤ A} (b : L ⊣ R) (V : C ⥤ A) (W : D ⥤ B)
-    (eF : F ⋙ W ≅ V ⋙ L) (eG : G ⋙ V ≅ W ⋙ R)
-    (hu : ∀ M, V.map (a.unit.app M) ≫ eG.hom.app (F.obj M) ≫
-      R.map (eF.hom.app M) = b.unit.app (V.obj M)) (N : D) :
-    b.homEquiv _ _ (eF.inv.app (G.obj N) ≫ W.map (a.counit.app N)) =
-      eG.hom.app N := by
-  have hu' : V.map (a.unit.app (G.obj N)) ≫ eG.hom.app (F.obj (G.obj N)) =
-      b.unit.app (V.obj (G.obj N)) ≫ R.map (eF.inv.app (G.obj N)) := by
-    apply (Iso.eq_comp_inv (R.mapIso (eF.app (G.obj N)))).2
-    simpa only [CategoryTheory.Functor.mapIso_hom, Iso.app_hom, Category.assoc]
-      using hu (G.obj N)
-  have hh : V.map (a.homEquiv _ _ (a.counit.app N)) ≫ eG.hom.app N =
-      b.homEquiv _ _ (eF.inv.app (G.obj N) ≫ W.map (a.counit.app N)) := by
-    rw [Adjunction.homEquiv_unit, CategoryTheory.Functor.map_comp, Category.assoc]
-    have hn : V.map (G.map (a.counit.app N)) ≫ eG.hom.app N =
-        eG.hom.app (F.obj (G.obj N)) ≫ R.map (W.map (a.counit.app N)) :=
-      eG.hom.naturality (a.counit.app N)
-    rw [hn, ← Category.assoc, hu']
-    simp only [Adjunction.homEquiv_unit, CategoryTheory.Functor.map_comp,
-      Category.assoc]
-  have he : a.homEquiv _ _ (a.counit.app N) = 𝟙 (G.obj N) := by
-    rw [← a.homEquiv_symm_id N]
-    exact (a.homEquiv _ _).apply_symm_apply _
-  rw [he, CategoryTheory.Functor.map_id, Category.id_comp] at hh
-  exact hh.symm
-
-namespace AlgebraicGeometry.ProEtale.DiagonalTrace
-variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
-  [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
-private abbrev horizontal (T : Scheme.{u}) {m n : ℕ} (h : n ≤ m) :
-    SpTowerShriek.ev l E T m ⟶ SpTowerShriek.ev l E T n ⋙
-      SemilinearSections.res.{u + 1, u, u + 1}
-        (SemilinearSections.coefficientMap.{u + 1, u, u + 1} (Scheme.ProEt.topology T)
-          (SpTowerShriek.B l E T) (SpTowerShriek.tau l E T) h) :=
-  SemilinearSections.transition.{u + 1, u, u + 1} (Scheme.ProEt.topology T)
-    (SpTowerShriek.B l E T) (SpTowerShriek.tau l E T) h
-private abbrev restrict (T : Scheme.{u}) {m n : ℕ} (h : n ≤ m) :
-    SemilinearSections.Mod.{u + 1, u, u + 1} (Scheme.ProEt.topology T)
-        (SpTowerShriek.B l E T n) ⥤
-      SemilinearSections.Mod.{u + 1, u, u + 1} (Scheme.ProEt.topology T)
-        (SpTowerShriek.B l E T m) :=
-  SemilinearSections.res.{u + 1, u, u + 1}
-    (SemilinearSections.coefficientMap.{u + 1, u, u + 1} (Scheme.ProEt.topology T)
-      (SpTowerShriek.B l E T) (SpTowerShriek.tau l E T) h)
-
-private def horizontalSection (T : Scheme.{u}) {m n : ℕ} (h : n ≤ m)
-    (M : SpTowerShriek.S l E T) (U : T.ProEtᵒᵖ)
-    (x : ((SpTowerShriek.ev l E T m).obj M).val.obj U) :
-    ((SpTowerShriek.ev l E T n).obj M).val.obj U :=
-  restrictedSection
-    (SemilinearSections.coefficientMap.{u + 1, u, u + 1} (Scheme.ProEt.topology T)
-      (SpTowerShriek.B l E T) (SpTowerShriek.tau l E T) h)
-    ((SpTowerShriek.ev l E T n).obj M) U (((horizontal l E T h).app M).val.app U x)
-
-private theorem push_horizontal {X S : Scheme.{u}} (f : X ⟶ S)
-    (b : SpTowerShriek.Base l E) (g : SpTowerShriek.Geometry l E b f)
-    (N : SpTowerShriek.S l E X) {m n : ℕ} (h : n ≤ m) (U : S.ProEtᵒᵖ)
-    (x : ((SpTowerShriek.ev l E S m).obj (g.push.obj N)).val.obj U) :
-    pushSection (SpTowerShriek.R l E n) f ((SpTowerShriek.ev l E X n).obj N) U
-      (((g.ordinaryPushEvaluation n).hom.app N).val.app U
-        (horizontalSection l E S h (g.push.obj N) U x)) =
-      horizontalSection l E X h N (chart f U)
-        (pushSection (SpTowerShriek.R l E m) f ((SpTowerShriek.ev l E X m).obj N) U
-          (((g.ordinaryPushEvaluation m).hom.app N).val.app U x)) := by
-  let D := g.push.obj N
-  let ε : g.pull.obj D ⟶ N := g.ordinaryAdjunction.counit.app N
-  let a := fun k ↦ Scheme.proEtaleConstantRingAdjunction (SpTowerShriek.R l E k) f
-  let d := fun k ↦ (g.ordinaryPullEvaluation k).inv.app D ≫
-    (SpTowerShriek.ev l E X k).map ε
-  have hd (k : ℕ) : (a k).homEquiv _ _ (d k) =
-      (g.ordinaryPushEvaluation k).hom.app N := by
-    exact counit_evaluation g.ordinaryAdjunction (a k)
-      (SpTowerShriek.ev l E S k) (SpTowerShriek.ev l E X k)
-      (g.ordinaryPullEvaluation k) (g.ordinaryPushEvaluation k)
-      (SpTowerShriek.geometry_unit_evaluation l E b g k) N
-  let t := (g.ordinaryPullEvaluation m).inv.app D ≫
-    (horizontal l E X h).app (g.pull.obj D) ≫
-      (restrict l E X h).map ((g.ordinaryPullEvaluation n).hom.app D)
-  have ht : t ≫ (restrict l E X h).map (d n) =
-      d m ≫ (horizontal l E X h).app N := by
-    calc
-      _ = (g.ordinaryPullEvaluation m).inv.app D ≫
-          (horizontal l E X h).app (g.pull.obj D) ≫
-            (restrict l E X h).map
-              ((g.ordinaryPullEvaluation n).hom.app D ≫ d n) := by
-        simp only [t, Category.assoc, CategoryTheory.Functor.map_comp]
-      _ = (g.ordinaryPullEvaluation m).inv.app D ≫
-          (horizontal l E X h).app (g.pull.obj D) ≫
-            (restrict l E X h).map ((SpTowerShriek.ev l E X n).map ε) := by
-        rw [show (g.ordinaryPullEvaluation n).hom.app D ≫ d n =
-          (SpTowerShriek.ev l E X n).map ε from
-            (g.ordinaryPullEvaluation n).hom_inv_id_app_assoc D _]
-      _ = _ := congrArg ((g.ordinaryPullEvaluation m).inv.app D ≫ ·)
-        ((horizontal l E X h).naturality ε).symm
-  let y := horizontalSection l E S h D U x
-  have hy : HEq (((horizontal l E S h).app D).val.app U x) y :=
-    (restrictedSection_heq _ _ _ _).symm
-  have hu := g.ordinaryUnitTransition
-  unfold SpTowerShriek.OrdinaryUnitTransition SpTowerShriek.OrdinaryUnitTransitionModel at hu
-  have hh := hu D h U x y hy
-  have hh' : HEq
-      (pushSection (SpTowerShriek.R l E m) f ((restrict l E X h).obj
-        ((SpTowerShriek.ev l E X n).obj N)) U
-          (((a m).homEquiv _ _ (t ≫ (restrict l E X h).map (d n))).val.app U x))
-      (pushSection (SpTowerShriek.R l E n) f ((SpTowerShriek.ev l E X n).obj N) U
-        (((a n).homEquiv _ _ (d n)).val.app U y)) := by
-    rw [Adjunction.homEquiv_naturality_right, pushSection_comp]
-    have hh₀ := (pushSection_heq _ _ _ _ _).trans
-      (hh.trans (pushSection_heq _ _ _ _ _).symm)
-    have hh₁ := restrict_map_heq
-      (SemilinearSections.coefficientMap.{u + 1, u, u + 1} (Scheme.ProEt.topology X)
-        (SpTowerShriek.B l E X) (SpTowerShriek.tau l E X) h)
-      (d n) (chart f U) _ _ hh₀
-    change HEq _ (pushSection (SpTowerShriek.R l E n) f _ U
-      (((a n).unit.app _ ≫
-        (Scheme.proEtaleConstantRingPushforward (SpTowerShriek.R l E n) f).map
-          (d n)).val.app U y))
-    rw [show ((a n).unit.app _ ≫
-        (Scheme.proEtaleConstantRingPushforward (SpTowerShriek.R l E n) f).map
-          (d n)).val.app U y =
-        ((Scheme.proEtaleConstantRingPushforward (SpTowerShriek.R l E n) f).map
-          (d n)).val.app U (((a n).unit.app _).val.app U y) by rfl,
-      pushSection_map]
-    exact hh₁
-  rw [ht, Adjunction.homEquiv_naturality_right, hd m, hd n, pushSection_comp] at hh'
-  exact eq_of_heq (((restrictedSection_heq _ _ _ _).trans hh').symm)
-end AlgebraicGeometry.ProEtale.DiagonalTrace
-
-namespace AlgebraicGeometry.ProEtale.DiagonalTrace
 variable (l : ℕ) [Fact l.Prime] {X S : Scheme.{u}} (f : X ⟶ S)
   (b : SpTowerShriek.Base l (ULift.{u} (Padic l)))
   (g : SpTowerShriek.Geometry l (ULift.{u} (Padic l)) b f)
   (rS : Restriction l (ULift.{u} (Padic l)) S)
   (rX : Restriction l (ULift.{u} (Padic l)) X)
-
-private theorem transport_addHom {A B A' B' : AddCommGrpCat.{u + 1}}
-    (eA : A = A') (eB : B = B') (f : A ⟶ B) (g : A' ⟶ B')
-    (h : HEq f.hom g.hom) : f ≫ eqToHom eB = eqToHom eA ≫ g := by
-  subst A'
-  subst B'
-  simpa only [eqToHom_refl, Category.comp_id, Category.id_comp]
-    using AddCommGrpCat.hom_ext (eq_of_heq h)
 
 private def restrictionUnderlying (T : Scheme.{u})
     (r : Restriction l (ULift.{u} (Padic l)) T) (n : ℕ) :
@@ -485,19 +296,19 @@ private theorem levelUnderlying_horizontal
     (Scheme.ProEt.topology S) (SpTowerShriek.B l (ULift.{u} (Padic l)) S)
     (SpTowerShriek.tau l (ULift.{u} (Padic l)) S) h
   let t := restrictedAddHom φS
-    ((horizontal l (ULift.{u} (Padic l)) S h).app (g.push.obj M)) U
+    ((SpTowerShriek.horizontal l (ULift.{u} (Padic l)) S h).app (g.push.obj M)) U
   let u := AddCommGrpCat.ofHom
     ((((rX.F.obj M).map (homOfLE h).op).hom.app (chart f U)).hom.toAddMonoidHom)
   let φX := SemilinearSections.coefficientMap.{u + 1, u, u + 1}
     (Scheme.ProEt.topology X) (SpTowerShriek.B l (ULift.{u} (Padic l)) X)
     (SpTowerShriek.tau l (ULift.{u} (Padic l)) X) h
   let v := restrictedAddHom φX
-    ((horizontal l (ULift.{u} (Padic l)) X h).app M) (chart f U)
+    ((SpTowerShriek.horizontal l (ULift.{u} (Padic l)) X h).app M) (chart f U)
   let e := fun k ↦ pushAddHom (SpTowerShriek.R l (ULift.{u} (Padic l)) k) f
     ((g.ordinaryPushEvaluation k).hom.app M) U
   have ht : t ≫ e n = e m ≫ v := by
     ext x
-    exact push_horizontal l (ULift.{u} (Padic l)) f b g M h U x
+    exact SpTowerShriek.push_horizontal l (ULift.{u} (Padic l)) f b g M h U x
   change s ≫ (eqToHom (rS.underlying (g.push.obj M) n U) ≫ e n ≫
       eqToHom (rX.underlying M n (chart f U)).symm) =
     (eqToHom (rS.underlying (g.push.obj M) m U) ≫ e m ≫
@@ -508,13 +319,13 @@ private theorem levelUnderlying_horizontal
     s t u v (e m) (e n)
     ((rS.transitions (g.push.obj M) h U).trans
       ((restrictedAddHom_heq φS
-        ((horizontal l (ULift.{u} (Padic l)) S h).app (g.push.obj M)) U).trans
+        ((SpTowerShriek.horizontal l (ULift.{u} (Padic l)) S h).app (g.push.obj M)) U).trans
         (transition_addHom (Scheme.ProEt.topology S)
           (SpTowerShriek.B l (ULift.{u} (Padic l)) S)
           (SpTowerShriek.tau l (ULift.{u} (Padic l)) S) (g.push.obj M) h U)).symm)
     ((rX.transitions M h (chart f U)).trans
       ((restrictedAddHom_heq φX
-        ((horizontal l (ULift.{u} (Padic l)) X h).app M) (chart f U)).trans
+        ((SpTowerShriek.horizontal l (ULift.{u} (Padic l)) X h).app M) (chart f U)).trans
         (transition_addHom (Scheme.ProEt.topology X)
           (SpTowerShriek.B l (ULift.{u} (Padic l)) X)
           (SpTowerShriek.tau l (ULift.{u} (Padic l)) X) M h (chart f U))).symm) ht
@@ -586,27 +397,35 @@ These equations assemble the level isomorphisms into a natural isomorphism of
 strict systems, with the asserted identity on every section. No completed
 coefficients or coefficient cones occur. The argument also covers identity maps,
 empty sites, and level zero (the first positive quotient). -/
-theorem diagonalTraceVaryingScalarSquare (l : ℕ) [Fact l.Prime]
+@[no_expose] def diagonalTraceVaryingScalarSquare (l : ℕ) [Fact l.Prime]
     {X S : Scheme.{u}} (f : X ⟶ S)
     (b : SpTowerShriek.Base l (ULift.{u} (Padic l)))
     (g : SpTowerShriek.Geometry l (ULift.{u} (Padic l)) b f)
     (rS : Restriction l (ULift.{u} (Padic l)) S)
     (rX : Restriction l (ULift.{u} (Padic l)) X) :
-    ∃ e : g.push ⋙ rS.F ≅ rX.F ⋙ diagonalTraceSystemPush l f,
-      ∀ (M : Systems X (Arings l (ULift.{u} (Padic l)) X)) (n : ℕ) (U : S.ProEtᵒᵖ)
-        (x : (((g.push ⋙ rS.F).obj M).obj (op n)).obj.obj U),
-        HEq (((e.hom.app M).app (op n)).hom.app U x) x := by
-  let e : g.push ⋙ rS.F ≅ rX.F ⋙ diagonalTraceSystemPush l f :=
-    NatIso.ofComponents (fun M ↦ NatIso.ofComponents
-      (fun n ↦ (levelIso l f b g rS rX n.unop).app M) (by
-        intro m n a
-        have ha : a = (homOfLE (leOfHom a.unop)).op := Subsingleton.elim _ _
-        cases ha
-        exact levelIso_horizontal l f b g rS rX M (leOfHom a.unop))) (by
-          intro M N a
-          apply NatTrans.ext
-          funext n
-          exact (levelIso l f b g rS rX n.unop).hom.naturality a)
-  exact ⟨e, fun M n U x ↦ levelIso_sections l f b g rS rX M n U x⟩
+    g.push ⋙ rS.F ≅ rX.F ⋙ diagonalTraceSystemPush l f :=
+  NatIso.ofComponents (fun M ↦ NatIso.ofComponents
+    (fun n ↦ (levelIso l f b g rS rX n.unop).app M) (by
+      intro m n a
+      have ha : a = (homOfLE (leOfHom a.unop)).op := Subsingleton.elim _ _
+      cases ha
+      exact levelIso_horizontal l f b g rS rX M (leOfHom a.unop))) (by
+        intro M N a
+        apply NatTrans.ext
+        funext n
+        exact (levelIso l f b g rS rX n.unop).hom.naturality a)
+
+/-- The varying scalar square is the identity on sections. -/
+theorem diagonalTraceVaryingScalarSquare_hom_app_app_hom_app (l : ℕ) [Fact l.Prime]
+    {X S : Scheme.{u}} (f : X ⟶ S)
+    (b : SpTowerShriek.Base l (ULift.{u} (Padic l)))
+    (g : SpTowerShriek.Geometry l (ULift.{u} (Padic l)) b f)
+    (rS : Restriction l (ULift.{u} (Padic l)) S)
+    (rX : Restriction l (ULift.{u} (Padic l)) X)
+    (M : Systems X (Arings l (ULift.{u} (Padic l)) X)) (n : ℕ) (U : S.ProEtᵒᵖ)
+    (x : (((g.push ⋙ rS.F).obj M).obj (op n)).obj.obj U) :
+    HEq ((((diagonalTraceVaryingScalarSquare l f b g rS rX).hom.app M).app (op n)).hom.app U x)
+      x :=
+  levelIso_sections l f b g rS rX M n U x
 
 end AlgebraicGeometry.ProEtale.DiagonalTrace

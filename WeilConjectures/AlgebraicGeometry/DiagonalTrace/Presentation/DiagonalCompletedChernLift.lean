@@ -6,7 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Presentation.DiagonalTowerTracePresentations
-import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalCompleteScalarRestriction
+import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalCompleteScalarRestrictionCore
 import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Completed.DiagonalCompletedLineComplete
 import WeilConjectures.AlgebraicGeometry.Pur.PurTwistSheafLocallyFree
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
@@ -132,7 +132,7 @@ theorem diagonalTrace_completedChern_lift
   let P : ObjectProperty (DerivedCategory (DiagonalCompleted l S)) := fun M ↦
     ∀ V : DerivedCategory (DiagonalMod l S),
       IsIso (l • 𝟙 V) → Subsingleton (V ⟶ F.obj M)
-  obtain ⟨ff⟩ := diagonalCompleteScalarRestriction l S
+  obtain ⟨ff⟩ := diagonalCompleteScalarRestrictionCore l S
   let U := SheafOfModules.unit (Scheme.purTwistRing S (Scheme.purTwistZlCompletion S l))
   have hunit := diagonalCompletedLine_complete l S U
     ((SheafOfModules.isInvertible_iff_isFiniteLocallyFreeOfRank_one U).mp inferInstance)

@@ -84,8 +84,9 @@ theorem exists_diagonalTraceOrdinaryScalars (l : ℕ) [Fact l.Prime]
         HEq ((completedOrdinary.hom.app M).hom.app U x) x := by
   obtain ⟨rS, aS⟩ := exists_diagonalTraceCoefficientRestriction l S cS nS
   obtain ⟨rX, aX⟩ := exists_diagonalTraceCoefficientRestriction l X cX nX
-  obtain ⟨varying, hvarying⟩ := diagonalTraceVaryingScalarSquare l f b g rS rX
-  obtain ⟨completed, hcompleted⟩ := diagonalTraceCompletedScalarSquare l f
-  exact ⟨rS, rX, aS, aX, varying, hvarying, completed, hcompleted⟩
+  exact ⟨rS, rX, aS, aX, diagonalTraceVaryingScalarSquare l f b g rS rX,
+    diagonalTraceVaryingScalarSquare_hom_app_app_hom_app l f b g rS rX,
+    diagonalTraceCompletedScalarSquare l f,
+    diagonalTraceCompletedScalarSquare_hom_app_hom_app l f⟩
 
 end AlgebraicGeometry.ProEtale.DiagonalTrace

@@ -107,7 +107,7 @@ theorem etaleModule_affine_cohomology_isZero
       (Sheaf.H ((Etale.upperStar AddCommGrpCat.{u + 1} W.hom).obj F) q.toNat) := by
     have : IsAffine ((𝟭 Scheme).obj W.left) := ‹IsAffine W.left›
     let U : X.ProEt := Scheme.ProEt.mk W.hom
-    have hB := (ProEtale.classicalUniformBounds hk (X ↘ Spec (.of k))
+    have hB := (ProEtale.hasClassicalUniformBounds hk (X ↘ Spec (.of k))
       (X ↘ Spec (.of k)) (𝟙 X) F hF).1.1 U (proAffineEtale.of_isAffine W.hom) q.toNat
         (by exact_mod_cast hqNat)
     let Fw := (Etale.upperStar AddCommGrpCat.{u + 1} W.hom).obj F

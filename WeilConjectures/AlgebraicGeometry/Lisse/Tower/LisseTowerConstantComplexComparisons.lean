@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Lisse.Tower.LisseTowerLocalizedConstantsNormalization
+import WeilConjectures.AlgebraicGeometry.Lisse.Tower.LisseTowerConstantCoherence
 
 /-! # Constant model comparisons and the coefficient identity on complexes
 
@@ -71,7 +72,8 @@ theorem lisseTower_constant_complex_comparisons
       (Functor.isoWhiskerLeft (normalizationModuleRestrict (lisseTowerEtaleQuotient d n))
           (lisseTowerConstantModelIso g a b d (n + 1) (model (n + 1))) ≪≫
         Functor.isoWhiskerRight (lisseTowerAlgebraRestrictIso d n)
-          (constantAdicFiniteRealization g d)).hom.app (DerivedCategory.Q.obj K) := by
-  sorry
+          (constantAdicFiniteRealization g d)).hom.app (DerivedCategory.Q.obj K) :=
+  ⟨fun n ↦ lisseTowerConstantModel g a b d n,
+    fun n K ↦ lisseTowerConstantModel_coherence g a b d n K⟩
 
 end AlgebraicGeometry.Scheme

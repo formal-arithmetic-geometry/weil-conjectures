@@ -15,7 +15,6 @@ import all WeilConjectures.AlgebraicGeometry.SixFunctors.ShriekCoefficientIsomor
 /-! # Finite scalar realization from the étale site
 
 Source: blueprint scalar-six-ctf (1), finite coefficient comparison.
-(blueprint: lem-sfb-finite-scalar-etale-origin).
 -/
 
 @[expose] public noncomputable section
@@ -38,9 +37,8 @@ variable (A : Type) [CommRing A] [TopologicalSpace A] [IsTopologicalRing A]
 /-- Exact étale inverse image, the existing constant-ring realization, and restriction
 along the given condensed coefficient isomorphism. All three functors are specified
 constructions; no constructible preimage is chosen in this definition.
-Source: blueprint scalar-six-ctf (1), finite discrete comparison and transport along e.
-(blueprint: lem-sfb-finite-scalar-etale-origin). -/
-abbrev sfbFiniteScalarRealization (T : Scheme.{u}) :
+Source: blueprint scalar-six-ctf (1), finite discrete comparison and transport along e. -/
+abbrev finiteScalarRealization (T : Scheme.{u}) :
     Etale.DerivedCategoryModule (ULift.{u + 1} A) T ⥤
       DerivedCategory (ModuleRingedComparison.internalModules Λ.X T) :=
   (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) T).mapDerivedCategory ⋙

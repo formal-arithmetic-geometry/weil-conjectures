@@ -6,7 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.Locally.LocallyConstantLineTwist
-import WeilConjectures.AlgebraicGeometry.SixFunctors.DisjointOpenProductRestriction
+public import WeilConjectures.AlgebraicGeometry.SixFunctors.DisjointOpenProductRestriction
 import WeilConjectures.AlgebraicGeometry.SixFunctors.DisjointOpenIsoGluing
 import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
 
@@ -33,12 +33,18 @@ private theorem degree_disjoint {X : Scheme.{u}} (d : LocallyConstant X ℤ)
     (hj : x ∈ lineDegreeOpen d j) : i = j :=
   hi.symm.trans hj
 
-private theorem twist_restrict {X : Scheme.{u}} (A : X.Modules)
+/-- On an open where the degree is constantly `m`, the locally constant line twist restricts
+to the `m`-th integer line power: the projection from the defining product to its `m`-th
+factor, via `disjointOpenProductRestrictIso`.
+
+Source: Stacks, sheaves.tex, Tags 00AL and 00AM.
+(blueprint: lem-sfb-locally-constant-line-twist-identities) -/
+noncomputable def locallyConstantLineTwistRestrictIso {X : Scheme.{u}} (A : X.Modules)
     (hA : A.IsInvertible) (d : LocallyConstant X ℤ) (m : ℤ) (U : X.Opens)
     (hU : ∀ x : X, x ∈ U → d x = m) :
-    Nonempty ((tensorPullback U.ι).obj (locallyConstantLineTwist A hA d) ≅
-      (tensorPullback U.ι).obj (integerLinePower A hA m)) := by
-  exact disjointOpenProduct_restrict (lineDegreeOpen d) (degree_disjoint d)
+    (tensorPullback U.ι).obj (locallyConstantLineTwist A hA d) ≅
+      (tensorPullback U.ι).obj (integerLinePower A hA m) :=
+  disjointOpenProductRestrictIso (lineDegreeOpen d) (fun _ _ _ hi hj ↦ hi.symm.trans hj)
     (integerLinePower A hA) m U (fun x hx ↦ hU x hx)
 
 private noncomputable def pullback_unit {X Y : Scheme.{u}} (f : Y ⟶ X) :
@@ -74,7 +80,8 @@ private theorem restriction_of_eq {X Y : Scheme.{u}} {g h : Y ⟶ X}
   subst h
   exact ⟨Iso.refl _⟩
 
-/-- The calculus of the concrete disjoint-stratum model of integer line powers.
+/-- The tensor and pullback calculus of the concrete disjoint-stratum model of integer line
+powers (the restriction identity is `locallyConstantLineTwistRestrictIso`).
 These statements hold for any invertible module, independently of projective geometry.
 
 Source: Stacks, sheaves.tex, Tags 00AL and 00AM; modules.tex, Tags 01CD and 01CR;
@@ -100,10 +107,6 @@ The empty strata and empty scheme have the unique maps of zero modules, so the
 same construction includes them. -/
 theorem locallyConstantLineTwist_identities {X : Scheme.{u}} (A : X.Modules)
     (hA : A.IsInvertible) :
-    (∀ (d : LocallyConstant X ℤ) (m : ℤ) (U : X.Opens),
-      (∀ x : X, x ∈ U → d x = m) →
-        Nonempty ((tensorPullback U.ι).obj (locallyConstantLineTwist A hA d) ≅
-          (tensorPullback U.ι).obj (integerLinePower A hA m))) ∧
     (∀ d e : LocallyConstant X ℤ,
       Nonempty (locallyConstantLineTwist A hA d ⊗ locallyConstantLineTwist A hA e ≅
         locallyConstantLineTwist A hA (d + e))) ∧
@@ -112,7 +115,7 @@ theorem locallyConstantLineTwist_identities {X : Scheme.{u}} (A : X.Modules)
       Nonempty ((tensorPullback f).obj (locallyConstantLineTwist A hA d) ≅
         locallyConstantLineTwist ((tensorPullback f).obj A) hAf (d.comap f.base.hom))) := by
   classical
-  refine ⟨twist_restrict A hA, ?_, ?_⟩
+  refine ⟨?_, ?_⟩
   · intro d e
     let U : ℤ × ℤ → X.Opens := fun p ↦ lineDegreeOpen d p.1 ⊓ lineDegreeOpen e p.2
     apply disjointOpen_nonempty_iso U
@@ -121,9 +124,9 @@ theorem locallyConstantLineTwist_identities {X : Scheme.{u}} (A : X.Modules)
     intro p
     let P := tensorPullback (U p).ι
     obtain ⟨td, _⟩ := module_pullback_tensor (U p).ι
-    obtain ⟨ed⟩ := twist_restrict A hA d p.1 (U p) (fun _ hx ↦ hx.1)
-    obtain ⟨ee⟩ := twist_restrict A hA e p.2 (U p) (fun _ hx ↦ hx.2)
-    obtain ⟨es⟩ := twist_restrict A hA (d + e) (p.1 + p.2) (U p) (by
+    let ed := locallyConstantLineTwistRestrictIso A hA d p.1 (U p) (fun _ hx ↦ hx.1)
+    let ee := locallyConstantLineTwistRestrictIso A hA e p.2 (U p) (fun _ hx ↦ hx.2)
+    let es := locallyConstantLineTwistRestrictIso A hA (d + e) (p.1 + p.2) (U p) (by
       intro x hx
       change d x + e x = p.1 + p.2
       rw [hx.1, hx.2])
@@ -139,9 +142,9 @@ theorem locallyConstantLineTwist_identities {X : Scheme.{u}} (A : X.Modules)
     let g : (V : Scheme.{u}) ⟶ W := f ∣_ W
     have hg : g ≫ W.ι = V.ι ≫ f := morphismRestrict_ι f W
     let P := tensorPullback V.ι
-    obtain ⟨ed⟩ := twist_restrict A hA d m W (fun _ hx ↦ hx)
+    let ed := locallyConstantLineTwistRestrictIso A hA d m W (fun _ hx ↦ hx)
     obtain ⟨ef⟩ := power_pullback A hA f hAf m
-    obtain ⟨es⟩ := twist_restrict ((tensorPullback f).obj A) hAf d' m V
+    let es := locallyConstantLineTwistRestrictIso ((tensorPullback f).obj A) hAf d' m V
       (fun _ hx ↦ hx)
     exact ⟨(tensorPullbackSectionComp V.ι f).symm.app _ ≪≫
       (restriction_of_eq hg.symm _).some ≪≫

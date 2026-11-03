@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Uniformizer.DiagonalUniformizerChernTransport
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Uniformizer.DiagonalUniformizerAdjunctTransport
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.UniformizerChernNormalizationData.DiagonalUniformizerLocalChern
-import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalCompleteScalarRestriction
+import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalCompleteScalarRestrictionCore
 import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Completed.DiagonalCompletedLineComplete
 import WeilConjectures.AlgebraicGeometry.Pur.PurTwistSheafLocallyFree
 
@@ -107,7 +107,7 @@ private theorem completed_local_lift
     have := s.tq.line_limit
     dsimp only [v, DiagonalTrace.shiftedComparison]
     infer_instance
-  obtain ⟨ff⟩ := DiagonalTrace.diagonalCompleteScalarRestriction l X
+  obtain ⟨ff⟩ := DiagonalTrace.diagonalCompleteScalarRestrictionCore l X
   obtain ⟨z, hz⟩ := ff.map_surjective (X := A) (Y := B)
     (s.tq.coefficientsX.unitMap l (ULift.{u} (Padic l)) s.tq.LX ≫
       s.tq.LX.R.map (s.tq.restrictionX.F.mapDerivedCategory.map theta) ≫ inv v)

@@ -32,6 +32,7 @@ import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionProjectionIso
 import WeilConjectures.AlgebraicGeometry.SupportedConstructibleOriginComparison.SupportedConstructibleOriginComparison
 import WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicTorAmplitudeTransport
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ProjectionFormulaBounded
+import all WeilConjectures.AlgebraicGeometry.Etale.Derived.EtaleDerivedScalarTensor
 
 /-! # Bounded etale origin of an open-supported coefficient tensor
 
@@ -56,42 +57,6 @@ namespace AlgebraicGeometry.ProEtale
 namespace SupportedEtaleTensorOrigin
 
 attribute [-instance] instIsMonoidalFunctorOppositeWOfHasSheafComposeForgetOfHasEnoughPoints
-
-private theorem mate_of_conjugate
-    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
-    {F : A ⥤ C} {H : C ⥤ A} {G : B ⥤ D} {K : D ⥤ B}
-    {U₁ : B ⥤ A} {V₁ : A ⥤ B} {U₂ : D ⥤ C} {V₂ : C ⥤ D}
-    (a₁ : G ⊣ K) (a₂ : F ⊣ H) (b₁ : U₂ ⊣ V₂) (b₂ : U₁ ⊣ V₁)
-    (e : V₂ ⋙ K ≅ H ⋙ V₁) (σ : K ⋙ U₁ ⟶ U₂ ⋙ H)
-    (hσ : (mateEquiv b₁ b₂ (TwoSquare.mk K U₂ U₁ H σ)).natTrans = e.hom) :
-    (mateEquiv a₁ a₂ (TwoSquare.mk U₁ G F U₂
-      ((conjugateIsoEquiv (a₁.comp b₁) (b₂.comp a₂)).symm e).hom)).natTrans = σ := by
-  have h : mateEquiv a₁ a₂ (TwoSquare.mk U₁ G F U₂
-      ((conjugateIsoEquiv (a₁.comp b₁) (b₂.comp a₂)).symm e).hom) =
-      TwoSquare.mk K U₂ U₁ H σ := by
-    apply (mateEquiv b₁ b₂).injective
-    apply TwoSquare.ext
-    rw [iterated_mateEquiv_conjugateEquiv, hσ]
-    intro X
-    change ((conjugateEquiv (a₁.comp b₁) (b₂.comp a₂))
-      ((conjugateEquiv (a₁.comp b₁) (b₂.comp a₂)).symm e.hom)).app X = e.hom.app X
-    exact congr_app (Equiv.apply_symm_apply _ _) X
-  exact congrArg TwoSquare.natTrans h
-
-private theorem isIso_left_mate_of_iterated
-    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
-    {E₁ : A ⥤ B} {U₁ : B ⥤ A} {E₂ : C ⥤ D} {U₂ : D ⥤ C}
-    (a₁ : E₁ ⊣ U₁) (a₂ : E₂ ⊣ U₂)
-    {F : A ⥤ C} {H : C ⥤ A} {G : B ⥤ D} {K : D ⥤ B}
-    (b₁ : F ⊣ H) (b₂ : G ⊣ K) (τ : U₁ ⋙ F ⟶ G ⋙ U₂)
-    (hτ : IsIso ((mateEquiv b₂ b₁ (TwoSquare.mk _ _ _ _ τ)).natTrans)) :
-    IsIso (((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ τ)).natTrans) := by
-  let δ := (mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ τ)
-  have hm : mateEquiv a₁ a₂ δ = TwoSquare.mk _ _ _ _ τ := Equiv.apply_symm_apply _ _
-  have h := iterated_mateEquiv_conjugateEquiv a₁ a₂ b₁ b₂ δ
-  rw [hm] at h
-  have : IsIso (conjugateEquiv (a₁.comp b₂) (b₁.comp a₂) δ.natTrans) := h ▸ hτ
-  exact conjugateEquiv_of_iso (a₁.comp b₂) (b₁.comp a₂) δ.natTrans
 
 /-- A reduction boundary for the published exact square descent. Its data is exactly
 that descent; the boundary prevents repeated unfolding of derived localizations.
@@ -264,24 +229,6 @@ def proScalarSheafTensorMap
       ((ProEtale.sheafExtendScalars φ T).obj M) (𝟙_ _) ≫
     (Sheaf.restrictScalars (Scheme.ProEt.topology T) φ).map (ρ_ _).hom
 
-private theorem balancing_naturality
-    {C D : Type*} [Category C] [Category D]
-    [MonoidalCategory C] [MonoidalCategory D]
-    {L : C ⥤ D} {R : D ⥤ C} [R.LaxMonoidal] (adj : L ⊣ R)
-    {M N : C} (a : M ⟶ N) :
-    a ▷ R.obj (𝟙_ D) ≫
-        (adj.unit.app N ▷ R.obj (𝟙_ D) ≫
-          Functor.LaxMonoidal.μ R (L.obj N) (𝟙_ D) ≫ R.map (ρ_ (L.obj N)).hom) =
-      (adj.unit.app M ▷ R.obj (𝟙_ D) ≫
-          Functor.LaxMonoidal.μ R (L.obj M) (𝟙_ D) ≫ R.map (ρ_ (L.obj M)).hom) ≫
-        R.map (L.map a) := by
-  have hn : a ≫ adj.unit.app N = adj.unit.app M ≫ R.map (L.map a) :=
-    adj.unit.naturality a
-  rw [← comp_whiskerRight_assoc, hn]
-  rw [comp_whiskerRight_assoc, Functor.LaxMonoidal.μ_natural_left_assoc]
-  rw [← R.map_comp, rightUnitor_naturality, R.map_comp]
-  simp only [Category.assoc]
-
 /-- Naturality of the balancing map.
 Source: Stacks 03EK (blueprint: lem-sp-supported-etale-tensor-origin).
 Proof: apply naturality of the scalar unit, the lax tensorator, and the right unitor.
@@ -294,7 +241,7 @@ theorem proScalarSheafTensorMap_naturality
       proScalarSheafTensorMap φ T M ≫
         (Sheaf.restrictScalars (Scheme.ProEt.topology T) φ).map
           ((ProEtale.sheafExtendScalars φ T).map a) := by
-  exact balancing_naturality (ProEtale.sheafExtendScalarsAdjunction φ T) a
+  exact AlgebraicGeometry.Etale.balancing_naturality (ProEtale.sheafExtendScalarsAdjunction φ T) a
 
 /-- The ordinary balancing map, as a natural transformation.
 Source: Stacks 03EK (blueprint: lem-sp-supported-etale-tensor-origin). -/
@@ -329,100 +276,6 @@ def proScalarExtensionRepresentative
 
 attribute [local irreducible] Functor.leftAdjoint Adjunction.ofIsRightAdjoint
   proScalarCoefficientSheaf proScalarSheafTensorTransformation
-
-section TensorComparison
-
-set_option backward.isDefEq.respectTransparency.types false
-
-variable {C : Type c₁} [Category.{h₁} C] [Abelian C] [IsGrothendieckAbelian.{h₁} C]
-  [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
-  [HasDerivedCategory.{h₁} C] [Abelian.HasFunctorialFlatResolution C]
-
-private def tensorCounit (F : C) :
-    DerivedCategory.Q ⋙ AlgebraicGeometry.Etale.scalarTensorModelFunctor F ⟶
-      (tensorRight F).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q where
-  app P := Functor.LaxMonoidal.μ DerivedCategory.Q P
-      ((HomologicalComplex.single C (.up ℤ) 0).obj F) ≫
-    DerivedCategory.Q.map
-      ((CochainComplex.map₂HomologicalComplexFlipObjSingleIso (curriedTensor C) F).hom.app P)
-  naturality P R a := by
-    change (DerivedCategory.Q.map a ▷ _) ≫ _ = _
-    erw [Functor.LaxMonoidal.μ_natural_left_assoc]
-    erw [← DerivedCategory.Q.map_comp]
-    erw [(CochainComplex.map₂HomologicalComplexFlipObjSingleIso
-      (curriedTensor C) F).hom.naturality a]
-    erw [DerivedCategory.Q.map_comp]
-    simp only [Functor.comp_map, Category.assoc]
-    rfl
-
-private theorem tensorCounit_isIso (F : C) (P : CochainComplex C ℤ)
-    (hP : (HomologicalComplex.quasiIso C (.up ℤ)).kFlat P) :
-    IsIso ((tensorCounit F).app P) := by
-  have h : IsIso (Functor.LaxMonoidal.μ DerivedCategory.Qh
-      ((HomotopyCategory.quotient C (.up ℤ)).obj P)
-      ((HomotopyCategory.quotient C (.up ℤ)).obj
-        ((HomologicalComplex.single C (.up ℤ) 0).obj F))) :=
-    DerivedMonoidal.isIso_counit_app_app_of_kFlat_left DerivedCategory.Qh
-    (HomotopyCategory.quasiIso C (.up ℤ))
-    ((HomotopyCategory.quotient C (.up ℤ)).obj P)
-    ((HomotopyCategory.quotient C (.up ℤ)).obj
-      ((HomologicalComplex.single C (.up ℤ) 0).obj F))
-    ((HomotopyCategory.kFlat_quotient_obj_iff P).2 hP)
-  have : IsIso (Functor.LaxMonoidal.μ DerivedCategory.Q P
-      ((HomologicalComplex.single C (.up ℤ) 0).obj F)) := by
-    change IsIso ((_ ⊗ₘ _) ≫
-      (Functor.LaxMonoidal.μ DerivedCategory.Qh _ _ ≫ DerivedCategory.Qh.map
-        (Functor.LaxMonoidal.μ (HomotopyCategory.quotient C (.up ℤ)) P
-          ((HomologicalComplex.single C (.up ℤ) 0).obj F))) ≫ _)
-    infer_instance
-  dsimp only [tensorCounit]
-  infer_instance
-
-private theorem tensorComparison_existsUnique (F : C) (V : C ⥤ C) [V.Additive]
-    (τ : tensorRight F ≅ V) (G : DerivedCategory C ⥤ DerivedCategory C)
-    (r : DerivedCategory.Q ⋙ G ⟶ V.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)
-    (hr : ∀ P : CochainComplex C ℤ,
-      (HomologicalComplex.quasiIso C (.up ℤ)).kFlat P → IsIso (r.app P))
-    (r₀ : ∀ P : CochainComplex C ℤ, G.obj (DerivedCategory.Q.obj P) ⟶
-      DerivedCategory.Q.obj ((V.mapHomologicalComplex (.up ℤ)).obj P))
-    (hrr : ∀ P, r.app P = r₀ P) :
-    ∃! e : G ≅ AlgebraicGeometry.Etale.scalarTensorModelFunctor F,
-      AlgebraicGeometry.Etale.scalarTensorModelNormalization F τ.hom e r₀ := by
-  let α := tensorCounit F ≫ Functor.whiskerRight
-    (NatTrans.mapHomologicalComplex τ.hom (.up ℤ)) DerivedCategory.Q
-  have hα : (AlgebraicGeometry.Etale.scalarTensorModelFunctor F).IsLeftDerivedFunctor α
-      (HomologicalComplex.quasiIso C (.up ℤ)) := by
-    apply (HomologicalComplex.quasiIso C (.up ℤ)).localizerMorphismKFlat
-      |>.isLeftDerivedFunctor_of_isLeftDerivabilityStructure α
-    intro P
-    change IsIso (α.app P.obj)
-    have := tensorCounit_isIso F P.obj P.property
-    have : IsIso ((NatTrans.mapHomologicalComplex τ.hom (.up ℤ)).app P.obj) :=
-      ((NatIso.mapHomologicalComplex τ (.up ℤ)).app P.obj).isIso_hom
-    dsimp only [α, NatTrans.comp_app, Functor.whiskerRight_app]
-    infer_instance
-  have hG : G.IsLeftDerivedFunctor r (HomologicalComplex.quasiIso C (.up ℤ)) := by
-    apply (HomologicalComplex.quasiIso C (.up ℤ)).localizerMorphismKFlat
-      |>.isLeftDerivedFunctor_of_isLeftDerivabilityStructure r
-    exact fun P ↦ hr P.obj P.property
-  let e : G ≅ AlgebraicGeometry.Etale.scalarTensorModelFunctor F :=
-    Functor.leftDerivedUnique _ _ r α (HomologicalComplex.quasiIso C (.up ℤ))
-  have he : AlgebraicGeometry.Etale.scalarTensorModelNormalization F τ.hom e r.app := by
-    intro P
-    simpa only [e, Functor.leftDerivedUnique, Functor.leftDerivedNatIso_hom, Iso.refl_hom,
-      α, tensorCounit, NatTrans.comp_app, Functor.whiskerRight_app,
-      NatTrans.id_app, Category.comp_id, Category.assoc] using
-      (Functor.leftDerivedNatTrans_app _ _ r α
-        (HomologicalComplex.quasiIso C (.up ℤ)) (𝟙 _) P)
-  refine ⟨e, fun P ↦ (he P).trans (hrr P), ?_⟩
-  intro e' he'
-  apply Iso.ext
-  apply Functor.leftDerived_ext _ α (HomologicalComplex.quasiIso C (.up ℤ))
-  ext P
-  simpa only [α, tensorCounit, NatTrans.comp_app, Functor.whiskerLeft_app,
-    Functor.whiskerRight_app, Category.assoc] using ((he' P).trans (hrr P).symm).trans (he P).symm
-
-end TensorComparison
 
 set_option backward.isDefEq.respectTransparency.types false in
 /-- H is the tensor in the ordinary uncompleted etale derived category; B has its
