@@ -13,6 +13,8 @@ import all WeilConjectures.FourierTransform.FdIntegralScalarPresentationForward.
 import WeilConjectures.FourierTransform.FdIntegralScalarPresentationForward.AbstractAssembly
 import all WeilConjectures.AlgebraicGeometry.Finite.FiniteStagePairCategory
 import WeilConjectures.DeligneLaumon.SfScalarExtensionComposition
+import all WeilConjectures.FourierTransform.FdIntegralScalarPresentationForward.RepresentativeFormula
+import WeilConjectures.FourierTransform.FdIntegralScalarPresentationForward.UnitAssembly
 
 /-! # Forward coherence of the integral scalar comparison
 
@@ -84,7 +86,35 @@ private theorem eD_unit (E : Padic.FiniteCoefficientFields l Ω)
             (FdIntegralScalarForward.inclusion_id l Ω E).symm).symm Y) ≫
             (integralOrdinaryDerivedScalarUnit l (pbcFiniteField.{u} l Ω E) T).hom.app Y) =
       (pbcAmbientScalarUnit l Ω T E).hom.app ((integralDetailedTransport T l _).obj Y) := by
-  sorry
+  refine FdIntegralScalarForward.unit_generic
+    (C := scalarReductionSource l (pbcFiniteField.{u} l Ω E) T)
+    (aC := @SheafOfModules.instAbelian _ _ _ _
+      (@GrothendieckTopology.hasSheafify_proEtTopology AddCommGrpCat _ _ _ T) (sfAbBijective T))
+    (dC := scalarReductionSourceDerived l (pbcFiniteField.{u} l Ω E) T)
+    (fun ι ↦ integralOrdinaryScalar l (pbcFiniteField.{u} l Ω E) (pbcFiniteField.{u} l Ω E) ι T)
+    (hFa := fun ι ↦ integralOrdinaryScalar_additive l _ _ ι T)
+    (hFl := fun ι ↦ integralOrdinaryScalar_finiteLimits l _ _ ι T)
+    (hFc := fun ι ↦ integralOrdinaryScalar_finiteColimits l _ _ ι T)
+    _ _ (FdIntegralScalarForward.inclusion_id l Ω E)
+    (integralOrdinaryScalarUnit l (pbcFiniteField.{u} l Ω E) T)
+    (integralOrdinaryDerivedScalar l (pbcFiniteField.{u} l Ω E) (pbcFiniteField.{u} l Ω E)
+      (pbcFiniteFieldInclusion l Ω (le_refl E)) T)
+    (integralOrdinaryDerivedScalar l (pbcFiniteField.{u} l Ω E) (pbcFiniteField.{u} l Ω E)
+      (AlgHom.id ℚ_[l] _) T) ?_ ?_
+    (integralOrdinaryDerivedScalarUnit l (pbcFiniteField.{u} l Ω E) T) ?_
+    ((integralOrdinaryScalar l (pbcFiniteField.{u} l Ω E) (pbcFiniteField.{u} l Ω E)
+      (pbcFiniteFieldInclusion l Ω (le_refl E)) T).mapHomologicalComplex (.up ℤ)) ?_
+    (integralOrdinaryScalar l (pbcFiniteField.{u} l Ω E) (pbcFiniteField.{u} l Ω E)
+      (pbcFiniteFieldInclusion l Ω (le_refl E)) T).mapDerivedCategoryFactors ?_
+    (NatIso.mapHomologicalComplex (FdIntegralScalarForward.Ounit l Ω T E) (.up ℤ) ≪≫
+      Functor.mapHomologicalComplexIdIso _ (.up ℤ)) ?_
+    DerivedCategory.Q _ _ _ _ _ _ _ _ (FdIntegralScalarForward.eD l Ω T (le_refl E) o) _
+    (FdIntegralScalarForward.eD_heh l Ω T (le_refl E) o)
+    (FdIntegralScalarForward.ambient_unit_rep l Ω T E)
+    (FdIntegralScalarForward.ordinary_unit_chain l Ω T E o)
+    (congrArg (fun ι ↦ integralOrdinaryDerivedScalar l (pbcFiniteField.{u} l Ω E)
+      (pbcFiniteField.{u} l Ω E) ι T) (FdIntegralScalarForward.inclusion_id l Ω E).symm).symm Y
+  all_goals first | rfl | exact HEq.rfl
 
 end Atoms
 
