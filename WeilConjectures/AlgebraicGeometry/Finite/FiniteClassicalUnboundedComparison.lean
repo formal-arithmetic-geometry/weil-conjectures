@@ -537,8 +537,8 @@ private theorem boundedCounit (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ]
   exact @IsIso.of_isIso_comp_left _ _ _ _ _ _ _ _ hm
 
 /-- Exact inverse image has classical cohomology, and the canonical unbounded derived
-counit is invertible on every classical complex. Consequently every such complex is
-isomorphic to an inverse image, without any boundedness or constructibility condition.
+counit is invertible on every classical complex (so every such complex is isomorphic to an
+inverse image), without any boundedness or constructibility condition.
 Source: Bhatt--Scholze, Proposition 5.2.6(3), Remark 5.2.8 and Proposition 5.3.2,
 and the opening comparison in blueprint `sk-lem-geo-affine-local`
 (blueprint: lem-sfb-finite-classical-unbounded-comparison).
@@ -568,8 +568,8 @@ direct image vanishes in degrees m and m+1, so the truncation triangle makes
 H^m(R nu_* K) -> H^m(R nu_* tau_{>=n} K) invertible. Exact inverse image preserves
 this isomorphism. Counit naturality and Step 3 now make H^m of the counit at K
 invertible. The cohomology criterion proves that the counit itself is invertible.
-Finally take M = R nu_* K and its counit isomorphism. -/
-theorem finiteClassicalUnboundedComparison
+-/
+theorem comparisonUpperStar_isClassicalComplexFor
     (k : Type u) [Field k] (hbase : Finite k ∨ IsAlgClosed k)
     (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : IsUnit (algebraMap ℤ k (ℓ : ℤ)))
     (A : Type (u + 1)) [CommRing A] [Finite A]
@@ -584,12 +584,7 @@ theorem finiteClassicalUnboundedComparison
       IsClassicalComplexFor X A K →
         IsIso
           ((comparisonAdjunction (ModuleCat.{u + 1} A) X).mapDerivedCategoryRightDerivedAdjunction
-            |>.counit.app K)) ∧
-    (∀ K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)),
-      IsClassicalComplexFor X A K →
-        ∃ M : FiniteCoefficientEtaleDerivedCategory X A,
-          Nonempty
-            ((comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory.obj M ≅ K)) := by
+            |>.counit.app K)) := by
   have hi := unboundedImage X A
   have hc : ∀ K : DerivedCategory
       (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)),
@@ -657,12 +652,6 @@ theorem finiteClassicalUnboundedComparison
       rw [← hw]
       infer_instance
     exact IsIso.of_isIso_comp_right _ ((DerivedCategory.homologyFunctor C m).map f)
-  refine ⟨hi, hc, ?_⟩
-  intro K hK
-  let adj := (comparisonAdjunction (ModuleCat.{u + 1} A) X)
-    |>.mapDerivedCategoryRightDerivedAdjunction
-  have : IsIso (adj.counit.app K) := hc K hK
-  exact ⟨(comparisonLowerStar (ModuleCat.{u + 1} A) X).rightDerivedFunctor.obj K,
-    ⟨asIso (adj.counit.app K)⟩⟩
+  exact ⟨hi, hc⟩
 
 end AlgebraicGeometry.ProEtale

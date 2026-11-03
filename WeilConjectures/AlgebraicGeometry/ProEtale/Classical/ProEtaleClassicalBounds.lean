@@ -52,23 +52,16 @@ open AlgebraicGeometry
 
 namespace AlgebraicGeometry.ProEtale
 
-/-- The three uniform bounds in `det-pe-unbounded-classical-bounds`, for a finite-type source
-and target over a finite or algebraically closed field.  The dimensions are the topological
-Krull dimensions, with the empty scheme assigned dimension zero, and the bound is `2 * d + 1`.
+/-- The three uniform bounds in `det-pe-unbounded-classical-bounds` for a morphism `f` and an
+étale sheaf `F` on its source; `hasClassicalUniformBounds` proves them for torsion `F` and
+finite-type schemes over a finite or algebraically closed field. The dimensions are the
+topological Krull dimensions, with the empty scheme assigned dimension zero, and the bound
+is `2 * d + 1`.
 Source: blueprint `sec-six-functors-basics/sk-prop-pe-unbounded-classical`, node
 `det-pe-unbounded-classical-bounds` (blueprint: det-pe-unbounded-classical-bounds).
 -/
-def HasClassicalUniformBounds {k : Type u} [Field k]
-    (hk : Finite k ∨ IsAlgClosed k)
-    {S R : Scheme.{u}}
-    (aS : S ⟶ Spec (.of k)) (aR : R ⟶ Spec (.of k))
-    [LocallyOfFiniteType aS] [QuasiCompact aS]
-    [LocallyOfFiniteType aR] [QuasiCompact aR]
-    (f : S ⟶ R) [LocallyOfFiniteType f] [QuasiCompact f]
-    (F : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1})
-    (hF : F.IsTorsion) : Prop :=
-  let _ := hk
-  let _ := hF
+def HasClassicalUniformBounds {S R : Scheme.{u}} (f : S ⟶ R)
+    (F : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}) : Prop :=
   let dS : ℕ := (topologicalKrullDim S).unbotD 0 |>.toNat
   let eS : ℕ := 2 * dS + 1
   (∀ (U : S.ProEt), proAffineEtale U.hom → ∀ q : ℤ, (eS : ℤ) < q →
@@ -226,14 +219,13 @@ private theorem proAffine_pullback_cd {X Y V : Scheme.{u}} (g : X ⟶ Y) (v : V 
     (b'.extend e.hom) (IsLimit.extendIso (s := b') e.hom hb') c (fun i ↦ hstage (t.app i))
 
 private theorem uniform_bounds_of_field_cd {k : Type u} [Field k]
-    (hk : Finite k ∨ IsAlgClosed k)
     (hcd : Scheme.HasTorsionEtaleCohomologicalDimensionLE (Spec (.of k)) 1)
     {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
     [LocallyOfFiniteType aX] [QuasiCompact aX]
     [LocallyOfFiniteType aY] [QuasiCompact aY]
     (g : X ⟶ Y) [LocallyOfFiniteType g] [QuasiCompact g]
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (hG : G.IsTorsion) :
-    HasClassicalUniformBounds hk aX aY g G hG := by
+    HasClassicalUniformBounds g G := by
   let d := (topologicalKrullDim X).unbotD 0 |>.toNat
   let c := 2 * d + 1
   have hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞) := finite_dimension_bound aX
@@ -327,7 +319,7 @@ Proof (the eleven steps of the node, with their dependency nodes):
     Thus the explicit empty bound one works. Repeat with source Y and an arbitrary
     finite-type target and map to obtain the last conjunct (including the identity).
 -/
-theorem classicalUniformBounds {k : Type u} [Field k]
+theorem hasClassicalUniformBounds {k : Type u} [Field k]
     (hk : Finite k ∨ IsAlgClosed k)
     {X Y : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
@@ -335,12 +327,12 @@ theorem classicalUniformBounds {k : Type u} [Field k]
     [LocallyOfFiniteType aY] [QuasiCompact aY]
     (g : X ⟶ Y) [LocallyOfFiniteType g] [QuasiCompact g]
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (hG : G.IsTorsion) :
-    HasClassicalUniformBounds hk aX aY g G hG ∧
+    HasClassicalUniformBounds g G ∧
       ∀ {Z : Scheme.{u}} (aZ : Z ⟶ Spec (.of k))
         [LocallyOfFiniteType aZ] [QuasiCompact aZ]
         (h : Y ⟶ Z) [LocallyOfFiniteType h] [QuasiCompact h]
-        (H : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) (hH : H.IsTorsion),
-        HasClassicalUniformBounds hk aY aZ h H hH := by
+        (H : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}),
+        H.IsTorsion → HasClassicalUniformBounds h H := by
   have hcd : Scheme.HasTorsionEtaleCohomologicalDimensionLE (Spec (.of k)) 1 := by
     rcases hk with hfinite | hclosed
     · have : Finite k := hfinite
@@ -349,9 +341,9 @@ theorem classicalUniformBounds {k : Type u} [Field k]
       intro F hF q hq
       exact Scheme.hasTorsionEtaleCohomologicalDimensionLE_zero_of_isSepClosed k
         F hF q (by omega)
-  refine ⟨uniform_bounds_of_field_cd hk hcd aX aY g G hG, ?_⟩
+  refine ⟨uniform_bounds_of_field_cd hcd aX aY g G hG, ?_⟩
   intro Z aZ _ _ h _ _ H hH
-  exact uniform_bounds_of_field_cd hk hcd aY aZ h H hH
+  exact uniform_bounds_of_field_cd hcd aY aZ h H hH
 
 end AlgebraicGeometry.ProEtale
 

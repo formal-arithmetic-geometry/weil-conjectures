@@ -214,11 +214,10 @@ private theorem constantModelPullback
   · intro S hS U P hP eP a i
     exact coverModel_pullback Λ (S.immersion a) g (U a) i M (P a i) (hP a i) (eP a i)
 
-/-- Inverse image preserves constructible modules and their specified constant models for
-all the admissible coefficients of the node. Finite discrete rings are represented by
-constant ring sheaves (equivalently continuous maps to the finite discrete ring).
-The last alternative is specifically the finite-subextension-valued condensed algebraic
-closure, rather than all continuous algebraic-closure-valued functions.
+/-- Inverse image preserves constructible modules and their specified constant models, for
+every commutative condensed coefficient ring (in particular for all the admissible
+coefficients of the node: finite discrete rings, the ℓ-adic integers and numbers, their
+finite extensions, and the condensed algebraic closure).
 
 Source: blueprint main-20261015, proper-base-change-unbounded pullback proof,
 "Constructible complexes"; Stacks 054I; Bhatt--Scholze, proof of Lemma 6.3.8
@@ -245,24 +244,12 @@ extension of the original P. The composition isomorphism of
 sk-def-sfb-module-pushforward-pullback identifies the two composite restrictions.
 5. The pulled-back finite constructible locally closed stratification, its covers and
 these models witness sk-def-sfb-constructible on the qcqs target scheme. -/
-theorem pullback_constantModelConstructible (ℓ : ℕ) [Fact ℓ.Prime]
+theorem pullback_constantModelConstructible
     (L : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})
     [IsCommMonObj ((sheafCompose (coherentTopology Profinite.{u})
-      (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj L)]
-    (hL :
-      (∃ A : CommRingCat.{u + 1}, Finite A ∧
-        (∃ n : ℕ, ∀ a : A, (ℓ ^ n) • a = 0) ∧
-        Nonempty (L ≅ (constantSheaf (coherentTopology Profinite.{u}) RingCat.{u + 1}).obj
-          ((forget₂ CommRingCat.{u + 1} RingCat.{u + 1}).obj A))) ∨
-      L = Profinite.padicIntCondensedRing ℓ ∨
-      L = Profinite.padicCondensedRing ℓ ∨
-      (∃ E : IntermediateField ℚ_[ℓ] (PadicAlgCl ℓ), FiniteDimensional ℚ_[ℓ] E ∧
-        (L = Profinite.padicIntegersCondensedRing ℓ E ∨
-          L = Profinite.padicSubfieldCondensedRing ℓ E)) ∨
-      L = Profinite.padicAlgClCondensedRing ℓ) :
+      (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj L)] :
     ConstantModelPullbackStatement ((sheafCompose (coherentTopology Profinite.{u})
       (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj L) := by
-  have _ := hL
   intro Y Y' _ _ _ _ g M hM
   exact constantModelPullback _ g M hM
 

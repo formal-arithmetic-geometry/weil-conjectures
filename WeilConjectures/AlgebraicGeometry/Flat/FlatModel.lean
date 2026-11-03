@@ -171,7 +171,7 @@ Source: Weil conjectures blueprint, main-20261015, `sec-six-functors-basics/`
 
 * `proEtaleFlatModel`: bounded flat constructible representatives.
 * `proEtaleFlatStratification`: finite projective constant local models on strata.
-* `proEtaleThickGeneration`, `etaleThickGeneration`: the Noetherian complement.
+* `proEtaleThickGeneration`, `boundedConstructible_induction`: the Noetherian complement.
 * `proEtaleThickGeneration_eq`: equality with the thick envelope in the standing setting.
 
 The generator predicates below spell out the statement's locally closed extension by zero.
@@ -202,7 +202,7 @@ factor through the scheme-theoretic image of the stratum immersion. Lisse flat s
 have finite projective constant local models over the finite coefficient ring.
 Source: blueprint `sk-lem-sf-flat-model`, complement
 (blueprint: sk-lem-sf-flat-model). -/
-def sfEtaleClosureGenerators (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A] [Finite A] :
+def etaleClosureGenerators (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A] [Finite A] :
     ObjectProperty (Etale.DerivedCategoryModule A X) :=
   fun K ↦ ∃ (str : Stratification X) (i : Fin str.n)
     (j : str.domain i ⟶ (str.immersion i).image) (_ : IsOpenImmersion j)
@@ -223,17 +223,17 @@ comparison descent. Clauses 1--2 of det-sf-flat-model-generation give an ordered
 stratification and a finite extension filtration of each flat constructible term.
 Finite stalks give finite generation on each locally constant restriction, and inverse
 image preserves flatness. The canonical open factor through the scheme-theoretic image
-therefore identifies each filtration factor with an sfEtaleClosureGenerators object.
+therefore identifies each filtration factor with an etaleClosureGenerators object.
 The short exact sequences give distinguished single-object triangles, so finite
 induction proves the property for each term, starting with the zero filtration member.
 Apply HomotopyCategory.mem_subcategory_of_strictly_bounded to the inverse image of P
 under Qh; this implements the bounded stupid-tail induction. Finally transport across
 the quotient-comparison and representing isomorphisms. -/
-theorem etaleThickGeneration
+theorem boundedConstructible_induction
     (X : Scheme.{u}) [IsNoetherian X] (A : Type (u + 1)) [CommRing A] [Finite A]
     (P : ObjectProperty (Etale.DerivedCategoryModule A X))
     [P.IsTriangulated] [P.IsStableUnderRetracts] [P.IsClosedUnderIsomorphisms]
-    (hP : sfEtaleClosureGenerators X A ≤ P)
+    (hP : etaleClosureGenerators X A ≤ P)
     (K : Etale.DerivedCategoryModule A X)
     (hbc : Etale.DerivedCategory.isBoundedConstructible A X K)
     (hTor : ∃ a b : ℤ, a ≤ b ∧ Etale.DerivedCategory.hasTorAmplitudeIn A X a b K) :
@@ -246,7 +246,7 @@ theorem etaleThickGeneration
       P ((_root_.DerivedCategory.singleFunctor _ 0).obj F) := by
     obtain ⟨str, ho, hp⟩ := etale_flatConstructible_orderedStratification X A F hFc hFf
     obtain ⟨M, hM0, ⟨eM⟩, hM⟩ :=
-      (etale_flatConstructible_extensionFiltration X A F hFc hFf str ho hp).1
+      (etale_flatConstructible_extensionFiltration X A F str ho hp).1
     have hG (k : Fin str.n) :
         P ((_root_.DerivedCategory.singleFunctor _ 0).obj
           ((flatModelEtaleExtension A (str.immersion k) (str.isImmersion k)).obj

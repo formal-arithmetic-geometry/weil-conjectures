@@ -187,7 +187,7 @@ Proof:
    containing `Dbc` by step 2. Minimality gives the assertion for `A ∈ Loc(Dbc)`.
    Fixing such an `A`, repeat in the second variable to obtain clause (2).
 -/
-theorem tensorClosureRational
+theorem constantModelBoundedConstructible_derivedTensor
     (ℓ : ℕ) [Fact ℓ.Prime]
     {k : Type u} [Field k] (p : ℕ) [CharP k p]
     (hp : 0 < p) (hpl : p ≠ ℓ)
