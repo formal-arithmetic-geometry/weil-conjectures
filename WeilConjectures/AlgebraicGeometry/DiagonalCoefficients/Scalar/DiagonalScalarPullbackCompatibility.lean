@@ -53,9 +53,7 @@ attribute [local irreducible] Functor.leftDerivedFunctor Functor.rightDerivedFun
   ProEtale.upperStar ProEtale.lowerStar ProEtale.upperStarLowerStarAdjunction
   ProEtale.upperStarComp
 
-attribute [local irreducible] canonical_source_pullback
-
-attribute [local irreducible] scalar_pullback derivedUpper derivedLower derivedScalars
+attribute [local irreducible] derivedUpper derivedLower derivedScalars
   singlePullback
 attribute [local semireducible] ProEtale.upperStar
 
