@@ -6,7 +6,6 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.SystemProjection.EtaleSystemProjectionData
-import WeilConjectures.AlgebraicGeometry.SystemProjection.EtaleSystemProjectionSupportExistence
 import WeilConjectures.AlgebraicGeometry.SystemProjection.EtaleSystemProjectionData
 
 /-! # Ordinary operations for normalized etale systems

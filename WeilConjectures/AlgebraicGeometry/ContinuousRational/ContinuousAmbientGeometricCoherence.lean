@@ -48,6 +48,4 @@ private theorem tensor_transport (X : Scheme.{u})
     eqToHom_refl, SheafOfModules.id_val, PresheafOfModules.id_app,
     ConcreteCategory.id_apply]
 
-attribute [-instance] coefficientProEtaleModelBaseChange_isContinuous
-  coefficientProEtaleModelUp_isContinuous in
 end AlgebraicGeometry.Scheme.ContinuousRational
