@@ -16,6 +16,12 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condense
 public import WeilConjectures.AlgebraicGeometry.Purity.PurityNormalProjection
 public import WeilConjectures.AlgebraicGeometry.RelativeTangentBundle.RelativeTangentBundle
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
+public import Mathlib.Algebra.CharP.Algebra
+public import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+public import WeilConjectures.AlgebraicGeometry.Etale.ProEtale.EtaleProEtaleExceptionalObjectComparison
+public import WeilConjectures.AlgebraicGeometry.FiniteSmoothPurity.FiniteSmoothNormalizedExistence
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriek
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomComparison
 
 /-! # The normalized smooth diagonal orientation
 
@@ -39,6 +45,48 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry Scheme
 open Etale.FiniteSmoothPurity
 
 namespace AlgebraicGeometry.ProEtale
+
+private theorem ordinaryUnitCtf
+    (A : Type (u + 1)) [CommRing A] [Finite A] (T : Scheme.{u}) :
+    DerivedCategory.boundedConstructibleFiniteTor A T (𝟙_ _) := by
+  let U := 𝟙_ (Sheaf T.smallEtaleTopology (ModuleCat A))
+  have hbc := DerivedCategory.boundedConstructible_singleFunctor_obj U 0
+  have ht := torAmplitudeIn_singleFunctor_zero_of_flat (ModuleCat A) U
+    (ObjectProperty.prop_unit (ObjectProperty.flat (A := Sheaf T.smallEtaleTopology
+      (ModuleCat A))))
+  let e := singleFunctorObjUnitIso (ModuleCat A) T
+  exact ⟨(DerivedCategory.boundedConstructible (ModuleCat A) T).prop_of_iso e hbc,
+    (_root_.DerivedCategory.finiteTorAmplitude _).prop_of_iso e ⟨0, 0, ht⟩⟩
+
+private theorem normalizedOrientation_unique
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
+    {X Y : Scheme.{u}} [IsNoetherian X]
+    (f : X ⟶ Y) [IsSeparated f] [QuasiCompact f] [HasCompactification f]
+    (d : ℕ) [SmoothOfRelativeDimension d f]
+    (G : FiniteRingSectionDeformation.Geometry d
+      (pullback.fst f f) (pullback.diagonal f))
+    (hX : IsUnit (N : Γ(X, ⊤)))
+    {α β : dualizingComplex A f ≅ line A N hA X d}
+    (hα : OrientationNormalized A N hN hA f d G hX α)
+    (hβ : OrientationNormalized A N hN hA f d G hX β) : α = β := by
+  let := G
+  obtain ⟨κ, hκ, sq, ha⟩ := hα
+  obtain ⟨κ', hκ', sq', hb⟩ := hβ
+  have hk : κ' = κ :=
+    (FiniteRingSectionDeformation.existsUnique_normalized N hN A hA hX d
+      (pullback.fst f f) (pullback.diagonal f) (pullback.diagonal_fst f)).unique hκ' hκ
+  subst κ'
+  have := normalSectionMap_isIso A d (pullback.fst f f) (pullback.diagonal f)
+    (pullback.diagonal_fst f) sq N hN hA hX
+  have := (FiniteRingSectionDeformation.bundleAdjoint_isIso
+    N hN A hA X hX d (ConormalGradedAlgebra.piece (pullback.diagonal f) 1)).2
+  apply Iso.ext
+  exact (cancel_mono
+    (FiniteRingSectionDeformation.bundleSectionAdjoint N hN A hA X hX d
+      (ConormalGradedAlgebra.piece (pullback.diagonal f) 1) ≫
+        normalSectionMap A d (pullback.fst f f) (pullback.diagonal f)
+          (pullback.diagonal_fst f) sq)).mp (ha.symm.trans hb)
 
 /-- The canonical orientation of a separated smooth morphism of pure dimension d.
 The coefficient is the existing size presentation of Z/(ell^n), and the target is
@@ -106,6 +154,54 @@ theorem existsUnique_smoothDiagonalOrientation
             IsCtf A X.left ((comparison A X.left).obj (line A (ell ^ n) hA X.left d)) ∧
             finiteGeneralRingDualizingUnitMap A f.left ≫ theta.hom =
               (comparison A X.left).map alpha.hom := by
-  sorry
+  classical
+  have _ := hn
+  have _ := hbase
+  let := isNoetherian_of_locallyOfFiniteType X.hom
+  let := isNoetherian_of_locallyOfFiniteType Y.hom
+  let : CompactSpace X.left := QuasiCompact.compactSpace_of_compactSpace X.hom
+  let : CompactSpace Y.left := QuasiCompact.compactSpace_of_compactSpace Y.hom
+  let : QuasiCompact f.left := inferInstance
+  let : HasCompactification f.left := HasCompactification.of_over f
+  let A := coefficient.{u} ell n
+  let hA : ((ell ^ n : ℕ) : A) = 0 := CharP.cast_eq_zero _ _
+  have hl : IsUnit (ell : k) := isUnit_iff_ne_zero.mpr
+    (CharP.cast_ne_zero_of_ne_of_prime k (Fact.out : ell.Prime) hEll.symm)
+  have hY : IsUnit ((ell ^ n : ℕ) : Γ(Y.left, ⊤)) := by
+    simpa only [map_natCast, Nat.cast_pow] using
+      (hl.map ((Scheme.ΓSpecIso (.of k)).inv ≫ Y.hom.appTop).hom).pow n
+  have hX : IsUnit ((ell ^ n : ℕ) : Γ(X.left, ⊤)) := by
+    simpa only [map_natCast, Nat.cast_pow] using
+      (hl.map ((Scheme.ΓSpecIso (.of k)).inv ≫ X.hom.appTop).hom).pow n
+  have : HasInvertibleExponent A Y.left :=
+    ⟨ell ^ n, pow_pos (Fact.out : ell.Prime).pos n, hA, hY⟩
+  obtain ⟨G, alpha, hnorm⟩ := generalRingNormalizedOrientation A (ell ^ n)
+    (pow_pos (Fact.out : ell.Prime).pos n) hA f.left d hX
+  have := isIso_derivedComparisonAdjunction_unit_app (ModuleCat.{u + 1} A) Y.left
+    (Etale.ordinaryFiniteUnit A Y.left) ⟨0, inferInstance⟩
+  have : IsIso (finiteGeneralRingDualizingUnitMap A f.left) := by
+    unfold finiteGeneralRingDualizingUnitMap
+    infer_instance
+  let theta := (asIso (finiteGeneralRingDualizingUnitMap A f.left)).symm ≪≫
+    (comparison A X.left).mapIso alpha
+  have htheta : finiteGeneralRingDualizingUnitMap A f.left ≫ theta.hom =
+      (comparison A X.left).map alpha.hom := by
+    dsimp only [theta, Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom]
+    exact IsIso.hom_inv_id_assoc _ _
+  have homega : IsCtf A X.left ((comparison A X.left).obj
+      (Etale.dualizingComplex A f.left)) :=
+    comparisonCtf A X.left _ (ordinaryExceptionalCtf A f.left d _ (ordinaryUnitCtf A _))
+  have htarget : IsCtf A X.left ((comparison A X.left).obj (line A (ell ^ n) hA X.left d)) :=
+    isCtfOfIso A X.left ((comparison A X.left).mapIso alpha) homega
+  refine ⟨hX, G, theta, ⟨alpha, hnorm, isCtfOfIso A X.left theta.symm htarget,
+    htarget, htheta⟩, ?_⟩
+  intro theta' htheta'
+  obtain ⟨alpha', hnorm', _, _, heq'⟩ := htheta'
+  have ha : alpha' = alpha :=
+    normalizedOrientation_unique A (ell ^ n) (pow_pos (Fact.out : ell.Prime).pos n)
+      hA f.left d G hX hnorm' hnorm
+  apply Iso.ext
+  apply (cancel_epi (finiteGeneralRingDualizingUnitMap A f.left)).mp
+  exact heq'.trans (ha ▸ htheta.symm)
 
 end AlgebraicGeometry.ProEtale

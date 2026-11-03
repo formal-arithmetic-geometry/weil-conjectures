@@ -20,6 +20,7 @@ import WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Triangularizable
 import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Charpoly.Basic
 import Mathlib.LinearAlgebra.Dimension.Free
 import Mathlib.RingTheory.Finiteness.Basic
+public import WeilConjectures.SmoothPurity.CondensedWeilModules
 
 /-! # Residue-degree Frobenius for condensed coefficient pullback
 
@@ -55,6 +56,19 @@ def fdCondensedFibreComparison (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prim
   (CondensedRing.pointSections l D.k).mapIso
     ((CondensedRing.upperStarComp (Profinite.padicAlgClRingObj l) z f).symm.app M ≪≫
       (CondensedRing.upperStarCongr (Profinite.padicAlgClRingObj l) h).app M)
+
+private theorem fd_fibreComparison_hom (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) (z : Spec (.of D.k) ⟶ X)
+    (x : Spec (.of D.k) ⟶ Y) (h : z ≫ f = x) (M : CondensedModule.Modules l Y) :
+    (fdCondensedFibreComparison D l f z x h M).hom =
+      (CondensedRing.pointSections l D.k).map
+        ((CondensedRing.upperStarComp (Profinite.padicAlgClRingObj l) z f).inv.app M ≫
+          eqToHom (congrArg (fun x ↦
+            (CondensedRing.upperStar (Profinite.padicAlgClRingObj l) x).obj M) h)) := by
+  subst x
+  simp only [fdCondensedFibreComparison, Functor.mapIso_hom, Iso.trans_hom,
+    Iso.app_hom, Iso.symm_hom, CondensedRing.upperStarCongr_self, Iso.refl_hom,
+    NatTrans.id_app, eqToHom_refl, Category.comp_id] <;> rfl
 
 attribute [local irreducible] CondensedRing.upperStar CondensedRing.upperStarComp
   CondensedRing.upperStarFromPointMod CondensedRing.upperStarIsoIdOfIsSepClosed
