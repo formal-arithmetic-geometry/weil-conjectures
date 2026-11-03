@@ -55,7 +55,7 @@ def sfOrientationAffineTrace (A : Type (u + 1)) [CommRing A] [Finite A]
           (affineTraceProjectiveInvertible N Y hY)).inv ≫
         (Etale.affineTraceOpenAdjunction A Y).counit.app
           ((Etale.ordinaryFiniteLine A N hA (ProjectiveLine Y))⟦(2 : ℤ)⟧)) ≫
-    Etale.projectiveLineTrace N hN A hA Y hY ≫
+    Etale.ordinaryFiniteProjectiveLineTrace N hN A hA Y hY ≫
     (Etale.singleFunctorObjUnitIso (ModuleCat.{u + 1} A) Y).hom
 
 end WeilConjectures

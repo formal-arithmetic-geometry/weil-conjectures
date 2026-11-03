@@ -57,11 +57,11 @@ theorem affineOriginLine_scalar
   obtain ⟨e⟩ := projectiveZero_dualIdeal T
   have hc := normalized_trace A T N hN hA hT hI (projectiveZeroCartier T)
     (projectiveSupported_chern A T N hN hA hT (projectiveZeroCartier T) e)
-  have hi := congrArg (fun f ↦ f ≫ Etale.projectiveLineTrace N hN A hA T hT) hc
+  have hi := congrArg (fun f ↦ f ≫ Etale.ordinaryFiniteProjectiveLineTrace N hN A hA T hT) hc
   calc
     _ = Etale.ordinaryFiniteP1ChernPushforward A N hA T
         (Etale.projectiveLineTraceDatum N hN A hA T hT).chern ≫
-          Etale.projectiveLineTrace N hN A hA T hT := by
+          Etale.ordinaryFiniteProjectiveLineTrace N hN A hA T hT := by
       simpa only [CoordinateLine.integration, Category.assoc] using hi
     _ = 𝟙 _ := Etale.projectiveLineTrace_chern N hN A hA T hT
 

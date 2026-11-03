@@ -13,6 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.Native.NativeFiniteTwistLocalLin
 public import WeilConjectures.SmoothPurity.Supporting.TwistPreservesFiniteness
 public import WeilConjectures.TateTwist.ProEtale
 public import WeilConjectures.AlgebraicGeometry.Tate.TateTwistIntegralLines
+public import WeilConjectures.AlgebraicGeometry.Tate.TateTwistLocallyFree
 
 /-! # Tate twists are well defined and locally free of rank one
 
@@ -112,7 +113,44 @@ theorem det_def_sp_tate_twist_locally_free
     CondensedRing.NativeTwistFiniteness (Profinite.padicAlgClRingObj ℓ) X
       (tateTwist X ℓ) := by
   have _ := embedding
-  exact ⟨tateTwist_finite_locallyFree X ℓ,
-    AlgebraicGeometry.ProEtale.tateNativeFiniteness ℓ E X⟩
+  obtain ⟨hF, hI, hR, hQ⟩ := tateTwist_locallyFree ℓ E X
+  have liftLine (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+      [MonObj Λ] [IsCommMonObj Λ]
+      (L : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
+      (h : CondensedTateLineProperties Λ X
+        (coefficientSignedTwist X (condensedRingObj Λ X) L)) :
+      CondensedRing.NativeTwistFiniteness Λ X
+        (coefficientSignedTwist X (condensedRingObj Λ X) L) := by
+    obtain ⟨𝒰, h𝒰⟩ := h.locallyTrivial 1
+    apply CondensedRing.nativeSignedLine_finiteness Λ X L
+    refine ⟨𝒰, fun i ↦ ?_⟩
+    let F := (upperStar Ab.{u + 1} (𝒰.f i)).mapMod (condensedRingObj Λ X)
+    exact ⟨F.mapIso (λ_ L).symm ≪≫ (h𝒰 i).some⟩
+  refine ⟨tateTwist_finite_locallyFree X ℓ,
+    (fun n ↦ liftLine _ _ (hF n)), liftLine _ _ hI, liftLine _ _ hR, ?_⟩
+  obtain ⟨𝒰, h𝒰⟩ := hQ.locallyTrivial 1
+  have hfin := CondensedRing.nativeSignedLine_finiteness
+    (Profinite.padicAlgClRingObj ℓ) X (tateTwistOne X ℓ) (by
+      refine ⟨𝒰, fun i ↦ ?_⟩
+      let F := (upperStar Ab.{u + 1} (𝒰.f i)).mapMod
+        (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X)
+      exact ⟨F.mapIso (λ_ (tateTwistOne X ℓ)).symm ≪≫ (h𝒰 i).some⟩)
+  have hn (n : ℕ) : coefficientTwistNat X
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X) (tateTwistOne X ℓ) n =
+        tateTwistNat X ℓ n := by
+    induction n with
+    | zero => rfl
+    | succ n ih => simp only [coefficientTwistNat, tateTwistNat, ih]
+  have hs : coefficientSignedTwist X
+      (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X) (tateTwistOne X ℓ) =
+        tateTwist X ℓ := by
+    funext m
+    cases m with
+    | ofNat n => exact hn n
+    | negSucc n =>
+      dsimp only [coefficientSignedTwist, tateTwist]
+      rw [hn]
+  rw [hs] at hfin
+  exact hfin
 
 end AlgebraicGeometry.Scheme

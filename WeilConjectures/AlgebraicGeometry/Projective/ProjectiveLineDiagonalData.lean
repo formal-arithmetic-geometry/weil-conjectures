@@ -90,7 +90,7 @@ def projectiveLineDiagonalTrace (N : ℕ) (hN : 0 < N)
           simpa using hS.map
             ((pullback.fst (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)) ≫
               (ProjectiveLine S ↘ S)).appTop.hom)).hom ≫
-    projectiveLineTrace N hN A hA (ProjectiveLine S)
+    ordinaryFiniteProjectiveLineTrace N hN A hA (ProjectiveLine S)
       (by simpa using hS.map (ProjectiveLine S ↘ S).appTop.hom)
 
 /-- Transport direct image along a product projection to the standard projective line.
@@ -121,5 +121,24 @@ def projectiveLineDiagonalChartPushforward (N : ℕ) (hN : 0 < N)
           simpa using hS.map
             ((pullback.fst (ProjectiveLine S ↘ S) (ProjectiveLine S ↘ S)) ≫
               (ProjectiveLine S ↘ S)).appTop.hom)).hom
+
+/-- The diagonal trace is the chart pushforward followed by the projective-line trace.
+Source: blueprint lem-amb-p1-diagonal-integrals, the maps t_{p_a}
+(blueprint: def-amb-p1-diagonal-data).
+Proof: unfold both definitions; the two composites agree up to associativity. -/
+theorem projectiveLineDiagonalTrace_eq (N : ℕ) (hN : 0 < N)
+    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
+    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (a : Bool) :
+    letI : IsLocallyNoetherian (ProjectiveLine S) :=
+      LocallyOfFiniteType.isLocallyNoetherian (ProjectiveLine S ↘ S)
+    letI : CompactSpace (ProjectiveLine S) :=
+      QuasiCompact.compactSpace_of_compactSpace (ProjectiveLine S ↘ S)
+    letI : IsNoetherian (ProjectiveLine S) := ⟨⟩
+    projectiveLineDiagonalTrace N hN A hA S hS a =
+      projectiveLineDiagonalChartPushforward N hN A hA S hS a ≫
+        ordinaryFiniteProjectiveLineTrace N hN A hA (ProjectiveLine S)
+          (by simpa using hS.map (ProjectiveLine S ↘ S).appTop.hom) := by
+  simp only [projectiveLineDiagonalTrace, projectiveLineDiagonalChartPushforward,
+    Category.assoc]
 
 end AlgebraicGeometry.Etale
