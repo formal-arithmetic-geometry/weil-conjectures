@@ -328,22 +328,94 @@ Source: `det-prop-sf-cbc`, proof steps 8--9 (blueprint: det-prop-sf-cbc). -/
       Functor.isoWhiskerRight (leftDerivedUpperStarIsoMapDerivedCategory Λ t).symm (J Λ l)
   exact isIso_open_baseChange_of_comparison F sq beta
 
-/-- The formalism's exchange is the existing specified proper-then-open composite.
-Proof steps: expand the generic compact-support exchange. Its proper factor is the mate of
-the published pullback-square compositor, hence `detSfProperBaseChangeMap`. The inverse open
-factor is beta: the arbitrary-base comparison is normalized by the same open unit and counit.
-Cancel the exact/total comparison factors. Functor associators have identity components, so
-the result is exactly `detSfCompactSupportBaseChangeComposite`, as natural transformations.
-Source: `det-prop-sf-cbc`, exchange definition and proof steps 8--9
-(blueprint: det-prop-sf-cbc). -/
+private theorem normalized_shriekBaseChange_app
+    (F : CompactSupportFormalism.{w, v, u}) [F.HasBaseChange]
+    {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}
+    {g : Y' ⟶ Y} {g' : X' ⟶ X}
+    (c : Compactification f) (c' : Compactification f') (h : c'.Z ⟶ c.Z)
+    (hi : IsPullback g' c'.i c.i h) (hp : IsPullback h c'.g c.g g)
+    (beta : F.sh c.i ⋙ F.pb h ≅ F.pb g' ⋙ F.sh c'.i)
+    (hb : (F.baseChange g' c'.i c.i h hi.w).natTrans = beta.inv) (K : F.obj X) :
+    (F.shriekBaseChange c c' h hi hp).natTrans.app K =
+      (F.pfBaseChange h c'.g c.g g hp.w).natTrans.app ((F.sh c.i).obj K) ≫
+        (F.pf c'.g).map (beta.hom.app K) := by
+  haveI := CompactSupportFormalism.HasBaseChange.isIso_baseChange (F := F) hi
+  have hinv : inv ((F.baseChange g' c'.i c.i h hi.w).natTrans.app K) =
+      beta.hom.app K := by
+    apply IsIso.inv_eq_of_hom_inv_id
+    rw [NatTrans.congr_app hb K]
+    exact beta.inv_hom_id_app K
+  dsimp only [CompactSupportFormalism.shriekBaseChange]
+  rw [ExchangeFormalism.shriekBaseChange_app, hinv]
+
+private theorem normalized_shriekBaseChange
+    (F : CompactSupportFormalism.{w, v, u}) [F.HasBaseChange]
+    {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'}
+    {g : Y' ⟶ Y} {g' : X' ⟶ X}
+    (c : Compactification f) (c' : Compactification f') (h : c'.Z ⟶ c.Z)
+    (hi : IsPullback g' c'.i c.i h) (hp : IsPullback h c'.g c.g g)
+    (beta : F.sh c.i ⋙ F.pb h ≅ F.pb g' ⋙ F.sh c'.i)
+    (hb : (F.baseChange g' c'.i c.i h hi.w).natTrans = beta.inv) :
+    (F.shriekBaseChange c c' h hi hp).natTrans =
+      (Functor.compactSupportExchangeData (F.sh c.i) (F.pf c.g) (F.pb g)
+        (F.pb h) (F.pf c'.g) (F.pb g') (F.sh c'.i)
+        (F.pfBaseChange h c'.g c.g g hp.w).natTrans beta).map := by
+  ext K
+  rw [normalized_shriekBaseChange_app F c c' h hi hp beta hb K]
+  exact ((Functor.compactSupportExchangeData (F.sh c.i) (F.pf c.g) (F.pb g)
+    (F.pb h) (F.pf c'.g) (F.pb g') (F.sh c'.i)
+    (F.pfBaseChange h c'.g c.g g hp.w).natTrans beta).component K).symm
+
+private theorem compactSupport_proper_mate_normalization {X Y Y' : Scheme.{u}}
+    (f : X ⟶ Y) (g : Y' ⟶ Y) (c : Compactification f) :
+    (ExchangeFormalism.pfBaseChange (compactSupportCondensedFormalism Λ)
+        (pullback.fst c.g g) (pullback.snd c.g g) c.g g
+        (c.isPullback_g_ofIsPullback (IsPullback.of_hasPullback f g)).flip.w).natTrans =
+      condensedAmbientExchange Λ (detSfProperBaseChangeSquare c.g g) := by
+  simp only [ExchangeFormalism.pfBaseChange, ExchangeFormalism.sqIso,
+    ExchangeFormalism.pbComp',
+    compactSupportCondensedFormalism, condensedAmbientExchange,
+    condensedAmbientPullbackComparison,
+    Iso.trans_inv, Iso.trans_hom, Iso.symm_inv, Iso.symm_hom,
+    eqToIso.inv, eqToIso.hom, eqToHom_refl, Category.assoc,
+    Category.id_comp]
+
+private theorem compactSupport_open_mate_normalization {X Y Y' : Scheme.{u}}
+    (f : X ⟶ Y) (g : Y' ⟶ Y) (c : Compactification f) :
+    ((compactSupportCondensedFormalism Λ).baseChange
+      (pullback.fst f g) (c.baseChange g).i c.i (pullback.fst c.g g)
+      (c.isPullback_i_ofIsPullback (IsPullback.of_hasPullback f g)).w).natTrans =
+      (compactSupportOpenBaseChangeIso Λ f g c).inv := by
+  refine (compactSupport_cartesian_open_mate_transport Λ
+    (c.isPullback_i_ofIsPullback (IsPullback.of_hasPullback f g))).trans ?_
+  rw [compactSupport_literal_open_mate Λ c.i (pullback.fst c.g g)]
+  simp only [compactSupportOpenBaseChangeIso, ← Functor.isoWhiskerRight_symm,
+    Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv,
+    Category.assoc, Iso.inv_hom_id_assoc,
+    Compactification.baseChange]
+
+/-- The formal compact-support exchange is the published proper/open composite.
+Proof: expand `CompactSupportFormalism.shriekBaseChange`, normalize the open inverse by the
+arbitrary-base open comparison, normalize the proper mate, and apply the exchange-data component.
+Source: `det-prop-sf-cbc`, proof steps 8--9 (blueprint: det-prop-sf-cbc). -/
 theorem compactSupportCondensedFormalism_exchange {X Y Y' : Scheme.{u}} (f : X ⟶ Y) (g : Y' ⟶ Y)
     (c : Compactification f) :
-    ((compactSupportCondensedFormalism Λ).shriekBaseChange c (c.baseChange g) (pullback.fst c.g g)
+    ((compactSupportCondensedFormalism Λ).shriekBaseChange c (c.baseChange g)
+      (pullback.fst c.g g)
       (c.isPullback_i_ofIsPullback (IsPullback.of_hasPullback f g))
       (c.isPullback_g_ofIsPullback (IsPullback.of_hasPullback f g)).flip).natTrans =
-    detSfCompactSupportBaseChangeComposite Λ f g c
-      (compactSupportOpenBaseChangeIso Λ f g c) := by
-  sorry
+      detSfCompactSupportBaseChangeComposite Λ f g c
+        (compactSupportOpenBaseChangeIso Λ f g c) := by
+  have h := normalized_shriekBaseChange (compactSupportCondensedFormalism Λ)
+    c (c.baseChange g) (pullback.fst c.g g)
+    (c.isPullback_i_ofIsPullback (IsPullback.of_hasPullback f g))
+    (c.isPullback_g_ofIsPullback (IsPullback.of_hasPullback f g)).flip
+    (compactSupportOpenBaseChangeIso Λ f g c)
+    (compactSupport_open_mate_normalization Λ f g c)
+  simp only [Compactification.baseChange_g] at h
+  rw [compactSupport_proper_mate_normalization Λ f g c] at h
+  simpa only [detSfCompactSupportBaseChangeComposite, detSfCompactSupportExchangeData,
+    compactSupportCondensedFormalism, detSfProperBaseChangeMap] using h
 
 /-- Identity-square law for the actual condensed compact-support exchange.
 Proof steps: proper mate normalization gives the proper identity square. The open mate has

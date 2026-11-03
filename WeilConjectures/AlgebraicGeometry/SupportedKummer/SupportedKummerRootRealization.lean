@@ -17,6 +17,8 @@ import Mathlib.RingTheory.KrullDimension.Regular
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.RingTheory.Flat.Localization
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.EffectiveCartier
+public import Mathlib.CategoryTheory.Filtered.Final
+public import WeilConjectures.AlgebraicGeometry.SmoothPurity.RootsOfUnityInverseImageIso
 
 /-! # Supported divisor classes from the full compatible-root boundary
 
@@ -68,7 +70,39 @@ theorem rootComparison_existsUnique (ell : ℕ) [Fact ell.Prime] (X : Scheme.{u}
     ∃! e : compatibleRoots ell X ≅ (tateModule X ell).X,
       ∀ n : ℕ, e.hom ≫ (limit.π (tateModuleSystem X ell) (op (n + 1))).hom ≫
         ((kummerData ell X).level n).hom = compatibleRootsCoordinate ell X n := by
-  sorry
+  let shift : ℕᵒᵖ ⥤ ℕᵒᵖ := (show Monotone (fun n : ℕ ↦ n + 1) from
+    fun _ _ h ↦ Nat.add_le_add_right h 1).functor.op
+  have hfinal : ((show Monotone (fun n : ℕ ↦ n + 1) from
+      fun _ _ h ↦ Nat.add_le_add_right h 1).functor).Final :=
+    (Monotone.final_functor_iff _).mpr (fun n ↦ ⟨n, Nat.le_succ n⟩)
+  let U : Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (Profinite.continuousMapRingObj ℤ_[ell]) X) ⥤
+      Sheaf (ProEt.topology X) Ab.{u + 1} := Mod.forget _
+  let c := (U.mapCone (limit.cone (tateModuleSystem X ell))).whisker shift
+  have hc : IsLimit c := (Functor.Initial.isLimitWhiskerEquiv shift _).symm
+    (isLimitOfPreserves U (limit.isLimit (tateModuleSystem X ell)))
+  let t : shift ⋙ tateModuleSystem X ell ⋙ U ⟶ compatibleRootsTower ell X :=
+    NatTrans.ofOpSequence (fun n ↦ ((kummerData ell X).level n).hom) (fun n ↦ by
+      change ((tateModuleSystem X ell).map (homOfLE (Nat.le_succ (n + 1))).op).hom ≫
+        ((kummerData ell X).level n).hom = _
+      simp only [tateModuleSystem, Functor.ofOpSequence_map_homOfLE_succ]
+      exact rootLevel_step ell X n)
+  have : ∀ j, IsIso (t.app j) := fun j ↦ ((kummerData ell X).level j.unop).isIso_hom
+  have : IsIso t := NatIso.isIso_of_isIso_app t
+  let d := (Cone.postcompose t).obj c
+  have hd : IsLimit d := (IsLimit.postcomposeHomEquiv (asIso t) c).symm hc
+  let e : compatibleRoots ell X ≅ (tateModule X ell).X :=
+    (limit.isLimit (compatibleRootsTower ell X)).conePointUniqueUpToIso hd
+  have he (n : ℕ) : e.hom ≫
+      (limit.π (tateModuleSystem X ell) (op (n + 1))).hom ≫
+        ((kummerData ell X).level n).hom = compatibleRootsCoordinate ell X n :=
+    IsLimit.conePointUniqueUpToIso_hom_comp _ hd (op n)
+  refine ⟨e, he, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  apply hd.hom_ext
+  rintro ⟨n⟩
+  exact (he' n).trans (he n).symm
 
 /-- The coordinate-normalized root comparison, determined uniquely by the preceding theorem.
 Source: compatible-root-boundary native realization
