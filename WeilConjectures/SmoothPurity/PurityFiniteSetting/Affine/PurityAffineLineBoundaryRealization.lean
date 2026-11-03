@@ -62,6 +62,8 @@ import WeilConjectures.NumberTheory.Padics.CoefficientExtensionSupplement
 import Mathlib.RingTheory.Ideal.Quotient.Index
 import WeilConjectures.AlgebraicGeometry.Compact.CompactSupportComparisonUnit
 import WeilConjectures.AlgebraicGeometry.SmoothPurity.SiteClosedCounitTransport
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.PurityAffineLineBounds
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.PurityBoundaryRealizationAssembly
 
 /-! # Realization of affine-line supported classes
 
@@ -228,37 +230,32 @@ def AffineLineBoundaryRealization (P : PurityFiniteSetting.{u})
               (δ 1).app ⟨P.gysinInput h Y, trivial⟩ (P.gysinKummerSection h Y a c b)
 
 /-- Finite-Tor realization and exceptional transpose of every affine-line support class.
-Source: blueprint main-20261015, thm-pur-affine-line-orientation.proof.md,
-first paragraph, ambient qualifications, and final site-comparison sentence;
+Source: literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an,
+cor-pur-affine-space-zero-section-purity.proof.md, rank-one supported-class step;
 Milne, Theorem 9.4, Example 9.5, and closed-support adjunction before Theorem 16.7
 (blueprint: lem-pur-affine-line-boundary-realization).
 
-Proof (the seven steps of the node):
-1. The zero-support retraction triangle supplies the finite Noetherian closed/open pair
-and quasi-compact j. Finite-type dimension supplies d, with d=0 for the empty scheme.
-The finite Kummer-level lemma gives ell^N A=0. OpenComplementKnown gives c=2d.
-2. FiniteEtaleTwistLine and PurTwistSheafLocallyFree give the etale and pro-etale root
-lines. On a root-trivializing cover both coefficient comparisons send zeta^a tensor b
-to ab; their identical transition multipliers glue. Exact comparison preserves the
-constant coefficient sheaf. Locally tensoring either line is tensoring A, so its Tor
-interval is [0,0]. The constant unit has that interval and is constructible.
-3. EtaleClosedAmbientAdjoint supplies the ordinary adjoint independently of step 1.
-EtaleClosedSupportAmplitude and EtaleClosedSupportTorAmplitude, using the two open
-conditions separately, give bounded constructibility and finite-Tor preservation.
-4. The zero-support triangle and KummerTriangleConcentration give the classical support
-value shifted by two, concentrated in degree zero and finite-Tor constructible.
-SupportedClassEvaluationComparison compares it with the transported exceptional value
-using the closed counit, and supplies the two evaluation isomorphisms.
-5. Define u_alpha by these bijections. The normalized edge and supportIso are exactly
-the Gysin section-to-support identification. The inverse adjunct is s_*u_alpha followed
-by the exceptional counit, proving the displayed equality and uniqueness.
-6. The finite twist has its actual etale model; step 3 puts its exceptional value in D+.
-Full faithfulness of site comparison gives the unique etale representative of every
-u_alpha. SiteClosedCounitTransport identifies the counit with the ordinary etale counit
-through the closed image mate. Exact comparison commutes with the displayed shifts.
-No adjunction on arbitrary pro-etale objects is used.
-7. Substitute the exact support boundary of coordinateKummer. By the definition of
-gysinHomToSections, evaluation is H^0(u)(1), giving the final assertion. -/
+Proof:
+1. finiteKummerLevel gives the positive Kummer level; the explicit coefficient
+annihilation lemma gives the exponent relation in the lifted coefficient ring.
+2. Finite type bounds the affine line's dimension. Its coordinate complement is
+quasi-compact, and the finite-field open-complement theorem gives the bound 2d.
+3. The ordinary closed derived direct image has a right adjoint. The closed
+amplitude theorem and the residue-test Tor argument preserve bounded constructibility
+and finite Tor amplitude at the actual lifted purity coefficient ring.
+4. FiniteEtaleTwistLine gives one cover of the actual etale root line. Pull back its
+trivializations through comparison to get the pro-etale cover. Flatness gives Tor
+interval zero, and exact comparison transports it. The constant regular coefficient
+is constructible and flat; use the recorded Gysin structure for the shifted value.
+5. Invert the prescribed comparison maps using the bounded-below comparison unit,
+uniqueness of ordinary right adjoints, and the canonical closed direct-image mate.
+Define the transported counit by their inverses and prove its equality by cancellation.
+6. The normalized edge/support chart and the Gysin evaluation bijection give a
+bijection between realizing morphisms and supported classes. The chart inverse
+identity and supported transpose identity prove the displayed counit formula.
+7. Full faithfulness of bounded-below comparison gives a unique ordinary etale
+antecedent. Apply the same evaluation bijection to every exact support boundary
+on the coordinate Kummer class to obtain its unique realizing morphism. -/
 theorem affine_line_boundary_realization (P : PurityFiniteSetting.{u})
     (h : P.ramificationIndex ∣ P.level) (Y : Scheme.{u})
     (a : Y ⟶ Spec (CommRingCat.of P.field.k))
@@ -297,6 +294,12 @@ theorem affine_line_boundary_realization (P : PurityFiniteSetting.{u})
       IsZero ((DerivedCategory.homologyFunctor (ProSheaves P Y) q).obj
         (P.gysinValue h Y))) ∧
     P.AffineLineBoundaryRealization h Y a := by
-  sorry
+  have hk1 := (P.finiteKummerLevel h).1
+  have hkexp' : (P.exponent : P.Coefficient) = 0 := P.exponent_coefficient_eq_zero h
+  have hgeom := affine_line_boundary_bounds P h Y a
+  have hreal := affine_line_boundary_realization_data P h Y a
+  rcases hgeom with ⟨hdim, hadj, hpres, hcover, htor, hpro, hderived, hval, hzero⟩
+  exact ⟨⟨hk1, hkexp'⟩, hdim, hadj, hpres, hcover, htor, hpro, hderived, hval, hzero,
+    hreal⟩
 
 end WeilConjectures.PurityFiniteSetting

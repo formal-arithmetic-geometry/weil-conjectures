@@ -696,6 +696,239 @@ def relativeExtensionComparison {T Z : Scheme.{u}}
   Classical.choose (relativeExtensionComparison_existsUnique i G I) q
 
 set_option backward.isDefEq.respectTransparency false in
+private lemma coneSecondCoordinate (T : Scheme.{u}) (U : T.Etale)
+    (I : CochainComplex (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) ℕ) (n : ℕ) :
+    relativeSnd T U I n =
+      homotopyCofiber.sndX (relativeSectionRestriction T U I) ((n : ℤ) + 1 + -1) ≫
+      (HomologicalComplex.extendXIso _ _ (by simp :
+        ComplexShape.embeddingUpNat.f n = (n : ℤ) + 1 + -1)).hom := by
+  unfold relativeSnd relativeDegreeIso
+  simp only [Iso.trans_hom, Category.assoc]
+  erw [← AddCommGrpCat.biprodIsoProd_inv_comp_snd, Iso.hom_inv_id_assoc,
+    biprod.mapIso_hom, biprod.map_snd]
+  rw [← Category.assoc]
+  congr 1
+  have hs : ∀ (i j : ℤ) (h : i + 1 = j),
+      (homotopyCofiber.XIsoBiprod (relativeSectionRestriction T U I) i j h).hom ≫
+        biprod.snd = homotopyCofiber.sndX (relativeSectionRestriction T U I) i := by
+    intro i j h
+    subst j
+    apply homotopyCofiber.ext_from_X _ (i + 1) i rfl <;> simp
+  exact hs _ _ _
+
+set_option backward.isDefEq.respectTransparency.types false in
+/- The first resolution row computes extMk of a lifted cocycle as minus the extension class. -/
+private theorem extMk_of_extension_lift
+    {C : Type u} [Category.{v} C] [Abelian C] [HasExt.{w} C]
+    {G E Q : C} (I : InjectiveResolution G) (a : G ⟶ E) (b : E ⟶ Q)
+    (hab : a ≫ b = 0) (hE : (ShortComplex.mk a b hab).ShortExact)
+    (wI : I.ι.f 0 ≫ I.cocomplex.toCycles 0 1 = 0)
+    (hI : (ShortComplex.mk (I.ι.f 0) (I.cocomplex.toCycles 0 1) wI).ShortExact)
+    (h : E ⟶ I.cocomplex.X 0) (k : Q ⟶ I.cocomplex.X 1)
+    (ha : a ≫ h = I.ι.f 0) (hb : b ≫ k = h ≫ I.cocomplex.d 0 1)
+    (hk : k ≫ I.cocomplex.d 1 2 = 0) :
+    I.extMk k 2 rfl hk = -hE.extClass := by
+  have : Epi b := hE.epi_g
+  obtain ⟨k', hki⟩ : ∃ k' : Q ⟶ I.cocomplex.cycles 1,
+      k' ≫ I.cocomplex.iCycles 1 = k :=
+    ⟨I.cocomplex.liftCycles k 2 (by simp) hk, I.cocomplex.liftCycles_i _ _ _ _⟩
+  have hb' : b ≫ k' = h ≫ I.cocomplex.toCycles 0 1 := by
+    apply (cancel_mono (I.cocomplex.iCycles 1)).mp
+    rw [Category.assoc, hki, Category.assoc, I.cocomplex.toCycles_i, hb]
+  have hn := hE.extClass_naturality hI
+    (ShortComplex.homMk (𝟙 G) h k'
+      (by change (𝟙 G) ≫ I.ι.f 0 = a ≫ h; exact (Category.id_comp _).trans ha.symm)
+      (by change h ≫ I.cocomplex.toCycles 0 1 = b ≫ k'; exact hb'.symm))
+  change hE.extClass.comp (Ext.mk₀ (𝟙 G)) (add_zero 1) =
+    (Ext.mk₀ k').comp hI.extClass (zero_add 1) at hn
+  rw [Ext.comp_mk₀_id] at hn
+  have he := InjectiveResolution.mk₀_comp_extMk I
+    (I.cocomplex.iCycles 1) 2 rfl (by simp) k'
+  have hfirst : I.extMk (I.cocomplex.iCycles 1) 2 rfl (by simp) = -hI.extClass :=
+    InjectiveResolution.extMk_firstCycles I wI hI
+  have he' := congrArg (fun β ↦ (Ext.mk₀ k').comp β (zero_add 1)) hfirst
+  have hh : (Ext.mk₀ k').comp (I.extMk (I.cocomplex.iCycles 1) 2 rfl (by simp))
+      (zero_add 1) = -hE.extClass :=
+    he'.trans ((Ext.comp_neg _ _ (zero_add 1)).trans (congrArg Neg.neg hn.symm))
+  have heq : (Ext.mk₀ k').comp
+      (I.extMk (I.cocomplex.iCycles 1) 2 rfl (by simp)) (zero_add 1) =
+      I.extMk k 2 rfl hk := by
+    simpa only [hki] using he
+  exact heq.symm.trans hh
+
+/-- The relative extension realizes the Ext-normalized relative torsor class.
+Source: Stacks Tags 03AJ, 06XR, 06XV and 0A45, relative refinement
+(blueprint: lem-pur-relative-extension-cohomology-normalization).
+Proof: represent beta by 0 -> G -> E -> i_*Z_Z -> 0 and its equivariant torsor
+map killing the frame. Extend the resolution augmentation across G -> E to h.
+Factor dh through the quotient to a closed cocycle k. The first resolution row
+and naturality of extension classes give I.extMk(k) = -beta: the cycles inclusion
+is the negative of the first-row extension class. Under the comparison k maps
+to the signed pair (a,0), where a = (kp)(1). The map h composed with the framed
+lift is an equivariant map from P to the lifting torsor of a, killing the frame,
+so the raw relative class of P is the frame cycle with coordinates (a,0). The
+normalization of the comparison sends I.extMk(k) to that class. Hence the
+comparison of beta is minus the raw class, the Ext-normalized relative class. -/
+theorem relative_extension_cohomology_normalization {T Z : Scheme.{u}}
+    [HasExt.{u + 1} (Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})] (i : Z ⟶ T)
+    [IsClosedImmersion i] (G : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1})
+    (I : InjectiveResolution G)
+    (P : Sheaf.Torsor.WithSection G (Scheme.Etale.mk i.openComplement.ι)) :
+    relativeExtensionComparison i G I 1 (relativeExtension i P) =
+      -relativeTorsorEquiv T (Scheme.Etale.mk i.openComplement.ι) I (Quotient.mk _ P) := by
+  classical
+  let U := Scheme.Etale.mk i.openComplement.ι
+  let hT := MorphismProperty.Over.mkIdTerminal @Etale T
+  obtain ⟨E, a, b, hab, hE, f, hfa, hfb, hfτ, hβ⟩ :=
+    (Classical.choose_spec (relativeExtension_existsUnique i P)).1
+  change relativeExtension i P = hE.extClass at hβ
+  let : Mono a := hE.mono_f
+  let : Epi b := hE.epi_g
+  let : Injective (I.cocomplex.X 0) := I.injective 0
+  obtain ⟨h, ha⟩ : ∃ h : E ⟶ I.cocomplex.X 0, a ≫ h = I.ι.f 0 :=
+    ⟨Injective.factorThru (I.ι.f 0) a, Injective.comp_factorThru _ _⟩
+  have hhd : a ≫ (h ≫ I.cocomplex.d 0 1) = 0 := by
+    rw [← Category.assoc, ha]
+    exact I.ι_f_zero_comp_complex_d
+  obtain ⟨k, hb⟩ : ∃ k : (lowerStar AddCommGrpCat.{u + 1} i).obj
+      (supportedIntegralConstant Z) ⟶ I.cocomplex.X 1,
+      b ≫ k = h ≫ I.cocomplex.d 0 1 :=
+    ⟨hE.gIsCokernel.desc (CokernelCofork.ofπ (h ≫ I.cocomplex.d 0 1) hhd),
+      hE.gIsCokernel.fac _ WalkingParallelPair.one⟩
+  have hk : k ≫ I.cocomplex.d 1 2 = 0 := by
+    apply (cancel_epi b).mp
+    rw [← Category.assoc, hb, Category.assoc, I.cocomplex.d_comp_d, comp_zero, comp_zero]
+  have hk' : ∃ k' : (lowerStar AddCommGrpCat.{u + 1} i).obj
+      (supportedIntegralConstant Z) ⟶ I.cocomplex.cycles 1,
+      k' ≫ I.cocomplex.iCycles 1 = k :=
+    ⟨I.cocomplex.liftCycles k 2 (by simp) hk, I.cocomplex.liftCycles_i _ _ _ _⟩
+  obtain ⟨k', hki⟩ := hk'
+  have hb' : b ≫ k' = h ≫ I.cocomplex.toCycles 0 1 := by
+    apply (cancel_mono (I.cocomplex.iCycles 1)).mp
+    rw [Category.assoc, hki, Category.assoc, I.cocomplex.toCycles_i, hb]
+  have hsign : I.extMk k 2 rfl hk = -relativeExtension i P :=
+    (extMk_of_extension_lift I a b hab hE _
+      (resolutionLiftSequence_shortExact T I) h k ha hb hk).trans
+        (congrArg Neg.neg hβ.symm)
+  let s := k'.hom.app (op (Scheme.Etale.mk (𝟙 T)))
+    ((supportedIntegralUnit i).hom.app (op (Scheme.Etale.mk (𝟙 T))) (supportedIntegralOne T))
+  let Q := Sheaf.Torsor.lifts (G := G) hT (resolutionLiftSequence_shortExact T I) s
+  have hs (V : T.Etaleᵒᵖ) (t : P.1.sheaf.obj.obj V) :
+      (I.cocomplex.toCycles 0 1).hom.app V (h.hom.app V (f.app V t)) =
+        (I.cocomplex.cycles 1).obj.map (hT.from V.unop).op s := by
+    have hn := ConcreteCategory.congr_hom (k'.hom.naturality (hT.from V.unop).op)
+      ((supportedIntegralUnit i).hom.app (op (Scheme.Etale.mk (𝟙 T)))
+        (supportedIntegralOne T))
+    have hp := integerSectionEquiv_restrict T (I.cocomplex.cycles 1)
+      (supportedIntegralUnit i ≫ k') V
+    rw [integerSectionEquiv_eval] at hp
+    have he := congrArg (fun l ↦ l.hom.app V (f.app V t)) hb'
+    change k'.hom.app V (b.hom.app V (f.app V t)) = _ at he
+    rw [hfb] at he
+    exact he.symm.trans hp
+  let μ : P.1.sheaf ⟶ Q.sheaf := ⟨{
+    app V := TypeCat.ofHom fun t ↦ ⟨h.hom.app V (f.app V t), hs V t⟩
+    naturality V W l := by
+      ext t
+      apply Subtype.ext
+      have hh := ConcreteCategory.congr_hom (h.hom.naturality l) (f.app V t)
+      simp only [ConcreteCategory.comp_apply] at hh
+      change h.hom.app W (f.app W (P.1.sheaf.obj.map l t)) =
+        (I.cocomplex.X 0).obj.map l (h.hom.app V (f.app V t))
+      exact (congrArg (h.hom.app W)
+        (ConcreteCategory.congr_hom (f.naturality l) t)).trans hh }⟩
+  let ε : P.1.Iso Q := Sheaf.Torsor.Iso.ofHom μ (fun V g t ↦ by
+    apply Subtype.ext
+    change h.hom.app V (f.app V (P.1.vadd V g t)) =
+      h.hom.app V (f.app V t) + (I.ι.f 0).hom.app V g
+    exact (congrArg (h.hom.app V) (hfa V g t)).trans
+      ((map_add (h.hom.app V).hom _ _).trans
+        (congrArg (h.hom.app V (f.app V t) + ·)
+          (congrArg (fun l ↦ l.hom.app V g) ha))))
+  have hz' : ∃ z : ResolutionFramedLift T U I,
+      relativeTorsorEquiv T U I (Quotient.mk _ P) = relativeFrameClass T U I z ∧
+        z.1 = s ∧ (show (I.cocomplex.X 0).obj.obj (op U) from z.2.1) = 0 := by
+    refine ⟨⟨s, ε.iso.hom.hom.app (op U) P.2⟩,
+      relativeTorsorEquiv_presentation T U I P s ε, rfl, ?_⟩
+    change h.hom.app (op U) (f.app (op U) P.2) = 0
+    exact (congrArg (h.hom.app (op U)) hfτ).trans (map_zero _)
+  obtain ⟨z, hPz, hzs, hz⟩ := hz'
+  have hzi : (relativeSectionComplex T U I.cocomplex).iCycles 1
+      (relativeFrameCycle T U I z) = relativeFrameElement T U I z := by
+    unfold relativeFrameCycle
+    rw [← ConcreteCategory.comp_apply, HomologicalComplex.cyclesIsoSc'_inv_iCycles]
+    exact ShortComplex.abCyclesIso_inv_apply_iCycles _ _
+  have hn := (Classical.choose_spec (relativeExtensionComparison_existsUnique i G I)).1.onCocycle
+    1 k hk (relativeFrameCycle T U I z)
+  have hfst : (relativeForgetComplex T U I.cocomplex).f 1
+      ((relativeSectionComplex T U I.cocomplex).iCycles 1 (relativeFrameCycle T U I z)) =
+      (HomologicalComplex.extendXIso
+        (((etaleSectionFunctor (Scheme.Etale.mk (𝟙 T))).mapHomologicalComplex (.up ℕ)).obj
+          I.cocomplex) ComplexShape.embeddingUpNat (rfl : (1 : ℤ) = 1)).inv
+        (k.hom.app (op (Scheme.Etale.mk (𝟙 T)))
+          ((supportedIntegralUnit i).hom.app (op (Scheme.Etale.mk (𝟙 T)))
+            (supportedIntegralOne T))) := by
+    apply (HomologicalComplex.extendXIso
+      (((etaleSectionFunctor (Scheme.Etale.mk (𝟙 T))).mapHomologicalComplex (.up ℕ)).obj
+        I.cocomplex) ComplexShape.embeddingUpNat
+        (rfl : (1 : ℤ) = 1)).addCommGroupIsoToAddEquiv.injective
+    let e := HomologicalComplex.extendXIso
+      (((etaleSectionFunctor (Scheme.Etale.mk (𝟙 T))).mapHomologicalComplex
+        (.up ℕ)).obj I.cocomplex) ComplexShape.embeddingUpNat (rfl : (1 : ℤ) = 1)
+    change e.hom ((relativeForgetComplex T U I.cocomplex).f 1
+      ((relativeSectionComplex T U I.cocomplex).iCycles 1
+        (relativeFrameCycle T U I z))) = e.hom (e.inv _)
+    rw [Iso.inv_hom_id_apply]
+    change ((relativeForgetComplex T U I.cocomplex).f 1 ≫ e.hom)
+      ((relativeSectionComplex T U I.cocomplex).iCycles 1 (relativeFrameCycle T U I z)) = _
+    erw [relativeForget_fst]
+    rw [hzi]
+    have he := CategoryTheory.Iso.inv_hom_id_apply
+      (relativeDegreeIso T U I.cocomplex 0)
+      ((I.cocomplex.iCycles 1).hom.app (op (Scheme.Etale.mk (𝟙 T))) z.1,
+        -(show (I.cocomplex.X 0).obj.obj (op U) from z.2.1))
+    change (Prod.fst ((relativeDegreeIso T U I.cocomplex 0).hom
+      ((relativeDegreeIso T U I.cocomplex 0).inv _))) = _
+    rw [he]
+    change (I.cocomplex.iCycles 1).hom.app (op (Scheme.Etale.mk (𝟙 T))) z.1 = _
+    exact (congrArg ((I.cocomplex.iCycles 1).hom.app
+      (op (Scheme.Etale.mk (𝟙 T)))) hzs).trans
+      (congrArg (fun l ↦ l.hom.app (op (Scheme.Etale.mk (𝟙 T)))
+        ((supportedIntegralUnit i).hom.app (op (Scheme.Etale.mk (𝟙 T)))
+          (supportedIntegralOne T))) hki)
+  have hsnd : (((CochainComplex.mappingCone
+      (relativeSectionRestriction T U I.cocomplex)).shiftFunctorObjXIso
+      (-1) (1 : ℤ) (1 + -1) rfl).hom ≫
+      homotopyCofiber.sndX (relativeSectionRestriction T U I.cocomplex) (1 + -1))
+      ((relativeSectionComplex T U I.cocomplex).iCycles 1 (relativeFrameCycle T U I z)) = 0 := by
+    rw [hzi]
+    dsimp only [relativeFrameElement]
+    change (homotopyCofiber.sndX (relativeSectionRestriction T U I.cocomplex) 0)
+      ((relativeDegreeIso T U I.cocomplex 0).inv
+        (_, -(show (I.cocomplex.X 0).obj.obj (op U) from z.2.1))) = 0
+    rw [hz, neg_zero]
+    let C := ((etaleSectionFunctor U).mapHomologicalComplex (.up ℕ)).obj I.cocomplex
+    let a := (I.cocomplex.iCycles 1).hom.app (op (Scheme.Etale.mk (𝟙 T))) z.1
+    have hs : relativeSnd T U I.cocomplex 0
+        ((relativeDegreeIso T U I.cocomplex 0).inv (a, 0)) = 0 := by
+      change Prod.snd ((relativeDegreeIso T U I.cocomplex 0).hom
+        ((relativeDegreeIso T U I.cocomplex 0).inv (a, 0))) = 0
+      exact congrArg Prod.snd
+        (Iso.inv_hom_id_apply (relativeDegreeIso T U I.cocomplex 0) (a, 0))
+    have he := congrArg (fun f ↦ f ((relativeDegreeIso T U I.cocomplex 0).inv (a, 0)))
+      (coneSecondCoordinate T U I.cocomplex 0)
+    apply (C.extendXIso ComplexShape.embeddingUpNat
+      (rfl : (0 : ℤ) = 0)).addCommGroupIsoToAddEquiv.injective
+    exact (he.symm.trans hs).trans (map_zero _).symm
+  have hn' := hn hfst hsnd
+  change relativeExtensionComparison i G I 1 (I.extMk k 2 rfl hk) = _ at hn'
+  rw [hsign, map_neg] at hn'
+  change -relativeExtensionComparison i G I 1 (relativeExtension i P) =
+    relativeFrameClass T U I z at hn'
+  rw [hPz]
+  exact neg_eq_iff_eq_neg.mp hn'
+
+set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency false in
