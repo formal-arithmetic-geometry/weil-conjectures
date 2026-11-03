@@ -800,6 +800,7 @@ private def ExceptionalKey : Prop :=
         (constantModelBoundedConstructible Λ Z.left ⊓
           _root_.DerivedCategory.finiteTorAmplitude _) (H.obj N).obj
 
+omit [IsProper (Over.Hom.left g)] in
 /-- The data for `E` and `Q̄_ℓ`, from Brown representability and the rational restriction
 theorem alone (blueprint: sk-thm-restriction). -/
 private theorem exceptionalKey_rational
