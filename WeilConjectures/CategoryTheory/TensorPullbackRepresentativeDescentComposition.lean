@@ -31,6 +31,13 @@ variable {KY : Type u₁} {KX : Type u₂} {KZ : Type u₃} {DY : Type u₄} {DX
   [Category.{v₄} DY] [Category.{v₅} DX] [Category.{v₆} DZ]
 
 /-- The pointwise composition law of descended tensor comparisons on representatives.
+For representatives `X`, `Y` and `A = qY X`, `B = qY Y`, the following square commutes:
+```
+  Lhf(A ⊗ B) ──────── σhf ────────→ Lhf A ⊗ Lhf B
+      │ μ                                 │ μ ⊗ μ
+      ↓                                   ↓
+  Lh Lf(A ⊗ B) ─ Lh σf → Lh(Lf A ⊗ Lf B) ─ σh → Lh Lf A ⊗ Lh Lf B
+```
 Source: Stacks 07A4 and 0D6D (auxiliary; not a blueprint node).
 Proof: precompose with the source tensor identification and postcompose with the
 invertible comparisons of the two inputs. Both sides then become the localization of
@@ -148,6 +155,13 @@ theorem tensorComparisonDescent_comp_app
 
 /-- Descended tensor comparisons satisfy the composition law with the descended
 compositor, at every pair of derived objects.
+For all `A B : DY` the following square commutes:
+```
+  Lhf(A ⊗ B) ──────── σhf ────────→ Lhf A ⊗ Lhf B
+      │ μ                                 │ μ ⊗ μ
+      ↓                                   ↓
+  Lh Lf(A ⊗ B) ─ Lh σf → Lh(Lf A ⊗ Lf B) ─ σh → Lh Lf A ⊗ Lh Lf B
+```
 Source: Stacks 07A4 and 0D6D (auxiliary; not a blueprint node).
 Proof: both sides are components of natural transformations between the same functors
 on pairs of derived objects. Restriction along the localization of pairs of
@@ -210,8 +224,17 @@ theorem tensorComparisonDescent_comp
       hFf hFh hFhf tY tX tZ TY TX TZ rY rX rZ bf bh bhf σf σh σhf hσf hσh hσhf m μ hμ hm
       hεf hεh X Y hx hy
   exact congrArg (fun N ↦ N.app (A, B)) hN
+
 /-- Transport of a descent square along identifications `F' ≅ F` of representative
 functors and `L' ≅ L` of derived functors compatible with the factorizations.
+Writing `σ_b` for `σ` conjugated by `b` and `c_p` for `c` conjugated by `p`, the
+conclusion is the commutative square
+```
+  L qY(P ⊗ Q) ─ L mY → L(qY P ⊗ qY Q) ── σ_b ──→ L qY P ⊗ L qY Q
+      │ ε                                              │ ε ⊗ ε
+      ↓                                                ↓
+  qX F(P ⊗ Q) ─ qX c_p → qX(F P ⊗ F Q) ─── mX ──→ qX F P ⊗ qX F Q
+```
 Source: Stacks 07A4 (auxiliary; not a blueprint node).
 Proof: rewrite the transported comparison through the two bridges, move the bridges
 across the source model by naturality and across the target model by its naturality,
