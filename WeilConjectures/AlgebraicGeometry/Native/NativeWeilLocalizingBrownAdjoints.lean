@@ -15,6 +15,7 @@ public import Mathlib.CategoryTheory.Triangulated.Opposite.Pretriangulated
 public import Mathlib.CategoryTheory.Idempotents.Basic
 import WeilConjectures.AlgebraicGeometry.Native.NativeAdicCompactSupportSums
 import WeilConjectures.AlgebraicGeometry.NativeWeilInduction.NativeWeilDerivedInductionComparison
+import WeilConjectures.AlgebraicGeometry.NativeWeilInduction.NativeWeilHeartProperties
 import WeilConjectures.CategoryTheory.SmoothPurity.CountableCoproductsIdempotentComplete
 import WeilConjectures.CategoryTheory.SixFunctors.SetGeneratedDerivedSolutionSet
 import WeilConjectures.CategoryTheory.SixFunctors.CohomologicalSolutionSetRepresentability
@@ -523,6 +524,8 @@ theorem nativeWeil_localizing_brown_adjoints
   have : QuasiCompact (Yb ↘ Spec (CommRingCat.of (AlgebraicClosure k₀))) := by
     change QuasiCompact (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure
     infer_instance
+  have : IsSeparated (Yb ↘ Spec (CommRingCat.of (AlgebraicClosure k₀))) :=
+    MorphismProperty.pullback_snd _ _ inferInstance
   obtain ⟨h, htri, hsum⟩ :=
     ProEtale.nativeAdicCompactSupport_localizing_preservesCoproducts
       k₀ (AlgebraicClosure k₀) l (Fact.out : ringChar k₀ ≠ l) fb cb
