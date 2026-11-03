@@ -201,7 +201,7 @@ private theorem finite_field_tor
 
 section Finiteness
 variable (ℓ : ℕ) [Fact ℓ.Prime]
-  {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+  {k : Type u} [Field k] [Fact (ringChar k ≠ ℓ)]
   {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
@@ -214,13 +214,9 @@ private instance target_noetherian : IsNoetherian Y.left :=
 
 include ℓ k
 
-private theorem ell_unit : IsUnit (ℓ : k) := by
-  apply isUnit_iff_ne_zero.mpr
-  intro h
-  have hdvd := (CharP.cast_eq_zero_iff k (ringChar k) ℓ).mp h
-  rcases (Nat.dvd_prime (Fact.out : ℓ.Prime)).mp hdvd with he | he
-  · exact (Fact.out : (ringChar k).Prime).ne_one he
-  · exact (Fact.out : ringChar k ≠ ℓ) he
+private theorem ell_unit : IsUnit (ℓ : k) :=
+  isUnit_iff_ne_zero.mpr (CharP.cast_ne_zero_of_ne_of_prime k (p := ringChar k)
+    (Fact.out : ℓ.Prime) (Fact.out : ringChar k ≠ ℓ))
 
 set_option linter.unusedSectionVars false in
 private theorem finite_etale (f : X ⟶ Y)
@@ -493,7 +489,7 @@ Deligne's finiteness theorems, in the namespaces of upstream's per-ring operatio
 section SingleConstructible
 
 variable (ℓ : ℕ) [Fact ℓ.Prime]
-  {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+  {k : Type u} [Field k] [Fact (ringChar k ≠ ℓ)]
   {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]

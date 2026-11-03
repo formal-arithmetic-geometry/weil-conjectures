@@ -125,6 +125,7 @@ variable {X Y : Over (Spec (.of k))}
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (f : X ⟶ Y)
 
+omit [Fact (ringChar k).Prime] in
 /-- **Deligne's finiteness theorem** for `Rf_*` (blueprint `lem-sfb-dc-lower-star-preserves`;
 part of blueprint `sk-def-sfb-dc-restricted-functors`): for `ℓ` invertible in `k`, the
 derived pushforward along a morphism of separated `k`-schemes of finite type carries bounded
@@ -212,6 +213,7 @@ variable {X Y : Over (Spec (.of k))}
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (f : X ⟶ Y)
 
+omit [Fact (ringChar k).Prime] in
 /-- **Deligne's finiteness theorem** for `Rf_*`: for `ℓ` invertible in `k`, the
 derived pushforward along a morphism of separated `k`-schemes of finite type carries bounded
 constructible complexes of `E`-sheaves to bounded constructible complexes (SGA 4½ [Th. finitude] for
@@ -308,6 +310,7 @@ variable {X Y : Over (Spec (.of k))}
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (f : X ⟶ Y)
 
+omit [Fact (ringChar k).Prime] in
 /-- **Deligne's finiteness theorem** for `Rf_*`: for `ℓ` invertible in `k`, the
 derived pushforward along a morphism of separated `k`-schemes of finite type carries bounded
 constructible complexes of `𝒪_E`-sheaves to bounded constructible complexes (SGA 4½ [Th. finitude]
@@ -607,6 +610,7 @@ variable (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.h
 
 -- An instance keeps only the section variables its statement and proof mention, so its
 -- hypotheses are restated as binders; they repeat section variables.
+omit [Fact (ringChar k).Prime] in
 set_option linter.overlappingInstances false in
 /-- Blueprint `lem-sfb-dc-hom-preserves`: the bounded constructible complexes of `ℚ̄_ℓ`-sheaves
 are stable under the derived hom
@@ -675,6 +679,7 @@ variable (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.h
 
 -- An instance keeps only the section variables its statement and proof mention, so its
 -- hypotheses are restated as binders; they repeat section variables.
+omit [Fact (ringChar k).Prime] in
 set_option linter.overlappingInstances false in
 /-- The bounded constructible complexes of `E`-sheaves are stable under the derived hom
 `RHom(-, -)`, the internal hom of `D(Mod_{E_X})` (SGA 4½ [Th. finitude], 1.6;
@@ -746,6 +751,7 @@ variable (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.h
 
 -- An instance keeps only the section variables its statement and proof mention, so its
 -- hypotheses are restated as binders; they repeat section variables.
+omit [Fact (ringChar k).Prime] in
 set_option linter.overlappingInstances false in
 /-- The bounded constructible complexes of `𝒪_E`-sheaves are stable under the derived hom
 `RHom(-, -)`, the internal hom of `D(Mod_{𝒪_{E,X}})` (SGA 4½ [Th. finitude],

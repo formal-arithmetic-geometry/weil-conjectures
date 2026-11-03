@@ -12,8 +12,40 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColim
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleLowerStar
 
 /-!
-# Finiteness for the pushforward of constructible `ℓ`-adic sheaves, by comparison of models
+# Finiteness for the pushforward of constructible `ℓ`-adic sheaves
+
+Let `K` be an algebraically closed field of characteristic different from `ℓ`, `Y` a scheme
+locally of finite type over `K` and `f : X ⟶ Y` a quasi-compact, quasi-separated morphism
+locally of finite type. The *finiteness theorem* (SGA 4½, *Th. finitude*, Th. 1.1, with
+`ℓ`-adic coefficients as in Bhatt–Scholze, *The pro-étale topology for schemes*, §6.8; blueprint
+`det-thm-sf-ctf-stability-direct-images` (3), the `ℚ̄_ℓ` stage of `sk-prop-sf-finiteness`)
+asserts that for a constructible `ℓ`-adic sheaf `F` on `X_proét`:
+
+- the pushforward `f_* F` is constructible
+  (`AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf.lowerStar`);
+- every higher direct image `Rⁿf_* F` is constructible
+  (`AlgebraicGeometry.ProEtale.isAdicConstructibleSheaf_homology_rightDerivedFunctor_lowerStar`);
+- if moreover `Y` is quasi-compact, then `Rf_*(F[0])` is bounded
+  (`AlgebraicGeometry.ProEtale.bounded_rightDerivedFunctor_lowerStar`,
+  `AlgebraicGeometry.ProEtale.finiteLowerStar_singleFunctor`).
+
+## Proof
+
+The case of an affine source and an affine target,
+`AlgebraicGeometry.ProEtale.finiteLowerStar_singleFunctor_of_isAffine`, is deduced from Deligne's
+finiteness theorem for module objects over the condensed coefficient ring `ℚ̲̄_ℓ`
+(`AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_rightDerivedLowerStar_obj`),
+through the equivalence `AdicSheaf ℓ X ≌ Mod_{ℚ̲̄_ℓ,X}`
+(`AlgebraicGeometry.ProEtale.adicSheafEquivCondensedMod`). This equivalence commutes with the
+derived pushforward (`AlgebraicGeometry.ProEtale.adicRightDerivedLowerStarCompIso`) and with the
+cohomology sheaves, and it matches the two notions of constructibility
+(`WeilConjectures.SixFunctors.ProEtale.Adic.CondensedModelConstructible`). The general case
+follows by the reductions of `WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar`.
+
+These results are in a separate file from those reductions because the condensed finiteness
+theorem imports `WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar`.
 -/
+
 
 @[expose] public section
 
@@ -56,19 +88,26 @@ section Finiteness
 variable {K : Type u} [Field K] [IsAlgClosed K] {X Y : Scheme.{u}}
   (s : Y ⟶ Spec (.of K)) (f : X ⟶ Y)
 
-omit [IsAlgClosed K] in
-/-- The positive characteristic case of
-`AlgebraicGeometry.ProEtale.finiteLowerStar_singleFunctor_of_isAffine`, by comparison with the
-module objects over `ℚ̲̄_ℓ`. -/
-theorem finiteLowerStar_singleFunctor_of_isAffine_of_charP [Fact (ringChar K).Prime]
-    [Fact (ringChar K ≠ l)] [LocallyOfFiniteType s]
+-- The statement keeps the standing hypothesis that `K` is algebraically closed; the comparison
+-- with module objects over `ℚ̲̄_ℓ` only uses that `ℓ` is invertible in `K`.
+set_option linter.unusedSectionVars false in
+/-- **Finiteness for the derived pushforward of a constructible `ℓ`-adic sheaf, affine case**
+(SGA 4½, *Th. finitude*): over an algebraically closed field of characteristic `≠ ℓ`, the
+derived pushforward `Rg_* F` of a constructible `ℓ`-adic sheaf along a morphism `g` locally of
+finite type between affine schemes, with target of finite type, is bounded with constructible
+cohomology sheaves `Rⁿg_* F`. This is the affine `ℚ̄_ℓ` case of clause (3) of blueprint
+`det-thm-sf-ctf-stability-direct-images` (subsection `sk-thm-sf-ctf-stability`: `Rf_*`
+preserves `Dᵇc(-, ℚ̄_ℓ)`); blueprint `sk-prop-sf-finiteness` is the finite-coefficient case. -/
+theorem finiteLowerStar_singleFunctor_of_isAffine (hK : ringChar K ≠ l) [LocallyOfFiniteType s]
     [IsAffine Y] {T : Scheme.{u}} [IsAffine T] (g : T ⟶ Y) [LocallyOfFiniteType g]
     {F : AdicSheaf l T} (hF : IsAdicConstructibleSheaf F) :
     finiteLowerStar l g ((DerivedCategory.singleFunctor _ 0).obj F) := by
+  have : Fact (ringChar K ≠ l) := ⟨hK⟩
   have : IsLocallyNoetherian Y := LocallyOfFiniteType.isLocallyNoetherian s
   have : IsLocallyNoetherian T := LocallyOfFiniteType.isLocallyNoetherian (g ≫ s)
   have : IsNoetherian Y := {}
   have : IsNoetherian T := {}
+  -- `g` as a morphism of affine, hence separated and quasi-compact, `K`-schemes of finite type
   let X' : Over (Spec (.of K)) := Over.mk (g ≫ s)
   let Y' : Over (Spec (.of K)) := Over.mk s
   let f' : X' ⟶ Y' := Over.homMk g
@@ -78,6 +117,7 @@ theorem finiteLowerStar_singleFunctor_of_isAffine_of_charP [Fact (ringChar K).Pr
   have : QuasiCompact Y'.hom := inferInstanceAs (QuasiCompact s)
   have : IsSeparated X'.hom := inferInstanceAs (IsSeparated (g ≫ s))
   have : IsSeparated Y'.hom := inferInstanceAs (IsSeparated s)
+  -- `F[0]` is bounded constructible in the condensed model, hence so is its pushforward
   have hM : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj.{u} l) T)
       ((adicSheafDerivedEquivCondensedMod l T).functor.obj
         ((DerivedCategory.singleFunctor _ 0).obj F)) :=
@@ -89,24 +129,6 @@ theorem finiteLowerStar_singleFunctor_of_isAffine_of_charP [Fact (ringChar K).Pr
   exact bounded_homologyProperty_of_boundedConstructible
     ((boundedConstructible _).prop_of_iso
       ((adicRightDerivedLowerStarCompIso (l := l) (X := Y) g).app _).symm h)
-
-/-- **Finiteness for the derived pushforward of a constructible `ℓ`-adic sheaf, affine case**
-(SGA 4½, *Th. finitude*): over an algebraically closed field of characteristic `≠ ℓ`, the
-derived pushforward `Rg_* F` of a constructible `ℓ`-adic sheaf along a morphism `g` locally of
-finite type between affine schemes, with target of finite type, is bounded with constructible
-cohomology sheaves `Rⁿg_* F`. This is the affine `ℚ̄_ℓ` case of clause (3) of blueprint
-`det-thm-sf-ctf-stability-direct-images` (subsection `sk-thm-sf-ctf-stability`: `Rf_*`
-preserves `Dᵇc(-, ℚ̄_ℓ)`); blueprint `sk-prop-sf-finiteness` is the finite-coefficient case. -/
-theorem finiteLowerStar_singleFunctor_of_isAffine (hK : ringChar K ≠ l) [LocallyOfFiniteType s]
-    [IsAffine Y] {T : Scheme.{u}} [IsAffine T] (g : T ⟶ Y) [LocallyOfFiniteType g]
-    {F : AdicSheaf l T} (hF : IsAdicConstructibleSheaf F) :
-    finiteLowerStar l g ((DerivedCategory.singleFunctor _ 0).obj F) :=
-  by
-  obtain hp | h0 := CharP.char_is_prime_or_zero K (ringChar K)
-  · have : Fact (ringChar K).Prime := ⟨hp⟩
-    have : Fact (ringChar K ≠ l) := ⟨hK⟩
-    exact finiteLowerStar_singleFunctor_of_isAffine_of_charP s g hF
-  · sorry
 
 
 /-- **Finiteness over an affine target** (SGA 4½, *Th. finitude*): the case of a quasi-compact

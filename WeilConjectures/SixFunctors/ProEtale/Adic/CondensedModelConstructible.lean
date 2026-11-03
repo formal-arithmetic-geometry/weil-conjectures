@@ -21,8 +21,8 @@ agree on a noetherian scheme:
 
 - `AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf.isConstructibleModuleObject`: on a
   quasi-compact quasi-separated scheme, a constructible `ℓ`-adic sheaf `F` is stratified lisse,
-  and on each stratum `E(F)` is locally free (`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.isLocallyFree`),
-  hence locally finitely presented;
+  and on each stratum `E(F)` is locally free
+  (`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.isLocallyFree`), hence locally finitely presented;
 - `AlgebraicGeometry.ProEtale.isAdicLisseSheaf_of_isLocallyFinitelyPresented`: on a scheme with
   noetherian underlying space, a locally finitely presented module object over `ℚ̲̄_ℓ` is
   pro-étale locally free (`AlgebraicGeometry.ProEtale.condensedQbar_lfp_locally_free`), so the
