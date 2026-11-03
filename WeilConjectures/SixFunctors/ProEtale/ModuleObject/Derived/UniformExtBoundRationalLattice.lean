@@ -9,6 +9,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Construc
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UniformExtBoundPadicAlgCl
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UniformExtBoundRational
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LisseLattice
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyFreeConstructible
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyFreeOfFinitelyPresentedField
 
 /-!
 # The uniform `Ext` bound for constructible `E`-sheaves, from `𝒪_E`, by dévissage

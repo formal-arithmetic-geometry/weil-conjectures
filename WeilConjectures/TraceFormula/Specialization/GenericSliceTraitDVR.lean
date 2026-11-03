@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.TraceFormula.Specialization.GenericSlicePoint
 public import Mathlib.RingTheory.DiscreteValuationRing.Basic
-public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationLocal
 import WeilConjectures.AlgebraicGeometry.StrictHenselizationLocalPresentation
 import WeilConjectures.Mathlib.RingTheory.DiscreteValuationRing.TFAE
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs

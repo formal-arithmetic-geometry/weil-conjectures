@@ -9,7 +9,6 @@ public import WeilConjectures.NumberTheory.Padics.IntegersShrinkModPow
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralFlatOfAlgebra
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushResidueInputsAcyclic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.TorsionFreeResolutionProEtale
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushResidueIsoCriterion
 
 /-!
 # The derived (Push) comparison along `𝒪_E ⟶ 𝔽_E`

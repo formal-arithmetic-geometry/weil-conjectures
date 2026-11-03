@@ -4,8 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
+public import WeilConjectures.AlgebraicGeometry.ConstantModelTorAmplitude
 public import WeilConjectures.SixFunctors.ProEtale.DerivedCompletion
-public import WeilConjectures.AlgebraicGeometry.CondensedConstantConstructibility
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 import WeilConjectures.AlgebraicGeometry.CohomologyTorInterval
 import all WeilConjectures.AlgebraicGeometry.IntegralConstantModelHeartClosure
 import WeilConjectures.AlgebraicGeometry.IntegralModelsStacks

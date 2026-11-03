@@ -8,7 +8,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.ClosedPoints.GlobalGeneration
 public import WeilConjectures.AlgebraicGeometry.Sites.FilteredColimitSections
 public import WeilConjectures.AlgebraicGeometry.ClosedPointResidueField
-public import WeilConjectures.SixFunctors.Etale.Derived.Stalks.Support
+public import WeilConjectures.AlgebraicGeometry.Sites.UpperStarSections
 
 /-!
 # Étale sheaves supported on the closed points

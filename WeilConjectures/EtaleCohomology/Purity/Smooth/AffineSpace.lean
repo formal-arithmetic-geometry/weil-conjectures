@@ -5,9 +5,12 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Compactification.Affine
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLine
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Coprojection
-public import WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion
+public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientsShift
+public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekIso
 
 /-!
 # `𝔸¹ ⇒ 𝔸ⁿ`: the model purity

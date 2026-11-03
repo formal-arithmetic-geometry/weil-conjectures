@@ -9,7 +9,6 @@ public import WeilConjectures.Compactification.CommonRefinement
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
 public import WeilConjectures.TraceFormula.Specialization.TraitModelGenericSpec
-public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethGlobal
 
 /-!
 

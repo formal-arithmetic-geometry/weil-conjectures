@@ -10,11 +10,7 @@ public import WeilConjectures.ConstructibleSheaf.GenericConstancy
 public import WeilConjectures.ConstructibleSheaf.Pullback
 public import WeilConjectures.SixFunctors.Etale.Derived.LeftDerivedUpperStarSingle
 public import WeilConjectures.SixFunctors.Etale.Derived.LocallyConstantInvertible
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCompositionCoherence
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarInternalHom
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekInvertible
-public import WeilConjectures.SixFunctors.Etale.Derived.EtaleLocalization
-public import WeilConjectures.SixFunctors.Etale.Derived.Composition
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMapsComposition
 
 /-!
 # Smooth duality is local: descent and composition

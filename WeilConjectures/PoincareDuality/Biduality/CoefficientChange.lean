@@ -10,7 +10,6 @@ public import WeilConjectures.PoincareDuality.Biduality.CoefficientChangeBraided
 public import WeilConjectures.PoincareDuality.Biduality.Integral
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IhomCompatibility
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.UpperShriekCompatibilityProper
-public import WeilConjectures.PoincareDuality.Verdier
 
 /-!
 # Biduality along the coefficient change `𝒪_E ⟶ ℚ̄_ℓ`

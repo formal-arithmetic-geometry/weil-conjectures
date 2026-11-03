@@ -8,7 +8,10 @@ module
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineAcyclicDVR
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineAcyclicStrictlyLocal
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineAcyclicityStalk
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.GmRelativeKummer
 public import WeilConjectures.EtaleCohomology.TateTwist.AffineLineDescentKummer
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ProperProjectionFormula
+public import WeilConjectures.ConstructibleSheaf.Pullback
 
 /-!
 # Acyclicity of the affine line over an arbitrary base

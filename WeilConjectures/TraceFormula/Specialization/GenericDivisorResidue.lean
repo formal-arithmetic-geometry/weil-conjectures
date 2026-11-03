@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Reduction
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorLisseLocus
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorResidueLisse
 

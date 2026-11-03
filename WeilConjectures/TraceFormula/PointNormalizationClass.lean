@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.Monoidal.ClassTransport
+public import WeilConjectures.PoincareDuality.ProjectionFormulaCoherence
 public import WeilConjectures.TraceFormula.PointNormalizationReduction
 
 /-!

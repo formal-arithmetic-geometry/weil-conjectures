@@ -6,6 +6,10 @@ Authors: Claude
 module
 
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineCohomology
+public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.TraceDiagonal.Basic
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMaps
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.RelativeMap
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.ProjectiveLineDiagonalGysinSwap
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.ProjectiveLineKernelBraiding
 

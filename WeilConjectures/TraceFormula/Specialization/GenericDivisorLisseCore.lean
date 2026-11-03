@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.TraceFormula.Specialization.GenericDivisorGenericPoint
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorIntegral
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorLisse
 

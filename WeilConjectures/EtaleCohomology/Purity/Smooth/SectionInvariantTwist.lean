@@ -5,7 +5,10 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpace
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.CohomologicalSmoothness
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.Coprojection
+public import WeilConjectures.SixFunctors.Etale.Derived.Composition
 public import WeilConjectures.SixFunctors.Etale.Derived.Identity
 
 /-!

@@ -5,9 +5,18 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicIntegralModel
 public import WeilConjectures.SixFunctors.NearbyCycles.ExtendScalars
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChangeIntegralRational
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.SmoothPadicAlgCl
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.OpenImmersion
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushIntegralDerivedIso
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushPadicSubfieldFinite
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushResidueFinal
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ReductionConstructible
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorResidue
+public import WeilConjectures.TraceFormula.Specialization.NormalizePrecoherent
 
 /-!
 

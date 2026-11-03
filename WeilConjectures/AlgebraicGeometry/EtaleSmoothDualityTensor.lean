@@ -5,13 +5,13 @@ Authors: Bin Wu
 -/
 module
 
+public import WeilConjectures.ConstructibleSheaf.Defs
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMaps
-public import WeilConjectures.AlgebraicGeometry.SfEtaleAmbientAdjointProjection
 import WeilConjectures.AlgebraicGeometry.SfAffineLineCanonicalDuality
 import WeilConjectures.AlgebraicGeometry.SfEtaleUnitTensorArbitraryBase
 import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.AffineSpace
-import WeilConjectures.AlgebraicGeometry.FiniteEtaleTwistLine
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionExchange
 
 /-!
 # Smooth duality from the étale and affine-line cases

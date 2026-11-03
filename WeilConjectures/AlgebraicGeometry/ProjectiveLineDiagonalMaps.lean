@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import WeilConjectures.AlgebraicGeometry.OrdinarySupportedKummerSystem
+public import WeilConjectures.AlgebraicGeometry.OrdinarySupportedCartierKummer
 /-!
 Source: blueprint thm-amb-p1-adjunction.proof.md.
 (auxiliary; not a blueprint node).

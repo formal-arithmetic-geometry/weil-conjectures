@@ -5,9 +5,6 @@ Authors: Claude
 -/
 module
 
--- Imported first: the instance order it gives keeps the elaboration of
--- `zeroSectionNearbyCyclesUpperStarIso` within the default heartbeats.
-public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethGlobal  -- shake: keep
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorLisse
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorLocal
 public import WeilConjectures.TraceFormula.Specialization.OpenExchange

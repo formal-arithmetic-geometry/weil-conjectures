@@ -6,8 +6,11 @@ Authors: Claude
 module
 
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.CohomologyHom
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerOrientation
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerClassGenerator
 public import WeilConjectures.SixFunctors.Etale.SupportCohomologyHom
+public import WeilConjectures.SixFunctors.Finite.Exact
+public import WeilConjectures.SixFunctors.Etale.Derived.AlgClosedField
 
 /-!
 # Cohomology with supports and the exceptional inverse image of a closed immersion

@@ -6,7 +6,10 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.Specialization.GenericSliceTraitGaloisLayerIntegral
+public import WeilConjectures.TraceFormula.Specialization.GenericSliceTraitExists
+public import WeilConjectures.TraceFormula.Specialization.GenericSliceTraitUnramified
 public import WeilConjectures.TraceFormula.Specialization.NearbyFinitenessPadicAlgCl
+public import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 

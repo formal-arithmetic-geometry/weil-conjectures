@@ -6,6 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBaseSliceOpen
+public import WeilConjectures.SixFunctors.NearbyCycles.HomComp
+import WeilConjectures.Tactic.TransportExact
 
 /-!
 

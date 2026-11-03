@@ -4,9 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Claude
 -/
 module
-public import WeilConjectures.TraceFormula.Specialization.DefectExchanges
-public import WeilConjectures.TraceFormula.Specialization.DeformationSpecialFibreBaseChange
 
+public import WeilConjectures.TraceFormula.Specialization.DefectLocal
 
 /-!
 

@@ -13,7 +13,6 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
 public import WeilConjectures.AlgebraicGeometry.SectionNonvanishingZeroLocus
 public import WeilConjectures.AlgebraicGeometry.SpecAlgClosedEtaleSheafConstant
 public import WeilConjectures.CategoryTheory.RingedToposDerivedPushforwardComposition
-public import WeilConjectures.AlgebraicGeometry.OrdinarySupportedCartierKummer
 
 /-! # The two Chern components of the projective-line diagonal
 

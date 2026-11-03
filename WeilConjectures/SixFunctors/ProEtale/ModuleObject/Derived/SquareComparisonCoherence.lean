@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Localizing
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalCompDerived
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SquareComparisonBasic
 
 /-!
 # Coherence of the pullback comparisons of derived pullbacks
@@ -44,6 +43,14 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 open Scheme
 
 section Abstract
+
+/-- The components of `α ≪≫ eqToIso h ≪≫ β`. -/
+private lemma trans_eqToIso_trans_hom_app {C D : Type*} [Category C] [Category D]
+    {F F' G H : C ⥤ D} (α : G ≅ F) (h : F = F') (β : F' ≅ H) (K : C) :
+    (α ≪≫ eqToIso h ≪≫ β).hom.app K =
+      α.hom.app K ≫ eqToHom (Functor.congr_obj h K) ≫ β.hom.app K := by
+  subst h
+  simp
 
 /-- The diagram chase behind `pullbackSquareComparison_flip`. -/
 private lemma flip_aux {C : Type*} [Category C] {y₀ y₁ y₂ y₃ : C}
@@ -162,6 +169,22 @@ end Composition
 section BaseChange
 
 variable {X Y X' Y' : Scheme.{u}} {p : X ⟶ Y} {g : Y' ⟶ Y} {p' : X' ⟶ Y'} {g' : X' ⟶ X}
+
+/-- `ProEtale.CondensedRing.pullbackSquareComparison` unfolded. -/
+lemma pullbackSquareComparison_eq (sq : CommSq g' p' p g) :
+    pullbackSquareComparison Λ sq = (leftDerivedUpperStarComp Λ p' g).symm ≪≫
+      eqToIso (by rw [sq.w]) ≪≫ leftDerivedUpperStarComp Λ g' p :=
+  rfl
+
+/-- The components of the pullback comparison. -/
+lemma pullbackSquareComparison_hom_app (sq : CommSq g' p' p g)
+    (K : DerivedCategory (Mod (Sheaf (ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))) :
+    (pullbackSquareComparison Λ sq).hom.app K =
+      (leftDerivedUpperStarComp Λ p' g).inv.app K ≫
+        eqToHom (by rw [sq.w] : L((p' ≫ g)^*⟦Λ⟧).obj K = L((g' ≫ p)^*⟦Λ⟧).obj K) ≫
+        (leftDerivedUpperStarComp Λ g' p).hom.app K :=
+  (congrArg (fun θ ↦ θ.hom.app K) (pullbackSquareComparison_eq Λ sq)).trans
+    (trans_eqToIso_trans_hom_app _ _ _ K)
 
 /-- The pullback comparison of the transposed square is the inverse of the pullback
 comparison. -/

@@ -6,6 +6,11 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.ProjectiveLineAdjunction
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionExchange
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionMonoidal
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Braided
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.TensorShiftIso
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMapsCoherence
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpace
 
 /-!

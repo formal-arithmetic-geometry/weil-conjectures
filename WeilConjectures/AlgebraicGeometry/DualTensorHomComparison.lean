@@ -6,7 +6,6 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 public import WeilConjectures.AlgebraicGeometry.Modules.HomTensor.Basic
 
 /-! # Identifying the sheaf dual-tensor comparison with the categorical comparison

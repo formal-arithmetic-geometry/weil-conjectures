@@ -5,8 +5,7 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1KummerMaps
-public import WeilConjectures.AlgebraicGeometry.EtaleDiagonalSectionCoherence
-public import WeilConjectures.AlgebraicGeometry.EtaleFiniteTwistPullback
+public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteTraceCounit
 import WeilConjectures.AlgebraicGeometry.EtaleDiagonalCoefficientTriangles
 import WeilConjectures.AlgebraicGeometry.EtaleSectionUnitNormalization
 import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteDiagonalFirstCoordinateExchange

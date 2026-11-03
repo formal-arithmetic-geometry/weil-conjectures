@@ -8,6 +8,8 @@ module
 public import WeilConjectures.TraceFormula.Specialization.KernelPullback
 public import WeilConjectures.TraceFormula.Specialization.UniversalKernel
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGlobal
+public import WeilConjectures.TraceFormula.Specialization.CompactSupportExchange
+public import WeilConjectures.Tactic.FirstOrderApply
 
 /-!
 

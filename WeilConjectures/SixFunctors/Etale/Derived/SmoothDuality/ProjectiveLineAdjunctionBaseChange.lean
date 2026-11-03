@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.ProjectiveLineAdjunction
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.ProjectiveLineBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.LowerShriekTraceCounitBaseChange
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineTraceBaseChange
 
 /-!
 # The projective-line adjunction commutes with base change

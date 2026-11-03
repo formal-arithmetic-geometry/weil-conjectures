@@ -5,10 +5,14 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionUpperShriek
 public import WeilConjectures.TraceFormula.CompactCohomology
-public import WeilConjectures.TraceFormula.ClosedPieceOperator
 public import WeilConjectures.TraceFormula.OpenPieceCoherence
+public import WeilConjectures.CategoryTheory.Triangulated.TriangleMorphismExtension
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CompactlySupported
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarShift
+public import WeilConjectures.TraceFormula.CompactPullbackShift
 
 /-!
 
@@ -121,6 +125,28 @@ variable {X U Z : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact
   [IsSeparated X.hom] [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom]
   [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]
 
+variable (ℓ) in
+/-- The isomorphism `Ra_{X!} Ri_* ≅ Ra_{X!} Ri_! ≅ Ra_{Z!}` for a proper `i : Z ⟶ X`. -/
+noncomputable def boundedConstructibleLowerStarCompToPoint (i : Z ⟶ X) [IsProper i.left] :
+    boundedConstructibleLowerStar ℓ i ⋙
+        boundedConstructibleLowerShriek ℓ (toPoint X) ≅
+      boundedConstructibleLowerShriek ℓ (toPoint Z) :=
+  Functor.isoWhiskerRight (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ i).symm _ ≪≫
+    boundedConstructibleLowerShriekCompToPoint ℓ i
+
+/-- The pullback `i^♯ : Ra_{X!} ⟶ Ra_{Z!} Li^*` along a proper `i` is `Ra_{X!}` of the unit of
+`Li^* ⊣ Ri_*` followed by `Ra_{X!} Ri_* ≅ Ra_{Z!}`. -/
+lemma compactPullback_app_eq (i : Z ⟶ X) [IsProper i.left]
+    (N : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (compactPullback ℓ i).app N =
+      (boundedConstructibleLowerShriek ℓ (toPoint X)).map
+          ((boundedConstructibleUpperStarLowerStarAdjunction ℓ
+            i).unit.app N) ≫
+        (boundedConstructibleLowerStarCompToPoint ℓ i).hom.app
+          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj N) := by
+  rw [compactPullback_app, boundedConstructibleLowerStarCompToPoint, Iso.trans_hom,
+    NatTrans.comp_app, Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, Iso.symm_hom]
+
 variable {Φ : X ⟶ X} {ΦU : U ⟶ U} {ΦZ : Z ⟶ Z} {j : U ⟶ X} {i : Z ⟶ X}
   [IsOpenImmersion j.left] [IsClosedImmersion i.left] [IsFinite Φ.left]
   [IsUniversalHomeomorphism Φ.left] [IsFinite ΦU.left] [IsUniversalHomeomorphism ΦU.left]
@@ -201,6 +227,27 @@ noncomputable def compactFrobeniusOpenPiece (hj : ΦU ≫ j = j ≫ Φ)
     ((weilUpperStar ℓ ΦU Φ j hj).obj K).compactFrobenius ≫
     (boundedConstructibleLowerShriekCompToPoint ℓ j).inv.app
     ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K.carrier)
+
+variable (ℓ) in
+/-- The operator `E_Z` on `RΓ_c(X, Ri_* Li^* K)`: the compactly supported Frobenius of the
+restriction `K|_Z`, transported along `Ra_{X!} Ri_* ≅ Ra_{Z!}`. -/
+noncomputable def compactFrobeniusClosedPiece (hi : ΦZ ≫ i = i ≫ Φ)
+    (K : WeilBoundedConstructible ℓ Φ) :
+    (boundedConstructibleLowerShriek ℓ (toPoint X)).obj
+        ((boundedConstructibleLowerStar ℓ i).obj
+          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K.carrier)) ⟶
+      (boundedConstructibleLowerShriek ℓ (toPoint X)).obj
+        ((boundedConstructibleLowerStar ℓ i).obj
+          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K.carrier)) :=
+  (boundedConstructibleLowerStarCompToPoint ℓ i).hom.app
+    ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K.carrier) ≫
+    ((compactPullback ℓ ΦZ).app ((boundedConstructibleUpperStar
+      (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K.carrier) ≫
+      (boundedConstructibleLowerShriek ℓ (toPoint Z)).map
+        ((weilUpperStarComparison ℓ ΦZ Φ i hi).hom.app K.carrier ≫
+          (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).map K.str.hom)) ≫
+    (boundedConstructibleLowerStarCompToPoint ℓ i).inv.app
+    ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K.carrier)
 
 set_option maxHeartbeats 1000000 in
 -- the closed-piece operator unfolds to a long composite

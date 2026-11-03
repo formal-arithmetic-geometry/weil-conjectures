@@ -9506,7 +9506,6 @@ public import WeilConjectures.AlgebraicGeometry.ProperFibreIdempotentImage
 public import WeilConjectures.AlgebraicGeometry.ProperFibreIdempotentImageNoetherian
 public import WeilConjectures.AlgebraicGeometry.ProperFinitePresentationClosedLimit
 public import WeilConjectures.AlgebraicGeometry.ProperFinitePresentationClosedLimitEnvelope
-public import WeilConjectures.AlgebraicGeometry.ProperFiniteSectionsAffine
 public import WeilConjectures.AlgebraicGeometry.ProperFiniteTypeStage
 public import WeilConjectures.AlgebraicGeometry.ProperFlatCechModel
 public import WeilConjectures.AlgebraicGeometry.ProperFlatCohomologyData
@@ -17779,7 +17778,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.AlgClosedField
 public import WeilConjectures.SixFunctors.Etale.Derived.BaseChangeCube
 public import WeilConjectures.SixFunctors.Etale.Derived.BidualitySupport
 public import WeilConjectures.SixFunctors.Etale.Derived.BoundaryDuality
-public import WeilConjectures.SixFunctors.Etale.Derived.BoundedConstructibleIntegral
 public import WeilConjectures.SixFunctors.Etale.Derived.BoundedConstructibleUpperShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.BoundedFlatReplacement
 public import WeilConjectures.SixFunctors.Etale.Derived.ClopenTransfer
@@ -19454,7 +19452,6 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheore
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.Integral
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.MorphismDefs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.OpenImmersionBaseChange
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.ProperCompactificationIso
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.PushforwardData
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.PushforwardDataCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.PushforwardDataExchangeFormalism
@@ -19795,7 +19792,6 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunct
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.SpectralFiniteEtaleTraceLattice
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.StratifiedLattice
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SmoothPurity.SitePerfectComplex
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SquareComparisonBasic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SquareComparisonCoherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.TopologicalInvariance
@@ -21088,7 +21084,6 @@ public import WeilConjectures.TraceFormula.CategoricalTraceBiproduct
 public import WeilConjectures.TraceFormula.CategoricalTraceExact
 public import WeilConjectures.TraceFormula.ClassTest
 public import WeilConjectures.TraceFormula.ClosedPieceFrobenius
-public import WeilConjectures.TraceFormula.ClosedPieceOperator
 public import WeilConjectures.TraceFormula.ClosedPieceSquare
 public import WeilConjectures.TraceFormula.ClosedPieceTriangle
 public import WeilConjectures.TraceFormula.CoefficientMorphism
@@ -21243,7 +21238,6 @@ public import WeilConjectures.TraceFormula.KunnethVerdier
 public import WeilConjectures.TraceFormula.KunnethVerdierClosed
 public import WeilConjectures.TraceFormula.KunnethVerdierDual
 public import WeilConjectures.TraceFormula.KunnethVerdierOpen
-public import WeilConjectures.TraceFormula.KunnethVerdierRestriction
 public import WeilConjectures.TraceFormula.KunnethVerdierShift
 public import WeilConjectures.TraceFormula.KunnethVerdierTheorem
 public import WeilConjectures.TraceFormula.KunnethVerdierUnit
@@ -21388,7 +21382,6 @@ public import WeilConjectures.TraceFormula.Specialization.CompactSupportExchange
 public import WeilConjectures.TraceFormula.Specialization.CompactSupportExchangeComposition
 public import WeilConjectures.TraceFormula.Specialization.CompactSupportExchangeRefinement
 public import WeilConjectures.TraceFormula.Specialization.CompactSupportRefinement
-public import WeilConjectures.TraceFormula.Specialization.CompactificationOverFieldProper
 public import WeilConjectures.TraceFormula.Specialization.CompactificationRouteClosedExtension
 public import WeilConjectures.TraceFormula.Specialization.CompactificationRouteCoherence
 public import WeilConjectures.TraceFormula.Specialization.CompactifiedModel

@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineDiagonalPurity
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.ProjectiveLineKernelAssembly
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompCoherence
 
 /-!
 # The Gysin map of the diagonal of the projective line

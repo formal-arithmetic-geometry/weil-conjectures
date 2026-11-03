@@ -5,7 +5,6 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.Adjunction.ExchangeCube
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.NonFlatPullFac
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.PushResidueIsoMate
 

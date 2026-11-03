@@ -6,7 +6,21 @@ Authors: Claude
 module
 
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.GmRelativeKummer
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FieldExtensionBaseChange
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Derived
+public import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
+public import WeilConjectures.SixFunctors.BaseChange.DerivedUnboundedPlus
+public import WeilConjectures.SixFunctors.BaseChange.EtaleDerived
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Local
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Dualizable
+public import WeilConjectures.CategoryTheory.Sites.ConstantSheafMonoidal
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
+public import WeilConjectures.SixFunctors.Etale.Derived.AdjunctionShift
+public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
+public import WeilConjectures.SixFunctors.Etale.Derived.Stability.FiniteEtaleAdjoint
+public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
+public import WeilConjectures.SixFunctors.Etale.Derived.TensorHom
+public import WeilConjectures.AlgebraicGeometry.AffineSpace.ZeroSectionComplement
 
 /-!
 # Descent of the computations on `𝔸¹` and `𝔾ₘ` with `Λ(1)`-coefficients

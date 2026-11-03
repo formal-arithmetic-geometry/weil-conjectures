@@ -4,8 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
+public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Arrows
+public import WeilConjectures.AlgebraicGeometry.OrdinarySupportedKummerBoundary
+public import WeilConjectures.AlgebraicGeometry.ProEtaleFiniteModules
+public import WeilConjectures.AlgebraicGeometry.ProEtaleInverseImage
 public import WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf
-public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteP1Kummer
 
 /-!
 # The cycle class of an effective Cartier divisor

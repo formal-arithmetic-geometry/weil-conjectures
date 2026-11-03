@@ -4,9 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
-public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
-public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
+public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 import WeilConjectures.AlgebraicGeometry.ContinuousIntegralScalarExact
 import WeilConjectures.AlgebraicGeometry.FiniteDiscreteCondensedRing
 import WeilConjectures.AlgebraicGeometry.FiniteDiscreteConstructibleEncoding
@@ -16,6 +14,7 @@ import WeilConjectures.AlgebraicGeometry.FiniteTypeIntegralHeartBound
 import WeilConjectures.AlgebraicGeometry.FiniteTypeRationalHeartIntegralImage
 import WeilConjectures.AlgebraicGeometry.InternalModuleAbEquivalence
 import WeilConjectures.AlgebraicGeometry.UnboundedDirectImageBoundedBelow
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedComp
 import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImage
 
 /-! # Finiteness of direct images of constructible sheaves in degree zero -/

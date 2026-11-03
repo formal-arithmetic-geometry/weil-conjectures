@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.GeometricBidualityInduction
+public import WeilConjectures.SixFunctors.Etale.Derived.VerdierPreservation
 
 /-!
 # General Verdier biduality at a finite stage

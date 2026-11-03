@@ -5,7 +5,12 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.SmoothRelativeDimensionCover
+public import WeilConjectures.CategoryTheory.Monoidal.Closed.IhomUnitTensorComparison
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleOpenCoverIsIso
+public import WeilConjectures.TraceFormula.PurityBaseChangeRestriction
 public import WeilConjectures.TraceFormula.PurityOrientationPure
+public import WeilConjectures.SmoothPurity.UpperShriekSmoothBaseChange
 
 /-!
 

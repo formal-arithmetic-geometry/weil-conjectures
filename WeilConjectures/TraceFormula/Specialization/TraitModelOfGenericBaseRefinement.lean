@@ -8,7 +8,6 @@ module
 public import WeilConjectures.Compactification.CommonRefinement
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
 public import WeilConjectures.TraceFormula.Specialization.TraitModelOfGenericBaseCompactification
-public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethGlobal
 
 /-!
 

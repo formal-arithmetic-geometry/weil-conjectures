@@ -9,7 +9,6 @@ public import WeilConjectures.SixFunctors.NearbyCycles.ProperExchangeFinite
 public import WeilConjectures.TraceFormula.Specialization.ResidueConstantSmoothExchange
 public import WeilConjectures.TraceFormula.Specialization.ThickOrigin
 public import WeilConjectures.TraceFormula.Specialization.ThickOriginPowUnit
-public import WeilConjectures.TraceFormula.Specialization.DefectLocal
 import WeilConjectures.Tactic.ExactModProofs
 
 /-!

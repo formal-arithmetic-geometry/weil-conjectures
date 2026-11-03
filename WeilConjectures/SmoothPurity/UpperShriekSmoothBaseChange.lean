@@ -6,13 +6,13 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeRestriction
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralReductionClosedLowerStar
 public import WeilConjectures.SmoothPurity.UpperShriekOpenVanishing
 public import WeilConjectures.TraceFormula.OpenClosedTriangle
 public import WeilConjectures.TraceFormula.ClosedPieceTriangle
 public import WeilConjectures.TraceFormula.PurityBaseChangeRestriction
 public import WeilConjectures.AlgebraicGeometry.SmoothRelativeDimensionCover
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleOpenCoverIsIso
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleTriangulated
 
 /-!
 # Base change for `Rf^!` along closed and open immersions

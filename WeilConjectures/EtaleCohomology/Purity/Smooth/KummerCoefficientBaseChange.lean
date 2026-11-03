@@ -8,7 +8,6 @@ module
 public import Mathlib.LinearAlgebra.TensorProduct.Basic
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerBoundaryComparison
 public import WeilConjectures.Mathlib.Algebra.Group.Equiv.Defs
-public import WeilConjectures.AlgebraicGeometry.Curve.AffineLineKummer
 
 /-!
 # Base change of the Kummer coefficients

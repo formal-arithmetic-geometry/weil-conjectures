@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeCube
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsPull
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SquareComparisonBasic
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SquareComparisonCoherence
 
 /-!
 

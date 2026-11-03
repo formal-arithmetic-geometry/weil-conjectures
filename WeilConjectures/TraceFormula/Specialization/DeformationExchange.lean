@@ -7,13 +7,13 @@ module
 
 public import WeilConjectures.TraceFormula.Specialization.PointExchangeOpen
 public import WeilConjectures.TraceFormula.Specialization.SupportClosureProper
+public import WeilConjectures.TraceFormula.Specialization.SupportIdentityOnComponent
+public import WeilConjectures.TraceFormula.Specialization.ComponentClassReduction
 public import WeilConjectures.TraceFormula.Specialization.ComponentCounitIso
 public import WeilConjectures.TraceFormula.Specialization.ComponentUnitClassF
+public import WeilConjectures.Tactic.MatchTactic
 public import WeilConjectures.TraceFormula.Specialization.ComponentExchangeAssembly
 public import WeilConjectures.TraceFormula.Specialization.PointExchangeNormalForm
-public import WeilConjectures.TraceFormula.Specialization.FixedSquareClosedExchange
-public import WeilConjectures.TraceFormula.Specialization.SupportIdentityAbstract
-public import WeilConjectures.TraceFormula.Specialization.SupportExchangeOnComponentBdc
 
 /-!
 

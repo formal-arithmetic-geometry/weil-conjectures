@@ -4,9 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Claude
 -/
 module
-public import WeilConjectures.TraceFormula.Specialization.ThickOriginPowModel
-public import WeilConjectures.TraceFormula.Specialization.DeformationSpacePow
 
+public import WeilConjectures.TraceFormula.Specialization.ThickOrigin
+public import WeilConjectures.TraceFormula.Specialization.ThickOriginPow
 
 /-!
 

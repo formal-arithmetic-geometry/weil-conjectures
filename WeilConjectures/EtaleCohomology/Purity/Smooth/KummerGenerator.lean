@@ -5,13 +5,10 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.DerivedCategory.ConstructibleTorsion
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineRelative
 public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
 public import WeilConjectures.SixFunctors.Etale.Derived.AlgClosedField
-public import WeilConjectures.AlgebraicGeometry.AffineSpace.PuncturedLine
-public import WeilConjectures.CategoryTheory.DerivedCategory.HomSingleProjective
-public import WeilConjectures.SixFunctors.Etale.Derived.GeometricPoint
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Linear
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.KunnethMap
 import WeilConjectures.SixFunctors.Etale.Derived.Point
 
 /-!

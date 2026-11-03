@@ -10,6 +10,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheore
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReductionConservative
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleReductionLowerShriekCanonical
 public import WeilConjectures.SmoothPurity.UpperShriekBaseChangePasting
+public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.SmoothBaseChange
 
 /-!
 # Smooth base change for `Rf^!` from finite coefficients, along any morphism

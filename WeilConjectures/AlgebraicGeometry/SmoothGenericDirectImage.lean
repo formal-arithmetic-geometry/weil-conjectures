@@ -4,10 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
 module
+public import WeilConjectures.AlgebraicGeometry.ChosenCartesianSquare
+public import WeilConjectures.AlgebraicGeometry.DerivedCategories
+public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
-public import Mathlib.Algebra.Field.ZMod
-public import WeilConjectures.ConstructibleSheaf.Defs
-public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 import Mathlib.Data.Int.Interval
 import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.AlgebraicGeometry.SmoothCompactDualModel

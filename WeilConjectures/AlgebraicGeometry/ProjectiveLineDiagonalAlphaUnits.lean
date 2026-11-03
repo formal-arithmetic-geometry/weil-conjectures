@@ -5,7 +5,6 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.ProjectiveLineDiagonalMaps
-public import WeilConjectures.AlgebraicGeometry.OrdinarySupportedKummerSystem
 
 /-! # The cached diagonal source unit as the supported-unit composite
 

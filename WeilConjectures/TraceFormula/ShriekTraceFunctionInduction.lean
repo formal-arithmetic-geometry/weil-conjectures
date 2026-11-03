@@ -6,8 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.VanishingIdealSubschemeIso
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleAdditive
 public import WeilConjectures.TraceFormula.ShriekTraceFunctionDevissage
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleTriangulatedBasic
 
 /-!
 

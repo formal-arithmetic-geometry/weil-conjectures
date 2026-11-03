@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.OpenImmersion.SepReduction
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.OpenImmersion.ProjSepClosed
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.OpenImmersion.ProjStalks

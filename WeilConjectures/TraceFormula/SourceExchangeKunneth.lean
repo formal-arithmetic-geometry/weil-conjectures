@@ -8,7 +8,6 @@ module
 public import WeilConjectures.TraceFormula.SourceExchangeBaseChange
 public import WeilConjectures.TraceFormula.SourceExchangeKunnethAux
 public import WeilConjectures.TraceFormula.SourceExchangeProjection
-public import WeilConjectures.TraceFormula.ProperPushforward
 
 /-!
 

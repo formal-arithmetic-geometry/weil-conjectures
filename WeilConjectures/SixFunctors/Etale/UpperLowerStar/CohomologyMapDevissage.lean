@@ -5,14 +5,10 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyFilteredColimit
+public import WeilConjectures.AlgebraicGeometry.Curve.Reductions
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTorsion
 public import WeilConjectures.SixFunctors.Etale.Gabber
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMap
-public import Mathlib.Order.CompletePartialOrder
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
-public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
-public import WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomology
 
 /-!
 # Dévissage for the comparison maps on étale cohomology

@@ -7,8 +7,6 @@ module
 
 public import WeilConjectures.TraceFormula.SourceExchangeCoefficient
 public import WeilConjectures.TraceFormula.SourceExchangeProjection
--- without this import elaboration of the class computations does not terminate in 16 GB
-public import WeilConjectures.TraceFormula.ProperCompatibilitySupport  -- shake: keep
 
 /-!
 

@@ -14,7 +14,6 @@ public import WeilConjectures.RingTheory.ProEtale.StrictlyHenselianRetraction
 public import WeilConjectures.SixFunctors.NearbyCycles.TraitChangeInduction.Basic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.ResidueFieldEtaleOrigin
 public import WeilConjectures.Tactic.TransportExact
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.DerivedComplete.Constructible
 
 /-!
 

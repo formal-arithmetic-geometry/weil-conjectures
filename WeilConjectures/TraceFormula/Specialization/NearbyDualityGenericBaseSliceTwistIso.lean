@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.TraceFormula.Specialization.NearbyCyclesZeroTwist
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBaseSliceInputs
+public import WeilConjectures.TraceFormula.Specialization.NearbyDualityTwist
+public import WeilConjectures.TraceFormula.Specialization.NearbyDualizingAutInvariant
 
 /-!
 

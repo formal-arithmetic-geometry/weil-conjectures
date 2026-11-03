@@ -6,8 +6,9 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.Additivity
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarUnitCoherence
-public import WeilConjectures.PoincareDuality.Verdier
+public import WeilConjectures.TraceFormula.TraceClass
+public import WeilConjectures.TraceFormula.FixedPoint
+public import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 

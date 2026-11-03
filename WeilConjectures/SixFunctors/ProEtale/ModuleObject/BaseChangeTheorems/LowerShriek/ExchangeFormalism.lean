@@ -10,6 +10,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedC
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriekIndependence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekCompositionPadicAlgCl
 public import WeilConjectures.CategoryTheory.ExchangeFormalism.Shriek
+public import WeilConjectures.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons
 
 /-!
 

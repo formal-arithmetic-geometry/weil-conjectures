@@ -7,7 +7,12 @@ module
 
 public import WeilConjectures.SmoothPurity.Defs
 public import WeilConjectures.SmoothPurity.OrientationBaseChange
+public import WeilConjectures.SmoothPurity.TateTwistDualizable
+public import WeilConjectures.SmoothPurity.UpperShriekUnitDualizable
+public import WeilConjectures.TraceFormula.DualizableShift
 public import WeilConjectures.TraceFormula.PurityTensorMap
+public import WeilConjectures.TateTwist.LocallyFree
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocallyFreeDualizable
 
 /-!
 

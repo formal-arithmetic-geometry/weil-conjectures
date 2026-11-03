@@ -9,8 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.AffineSpaceClosedPoints
 public import WeilConjectures.AlgebraicGeometry.QuasiFiniteClosedPoints
 public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethFormula
 public import WeilConjectures.TraceFormula.Specialization.TraitProductRestrict
-public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethGlobal
-public import WeilConjectures.TraceFormula.Specialization.ClosedPointsSupport
 import WeilConjectures.TraceFormula.Specialization.SliceSupport
 import WeilConjectures.AlgebraicGeometry.StrictHenselizationLimitDimension
 

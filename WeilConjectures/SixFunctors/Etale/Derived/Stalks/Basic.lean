@@ -6,6 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ProperProjectionFormula
+public import WeilConjectures.SixFunctors.OpenClosed.Conservative
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
 /-!
 # Geometric stalks as inverse images

@@ -6,8 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.Specialization.ComponentClassReduction
-public import WeilConjectures.TraceFormula.Specialization.PointExchangeOnComponentBdcOfEq
-public import WeilConjectures.TraceFormula.Specialization.CompactificationOverFieldProper
+public import WeilConjectures.TraceFormula.Specialization.PointExchangeOnSeparatedBdc
 
 /-!
 

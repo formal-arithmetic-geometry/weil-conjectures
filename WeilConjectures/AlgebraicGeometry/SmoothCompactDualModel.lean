@@ -5,6 +5,8 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
+public import WeilConjectures.AlgebraicGeometry.ChosenCartesianSquare
+public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.AlgebraicGeometry.FiniteLisseFieldDual
 public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
 import WeilConjectures.AlgebraicGeometry.CompactInternalAdjunctionExchange

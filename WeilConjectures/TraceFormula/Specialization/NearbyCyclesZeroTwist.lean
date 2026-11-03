@@ -5,6 +5,9 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.SingleFunctor
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
+public import WeilConjectures.SixFunctors.NearbyCycles.AutActionExchange
 public import WeilConjectures.SixFunctors.NearbyCycles.AutActionTensor
 public import WeilConjectures.TateTwist.UpperStar
 public import WeilConjectures.TraceFormula.Specialization.GenericDivisorShift

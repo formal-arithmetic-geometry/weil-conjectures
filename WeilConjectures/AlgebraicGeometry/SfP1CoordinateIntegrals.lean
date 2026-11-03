@@ -5,8 +5,7 @@ Authors: Bin Wu
 -/
 module
 public import WeilConjectures.AlgebraicGeometry.FiniteEtaleTwistLine
-public import WeilConjectures.AlgebraicGeometry.SfSupportedDiagonalData
-public import WeilConjectures.ConstructibleSheaf.LisseRankOne
+public import WeilConjectures.AlgebraicGeometry.SfDiagonalKernelIntegrals
 import WeilConjectures.AlgebraicGeometry.SfP1IntegralTransport
 
 /-! # Standard-chart projective-line coordinate integrals

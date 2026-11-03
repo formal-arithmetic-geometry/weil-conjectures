@@ -6,10 +6,9 @@ Authors: Claude
 module
 
 public import WeilConjectures.PoincareDuality.Biduality.Integral
+public import WeilConjectures.TraceFormula.OrdinaryKunnethReduction
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalarsTriangulated
 public import WeilConjectures.PoincareDuality.Biduality.ReductionIhom
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ReductionNakayama
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleTriangulatedBasic
 
 /-!
 # Biduality along the reduction `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`

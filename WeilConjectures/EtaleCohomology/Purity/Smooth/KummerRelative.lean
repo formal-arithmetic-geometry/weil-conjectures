@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerClass
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerGenerator
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineRelative
 
 /-!
 # The Kummer class generates `R¹π_* Λ(1)` over a base

@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.NearbyCycles.TraitChangeInduction.SliceGaloisFields
 public import WeilConjectures.TraceFormula.Specialization.SliceTraitCoordResidue
 public import WeilConjectures.RingTheory.Valuation.DiscreteSubfieldFullResidue
 public import WeilConjectures.RingTheory.Valuation.UnramifiedCompositum

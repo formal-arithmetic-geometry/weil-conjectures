@@ -9,7 +9,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Perfect
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Linear
 public import WeilConjectures.SixFunctors.Etale.Derived.DerivedComplete
-public import WeilConjectures.SixFunctors.Etale.Derived.BoundedConstructibleIntegral
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CompactSupportTorsion
 public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CompactSupport
@@ -213,6 +212,19 @@ local instance (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
   have : LocallySmall.{u + 1} X.Etale :=
     @locallySmall_of_univLE X.Etale _ (@univLE_of_max.{u, u + 1} UnivLE.self)
   essentiallySmall_of_small_of_locallySmall _
+
+/-- The integral stage `D^b_c(X, Λ)` of the `ℓ`-adic formalism, for `Λ = 𝒪_E` and `I = 𝔪_E`, as
+an object property of `D(X_ét, Λ)`: the objects `K` which are derived complete for `I` and whose
+reductions `K ⊗ᴸ Λ/Iⁿ⁺¹` are bounded constructible of Tor amplitude in one common interval
+`[a, b]`. -/
+def DerivedCategory.boundedConstructibleIntegral (X : Scheme.{u}) :
+    ObjectProperty (_root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :=
+  fun K ↦ DerivedCategory.derivedComplete X.smallEtaleTopology I K ∧
+    ∃ a b : ℤ, ∀ n : ℕ,
+      DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X
+          ((reductionModIdeal Λ X (I ^ (n + 1))).obj K) ∧
+        DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b
+          ((reductionModIdeal Λ X (I ^ (n + 1))).obj K)
 
 variable {I}
 

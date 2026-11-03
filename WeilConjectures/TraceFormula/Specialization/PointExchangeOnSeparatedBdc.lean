@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.TraceFormula.Specialization.PointExchangeOnComponentBdcOfEq
-public import WeilConjectures.TraceFormula.Specialization.CompactificationOverFieldProper
 
 /-!
 
@@ -37,6 +36,11 @@ section Separated
 
 variable {k : Type u} [Field k] {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom]
   [QuasiCompact X.hom] [IsSeparated X.hom]
+
+instance isProper_compactificationOverField_overObj :
+    IsProper (compactificationOverField (toPoint X)).overObj.hom :=
+  have := (compactificationOverField (toPoint X)).isProper
+  inferInstanceAs (IsProper (_ ≫ 𝟙 _))
 
 variable (x : RationalPoint X) (k' : Type u) [Field k'] [Algebra k k'] {ℓ : ℕ} [Fact ℓ.Prime]
   [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [IsSepClosed k'] [Fact (ringChar k').Prime]

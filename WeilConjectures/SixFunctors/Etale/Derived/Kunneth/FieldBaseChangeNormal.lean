@@ -5,8 +5,11 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.LimitBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.OpenImmersionBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.SepClosedPushforward
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConstantSheaf
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Coefficients
 
 /-!
 # Base change along a limit of schemes of finite type over a field

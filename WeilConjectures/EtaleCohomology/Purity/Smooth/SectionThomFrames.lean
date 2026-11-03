@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.SectionEtaleChart
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionInvariantTwist
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.ThomClassField
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ThomFramesFundamentalClass
 
 /-!
