@@ -8,6 +8,13 @@ module
 public import WeilConjectures.AlgebraicGeometry.Derived.DerivedReductionComparisonPasting
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChangeAdjunctionSupplement
+public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedReductionPullbackSquare
+public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedOrdinaryComparisons
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Canonical.ProEtaleCanonicalDerivedPullbackNormalization
+public import WeilConjectures.CategoryTheory.DerivedExactSquareComposition
+import all WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.CompletedReductionPullbackSquare
+import all WeilConjectures.AlgebraicGeometry.Stratum.StratumCompletionUnitRestriction
+import all WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientDatumSupplement
 
 /-!
 # Composition of normalized derived reduction comparisons
@@ -375,5 +382,107 @@ theorem restrictionPullbackInv_comp
     Functor.associator_hom_app, Functor.associator_inv_app, Category.id_comp,
     Category.comp_id, Category.assoc] using hm
 end RestrictionComposition
+
+end AlgebraicGeometry.Scheme
+
+namespace AlgebraicGeometry.Scheme
+
+section ReductionComposition
+
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
+variable {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
+
+/-- The tower compositor induced by an ordinary module compositor. -/
+abbrev towerCompositor {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    (κ : stratumModulePull d (f ≫ g) ≅ stratumModulePull d g ⋙ stratumModulePull d f) :
+    d.towerModulePull (f ≫ g) ≅ d.towerModulePull g ⋙ d.towerModulePull f :=
+  (Functor.whiskeringRight ℕᵒᵖ _ _).mapIso κ ≪≫
+    (Functor.whiskeringRightObjCompIso _ _).symm
+
+/-- The normalized reduction comparisons are compatible with composition, for any module
+compositor whose derived functor is the specified derived compositor.
+Source: Stacks Tags 06YY and 0D6D (blueprint: thm-cbc-complete-proetale). -/
+theorem reductionTowerPullbackIso_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    (κ : stratumModulePull d (f ≫ g) ≅ stratumModulePull d g ⋙ stratumModulePull d f)
+    (hκ : d.pullComp f g = Functor.mapDerivedCategoryTriangleIso' κ) (K : d.derived Z) :
+    (d.reductionTowerPullbackIso (f ≫ g)).hom.app K ≫
+        (completedReductionTower X d).map ((d.pullComp f g).hom.app K) =
+      (Functor.mapDerivedCategoryTriangleIso' (towerCompositor d f g κ)).hom.app
+          ((completedReductionTower Z d).obj K) ≫
+        (d.towerPull f).map ((d.reductionTowerPullbackIso g).hom.app K) ≫
+        (d.reductionTowerPullbackIso f).hom.app ((d.pull g).obj K) := by
+  let good : ObjectProperty (CochainComplex (reductionModules Z (d.completedRing Z)) ℤ) :=
+    fun P ↦ P.IsKFlatIndependentCoefficients ∧
+      ∀ n, SheafOfModules.IsFlatOnSite (J := ProEt.topology Z) (R := d.completedRing Z) (P.X n)
+  have res (L : CochainComplex (reductionModules Z (d.completedRing Z)) ℤ) :
+      ∃ P, ∃ p : P ⟶ L, good P ∧ QuasiIso p := by
+    obtain ⟨P, p, hP, hflat, hp, _⟩ :=
+      CochainComplex.exists_isKFlatResolutionIndependentCoefficients
+        (R := d.completedRing Z) L
+    exact ⟨P, p, ⟨hP, fun n ↦ (exactFunctor _ _).prop_of_iso
+      (SheafOfModules.siteSheafTensorRightIso (d.completedRing Z) (P.X n)).symm
+        (hflat n)⟩, hp⟩
+  have hcounit (T : Scheme.{u}) : (fun P ↦ (stratumComplexCounit d T).app P) =
+      completedReductionTowerComplexCounit T d := funext (stratumComplexCounit_app d T)
+  have spec {U V : Scheme.{u}} (q : U ⟶ V) :
+      StratumReductionFormula d q (d.reductionTowerPullbackIso q) :=
+    (completedReductionPullbackIso_existsUnique d q).choose_spec.1
+  have hf_flat (P) (hP : good P) (n : ℤ) := pullback_flatTerms f g
+    (d.completedRing Z) (d.completedRing Y) (d.completedRing X)
+    (d.integralRingIso g) (d.integralRingIso f) P hP.1 hP.2 n
+  refine derivedReductionTriangle_paste
+    (stratumModulePull d g) (stratumModulePull d f) (stratumModulePull d (f ≫ g))
+    _ _ _
+    (completedReductionModuleTowerFunctor Z d) (completedReductionModuleTowerFunctor Y d)
+    (completedReductionModuleTowerFunctor X d)
+    (completedReductionTower Z d) (completedReductionTower Y d) (completedReductionTower X d)
+    (stratumComplexCounit d Z) (stratumComplexCounit d Y) (stratumComplexCounit d X)
+    (stratumModuleReductionIso d g) (stratumModuleReductionIso d f)
+    (stratumModuleReductionIso d (f ≫ g))
+    (d.reductionTowerPullbackIso g) (d.reductionTowerPullbackIso f)
+    (d.reductionTowerPullbackIso (f ≫ g)) κ (towerCompositor d f g κ) (d.pullComp f g)
+    good res ?_ ?_ ?_ ?_ ?_ ?_ K
+  · intro P _
+    rw [hκ]
+    exact Functor.mapDerivedCategoryTriangleIso'_hom_app_factors κ P
+  · intro P hP
+    rw [hcounit, hcounit]
+    exact spec g P hP.1
+  · intro P hP
+    rw [hcounit, hcounit]
+    exact spec f _ (stratumPull_flatKFlat d g P hP.1 hP.2)
+  · intro P hP
+    rw [hcounit, hcounit]
+    exact spec (f ≫ g) P hP.1
+  · intro P hP
+    rw [stratumComplexCounit_app]
+    exact towerCounit_isIso X d _ (stratumPull_flatKFlat d f _
+      (stratumPull_flatKFlat d g P hP.1 hP.2) (hf_flat P hP))
+  · intro M
+    apply NatTrans.ext
+    funext n
+    have := stratumModuleUnit_epi d Z M n.unop
+    apply (cancel_epi ((stratumModulePull d (f ≫ g)).map
+      (((completedReductionModuleUnit d Z).app M).app n))).1
+    simp only [NatTrans.comp_app]
+    rw [reassoc_of% (reductionIso_level d (f ≫ g) M n)]
+    have hu := NatTrans.congr_app ((completedReductionModuleUnit d X).naturality (κ.hom.app M)) n
+    simp only [NatTrans.comp_app, Functor.const_map_app] at hu
+    rw [← hu]
+    have hκn := κ.hom.naturality (((completedReductionModuleUnit d Z).app M).app n)
+    simp only [Functor.comp_map] at hκn
+    simp only [towerCompositor, Iso.trans_hom, NatTrans.comp_app, Functor.mapIso_hom,
+      Iso.symm_hom, Functor.whiskeringRight_map_app_app, Functor.whiskeringRightObjCompIso,
+      Functor.whiskeringRight_obj_map, Functor.whiskerRight_app]
+    simp only [Iso.refl_inv, NatTrans.id_app]
+    erw [Category.comp_id]
+    rw [reassoc_of% hκn, ← Functor.map_comp_assoc]
+    erw [reductionIso_level d g M n]
+    erw [reductionIso_level d f ((stratumModulePull d g).obj M) n]
+    rfl
+
+end ReductionComposition
 
 end AlgebraicGeometry.Scheme
