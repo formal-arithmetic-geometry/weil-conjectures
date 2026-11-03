@@ -88,6 +88,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ScalarRestrictedT
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ScalarTensorComparisonOfUniverses
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.SiteBinaryCoverModulePushout
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.SiteFinitePresentationInternalHomColimit
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.SiteNestedExtensionMap
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.SiteSubterminalModuleCounitMono
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.SliceRestrictionFlat

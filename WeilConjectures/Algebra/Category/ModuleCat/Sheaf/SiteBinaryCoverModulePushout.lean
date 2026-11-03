@@ -6,8 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.CategoryTheory.SiteCoveringAxioms
-public import WeilConjectures.CategoryTheory.RingedSiteModules
-public import WeilConjectures.CategoryTheory.LocalizedModuleExactForSystems
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.SiteNestedExtensionMap
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
 

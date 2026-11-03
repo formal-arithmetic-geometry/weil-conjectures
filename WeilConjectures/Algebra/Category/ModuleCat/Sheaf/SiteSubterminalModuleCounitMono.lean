@@ -5,8 +5,7 @@ Authors: Bin Wu
 -/
 module
 
-public import WeilConjectures.CategoryTheory.RingedSiteModules
-public import WeilConjectures.CategoryTheory.LocalizedModuleExactForSystems
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.SiteNestedExtensionMap
 
 /-! # The extension counit of a subterminal object is monic
 
