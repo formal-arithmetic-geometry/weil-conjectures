@@ -6,6 +6,21 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.ExplicitSmoothComparison.ExplicitSmoothAdjunctionData
+public import Mathlib.CategoryTheory.Sites.Adjunction
+public import WeilConjectures.AlgebraicGeometry.CondensedQbarCoefficientConstruction
+public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Finite.DiagonalFiniteEncodingUnit
+public import WeilConjectures.AlgebraicGeometry.FiniteSmoothPurity.FiniteSmoothNormalizedExistence
+import WeilConjectures.AlgebraicGeometry.PurityTransport.Coefficient.TransportCoefficients
+import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteDiscreteCondensedRing
+import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteDiscreteCondensedRing
+import WeilConjectures.AlgebraicGeometry.InternalModuleAbEquivalence
+import WeilConjectures.AlgebraicGeometry.Cartier.CartierReductionDataSupplement
+import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
+public import WeilConjectures.CategoryTheory.ConstantInternalModuleSheafEncoding.ConstantInternalModuleSheafEquivalenceSupplement
+public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsUnit
+public import WeilConjectures.SixFunctors.ProEtale.Adic.FreeWeilCoefficientsProjection
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteDiscreteCoefficientEncodingDataSupplement
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteDiscreteRestrictionEncodingSupplement
 
 /-! # The explicit smooth adjunction
 
@@ -19,6 +34,32 @@ sk-thm-purity-transport/sk-prop-sp-comparison-brown-explicit.md and its proof.
 set_option autoImplicit false
 universe u
 namespace AlgebraicGeometry.ProEtale.ExplicitSmoothComparison
+
+private theorem assemble_finiteNormalized {ell : ℕ} [Fact ell.Prime]
+    {k : Type u} [Field k] (a : FiniteFamily ell k) (r : NonfiniteFamily ell k)
+    (h : a.normalized ell k) : FiniteNormalized ell k (assemble a r) := by
+  exact h
+
+private theorem assemble_affineNormalized {ell : ℕ} [Fact ell.Prime]
+    {k : Type u} [Field k] (a : FiniteFamily ell k) (r : NonfiniteFamily ell k)
+    (h : a.affineNormalized ell k) : AffineNormalized ell k (assemble a r) := by
+  exact h
+
+private theorem assemble_scalarCompatible {ell : ℕ} [Fact ell.Prime]
+    {k : Type u} [Field k] (a : FiniteFamily ell k) (r : NonfiniteFamily ell k)
+    (hfin : a.scalarCompatible ell k)
+    (hmix : MixedScalarCompatible ell k (assemble a r)) :
+    ScalarCompatible ell k (assemble a r) := by
+  intro c c' φ hφ
+  by_cases hc : IsFiniteCoefficient c
+  · cases c <;> simp only [IsFiniteCoefficient] at hc
+    case finite A fin n hA =>
+      by_cases hc' : IsFiniteCoefficient c'
+      · cases c' <;> simp only [IsFiniteCoefficient] at hc'
+        case finite A' fin' n' hA' =>
+          exact hfin A fin n hA A' fin' n' hA' φ hφ
+      · exact hmix _ _ φ hφ (Or.inr hc')
+  · exact hmix _ _ φ hφ (Or.inl hc)
 
 /-- The twisted shifted inverse image is right adjoint to the specified
 compact-support functor for every admissible coefficient, with unit and counit

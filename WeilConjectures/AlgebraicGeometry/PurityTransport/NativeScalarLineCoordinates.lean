@@ -49,55 +49,39 @@ private theorem monoidal_eq_of_delta
 end CategoryTheory
 namespace AlgebraicGeometry.ProEtale.PurityTransport
 variable (ell : ℕ) [Fact ell.Prime]
-/-- Native Tate scalar coordinates exist for every map respecting Z_ell.
-Source: sk-lem-sp-field-extension, native source comparison
-(blueprint: lem-pur-native-scalar-line-coordinates).
-
-Proof. Take the scalar-unit-normalized strong monoidal structure on extension
-of scalars. Any two such structures have the same cotensorator: precompose with
-the scalar adjunction unit and the balanced tensor epimorphism. The strong
-monoidal unit laws then identify the counits, and uniqueness of inverses
-identifies the lax maps, so the structures coincide. Extend the first Tate line
-by scalar associativity. Recursively extend each tensor power using this
-monoidal structure; power zero is its scalar unitor. Uniqueness proves the
-required power equation for every scalar-unit-normalized monoidal structure. -/
-theorem scalarLineCoordinates_nonempty {c c' : Coefficient ell}
-    (a : c.bundled.{u} ell ⟶ c'.bundled ell)
+/-- Normalized scalar Tate-line coordinates exist for each compatible ring map.
+Source: the canonical scalar source identification in coefficient change
+(blueprint: lem-pur-coefficient-monoidal-normalization).
+Proof: use the proved normalized strong monoidal scalar structure. Take the first
+line to be scalarFirst, and all powers to be its monoidal tensor powers. Any other
+normalized strong monoidal structure equals the chosen one by scalarMonoidal_unique,
+so all required normalization equations hold. -/
+theorem scalarLineCoordinates_nonempty (ell : ℕ) [Fact ell.Prime]
+    {c c' : Coefficient ell} (a : c.bundled.{u} ell ⟶ c'.bundled ell)
     (ha : c.integralMap ell ≫ a.hom.hom = c'.integralMap ell) (X : Scheme.{u}) :
     Nonempty (ScalarLineCoordinates ell a ha X) := by
-  let φ := coefficientMap (Λ := c.obj ell) (Λ' := c'.obj ell) a.hom.hom X
-  obtain ⟨m, hm⟩ := Mod.exists_extendScalarsMonoidal φ
-  have unique (n : (Mod.extendScalars φ).Monoidal)
-      (hn : ∀ M N, Mod.tensorObjπ M N ≫ (Mod.extendUnit φ (M ⊗ N)).hom ≫
-        (n.toOplaxMonoidal.δ M N).hom =
-          ((Mod.extendUnit φ M).hom ⊗ₘ (Mod.extendUnit φ N).hom) ≫
-            Mod.tensorObjπ ((Mod.extendScalars φ).obj M) ((Mod.extendScalars φ).obj N)) :
-      n = m := by
-    apply monoidal_eq_of_delta
-    intro M N
-    apply (Mod.extendHomEquiv φ (M ⊗ N) _).injective
-    apply Mod.hom_ext
-    apply (cancel_epi (Mod.tensorObjπ M N)).mp
-    exact (hn M N).trans (hm M N).symm
+  obtain ⟨m, hm⟩ := Mod.exists_extendScalarsMonoidal
+    (coefficientMap (Λ := c.obj ell) (Λ' := c'.obj ell)
+      a.hom.hom X)
   let := m
-  let first := scalarFirst ell a ha X
-  have line_eq (b : Coefficient ell) (d : ℕ) :
-      b.line ell X d = Nat.rec (𝟙_ _) (fun _ N ↦ N ⊗ b.firstLine ell X) d := by
-    induction d with
-    | zero => rfl
-    | succ d ih => exact congrArg (fun N ↦ N ⊗ b.firstLine ell X) ih
-  have powers (d : ℕ) : ∃ p : (Mod.extendScalars φ).obj (c.line ell X d) ≅ c'.line ell X d,
-      HEq p (powerPull (Mod.extendScalars φ) (c.firstLine ell X)
-        (c'.firstLine ell X) first d) := by
-    rw [line_eq c d, line_eq c' d]
-    exact ⟨_, HEq.rfl⟩
-  choose power hp using powers
-  refine ⟨{ first := first
+  refine ⟨{ first := scalarFirst ell a ha X
             first_normalized := HEq.rfl
-            power := power
+            power := fun d ↦
+              (Mod.extendScalars (coefficientMap (Λ := c.obj ell) (Λ' := c'.obj ell)
+                a.hom.hom X)).mapIso (eqToIso (line_eq_rec ell c X d)) ≪≫
+              powerPull (Mod.extendScalars (coefficientMap (Λ := c.obj ell) (Λ' := c'.obj ell)
+                a.hom.hom X)) (c.firstLine ell X) (c'.firstLine ell X)
+                (scalarFirst ell a ha X) d ≪≫ eqToIso (line_eq_rec ell c' X d).symm
             power_normalized := ?_ }⟩
   intro n hn d
-  have hnm := unique n hn
+  have h := scalarMonoidal_unique ell a X n m hn hm
   subst n
-  exact hp d
+  rw [mapIso_eqToIso]
+  exact iso_transport_heq
+    (congrArg (Mod.extendScalars (coefficientMap (Λ := c.obj ell) (Λ' := c'.obj ell)
+      a.hom.hom X)).obj (line_eq_rec ell c X d))
+    (line_eq_rec ell c' X d)
+    (powerPull (Mod.extendScalars (coefficientMap (Λ := c.obj ell) (Λ' := c'.obj ell)
+      a.hom.hom X)) (c.firstLine ell X) (c'.firstLine ell X) (scalarFirst ell a ha X) d)
+
 end AlgebraicGeometry.ProEtale.PurityTransport
