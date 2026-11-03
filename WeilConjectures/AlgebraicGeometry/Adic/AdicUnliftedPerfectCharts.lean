@@ -8,6 +8,10 @@ module
 public import WeilConjectures.AlgebraicGeometry.Integral.IntegralUniformCoefficient
 public import WeilConjectures.AlgebraicGeometry.Integral.IntegralStratifiedPerfectModelsSupplement
 public import Mathlib.AlgebraicGeometry.Noetherian
+import WeilConjectures.AlgebraicGeometry.Integral.IntegralStratifiedPerfectCharacterization
+import WeilConjectures.AlgebraicGeometry.Integral.IntegralStratifiedPerfectCharts
+import WeilConjectures.AlgebraicGeometry.Integral.IntegralStratifiedPerfectRingEquiv
+import WeilConjectures.NumberTheory.Padics.CoefficientExtensionAlgEquiv
 
 /-! # Perfect charts for the actual unlifted Padic datum
 
@@ -65,6 +69,27 @@ theorem pbc_adic_unlifted_perfect_charts
             (ModuleCat.{u + 1} (Padic.coefficientExtensionIntegers l E)),
           @DerivedCategory.IsPerfectRingComplex _ _ (HasDerivedCategory.standard _) C ∧
           Nonempty ((adicTowerPullback g B).obj K.obj ≅
-            (adicTowerPullback g B).obj ((integralConstantDerived T d).obj C)) := by sorry
+            (adicTowerPullback g B).obj ((integralConstantDerived T d).obj C)) := by
+  intro d B
+  obtain ⟨E₀, _, _, _, ⟨σ⟩⟩ := Padic.exists_algEquiv_coefficientExtension.{u} l E
+  let φ : Padic.coefficientExtensionIntegers l E ≃+* PbcIntegralRing l E₀ :=
+    (Padic.coefficientExtensionIntegersEquiv l σ).trans ULift.ringEquiv.symm
+  have hφ : d.ideal.map φ = (pbcIntegralDatum l E₀).ideal := by
+    change Ideal.map φ (Ideal.span {Padic.coefficientExtensionUniformizer l E}) =
+      Ideal.span {pbcUniformizer l E₀}
+    have h := Padic.map_span_coefficientExtensionUniformizer l
+      (Padic.coefficientExtensionIntegersEquiv l σ)
+    rw [Ideal.map_span, Set.image_singleton] at h ⊢
+    have h' := congrArg (Ideal.map (ULift.ringEquiv.symm : Padic.coefficientExtensionIntegers l E₀
+      ≃+* PbcIntegralRing l E₀)) h
+    rw [Ideal.map_span, Ideal.map_span, Set.image_singleton, Set.image_singleton] at h'
+    exact h'
+  have hl' : IsUnit (l : Γ(T, ⊤)) :=
+    T.toRingedSpace.isUnit_of_isUnit_germ ⊤ (l : Γ(T, ⊤)) (fun x _ ↦ by
+      simpa only [map_natCast] using hl x)
+  have hK := isIntegralStratifiedPerfect_of_ringEquiv T d (pbcIntegralDatum l E₀) φ hφ
+    (fun K' hK' ↦ ((integralStratifiedPerfectCharacterization T l E₀ hdim hl' K').1).mp hK')
+    K.obj K.property
+  exact IsIntegralStratifiedPerfect.exists_cover_charts T d K.obj hK
 
 end AlgebraicGeometry.Scheme
