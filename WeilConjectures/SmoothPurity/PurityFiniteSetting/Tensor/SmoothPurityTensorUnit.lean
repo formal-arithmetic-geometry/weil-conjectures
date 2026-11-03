@@ -86,6 +86,9 @@ private theorem square_single (s : F ⋙ G ≅ J ⋙ I) (V : C) :
 
 end Generic
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public section
 
 end

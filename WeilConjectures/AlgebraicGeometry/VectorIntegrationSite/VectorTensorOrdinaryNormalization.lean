@@ -13,6 +13,9 @@ import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategorySymmetri
 /-! # Ordinary normalization of coefficient-first vector integration
 Source: blueprint vector-bundle purity, ordinary integration and its adjunction transpose.
 -/
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048

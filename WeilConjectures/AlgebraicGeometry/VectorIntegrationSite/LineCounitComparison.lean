@@ -23,6 +23,9 @@ Stacks 099R, 09AF, 0B65, and 0GL1.
 (blueprint: lem-pur-line-counit-comparison).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false

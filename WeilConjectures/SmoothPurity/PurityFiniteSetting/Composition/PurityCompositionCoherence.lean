@@ -22,6 +22,9 @@ The exceptional comparison is the recorded standing counit mate, transported thr
 the canonical constant-scalar equivalences. All objects are on the small pro-etale site.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048

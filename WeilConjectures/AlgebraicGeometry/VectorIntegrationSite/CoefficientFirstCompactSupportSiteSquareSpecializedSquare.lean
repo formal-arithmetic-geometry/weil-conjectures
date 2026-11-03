@@ -10,6 +10,9 @@ import WeilConjectures.AlgebraicGeometry.VectorIntegrationSite.CoefficientFirstC
 
 /-! # Specialization of the coefficient-first compact-support comparison to a vector bundle. -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option backward.defeqAttrib.useBackward true

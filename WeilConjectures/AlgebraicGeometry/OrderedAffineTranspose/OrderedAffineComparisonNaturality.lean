@@ -14,6 +14,9 @@ import all WeilConjectures.SixFunctors.Exceptional.ExceptionalFiniteRestrictionA
 Source: the ordered affine transpose proof, Step 2.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option Elab.async false

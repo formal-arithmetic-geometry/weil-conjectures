@@ -21,6 +21,9 @@ Source: literature/blueprint/latest/blueprint/sec-smooth-purity/
 sk-prop-sp-composition/thm-pur-composition-coherence.proof.md, Step 1.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option maxRecDepth 4096
@@ -28,6 +31,11 @@ universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry MonoidalCategory
 open scoped CategoryTheory.Functor
 namespace WeilConjectures.PurityFiniteSetting.DiagonalPasting
+
+private noncomputable instance productOver (P : PurityFiniteSetting.{u})
+    {X Y S : Scheme.{u}} [X.Over (Spec (.of P.field.k))]
+    (f : X ⟶ S) (g : Y ⟶ S) : (pullback f g).Over (Spec (.of P.field.k)) :=
+  ⟨pullback.fst f g ≫ (X ↘ Spec (.of P.field.k))⟩
 
 private instance productFiniteType (P : PurityFiniteSetting.{u})
     {X Y S : Scheme.{u}} [X.Over (Spec (.of P.field.k))]
@@ -60,8 +68,6 @@ attribute [local irreducible] Etale.upperStar Etale.lowerStar
   Functor.mapDerivedCategory Functor.leftDerivedFunctor Functor.rightDerivedFunctor
   Etale.rightDerivedUpperShriek Etale.rightDerivedUpperShriekAdjunction
 
-set_option maxHeartbeats 1500000 in
--- Allow the derived-functor coherence expressions a larger elaboration budget.
 variable (P : PurityFiniteSetting.{u})
 variable {X Y X' Y' : Scheme.{u}}
 variable [X.Over (Spec (.of P.field.k))]

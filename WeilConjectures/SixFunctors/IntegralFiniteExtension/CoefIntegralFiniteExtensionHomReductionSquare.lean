@@ -9,6 +9,9 @@ public import WeilConjectures.SixFunctors.IntegralFiniteExtension.CoefIntegralFi
 
 /-! Split compatibility squares for integral finite-extension reduction pairing. -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096

@@ -192,13 +192,6 @@ def sourceUnitIso (A : Type (u + 1)) [CommRing A]
       (PurityFiniteSetting.smoothPurityUnitIso A Y) ≪≫
       Etale.leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} A) f)).app L ≪≫ λ_ L
 
-attribute [local instance] towerCoefficientCommRing
-
-section QuotientOrientation
-attribute [local instance] quotientCoefficientCommRing
-
-end QuotientOrientation
-
 end AlgebraicGeometry.ProEtale.SpFiniteOrientation
 
 namespace AlgebraicGeometry.ProEtale.SpFiniteOrientation

@@ -20,6 +20,9 @@ Source: composition coherence proof Step 1, compatible-chart argument Steps 5--6
 (blueprint: lem-pur-centred-diagonal-source-pasting).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048

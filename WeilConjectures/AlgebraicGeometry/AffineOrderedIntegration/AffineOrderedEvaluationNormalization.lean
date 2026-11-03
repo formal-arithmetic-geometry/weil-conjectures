@@ -15,6 +15,9 @@ import WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedEtaleCompactSupportC
 Source: projection-purity agreement, final paragraph, ordered counit calculation.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048

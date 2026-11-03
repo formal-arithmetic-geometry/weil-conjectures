@@ -9,6 +9,9 @@ public import WeilConjectures.SixFunctors.FiniteExceptional.FiniteExceptionalDat
 
 /-! # Finite exceptional coefficient comparisons -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option relaxedAutoImplicit false

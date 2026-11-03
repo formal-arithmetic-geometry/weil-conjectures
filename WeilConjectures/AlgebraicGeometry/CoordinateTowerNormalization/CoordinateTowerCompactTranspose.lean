@@ -13,6 +13,9 @@ Source: current blueprint, sec-smooth-purity/sk-prop-an,
 cor-pur-affine-space-zero-section-purity.proof.md, final paragraph.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency true

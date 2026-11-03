@@ -295,6 +295,26 @@ Source: blueprint finite twists (blueprint: def-pur-adic-finite-tensor-realizati
 def adicPurityFiniteTensorRealization (d : ℕ) :=
   (adicPurityFiniteTensorRealization_existsUnique l E n T d).exists.choose
 
+/-- The ordinary intrinsic tensor realization preserves zero arrows.
+Source: blueprint finite twists (blueprint: def-pur-adic-finite-tensor-realization).
+Proof: realization is additive and tensoring with the finite line is additive. Their
+composite therefore sends the zero linear map to the zero linear map, on every section. -/
+theorem adicPurityFiniteTensorComposite_zero (d : ℕ) :
+    ((sfIntrinsicModuleEquivalence T (Padic.coefficientExtensionRing l E (n + 1))).functor ⋙
+      adicPurityFiniteSheafTwist l E n T d).PreservesZeroMorphisms := by
+  let : (sfIntrinsicModuleEquivalence T
+      (Padic.coefficientExtensionRing l E (n + 1))).functor.Additive := by
+    change (ProEtale.finiteCoefficientIntrinsicRealization T
+      (Padic.coefficientExtensionRing l E (n + 1))).Additive
+    infer_instance
+  let : (adicPurityFiniteSheafTwist l E n T d).Additive :=
+    (adicPurityFiniteSheafTwist_exact l E n T d).1
+  constructor
+  intro M N
+  change (adicPurityFiniteSheafTwist l E n T d).map
+    ((sfIntrinsicModuleEquivalence T
+      (Padic.coefficientExtensionRing l E (n + 1))).functor.map (0 : M ⟶ N)) = 0
+
 attribute [instance] adicPurityFiniteTensorComposite_zero
 
 end TwistReduction

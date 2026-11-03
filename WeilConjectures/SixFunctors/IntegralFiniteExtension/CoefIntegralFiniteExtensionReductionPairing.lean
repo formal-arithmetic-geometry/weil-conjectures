@@ -19,6 +19,9 @@ The defining comparisons are publicly re-exported from the models module.
 This module fixes the maps and predicates independently of their compatibility theorem.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096

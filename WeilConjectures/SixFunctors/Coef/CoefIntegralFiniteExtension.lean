@@ -26,6 +26,9 @@ Source: current blueprint, sec-smooth-purity/sk-lem-sp-tower, order 2494
 The defining comparisons are publicly re-exported from the models module.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option Elab.async false

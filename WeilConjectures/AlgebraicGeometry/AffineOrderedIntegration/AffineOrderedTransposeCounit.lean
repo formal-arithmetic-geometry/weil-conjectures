@@ -13,6 +13,9 @@ public import WeilConjectures.AlgebraicGeometry.AffineLineEvaluation.AffineLineC
 (blueprint: lem-pur-affine-ordered-transpose-counit).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency true

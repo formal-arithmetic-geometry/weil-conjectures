@@ -19,6 +19,9 @@ All indices below are predecessors of positive exponents: index n means A_(n+1).
 The functors are restrictions of the published intrinsic pro-etale constructions.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option relaxedAutoImplicit false

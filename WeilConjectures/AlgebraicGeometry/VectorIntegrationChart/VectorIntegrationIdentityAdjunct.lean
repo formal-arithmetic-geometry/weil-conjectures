@@ -21,6 +21,9 @@ Source: the rank-zero normalization in the diagonal chart proof.
 (blueprint: lem-pur-vector-integration-identity-adjunct).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 128

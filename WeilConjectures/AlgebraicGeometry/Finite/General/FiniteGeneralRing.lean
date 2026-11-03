@@ -32,6 +32,9 @@ and the direct orientation is normalized by the actual diagonal/Rees/integration
 * `finiteGeneralRingSmoothPurity`: smooth purity for every finite ell-primary ring.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096

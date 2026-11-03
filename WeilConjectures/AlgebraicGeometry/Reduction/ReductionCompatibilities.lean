@@ -98,6 +98,9 @@ including its actual diagonal/Rees/integration normalization. No flatness is ass
 * `reductionCompatibilities_purity`: coefficient change preserves normalized smooth purity.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option relaxedAutoImplicit false

@@ -14,6 +14,9 @@ public import WeilConjectures.SmoothPurity.PurityFiniteSetting.Dnc.PurityDncComp
 Source: latest blueprint, smooth-purity composition proof, Step 2.
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096

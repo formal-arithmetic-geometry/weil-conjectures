@@ -574,10 +574,7 @@ private theorem level_annihilates (P : WeilConjectures.PurityFiniteSetting.{u}) 
     ((P.coefficients.l ^ (P.level) : ℕ) : Ring P) = 0 := by
   let O := Padic.coefficientExtensionIntegers P.coefficients.l P.extension
   let m := Padic.coefficientExtensionMaximalIdeal P.coefficients.l P.extension
-  have hDvr := Padic.extension_integers_dvr P.coefficients.l P.extension
-    (Padic.coefficientExtensionAbsoluteValue P.coefficients.l P.extension)
-    (spectralNorm_extends (K := Padic P.coefficients.l) (L := P.extension))
-  have hs := hDvr.choose_spec.choose_spec
+  have hs := (Padic.coefficientExtensionIntegers_dvr P.coefficients.l P.extension).choose_spec
   have hm : (P.coefficients.l : O) ∈ m := by
     apply (hs.2.1 (P.coefficients.l : O)).2
     have he := spectralNorm_extends (K := Padic P.coefficients.l) (L := P.extension)

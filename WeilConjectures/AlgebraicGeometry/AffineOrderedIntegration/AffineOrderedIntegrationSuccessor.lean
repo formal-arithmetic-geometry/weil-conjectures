@@ -17,6 +17,9 @@ ordered-transpose proof, Steps 3--7.
 (blueprint: lem-pur-affine-ordered-integration-successor).
 -/
 
+-- After pruning, this module only keeps private declarations.
+set_option linter.privateModule false
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency true

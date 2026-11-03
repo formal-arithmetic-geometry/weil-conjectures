@@ -90,8 +90,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 private theorem cartierCoefficient_annihilated (n : ℕ) :
     ((l ^ (n + 1) : ℕ) : finiteTateCoefficient l E n) = 0 := by
-  let h := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
-    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
+  let h := (Padic.coefficientExtensionIntegers_dvr l E).choose_spec
   have hm : ∀ x : Padic.coefficientExtensionIntegers l E,
       x ∈ Padic.coefficientExtensionMaximalIdeal l E ↔
         Padic.coefficientExtensionAbsoluteValue l E (x : E) < 1 := h.2.1
