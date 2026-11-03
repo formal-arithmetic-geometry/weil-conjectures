@@ -23870,6 +23870,7 @@ public import WeilConjectures.WeilObject.Sheaf.Stalk
 public import WeilConjectures.WeilObject.Sheaf.StalkFiniteFree
 public import WeilConjectures.WeilObject.Sheaf.StalkFrobenius
 public import WeilConjectures.WeilObject.Sheaf.StalkUnit
+public import WeilConjectures.WeilSheaf.AffineLineBundle
 public import WeilConjectures.WeilSheaf.AffineLineCohomology
 public import WeilConjectures.WeilSheaf.AlgClosedCoefficientCohomology
 public import WeilConjectures.WeilSheaf.ArtinSchreierDual
