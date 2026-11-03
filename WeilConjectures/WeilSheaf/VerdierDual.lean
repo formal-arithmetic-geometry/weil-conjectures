@@ -12,6 +12,7 @@ public import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
 public import WeilConjectures.WeilSheaf.TateTwist
 import WeilConjectures.WeilSheaf.Bidual
 import WeilConjectures.WeilSheaf.DerivedHomSingleResolution
+import WeilConjectures.WeilSheaf.DerivedHomConstructible
 
 /-!
 # The exceptional inverse image and the Verdier dual of Weil complexes
@@ -166,7 +167,7 @@ the dualizing complex is a Weil complex. -/
 theorem objectProperty_derivedHom_dualizingComplex (K : WeilComplex k₀ l X) :
     WeilComplex.objectProperty k₀ l X
       ((ProEtaleWeilSheaf.derivedHom k₀ l X (dualizingComplex k₀ l X).obj).obj (op K.obj)) :=
-  sorry
+  objectProperty_derivedHom K (dualizingComplex k₀ l X)
 
 /-- The Verdier dual `𝔻_X K = RHom(K, ω_X)` of Weil complexes on a separated `k₀`-scheme of
 finite type `X`, the derived internal hom into the dualizing complex
