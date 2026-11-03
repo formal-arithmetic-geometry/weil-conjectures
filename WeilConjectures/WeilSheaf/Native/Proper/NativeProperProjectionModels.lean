@@ -1,0 +1,282 @@
+/-
+Copyright (c) 2026 Bin Wu. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Bin Wu
+-/
+module
+
+public import WeilConjectures.WeilSheaf.Native.Proper.NativeProperProjectionComparisons
+import WeilConjectures.WeilSheaf.Native.Proper.NativeProperSectionTensorModels
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebra
+
+/-! # Resolution models for native proper projection
+
+Source: BS 6.8.14--6.8.15; Stacks 070I, 08BJ, 07A4 and 0G7E.
+(blueprint: lem-sf-native-proper-projection-models).
+
+These comparisons concern resolutions and tensor pullback; no projection-formula
+isomorphism or invertibility assertion is included.
+-/
+
+@[expose] public noncomputable section
+set_option autoImplicit false
+set_option synthInstance.maxSize 4096
+set_option genSizeOf false
+set_option genSizeOfSpec false
+set_option genInjectivity false
+set_option genCtorIdx false
+attribute [local irreducible] HasDerivedCategory.standard
+  AlgebraicGeometry.ProEtaleWeilSheaf.nativeDerivedClosedComparison
+  WeilConjectures.AdicQbarRealization.ordinary
+  WeilConjectures.commonStageDerivedPullback WeilConjectures.commonStageDerivedTensor
+  AlgebraicGeometry.Scheme.ContinuousRational.modulePull
+  AlgebraicGeometry.Scheme.ContinuousRational.derivedPull
+
+universe u
+
+open CategoryTheory CategoryTheory.Limits AlgebraicGeometry WeilConjectures Opposite
+open WeilConjectures.AdicQbarRealization
+open AlgebraicGeometry.Scheme
+open scoped TensorProduct AlgebraicGeometry.ProEtaleWeilSheaf
+
+namespace AlgebraicGeometry.ProEtaleWeilSheaf
+
+variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
+  [Fact (ringChar k₀ ≠ l)]
+
+variable {Z Y : Scheme.{u}} [Z.Over (Spec (CommRingCat.of k₀))]
+  [Y.Over (Spec (CommRingCat.of k₀))]
+  [IsSeparated (Z ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (Z ↘ Spec (CommRingCat.of k₀))]
+  [IsSeparated (Y ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
+  (p : Z ⟶ Y) [p.IsOver (Spec (CommRingCat.of k₀))]
+
+set_option maxHeartbeats 800000 in
+-- The representative and adjunction squares require more than 200000 heartbeats.
+/-- Resolution and tensor comparison data before taking the projection mate.
+Source: Steps 1--4 of lem-sf-native-proper-projection-realization;
+BS 6.8.14--6.8.15 and Stacks 08BJ, 07A4, 0G7E
+(blueprint: lem-sf-native-proper-projection-models). -/
+structure NativeProperProjectionModels where
+  source : LocallyFiniteAdicRealization.Realization l
+    (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber
+  target : LocallyFiniteAdicRealization.Realization l
+    (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber
+  [sourceUnits : ∀ x : (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber,
+    Invertible (l : (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber.residueField x)]
+  [targetUnits : ∀ y : (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber,
+    Invertible (l : (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber.residueField y)]
+  sourceAt : At l (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber source
+  targetAt : At l (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber target
+  sourcePresentation :
+    (sectionFunctor l (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber source).IsEquivalence
+  targetPresentation :
+    (sectionFunctor l (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber target).IsEquivalence
+  sourceFinite : ∀ E,
+    FiniteNormalization l (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber source sourceAt E
+  targetFinite : ∀ E,
+    FiniteNormalization l (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber target targetAt E
+  sourceHom : HomLaws l (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber source sourceAt
+  targetHom : HomLaws l (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber target targetAt
+  primeUnit : IsUnit (l : AlgebraicClosure k₀)
+  comparison : Proper.Comparison l (NativeBaseChange.geometricMap k₀ p) source target
+    (AlgebraicClosure k₀) primeUnit sourceAt targetAt
+  sourceTensor : ProperSectionTensor k₀ l Z source sourceAt
+  targetTensor : ProperSectionTensor k₀ l Y target targetAt
+  balanced : NativeProjectionTensorComparison k₀ l p
+  pull : nativeOpenPull k₀ l p ⋙ properSectionDerived k₀ l Z source ≅
+    properSectionDerived k₀ l Y target ⋙
+      ContinuousRational.derivedPull
+        (NativeBaseChange.geometricMap k₀ p) comparison.operations.coefficient
+  pushSheaf : lowerStar k₀ l p ⋙ properSectionForget k₀ l Y target ≅
+    properSectionForget k₀ l Z source ⋙
+      ContinuousRational.DirectImage.modulePush
+        (NativeBaseChange.geometricMap k₀ p) comparison.operations.coefficient
+  pushSections : ∀ M V x, HEq ((pushSheaf.hom.app M).val.app V x) x
+  push : (lowerStar k₀ l p).rightDerivedFunctor ⋙ properSectionDerived k₀ l Y target ≅
+    properSectionDerived k₀ l Z source ⋙
+      ContinuousRational.DirectImage.derivedPush
+        (NativeBaseChange.geometricMap k₀ p) comparison.operations.coefficient
+  injective : ∀ I : CochainComplex (ProEtaleWeilSheaf k₀ l Z) ℤ,
+    I.IsKInjective → CochainComplex.IsKInjective
+      ((properSectionCochain k₀ l Z source).obj I)
+  pushRepresentative : ∀ (I : CochainComplex (ProEtaleWeilSheaf k₀ l Z) ℤ)
+      (_hI : I.IsKInjective),
+    (properSectionDerived k₀ l Y target).map (properNativePushUnit k₀ l p I) ≫
+      push.hom.app (DerivedCategory.Q.obj I) ≫
+      (ContinuousRational.DirectImage.derivedPush
+        (NativeBaseChange.geometricMap k₀ p) comparison.operations.coefficient).map
+          ((properSectionFactors k₀ l Z source).hom.app I) =
+    (properSectionFactors k₀ l Y target).hom.app
+        (((lowerStar k₀ l p).mapHomologicalComplex (.up ℤ)).obj I) ≫
+      DerivedCategory.Q.map
+        ((properPushSheafCochain k₀ l p source target comparison.operations pushSheaf).hom.app I) ≫
+      ContinuousRational.DirectImage.pushUnit (NativeBaseChange.geometricMap k₀ p)
+        comparison.operations.coefficient
+        ((properSectionCochain k₀ l Z source).obj I)
+  counit : ∀ A,
+    (properSectionDerived k₀ l Z source).map
+        ((derivedUpperStarLowerStarAdjunction k₀ l p).counit.app A) =
+      pull.hom.app ((lowerStar k₀ l p).rightDerivedFunctor.obj A) ≫
+        (ContinuousRational.derivedPull
+          (NativeBaseChange.geometricMap k₀ p) comparison.operations.coefficient).map
+          (push.hom.app A) ≫
+        comparison.operations.adjunction.counit.app
+          ((properSectionDerived k₀ l Z source).obj A)
+  pullTensor : ∀ M N,
+    (properSectionDerived k₀ l Z source).map (balanced.mu.hom.app (M, N)) ≫
+      sourceTensor.tensor.hom.app
+        ((nativeOpenPull k₀ l p).obj M, (nativeOpenPull k₀ l p).obj N) ≫
+      sourceAt.closed.tensor.map (Prod.mkHom (pull.hom.app M) (pull.hom.app N)) =
+    pull.hom.app ((nativeDerivedTensor k₀ l Y).obj (M, N)) ≫
+      (ContinuousRational.derivedPull
+        (NativeBaseChange.geometricMap k₀ p) comparison.operations.coefficient).map
+          (targetTensor.tensor.hom.app (M, N)) ≫
+      comparison.tensor.tensor.hom.app
+        ((properSectionDerived k₀ l Y target).obj M,
+          (properSectionDerived k₀ l Y target).obj N)
+
+omit [Fact (ringChar k₀ ≠ l)] [IsSeparated (Z ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (Z ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (Z ↘ Spec (CommRingCat.of k₀))] in
+private theorem properSectionCochain_isKInjective
+    (R : LocallyFiniteAdicRealization.Realization l
+      (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+    (hR : (sectionFunctor l
+      (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber R).IsEquivalence)
+    (I : CochainComplex (ProEtaleWeilSheaf k₀ l Z) ℤ) (hI : I.IsKInjective) :
+    CochainComplex.IsKInjective ((properSectionCochain k₀ l Z R).obj I) := by
+  have := IsGrothendieckAbelian.hasColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
+    (ProEtale.AdicSheaf l (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ
+  have := IsGrothendieckAbelian.hasExactColimitsOfShape_discrete.{u + 2, u + 1, u + 1}
+    (ProEtale.AdicSheaf l (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber) ℤ
+  let := hI
+  let := R.commutative
+  let : (sectionFunctor l (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber R).Additive :=
+    R.sectionsAdditive
+  let : (sectionFunctor l
+    (Z ↘ Spec (CommRingCat.of k₀)).geometricFiber R).IsEquivalence :=
+    hR
+  change CochainComplex.IsKInjective
+    (((properSectionForget k₀ l Z R).mapHomologicalComplex (.up ℤ)).obj I)
+  infer_instance
+
+/-- The native and ordinary operations have compatible resolution models.
+Source: Steps 1--4 of lem-sf-native-proper-projection-realization;
+BS 6.8.14--6.8.15 and Stacks 070I, 08BJ, 07A4, 0G7E
+(blueprint: lem-sf-native-proper-projection-models).
+
+Proof: apply the proper-adjunction realization theorem to the geometric base
+change of p and retain the source and target realization, finite normalization,
+and Hom data of its family. The coefficient-ring comparison identifies both
+coefficient maps with precomposition. Compose native forgetting with the section
+presentation equivalences. The lifted sheaf adjunction and Frobenius mate give
+pull and pushSheaf; on sections pushSheaf is the identity. Exact pullback and
+exact forgetting preserve the required acyclicity. Equivariant K-injective
+resolutions stay K-injective after forgetting; both pushforwards on such a
+resolution are the same ordinary complex. The normalized fixed-pair derived
+comparison gives push and pushRepresentative. Computing the derived counit on
+that resolution gives counit, independently of the resolution.
+For tensors use equivariant K-flat flat-term resolutions. On sheaves the balanced
+map sends b tensor (x tensor y) to (b tensor x) tensor (1 tensor y); its inverse
+multiplies coefficients. These maps commute with Frobenius. Totalize with the
+signed differential and retain each coproduct insertion. Ringed pullback preserves
+K-flatness, and conservative forgetting detects acyclicity. Localization of these
+maps gives balanced, sourceTensor and targetTensor, including their generator
+and representative equations. The same insertion formulas give pullTensor.
+None of these constructions uses invertibility of a projection mate. Zero inputs,
+empty schemes and identity maps use exactly the same resolution formulas. -/
+theorem native_proper_projection_models [IsProper p] :
+    Nonempty (NativeProperProjectionModels k₀ l p) := by
+  classical
+  let : Fintype k₀ := Fintype.ofFinite k₀
+  obtain ⟨n, hp, hn⟩ := FiniteField.card k₀ (ringChar k₀)
+  let D : FiniteFieldDatum.{u} :=
+    { p := ringChar k₀, a := n, q := Nat.card k₀, prime := hp
+      exponent_pos := n.pos
+      cardinality_eq := by simpa only [Nat.card_eq_fintype_card] using hn
+      k₀ := k₀, card_base := rfl, k := AlgebraicClosure k₀ }
+  have hl : l ≠ D.p := Ne.symm (Fact.out : ringChar k₀ ≠ l)
+  let Zg : GeometricSpace D :=
+    { base := Over.mk (Z ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure
+      separated := by
+        change IsSeparated (pullback.snd (Z ↘ Spec (CommRingCat.of k₀))
+          (Scheme.specAlgebraicClosure k₀).hom)
+        infer_instance
+      finiteType := by
+        change LocallyOfFiniteType (pullback.snd (Z ↘ Spec (CommRingCat.of k₀))
+          (Scheme.specAlgebraicClosure k₀).hom)
+        infer_instance
+      quasiCompact := by
+        change QuasiCompact (pullback.snd (Z ↘ Spec (CommRingCat.of k₀))
+          (Scheme.specAlgebraicClosure k₀).hom)
+        infer_instance }
+  let Yg : GeometricSpace D :=
+    { base := Over.mk (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure
+      separated := by
+        change IsSeparated (pullback.snd (Y ↘ Spec (CommRingCat.of k₀))
+          (Scheme.specAlgebraicClosure k₀).hom)
+        infer_instance
+      finiteType := by
+        change LocallyOfFiniteType (pullback.snd (Y ↘ Spec (CommRingCat.of k₀))
+          (Scheme.specAlgebraicClosure k₀).hom)
+        infer_instance
+      quasiCompact := by
+        change QuasiCompact (pullback.snd (Y ↘ Spec (CommRingCat.of k₀))
+          (Scheme.specAlgebraicClosure k₀).hom)
+        infer_instance }
+  let pg : Zg.base ⟶ Yg.base := Over.homMk (NativeBaseChange.geometricMap k₀ p)
+    (Scheme.Hom.geometricFiberMap_comp_geometricFiberToAlgebraicClosure p
+      (comp_over p (Spec (CommRingCat.of k₀))))
+  have hpg : IsProper pg.left := by
+    change IsProper (NativeBaseChange.geometricMap k₀ p)
+    exact Scheme.Hom.geometricFiberMap_of_isStableUnderBaseChange
+      (P := @IsProper) p (comp_over p (Spec (CommRingCat.of k₀))) inferInstance
+  obtain ⟨F, hF⟩ := Proper.adic_proper_adjunction_realization D l hl
+  obtain ⟨C⟩ := hF Zg Yg pg hpg
+  let := (F.data Zg).units
+  let := (F.data Yg).units
+  change Proper.Comparison l (NativeBaseChange.geometricMap k₀ p)
+    (F.data Zg).realization (F.data Yg).realization (AlgebraicClosure k₀)
+    (finiteFieldDatumPrimeUnit D l hl) (F.data Zg).tensor (F.data Yg).tensor at C
+  obtain ⟨N⟩ := native_proper_section_adjunction_models k₀ l p
+    (F.data Zg).realization (F.data Yg).realization C.operations
+    (F.data Zg).presentation (F.data Yg).presentation
+  obtain ⟨TZ, TY, balanced, hTensor⟩ := native_proper_section_tensor_models k₀ l p
+    (F.data Zg).realization (F.data Yg).realization C.operations
+    (F.data Zg).tensor (F.data Yg).tensor C.tensor N
+    (F.data Zg).presentation (F.data Yg).presentation
+  refine ⟨{
+    source := (F.data Zg).realization
+    target := (F.data Yg).realization
+    sourceUnits := (F.data Zg).units
+    targetUnits := (F.data Yg).units
+    sourceAt := (F.data Zg).tensor
+    targetAt := (F.data Yg).tensor
+    sourcePresentation := (F.data Zg).presentation
+    targetPresentation := (F.data Yg).presentation
+    sourceFinite := (F.data Zg).finite
+    targetFinite := (F.data Yg).finite
+    sourceHom := (F.data Zg).hom
+    targetHom := (F.data Yg).hom
+    primeUnit := finiteFieldDatumPrimeUnit D l hl
+    comparison := C
+    sourceTensor := TZ
+    targetTensor := TY
+    balanced := balanced
+    pull := N.pull
+    pushSheaf := N.pushSheaf
+    pushSections := N.pushSections
+    push := N.push
+    injective := ?_
+    pushRepresentative := N.pushRepresentative
+    counit := N.counit
+    pullTensor := hTensor }⟩
+  exact properSectionCochain_isKInjective k₀ l (F.data Zg).realization
+    (F.data Zg).presentation
+
+end AlgebraicGeometry.ProEtaleWeilSheaf

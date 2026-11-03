@@ -31,6 +31,11 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
+set_option hygiene false in
+/-- The derived category `D(X_proét, Λ) = D(Mod_{Λ_X})` of module objects over `Λ_X`. -/
+local notation "𝔻(" X ")" =>
+  DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
+
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
 section OpenImmersion
