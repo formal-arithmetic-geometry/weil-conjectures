@@ -8,6 +8,7 @@ module
 public import WeilConjectures.TraceFormula.Integral.IntegralTowerInverseImageUnit
 public import WeilConjectures.PoincareDuality.Integral.IntegralPullbackComparisonRealization
 public import WeilConjectures.TraceFormula.Integral.IntegralPullbackRoosAugmentation
+public import WeilConjectures.TraceFormula.Integral.IntegralTowerInverseImageFactors
 public import WeilConjectures.TraceFormula.Coherent.CoherentPrimitiveReductionPresentation
 public import WeilConjectures.TraceFormula.Supporting.RoosAdjunctionTranspose
 
@@ -31,49 +32,107 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 open AlgebraicGeometry.Scheme AlgebraicGeometry.ProEtale
 namespace WeilConjectures
 
-attribute [local instance] CategoryTheory.Limits.comp_preservesFiniteLimits
-  CategoryTheory.Limits.comp_preservesFiniteColimits
-
-section Coherence
-
-variable {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
-  [Abelian A] [Abelian B] [Abelian C] [Abelian D]
-  [HasDerivedCategory A] [HasDerivedCategory B] [HasDerivedCategory C] [HasDerivedCategory D]
-  (F : A ⥤ B) (G : B ⥤ D) (F' : A ⥤ C) (G' : C ⥤ D)
-  [F.Additive] [G.Additive] [F'.Additive] [G'.Additive]
-  [PreservesFiniteLimits F] [PreservesFiniteColimits F]
-  [PreservesFiniteLimits G] [PreservesFiniteColimits G]
-  [PreservesFiniteLimits F'] [PreservesFiniteColimits F']
-  [PreservesFiniteLimits G'] [PreservesFiniteColimits G']
-  (e : F ⋙ G ≅ F' ⋙ G') (K : CochainComplex A ℤ)
-
-/-- The derived image of a square of exact functors, evaluated on a complex. -/
-private theorem derivedSquare_fac :
-    G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app K) ≫
-        G.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj K) ≫
-        DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex e.hom (.up ℤ)).app K) =
-      ((Functor.mapDerivedCategoryCompIso F G).symm ≪≫ Functor.mapDerivedCategoryNatIso e ≪≫
-          Functor.mapDerivedCategoryCompIso F' G').hom.app (DerivedCategory.Q.obj K) ≫
-        G'.mapDerivedCategory.map (F'.mapDerivedCategoryFactors.hom.app K) ≫
-        G'.mapDerivedCategoryFactors.hom.app ((F'.mapHomologicalComplex (.up ℤ)).obj K) := by
-  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
-  rw [Functor.mapDerivedCategoryCompIso_hom_app_factors, Functor.mapDerivedCategoryNatIso_fac,
-    ← Functor.mapDerivedCategoryCompIso_hom_app_factors F G]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
-
-/-- The same square with the source factor isomorphism moved to the other side. -/
-private theorem derivedSquare_fac_inv :
-    G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.inv.app K) ≫
-        ((Functor.mapDerivedCategoryCompIso F G).symm ≪≫ Functor.mapDerivedCategoryNatIso e ≪≫
-          Functor.mapDerivedCategoryCompIso F' G').hom.app (DerivedCategory.Q.obj K) ≫
-        G'.mapDerivedCategory.map (F'.mapDerivedCategoryFactors.hom.app K) ≫
-        G'.mapDerivedCategoryFactors.hom.app ((F'.mapHomologicalComplex (.up ℤ)).obj K) =
-      G.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj K) ≫
-        DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex e.hom (.up ℤ)).app K) := by
-  rw [← derivedSquare_fac, ← Functor.map_comp_assoc, Iso.inv_hom_id_app]
-  simp
-
-end Coherence
+/-- The left side of `integralPullbackKFlatReductionCounit`, after composing with the
+presentation isomorphism: the normalized realization, the Roos transpose and the strict
+Roos lift turn it into the localization of the strict family `β`. -/
+private theorem integralPullbackKFlatReductionCounit_left
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+    {W Z : Scheme.{u}} (h : Z ⟶ W) [IsIso h]
+    (S : CoefficientDerivedSystemCalculus l E W)
+    (ρ : IntegralComparisonRoosModel l E Z)
+    (F : IntegralComparisonPullbackModel l E h S ρ)
+    (P : (integralOperationsGoodComplex l E W).FullSubcategory)
+    (C : CochainComplex (coefficientSequenceModules l E W) ℤ)
+    (e : S.reduction.obj (DerivedCategory.Q.obj P.obj) ≅ DerivedCategory.Q.obj C)
+    (q : (((coefficientSequenceRestriction l E Z).mapHomologicalComplex (.up ℤ)).obj
+        (((integralComparisonSequencePullback l E h).mapHomologicalComplex
+          (.up ℤ)).obj C)).asFunctor ≅
+      (integralOperationsPullbackTowerFunctor l E h).obj P.obj)
+    (hn : F.realization.hom.app (DerivedCategory.Q.obj P.obj) ≫
+        (coefficientSequenceLimit l E Z).map
+          ((integralComparisonDerivedSequencePullback l E h).map e.hom) ≫
+        (coefficientSequenceLimit l E Z).map
+          ((integralComparisonSequencePullback l E h).mapDerivedCategoryFactors.hom.app C) ≫
+        (integralComparisonRoosBridge l E Z ρ _).hom ≫
+        DerivedCategory.Q.map (integralOperationsRoosFunctor.map q.hom) =
+          (integralDerivedPullbackComparison l E h).hom.app P)
+    (β : ((Functor.const ℕᵒᵖ : scalarReductionSource l E Z ⥤
+        ℕᵒᵖ ⥤ scalarReductionSource l E Z).mapHomologicalComplex (.up ℤ)).obj
+          (((inverseImageIntegralModules l E h).mapHomologicalComplex (.up ℤ)).obj P.obj) ⟶
+      ((coefficientSequenceRestriction l E Z).mapHomologicalComplex (.up ℤ)).obj
+        (((integralComparisonSequencePullback l E h).mapHomologicalComplex (.up ℤ)).obj C))
+    (hθ : inverseImageRoosComparisonComplex l E h P.obj =
+      ((constLimAdj (J := ℕᵒᵖ) (C := scalarReductionSource l E Z)).mapHomologicalComplex
+          (.up ℤ)).homEquiv _ _ β ≫
+        integralComparisonLimitToRoos l E Z _ ≫ integralOperationsRoosFunctor.map q.hom) :
+    ((integralComparisonConstantTower l E Z).map
+        ((inverseImageIntegralModules l E h).mapDerivedCategoryFactors.hom.app P.obj ≫
+          DerivedCategory.Q.map (inverseImageRoosComparisonComplex l E h P.obj) ≫
+          (integralDerivedPullbackComparison l E h).inv.app P ≫
+          F.realization.hom.app (DerivedCategory.Q.obj P.obj)) ≫
+        (integralComparisonTowerCounit l E Z).app
+          ((coefficientSequenceDerivedRestriction l E Z).obj
+            ((integralComparisonDerivedSequencePullback l E h).obj
+              (S.reduction.obj (DerivedCategory.Q.obj P.obj))))) ≫
+      ((coefficientSequenceDerivedRestriction l E Z).map
+          ((integralComparisonDerivedSequencePullback l E h).map e.hom ≫
+            (integralComparisonSequencePullback l E h).mapDerivedCategoryFactors.hom.app C) ≫
+        (coefficientSequenceRestriction l E Z).mapDerivedCategoryFactors.hom.app
+          (((integralComparisonSequencePullback l E h).mapHomologicalComplex (.up ℤ)).obj C)) =
+    (integralComparisonConstantTower l E Z).map
+        ((inverseImageIntegralModules l E h).mapDerivedCategoryFactors.hom.app P.obj) ≫
+      (Functor.const ℕᵒᵖ : scalarReductionSource l E Z ⥤
+        ℕᵒᵖ ⥤ scalarReductionSource l E Z).mapDerivedCategoryFactors.hom.app
+          (((inverseImageIntegralModules l E h).mapHomologicalComplex (.up ℤ)).obj P.obj) ≫
+      DerivedCategory.Q.map β := by
+  let Hm := inverseImageIntegralModules l E h
+  let cZ := (Functor.const ℕᵒᵖ : scalarReductionSource l E Z ⥤
+    ℕᵒᵖ ⥤ scalarReductionSource l E Z)
+  let AZ := integralComparisonConstantAdjunction l E Z
+  let ΔZ := integralComparisonConstantTower l E Z
+  let limZ := coefficientConstantTowerLimit l E Z
+  let Hc := (Hm.mapHomologicalComplex (.up ℤ)).obj P.obj
+  let D := ((coefficientSequenceRestriction l E Z).mapHomologicalComplex (.up ℤ)).obj
+    (((integralComparisonSequencePullback l E h).mapHomologicalComplex (.up ℤ)).obj C)
+  let Y := (coefficientSequenceDerivedRestriction l E Z).map
+      ((integralComparisonDerivedSequencePullback l E h).map e.hom ≫
+        (integralComparisonSequencePullback l E h).mapDerivedCategoryFactors.hom.app C) ≫
+    (coefficientSequenceRestriction l E Z).mapDerivedCategoryFactors.hom.app
+      (((integralComparisonSequencePullback l E h).mapHomologicalComplex (.up ℤ)).obj C)
+  change _ ≫ Y = _
+  have hk : F.realization.hom.app (DerivedCategory.Q.obj P.obj) ≫ limZ.map Y ≫
+      ρ.comparison.hom.app D ≫ DerivedCategory.Q.map (integralOperationsRoosFunctor.map q.hom) =
+      (integralDerivedPullbackComparison l E h).hom.app P := by
+    rw [← hn]
+    dsimp only [Y, integralComparisonRoosBridge, coefficientSequenceLimit, limZ]
+    simp only [Functor.map_comp, Category.assoc, Iso.trans_hom, Functor.mapIso_hom,
+      Iso.app_hom, Functor.comp_map]
+    rfl
+  have hL : (inverseImageIntegralModules l E h).mapDerivedCategoryFactors.hom.app P.obj ≫
+        DerivedCategory.Q.map (inverseImageRoosComparisonComplex l E h P.obj) ≫
+        (integralDerivedPullbackComparison l E h).inv.app P ≫
+        F.realization.hom.app (DerivedCategory.Q.obj P.obj) ≫ limZ.map Y =
+      Hm.mapDerivedCategoryFactors.hom.app P.obj ≫
+        AZ.homEquiv _ _ (cZ.mapDerivedCategoryFactors.hom.app Hc ≫ DerivedCategory.Q.map β) := by
+    have ht := integralComparisonRoosTranspose l E Z ρ Hc D β
+    rw [← cancel_mono (ρ.comparison.hom.app D ≫
+      DerivedCategory.Q.map (integralOperationsRoosFunctor.map q.hom))]
+    simp only [Category.assoc]
+    rw [hk, Iso.inv_hom_id_app]
+    erw [Category.comp_id, reassoc_of% ht, hθ]
+    simp only [Functor.map_comp, Category.assoc]
+    rfl
+  have hn' : (integralComparisonTowerCounit l E Z).app _ ≫ Y =
+      ΔZ.map (limZ.map Y) ≫ (integralComparisonTowerCounit l E Z).app _ :=
+    ((integralComparisonTowerCounit l E Z).naturality Y).symm
+  rw [Category.assoc, hn', ← Functor.map_comp_assoc]
+  simp only [Category.assoc]
+  rw [hL, Functor.map_comp, Category.assoc]
+  dsimp only [integralComparisonTowerCounit]
+  rw [← Adjunction.homEquiv_counit]
+  exact congrArg (ΔZ.map (Hm.mapDerivedCategoryFactors.hom.app P.obj) ≫ ·)
+    (Equiv.symm_apply_apply _ _)
 
 /-- The counit image of the defining Roos lift is the inverse image of the
 whole-system reduction unit, followed by the finite tensor unit. This is the
@@ -165,39 +224,7 @@ theorem integralPullbackKFlatReductionCounit
   let fac := ΔZ.map (Hm.mapDerivedCategoryFactors.hom.app P.obj) ≫
     cZ.mapDerivedCategoryFactors.hom.app Hc ≫ DerivedCategory.Q.map β
   trans fac
-  · -- the left side, through the normalization of `F` and the Roos transpose
-    have hk : F.realization.hom.app (DerivedCategory.Q.obj P.obj) ≫ limZ.map Y ≫
-        ρ.comparison.hom.app D ≫ DerivedCategory.Q.map (integralOperationsRoosFunctor.map q.hom) =
-        (integralDerivedPullbackComparison l E h).hom.app P := by
-      rw [← hn]
-      dsimp only [Y, integralComparisonRoosBridge, coefficientSequenceLimit, limZ]
-      simp only [Functor.map_comp, Category.assoc, Iso.trans_hom, Functor.mapIso_hom,
-        Iso.app_hom, Functor.comp_map]
-      rfl
-    have hL : (inverseImageIntegralModules l E h).mapDerivedCategoryFactors.hom.app P.obj ≫
-          DerivedCategory.Q.map (inverseImageRoosComparisonComplex l E h P.obj) ≫
-          (integralDerivedPullbackComparison l E h).inv.app P ≫
-          F.realization.hom.app (DerivedCategory.Q.obj P.obj) ≫ limZ.map Y =
-        Hm.mapDerivedCategoryFactors.hom.app P.obj ≫
-          AZ.homEquiv _ _ (cZ.mapDerivedCategoryFactors.hom.app Hc ≫ DerivedCategory.Q.map β) := by
-      have ht := integralComparisonRoosTranspose l E Z ρ Hc D β
-      rw [← cancel_mono (ρ.comparison.hom.app D ≫
-        DerivedCategory.Q.map (integralOperationsRoosFunctor.map q.hom))]
-      simp only [Category.assoc]
-      rw [hk, Iso.inv_hom_id_app]
-      erw [Category.comp_id, reassoc_of% ht, hθ]
-      simp only [Functor.map_comp, Category.assoc]
-      rfl
-    have hn' : (integralComparisonTowerCounit l E Z).app _ ≫ Y =
-        ΔZ.map (limZ.map Y) ≫ (integralComparisonTowerCounit l E Z).app _ :=
-      ((integralComparisonTowerCounit l E Z).naturality Y).symm
-    rw [Category.assoc, hn', ← Functor.map_comp_assoc]
-    simp only [Category.assoc]
-    rw [hL, Functor.map_comp, Category.assoc]
-    dsimp only [integralComparisonTowerCounit]
-    rw [← Adjunction.homEquiv_counit]
-    exact congrArg (ΔZ.map (Hm.mapDerivedCategoryFactors.hom.app P.obj) ≫ ·)
-      (Equiv.symm_apply_apply _ _)
+  · exact integralPullbackKFlatReductionCounit_left l E h S ρ F P C e q hn β hθ
   · -- the right side, through the coherence of `b` and the factor isomorphisms
     have hR1 : τd.hom.app (S.reduction.obj (DerivedCategory.Q.obj P.obj)) ≫
         UZ.map ((integralComparisonDerivedSequencePullback l E h).map e.hom) =
@@ -215,48 +242,9 @@ theorem integralPullbackKFlatReductionCounit
         ((integralComparisonTowerCounit l E W).naturality _).symm
       rw [hn2, ← Functor.map_comp_assoc]
       exact hc
-    have p1 : ΔZ.map (Hm.mapDerivedCategoryFactors.hom.app P.obj) ≫
-        cZ.mapDerivedCategoryFactors.hom.app Hc ≫
-        DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
-          (Functor.compConstIso ℕᵒᵖ Hm).hom (.up ℤ)).app P.obj) =
-        (integralTowerInverseImageDiagonal l E h).hom.app (DerivedCategory.Q.obj P.obj) ≫
-          Td.map (cW.mapDerivedCategoryFactors.hom.app P.obj) ≫
-          T.mapDerivedCategoryFactors.hom.app ((cW.mapHomologicalComplex (.up ℤ)).obj P.obj) := by
-      exact derivedSquare_fac Hm cZ cW T (Functor.compConstIso ℕᵒᵖ Hm) P.obj
-    have p2 := T.mapDerivedCategoryFactors_hom_naturality b
-    have p3 : Td.map (RW.mapDerivedCategoryFactors.inv.app C) ≫
-        τd.hom.app (DerivedCategory.Q.obj C) ≫
-        UZ.map (B.mapDerivedCategoryFactors.hom.app C) ≫
-        RZ.mapDerivedCategoryFactors.hom.app ((B.mapHomologicalComplex (.up ℤ)).obj C) =
-        T.mapDerivedCategoryFactors.hom.app ((RW.mapHomologicalComplex (.up ℤ)).obj C) ≫
-          DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex τ.hom (.up ℤ)).app C) := by
-      exact derivedSquare_fac_inv RW T B RZ τ C
-    calc fac = ΔZ.map (Hm.mapDerivedCategoryFactors.hom.app P.obj) ≫
-          cZ.mapDerivedCategoryFactors.hom.app Hc ≫
-          DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
-            (Functor.compConstIso ℕᵒᵖ Hm).hom (.up ℤ)).app P.obj) ≫
-          DerivedCategory.Q.map ((T.mapHomologicalComplex (.up ℤ)).map b) ≫
-          DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex τ.hom (.up ℤ)).app C) := by
-          simp only [fac, β, Functor.map_comp]
-      _ = (integralTowerInverseImageDiagonal l E h).hom.app (DerivedCategory.Q.obj P.obj) ≫
-          Td.map (cW.mapDerivedCategoryFactors.hom.app P.obj) ≫
-          Td.map (DerivedCategory.Q.map b) ≫
-          Td.map (RW.mapDerivedCategoryFactors.inv.app C) ≫
-          τd.hom.app (DerivedCategory.Q.obj C) ≫
-          UZ.map (B.mapDerivedCategoryFactors.hom.app C) ≫
-          RZ.mapDerivedCategoryFactors.hom.app ((B.mapHomologicalComplex (.up ℤ)).obj C) := by
-          rw [p3]
-          erw [reassoc_of% p2]
-          rw [reassoc_of% p1]
+    calc fac = _ := integralTowerInverseImage_strictFamily_factors l E h P.obj C b
       _ = _ := by
-          have hT : Td.map (cW.mapDerivedCategoryFactors.hom.app P.obj) ≫
-              Td.map (DerivedCategory.Q.map b) ≫ Td.map (RW.mapDerivedCategoryFactors.inv.app C) =
-              Td.map (ΔW.map (S.adjunction.unit.app (DerivedCategory.Q.obj P.obj)) ≫
-                (integralComparisonTowerCounit l E W).app
-                  (UW.obj (S.reduction.obj (DerivedCategory.Q.obj P.obj))) ≫ UW.map e.hom) := by
-            rw [hR2]
-            simp only [Functor.map_comp]
-          rw [reassoc_of% hT]
+          rw [← hR2]
           dsimp only [Y]
           simp only [Functor.map_comp, Category.assoc]
           rw [reassoc_of% hR1]

@@ -101,7 +101,7 @@ theorem inverseImageRoosComparisonComplex_eq_limitToRoos
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     {W Z : Scheme.{u}} (h : Z ⟶ W) [IsIso h]
-    (P : CochainComplex (scalarReductionSource l E W) ℤ)
+    (P : CochainComplex (integralTowerModules l E W) ℤ)
     (C : CochainComplex (coefficientSequenceModules l E W) ℤ)
     (κ : ∀ n : ℕ,
       ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).obj C ≅
