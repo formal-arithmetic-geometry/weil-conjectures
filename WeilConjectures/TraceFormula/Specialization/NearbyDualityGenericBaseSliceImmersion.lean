@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.Compactification.AffineCharts
 public import WeilConjectures.TraceFormula.Specialization.CoordinateCompactificationProjective
-public import WeilConjectures.TraceFormula.Specialization.NearbyDualityTwistCompositionSlice
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBaseSlice
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBaseSliceShrink
 import WeilConjectures.Tactic.TransportExact
