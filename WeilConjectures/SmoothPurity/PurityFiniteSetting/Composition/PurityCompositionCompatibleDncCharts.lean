@@ -99,7 +99,6 @@ def CompatibleCentredChart.source (P : PurityFiniteSetting.{u})
   P.chartSourceCoordinateComparison r h aV x C.neighbourhood C.sectionMap
     C.diagonal C.etale C.cartesian N
 
-open scoped TensorProduct in
 section NormalSplitting
 
 variable (P : PurityFiniteSetting.{u})

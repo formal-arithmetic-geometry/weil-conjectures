@@ -169,7 +169,6 @@ def openAdjunction {U T : Scheme.{u}} (j : U ⟶ T) [IsOpenImmersion j] :
     (o.openOp j).derivedAdjunction).comp
     (SpTowerCalculus.realization l E b T (q.abelian T)).symm.toAdjunction
 
-open SpCoordinateAdjunction in
 end AlgebraicGeometry.ProEtale.SpTowerGluing
 
 attribute [instance high] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall

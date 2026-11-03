@@ -61,6 +61,4 @@ attribute [local irreducible] derivedTensorObjCompMapDerivedCategoryComparisonUp
 local syntax (name := startTensorProof) "start_tensor_proof" : tactic
 local syntax (name := finishTensorProof) "finish_tensor_proof" : tactic
 
-open Lean Meta Elab Tactic in
-open Lean Meta Elab Tactic in
 end AlgebraicGeometry.ProEtale

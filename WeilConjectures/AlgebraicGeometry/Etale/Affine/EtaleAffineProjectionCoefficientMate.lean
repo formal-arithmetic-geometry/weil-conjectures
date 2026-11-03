@@ -223,5 +223,4 @@ attribute [local irreducible] ProEtale.reductionSiteScalarIso
   ProEtale.reductionSite ProEtale.scalarExtensionFunctor
   ProEtale.reductionEtaleAffineScalarIso affineProjectionPurityIso
 
-open ProEtale in
 end AlgebraicGeometry.Etale
