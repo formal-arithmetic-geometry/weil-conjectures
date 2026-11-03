@@ -204,6 +204,13 @@ noncomputable def flatModelReductionData :=
   SheafOfModules.derivedChangeOfRingsIndependentCoefficients.{u + 2, u + 1, u + 1, u}
     (flatModelReductionRingMap l E m n hmn T)
 
+/-- Ordinary tensor along the specified quotient map, fixed on objects and maps by
+sectionwise tensor followed by sheafification in the recorded change-of-rings theorem.
+Source: blueprint, lem-sf-reduction-flat-model.md, ordinary tensor complex
+(blueprint: lem-sf-reduction-flat-model). -/
+noncomputable def flatModelReductionChange :=
+  (flatModelReductionData l E m n hmn T).choose
+
 /-- The universal left-derived scalar-extension pair and its K-flat computation.
 Source: Stacks Tags 06YT and 06YY; blueprint, lem-sf-reduction-flat-model.md
 (blueprint: lem-sf-reduction-flat-model). -/

@@ -114,6 +114,14 @@ import WeilConjectures.ProperBaseChange.IntegralFinitePullbackComposition
 import WeilConjectures.SmoothPurity.Compact.CompactSupportRepresentativeIndependence
 import WeilConjectures.SmoothPurity.Sf.SfIntegralConstructibleTriangulated
 public import WeilConjectures.SmoothPurity.Supporting.LegacySitePerfectComplex
+public import Mathlib.CategoryTheory.Adjunction.Unique
+public import WeilConjectures.AlgebraicGeometry.ExplicitExceptionalPreservation
+public import WeilConjectures.AlgebraicGeometry.Finite.Compact.FiniteCompactSupportScalarComparison
+public import WeilConjectures.AlgebraicGeometry.Sf.SfFullCohomologicalDimension
+public import WeilConjectures.SixFunctors.Coef.CoefFiniteHomSiteDescent
+public import WeilConjectures.SixFunctors.Etale.Derived.WeilComplexDual
+public import WeilConjectures.SixFunctors.Etale.EtaleGeometricBiduality
+public import WeilConjectures.SixFunctors.Finite.Coefficient.FiniteCoefficientHomChange
 
 /-! # Stability of the constructible finite-Tor domains
 
@@ -485,6 +493,278 @@ noncomputable def sfStabilityFiniteExceptional (c : Compactification f.left) :
     ProEtale.sfFiniteExceptional (Padic.coefficientExtensionRing l E (n + 1)) c)
     (fun K ↦ ((finiteTor_stability_exceptional_verdier D l hl E n X Y f).1
       c K.obj K.property).1)
+
+/-- The normalized strict-tower quotient and the direct quotient factor induce
+exactly the same scalar restriction. This fixes the normalization used in its mate.
+Source: blueprint (vii), canonical finite quotients (blueprint: thm-sf-ctf-stability).
+Proof: the tower quotient is a composite of adjacent coefficient quotient factors.
+On a representative from the valuation ring, every factor sends its residue class
+to the same residue class. Induct on the difference of the exponents, including
+zero for the identity quotient, to identify the composite with the direct factor.
+Constant sheafification and forgetting commutativity preserve this equality.
+Restriction of module scalars and termwise derived localization then preserve it. -/
+theorem sfStabilityQuotientRestrictionEquality
+    (W : Scheme.{u}) {m n : ℕ} (h : n ≤ m) :
+    normalizedDVRRes l E W h =
+      (proEtaleCoefficientRestrictScalars W
+        (compactSupportLevelQuotient l E m n h)).mapDerivedCategory := by
+  dsimp only [normalizedDVRRes]
+  congr 1
+  exact compactSupportModuleRes_eq l E W h
+
+/-- The canonical finite scalar adjunction, with its standard derived localizations
+made explicit. The type annotation fixes the coefficient universe of restriction.
+Source: Stacks 06YY (blueprint: thm-sf-ctf-stability). -/
+noncomputable def sfStabilityCanonicalQuotientAdjunction
+    (W : Scheme.{u}) {m n : ℕ} (h : n ≤ m) :
+    pbcDerivedExtend (compactSupportLevelSheafQuotient l E W m n h) ⊣
+      (@Functor.mapDerivedCategory.{u + 2, u + 2, u + 1, u + 1, u + 2, u + 2}
+        (proEtaleRingModules W (proEtaleConstantRing W
+          (Padic.coefficientExtensionRing l E (n + 1)))) _ _
+        (HasDerivedCategory.standard _)
+        (proEtaleRingModules W (proEtaleConstantRing W
+          (Padic.coefficientExtensionRing l E (m + 1)))) _ _
+        (HasDerivedCategory.standard _)
+        (proEtaleCoefficientRestrictScalars W (compactSupportLevelQuotient l E m n h))
+        inferInstance inferInstance inferInstance) :=
+  pbcDerivedScalarAdjunction (compactSupportLevelSheafQuotient l E W m n h)
+
+/-- The canonical scalar mate and its invertibility criterion, instantiated together
+so that the same coefficient category data is shared by both projections.
+Source: blueprint (vii) (blueprint: thm-sf-ctf-stability). -/
+noncomputable def sfStabilitySupportReductionData
+    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
+    {m n : ℕ} (h : n ≤ m) :=
+  ScalarMateTransport.certifiedTransport
+    ((coefficientDerivedSystemEvaluationCalculus l E X).choose.quotientCalculus.adjunction h)
+    (sfStabilityCanonicalQuotientAdjunction l E X h)
+    ((coefficientDerivedSystemEvaluationCalculus l E Y).choose.quotientCalculus.adjunction h)
+    (sfStabilityCanonicalQuotientAdjunction l E Y h)
+    (sfStabilityQuotientRestrictionEquality l E X h)
+    (sfStabilityQuotientRestrictionEquality l E Y h)
+    (sfAmbientCompactSupportCandidate (Padic.coefficientExtensionRing l E (m + 1)) c)
+    (sfAmbientCompactSupportCandidate (Padic.coefficientExtensionRing l E (n + 1)) c)
+    (sfCompactSupportRestriction c (compactSupportLevelQuotient l E m n h)).hom
+
+/-- Canonical finite-quotient compact-support comparison, obtained by scalar
+adjunction from the normalized restriction square. This definition includes all
+quotients, including the identity, and assumes no ambient exceptional adjunction.
+Source: blueprint (vii) (blueprint: thm-sf-ctf-stability). -/
+noncomputable def sfStabilitySupportReduction
+    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
+    {m n : ℕ} (h : n ≤ m) :
+    sfIntrinsicCompactSupport c (Padic.coefficientExtensionRing l E (m + 1)) ⋙
+        coefficientFiniteQuotientDerived l E Y h ⟶
+      coefficientFiniteQuotientDerived l E X h ⋙
+        sfIntrinsicCompactSupport c (Padic.coefficientExtensionRing l E (n + 1)) :=
+  (sfStabilitySupportReductionData l E c h).val
+
+/-- The quotient reduction of the geometric dualizing object. The first factor is
+uniqueness of the left adjoint to the very same exact scalar restriction; the
+second is the specified exceptional coefficient mate, normalized at the unit.
+Source: blueprint (vii) (blueprint: thm-sf-ctf-stability). -/
+noncomputable def sfStabilityDualizingReduction
+    (X : Scheme.{u}) [X.Over (Spec (.of D.k))]
+    [IsSeparated (X ↘ Spec (.of D.k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]
+    {m n : ℕ} (h : n ≤ m) :
+    (coefficientFiniteQuotientDerived l E X h).obj
+        (integralDualizingFiniteTerm l E D X m) ⟶ integralDualizingFiniteTerm l E D X n :=
+  (Adjunction.leftAdjointUniq
+    ((coefficientDerivedSystemEvaluationCalculus l E X).choose.quotientCalculus.adjunction h)
+    (Adjunction.ofIsRightAdjoint (normalizedDVRRes l E X h))).hom.app _ ≫
+      integralDualizingFiniteComparison l E D X hl h
+
+/-- The actual Verdier coefficient arrow is reduced evaluation followed by the
+normalized dualizing-object comparison. Thus evaluation, not an arbitrary object
+isomorphism, determines its value and its tensor-Hom transpose.
+Source: blueprint (vii) (blueprint: thm-sf-ctf-stability). -/
+noncomputable def sfStabilityVerdierReduction
+    (X : Scheme.{u}) [X.Over (Spec (.of D.k))]
+    [IsSeparated (X ↘ Spec (.of D.k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]
+    {m n : ℕ} (h : n ≤ m)
+    (K : proEtaleDerivedCategory X (Padic.coefficientExtensionRing l E (m + 1))) :
+    (coefficientFiniteQuotientDerived l E X h).obj
+        ((finiteIntrinsicDerivedInternalHom l E X m).obj
+          (op K, integralDualizingFiniteTerm l E D X m)) ⟶
+      (finiteIntrinsicDerivedInternalHom l E X n).obj
+        (op ((coefficientFiniteQuotientDerived l E X h).obj K),
+          integralDualizingFiniteTerm l E D X n) :=
+  finiteIntrinsicReductionHom l E X h K (integralDualizingFiniteTerm l E D X m) ≫
+    (finiteIntrinsicDerivedInternalHom l E X n).map
+      (Prod.mkHom (𝟙 _) (sfStabilityDualizingReduction D l hl E X h))
+
+private theorem sfStabilityCanonicalQuotientPreserves
+    (W : Scheme.{u}) {m n : ℕ} (h : n ≤ m) (K : normalizedDVRDerived l E W m)
+    (hK : finiteTorConstructible l E (m + 1) (Nat.succ_pos m) W K) :
+    finiteTorConstructible l E (n + 1) (Nat.succ_pos n) W
+      ((pbcDerivedExtend (compactSupportLevelSheafQuotient l E W m n h)).obj K) := by
+  have he : FiniteExceptional.reduction l E W h =
+      pbcDerivedExtend (compactSupportLevelSheafQuotient l E W m n h) := by
+    apply congrArg (reductionDerivedChange W)
+    rfl
+  rw [← he]
+  exact FiniteExceptional.reduction_preserves l E W h ⟨K, hK⟩
+
+private theorem sfStabilityQuotientPreserves
+    (W : Scheme.{u}) {m n : ℕ} (h : n ≤ m) (K : normalizedDVRDerived l E W m)
+    (hK : finiteTorConstructible l E (m + 1) (Nat.succ_pos m) W K) :
+    finiteTorConstructible l E (n + 1) (Nat.succ_pos n) W
+      ((coefficientFiniteQuotientDerived l E W h).obj K) := by
+  let e := Adjunction.leftAdjointUniq
+    (Adjunction.ofNatIsoRight
+      ((coefficientDerivedSystemEvaluationCalculus l E W).choose.quotientCalculus.adjunction h)
+      (eqToIso (sfStabilityQuotientRestrictionEquality l E W h)))
+    (pbcDerivedScalarAdjunction (compactSupportLevelSheafQuotient l E W m n h))
+  exact sfStabilityFiniteTorOfIso l E n W (e.app K).symm
+    (sfStabilityCanonicalQuotientPreserves l E W h K hK)
+
+private theorem sfStabilityFiniteDualizingConstructible
+    (X : Scheme.{u}) [X.Over (Spec (.of D.k))]
+    [IsSeparated (X ↘ Spec (.of D.k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]
+    (m : ℕ) : finiteTorConstructible l E (m + 1) (Nat.succ_pos m) X
+      (integralDualizingFiniteTerm l E D X m) := by
+  classical
+  let A := ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (m + 1))
+  let : Finite (Padic.coefficientExtensionRing l E (m + 1)) :=
+    Padic.finite_coefficientExtensionRing l E _ (Nat.succ_pos m)
+  let : HasInvertibleExponent A (Spec (.of D.k)) :=
+    coefficient_invertible_exponent D l hl E (m + 1)
+  let := (finiteDualizingCompactification D X).hasCompactification
+  let ωe := finiteDualizingEtaleTerm l E D X m
+  have hω : finiteTorConstructibleEtale l E (m + 1) (Nat.succ_pos m) X ωe := by
+    apply (finiteTorConstructibleEtale_iff_source l E (m + 1) (Nat.succ_pos m) X ωe).2
+    exact Etale.constructibleFiniteTor_dualizingComplex A (𝟙 _) _
+      (Etale.constructibleFiniteTor_unit A)
+  let eω : (finiteHomNu l E X m).obj ωe ≅ integralDualizingFiniteTerm l E D X m :=
+    (@Functor.mapDerivedCategoryCompIso.{u + 2, u + 2, u + 2,
+        u + 1, u + 1, u + 1, u + 1, u + 1, u + 2}
+      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))
+      (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} A))
+      (scalarReductionTarget.{u, u} l E X m)
+      _ _ _ _ _ _
+      (HasDerivedCategory.ofIsGrothendieckAbelian.{u + 1} _)
+      (HasDerivedCategory.ofIsGrothendieckAbelian.{u + 1} _)
+      (HasDerivedCategory.standard _)
+      (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) X)
+      (ProEtale.finiteCoefficientIntrinsicRealization X
+        (Padic.coefficientExtensionRing l E (m + 1)))
+      inferInstance
+      (ProEtale.finiteCoefficientIntrinsicRealization_exact X
+        (Padic.coefficientExtensionRing l E (m + 1))).2.1
+      inferInstance inferInstance
+      (ProEtale.finiteCoefficientIntrinsicRealization_exact X
+        (Padic.coefficientExtensionRing l E (m + 1))).2.2.1
+      (ProEtale.finiteCoefficientIntrinsicRealization_exact X
+        (Padic.coefficientExtensionRing l E (m + 1))).2.2.2).app ωe ≪≫
+      finiteDualizingOrigin l E D X m
+  have hωp := ((coefFiniteHomSiteDescent D l hl E X).1 m).2.2.2.2 ωe hω |>.1
+  exact sfStabilityFiniteTorOfIso l E m X eω hωp
+
+private theorem sfStabilityCanonicalSupportReductionIsIso
+    (X : Scheme.{u}) [X.Over (Spec (.of D.k))]
+    [IsSeparated (X ↘ Spec (.of D.k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]
+    (Y : Scheme.{u}) [Y.Over (Spec (.of D.k))]
+    [IsSeparated (Y ↘ Spec (.of D.k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]
+    (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))]
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    (c : Compactification f) {m n : ℕ} (h : n ≤ m)
+    (K : normalizedDVRDerived l E X m)
+    (hK : finiteTorConstructible l E (m + 1) (Nat.succ_pos m) X K) :
+    IsIso (((sfStabilityCanonicalQuotientAdjunction l E Y h).homEquiv _ _).symm
+      ((sfAmbientCompactSupportCandidate (Padic.coefficientExtensionRing l E (m + 1)) c).map
+          ((sfStabilityCanonicalQuotientAdjunction l E X h).unit.app K) ≫
+        (sfCompactSupportRestriction c (compactSupportLevelQuotient l E m n h)).hom.app
+          ((pbcDerivedExtend (compactSupportLevelSheafQuotient l E X m n h)).obj K))) := by
+  exact finiteCompactSupportScalarComparison l E D.k (finiteFieldDatumPrimeUnit D l hl)
+    (m + 1) (Nat.succ_pos m) (n + 1) (Nat.succ_pos n)
+    (Nat.add_le_add_right h 1) f c K hK.1 (sfStabilityCanonicalQuotientPreserves l E X h K hK).1
+
+private theorem sfStabilitySupportReductionIsIso
+    (X : Scheme.{u}) [X.Over (Spec (.of D.k))]
+    [IsSeparated (X ↘ Spec (.of D.k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]
+    (Y : Scheme.{u}) [Y.Over (Spec (.of D.k))]
+    [IsSeparated (Y ↘ Spec (.of D.k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]
+    (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))]
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    (c : Compactification f) {m n : ℕ} (h : n ≤ m)
+    (K : proEtaleDerivedCategory X (Padic.coefficientExtensionRing l E (m + 1)))
+    (hK : finiteTorConstructible l E (m + 1) (Nat.succ_pos m) X K) :
+    IsIso ((sfStabilitySupportReduction l E c h).app K) := by
+  exact (sfStabilitySupportReductionData l E c h).property K
+    (sfStabilityCanonicalSupportReductionIsIso D l hl E X Y f c h K hK)
+
+/-- Finite quotient change preserves the finite-Tor domain and commutes with
+its actual internal Hom, tensor, Verdier duality and compact-support direct image.
+The displayed evaluation compatibility includes naturality, every transpose and
+internal composition; the tensor comparison is fixed on K-flat pure tensors.
+Source: blueprint (vii) (blueprint: thm-sf-ctf-stability).
+
+Proof: scalar extension on bounded flat models preserves the constructible Tor
+domain. The tensor comparison is the normalized derived balancing comparison.
+For general Hom use geometric Verdier duality and the finite Hom coefficient
+theorem, which identifies exactly the transpose of reduced evaluation. Apply
+exceptional coefficient change at the coefficient unit for the dualizing object;
+composition with Hom reduction gives Verdier change. Compact support is open
+extension followed by proper direct image, and both coefficient comparisons are
+the canonical scalar mates of the normalized restriction squares. -/
+theorem finiteTor_stability_quotients
+    (X : Scheme.{u}) [X.Over (Spec (.of D.k))]
+    [IsSeparated (X ↘ Spec (.of D.k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]
+    {m n : ℕ} (h : n ≤ m) :
+    (∀ K : proEtaleDerivedCategory X (Padic.coefficientExtensionRing l E (m + 1)),
+      finiteTorConstructible l E (m + 1) (Nat.le_add_left 1 m) X K →
+      finiteTorConstructible l E (n + 1) (Nat.le_add_left 1 n) X
+        ((coefficientFiniteQuotientDerived l E X h).obj K)) ∧
+    (∀ K L : proEtaleDerivedCategory X (Padic.coefficientExtensionRing l E (m + 1)),
+      finiteTorConstructible l E (m + 1) (Nat.le_add_left 1 m) X K →
+      finiteTorConstructible l E (m + 1) (Nat.le_add_left 1 m) X L →
+      IsIso (finiteIntrinsicReductionHom l E X h K L)) ∧
+    CoefficientEvaluationCompatible (finiteIntrinsicClosed l E X m)
+      (finiteIntrinsicClosed l E X n) (coefficientFiniteQuotientDerived l E X h)
+      ((coefficientDerivedSystemEvaluationCalculus l E X).choose.quotientCalculus.tensor h) ∧
+    (∀ K : proEtaleDerivedCategory X (Padic.coefficientExtensionRing l E (m + 1)),
+      finiteTorConstructible l E (m + 1) (Nat.le_add_left 1 m) X K →
+      IsIso (sfStabilityVerdierReduction D l hl E X h K)) ∧
+    ∀ (Y : Scheme.{u}) [Y.Over (Spec (.of D.k))]
+      [IsSeparated (Y ↘ Spec (.of D.k))]
+      [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))]
+      (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))]
+      [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+      (c : Compactification f)
+      (K : proEtaleDerivedCategory X (Padic.coefficientExtensionRing l E (m + 1))),
+      finiteTorConstructible l E (m + 1) (Nat.le_add_left 1 m) X K →
+      IsIso ((sfStabilitySupportReduction l E c h).app K) := by
+  have hHom := finiteCoefficient_derivedHom_change D l hl E X m n h
+  have hhom (K L : normalizedDVRDerived l E X m)
+      (hK : finiteTorConstructible l E (m + 1) (Nat.succ_pos m) X K)
+      (hL : finiteTorConstructible l E (m + 1) (Nat.succ_pos m) X L) :
+      IsIso (finiteIntrinsicReductionHom l E X h K L) :=
+    (hHom.2.2.2.2.2.1 K L hK hL).2.2
+  refine ⟨sfStabilityQuotientPreserves l E X h, hhom, hHom.2.2.2.1, ?_, ?_⟩
+  · intro K hK
+    have := hhom K _ hK (sfStabilityFiniteDualizingConstructible D l hl E X m)
+    have := (finiteDualizingCoefficientComparisons l E D X hl).2.2.2.1 h
+    have : IsIso (sfStabilityDualizingReduction D l hl E X h) := by
+      dsimp only [sfStabilityDualizingReduction]
+      infer_instance
+    have : IsIso (Prod.mkHom (𝟙 (op ((coefficientFiniteQuotientDerived l E X h).obj K)))
+        (sfStabilityDualizingReduction D l hl E X h)) :=
+      (isIso_prod_iff (f := Prod.mkHom
+        (𝟙 (op ((coefficientFiniteQuotientDerived l E X h).obj K)))
+        (sfStabilityDualizingReduction D l hl E X h))).mpr
+        ⟨inferInstance, inferInstance⟩
+    dsimp only [sfStabilityVerdierReduction]
+    infer_instance
+  · intro Y _ _ _ _ f _ _ _ _ c K hK
+    exact sfStabilitySupportReductionIsIso D l hl E X Y f c h K hK
 
 end Morphism
 

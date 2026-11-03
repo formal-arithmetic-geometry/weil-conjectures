@@ -209,6 +209,12 @@ import WeilConjectures.AlgebraicGeometry.SpTowerProjection.TowerCompactSupportPr
 import Mathlib.FieldTheory.Finite.Basic
 import WeilConjectures.AlgebraicGeometry.Cohomological.CohomologicalSmoothnessFiniteComparison
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+import WeilConjectures.AlgebraicGeometry.SmoothOfRelativeDimension.SmoothAdmissibleCoordinateCover
+import WeilConjectures.AlgebraicGeometry.SpTowerGluing.SmoothPurityTowerBinaryPairGluing
+import WeilConjectures.AlgebraicGeometry.SpTowerGluing.SmoothPurityTowerPairOpenRestriction2
+import WeilConjectures.AlgebraicGeometry.SpTowerGluing.SmoothPurityTowerLocalCounitRepresentability
+
+public import WeilConjectures.AlgebraicGeometry.SpTowerGamma.SmoothPurityTowerGammaData
 
 /-!
 # Natural integral reconstruction comparisons
@@ -303,6 +309,78 @@ def supportCoordinates (b : SpTowerShriek.Base l E) (o : SpTowerShriek.Operation
         (SpTowerShriek.push l E b (o.geometry c.g) ⋙
           (SpTowerCalculus.realization l E b Y (D Y)).inverse))
 
+/-- Restriction of the actual reduction, retaining every ambient morphism.
+Source: blueprint, r_T (blueprint: lem-sp-integral-reconstruction-comparisons). -/
+def red (T : Scheme.{u}) (D : SpCoefficientTowersAbelian l E T)
+    (r : SpReductionTower l E T D) (a : Reconstruction l E T D r) :=
+  (spNormalizedConstructibleTorTowers l E T D).lift
+    ((sfIntegralConstructible l E T).ι ⋙ reduction l E T D r) a.reduction_mem
+
+/-- Restriction of total derived limit after scalar forgetting.
+Source: blueprint, L_T (blueprint: lem-sp-integral-reconstruction-comparisons). -/
+def lim (T : Scheme.{u}) (D : SpCoefficientTowersAbelian l E T)
+    (r : SpReductionTower l E T D) (a : Reconstruction l E T D r) :=
+  (sfIntegralConstructible l E T).lift
+    ((spNormalizedConstructibleTorTowers l E T D).ι ⋙
+      totalLimit l E T D r a.presentation) a.limit_mem
+
+/-- The actual reconstruction unit as an isomorphism in the full integral category.
+Source: blueprint, u_A (blueprint: lem-sp-integral-reconstruction-comparisons). -/
+def unit (T : Scheme.{u}) (D : SpCoefficientTowersAbelian l E T)
+    (r : SpReductionTower l E T D) (a : Reconstruction l E T D r)
+    (M : sfIntegralConstructibleCategory l E T) :
+    M ≅ (lim l E T D r a).obj ((red l E T D r a).obj M) :=
+  ObjectProperty.isoMk _
+    (@asIso _ _ _ _ (a.presentation.adjunction.unit.app M.obj) (a.unit_iso M))
+
+/-- The normalized full subcategory inside the ambient uniformly constructible category.
+Source: blueprint, restriction of the tower adjunction
+(blueprint: lem-sp-integral-reconstruction-comparisons). -/
+def normalizedInclusion (T : Scheme.{u}) (D : SpCoefficientTowersAbelian l E T) :
+    spNormalizedConstructibleTorTowerCategory l E T D ⥤ spConstructibleTorTowerCategory l E T D :=
+  ObjectProperty.ιOfLE (fun _ h ↦ h.1)
+
+/-- Restrict the specified left tower functor using its normalization preservation.
+Source: blueprint, F_bullet on N_X (blueprint: lem-sp-integral-reconstruction-comparisons). -/
+def towerLeft {X Y : Scheme.{u}} (DX : SpCoefficientTowersAbelian l E X)
+    (DY : SpCoefficientTowersAbelian l E Y)
+    (F : spConstructibleTorTowerCategory l E X DX ⥤ spConstructibleTorTowerCategory l E Y DY)
+    (hF : ∀ N : spNormalizedConstructibleTorTowerCategory l E X DX,
+      IsSpNormalizedTower l E Y DY (F.obj ((normalizedInclusion l E X DX).obj N)).obj) :=
+  (spNormalizedConstructibleTorTowers l E Y DY).lift
+    (normalizedInclusion l E X DX ⋙ F ⋙ (spConstructibleTorTowers l E Y DY).ι)
+    (fun N ↦ ⟨(F.obj ((normalizedInclusion l E X DX).obj N)).property, hF N⟩)
+
+/-- Restrict the specified right tower functor using its normalization preservation.
+Source: blueprint, G_bullet on N_Y (blueprint: lem-sp-integral-reconstruction-comparisons). -/
+def towerRight {X Y : Scheme.{u}} (DX : SpCoefficientTowersAbelian l E X)
+    (DY : SpCoefficientTowersAbelian l E Y)
+    (G : spConstructibleTorTowerCategory l E Y DY ⥤ spConstructibleTorTowerCategory l E X DX)
+    (hG : ∀ N : spNormalizedConstructibleTorTowerCategory l E Y DY,
+      IsSpNormalizedTower l E X DX (G.obj ((normalizedInclusion l E Y DY).obj N)).obj) :=
+  (spNormalizedConstructibleTorTowers l E X DX).lift
+    (normalizedInclusion l E Y DY ⋙ G ⋙ (spConstructibleTorTowers l E X DX).ι)
+    (fun N ↦ ⟨(G.obj ((normalizedInclusion l E Y DY).obj N)).property, hG N⟩)
+
+/-- The exceptional integral functor is the specified composite L_X G_bullet r_Y.
+Source: blueprint, H(K) (blueprint: lem-sp-integral-reconstruction-comparisons). -/
+def exceptional {X Y : Scheme.{u}} (DX : SpCoefficientTowersAbelian l E X)
+    (DY : SpCoefficientTowersAbelian l E Y)
+    (rX : SpReductionTower l E X DX) (rY : SpReductionTower l E Y DY)
+    (aX : Reconstruction l E X DX rX) (aY : Reconstruction l E Y DY rY)
+    (G : spNormalizedConstructibleTorTowerCategory l E Y DY ⥤
+      spNormalizedConstructibleTorTowerCategory l E X DX) :=
+  red l E Y DY rY aY ⋙ G ⋙ lim l E X DX rX aX
+
+/-- Restrict the separately derived proper/open integral functor, without changing maps.
+Source: blueprint, F = R bar-f_* j_!
+(blueprint: lem-sp-integral-reconstruction-comparisons). -/
+def integralLeft {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
+    (hF : ∀ M : sfIntegralConstructibleCategory l E X,
+      sfIntegralConstructible l E Y ((image l E c).obj M.obj)) :=
+  (sfIntegralConstructible l E Y).lift
+    ((sfIntegralConstructible l E X).ι ⋙ image l E c) hF
+
 /-- The canonical compactification-limit word, followed by the fixed coordinate
 comparison. All factors are actual natural transformations of strict-tower functors.
 Source: blueprint, alpha_M in Bijections
@@ -325,5 +403,99 @@ def realization (b : SpTowerShriek.Base l E) (o : SpTowerShriek.Operations l E b
     Functor.whiskerLeft (reduction l E X (D X) rX)
       (Functor.whiskerRight (supportCoordinates l E b o D c).hom
         (totalLimit l E Y (D Y) rY aY))
+
+/-- The conclusions retain the actual ambient arrows: the reconstruction equivalence,
+the restricted specified adjunction, and natural b,c with their canonical formulas.
+Source: blueprint, Normalization and Bijections
+(blueprint: lem-sp-integral-reconstruction-comparisons). -/
+structure Comparisons (b : SpTowerShriek.Base l E) (o : SpTowerShriek.Operations l E b)
+    (q : SpTowerCalculus.Coordinates l E b)
+    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
+    (rX : SpReductionTower l E X (q.abelian X))
+    (rZ : SpReductionTower l E c.Z (q.abelian c.Z))
+    (rY : SpReductionTower l E Y (q.abelian Y))
+    (aX : Reconstruction l E X (q.abelian X) rX)
+    (aY : Reconstruction l E Y (q.abelian Y) rY)
+    (aZ : LimitPresentation l E c.Z (q.abelian c.Z) rZ)
+    (e : forgetting l E X (q.abelian X) ⋙ fixedOpenOrd l E c.i ≅
+      ordinaryTowerOpen l E b o c.i ⋙ forgetting l E c.Z (q.abelian c.Z))
+    (d : forgetDerived l E c.Z (q.abelian c.Z) rZ aZ ⋙
+        (fixedPushOrd l E c.g).rightDerivedFunctor ≅
+      towerPush l E b o c.g (q.abelian c.Z) (q.abelian Y) ⋙
+        forgetDerived l E Y (q.abelian Y) rY aY.presentation)
+    (hF : ∀ M : SpTowerCalculus.C l E b q X,
+      spConstructibleTorTowers l E Y (q.abelian Y)
+        ((SpTowerCalculus.F l E b o q c).obj M.obj))
+    (G : SpTowerCalculus.C l E b q Y ⥤ SpTowerCalculus.C l E b q X)
+    (adj : SpTowerGluing.support l E b o q c hF ⊣ G)
+    (hFn : ∀ N : spNormalizedConstructibleTorTowerCategory l E X (q.abelian X),
+      IsSpNormalizedTower l E Y (q.abelian Y)
+        ((SpTowerGluing.support l E b o q c hF).obj
+          ((normalizedInclusion l E X (q.abelian X)).obj N)).obj)
+    (hGn : ∀ N : spNormalizedConstructibleTorTowerCategory l E Y (q.abelian Y),
+      IsSpNormalizedTower l E X (q.abelian X)
+        (G.obj ((normalizedInclusion l E Y (q.abelian Y)).obj N)).obj) where
+  equivalenceX : sfIntegralConstructibleCategory l E X ≌
+    spNormalizedConstructibleTorTowerCategory l E X (q.abelian X)
+  equivalenceX_functor : equivalenceX.functor = red l E X (q.abelian X) rX aX
+  equivalenceX_inverse : equivalenceX.inverse = lim l E X (q.abelian X) rX aX
+  equivalenceY : sfIntegralConstructibleCategory l E Y ≌
+    spNormalizedConstructibleTorTowerCategory l E Y (q.abelian Y)
+  equivalenceY_functor : equivalenceY.functor = red l E Y (q.abelian Y) rY aY
+  equivalenceY_inverse : equivalenceY.inverse = lim l E Y (q.abelian Y) rY aY
+  adjunction : towerLeft l E (q.abelian X) (q.abelian Y)
+      (SpTowerGluing.support l E b o q c hF) hFn ⊣
+    towerRight l E (q.abelian X) (q.abelian Y) G hGn
+  unit_same : ∀ N : spNormalizedConstructibleTorTowerCategory l E X (q.abelian X),
+    (adjunction.unit.app N).hom =
+      (adj.unit.app ((normalizedInclusion l E X (q.abelian X)).obj N)).hom
+  counit_same : ∀ N : spNormalizedConstructibleTorTowerCategory l E Y (q.abelian Y),
+    (adjunction.counit.app N).hom =
+      (adj.counit.app ((normalizedInclusion l E Y (q.abelian Y)).obj N)).hom
+  image_mem : ∀ M : sfIntegralConstructibleCategory l E X,
+    sfIntegralConstructible l E Y ((image l E c).obj M.obj)
+  direct : integralLeft l E c image_mem ⋙ red l E Y (q.abelian Y) rY aY ≅
+    red l E X (q.abelian X) rX aX ⋙
+      towerLeft l E (q.abelian X) (q.abelian Y) (SpTowerGluing.support l E b o q c hF) hFn
+  direct_hom : ∀ M : sfIntegralConstructibleCategory l E X,
+    (direct.hom.app M).hom =
+      (reduction l E Y (q.abelian Y) rY).map
+        ((realization l E b o q.abelian c rX rZ rY aX.presentation aZ aY.presentation e d).app
+          M.obj) ≫
+      aY.presentation.adjunction.counit.app
+        ((SpTowerCalculus.F l E b o q c).obj
+          ((reduction l E X (q.abelian X) rX).obj M.obj))
+  exceptionalComparison :
+    exceptional l E (q.abelian X) (q.abelian Y) rX rY aX aY
+        (towerRight l E (q.abelian X) (q.abelian Y) G hGn) ⋙
+      red l E X (q.abelian X) rX aX ≅
+    red l E Y (q.abelian Y) rY aY ⋙ towerRight l E (q.abelian X) (q.abelian Y) G hGn
+  exceptional_hom : ∀ K : sfIntegralConstructibleCategory l E Y,
+    (exceptionalComparison.hom.app K).hom =
+      aX.presentation.adjunction.counit.app
+        (G.obj ((normalizedInclusion l E Y (q.abelian Y)).obj
+          ((red l E Y (q.abelian Y) rY aY).obj K))).obj
+  direct_naturality : ∀ (M M' : sfIntegralConstructibleCategory l E X) (a : M ⟶ M'),
+    (direct.hom.app M) ≫
+        (red l E X (q.abelian X) rX aX ⋙
+          towerLeft l E (q.abelian X) (q.abelian Y)
+            (SpTowerGluing.support l E b o q c hF) hFn).map a =
+      (integralLeft l E c image_mem ⋙ red l E Y (q.abelian Y) rY aY).map a ≫
+        direct.hom.app M'
+  exceptional_naturality : ∀ (K K' : sfIntegralConstructibleCategory l E Y) (h : K ⟶ K'),
+    exceptionalComparison.hom.app K ≫
+        (red l E Y (q.abelian Y) rY aY ⋙
+          towerRight l E (q.abelian X) (q.abelian Y) G hGn).map h =
+      (exceptional l E (q.abelian X) (q.abelian Y) rX rY aX aY
+          (towerRight l E (q.abelian X) (q.abelian Y) G hGn) ⋙
+        red l E X (q.abelian X) rX aX).map h ≫ exceptionalComparison.hom.app K'
+  reconstructX : ∀ (A B : sfIntegralConstructibleCategory l E X) (a : A ⟶ B),
+    a = (unit l E X (q.abelian X) rX aX A).hom ≫
+      (lim l E X (q.abelian X) rX aX).map ((red l E X (q.abelian X) rX aX).map a) ≫
+        (unit l E X (q.abelian X) rX aX B).inv
+  reconstructY : ∀ (A B : sfIntegralConstructibleCategory l E Y) (a : A ⟶ B),
+    a = (unit l E Y (q.abelian Y) rY aY A).hom ≫
+      (lim l E Y (q.abelian Y) rY aY).map ((red l E Y (q.abelian Y) rY aY).map a) ≫
+        (unit l E Y (q.abelian Y) rY aY B).inv
 
 end AlgebraicGeometry.ProEtale.IntegralReconstructionComparisons

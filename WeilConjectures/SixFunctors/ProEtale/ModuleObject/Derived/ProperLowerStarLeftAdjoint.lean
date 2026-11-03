@@ -11,6 +11,43 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStar
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarIntegralTransport
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarTwoColimit
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.RationalProperLowerStarAdjoint
+public import Mathlib.CategoryTheory.Adjunction.Additive
+public import Mathlib.CategoryTheory.Adjunction.Basic
+public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
+import WeilConjectures.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
+import WeilConjectures.AlgebraicGeometry.CoherentReduction.ProperTorsionAdjunctionRealization
+import WeilConjectures.AlgebraicGeometry.CoherentReduction.CoherentMappingSystems
+import WeilConjectures.AlgebraicGeometry.FiniteProperQuotient.FiniteExceptionalDerivedHom
+import WeilConjectures.AlgebraicGeometry.CoherentReduction.FiniteProperReductionTransport
+import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStar
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ComparisonUpperStar
+import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapMate
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.EtaleOrigin
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarProjComparison
+import WeilConjectures.AlgebraicGeometry.CoherentReduction.CoherentIntegralReduction
+import Mathlib.Algebra.Field.ULift
+import Mathlib.Condensed.TopComparison
+import Mathlib.Topology.Category.Profinite.EffectiveEpi
+import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
+import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import WeilConjectures.ConstructibleSheaf.ProEtaleModule.IsoClosed
+import WeilConjectures.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
+import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
+import Mathlib.CategoryTheory.ObjectProperty.Equivalence
+import WeilConjectures.CategoryTheory.GrothendieckDerivedBrownRightAdjoint
+public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalizationHom
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive
+public import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ProfiniteCondensedRing
+public import WeilConjectures.CategoryTheory.ScalarLocalization.ScalarLocalization
+public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
+public import WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperQlbarAdjointOfFiniteCoefficients
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.LocalizedDirectImageComparison
 
 /-!
 # The proper direct image on `Dᵇc` is a left adjoint, over any field
@@ -64,19 +101,26 @@ instance isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj
     (fun E' ↦
       isLeftAdjoint_boundedConstructibleLowerStar_padicIntegersRingObj_of_isProper' ℓ E' g) E
 
-/-- Blueprint `lem-sfb-dc-proper-pushforward-left-adjoint-e`: for a proper morphism
-`g : Z ⟶ Y` and a finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, the derived pushforward
-`Rg_* : Dᵇc(Z)⟦E̲⟧ ⥤ Dᵇc(Y)⟦E̲⟧` is a left adjoint: invert `ℓ` in the case of `𝒪̲_E`. -/
+/-- Proper pushforward with finite-extension coefficients has a right adjoint.
+Source: inversion-of-ell step of the current blueprint proper-adjoint proof
+(blueprint: sk-def-sfb-dc-upper-shriek). -/
 instance isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj
-    (E : PadicAlgCl.FiniteIntermediateField ℓ) :
+    (E : PadicAlgCl.FiniteIntermediateField ℓ)
+    [IsProper g.left] :
     (ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E g).IsLeftAdjoint :=
-  isLeftAdjoint_boundedConstructibleLowerStar_continuousMapRingObj_of_padicIntegersRingObj ℓ g E
+  isLeftAdjoint_finiteCoefficients ℓ g E
 
-/-- Blueprint `lem-sfb-dc-proper-pushforward-left-adjoint-qlbar`: for a proper morphism
-`g : Z ⟶ Y`, the derived pushforward `Rg_* : Dᵇc(Z)⟦ℚ̲̄_ℓ⟧ ⥤ Dᵇc(Y)⟦ℚ̲̄_ℓ⟧` is a left adjoint: the
-2-colimit of the cases of the finite subextensions `E ⊆ ℚ̄_ℓ`. -/
-instance isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj :
-    (boundedConstructibleLowerStar ℓ g).IsLeftAdjoint :=
-  isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj_of_forall ℓ g
+/-- Proper pushforward with algebraic-closure coefficients has a right adjoint.
+Use the current proper-adjoint theorem on its stated finite/algebraically closed domain;
+for other fields descend the finite-extension adjunctions along coefficient enlargement.
+Source: current blueprint proper-adjoint theorem and its finite-coefficient descent step
+(blueprint: sk-def-sfb-dc-upper-shriek). -/
+instance isLeftAdjoint_boundedConstructibleLowerStar_padicAlgClRingObj [IsProper g.left] :
+    (boundedConstructibleLowerStar ℓ g).IsLeftAdjoint := by
+  classical
+  by_cases hk : Finite k ∨ IsAlgClosed k
+  · exact properPushforwardLeftAdjointQlbar ℓ hk g
+  · exact properPushforwardLeftAdjointQlbar_of_finiteCoefficients ℓ g
+      (fun E ↦ isLeftAdjoint_finiteCoefficients ℓ g E)
 
 end AlgebraicGeometry.ProEtale.CondensedRing

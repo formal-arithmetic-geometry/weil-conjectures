@@ -1,0 +1,213 @@
+/-
+Copyright (c) 2026 Bin Wu. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Bin Wu
+-/
+module
+
+public import WeilConjectures.AlgebraicGeometry.GeneralPurityTransport.GeneralTransportData
+public import WeilConjectures.AlgebraicGeometry.PurityTransport.TransportScalarLines
+public import WeilConjectures.CategoryTheory.ExactMonoidalEquivalenceDerived.ExactMonoidalEquivalenceDerived
+public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinary.FiniteCoefficientHeartTensor
+import WeilConjectures.AlgebraicGeometry.PurityTransport.Coefficient.TransportCoefficients
+import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteDiscreteCondensedRing
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteDiscreteCoefficientEncodingDataSupplement
+import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteDiscreteCondensedRing
+import WeilConjectures.AlgebraicGeometry.InternalModuleAbEquivalence
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteDiscreteRestrictionEncodingSupplement
+import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
+public import WeilConjectures.AlgebraicGeometry.PurityTransport.TransportRoot
+public import WeilConjectures.AlgebraicGeometry.Cartier.CartierReductionDataSupplement
+public import WeilConjectures.AlgebraicGeometry.Ordinary.OrdinaryFiniteP1KummerSupplement
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.Monoidal
+public import WeilConjectures.CategoryTheory.Constant.ConstantScalarRestrictionTensorSupplement
+public import WeilConjectures.CategoryTheory.InternalSectionTensorComparison
+public import WeilConjectures.AlgebraicGeometry.PurityTransport.TransportUnits
+public import WeilConjectures.AlgebraicGeometry.Comparison.ComparisonConstantGenerator
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedComp
+public import WeilConjectures.AlgebraicGeometry.Canonical.CanonicalCompactSupportSiteComparison
+public import WeilConjectures.AlgebraicGeometry.FiniteSmoothPurity.FiniteSmoothAdjunctionData
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekIndependence
+public import WeilConjectures.AlgebraicGeometry.PurityTransport.TransportDerived
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ComparisonMonoidal
+
+import WeilConjectures.AlgebraicGeometry.FiniteGeneralRingStatement
+import WeilConjectures.AlgebraicGeometry.CondensedIntegralTower.IntegralAdjunctionStatement
+import WeilConjectures.AlgebraicGeometry.Integral.IntegralModels
+import WeilConjectures.AlgebraicGeometry.CoefficientBoundedConstructibleProEtale
+import WeilConjectures.CategoryTheory.Right.RightDerivedFunctorOfQuasiIsoResolutions
+import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
+import WeilConjectures.CategoryTheory.RingObjects.Condensed.ProfiniteCondensedRing
+import WeilConjectures.NumberTheory.Padics.CoefficientExtensionFinite
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Continuous.ContinuousCoefficientModuleEncodingSupplement
+import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomModule
+import WeilConjectures.AlgebraicGeometry.ProEtaleCoefficients.PadicIntegersInvertEll
+import Mathlib.Algebra.Module.TransferInstance
+import Mathlib.LinearAlgebra.TensorProduct.Tower
+import Mathlib.Topology.MetricSpace.Ultra.TotallySeparated
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
+import WeilConjectures.CategoryTheory.DerivedCategory.RationalizationMap
+import Mathlib.RingTheory.Localization.BaseChange
+import WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Continuous.ContinuousIntegralPushComparisonSupplement
+import WeilConjectures.AlgebraicGeometry.ContinuousConstructibleIntegralModel
+import WeilConjectures.AlgebraicGeometry.Cartesian.CartesianCoefficients
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.IntegralModelsOperations
+import WeilConjectures.SixFunctors.Integral.IntegralModelsGenerators
+import WeilConjectures.AlgebraicGeometry.ProperBaseChange.PadicIntegersBoundedTriangulated
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Bounded.BoundedConstructiblePushforwardRestriction
+import WeilConjectures.AlgebraicGeometry.Compactification.CompactificationOverField
+import WeilConjectures.Compactification.NagataCompactification
+import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+import Mathlib.AlgebraicGeometry.Morphisms.Proper
+import WeilConjectures.NumberTheory.Padics.CoefficientExtensionSupplement
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedModuleDerivedPushpull
+import WeilConjectures.AlgebraicGeometry.ProEtaleCoefficients.ProfiniteFiniteConstantLocalModel
+import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+import WeilConjectures.CategoryTheory.SmoothPurity.ComplexColimitHomotopyColimit
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
+import Mathlib.AlgebraicGeometry.Scheme
+import Mathlib.Algebra.Homology.DerivedCategory.Basic
+import Mathlib.CategoryTheory.Limits.HasLimits
+import Mathlib.AlgebraicGeometry.Sites.Proetale
+import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+import WeilConjectures.CategoryTheory.RingedSiteModules
+import WeilConjectures.AlgebraicGeometry.ProEtaleInverseImage
+import WeilConjectures.AlgebraicGeometry.ProEtale.Bounded.ProEtaleBoundedContinuitySections
+import WeilConjectures.AlgebraicGeometry.ProEtale.Bounded.ProEtaleBoundedContinuityDirectImage
+import WeilConjectures.CategoryTheory.InternalAbelianSheafModuleEquivalence
+import WeilConjectures.Compactification.BoundaryRefinement
+import WeilConjectures.AlgebraicGeometry.ContinuousIntegralCoefficientData
+import WeilConjectures.AlgebraicGeometry.IntegralCtfEqualsBc
+import WeilConjectures.CategoryTheory.ProEtaleCoefficients.LocalizingAdmissibleCoefficients
+import Mathlib.CategoryTheory.Linear.Yoneda
+import WeilConjectures.AlgebraicGeometry.IntegralConstructibleSheafHom
+import WeilConjectures.CategoryTheory.HomColimitExtension
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
+import WeilConjectures.AlgebraicGeometry.Integral.IntegralLfpConstantModelComparison
+import WeilConjectures.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
+import WeilConjectures.AlgebraicGeometry.Finite.Constant.FiniteConstantLocalModel
+import WeilConjectures.AlgebraicGeometry.Condensed.CondensedConstantConstructibilitySupplement
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
+import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+import Mathlib.AlgebraicGeometry.Properties
+import Mathlib.CategoryTheory.Triangulated.Subcategory
+import Mathlib.Topology.NoetherianSpace
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteModelStratumFiltration
+import Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
+import Mathlib.Data.Fin.Tuple.Basic
+import Mathlib.Order.CompletePartialOrder
+import WeilConjectures.AlgebraicGeometry.ConstantModelTorAmplitude
+import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeartLisseExtensionConstructible
+import WeilConjectures.SixFunctors.TopologicalLisseIntegralClosure
+import WeilConjectures.SixFunctors.TopologicalIntegralConstructibility
+import WeilConjectures.CategoryTheory.ScalarLocalization.ScalarLocalization
+import WeilConjectures.AlgebraicGeometry.Adic.AdicConstructibilityPredicateComparison
+import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
+import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
+import WeilConjectures.Compactification.Dense
+import WeilConjectures.AlgebraicGeometry.Finite.Coefficient.FiniteCoefficientDescentTwoColimit
+import Mathlib.CategoryTheory.Adjunction.Unique
+import WeilConjectures.AlgebraicGeometry.CondensedIntegralTower.IntegralTowerStatement
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteLocalizingExceptionalPreservation
+import WeilConjectures.AlgebraicGeometry.Scalar.ScalarExtensionFunctor
+import WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinary.FiniteDiscreteOrdinaryEncodingSupplement
+import WeilConjectures.AlgebraicGeometry.Smooth.SmoothPurityNormalizedTowers
+import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMapCondensedRingMap
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Scalar.ScalarSixDefinitions
+import WeilConjectures.AlgebraicGeometry.Cartesian.CartesianCoefficientTwistsSupplement
+import WeilConjectures.AlgebraicGeometry.InternalModuleOperations.InternalModuleOperationsTransportSupplement
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Scalar.ScalarSixDerivedPullbackNormalization
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Scalar.ScalarSixImmersionComparison
+import WeilConjectures.AlgebraicGeometry.ProEtale.Fixed.ProEtaleFixedModuleConstructible
+import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleTorAmplitudePresentations
+import Mathlib.Topology.Category.Profinite.AsLimit
+import WeilConjectures.ProperBaseChange.ProfiniteTestObjectFunctor
+import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
+import WeilConjectures.Algebra.Homology.SixFunctors.OrdinaryDerivedChangeOfRings
+import WeilConjectures.CategoryTheory.SheafTensor
+import WeilConjectures.CategoryTheory.SixFunctors.InternalSectionScalarAdjunctionSupplement
+import WeilConjectures.AlgebraicGeometry.Reduction.ReductionDirectImageComparison
+import WeilConjectures.AlgebraicGeometry.Reduction.ReductionDirectImage
+import WeilConjectures.AlgebraicGeometry.Reduction.ReductionExceptionalObjects
+import WeilConjectures.AlgebraicGeometry.Reduction.ReductionExceptionalRealization
+import WeilConjectures.AlgebraicGeometry.Reduction.ReductionExceptionalConservativity
+import WeilConjectures.AlgebraicGeometry.Reduction.ReductionExceptionalChart
+import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantModuleConstructibility
+import WeilConjectures.AlgebraicGeometry.Reduction.ReductionCompatibilities
+import WeilConjectures.AlgebraicGeometry.CondensedQbarPurityAdjunction.CondensedQbarPurityAdjunction
+import WeilConjectures.AlgebraicGeometry.IntegralDirectImageTower.IntegralDirectImageTowerStatement
+import WeilConjectures.AlgebraicGeometry.CondensedIntegralTower.GeometricTowerStatement
+
+/-! # The construction underlying smooth purity, before composition
+
+Source: latest blueprint directory
+part-duality-trace-formula/sec-smooth-purity/sec-sp-grp-setup/
+sec-the-purity-statement/sk-thm-purity-transport/, file sk-thm-purity-transport.proof.md,
+Steps 1--4, including det-sp-purity-coefficient-change in Step 4.
+(blueprint: lem-pur-general-canonical-adjunction).
+
+Finite counits are fixed by the actual diagonal orientation and tensor transpose.
+The uniqueness assertion concerns the resulting family, including its counits;
+it does not merely assert existence of some adjunction. Composition is absent
+from the normalization and is proved separately in sk-prop-sp-composition.
+-/
+
+@[expose] public noncomputable section
+set_option autoImplicit false
+set_option relaxedAutoImplicit false
+universe u
+open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
+open AlgebraicGeometry AlgebraicGeometry.Scheme
+open AlgebraicGeometry.ProEtale.CondensedRing
+open AlgebraicGeometry.ProEtale.PurityTransport
+open scoped CategoryTheory.Obj
+namespace AlgebraicGeometry.ProEtale.GeneralPurityTransport
+
+variable (ell : ℕ) [Fact ell.Prime]
+
+/-- The canonical construction before any composition assertion.
+Source: transport proof Steps 1--4
+(blueprint: lem-pur-general-canonical-adjunction).
+
+Proof. Use the finite diagonal/DNC orientation and the projection/counit tensor
+mate on each constructible object; normalized section-action encoding transports
+this adjunction to condensed coefficients, with exactly the finite equation below.
+Assemble the finite units and counits in the actual normalized tower category,
+using their quotient cocycles, and transfer the Hom bijections by the reduction
+and derived-limit equivalence. This constructs the integral adjunction, not a
+choice of lifts of reduced morphisms. The same Hom comparison identifies uniquely
+any family satisfying the displayed finite and scalar normalization with this
+adjunction: perform the comparison in the tower category and apply the equivalence,
+rather than asserting faithfulness of derived evaluations. Localize these Hom
+bijections to finite rational extensions, and descend each finite diagram for the
+algebraic closure to a finite extension. These comparisons give uniqueness there
+as well. Brown comparison follows by the unique counit-preserving right-adjoint
+isomorphism. For Step 4 use the construction calculation in the proof of
+det-sp-purity-coefficient-change, before its later bundled purity statement.
+The whole integral counit and its finite reductions are those of
+det-sp-integral-adjunction-bijection. Use det-sp-reduction-compatibilities for
+finite purity reduction, and det-sp-field-extension-towers for scalar transport
+of the units and counits. The localized integral adjunction of
+det-sp-rational-adjunction and the finite-model Hom colimit of
+det-sp-qbar-adjunction transport this counit to rational and algebraic-closure
+coefficients. Naturality of the compact-support scalar comparison and injectivity
+of transposition give precisely the scalar-counit equations. This uses the earlier
+adjunction construction nodes, not the later coefficient-change theorem about the
+bundled transport family. This construction
+asserts neither base-change compatibility nor composition compatibility; those
+are the separate units cited after Steps 1--4 of the transport proof.
+-/
+theorem existsUnique_constructionFamily (k : Type u) [Field k]
+    [Fact (ringChar k).Prime] (_hk : Finite k ∨ IsAlgClosed k)
+    (hEll : IsUnit (ell : k)) :
+    ∃! a : AdjunctionFamily ell k,
+      ConstructionFiniteNormalized ell k hEll a ∧
+      ScalarCompatible ell k a ∧ BrownComparison ell k a := by
+  sorry
+
+end AlgebraicGeometry.ProEtale.GeneralPurityTransport
