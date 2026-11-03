@@ -21,6 +21,20 @@ universe u v w t
 open CategoryTheory CategoryTheory.Abelian
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
 
+/-- Ext-smallness supplies the shifted-single localization proof directly.
+Source: Mathlib `HasExt` and `HasSmallLocalizedShiftedHom`
+(blueprint: def-diagonal-ext-representative).
+Proof: apply the defining Ext-smallness proof to these objects and shifts.
+This shares a proof on the literal shifted complexes before geometric types
+are substituted; it changes no localization or Ext construction. -/
+theorem cyclicSmallShiftedSingleHom
+    {C : Type u} [Category.{v} C] [Abelian C] [h : HasExt.{w} C]
+    (X Y : C) (a b : ℤ) :
+    Localization.HasSmallLocalizedHom.{w}
+      (HomologicalComplex.quasiIso C (ComplexShape.up ℤ))
+      (((CochainComplex.singleFunctor C 0).obj X)⟦a⟧)
+      (((CochainComplex.singleFunctor C 0).obj Y)⟦b⟧) := by
+  exact h X Y a b
 
 /-- The actual Hom representative, kept behind a named function.
 Source: Mathlib Ext.Basic (blueprint: def-diagonal-ext-representative). -/
