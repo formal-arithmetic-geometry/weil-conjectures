@@ -141,6 +141,7 @@ import Mathlib.RingTheory.Flat.CategoryTheory
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.CategoryTheory.Localization.Predicate
+public import WeilConjectures.AlgebraicGeometry.Picard.KFlatResolutionIndependentCoefficients
 
 /-! # Descent of strict coefficient tensor complexes
 
@@ -256,6 +257,69 @@ structure Descent where
     ∃! α : T ≅ T', ∀ P : CochainComplex (Mod.{c, v, r} J R) ℤ,
       Resolving J R P → α.hom.app (DerivedCategory.Q.obj P) ≫ ε'.app P = ε.app P
 
+private theorem derivedPair
+    {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B]
+    [HasDerivedCategory A] [HasDerivedCategory B]
+    (E : A ⥤ B) [E.Additive] (p : CochainComplex A ℤ → Prop)
+    (res : ∀ K, ∃ (P : CochainComplex A ℤ) (s : P ⟶ K), p P ∧ QuasiIso s)
+    (hinv : ∀ {P Q : CochainComplex A ℤ} (s : P ⟶ Q),
+      p P → p Q → QuasiIso s → QuasiIso ((E.mapHomologicalComplex (.up ℤ)).map s)) :
+    ∃ (T : DerivedCategory A ⥤ DerivedCategory B)
+      (β : DerivedCategory.Q ⋙ T ⟶ E.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q),
+      T.IsLeftDerivedFunctor β (HomologicalComplex.quasiIso A (.up ℤ)) ∧
+      (E.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q).HasPointwiseLeftDerivedFunctor
+        (HomologicalComplex.quasiIso A (.up ℤ)) ∧
+      (∃ (_ : T.CommShift ℤ), T.IsTriangulated) ∧
+      ∀ K, p K → IsIso (β.app K) := by
+  classical
+  let q := HomotopyCategory.quotient A (.up ℤ)
+  let F := E.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh (C := B)
+  let P : Set (HomotopyCategory A (.up ℤ)) := fun X ↦
+    ∃ K : CochainComplex A ℤ, p K ∧ q.obj K = X
+  have hres : ∀ X : HomotopyCategory A (.up ℤ),
+      ∃ (Y : HomotopyCategory A (.up ℤ)) (s : Y ⟶ X),
+        Y ∈ P ∧ HomotopyCategory.quasiIso A (.up ℤ) s := by
+    intro X
+    obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective X
+    obtain ⟨L, s, hL, hs⟩ := res K
+    exact ⟨q.obj L, q.map s, ⟨L, hL, rfl⟩,
+      (HomotopyCategory.quotient_map_mem_quasiIso_iff s).2 hs⟩
+  have hmap : ∀ (X Y : HomotopyCategory A (.up ℤ)) (s : X ⟶ Y),
+      X ∈ P → Y ∈ P → HomotopyCategory.quasiIso A (.up ℤ) s → IsIso (F.map s) := by
+    rintro X Y s ⟨K, hK, rfl⟩ ⟨N, hN, rfl⟩ hs
+    obtain ⟨s, rfl⟩ := q.map_surjective s
+    have hs := hinv s hK hN ((HomotopyCategory.quotient_map_mem_quasiIso_iff s).1 hs)
+    change IsIso (DerivedCategory.Qh.map
+      ((HomotopyCategory.quotient B (.up ℤ)).map
+        ((E.mapHomologicalComplex (.up ℤ)).map s)))
+    exact Localization.inverts DerivedCategory.Qh (HomotopyCategory.quasiIso B (.up ℤ)) _
+      ((HomotopyCategory.quotient_map_mem_quasiIso_iff _).2 hs)
+  obtain ⟨hpw, T, ε, hu, ht, hc⟩ :=
+    Functor.leftDerived_from_resolvingClass A (DerivedCategory B) F P hres hmap
+  let : F.HasPointwiseLeftDerivedFunctor (HomotopyCategory.quasiIso A (.up ℤ)) := hpw
+  let : T.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso A (.up ℤ)) := hu
+  let α := (Functor.associator q DerivedCategory.Qh T).hom ≫ Functor.whiskerLeft q ε
+  have hα := pointwise_precomp_full q DerivedCategory.Qh F T ε
+    (Functor.isPointwiseRightKanExtensionOfHasPointwiseLeftDerivedFunctor T ε
+      (HomotopyCategory.quasiIso A (.up ℤ)))
+  let i := DerivedCategory.quotientCompQhIso A
+  let j : q ⋙ F ≅ E.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q :=
+    (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (E.mapHomotopyCategoryFactors (.up ℤ)) _ ≪≫
+      Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft _ (DerivedCategory.quotientCompQhIso B)
+  let β := Functor.whiskerRight i.inv T ≫ α ≫ j.hom
+  have hβ := pointwise_change_iso T i j α hα
+  refine ⟨T, β, ⟨hβ.isRightKanExtension⟩, ?_, ht, ?_⟩
+  · intro X
+    exact (Functor.hasPointwiseLeftDerivedFunctorAt_iff _ DerivedCategory.Q
+      (HomologicalComplex.quasiIso A (.up ℤ)) X).2
+        ((hβ _).hasPointwiseRightKanExtensionAt)
+  · intro K hK
+    have := hc (q.obj K) ⟨K, hK, rfl⟩
+    dsimp [β, α]
+    infer_instance
+
 attribute [local instance 21000] coefficientCompose
 
 set_option backward.isDefEq.respectTransparency true in
@@ -324,6 +388,15 @@ private theorem sequenceTransition
   change (M.level n).val.map (𝟙 U) ((M.transition h).val.app U x) = _
   rw [PresheafOfModules.map_id]
   rfl
+
+private theorem equivalencePreserves
+    {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B]
+    (e : A ≌ B) [e.functor.Additive]
+    {P Q : CochainComplex A ℤ} (f : P ⟶ Q) (hf : QuasiIso f) :
+    QuasiIso ((e.functor.mapHomologicalComplex (.up ℤ)).map f) := by
+  let : QuasiIso f := hf
+  let : e.functor.IsEquivalence := e.isEquivalence_functor
+  infer_instance
 
 attribute [local irreducible] sequenceLevelIso
 

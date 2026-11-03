@@ -86,6 +86,8 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 import Mathlib.RingTheory.Flat.CategoryTheory
 import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 import Mathlib.CategoryTheory.Localization.Predicate
+public import WeilConjectures.AlgebraicGeometry.Picard.KFlatResolutionIndependentCoefficients
+public import WeilConjectures.AlgebraicGeometry.Picard.SiteDerivedTensorDescentIndependentCoefficients
 
 /-! # Flat degree-zero tensor and unbounded cohomology on a ringed site
 
@@ -128,6 +130,28 @@ variable {M : Type*} [Category* M] [Preadditive M] [HasZeroObject M]
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
+
+/-- The existing degree-zero complex functor, with no replacement of its data.
+Source: Stacks, Tag 06YU (blueprint: lem-fd-ringed-flat-single-tensor-cohomology). -/
+abbrev degreeZero : Modules R ⥤ CochainComplex (Modules R) ℤ :=
+  HomologicalComplex.single (Modules R) (.up ℤ) 0
+
+/-- The published K-flat derived tensor with the localized degree-zero right factor.
+Source: Stacks, Tag 06YU (blueprint: lem-fd-ringed-flat-single-tensor-cohomology). -/
+abbrev derivedRight (L : Modules R) : DerivedCategory (Modules R) ⥤
+    DerivedCategory (Modules R) :=
+  (derivedTensor R).flip.obj (DerivedCategory.Q.obj ((degreeZero R).obj L))
+
+/-- The map of the published derived bifunctor on an arbitrary derived and module map.
+Source: Stacks, Tag 06YU (blueprint: lem-fd-ringed-flat-single-tensor-cohomology). -/
+abbrev derivedMap {K K' : DerivedCategory (Modules R)} (f : K ⟶ K')
+    {L L' : Modules R} (g : L ⟶ L') :
+    (derivedRight R L).obj K ⟶ (derivedRight R L').obj K' :=
+  (Functor.uncurry.obj (derivedTensor R)).map
+    (X := (K, DerivedCategory.Q.obj ((degreeZero R).obj L)))
+    (Y := (K', DerivedCategory.Q.obj ((degreeZero R).obj L')))
+    (f, DerivedCategory.Q.map ((degreeZero R).map g))
+
 @[reassoc] private theorem collapse_ι (L : M) (E : CochainComplex M ℤ) (i : ℤ) :
     HomologicalComplex.ιMapBifunctor E ((CochainComplex.singleFunctor _ 0).obj L)
         T (.up ℤ) i 0 i (Int.add_zero i) ≫

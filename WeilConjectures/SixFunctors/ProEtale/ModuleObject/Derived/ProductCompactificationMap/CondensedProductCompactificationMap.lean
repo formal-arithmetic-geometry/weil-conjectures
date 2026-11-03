@@ -21,6 +21,116 @@ import all Mathlib.CategoryTheory.Limits.HasLimits
 import all Mathlib.CategoryTheory.Iso
 import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Braided
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalBraided
+public import Mathlib.Algebra.Field.ULift
+public import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Sites.Proetale
+public import Mathlib.CategoryTheory.Adjunction.CompositionIso
+public import Mathlib.CategoryTheory.Adjunction.Mates
+public import Mathlib.CategoryTheory.Adjunction.PartialAdjoint
+public import Mathlib.CategoryTheory.Adjunction.Unique
+public import Mathlib.CategoryTheory.Limits.Final
+public import Mathlib.CategoryTheory.Limits.FullSubcategory
+public import Mathlib.CategoryTheory.Monoidal.Mod
+public import Mathlib.CategoryTheory.ObjectProperty.ColimitsOfShape
+public import Mathlib.CategoryTheory.ObjectProperty.Retract
+public import Mathlib.CategoryTheory.Triangulated.Opposite.Functor
+public import Mathlib.CategoryTheory.Triangulated.Opposite.Pretriangulated
+public import Mathlib.CategoryTheory.Triangulated.Opposite.Subcategory
+public import Mathlib.CategoryTheory.Triangulated.Yoneda
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import WeilConjectures.Algebra.Homology.Monoidal.Dual
+public import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
+public import WeilConjectures.Algebra.Homology.OpenCoverMateComplexShortExact
+public import WeilConjectures.Algebra.Homology.OpenDerivedMatePresentation
+public import WeilConjectures.AlgebraicGeometry.BaseFieldFiniteCD.FiniteCohomologicalDimensionHypothesis
+public import WeilConjectures.AlgebraicGeometry.Cartesian.CartesianCoefficientTwistsSupplement
+public import WeilConjectures.AlgebraicGeometry.Compactification.CompactificationOverField
+public import WeilConjectures.AlgebraicGeometry.Condensed.CondensedCoefficientIsoConstructible
+public import WeilConjectures.AlgebraicGeometry.Condensed.CondensedConstantConstructibilitySupplement
+public import WeilConjectures.AlgebraicGeometry.Condensed.CondensedLisseProEtaleLocality
+public import WeilConjectures.AlgebraicGeometry.Condensed.CondensedPointModuleComparison
+public import WeilConjectures.AlgebraicGeometry.CondensedGeometricPoint.CondensedCoefficientPoint
+public import WeilConjectures.AlgebraicGeometry.IntegralCtfEqualsBc
+public import WeilConjectures.AlgebraicGeometry.InternalHomDualTorAmplitude
+public import WeilConjectures.AlgebraicGeometry.InternalModuleOperations.InternalModuleOperationsTransportSupplement
+public import WeilConjectures.AlgebraicGeometry.LocallyConstantPerfectComplex
+public import WeilConjectures.AlgebraicGeometry.Open.OpenImmersionLocalizing
+public import WeilConjectures.AlgebraicGeometry.ProEtaleCoefficients.LocalizingClosureCtfEqualsBc
+public import WeilConjectures.AlgebraicGeometry.ProEtaleCoefficients.LocalizingClosureExistence
+public import WeilConjectures.AlgebraicGeometry.Pullback.PullbackFiniteConstantLocalModel
+public import WeilConjectures.AlgebraicGeometry.Rational.RationalOpenDirectImageConstructible
+public import WeilConjectures.AlgebraicGeometry.SixFunctors.BrownHypothesesSmall
+public import WeilConjectures.AlgebraicGeometry.TowerOpenCover.TowerOpenCoverOrdinaryKernel
+public import WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedLocalizingPullback
+public import WeilConjectures.CategoryTheory.Brown.BrownHypothesesCriteria
+public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Dualizable
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.DualizableProjectiveUnit
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
+public import WeilConjectures.CategoryTheory.DerivedCategory.SixFunctors.NativeInternalHomExact
+public import WeilConjectures.CategoryTheory.Exact.ExactFunctorCoproducts
+public import WeilConjectures.CategoryTheory.ModuleObjects.FreeMap
+public import WeilConjectures.CategoryTheory.ProEtaleCoefficients.LocalizingAdmissibleCoefficients
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.BaseCoefficientCondensedIdentification
+public import WeilConjectures.CategoryTheory.SixFunctors.CohomologicalSolutionSetRepresentability
+public import WeilConjectures.CategoryTheory.SixFunctors.SetGeneratedDerivedSolutionSet
+public import WeilConjectures.CategoryTheory.SmoothPurity.CompactSupportIdentityCalculus
+public import WeilConjectures.CategoryTheory.SmoothPurity.CountableCoproductsIdempotentComplete
+public import WeilConjectures.Compactification.Over
+public import WeilConjectures.ConstructibleSheaf.OpenClosed
+public import WeilConjectures.Mathlib.CategoryTheory.Functor.Derived.Adjunction
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.NaturalTransformationOplax
+public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Generators
+public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionFinite
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Conservative
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CompactificationIndependence
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.AdjunctionShift
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.AdmissibleTensorConstructibility
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Compactification.CompactificationLocalizing
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedModuleDerivedPushpull
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedOpenClosedInternalHom
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedOpenClosedInternalHomMaps
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedPullbackCoherence
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedPullbackTensorComparison
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedSupportDerivedLocalization
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CondensedOpenProper.CondensedOpenProperPasting
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CtfLocallyClosedPerfectGeneration
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.DetPropSfCbc
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.EllAdic.EllAdicLocalizingExceptionalBounded
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteOpenDirectImageCtf
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntTensorProjection
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.IntegralOpenImageProperFormulas
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerStarComp
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Mate.MateOpenRestrictionMaps
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalCompDerived
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.NativeTripleRestriction.CondensedTripleRestrictionTensor
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Open.DerivedOpenRestrictionNormalization
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Open.DerivedOpenRestrictionSuccessive
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionIhom
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionMapShift
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Proper.ProEtaleProperOpenInterchange
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Proper.ProperLocalizingAdmissibleCoefficients
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.AdmissibleBoundedConstructibleTriangulated
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.DerivedDirectImageOpenCoherenceData
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.ExceptionalInverseImageExistence
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.LocalizingExceptionalAdjoint
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.ModuleObjectProjectionMap
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
+public import WeilConjectures.TraceFormula.CategoricalTraceBiproduct
+public import WeilConjectures.ZetaWeil.PodCtfAdjunctionData.PodCtfAdjunctions
 
 /-!
 # Native condensed product compactification comparison
@@ -647,6 +757,130 @@ def BinaryAssertion (d : Diagram j k T Tb) (K : D Λ X) (L : D Λ Y) : Prop :=
           (fobj (pull Λ d.qb) (fobj (shriek Λ k) L)) ≫
         comparison Λ d.swap L K)
 
+/-- The triple ambient object, with left bracketing and composed projection pullbacks.
+Source: H₃ in proof step 8 (blueprint: lem-sf-condensed-product-compactification-map). -/
+def tripleAmbient (d₁₂ : Diagram j k T₁₂ Tb₁₂) (dL : Diagram d₁₂.u l T Tb)
+    (K : D Λ X) (L : D Λ Y) (M : D Λ W) : D Λ Tb :=
+  tensor Λ Tb
+    (tensor Λ Tb
+      ((P Λ dL.pb).obj
+        ((P Λ d₁₂.pb).obj ((J Λ j).obj K)))
+      ((P Λ dL.pb).obj
+        ((P Λ d₁₂.qb).obj ((J Λ k).obj L))))
+    ((P Λ dL.qb).obj ((J Λ l).obj M))
+
+/-- The triple open object with the same left bracketing.
+Source: D₃ in proof step 8 (blueprint: lem-sf-condensed-product-compactification-map). -/
+def tripleInside (d₁₂ : Diagram j k T₁₂ Tb₁₂) (dL : Diagram d₁₂.u l T Tb)
+    (K : D Λ X) (L : D Λ Y) (M : D Λ W) : D Λ T :=
+  tensor Λ T
+    (tensor Λ T
+      ((P Λ dL.p).obj ((P Λ d₁₂.p).obj K))
+      ((P Λ dL.p).obj ((P Λ d₁₂.q).obj L)))
+    ((P Λ dL.q).obj M)
+
+/-- First compare the first two factors, then their product with the third.
+Source: F in proof step 8 (blueprint: lem-sf-condensed-product-compactification-map). -/
+def tripleLeft (d₁₂ : Diagram j k T₁₂ Tb₁₂) (dL : Diagram d₁₂.u l T Tb)
+    (K : D Λ X) (L : D Λ Y) (M : D Λ W) :=
+  (tensorIsoMap Λ _
+    (tensorPullIso Λ dL.pb _ _).symm (Iso.refl _)).hom ≫
+    tensorMap Λ Tb
+      ((P Λ dL.pb).map (comparison Λ d₁₂ K L)) (𝟙 _) ≫
+    comparison Λ dL (inside Λ d₁₂ K L) M ≫
+    (J Λ dL.u).map
+      (tensorIsoMap Λ _
+        (tensorPullIso Λ dL.p _ _) (Iso.refl _)).hom
+
+/-- The canonical outer reassociation and projection-composition identification.
+Source: the ambient associator in proof step 8
+(blueprint: lem-sf-condensed-product-compactification-map). -/
+def outerAssociator
+    {d₁₂ : Diagram j k T₁₂ Tb₁₂} {d₂₃ : Diagram k l T₂₃ Tb₂₃}
+    {dL : Diagram d₁₂.u l T Tb} {dR : Diagram j d₂₃.u T Tb}
+    (t : Triple d₁₂ d₂₃ dL dR)
+    (K : D Λ X) (L : D Λ Y) (M : D Λ W) :
+    tripleAmbient Λ d₁₂ dL K L M ≅
+      tensor Λ Tb
+        ((P Λ dR.pb).obj ((J Λ j).obj K))
+        ((P Λ dR.qb).obj (ambient Λ d₂₃ L M)) :=
+  tensorIsoMap Λ _ (tensorIsoMap Λ _
+      (((leftDerivedUpperStarComp Λ dL.pb d₁₂.pb).symm ≪≫
+        eqToIso (congrArg (P Λ) t.outer₁)).app ((J Λ j).obj K))
+      ((square Λ _ _ _ _ t.outer₂).app ((J Λ k).obj L)))
+    ((eqToIso (congrArg (P Λ) t.outer₃) ≪≫
+      leftDerivedUpperStarComp Λ dR.qb d₂₃.qb).app ((J Λ l).obj M)) ≪≫
+    (α_ _ _ _) ≪≫
+      tensorIsoMap Λ _ (Iso.refl _)
+      (tensorPullIso Λ dR.qb _ _).symm
+
+/-- Reassociate the open factors using exactly the same projection-composition maps.
+Source: the open associator in proof step 8
+(blueprint: lem-sf-condensed-product-compactification-map). -/
+def innerAssociator
+    {d₁₂ : Diagram j k T₁₂ Tb₁₂} {d₂₃ : Diagram k l T₂₃ Tb₂₃}
+    {dL : Diagram d₁₂.u l T Tb} {dR : Diagram j d₂₃.u T Tb}
+    (t : Triple d₁₂ d₂₃ dL dR)
+    (K : D Λ X) (L : D Λ Y) (M : D Λ W) :
+    inside Λ dR K (inside Λ d₂₃ L M) ≅ tripleInside Λ d₁₂ dL K L M :=
+  tensorIsoMap Λ _ (Iso.refl _) (tensorPullIso Λ dR.q _ _) ≪≫
+    tensorIsoMap Λ _
+      (((eqToIso (congrArg (P Λ) t.inner₁)).symm ≪≫
+        leftDerivedUpperStarComp Λ dL.p d₁₂.p).app K)
+      (tensorIsoMap Λ _ ((square Λ _ _ _ _ t.inner₂).symm.app L)
+        (((leftDerivedUpperStarComp Λ dR.q d₂₃.q).symm ≪≫
+          eqToIso (congrArg (P Λ) t.inner₃.symm)).app M)) ≪≫
+    (α_ _ _ _).symm
+
+/-- First compare the last two factors, then the first factor with their product.
+The final transport is the identity of the common product open, followed by its
+canonical associator. Source: G in proof step 8
+(blueprint: lem-sf-condensed-product-compactification-map). -/
+def tripleRight
+    {d₁₂ : Diagram j k T₁₂ Tb₁₂} {d₂₃ : Diagram k l T₂₃ Tb₂₃}
+    {dL : Diagram d₁₂.u l T Tb} {dR : Diagram j d₂₃.u T Tb}
+    (t : Triple d₁₂ d₂₃ dL dR)
+    (K : D Λ X) (L : D Λ Y) (M : D Λ W) :=
+  (outerAssociator Λ t K L M).hom ≫
+    tensorMap Λ Tb (𝟙 _)
+      ((P Λ dR.qb).map (comparison Λ d₂₃ L M)) ≫
+    comparison Λ dR K (inside Λ d₂₃ L M) ≫
+    (J Λ dR.u).map (innerAssociator Λ t K L M).hom ≫
+    (shriekCongr Λ t.sameOpen).hom.app (tripleInside Λ d₁₂ dL K L M)
+
+/-- The triple restriction uses the same section units and tensor comparisons on
+both sides; it contains no occurrence of either triple comparison.
+Source: the identity-on-the-open clause in proof step 8
+(blueprint: lem-sf-condensed-product-compactification-map). -/
+def tripleRestriction (d₁₂ : Diagram j k T₁₂ Tb₁₂) (dL : Diagram d₁₂.u l T Tb)
+    (K : D Λ X) (L : D Λ Y) (M : D Λ W) :=
+  tensorMap Λ T
+    ((tensorPullIso Λ dL.p _ _).inv ≫
+      (P Λ dL.p).map (restriction Λ d₁₂ K L) ≫
+        (square Λ _ _ _ _ dL.left).inv.app (ambient Λ d₁₂ K L))
+    ((P Λ dL.q).map ((oa Λ l).unit.app M) ≫
+      (square Λ _ _ _ _ dL.right).inv.app ((J Λ l).obj M)) ≫
+    (tensorPullIso Λ dL.u _ _).inv ≫
+    (P Λ dL.u).map
+      (tensorIsoMap Λ _
+        (tensorPullIso Λ dL.pb _ _) (Iso.refl _)).hom
+
+/-- Equality of the two triple composites, and their separate identity restrictions.
+Source: proof step 8 (blueprint: lem-sf-condensed-product-compactification-map). -/
+def TripleAssertion
+    {d₁₂ : Diagram j k T₁₂ Tb₁₂} {d₂₃ : Diagram k l T₂₃ Tb₂₃}
+    {dL : Diagram d₁₂.u l T Tb} {dR : Diagram j d₂₃.u T Tb}
+    (t : Triple d₁₂ d₂₃ dL dR)
+    (K : D Λ X) (L : D Λ Y) (M : D Λ W) : Prop :=
+  tripleLeft Λ d₁₂ dL K L M = tripleRight Λ t K L M ∧
+    (tripleRestriction Λ d₁₂ dL K L M ≫
+      (P Λ dL.u).map (tripleLeft Λ d₁₂ dL K L M) =
+        (oa Λ dL.u).unit.app
+          (tripleInside Λ d₁₂ dL K L M)) ∧
+    (tripleRestriction Λ d₁₂ dL K L M ≫
+      (P Λ dL.u).map (tripleRight Λ t K L M) =
+        (oa Λ dL.u).unit.app
+          (tripleInside Λ d₁₂ dL K L M))
 
 private def firstOpenComparison (d : Diagram j k T Tb) (K : D Λ X) (L : D Λ Y) :
     ambient Λ d K L ⟶ fobj (shriek Λ d.j₁)
@@ -840,10 +1074,7 @@ private theorem firstOpen_unit (d : Diagram j k T Tb) (K : D Λ X) (L : D Λ Y) 
     (betaMap Λ d.first K)
     ((Category.assoc _ _ _).trans (beta_unit Λ d.first K))
     (compTo Λ d.j₁ d.qb d.s d.j₁_qb (fobj (shriek Λ k) L))
-  refine normalized_of_presentations (adj Λ d.j₁) h
-    (firstOpenRestriction Λ d K L) (firstOpenComparison Λ d K L) ?_ ?_
-  · rfl
-  · rfl
+  simpa only [firstOpenRestriction, firstOpenComparison, tensorMap, ambient, tensor] using h
 
 set_option maxHeartbeats 4000000 in
 -- Native derived functor endpoints require a larger checking limit.
@@ -857,10 +1088,8 @@ private theorem secondOpen_unit (d : Diagram j k T Tb) (K : D Λ X) (L : D Λ Y)
     (betaMap Λ d.second L)
     ((Category.assoc _ _ _).trans (beta_unit Λ d.second L))
     (compTo Λ d.k₁ d.r d.p d.k₁_r K)
-  refine normalized_of_presentations (adj Λ d.k₁) h
-    (secondOpenRestriction Λ d K L) (secondOpenComparison Λ d K L) ?_ ?_
-  · rfl
-  · rfl
+  simpa only [secondOpenRestriction, secondOpenComparison, tensorMap, inside, tensor] using h
+
 private theorem compTo_inv_natural {U V Z : Scheme.{u}}
     (i : U ⟶ V) (j : V ⟶ Z) (h : U ⟶ Z) (e : i ≫ j = h)
     {K L : D Λ Z} (f : K ⟶ L) :
@@ -1607,5 +1836,636 @@ theorem openProduct_normalization
     (d : Diagram j k T Tb) (K : D Λ X) (L : D Λ Y) : BinaryAssertion Λ d K L := by
   exact binary_of_normalization Λ d K L (comparison_unit Λ d K L)
     (comparison_unit Λ d.swap L K)
+
+private theorem normalized_pair_assertion
+    {C E : Type*} [Category C] [Category E]
+    {J : C ⥤ E} {R : E ⥤ C} (a : J ⊣ R) {N : C} {A : E}
+    (r : N ⟶ fobj R A) (f g : A ⟶ fobj J N) [IsIso r] [IsIso f]
+    (hf : r ≫ fmap R f = unitComponent a N)
+    (hg : r ≫ fmap R g = unitComponent a N) :
+    f = g ∧ (r ≫ fmap R f = unitComponent a N) ∧
+      (r ≫ fmap R g = unitComponent a N) := by
+  refine ⟨?_, hf, hg⟩
+  apply supported_restriction_injective a (asIso f)
+  exact (cancel_epi r).1 (hf.trans hg.symm)
+
+private theorem normalized_tensor_iteration
+    {C E : Type*} [Category C] [Category E]
+    [MonoidalCategory C] [MonoidalCategory E]
+    {J : C ⥤ E} {R : E ⥤ C} (a : J ⊣ R)
+    {N Y : C} {A B F : E}
+    (x : N ⟶ fobj R A) (x' : N ⟶ fobj R B) (y : Y ⟶ fobj R F)
+    (z : A ⟶ B) (f : B ⊗ₛ F ⟶ fobj J (N ⊗ₛ Y))
+    (m : fobj R A ⊗ₛ fobj R F ⟶ fobj R (A ⊗ₛ F))
+    (m' : fobj R B ⊗ₛ fobj R F ⟶ fobj R (B ⊗ₛ F))
+    (hm : m ≫ fmap R (z ⊗ₛₘ 𝟙 F) = (fmap R z ⊗ₛₘ 𝟙 _) ≫ m')
+    (hx : x ≫ fmap R z = x')
+    (hf : ((x' ⊗ₛₘ y) ≫ m') ≫ fmap R f = unitComponent a (N ⊗ₛ Y)) :
+    ((x ⊗ₛₘ y) ≫ m) ≫ fmap R ((z ⊗ₛₘ 𝟙 F) ≫ f) =
+      unitComponent a (N ⊗ₛ Y) := by
+  dsimp only [fobj, fmap, objTensor, mapTensor, unitComponent] at *
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← Category.assoc m, hm]
+  simp only [← Category.assoc, tensorHom_comp_tensorHom, Category.comp_id, hx]
+  exact hf
+
+private theorem normalized_tensor_iteration_right
+    {C E : Type*} [Category C] [Category E]
+    [MonoidalCategory C] [MonoidalCategory E]
+    {J : C ⥤ E} {R : E ⥤ C} (a : J ⊣ R)
+    {N Y : C} {A B F : E}
+    (x : N ⟶ fobj R F) (y : Y ⟶ fobj R A) (y' : Y ⟶ fobj R B)
+    (z : A ⟶ B) (f : F ⊗ₛ B ⟶ fobj J (N ⊗ₛ Y))
+    (m : fobj R F ⊗ₛ fobj R A ⟶ fobj R (F ⊗ₛ A))
+    (m' : fobj R F ⊗ₛ fobj R B ⟶ fobj R (F ⊗ₛ B))
+    (hm : m ≫ fmap R (𝟙 F ⊗ₛₘ z) = (𝟙 _ ⊗ₛₘ fmap R z) ≫ m')
+    (hy : y ≫ fmap R z = y')
+    (hf : ((x ⊗ₛₘ y') ≫ m') ≫ fmap R f = unitComponent a (N ⊗ₛ Y)) :
+    ((x ⊗ₛₘ y) ≫ m) ≫ fmap R ((𝟙 F ⊗ₛₘ z) ≫ f) =
+      unitComponent a (N ⊗ₛ Y) := by
+  dsimp only [fobj, fmap, objTensor, mapTensor, unitComponent] at *
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← Category.assoc m, hm]
+  simp only [← Category.assoc, tensorHom_comp_tensorHom, Category.comp_id, hy]
+  simpa only [Functor.map_id, Category.comp_id, id_tensorHom] using hf
+
+private theorem normalization_bitransport
+    {C E : Type*} [Category C] [Category E]
+    {J : C ⥤ E} {R : E ⥤ C} (a : J ⊣ R)
+    {N N' : C} {A A' : E} (r : N ⟶ fobj R A) (f : A ⟶ fobj J N)
+    (h : r ≫ fmap R f = unitComponent a N) (e : A' ≅ A) (c : N ≅ N') :
+    (c.inv ≫ r ≫ fmap R e.inv) ≫
+      fmap R (e.hom ≫ f ≫ fmap J c.hom) = unitComponent a N' := by
+  dsimp only [fobj, fmap, objTensor, mapTensor, unitComponent] at *
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← R.map_comp_assoc, e.inv_hom_id, R.map_id, Category.id_comp]
+  rw [reassoc_of% h, a.unit_naturality]
+  simp only [← Category.assoc, Iso.inv_hom_id, Category.id_comp]
+
+private theorem normalization_left_bitransport
+    {C E : Type*} [Category C] [Category E]
+    [MonoidalCategory C] [MonoidalCategory E]
+    {J : C ⥤ E} {R : E ⥤ C} (a : J ⊣ R)
+    {N N' Y : C} {A A' F : E}
+    (x : N ⟶ fobj R A) (y : Y ⟶ fobj R F)
+    (m : fobj R A ⊗ₛ fobj R F ⟶ fobj R (A ⊗ₛ F))
+    (g : A ⊗ₛ F ⟶ fobj J (N ⊗ₛ Y))
+    (h : ((x ⊗ₛₘ y) ≫ m) ≫ fmap R g = unitComponent a (N ⊗ₛ Y))
+    (e : A' ≅ A) (c : N ≅ N') :
+    ((((c.inv ≫ x) ⊗ₛₘ y) ≫ m) ≫ fmap R (e.inv ⊗ₛₘ 𝟙 F)) ≫
+      fmap R ((e.hom ⊗ₛₘ 𝟙 F) ≫ g ≫ fmap J (c.hom ⊗ₛₘ 𝟙 Y)) =
+        unitComponent a (N' ⊗ₛ Y) := by
+  have ht := normalization_bitransport a _ _ h
+    (tensorIso e (Iso.refl F)) (tensorIso c (Iso.refl Y))
+  dsimp only [fobj, fmap, objTensor, mapTensor] at *
+  simpa only [tensorIso_hom, tensorIso_inv, Iso.refl_hom, Iso.refl_inv,
+    Category.assoc, tensorHom_comp_tensorHom_assoc, Category.id_comp,
+    Category.comp_id] using ht
+
+private theorem normalized_iteration_left_transport
+    {C E : Type*} [Category C] [Category E]
+    [MonoidalCategory C] [MonoidalCategory E]
+    {J : C ⥤ E} {R : E ⥤ C} (a : J ⊣ R)
+    {N N' Y : C} {A A' B F : E}
+    (x : N ⟶ fobj R A) (x' : N ⟶ fobj R B) (y : Y ⟶ fobj R F)
+    (z : A ⟶ B) (f : B ⊗ₛ F ⟶ fobj J (N ⊗ₛ Y))
+    (m : fobj R A ⊗ₛ fobj R F ⟶ fobj R (A ⊗ₛ F))
+    (m' : fobj R B ⊗ₛ fobj R F ⟶ fobj R (B ⊗ₛ F))
+    (hm : m ≫ fmap R (z ⊗ₛₘ 𝟙 F) = (fmap R z ⊗ₛₘ 𝟙 _) ≫ m')
+    (hx : x ≫ fmap R z = x')
+    (hf : ((x' ⊗ₛₘ y) ≫ m') ≫ fmap R f = unitComponent a (N ⊗ₛ Y))
+    (e : A' ≅ A) (c : N ≅ N') :
+    (((c.inv ≫ x) ⊗ₛₘ y) ≫ m ≫ fmap R (e.inv ⊗ₛₘ 𝟙 F)) ≫
+      fmap R ((e.hom ⊗ₛₘ 𝟙 F) ≫ (z ⊗ₛₘ 𝟙 F) ≫ f ≫
+        fmap J (c.hom ⊗ₛₘ 𝟙 Y)) = unitComponent a (N' ⊗ₛ Y) := by
+  have h := normalized_tensor_iteration a x x' y z f m m' hm hx hf
+  have ht := normalization_left_bitransport a x y m ((z ⊗ₛₘ 𝟙 F) ≫ f) h e c
+  simpa only [Category.assoc] using ht
+
+private theorem normalized_square_unit
+    {C E : Type*} [Category C] [Category E] (F : C ⥤ E)
+    {X Y Z : C} {A B : E} (r : X ⟶ Y) (z : Y ⟶ Z) (η : X ⟶ Z)
+    (a : fobj F Y ⟶ A) (b : fobj F Z ⟶ B) (g : A ⟶ B)
+    (hn : fmap F z ≫ b = a ≫ g) (hr : r ≫ z = η) :
+    (fmap F r ≫ a) ≫ g = fmap F η ≫ b := by
+  dsimp only [fobj, fmap] at *
+  rw [Category.assoc, ← hn, ← F.map_comp_assoc, hr]
+
+private theorem binary_unit_expanded
+    (d : Diagram j k T Tb) (K : D Λ X) (L : D Λ Y) :
+    (((fmap (pull Λ d.p) (openUnit Λ j K) ≫
+        squareInv Λ _ _ _ _ d.left (fobj (shriek Λ j) K)) ⊗ₛₘ
+      (fmap (pull Λ d.q) (openUnit Λ k L) ≫
+        squareInv Λ _ _ _ _ d.right (fobj (shriek Λ k) L))) ≫
+      (tensorPullIso Λ d.u
+        (fobj (pull Λ d.pb) (fobj (shriek Λ j) K))
+        (fobj (pull Λ d.qb) (fobj (shriek Λ k) L))).inv) ≫
+      fmap (pull Λ d.u) (comparison Λ d K L) =
+        unitComponent (adj Λ d.u) (fobj (pull Λ d.p) K ⊗ₛ fobj (pull Λ d.q) L) := by
+  simpa only [restriction, tensorMap, inside, tensor, openUnit] using
+    (openProduct_normalization Λ d K L).2.2.1
+
+private theorem native_iteration_left
+    (d : Diagram j k T Tb) (K : D Λ X) (L : D Λ Y)
+    (A : D Λ Xb) (r : K ⟶ fobj (pull Λ j) A)
+    (f : A ⟶ fobj (shriek Λ j) K)
+    (hr : r ≫ fmap (pull Λ j) f = openUnit Λ j K)
+    {N' : D Λ T} {A' : D Λ Tb}
+    (e : A' ≅ fobj (pull Λ d.pb) A)
+    (c : fobj (pull Λ d.p) K ≅ N') :
+    ((((c.inv ≫ fmap (pull Λ d.p) r ≫ squareInv Λ _ _ _ _ d.left A) ⊗ₛₘ
+        (fmap (pull Λ d.q) (openUnit Λ k L) ≫
+          squareInv Λ _ _ _ _ d.right (fobj (shriek Λ k) L))) ≫
+      (tensorPullIso Λ d.u (fobj (pull Λ d.pb) A)
+        (fobj (pull Λ d.qb) (fobj (shriek Λ k) L))).inv ≫
+      fmap (pull Λ d.u) (e.inv ⊗ₛₘ 𝟙 _))) ≫
+      fmap (pull Λ d.u) ((e.hom ⊗ₛₘ 𝟙 _) ≫
+        (fmap (pull Λ d.pb) f ⊗ₛₘ 𝟙 _) ≫ comparison Λ d K L ≫
+        fmap (shriek Λ d.u) (c.hom ⊗ₛₘ 𝟙 _)) =
+      unitComponent (adj Λ d.u) (N' ⊗ₛ fobj (pull Λ d.q) L) := by
+  have hn := (square Λ _ _ _ _ d.left).inv.naturality f
+  dsimp only [Functor.comp_map] at hn
+  have hx := normalized_square_unit (pull Λ d.p) r (fmap (pull Λ j) f)
+    (openUnit Λ j K) (squareInv Λ _ _ _ _ d.left A)
+    (squareInv Λ _ _ _ _ d.left (fobj (shriek Λ j) K))
+    (fmap (pull Λ d.u) (fmap (pull Λ d.pb) f)) hn hr
+  exact normalized_iteration_left_transport (adj Λ d.u)
+    (fmap (pull Λ d.p) r ≫ squareInv Λ _ _ _ _ d.left A)
+    (fmap (pull Λ d.p) (openUnit Λ j K) ≫
+      squareInv Λ _ _ _ _ d.left (fobj (shriek Λ j) K))
+    (fmap (pull Λ d.q) (openUnit Λ k L) ≫
+      squareInv Λ _ _ _ _ d.right (fobj (shriek Λ k) L))
+    (fmap (pull Λ d.pb) f) (comparison Λ d K L)
+    (tensorPullIso Λ d.u (fobj (pull Λ d.pb) A)
+      (fobj (pull Λ d.qb) (fobj (shriek Λ k) L))).inv
+    (tensorPullIso Λ d.u (fobj (pull Λ d.pb) (fobj (shriek Λ j) K))
+      (fobj (pull Λ d.qb) (fobj (shriek Λ k) L))).inv
+    (tensorPull_inv_natural_left Λ d.u (fmap (pull Λ d.pb) f)
+      (fobj (pull Λ d.qb) (fobj (shriek Λ k) L))) hx
+    (binary_unit_expanded Λ d K L) e c
+
+private theorem unit_presentation
+    {U Z : Scheme.{u}} (i : U ⟶ Z) [IsOpenImmersion i] (K : D Λ U) :
+    (oa Λ i).unit.app K = openUnit Λ i K := by
+  unfold openUnit unitComponent adj
+  rfl
+
+private theorem square_presentation
+    {S X Y Z : Scheme.{u}} (f : S ⟶ X) (g : X ⟶ Z)
+    (h : S ⟶ Y) (i : Y ⟶ Z) (e : f ≫ g = h ≫ i) (N : D Λ Z) :
+    (square Λ f g h i e).inv.app N = squareInv Λ f g h i e N := by
+  unfold squareInv compositeComponent
+  rfl
+
+private theorem left_restriction_eq
+    (d₁₂ : Diagram j k T₁₂ Tb₁₂) (dL : Diagram d₁₂.u l T Tb)
+    (K : D Λ X) (L : D Λ Y) (M : D Λ W) :
+    tripleRestriction Λ d₁₂ dL K L M =
+      ((((tensorPullIso Λ dL.p (fobj (pull Λ d₁₂.p) K)
+          (fobj (pull Λ d₁₂.q) L)).inv ≫
+        fmap (pull Λ dL.p) (restriction Λ d₁₂ K L) ≫
+        squareInv Λ _ _ _ _ dL.left (ambient Λ d₁₂ K L)) ⊗ₛₘ
+       (fmap (pull Λ dL.q) (openUnit Λ l M) ≫
+        squareInv Λ _ _ _ _ dL.right (fobj (shriek Λ l) M))) ≫
+       (tensorPullIso Λ dL.u (fobj (pull Λ dL.pb) (ambient Λ d₁₂ K L))
+         (fobj (pull Λ dL.qb) (fobj (shriek Λ l) M))).inv ≫
+       fmap (pull Λ dL.u)
+         ((tensorPullIso Λ dL.pb
+            (fobj (pull Λ d₁₂.pb) (fobj (shriek Λ j) K))
+            (fobj (pull Λ d₁₂.qb) (fobj (shriek Λ k) L))).hom ⊗ₛₘ 𝟙 _)) := by
+  unfold tripleRestriction
+  rw [unit_presentation, square_presentation, square_presentation]
+  unfold tensorMap tensorIsoMap fmap fobj pull shriek mapTensor
+  rfl
+
+private theorem left_comparison_eq
+    (d₁₂ : Diagram j k T₁₂ Tb₁₂) (dL : Diagram d₁₂.u l T Tb)
+    (K : D Λ X) (L : D Λ Y) (M : D Λ W) :
+    tripleLeft Λ d₁₂ dL K L M =
+      ((tensorPullIso Λ dL.pb
+          (fobj (pull Λ d₁₂.pb) (fobj (shriek Λ j) K))
+          (fobj (pull Λ d₁₂.qb) (fobj (shriek Λ k) L))).inv ⊗ₛₘ 𝟙 _) ≫
+      (fmap (pull Λ dL.pb) (comparison Λ d₁₂ K L) ⊗ₛₘ 𝟙 _) ≫
+      comparison Λ dL (inside Λ d₁₂ K L) M ≫
+      fmap (shriek Λ dL.u)
+        ((tensorPullIso Λ dL.p (fobj (pull Λ d₁₂.p) K)
+          (fobj (pull Λ d₁₂.q) L)).hom ⊗ₛₘ 𝟙 _) := by
+  unfold tripleLeft tensorMap tensorIsoMap
+  rfl
+
+private theorem tripleLeft_restriction
+    (d₁₂ : Diagram j k T₁₂ Tb₁₂) (dL : Diagram d₁₂.u l T Tb)
+    (K : D Λ X) (L : D Λ Y) (M : D Λ W) :
+    tripleRestriction Λ d₁₂ dL K L M ≫
+      (pull Λ dL.u).map (tripleLeft Λ d₁₂ dL K L M) =
+        (adj Λ dL.u).unit.app (tripleInside Λ d₁₂ dL K L M) := by
+  have h := native_iteration_left Λ dL (inside Λ d₁₂ K L) M (ambient Λ d₁₂ K L)
+    (restriction Λ d₁₂ K L) (comparison Λ d₁₂ K L)
+    (openProduct_normalization Λ d₁₂ K L).2.2.1
+    (tensorPullIso Λ dL.pb
+      (fobj (pull Λ d₁₂.pb) (fobj (shriek Λ j) K))
+      (fobj (pull Λ d₁₂.qb) (fobj (shriek Λ k) L))).symm
+    (tensorPullIso Λ dL.p (fobj (pull Λ d₁₂.p) K)
+      (fobj (pull Λ d₁₂.q) L))
+  rw [left_restriction_eq, left_comparison_eq]
+  exact h
+
+private theorem normalized_iteration_right_transport
+    {C E : Type*} [Category C] [Category E]
+    [MonoidalCategory C] [MonoidalCategory E]
+    {J : C ⥤ E} {R : E ⥤ C} (a : J ⊣ R)
+    {N Y N' : C} {A B F A' : E}
+    (x : N ⟶ fobj R F) (y : Y ⟶ fobj R A) (y' : Y ⟶ fobj R B)
+    (z : A ⟶ B) (f : F ⊗ₛ B ⟶ fobj J (N ⊗ₛ Y))
+    (m : fobj R F ⊗ₛ fobj R A ⟶ fobj R (F ⊗ₛ A))
+    (m' : fobj R F ⊗ₛ fobj R B ⟶ fobj R (F ⊗ₛ B))
+    (hm : m ≫ fmap R (𝟙 F ⊗ₛₘ z) = (𝟙 _ ⊗ₛₘ fmap R z) ≫ m')
+    (hy : y ≫ fmap R z = y')
+    (hf : ((x ⊗ₛₘ y') ≫ m') ≫ fmap R f = unitComponent a (N ⊗ₛ Y))
+    (e : A' ≅ F ⊗ₛ A) (c : N ⊗ₛ Y ≅ N') :
+    (c.inv ≫ (x ⊗ₛₘ y) ≫ m ≫ fmap R e.inv) ≫
+      fmap R (e.hom ≫ (𝟙 F ⊗ₛₘ z) ≫ f ≫ fmap J c.hom) =
+        unitComponent a N' := by
+  have h := normalized_tensor_iteration_right a x y y' z f m m' hm hy hf
+  have ht := normalization_bitransport a _ _ h e c
+  simpa only [Category.assoc] using ht
+
+private theorem native_iteration_right
+    (d : Diagram j k T Tb) (K : D Λ X) (L : D Λ Y)
+    (A : D Λ Yb) (r : L ⟶ fobj (pull Λ k) A)
+    (f : A ⟶ fobj (shriek Λ k) L)
+    (hr : r ≫ fmap (pull Λ k) f = openUnit Λ k L)
+    {N' : D Λ T} {A' : D Λ Tb}
+    (e : A' ≅ fobj (pull Λ d.pb) (fobj (shriek Λ j) K) ⊗ₛ fobj (pull Λ d.qb) A)
+    (c : inside Λ d K L ≅ N') :
+    (c.inv ≫
+      ((fmap (pull Λ d.p) (openUnit Λ j K) ≫
+          squareInv Λ _ _ _ _ d.left (fobj (shriek Λ j) K)) ⊗ₛₘ
+        (fmap (pull Λ d.q) r ≫ squareInv Λ _ _ _ _ d.right A)) ≫
+      (tensorPullIso Λ d.u (fobj (pull Λ d.pb) (fobj (shriek Λ j) K))
+        (fobj (pull Λ d.qb) A)).inv ≫ fmap (pull Λ d.u) e.inv) ≫
+      fmap (pull Λ d.u) (e.hom ≫ (𝟙 _ ⊗ₛₘ fmap (pull Λ d.qb) f) ≫
+        comparison Λ d K L ≫ fmap (shriek Λ d.u) c.hom) =
+      unitComponent (adj Λ d.u) N' := by
+  have hn := (square Λ _ _ _ _ d.right).inv.naturality f
+  dsimp only [Functor.comp_map] at hn
+  have hy := normalized_square_unit (pull Λ d.q) r (fmap (pull Λ k) f)
+    (openUnit Λ k L) (squareInv Λ _ _ _ _ d.right A)
+    (squareInv Λ _ _ _ _ d.right (fobj (shriek Λ k) L))
+    (fmap (pull Λ d.u) (fmap (pull Λ d.qb) f)) hn hr
+  exact normalized_iteration_right_transport (adj Λ d.u)
+    (fmap (pull Λ d.p) (openUnit Λ j K) ≫
+      squareInv Λ _ _ _ _ d.left (fobj (shriek Λ j) K))
+    (fmap (pull Λ d.q) r ≫ squareInv Λ _ _ _ _ d.right A)
+    (fmap (pull Λ d.q) (openUnit Λ k L) ≫
+      squareInv Λ _ _ _ _ d.right (fobj (shriek Λ k) L))
+    (fmap (pull Λ d.qb) f) (comparison Λ d K L)
+    (tensorPullIso Λ d.u (fobj (pull Λ d.pb) (fobj (shriek Λ j) K))
+      (fobj (pull Λ d.qb) A)).inv
+    (tensorPullIso Λ d.u (fobj (pull Λ d.pb) (fobj (shriek Λ j) K))
+      (fobj (pull Λ d.qb) (fobj (shriek Λ k) L))).inv
+    (tensorPull_inv_natural_right Λ d.u
+      (fobj (pull Λ d.pb) (fobj (shriek Λ j) K)) (fmap (pull Λ d.qb) f)) hy
+    (binary_unit_expanded Λ d K L) e c
+
+private def rightRestriction
+    {d₁₂ : Diagram j k T₁₂ Tb₁₂} {d₂₃ : Diagram k l T₂₃ Tb₂₃}
+    {dL : Diagram d₁₂.u l T Tb} {dR : Diagram j d₂₃.u T Tb}
+    (t : Triple d₁₂ d₂₃ dL dR) (K : D Λ X) (L : D Λ Y) (M : D Λ W) :=
+  (innerAssociator Λ t K L M).inv ≫
+    tensorMap Λ T
+      ((pull Λ dR.p).map ((adj Λ j).unit.app K) ≫
+        (square Λ _ _ _ _ dR.left).inv.app ((shriek Λ j).obj K))
+      ((pull Λ dR.q).map (restriction Λ d₂₃ L M) ≫
+        (square Λ _ _ _ _ dR.right).inv.app (ambient Λ d₂₃ L M)) ≫
+    (tensorPullIso Λ dR.u _ _).inv ≫
+    (pull Λ dR.u).map (outerAssociator Λ t K L M).inv
+
+private def rightComparison
+    {d₁₂ : Diagram j k T₁₂ Tb₁₂} {d₂₃ : Diagram k l T₂₃ Tb₂₃}
+    {dL : Diagram d₁₂.u l T Tb} {dR : Diagram j d₂₃.u T Tb}
+    (t : Triple d₁₂ d₂₃ dL dR) (K : D Λ X) (L : D Λ Y) (M : D Λ W) :
+    tripleAmbient Λ d₁₂ dL K L M ⟶ (J Λ dR.u).obj (tripleInside Λ d₁₂ dL K L M) :=
+  (outerAssociator Λ t K L M).hom ≫
+    tensorMap Λ Tb (𝟙 _) ((P Λ dR.qb).map (comparison Λ d₂₃ L M)) ≫
+    comparison Λ dR K (inside Λ d₂₃ L M) ≫
+    (J Λ dR.u).map (innerAssociator Λ t K L M).hom
+
+private theorem adj_unit_presentation
+    {U Z : Scheme.{u}} (i : U ⟶ Z) [IsOpenImmersion i] (K : D Λ U) :
+    (adj Λ i).unit.app K = openUnit Λ i K := by
+  unfold openUnit unitComponent
+  rfl
+
+private theorem right_normalization
+    {d₁₂ : Diagram j k T₁₂ Tb₁₂} {d₂₃ : Diagram k l T₂₃ Tb₂₃}
+    {dL : Diagram d₁₂.u l T Tb} {dR : Diagram j d₂₃.u T Tb}
+    (t : Triple d₁₂ d₂₃ dL dR) (K : D Λ X) (L : D Λ Y) (M : D Λ W) :
+    rightRestriction Λ t K L M ≫ (pull Λ dR.u).map (rightComparison Λ t K L M) =
+      (adj Λ dR.u).unit.app (tripleInside Λ d₁₂ dL K L M) := by
+  unfold rightRestriction rightComparison tensorMap
+  rw [adj_unit_presentation, square_presentation, square_presentation]
+  exact native_iteration_right Λ dR K (inside Λ d₂₃ L M) (ambient Λ d₂₃ L M)
+    (restriction Λ d₂₃ L M) (comparison Λ d₂₃ L M)
+    (openProduct_normalization Λ d₂₃ L M).2.2.1
+    (outerAssociator Λ t K L M) (innerAssociator Λ t K L M)
+
+private theorem native_tensorPull_eq
+    {V Z : Scheme.{u}} (f : V ⟶ Z) (K L : D Λ Z) :
+    NativeTripleRestriction.tensorPull Λ f K L = tensorPullIso Λ f K L := by
+  unfold NativeTripleRestriction.tensorPull tensorPullIso
+  rfl
+
+private theorem native_square_eq
+    {S X Y Z : Scheme.{u}} (f : S ⟶ X) (g : X ⟶ Z)
+    (h : S ⟶ Y) (i : Y ⟶ Z) (e : f ≫ g = h ≫ i) :
+    NativeTripleRestriction.square Λ f g h i e = square Λ f g h i e := by
+  unfold NativeTripleRestriction.square square
+  rfl
+
+private theorem native_binary_eq
+    (d : Diagram j k T Tb) (K : D Λ X) (L : D Λ Y) :
+    NativeTripleRestriction.binary Λ d K L = restriction Λ d K L := by
+  unfold NativeTripleRestriction.binary restriction NativeTripleRestriction.leg
+  rw [native_tensorPull_eq, native_square_eq, native_square_eq]
+  rw [unit_presentation, unit_presentation, square_presentation, square_presentation]
+  unfold tensorMap mapTensor NativeTripleRestriction.ambient ambient
+    tensor objTensor pull shriek fmap fobj
+  rfl
+
+private theorem native_outer_eq
+    {d₁₂ : Diagram j k T₁₂ Tb₁₂} {d₂₃ : Diagram k l T₂₃ Tb₂₃}
+    {dL : Diagram d₁₂.u l T Tb} {dR : Diagram j d₂₃.u T Tb}
+    (t : Triple d₁₂ d₂₃ dL dR) (K : D Λ X) (L : D Λ Y) (M : D Λ W) :
+    NativeTripleRestriction.outer Λ t K L M = outerAssociator Λ t K L M := by
+  unfold NativeTripleRestriction.outer outerAssociator
+  dsimp only [NativeTripleRestriction.first, NativeTripleRestriction.second,
+    NativeTripleRestriction.third]
+  rw [native_tensorPull_eq, native_square_eq]
+  dsimp only [NativeTripleRestriction.ambient, NativeTripleRestriction.inside,
+    NativeTripleRestriction.tripleAmbient, NativeTripleRestriction.tripleInside,
+    tripleAmbient, tripleInside, ambient, inside, tensorIsoMap, tensor, objTensor,
+    pull, shriek, fobj, Functor.comp_obj]
+
+private theorem native_inner_eq
+    {d₁₂ : Diagram j k T₁₂ Tb₁₂} {d₂₃ : Diagram k l T₂₃ Tb₂₃}
+    {dL : Diagram d₁₂.u l T Tb} {dR : Diagram j d₂₃.u T Tb}
+    (t : Triple d₁₂ d₂₃ dL dR) (K : D Λ X) (L : D Λ Y) (M : D Λ W) :
+    NativeTripleRestriction.inner Λ t K L M = innerAssociator Λ t K L M := by
+  unfold NativeTripleRestriction.inner innerAssociator
+  dsimp only [NativeTripleRestriction.first, NativeTripleRestriction.second,
+    NativeTripleRestriction.third]
+  rw [native_tensorPull_eq, native_square_eq]
+  dsimp only [NativeTripleRestriction.ambient, NativeTripleRestriction.inside,
+    NativeTripleRestriction.tripleAmbient, NativeTripleRestriction.tripleInside,
+    tripleAmbient, tripleInside, ambient, inside, tensorIsoMap, tensor, objTensor,
+    pull, shriek, fobj, Functor.comp_obj]
+
+
+-- Build small equality and heterogeneous-congruence proofs for the presentation
+-- bridges. Each auxiliary declaration is checked by Lean's kernel; the procedure
+-- unfolds only the listed wrappers and uses the proved native bridges and associativity.
+
+private meta def representationSmall (e : Lean.Expr) : Bool :=
+  [``tripleRight, ``rightComparison, ``tripleRestriction, ``rightRestriction,
+    ``pull, ``shriek, ``adj, ``fobj, ``fmap, ``objTensor, ``mapTensor, ``tensor,
+    ``tensorMap, ``tensorIsoMap, ``tensorIso, ``Iso.refl, ``Iso.symm,
+    ``Functor.comp, ``Functor.id,
+    ``unitComponent, ``compositeComponent, ``squareInv, ``inside, ``ambient,
+    ``tripleInside, ``tripleAmbient, ``CompactificationReindexing.D,
+    ``CompactificationReindexing.P, ``CompactificationReindexing.J,
+    ``CompactificationReindexing.oa, ``CategoryTheory.catToReflQuiver,
+    ``NativeTripleRestriction.leg, ``NativeTripleRestriction.left,
+    ``NativeTripleRestriction.right, ``NativeTripleRestriction.ambient,
+    ``NativeTripleRestriction.inside, ``NativeTripleRestriction.tripleInside,
+    ``NativeTripleRestriction.tripleAmbient].any e.isAppOf
+
+private meta def representationReduction (e : Lean.Expr) :
+    Lean.MetaM (Option Lean.Expr) := do
+  if let .letE _ _ v body _ := e then return some (body.instantiate1 v)
+  if e.headBeta != e then return some e.headBeta
+  if e.getAppFn.isConst then
+    if let some info ← Lean.getProjectionFnInfo? e.getAppFn.constName! then
+      let es := e.getAppArgs
+      if es.size > info.numParams then
+        let major ← representationLetValue 32 es[info.numParams]!
+        if major.getAppFn.isConstOf info.ctorName then
+          return some (Lean.mkAppN major.getAppArgs[info.numParams + info.i]!
+            (es.extract (info.numParams + 1) es.size)).headBeta
+        if representationSmall major then
+          if let some value ← Lean.Meta.unfoldDefinition? major then
+            return some (Lean.mkAppN e.getAppFn (es.set! info.numParams value))
+  if representationSmall e then return ← Lean.Meta.unfoldDefinition? e
+  if e.isAppOf ``CategoryStruct.comp then
+    let es := e.getAppArgs
+    let i := es.size - 2
+    let f := es[i]!
+    if representationSmall f then
+      if let some f' ← Lean.Meta.unfoldDefinition? f then
+        return some (Lean.mkAppN e.getAppFn (es.set! i f'))
+  return none
+
+private meta def representationKnownReduction (e _other : Lean.Expr) :
+    Lean.MetaM (Option (Lean.Expr × Lean.Expr)) := do
+  let facts := [( ``NativeTripleRestriction.binary, ``native_binary_eq),
+    (``NativeTripleRestriction.tensorPull, ``native_tensorPull_eq),
+    (``NativeTripleRestriction.square, ``native_square_eq),
+    (``NativeTripleRestriction.outer, ``native_outer_eq),
+    (``NativeTripleRestriction.inner, ``native_inner_eq)]
+  for (head, fact) in facts do
+    if e.isAppOf head then
+      let mut fnTy ← Lean.Meta.inferType e.getAppFn
+      let mut explicitArgs := #[]
+      for arg in e.getAppArgs do
+        let .forallE _ _ body bi := fnTy | throwError "expected function type"
+        if bi.isExplicit then explicitArgs := explicitArgs.push arg
+        fnTy := body.instantiate1 arg
+      let h ← Lean.Meta.mkAppM fact explicitArgs
+      let ty ← Lean.Meta.inferType h
+      return some (ty.getAppArgs.back!, ← representationOfEq h)
+  if e.isAppOf ``CategoryStruct.comp then
+    let es := e.getAppArgs
+    let f := es[es.size - 2]!
+    if f.isAppOf ``CategoryStruct.comp then
+      let fs := f.getAppArgs
+      let h ← Lean.Meta.mkAppM ``Category.assoc
+        #[fs[fs.size - 2]!, fs.back!, es.back!]
+      let ty ← Lean.Meta.inferType h
+      return some (ty.getAppArgs.back!, ← representationOfEq h)
+  return none
+
+private meta def representationCongruence : Nat →
+    IO.Ref (Std.HashMap (Lean.Expr × Lean.Expr) Lean.Expr) →
+    IO.Ref (Std.HashMap (Lean.Expr × Nat) Lean.Meta.CongrTheorem) →
+    Lean.Expr → Lean.Expr → Lean.MetaM Lean.Expr
+  | 0, _, _, _, _ => throwError "representation congruence exceeded its depth bound"
+  | fuel + 1, cache, congrCache, a, b => do
+    let a ← representationLetValue 32 a.consumeMData
+    let b ← representationLetValue 32 b.consumeMData
+    if a == b then return ← Lean.Meta.mkHEqRefl a
+    if let some h := (← cache.get).get? (a, b) then return h
+    let compute : Lean.MetaM Lean.Expr := do
+      if (← Lean.Meta.isProof a) && (← Lean.Meta.isProof b) then
+        return ← Lean.Meta.mkAppM ``proof_irrel_heq #[a, b]
+      if let some (a', h) ← representationKnownReduction a b then
+        return ← representationTrans h
+          (← representationCongruence fuel cache congrCache a' b)
+      if let some (b', h) ← representationKnownReduction b a then
+        return ← representationTrans
+          (← representationCongruence fuel cache congrCache a b')
+          (← representationSymm h)
+      if let some a' ← representationReduction a then
+        return ← representationTrans (← representationCheck a a')
+          (← representationCongruence fuel cache congrCache a' b)
+      if let some b' ← representationReduction b then
+        return ← representationTrans
+          (← representationCongruence fuel cache congrCache a b')
+          (← representationSymm (← representationCheck b b'))
+      if a.getAppFn == b.getAppFn && a.getAppFn.isConst && a.isApp &&
+          a.getAppNumArgs == b.getAppNumArgs then
+        let aa := a.getAppArgs
+        let bb := b.getAppArgs
+        let key := (a.getAppFn, aa.size)
+        let ct ← match (← congrCache.get).get? key with
+          | some ct => pure ct
+          | none => do
+            let ct ← Lean.Meta.withLCtx {} {} <|
+              Lean.Meta.mkHCongrWithArity a.getAppFn aa.size
+            let proof ← Lean.Meta.mkAuxTheorem ct.type ct.proof
+              (kind? := `_representationCongruence)
+            let ct := { ct with proof := proof }
+            congrCache.modify fun m => m.insert key ct
+            pure ct
+        let mut args := #[]
+        for i in [:aa.size] do
+          let h ← try representationCongruence fuel cache congrCache aa[i]! bb[i]!
+            catch ex => throwError "At {a.getAppFn}, argument {i}: {ex.toMessageData}"
+          let h ← if ct.argKinds[i]! == .eq then representationToEq h else pure h
+          args := args ++ #[aa[i]!, bb[i]!, h]
+        let h := Lean.mkAppN ct.proof args
+        return ← if (← Lean.Meta.inferType h).isHEq then pure h else representationOfEq h
+      representationCheck a b
+    let h ← compute
+    let ty ← Lean.Meta.mkHEq a b
+    let h ← if (← Lean.Meta.inferType h) == ty then pure h else
+      Lean.Meta.mkAuxTheorem ty h (zetaDelta := true) (kind? := `_representationBridge)
+    cache.modify fun m => m.insert (a, b) h
+    return h
+
+private theorem native_left_eq
+    (d₁₂ : Diagram j k T₁₂ Tb₁₂) (dL : Diagram d₁₂.u l T Tb)
+    (K : D Λ X) (L : D Λ Y) (M : D Λ W) :
+    NativeTripleRestriction.left Λ d₁₂ dL K L M = tripleRestriction Λ d₁₂ dL K L M := by
+  run_tac Lean.Elab.Tactic.withMainContext do
+    let ty ← Lean.instantiateMVars (← Lean.Elab.Tactic.getMainTarget)
+    let es := ty.getAppArgs
+    let cache ← IO.mkRef {}
+    let congrCache ← IO.mkRef {}
+    let h ← representationToEq
+      (← representationCongruence 512 cache congrCache es[1]! es[2]!)
+    Lean.Elab.Tactic.closeMainGoal `representationCongruence h
+
+private theorem native_right_eq
+    {d₁₂ : Diagram j k T₁₂ Tb₁₂} {d₂₃ : Diagram k l T₂₃ Tb₂₃}
+    {dL : Diagram d₁₂.u l T Tb} {dR : Diagram j d₂₃.u T Tb}
+    (t : Triple d₁₂ d₂₃ dL dR) (K : D Λ X) (L : D Λ Y) (M : D Λ W) :
+    NativeTripleRestriction.right Λ t K L M = rightRestriction Λ t K L M ≫
+      (eqToIso (congrArg (P Λ) t.sameOpen)).hom.app (tripleAmbient Λ d₁₂ dL K L M) := by
+  run_tac Lean.Elab.Tactic.withMainContext do
+    let ty ← Lean.instantiateMVars (← Lean.Elab.Tactic.getMainTarget)
+    let es := ty.getAppArgs
+    let cache ← IO.mkRef {}
+    let congrCache ← IO.mkRef {}
+    let h ← representationToEq
+      (← representationCongruence 512 cache congrCache es[1]! es[2]!)
+    Lean.Elab.Tactic.closeMainGoal `representationCongruence h
+
+private theorem normalized_open_congr {U Z : Scheme.{u}}
+    (i i' : U ⟶ Z) [IsOpenImmersion i] [IsOpenImmersion i'] (e : i = i')
+    {N : D Λ U} {A : D Λ Z}
+    (r : N ⟶ fobj (pull Λ i) A) (f : A ⟶ fobj (shriek Λ i) N)
+    (h : r ≫ fmap (pull Λ i) f = unitComponent (adj Λ i) N) :
+    (r ≫ (eqToIso (congrArg (P Λ) e)).hom.app A) ≫
+      fmap (pull Λ i') (f ≫ (shriekCongr Λ e).hom.app N) =
+        unitComponent (adj Λ i') N := by
+  subst i'
+  simpa only [shriekCongr, eqToIso_refl, Iso.refl_hom, NatTrans.id_app,
+    fmap, fobj, pull, Functor.map_comp, Functor.map_id, Category.comp_id] using h
+
+private theorem triple_restriction_rebracketing
+    {d₁₂ : Diagram j k T₁₂ Tb₁₂} {d₂₃ : Diagram k l T₂₃ Tb₂₃}
+    {dL : Diagram d₁₂.u l T Tb} {dR : Diagram j d₂₃.u T Tb}
+    (t : Triple d₁₂ d₂₃ dL dR) (K : D Λ X) (L : D Λ Y) (M : D Λ W) :
+    tripleRestriction Λ d₁₂ dL K L M = rightRestriction Λ t K L M ≫
+      (eqToIso (congrArg (P Λ) t.sameOpen)).hom.app (tripleAmbient Λ d₁₂ dL K L M) := by
+  obtain ⟨h₁, h₂, h₃⟩ := NativeTripleRestriction.legs_coherent Λ t K L M
+  have h := NativeTripleRestriction.tensor_rebracketing Λ t K L M h₁ h₂ h₃
+  exact (native_left_eq Λ d₁₂ dL K L M).symm.trans
+    (h.trans (native_right_eq Λ t K L M))
+
+private theorem tripleLeft_isIso
+    (d₁₂ : Diagram j k T₁₂ Tb₁₂) (dL : Diagram d₁₂.u l T Tb)
+    (K : D Λ X) (L : D Λ Y) (M : D Λ W) :
+    IsIso (tripleLeft Λ d₁₂ dL K L M) := by
+  have := comparison_isIso Λ d₁₂ K L
+  have := comparison_isIso Λ dL (inside Λ d₁₂ K L) M
+  unfold tripleLeft tensorMap
+  infer_instance
+
+private theorem tripleRestriction_isIso
+    (d₁₂ : Diagram j k T₁₂ Tb₁₂) (dL : Diagram d₁₂.u l T Tb)
+    (K : D Λ X) (L : D Λ Y) (M : D Λ W) :
+    IsIso (tripleRestriction Λ d₁₂ dL K L M) := by
+  have := restriction_isIso Λ d₁₂ K L
+  have : IsIso (oa Λ l).unit := CompactificationReindexing.openUnit_isIso Λ l
+  unfold tripleRestriction tensorMap
+  infer_instance
+
+private theorem tripleRight_eq
+    {d₁₂ : Diagram j k T₁₂ Tb₁₂} {d₂₃ : Diagram k l T₂₃ Tb₂₃}
+    {dL : Diagram d₁₂.u l T Tb} {dR : Diagram j d₂₃.u T Tb}
+    (t : Triple d₁₂ d₂₃ dL dR) (K : D Λ X) (L : D Λ Y) (M : D Λ W) :
+    tripleRight Λ t K L M = rightComparison Λ t K L M ≫
+      (shriekCongr Λ t.sameOpen).hom.app (tripleInside Λ d₁₂ dL K L M) := by
+  run_tac Lean.Elab.Tactic.withMainContext do
+    let ty ← Lean.instantiateMVars (← Lean.Elab.Tactic.getMainTarget)
+    let es := ty.getAppArgs
+    let cache ← IO.mkRef {}
+    let congrCache ← IO.mkRef {}
+    let h ← representationToEq
+      (← representationCongruence 512 cache congrCache es[1]! es[2]!)
+    Lean.Elab.Tactic.closeMainGoal `representationCongruence h
+
+/-- Three-factor associativity of the same canonical open comparison.
+Source: Coherence (i), three-factor normalization
+(blueprint: lem-sf-condensed-product-compactification-map).
+Proof: pull back both bracketings to the open triple product. The normalized binary
+maps are identities, and native pullback/tensor coherence identifies both associators
+with the signed total-tensor associator. Full faithfulness of the product open extension
+then identifies the two maps before restriction. -/
+theorem openProduct_associativity
+    {d₁₂ : Diagram j k T₁₂ Tb₁₂} {d₂₃ : Diagram k l T₂₃ Tb₂₃}
+    {dL : Diagram d₁₂.u l T Tb} {dR : Diagram j d₂₃.u T Tb}
+    (t : Triple d₁₂ d₂₃ dL dR)
+    (K : D Λ X) (L : D Λ Y) (M : D Λ W) : TripleAssertion Λ t K L M := by
+  have hL := tripleLeft_restriction Λ d₁₂ dL K L M
+  have hR := normalized_open_congr Λ dR.u dL.u t.sameOpen
+    (rightRestriction Λ t K L M) (rightComparison Λ t K L M)
+    (right_normalization Λ t K L M)
+  rw [← triple_restriction_rebracketing Λ t K L M] at hR
+  have hR' : tripleRestriction Λ d₁₂ dL K L M ≫
+      (pull Λ dL.u).map (tripleRight Λ t K L M) =
+        (adj Λ dL.u).unit.app (tripleInside Λ d₁₂ dL K L M) := by
+    rw [tripleRight_eq]
+    exact hR
+  have := tripleLeft_isIso Λ d₁₂ dL K L M
+  have := tripleRestriction_isIso Λ d₁₂ dL K L M
+  have h := normalized_pair_assertion (adj Λ dL.u) (tripleRestriction Λ d₁₂ dL K L M)
+    (tripleLeft Λ d₁₂ dL K L M) (tripleRight Λ t K L M) hL hR'
+  refine ⟨h.1, ?_, ?_⟩
+  · rw [unit_presentation]
+    exact h.2.1
+  · rw [unit_presentation]
+    exact h.2.2
 
 end AlgebraicGeometry.ProEtale.CondensedRing.ProductCompactificationMap

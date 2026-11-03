@@ -175,6 +175,10 @@ import WeilConjectures.Algebra.Homology.KFlatTensorPreservesQuasiIsoIndependentC
 import WeilConjectures.CategoryTheory.Principal.PrincipalKoszulQuotientTowersSupplement
 import WeilConjectures.TraceFormula.Primitive.PrimitiveQuotientPullbackModelExistence
 import WeilConjectures.TraceFormula.Primitive.PrimitiveQuotientScalarModelExistence
+public import WeilConjectures.AlgebraicGeometry.Picard.KFlatResolutionIndependentCoefficients
+public import WeilConjectures.AlgebraicGeometry.Picard.KFlatRingedToposPullback
+public import WeilConjectures.SmoothPurity.ChangeOfRingsKFlatIndependentCoefficients
+public import WeilConjectures.SmoothPurity.SheafRingCoefficientOrdinaryAdjunction
 
 /-! # Primitive realization on simultaneous quotient complexes
 
@@ -235,6 +239,21 @@ private theorem flat_of_single_kFlat [EssentiallySmall.{r} C]
     (Functor.exactFunctor_iff_preservesQuasiIso T (.up ℤ)
       (i₀ := 0) (i₁ := 1) rfl (by decide)).2 hp
   exact (exactFunctor _ _).prop_of_iso (SheafOfModules.siteSheafTensorRightIso R M).symm he
+
+private def finiteOrdinary (W : Scheme.{t}) (n : ℕ) :
+    PrimitiveOrdinary.Ordinary.{t + 1, t, max u (t + 1)}
+      (integralScalarQuotientSheafMap l E L ι W n) where
+  E := (primitiveQuotientFiniteScalarModel l E L ι W n).E
+  obj_eq := (primitiveQuotientFiniteScalarModel l E L ι W n).obj_eq
+  map_eq := (primitiveQuotientFiniteScalarModel l E L ι W n).map_eq
+
+/-- The canonical ordinary and derived extension along a finite quotient inclusion.
+The universal cochain counit determines this model up to its unique compatible
+isomorphism. Source: Stacks 06YY, 0D6D
+(blueprint: lem-trf-primitive-quotient-realization-comparisons). -/
+def primitiveQuotientFiniteScalarModel (W : Scheme.{t}) (n : ℕ) :=
+  Classical.choice (SheafOfModules.nonempty_derivedChangeOfRingsCochainModel
+    (integralScalarQuotientSheafMap l E L ι W n))
 
 end PrimitiveOrdinary
 

@@ -30,6 +30,9 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 import WeilConjectures.AlgebraicGeometry.Picard.SiteDerivedTensorDescentIndependentCoefficients
 import WeilConjectures.AlgebraicGeometry.Canonical.CanonicalOriginCompactSupportComposition
 import WeilConjectures.SixFunctors.LowerShriek.Formalism.BaseChange
+public import WeilConjectures.AlgebraicGeometry.OpenExternalTensor.OpenExternalTensorNormalization
+public import WeilConjectures.SixFunctors.CurrentSixFunctorProjection
+public import WeilConjectures.SmoothPurity.ProjectionFormulaCoherence
 
 /-! # Coherence of the canonical relative compact-support product
 
@@ -268,6 +271,41 @@ def Triple.targetAssoc {B : Scheme.{u}} (s : Triple B)
   AlgebraicGeometry.Etale.derivedTensorAssociator (ModuleCat.{u + 1} Λ) B
     ((currentShriek s.xy.f).obj K) ((currentShriek s.xy.g).obj L)
     ((currentShriek s.h).obj M)
+
+/-- Signed symmetry of the canonical word, on every Cartesian product realization.
+Source: clause (i) (blueprint: lem-sf-kunneth-coherence). -/
+def Symmetry (B : Scheme.{u}) : Prop :=
+  ∀ (d : Pair B) (K : CurrentDerived Λ d.X) (L : CurrentDerived Λ d.Y),
+    currentCtf Λ d.X K → currentCtf Λ d.Y L →
+      (d.sourceSwap K L).hom ≫ (d.swap.kappa L K).hom =
+        (d.kappa K L).hom ≫ (d.targetSwap K L).hom
+
+/-- Equality of the two triple-product iterations through the specified canonical associators.
+Source: clause (ii) (blueprint: lem-sf-kunneth-coherence). -/
+def Associativity (B : Scheme.{u}) : Prop :=
+  ∀ (s : Triple B) (K : CurrentDerived Λ s.xy.X) (L : CurrentDerived Λ s.xy.Y)
+    (M : CurrentDerived Λ s.W),
+    currentCtf Λ s.xy.X K → currentCtf Λ s.xy.Y L → currentCtf Λ s.W M →
+      (s.sourceAssoc K L M).hom ≫ (s.rightKappa K L M).hom =
+        (s.leftKappa K L M).hom ≫ (s.targetAssoc K L M).hom
+
+/-- The identity-factor normalization. The two identity comparisons are exactly the published
+pullback and shriek identity unitors, and PF is the existing projection transformation.
+Source: clause (iv) (blueprint: lem-sf-kunneth-coherence). -/
+def Projection (B : Scheme.{u}) : Prop :=
+  ∀ {X : Scheme.{u}} (f : X ⟶ B) [IsSeparated f] [LocallyOfFiniteType f]
+    [QuasiCompact f] [HasCompactification f]
+    (sq : IsPullback (𝟙 X) f f (𝟙 B))
+    (K : CurrentDerived Λ X) (L : CurrentDerived Λ B),
+    currentCtf Λ X K → currentCtf Λ B L →
+      (AlgebraicGeometry.Etale.relativeKunnethIsoOfIsPullback Λ sq f (by simp) K L).inv =
+        (tensorIso (Iso.refl ((currentShriek f).obj K))
+          ((AlgebraicGeometry.Etale.rightDerivedLowerShriekIdIso
+            (ModuleCat.{u + 1} Λ) B).app L)).hom ≫
+        (currentProjectionFormula f K L).hom ≫
+        (currentShriek f).map
+          (tensorIso ((AlgebraicGeometry.Etale.leftDerivedUpperStarId
+            (ModuleCat.{u + 1} Λ) X).app K).symm (Iso.refl _)).hom
 
 /-- Functoriality in both inputs on the source of kappa.
 Source: naturality in thm-sf-kunneth-relative, used in the finite-product consequence

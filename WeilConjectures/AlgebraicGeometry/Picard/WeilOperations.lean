@@ -20,6 +20,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Exchange
 public import WeilConjectures.CategoryTheory.NormalizedClosedExchange.NormalizedClosedAdjunctionExchange
 public import WeilConjectures.AlgebraicGeometry.PurityTransport.Transport
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerStarComp
+public import WeilConjectures.AlgebraicGeometry.Picard.WeilOperationsOrdinary
+public import WeilConjectures.AlgebraicGeometry.Picard.WeilTruncationLift
 
 /-! # Six operations on Weil complexes
 
@@ -512,4 +514,37 @@ set_option maxHeartbeats 1600000 in
 -- This simultaneous statement elaborates all six native derived-operation endpoints.
 set_option maxHeartbeats 1600000 in
 -- The package contains all operation and comparison endpoints simultaneously.
+end WeilConjectures
+
+namespace WeilConjectures
+
+private theorem woCohomology (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) (g : X ⟶ X) :
+    WOCohomology Λ X g := by
+  intro A B θA θB a h n
+  let H := DerivedCategory.homologyFunctor
+    (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) n
+  let e := (upperStar Λ g).mapDerivedCategoryHomologyFunctorIso n
+  have hH : H.map (((upperStar Λ g).mapDerivedCategory).map a) ≫ H.map θB =
+      H.map θA ≫ H.map a := by
+    simpa only [Functor.map_comp] using congrArg H.map h.1
+  refine ⟨hH, ?_⟩
+  change (upperStar Λ g).map (H.map a) ≫ e.hom.app B ≫ H.map θB = _
+  have hn := e.hom.naturality a
+  change (upperStar Λ g).map (H.map a) ≫ e.hom.app B =
+    e.hom.app A ≫ H.map (((upperStar Λ g).mapDerivedCategory).map a) at hn
+  rw [← Category.assoc, hn, Category.assoc, hH]
+
+private theorem woTruncations_coefficient
+    (ell : ℕ) [Fact ell.Prime] (c : WeilCoefficient ell)
+    (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]
+    (g : X ⟶ X) [IsIso g] : WOTruncations (WeilCoefficient.ab c) X g := by
+  cases c with
+  | finite E =>
+    obtain ⟨t, ht⟩ := (condensedConstructibleTruncations_exists ell X).1 E |>.1
+    exact woTruncations_of_standard _ X g t ht
+  | qbar =>
+    obtain ⟨t, ht⟩ := (condensedConstructibleTruncations_exists ell X).2.1
+    exact woTruncations_of_standard _ X g t ht
+
 end WeilConjectures

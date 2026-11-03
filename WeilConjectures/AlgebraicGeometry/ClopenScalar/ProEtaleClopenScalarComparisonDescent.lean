@@ -38,6 +38,7 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 import all WeilConjectures.CategoryTheory.ProperBaseChange.ResolvingRepresentativeWhiskeringSupplement
 import WeilConjectures.AlgebraicGeometry.ClopenScalar.ProEtaleClopenOrdinaryScalarComparison
+public import WeilConjectures.AlgebraicGeometry.Picard.KFlatResolutionIndependentCoefficients
 
 /-! # Normalized clopen scalar comparison
 
@@ -97,6 +98,52 @@ private noncomputable def cochainRepresentativeWhiskering
       (CategoryTheory.fullyFaithfulWhiskeringOfFullEssSurj f E)
   exact ff.ofIso ((Functor.whiskeringLeft _ _ E).mapIso
     (Functor.isoWhiskerLeft P.ι (DerivedCategory.quotientCompQhIso A)))
+
+private def computationNat {Z : Scheme.{t}}
+    {R S : Sheaf (topology Z) CommRingCat.{max u (t + 1)}} {a : R ⟶ S}
+    (p : SheafOfModules.SuccessiveDerivedQuotient.Presentation.{t + 1, t,
+      max u (t + 1), max (u + 1) (t + 2)} a) :
+    DerivedCategory.Q ⋙ p.derived ⟶
+      p.ordinary.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q :=
+  Functor.whiskerRight (DerivedCategory.quotientCompQhIso (Mods.{t, u} R)).inv p.derived ≫
+    Functor.whiskerLeft (HomotopyCategory.quotient _ _) p.counit ≫
+    Functor.whiskerRight (p.ordinary.mapHomotopyCategoryFactors (.up ℤ)).hom
+      DerivedCategory.Qh ≫
+    Functor.whiskerLeft (p.ordinary.mapHomologicalComplex (.up ℤ))
+      (DerivedCategory.quotientCompQhIso (Mods.{t, u} S)).hom
+
+private theorem computationNat_app {Z : Scheme.{t}}
+    {R S : Sheaf (topology Z) CommRingCat.{max u (t + 1)}} {a : R ⟶ S}
+    (p : SheafOfModules.SuccessiveDerivedQuotient.Presentation.{t + 1, t,
+      max u (t + 1), max (u + 1) (t + 2)} a)
+    (P : CochainComplex (Mods.{t, u} R) ℤ) :
+    (computationNat p).app P = computation p P := by
+  rfl
+
+private theorem computation_isIso {Z : Scheme.{t}} {p : Presentations.{t, u} Z}
+    (n : Normalization.{t + 1, t, max u (t + 1), max (u + 1) (t + 2)}
+      (C := Z.ProEt) (J := topology Z) (hD := derived.{t, u} Z) @p)
+    {R S : Sheaf (topology Z) CommRingCat.{max u (t + 1)}} (a : R ⟶ S)
+    (P : CochainComplex (Mods.{t, u} R) ℤ)
+    (hP : CochainComplex.IsKFlatIndependentCoefficients (R := R) P)
+    (hf : ∀ k : ℤ, IsFlatOnSite (J := topology Z) (R := R) (P.X k)) :
+    IsIso ((computationNat (p a)).app P) := by
+  have := n.computed a P hP hf
+  dsimp only [computationNat, NatTrans.comp_app, Functor.whiskerRight_app,
+    Functor.whiskerLeft_app]
+  infer_instance
+
+private theorem models_resolve {Z : Scheme.{t}}
+    (R : Sheaf (topology Z) CommRingCat.{max u (t + 1)})
+    (K : CochainComplex (Mods.{t, u} R) ℤ) :
+    ∃ (P : CochainComplex (Mods.{t, u} R) ℤ) (f : P ⟶ K),
+      (CochainComplex.IsKFlatIndependentCoefficients (R := R) P ∧
+        ∀ k : ℤ, IsFlatOnSite (J := topology Z) (R := R) (P.X k)) ∧ QuasiIso f := by
+  obtain ⟨P, f, hP, hf, hq, _⟩ :=
+    CochainComplex.exists_isKFlatResolutionIndependentCoefficients K
+  refine ⟨P, f, ⟨hP, fun k ↦ ?_⟩, hq⟩
+  exact (exactFunctor _ _).prop_of_iso
+    (siteSheafTensorRightIso R (P.X k)).symm (hf k)
 
 attribute [local irreducible] computation computationNat
   SheafOfModules.monoidalCategory HasDerivedCategory.standard
@@ -175,5 +222,79 @@ private theorem descendComparison
   apply (cancel_mono b').1
   ext K
   exact (he' K.obj K.property).trans (NatTrans.congr_app he K).symm
+
+/-- The ordinary scalar restriction square and its unique normalized derived lift.
+Source: Stacks Project, sites-cohomology.tex, Tag 06YY, and sites-modules.tex,
+Tag 03EK; the construction in steps 1 and 3 of the parent node.
+(blueprint: lem-pur-clopen-scalar-comparison-descent).
+
+Proof: the ordinary extension is the sheafification of sectionwise scalar tensor.
+Restrict its sheafification unit to the component site. The composition functor
+from the component pro-etale site is cocontinuous, so this unit remains locally
+bijective. The component extension has the same presheaf of tensors, up to the
+identity sectionwise identification. The universal property of sheafification
+therefore gives a natural isomorphism sending s tensor x to s tensor x. It is
+linear over the component target ring. Apply it degreewise to obtain the chain
+isomorphism; naturality with differentials and homotopies follows from ordinary
+naturality. On the full homotopy subcategory of flat-term K-flat input complexes,
+restrict the universal computation counits. These are isomorphisms, both globally
+and on the component, by scalar computation and clopen K-flat detection. Together
+with the exact restriction localization factors, they conjugate the chain
+comparison into an isomorphism of the two derived functors on that subcategory.
+The localized resolving subcategory is equivalent to the entire derived category.
+Full faithfulness of restriction of natural transformations along this
+localization extends the isomorphism and its inverse uniquely. Cancellation of
+the same computation isomorphisms gives exactly the representative equation;
+faithfulness gives the stated uniqueness. This argument applies to zero modules
+and empty components, and uses no flatness of the coefficient maps. -/
+theorem clopen_scalar_comparison_descent
+    (X : Scheme.{t}) (I : Type w) [Finite I] (Y : I → Scheme.{t})
+    (j : ∀ i, Y i ⟶ X) [∀ i, IsOpenImmersion (j i)] [∀ i, IsClosedImmersion (j i)]
+    (hd : Pairwise (fun i k ↦ Disjoint (Set.range (j i)) (Set.range (j k))))
+    (hc : ∀ x : X, ∃ i, x ∈ Set.range (j i))
+    (p : Presentations.{t, u} X)
+    (n : Normalization.{t + 1, t, max u (t + 1), max (u + 1) (t + 2)}
+      (C := X.ProEt) (J := topology X) (hD := derived.{t, u} X) @p)
+    (q : ∀ i, Presentations.{t, u} (Y i))
+    (m : ∀ i, Normalization.{t + 1, t, max u (t + 1), max (u + 1) (t + 2)}
+      (C := (Y i).ProEt) (J := topology (Y i)) (hD := derived.{t, u} (Y i))
+      (fun {R S} a ↦ q i (R := R) (S := S) a))
+    : ∃ d : ∀ i, Comparison.{t, u} (j i) @p
+        (fun {R S} a ↦ q i (R := R) (S := S) a),
+      ∀ i, (d i).sections ∧ (d i).degree ∧ (d i).representative ∧ (d i).unique := by
+  classical
+  have ho (i : I) := clopen_ordinary_scalar_comparison (j i) @p
+    (fun {R S} a ↦ q i (R := R) (S := S) a)
+  choose c hs using ho
+  have hderived (i : I) {R S : Sheaf (topology X) CommRingCat.{max u (t + 1)}}
+      (a : R ⟶ S) := by
+    let good (P : CochainComplex (Mods.{t, u} R) ℤ) :=
+      CochainComplex.IsKFlatIndependentCoefficients (R := R) P ∧
+        ∀ k : ℤ, IsFlatOnSite (J := topology X) (R := R) (P.X k)
+    have hδ (P : CochainComplex (Mods.{t, u} R) ℤ) (hP : good P) := by
+      have hR := clopen_total_tensor_kflat_detection X I Y j hd hc R
+      exact computation_isIso (m i) ((rings (j i)).map a) _
+        ((hR.2.1 P).mp hP.1 i) (fun k ↦ (hR.1 (P.X k)).mp (hP.2 k) i)
+    exact descendComparison (res (j i) R) (res (j i) S)
+      (ext (p a)) (ext (q i ((rings (j i)).map a)))
+      (extD (p a)) (extD (q i ((rings (j i)).map a)))
+      (computationNat (p a)) (computationNat (q i ((rings (j i)).map a)))
+      good (models_resolve R) (fun P hP ↦ computation_isIso n a P hP.1 hP.2)
+      hδ (c i a)
+  choose e he hu using hderived
+  let d (i : I) : Comparison.{t, u} (j i) @p
+      (fun {R S} a ↦ q i (R := R) (S := S) a) :=
+    { ordinary := c i
+      chain := fun a ↦ NatIso.mapHomologicalComplex (c i a) (.up ℤ)
+      derived := e i }
+  refine ⟨d, fun i ↦ ⟨?_, ?_, ?_, ?_⟩⟩
+  · exact hs i
+  · intro R S a P k
+    rfl
+  · intro R S a P hP hf
+    simpa only [computationNat_app] using he i a P ⟨hP, hf⟩
+  · intro R S a e' he'
+    exact hu i a e' (fun P hP ↦ by
+      simpa only [computationNat_app] using he' P hP.1 hP.2)
 
 end AlgebraicGeometry.Scheme.ProEt.ClopenScalar

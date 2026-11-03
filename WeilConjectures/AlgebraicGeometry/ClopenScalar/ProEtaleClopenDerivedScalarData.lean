@@ -124,6 +124,7 @@ public import WeilConjectures.Algebra.Homology.SuccessiveDerivedQuotientData
 public import WeilConjectures.Algebra.Homology.SixFunctors.OrdinaryDerivedChangeOfRings
 public import WeilConjectures.AlgebraicGeometry.CompletedIntegralConstantMapOfUniverses
 public import WeilConjectures.SmoothPurity.Completed.CompletedIntegralCoefficientGerm
+public import WeilConjectures.AlgebraicGeometry.Picard.SuccessiveDerivedQuotientNormalization
 
 /-! # Clopen derived scalar comparison and normalized compositor
 
@@ -362,6 +363,28 @@ def Comparison.computed {X Y : Scheme.{t}} {j : Y ⟶ X} [IsOpenImmersion j]
           (S := (rings.{t, u} j).obj S) (a := (rings.{t, u} j).map a)
           (q ((rings.{t, u} j).map a))
         (((res.{t, u} j R).mapHomologicalComplex (.up ℤ)).obj P))
+
+/-- The extended law of the normalized scalar comparison. Source: Stacks 06YY, 0D6D
+(blueprint: def-pur-clopen-derived-scalar-comparison-data). -/
+def Comparison.extended {X Y : Scheme.{t}} {j : Y ⟶ X} [IsOpenImmersion j]
+    {p : Presentations.{t, u} X} {q : Presentations.{t, u} Y}
+    (_d : Comparison.{t, u} j @p @q) : Prop :=
+  ∀ {R S : Sheaf (topology X) CommRingCat.{max u (t + 1)}}
+    (a : R ⟶ S) (P : CochainComplex (Mods.{t, u} R) ℤ),
+    CochainComplex.IsKFlatIndependentCoefficients.{t + 1, t, max u (t + 1)} (R := R) P →
+    (∀ n : ℤ, IsFlatOnSite.{t + 1, t, max u (t + 1), max u (t + 1)} (J := topology X) (R := R) (P.X
+      n)) →
+    CochainComplex.IsKFlatIndependentCoefficients.{t + 1, t, max u (t + 1)} (R := S)
+        (((ext.{t, u} (Z := X) (p a)).mapHomologicalComplex (.up ℤ)).obj P) ∧
+      (∀ n : ℤ, IsFlatOnSite.{t + 1, t, max u (t + 1), max u (t + 1)} (J := topology X) (R := S)
+        ((ext.{t, u} (Z := X) (p a)).obj (P.X n))) ∧
+      CochainComplex.IsKFlatIndependentCoefficients.{t + 1, t, max u (t + 1)} (R := (rings.{t, u}
+        j).obj S)
+        (((res.{t, u} j S).mapHomologicalComplex (.up ℤ)).obj
+          (((ext.{t, u} (Z := X) (p a)).mapHomologicalComplex (.up ℤ)).obj P)) ∧
+      (∀ n : ℤ, IsFlatOnSite.{t + 1, t, max u (t + 1), max u (t + 1)} (J := topology Y) (R :=
+        (rings.{t, u} j).obj S)
+        ((res.{t, u} j S).obj ((ext.{t, u} (Z := X) (p a)).obj (P.X n))))
 
 /-- The unique law of the normalized scalar comparison. Source: Stacks 06YY, 0D6D
 (blueprint: def-pur-clopen-derived-scalar-comparison-data). -/

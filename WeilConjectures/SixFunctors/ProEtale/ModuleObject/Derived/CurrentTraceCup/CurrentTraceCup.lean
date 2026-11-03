@@ -202,6 +202,22 @@ public import WeilConjectures.AlgebraicGeometry.PurityTransport.TransportPull
 public import WeilConjectures.AlgebraicGeometry.RationalP1.Tate.RationalTateLineComposition
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsComapUnit
 public import WeilConjectures.Compactification.CommonDenseRefinement
+public import WeilConjectures.AlgebraicGeometry.Constant.ConstantModelStratificationTransportSupplement
+public import WeilConjectures.AlgebraicGeometry.Integral.IntegralTateBasis
+public import WeilConjectures.AlgebraicGeometry.Native.NativeSignedLine
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Open.ProEtaleOpenClosedSequenceRingSheaf
+public import WeilConjectures.AlgebraicGeometry.Pullback.PullbackFiniteConstantLocalModel
+public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsRegularEnd
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Braided
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.AdmissibleTensorConstructibility
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntTensorProjection
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixCtf
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixFiniteGeneration
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixNonfiniteGeneration
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixPerfectExtension
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixTensorComparison
 
 /-! # Trace and trace--cup pairing in pulled-back condensed coefficients
 
@@ -246,6 +262,101 @@ Source: K_- = Lambda_s(-d) (blueprint: sk-def-trace-cup). -/
 def derivedLine (T : Scheme.{u}) (r : ℤ) : c.derived ell T :=
   (DerivedCategory.singleFunctor _ 0).obj (signedLine ell c T r)
 
+private theorem firstLine_locallyTrivial (T : Scheme.{u})
+    [∀ x : T, Invertible (ell : T.residueField x)] :
+    ∃ 𝒱 : Scheme.Cover.{u} Scheme.proetalePrecoverage T, ∀ i : 𝒱.I₀,
+      Nonempty (((AlgebraicGeometry.ProEtale.upperStar Ab.{u + 1} (𝒱.f i)).mapMod
+        (condensedRingObj (c.obj ell) T)).obj (c.firstLine ell T) ≅ 𝟙_ _) := by
+  classical
+  have hInv : IsUnit (ell : Γ(T, ⊤)) := by
+    apply T.toRingedSpace.isUnit_of_isUnit_germ
+    intro y hy
+    change IsUnit ((T.presheaf.germ ⊤ y hy).hom (ell : Γ(T, ⊤)))
+    rw [map_natCast]
+    apply (isUnit_map_iff (IsLocalRing.residue (T.presheaf.stalk y)) _).mp
+    simpa only [map_natCast] using isUnit_of_invertible (ell : T.residueField y)
+  obtain ⟨𝒰, h𝒰⟩ := tateModule_locally_trivial T ell hInv
+  have hpull {X Y : Scheme.{u}} (f : Y ⟶ X)
+      {R S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}}
+      [MonObj R] [MonObj S] [IsCommMonObj R] [IsCommMonObj S]
+      (a : R ⟶ S) [IsMonHom a] :
+      Nonempty (((AlgebraicGeometry.ProEtale.upperStar Ab.{u + 1} f).mapMod R ⋙
+        Mod.extendScalars
+          ((AlgebraicGeometry.ProEtale.upperStar Ab.{u + 1} f).map a)) ≅
+        (Mod.extendScalars a ⋙
+          (AlgebraicGeometry.ProEtale.upperStar Ab.{u + 1} f).mapMod S)) := by
+    let adj := AlgebraicGeometry.ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} f
+    exact ⟨Adjunction.pullIsoOfComapIso
+      (Mod.extendRestrictAdjunction
+        ((AlgebraicGeometry.ProEtale.upperStar Ab.{u + 1} f).map a))
+      (Mod.extendRestrictAdjunction a)
+      (adj.mapModAdjunction R) (adj.mapModAdjunction S)
+      (Mod.comapMapModComapIso (AlgebraicGeometry.ProEtale.lowerStar Ab.{u + 1} f)
+        ((AlgebraicGeometry.ProEtale.upperStar Ab.{u + 1} f).map a) a
+        (adj.unitAlgHom R) (adj.unitAlgHom S) (adj.unit.naturality a))⟩
+  have hfirst : ∃ 𝒱 : Scheme.Cover.{u} Scheme.proetalePrecoverage T, ∀ i : 𝒱.I₀,
+      Nonempty (((AlgebraicGeometry.ProEtale.upperStar Ab.{u + 1} (𝒱.f i)).mapMod
+        (condensedRingObj (c.obj ell) T)).obj (c.firstLine ell T) ≅ 𝟙_ _) := by
+    refine ⟨𝒰, fun i ↦ ?_⟩
+    let F := AlgebraicGeometry.ProEtale.upperStar Ab.{u + 1} (𝒰.f i)
+    exact ⟨(hpull (𝒰.f i) (coefficientMap (c.integralMap ell) T)).some.symm.app
+        (tateModule T ell) ≪≫
+      (Mod.extendScalars (F.map (coefficientMap (c.integralMap ell) T))).mapIso
+        (h𝒰 i).some ≪≫
+      Mod.extendScalarsObjRegularIso (F.map (coefficientMap (c.integralMap ell) T))⟩
+  exact hfirst
+
+private theorem line_eq (T : Scheme.{u}) (n : ℕ) : c.line ell T n =
+    coefficientTwistNat T (condensedRingObj (c.obj ell) T) (c.firstLine ell T) n := by
+  induction n with
+  | zero => rfl
+  | succ n ih => simp only [Coefficient.line, coefficientTwistNat, ih]
+
+private theorem signedLine_eq (T : Scheme.{u}) (r : ℤ) :
+    signedLine ell c T r =
+      coefficientSignedTwist T (condensedRingObj (c.obj ell) T) (c.firstLine ell T) r := by
+  cases r with
+  | ofNat n => exact line_eq ell c T n
+  | negSucc n =>
+    exact congrArg (fun L ↦ (ihom L).obj (𝟙_ _)) (line_eq ell c T (n + 1))
+
+private theorem constructible_of_localModel
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (T : Scheme.{u})
+    (M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))
+    (hM : HasFiniteConstantLocalModel Λ T M) : IsConstantModelConstructible Λ T M := by
+  classical
+  have hs (X : Scheme.{u})
+      (N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
+      (hN : HasFiniteConstantLocalModel Λ X N) : IsFiniteConstantStratified Λ X N := by
+    let S : Scheme.Stratification X :=
+      { n := 1
+        stratum := fun _ ↦ Set.univ
+        isLocallyClosed_stratum := fun _ ↦ isOpen_univ.isLocallyClosed
+        isConstructible_stratum := fun _ ↦ Topology.IsConstructible.univ
+        iUnion_stratum_eq_univ := Set.iUnion_const _
+        pairwise_disjoint_stratum := fun i j hij ↦ (hij (Subsingleton.elim i j)).elim
+        domain := fun _ ↦ X
+        immersion := fun _ ↦ 𝟙 X
+        range_immersion := fun _ ↦ Set.range_id' }
+    exact ⟨S, fun a ↦ pullback_finiteConstantLocalModel Λ (S.immersion a) N hN⟩
+  unfold IsConstantModelConstructible
+  split
+  · exact hs T M hM
+  · exact fun U _ ↦ hs U.toScheme _ (pullback_finiteConstantLocalModel Λ U.ι M hM)
+
+private theorem constructible_of_zero
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (T : Scheme.{u})
+    (M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))
+    (hM : IsZero M) : IsConstantModelConstructible Λ T M := by
+  apply constructible_of_localModel Λ T M
+  refine ⟨.singleton (𝟙 T) (Precoverage.mem_coverings_of_isIso _), fun i ↦ ?_⟩
+  refine ⟨HasZeroObject.zero.choose, ?_, ⟨?_⟩⟩
+  · exact ⟨0, 0, 𝟙 _, ⟨(isZero_zero _).iso (isZero_cokernel_of_epi (𝟙 _))⟩⟩
+  · exact ((CondensedRing.upperStar Λ _).map_isZero hM).iso
+      (((upperStarFromPoint _).mapMod Λ).map_isZero (isZero_zero _))
+
 /-- The Tate representative used by U_X is constructible and has finite Tor amplitude.
 Source: K_- in the defining U_X display (blueprint: sk-def-trace-cup), and the
 compatible-root-cover construction of sk-def-sp-tate-twist.
@@ -259,7 +370,44 @@ its Tor amplitude is [0,0]. This includes degree zero and non-field finite rings
 theorem tateLine_mem (T : Scheme.{u})
     [∀ x : T, Invertible (ell : T.residueField x)] (r : ℤ) :
     property ell c T (derivedLine ell c T r) := by
-  sorry
+  classical
+  have hs := nativeSignedLine (condensedRingObj (c.obj ell) T) (c.firstLine ell T)
+    (firstLine_locallyTrivial ell c T)
+  have hfree : IsLocallyFree (condensedRingObj (c.obj ell) T) (signedLine ell c T r) := by
+    rw [signedLine_eq ell c T r]
+    exact hs.2.1 r
+  have hM : IsConstantModelConstructible (c.obj ell) T (signedLine ell c T r) := by
+    apply constructible_of_localModel
+    obtain ⟨𝒰, h𝒰⟩ := hs.1 r
+    refine ⟨𝒰, fun i ↦ ?_⟩
+    refine ⟨𝟙_ _, ?_, ⟨?_⟩⟩
+    · exact ⟨1, 0, 0, ⟨(biproductUniqueIso (fun _ : Fin 1 ↦
+        Mod.regular (c.obj ell))).symm ≪≫ cokernelZeroIsoTarget.symm⟩⟩
+    · letI : (upperStarFromPoint (𝒰.X i)).Braided :=
+        { toMonoidal := inferInstance, braided := Functor.LaxBraided.braided }
+      haveI : PreservesColimitsOfSize.{0, 0} (upperStarFromPoint (𝒰.X i)) :=
+        (pointUpperStarLowerStarAdjunction.comp
+          (AlgebraicGeometry.ProEtale.upperStarLowerStarAdjunction Ab.{u + 1}
+            (toSpecZ (𝒰.X i)))).leftAdjoint_preservesColimits
+      let a := condensedPullbackHom (c.obj ell) (𝒰.f i)
+      change (Mod.extendScalars a).obj
+        (((AlgebraicGeometry.ProEtale.upperStar Ab.{u + 1} (𝒰.f i)).mapMod
+          (condensedRingObj (c.obj ell) T)).obj (signedLine ell c T r)) ≅ _
+      rw [signedLine_eq ell c T r]
+      exact (Mod.extendScalars a).mapIso (h𝒰 i).some ≪≫
+        Mod.extendScalarsObjRegularIso a ≪≫
+        (upperStarFromPoint (𝒰.X i)).mapModUnitIso
+  change property ell c T ((DerivedCategory.singleFunctor _ 0).obj (signedLine ell c T r))
+  refine ⟨⟨⟨⟨0, inferInstance⟩, ⟨0, inferInstance⟩⟩, fun n ↦ ?_⟩, ?_⟩
+  · by_cases hn : n = 0
+    · subst n
+      exact constantModelConstructible_transport (c.obj ell)
+        ((DerivedCategory.singleFunctorCompHomologyFunctorIso _ 0).app _).symm hM
+    · apply constructible_of_zero
+      rcases lt_or_gt_of_ne hn with hn | hn
+      · exact DerivedCategory.isZero_of_isGE _ 0 n hn
+      · exact DerivedCategory.isZero_of_isLE _ 0 n hn
+  · exact ⟨0, 0, DerivedCategory.torAmplitudeIn_singleFunctor_obj_of_flat hfree.flat⟩
 
 set_option maxHeartbeats 0 in
 -- Native tensor and derived-functor comparisons elaborate large instance terms.
@@ -318,7 +466,20 @@ theorem cancellation_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     [∀ x : X, Invertible (ell : X.residueField x)]
     [∀ y : Y, Invertible (ell : Y.residueField y)] (d : ℕ) :
     IsIso (cancellation ell c f d) := by
-  sorry
+  classical
+  have hfirst := firstLine_locallyTrivial ell c Y
+  have hsigned := AlgebraicGeometry.ProEtale.nativeSignedLine
+    (condensedRingObj (c.obj ell) Y) (c.firstLine ell Y) hfirst
+  have hv : IsIso (evaluation ell c Y d) := by
+    cases d with
+    | zero => change IsIso ((λ_ _).hom); infer_instance
+    | succ d =>
+      have hpow : IsInvertible (c.line ell Y (d + 1)) := by
+        rw [line_eq ell c Y]
+        exact hsigned.2.2.1 (Int.ofNat (d + 1))
+      exact hpow.isIso_ev (𝟙_ _)
+  dsimp only [cancellation]
+  infer_instance
 
 set_option maxHeartbeats 0 in
 -- Native tensor and derived-functor comparisons elaborate large instance terms.
@@ -328,6 +489,44 @@ def minus (Y : Scheme.{u}) [∀ y : Y, Invertible (ell : Y.residueField y)]
     (d : ℕ) : c.ctf ell Y :=
   ⟨derivedLine ell c Y (-(d : ℤ)),
     tateLine_mem ell c Y (-(d : ℤ))⟩
+
+/-- Pullback of the positive Tate line, in the actual derived module category.
+Source: Cartesian Tate twists (blueprint: sk-def-trace-cup). -/
+def positivePull {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [∀ x : X, Invertible (ell : X.residueField x)]
+    [∀ y : Y, Invertible (ell : Y.residueField y)] (d : ℕ) :
+    (upperStar (c.obj ell) f).leftDerivedFunctor.obj (derivedLine ell c Y d) ≅
+      derivedLine ell c X d :=
+  ((upperStar (c.obj ell) f).singleFunctorCompLeftDerivedFunctorIso).app _ ≪≫
+    (DerivedCategory.singleFunctor _ 0).mapIso ((linePull ell c f).power d)
+
+/-- Derived evaluation of the positive and negative Tate lines.
+Source: the untwisting in sk-def-trace-cup (blueprint: sk-def-trace-cup). -/
+def derivedEvaluation (T : Scheme.{u})
+    [∀ x : T, Invertible (ell : T.residueField x)] (d : ℕ) :
+    derivedLine ell c T d ⊗ derivedLine ell c T (-(d : ℤ)) ⟶ unit ell c T :=
+  (singleTensor ell c T _ _ (line_flat ell c T d)).hom ≫
+    (DerivedCategory.singleFunctor _ 0).map (evaluation ell c T d)
+
+/-- Derived evaluation is an isomorphism, including dimension zero.
+Proof: the root cover makes the positive line invertible, so closed evaluation is
+invertible; the flat single-tensor comparison preserves this property.
+Source: untwisting by the inverse Tate line (blueprint: sk-def-trace-cup). -/
+instance derivedEvaluation_isIso (T : Scheme.{u})
+    [∀ x : T, Invertible (ell : T.residueField x)] (d : ℕ) :
+    IsIso (derivedEvaluation ell c T d) := by
+  have hs := nativeSignedLine (condensedRingObj (c.obj ell) T) (c.firstLine ell T)
+    (firstLine_locallyTrivial ell c T)
+  have hv : IsIso (evaluation ell c T d) := by
+    cases d with
+    | zero => change IsIso ((λ_ _).hom); infer_instance
+    | succ d =>
+      have hpow : IsInvertible (c.line ell T (d + 1)) := by
+        rw [line_eq ell c T]
+        exact hs.2.2.1 (Int.ofNat (d + 1))
+      exact hpow.isIso_ev (𝟙_ _)
+  dsimp only [derivedEvaluation]
+  infer_instance
 
 set_option maxHeartbeats 0 in
 -- Native tensor and derived-functor comparisons elaborate large instance terms.
@@ -561,19 +760,20 @@ def pairing (D : WeilConjectures.FiniteFieldDatum.{u}) (hEll : ell ≠ D.p)
 
 set_option maxHeartbeats 0 in
 -- Native tensor and derived-functor comparisons elaborate large instance terms.
-/-- The trace--cup pairing in precisely the four coefficient stages of the fixed setting.
-All finite-field, coefficient, uniformizer, geometric and properness hypotheses are
-explicit; the coefficient Tate line is H^0 Fib_s(Lambda_s(-d)).
-Source: latest blueprint sk-def-trace-cup, entire definition (blueprint: sk-def-trace-cup). -/
+/-- The trace--cup pairing in the fixed setting, with properness imposed here.
+The trace is the untwisted exceptional counit read through the orientation and the
+product is the ordinary cup. Point sections only realize these cohomology groups.
+Source: latest sk-def-trace-cup, entire definition (blueprint: sk-def-trace-cup). -/
 def traceCupPairing (D : WeilConjectures.FiniteFieldDatum.{u}) (hEll : ell ≠ D.p)
     (E : PadicAlgCl.FiniteIntermediateField ell) (π : PadicAlgCl.integers ell E)
     (hπ : Ideal.span {π} = IsLocalRing.maximalIdeal (PadicAlgCl.integers ell E))
-    (n : ℕ) (hn : 1 ≤ n) (b : CondensedPoincare.Stage)
-    (d : ℕ) (G : PoincareDualitySetting D.k₀ d) [IsProper G.modelStructureMorphism]
-    (i : ℤ) :
-    H ell (CondensedPoincare.coefficient ell E π hπ n hn b) D d G i →
-      H ell (CondensedPoincare.coefficient ell E π hπ n hn b) D d G (2 * (d : ℤ) - i) →
-        TateLineValue ell (CondensedPoincare.coefficient ell E π hπ n hn b) D d :=
-  pairing ell (CondensedPoincare.coefficient ell E π hπ n hn b) D hEll d G i
+    (n : ℕ) (hn : 1 ≤ n) (d : ℕ)
+    (S : CondensedPoincare.Setting ell D hEll E π hπ n hn d)
+    [IsProper S.geometry.modelStructureMorphism] (i : ℤ) :
+    H ell (CondensedPoincare.coefficient ell E π hπ n hn S.stage) D d S.geometry i →
+      H ell (CondensedPoincare.coefficient ell E π hπ n hn S.stage) D d S.geometry
+        (2 * (d : ℤ) - i) →
+          TateLineValue ell (CondensedPoincare.coefficient ell E π hπ n hn S.stage) D d :=
+  pairing ell (CondensedPoincare.coefficient ell E π hπ n hn S.stage) D hEll d S.geometry i
 
 end AlgebraicGeometry.ProEtale.CondensedRing.CurrentTraceCup

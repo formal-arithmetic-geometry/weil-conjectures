@@ -122,6 +122,11 @@ import WeilConjectures.Algebra.Homology.BoundedFlatIndependentCoefficients
 import Mathlib.CategoryTheory.Monoidal.Preadditive
 import WeilConjectures.CategoryTheory.NatTransFromResolvingClass
 import Mathlib.Algebra.Homology.DerivedCategory.Fractions
+public import WeilConjectures.AlgebraicGeometry.Picard.KFlatResolutionIndependentCoefficients
+public import WeilConjectures.AlgebraicGeometry.Picard.KFlatRingedToposPullback
+public import WeilConjectures.CategoryTheory.InternalAbelianSheafModuleEquivalence
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+public import WeilConjectures.SmoothPurity.SheafRingCoefficientOrdinaryAdjunction
 
 /-! # Simultaneous K-flat word models and normalized comparison descent
 
@@ -810,6 +815,25 @@ theorem scalar_unit (F : DerivedChangeOfRingsCochainModel.{u, v, r, wR, wR} (�
       intro P hP
       change other.hom.app (DerivedCategory.Q.obj P) ≫ 𝟙 _ = _
       simpa only [Category.comp_id, ht] using ho P hP.1 hP.2
+
+/-- The pro-etale site with the actual coefficient ring `Λ_W = p_W^* Λ`.
+The section-ring reconstruction preserves the multiplication and restrictions of this
+ring object. The general word theorem therefore applies directly to condensed coefficients.
+Source: current blueprint det-def-sfb-pulled-back-coefficients and Stacks 00YV, 05RU.
+(blueprint: lem-trf-ringed-kflat-word-comparison-descent). -/
+noncomputable def condensedCoefficientSite
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] (W : AlgebraicGeometry.Scheme.{u}) :
+    Site.{u + 1, u, u + 1, u + 2} := by
+  letI : EssentiallySmall.{u + 1} W.ProEt := essentiallySmallSelf.{0, u, u + 1} _
+  exact {
+    C := W.ProEt
+    J := AlgebraicGeometry.Scheme.ProEt.topology W
+    R := InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}
+      (AlgebraicGeometry.Scheme.ProEt.topology W)
+      (AlgebraicGeometry.ProEtale.condensedRingObj Λ W)
+    small := essentiallySmallSelf.{0, u, u + 1} _
+    derivedCategory := HasDerivedCategory.standard _ }
 
 end ScalarFormulas
 

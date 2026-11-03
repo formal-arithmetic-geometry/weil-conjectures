@@ -31,6 +31,7 @@ public import Mathlib.CategoryTheory.Sites.Equivalence
 public import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
 public import Mathlib.CategoryTheory.Limits.EssentiallySmall
 public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
+public import WeilConjectures.AlgebraicGeometry.Picard.KFlatResolutionIndependentCoefficients
 /-!
 # The reduction tower is normalized
 
@@ -214,6 +215,38 @@ def spReductionDerivedEvaluations (D : SpCoefficientTowersAbelian l E T)
   ∀ n : ℕ, red ⋙ spDerivedCoefficientEvaluation l E T D n ≅
     (D.scalar (spIntegralReductionScalar l E T coefficient n)).model.T
 
+/-- Evaluation retains the canonical comparison on K-flat representatives. In particular,
+the level identifications cannot be rescaled independently.
+Source: blueprint, construction by K-flat descent
+(blueprint: def-sp-reduction-tower-data). -/
+def IsSpReductionEvaluationNormalized (D : SpCoefficientTowersAbelian l E T)
+    (coefficient : spIntegralSectionRing l E T ≅
+      WeilConjectures.completedIntegralCommRingSheafUnrestricted l E T)
+    (ordinary : spIntegralSectionModules l E T ⥤ spCoefficientTowers l E T)
+    [ordinary.Additive]
+    (level : spReductionOrdinaryLevels l E T D coefficient ordinary)
+    (red : DerivedCategory (spIntegralSectionModules l E T) ⥤
+      spDerivedCoefficientTowers l E T D)
+    (counit : DerivedCategory.Q ⋙ red ⟶
+      ordinary.mapHomologicalComplex (.up ℤ) ⋙ spTowerLocalization l E T D)
+    (evaluation : spReductionDerivedEvaluations l E T D coefficient red) : Prop :=
+  ∀ n : ℕ,
+    letI := D.hasDerived
+    letI := D.equivalenceAdditive
+    letI := D.evaluationLimits n
+    letI := D.evaluationColimits n
+    letI : (spCoefficientEvaluation l E T D.equivalence n).Additive :=
+      Functor.additive_of_preserves_binary_products _
+    ∀ P : CochainComplex (spIntegralSectionModules l E T) ℤ,
+      CochainComplex.IsKFlatIndependentCoefficients (R := spIntegralSectionRing l E T) P →
+      (evaluation n).hom.app (DerivedCategory.Q.obj P) ≫
+          (D.scalar (spIntegralReductionScalar l E T coefficient n)).model.ε.app P =
+        (spDerivedCoefficientEvaluation l E T D n).map (counit.app P) ≫
+          (spCoefficientEvaluation l E T D.equivalence n).mapDerivedCategoryFactors.hom.app
+            ((ordinary.mapHomologicalComplex (.up ℤ)).obj P) ≫
+          DerivedCategory.Q.map
+            ((NatIso.mapHomologicalComplex (level n) (.up ℤ)).hom.app P)
+
 /-- The constructible condition of the canonical reduction construction.
 Source: blueprint, normalized-towers-reduction
 (blueprint: det-sp-reduction-tower-normalized). -/
@@ -279,6 +312,9 @@ structure SpReductionTower (D : SpCoefficientTowersAbelian l E T) where
       IsIso (counit.app P)
   /-- The evaluated functors are exactly derived extension to the quotient coefficients. -/
   evaluation : spReductionDerivedEvaluations l E T D coefficient red
+  /-- These are the comparisons descended from the specified ordinary tensor levels. -/
+  evaluation_normalized : IsSpReductionEvaluationNormalized l E T D coefficient ordinary
+    level red counit evaluation
 
   /-- Every actual transition-adjoint reduction map is an isomorphism, without qcqs. -/
   normalized : ∀ M : DerivedCategory (spIntegralSectionModules l E T),
@@ -287,5 +323,46 @@ structure SpReductionTower (D : SpCoefficientTowersAbelian l E T) where
   constructible towers and themselves have finite Tor amplitude. Every Tor interval of
   M bounds both Tor amplitude and cohomological support at every positive level. -/
   constructible : IsSpReductionConstructible l E T D red
+
+/-- The K-flat normalization uniquely determines the derived evaluation comparisons.
+Source: uniqueness of localization comparisons, Stacks Tag 06XN
+(blueprint: def-sp-reduction-tower-data).
+
+Proof: cancel the scalar computation counit on a K-flat representative. The two
+normalization equations then give equal evaluation components. Resolve an arbitrary
+complex by a K-flat complex; naturality and invertibility of its localized resolution
+extend equality to that complex. Localization detects equality of natural transformations,
+and extensionality of natural isomorphisms finishes the proof. -/
+theorem SpReductionTower.evaluation_unique (D : SpCoefficientTowersAbelian l E T)
+    (R : SpReductionTower l E T D)
+    (evaluation : spReductionDerivedEvaluations l E T D R.coefficient R.red)
+    (h : letI := R.additive
+      IsSpReductionEvaluationNormalized l E T D R.coefficient R.ordinary
+        R.level R.red R.counit evaluation) : evaluation = R.evaluation := by
+  let := R.additive
+  funext n
+  apply Iso.ext
+  let := D.hasDerived
+  let := D.equivalenceAdditive
+  let := D.evaluationLimits n
+  let := D.evaluationColimits n
+  let : (spCoefficientEvaluation l E T D.equivalence n).Additive :=
+    Functor.additive_of_preserves_binary_products _
+  apply Localization.natTrans_ext DerivedCategory.Q
+    (HomologicalComplex.quasiIso (spIntegralSectionModules l E T) (.up ℤ))
+  intro K
+  obtain ⟨P, s, hP, _, hs, _⟩ :=
+    CochainComplex.exists_isKFlatResolutionIndependentCoefficients
+      (R := spIntegralSectionRing l E T) K
+  have : QuasiIso s := hs
+  have he : (evaluation n).hom.app (DerivedCategory.Q.obj P) =
+      (R.evaluation n).hom.app (DerivedCategory.Q.obj P) := by
+    have := (D.scalar (spIntegralReductionScalar l E T R.coefficient n)).model.computes P hP
+    apply (cancel_mono
+      ((D.scalar (spIntegralReductionScalar l E T R.coefficient n)).model.ε.app P)).1
+    exact (h n P hP).trans (R.evaluation_normalized n P hP).symm
+  apply (cancel_epi ((R.red ⋙ spDerivedCoefficientEvaluation l E T D n).map
+    (DerivedCategory.Q.map s))).1
+  rw [(evaluation n).hom.naturality, (R.evaluation n).hom.naturality, he]
 
 end AlgebraicGeometry.ProEtale

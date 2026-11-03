@@ -118,6 +118,10 @@ public import WeilConjectures.SmoothPurity.Coefficient.CoefficientSystemScalarCa
 public import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerivedSystemEvaluationData
 import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerivedSystemResolutionModels
 import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerivedSystemProjectionFormulas
+public import WeilConjectures.AlgebraicGeometry.Picard.DerivedChangeOfRingsIndependentCoefficients
+public import WeilConjectures.AlgebraicGeometry.Picard.KFlatResolutionIndependentCoefficients
+public import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerivedSystemGammaProjectionTransport
+public import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerivedSystemHomProjectionTransport
 
 /-! # Assembly of the coherent derived coefficient-system evaluation calculus
 
@@ -191,8 +195,8 @@ choose normalized fibers F, the global-limit comparison kappa, the resolution co
 and the projection-model equations H. Construct S from F and kappa; its enriched_isIso field
 is coefficientClosedEnriched_isIso: the evaluation-defined enriched adjunct is the inverse of
 the five-Hom-bijection comparison ClosedScalarHom.iso (lem-sfb-closed-scalar-hom-comparison).
-2. coefficientDerivedSystemProjectionFormulas (lem-coef-derived-system-projection-formulas)
-applied to S, D and H gives the gamma projection and Hom-zero projection fields.
+2. The two existing transport lemmas give the gamma and Hom-zero projection fields.
+This legacy assembly is kept compatible until its separate route-switch repair.
 3. Finite enriched invertibility is coefficientClosedEnriched_isIso for the finite scalar
 adjunction and its tensor comparison. Gamma naturality: apply integral sections to
 coefficientClosedEnriched_naturality, then naturality of kappa.
@@ -212,7 +216,45 @@ theorem coefficientDerivedSystemEvaluationCalculus :
       globalLimit := κ }
   change CoefficientDerivedSystemResolutionCoherence l E W S at D
   change CoefficientDerivedSystemProjectionModels l E W S D at H
-  obtain ⟨hγ, h₀⟩ := coefficientDerivedSystemProjectionFormulas l E W S D H
+  have hγ := coefficientDerivedSystemGammaProjectionTransport l E W S D H
+  have h₀ : CoefficientHomProjection l E W S := by
+    intro P N hN h n
+    have hγn := hγ P N hN n
+    have hp := coefficientDerivedSystemHomProjectionTransport.{u, t+1, t}
+      (Scheme.ProEt.topology W) (completedIntegralCommRingSheafUnrestricted l E W)
+      (integralCoefficientCommRingSheaf l E W n)
+      (coefficientFiniteDerivedExtension l E W n)
+      (coefficientFiniteDerivedRestriction l E W n) (coefficientFiniteAdjunction l E W n)
+      P ((coefficientSequenceLimit l E W).obj N)
+      ((coefficientSequenceDerivedEvaluation l E W n).obj (S.reduction.obj P))
+      ((coefficientSequenceDerivedEvaluation l E W n).obj
+        (S.reduction.obj ((coefficientSequenceLimit l E W).obj N)))
+      ((coefficientSequenceDerivedEvaluation l E W n).obj N)
+      ((S.reductionEvaluation n).app P)
+      ((S.reductionEvaluation n).app ((coefficientSequenceLimit l E W).obj N)).symm
+      ((coefficientSequenceDerivedEvaluation l E W n).map (S.adjunction.counit.app N))
+      ((coefficientSequenceProjection l E W n).app N) (S.counit_projection N n).symm
+      ((coefficientIntegralSections l E W).map
+        (coefficientEnrichedAdjunctionMap S.integralClosed (S.finiteClosed n)
+          (coefficientFiniteDerivedExtension l E W n) (coefficientFiniteAdjunction l E W n)
+          (S.finiteTensor n) P ((coefficientSequenceDerivedEvaluation l E W n).obj N)) ≫
+        (D.scalarSections n).hom.app ((coefficientFiniteInternalHom l E W n).obj
+          (op ((coefficientFiniteDerivedExtension l E W n).obj P),
+            (coefficientSequenceDerivedEvaluation l E W n).obj N)))
+      (H.scalar_hom_zero n P ((coefficientSequenceDerivedEvaluation l E W n).obj N))
+      ((S.gamma l E W P N hN).hom ≫
+        (coefficientMappingProjection n).app
+          ((coefficientSequenceGlobalHom l E W).obj (op (S.reduction.obj P), N)) ≫
+        (S.globalEvaluation _ _ (S.reduction_normalized P) hN n).hom)
+      (by simpa only [coefficientIntegralGlobalHom, coefficientFiniteGlobalHom,
+        coefficientIntegralInternalHom, coefficientFiniteInternalHom,
+        coefficientIntegralSections, coefficientFiniteSections,
+        Functor.comp_map, Category.assoc, Iso.app_hom] using hγn) h
+    convert hp using 1 <;>
+      simp only [coefficientGammaZeroMap, coefficientGammaZero,
+        coefficientIntegralHomEquiv, coefficientFiniteHomEquiv, Functor.map_comp,
+        AddCommGrpCat.comp_apply, Iso.app_hom, Iso.app_inv, Iso.symm_hom]
+    rfl
   refine ⟨S, ⟨{
     toCoefficientDerivedSystemResolutionCoherence := D
     finite_enriched_isIso := ?_

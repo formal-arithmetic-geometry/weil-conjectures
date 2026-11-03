@@ -321,6 +321,56 @@ private theorem normalized_pure_iso (L : DerivedCategory A ⥤ DerivedCategory B
     simp only [Adjunction.homEquiv_unit]
     exact hu'.trans (by simpa only [asIso_hom, hu] using he.symm)
 
+private theorem derived_single_iso : ∃ e : L.obj ((DerivedCategory.singleFunctor A 0).obj X) ≅
+      (DerivedCategory.singleFunctor B 0).obj Y,
+    ad.unit.app ((DerivedCategory.singleFunctor A 0).obj X) ≫
+      R.mapDerivedCategory.map e.hom ≫ (R.mapDerivedCategorySingleFunctor 0).hom.app Y =
+        (DerivedCategory.singleFunctor A 0).map f := by
+  let K := (HomologicalComplex.single A (.up ℤ) 0).obj X
+  let K' := (HomologicalComplex.single B (.up ℤ) 0).obj Y
+  let cE := HomologicalComplex.singleMapHomologicalComplex E (.up ℤ) 0
+  let cR := HomologicalComplex.singleMapHomologicalComplex R (.up ℤ) 0
+  let β := cE.hom.app X ≫ (HomologicalComplex.single B (.up ℤ) 0).map b
+  have hc : (a.mapHomologicalComplex (.up ℤ)).unit.app K ≫
+      (R.mapHomologicalComplex (.up ℤ)).map β ≫ cR.hom.app Y =
+      (HomologicalComplex.single A (.up ℤ) 0).map f := by
+    ext i
+    by_cases hi : i = 0
+    · subst i
+      simp only [HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
+        Adjunction.mapHomologicalComplex_unit_app_f, β,
+        HomologicalComplex.single_map_f_self, cE, cR,
+        HomologicalComplex.singleMapHomologicalComplex_hom_app_self,
+        Functor.map_comp, Category.assoc]
+      erw [← a.unit.naturality_assoc]
+      simp only [← Functor.map_comp_assoc, Iso.inv_hom_id]
+      simp only [Iso.inv_hom_id_assoc, Category.comp_id, Functor.id_map]
+      simpa only [Category.assoc] using congrArg
+        (fun g ↦ (HomologicalComplex.singleObjXSelf (.up ℤ) 0 X).hom ≫
+          g ≫ (HomologicalComplex.singleObjXSelf (.up ℤ) 0 (R.obj Y)).inv) hb
+    · exact (HomologicalComplex.isZero_single_obj_X (.up ℤ) 0 X i hi).eq_of_src _ _
+  let : IsIso (ε.app K) := hε
+  let e : L.obj ((DerivedCategory.singleFunctor A 0).obj X) ≅
+      (DerivedCategory.singleFunctor B 0).obj Y :=
+    asIso (ε.app K) ≪≫ DerivedCategory.Q.mapIso (cE.app X) ≪≫
+      (DerivedCategory.singleFunctor B 0).mapIso (asIso b)
+  refine ⟨e, ?_⟩
+  have hβ : e.hom = ε.app K ≫ DerivedCategory.Q.map β := by
+    simp only [e, Iso.trans_hom, asIso_hom, Functor.mapIso_hom, β, Functor.map_comp]
+    rfl
+  have hR : (R.mapDerivedCategorySingleFunctor 0).hom.app Y =
+      R.mapDerivedCategoryFactors.hom.app K' ≫ DerivedCategory.Q.map (cR.hom.app Y) := by
+    erw [← R.mapDerivedCategoryFactors_inv_app_mapDerivedCategorySingleFunctor_hom_app Y]
+    erw [Iso.hom_inv_id_app_assoc]
+  erw [hβ, hR, R.mapDerivedCategory.map_comp]
+  simp only [Category.assoc]
+  erw [R.mapDerivedCategoryFactors.hom.naturality_assoc β]
+  erw [reassoc_of% hu]
+  change DerivedCategory.Q.map _ ≫ DerivedCategory.Q.map _ ≫
+    DerivedCategory.Q.map _ = DerivedCategory.Q.map _
+  erw [← DerivedCategory.Q.map_comp_assoc, ← DerivedCategory.Q.map_comp]
+  exact DerivedCategory.Q.congr_map ((Category.assoc _ _ _).trans hc)
+
 end Generic
 
 section DerivedSingle
@@ -947,6 +997,27 @@ private theorem scalar_derived_unit
   Classical.choose_spec (Classical.choose_spec
     (sheafDerivedScalarAdjunction_exists q D)).2 P hP
 
+private theorem extension_unit_isIso (E : Integral J ⥤ Residue J n)
+    (a : E ⊣ restriction J n) : IsIso ((a.homEquiv _ _).symm (coefficientUnit J n)) := by
+  rw [isIso_iff_coyoneda_map_bijective]
+  intro M
+  rw [← (a.homEquiv _ _).bijective.of_comp_iff',
+    ← (unitHomEquiv _).bijective.of_comp_iff']
+  convert! M.unitHomEquiv.bijective using 1
+  ext f : 1
+  dsimp
+  rw [a.homEquiv_naturality_right, Equiv.apply_symm_apply]
+  ext U
+  change (coefficientUnit J n ≫ (restriction J n).map f).val.app U
+    (1 : (integers J).obj.obj U) = _
+  change f.val.app U ((coefficientUnit J n).val.app U (1 : (integers J).obj.obj U)) = _
+  have hc : (coefficientUnit J n).val.app U (1 : (integers J).obj.obj U) =
+      (1 : (residues J n).obj.obj U) := by
+    exact congrArg (fun s ↦ s.val U)
+      (((restriction J n).obj (residueUnit J n)).unitHomEquiv.apply_symm_apply _)
+  rw [hc]
+  rfl
+
 set_option backward.isDefEq.respectTransparency true
 
 end SheafOfModules
@@ -1249,6 +1320,53 @@ noncomputable def boundary [HasTerminal C] (hn : 1 ≤ n) (P : Presentation (J :
     (identifications n D hn P).alphaB.hom⟦(1 : ℤ)⟧' ≫
     (shiftFunctorAdd (DerivedCategory (Residue J n)) (1 : ℤ) 1).inv.app
       ((DerivedCategory.singleFunctor (Residue J n) 0).obj P.H)
+
+/-- The unit object reduces canonically to the residue unit.
+Source: Cartier proof, paragraph 5; Stacks 06YU, 09T5 and 0FND
+(blueprint: lem-sfb-divisible-extension-derived-reduction).
+Proof: Z[0] is K-flat since tensoring with it is the identity. Apply the K-flat
+counit to identify its scalar extension with R[0]. The normalized derived unit
+is the ordinary coefficient map. Conversely this unit equation determines the
+isomorphism, by the scalar adjunction and the fact that a map of residue unit
+sheaves is fixed on 1. -/
+theorem coefficientIso_existsUnique [HasTerminal C] (hn : 1 ≤ n) :
+    ∃! e : D.T.obj ((DerivedCategory.singleFunctor (Integral J) 0).obj (integerUnit J)) ≅
+        (DerivedCategory.singleFunctor (Residue J n) 0).obj (residueUnit J n),
+      eta n D (integerUnit J) ≫ (derivedRestriction n).map e.hom ≫
+        ((restriction J n).mapDerivedCategorySingleFunctor 0).hom.app (residueUnit J n) =
+      (DerivedCategory.singleFunctor (Integral J) 0).map (coefficientUnit J n) := by
+  have _ := hn
+  classical
+  let a := sheafScalarOrdinaryAdjunction (projection J n) D
+  let K := (HomologicalComplex.single (Integral J) (.up ℤ) 0).obj (integerUnit J)
+  have hK : CochainComplex.IsKFlatIndependentCoefficients (R := integers J) K :=
+    SheafOfModules.unit_kflat (integers J)
+  let b := (a.homEquiv _ _).symm (coefficientUnit J n)
+  have hb : IsIso b := extension_unit_isIso n D.E a
+  have hε : IsIso (D.ε.app K) := D.computes K hK
+  have hbunit : a.unit.app (integerUnit J) ≫ (restriction J n).map b =
+      coefficientUnit J n := by
+    exact (Adjunction.homEquiv_unit a _ _ b).symm.trans (Equiv.apply_symm_apply _ _)
+  have hnormal := scalar_derived_unit (projection J n) D K hK
+  obtain ⟨e, he⟩ := derived_single_iso D.E (restriction J n) a D.T
+    (sheafScalarDerivedAdjunction (projection J n) D) D.ε
+    (integerUnit J) (residueUnit J n) b (coefficientUnit J n) hbunit hε hnormal
+  refine ⟨e, he, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  apply (sheafScalarDerivedAdjunction (projection J n) D).homEquiv _ _ |>.injective
+  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
+  apply (cancel_mono
+    (((restriction J n).mapDerivedCategorySingleFunctor 0).hom.app
+      (residueUnit J n))).1
+  simp only [Category.assoc]
+  exact he'.trans he.symm
+
+/-- The unit reduction fixed by the actual coefficient map.
+Source: Cartier proof, paragraph 5
+(blueprint: lem-sfb-divisible-extension-derived-reduction). -/
+noncomputable def coefficientIso [HasTerminal C] (hn : 1 ≤ n) :=
+  Classical.choose (coefficientIso_existsUnique n D hn)
 
 set_option backward.isDefEq.respectTransparency true in
 attribute [local irreducible] identifications

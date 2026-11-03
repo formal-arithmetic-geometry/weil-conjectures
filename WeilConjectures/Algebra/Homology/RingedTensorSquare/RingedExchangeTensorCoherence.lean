@@ -99,6 +99,8 @@ import Mathlib.Algebra.Category.Grp.Abelian
 import Mathlib.CategoryTheory.Sites.Abelian
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 import WeilConjectures.Algebra.Homology.Site.SiteDerivedTensorDescent
+public import WeilConjectures.AlgebraicGeometry.Picard.KFlatRingedToposPullback
+public import WeilConjectures.ProperBaseChange.RingedTopoiDerivedPullback
 
 /-!
 # Projection-formula coherence for a square of ringed topoi
@@ -116,6 +118,28 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 
 set_option backward.isDefEq.respectTransparency false in
+
+private theorem tensor_projection_naturality
+    {A B : Type*} [Category A] [Category B] {F : A ⥤ B} {R : B ⥤ A}
+    (adj : F ⊣ R) (T : A × A ⥤ A) (U : B × B ⥤ B)
+    (t : T ⋙ F ⟶ (F.prod F) ⋙ U)
+    {E E' : B} {Q Q' : A} (v : E ⟶ E') (z : Q ⟶ Q') :
+    T.map (CategoryTheory.Prod.mkHom (R.map v) z) ≫
+        adj.homEquiv _ _ (t.app (R.obj E', Q') ≫
+          U.map (CategoryTheory.Prod.mkHom (adj.counit.app E') (𝟙 (F.obj Q')))) =
+      adj.homEquiv _ _ (t.app (R.obj E, Q) ≫
+          U.map (CategoryTheory.Prod.mkHom (adj.counit.app E) (𝟙 (F.obj Q)))) ≫
+        R.map (U.map (CategoryTheory.Prod.mkHom v (F.map z))) := by
+  apply adj.homEquiv_naturality_left_square
+  have hn := t.naturality (CategoryTheory.Prod.mkHom (R.map v) z)
+  dsimp at hn
+  rw [← Category.assoc, hn, Category.assoc]
+  simp only [Category.assoc, ← U.map_comp]
+  congr 2
+  ext
+  · exact adj.counit.naturality v
+  · simp
+
 private theorem tensor_mate_coherence
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
     {F : A ⥤ B} {R : B ⥤ A} {G : A ⥤ C} {H : B ⥤ D} {K : C ⥤ D} {S : D ⥤ C}

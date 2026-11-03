@@ -13,6 +13,14 @@ import all WeilConjectures.PoincareDuality.Pod.Reduction.PodReductionDescentSyst
 import WeilConjectures.PoincareDuality.Pod.Reduction.PodReductionGoodRepresentativeSquare
 import all WeilConjectures.PoincareDuality.Pod.Reduction.PodReductionRepresentativeModels
 import all WeilConjectures.SmoothPurity.Completed.CompletedPullbackTowerCore
+public import WeilConjectures.Algebra.Homology.KFlatTotalTensorModel.KFlatTotalTensorModelSupplement
+public import WeilConjectures.AlgebraicGeometry.Picard.KFlatRingedToposPullback
+public import WeilConjectures.PoincareDuality.Pod.Reduction.PodReductionRepresentativeAssembly
+public import WeilConjectures.PoincareDuality.PodReductionRepresentatives.PodReductionReindexStrictTensor
+public import WeilConjectures.PoincareDuality.PodReductionRepresentatives.PodReductionReindexUnaryModel
+public import WeilConjectures.SixFunctors.Coefficient.CoefficientReductionTensorEvaluationPasting
+public import WeilConjectures.SixFunctors.Tensor.TensorReductionStrictDerivedSquare
+public import WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSupplement
 
 /-! # Descent of the strict reduction/tensor representative square
 
@@ -116,6 +124,144 @@ private theorem reduction_square_transport
   simpa only [Category.assoc] using congrArg (fun z ↦ z ≫ V.map (Prod.mkHom
       (S.map (F.map eP.hom)) (S.map (F.map eQ.hom)))) hg
 
+private theorem podReduction_representative_square_legacy
+    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
+    [∀ x : X, Invertible (l : X.residueField x)]
+    [∀ y : Y, Invertible (l : Y.residueField y)]
+    (A : PodCompletionReindex l E g)
+    (hA : PodCompletionReindex.Laws l E g A)
+    (c : PodReindexingCoherence.Comparison l E g none
+      (podReindexCalculus l E X).integralClosed (podReindexCalculus l E Y).integralClosed
+      (podReindexCalculus l E X).integralTensorModel
+      (podReindexCalculus l E Y).integralTensorModel)
+    (h : podReindexingDerivedFunctor l E g none = podOrdinaryReindex l E g)
+    (hPure : ∀ (P L : PodReindexingCoherence.K l E Y none) (p q k : ℤ)
+      (hk : p + q = k) (U : X.ProEt)
+      (x : (P.X p).val.obj (op ((proEtaleIsoPostcompose g).obj U)))
+      (y : (L.X q).val.obj (op ((proEtaleIsoPostcompose g).obj U))),
+      (((c.tensorChain P L).hom.f k).val.app (op U))
+        (coefficientTensorGenerator.{u, u + 1, u}
+          (ProEt.topology Y) (podReindexingRing l E Y none) P L p q k hk
+          (op ((proEtaleIsoPostcompose g).obj U)) x y) =
+      coefficientTensorGenerator.{u, u + 1, u}
+        (ProEt.topology X) (podReindexingRing l E X none)
+        ((podReindexingComplexFunctor l E g none).obj P)
+        ((podReindexingComplexFunctor l E g none).obj L) p q k hk
+        (op U) x y)
+    (P Q : (integralOperationsGoodComplex l E Y).FullSubcategory) :
+    (integralComparisonDerivedSequencePullback l E g).map
+        ((podReindexCalculus l E Y).reductionTensor.hom.app ((podReindexingQ l E Y none).obj P.obj,
+          (podReindexingQ l E Y none).obj Q.obj)) ≫
+      (podReindexingSystemTensor l E g).hom.app
+        ((podReindexCalculus l E Y).reduction.obj ((podReindexingQ l E Y none).obj P.obj),
+          (podReindexCalculus l E Y).reduction.obj ((podReindexingQ l E Y none).obj Q.obj)) ≫
+      (podReindexCalculus l E X).systemClosed.tensor.map
+        (Prod.mkHom
+          (A.reduction.hom.app ((podReindexingQ l E Y none).obj P.obj))
+          (A.reduction.hom.app ((podReindexingQ l E Y none).obj Q.obj))) =
+    A.reduction.hom.app
+        ((podReindexCalculus l E Y).integralClosed.tensor.obj
+          ((podReindexingQ l E Y none).obj P.obj,
+          (podReindexingQ l E Y none).obj Q.obj)) ≫
+      (podReindexCalculus l E X).reduction.map
+        ((reductionOrdinaryTensor l E g c h).hom.app
+          ((podReindexingQ l E Y none).obj P.obj, (podReindexingQ l E Y none).obj Q.obj)) ≫
+      (podReindexCalculus l E X).reductionTensor.hom.app
+        ((podOrdinaryReindex l E g).obj ((podReindexingQ l E Y none).obj P.obj),
+          (podOrdinaryReindex l E g).obj ((podReindexingQ l E Y none).obj Q.obj)) := by
+  let T0 := (PodReindexingCoherence.total l E Y none).obj (P.obj, Q.obj)
+  have hT := total_good l E Y P Q
+  obtain ⟨hFP, βP, hβP, hUP⟩ := PodReductionRepresentatives.unary_model l E g A hA h P
+  obtain ⟨hFQ, βQ, hβQ, hUQ⟩ := PodReductionRepresentatives.unary_model l E g A hA h Q
+  obtain ⟨hFT, βT, hβT, hUT⟩ := PodReductionRepresentatives.unary_model l E g A hA h ⟨T0, hT⟩
+  let CY := podReindexCalculus l E Y
+  let CX := podReindexCalculus l E X
+  let G := integralComparisonDerivedSequencePullback l E g
+  let D := podOrdinaryReindex l E g
+  let T0 := (T[Y]).obj (P.obj, Q.obj)
+  let FP : (integralOperationsGoodComplex l E X).FullSubcategory := ⟨_, hFP⟩
+  let FQ : (integralOperationsGoodComplex l E X).FullSubcategory := ⟨_, hFQ⟩
+  let FT : (integralOperationsGoodComplex l E X).FullSubcategory := ⟨_, hFT⟩
+  let TX := (T[X]).obj (FP.obj, FQ.obj)
+  let hTX := total_good l E X FP FQ
+  let bY := ordinaryModel l E Y CY.integralClosed CY.integralTensorModel
+    P.obj Q.obj P.property.1 Q.property.1
+  let bX := ordinaryModel l E X CX.integralClosed CX.integralTensorModel
+    FP.obj FQ.obj hFP.1 hFQ.1
+  let fP := (factor l E g h).app P.obj
+  let fQ := (factor l E g h).app Q.obj
+  let fT := (factor l E g h).app T0
+  let rP := (pullbackTensorReductionModel l E Y).app P
+  let rQ := (pullbackTensorReductionModel l E Y).app Q
+  let rT := (pullbackTensorReductionModel l E Y).app ⟨T0, hT⟩
+  let rFP := (pullbackTensorReductionModel l E X).app FP
+  let rFQ := (pullbackTensorReductionModel l E X).app FQ
+  let rFT := (pullbackTensorReductionModel l E X).app FT
+  let rTX := (pullbackTensorReductionModel l E X).app ⟨TX, hTX⟩
+  let RP := (R[Y]).obj P.obj
+  let RQ := (R[Y]).obj Q.obj
+  let sY := systemModel l E Y RP RQ
+    (pullbackTensorReductionGood l E Y P) (pullbackTensorReductionGood l E Y Q)
+  let sX := systemModel l E X _ _
+    (pullbackTensorReductionGood l E X FP) (pullbackTensorReductionGood l E X FQ)
+  let iP := (systemFactor l E g).hom.app RP
+  let iQ := (systemFactor l E g).hom.app RQ
+  let iT := (systemFactor l E g).hom.app
+    ((R[Y]).obj T0)
+  let iS := (systemFactor l E g).hom.app
+    ((S[Y]).obj (RP, RQ))
+  let ψY := tensorReductionStrictMap l E Y P.obj Q.obj
+  let ψX := tensorReductionStrictMap l E X FP.obj FQ.obj
+  let t := c.tensorChain P.obj Q.obj
+  let w := podReindexingSystemTensor l E g
+  let hIP := sequence_good l E g RP (pullbackTensorReductionGood l E Y P)
+  let hIQ := sequence_good l E g RQ (pullbackTensorReductionGood l E Y Q)
+  have hS := system_model l E g RP RQ
+    (pullbackTensorReductionGood l E Y P) (pullbackTensorReductionGood l E Y Q) hIP hIQ
+  let sI := systemModel l E X _ _ hIP hIQ
+  have hY := reduction_model l E Y P Q hT
+  have hX := reduction_model l E X FP FQ hTX
+  have hO := ordinary_model l E g c h P Q hFP hFQ
+  have hN := system_naturality l E X _ _ _ _ hIP hIQ
+    (pullbackTensorReductionGood l E X FP) (pullbackTensorReductionGood l E X FQ)
+    βP.hom βQ.hom
+  have hi := (systemFactor l E g).hom.naturality
+    ψY
+  have hr := (pullbackTensorReductionModel l E X).hom.naturality
+    (X := FT) (Y := ⟨TX, hTX⟩) (ObjectProperty.homMk t.hom)
+  have hc := strict_tensor l E g P.obj Q.obj t (hPure P.obj Q.obj)
+    βP βQ βT hβP hβQ hβT
+  have hc' := map_three (systemQ l E X) hc
+  exact podReduction_assemble_representative CY.reduction CX.reduction D G
+    CY.integralClosed.tensor CX.integralClosed.tensor
+    CY.systemClosed.tensor CX.systemClosed.tensor
+    A.reduction.hom (reductionOrdinaryTensor l E g c h).hom w.hom
+    CY.reductionTensor.hom CX.reductionTensor.hom
+    ((podReindexingQ l E Y none).obj P.obj) ((podReindexingQ l E Y none).obj Q.obj)
+    ((podReindexingQ l E Y none).obj T0) ((podReindexingQ l E X none).obj FP.obj)
+    ((podReindexingQ l E X none).obj FQ.obj) ((podReindexingQ l E X none).obj FT.obj)
+    ((podReindexingQ l E X none).obj TX) bY bX fP fQ fT
+    ((systemQ l E Y).obj RP) ((systemQ l E Y).obj RQ)
+    ((systemQ l E Y).obj ((R[Y]).obj T0))
+    ((systemQ l E Y).obj ((S[Y]).obj (RP, RQ)))
+    ((systemQ l E X).obj ((I[g]).obj RP)) ((systemQ l E X).obj ((I[g]).obj RQ))
+    ((systemQ l E X).obj ((I[g]).obj ((R[Y]).obj T0)))
+    ((systemQ l E X).obj ((I[g]).obj ((S[Y]).obj (RP, RQ))))
+    ((systemQ l E X).obj ((S[X]).obj (((I[g]).obj RP, (I[g]).obj RQ))))
+    ((systemQ l E X).obj ((R[X]).obj FP.obj))
+    ((systemQ l E X).obj ((R[X]).obj FQ.obj))
+    ((systemQ l E X).obj ((R[X]).obj FT.obj))
+    ((systemQ l E X).obj ((R[X]).obj TX))
+    ((systemQ l E X).obj ((S[X]).obj (((R[X]).obj FP.obj, (R[X]).obj FQ.obj))))
+    rP rQ rT rFP rFQ rFT rTX sY sI sX iP iQ iT iS
+    ((systemQ l E Y).map ψY) ((systemQ l E X).map ((I[g]).map ψY))
+    ((systemQ l E X).map ((systemChain l E g).hom.app (RP, RQ)))
+    ((systemQ l E X).map βP.hom) ((systemQ l E X).map βQ.hom)
+    ((systemQ l E X).map βT.hom)
+    ((systemQ l E X).map ((S[X]).map (Prod.mkHom βP.hom βQ.hom)))
+    ((podReindexingQ l E X none).map t.hom) ((systemQ l E X).map ((R[X]).map t.hom))
+    ((systemQ l E X).map ψX) hUP hUQ hUT hY hX hO hS hN hi hr hc'
+
 /--
 STATEMENT-DISPUTED: The former statement quantified over arbitrary `w` and `v`,
 although no compatibility laws related them to the canonical comparisons were assumed.
@@ -172,7 +318,7 @@ theorem podReindexing_reduction_tensor_square_descent
         ((podOrdinaryReindex l E g).obj M, (podOrdinaryReindex l E g).obj N) := by
   obtain ⟨P, ⟨eP⟩⟩ := good_representative l E Y M
   obtain ⟨Q, ⟨eQ⟩⟩ := good_representative l E Y N
-  have hg := podReduction_representative_square l E g A hA c h hPure P Q
+  have hg := podReduction_representative_square_legacy l E g A hA c h hPure P Q
   have result := reduction_square_transport
     (podReindexCalculus l E Y).reduction (podReindexCalculus l E X).reduction
     (podOrdinaryReindex l E g) (integralComparisonDerivedSequencePullback l E g)

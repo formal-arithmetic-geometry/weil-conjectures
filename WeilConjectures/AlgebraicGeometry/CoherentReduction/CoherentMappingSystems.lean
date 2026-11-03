@@ -57,7 +57,53 @@ theorem scalarAlgebra_existsUnique (X : Scheme.{u}) :
         (coefficients l E X) (transitions l E X) (Padic.coefficientExtensionIntegers l E),
       ∀ (a : Padic.coefficientExtensionIntegers l E) (U : (ℕ × X.ProEt)ᵒᵖ),
         (α a).val U = scalarValue l E X U.unop.1 (op U.unop.2) a := by
-  sorry
+  let J := Scheme.ProEt.topology X
+  let O := Padic.coefficientExtensionIntegers l E
+  let R := (Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of O)
+  let α (n : ℕ) : R ⟶ (coefficients l E X n).obj :=
+    toSheafify J R ≫ (constantSections X O ≫ coefficientMap l E X n).hom
+  have hα (n : ℕ) : α (n + 1) ≫ (transitions l E X n).hom = α n := by
+    have hc := congrArg (fun g ↦ toSheafify J R ≫
+      (sheafToPresheaf J CommRingCat.{u + 1}).map (constantSections X O ≫ g))
+      (coefficientMap_compatible l E X n)
+    simpa only [α, Functor.map_comp, sheafToPresheaf_map,
+      ObjectProperty.FullSubcategory.comp_hom, Category.assoc, Category.id_comp] using hc
+  let a : (Functor.const ℕᵒᵖ).obj R ⟶
+      rings J (coefficients l E X) (transitions l E X) ⋙
+        sheafToPresheaf J CommRingCat.{u + 1} :=
+    NatTrans.ofOpSequence α (fun n ↦ by
+      change (𝟙 R) ≫ α n = α (n + 1) ≫ _
+      rw [Category.id_comp]
+      simpa only [Functor.comp_map, rings, Functor.ofOpSequence_map_homOfLE_succ,
+        sheafToPresheaf_map] using (hα n).symm)
+  let f : (Functor.const (ℕ × X.ProEt)ᵒᵖ).obj (CommRingCat.of O) ⟶
+      (systemRing J (coefficients l E X) (transitions l E X)).obj :=
+    Functor.whiskerLeft (prodOpEquiv (C := ℕ) (D := X.ProEt)).functor
+      (Functor.uncurry.map a)
+  let β : SystemAlgebra J (coefficients l E X) (transitions l E X) O :=
+    { toFun := fun x ↦ ⟨fun U ↦ (f.app U).hom x, by
+        intro U V g
+        change ((systemRing J (coefficients l E X) (transitions l E X)).obj.map g).hom
+          ((f.app U).hom x) = (f.app V).hom x
+        have hn := f.naturality g
+        change (𝟙 (CommRingCat.of O)) ≫ f.app V = f.app U ≫
+          (systemRing J (coefficients l E X) (transitions l E X)).obj.map g at hn
+        rw [Category.id_comp] at hn
+        rw [← RingHom.comp_apply, ← CommRingCat.hom_comp]
+        exact congrArg (fun h ↦ h.hom x) hn.symm⟩
+      map_one' := by apply Subtype.ext; funext U; exact map_one (f.app U).hom
+      map_mul' := fun x y ↦ by
+        apply Subtype.ext; funext U; exact map_mul (f.app U).hom x y
+      map_zero' := by apply Subtype.ext; funext U; exact map_zero (f.app U).hom
+      map_add' := fun x y ↦ by
+        apply Subtype.ext; funext U; exact map_add (f.app U).hom x y }
+  refine ⟨β, fun _ _ ↦ rfl, ?_⟩
+  intro γ hγ
+  apply RingHom.ext
+  intro x
+  apply Subtype.ext
+  funext U
+  exact hγ x U
 
 /-- The unique quotient-compatible action of the original integral scalar ring.
 Source: Stacks 0B6E (blueprint: def-sfb-coherent-integral-mapping-systems). -/

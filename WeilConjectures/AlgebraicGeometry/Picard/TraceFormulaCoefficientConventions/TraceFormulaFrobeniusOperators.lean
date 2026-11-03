@@ -47,6 +47,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Cohomolo
 public import WeilConjectures.SmoothPurity.FiniteFieldDatum.FrobeniusFactorization
 public import WeilConjectures.SmoothPurity.FiniteFieldDatum.SchemeFrobenius
 public import WeilConjectures.TraceFormula.FrobeniusIterate
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CohomologyTransport.CondensedFrobeniusGeometry
 
 /-! # Global and local finite-coefficient geometric Frobenius operators
 
@@ -152,14 +153,14 @@ noncomputable def poweredGeometry
     (Y₀ : Over (Spec (CommRingCat.of F.k₀))) [IsSeparated Y₀.hom]
     [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] (m : ℕ) :
     Geometry F.k := by
-  let q := geometricFrobeniusGeometry F Y₀
+  let q := condensedFrobeniusGeometry F Y₀
   let g : q.X ≅ q.X :=
     { hom := (F.geometricFrobenius Y₀).hom
       inv := (F.geometricFrobenius Y₀).inv
       hom_inv_id := (F.geometricFrobenius Y₀).hom_inv_id
       inv_hom_id := (F.geometricFrobenius Y₀).inv_hom_id }
   have hbase : g.hom ≫ q.a = q.a ≫ q.b.hom := by
-    simpa [q, g, geometricFrobeniusGeometry] using q.comm
+    simpa [q, g, condensedFrobeniusGeometry] using q.comm
   exact
     { X := q.X
       X' := q.X
@@ -181,6 +182,27 @@ noncomputable def poweredGeometry
       separated' := q.separated
       finiteType' := q.finiteType
       quasiCompact' := q.quasiCompact }
+
+/-- The global operator at any coefficient ring with the normalized transport data.
+This is the same insertion/exchange/iterated-Weil composite as the finite-quotient
+operator below; its transport input carries the full normalization laws.
+Source: def-trf-frobenius-operators, clause (1)
+(blueprint: def-trf-frobenius-operators). -/
+noncomputable def globalFrobeniusMap
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ]
+    (F : WeilConjectures.FiniteFieldDatum.{u})
+    (Y₀ : Over (Spec (.of F.k₀))) [IsSeparated Y₀.hom]
+    [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]
+    (S : CompactData Λ (Spec (.of F.k))) (hS : Laws Λ S)
+    (K : (boundedConstructible (condensedRingObj Λ (F.geometricFiber Y₀).left)).FullSubcategory)
+    (φ : (L Λ (condensedFrobeniusGeometry F Y₀).h.hom).obj K.obj ≅ K.obj)
+    (c : Compactification (condensedFrobeniusGeometry F Y₀).a) (m : ℕ) :
+    End ((Γ Λ (Spec (.of F.k))).obj ((C Λ c).obj K.obj)) :=
+  compactTransport Λ S (poweredGeometry F Y₀ m) c c K
+      (hS.pull_constructible (poweredGeometry F Y₀ m) K) ≫
+    (Γ Λ (Spec (.of F.k))).map
+      ((C Λ c).map (iteratedWeilMap Λ F Y₀ K.obj φ m).hom)
 
 /-- The global geometric Frobenius operator
 `F^m_{c,K} = RΓ_c(φ^[m]) ∘ t_{c,g^m}`.
@@ -232,7 +254,7 @@ noncomputable def FiniteFixedPoint.xbar
     (Y₀ : Over (Spec (CommRingCat.of F.k₀))) [IsSeparated Y₀.hom]
     [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] (m : ℕ) (hm : 1 ≤ m)
     (P : FiniteFixedPoint F Y₀ m hm) : Spec (.of F.k) ⟶ (F.geometricFiber Y₀).left :=
-  localExtensionPoint F Y₀ m hm P.x
+  extensionPointGeometry F Y₀ m hm P.x
 
 /-- The canonical stalk transport before point evaluation. After applying `Γ`, this
 is `τ_{x,m} = Fib(Lx̄^*κ^(m)) ∘ ρ_{x,m}`. Its first two factors form `ρ` from
@@ -255,12 +277,12 @@ noncomputable def fixedPointReturn
     (L (finiteCoefficient ell E n) (P.xbar F Y₀ m hm)).obj K.carrier.obj ≅
       (L (finiteCoefficient ell E n) (P.xbar F Y₀ m hm)).obj
         ((L (finiteCoefficient ell E n)
-          ((geometricFrobeniusGeometry F Y₀).h.pow m).hom).obj K.carrier.obj) := by
+          ((condensedFrobeniusGeometry F Y₀).h.pow m).hom).obj K.carrier.obj) := by
   let Λ := finiteCoefficient ell E n
   let xbar := P.xbar F Y₀ m hm
   exact (eqToIso (congrArg (fun f => (L Λ f).obj K.carrier.obj)
       (rationalPoint_schemeFrobenius_fixed F Y₀ m hm P.x))).symm ≪≫
-    (leftDerivedUpperStarComp Λ xbar (F.schemeFrobeniusIterate Y₀ m)).app
+    (leftDerivedUpperStarComp Λ xbar (F.coefficientFreeSchemeFrobeniusIterate Y₀ m)).app
       K.carrier.obj ≪≫
     (L Λ xbar).mapIso (finiteSchemeGaloisComparison F Y₀ ell hEll E n hn K m hm)
 
@@ -302,7 +324,7 @@ noncomputable def condensedGlobalFrobeniusCohomology
     (ell : ℕ) [Fact ell.Prime] (hEll : ell ≠ F.p) (E : Type u) [Field E]
     [Algebra (Padic ell) E] [FiniteDimensional (Padic ell) E]
     (n : ℕ) (hn : 1 ≤ n) (K : FiniteStrictWeilComplex F Y₀ ell E n hn)
-    (c : Compactification (geometricFrobeniusGeometry F Y₀).a) (m : ℕ) (hm : 1 ≤ m) (i : ℤ) :=
+    (c : Compactification (condensedFrobeniusGeometry F Y₀).a) (m : ℕ) (hm : 1 ≤ m) (i : ℤ) :=
   (@DerivedCategory.homologyFunctor.{u + 1, u + 1, u + 2}
     (ModuleCat.{u + 1, u + 1} (condensedScalarRing (finiteCoefficient ell E n)))
     inferInstance inferInstance

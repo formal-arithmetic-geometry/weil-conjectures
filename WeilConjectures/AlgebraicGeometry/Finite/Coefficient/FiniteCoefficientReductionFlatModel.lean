@@ -113,6 +113,8 @@ import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
 import WeilConjectures.Algebra.Category.ModuleCat.DerivedBaseChange
 import Mathlib.RingTheory.Flat.Stability
 import Mathlib.CategoryTheory.Sites.Point.Skyscraper
+public import WeilConjectures.AlgebraicGeometry.Picard.DerivedChangeOfRingsIndependentCoefficients
+public import WeilConjectures.SmoothPurity.ChangeOfRingsKFlatIndependentCoefficients
 
 /-!
 # Reduction of bounded flat models at finite coefficient levels
@@ -172,6 +174,50 @@ noncomputable def flatModelReductionCoefficientMap :
   RingHom.ulift
     (Ideal.Quotient.factor (S := Padic.coefficientExtensionIdeal l E n)
       (T := Padic.coefficientExtensionIdeal l E m) (Ideal.pow_le_pow_right hmn))
+
+/-- The canonical constant coefficient map from stage n to stage m.
+Source: blueprint, lem-sf-reduction-flat-model.md, coefficient reduction
+(blueprint: lem-sf-reduction-flat-model). -/
+noncomputable def flatModelReductionRingMap :
+    proEtaleConstantRing T (Padic.coefficientExtensionRing l E n) ⟶
+      proEtaleConstantRing T (Padic.coefficientExtensionRing l E m) :=
+  (constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).map
+    (CommRingCat.ofHom (flatModelReductionCoefficientMap l E m n hmn))
+
+/-- Canonical scalar extension with its specified object/map formulas and its universal
+left-derived pair, specialized to the finite-level quotient map. The formulas determine
+the ordinary functor; the universal property determines the derived pair up to unique
+compatible isomorphism.
+Source: Stacks Tags 03EK, 06YT and 06YY; blueprint, lem-sf-reduction-flat-model.md
+(blueprint: lem-sf-reduction-flat-model). -/
+noncomputable def flatModelReductionData :=
+  letI : EssentiallySmall.{u + 1} T.ProEt := essentiallySmallSelf.{0, u, u + 1} _
+  letI : HasSheafify (ProEt.topology T) AddCommGrpCat.{u + 1} :=
+    hasSheafifyEssentiallySmallSite.{u, u + 1, u + 1, u + 2, u + 1} _ _
+  letI : (ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
+    GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall.{u, u + 1, u + 1,
+      u + 2, u + 1, u + 1, u + 1} _
+  letI := HasDerivedCategory.standard
+    (proEtaleRingModules T (proEtaleConstantRing T (Padic.coefficientExtensionRing l E n)))
+  letI := HasDerivedCategory.standard
+    (proEtaleRingModules T (proEtaleConstantRing T (Padic.coefficientExtensionRing l E m)))
+  SheafOfModules.derivedChangeOfRingsIndependentCoefficients.{u + 2, u + 1, u + 1, u}
+    (flatModelReductionRingMap l E m n hmn T)
+
+/-- The universal left-derived scalar-extension pair and its K-flat computation.
+Source: Stacks Tags 06YT and 06YY; blueprint, lem-sf-reduction-flat-model.md
+(blueprint: lem-sf-reduction-flat-model). -/
+noncomputable def flatModelReductionDerivedData :=
+  (flatModelReductionData l E m n hmn T).choose_spec.choose_spec.choose_spec.choose_spec.2.2
+
+/-- Derived reduction from finite coefficient stage n to stage m, as the universal
+left-derived functor of the specified ordinary scalar extension.
+Source: blueprint, lem-sf-reduction-flat-model.md, definition of K_m
+(blueprint: lem-sf-reduction-flat-model). -/
+noncomputable def flatModelReduction :
+    proEtaleDerivedCategory T (Padic.coefficientExtensionRing l E n) ⥤
+      proEtaleDerivedCategory T (Padic.coefficientExtensionRing l E m) :=
+  (flatModelReductionDerivedData l E m n hmn T).choose
 
 set_option linter.defProp false in
 attribute [local irreducible] flatModelReductionData

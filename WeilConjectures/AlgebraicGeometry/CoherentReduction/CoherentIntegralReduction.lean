@@ -16,6 +16,8 @@ public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 public import Mathlib.Topology.ContinuousMap.Algebra
 public import Mathlib.Topology.Instances.Discrete
+public import Mathlib.RingTheory.Ideal.Quotient.Index
+public import Mathlib.Topology.LocallyConstant.Basic
 
 /-! # The actual coherent integral reduction system
 
@@ -158,6 +160,18 @@ def internalSectionMap (X : Scheme.{u})
     ((Monoidal.commMonFunctorCategoryEquivalence X.ProEtᵒᵖ Ab.{u + 1}).functor.map
       ((sheafToPresheaf _ Ab.{u + 1}).mapCommMon.map (CommMon.homMk (Mon.ofHom f))))
     InternalAbelianSheafModule.commMonToRing.{u + 1}⟩
+
+private theorem internalSectionMap_comp (X : Scheme.{u})
+    {R S T : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}}
+    [MonObj R] [MonObj S] [MonObj T]
+    [IsCommMonObj R] [IsCommMonObj S] [IsCommMonObj T]
+    (f : R ⟶ S) (g : S ⟶ T) [IsMonHom f] [IsMonHom g] :
+    internalSectionMap X f ≫ internalSectionMap X g = internalSectionMap X (f ≫ g) := by
+  apply Sheaf.hom_ext
+  change (internalSectionMap X f).hom ≫ (internalSectionMap X g).hom = _
+  dsimp only [internalSectionMap]
+  rw [← Functor.whiskerRight_comp, ← Functor.map_comp, ← Functor.map_comp]
+  rfl
 
 /-- Pull back a continuous scalar homomorphism, then reconstruct the section homomorphism.
 Source: the blueprint's coefficient morphisms
@@ -308,7 +322,32 @@ finite. Ramified extensions are included: the exponent is multiplied by their
 ramification index, not replaced by n+1.
 -/
 theorem quotient_finite (n : ℕ) : Finite (Etale.FiniteProperQuotient.Ring l E n) := by
-  sorry
+  classical
+  have : CharZero E := charZero_of_injective_algebraMap (algebraMap ℚ_[l] E).injective
+  let O := Padic.coefficientExtensionIntegers l E
+  have hO := (Padic.extension_integers_dvr l E
+    (Padic.coefficientExtensionAbsoluteValue l E)
+    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  have : IsLocalRing O := hO.2.2.2.1
+  have : IsDiscreteValuationRing O := hO.2.2.2.2.2.2.2.1
+  have : IsPrincipalIdealRing O := hO.2.2.2.2.2.2.2.2.1
+  obtain ⟨π, hπ⟩ := IsDiscreteValuationRing.exists_irreducible O
+  have hmax : IsLocalRing.maximalIdeal O = Padic.coefficientExtensionMaximalIdeal l E :=
+    hO.2.2.2.2.2.1 _ (IsLocalRing.maximalIdeal.isMaximal O)
+  have : Finite (O ⧸ Ideal.span {π}) := by
+    rw [← hπ.maximalIdeal_eq, hmax]
+    exact hO.2.2.2.2.2.2.2.2.2.2.2.1
+  have hl : (l : O) ≠ 0 := by
+    intro h
+    have h' : (l : E) = 0 := congrArg (fun x : O ↦ (x : E)) h
+    exact (Nat.cast_ne_zero.mpr (Fact.out : l.Prime).ne_zero) h'
+  obtain ⟨r, v, hv⟩ :=
+    IsDiscreteValuationRing.eq_unit_mul_pow_irreducible (pow_ne_zero (n + 1) hl) hπ
+  have hid : Ideal.span ({(l : O) ^ (n + 1)} : Set O) = Ideal.span {π} ^ r := by
+    rw [hv, Ideal.span_singleton_mul_left_unit v.isUnit, Ideal.span_singleton_pow]
+  change Finite (O ⧸ Ideal.span {(l : O) ^ (n + 1)})
+  rw [hid]
+  exact Ideal.finite_quotient_pow (Submodule.fg_span_singleton π) r
 
 /-- Finiteness for the actual positive ell-power quotients.
 Source: finite torsion coefficients
@@ -331,7 +370,36 @@ zero-exponent convention; ramification changes the valuation of ell but not
 openness of its positive powers.
 -/
 theorem quotient_continuous (n : ℕ) : Continuous (quotient l E n) := by
-  sorry
+  classical
+  have : CharZero E := charZero_of_injective_algebraMap (algebraMap ℚ_[l] E).injective
+  let _ := spectralNorm.normedField ℚ_[l] E
+  let O := Padic.coefficientExtensionIntegers l E
+  let a : E := (l : E) ^ (n + 1)
+  have ha : a ≠ 0 := pow_ne_zero _
+    (Nat.cast_ne_zero.mpr (Fact.out : l.Prime).ne_zero)
+  have hO := (Padic.extension_integers_dvr l E
+    (Padic.coefficientExtensionAbsoluteValue l E)
+    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  apply IsLocallyConstant.continuous
+  apply (IsLocallyConstant.iff_exists_open _).2
+  intro x
+  refine ⟨(fun z : O ↦ (z : E)) ⁻¹' Metric.ball (x : E) ‖a‖,
+    Metric.isOpen_ball.preimage continuous_subtype_val, ?_, ?_⟩
+  · simpa only [Set.mem_preimage, Metric.mem_ball, dist_self] using norm_pos_iff.mpr ha
+  · intro y hy
+    have hsmall : ‖(y : E) - (x : E)‖ < ‖a‖ := by
+      simpa only [Set.mem_preimage, Metric.mem_ball, dist_eq_norm] using hy
+    have hz : ((y : E) - (x : E)) / a ∈ O := by
+      apply (hO.1 _).2
+      change ‖((y : E) - (x : E)) / a‖ ≤ 1
+      rw [norm_div]
+      exact (div_le_one₀ (norm_pos_iff.mpr ha)).2 hsmall.le
+    apply Ideal.Quotient.eq.mpr
+    apply Ideal.mem_span_singleton.mpr
+    refine ⟨⟨((y : E) - (x : E)) / a, hz⟩, ?_⟩
+    apply Subtype.ext
+    change (y : E) - (x : E) = a * (((y : E) - (x : E)) / a)
+    field_simp [ha]
 
 /-- Finite coefficient sheaves on the pro-etale site, obtained from the point.
 Source: the blueprint's quotient coefficient system
@@ -368,7 +436,19 @@ theorem coefficientMap_compatible (X : Scheme.{u}) (n : ℕ) :
     coefficientMap l E X (n + 1) ≫ transitions l E X n =
       (𝟙 (sectionRing X (Padic.coefficientExtensionIntegers l E))) ≫
         coefficientMap l E X n := by
-  sorry
+  have hpoint : continuousPointMap (quotient l E (n + 1))
+        (quotient_continuous l E (n + 1)) ≫
+      continuousPointMap (Etale.FiniteProperQuotient.quotient l E (Nat.le_succ n))
+        continuous_of_discreteTopology =
+      continuousPointMap (quotient l E n) (quotient_continuous l E n) := by
+    unfold continuousPointMap
+    rw [← Functor.map_comp]
+    congr 1
+  rw [Category.id_comp]
+  dsimp only [coefficientMap, transitions, sectionMap]
+  rw [internalSectionMap_comp]
+  congr 1
+  rw [← Functor.map_comp, ← Functor.map_comp, ← Functor.map_comp, hpoint]
 
 /-- The normalized simultaneous derived extension of the constant integral system.
 Source: Zheng, Construction 4.1; the existing normalized semilinear calculus

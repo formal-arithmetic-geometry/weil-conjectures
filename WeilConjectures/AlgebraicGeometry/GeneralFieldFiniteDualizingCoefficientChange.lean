@@ -21,6 +21,12 @@ public import WeilConjectures.AlgebraicGeometry.Normalized.NormalizedOriginScala
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ExtendScalars.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.AlgebraicGeometry.OpenScalarOperations.OpenScalarOperations
+public import WeilConjectures.AlgebraicGeometry.CoefficientCompatibility.EtaleProEtaleCompactScalarSquare
+public import WeilConjectures.AlgebraicGeometry.Etale.Scalar.EtaleScalarUnitComposition
+public import WeilConjectures.AlgebraicGeometry.GeneralFieldFiniteDualizingGeometry
+public import WeilConjectures.AlgebraicGeometry.GeneralFieldFiniteDualizingScalarSite
+public import WeilConjectures.AlgebraicGeometry.SystemProjection.EtaleSingleCoefficientProjection
+public import WeilConjectures.CategoryTheory.Adjunction.SixFunctors.CoefficientCounitMateCocycle
 
 /-!
 # General-field finite dualizing coefficient change
@@ -673,6 +679,507 @@ structure GeneralFieldFiniteDualizingCoefficientChange
             (generalFieldFiniteProDualizingMap iRS a) ≫
           generalFieldFiniteProDualizingMap iSU a)
 
+private theorem generalFieldFiniteComparisonRestriction
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
+    (X : Scheme.{u}) :
+    Scheme.comparisonRestrictScalarsIso X A φ =
+      (CoefficientScalarRepresentatives.derivedComparisonRestriction X φ).symm := by
+  have he : Scheme.comparisonRestrictScalarsSheafIso X A φ =
+      (CoefficientScalarRepresentatives.comparisonRestriction X φ).symm := by
+    let adj₁ := (Sheaf.restrictCoextendScalarsAdj X.smallEtaleTopology φ).comp
+      (ProEtale.comparisonAdjunction (ModuleCat.{u + 1} A) X)
+    let adj₂ := (ProEtale.comparisonAdjunction (ModuleCat.{u + 1} B) X).comp
+      (Sheaf.restrictCoextendScalarsAdj (Scheme.ProEt.topology X) φ)
+    apply Iso.ext
+    apply NatTrans.ext
+    funext M
+    change Scheme.comparisonRestrictScalarsMap X A φ M =
+      (adj₁.leftAdjointUniq adj₂).hom.app M
+    apply (adj₁.homEquiv _ _).injective
+    have hh := Adjunction.homEquiv_leftAdjointUniq_hom_app adj₁ adj₂ M
+    refine Eq.trans ?_ hh.symm
+    change (Sheaf.restrictCoextendScalarsAdj X.smallEtaleTopology φ).homEquiv _ _
+      ((ProEtale.comparisonAdjunction (ModuleCat.{u + 1} A) X).homEquiv _ _
+        (Scheme.comparisonRestrictScalarsMap X A φ M)) = adj₂.unit.app M
+    rw [Scheme.comparisonRestrictScalarsMap, Equiv.apply_symm_apply,
+      Adjunction.homEquiv_unit]
+    dsimp only [adj₂]
+    rw [Adjunction.comp_unit_app]
+    exact ((Sheaf.restrictCoextendScalarsAdj X.smallEtaleTopology φ).unit.naturality
+      ((ProEtale.comparisonAdjunction (ModuleCat.{u + 1} B) X).unit.app M)).symm
+  unfold Scheme.comparisonRestrictScalarsIso
+    CoefficientScalarRepresentatives.derivedComparisonRestriction
+  rw [he]
+  apply Iso.ext
+  simp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.trans_inv,
+    Iso.symm_hom, Functor.mapDerivedCategoryNatIso_symm, Iso.symm_inv, Category.assoc]
+
+private theorem generalFieldFiniteScalarMate_apply
+    {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]
+    {L : C ⥤ D} {R : D ⥤ C} {L' : E ⥤ F} {R' : F ⥤ E}
+    (a : L ⊣ R) (b : L' ⊣ R') (U : C ⥤ E) (V : D ⥤ F)
+    (r : R ⋙ U ⟶ V ⋙ R') {M : C} {N : D} (f : L.obj M ⟶ N) :
+    (b.homEquiv _ _).symm (U.map (a.homEquiv _ _ f) ≫ r.app N) =
+      ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ r)).natTrans.app M ≫ V.map f := by
+  apply (b.homEquiv _ _).injective
+  rw [Equiv.apply_symm_apply]
+  simp only [Adjunction.homEquiv_unit, Functor.map_comp, Category.assoc]
+  have hu := unit_mateEquiv_symm a b (TwoSquare.mk _ _ _ _ r) M
+  dsimp only [Functor.id_obj] at hu
+  change U.map (a.unit.app M) ≫ r.app (L.obj M) =
+    b.unit.app (U.obj M) ≫ R'.map
+      (((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ r)).natTrans.app M) at hu
+  calc
+    _ = (U.map (a.unit.app M) ≫ r.app (L.obj M)) ≫ R'.map (V.map f) := by
+      simpa only [Category.assoc, Functor.comp_map] using
+        congrArg (fun z ↦ U.map (a.unit.app M) ≫ z) (r.naturality f)
+    _ = _ := by rw [hu]; simp only [Category.assoc]
+
+private theorem generalFieldFiniteProDualizingMap_eq
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
+    (φ : A →+* B) {X S : Scheme.{u}} (a : X ⟶ S) [HasCompactification a] :
+    let : EssentiallySmall.{u + 1} X.ProEt := essentiallySmallSelf.{0, u, u + 1} _
+    generalFieldFiniteProDualizingMap φ a =
+      (ProEtale.OrdinaryScalarSite.delta φ X).hom.app (dualizingComplex A a) ≫
+        (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} B) X).mapDerivedCategory.map
+          (generalFieldFiniteDualizingMap φ a) := by
+  let : EssentiallySmall.{u + 1} X.ProEt := essentiallySmallSelf.{0, u, u + 1} _
+  unfold generalFieldFiniteProDualizingMap
+  rw [generalFieldFiniteComparisonRestriction]
+  exact generalFieldFiniteScalarMate_apply _ _ _ _ _ _
+
+private theorem generalFieldFiniteDualizingMap_counit
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
+    (φ : A →+* B) {X S : Scheme.{u}} (a : X ⟶ S) [HasCompactification a] :
+    (rightDerivedLowerShriek (ModuleCat.{u + 1} B) a).map
+        (generalFieldFiniteDualizingMap φ a) ≫
+      (rightDerivedUpperShriekAdjunction B a).counit.app
+        (𝟙_ (DerivedCategoryModule B S)) =
+    ExceptionalCoefficients.comparisonInverse φ (HasCompactification.compactification a)
+        (dualizingComplex A a) ≫
+      (scalarExtension φ S).map
+        ((rightDerivedUpperShriekAdjunction A a).counit.app
+          (𝟙_ (DerivedCategoryModule A S))) ≫
+      (ExceptionalCoefficients.unitIso φ S).hom := by
+  rw [generalFieldFiniteDualizingMap, ExceptionalCoefficients.dualizingScalarMap]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [show (rightDerivedLowerShriek (ModuleCat.{u + 1} B) a).map
+      ((rightDerivedUpperShriek B a).map (ExceptionalCoefficients.unitIso φ S).hom) ≫
+        (rightDerivedUpperShriekAdjunction B a).counit.app _ =
+      (rightDerivedUpperShriekAdjunction B a).counit.app _ ≫
+        (ExceptionalCoefficients.unitIso φ S).hom from
+    (rightDerivedUpperShriekAdjunction B a).counit.naturality _]
+  have hm : (rightDerivedLowerShriek (ModuleCat.{u + 1} B) a).map
+      (ExceptionalCoefficients.mateMap φ a (𝟙_ (DerivedCategoryModule A S))) ≫
+        (rightDerivedUpperShriekAdjunction B a).counit.app _ =
+      ExceptionalCoefficients.comparisonInverse φ (HasCompactification.compactification a)
+        (dualizingComplex A a) ≫
+      (scalarExtension φ S).map
+        ((rightDerivedUpperShriekAdjunction A a).counit.app
+          (𝟙_ (DerivedCategoryModule A S))) :=
+    ((rightDerivedUpperShriekAdjunction B a).homEquiv _ _).symm_apply_apply _
+  simpa only [Category.assoc] using
+    congrArg (fun z ↦ z ≫ (ExceptionalCoefficients.unitIso φ S).hom) hm
+
+private theorem generalFieldFiniteDualizingMap_adjunct
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
+    (φ : A →+* B) {X S : Scheme.{u}} (a : X ⟶ S) [HasCompactification a] :
+    generalFieldFiniteDualizingMap φ a =
+      (rightDerivedUpperShriekAdjunction B a).homEquiv _ _
+        (ExceptionalCoefficients.comparisonInverse φ (HasCompactification.compactification a)
+            (dualizingComplex A a) ≫
+          (scalarExtension φ S).map
+            ((rightDerivedUpperShriekAdjunction A a).counit.app
+              (𝟙_ (DerivedCategoryModule A S))) ≫
+          (ExceptionalCoefficients.unitIso φ S).hom) := by
+  apply ((rightDerivedUpperShriekAdjunction B a).homEquiv _ _).symm.injective
+  rw [Equiv.symm_apply_apply]
+  exact generalFieldFiniteDualizingMap_counit φ a
+
+private theorem generalFieldFiniteDualizingMap_composition
+    {A B C : Type (u + 1)} [CommRing A] [CommRing B] [CommRing C]
+    [Finite A] [Finite B] [Finite C]
+    (φ : A →+* B) (ψ : B →+* C)
+    (l : ℕ) (hA : ∃ n : ℕ, (l ^ n : A) = 0)
+    (hB : ∃ n : ℕ, (l ^ n : B) = 0) (hC : ∃ n : ℕ, (l ^ n : C) = 0)
+    {X S : Scheme.{u}} [IsNoetherian X] [IsNoetherian S]
+    (a : X ⟶ S) [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a]
+    [HasCompactification a] :
+    (FiniteCoefficientOrdinary.scalarComposition X.smallEtaleTopology φ ψ).hom.app
+        (dualizingComplex A a) ≫ generalFieldFiniteDualizingMap (ψ.comp φ) a =
+      (scalarExtension ψ X).map (generalFieldFiniteDualizingMap φ a) ≫
+        generalFieldFiniteDualizingMap ψ a := by
+  let c := HasCompactification.compactification a
+  have hi (R Q : Type (u + 1)) [CommRing R] [CommRing Q] [Finite R] [Finite Q]
+      (f : R →+* Q) (K : DerivedCategoryModule R X) :
+      IsIso ((compactScalarMap f c).app K) :=
+    (etaleCompactScalarCoherence f a c).1 K
+  let := hi A B φ (dualizingComplex A a)
+  let := hi A C (ψ.comp φ) (dualizingComplex A a)
+  let := hi B C ψ (dualizingComplex B a)
+  let := hi B C ψ ((scalarExtension φ X).obj (dualizingComplex A a))
+  have hc := NatTrans.congr_app
+    ((SystemProjection.etaleSingleCoefficientProjection c l).2
+      (.of A) (.of B) (.of C) inferInstance inferInstance inferInstance hA hB hC
+        (CommRingCat.ofHom φ) (CommRingCat.ofHom ψ)) (dualizingComplex A a)
+  have hc' : (scalarExtension ψ S).map ((compactScalarMap φ c).app
+        (dualizingComplex A a)) ≫
+      (compactScalarMap ψ c).app ((scalarExtension φ X).obj (dualizingComplex A a)) ≫
+      (rightDerivedLowerShriek (ModuleCat.{u + 1} C) a).map
+        ((FiniteCoefficientOrdinary.scalarComposition X.smallEtaleTopology φ ψ).hom.app
+          (dualizingComplex A a)) =
+      (FiniteCoefficientOrdinary.scalarComposition S.smallEtaleTopology φ ψ).hom.app
+        ((rightDerivedLowerShriek (ModuleCat.{u + 1} A) a).obj
+          (dualizingComplex A a)) ≫
+        (compactScalarMap (ψ.comp φ) c).app (dualizingComplex A a) := by
+    dsimp only [SystemProjection.singlePath, NatTrans.comp_app, Functor.whiskerLeft_app,
+      Functor.whiskerRight_app] at hc
+    simp only [CommRingCat.hom_comp, CommRingCat.hom_ofHom] at hc
+    change (compactScalarMap (ψ.comp φ) c).app (dualizingComplex A a) =
+      (FiniteCoefficientOrdinary.scalarComposition S.smallEtaleTopology φ ψ).inv.app
+          ((rightDerivedLowerShriek (ModuleCat.{u + 1} A) a).obj
+            (dualizingComplex A a)) ≫
+        (scalarExtension ψ S).map ((compactScalarMap φ c).app (dualizingComplex A a)) ≫
+        (compactScalarMap ψ c).app ((scalarExtension φ X).obj (dualizingComplex A a)) ≫
+        (rightDerivedLowerShriek (ModuleCat.{u + 1} C) a).map
+          ((FiniteCoefficientOrdinary.scalarComposition X.smallEtaleTopology φ ψ).hom.app
+            (dualizingComplex A a)) at hc
+    have h := congrArg (fun z ↦
+      (FiniteCoefficientOrdinary.scalarComposition S.smallEtaleTopology φ ψ).hom.app
+        ((rightDerivedLowerShriek (ModuleCat.{u + 1} A) a).obj
+          (dualizingComplex A a)) ≫ z) hc
+    simpa only [Category.assoc, Iso.hom_inv_id_app_assoc] using h.symm
+  have he := Adjunction.coefficientCounitMate_cocycle
+    (rightDerivedUpperShriekAdjunction A a) (rightDerivedUpperShriekAdjunction B a)
+    (rightDerivedUpperShriekAdjunction C a)
+    (scalarExtension φ X) (scalarExtension φ S) (scalarExtension ψ X)
+    (scalarExtension ψ S) (scalarExtension (ψ.comp φ) X) (scalarExtension (ψ.comp φ) S)
+    (FiniteCoefficientOrdinary.scalarComposition X.smallEtaleTopology φ ψ)
+    (FiniteCoefficientOrdinary.scalarComposition S.smallEtaleTopology φ ψ)
+    (𝟙_ (DerivedCategoryModule A S)) (𝟙_ (DerivedCategoryModule B S))
+    (𝟙_ (DerivedCategoryModule C S))
+    (ExceptionalCoefficients.unitIso φ S) (ExceptionalCoefficients.unitIso ψ S)
+    (ExceptionalCoefficients.unitIso (ψ.comp φ) S)
+    (normalizedScalarUnit_comp φ ψ (ψ.comp φ) rfl S)
+    (compactScalarMap φ c) (compactScalarMap ψ c) (compactScalarMap (ψ.comp φ) c) hc'
+  have he' : generalFieldFiniteDualizingMap (ψ.comp φ) a =
+      (FiniteCoefficientOrdinary.scalarComposition X.smallEtaleTopology φ ψ).inv.app
+        (dualizingComplex A a) ≫
+      (scalarExtension ψ X).map (generalFieldFiniteDualizingMap φ a) ≫
+        generalFieldFiniteDualizingMap ψ a := by
+    have hφ : IsIso (ExceptionalCoefficients.compactSupportMap φ c
+        (dualizingComplex A a)) := hi _ _ _ _
+    have hψ : IsIso (ExceptionalCoefficients.compactSupportMap ψ c
+        (dualizingComplex B a)) := hi _ _ _ _
+    have hψφ : IsIso (ExceptionalCoefficients.compactSupportMap (ψ.comp φ) c
+        (dualizingComplex A a)) := hi _ _ _ _
+    rw [generalFieldFiniteDualizingMap_adjunct,
+      generalFieldFiniteDualizingMap_adjunct, generalFieldFiniteDualizingMap_adjunct]
+    dsimp only [ExceptionalCoefficients.comparisonInverse]
+    rw [dif_pos hφ, dif_pos hψ, dif_pos hψφ]
+    exact he
+  rw [he']
+  simp only [Iso.hom_inv_id_app_assoc]
+
+private theorem generalFieldFiniteDerivedCompUnit
+    {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
+    (F : C ⥤ C) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    (e : F ≅ 𝟭 C) (c : F ⋙ F ≅ F)
+    (hc : c = Functor.isoWhiskerRight e F ≪≫ F.leftUnitor) :
+    (Functor.mapDerivedCategoryCompIso F F).symm ≪≫
+        Functor.mapDerivedCategoryNatIso c =
+      Functor.isoWhiskerRight
+        (Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryIdIso C)
+        F.mapDerivedCategory ≪≫ F.mapDerivedCategory.leftUnitor := by
+  subst c
+  apply Iso.ext
+  simp only [Iso.trans_hom, Iso.symm_hom]
+  rw [Functor.mapDerivedCategoryNatIso_trans]
+  have hu : (Functor.mapDerivedCategoryNatIso F.leftUnitor).hom = 𝟙 _ := by
+    exact Functor.mapDerivedCategoryNatIso_refl
+  rw [hu, Category.comp_id]
+  apply (cancel_mono (Functor.mapDerivedCategoryCompIso (𝟭 C) F).hom).mp
+  simp only [Iso.trans_hom, Functor.isoWhiskerRight_hom,
+    Functor.whiskerRight_comp, Category.assoc]
+  rw [Functor.mapDerivedCategoryNatIso_isoWhiskerRight,
+    Iso.inv_hom_id_assoc]
+  have h := Functor.mapDerivedCategoryCompIso_id_comp F
+  have hh : (Functor.mapDerivedCategoryCompIso (𝟭 C) F).inv =
+      Functor.whiskerRight (Functor.mapDerivedCategoryIdIso C).hom
+        F.mapDerivedCategory := by
+    apply (cancel_epi (Functor.mapDerivedCategoryCompIso (𝟭 C) F).hom).mp
+    rw [Iso.hom_inv_id, h]
+    rfl
+  rw [← hh]
+  have hu' : F.mapDerivedCategory.leftUnitor.hom = 𝟙 F.mapDerivedCategory := by rfl
+  rw [hu']
+  erw [Category.id_comp, Iso.inv_hom_id, Category.comp_id]
+
+private theorem generalFieldFiniteScalarCompUnit
+    {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
+    (J : GrothendieckTopology C) (A : Type (u + 1)) [CommRing A] :
+    ProEtale.pbcFixedScalarExtensionComp J (RingHom.id A) (RingHom.id A)
+        (RingHom.id A) (by ext; rfl) =
+      Functor.isoWhiskerLeft (ProEtale.pbcFixedScalarExtension J (RingHom.id A))
+        (ProEtale.normalizedOriginScalarUnit J (RingHom.id A) rfl) ≪≫
+      (ProEtale.pbcFixedScalarExtension J (RingHom.id A)).rightUnitor := by
+  apply Adjunction.leftAdjointCompIso_comp_id
+  exact generalFieldFiniteDerivedCompUnit _ _ _ (by
+    apply Iso.ext
+    ext M U x
+    rfl)
+
+private theorem generalFieldFiniteDualizingMap_identity
+    {A : Type (u + 1)} [CommRing A] [Finite A]
+    (l : ℕ) (hA : ∃ n : ℕ, (l ^ n : A) = 0)
+    {X S : Scheme.{u}} [IsNoetherian X] [IsNoetherian S]
+    (a : X ⟶ S) [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a]
+    [HasCompactification a] [IsIso (generalFieldFiniteDualizingMap (RingHom.id A) a)] :
+    generalFieldFiniteDualizingMap (RingHom.id A) a =
+      (ProEtale.normalizedOriginScalarUnit X.smallEtaleTopology
+        (RingHom.id A) rfl).hom.app (dualizingComplex A a) := by
+  let T := scalarExtension (RingHom.id A) X
+  let e := ProEtale.normalizedOriginScalarUnit X.smallEtaleTopology (RingHom.id A) rfl
+  let f := generalFieldFiniteDualizingMap (RingHom.id A) a
+  have hc := generalFieldFiniteDualizingMap_composition (RingHom.id A) (RingHom.id A)
+    l hA hA hA a
+  change (ProEtale.pbcFixedScalarExtensionComp X.smallEtaleTopology (RingHom.id A)
+    (RingHom.id A) (RingHom.id A) (by ext; rfl)).hom.app (dualizingComplex A a) ≫ f =
+      T.map f ≫ f at hc
+  rw [generalFieldFiniteScalarCompUnit] at hc
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
+    Functor.whiskerLeft_app, Functor.rightUnitor_hom_app] at hc
+  erw [Category.comp_id] at hc
+  have hee : e.hom.app (T.obj (dualizingComplex A a)) =
+      T.map (e.hom.app (dualizingComplex A a)) := by
+    apply (cancel_mono (e.hom.app (dualizingComplex A a))).1
+    exact (e.hom.naturality (e.hom.app (dualizingComplex A a))).symm
+  change e.hom.app (T.obj (dualizingComplex A a)) ≫ f = T.map f ≫ f at hc
+  rw [hee] at hc
+  have he : T.map (e.hom.app (dualizingComplex A a)) = T.map f :=
+    (cancel_mono f).1 hc
+  let : T.Faithful := Functor.Faithful.of_iso e.symm
+  exact (T.map_injective he).symm
+
+private theorem generalFieldFiniteSiteComparison_eq
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X S : Scheme.{u}} {a : X ⟶ S} (c : Compactification a)
+    (J : ProEtale.FiniteCompactificationTranspose.EPlus A X) :
+    (ProEtale.FiniteCompactificationTranspose.B A c J).hom =
+      (generalFieldFiniteSiteComparison A c).app J.obj := by
+  simpa only [ProEtale.FiniteCompactificationTranspose.B, Iso.app_hom, Iso.symm_hom,
+    generalFieldFiniteSiteComparison, ProEtale.FiniteCompactCoefficients.site,
+    NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    ProEtale.directImageComparisonAmbient, ProEtale.directImageComparisonAmbientPullbackIso,
+    ProEtale.ambientEtaleProEtaleDirectImageComparison,
+    ProEtale.ambientEtaleProEtaleDirectImageComparisonPullbackIso,
+    ProEtale.mapDerivedCategoryOpenImmersionLowerShriekComparisonUpperStarIso] using
+    (show (ProEtale.compactSupportSiteComparison A c).inv.app J = _ from
+      ProEtale.CoefficientCompatibility.compactComparison_inv A c J)
+
+private theorem generalFieldFiniteQuotientSquare
+    {R S : Type (u + 1)} [CommRing R] [CommRing S] [Algebra R S]
+    (t : R) {m n : ℕ} (h : n ≤ m) :
+    (generalFieldFiniteQuotientTransition (algebraMap R S t) h).comp
+        (generalFieldFiniteQuotientInclusion t m) =
+      (generalFieldFiniteQuotientInclusion t n).comp
+        (generalFieldFiniteQuotientTransition t h) := by
+  apply Ideal.Quotient.ringHom_ext
+  ext x
+  rfl
+
+private def generalFieldFiniteQuotientMap
+    {R S : Type (u + 1)} [CommRing R] [CommRing S] (f : R →+* S)
+    (t : R) (n : ℕ) :
+    (R ⧸ Ideal.span ({t ^ n} : Set R)) →+*
+      (S ⧸ Ideal.span ({(f t) ^ n} : Set S)) := by
+  apply Ideal.Quotient.lift (Ideal.span ({t ^ n} : Set R))
+    ((Ideal.Quotient.mk (Ideal.span ({(f t) ^ n} : Set S))).comp
+      (f))
+  intro x hx
+  simp only [RingHom.comp_apply]
+  rw [Ideal.Quotient.eq_zero_iff_mem]
+  have hI : Ideal.map (f) (Ideal.span ({t ^ n} : Set R)) ≤
+      Ideal.span ({(f t) ^ n} : Set S) := by
+    rw [Ideal.map_span]
+    apply Ideal.span_mono
+    intro y hy
+    rcases hy with ⟨z, hz, rfl⟩
+    rcases hz with rfl
+    rw [map_pow]
+    exact show (f t) ^ n ∈
+      ({(f t) ^ n} : Set S) from Set.mem_singleton _
+  exact hI (Ideal.mem_map_of_mem (f) hx)
+
+private theorem generalFieldFiniteQuotientTower
+    {R S U : Type (u + 1)} [CommRing R] [CommRing S] [CommRing U]
+    [Algebra R S] [Algebra S U] [Algebra R U] (t : R) (n : ℕ)
+    (h : algebraMap R U = (algebraMap S U).comp (algebraMap R S)) :
+    (generalFieldFiniteQuotientInclusion (algebraMap R S t) n).comp
+        (generalFieldFiniteQuotientInclusion t n) =
+      h ▸ generalFieldFiniteQuotientInclusion t n := by
+  have hg (ρ : R →+* U) (hρ : ρ = (algebraMap S U).comp (algebraMap R S)) :
+      (generalFieldFiniteQuotientMap (algebraMap S U) (algebraMap R S t) n).comp
+          (generalFieldFiniteQuotientMap (algebraMap R S) t n) =
+        cast (congrArg (fun f : R →+* U ↦
+          (R ⧸ Ideal.span ({t ^ n} : Set R)) →+*
+            U ⧸ Ideal.span ({(f t) ^ n} : Set U)) hρ)
+          (generalFieldFiniteQuotientMap ρ t n) := by
+    cases hρ
+    apply Ideal.Quotient.ringHom_ext
+    ext x
+    rfl
+  apply eq_of_heq
+  apply HEq.symm
+  rw [eqRec_heq_iff]
+  exact (heq_of_eq_cast _ (hg _ h)).symm
+
+private theorem generalFieldFiniteRamificationPower
+    {S : Type (u + 1)} [CommRing S] {t v : S} {e : ℕ}
+    (h : Ideal.span ({t} : Set S) = Ideal.span ({v ^ e} : Set S)) (n : ℕ) :
+    Ideal.span ({t ^ n} : Set S) = Ideal.span ({v ^ (e * n)} : Set S) := by
+  rw [← Ideal.span_singleton_pow, h, Ideal.span_singleton_pow, ← pow_mul]
+
+private theorem generalFieldFiniteMapSquare
+    {C : Type*} [Category C] {I : Type*} (W : I → C) {Z U V : C}
+    (f : ∀ i, W i ⟶ Z) {i j : I} (h : i = j)
+    (e : U ≅ W i) (d : V ≅ W j) :
+    e.hom ≫ f i = e.hom ≫ eqToHom (congrArg W h) ≫ d.inv ≫ (d.hom ≫ f j) := by
+  subst j
+  simp only [eqToHom_refl, Category.id_comp, Iso.inv_hom_id_assoc]
+
+private theorem generalFieldFiniteDualizing_assemble
+    (l : ℕ) {X S : Scheme.{u}} [IsNoetherian X] [IsNoetherian S]
+    (a : X ⟶ S) [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a]
+    [HasCompactification a]
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
+    (hA : ∃ n : ℕ, ∀ x : A, (l ^ n : A) * x = 0)
+    (hB : ∃ n : ℕ, ∀ x : B, (l ^ n : B) * x = 0) (φ : A →+* B)
+    (hg : ∀ {R Q : Type (u + 1)} [CommRing R] [CommRing Q] [Finite R] [Finite Q]
+      (_hR : ∃ n : ℕ, ∀ x : R, (l ^ n : R) * x = 0)
+      (_hQ : ∃ n : ℕ, ∀ x : Q, (l ^ n : Q) * x = 0) (f : R →+* Q),
+      GeneralFieldFiniteDualizingGeometry l f a)
+    (hs : ∀ {R Q : Type (u + 1)} [CommRing R] [CommRing Q] [Finite R] [Finite Q]
+      (_hR : ∃ n : ℕ, ∀ x : R, (l ^ n : R) * x = 0)
+      (_hQ : ∃ n : ℕ, ∀ x : Q, (l ^ n : Q) * x = 0) (f : R →+* Q),
+      GeneralFieldFiniteDualizingScalarSite l f a) :
+    GeneralFieldFiniteDualizingCoefficientChange l φ a := by
+  have hp (R : Type (u + 1)) [CommRing R]
+      (hR : ∃ n : ℕ, ∀ x : R, (l ^ n : R) * x = 0) :
+      ∃ n : ℕ, (l ^ n : R) = 0 := by
+    obtain ⟨n, hn⟩ := hR
+    exact ⟨n, by simpa only [mul_one] using hn 1⟩
+  have comp {R Q T : Type (u + 1)} [CommRing R] [CommRing Q] [CommRing T]
+      [Finite R] [Finite Q] [Finite T]
+      (hR : ∃ n : ℕ, ∀ x : R, (l ^ n : R) * x = 0)
+      (hQ : ∃ n : ℕ, ∀ x : Q, (l ^ n : Q) * x = 0)
+      (hT : ∃ n : ℕ, ∀ x : T, (l ^ n : T) * x = 0)
+      (f : R →+* Q) (g : Q →+* T) :=
+    generalFieldFiniteDualizingMap_composition f g l (hp R hR) (hp Q hQ) (hp T hT) a
+  let : IsIso (generalFieldFiniteDualizingMap φ a) := (hg hA hB φ).etale_isIso
+  refine {
+    etale_isIso := (hg hA hB φ).etale_isIso
+    etale_counit := generalFieldFiniteDualizingMap_counit φ a
+    canonical_delta_isIso := ?_
+    pro_isIso := ?_
+    natural_under_isomorphism := (hg hA hB φ).natural_under_isomorphism
+    compactification_independent := (hg hA hB φ).compactification_independent
+    composition := ?_
+    identity := by
+      let : IsIso (generalFieldFiniteDualizingMap (RingHom.id A) a) :=
+        (hg hA hA (RingHom.id A)).etale_isIso
+      exact ⟨generalFieldFiniteDualizingMap_identity l (hp A hA) a,
+        (hs hA hB φ).pro_identity⟩
+    reduction_square := ?_
+    pro_b_Q_and_epsilon := ?_
+    pro_b_Q_isIso := ?_
+    pro_epsilon_p := rfl
+    pro_c_p_isIso := ?_
+    pro_mixed_square := (hs hA hB φ).pro_mixed_square
+    pro_mate_characterization := generalFieldFiniteProDualizingMap_eq φ a
+    pro_counit_equation := (hs hA hB φ).pro_counit_equation
+    transitivity := ?_
+    pro_site_composition := (hs hA hB φ).pro_site_composition
+    commutative_square := ?_
+    compactification_independent_pro := ?_
+    quotient_level_transitivity := ?_ }
+  · infer_instance
+  · rw [generalFieldFiniteProDualizingMap_eq]
+    infer_instance
+  · intro C _ _ hA hB hC ψ
+    exact comp hA hB hC φ ψ
+  · intro R Q _ _ _ _ _ t v e m n hmn hram _ _ _ _ hRm hRn hQm hQn
+    let qR := generalFieldFiniteQuotientTransition t hmn
+    let qQ := generalFieldFiniteQuotientTransition (algebraMap R Q t) hmn
+    let im := generalFieldFiniteQuotientInclusion (S := Q) t m
+    let iN := generalFieldFiniteQuotientInclusion (S := Q) t n
+    have hc := generalFieldFiniteQuotientSquare (S := Q) t hmn
+    have ce₁ := comp hRm hQm hQn im qQ
+    have ce₂ := comp hRm hRn hQn qR iN
+    have cp₁ := (hs hRm hQm im).pro_site_composition hRm hQm hQn qQ
+    have cp₂ := (hs hRm hRn qR).pro_site_composition hRm hRn hQn iN
+    refine ⟨hc, generalFieldFiniteRamificationPower hram m,
+      generalFieldFiniteRamificationPower hram n, ?_, ?_, ce₁, ce₂, cp₁, cp₂⟩
+    · dsimp only
+      rw [← ce₁, ← ce₂]
+      simpa only [Category.assoc, Iso.app_hom, Iso.app_inv] using generalFieldFiniteMapSquare
+        (fun (f : (R ⧸ Ideal.span ({t ^ m} : Set R)) →+*
+            (Q ⧸ Ideal.span ({(algebraMap R Q t) ^ n} : Set Q))) ↦
+          (scalarExtension f X).obj
+            (dualizingComplex (R ⧸ Ideal.span ({t ^ m} : Set R)) a))
+        (fun f ↦ generalFieldFiniteDualizingMap f a) hc
+        ((FiniteCoefficientOrdinary.scalarComposition X.smallEtaleTopology im qQ).app _)
+        ((FiniteCoefficientOrdinary.scalarComposition X.smallEtaleTopology qR iN).app _)
+    · dsimp only
+      rw [← cp₁, ← cp₂]
+      let : EssentiallySmall.{u + 1} X.ProEt := essentiallySmallSelf.{0, u, u + 1} _
+      simpa only [Category.assoc, Iso.app_hom, Iso.app_inv] using
+        generalFieldFiniteMapSquare
+        (C := _root_.DerivedCategory.{u + 1} (Sheaf (Scheme.ProEt.topology X)
+          (ModuleCat.{u + 1} (Q ⧸ Ideal.span ({(algebraMap R Q t) ^ n} : Set Q)))))
+        (fun (f : (R ⧸ Ideal.span ({t ^ m} : Set R)) →+*
+            (Q ⧸ Ideal.span ({(algebraMap R Q t) ^ n} : Set Q))) ↦
+          (@Sheaf.fixedCoefficientDerivedScalarExtension.{u} X.ProEt inferInstance
+            (essentiallySmallSelf.{0, u, u + 1} _) (Scheme.ProEt.topology X) _ _
+            inferInstance inferInstance f).obj
+          ((ProEtale.comparisonUpperStar
+            (ModuleCat.{u + 1} (R ⧸ Ideal.span ({t ^ m} : Set R))) X).mapDerivedCategory.obj
+              (dualizingComplex (R ⧸ Ideal.span ({t ^ m} : Set R)) a)))
+        (fun f ↦ generalFieldFiniteProDualizingMap.{u} f a) hc
+        ((FiniteCoefficientOrdinary.scalarComposition.{u} (Scheme.ProEt.topology X) im qQ).app
+          ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1}
+            (R ⧸ Ideal.span ({t ^ m} : Set R))) X).mapDerivedCategory.obj
+              (dualizingComplex (R ⧸ Ideal.span ({t ^ m} : Set R)) a)))
+        ((FiniteCoefficientOrdinary.scalarComposition.{u} (Scheme.ProEt.topology X) qR iN).app
+          ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1}
+            (R ⧸ Ideal.span ({t ^ m} : Set R))) X).mapDerivedCategory.obj
+              (dualizingComplex (R ⧸ Ideal.span ({t ^ m} : Set R)) a)))
+  · refine ⟨generalFieldFiniteSiteComparison_eq A _ _, ?_⟩
+    dsimp only [generalFieldFiniteProEpsilon, ProEtale.FiniteCompactificationTranspose.counit]
+    exact Iso.hom_inv_id_assoc _ _
+  · intro J
+    refine ⟨generalFieldFiniteSiteComparison_eq A _ J, ?_⟩
+    rw [← generalFieldFiniteSiteComparison_eq A _ J]
+    infer_instance
+  · intro c K hK
+    exact ((hs hA hB φ).pro_mixed_square c K hK).1
+  · intro C D _ _ _ _ hA hB hC hD ψ χ
+    refine ⟨?_, (hs hA hC (ψ.comp φ)).pro_site_composition hA hC hD χ⟩
+    rw [comp hA hC hD (ψ.comp φ) χ, Functor.map_comp, Category.assoc]
+  · intro C D _ _ _ _ ψ χ hB hC hD r h
+    subst χ
+    exact comp hB hC hD ψ r
+  · intro c d
+    dsimp only [generalFieldFiniteProDualizingMapAt]
+    rw [((hg hA hB φ).compactification_independent c d).1,
+      ((hg hA hB φ).compactification_independent d d).2]
+    exact ⟨rfl, (generalFieldFiniteProDualizingMap_eq φ a).symm⟩
+  · intro R Q U _ _ _ _ _ _ t n _ _ _ _ hR hQ hU hU' hRU
+    refine ⟨generalFieldFiniteQuotientTower t n hRU, ?_, ?_⟩
+    · exact comp hR hQ hU' _ _
+    · exact (hs hR hQ (generalFieldFiniteQuotientInclusion (S := Q) t n)).pro_site_composition
+        hR hQ hU' (generalFieldFiniteQuotientInclusion (S := U) (algebraMap R Q t) n)
+
 /-- Finite dualizing coefficient change over a finite or algebraically closed field,
 with normalized ordinary and pro-etale counit mates, coherence, composition, identity,
 and the finite-level reduction square.
@@ -698,6 +1205,13 @@ theorem generalFieldFiniteDualizingCoefficientChange
     (hB : ∃ n : ℕ, ∀ x : B, (l ^ n : B) * x = 0)
     (φ : A →+* B) :
     GeneralFieldFiniteDualizingCoefficientChange l φ a := by
-  sorry
+  let : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian a
+  let : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace a
+  let : IsNoetherian X := ⟨⟩
+  apply generalFieldFiniteDualizing_assemble l a hA hB φ
+  · intro R Q _ _ _ _ hR hQ f
+    exact generalFieldFiniteDualizingGeometry k p l _hp _hlp _hk _hl _hlp' hR hQ f
+  · intro R Q _ _ _ _ hR hQ f
+    exact generalFieldFiniteDualizingScalarSite k p l _hp _hlp _hk _hl _hlp' hR hQ f
 
 end AlgebraicGeometry.Etale

@@ -405,6 +405,22 @@ import Mathlib.Algebra.Module.Projective
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleStratum
 import WeilConjectures.PoincareDuality.VerdierBiduality
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.FinitePointSectionsExact
+public import WeilConjectures.AlgebraicGeometry.CondensedDerivedTensorShifts
+public import WeilConjectures.AlgebraicGeometry.Picard.ConstructibleTensorHom.TensorHomExchange
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Open.ProEtaleOpenClosedSequenceRingSheaf
+public import WeilConjectures.AlgebraicGeometry.PurityCoefficientChange.CondensedPurityCoefficientChange
+
+public import WeilConjectures.AlgebraicGeometry.PurityTransport.TransportFiniteLines
+public import WeilConjectures.Compactification.CommonDenseRefinement
+
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.AdmissibleTensorConstructibility
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.FinitePointIntegralCoefficientIso
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.FinitePointScalarRings
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntTensorProjection
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixCtf
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixFiniteGeneration
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixNonfiniteGeneration
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixPerfectExtension
 
 /-! # Smooth Poincare identification
 
@@ -452,6 +468,19 @@ def identificationScalarValue {R : Type (u + 1)} [CommRing R]
         (DerivedCategory.singleFunctorObjUnitIso (ModuleCat R)).inv) ≫
     (DerivedCategory.singleFunctorCompHomologyFunctorIso (ModuleCat R) 0).hom.app _).hom
       (1 : R)
+
+/-- Perfectness of the degreewise form of the specified derived pairing, using
+Mathlib's perfect bilinear pairing predicate. Hom from the regular unit to a
+shifted scalar complex is its cohomology module. The equality fixes the bilinear
+map to be the degreewise value of the given derived pairing.
+Source: Complement (blueprint: sk-thm-sf-identification). -/
+def IdentificationDegreewise {R : Type (u + 1)} [CommRing R]
+    {P Q : DerivedCategory (ModuleCat.{u + 1} R)} (b : P ⊗ Q ⟶ 𝟙_ _) : Prop :=
+  ∀ i : ℤ,
+    ∃ B : (𝟙_ _ ⟶ P⟦i⟧) →ₗ[R] (𝟙_ _ ⟶ Q⟦-i⟧) →ₗ[R] R,
+      (∀ (x : 𝟙_ _ ⟶ P⟦i⟧) (y : 𝟙_ _ ⟶ Q⟦-i⟧),
+        B x y = identificationScalarValue (identificationDegreeValue b i x y)) ∧
+      B.IsPerfPair
 
 variable (ell : ℕ) [Fact ell.Prime]
   (D : WeilConjectures.FiniteFieldDatum.{u}) (hEll : ell ≠ D.p)

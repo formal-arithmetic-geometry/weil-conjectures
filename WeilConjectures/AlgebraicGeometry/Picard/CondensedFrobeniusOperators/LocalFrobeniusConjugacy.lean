@@ -8,6 +8,11 @@ module
 public import WeilConjectures.AlgebraicGeometry.Picard.TraceFormulaCoefficientConventions.TraceFormulaFrobeniusOperators
 public import WeilConjectures.CategoryTheory.DerivedCategory.PerfectCategoricalTrace
 public import WeilConjectures.ZetaSeries
+public import WeilConjectures.AlgebraicGeometry.FrobeniusFixedPointsCount
+public import WeilConjectures.AlgebraicGeometry.Picard.CondensedFrobeniusOperators.LocalFrobeniusConjugacyOrbit
+public import WeilConjectures.AlgebraicGeometry.Picard.CondensedFrobeniusOperators.LocalFrobeniusConjugacyTransport
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
+public import WeilConjectures.PointCount
 
 /-!
 # Local Frobenius conjugacy along the normalized orbit
@@ -46,8 +51,8 @@ clause 1 (blueprint: lem-trf-local-frobenius-conjugacy). -/
 def localFrobeniusOrbit
     (z : Spec (.of F.k) ⟶ (F.geometricFiber Y₀).left) (i : ℕ) :
     Spec (.of F.k) ⟶ (F.geometricFiber Y₀).left :=
-  ((geometricFrobeniusGeometry F Y₀).b.pow i).inv ≫
-    (z ≫ ((geometricFrobeniusGeometry F Y₀).h.pow i).hom)
+  ((condensedFrobeniusGeometry F Y₀).b.pow i).inv ≫
+    (z ≫ ((condensedFrobeniusGeometry F Y₀).h.pow i).hom)
 
 /-- A lift is a k-morphism whose projection to X₀ has image x.
 Source: the opening paragraph of the DAG statement
@@ -91,11 +96,11 @@ def localFrobeniusTransport (K : FiniteStrictWeilComplex F Y₀ ell E n hn)
     (localFrobeniusFibre F Y₀ ell E n (localFrobeniusOrbit F Y₀ z i)).obj K.carrier.obj ≅
       (localFrobeniusFibre F Y₀ ell E n z).obj K.carrier.obj :=
   (localFrobeniusReparam F Y₀ ell E n
-      (z ≫ ((geometricFrobeniusGeometry F Y₀).h.pow i).hom)
-      ((geometricFrobeniusGeometry F Y₀).b.pow i).inv).symm.app K.carrier.obj ≪≫
+      (z ≫ ((condensedFrobeniusGeometry F Y₀).h.pow i).hom)
+      ((condensedFrobeniusGeometry F Y₀).b.pow i).inv).symm.app K.carrier.obj ≪≫
     (Γ (finiteCoefficient ell E n) (Spec (.of F.k))).mapIso
       ((leftDerivedUpperStarComp (finiteCoefficient ell E n) z
-        ((geometricFrobeniusGeometry F Y₀).h.pow i).hom).app K.carrier.obj) ≪≫
+        ((condensedFrobeniusGeometry F Y₀).h.pow i).hom).app K.carrier.obj) ≪≫
     (localFrobeniusFibre F Y₀ ell E n z).mapIso (iteratedWeil F Y₀ ell E n hn K i)
 
 /-- The owning local operator in the coordinates of an equal chosen geometric lift.
@@ -106,17 +111,206 @@ def localFrobeniusAtLift (hEll : ell ≠ F.p)
     (K : FiniteStrictWeilComplex F Y₀ ell E n hn) (m : ℕ) (hm : 1 ≤ m)
     (y : F.extensionPoints Y₀ m hm)
     (z : Spec (.of F.k) ⟶ (F.geometricFiber Y₀).left)
-    (hy : localExtensionPoint F Y₀ m hm y = z) :
+    (hy : extensionPointGeometry F Y₀ m hm y = z) :
     End ((localFrobeniusFibre F Y₀ ell E n z).obj K.carrier.obj) :=
   let e := eqToIso (congrArg
     (fun w ↦ (localFrobeniusFibre F Y₀ ell E n w).obj K.carrier.obj) hy)
   e.inv ≫ condensedLocalFrobenius F Y₀ ell hEll E n hn m hm ⟨y⟩ K ≫ e.hom
 
+/-- Compatibility of a chosen residue-field embedding with the model base map.
+Source: the closed-point construction in def-weil-local-frobenius-trace.
+Proof: compose the residue-field structural map and use contravariance of Spec. -/
+private theorem closedPointLift_compatible
+    (y : {y : Y₀.left // y ∈ closedPoints Y₀.left})
+    (i : Y₀.left.residueField y.val →+* F.k)
+    (hi : i.comp (Y₀.hom.residueFieldAlgebraMap y.val) = algebraMap F.k₀ F.k) :
+    (Spec.map (CommRingCat.ofHom i) ≫ Y₀.left.fromSpecResidueField y.val) ≫ Y₀.hom =
+      (𝟙 (Spec (.of F.k))) ≫ Spec.map (CommRingCat.ofHom (algebraMap F.k₀ F.k)) := by
+  rw [Category.assoc, ← Y₀.hom.specMap_residueFieldAlgebraMap,
+    Category.id_comp, ← Spec.map_comp, ← CommRingCat.ofHom_comp, hi]
+
+/-- The same concrete closed-point lift, retained privately for the counting proof.
+Source: def-weil-local-frobenius-trace. This is the universal pullback lift of
+Spec of the chosen residue-field embedding and the identity map of Spec k. -/
+private def closedPointLift (y : {y : Y₀.left // y ∈ closedPoints Y₀.left})
+    (i : Y₀.left.residueField y.val →+* F.k)
+    (hi : i.comp (Y₀.hom.residueFieldAlgebraMap y.val) = algebraMap F.k₀ F.k) :
+    Spec (.of F.k) ⟶ (F.geometricFiber Y₀).left :=
+  pullback.lift (Spec.map (CommRingCat.ofHom i) ≫ Y₀.left.fromSpecResidueField y.val)
+    (𝟙 _) (closedPointLift_compatible F Y₀ y i hi)
+
+private theorem iso_pow_add {C : Type*} [Category C] {X : C}
+    (e : X ≅ X) (i j : ℕ) : e.pow (i + j) = e.pow i ≪≫ e.pow j := by
+  induction j with
+  | zero => simp
+  | succ j ih =>
+    rw [Nat.add_succ, Iso.pow_succ, ih, Iso.pow_succ, Iso.trans_assoc]
+
+private theorem localFrobeniusOrbit_zero
+    (z : Spec (.of F.k) ⟶ (F.geometricFiber Y₀).left) :
+    localFrobeniusOrbit F Y₀ z 0 = z := by
+  change 𝟙 _ ≫ (z ≫ 𝟙 _) = z
+  rw [Category.id_comp, Category.comp_id]
+
+private theorem localFrobeniusOrbit_add
+    (z : Spec (.of F.k) ⟶ (F.geometricFiber Y₀).left) (i j : ℕ) :
+    localFrobeniusOrbit F Y₀ (localFrobeniusOrbit F Y₀ z i) j =
+      localFrobeniusOrbit F Y₀ z (i + j) := by
+  simp only [localFrobeniusOrbit, iso_pow_add, Iso.trans_hom, Iso.trans_inv,
+    Category.assoc]
+
+private theorem localFrobeniusOrbit_iterate
+    (z : Spec (.of F.k) ⟶ (F.geometricFiber Y₀).left) (i : ℕ) :
+    localFrobeniusOrbit F Y₀ z i =
+      ((fun w ↦ localFrobeniusOrbit F Y₀ w 1)^[i]) z := by
+  induction i with
+  | zero => exact localFrobeniusOrbit_zero F Y₀ z
+  | succ i ih =>
+    rw [← localFrobeniusOrbit_add, ih, Function.iterate_succ_apply']
+
+private theorem factor_field_point_native {K : Type u} [Field K] {X : Scheme.{u}}
+    (z : Spec (.of K) ⟶ X) (y : X)
+    (hy : z (IsLocalRing.closedPoint K) = y) :
+    ∃ i : X.residueField y →+* K,
+      Spec.map (CommRingCat.ofHom i) ≫ X.fromSpecResidueField y = z := by
+  obtain ⟨⟨p, i⟩, rfl⟩ := (Scheme.SpecToEquivOfField K X).symm.surjective z
+  simp only [Scheme.SpecToEquivOfField, Equiv.coe_fn_symm_mk, Scheme.Hom.comp_apply,
+    Scheme.fromSpecResidueField_apply] at hy
+  subst p
+  exact ⟨i.hom, rfl⟩
+
+private theorem factor_lift_native (x : Y₀.left) (hx : IsClosed ({x} : Set Y₀.left))
+    (z : Spec (.of F.k) ⟶ (F.geometricFiber Y₀).left)
+    (hz : IsLocalFrobeniusLift F Y₀ x z) :
+    ∃ i : Y₀.left.residueField x →+* F.k,
+      ∃ hi : i.comp (Y₀.hom.residueFieldAlgebraMap x) = algebraMap F.k₀ F.k,
+        z = (closedPointLift F Y₀ ⟨x, hx⟩ i hi) := by
+  obtain ⟨i, hi⟩ := factor_field_point_native
+    (z ≫ pullback.fst Y₀.hom
+      (Spec.map (CommRingCat.ofHom (algebraMap F.k₀ F.k)))) x hz.2
+  have hb : (Spec.map (CommRingCat.ofHom i) ≫ Y₀.left.fromSpecResidueField x) ≫
+      Y₀.hom = Spec.map (CommRingCat.ofHom (algebraMap F.k₀ F.k)) := by
+    rw [hi, Category.assoc, pullback.condition]
+    change z ≫ (F.geometricFiber Y₀).hom ≫ _ = _
+    rw [← Category.assoc, hz.1, Category.id_comp]
+  rw [Category.assoc, ← Y₀.hom.specMap_residueFieldAlgebraMap,
+    ← Spec.map_comp, Spec.map_inj] at hb
+  have hic : i.comp (Y₀.hom.residueFieldAlgebraMap x) = algebraMap F.k₀ F.k :=
+    congrArg (fun f : CommRingCat.of F.k₀ ⟶ CommRingCat.of F.k ↦ f.hom) hb
+  refine ⟨i, hic, ?_⟩
+  apply pullback.hom_ext
+  · simpa only [closedPointLift, pullback.lift_fst] using hi.symm
+  · simpa [closedPointLift, FiniteFieldDatum.geometricFiber] using hz.1
+
+private def lift_of_embedding (x : Y₀.left) (hx : IsClosed ({x} : Set Y₀.left))
+    (i : Y₀.left.residueField x →+* F.k)
+    (hi : i.comp (Y₀.hom.residueFieldAlgebraMap x) = algebraMap F.k₀ F.k) :
+    Spec (.of F.k) ⟶ (F.geometricFiber Y₀).left :=
+  closedPointLift F Y₀ ⟨x, hx⟩ i hi
+
+private theorem lift_of_embedding_isLift (x : Y₀.left) (hx : IsClosed ({x} : Set Y₀.left))
+    (i : Y₀.left.residueField x →+* F.k)
+    (hi : i.comp (Y₀.hom.residueFieldAlgebraMap x) = algebraMap F.k₀ F.k) :
+    IsLocalFrobeniusLift F Y₀ x (lift_of_embedding F Y₀ x hx i hi) := by
+  constructor
+  · simp [lift_of_embedding, closedPointLift, FiniteFieldDatum.geometricFiber]
+  · simp only [lift_of_embedding, closedPointLift, pullback.lift_fst,
+      Scheme.Hom.comp_apply]
+    exact Y₀.left.fromSpecResidueField_apply x _
+
+private theorem lift_of_embedding_surjective (x : Y₀.left) (hx : IsClosed ({x} : Set Y₀.left)) :
+    Function.Surjective (fun p : {i : Y₀.left.residueField x →+* F.k //
+        i.comp (Y₀.hom.residueFieldAlgebraMap x) = algebraMap F.k₀ F.k} ↦
+      (⟨lift_of_embedding F Y₀ x hx p.1 p.2,
+        lift_of_embedding_isLift F Y₀ x hx p.1 p.2⟩ :
+        {z : Spec (.of F.k) ⟶ (F.geometricFiber Y₀).left //
+          IsLocalFrobeniusLift F Y₀ x z})) := by
+  intro z
+  obtain ⟨i, hi, hz⟩ := factor_lift_native F Y₀ x hx z.1 z.2
+  refine ⟨⟨i, hi⟩, ?_⟩
+  apply Subtype.ext
+  exact hz.symm
+
+private theorem lift_of_embedding_injective (x : Y₀.left) (hx : IsClosed ({x} : Set Y₀.left)) :
+    Function.Injective (fun p : {i : Y₀.left.residueField x →+* F.k //
+        i.comp (Y₀.hom.residueFieldAlgebraMap x) = algebraMap F.k₀ F.k} ↦
+      (⟨lift_of_embedding F Y₀ x hx p.1 p.2,
+        lift_of_embedding_isLift F Y₀ x hx p.1 p.2⟩ :
+        {z : Spec (.of F.k) ⟶ (F.geometricFiber Y₀).left //
+          IsLocalFrobeniusLift F Y₀ x z})) := by
+  intro p q h
+  apply Subtype.ext
+  have hb := congrArg
+    (fun z => z ≫ pullback.fst Y₀.hom
+      (Spec.map (CommRingCat.ofHom (algebraMap F.k₀ F.k))))
+    (congrArg Subtype.val h)
+  simp only [lift_of_embedding, closedPointLift, pullback.lift_fst] at hb
+  exact congrArg CommRingCat.Hom.hom
+    ((Scheme.specMap_comp_fromSpecResidueField_injective x) hb)
+
+private theorem lift_of_embedding_bijective (x : Y₀.left) (hx : IsClosed ({x} : Set Y₀.left)) :
+    Function.Bijective (fun p : {i : Y₀.left.residueField x →+* F.k //
+        i.comp (Y₀.hom.residueFieldAlgebraMap x) = algebraMap F.k₀ F.k} ↦
+      (⟨lift_of_embedding F Y₀ x hx p.1 p.2,
+        lift_of_embedding_isLift F Y₀ x hx p.1 p.2⟩ :
+        {z : Spec (.of F.k) ⟶ (F.geometricFiber Y₀).left //
+          IsLocalFrobeniusLift F Y₀ x z})) :=
+  ⟨lift_of_embedding_injective F Y₀ x hx, lift_of_embedding_surjective F Y₀ x hx⟩
+
+private theorem embedding_card_native (x : Y₀.left) (hx : IsClosed ({x} : Set Y₀.left)) :
+    Nat.card {i : Y₀.left.residueField x →+* F.k //
+      i.comp (Y₀.hom.residueFieldAlgebraMap x) = algebraMap F.k₀ F.k} =
+      Y₀.hom.degreeOver x := by
+  let : Algebra F.k₀ (Y₀.left.residueField x) :=
+    (Y₀.hom.residueFieldAlgebraMap x).toAlgebra
+  have : Module.Finite F.k₀ (Y₀.left.residueField x) := by
+    exact Y₀.hom.finite_residueField_of_isClosed x hx
+  let e : {i : Y₀.left.residueField x →+* F.k //
+      i.comp (Y₀.hom.residueFieldAlgebraMap x) = algebraMap F.k₀ F.k} ≃
+      (Y₀.left.residueField x →ₐ[F.k₀] F.k) :=
+    { toFun := fun i =>
+        { toRingHom := i.1
+          commutes' := by
+            intro a
+            exact RingHom.congr_fun i.2 a }
+      invFun := fun i =>
+        ⟨i.toRingHom, by
+          ext a
+          exact i.commutes a⟩
+      left_inv := by intro i; rfl
+      right_inv := by intro i; rfl }
+  rw [Nat.card_congr e, AlgHom.natCard_of_splits F.k₀ (Y₀.left.residueField x) F.k
+    (fun _ => IsAlgClosed.splits _)]
+  rfl
+
+private theorem lift_card_native (x : Y₀.left) (hx : IsClosed ({x} : Set Y₀.left)) :
+    Nat.card {z : Spec (.of F.k) ⟶ (F.geometricFiber Y₀).left //
+      IsLocalFrobeniusLift F Y₀ x z} = Y₀.hom.degreeOver x := by
+  rw [← Nat.card_congr (Equiv.ofBijective _
+    (lift_of_embedding_bijective F Y₀ x hx)), embedding_card_native F Y₀ x hx]
+
+private theorem local_trace_conjugacy {R : Type*} [CommRing R]
+    [HasDerivedCategory (ModuleCat R)]
+    {P Q : DerivedCategory (ModuleCat R)}
+    (hP : DerivedCategory.IsPerfectRingComplex P)
+    (hQ : DerivedCategory.IsPerfectRingComplex Q)
+    (f : P ⟶ P) (g : Q ⟶ Q) (e : P ≅ Q)
+    (hf : f = e.hom ≫ g ≫ e.inv) :
+    DerivedCategory.perfectCategoricalTrace P hP f =
+      DerivedCategory.perfectCategoricalTrace Q hQ g := by
+  let := DerivedCategory.perfectTraceCanonicalBraiding (ModuleCat R)
+  let := DerivedCategory.perfectTraceHasRightDual P hP
+  let := DerivedCategory.perfectTraceHasRightDual Q hQ
+  unfold DerivedCategory.perfectCategoricalTrace
+  apply congrArg DerivedCategory.perfectTraceScalar
+  apply MonoidalCategory.trace_eq_of_iso e f g
+  rw [hf]
+  simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+
 /-- All clauses of local Frobenius conjugacy, on the native condensed finite coefficient
 category and on literal point-fibre complexes.
 
-Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-trace-formula/
-sec-tf-curve-local/sec-the-local-term-at-a-fixed-point/sk-p-frob/sk-c-proper-global/
+Source: literature/blueprint/latest/blueprint/sec-trace-formula/sk-c-proper-global/
 lem-trf-local-frobenius-conjugacy.md, clauses 1--3, with the DAG's normalized k-points
 (blueprint: lem-trf-local-frobenius-conjugacy).
 
@@ -169,7 +363,7 @@ theorem local_frobenius_conjugacy (hEll : ell ≠ F.p)
         localFrobeniusOrbit F Y₀ z (i + j)) ∧
       (∀ (m : ℕ) (hm : 1 ≤ m), Y₀.hom.degreeOver x ∣ m → ∀ i : ℕ,
         ∃! y : F.extensionPoints Y₀ m hm,
-          localExtensionPoint F Y₀ m hm y = localFrobeniusOrbit F Y₀ z i) ∧
+          extensionPointGeometry F Y₀ m hm y = localFrobeniusOrbit F Y₀ z i) ∧
       HEq (localFrobeniusTransport F Y₀ ell E n hn K z 0).hom
         (𝟙 ((localFrobeniusFibre F Y₀ ell E n z).obj K.carrier.obj)) ∧
       (∀ i j : ℕ,
@@ -177,12 +371,12 @@ theorem local_frobenius_conjugacy (hEll : ell ≠ F.p)
           ((localFrobeniusTransport F Y₀ ell E n hn K (localFrobeniusOrbit F Y₀ z i) j).hom ≫
             (localFrobeniusTransport F Y₀ ell E n hn K z i).hom)) ∧
       (∀ (m : ℕ) (hm : 1 ≤ m), Y₀.hom.degreeOver x ∣ m → ∀ i : ℕ,
-        (localFrobeniusOrbit F Y₀ z i) ≫ F.schemeFrobeniusIterate Y₀ m =
+        (localFrobeniusOrbit F Y₀ z i) ≫ F.coefficientFreeSchemeFrobeniusIterate Y₀ m =
           localFrobeniusOrbit F Y₀ z i) ∧
       (∀ (m : ℕ) (hm : 1 ≤ m), Y₀.hom.degreeOver x ∣ m → ∀ i : ℕ,
         ∀ (y₀ yᵢ : F.extensionPoints Y₀ m hm)
-          (hy₀ : localExtensionPoint F Y₀ m hm y₀ = z)
-          (hyᵢ : localExtensionPoint F Y₀ m hm yᵢ = localFrobeniusOrbit F Y₀ z i),
+          (hy₀ : extensionPointGeometry F Y₀ m hm y₀ = z)
+          (hyᵢ : extensionPointGeometry F Y₀ m hm yᵢ = localFrobeniusOrbit F Y₀ z i),
         localFrobeniusAtLift F Y₀ ell E n hn hEll K m hm yᵢ _ hyᵢ =
           (localFrobeniusTransport F Y₀ ell E n hn K z i).hom ≫
             localFrobeniusAtLift F Y₀ ell E n hn hEll K m hm y₀ z hy₀ ≫
@@ -194,12 +388,33 @@ theorem local_frobenius_conjugacy (hEll : ell ≠ F.p)
       (∀ w : Spec (.of F.k) ⟶ (F.geometricFiber Y₀).left,
         IsLocalFrobeniusLift F Y₀ x w →
         ∀ (y₀ y₁ : F.extensionPoints Y₀ (Y₀.hom.degreeOver x) hd)
-          (hy₀ : localExtensionPoint F Y₀ _ hd y₀ = z)
-          (hy₁ : localExtensionPoint F Y₀ _ hd y₁ = w),
+          (hy₀ : extensionPointGeometry F Y₀ _ hd y₀ = z)
+          (hy₁ : extensionPointGeometry F Y₀ _ hd y₁ = w),
         ∃ e : (localFrobeniusFibre F Y₀ ell E n w).obj K.carrier.obj ≅
             (localFrobeniusFibre F Y₀ ell E n z).obj K.carrier.obj,
           localFrobeniusAtLift F Y₀ ell E n hn hEll K _ hd y₁ w hy₁ = e.hom ≫
             localFrobeniusAtLift F Y₀ ell E n hn hEll K _ hd y₀ z hy₀ ≫ e.inv) := by
-  sorry
+  let : HasDerivedCategory.{u + 1}
+      (ModuleCat.{u + 1} (condensedScalarRing (finiteCoefficient ell E n))) :=
+    HasDerivedCategory.ofIsGrothendieckAbelian _
+  constructor
+  · exact lift_card_native F Y₀ x _hx
+  · intro z hz
+    obtain ⟨hd, h1, h2, h3, h4, h7, ht2⟩ :=
+      local_frobenius_conjugacy_orbit F Y₀ x _hx z hz
+    obtain ⟨hP, hP₀, ht0, ht1, hc⟩ :=
+      local_frobenius_conjugacy_transport F Y₀ ell E n hn hEll K x _hx z hz
+    refine ⟨hd, hP, hP₀, h1, h2, h3, h4,
+      localFrobeniusOrbit_iterate F Y₀ z, localFrobeniusOrbit_add F Y₀ z,
+      h7, ht0, ht1, ht2, ?_, ?_⟩
+    · intro m hm hdm i y₀ yᵢ hy₀ hyᵢ
+      have he := hc m hm hdm i y₀ yᵢ hy₀ hyᵢ
+      exact ⟨he, local_trace_conjugacy (hP i) hP₀ _ _
+        (localFrobeniusTransport F Y₀ ell E n hn K z i) he⟩
+    · intro w hw y₀ y₁ hy₀ hy₁
+      obtain ⟨i, hi⟩ := h3 w hw
+      cases hi
+      refine ⟨localFrobeniusTransport F Y₀ ell E n hn K z i.val, ?_⟩
+      exact hc (Y₀.hom.degreeOver x) hd (dvd_refl _) i.val y₀ y₁ hy₀ hy₁
 
 end WeilConjectures.CondensedFrobeniusOperators

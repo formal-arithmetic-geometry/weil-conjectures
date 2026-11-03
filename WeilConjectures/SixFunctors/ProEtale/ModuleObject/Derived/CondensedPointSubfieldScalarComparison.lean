@@ -459,6 +459,12 @@ private theorem point_comparison_isIso
   obtain ⟨x, hx⟩ := hbij.2 (en y)
   exact ⟨x, en.injective hx⟩
 
+/-- Target sections in the point scalar comparison.
+Source: HRS Lemma 4.1(1)
+(blueprint: lem-zl-condensed-point-subfield-scalar-comparison). -/
+abbrev pointAlgClSections (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] :=
+  condensedRingCoefficientSections (Profinite.padicAlgClRingObj ℓ) (Spec (.of k))
+
 /-- Internal scalar extension at the point in the comparison.
 Source: HRS Lemma 4.1(1)
 (blueprint: lem-zl-condensed-point-subfield-scalar-comparison). -/
@@ -466,6 +472,14 @@ abbrev pointSubfieldExtension (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ) (k : Type u) [Field k] :=
   Mod.extendScalars
     (coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) (Spec (.of k)))
+
+/-- Ordinary section-ring scalar extension in the comparison.
+Source: HRS Lemma 4.1(1)
+(blueprint: lem-zl-condensed-point-subfield-scalar-comparison). -/
+abbrev pointSubfieldSectionExtension (ℓ : ℕ) [Fact ℓ.Prime]
+    (E : PadicAlgCl.FiniteIntermediateField ℓ) :=
+  ModuleCat.extendScalars.{u + 1, u + 1, u + 1}
+    (MonObj.Γ.map (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E))
 
 private theorem subfield_internal_exact (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ) (k : Type u) [Field k] :

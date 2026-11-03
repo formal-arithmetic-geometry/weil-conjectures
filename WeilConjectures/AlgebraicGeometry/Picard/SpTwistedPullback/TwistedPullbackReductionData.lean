@@ -127,6 +127,33 @@ structure CofinalGeometry (b : SpTowerShriek.Base l E) {X Y : Scheme.{u}}
       direct.hom.app ((finiteSystemPullback (integralSystemRings l E)
         (integralSystemTransition l E) f).obj M)
 
+/-- The localized cofinal inverse-image comparison.
+Source: blueprint restriction of entire systems
+(blueprint: def-sp-twisted-pullback-reduction-data). -/
+def CofinalGeometry.derived (b : SpTowerShriek.Base l E) {X Y : Scheme.{u}}
+    (f : X ⟶ Y) (g : SpTowerShriek.Geometry l E b f)
+    (FX : CofinalModel l E b X) (FY : CofinalModel l E b Y)
+    (H : CofinalGeometry l E b f g FX FY) :
+    FY.ordinary.mapDerivedCategory ⋙ SpTowerShriek.pull l E b g ≅
+      finiteSystemDerivedPullback (integralSystemRings l E)
+        (integralSystemTransition l E) f ⋙ FX.ordinary.mapDerivedCategory :=
+  letI : ∀ n : ℕ, Finite (integralSystemRings l E n) :=
+    fun n ↦ integralSystemRings_finite l E n
+  letI := FX.additive
+  letI := FX.limits
+  letI := FX.colimits
+  letI := FY.additive
+  letI := FY.limits
+  letI := FY.colimits
+  letI := finiteSystemPullbackAdditive (integralSystemRings l E)
+    (integralSystemTransition l E) f
+  letI := finiteSystemPullbackLimits (integralSystemRings l E)
+    (integralSystemTransition l E) f
+  letI := finiteSystemPullbackColimits (integralSystemRings l E)
+    (integralSystemTransition l E) f
+  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    Functor.mapDerivedCategoryNatIso H.inverseImage ≪≫ Functor.mapDerivedCategoryCompIso _ _
+
 /-- Tensor transport along the actual cofinal restriction. The strict ordinary
 comparison is the identity on every selected local tensor generator; the general
 model fixes its localized class on entire system complexes.

@@ -15,6 +15,8 @@ import WeilConjectures.Compactification.BaseChange
 import WeilConjectures.AlgebraicGeometry.ProEtale.Derived.ProEtaleDerivedExtensionZeroBaseChange
 import WeilConjectures.AlgebraicGeometry.Reduction.ReductionDirectImage
 import WeilConjectures.AlgebraicGeometry.MixedBaseChangeInput
+public import WeilConjectures.AlgebraicGeometry.TowerExceptionalBaseChange.TowerExceptionalBaseChangeData
+public import WeilConjectures.AlgebraicGeometry.TowerExceptionalBaseChange.TowerExceptionalBaseChangeIntegralCoordinates
 
 /-! # Exceptional base change in current integral coefficients
 
@@ -227,6 +229,303 @@ def IntegralConclusion (hb : IsIso (SpTowerMate.beta l E b o q a ex)) : Prop :=
                 ((reduction l E b o q ex laws rY).obj K) ≫
               a.right'.map (pv.comparison.inv.app K) ≫ s'.rightComparison.inv.app _).hom)
 
+private theorem counit_transport
+    {C D C' D' A B A' B' : Type*}
+    [Category C] [Category D] [Category C'] [Category D']
+    [Category A] [Category B] [Category A'] [Category B']
+    (rC : C ⥤ A) (rD : D ⥤ B) (rC' : C' ⥤ A') (rD' : D' ⥤ B')
+    [rD'.Faithful]
+    (F : C ⥤ D) (G : D ⥤ C) (F' : C' ⥤ D') (G' : D' ⥤ C')
+    (U : C ⥤ C') (V : D ⥤ D')
+    (Ft : A ⥤ B) (Gt : B ⥤ A) (Ft' : A' ⥤ B') (Gt' : B' ⥤ A')
+    (Ut : A ⥤ A') (Vt : B ⥤ B')
+    (ad : F ⊣ G) (ad' : F' ⊣ G') (adt : Ft ⊣ Gt) (adt' : Ft' ⊣ Gt')
+    (sf : F ⋙ rD ≅ rC ⋙ Ft) (sf' : F' ⋙ rD' ≅ rC' ⋙ Ft')
+    (sg : G ⋙ rC ≅ rD ⋙ Gt) (sg' : G' ⋙ rC' ≅ rD' ⋙ Gt')
+    (su : U ⋙ rC' ≅ rC ⋙ Ut) (sv : V ⋙ rD' ≅ rD ⋙ Vt)
+    (bt : Ft ⋙ Vt ⟶ Ut ⋙ Ft') (mt : Gt ⋙ Ut ⟶ Vt ⋙ Gt')
+    (beta : F ⋙ V ≅ U ⋙ F') (K : D)
+    (e : U.obj (G.obj K) ⟶ G'.obj (V.obj K))
+    (hb : rD'.map (beta.hom.app (G.obj K)) =
+      sv.hom.app (F.obj (G.obj K)) ≫ Vt.map (sf.hom.app (G.obj K)) ≫
+        bt.app (rC.obj (G.obj K)) ≫ Ft'.map (su.inv.app (G.obj K)) ≫
+          sf'.inv.app (U.obj (G.obj K)))
+    (he : rC'.map e = su.hom.app (G.obj K) ≫ Ut.map (sg.hom.app K) ≫
+      mt.app (rD.obj K) ≫ Gt'.map (sv.inv.app K) ≫ sg'.inv.app (V.obj K))
+    (hc : rD.map (ad.counit.app K) = sf.hom.app (G.obj K) ≫
+      Ft.map (sg.hom.app K) ≫ adt.counit.app (rD.obj K))
+    (hc' : rD'.map (ad'.counit.app (V.obj K)) = sf'.hom.app (G'.obj (V.obj K)) ≫
+      Ft'.map (sg'.hom.app (V.obj K)) ≫ adt'.counit.app (rD'.obj (V.obj K)))
+    (ht : bt.app (Gt.obj (rD.obj K)) ≫ Ft'.map (mt.app (rD.obj K)) ≫
+      adt'.counit.app (Vt.obj (rD.obj K)) = Vt.map (adt.counit.app (rD.obj K))) :
+    beta.hom.app (G.obj K) ≫ F'.map e ≫ ad'.counit.app (V.obj K) =
+      V.map (ad.counit.app K) := by
+  apply rD'.map_injective
+  simp only [Functor.map_comp]
+  rw [hc']
+  have hn : rD'.map (F'.map e) ≫ sf'.hom.app (G'.obj (V.obj K)) =
+      sf'.hom.app (U.obj (G.obj K)) ≫ Ft'.map (rC'.map e) :=
+    sf'.hom.naturality e
+  rw [reassoc_of% hn]
+  simp only [Functor.comp_obj]
+  rw [he]
+  apply (cancel_mono (sv.hom.app K)).1
+  rw [hb]
+  simp only [Functor.map_comp, Category.assoc, Iso.inv_hom_id_app_assoc]
+  have hu : Ft'.map (su.inv.app (G.obj K)) ≫ Ft'.map (su.hom.app (G.obj K)) =
+      𝟙 _ := by rw [← Ft'.map_comp, su.inv_hom_id_app, Ft'.map_id]
+  have hg : Ft'.map (sg'.inv.app (V.obj K)) ≫
+      Ft'.map (sg'.hom.app (V.obj K)) = 𝟙 _ := by
+    rw [← Ft'.map_comp, sg'.inv_hom_id_app, Ft'.map_id]
+  rw [reassoc_of% hu, reassoc_of% hg]
+  have hcounit : Ft'.map (Gt'.map (sv.inv.app K)) ≫
+      adt'.counit.app (rD'.obj (V.obj K)) =
+      adt'.counit.app (Vt.obj (rD.obj K)) ≫ sv.inv.app K :=
+    adt'.counit.naturality (sv.inv.app K)
+  rw [reassoc_of% hcounit]
+  simp only [Iso.inv_hom_id_app]
+  slice_lhs 3 4 => exact (bt.naturality (sg.hom.app K)).symm
+  simp only [Functor.comp_map, Functor.comp_obj, Category.assoc, Category.comp_id]
+  rw [ht]
+  rw [← Vt.map_comp, ← Vt.map_comp, ← hc]
+  exact (sv.hom.naturality (ad.counit.app K)).symm
+
+private def integralExchange (hb : IsIso (SpTowerMate.beta l E b o q a ex)) :
+    support l E b o q ex laws s.support ⋙ pullback l E v s.pull'.closed ≅
+      pullback l E u' s.pull.closed ⋙ support l E b o q ex laws s.support' := by
+  letI := hb
+  let F := support l E b o q ex laws s.support
+  let F' := support l E b o q ex laws s.support'
+  let U := pullback l E u' s.pull.closed
+  let V := pullback l E v s.pull'.closed
+  let Ft := SpTowerGluing.support l E b o q c a.support_closed
+  let Ft' := SpTowerGluing.support l E b o q (c.ofIsPullback sq) a.support_closed'
+  let Ut := SpTowerMate.U l E b o q a
+  let Vt := SpTowerMate.V l E b o q a
+  let rX := reduction l E b o q ex laws s.rX
+  let rY' := reduction l E b o q ex laws s.rY'
+  let e : (F ⋙ V) ⋙ rY' ≅ (U ⋙ F') ⋙ rY' :=
+    Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft F s.pull'.comparison ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight s.support.leftComparison Vt ≪≫
+      Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft rX (asIso (SpTowerMate.beta l E b o q a ex)) ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight s.pull.comparison.symm Ft' ≪≫
+      Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft U s.support'.leftComparison.symm ≪≫
+      (Functor.associator _ _ _).symm
+  exact (s.rY'.fullyFaithful.whiskeringRight _).preimageIso e
+
+private theorem integralExchange_reduction
+    (hb : IsIso (SpTowerMate.beta l E b o q a ex)) (M : Constructible l E X) :
+    (reduction l E b o q ex laws s.rY').map
+        ((integralExchange l E b o q ex laws a s hb).hom.app M) =
+      s.pull'.comparison.hom.app _ ≫
+        (SpTowerMate.V l E b o q a).map (s.support.leftComparison.hom.app M) ≫
+        (SpTowerMate.beta l E b o q a ex).app
+          ((reduction l E b o q ex laws s.rX).obj M) ≫
+        (SpTowerGluing.support l E b o q (c.ofIsPullback sq) a.support_closed').map
+          (s.pull.comparison.inv.app M) ≫ s.support'.leftComparison.inv.app _ := by
+  unfold integralExchange
+  simp only [Functor.FullyFaithful.preimageIso_hom,
+    Functor.FullyFaithful.whiskeringRight_preimage_app,
+    Functor.FullyFaithful.map_preimage, Iso.trans_hom, NatTrans.comp_app,
+    Functor.associator_hom_app, Functor.associator_inv_app,
+    Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app, Iso.symm_hom,
+    asIso_hom, Category.id_comp, Category.comp_id]
+  exact Category.id_comp _
+
+private def reconstructed (hb : IsIso (SpTowerMate.beta l E b o q a ex))
+    (K : Constructible l E Y) :
+    (pullback l E u' s.pull.closed).obj ((right l E b o q ex laws s.support).obj K) ⟶
+      (right l E b o q ex laws s.support').obj
+        ((pullback l E v s.pull'.closed).obj K) :=
+  s.rX'.fullyFaithful.preimage
+    (s.pull.comparison.hom.app _ ≫
+      (SpTowerMate.U l E b o q a).map (s.support.rightComparison.hom.app K) ≫
+      (SpTowerMate.mate l E b o q a ex hb).app
+        ((reduction l E b o q ex laws s.rY).obj K) ≫
+      a.right'.map (s.pull'.comparison.inv.app K) ≫ s.support'.rightComparison.inv.app _)
+
+private theorem reconstructed_isIso (hb : IsIso (SpTowerMate.beta l E b o q a ex))
+    (hm : IsIso (SpTowerMate.mate l E b o q a ex hb)) (K : Constructible l E Y) :
+    IsIso (reconstructed l E b o q ex laws a s hb K) := by
+  have := hm
+  let e := s.pull.comparison.app _ ≪≫
+    (SpTowerMate.U l E b o q a).mapIso (s.support.rightComparison.app K) ≪≫
+    asIso ((SpTowerMate.mate l E b o q a ex hb).app
+      ((reduction l E b o q ex laws s.rY).obj K)) ≪≫
+    a.right'.mapIso (s.pull'.comparison.app K).symm ≪≫
+    (s.support'.rightComparison.app _).symm
+  unfold reconstructed
+  simpa only [Functor.FullyFaithful.preimageIso_hom, e, Iso.trans_hom,
+    Iso.symm_hom, Functor.mapIso_hom, Iso.app_hom, Iso.app_inv, asIso_hom,
+    Category.assoc] using (s.rX'.fullyFaithful.preimageIso e).isIso_hom
+
+private theorem reconstructed_counit (hb : IsIso (SpTowerMate.beta l E b o q a ex))
+    (K : Constructible l E Y) :
+    (integralExchange l E b o q ex laws a s hb).hom.app
+        ((right l E b o q ex laws s.support).obj K) ≫
+      (support l E b o q ex laws s.support').map
+        (reconstructed l E b o q ex laws a s hb K) ≫
+      s.support'.adjunction.counit.app ((pullback l E v s.pull'.closed).obj K) =
+    (pullback l E v s.pull'.closed).map (s.support.adjunction.counit.app K) := by
+  have := hb
+  let F' := SpTowerGluing.support l E b o q (c.ofIsPullback sq) a.support_closed'
+  let U := SpTowerMate.U l E b o q a
+  let V := SpTowerMate.V l E b o q a
+  let Kt := (reduction l E b o q ex laws s.rY).obj K
+  have ht : (SpTowerMate.beta l E b o q a ex).app (a.right.obj Kt) ≫
+      F'.map ((SpTowerMate.mate l E b o q a ex hb).app Kt) ≫
+        a.adjunction'.counit.app (V.obj Kt) = V.map (a.adjunction.counit.app Kt) := by
+    have h := mateEquiv_counit a.adjunction a.adjunction'
+      (TwoSquare.mk _ _ _ _ (@inv _ _ _ _ (SpTowerMate.beta l E b o q a ex) hb)) Kt
+    change F'.map ((SpTowerMate.mate l E b o q a ex hb).app Kt) ≫
+      a.adjunction'.counit.app (V.obj Kt) = _ at h
+    rw [h]
+    simp [V]
+  have := s.rY'.fullyFaithful.faithful
+  apply counit_transport (reduction l E b o q ex laws s.rX)
+    (reduction l E b o q ex laws s.rY) (reduction l E b o q ex laws s.rX')
+    (reduction l E b o q ex laws s.rY') _ _ _ _ _ _ _ _ _ _ _ _
+    s.support.adjunction s.support'.adjunction a.adjunction a.adjunction'
+    s.support.leftComparison s.support'.leftComparison
+    s.support.rightComparison s.support'.rightComparison
+    s.pull.comparison s.pull'.comparison
+    (SpTowerMate.beta l E b o q a ex) (SpTowerMate.mate l E b o q a ex hb)
+    (integralExchange l E b o q ex laws a s hb) K
+    (reconstructed l E b o q ex laws a s hb K)
+  · exact integralExchange_reduction l E b o q ex laws a s hb _
+  · unfold reconstructed
+    exact s.rX'.fullyFaithful.map_preimage _
+  · exact s.support.counit K
+  · exact s.support'.counit _
+  · exact ht
+
+private theorem integralConclusion_of_data
+    (hb : IsIso (SpTowerMate.beta l E b o q a ex))
+    (hm : IsIso (SpTowerMate.mate l E b o q a ex hb)) :
+    IntegralConclusion l E b o q ex laws a hb := by
+  let beta := integralExchange l E b o q ex laws a s hb
+  refine ⟨s.rX, s.rY, s.rX', s.rY', s.geometry, s.openIso, s.support, s.support',
+    s.pull, s.pull', beta, integralExchange_reduction l E b o q ex laws a s hb, ?_⟩
+  intro K
+  let e := reconstructed l E b o q ex laws a s hb K
+  refine ⟨e, reconstructed_isIso l E b o q ex laws a s hb hm K, ?_, ?_, ?_⟩
+  · apply (s.support'.adjunction.homEquiv _ _).symm_apply_eq.mp
+    change (support l E b o q ex laws s.support').map e ≫
+      s.support'.adjunction.counit.app _ = _
+    apply (Iso.cancel_iso_hom_left
+      (beta.app ((right l E b o q ex laws s.support).obj K)) _ _).mp
+    simpa only [Iso.app_hom, Category.assoc, Iso.hom_inv_id_app_assoc] using
+      reconstructed_counit l E b o q ex laws a s hb K
+  · exact s.rX'.fullyFaithful.map_preimage _
+  · have he := congrArg (fun t ↦ t.hom) (s.rX'.fullyFaithful.map_preimage
+      (s.pull.comparison.hom.app _ ≫
+        (SpTowerMate.U l E b o q a).map (s.support.rightComparison.hom.app K) ≫
+        (SpTowerMate.mate l E b o q a ex hb).app
+          ((reduction l E b o q ex laws s.rY).obj K) ≫
+        a.right'.map (s.pull'.comparison.inv.app K) ≫ s.support'.rightComparison.inv.app _))
+    change (red l E (presentation l E b o q ex laws) X').map e.hom = _ at he
+    rw [← he]
+    exact ((redLimitAdjunction l E (presentation l E b o q ex laws) X'
+      s.rX'.limit).unit.naturality e.hom)
+
+/-- Tower exchange data, finite mates, and normalized source and target towers.
+Proof: pull back the chosen compactification. Finite constant-ring inverse image
+preserves constructibility and common cohomological and Tor intervals. The finite
+or algebraically closed base-field argument gives bounded etale-origin witnesses.
+The compact-support amplitude bound and tower shriek-level theorem restrict the
+actual compactification operations to the uniformly bounded ctf categories.
+Apply tower gluing to f and f' to obtain their right adjoints and the finite
+unit/counit-normalized comparison data. Open exchange and proper base change define
+beta, whose evaluations are the invertible finite compact-support exchange maps;
+conservativity of evaluation makes beta invertible. Transpose its inverse followed
+by the pulled-back counit. Evaluation of gluing units and counits identifies the
+result with the finite exceptional counit mate at every level. Finite smooth
+exceptional base change makes these maps invertible; evaluation conservativity
+and the full inclusion reflect this to the tower mate. The gluing coefficient
+counit formula gives the source and target reduction equations. The second mixed
+base-change identity intertwines the finite mates with coefficient reduction;
+finite mate naturality gives the full three-step reduction chain. Tower purity
+normalizes the exceptional source on normalized inputs; scalar/pullback compatibility
+preserves its normalization under u*. Naturality of the actual reductions transfers
+normalization across the tower mate isomorphism to the target. These constructions
+supply Data, Laws, both isomorphism assertions and both normalization conclusions.
+Source: proof clauses (1)--(2)
+(blueprint: stage3-sp-tower-exceptional-data-current).
+-/
+theorem tower_exceptional_base_change_data
+    (k : Type u) [Field k] (_hk : Finite k ∨ IsAlgClosed k)
+    (pchar : ℕ) (_hp : 0 < pchar) [CharP k pchar] (_hne : l ≠ pchar)
+    (X Y X' Y' : Over (Spec (CommRingCat.of k)))
+    [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
+    [IsSeparated Y.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
+    [IsSeparated X'.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
+    [IsSeparated Y'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom]
+    (f : X ⟶ Y) (v : Y' ⟶ Y) (u' : X' ⟶ X) (f' : X' ⟶ Y')
+    (sq : IsPullback u'.left f'.left f.left v.left)
+    (d : ℕ) [SmoothOfRelativeDimension d f.left] (c : Compactification f.left) :
+    ∃ a : SpTowerMate.Data l E b o q sq c,
+    ∃ hb : IsIso (SpTowerMate.beta l E b o q a ex),
+    ∃ hfinite : ∀ (n : ℕ)
+      (K : spFiniteConstructibleTorCategory Y.left (SpTowerShriek.R l E n)),
+      IsIso ((SpTowerMate.finiteExchange l E b (sq := sq) (c := c) n).app
+        ((a.levels.right n).obj K).obj),
+      SpTowerMate.Laws l E b o q a ex hb hfinite ∧
+      IsIso (SpTowerMate.mate l E b o q a ex hb) ∧
+      (∀ K : SpTowerCalculus.C l E b q Y.left,
+        IsSpNormalizedTower l E Y.left (q.abelian Y.left) K.obj →
+          IsSpNormalizedTower l E X'.left (q.abelian X'.left)
+              (((SpTowerMate.U l E b o q a).obj (a.right.obj K)).obj) ∧
+            IsSpNormalizedTower l E X'.left (q.abelian X'.left)
+              ((a.right'.obj ((SpTowerMate.V l E b o q a).obj K)).obj)) := by
+  sorry
+
+/-- The integral counit transpose is the inverse limit of the specified tower mate.
+Source: blueprint sk-prop-sp-purity-bc-tower.proof.md, clause (3)
+(blueprint: det-sp-tower-exceptional-bc).
+
+Proof: obtain the common geometric reduction coordinates. Lift the conjugated
+whole-tower exchange and mate through fully faithful reduction. The preimage
+isomorphism proves invertibility. The two reduced counit formulas and the tower
+mate-counit identity identify the lift with the integral adjunction transpose.
+Naturality of the actual reduction/limit unit proves the displayed limit equation.
+-/
+theorem tower_exceptional_base_change_integral
+    (k : Type u) [Field k] (_hk : Finite k ∨ IsAlgClosed k)
+    (pchar : ℕ) (_hp : 0 < pchar) [CharP k pchar] (_hne : l ≠ pchar)
+    (X Y X' Y' : Over (Spec (CommRingCat.of k)))
+    [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
+    [IsSeparated Y.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom]
+    [IsSeparated X'.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
+    [IsSeparated Y'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom]
+    (f : X ⟶ Y) (v : Y' ⟶ Y) (u' : X' ⟶ X) (f' : X' ⟶ Y')
+    (sq : IsPullback u'.left f'.left f.left v.left)
+    (d : ℕ) [SmoothOfRelativeDimension d f.left] (c : Compactification f.left)
+    (a : SpTowerMate.Data l E b o q sq c)
+    (hb : IsIso (SpTowerMate.beta l E b o q a ex))
+    (hfinite : ∀ (n : ℕ)
+      (K : spFiniteConstructibleTorCategory Y.left (SpTowerShriek.R l E n)),
+      IsIso ((SpTowerMate.finiteExchange l E b (sq := sq) (c := c) n).app
+        ((a.levels.right n).obj K).obj))
+    (hlaws : SpTowerMate.Laws l E b o q a ex hb hfinite)
+    (hm : IsIso (SpTowerMate.mate l E b o q a ex hb))
+    (hn : ∀ K : SpTowerCalculus.C l E b q Y.left,
+      IsSpNormalizedTower l E Y.left (q.abelian Y.left) K.obj →
+        IsSpNormalizedTower l E X'.left (q.abelian X'.left)
+            (((SpTowerMate.U l E b o q a).obj (a.right.obj K)).obj) ∧
+          IsSpNormalizedTower l E X'.left (q.abelian X'.left)
+            ((a.right'.obj ((SpTowerMate.V l E b o q a).obj K)).obj)) :
+    Module.finrank (Padic l) E = 1 → IntegralConclusion l E b o q ex laws a hb  := by
+  intro hdim
+  obtain ⟨s⟩ := tower_exceptional_base_change_integral_coordinates l E b o q ex laws
+    k _hk pchar _hp _hne X Y X' Y' f v u' f' sq d c a hb hfinite hlaws hm hn hdim
+  exact integralConclusion_of_data l E b o q ex laws a s hb hm
+
 /-- Compact-support base change, its exceptional counit transpose, all finite evaluations
 and reductions, preservation of normalized towers, and integral inverse-limit descent.
 Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/sec-smooth-purity/
@@ -282,6 +581,12 @@ theorem tower_exceptional_base_change_statement
             IsSpNormalizedTower l E X'.left (q.abelian X'.left)
               ((a.right'.obj ((SpTowerMate.V l E b o q a).obj K)).obj)) ∧
       (Module.finrank (Padic l) E = 1 → IntegralConclusion l E b o q ex laws a hb) := by
-  sorry
+  obtain ⟨a, hb, hfinite, hlaws, hm, hn⟩ :=
+    tower_exceptional_base_change_data l E b o q ex k _hk pchar _hp _hne
+      X Y X' Y' f v u' f' sq d c
+  refine ⟨a, hb, hfinite, hlaws, hm, hn, ?_⟩
+  intro hdim
+  exact tower_exceptional_base_change_integral l E b o q ex laws k _hk pchar _hp _hne
+    X Y X' Y' f v u' f' sq d c a hb hfinite hlaws hm hn hdim
 
 end AlgebraicGeometry.ProEtale.TowerExceptionalBaseChange

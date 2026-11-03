@@ -48,6 +48,9 @@ import Mathlib.CategoryTheory.Sites.LocalProperties
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerStarComp
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedComp
 import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
+public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteClassArbitraryBase
+public import WeilConjectures.SixFunctors.Etale.Derived.ClosedImmersionUpperShriek
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 
 /-!
 # The Brown exceptional orientation of the affine-line zero section
@@ -177,7 +180,7 @@ comparison to an injective resolution; the induced map is ordinaryFiniteClass. -
 theorem classToAbelian_bijective (T : Scheme.{u})
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} A))) :
     Function.Bijective (Etale.ordinaryFiniteClass (ULift.{u + 1} A) T F 1) := by
-  sorry
+  exact Etale.ordinaryFiniteClass_bijective_arbitraryBase (ULift.{u + 1} A) T F 1
 
 /-- The genuine Kummer boundary of a unit, extended by z to 1 tensor z.
 Its lift is through a specified bijection, so no generator is selected arbitrarily.
@@ -209,7 +212,10 @@ Proof: the common zero locus of the single coordinate is the zero section. -/
 theorem complement (Y : Scheme.{u}) :
     Set.range (PurityFiniteSetting.zeroSection Y).base =
       (Set.range (PurityFiniteSetting.openImmersion Y).base)ᶜ := by
-  sorry
+  change Set.range (AffineSpace.zeroSection (ULift.{u} (Fin 1)) Y).base =
+    (Set.range ((AffineSpace (ULift.{u} (Fin 1)) Y).basicOpen
+      (AffineSpace.coord Y (ULift.up 0))).ι.base)ᶜ
+  rw [AffineSpace.range_basicOpen_ι_coord, compl_compl]
 
 /-- The recorded geometric zero section is closed. Source: Step 1
 (blueprint: det-prop-a1). -/
@@ -263,7 +269,23 @@ theorem etaleValuePlus (N : ℕ) (hA : (N : ULift.{u + 1} A) = 0) (Y : Scheme.{u
       (((Etale.rightDerivedUpperShriek (ULift.{u + 1} A)
         (PurityFiniteSetting.zeroSection Y)).obj
           (root A N hA (PurityFiniteSetting.Line Y)))⟦q⟧) := by
-  sorry
+  let i := PurityFiniteSetting.zeroSection Y
+  let j := PurityFiniteSetting.openImmersion Y
+  let : IsClosedImmersion i := zeroSectionClosed Y
+  let : IsOpenImmersion j :=
+    inferInstanceAs (IsOpenImmersion ((PurityFiniteSetting.Line Y).basicOpen
+      (PurityFiniteSetting.coordinate Y)).ι)
+  let F := Etale.closedUpperShriek (ModuleCat.{u + 1} (ULift.{u + 1} A)) i j
+  let e := ((Etale.derivedLowerStarClosedUpperShriekAdjunction i j (complement Y)).ofNatIsoLeft
+    (Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar
+      (ModuleCat.{u + 1} (ULift.{u + 1} A)) i).symm).rightAdjointUniq
+        (Etale.rightDerivedUpperShriekAdjunction (ULift.{u + 1} A) i)
+  let := F.isGE_rightDerivedFunctor_obj_singleFunctor
+    (Scheme.finiteEtaleTateLine (PurityFiniteSetting.Line Y) N (ULift.{u + 1} A) hA)
+  have h : DerivedCategory.TStructure.t.plus (F.rightDerivedFunctor.obj
+      (root A N hA (PurityFiniteSetting.Line Y))) := ⟨0, inferInstance⟩
+  have h' := DerivedCategory.TStructure.t.plus.prop_of_iso (e.app _) h
+  exact (DerivedCategory.TStructure.t.plus.prop_shift_iff_of_isStableUnderShift _ q).mpr h'
 
 /-- The finite exceptional object in ordinary etale coordinates.
 Source: Step 1, theta comparison (blueprint: det-prop-a1). -/
@@ -276,7 +298,8 @@ Source: Step 1 (blueprint: det-prop-a1).
 Proof: transport etaleValuePlus at zero along the canonical zero-shift isomorphism. -/
 theorem etaleValueUnshiftedPlus (N : ℕ) (hA : (N : ULift.{u + 1} A) = 0)
     (Y : Scheme.{u}) : DerivedCategory.TStructure.t.plus (etaleValue A N hA Y) := by
-  sorry
+  exact DerivedCategory.TStructure.t.plus.prop_of_iso
+    ((shiftFunctorZero _ ℤ).app _) (etaleValuePlus A N hA Y 0)
 
 /-- Its unshifted transported counit, formed from chi, exact site comparison, and the
 ordinary etale counit. This fixes theta and rules out rescaling it by a unit.
@@ -359,6 +382,17 @@ def globalSection (T : Scheme.{u}) (M : DerivedCategory (Internal A T))
       ((((encoding A T).ordinary.trans (encoding A T).fixed).counitIso.inv.app _).hom.app
         (op (Scheme.ProEt.mk (𝟙 T))) (one A T _))
 
+private theorem one_naturality (T : Scheme.{u}) {W W' : T.ProEtᵒᵖ}
+    (f : W ⟶ W') :
+    ((comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) T).obj
+      (Etale.ordinaryFiniteConstant (ULift.{u + 1} A) T)).obj.map f (one A T W) =
+        one A T W' := by
+  let M := ModuleCat.of (ULift.{u + 1} A) (ULift.{u + 1} A)
+  let η := toSheafify (Scheme.ProEt.topology T) ((Functor.const T.ProEtᵒᵖ).obj M) ≫
+    ((constantSheafCompComparisonUpperStarIso
+      (ModuleCat.{u + 1} (ULift.{u + 1} A)) T).inv.app M).hom
+  exact (ConcreteCategory.congr_hom (η.naturality f) (1 : ULift.{u + 1} A)).symm
+
 /-- The intrinsic coefficient-unit map is uniquely fixed by its value one in every
 section. Its value is the actual associated-module-sheafification unit, not a basis.
 Source: Steps 4--5, ordinary coefficient realization (blueprint: det-prop-a1).
@@ -372,7 +406,24 @@ theorem intrinsicUnitMap_existsUnique (T : Scheme.{u}) :
         (Scheme.sfRealizationUnit A T
           ((comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) T).obj
             (Etale.ordinaryFiniteConstant (ULift.{u + 1} A) T))).app W (one A T W) := by
-  sorry
+  let F := (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) T).obj
+    (Etale.ordinaryFiniteConstant (ULift.{u + 1} A) T)
+  let M := (finiteCoefficientIntrinsicComparison T A).obj
+    (Etale.ordinaryFiniteConstant (ULift.{u + 1} A) T)
+  let η := Scheme.sfRealizationUnit A T F
+  let t : M.sections := M.val.sectionsMk (fun W ↦ (η.app W) (one A T W)) (by
+    intro W W' f
+    exact (PresheafOfModules.naturality_apply η f (one A T W)).symm.trans
+      (congrArg (fun z ↦ η.app W' z) (one_naturality A T f)))
+  refine ⟨M.unitHomEquiv.symm t, ?_, ?_⟩
+  · intro W
+    exact congrArg (fun s : M.sections ↦ s.val W) (M.unitHomEquiv.apply_symm_apply t)
+  · intro f hf
+    apply M.unitHomEquiv.injective
+    apply PresheafOfModules.sections_ext
+    intro W
+    exact (hf W).trans (congrArg (fun s : M.sections ↦ s.val W)
+      (M.unitHomEquiv.apply_symm_apply t)).symm
 
 /-- The realized constant-ring equivalence, derived termwise.
 Source: Step 5, the recorded finite exceptional functor (blueprint: det-prop-a1). -/
@@ -406,7 +457,10 @@ theorem originUnit_isIso (T : Scheme.{u})
     (K : DerivedCategory (Sheaf T.smallEtaleTopology
       (ModuleCat.{u + 1} (ULift.{u + 1} A)))) (hK : DerivedCategory.TStructure.t.plus K) :
     IsIso (originUnit A T K) := by
-  sorry
+  let := isIso_derivedComparisonAdjunction_unit_app
+    (ModuleCat.{u + 1} (ULift.{u + 1} A)) T K hK
+  dsimp only [originUnit]
+  infer_instance
 
 /-- Canonical etale Hom coordinates of a proposed native orientation after theta.
 Source: Steps 1 and 5 (blueprint: det-prop-a1). -/
@@ -423,6 +477,28 @@ def etaleClass (N : ℕ) (hA : (N : ULift.{u + 1} A) = 0) (Y : Scheme.{u})
         ((encoding A Y).fixedDerived.functor.commShiftIso (2 : ℤ)).hom.app _ ≫
         (nativeIso A Y _).hom⟦(2 : ℤ)⟧' ≫
         ((nu A Y).commShiftIso (2 : ℤ)).inv.app _)
+
+private theorem etaleClass_transport (N : ℕ) (hA : (N : ULift.{u + 1} A) = 0)
+    (Y : Scheme.{u}) {M M' : DerivedCategory (Internal A Y)} (e : M ≅ M')
+    (theta : M' ≅ native A Y (etaleValue A N hA Y))
+    (m : unit A Y ⟶ M⟦(2 : ℤ)⟧) :
+    etaleClass A N hA Y M (e ≪≫ theta) m =
+      etaleClass A N hA Y M' theta (m ≫ e.hom⟦(2 : ℤ)⟧') := by
+  simp only [etaleClass, Iso.trans_hom, Functor.map_comp, Category.assoc]
+
+private theorem comp_shift_inv_hom (Y : Scheme.{u})
+    {M M' : DerivedCategory (Internal A Y)} (e : M ≅ M')
+    (m : unit A Y ⟶ M'⟦(2 : ℤ)⟧) :
+    (m ≫ e.inv⟦(2 : ℤ)⟧') ≫ e.hom⟦(2 : ℤ)⟧' = m := by
+  simp only [Category.assoc, Iso.map_inv_hom_id, Category.comp_id]
+
+private theorem etaleClass_transport_inv (N : ℕ) (hA : (N : ULift.{u + 1} A) = 0)
+    (Y : Scheme.{u}) {M M' : DerivedCategory (Internal A Y)} (e : M ≅ M')
+    (theta : M' ≅ native A Y (etaleValue A N hA Y))
+    (m : unit A Y ⟶ M'⟦(2 : ℤ)⟧) :
+    etaleClass A N hA Y M (e ≪≫ theta) (m ≫ e.inv⟦(2 : ℤ)⟧') =
+      etaleClass A N hA Y M' theta m := by
+  rw [etaleClass_transport, comp_shift_inv_hom]
 
 /-- The supported representative in the shifted-coefficient localization triangle.
 Source: Steps 3 and 6 (blueprint: det-prop-a1). -/
@@ -442,7 +518,15 @@ cancel the cartesian lower square to obtain the square of zero sections. -/
 theorem zeroSectionSquare {X Y : Scheme.{u}} (f : X ⟶ Y) :
     IsPullback f (PurityFiniteSetting.zeroSection X) (PurityFiniteSetting.zeroSection Y)
       (AffineSpace.map (ULift.{u} (Fin 1)) f) := by
-  sorry
+  have h : IsPullback f
+      (AffineSpace.zeroSection (ULift.{u} (Fin 1)) X ≫
+        (AffineSpace (ULift.{u} (Fin 1)) X ↘ X))
+      (AffineSpace.zeroSection (ULift.{u} (Fin 1)) Y ≫
+        (AffineSpace (ULift.{u} (Fin 1)) Y ↘ Y)) f := by
+    simpa using
+      (IsPullback.of_horiz_isIso (CommSq.mk (show 𝟙 X ≫ f = f ≫ 𝟙 Y by simp))).flip
+  exact IsPullback.of_bot h (AffineSpace.zeroSection_comp_map f).symm
+    (AffineSpace.isPullback_map f)
 
 /-- The normalized point condition compares with an independently constructed coordinate
 Kummer boundary over the geometric point. Restriction uses the canonical counit mate for
@@ -474,7 +558,7 @@ Source: Step 1 (blueprint: det-prop-a1).
 Proof: the derived single functor into the plus category gives this membership. -/
 theorem rootPlus (N : ℕ) (hA : (N : ULift.{u + 1} A) = 0) (T : Scheme.{u}) :
     DerivedCategory.TStructure.t.plus (root A N hA T) := by
-  sorry
+  exact ⟨0, inferInstance⟩
 
 end FiniteCoordinates
 
@@ -702,7 +786,9 @@ Source: det-def-sf-operations (vi) (blueprint: det-prop-a1).
 Proof: apply BaseFieldFiniteCD.of_finite or of_isAlgClosed according to hk. -/
 theorem baseFiniteCD (l : ℕ) [Fact l.Prime] (k : Type u) [Field k]
     (hk : Finite k ∨ IsAlgClosed k) : BaseFieldFiniteCD l k := by
-  sorry
+  rcases hk with h | h
+  · exact BaseFieldFiniteCD.of_finite l k
+  · exact BaseFieldFiniteCD.of_isAlgClosed l k
 
 /-- The same orientation stated literally on the published ctfExceptionalInverseImage.
 The general-field interface above has a canonical adjunction-compatible isomorphism
@@ -772,7 +858,169 @@ theorem detPropA1_recorded (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Alge
           ∀ phi : unit B Y ⟶ M⟦(2 : ℤ)⟧,
             GeometricallyNormalized B (l ^ n) (pow_pos (Fact.out : l.Prime).pos n) hA Y hr
               (etaleClass B (l ^ n) hA Y M theta phi) ↔ phi = pur := by
-  sorry
-
+  classical
+  let B := Padic.coefficientExtensionRing l E n
+  let := Padic.finite_coefficientExtensionRing l E n hn
+  let : TopologicalSpace B := ⊥
+  let := discreteTopology_bot B
+  let YO : Over (Spec (.of k)) := Over.mk (Y ↘ Spec (.of k))
+  let : LocallyOfFiniteType YO.hom := inferInstanceAs
+    (LocallyOfFiniteType (Y ↘ Spec (.of k)))
+  let : QuasiCompact YO.hom := inferInstanceAs (QuasiCompact (Y ↘ Spec (.of k)))
+  let : IsSeparated YO.hom := inferInstanceAs (IsSeparated (Y ↘ Spec (.of k)))
+  let XO : Over (Spec (.of k)) :=
+    Over.mk (PurityFiniteSetting.lineProjection Y ≫ (Y ↘ Spec (.of k)))
+  let : LocallyOfFiniteType XO.hom := inferInstanceAs (LocallyOfFiniteType
+    ((AffineSpace (ULift.{u} (Fin 1)) Y ↘ Y) ≫ (Y ↘ Spec (.of k))))
+  let : QuasiCompact XO.hom := inferInstanceAs (QuasiCompact
+    ((AffineSpace (ULift.{u} (Fin 1)) Y ↘ Y) ≫ (Y ↘ Spec (.of k))))
+  let : IsSeparated XO.hom := inferInstanceAs (IsSeparated
+    ((AffineSpace (ULift.{u} (Fin 1)) Y ↘ Y) ≫ (Y ↘ Spec (.of k))))
+  let s : YO ⟶ XO := Over.homMk (PurityFiniteSetting.zeroSection Y) (by
+    change AffineSpace.zeroSection (ULift.{u} (Fin 1)) Y ≫
+      ((AffineSpace (ULift.{u} (Fin 1)) Y ↘ Y) ≫ (Y ↘ Spec (.of k))) = _
+    rw [← Category.assoc, AffineSpace.zeroSection_comp_over, Category.id_comp]
+    rfl)
+  let : IsClosedImmersion s.left := zeroSectionClosed Y
+  obtain ⟨hA, hr, hK, theta, hc, hv, hg, hs, pur, hb, hi, hsi, hnrm, hu⟩ :=
+    detPropA1 l E n hn k Y
+  have hpow : (l ^ n : B) = 0 := by
+    have h := congrArg (fun z : ULift.{u + 1} B ↦ z.down) hA
+    simpa only [ULift.pow_down, ULift.down_natCast, ULift.zero_down, Nat.cast_pow] using h
+  let hB : IsLocalizingAdmissibleCoefficient l (coefficient B) := by
+    let C := Shrink.{0} B
+    let : TopologicalSpace C := ⊥
+    let : DiscreteTopology C := ⟨rfl⟩
+    let : IsTopologicalRing C := by infer_instance
+    let e : B ≃+* C := (Shrink.ringEquiv.{0} B).symm
+    let h : Profinite.continuousCoefficientRingSheaf B ⟶
+        Profinite.continuousMapRingSheaf.{u} C :=
+      ⟨{ app := fun S ↦ RingCat.ofHom
+          (ULift.ringEquiv.symm.toRingHom.comp
+            ((e.toRingHom.compLeftContinuous S.unop (continuous_of_discreteTopology)).comp
+              ULift.ringEquiv.toRingHom))
+         naturality := by intros; rfl }⟩
+    let v : Profinite.continuousMapRingSheaf.{u} C ⟶
+        Profinite.continuousCoefficientRingSheaf B :=
+      ⟨{ app := fun S ↦ RingCat.ofHom
+          (ULift.ringEquiv.symm.toRingHom.comp
+            ((e.symm.toRingHom.compLeftContinuous S.unop (continuous_of_discreteTopology)).comp
+              ULift.ringEquiv.toRingHom))
+         naturality := by intros; rfl }⟩
+    let E : Profinite.continuousCoefficientRingSheaf B ≅
+        Profinite.continuousMapRingSheaf.{u} C :=
+      { hom := h
+        inv := v
+        hom_inv_id := by
+          ext S f
+          apply ULift.ext
+          apply ContinuousMap.ext
+          intro x
+          exact e.symm_apply_apply _
+        inv_hom_id := by
+          ext S f
+          apply ULift.ext
+          apply ContinuousMap.ext
+          intro x
+          exact e.apply_symm_apply _ }
+    let E' := (sheafCompose (coherentTopology Profinite.{u})
+      (forget₂ RingCat.{u + 1} Ab.{u + 1})).mapIso E
+    let : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
+    let eh := presheaf_enrichedHoms_exist
+      (C := Profinite.{u}) (A := Ab.{u + 1})
+    let : ∀ (F G : Profinite.{u}ᵒᵖ ⥤ Ab.{u + 1}),
+      Enriched.FunctorCategory.HasEnrichedHom Ab.{u + 1} F G := eh.1
+    let : ∀ (F G : Profinite.{u}ᵒᵖ ⥤ Ab.{u + 1}),
+      Enriched.FunctorCategory.HasFunctorEnrichedHom Ab.{u + 1} F G := eh.2
+    let : ((coherentTopology Profinite.{u}).W (A := Ab.{u + 1})).IsMonoidal :=
+      GrothendieckTopology.W.monoidal
+    let hmon : IsMonHom E'.hom := Sheaf.isMonHom_sheafCompose_map _ E.hom
+    refine Or.inl ⟨C, inferInstance, inferInstance, inferInstance, inferInstance,
+      inferInstance, ?_, ⟨Mon.mkIso' E'⟩⟩
+    let hn : ∀ a : B, (l ^ n) • a = 0 := fun a ↦ by
+      rw [nsmul_eq_mul, Nat.cast_pow, hpow, zero_mul]
+    refine ⟨n, fun b ↦ ?_⟩
+    have hn' : (l ^ n : ℕ) • (1 : C) = 0 := by
+      simpa only [map_nsmul, map_one, map_zero] using congrArg e (hn 1)
+    simpa only [nsmul_eq_mul, mul_one, zero_mul] using congrArg (fun x : C ↦ x * b) hn'
+  refine ⟨hA, hr, hB, hK, ?_⟩
+  let K : ConstantModelConstructibleFiniteTor (coefficient B)
+      (PurityFiniteSetting.Line Y) := ⟨_, hK⟩
+  let e := ((constantModelBoundedConstructible (coefficient B) Y ⊓
+      DerivedCategory.finiteTorAmplitude _).ι).mapIso
+    ((CondensedRing.finiteClosedCtfExceptionalIso B l k s ⟨n, hpow⟩
+      (baseFiniteCD l k hk) hB).app K)
+  refine ⟨e ≪≫ theta, ?_, ?_, ?_, ?_, ?_⟩
+  · rw [Iso.trans_hom, Functor.map_comp, Category.assoc, hc]
+    exact congrArg (fun f ↦ f.hom)
+      (Adjunction.rightAdjointUniq_hom_app_counit
+        (CondensedRing.ctfExceptionalAdjunction (coefficient B) l k
+          (baseFiniteCD l k hk) s hB)
+        (CondensedRing.finiteClosedCtfAdjunction B l k s ⟨n, hpow⟩) K)
+  · intro q hq
+    exact (hv q hq).of_iso
+      ((DerivedCategory.homologyFunctor (Internal B Y) q).mapIso
+        ((shiftFunctor _ (2 : ℤ)).mapIso e))
+  · let es := (shiftFunctor _ (2 : ℤ)).mapIso e
+    let eh := Iso.homCongr (Iso.refl (unit B Y)) es
+    let E := ((encoding B Y).ordinary.trans (encoding B Y).fixed).functor
+    let h := E.mapIso ((DerivedCategory.homologyFunctor (Internal B Y) 0).mapIso es)
+    let W := op (Scheme.ProEt.mk (𝟙 Y))
+    have hbij := ConcreteCategory.bijective_of_isIso (h.hom.hom.app W)
+    have hcomm (m : unit B Y ⟶ ((CondensedRing.ctfExceptionalInverseImage (coefficient B) l k
+        (baseFiniteCD l k hk) s hB).obj K).obj⟦(2 : ℤ)⟧) :
+        globalSection B Y _ (eh m) = h.hom.hom.app W (globalSection B Y _ m) := by
+      simp [globalSection, sheafMap, eh, Iso.homCongr, E, h, Functor.map_comp,
+        Category.assoc, W]
+    constructor
+    · intro a b hab
+      apply eh.injective
+      apply hg.1
+      exact (hcomm a).trans ((congrArg (fun x ↦ h.hom.hom.app W x) hab).trans
+        (hcomm b).symm)
+    · intro x
+      obtain ⟨y, hy⟩ := hg.2 (h.hom.hom.app W x)
+      obtain ⟨z, rfl⟩ := eh.surjective y
+      refine ⟨z, hbij.1 ?_⟩
+      exact (hcomm z).symm.trans hy
+  · let eh := Iso.homCongr (Iso.refl (unit B Y)) ((shiftFunctor _ (2 : ℤ)).mapIso e)
+    have heq : supportedClass l E n hn k Y (l ^ n) hA _ (e ≪≫ theta) =
+        supportedClass l E n hn k Y (l ^ n) hA _ theta ∘ eh := by
+      funext m
+      simp only [Function.comp_apply, supportedClass, etaleClass_transport, eh,
+        Iso.homCongr_apply, Iso.refl_inv, Category.id_comp]
+      rfl
+    exact heq.symm ▸ hs.comp eh.bijective
+  · refine ⟨pur ≫ e.inv⟦(2 : ℤ)⟧', ?_, ?_, ?_, ?_, ?_⟩
+    · simp only [supportedClass, etaleClass_transport_inv, ObjectProperty.ι_obj]
+      exact hb
+    · let := hi
+      infer_instance
+    · let := hsi
+      simpa [sheafMap, Functor.map_comp, Category.assoc] using
+        (inferInstance : IsIso (sheafMap B Y _ pur ≫
+          (DerivedCategory.homologyFunctor (Internal B Y) 0).map (e.inv⟦(2 : ℤ)⟧')))
+    · simp only [etaleClass_transport_inv, ObjectProperty.ι_obj]
+      exact hnrm
+    · intro phi
+      have ht : GeometricallyNormalized B (l ^ n)
+          (pow_pos (Fact.out : l.Prime).pos n) hA Y hr
+          (etaleClass B (l ^ n) hA Y _ (e ≪≫ theta) phi) ↔
+          GeometricallyNormalized B (l ^ n)
+          (pow_pos (Fact.out : l.Prime).pos n) hA Y hr
+          (etaleClass B (l ^ n) hA Y _ theta (phi ≫ e.hom⟦(2 : ℤ)⟧')) :=
+        iff_of_eq (congrArg (GeometricallyNormalized B (l ^ n)
+          (pow_pos (Fact.out : l.Prime).pos n) hA Y hr)
+          (etaleClass_transport B (l ^ n) hA Y e theta phi))
+      refine ht.trans ((hu _).trans ?_)
+      constructor
+      · intro h
+        calc
+          phi = (phi ≫ e.hom⟦(2 : ℤ)⟧') ≫ e.inv⟦(2 : ℤ)⟧' := by
+            simp only [Category.assoc, Iso.map_hom_inv_id, Category.comp_id]
+          _ = pur ≫ e.inv⟦(2 : ℤ)⟧' := congrArg (fun f ↦ f ≫ e.inv⟦(2 : ℤ)⟧') h
+      · intro h
+        exact (congrArg (fun f ↦ f ≫ e.hom⟦(2 : ℤ)⟧') h).trans
+          (comp_shift_inv_hom B Y e pur)
 
 end WeilConjectures.AffineLineOrientation

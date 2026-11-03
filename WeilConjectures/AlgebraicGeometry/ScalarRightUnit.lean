@@ -170,6 +170,19 @@ public import WeilConjectures.SecSmoothPurity.CochainCoefficientArrowsSupplement
 public import WeilConjectures.SmoothPurity.ChangeOfRingsKFlatIndependentCoefficients
 public import WeilConjectures.Algebra.Homology.ScalarHomOrdinary.ScalarHomOrdinaryTensorComparisonSupplement
 public import WeilConjectures.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
+public import WeilConjectures.AlgebraicGeometry.ScalarIdentification.ScalarRightUnitEncoding
+public import WeilConjectures.AlgebraicGeometry.ScalarRightUnitNative
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntTensorProjection
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.AdmissibleTensorConstructibility
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixFiniteGeneration
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixNonfiniteGeneration
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixPerfectExtension
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixCtf
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntTensorProjection
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.AdmissibleTensorConstructibility
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixFiniteGeneration
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixNonfiniteGeneration
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixPerfectExtension
 
 /-!
 # Pro-etale scalar-extension right unit
@@ -202,7 +215,8 @@ Proof: the small pro-etale site of `T` has objects and morphisms in `Type u`, he
 in `Type (u + 1)`; it is therefore essentially small in that universe, being
 equivalent to itself (`essentiallySmallSelf`). -/
 theorem currentScalarSmall (T : Scheme.{u}) : EssentiallySmall.{u + 1} T.ProEt := by
-  sorry
+  exact essentiallySmallSelf.{0, u, u + 1} _
+
 attribute [local instance] currentScalarSmall
 
 /-- Ordinary extension in the current ringed-site universal pair, fixed on objects
@@ -225,7 +239,10 @@ theorem currentScalarOrdinary_obj {A B : Type u} [CommRing A] [CommRing B]
     (M : proEtaleRingModules T (proEtaleConstantRing T A)) :
     (currentScalarOrdinary φ T).obj M =
       SheafOfModules.changeOfRings (proEtaleConstantRingMap (T := T) φ) M := by
-  sorry
+  exact (SheafOfModules.derivedChangeOfRingsIndependentCoefficients.{u + 2, u + 1, u + 1, u}
+    (C := T.ProEt) (J := ProEt.topology T)
+    (O := proEtaleConstantRing T A) (O' := proEtaleConstantRing T B)
+    (proEtaleConstantRingMap (T := T) φ)).choose_spec.choose M
 
 /-- Additivity from the same normalized current universal pair.
 Source: Stacks 03CY (blueprint: lem-pur-scalar-right-unit).
@@ -234,7 +251,11 @@ Proof: the current derived-change-of-rings theorem, whose ordinary functor is
 equivalently, sheafified balanced tensor with `B_T` is additive in the module. -/
 theorem currentScalarOrdinaryAdditive {A B : Type u} [CommRing A] [CommRing B]
     (φ : A →+* B) (T : Scheme.{u}) : (currentScalarOrdinary φ T).Additive := by
-  sorry
+  exact (SheafOfModules.derivedChangeOfRingsIndependentCoefficients.{u + 2, u + 1, u + 1, u}
+    (C := T.ProEt) (J := ProEt.topology T)
+    (O := proEtaleConstantRing T A) (O' := proEtaleConstantRing T B)
+    (proEtaleConstantRingMap (T := T) φ)).choose_spec.choose_spec.choose_spec.choose
+
 attribute [local instance] currentScalarOrdinaryAdditive
 
 /-- The ordinary identification with the explicit balanced extension functor.
@@ -320,7 +341,15 @@ theorem currentScalarCounit_isIso {A B : Type u} [CommRing A] [CommRing B]
     (P : CochainComplex (proEtaleRingModules T (proEtaleConstantRing T A)) ℤ)
     (hP : CochainComplex.IsKFlatIndependentCoefficients (R := proEtaleConstantRing T A) P) :
     IsIso (currentScalarCounit φ T P) := by
-  sorry
+  let h := (SheafOfModules.derivedChangeOfRingsIndependentCoefficients.{u + 2, u + 1, u + 1, u}
+    (C := T.ProEt) (J := ProEt.topology T)
+    (O := proEtaleConstantRing T A) (O' := proEtaleConstantRing T B)
+    (proEtaleConstantRingMap (T := T) φ)).choose_spec.choose_spec.choose_spec.choose_spec.2.2
+  have : IsIso ((currentScalarHomotopyCounit φ T).app
+      ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) :=
+    h.choose_spec.choose_spec.2.2 P hP
+  dsimp [currentScalarCounit, currentScalarCounitNat]
+  infer_instance
 
 /-- Canonical current-model computation iso, with its target-ring action retained.
 Source: Stacks 06YY (blueprint: lem-pur-scalar-right-unit). -/
@@ -345,7 +374,7 @@ theorem currentScalar_map {A B : Type u} [CommRing A] [CommRing B]
       currentScalarCounit φ T P ≫ DerivedCategory.Q.map
         ((CochainPullback.extend.{u + 1, u + 1, u}
           (proEtaleConstantRingMap (T := T) φ)).map v) := by
-  sorry
+  exact (currentScalarCounitNat φ T).naturality v
 
 /-- The published derived tensor is the SheafOfModules tensor localized with
 the RingedDerivedNative K-flat construction.
@@ -375,7 +404,8 @@ is additive in each variable; sheafification is additive. This is the published
 `SheafOfModules.cochainModulesPreadditive` for the ring `A_T`. -/
 theorem scalarModulesPreadditive (T : Scheme.{u}) (A : Type u) [CommRing A] :
     MonoidalPreadditive (proEtaleRingModules T (proEtaleConstantRing T A)) := by
-  sorry
+  exact SheafOfModules.cochainModulesPreadditive (proEtaleConstantRing T A)
+
 /-- Use the native K-flat derived tensor for the displayed tensor notation.
 Source: Stacks 06YS, 0FPT (blueprint: lem-pur-scalar-right-unit). -/
 @[instance_reducible]
@@ -731,27 +761,27 @@ including its representative and condensed/compact-support identifications.
 Source: blueprint det-sp-reduction-compatibilities, Proof (3), Tensor map
 (blueprint: lem-pur-scalar-right-unit).
 
-Proof (the node's single step): Apply
-lem-sf-module-object-ordinary-coefficient-equivalence to the finite discrete
-rings A and B. Its section-action equivalences, together with
-lem-sfb-internal-scalar-pullback-normalization, identify the actual internal
-scalar functor with scalarExtensionFunctor through their K-flat computation
-counits. On ordinary representatives the normalized balanced map is exactly
-scalarComplexTensor, and on the degree-zero ring it is scalarComplexUnit.
-The pure-section and total-summand equations determine the tensor comparisons
-of the equivalences; the localization equations determine their derived maps.
-Thus the tensor_equation and unit_equation identify the concrete maps defined
-above with scalarProjectionTensor and the actual oplax unit of
-scalarProjectionMonoidal. Specialize the right-unit coherence of these actual
-condensed maps from lem-fix-condensed-scalar-projection-coherence, and transport
-it through the same normalized identifications. This gives the displayed
-right-unit law for every unbounded K. The compact-support clause is the
-specified proper-counit-mate/open-balancing square with compactScalarProjection
-and reductionDirectImageComparison; no replacement comparison is chosen.
-K-flat resolutions and cancellation of their localized quasi-isomorphisms give
-the representative equations and independence from the resolutions used in the
-definition. The tensor and unit comparisons are invertible because their
-normalized representative maps are invertible. No flatness of B over A enters.
+Proof: restrict localization to flat-term K-flat representatives, where the
+actual scalar computation counits and native tensor comparisons are invertible.
+The balanced cochain tensor comparison descends through fully faithful
+restriction. Its representative square and naturality at the chosen resolution
+isomorphisms identify its components with precisely proEtaleScalarTensor.
+This proves the prescribed tensor normalization; the unit normalization follows
+by cancelling the target native unit isomorphism. Tensor closure of K-flatness
+makes both concrete comparisons invertible.
+
+Apply right-unit transport at a chosen representative and the coefficient unit.
+The cochain comparison obeys the ordinary right-unit equation, and its normalized
+localization squares give the desired equation after cancelling the computation
+counit. Naturality transports the equation to every unbounded derived object.
+
+Put the finite coefficient rings in their discrete topology. The normalized
+ordinary/total/derived encoding identifies the same concrete comparisons with
+the actual condensed tensor and unit maps. The compactification mate comparison
+identifies the specified proper counit mate followed by open balancing. Append
+the normalized condensed compact projection square for that same arrow and
+compactification. No arbitrary comparison is substituted for a specified map,
+and no flatness of B over A enters.
 -/
 theorem scalarRightUnit
     (ell : ℕ) [Fact ell.Prime]
@@ -773,6 +803,19 @@ theorem scalarRightUnit
      letI : DiscreteTopology B := ⟨rfl⟩
      ∃ d : ScalarIdentification.Transport φ,
        ScalarIdentification.CompactCompatible ell φ d) := by
-  sorry
+  obtain ⟨⟨a, ha⟩, hn⟩ := proEtaleScalarTensor_natural_normalized φ T
+  refine ⟨?_, hn, proEtaleScalarUnit_normalized φ T, ?_,
+    proEtaleScalarUnit_isIso φ T, ?_⟩
+  · intro K
+    exact proEtaleScalarTensor_rightUnit_of_normalized φ T a ha hn K
+  · intro K L
+    exact proEtaleScalarTensor_isIso φ T K L
+  · let : TopologicalSpace A := ⊥
+    let : TopologicalSpace B := ⊥
+    let : DiscreteTopology A := ⟨rfl⟩
+    let : DiscreteTopology B := ⟨rfl⟩
+    obtain ⟨d⟩ := ScalarIdentification.scalar_transport_exists (A := A) (B := B) φ
+    exact ⟨d, ScalarIdentification.compactCompatible_of_mates ell φ d
+      (ScalarIdentification.scalar_compactification_mates ell _hA _hB φ d)⟩
 
 end AlgebraicGeometry.ProEtale

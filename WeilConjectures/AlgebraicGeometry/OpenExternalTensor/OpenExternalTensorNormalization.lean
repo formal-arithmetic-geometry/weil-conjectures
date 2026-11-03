@@ -44,6 +44,18 @@ open WeilConjectures
 
 variable (A : Type (u + 1)) [CommRing A] [Finite A]
 
+/-- The canonical derived associator, evaluated before coefficient specialization.
+It is induced by the signed total tensor, as is the existing derived tensor itself.
+Source: Stacks 06YS and the associator in proof step 8
+(blueprint: lem-sf-open-external-tensor-normalization). -/
+def proetAssociator (V : Type v) [Category.{u + 1} V] [Abelian V]
+    [IsGrothendieckAbelian.{u + 1} V] [MonoidalCategory V] [MonoidalClosed V]
+    [MonoidalPreadditive V] [SymmetricCategory V] [Abelian.HasFunctorialFlatResolution V]
+    (Z : Scheme.{u}) (K L M : DerivedCategory (Sheaf (ProEt.topology Z) V)) :
+    ((ProEtale.derivedTensor V Z).obj (((ProEtale.derivedTensor V Z).obj K).obj L)).obj M ≅
+      ((ProEtale.derivedTensor V Z).obj K).obj (((ProEtale.derivedTensor V Z).obj L).obj M) :=
+  α_ K L M
+
 /-- Transport open extension along equality of its geometric map. Source: Stacks 03DI
 (blueprint: lem-sf-open-external-tensor-normalization). -/
 def shriekCongr {U V : Scheme.{u}} {f g : U ⟶ V}
@@ -205,6 +217,146 @@ def BinaryAssertion (d : Diagram j k T Tb) (K : FiniteD A X) (L : FiniteD A Y) :
           ((FiniteOpenProduct.pull A d.pb).obj ((finiteShriek A j).obj K))
           ((FiniteOpenProduct.pull A d.qb).obj ((finiteShriek A k).obj L)) ≫
         comparison A d.swap L K)
+
+/-- The projection equations for the two bracketings of the same triple product.
+No comparison is chosen as extra data: the equations are used only with the canonical
+pullback-composition maps. Source: proof step 8
+(blueprint: lem-sf-open-external-tensor-normalization). -/
+structure Triple
+    (d₁₂ : Diagram j k T₁₂ Tb₁₂) (d₂₃ : Diagram k l T₂₃ Tb₂₃)
+    (dL : Diagram d₁₂.u l T Tb) (dR : Diagram j d₂₃.u T Tb) : Prop where
+  outer₁ : dL.pb ≫ d₁₂.pb = dR.pb
+  outer₂ : dL.pb ≫ d₁₂.qb = dR.qb ≫ d₂₃.pb
+  outer₃ : dL.qb = dR.qb ≫ d₂₃.qb
+  inner₁ : dL.p ≫ d₁₂.p = dR.p
+  inner₂ : dL.p ≫ d₁₂.q = dR.q ≫ d₂₃.p
+  inner₃ : dL.q = dR.q ≫ d₂₃.q
+  sameOpen : dR.u = dL.u
+
+/-- The triple ambient object, with left bracketing and composed projection pullbacks.
+Source: H₃ in proof step 8 (blueprint: lem-sf-open-external-tensor-normalization). -/
+def tripleAmbient (d₁₂ : Diagram j k T₁₂ Tb₁₂) (dL : Diagram d₁₂.u l T Tb)
+    (K : FiniteD A X) (L : FiniteD A Y) (M : FiniteD A W) : FiniteD A Tb :=
+  FiniteOpenProduct.tensor A Tb
+    (FiniteOpenProduct.tensor A Tb
+      ((FiniteOpenProduct.pull A dL.pb).obj
+        ((FiniteOpenProduct.pull A d₁₂.pb).obj ((finiteShriek A j).obj K)))
+      ((FiniteOpenProduct.pull A dL.pb).obj
+        ((FiniteOpenProduct.pull A d₁₂.qb).obj ((finiteShriek A k).obj L))))
+    ((FiniteOpenProduct.pull A dL.qb).obj ((finiteShriek A l).obj M))
+
+/-- The triple open object with the same left bracketing.
+Source: D₃ in proof step 8 (blueprint: lem-sf-open-external-tensor-normalization). -/
+def tripleInside (d₁₂ : Diagram j k T₁₂ Tb₁₂) (dL : Diagram d₁₂.u l T Tb)
+    (K : FiniteD A X) (L : FiniteD A Y) (M : FiniteD A W) : FiniteD A T :=
+  FiniteOpenProduct.tensor A T
+    (FiniteOpenProduct.tensor A T
+      ((FiniteOpenProduct.pull A dL.p).obj ((FiniteOpenProduct.pull A d₁₂.p).obj K))
+      ((FiniteOpenProduct.pull A dL.p).obj ((FiniteOpenProduct.pull A d₁₂.q).obj L)))
+    ((FiniteOpenProduct.pull A dL.q).obj M)
+
+/-- First compare the first two factors, then their product with the third.
+Source: F in proof step 8 (blueprint: lem-sf-open-external-tensor-normalization). -/
+def tripleLeft (d₁₂ : Diagram j k T₁₂ Tb₁₂) (dL : Diagram d₁₂.u l T Tb)
+    (K : FiniteD A X) (L : FiniteD A Y) (M : FiniteD A W) :=
+  (FiniteOpenProduct.tensorIsoMap A _
+    (FiniteOpenProduct.tensorPullIso A dL.pb _ _).symm (Iso.refl _)).hom ≫
+    FiniteOpenProduct.tensorMap A Tb
+      ((FiniteOpenProduct.pull A dL.pb).map (comparison A d₁₂ K L)) (𝟙 _) ≫
+    comparison A dL (inside A d₁₂ K L) M ≫
+    (finiteShriek A dL.u).map
+      (FiniteOpenProduct.tensorIsoMap A _
+        (FiniteOpenProduct.tensorPullIso A dL.p _ _) (Iso.refl _)).hom
+
+/-- The canonical outer reassociation and projection-composition identification.
+Source: the ambient associator in proof step 8
+(blueprint: lem-sf-open-external-tensor-normalization). -/
+def outerAssociator
+    {d₁₂ : Diagram j k T₁₂ Tb₁₂} {d₂₃ : Diagram k l T₂₃ Tb₂₃}
+    {dL : Diagram d₁₂.u l T Tb} {dR : Diagram j d₂₃.u T Tb}
+    (t : Triple d₁₂ d₂₃ dL dR)
+    (K : FiniteD A X) (L : FiniteD A Y) (M : FiniteD A W) :
+    tripleAmbient A d₁₂ dL K L M ≅
+      FiniteOpenProduct.tensor A Tb
+        ((FiniteOpenProduct.pull A dR.pb).obj ((finiteShriek A j).obj K))
+        ((FiniteOpenProduct.pull A dR.qb).obj (ambient A d₂₃ L M)) :=
+  FiniteOpenProduct.tensorIsoMap A _ (FiniteOpenProduct.tensorIsoMap A _
+      (((FiniteOpenProduct.pullComp A dL.pb d₁₂.pb).symm ≪≫
+        eqToIso (congrArg (FiniteOpenProduct.pull A) t.outer₁)).app ((finiteShriek A j).obj K))
+      ((FiniteOpenProduct.square A _ _ _ _ t.outer₂).app ((finiteShriek A k).obj L)))
+    ((eqToIso (congrArg (FiniteOpenProduct.pull A) t.outer₃) ≪≫
+      FiniteOpenProduct.pullComp A dR.qb d₂₃.qb).app ((finiteShriek A l).obj M)) ≪≫
+    (proetAssociator (ModuleCat.{u + 1} A) Tb _ _ _) ≪≫
+      FiniteOpenProduct.tensorIsoMap A _ (Iso.refl _)
+      (FiniteOpenProduct.tensorPullIso A dR.qb _ _).symm
+
+/-- Reassociate the open factors using exactly the same projection-composition maps.
+Source: the open associator in proof step 8
+(blueprint: lem-sf-open-external-tensor-normalization). -/
+def innerAssociator
+    {d₁₂ : Diagram j k T₁₂ Tb₁₂} {d₂₃ : Diagram k l T₂₃ Tb₂₃}
+    {dL : Diagram d₁₂.u l T Tb} {dR : Diagram j d₂₃.u T Tb}
+    (t : Triple d₁₂ d₂₃ dL dR)
+    (K : FiniteD A X) (L : FiniteD A Y) (M : FiniteD A W) :
+    inside A dR K (inside A d₂₃ L M) ≅ tripleInside A d₁₂ dL K L M :=
+  FiniteOpenProduct.tensorIsoMap A _ (Iso.refl _) (FiniteOpenProduct.tensorPullIso A dR.q _ _) ≪≫
+    FiniteOpenProduct.tensorIsoMap A _
+      (((eqToIso (congrArg (FiniteOpenProduct.pull A) t.inner₁)).symm ≪≫
+        FiniteOpenProduct.pullComp A dL.p d₁₂.p).app K)
+      (FiniteOpenProduct.tensorIsoMap A _ ((FiniteOpenProduct.square A _ _ _ _ t.inner₂).symm.app L)
+        (((FiniteOpenProduct.pullComp A dR.q d₂₃.q).symm ≪≫
+          eqToIso (congrArg (FiniteOpenProduct.pull A) t.inner₃.symm)).app M)) ≪≫
+    (proetAssociator (ModuleCat.{u + 1} A) T _ _ _).symm
+
+/-- First compare the last two factors, then the first factor with their product.
+The final transport is the identity of the common product open, followed by its
+canonical associator. Source: G in proof step 8
+(blueprint: lem-sf-open-external-tensor-normalization). -/
+def tripleRight
+    {d₁₂ : Diagram j k T₁₂ Tb₁₂} {d₂₃ : Diagram k l T₂₃ Tb₂₃}
+    {dL : Diagram d₁₂.u l T Tb} {dR : Diagram j d₂₃.u T Tb}
+    (t : Triple d₁₂ d₂₃ dL dR)
+    (K : FiniteD A X) (L : FiniteD A Y) (M : FiniteD A W) :=
+  (outerAssociator A t K L M).hom ≫
+    FiniteOpenProduct.tensorMap A Tb (𝟙 _)
+      ((FiniteOpenProduct.pull A dR.qb).map (comparison A d₂₃ L M)) ≫
+    comparison A dR K (inside A d₂₃ L M) ≫
+    (finiteShriek A dR.u).map (innerAssociator A t K L M).hom ≫
+    (shriekCongr A t.sameOpen).hom.app (tripleInside A d₁₂ dL K L M)
+
+/-- The triple restriction uses the same section units and tensor comparisons on
+both sides; it contains no occurrence of either triple comparison.
+Source: the identity-on-the-open clause in proof step 8
+(blueprint: lem-sf-open-external-tensor-normalization). -/
+def tripleRestriction (d₁₂ : Diagram j k T₁₂ Tb₁₂) (dL : Diagram d₁₂.u l T Tb)
+    (K : FiniteD A X) (L : FiniteD A Y) (M : FiniteD A W) :=
+  FiniteOpenProduct.tensorMap A T
+    ((FiniteOpenProduct.tensorPullIso A dL.p _ _).inv ≫
+      (FiniteOpenProduct.pull A dL.p).map (restriction A d₁₂ K L) ≫
+        (FiniteOpenProduct.square A _ _ _ _ dL.left).inv.app (ambient A d₁₂ K L))
+    ((FiniteOpenProduct.pull A dL.q).map ((FiniteOpenProduct.adj A l).unit.app M) ≫
+      (FiniteOpenProduct.square A _ _ _ _ dL.right).inv.app ((finiteShriek A l).obj M)) ≫
+    (FiniteOpenProduct.tensorPullIso A dL.u _ _).inv ≫
+    (FiniteOpenProduct.pull A dL.u).map
+      (FiniteOpenProduct.tensorIsoMap A _
+        (FiniteOpenProduct.tensorPullIso A dL.pb _ _) (Iso.refl _)).hom
+
+/-- Equality of the two triple composites, and their separate identity restrictions.
+Source: proof step 8 (blueprint: lem-sf-open-external-tensor-normalization). -/
+def TripleAssertion
+    {d₁₂ : Diagram j k T₁₂ Tb₁₂} {d₂₃ : Diagram k l T₂₃ Tb₂₃}
+    {dL : Diagram d₁₂.u l T Tb} {dR : Diagram j d₂₃.u T Tb}
+    (t : Triple d₁₂ d₂₃ dL dR)
+    (K : FiniteD A X) (L : FiniteD A Y) (M : FiniteD A W) : Prop :=
+  tripleLeft A d₁₂ dL K L M = tripleRight A t K L M ∧
+    (tripleRestriction A d₁₂ dL K L M ≫
+      (FiniteOpenProduct.pull A dL.u).map (tripleLeft A d₁₂ dL K L M) =
+        (FiniteOpenProduct.adj A dL.u).unit.app
+          (tripleInside A d₁₂ dL K L M)) ∧
+    (tripleRestriction A d₁₂ dL K L M ≫
+      (FiniteOpenProduct.pull A dL.u).map (tripleRight A t K L M) =
+        (FiniteOpenProduct.adj A dL.u).unit.app
+          (tripleInside A d₁₂ dL K L M))
 
 variable {W Wb T₁₂ T₂₃ Tb₁₂ Tb₂₃ : Scheme.{u}} {l : W ⟶ Wb}
   [IsOpenImmersion l]

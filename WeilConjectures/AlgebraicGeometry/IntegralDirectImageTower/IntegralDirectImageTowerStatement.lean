@@ -48,6 +48,11 @@ import WeilConjectures.CategoryTheory.ConstantModuleDerivedProjection.ExactDeriv
 import WeilConjectures.Algebra.Homology.Ringed.RingedDerivedTensorNativeSupplement
 import WeilConjectures.ProperBaseChange.FlatAlgebraicInverseImageOfUniverses
 import WeilConjectures.Algebra.Homology.KFlatTotalTensorModel.KFlatTotalTensorModelSupplement
+public import WeilConjectures.AlgebraicGeometry.IntegralDirectImageTower.Current.IntegralReconstructionCanonicalMaps
+public import WeilConjectures.AlgebraicGeometry.IntegralDirectImageTower.Current.IntegralTowerImageReconstructionCurrent
+public import WeilConjectures.AlgebraicGeometry.IntegralDirectImageTower.IntegralImageTowerRefinementCompatibility
+public import WeilConjectures.AlgebraicGeometry.IntegralDirectImageTower.IntegralProjectionTowerLimitCoordinates
+public import WeilConjectures.CategoryTheory.Constant.ConstantTowerNormalization
 
 /-!
 # Statement of the integral compactly supported direct-image tower
@@ -96,6 +101,96 @@ namespace AlgebraicGeometry.ProEtale.IntegralDirectImageTower
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+
+private theorem evaluation_normalization (s : Presentation l E) (T : Scheme.{u}) :
+    ∃ e : spReductionDerivedEvaluations l E T (s.towers T)
+        (s.reduction T).coefficient (s.reduction T).red,
+      Current.IsEvaluationNormalized l E T (s.towers T)
+        { s.reduction T with evaluation := e } := by
+  classical
+  let D := s.towers T
+  let r := s.reduction T
+  let := D.hasDerived
+  let := r.additive
+  have res (K : CochainComplex (spIntegralSectionModules l E T) ℤ) :
+      ∃ (P : CochainComplex (spIntegralSectionModules l E T) ℤ) (f : P ⟶ K),
+        CochainComplex.IsKFlatIndependentCoefficients (R := spIntegralSectionRing l E T) P ∧
+          QuasiIso f := by
+    obtain ⟨P, f, hP, _, hf, _⟩ :=
+      CochainComplex.exists_isKFlatResolutionIndependentCoefficients
+        (R := spIntegralSectionRing l E T) K
+    exact ⟨P, f, hP, hf⟩
+  let evalLimits (n : ℕ) := D.evaluationLimits n
+  let evalColimits (n : ℕ) := D.evaluationColimits n
+  let evalAdditive (n : ℕ) :
+      (spCoefficientEvaluation l E T D.equivalence n).Additive :=
+    Functor.additive_of_preserves_binary_products _
+  have ev (n : ℕ) : ∃ e : r.red ⋙ spDerivedCoefficientEvaluation l E T D n ≅
+      (D.scalar (spIntegralReductionScalar l E T r.coefficient n)).model.T,
+      ∀ P : CochainComplex (spIntegralSectionModules l E T) ℤ,
+        e.hom.app (DerivedCategory.Q.obj P) ≫
+            (D.scalar (spIntegralReductionScalar l E T r.coefficient n)).model.ε.app P =
+          (spDerivedCoefficientEvaluation l E T D n).map (r.counit.app P) ≫
+            (spCoefficientEvaluation l E T D.equivalence n).mapDerivedCategoryFactors.hom.app
+              ((r.ordinary.mapHomologicalComplex (.up ℤ)).obj P) ≫
+            DerivedCategory.Q.map ((NatIso.mapHomologicalComplex (r.level n) (.up ℤ)).hom.app
+              P) := by
+    let := D.evaluationLimits n
+    let := D.evaluationColimits n
+    let : (spCoefficientEvaluation l E T D.equivalence n).Additive :=
+      Functor.additive_of_preserves_binary_products _
+    let V := spDerivedCoefficientEvaluation l E T D n
+    let A := (D.scalar (spIntegralReductionScalar l E T r.coefficient n)).model
+    let H := A.E.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q
+    let η : DerivedCategory.Q ⋙ (r.red ⋙ V) ⟶ H :=
+      Functor.whiskerRight r.counit V ≫
+        Functor.whiskerLeft (r.ordinary.mapHomologicalComplex (.up ℤ))
+          (spCoefficientEvaluation l E T D.equivalence n).mapDerivedCategoryFactors.hom ≫
+        (Functor.isoWhiskerRight
+          (Functor.mapHomologicalComplexCompIso (r.level n) (.up ℤ)) DerivedCategory.Q).hom
+    obtain ⟨e, he, _⟩ := comparison_from_resolutions _ res (r.red ⋙ V) A.T H η A.ε
+      (fun P hP ↦ by
+        have := r.computes P hP
+        dsimp only [η, NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
+        infer_instance)
+      (fun P hP ↦ A.computes P hP)
+    refine ⟨e, fun K ↦ ?_⟩
+    obtain ⟨P, f, hP, hf⟩ := res K
+    let := hf
+    have h := he P hP
+    have hn : e.hom.app (DerivedCategory.Q.obj K) ≫ A.ε.app K = η.app K := by
+      apply (cancel_epi ((r.red ⋙ V).map (DerivedCategory.Q.map f))).1
+      erw [← Category.assoc, e.hom.naturality, Category.assoc,
+        A.ε.naturality, ← Category.assoc, h, η.naturality]
+    exact hn
+  refine ⟨fun n ↦ (ev n).choose, ?_⟩
+  intro n
+  exact (ev n).choose_spec
+
+private theorem conjugate_refinement {C D : Type*} [Category C] [Category D]
+    (F : C ⥤ D) {A₁ A₂ Aᵣ : D} {B₁ B₂ Bᵣ : C}
+    (e₁ : A₁ ≅ F.obj B₁) (e₂ : A₂ ≅ F.obj B₂) (eᵣ : Aᵣ ≅ F.obj Bᵣ)
+    (t₁₂ : B₁ ⟶ B₂) (t₁ᵣ : B₁ ⟶ Bᵣ) (t₂ᵣ : B₂ ⟶ Bᵣ)
+    (r₁ : A₁ ⟶ Aᵣ) (r₂ : A₂ ⟶ Aᵣ)
+    (hc : t₁₂ ≫ t₂ᵣ = t₁ᵣ)
+    (h₁ : e₁.hom ≫ F.map t₁ᵣ = r₁ ≫ eᵣ.hom)
+    (h₂ : e₂.hom ≫ F.map t₂ᵣ = r₂ ≫ eᵣ.hom) :
+    e₁.hom ≫ F.map t₁₂ ≫ e₂.inv ≫ r₂ = r₁ := by
+  apply (cancel_mono eᵣ.hom).1
+  calc
+    (e₁.hom ≫ F.map t₁₂ ≫ e₂.inv ≫ r₂) ≫ eᵣ.hom =
+        e₁.hom ≫ F.map t₁₂ ≫ e₂.inv ≫ (r₂ ≫ eᵣ.hom) := by
+      simp only [Category.assoc]
+    _ = e₁.hom ≫ F.map t₁₂ ≫ F.map t₂ᵣ := by
+      rw [← h₂]
+      simp only [Iso.inv_hom_id_assoc]
+    _ = e₁.hom ≫ F.map (t₁₂ ≫ t₂ᵣ) := by
+      rw [F.map_comp]
+    _ = r₁ ≫ eᵣ.hom := by rw [hc, h₁]
+
+private theorem conjugate_identity {C : Type*} [Category C] {X Y : C} (e : X ≅ Y) :
+    e ≪≫ Iso.refl Y ≪≫ e.symm = Iso.refl X := by
+  simp only [Iso.refl_trans, Iso.self_symm_id]
 
 /--
 The normalized constructible tower, integral inverse-limit reconstruction,

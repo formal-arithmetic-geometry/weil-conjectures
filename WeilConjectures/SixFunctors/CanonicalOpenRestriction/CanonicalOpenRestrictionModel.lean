@@ -42,6 +42,7 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 import WeilConjectures.SixFunctors.CanonicalOpenRestriction.OpenRestrictionAugmentedDescent
 import WeilConjectures.SixFunctors.CanonicalOpenRestriction.OpenRestrictionCounitOnGoodComplexes
+public import WeilConjectures.AlgebraicGeometry.Picard.KFlatResolutionIndependentCoefficients
 
 /-! # Canonical open restriction on augmented quotient models
 
@@ -88,6 +89,7 @@ private theorem eq_of_good_complexes
     Localization.inverts DerivedCategory.Q (HomologicalComplex.quasiIso _ _) q hq
   let e : DerivedCategory.Q.obj Q ≅ M :=
     asIso (DerivedCategory.Q.map q) ≪≫ DerivedCategory.Q.objObjPreimageIso M
+  have : IsIso (F.map e.hom) := F.map_isIso e.hom
   apply (cancel_epi (F.map e.hom)).1
   have hf : ∀ i : ℤ, SheafOfModules.IsFlatOnSite
       (J := ProEt.topology X)

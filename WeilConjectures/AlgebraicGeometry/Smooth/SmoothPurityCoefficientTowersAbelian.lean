@@ -40,6 +40,7 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 import Mathlib.CategoryTheory.Limits.Constructions.LimitsOfProductsAndEqualizers
+public import WeilConjectures.AlgebraicGeometry.Picard.KFlatResolutionIndependentCoefficients
 
 /-!
 # The abelian category of smooth-purity coefficient towers
@@ -397,10 +398,60 @@ private def equivalence : Towers (rings B) ≌ StrictRingSystem B where
     ext U x
     rfl
 
+private theorem sections_heq (M : Towers (rings B)) (n : ℕ) (U : Cᵒᵖ) :
+    HEq ((((equivalence B).functor.obj M).level n).val.obj U)
+      (M.obj.obj (op (n, U.unop))) := HEq.rfl
+
+private theorem morphisms_heq {M N : Towers (rings B)} (f : M ⟶ N)
+    (n : ℕ) (U : Cᵒᵖ) :
+    HEq ((((equivalence B).functor.map f).app n).val.app U)
+      (f.hom.app (op (n, U.unop))) := HEq.rfl
+
+private theorem hom_heq {R S : Type w} [Ring R] [Ring S]
+    {M : ModuleCat.{w} R} {N : ModuleCat.{w} S} {f g : R →+* S}
+    (h : f = g) (a : M ⟶ (ModuleCat.restrictScalars f).obj N)
+    (b : M ⟶ (ModuleCat.restrictScalars g).obj N) (hab : ∀ x, a x = b x) : HEq a b := by
+  subst g
+  apply heq_of_eq
+  ext x
+  exact hab x
+
+private theorem restrictions_heq (M : Towers (rings B)) (n : ℕ)
+    {U V : Cᵒᵖ} (f : U ⟶ V) :
+    HEq ((((equivalence B).functor.obj M).level n).val.map f)
+      (M.obj.map (Prod.mkHom (𝟙 n) f.unop).op) := by
+  exact (hom_heq (congrArg RingCat.Hom.hom (verticalRingMap (rings B) n f))
+    (M.obj.map (Prod.mkHom (𝟙 n) f.unop).op) _ (fun _ ↦ rfl)).symm
+
+private theorem transitions_heq (M : Towers (rings B)) {m n : ℕ} (h : m ≤ n)
+    (U : Cᵒᵖ) :
+    HEq ((((equivalence B).functor.obj M).transition h).val.app U)
+      (M.obj.map (Prod.mkHom (homOfLE h) (𝟙 U.unop)).op) := by
+  exact (hom_heq (congrArg RingCat.Hom.hom (horizontalRingMap B h U))
+    (M.obj.map (Prod.mkHom (homOfLE h) (𝟙 U.unop)).op) _ (fun _ ↦ rfl)).symm
+
 private def rebase {R S : ℕᵒᵖ ⥤ Sheaf J RingCat.{w}} (h : R = S) :
     Towers R ≌ Towers S := by
   subst S
   exact CategoryTheory.Equivalence.refl
+
+private theorem rebase_sections {R S : ℕᵒᵖ ⥤ Sheaf J RingCat.{w}} (h : R = S)
+    (M : Towers R) (X : (ℕ × C)ᵒᵖ) :
+    HEq (((rebase h).functor.obj M).obj.obj X) (M.obj.obj X) := by
+  subst S
+  rfl
+
+private theorem rebase_restrictions {R S : ℕᵒᵖ ⥤ Sheaf J RingCat.{w}} (h : R = S)
+    (M : Towers R) {X Y : (ℕ × C)ᵒᵖ} (f : X ⟶ Y) :
+    HEq (((rebase h).functor.obj M).obj.map f) (M.obj.map f) := by
+  subst S
+  rfl
+
+private theorem rebase_morphisms {R S : ℕᵒᵖ ⥤ Sheaf J RingCat.{w}} (h : R = S)
+    {M N : Towers R} (f : M ⟶ N) (X : (ℕ × C)ᵒᵖ) :
+    HEq (((rebase h).functor.map f).hom.app X) (f.hom.app X) := by
+  subst S
+  rfl
 
 omit [J.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]
   [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}] in
@@ -464,6 +515,10 @@ private theorem ordinary_one {m n : ℕ} (h : m ≤ n) (M : A) (U : Cᵒᵖ)
   change ((ordinary B S F h).app M).val.app U
     (((systemTensorAdj S B h).unit.app ((F.obj M).level n)).val.app U x) = _ at he
   simpa only [SystemScalarModel.unit_normalized] using he
+
+private theorem ordinary_eq {m n : ℕ} (h : m ≤ n) (M : A) :
+    (ordinary B S F h).app M =
+      ((systemTensorAdj S B h).homEquiv _ _).symm ((F.obj M).transition h) := rfl
 
 private theorem ordinary_transpose {m n : ℕ} (h : m ≤ n) (M : A) :
     (systemTensorAdj S B h).homEquiv _ _ ((ordinary B S F h).app M) =
@@ -777,6 +832,45 @@ private theorem reduction_comp (TC : SystemTensorCoherence S)
           (fun z ↦ z ≫ εd.app Pn ≫ DerivedCategory.Q.map c ≫ αr.inv) hβ
   exact congr_app he M
 
+private theorem equivalence_limits (e : A ≌ StrictRingSystem.{c, v, w} B) :
+    PreservesFiniteLimits e.functor := by
+  let : e.functor.IsEquivalence := e.isEquivalence_functor
+  let : PreservesLimitsOfSize.{0, 0} e.functor :=
+    Adjunction.isEquivalencePreservesLimits e.functor
+  infer_instance
+
+private theorem equivalence_finite_colimits (e : A ≌ StrictRingSystem.{c, v, w} B) :
+    PreservesFiniteColimits e.functor := by
+  let : e.functor.IsEquivalence := e.isEquivalence_functor
+  let : PreservesColimitsOfSize.{0, 0} e.functor :=
+    Adjunction.isEquivalence_preservesColimits e.functor
+  infer_instance
+
+private theorem equivalence_additive [Abelian A]
+    (e : A ≌ StrictRingSystem.{c, v, w} B) : e.functor.Additive := by
+  let : e.functor.IsEquivalence := e.isEquivalence_functor
+  let : PreservesFiniteLimits e.functor := equivalence_limits B e
+  exact Functor.additive_of_preserves_binary_products e.functor
+
+private theorem equivalence_grothendieck [Abelian A]
+    (L : SystemLevelLeftExtensionTheory (J := J))
+    (e : A ≌ StrictRingSystem.{c, v, w} B) : IsGrothendieckAbelian.{w} A := by
+  let : IsGrothendieckAbelian.{w} (StrictRingSystem.{c, v, w} B) := L.grothendieck B
+  exact IsGrothendieckAbelian.of_equivalence e.symm
+
+private theorem equivalence_colimits (L : SystemLevelLeftExtensionTheory (J := J))
+    (e : A ≌ StrictRingSystem.{c, v, w} B) (n : ℕ) :
+    PreservesColimitsOfSize.{w, w} (e.functor ⋙ systemEvaluation B n) := by
+  let : HasCoproducts.{w} (StrictRingSystem.{c, v, w} B) := L.coproducts B
+  let (K : Type w) : PreservesColimitsOfShape (Discrete K) (systemEvaluation B n) :=
+    L.evaluationCoproducts B n K
+  let : PreservesColimitsOfSize.{w, w} (systemEvaluation B n) :=
+    preservesColimits_of_preservesCoequalizers_and_coproducts (systemEvaluation B n)
+  let : e.functor.IsEquivalence := e.isEquivalence_functor
+  let : PreservesColimitsOfSize.{w, w} e.functor :=
+    Adjunction.isEquivalence_preservesColimits e.functor
+  infer_instance
+
 end Derived
 
 omit [EssentiallySmall.{w} C] in
@@ -822,6 +916,38 @@ private def coefficientEquivalence : spCoefficientTowers l E T ≌
     StrictRingSystem.{t + 1, t, max u (t + 1)} (spCoefficientCommRings l E T) :=
   (CoefficientTowerProof.rebase (coefficientRings_eq l E T)).trans
     (CoefficientTowerProof.equivalence (spCoefficientCommRings l E T))
+
+private theorem coefficientEquivalence_sections (M : spCoefficientTowers l E T)
+    (n : ℕ) (U : T.ProEtᵒᵖ) :
+    HEq ((((coefficientEquivalence l E T).functor.obj M).level n).val.obj U)
+      (M.obj.obj (op (n, U.unop))) :=
+  (CoefficientTowerProof.sections_heq (spCoefficientCommRings l E T)
+    ((CoefficientTowerProof.rebase (coefficientRings_eq l E T)).functor.obj M) n U).trans
+    (CoefficientTowerProof.rebase_sections (coefficientRings_eq l E T) M _)
+
+private theorem coefficientEquivalence_restrictions (M : spCoefficientTowers l E T)
+    (n : ℕ) {U V : T.ProEtᵒᵖ} (f : U ⟶ V) :
+    HEq ((((coefficientEquivalence l E T).functor.obj M).level n).val.map f)
+      (M.obj.map (Prod.mkHom (𝟙 n) f.unop).op) :=
+  (CoefficientTowerProof.restrictions_heq (spCoefficientCommRings l E T)
+    ((CoefficientTowerProof.rebase (coefficientRings_eq l E T)).functor.obj M) n f).trans
+    (CoefficientTowerProof.rebase_restrictions (coefficientRings_eq l E T) M _)
+
+private theorem coefficientEquivalence_transitions (M : spCoefficientTowers l E T)
+    {m n : ℕ} (h : m ≤ n) (U : T.ProEtᵒᵖ) :
+    HEq ((((coefficientEquivalence l E T).functor.obj M).transition h).val.app U)
+      (M.obj.map (Prod.mkHom (homOfLE h) (𝟙 U.unop)).op) :=
+  (CoefficientTowerProof.transitions_heq (spCoefficientCommRings l E T)
+    ((CoefficientTowerProof.rebase (coefficientRings_eq l E T)).functor.obj M) h U).trans
+    (CoefficientTowerProof.rebase_restrictions (coefficientRings_eq l E T) M _)
+
+private theorem coefficientEquivalence_morphisms {M N : spCoefficientTowers l E T}
+    (f : M ⟶ N) (n : ℕ) (U : T.ProEtᵒᵖ) :
+    HEq ((((coefficientEquivalence l E T).functor.map f).app n).val.app U)
+      (f.hom.app (op (n, U.unop))) :=
+  (CoefficientTowerProof.morphisms_heq (spCoefficientCommRings l E T)
+    ((CoefficientTowerProof.rebase (coefficientRings_eq l E T)).functor.map f) n U).trans
+    (CoefficientTowerProof.rebase_morphisms (coefficientRings_eq l E T) f _)
 
 end
 
@@ -989,6 +1115,109 @@ structure SpCoefficientTowersAbelian where
       (tensor.derivedAssoc (spCoefficientCommRings l E T) h k).hom.app
         ((spCoefficientEvaluation l E T equivalence n).mapDerivedCategory.obj M) ≫
       (reduction (h.trans k)).app M
+
+private theorem assembleCoefficientTowers
+    (L : SystemLevelLeftExtensionTheory.{t + 1, t, max u (t + 1)}
+      (J := Scheme.ProEt.topology T))
+    (e : spCoefficientTowers l E T ≌
+      StrictRingSystem.{t + 1, t, max u (t + 1)} (spCoefficientCommRings l E T))
+    (hs : ∀ (M : spCoefficientTowers l E T) (n : ℕ) (U : T.ProEtᵒᵖ),
+      HEq (((e.functor.obj M).level n).val.obj U) (M.obj.obj (op (n, U.unop))))
+    (hr : ∀ (M : spCoefficientTowers l E T) (n : ℕ)
+      {U V : T.ProEtᵒᵖ} (f : U ⟶ V),
+      HEq (((e.functor.obj M).level n).val.map f)
+        (M.obj.map (Prod.mkHom (𝟙 n) f.unop).op))
+    (ht : ∀ (M : spCoefficientTowers l E T) {m n : ℕ} (h : m ≤ n)
+      (U : T.ProEtᵒᵖ),
+      HEq (((e.functor.obj M).transition h).val.app U)
+        (M.obj.map (Prod.mkHom (homOfLE h) (𝟙 U.unop)).op))
+    (hm : ∀ {M N : spCoefficientTowers l E T} (f : M ⟶ N) (n : ℕ)
+      (U : T.ProEtᵒᵖ),
+      HEq (((e.functor.map f).app n).val.app U) (f.hom.app (op (n, U.unop)))) :
+    Nonempty (SpCoefficientTowersAbelian l E T) := by
+  let B : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{max u (t + 1)} :=
+    spCoefficientCommRings l E T
+  let : PreservesFiniteLimits e.functor := CoefficientReductionProof.equivalence_limits B e
+  let : PreservesFiniteColimits e.functor :=
+    CoefficientReductionProof.equivalence_finite_colimits B e
+  let : e.functor.Additive := CoefficientReductionProof.equivalence_additive B e
+  let : IsGrothendieckAbelian.{max u (t + 1)} (spCoefficientTowers l E T) :=
+    CoefficientReductionProof.equivalence_grothendieck B L e
+  let d : HasDerivedCategory.{max u (t + 1) + 1} (spCoefficientTowers l E T) :=
+    HasDerivedCategory.standard _
+  have filtered (I : Type (max u (t + 1))) [SmallCategory I] [IsFiltered I] (n : ℕ) :
+      PreservesColimitsOfShape I (spCoefficientEvaluation l E T e n) := by
+    let := CoefficientReductionProof.equivalence_colimits B L e n
+    infer_instance
+  exact ⟨{
+    equivalence := e
+    sections := hs
+    restrictions := hr
+    transitions := ht
+    morphisms := hm
+    equivalenceAdditive := inferInstance
+    grothendieck := inferInstance
+    evaluationLimits := fun n ↦ inferInstance
+    evaluationColimits := fun n ↦ inferInstance
+    hasDerived := d
+    filteredColimits := filtered
+    scalar := L.scalar
+    tensor := L.tensor
+    ordinaryReduction := CoefficientReductionProof.ordinary B L.scalar e.functor
+    ordinaryReduction_eq := CoefficientReductionProof.ordinary_eq B L.scalar e.functor
+    reduction := CoefficientReductionProof.reduction B L.scalar e.functor
+    reduction_rep := CoefficientReductionProof.reduction_rep B L.scalar e.functor
+    reduction_identity := CoefficientReductionProof.reduction_identity B L.scalar e.functor L.tensor
+    reduction_comp := CoefficientReductionProof.reduction_comp B L.scalar e.functor L.tensor }⟩
+
+/-- The category of coefficient towers is Grothendieck abelian with levelwise kernels,
+cokernels and filtered colimits. Evaluation is exact and induces the indicated ordinary
+unbounded derived functor. The actual strict transitions induce natural derived
+reduction maps compatible with identities and composition.
+Source: blueprint main-20261015, coefficient-tower lemma, clauses (1)--(3);
+Bhatt--Scholze, Definition 3.5.3 (blueprint: det-sp-coefficient-towers-abelian).
+
+Proof:
+1. Uncurry a product-site module into its vertical slices. The horizontal maps are
+semilinear transitions; product functoriality proves their identity and composition
+laws. Conversely, compose a transition with a vertical restriction to construct the
+product-site module. The strict-system laws give functoriality. Identity maps on
+sections give the unit and counit and all four normalization formulas. Forgetting
+commutativity identifies the explicit coefficient ring diagrams without changing
+any section or action. The preceding abelian-axioms theorem already identifies
+vertical module sheaves with the recorded tower category.
+2. Apply systemLevelLeftExtensionTheory to these commutative coefficient sheaves.
+Transport its Grothendieck structure along the explicit equivalence. It preserves
+finite limits and colimits; preservation of binary products and zero morphisms
+implies additivity. The existing exact evaluations then give exact evaluation on towers.
+The theory's evaluation coproducts, together with preservation of coequalizers, give
+all small colimits and hence the required filtered colimits. Use the standard ordinary
+derived localization.
+3. Transpose each strict semilinear transition through the normalized scalar
+adjunction to obtain ordinary reduction. Naturality follows from the strict-map
+compatibility square. Evaluating on tensors with scalar 1 gives the original
+transition. Adjunction injectivity, the normalized unit and associator, and the
+strict identity and composition laws prove ordinary coherence.
+4. On tower complexes, compose the exact-evaluation localization comparisons,
+the universal derived scalar comparison, and the termwise ordinary reduction.
+Fully faithful precomposition with the localization functor descends this natural
+transformation uniquely. Its component formula is reduction_rep on every complex.
+5. To verify coherence of the derived scalar comparisons on an arbitrary source
+complex, take one K-flat resolution with flat terms of that source level. The
+independent-coefficient tensor comparison identifies the flatness predicates.
+Naturality moves the comparison along this quasi-isomorphism. Its image under
+localization and under either derived tensor functor is invertible, so it can be
+cancelled. On the resolution, the stipulated normalized derived unit and associator
+compute the comparisons; ordinary coherence supplies the remaining equality.
+No simultaneous resolution of all tower levels is needed. Finally, fully faithful
+localization precomposition and naturality of the exact-evaluation comparison
+isomorphisms give reduction_identity and reduction_comp on every derived tower. -/
+theorem sp_coefficient_towers_abelian : Nonempty (SpCoefficientTowersAbelian l E T) := by
+  obtain ⟨L⟩ := systemLevelLeftExtensionTheory.{t + 1, t, max u (t + 1)}
+    (J := Scheme.ProEt.topology T)
+  exact assembleCoefficientTowers l E T L (coefficientEquivalence l E T)
+    (coefficientEquivalence_sections l E T) (coefficientEquivalence_restrictions l E T)
+    (coefficientEquivalence_transitions l E T) (coefficientEquivalence_morphisms l E T)
 
 end
 

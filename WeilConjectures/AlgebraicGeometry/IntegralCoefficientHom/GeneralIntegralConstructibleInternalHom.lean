@@ -38,6 +38,10 @@ import WeilConjectures.AlgebraicGeometry.Integral.Models.IntegralModelsStacksBlu
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import WeilConjectures.AlgebraicGeometry.Picard.KFlatResolutionIndependentCoefficients
 import Mathlib.AlgebraicGeometry.Noetherian
+public import WeilConjectures.AlgebraicGeometry.IntegralCoefficientHom.IntegralConstructibleInternalHomBounded
+public import WeilConjectures.AlgebraicGeometry.IntegralCoefficientHom.IntegralConstructibleInternalHomData
+public import WeilConjectures.AlgebraicGeometry.IntegralCoefficientHom.IntegralConstructibleInternalHomTor
+public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.IsoClosed
 
 /-! # Integral constructible internal Hom for arbitrary admissible integral rings
 
@@ -145,26 +149,15 @@ Source: latest blueprint cor-coef-integral-internal-hom.md and its three-step DA
 (blueprint: cor-coef-integral-internal-hom).
 
 Proof:
-1. Choose a coefficient isomorphism to O_E (using E = Q_l in the Z_l case).
-   It identifies uniformizer power ideals, scalar extensions, internal Homs and the
-   evaluation-defined comparisons. Finite type over k makes X Noetherian by
-   lem-weil-pbc-finite-type-over-noetherian. The predicate comparison
-   lem-sfb-adic-constructibility-predicate-comparison and the forward integral criterion
-   lem-sfb-internal-integral-criterion-forward give completeness and bounded finite
-   constant models for the residue reductions of K,L. Apply lem-coef-integral-hom-reduction
-   to obtain completeness of H and invertibility of each actual evaluation comparison.
-2. Choose ordered cohomology-support intervals for K_1,L_1. By
-   lem-kun-dimension-finite-type choose d0 bounding dim X, with d0=0 on the empty scheme.
-   Apply lem-coef-condensed-residue-controlled-finite-homs: all finite internal Homs T_n
-   are bounded constructible. Hence H_1 is bounded constructible via its comparison to
-   T_1. Completeness and lem-sfb-internal-integral-criterion-reverse give integral
-   constructibility of H; the predicate comparison gives the ambient bounded predicate.
-3. Test the supplied first-reduction Tor intervals against the coefficient module in
-   degree zero. On a K-flat representative (lem-pc-kflat-resolution), x tensor r ↦ rx
-   and x ↦ x tensor 1 are inverse chain maps, giving cohomology support in [a,b],[c,e].
-   Apply lem-coef-condensed-residue-controlled-finite-homs with these intervals and d.
-   It gives [c-b-2d,e-a+2d] for each T_n; invariance under the canonical comparison
-   isomorphism gives the same interval for H_n, uniformly in n. -/
+1. Finite type over a field makes X Noetherian. The canonical reduction and integral
+   residue test give invertibility of every specified comparison and a residue test
+   for bounded constructibility of H.
+2. The residue-Tor theorem makes the input reductions finite-Tor. Finite coefficient
+   constructible Hom makes T_n bounded constructible. In particular H_1 is bounded
+   constructible through its specified comparison with T_1. The residue test gives
+   bounded constructibility of H.
+3. Apply the quantitative finite Hom estimate directly to the supplied reduction Tor
+   intervals and d. Transport its interval along the actual comparison at every n. -/
 theorem boundedConstructible_internalHom
     (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p]
     (_hk : Finite k ∨ IsAlgClosed k) (ℓ : ℕ) [Fact ℓ.Prime] (_hℓ : ℓ ≠ p)
@@ -198,7 +191,20 @@ theorem boundedConstructible_internalHom
             (c - b - 2 * (d : ℤ)) (e - a + 2 * (d : ℤ))
             ((reduction R X π n).obj
               (((CondensedRing.derivedHom (Profinite.continuousCoefficientRingObj R) X).obj
-                (op K)).obj L)) := by
-  sorry
+                (op K)).obj L))  := by
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
+  have : IsNoetherian X := ⟨⟩
+  obtain ⟨hcomparison, htest⟩ :=
+    admissible_integral_hom_residue_test R ℓ _hR X π _hπ K L _hK _hL
+  obtain ⟨hfinite, htor⟩ :=
+    admissible_finite_hom_bound R k p _hk ℓ _hℓ _hR X π _hπ K L _hK _hL
+  have : IsIso (comparison R X π 1 K L) := hcomparison 1 le_rfl
+  refine ⟨htest ((boundedConstructible _).prop_of_iso
+    (asIso (comparison R X π 1 K L)).symm (hfinite 1 le_rfl)), hcomparison, ?_⟩
+  intro a b c e hab hce d hd hKt hLt n hn
+  have := hcomparison n hn
+  exact (_root_.DerivedCategory.torAmplitudeIn _ _ _).prop_of_iso
+    (asIso (comparison R X π n K L)).symm (htor a b c e hab hce d hd hKt hLt n hn)
 
 end AlgebraicGeometry.ProEtale.IntegralCoefficientHom

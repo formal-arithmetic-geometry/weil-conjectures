@@ -42,6 +42,8 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
 import WeilConjectures.Algebra.Homology.SmoothPurity.ChangeOfRingsTensorCancellationIndependentCoefficientsSupplement
+public import WeilConjectures.AlgebraicGeometry.Picard.KFlatResolutionIndependentCoefficients
+public import WeilConjectures.SmoothPurity.ChangeOfRingsKFlatIndependentCoefficients
 
 /-! # Data for mixed geometric and scalar coherence on strict quotient systems
 
@@ -96,6 +98,10 @@ private theorem sequenceDerived_ext
       (R := coefficientSequenceCommRingSheaf l E X) K
   let := hf
   have : IsIso (DerivedCategory.Q.map f) := inferInstance
+  have : IsIso (F.map (DerivedCategory.Q.map f)) := Functor.map_isIso F _
+  have : Epi (F.map (DerivedCategory.Q.map f)) := IsIso.epi_of_iso _
+  let : IsIso (F.map (DerivedCategory.Q.map f)) := Functor.map_isIso F _
+  let : Epi (F.map (DerivedCategory.Q.map f)) := IsIso.epi_of_iso _
   apply (cancel_epi (F.map (DerivedCategory.Q.map f))).mp
   rw [α.naturality, β.naturality, h P hP]
 
@@ -193,6 +199,8 @@ theorem integralComparisonSystemScalarComposition_existsUnique (X : Scheme.{t}) 
   apply sequenceDerived_ext l E X b.hom c
   intro P hP
   have := mc.computes P hP
+  have : Mono (mc.ε.app P) := IsIso.mono_of_iso _
+  let : Mono (mc.ε.app P) := IsIso.mono_of_iso _
   apply (cancel_mono (mc.ε.app P)).mp
   exact (hb P hP).trans (hc P).symm
 
