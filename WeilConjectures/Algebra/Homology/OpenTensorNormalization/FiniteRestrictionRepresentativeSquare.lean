@@ -86,6 +86,6 @@ theorem finite_restriction_representative_square
           (e.realizeX.derived.obj M, e.realizeX.derived.obj N) :=
   (RestrictionSquare.squareEq_of_halves A gU j' j g sq o e P Q hp hq
     (RestrictionSquare.leftEq A gU j' j g sq o e P Q hp hq)
-    (RestrictionSquare.rightEq A gU j' j g sq o e P Q hp hq) ⟨h_total P Q⟩).eq
+    (RestrictionSquare.rightEq A gU j' j g sq o e P Q hp hq) h_total).eq
 
 end SheafOfModules.OpenTensorNormalization
