@@ -8,7 +8,6 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CompositionAssoc
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CompositionUnit
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperLowerShriek
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ShriekComposition
 
 /-!
 

@@ -5,6 +5,9 @@ Authors: Claude
 -/
 module
 
+-- Imported first: the instance order it gives keeps the elaboration of
+-- `pullbackExchange_geometricSliceTraitChangeHom_comp_autAction` within the default heartbeats.
+public import WeilConjectures.TraceFormula.Specialization.NearbyKunnethGlobal  -- shake: keep
 public import WeilConjectures.TraceFormula.Specialization.TraitSliceInvariants
 public import WeilConjectures.SixFunctors.NearbyCycles.GaloisLayerMap
 public import WeilConjectures.SixFunctors.NearbyCycles.AutActionTrivial

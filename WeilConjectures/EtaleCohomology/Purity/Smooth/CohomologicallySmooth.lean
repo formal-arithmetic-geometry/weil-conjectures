@@ -6,14 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.CohomologicalSmoothness
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.Coprojection
-public import WeilConjectures.SixFunctors.Etale.Derived.Composition
-public import WeilConjectures.SixFunctors.Etale.Derived.EtaleLocalization
 public import WeilConjectures.SixFunctors.Etale.Derived.EtaleLocalizationUpperShriek
-public import WeilConjectures.SixFunctors.Etale.Derived.GlobalDuality
-public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMapsComposition
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekInvertible
+public import WeilConjectures.SixFunctors.Etale.Derived.Identity
 
 /-!
 # Cohomologically smooth morphisms

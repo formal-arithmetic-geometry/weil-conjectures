@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.ModuleCatFiniteResolution
 public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageTorAmplitude
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Ordinary
 
 /-!
 # The projection formula with a finite constant coefficient

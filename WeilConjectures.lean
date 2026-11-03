@@ -2805,6 +2805,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.CechSecti
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FibreDimension
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Field
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteSections
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.GeometricFibreRank
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.IsFlatOver
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.IsFlatOverLocal
@@ -5948,6 +5949,7 @@ public import WeilConjectures.AlgebraicGeometry.FiniteEtaleDescentEssentiallySur
 public import WeilConjectures.AlgebraicGeometry.FiniteEtaleDescentFullyFaithful
 public import WeilConjectures.AlgebraicGeometry.FiniteEtaleEquivalenceH1
 public import WeilConjectures.AlgebraicGeometry.FiniteEtaleEtaleLocalSplit
+public import WeilConjectures.AlgebraicGeometry.FiniteEtaleFiniteLocallyConstant
 public import WeilConjectures.AlgebraicGeometry.FiniteEtaleFiniteTypeClosedFibreStage
 public import WeilConjectures.AlgebraicGeometry.FiniteEtaleGraphBaseChange
 public import WeilConjectures.AlgebraicGeometry.FiniteEtaleGraphClopen
@@ -15887,6 +15889,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.CohomologyHom
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Conventions
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Coprojection
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Deformation
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.Diagonal
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientation
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationCoefficients
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.DiagonalOrientationCoefficientsFrame
@@ -19690,6 +19693,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LocalizationIntegral
 public import WeilConjectures.SixFunctors.Etale.Derived.LocalizationIntegralClosedSupport
 public import WeilConjectures.SixFunctors.Etale.Derived.LocalizationRational
 public import WeilConjectures.SixFunctors.Etale.Derived.LocalizationRationalWeil
+public import WeilConjectures.SixFunctors.Etale.Derived.LocalizationRecollement
 public import WeilConjectures.SixFunctors.Etale.Derived.LocallyConstantInvertible
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChange
@@ -21240,6 +21244,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.PadicAlg
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.PadicAlgClRetraction
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldBasis
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldBiproductUnit
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldComapConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldExtendRestrictBiproduct
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldFiniteFree
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldLinear
@@ -23117,6 +23122,7 @@ public import WeilConjectures.TraceFormula.BorelMoore
 public import WeilConjectures.TraceFormula.CategoricalTrace
 public import WeilConjectures.TraceFormula.CategoricalTraceBiproduct
 public import WeilConjectures.TraceFormula.CategoricalTraceExact
+public import WeilConjectures.TraceFormula.ClassTest
 public import WeilConjectures.TraceFormula.ClosedPieceFrobenius
 public import WeilConjectures.TraceFormula.ClosedPieceSquare
 public import WeilConjectures.TraceFormula.ClosedPieceTriangle
@@ -23409,6 +23415,7 @@ public import WeilConjectures.TraceFormula.Specialization.AffineSpaceSliceCartes
 public import WeilConjectures.TraceFormula.Specialization.AffineSpaceSliceModel
 public import WeilConjectures.TraceFormula.Specialization.Basic
 public import WeilConjectures.TraceFormula.Specialization.BoundedConstructibleFiniteComplement
+public import WeilConjectures.TraceFormula.Specialization.BoundedConstructibleNearbyCyclesLaxMonoidal
 public import WeilConjectures.TraceFormula.Specialization.BoundedConstructiblePushforwardExchangeComp
 public import WeilConjectures.TraceFormula.Specialization.ClopenCounit
 public import WeilConjectures.TraceFormula.Specialization.ClosedPointsSupport
@@ -23713,6 +23720,7 @@ public import WeilConjectures.TraceFormula.Specialization.TraitClosedLift
 public import WeilConjectures.TraceFormula.Specialization.TraitDirectImageUnit
 public import WeilConjectures.TraceFormula.Specialization.TraitGenericFibre
 public import WeilConjectures.TraceFormula.Specialization.TraitHigherDirectImage
+public import WeilConjectures.TraceFormula.Specialization.TraitInstances
 public import WeilConjectures.TraceFormula.Specialization.TraitModel
 public import WeilConjectures.TraceFormula.Specialization.TraitModelCompactification
 public import WeilConjectures.TraceFormula.Specialization.TraitModelEmbedding

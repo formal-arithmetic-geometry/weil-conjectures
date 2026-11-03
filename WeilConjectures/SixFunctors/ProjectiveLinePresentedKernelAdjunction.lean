@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 public import WeilConjectures.AlgebraicGeometry.FiniteP1ArbitraryBaseIntegrals
 public import WeilConjectures.AlgebraicGeometry.SfP1IntegralTransportData
+public import WeilConjectures.AlgebraicGeometry.SfDiagonalKernelIntegrals
 import WeilConjectures.AlgebraicGeometry.FiniteEtaleTateLocalLine
 import WeilConjectures.SixFunctors.ProjectiveLinePresentedKernelIntegrals
 

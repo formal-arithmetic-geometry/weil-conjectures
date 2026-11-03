@@ -12,6 +12,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.GmRelativeKummer
 public import WeilConjectures.EtaleCohomology.TateTwist.AffineLineDescentKummer
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ProperProjectionFormula
 public import WeilConjectures.ConstructibleSheaf.Pullback
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineRelative
 
 /-!
 # Acyclicity of the affine line over an arbitrary base

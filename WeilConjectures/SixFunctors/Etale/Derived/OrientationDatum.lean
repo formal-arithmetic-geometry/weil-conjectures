@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.Orientation
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Duality
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.TraceDiagonal
 
 /-!
 # Orientation data

@@ -10,7 +10,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.CoproductTriangle
 public import WeilConjectures.SixFunctors.Etale.Derived.ClosedSupportTriangle
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Coproducts
-public import WeilConjectures.SixFunctors.Etale.Derived.LocalizationIntegral
+public import WeilConjectures.SixFunctors.Etale.Derived.LocalizationRecollement
 
 /-!
 # The exceptional inverse image along a closed immersion commutes with coproducts

@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Limits
 public import WeilConjectures.AlgebraicGeometry.Curve
-public import WeilConjectures.AlgebraicGeometry.Curve.Reductions
+public import WeilConjectures.AlgebraicGeometry.Sites.TorsionSheaf
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyFilteredColimit
 public import WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport
 public import WeilConjectures.AlgebraicGeometry.Sites.TorsionAcyclic
@@ -15,6 +15,9 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.Comparison
 public import WeilConjectures.PointCount
+public import Mathlib.Order.CompletePartialOrder
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
+public import WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomology
 
 /-!
 # Étale cohomology of curves in degrees at least three

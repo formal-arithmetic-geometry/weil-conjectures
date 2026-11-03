@@ -8,6 +8,7 @@ module
 public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBaseSliceOpen
 public import WeilConjectures.TraceFormula.Specialization.CoordinateCompactification
 public import WeilConjectures.Tactic.TransportExact
+public import WeilConjectures.TraceFormula.Specialization.NearbyDualityGenericBaseSliceRebaseTwist
 
 /-!
 

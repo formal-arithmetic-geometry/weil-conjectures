@@ -7,12 +7,10 @@ module
 
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethGeneric
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethProper
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleUpperStar
 public import WeilConjectures.TraceFormula.Specialization.NearbyProperExchange
 public import WeilConjectures.TraceFormula.OrdinaryKunnethGlobalSections
+public import WeilConjectures.TraceFormula.Specialization.TraitInstances
 public import WeilConjectures.TraceFormula.Specialization.TraitProduct
-public import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 
@@ -162,9 +160,6 @@ variable {k' : Type u} [Field k'] {X Y Z : Scheme.{u}} {X' Y' Z' : Over (Spec (.
   {f₂' : Z'.left ⟶ Y'.left} {φ₁ : P.Hom M f₁ f₁'} {φ₂ : P.Hom N f₂ f₂'}
   {qM : M.total ⟶ trait k'} {gM : M.generic ⟶ Spec (.of (traitGenericField k'))}
   {qN : N.total ⟶ trait k'} {gN : N.generic ⟶ Spec (.of (traitGenericField k'))}
-
-instance : IsClosedImmersion (traitClosedPoint k') :=
-  IsClosedImmersion.spec_of_surjective _ fun a ↦ ⟨PowerSeries.C a, by simp⟩
 
 /-- The morphism of special fibres of the first projection of a product over the trait lies over
 `Spec k'`. -/
@@ -409,22 +404,6 @@ theorem isIso_lowerStar_kunnethMap_of_isIso (hM : M.IsTraitModelOver qM gM)
 end GlobalAbstract
 
 /-! ### The global-sections step -/
-
-section TraitGenericField
-
-variable (ℓ : ℕ) {k' : Type u} [Field k']
-
-/-- The geometric generic point of the trait has the characteristic of `k'`. -/
-lemma ringChar_traitGenericField : ringChar (traitGenericField k') = ringChar k' :=
-  (Algebra.ringChar_eq k' _).symm
-
-instance [Fact (ringChar k').Prime] : Fact (ringChar (traitGenericField k')).Prime :=
-  ⟨by rw [ringChar_traitGenericField]; exact Fact.out⟩
-
-instance [Fact (ringChar k' ≠ ℓ)] : Fact (ringChar (traitGenericField k') ≠ ℓ) :=
-  ⟨by rw [ringChar_traitGenericField]; exact Fact.out⟩
-
-end TraitGenericField
 
 section Global
 

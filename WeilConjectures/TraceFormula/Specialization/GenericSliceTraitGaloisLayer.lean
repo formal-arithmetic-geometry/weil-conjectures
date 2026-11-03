@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.TraceFormula.Specialization.GenericSliceTrait
 public import WeilConjectures.TraceFormula.Specialization.SliceTraitGaloisLayer
+public import WeilConjectures.TraceFormula.Specialization.TraitChangeInvariance
 
 /-!
 

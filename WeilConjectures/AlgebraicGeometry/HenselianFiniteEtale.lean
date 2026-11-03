@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantSets
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.RingTheory.Henselian
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+public import WeilConjectures.AlgebraicGeometry.FiniteEtaleFiniteLocallyConstant
 public import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantEtale
 import WeilConjectures.AlgebraicGeometry.HenselianClopenRestriction
 import WeilConjectures.AlgebraicGeometry.SchemeClopenIdempotent
@@ -76,33 +77,6 @@ open CategoryTheory Limits
 namespace AlgebraicGeometry
 
 /-! ### Auxiliary lemmas -/
-
-/-! ### Finite locally constant sheaves and finite étale schemes -/
-
-/-- **Finite locally constant sheaves of sets are finite étale schemes.** For a scheme `T`:
-
-* for every finite étale `π : P ⟶ T`, the presheaf of sections `U ↦ Hom_T(U, P)` on the small
-  étale site (the Yoneda presheaf of `P`, viewed as an étale `T`-scheme) is a sheaf, and it
-  is finite locally constant;
-* every finite locally constant sheaf of sets `E` is isomorphic to the sheaf of sections of
-  a finite étale `T`-scheme.
-
-These are the two object-level halves of the blueprint node. Together with the Yoneda lemma
-(morphisms of the sheaves of sections are `T`-morphisms) they give the equivalence between
-finite étale `T`-schemes and finite locally constant sheaves of sets, and with it the
-statement about finite group actions; neither is stated here.
-(blueprint: `lemma-weil-pbc-finite-locally-constant-etale-equivalence`) 
-(blueprint: lem-galois-flc-representable)
-(blueprint: lemma-weil-pbc-finite-locally-constant-etale-equivalence)
--/
-theorem Scheme.isFiniteLocallyConstant_yoneda_and_exists_iso (T : Scheme.{u}) :
-    (∀ (P : Scheme.{u}) (π : P ⟶ T) [IsFinite π] [Etale π],
-      ∃ h : Presheaf.IsSheaf T.smallEtaleTopology (uliftYoneda.{u + 1}.obj (Scheme.Etale.mk π)),
-        IsFiniteLocallyConstantSheafOfTypes ⟨_, h⟩) ∧
-    ∀ E : Sheaf T.smallEtaleTopology (Type (u + 1)), IsFiniteLocallyConstantSheafOfTypes E →
-      ∃ (P : Scheme.{u}) (π : P ⟶ T) (_ : IsFinite π) (_ : Etale π),
-        Nonempty (E.obj ≅ uliftYoneda.{u + 1}.obj (Scheme.Etale.mk π)) :=
-  isFiniteLocallyConstant_yoneda_and_exists_iso' T
 
 
 section Henselian

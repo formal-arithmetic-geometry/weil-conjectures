@@ -8,6 +8,7 @@ module
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLine
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.GeometricPoint
+public import WeilConjectures.EtaleCohomology.TateTwist.Normalized
 
 /-!
 # The orientation of the zero section of the affine line
