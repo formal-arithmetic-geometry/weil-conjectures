@@ -28,6 +28,11 @@ import WeilConjectures.AlgebraicGeometry.Etale.EtalePullbackTwistTorWindow
 import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeMapDerivedCategory
 import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryBraided
+public import WeilConjectures.AlgebraicGeometry.Constructible.ConstructibleCoefficientSiteSquare
+public import WeilConjectures.AlgebraicGeometry.EtaleChartComparison.EtaleChartComparisonIsos
+public import WeilConjectures.AlgebraicGeometry.EtaleCompactSupportTorWindowGeneralField
+public import WeilConjectures.AlgebraicGeometry.EtalePullbackTwistTorWindowField
+public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionConstructible
 
 /-! # Finite-Tor domains for ordinary etale charts
 
@@ -178,22 +183,74 @@ private theorem comparison_equivalence
     exact ⟨⟨L, hL⟩, ⟨ObjectProperty.isoMk _ e⟩⟩
   exact {}
 
+/-- The current scalar-extension counit computes extension on a K-flat complex.
+Source: Stacks 06YT and 06YY (blueprint: lem-sp-etale-ctf-chart-domain). -/
+private theorem fixed_scalar_counit_iso
+    {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
+    (J : GrothendieckTopology C)
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
+    (P : CochainComplex (Sheaf J (ModuleCat.{u + 1} A)) ℤ)
+    (hP : (HomologicalComplex.quasiIso
+      (Sheaf J (ModuleCat.{u + 1} A)) (.up ℤ)).kFlat P) :
+    IsIso ((fixedCoefficientDerivedExtensionCounit J φ).app P) := by
+  let E := fixedCoefficientScalarExtension J φ
+  have : E.PreservesKFlatQuasiIso := CategoryTheory.fixedExtension_preservesKFlat J φ
+  have hd : (HomologicalComplex.quasiIso
+      (Sheaf J (ModuleCat.{u + 1} A)) (.up ℤ)).localizerMorphismKFlat.Derives
+      (E.mapHomologicalComplex (.up ℤ) ⋙ _root_.DerivedCategory.Q) := by
+    intro X Y f hf
+    let g := (HomologicalComplex.quasiIso
+      (Sheaf J (ModuleCat.{u + 1} A)) (.up ℤ)).ιKFlat.map f
+    have : QuasiIso g := (HomologicalComplex.mem_quasiIso_iff g).1 hf
+    have := E.quasiIso_mapHomologicalComplex_map_of_kFlat X.property Y.property g
+    exact Localization.inverts _root_.DerivedCategory.Q _ _
+      ((HomologicalComplex.mem_quasiIso_iff _).2 this)
+  have : (fixedCoefficientDerivedExtension J φ).IsLeftDerivedFunctor
+      (fixedCoefficientDerivedExtensionCounit J φ)
+      (HomologicalComplex.quasiIso (Sheaf J (ModuleCat.{u + 1} A)) (.up ℤ)) := by
+    dsimp only [fixedCoefficientDerivedExtension, fixedCoefficientDerivedExtensionCounit]
+    infer_instance
+  exact hd.isIso_of_isLeftDerivedFunctor (fixedCoefficientDerivedExtensionCounit J φ)
+    ⟨P, hP⟩
+
+/-- Bounded flat constructible models compute the current ordinary scalar extension.
+Source: Stacks 03TT, 0GKB, 06YT and 08G1 (blueprint: lem-sp-etale-ctf-chart-domain). -/
 private theorem scalar_preserves_etale
     {A B : Type (u + 1)} [CommRing A] [Finite A] [CommRing B] [Finite B]
     (φ : A →+* B) (T : Scheme.{u}) [IsNoetherian T]
     (K : Etale.DerivedCategoryModule A T) (hK : etaleProperty A T K) :
-    etaleProperty B T ((Etale.scalarExtension φ T).obj K) := by
+    etaleProperty B T ((fixedCoefficientDerivedExtension T.smallEtaleTopology φ).obj K) := by
   obtain ⟨a, b, ht⟩ := hK.2
   have hab : min a b ≤ b := min_le_right _ _
   have ht' := Etale.DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn.2
     (ht.mono (min_le_left a b) le_rfl)
-  obtain ⟨_, _, _, hc, htor⟩ := Etale.exists_etaleScalarFlatModel T A B φ (min a b) b hab
-    ⟨K, bounded_of_constructible A T K hK.1⟩ hK.1.1 ht'
-  have h := Etale.DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn.1 htor
-  have hz := _root_.DerivedCategory.homologyConcentratedIn_of_torAmplitudeIn h
-  exact ⟨⟨hc, min a b, b, hab, fun i hi ↦ hi.elim
-    (fun hi ↦ (_root_.DerivedCategory.isGE_iff _ _).1 hz.1 i hi)
-    (fun hi ↦ (_root_.DerivedCategory.isLE_iff _ _).1 hz.2 i hi)⟩, min a b, b, h⟩
+  obtain ⟨P, hf, hc, hz, ⟨e⟩⟩ :=
+    (Etale.hasTorAmplitudeIn_iff_exists_finiteValueConstructibleModel
+      A T (min a b) b hab K hK.1).1 ht'
+  have : P.IsStrictlyGE (min a b) := (CochainComplex.isStrictlyGE_iff _ _).2
+    (fun q hq ↦ hz q (.inl hq))
+  have : P.IsStrictlyLE b := (CochainComplex.isStrictlyLE_iff _ _).2
+    (fun q hq ↦ hz q (.inr hq))
+  have hp := CochainComplex.kFlat_of_bounded_of_flat P (min a b) b hf
+  let E := fixedCoefficientScalarExtension T.smallEtaleTopology φ
+  let Q : CochainComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} B)) ℤ :=
+    (E.mapHomologicalComplex (.up ℤ)).obj P
+  have hqf (q : ℤ) : ObjectProperty.flat (Q.X q) :=
+    flat_etaleSheafExtendScalars_obj (φ := φ) (hf q)
+  have hqz (q : ℤ) (hq : q < min a b ∨ b < q) : IsZero (Q.X q) :=
+    E.map_isZero (hz q hq)
+  have : Q.IsStrictlyGE (min a b) := (CochainComplex.isStrictlyGE_iff _ _).2
+    (fun q hq ↦ hqz q (.inl hq))
+  have : Q.IsStrictlyLE b := (CochainComplex.isStrictlyLE_iff _ _).2
+    (fun q hq ↦ hqz q (.inr hq))
+  have htor := _root_.DerivedCategory.torAmplitudeIn_Q_obj_of_flat Q (min a b) b hqf
+  have hcons := (constructibleCoefficientSiteSquare T A B φ (min a b) b hab P hz hc).2.2.2.1
+  have := fixed_scalar_counit_iso T.smallEtaleTopology φ P hp
+  let eQ : (fixedCoefficientDerivedExtension T.smallEtaleTopology φ).obj K ≅
+      _root_.DerivedCategory.Q.obj Q :=
+    (fixedCoefficientDerivedExtension T.smallEtaleTopology φ).mapIso e.symm ≪≫
+      asIso ((fixedCoefficientDerivedExtensionCounit T.smallEtaleTopology φ).app P)
+  exact property_of_iso B T eQ.symm ⟨hcons, min a b, b, htor⟩
 
 /-- Compact support, comparison, and twisted shifted inverse image have the finite-Tor
 chart domains. The coefficient `R` is arbitrary: specialize it separately to A and B
@@ -237,7 +294,7 @@ Proof:
    equivalences to get the pro-etale domain assertion. -/
 theorem etaleCtfChartDomain
     (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
-    [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+    (hk : Finite k ∨ IsAlgClosed k) (hchar : ringChar k ≠ ℓ)
     (R : Type (u + 1)) [CommRing R] [Finite R] (n : ℕ) (hR : ((ℓ ^ n : ℕ) : R) = 0)
     {U V : Scheme.{u}} [U.Over (Spec (.of k))] [V.Over (Spec (.of k))]
     [LocallyOfFiniteType (U ↘ Spec (.of k))] [QuasiCompact (U ↘ Spec (.of k))]
@@ -279,8 +336,8 @@ theorem etaleCtfChartDomain
   have : IsNoetherian T := ⟨⟩
   have hcompact : ∀ K, etaleProperty R U K → etaleProperty R V
       ((Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} R) c).obj K) := by
-    obtain ⟨e, _, he⟩ := Etale.exists_etaleCompactSupport_torWindow k (ringChar k) ℓ
-      (Fact.out : (ringChar k).Prime).pos Fact.out Fact.out c.g
+    obtain ⟨e, _, he⟩ := Etale.exists_etaleCompactSupport_torWindow_of_finite_or_isAlgClosed
+      k ℓ Fact.out hk hchar c.g
     intro K hK
     obtain ⟨a, b, ht⟩ := hK.2
     have hab : min a b ≤ b := min_le_right _ _
@@ -320,9 +377,8 @@ theorem etaleCtfChartDomain
       ‹QuasiCompact (T' ↘ Spec (.of k))›
     let f : Over.mk (T' ↘ Spec (.of k)) ⟶ Over.mk (T ↘ Spec (.of k)) :=
       Over.homMk u (comp_over u _)
-    have h := (Etale.etale_pullback_twist_tor_window k (ringChar k) ℓ
-      (Fact.out : (ringChar k).Prime).pos Fact.out
-      (Ne.symm (Fact.out : ringChar k ≠ ℓ)) _ _ f n R hR (min i j) j hij).1
+    have h := (Etale.etale_pullback_twist_tor_window_finite_or_algClosed
+      k hk ℓ Fact.out hchar _ _ f n R hR (min i j) j hij).1
         K hK.1 ht' P hP (fun i ↦ (hf i).tensorRight) hc hz a b
     let := _root_.DerivedCategory.braidedCategory'
       (Sheaf T'.smallEtaleTopology (ModuleCat.{u + 1} R))
@@ -345,7 +401,8 @@ theorem etaleCtfChartDomain
       (comparisonUpperStar (ModuleCat.{u + 1} R) T').mapDerivedCategory).prop_of_iso d.symm h.1
 
 /-- Arbitrary finite coefficient extension preserves both chart domains. The comparison
-on these domains is chartScalarComparison, the canonical B-linear tensor comparison.
+on these domains is the current derived scalar comparison encoded by
+`EtaleChartComparison.ScalarModel`.
 No finite projective dimension or flatness of B over A is assumed.
 
 Source: blueprint Charts, coefficient-change proof step; Stacks 03TT, 0GKB, 06YY and 07A4
@@ -364,23 +421,27 @@ Proof:
    constructible by thm-constructible-serre, giving bounded constructibility.
 4. Tensor the resulting bounded flat B-model with every degree-zero B-module
    sheaf. It remains in the same finite interval, proving finite B-Tor amplitude.
-5. Exact comparison commutes termwise with scalar extension. The canonical B-linear
-   map is chartScalarComparison, obtained by the scalar adjunction mate; its K-flat
-   formula is nu(P tensor_A B) = nu(P) tensor_A B by the tensor-pullback theorem.
-   Apply the comparison equivalence on both rings and the etale preservation just
-   proved to deduce preservation for every pro-etale finite-Tor object. -/
+5. Use the current total left-derived coefficient extension on the small ordinary and
+   pro-etale sites. The canonical B-linear comparison is the left-derived image of
+   `EtaleChartComparison.scalarSheafIso`; its K-flat formula is the ordinary balanced
+   tensor comparison for the current fixed coefficient extension. Apply the comparison
+   equivalence on both rings and the ordinary
+   coefficient-extension preservation to deduce the pro-etale assertion. -/
 theorem etaleCtfChartScalarDomain
     (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
-    [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+    (hk : Finite k ∨ IsAlgClosed k) (hchar : ringChar k ≠ ℓ)
     {A B : Type (u + 1)} [CommRing A] [Finite A] [CommRing B] [Finite B]
     (φ : A →+* B) (n : ℕ) (_hA : ((ℓ ^ n : ℕ) : A) = 0) (_hB : ((ℓ ^ n : ℕ) : B) = 0)
     (T : Scheme.{u}) [T.Over (Spec (.of k))]
     [LocallyOfFiniteType (T ↘ Spec (.of k))] [QuasiCompact (T ↘ Spec (.of k))]
     [IsSeparated (T ↘ Spec (.of k))] :
-    (∀ K, etaleProperty A T K → etaleProperty B T ((Etale.scalarExtension φ T).obj K)) ∧
+    (∀ K, etaleProperty A T K → etaleProperty B T
+      ((CategoryTheory.fixedCoefficientDerivedExtension T.smallEtaleTopology φ).obj K)) ∧
     (∀ K, proEtaleProperty A T K → proEtaleProperty B T
-      ((pbcFixedScalarExtension (Scheme.ProEt.topology T) φ).obj K)) := by
+      ((CategoryTheory.fixedCoefficientDerivedExtension (Scheme.ProEt.topology T) φ).obj K)) := by
   classical
+  have _ := hk
+  have _ := hchar
   have : IsLocallyNoetherian T :=
     LocallyOfFiniteType.isLocallyNoetherian (T ↘ Spec (.of k))
   have : CompactSpace T := QuasiCompact.compactSpace_of_compactSpace (T ↘ Spec (.of k))
@@ -388,11 +449,55 @@ theorem etaleCtfChartScalarDomain
   refine ⟨scalar_preserves_etale φ T, ?_⟩
   intro K hK
   obtain ⟨L, hL, ⟨e⟩⟩ := comparison_preimage A T K hK
+  obtain ⟨a, b, ht⟩ := hL.2
+  have hab : min a b ≤ b := min_le_right _ _
+  have ht' := Etale.DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn.2
+    (ht.mono (min_le_left a b) le_rfl)
+  obtain ⟨P, hf, _, hz, ⟨eP⟩⟩ :=
+    (Etale.hasTorAmplitudeIn_iff_exists_finiteValueConstructibleModel
+      A T (min a b) b hab L hL.1).1 ht'
+  have : P.IsStrictlyGE (min a b) := (CochainComplex.isStrictlyGE_iff _ _).2
+    (fun q hq ↦ hz q (.inl hq))
+  have : P.IsStrictlyLE b := (CochainComplex.isStrictlyLE_iff _ _).2
+    (fun q hq ↦ hz q (.inr hq))
+  have hp := CochainComplex.kFlat_of_bounded_of_flat P (min a b) b hf
+  let NA := comparisonUpperStar (ModuleCat.{u + 1} A) T
+  let NB := comparisonUpperStar (ModuleCat.{u + 1} B) T
+  let E := fixedCoefficientScalarExtension T.smallEtaleTopology φ
+  let F := fixedCoefficientScalarExtension (Scheme.ProEt.topology T) φ
+  let PN : CochainComplex (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A)) ℤ :=
+    (NA.mapHomologicalComplex (.up ℤ)).obj P
+  let PE := (E.mapHomologicalComplex (.up ℤ)).obj P
+  have hnf (q : ℤ) : ObjectProperty.flat (PN.X q) :=
+    flat_comparisonUpperStar_obj (hf q)
+  have hnz (q : ℤ) (hq : q < min a b ∨ b < q) : IsZero (PN.X q) :=
+    NA.map_isZero (hz q hq)
+  have : PN.IsStrictlyGE (min a b) := (CochainComplex.isStrictlyGE_iff _ _).2
+    (fun q hq ↦ hnz q (.inl hq))
+  have : PN.IsStrictlyLE b := (CochainComplex.isStrictlyLE_iff _ _).2
+    (fun q hq ↦ hnz q (.inr hq))
+  have hpn := CochainComplex.kFlat_of_bounded_of_flat PN (min a b) b hnf
+  have := fixed_scalar_counit_iso T.smallEtaleTopology φ P hp
+  have := fixed_scalar_counit_iso (Scheme.ProEt.topology T) φ PN hpn
+  let eEt : (fixedCoefficientDerivedExtension T.smallEtaleTopology φ).obj L ≅
+      _root_.DerivedCategory.Q.obj PE :=
+    (fixedCoefficientDerivedExtension T.smallEtaleTopology φ).mapIso eP.symm ≪≫
+      asIso ((fixedCoefficientDerivedExtensionCounit T.smallEtaleTopology φ).app P)
+  let eSrc : NA.mapDerivedCategory.obj L ≅ _root_.DerivedCategory.Q.obj PN :=
+    NA.mapDerivedCategory.mapIso eP.symm ≪≫ NA.mapDerivedCategoryFactors.app P
+  let ePro : (fixedCoefficientDerivedExtension (Scheme.ProEt.topology T) φ).obj K ≅
+      _root_.DerivedCategory.Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj PN) :=
+    (fixedCoefficientDerivedExtension (Scheme.ProEt.topology T) φ).mapIso
+      (e.symm ≪≫ eSrc) ≪≫
+      asIso ((fixedCoefficientDerivedExtensionCounit (Scheme.ProEt.topology T) φ).app PN)
+  let chain := (Functor.mapHomologicalComplexCompIso (Iso.refl (E ⋙ NB)) (.up ℤ)).symm ≪≫
+    NatIso.mapHomologicalComplex (EtaleChartComparison.scalarSheafIso φ T) (.up ℤ) ≪≫
+    Functor.mapHomologicalComplexCompIso (Iso.refl (NA ⋙ F)) (.up ℤ)
+  let d := ePro ≪≫ (_root_.DerivedCategory.Q.mapIso (chain.app P)).symm ≪≫
+    (NB.mapDerivedCategoryFactors.app PE).symm ≪≫ NB.mapDerivedCategory.mapIso eEt.symm
   have h := comparison_preserves B T _ (scalar_preserves_etale φ T L hL)
-  let d := ((pbcFixedScalarExtension (Scheme.ProEt.topology T) φ).mapIso e).symm ≪≫
-    (pbcComparisonReduction T φ).app L
   refine ⟨?_, (_root_.DerivedCategory.finiteTorAmplitude _).prop_of_iso d.symm h.2⟩
   exact ((Etale.DerivedCategory.isBoundedConstructible B T).map
-    (comparisonUpperStar (ModuleCat.{u + 1} B) T).mapDerivedCategory).prop_of_iso d.symm h.1
+    NB.mapDerivedCategory).prop_of_iso d.symm h.1
 
 end AlgebraicGeometry.ProEtale.AdjunctionTransfer
