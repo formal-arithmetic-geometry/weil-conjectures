@@ -10,8 +10,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjection
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FiniteEtaleFlat
-public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.Dual
-public import WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude
+public import WeilConjectures.SixFunctors.Etale.Derived.Perfect
 
 /-!
 # Stability of `Dctf`: pullback, tensor product and internal hom

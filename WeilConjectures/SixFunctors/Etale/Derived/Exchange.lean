@@ -5,10 +5,25 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Reduction
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConstantSheaf
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
+public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.QuotPowTriangle
+public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Functor
+public import WeilConjectures.SixFunctors.Etale.Derived.Invertible
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionUnit
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionShift
+public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
+public import WeilConjectures.SixFunctors.Etale.Derived.TensorRightUnitor
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekTensorRight
+import WeilConjectures.AlgebraicGeometry.CompactificationUpperShriek.CompactificationUpperShriek
 
 /-!
 # Compact-support base change, the projection formula and finite reduction

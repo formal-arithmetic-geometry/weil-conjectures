@@ -7,8 +7,11 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeOpenChoices
+public import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
+public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 import WeilConjectures.Topology.RestrictInjectiveResolution
 import WeilConjectures.Algebra.Homology.OpenRestrictionAdjunctionExact
+import Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 
 /-! # Untwisted comparison with raw section cohomology

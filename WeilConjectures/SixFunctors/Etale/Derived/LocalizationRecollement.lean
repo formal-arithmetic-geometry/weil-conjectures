@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.Triangulated.Recollement
-public import WeilConjectures.SixFunctors.ClosedImmersionStages
 public import WeilConjectures.SixFunctors.Etale.Derived.Localization
 
 /-!

@@ -9,7 +9,6 @@ public import WeilConjectures.SixFunctors.ClosedImmersionStages
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Localization
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Perfect
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Stability
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ClosedUpperShriek
 
 /-!
 # The closed-support triangle on bounded constructible pro-étale complexes

@@ -10,7 +10,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleProjectionTraceNormalization
 import WeilConjectures.AlgebraicGeometry.SfSupportedFirstExtraction
 import WeilConjectures.AlgebraicGeometry.SfSupportedSecondExtraction
 import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormulaCoherence
-public import WeilConjectures.SixFunctors.Etale.Derived.TensorRightUnitor
 
 /-! # Compact-support coordinate contractions before inserting a diagonal
 
