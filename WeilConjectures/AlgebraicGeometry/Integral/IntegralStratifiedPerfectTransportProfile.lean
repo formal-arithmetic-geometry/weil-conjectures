@@ -129,4 +129,179 @@ def AdicCoefficientDatum.constantReductionTransportIso (T : Scheme.{u}) (n : ℕ
 
 end RingEquiv
 
+section ConstantRing
+
+variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] (q : Λ ≃+* Λ')
+
+/-- The constant ring sheaf isomorphism induced by a ring isomorphism.
+(auxiliary; not a blueprint node). -/
+abbrev constantRingIso (X : Scheme.{u}) :
+    adicLisseConstantRing X Λ ≅ adicLisseConstantRing X Λ' :=
+  (constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).mapIso q.toCommRingCatIso
+
+private theorem constantRingIso_unit (X : Scheme.{u}) (U : X.ProEtᵒᵖ) (a : Λ') :
+    (constantRingIso q X).hom.hom.app U
+      ((toSheafify (ProEt.topology X)
+        ((Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of Λ))).app U (q.symm a)) =
+    (toSheafify (ProEt.topology X)
+        ((Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of Λ'))).app U a := by
+  have hn := ConcreteCategory.congr_hom (NatTrans.congr_app (toSheafify_naturality
+    (ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).map (CommRingCat.ofHom q.toRingHom))) U)
+    (q.symm a)
+  simp only [NatTrans.comp_app, CategoryTheory.comp_apply] at hn
+  exact hn.symm.trans (congrArg _ (q.apply_symm_apply a))
+
+private theorem smul_congr'' {T : Scheme.{u}} {R : Sheaf (ProEt.topology T) CommRingCat.{u + 1}}
+    (N : pbcModules T R) (U : T.ProEtᵒᵖ) {r s : ((adicLisseForget T).obj R).obj.obj U}
+    (h : r = s) (x : N.val.obj U) : r • x = s • x := by rw [h]
+
+private def constantGlobalSectionsIso (X : Scheme.{u}) (Tm : X.ProEt) :
+    adicLisseConstantGlobalSections X Λ' Tm ≅
+      pbcRestrict (constantRingIso q X).hom ⋙ adicLisseConstantGlobalSections X Λ Tm ⋙
+        ModuleCat.restrictScalars q.symm.toRingHom :=
+  NatIso.ofComponents (fun N ↦
+    { hom := ModuleCat.ofHom (X := (adicLisseConstantGlobalSections X Λ' Tm).obj N)
+        (Y := (pbcRestrict (constantRingIso q X).hom ⋙ adicLisseConstantGlobalSections X Λ Tm ⋙
+          ModuleCat.restrictScalars q.symm.toRingHom).obj N)
+        { toFun := fun x ↦ x
+          map_add' := fun _ _ ↦ rfl
+          map_smul' := fun a x ↦ by
+            exact smul_congr'' (R := adicLisseConstantRing X Λ') N (op Tm)
+              (constantRingIso_unit q X (op Tm) a).symm x }
+      inv := ModuleCat.ofHom (Y := (adicLisseConstantGlobalSections X Λ' Tm).obj N)
+        (X := (pbcRestrict (constantRingIso q X).hom ⋙ adicLisseConstantGlobalSections X Λ Tm ⋙
+          ModuleCat.restrictScalars q.symm.toRingHom).obj N)
+        { toFun := fun x ↦ x
+          map_add' := fun _ _ ↦ rfl
+          map_smul' := fun a x ↦ by
+            exact smul_congr'' (R := adicLisseConstantRing X Λ') N (op Tm)
+              (constantRingIso_unit q X (op Tm) a) x } })
+    (fun f ↦ by
+      ext x
+      rfl)
+
+/-- Constant module sheaves commute with restriction along a constant ring isomorphism.
+(auxiliary; not a blueprint node). -/
+private def adicLisseConstantModulesTransportIso (X : Scheme.{u}) :
+    adicLisseConstantModules X Λ' ≅
+      ModuleCat.restrictScalars q.toRingHom ⋙ adicLisseConstantModules X Λ ⋙
+        pbcRestrict (constantRingIso q X).inv :=
+  let Tm : X.ProEt := ⊤_ X.ProEt
+  let hT : IsTerminal Tm := terminalIsTerminal
+  let adj₁ := (ModuleCat.restrictScalarsEquivalenceOfRingEquiv q).toAdjunction
+  let adjG := adicLisseConstantModulesAdjunction X Λ Tm hT
+  let adj₃ := (pbcRestrictEquivalence (constantRingIso q X).symm).toAdjunction
+  let adjG' := adicLisseConstantModulesAdjunction X Λ' Tm hT
+  (conjugateIsoEquiv (adj₁.comp (adjG.comp adj₃)) adjG').symm
+    (constantGlobalSectionsIso q X Tm).symm
+
+/-- Constructibility is invariant under isomorphism. (auxiliary; not a blueprint node). -/
+theorem isConstructibleProEtaleCoefficientModuleSheaf_of_iso (Y : Scheme.{u})
+    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    {F G : pbcModules Y (adicLisseConstantRing Y Λ)} (e : F ≅ G)
+    (hF : IsConstructibleProEtaleCoefficientModuleSheaf Y Λ F) :
+    IsConstructibleProEtaleCoefficientModuleSheaf Y Λ G := by
+  obtain ⟨S, hn, hc, hS⟩ := hF
+  refine ⟨S, hn, hc, fun i ↦ ?_⟩
+  obtain ⟨W, hW, hloc⟩ := hS i
+  refine ⟨W, hW, fun V f hf ↦ ?_⟩
+  obtain ⟨M, hM, ⟨e'⟩⟩ := hloc V f hf
+  exact ⟨M, hM, ⟨(SheafOfModules.overFunctor _ V).mapIso
+    ((proEtaleModuleInverseImage (S.immersion i) (adicLisseConstantRing Y Λ)).mapIso e.symm) ≪≫
+      e'⟩⟩
+
+/-- Constructibility is invariant under restriction along a constant ring isomorphism.
+(auxiliary; not a blueprint node).
+Proof: on the same strata and sieves, restriction of scalars commutes with inverse image and
+slice restriction, and carries the constant sheaf of a finite module to the constant sheaf
+of the same module with transported scalars. -/
+theorem isConstructible_restrict_constantRingIso (Y : Scheme.{u}) [Finite Λ] [Finite Λ']
+    (F : pbcModules Y (adicLisseConstantRing Y Λ))
+    (hF : IsConstructibleProEtaleCoefficientModuleSheaf Y Λ F) :
+    IsConstructibleProEtaleCoefficientModuleSheaf Y Λ'
+      ((pbcRestrict (constantRingIso q Y).inv).obj F) := by
+  obtain ⟨S, hn, hc, hS⟩ := hF
+  refine ⟨S, hn, hc, fun i ↦ ?_⟩
+  obtain ⟨W, hW, hloc⟩ := hS i
+  refine ⟨W, hW, fun V f hf ↦ ?_⟩
+  obtain ⟨M, hM, he⟩ := hloc V f hf
+  let M' := (ModuleCat.restrictScalars q.symm.toRingHom).obj M
+  have hM' : Finite M' := hM
+  obtain ⟨e₁⟩ := (localModel_iff (S.immersion i) (constantRingIso q Y).symm V F
+    ((adicLisseConstantModules Y Λ).obj M)).mp he
+  let c : (pbcRestrict (constantRingIso q Y).inv).obj ((adicLisseConstantModules Y Λ).obj M) ≅
+      (adicLisseConstantModules Y Λ').obj M' :=
+    (pbcRestrict (constantRingIso q Y).inv).mapIso ((adicLisseConstantModules Y Λ).mapIso
+      ((ModuleCat.restrictScalarsEquivalenceOfRingEquiv q).counitIso.app M).symm) ≪≫
+      ((adicLisseConstantModulesTransportIso q Y).app M').symm
+  exact ⟨M', hM', ⟨e₁ ≪≫ (SheafOfModules.overFunctor _ V).mapIso
+    ((proEtaleModuleInverseImage (S.immersion i) (adicLisseConstantRing Y Λ')).mapIso c)⟩⟩
+
+end ConstantRing
+
+section Profile
+
+variable {A A' : Type (u + 1)} [CommRing A] [CommRing A']
+  (d : AdicCoefficientDatum A) (d' : AdicCoefficientDatum A')
+  (φ : A ≃+* A') (hφ : d.ideal.map φ = d'.ideal)
+
+/-- The uniform reduction profile transports along an isomorphism of coefficient data.
+Source: Bhatt--Scholze, Definition 6.5.1 (auxiliary; not a blueprint node).
+Proof: the constant reductions of the transported object are the restrictions of those of
+`K` along the constant quotient ring isomorphisms. This exact equivalence preserves the
+cohomological bounds and commutes with cohomology; constructibility is invariant under it. -/
+theorem AdicCoefficientDatum.transport_uniformReductionProfile (T : Scheme.{u})
+    (K : PbcCompletedDerived T d) (hK : PbcUniformReductionProfile T d K) :
+    PbcUniformReductionProfile T d' ((d.transportDerived d' φ hφ T).obj K) := by
+  obtain ⟨a, b, h⟩ := hK
+  refine ⟨a, b, fun n ↦ ?_⟩
+  obtain ⟨ha, hb, hc⟩ := h n
+  let e := (d.constantReductionTransportIso d' φ hφ T n).app K
+  let R := pbcRestrict (d.constantLevelIso d' φ hφ T n).inv
+  let Y := (pbcConstantReduction T d n).obj K
+  have : Y.IsGE a := ha
+  have : Y.IsLE b := hb
+  let e' : (pbcDerivedRestrict (d.constantLevelIso d' φ hφ T n).inv).obj Y ≅
+      (pbcConstantReduction T d' n).obj ((d.transportDerived d' φ hφ T).obj K) := e.symm
+  have : ((pbcDerivedRestrict (d.constantLevelIso d' φ hφ T n).inv).obj Y).IsGE a :=
+    R.isGE_mapDerivedCategory_obj Y a
+  have : ((pbcDerivedRestrict (d.constantLevelIso d' φ hφ T n).inv).obj Y).IsLE b :=
+    R.isLE_mapDerivedCategory_obj Y b
+  refine ⟨DerivedCategory.TStructure.t.isGE_of_iso e' a,
+    DerivedCategory.TStructure.t.isLE_of_iso e' b, fun m ↦ ?_⟩
+  letI := d.quotientFinite n
+  letI := d'.quotientFinite n
+  have hY : IsConstructibleProEtaleCoefficientModuleSheaf T (A ⧸ d.ideal ^ (n + 1))
+      ((DerivedCategory.homologyFunctor _ m).obj Y) := hc m
+  have h₁ := isConstructible_restrict_constantRingIso (d.quotientRingEquiv d' φ hφ n) T _ hY
+  let i₁ : R.obj ((DerivedCategory.homologyFunctor _ m).obj Y) ≅
+      (DerivedCategory.homologyFunctor _ m).obj (R.mapDerivedCategory.obj Y) :=
+    (R.mapDerivedCategoryHomologyFunctorIso m).app Y
+  let i₂ : (DerivedCategory.homologyFunctor _ m).obj (R.mapDerivedCategory.obj Y) ≅
+      (DerivedCategory.homologyFunctor _ m).obj
+        ((pbcConstantReduction T d' n).obj ((d.transportDerived d' φ hφ T).obj K)) :=
+    (DerivedCategory.homologyFunctor _ m).mapIso e'
+  exact isConstructibleProEtaleCoefficientModuleSheaf_of_iso T _ (i₁ ≪≫ i₂) h₁
+
+end Profile
+
+/-- The implication "intrinsically complete with a uniform reduction profile implies
+stratified perfect" is invariant under isomorphisms of adic coefficient data.
+Source: Bhatt--Scholze, Proposition 6.6.11 (auxiliary; not a blueprint node).
+Proof: restriction of scalars along the completed isomorphism transports completeness and
+the uniform reduction profile; the hypothesis for `d'` gives stratified perfect models of the
+transported object, and these descend. -/
+theorem isIntegralStratifiedPerfect_of_ringEquiv (T : Scheme.{u})
+    {A A' : Type (u + 1)} [CommRing A] [CommRing A']
+    (d : AdicCoefficientDatum A) (d' : AdicCoefficientDatum A')
+    (φ : A ≃+* A') (hφ : d.ideal.map φ = d'.ideal)
+    (h' : ∀ K' : PbcCompletedDerived T d', PbcIsIntrinsicallyComplete T d' K' →
+      PbcUniformReductionProfile T d' K' → IsIntegralStratifiedPerfect T d' K')
+    (K : PbcCompletedDerived T d) (hc : PbcIsIntrinsicallyComplete T d K)
+    (hp : PbcUniformReductionProfile T d K) :
+    IsIntegralStratifiedPerfect T d K :=
+  d.isIntegralStratifiedPerfect_of_transport d' φ hφ T K
+    (h' _ (d.transport_intrinsicallyComplete d' φ hφ T K hc)
+      (d.transport_uniformReductionProfile d' φ hφ T K hp))
+
 end AlgebraicGeometry.Scheme

@@ -15,7 +15,7 @@ public import WeilConjectures.AlgebraicGeometry.Pbc.PbcUniformReductionProfile
 A ring isomorphism `φ : A ≃+* A'` carrying the ideal of one adic coefficient datum onto the
 ideal of another identifies all finite quotients, hence the quotient coefficient sheaves and
 their limit. Restriction of scalars along this completed isomorphism transports completed
-derived objects, intrinsic completeness and the uniform reduction profile.
+derived objects and intrinsic completeness.
 
 Source: Bhatt--Scholze, Proposition 6.6.11 (auxiliary; not a blueprint node).
 -/
@@ -159,20 +159,6 @@ completion unit is invertible. -/
 theorem AdicCoefficientDatum.transport_intrinsicallyComplete (T : Scheme.{u})
     (K : PbcCompletedDerived T d) (hK : PbcIsIntrinsicallyComplete T d K) :
     PbcIsIntrinsicallyComplete T d' ((d.transportDerived d' φ hφ T).obj K) := by
-  sorry
-
-/-- The uniform reduction profile transports along an isomorphism of coefficient data.
-Source: Bhatt--Scholze, Definition 6.5.1 (auxiliary; not a blueprint node).
-Proof: the completed isomorphism is compatible with the level projections and the quotient
-isomorphisms with the constant level comparisons; by uniqueness of scalar extension the
-constant reductions of the transported object are the restrictions of those of `K` along
-the constant quotient ring isomorphisms. This exact equivalence preserves the cohomological
-bounds and identifies the cohomology sheaves; constructibility is invariant under
-restriction of scalars along an isomorphism of constant finite coefficient rings, since
-inverse image, slice restriction and constant module sheaves commute with it. -/
-theorem AdicCoefficientDatum.transport_uniformReductionProfile (T : Scheme.{u})
-    (K : PbcCompletedDerived T d) (hK : PbcUniformReductionProfile T d K) :
-    PbcUniformReductionProfile T d' ((d.transportDerived d' φ hφ T).obj K) := by
   sorry
 
 end RingEquiv
