@@ -71,6 +71,80 @@ Source: termwise Tate construction (blueprint: def-sp-coordinate-tate-tensor-com
 abbrev lineComplex {T : Scheme.{u}} (w : SpChartAdmissibility.Twists l E T) (r : ℕ) :=
   (CochainComplex.singleFunctor (SpTowerShriek.S l E T) 0).obj (w.tower r)
 
+/-- Pure-tensor normalized multiplication on the strict Tate towers, with the
+actual K-flat representative equation for the derived map. The ordinary transition
+condition is already part of each tower morphism.
+Source: Local pairs, tensor reassociation
+(blueprint: def-sp-coordinate-tate-tensor-comparisons). -/
+structure Products (b : SpTowerShriek.Base l E) {T : Scheme.{u}}
+    (w : SpChartAdmissibility.Twists l E T) where
+  finite : ∀ n : ℕ, SpEllTwistProducts l E T n
+  finite_normalized : ∀ n : ℕ,
+    SheafOfModules.SignedLineProductNormalized.{u + 1, u, u + 1}
+      (spEllTwistOne l E T n) (finite n)
+  ordinary : ∀ a c : ℕ,
+    SemilinearSections.ordinaryTensor.{u + 1, u, u + 1}
+      (coefficientSequenceTopology (ProEt.topology T))
+      (SemilinearSections.systemRing.{u + 1, u, u + 1}
+        (ProEt.topology T) (SpTowerShriek.B l E T) (SpTowerShriek.tau l E T))
+      (w.tower a) (w.tower c) ≅ w.tower (a + c)
+  ordinary_normalized : ∀ (a c n : ℕ) (U : T.ProEtᵒᵖ)
+    (x : ((SpTowerShriek.ev l E T n).obj (w.tower a)).val.obj U)
+    (y : ((SpTowerShriek.ev l E T n).obj (w.tower c)).val.obj U),
+    ((SpTowerShriek.ev l E T n).map (ordinary a c).hom ≫
+        (w.level n (a + c)).hom).val.app U
+      ((SemilinearSections.ordinaryEvaluationTensor.{u + 1, u, u + 1}
+        (ProEt.topology T) (SpTowerShriek.B l E T) (SpTowerShriek.tau l E T)
+          n (w.tower a) (w.tower c)).inv.val.app U
+        (SemilinearSections.tensorSection.{u + 1, u, u + 1}
+          (ProEt.topology T) (SpTowerShriek.B l E T n)
+          ((SpTowerShriek.ev l E T n).obj (w.tower a))
+          ((SpTowerShriek.ev l E T n).obj (w.tower c)) U x y)) =
+      (finite n (a : ℤ) (c : ℤ)).hom.val.app U
+        (SheafOfModules.siteSheafTensorTmul
+          (spEllTwistLine l E T n (a : ℤ)) (spEllTwistLine l E T n (c : ℤ)) U
+          ((w.level n a).hom.val.app U x) ((w.level n c).hom.val.app U y))
+  kflat : ∀ r : ℕ, CochainComplex.IsKFlatIndependentCoefficients
+    (J := coefficientSequenceTopology (ProEt.topology T))
+    (R := SpTowerClasses.systemRing l E T) (lineComplex l E w r)
+  chain : ∀ a c : ℕ,
+    ((SemilinearSections.totalTensor.{u + 1, u, u + 1}
+      (coefficientSequenceTopology (ProEt.topology T))
+      (SemilinearSections.systemRing.{u + 1, u, u + 1}
+        (ProEt.topology T) (SpTowerShriek.B l E T) (SpTowerShriek.tau l E T))).obj
+      (lineComplex l E w a, lineComplex l E w c)) ⟶ lineComplex l E w (a + c)
+  chain_normalized : ∀ a c : ℕ,
+    SemilinearSections.tensorSummand.{u + 1, u, u + 1}
+      (coefficientSequenceTopology (ProEt.topology T))
+      (SemilinearSections.systemRing.{u + 1, u, u + 1}
+        (ProEt.topology T) (SpTowerShriek.B l E T) (SpTowerShriek.tau l E T))
+      (lineComplex l E w a) (lineComplex l E w c) 0 0 0 (by decide) ≫
+        (chain a c).f 0 =
+      SemilinearSections.ordinaryTensorHom.{u + 1, u, u + 1}
+        (coefficientSequenceTopology (ProEt.topology T))
+      (SemilinearSections.systemRing.{u + 1, u, u + 1}
+        (ProEt.topology T) (SpTowerShriek.B l E T) (SpTowerShriek.tau l E T))
+        (HomologicalComplex.singleObjXSelf (.up ℤ) 0 (w.tower a)).hom
+        (HomologicalComplex.singleObjXSelf (.up ℤ) 0 (w.tower c)).hom ≫
+        (ordinary a c).hom ≫
+        (HomologicalComplex.singleObjXSelf (.up ℤ) 0 (w.tower (a + c))).inv
+  derived : ∀ a c : ℕ,
+    (SpTowerShriek.tensor l E b T).obj (line l E w a, line l E w c) ≅ line l E w (a + c)
+  derived_normalized : ∀ a c : ℕ,
+    (SpTowerShriek.tensor l E b T).map
+      (Prod.mkHom
+        ((DerivedCategory.singleFunctorIsoCompQ _ 0).hom.app (w.tower a))
+        ((DerivedCategory.singleFunctorIsoCompQ _ 0).hom.app (w.tower c))) ≫
+      (SemilinearSections.tensorModelIso.{u + 1, u, u + 1}
+        (coefficientSequenceTopology (ProEt.topology T))
+      (SemilinearSections.systemRing.{u + 1, u, u + 1}
+        (ProEt.topology T) (SpTowerShriek.B l E T) (SpTowerShriek.tau l E T))
+        (b.calculus T).closed (b.calculus T).tensorModels
+        (lineComplex l E w a) (lineComplex l E w c) (kflat a) (kflat c)).inv ≫
+      DerivedCategory.Q.map (chain a c) ≫
+      (DerivedCategory.singleFunctorIsoCompQ _ 0).inv.app (w.tower (a + c)) =
+        (derived a c).hom
+
 /-- The canonical total-complex shift in the first tensor variable, with the same
 coefficient-size instances as the recorded tensor model. Source: Local pairs,
 addition of shifts (blueprint: def-sp-coordinate-tate-tensor-comparisons). -/

@@ -170,6 +170,7 @@ import all WeilConjectures.AlgebraicGeometry.Vector.VectorBundlePurity
 import all WeilConjectures.AlgebraicGeometry.Bounded.BoundedSiteAdjunctionTranspose
 import WeilConjectures.AlgebraicGeometry.VectorIntegrationSite.VectorTensorProjectionComparison
 import WeilConjectures.AlgebraicGeometry.VectorIntegrationSite.VectorTensorOrdinaryNormalization
+public import WeilConjectures.AlgebraicGeometry.Sp.SpDirectImageEtaleMate
 
 /-! # Site comparison of normalized vector-bundle integration
 Source: Stacks 099R, 09AF and 0B65; main-20261015, vector-bundle integration
@@ -227,13 +228,196 @@ private theorem mate_adjunct
   rw [← Category.assoc, unit_mateEquiv]
   simp only [Functor.id_obj, Category.assoc]
 
+-- Reuse the proved GeoP1Cohomology calculations as local private lemmas.
+
+private theorem vector_mate_app_homEquiv
+    {C D E H : Type*} [Category C] [Category D] [Category E] [Category H]
+    {L : C ⥤ D} {R : D ⥤ C} {L' : E ⥤ H} {R' : H ⥤ E}
+    {G : C ⥤ E} {F : D ⥤ H} (a : L ⊣ R) (b : L' ⊣ R')
+    (α : G ⋙ L' ⟶ L ⋙ F) (K : D) :
+    (mateEquiv a b α).app K = b.homEquiv _ _
+      (α.app (R.obj K) ≫ F.map (a.counit.app K)) := by
+  simp [mateEquiv_apply, Adjunction.homEquiv_unit]
+
+private theorem vector_pullComparison_eq (A : Type (u + 1)) [CommRing A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    geoP1PullComparison A f = BoundaryComparison.pullbackSquare (ModuleCat.{u + 1} A) f := by
+  unfold geoP1PullComparison BoundaryComparison.pullbackSquare
+    leftDerivedUpperStarIsoMapDerivedCategory Etale.leftDerivedUpperStarIsoMapDerivedCategory
+  rfl
+
+private theorem vector_pushComparison_mate (A : Type (u + 1)) [CommRing A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) (K : Etale.DerivedCategoryModule A X) :
+    geoP1PushComparison A f K =
+      (BoundaryComparison.directImageMate (ModuleCat.{u + 1} A) f).app K := by
+  unfold geoP1PushComparison BoundaryComparison.directImageMate
+  rw [vector_mate_app_homEquiv]
+  rw [vector_pullComparison_eq]
+  rfl
+
+private theorem vector_sp_included_counit
+    (C : Type*) [Category.{u + 1} C] [Abelian C]
+    [IsGrothendieckAbelian.{u + 1} C]
+    [MonoidalCategory C] [MonoidalPreadditive C] [SymmetricCategory C]
+    [MonoidalClosed C] [Abelian.HasFunctorialFlatResolution C]
+    {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (J : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) C)) :
+    (upperStar C f).mapDerivedCategory.map
+        ((lowerStar C f).rightDerivedFunctorPlusCompatibility.hom.app J) ≫
+      ((upperStarLowerStarAdjunction C f).derivedAdjunction.ofNatIsoLeft
+        (upperStar C f).leftDerivedFunctorIsoMapDerivedCategory).counit.app J.obj =
+    DerivedCategory.Plus.ι.map
+      ((derivedUpperStarLowerStarAdjunctionPlus C f).counit.app J) := by
+  simp only [derivedUpperStarLowerStarAdjunctionPlus, Adjunction.derivedAdjunctionPlus,
+    Adjunction.map_restrictFullyFaithful_counit_app,
+    Functor.mapDerivedCategoryPlusCompatibility, Iso.symm_inv, Iso.refl_hom,
+    NatTrans.id_app, Category.id_comp]
+  rfl
+
+private theorem vector_sp_included_etale_counit
+    (C : Type*) [Category.{u + 1} C] [Abelian C]
+    [IsGrothendieckAbelian.{u + 1} C]
+    [MonoidalCategory C] [MonoidalPreadditive C] [SymmetricCategory C]
+    [MonoidalClosed C] [Abelian.HasFunctorialFlatResolution C]
+    {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (J : DerivedCategory.Plus (Sheaf X.smallEtaleTopology C)) :
+    (Etale.upperStar C f).mapDerivedCategory.map
+        ((Etale.lowerStar C f).rightDerivedFunctorPlusCompatibility.hom.app J) ≫
+      ((Etale.upperStarLowerStarAdjunction C f).derivedAdjunction.ofNatIsoLeft
+        (Etale.upperStar C f).leftDerivedFunctorIsoMapDerivedCategory).counit.app J.obj =
+    DerivedCategory.Plus.ι.map
+      ((Etale.derivedUpperStarLowerStarAdjunctionPlus C f).counit.app J) := by
+  simp only [Etale.derivedUpperStarLowerStarAdjunctionPlus, Adjunction.derivedAdjunctionPlus,
+    Adjunction.map_restrictFullyFaithful_counit_app,
+    Functor.mapDerivedCategoryPlusCompatibility, Iso.symm_inv, Iso.refl_hom,
+    NatTrans.id_app, Category.id_comp]
+  rfl
+
+private theorem vector_geoP1_sp_comparison_hom
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)))
+    (hK : ∃ n : ℤ, K.IsGE n) :
+    (spDirectImageComparisonIso A f K hK).hom =
+      (BoundaryComparison.directImageMate (ModuleCat.{u + 1} A) f).app K := by
+  let J : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) :=
+    ⟨K, hK⟩
+  let C := ModuleCat.{u + 1} A
+  let E := Etale.upperStar C f
+  let P := upperStar C f
+  let DX := (comparisonUpperStar C X).mapDerivedCategory
+  let DY := (comparisonUpperStar C Y).mapDerivedCategory
+  let eps := ((upperStarLowerStarAdjunction C f).derivedAdjunction.ofNatIsoLeft
+    P.leftDerivedFunctorIsoMapDerivedCategory).counit
+  let epse := ((Etale.upperStarLowerStarAdjunction C f).derivedAdjunction.ofNatIsoLeft
+    E.leftDerivedFunctorIsoMapDerivedCategory).counit
+  have hn := congrArg DerivedCategory.Plus.ι.map
+    (fixedComparisonDirectImageMatePlus_counit A f J)
+  have hpull : DerivedCategory.Plus.ι.map
+      ((fixedComparisonPullbackPlus A f).hom.app
+        ((Etale.rightDerivedLowerStarPlus C f).obj J)) =
+      ((Functor.mapDerivedCategoryCompIso E (comparisonUpperStar C X)).inv ≫
+        (Functor.mapDerivedCategoryNatIso
+          (comparisonUpperStarCompUpperStarIso C f).symm).hom ≫
+        (Functor.mapDerivedCategoryCompIso (comparisonUpperStar C Y) P).hom).app
+          (((Etale.lowerStar C f).rightDerivedFunctorPlus.obj J).obj) := by
+    simp only [fixedComparisonPullbackPlus, Iso.trans_hom, Iso.symm_hom,
+      NatTrans.comp_app, Functor.map_comp]
+    have he : DerivedCategory.Plus.ι.mapIso
+        ((Functor.mapDerivedCategoryPlusCompIso E (comparisonUpperStar C X)).app
+          ((Etale.rightDerivedLowerStarPlus C f).obj J)) =
+        (Functor.mapDerivedCategoryCompIso E (comparisonUpperStar C X)).app
+          (((Etale.rightDerivedLowerStarPlus C f).obj J).obj) :=
+      Iso.ext (Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app _ _ _)
+    have hi := congrArg Iso.inv he
+    change DerivedCategory.Plus.ι.map
+      ((Functor.mapDerivedCategoryPlusCompIso E (comparisonUpperStar C X)).inv.app
+        ((Etale.rightDerivedLowerStarPlus C f).obj J)) = _ at hi
+    erw [hi, Functor.ι_map_mapDerivedCategoryPlusNatIso_hom_app,
+      Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app]
+    rfl
+  simp only [Functor.map_comp] at hn
+  rw [hpull, ← vector_sp_included_counit C f] at hn
+  change _ = DX.map (DerivedCategory.Plus.ι.map
+    ((Etale.derivedUpperStarLowerStarAdjunctionPlus C f).counit.app J)) at hn
+  rw [← vector_sp_included_etale_counit C f] at hn
+  change _ = DX.map (E.mapDerivedCategory.map
+    ((Etale.lowerStar C f).rightDerivedFunctorPlusCompatibility.hom.app J) ≫ epse.app K) at hn
+  apply ((derivedUpperStarLowerStarAdjunction C f).ofNatIsoLeft
+    P.leftDerivedFunctorIsoMapDerivedCategory).homEquiv _ _ |>.symm.injective
+  rw [Adjunction.homEquiv_counit]
+  rw [Adjunction.homEquiv_ofNatIsoLeft_symm_apply,
+    BoundaryComparison.directImageMate, Adjunction.homEquiv_counit, mateEquiv_counit]
+  dsimp only [spDirectImageComparisonIso, Iso.trans_hom, Functor.mapIso_hom,
+    Iso.symm_hom, Iso.symm_inv, Iso.app_hom, Iso.app_inv, asIso_hom,
+    Functor.mapDerivedCategoryPlusCompatibility, Iso.refl_hom, Iso.refl_inv,
+    NatTrans.id_app]
+  let q := (Functor.mapDerivedCategoryCompIso E (comparisonUpperStar C X)).symm ≪≫
+    Functor.mapDerivedCategoryNatIso (comparisonUpperStarCompUpperStarIso C f).symm ≪≫
+    Functor.mapDerivedCategoryCompIso (comparisonUpperStar C Y) P
+  let r := (Etale.lowerStar C f).rightDerivedFunctorPlusCompatibility.app J
+  let b := DerivedCategory.Plus.ι.map ((fixedComparisonDirectImageMatePlus A f).app J)
+  let c := (lowerStar C f).rightDerivedFunctorPlusCompatibility.hom.app
+    ((comparisonUpperStar C X).mapDerivedCategoryPlus.obj J)
+  erw [CategoryTheory.Functor.map_id, Category.comp_id, Category.id_comp]
+  change P.mapDerivedCategory.map (DY.map r.inv ≫ b ≫ c) ≫ eps.app (DX.obj K) = _
+  have hnorm : P.mapDerivedCategory.map b ≫ P.mapDerivedCategory.map c ≫
+      eps.app (DX.obj K) = q.inv.app ((Etale.rightDerivedLowerStarPlus C f).obj J).obj ≫
+        DX.map (E.mapDerivedCategory.map r.hom ≫ epse.app K) := by
+    change q.hom.app _ ≫ P.mapDerivedCategory.map b ≫ P.mapDerivedCategory.map c ≫
+      eps.app (DX.obj K) = _ at hn
+    apply (cancel_epi (q.hom.app _)).1
+    erw [Iso.hom_inv_id_app_assoc]
+    exact hn
+  simp only [Functor.map_comp, Category.assoc]
+  rw [hnorm]
+  erw [q.inv.naturality_assoc]
+  simp only [Functor.comp_map, Functor.map_comp]
+  change q.inv.app _ ≫ DX.map (E.mapDerivedCategory.map r.inv) ≫
+    DX.map (E.mapDerivedCategory.map r.hom) ≫ DX.map (epse.app K) = _
+  rw [← DX.map_comp_assoc, ← E.mapDerivedCategory.map_comp, r.inv_hom_id,
+    CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id, Category.id_comp]
+  simp only [q, epse, BoundaryComparison.pullbackSquare, Adjunction.ofNatIsoLeft_counit,
+    Iso.trans_inv, Iso.trans_hom, Iso.symm_inv, Iso.symm_hom, NatTrans.comp_app,
+    Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.map_comp, Category.assoc,
+    ]
+  erw [Iso.inv_hom_id_app_assoc]
+  rfl
+
+private theorem vector_geoP1_pushComparison_eq (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
+    (K : Etale.DerivedCategoryModule A X) (hK : ∃ n : ℤ, K.IsGE n) :
+    geoP1PushComparison A f K = (spDirectImageComparisonIso A f K hK).hom := by
+  rw [vector_pushComparison_mate]
+  exact (vector_geoP1_sp_comparison_hom A f K hK).symm
+
+private theorem vector_pushComparison_plus (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
+    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) :
+    (geoP1Comparison A Y).map
+        ((Etale.lowerStar (ModuleCat.{u + 1} A) f).rightDerivedFunctorPlusCompatibility.hom.app K) ≫
+      geoP1PushComparison A f K.obj =
+    (rightDerivedLowerStarComparisonIso' f (ModuleCat.{u + 1} A)).hom.app K := by
+  rw [vector_geoP1_pushComparison_eq A f K.obj K.property]
+  simp only [spDirectImageComparisonIso, rightDerivedLowerStarComparisonIso',
+    rightDerivedLowerStarComparisonPlusIso, Functor.mapDerivedCategoryPlusCompatibility,
+    Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv, Functor.mapIso_hom,
+    NatTrans.comp_app, Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Iso.refl_hom, Iso.refl_inv, NatTrans.id_app, asIso_hom,
+    fixedComparisonDirectImageMatePlus]
+  erw [Category.id_comp, CategoryTheory.Functor.map_id, Category.comp_id]
+  erw [← Functor.map_comp_assoc, Iso.hom_inv_id_app,
+    CategoryTheory.Functor.map_id, Category.id_comp]
+
 private theorem directImage_eq_push (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
     (J : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) :
     (directImage A f J).hom = geoP1PushComparison A f J.obj := by
   unfold directImage
   simp only [Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom, Iso.app_inv, Iso.app_hom]
-  rw [← pushComparison_plus A f J]
+  rw [← vector_pushComparison_plus A f J]
   simp only [← Functor.map_comp_assoc, Iso.inv_hom_id_app]
   change (comparison A Y).map (𝟙 ((Etale.ordinaryFinitePushforward A f).obj J.obj)) ≫
     geoP1PushComparison A f J.obj = _
@@ -254,7 +438,7 @@ private theorem directImage_adjunct (A : Type (u + 1)) [CommRing A] [Finite A]
     (Etale.derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)
     (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)
     (geoP1PullComparison A f) g
-  rw [mate_app_homEquiv] at h
+  rw [vector_mate_app_homEquiv] at h
   rw [directImage_eq_push A f J]
   unfold pullback
   exact h
@@ -427,6 +611,22 @@ theorem openCounitComparison {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j
     ((leftDerivedUpperStarIsoMapDerivedCategory B j).hom.app ((comparison A X).obj G))
   rw [Iso.inv_hom_id_app, CategoryTheory.Functor.map_id] at hp
   rw [← reassoc_of% hp]
+
+/-- The displayed canonical comparison equations, packaged as a proposition.
+Source: Stacks 099R, 09AF, 0B65 and the vector-bundle integration formulas
+(blueprint: lem-pur-vector-integration-site-comparison). -/
+def IntegrationCompatibility (S : Scheme.{u}) [IsNoetherian S]
+    (hS : IsUnit (l : Γ(S, ⊤))) (r : ℕ)
+    (hA : ((l ^ (r + 1) : ℕ) : Scheme.finiteTateCoefficient l E n) = 0) (d : ℕ)
+    (F : SheafOfModules.{u} S.ringCatSheaf) [F.IsFiniteLocallyFreeOfRank d] : Prop :=
+    VectorNormalization l E n S r hA d F hS
+      (vectorIntegration l E n S r hA d F hS) ∧
+    (vectorSite l E n S r hA d F hS).inv ≫
+        vectorIntegration l E n S r hA d F hS =
+      (comparison (Scheme.finiteTateCoefficient l E n) S).map
+        (Etale.vectorBundleIntegration (l ^ (r + 1))
+          (pow_pos (Fact.out : l.Prime).pos _) (Scheme.finiteTateCoefficient l E n) hA S
+          (by simpa only [Nat.cast_pow] using hS.pow (r + 1)) d F)
 
 private theorem compared_pullback_unit (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (f : X ⟶ Y)

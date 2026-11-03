@@ -48,8 +48,11 @@ theorem exceptionalIntegralCompletedScalarShift
     completedScalarChainShift l E.carrier L.carrier i (endpoint X Y side)
   refine ⟨eC, ?_, hs⟩
   intro P m
-  simpa only [RoosShift.ConeFormula, completedScalarShiftConeFormula,
+  dsimp only [RoosShift.ConeFormula, completedScalarShiftConeFormula,
     completedScalarShiftProductIso, completedScalarShiftLevelIso,
     completedScalarChainProductIso, completedScalarRoosEndomorphism,
-    RoosShift.endomorphism, RoosShift.roosFunctor, integralScalarComplexFunctor] using hc P m
+    RoosShift.endomorphism, RoosShift.roosFunctor, integralScalarComplexFunctor] at hc ⊢
+  set_option backward.isDefEq.respectTransparency false in
+    exact hc P m
+
 end WeilConjectures.ExceptionalIntegralScalar

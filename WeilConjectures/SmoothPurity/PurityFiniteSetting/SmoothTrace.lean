@@ -118,4 +118,44 @@ noncomputable def coefficientValuedSmoothTrace
       (P.smoothPurityMap f d K hK) ≫
     smoothExceptionalCounit P f K
 
+/-- The smooth trace on the coefficient unit, using the purity map's explicit formula
+in the canonical ordinary-etale unit presentation. The realization unit supplies the
+representing isomorphism. The existing uniqueness characterization of the tensor purity
+map identifies this with its coefficient-valued specialization at Lambda_Y; thus no
+separate finite-Tor proof is needed merely to construct this particular arrow.
+Source: blueprint smooth trace, first composite (blueprint: def-pur-smooth-trace). -/
+noncomputable def smoothTrace
+    (P : PurityFiniteSetting.{u}) {X Y : Scheme.{u}}
+    [X.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))]
+    [QuasiCompact (X ↘ Spec (.of P.field.k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of P.field.k))]
+    [QuasiCompact (Y ↘ Spec (.of P.field.k))]
+    (f : X ⟶ Y) [f.IsOver (Spec (.of P.field.k))]
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    (d : ℕ) [SmoothOfRelativeDimension d f] :
+    (smoothCompactSupport P f).obj
+        ((Scheme.sfIntrinsicDerivedEquivalence X P.Ring).functor.obj
+          ((shiftFunctor (DerivedCategory (Sheaf (Scheme.ProEt.topology X)
+              (ModuleCat.{u + 1} P.Coefficient))) (2 * (d : ℤ))).obj
+            (((smoothPurityTensor P.Coefficient X).obj
+                ((P.smoothPurityPullback f).obj
+                  ((Scheme.sfIntrinsicDerivedEquivalence Y P.Ring).inverse.obj
+                    (coefficientUnit P Y)))).obj
+              ((shiftFunctor (DerivedCategory (Sheaf (Scheme.ProEt.topology X)
+                  (ModuleCat.{u + 1} P.Coefficient))) (-(2 * (d : ℤ)))).obj
+                (P.diagonalTwist X d))))) ⟶ coefficientUnit P Y := by
+  let E := Scheme.sfIntrinsicDerivedEquivalence Y P.Ring
+  let C := (ProEtale.comparisonUpperStar
+    (ModuleCat.{u + 1} P.Coefficient) Y).mapDerivedCategory
+  let U := Etale.ordinaryFiniteUnit P.Coefficient Y
+  let L := E.inverse.obj (coefficientUnit P Y)
+  let γ := (Scheme.sfIntrinsicDerivedEquivalence X P.Ring).functor.map
+    (P.smoothPurityReassociation X d ((P.smoothPurityPullback f).obj L)).hom ≫
+      (Scheme.sfIntrinsicDerivedEquivalence X P.Ring).functor.map
+        (P.smoothPurityTensorMapInPresentation f d (Y ↘ Spec (.of P.field.k)) L U
+          (E.unitIso.app (C.obj U)))
+  exact (smoothCompactSupport P f).map γ ≫
+    smoothExceptionalCounit P f (coefficientUnit P Y)
+
 end WeilConjectures.PurityFiniteSetting

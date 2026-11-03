@@ -533,6 +533,23 @@ private theorem symmetricMap_spec (S : Scheme.{u}) (F G : S.Modules) (j : G ⟶ 
   (exists_quasiCoherentSymmetricAlgebra_core S G (SymmetricAlgebraSheaf.algebra F)
     (j ≫ SymmetricAlgebraSheaf.inclusion F)).exists.choose_spec U x
 
+private theorem symmetricMap_inverse (S : Scheme.{u}) (F G : S.Modules)
+    (j : G ≅ F) :
+    WeilConjectures.PurityFiniteSetting.puritySymmetricAlgebraMap S F G j.hom ≫
+      WeilConjectures.PurityFiniteSetting.puritySymmetricAlgebraMap S G F j.inv = 𝟙 _ := by
+  apply (exists_quasiCoherentSymmetricAlgebra_core S G
+    (SymmetricAlgebraSheaf.algebra G) (SymmetricAlgebraSheaf.inclusion G)).unique
+  · intro U x
+    change (WeilConjectures.PurityFiniteSetting.puritySymmetricAlgebraMap
+      S G F j.inv).right.hom.app (op U)
+      ((WeilConjectures.PurityFiniteSetting.puritySymmetricAlgebraMap
+        S F G j.hom).right.hom.app (op U) _) = _
+    rw [symmetricMap_spec, symmetricMap_spec]
+    have h := congrArg (fun k : G ⟶ G ↦ k.val.app (op U) x) j.hom_inv_id
+    exact congrArg ((SymmetricAlgebraSheaf.inclusion G).val.app (op U)) h
+  · intros
+    rfl
+
 /-- The first projection, induced by the first summand's generators.
 Source: blueprint paragraph 2 (blueprint: def-pur-vector-trace-geometry). -/
 def first (S : Scheme.{u}) [IsNoetherian S] (r s : ℕ) (F G : S.Modules)
@@ -730,6 +747,22 @@ def swap (S : Scheme.{u}) [IsNoetherian S] (r s : ℕ) (F G : S.Modules)
       VectorBundleZeroSection.scheme S (s + r) (sum S G F) :=
   WeilConjectures.PurityFiniteSetting.purityBundleMap S (r + s) (s + r)
     (sum S F G) (sum S G F) (biprod.braiding G F).hom
+
+/-- The rank-zero bundle projection is an isomorphism, including on the empty scheme.
+Source: blueprint paragraph 2, rank zero (blueprint: def-pur-vector-trace-geometry).
+Proof: the rank-zero module is zero on every frame, hence is zero. Its symmetric algebra
+is O_S by the generator universal property. Relative Spec identifies the projection with
+Spec_S O_S, whose augmentation is its inverse. -/
+theorem zero_isIso (S : Scheme.{u}) [IsNoetherian S] (F : S.Modules)
+    [F.IsFiniteLocallyFreeOfRank 0] : IsIso (VectorBundleZeroSection.π S 0 F) := by
+  obtain ⟨I, U, hU, e⟩ :=
+    Scheme.Modules.IsFiniteLocallyFreeOfRank.exists_restrict_iso_free F (r := 0)
+  apply IsZariskiLocalAtTarget.of_iSup_eq_top
+    (P := MorphismProperty.isomorphisms Scheme) U hU
+  intro i
+  have := (VectorBundleZeroSection.trivializationMap_spec S 0 F (U i) (e i).some).1
+  rw [← (VectorBundleZeroSection.trivializationMap_spec S 0 F (U i) (e i).some).2.1]
+  infer_instance
 
 end VectorTraceGeometry
 end AlgebraicGeometry

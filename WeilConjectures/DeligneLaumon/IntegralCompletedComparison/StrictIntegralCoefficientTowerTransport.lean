@@ -256,16 +256,7 @@ theorem integralRoosFiniteTower_commShift_good
   have enat := e.hom.naturality
     ((Functor.commShiftIso S (self := C.finiteChainShift) r).hom.app P)
   dsimp only [Functor.comp_map] at enat
-  have hE : γ ≫ (e.hom.app (S.obj P))⟦r⟧' =
-      e.hom.app (S.obj (P⟦r⟧)) ≫ R.map σ ≫
-        (R.commShiftIso r).hom.app (DerivedCategory.Q.obj (S.obj P)) := by
-    dsimp only [γ, σ]
-    erw [finite_roos_chain_shift l E g C c hc P r, DerivedCategory.Q.map_comp]
-    simp only [Category.assoc]
-    erw [eshift, reassoc_of% enat]
-    simp only [Functor.map_comp, Category.assoc]
-    rfl
-  exact comparison_shift_pasting C.B.functor D R b
+  refine comparison_shift_pasting C.B.functor D R b
     (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj (P⟦r⟧)) r
     ((DerivedCategory.Q.commShiftIso r).inv.app P)
     (DerivedCategory.Q.obj (S.obj P)) (DerivedCategory.Q.obj (S.obj (P⟦r⟧)))
@@ -275,7 +266,13 @@ theorem integralRoosFiniteTower_commShift_good
     ((integralDerivedPullbackComparison l E g).hom.app ⟨P, hP⟩)
     ((integralDerivedPullbackComparison l E g).hom.app ⟨P⟦r⟧, hPs⟩)
     (e.hom.app (S.obj P)) (e.hom.app (S.obj (P⟦r⟧))) γ
-    (hb P hP) (hb (P⟦r⟧) hPs) hfinite hds hE
+    (hb P hP) (hb (P⟦r⟧) hPs) hfinite hds ?_
+  dsimp only [γ, σ]
+  erw [finite_roos_chain_shift l E g C c hc P r, DerivedCategory.Q.map_comp]
+  simp only [Category.assoc]
+  erw [eshift, reassoc_of% enat]
+  simp only [Functor.map_comp, Category.assoc]
+  rfl
 
 private theorem finite_roos_chain_shift
     (C : FinitePullbackStrictTower.Comparison.{u, u} l E g)

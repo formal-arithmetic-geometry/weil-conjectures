@@ -542,6 +542,32 @@ def kummer (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
           (coefficientModule A (l ^ (r + 1)) hA) (1 : A)) 1
         (T.kummerδ₀ (l ^ (r + 1)) hT (Additive.ofMul v))))
 
+private def coefficientRootMap (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
+    (A : Type (u + 1)) [CommRing A] [Finite A] (r : ℕ)
+    (hA : ((l ^ (r + 1) : ℕ) : A) = 0)
+    (hT : IsUnit ((l ^ (r + 1) : ℕ) : Γ(T, ⊤))) :
+    (ProEtale.comparisonUpperStar AddCommGrpCat.{u + 1} T).obj
+      (T.rootsOfUnitySheaf (l ^ (r + 1))) ⟶ finiteLine T l A r hA :=
+  (ProEtale.comparisonUpperStar AddCommGrpCat.{u + 1} T).map
+    (Scheme.kummerCoefficientInsertion T (l ^ (r + 1))
+      (coefficientModule A (l ^ (r + 1)) hA) (1 : A)) ≫
+    (coefficientComparison T l A r hA hT).hom
+
+private lemma coefficientRootMap_normalization (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
+    (A : Type (u + 1)) [CommRing A] [Finite A] (r : ℕ)
+    (hA : ((l ^ (r + 1) : ℕ) : A) = 0)
+    (hT : IsUnit ((l ^ (r + 1) : ℕ) : Γ(T, ⊤)))
+    (W : T.Etaleᵒᵖ) (z : (T.rootsOfUnitySheaf (l ^ (r + 1))).obj.obj W) :
+    (((ProEtale.comparisonAdjunction AddCommGrpCat.{u + 1} T).homEquiv _ _)
+      (coefficientRootMap T l A r hA hT)).hom.app W z =
+    Scheme.tateFiniteTensor T l A r (Scheme.finiteEtaleTwistScalar _ A hA)
+      ((Scheme.toProEt T).obj W.unop)
+      (coefficientSection T A ((Scheme.toProEt T).op.obj W) 1)
+      ((rootRestriction T (l ^ (r + 1))).hom.app W z) := by
+  unfold coefficientRootMap
+  rw [Adjunction.homEquiv_naturality_left]
+  exact (coefficientComparison_existsUnique T l A r hA hT).choose_spec.1 W 1 z
+
 private theorem finiteLine_hom_ext (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (A : Type (u + 1)) [CommRing A] (n : ℕ)
     (hA : ((l ^ (n + 1) : ℕ) : A) = 0)
@@ -567,6 +593,219 @@ private theorem finiteLine_hom_ext (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
   | zero => simp only [map_zero]
   | add x y hx hy => simp only [map_add, hx, hy]
   | tmul b z => exact h U.unop b z
+
+private theorem finiteLine_tensor_restrict (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
+    (A : Type (u + 1)) [CommRing A] (r : ℕ)
+    (hA : ((l ^ (r + 1) : ℕ) : A) = 0) {U V : T.ProEtᵒᵖ} (i : U ⟶ V)
+    (b : (Scheme.tateFiniteCoefficient T A).obj.obj U)
+    (z : (Scheme.proEtaleRootsOfUnitySheaf T (l ^ (r + 1))).obj.obj U) :
+    (finiteLine T l A r hA).obj.map i
+        (Scheme.tateFiniteTensor T l A r (Scheme.finiteEtaleTwistScalar _ A hA)
+          U.unop b z) =
+      Scheme.tateFiniteTensor T l A r (Scheme.finiteEtaleTwistScalar _ A hA)
+        V.unop ((Scheme.tateFiniteCoefficient T A).obj.map i b)
+        ((Scheme.proEtaleRootsOfUnitySheaf T (l ^ (r + 1))).obj.map i z) := by
+  let α := Scheme.tateFiniteScalar T l A r (Scheme.finiteEtaleTwistScalar _ A hA)
+  let M := Scheme.purTwistRootsModule T l r
+  let P := SheafOfModules.changeOfRingsPresheafOfUniverses.{u, u + 1, u + 1, u + 1} α M
+  let z' : M.val.obj U := z
+  have h := NatTrans.naturality_apply
+    (toSheafify (Scheme.ProEt.topology T) P.presheaf) i
+      (b ⊗ₜ[(Scheme.purTwistFiniteRing T l r).obj.obj U, (α.hom.app U).hom] z')
+  have hm := SheafOfModules.changeOfRingsMap_tmulOfUniverses α M i b z'
+  exact h.symm.trans (congrArg (fun t ↦
+    (toSheafify (Scheme.ProEt.topology T) P.presheaf).app V t) hm)
+
+private theorem finiteLine_const_hom_ext (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
+    (A : Type (u + 1)) [CommRing A] (r : ℕ)
+    (hA : ((l ^ (r + 1) : ℕ) : A) = 0)
+    {F : Sheaf (Scheme.ProEt.topology T) AddCommGrpCat.{u + 1}}
+    (f g : finiteLine T l A r hA ⟶ F)
+    (h : ∀ (V : T.ProEt) (a : A)
+      (z : (Scheme.proEtaleRootsOfUnitySheaf T (l ^ (r + 1))).obj.obj (op V)),
+      f.hom.app (op V)
+          (Scheme.tateFiniteTensor T l A r (Scheme.finiteEtaleTwistScalar _ A hA)
+            V (coefficientSection T A (op V) a) z) =
+        g.hom.app (op V)
+          (Scheme.tateFiniteTensor T l A r (Scheme.finiteEtaleTwistScalar _ A hA)
+            V (coefficientSection T A (op V) a) z)) : f = g := by
+  apply finiteLine_hom_ext T l A r hA f g
+  intro V b z
+  let η := toSheafify (Scheme.ProEt.topology T)
+    ((Functor.const T.ProEtᵒᵖ).obj (CommRingCat.of A))
+  apply F.property.isSeparated _ _
+    (Presheaf.imageSieve_mem (Scheme.ProEt.topology T) η b)
+  intro W i hi
+  obtain ⟨a, ha⟩ := hi
+  have hf := NatTrans.naturality_apply f.hom i.op
+    (Scheme.tateFiniteTensor T l A r (Scheme.finiteEtaleTwistScalar _ A hA) V b z)
+  have hg := NatTrans.naturality_apply g.hom i.op
+    (Scheme.tateFiniteTensor T l A r (Scheme.finiteEtaleTwistScalar _ A hA) V b z)
+  rw [finiteLine_tensor_restrict] at hf hg
+  change coefficientSection T A (op W) a =
+    (Scheme.tateFiniteCoefficient T A).obj.map i.op b at ha
+  rw [← ha] at hf hg
+  exact hf.symm.trans ((h W a _).trans hg)
+
+/-- The finite line pullback is characterized by restriction of roots and constants.
+Source: blueprint sk-def-purity-conv, naturality paragraph
+(blueprint: sk-def-purity-conv).
+Proof: pullback of roots is the canonical root-restriction isomorphism; pullback of
+constant A is the constant-sheaf isomorphism. The universal property of the sheafified
+tensor gives this map. After an etale root trivialization it is the identity on A,
+so it is an isomorphism. Local sums of pure tensors prove uniqueness. -/
+theorem finiteLinePullback_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (l : ℕ) [Fact l.Prime] (A : Type (u + 1)) [CommRing A] [Finite A] (r : ℕ)
+    (hA : ((l ^ (r + 1) : ℕ) : A) = 0)
+    (hY : IsUnit ((l ^ (r + 1) : ℕ) : Γ(Y, ⊤))) :
+    ∃! e : (ProEtale.upperStar AddCommGrpCat.{u + 1} f).obj
+        (finiteLine Y l A r hA) ≅ finiteLine X l A r hA,
+      ∀ (V : Y.ProEt) (a : A)
+        (z : (Scheme.proEtaleRootsOfUnitySheaf Y (l ^ (r + 1))).obj.obj (op V)),
+        (((ProEtale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).homEquiv _ _)
+          e.hom).hom.app (op V)
+            (Scheme.tateFiniteTensor Y l A r (Scheme.finiteEtaleTwistScalar _ A hA)
+              V (coefficientSection Y A (op V) a) z) =
+          Scheme.tateFiniteTensor X l A r (Scheme.finiteEtaleTwistScalar _ A hA)
+            ((Scheme.proEtaleBaseChange f).obj V)
+            (coefficientSection X A (op ((Scheme.proEtaleBaseChange f).obj V)) a)
+            ((Scheme.proEtaleRootsOfUnityDirectImageMap f (l ^ (r + 1))).hom.app
+              (op V) z) := by
+  have hlY : IsUnit (l : Γ(Y, ⊤)) :=
+    (isUnit_pow_iff (Nat.succ_ne_zero r)).mp (by
+      simpa only [Nat.cast_pow] using hY)
+  have hlX : IsUnit (l : Γ(X, ⊤)) := by
+    simpa only [map_natCast] using hlY.map f.appTop.hom
+  let : ∀ y : Y, Invertible (l : Y.residueField y) := fun y ↦
+    (show IsUnit (l : Y.residueField y) from by
+      simpa only [map_natCast] using hlY.map (Y.Γevaluation y).hom).invertible
+  let : ∀ x : X, Invertible (l : X.residueField x) := fun x ↦
+    (show IsUnit (l : X.residueField x) from by
+      simpa only [map_natCast] using hlX.map (X.Γevaluation x).hom).invertible
+  let R := Scheme.tateFiniteCoefficient Y A
+  let S := Scheme.tateFiniteCoefficient X A
+  let c := ProEtale.StrictTower.constantRingIso A f
+  let M := Scheme.tateFiniteLine Y l A r (Scheme.finiteEtaleTwistScalar _ A hA)
+  let UY := SheafOfModules.toSheaf ((sheafCompose (Scheme.ProEt.topology Y)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)
+  let UX := SheafOfModules.toSheaf ((sheafCompose (Scheme.ProEt.topology X)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S)
+  let adj := ProEtale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f
+  let unit := UY.map ((Scheme.proEtaleRingModuleAdjunction f R S c).unit.app M)
+  let k₀ := (adj.homEquiv (UY.obj M)
+    (UX.obj ((Scheme.proEtaleRingModulePullback f R S c).obj M))).symm unit
+  have hk₀ : IsIso k₀ := ProEtale.pullback_unit_mate_isIso f R S c M
+  let k := ProEtale.finiteFirstComparison f l A r (Scheme.finiteEtaleTwistScalar _ A hA)
+  have hk : IsIso k :=
+    ProEtale.finiteFirstComparison_isIso f l A r (Scheme.finiteEtaleTwistScalar _ A hA)
+  let e : (ProEtale.upperStar AddCommGrpCat.{u + 1} f).obj
+      (finiteLine Y l A r hA) ≅ finiteLine X l A r hA :=
+    asIso (k₀ ≫ UX.map k)
+  have he (V : Y.ProEt) (a : A)
+      (z : (Scheme.proEtaleRootsOfUnitySheaf Y (l ^ (r + 1))).obj.obj (op V)) :
+      ((adj.homEquiv _ _) e.hom).hom.app (op V)
+          (Scheme.tateFiniteTensor Y l A r (Scheme.finiteEtaleTwistScalar _ A hA)
+            V (coefficientSection Y A (op V) a) z) =
+        Scheme.tateFiniteTensor X l A r (Scheme.finiteEtaleTwistScalar _ A hA)
+          ((Scheme.proEtaleBaseChange f).obj V)
+          (coefficientSection X A (op ((Scheme.proEtaleBaseChange f).obj V)) a)
+          ((Scheme.proEtaleRootsOfUnityDirectImageMap f (l ^ (r + 1))).hom.app
+            (op V) z) := by
+    have hm := ProEtale.finiteFirstComparison_apply f l A r
+      (Scheme.finiteEtaleTwistScalar _ A hA) V (coefficientSection Y A (op V) a) z
+    have hc := ((sheafificationAdjunction (Scheme.ProEt.topology Y)
+      CommRingCat.{u + 1}).homEquiv
+        ((Functor.const Y.ProEtᵒᵖ).obj (CommRingCat.of A))
+        ((Scheme.proEtaleSheafDirectImage f CommRingCat.{u + 1}).obj S)).apply_symm_apply
+          (Functor.whiskerLeft (Scheme.proEtaleBaseChange f).op
+            (toSheafify (Scheme.ProEt.topology X)
+              ((Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of A))))
+    have hca := congrArg (fun q ↦ (q.app (op V)).hom a) hc
+    change (Scheme.proEtaleConstantDirectImageMap f CommRingCat.{u + 1}
+      (CommRingCat.of A)).hom.app (op V) (coefficientSection Y A (op V) a) =
+      coefficientSection X A (op ((Scheme.proEtaleBaseChange f).obj V)) a at hca
+    rw [hca] at hm
+    change ((adj.homEquiv _ _) (k₀ ≫ UX.map k)).hom.app (op V) _ = _
+    rw [Adjunction.homEquiv_naturality_right, Equiv.apply_symm_apply]
+    exact hm
+  refine ⟨e, he, ?_⟩
+  intro d hd
+  apply Iso.ext
+  apply (adj.homEquiv _ _).injective
+  apply finiteLine_const_hom_ext Y l A r hA
+  intro V a z
+  exact (hd V a z).trans (he V a z).symm
+
+/-- The unique root-normalized pullback isomorphism.
+Source: blueprint sk-def-purity-conv, pullback convention
+(blueprint: sk-def-purity-conv). -/
+def finiteLinePullback {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (l : ℕ) [Fact l.Prime] (A : Type (u + 1)) [CommRing A] [Finite A] (r : ℕ)
+    (hA : ((l ^ (r + 1) : ℕ) : A) = 0)
+    (hY : IsUnit ((l ^ (r + 1) : ℕ) : Γ(Y, ⊤))) :
+    (ProEtale.upperStar AddCommGrpCat.{u + 1} f).obj
+      (finiteLine Y l A r hA) ≅ finiteLine X l A r hA :=
+  Classical.choose (finiteLinePullback_existsUnique f l A r hA hY)
+
+private lemma etaleRootsPullback_eq (A : Type (u + 1)) [CommRing A]
+    (m : ℕ) (hm : 0 < m) (hA : (m : A) = 0) {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (hY : IsUnit (m : Γ(Y, ⊤))) :
+    ((Scheme.finiteEtaleTwistPullbackData A m hm hA).r f hY).hom =
+      Scheme.upperStarRootsOfUnitySheafToRootsOfUnitySheaf m f := by
+  apply (cancel_mono (kernel.ι (m • 𝟙 X.gmSheaf))).mp
+  rw [Scheme.upperStarRootsOfUnitySheafToRootsOfUnitySheaf_ι]
+  exact ((Scheme.finiteEtaleTwistPullbackData A m hm hA).laws.2.1 f hY).symm
+
+private lemma coefficientRootMap_baseChange {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (l : ℕ) [Fact l.Prime] (A : Type (u + 1)) [CommRing A] [Finite A] (r : ℕ)
+    (hA : ((l ^ (r + 1) : ℕ) : A) = 0)
+    (hY : IsUnit ((l ^ (r + 1) : ℕ) : Γ(Y, ⊤)))
+    (hX : IsUnit ((l ^ (r + 1) : ℕ) : Γ(X, ⊤))) :
+    (ProEtale.upperStar AddCommGrpCat.{u + 1} f).map
+        (coefficientRootMap Y l A r hA hY) ≫ (finiteLinePullback f l A r hA hY).hom =
+      (ProEtale.comparisonCoefficientPullbackIso AddCommGrpCat.{u + 1} f).inv.app
+          (Y.rootsOfUnitySheaf (l ^ (r + 1))) ≫
+        (ProEtale.comparisonUpperStar AddCommGrpCat.{u + 1} X).map
+          (Scheme.upperStarRootsOfUnitySheafToRootsOfUnitySheaf (l ^ (r + 1)) f) ≫
+        coefficientRootMap X l A r hA hX := by
+  have hm := pow_pos (Fact.out : l.Prime).pos (r + 1)
+  rw [← etaleRootsPullback_eq A (l ^ (r + 1)) hm hA f hY]
+  apply (((ProEtale.comparisonAdjunction AddCommGrpCat.{u + 1} Y).comp
+    (Scheme.proEtaleSheafAdjunction f AddCommGrpCat.{u + 1})).homEquiv _ _).injective
+  rw [Scheme.transpose_comparison_ab]
+  rw [Scheme.composite_transpose, Scheme.composite_transpose]
+  -- Name the four adjunctions: the generic pattern made `erw` try (and fail, slowly) to unify
+  -- with every other `homEquiv` occurrence at default transparency.
+  erw [(Scheme.proEtaleSheafAdjunction f AddCommGrpCat.{u + 1}).homEquiv_naturality_left,
+    (ProEtale.comparisonAdjunction AddCommGrpCat.{u + 1} X).homEquiv_naturality_left,
+    (ProEtale.comparisonAdjunction AddCommGrpCat.{u + 1} Y).homEquiv_naturality_right,
+    (Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).homEquiv_naturality_right]
+  ext U z
+  change (((ProEtale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).homEquiv _ _
+      (finiteLinePullback f l A r hA hY).hom).hom.app ((Scheme.toProEt Y).op.obj U))
+        ((((ProEtale.comparisonAdjunction AddCommGrpCat.{u + 1} Y).homEquiv _ _)
+          (coefficientRootMap Y l A r hA hY)).hom.app U z) = _
+  rw [coefficientRootMap_normalization]
+  dsimp only [finiteLinePullback]
+  erw [(finiteLinePullback_existsUnique f l A r hA hY).choose_spec.1]
+  change _ = ((ProEtale.lowerStarCompComparisonLowerStarIso f
+      AddCommGrpCat.{u + 1}).inv.app (finiteLine X l A r hA)).hom.app U
+    ((((Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).homEquiv _ _)
+      (((Scheme.finiteEtaleTwistPullbackData A (l ^ (r + 1)) hm hA).r f hY).hom ≫
+        ((ProEtale.comparisonAdjunction AddCommGrpCat.{u + 1} X).homEquiv _ _)
+          (coefficientRootMap X l A r hA hX))).hom.app U z)
+  rw [Scheme.rightComparison_component]
+  erw [Adjunction.homEquiv_naturality_right]
+  change _ = (((ProEtale.comparisonAdjunction AddCommGrpCat.{u + 1} X).homEquiv _ _)
+      (coefficientRootMap X l A r hA hX)).hom.app
+        ((MorphismProperty.Over.pullback @Etale ⊤ f).op.obj U)
+        ((((Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} f).homEquiv _ _)
+          ((Scheme.finiteEtaleTwistPullbackData A (l ^ (r + 1)) hm hA).r f hY).hom).hom.app U z)
+  rw [coefficientRootMap_normalization,
+    rootRestriction_adjunct Y (l ^ (r + 1)) hm hY,
+    rootRestriction_adjunct X (l ^ (r + 1)) hm hX,
+    Scheme.rootComparison_adjunct_square A (l ^ (r + 1)) hm hA f hY hX]
+  try rfl
 
 set_option maxHeartbeats 2000000 in
 -- Comparing composite adjunctions unfolds the site and module presentations.
@@ -641,13 +880,16 @@ theorem regularNormalBundle {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion 
       intro z
       exact hbij z
     have hval : IsIso ((commAlgebraSheafModuleFunctor Z.sheaf).map f).val := by
-      exact inferInstanceAs (IsIso ((SheafOfModules.forget _).map
-        ((commAlgebraSheafModuleFunctor Z.sheaf).map f)))
+      -- Elaborate the functor image first, so that `_` is solved before the defeq check.
+      have h := Functor.map_isIso (SheafOfModules.forget _)
+        ((commAlgebraSheafModuleFunctor Z.sheaf).map f)
+      exact h
     have happ (W : Z.Opensᵒᵖ) : IsIso (f.right.hom.app W) := by
       apply (ConcreteCategory.isIso_iff_bijective _).mpr
       have : IsIso (((commAlgebraSheafModuleFunctor Z.sheaf).map f).val.app W) := by
-        exact inferInstanceAs (IsIso ((PresheafOfModules.evaluation _ W).map
-          ((commAlgebraSheafModuleFunctor Z.sheaf).map f).val))
+        have h := Functor.map_isIso (PresheafOfModules.evaluation _ W)
+          ((commAlgebraSheafModuleFunctor Z.sheaf).map f).val
+        exact h
       exact ConcreteCategory.bijective_of_isIso
         (((commAlgebraSheafModuleFunctor Z.sheaf).map f).val.app W)
     have : IsIso f.right.hom := NatIso.isIso_of_isIso_app _

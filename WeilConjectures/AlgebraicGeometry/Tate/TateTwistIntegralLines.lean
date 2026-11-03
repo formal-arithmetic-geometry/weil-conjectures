@@ -29,6 +29,12 @@ import WeilConjectures.SixFunctors.Completed.CompletedTensorScalarLinearity
 import all WeilConjectures.CategoryTheory.ScalarLocalization.ScalarLocalization
 import WeilConjectures.CategoryTheory.ScalarLocalization.SemilinearScalarLocalization
 import all WeilConjectures.AlgebraicGeometry.Tate.TateTwistFiniteLocallyFree
+public import Mathlib.Tactic.CongrExclamation
+public import WeilConjectures.AlgebraicGeometry.Integral.IntegralTateBasis
+public import WeilConjectures.AlgebraicGeometry.Native.NativeFiniteTwistLocalLine
+public import WeilConjectures.AlgebraicGeometry.Native.NativeIntegralTwistLocalLine
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Native.NativeSignedLineFiniteness
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.MonoidalModule
 
 /-! # Integral and rational Tate twists: definitions and local calculations
 
@@ -60,26 +66,79 @@ open AlgebraicGeometry AlgebraicGeometry.Scheme WeilConjectures
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The canonical bounded integral twist uses the recorded intrinsic coefficient line.
-Source: blueprint clause (3), integral case
-(blueprint: det-def-sp-tate-twist-locally-free). -/
-def tateIntegralTwist (D : FiniteFieldDatum.{d}) (ℓ : ℕ) [Fact ℓ.Prime]
-    (hD : ℓ ≠ D.p) (E : Type u) [Field E] [Algebra (Padic ℓ) E]
-    [FiniteDimensional (Padic ℓ) E] (X : Scheme.{u})
-    [∀ x : X, Invertible (ℓ : X.residueField x)] (m : ℤ) :=
-  tateTensorRight (constructibleIntegralTensor ℓ E X)
-    (intrinsicIntegralCoefficientTwist D ℓ hD E X m)
+/-- The finite, integral, rational and algebraic-closure lines have all signed-line
+properties on the ordinary unbounded derived categories.
+Source: current blueprint, clause (3)
+(blueprint: det-def-sp-tate-twist-locally-free).
+Proof: compatible roots identify the finite root lines with their coefficient units.
+Their compatible bases identify the integral inverse limit with the integral unit.
+Extension of scalars, commuting with inverse image, gives the rational and algebraic
+closure bases. Signed powers and internal duals of each local line remain locally
+free. Evaluation is invertible on the cover, hence globally; a locally free line is
+flat, so the single-complex tensor computes derived tensor. Its evaluation and the
+opposite evaluation give inverse tensor functors, with the prescribed signed powers. -/
+private theorem tateNativeFiniteness
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
+    [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})
+    [∀ x : X, Invertible (l : X.residueField x)] :
+    (∀ n : ℕ, CondensedRing.NativeTwistFiniteness (twistFiniteRing l E n) X
+      (coefficientSignedTwist X _ (coefficientFiniteTwistOne l E X n))) ∧
+    CondensedRing.NativeTwistFiniteness (twistIntegralRing l E) X
+      (coefficientSignedTwist X _ (coefficientIntegralTwistOne l E X)) ∧
+    CondensedRing.NativeTwistFiniteness (twistRationalRing l E) X
+      (coefficientSignedTwist X _ (coefficientRationalTwistOne l E X)) ∧
+    CondensedRing.NativeTwistFiniteness (Profinite.padicAlgClRingObj l) X
+      (tateTwist X l) := by
+  have hl : IsUnit (l : Γ(X, ⊤)) := by
+    apply X.toRingedSpace.isUnit_of_isUnit_germ
+    intro x hx
+    have h : IsUnit (l : X.presheaf.stalk x) := by
+      apply (IsLocalRing.residue_ne_zero_iff_isUnit _).mp
+      change (X.residue x).hom (l : X.presheaf.stalk x) ≠ 0
+      simpa only [map_natCast] using
+        (isUnit_of_invertible (l : X.residueField x)).ne_zero
+    simpa only [map_natCast] using h
+  have hI := coefficientIntegralTwistOne_locally_trivial l E X hl
+  have hR := scalarExtension_locally_trivial
+    (coefficientMap (twistIntegralToRational l E) X) (coefficientIntegralTwistOne l E X) hI
+  have hQ := scalarExtension_locally_trivial
+    (coefficientMap (Profinite.padicIntRingObjToPadicAlgCl l) X) (tateModule X l)
+      (tateModule_locally_trivial X l hl)
+  refine ⟨fun n ↦ CondensedRing.nativeSignedLine_finiteness _ X _
+      (coefficientFiniteTwistOne_locally_trivial l E X hl n),
+    CondensedRing.nativeSignedLine_finiteness _ X _ hI,
+    CondensedRing.nativeSignedLine_finiteness _ X _ hR, ?_⟩
+  have hn (n : ℕ) : coefficientTwistNat X
+      (condensedRingObj (Profinite.padicAlgClRingObj l) X) (tateTwistOne X l) n =
+        tateTwistNat X l n := by
+    induction n with
+    | zero => rfl
+    | succ n ih => simp only [coefficientTwistNat, tateTwistNat, ih]
+  have hs : coefficientSignedTwist X
+      (condensedRingObj (Profinite.padicAlgClRingObj l) X) (tateTwistOne X l) =
+        tateTwist X l := by
+    funext m
+    cases m with
+    | ofNat n => exact hn n
+    | negSucc n =>
+      simp only [coefficientSignedTwist, tateTwist]
+      have h := hn (n + 1)
+      congr!
+  have hfin := CondensedRing.nativeSignedLine_finiteness _ X (tateTwistOne X l) hQ
+  rw [hs] at hfin
+  exact hfin
 
-/-- The rational twist tensors with the localization of the same integral representative.
-Source: blueprint clause (3), rational case
-(blueprint: det-def-sp-tate-twist-locally-free). -/
-def tateRationalTwist (D : FiniteFieldDatum.{d}) (ℓ : ℕ) [Fact ℓ.Prime]
-    (hD : ℓ ≠ D.p) (E : Type u) [Field E] [Algebra (Padic ℓ) E]
-    [FiniteDimensional (Padic ℓ) E] (X : Scheme.{u})
-    [∀ x : X, Invertible (ℓ : X.residueField x)] (m : ℤ) :=
-  tateTensorRight (rationalDerivedTensor ℓ E X)
-    ((sfRationalConstructibleLocalization ℓ E X).obj
-      (intrinsicIntegralCoefficientTwist D ℓ hD E X m))
+/-- Integral twisting on the unbounded derived category over the condensed integral ring.
+Source: coefficient twist construction (blueprint: def-coefficient-twists-detailed). -/
+abbrev tateIntegralTwist (ℓ : ℕ) [Fact ℓ.Prime]
+    (E : Type u) [Field E] [Algebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
+    (X : Scheme.{u}) (m : ℤ) := coefficientIntegralTwistFunctor ℓ E X m
+
+/-- Rational twisting on the unbounded derived category over the condensed field ring.
+Source: coefficient twist construction (blueprint: def-coefficient-twists-detailed). -/
+abbrev tateRationalTwist (ℓ : ℕ) [Fact ℓ.Prime]
+    (E : Type u) [Field E] [Algebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
+    (X : Scheme.{u}) (m : ℤ) := coefficientRationalTwistFunctor ℓ E X m
 
 /-- Transport invertibility along the actual residue-field homomorphism.
 Source: the cover in blueprint clause (3)
@@ -90,51 +149,18 @@ Source: the cover in blueprint clause (3)
   fun y ↦ (map_natCast (f.residueFieldMap y).hom ℓ) ▸
     Invertible.map (f.residueFieldMap y).hom (ℓ : X.residueField (f y))
 
-/-- The rational signed lines, interpreted in the recorded rational category:
-every signed degree-zero line restricts to the coefficient unit on this cover,
-and the positive/negative tensor product is the coefficient unit globally.
-The integral representative of the coefficient unit is the published zero twist.
-Source: blueprint clause (3), rational interpretation via def-coefficient-twists-detailed
-(blueprint: det-def-sp-tate-twist-locally-free). -/
-def TateRationalSignedLine (D : FiniteFieldDatum.{d}) (ℓ : ℕ) [Fact ℓ.Prime]
-    (hD : ℓ ≠ D.p) (E : Type u) [Field E] [Algebra (Padic ℓ) E]
-    [FiniteDimensional (Padic ℓ) E] (X : Scheme.{u})
-    [∀ x : X, Invertible (ℓ : X.residueField x)]
-    {I : Type (u + 1)} (U : I → X.ProEt) : Prop :=
-  (∀ (m : ℤ) (i : I),
-    letI := tatePullbackInvertible ℓ (U i).hom
-    Nonempty ((rationalDerivedPullback ℓ E (U i).hom).obj
-      ((sfRationalConstructibleLocalization ℓ E X).obj
-        (intrinsicIntegralCoefficientTwist D ℓ hD E X m)) ≅
-      (sfRationalConstructibleLocalization ℓ E (U i).left).obj
-        (intrinsicIntegralCoefficientTwist D ℓ hD E (U i).left 0))) ∧
-  ∀ n : ℕ, Nonempty ((rationalDerivedTensor ℓ E X).obj
-    ((sfRationalConstructibleLocalization ℓ E X).obj
-      (intrinsicIntegralCoefficientTwist D ℓ hD E X n),
-      (sfRationalConstructibleLocalization ℓ E X).obj
-        (intrinsicIntegralCoefficientTwist D ℓ hD E X (-(n : ℤ)))) ≅
-    (sfRationalConstructibleLocalization ℓ E X).obj
-      (intrinsicIntegralCoefficientTwist D ℓ hD E X 0))
+/-- Signed rational lines, with local bases, internal duals and inverse tensor functors.
+Source: clause (3) (blueprint: det-def-sp-tate-twist-locally-free). -/
+abbrev TateRationalSignedLine (ℓ : ℕ) [Fact ℓ.Prime]
+    (E : Type u) [Field E] [Algebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
+    (X : Scheme.{u}) : Prop :=
+  CondensedRing.NativeTwistFiniteness (twistRationalRing ℓ E) X
+    (coefficientSignedTwist X _ (coefficientRationalTwistOne ℓ E X))
 
-/-- The same signed local-line and tensor-inverse clauses in the recorded literal
-common-stage category. Both restriction and tensor are the canonical published functors;
-the coefficient unit is the least-stage zero twist, not an arbitrarily chosen object.
-Source: blueprint clause (3), Qbar interpretation via def-coefficient-twists-detailed
-(blueprint: det-def-sp-tate-twist-locally-free). -/
-def TateQbarSignedLine (D : FiniteFieldDatum.{d}) (ℓ : ℕ) [Fact ℓ.Prime]
-    (hD : ℓ ≠ D.p) (X : Scheme.{u})
-    [∀ x : X, Invertible (ℓ : X.residueField x)]
-    (Ω : Type v) [Field Ω] [Algebra (Padic ℓ) Ω] [IsAlgClosure (Padic ℓ) Ω]
-    {I : Type (u + 1)} (U : I → X.ProEt) : Prop :=
-  (∀ (m : ℤ) (i : I),
-    letI := tatePullbackInvertible ℓ (U i).hom
-    Nonempty ((commonStageDerivedPullback ℓ Ω (U i).hom).obj
-      (intrinsicQbarCoefficientTwist D ℓ hD X Ω m) ≅
-      intrinsicQbarCoefficientTwist D ℓ hD (U i).left Ω 0)) ∧
-  ∀ n : ℕ, Nonempty ((commonStageDerivedTensor ℓ Ω X).obj
-    (intrinsicQbarCoefficientTwist D ℓ hD X Ω n,
-      intrinsicQbarCoefficientTwist D ℓ hD X Ω (-(n : ℤ))) ≅
-    intrinsicQbarCoefficientTwist D ℓ hD X Ω 0)
+/-- Signed algebraic-closure lines over the actual condensed algebraic closure.
+Source: clause (3) (blueprint: det-def-sp-tate-twist-locally-free). -/
+abbrev TateQbarSignedLine (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) : Prop :=
+  CondensedRing.NativeTwistFiniteness (Profinite.padicAlgClRingObj ℓ) X (tateTwist X ℓ)
 
 set_option backward.isDefEq.respectTransparency.types false
 attribute [local instance] HasDerivedCategory.standard

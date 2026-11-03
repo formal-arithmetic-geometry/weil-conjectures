@@ -126,6 +126,19 @@ theorem finiteComparedInvertibleExponent (P : PurityFiniteSetting.{u})
     ((AlgebraicGeometry.Scheme.ΓSpecIso (.of P.field.k)).inv.hom)
   simpa only [map_pow, map_natCast, Nat.cast_pow] using hu.map a.appTop.hom
 
+/-- The canonical tensor mate on every etale representative of a pro-etale Dctf object.
+Source: blueprint def-pur-co-smoothness, clause 2
+(blueprint: def-pur-co-smoothness). -/
+noncomputable def finiteComparedTensorClause
+    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Y : Scheme.{u}}
+    (f : X ⟶ Y) [HasCompactification f] : Prop :=
+  ∀ K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology
+      (ModuleCat.{u + 1} Λ)),
+    DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y
+      ((comparisonUpperStar (ModuleCat.{u + 1} Λ) Y).mapDerivedCategory.obj K) →
+    IsIso ((comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategory.map
+      (Etale.dualizingComplexTensorMap Λ f K))
+
 end WeilConjectures.PurityFiniteSetting
 
 namespace AlgebraicGeometry.ProEtale

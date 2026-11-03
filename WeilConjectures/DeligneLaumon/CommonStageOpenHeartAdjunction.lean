@@ -480,6 +480,19 @@ private def realization :
       (Compactification.ofIsOpenImmersion j)).symm ≪≫
     CategoryTheory.Functor.isoWhiskerLeft (sfIntegralConstructible l E U).ι (openIdentity l E j)
 
+private def cohomology (a : ℤ) :
+    integral D l hl j E ⋙ (sfIntegralConstructible l E T).ι ⋙
+        DerivedCategory.homologyFunctor (scalarReductionSource l E T) a ≅
+      (sfIntegralConstructible l E U).ι ⋙
+        DerivedCategory.homologyFunctor (scalarReductionSource l E U) a ⋙
+          PurCompactSupport.openExtension (PurCompactSupport.completed l E) j :=
+  (CategoryTheory.Functor.associator _ _ _).symm ≪≫
+    CategoryTheory.Functor.isoWhiskerRight (realization D l hl j E) _ ≪≫
+    CategoryTheory.Functor.associator _ _ _ ≪≫
+    CategoryTheory.Functor.isoWhiskerLeft (sfIntegralConstructible l E U).ι
+      (CategoryTheory.Functor.mapDerivedCategoryHomologyFunctorIso
+        (PurCompactSupport.openExtension (PurCompactSupport.completed l E) j) a).symm
+
 attribute [-instance] WeilConjectures.CompletedCoefficientPushforward.modAbelian
   WeilConjectures.CompletedCoefficientPushforward.hasDerived
   SheafOfModules.localizedSystemExtensionAdditive

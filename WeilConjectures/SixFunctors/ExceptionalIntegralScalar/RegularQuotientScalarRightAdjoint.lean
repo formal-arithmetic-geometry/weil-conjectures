@@ -161,6 +161,6 @@ theorem regularQuotientScalarRightAdjoint
     S.functor.IsRightAdjoint := by
   exact regularQuotientScalarRightAdjoint_of_trace l Ω E n T S
     (reductionCoinductionTrace_isIso l E.carrier T n)
-    (scalarReductionDerivedRestriction_bounds l E.carrier T n)
+    (scalarReductionDerivedRestriction_bounds_legacy l E.carrier T n)
 
 end WeilConjectures.ExceptionalIntegralScalar

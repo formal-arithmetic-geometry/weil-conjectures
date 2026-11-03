@@ -139,6 +139,56 @@ def compositionEtalePowerAdd (A : Type (u + 1)) [CommRing A]
     (eqToIso (compositionEtalePowerZero A N hA X) ≪≫ smoothPurityUnitIso A X)
     (fun n ↦ eqToIso (compositionEtalePowerSuccessor A N hA X n)) d e
 
+/-- Compare and reverse the two blocks of an ordered finite Tate power.
+Source: main-20261015 composition proof Step 9
+(blueprint: thm-pur-composition-coherence). -/
+def compositionComparisonPowerAdd (A : Type (u + 1)) [CommRing A] [Finite A]
+    (N : ℕ) (hA : (N : A) = 0)
+    (X : Scheme.{u}) (d e : ℕ) :
+    (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory.obj
+      (Etale.affineLinearBaseCoefficient A N hA X (d + e)) ≅
+    ((smoothPurityTensor A X).obj
+      ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory.obj
+        (Etale.affineLinearBaseCoefficient A N hA X e))).obj
+      ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory.obj
+        (Etale.affineLinearBaseCoefficient A N hA X d)) :=
+  (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory.mapIso
+    (compositionEtalePowerAdd A N hA X d e ≪≫
+      ((Etale.derivedTensorSymmetry (ModuleCat.{u + 1} A) X).app
+        (Etale.affineLinearBaseCoefficient A N hA X d)).app
+          (Etale.affineLinearBaseCoefficient A N hA X e)) ≪≫
+    smoothPurityComparisonTensor A X
+      (Etale.affineLinearBaseCoefficient A N hA X e)
+      (Etale.affineLinearBaseCoefficient A N hA X d)
+
+/-- Split the shifted Tate power in the order e,d needed by the iterated source.
+The symmetry is the derived symmetry, hence includes its Koszul sign (even here).
+Source: main-20261015 composition proof Step 9
+(blueprint: thm-pur-composition-coherence). -/
+def compositionPowerAdd (P : PurityFiniteSetting.{u}) (X : Scheme.{u}) (d e : ℕ) :
+    P.diagonalTwist X (d + e) ≅
+      ((smoothPurityTensor P.Coefficient X).obj (P.diagonalTwist X e)).obj
+        (P.diagonalTwist X d) :=
+  compositionComparisonPowerAdd P.Coefficient P.diagonalExponent
+    P.diagonalExponent_annihilates X d e
+
+/-- Pullback of the shifted Tate power, fixed by roots restriction and pure tensors.
+Source: main-20261015 composition proof Step 9, twist-pullback identification
+(blueprint: thm-pur-composition-coherence). -/
+def compositionTwistPullback (P : PurityFiniteSetting.{u}) {X Y : Scheme.{u}}
+    [Y.Over (Spec (.of P.field.k))] (f : X ⟶ Y) (e : ℕ) :
+    (P.smoothPurityPullback f).obj (P.diagonalTwist Y e) ≅ P.diagonalTwist X e :=
+  (ProEtale.sfDerivedComparisonPullbackIso P.Ring f).app (P.diagonalTwistEtale Y e) ≪≫
+    (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X).mapDerivedCategory.mapIso
+      (((Etale.leftDerivedUpperStarIsoMapDerivedCategory
+          (ModuleCat.{u + 1} P.Coefficient) f).app (P.diagonalTwistEtale Y e)).symm ≪≫
+        Etale.vectorIntegrationBaseCoefficientPullback P.Coefficient P.diagonalExponent
+          P.diagonalExponent_annihilates
+          (Etale.projectiveLineTraceTransport P.diagonalExponent
+            (pow_pos (Fact.out : Nat.Prime P.coefficients.l).pos P.level)
+            P.Coefficient P.diagonalExponent_annihilates)
+          f (P.diagonalExponent_isUnit (Y ↘ Spec (.of P.field.k))) e)
+
 /-- The monoidal pullback iso, normalized to the published derived comparison.
 Source: main-20261015 composition proof Step 9
 (blueprint: thm-pur-composition-coherence).
@@ -302,6 +352,206 @@ def compositionFixedPullbackComp (A : Type u) [CommRing A] {X Y Z : Scheme.{u}}
       ProEtale.sfFixedDerivedPullback A g ⋙ ProEtale.sfFixedDerivedPullback A f :=
   Classical.choose (existsUnique_compositionFixedPullbackComp A f g)
 
+/-- Type of the associator in the published tensor presentation.
+Source: main-20261015 composition proof Step 9
+(blueprint: thm-pur-composition-coherence). -/
+def CompositionTensorAssociatorType (A : Type (u + 1)) [CommRing A]
+    (X : Scheme.{u}) (M N L : _root_.DerivedCategory
+      (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A))) :=
+  ((smoothPurityTensor A X).obj (((smoothPurityTensor A X).obj M).obj N)).obj L ≅
+    ((smoothPurityTensor A X).obj M).obj (((smoothPurityTensor A X).obj N).obj L)
+
+/-- The associator normalization fixes the map to be the ordinary monoidal associator.
+Source: main-20261015 composition proof Step 9
+(blueprint: thm-pur-composition-coherence). -/
+def CompositionTensorAssociatorNormalized (A : Type (u + 1)) [CommRing A]
+    (X : Scheme.{u}) (M N L : _root_.DerivedCategory
+      (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)))
+    (a : CompositionTensorAssociatorType A X M N L) : Prop := HEq a (α_ M N L)
+
+/-- The specified associator is uniquely the ordinary monoidal associator.
+Source: main-20261015 composition proof Step 9
+(blueprint: thm-pur-composition-coherence).
+Proof: unfold the type alias and smoothPurityTensorPresentation. These are the endpoints
+of the ordinary associator. HEq fixes both its morphism and inverse, giving uniqueness. -/
+theorem existsUnique_compositionTensorAssociatorFixed (A : Type (u + 1)) [CommRing A]
+    (X : Scheme.{u}) (M N L : _root_.DerivedCategory
+      (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A))) :
+    ∃! a : CompositionTensorAssociatorType A X M N L,
+      CompositionTensorAssociatorNormalized A X M N L a := by
+  unfold CompositionTensorAssociatorType CompositionTensorAssociatorNormalized
+  unfold smoothPurityTensor
+  refine ⟨_, HEq.rfl, ?_⟩
+  intro a ha
+  exact eq_of_heq ha
+
+/-- The unique published associator in fixed coefficient coordinates.
+Source: main-20261015 composition proof Step 9
+(blueprint: thm-pur-composition-coherence). -/
+def compositionTensorAssociatorFixed (A : Type (u + 1)) [CommRing A]
+    (X : Scheme.{u}) (M N L : _root_.DerivedCategory
+      (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A))) :=
+  Classical.choose (existsUnique_compositionTensorAssociatorFixed A X M N L)
+
+/-- Type of the fixed-coordinate source identification in the composition display.
+Source: main-20261015 composition proof Step 9
+(blueprint: thm-pur-composition-coherence). -/
+def CompositionSourceType (P : PurityFiniteSetting.{u}) {X Y Z : Scheme.{u}}
+    [Y.Over (Spec (.of P.field.k))] (f : X ⟶ Y) (g : Y ⟶ Z) (d e : ℕ)
+    (K : Scheme.proEtaleDerivedCategory Z P.Ring) :=
+  (P.compositionTwistShift X (d + e)).obj
+    ((P.smoothPurityPullback (f ≫ g)).obj
+      ((Scheme.sfIntrinsicDerivedEquivalence Z P.Ring).inverse.obj K)) ≅
+  (P.compositionTwistShift X d).obj ((P.smoothPurityPullback f).obj
+    ((Scheme.sfIntrinsicDerivedEquivalence Y P.Ring).inverse.obj
+      ((P.compositionShiftedPullback g e).obj K)))
+
+/-- Intermediate objects of the canonical source identification. Step 3 to step 5
+separates twist pullback from tensor pullback, making every interface explicit.
+Source: main-20261015 composition proof Step 9
+(blueprint: thm-pur-composition-coherence). -/
+def compositionSourceStage (P : PurityFiniteSetting.{u}) {X Y Z : Scheme.{u}}
+    [Y.Over (Spec (.of P.field.k))] (f : X ⟶ Y) (g : Y ⟶ Z) (d e : ℕ)
+    (K : Scheme.proEtaleDerivedCategory Z P.Ring) (j : ℕ) :
+    _root_.DerivedCategory
+      (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} P.Coefficient)) :=
+  let M := (Scheme.sfIntrinsicDerivedEquivalence Z P.Ring).inverse.obj K
+  let F := P.smoothPurityPullback f
+  let G := P.smoothPurityPullback g
+  let T := smoothPurityTensor P.Coefficient X
+  let V := ((smoothPurityTensor P.Coefficient Y).obj (G.obj M)).obj (P.diagonalTwist Y e)
+  let B := (P.compositionTwistShift Y e).obj (G.obj M)
+  match j with
+  | 0 => (P.compositionTwistShift X (d + e)).obj
+      ((P.smoothPurityPullback (f ≫ g)).obj M)
+  | 1 => (T.obj ((P.smoothPurityPullback (f ≫ g)).obj M)).obj
+      (P.diagonalTwist X (d + e))
+  | 2 => (T.obj (F.obj (G.obj M))).obj
+      ((T.obj (P.diagonalTwist X e)).obj (P.diagonalTwist X d))
+  | 3 => (T.obj ((T.obj (F.obj (G.obj M))).obj (P.diagonalTwist X e))).obj
+      (P.diagonalTwist X d)
+  | 4 => (T.obj ((T.obj (F.obj (G.obj M))).obj (F.obj (P.diagonalTwist Y e)))).obj
+      (P.diagonalTwist X d)
+  | 5 => (T.obj (F.obj V)).obj (P.diagonalTwist X d)
+  | 6 => (P.compositionTwistShift X d).obj (F.obj V)
+  | 7 => (P.compositionTwistShift X d).obj (F.obj B)
+  | _ => (P.compositionTwistShift X d).obj
+      (F.obj ((Scheme.sfIntrinsicDerivedEquivalence Y P.Ring).inverse.obj
+        ((Scheme.sfIntrinsicDerivedEquivalence Y P.Ring).functor.obj B)))
+
+/-- The complete normalization fixes each factor to its published canonical map,
+then fixes a to their ordered composite. The intermediate isomorphisms are bound
+only inside this proposition; each is uniquely fixed by its HEq clause.
+Source: main-20261015 composition proof Step 9
+(blueprint: thm-pur-composition-coherence). -/
+def CompositionSourceNormalized (P : PurityFiniteSetting.{u}) {X Y Z : Scheme.{u}}
+    [Y.Over (Spec (.of P.field.k))] (f : X ⟶ Y) (g : Y ⟶ Z) (d e : ℕ)
+    (K : Scheme.proEtaleDerivedCategory Z P.Ring)
+    (a : P.CompositionSourceType f g d e K) : Prop :=
+  let M := (Scheme.sfIntrinsicDerivedEquivalence Z P.Ring).inverse.obj K
+  let F := P.smoothPurityPullback f
+  let G := P.smoothPurityPullback g
+  let T := P.compositionTwistShift X d
+  let B := (P.compositionTwistShift Y e).obj (G.obj M)
+  let S := P.compositionSourceStage f g d e K
+  ∃ i₀ : S 0 ≅ S 1, ∃ i₁ : S 1 ≅ S 2, ∃ i₂ : S 2 ≅ S 3,
+    ∃ i₃ : S 3 ≅ S 4, ∃ i₄ : S 4 ≅ S 5, ∃ i₅ : S 5 ≅ S 6,
+      ∃ i₆ : S 6 ≅ S 7, ∃ i₇ : S 7 ≅ S 8,
+  HEq i₀ (P.smoothPurityReassociation X (d + e)
+    ((P.smoothPurityPullback (f ≫ g)).obj M)) ∧
+  HEq i₁ (compositionTensorMapIso (smoothPurityTensor P.Coefficient X)
+    ((compositionFixedPullbackComp P.Ring f g).app M) (P.compositionPowerAdd X d e)) ∧
+  HEq i₂ ((compositionTensorAssociatorFixed P.Coefficient X
+    (F.obj (G.obj M)) (P.diagonalTwist X e) (P.diagonalTwist X d)).symm) ∧
+  HEq i₃ (compositionTensorMapIso (smoothPurityTensor P.Coefficient X)
+    (compositionTensorMapIso (smoothPurityTensor P.Coefficient X)
+      (Iso.refl (F.obj (G.obj M))) (P.compositionTwistPullback f e).symm)
+    (Iso.refl (P.diagonalTwist X d))) ∧
+  HEq i₄ (compositionTensorMapIso (smoothPurityTensor P.Coefficient X)
+    (compositionPullbackTensorFixed P.Ring f (G.obj M) (P.diagonalTwist Y e)).symm
+    (Iso.refl (P.diagonalTwist X d))) ∧
+  HEq i₅ ((P.smoothPurityReassociation X d
+    (F.obj (((smoothPurityTensor P.Coefficient Y).obj (G.obj M)).obj
+      (P.diagonalTwist Y e)))).symm) ∧
+  HEq i₆ (T.mapIso (F.mapIso (P.smoothPurityReassociation Y e (G.obj M)).symm)) ∧
+  HEq i₇ (T.mapIso (F.mapIso ((Scheme.sfIntrinsicDerivedEquivalence Y P.Ring).unitIso.app B))) ∧
+  HEq a (i₀ ≪≫ i₁ ≪≫ i₂ ≪≫ i₃ ≪≫ i₄ ≪≫ i₅ ≪≫ i₆ ≪≫ i₇)
+
+/-- There is exactly one source identification with this complete map normalization.
+Source: main-20261015 composition statement, source identification, and proof Step 9
+(blueprint: thm-pur-composition-coherence).
+Proof: unfold CompositionSourceType and CompositionSourceNormalized. Each of the eight
+factors is the specified canonical isomorphism, with the adjacent endpoints matching
+by the pullback compositor, ordered power splitting, tensor associator, tensor and
+Tate pullback comparisons, two shift reassociations and the realization unit. Their
+composite has exactly the displayed endpoints. It gives existence with reflexive HEq.
+If two isomorphisms satisfy the normalization, heterogeneous transitivity gives their
+ordinary equality, proving uniqueness of the full morphism and inverse. -/
+theorem existsUnique_compositionSourceFixed (P : PurityFiniteSetting.{u}) {X Y Z : Scheme.{u}}
+    [Y.Over (Spec (.of P.field.k))] (f : X ⟶ Y) (g : Y ⟶ Z) (d e : ℕ)
+    (K : Scheme.proEtaleDerivedCategory Z P.Ring) :
+    ∃! a : P.CompositionSourceType f g d e K,
+      P.CompositionSourceNormalized f g d e K a := by
+  let M := (Scheme.sfIntrinsicDerivedEquivalence Z P.Ring).inverse.obj K
+  let F := P.smoothPurityPullback f
+  let G := P.smoothPurityPullback g
+  let T := P.compositionTwistShift X d
+  let B := (P.compositionTwistShift Y e).obj (G.obj M)
+  let S := P.compositionSourceStage f g d e K
+  let i₀ : S 0 ≅ S 1 := P.smoothPurityReassociation X (d + e)
+    ((P.smoothPurityPullback (f ≫ g)).obj M)
+  let i₁ : S 1 ≅ S 2 := compositionTensorMapIso (smoothPurityTensor P.Coefficient X)
+    ((compositionFixedPullbackComp P.Ring f g).app M) (P.compositionPowerAdd X d e)
+  let i₂ : S 2 ≅ S 3 := (compositionTensorAssociatorFixed P.Coefficient X
+    (F.obj (G.obj M)) (P.diagonalTwist X e) (P.diagonalTwist X d)).symm
+  let i₃ : S 3 ≅ S 4 := compositionTensorMapIso (smoothPurityTensor P.Coefficient X)
+    (compositionTensorMapIso (smoothPurityTensor P.Coefficient X)
+      (Iso.refl (F.obj (G.obj M))) (P.compositionTwistPullback f e).symm)
+    (Iso.refl (P.diagonalTwist X d))
+  let i₄ : S 4 ≅ S 5 := compositionTensorMapIso (smoothPurityTensor P.Coefficient X)
+    (compositionPullbackTensorFixed P.Ring f (G.obj M) (P.diagonalTwist Y e)).symm
+    (Iso.refl (P.diagonalTwist X d))
+  let i₅ : S 5 ≅ S 6 := (P.smoothPurityReassociation X d
+    (F.obj (((smoothPurityTensor P.Coefficient Y).obj (G.obj M)).obj
+      (P.diagonalTwist Y e)))).symm
+  let i₆ : S 6 ≅ S 7 :=
+    T.mapIso (F.mapIso (P.smoothPurityReassociation Y e (G.obj M)).symm)
+  let i₇ : S 7 ≅ S 8 :=
+    T.mapIso (F.mapIso ((Scheme.sfIntrinsicDerivedEquivalence Y P.Ring).unitIso.app B))
+  refine ⟨i₀ ≪≫ i₁ ≪≫ i₂ ≪≫ i₃ ≪≫ i₄ ≪≫ i₅ ≪≫ i₆ ≪≫ i₇, ?_, ?_⟩
+  · exact ⟨i₀, i₁, i₂, i₃, i₄, i₅, i₆, i₇,
+      HEq.rfl, HEq.rfl, HEq.rfl, HEq.rfl, HEq.rfl, HEq.rfl, HEq.rfl, HEq.rfl,
+      HEq.rfl⟩
+  · rintro a ⟨j₀, j₁, j₂, j₃, j₄, j₅, j₆, j₇,
+      h₀, h₁, h₂, h₃, h₄, h₅, h₆, h₇, ha⟩
+    have hj₀ : j₀ = i₀ := eq_of_heq h₀
+    have hj₁ : j₁ = i₁ := eq_of_heq h₁
+    have hj₂ : j₂ = i₂ := eq_of_heq h₂
+    have hj₃ : j₃ = i₃ := eq_of_heq h₃
+    have hj₄ : j₄ = i₄ := eq_of_heq h₄
+    have hj₅ : j₅ = i₅ := eq_of_heq h₅
+    have hj₆ : j₆ = i₆ := eq_of_heq h₆
+    have hj₇ : j₇ = i₇ := eq_of_heq h₇
+    simpa only [hj₀, hj₁, hj₂, hj₃, hj₄, hj₅, hj₆, hj₇] using eq_of_heq ha
+
+/-- The source identification, uniquely fixed by its explicit canonical eight factors.
+Only the equality of endpoint presentations is postponed; all map data is fixed above.
+Source: main-20261015 composition statement, displayed identification
+(blueprint: thm-pur-composition-coherence). -/
+def compositionSourceFixed (P : PurityFiniteSetting.{u}) {X Y Z : Scheme.{u}}
+    [Y.Over (Spec (.of P.field.k))] (f : X ⟶ Y) (g : Y ⟶ Z) (d e : ℕ)
+    (K : Scheme.proEtaleDerivedCategory Z P.Ring) :=
+  Classical.choose (P.existsUnique_compositionSourceFixed f g d e K)
+
+/-- The canonical identification on the original pro-etale derived category.
+Source: main-20261015 composition statement, displayed identification
+(blueprint: thm-pur-composition-coherence). -/
+def compositionSourceIdentification (P : PurityFiniteSetting.{u}) {X Y Z : Scheme.{u}}
+    [Y.Over (Spec (.of P.field.k))] (f : X ⟶ Y) (g : Y ⟶ Z) (d e : ℕ)
+    (K : Scheme.proEtaleDerivedCategory Z P.Ring) :=
+  (Scheme.sfIntrinsicDerivedEquivalence X P.Ring).functor.mapIso
+    (P.compositionSourceFixed f g d e K)
+
 section Geometry
 variable (P : PurityFiniteSetting.{u}) {X Y Z : Scheme.{u}}
   [X.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))]
@@ -401,6 +651,27 @@ theorem compositionInput_bounded (K : Scheme.proEtaleDerivedCategory Z P.Ring)
     exact (Scheme.sfIntrinsicDerivedEquivalence Z P.Ring).unitIso.app _ ≪≫
       (Scheme.sfIntrinsicDerivedEquivalence Z P.Ring).inverse.mapIso
         ((Functor.mapDerivedCategoryCompIso C R).symm.app G.obj ≪≫ e)
+
+/-- The actual c_{g,f,K}, not a variable: realize the standing exceptional mate,
+then insert the realization unit at its intermediate exceptional value.
+Source: main-20261015 composition statement and pur9-def-upper-shriek-composition
+(blueprint: thm-pur-composition-coherence). -/
+def compositionExceptionalMap (f : X ⟶ Y) (g : Y ⟶ Z)
+    [f.IsOver (Spec (.of P.field.k))] [g.IsOver (Spec (.of P.field.k))]
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g]
+    (K : Scheme.proEtaleDerivedCategory Z P.Ring)
+    (hK : finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos Z K) :
+    (P.compositionExceptional (f ≫ g)).obj K ⟶
+      (P.compositionExceptional f).obj ((P.compositionExceptional g).obj K) :=
+  (Scheme.sfIntrinsicDerivedEquivalence X P.Ring).functor.map
+    (ProEtale.standingExceptionalComposition P f g
+      ⟨(Scheme.sfIntrinsicDerivedEquivalence Z P.Ring).inverse.obj K,
+        P.compositionInput_bounded K hK⟩ ≫
+      (P.smoothPurityExceptionalOver f (Y ↘ Spec (.of P.field.k))).map
+        ((Scheme.sfIntrinsicDerivedEquivalence Y P.Ring).unitIso.hom.app
+          ((P.smoothPurityExceptionalOver g (Z ↘ Spec (.of P.field.k))).obj
+            ((Scheme.sfIntrinsicDerivedEquivalence Z P.Ring).inverse.obj K))))
 
 end Geometry
 end WeilConjectures.PurityFiniteSetting

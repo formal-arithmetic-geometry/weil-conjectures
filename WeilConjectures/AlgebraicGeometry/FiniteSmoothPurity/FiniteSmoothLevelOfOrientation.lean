@@ -88,6 +88,77 @@ private theorem actualOriginCtf
   exact ⟨(DerivedCategory.boundedConstructible (ModuleCat A) T).prop_of_iso q hK₀.1,
     (_root_.DerivedCategory.finiteTorAmplitude _).prop_of_iso q hK₀.2⟩
 
+private theorem abstractMateNaturality
+    {C D : Type*} [Category* C] [Category* D]
+    [MonoidalCategory C] [BraidedCategory C]
+    [MonoidalCategory D] [BraidedCategory D]
+    (P : D ⥤ C) {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G)
+    (W : C) (eps : F.obj W ⟶ 𝟙_ D)
+    (pi : ∀ K, F.obj (W ⊗ P.obj K) ⟶ F.obj W ⊗ K)
+    (hn : ∀ {K L} (a : K ⟶ L),
+      F.map (W ◁ P.map a) ≫ pi L = pi K ≫ (F.obj W ◁ a))
+    {K L : D} (a : K ⟶ L) :
+    (P.map a ▷ W) ≫
+      adj.homEquiv _ _ (F.map (β_ (P.obj L) W).hom ≫ pi L ≫
+        (β_ (F.obj W) L).hom ≫ (L ◁ eps) ≫ (ρ_ L).hom) =
+    adj.homEquiv _ _ (F.map (β_ (P.obj K) W).hom ≫ pi K ≫
+        (β_ (F.obj W) K).hom ≫ (K ◁ eps) ≫ (ρ_ K).hom) ≫ G.map a := by
+  rw [← adj.homEquiv_naturality_left, ← adj.homEquiv_naturality_right]
+  apply congrArg (adj.homEquiv _ _)
+  rw [← Category.assoc, ← Functor.map_comp,
+    BraidedCategory.braiding_naturality_left, Functor.map_comp]
+  simp only [Category.assoc]
+  rw [reassoc_of% (hn a)]
+  rw [BraidedCategory.braiding_naturality_right_assoc,
+    ← whisker_exchange_assoc, rightUnitor_naturality]
+
+private theorem directNaturality
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X S : Scheme.{u}} (f : X ⟶ S) [HasCompactification f]
+    [hPF : IsIso (projectionMap (ModuleCat.{u + 1} A) f)]
+    {K L : _root_.DerivedCategory (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} A))}
+    (a : K ⟶ L) :
+    ((derivedTensor (ModuleCat.{u + 1} A) X).map
+        ((upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor.map a)).app
+        (dualizingComplex A f) ≫ smoothTensorDualityMap A f hPF L =
+      smoothTensorDualityMap A f hPF K ≫ (rightDerivedUpperShriek A f).map a := by
+  let := smoothTensorCanonicalDerivedBraiding (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))
+  let := smoothTensorCanonicalDerivedBraiding (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} A))
+  apply abstractMateNaturality
+  intro K L a
+  have h := (asIso ((projectionMap (ModuleCat.{u + 1} A) f).app
+    (dualizingComplex A f))).inv.naturality a
+  simpa only [asIso, NatIso.isIso_inv_app,
+    rightDerivedLowerShriekDerivedTensorLeftDerivedUpperStar,
+    derivedTensorRightDerivedLowerShriek, Functor.comp_map,
+    Functor.postcompose₂, Functor.whiskeringLeft₂, Functor.whiskeringRight,
+    Functor.whiskeringLeft, Functor.whiskerLeft, Functor.whiskerRight,
+    Functor.comp_obj, Functor.id_obj, Functor.id_map,
+    rightDerivedLowerShriek, rightDerivedLowerShriekOfCompactification,
+    derivedTensor_obj_map] using h
+
+private theorem ordinaryGammaNaturality
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
+    (L : DerivedCategoryModule A X)
+    (alpha : dualizingComplex A f ≅ L)
+    {K K' : DerivedCategoryModule A Y} (a : K ⟶ K') :
+    (puritySource A f L).map a ≫ gamma A f L alpha K' =
+      gamma A f L alpha K ≫ (rightDerivedUpperShriek A f).map a := by
+  change ((derivedTensor (ModuleCat A) X).map
+      ((ordinaryFinitePullback A f).map a)).app L ≫ _ = _
+  unfold gamma
+  have ht := ((derivedTensor (ModuleCat A) X).map
+    ((ordinaryFinitePullback A f).map a)).naturality alpha.inv
+  rw [← Category.assoc, ← ht, Category.assoc]
+  have hn := directNaturality A f a
+  change ((derivedTensor (ModuleCat A) X).map
+    ((ordinaryFinitePullback A f).map a)).app (dualizingComplex A f) ≫
+      smoothTensorDualityMap A f _ K' =
+      smoothTensorDualityMap A f _ K ≫
+        (rightDerivedUpperShriek A f).map a at hn
+  rw [hn, Category.assoc]
+
 private def tensorTransport
     {C D : Type*} [Category C] [Category D]
     (T : C ⥤ C ⥤ C) (U : D ⥤ D ⥤ D)
@@ -99,6 +170,21 @@ private def tensorTransport
   (Functor.postcompose₂.mapIso e.symm).app T ≪≫ m ≪≫
     ((((Functor.whiskeringLeft₂ D).obj F).mapIso e).app U) ≪≫
     (((Functor.whiskeringLeft₂ D).mapIso e).app G).app U
+
+private theorem tensorTransport_app
+    (C : Type*) [Category.{u + 1} C] [Abelian C]
+    [IsGrothendieckAbelian.{u + 1} C]
+    [MonoidalCategory C] [MonoidalPreadditive C] [SymmetricCategory C]
+    [MonoidalClosed C] [Abelian.HasFunctorialFlatResolution C]
+    (X : Scheme.{u}) [(ProEtale.comparisonUpperStar C X).PreservesFlat]
+    (K Q : _root_.DerivedCategory (Sheaf X.smallEtaleTopology C)) :
+    ((tensorTransport (derivedTensor C X) (ProEtale.derivedTensor C X)
+      (ProEtale.comparisonUpperStar C X).leftDerivedFunctorIsoMapDerivedCategory
+      (asIso (ProEtale.comparisonUpperStar C X).leftDerivedTensorComparison)).hom.app K).app Q =
+      ((ProEtale.derivedTensorObjCompMapDerivedCategoryComparisonUpperStarIso C K).app Q).hom := by
+  dsimp [tensorTransport,
+    ProEtale.derivedTensorObjCompMapDerivedCategoryComparisonUpperStarIso]
+  rfl
 
 private def sourceTransport
     {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
@@ -115,6 +201,185 @@ private def sourceTransport
     (Functor.associator _ _ _).symm ≪≫
     Functor.isoWhiskerRight q.symm (U.flip.obj (H.obj L)) ≪≫
     Functor.associator _ _ _
+
+private theorem sourceTransport_app
+    {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
+    (P : C ⥤ D) (E : C ⥤ C') (H : D ⥤ D') (Q : C' ⥤ D')
+    (T : D ⥤ D ⥤ D) (U : D' ⥤ D' ⥤ D')
+    (t : (Functor.postcompose₂.obj H).obj T ≅
+      (((Functor.whiskeringLeft₂ D').obj H).obj H).obj U)
+    (q : E ⋙ Q ≅ P ⋙ H) (L : D) (K : C) :
+    (sourceTransport P E H Q T U t q L).hom.app K =
+      (t.hom.app (P.obj K)).app L ≫ (U.map (q.inv.app K)).app (H.obj L) := by
+  simp [sourceTransport]
+
+private def tensorSourceTransport
+    (C : Type*) [Category.{u + 1} C] [Abelian C]
+    [IsGrothendieckAbelian.{u + 1} C]
+    [MonoidalCategory C] [MonoidalPreadditive C] [SymmetricCategory C]
+    [MonoidalClosed C] [Abelian.HasFunctorialFlatResolution C]
+    (X : Scheme.{u}) [(ProEtale.comparisonUpperStar C X).PreservesFlat]
+    {B B' : Type*} [Category B] [Category B']
+    (P : B ⥤ _root_.DerivedCategory (Sheaf X.smallEtaleTopology C))
+    (E : B ⥤ B') (Q : B' ⥤ _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) C))
+    (q : E ⋙ Q ≅ P ⋙ (ProEtale.comparisonUpperStar C X).mapDerivedCategory)
+    (L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology C)) :=
+  sourceTransport P E (ProEtale.comparisonUpperStar C X).mapDerivedCategory Q
+    (derivedTensor C X) (ProEtale.derivedTensor C X)
+    (tensorTransport (derivedTensor C X) (ProEtale.derivedTensor C X)
+      (ProEtale.comparisonUpperStar C X).leftDerivedFunctorIsoMapDerivedCategory
+      (asIso (ProEtale.comparisonUpperStar C X).leftDerivedTensorComparison)) q L
+
+private theorem tensorSourceTransport_app
+    (C : Type*) [Category.{u + 1} C] [Abelian C]
+    [IsGrothendieckAbelian.{u + 1} C]
+    [MonoidalCategory C] [MonoidalPreadditive C] [SymmetricCategory C]
+    [MonoidalClosed C] [Abelian.HasFunctorialFlatResolution C]
+    (X : Scheme.{u}) [(ProEtale.comparisonUpperStar C X).PreservesFlat]
+    {B B' : Type*} [Category B] [Category B']
+    (P : B ⥤ _root_.DerivedCategory (Sheaf X.smallEtaleTopology C))
+    (E : B ⥤ B') (Q : B' ⥤ _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) C))
+    (q : E ⋙ Q ≅ P ⋙ (ProEtale.comparisonUpperStar C X).mapDerivedCategory)
+    (L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology C)) (K : B) :
+    (tensorSourceTransport C X P E Q q L).app K =
+      (ProEtale.derivedTensorObjCompMapDerivedCategoryComparisonUpperStarIso C
+        (P.obj K)).app L ≪≫
+        ((ProEtale.derivedTensor C X).mapIso (q.app K).symm).app
+          ((ProEtale.comparisonUpperStar C X).mapDerivedCategory.obj L) := by
+  apply Iso.ext
+  have h := sourceTransport_app P E (ProEtale.comparisonUpperStar C X).mapDerivedCategory Q
+    (derivedTensor C X) (ProEtale.derivedTensor C X)
+    (tensorTransport (derivedTensor C X) (ProEtale.derivedTensor C X)
+      (ProEtale.comparisonUpperStar C X).leftDerivedFunctorIsoMapDerivedCategory
+      (asIso (ProEtale.comparisonUpperStar C X).leftDerivedTensorComparison)) q L K
+  have ht := tensorTransport_app C X (P.obj K) L
+  exact h.trans (congrArg (fun a ↦ a ≫
+    ((ProEtale.derivedTensor C X).map (q.inv.app K)).app
+      ((ProEtale.comparisonUpperStar C X).mapDerivedCategory.obj L)) ht)
+
+private def sourceNatIso
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) (L : DerivedCategoryModule A X) :
+    puritySource A f L ⋙ comparison A X ≅ comparison A Y ⋙ proSource A f L := by
+  letI : IsNoetherianRing A := isNoetherian_of_finite A A
+  letI : (ProEtale.comparisonUpperStar (ModuleCat A) X).PreservesFlat :=
+    ProEtale.preservesFlat_comparisonUpperStar
+  exact tensorSourceTransport (ModuleCat A) X (ordinaryFinitePullback A f)
+    (comparison A Y) (proPullback A f) (sitePullbackIso A f) L
+
+private theorem sourceNatIso_app
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) (L : DerivedCategoryModule A X)
+    (K : DerivedCategoryModule A Y) :
+    (sourceNatIso A f L).app K = sourceAtOriginIso A f L K := by
+  let : IsNoetherianRing A := isNoetherian_of_finite A A
+  let : (ProEtale.comparisonUpperStar (ModuleCat A) X).PreservesFlat :=
+    ProEtale.preservesFlat_comparisonUpperStar
+  exact tensorSourceTransport_app (ModuleCat A) X (ordinaryFinitePullback A f)
+    (comparison A Y) (proPullback A f) (sitePullbackIso A f) L K
+
+private theorem originInverseNaturality
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    (Y : Scheme.{u}) [IsNoetherian Y]
+    {K K' : proCategory A Y} (hK : IsCtf A Y K) (hK' : IsCtf A Y K') (a : K ⟶ K') :
+    a ≫ originInverse A Y K' =
+      originInverse A Y K ≫ (comparison A Y).map ((origin A Y).map a) := by
+  have hc := intrinsicOriginCounit A Y K hK
+  have hc' := intrinsicOriginCounit A Y K' hK'
+  dsimp only [originInverse]
+  rw [dif_pos hc, dif_pos hc']
+  apply (cancel_mono
+    ((ProEtale.derivedComparisonAdjunction (ModuleCat A) Y).counit.app K')).mp
+  simp only [Category.assoc, IsIso.inv_hom_id, Category.comp_id]
+  rw [show (comparison A Y).map ((origin A Y).map a) ≫
+    (ProEtale.derivedComparisonAdjunction (ModuleCat A) Y).counit.app K' =
+    (ProEtale.derivedComparisonAdjunction (ModuleCat A) Y).counit.app K ≫ a from
+    (ProEtale.derivedComparisonAdjunction (ModuleCat A) Y).counit.naturality a]
+  simp
+
+private theorem transportedNaturality
+    {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
+    (P G : C ⥤ D) (E : C ⥤ C') (H : D ⥤ D') (O : C' ⥤ C) (Q : C' ⥤ D')
+    (q : P ⋙ H ≅ E ⋙ Q) (g : P ⟶ G)
+    {K K' : C'} (a : K ⟶ K')
+    (u : K ⟶ E.obj (O.obj K)) (u' : K' ⟶ E.obj (O.obj K'))
+    (hu : a ≫ u' = u ≫ E.map (O.map a)) :
+    Q.map a ≫ (Q.map u' ≫ q.inv.app (O.obj K') ≫ H.map (g.app (O.obj K'))) =
+      (Q.map u ≫ q.inv.app (O.obj K) ≫ H.map (g.app (O.obj K))) ≫
+        H.map (G.map (O.map a)) := by
+  rw [← Q.map_comp_assoc, hu, Q.map_comp_assoc]
+  rw [reassoc_of% (q.inv.naturality (O.map a))]
+  simp only [Category.assoc]
+  rw [← H.map_comp, g.naturality, H.map_comp]
+
+private theorem proNaturality
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} [IsNoetherian Y]
+    (f : X ⟶ Y) [HasCompactification f]
+    (L : DerivedCategoryModule A X)
+    (alpha : dualizingComplex A f ≅ L)
+    {K K' : proCategory A Y} (hK : IsCtf A Y K) (hK' : IsCtf A Y K') (a : K ⟶ K') :
+    (proSource A f L).map a ≫ proGamma A f L alpha K' =
+      proGamma A f L alpha K ≫ (exceptional A f).map a := by
+  let g : puritySource A f L ⟶ rightDerivedUpperShriek A f :=
+    ⟨gamma A f L alpha, fun _ _ a ↦ ordinaryGammaNaturality A f L alpha a⟩
+  have h := transportedNaturality (puritySource A f L)
+    (rightDerivedUpperShriek A f) (comparison A Y) (comparison A X)
+    (origin A Y) (proSource A f L) (sourceNatIso A f L) g a
+    (originInverse A Y K) (originInverse A Y K')
+    (originInverseNaturality A Y hK hK' a)
+  have he (M : DerivedCategoryModule A Y) :
+      (sourceNatIso A f L).inv.app M = (sourceAtOriginIso A f L M).inv :=
+    congrArg Iso.inv (sourceNatIso_app A f L M)
+  rw [he, he] at h
+  simpa only [proGamma, sourceToOrigin, exceptional, Functor.comp_map,
+    Category.assoc, g] using h
+
+private theorem compactSiteNaturality
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
+    {M M' : DerivedCategoryModule A X}
+    (hM : _root_.DerivedCategory.TStructure.t.plus M)
+    (hM' : _root_.DerivedCategory.TStructure.t.plus M') (a : M ⟶ M') :
+    (proCompact A f).map ((comparison A X).map a) ≫ compactSiteMap A f M' =
+      compactSiteMap A f M ≫
+        (comparison A Y).map ((rightDerivedLowerShriek (ModuleCat A) f).map a) := by
+  dsimp only [compactSiteMap]
+  rw [dif_pos hM, dif_pos hM']
+  exact (ProEtale.compactSupportSiteComparison A
+    (HasCompactification.compactification f)).hom.naturality
+      (show (⟨M, hM⟩ : _root_.DerivedCategory.Plus _) ⟶ ⟨M', hM'⟩ from ObjectProperty.homMk a)
+
+private theorem transportedTrace
+    {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
+    (F : D ⥤ C) (G : C ⥤ D) (adjF : F ⊣ G)
+    (E : C ⥤ C') (H : D ⥤ D') (O : C' ⥤ C) (adj : E ⊣ O)
+    (F' : D' ⥤ C') (K₀ : C) (K : C') (e : E.obj K₀ ⟶ K)
+    (M : D) (g : M ⟶ G.obj K₀)
+    (b : F'.obj (H.obj M) ⟶ E.obj (F.obj M))
+    (b' : F'.obj (H.obj (G.obj (O.obj K))) ⟶ E.obj (F.obj (G.obj (O.obj K))))
+    (hn : F'.map (H.map (g ≫ G.map (adj.unit.app K₀ ≫ O.map e))) ≫ b' =
+      b ≫ E.map (F.map (g ≫ G.map (adj.unit.app K₀ ≫ O.map e)))) :
+    F'.map (H.map g ≫ H.map (G.map (adj.unit.app K₀ ≫ O.map e))) ≫
+      b' ≫ E.map (adjF.counit.app (O.obj K)) ≫ adj.counit.app K =
+        b ≫ E.map (F.map g ≫ adjF.counit.app K₀) ≫ e := by
+  have hnF : F.map (G.map (adj.unit.app K₀ ≫ O.map e)) ≫
+      adjF.counit.app (O.obj K) =
+      adjF.counit.app K₀ ≫ (adj.unit.app K₀ ≫ O.map e) :=
+    adjF.counit.naturality _
+  have hnE : E.map (O.map e) ≫ adj.counit.app K =
+      adj.counit.app (E.obj K₀) ≫ e := adj.counit.naturality e
+  have ht : E.map (adj.unit.app K₀) ≫ adj.counit.app (E.obj K₀) =
+      𝟙 (E.obj K₀) := adj.left_triangle_components K₀
+  have hε := congrArg E.map hnF
+  simp only [E.map_comp] at hε
+  rw [← H.map_comp, ← Category.assoc, hn]
+  rw [F.map_comp, E.map_comp]
+  simp only [Category.assoc]
+  rw [reassoc_of% hε]
+  rw [E.map_comp]
+  simp only [Category.assoc]
+  rw [hnE, reassoc_of% ht]
 
 private theorem ordinaryExceptionalCtf
     (A : Type (u + 1)) [CommRing A] [Finite A]

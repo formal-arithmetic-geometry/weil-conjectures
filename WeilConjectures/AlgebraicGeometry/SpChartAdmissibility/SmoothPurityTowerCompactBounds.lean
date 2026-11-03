@@ -49,4 +49,18 @@ private theorem tor_of_iso (T : Scheme.{u}) (A : Type u) [CommRing A]
   obtain ⟨eC⟩ := hC
   exact h.2 C P ⟨eC ≪≫ e.symm⟩ f hf hP M i hi
 
+private theorem finite_of_iso (T : Scheme.{u}) (A : Type u) [CommRing A] [Finite A]
+    {K L : proEtaleDerivedCategory T A} (e : K ≅ L)
+    (h : spFiniteConstructibleTor T A K) : spFiniteConstructibleTor T A L := by
+  obtain ⟨⟨a, b, hab, hv⟩, hc, s, t, ht⟩ := h
+  refine ⟨⟨a, b, hab, ?_⟩, ?_, s, t, tor_of_iso T A e ht⟩
+  · intro i hi
+    exact (hv i hi).of_iso ((DerivedCategory.homologyFunctor _ i).mapIso e).symm
+  · intro i
+    have hcons := hc i
+    rw [proEtaleModuleRestriction_constructible_iff] at hcons ⊢
+    exact ProEtale.isConstructible_of_iso
+      ((proEtaleModuleRestriction T A).mapIso
+        ((DerivedCategory.homologyFunctor _ i).mapIso e)) hcons
+
 end AlgebraicGeometry.ProEtale.SpChartAdmissibility

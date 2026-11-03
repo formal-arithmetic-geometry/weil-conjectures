@@ -24,6 +24,8 @@ public import WeilConjectures.SmoothPurity.GeneralAlgebraicallyClosedCoefficient
 
 import WeilConjectures.SixFunctors.AdicQbarRealization.Proper.AdicNormalizedPullbackRealization
 import WeilConjectures.SixFunctors.AdicQbarRealization.Proper.AdicProperOrdinaryPushPreservation
+public import WeilConjectures.SixFunctors.AdicQbarRealization.AdicQbarRealizationLegacyCompatibility
+public import WeilConjectures.SixFunctors.AdicQbarRealization.AdicRealizationFamilyData
 
 /-! # Proper adjunction comparison for native continuous coefficients
 
@@ -237,7 +239,7 @@ theorem adic_proper_adjunction_realization (D : FiniteFieldDatum.{u}) (l : ℕ)
     ∃ F : Family l D, ∀ (Z T : GeometricSpace D) (p : Z.base ⟶ T.base),
       IsProper p.left → Nonempty (AtSpaces l D hl F Z T p) := by
   classical
-  obtain ⟨F⟩ := adic_qbar_constructible_realization D l hl
+  obtain ⟨F⟩ := adic_qbar_constructible_realization_legacy D l hl
   refine ⟨F, ?_⟩
   intro Z T p hp
   letI := (F.data Z).units

@@ -1524,6 +1524,33 @@ private theorem native_coordinate_identity (P : PurityFiniteSetting.{u}) (n : �
   have heq := closed_single_identity_hom Q.Coefficient B (Q.constant B)
   with_unfolding_all exact heq.trans hfinal
 
+/-- The empty supported coordinate product is the canonical compact-support identity.
+
+Source: literature/blueprint/latest/blueprint/sec-smooth-purity/sk-prop-an/
+cor-pur-affine-space-zero-section-purity.proof.md, parent proof Step 5.
+
+Proof: unfold `compactProduct` and the exceptional adjunct defining `thom`.  At
+rank zero the support list is empty, so `product` is the coefficient-unit map
+from `classSource_nil`; the support map is the identity and `closedSingleIso`
+is the normalized proper closed comparison.  The inverse exceptional Hom
+bijection in `compactProduct` cancels the bijection used by `thom`.  The
+remaining map is exactly the component of `originCompactSupportId`, which is
+`coordinateIdentity` by definition.  All transports are the canonical identity
+transports, including the empty-base case.
+(blueprint: lem-pur-coordinate-supported-product-zero)
+-/
+theorem coordinate_supported_product_zero (P : PurityFiniteSetting.{u}) (n : ℕ)
+    (B : Scheme.{u}) (aB : B ⟶ Spec (.of P.field.k))
+    [LocallyOfFiniteType aB] [QuasiCompact aB] [IsSeparated aB] :
+    compactProduct P n B aB 0 = coordinateIdentity P n B := by
+  let : IsNoetherian B := by
+    with_unfolding_all
+      exact tower_noetherian (setting P n) B aB 0
+  unfold compactProduct thom coordinateThomAdjunct
+  rw [Equiv.symm_apply_apply, empty_supported_class]
+  with_unfolding_all
+    exact native_coordinate_identity P n B aB
+
 end IdentityComparison
 
 end AlgebraicGeometry.ProEtale.AffineZeroPurity

@@ -141,6 +141,35 @@ def SuccessiveCoefficientHomTransport
           internalHomComparison GBC (G.obj (UA.obj K)) (G.obj (UA.obj M))) ∧
       (∀ (X Y : DA), internalHomComparison (𝟭 DA) X Y = 𝟙 _)
 
+private lemma comparison_eq (V : C ⥤ D) [V.Monoidal] (K M : C) :
+    internalHomComparison V K M = (ihomComparison V K).natTrans.app M :=
+  (ihomComparison_app_eq_curry V K M).symm
+
+private lemma comparison_comp (V : C ⥤ D) (W : D ⥤ E)
+    [V.Monoidal] [W.Monoidal] (K M : C) :
+    internalHomComparison (V ⋙ W) K M =
+      W.map (internalHomComparison V K M) ≫
+        internalHomComparison W (V.obj K) (V.obj M) := by
+  simp only [comparison_eq, ihomComparison_comp_app]
+
+private lemma comparison_iso {V W : C ⥤ D} [V.Monoidal] [W.Monoidal]
+    (e : V ≅ W) [NatTrans.IsMonoidal e.hom] (K M : C) :
+    e.hom.app (K ⟶[C] M) ≫ internalHomComparison W K M =
+      internalHomComparison V K M ≫ internalHomTransport e K M := by
+  have q := ihomComparison_app_comp_map_app e.inv K M
+  have q' := congrArg (fun f ↦ e.hom.app (K ⟶[C] M) ≫ f ≫
+    (ihom (W.obj K)).map (e.hom.app M)) q
+  simp only [← Functor.map_comp, Iso.inv_hom_id_app, Functor.map_id,
+    Category.assoc, Iso.hom_inv_id_app_assoc, ← comparison_eq] at q'
+  simpa [internalHomTransport] using q'
+
+private lemma comparison_transpose (V : C ⥤ D) [V.Monoidal]
+    {T K M : C} (t : T ⟶ (K ⟶[C] M)) :
+    V.map t ≫ internalHomComparison V K M =
+      curry (μ V K T ≫ V.map (uncurry t)) := by
+  rw [internalHomComparison, ← curry_natural_left, uncurry_eq,
+    V.map_comp, ← μ_natural_right_assoc]
+
 section ComparisonProofs
 
 variable {C : Type uCA} [Category.{vCA} C] [MonoidalCategory C]

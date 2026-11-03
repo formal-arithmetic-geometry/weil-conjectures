@@ -119,6 +119,55 @@ structure CompositeTensorLocalData
   pgV : Q.obj ⟨A.obj ⊗ V.obj, hAVY⟩ ≅ K ⊗ Q.obj ⟨V.obj, hV⟩
   pgU : Q.obj ⟨A.obj ⊗ P.obj U, hAPU⟩ ≅ K ⊗ Q.obj ⟨P.obj U, hPU⟩
 
+/-- The second composite, using the composite projection and composite counit.
+Source: blueprint sec-six-functors-basics/sk-prop-cohsm, second paragraph
+(blueprint: lem-pur-composite-tensor-transpose). -/
+def second : d.S.obj ⟨d.A.obj ⊗ d.V.obj, d.hAV⟩ ⊗ d.W.obj ⟶ d.H.obj :=
+  (d.delta.hom ▷ d.W.obj) ≫ (α_ (d.S.obj d.A) (d.S.obj d.V) d.W.obj).hom ≫
+    (d.S.obj d.A ◁ d.q) ≫
+    d.homFT ⟨d.S.obj d.A ⊗ d.U.obj, d.hAU⟩
+      (d.homGK ⟨d.P.obj ⟨d.S.obj d.A ⊗ d.U.obj, d.hAU⟩, d.hPAU⟩
+        (d.Q.map (ObjectProperty.homMk d.pfAU.hom) ≫ d.pgU.hom ≫
+          (d.K ◁ (d.Q.map (ObjectProperty.homMk d.counitFV) ≫ d.counitGOne)) ≫
+          (ρ_ d.K).hom))
+
+/-- The first composite, formed using only local Hom bijections.
+Source: blueprint sec-six-functors-basics/sk-prop-cohsm, second paragraph
+(blueprint: lem-pur-composite-tensor-transpose). -/
+def first : d.S.obj ⟨d.A.obj ⊗ d.V.obj, d.hAV⟩ ⊗ d.W.obj ⟶ d.H.obj :=
+  (d.S.map (ObjectProperty.homMk d.tauG) ▷ d.W.obj) ≫
+    d.homFT ⟨d.S.obj d.T ⊗ d.W.obj, d.hTW⟩
+      (d.pfT.hom ≫ d.T.obj ◁ d.counitFOne ≫ (ρ_ d.T.obj).hom)
+
+/-- The local tensor-counit transpose `q = τ_f V`.
+Source: blueprint sec-six-functors-basics/sk-prop-cohsm, second paragraph
+(blueprint: lem-pur-composite-tensor-transpose). -/
+def q : d.S.obj d.V ⊗ d.W.obj ⟶ d.U.obj :=
+  d.homFV ⟨d.S.obj d.V ⊗ d.W.obj, d.hVW⟩
+    (d.pfV.hom ≫ d.V.obj ◁ d.counitFOne ≫ (ρ_ d.V.obj).hom)
+
+/-- The local tensor-counit transpose `τ_g K`.
+Source: blueprint sec-six-functors-basics/sk-prop-cohsm, second paragraph
+(blueprint: lem-pur-composite-tensor-transpose). -/
+def tauG : d.A.obj ⊗ d.V.obj ⟶ d.T.obj :=
+  d.homGK ⟨d.A.obj ⊗ d.V.obj, d.hAVY⟩
+    (d.pgV.hom ≫ d.K ◁ d.counitGOne ≫ (ρ_ d.K).hom)
+
+/-- The second counit at the unit, obtained from the specified local Hom bijection.
+Source: Stacks Tag 0037 (blueprint: lem-pur-composite-tensor-transpose). -/
+def counitGOne : d.Q.obj ⟨d.V.obj, d.hV⟩ ⟶ 𝟙_ E :=
+  (d.homGOne ⟨d.V.obj, d.hV⟩).symm (𝟙 d.V.obj)
+
+/-- The first counit at `G_g 𝟙`, obtained from the specified local Hom bijection.
+Source: Stacks Tag 0037 (blueprint: lem-pur-composite-tensor-transpose). -/
+def counitFV : d.P.obj d.U ⟶ d.V.obj :=
+  (d.homFV d.U).symm (𝟙 d.U.obj)
+
+/-- The first counit at the unit, obtained from the specified local Hom bijection.
+Source: Stacks Tag 0037 (blueprint: lem-pur-composite-tensor-transpose). -/
+def counitFOne : d.P.obj d.W ⟶ 𝟙_ D :=
+  (d.homFOne d.W).symm (𝟙 d.W.obj)
+
 namespace CompositeTensorLocalData
 
 variable {C : Type uX} [Category.{vX} C] [MonoidalCategory C]

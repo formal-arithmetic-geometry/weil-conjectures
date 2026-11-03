@@ -24,6 +24,8 @@ import all WeilConjectures.AlgebraicGeometry.Scalar.ScalarExtensionFunctor
 public import Mathlib.CategoryTheory.Adjunction.Mates
 public import WeilConjectures.SixFunctors.CoefDualFormulaScalarTranspose.CoefDualFormulaFiniteTrace
 public import WeilConjectures.SixFunctors.Exceptional.ExceptionalFiniteRestrictionAdjunction
+public import WeilConjectures.AlgebraicGeometry.Finite.Ring.FiniteRingConstructibleDerivedOrigin
+public import WeilConjectures.SixFunctors.IntegralFiniteExtension.CoefIntegralFiniteExtensionModels
 
 /-!
 # Finite exceptional inverse image and quotient coefficients
@@ -47,6 +49,162 @@ namespace WeilConjectures.FiniteExceptional
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
+
+private theorem finiteTransposeLeft
+    {E₀ E₁ C₀ C₁ : Type*} [Category* E₀] [Category* E₁]
+    [Category* C₀] [Category* C₁]
+    (A : E₀ ⥤ C₀) (B : E₁ ⥤ C₁) (U : C₁ ⥤ E₁)
+    (F : E₀ ⥤ E₁) (R : E₁ ⥤ E₀) (I : C₀ ⥤ C₁)
+    (ad : F ⊣ R) (bd : B ⊣ U)
+    {L L' : E₀} {M M' : C₀} {N : C₁}
+    (a : A.obj L ≅ M) (a' : A.obj L' ≅ M')
+    (v : B.obj (F.obj L) ⟶ I.obj (A.obj L))
+    (v' : B.obj (F.obj L') ⟶ I.obj (A.obj L'))
+    (s : M ⟶ M') (b : I.obj M' ⟶ N) (t : L ⟶ L')
+    (ht : A.map t = a.hom ≫ s ≫ a'.inv)
+    (hv : B.map (F.map t) ≫ v' = v ≫ I.map (A.map t)) :
+    a.inv ≫ A.map (ad.homEquiv _ _
+      (bd.homEquiv _ _ (v ≫ I.map a.hom ≫ I.map s ≫ b))) =
+    s ≫ a'.inv ≫ A.map (ad.homEquiv _ _
+      (bd.homEquiv _ _ (v' ≫ I.map a'.hom ≫ b))) := by
+  have hm : A.map t ≫ a'.hom = a.hom ≫ s := by
+    rw [ht]
+    simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+  have heq : v ≫ I.map a.hom ≫ I.map s ≫ b =
+      B.map (F.map t) ≫ v' ≫ I.map a'.hom ≫ b := by
+    rw [reassoc_of% hv, ← I.map_comp_assoc, ← I.map_comp_assoc, hm, I.map_comp,
+      Category.assoc]
+  rw [heq, bd.homEquiv_naturality_left, ad.homEquiv_naturality_left, A.map_comp]
+  simp only [← Category.assoc]
+  congr 1
+  rw [ht]
+  simp only [← Category.assoc, Iso.inv_hom_id, Category.id_comp]
+
+private theorem finiteSpecifiedHomValue
+    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    {X Y : Scheme.{u}} {f : X ⟶ Y} [QuasiCompact f] [CompactSpace Y]
+    (c : Compactification f)
+    [(Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) c).IsLeftAdjoint]
+    (M : DerivedCategory.Plus (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ)))
+    (W : FixedEtaleOriginWitness X Λ M)
+    (L : DerivedCategory.Plus (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} Λ)))
+    (a : (ProEtale.rightDerivedLowerShriekOfCompactification
+      (ModuleCat.{u + 1} Λ) c).obj M.obj ⟶ L.obj) :
+    ProEtale.specifiedExceptionalHomEquiv Λ c M W L a = W.iso.inv ≫
+      (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategory.map
+        ((Adjunction.ofIsLeftAdjoint (Etale.rightDerivedLowerShriekOfCompactification
+          (ModuleCat.{u + 1} Λ) c)).homEquiv _ _
+          ((ProEtale.derivedComparisonAdjunction (ModuleCat.{u + 1} Λ) Y).homEquiv _ _
+            ((ProEtale.fixedCompactSupportComparisonIso Λ c).inv.app W.complex ≫
+              (ProEtale.rightDerivedLowerShriekOfCompactification
+                (ModuleCat.{u + 1} Λ) c).map W.iso.hom ≫ a))) := by
+  rfl
+
+private theorem finiteSpecifiedHomLeft
+    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    {X Y : Scheme.{u}} {f : X ⟶ Y} [QuasiCompact f] [CompactSpace Y]
+    (c : Compactification f)
+    [(Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) c).IsLeftAdjoint]
+    (M M' : DerivedCategory.Plus (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ)))
+    (W : FixedEtaleOriginWitness X Λ M) (W' : FixedEtaleOriginWitness X Λ M')
+    (L : DerivedCategory.Plus (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} Λ)))
+    (s : M.obj ⟶ M'.obj)
+    (a : (ProEtale.rightDerivedLowerShriekOfCompactification
+      (ModuleCat.{u + 1} Λ) c).obj M'.obj ⟶ L.obj) :
+    ProEtale.specifiedExceptionalHomEquiv Λ c M W L
+      ((ProEtale.rightDerivedLowerShriekOfCompactification
+        (ModuleCat.{u + 1} Λ) c).map s ≫ a) =
+      s ≫ ProEtale.specifiedExceptionalHomEquiv Λ c M' W' L a := by
+  obtain ⟨t, ht⟩ := (ProEtale.bijective_comparisonUpperStar_mapDerivedCategory_map
+    W.complex.obj W'.complex.obj W'.complex.property).surjective
+      (W.iso.hom ≫ s ≫ W'.iso.inv)
+  have hv := (ProEtale.fixedCompactSupportComparisonIso Λ c).inv.naturality
+    (ObjectProperty.homMk t : W.complex ⟶ W'.complex)
+  rw [finiteSpecifiedHomValue, finiteSpecifiedHomValue]
+  exact finiteTransposeLeft _ _ _ _ _ _
+    (Adjunction.ofIsLeftAdjoint (Etale.rightDerivedLowerShriekOfCompactification
+      (ModuleCat.{u + 1} Λ) c))
+    (ProEtale.derivedComparisonAdjunction (ModuleCat.{u + 1} Λ) Y)
+    W.iso W'.iso _ _ s a t ht hv
+
+private theorem finiteSpecifiedHomRight
+    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    {X Y : Scheme.{u}} {f : X ⟶ Y} [QuasiCompact f] [CompactSpace Y]
+    (c : Compactification f)
+    [(Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) c).IsLeftAdjoint]
+    (M : DerivedCategory.Plus (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ)))
+    (W : FixedEtaleOriginWitness X Λ M)
+    (L L' : DerivedCategory.Plus (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} Λ)))
+    (a : (ProEtale.rightDerivedLowerShriekOfCompactification
+      (ModuleCat.{u + 1} Λ) c).obj M.obj ⟶ L.obj) (b : L.obj ⟶ L'.obj) :
+    ProEtale.specifiedExceptionalHomEquiv Λ c M W L' (a ≫ b) =
+      ProEtale.specifiedExceptionalHomEquiv Λ c M W L a ≫
+        (ProEtale.sfFiniteExceptionalAt Λ c).map b := by
+  rw [finiteSpecifiedHomValue, finiteSpecifiedHomValue]
+  simp only [← Category.assoc]
+  rw [Adjunction.homEquiv_naturality_right, Adjunction.homEquiv_naturality_right,
+    Functor.map_comp]
+  simp only [Category.assoc]
+  rfl
+
+private theorem finiteRestrictHom
+    {C D C' D' : Type*} [Category* C] [Category* D] [Category* C'] [Category* D']
+    (RX : C ⥤ C') (RY : D ⥤ D') [RX.Full] [RX.Faithful] [RY.Full] [RY.Faithful]
+    (P : C' ⥤ D') (H : D' ⥤ C') (F : C ⥤ D) (G : D ⥤ C)
+    (rF : F ⋙ RY ≅ RX ⋙ P) (rG : G ⋙ RX ≅ RY ⋙ H)
+    (e : ∀ K L, (P.obj (RX.obj K) ⟶ RY.obj L) ≃ (RX.obj K ⟶ H.obj (RY.obj L)))
+    (hleft : ∀ {K K'} (s : K ⟶ K') (L) (a : P.obj (RX.obj K') ⟶ RY.obj L),
+      e K L (P.map (RX.map s) ≫ a) = RX.map s ≫ e K' L a)
+    (hright : ∀ (K) {L L'} (a : P.obj (RX.obj K) ⟶ RY.obj L) (b : L ⟶ L'),
+      e K L' (a ≫ RY.map b) = e K L a ≫ H.map (RY.map b)) :
+    ∃ adj : F ⊣ G, ∀ K L (a : F.obj K ⟶ L),
+      RX.map (adj.homEquiv K L a) ≫ rG.hom.app L =
+        e K L (rF.inv.app K ≫ RY.map a) := by
+  let ffX := Functor.FullyFaithful.ofFullyFaithful RX
+  let ffY := Functor.FullyFaithful.ofFullyFaithful RY
+  let ψ (K : C) (L : D) : (F.obj K ⟶ L) ≃ (K ⟶ G.obj L) :=
+    ffY.homEquiv.trans (((rF.app K).homFromEquiv.trans (e K L)).trans
+      (((rG.app L).symm.homToEquiv).trans ffX.homEquiv.symm))
+  have hn (K : C) (L : D) (a : F.obj K ⟶ L) :
+      RX.map (ψ K L a) ≫ rG.hom.app L =
+        e K L (rF.inv.app K ≫ RY.map a) := by
+    dsimp only [ψ, Equiv.trans_apply, Functor.FullyFaithful.homEquiv,
+      Iso.homFromEquiv, Iso.homToEquiv, Equiv.symm, Equiv.coe_fn_mk]
+    rw [ffX.map_preimage]
+    simp only [Category.assoc]
+    change e K L (rF.inv.app K ≫ RY.map a) ≫ rG.inv.app L ≫ rG.hom.app L = _
+    rw [Iso.inv_hom_id_app]
+    exact Category.comp_id _
+  have hl {K K' : C} (s : K ⟶ K') (L : D) (a : F.obj K' ⟶ L) :
+      ψ K L (F.map s ≫ a) = s ≫ ψ K' L a := by
+    apply RX.map_injective
+    apply (cancel_mono (rG.hom.app L)).1
+    rw [hn, RX.map_comp, Category.assoc, hn]
+    have hnat := rF.inv.naturality s
+    dsimp only [Functor.comp_map] at hnat
+    rw [RY.map_comp, ← Category.assoc, ← hnat, Category.assoc]
+    change e K L ((RX ⋙ P).map s ≫ rF.inv.app K' ≫ RY.map a) = _
+    exact hleft s L _
+  have hr (K : C) {L L' : D} (a : F.obj K ⟶ L) (b : L ⟶ L') :
+      ψ K L' (a ≫ b) = ψ K L a ≫ G.map b := by
+    apply RX.map_injective
+    apply (cancel_mono (rG.hom.app L')).1
+    have hnat := rG.hom.naturality b
+    dsimp only [Functor.comp_map] at hnat
+    rw [hn, RX.map_comp, Category.assoc, hnat]
+    change _ = RX.map (ψ K L a) ≫ rG.hom.app L ≫ H.map (RY.map b)
+    rw [← Category.assoc, hn, RY.map_comp, ← Category.assoc, hright]
+  let core : Adjunction.CoreHomEquiv F G :=
+    { homEquiv := ψ
+      homEquiv_naturality_left_symm := by
+        intro K K' L s a
+        apply (ψ K L).injective
+        rw [Equiv.apply_symm_apply, hl, Equiv.apply_symm_apply]
+      homEquiv_naturality_right := fun {_ _ _} a b ↦ hr _ a b }
+  exact ⟨Adjunction.mkOfHomEquiv core, fun K L a ↦ by
+    rw [Adjunction.mkOfHomEquiv_homEquiv]
+    change RX.map (ψ K L a) ≫ rG.hom.app L = _
+    exact hn K L a⟩
 
 private theorem support_inverse
     {C D C' D' : Type*} [Category* C] [Category* D] [Category* C'] [Category* D']
@@ -129,6 +287,59 @@ def Q (T : Scheme.{u}) {m n : ℕ} (h : n ≤ m) :
     (domain l E T m).FullSubcategory ⥤ (domain l E T n).FullSubcategory :=
   (domain l E T n).lift ((domain l E T m).ι ⋙ reduction l E T h)
     (reduction_preserves l E T h)
+
+/-- A bounded etale origin obtained directly from the arbitrary finite-ring comparison.
+Source: Stacks, Tag 09AL. Finite support gives an ordered cohomological interval;
+exact coefficient realization transports the resulting bounded etale origin. -/
+private theorem finiteRingOrigin (l : ℕ) [Fact l.Prime]
+    (E : Type u) [Field E] [Algebra (Padic l) E]
+    [FiniteDimensional (Padic l) E] (n : ℕ) (T : Scheme.{u})
+    (K : (domain l E T n).FullSubcategory) :
+    ∃ h : DerivedCategory.TStructure.t.plus
+        ((sfIntrinsicDerivedEquivalence T
+          (Padic.coefficientExtensionRing l E (n + 1))).inverse.obj K.obj),
+      Nonempty (FixedEtaleOriginWitness T
+        (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))
+        ⟨(sfIntrinsicDerivedEquivalence T
+          (Padic.coefficientExtensionRing l E (n + 1))).inverse.obj K.obj, h⟩) := by
+  classical
+  let A := Padic.coefficientExtensionRing l E (n + 1)
+  let : Finite A := Padic.finite_coefficientExtensionRing l E _ (Nat.succ_pos n)
+  let : HasDerivedCategory.{u + 2}
+      (proEtaleRingModules T (proEtaleConstantRing T A)) :=
+    HasDerivedCategory.standard _
+  let R := sfIntrinsicDerivedEquivalence T A
+  let U := ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) T
+  obtain ⟨a, ha⟩ := K.property.1.1.bddBelow
+  obtain ⟨b, hb⟩ := K.property.1.1.bddAbove
+  have horigin : ∃ L : Etale.BoundedConstructibleDerivedCategory
+      (ULift.{u + 1, u} A) T,
+      Nonempty ((ProEtale.finiteCoefficientIntrinsicDerivedComparison T A).obj L.obj ≅
+        K.obj) := by
+    apply ((finiteRing_constructibleDerived_origin T A).2.2.1 K.obj).mpr
+    refine ⟨K.property.1.2, min a b, b, min_le_right _ _, ?_⟩
+    intro i hi
+    by_contra hz
+    rcases hi with hi | hi
+    · exact (not_lt_of_ge (ha hz)) (lt_of_lt_of_le hi (min_le_left _ _))
+    · exact (not_lt_of_ge (hb hz)) hi
+  obtain ⟨L, ⟨eL⟩⟩ := horigin
+  let hL : DerivedCategory.TStructure.t.plus L.obj := by
+    obtain ⟨c, d, _, hcd⟩ := L.property.2
+    exact ⟨c, (DerivedCategory.isGE_iff L.obj c).2 (fun i hi ↦ hcd i (.inl hi))⟩
+  let e : U.mapDerivedCategory.obj L.obj ≅ R.inverse.obj K.obj :=
+    R.functor.preimageIso
+      (((Functor.mapDerivedCategoryCompIso U
+        (sfIntrinsicModuleEquivalence T A).functor).app L.obj).symm ≪≫
+        eL ≪≫ (R.counitIso.app K.obj).symm)
+  have hU : DerivedCategory.TStructure.t.plus (U.mapDerivedCategory.obj L.obj) := by
+    obtain ⟨c, hc⟩ := hL
+    refine ⟨c, (DerivedCategory.isGE_iff _ c).2 (fun i hi ↦ ?_)⟩
+    exact U.isZero_homologyFunctor_mapDerivedCategory_obj
+      ((DerivedCategory.isGE_iff L.obj c).1 hc i hi)
+  have h : DerivedCategory.TStructure.t.plus (R.inverse.obj K.obj) :=
+    DerivedCategory.TStructure.t.plus.prop_of_iso e hU
+  exact ⟨h, ⟨⟨⟨L.obj, hL⟩, e⟩⟩⟩
 
 variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
   {X Y : Scheme.{u}}
@@ -399,8 +610,6 @@ theorem adjunction_existsUnique (n : ℕ) :
       AdjunctionNormalized l E D hl f c n a := by
   classical
   let A := Padic.coefficientExtensionRing l E (n + 1)
-  let E' : ConstructibleExceptionalCoefficients.FieldStage.{u} l := { carrier := E }
-  let n' : ℕ+ := ⟨n + 1, Nat.succ_pos n⟩
   let EX := sfIntrinsicDerivedEquivalence X A
   let EY := sfIntrinsicDerivedEquivalence Y A
   let RX := (domain l E X n).ι ⋙ EX.inverse
@@ -410,13 +619,13 @@ theorem adjunction_existsUnique (n : ℕ) :
   have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace (Y ↘ Spec (.of D.k))
   let hX (K : (domain l E X n).FullSubcategory) :
       DerivedCategory.TStructure.t.plus (RX.obj K) :=
-    (sfRestrictionOrigin l E' n' X K).choose
+    (finiteRingOrigin l E n X K).choose
   let hY (L : (domain l E Y n).FullSubcategory) :
       DerivedCategory.TStructure.t.plus (RY.obj L) :=
-    (sfRestrictionOrigin l E' n' Y L).choose
+    (finiteRingOrigin l E n Y L).choose
   let wX (K : (domain l E X n).FullSubcategory) :
       FixedEtaleOriginWitness X (ULift.{u + 1, u} A) ⟨RX.obj K, hX K⟩ :=
-    Classical.choice (sfRestrictionOrigin l E' n' X K).choose_spec
+    Classical.choice (finiteRingOrigin l E n X K).choose_spec
   let t := ProEtale.sfIntrinsicCompactSupportComparison A c
   let sF : sfIntrinsicCompactSupport c A ⋙ EY.inverse ≅ EX.inverse ⋙ P :=
     (Iso.inverseCompIso
@@ -438,7 +647,7 @@ theorem adjunction_existsUnique (n : ℕ) :
         (fixedExceptionalIso l E f c n).inv.app (RY.obj L) =
       RX.map s ≫ ProEtale.specifiedExceptionalHomEquiv _ c
         ⟨RX.obj K', hX K'⟩ (wX K') ⟨RY.obj L, hY L⟩ a ≫ _
-    have hh := sfSpecifiedHomLeft (ULift.{u + 1, u} A) c
+    have hh := finiteSpecifiedHomLeft (ULift.{u + 1, u} A) c
       ⟨RX.obj K, hX K⟩ ⟨RX.obj K', hX K'⟩ (wX K) (wX K')
       ⟨RY.obj L, hY L⟩ (RX.map s) a
     exact (congrArg (· ≫ (fixedExceptionalIso l E f c n).inv.app (RY.obj L)) hh).trans
@@ -450,7 +659,7 @@ theorem adjunction_existsUnique (n : ℕ) :
         (fixedExceptionalIso l E f c n).inv.app (RY.obj L') =
       (ProEtale.specifiedExceptionalHomEquiv _ c
         ⟨RX.obj K, hX K⟩ (wX K) ⟨RY.obj L, hY L⟩ a ≫ _) ≫ J.map (RY.map b)
-    have hh := sfSpecifiedHomRight (ULift.{u + 1, u} A) c
+    have hh := finiteSpecifiedHomRight (ULift.{u + 1, u} A) c
       ⟨RX.obj K, hX K⟩ (wX K) ⟨RY.obj L, hY L⟩ ⟨RY.obj L', hY L'⟩ a (RY.map b)
     have hn := (fixedExceptionalIso l E f c n).inv.naturality (RY.map b)
     calc
@@ -464,7 +673,7 @@ theorem adjunction_existsUnique (n : ℕ) :
         exact (congrArg (ProEtale.specifiedExceptionalHomEquiv _ c
           ⟨RX.obj K, hX K⟩ (wX K) ⟨RY.obj L, hY L⟩ a ≫ ·) hn).trans
             (Category.assoc _ _ _).symm
-  obtain ⟨a, ha⟩ := sfRestrictHom RX RY P J (F l E D hl f c n)
+  obtain ⟨a, ha⟩ := finiteRestrictHom RX RY P J (F l E D hl f c n)
     (G l E D hl f c n) rF rG e heLeft heRight
   have hnorm : AdjunctionNormalized l E D hl f c n a := by
     intro M W L hM hL v
@@ -497,10 +706,10 @@ theorem adjunction_existsUnique (n : ℕ) :
         (ProEtale.specifiedExceptionalHomEquiv _ c M W L v ≫
           (fixedExceptionalIso l E f c n).inv.app L.obj) ≫
             J.map (EY.unitIso.hom.app L.obj)
-    erw [sfSpecifiedHomLeft (ULift.{u + 1, u} A) c
+    erw [finiteSpecifiedHomLeft (ULift.{u + 1, u} A) c
       ⟨RX.obj K0, hX K0⟩ M (wX K0) W ⟨RY.obj L0, hY L0⟩
       (EX.unitIso.inv.app M.obj) (v ≫ EY.unitIso.hom.app L.obj)]
-    erw [sfSpecifiedHomRight (ULift.{u + 1, u} A) c M W L
+    erw [finiteSpecifiedHomRight (ULift.{u + 1, u} A) c M W L
       ⟨RY.obj L0, hY L0⟩ v (EY.unitIso.hom.app L.obj)]
     simp only [Category.assoc]
     exact congrArg

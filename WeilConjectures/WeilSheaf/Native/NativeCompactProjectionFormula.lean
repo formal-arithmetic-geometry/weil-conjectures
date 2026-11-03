@@ -17,6 +17,14 @@ import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import Mathlib.AlgebraicGeometry.Morphisms.Separated
+public import WeilConjectures.AlgebraicGeometry.ConstantModelTorAmplitude
+public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
+public import WeilConjectures.CategoryTheory.Native.NativeOpenTensorPresentation
+public import WeilConjectures.CategoryTheory.ProEtaleCoefficients.LocalizingAdmissibleCoefficients
+public import WeilConjectures.Compactification.NagataCompactification
+public import WeilConjectures.Compactification.Over
+public import WeilConjectures.PoincareDuality.ProjectionFormula
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.AdmissibleTensorConstructibility
 
 /-! # Compact projection formula for actual derived Weil complexes
 
@@ -123,6 +131,124 @@ structure ProjectionTensorPresentation
   /-- It localizes precisely the total map on arbitrary K-flat inputs. -/
   models : OpenTensorRestrictionNormalization F TB TA DB DA flatB flatA kflat
     modelB modelA total mu
+
+/-- The balanced compositor for the specified compactification, in the direction
+j* p* to f*. Source: fix-lem-tensor-adjunction.proof.md Step 1.
+(blueprint: def-sf-native-projection-tensor-comparison-data). -/
+abbrev nativeProjectionPullComp {X Y : Scheme.{u}} {f : X ⟶ Y}
+    (c : Compactification f) :=
+  (leftDerivedUpperStarCompactificationIso Λ c).symm
+
+/-- The target of the compact projection formula, with the same ambient tensor and Rf!.
+Source: fix-lem-tensor-adjunction.proof.md Step 1.
+(blueprint: def-sf-native-projection-tensor-comparison-data). -/
+abbrev nativeCompactProjectionRight {X Y : Scheme.{u}} {f : X ⟶ Y}
+    (c : Compactification f) :=
+  ((constantModelBoundedConstructible Λ X ⊓ _root_.DerivedCategory.finiteTorAmplitude _).ι.prod
+    ((constantModelBoundedConstructible Λ Y ⊓ _root_.DerivedCategory.finiteTorAmplitude _).ι ⋙
+      (upperStar Λ f).leftDerivedFunctor)) ⋙ Functor.uncurry.obj (derivedTensor Λ X) ⋙
+        rightDerivedLowerShriekOfCompactification Λ c
+
+/-- The source of the compact projection formula on finite-Tor constructible inputs,
+viewed in the ambient ordinary derived category.
+Source: fix-lem-tensor-adjunction.proof.md Step 1.
+(blueprint: def-sf-native-projection-tensor-comparison-data). -/
+abbrev nativeCompactProjectionLeft {X Y : Scheme.{u}} {f : X ⟶ Y}
+    (c : Compactification f) :=
+  (((constantModelBoundedConstructible Λ X ⊓ _root_.DerivedCategory.finiteTorAmplitude _).ι ⋙
+      rightDerivedLowerShriekOfCompactification Λ c).prod
+    (constantModelBoundedConstructible Λ Y ⊓ _root_.DerivedCategory.finiteTorAmplitude _).ι) ⋙
+      Functor.uncurry.obj (derivedTensor Λ Y)
+
+/-- The normalized counit mate is the library's canonical projection morphism.
+Source: fix-lem-tensor-adjunction.proof.md Step 1, second Hom bijection.
+(blueprint: def-sf-native-projection-tensor-comparison-data).
+Proof: substitute the normalization of the tensor comparison. Both sides are the
+same adjunction transpose of the pullback tensorator followed by counit tensor identity. -/
+theorem nativeProjectionProperMate_eq (C : NativeProjectionTensorComparison Λ p)
+    (A : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)))
+    (T : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))) :
+    nativeProjectionProperMate Λ p C A T = properProjectionMorphism Λ p A T := by
+  unfold nativeProjectionProperMate
+  rw [C.normalization]
+  simp only [tensorHom_id]
+  rfl
+
+/-- The proper counit mate of the specified balanced tensor comparison.
+No invertibility is part of this definition.
+Source: fix-lem-tensor-adjunction.proof.md Step 1, second Hom bijection.
+(blueprint: def-sf-native-projection-tensor-comparison-data). -/
+def nativeProjectionProperMate (C : NativeProjectionTensorComparison Λ p)
+    (A : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1}) (condensedRingObj Λ Z)))
+    (T : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))) :
+    (lowerStar Λ p).rightDerivedFunctor.obj A ⊗ T ⟶
+      (lowerStar Λ p).rightDerivedFunctor.obj
+        (A ⊗ (upperStar Λ p).leftDerivedFunctor.obj T) :=
+  (derivedUpperStarLowerStarAdjunction Λ p).homEquiv _ _
+    ((C.mu.hom.app ((lowerStar Λ p).rightDerivedFunctor.obj A)).app T ≫
+      ((derivedUpperStarLowerStarAdjunction Λ p).counit.app A ⊗ₘ 𝟙 _))
+
+/-- The canonical comparison, without choosing any isomorphism from mere existence.
+Source: the K-flat construction of the derived monoidal pullback.
+(blueprint: def-sf-native-projection-tensor-comparison-data). -/
+def nativeProjectionTensorComparison : NativeProjectionTensorComparison Λ p :=
+  ⟨leftDerivedUpperStarTensorIso Λ p, rfl⟩
+
+/-- The normalized comparison is the actual derived pullback tensor isomorphism.
+Its construction in Derived.Monoidal fixes the ordinary balanced sheaf map, its
+summand maps on total complexes, and its K-flat localization. No alternative tensorator
+or projection-formula hypothesis is introduced.
+Source: fix-lem-tensor-adjunction.proof.md Step 1, second Hom bijection.
+(blueprint: def-sf-native-projection-tensor-comparison-data). -/
+structure NativeProjectionTensorComparison where
+  /-- The comparison on the two ambient ordinary derived categories. -/
+  mu : leftDerivedUpperStarTensorLeft Λ p ≅ leftDerivedUpperStarTensorRight Λ p
+  /-- Pinning to the canonical balanced, totalized and localized comparison. -/
+  normalization : mu = leftDerivedUpperStarTensorIso Λ p
+
+/-- Restriction of the ordinary condensed derived tensor to Dctf, with the same maps.
+Source: fix-lem-tensor-adjunction.proof.md Step 1.
+(blueprint: def-sf-native-constructible-tensor). -/
+def nativeConstructibleTensor
+    (ell : ℕ) [Fact ell.Prime] (k : Type u) [Field k]
+    [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ell)]
+    (hΛ : IsLocalizingAdmissibleCoefficient ell Λ)
+    (X : Scheme.{u}) [X.Over (Spec (.of k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of k))]
+    [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] :
+    ConstantModelConstructibleFiniteTor Λ X × ConstantModelConstructibleFiniteTor Λ X ⥤
+      ConstantModelConstructibleFiniteTor Λ X :=
+  (constantModelBoundedConstructible Λ X ⊓ _root_.DerivedCategory.finiteTorAmplitude _).lift
+    (((constantModelBoundedConstructible Λ X ⊓ _root_.DerivedCategory.finiteTorAmplitude _).ι).prod
+      ((constantModelBoundedConstructible Λ X ⊓ _root_.DerivedCategory.finiteTorAmplitude _).ι) ⋙
+        Functor.uncurry.obj (derivedTensor Λ X))
+    (fun A ↦ nativeConstructibleTensor_mem Λ ell k hΛ X A.1 A.2)
+
+/-- Tensor closure for the current finite-Tor constructible predicate.
+Source: fix-lem-tensor-adjunction.proof.md Step 1, with tensor constructibility from
+lem-sfb-admissible-tensor-constructibility.
+(blueprint: def-sf-native-constructible-tensor).
+Proof: apply admissible-coefficient constructibility to the two inputs. Choose their
+Tor intervals [a,b] and [c,d]; the tensor has interval [a+c,b+d]. -/
+theorem nativeConstructibleTensor_mem
+    (ell : ℕ) [Fact ell.Prime] (k : Type u) [Field k]
+    [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ell)]
+    (hΛ : IsLocalizingAdmissibleCoefficient ell Λ)
+    (X : Scheme.{u}) [X.Over (Spec (.of k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of k))]
+    [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))]
+    (A B : ConstantModelConstructibleFiniteTor Λ X) :
+    (constantModelBoundedConstructible Λ X ⊓ _root_.DerivedCategory.finiteTorAmplitude _)
+      (((derivedTensor Λ X).obj A.obj).obj B.obj) := by
+  refine ⟨constantModelBoundedConstructible_tensor_of_admissible
+    ell k Λ hΛ A.obj B.obj A.property B.property, ?_⟩
+  obtain ⟨a, b, hA⟩ := A.property.2
+  obtain ⟨c, d, hB⟩ := B.property.2
+  exact ⟨a + c, b + d, _root_.DerivedCategory.torAmplitudeIn_tensor hA hB⟩
 
 end CategoryTheory
 
@@ -232,11 +358,12 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
 
 /-- The framework's actual chosen compactification, with its canonical k0-structure.
-Source: native framework, LowerShriek.lean; blueprint latest,
+Source: Nagata compactification over a field; blueprint latest,
 fix-lem-tensor-adjunction.proof.md, Step 1
 (blueprint: lem-sf-derived-weil-compact-projection-formula). -/
 abbrev nativeProjectionCompactification : Compactification f :=
-  HasCompactification.compactification f (hf := hasCompactification_of_over (k₀ := k₀) f)
+  HasCompactification.compactification f
+    (hf := HasCompactification.of_isOver (S := Spec (CommRingCat.of k₀)) f)
 
 /-- Finite type of the chosen compactification source, by composition with its proper map.
 Source: Stacks 01T3; node proof Step 1

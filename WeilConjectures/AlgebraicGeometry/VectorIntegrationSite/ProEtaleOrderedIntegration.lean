@@ -194,4 +194,50 @@ def towerCounit (T : Scheme.{u}) [IsNoetherian T]
     TowerCounitFamily l E n T r hA K.obj :=
   (existsUniqueTowerCounit l E n T hT r hA K).exists.choose
 
+/-- The canonical proper-mate/open-extension comparison for one coordinate.
+Source: Stacks 099R and 09AF (blueprint: def-pur-proetale-ordered-integration). -/
+@[irreducible]
+def lineSiteComparison (T : Scheme.{u})
+    (J : DerivedCategory.Plus (Sheaf (AffineSpace PUnit.{u + 1} T).smallEtaleTopology
+      (ModuleCat.{u + 1} A))) :
+    (lineLeft A T).obj ((comparison A _).obj J.obj) ≅
+      (comparison A T).obj ((Etale.affineTraceLineLeft A T).obj J.obj) :=
+  (compactSupportSiteComparison A (affineTraceLineCompactification T)).app J
+
+/-- Iterated canonical proper/open comparison; no counit or trace occurs in this map.
+Source: Stacks 099R, 09AF and compact-support composition
+(blueprint: def-pur-proetale-ordered-integration). -/
+@[irreducible]
+def towerSiteComparison (T : Scheme.{u}) : (d : ℕ) →
+    (J : DerivedCategory.Plus (Sheaf (affineTraceTower T d).smallEtaleTopology
+      (ModuleCat.{u + 1} A))) →
+    (towerLeft A T d).obj ((comparison A _).obj J.obj) ≅
+      (comparison A T).obj ((Etale.affineTraceLeft A T d).obj J.obj)
+  | 0, _ => Iso.refl _
+  | d + 1, J =>
+    let L := Etale.rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} A)
+      (affineTraceLineCompactification (affineTraceTower T d))
+    let e := (Etale.rightDerivedLowerShriekOfCompactificationPlusCompatibility
+      (ModuleCat.{u + 1} A) (affineTraceLineCompactification (affineTraceTower T d))).app J
+    (towerLeft A T d).mapIso (lineSiteComparison A _ J) ≪≫
+      (towerLeft A T d).mapIso ((comparison A _).mapIso e.symm) ≪≫
+      towerSiteComparison T d (L.obj J) ≪≫
+      (comparison A T).mapIso ((Etale.affineTraceLeft A T d).mapIso e)
+
+/-- Ordered integration in ordinary-comparison source coordinates, with actual pro-etale
+line counits in its body. The source comparison contains no ordinary integration map.
+Source: blueprint affine-space trace (blueprint: def-pur-proetale-ordered-integration). -/
+@[irreducible]
+def orderedIntegration (T : Scheme.{u}) [IsNoetherian T]
+    (hT : IsUnit (l : Γ(T, ⊤))) (r : ℕ)
+    (hA : ((l ^ (r + 1) : ℕ) : Scheme.finiteTateCoefficient l E n) = 0) (d : ℕ) :
+    (comparison (Scheme.finiteTateCoefficient l E n) T).obj
+      ((Etale.affineTraceLeft _ T d).obj
+        ((Etale.affineTraceRight _ (l ^ (r + 1)) hA T d).obj
+          (Etale.ordinaryFiniteUnit _ T))) ⟶ unit (Scheme.finiteTateCoefficient l E n) T :=
+  (towerSiteComparison (Scheme.finiteTateCoefficient l E n) T d
+    ⟨_, rightTower_plus l E n T hT r hA d
+      ⟨Etale.ordinaryFiniteUnit _ T, ⟨0, inferInstance⟩⟩⟩).inv ≫
+    towerCounit l E n T hT r hA ⟨Etale.ordinaryFiniteUnit _ T, ⟨0, inferInstance⟩⟩ d
+
 end AlgebraicGeometry.ProEtale.VectorIntegrationSite

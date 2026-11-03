@@ -214,4 +214,37 @@ private theorem support_pullback_eq (A : Type (u + 1)) [CommRing A]
   exact (exists_unique_supportTransportComparison A h d).choose_spec.1 |>.trans
     (composite_unit_eq _ _)
 
+/-- On complex models the derived open-support coefficient mate is the degreewise
+ordinary mate, with the exact-functor localization factors displayed.
+Source: Tag 0F1E, normalization in the open restriction calculation of
+lem-pur-supported-product-localization, step 11.
+(blueprint: lem-pur-supported-coefficient-derived-open-mate).
+Proof: the normalized composite unit identifies derived support restriction with
+`rightDerivedPullback` of the ordinary restriction. The exact-derived mate calculation
+identifies its left mate with the localization of the ordinary left mate followed by
+the exact-functor composition comparison. The localization factorization for this
+composition and the defining equation of the localized ordinary transformation give
+the formula. This works on arbitrary unbounded complexes. -/
+theorem supportedCoefficientDerivedOpenMate_fac (A : Type (u + 1)) [CommRing A]
+    {T S B D : Scheme.{u}} (h : S ⟶ T) [IsOpenImmersion h]
+    (b : B ⟶ T) (d : D ⟶ S) [IsClosedImmersion b] [IsClosedImmersion d]
+    (hd : d.openComplement = h ⁻¹ᵁ b.openComplement)
+    (K : HomotopyCategory (ModuleCat.{u + 1} A) (.up ℤ)) :
+    (supportCoefficientOpenMate A h b d hd).app (DerivedCategory.Qh.obj K) ≫
+        (upperStar (ModuleCat.{u + 1} A) h).mapDerivedCategory.map
+          ((supportedCoefficients A b).mapDerivedCategoryFactorsh.hom.app K) ≫
+        (upperStar (ModuleCat.{u + 1} A) h).mapDerivedCategoryFactorsh.hom.app
+          (((supportedCoefficients A b).mapHomotopyCategory (.up ℤ)).obj K) =
+      (supportedCoefficients A d).mapDerivedCategoryFactorsh.hom.app K ≫
+        DerivedCategory.Qh.map
+          ((NatTrans.mapHomotopyCategory
+            (supportCoefficientMate (supportedCoefficientAdjunction A b)
+              (supportedCoefficientAdjunction A d) (upperStar (ModuleCat.{u + 1} A) h)
+              (supportTransport A h b d hd)) (.up ℤ)).app K) := by
+  dsimp only [supportCoefficientOpenMate, supportedCoefficientDerivedAdjunction]
+  rw [← support_pullback_eq, derivedMate_eq]
+  dsimp only [NatTrans.comp_app]
+  rw [Category.assoc, Functor.mapDerivedCategoryCompIso_hom_app_factorsh]
+  exact exactMap_fac _ K
+
 end AlgebraicGeometry.Etale

@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SixFunctors.IntegralSystemRealization.Canonical.IntegralSystemCanonicalBridge
 import WeilConjectures.SixFunctors.IntegralSystemRealization.Ordinary.IntegralOrdinaryTowerComparison
 import WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralCompletedDirectImageComparison
+public import WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralOrdinaryTowerComparisonLegacy
 
 /-! # Ordinary direct image and the coefficient limit
 
@@ -63,14 +64,14 @@ private def towerComparison {X Y : Scheme.{u}} (f : X ⟶ Y) :
     pullbackTensorSequenceDirect l E f ⋙ coefficientSequenceRestriction l E Y ≅
       coefficientSequenceRestriction l E X ⋙
         (Functor.whiskeringRight ℕᵒᵖ _ _).obj (sfCompletedModuleDirectImage l E f) :=
-  (integralOrdinaryTowerComparison l E f).exists.choose
+  (integralOrdinaryTowerComparison_legacy l E f).exists.choose
 
 private theorem towerComparison_sections {X Y : Scheme.{u}} (f : X ⟶ Y)
     (M : coefficientSequenceModules l E X) (n : ℕ) (V : Y.ProEtᵒᵖ)
     (x : (((pullbackTensorSequenceDirect l E f ⋙ coefficientSequenceRestriction l E Y).obj M).obj
       (op n)).val.obj V) :
     HEq ((((towerComparison l E f).hom.app M).app (op n)).val.app V x) x := by
-  exact (integralOrdinaryTowerComparison l E f).exists.choose_spec M n V x
+  exact (integralOrdinaryTowerComparison_legacy l E f).exists.choose_spec M n V x
 
 attribute [local irreducible] towerComparison
 

@@ -78,6 +78,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import WeilConjectures.SixFunctors.AdicQbarRealization.AmbientHomEvaluation.CoherenceCalculus.CommonStageEvaluationFiniteSquare
 import WeilConjectures.SixFunctors.Normalized.NormalizedCommonEvaluationForStructure
 import WeilConjectures.SixFunctors.AdicQbarRealization.Native.NativeAdicAmbientHomConstructible
+public import WeilConjectures.AlgebraicGeometry.ModuleObjectRingedComparison.ModuleObjectRingedSiteDerivedComparison
 
 /-! # Ambient Hom from the actual evaluation transpose
 
@@ -935,3 +936,145 @@ theorem adic_ambient_hom_evaluation_comparison
 
 end AmbientHomEvaluation
 end WeilConjectures.AdicQbarRealization
+
+namespace AlgebraicGeometry.ProEtale.CondensedCoefficientRealization
+
+/-- Evaluation in the native derived category, in the right-tensor convention used
+by the ordinary ringed-site Hom. The exchange is the native Koszul braiding.
+Source: cor-coef-verdier-weil-equivariance.proof.md, paragraph 2
+(blueprint: lem-sf-adic-ambient-hom-evaluation-comparison). -/
+def evaluation (K N : DerivedCategory.{u + 1} (Internal Λ X)) :
+    ((CondensedRing.derivedTensor Λ X).obj
+      (((CondensedRing.derivedHom Λ X).obj (op K)).obj N)).obj K ⟶ N :=
+  (@BraidedCategory.braiding _ _ _ (internalBraiding Λ X)
+    (((CondensedRing.derivedHom Λ X).obj (op K)).obj N) K).hom ≫
+      (CondensedRing.derivedTensorHomAdjunction Λ K).counit.app N
+
+/-- An evaluation-normalized ordinary realization of the actual condensed category.
+The tensor is normalized on K-flat representatives, and the Hom comparison is a
+natural isomorphism on the entire ambient derived category, not only perfect inputs.
+Source: Stacks 08J9--08JB; current cor-coef-verdier-weil-equivariance.proof.md,
+paragraph 2 (blueprint: lem-sf-adic-ambient-hom-evaluation-comparison). -/
+structure ClosedPresentation where
+  closed : CoefficientClosedStructure (hom Λ X)
+  models : CoefficientTensorModels.{u, u + 1, u, u + 1}
+    (Scheme.ProEt.topology X) (ring Λ X) closed
+  tensor : TensorComparison Λ X closed models
+  homIso : Functor.uncurry.obj (CondensedRing.derivedHom Λ X) ⋙ forward Λ X ≅
+    ((forward Λ X).op.prod (forward Λ X)) ⋙ hom Λ X
+  evaluation : ∀ K N : DerivedCategory.{u + 1} (Internal Λ X),
+    (forward Λ X).map (CondensedCoefficientRealization.evaluation Λ X K N) =
+      tensor.iso.hom.app ((((CondensedRing.derivedHom Λ X).obj (op K)).obj N), K) ≫
+        closed.tensor.map
+          (X := ((forward Λ X).obj (((CondensedRing.derivedHom Λ X).obj (op K)).obj N),
+            (forward Λ X).obj K))
+          (Y := ((hom Λ X).obj (op ((forward Λ X).obj K), (forward Λ X).obj N),
+            (forward Λ X).obj K))
+          (homIso.hom.app (op K, N), 𝟙 ((forward Λ X).obj K)) ≫
+            closed.evaluation ((forward Λ X).obj K) ((forward Λ X).obj N)
+
+/-- Uncurrying is tensoring with the identity followed by evaluation. -/
+private theorem transpose_symm {C : Type*} [Category C] {H : Cᵒᵖ × C ⥤ C}
+    (S : CoefficientClosedStructure H) (L K N : C) (a : L ⟶ H.obj (op K, N)) :
+    (S.transpose L K N).symm a = S.tensor.map (a, 𝟙 K) ≫ S.evaluation K N := by
+  change (@MonoidalCategory.tensorRight C _ S.monoidal K).map a ≫ _ = _
+  let _ := S.monoidal
+  simp [CoefficientClosedStructure.tensor, CoefficientClosedStructure.evaluation]
+
+/-- The evaluation-normalized Hom comparison also identifies every transpose.
+Source: cor-coef-verdier-weil-equivariance.proof.md, paragraph 2
+(blueprint: lem-sf-adic-ambient-hom-evaluation-comparison).
+Proof: use the inverse tensor comparison to express the realized pairing. Tensor
+naturality and the evaluation equation identify it with evaluation after the realized
+Hom morphism. The inverse of the ordinary tensor--Hom adjunction gives its transpose. -/
+theorem ClosedPresentation.transpose_evaluation (S : ClosedPresentation Λ X)
+    (L K N : DerivedCategory.{u + 1} (Internal Λ X))
+    (a : L ⟶ ((CondensedRing.derivedHom Λ X).obj (op K)).obj N) :
+    S.closed.transpose ((forward Λ X).obj L) ((forward Λ X).obj K)
+      ((forward Λ X).obj N)
+      (S.tensor.iso.inv.app (L, K) ≫ (forward Λ X).map
+        ((Functor.uncurry.obj (CondensedRing.derivedTensor Λ X)).map
+          (X := (L, K))
+          (Y := (((CondensedRing.derivedHom Λ X).obj (op K)).obj N, K))
+          (Prod.mkHom a (𝟙 K)) ≫
+          CondensedCoefficientRealization.evaluation Λ X K N)) =
+      (forward Λ X).map a ≫ S.homIso.hom.app (op K, N) := by
+  apply (S.closed.transpose _ _ _).symm.injective
+  rw [Equiv.symm_apply_apply, transpose_symm]
+  have ht := S.tensor.iso.inv.naturality (Prod.mkHom a (𝟙 K))
+  dsimp only [Functor.comp_map, Functor.prod_map] at ht
+  rw [CategoryTheory.Functor.map_id] at ht
+  rw [CategoryTheory.Functor.map_comp, ← Category.assoc, ← ht]
+  rw [Category.assoc, S.evaluation, Iso.inv_hom_id_app_assoc, ← Category.assoc,
+    ← S.closed.tensor.map_comp]
+  congr 2
+  ext <;> simp
+
+/-- Evaluation determines each component of the ordinary internal-Hom comparison.
+Source: cor-coef-verdier-weil-equivariance.proof.md, paragraph 2
+(blueprint: lem-sf-adic-ambient-hom-evaluation-comparison).
+Proof: compare the two evaluation equations and cancel the tensor comparison,
+which is an isomorphism. The inverse ordinary tensor--Hom adjunction is injective;
+its formula is tensoring with the identity followed by evaluation. -/
+theorem ClosedPresentation.hom_component_unique (S : ClosedPresentation Λ X)
+    (K N : DerivedCategory.{u + 1} (Internal Λ X))
+    (b : (forward Λ X).obj (((CondensedRing.derivedHom Λ X).obj (op K)).obj N) ⟶
+      (hom Λ X).obj (op ((forward Λ X).obj K), (forward Λ X).obj N))
+    (hb : (forward Λ X).map (CondensedCoefficientRealization.evaluation Λ X K N) =
+      S.tensor.iso.hom.app ((((CondensedRing.derivedHom Λ X).obj (op K)).obj N), K) ≫
+        S.closed.tensor.map
+          (X := ((forward Λ X).obj
+            (((CondensedRing.derivedHom Λ X).obj (op K)).obj N), (forward Λ X).obj K))
+          (Y := ((hom Λ X).obj (op ((forward Λ X).obj K), (forward Λ X).obj N),
+            (forward Λ X).obj K))
+          (b, 𝟙 ((forward Λ X).obj K)) ≫
+          S.closed.evaluation ((forward Λ X).obj K) ((forward Λ X).obj N)) :
+    b = S.homIso.hom.app (op K, N) := by
+  apply (S.closed.transpose _ _ _).symm.injective
+  rw [transpose_symm, transpose_symm]
+  apply (cancel_epi (S.tensor.iso.hom.app
+    ((((CondensedRing.derivedHom Λ X).obj (op K)).obj N), K))).1
+  exact hb.symm.trans (S.evaluation K N)
+
+/-- The natural Hom comparison is uniquely specified by its evaluation equation.
+Source: cor-coef-verdier-weil-equivariance.proof.md, paragraph 2
+(blueprint: lem-sf-adic-ambient-hom-evaluation-comparison).
+Proof: the preceding component uniqueness applies at every pair of ambient objects.
+Natural transformation extensionality and isomorphism extensionality give equality
+of the natural isomorphisms. No choice of a coefficient representative is involved. -/
+theorem ClosedPresentation.homIso_unique (S : ClosedPresentation Λ X)
+    (θ : Functor.uncurry.obj (CondensedRing.derivedHom Λ X) ⋙ forward Λ X ≅
+      ((forward Λ X).op.prod (forward Λ X)) ⋙ hom Λ X)
+    (he : ∀ K N : DerivedCategory.{u + 1} (Internal Λ X),
+      (forward Λ X).map (CondensedCoefficientRealization.evaluation Λ X K N) =
+        S.tensor.iso.hom.app ((((CondensedRing.derivedHom Λ X).obj (op K)).obj N), K) ≫
+          S.closed.tensor.map
+            (X := ((forward Λ X).obj
+              (((CondensedRing.derivedHom Λ X).obj (op K)).obj N), (forward Λ X).obj K))
+            (Y := ((hom Λ X).obj (op ((forward Λ X).obj K), (forward Λ X).obj N),
+              (forward Λ X).obj K))
+            (θ.hom.app (op K, N), 𝟙 ((forward Λ X).obj K)) ≫
+            S.closed.evaluation ((forward Λ X).obj K) ((forward Λ X).obj N)) :
+    θ = S.homIso := by
+  apply Iso.ext
+  apply NatTrans.ext
+  funext P
+  exact S.hom_component_unique Λ X P.1.unop P.2 (θ.hom.app P) (he P.1.unop P.2)
+
+/-- The ambient comparison uses the actual pulled-back condensed coefficient ring.
+Its natural isomorphism is normalized by evaluation, and the preceding laws identify
+its transpose and prove its uniqueness, without a boundedness or perfectness restriction.
+
+Source: cor-coef-verdier-weil-equivariance.proof.md, paragraph 2; Stacks 08J9--08JB.
+(blueprint: lem-sf-adic-ambient-hom-evaluation-comparison).
+
+Proof: use the derived section equivalence and its K-flat tensor comparison from the
+module-object/ringed-site comparison. Retain the natural internal-Hom isomorphism and
+its counit equation, with the native Koszul braiding converting left to right evaluation.
+The inverse ordinary tensor-Hom transpose identifies every realized pairing; its
+injectivity makes the evaluation-normalized comparison unique. -/
+theorem adic_ambient_hom_evaluation_comparison : Nonempty (ClosedPresentation Λ X) := by
+  obtain ⟨S, T, t, θ, he, _⟩ := moduleObject_ringedSite_derived_comparison Λ X
+  exact ⟨S, T, t, θ, he⟩
+
+end AlgebraicGeometry.ProEtale.CondensedCoefficientRealization

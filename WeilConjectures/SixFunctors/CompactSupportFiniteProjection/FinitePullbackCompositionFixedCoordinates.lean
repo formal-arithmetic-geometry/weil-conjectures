@@ -172,6 +172,42 @@ private def finiteExactCoordinates (S : SixFunctorFiniteOperations D C E n hn)
       (intrinsicFiniteTorsionConstructible C.l E n hn Y.obj.left).ι
       (exactPullCoordinates (Padic.coefficientExtensionRing C.l E n) f.hom.left)
 
+private theorem finiteExactCoordinates_comp (S : SixFunctorFiniteOperations D C E n hn)
+    {X Y Z : SixFunctorSpace D} (f : X ⟶ Y) (g : Y ⟶ Z)
+    (M : sixFunctorFiniteCategory D C E n hn Z) :
+    (coordinates (C := C) (E := E) (n := n) (hn := hn) X).map
+        ((S.finite.pullComposition f g).hom.app M) ≫
+      (finiteExactCoordinates S f).hom.app ((S.finite.pull g).obj M) ≫
+      (ProEtale.sfFixedDerivedPullback (Padic.coefficientExtensionRing C.l E n)
+        f.hom.left).map ((finiteExactCoordinates S g).hom.app M) =
+    (finiteExactCoordinates S (f ≫ g)).hom.app M ≫
+      (Functor.mapDerivedCategoryTriangleIso
+        (ProEtale.upperStarComp
+          (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing C.l E n)))
+          f.hom.left g.hom.left)).hom.app
+        ((coordinates (C := C) (E := E) (n := n) (hn := hn) Z).obj M) := by
+  let := Padic.finite_coefficientExtensionRing C.l E n hn
+  let A := Padic.coefficientExtensionRing C.l E n
+  let RX := realization (C := C) (E := E) (n := n) (hn := hn) X
+  have hb := (exactPullCoordinates A f.hom.left).hom.naturality
+    ((S.finitePullback g).hom.app M)
+  dsimp only [Functor.comp_map] at hb
+  have h := congrArg RX.inverse.map (S.finitePullCompositionNormalization f g M)
+  simp only [finiteExactCoordinates, Iso.trans_hom, NatTrans.comp_app,
+    Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    Functor.map_comp, Category.assoc]
+  dsimp only [coordinates, realization, sixFunctorFiniteRealization,
+    sixFunctorFinitePullback, Functor.comp_map, Functor.comp_obj] at hb h RX ⊢
+  rw [← reassoc_of% hb]
+  simp only [Functor.map_comp] at h
+  erw [reassoc_of% h]
+  simpa only [A, RX, realization, sixFunctorFiniteRealization,
+    Functor.comp_obj, ObjectProperty.ι_obj, ObjectProperty.FullSubcategory.comp_hom,
+    Over.comp_left, Iso.trans_hom, NatTrans.comp_app, Category.assoc] using congrArg
+    (fun t ↦ RX.inverse.map ((S.finitePullback (f ≫ g)).hom.app M) ≫ t)
+    (exactPullCoordinates_comp A f.hom.left g.hom.left M.obj)
+
 private theorem finiteExactCoordinates_total (S : SixFunctorFiniteOperations D C E n hn)
     {X Y : SixFunctorSpace D} (f : X ⟶ Y)
     (M : sixFunctorFiniteCategory D C E n hn Y) :
@@ -184,6 +220,59 @@ private theorem finiteExactCoordinates_total (S : SixFunctorFiniteOperations D C
     Functor.whiskerRight_app, Functor.whiskerLeft_app, NatTrans.comp_app,
     Functor.map_comp, Category.assoc]
   rfl
+
+/-- The prescribed pullback compositor becomes the canonical fixed-coefficient
+compositor. There is no tensor product or Tor-amplitude hypothesis in this assertion.
+
+Source: the coefficient-realization calculation in the first paragraph of
+the blueprint proof of `prop-sf-pf-coherence` (first paragraph).
+(blueprint: lem-sf-finite-pullback-composition-fixed-coordinates).
+
+Proof: apply the inverse coefficient realization at X to
+`S.finitePullCompositionNormalization f g M`. Expand `fixedPullRealization` as the
+inverse realization applied to `pullRealization`, followed by the inverse realization
+unit and the inverse of `fixedPullComparison`. The two exact-functor composition
+comparisons in `pullRealization` identify the intrinsic pullback with the conjugate
+of fixed-scalar exact pullback. Naturality moves these comparisons past the realized
+map for g. The associativity identity for `mapDerivedCategoryCompIso`, together with
+its compatibility with `mapDerivedCategoryNatIso` and whiskering, identifies the
+image of `sfIntrinsicDerivedPullbackComp` with the fixed-scalar exact compositor;
+the middle coefficient unit inserted by `sfIntrinsicTransportComp` cancels the
+inverse unit occurring in `fixedPullRealization`. Finally expand
+`leftDerivedUpperStarComp` using the exact-to-left-derived comparison. Its two
+comparison factors cancel the two `fixedPullComparison` factors on the left,
+leaving the displayed right-hand side. All cancellations are of the specified
+realization units and exact-to-derived comparisons, so no alternative compositor
+or coefficient equivalence is chosen. -/
+theorem pullbackComposition_fixed_coordinates
+    (S : SixFunctorFiniteOperations D C E n hn)
+    {X Y Z : SixFunctorSpace D} (f : X ⟶ Y) (g : Y ⟶ Z)
+    (M : sixFunctorFiniteCategory D C E n hn Z) :
+    let A := ModuleCat.{u + 1}
+      (ULift.{u + 1} (Padic.coefficientExtensionRing C.l E n))
+    (coordinates (C := C) (E := E) (n := n) (hn := hn) X).map
+        ((S.finite.pullComposition f g).hom.app M) ≫
+      (fixedPullRealization S f ((S.finite.pull g).obj M)).hom ≫
+      (fixedDerivedPull (C := C) (E := E) (n := n) f).map
+        (fixedPullRealization S g M).hom =
+    (fixedPullRealization S (f ≫ g) M).hom ≫
+      (AlgebraicGeometry.ProEtale.leftDerivedUpperStarComp A f.hom.left g.hom.left).hom.app
+        ((coordinates (C := C) (E := E) (n := n) (hn := hn) Z).obj M) := by
+  let := Padic.finite_coefficientExtensionRing C.l E n hn
+  have hnat := (fixedPullComparison (C := C) (E := E) (n := n) f).inv.naturality
+    ((finiteExactCoordinates S g).hom.app M)
+  dsimp only
+  rw [ProEtale.leftDerivedUpperStarComp_hom_app]
+  simp only [finiteExactCoordinates_total, Functor.map_comp, Category.assoc]
+  rw [← reassoc_of% hnat]
+  have hnat₂ := (fixedPullComparison (C := C) (E := E) (n := n) f).inv.naturality
+    ((fixedPullComparison (C := C) (E := E) (n := n) g).inv.app
+      ((coordinates (C := C) (E := E) (n := n) (hn := hn) Z).obj M))
+  simp only [fixedPullComparison] at hnat₂ ⊢
+  rw [← hnat₂]
+  simp only [fixedDerivedPull, ProEtale.sfFixedDerivedPullback,
+    ObjectProperty.FullSubcategory.comp_hom, Over.comp_left, Iso.inv_hom_id_app_assoc]
+  rw [reassoc_of% (finiteExactCoordinates_comp S f g M)]
 
 set_option maxHeartbeats 800000 in
 -- The comparison rewrites retain several large derived-category endpoint types.

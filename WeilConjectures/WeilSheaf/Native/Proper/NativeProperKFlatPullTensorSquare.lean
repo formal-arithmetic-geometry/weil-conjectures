@@ -6,6 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.WeilSheaf.Native.Proper.NativeProperSectionAdjunctionModels
+public import WeilConjectures.WeilSheaf.Native.NativeTwoSidedKFlatSections
 
 /-! # Pullback tensor square on native K-flat representatives
 
@@ -133,5 +134,38 @@ theorem native_proper_kflat_pull_tensor_square
         C.tensor.hom.app
           ((properSectionDerived k₀ l Y S).obj (DerivedCategory.Q.obj P),
             (properSectionDerived k₀ l Y S).obj (DerivedCategory.Q.obj Q)) := by sorry
+
+theorem native_proper_section_tensor_descent_legacy
+    (hR : (sectionFunctor l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber R).IsEquivalence) :
+    ∃ (cochain : ∀ P Q : CochainComplex (ProEtaleWeilSheaf k₀ l X) ℤ,
+    (properSectionCochain k₀ l X R).obj
+      (((nativeTensorTotal k₀ l X).obj P).obj Q) ≅
+    (coefficientTotalTensor.{u + 1, u + 1, u}
+      (Scheme.ProEt.topology (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+      (ring l _ R)).obj
+        ((properSectionCochain k₀ l X R).obj P,
+          (properSectionCochain k₀ l X R).obj Q))
+      (tensor : nativeDerivedTensor k₀ l X ⋙ properSectionDerived k₀ l X R ≅
+    (properSectionDerived k₀ l X R).prod (properSectionDerived k₀ l X R) ⋙ A.closed.tensor),
+    (∀ P Q (i j n : ℤ) (h : i + j = n) V x y,
+    ((cochain P Q).hom.f n).val.app V
+      (properNativeTotalGenerator k₀ l X R P Q i j n h V x y) =
+    coefficientTensorGenerator.{u + 1, u + 1, u}
+      (Scheme.ProEt.topology (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
+      (ring l _ R)
+      ((properSectionCochain k₀ l X R).obj P)
+      ((properSectionCochain k₀ l X R).obj Q) i j n h V x y) ∧
+    (∀ P Q (hP : NativeIsKFlat k₀ l X P) (hQ : NativeIsKFlat k₀ l X Q),
+    (properSectionDerived k₀ l X R).map (nativeOpenTensorModel k₀ l X P Q hP hQ).hom ≫
+      (properSectionFactors k₀ l X R).hom.app
+        (((nativeTensorTotal k₀ l X).obj P).obj Q) ≫
+      DerivedCategory.Q.map (cochain P Q).hom ≫
+      (A.models.iso _ _ _ _ _
+        (native_two_sided_kflat_sections k₀ l X R P hP)
+        (native_two_sided_kflat_sections k₀ l X R Q hQ)).hom =
+    tensor.hom.app (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) ≫
+      A.closed.tensor.map (Prod.mkHom
+        ((properSectionFactors k₀ l X R).hom.app P)
+        ((properSectionFactors k₀ l X R).hom.app Q))) := by sorry
 
 end AlgebraicGeometry.ProEtaleWeilSheaf

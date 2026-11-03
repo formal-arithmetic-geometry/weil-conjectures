@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Coef.CoefFiniteHomSiteDescentData
 import WeilConjectures.SixFunctors.Finite.Hom.FiniteHomSiteTensorNaturalEquality
+public import WeilConjectures.SixFunctors.FiniteHomSiteTensorNaturalEqualityLegacy
 
 /-! # Tensor equation of the finite site mate
 
@@ -82,7 +83,7 @@ theorem finiteHomSiteTensorMateEquations
             ((coefFiniteHomSiteIso l E X h).hom.app M)) := by
   intro K M
   have hKM := congrArg (fun z ↦ z.app (K, M))
-    (finiteHomSiteTensorNaturalEquality l E X h)
+    (finiteHomSiteTensorNaturalEquality_legacy l E X h)
   exact beta_square_inverse ((finiteIntrinsicClosed l E X m).tensor)
     ((coefFiniteHomSiteIso l E X h).app
       ((finiteHomEtaleClosed l E X n).tensor.obj (K, M)))

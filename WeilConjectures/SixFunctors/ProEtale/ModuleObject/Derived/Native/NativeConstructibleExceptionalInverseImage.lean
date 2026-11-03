@@ -167,6 +167,70 @@ def nativeConstructibleExceptionalAdjunction :
       nativeConstructibleExceptionalInverseImage Λ ℓ k hcd f hΛ :=
   Adjunction.ofIsLeftAdjoint _
 
+/-- Any other right adjoint to the same native compact-support functor, in particular
+a compactification construction, has a unique counit-compatible comparison with this
+exceptional inverse image. Source: uniqueness paragraph, det-sp-unique-right-adjoint
+(blueprint: def-weil-exceptional-inverse-image).
+
+Proof: transpose the two counits by the two adjunctions. The triangle identities make
+the transposes inverse; injectivity of the Hom bijections proves uniqueness. -/
+theorem nativeConstructibleExceptionalInverseImage_unique
+    (G : ConstantModelBoundedConstructible Λ Y.left ⥤
+      ConstantModelBoundedConstructible Λ X.left)
+    (adj : nativeConstructibleLowerShriek Λ ℓ k hcd f hΛ ⊣ G) :
+    ∃! e : nativeConstructibleExceptionalInverseImage Λ ℓ k hcd f hΛ ≅ G,
+      ∀ N, (nativeConstructibleLowerShriek Λ ℓ k hcd f hΛ).map (e.hom.app N) ≫
+        adj.counit.app N =
+          (nativeConstructibleExceptionalAdjunction Λ ℓ k hcd f hΛ).counit.app N :=
+  (nativeConstructibleExceptionalAdjunction Λ ℓ k hcd f hΛ).existsUnique_iso_comp_counit adj
+
+/-- The native constructible adjunction is exact, for the inherited triangulations
+and the adjoint shift structure. Source: sk-thm-existence (3), restriction paragraph
+(blueprint: def-weil-exceptional-inverse-image).
+
+Proof: admissible bounded constructibility is triangulated. The restricted compact
+support functor inherits its shift and triangle structures from the ambient derived
+functor. Its adjoint receives the canonical adjoint shift structure; the triangulated
+right-adjoint theorem proves exactness and compatibility of the adjunction. -/
+theorem nativeConstructibleExceptionalAdjunction_exact :
+    ∃ (hX : (constantModelBoundedConstructible Λ X.left).IsTriangulated)
+      (hY : (constantModelBoundedConstructible Λ Y.left).IsTriangulated),
+      (fun [_triX : (constantModelBoundedConstructible Λ X.left).IsTriangulated]
+          [_triY : (constantModelBoundedConstructible Λ Y.left).IsTriangulated] ↦
+        ∃ s : (nativeConstructibleLowerShriek Λ ℓ k hcd f hΛ).CommShift ℤ,
+          ∃ t : (nativeConstructibleExceptionalInverseImage Λ ℓ k hcd f hΛ).CommShift ℤ,
+            (fun [_leftShift : (nativeConstructibleLowerShriek Λ ℓ k hcd f hΛ).CommShift ℤ]
+                [_rightShift : (nativeConstructibleExceptionalInverseImage
+                  Λ ℓ k hcd f hΛ).CommShift ℤ] ↦
+              (nativeConstructibleExceptionalAdjunction Λ ℓ k hcd f hΛ).IsTriangulated)
+              (_leftShift := s) (_rightShift := t)) (_triX := hX) (_triY := hY) := by
+  let : X.left.Over (Spec (.of k)) := ⟨X.hom⟩
+  let : Y.left.Over (Spec (.of k)) := ⟨Y.hom⟩
+  let : LocallyOfFiniteType (X.left ↘ Spec (.of k)) := ‹LocallyOfFiniteType X.hom›
+  let : LocallyOfFiniteType (Y.left ↘ Spec (.of k)) := ‹LocallyOfFiniteType Y.hom›
+  let : QuasiCompact (X.left ↘ Spec (.of k)) := ‹QuasiCompact X.hom›
+  let : QuasiCompact (Y.left ↘ Spec (.of k)) := ‹QuasiCompact Y.hom›
+  let : IsSeparated (X.left ↘ Spec (.of k)) := ‹IsSeparated X.hom›
+  let : IsSeparated (Y.left ↘ Spec (.of k)) := ‹IsSeparated Y.hom›
+  let hX := admissible_boundedConstructible_isTriangulated Λ ℓ k
+    (X := X.left) (nativeCoefficient_admissible Λ ℓ hΛ)
+  let hY := admissible_boundedConstructible_isTriangulated Λ ℓ k
+    (X := Y.left) (nativeCoefficient_admissible Λ ℓ hΛ)
+  let := hX
+  let := hY
+  let F := nativeConstructibleLowerShriek Λ ℓ k hcd f hΛ
+  let G := nativeConstructibleExceptionalInverseImage Λ ℓ k hcd f hΛ
+  let adj := nativeConstructibleExceptionalAdjunction Λ ℓ k hcd f hΛ
+  let s : F.CommShift ℤ := by
+    dsimp [F, nativeConstructibleLowerShriek, restrictionGlueLowerShriek]
+    infer_instance
+  let : F.IsTriangulated := by
+    dsimp [F, nativeConstructibleLowerShriek, restrictionGlueLowerShriek]
+    infer_instance
+  let t : G.CommShift ℤ := adj.rightAdjointCommShift ℤ
+  let : adj.CommShift ℤ := adj.commShift_of_leftAdjoint ℤ
+  exact ⟨hX, hY, s, t, Adjunction.IsTriangulated.mk' adj⟩
+
 /-- Over the algebraically closed field of the blueprint, finite cohomological
 dimension is a theorem. Thus this specialization has no extra cohomological-
 dimension hypothesis. Source: the non-finite restriction paragraph

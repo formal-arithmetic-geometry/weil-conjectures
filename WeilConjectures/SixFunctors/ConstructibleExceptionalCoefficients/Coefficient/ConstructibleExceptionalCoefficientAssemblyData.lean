@@ -104,8 +104,12 @@ structure CoefficientLeftRefinements
     (left r s).hom.CommShift ℤ
   normalized {c d : Compactification f} (r : c.Refinement d) (s : RingStage.{max u v} l) :
     RingRefinementNormalized.{u, v} l Ω r s (R.left c s) (R.left d s)
-      (refinementComparisonOfLeft.{u, v} l Ω (R.operation c (s.stage l))
-        (R.operation d (s.stage l)) (left r (s.stage l)) (leftShift r (s.stage l)))
+      (let q := refinementComparisonOfLeft
+          (R.operation c (s.stage l)).adjunction (R.operation d (s.stage l)).adjunction
+          (left r (s.stage l)) (leftShift r (s.stage l))
+          (R.operation c (s.stage l)).unitShift (R.operation d (s.stage l)).counitShift;
+        { left := q.left, right := q.right, counit := q.counit, unit := q.unit,
+          leftShift := q.leftShift, rightShift := q.rightShift })
   rational {c d : Compactification f} (r : c.Refinement d) (E : FieldStage.{max u v} l)
       (K : C.{u, v} l Ω X (.integral E)) :
     HEq ((left r (.rational E)).hom.app ((rationalization.{u, v} l Ω E X).obj K))

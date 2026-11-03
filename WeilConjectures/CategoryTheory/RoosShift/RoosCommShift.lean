@@ -7,6 +7,7 @@ module
 public import WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSupplement
 public import WeilConjectures.CategoryTheory.SignedCoconeShift.SignedMappingCoconeShift
 public import WeilConjectures.CategoryTheory.ProductShift.ProductCommShift
+public import WeilConjectures.CategoryTheory.StrictTowerRoos.StrictTowerRoosFunctor
 /-! # Coherent shifts of the native Roos functor
 
 Tower evaluation and adjacent transitions use arbitrary target categories.
@@ -87,17 +88,16 @@ variable {A : Type a} [Category.{b} A] [Abelian A] [HasCountableProducts A]
 variable [∀ n, (levelFunctor K n).CommShift ℤ]
   [∀ n, NatTrans.CommShift (transition K n) ℤ]
 
-noncomputable abbrev productFunctor := ProductShift.productFunctor (levelFunctor K)
+noncomputable abbrev productFunctor := K ⋙ StrictTowerRoos.productFunctor
+
 @[instance_reducible]
 noncomputable def productCommShift : (productFunctor K).CommShift ℤ :=
   ProductShift.productCommShift (levelFunctor K)
 
 attribute [local instance] productCommShift
 
-noncomputable def endomorphism : productFunctor K ⟶ productFunctor K where
-  app X := towerTransitionEndomorphism
-    (K := fun n ↦ (K.obj X).obj (op n)) (WeilConjectures.integralOperationsTowerStep (K.obj X))
-  naturality _ _ f := (WeilConjectures.integralOperationsRoos_square (K.map f)).symm
+noncomputable def endomorphism : productFunctor K ⟶ productFunctor K :=
+  Functor.whiskerLeft K StrictTowerRoos.boundary
 
 omit [∀ n, NatTrans.CommShift (transition K n) ℤ]
   [∀ n, (levelFunctor K n).CommShift ℤ] [HasShift S ℤ] in
@@ -107,7 +107,7 @@ lemma endomorphism_π (X : S) (n : ℕ) :
         Limits.Pi.π (fun n ↦ (levelFunctor K n).obj X) (n + 1) ≫ (transition K n).app X := by
   exact (towerTransitionEndomorphism_eq_iff
     (K := fun n ↦ (levelFunctor K n).obj X)
-    (WeilConjectures.integralOperationsTowerStep (K.obj X)) _).1 rfl n
+    (fun n ↦ (K.obj X).map (homOfLE (Nat.le_succ n)).op) _).1 rfl n
 
 theorem endomorphism_commShift : NatTrans.CommShift (endomorphism K) ℤ := by
   constructor
@@ -131,7 +131,7 @@ theorem endomorphism_commShift : NatTrans.CommShift (endomorphism K) ℤ := by
 
 attribute [local instance] endomorphism_commShift
 
-noncomputable abbrev roosFunctor := K ⋙ WeilConjectures.integralOperationsRoosFunctor
+noncomputable abbrev roosFunctor := K ⋙ StrictTowerRoos.functor
 
 /-- The native strict Roos functor has the signed mapping-cocone shift.
 Source: Stacks 011G, 014E, 08TC (blueprint: lem-weil-roos-comm-shift).

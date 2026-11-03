@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralNormalizedRefinementData
 public import WeilConjectures.SixFunctors.IntegralSystemRealization.Refinement.IntegralRefinementDiagramAdmissibility
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Compactification.CompactificationRefinementLocalizing
 
 /-! # Realization of an open-unit-normalized reverse refinement
 
@@ -89,3 +90,64 @@ theorem integralRefinementTransposeRealization
   sorry
 
 end WeilConjectures.IntegralSystemRealization
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+/-- The native refinement map is uniquely normalized by its open transpose, is
+invertible on the localizing closure, and satisfies identity and composition.
+
+Source: blueprint det-sf-comp-coherence-refinement, clauses (1)--(3).
+(blueprint: lem-sf-integral-refinement-transpose-realization).
+
+Proof: this released identifier is the reviewed alias of
+`det-sf-comp-coherence-refinement`. Apply its canonical refinement theorem with
+exactly the same coefficient, geometric, and input hypotheses. Its first clause
+is the adjunction uniqueness equation, its second is invertibility on Loc(Dctf),
+and its last two clauses use the canonical derived identity and composition
+comparisons. In particular uniqueness and coherence hold on all unbounded
+inputs; only invertibility requires membership in the localizing closure.
+-/
+theorem integralRefinementTransposeRealization
+    (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
+    (p : ℕ) [CharP k p] (hp : 0 < p) (hpℓ : p ≠ ℓ)
+    (hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ)
+    {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
+    [IsSeparated (X ↘ Spec (.of k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
+    [IsSeparated (Y ↘ Spec (.of k))]
+    (f : X ⟶ Y) [f.IsOver (Spec (.of k))]
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] :
+    (∀ (c d : Compactification.DenseBoundaryCompactification f) (r : d ⟶ c)
+      (K : DerivedCategory
+        (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))),
+      ∀ b : (openImmersionLowerShriek Λ c.obj.obj.obj.i).mapDerivedCategory.obj K ⟶
+        (lowerStar Λ r.hom.hom.hom.hom).rightDerivedFunctor.obj
+          ((openImmersionLowerShriek Λ d.obj.obj.obj.i).mapDerivedCategory.obj K),
+        (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ c.obj.obj.obj.i).unit.app K ≫
+            (upperStar Λ c.obj.obj.obj.i).mapDerivedCategory.map b ≫
+              (refinementTheta Λ r.hom K).hom = 𝟙 K ↔
+          b = localizingRefinementMap Λ r.hom K) ∧
+    (∀ (c d : Compactification.DenseBoundaryCompactification f) (r : d ⟶ c)
+      (K : DerivedCategory
+        (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))),
+      localizingClosureProEtale Λ X K → IsIso (localizingRefinementMap Λ r.hom K)) ∧
+    (∀ (c : Compactification.DenseBoundaryCompactification f)
+      (K : DerivedCategory
+        (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))),
+      localizingRefinementMap Λ (𝟙 c.obj) K ≫
+          (refinementDerivedLowerStarId Λ c.obj.obj.obj.Z).hom.app
+            ((openImmersionLowerShriek Λ c.obj.obj.obj.i).mapDerivedCategory.obj K) = 𝟙 _) ∧
+    (∀ (c d e : Compactification.DenseBoundaryCompactification f)
+      (r : d ⟶ c) (s : e ⟶ d)
+      (K : DerivedCategory
+        (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))),
+      localizingRefinementMap Λ (s ≫ r).hom K ≫
+          (refinementDerivedLowerStarComp Λ s.hom.hom.hom.hom r.hom.hom.hom.hom).hom.app
+            ((openImmersionLowerShriek Λ e.obj.obj.obj.i).mapDerivedCategory.obj K) =
+        localizingRefinementMap Λ r.hom K ≫
+          (lowerStar Λ r.hom.hom.hom.hom).rightDerivedFunctor.map
+            (localizingRefinementMap Λ s.hom K)) := by
+  exact localizingRefinement_coherence Λ ℓ k p hp hpℓ hΛ f
+
+end AlgebraicGeometry.ProEtale.CondensedRing

@@ -25,6 +25,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import WeilConjectures.AlgebraicGeometry.Locally.LocallyClosedComparisonCoordinates
 import WeilConjectures.CategoryTheory.Exact.ExactDerivedAdjunctionBounds
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ClosedImmersion
+public import WeilConjectures.AlgebraicGeometry.Locally.LocallyClosedCounitComparison
+public import WeilConjectures.AlgebraicGeometry.Locally.LocallyClosedRelativeHomIdentity
+public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Locally closed exceptional comparison with its adjunction normalization
@@ -151,5 +154,73 @@ private theorem normalizedComparison_unique
     · apply Iso.ext
       apply (cancel_mono θ'.hom).1
       simpa using congrArg Iso.hom (eq_of_heq he.2.1)
+
+/-- The normalized comparisons between two closed/open factorizations are unique.
+Consequently identity comparisons and composition comparisons satisfy the cocycle law.
+`HEq` expresses equality after the equality of the two composite scheme morphisms;
+it does not introduce an independently chosen identification of the transported functors.
+The first equation fixes the etale map by counit-compatible adjoint uniqueness, the second
+fixes the pro-etale map by the transported value, and the last is the gamma square.
+Source: blueprint locally closed exceptional comparison, Step 12
+(blueprint: lem-weil-finite-duality-locally-closed-comparison).
+
+Proof: identify both left adjoints with closure extension by the unique sheaf maps
+restricting to the identity on S. Their localizations have the same normalization.
+Step 8 identifies the named derived closed mate with its termwise sheaf mate. The open
+unit equation and the restriction Hom bijection of locally closed extension coherence
+then give q_p Delta = B C(q_e) for each factorization (Step 9). Transport the normalized
+left-adjoint identification by right-adjoint uniqueness to obtain the etale isomorphism.
+The counit equation uniquely characterizes gamma as a transpose, hence gives its square.
+The formula gamma theta = C(s-times(eta)) gives the transported-value square. Each of the
+first two normalizations uniquely determines its isomorphism by cancellation; thus the
+identity and composites are the same normalized maps. This is exactly Step 12, using
+lem-sfb-etale-locally-closed-extension-comparison, lem-sfb-locally-closed-extension-coherence,
+def-weil-pbc-adjunction-conjugate, lem-cat-right-adjoint-composition,
+def-weil-pbc-composite-adjunction and thm-weil-pbc-site-comparison. -/
+theorem locallyClosed_comparison_factorization
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {S V V' T : Scheme.{u}} [IsNoetherian T]
+    (c : S ⟶ V) (v : V ⟶ T) (c' : S ⟶ V') (v' : V' ⟶ T)
+    [IsClosedImmersion c] [IsOpenImmersion v]
+    [IsClosedImmersion c'] [IsOpenImmersion v']
+    [QuasiCompact (c ≫ v)] [QuasiCompact (c' ≫ v')]
+    (_hs : c ≫ v = c' ≫ v')
+    (z : LocallyClosedExceptionalComparison A c v)
+    (z' : LocallyClosedExceptionalComparison A c' v') :
+    ∃! e : (z.adjoints.etaleRight v ≅ z'.adjoints.etaleRight v') ×
+        ((Etale.DerivedCategory.isBoundedConstructible A T).ι ⋙
+            (comparisonUpperStar (ModuleCat.{u + 1} A) T).mapDerivedCategory ⋙
+            z.adjoints.proetaleRight v ≅
+          (Etale.DerivedCategory.isBoundedConstructible A T).ι ⋙
+            (comparisonUpperStar (ModuleCat.{u + 1} A) T).mapDerivedCategory ⋙
+            z'.adjoints.proetaleRight v'),
+      HEq (e.1 ≪≫ locallyClosedEtaleRightIso v' z'.adjoints)
+          (locallyClosedEtaleRightIso v z.adjoints) ∧
+        HEq (e.2 ≪≫ z'.transport) z.transport ∧
+        ∀ M : Etale.BoundedConstructibleDerivedCategory A T,
+          (comparisonUpperStar (ModuleCat.{u + 1} A) S).mapDerivedCategory.map
+              (e.1.hom.app M.obj) ≫ z'.gamma.hom.app M =
+            z.gamma.hom.app M ≫ e.2.hom.app M := by
+  let CS := (comparisonUpperStar (ModuleCat.{u + 1} A) S).mapDerivedCategory
+  let CT := (comparisonUpperStar (ModuleCat.{u + 1} A) T).mapDerivedCategory
+  let U := (comparisonLowerStar (ModuleCat.{u + 1} A) T).rightDerivedFunctor
+  let X := locallyClosedEtaleExceptional A (c ≫ v)
+  let X' := locallyClosedEtaleExceptional A (c' ≫ v')
+  -- Package the proof-valued instances so congruence identifies the closure functors.
+  let exceptional (s : {f : S ⟶ T // IsImmersion f ∧ QuasiCompact f}) :=
+    @locallyClosedEtaleExceptional A _ _ S T s.val s.property.1 s.property.2 _
+  have hsub : (⟨c ≫ v, inferInstance, inferInstance⟩ :
+      {f : S ⟶ T // IsImmersion f ∧ QuasiCompact f}) =
+      ⟨c' ≫ v', inferInstance, inferInstance⟩ := Subtype.ext _hs
+  have hX := congrArg exceptional hsub
+  change X = X' at hX
+  exact normalizedComparison_unique
+    (Etale.DerivedCategory.isBoundedConstructible A T).ι CS CT U
+    (derivedComparisonAdjunction (ModuleCat.{u + 1} A) T).unit
+    (z.adjoints.etaleRight v) (z'.adjoints.etaleRight v') X X'
+    (z.adjoints.proetaleRight v) (z'.adjoints.proetaleRight v') hX
+    (locallyClosedEtaleRightIso v z.adjoints)
+    (locallyClosedEtaleRightIso v' z'.adjoints)
+    z.gamma z'.gamma z.transport z'.transport z.unit_normalization z'.unit_normalization
 
 end AlgebraicGeometry.ProEtale

@@ -142,6 +142,51 @@ theorem isIso_finiteDualityClosedComparisonDelta_proof
   dsimp -failIfUnchanged only [Etale.rightDerivedLowerStar]
   infer_instance
 
+private theorem closedComparisonDelta_naturality
+    {A : Type (u + 1)} [CommRing A] [Finite A]
+    {Z T : Scheme.{u}} (i : Z ⟶ T) [QuasiCompact i] [QuasiSeparated i]
+    {X Y : DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} A))}
+    (L L' : DerivedCategory.Plus
+      (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} A)))
+    (e : X ≅ DerivedCategory.Plus.ι.obj L)
+    (e' : Y ≅ DerivedCategory.Plus.ι.obj L') (f : X ⟶ Y) :
+    finiteDualityClosedComparisonDelta i X L e ≫
+      (ProEtale.lowerStar (ModuleCat.{u + 1} A) i).rightDerivedFunctor.map
+        ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) Z).mapDerivedCategory.map f) =
+    (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) T).mapDerivedCategory.map
+      ((Etale.rightDerivedLowerStar (ModuleCat.{u + 1} A) i).map f) ≫
+      finiteDualityClosedComparisonDelta i Y L' e' := by
+  let g : L ⟶ L' := DerivedCategory.Plus.ι.preimage (e.inv ≫ f ≫ e'.hom)
+  have hg : DerivedCategory.Plus.ι.map g = e.inv ≫ f ≫ e'.hom :=
+    DerivedCategory.Plus.ι.map_preimage _
+  let RE := Etale.rightDerivedLowerStar (ModuleCat.{u + 1} A) i
+  let RP := (ProEtale.lowerStar (ModuleCat.{u + 1} A) i).rightDerivedFunctor
+  let FT := (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) T).mapDerivedCategory
+  let FZ := (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) Z).mapDerivedCategory
+  let b : DerivedCategory.Plus.ι ⋙ RE ⋙ FT ⟶ DerivedCategory.Plus.ι ⋙ FZ ⋙ RP :=
+    Functor.whiskerRight
+        (Etale.lowerStar (ModuleCat.{u + 1} A) i).rightDerivedFunctorPlusCompatibility.inv FT ≫
+      Functor.whiskerLeft (Etale.lowerStar (ModuleCat.{u + 1} A) i).rightDerivedFunctorPlus
+        (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) T
+          ).mapDerivedCategoryPlusCompatibility.inv ≫
+      Functor.whiskerRight (ProEtale.fixedComparisonDirectImageMatePlus A i)
+        DerivedCategory.Plus.ι ≫
+      Functor.whiskerLeft
+        (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) Z).mapDerivedCategoryPlus
+        (ProEtale.lowerStar (ModuleCat.{u + 1} A) i
+          ).rightDerivedFunctorPlusCompatibility.hom ≫
+      Functor.whiskerRight
+        (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) Z
+        ).mapDerivedCategoryPlusCompatibility.hom RP
+  have hf : f = e.hom ≫ DerivedCategory.Plus.ι.map g ≫ e'.inv := by
+    rw [hg]
+    simp
+  rw [hf]
+  simpa [finiteDualityClosedComparisonDelta, b, RE, RP, FT, FZ,
+    Functor.map_comp, Category.assoc] using
+    congrArg (fun k ↦ FT.map (RE.map e.hom) ≫ k ≫ RP.map (FZ.map e'.inv))
+      (b.naturality g).symm
+
 /- The postponed theorem is registered as an instance directly, so that `asIso` applies
 to the canonical component; no further declaration or proof is added. -/
 attribute [instance] isIso_finiteDualityClosedComparisonDelta_proof

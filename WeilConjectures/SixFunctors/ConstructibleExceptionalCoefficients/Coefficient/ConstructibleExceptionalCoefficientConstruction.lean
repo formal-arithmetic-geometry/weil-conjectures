@@ -9,6 +9,7 @@ public import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.C
 
 import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Coefficient.ConstructibleExceptionalCoefficientStages
 import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.ConstructibleExceptionalLeftRefinements
+public import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.ConstructibleExceptionalRefinementMate
 
 /-! # Normalized coefficient adjunction construction before coherence
 
@@ -81,8 +82,11 @@ theorem exists_coefficient_construction (D : FiniteFieldDatum.{max u v}) (hl : l
     localizationIdentity := H.localizationIdentity
     refinements := ?_ }⟩
   exact {
-    refinement := fun r s ↦ refinementComparisonOfLeft.{u, v} l Ω
-      (R.operation _ s) (R.operation _ s) (N.left r s) (N.leftShift r s)
+    refinement := fun {c d} r s ↦
+      let q := refinementComparisonOfLeft (R.operation c s).adjunction (R.operation d s).adjunction
+        (N.left r s) (N.leftShift r s) (R.operation c s).unitShift (R.operation d s).counitShift
+      { left := q.left, right := q.right, counit := q.counit, unit := q.unit,
+        leftShift := q.leftShift, rightShift := q.rightShift }
     refinement_normalized := N.normalized
     refinementRational := N.rational
     refinementCommon := N.common }

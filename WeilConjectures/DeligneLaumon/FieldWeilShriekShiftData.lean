@@ -20,6 +20,7 @@ import WeilConjectures.SmoothPurity.IntegralSupportNormalization.IntegralSupport
 import WeilConjectures.DeligneLaumon.FieldShriekCompositionQcqs
 import WeilConjectures.DeligneLaumon.ZlFrobeniusCompactSupportComparison
 import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import WeilConjectures.SixFunctors.SemilinearFieldOperationLiftsLegacy
 
 /-! # Normalized shifts and finite-stage Weil compact support
 
@@ -752,12 +753,11 @@ private theorem fieldFrobenius_isEquivalence
     (T₀ : Over (Spec (.of D.k₀)))
     [LocallyOfFiniteType T₀.hom] [QuasiCompact T₀.hom] :
     (sfWeilFrobeniusPullback D l hl T₀ E).IsEquivalence := by
-  have h := (semilinearFieldOperationLifts D l hl T₀ T₀ (𝟙 T₀) E
-    (AlgebraicClosure (Padic l))).2.2.1.1
-  rcases h with ⟨_, _, _, _, _, _, _, h, _⟩
-  exact h
+  exact (pod_field_transport_legacy_equivalences D l hl
+    (AlgebraicClosure (Padic l)) T₀ E).1
 
 -- Dualize the right-mate lemma to preserve the specified inverse open exchange.
+
 private theorem fieldInverseMate_isIso
     {A B C F : Type*} [Category A] [Category B] [Category C] [Category F]
     {L : A ⥤ B} {R : B ⥤ A} {L' : C ⥤ F} {R' : F ⥤ C}

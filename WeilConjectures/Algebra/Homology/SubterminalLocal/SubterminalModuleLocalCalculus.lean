@@ -96,6 +96,18 @@ Source: Stacks 03DI (blueprint: lem-sp-subterminal-module-local-calculus). -/
 abbrev adj (Z : C) : jbang.{c, v, r} R Z ⊣ jstar.{c, v, r} R Z :=
   localizedSystemAdjunction.{c, v, r} R Z
 
+/-- The canonical nested-open map, obtained by transposing restriction of the unit.
+Source: Stacks 03DI and 04IY (blueprint: lem-sp-subterminal-module-local-calculus). -/
+def nested {A B : C} (f : A ⟶ B) (M : Modules.{c, v, r} R) :
+    (jbang.{c, v, r} R A).obj ((jstar.{c, v, r} R A).obj M) ⟶
+      (jbang.{c, v, r} R B).obj ((jstar.{c, v, r} R B).obj M) :=
+  ((adj.{c, v, r} R A).homEquiv _ _).symm
+    ((overFunctorMap.{max c v r} (coefficients.{c, v, r} R) f).inv.app M ≫
+      (overMap.{max c v r} (coefficients.{c, v, r} R) f).map
+        ((adj.{c, v, r} R B).unit.app ((jstar.{c, v, r} R B).obj M)) ≫
+      (overFunctorMap.{max c v r} (coefficients.{c, v, r} R) f).hom.app
+        ((jbang.{c, v, r} R B).obj ((jstar.{c, v, r} R B).obj M)))
+
 open Classical in
 section LocalCalculusProof
 set_option backward.defeqAttrib.useBackward true
@@ -257,6 +269,26 @@ private def restrictionSquare {U V W : C} (f : W ⟶ U) (g : W ⟶ V) :
       (overMap.{max c v r} (coefficients.{c, v, r} R) f) :=
   (overFunctorMap.{max c v r} (coefficients.{c, v, r} R) g).hom ≫
     (overFunctorMap.{max c v r} (coefficients.{c, v, r} R) f).inv
+
+private theorem nested_counit {A B : C} (f : A ⟶ B) (M : Modules.{c, v, r} R) :
+    nested.{c, v, r} R f M ≫ (adj.{c, v, r} R B).counit.app M =
+      (adj.{c, v, r} R A).counit.app M := by
+  apply ((adj.{c, v, r} R A).homEquiv _ _).injective
+  rw [Adjunction.homEquiv_naturality_right]
+  rw [show ((adj.{c, v, r} R A).homEquiv _ _) (nested.{c, v, r} R f M) = _ from
+    Equiv.apply_symm_apply _ _]
+  rw [Adjunction.homEquiv_unit, Adjunction.right_triangle_components]
+  let α := overFunctorMap.{max c v r} (coefficients.{c, v, r} R) f
+  change (α.inv.app M ≫
+    (overMap.{max c v r} (coefficients.{c, v, r} R) f).map
+      ((adj.{c, v, r} R B).unit.app ((jstar.{c, v, r} R B).obj M)) ≫
+    α.hom.app ((jbang.{c, v, r} R B).obj ((jstar.{c, v, r} R B).obj M))) ≫
+    (jstar.{c, v, r} R A).map ((adj.{c, v, r} R B).counit.app M) = 𝟙 _
+  rw [Category.assoc, Category.assoc, ← α.hom.naturality]
+  simp only [CategoryTheory.Functor.comp_map]
+  rw [← CategoryTheory.Functor.map_comp_assoc,
+    Adjunction.right_triangle_components, CategoryTheory.Functor.map_id, Category.id_comp]
+  exact α.inv_hom_id_app M
 
 omit [HasFiniteLimits C] in
 omit [HasFiniteLimits C] in

@@ -122,4 +122,53 @@ def towerAdjoint (N : ℕ) (hN : 0 < N)
         affineTraceCounit A N hA t D S hS d ≫
           (singleFunctorObjUnitIso (ModuleCat.{u + 1} A) S).hom)
 
+/-- The fixed coordinate isomorphism is a Cartesian map over S.
+Source: sk-thm-dnc, standard model (blueprint: def-trf-coordinate-counit-arrows).
+Proof: its hom is the map of the ordered coordinates, hence commutes with projection.
+Cancel the isomorphism to obtain the inverse equation; a square with horizontal
+isomorphisms is Cartesian. This includes the zero-variable affine space. -/
+theorem standardSquare (S : Scheme.{u}) (d : ℕ) :
+    IsPullback (affineTraceAffineSpaceIso S d).inv
+      (AffineSpace (ULift.{u} (Fin d)) S ↘ S) (affineTraceProjection S d) (𝟙 S) := by
+  apply IsPullback.of_horiz_isIso
+  refine ⟨?_⟩
+  rw [Category.comp_id]
+  apply (cancel_epi (affineTraceAffineSpaceIso S d).hom).mp
+  simp only [Iso.hom_inv_id_assoc]
+  exact (AffineSpace.homOfVector_over _ _).symm
+
+/-- The prescribed affine orientation in the standard affine-space model. The middle
+map is the actual tower counit's transpose; the final map is the exceptional mate
+for the fixed coordinate isomorphism. No adjunction or orientation is chosen here.
+Source: sk-thm-dnc, standard model (blueprint: def-trf-coordinate-counit-arrows). -/
+@[irreducible]
+def standardAdjoint (N : ℕ) (hN : 0 < N)
+    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
+    (t : OrdinaryFiniteTwistTransport A N hA)
+    (D : ∀ (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (N : Γ(T, ⊤))),
+      OrdinaryFiniteP1Datum A N hA t T hT)
+    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ) :
+    SectionLocalDualizingComparisons.tateObject A N hA (AffineSpace (ULift.{u} (Fin d)) S) d ⟶
+      dualizingComplex A (AffineSpace (ULift.{u} (Fin d)) S ↘ S) :=
+  (tatePullback A N hN hA (affineTraceAffineSpaceIso S d).inv
+    (affineTraceInvertible N S hS d)
+    (invertibleOnSource N (AffineSpace (ULift.{u} (Fin d)) S ↘ S) hS) d).inv ≫
+      (ordinaryFinitePullback A (affineTraceAffineSpaceIso S d).inv).map
+        ((towerTateIso A N hN hA t S hS d).inv ≫ towerAdjoint N hN A hA t D S hS d) ≫
+      dualizingComplexBaseChangeMap A (standardSquare S d)
+
+/-- A presentation of the affine adjunction with precisely the prescribed counit at
+coefficients. The condition fixes all section orientations used in this delivery.
+Source: sk-thm-dnc, counit normalization (blueprint: def-trf-coordinate-counit-arrows). -/
+def IsNormalized (N : ℕ) (hN : 0 < N)
+    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)
+    (t : OrdinaryFiniteTwistTransport A N hA)
+    (D : ∀ (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (N : Γ(T, ⊤))),
+      OrdinaryFiniteP1Datum A N hA t T hT)
+    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ)
+    (adj : rightDerivedLowerShriek (ModuleCat.{u + 1} A)
+      (AffineSpace (ULift.{u} (Fin d)) S ↘ S) ⊣ affineRight A N hA S d) : Prop :=
+  (affineDualizingIso A N hN hA S hS d adj).inv =
+    standardAdjoint N hN A hA t D S hS d
+
 end AlgebraicGeometry.Etale.CoordinateCounitArrows

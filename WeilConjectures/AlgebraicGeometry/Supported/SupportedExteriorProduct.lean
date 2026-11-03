@@ -104,6 +104,20 @@ noncomputable def supportedTotalTensorGeneric (X : Scheme.{u})
     (P Q : CochainComplex (Sheaf X.smallEtaleTopology C) ℤ) :=
   HomologicalComplex.tensorObj (C := Sheaf X.smallEtaleTopology C) (c := .up ℤ) P Q
 
+/-- Tensor two sheaf morphisms using the upstream bifunctor.
+Source: blueprint constant tensor pairing (blueprint: def-pur-supported-exterior-product). -/
+noncomputable def supportedSheafTensorMapGeneric (X : Scheme.{u})
+    {M M' N N' : Sheaf X.smallEtaleTopology C} (a : M ⟶ M') (b : N ⟶ N') :
+    ((supportedSheafTensorGeneric C X).obj M).obj N ⟶
+      ((supportedSheafTensorGeneric C X).obj M').obj N' :=
+  ((supportedSheafTensorGeneric C X).map a).app N ≫
+    ((supportedSheafTensorGeneric C X).obj M').map b
+
+/-- Sheaf tensor with the specified coefficient ring.
+Source: blueprint tensor convention (blueprint: def-pur-supported-exterior-product). -/
+noncomputable abbrev supportedSheafTensor (A : Type (u + 1)) [CommRing A]
+    (X : Scheme.{u}) := supportedSheafTensorGeneric (ModuleCat.{u + 1} A) X
+
 end TensorWrappers
 
 /-- Closed supported constant coefficients. Source: blueprint
@@ -636,6 +650,45 @@ theorem supportedProductImmersion_isClosedImmersion {B X Y Z W : Scheme.{u}}
       (inferInstanceAs (IsClosedImmersion i))
       (inferInstanceAs (IsClosedImmersion j)) rfl rfl
 
+/-- The pointwise constant-presheaf tensor comparison.
+Source: blueprint `def-pur-supported-exterior-product`, constant section tensor
+(blueprint: def-pur-supported-exterior-product). -/
+def constantPresheafTensor (A : Type (u + 1)) [CommRing A]
+    (T : Scheme.{u}) (M N : ModuleCat.{u + 1} A) :
+    (Functor.const T.Etaleᵒᵖ).obj (M ⊗ N) ⟶
+      (Functor.const T.Etaleᵒᵖ).obj M ⊗ (Functor.const T.Etaleᵒᵖ).obj N where
+  app _ := 𝟙 _
+  naturality _ _ _ := by simp
+
+/-- Constant coefficient tensor comparison before pulling back either factor.
+Source: blueprint constant section pairing (blueprint: def-pur-supported-exterior-product). -/
+noncomputable def supportedConstantTensor (A : Type (u + 1)) [CommRing A]
+    (X : Scheme.{u}) (M N : ModuleCat.{u + 1} A) :
+    (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)).obj (M ⊗ N) ⟶
+      ((supportedSheafTensor A X).obj
+        ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)).obj M)).obj
+        ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)).obj N) :=
+  (presheafToSheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)).map
+      (constantPresheafTensor A X M N) ≫
+    (Functor.Monoidal.μIso (presheafToSheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))
+      ((Functor.const _).obj M) ((Functor.const _).obj N)).inv
+
+/-- Tensor comparison for constant coefficients and the two projection pullbacks.
+Source: blueprint `def-pur-supported-exterior-product`, constant section pairing
+(blueprint: def-pur-supported-exterior-product). -/
+noncomputable def constantExteriorTensor (A : Type (u + 1)) [CommRing A]
+    {B X Y : Scheme.{u}} (f : X ⟶ B) (g : Y ⟶ B) (M N : ModuleCat.{u + 1} A) :
+    (constantSheaf (pullback f g).smallEtaleTopology (ModuleCat.{u + 1} A)).obj (M ⊗ N) ⟶
+      ((supportedSheafTensor A (pullback f g)).obj
+        ((upperStar (ModuleCat.{u + 1} A) (pullback.fst f g)).obj
+        ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)).obj M))).obj
+      ((upperStar (ModuleCat.{u + 1} A) (pullback.snd f g)).obj
+        ((constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A)).obj N)) :=
+  supportedConstantTensor A (pullback f g) M N ≫
+    supportedSheafTensorMapGeneric (ModuleCat.{u + 1} A) (pullback f g)
+      ((Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} A) (pullback.fst f g)).inv.app M)
+      ((Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} A) (pullback.snd f g)).inv.app N)
+
 /-- Supported coefficients pulled back along the first projection.
 Source: blueprint `def-pur-supported-exterior-product`
 (blueprint: def-pur-supported-exterior-product). -/
@@ -649,6 +702,279 @@ Source: blueprint `def-pur-supported-exterior-product`
 noncomputable abbrev supportedSecondCoefficients (A : Type (u + 1)) [CommRing A]
     {B X Y W : Scheme.{u}} (f : X ⟶ B) (g : Y ⟶ B) (j : W ⟶ Y) :=
   supportedCoefficients A j ⋙ upperStar (ModuleCat.{u + 1} A) (pullback.snd f g)
+
+private theorem coefficientQuotient_naturality
+    (A : Type (u + 1)) [CommRing A] {Z X : Scheme.{u}}
+    (i : Z ⟶ X) [IsClosedImmersion i] {M M' : ModuleCat.{u + 1} A} (f : M ⟶ M') :
+    (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)).map f ≫
+        supportedCoefficientQuotient A i M' =
+      supportedCoefficientQuotient A i M ≫ (supportedCoefficients A i).map f := by
+  let η := Functor.whiskerLeft
+    (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))
+    (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) i).unit
+  let ν := Functor.whiskerRight
+    (Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} A) i).hom
+    (lowerStar (ModuleCat.{u + 1} A) i)
+  exact (η ≫ ν).naturality f
+
+private theorem zero_of_open_cover
+    (C : Type v) [Category.{u + 1} C] [Abelian C]
+    [IsGrothendieckAbelian.{u + 1} C] {T : Scheme.{u}}
+    (F : Sheaf T.smallEtaleTopology C)
+    {I : Type*} {V : I → Scheme.{u}} (a : ∀ k, V k ⟶ T)
+    [∀ k, IsOpenImmersion (a k)]
+    (ha : ⋃ k, Set.range (a k).base = Set.univ)
+    (hF : ∀ k, IsZero ((upperStar C (a k)).obj F)) : IsZero F := by
+  have h : IsIso (0 : F ⟶ 0) := by
+    apply isIso_of_isIso_localizationRestriction C (0 : F ⟶ 0) a ha
+    intro k
+    have hz := (hF k).of_iso
+      ((upperStarIsoLocalizationRestriction C (a k) inferInstance).app F).symm
+    exact hz.isIso ((localizationRestriction C (a k) inferInstance).map_isZero
+      (isZero_zero _)) _
+  exact (isZero_zero _).of_iso (asIso (0 : F ⟶ 0))
+
+private theorem coefficient_zero_on_complement
+    (A : Type (u + 1)) [CommRing A] {Z X T : Scheme.{u}}
+    (i : Z ⟶ X) [IsClosedImmersion i] (a : T ⟶ X)
+    (ha : Set.range a.base ⊆ (i.openComplement : Set X))
+    (M : ModuleCat.{u + 1} A) :
+    IsZero ((upperStar (ModuleCat.{u + 1} A) a).obj
+      ((supportedCoefficients A i).obj M)) := by
+  let C := ModuleCat.{u + 1} A
+  let v := i.openComplement.ι
+  have hav : Set.range a.base ⊆ Set.range v.base := by
+    simpa only [v, Scheme.Opens.range_ι] using ha
+  let l := IsOpenImmersion.lift v a hav
+  have hz : IsZero ((upperStar C v).obj ((supportedCoefficients A i).obj M)) := by
+    apply isZero_upperStar_lowerStar_of_disjoint_range C v i
+    rw [show Set.range v.base = (Set.range i.base)ᶜ by
+      simp [v, Scheme.Hom.coe_openComplement]]
+    exact disjoint_compl_left
+  exact ((upperStar C l).map_isZero hz).of_iso
+    ((upperStarComp C l v a (IsOpenImmersion.lift_fac v a hav).symm).app _)
+
+private theorem tensor_zero_on_union
+    (A : Type (u + 1)) [CommRing A] {T X Y Z W : Scheme.{u}}
+    (p : T ⟶ X) (q : T ⟶ Y) (i : Z ⟶ X) (j : W ⟶ Y)
+    [IsClosedImmersion i] [IsClosedImmersion j]
+    (V : T.Opens) (hV : V = p ⁻¹ᵁ i.openComplement ⊔ q ⁻¹ᵁ j.openComplement)
+    (M N : ModuleCat.{u + 1} A) :
+    IsZero ((upperStar (ModuleCat.{u + 1} A) V.ι).obj
+      (((upperStar (ModuleCat.{u + 1} A) p).obj ((supportedCoefficients A i).obj M)) ⊗
+        ((upperStar (ModuleCat.{u + 1} A) q).obj ((supportedCoefficients A j).obj N)))) := by
+  let C := ModuleCat.{u + 1} A
+  let F := (upperStar C p).obj ((supportedCoefficients A i).obj M)
+  let G := (upperStar C q).obj ((supportedCoefficients A j).obj N)
+  let O : Bool → V.toScheme.Opens := fun b ↦
+    if b then V.ι ⁻¹ᵁ (p ⁻¹ᵁ i.openComplement) else V.ι ⁻¹ᵁ (q ⁻¹ᵁ j.openComplement)
+  have hcov : ⋃ b, Set.range (O b).ι.base = Set.univ := by
+    apply Set.eq_univ_of_forall
+    intro x
+    have hx : V.ι.base x ∈ (p ⁻¹ᵁ i.openComplement : Set T) ∪
+        (q ⁻¹ᵁ j.openComplement : Set T) := by
+      change V.ι.base x ∈ ((p ⁻¹ᵁ i.openComplement ⊔ q ⁻¹ᵁ j.openComplement) : T.Opens)
+      rw [← hV]
+      exact x.2
+    rcases hx with hx | hx
+    · apply Set.mem_iUnion.2
+      refine ⟨true, ?_⟩
+      rw [Scheme.Opens.range_ι]
+      exact hx
+    · apply Set.mem_iUnion.2
+      refine ⟨false, ?_⟩
+      rw [Scheme.Opens.range_ι]
+      exact hx
+  apply zero_of_open_cover C _ (fun b ↦ (O b).ι) hcov
+  intro b
+  let a := (O b).ι ≫ V.ι
+  have hz : IsZero ((upperStar C a).obj (F ⊗ G)) := by
+    cases b
+    · have hq : Set.range (a ≫ q).base ⊆ (j.openComplement : Set Y) := by
+        rintro _ ⟨x, rfl⟩
+        exact x.2
+      have h₀ := coefficient_zero_on_complement A j (a ≫ q) hq N
+      have hG : IsZero ((upperStar C a).obj G) :=
+        h₀.of_iso ((upperStarComp C a q).app _).symm
+      exact ((tensorLeft ((upperStar C a).obj F)).map_isZero hG).of_iso
+        (Functor.Monoidal.μIso (upperStar C a) F G).symm
+    · have hp : Set.range (a ≫ p).base ⊆ (i.openComplement : Set X) := by
+        rintro _ ⟨x, rfl⟩
+        exact x.2
+      have h₀ := coefficient_zero_on_complement A i (a ≫ p) hp M
+      have hF : IsZero ((upperStar C a).obj F) :=
+        h₀.of_iso ((upperStarComp C a p).app _).symm
+      exact ((tensorRight ((upperStar C a).obj G)).map_isZero hF).of_iso
+        (Functor.Monoidal.μIso (upperStar C a) F G).symm
+  exact hz.of_iso ((upperStarComp C (O b).ι V.ι).app (F ⊗ G)).symm
+
+private theorem coefficient_factorization
+    (A : Type (u + 1)) [CommRing A] {Z X : Scheme.{u}}
+    (i : Z ⟶ X) [IsClosedImmersion i] (M : ModuleCat.{u + 1} A)
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))
+    (hF : IsZero ((upperStar (ModuleCat.{u + 1} A) i.openComplement.ι).obj F))
+    (α : (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)).obj M ⟶ F) :
+    ∃! t : (supportedCoefficients A i).obj M ⟶ F,
+      supportedCoefficientQuotient A i M ≫ t = α := by
+  let C := ModuleCat.{u + 1} A
+  let a := upperStarLowerStarAdjunction C i
+  let b := Scheme.upperStarConstantSheafIso C i
+  have : IsIso (a.unit.app F) :=
+    isIso_upperStarLowerStarAdjunction_unit_app_of_isZero C i i.openComplement.ι
+      (by simp) hF
+  let t : (supportedCoefficients A i).obj M ⟶ F :=
+    (lowerStar C i).map (b.inv.app M) ≫
+      (lowerStar C i).map ((upperStar C i).map α) ≫ inv (a.unit.app F)
+  have ht : supportedCoefficientQuotient A i M ≫ t = α := by
+    exact adjunction_factorization_equation a (b.app M) α
+  have := coefficientQuotient_epi A i M
+  exact ⟨t, ht, fun t' ht' ↦ (cancel_epi (supportedCoefficientQuotient A i M)).1
+    (ht'.trans ht.symm)⟩
+
+/-- The supported coefficient tensor comparison is uniquely fixed by the quotient
+of constant sections. Source: blueprint `def-pur-supported-exterior-product`
+(blueprint: def-pur-supported-exterior-product).
+Proof: the target is zero off the intersection of the two inverse-image supports,
+so the constant section pairing factors through the open-closed coefficient quotient.
+That quotient is epic, giving uniqueness. On the intersection all maps are the
+identity on M tensor N; elsewhere both supported coefficients are zero. Geometric
+stalks detect that the resulting comparison is an isomorphism. -/
+theorem exists_unique_supportedCoefficientTensor
+    (A : Type (u + 1)) [CommRing A] {B X Y Z W : Scheme.{u}}
+    (f : X ⟶ B) (g : Y ⟶ B) (i : Z ⟶ X) (j : W ⟶ Y)
+    [IsClosedImmersion i] [IsClosedImmersion j] (M N : ModuleCat.{u + 1} A) :
+    ∃! t : (supportedCoefficients A (supportedProductImmersion f g i j)).obj (M ⊗ N) ⟶
+        ((supportedSheafTensor A (pullback f g)).obj
+          ((supportedFirstCoefficients A f g i).obj M)).obj
+          ((supportedSecondCoefficients A f g j).obj N),
+      supportedCoefficientQuotient A (supportedProductImmersion f g i j) (M ⊗ N) ≫ t =
+        constantExteriorTensor A f g M N ≫
+          supportedSheafTensorMapGeneric (ModuleCat.{u + 1} A) (pullback f g)
+            ((upperStar (ModuleCat.{u + 1} A) (pullback.fst f g)).map
+              (supportedCoefficientQuotient A i M))
+            ((upperStar (ModuleCat.{u + 1} A) (pullback.snd f g)).map
+              (supportedCoefficientQuotient A j N)) := by
+  have hc : (supportedProductImmersion f g i j).openComplement =
+      pullback.fst f g ⁻¹ᵁ i.openComplement ⊔ pullback.snd f g ⁻¹ᵁ j.openComplement := by
+    apply TopologicalSpace.Opens.ext
+    simp [Scheme.Hom.coe_openComplement, supportedProductImmersion,
+      Scheme.Pullback.range_map, Set.compl_inter, Set.preimage_compl]
+  exact coefficient_factorization A (supportedProductImmersion f g i j) (M ⊗ N) _
+    (tensor_zero_on_union A (pullback.fst f g) (pullback.snd f g) i j _ hc M N) _
+
+/-- The uniquely normalized supported coefficient tensor comparison.
+Source: blueprint `def-pur-supported-exterior-product`
+(blueprint: def-pur-supported-exterior-product). -/
+noncomputable def supportedCoefficientTensor
+    (A : Type (u + 1)) [CommRing A] {B X Y Z W : Scheme.{u}}
+    (f : X ⟶ B) (g : Y ⟶ B) (i : Z ⟶ X) (j : W ⟶ Y)
+    [IsClosedImmersion i] [IsClosedImmersion j] (M N : ModuleCat.{u + 1} A) :=
+  (exists_unique_supportedCoefficientTensor A f g i j M N).choose
+
+private theorem constantTensor_natural
+    (A : Type (u + 1)) [CommRing A] (X : Scheme.{u})
+    {M M' N N' : ModuleCat.{u + 1} A} (a : M ⟶ M') (b : N ⟶ N') :
+    (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)).map (a ⊗ₘ b) ≫
+        supportedConstantTensor A X M' N' =
+      supportedConstantTensor A X M N ≫
+        ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)).map a ⊗ₘ
+          (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)).map b) := by
+  exact (Functor.OplaxMonoidal.δ_natural
+    (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) a b).symm
+
+private noncomputable def coefficientQuotientNat
+    (A : Type (u + 1)) [CommRing A] {Z X : Scheme.{u}}
+    (i : Z ⟶ X) [IsClosedImmersion i] :
+    constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} A) ⟶
+      supportedCoefficients A i where
+  app := supportedCoefficientQuotient A i
+  naturality _ _ f := coefficientQuotient_naturality A i f
+
+private noncomputable def firstCoefficientQuotientNat
+    (A : Type (u + 1)) [CommRing A] {B X Y Z : Scheme.{u}}
+    (f : X ⟶ B) (g : Y ⟶ B) (i : Z ⟶ X) [IsClosedImmersion i] :
+    constantSheaf (pullback f g).smallEtaleTopology (ModuleCat.{u + 1} A) ⟶
+      supportedFirstCoefficients A f g i :=
+  (Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} A) (pullback.fst f g)).inv ≫
+    Functor.whiskerRight (coefficientQuotientNat A i)
+      (upperStar (ModuleCat.{u + 1} A) (pullback.fst f g))
+
+private noncomputable def secondCoefficientQuotientNat
+    (A : Type (u + 1)) [CommRing A] {B X Y W : Scheme.{u}}
+    (f : X ⟶ B) (g : Y ⟶ B) (j : W ⟶ Y) [IsClosedImmersion j] :
+    constantSheaf (pullback f g).smallEtaleTopology (ModuleCat.{u + 1} A) ⟶
+      supportedSecondCoefficients A f g j :=
+  (Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} A) (pullback.snd f g)).inv ≫
+    Functor.whiskerRight (coefficientQuotientNat A j)
+      (upperStar (ModuleCat.{u + 1} A) (pullback.snd f g))
+
+private theorem coefficientTensor_spec
+    (A : Type (u + 1)) [CommRing A] {B X Y Z W : Scheme.{u}}
+    (f : X ⟶ B) (g : Y ⟶ B) (i : Z ⟶ X) (j : W ⟶ Y)
+    [IsClosedImmersion i] [IsClosedImmersion j] (M N : ModuleCat.{u + 1} A) :
+    supportedCoefficientQuotient A (supportedProductImmersion f g i j) (M ⊗ N) ≫
+        supportedCoefficientTensor A f g i j M N =
+      supportedConstantTensor A (pullback f g) M N ≫
+        ((firstCoefficientQuotientNat A f g i).app M ⊗ₘ
+          (secondCoefficientQuotientNat A f g j).app N) := by
+  have h := (exists_unique_supportedCoefficientTensor A f g i j M N).choose_spec.1
+  change supportedCoefficientQuotient A (supportedProductImmersion f g i j) (M ⊗ N) ≫
+    supportedCoefficientTensor A f g i j M N = _ at h
+  rw [h]
+  change (_ ≫ (_ ⊗ₘ _)) ≫ (_ ⊗ₘ _) = _ ≫ ((_ ≫ _) ⊗ₘ (_ ≫ _))
+  rw [Category.assoc, tensorHom_comp_tensorHom]
+  rfl
+
+private theorem coefficientTensor_natural
+    (A : Type (u + 1)) [CommRing A] {B X Y Z W : Scheme.{u}}
+    (f : X ⟶ B) (g : Y ⟶ B) (i : Z ⟶ X) (j : W ⟶ Y)
+    [IsClosedImmersion i] [IsClosedImmersion j]
+    {M M' N N' : ModuleCat.{u + 1} A} (a : M ⟶ M') (b : N ⟶ N') :
+    (supportedCoefficients A (supportedProductImmersion f g i j)).map (a ⊗ₘ b) ≫
+        supportedCoefficientTensor A f g i j M' N' =
+      supportedCoefficientTensor A f g i j M N ≫
+        ((supportedFirstCoefficients A f g i).map a ⊗ₘ
+          (supportedSecondCoefficients A f g j).map b) := by
+  have := coefficientQuotient_epi A (supportedProductImmersion f g i j) (M ⊗ N)
+  apply (cancel_epi (supportedCoefficientQuotient A
+    (supportedProductImmersion f g i j) (M ⊗ N))).1
+  rw [← Category.assoc, ← coefficientQuotient_naturality, Category.assoc,
+    coefficientTensor_spec, ← Category.assoc, constantTensor_natural, Category.assoc,
+    tensorHom_comp_tensorHom, (firstCoefficientQuotientNat A f g i).naturality,
+    (secondCoefficientQuotientNat A f g j).naturality, ← tensorHom_comp_tensorHom,
+    ← Category.assoc, ← coefficientTensor_spec, Category.assoc]
+
+/-- The natural bifunctor comparison for closed supported coefficients.
+Source: blueprint supported tensor construction (blueprint: def-pur-supported-exterior-product). -/
+noncomputable def supportedCoefficientTensorNatTrans
+    (A : Type (u + 1)) [CommRing A] {B X Y Z W : Scheme.{u}}
+    (f : X ⟶ B) (g : Y ⟶ B) (i : Z ⟶ X) (j : W ⟶ Y)
+    [IsClosedImmersion i] [IsClosedImmersion j] :
+    (Functor.postcompose₂.obj (supportedCoefficients A (supportedProductImmersion f g i j))).obj
+        (curriedTensor (ModuleCat.{u + 1} A)) ⟶
+      (((Functor.whiskeringLeft₂ _).obj (supportedFirstCoefficients A f g i)).obj
+        (supportedSecondCoefficients A f g j)).obj
+          (supportedSheafTensor A (pullback f g)) where
+  app M :=
+    { app N := supportedCoefficientTensor A f g i j M N
+      naturality N N' b := by
+        change (supportedCoefficients A (supportedProductImmersion f g i j)).map (M ◁ b) ≫
+          supportedCoefficientTensor A f g i j M N' =
+            supportedCoefficientTensor A f g i j M N ≫
+              ((supportedFirstCoefficients A f g i).obj M ◁
+                (supportedSecondCoefficients A f g j).map b)
+        simpa only [CategoryTheory.Functor.map_id, id_tensorHom] using
+          coefficientTensor_natural A f g i j (𝟙 M) b }
+  naturality M M' a := by
+    apply NatTrans.ext
+    funext N
+    change (supportedCoefficients A (supportedProductImmersion f g i j)).map (a ▷ N) ≫
+      supportedCoefficientTensor A f g i j M' N =
+        supportedCoefficientTensor A f g i j M N ≫
+          ((supportedFirstCoefficients A f g i).map a ▷
+            (supportedSecondCoefficients A f g j).obj N)
+    simpa only [CategoryTheory.Functor.map_id, tensorHom_id] using
+      coefficientTensor_natural A f g i j a (𝟙 N)
 
 attribute [local irreducible] HomologicalComplex₂.total
 
@@ -756,6 +1082,13 @@ noncomputable def supportedDerivedComparisonHom
       G.mapDerivedCategory.obj (M ⊗ N) ⟶
         F₁.mapDerivedCategory.obj M ⊗ F₂.mapDerivedCategory.obj N
 
+private theorem tensorLocalization_model_eq (P Q : CochainComplex D ℤ) :
+    Functor.LaxMonoidal.μ DerivedCategory.Q P Q ≫
+        DerivedCategory.Q.map (eqToHom (supportedComplexTensor_eq P Q)) =
+      Functor.LaxMonoidal.μ DerivedCategory.Q P Q := by
+  have h : eqToHom (supportedComplexTensor_eq P Q) = 𝟙 (P ⊗ Q) := rfl
+  rw [h, CategoryTheory.Functor.map_id, Category.comp_id]
+
 /-- Naturality and normalization on all complex models, retaining the signed total tensor.
 Source: blueprint derived tensor comparison (blueprint: def-pur-supported-exterior-product). -/
 noncomputable def supportedDerivedComparisonCondition
@@ -784,6 +1117,310 @@ noncomputable def supportedDerivedComparisonCondition
             DerivedCategory.Q.map (eqToHom (supportedComplexTensor_eq
               ((F₁.mapHomologicalComplex (.up ℤ)).obj P)
               ((F₂.mapHomologicalComplex (.up ℤ)).obj Q)))))
+
+/-- Evaluate a derived comparison without expanding the total-complex implementation.
+Source: blueprint derived tensor comparison (blueprint: def-pur-supported-exterior-product). -/
+noncomputable def supportedDerivedComparisonApply
+    (G F₁ F₂ : C ⥤ D) [G.Additive] [F₁.Additive] [F₂.Additive]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    [PreservesFiniteLimits F₁] [PreservesFiniteColimits F₁]
+    [PreservesFiniteLimits F₂] [PreservesFiniteColimits F₂]
+    (t : supportedDerivedComparisonHom G F₁ F₂) (M N : DerivedCategory C) :
+    G.mapDerivedCategory.obj (M ⊗ N) ⟶
+      F₁.mapDerivedCategory.obj M ⊗ F₂.mapDerivedCategory.obj N := t M N
+
+private theorem derivedComparison_unique
+    (G F₁ F₂ : C ⥤ D) [G.Additive] [F₁.Additive] [F₂.Additive]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    [PreservesFiniteLimits F₁] [PreservesFiniteColimits F₁]
+    [PreservesFiniteLimits F₂] [PreservesFiniteColimits F₂]
+    [F₂.PreservesFlat] [F₂.IsLeftAdjoint]
+    (τ : (Functor.postcompose₂.obj (G.mapHomologicalComplex (.up ℤ))).obj
+        (curriedTensor (CochainComplex C ℤ)) ⟶
+      (((Functor.whiskeringLeft₂ _).obj (F₁.mapHomologicalComplex (.up ℤ))).obj
+        (F₂.mapHomologicalComplex (.up ℤ))).obj (curriedTensor _)) :
+    ∃! t : supportedDerivedComparisonHom G F₁ F₂,
+      supportedDerivedComparisonCondition G F₁ F₂ τ t := by
+  unfold supportedDerivedComparisonHom supportedDerivedComparisonCondition
+  simp only [tensorLocalization_model_eq]
+  let U := (Functor.postcompose₂.obj G.mapDerivedCategory).obj
+    (curriedTensor (DerivedCategory C))
+  let V := (((Functor.whiskeringLeft₂ _).obj F₁.mapDerivedCategory).obj
+    F₂.mapDerivedCategory).obj (curriedTensor (DerivedCategory D))
+  let α := mixedTensorCounit F₁ F₂
+  have : V.IsLeftDerivedFunctor₂ α (HomologicalComplex.quasiIso C (.up ℤ))
+      (HomologicalComplex.quasiIso C (.up ℤ)) := mixedTensor_isLeftDerived F₁ F₂
+  let β := (Functor.postcompose₂.obj G.mapDerivedCategory).map
+      (Functor.LaxMonoidal.μNatTrans DerivedCategory.Q) ≫
+    (Functor.postcompose₂.map G.mapDerivedCategoryFactors.hom).app
+      (curriedTensor (CochainComplex C ℤ)) ≫
+    Functor.postcompose₂MapWhiskeringLeft₂ τ DerivedCategory.Q
+  let γ : U ⟶ V := V.leftDerived₂Lift α
+    (HomologicalComplex.quasiIso C (.up ℤ))
+    (HomologicalComplex.quasiIso C (.up ℤ)) U β
+  have hγ (P Q : CochainComplex C ℤ) :=
+    V.leftDerived₂_fac_app_app α (HomologicalComplex.quasiIso C (.up ℤ))
+      (HomologicalComplex.quasiIso C (.up ℤ)) U β P Q
+  have hα (P Q : CochainComplex C ℤ) : (α.app P).app Q =
+      (F₁.mapDerivedCategoryFactors.hom.app P ⊗ₘ
+        F₂.mapDerivedCategoryFactors.hom.app Q) ≫
+        Functor.LaxMonoidal.μ DerivedCategory.Q
+          ((F₁.mapHomologicalComplex (.up ℤ)).obj P)
+          ((F₂.mapHomologicalComplex (.up ℤ)).obj Q) := by
+    simp only [α, mixedTensorCounit, NatTrans.comp_app,
+      MonoidalCategory.tensorHom_def, Category.assoc]
+    rfl
+  have hβ (P Q : CochainComplex C ℤ) : (β.app P).app Q =
+      G.mapDerivedCategory.map (Functor.LaxMonoidal.μ DerivedCategory.Q P Q) ≫
+        G.mapDerivedCategoryFactors.hom.app (P ⊗ Q) ≫
+        DerivedCategory.Q.map ((τ.app P).app Q) := by rfl
+  refine ⟨fun M N ↦ (γ.app M).app N, ⟨?_, ?_⟩, ?_⟩
+  · intro M M' N N' a b
+    have ha := congr_app (γ.naturality a) N
+    have hb := (γ.app M').naturality b
+    change G.mapDerivedCategory.map (a ▷ N) ≫ (γ.app M').app N =
+      (γ.app M).app N ≫ (F₁.mapDerivedCategory.map a ▷ F₂.mapDerivedCategory.obj N) at ha
+    change G.mapDerivedCategory.map (M' ◁ b) ≫ (γ.app M').app N' =
+      (γ.app M').app N ≫ (F₁.mapDerivedCategory.obj M' ◁ F₂.mapDerivedCategory.map b) at hb
+    rw [MonoidalCategory.tensorHom_def, CategoryTheory.Functor.map_comp, Category.assoc, hb,
+      ← Category.assoc, ha, Category.assoc, ← MonoidalCategory.tensorHom_def]
+  · intro P Q
+    have h := hγ P Q
+    rw [hα, hβ] at h
+    exact h.symm
+  · intro t ht
+    let δ : U ⟶ V :=
+      { app M :=
+          { app N := t M N
+            naturality N N' b := by
+              change G.mapDerivedCategory.map (M ◁ b) ≫ t M N' =
+                t M N ≫ (F₁.mapDerivedCategory.obj M ◁ F₂.mapDerivedCategory.map b)
+              simpa only [id_tensorHom, CategoryTheory.Functor.map_id] using
+                ht.1 M M N N' (𝟙 M) b }
+        naturality M M' a := by
+          apply NatTrans.ext
+          funext N
+          change G.mapDerivedCategory.map (a ▷ N) ≫ t M' N =
+            t M N ≫ (F₁.mapDerivedCategory.map a ▷ F₂.mapDerivedCategory.obj N)
+          simpa only [tensorHom_id, CategoryTheory.Functor.map_id] using
+            ht.1 M M' N N a (𝟙 N) }
+    have he : δ = γ := by
+      apply V.leftDerived₂_ext α (HomologicalComplex.quasiIso C (.up ℤ))
+        (HomologicalComplex.quasiIso C (.up ℤ)) U
+      apply NatTrans.ext
+      funext P
+      apply NatTrans.ext
+      funext Q
+      change t (DerivedCategory.Q.obj P) (DerivedCategory.Q.obj Q) ≫ (α.app P).app Q = _
+      rw [hα]
+      have h := hγ P Q
+      rw [hβ] at h
+      exact (ht.2 P Q).symm.trans h.symm
+    exact congrArg (fun η : U ⟶ V ↦ fun M N ↦ (η.app M).app N) he
+
+/-- Derived comparison families at a variable scheme.
+Source: blueprint derived tensor construction (blueprint: def-pur-supported-exterior-product). -/
+noncomputable def supportedSchemeDerivedHom : Type _ :=
+  supportedDerivedComparisonHom G F₁ F₂
+
+/-- Model normalization for the derived coefficient comparison at a variable scheme.
+Source: blueprint K-flat derivation (blueprint: def-pur-supported-exterior-product). -/
+noncomputable def supportedSchemeDerivedCondition
+    (τ : (Functor.postcompose₂.obj G).obj (curriedTensor C) ⟶
+      (((Functor.whiskeringLeft₂ _).obj F₁).obj F₂).obj (supportedSheafTensorGeneric C T))
+    (t : supportedSchemeDerivedHom C T G F₁ F₂) : Prop :=
+  supportedDerivedComparisonCondition G F₁ F₂
+    (supportedComplexComparisonNatTrans G F₁ F₂ τ) t
+
+private theorem supportedSchemeDerived_unique [F₂.PreservesFlat] [F₂.IsLeftAdjoint]
+    (τ : (Functor.postcompose₂.obj G).obj (curriedTensor C) ⟶
+      (((Functor.whiskeringLeft₂ _).obj F₁).obj F₂).obj (supportedSheafTensorGeneric C T)) :
+    ∃! t : supportedSchemeDerivedHom C T G F₁ F₂,
+      supportedSchemeDerivedCondition C T G F₁ F₂ τ t :=
+  derivedComparison_unique G F₁ F₂ (supportedComplexComparisonNatTrans G F₁ F₂ τ)
+
+/-- Evaluate the derived coefficient family with the canonical sheaf tensor structure.
+Source: blueprint derived tensor construction (blueprint: def-pur-supported-exterior-product). -/
+noncomputable def supportedSchemeDerivedApply
+    (t : supportedSchemeDerivedHom C T G F₁ F₂) (M N : DerivedCategory C) :
+    G.mapDerivedCategory.obj (M ⊗ N) ⟶
+      ((derivedTensor C T).obj (F₁.mapDerivedCategory.obj M)).obj
+        (F₂.mapDerivedCategory.obj N) :=
+  supportedDerivedComparisonApply G F₁ F₂ t M N
+
+/-- Tensor morphisms through the existing derived bifunctor at a variable scheme.
+Source: blueprint supported pairing (blueprint: def-pur-supported-exterior-product). -/
+noncomputable def supportedDerivedTensorMap (A : Type (u + 1)) [CommRing A]
+    (X : Scheme.{u})
+    {M M' N N' : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))}
+    (a : M ⟶ M') (b : N ⟶ N') :
+    ((derivedTensor (ModuleCat.{u + 1} A) X).obj M).obj N ⟶
+      ((derivedTensor (ModuleCat.{u + 1} A) X).obj M').obj N' :=
+  ((derivedTensor (ModuleCat.{u + 1} A) X).map a).app N ≫
+    ((derivedTensor (ModuleCat.{u + 1} A) X).obj M').map b
+
+/-- The morphism type for the signed derived coefficient comparison.
+Source: blueprint supported tensor construction (blueprint: def-pur-supported-exterior-product). -/
+noncomputable def supportedCoefficientTensorDerivedHom
+    (A : Type (u + 1)) [CommRing A] {B X Y Z W : Scheme.{u}}
+    (f : X ⟶ B) (g : Y ⟶ B) (i : Z ⟶ X) (j : W ⟶ Y)
+    [IsClosedImmersion i] [IsClosedImmersion j] : Type (u + 2) :=
+  supportedSchemeDerivedHom (ModuleCat.{u + 1} A) (pullback f g)
+    (supportedCoefficients A (supportedProductImmersion f g i j))
+    (supportedFirstCoefficients A f g i) (supportedSecondCoefficients A f g j)
+
+/-- The complete normalization of the signed derived coefficient comparison.
+Source: blueprint supported tensor construction (blueprint: def-pur-supported-exterior-product). -/
+noncomputable def supportedCoefficientTensorDerivedCondition
+    (A : Type (u + 1)) [CommRing A] {B X Y Z W : Scheme.{u}}
+    (f : X ⟶ B) (g : Y ⟶ B) (i : Z ⟶ X) (j : W ⟶ Y)
+    [IsClosedImmersion i] [IsClosedImmersion j]
+    (t : supportedCoefficientTensorDerivedHom A f g i j) : Prop :=
+  supportedSchemeDerivedCondition (ModuleCat.{u + 1} A) (pullback f g)
+    (supportedCoefficients A (supportedProductImmersion f g i j))
+    (supportedFirstCoefficients A f g i) (supportedSecondCoefficients A f g j)
+    (supportedCoefficientTensorNatTrans A f g i j) t
+
+private theorem closedPushforward_flat
+    (A : Type (u + 1)) [CommRing A] {X Z : Scheme.{u}}
+    (i : Z ⟶ X) [IsClosedImmersion i]
+    (M : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} A))
+    (hM : ObjectProperty.flat M) :
+    ObjectProperty.flat ((lowerStar (ModuleCat.{u + 1} A) i).obj M) := by
+  let C := ModuleCat.{u + 1} A
+  let j := i.openComplement.ι
+  let F := (lowerStar C i).obj M
+  have hij : Set.range i.base = (Set.range j.base)ᶜ := by
+    simp [j, Scheme.Hom.coe_openComplement, Scheme.Opens.range_ι]
+  have hj : ObjectProperty.flat ((upperStar C j).obj F) :=
+    ObjectProperty.flat_of_isZero
+      (isZero_upperStar_lowerStar_of_disjoint_range C j i
+        (disjoint_range_of_range_eq_compl j i hij) M)
+  have hi : ObjectProperty.flat ((upperStar C i).obj F) :=
+    ObjectProperty.prop_of_iso ObjectProperty.flat
+      (asIso ((upperStarLowerStarAdjunction C i).counit.app M)).symm hM
+  apply (flat_iff_forall_flat_sheafFiber_obj F).2
+  intro Ω _ _ s
+  obtain ⟨t, ht, -⟩ | ⟨t, ht, -⟩ :=
+    existsUnique_fac_or_fac_of_range_eq_compl j i hij s
+  · subst ht
+    exact ObjectProperty.prop_of_iso ObjectProperty.flat
+      ((upperStarCompUliftSheafFiberIso C j t).app F)
+        ((flat_iff_forall_flat_sheafFiber_obj _).1 hj t)
+  · subst ht
+    exact ObjectProperty.prop_of_iso ObjectProperty.flat
+      ((upperStarCompUliftSheafFiberIso C i t).app F)
+        ((flat_iff_forall_flat_sheafFiber_obj _).1 hi t)
+
+private theorem coefficients_preserveFlat
+    (A : Type (u + 1)) [CommRing A] {X Z : Scheme.{u}}
+    (i : Z ⟶ X) [IsClosedImmersion i] : (supportedCoefficients A i).PreservesFlat := by
+  constructor
+  intro M hM
+  exact closedPushforward_flat A i _
+    (GrothendieckTopology.flat_presheafToSheaf_obj
+      (ModuleCat.{u + 1} A) Z.smallEtaleTopology _ (fun _ ↦ hM))
+
+/-- The coefficient comparison after localization, with its full complex-model
+normalization and naturality, rather than an unspecified isomorphism.
+Source: blueprint `def-pur-supported-exterior-product`, K-flat tensor derivation
+(blueprint: def-pur-supported-exterior-product).
+Proof: choose K-flat module complexes with flat terms. Closed supported coefficients
+and their projection inverse images preserve these properties: on a stalk their
+coefficient sheaves are A or zero, and tensor with each is exact. The signed total
+comparison above is an isomorphism on each stalk. Localize it and use the K-flat
+localization equivalence to descend it naturally in both variables. Its compatibility
+with the tensor localization counits is the displayed equation, also for other
+complexes by naturality. Every derived object is isomorphic to the localization of
+a K-flat model, and the localization tensor counits are isomorphisms on such models;
+therefore that equation and naturality determine the family uniquely. -/
+theorem exists_unique_supportedCoefficientTensorDerived
+    (A : Type (u + 1)) [CommRing A] {B X Y Z W : Scheme.{u}}
+    (f : X ⟶ B) (g : Y ⟶ B) (i : Z ⟶ X) (j : W ⟶ Y)
+    [IsClosedImmersion i] [IsClosedImmersion j] :
+    ∃! t : supportedCoefficientTensorDerivedHom A f g i j,
+      supportedCoefficientTensorDerivedCondition A f g i j t  := by
+  have : (supportedCoefficients A j).PreservesFlat := coefficients_preserveFlat A j
+  have : (supportedSecondCoefficients A f g j).IsLeftAdjoint :=
+    inferInstanceAs ((supportedCoefficients A j) ⋙
+      upperStar (ModuleCat.{u + 1} A) (pullback.snd f g)).IsLeftAdjoint
+  have : (supportedSecondCoefficients A f g j).PreservesFlat :=
+    ⟨fun h ↦ Functor.PreservesFlat.flat_obj (F := upperStar (ModuleCat.{u + 1} A)
+      (pullback.snd f g)) (Functor.PreservesFlat.flat_obj h)⟩
+  exact supportedSchemeDerived_unique (ModuleCat.{u + 1} A) (pullback f g)
+    (supportedCoefficients A (supportedProductImmersion f g i j))
+    (supportedFirstCoefficients A f g i) (supportedSecondCoefficients A f g j)
+    (supportedCoefficientTensorNatTrans A f g i j)
+
+/-- The derived coefficient comparison with its uniquely specified model normalization.
+Source: blueprint `def-pur-supported-exterior-product`
+(blueprint: def-pur-supported-exterior-product). -/
+noncomputable def supportedCoefficientTensorDerived
+    (A : Type (u + 1)) [CommRing A] {B X Y Z W : Scheme.{u}}
+    (f : X ⟶ B) (g : Y ⟶ B) (i : Z ⟶ X) (j : W ⟶ Y)
+    [IsClosedImmersion i] [IsClosedImmersion j]
+    (M N : DerivedCategory (ModuleCat.{u + 1} A)) :
+      (supportedCoefficients A (supportedProductImmersion f g i j)).mapDerivedCategory.obj
+          (M ⊗ N) ⟶
+        ((derivedTensor (ModuleCat.{u + 1} A) (pullback f g)).obj
+          ((supportedFirstCoefficients A f g i).mapDerivedCategory.obj M)).obj
+          ((supportedSecondCoefficients A f g j).mapDerivedCategory.obj N) :=
+  supportedSchemeDerivedApply (ModuleCat.{u + 1} A) (pullback f g)
+    (supportedCoefficients A (supportedProductImmersion f g i j))
+    (supportedFirstCoefficients A f g i) (supportedSecondCoefficients A f g j)
+    (exists_unique_supportedCoefficientTensorDerived A f g i j).choose M N
+
+/-- Pull back the supported evaluation counit along the first projection, retaining
+all exact-functor and total-derived pullback comparisons.
+Source: blueprint `def-pur-supported-exterior-product`, evaluation construction
+(blueprint: def-pur-supported-exterior-product). -/
+noncomputable def supportedFirstEvaluation
+    (A : Type (u + 1)) [CommRing A] {B X Y Z : Scheme.{u}}
+    (f : X ⟶ B) (g : Y ⟶ B) (i : Z ⟶ X) [IsClosedImmersion i]
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) :=
+  (Functor.mapDerivedCategoryCompIso (supportedCoefficients A i)
+      (upperStar (ModuleCat.{u + 1} A) (pullback.fst f g))).hom.app
+        ((supportedSectionsDerived A i).obj K) ≫
+    (upperStar (ModuleCat.{u + 1} A) (pullback.fst f g)).mapDerivedCategory.map
+      ((supportedCoefficientDerivedAdjunction A i).counit.app K) ≫
+    (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A)
+      (pullback.fst f g)).inv.app K
+
+/-- Pull back the supported evaluation counit along the second projection.
+Source: blueprint `def-pur-supported-exterior-product`, evaluation construction
+(blueprint: def-pur-supported-exterior-product). -/
+noncomputable def supportedSecondEvaluation
+    (A : Type (u + 1)) [CommRing A] {B X Y W : Scheme.{u}}
+    (f : X ⟶ B) (g : Y ⟶ B) (j : W ⟶ Y) [IsClosedImmersion j]
+    (L : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A))) :=
+  (Functor.mapDerivedCategoryCompIso (supportedCoefficients A j)
+      (upperStar (ModuleCat.{u + 1} A) (pullback.snd f g))).hom.app
+        ((supportedSectionsDerived A j).obj L) ≫
+    (upperStar (ModuleCat.{u + 1} A) (pullback.snd f g)).mapDerivedCategory.map
+      ((supportedCoefficientDerivedAdjunction A j).counit.app L) ≫
+    (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A)
+      (pullback.snd f g)).inv.app L
+
+/-- The supported exterior product: the adjoint of the coefficient tensor comparison
+followed by the tensor of the two supported evaluation counits.
+Source: blueprint `def-pur-supported-exterior-product`, supported-section construction
+(blueprint: def-pur-supported-exterior-product). The comparison is normalized on every
+cochain bidegree, so this is the actual supported section pairing. In the bounded-below
+case the total support functor agrees with injective support resolutions. -/
+noncomputable def supportedExteriorProduct
+    (A : Type (u + 1)) [CommRing A] {B X Y Z W : Scheme.{u}}
+    (f : X ⟶ B) (g : Y ⟶ B) (i : Z ⟶ X) (j : W ⟶ Y)
+    [IsClosedImmersion i] [IsClosedImmersion j]
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)))
+    (L : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A))) :
+    (supportedSectionsDerived A i).obj K ⊗ (supportedSectionsDerived A j).obj L ⟶
+      (supportedSectionsDerived A (supportedProductImmersion f g i j)).obj
+        (externalProduct (ModuleCat.{u + 1} A) f g K L) :=
+  (supportedCoefficientDerivedAdjunction A (supportedProductImmersion f g i j)).homEquiv _ _
+    (supportedCoefficientTensorDerived A f g i j
+        ((supportedSectionsDerived A i).obj K) ((supportedSectionsDerived A j).obj L) ≫
+      supportedDerivedTensorMap A (pullback f g)
+        (supportedFirstEvaluation A f g i K) (supportedSecondEvaluation A f g j L))
 
 end AbstractDerivedTensor
 

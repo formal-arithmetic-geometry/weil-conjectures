@@ -69,4 +69,38 @@ def x {S : Scheme.{u}} {F : S.Modules} (P : Presentation S F) (V : S.affineOpens
     (m : F.val.obj (op V.1)) : P.algebra.obj V :=
   P.equiv V (SymmetricAlgebra.ι _ _ (0, m))
 
+/-- D_+(t), formed from the canonical local Proj opens, over the affine basis of S.
+Source: Stacks Tags 01OA and 01NG (blueprint: def-amb-vector-projective-presentation-data). -/
+def chartOpen {S : Scheme.{u}} {F : S.Modules} (P : Presentation S F) :
+    P.algebra.relProj.Opens :=
+  ⨆ V : S.affineOpens,
+    (P.algebra.relProjι V).opensFunctor.obj (Proj.basicOpen (P.algebra.grading V) (t P V))
+
+/-- The whole affine open V, viewed as an affine open of its own scheme.
+Source: Stacks Tag 01OA (blueprint: def-amb-vector-projective-presentation-data). -/
+def affineTop {S : Scheme.{u}} (V : S.affineOpens) : V.1.toScheme.affineOpens :=
+  ⟨⊤, isAffineOpen_top V.1.toScheme⟩
+
+/-- The canonical local Proj embedding into the recorded relative projective space
+on an affine base. Its charts are RelativeProjectiveSpace.localChart.
+Source: Stacks Tags 01OA and 01NG (blueprint: def-amb-vector-projective-presentation-data). -/
+def projectiveChart {S : Scheme.{u}} (V : S.affineOpens) (d : ℕ) :
+    (RelativeProjectiveSpace.algebra V.1.toScheme d).localProj (affineTop V) ⟶
+      RelativeProjectiveSpace.scheme V.1.toScheme d :=
+  ((RelativeProjectiveSpace.construction V.1.toScheme d).restrictionIso (affineTop V)).inv ≫
+    (RelativeProjectiveSpace.π V.1.toScheme d ⁻¹ᵁ ⊤).ι
+
+/-- The local map from Spec Sym(F(V)) to the completion, induced by dehomogenization,
+then the recorded homogeneous-localization Proj chart and the relative Proj embedding.
+Source: Stacks Tag 01NG (blueprint: def-amb-vector-projective-presentation-data). -/
+def chartMap {S : Scheme.{u}} {F : S.Modules} (P : Presentation S F)
+    (ht : ∀ V : S.affineOpens, t P V ∈ P.algebra.grading V 1)
+    (a : ∀ V : S.affineOpens, SymmetricAlgebraSheaf.sections F (op V.1) ≃+*
+      HomogeneousLocalization.Away (P.algebra.grading V) (t P V))
+    (V : S.affineOpens) :
+    Spec (.of (SymmetricAlgebraSheaf.sections F (op V.1))) ⟶ P.algebra.relProj :=
+  Spec.map (CommRingCat.ofHom (a V).symm.toRingHom) ≫
+    Proj.awayι (P.algebra.grading V) (t P V) (ht V) Nat.one_pos ≫
+      P.algebra.relProjι V
+
 end AlgebraicGeometry.VectorProjectiveCompletion

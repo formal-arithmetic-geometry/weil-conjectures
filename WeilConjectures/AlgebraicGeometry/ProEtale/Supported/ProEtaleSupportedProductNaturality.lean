@@ -63,6 +63,30 @@ private def bifunctorMap {D : Type*} [Category D] (T : D ⥤ D ⥤ D)
     (T.obj U).obj V ⟶ (T.obj U').obj V' :=
   (T.map a).app V ≫ (T.obj U').map b
 
+private theorem bifunctorMap_comp {D : Type*} [Category D] (T : D ⥤ D ⥤ D)
+    {U U' U'' V V' V'' : D} (a : U ⟶ U') (b : V ⟶ V')
+    (a' : U' ⟶ U'') (b' : V' ⟶ V'') :
+    bifunctorMap T a b ≫ bifunctorMap T a' b' = bifunctorMap T (a ≫ a') (b ≫ b') := by
+  simp only [bifunctorMap, Category.assoc, Functor.map_comp, NatTrans.comp_app]
+  rw [(T.map a').naturality_assoc b]
+
+private theorem adjunct_bifunctor_pairing_natural
+    {C D : Type*} [Category C] [Category D] [MonoidalCategory C]
+    {F : C ⥤ D} {R : D ⥤ C} (adj : F ⊣ R) (T : D ⥤ D ⥤ D)
+    {M M' N N' : C} {U U' V V' P P' Q Q' : D}
+    (a : M ⟶ M') (b : N ⟶ N') (x : U ⟶ U') (y : V ⟶ V')
+    (t : F.obj (M ⊗ N) ⟶ (T.obj U).obj V)
+    (t' : F.obj (M' ⊗ N') ⟶ (T.obj U').obj V')
+    (v : U ⟶ P) (v' : U' ⟶ P') (w : V ⟶ Q) (w' : V' ⟶ Q')
+    (p : P ⟶ P') (q : Q ⟶ Q')
+    (ht : F.map (a ⊗ₘ b) ≫ t' = t ≫ bifunctorMap T x y)
+    (hv : x ≫ v' = v ≫ p) (hw : y ≫ w' = w ≫ q) :
+    (a ⊗ₘ b) ≫ adj.homEquiv _ _ (t' ≫ bifunctorMap T v' w') =
+      adj.homEquiv _ _ (t ≫ bifunctorMap T v w) ≫ R.map (bifunctorMap T p q) := by
+  apply adj.homEquiv_naturality_left_square
+  rw [← Category.assoc, ht, Category.assoc, bifunctorMap_comp, hv, hw,
+    ← bifunctorMap_comp, ← Category.assoc]
+
 private theorem castFamily_natural
     {C D : Type*} [Category C] [Category D] [MonoidalCategory C] [MonoidalCategory D]
     (G F₁ F₂ : C ⥤ D) (T : D ⥤ D ⥤ D) (hT : T = curriedTensor D)
@@ -145,5 +169,111 @@ private theorem comparison_natural (A : Type (u + 1)) [CommRing A] [Finite A]
     (derivedTensor (ModuleCat.{u + 1} A) (pullback f g))
     (tensorFunctor_eq A (pullback f g))
     (supportedCoefficientTensorDerivedHom_tensor A f g i j) a b
+
+private theorem adjunct_pairing_isIso_of_iso
+    {C D : Type*} [Category C] [Category D] [MonoidalCategory C]
+    {F : C ⥤ D} {R : D ⥤ C} (adj : F ⊣ R) (T : D ⥤ D ⥤ D)
+    {M M' N N' : C} {U U' V V' P P' Q Q' : D}
+    (a : M ⟶ M') (b : N ⟶ N') [IsIso a] [IsIso b]
+    (x : U ⟶ U') (y : V ⟶ V')
+    (t : F.obj (M ⊗ N) ⟶ (T.obj U).obj V)
+    (t' : F.obj (M' ⊗ N') ⟶ (T.obj U').obj V')
+    (v : U ⟶ P) (v' : U' ⟶ P') (w : V ⟶ Q) (w' : V' ⟶ Q')
+    (p : P ⟶ P') (q : Q ⟶ Q') [IsIso p] [IsIso q]
+    (ht : F.map (a ⊗ₘ b) ≫ t' = t ≫ bifunctorMap T x y)
+    (hv : x ≫ v' = v ≫ p) (hw : y ≫ w' = w ≫ q)
+    (hκ : IsIso (adj.homEquiv _ _ (t ≫ bifunctorMap T v w))) :
+    IsIso (adj.homEquiv _ _ (t' ≫ bifunctorMap T v' w')) := by
+  have hn := adjunct_bifunctor_pairing_natural adj T a b x y t t' v v' w w' p q ht hv hw
+  have := hκ
+  have : IsIso (bifunctorMap T p q) := by unfold bifunctorMap; infer_instance
+  have : IsIso ((a ⊗ₘ b) ≫ adj.homEquiv _ _ (t' ≫ bifunctorMap T v' w')) := by
+    rw [hn]
+    infer_instance
+  exact IsIso.of_isIso_comp_left (a ⊗ₘ b)
+    (adj.homEquiv _ _ (t' ≫ bifunctorMap T v' w'))
+
+private theorem firstEvaluation_natural (A : Type (u + 1)) [CommRing A] [Finite A]
+    {S X Y B : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S) (b : B ⟶ X)
+    [IsClosedImmersion b] [IsLocallyNoetherian X]
+    {K K' : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A))}
+    (a : K ⟶ K') :
+    (supportedFirstCoefficients A f g b).mapDerivedCategory.map
+        ((supportedSectionsDerived A b).map a) ≫ supportedFirstEvaluation A f g b K' =
+      supportedFirstEvaluation A f g b K ≫
+        (upperStar (ModuleCat.{u + 1} A) (pullback.fst f g)).leftDerivedFunctor.map a := by
+  exact evaluation_natural (supportedCoefficients A b).mapDerivedCategory
+    (supportedSectionsDerived A b)
+    (upperStar (ModuleCat.{u + 1} A) (pullback.fst f g)).mapDerivedCategory
+    (upperStar (ModuleCat.{u + 1} A) (pullback.fst f g)).leftDerivedFunctor
+    (supportedFirstCoefficients A f g b).mapDerivedCategory
+    (Functor.mapDerivedCategoryCompIso (supportedCoefficients A b)
+      (upperStar (ModuleCat.{u + 1} A) (pullback.fst f g)))
+    (supportedCoefficientDerivedAdjunction A b).counit
+    (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) (pullback.fst f g)) a
+
+private theorem secondEvaluation_natural (A : Type (u + 1)) [CommRing A] [Finite A]
+    {S X Y D : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S) (d : D ⟶ Y)
+    [IsClosedImmersion d] [IsLocallyNoetherian Y]
+    {L L' : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} A))}
+    (e : L ⟶ L') :
+    (supportedSecondCoefficients A f g d).mapDerivedCategory.map
+        ((supportedSectionsDerived A d).map e) ≫ supportedSecondEvaluation A f g d L' =
+      supportedSecondEvaluation A f g d L ≫
+        (upperStar (ModuleCat.{u + 1} A) (pullback.snd f g)).leftDerivedFunctor.map e := by
+  exact evaluation_natural (supportedCoefficients A d).mapDerivedCategory
+    (supportedSectionsDerived A d)
+    (upperStar (ModuleCat.{u + 1} A) (pullback.snd f g)).mapDerivedCategory
+    (upperStar (ModuleCat.{u + 1} A) (pullback.snd f g)).leftDerivedFunctor
+    (supportedSecondCoefficients A f g d).mapDerivedCategory
+    (Functor.mapDerivedCategoryCompIso (supportedCoefficients A d)
+      (upperStar (ModuleCat.{u + 1} A) (pullback.snd f g)))
+    (supportedCoefficientDerivedAdjunction A d).counit
+    (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) (pullback.snd f g)) e
+
+/-- Invertibility of the actual pairing is unchanged by specified isomorphisms of
+its coefficient objects. Source: blueprint witness-transport paragraph
+(blueprint: lem-pur-proetale-supported-product-naturality).
+
+Proof: naturality of the derived coefficient comparison and of the two evaluation
+counits gives a commutative square of their tensor composites. Transposing the square
+under the normalized coefficient adjunction gives the square for supported sections.
+Its vertical arrows are the tensor of the supported-section images of the given
+isomorphisms and the supported-section image of their external tensor. All are
+isomorphisms. Cancel them to transfer invertibility. The final definitional transport
+from the explicit tensor presentation to the external product is also an isomorphism.
+-/
+theorem isIso_supportedExteriorProduct_of_iso
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {S X Y Z W : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S) (i : Z ⟶ X) (j : W ⟶ Y)
+    [IsClosedImmersion i] [IsClosedImmersion j]
+    [IsLocallyNoetherian X] [IsLocallyNoetherian Y] [IsLocallyNoetherian (pullback f g)]
+    {K K' : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A))}
+    {L L' : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} A))}
+    (eK : K ≅ K') (eL : L ≅ L')
+    (hκ : IsIso (supportedExteriorProduct A f g i j K L)) :
+    IsIso (supportedExteriorProduct A f g i j K' L') := by
+  unfold supportedExteriorProduct at hκ ⊢
+  have := hκ
+  have hraw : IsIso
+      ((supportedCoefficientDerivedAdjunction A
+        (Etale.supportedProductImmersion f g i j)).homEquiv _ _
+        (supportedCoefficientTensorDerived A f g i j
+            ((supportedSectionsDerived A i).obj K) ((supportedSectionsDerived A j).obj L) ≫
+          supportedDerivedTensorMap A (pullback f g)
+            (supportedFirstEvaluation A f g i K) (supportedSecondEvaluation A f g j L))) := by
+    exact IsIso.of_isIso_comp_right _
+      ((supportedSectionsDerived A (Etale.supportedProductImmersion f g i j)).map
+        (eqToHom (supportedExternalProduct_eq A f g K L)))
+  apply IsIso.comp_isIso'
+  · exact adjunct_pairing_isIso_of_iso
+      (supportedCoefficientDerivedAdjunction A (Etale.supportedProductImmersion f g i j))
+      (derivedTensor (ModuleCat.{u + 1} A) (pullback f g))
+      ((supportedSectionsDerived A i).map eK.hom)
+      ((supportedSectionsDerived A j).map eL.hom)
+      _ _ _ _ _ _ _ _ _ _
+      (comparison_natural A f g i j _ _)
+      (firstEvaluation_natural A f g i eK.hom) (secondEvaluation_natural A f g j eL.hom) hraw
+  · infer_instance
 
 end AlgebraicGeometry.ProEtale

@@ -35,3 +35,23 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 namespace AlgebraicGeometry.ProEtale
 
 end AlgebraicGeometry.ProEtale
+
+namespace AlgebraicGeometry.ProEtale
+
+/-- Final-object module evaluation in a universe containing site and coefficients.
+Source: Stacks 03CW (blueprint: lem-weil-point-proetale-sections-exact). -/
+abbrev pointModuleSectionsOfUniverses (k : Type t) [Field k]
+    (A : Sheaf (Scheme.ProEt.topology (Spec (.of k))) CommRingCat.{max u (t + 1)}) :
+    ringedSiteModules.{max u (t + 1)}
+        ((sheafCompose (Scheme.ProEt.topology (Spec (.of k)))
+          (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj A) ⥤
+      ModuleCat.{max u (t + 1)}
+        (((sheafCompose (Scheme.ProEt.topology (Spec (.of k)))
+          (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj A).obj.obj
+            (op (Scheme.ProEt.mk (𝟙 (Spec (.of k)))))) :=
+  SheafOfModules.forget.{max u (t + 1)}
+      ((sheafCompose (Scheme.ProEt.topology (Spec (.of k)))
+        (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj A) ⋙
+    PresheafOfModules.evaluation _ (op (Scheme.ProEt.mk (𝟙 (Spec (.of k)))))
+
+end AlgebraicGeometry.ProEtale

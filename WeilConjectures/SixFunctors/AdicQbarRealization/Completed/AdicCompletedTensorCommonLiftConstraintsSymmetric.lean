@@ -46,6 +46,20 @@ natural tensor isomorphism. Naturality does not imply symmetry: the private grad
 example above is a counterexample to that inference. The explicit component equation
 below restricts the law to the constructed comparison, and its existing constructor
 supplies this equation without assuming a coherence law. -/
+
+private structure Line where
+  degree : ℤ
+
+private structure Hom (A B : Line) where
+  degree_eq : A.degree = B.degree
+  scalar : ℚ
+
+private theorem hom_ext {A B : Line} (f g : Hom A B) (h : f.scalar = g.scalar) : f = g := by
+  cases f
+  cases g
+  cases h
+  rfl
+
 /-- The symmetry component for the explicitly normalized common-stage tensorator.
 Source: BS Remark 6.8.15; HRS Lemma 7.9.
 

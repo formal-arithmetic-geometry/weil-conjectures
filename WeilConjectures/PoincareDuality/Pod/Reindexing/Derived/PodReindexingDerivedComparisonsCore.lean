@@ -228,13 +228,17 @@ theorem podReindexingDerivedComparisonsCore
   obtain ⟨α, hUnit₀⟩ := podReindexingDerivedCoreData_unit
     l E g SY SX S hS β hβ htransition CY CX Q₂
   let Q₃ : PodReindexingDerivedCoreData l E g := { Q₂ with reduction := α }
-  obtain ⟨restriction, hReduction⟩ := podReindexingDerivedCoreData_reductionEvaluation
-    l E g SY SX S hS β hβ htransition CY CX Q₃
-  let Q : PodReindexingDerivedCoreData l E g := { Q₃ with restriction := restriction }
-  have hProjection := podReindexingDerivedCoreData_limitProjection
-    l E g SY SX S hS β hβ htransition CY CX Q
+  have hFinite₃ : PodCompletionReindex.FiniteModel l E g
+      (Q₃.assemble l E g SY SX S β CY CX) := hFinite
+  have hLimit₃ : PodCompletionReindex.LimitModel l E g
+      (Q₃.assemble l E g SY SX S β CY CX) := hLimit
+  obtain ⟨evaluation, restriction, hProjection, hReduction⟩ :=
+    podReindexingDerivedCoreData_limitProjection
+      l E g SY SX S hS β hβ htransition CY CX Q₃ hFinite₃ hLimit₃
+  let Q : PodReindexingDerivedCoreData l E g :=
+    { Q₃ with evaluation := evaluation, restriction := restriction }
   have hUnit : PodCompletionReindex.Unit l E g (Q.assemble l E g SY SX S β CY CX) := hUnit₀
-  have hReduction' := hReduction hUnit hProjection
+  have hReduction' := hReduction hUnit
   let R : PodReindexingDerivedData l E g :=
     { reduction := Q.reduction
       limit := Q.limit

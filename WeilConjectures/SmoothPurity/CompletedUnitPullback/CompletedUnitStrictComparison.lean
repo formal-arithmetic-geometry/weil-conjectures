@@ -70,7 +70,7 @@ theorem completedUnitStrictComparison (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p
             (b n).hom =
         (S.reductionEvaluation n).hom.app (integralConstantCoefficientObject l E W) ≫
           constantCoefficientReductionMap l E W n := by
-  obtain ⟨d, hd⟩ := regularLimitComparisonData l E D hl W b hb
+  obtain ⟨d, hd⟩ := regularLimitComparisonData_legacy l E D hl W b hb
   exact adjunctionComparison l E W S b hb d hd
 
 end WeilConjectures.CompletedUnitPullback

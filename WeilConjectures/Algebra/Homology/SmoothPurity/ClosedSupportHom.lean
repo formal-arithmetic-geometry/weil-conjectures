@@ -117,6 +117,27 @@ lemma closedConeLift_quasiIso
   have := hqκ
   infer_instance
 
+/-- The canonical closed-support construction and its normalization.
+Source: Stacks, Tags 0A45, 095L (blueprint: lem-amb-closed-support-hom). -/
+lemma closedConeLift_naturality
+    {C : Type u} [Category.{v} C] [Abelian C]
+    {S P Q S' P' Q' : CochainComplex C ℤ}
+    (q : P ⟶ Q) (q' : P' ⟶ Q') (a : S ⟶ P) (a' : S' ⟶ P')
+    (ha : a ≫ q = 0) (ha' : a' ≫ q' = 0)
+    (s : S ⟶ S') (p : P ⟶ P') (b : Q ⟶ Q')
+    (hs : s ≫ a' = a ≫ p) (hp : p ≫ q' = q ≫ b) :
+    s ≫ closedConeLift q' a' ha' = closedConeLift q a ha ≫
+      (mappingCone.map q q' p b hp.symm)⟦(-1 : ℤ)⟧' := by
+  ext n
+  dsimp only [comp_f, closedConeLift, shiftFunctor_map_f]
+  rw [← Category.assoc, ← comp_f, hs, comp_f, Category.assoc]
+  rw [Category.assoc]
+  apply congrArg (fun t ↦ a.f n ≫ t)
+  change p.f n ≫ (mappingCone.inl q').v n (n + -1) rfl =
+    (mappingCone.inl q).v n (n + -1) rfl ≫
+      (mappingCone.map q q' p b hp.symm).f (n + -1)
+  simp [mappingCone.map]
+
 end CochainComplex
 
 namespace CategoryTheory.Functor

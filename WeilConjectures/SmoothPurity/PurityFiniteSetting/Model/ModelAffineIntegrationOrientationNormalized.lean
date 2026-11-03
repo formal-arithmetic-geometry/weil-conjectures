@@ -45,3 +45,15 @@ end WeilConjectures.PurityFiniteSetting
 
 namespace WeilConjectures.PurityFiniteSetting
 end WeilConjectures.PurityFiniteSetting
+
+namespace WeilConjectures.PurityFiniteSetting
+
+/-- The inverse diagonal orientation on each fixed finite-coordinate affine projection.
+Source: composition proof, affine model normalization.
+(blueprint: lem-pur-model-affine-integration-orientation-normalized). -/
+def modelAffineCanonicalGamma (P : PurityFiniteSetting.{u}) : P.ModelAffineGamma :=
+  fun B _ aB _ _ r ↦ by
+    letI := DiagonalPasting.affineDimension r B
+    exact (P.diagonalDualizingObject r (DiagonalPasting.pr r B) aB).symm
+
+end WeilConjectures.PurityFiniteSetting

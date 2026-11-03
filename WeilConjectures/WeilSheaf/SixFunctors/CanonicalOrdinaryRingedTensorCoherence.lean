@@ -13,6 +13,7 @@ import WeilConjectures.WeilSheaf.Ordinary.OrdinaryRingedTensorTermwiseComparison
 import WeilConjectures.WeilSheaf.Ordinary.OrdinaryRelativeTensorIdentification
 import all WeilConjectures.CategoryTheory.RingedForgetTensorTransposition.RingedForgetTensorChainAssociativity
 import all Mathlib.CategoryTheory.Limits.HasLimits
+public import WeilConjectures.WeilSheaf.Native.Weil.Tensor.CanonicalOrdinaryTensorSymmetry
 
 /-! # Coherence of the canonical ordinary section-module comparison -/
 
@@ -141,7 +142,17 @@ private theorem ordinary_coherence_of_inverse_associativity
             E.functor.map (α_ P Q N).hom =
           (α_ (E.functor.obj P) (E.functor.obj Q) (E.functor.obj N)).hom ≫
             (E.functor.obj P ◁ ν.inv.app (Q, N)) ≫ ν.inv.app (P, Q ⊗ N)) →
-      OrdinaryRingedTensorCoherence l Y J R E H := by
+      ∀ (κ : ∀ P Q : CochainComplex (ProEtale.AdicSheaf l Y) ℤ,
+          ordinaryTensorTotal l Y P Q ≅ Q ⊗ P),
+        (∀ (P Q : CochainComplex (ProEtale.AdicSheaf l Y) ℤ)
+          (p q n : ℤ) (hpq : p + q = n) (hqp : q + p = n),
+          Mod.tensorπ (Q.X q) (P.X p) ≫
+              (HomologicalComplex.ιMapBifunctor P Q (ordinaryTensorBifunctor l Y)
+                (.up ℤ) p q n hpq).hom ≫ ((κ P Q).hom.f n).hom =
+            (p * q).negOnePow • (Mod.tensorObjπ (Q.X q) (P.X p) ≫
+              (HomologicalComplex.ιTensorObj Q P q p n hqp).hom)) →
+        ∀ d : OrdinaryRingedTensorUnderivedData l Y J R E H,
+          Nonempty (OrdinaryRingedTensorChainComparison l Y J R E H κ d) := by
   let _ := SheafOfModules.isMonoidal_W_independentCoefficients R
   let _ := SheafOfModules.monoidalCategory R
   intro hassoc κ hκ d

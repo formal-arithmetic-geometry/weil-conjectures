@@ -44,6 +44,37 @@ variable (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
 /- The former statement asserted this law for an arbitrary tensorator. The
 normalization below fixes the actual common-field comparison; its existence is
 proved by completed_tensor_common_lift_normalized_tensor_unit. -/
+
+private structure Line where
+  degree : ℤ
+
+private structure Hom (A B : Line) where
+  degree_eq : A.degree = B.degree
+  scalar : ℚ
+
+private theorem hom_ext {A B : Line} (f g : Hom A B) (h : f.scalar = g.scalar) : f = g := by
+  cases f
+  cases g
+  cases h
+  rfl
+
+private def tensor : Line × Line ⥤ Line where
+  obj P := ⟨P.1.degree + P.2.degree⟩
+  map f := ⟨congrArg₂ (· + ·) f.1.degree_eq f.2.degree_eq, f.1.scalar * f.2.scalar⟩
+  map_id _ := hom_ext _ _ (one_mul 1)
+  map_comp f g := by
+    apply hom_ext
+    change (f.1.scalar * g.1.scalar) * (f.2.scalar * g.2.scalar) =
+      (f.1.scalar * f.2.scalar) * (g.1.scalar * g.2.scalar)
+    ring
+
+private def associator (A B C : Line) :
+    tensor.obj (tensor.obj (A, B), C) ≅ tensor.obj (A, tensor.obj (B, C)) where
+  hom := ⟨add_assoc A.degree B.degree C.degree, 1⟩
+  inv := ⟨(add_assoc A.degree B.degree C.degree).symm, 1⟩
+  hom_inv_id := hom_ext _ _ (one_mul 1)
+  inv_hom_id := hom_ext _ _ (one_mul 1)
+
 /-- The associativity component of the common-stage constraint system.
 The tensorator is explicitly required to have the constructed common-field
 components; an arbitrary natural isomorphism does not determine this equation.

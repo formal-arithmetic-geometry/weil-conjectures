@@ -148,8 +148,13 @@ theorem section_normalized_specialization (P : PurityFiniteSetting.{u})
   classical
   refine ⟨?_, ?_, ?_⟩
   · intro B aB _ _ _ d X' X a
-    obtain ⟨⟨κ, hκ, hδ⟩, _⟩ := section_constant_trivialization P aB X
-    obtain ⟨⟨κ', hκ', hδ'⟩, hfaith⟩ := section_constant_trivialization P aB X'
+    let κ := (section_constant_trivialization P aB X).1.choose
+    have hκ := (section_constant_trivialization P aB X).1.choose_spec.1
+    have hδ := (section_constant_trivialization P aB X).1.choose_spec.2
+    let κ' := (section_constant_trivialization P aB X').1.choose
+    have hκ' := (section_constant_trivialization P aB X').1.choose_spec.1
+    have hδ' := (section_constant_trivialization P aB X').1.choose_spec.2
+    have hfaith := (section_constant_trivialization P aB X').2
     rw [hδ', hδ]
     exact normalized_readings_square _ _ _
       (lineCounit P B _ (AffineSpace.oneSection_comp_over _ B))
@@ -158,13 +163,18 @@ theorem section_normalized_specialization (P : PurityFiniteSetting.{u})
       (restriction P aB (normalEtaleMap P aB a)) hκ hκ' hfaith
       (hE B aB d X' X a).1 (hE B aB d X' X a).2
   · intro B B₀ aB _ _ _ aB₀ _ _ _ b hb d X X₀ sq
-    obtain ⟨⟨κ, hκ, hδ⟩, _⟩ := section_constant_trivialization P aB X
-    obtain ⟨⟨κ₀, hκ₀, hδ₀⟩, hfaith⟩ := section_constant_trivialization P aB₀ X₀
+    let κ := (section_constant_trivialization P aB X).1.choose
+    have hκ := (section_constant_trivialization P aB X).1.choose_spec.1
+    have hδ := (section_constant_trivialization P aB X).1.choose_spec.2
+    let κ₀ := (section_constant_trivialization P aB₀ X₀).1.choose
+    have hκ₀ := (section_constant_trivialization P aB₀ X₀).1.choose_spec.1
+    have hδ₀ := (section_constant_trivialization P aB₀ X₀).1.choose_spec.2
+    have hfaith := (section_constant_trivialization P aB₀ X₀).2
     let T := baseComparison P ((AffineSpace (ULift.{u} (Fin 1)) B ↘ B) ≫ aB)
       ((AffineSpace (ULift.{u} (Fin 1)) B₀ ↘ B₀) ≫ aB₀) (familyBaseChange P aB aB₀ sq)
     have hread := constant_family_base_change P b _ _ _ _ κ κ₀ T
       (baseComparison P aB aB₀ sq) hfaith (by
-        simpa only [← Iso.trans_assoc, hκ, hκ₀] using (hB B B₀ aB aB₀ b hb d X X₀ sq).1)
+        simpa only [κ, κ₀, Iso.trans_assoc, hκ, hκ₀] using (hB B B₀ aB aB₀ b hb d X X₀ sq).1)
     rw [hδ, hδ₀, Functor.mapIso_trans, Functor.mapIso_symm]
     exact ratio_square _ _ _ _
       (endpointPull P b _ _ (AffineSpace.zeroSection_comp_map b)
@@ -174,8 +184,10 @@ theorem section_normalized_specialization (P : PurityFiniteSetting.{u})
       _ _ (by simpa only [Iso.trans_assoc] using hread.symm)
       (by simpa only [Iso.trans_assoc] using (hB B B₀ aB aB₀ b hb d X X₀ sq).2)
   · intro B aB _ _ _
-    obtain ⟨⟨κ, hκ, hδ⟩, hfaith⟩ :=
-      section_constant_trivialization P aB (standardZero B)
+    let κ := (section_constant_trivialization P aB (standardZero B)).1.choose
+    have hκ := (section_constant_trivialization P aB (standardZero B)).1.choose_spec.1
+    have hδ := (section_constant_trivialization P aB (standardZero B)).1.choose_spec.2
+    have hfaith := (section_constant_trivialization P aB (standardZero B)).2
     obtain ⟨κ₀, h₁, h₀⟩ := rank_zero_family_readings P aB
     have he : κ = κ₀ := by
       apply hfaith
@@ -184,6 +196,7 @@ theorem section_normalized_specialization (P : PurityFiniteSetting.{u})
         (fun e ↦ e ≪≫
           ((lineCounit P B _ (AffineSpace.oneSection_comp_over _ B)).app _).symm) h
       simpa only [Iso.trans_assoc, Iso.self_symm_id, Iso.trans_refl] using h'
+    dsimp only [κ] at he
     rw [hδ, he, h₀]
     simp only [Iso.trans_symm, Iso.trans_assoc, Iso.symm_self_id, Iso.refl_trans]
 

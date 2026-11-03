@@ -24,6 +24,21 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
   [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})
 
+private theorem finiteHomSiteInverseMate_app
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    {F : A ⥤ B} {R : B ⥤ A} {G : C ⥤ D} {S : D ⥤ C}
+    (a : F ⊣ R) (b : G ⊣ S) {U : A ⥤ C} {V : B ⥤ D}
+    (ρ : R ⋙ U ⟶ V ⋙ S) (T : A) :
+    (((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ ρ)).natTrans).app T =
+      G.map (U.map (a.unit.app T)) ≫ G.map (ρ.app (F.obj T)) ≫
+        b.counit.app (V.obj (F.obj T)) := by
+  simp only [mateEquiv_symm_apply, TwoSquare.mk, TwoSquare.natTrans,
+    NatTrans.comp_app, Functor.leftUnitor_inv_app, Functor.rightUnitor_hom_app,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    Functor.associator_hom_app, Functor.associator_inv_app,
+    Functor.comp_obj, Functor.comp_map, Functor.id_obj, G.map_id,
+    Category.id_comp, Category.comp_id]
+
 /-- The inverse mate is the prescribed unit--inverse-restriction--counit composite.
 Source: blueprint thm-coef-finite-hom, final site-comparison sentence; Stacks 00YV
 (blueprint: def-sf-finite-coefficient-site-scalar-arrow).
@@ -46,6 +61,10 @@ theorem finiteHomSiteBeta_app {n m : ℕ} (h : m ≤ n) (T : finiteHomEtale l E 
       ((coefficientDerivedSystemEvaluationCalculus l E X).choose.quotientCalculus.adjunction
         h).counit.app ((finiteHomNu l E X m).obj
           ((finiteHomEtaleReduction l E X h).obj T)) := by
-  sorry
+  exact finiteHomSiteInverseMate_app
+    (Adjunction.ofIsRightAdjoint
+      (Sheaf.derivedRestrictScalars X.smallEtaleTopology (finiteHomQuotient l E h)))
+    ((coefficientDerivedSystemEvaluationCalculus l E X).choose.quotientCalculus.adjunction h)
+    (finiteHomNuDerivedRestriction l E X h).inv T
 
 end WeilConjectures

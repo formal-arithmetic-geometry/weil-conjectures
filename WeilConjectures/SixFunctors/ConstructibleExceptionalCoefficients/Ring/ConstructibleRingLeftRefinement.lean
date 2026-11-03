@@ -89,7 +89,12 @@ theorem exists_ring_left_refinement
         letI := (R.operation d (s.stage l)).leftShift
         (α s).hom.CommShift ℤ,
       (∀ s, RingRefinementNormalized.{u, v} l Ω r s (R.left c s) (R.left d s)
-        (refinementComparisonOfLeft.{u, v} l Ω _ _ (α s) (hα s))) ∧
+        (let q := refinementComparisonOfLeft
+            (R.operation c (s.stage l)).adjunction (R.operation d (s.stage l)).adjunction
+            (α s) (hα s)
+            (R.operation c (s.stage l)).unitShift (R.operation d (s.stage l)).counitShift;
+          { left := q.left, right := q.right, counit := q.counit, unit := q.unit,
+            leftShift := q.leftShift, rightShift := q.rightShift })) ∧
     ∀ (E L : FieldStage.{max u v} l) (i : E.carrier →ₐ[Padic l] L.carrier)
       (K : C.{u, v} l Ω X (.integral E)),
       let a := PurCompactSupport.completedChange l E.carrier L.carrier i

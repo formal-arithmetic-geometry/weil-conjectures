@@ -128,6 +128,98 @@ def pullSection {b : SpTowerShriek.Base l E} {o : SpTowerShriek.Operations l E b
       (SpTowerClasses.adjointSection l E (o.geometry e) a.ordinary.hom n U
         ((wT.level n d).inv.val.app U x))
 
+/-- The canonical component for one further ordered coordinate. It pulls the old
+line first, moves its even shift, reassociates the actual derived tensor, multiplies
+Tate factors and adds the shifts. Source: Local pairs, ordered iteration
+(blueprint: def-sp-coordinate-right-comparisons). -/
+def stepComponent (b : SpTowerShriek.Base l E) (o : SpTowerShriek.Operations l E b)
+    {k : Type u} [Field k] (w : TwistFamily l E k) (Y : Scheme.{u})
+    [Y.Over (Spec (.of k))] (d : ℕ)
+    (a : PullTwist l E b o (AffineSpace PUnit.{u + 1} (space Y d) ↘ space Y d)
+      (proj Y d) (w (space Y d)) (w (space Y (d + 1))) d)
+    (mu : Products l E b (w (space Y (d + 1))))
+    (sh : TensorShifts l E b (space Y (d + 1))) (K : SpTowerShriek.D l E Y) :
+    ((projectionRight l E b o (proj Y d) (w (space Y d)) d ⋙
+      projectionRight l E b o (AffineSpace PUnit.{u + 1} (space Y d) ↘ space Y d)
+        (w (space Y (d + 1))) 1).obj K) ≅
+    (projectionRight l E b o (proj Y (d + 1)) (w (space Y (d + 1))) (d + 1)).obj K :=
+  (shiftFunctor _ (2 : ℤ)).mapIso
+    ((SpTowerShriek.tensor l E b (space Y (d + 1))).mapIso
+      (Iso.prod (a.comparison.app K) (Iso.refl _)) ≪≫
+      sh.first _ _ (2 * (d : ℤ)) ≪≫
+      (shiftFunctor _ (2 * (d : ℤ))).mapIso
+        ((b.calculus (space Y (d + 1))).closed.monoidal.associator _ _ _ ≪≫
+          (SpTowerShriek.tensor l E b (space Y (d + 1))).mapIso
+            (Iso.prod ((o.comp
+              (AffineSpace PUnit.{u + 1} (space Y d) ↘ space Y d)
+              (proj Y d)).app K) (mu.derived d 1)))) ≪≫
+    (shiftFunctorAdd' _ (2 * (d : ℤ)) 2 (2 * ((d + 1 : ℕ) : ℤ)) (by omega)).symm.app _
+
+/-- Equality transport of the normalized projective right functor into the common
+calculus. Source: affine-line factor (blueprint: def-sp-coordinate-right-comparisons). -/
+def projectiveTensor {b : SpTowerShriek.Base l E}
+    {o : SpTowerShriek.Operations l E b} {S : Scheme.{u}}
+    (t : ProjectivePresentation l E b o S) :
+    t.presentation.G l E ≅
+      SpTowerShriek.pull l E b (o.geometry (ProjectiveLine S ↘ S)) ⋙
+        Prod.sectL (SpTowerShriek.D l E (ProjectiveLine S))
+          ((SpTowerClasses.line l E t.presentation.classes.chernP)⟦(2 : ℤ)⟧) ⋙
+          SpTowerShriek.tensor l E b (ProjectiveLine S) := by
+  rcases t with ⟨hinv, p, hb, ho, m, a⟩
+  cases hb
+  cases ho
+  exact Iso.refl _
+
+/-- Restriction of the normalized projective-line Tate line to the affine chart.
+The finite root formula fixes the scalar and makes this an actual tower comparison.
+Source: affine-line factor (blueprint: def-sp-coordinate-right-comparisons). -/
+structure AffineRestriction {b : SpTowerShriek.Base l E}
+    {o : SpTowerShriek.Operations l E b} {S : Scheme.{u}}
+    (t : ProjectivePresentation l E b o S)
+    (wA : SpChartAdmissibility.Twists l E (AffineSpace PUnit.{u + 1} S))
+    (roots : RootLines l E (AffineSpace PUnit.{u + 1} S))
+    (sh : TensorShifts l E b (AffineSpace PUnit.{u + 1} S)) where
+  ordinary : (o.geometry (ProjectiveLine.affineChart S)).pull.obj
+    (SpTowerClasses.lineModule l E t.presentation.classes.chernP) ≅ wA.tower 1
+  ordinary_normalized : ∀ (n : ℕ) (U : (ProjectiveLine S).ProEtᵒᵖ)
+    (a : (SpTowerShriek.B l E (ProjectiveLine S) n).obj.obj U)
+    (z : (Scheme.proEtaleRootsOfUnitySheaf (ProjectiveLine S) (l ^ (n + 1))).obj.obj U),
+    ((proEtaleConstantRingPushforward (SpTowerShriek.R l E n)
+      (ProjectiveLine.affineChart S)).map
+      ((wA.level n 1).hom ≫ (roots.iso n).hom)).val.app U
+        (SpTowerClasses.adjointSection l E (o.geometry (ProjectiveLine.affineChart S))
+          ordinary.hom n U
+          ((SpTowerClasses.lineEvaluation l E t.presentation.classes.chernP n).inv.val.app U
+            (Scheme.tateFiniteTensor (ProjectiveLine S) l (SpTowerClasses.FiniteRing l E n) n
+              (SpTowerClasses.finiteScalar l E n) U.unop a z))) =
+      Scheme.tateFiniteTensor (AffineSpace PUnit.{u + 1} S) l
+        (SpTowerClasses.FiniteRing l E n) n (SpTowerClasses.finiteScalar l E n)
+        (SpTowerClasses.chart (ProjectiveLine.affineChart S) U).unop
+        ((Scheme.proEtaleConstantDirectImageMap.{u, u + 2} (ProjectiveLine.affineChart S)
+          CommRingCat.{u + 1} (CommRingCat.of (SpTowerClasses.FiniteRing l E n))).hom.app U a)
+        (SpTowerClasses.restrictRoot l (ProjectiveLine.affineChart S) n U z)
+  comparison : t.presentation.G l E ⋙
+    SpTowerShriek.pull l E b (o.geometry (ProjectiveLine.affineChart S)) ≅
+      projectionRight l E b o (AffineSpace PUnit.{u + 1} S ↘ S) wA 1
+  normalized : ∀ K : SpTowerShriek.D l E S,
+    (SpTowerShriek.pull l E b (o.geometry (ProjectiveLine.affineChart S))).mapIso
+        ((projectiveTensor l E t).symm.app K) ≪≫ comparison.app K =
+      (o.geometry (ProjectiveLine.affineChart S)).tensorPullback.app
+        ((SpTowerShriek.pull l E b (o.geometry (ProjectiveLine S ↘ S))).obj K,
+          (SpTowerClasses.line l E t.presentation.classes.chernP)⟦(2 : ℤ)⟧) ≪≫
+      (SpTowerShriek.tensor l E b (AffineSpace PUnit.{u + 1} S)).mapIso
+        (Iso.prod ((o.comp (ProjectiveLine.affineChart S) (ProjectiveLine S ↘ S)).app K ≪≫
+          (eqToIso (congrArg
+            (fun f ↦ (SpTowerShriek.pull l E b (o.geometry f)).obj K)
+            (ProjectiveLine.affineChart_over S))))
+          (((SpTowerShriek.pull l E b (o.geometry (ProjectiveLine.affineChart S))).commShiftIso
+            (2 : ℤ)).app (SpTowerClasses.line l E t.presentation.classes.chernP) ≪≫
+            (shiftFunctor _ (2 : ℤ)).mapIso
+              (((o.geometry (ProjectiveLine.affineChart S)).pull.mapDerivedCategorySingleFunctor
+                0).app (SpTowerClasses.lineModule l E t.presentation.classes.chernP) ≪≫
+                (DerivedCategory.singleFunctor _ 0).mapIso ordinary))) ≪≫
+        sh.second _ _ 2
+
 /-- The specified right evaluation component for the whole chart. It uses only
 realization, exact pullback, normalized tensor evaluation and the ordinary shift.
 Source: Levels (blueprint: def-sp-coordinate-right-comparisons). -/

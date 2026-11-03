@@ -31,6 +31,36 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
+private theorem adjunction_mate_of_unit
+    {C D : Type*} [Category* C] [Category* D] {L : C ⥤ D} {R : D ⥤ C}
+    (adj : L ⊣ R) {M : C} {K : D} (a : K ≅ L.obj M) (u : M ⟶ R.obj K)
+    (h : u ≫ R.map a.hom = adj.unit.app M) : adj.homEquiv _ _ a.inv = u := by
+  rw [Adjunction.homEquiv_unit]
+  calc
+    _ = (u ≫ R.map a.hom) ≫ R.map a.inv := by rw [h]
+    _ = u := by
+      simp only [Category.assoc, ← R.map_comp, a.hom_inv_id, R.map_id, Category.comp_id]
+
+/-- The inverse reduction comparison is fixed by the whole-system adjunction,
+not merely by its finite derived evaluations.
+Source: Stacks 07A6; the reduction/limit adjunction and its triangle identities
+(blueprint: lem-pod-reindexing-reduction-tensor-square). -/
+theorem podReindexing_reduction_inv_mate
+    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
+    (A : PodCompletionReindex l E g) (hA : PodCompletionReindex.Laws l E g A)
+    (K : DerivedCategory (scalarReductionSource l E Y)) :
+    (podReindexCalculus l E X).adjunction.homEquiv _ _ (A.reduction.inv.app K) =
+      (podOrdinaryReindex l E g).map ((podReindexCalculus l E Y).adjunction.unit.app K) ≫
+        A.limit.hom.app ((podReindexCalculus l E Y).reduction.obj K) := by
+  exact adjunction_mate_of_unit (podReindexCalculus l E X).adjunction
+    (A.reduction.app K)
+    ((podOrdinaryReindex l E g).map ((podReindexCalculus l E Y).adjunction.unit.app K) ≫
+      A.limit.hom.app ((podReindexCalculus l E Y).reduction.obj K))
+    (by
+      have hu := hA.2.2.2.1 K
+      dsimp only [Functor.id_obj, Functor.comp_obj] at hu
+      simpa only [Category.assoc, Iso.app_hom] using hu)
+
 /-- The existing tensor realization, displayed in the reindexing calculus.
 Source: Stacks 07A4 and 0941
 (blueprint: lem-pod-reindexing-tensor-limit-model). -/

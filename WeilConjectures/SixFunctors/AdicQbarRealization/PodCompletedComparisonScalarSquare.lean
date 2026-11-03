@@ -8,6 +8,8 @@ module
 public import WeilConjectures.SixFunctors.AdicQbarRealization.Reindex.AdicReindexScalarData
 import WeilConjectures.SixFunctors.AdicQbarRealization.PodCompletedComparisonNormalization
 import WeilConjectures.SixFunctors.AdicQbarRealization.Integral.AdicRealizationIntegralReindex
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Scalar.ScalarSixDefinitions
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Scalar.ScalarSixDerivedPullbackNormalization
 
 /-! # Scalar compatibility of the actual completion comparisons
 
@@ -158,3 +160,53 @@ theorem completion_constructible_scalar_square (l : ℕ) [Fact l.Prime]
     completion_scalar_square l E L i g hX hY K
 
 end WeilConjectures.AdicQbarRealization
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+/-- The specified scalar pullback mate commutes with canonical scalar reassociation.
+Source: current blueprint `det-prop-scalar-six-pullback`, proof (1) and (3).
+(blueprint: lem-pod-completed-comparison-scalar-square).
+
+Proof: take the already constructed normalized pullback data. Its tower equation
+uses the canonical scalar reassociation. Its normalization identifies each of the
+three comparison maps with the specified scalar-adjunction mate. Substitute these
+three equalities. This proves equality of the actual derived morphisms, without
+using finite reductions or any flatness hypothesis. -/
+theorem completion_scalar_square
+    {Λ Λ' Λ'' : ScalarSixRing.{u}} (a : Λ ⟶ Λ') (b : Λ' ⟶ Λ'')
+    {X Y : Scheme.{u}} (g : X ⟶ Y)
+    (K : DerivedCategory (ModuleRingedComparison.internalModules Λ.X Y)) :
+    (scalarSixTower a b X).hom.app ((scalarSixPull Λ g).obj K) ≫
+        (scalarSixPullHom (a ≫ b) g).app K =
+      (scalarSixChange b X).map ((scalarSixPullHom a g).app K) ≫
+        (scalarSixPullHom b g).app ((scalarSixChange a Y).obj K) ≫
+          (scalarSixPull Λ'' g).map ((scalarSixTower a b Y).hom.app K) := by
+  obtain ⟨C⟩ := scalarSixPullbackData_exists.{u}
+  simpa only [C.thetaNormalization] using C.tower a b g K
+
+/-- The same square as an equality of natural transformations on the entire
+unbounded derived category, including its constructible objects.
+Source: current blueprint `det-prop-scalar-six-pullback`, proof (1) and (3).
+(blueprint: lem-pod-completed-comparison-scalar-square).
+
+Proof: evaluate both composites at an arbitrary object. Functor associators have
+identity components, and whiskering evaluates to functorial application. The
+component equation is exactly completion_scalar_square. -/
+theorem completion_constructible_scalar_square
+    {Λ Λ' Λ'' : ScalarSixRing.{u}} (a : Λ ⟶ Λ') (b : Λ' ⟶ Λ'')
+    {X Y : Scheme.{u}} (g : X ⟶ Y) :
+    Functor.whiskerLeft (scalarSixPull Λ g) (scalarSixTower a b X).hom ≫
+        scalarSixPullHom (a ≫ b) g =
+      (Functor.associator _ _ _).inv ≫
+        Functor.whiskerRight (scalarSixPullHom a g) (scalarSixChange b X) ≫
+        (Functor.associator _ _ _).hom ≫
+        Functor.whiskerLeft (scalarSixChange a Y) (scalarSixPullHom b g) ≫
+        (Functor.associator _ _ _).inv ≫
+        Functor.whiskerRight (scalarSixTower a b Y).hom (scalarSixPull Λ'' g) := by
+  ext K
+  simpa only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.associator_hom_app, Functor.associator_inv_app,
+    Category.id_comp, Category.comp_id, Category.assoc] using
+    completion_scalar_square a b g K
+
+end AlgebraicGeometry.ProEtale.CondensedRing

@@ -11,6 +11,11 @@ public import WeilConjectures.AlgebraicGeometry.AdicCompletion.DerivedCompletion
 public import WeilConjectures.AlgebraicGeometry.ProEtaleMilnor
 public import WeilConjectures.AlgebraicGeometry.IntegralPointMonEquality
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
+public import WeilConjectures.Algebra.Homology.System.SystemDerivedEvaluation
+public import WeilConjectures.AlgebraicGeometry.Integral.Constant.IntegralConstantModelRealizationSupplement
+public import WeilConjectures.AlgebraicGeometry.NormalizedDVRFiniteComparison
+public import WeilConjectures.AlgebraicGeometry.NormalizedDVRLimitComplete
+public import WeilConjectures.AlgebraicGeometry.NormalizedDVRProjectionDescent
 
 /-!
 # Effectivity of normalized towers
@@ -40,7 +45,7 @@ def spDVRCompletionTransport :
     DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
       (condensedRingObj (spIntegralCondensed l E) T)) ⥤
       DerivedCategory (AdicCompletion.Modules l E T) :=
-  let e := eqToIso (integralPointMon_eq l E)
+  let e := IntegralConstantModel.pointComparison l E
   let F : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
       (condensedRingObj (spIntegralCondensed l E) T) ⥤ AdicCompletion.Modules l E T :=
     Mod.comap (coefficientMap e.hom.hom T)
@@ -153,6 +158,41 @@ def spDVRCompletedLimit (D : SpCoefficientTowersAbelian l E T)
 
 set_option maxHeartbeats 10000000 in
 -- Explicit scalar transports and the Roos projection require deeper category elaboration.
+
+private theorem spDVRComparison_isIso
+    (D : SpCoefficientTowersAbelian l E T) (R : SpReductionTower l E T D)
+    (P : CochainComplex (spCoefficientTowers l E T) ℤ)
+    (f : R.red.obj (spDVRLimit l E T D R P) ⟶ (spTowerLocalization l E T D).obj P)
+    (hf : ∀ n : ℕ,
+      (spDerivedCoefficientEvaluation l E T D n).map f ≫
+          (spDVRLevelLocalization l E T D P n).hom =
+        (R.evaluation n).hom.app (spDVRLimit l E T D R P) ≫
+          spDVRFiniteComparison l E T D R P n)
+    (hfinite : ∀ n : ℕ, IsIso (spDVRFiniteComparison l E T D R P n)) : IsIso f := by
+  let := D.hasDerived
+  let := D.equivalenceAdditive
+  let : D.equivalence.inverse.Additive :=
+    Functor.additive_of_preserves_binary_products _
+  have heval (n : ℕ) : IsIso ((spDerivedCoefficientEvaluation l E T D n).map f) := by
+    have := hfinite n
+    have : IsIso ((spDerivedCoefficientEvaluation l E T D n).map f ≫
+        (spDVRLevelLocalization l E T D P n).hom) := by
+      rw [hf]
+      infer_instance
+    exact IsIso.of_isIso_comp_right _ (spDVRLevelLocalization l E T D P n).hom
+  have : IsIso (D.equivalence.mapDerivedCategory.functor.map f) := by
+    apply (SheafOfModules.systemDerivedEvaluation_isIso_iff
+      (spCoefficientCommRings l E T) _).2
+    intro n
+    let := D.evaluationLimits n
+    let := D.evaluationColimits n
+    let : (spCoefficientEvaluation l E T D.equivalence n).Additive :=
+      Functor.additive_of_preserves_binary_products _
+    exact (NatIso.isIso_map_iff
+      (Functor.mapDerivedCategoryCompIso D.equivalence.functor
+        (SheafOfModules.systemEvaluation (spCoefficientCommRings l E T) n)) f).1 (heval n)
+  exact isIso_of_reflects_iso f D.equivalence.mapDerivedCategory.functor
+
 /-- Every normalized unbounded tower is recovered from its Milnor derived inverse limit.
 The canonical finite comparisons are invertible; the reduction tower is isomorphic to
 that original derived tower, and the inverse limit is derived complete.
@@ -181,6 +221,9 @@ theorem normalized_dvr_effectivity
             (R.evaluation n).hom.app (spDVRLimit l E T D R P) ≫
               spDVRFiniteComparison l E T D R P n) ∧
       IsDerivedComplete l E T (spDVRCompletedLimit l E T D R P) := by
-  sorry
+  have hfinite := normalized_dvr_finite_comparison l E T D R P hP
+  obtain ⟨f, hf⟩ := normalized_dvr_projection_descent l E T D R P
+  let := spDVRComparison_isIso l E T D R P f hf hfinite
+  exact ⟨hfinite, ⟨asIso f, hf⟩, normalized_dvr_limit_complete l E T D R P (asIso f) hf⟩
 
 end AlgebraicGeometry.ProEtale

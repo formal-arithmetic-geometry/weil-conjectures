@@ -157,6 +157,15 @@ Source: standing convention (blueprint: def-sp-coordinate-adjunction-categories)
 abbrev P (b : SpTowerShriek.Base l E) (q : SpTowerCalculus.Coordinates l E b)
     (T : Scheme.{u}) := spConstructibleTorTowers l E T (q.abelian T)
 
+/-- A chart's actual tower adjunction, on the full subcategories in the statement.
+Source: first display (blueprint: def-sp-coordinate-adjunction-categories). -/
+abbrev ChartPair (b : SpTowerShriek.Base l E) (o : SpTowerShriek.Operations l E b)
+    (q : SpTowerCalculus.Coordinates l E b) {U T Y : Scheme.{u}}
+    (e : U ⟶ T) (p : T ⟶ Y) (c : Compactification (e ≫ p))
+    (w : SpChartAdmissibility.Twists l E U) (d : ℕ) :=
+  RestrictedPair (P l E b q U) (P l E b q Y) (SpTowerCalculus.F l E b o q c)
+    (originalChartRight l E b o q e p w d)
+
 /-- The ordered coordinate model's projection. Source: Local pairs, iteration;
 the canonical affineTraceAffineSpaceIso identifies it with p_d.
 (blueprint: def-sp-coordinate-adjunction-categories). -/
@@ -210,6 +219,23 @@ instance baseOver {k : Type u} [Field k] (T : Bases k) :
 instance baseFiniteType {k : Type u} [Field k] (T : Bases k) :
     LocallyOfFiniteType (T.val.left ↘ Spec (.of k)) := T.property.2.1
 
+/-- The ordinary Tate tower on schemes over the fixed ground field. The global
+existence theorem is restricted to schemes where l is invertible; restriction to
+k-schemes is supplied by restrictTwistFamily below.
+Source: twists in Local pairs (blueprint: def-sp-coordinate-adjunction-categories). -/
+abbrev TwistFamily (k : Type u) [Field k] :=
+  ∀ (T : Scheme.{u}) [T.Over (Spec (.of k))], SpChartAdmissibility.Twists l E T
+
+/-- Restrict an ell-invertible Tate family to schemes over a field in which ell is
+a unit. Ring maps preserve units, including on empty schemes.
+Source: Local pairs (blueprint: def-sp-coordinate-adjunction-categories). -/
+def restrictTwistFamily {k : Type u} [Field k] (hl : IsUnit (l : k))
+    (w : ∀ T : Scheme.{u}, IsUnit (l : Γ(T, ⊤)) → SpChartAdmissibility.Twists l E T) :
+    TwistFamily l E k := fun T _ ↦ w T (by
+  let g : k →+* Γ(T, ⊤) :=
+    (T ↘ Spec (.of k)).appTop.hom.comp (Scheme.ΓSpecIso (.of k)).inv.hom
+  simpa only [map_natCast] using hl.map g)
+
 /-- A normalized projective-line presentation in the same geometric calculus.
 The field equalities retain the actual trace and diagonal unit of the dependency.
 Source: affine-line restriction (blueprint: def-sp-coordinate-adjunction-categories). -/
@@ -227,6 +253,29 @@ Source: affine-line Hom display (blueprint: def-sp-coordinate-adjunction-categor
 def projectiveRight {b : SpTowerShriek.Base l E} {o : SpTowerShriek.Operations l E b}
     {S : Scheme.{u}} (t : ProjectivePresentation l E b o S) :=
   t.presentation.G l E
+
+/-- The ordered affine-line right composites, with literal identity at dimension zero.
+Source: Local pairs, iteration (blueprint: def-sp-coordinate-adjunction-categories). -/
+def orderedRight (b : SpTowerShriek.Base l E) (o : SpTowerShriek.Operations l E b)
+    {k : Type u} [Field k] (w : TwistFamily l E k) (Y : Scheme.{u})
+    [Y.Over (Spec (.of k))] :
+    (d : ℕ) → SpTowerShriek.D l E Y ⥤ SpTowerShriek.D l E (space Y d)
+  | 0 => 𝟭 _
+  | d + 1 => orderedRight b o w Y d ⋙
+      projectionRight l E b o
+        (AffineSpace PUnit.{u + 1} (space Y d) ↘ space Y d)
+        (w (space Y (d + 1))) 1
+
+/-- The standard affine-coordinate base, retaining the original k-structure.
+Source: ordered iteration (blueprint: def-sp-coordinate-adjunction-categories). -/
+def coordinateBase {k : Type u} [Field k] (Y : Bases k) (d : ℕ) : Bases k :=
+  ⟨Over.mk (proj Y.val.left d ≫ Y.val.hom),
+    inferInstanceAs (IsSeparated (proj Y.val.left d ≫
+      (Y.val.left ↘ Spec (.of k)))),
+    inferInstanceAs (LocallyOfFiniteType (proj Y.val.left d ≫
+      (Y.val.left ↘ Spec (.of k)))),
+    inferInstanceAs (QuasiCompact (proj Y.val.left d ≫
+      (Y.val.left ↘ Spec (.of k))))⟩
 
 /-- The projection full category at the indicated ordered stage.
 Source: iteration (blueprint: def-sp-coordinate-adjunction-categories). -/

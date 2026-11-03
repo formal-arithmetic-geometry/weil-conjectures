@@ -13,6 +13,7 @@ public import WeilConjectures.PoincareDuality.Pod.Reduction.PodReductionRepresen
 import all WeilConjectures.PoincareDuality.Pod.Reduction.PodReductionRepresentativeModels
 import WeilConjectures.PoincareDuality.Pod.Reduction.PodReductionRepresentativeAssembly
 import WeilConjectures.PoincareDuality.PodReductionRepresentatives.PodReductionReindexUnaryModel
+public import WeilConjectures.CategoryTheory.RingedDerivedComparisons.RingedDerivedComparisonData
 
 /-! # The reduction tensor square on good representatives
 
@@ -92,62 +93,86 @@ set_option allowUnsafeReducibility true in
 attribute [local irreducible] podReindexingDerivedFunctor podReindexingDerivedFactors
 open PodReindexingCoherence
 
-/-- The reduction/reindexing tensor square on flat-term K-flat representatives.
-Source: blueprint dual-Tate compatibility Steps 2 and 4; Stacks 07A4 and 0941.
-The proof pastes the unary models with the strict tensor identity and cancels the
-model isomorphisms. No finite-evaluation faithfulness is used.
+private theorem tensorMap_comp
+    {C D : Type*} [Category* C] [Category* D] (T : C × C ⥤ D)
+    {A B C' A' B' C'' : C} (f : A ⟶ B) (g : A' ⟶ B')
+    (h : B ⟶ C') (i : B' ⟶ C'') :
+    T.map (Prod.mkHom f g) ≫ T.map (Prod.mkHom h i) =
+      T.map (Prod.mkHom (f ≫ h) (g ≫ i)) := by
+  rw [← T.map_comp]
+  rfl
+
+private theorem paste_tensor_square
+    {D : Type*} [Category* D] (T : D × D ⥤ D)
+    {A₀ A₁ A₂ B₀ B₁ B₂ C₀ C₁ C₂ D₀ D₁ D₂ : D}
+    (a : B₀ ≅ A₀) (b : B₀ ≅ C₀) (c : C₀ ≅ D₀)
+    (a₁ : B₁ ≅ A₁) (a₂ : B₂ ≅ A₂)
+    (b₁ : B₁ ≅ C₁) (b₂ : B₂ ≅ C₂)
+    (c₁ : C₁ ≅ D₁) (c₂ : C₂ ≅ D₂)
+    (tA : A₀ ⟶ T.obj (A₁, A₂)) (tB : B₀ ⟶ T.obj (B₁, B₂))
+    (tC : C₀ ⟶ T.obj (C₁, C₂)) (tD : D₀ ⟶ T.obj (D₁, D₂))
+    (ha : a.hom ≫ tA = tB ≫ T.map (Prod.mkHom a₁.hom a₂.hom))
+    (hb : b.hom ≫ tC = tB ≫ T.map (Prod.mkHom b₁.hom b₂.hom))
+    (hc : c.hom ≫ tD = tC ≫ T.map (Prod.mkHom c₁.hom c₂.hom)) :
+    tA ≫ T.map (Prod.mkHom (a₁.symm ≪≫ b₁ ≪≫ c₁).hom
+        (a₂.symm ≪≫ b₂ ≪≫ c₂).hom) =
+      (a.symm ≪≫ b ≪≫ c).hom ≫ tD := by
+  apply (cancel_epi a.hom).1
+  simp only [Iso.trans_hom, Iso.symm_hom, Category.assoc]
+  rw [reassoc_of% ha, tensorMap_comp]
+  simp only [Iso.hom_inv_id_assoc]
+  rw [← tensorMap_comp, ← reassoc_of% hb, ← hc]
+
+/-- The specified coefficient/pullback exchange preserves the tensor comparison.
+The four ringed sites may be the condensed coefficient sheaves on two schemes before
+and after coefficient extension. No special presentation of the coefficient ring is
+required. In particular the result applies to reduction and to the Frobenius
+inverse image, including its semilinear structural ring map.
+
+The statement holds on the entire unbounded derived categories, hence on the images
+of flat-term K-flat representatives without any further descent or completeness
+hypothesis. The comparison is the specified composite, not an arbitrary isomorphism.
+
+Source: latest blueprint, prop-pod-dual-tate-data-compatibility, Step 5, using the
+composition and 2-isomorphism clauses of lem-sfb-ringed-derived-monoidal-comparisons.
+Proof: paste the tensor equations for the first composition, the given geometric
+2-isomorphism, and the second composition. Functoriality of the target tensor combines
+the two component maps. Cancel the first composition isomorphism on the tensor and
+on each factor. These are the same model-isomorphism cancellations as in the
+representative proof, now for the current ringed-topos comparisons.
 (blueprint: lem-pod-reduction-good-representative-square). -/
 theorem podReduction_representative_square
-    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
-    [∀ x : X, Invertible (l : X.residueField x)]
-    [∀ y : Y, Invertible (l : Y.residueField y)]
-    (A : PodCompletionReindex l E g)
-    (hA : PodCompletionReindex.Laws l E g A)
-    (c : PodReindexingCoherence.Comparison l E g none
-      (podReindexCalculus l E X).integralClosed (podReindexCalculus l E Y).integralClosed
-      (podReindexCalculus l E X).integralTensorModel
-      (podReindexCalculus l E Y).integralTensorModel)
-    (h : podReindexingDerivedFunctor l E g none = podOrdinaryReindex l E g)
-    (hPure : ∀ (P L : PodReindexingCoherence.K l E Y none) (p q k : ℤ)
-      (hk : p + q = k) (U : X.ProEt)
-      (x : (P.X p).val.obj (op ((proEtaleIsoPostcompose g).obj U)))
-      (y : (L.X q).val.obj (op ((proEtaleIsoPostcompose g).obj U))),
-      (((c.tensorChain P L).hom.f k).val.app (op U))
-        (coefficientTensorGenerator.{u, u + 1, u}
-          (ProEt.topology Y) (podReindexingRing l E Y none) P L p q k hk
-          (op ((proEtaleIsoPostcompose g).obj U)) x y) =
-      coefficientTensorGenerator.{u, u + 1, u}
-        (ProEt.topology X) (podReindexingRing l E X none)
-        ((podReindexingComplexFunctor l E g none).obj P)
-        ((podReindexingComplexFunctor l E g none).obj L) p q k hk
-        (op U) x y)
-    (P Q : (integralOperationsGoodComplex l E Y).FullSubcategory) :
-    (integralComparisonDerivedSequencePullback l E g).map
-        ((podReindexCalculus l E Y).reductionTensor.hom.app ((podReindexingQ l E Y none).obj P.obj,
-          (podReindexingQ l E Y none).obj Q.obj)) ≫
-      (podReindexingSystemTensor l E g).hom.app
-        ((podReindexCalculus l E Y).reduction.obj ((podReindexingQ l E Y none).obj P.obj),
-          (podReindexCalculus l E Y).reduction.obj ((podReindexingQ l E Y none).obj Q.obj)) ≫
-      (podReindexCalculus l E X).systemClosed.tensor.map
-        (Prod.mkHom
-          (A.reduction.hom.app ((podReindexingQ l E Y none).obj P.obj))
-          (A.reduction.hom.app ((podReindexingQ l E Y none).obj Q.obj))) =
-    A.reduction.hom.app
-        ((podReindexCalculus l E Y).integralClosed.tensor.obj
-          ((podReindexingQ l E Y none).obj P.obj,
-          (podReindexingQ l E Y none).obj Q.obj)) ≫
-      (podReindexCalculus l E X).reduction.map
-        ((reductionOrdinaryTensor l E g c h).hom.app
-          ((podReindexingQ l E Y none).obj P.obj, (podReindexingQ l E Y none).obj Q.obj)) ≫
-      (podReindexCalculus l E X).reductionTensor.hom.app
-        ((podOrdinaryReindex l E g).obj ((podReindexingQ l E Y none).obj P.obj),
-          (podOrdinaryReindex l E g).obj ((podReindexingQ l E Y none).obj Q.obj)) := by
-  let T0 := (T[Y]).obj (P.obj, Q.obj)
-  have hT := total_good l E Y P Q
-  obtain ⟨hFP, βP, hβP, hUP⟩ := unary_model l E g A hA h P
-  obtain ⟨hFQ, βQ, hβQ, hUQ⟩ := unary_model l E g A hA h Q
-  obtain ⟨hFT, βT, hβT, hUT⟩ := unary_model l E g A hA h ⟨T0, hT⟩
-  exact podReduction_assemble_representative l E g A c h hPure P Q hT
-    hFP βP hβP hUP hFQ βQ hβQ hUQ hFT βT hβT hUT
+    {X Y Z W : Site.{u, w}}
+    {f : Morphism X Y} {g : Morphism Y Z}
+    {a : Morphism X W} {b : Morphism W Z}
+    {k h : Morphism X Z}
+    {lf : Lift f} {lg : Lift g} {la : Lift a} {lb : Lift b}
+    {lk : Lift k} {lh : Lift h}
+    {θ : k.inverse ≅ g.inverse ⋙ f.inverse}
+    {ψ : h.inverse ≅ b.inverse ⋙ a.inverse} {η : k.inverse ≅ h.inverse}
+    (c : Composition lf lg lk θ) (d : Composition la lb lh ψ)
+    (e : TwoIso lk lh η) (U V : Z.D) :
+    let δ := c.pullback.symm ≪≫ e.pullback ≪≫ d.pullback
+    lf.edge.left.map (lg.tensor U V).hom ≫
+        (lf.tensor (lg.edge.left.obj U) (lg.edge.left.obj V)).hom ≫
+        X.closed.tensor.map (Prod.mkHom (δ.hom.app U) (δ.hom.app V)) =
+      δ.hom.app (Z.closed.tensor.obj (U, V)) ≫
+        la.edge.left.map (lb.tensor U V).hom ≫
+        (la.tensor (lb.edge.left.obj U) (lb.edge.left.obj V)).hom := by
+  simpa only [Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv,
+    NatTrans.comp_app, Category.assoc] using
+    paste_tensor_square X.closed.tensor
+      (c.pullback.app (Z.closed.tensor.obj (U, V)))
+      (e.pullback.app (Z.closed.tensor.obj (U, V)))
+      (d.pullback.app (Z.closed.tensor.obj (U, V)))
+      (c.pullback.app U) (c.pullback.app V)
+      (e.pullback.app U) (e.pullback.app V)
+      (d.pullback.app U) (d.pullback.app V)
+      (lf.edge.left.map (lg.tensor U V).hom ≫
+        (lf.tensor (lg.edge.left.obj U) (lg.edge.left.obj V)).hom)
+      (lk.tensor U V).hom (lh.tensor U V).hom
+      (la.edge.left.map (lb.tensor U V).hom ≫
+        (la.tensor (lb.edge.left.obj U) (lb.edge.left.obj V)).hom)
+      (c.tensor U V) (e.tensor U V) (d.tensor U V)
 
 end WeilConjectures

@@ -11,6 +11,9 @@ import WeilConjectures.SixFunctors.Integral.IntegralConstructibleAdjacentReducti
 import WeilConjectures.SixFunctors.Compact.CompactSupportReductionCoherence
 import WeilConjectures.SixFunctors.CoefDualFormulaScalarTranspose.CoefDualFormulaPairingPerfect
 import WeilConjectures.SixFunctors.CoefDualFormulaScalarTranspose.CoefDualFormulaPairingScalar
+public import WeilConjectures.SixFunctors.CoefDualFormulaScalarTranspose.CoefEtaleRelativeTraceRestriction
+public import WeilConjectures.SixFunctors.CoefDualFormulaScalarTranspose.CoefRelativeTraceRestriction
+public import WeilConjectures.SixFunctors.CoefDualFormulaScalarTranspose.CoefSupportRealizationRestriction
 
 /-!
 # Scalar transpose of the canonical integral exceptional formula
@@ -31,6 +34,90 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry AlgebraicGeometry.Scheme
 
 namespace WeilConjectures.CoefDualFormulaScalarTranspose
+
+/-- Successor quotient compatibility of the specified finite relative trace.
+Source: blueprint absolute structural trace and its coefficient counit squares
+(historical blueprint tag: lem-coef-relative-trace-reduction).
+Proof: use the structural counit squares and restriction/composition compatibility
+on the etale site to obtain the etale relative trace square. Transport that square
+through the intrinsic/site restriction square and the specified dualizing origins.
+Naturality moves the origins past the restriction comparison and cancels their
+inverse pairs, giving the displayed equality. -/
+private theorem finiteTrace_restriction (n : ℕ) :
+  finiteTrace D l E f c (n + 1) ≫
+      integralDualizingExceptionalTransition l E D Y hl n.le_succ =
+    (sfAmbientCompactSupportCandidate (Padic.coefficientExtensionRing l E (n + 2)) c).map
+        (integralDualizingExceptionalTransition l E D X hl n.le_succ) ≫
+      (finiteSupportRestriction l E c n.le_succ).hom.app
+        (integralDualizingFiniteTerm l E D X n) ≫
+      (normalizedDVRRes l E Y n.le_succ).map (finiteTrace D l E f c n) := by
+  let FX := sfAmbientCompactSupportCandidate (Padic.coefficientExtensionRing l E (n + 2)) c
+  let SY := normalizedDVRRes l E Y n.le_succ
+  let VX := finiteDualizingRealization l E X (n + 1)
+  let V := finiteDualizingRealization l E Y (n + 1)
+  let V0 := finiteDualizingRealization l E Y n
+  let K : DerivedCategory.Plus
+      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (finiteDualizingCoeff l E n))) :=
+    ⟨finiteDualizingEtaleTerm l E D X n, finiteEtaleDualizing_plus D l E X n⟩
+  have hn := (finiteSupportRealization l E c (n + 1)).hom.naturality
+    (ObjectProperty.homMk (X :=
+      ⟨finiteDualizingEtaleTerm l E D X (n + 1),
+        finiteEtaleDualizing_plus D l E X (n + 1)⟩)
+      (Y := (Sheaf.restrictScalars X.smallEtaleTopology
+      (finiteDualizingQuotient l E n.le_succ)).mapDerivedCategoryPlus.obj K)
+      (finiteDualizingEtaleTransition l E D X n.le_succ))
+  have ht := congrArg (fun v ↦ V.map v) (finiteEtaleTrace_restriction D l E f c n)
+  have ht' : V.map (finiteEtaleTrace D l E f c (n + 1)) ≫
+      V.map (finiteDualizingEtaleTransition l E D Y n.le_succ) =
+    V.map ((Etale.rightDerivedLowerShriekOfCompactification
+      (ModuleCat.{u + 1} (finiteDualizingCoeff l E (n + 1))) c).map
+        (finiteDualizingEtaleTransition l E D X n.le_succ)) ≫
+      V.map (finiteEtaleSupportRestriction (finiteDualizingQuotient l E n.le_succ) c K) ≫
+        V.map ((Sheaf.derivedRestrictScalars Y.smallEtaleTopology
+          (finiteDualizingQuotient l E n.le_succ)).map (finiteEtaleTrace D l E f c n)) := by
+    simpa only [V.map_comp] using ht
+  have hs := finiteSupportRealization_restriction l E c n.le_succ K
+  have hy := (finiteDualizingRealizationRestriction l E Y n.le_succ).inv.naturality
+    (finiteEtaleTrace D l E f c n)
+  have hreal := paste_trace_square FX
+    ((finiteDualizingRealizationRestriction l E X n.le_succ).app K.obj)
+    ((finiteDualizingRealizationRestriction l E Y n.le_succ).app
+      ((Etale.rightDerivedLowerShriekOfCompactification
+        (ModuleCat.{u + 1} (finiteDualizingCoeff l E n)) c).obj K.obj))
+    ((finiteDualizingRealizationRestriction l E Y n.le_succ).app
+      (finiteDualizingEtaleTerm l E D Y n))
+    (finiteSupportOrigin D l E f c (n + 1)).hom
+    ((finiteSupportRealization l E c (n + 1)).hom.app
+      ((Sheaf.restrictScalars X.smallEtaleTopology
+        (finiteDualizingQuotient l E n.le_succ)).mapDerivedCategoryPlus.obj K))
+    (VX.map (finiteDualizingEtaleTransition l E D X n.le_succ))
+    (V.map (finiteEtaleSupportRestriction (finiteDualizingQuotient l E n.le_succ) c K))
+    (V.map (finiteDualizingEtaleTransition l E D Y n.le_succ))
+    (V.map ((Etale.rightDerivedLowerShriekOfCompactification
+      (ModuleCat.{u + 1} (finiteDualizingCoeff l E (n + 1))) c).map
+        (finiteDualizingEtaleTransition l E D X n.le_succ)))
+    (V.map (finiteEtaleTrace D l E f c (n + 1)))
+    (V.map ((Sheaf.derivedRestrictScalars Y.smallEtaleTopology
+      (finiteDualizingQuotient l E n.le_succ)).map (finiteEtaleTrace D l E f c n)))
+    (SY.map (V0.map (finiteEtaleTrace D l E f c n)))
+    ((finiteSupportRestriction l E c n.le_succ).hom.app
+      ((finiteDualizingRealization l E X n).obj K.obj) ≫
+      SY.map (finiteSupportOrigin D l E f c n).hom)
+    hn ht' (hs.trans (Category.assoc _ _ _).symm) hy
+  refine transport_trace_square
+    (sfAmbientCompactSupportCandidate (Padic.coefficientExtensionRing l E (n + 1)) c)
+    FX (normalizedDVRRes l E X n.le_succ) SY (finiteSupportRestriction l E c n.le_succ)
+    (finiteDualizingOrigin l E D X n) (finiteDualizingOrigin l E D X (n + 1))
+    (finiteDualizingOrigin l E D Y n) (finiteDualizingOrigin l E D Y (n + 1))
+    (VX.map (finiteDualizingEtaleTransition l E D X n.le_succ))
+    ((finiteDualizingRealizationRestriction l E X n.le_succ).inv.app K.obj)
+    (V.map (finiteDualizingEtaleTransition l E D Y n.le_succ))
+    ((finiteDualizingRealizationRestriction l E Y n.le_succ).inv.app
+      (finiteDualizingEtaleTerm l E D Y n))
+    (finiteSupportOrigin D l E f c n).hom (V0.map (finiteEtaleTrace D l E f c n))
+    (finiteSupportOrigin D l E f c (n + 1)).hom
+    (V.map (finiteEtaleTrace D l E f c (n + 1))) ?_
+  exact hreal.trans (reassociate_map SY _ _ _ _)
 
 private theorem iso_of_pairings {C : Type*} [Category C] (H G : C)
     (P : C → Type*) (A : ∀ K, (K ⟶ H) → P K) (B : ∀ K, (K ⟶ G) → P K)

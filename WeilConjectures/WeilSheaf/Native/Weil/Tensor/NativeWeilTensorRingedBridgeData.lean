@@ -96,6 +96,27 @@ structure NativeWeilTensorRingedBridge
       ((forget.mapHomologicalComplex (.up ℤ)).obj P) ∧
     ∀ p : ℤ, SheafOfModules.IsFlatOnSite (J := K) (R := Q) (forget.obj (P.X p))
 
+private theorem bridge_ordinary_tensor_symmetry
+    {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
+    [Fact (ringChar k₀ ≠ l)] {X : Scheme.{u}}
+    [X.Over (Spec (CommRingCat.of k₀))]
+    (b : NativeWeilTensorRingedBridge k₀ l X)
+    (d : OrdinaryRingedTensorUnderivedData l
+      (X ↘ Spec (CommRingCat.of k₀)).geometricFiber b.K b.Q b.ordinary b.ordinaryHom)
+    (P Q : ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber) :
+    ∃ s : ((ordinaryTensorBifunctor l
+          (X ↘ Spec (CommRingCat.of k₀)).geometricFiber).obj Q).obj P ⟶
+        ((ordinaryTensorBifunctor l
+          (X ↘ Spec (CommRingCat.of k₀)).geometricFiber).obj P).obj Q,
+      (letI := SheafOfModules.isMonoidal_W_independentCoefficients b.Q
+       letI := SheafOfModules.monoidalCategory b.Q
+       letI := SheafOfModules.symmetricCategory b.Q
+       b.ordinary.functor.map s ≫ (d.underived P Q).hom =
+         (d.underived Q P).hom ≫
+           (β_ (b.ordinary.functor.obj P) (b.ordinary.functor.obj Q)).hom) ∧
+      Mod.tensorπ P Q ≫ s.hom = (β_ P.X Q.X).hom ≫ Mod.tensorπ Q P := by
+  exact b.ordinary_coherence.1 d P Q
+
 attribute [instance] NativeWeilTensorRingedBridge.categoryC
   NativeWeilTensorRingedBridge.categoryA NativeWeilTensorRingedBridge.native_additive
   NativeWeilTensorRingedBridge.ordinary_additive NativeWeilTensorRingedBridge.forget_additive

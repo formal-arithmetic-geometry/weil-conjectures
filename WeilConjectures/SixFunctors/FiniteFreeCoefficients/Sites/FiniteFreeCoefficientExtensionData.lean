@@ -122,6 +122,12 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerS
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorHom
 public import WeilConjectures.AlgebraicGeometry.SixFunctors.EvaluationHomSiteComparison
 public import WeilConjectures.AlgebraicGeometry.ExceptionalCoefficients.ExceptionalCoefficientComparison
+public import WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicTorAmplitudeTransport
+public import WeilConjectures.SixFunctors.Etale.EtaleGeometricBiduality
+public import WeilConjectures.SixFunctors.Finite.FiniteVerdierCoefficientDiagrams
+public import WeilConjectures.SixFunctors.Finite.Hom.FiniteHomDomainCalculus
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomComparison
+public import WeilConjectures.SixFunctors.Supporting.WeilVerdierPreservationStrata
 
 /-! # Finite free coefficient extensions and cofinal levels
 
@@ -876,6 +882,20 @@ def pullHom (A : Type (u + 1)) [CommRing A] {Y X : Scheme.{u}} (g : Y ⟶ X)
     ((Etale.leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} A) g K
       (((Etale.derivedHom (ModuleCat.{u + 1} A) X).obj (op K)).obj M)).inv ≫
       (pull A g).map ((FiniteFreeCoefficients.closed A X K).counit.app M))
+
+/-- The exceptional coefficient mate commutes with isomorphism base change.
+At a closed immersion this is the unique closed counit mate; at the structure morphism
+and the unit it is precisely dualizing naturality. Verdier naturality is their composite
+with HomGeometry. The base is allowed to move, as required for geometric Frobenius.
+Source: blueprint main-20261015, lem-coef-finite-free-extension, scheme-isomorphism
+naturality, including geometric Frobenius (blueprint:
+  def-sf-finite-free-coefficient-comparison-data). -/
+def ExceptionalGeometry {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    [Finite A] [Finite B] (φ : A →+* B) {X S : Scheme.{u}} {f : X ⟶ S}
+    [QuasiCompact f] (c : Compactification f) (M : Cat A S) : Prop :=
+  letI := c.hasCompactification
+  ∀ (S' : Scheme.{u}) (e : S' ≅ S),
+    Etale.ExceptionalCoefficients.BaseChangeCompatibility φ f e.hom M
 
 /-- Inverse on the isomorphism domain, extended by zero elsewhere.
 Source: blueprint finite constructible comparison domains

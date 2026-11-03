@@ -381,6 +381,132 @@ private theorem pairMap_compatible {V V' S S' : Scheme.{u}}
   · intro U' U hU
     exact PullbackData.ι_comparison _ _ _ hU
 
+private theorem epi_fixedRank_isIso {S : Scheme.{u}} {M N : S.Modules}
+    (r : ℕ) [M.IsFiniteLocallyFreeOfRank r] [N.IsFiniteLocallyFreeOfRank r]
+    (a : M ⟶ N) [Epi a] : IsIso a := by
+  classical
+  have := SheafOfModules.IsFiniteLocallyFreeOfRank.isFiniteLocallyFree M r
+  have := SheafOfModules.IsFiniteLocallyFreeOfRank.isFiniteLocallyFree N r
+  apply Scheme.Modules.isIso_of_bijective_stalkLinearMap
+  intro x
+  obtain ⟨_, _⟩ := Scheme.Modules.stalk_isFiniteFree_of_isFiniteLocallyFree M x
+  obtain ⟨_, _⟩ := Scheme.Modules.stalk_isFiniteFree_of_isFiniteLocallyFree N x
+  let F := RingedSpace.moduleStalkFunctor S.toRingedSpace x
+  have : Epi (Abelian.image.ι a) := epi_of_epi_fac (Abelian.image.fac a)
+  have : IsIso (Abelian.image.ι a) := isIso_of_mono_of_epi _
+  have : Epi (F.map (Abelian.factorThruImage a)) :=
+    (RingedSpace.module_stalk_exact S.toRingedSpace a).2.2.2.1 x |>.1
+  have hsurj : Function.Surjective (F.map a).hom := by
+    apply (ModuleCat.epi_iff_surjective _).mp
+    rw [← Abelian.image.fac a, F.map_comp]
+    infer_instance
+  let e := LinearEquiv.ofFinrankEq (F.obj M) (F.obj N)
+    ((Scheme.Modules.finiteLocallyFreeOfRank_stalk_finrank M r x).trans
+      (Scheme.Modules.finiteLocallyFreeOfRank_stalk_finrank N r x).symm)
+  have hinj := Module.End.injective_of_surjective (S.presheaf.stalk x) (F.obj M)
+    (f := e.symm.toLinearMap.comp (F.map a).hom) (e.symm.surjective.comp hsurj)
+  exact ⟨fun _ _ h ↦ hinj (congrArg e.symm h), hsurj⟩
+
+private theorem conormalRank {V S : Scheme.{u}} (s : S ⟶ V) [IsClosedImmersion s]
+    (d : ℕ) [(ConormalGradedAlgebra.piece s 1).IsFiniteLocallyFreeOfRank d] :
+    ((Scheme.Modules.tensorPullback s).obj s.ker.toModules).IsFiniteLocallyFreeOfRank d := by
+  obtain ⟨e, _⟩ := (ConormalGradedAlgebra.presentation s).powerIdentification 1
+  let q : ConormalGradedAlgebra.piece s 1 ≅
+      (Scheme.Modules.tensorPullback s).obj s.ker.toModules :=
+    (Scheme.Modules.tensorPullback s).mapIso
+      (e ≪≫ eqToIso (by rw [pow_one]))
+  exact SheafOfModules.IsFiniteLocallyFreeOfRank.of_iso q
+
+private theorem conormalMap_isIso {V V' S S' : Scheme.{u}}
+    (s : S ⟶ V) (s' : S' ⟶ V') [IsClosedImmersion s] [IsClosedImmersion s']
+    (h : V' ⟶ V) (b : S' ⟶ S) (w : s' ≫ h = b ≫ s)
+    (centres : IsPullback s' b h s) (d : ℕ)
+    [(ConormalGradedAlgebra.piece s 1).IsFiniteLocallyFreeOfRank d]
+    [(ConormalGradedAlgebra.piece s' 1).IsFiniteLocallyFreeOfRank d] :
+    IsIso (conormalMap s s' h b w) := by
+  have := conormalRank s d
+  have := conormalRank s' d
+  let E := (Scheme.Modules.tensorPullback s).obj s.ker.toModules
+  let q : Scheme.Modules.tensorPullback b ≅ Scheme.Modules.pullback b :=
+    (Scheme.Modules.nonempty_tensorPullbackAdjunction b).some.leftAdjointUniq
+      (Scheme.Modules.pullbackPushforwardAdjunction b)
+  have : ((Scheme.Modules.tensorPullback b).obj E).IsFiniteLocallyFreeOfRank d :=
+    SheafOfModules.IsFiniteLocallyFreeOfRank.of_iso (q.app E).symm
+  have : Epi (conormalMap s s' h b w) :=
+    (Scheme.Modules.closedImmersion_conormal_flat_base_change s' s h b w
+      centres.isLimit _ rfl).1
+  exact epi_fixedRank_isIso d _
+
+/-- Arbitrary base change of a section Rees family, with the augmented pair at zero
+and one and the punctured trivialization. Source: sk-thm-dnc, Local construction
+(blueprint: lem-trf-section-rees-base-change-etale).
+Proof: The upstream covering Rees-pushout theorem and relative-gluing comparison give
+the deformation pullback. Coefficientwise Laurent and t-quotient comparisons preserve
+augmentation and both fibres. The Cartesian conormal comparison is an epimorphism
+between bundles of the same rank d; stalkwise surjective endomorphisms of finite free
+modules are injective. Cancelling the zero-fibre square gives the normal-cone pullback.
+All chart formulas are the existing comparison's coefficient formulas. -/
+theorem base_change {V S S' : Scheme.{u}} [IsNoetherian S] [IsNoetherian S']
+    (d : ℕ) (g : V ⟶ S) [SmoothOfRelativeDimension d g] [IsSeparated g]
+    [LocallyOfFiniteType g] [QuasiCompact g] (s : S ⟶ V) [IsClosedImmersion s]
+    (hs : s ≫ g = 𝟙 S) (b : S' ⟶ S) :
+    ∃ (s' : S' ⟶ pullback g b) (_ : IsClosedImmersion s')
+      (w : s' ≫ pullback.fst g b = b ≫ s),
+      s' = Scheme.Hom.baseChangeSection g s hs b ∧
+      IsPullback (pairMap s s' (pullback.fst g b) b w)
+        (s'.ker.deformationSpaceProj ≫ pullback.snd g b)
+        (s.ker.deformationSpaceProj ≫ g) b ∧
+      Compatible g (pullback.snd g b) s s' (pullback.fst g b) b
+        (pairMap s s' (pullback.fst g b) b w) ∧
+      IsIso (conormalMap s s' (pullback.fst g b) b w) ∧
+      ∃ ν : s'.ker.normalCone ⟶ s.ker.normalCone,
+        ν ≫ s.ker.normalConeToDeformationSpace =
+          s'.ker.normalConeToDeformationSpace ≫ pairMap s s' (pullback.fst g b) b w ∧
+        IsPullback ν (Scheme.Hom.normalConeProj (pullback.snd g b) s')
+          (Scheme.Hom.normalConeProj g s) b := by
+  let s' := Scheme.Hom.baseChangeSection g s hs b
+  have : IsClosedImmersion s' := MorphismProperty.of_isPullback
+    (Scheme.Hom.isPullback_baseChangeSection g s hs b).flip inferInstance
+  let w := Scheme.Hom.baseChangeSection_fst g s hs b
+  let D := Scheme.IdealSheafData.extendedReesPullbackData (pullback.fst g b)
+    s.ker s'.ker (Scheme.Hom.map_siteIdeal_ker_le_baseChangeSection g s hs b)
+  have hcov : ∀ x : (pullback g b : Scheme.{u}),
+      ∃ (U' : (pullback g b).AffineZariskiSite) (U : V.AffineZariskiSite)
+        (hU : U'.1 ≤ pullback.fst g b ⁻¹ᵁ U.1), x ∈ U'.1 ∧
+        IsPushout ((pullback.fst g b).appLE U.1 U'.1 hU)
+          (s.ker.toReesPresheaf.app (op U)) (s'.ker.toReesPresheaf.app (op U'))
+          (D.map hU) := by
+    intro x
+    obtain ⟨U', U, hU, hx, _, H⟩ :=
+      Scheme.Hom.exists_isPushout_extendedReesAlgebraMap_baseChange g s hs b d x
+    exact ⟨U', U, hU, hx, H⟩
+  have hp := (D.isPullback_comparison s.ker.coequifibered_toReesPresheaf
+    s'.ker.coequifibered_toReesPresheaf hcov).paste_vert
+    (IsPullback.of_hasPullback g b)
+  have hq : IsPullback (pairMap s s' (pullback.fst g b) b w)
+      (Scheme.Hom.deformationSpaceProj (pullback.snd g b) s')
+      (Scheme.Hom.deformationSpaceProj g s) (AffineSpace.map (ULift.{u} (Fin 1)) b) :=
+    Scheme.IdealSheafData.isPullback_deformationSpaceMap_proj
+    (pullback.fst g b) s.ker s'.ker
+    (Scheme.Hom.map_siteIdeal_ker_le_baseChangeSection g s hs b) hcov
+    g (pullback.snd g b) b (IsPullback.of_hasPullback g b)
+  have hc := pairMap_compatible g (pullback.snd g b) s s'
+    (pullback.fst g b) b w pullback.condition
+  obtain ⟨ν, _, _, hν, hπ, _⟩ := hc.2.2.2
+  have he : (ConormalGradedAlgebra.piece s 1).IsFiniteLocallyFreeOfRank d :=
+    (SmoothSectionCentredCoordinates.exists_centred_coordinates d g s hs).2.2.1
+  have he' : (ConormalGradedAlgebra.piece s' 1).IsFiniteLocallyFreeOfRank d :=
+    (SmoothSectionCentredCoordinates.exists_centred_coordinates d (pullback.snd g b) s'
+      (Scheme.Hom.baseChangeSection_snd g s hs b)).2.2.1
+  refine ⟨s', inferInstance, w, rfl, hp, hc,
+    conormalMap_isIso s s' (pullback.fst g b) b w
+      (Scheme.Hom.isPullback_baseChangeSection g s hs b) d, ν, hν, ?_⟩
+  have outer := (Scheme.Hom.isPullback_normalConeToDeformationSpace
+    (pullback.snd g b) s').paste_horiz hq
+  rw [AffineSpace.zeroSection_comp_map, ← hν] at outer
+  exact IsPullback.of_right outer hπ
+    (Scheme.Hom.isPullback_normalConeToDeformationSpace g s)
+
 /-- Etale maps of pairs with Cartesian centres give the canonical pullback of the Rees
 space, preserve augmentation and both fibres, and induce the linear normal-bundle
 isomorphism. Source: sk-thm-dnc, Local construction, etale maps of pairs

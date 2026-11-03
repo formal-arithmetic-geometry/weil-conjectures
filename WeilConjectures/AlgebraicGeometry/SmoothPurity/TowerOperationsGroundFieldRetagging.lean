@@ -129,4 +129,14 @@ def spEllTwistTransition (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
       ((sheafCompose (ProEt.topology T) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
         (SpTowerShriek.tau l E T n))).map (B m).hom
 
+/-- All signed multiplication/contraction maps on a finite Tate line. They encode the
+reassociations used in twisting an arbitrary tower, with mixed signs and the unit cases.
+Source: blueprint gamma proof (2), twist reassociations
+(blueprint: lem-pur-tower-operations-ground-field-retagging). -/
+abbrev SpEllTwistProducts (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{u}) (n : ℕ) :=
+  ∀ a b : ℤ, (SheafOfModules.siteSheafTensorRight.{u, u + 1, u + 1, u + 1}
+    (spEllTwistLine l E T n b)).obj
+    (spEllTwistLine l E T n a) ≅ spEllTwistLine l E T n (a + b)
+
 end AlgebraicGeometry.ProEtale

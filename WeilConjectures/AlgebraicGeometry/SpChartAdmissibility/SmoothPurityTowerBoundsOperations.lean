@@ -112,6 +112,20 @@ private theorem support_of_iso (T : Scheme.{u}) (A : Type u) [CommRing A]
   intro hz
   exact hi (((DerivedCategory.homologyFunctor _ i).mapIso e).isZero_iff.mp hz)
 
+private theorem finite_of_iso (T : Scheme.{u}) (A : Type u) [CommRing A] [Finite A]
+    {K L : proEtaleDerivedCategory T A} (e : K ≅ L)
+    (h : spFiniteConstructibleTor T A K) : spFiniteConstructibleTor T A L := by
+  obtain ⟨⟨a, b, hab, hv⟩, hc, s, t, ht⟩ := h
+  refine ⟨⟨a, b, hab, ?_⟩, ?_, s, t, torAmplitude_of_iso T A e s t ht⟩
+  · intro i hi
+    exact (hv i hi).of_iso ((DerivedCategory.homologyFunctor _ i).mapIso e).symm
+  · intro i
+    have hcons := hc i
+    rw [proEtaleModuleRestriction_constructible_iff] at hcons ⊢
+    exact ProEtale.isConstructible_of_iso
+      ((proEtaleModuleRestriction T A).mapIso
+        ((DerivedCategory.homologyFunctor _ i).mapIso e)) hcons
+
 private theorem tor_shift (T : Scheme.{u}) (A : Type u) [CommRing A]
     (K : proEtaleDerivedCategory T A) (a b j : ℤ)
     (h : HasProEtaleTorAmplitude T A K a b) :

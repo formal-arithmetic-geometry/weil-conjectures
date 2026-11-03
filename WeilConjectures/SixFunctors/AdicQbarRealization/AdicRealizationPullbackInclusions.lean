@@ -9,6 +9,8 @@ public import WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorHom
 public import WeilConjectures.PoincareDuality.Derived.DerivedAutomorphismHomEvaluationContinuationB
 public import Mathlib.NumberTheory.Padics.Complex
 import WeilConjectures.SixFunctors.Common.CommonStagePullbackNormalizedDescent
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsPull
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedModuleDerivedPushpull
 
 /-! # Pullback on finite-stage inclusions
 
@@ -106,3 +108,92 @@ theorem realizationCompletionPullbackIso_inv_app (l : ℕ) [Fact l.Prime]
   rfl
 
 end WeilConjectures.AdicQbarRealization
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+/-- The ambient comparison is the canonical exact-pullback comparison itself.
+Source: `def-weil-derived-pullback-tensor-hom`, the termwise formula for total pullback.
+Proof: exactness identifies the total left derived functor with termwise inverse image.
+(blueprint: lem-sfb-condensed-pullback-inclusions). -/
+def realizationPullback_termwiseIso :
+    moduleObjectDerivedPullback Λ g ≅ (upperStar Λ g).mapDerivedCategory :=
+  leftDerivedUpperStarIsoMapDerivedCategory Λ g
+
+/-- On any full subcategory, derived inverse image is the exact termwise inverse image.
+Source: `def-weil-derived-pullback-tensor-hom`, its exactness comparison.
+Proof: restrict the components of the canonical total-derived/termwise comparison.
+Its naturality on the underlying morphisms proves naturality after inclusion.
+(blueprint: lem-sfb-condensed-pullback-inclusions). -/
+def realizationPullback_inclusionIso :
+    P.ι ⋙ moduleObjectDerivedPullback Λ g ≅ P.ι ⋙ (upperStar Λ g).mapDerivedCategory :=
+  NatIso.ofComponents
+    (fun K ↦ (realizationPullback_termwiseIso Λ g).app K.obj)
+    (fun {_K _L} f ↦ (realizationPullback_termwiseIso Λ g).hom.naturality f.hom)
+
+/-- Restriction retains the specified inverse component, with no choice of comparisons.
+Source: the component construction above.
+Proof: unfold the natural isomorphism built from components.
+(blueprint: lem-sfb-condensed-pullback-inclusions). -/
+theorem realizationPullback_inclusionIso_inv_app (K : P.FullSubcategory) :
+    (realizationPullback_inclusionIso Λ g P).inv.app K =
+      (leftDerivedUpperStarIsoMapDerivedCategory Λ g).inv.app K.obj := by
+  rfl
+
+/-- Inverse image commutes with derived coefficient change, including localization
+and non-flat reduction. No completion or finite-stage realization is involved.
+Source: `det-prop-scalar-six-pullback`, proof (1).
+Proof: use the canonical derived tensor/pullback comparison, computed on K-flat
+resolutions; the coefficient square identifies the two tensor products.
+(blueprint: lem-sf-adic-realization-pullback-inclusions). -/
+def realizationPullback_scalarIso :
+    moduleObjectDerivedPullback Λ g ⋙ L(Mod.extendScalars (coefficientMap a X)) ≅
+      L(Mod.extendScalars (coefficientMap a Y)) ⋙ moduleObjectDerivedPullback Λ' g :=
+  derivedUpperStarExtendScalarsIso a g
+
+/-- Transport the same scalar square through the exact-pullback identifications.
+Source: `det-prop-scalar-six-pullback`, proof (1), where inverse image is exact.
+Proof: compose inverse exactness at Λ, the specified total-derived scalar square,
+and exactness at Λ′. These are the prescribed maps, not independently chosen witnesses.
+(blueprint: lem-sf-adic-realization-pullback-inclusions). -/
+def realizationPullback_scalarTermwiseIso :
+    (upperStar Λ g).mapDerivedCategory ⋙ L(Mod.extendScalars (coefficientMap a X)) ≅
+      L(Mod.extendScalars (coefficientMap a Y)) ⋙ (upperStar Λ' g).mapDerivedCategory :=
+  Functor.isoWhiskerRight (realizationPullback_termwiseIso Λ g).symm _ ≪≫
+    realizationPullback_scalarIso g a ≪≫
+    Functor.isoWhiskerLeft _ (realizationPullback_termwiseIso Λ' g)
+
+/-- The scalar comparison on a full subcategory is the restriction of the ambient
+comparison, with the functor associators recorded explicitly.
+Source: `det-prop-scalar-six-pullback`, proof (1), naturality in the input.
+Proof: associate to the ambient square, restrict it by the inclusion, and reassociate.
+(blueprint: lem-sf-adic-realization-pullback-inclusions). -/
+def realizationPullback_scalarInclusionIso :
+    (P.ι ⋙ (upperStar Λ g).mapDerivedCategory) ⋙
+        L(Mod.extendScalars (coefficientMap a X)) ≅
+      (P.ι ⋙ L(Mod.extendScalars (coefficientMap a Y))) ⋙
+        (upperStar Λ' g).mapDerivedCategory :=
+  Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft P.ι (realizationPullback_scalarTermwiseIso g a) ≪≫
+    (Functor.associator _ _ _).symm
+
+/-- The restricted comparison retains the specified ambient arrow and exactness transports.
+Source: the preceding restricted comparison.
+Proof: the associator components are identities; whiskering evaluates at the
+underlying object. Thus no equality merely after reduction is used.
+(blueprint: lem-sf-adic-realization-pullback-inclusions). -/
+theorem realizationPullback_scalarInclusionIso_hom_app (K : P.FullSubcategory) :
+    (realizationPullback_scalarInclusionIso g P a).hom.app K =
+      L(Mod.extendScalars (coefficientMap a X)).map
+          ((leftDerivedUpperStarIsoMapDerivedCategory Λ g).inv.app K.obj) ≫
+        (derivedUpperStarExtendScalarsIso a g).hom.app K.obj ≫
+        (leftDerivedUpperStarIsoMapDerivedCategory Λ' g).hom.app
+          (L(Mod.extendScalars (coefficientMap a Y)).obj K.obj) := by
+  simp only [realizationPullback_scalarInclusionIso, realizationPullback_scalarTermwiseIso,
+    realizationPullback_scalarIso, realizationPullback_termwiseIso,
+    Iso.trans_hom, NatTrans.comp_app, Functor.associator_hom_app,
+    Functor.associator_inv_app, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
+    Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
+    Iso.symm_hom, Category.id_comp, Category.comp_id]
+  rfl
+
+end AlgebraicGeometry.ProEtale.CondensedRing

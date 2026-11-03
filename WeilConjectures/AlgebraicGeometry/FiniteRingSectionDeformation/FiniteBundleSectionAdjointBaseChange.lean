@@ -257,4 +257,86 @@ private theorem integration_mate_square
   have h := congrArg (fun k ↦ ex.inv.app W ≫ k) ht
   simpa only [← Category.assoc, Iso.inv_hom_id_app, Category.id_comp] using h.symm
 
+/-- Restrict the integration adjunct square to zero sections in a Cartesian bundle
+presentation. Source: latest blueprint, sec-smooth-purity/sk-prop-sp-purity-bc,
+sk-prop-sp-purity-bc-factors.proof.md, proof (1), normal-bundle integration step.
+(blueprint: lem-sp-finite-bundle-section-adjoint-base-change).
+
+Cancel the coefficient-to-unit isomorphism from scalar trace base change. Transpose
+under the compact-support adjunctions; the mate is the exceptional exchange map with
+its unit coordinates. Restrict the resulting coefficient square along the zero
+sections using sectionPullback_coefficient_naturality. The section equations and
+pullback unit comparisons identify the two coefficient restrictions. This also
+covers rank zero and empty schemes without a case distinction. -/
+theorem bundleSectionAdjoint_baseChange
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
+    {B B' : Scheme.{u}} [IsNoetherian B] [IsNoetherian B']
+    (hB : IsUnit (N : Γ(B, ⊤))) (hB' : IsUnit (N : Γ(B', ⊤)))
+    (d : ℕ) (F : B.Modules) (F' : B'.Modules)
+    [F.IsFiniteLocallyFreeOfRank d] [F'.IsFiniteLocallyFreeOfRank d]
+    (b : B' ⟶ B)
+    (v : VectorBundleZeroSection.scheme B' d F' ⟶ VectorBundleZeroSection.scheme B d F)
+    (sq : IsPullback v (VectorBundleZeroSection.π B' d F')
+      (VectorBundleZeroSection.π B d F) b)
+    (hz : VectorBundleZeroSection.zero B' d F' ≫ v =
+      b ≫ VectorBundleZeroSection.zero B d F) :
+    (ordinaryFinitePullback A b).map
+        (FiniteRingSectionDeformation.bundleSectionAdjoint N hN A hA B hB d F) ≫
+      NoetherianSectionSpecialization.sectionMap A
+        (VectorBundleZeroSection.π B d F) (VectorBundleZeroSection.π B' d F') b v sq
+        (VectorBundleZeroSection.zero B d F) (VectorBundleZeroSection.zero B' d F') hz =
+      (vectorIntegrationBaseCoefficientPullback A N hA
+        (WeilConjectures.PurityFiniteSetting.purityTwistTransport A N hN hA) b hB d).hom ≫
+        FiniteRingSectionDeformation.bundleSectionAdjoint N hN A hA B' hB' d F' := by
+  let π := VectorBundleZeroSection.π B d F
+  let π' := VectorBundleZeroSection.π B' d F'
+  let C := affineLinearBaseCoefficient A N hA B d
+  let C' := affineLinearBaseCoefficient A N hA B' d
+  let c := vectorIntegrationBaseCoefficientPullback A N hA
+    (WeilConjectures.PurityFiniteSetting.purityTwistTransport A N hN hA) b hB d
+  let a := (WeilConjectures.PurityFiniteSetting.purityPullbackSquare A sq C ≪≫
+    (ordinaryFinitePullback A π').mapIso c).hom
+  let adj := vectorBundlePurityAdjunction A B d F
+  let adj' := vectorBundlePurityAdjunction A B' d F'
+  let t := vectorBundleIntegration N hN A hA B hB d F
+  let t' := vectorBundleIntegration N hN A hA B' hB' d F'
+  have htrace := WeilConjectures.PurityFiniteSetting.vectorIntegration_cartesianTrace
+    A N hN hA hB hB' d F F' sq
+  have := isIso_rightDerivedLowerShriekBaseChangeMap A sq
+  let ex := asIso (rightDerivedLowerShriekBaseChangeMap A sq)
+  have ht : ex.hom.app _ ≫
+      (rightDerivedLowerShriek (ModuleCat.{u + 1} A) π').map a ≫ t' =
+      (ordinaryFinitePullback A b).map t ≫ (ordinaryFiniteUnitPullback A b).hom := by
+    apply (cancel_mono (singleFunctorObjUnitIso (ModuleCat.{u + 1} A) B').hom).1
+    simp only [Category.assoc]
+    erw [ordinaryFiniteUnitPullback_hom_unit]
+    dsimp only [ex, a, t, t', π, π', C, c,
+      WeilConjectures.PurityFiniteSetting.RfPullback,
+      WeilConjectures.PurityFiniteSetting.RfShriek, vectorIntegrationCoefficient] at htrace ⊢
+    simpa only [asIso_hom, Functor.map_comp, Category.assoc] using htrace
+  have hm := integration_mate_square adj adj' (ordinaryFinitePullback A v)
+    (ordinaryFinitePullback A b) ex a t t' (ordinaryFiniteUnitPullback A b).hom ht
+  rw [FiniteSmoothPurity.ordinaryFiniteUnitPullback_eq_unitCoordinates] at hm
+  change (ordinaryFinitePullback A v).map
+      (FiniteRingSectionDeformation.bundleAdjoint N hN A hA B hB d F) ≫
+        dualizingComplexBaseChangeMap A sq =
+      a ≫ FiniteRingSectionDeformation.bundleAdjoint N hN A hA B' hB' d F' at hm
+  dsimp only [a, WeilConjectures.PurityFiniteSetting.purityPullbackSquare,
+    Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv,
+    Functor.mapIso_hom] at hm
+  simp only [Category.assoc] at hm
+  have hc := sectionPullback_coefficient_naturality A b π π' v
+    (VectorBundleZeroSection.zero B d F) (VectorBundleZeroSection.zero B' d F')
+    sq.w hz (VectorBundleZeroSection.zero_spec B d F).1
+    (VectorBundleZeroSection.zero_spec B' d F').1 C C' _ _ c.hom
+    (FiniteRingSectionDeformation.bundleAdjoint N hN A hA B hB d F)
+    (FiniteRingSectionDeformation.bundleAdjoint N hN A hA B' hB' d F')
+    (dualizingComplexBaseChangeMap A sq) hm
+  dsimp only [FiniteRingSectionDeformation.bundleSectionAdjoint,
+    NoetherianSectionSpecialization.sectionMap, sectionInvariant, ordinaryFinitePullback,
+    Iso.app_hom, Iso.app_inv, c, C, C', π, π'] at hc ⊢
+  simp only [Functor.map_comp, Category.assoc] at hc ⊢
+  exact hc
+
 end AlgebraicGeometry.Etale.FiniteRingSectionDeformation

@@ -103,6 +103,40 @@ private theorem conjugate_unit (e : S.obj (𝟙_ T) ⟶ 𝟙_ C) (M : C)
   congr 1
   rw [← BraidedCategory.braiding_naturality_left_assoc, braiding_rightUnitor]
 
+private theorem coherenceBC_tensor
+    {K M : DerivedCategory (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} Λ))}
+    (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) T K)
+    (hM : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) T M) :
+    DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) T (K ⊗ M) := by
+  obtain ⟨K', hK', ⟨eK⟩⟩ := hK
+  obtain ⟨⟨M', hM', ⟨eM⟩⟩, a, b, htM⟩ := hM
+  let F := (comparisonUpperStar (ModuleCat.{u + 1} Λ) T).mapDerivedCategory
+  have htM' : Etale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) T a b M' :=
+    (DerivedCategory.torAmplitudeIn_mapDerivedCategory_iff a b M').1
+      ((DerivedCategory.torAmplitudeIn _ T a b).prop_of_iso eM.symm htM)
+  have h := Etale.boundedConstructible_tensor Λ T hK' hM' ⟨a, b, htM'⟩
+  apply (DerivedCategory.boundedConstructible _ T).prop_of_iso
+    ((((derivedTensorObjCompMapDerivedCategoryComparisonUpperStarIso
+      (ModuleCat.{u + 1} Λ) K').app M')) ≪≫ tensorIso eK eM)
+  exact DerivedCategory.boundedConstructible_comparisonUpperStar_mapDerivedCategory_obj h
+
+private theorem coherenceCtf_unit :
+    DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) T (𝟙_ _) :=
+  (DerivedCategory.constructibleFiniteTor _ T).prop_of_iso
+    (DerivedCategory.mapDerivedCategoryComparisonUpperStarUnitIso Λ T)
+    (DerivedCategory.constructibleFiniteTor_mapDerivedCategory Λ
+      (Etale.constructibleFiniteTor_tensorUnit Λ T))
+
+private theorem coherenceCtf_tensor
+    {K M : DerivedCategory (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} Λ))}
+    (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) T K)
+    (hM : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) T M) :
+    DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) T (K ⊗ M) := by
+  obtain ⟨hcK, a, b, htK⟩ := hK
+  obtain ⟨hcM, c, d, htM⟩ := hM
+  exact ⟨coherenceBC_tensor Λ T hcK ⟨hcM, c, d, htM⟩, a + c, b + d,
+    _root_.DerivedCategory.torAmplitudeIn_tensor htK htM⟩
+
 omit [SymmetricCategory C] [SymmetricCategory T] in
 end Conjugate
 

@@ -87,6 +87,7 @@ import WeilConjectures.AlgebraicGeometry.Comparison.ComparisonTorAmplitude
 import WeilConjectures.AlgebraicGeometry.Finite.Ring.FiniteRingConstructibleDerivedOrigin
 import WeilConjectures.SmoothPurity.Sf.SfIntegralConstructibleTriangulated
 import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
+public import WeilConjectures.AlgebraicGeometry.Finite.Compact.FiniteCompactSupportUniformTor
 
 /-! # Finite Hom groups into finite compact-support terms
 
@@ -249,5 +250,80 @@ private theorem intrinsic_hom_finite
         (X := K') (Y := M')).symm
   exact Finite.of_equiv _ ((Functor.FullyFaithful.ofFullyFaithful J).homEquiv.trans
     (eK.homCongr eM))
+
+/-- Finite-level compact-support terms have finite shifted Hom groups from integral
+constructible objects. Source: SGA 4½, Th. finitude; blueprint Verdier-exchange Step 1,
+integral realization (blueprint: lem-sf-compact-support-term-hom-finite).
+
+Proof:
+1. Transpose through the derived reduction--restriction adjunction at level n+1.
+The source is the reduction of the shifted integral object M[1]. The integral
+predicate supplies bounded constructibility of both reductions. Integral residue Tor
+upgrades the common residue intervals to Tor intervals at every positive level.
+2. Apply the uniform compact-support Tor estimate, which uses a dense refinement,
+and transport the result back to the original compactification. This yields bounded
+constructibility and finite Tor amplitude of the finite compact-support target.
+3. Use finite-ring etale origin and its fully faithful comparison to compute Hom on
+the small etale site. Reflect both Tor intervals along this comparison. Bounded
+constructible internal Hom is bounded constructible by the existing finite-Tor
+internal-Hom theorem. Its direct image to the algebraically closed point is bounded
+constructible by the finite-type direct-image finiteness theorem, which allows
+nonseparated source schemes. The degree-zero sections of that direct image form a
+finite module over the finite ring. Global sections at the point are exact and fully
+faithful, and inverse image preserves the unit; the direct-image adjunction and the
+closed monoidal Hom adjunction identify these sections with the original Hom set.
+4. Transport finiteness back through the comparison and scalar-adjunction Hom
+bijections. Zero objects, empty schemes and the first positive quotient are included. -/
+theorem compactSupportTerm_hom_finite
+    (D : FiniteFieldDatum.{u}) (B : D.CoefficientDatum)
+    (E : Type u) [Field E] [Algebra (Padic B.l) E]
+    [FiniteDimensional (Padic B.l) E]
+    {X Y : SixFunctorSpace D} (f : X ⟶ Y)
+    [IsSeparated f.hom.left] [LocallyOfFiniteType f.hom.left] [QuasiCompact f.hom.left]
+    (c : Compactification f.hom.left)
+    (M : sfIntegralConstructibleCategory B.l E Y.obj.left)
+    (K : sfIntegralConstructibleCategory B.l E X.obj.left) (n : ℕ) :
+    Finite (M.obj⟦(1 : ℤ)⟧ ⟶ sfCompactSupportTerm B.l E c K.obj n) := by
+  classical
+  letI : ∀ x : X.obj.left, Invertible (B.l : X.obj.left.residueField x) := fun x ↦ by
+    let φ : D.k →+* X.obj.left.residueField x :=
+      (X.obj.left.evaluation ⊤ x (by trivial)).hom.comp
+        ((X.obj.left ↘ Spec (.of D.k)).appTop.hom.comp
+          (Scheme.ΓSpecIso (.of D.k)).inv.hom)
+    exact (show IsUnit (B.l : X.obj.left.residueField x) from by
+      simpa only [map_natCast] using
+        (PurCompactSupport.coefficientPrimeUnit B.l D B.different).map φ).invertible
+  letI : ∀ y : Y.obj.left, Invertible (B.l : Y.obj.left.residueField y) := fun y ↦ by
+    let φ : D.k →+* Y.obj.left.residueField y :=
+      (Y.obj.left.evaluation ⊤ y (by trivial)).hom.comp
+        ((Y.obj.left ↘ Spec (.of D.k)).appTop.hom.comp
+          (Scheme.ΓSpecIso (.of D.k)).inv.hom)
+    exact (show IsUnit (B.l : Y.obj.left.residueField y) from by
+      simpa only [map_natCast] using
+        (PurCompactSupport.coefficientPrimeUnit B.l D B.different).map φ).invertible
+  let M' : sfIntegralConstructibleCategory B.l E Y.obj.left :=
+    ⟨M.obj⟦(1 : ℤ)⟧, (sfIntegralConstructible B.l E Y.obj.left).le_shift (1 : ℤ) _
+      M.property⟩
+  obtain ⟨a, b, hab, hK⟩ := K.property.2
+  obtain ⟨c', d, hcd, hM⟩ := M'.property.2
+  have htK := (integral_residue_tor D B.l B.different E X.obj.left).1
+    K.obj K.property a b hab (hK 0).2 n
+  have htM := (integral_residue_tor D B.l B.different E Y.obj.left).1
+    M'.obj M'.property c' d hcd (hM 0).2 n
+  obtain ⟨dim, hdim⟩ := exists_topologicalKrullDim_le (X.obj.left ↘ Spec (.of D.k))
+  have hs := (ProEtale.finiteCompactSupport_uniformTor_after_denseRefinement
+    D B.l B.different E f.hom.left c dim hdim).2.2.2.2.2
+    (n + 1) (by omega) a b hab
+    ((scalarReductionDerivedExtension B.l E X.obj.left n).obj K.obj) (hK n).1 htK
+  let L := (sfAmbientCompactSupportCandidate
+    (Padic.coefficientExtensionRing B.l E (n + 1)) c).obj
+      ((scalarReductionDerivedExtension B.l E X.obj.left n).obj K.obj)
+  letI : Finite
+      ((scalarReductionDerivedExtension B.l E Y.obj.left n).obj M'.obj ⟶ L) :=
+    intrinsic_hom_finite D B.l B.different E (n + 1) (by omega) Y.obj.left
+      _ L (hM n).1 hs.2.2.1 c' d a (b + 2 * (dim : ℤ)) htM hs.2.2.2.1
+  exact Finite.of_equiv _
+    ((derivedScalarExtensionRestrictionAdjunction B.l E Y.obj.left n).choose.homEquiv
+      M'.obj L)
 
 end WeilConjectures

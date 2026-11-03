@@ -88,6 +88,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeHomology
 import WeilConjectures.SixFunctors.Etale.Derived.GenericPerfect
 import WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion
 import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+public import WeilConjectures.CategoryTheory.SixFunctors.OrdinaryModuleDerivedInternalHom
 
 /-! # Site comparison for internal Hom from a flat lisse sheaf
 
@@ -114,6 +115,53 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposi
 open MonoidalClosed
 
 namespace AlgebraicGeometry.ProEtale
+
+/-- Evaluate internal Hom at the images of the specified basis vectors. This is a real
+map, with no selected Hom isomorphism. The tensor-unit comparison supplies the vectors
+after applying F. Source: Stacks 03EO, 08JI, the degree-zero finite-free computation
+(blueprint: lem-sf-lisse-flat-hom-site-comparison). -/
+def lisseFlatHomCoordinates
+    {C : Type c} [Category.{v} C] [MonoidalCategory C] [MonoidalClosed C]
+    {D : Type d} [Category.{v} D] [MonoidalCategory D] [MonoidalClosed D]
+    (F : C ⥤ D) [F.LaxMonoidal] (K M : C) (r : ℕ)
+    [HasCoproduct (fun _ : Fin r ↦ 𝟙_ C)]
+    [HasProduct (fun _ : Fin r ↦ F.obj M)]
+    (e : (∐ fun _ : Fin r ↦ 𝟙_ C) ≅ K) :
+    (ihom (F.obj K)).obj (F.obj M) ⟶ ∏ᶜ fun _ : Fin r ↦ F.obj M :=
+  Pi.lift fun j ↦
+    (MonoidalClosed.pre (Functor.LaxMonoidal.ε F ≫
+      F.map (Sigma.ι (fun _ : Fin r ↦ 𝟙_ C) j ≫ e.hom))).app
+      (F.obj M) ≫ (MonoidalClosed.unitIsoSelf (F.obj M)).hom
+
+/-- The finite-free description of the very evaluation comparison on a slice. The two
+coordinate maps are explicitly prescribed by evaluation, and are asserted invertible.
+Thus this asserts a conjugacy to the canonical finite-product comparison, rather than
+merely the existence of unrelated isomorphic objects. Quantifying over every basis
+includes changes of trivialization. Source: Stacks 08JI, 03EO
+(blueprint: lem-sf-lisse-flat-hom-site-comparison). -/
+def lisseFlatHomFiniteFreeAssertion
+    {C : Type c} [Category.{v} C] [MonoidalCategory C] [MonoidalClosed C]
+    {D : Type d} [Category.{v} D] [MonoidalCategory D] [MonoidalClosed D]
+    (F : C ⥤ D) [F.LaxMonoidal]
+    [HasFiniteCoproducts C] [HasFiniteProducts C] [HasFiniteProducts D]
+    (K M : C)
+    (β : F.obj ((ihom K).obj M) ⟶ (ihom (F.obj K)).obj (F.obj M)) : Prop :=
+  ∀ (r : ℕ) (e : (∐ fun _ : Fin r ↦ 𝟙_ C) ≅ K),
+    IsIso (lisseFlatHomCoordinates (𝟭 C) K M r e) ∧
+    IsIso (lisseFlatHomCoordinates F K M r e) ∧
+    β ≫ lisseFlatHomCoordinates F K M r e =
+      F.map (lisseFlatHomCoordinates (𝟭 C) K M r e) ≫
+        piComparison F (fun _ : Fin r ↦ M)
+
+/-- Specialize the evaluation-coordinate equation to the canonical site comparison.
+Source: Stacks 08JI, 03EO (blueprint: lem-sf-lisse-flat-hom-site-comparison). -/
+def lisseFlatHomLocalAssertion
+    (A : Type (u + 1)) [CommRing A] [Finite A] (X : Scheme.{u})
+    (K M : Etale.DerivedCategoryModule A X) : Prop :=
+  let F := (comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory
+  let _ : F.Monoidal := siteComparisonDerivedMonoidal (ModuleCat.{u + 1} A) X
+  lisseFlatHomFiniteFreeAssertion F K M
+    ((Functor.LaxMonoidal.ihomComparison F K).natTrans.app M)
 
 /-- Both-variable naturality, stated with abstract functors so that it does not
 unfold the derived tensor structures while checking the equation. The specialization
@@ -149,6 +197,136 @@ private theorem homComparison_naturality
   rw [F.map_comp, Category.assoc, h, ← Category.assoc,
     Functor.LaxMonoidal.map_pre_app_comp_ihomComparison_app, Category.assoc]
 
+private theorem unit_eval
+    {C : Type c} [Category.{v} C] [MonoidalCategory C] [MonoidalClosed C] (M : C) :
+    (unitIsoSelf M).hom = (λ_ ((ihom (𝟙_ C)).obj M)).inv ≫
+      (ihom.ev (𝟙_ C)).app M := by
+  simp [unitIsoSelf, unitNatIso, conjugateIsoEquiv, conjugateEquiv]
+
+private theorem coordinate_comp
+    {C : Type c} [Category.{v} C] [MonoidalCategory C] [MonoidalClosed C]
+    {K M T : C} (v : 𝟙_ C ⟶ K) (f : T ⟶ (ihom K).obj M) :
+    f ≫ (pre v).app M ≫ (unitIsoSelf M).hom =
+      (λ_ T).inv ≫ (v ▷ T) ≫ uncurry f := by
+  rw [unit_eval, leftUnitor_inv_naturality_assoc,
+    id_tensor_pre_app_comp_ev, leftUnitor_inv_naturality_assoc,
+    whisker_exchange_assoc, uncurry_eq]
+
+private theorem coordinates_iso
+    {C : Type c} [Category.{v} C] [MonoidalCategory C] [MonoidalClosed C]
+    [∀ T : C, PreservesFiniteCoproducts (tensorRight T)] {K M : C} {r : ℕ}
+    [HasProduct (fun _ : Fin r ↦ M)]
+    (v : ∀ _j : Fin r, 𝟙_ C ⟶ K) (h : IsColimit (Cofan.mk K v)) :
+    IsIso (Pi.lift fun j ↦ (pre (v j)).app M ≫ (unitIsoSelf M).hom) := by
+  apply isIso_of_yoneda_map_bijective
+  intro T
+  let ht := isColimitCofanMkObjOfIsColimit (tensorRight T) (fun _ : Fin r ↦ 𝟙_ C) v h
+  constructor
+  · intro a b hab
+    apply uncurry_injective
+    apply ht.hom_ext
+    intro j
+    have hj := congrArg (fun f ↦ f ≫ Pi.π (fun _ : Fin r ↦ M) j.as) hab
+    change (v j.as ▷ T) ≫ uncurry a = (v j.as ▷ T) ≫ uncurry b
+    simpa only [Category.assoc, limit.lift_π, Fan.mk_π_app,
+      coordinate_comp, cancel_epi] using hj
+  · intro a
+    let s := Cofan.mk M (fun j : Fin r ↦ (λ_ T).hom ≫ a ≫ Pi.π _ j)
+    refine ⟨curry (ht.desc s), ?_⟩
+    apply Pi.hom_ext
+    intro j
+    simp only [Category.assoc, limit.lift_π, Fan.mk_π_app, coordinate_comp,
+      uncurry_curry]
+    change (λ_ T).inv ≫ (v j ▷ T) ≫ ht.desc s = _
+    rw [show (v j ▷ T) ≫ ht.desc s = s.inj j from ht.fac s ⟨j⟩]
+    simp [s]
+
+private def mapped_basis_colimit
+    {C : Type c} [Category.{v} C] [MonoidalCategory C]
+    {D : Type d} [Category.{v} D] [MonoidalCategory D]
+    (F : C ⥤ D) [F.Monoidal] {K : C} {r : ℕ}
+    [HasCoproduct (fun _ : Fin r ↦ 𝟙_ C)] [PreservesFiniteCoproducts F]
+    (e : (∐ fun _ : Fin r ↦ 𝟙_ C) ≅ K) :
+    IsColimit (Cofan.mk (F.obj K) (fun j : Fin r ↦
+      Functor.LaxMonoidal.ε F ≫ F.map (Sigma.ι (fun _ : Fin r ↦ 𝟙_ C) j ≫ e.hom))) := by
+  let h : IsColimit (Cofan.mk K (fun j : Fin r ↦ Sigma.ι (fun _ : Fin r ↦ 𝟙_ C) j ≫ e.hom)) :=
+    IsColimit.ofIsoColimit (coproductIsCoproduct _) (Cofan.ext e (fun _ ↦ rfl))
+  let h' := isColimitCofanMkObjOfIsColimit F (fun _ : Fin r ↦ 𝟙_ C) _ h
+  let α : Discrete.functor (fun _ : Fin r ↦ 𝟙_ D) ≅
+      Discrete.functor (fun _ : Fin r ↦ F.obj (𝟙_ C)) :=
+    Discrete.natIso (fun _ ↦ Functor.Monoidal.εIso F)
+  exact (IsColimit.precomposeHomEquiv α
+    (Cofan.mk (F.obj K) (fun j : Fin r ↦ F.map (Sigma.ι (fun _ : Fin r ↦ 𝟙_ C) j ≫ e.hom)))).symm h'
+
+private theorem coordinate_comparison
+    {C : Type c} [Category.{v} C] [MonoidalCategory C] [MonoidalClosed C]
+    {D : Type d} [Category.{v} D] [MonoidalCategory D] [MonoidalClosed D]
+    (F : C ⥤ D) [F.Monoidal] {K M : C} (v : 𝟙_ C ⟶ K) :
+    (Functor.LaxMonoidal.ihomComparison F K).natTrans.app M ≫
+      (pre (Functor.LaxMonoidal.ε F ≫ F.map v)).app (F.obj M) ≫
+        (unitIsoSelf (F.obj M)).hom =
+      F.map ((pre v).app M ≫ (unitIsoSelf M).hom) := by
+  rw [coordinate_comp, uncurry_eq, Functor.LaxMonoidal.ihomComparison_ev,
+    comp_whiskerRight]
+  dsimp only [Functor.comp_obj]
+  rw [Category.assoc, Functor.LaxMonoidal.μ_natural_left_assoc]
+  rw [Functor.LaxMonoidal.left_unitality_inv_assoc, ← F.map_comp, ← F.map_comp]
+  congr 1
+  simpa only [Category.id_comp, uncurry_id_eq_ev] using
+    (coordinate_comp v (𝟙 ((ihom K).obj M))).symm
+
+private theorem finiteFree_assertion
+    {C : Type c} [Category.{v} C] [MonoidalCategory C] [MonoidalClosed C]
+    [∀ T : C, PreservesFiniteCoproducts (tensorRight T)]
+    {D : Type d} [Category.{v} D] [MonoidalCategory D] [MonoidalClosed D]
+    [∀ T : D, PreservesFiniteCoproducts (tensorRight T)]
+    (F : C ⥤ D) [F.Monoidal] [PreservesFiniteCoproducts F]
+    [HasFiniteCoproducts C] [HasFiniteProducts C] [HasFiniteProducts D]
+    (K M : C) :
+    lisseFlatHomFiniteFreeAssertion F K M
+      ((Functor.LaxMonoidal.ihomComparison F K).natTrans.app M) := by
+  intro r e
+  refine ⟨?_, ?_, ?_⟩
+  · exact coordinates_iso _ (mapped_basis_colimit (𝟭 C) e)
+  · exact coordinates_iso _ (mapped_basis_colimit F e)
+  · apply Pi.hom_ext
+    intro j
+    simp only [lisseFlatHomCoordinates, Category.assoc, limit.lift_π, Fan.mk_π_app,
+      piComparison_comp_π, ← F.map_comp]
+    erw [Pi.lift_π]
+    simpa using coordinate_comparison F (M := M) (Sigma.ι (fun _ : Fin r ↦ 𝟙_ C) j ≫ e.hom)
+
+private theorem hom_preserves_vanishing
+    {C : Type c} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C]
+    [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
+    [HasDerivedCategory.{v} C] [Abelian.HasFunctorialFlatResolution C]
+    (Q K N : _root_.DerivedCategory C) [ExactPairing Q K]
+    (hKt : _root_.DerivedCategory.torAmplitudeIn C 0 0 K) (i : ℤ)
+    (hz : IsZero ((_root_.DerivedCategory.homologyFunctor C i).obj N)) :
+    IsZero ((_root_.DerivedCategory.homologyFunctor C i).obj ((ihom K).obj N)) := by
+  obtain ⟨_⟩ := _root_.DerivedCategory.nonempty_braidedCategory C
+  let := BraidedCategory.exactPairing_swap Q K
+  have ht : _root_.DerivedCategory.torAmplitudeIn C 0 0 Q := by
+    simpa using _root_.DerivedCategory.torAmplitudeIn_of_exactPairing (L := Q) hKt
+  exact (_root_.DerivedCategory.isZero_homologyFunctor_tensor_of_torAmplitudeIn
+    ht N i hz).of_iso
+      ((_root_.DerivedCategory.homologyFunctor C i).mapIso (ihomObjIsoTensor Q K N))
+
+private theorem site_naturality
+    (B : Type (u + 2)) [Category.{u + 1} B] [Abelian B]
+    [IsGrothendieckAbelian.{u + 1} B] [MonoidalCategory B]
+    [MonoidalPreadditive B] [SymmetricCategory B] [MonoidalClosed B]
+    [Abelian.HasFunctorialFlatResolution B]
+    (X : Scheme.{u}) [(comparisonUpperStar B X).PreservesFlat]
+    (K N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology B)) :
+    lisseFlatHomNaturality (Etale.derivedHom B X) (derivedHom B X)
+      (comparisonUpperStar B X).mapDerivedCategory
+      (siteComparisonEvaluationHom B X) K N := by
+  let : (comparisonUpperStar B X).mapDerivedCategory.Monoidal :=
+    siteComparisonDerivedMonoidal B X
+  unfold siteComparisonEvaluationHom
+  exact homComparison_naturality _ K N
+
 private theorem site_iso_of_pairing
     (B : Type (u + 2)) [Category.{u + 1} B] [Abelian B]
     [IsGrothendieckAbelian.{u + 1} B] [MonoidalCategory B]
@@ -161,6 +339,55 @@ private theorem site_iso_of_pairing
     siteComparisonDerivedMonoidal B X
   unfold siteComparisonEvaluationHom
   exact Functor.Monoidal.isIso_ihomComparison_app_of_exactPairing _ Q K N
+
+private theorem site_vanishing
+    (B : Type (u + 2)) [Category.{u + 1} B] [Abelian B]
+    [IsGrothendieckAbelian.{u + 1} B] [MonoidalCategory B]
+    [MonoidalPreadditive B] [SymmetricCategory B] [MonoidalClosed B]
+    [Abelian.HasFunctorialFlatResolution B] (X : Scheme.{u})
+    (Q K N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology B))
+    [ExactPairing Q K]
+    (hKt : _root_.DerivedCategory.torAmplitudeIn
+      (Sheaf X.smallEtaleTopology B) 0 0 K) (i : ℤ)
+    (hz : IsZero ((_root_.DerivedCategory.homologyFunctor _ i).obj N)) :
+    IsZero ((_root_.DerivedCategory.homologyFunctor _ i).obj
+      (((Etale.derivedHom B X).obj (op K)).obj N)) := by
+  exact hom_preserves_vanishing Q K N hKt i hz
+
+private def site_hom_tensor
+    (B : Type (u + 2)) [Category.{u + 1} B] [Abelian B]
+    [IsGrothendieckAbelian.{u + 1} B] [MonoidalCategory B]
+    [MonoidalPreadditive B] [SymmetricCategory B] [MonoidalClosed B]
+    [Abelian.HasFunctorialFlatResolution B] (X : Scheme.{u})
+    (Q K N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology B))
+    [ExactPairing Q K] :
+    ((Etale.derivedHom B X).obj (op K)).obj N ≅
+      ((Etale.derivedTensor B X).obj Q).obj N :=
+  ihomObjIsoTensor Q K N
+
+private theorem site_property_hom
+    (B : Type (u + 2)) [Category.{u + 1} B] [Abelian B]
+    [IsGrothendieckAbelian.{u + 1} B] [MonoidalCategory B]
+    [MonoidalPreadditive B] [SymmetricCategory B] [MonoidalClosed B]
+    [Abelian.HasFunctorialFlatResolution B] (X : Scheme.{u})
+    (Q K N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology B))
+    [ExactPairing Q K]
+    (P : ObjectProperty (_root_.DerivedCategory (Sheaf X.smallEtaleTopology B)))
+    [P.IsClosedUnderIsomorphisms]
+    (h : P (((Etale.derivedTensor B X).obj N).obj Q)) :
+    P (((Etale.derivedHom B X).obj (op K)).obj N) := by
+  obtain ⟨flip⟩ := Etale.nonempty_iso_derivedTensor_flip B X
+  exact P.prop_of_iso (site_hom_tensor B X Q K N).symm
+    (P.prop_of_iso ((flip.app Q).app N).symm h)
+
+private theorem local_assertion
+    (A : Type (u + 1)) [CommRing A] [Finite A] (X : Scheme.{u})
+    (K N : Etale.DerivedCategoryModule A X) :
+    lisseFlatHomLocalAssertion A X K N := by
+  dsimp only [lisseFlatHomLocalAssertion]
+  let : (comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory.Monoidal :=
+    siteComparisonDerivedMonoidal (ModuleCat.{u + 1} A) X
+  apply finiteFree_assertion
 
 attribute [local irreducible] _root_.DerivedCategory.monoidalClosed
 

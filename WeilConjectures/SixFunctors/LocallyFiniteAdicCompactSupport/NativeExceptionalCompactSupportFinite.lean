@@ -60,6 +60,15 @@ variable (l : ℕ) [Fact l.Prime] (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
 set_option allowUnsafeReducibility true in
 attribute [local reducible] ScalarLocalization.category
   sfCompactSupportFiniteFunctor sfRationalConstructibleLocalization in
+
+/-- The preimage of an isomorphism under a fully faithful functor is invertible. -/
+private theorem preimageIsIso
+    {A B : Type*} [Category A] [Category B]
+    (T : A ⥤ B) (ff : T.FullyFaithful) {K L : A}
+    (m : T.obj K ⟶ T.obj L) (hm : IsIso m) : IsIso (ff.preimage m) := by
+  let := hm
+  exact (ff.preimageIso (asIso m)).isIso_hom
+
 /-- Integral localization commutes with the prescribed pure-tensor compact-support action.
 Source: the raw compact-support Hom formula
 (blueprint: lem-sf-native-exceptional-compact-support-finite). -/
@@ -219,6 +228,100 @@ def systemIntegralMap [G : NativeGeometry.{u} l]
   ((Functor.FullyFaithful.ofFullyFaithful
     (sections l Y).mapDerivedCategory).whiskeringRight _).preimage
       (systemSectionMap l D hl source target S c E a hs ht)
+
+/-- The scalar map is invertible on the full integral constructible category.
+Source: integral residue Tor and the invertible native compact-support scalar mate
+(blueprint: lem-sf-native-exceptional-compact-support-finite).
+
+Proof: residue Tor equips the unchanged underlying integral object with finite-Tor
+bounds. The proper/open scalar mate is invertible on it. The two boundary maps are
+isomorphisms, and the section equivalence reflects isomorphisms. -/
+theorem systemSectionMap_isIso [G : NativeGeometry.{u} l]
+    [∀ x : X, Invertible (l : X.residueField x)]
+    (E : Index l (PadicAlgCl l))
+    (a : PurCompactSupport.Change (PurCompactSupport.completed l
+      (Coefficient.{u} l (PadicAlgCl l) E)) (nativeCoefficients l))
+    (ha : ∀ (T : Scheme.{u})
+      (C : CoefficientPresentation l T (Coefficient.{u} l (PadicAlgCl l) E) (embedding l E)),
+      a.map T = C.integralMap l T) :
+    IsIso (systemSectionMap l D hl source target S c E a
+      (ha X (source.coefficient E)) (ha Y (target.coefficient E))) := by
+  let I := (sfIntegralConstructible l (Coefficient.{u} l (PadicAlgCl l) E) X).ι
+  let middle := Functor.whiskerLeft I (PurCompactSupport.comparison a c)
+  let hm : IsIso middle := by
+    refine @NatIso.isIso_of_isIso_app _ _ _ _ _ _ _ (fun K ↦ ?_)
+    let K' : finiteTorConstructibleIntegralCategory l
+        (Coefficient.{u} l (PadicAlgCl l) E) X :=
+      ⟨K.obj, by
+        rw [← (integral_residue_tor D l hl (Coefficient.{u} l (PadicAlgCl l) E) X).2]
+        exact K.property⟩
+    exact native_compact_support_scalar_mate_invertible l D hl c E a ha K'
+  let b := systemIntegralSource l D hl target S c E ≪≫
+    Functor.isoWhiskerLeft
+      (I ⋙ PurCompactSupport.image (PurCompactSupport.completed l
+        (Coefficient.{u} l (PadicAlgCl l) E)) c)
+      (eqToIso (congrArg pbcDerivedExtend (ha Y (target.coefficient E)).symm))
+  let d := Functor.isoWhiskerRight
+      (Functor.isoWhiskerLeft I
+        (eqToIso (congrArg pbcDerivedExtend (ha X (source.coefficient E)))))
+      (PurCompactSupport.image (nativeCoefficients l) c) ≪≫
+    systemIntegralTarget l source c E
+  change IsIso (b.hom ≫ middle ≫ d.hom)
+  exact (b ≪≫ ((@asIso _ _ _ _ middle hm) ≪≫ d)).isIso_hom
+
+/-- The integral scalar map is invertible by fully faithful lifting of its section map.
+Source: native section equivalence and integral residue Tor
+(blueprint: lem-sf-native-exceptional-compact-support-finite). -/
+theorem systemIntegralMap_isIso [G : NativeGeometry.{u} l]
+    [∀ x : X, Invertible (l : X.residueField x)]
+    (E : Index l (PadicAlgCl l))
+    (a : PurCompactSupport.Change (PurCompactSupport.completed l
+      (Coefficient.{u} l (PadicAlgCl l) E)) (nativeCoefficients l))
+    (ha : ∀ (T : Scheme.{u})
+      (C : CoefficientPresentation l T (Coefficient.{u} l (PadicAlgCl l) E) (embedding l E)),
+      a.map T = C.integralMap l T) :
+    IsIso (systemIntegralMap l D hl source target S c E a
+      (ha X (source.coefficient E)) (ha Y (target.coefficient E))) := by
+  let n := systemSectionMap l D hl source target S c E a
+    (ha X (source.coefficient E)) (ha Y (target.coefficient E))
+  exact preimageIsIso _
+    ((Functor.FullyFaithful.ofFullyFaithful
+      (sections l Y).mapDerivedCategory).whiskeringRight _) n
+    (systemSectionMap_isIso l D hl source target S c E a ha)
+
+/-- The normalized integral scalar comparison extends uniquely to rational arrows.
+Source: Bhatt--Scholze, Proposition 6.8.14 and Remark 6.8.15; categorical localization
+(blueprint: lem-sf-native-exceptional-compact-support-finite).
+
+Proof: the integral scalar map is invertible by the preceding residue-Tor argument.
+Raw scalar localization is categorical localization at uniformizer powers, so fully
+faithful precomposition extends this natural isomorphism uniquely. Its component
+formula retains the specified integral scalar map. -/
+theorem systemFiniteComparison [G : NativeGeometry.{u} l]
+    [∀ x : X, Invertible (l : X.residueField x)]
+    (E : Index l (PadicAlgCl l))
+    (a : PurCompactSupport.Change (PurCompactSupport.completed l
+      (Coefficient.{u} l (PadicAlgCl l) E)) (nativeCoefficients l))
+    (ha : ∀ (T : Scheme.{u})
+      (C : CoefficientPresentation l T (Coefficient.{u} l (PadicAlgCl l) E) (embedding l E)),
+      a.map T = C.integralMap l T) :
+    ∃! alpha : systemFiniteSource l D hl target S c E ≅ systemFiniteTarget l source c E,
+      ∀ K : sfIntegralConstructibleCategory l (Coefficient.{u} l (PadicAlgCl l) E) X,
+        alpha.hom.app ((sfRationalConstructibleLocalization l
+          (Coefficient.{u} l (PadicAlgCl l) E) X).obj K) =
+        (systemIntegralMap l D hl source target S c E a
+          (ha X (source.coefficient E)) (ha Y (target.coefficient E))).app K := by
+  let := systemIntegralMap_isIso l D hl source target S c E a ha
+  exact @ScalarLocalization.naturalIso_of_integral
+    (Padic.coefficientExtensionIntegers l (Coefficient.{u} l (PadicAlgCl l) E)) _
+    (sfIntegralConstructibleCategory l (Coefficient.{u} l (PadicAlgCl l) E) X)
+    _ _ _ _ _ (fun n ↦ inferInstance) _ _
+    (fun n ↦ sfIntegralConstructibleShift_linear l
+      (Coefficient.{u} l (PadicAlgCl l) E) X n)
+    (Padic.coefficientExtensionUniformizer l (Coefficient.{u} l (PadicAlgCl l) E)) _ _
+    (systemFiniteSource l D hl target S c E) (systemFiniteTarget l source c E)
+    (asIso (systemIntegralMap l D hl source target S c E a
+      (ha X (source.coefficient E)) (ha Y (target.coefficient E))))
 
 attribute [local irreducible] systemSectionMap
 

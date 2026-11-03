@@ -55,8 +55,10 @@ def integralComparisonSequenceRoosFunctor (X : Scheme.{u}) :=
     change 𝟙 _ ≫ (C.X (i + m)).map (homOfLE (Nat.le_succ n)).op =
       (C.X (i + m)).map (homOfLE (Nat.le_succ n)).op ≫ 𝟙 _
     simp only [Category.id_comp, Category.comp_id]
-  letI := RoosShift.commShift
-    (HomologicalComplex.complexOfFunctorsToFunctorToComplex
+  letI : (HomologicalComplex.complexOfFunctorsToFunctorToComplex
+      (T := ℕᵒᵖ) (V := scalarReductionSource l E X) (c := ComplexShape.up ℤ) ⋙
+      integralOperationsRoosFunctor).CommShift ℤ :=
+    RoosShift.commShift (HomologicalComplex.complexOfFunctorsToFunctorToComplex
       (T := ℕᵒᵖ) (V := scalarReductionSource l E X) (c := ComplexShape.up ℤ))
   infer_instance
 
@@ -184,11 +186,13 @@ private theorem augmentation_shift {A : Type*} [Category A] [Abelian A]
         i (i - 1) (by omega) = 0) :
     let := fun n ↦ towerLevelShift (A := A) n
     let := fun n ↦ towerTransitionShift (A := A) n
-    let := RoosShift.commShift (towerConversion A)
+    let : (towerConversion A ⋙ integralOperationsRoosFunctor).CommShift ℤ :=
+      RoosShift.commShift (towerConversion A)
     NatTrans.CommShift b ℤ := by
   let := fun n ↦ towerLevelShift (A := A) n
   let := fun n ↦ towerTransitionShift (A := A) n
-  let := RoosShift.commShift (towerConversion A)
+  let : (towerConversion A ⋙ integralOperationsRoosFunctor).CommShift ℤ :=
+      RoosShift.commShift (towerConversion A)
   constructor
   intro m
   apply NatTrans.ext
@@ -207,7 +211,9 @@ private theorem augmentation_shift {A : Type*} [Category A] [Abelian A]
 private theorem limitAugmentation_shift (X : Scheme.{u}) :
     let := fun n ↦ towerLevelShift (A := scalarReductionSource l E X) n
     let := fun n ↦ towerTransitionShift (A := scalarReductionSource l E X) n
-    let := RoosShift.commShift (towerConversion (scalarReductionSource l E X))
+    let : (towerConversion (scalarReductionSource l E X) ⋙
+        integralOperationsRoosFunctor).CommShift ℤ :=
+      RoosShift.commShift (towerConversion (scalarReductionSource l E X))
     NatTrans.CommShift (limitAugmentation l E X) ℤ := by
   apply augmentation_shift (limitAugmentation l E X)
   · intro C n
@@ -346,11 +352,15 @@ private theorem normalizedComparison_shift (X : Scheme.{u})
     (ρ : IntegralComparisonRoosModel l E X) :
     let := fun n ↦ towerLevelShift (A := scalarReductionSource l E X) n
     let := fun n ↦ towerTransitionShift (A := scalarReductionSource l E X) n
-    let := RoosShift.commShift (towerConversion (scalarReductionSource l E X))
+    let : (towerConversion (scalarReductionSource l E X) ⋙
+        integralOperationsRoosFunctor).CommShift ℤ :=
+      RoosShift.commShift (towerConversion (scalarReductionSource l E X))
     NatTrans.CommShift (comparisonForShift l E X ρ).hom ℤ := by
   let := fun n ↦ towerLevelShift (A := scalarReductionSource l E X) n
   let := fun n ↦ towerTransitionShift (A := scalarReductionSource l E X) n
-  let := RoosShift.commShift (towerConversion (scalarReductionSource l E X))
+  let : (towerConversion (scalarReductionSource l E X) ⋙
+        integralOperationsRoosFunctor).CommShift ℤ :=
+      RoosShift.commShift (towerConversion (scalarReductionSource l E X))
   let b := Functor.whiskerRight (limitAugmentation l E X) DerivedCategory.Q
   have : NatTrans.CommShift b ℤ := by
     have := limitAugmentation_shift l E X
@@ -390,7 +400,9 @@ theorem integralComparisonRoosBridge_commShift (X : Scheme.{u})
   let := integralComparisonSequenceRoosShift l E X
   let := fun n ↦ towerLevelShift (A := scalarReductionSource l E X) n
   let := fun n ↦ towerTransitionShift (A := scalarReductionSource l E X) n
-  let := RoosShift.commShift (towerConversion (scalarReductionSource l E X))
+  let : (towerConversion (scalarReductionSource l E X) ⋙
+        integralOperationsRoosFunctor).CommShift ℤ :=
+      RoosShift.commShift (towerConversion (scalarReductionSource l E X))
   have := normalizedComparison_shift l E X ρ
   let R := coefficientSequenceRestriction l E X
   let T := R.mapHomologicalComplex (.up ℤ)

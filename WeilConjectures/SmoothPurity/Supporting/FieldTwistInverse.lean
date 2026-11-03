@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicCoefficientTwistsUnrestricted
 import WeilConjectures.AlgebraicGeometry.Tate.TateTwistLocallyFree
 import Mathlib.Data.Nat.Prime.Infinite
+public import WeilConjectures.AlgebraicGeometry.LegacyTateTwistLocallyFree
 
 /-! # Inverse evaluation for the recorded field coefficient twists
 
@@ -66,7 +67,7 @@ theorem fieldTwist_inverse
       k := AlgebraicClosure (ZMod p) }
   have hl : l ≠ D.p := Nat.ne_of_lt (Nat.lt_of_succ_le hlp)
   obtain ⟨I, U, f, ζ, e, hc, hζ, he, hfinite, hint, hfield⟩ :=
-    AlgebraicGeometry.Scheme.tateTwist_locallyFree S l E Ω
+    AlgebraicGeometry.Scheme.tateTwist_locallyFree_legacy S l E Ω
       (IsAlgClosed.lift : E →ₐ[Padic l] Ω)
   have hpos (n : ℕ) :
       Nonempty (sfRationalTwistingFunctor l E S (n : ℤ) ⋙

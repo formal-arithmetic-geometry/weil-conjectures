@@ -10,6 +10,10 @@ public import WeilConjectures.AlgebraicGeometry.Etale.Compact.EtaleCompactSuppor
 public import WeilConjectures.AlgebraicGeometry.ProperRestrictionSiteSquareStatement
 public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionFinite
 public import WeilConjectures.Compactification.RefinementCategory
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RestrictCoextendScalars
+public import WeilConjectures.AlgebraicGeometry.Open.OpenRestrictionSiteSquare
+public import WeilConjectures.CategoryTheory.Adjunction.SquareCompatibleMate
+public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Finite coefficient compact-support realization and restriction
 
@@ -167,7 +171,7 @@ theorem supportOpenScalarProMap_isIso
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] :
     IsIso (supportOpenScalarProMap φ j) := by
-  sorry
+  exact ordinaryRestrictionOpenMap_isIso φ j
 
 /-- The D+ form of `c_j^p`, obtained termwise from the canonical open scalar mate
 (blueprint: lem-coef-support-realization-restriction). -/
@@ -233,6 +237,126 @@ noncomputable def supportRestrictionEtalePlus
     Functor.isoWhiskerLeft _ (Etale.derivedLowerStarRestrictScalarsIso φ c.g).symm ≪≫
     (Functor.associator _ _ _).symm
 
+private theorem exactPlusSquare_hom
+    {C D E V : Type*} [Category C] [Category D] [Category E] [Category V]
+    [Abelian C] [Abelian D] [Abelian E] [Abelian V]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    [HasDerivedCategory E] [HasDerivedCategory V]
+    (F : C ⥤ D) (G : D ⥤ V) (H : C ⥤ E) (J : E ⥤ V)
+    [F.Additive] [G.Additive] [H.Additive] [J.Additive]
+    [Limits.PreservesFiniteLimits F] [Limits.PreservesFiniteColimits F]
+    [Limits.PreservesFiniteLimits G] [Limits.PreservesFiniteColimits G]
+    [Limits.PreservesFiniteLimits H] [Limits.PreservesFiniteColimits H]
+    [Limits.PreservesFiniteLimits J] [Limits.PreservesFiniteColimits J]
+    (e : F ⋙ G ≅ H ⋙ J) (K : DerivedCategory.Plus C) :
+    DerivedCategory.Plus.ι.map
+      (((Functor.mapDerivedCategoryPlusCompIso F G).symm ≪≫
+        Functor.mapDerivedCategoryPlusNatIso e ≪≫
+        Functor.mapDerivedCategoryPlusCompIso H J).hom.app K) =
+      (Functor.mapDerivedCategorySquareIso e).hom.app K.obj := by
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.map_comp]
+  rw [plus_comp_inv, Functor.ι_map_mapDerivedCategoryPlusNatIso_hom_app,
+    Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app]
+  rfl
+
+private theorem exactPlusSquare_inv
+    {C D E V : Type*} [Category C] [Category D] [Category E] [Category V]
+    [Abelian C] [Abelian D] [Abelian E] [Abelian V]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    [HasDerivedCategory E] [HasDerivedCategory V]
+    (F : C ⥤ D) (G : D ⥤ V) (H : C ⥤ E) (J : E ⥤ V)
+    [F.Additive] [G.Additive] [H.Additive] [J.Additive]
+    [Limits.PreservesFiniteLimits F] [Limits.PreservesFiniteColimits F]
+    [Limits.PreservesFiniteLimits G] [Limits.PreservesFiniteColimits G]
+    [Limits.PreservesFiniteLimits H] [Limits.PreservesFiniteColimits H]
+    [Limits.PreservesFiniteLimits J] [Limits.PreservesFiniteColimits J]
+    (e : F ⋙ G ≅ H ⋙ J) (K : DerivedCategory.Plus C) :
+    DerivedCategory.Plus.ι.map
+      (((Functor.mapDerivedCategoryPlusCompIso F G).symm ≪≫
+        Functor.mapDerivedCategoryPlusNatIso e ≪≫
+        Functor.mapDerivedCategoryPlusCompIso H J).inv.app K) =
+      (Functor.mapDerivedCategorySquareIso e).inv.app K.obj := by
+  have he : DerivedCategory.Plus.ι.mapIso
+      (((Functor.mapDerivedCategoryPlusCompIso F G).symm ≪≫
+        Functor.mapDerivedCategoryPlusNatIso e ≪≫
+        Functor.mapDerivedCategoryPlusCompIso H J).app K) =
+      (Functor.mapDerivedCategorySquareIso e).app K.obj :=
+    Iso.ext (exactPlusSquare_hom F G H J e K)
+  exact congrArg Iso.inv he
+
+private theorem supportComparison_ambient
+    {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    (T : Scheme.{u}) (φ : A →+* B)
+    (K : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} B))) :
+    DerivedCategory.Plus.ι.map ((properRestrictionComparisonPlus T φ).hom.app K) =
+      (pbcDerivedComparisonRestrict T φ).inv.app K.obj := by
+  change DerivedCategory.Plus.ι.map
+    (((Functor.mapDerivedCategoryPlusCompIso _ _).symm ≪≫
+      Functor.mapDerivedCategoryPlusNatIso (pbcComparisonRestrict T φ).symm ≪≫
+      Functor.mapDerivedCategoryPlusCompIso _ _).hom.app K) = _
+  rw [exactPlusSquare_hom, square_symm]
+  rfl
+
+private theorem supportBoundary_ambient
+    (A : Type (u + 1)) [CommRing A]
+    {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]
+    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) :
+    DerivedCategory.Plus.ι.map ((supportOpenBoundaryPlus A j).hom.app K) =
+      (openRestrictionSiteBoundary A j).hom.app K := by
+  rw [open_boundary_normalization]
+  exact exactPlusSquare_inv _ _ _ _
+    (openImmersionLowerShriekComparisonUpperStarIso (ModuleCat.{u + 1} A) j) K
+
+private theorem supportScalar_ambient
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
+    (φ : A →+* B) {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]
+    (K : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} B))) :
+    DerivedCategory.Plus.ι.map ((supportOpenScalarProPlus φ j).hom.app K) =
+      (fixedScalarRestrictionOpen φ j).hom.app K.obj := by
+  let := ordinaryRestrictionOpenMap_isIso φ j
+  have he := ordinaryRestrictionOpenMap_derived φ j
+  rw [square_symm, Iso.symm_hom] at he
+  change DerivedCategory.Plus.ι.map
+    (((Functor.mapDerivedCategoryPlusCompIso _ _).symm ≪≫
+      Functor.mapDerivedCategoryPlusNatIso (asIso (ordinaryRestrictionOpenMap φ j)) ≪≫
+      Functor.mapDerivedCategoryPlusCompIso _ _).hom.app K) = _
+  rw [exactPlusSquare_hom, he, ← fixedScalarRestrictionOpenMap_eq_exact_mate]
+  rfl
+
+private theorem supportOpen_square
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
+    (φ : A →+* B) {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]
+    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B))) :
+    (openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapDerivedCategoryPlus.map
+        ((properRestrictionComparisonPlus X φ).hom.app K) ≫
+      (supportOpenScalarProPlus φ j).hom.app
+        ((siteComparisonDerivedPullbackPlus X B).obj K) ≫
+      (Sheaf.restrictScalars (Scheme.ProEt.topology Z) φ).mapDerivedCategoryPlus.map
+        ((supportOpenBoundaryPlus B j).hom.app K) =
+    (supportOpenBoundaryPlus A j).hom.app
+        ((Sheaf.restrictScalars X.smallEtaleTopology φ).mapDerivedCategoryPlus.obj K) ≫
+      (siteComparisonDerivedPullbackPlus Z A).map
+        ((supportOpenScalarEtalePlus φ j).hom.app K) ≫
+      (properRestrictionComparisonPlus Z φ).hom.app
+        ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} B) j).mapDerivedCategoryPlus.obj
+          K) := by
+  apply DerivedCategory.Plus.ι.map_injective
+  simp only [Functor.map_comp]
+  change
+    (openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapDerivedCategory.map
+        (DerivedCategory.Plus.ι.map ((properRestrictionComparisonPlus X φ).hom.app K)) ≫
+      DerivedCategory.Plus.ι.map ((supportOpenScalarProPlus φ j).hom.app
+        ((siteComparisonDerivedPullbackPlus X B).obj K)) ≫
+      (Sheaf.derivedRestrictScalars (Scheme.ProEt.topology Z) φ).map
+        (DerivedCategory.Plus.ι.map ((supportOpenBoundaryPlus B j).hom.app K)) = _
+  rw [supportComparison_ambient, supportScalar_ambient, supportBoundary_ambient]
+  change _ = DerivedCategory.Plus.ι.map ((supportOpenBoundaryPlus A j).hom.app _) ≫
+    (comparisonUpperStar (ModuleCat.{u + 1} A) Z).mapDerivedCategory.map
+      (DerivedCategory.Plus.ι.map ((supportOpenScalarEtalePlus φ j).hom.app K)) ≫
+    DerivedCategory.Plus.ι.map ((properRestrictionComparisonPlus Z φ).hom.app _)
+  rw [supportBoundary_ambient, supportComparison_ambient]
+  exact openRestriction_site_square φ j K
+
 variable (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
@@ -289,6 +413,33 @@ theorem finiteSupportRealization_restriction_statement
       (properRestrictionComparisonPlus Y (supportCoeffQuotient l E h)).hom.app
         ((Etale.rightDerivedLowerShriekOfCompactificationPlus
           (ModuleCat.{u + 1} (supportCoeff l E n)) c).obj K) := by
-  sorry
+  let A := supportCoeff l E m
+  let B := supportCoeff l E n
+  let φ := supportCoeffQuotient l E h
+  let P := (lowerStar (ModuleCat.{u + 1} A) c.g).rightDerivedFunctorPlus
+  have ho := supportOpen_square φ c.i K
+  have hp := properRestrictionSiteSquare_statement φ c.g
+    ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} B) c.i).mapDerivedCategoryPlus.obj K)
+  have hn := (properRestrictionScalarPlus φ c.g).hom.naturality
+    ((supportOpenBoundaryPlus B c.i).hom.app K)
+  have hb := (supportProperBoundaryPlus A c.g).hom.naturality
+    ((supportOpenScalarEtalePlus φ c.i).hom.app K)
+  simp only [Functor.comp_map, Functor.comp_obj, supportProperBoundaryPlus] at hn hb
+  simp only [supportRestrictionProPlus, supportSiteRealizationPlus,
+    supportRestrictionEtalePlus, rightDerivedLowerShriekOfCompactificationPlus,
+    Etale.rightDerivedLowerShriekOfCompactificationPlus,
+    Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerRight_hom,
+    Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    Functor.associator_hom_app, Functor.associator_inv_app, NatTrans.comp_app,
+    Category.id_comp, Category.comp_id, Functor.comp_map, Functor.comp_obj,
+    Functor.map_comp, Category.assoc]
+  rw [← reassoc_of% hn, ← P.map_comp_assoc, ← P.map_comp_assoc]
+  simp only [Category.assoc]
+  rw [ho]
+  simp only [Functor.map_comp, Category.assoc]
+  simp only [supportProperBoundaryPlus]
+  rw [hp]
+  erw [reassoc_of% hb]
+  rfl
 
 end AlgebraicGeometry.ProEtale

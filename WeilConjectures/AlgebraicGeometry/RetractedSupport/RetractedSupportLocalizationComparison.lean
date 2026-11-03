@@ -71,6 +71,14 @@ import WeilConjectures.AlgebraicGeometry.Bounded.BoundedBelowProEtaleComparison
 import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.ConstructibleExceptionalAdjunctionCoefficients
 import WeilConjectures.AlgebraicGeometry.Finite.FiniteDirectImageComposition
 import WeilConjectures.SmoothPurity.Sf.SfCommonStageWeilCohomology
+public import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
+public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Classical.ProEtaleClassicalDirectImagePreservation
+public import WeilConjectures.CategoryTheory.Abelian.ExactFunctorHigherDerivedVanishing
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusExact
+public import WeilConjectures.Mathlib.CategoryTheory.Sites.Whiskering
+public import WeilConjectures.SixFunctors.Integral.Exact
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Comparison
 
 /-!
 # The localization triangle of a retracted closed section
@@ -212,6 +220,27 @@ noncomputable def collapse {X Y : Scheme.{u}} (p : X ⟶ Y) (s : Y ⟶ X)
     Functor.rightDerivedFunctorIsoMapDerivedCategory (𝟭 (EtSheaves P Y)) ≪≫
     Functor.mapDerivedCategoryIdIso (EtSheaves P Y)
 
+/-- The natural transformation whose components are the specified first comparison.
+Source: the etale counit and unit transport in sk-prop-a1
+(blueprint: lem-pur-first-comparison-naturality). -/
+noncomputable def firstComparisonTransformation {X Y : Scheme.{u}}
+    (p : X ⟶ Y) (s : Y ⟶ X) [IsClosedImmersion s] (hs : s ≫ p = 𝟙 Y) :
+    DerivedCategory.Plus.ι ⋙ etClosed P s ⋙
+      (Etale.lowerStar (Modules P) s).rightDerivedFunctor ⋙
+      (Etale.lowerStar (Modules P) p).rightDerivedFunctor ⋙ nu P Y ⟶ closedTerm P s :=
+  letI := (Compactification.ofIsProper s).hasCompactification
+  Functor.whiskerRight
+    (Functor.whiskerLeft (DerivedCategory.Plus.ι ⋙ etClosed P s) (collapse P p s hs).hom ≫
+      Functor.whiskerLeft DerivedCategory.Plus.ι
+        (Adjunction.rightAdjointUniq
+          (Adjunction.ofIsLeftAdjoint (Etale.lowerStar (Modules P) s).rightDerivedFunctor)
+          ((Etale.rightDerivedUpperShriekAdjunction P.Coefficient s).ofNatIsoLeft
+            (Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar (Modules P) s))).hom ≫
+      Functor.whiskerRight
+        (Functor.whiskerLeft DerivedCategory.Plus.ι
+          (comparisonAdjunction (Modules P) X).mapDerivedCategoryRightDerivedAdjunction.unit)
+        (Etale.rightDerivedUpperShriek P.Coefficient s)) (nu P Y)
+
 /-- The first comparison includes the counit-compatible uniqueness of the etale right
 adjoint, and the unit B -> Rnu_* nu^* B. Thus it compares with the actual transported
 exceptional functor at the specified identity/proper compactification.
@@ -223,17 +252,39 @@ noncomputable def firstComparison {X Y : Scheme.{u}} (p : X ⟶ Y) (s : Y ⟶ X)
     (nu P Y).obj ((Etale.lowerStar (Modules P) p).rightDerivedFunctor.obj
       ((Etale.lowerStar (Modules P) s).rightDerivedFunctor.obj
         ((etClosed P s).obj B.obj))) ⟶ (closedTerm P s).obj B :=
-  letI := (Compactification.ofIsProper s).hasCompactification
-  (nu P Y).map
-    ((collapse P p s hs).hom.app ((etClosed P s).obj B.obj) ≫
-      (Adjunction.rightAdjointUniq
-        (Adjunction.ofIsLeftAdjoint (Etale.lowerStar (Modules P) s).rightDerivedFunctor)
-        ((Etale.rightDerivedUpperShriekAdjunction P.Coefficient s).ofNatIsoLeft
-          (Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar (Modules P) s))).hom.app
-            B.obj ≫
-      (Etale.rightDerivedUpperShriek P.Coefficient s).map
-        ((comparisonAdjunction (Modules P) X).mapDerivedCategoryRightDerivedAdjunction.unit.app
-          B.obj))
+  (firstComparisonTransformation P p s hs).app B
+
+/-- Component normalization of the natural first comparison.
+Source: sk-prop-a1; expand composition and whiskering of natural transformations
+(blueprint: lem-pur-first-comparison-naturality). -/
+theorem firstComparisonTransformation_app {X Y : Scheme.{u}}
+    (p : X ⟶ Y) (s : Y ⟶ X) [IsClosedImmersion s] (hs : s ≫ p = 𝟙 Y)
+    (B : DerivedCategory.Plus (EtSheaves P X)) :
+    (firstComparisonTransformation P p s hs).app B = firstComparison P p s hs B := rfl
+
+/-- The first comparison is invertible on bounded-below etale inputs.
+Source: bounded-below comparison full faithfulness and right-adjoint uniqueness
+(blueprint: lem-pur-first-comparison-naturality).
+Proof: restrict the derived comparison unit to the bounded-below inclusion. Its
+components are invertible by full faithfulness, after transporting the unit between
+the two canonically isomorphic right adjoints. The collapse and right-adjoint
+uniqueness factors are natural isomorphisms. Whiskering and composition preserve
+invertibility, so their composite is invertible as a natural transformation. -/
+theorem firstComparisonTransformation_isIso {X Y : Scheme.{u}}
+    (p : X ⟶ Y) (s : Y ⟶ X) [IsClosedImmersion s] (hs : s ≫ p = 𝟙 Y) :
+    IsIso (firstComparisonTransformation P p s hs) := by
+  let := (Compactification.ofIsProper s).hasCompactification
+  let adj := (comparisonAdjunction (Modules P) X).mapDerivedCategoryRightDerivedAdjunction
+  let η := Functor.whiskerLeft DerivedCategory.Plus.ι adj.unit
+  have (B : DerivedCategory.Plus (EtSheaves P X)) : IsIso (η.app B) := by
+    change IsIso (adj.unit.app B.obj)
+    have := isIso_derivedComparisonAdjunction_unit_app (Modules P) X B.obj B.property
+    rw [← Adjunction.unit_rightAdjointUniq_hom_app
+      (derivedComparisonAdjunction (Modules P) X) adj B.obj]
+    infer_instance
+  have : IsIso η := NatIso.isIso_of_isIso_app η
+  unfold firstComparisonTransformation
+  infer_instance
 
 /-- Canonical comparison for the third term, including the open pullback comparison.
 Source: sk-prop-a1, comparison of localization triangles
@@ -609,5 +660,72 @@ structure Comparison {X Y U : Scheme.{u}} (p : X ⟶ Y) (s : Y ⟶ X)
         ((etaleGlobalComparison P Y).app B.obj) ≫
         (edge q).app ((nu P Y).obj B.obj) =
       (etaleEdge q).app B.obj ≫ etaleLocalComparison P Y q B.obj
+
+/-- A retracted closed section has the natural distinguished localization triangle,
+its canonical etale/pro-etale comparison, the global supported-cohomology identification,
+and the displayed compatibility of the boundary with canonical local-class edge maps.
+
+Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-a1/sk-prop-a1.proof.md,
+first displayed triangle and following global paragraph; Stacks Tags 09XP, 09XQ, 0D6H,
+0D6E, 09A6 and 099R
+(blueprint: lem-pur-retracted-support-localization-comparison).
+
+Proof, following the twelve steps of the node:
+1. A closed section is proper. Use its identity/proper compactification. Exactness of
+etale closed direct image identifies compact support with direct image on K-injective
+representatives; uniqueness of right adjoints identifies their counits. The derived
+comparison unit on bounded-below etale B identifies the finite exceptional term with
+nu_Y^* s^times B, naturally in B (sk-prop-sf-comparison).
+2. Apply Rp_et,* to lem-exc-closed-support-triangle. It is triangulated, and the
+canonical composition and identity isomorphisms collapse Rp_*s_* by ps = id.
+3. Apply exact nu_Y^*. Use sk-thm-pe-direct-image-comparison for p, j, pi and s.
+The canonical mate respects the open unit and closed counit. Transport the whole
+triangle, including the shift comparison, to fix the third arrow and its sign.
+4. Compare with lem-pur-support-localization-triangle. TR3 extends the identities of
+the middle and open terms, and the two-out-of-three theorem makes the first map invertible.
+5. Exact full faithfulness of s_* identifies this first map with the unique transpose
+of the transported counit under the support adjunction. It is natural and independent
+of the TR3 completion, and identifies the entire supported triangle.
+6. The sheaf functor s^!_0 = s^* G_Z is right adjoint to exact s_*. Hence it preserves
+injectives. On a bounded-below injective representative I it computes the support
+exceptional object and its derived global sections.
+7. The sectionwise support-kernel formula identifies Gamma(Y,s^!_0 I) with
+ker(I(X) -> I(U)), degree by degree and with their differentials. This gives supportIso.
+8. Injectivity makes restriction I^r(X) -> I^r(U) surjective, using the mono
+j_! A_U -> A_X. Its kernel is the supported sections. The cone-to-quotient map q
+and negative shifted projection -p give the boundary: a lift b of a cocycle c
+has cone cocycle (b,-db), whose image under -p is db. This is the snake boundary,
+with no additional sign (thm-pur-with-support-exactness).
+9. Direct images preserve K-injectives as right adjoints to exact pullback. Their
+global derived sections are evaluation at the final object. The resulting canonical
+Leray comparisons give middleGlobalIso and openGlobalIso and identify the global boundary.
+10. For the identity morphism the bounded-complex cohomology-presheaf comparison
+identifies the cohomology sheaf with the sheafification of local hypercohomology.
+Sending a global cocycle to its local class gives EdgeNormalization. Chain-map
+representatives give naturality; homotopies act identically. It commutes with shifts,
+since negating the differentials changes neither cycles nor boundaries.
+11. Apply this naturality to the third arrow with target C[1]. Shift compatibility
+and step 9 give edge_boundary in every integer degree, equivalently the formula for alpha.
+12. By construction transport is the canonical etale/pro-etale comparison of all
+three arrows. The comparison unit gives the natural global comparison, compatible
+with shifts. Restricting a class to each etale test object commutes with the unit;
+sheafification gives edge_comparison. Hence the global identifications, boundary,
+and edge formula agree with their ordinary etale counterparts. -/
+theorem exists_comparison
+    {X Y U : Scheme.{u}}
+    [X.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))]
+    [IsSeparated (X ↘ Spec (.of P.field.k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))]
+    [QuasiCompact (X ↘ Spec (.of P.field.k))]
+    [IsSeparated (Y ↘ Spec (.of P.field.k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of P.field.k))]
+    [QuasiCompact (Y ↘ Spec (.of P.field.k))]
+    (p : X ⟶ Y) [p.IsOver (Spec (.of P.field.k))]
+    [IsSeparated p] [LocallyOfFiniteType p] [QuasiCompact p]
+    (s : Y ⟶ X) [IsClosedImmersion s] (hs : s ≫ p = 𝟙 Y)
+    (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
+    (hcompl : IsCompl (Set.range s.base) (Set.range j.base)) :
+    Nonempty (Comparison P p s j hs) := by
+  sorry
 
 end AlgebraicGeometry.ProEtale.RetractedSupport

@@ -35,6 +35,10 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condense
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionProjection
+public import Mathlib.CategoryTheory.HomCongr
+public import Mathlib.CategoryTheory.Triangulated.Opposite.Subcategory
+public import WeilConjectures.CategoryTheory.ProEtaleCoefficients.LocalizingAdmissibleCoefficients
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
 
 /-! # Verdier biduality at algebraically closed coefficients
 
@@ -551,31 +555,82 @@ def EvaluationCompatible
     F.map (δ.app K) ≫ r.hom.app (op (D.obj (op K))) ≫
       H.map (r.inv.app (op K)).op = ε.app (F.obj K)
 
-/-- An exact contravariant anti-equivalence together with its natural biduality
-isomorphism. The specific evaluation normalization is imposed by the stage clauses.
-Source: blueprint thm-sf-biduality-class, first conclusion
-(blueprint: def-sf-common-stage-verdier-data). -/
+/-- Exact anti-equivalence with its specified natural double-dual isomorphism.
+Source: prop-functor-package (7) (blueprint: def-sf-common-stage-verdier-data). -/
 structure ExactDuality (C : Type a) [Category.{b} C]
     [HasShift C ℤ] [HasZeroObject C] [Preadditive C]
     [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] where
-  /-- The contravariant dual functor. -/
   dual : Cᵒᵖ ⥤ C
-  /-- Exact anti-equivalence, using the actual distinguished triangles. -/
   exact : ∃ s : dual.CommShift ℤ, ∀ T : Triangle Cᵒᵖ,
     T ∈ distTriang Cᵒᵖ →
       Triangle.mk (dual.map T.mor₁) (dual.map T.mor₂)
-        (dual.map T.mor₃ ≫ (s.commShiftIso (1 : ℤ)).hom.app T.obj₁) ∈
-          distTriang C
-  /-- The specified contravariant functor is an equivalence. -/
+        (dual.map T.mor₃ ≫ (s.commShiftIso (1 : ℤ)).hom.app T.obj₁) ∈ distTriang C
   equivalence : dual.IsEquivalence
-  /-- The evaluation-defined natural double-dual isomorphism. -/
   bidual : 𝟭 C ≅ dual.rightOp ⋙ dual
 
-/-- The ordinary category of modules over the specified pulled-back condensed ring.
-Source: current blueprint prop-functor-package (7)
-(blueprint: def-sf-common-stage-verdier-data). -/
-abbrev Ambient (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] :=
+/-- The ordinary derived category of modules over the pulled-back condensed ring.
+Source: prop-functor-package (7) (blueprint: def-sf-common-stage-verdier-data). -/
+abbrev Ambient (X : Scheme.{u}) :=
   DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
+
+/-- The precise bounded constructible finite-Tor property.
+Source: prop-functor-package, proved domains
+(blueprint: def-sf-common-stage-verdier-data). -/
+abbrev domain (X : Scheme.{u}) : ObjectProperty (Ambient Λ X) :=
+  constantModelBoundedConstructible Λ X ⊓ fun K ↦ DerivedCategory.finiteTorAmplitude _ K
+
+/-- Geometric parameters and a supplied constructible exceptional adjunction.
+The left adjoint is the actual compactification composite restricted to Dᵇ_ctf;
+the adjunction determines the right adjoint up to its unique compatible isomorphism.
+The triangulated fields are proofs about the inherited ambient structures.
+Source: prop-functor-package (7), with sk-thm-existence
+(blueprint: def-sf-common-stage-verdier-data). -/
+structure Setting where
+  field : FiniteFieldDatum.{u}
+  ell : ℕ
+  [prime : Fact ell.Prime]
+  different : ell ≠ field.p
+  admissible : IsLocalizingAdmissibleCoefficient ell Λ
+  X : Over (Spec (.of field.k))
+  [finiteType : LocallyOfFiniteType X.hom]
+  [quasiCompact : QuasiCompact X.hom]
+  [separated : IsSeparated X.hom]
+  compactification : Compactification X.hom
+  [sourceTriangulated : (domain Λ X.left).IsTriangulated]
+  [pointTriangulated : (domain Λ (Spec (.of field.k))).IsTriangulated]
+  unit_mem : domain Λ (Spec (.of field.k)) (𝟙_ (Ambient Λ (Spec (.of field.k))))
+  support_mem : ∀ K : (domain Λ X.left).FullSubcategory,
+    domain Λ (Spec (.of field.k))
+      ((rightDerivedLowerShriekOfCompactification Λ compactification).obj K.obj)
+  exceptional : (domain Λ (Spec (.of field.k))).FullSubcategory ⥤
+    (domain Λ X.left).FullSubcategory
+  adjunction : (domain Λ (Spec (.of field.k))).lift
+    ((domain Λ X.left).ι ⋙ rightDerivedLowerShriekOfCompactification Λ compactification)
+      support_mem ⊣ exceptional
+
+/-- The actual coefficient unit in the constructible category.
+Source: prop-functor-package (7) (blueprint: def-sf-common-stage-verdier-data). -/
+def Setting.unit (s : Setting Λ) : (domain Λ (Spec (.of s.field.k))).FullSubcategory :=
+  ⟨𝟙_ (Ambient Λ (Spec (.of s.field.k))), s.unit_mem⟩
+
+/-- The prescribed dualizing object Ra_X^! Λ; no existence witness is selected.
+Source: prop-functor-package (7) (blueprint: def-sf-common-stage-verdier-data). -/
+def Setting.omega (s : Setting Λ) : (domain Λ s.X.left).FullSubcategory :=
+  s.exceptional.obj s.unit
+
+/-- The native internal Hom into the prescribed dualizing object.
+Source: prop-functor-package (7) (blueprint: def-sf-common-stage-verdier-data). -/
+def Setting.homDual (s : Setting Λ) : (Ambient Λ s.X.left)ᵒᵖ ⥤ Ambient Λ s.X.left :=
+  (derivedHom Λ s.X.left).flip.obj s.omega.obj
+
+/-- The evaluation-defined native double-dual arrow, using the derived Koszul braiding.
+Source: prop-functor-package (7) (blueprint: def-sf-common-stage-verdier-data).
+The named map shares the closed-structure construction across the record projections. -/
+def Setting.biduality (s : Setting Λ) :
+    𝟭 (Ambient Λ s.X.left) ⟶ s.homDual.rightOp ⋙ s.homDual := by
+  letI := DerivedCategory.braidedCategory'
+    (Mod (Sheaf (ProEt.topology s.X.left) Ab.{u + 1}) (condensedRingObj Λ s.X.left))
+  exact MonoidalClosed.toIhomIhomNatTrans s.omega.obj
 
 /-- Pullback from the condensed point is additive because it is a left adjoint.
 Source: native coefficient construction, upperStarFromPoint
@@ -972,29 +1027,88 @@ def DualityProperties (B : DualityData l Ω X D) : Prop :=
     B.duality.dual.map (B.duality.dual.map i.op).op ≫ B.duality.bidual.inv.app K ≫ p =
       B.duality.bidual.inv.app P)) (_linearInst := B.linearCategory)
 
-/-- Common-stage Verdier duality on the ordinary condensed category, with all its
-finite-origin equations. This is a dependent record, not an existence assertion.
-Source: current blueprint prop-functor-package (7)
-(blueprint: def-sf-common-stage-verdier-data). -/
-def Duality := { B : DualityData l Ω X D // DualityProperties l Ω X D B }
+/-- The datum already includes its normalization equations.
+Source: prop-functor-package (7) (blueprint: def-sf-common-stage-verdier-data). -/
+abbrev Duality (s : Setting Λ) := DualityData s
 
-/-- The actual internal-Hom identification and the universal property of the same
-specified evaluation. The map in `universal` is evaluation transpose, not an arbitrary
-Hom-set equivalence. The native ambient Hom determines the permitted restriction.
-Source: current blueprint prop-functor-package (7)
-(blueprint: def-sf-common-stage-verdier-data). -/
-structure InternalHom (B : Duality l Ω X D) where
-  comparison : B.val.duality.dual ⋙ (boundedConstructible (padicAlgClRingObj X l)).ι ≅
-    (boundedConstructible (padicAlgClRingObj X l)).ι.op ⋙
-      (derivedHom (Profinite.padicAlgClRingObj l) X).flip.obj B.val.omega.obj
-  evaluation_normalized (K : PadicAlgClConstructible X l) :
-    B.val.evaluation K = (𝟙 K.obj ⊗ₘ comparison.hom.app (op K)) ≫
-      (derivedTensorHomAdjunction (Profinite.padicAlgClRingObj l) K.obj).counit.app
-        B.val.omega.obj
-  universal (K P : PadicAlgClConstructible X l) :
-    Function.Bijective (fun h : P ⟶ B.val.duality.dual.obj (op K) ↦
-      (𝟙 K.obj ⊗ₘ (boundedConstructible (padicAlgClRingObj X l)).ι.map h) ≫
-        B.val.evaluation K)
+/-- Evaluation is the actual tensor-Hom counit through the supplied comparison.
+Source: prop-functor-package (7) (blueprint: def-sf-common-stage-verdier-data). -/
+def DualityData.evaluation {s : Setting Λ} (B : DualityData s)
+    (K : (domain Λ s.X.left).FullSubcategory) :
+    K.obj ⊗ (B.duality.dual.obj (op K)).obj ⟶ s.omega.obj :=
+  (𝟙 K.obj ⊗ₘ B.comparison.hom.app (op K)) ≫
+    (derivedTensorHomAdjunction Λ K.obj).counit.app s.omega.obj
+
+/-- The internal-Hom identification is the specified natural comparison itself.
+Source: prop-functor-package (7) (blueprint: def-sf-common-stage-verdier-data). -/
+abbrev InternalHom {s : Setting Λ} (B : DualityData s) := B.comparison
+
+/-- The evaluation transpose is the composite of the fully faithful inclusion,
+the specified Hom comparison and the native tensor-Hom adjunction.
+Source: prop-functor-package (7) (blueprint: def-sf-common-stage-verdier-data).
+Construction: each factor is the stated equivalence of Hom sets, so their composite
+has exactly the prescribed evaluation as its uncurrying map. -/
+def DualityData.evaluationEquiv {s : Setting Λ} (B : DualityData s)
+    (K P : (domain Λ s.X.left).FullSubcategory) :
+    (P ⟶ B.duality.dual.obj (op K)) ≃ (K.obj ⊗ P.obj ⟶ s.omega.obj) :=
+  (ObjectProperty.fullyFaithfulι (domain Λ s.X.left)).homEquiv.trans
+    ((Iso.homCongr (Iso.refl P.obj) (B.comparison.app (op K))).trans
+      ((derivedTensorHomAdjunction Λ K.obj).homEquiv P.obj s.omega.obj).symm)
+
+/-- The constructed Hom equivalence is the specified evaluation transpose.
+Source: prop-functor-package (7) (blueprint: def-sf-common-stage-verdier-data).
+Proof: uncurrying is tensoring the arrow with the identity followed by the counit;
+expand the composite arrow and use functoriality of left tensoring. -/
+theorem DualityData.evaluationEquiv_apply {s : Setting Λ} (B : DualityData s)
+    (K P : (domain Λ s.X.left).FullSubcategory) (f : P ⟶ B.duality.dual.obj (op K)) :
+    B.evaluationEquiv K P f = (𝟙 K.obj ⊗ₘ f.hom) ≫ B.evaluation K := by
+  change ((derivedTensorHomAdjunction Λ K.obj).homEquiv P.obj s.omega.obj).symm
+    (𝟙 P.obj ≫ f.hom ≫ B.comparison.hom.app (op K)) = _
+  rw [Category.id_comp, Adjunction.homEquiv_counit]
+  change (K.obj ◁ (f.hom ≫ B.comparison.hom.app (op K))) ≫ _ = _
+  simp only [MonoidalCategory.whiskerLeft_comp, Category.assoc,
+    DualityData.evaluation, MonoidalCategory.id_tensorHom]
+
+/-- Bijectivity is a property of the actual evaluation transpose, rather than
+additional independently supplied data.
+Source: prop-functor-package (7) (blueprint: def-sf-common-stage-verdier-data).
+Proof: the preceding equality identifies the transpose with an equivalence. -/
+theorem DualityData.evaluation_transpose_bijective {s : Setting Λ} (B : DualityData s)
+    (K P : (domain Λ s.X.left).FullSubcategory) :
+    Function.Bijective (fun f : P ⟶ B.duality.dual.obj (op K) ↦
+      (𝟙 K.obj ⊗ₘ f.hom) ≫ B.evaluation K) := by
+  have h : (fun f ↦ B.evaluationEquiv K P f) =
+      (fun f ↦ (𝟙 K.obj ⊗ₘ f.hom) ≫ B.evaluation K) :=
+    funext (B.evaluationEquiv_apply K P)
+  rw [← h]
+  exact (B.evaluationEquiv K P).bijective
+
+/-- Forward biduality on a split retract is forced by naturality.
+Source: prop-functor-package (7) (blueprint: def-sf-common-stage-verdier-data).
+Proof: apply naturality to the retraction and cancel its composite with the section.
+This is the original retract argument, applied to the native coefficient category. -/
+theorem DualityData.bidual_retract {s : Setting Λ} (B : DualityData s)
+    {P K : (domain Λ s.X.left).FullSubcategory} (i : P ⟶ K) (p : K ⟶ P)
+    (h : i ≫ p = 𝟙 P) :
+    i ≫ B.duality.bidual.hom.app K ≫
+      (B.duality.dual.rightOp ⋙ B.duality.dual).map p = B.duality.bidual.hom.app P := by
+  have hp := B.duality.bidual.hom.naturality p
+  dsimp only [Functor.id_map] at hp
+  rw [← hp, ← Category.assoc, h, Category.id_comp]
+
+/-- Inverse biduality on a split retract is also forced by naturality.
+Source: prop-functor-package (7) (blueprint: def-sf-common-stage-verdier-data).
+Proof: apply inverse naturality to the section and use the retraction equation.
+This reuses the inverse part of the original retract argument. -/
+theorem DualityData.bidual_inverse_retract {s : Setting Λ} (B : DualityData s)
+    {P K : (domain Λ s.X.left).FullSubcategory} (i : P ⟶ K) (p : K ⟶ P)
+    (h : i ≫ p = 𝟙 P) :
+    (B.duality.dual.rightOp ⋙ B.duality.dual).map i ≫
+      B.duality.bidual.inv.app K ≫ p = B.duality.bidual.inv.app P := by
+  have hi := B.duality.bidual.inv.naturality i
+  dsimp only [Functor.id_map] at hi
+  rw [← Category.assoc, hi, Category.assoc, h]
+  exact Category.comp_id (B.duality.bidual.inv.app P)
 
 /-- Restrict actual derived scalar extension, using a supplied preservation proof.
 Source: sk-prop-scalar-six (blueprint: def-sf-common-stage-verdier-data). -/

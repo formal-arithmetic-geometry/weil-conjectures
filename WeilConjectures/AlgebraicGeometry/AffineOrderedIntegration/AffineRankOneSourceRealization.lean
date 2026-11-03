@@ -8,6 +8,19 @@ module
 public import WeilConjectures.AlgebraicGeometry.AffineLineEvaluation.AffineLineCompositeTranspose
 public import WeilConjectures.AlgebraicGeometry.CoordinateLine.CoordinateLineAdjunctionMaps
 public import WeilConjectures.AlgebraicGeometry.AffineOrderedIntegration.AffineOrderedRightFiniteTor
+public import Mathlib.CategoryTheory.Limits.HasLimits
+public import Mathlib.Logic.Small.Defs
+public import WeilConjectures.AlgebraicGeometry.AffineOrderedIntegration.AffineOrderedCounitDescentComparison
+public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteSingleUnitNormalization
+public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteTwistComposition
+public import WeilConjectures.AlgebraicGeometry.OrdinaryFiniteUnitPullbackNormalization
+public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategoryMonoidal
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.SingleFunctor
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionMonoidal
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comp
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarCompCoherence
 
 /-! # Rank-one source comparison before compact support
 
@@ -39,6 +52,57 @@ set_option maxHeartbeats 3200000 in
 end AlgebraicGeometry.ProEtale.AffineOrderedIntegration
 
 namespace AlgebraicGeometry.ProEtale.AffineOrderedIntegration
+
+private theorem pro_tensor_iso_hom
+    (A : Type (u + 1)) [CommRing A] (X : Scheme.{u})
+    {M M' L L' : C A X} (e : M ≅ M') (c : L ≅ L') :
+    (AffineSpacePurity.tensorIso A X e c).hom = e.hom ⊗ₘ c.hom := rfl
+
+private theorem realizedTensorComparison_hom
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) (K : C A Y)
+    (Ke : Etale.DerivedCategoryModule A Y) (W : Etale.DerivedCategoryModule A X)
+    (eK : (comparison A Y).obj Ke ≅ K) :
+    (realizedTensorComparison A f K Ke W eK).hom =
+      (tensorComparison A X ((Etale.ordinaryFinitePullback A f).obj Ke) W).hom ≫
+        ((pullback A f).app Ke).hom ▷ (comparison A X).obj W ≫
+        (inverseImage A f).map eK.hom ▷ (comparison A X).obj W := by
+  unfold realizedTensorComparison tensorPullbackComparison
+  simp -implicitDefEqProofs only [id_eq, Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom,
+    derivedTensor, curriedTensor_map_app, Category.assoc]
+  rfl
+
+private theorem line_coefficient_iso
+    (P : WeilConjectures.PurityFiniteSetting.{u}) (Y : Scheme.{u})
+    (aY : Y ⟶ Spec (.of P.field.k)) :
+    lineCoefficientIso P Y aY =
+      (comparison (AffineLinePurity.Ring P) (AffineSpace PUnit.{u + 1} Y)).mapIso
+        (Etale.ordinaryFiniteShiftedLinePullback (AffineLinePurity.Ring P)
+          (exponent P) (annihilates P) (transport P)
+          (ProjectiveLine.affineChart Y)
+          (affineTraceProjectiveInvertible (exponent P) Y (exponentUnit P Y aY))) := by
+  unfold lineCoefficientIso
+  simp -implicitDefEqProofs only [eqToIso_refl, Functor.mapIso_refl,
+    Iso.refl_trans]
+  unfold comparedLinePullback transport
+  with_unfolding_all rfl
+
+private theorem line_witness_iso
+    (P : WeilConjectures.PurityFiniteSetting.{u}) (Y : Scheme.{u})
+    (K : C (AffineLinePurity.Ring P) Y)
+    (Ke : Etale.DerivedCategoryModule (AffineLinePurity.Ring P) Y)
+    (hKe : etaleFiniteTor (AffineLinePurity.Ring P) Y Ke)
+    (eK : (comparison (AffineLinePurity.Ring P) Y).obj Ke ≅ K) :
+    (AffineLineEvaluation.lineWitness P Y K Ke hKe eK).iso =
+      realizedTensorComparison (AffineLinePurity.Ring P)
+        (AffineSpace PUnit.{u + 1} Y ↘ Y) K Ke
+        (AffineLinePurity.etaleCoefficient P.coefficients.l P.extension
+          (P.level - 1) Y P.level (annihilates P)) eK := by
+  unfold AffineLineEvaluation.lineWitness AffineLinePurity.sourceWitness
+    AffineLinePurity.sourceComparison
+  simp -implicitDefEqProofs only [eqToIso_refl, Functor.mapIso_refl, Iso.refl_trans,
+    Iso.refl_symm]
+  erw [Iso.trans_refl, Iso.trans_refl]
 
 /-- The geometric rank-one witness and ordered tensor realization agree before
 applying compact support.

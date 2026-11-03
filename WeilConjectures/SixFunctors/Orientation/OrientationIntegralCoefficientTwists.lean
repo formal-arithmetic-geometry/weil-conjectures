@@ -108,6 +108,62 @@ variable {C : Type*} [Category C] [MonoidalCategory C] [Preadditive C]
   [(curriedTensor C).PreservesZeroMorphisms]
   [∀ M : C, ((curriedTensor C).obj M).PreservesZeroMorphisms]
 
+/-- The inverse-image map of a positive completed line for an arbitrary base map.
+Every local scalar and every compatible root is retained. Unlike the Frobenius
+interface, this statement does not require the map of schemes to be invertible.
+Source: base naturality in clause 1 (blueprint: def-sf-orientation-integral-line-comparisons).
+Proof: use the projection-normalized completed coefficient map and root-limit map.
+The integral inverse-image theorem identifies their tensor product with the first
+line. Apply tensor pullback recursively. At degree zero use the coefficient map.
+The indicated pure tensors generate locally, so the formulas determine every map.
+The locally free rank-one comparisons are invertible on a pro-etale cover, hence
+globally. This proof applies to every morphism and to the empty scheme. -/
+theorem sfOrientationIntegralLineMaps_existsUnique
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
+    [FiniteDimensional (Padic l) E] {X Y : Scheme.{u}} (g : X ⟶ Y)
+    [∀ x : X, Invertible (l : X.residueField x)]
+    [∀ y : Y, Invertible (l : Y.residueField y)] :
+    ∃! tau : ∀ d : ℕ,
+      (FrobeniusCoefficientTwists.modulePull l E g).obj
+        (FrobeniusCoefficientTwists.positiveLine l E Y d) ≅
+          FrobeniusCoefficientTwists.positiveLine l E X d,
+      ∀ (d : ℕ) (V : Y.ProEt)
+        (a : (completedIntegralCoefficientSheafUnrestricted l E Y).obj.obj
+          (Opposite.op V)) (x : Fin d → (purTwistZlOne Y l).obj.obj (Opposite.op V)),
+        (tau d).hom.val.app (Opposite.op ((proEtaleBaseChange g).obj V))
+          (FrobeniusCoefficientTwists.moduleSection l E g
+            (FrobeniusCoefficientTwists.positiveLine l E Y d) V
+            (FrobeniusCoefficientTwists.generator l E Y (Opposite.op V) a d x)) =
+        FrobeniusCoefficientTwists.generator l E X
+          (Opposite.op ((proEtaleBaseChange g).obj V))
+          ((sfCompletedCoefficientMap l E g).hom.app (Opposite.op V) a) d
+          (fun i ↦ FrobeniusCoefficientTwists.rootSection l g V (x i)) := by
+  obtain ⟨τ, hτ⟩ := sfIntegralPositiveRootLineMaps_exists l E g
+  refine ⟨τ, hτ, ?_⟩
+  intro other hother
+  funext d
+  apply Iso.ext
+  apply ((proEtaleRingModuleAdjunction g
+    ((PurCompactSupport.completed l E).ring Y)
+    ((PurCompactSupport.completed l E).ring X)
+    ((PurCompactSupport.completed l E).pull g)).homEquiv _ _).injective
+  apply sfPositiveRootGenerator_hom_ext l E Y d
+  intro V a x
+  exact (hother d V.unop a x).trans (hτ d V.unop a x).symm
+
+/-- The actual completed-module line map selected by its unique root formula.
+Source: clause 1, pullback/twist comparison
+(blueprint: def-sf-orientation-integral-line-comparisons). -/
+def sfOrientationIntegralLineMaps
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
+    [FiniteDimensional (Padic l) E] {X Y : Scheme.{u}} (g : X ⟶ Y)
+    [∀ x : X, Invertible (l : X.residueField x)]
+    [∀ y : Y, Invertible (l : Y.residueField y)] (d : ℕ) :
+    (FrobeniusCoefficientTwists.modulePull l E g).obj
+      (FrobeniusCoefficientTwists.positiveLine l E Y d) ≅
+        FrobeniusCoefficientTwists.positiveLine l E X d :=
+  (sfOrientationIntegralLineMaps_existsUnique l E g).exists.choose d
+
 private abbrev singleAt (M : C) (p : ℤ) :=
   (HomologicalComplex.single C (.up ℤ) p).obj M
 

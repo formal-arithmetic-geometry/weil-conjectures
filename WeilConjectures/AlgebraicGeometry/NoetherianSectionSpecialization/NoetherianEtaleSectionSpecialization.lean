@@ -735,4 +735,69 @@ private theorem comparison_eq (A : Type (u + 1)) [CommRing A] [Finite A]
   simp only [sectionExceptionalComparison, sectionCoherencePullbackIso, sectionMap,
     Iso.trans_hom, Iso.app_hom, Iso.app_inv, Iso.symm_hom, Category.assoc]
 
+/-- The existing actual Rees family, exposed for endpoint naturality statements.
+Source: sk-thm-dnc, fibre restrictions
+(blueprint: lem-pur-noetherian-etale-section-specialization). -/
+def reesFamily {V S : Scheme.{u}} [IsNoetherian V] [IsNoetherian S]
+    (d : ℕ) (g : V ⟶ S) [SmoothOfRelativeDimension d g] [IsSeparated g]
+    [HasCompactification g] (s : S ⟶ V) [IsClosedImmersion s]
+    (hs : s ≫ g = 𝟙 S) [HasCompactification (Scheme.Hom.deformationSpaceProj g s)]
+    [HasCompactification (Scheme.Hom.normalConeProj g s)] :
+    ExceptionalSectionFamily S d := by
+  have hd := Scheme.Hom.smoothOfRelativeDimension_deformationSpaceProj d g s hs
+  have hline : IsNoetherian (AffineSpace (ULift.{u} (Fin 1)) S) :=
+    isNoetherian_of_locallyOfFiniteType (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)
+  have hD : IsNoetherian s.ker.deformationSpace :=
+    isNoetherian_of_locallyOfFiniteType (Scheme.Hom.deformationSpaceProj g s)
+  have hn : SmoothOfRelativeDimension d (Scheme.Hom.normalConeProj g s) :=
+    (smoothOfRelativeDimension_isStableUnderBaseChange (n := d)).of_isPullback
+      (Scheme.Hom.isPullback_normalConeToDeformationSpace g s) hd
+  have hsep : IsSeparated (Scheme.Hom.normalConeProj g s) :=
+    MorphismProperty.of_isPullback (P := @IsSeparated)
+      (Scheme.Hom.isPullback_normalConeToDeformationSpace g s)
+        (inferInstance : IsSeparated (Scheme.Hom.deformationSpaceProj g s))
+  have : QuasiCompact (Scheme.Hom.normalConeProj g s) :=
+    MorphismProperty.of_isPullback (P := @QuasiCompact)
+      (Scheme.Hom.isPullback_normalConeToDeformationSpace g s) inferInstance
+  have hN : IsNoetherian s.ker.normalCone :=
+    isNoetherian_of_locallyOfFiniteType (Scheme.Hom.normalConeProj g s)
+  have hcD : IsClosedImmersion s.deformationSpaceSection := by
+    have : IsClosedImmersion
+        (s.deformationSpaceSection ≫ Scheme.Hom.deformationSpaceProj g s) := by
+      rw [Scheme.Hom.deformationSpaceSection_deformationSpaceProj hs]
+      infer_instance
+    exact IsClosedImmersion.of_comp s.deformationSpaceSection
+      (Scheme.Hom.deformationSpaceProj g s)
+  have hcN : IsClosedImmersion s.normalConeZeroSection := by
+    have : IsClosedImmersion (s.normalConeZeroSection ≫ Scheme.Hom.normalConeProj g s) := by
+      rw [Scheme.Hom.normalConeZeroSection_normalConeProj hs]
+      infer_instance
+    exact IsClosedImmersion.of_comp s.normalConeZeroSection
+      (Scheme.Hom.normalConeProj g s)
+  let source : ExceptionalSectionPair S d :=
+    { total := V, map := g, sect := s, section_map := hs }
+  let normal : ExceptionalSectionPair S d :=
+    { total := s.ker.normalCone
+      map := Scheme.Hom.normalConeProj g s
+      sect := s.normalConeZeroSection
+      section_map := Scheme.Hom.normalConeZeroSection_normalConeProj hs }
+  refine
+    { ambient :=
+        { total := s.ker.deformationSpace
+          map := Scheme.Hom.deformationSpaceProj g s
+          sect := s.deformationSpaceSection
+          section_map := Scheme.Hom.deformationSpaceSection_deformationSpaceProj hs }
+      fibre := fun t ↦ if t then source else normal
+      restriction := ?_ }
+  intro t
+  cases t
+  · exact
+      { upper := s.ker.normalConeToDeformationSpace
+        square := Scheme.Hom.isPullback_normalConeToDeformationSpace g s
+        section_comm := Scheme.Hom.normalConeZeroSection_comp_normalConeToDeformationSpace }
+  · exact
+      { upper := Scheme.Hom.deformationSpaceOneFibre g s
+        square := Scheme.Hom.isPullback_deformationSpaceOneFibre g s
+        section_comm := Scheme.Hom.comp_deformationSpaceOneFibre hs }
+
 end AlgebraicGeometry.Etale.NoetherianSectionSpecialization

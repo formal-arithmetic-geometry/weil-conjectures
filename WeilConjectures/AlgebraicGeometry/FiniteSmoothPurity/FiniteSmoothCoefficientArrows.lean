@@ -335,4 +335,66 @@ def proPullbackMap (phi : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y)
           (originReductionMap phi Y K)) ≫
     pullbackFromOrigin f ((proScalar phi Y).obj K)
 
+/-- The exceptional comparison on pro-etale Dctf is the transport of the specified
+ordinary counit transpose, through the canonical site/scalar and origin comparisons.
+Source: sk-lem-sp-reduction (blueprint: def-pur-finite-smooth-coefficient-arrows). -/
+def proCoefficientMap [Finite A] [Finite B] (phi : A →+* B)
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] (K : proCategory A Y) :
+    (proScalar phi X).obj ((exceptional A f).obj K) ⟶
+      (exceptional B f).obj ((proScalar phi Y).obj K) :=
+  (ProEtale.pbcComparisonReduction X phi).hom.app
+      ((rightDerivedUpperShriek A f).obj ((origin A Y).obj K)) ≫
+    (comparison B X).map
+      (ExceptionalCoefficients.mateMap phi f ((origin A Y).obj K) ≫
+        (rightDerivedUpperShriek B f).map (originReductionMap phi Y K))
+
+/-- Lambda on the actual pro-etale source, with each scalar, pullback, twist, and
+origin transport displayed. Source: sk-lem-sp-reduction/compatibilities (3)
+(blueprint: def-pur-finite-smooth-coefficient-arrows). -/
+def proLambda [Finite A] [Finite B] {phi : A →+* B} {N M : ℕ} {hA : (N : A) = 0} {hB : (M : B) = 0}
+    {X Y : Scheme.{u}} (f : X ⟶ Y) (d : ℕ)
+    (e : CoefficientLineComparison phi N M hA hB X)
+    (K : proCategory A Y) :
+    (proScalar phi X).obj ((proSource A f (line A N hA X d)).obj K) ⟶
+      (proSource B f (line B M hB X d)).obj ((proScalar phi Y).obj K) :=
+  (proScalar phi X).map (sourceToOrigin A f (line A N hA X d) K) ≫
+    (ProEtale.pbcComparisonReduction X phi).hom.app
+      ((puritySource A f (line A N hA X d)).obj ((origin A Y).obj K)) ≫
+    (comparison B X).map
+      ((pullbackTwistComparison f d e ((origin A Y).obj K)).hom ≫
+        (puritySource B f (line B M hB X d)).map (originReductionMap phi Y K)) ≫
+    sourceFromOrigin B f (line B M hB X d) ((proScalar phi Y).obj K)
+
+/-- Transport of the canonical compactification coefficient map, through the same
+proper/open site comparisons and origin counits used for the adjunction.
+Source: sk-lem-sp-reduction (blueprint: def-pur-finite-smooth-coefficient-arrows). -/
+def proCompactCoefficientMap [Finite A] [Finite B] (phi : A →+* B)
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] (M : proCategory A X) :
+    (proScalar phi Y).obj ((proCompact A f).obj M) ⟶
+      (proCompact B f).obj ((proScalar phi X).obj M) :=
+  (proScalar phi Y).map
+      ((proCompact A f).map (originInverse A X M) ≫
+        compactSiteMap A f ((origin A X).obj M)) ≫
+    (ProEtale.pbcComparisonReduction Y phi).hom.app
+      ((rightDerivedLowerShriek (ModuleCat.{u + 1} A) f).obj ((origin A X).obj M)) ≫
+    (comparison B Y).map
+      (ExceptionalCoefficients.compactSupportMap phi
+        (HasCompactification.compactification f) ((origin A X).obj M)) ≫
+    compactSiteInverse B f ((ordinaryScalar phi X).obj ((origin A X).obj M)) ≫
+    (proCompact B f).map
+      ((ProEtale.pbcComparisonReduction X phi).inv.app ((origin A X).obj M) ≫
+        (proScalar phi X).map
+          ((ProEtale.derivedComparisonAdjunction (ModuleCat.{u + 1} A) X).counit.app M))
+
+/-- The inverse coefficient comparison on its isomorphism locus.
+Source: sk-lem-sp-reduction (blueprint: def-pur-finite-smooth-coefficient-arrows). -/
+def proCompactCoefficientInverse [Finite A] [Finite B] (phi : A →+* B)
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] (M : proCategory A X) :
+    (proCompact B f).obj ((proScalar phi X).obj M) ⟶
+      (proScalar phi Y).obj ((proCompact A f).obj M) :=
+  open Classical in
+  if h : IsIso (proCompactCoefficientMap phi f M) then
+    @inv _ _ _ _ (proCompactCoefficientMap phi f M) h
+  else 0
+
 end AlgebraicGeometry.Etale.FiniteSmoothPurity

@@ -602,6 +602,178 @@ private theorem etale_open_id_eq (X : Scheme.{u}) :
         ((Functor.mapDerivedCategoryIdIso _).hom.app K.obj)
   simpa only [Iso.trans_hom, NatTrans.comp_app, Functor.map_comp, Category.assoc] using h
 
+private theorem etale_compositor_unit_left
+    {X Y : Scheme.{u}} {f : X ⟶ Y} [QuasiCompact f] (c : Compactification f)
+    (E : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R))) :
+    (coherenceEtaleCompositor R (Compactification.ofIsProper (𝟙 X)) c
+        (c.copy (Category.id_comp f))).hom.app E =
+      (coherenceEtaleFunctor R c).map
+        (((Etale.derivedPlusFormalism (ModuleCat.{u + 1} R)).shriekOfIsProperIdIso X).hom.app
+          E) := by
+  have h := etale_compositor_tower R (Compactification.ofIsProper (𝟙 X)) c
+    (c.copy (Category.id_comp f)) (Compactification.Triangle.unitLeft c) E
+  simp only [Compactification.Triangle.unitLeft, coherenceEtaleChangeIso, coherenceEtaleFunctor,
+    Etale.rightDerivedLowerShriekOfCompactificationPlusIso_refl,
+    Iso.refl_hom, NatTrans.id_app, CategoryTheory.Functor.map_id,
+    Category.id_comp, Category.comp_id] at h
+  simp only [towerEtaleIso, Etale.native_bounded_triangle_iso] at h
+  have hn := NatTrans.congr_app
+    ((Etale.derivedPlusFormalism (ModuleCat.{u + 1} R)).compIso_unitLeft c) E
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app,
+    Functor.leftUnitor_hom_app, Etale.derivedPlusFormalism_shriek] at hn
+  dsimp only [ExchangeFormalism.shriek, Etale.derivedPlusFormalism,
+    Functor.comp_obj, Functor.comp_map, Functor.id_obj] at hn
+  simp only [Category.comp_id] at hn
+  dsimp only [ExchangeFormalism.shriek, Etale.derivedPlusFormalism,
+    Functor.comp_obj, Functor.comp_map, Functor.id_obj, coherenceEtaleFunctor] at h ⊢
+  exact h.trans hn
+
+private theorem etale_compositor_unit_right
+    {X Y : Scheme.{u}} {f : X ⟶ Y} [QuasiCompact f] (c : Compactification f)
+    (E : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R))) :
+    (coherenceEtaleCompositor R c (Compactification.ofIsProper (𝟙 Y))
+        (c.copy (Category.comp_id f))).hom.app E =
+      ((Etale.derivedPlusFormalism (ModuleCat.{u + 1} R)).shriekOfIsProperIdIso Y).hom.app
+        ((coherenceEtaleFunctor R c).obj E) := by
+  have h := etale_compositor_tower R c (Compactification.ofIsProper (𝟙 Y))
+    (c.copy (Category.comp_id f)) (Compactification.Triangle.unitRight c) E
+  simp only [Compactification.Triangle.unitRight, coherenceEtaleChangeIso, coherenceEtaleFunctor,
+    Etale.rightDerivedLowerShriekOfCompactificationPlusIso_refl,
+    Iso.refl_hom, NatTrans.id_app, CategoryTheory.Functor.map_id,
+    Category.id_comp, Category.comp_id] at h
+  simp only [towerEtaleIso, Etale.native_bounded_triangle_iso] at h
+  have hn := NatTrans.congr_app
+    ((Etale.derivedPlusFormalism (ModuleCat.{u + 1} R)).compIso_unitRight c) E
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app,
+    Functor.rightUnitor_hom_app, Etale.derivedPlusFormalism_shriek] at hn
+  dsimp only [ExchangeFormalism.shriek, Etale.derivedPlusFormalism,
+    Functor.comp_obj, Functor.comp_map, Functor.id_obj] at hn
+  simp only [Category.comp_id] at hn
+  dsimp only [ExchangeFormalism.shriek, Etale.derivedPlusFormalism,
+    Functor.comp_obj, Functor.comp_map, Functor.id_obj, coherenceEtaleFunctor] at h ⊢
+  exact h.trans hn
+
+private theorem compositor_assoc_transport
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    {F F₀ : A ⥤ B} {G G₀ : B ⥤ C} {H H₀ : C ⥤ D}
+    {P P₀ : A ⥤ C} {Q Q₀ : B ⥤ D} {S S₀ S₁ : A ⥤ D}
+    (a : F ≅ F₀) (b : G ≅ G₀) (c : H ≅ H₀) (d : P ≅ P₀) (e : Q ≅ Q₀)
+    (μ : F₀ ⋙ G₀ ≅ P₀) (ν : G₀ ⋙ H₀ ≅ Q₀)
+    (ξ : P₀ ⋙ H₀ ≅ S₀) (ζ : F₀ ⋙ Q₀ ≅ S₁)
+    (t₀ : S₀ ≅ S) (t₁ : S₁ ≅ S) (E : A)
+    (h : H₀.map (μ.hom.app E) ≫ ξ.hom.app E ≫ t₀.hom.app E =
+      ν.hom.app (F₀.obj E) ≫ ζ.hom.app E ≫ t₁.hom.app E) :
+    H.map ((coherenceCompositorOfChanges F F₀ G G₀ P₀ P a b μ d.symm).hom.app E) ≫
+        (coherenceCompositorOfChanges P P₀ H H₀ S₀ S d c ξ t₀).hom.app E =
+      (coherenceCompositorOfChanges G G₀ H H₀ Q₀ Q b c ν e.symm).hom.app (F.obj E) ≫
+        (coherenceCompositorOfChanges F F₀ Q Q₀ S₁ S a e ζ t₁).hom.app E := by
+  simp only [compositor_component, Iso.symm_hom, Functor.map_comp, Category.assoc]
+  slice_lhs 4 5 => rw [← H.map_comp, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id]
+  simp only [Category.id_comp]
+  simp only [Category.assoc]
+  rw [c.hom.naturality_assoc, ← H.map_comp_assoc, b.hom.naturality,
+    H.map_comp_assoc]
+  rw [← e.inv.naturality_assoc, Iso.inv_hom_id_app_assoc]
+  rw [← ν.hom.naturality_assoc]
+  dsimp only [Functor.comp_map]
+  rw [c.hom.naturality_assoc]
+  rw [h]
+
+private def formalCompositor (F : CompactSupportFormalism) [F.HasProperExchange]
+    {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
+    [QuasiCompact f] [QuasiCompact g]
+    (c : Compactification f) (d : Compactification g) (e : Compactification (f ≫ g)) :
+    F.shriek c ⋙ F.shriek d ≅ F.shriek e :=
+  letI := c.hasCompactification
+  letI := d.hasCompactification
+  letI := e.hasCompactification
+  coherenceCompositorOfChanges _ _ _ _ _ _
+    (F.shriekIso c (HasCompactification.compactification f))
+    (F.shriekIso d (HasCompactification.compactification g))
+    (F.lowerShriekCompIso f g)
+    (F.shriekIso (HasCompactification.compactification (f ≫ g)) e)
+
+private theorem formal_change_copy (F : CompactSupportFormalism) [F.HasProperExchange]
+    {X Y : Scheme.{u}} {f f' : X ⟶ Y} [QuasiCompact f] [QuasiCompact f']
+    [HasCompactification f] [HasCompactification f'] (w : f = f')
+    (d : Compactification f') :
+    (F.shriekIso (HasCompactification.compactification f) (d.copy w)).hom =
+      (F.lowerShriekCongr w).hom ≫
+        (F.shriekIso (HasCompactification.compactification f') d).hom := by
+  subst f'
+  simp only [CompactSupportFormalism.lowerShriekCongr_refl, Iso.refl_hom, Category.id_comp]
+  rfl
+
+private theorem formal_compositor_assoc (F : CompactSupportFormalism) [F.HasProperExchange]
+    {X Y Z W : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z} {h : Z ⟶ W}
+    [QuasiCompact f] [QuasiCompact g] [QuasiCompact h]
+    (c : Compactification f) (d : Compactification g) (e : Compactification h)
+    (cfg : Compactification (f ≫ g)) (cgh : Compactification (g ≫ h))
+    (cfgh : Compactification (f ≫ g ≫ h)) (E : F.obj X) :
+    (F.shriek e).map ((formalCompositor F c d cfg).hom.app E) ≫
+        (formalCompositor F cfg e (cfgh.copy (Category.assoc f g h))).hom.app E =
+      (formalCompositor F d e cgh).hom.app ((F.shriek c).obj E) ≫
+        (formalCompositor F c cgh cfgh).hom.app E := by
+  let := c.hasCompactification
+  let := d.hasCompactification
+  let := e.hasCompactification
+  let := cfg.hasCompactification
+  let := cgh.hasCompactification
+  let := cfgh.hasCompactification
+  let := (cfgh.copy (Category.assoc f g h)).hasCompactification
+  have hn := congr_app (F.lowerShriekCompIso_assoc f g h) E
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    Functor.associator_hom_app, Category.id_comp] at hn
+  have ht := congrArg (fun t ↦ t ≫
+      (F.shriekIso (HasCompactification.compactification (f ≫ g ≫ h)) cfgh).hom.app E) hn
+  have hcopy := congr_app (formal_change_copy F (Category.assoc f g h) cfgh) E
+  simp only [NatTrans.comp_app] at hcopy
+  simp only [Category.assoc] at ht
+  rw [← hcopy] at ht
+  have hp := compositor_assoc_transport
+    (F.shriekIso c (HasCompactification.compactification f))
+    (F.shriekIso d (HasCompactification.compactification g))
+    (F.shriekIso e (HasCompactification.compactification h))
+    (F.shriekIso cfg (HasCompactification.compactification (f ≫ g)))
+    (F.shriekIso cgh (HasCompactification.compactification (g ≫ h)))
+    (F.lowerShriekCompIso f g) (F.lowerShriekCompIso g h)
+    (F.lowerShriekCompIso (f ≫ g) h) (F.lowerShriekCompIso f (g ≫ h))
+    (F.shriekIso (HasCompactification.compactification ((f ≫ g) ≫ h))
+      (cfgh.copy (Category.assoc f g h)))
+    (F.shriekIso (HasCompactification.compactification (f ≫ g ≫ h)) cfgh) E ht
+  simp only [formalCompositor, F.shriekIso_symm] at hp ⊢
+  dsimp only [CompactSupportFormalism.lowerShriek, CompactSupportFormalism.shriek,
+    ExchangeFormalism.shriek,
+    Compactification.copy] at hp ⊢
+  exact hp
+
+private theorem formalCompositor_etale
+    {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
+    [QuasiCompact f] [QuasiCompact g]
+    (c : Compactification f) (d : Compactification g) (e : Compactification (f ≫ g)) :
+    formalCompositor (Etale.derivedPlusFormalism (ModuleCat.{u + 1} R)) c d e =
+      coherenceEtaleCompositor R c d e := by
+  unfold formalCompositor coherenceEtaleCompositor coherenceEtaleChangeIso
+    coherenceChosenEtaleCompositorIso Etale.rightDerivedLowerShriekPlusCompIso
+  simp only [Etale.derivedPlusFormalism_shriekIso]
+  rfl
+
+private theorem etale_compositor_assoc
+    {X Y Z W : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z} {h : Z ⟶ W}
+    [QuasiCompact f] [QuasiCompact g] [QuasiCompact h]
+    (c : Compactification f) (d : Compactification g) (e : Compactification h)
+    (cfg : Compactification (f ≫ g)) (cgh : Compactification (g ≫ h))
+    (cfgh : Compactification (f ≫ g ≫ h))
+    (E : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R))) :
+    (coherenceEtaleFunctor R e).map ((coherenceEtaleCompositor R c d cfg).hom.app E) ≫
+        (coherenceEtaleCompositor R cfg e (cfgh.copy (Category.assoc f g h))).hom.app E =
+      (coherenceEtaleCompositor R d e cgh).hom.app ((coherenceEtaleFunctor R c).obj E) ≫
+        (coherenceEtaleCompositor R c cgh cfgh).hom.app E := by
+  have h := formal_compositor_assoc (Etale.derivedPlusFormalism
+    (ModuleCat.{u + 1} R)) c d e cfg cgh cfgh E
+  simpa only [formalCompositor_etale, Etale.derivedPlusFormalism_shriek,
+    coherenceEtaleFunctor] using h
+
 section UnitCalculation
 attribute [local implicit_reducible] ExchangeFormalism.shriek
 attribute [local irreducible] Functor.rightDerivedFunctorPlus Functor.rightDerivedFunctor

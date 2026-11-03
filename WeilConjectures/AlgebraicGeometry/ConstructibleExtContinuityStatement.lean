@@ -70,6 +70,7 @@ import Mathlib.CategoryTheory.Abelian.Subcategory
 import Mathlib.CategoryTheory.ObjectProperty.Extensions
 import Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
 
 /-!
 # Continuity of Ext from constructible complexes
@@ -102,6 +103,11 @@ Source: literature/blueprint/latest/blueprint/part-six-operations/
 sec-reduction-finite-coefficients/sec-ext-continuity/
 `sk-lem-constructible-ext-continuity/_section.md`, entire unit statement and clauses (1)--(2).
 (blueprint: sk-lem-constructible-ext-continuity)
+
+The standing field is finite or algebraically closed, as fixed in
+`literature/blueprint/latest/blueprint/part-six-operations/prose-P1-01.md` (paragraph
+"Throughout this part the base field is finite or algebraically closed") and
+`literature/blueprint/latest/blueprint/sec-introduction/sec-conventions/prose-01-09.md`.
 
 The first conjunct is the displayed comparison for a complex obtained by finite extensions
 and shifts of locally closed lisse finite locally free sheaves. The second supplies the generator
@@ -144,7 +150,8 @@ Proof, following the eight steps of the node:
 -/
 theorem constructible_ext_continuity_statement
     (ell : ℕ) [Fact ell.Prime] (E : PadicAlgCl.FiniteIntermediateField ell)
-    (k : Type u) [Field k] (_hchar : ringChar k ≠ ell)
+    (k : Type u) [Field k] (_hk : Finite k ∨ IsAlgClosed k)
+    (_hchar : ringChar k ≠ ell)
     (X : Scheme.{u}) [X.Over (Spec (.of k))]
     [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
     [IsSeparated (X ↘ Spec (.of k))]
@@ -192,6 +199,77 @@ theorem constructible_ext_continuity_statement
               (cokernel (Subobject.ofLE (F i.castSucc) (F i.succ) (hF i)))) →
         IsExtContinuityGenerated (coefficientHeartRingObj R) X Set.univ
           ((DerivedCategory.singleFunctor _ 0).obj M)) := by
-  sorry
+  -- The standing finite-or-algebraically-closed setting supplies the permitted inputs.
+  -- The reused closed-support and bounded-continuity argument needs only finite type here.
+  have : IsLocallyNoetherian X :=
+    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
+  have : CompactSpace X :=
+    QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+  refine ⟨?_, ?_, ?_⟩
+  · intro M hM I _ _ K b hb n
+    exact constructible_ext_continuity ell E R _hR X M hM K b hb
+      (colimit.cocone K) (colimit.isColimit K) n
+  · intro hfield
+    constructor
+    · intro M hM
+      exact bounded_constructible_ext_generated ell E R hfield X M hM
+    · intro M hM I _ _ K n
+      exact constructible_sheaf_ext_continuity ell E R hfield X M hM K
+        (colimit.cocone K) (colimit.isColimit K) n
+  · intro _ M hM
+    let A := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (coefficientHeartRingObj R) X)
+    let G := extContinuityShiftedStrata (coefficientHeartRingObj R) X Set.univ
+    let P : ObjectProperty (DerivedCategory A) := fun D ↦ ∃ n : ℕ, G.extensionProductIter n D
+    have : G.IsClosedUnderIsomorphisms := ⟨by
+      rintro D D' e ⟨N, hN, t, ht, ⟨eN⟩⟩
+      exact ⟨N, hN, t, ht, ⟨e.symm ≪≫ eN⟩⟩⟩
+    have hGn (n : ℕ) : (G.extensionProductIter n).IsClosedUnderIsomorphisms := by
+      cases n with
+      | zero => change G.IsClosedUnderIsomorphisms; infer_instance
+      | succ n => rw [ObjectProperty.extensionProductIter_succ]; infer_instance
+    have : P.IsClosedUnderIsomorphisms := ⟨by
+      rintro D D' e ⟨n, hn⟩
+      have := hGn n
+      exact ⟨n, (G.extensionProductIter n).prop_of_iso e hn⟩⟩
+    have hsingle (N : A) (hN : IsExtContinuityStratum (coefficientHeartRingObj R) X N) :
+        G ((DerivedCategory.singleFunctor A 0).obj N) := by
+      exact ⟨N, hN, 0, Set.mem_univ _,
+        ⟨((shiftFunctorZero (DerivedCategory A) ℤ).app _).symm⟩⟩
+    have hzero (N : A) (hN : IsZero N) :
+        IsExtContinuityStratum (coefficientHeartRingObj R) X N := by
+      have hfree (Y : Scheme.{u}) :
+          IsZero (Mod.finiteFree (condensedRingObj (coefficientHeartRingObj R) Y) 0) := by
+        apply (IsZero.iff_id_eq_zero _).mpr
+        apply biproduct.hom_ext
+        intro i
+        exact Fin.elim0 i
+      have hL : IsLisseCoefficientModule (coefficientHeartRingObj R) (0 : A) := by
+        refine ⟨.singleton (𝟙 X) (Precoverage.mem_coverings_of_isIso _), fun i ↦ ?_⟩
+        exact ⟨0, ⟨((CondensedRing.upperStar (coefficientHeartRingObj R) _).map_isZero
+          (isZero_zero A)).iso (hfree _)⟩⟩
+      refine ⟨X, X, 𝟙 X, 𝟙 X, inferInstance, inferInstance, 0, hL, ⟨?_⟩⟩
+      exact hN.iso ((CondensedRing.lowerStar (coefficientHeartRingObj R) (𝟙 X)).map_isZero
+        ((CondensedRing.openImmersionLowerShriek (coefficientHeartRingObj R) (𝟙 X)).map_isZero
+          (isZero_zero A)))
+    obtain ⟨m, F, hF, hbot, htop, hquot⟩ := hM
+    have hPF (r : Fin (m + 1)) : P ((DerivedCategory.singleFunctor A 0).obj (F r)) := by
+      induction r using Fin.induction with
+      | zero =>
+        refine ⟨0, hsingle _ (hzero _ ?_)⟩
+        rw [hbot]
+        exact (isZero_zero A).of_iso Subobject.botCoeIsoZero
+      | succ i ih =>
+        let f := Subobject.ofLE (F i.castSucc) (F i.succ) (hF i)
+        let S := ShortComplex.mk f (cokernel.π f) (cokernel.condition f)
+        have hS : S.ShortExact := { exact := ShortComplex.exact_cokernel f }
+        obtain ⟨n, hn⟩ := ih
+        refine ⟨n + 1, ?_⟩
+        rw [ObjectProperty.extensionProductIter_succ']
+        exact ⟨_, _, _, _, _, hS.singleTriangle_distinguished, hn, hsingle _ (hquot i)⟩
+    have e : (F (Fin.last m) : A) ≅ M :=
+      eqToIso (congrArg (fun S : Subobject M ↦ (S : A)) htop) ≪≫
+        Subobject.underlyingIso (𝟙 M)
+    exact P.prop_of_iso ((DerivedCategory.singleFunctor A 0).mapIso e) (hPF (Fin.last m))
 
 end AlgebraicGeometry.ProEtale

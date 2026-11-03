@@ -269,6 +269,16 @@ Source: Stacks, 06YS (blueprint: lem-sp-etale-chart-comparison-isos). -/
 instance proAbelian (R : Type (u + 1)) [CommRing R] (T : Scheme.{u}) :
     Abelian (Pro R T) := inferInstance
 
+/-- Cache the existing IsGrothendieckAbelian.{u + 1} structure, without choosing a new category.
+Source: Stacks, 06YS (blueprint: lem-sp-etale-chart-comparison-isos). -/
+instance etGroth (R : Type (u + 1)) [CommRing R] (T : Scheme.{u}) :
+    IsGrothendieckAbelian.{u + 1} (Et R T) := inferInstance
+
+/-- Cache the existing IsGrothendieckAbelian.{u + 1} structure, without choosing a new category.
+Source: Stacks, 06YS (blueprint: lem-sp-etale-chart-comparison-isos). -/
+instance proGroth (R : Type (u + 1)) [CommRing R] (T : Scheme.{u}) :
+    IsGrothendieckAbelian.{u + 1} (Pro R T) := inferInstance
+
 /-- Cache the existing MonoidalPreadditive structure, without choosing a new category.
 Source: Stacks, 06YS (blueprint: lem-sp-etale-chart-comparison-isos). -/
 instance etMonoidalPreadditive (R : Type (u + 1)) [CommRing R] (T : Scheme.{u}) :
@@ -283,6 +293,11 @@ instance proMonoidalPreadditive (R : Type (u + 1)) [CommRing R] (T : Scheme.{u})
 Source: Stacks, 06YS (blueprint: lem-sp-etale-chart-comparison-isos). -/
 instance etSymmetricCategory (R : Type (u + 1)) [CommRing R] (T : Scheme.{u}) :
     SymmetricCategory (Et R T) := inferInstance
+
+/-- Cache the existing SymmetricCategory structure, without choosing a new category.
+Source: Stacks, 06YS (blueprint: lem-sp-etale-chart-comparison-isos). -/
+instance proSymmetricCategory (R : Type (u + 1)) [CommRing R] (T : Scheme.{u}) :
+    SymmetricCategory (Pro R T) := inferInstance
 
 /-- Cache the existing MonoidalClosed structure, without choosing a new category.
 Source: Stacks, 06YS (blueprint: lem-sp-etale-chart-comparison-isos). -/

@@ -11,6 +11,11 @@ public import WeilConjectures.AlgebraicGeometry.Condensed.CondensedConstantConst
 public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.SitePerfect
 public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
+public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
+public import WeilConjectures.Compactification.Defs
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.Conventions
+public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.NativeSitePerfectDual
 
 /-! # Internal Hom through the coefficient dual
 
@@ -57,23 +62,16 @@ finite-projective object is dualizable: for every bounded constructible finite-T
 target, coefficient dual tensor target maps isomorphically to derived internal Hom.
 
 Source: current Weil conjectures blueprint,
-`sec-six-functors/sk-prop-sf-dualizable-biduality/prop-sf-dualizable-hom.md`,
+`part-duality-trace-formula/sec-lefschetz-verdier/sec-kunneth-formulas-and-external-duality/`
+`sk-thm-sf-kunneth-verdier/sk-prop-sf-dualizable-biduality/prop-sf-dualizable-hom.md`,
 statement and proof steps 1--5 (blueprint: prop-sf-dualizable-hom).
 
-Proof (node proof, Stacks 08JJ).
-1. The internal Hom `H = RHom_R` is the right adjoint of the same K-flat derived tensor, by
-   uniqueness of adjoints; the displayed map is the evaluation
-   `e : M ⊗ᴸ H(K, R) ⟶ H(K, M)` after symmetry. On each chart of the cover choose a bounded
-   representative `P` of `K` whose terms are retracts of finite free modules.
-2. On a chart put `D = Hom^•(P, R[0])`. The terms of `P` have exact Hom functors and finite
-   free retract duals, so `D` represents `H(K, R)` and `Hom^•(P, F)` represents `H(K, M)`
-   for a K-flat flat-term representative `F` of `M`; `D` is bounded flat, hence K-flat.
-3. Termwise all-target evaluation `B ⊗ (P^i)^∨ ≅ Hom(P^i, B)`, assembled with signs, gives
-   a chain isomorphism `Tot(F ⊗ D) ≅ Hom^•(P, F)`, `y ⊗ φ ↦ (x ↦ y φ(x))`.
-4. The representative normalization of the ringed-site duality maps identifies this chain
-   isomorphism with `e` on the chart, compatibly with restriction to the chart.
-5. Restriction is exact, so the cohomology sheaves of the cone of `e` vanish on a cover and
-   hence vanish; `e` and therefore the displayed map are isomorphisms. -/
+Proof: `native_sitePerfect_dual` performs the local finite-projective calculation:
+finite free retract terms have duals, their bounded signed dual complexes are K-flat,
+and their exact pairing localizes and descends over the perfect cover. It supplies an
+exact pairing with the actual coefficient dual. The closed-category evaluation comparison
+for this pairing is precisely `ihomUnitTensorToIhom`, so it is invertible. No biduality,
+constructibility, or six-operation comparison is used in this local calculation. -/
 theorem sitePerfect_dualizable_hom
     [IsCommMonObj Λ]
     (K M : DerivedCategory
@@ -85,7 +83,11 @@ theorem sitePerfect_dualizable_hom
       DerivedCategory.finiteTorAmplitude _ M)
     (hPerfect : IsPerfectOnCoefficientSite Λ X K) :
     IsIso (MonoidalClosed.ihomUnitTensorToIhom K M) := by
-  sorry
+  have _ := hK
+  have _ := hM
+  obtain ⟨_, ep, _⟩ := native_sitePerfect_dual Λ X K hPerfect
+  let := ep
+  exact MonoidalClosed.isIso_ihomUnitTensorToIhom ((ihom K).obj (𝟙_ _)) K M
 
 end
 
@@ -106,15 +108,14 @@ finite-Tor subcategory, and `IsSitePerfect` is the local bounded
 finite-projective condition on the coefficient site.
 
 Source: current Weil conjectures blueprint,
-`sec-six-functors/sk-prop-sf-dualizable-biduality/prop-sf-dualizable-hom.md`,
+`part-duality-trace-formula/sec-lefschetz-verdier/sec-kunneth-formulas-and-external-duality/`
+`sk-thm-sf-kunneth-verdier/sk-prop-sf-dualizable-biduality/prop-sf-dualizable-hom.md`,
 finite-coefficient small-étale clause (blueprint: prop-sf-dualizable-hom).
 
-Proof (node proof, step 5): steps 1--5 of `sitePerfect_dualizable_hom` use only statements
-about an arbitrary small ringed site with commutative coefficient sheaf; run on the small
-étale site with the constant coefficient sheaf of `A`, they give this assertion: local
-finite-free-retract representatives, their K-flat termwise duals, the signed termwise
-evaluation chain isomorphism, its identification with the canonical map on each chart,
-and local detection of the acyclic cone. -/
+Proof: the existing small-etale site-perfect theorem carries out the same bounded
+finite-projective local dual calculation and descent. Its right dual is also a left dual
+by the derived braiding. Apply the closed-category theorem to that exact pairing; its
+conclusion concerns the specified canonical evaluation comparison. -/
 theorem sitePerfect_dualizable_hom_etale
     (K M : DerivedCategoryModule A X)
     (hK : DerivedCategory.isBoundedConstructible A X K ∧
@@ -123,6 +124,67 @@ theorem sitePerfect_dualizable_hom_etale
       ∃ a b : ℤ, a ≤ b ∧ DerivedCategory.hasTorAmplitudeIn A X a b M)
     (hPerfect : IsSitePerfect K) :
     IsIso (MonoidalClosed.ihomUnitTensorToIhom K M) := by
-  sorry
+  have _ := hK
+  have _ := hM
+  let := hPerfect.isDualizable.some
+  let : BraidedCategory (DerivedCategoryModule A X) :=
+    (DerivedCategory.nonempty_braidedCategory _).some
+  let := BraidedCategory.exactPairing_swap K Kᘁ
+  exact MonoidalClosed.isIso_ihomUnitTensorToIhom Kᘁ K M
+
+/-- Internal Hom through the coefficient dual, in the setting of `def-sf-datum`: let `k` be
+a field, `Λ` a finite commutative ring with a Tate twist datum whose exponent is invertible
+on `X`, and `X` separated, of finite type and compactifiable over `k`. If
+`K ∈ D^b_ctf(X, Λ)` is, locally on the small étale site, quasi-isomorphic to a bounded
+complex of finite projective `Λ_X`-modules (`IsSitePerfect`), then for every
+`M ∈ D^b_ctf(X, Λ)` the canonical comparison `K^∨ ⊗^L M ⟶ RHom(K, M)`
+(`ihomUnitTensorToIhom`, with `K^∨ = RHom(K, Λ_X)`) is an isomorphism.
+
+Source: current Weil conjectures blueprint,
+`part-duality-trace-formula/sec-lefschetz-verdier/sec-kunneth-formulas-and-external-duality/`
+`sk-thm-sf-kunneth-verdier/sk-prop-sf-dualizable-biduality/prop-sf-dualizable-hom.md`,
+order 3499, and its proof (blueprint: prop-sf-dualizable-hom).
+
+Proof (node steps 1--5, on the ringed site `(X_et, Λ_X)`):
+1. The derived internal Hom `H = RHom_Λ` is the right adjoint of the K-flat derived tensor
+   (lem-sf-ringed-derived-closed-symmetric-monoidal, def-weil-derived-pullback-tensor-hom);
+   the comparison is evaluation `e : M ⊗ H(K, Λ_X) ⟶ H(K, M)` after symmetry. Choose on
+   each chart a bounded representative `P` of `K` with finite-free retract terms.
+2. `D = Hom^•(P, Λ[0])` represents `H(K, Λ_X)` and `Hom^•(P, F)` represents `H(K, M)` for
+   any representative `F` of `M` (lem-sfb-ringed-site-finite-retract-dual-exact,
+   lem-pc-bounded-exact-term-hom-quasi-iso, def-pur-derived-internal-hom); `D` is bounded
+   flat, hence K-flat (lem-sfb-ringed-site-bounded-dual-components,
+   lem-pc-bounded-above-flat-kflat-site); choose `F` K-flat with flat terms
+   (lem-pc-kflat-resolution).
+3. Termwise `B ⊗ (P^i)^∨ ≅ Hom(P^i, B)` (lem-sf-hom-finite-projective,
+   lem-pc-finite-projective-internal-hom-evaluation) assembles to a chain isomorphism
+   `Tot(F ⊗ D) ≅ Hom^•(P, F)` (lem-sfb-ringed-site-bounded-evaluation-assembly).
+4. The representative normalization of lem-sfb-ringed-site-duality-maps identifies this
+   chain isomorphism with `e` on the chart, compatibly with restriction.
+5. Slice restriction is exact (lem-pur-site-restriction-module-adjunction-exact), so the
+   cohomology sheaves of the cone of `e` vanish on a cover, hence globally; `e` is an
+   isomorphism, and so is the displayed map.
+The existing small-étale site-perfect theorem realizes the local finite-projective
+calculation and descent. As in `sitePerfect_dualizable_hom_etale`, take its right dual,
+use the derived braiding to obtain a left dual, and apply the closed-category comparison
+theorem to the specified map `ihomUnitTensorToIhom`. -/
+theorem sitePerfect_dualizable_hom_general
+    {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] [HasTateTwist Λ]
+    (k : Type u) [Field k] {X : Scheme.{u}}
+    (aX : X ⟶ Spec (.of k)) [HasInvertibleExponent Λ X]
+    [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX]
+    [HasCompactification aX]
+    (K M : DerivedCategoryModule Λ X)
+    (hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K)
+    (hM : DerivedCategory.boundedConstructibleFiniteTor Λ X M)
+    (hPerfect : IsSitePerfect K) :
+    IsIso (MonoidalClosed.ihomUnitTensorToIhom K M) := by
+  have _ := hK
+  have _ := hM
+  let := hPerfect.isDualizable.some
+  let : BraidedCategory (DerivedCategoryModule Λ X) :=
+    (DerivedCategory.nonempty_braidedCategory _).some
+  let := BraidedCategory.exactPairing_swap K Kᘁ
+  exact MonoidalClosed.isIso_ihomUnitTensorToIhom Kᘁ K M
 
 end AlgebraicGeometry.Etale.DerivedCategory

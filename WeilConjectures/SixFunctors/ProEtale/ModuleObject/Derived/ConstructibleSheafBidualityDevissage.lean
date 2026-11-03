@@ -17,6 +17,9 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ConstructibleSh
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ConstructibleSheafBidualityRational
 public import WeilConjectures.SixFunctors.ConstructibleSheafBidualityQbar
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ConstructibleSheafBidualityBaseField
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleStratum
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ConstructibleSheafBidualityScalarComparison
 
 @[expose] public section
 set_option autoImplicit false
@@ -33,56 +36,52 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k]
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
   [LocallyOfFiniteType S.hom] [QuasiCompact S.hom] [IsSeparated S.hom]
 
-/-- Transport Verdier biduality through all coefficient stages.
+/-- Transport native integral biduality to a condensed constructible sheaf.
 
-Source: `literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-thm-sf-ctf-stability/det-prop-sf-biduality-general.proof.md`, the single
-coefficient paragraph.  The four premises are independent current stage
-statements: derived-complete integral duality, rational scalar coherence,
-common-stage Qbar duality, and reflection by the base-change functor.  The
-missing argument pastes their evaluation-compatible comparisons, uses the
-open--closed triangle on constructible objects, and applies conservativity to
-the canonical condensed evaluation transpose.  It does not assume a finite-
-stage biduality theorem as a hypothesis.
+Source: Bhatt--Scholze, Lemma 6.7.20 and Proposition 6.8.14; latest blueprint
+`sec-six-functors-basics/sk-thm-sf-ctf-stability/det-prop-sf-biduality-general.proof.md`,
+the integral and field coefficient paragraph.
+
+Proof: the finite-type scheme is noetherian. Choose an integral model `L` for `M[0]`
+over a finite coefficient extension `E`. The given integral biduality makes `δ_L`
+invertible. The canonical scalar comparison identifies `δ_(F L)` with `F(δ_L)`
+followed by an isomorphism, hence it is invertible. Naturality along the integral-model
+isomorphism `F L ≅ M[0]` finishes the proof. No coefficient-stage category is substituted
+for the native condensed derived category.
 (blueprint: lem-pd-constructible-sheaf-biduality-devissage) -/
 theorem isIso_biduality_constructible_sheaf_of_stage_transport
-    (hIntegral : ∀ (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ)
-      [Fact l.Prime] (hl : l ≠ D.p) (E : Type u) [Field E]
-      [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (Y : Scheme.{u})
-      [Y.Over (Spec (.of D.k))]
-      [LocallyOfFiniteType (Y ↘ Spec (.of D.k))]
-      [QuasiCompact (Y ↘ Spec (.of D.k))]
-      [IsSeparated (Y ↘ Spec (.of D.k))]
-      (ω : WeilConjectures.sfIntegralConstructibleCategory l E Y)
-      (r : ∀ n : ℕ,
-        (WeilConjectures.scalarReductionDerivedExtension l E Y n).obj ω.obj ≅
-          WeilConjectures.integralDualizingFiniteTerm l E D Y n),
-      WeilConjectures.IntegralVerdier.Conclusion l E Y D hl ω r)
-    (hRational : ∀ (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ)
-      [Fact l.Prime] (hl : l ≠ D.p) (Y : Scheme.{u})
-      [Y.Over (Spec (.of D.k))]
-      [LocallyOfFiniteType (Y ↘ Spec (.of D.k))]
-      [QuasiCompact (Y ↘ Spec (.of D.k))]
-      [IsSeparated (Y ↘ Spec (.of D.k))],
-      WeilConjectures.RationalVerdier.Conclusion D l hl Y)
-    (hQbar : ∀ (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ)
-      [Fact l.Prime] (hl : l ≠ D.p) (Ω : Type u) [Field Ω]
-      [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (Y : Scheme.{u})
-      [Y.Over (Spec (.of D.k))]
-      [LocallyOfFiniteType (Y ↘ Spec (.of D.k))]
-      [QuasiCompact (Y ↘ Spec (.of D.k))]
-      [IsSeparated (Y ↘ Spec (.of D.k))],
-      WeilConjectures.CurrentCoefQbarVerdierConclusion D l hl Ω Y)
-    (hBase : ∀ {C : Type u} {D : Type u} [Category.{u} C] [Category.{u} D]
-      (F : C ⥤ D) (hF : F.FullyFaithful) {A B : C} (f : A ⟶ B)
-      [IsIso (F.map f)], IsIso f)
     [IsIso S.hom] (a : X ⟶ S)
+    (hIntegral : ∀ (E : PadicAlgCl.FiniteIntermediateField ℓ)
+      (L : BoundedConstructible
+        (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X.left)),
+      IsIso (toIhomIhom
+        ((PadicIntegersRingObj.boundedConstructibleUpperShriek ℓ E.1 a).obj (𝟙_ _)).obj
+        L.obj))
     (M : Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
       (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left))
     (hM : IsConstructibleModuleObject _ M) :
     IsIso (toIhomIhom
       ((boundedConstructibleUpperShriek ℓ a).obj (𝟙_ _)).obj
       ((DerivedCategory.singleFunctor _ 0).obj M)) := by
-  sorry
+  have _ : IsLocallyNoetherian X.left :=
+    LocallyOfFiniteType.isLocallyNoetherian X.hom
+  have _ : CompactSpace X.left :=
+    QuasiCompact.compactSpace_of_compactSpace X.hom
+  have _ : IsNoetherian X.left := ⟨⟩
+  let K : PadicAlgClConstructible X.left ℓ :=
+    ⟨(DerivedCategory.singleFunctor _ 0).obj M,
+      boundedConstructible_singleFunctor_zero_obj _ M hM⟩
+  obtain ⟨E, L, ⟨e⟩⟩ := exists_padicAlgCl_iso_integralModel X.left ℓ K
+  let F := (Mod.extendScalars (padicIntegersToPadicSubfield X.left ℓ E)).leftDerivedFunctor ⋙
+    derivedExtendScalarsToPadicAlgCl X.left ℓ E
+  let W := ((PadicIntegersRingObj.boundedConstructibleUpperShriek ℓ E.1 a).obj (𝟙_ _)).obj
+  let W' := ((boundedConstructibleUpperShriek ℓ a).obj (𝟙_ _)).obj
+  have hδ : IsIso (toIhomIhom W L.obj) := hIntegral E L
+  obtain ⟨c, hc⟩ := integral_qbar_biduality_comparison ℓ a E L
+  have hF : IsIso (toIhomIhom W' (F.obj L.obj)) := by
+    rw [hc]
+    infer_instance
+  exact (NatTrans.isIso_app_iff_of_iso (toIhomIhomNatTrans W')
+    ((boundedConstructible _).ι.mapIso e)).1 hF
 
 end AlgebraicGeometry.ProEtale.CondensedRing

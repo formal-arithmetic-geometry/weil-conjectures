@@ -21,6 +21,24 @@ import WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorIso
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Mathlib.AlgebraicGeometry.Morphisms.Separated
 import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicCoefficientTwistsUnrestricted
+public import WeilConjectures.PoincareDuality.RationalSmoothPurityCanonical.CanonicalFiniteUnitCounit
+public import WeilConjectures.PoincareDuality.RationalSmoothPurityCanonical.CanonicalFiniteUnitTensor
+public import WeilConjectures.PoincareDuality.RationalSmoothPurityCanonical.PuritySourceTransports
+public import WeilConjectures.PoincareDuality.RationalSmoothPurityCanonical.RationalSmoothPurityFiniteTrace
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependence
+public import WeilConjectures.SixFunctors.Integral.IntegralOrdinaryProjectionReduction
+public import WeilConjectures.SixFunctors.Integral.IntegralResidueTor
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomComparison
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekComparison
+public import WeilConjectures.SixFunctors.PurCompactSupport.IntegralCompactSupportCoefficientComparison
+public import WeilConjectures.SixFunctors.SemilinearFieldOperationLiftsLegacy
+public import WeilConjectures.SixFunctors.Sf.SfIntegralReductionConservative
+public import WeilConjectures.SixFunctors.SfProEtaleProjection.SfProEtaleProjectionFormula
+public import WeilConjectures.SmoothPurity.AdicSmoothDualizing.AdicSmoothDualizingIntegralDetection
+public import WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSupplement
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.FiniteCoefficientSmoothPurity
+public import WeilConjectures.SmoothPurity.PurityFiniteSetting.SmoothTrace
 
 /-! # Constant purity and its canonical Frobenius square
 
@@ -368,11 +386,12 @@ composition by the adjunction triangle identities, so their two composites are
 identities after the same constraints. This supplies the inverse mate. -/
 theorem exceptionalMate_isIso :
     IsIso (exceptionalMate D l hl Ω X₀ Y₀ f₀ c₀ S) := by
-  have h := semilinearFieldOperationLifts D l hl X₀ Y₀ f₀
-    (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω
-      (Padic.finiteCoefficientBase l Ω)) Ω
-  let : (sourceFrobenius D l hl Ω X₀).IsEquivalence := h.2.2.1.2.1
-  let : (targetFrobenius D l hl Ω Y₀).IsEquivalence := h.2.2.2.2.1
+  let E := AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω
+    (Padic.finiteCoefficientBase l Ω)
+  let : (sourceFrobenius D l hl Ω X₀).IsEquivalence :=
+    (pod_field_transport_legacy_equivalences D l hl Ω X₀ E).2
+  let : (targetFrobenius D l hl Ω Y₀).IsEquivalence :=
+    (pod_field_transport_legacy_equivalences D l hl Ω Y₀ E).2
   exact isIso_mateEquiv_of_isEquivalence_of_fullyFaithful _ _
     (sourceFrobenius D l hl Ω X₀) (targetFrobenius D l hl Ω Y₀)
     (beta D l hl Ω X₀ Y₀ f₀ c₀ S).symm

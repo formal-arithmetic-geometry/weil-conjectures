@@ -11,6 +11,15 @@ public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleSiteComparisonSupplement
 import WeilConjectures.SixFunctors.FiniteFreeCoefficients.Sites.NormalizedStageSiteKFlatComparisonNormalization
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
+public import WeilConjectures.AlgebraicGeometry.Etale.Scalar.EtaleScalarPullbackTensorCoherence
+public import WeilConjectures.AlgebraicGeometry.Etale.Scalar.EtaleScalarPullbackTensorKFlat
+public import WeilConjectures.AlgebraicGeometry.Scalar.ScalarPullbackIsoExistence
+public import WeilConjectures.AlgebraicGeometry.Scalar.ScalarSheafTensorPullback
+public import WeilConjectures.AlgebraicGeometry.Upper.UpperStarTensorCochainRepresentative
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategoryMonoidal
+public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.Flat
+public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionMonoidal
 
 /-! # The normalized scalar/site monoidal square
 
@@ -79,6 +88,234 @@ private theorem natTrans_ext_flat
   change F.map (Prod.mkHom eP.hom eQ.hom) ≫ α.app (U, V) =
     F.map (Prod.mkHom eP.hom eQ.hom) ≫ β.app (U, V)
   rw [α.naturality, β.naturality, h P Q hP hQ hPflat hQflat]
+
+private theorem slide_iso
+    {C : Type*} [Category C] {W X Y Z : C} (i : W ≅ X) (j : Y ≅ Z)
+    (f : X ⟶ Y) (g : W ⟶ Z) (h : i.hom ≫ f = g ≫ j.inv) :
+    f ≫ j.hom = i.inv ≫ g := by
+  apply (cancel_epi i.hom).1
+  rw [Iso.hom_inv_id_assoc, ← Category.assoc, h, Category.assoc,
+    Iso.inv_hom_id, Category.comp_id]
+
+private theorem cochain_square_normalization
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    [Abelian A] [Abelian B] [Abelian C] [Abelian D]
+    [HasDerivedCategory A] [HasDerivedCategory B]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    {F₁ : A ⥤ B} {F₂ : B ⥤ D} {G₁ : A ⥤ C} {G₂ : C ⥤ D}
+    [F₁.Additive] [F₂.Additive] [G₁.Additive] [G₂.Additive]
+    [PreservesFiniteLimits F₁] [PreservesFiniteColimits F₁]
+    [PreservesFiniteLimits F₂] [PreservesFiniteColimits F₂]
+    [PreservesFiniteLimits G₁] [PreservesFiniteColimits G₁]
+    [PreservesFiniteLimits G₂] [PreservesFiniteColimits G₂]
+    (e : F₁ ⋙ F₂ ≅ G₁ ⋙ G₂) (P : CochainComplex A ℤ) :
+    F₂.mapDerivedCategory.map (F₁.mapDerivedCategoryFactors.hom.app P) ≫
+      F₂.mapDerivedCategoryFactors.hom.app ((F₁.mapHomologicalComplex (.up ℤ)).obj P) ≫
+      _root_.DerivedCategory.Q.map
+        ((NatTrans.mapHomologicalComplex e.hom (.up ℤ)).app P) =
+    (Functor.mapDerivedCategorySquareIso e).hom.app (_root_.DerivedCategory.Q.obj P) ≫
+      G₂.mapDerivedCategory.map (G₁.mapDerivedCategoryFactors.hom.app P) ≫
+      G₂.mapDerivedCategoryFactors.hom.app ((G₁.mapHomologicalComplex (.up ℤ)).obj P) := by
+  with_unfolding_all
+    apply (cancel_epi ((Functor.mapDerivedCategoryCompIso F₁ F₂).hom.app
+      (_root_.DerivedCategory.Q.obj P))).1
+    simp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom, Iso.symm_hom,
+      NatTrans.comp_app, Category.assoc]
+    erw [Functor.mapDerivedCategoryCompIso_hom_app_factors_assoc,
+      Functor.mapDerivedCategoryCompIso_hom_app_factors]
+    erw [Iso.hom_inv_id_app_assoc, Functor.mapDerivedCategoryNatIso_fac]
+    rfl
+
+private theorem cochain_unit_formula
+    {C D : Type*} [Category C] [Category D] [Preadditive C] [Preadditive D]
+    {E : C ⥤ D} {U : D ⥤ C} [E.Additive] [U.Additive] (a : E ⊣ U)
+    (P : CochainComplex C ℤ) :
+    (a.mapHomologicalComplex (.up ℤ)).unit.app P =
+      (Functor.mapHomologicalComplexIdIso _ (.up ℤ)).inv.app P ≫
+        (NatTrans.mapHomologicalComplex a.unit (.up ℤ)).app P ≫
+          (Functor.mapHomologicalComplexCompIso (Iso.refl (E ⋙ U)) (.up ℤ)).inv.app P := by
+  ext i
+  change a.unit.app (P.X i) = 𝟙 _ ≫ a.unit.app (P.X i) ≫ 𝟙 _
+  simp only [Category.id_comp, Category.comp_id]
+
+private theorem cochain_left_mate
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    [Preadditive A] [Preadditive B] [Preadditive C] [Preadditive D]
+    {E₁ : A ⥤ B} {U₁ : B ⥤ A} {E₂ : C ⥤ D} {U₂ : D ⥤ C}
+    [E₁.Additive] [U₁.Additive] [E₂.Additive] [U₂.Additive]
+    (a₁ : E₁ ⊣ U₁) (a₂ : E₂ ⊣ U₂)
+    {F : A ⥤ C} {G : B ⥤ D} [F.Additive] [G.Additive]
+    (τ : U₁ ⋙ F ⟶ G ⋙ U₂) (P : CochainComplex A ℤ) :
+    ((mateEquiv (G := F.mapHomologicalComplex (.up ℤ))
+      (H := G.mapHomologicalComplex (.up ℤ)) (a₁.mapHomologicalComplex (.up ℤ))
+      (a₂.mapHomologicalComplex (.up ℤ))).symm
+      (TwoSquare.mk _ _ _ _ (NatTrans.mapHomologicalComplex τ (.up ℤ)))).natTrans.app P =
+    (NatTrans.mapHomologicalComplex
+      (((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ τ)).natTrans) (.up ℤ)).app P := by
+  with_unfolding_all
+    erw [left_mate_app]
+
+private theorem cochain_scalar_mate
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    [Abelian A] [Abelian B] [Abelian C] [Abelian D]
+    [HasDerivedCategory A] [HasDerivedCategory B]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    {E₁ : A ⥤ B} {U₁ : B ⥤ A} {E₂ : C ⥤ D} {U₂ : D ⥤ C}
+    [E₁.Additive] [U₁.Additive] [E₂.Additive] [U₂.Additive]
+    [PreservesFiniteLimits U₁] [PreservesFiniteColimits U₁]
+    [PreservesFiniteLimits U₂] [PreservesFiniteColimits U₂]
+    (a₁ : E₁ ⊣ U₁) (a₂ : E₂ ⊣ U₂)
+    {L₁ : _root_.DerivedCategory A ⥤ _root_.DerivedCategory B}
+    {L₂ : _root_.DerivedCategory C ⥤ _root_.DerivedCategory D}
+    (d₁ : L₁ ⊣ U₁.mapDerivedCategory) (d₂ : L₂ ⊣ U₂.mapDerivedCategory)
+    (N : A ⥤ C) (N' : B ⥤ D) [N.Additive] [N'.Additive]
+    [PreservesFiniteLimits N] [PreservesFiniteColimits N]
+    [PreservesFiniteLimits N'] [PreservesFiniteColimits N']
+    (e : N' ⋙ U₂ ≅ U₁ ⋙ N) (P : CochainComplex A ℤ) :
+    ((mateEquiv d₁ d₂).symm
+      (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso e).inv)).natTrans.app
+        (_root_.DerivedCategory.Q.obj P) ≫
+      N'.mapDerivedCategory.map ((representative E₁ U₁ a₁ d₁).app P) ≫
+      N'.mapDerivedCategoryFactors.hom.app ((E₁.mapHomologicalComplex (.up ℤ)).obj P) =
+    L₂.map (N.mapDerivedCategoryFactors.hom.app P) ≫
+      (representative E₂ U₂ a₂ d₂).app ((N.mapHomologicalComplex (.up ℤ)).obj P) ≫
+      _root_.DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
+        (((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ e.inv)).natTrans) (.up ℤ)).app P) := by
+  with_unfolding_all
+    have h := left_mate_normalization
+      (a₁.mapHomologicalComplex (.up ℤ)) (a₂.mapHomologicalComplex (.up ℤ)) d₁ d₂
+      _root_.DerivedCategory.Q _root_.DerivedCategory.Q
+      _root_.DerivedCategory.Q _root_.DerivedCategory.Q
+      (representative E₁ U₁ a₁ d₁) (representative E₂ U₂ a₂ d₂)
+      U₁.mapDerivedCategoryFactors U₂.mapDerivedCategoryFactors
+      N.mapDerivedCategoryFactors N'.mapDerivedCategoryFactors
+      (NatTrans.mapHomologicalComplex e.inv (.up ℤ))
+      (Functor.mapDerivedCategorySquareIso e).inv
+      (representative_unit E₁ U₁ a₁ d₁) (representative_unit E₂ U₂ a₂ d₂)
+      (by
+        intro R
+        have he := cochain_square_normalization e.symm R
+        simp only [Functor.mapDerivedCategorySquareIso, Iso.trans_hom,
+          Iso.symm_hom, Functor.mapDerivedCategoryNatIso_symm,
+          NatTrans.comp_app, Category.assoc] at he
+        convert! he using 1
+        simp only [Functor.mapDerivedCategorySquareIso, Iso.trans_inv, Iso.symm_inv,
+          NatTrans.comp_app, Category.assoc]) P
+    have hc := cochain_left_mate (F := N) (G := N') a₁ a₂ e.inv P
+    rw [hc] at h
+    exact h
+
+private theorem cochain_scalar_mate_iso
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    [Abelian A] [Abelian B] [Abelian C] [Abelian D]
+    [HasDerivedCategory A] [HasDerivedCategory B]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    {E₁ : A ⥤ B} {U₁ : B ⥤ A} {E₂ : C ⥤ D} {U₂ : D ⥤ C}
+    [E₁.Additive] [U₁.Additive] [E₂.Additive] [U₂.Additive]
+    [PreservesFiniteLimits U₁] [PreservesFiniteColimits U₁]
+    [PreservesFiniteLimits U₂] [PreservesFiniteColimits U₂]
+    (a₁ : E₁ ⊣ U₁) (a₂ : E₂ ⊣ U₂)
+    {L₁ : _root_.DerivedCategory A ⥤ _root_.DerivedCategory B}
+    {L₂ : _root_.DerivedCategory C ⥤ _root_.DerivedCategory D}
+    (d₁ : L₁ ⊣ U₁.mapDerivedCategory) (d₂ : L₂ ⊣ U₂.mapDerivedCategory)
+    (N : A ⥤ C) (N' : B ⥤ D) [N.Additive] [N'.Additive]
+    [PreservesFiniteLimits N] [PreservesFiniteColimits N]
+    [PreservesFiniteLimits N'] [PreservesFiniteColimits N']
+    (e : N' ⋙ U₂ ≅ U₁ ⋙ N) (s : E₁ ⋙ N' ≅ N ⋙ E₂)
+    (δ : N.mapDerivedCategory ⋙ L₂ ≅ L₁ ⋙ N'.mapDerivedCategory)
+    (hδ : δ.hom = ((mateEquiv d₁ d₂).symm
+      (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso e).inv)).natTrans)
+    (hs : ((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ e.inv)).natTrans = s.inv)
+    (P : CochainComplex A ℤ) :
+    N'.mapDerivedCategory.map ((representative E₁ U₁ a₁ d₁).app P) ≫
+      N'.mapDerivedCategoryFactors.hom.app ((E₁.mapHomologicalComplex (.up ℤ)).obj P) ≫
+      _root_.DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex s.hom (.up ℤ)).app P) =
+    δ.inv.app (_root_.DerivedCategory.Q.obj P) ≫
+      L₂.map (N.mapDerivedCategoryFactors.hom.app P) ≫
+      (representative E₂ U₂ a₂ d₂).app ((N.mapHomologicalComplex (.up ℤ)).obj P) := by
+  with_unfolding_all
+    have h := cochain_scalar_mate a₁ a₂ d₁ d₂ N N' e P
+    erw [← hδ, hs] at h
+    have hh := slide_iso (δ.app (_root_.DerivedCategory.Q.obj P))
+      (_root_.DerivedCategory.Q.mapIso ((NatIso.mapHomologicalComplex s (.up ℤ)).app P))
+      (N'.mapDerivedCategory.map ((representative E₁ U₁ a₁ d₁).app P) ≫
+        N'.mapDerivedCategoryFactors.hom.app ((E₁.mapHomologicalComplex (.up ℤ)).obj P))
+      (L₂.map (N.mapDerivedCategoryFactors.hom.app P) ≫
+        (representative E₂ U₂ a₂ d₂).app ((N.mapHomologicalComplex (.up ℤ)).obj P))
+      (h.trans (Category.assoc _ _ _).symm)
+    exact (Category.assoc _ _ _).symm.trans hh
+
+private instance genericSiteTensorComparison_isIso
+    (C : Type (u + 2)) [Category.{u + 1} C] [Abelian C]
+    [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C]
+    [MonoidalPreadditive C] [SymmetricCategory C] [MonoidalClosed C]
+    [Abelian.HasFunctorialFlatResolution C]
+    (X : Scheme.{u}) [(ProEtale.comparisonUpperStar C X).PreservesFlat] :
+    IsIso (genericSiteTensorComparison C X) := by
+  dsimp only [genericSiteTensorComparison]
+  infer_instance
+
+private theorem inverse_tensor_square
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
+    (φ : A →+* B) (X : Scheme.{u})
+    (μ : Sites.TensorComparison true φ X) (hμ : Sites.NormalizedTensor true φ X μ)
+    (K M : Cat A X) :
+    (Sites.scalarSite φ X).inv.app (K ⊗ M) ≫
+      (Sites.scalar true φ X).map
+        ((ProEtale.siteComparisonTensorIso (ModuleCat.{u + 1} A) X K).hom.app M) ≫
+      μ.hom.app ((Sites.nu A X).obj K, (Sites.nu A X).obj M) =
+    (Sites.nu B X).map ((Etale.ExceptionalCoefficients.tensorIso φ X).hom.app (K, M)) ≫
+      (ProEtale.siteComparisonTensorIso (ModuleCat.{u + 1} B) X
+        ((Sites.scalar false φ X).obj K)).hom.app ((Sites.scalar false φ X).obj M) ≫
+      ((Sites.scalarSite φ X).inv.app K ⊗ₘ (Sites.scalarSite φ X).inv.app M) := by
+  with_unfolding_all
+    let F := Sites.scalar false φ X
+    let G := Sites.scalar true φ X
+    let P := Sites.nu A X
+    let Q := Sites.nu B X
+    let TY := Functor.uncurry.obj (curriedTensor (Cat A X))
+    let TX := Functor.uncurry.obj (curriedTensor (Sites.D true B X))
+    let tF : TY ⋙ F ≅ F.prod F ⋙ Functor.uncurry.obj (curriedTensor (Cat B X)) := by
+      with_unfolding_all
+        exact Etale.ExceptionalCoefficients.tensorIso φ X
+    let tG : Functor.uncurry.obj (curriedTensor (Sites.D true A X)) ⋙ G ≅
+        G.prod G ⋙ TX := by
+      with_unfolding_all exact μ
+    let tP := (rawSiteTensor A X).hom
+    let tQ := (rawSiteTensor B X).hom
+    let a := (Sites.scalarSite φ X).symm
+    let α : TY ⋙ F ⋙ Q ⟶ P.prod P ⋙ G.prod G ⋙ TX :=
+      Functor.whiskerLeft TY a.hom ≫ Functor.whiskerRight tP G ≫
+        Functor.whiskerLeft (P.prod P) tG.hom
+    let β : TY ⋙ F ⋙ Q ⟶ P.prod P ⋙ G.prod G ⋙ TX :=
+      Functor.whiskerRight tF.hom Q ≫ Functor.whiskerLeft (F.prod F) tQ ≫
+        Functor.whiskerRight (NatTrans.prod a.hom a.hom) TX
+    have h : α = β := by
+      apply Etale.natTrans_ext_flat α β
+      intro U V hU hV _ _
+      dsimp only [α, β, TY, TX, P, Q, F, G, tF, tP, tQ, a, Iso.symm_hom,
+        Functor.whiskerLeft_app, Functor.whiskerRight_app, NatTrans.comp_app,
+        Functor.uncurry_obj_obj, Functor.prod_obj, Functor.comp_obj, NatTrans.prod]
+      dsimp only [tG]
+      rw [rawSiteTensor_generic_app, rawSiteTensor_generic_app]
+      have hk := normalized_site_tensor_kflat φ X μ hμ U V hU hV
+      simp only [Sites.tensor, _root_.id, Etale.derivedTensor, ProEtale.derivedTensor,
+        curriedTensor_obj_obj, Etale.uncurryCurriedTensor_map,
+        Functor.comp_obj, Functor.prod_obj, Functor.uncurry_obj_obj] at hk ⊢
+      with_unfolding_all
+        convert! hk using 1
+    have h' := congrArg (fun t ↦ t.app (K, M)) h
+    dsimp only [α, β, TY, TX, P, Q, F, G, tF, tP, tQ, a, Iso.symm_hom,
+      Functor.whiskerLeft_app, Functor.whiskerRight_app, NatTrans.comp_app,
+      Functor.uncurry_obj_obj, Functor.prod_obj, Functor.comp_obj, NatTrans.prod,
+      Etale.uncurryTensorComparison] at h'
+    rw [rawSiteTensor_hom_app, rawSiteTensor_hom_app] at h'
+    dsimp only [tG] at h'
+    simp only [Sites.tensor, _root_.id, Etale.derivedTensor, ProEtale.derivedTensor,
+      curriedTensor_obj_obj, Etale.uncurryCurriedTensor_map,
+      Functor.comp_obj, Functor.prod_obj, Functor.uncurry_obj_obj] at h' ⊢
+    with_unfolding_all
+      convert! h' using 1
 
 /-- The canonical scalar/site comparison commutes with the normalized tensorators.
 The tensor product of the two comparison components is written using the two actions

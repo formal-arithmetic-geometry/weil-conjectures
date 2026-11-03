@@ -1,0 +1,147 @@
+/-
+Copyright (c) 2026 Bin Wu. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Bin Wu
+-/
+module
+
+public import Mathlib.Algebra.Homology.DerivedCategory.Plus
+public import Mathlib.CategoryTheory.Triangulated.Functor
+import WeilConjectures.CategoryTheory.DerivedCategory.FinitePostnikovIsomorphism
+import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLEGT
+
+/-!
+# A heart test for bounded-below transformations
+
+Source: main-20261015 blueprint, `sk-thm-properbasechange`, bounded below complexes paragraph;
+Stacks Project, Derived Categories, Tags 08J5 and 05TC
+(blueprint: lem-weil-pbc-heart-test-bounded-below).
+
+## Main statements
+
+- `DerivedCategory.Plus.heart_test_bounded_below`: invertibility on the cohomology objects
+  in degree zero implies invertibility on a bounded-below object, with the degreewise
+  truncation comparisons and their naturality formula.
+-/
+
+@[expose] public section
+
+universe uA vA wA uB vB wB
+
+open CategoryTheory CategoryTheory.Limits
+
+namespace DerivedCategory.Plus
+
+/-- A shift-compatible transformation of triangulated functors preserving every lower
+cohomology bound is invertible at a bounded-below object if it is invertible on all its
+cohomology objects placed in degree zero. The conclusion includes both truncation-map
+isomorphisms, invertibility at the truncation, and the naturality formula in every degree.
+
+Source: main-20261015 blueprint, `sk-thm-properbasechange`, bounded below complexes paragraph;
+Stacks Project, Derived Categories, Tags 08J5 and 05TC
+(blueprint: lem-weil-pbc-heart-test-bounded-below).
+
+Proof:
+1. For each m choose a lower bound a0 for E and put a = min(a0,m+1). Finite Postnikov
+   propagation (`lem-weil-pbc-finite-postnikov-isomorphism`) gives invertibility at
+   tau_{<=m} E, including the empty interval when m < a0.
+2. The canonical truncation triangle (`lem-sf-derived-truncation-triangle`) has vertices
+   tau_{<=m} E, E, and T_m = tau_{>=m+1} E. All lie in the full triangulated subcategory
+   D+ (`def-weil-pbc-bounded-derived-subcategories`). Applying either triangulated functor
+   gives a distinguished triangle (`def-weil-triangulated-category`).
+3. Lower-bound preservation kills H^{m-1} and H^m of either functor's value on T_m.
+   The long exact sequence (`lem-sf-derived-homology-long-exact`) makes both maps from
+   H^m(F(tau_{<=m} E)) to H^m(F(E)) monic and epic, hence invertible.
+4. Apply H^m to naturality at c_m and compose with the inverse of H^m(Phi(c_m)). This
+   gives the displayed formula; all three factors are invertible by steps 1 and 3.
+5. Thus H^m(eta_E) is invertible for every m. Cohomology detects isomorphisms in D+
+   (`lem-weil-pbc-derived-plus-iso-on-cohomology`), so eta_E is invertible. No infinite
+   limit or upper bound on E is used.
+-/
+theorem heart_test_bounded_below
+    {A : Type uA} [Category.{vA} A] [Abelian A] [HasDerivedCategory.{wA} A]
+    {B : Type uB} [Category.{vB} B] [Abelian B] [HasDerivedCategory.{wB} B]
+    (Φ Ψ : DerivedCategory.Plus A ⥤ DerivedCategory.Plus B)
+    [Φ.CommShift ℤ] [Ψ.CommShift ℤ] [Φ.IsTriangulated] [Ψ.IsTriangulated]
+    (η : Φ ⟶ Ψ)
+    (hη : ∀ M : DerivedCategory.Plus A,
+      η.app (M⟦(1 : ℤ)⟧) ≫ (Ψ.commShiftIso (1 : ℤ)).hom.app M =
+        (Φ.commShiftIso (1 : ℤ)).hom.app M ≫ (η.app M)⟦(1 : ℤ)⟧')
+    (hΦ : ∀ (M : DerivedCategory.Plus A) (n : ℤ),
+      (∀ (q : ℤ), q < n → IsZero ((homologyFunctor A q).obj M)) →
+        ∀ (q : ℤ), q < n → IsZero ((homologyFunctor B q).obj (Φ.obj M)))
+    (hΨ : ∀ (M : DerivedCategory.Plus A) (n : ℤ),
+      (∀ (q : ℤ), q < n → IsZero ((homologyFunctor A q).obj M)) →
+        ∀ (q : ℤ), q < n → IsZero ((homologyFunctor B q).obj (Ψ.obj M)))
+    (E : DerivedCategory.Plus A)
+    (hH : ∀ (q : ℤ),
+      IsIso (η.app ((singleFunctor A 0).obj ((homologyFunctor A q).obj E)))) :
+    IsIso (η.app E) ∧ ∀ (m : ℤ),
+      ∃ (hcΦ : IsIso ((homologyFunctor B m).map
+          (Φ.map ((DerivedCategory.TStructure.t.onPlus.truncLEι m).app E)))),
+        IsIso ((homologyFunctor B m).map
+          (Ψ.map ((DerivedCategory.TStructure.t.onPlus.truncLEι m).app E))) ∧
+        IsIso (η.app ((DerivedCategory.TStructure.t.onPlus.truncLE m).obj E)) ∧
+        (homologyFunctor B m).map (η.app E) =
+          @CategoryTheory.inv B _ _ _ ((homologyFunctor B m).map
+            (Φ.map ((DerivedCategory.TStructure.t.onPlus.truncLEι m).app E))) hcΦ ≫
+          (homologyFunctor B m).map
+            (η.app ((DerivedCategory.TStructure.t.onPlus.truncLE m).obj E)) ≫
+          (homologyFunctor B m).map
+            (Ψ.map ((DerivedCategory.TStructure.t.onPlus.truncLEι m).app E)) := by
+  let t := (DerivedCategory.TStructure.t (C := A)).onPlus
+  have hc (F : DerivedCategory.Plus A ⥤ DerivedCategory.Plus B)
+      [F.CommShift ℤ] [F.IsTriangulated]
+      (hF : ∀ (M : DerivedCategory.Plus A) (n : ℤ),
+        (∀ (q : ℤ), q < n → IsZero ((homologyFunctor A q).obj M)) →
+          ∀ (q : ℤ), q < n → IsZero ((homologyFunctor B q).obj (F.obj M)))
+      (m : ℤ) :
+      IsIso ((homologyFunctor B m).map (F.map ((t.truncLEι m).app E))) := by
+    have hT := ι.map_distinguished _
+      (F.map_distinguished _ (t.triangleLEGE_distinguished m (m + 1) rfl E))
+    have htail (q : ℤ) (hq : q < m + 1) :
+        IsZero ((homologyFunctor B q).obj (F.obj ((t.truncGE (m + 1)).obj E))) := by
+      exact hF _ (m + 1)
+        (fun i hi ↦ isZero_homology_of_isGE _ (m + 1) i hi) q hq
+    have : Mono ((homologyFunctor B m).map (F.map ((t.truncLEι m).app E))) :=
+      (DerivedCategory.HomologySequence.mono_homologyMap_mor₁_iff _ hT
+        (m - 1) m (by omega)).2 ((htail (m - 1) (by omega)).eq_of_src _ _)
+    have : Epi ((homologyFunctor B m).map (F.map ((t.truncLEι m).app E))) :=
+      (DerivedCategory.HomologySequence.epi_homologyMap_mor₁_iff _ hT m).2
+        ((htail m (by omega)).eq_of_tgt _ _)
+    exact isIso_of_mono_of_epi _
+  obtain ⟨a₀, ha₀⟩ := E.2
+  have : E.IsGE a₀ := ⟨ha₀.1⟩
+  have ht (m : ℤ) : IsIso (η.app ((t.truncLE m).obj E)) := by
+    refine isIso_app_truncLE_of_isIso_app_homology Φ Ψ η hη E (min a₀ (m + 1)) m
+      (by omega) ?_ (fun q _ _ ↦ hH q)
+    intro q hq
+    exact isZero_homology_of_isGE E a₀ q (lt_of_lt_of_le hq (min_le_left _ _))
+  have hf (m : ℤ) :
+      (homologyFunctor B m).map (Φ.map ((t.truncLEι m).app E)) ≫
+        (homologyFunctor B m).map (η.app E) =
+      (homologyFunctor B m).map (η.app ((t.truncLE m).obj E)) ≫
+        (homologyFunctor B m).map (Ψ.map ((t.truncLEι m).app E)) := by
+    simpa only [Functor.map_comp, Functor.id_obj] using
+      (homologyFunctor B m).congr_map (η.naturality ((t.truncLEι m).app E))
+  have hformula (m : ℤ) :
+      (homologyFunctor B m).map (η.app E) =
+        @CategoryTheory.inv B _ _ _
+          ((homologyFunctor B m).map (Φ.map ((t.truncLEι m).app E))) (hc Φ hΦ m) ≫
+        (homologyFunctor B m).map (η.app ((t.truncLE m).obj E)) ≫
+        (homologyFunctor B m).map (Ψ.map ((t.truncLEι m).app E)) := by
+    have := hc Φ hΦ m
+    rw [← hf m, IsIso.inv_hom_id_assoc]
+  constructor
+  · rw [isIso_iff]
+    intro m
+    have := hc Φ hΦ m
+    have := hc Ψ hΨ m
+    have := ht m
+    rw [hformula m]
+    infer_instance
+  · intro m
+    exact ⟨hc Φ hΦ m, hc Ψ hΨ m, ht m, hformula m⟩
+
+end DerivedCategory.Plus

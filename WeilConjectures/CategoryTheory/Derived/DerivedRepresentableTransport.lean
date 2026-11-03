@@ -64,6 +64,28 @@ noncomputable def representableTransportComparison
   S.rightDerivedFunctorPlus.rightDerivedDesc S.rightDerivedFunctorPlusUnit
     (HomotopyCategory.Plus.quasiIso A) _ (representableTransportUnit L S S' tau)
 
+/-- The roof-normalized RHom equivalence supplied by the recorded roof theorem.
+Its normalization determines it on every injective representative.
+Source: Stacks Tag 070I (blueprint: lem-pur-derived-representable-transport). -/
+noncomputable def representableTransportRoof (P : A) (X : DerivedCategory.Plus A) (a : ℤ) :
+    (DerivedCategory.Plus.homologyFunctor AddCommGrpCat.{v} a).obj
+        ((preadditiveCoyoneda.obj (op P)).rightDerivedFunctorPlus.obj X) ≃+
+      ((DerivedCategory.singleFunctor A 0).obj P ⟶ X.obj⟦a⟧) :=
+  Classical.choose (exists_rhom_hom_derived_roof P) X a
+
+/-- Derive the inverse representing isomorphism, then apply the roof equivalence.
+Source: Stacks Tags 05TI and 070I
+(blueprint: lem-pur-derived-representable-transport). -/
+noncomputable def representedTransportHomEquiv
+    (P : A) (S : A ⥤ AddCommGrpCat.{v}) [S.Additive]
+    (θ : preadditiveCoyoneda.obj (op P) ≅ S) (X : DerivedCategory.Plus A) (a : ℤ) :
+    (DerivedCategory.Plus.homologyFunctor AddCommGrpCat.{v} a).obj
+        (S.rightDerivedFunctorPlus.obj X) ≃+
+      ((DerivedCategory.singleFunctor A 0).obj P ⟶ X.obj⟦a⟧) :=
+  ((DerivedCategory.Plus.homologyFunctor AddCommGrpCat.{v} a).mapIso
+    ((rightDerivedFunctorPlusNatIso θ.symm).app X)).addCommGroupIsoToAddEquiv.trans
+      (representableTransportRoof P X a)
+
 /-- Apply the exact derived functor to a shifted morphism and precompose with `d⁻¹`.
 The displayed single and shift isomorphisms are the termwise ones.
 Source: Stacks Tag 015F (blueprint: lem-pur-derived-representable-transport). -/

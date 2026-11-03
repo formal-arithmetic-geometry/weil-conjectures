@@ -307,6 +307,65 @@ private theorem realizationFromData (A : Type u) [CommRing A] [Finite A]
   rw [hCmp]
   exact hc K
 
+/-- A single finite coefficient ring has a constructible exceptional adjunction with
+an ordinary-etale realization that retains the specified compact-support counit.
+Source: blueprint latest, sec-smooth-purity, sk-lem-sp-reduction-exceptional.proof.md,
+Steps 3--4 (blueprint: lem-sp-reduction-exceptional-realization).
+
+Proof: the field hypothesis makes X, Y and Z Noetherian. Realization identifies the
+intrinsic Dctf property with the fixed-module bounded constructible finite-Tor property.
+The finite-ring etale/pro-etale comparison equivalence supplies a functorial etale
+origin and its natural comparison. Choose the ordinary exceptional right adjoint for
+this fixed compactification. Its values on those origins remain bounded constructible
+of finite Tor amplitude by exceptional preservation. Apply compact-support comparison,
+comparison full faithfulness, and the ordinary adjunction to obtain the natural Hom
+bijection on the intrinsic full subcategories. Its inverse at the identity is the
+counit. This constructs the intrinsic right functor, adjunction, and output comparison.
+The defining Hom bijection gives precisely reductionRealizationCounitEquation;
+there is no independent choice of a counit or of an output isomorphism. -/
+theorem reductionExceptionalRealization_exists
+    (ℓ pchar : ℕ) [Fact ℓ.Prime] (_hp : 0 < pchar) (hℓ : pchar ≠ ℓ)
+    (k : Type u) [Field k] [CharP k pchar]
+    {X Z Y : Scheme.{u}}
+    [X.Over (Spec (.of k))] [Z.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
+    [IsSeparated (X ↘ Spec (.of k))]
+    [LocallyOfFiniteType (Z ↘ Spec (.of k))] [QuasiCompact (Z ↘ Spec (.of k))]
+    [IsSeparated (Z ↘ Spec (.of k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
+    [IsSeparated (Y ↘ Spec (.of k))]
+    (f : X ⟶ Y) [f.IsOver (Spec (.of k))]
+    (j : X ⟶ Z) [IsOpenImmersion j] [j.IsOver (Spec (.of k))]
+    (p : Z ⟶ Y) [IsProper p] [p.IsOver (Spec (.of k))] (_hf : j ≫ p = f)
+    (A : Type u) [CommRing A] [Finite A]
+    (hA : ∃ n : ℕ, ∀ x : A, (ℓ ^ n) • x = 0)
+    (hF : ∀ M : spFiniteConstructibleTorCategory X A,
+      spFiniteConstructibleTor Y A ((reductionCompactSupport A j p).obj M.obj)) :
+    ∃ (G : spFiniteConstructibleTorCategory Y A ⥤ spFiniteConstructibleTorCategory X A)
+      (adj : reductionCtfCompactSupport A j p hF ⊣ G),
+      Nonempty (ReductionExceptionalRealization A j p hF G adj) := by
+  classical
+  have : IsNoetherian X := isNoetherian_of_locallyOfFiniteType (X ↘ Spec (.of k))
+  have : IsNoetherian Y := isNoetherian_of_locallyOfFiniteType (Y ↘ Spec (.of k))
+  have : IsNoetherian Z := isNoetherian_of_locallyOfFiniteType (Z ↘ Spec (.of k))
+  have : HasInvertibleExponent (ULift.{u + 1} A) (Spec (.of k)) := by
+    obtain ⟨n, hn⟩ := hA
+    have hz : ((ℓ ^ n : ℕ) : ULift.{u + 1} A) = 0 := by
+      apply ULift.ext
+      change ((ℓ ^ n : ℕ) : A) = 0
+      simpa only [nsmul_eq_mul, mul_one] using hn 1
+    have hne : (ℓ : k) ≠ 0 :=
+      CharP.cast_ne_zero_of_ne_of_prime k (Fact.out : ℓ.Prime) hℓ
+    have hu : IsUnit ((ℓ ^ n : ℕ) : k) := by
+      rw [Nat.cast_pow]
+      exact isUnit_iff_ne_zero.mpr (pow_ne_zero n hne)
+    exact ⟨ℓ ^ n, pow_pos (Fact.out : ℓ.Prime).pos _, hz, by
+      simpa only [map_natCast] using hu.map (Scheme.ΓSpecIso (.of k)).inv.hom⟩
+  have : HasInvertibleExponent (ULift.{u + 1} A) Y :=
+    HasInvertibleExponent.of_hom (Y ↘ Spec (.of k))
+  exact realizationFromData A j p hF
+    (ordinaryCtfData A k (Y ↘ Spec (.of k)) j p)
+
 /-- The already proved intrinsic realization equivalence identifies precisely the
 finite-ctf subcategories.  This public form combines the existing finite-support
 and realization predicate comparisons without changing either predicate.

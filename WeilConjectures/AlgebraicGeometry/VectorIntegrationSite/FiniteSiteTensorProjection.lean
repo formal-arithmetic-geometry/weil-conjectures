@@ -167,4 +167,42 @@ def ProperIntegrationEquation {X Y : Scheme.{u}} (f : X ⟶ Y)
     ((derivedTensor (ModuleCat.{u + 1} A) Y).obj ((comparison A Y).obj K)).map t ≫
       (rightUnit A Y K).hom
 
+/-- Compose a specified inverse projection with ordinary tensor integration.
+Source: vector-bundle integration formula
+(blueprint: def-pur-finite-site-tensor-projection). -/
+@[irreducible]
+def ordinaryTensorIntegrate (T : Scheme.{u})
+    (K W Z : Etale.DerivedCategoryModule A T)
+    (p : Z ≅ ((Etale.derivedTensor (ModuleCat.{u + 1} A) T).obj K).obj W)
+    (t : W ⟶ Etale.ordinaryFiniteUnit A T) : Z ⟶ K :=
+  p.hom ≫ ((Etale.derivedTensor (ModuleCat.{u + 1} A) T).obj K).map t ≫
+    (Etale.derivedTensorRightUnitor (ModuleCat.{u + 1} A) T K).hom
+
+/-- Compose a specified inverse projection with pro-etale tensor integration.
+Source: vector-bundle integration formula
+(blueprint: def-pur-finite-site-tensor-projection). -/
+@[irreducible]
+def proTensorIntegrate (T : Scheme.{u}) (K : Etale.DerivedCategoryModule A T)
+    (W Z : DerivedCategory (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A)))
+    (p : Z ≅ ((derivedTensor (ModuleCat.{u + 1} A) T).obj ((comparison A T).obj K)).obj W)
+    (t : W ⟶ unit A T) : Z ⟶ (comparison A T).obj K :=
+  p.hom ≫ ((derivedTensor (ModuleCat.{u + 1} A) T).obj ((comparison A T).obj K)).map t ≫
+    (rightUnit A T K).hom
+
+/-- Coefficient specialization of the published compact-support projection.
+Source: Stacks 0GL1 (blueprint: def-pur-finite-site-tensor-projection). -/
+@[irreducible]
+def moduleProjection {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
+    (W : Etale.DerivedCategoryModule A X) (K : Etale.DerivedCategoryModule A Y) :=
+  projection (ModuleCat.{u + 1} A) c ((comparison A X).obj W) ((comparison A Y).obj K)
+
+/-- Compact-support projection in comparison-source coordinates.
+Source: Stacks 099R and 0GL1 (blueprint: def-pur-finite-site-tensor-projection). -/
+@[irreducible]
+def comparedModuleProjection {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
+    (W : Etale.DerivedCategoryModule A X) (K : Etale.DerivedCategoryModule A Y) :=
+  moduleProjection A c W K ≫
+    (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).map
+      (tensorPullbackComparison A f K W).inv
+
 end AlgebraicGeometry.ProEtale.VectorIntegrationSite

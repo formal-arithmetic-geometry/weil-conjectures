@@ -215,6 +215,7 @@ theorem delta_square :
   have ha : U.1.ι ≫ (f ≫ aY) = aU := by
     dsimp only [aU, h]
     simp only [← Category.assoc, Scheme.Hom.resLE_comp_ι]
+  -- The chart reference supplies the route; the actual square uses DNC coherence.
   have C := SectionRestriction.coherence P
   have hb := (C.2.2.2.1 X U.1.toScheme (f ≫ aY) aU U.1.ι ha d
     (diagonalPair d f) (mixedPair d f U) (sourceSquare d f U)).2.2

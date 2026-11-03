@@ -14,6 +14,9 @@ import all WeilConjectures.SmoothPurity.PurityFiniteSetting.SectionRestriction.P
 import all WeilConjectures.SmoothPurity.PurityFiniteSetting.SectionRestriction.PuritySectionRestrictionEtaleFunctorial
 import all WeilConjectures.AlgebraicGeometry.Section.SectionExceptionalFibreCoherence
 import all WeilConjectures.AlgebraicGeometry.FiniteEtaleNormalization.FiniteEtaleDualizingNormalization
+public import WeilConjectures.AlgebraicGeometry.EtaleTensorTraceBaseChange
+public import WeilConjectures.AlgebraicGeometry.SmoothExceptionalPasting.SmoothExceptionalTensorPasting
+public import WeilConjectures.AlgebraicGeometry.Tensor.TensorMateBaseChange
 
 /-! # Open restrictions of diagonal section pasting
 
@@ -192,6 +195,100 @@ private theorem restriction_factor (hs : a ≫ f = p ≫ v) :
   simp only [Iso.hom_inv_id_app, Category.comp_id]
   rw [SectionRestriction.congr_symm P ((j ≫ p) ≫ v) ((j ≫ a) ≫ f)
     (by rw [Category.assoc, Category.assoc, hs])]
+  rfl
+
+private theorem pullSquare_eq (P : PurityFiniteSetting.{u})
+    {X X' Y Y' : Scheme.{u}} (u' : X' ⟶ X) (f : X ⟶ Y)
+    (f' : X' ⟶ Y') (v : Y' ⟶ Y) (h : u' ≫ f = f' ≫ v)
+    (K : Etale.DerivedCategoryModule P.Coefficient Y) :
+    (ProEtale.DualizingLocality.pullSquare P u' f' f v ⟨h⟩).hom.app K =
+      (Etale.sectionCoherencePullbackIso P.Coefficient u' f f' v h K).hom := by
+  exact congrArg Iso.hom (Etale.sectionPullback_endpoint P.Coefficient u' f f' v
+    (f' ≫ v) (u' ≫ f) h.symm rfl rfl h K)
+
+private theorem section_composite_natural
+    (A : Type (u + 1)) [CommRing A]
+    {B B' W W' V V' : Scheme.{u}} (u' : B' ⟶ B)
+    (s : B ⟶ W) (s' : B' ⟶ W') (t : B ⟶ V) (t' : B' ⟶ V')
+    (q : W ⟶ V) (q' : W' ⟶ V') (r : W' ⟶ W) (v : V' ⟶ V)
+    (hs : u' ≫ s = s' ≫ r) (ht : u' ≫ t = t' ≫ v)
+    (hq : r ≫ q = q' ≫ v) (h : s ≫ q = t) (h' : s' ≫ q' = t')
+    {L : Etale.DerivedCategoryModule A V} {L' : Etale.DerivedCategoryModule A V'}
+    {K : Etale.DerivedCategoryModule A W} {K' : Etale.DerivedCategoryModule A W'}
+    (b : (Etale.upperStar (ModuleCat.{u + 1} A) q).leftDerivedFunctor.obj L ≅ K)
+    (b' : (Etale.upperStar (ModuleCat.{u + 1} A) q').leftDerivedFunctor.obj L' ≅ K')
+    (cK : (Etale.upperStar (ModuleCat.{u + 1} A) r).leftDerivedFunctor.obj K ≅ K')
+    (cL : (Etale.upperStar (ModuleCat.{u + 1} A) v).leftDerivedFunctor.obj L ≅ L')
+    (hb : (Etale.upperStar (ModuleCat.{u + 1} A) r).leftDerivedFunctor.map b.hom ≫
+        cK.hom = (Etale.sectionCoherencePullbackIso A r q q' v hq L).hom ≫
+          (Etale.upperStar (ModuleCat.{u + 1} A) q').leftDerivedFunctor.map cL.hom ≫
+            b'.hom) :
+    (Etale.upperStar (ModuleCat.{u + 1} A) u').leftDerivedFunctor.map
+        ((Etale.upperStar (ModuleCat.{u + 1} A) s).leftDerivedFunctor.map b.inv ≫
+          (Etale.leftDerivedUpperStarComp
+            (ModuleCat.{u + 1} A) s q t h.symm).inv.app L) ≫
+      (Etale.sectionCoherencePullbackIso A u' t t' v ht L).hom ≫
+        (Etale.upperStar (ModuleCat.{u + 1} A) t').leftDerivedFunctor.map cL.hom =
+    (Etale.sectionCoherencePullbackIso A u' s s' r hs K).hom ≫
+      (Etale.upperStar (ModuleCat.{u + 1} A) s').leftDerivedFunctor.map cK.hom ≫
+        (Etale.upperStar (ModuleCat.{u + 1} A) s').leftDerivedFunctor.map b'.inv ≫
+          (Etale.leftDerivedUpperStarComp
+            (ModuleCat.{u + 1} A) s' q' t' h'.symm).inv.app L' := by
+  let U := (Etale.upperStar (ModuleCat.{u + 1} A) u').leftDerivedFunctor
+  let S := (Etale.upperStar (ModuleCat.{u + 1} A) s).leftDerivedFunctor
+  let S' := (Etale.upperStar (ModuleCat.{u + 1} A) s').leftDerivedFunctor
+  let R := (Etale.upperStar (ModuleCat.{u + 1} A) r).leftDerivedFunctor
+  let T' := (Etale.upperStar (ModuleCat.{u + 1} A) t').leftDerivedFunctor
+  have hc := Etale.section_pullback_locality_comp A u' t t' s s' q q' v r
+    ht hs h h' hq L
+  have hn := ((Etale.leftDerivedUpperStarComp (ModuleCat.{u + 1} A) u' s).symm ≪≫
+    Etale.leftDerivedUpperStarComp (ModuleCat.{u + 1} A) s' r (u' ≫ s) hs).hom.naturality b.inv
+  change U.map (S.map b.inv) ≫
+      (Etale.sectionCoherencePullbackIso A u' s s' r hs _).hom =
+    (Etale.sectionCoherencePullbackIso A u' s s' r hs K).hom ≫
+      S'.map (R.map b.inv) at hn
+  have hn' := (Etale.leftDerivedUpperStarComp (ModuleCat.{u + 1} A) s' q' t'
+    h'.symm).inv.naturality cL.hom
+  change S'.map ((Etale.upperStar (ModuleCat.{u + 1} A) q').leftDerivedFunctor.map cL.hom) ≫
+      (Etale.leftDerivedUpperStarComp (ModuleCat.{u + 1} A) s' q' t' h'.symm).inv.app L' =
+    (Etale.leftDerivedUpperStarComp (ModuleCat.{u + 1} A) s' q' t' h'.symm).inv.app _ ≫
+      T'.map cL.hom at hn'
+  have hb' : cK.hom ≫ b'.inv = R.map b.inv ≫
+      (Etale.sectionCoherencePullbackIso A r q q' v hq L).hom ≫
+      (Etale.upperStar (ModuleCat.{u + 1} A) q').leftDerivedFunctor.map cL.hom := by
+    apply (cancel_epi (R.map b.hom)).1
+    try simp only [Category.assoc]
+    rw [reassoc_of% hb]
+    simp only [Iso.hom_inv_id, Category.comp_id,
+      ← R.map_comp_assoc, Iso.hom_inv_id, R.map_id, Category.id_comp]
+  have hc' :
+      (Etale.sectionCoherencePullbackIso A u' s s' r hs _).hom ≫
+        S'.map (Etale.sectionCoherencePullbackIso A r q q' v hq L).hom ≫
+          (Etale.leftDerivedUpperStarComp (ModuleCat.{u + 1} A) s' q' t' h'.symm).inv.app _ =
+      U.map ((Etale.leftDerivedUpperStarComp (ModuleCat.{u + 1} A) s q t h.symm).inv.app L) ≫
+        (Etale.sectionCoherencePullbackIso A u' t t' v ht L).hom := by
+    apply (cancel_epi (U.map
+      ((Etale.leftDerivedUpperStarComp (ModuleCat.{u + 1} A) s q t h.symm).hom.app L))).1
+    try simp only [Category.assoc]
+    rw [reassoc_of% hc]
+    simp only [Iso.hom_inv_id_app, Category.comp_id,
+      ← U.map_comp_assoc, Iso.hom_inv_id_app, U.map_id, Category.id_comp]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← S'.map_comp_assoc, hb']
+  simp only [S'.map_comp, Category.assoc]
+  rw [← reassoc_of% hn, hn', reassoc_of% hc']
+
+private theorem tensorComparison_hom (P : PurityFiniteSetting.{u})
+    [HasInvertibleExponent P.Coefficient (Spec (.of P.field.k))]
+    {X : Scheme.{u}} {K K' M M' : D P.Coefficient P X} (a : K ≅ K') (b : M ≅ M') :
+    (tensorComparison P.Coefficient P a b).hom =
+      Etale.derivedTensorHom (ModuleCat.{u + 1} P.Coefficient) a.hom b.hom := rfl
+
+private theorem sigma_hom_eq
+    [HasInvertibleExponent P.Coefficient (Spec (.of P.field.k))]
+    (aX : X ⟶ Spec (.of P.field.k)) :
+    (sigma P.Coefficient P d f g aX).hom =
+      ProEtale.FiniteEtaleNormalization.sigma P.Coefficient f g (comp P f g) := by
   rfl
 
 set_option maxHeartbeats 1500000 in

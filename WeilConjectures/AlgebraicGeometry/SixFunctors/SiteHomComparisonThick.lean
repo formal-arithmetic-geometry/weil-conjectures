@@ -63,6 +63,12 @@ namespace AlgebraicGeometry.ProEtale
 
 attribute [local irreducible] Functor.mapDerivedCategory
 
+/-- The structure morphism of an etale object, with its source and target explicit.
+This is exactly U.hom; the alias keeps slice-object wrappers out of inferred functor
+parameters. Source: Stacks 08JB (blueprint: lem-sf-site-hom-comparison-thick). -/
+abbrev siteHomEtaleObjectHom (X : Scheme.{u}) (U : X.Etale) : U.left ⟶ X :=
+  U.hom
+
 /-- Derive the ordinary tensor comparison and transport it to the exact termwise
 functor. This packages the existing construction without selecting new tensor data.
 Source: Stacks 07A4 (blueprint: lem-sf-site-hom-comparison-thick). -/
@@ -79,6 +85,67 @@ Source: Stacks 07A4 (blueprint: lem-sf-site-hom-comparison-thick). -/
     [F.PreservesFlat] [F.IsLeftAdjoint] [F.Monoidal] :
     F.mapDerivedCategory.Monoidal :=
   Functor.exactClosedDerivedMonoidal F
+
+private theorem isIso_exactDerivedHom
+    {C : Type d} [Category.{u + 1} C] [Abelian C]
+    [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C]
+    [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
+    [Abelian.HasFunctorialFlatResolution C]
+    {D : Type e} [Category.{u + 1} D] [Abelian D]
+    [IsGrothendieckAbelian.{u + 1} D] [MonoidalCategory D]
+    [MonoidalPreadditive D] [MonoidalClosed D] [BraidedCategory D]
+    [Abelian.HasFunctorialFlatResolution D]
+    (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [F.PreservesFlat] [F.IsLeftAdjoint] [F.Monoidal]
+    {L : D ⥤ C} [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L]
+    (a : L ⊣ F) [∀ K : C, IsIso (Functor.LaxMonoidal.ihomComparison F K).natTrans]
+    (K M : DerivedCategory C) :
+    letI := siteHomExactDerivedMonoidal F
+    IsIso (Functor.closedComparison F.mapDerivedCategory K M) := by
+  unfold siteHomExactDerivedMonoidal
+  exact Functor.isIso_closedComparison_exactDerived F a K M
+
+/-- Assemble the canonical evaluation transpose for Etale derived inverse image.
+The monoidal structure is an explicit parameter so specialization uses exactly the
+canonical derived tensor comparison. Source: Stacks 08JB, 07A4
+(blueprint: lem-sf-site-hom-comparison-thick). -/
+@[irreducible] def siteHomEtaleRestrictionEvaluation
+    (B : Type (u + 2)) [Category.{u + 1} B] [Abelian B]
+    [IsGrothendieckAbelian.{u + 1} B] [MonoidalCategory B]
+    [MonoidalPreadditive B] [SymmetricCategory B] [MonoidalClosed B]
+    [Abelian.HasFunctorialFlatResolution B]
+    {Y X : Scheme.{u}} (f : Y ⟶ X)
+    (m : (Etale.upperStar B f).mapDerivedCategory.Monoidal)
+    (K M : DerivedCategory (Sheaf (X.smallEtaleTopology) B)) :
+    (Etale.upperStar B f).mapDerivedCategory.obj
+        (((Etale.derivedHom B X).obj (op K)).obj M) ⟶
+      ((Etale.derivedHom B Y).obj
+        (op ((Etale.upperStar B f).mapDerivedCategory.obj K))).obj
+          ((Etale.upperStar B f).mapDerivedCategory.obj M) :=
+  let F := (Etale.upperStar B f).mapDerivedCategory
+  let _ : F.Monoidal := m
+  Functor.closedComparison F K M
+
+/-- Assemble the canonical evaluation transpose for ProEtale derived inverse image.
+The monoidal structure is an explicit parameter so specialization uses exactly the
+canonical derived tensor comparison. Source: Stacks 08JB, 07A4
+(blueprint: lem-sf-site-hom-comparison-thick). -/
+@[irreducible] def siteHomProEtaleRestrictionEvaluation
+    (B : Type (u + 2)) [Category.{u + 1} B] [Abelian B]
+    [IsGrothendieckAbelian.{u + 1} B] [MonoidalCategory B]
+    [MonoidalPreadditive B] [SymmetricCategory B] [MonoidalClosed B]
+    [Abelian.HasFunctorialFlatResolution B]
+    {Y X : Scheme.{u}} (f : Y ⟶ X)
+    (m : (upperStar B f).mapDerivedCategory.Monoidal)
+    (K M : DerivedCategory (Sheaf (Scheme.ProEt.topology X) B)) :
+    (upperStar B f).mapDerivedCategory.obj
+        (((derivedHom B X).obj (op K)).obj M) ⟶
+      ((derivedHom B Y).obj
+        (op ((upperStar B f).mapDerivedCategory.obj K))).obj
+          ((upperStar B f).mapDerivedCategory.obj M) :=
+  let F := (upperStar B f).mapDerivedCategory
+  let _ : F.Monoidal := m
+  Functor.closedComparison F K M
 
 /-- The complete exactness and thick-locus assertion for a specified closed-category
 comparison. This is a transparent proposition, not an extra hypothesis or chosen map.
@@ -223,6 +290,129 @@ checking. Source: blueprint comparison proof, paragraph 2
   siteHomExactThickAssertion (comparisonUpperStar B X).mapDerivedCategory
     (siteComparisonEvaluationHom B X) M
 
+/-- Canonical inverse-image comparison on the derived restriction square: localize the
+ordinary adjunction-mate comparison, using exact-functor composition comparisons.
+Source: Stacks 00WX, 08JB (blueprint: lem-sf-site-hom-comparison-thick). -/
+def siteHomRestrictionSquareFor
+    (B : Type (u + 2)) [Category.{u + 1} B] [Abelian B]
+    [IsGrothendieckAbelian.{u + 1} B] [MonoidalCategory B]
+    [MonoidalPreadditive B] [SymmetricCategory B] [MonoidalClosed B]
+    [Abelian.HasFunctorialFlatResolution B]
+    {Y X : Scheme.{u}} (f : Y ⟶ X) :
+    (Etale.upperStar B f).mapDerivedCategory ⋙
+        (comparisonUpperStar B Y).mapDerivedCategory ≅
+      (comparisonUpperStar B X).mapDerivedCategory ⋙
+        (upperStar B f).mapDerivedCategory :=
+  let e : Etale.upperStar B f ⋙
+      comparisonUpperStar B Y ≅
+    comparisonUpperStar B X ⋙
+      upperStar B f :=
+    supportSiteComparisonCoefficientPullbackIso B f
+  (Functor.mapDerivedCategoryCompIso
+      (Etale.upperStar B f)
+      (comparisonUpperStar B Y)).symm ≪≫
+    Functor.mapDerivedCategoryNatIso e ≪≫
+    Functor.mapDerivedCategoryCompIso
+      (comparisonUpperStar B X)
+      (upperStar B f)
+
+/-- A comparison square for four closed categories, retaining the actual component
+maps and the inverse-image comparison. This proposition is instantiated below by the
+canonical evaluation transposes, not by arbitrary witnesses. Source: Stacks 08JB
+(blueprint: lem-sf-site-hom-comparison-thick). -/
+def siteHomRestrictionSquareAssertion
+    {C : Type d} [Category.{v} C] {C₁ : Type d₁} [Category.{v} C₁]
+    {D : Type e} [Category.{v} D] {D₁ : Type e₁} [Category.{v} D₁]
+    (H : Cᵒᵖ ⥤ C ⥤ C) (H₁ : C₁ᵒᵖ ⥤ C₁ ⥤ C₁)
+    (G : Dᵒᵖ ⥤ D ⥤ D) (G₁ : D₁ᵒᵖ ⥤ D₁ ⥤ D₁)
+    (F : C ⥤ D) (F₁ : C₁ ⥤ D₁) (r_e : C ⥤ C₁) (r_p : D ⥤ D₁)
+    (θ : r_e ⋙ F₁ ≅ F ⋙ r_p)
+    (b : ∀ K M : C, F.obj ((H.obj (op K)).obj M) ⟶
+      (G.obj (op (F.obj K))).obj (F.obj M))
+    (b₁ : ∀ K M : C₁, F₁.obj ((H₁.obj (op K)).obj M) ⟶
+      (G₁.obj (op (F₁.obj K))).obj (F₁.obj M))
+    (h_e : ∀ K M : C, r_e.obj ((H.obj (op K)).obj M) ⟶
+      (H₁.obj (op (r_e.obj K))).obj (r_e.obj M))
+    (h_p : ∀ K M : D, r_p.obj ((G.obj (op K)).obj M) ⟶
+      (G₁.obj (op (r_p.obj K))).obj (r_p.obj M)) (K M : C) : Prop :=
+  IsIso (h_e K M) ∧ IsIso (h_p (F.obj K) (F.obj M)) ∧
+    F₁.map (h_e K M) ≫ b₁ (r_e.obj K) (r_e.obj M) ≫
+      (G₁.map (θ.inv.app K).op).app (F₁.obj (r_e.obj M)) ≫
+      (G₁.obj (op (r_p.obj (F.obj K)))).map (θ.hom.app M) =
+    θ.hom.app ((H.obj (op K)).obj M) ≫ r_p.map (b K M) ≫ h_p (F.obj K) (F.obj M)
+
+/-- The evaluation-normalized restriction assertion, before coefficient specialization.
+Its two monoidal arguments will be instantiated by the canonical derived tensor
+structures. The proposition spells out both Hom restriction isomorphisms and the
+comparison equation. Source: Stacks 08JB, 07A4
+(blueprint: lem-sf-site-hom-comparison-thick). -/
+def siteHomRestrictionAssertion
+    (B : Type (u + 2)) [Category.{u + 1} B] [Abelian B]
+    [IsGrothendieckAbelian.{u + 1} B] [MonoidalCategory B]
+    [MonoidalPreadditive B] [SymmetricCategory B] [MonoidalClosed B]
+    [Abelian.HasFunctorialFlatResolution B]
+    {Y X : Scheme.{u}} (f : Y ⟶ X)
+    [(comparisonUpperStar B X).PreservesFlat]
+    [(comparisonUpperStar B Y).PreservesFlat]
+    (m_e : (Etale.upperStar B f).mapDerivedCategory.Monoidal)
+    (m_p : (upperStar B f).mapDerivedCategory.Monoidal)
+    (K M : DerivedCategory (Sheaf X.smallEtaleTopology B)) : Prop :=
+  siteHomRestrictionSquareAssertion
+    (Etale.derivedHom B X) (Etale.derivedHom B Y)
+    (derivedHom B X) (derivedHom B Y)
+    (comparisonUpperStar B X).mapDerivedCategory
+    (comparisonUpperStar B Y).mapDerivedCategory
+    (Etale.upperStar B f).mapDerivedCategory (upperStar B f).mapDerivedCategory
+    (siteHomRestrictionSquareFor B f)
+    (siteComparisonEvaluationHom B X) (siteComparisonEvaluationHom B Y)
+    (siteHomEtaleRestrictionEvaluation B f m_e)
+    (siteHomProEtaleRestrictionEvaluation B f m_p) K M
+
+private theorem etaleRestriction_isIso
+    (B : Type (u + 2)) [Category.{u + 1} B] [Abelian B]
+    [IsGrothendieckAbelian.{u + 1} B] [MonoidalCategory B]
+    [MonoidalPreadditive B] [SymmetricCategory B] [MonoidalClosed B]
+    [Abelian.HasFunctorialFlatResolution B]
+    {Y X : Scheme.{u}} (f : Y ⟶ X) [Etale f] [(Etale.upperStar B f).PreservesFlat]
+    (K M : DerivedCategory (Sheaf X.smallEtaleTopology B)) :
+    IsIso (siteHomEtaleRestrictionEvaluation B f
+      (siteHomExactDerivedMonoidal (Etale.upperStar B f)) K M) := by
+  let L := Etale.etaleLowerShriek B f inferInstance
+  let a : L ⊣ Etale.upperStar B f :=
+    Etale.etaleLowerShriekUpperStarAdjunction B f inferInstance
+  have : PreservesFiniteLimits L :=
+    Etale.preservesFiniteLimits_etaleLowerShriek_of_hasSmallSiteSheafify B f inferInstance
+  have : L.Additive := a.left_adjoint_additive
+  have := a.leftAdjoint_preservesColimits
+  have : PreservesFiniteColimits L :=
+    PreservesColimitsOfSize.preservesFiniteColimits.{u + 1, u + 1} L
+  have (P : Sheaf X.smallEtaleTopology B) :
+      IsIso (Functor.LaxMonoidal.ihomComparison (Etale.upperStar B f) P).natTrans :=
+    Etale.isIso_ihomComparison_upperStar B f P
+  unfold siteHomEtaleRestrictionEvaluation
+  exact isIso_exactDerivedHom (Etale.upperStar B f) a K M
+
+private theorem proetaleRestriction_isIso
+    (B : Type (u + 2)) [Category.{u + 1} B] [Abelian B]
+    [IsGrothendieckAbelian.{u + 1} B] [MonoidalCategory B]
+    [MonoidalPreadditive B] [SymmetricCategory B] [MonoidalClosed B]
+    [Abelian.HasFunctorialFlatResolution B]
+    {Y X : Scheme.{u}} (f : Y ⟶ X) [WeaklyEtale f] [(upperStar B f).PreservesFlat]
+    (K M : DerivedCategory (Sheaf (Scheme.ProEt.topology X) B)) :
+    IsIso (siteHomProEtaleRestrictionEvaluation B f
+      (siteHomExactDerivedMonoidal (upperStar B f)) K M) := by
+  have (P : Sheaf (Scheme.ProEt.topology X) B) :
+      IsIso (Functor.LaxMonoidal.ihomComparison (upperStar B f) P).natTrans :=
+    ProEtale.isIso_ihomComparison_upperStar B f P
+  unfold siteHomProEtaleRestrictionEvaluation
+  exact isIso_exactDerivedHom (upperStar B f) (weaklyEtaleLowerShriekAdjunction B f) K M
+
+private theorem comparisonMonoidal_eq (X : Scheme.{u})
+    [(comparisonUpperStar B X).PreservesFlat] :
+    siteComparisonMonoidal B X = monoidal_comparisonUpperStar B X := by
+  unfold siteComparisonMonoidal monoidal_comparisonUpperStar
+  rfl
+
 section RestrictionSquare
 variable (B : Type (u + 2)) [Category.{u + 1} B] [Abelian B]
   [IsGrothendieckAbelian.{u + 1} B] [MonoidalCategory B]
@@ -238,6 +428,54 @@ private theorem comparisonDerivedMonoidal_eq (X : Scheme.{u})
   unfold siteHomExactDerivedMonoidal
   exact Functor.exactDerivedMonoidal_eq_of_delta (comparisonUpperStar B X)
     (siteComparisonDerivedMonoidal B X) (siteComparisonDerivedMonoidal_δ B X)
+
+private theorem ordinaryRestrictionSquare_eq {Y X : Scheme.{u}} (f : Y ⟶ X) :
+    supportSiteComparisonCoefficientPullbackIso B f =
+      (comparisonUpperStarCompUpperStarIso B f).symm := by
+  rfl
+
+private theorem ordinaryRestrictionSquare_monoidal {Y X : Scheme.{u}} (f : Y ⟶ X) :
+    NatTrans.IsMonoidal (comparisonUpperStarCompUpperStarIso B f).inv := by
+  haveI := isMonoidal_comparisonUpperStarCompUpperStarIso_hom (A := B) f
+  infer_instance
+
+private theorem restrictionSquare_monoidal {Y X : Scheme.{u}} (f : Y ⟶ X)
+    [(comparisonUpperStar B X).PreservesFlat]
+    [(comparisonUpperStar B Y).PreservesFlat]
+    [(Etale.upperStar B f).PreservesFlat] [(upperStar B f).PreservesFlat] :
+    letI : (comparisonUpperStar B X).mapDerivedCategory.Monoidal :=
+    siteComparisonDerivedMonoidal B X
+    letI : (comparisonUpperStar B Y).mapDerivedCategory.Monoidal :=
+    siteComparisonDerivedMonoidal B Y
+    letI := siteHomExactDerivedMonoidal (Etale.upperStar B f)
+    letI := siteHomExactDerivedMonoidal (upperStar B f)
+    NatTrans.IsMonoidal (siteHomRestrictionSquareFor B f).hom := by
+  letI mX : (comparisonUpperStar B X).Monoidal := siteComparisonMonoidal B X
+  letI mY : (comparisonUpperStar B Y).Monoidal := siteComparisonMonoidal B Y
+  let e : Etale.upperStar B f ⋙ comparisonUpperStar B Y ≅
+      comparisonUpperStar B X ⋙ upperStar B f :=
+    supportSiteComparisonCoefficientPullbackIso B f
+  have he : e = (comparisonUpperStarCompUpperStarIso B f).symm :=
+    ordinaryRestrictionSquare_eq B f
+  let P (a : (comparisonUpperStar B X).Monoidal)
+      (b : (comparisonUpperStar B Y).Monoidal) : Prop :=
+    letI := a
+    letI := b
+    NatTrans.IsMonoidal e.hom
+  have h₀ : P (monoidal_comparisonUpperStar B X)
+      (monoidal_comparisonUpperStar B Y) := by
+    dsimp only [P]
+    rw [he]
+    exact ordinaryRestrictionSquare_monoidal B f
+  haveI h : NatTrans.IsMonoidal e.hom :=
+    Eq.mpr (congrArg₂ P (comparisonMonoidal_eq B X) (comparisonMonoidal_eq B Y)) h₀
+  rw [comparisonDerivedMonoidal_eq B X, comparisonDerivedMonoidal_eq B Y]
+  unfold siteHomExactDerivedMonoidal
+    siteHomRestrictionSquareFor
+  exact Functor.exactDerivedSquare_monoidal (comparisonUpperStar B X) (upperStar B f)
+    (Etale.upperStar B f) (comparisonUpperStar B Y)
+    e
+
 private theorem siteComparisonEvaluationHom_eq_closedComparison (X : Scheme.{u})
     [(comparisonUpperStar B X).PreservesFlat]
     (K M : DerivedCategory (Sheaf X.smallEtaleTopology B)) :
@@ -247,6 +485,35 @@ private theorem siteComparisonEvaluationHom_eq_closedComparison (X : Scheme.{u})
       Functor.closedComparison (comparisonUpperStar B X).mapDerivedCategory K M := by
   unfold siteComparisonEvaluationHom Functor.closedComparison
   rfl
+
+private theorem restrictionAssertion {Y X : Scheme.{u}} (f : Y ⟶ X) [Etale f]
+    [(comparisonUpperStar B X).PreservesFlat]
+    [(comparisonUpperStar B Y).PreservesFlat]
+    [(Etale.upperStar B f).PreservesFlat] [(upperStar B f).PreservesFlat]
+    (K M : DerivedCategory (Sheaf X.smallEtaleTopology B)) :
+    siteHomRestrictionAssertion B f
+      (siteHomExactDerivedMonoidal (Etale.upperStar B f))
+      (siteHomExactDerivedMonoidal (upperStar B f)) K M := by
+  refine ⟨etaleRestriction_isIso B f K M,
+    proetaleRestriction_isIso B f _ _, ?_⟩
+  letI : (comparisonUpperStar B X).mapDerivedCategory.Monoidal :=
+    siteComparisonDerivedMonoidal B X
+  letI : (comparisonUpperStar B Y).mapDerivedCategory.Monoidal :=
+    siteComparisonDerivedMonoidal B Y
+  letI := siteHomExactDerivedMonoidal (Etale.upperStar B f)
+  letI := siteHomExactDerivedMonoidal (upperStar B f)
+  have := restrictionSquare_monoidal B f
+  rw [siteComparisonEvaluationHom_eq_closedComparison,
+    siteComparisonEvaluationHom_eq_closedComparison]
+  unfold siteHomEtaleRestrictionEvaluation siteHomProEtaleRestrictionEvaluation
+  exact CategoryTheory.closedComparison_square
+    (A := DerivedCategory (Sheaf X.smallEtaleTopology B))
+    (B := DerivedCategory (Sheaf Y.smallEtaleTopology B))
+    (E := DerivedCategory (Sheaf (Scheme.ProEt.topology X) B))
+    (H := DerivedCategory (Sheaf (Scheme.ProEt.topology Y) B))
+    (Etale.upperStar B f).mapDerivedCategory
+    (upperStar B f).mapDerivedCategory (comparisonUpperStar B X).mapDerivedCategory
+    (comparisonUpperStar B Y).mapDerivedCategory (siteHomRestrictionSquareFor B f) K M
 
 end RestrictionSquare
 
@@ -286,6 +553,44 @@ def siteHomComparisonLocus (M : Etale.DerivedCategoryModule A X) :
     ObjectProperty (Etale.DerivedCategoryModule A X) :=
   fun K ↦ IsIso (siteComparisonEvaluationHom (ModuleCat.{u + 1} A) X K M)
 
+/-- Exact etale restriction along an arbitrary object U → X, in fixed coefficients.
+Source: Stacks 08JB (blueprint: lem-sf-site-hom-comparison-thick). -/
+abbrev siteHomEtaleRestriction (U : X.Etale) :=
+  (Etale.upperStar (ModuleCat.{u + 1} A) (siteHomEtaleObjectHom X U)).mapDerivedCategory
+
+/-- Exact pro-etale restriction along the same etale object.
+Source: Stacks 08JB (blueprint: lem-sf-site-hom-comparison-thick). -/
+abbrev siteHomProEtaleRestriction (U : X.Etale) :=
+  (upperStar (ModuleCat.{u + 1} A) (siteHomEtaleObjectHom X U)).mapDerivedCategory
+
+/-- The fixed-coefficient instance of the canonical derived restriction square.
+Source: Stacks 08JB (blueprint: lem-sf-site-hom-comparison-thick). -/
+abbrev siteHomRestrictionSquare (U : X.Etale) :=
+  siteHomRestrictionSquareFor (ModuleCat.{u + 1} A) (siteHomEtaleObjectHom X U)
+
+/-- Strong monoidal structure on exact etale derived restriction, transported from
+its K-flat derived tensor comparison. No tensorator is chosen arbitrarily.
+Source: Stacks 07A4, 08JB (blueprint: lem-sf-site-hom-comparison-thick). -/
+@[irreducible] def siteHomEtaleRestrictionMonoidal (U : X.Etale) :
+    (siteHomEtaleRestriction A X U).Monoidal :=
+  siteHomExactDerivedMonoidal (Etale.upperStar (ModuleCat.{u + 1} A) (siteHomEtaleObjectHom X U))
+
+/-- Strong monoidal structure on exact pro-etale derived restriction, obtained by the
+same K-flat comparison; weak etaleness of U → X gives preservation of flat sheaves.
+Source: Stacks 07A4, 08JB (blueprint: lem-sf-site-hom-comparison-thick). -/
+@[irreducible] def siteHomProEtaleRestrictionMonoidal (U : X.Etale) :
+    (siteHomProEtaleRestriction A X U).Monoidal :=
+  let F := upperStar (ModuleCat.{u + 1} A) (siteHomEtaleObjectHom X U)
+  let _ : F.PreservesFlat := preservesFlat_upperStar_of_weaklyEtale (siteHomEtaleObjectHom X U)
+  siteHomExactDerivedMonoidal F
+
+/-- The canonical pro-etale internal-Hom restriction map, with the same evaluation
+normalization. Source: Stacks 08J9, 08JB (blueprint: lem-sf-site-hom-comparison-thick). -/
+abbrev siteHomProEtaleRestrictionHom (U : X.Etale)
+    (K M : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A))) :=
+  siteHomProEtaleRestrictionEvaluation (ModuleCat.{u + 1} A) (siteHomEtaleObjectHom X U)
+    (siteHomProEtaleRestrictionMonoidal A X U) K M
+
 /-- Exactness, signed shift compatibility, the full reversed triangle morphism and thick
 closure for the specified evaluation comparison, for each arbitrary fixed target M.
 Source: blueprint comparison proof, paragraph 2; Stacks 08J9, 08JC
@@ -307,5 +612,30 @@ beta_L is B(i) a⁻¹ C(p); naturality and pi=1 prove both inverse identities. -
 theorem siteHomComparison_exact_thick (M : Etale.DerivedCategoryModule A X) :
     siteHomSiteExactThick (ModuleCat.{u + 1} A) X M := by
   exact siteHomExactThick_generic (ModuleCat.{u + 1} A) X M
+
+/-- The actual comparison commutes with restriction to every etale object, including
+restricted evaluation. Both Hom restriction maps are the canonical isomorphisms.
+Source: blueprint comparison proof, paragraphs 1--2; Stacks 08JB and 07A4
+(blueprint: lem-sf-site-hom-comparison-thick).
+
+Proof (node step 7): the localized ringed-site square gives r_p F ≅ F_U r_e. Its
+K-flat normalization is the same as localization of the ordinary inverse-image
+comparison (lem-weil-pbc-ringed-slice-pullback-mate-normalization). Restriction
+preserves evaluation and its transpose (lem-weil-pbc-ringed-slice-evaluation-transpose).
+Uncurry both sides of the displayed equation. Each is restricted evaluation after
+the inverse canonical tensor comparison. On each K-flat total-tensor summand the
+comparison square commutes, since both routes restrict the ordinary tensor map.
+Injectivity of the tensor-Hom bijection gives equality. This uses localization at
+an object, not an open-immersion assumption, and applies to all unbounded K,M. -/
+theorem siteHomComparison_restriction (U : X.Etale)
+    (K M : Etale.DerivedCategoryModule A X) :
+    siteHomRestrictionAssertion (ModuleCat.{u + 1} A) (siteHomEtaleObjectHom X U)
+      (siteHomEtaleRestrictionMonoidal A X U) (siteHomProEtaleRestrictionMonoidal A X U)
+      K M := by
+  letI : (upperStar (ModuleCat.{u + 1} A) (siteHomEtaleObjectHom X U)).PreservesFlat :=
+    preservesFlat_upperStar_of_weaklyEtale (Λ := A) (siteHomEtaleObjectHom X U)
+  unfold siteHomEtaleRestrictionMonoidal siteHomProEtaleRestrictionMonoidal
+  exact restrictionAssertion (ModuleCat.{u + 1} A)
+    (Y := U.left) (X := X) (siteHomEtaleObjectHom X U) K M
 
 end AlgebraicGeometry.ProEtale

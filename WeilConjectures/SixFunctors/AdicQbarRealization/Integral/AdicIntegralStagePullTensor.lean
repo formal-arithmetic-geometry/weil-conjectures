@@ -154,6 +154,25 @@ private theorem combine_squares
     _ = I.map (p ≫ q ≫ e.inv) ≫ c1 := by rw [h]
     _ = _ := by simp only [Functor.map_comp, Category.assoc]
 
+/-- `integralStageTensorIso` with its stage tensor replaced by the inclusion comparison. -/
+private theorem integralStageTensorIso_eq
+    (W : Scheme.{u}) [∀ x : W, Invertible (l : W.residueField x)]
+    (E : AlgebraicallyClosedCoefficients.Index l (PadicAlgCl l))
+    (K L : sfIntegralConstructibleCategory l
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) W) :
+    integralStageTensorIso l W E K L =
+      (GeneralAlgebraicallyClosedCoefficients.inclusion
+        (l := l) (Ω := PadicAlgCl l) (Y := W) E).mapIso
+          (tensorIntegralObjectIso l W E K L).symm ≪≫
+      (commonInclusionTensorComparison l (PadicAlgCl l) W E).app
+        ((sfRationalConstructibleLocalization l
+          (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) W).obj K,
+        (sfRationalConstructibleLocalization l
+          (AlgebraicallyClosedCoefficients.Coefficient.{u} l (PadicAlgCl l) E) W).obj L) := by
+  unfold integralStageTensorIso
+  rw [inclusion_tensor_eq l W E]
+  rfl
+
 attribute [local irreducible] rationalDerivedPullback rationalDerivedTensor
   commonStageDerivedTensor
 
@@ -258,8 +277,8 @@ theorem integral_stage_pull_tensor
       (commonStageDerivedTensor l (PadicAlgCl l) X).map
         (Prod.mkHom (IX.map (p K).hom) (IX.map (p L).hom)) at hn
   dsimp only
-  unfold integralStageTensorIso integralStagePullIso
-  rw [← inclusion_tensor_eq l Y E, ← inclusion_tensor_eq l X E]
+  simp only [integralStageTensorIso_eq l Y E, integralStageTensorIso_eq l X E]
+  unfold integralStagePullIso
   dsimp only [Iso.trans, Functor.mapIso, Iso.symm, Iso.app, tensorStage,
     Functor.comp_obj, Functor.comp_map]
   simp only [Category.assoc]

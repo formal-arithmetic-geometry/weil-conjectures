@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.WeilSheaf.Native.Proper.NativeProperProjectionComparisons
 public import WeilConjectures.WeilSheaf.Native.NativeTwoSidedKFlatSections
+public import WeilConjectures.AlgebraicGeometry.ModuleObjectRingedComparison.InternalSectionDerivedTensorComparison
+public import WeilConjectures.AlgebraicGeometry.ModuleObjectRingedComparison.InternalSectionTensorLocalization
 
 /-! # Tensor comparison for normalized native section adjunctions
 
@@ -120,3 +122,38 @@ theorem native_proper_section_tensor_descent
         ((properSectionFactors k₀ l X R).hom.app Q))) := by sorry
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
+
+namespace AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison
+
+/-- Normalized descent of the section tensor comparison for a pulled-back condensed ring.
+The cochain map is the fixed signed sum-total comparison; the derived map has its
+specified K-flat representative normalization. No restriction on the coefficient ring,
+complexes, or scheme is imposed.
+
+Source: latest blueprint, det-def-sfb-derived-tensor-hom, Layer B, and its proof;
+Stacks 03CV, 03EK, 06YL and 06YS.
+(blueprint: lem-route-native-proper-section-tensor-descent).
+
+Proof: apply internalSection_tensorLocalization to the actual pulled-back coefficient
+ring and take its global comparison. Choose the fixed totalComparison on complexes.
+Its equality to that fixed map retains the summand and pure-tensor normalization.
+The comparison record supplies the natural derived isomorphism and precisely its
+representative square. The ordinary comparison was formed from balanced tensors and
+signed direct-sum totalization, then localized through K-flat representatives; this
+is the Layer B relative derived tensor, not a tensor over the integers. The same
+construction applies to the zero ring, empty schemes, zero complexes and unbounded
+complexes. -/
+theorem native_proper_section_tensor_descent :
+    ∃ (S : GlobalClosedStructureType Λ X) (T : GlobalTensorModelsType Λ X S)
+      (cochain : ∀ P Q : CochainComplex (Internal Λ X) ℤ,
+        (complexForward Λ X).obj (internalTotalTensor Λ X P Q) ≅
+          (coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology X) (ring Λ X)).obj
+            ((complexForward Λ X).obj P, (complexForward Λ X).obj Q))
+      (tensor : GlobalTensorComparisonIsoType Λ X S),
+      (∀ P Q, cochain P Q = totalComparison Λ X P Q) ∧
+        tensorComparisonNormalized Λ X S T tensor := by
+  obtain ⟨S, T, ⟨comparison⟩⟩ := (internalSection_tensorLocalization Λ X).1
+  exact ⟨S, T, totalComparison Λ X, comparison.iso, fun _ _ ↦ rfl,
+    comparison.normalization⟩
+
+end AlgebraicGeometry.ProEtale.ModuleObjectRingedComparison

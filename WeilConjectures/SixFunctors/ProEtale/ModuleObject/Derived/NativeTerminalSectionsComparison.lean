@@ -32,21 +32,47 @@ variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
     {A : Type (u + 1)} [CommRing A] (s : A →+* MonObj.Γ O)
     (U : C) (hU : IsTerminal U)
 
-private abbrev regularSections := coyonedaSections ((Mod.regularEndRingHom.op).comp
+/-- Regular-module sections with the specified scalar action.
+Source: free-module universal property
+(blueprint: lem-sf-native-terminal-sections-comparison). -/
+abbrev regularSections := coyonedaSections ((Mod.regularEndRingHom.op).comp
     ((RingEquiv.toOpposite _).toRingHom.comp s))
 
-private abbrev site_eval :=
+/-- Underlying abelian-sheaf evaluation at the specified terminal object.
+Source: terminal sections (blueprint: lem-sf-native-terminal-sections-comparison). -/
+abbrev site_eval :=
   sheafToPresheaf J Ab.{u + 1} ⋙ (evaluation Cᵒᵖ Ab.{u + 1}).obj (op U)
 
-private def terminal_eval (M : Mod (Sheaf J Ab.{u + 1}) O) :
+private instance evaluation_monoidal :
+    ((evaluation Cᵒᵖ Ab.{u + 1}).obj (op U)).Monoidal :=
+  Functor.CoreMonoidal.toMonoidal { εIso := Iso.refl _, μIso _ _ := Iso.refl _ }
+
+/-- Evaluation retains pointwise tensor products and the tensor unit.
+Source: pointwise tensor structure
+(blueprint: lem-sf-native-terminal-sections-comparison). -/
+instance evaluation_monoidal :
+    ((evaluation Cᵒᵖ Ab.{u + 1}).obj (op U)).Monoidal :=
+  Functor.CoreMonoidal.toMonoidal { εIso := Iso.refl _, μIso _ _ := Iso.refl _ }
+
+/-- A regular-module morphism evaluated at the unit section 1.
+Source: free-module universal property
+(blueprint: lem-sf-native-terminal-sections-comparison). -/
+def terminal_eval (M : Mod (Sheaf J Ab.{u + 1}) O) :
     (regularSections J O s).obj M →
       (Evaluation.sections J O U ⋙ ModuleCat.restrictScalars
         ((sectionGlobalEval J O U).comp s)).obj M :=
   fun f ↦ ((Functor.LaxMonoidal.ε (site_eval J U) ≫
     (site_eval J U).map (η[O] ≫ f.hom)).hom) (ULift.up 1)
 
-include hU in
-private theorem terminal_eval_bijective (M : Mod (Sheaf J Ab.{u + 1}) O) :
+/-- Evaluation at 1 is bijective on regular-module sections.
+Source: tensor-unit/free-module universal properties
+(blueprint: lem-sf-native-terminal-sections-comparison).
+
+Proof: the regular-module adjunction identifies a module morphism with its
+composite with the ring unit. The constant-sheaf adjunction then identifies the
+latter with a terminal section, evaluated at the free abelian generator 1.
+The two bijections compose to the displayed evaluation map. -/
+theorem terminal_eval_bijective (M : Mod (Sheaf J Ab.{u + 1}) O) :
     Function.Bijective (terminal_eval J O s U M) := by
   let e : (Mod.regular O ⟶ M) ≃ (𝟙_ (Sheaf J Ab.{u + 1}) ⟶ M.X) :=
     { toFun f := η[O] ≫ f.hom
@@ -57,7 +83,11 @@ private theorem terminal_eval_bijective (M : Mod (Sheaf J Ab.{u + 1}) O) :
     (AddCommGrpCat.uliftZMultiplesAddEquiv (M.X.obj.obj (op U))).toEquiv
   exact (q.bijective.comp e.bijective)
 
-private def terminal_linear (M : Mod (Sheaf J Ab.{u + 1}) O) :
+include hU in
+/-- The evaluation-at-one map with its specified scalar linearity.
+Source: regular multiplication acts sectionwise
+(blueprint: lem-sf-native-terminal-sections-comparison). -/
+def terminal_linear (M : Mod (Sheaf J Ab.{u + 1}) O) :
     (regularSections J O s).obj M →ₗ[A]
       (Evaluation.sections J O U ⋙ ModuleCat.restrictScalars
         ((sectionGlobalEval J O U).comp s)).obj M where
@@ -79,6 +109,22 @@ private def terminal_linear (M : Mod (Sheaf J Ab.{u + 1}) O) :
         ((Functor.LaxMonoidal.ε F ≫ F.map (η[O] ≫ f.hom)).hom) (ULift.up 1)) = _
     rfl
 
+/-- The explicit terminal-sections comparison, normalized by evaluation at 1.
+This exposes the very data used by `native_terminalSectionsIso`, so callers needing
+its specified normalization do not have to choose an unspecified natural isomorphism.
+Source: tensor-unit/free-module universal properties
+(blueprint: lem-sf-native-terminal-sections-comparison). -/
+def native_terminalSectionsComparison :
+    coyonedaSections ((Mod.regularEndRingHom.op).comp
+        ((RingEquiv.toOpposite _).toRingHom.comp s)) ≅ Evaluation.sections J O U ⋙
+      ModuleCat.restrictScalars ((sectionGlobalEval J O U).comp s) := by
+  exact NatIso.ofComponents (fun M ↦ LinearEquiv.toModuleIso
+    (LinearEquiv.ofBijective (terminal_linear J O s U M)
+      (terminal_eval_bijective J O s U hU M))) (by
+        intro M N f
+        ext g
+        rfl)
+
 include hU in
 /-- Evaluation at 1 identifies regular-module sections, with any specified scalar
 map, with actual terminal evaluation restricted through the evaluated scalar map.
@@ -96,11 +142,6 @@ theorem native_terminalSectionsIso :
     Nonempty (coyonedaSections ((Mod.regularEndRingHom.op).comp
         ((RingEquiv.toOpposite _).toRingHom.comp s)) ≅ Evaluation.sections J O U ⋙
       ModuleCat.restrictScalars ((sectionGlobalEval J O U).comp s)) := by
-  exact ⟨NatIso.ofComponents (fun M ↦ LinearEquiv.toModuleIso
-    (LinearEquiv.ofBijective (terminal_linear J O s U M)
-      (terminal_eval_bijective J O s U hU M))) (by
-        intro M N f
-        ext g
-        rfl)⟩
+  exact ⟨native_terminalSectionsComparison J O s U hU⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing

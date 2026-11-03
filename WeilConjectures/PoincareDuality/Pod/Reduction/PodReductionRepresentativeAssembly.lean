@@ -98,6 +98,10 @@ import all WeilConjectures.Algebra.Homology.KFlatResolutionIndependentCoefficien
 import all Mathlib.CategoryTheory.Monoidal.Closed.Basic
 import all WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 import all WeilConjectures.SixFunctors.Coefficient.CoefficientReductionTensorEvaluationPasting
+public import Mathlib.CategoryTheory.NatIso
+public import Mathlib.CategoryTheory.Products.Basic
+public import Mathlib.Tactic.CategoryTheory.Reassoc
+public import WeilConjectures.CategoryTheory.RingedDerivedComparisons.RingedDerivedComparisonData
 
 /-! # Pasting the reduction tensor square on specified representatives
 
@@ -185,175 +189,165 @@ private theorem map_three {C D : Type*} [Category C] [Category D]
     F.map a ≫ F.map b ≫ F.map c = F.map d ≫ F.map e ≫ F.map f := by
   simpa only [Functor.map_comp] using congrArg (fun z ↦ F.map z) h
 
-/-- The reduction/reindexing tensor square on flat-term K-flat representatives.
-Source: blueprint dual-Tate compatibility Steps 2 and 4; Stacks 07A4 and 0941.
-The proof pastes the unary models with the strict tensor identity and cancels the
-model isomorphisms. No finite-evaluation faithfulness is used.
+/-- Assemble the tensor square from its normalized representative diagrams.
+This categorical lemma applies to the condensed derived categories with
+coefficients pulled back from a condensed ring, including non-flat coefficient change.
+No equality is inferred from finite reductions: the strict square `hc` is used directly.
+
+Source: latest blueprint prop-pod-dual-tate-data-compatibility, Step 5.
+Proof: precompose with the image of the source tensor-model isomorphism and
+postcompose with the tensor of the target model isomorphisms. Naturality and the
+three unary normalization squares rewrite the two composites to the two sides of
+`hc`. Whisker that strict equality and cancel the two isomorphisms.
 (blueprint: lem-pod-reduction-representative-assembly). -/
 theorem podReduction_assemble_representative
-    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
-    [∀ x : X, Invertible (l : X.residueField x)]
-    [∀ y : Y, Invertible (l : Y.residueField y)]
-    (A : PodCompletionReindex l E g)
-    (c : PodReindexingCoherence.Comparison l E g none
-      (podReindexCalculus l E X).integralClosed (podReindexCalculus l E Y).integralClosed
-      (podReindexCalculus l E X).integralTensorModel
-      (podReindexCalculus l E Y).integralTensorModel)
-    (h : podReindexingDerivedFunctor l E g none = podOrdinaryReindex l E g)
-    (hPure : ∀ (P L : PodReindexingCoherence.K l E Y none) (p q k : ℤ)
-      (hk : p + q = k) (U : X.ProEt)
-      (x : (P.X p).val.obj (op ((proEtaleIsoPostcompose g).obj U)))
-      (y : (L.X q).val.obj (op ((proEtaleIsoPostcompose g).obj U))),
-      (((c.tensorChain P L).hom.f k).val.app (op U))
-        (coefficientTensorGenerator.{u, u + 1, u}
-          (ProEt.topology Y) (podReindexingRing l E Y none) P L p q k hk
-          (op ((proEtaleIsoPostcompose g).obj U)) x y) =
-      coefficientTensorGenerator.{u, u + 1, u}
-        (ProEt.topology X) (podReindexingRing l E X none)
-        ((podReindexingComplexFunctor l E g none).obj P)
-        ((podReindexingComplexFunctor l E g none).obj L) p q k hk
-        (op U) x y)
-    (P Q : (integralOperationsGoodComplex l E Y).FullSubcategory)
-    (hT : integralOperationsGoodComplex l E Y ((T[Y]).obj (P.obj, Q.obj)))
-    (hFP : integralOperationsGoodComplex l E X ((F[g]).obj P.obj))
-    (βP : (I[g]).obj ((R[Y]).obj P.obj) ≅ (R[X]).obj ((F[g]).obj P.obj))
-    (hβP : Generators l E g P.obj βP)
-    (hUP : (integralComparisonDerivedSequencePullback l E g).map
-        ((pullbackTensorReductionModel l E Y).hom.app P) ≫
-      (systemFactor l E g).hom.app ((R[Y]).obj P.obj) ≫
-        (systemQ l E X).map βP.hom =
-      A.reduction.hom.app ((podReindexingQ l E Y none).obj P.obj) ≫
-        (podReindexCalculus l E X).reduction.map ((factor l E g h).hom.app P.obj) ≫
-        (pullbackTensorReductionModel l E X).hom.app ⟨((F[g]).obj P.obj), hFP⟩)
-    (hFQ : integralOperationsGoodComplex l E X ((F[g]).obj Q.obj))
-    (βQ : (I[g]).obj ((R[Y]).obj Q.obj) ≅ (R[X]).obj ((F[g]).obj Q.obj))
-    (hβQ : Generators l E g Q.obj βQ)
-    (hUQ : (integralComparisonDerivedSequencePullback l E g).map
-        ((pullbackTensorReductionModel l E Y).hom.app Q) ≫
-      (systemFactor l E g).hom.app ((R[Y]).obj Q.obj) ≫
-        (systemQ l E X).map βQ.hom =
-      A.reduction.hom.app ((podReindexingQ l E Y none).obj Q.obj) ≫
-        (podReindexCalculus l E X).reduction.map ((factor l E g h).hom.app Q.obj) ≫
-        (pullbackTensorReductionModel l E X).hom.app ⟨((F[g]).obj Q.obj), hFQ⟩)
-    (hFT : integralOperationsGoodComplex l E X ((F[g]).obj ((T[Y]).obj (P.obj, Q.obj))))
-    (βT : (I[g]).obj ((R[Y]).obj ((T[Y]).obj (P.obj, Q.obj))) ≅
-      (R[X]).obj ((F[g]).obj ((T[Y]).obj (P.obj, Q.obj))))
-    (hβT : Generators l E g ((T[Y]).obj (P.obj, Q.obj)) βT)
-    (hUT : (integralComparisonDerivedSequencePullback l E g).map
-        ((pullbackTensorReductionModel l E Y).hom.app ⟨((T[Y]).obj (P.obj, Q.obj)), hT⟩) ≫
-      (systemFactor l E g).hom.app ((R[Y]).obj ((T[Y]).obj (P.obj, Q.obj))) ≫
-        (systemQ l E X).map βT.hom =
-      A.reduction.hom.app ((podReindexingQ l E Y none).obj ((T[Y]).obj (P.obj, Q.obj))) ≫
-        (podReindexCalculus l E X).reduction.map
-          ((factor l E g h).hom.app ((T[Y]).obj (P.obj, Q.obj))) ≫
-        (pullbackTensorReductionModel l E X).hom.app
-          ⟨((F[g]).obj ((T[Y]).obj (P.obj, Q.obj))), hFT⟩) :
-    (integralComparisonDerivedSequencePullback l E g).map
-        ((podReindexCalculus l E Y).reductionTensor.hom.app ((podReindexingQ l E Y none).obj P.obj,
-          (podReindexingQ l E Y none).obj Q.obj)) ≫
-      (podReindexingSystemTensor l E g).hom.app
-        ((podReindexCalculus l E Y).reduction.obj ((podReindexingQ l E Y none).obj P.obj),
-          (podReindexCalculus l E Y).reduction.obj ((podReindexingQ l E Y none).obj Q.obj)) ≫
-      (podReindexCalculus l E X).systemClosed.tensor.map
-        (Prod.mkHom
-          (A.reduction.hom.app ((podReindexingQ l E Y none).obj P.obj))
-          (A.reduction.hom.app ((podReindexingQ l E Y none).obj Q.obj))) =
-    A.reduction.hom.app
-        ((podReindexCalculus l E Y).integralClosed.tensor.obj
-          ((podReindexingQ l E Y none).obj P.obj,
-          (podReindexingQ l E Y none).obj Q.obj)) ≫
-      (podReindexCalculus l E X).reduction.map
-        ((reductionOrdinaryTensor l E g c h).hom.app
-          ((podReindexingQ l E Y none).obj P.obj, (podReindexingQ l E Y none).obj Q.obj)) ≫
-      (podReindexCalculus l E X).reductionTensor.hom.app
-        ((podOrdinaryReindex l E g).obj ((podReindexingQ l E Y none).obj P.obj),
-          (podOrdinaryReindex l E g).obj ((podReindexingQ l E Y none).obj Q.obj)) := by
-  let CY := podReindexCalculus l E Y
-  let CX := podReindexCalculus l E X
-  let G := integralComparisonDerivedSequencePullback l E g
-  let D := podOrdinaryReindex l E g
-  let T0 := (T[Y]).obj (P.obj, Q.obj)
-  let FP : (integralOperationsGoodComplex l E X).FullSubcategory := ⟨_, hFP⟩
-  let FQ : (integralOperationsGoodComplex l E X).FullSubcategory := ⟨_, hFQ⟩
-  let FT : (integralOperationsGoodComplex l E X).FullSubcategory := ⟨_, hFT⟩
-  let TX := (T[X]).obj (FP.obj, FQ.obj)
-  let hTX := total_good l E X FP FQ
-  let bY := ordinaryModel l E Y CY.integralClosed CY.integralTensorModel
-    P.obj Q.obj P.property.1 Q.property.1
-  let bX := ordinaryModel l E X CX.integralClosed CX.integralTensorModel
-    FP.obj FQ.obj hFP.1 hFQ.1
-  let fP := (factor l E g h).app P.obj
-  let fQ := (factor l E g h).app Q.obj
-  let fT := (factor l E g h).app T0
-  let rP := (pullbackTensorReductionModel l E Y).app P
-  let rQ := (pullbackTensorReductionModel l E Y).app Q
-  let rT := (pullbackTensorReductionModel l E Y).app ⟨T0, hT⟩
-  let rFP := (pullbackTensorReductionModel l E X).app FP
-  let rFQ := (pullbackTensorReductionModel l E X).app FQ
-  let rFT := (pullbackTensorReductionModel l E X).app FT
-  let rTX := (pullbackTensorReductionModel l E X).app ⟨TX, hTX⟩
-  let RP := (R[Y]).obj P.obj
-  let RQ := (R[Y]).obj Q.obj
-  let sY := systemModel l E Y RP RQ
-    (pullbackTensorReductionGood l E Y P) (pullbackTensorReductionGood l E Y Q)
-  let sX := systemModel l E X _ _
-    (pullbackTensorReductionGood l E X FP) (pullbackTensorReductionGood l E X FQ)
-  let iP := (systemFactor l E g).hom.app RP
-  let iQ := (systemFactor l E g).hom.app RQ
-  let iT := (systemFactor l E g).hom.app
-    ((R[Y]).obj T0)
-  let iS := (systemFactor l E g).hom.app
-    ((S[Y]).obj (RP, RQ))
-  let ψY := tensorReductionStrictMap l E Y P.obj Q.obj
-  let ψX := tensorReductionStrictMap l E X FP.obj FQ.obj
-  let t := c.tensorChain P.obj Q.obj
-  let w := podReindexingSystemTensor l E g
-  let hIP := sequence_good l E g RP (pullbackTensorReductionGood l E Y P)
-  let hIQ := sequence_good l E g RQ (pullbackTensorReductionGood l E Y Q)
-  have hS := system_model l E g RP RQ
-    (pullbackTensorReductionGood l E Y P) (pullbackTensorReductionGood l E Y Q) hIP hIQ
-  let sI := systemModel l E X _ _ hIP hIQ
-  have hY := reduction_model l E Y P Q hT
-  have hX := reduction_model l E X FP FQ hTX
-  have hO := ordinary_model l E g c h P Q hFP hFQ
-  have hN := system_naturality l E X _ _ _ _ hIP hIQ
-    (pullbackTensorReductionGood l E X FP) (pullbackTensorReductionGood l E X FQ)
-    βP.hom βQ.hom
-  have hi := (systemFactor l E g).hom.naturality
-    ψY
-  have hr := (pullbackTensorReductionModel l E X).hom.naturality
-    (X := FT) (Y := ⟨TX, hTX⟩) (ObjectProperty.homMk t.hom)
-  have hc := strict_tensor l E g P.obj Q.obj t (hPure P.obj Q.obj)
-    βP βQ βT hβP hβQ hβT
-  have hc' := map_three (systemQ l E X) hc
-  exact reduction_pasting CY.reduction CX.reduction D G
-    CY.integralClosed.tensor CX.integralClosed.tensor
-    CY.systemClosed.tensor CX.systemClosed.tensor
-    A.reduction.hom (reductionOrdinaryTensor l E g c h).hom w.hom
-    CY.reductionTensor.hom CX.reductionTensor.hom
-    ((podReindexingQ l E Y none).obj P.obj) ((podReindexingQ l E Y none).obj Q.obj)
-    ((podReindexingQ l E Y none).obj T0) ((podReindexingQ l E X none).obj FP.obj)
-    ((podReindexingQ l E X none).obj FQ.obj) ((podReindexingQ l E X none).obj FT.obj)
-    ((podReindexingQ l E X none).obj TX) bY bX fP fQ fT
-    ((systemQ l E Y).obj RP) ((systemQ l E Y).obj RQ)
-    ((systemQ l E Y).obj ((R[Y]).obj T0))
-    ((systemQ l E Y).obj ((S[Y]).obj (RP, RQ)))
-    ((systemQ l E X).obj ((I[g]).obj RP)) ((systemQ l E X).obj ((I[g]).obj RQ))
-    ((systemQ l E X).obj ((I[g]).obj ((R[Y]).obj T0)))
-    ((systemQ l E X).obj ((I[g]).obj ((S[Y]).obj (RP, RQ))))
-    ((systemQ l E X).obj ((S[X]).obj (((I[g]).obj RP, (I[g]).obj RQ))))
-    ((systemQ l E X).obj ((R[X]).obj FP.obj))
-    ((systemQ l E X).obj ((R[X]).obj FQ.obj))
-    ((systemQ l E X).obj ((R[X]).obj FT.obj))
-    ((systemQ l E X).obj ((R[X]).obj TX))
-    ((systemQ l E X).obj ((S[X]).obj (((R[X]).obj FP.obj, (R[X]).obj FQ.obj))))
-    rP rQ rT rFP rFQ rFT rTX sY sI sX iP iQ iT iS
-    ((systemQ l E Y).map ψY) ((systemQ l E X).map ((I[g]).map ψY))
-    ((systemQ l E X).map ((systemChain l E g).hom.app (RP, RQ)))
-    ((systemQ l E X).map βP.hom) ((systemQ l E X).map βQ.hom)
-    ((systemQ l E X).map βT.hom)
-    ((systemQ l E X).map ((S[X]).map (Prod.mkHom βP.hom βQ.hom)))
-    ((podReindexingQ l E X none).map t.hom) ((systemQ l E X).map ((R[X]).map t.hom))
-    ((systemQ l E X).map ψX) hUP hUQ hUT hY hX hO hS hN hi hr hc'
+    {C D A B : Type*} [Category C] [Category D] [Category A] [Category B]
+    (R : C ⥤ A) (S : D ⥤ B) (F : C ⥤ D) (G : A ⥤ B)
+    (T : C × C ⥤ C) (W : D × D ⥤ D)
+    (U : A × A ⥤ A) (V : B × B ⥤ B)
+    (a : R ⋙ G ⟶ F ⋙ S) (v : T ⋙ F ⟶ F.prod F ⋙ W)
+    (w : U ⋙ G ⟶ G.prod G ⋙ V)
+    (τY : T ⋙ R ⟶ R.prod R ⋙ U) (τX : W ⋙ S ⟶ S.prod S ⋙ V)
+    (P Q T₀ : C) (PX QX FT TX : D)
+    (bY : T₀ ≅ T.obj (P, Q)) (bX : TX ≅ W.obj (PX, QX))
+    (fP : F.obj P ≅ PX) (fQ : F.obj Q ≅ QX) (fT : F.obj T₀ ≅ FT)
+    (RP RQ RT SY : A) (IP IQ IT IS SI RFP RFQ RFT RTX SX : B)
+    (rP : R.obj P ≅ RP) (rQ : R.obj Q ≅ RQ) (rT : R.obj T₀ ≅ RT)
+    (rFP : S.obj PX ≅ RFP) (rFQ : S.obj QX ≅ RFQ)
+    (rFT : S.obj FT ≅ RFT) (rTX : S.obj TX ≅ RTX)
+    (sY : SY ≅ U.obj (RP, RQ)) (sI : SI ≅ V.obj (IP, IQ))
+    (sX : SX ≅ V.obj (RFP, RFQ))
+    (iP : G.obj RP ⟶ IP) (iQ : G.obj RQ ⟶ IQ)
+    (iT : G.obj RT ⟶ IT) (iS : G.obj SY ⟶ IS)
+    (ψY : RT ⟶ SY) (IψY : IT ⟶ IS) (systemt : IS ⟶ SI)
+    (βP : IP ⟶ RFP) (βQ : IQ ⟶ RFQ) (βT : IT ⟶ RFT)
+    (tensorβ : SI ⟶ SX) (t : FT ⟶ TX) (Rt : RFT ⟶ RTX) (ψX : RTX ⟶ SX)
+    (hUP : G.map rP.hom ≫ iP ≫ βP = a.app P ≫ S.map fP.hom ≫ rFP.hom)
+    (hUQ : G.map rQ.hom ≫ iQ ≫ βQ = a.app Q ≫ S.map fQ.hom ≫ rFQ.hom)
+    (hUT : G.map rT.hom ≫ iT ≫ βT = a.app T₀ ≫ S.map fT.hom ≫ rFT.hom)
+    (hY : R.map bY.hom ≫ τY.app (P, Q) ≫ U.map (Prod.mkHom rP.hom rQ.hom) =
+      rT.hom ≫ ψY ≫ sY.hom)
+    (hX : S.map bX.hom ≫ τX.app (PX, QX) ≫ V.map (Prod.mkHom rFP.hom rFQ.hom) =
+      rTX.hom ≫ ψX ≫ sX.hom)
+    (hO : F.map bY.hom ≫ v.app (P, Q) ≫ W.map (Prod.mkHom fP.hom fQ.hom) =
+      fT.hom ≫ t ≫ bX.hom)
+    (hS : G.map sY.hom ≫ w.app (RP, RQ) ≫ V.map (Prod.mkHom iP iQ) =
+      iS ≫ systemt ≫ sI.hom)
+    (hN : tensorβ ≫ sX.hom = sI.hom ≫ V.map (Prod.mkHom βP βQ))
+    (hi : G.map ψY ≫ iS = iT ≫ IψY)
+    (hr : S.map t ≫ rTX.hom = rFT.hom ≫ Rt)
+    (hc : IψY ≫ systemt ≫ tensorβ = βT ≫ Rt ≫ ψX) :
+    G.map (τY.app (P, Q)) ≫ w.app (R.obj P, R.obj Q) ≫
+      V.map (Prod.mkHom (a.app P) (a.app Q)) =
+    a.app (T.obj (P, Q)) ≫ S.map (v.app (P, Q)) ≫
+      τX.app (F.obj P, F.obj Q) := by
+  have hw := w.naturality (Prod.mkHom rP.hom rQ.hom)
+  have ha := a.naturality bY.hom
+  have hd := τX.naturality (Prod.mkHom fP.hom fQ.hom)
+  dsimp only [Functor.comp_map, Functor.prod_map] at hw ha hd
+  let pre := G.map (R.map bY.hom)
+  let post := V.map (Prod.mkHom (S.map fP.hom ≫ rFP.hom)
+    (S.map fQ.hom ≫ rFQ.hom))
+  have : IsIso post := tensor_isIso V (S.mapIso fP ≪≫ rFP) (S.mapIso fQ ≪≫ rFQ)
+  apply (cancel_epi pre).1
+  apply (cancel_mono post).1
+  have hL : pre ≫ G.map (τY.app (P, Q)) ≫ w.app (R.obj P, R.obj Q) ≫
+        V.map (Prod.mkHom (a.app P) (a.app Q)) ≫ post =
+      G.map rT.hom ≫ iT ≫ IψY ≫ systemt ≫ tensorβ ≫ sX.hom := by
+    dsimp only [pre, post]
+    conv_lhs =>
+      rhs; rhs; rhs
+      rw [tensor_comp]
+    rw [← hUP, ← hUQ]
+    rw [← tensor_comp V (G.map rP.hom) (G.map rQ.hom) (iP ≫ βP) (iQ ≫ βQ)]
+    rw [← reassoc_of% hw, ← G.map_comp_assoc, ← G.map_comp_assoc]
+    simp only [Category.assoc]
+    rw [hY]
+    simp only [Functor.map_comp, Category.assoc]
+    rw [← tensor_comp V iP iQ βP βQ]
+    rw [reassoc_of% hS, reassoc_of% hi, ← hN]
+  have hR : pre ≫ a.app (T.obj (P, Q)) ≫ S.map (v.app (P, Q)) ≫
+        τX.app (F.obj P, F.obj Q) ≫ post =
+      G.map rT.hom ≫ iT ≫ βT ≫ Rt ≫ ψX ≫ sX.hom := by
+    dsimp only [pre, post]
+    rw [← tensor_comp V (S.map fP.hom) (S.map fQ.hom) rFP.hom rFQ.hom]
+    rw [← reassoc_of% hd, reassoc_of% ha]
+    rw [← S.map_comp_assoc, ← S.map_comp_assoc]
+    simp only [Category.assoc]
+    rw [hO]
+    simp only [Functor.map_comp, Category.assoc]
+    rw [hX, reassoc_of% hr, ← reassoc_of% hUT]
+  have hc' := congrArg (fun z ↦ G.map rT.hom ≫ iT ≫ z ≫ sX.hom) hc
+  simp only [Category.assoc] at hc'
+  simpa only [Category.assoc] using hL.trans (hc'.trans hR.symm)
+
+private theorem path_tensor
+    {C D : Type*} [Category C] [Category D]
+    (T : C × C ⥤ C) (V : D × D ⥤ D)
+    (L F R H : C ⥤ D) (cl : L ≅ F) (e : L ≅ R) (cr : R ≅ H)
+    (P Q : C)
+    (dl : L.obj (T.obj (P, Q)) ⟶ V.obj (L.obj P, L.obj Q))
+    (df : F.obj (T.obj (P, Q)) ⟶ V.obj (F.obj P, F.obj Q))
+    (dr : R.obj (T.obj (P, Q)) ⟶ V.obj (R.obj P, R.obj Q))
+    (dh : H.obj (T.obj (P, Q)) ⟶ V.obj (H.obj P, H.obj Q))
+    (hl : cl.hom.app (T.obj (P, Q)) ≫ df =
+      dl ≫ V.map (Prod.mkHom (cl.hom.app P) (cl.hom.app Q)))
+    (he : e.hom.app (T.obj (P, Q)) ≫ dr =
+      dl ≫ V.map (Prod.mkHom (e.hom.app P) (e.hom.app Q)))
+    (hr : cr.hom.app (T.obj (P, Q)) ≫ dh =
+      dr ≫ V.map (Prod.mkHom (cr.hom.app P) (cr.hom.app Q))) :
+    let a := cl.symm ≪≫ e ≪≫ cr
+    df ≫ V.map (Prod.mkHom (a.hom.app P) (a.hom.app Q)) =
+      a.hom.app (T.obj (P, Q)) ≫ dh := by
+  dsimp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app]
+  apply (cancel_epi (cl.hom.app (T.obj (P, Q)))).1
+  simp only [Category.assoc]
+  rw [reassoc_of% hl, tensor_comp]
+  simp only [Iso.hom_inv_id_app_assoc]
+  rw [← tensor_comp V (e.hom.app P) (e.hom.app Q)
+    (cr.hom.app P) (cr.hom.app Q)]
+  rw [← reassoc_of% he, ← hr]
+
+/-- The tensor square for two ring-compatible paths of derived pullback.
+For coefficient change and geometric Frobenius these are the two paths around the
+condensed scalar/pullback square. The path comparisons retain their K-flat
+normalizations; no coefficient flatness or boundedness hypothesis is needed.
+
+Source: latest blueprint prop-pod-dual-tate-data-compatibility, Step 5, using
+lem-sfb-ringed-derived-monoidal-comparisons, compositor and 2-isomorphism clauses.
+Proof: precompose with the first compositor, apply its tensor equation, then the
+2-isomorphism tensor equation, then the second compositor tensor equation. The
+unary path comparisons telescope. Cancel the first compositor.
+(blueprint: lem-pod-reduction-ringed-path-tensor-square). -/
+theorem podReduction_ringed_path_tensor_square
+    {X Y A D : Site.{u, w}}
+    {f : Morphism X A} {g : Morphism A Y}
+    {h : Morphism X D} {k : Morphism D Y}
+    {left right : Morphism X Y}
+    (lf : Lift f) (lg : Lift g) (lh : Lift h) (lk : Lift k)
+    (ll : Lift left) (lr : Lift right)
+    {θl : left.inverse ≅ g.inverse ⋙ f.inverse}
+    {θr : right.inverse ≅ k.inverse ⋙ h.inverse}
+    {θ : left.inverse ≅ right.inverse}
+    (cl : Composition lf lg ll θl) (cr : Composition lh lk lr θr)
+    (e : TwoIso ll lr θ) (P Q : Y.D) :
+    let a := cl.pullback.symm ≪≫ e.pullback ≪≫ cr.pullback
+    lf.edge.left.map (lg.tensor P Q).hom ≫
+        (lf.tensor (lg.edge.left.obj P) (lg.edge.left.obj Q)).hom ≫
+        X.closed.tensor.map (Prod.mkHom (a.hom.app P) (a.hom.app Q)) =
+      a.hom.app (Y.closed.tensor.obj (P, Q)) ≫
+        lh.edge.left.map (lk.tensor P Q).hom ≫
+        (lh.tensor (lk.edge.left.obj P) (lk.edge.left.obj Q)).hom := by
+  simpa only [Category.assoc] using
+    WeilConjectures.path_tensor Y.closed.tensor X.closed.tensor
+    ll.edge.left (lg.edge.left ⋙ lf.edge.left) lr.edge.left
+    (lk.edge.left ⋙ lh.edge.left) cl.pullback e.pullback cr.pullback P Q
+    (ll.tensor P Q).hom
+    (lf.edge.left.map (lg.tensor P Q).hom ≫
+      (lf.tensor (lg.edge.left.obj P) (lg.edge.left.obj Q)).hom)
+    (lr.tensor P Q).hom
+    (lh.edge.left.map (lk.tensor P Q).hom ≫
+      (lh.tensor (lk.edge.left.obj P) (lk.edge.left.obj Q)).hom)
+    (cl.tensor P Q) (e.tensor P Q) (cr.tensor P Q)
 
 end WeilConjectures

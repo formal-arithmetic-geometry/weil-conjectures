@@ -260,6 +260,76 @@ private theorem source_comp_eq (f : W ⟶ X) (g : X ⟶ Y) (h : Y ⟶ Z)
     Functor.map_comp, Functor.map_id, Etale.dualizingComplex, exc, pull] using hh.symm
 
 -- The inverse-locality factorization is determined by the same counit equation.
+
+private theorem source_locality
+    {U V B : Scheme.{u}} [IsNoetherian U] [IsNoetherian V] [IsNoetherian B]
+    (a : U ⟶ V) [Etale a] [IsSeparated a] [QuasiCompact a]
+    (f : V ⟶ B) [HasCompactification a]
+    [HasCompactification f] [HasCompactification (a ≫ f)] :
+    source A a f = (Etale.sectionStructuralLocalityIso A a f (a ≫ f) rfl).symm := by
+  let C := ModuleCat.{u + 1} A
+  let N := Etale.canonicalEtaleCompactSupportNormalization A
+  let adjA := Etale.derivedEtaleLowerShriekUpperStarAdjunction C a inferInstance
+  let adjF := Etale.rightDerivedUpperShriekAdjunction A f
+  let adjG := Etale.rightDerivedUpperShriekAdjunction A (a ≫ f)
+  let H := Etale.existsUnique_etaleAmbientAdjointLocalityIso A a f
+    (HasCompactification.compactification f) (HasCompactification.compactification (a ≫ f))
+    (Etale.rightDerivedUpperShriek A f)
+    (Etale.rightDerivedUpperShriek A (a ≫ f)) adjF adjG
+  let α := Etale.etaleAmbientLeftComparison A N a f
+    (HasCompactification.compactification f) (HasCompactification.compactification (a ≫ f))
+  let τ := conjugateIsoEquiv (adjA.comp adjF) adjG α.symm
+  have hτ : Classical.choose H = τ := by
+    apply ((Classical.choose_spec H).2 τ ?_).symm
+    intro N' K
+    have hα : Etale.etaleAmbientLeftComparison A N' a f
+        (HasCompactification.compactification f)
+        (HasCompactification.compactification (a ≫ f)) = α := by
+      unfold Etale.etaleAmbientLeftComparison α
+      rw [Etale.normalization_comparison_eq A N' N]
+      rfl
+    rw [hα]
+    simpa only [τ, conjugateIsoEquiv_apply_hom, Iso.symm_hom,
+      Adjunction.comp_counit_app, Etale.rightDerivedLowerShriek, Functor.comp_obj,
+      C, adjA] using
+        conjugateEquiv_counit (adjA.comp adjF) adjG α.inv K
+  have hs : Etale.etaleSumSupportIso A a =
+      N.comparison a (HasCompactification.compactification a) := by
+    rw [Etale.normalization_comparison_eq_canonical]
+    unfold Etale.etaleSumSupportIso Etale.rightDerivedLowerShriekIso
+    rw [(Etale.unboundedEtaleCompactSupport_comparison_coherence A a).1]
+    exact Iso.refl_trans _
+  have hα : α = Functor.isoWhiskerRight (Etale.etaleSumSupportIso A a).symm
+      (Etale.rightDerivedLowerShriek C f) ≪≫
+        Etale.unboundedEtaleLowerShriekCompIso A a f := by
+    rw [hs]
+    exact Etale.left_comparison_chosen A N a f
+  apply Iso.ext
+  simp only [Etale.sectionStructuralLocalityIso, hτ, Iso.symm_hom,
+    Iso.trans_inv, Iso.app_inv]
+  have ht : τ.inv = (comp A a f).hom ≫
+      Functor.whiskerLeft (Etale.rightDerivedUpperShriek A f)
+        (rho A a ≪≫ Etale.leftDerivedUpperStarIsoMapDerivedCategory C a).hom := by
+    dsimp only [τ]
+    rw [conjugateIsoEquiv_apply_inv, Iso.symm_inv]
+    rw [hα]
+    simp only [Iso.trans_hom, Functor.isoWhiskerRight_hom, Iso.symm_hom]
+    rw [← conjugateEquiv_comp _
+      ((Etale.rightDerivedUpperShriekAdjunction A a).comp adjF)]
+    rw [conjugateEquiv_whiskerRight]
+    have hr := congrArg Iso.hom (rho_exact A a)
+    simp only [Iso.trans_hom] at hr
+    dsimp only [C]
+    rw [hr]
+    simp only [comp, Etale.etaleSumRightAdjointIso, conjugateIsoEquiv_apply_hom,
+      Iso.symm_hom]
+    rfl
+  rw [ht]
+  simp only [source, Iso.trans_hom, Iso.app_hom, NatTrans.comp_app,
+    Functor.whiskerLeft_app, Category.assoc]
+  dsimp only [C, Etale.dualizingComplex]
+  erw [Iso.hom_inv_id_app, Category.comp_id]
+
 private def restriction
     {U V B : Scheme.{u}} [IsNoetherian U] [IsNoetherian V] [IsNoetherian B]
     (v : U ⟶ V) [Etale v] [IsSeparated v] [QuasiCompact v]

@@ -623,6 +623,47 @@ private theorem open_localized (o : Operations.{u})
     (Functor.exactDerivedRestrictionComposition_hom_factors
       (o.extension j) (o.extension b) (o.extension (j ≫ b)) ν K).symm
 
+private theorem c_eq (o : Operations.{u}) {X Y Z : Scheme.{u}}
+    (f : X ⟶ Y) (g : Y ⟶ Z) :
+    o.c f g = conjugateIsoEquiv ((o.adjunction g).comp (o.adjunction f))
+      (o.adjunction (f ≫ g)) (pComp o f g) := rfl
+
+private theorem sId_eq (o : Operations.{u}) (X : Scheme.{u}) :
+    o.sId X = conjugateIsoEquiv (o.adjunction (𝟙 X)) Adjunction.id (o.pId X).symm := rfl
+
+private theorem s_unital (o : Operations.{u}) (hp : PullCoherence o)
+    {X Y : Scheme.{u}} (f : X ⟶ Y) (M : o.D X) :
+    ((o.c (𝟙 X) f).hom.app M ≫
+        (eqToIso (congrArg o.S (Category.id_comp f))).hom.app M =
+      (o.S f).map ((o.sId X).hom.app M)) ∧
+    ((o.c f (𝟙 Y)).hom.app M ≫
+        (eqToIso (congrArg o.S (Category.comp_id f))).hom.app M =
+      (o.sId Y).hom.app ((o.S f).obj M)) := by
+  constructor
+  · have hh := ProEtale.StrictTower.conjugate_unit (o.adjunction f)
+      (o.adjunction (𝟙 X)) (o.pId X)
+      (eqToIso (congrArg o.P (Category.id_comp f).symm) ≪≫ pComp o (𝟙 X) f)
+      (by simpa only [Iso.trans_assoc] using hp.left_unit f)
+    rw [ProEtale.SemilinearProperOpen.conjugate_transport o.P o.S
+      (fun t ↦ o.adjunction t) ((o.adjunction f).comp (o.adjunction (𝟙 X)))
+      (Category.id_comp f) (pComp o (𝟙 X) f)] at hh
+    have hm := congr_app (congrArg Iso.hom hh) M
+    simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+      Functor.whiskerRight_app, Functor.leftUnitor_hom_app] at hm
+    conv_rhs at hm => erw [Category.comp_id]
+    simpa only [c_eq, sId_eq, Operations.jId] using hm
+  · have hh := conjugate_right_unit (o.adjunction f) (o.adjunction (𝟙 Y)) (o.pId Y)
+      (eqToIso (congrArg o.P (Category.comp_id f).symm) ≪≫ pComp o f (𝟙 Y))
+      (by simpa only [Iso.trans_assoc] using hp.right_unit f)
+    rw [ProEtale.SemilinearProperOpen.conjugate_transport o.P o.S
+      (fun t ↦ o.adjunction t) ((o.adjunction (𝟙 Y)).comp (o.adjunction f))
+      (Category.comp_id f) (pComp o f (𝟙 Y))] at hh
+    have hm := congr_app (congrArg Iso.hom hh) M
+    simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
+      Functor.whiskerLeft_app, Functor.rightUnitor_hom_app] at hm
+    conv_rhs at hm => erw [Category.comp_id]
+    simpa only [c_eq, sId_eq, Operations.jId] using hm
+
 section SystemUnits
 open ProEtale.SemilinearProperOpen
 variable (C : ℕ → CommRingCat.{u + 1}) (τ : ∀ n, C (n + 1) ⟶ C n)

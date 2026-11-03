@@ -45,7 +45,95 @@ def supportIdeal : Ideal (I → k) := Ideal.span (Set.range (coordinate k I))
 /-- The closed complement of all coordinate pieces. -/
 abbrev closed : Scheme.{u} := Spec (.of ((I → k) ⧸ supportIdeal k I))
 
+/-- The quotient immersion defining the closed complement. -/
+def closedInclusion : closed k I ⟶ base k I :=
+  Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (supportIdeal k I)))
+
 /-- The union of the coordinate pieces. -/
 def openPart : (base k I).Opens := ⨆ i, piece k I i
+
+private theorem coordinate_idempotent (i : I) :
+    coordinate k I i * coordinate k I i = coordinate k I i := by
+  ext j
+  by_cases h : j = i <;> simp [coordinate, h]
+
+private theorem piece_clopen (i : I) : IsClopen (piece k I i : Set (base k I)) := by
+  apply PrimeSpectrum.isClopen_basicOpen_of_mul_add (coordinate k I i)
+    (1 - coordinate k I i)
+  · rw [mul_sub, mul_one, coordinate_idempotent, sub_self]
+  · exact add_sub_cancel _ _
+
+private def coordinatePoint (i : I) : base k I :=
+  PrimeSpectrum.comap (Pi.evalRingHom (fun _ : I ↦ k) i) ⟨⊥, inferInstance⟩
+
+private theorem point_mem_piece_iff (i j : I) :
+    coordinatePoint k I i ∈ piece k I j ↔ i = j := by
+  change (Pi.single j (1 : k) : I → k) i ∉ (⊥ : Ideal k) ↔ i = j
+  by_cases h : i = j <;> simp [h, eq_comm]
+
+/-- An infinite family of coordinate clopens has an affine base and a closed complement,
+but its union is not quasi-compact. The individual pieces are nonempty closed immersions
+and distinct pieces are disjoint.
+
+Source: step 5 of `def-pur-flasque-support`
+(blueprint: lem-pur-infinite-clopen-pair).
+Proof: coordinate idempotents define clopen subsets. The zero locus of their generated
+ideal is the complement of their union. Each evaluation prime lies in exactly its own
+coordinate piece. A finite subcover of the union would miss an evaluation prime, so the
+union is not compact. Its inclusion into the affine spectrum cannot be quasi-compact. -/
+theorem pair_properties [Infinite I] :
+    IsClosedImmersion (closedInclusion k I) ∧
+      IsCompl (Set.range (closedInclusion k I)) (Set.range (openPart k I).ι) ∧
+      ¬ QuasiCompact (openPart k I).ι ∧
+      (∀ i : I, IsClosedImmersion (piece k I i).ι ∧ Nonempty (piece k I i)) ∧
+      Pairwise (fun i j : I ↦ Disjoint (piece k I i) (piece k I j)) := by
+  classical
+  have hclosed : IsClosedImmersion (closedInclusion k I) :=
+    IsClosedImmersion.spec_of_surjective _ Ideal.Quotient.mk_surjective
+  have hr : Set.range (closedInclusion k I) =
+      (openPart k I : Set (base k I))ᶜ := by
+    change Set.range (PrimeSpectrum.comap (Ideal.Quotient.mk (supportIdeal k I))) = _
+    rw [_root_.range_comap_of_surjective _ _ Ideal.Quotient.mk_surjective]
+    ext p
+    rw [Ideal.mk_ker, supportIdeal, PrimeSpectrum.zeroLocus_span]
+    change (∀ a ∈ Set.range (coordinate k I), a ∈ p.asIdeal) ↔ _
+    have hmem : p ∈ (openPart k I : Set (base k I)) ↔ ∃ i, p ∈ piece k I i :=
+      Opens.mem_iSup
+    simp only [Set.mem_compl_iff, hmem, not_exists, piece,
+      Set.mem_range, forall_exists_index, forall_apply_eq_imp_iff]
+    change (∀ a, coordinate k I a ∈ p.asIdeal) ↔
+      ∀ a, ¬ (coordinate k I a ∉ p.asIdeal)
+    simp only [not_not]
+  refine ⟨hclosed, ?_, ?_, ?_, ?_⟩
+  · rw [Scheme.Opens.range_ι, hr]
+    exact isCompl_compl.symm
+  · intro hqc
+    have hc : IsCompact (openPart k I : Set (base k I)) := by
+      have hp := QuasiCompact.isCompact_preimage (f := (openPart k I).ι)
+        (Set.univ : Set (base k I)) isOpen_univ isCompact_univ
+      have hi := hp.image (openPart k I).ι.continuous
+      simpa only [Set.preimage_univ, Set.image_univ, Scheme.Opens.range_ι] using hi
+    obtain ⟨s, hs⟩ := hc.elim_finite_subcover (fun i : I ↦ (piece k I i : Set (base k I)))
+      (fun i ↦ (piece k I i).isOpen) (by
+        intro x hx
+        exact Set.mem_iUnion.mpr (Opens.mem_iSup.mp hx))
+    obtain ⟨i, hi⟩ := Infinite.exists_notMem_finset s
+    have hp : coordinatePoint k I i ∈ openPart k I := by
+      exact Opens.mem_iSup.mpr ⟨i, (point_mem_piece_iff k I i i).2 rfl⟩
+    obtain ⟨j, hj, hmem⟩ := Set.mem_iUnion₂.mp (hs hp)
+    exact hi ((point_mem_piece_iff k I i j).1 hmem ▸ hj)
+  · intro i
+    exact ⟨IsClosedImmersion.of_isPreimmersion _
+      ((Scheme.Opens.range_ι _).symm ▸ (piece_clopen k I i).isClosed),
+      ⟨⟨coordinatePoint k I i, (point_mem_piece_iff k I i i).2 rfl⟩⟩⟩
+  · intro i j hij
+    apply disjoint_iff_inf_le.mpr
+    intro p hp
+    obtain ⟨hi, hj⟩ := hp
+    have hmul : coordinate k I i * coordinate k I j = 0 := by
+      ext n
+      by_cases hn : n = i <;> simp [coordinate, Pi.single_apply, hn, hij]
+    have hprime := p.isPrime.mem_or_mem_of_mul_eq_zero hmul
+    exact hprime.elim hi hj
 
 end AlgebraicGeometry.ProEtale.SupportCounterexample

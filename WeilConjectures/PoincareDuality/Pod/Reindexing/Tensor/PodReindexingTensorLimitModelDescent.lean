@@ -10,6 +10,7 @@ public import WeilConjectures.PoincareDuality.Pod.Reindexing.PodReindexingReduct
 import WeilConjectures.PoincareDuality.Pod.Reindexing.PodReindexingCoherentTensorRoos
 import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSupplement
 import WeilConjectures.SmoothPurity.Sf.SfIntegralConstructibleTriangulated
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
 
 /-! # Descent of the strict tensor limit model
 
@@ -116,86 +117,42 @@ private theorem frameFinish
   have he := congrArg (fun f ↦ f ≫ q.dX.hom) h
   simpa only [Category.assoc, Iso.inv_hom_id, Category.comp_id, Functor.map_comp] using he
 
-/--
-The strict normalized tensor equation descends through the product of the two good
-complex localizations. The hypotheses record the pure-tensor generator normalization,
-the strict model equation and its naturality; the conclusion is the component equation
-used by the parent limit-model lemma.
+/-- Evaluation is equivariant for the contragredient datum under a monoidal
+self-equivalence. The inverse datum occurs in the first internal-Hom slot.
+The categorical statement applies in particular to the native derived category
+of modules over any pulled-back commutative condensed coefficient ring.
 
-Source: blueprint dual-Tate compatibility, Steps 2 and 4; Stacks 07A4, 08TC,
-0941. Construct the natural coherent comparison. Its strict Roos normalization
-and Model identify it with T.tensor on good representatives after cancelling the
-target realization. Choose representatives of the constructible inputs, transport
-constructibility across their isomorphisms, and use Naturality to transport this
-component equality. Postcompose with the target tensor realization to get the frame
-equation. STATEMENT-DISPUTED: the original signature omitted Generators. Simultaneously
-negating T.tower and T.tensor preserves Model and Naturality, but changes the equation.
-(blueprint: stage3-pod-reindexing-tensor-limit-model-descent).
--/
+Source: latest blueprint prop-pod-dual-tate-data-compatibility, proof Step 2.
+Proof: expand the tensor datum and the evaluation-transpose internal-Hom comparison.
+Naturality of evaluation moves the datum of B to the output. Dinaturality in A
+moves the inverse datum of A to the tensor factor, where it cancels its forward
+datum. The defining evaluation equation for the canonical internal-Hom comparison
+then gives the tensorator followed by P(evaluation). Cancel the inverse tensorator.
+This uses neither dualizability nor boundedness, and also holds for zero objects.
+(blueprint: lem-pod-reindexing-contragredient-evaluation). -/
 theorem podReindexing_tensor_limit_model_descent
-    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
-    [∀ x : X, Invertible (l : X.residueField x)]
-    [∀ y : Y, Invertible (l : Y.residueField y)]
-    (A : PodCompletionReindex l E g) (T : PodCompletedTensorReindex l E g A)
-    (hA : PodCompletionReindex.Laws l E g A)
-    (hGenerators : PodCompletedTensorReindex.Generators l E g A T)
-    (_hModel : PodCompletedTensorReindex.Model l E g A T)
-    (_hNaturality : PodCompletedTensorReindex.Naturality l E g A T)
-    (M N : sfIntegralConstructibleCategory l E Y) :
-    let q := podReindexingTensorFrame l E g A hA M.obj N.obj
-    let t : q.F.obj q.CY ⟶ q.CX := (T.tensor M N).hom
-    q.F.map q.dY.hom ≫ q.δ.app q.U ≫ q.RX.map (q.w₁ ≫ q.w₂) =
-      t ≫ q.dX.hom := by
-  classical
-  let : (isoReductionIntegralInverse l E g).Additive :=
-    isoSectionwiseModuleInverseImage_additive.{u, u} g (isoReductionCompletedMap l E g).hom
-  let : PreservesFiniteLimits (isoReductionIntegralInverse l E g) :=
-    isoSectionwiseModuleInverseImage_limits.{u, u} g (isoReductionCompletedMap l E g).hom
-  let : PreservesFiniteColimits (isoReductionIntegralInverse l E g) :=
-    isoSectionwiseModuleInverseImage_colimits.{u, u} g (isoReductionCompletedMap l E g).hom
-  let κ := podReindexingLimitTensorComparisonHom l E g A hA
-  have hrep (P Q : (integralOperationsGoodComplex l E Y).FullSubcategory)
-      (hP : sfIntegralConstructible l E Y (DerivedCategory.Q.obj P.obj))
-      (hQ : sfIntegralConstructible l E Y (DerivedCategory.Q.obj Q.obj)) :
-      κ (DerivedCategory.Q.obj P.obj) (DerivedCategory.Q.obj Q.obj) =
-        (T.tensor ⟨DerivedCategory.Q.obj P.obj, hP⟩
-          ⟨DerivedCategory.Q.obj Q.obj, hQ⟩).hom := by
-    have hs := podReindexing_tensor_roos_normalization l E g A T hA hGenerators P Q
-    have hm := _hModel P Q hP hQ
-    let e := (integralCompletedTensor l E X).mapIso
-      (Iso.prod (goodReindexFactors l E g A P) (goodReindexFactors l E g A Q)) ≪≫
-      (integralCompletedTensorComparison l E X).app
-        ((podGoodReindex l E g A).obj P, (podGoodReindex l E g A).obj Q)
-    apply (cancel_mono e.hom).1
-    dsimp only [e, Iso.trans, Functor.mapIso, Iso.prod, Iso.app] at ⊢
-    simpa only [κ, goodReindexFactors, id, podGoodReindex, Iso.app_hom,
-      Category.assoc, podReindexingTensorFrame] using eq_of_heq (hs.trans hm)
-  dsimp only [κ] at hrep
-  let L := integralOperationsGoodLocalization l E Y
-  let W := (HomologicalComplex.quasiIso (integralTowerModules l E Y) (.up ℤ)).inverseImage
-    (integralOperationsGoodComplex l E Y).ι
-  have : L.IsLocalization W := integralOperationsGoodLocalization_isLocalization l E Y
-  have : L.EssSurj := Localization.essSurj L W
-  let P := L.objPreimage M.obj
-  let Q := L.objPreimage N.obj
-  let eM : DerivedCategory.Q.obj P.obj ≅ M.obj := L.objObjPreimageIso M.obj
-  let eN : DerivedCategory.Q.obj Q.obj ≅ N.obj := L.objObjPreimageIso N.obj
-  let MP : sfIntegralConstructibleCategory l E Y :=
-    ⟨DerivedCategory.Q.obj P.obj,
-      ObjectProperty.prop_of_iso (sfIntegralConstructible l E Y) eM.symm M.property⟩
-  let NQ : sfIntegralConstructibleCategory l E Y :=
-    ⟨DerivedCategory.Q.obj Q.obj,
-      ObjectProperty.prop_of_iso (sfIntegralConstructible l E Y) eN.symm N.property⟩
-  have hk : κ M.obj N.obj = (T.tensor M N).hom := by
-    let e := (podOrdinaryReindex l E g).mapIso
-      ((integralCompletedTensor l E Y).mapIso (Iso.prod eM eN))
-    apply (cancel_epi e.hom).1
-    dsimp only [e, Functor.mapIso, Iso.prod]
-    rw [limitTensorComparison_naturality l E g A hA _ _ _ _ eM.hom eN.hom]
-    rw [hrep P Q MP.property NQ.property]
-    exact (_hNaturality MP NQ M N
-      (ObjectProperty.homMk eM.hom) (ObjectProperty.homMk eN.hom)).symm
-  exact frameFinish _ (T.tensor M N).hom
-    ((eq_of_heq (limitTensorComparison_app l E g A hA M.obj N.obj)).symm.trans hk)
+    {C : Type u} [Category.{v} C] [MonoidalCategory C] [MonoidalClosed C]
+    (P : C ⥤ C) [P.Monoidal] [P.IsEquivalence]
+    {A B : C} (a : P.obj A ≅ A) (b : P.obj B ≅ B) :
+    let c := Functor.Monoidal.ihomObjIso P A B ≪≫
+      (MonoidalClosed.internalHom.mapIso a.symm.op).app (P.obj B) ≪≫
+      (ihom A).mapIso b
+    (Functor.Monoidal.μIso P A ((ihom A).obj B)).inv ≫
+      (a.hom ⊗ₘ c.hom) ≫ (ihom.ev A).app B =
+        P.map ((ihom.ev A).app B) ≫ b.hom := by
+  intro c
+  change (Functor.OplaxMonoidal.δ P A ((ihom A).obj B)) ≫
+      (a.hom ⊗ₘ ((Functor.LaxMonoidal.ihomComparison P A).natTrans.app B ≫
+        (pre a.inv).app (P.obj B) ≫ (ihom A).map b.hom)) ≫
+      (ihom.ev A).app B = _
+  rw [MonoidalCategory.tensorHom_def a.hom]
+  simp only [whiskerLeft_comp, Category.assoc]
+  rw [ihom.ev_naturality, id_tensor_pre_app_comp_ev_assoc]
+  have hx := MonoidalCategory.whisker_exchange a.inv
+    ((Functor.LaxMonoidal.ihomComparison P A).natTrans.app B)
+  dsimp only [Functor.comp_obj] at hx
+  rw [reassoc_of% hx]
+  simp only [← comp_whiskerRight_assoc, a.hom_inv_id, id_whiskerRight, Category.id_comp]
+  rw [Functor.LaxMonoidal.ihomComparison_ev_assoc, Functor.Monoidal.δ_μ_assoc]
 
 end WeilConjectures

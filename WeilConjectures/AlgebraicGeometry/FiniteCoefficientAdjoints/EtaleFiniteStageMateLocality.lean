@@ -310,7 +310,7 @@ private theorem mate_isIso_etale
     apply (cancel_mono ((NB.comparison f c).hom.app
       ((Etale.scalarExtension φ X).obj M))).mp
     simp only [Category.assoc, Iso.inv_hom_id_app]
-    rw [Etale.ordinaryChartSumNormalization φ f c NA NB M]
+    rw [Etale.chart_sum_normalization φ f c NA NB M]
     simp only [← Functor.map_comp_assoc, Iso.inv_hom_id_app,
       _root_.CategoryTheory.Functor.map_id, Category.id_comp]
     exact (Category.comp_id

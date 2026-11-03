@@ -314,6 +314,46 @@ def sectionAdjunct (P : PurityFiniteSetting.{u}) (n : ℕ) (B : Scheme.{u})
     (target_origin P n _ (towerBase aB r) r)
     (target_plus P n _ (towerBase aB (r + 1)) (r + 1)) (sectionArrow P n B aB r)
 
+/-- The compact-support source identification from the specified composition law.
+Source: explicit supported recursion
+(blueprint: def-pur-coordinate-section-arrows). -/
+@[irreducible]
+def coordinateComposition (P : PurityFiniteSetting.{u}) (n : ℕ) (B : Scheme.{u}) (r : ℕ) :
+    (rightDerivedLowerShriek (ModuleCat.{u + 1} (setting P n).Coefficient)
+      (zero B (r + 1))).obj (unit P n B) ≅
+    (rightDerivedLowerShriek (ModuleCat.{u + 1} (setting P n).Coefficient)
+      (lastSection B r)).obj
+        ((rightDerivedLowerShriek (ModuleCat.{u + 1} (setting P n).Coefficient)
+          (zero B r)).obj (unit P n B)) :=
+  (rightDerivedLowerShriekCongr (ModuleCat.{u + 1} (setting P n).Coefficient)
+    (f := zero B (r + 1)) (g := zero B r ≫ lastSection B r)
+    (CoordinateTowerNormalization.zero_successor B r :
+      zero B r ≫ lastSection B r = zero B (r + 1)).symm).app _ ≪≫
+    (originCompositionAmbient (setting P n).Coefficient (zero B r)
+      (lastSection B r)).symm.app ⟨unit P n B, unit_origin P n B⟩
+
+/-- The inverse exceptional compositor d_r, obtained by conjugating that same
+compact-support composition through the pasted counits.
+Source: proof Step 6 (blueprint: def-pur-coordinate-section-arrows). -/
+@[irreducible]
+def coordinateExceptionalComposition (P : PurityFiniteSetting.{u}) (n : ℕ) (B : Scheme.{u})
+    (aB : B ⟶ Spec (.of P.field.k))
+    [LocallyOfFiniteType aB] [QuasiCompact aB] [IsSeparated aB] (r : ℕ) :
+    (rightDerivedUpperShriek (setting P n).Coefficient
+      (zero B r)).obj
+        ((rightDerivedUpperShriek (setting P n).Coefficient
+          (lastSection B r)).obj (target P n (iteratedAffineLine B (r + 1)) (r + 1))) ⟶
+    (rightDerivedUpperShriek (setting P n).Coefficient
+      (zero B (r + 1))).obj (target P n (iteratedAffineLine B (r + 1)) (r + 1)) :=
+  letI := tower_noetherian (setting P n) B aB r
+  letI := tower_noetherian (setting P n) B aB (r + 1)
+  compositionInverse (setting P n).Coefficient (zero B r) (lastSection B r)
+      ⟨_, target_plus P n _ (towerBase aB (r + 1)) (r + 1)⟩ ≫
+    (rightDerivedUpperShriekCongr (setting P n).Coefficient
+      (f := zero B r ≫ lastSection B r) (g := zero B (r + 1))
+      (CoordinateTowerNormalization.zero_successor B r :
+        zero B r ≫ lastSection B r = zero B (r + 1))).hom.app _
+
 private theorem compositionInverse_isIso (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
@@ -342,6 +382,23 @@ private theorem compositionInverse_isIso (A : Type (u + 1)) [CommRing A] [Finite
       (f ≫ g) hT _ K.property u t)
     (originCompositionAmbient A f g)
 
+/-- The conjugate compositor is an isomorphism, since compact-support composition
+is an isomorphism and both closed Hom bijections are adjunction bijections.
+Source: proof Step 6 (blueprint: def-pur-coordinate-section-arrows).
+Proof: the compact-support compositor and its inverse are conjugate through the
+two adjunctions. Their composites are identities by naturality and the triangle
+identities. The defining pasted-counit map is precisely this inverse conjugate. -/
+theorem coordinateExceptionalComposition_isIso (P : PurityFiniteSetting.{u}) (n : ℕ)
+    (B : Scheme.{u}) (aB : B ⟶ Spec (.of P.field.k))
+    [LocallyOfFiniteType aB] [QuasiCompact aB] [IsSeparated aB] (r : ℕ) :
+    IsIso (coordinateExceptionalComposition P n B aB r) := by
+  let := tower_noetherian (setting P n) B aB r
+  let := tower_noetherian (setting P n) B aB (r + 1)
+  have := compositionInverse_isIso (setting P n).Coefficient (zero B r) (lastSection B r)
+    ⟨_, target_plus P n _ (towerBase aB (r + 1)) (r + 1)⟩
+  unfold coordinateExceptionalComposition
+  infer_instance
+
 attribute [local irreducible] originCompositionAmbient rightDerivedUpperShriekHomEquiv
   rightDerivedUpperShriekCounit
 
@@ -355,5 +412,18 @@ def coordinateIdentity (P : PurityFiniteSetting.{u}) (n : ℕ) (B : Scheme.{u}) 
       (zero B 0)).obj (unit P n B) ⟶ unit P n B :=
   ((originCompactSupportId (setting P n).Coefficient B).hom.app
     ⟨_, unit_origin P n B⟩).hom
+
+/-- The identity exceptional comparison at rank zero, transposed from the specified
+compact-support identity. Source: empty-product normalization
+(blueprint: def-pur-coordinate-section-arrows). -/
+@[irreducible]
+def coordinateIdentityAdjunct (P : PurityFiniteSetting.{u}) (n : ℕ) (B : Scheme.{u})
+    (aB : B ⟶ Spec (.of P.field.k))
+    [LocallyOfFiniteType aB] [QuasiCompact aB] [IsSeparated aB] :
+    unit P n B ⟶ (rightDerivedUpperShriek (setting P n).Coefficient
+      (zero B 0)).obj (target P n B 0) :=
+  letI := tower_noetherian (setting P n) B aB 0
+  rightDerivedUpperShriekHomEquiv (zero B 0) (unit_origin P n B)
+    (target_plus P n B aB 0) (coordinateIdentity P n B)
 
 end AlgebraicGeometry.ProEtale.AffineZeroPurity

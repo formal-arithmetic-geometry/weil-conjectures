@@ -64,6 +64,16 @@ section GenericUnit
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
+/-- The finite coefficient exponent is invertible on every scheme over the fixed field.
+Source: blueprint def-pur-conventions, the finite coefficient paragraph
+(blueprint: def-pur-conventions).
+Proof: ell to the positive level annihilates the coefficient quotient, since the
+valuation of ell in O_E is positive. The same integer is nonzero in k, hence a unit;
+its image along the structure morphism is a unit in global sections. -/
+theorem comparedExponent (P : PurityFiniteSetting.{u}) {T : Scheme.{u}}
+    (aT : T ⟶ Spec (.of P.field.k)) : HasInvertibleExponent P.Coefficient T := by
+  exact P.finiteComparedInvertibleExponent aT
+
 /-- Evaluate the exceptional compositor at the coefficient unit before specializing
 its coefficient category. This preserves the upstream generic derived-unit term.
 Source: blueprint sigma, exceptional compositor at the unit
@@ -130,6 +140,16 @@ def tensorComparison (P : PurityFiniteSetting.{u})
     tensor Λ P K M ≅ tensor Λ P K' M' :=
   ((Etale.derivedTensor (ModuleCat.{u + 1} Λ) X).mapIso a').app M ≪≫
     ((Etale.derivedTensor (ModuleCat.{u + 1} Λ) X).obj K').mapIso b'
+
+/-- Equality of the actual small pro-etale arrows in canonical etale-origin
+coordinates. Every arrow is carried by the dependency's comparison inverse image.
+Source: blueprint finite pro-etale operations and comparison convention
+(blueprint: lem-pur-diagonal-section-pasting). -/
+def SameProEtaleMap (P : PurityFiniteSetting.{u})
+    [HasInvertibleExponent Λ (Spec (.of P.field.k))] {X : Scheme.{u}}
+    {K L : D Λ P X} (r t : K ⟶ L) : Prop :=
+  (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategory.map r =
+    (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} Λ) X).mapDerivedCategory.map t
 
 /-- The self-product section object, using the dependency's section invariant.
 Source: blueprint lem-pur-diagonal-section-pasting, C_h
@@ -306,6 +326,29 @@ theorem geometry {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
   · apply pullback.hom_ext <;> simp [pullback.map, i]
   · apply pullback.hom_ext <;> simp [s, j]
 
+/-- The smooth dimensions and separated finite-type properties of the pasted tower.
+Source: blueprint lem-pur-diagonal-section-pasting, proof Step 1
+(blueprint: lem-pur-diagonal-section-pasting).
+Proof: a is the base change of f along the second projection Q to Y, and b is the
+base change of g along gf. Base-change permanence gives their dimensions d,e and
+their separated finite-type properties. Composition gives dimension d+e. -/
+theorem geometryProperties {X Y Z : Scheme.{u}} (d e : ℕ) (f : X ⟶ Y) (g : Y ⟶ Z)
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g]
+    [SmoothOfRelativeDimension d f] [SmoothOfRelativeDimension e g] :
+    SmoothOfRelativeDimension d (a f g) ∧ IsSeparated (a f g) ∧
+    LocallyOfFiniteType (a f g) ∧ QuasiCompact (a f g) ∧
+    SmoothOfRelativeDimension (d + e) (f ≫ g) := by
+  have hp : IsPullback (pullback.snd (f ≫ g) (f ≫ g)) (a f g) f
+      (pullback.snd (f ≫ g) g) := by
+    apply IsPullback.of_bot ?_ (by simp [a]) (IsPullback.of_hasPullback (f ≫ g) g).flip
+    simpa [a] using (IsPullback.of_hasPullback (f ≫ g) (f ≫ g)).flip
+  have : SmoothOfRelativeDimension d (a f g) :=
+    (smoothOfRelativeDimension_isStableUnderBaseChange (n := d)).of_isPullback hp inferInstance
+  exact ⟨inferInstance, MorphismProperty.of_isPullback (P := @IsSeparated) hp inferInstance,
+    MorphismProperty.of_isPullback (P := @LocallyOfFiniteType) hp inferInstance,
+    MorphismProperty.of_isPullback (P := @QuasiCompact) hp inferInstance, inferInstance⟩
+
 /-- Equality transport of the dualizing object, with no choice of comparison.
 Source: blueprint canonical Cartesian product identifications
 (blueprint: lem-pur-diagonal-section-pasting). -/
@@ -410,6 +453,81 @@ def kappa (P : PurityFiniteSetting.{u})
         (sigma Λ P d (a f g) (pullback.fst (f ≫ g) g)
             (pullback.fst (f ≫ g) (f ≫ g) ≫ (f ≫ g) ≫ aZ) ≪≫
           dualizingCongr Λ P (geometry f g).2.2.1)
+
+/-- The diagonal pasting equation with every auxiliary compactification supplied
+by Nagata and every auxiliary dimension supplied by base change.
+Source: blueprint lem-pur-diagonal-section-pasting, first asserted equality
+(blueprint: lem-pur-diagonal-section-pasting). -/
+def Equation (P : PurityFiniteSetting.{u})
+    [HasInvertibleExponent Λ (Spec (.of P.field.k))] {X Y Z : Scheme.{u}}
+    (d e : ℕ) (f : X ⟶ Y) (g : Y ⟶ Z)
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g]
+    [SmoothOfRelativeDimension d f] [SmoothOfRelativeDimension e g]
+    (aZ : Z ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aZ] [QuasiCompact aZ] : Prop :=
+  letI := LocallyOfFiniteType.isLocallyNoetherian aZ
+  letI := QuasiCompact.compactSpace_of_compactSpace aZ
+  letI : IsNoetherian Z := ⟨⟩
+  letI := LocallyOfFiniteType.isLocallyNoetherian g
+  letI := QuasiCompact.compactSpace_of_compactSpace g
+  letI : IsNoetherian Y := ⟨⟩
+  letI := LocallyOfFiniteType.isLocallyNoetherian f
+  letI := QuasiCompact.compactSpace_of_compactSpace f
+  letI : IsNoetherian X := ⟨⟩
+  let hgeom := geometryProperties d e f g
+  letI := hgeom.1
+  letI := hgeom.2.1
+  letI := hgeom.2.2.1
+  letI := hgeom.2.2.2.1
+  letI := hgeom.2.2.2.2
+  SameProEtaleMap Λ P
+    ((kappa Λ P d e f g aZ).hom ≫ (alpha Λ P (d + e) (f ≫ g) ((f ≫ g) ≫ aZ)).hom)
+    ((tensorComparison Λ P (alpha Λ P d f (f ≫ g ≫ aZ))
+      ((Etale.upperStar (ModuleCat.{u + 1} Λ) f).leftDerivedFunctor.mapIso
+        (alpha Λ P e g (g ≫ aZ)))).hom ≫ (sigma Λ P d f g (f ≫ g ≫ aZ)).hom)
+
+/-- The normalized etale localization comparison, selected from the dependency's
+unique counit-normalized isomorphism, not from a mere existence of an isomorphism.
+Source: blueprint proof Steps 7 and 9--12, E_(u,h)
+(blueprint: lem-pur-diagonal-section-pasting). -/
+def etaleRestriction (P : PurityFiniteSetting.{u})
+    [HasInvertibleExponent Λ (Spec (.of P.field.k))] {U X S : Scheme.{u}}
+    (v : U ⟶ X) (h : X ⟶ S)
+    [Etale v] [IsSeparated v] [LocallyOfFiniteType v] [QuasiCompact v]
+    [IsNoetherian U] [IsNoetherian X] [IsNoetherian S]
+    [HasCompactification h] [HasCompactification (v ≫ h)] :
+    Etale.dualizingComplex Λ (v ≫ h) ≅
+      (Etale.upperStar (ModuleCat.{u + 1} Λ) v).leftDerivedFunctor.obj
+        (Etale.dualizingComplex Λ h) :=
+  let E := Classical.choose
+    (Etale.existsUnique_etaleAmbientAdjointLocalityIso Λ v h
+      (HasCompactification.compactification h)
+      (HasCompactification.compactification (v ≫ h))
+      (Etale.rightDerivedUpperShriek Λ h)
+      (Etale.rightDerivedUpperShriek Λ (v ≫ h))
+      (Etale.rightDerivedUpperShriekAdjunction Λ h)
+      (Etale.rightDerivedUpperShriekAdjunction Λ (v ≫ h))).exists
+  restrictionUnit Λ v h E ≪≫
+    ((Etale.leftDerivedUpperStarIsoMapDerivedCategory
+      (ModuleCat.{u + 1} Λ) v).app _).symm
+
+/-- Canonical comparison of section invariants along an etale map over the base.
+The only identifications are equality transport, normalized etale localization,
+and the recorded derived pullback compositor.
+Source: blueprint proof Steps 9--12 (blueprint: lem-pur-diagonal-section-pasting). -/
+def etaleSection (P : PurityFiniteSetting.{u})
+    [HasInvertibleExponent Λ (Spec (.of P.field.k))] {U X B : Scheme.{u}}
+    (v : U ⟶ X) (h : X ⟶ B) (h' : U ⟶ B) (r : B ⟶ U) (z : B ⟶ X)
+    [Etale v] [IsSeparated v] [LocallyOfFiniteType v] [QuasiCompact v]
+    [IsNoetherian U] [IsNoetherian X] [IsNoetherian B]
+    [HasCompactification h] [HasCompactification h'] [HasCompactification (v ≫ h)]
+    (hv : h' = v ≫ h) (hz : z = r ≫ v) :
+    Etale.sectionInvariant Λ h' r ≅
+      Etale.sectionInvariant Λ h z :=
+  (Etale.upperStar (ModuleCat.{u + 1} Λ) r).leftDerivedFunctor.mapIso
+    (dualizingCongr Λ P hv ≪≫ etaleRestriction Λ P v h) ≪≫
+    ((Etale.leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ)
+      r v z hz).app _).symm
 
 attribute [instance] noetherianPullback
 
@@ -564,6 +682,101 @@ def openFactor {X Y X' Y' : Scheme.{u}} (h : X ⟶ Y) (h' : X' ⟶ Y')
     (u' : X' ⟶ X) (v : Y' ⟶ Y) (w : u' ≫ h = h' ≫ v) :
     X' ⟶ pullback h v := pullback.lift u' h' w
 
+/-- The residual factor is an open immersion; this does not assert that the
+original compatible open square was Cartesian.
+Source: blueprint proof Step 7 (blueprint: lem-pur-diagonal-section-pasting).
+Proof: target base change restricts X to h inverse image of Y'. Since u maps into
+this inverse image, its factor is the same open immersion into that open subset.
+The two projection equations are the universal-property equations. -/
+theorem openFactorProperties {X Y X' Y' : Scheme.{u}}
+    (h : X ⟶ Y) (h' : X' ⟶ Y') (u' : X' ⟶ X) (v : Y' ⟶ Y)
+    [IsOpenImmersion u'] [IsOpenImmersion v] (w : u' ≫ h = h' ≫ v) :
+    IsOpenImmersion (openFactor h h' u' v w) ∧
+    openFactor h h' u' v w ≫ pullback.fst h v = u' ∧
+    openFactor h h' u' v w ≫ pullback.snd h v = h' := by
+  have hfst : openFactor h h' u' v w ≫ pullback.fst h v = u' := by
+    simp [openFactor]
+  refine ⟨?_, hfst, by simp [openFactor]⟩
+  have : IsOpenImmersion (openFactor h h' u' v w ≫ pullback.fst h v) :=
+    hfst.symm ▸ inferInstance
+  exact IsOpenImmersion.of_comp _ (pullback.fst h v)
+
+/-- Restriction of the dualizing object for arbitrary compatible source and target
+opens: target base change first, then normalized source etale localization.
+Source: blueprint proof Step 7 (blueprint: lem-pur-diagonal-section-pasting). -/
+def openDualizing (P : PurityFiniteSetting.{u})
+    [HasInvertibleExponent Λ (Spec (.of P.field.k))] {X Y X' Y' : Scheme.{u}}
+    (d : ℕ) (h : X ⟶ Y) (h' : X' ⟶ Y') (u' : X' ⟶ X) (v : Y' ⟶ Y)
+    [IsNoetherian X] [IsNoetherian Y] [IsNoetherian X'] [IsNoetherian Y']
+    [IsOpenImmersion u'] [IsOpenImmersion v]
+    [IsSeparated h] [LocallyOfFiniteType h] [QuasiCompact h]
+    [IsSeparated h'] [LocallyOfFiniteType h'] [QuasiCompact h']
+    [SmoothOfRelativeDimension d h]
+    (w : u' ≫ h = h' ≫ v) (aX : X ⟶ Spec (.of P.field.k)) :
+    (Etale.upperStar (ModuleCat.{u + 1} Λ) u').leftDerivedFunctor.obj
+      (Etale.dualizingComplex Λ h) ≅
+      Etale.dualizingComplex Λ h' :=
+  let j := openFactor h h' u' v w
+  letI := (openFactorProperties h h' u' v w).1
+  (Etale.leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ)
+    j (pullback.fst h v) u'
+    (openFactorProperties h h' u' v w).2.1.symm).app _ ≪≫
+  (Etale.upperStar (ModuleCat.{u + 1} Λ) j).leftDerivedFunctor.mapIso
+    (beta Λ P d (IsPullback.of_hasPullback h v) aX) ≪≫
+  (etaleRestriction Λ P j (pullback.snd h v)).symm ≪≫
+  dualizingCongr Λ P (openFactorProperties h h' u' v w).2.2
+
+/-- Restrict both factors of the diagonal self-product.
+Source: blueprint proof Step 7 (blueprint: lem-pur-diagonal-section-pasting). -/
+def openPair {X Y X' Y' : Scheme.{u}} (h : X ⟶ Y) (h' : X' ⟶ Y')
+    (u' : X' ⟶ X) (v : Y' ⟶ Y) (w : u' ≫ h = h' ≫ v) :
+    pullback h' h' ⟶ pullback h h :=
+  pullback.map h' h' h h u' u' v w.symm w.symm
+
+/-- Simultaneous restriction of the two factors is open, and the diagonal factors
+through that restriction.
+Source: blueprint proof Step 7 (blueprint: lem-pur-diagonal-section-pasting).
+Proof: the map is the restriction of the open product u times u to the locus where
+the images in Y' agree. Because v is a monomorphism this is exactly the inverse
+image of W_h. Projection and diagonal equations follow from the pullback property. -/
+theorem openPairProperties {X Y X' Y' : Scheme.{u}}
+    (h : X ⟶ Y) (h' : X' ⟶ Y') (u' : X' ⟶ X) (v : Y' ⟶ Y)
+    [IsOpenImmersion u'] [IsOpenImmersion v] (w : u' ≫ h = h' ≫ v) :
+    IsOpenImmersion (openPair h h' u' v w) ∧
+    openPair h h' u' v w ≫ pullback.fst h h = pullback.fst h' h' ≫ u' ∧
+    pullback.diagonal h' ≫ openPair h h' u' v w = u' ≫ pullback.diagonal h := by
+  refine ⟨?_, ?_, ?_⟩
+  · exact Scheme.pullback_map_isOpenImmersion h' h' h h u' u' v w.symm w.symm
+  · simp [pullback.map, openPair]
+  · apply pullback.hom_ext <;> simp [pullback.map, openPair]
+
+/-- Restriction of C_h by restricting both factors and using the normalized
+exceptional comparison on their first projections.
+Source: blueprint proof Step 7 (blueprint: lem-pur-diagonal-section-pasting). -/
+def openSection (P : PurityFiniteSetting.{u})
+    [HasInvertibleExponent Λ (Spec (.of P.field.k))] {X Y X' Y' : Scheme.{u}}
+    (d : ℕ) (h : X ⟶ Y) (h' : X' ⟶ Y') (u' : X' ⟶ X) (v : Y' ⟶ Y)
+    [IsNoetherian X] [IsNoetherian Y] [IsNoetherian X'] [IsNoetherian Y']
+    [IsOpenImmersion u'] [IsOpenImmersion v]
+    [IsSeparated h] [LocallyOfFiniteType h] [QuasiCompact h]
+    [IsSeparated h'] [LocallyOfFiniteType h'] [QuasiCompact h']
+    [SmoothOfRelativeDimension d h]
+    (w : u' ≫ h = h' ≫ v) (aX : X ⟶ Spec (.of P.field.k)) :
+    (Etale.upperStar (ModuleCat.{u + 1} Λ) u').leftDerivedFunctor.obj
+      (diagonalSection Λ P h) ≅ diagonalSection Λ P h' :=
+  letI := (openPairProperties h h' u' v w).1
+  ((Etale.leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ)
+    u' (pullback.diagonal h)).app _).symm ≪≫
+  (Etale.leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ)
+    (pullback.diagonal h') (openPair h h' u' v w)
+    (u' ≫ pullback.diagonal h)
+    (openPairProperties h h' u' v w).2.2.symm).app _ ≪≫
+  (Etale.upperStar (ModuleCat.{u + 1} Λ)
+    (pullback.diagonal h')).leftDerivedFunctor.mapIso
+      (openDualizing Λ P d (pullback.fst h h) (pullback.fst h' h')
+        (openPair h h' u' v w) u'
+        (openPairProperties h h' u' v w).2.1 (pullback.fst h h ≫ aX))
+
 /-- Difference coordinates for the self-product of the first chart.
 Source: blueprint proof Step 11 (blueprint: lem-pur-diagonal-section-pasting). -/
 def differenceFirst {X Y : Scheme.{u}} (d : ℕ) (f : X ⟶ Y)
@@ -673,5 +886,411 @@ private lemma differenceFirst_etale {X Y : Scheme.{u}} (d : ℕ) (f : X ⟶ Y)
       simp only [appTop_comp_apply]
   rw [heq]
   infer_instance
+
+/-- The chart difference maps are etale, separated and finite type, and carry the
+specified sections to the zero sections. No non-Cartesian square is called Cartesian.
+Source: blueprint proof Steps 9 and 11 (blueprint: lem-pur-diagonal-section-pasting).
+Proof: G is the base change of y followed by translation. Factor F through
+R=Q times_(A^e_X) A^(d+e)_X. Its first factor is the base change of x followed
+by translation, and its second factor is the base change of G. Thus all three
+maps are etale. The schemes are affine and Noetherian, so their maps are separated
+and finite type. Projection equations follow from homOfVector; diagonal difference
+coordinates are zero. This includes empty schemes and either empty coordinate block. -/
+theorem chartGeometry {X Y Z : Scheme.{u}} (d e : ℕ) (f : X ⟶ Y) (g : Y ⟶ Z)
+    [IsAffine X] [IsAffine Y] [IsAffine Z]
+    [IsNoetherian X] [IsNoetherian Y] [IsNoetherian Z]
+    (x : X ⟶ A d Y) (y : Y ⟶ A e Z) [Etale x] [Etale y]
+    (hx : x ≫ pr d Y = f) (hy : y ≫ pr e Z = g) :
+    (Etale (differenceFirst d f x) ∧ IsSeparated (differenceFirst d f x) ∧
+      LocallyOfFiniteType (differenceFirst d f x) ∧ QuasiCompact (differenceFirst d f x)) ∧
+    (Etale (differenceSecond e f g y) ∧ IsSeparated (differenceSecond e f g y) ∧
+      LocallyOfFiniteType (differenceSecond e f g y) ∧ QuasiCompact (differenceSecond e f g y)) ∧
+    (Etale (differenceTotal d e f g x y) ∧ IsSeparated (differenceTotal d e f g x y) ∧
+      LocallyOfFiniteType (differenceTotal d e f g x y) ∧
+      QuasiCompact (differenceTotal d e f g x y)) ∧
+    differenceFirst d f x ≫ pr d X = pullback.fst f f ∧
+    pullback.diagonal f ≫ differenceFirst d f x = zero d X ∧
+    differenceSecond e f g y ≫ pr e X = pullback.fst (f ≫ g) g ∧
+    s f g ≫ differenceSecond e f g y = zero e X ∧
+    differenceTotal d e f g x y ≫ pr (d + e) X = pullback.fst (f ≫ g) (f ≫ g) ∧
+    pullback.diagonal (f ≫ g) ≫ differenceTotal d e f g x y = zero (d + e) X := by
+  have hf : LocallyOfFiniteType f := hx ▸ inferInstance
+  have hg : LocallyOfFiniteType g := hy ▸ inferInstance
+  have ha₁ : a f g ≫ pullback.fst (f ≫ g) g =
+      pullback.fst (f ≫ g) (f ≫ g) := by simp [a]
+  have ha₂ : a f g ≫ pullback.snd (f ≫ g) g =
+      pullback.snd (f ≫ g) (f ≫ g) ≫ f := by simp [a]
+  let Graw := AffineSpace.homOfVector (pullback.fst (f ≫ g) g)
+    (fun k : ULift.{u} (Fin e) ↦
+      (pullback.snd (f ≫ g) g ≫ y).appTop (AffineSpace.coord Z k))
+  let Hraw := AffineSpace.homOfVector (a f g)
+    (fun k : ULift.{u} (Fin d) ↦
+      (pullback.snd (f ≫ g) (f ≫ g) ≫ x).appTop (AffineSpace.coord Y k))
+  let H := AffineSpace.homOfVector (a f g)
+    (fun k : ULift.{u} (Fin d) ↦
+      (pullback.snd (f ≫ g) (f ≫ g) ≫ x).appTop (AffineSpace.coord Y k) -
+      (pullback.fst (f ≫ g) (f ≫ g) ≫ x).appTop (AffineSpace.coord Y k))
+  let J : A d (pullback (f ≫ g) g) ⟶ A (d + e) X :=
+    AffineSpace.homOfVector (pr d _ ≫ pullback.fst (f ≫ g) g)
+      (fun k ↦ Fin.addCases
+        (fun l ↦ AffineSpace.coord (pullback (f ≫ g) g) (ULift.up l))
+        (fun l ↦ (pr d _ ≫ differenceSecond e f g y).appTop
+          (AffineSpace.coord X (ULift.up l))) k.down)
+  have hpG : IsPullback Graw (pullback.snd (f ≫ g) g)
+      (AffineSpace.map (ULift.{u} (Fin e)) (f ≫ g)) y :=
+    chart_pullback _ _ _ _ (IsPullback.of_hasPullback (f ≫ g) g) y hy
+  have hpA : IsPullback (a f g) (pullback.snd (f ≫ g) (f ≫ g))
+      (pullback.snd (f ≫ g) g) f := by
+    have hout : IsPullback (a f g ≫ pullback.fst (f ≫ g) g)
+        (pullback.snd (f ≫ g) (f ≫ g)) (f ≫ g) (f ≫ g) := by
+      simpa only [ha₁] using IsPullback.of_hasPullback (f ≫ g) (f ≫ g)
+    exact hout.of_right ha₂ (IsPullback.of_hasPullback (f ≫ g) g)
+  have hpH : IsPullback Hraw (pullback.snd (f ≫ g) (f ≫ g))
+      (AffineSpace.map (ULift.{u} (Fin d)) (pullback.snd (f ≫ g) g)) x :=
+    chart_pullback _ _ _ _ hpA x hx
+  have htG : differenceSecond e f g y = Graw ≫ AffineSpace.translation
+      (fun k ↦ -((f ≫ y).appTop (AffineSpace.coord Z k))) := by
+    apply AffineSpace.hom_ext
+    · simp [differenceSecond, Graw]
+    · intro k
+      rw [comp_translation_coord]
+      simp only [differenceSecond, Graw, AffineSpace.homOfVector_appTop_coord,
+        AffineSpace.homOfVector_over, map_neg, sub_eq_add_neg]
+      simp only [appTop_comp_apply, Category.assoc]
+  have htH : H = Hraw ≫ AffineSpace.translation
+      (fun k ↦ -((pullback.fst (f ≫ g) g ≫ x).appTop (AffineSpace.coord Y k))) := by
+    apply AffineSpace.hom_ext
+    · simp [H, Hraw]
+    · intro k
+      rw [comp_translation_coord]
+      simp only [H, Hraw, AffineSpace.homOfVector_appTop_coord,
+        AffineSpace.homOfVector_over, map_neg, sub_eq_add_neg]
+      simp only [appTop_comp_apply, ← Category.assoc, ha₁]
+  have hJ : J ≫ q d e X = pr d _ ≫ differenceSecond e f g y := by
+    apply AffineSpace.hom_ext
+    · simp [J, q, differenceSecond]
+    · rintro ⟨k⟩
+      simp only [J, q, Scheme.Hom.comp_appTop, CommRingCat.comp_apply,
+        AffineSpace.reindex_appTop_coord, AffineSpace.homOfVector_appTop_coord,
+        Fin.addCases_right]
+  have hJfirst : J ≫ first d e X =
+      AffineSpace.map (ULift.{u} (Fin d)) (pullback.fst (f ≫ g) g) := by
+    apply AffineSpace.hom_ext
+    · simp [J, first]
+    · rintro ⟨k⟩
+      simp only [J, first, Scheme.Hom.comp_appTop, CommRingCat.comp_apply,
+        AffineSpace.reindex_appTop_coord, AffineSpace.homOfVector_appTop_coord,
+        Fin.addCases_left, AffineSpace.map_appTop_coord]
+  have hpJ : IsPullback J (pr d _) (q d e X) (differenceSecond e f g y) := by
+    have hout : IsPullback (J ≫ first d e X) (pr d _)
+        (pr d X) (differenceSecond e f g y ≫ pr e X) := by
+      simpa only [hJfirst, differenceSecond, AffineSpace.homOfVector_over] using
+        AffineSpace.isPullback_map (n := ULift.{u} (Fin d)) (pullback.fst (f ≫ g) g)
+    exact hout.of_right hJ (affineGeometry d e X).1
+  have hF : H ≫ J = differenceTotal d e f g x y := by
+    apply AffineSpace.hom_ext
+    · simp [J, H, differenceTotal, ha₁]
+    · rintro ⟨k⟩
+      refine Fin.addCases (fun l ↦ ?_) (fun l ↦ ?_) k
+      · simp only [J, H, differenceTotal, Scheme.Hom.comp_appTop,
+          CommRingCat.comp_apply, AffineSpace.homOfVector_appTop_coord,
+          Fin.addCases_left]
+      · simp only [J, differenceTotal, Scheme.Hom.comp_appTop, CommRingCat.comp_apply,
+          AffineSpace.homOfVector_appTop_coord, Fin.addCases_right]
+        rw [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop,
+          AffineSpace.homOfVector_over]
+        simp only [differenceSecond, AffineSpace.homOfVector_appTop_coord, map_sub]
+        simp only [appTop_comp_apply, ← Category.assoc, ha₁, ha₂]
+  have : Etale Graw := MorphismProperty.of_isPullback hpG.flip inferInstance
+  have : Etale Hraw := MorphismProperty.of_isPullback hpH.flip inferInstance
+  have : Etale (differenceSecond e f g y) := by
+    rw [htG]
+    have := translation_isIso (fun k ↦ -((f ≫ y).appTop (AffineSpace.coord Z k)))
+    infer_instance
+  have : Etale H := by
+    rw [htH]
+    have := translation_isIso
+      (fun k ↦ -((pullback.fst (f ≫ g) g ≫ x).appTop (AffineSpace.coord Y k)))
+    infer_instance
+  have : Etale J := MorphismProperty.of_isPullback hpJ.flip inferInstance
+  have : Etale (differenceTotal d e f g x y) := by rw [← hF]; infer_instance
+  have := differenceFirst_etale d f x hx
+  refine ⟨⟨inferInstance, inferInstance, inferInstance, inferInstance⟩,
+    ⟨inferInstance, inferInstance, inferInstance, inferInstance⟩,
+    ⟨inferInstance, inferInstance, inferInstance, inferInstance⟩,
+    AffineSpace.homOfVector_over _ _, differenceFirst_diagonal d f x,
+    AffineSpace.homOfVector_over _ _, ?_, AffineSpace.homOfVector_over _ _, ?_⟩
+  · apply AffineSpace.hom_ext
+    · simp [differenceSecond, s]
+    · intro k
+      simp only [differenceSecond, Scheme.Hom.comp_appTop, CommRingCat.comp_apply,
+        AffineSpace.homOfVector_appTop_coord, map_sub]
+      simp only [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop,
+        ← Category.assoc, s, pullback.lift_snd, pullback.lift_fst, Category.id_comp,
+        sub_self, AffineSpace.zeroSection_appTop_coord]
+  · apply AffineSpace.hom_ext
+    · simp [differenceTotal]
+    · rintro ⟨k⟩
+      refine Fin.addCases (fun l ↦ ?_) (fun l ↦ ?_) k <;>
+        simp only [differenceTotal, Scheme.Hom.comp_appTop, CommRingCat.comp_apply,
+          AffineSpace.homOfVector_appTop_coord, Fin.addCases_left, Fin.addCases_right, map_sub]
+      all_goals simp only [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop,
+        pullback.diagonal_snd_assoc, pullback.diagonal_fst_assoc, sub_self,
+        AffineSpace.zeroSection_appTop_coord]
+
+/-- The coordinate assertion, in the actual difference-coordinate identifications.
+On an affine restricted chart triple the common base is X (the U of the statement).
+Source: blueprint proof Steps 8--12 (blueprint: lem-pur-diagonal-section-pasting). -/
+def ChartEquation (P : PurityFiniteSetting.{u})
+    [HasInvertibleExponent Λ (Spec (.of P.field.k))] {X Y Z : Scheme.{u}}
+    (d e : ℕ) (f : X ⟶ Y) (g : Y ⟶ Z)
+    [IsAffine X] [IsAffine Y] [IsAffine Z]
+    [IsNoetherian X] [IsNoetherian Y] [IsNoetherian Z]
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g]
+    [SmoothOfRelativeDimension d f] [SmoothOfRelativeDimension e g]
+    (aZ : Z ⟶ Spec (.of P.field.k))
+    (x : X ⟶ A d Y) (y : Y ⟶ A e Z) [Etale x] [Etale y]
+    (hx : x ≫ pr d Y = f) (hy : y ≫ pr e Z = g) : Prop :=
+  let h := chartGeometry d e f g x y hx hy
+  letI := h.1.1
+  letI := h.1.2.1
+  letI := h.1.2.2.1
+  letI := h.1.2.2.2
+  letI := h.2.1.1
+  letI := h.2.1.2.1
+  letI := h.2.1.2.2.1
+  letI := h.2.1.2.2.2
+  letI := h.2.2.1.1
+  letI := h.2.2.1.2.1
+  letI := h.2.2.1.2.2.1
+  letI := h.2.2.1.2.2.2
+  let hgeom := geometryProperties d e f g
+  letI := hgeom.1
+  letI := hgeom.2.1
+  letI := hgeom.2.2.1
+  letI := hgeom.2.2.2.1
+  letI := hgeom.2.2.2.2
+  let c₁ := etaleSection Λ P (differenceFirst d f x) (pr d X)
+    (pullback.fst f f) (pullback.diagonal f) (zero d X)
+    h.2.2.2.1.symm h.2.2.2.2.1.symm
+  let c₂ := gammaG Λ P e f g aZ ≪≫
+    etaleSection Λ P (differenceSecond e f g y) (pr e X)
+      (pullback.fst (f ≫ g) g) (s f g) (zero e X)
+      h.2.2.2.2.2.1.symm h.2.2.2.2.2.2.1.symm
+  let c₃ := etaleSection Λ P (differenceTotal d e f g x y) (pr (d + e) X)
+    (pullback.fst (f ≫ g) (f ≫ g)) (pullback.diagonal (f ≫ g)) (zero (d + e) X)
+    h.2.2.2.2.2.2.2.1.symm h.2.2.2.2.2.2.2.2.symm
+  SameProEtaleMap Λ P ((kappa Λ P d e f g aZ).hom ≫ c₃.hom)
+    ((tensorComparison Λ P c₁ c₂).hom ≫ (nu Λ P d e X (f ≫ g ≫ aZ)).hom)
+
+/-- The canonical restriction comparison for a tensor with a pulled-back second
+factor. It is built only from the monoidal pullback and composition comparisons.
+Source: blueprint proof Step 7 (blueprint: lem-pur-diagonal-section-pasting). -/
+def tensorRestriction (P : PurityFiniteSetting.{u})
+    [HasInvertibleExponent Λ (Spec (.of P.field.k))] {X Y X' Y' : Scheme.{u}}
+    (f : X ⟶ Y) (f' : X' ⟶ Y') (u' : X' ⟶ X) (v : Y' ⟶ Y)
+    (w : u' ≫ f = f' ≫ v) (K : D Λ P X) (M : D Λ P Y) (K' : D Λ P X') (M' : D Λ P Y')
+    (e₁ : (Etale.upperStar (ModuleCat.{u + 1} Λ) u').leftDerivedFunctor.obj K ≅ K')
+    (e₂ : (Etale.upperStar (ModuleCat.{u + 1} Λ) v).leftDerivedFunctor.obj M ≅ M') :
+    (Etale.upperStar (ModuleCat.{u + 1} Λ) u').leftDerivedFunctor.obj
+      (tensor Λ P K
+        ((Etale.upperStar (ModuleCat.{u + 1} Λ) f).leftDerivedFunctor.obj M)) ≅
+      tensor Λ P K'
+        ((Etale.upperStar (ModuleCat.{u + 1} Λ) f').leftDerivedFunctor.obj M') :=
+  Etale.leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} Λ) u' _ _ ≪≫
+    tensorComparison Λ P e₁
+      (((Etale.leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) u' f).app M).symm ≪≫
+        (Etale.leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ)
+          f' v (u' ≫ f) w).app M ≪≫
+        (Etale.upperStar (ModuleCat.{u + 1} Λ) f').leftDerivedFunctor.mapIso e₂)
+
+/-- Composing compatible restriction squares gives the restriction square for gf.
+Source: blueprint proof Step 7 (blueprint: lem-pur-diagonal-section-pasting).
+Proof: reassociate u f g, substitute u f=f' v and v g=g' w, and reassociate back. -/
+theorem compositeSquare {X Y Z X' Y' Z' : Scheme.{u}}
+    (f : X ⟶ Y) (g : Y ⟶ Z) (f' : X' ⟶ Y') (g' : Y' ⟶ Z')
+    (u' : X' ⟶ X) (v : Y' ⟶ Y) (w : Z' ⟶ Z)
+    (hf : u' ≫ f = f' ≫ v) (hg : v ≫ g = g' ≫ w) :
+    u' ≫ (f ≫ g) = (f' ≫ g') ≫ w := by
+  calc
+    u' ≫ (f ≫ g) = (u' ≫ f) ≫ g := (Category.assoc _ _ _).symm
+    _ = (f' ≫ v) ≫ g := congrArg (fun k ↦ k ≫ g) hf
+    _ = f' ≫ (g' ≫ w) := by rw [Category.assoc, hg]
+    _ = (f' ≫ g') ≫ w := (Category.assoc _ _ _).symm
+
+/-- Restriction of the middle product Q by the compatible source/target opens.
+Source: blueprint proof Step 7 (blueprint: lem-pur-diagonal-section-pasting). -/
+def openMiddle {X Y Z X' Y' Z' : Scheme.{u}}
+    (f : X ⟶ Y) (g : Y ⟶ Z) (f' : X' ⟶ Y') (g' : Y' ⟶ Z')
+    (u' : X' ⟶ X) (v : Y' ⟶ Y) (w : Z' ⟶ Z)
+    (hf : u' ≫ f = f' ≫ v) (hg : v ≫ g = g' ≫ w) :
+    pullback (f' ≫ g') g' ⟶ pullback (f ≫ g) g :=
+  pullback.map (f' ≫ g') g' (f ≫ g) g u' v w
+    (compositeSquare f g f' g' u' v w hf hg).symm hg.symm
+
+/-- The open middle product respects a, b and the graph section.
+Source: blueprint proof Step 7 (blueprint: lem-pur-diagonal-section-pasting).
+Proof: openMiddle restricts both factors to opens, as for openPair. For a and b
+compare the two projections; they agree by the compatible restriction equations.
+For the graph compare its first projection, the identity, and second projection f.
+The pullback universal property then proves each equality. -/
+theorem openMiddleProperties {X Y Z X' Y' Z' : Scheme.{u}}
+    (f : X ⟶ Y) (g : Y ⟶ Z) (f' : X' ⟶ Y') (g' : Y' ⟶ Z')
+    (u' : X' ⟶ X) (v : Y' ⟶ Y) (w : Z' ⟶ Z)
+    [IsOpenImmersion u'] [IsOpenImmersion v] [IsOpenImmersion w]
+    (hf : u' ≫ f = f' ≫ v) (hg : v ≫ g = g' ≫ w) :
+    IsOpenImmersion (openMiddle f g f' g' u' v w hf hg) ∧
+    openPair (f ≫ g) (f' ≫ g') u' w
+      (compositeSquare f g f' g' u' v w hf hg) ≫ a f g =
+        a f' g' ≫ openMiddle f g f' g' u' v w hf hg ∧
+    openMiddle f g f' g' u' v w hf hg ≫ pullback.fst (f ≫ g) g =
+      pullback.fst (f' ≫ g') g' ≫ u' ∧
+    u' ≫ s f g = s f' g' ≫ openMiddle f g f' g' u' v w hf hg := by
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · exact Scheme.pullback_map_isOpenImmersion (f' ≫ g') g' (f ≫ g) g u' v w
+      (compositeSquare f g f' g' u' v w hf hg).symm hg.symm
+  · apply pullback.hom_ext <;> simp [pullback.map, openPair, openMiddle, a, Category.assoc, hf]
+  · simp [pullback.map, openMiddle]
+  · apply pullback.hom_ext <;> simp [s, openMiddle, hf]
+
+/-- Restriction comparison for the pullback of an object along a section or graph.
+Source: blueprint proof Step 7 (blueprint: lem-pur-diagonal-section-pasting). -/
+def pullbackRestriction (P : PurityFiniteSetting.{u})
+    [HasInvertibleExponent Λ (Spec (.of P.field.k))] {X Y X' Y' : Scheme.{u}}
+    (r : X ⟶ Y) (r' : X' ⟶ Y') (u' : X' ⟶ X) (v : Y' ⟶ Y)
+    (h : u' ≫ r = r' ≫ v) (K : D Λ P Y) (K' : D Λ P Y')
+    (c : (Etale.upperStar (ModuleCat.{u + 1} Λ) v).leftDerivedFunctor.obj K ≅ K') :
+    (Etale.upperStar (ModuleCat.{u + 1} Λ) u').leftDerivedFunctor.obj
+      ((Etale.upperStar (ModuleCat.{u + 1} Λ) r).leftDerivedFunctor.obj K) ≅
+    (Etale.upperStar (ModuleCat.{u + 1} Λ) r').leftDerivedFunctor.obj K' :=
+  ((Etale.leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) u' r).app K).symm ≪≫
+    (Etale.leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ)
+      r' v (u' ≫ r) h).app K ≪≫
+    (Etale.upperStar (ModuleCat.{u + 1} Λ) r').leftDerivedFunctor.mapIso c
+
+/-- Naturality under arbitrary compatible source and target open restrictions.
+The first three equations concern alpha_f, alpha_g, alpha_gf, the fourth sigma,
+the fifth kappa, and the last two gamma_f and gamma_g. In particular source
+opens are not treated as Cartesian.
+Source: blueprint proof Step 7 (blueprint: lem-pur-diagonal-section-pasting). -/
+def OpenEquation (P : PurityFiniteSetting.{u})
+    [HasInvertibleExponent Λ (Spec (.of P.field.k))] {X Y Z X' Y' Z' : Scheme.{u}}
+    (d e : ℕ) (f : X ⟶ Y) (g : Y ⟶ Z) (f' : X' ⟶ Y') (g' : Y' ⟶ Z')
+    (u' : X' ⟶ X) (v : Y' ⟶ Y) (w : Z' ⟶ Z)
+    [IsNoetherian X] [IsNoetherian Y] [IsNoetherian Z]
+    [IsNoetherian X'] [IsNoetherian Y'] [IsNoetherian Z']
+    [IsOpenImmersion u'] [IsOpenImmersion v] [IsOpenImmersion w]
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g]
+    [IsSeparated f'] [LocallyOfFiniteType f'] [QuasiCompact f']
+    [IsSeparated g'] [LocallyOfFiniteType g'] [QuasiCompact g']
+    [SmoothOfRelativeDimension d f] [SmoothOfRelativeDimension e g]
+    [SmoothOfRelativeDimension d f'] [SmoothOfRelativeDimension e g']
+    (hf : u' ≫ f = f' ≫ v) (hg : v ≫ g = g' ≫ w)
+    (aZ : Z ⟶ Spec (.of P.field.k)) : Prop :=
+  let hgeom := geometryProperties d e f g
+  letI := hgeom.1
+  letI := hgeom.2.1
+  letI := hgeom.2.2.1
+  letI := hgeom.2.2.2.1
+  letI := hgeom.2.2.2.2
+  let hgeom' := geometryProperties d e f' g'
+  letI := hgeom'.1
+  letI := hgeom'.2.1
+  letI := hgeom'.2.2.1
+  letI := hgeom'.2.2.2.1
+  letI := hgeom'.2.2.2.2
+  let hfg := compositeSquare f g f' g' u' v w hf hg
+  let S₁ := openSection Λ P d f f' u' v hf (f ≫ g ≫ aZ)
+  let S₂ := openSection Λ P e g g' v w hg (g ≫ aZ)
+  let S₃ := openSection Λ P (d + e) (f ≫ g) (f' ≫ g') u' w hfg (f ≫ g ≫ aZ)
+  let O₁ := openDualizing Λ P d f f' u' v hf (f ≫ g ≫ aZ)
+  let O₂ := openDualizing Λ P e g g' v w hg (g ≫ aZ)
+  let O₃ := openDualizing Λ P (d + e) (f ≫ g) (f' ≫ g') u' w hfg (f ≫ g ≫ aZ)
+  let R := openMiddle f g f' g' u' v w hf hg
+  let T := openPair (f ≫ g) (f' ≫ g') u' w hfg
+  let hR := openMiddleProperties f g f' g' u' v w hf hg
+  letI := hR.1
+  let hT := openPairProperties (f ≫ g) (f' ≫ g') u' w hfg
+  letI := hT.1
+  let Oa := openDualizing Λ P d (a f g) (a f' g') T R hR.2.1
+    (pullback.fst (f ≫ g) (f ≫ g) ≫ f ≫ g ≫ aZ)
+  let Ob := openDualizing Λ P e (pullback.fst (f ≫ g) g)
+    (pullback.fst (f' ≫ g') g') R u' hR.2.2.1
+    (pullback.fst (f ≫ g) g ≫ f ≫ g ≫ aZ)
+  let Ta := pullbackRestriction Λ P (pullback.diagonal (f ≫ g))
+    (pullback.diagonal (f' ≫ g')) u' T hT.2.2.symm _ _ Oa
+  let Tb := pullbackRestriction Λ P (s f g) (s f' g') u' R hR.2.2.2 _ _ Ob
+  let Sg := pullbackRestriction Λ P f f' u' v hf _ _ S₂
+  let U := (Etale.upperStar (ModuleCat.{u + 1} Λ) u').leftDerivedFunctor
+  let V := (Etale.upperStar (ModuleCat.{u + 1} Λ) v).leftDerivedFunctor
+  SameProEtaleMap Λ P (U.map (alpha Λ P d f (f ≫ g ≫ aZ)).hom ≫ O₁.hom)
+      (S₁.hom ≫ (alpha Λ P d f' (u' ≫ f ≫ g ≫ aZ)).hom) ∧
+  SameProEtaleMap Λ P (V.map (alpha Λ P e g (g ≫ aZ)).hom ≫ O₂.hom)
+      (S₂.hom ≫ (alpha Λ P e g' (v ≫ g ≫ aZ)).hom) ∧
+  SameProEtaleMap Λ P (U.map (alpha Λ P (d + e) (f ≫ g) (f ≫ g ≫ aZ)).hom ≫ O₃.hom)
+      (S₃.hom ≫ (alpha Λ P (d + e) (f' ≫ g') (u' ≫ f ≫ g ≫ aZ)).hom) ∧
+  SameProEtaleMap Λ P (U.map (sigma Λ P d f g (f ≫ g ≫ aZ)).hom ≫ O₃.hom)
+      ((tensorRestriction Λ P f f' u' v hf _ _ _ _ O₁ O₂).hom ≫
+        (sigma Λ P d f' g' (u' ≫ f ≫ g ≫ aZ)).hom) ∧
+  SameProEtaleMap Λ P (U.map (kappa Λ P d e f g aZ).hom ≫ S₃.hom)
+      ((tensorRestriction Λ P f f' u' v hf _ _ _ _ S₁ S₂).hom ≫
+        (kappa Λ P d e f' g' (w ≫ aZ)).hom) ∧
+  SameProEtaleMap Λ P (U.map (gammaF Λ P d f g aZ).hom ≫ Ta.hom)
+      (S₁.hom ≫ (gammaF Λ P d f' g' (w ≫ aZ)).hom) ∧
+  SameProEtaleMap Λ P (U.map (gammaG Λ P e f g aZ).hom ≫ Tb.hom)
+      (Sg.hom ≫ (gammaG Λ P e f' g' (w ≫ aZ)).hom)
+
+/-- All clauses of orientation-free diagonal section pasting, including restriction
+and the conditional coordinate comparison on each compatible affine open chart.
+The repeated finiteness, smoothness and Noetherian instances for restrictions are
+consequences of the compatible open squares, recorded explicitly to bind every object.
+Source: blueprint lem-pur-diagonal-section-pasting
+(blueprint: lem-pur-diagonal-section-pasting). -/
+def ModelStatement (P : PurityFiniteSetting.{u})
+    [HasInvertibleExponent Λ (Spec (.of P.field.k))] {X Y Z : Scheme.{u}}
+    (d e : ℕ) (f : X ⟶ Y) (g : Y ⟶ Z)
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g]
+    [SmoothOfRelativeDimension d f] [SmoothOfRelativeDimension e g]
+    (aZ : Z ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aZ] [QuasiCompact aZ] : Prop :=
+  letI := LocallyOfFiniteType.isLocallyNoetherian aZ
+  letI := QuasiCompact.compactSpace_of_compactSpace aZ
+  letI : IsNoetherian Z := ⟨⟩
+  letI := LocallyOfFiniteType.isLocallyNoetherian g
+  letI := QuasiCompact.compactSpace_of_compactSpace g
+  letI : IsNoetherian Y := ⟨⟩
+  letI := LocallyOfFiniteType.isLocallyNoetherian f
+  letI := QuasiCompact.compactSpace_of_compactSpace f
+  letI : IsNoetherian X := ⟨⟩
+  Equation Λ P d e f g aZ ∧
+    ∀ {X' Y' Z' : Scheme.{u}} (f' : X' ⟶ Y') (g' : Y' ⟶ Z')
+      (u' : X' ⟶ X) (v : Y' ⟶ Y) (w : Z' ⟶ Z)
+      [IsNoetherian X'] [IsNoetherian Y'] [IsNoetherian Z']
+      [IsOpenImmersion u'] [IsOpenImmersion v] [IsOpenImmersion w]
+      [IsSeparated f'] [LocallyOfFiniteType f'] [QuasiCompact f']
+      [IsSeparated g'] [LocallyOfFiniteType g'] [QuasiCompact g']
+      [SmoothOfRelativeDimension d f'] [SmoothOfRelativeDimension e g']
+      (hf : u' ≫ f = f' ≫ v) (hg : v ≫ g = g' ≫ w),
+      OpenEquation Λ P d e f g f' g' u' v w hf hg aZ ∧
+      (∀ [IsAffine X'] [IsAffine Y'] [IsAffine Z']
+        (x : X' ⟶ A d Y') (y : Y' ⟶ A e Z') [Etale x] [Etale y]
+        (hx : x ≫ pr d Y' = f') (hy : y ≫ pr e Z' = g'),
+        ChartEquation Λ P d e f' g' (w ≫ aZ) x y hx hy)
+
+/-- The statement in the prescribed coefficient setting. Internal formulas use a
+coefficient ring variable; this definition specializes their proposition to the actual
+coefficient quotient and the source-implied invertible exponent on the fixed field.
+Source: blueprint all clauses of diagonal section pasting
+(blueprint: def-pur-diagonal-section-pasting-data). -/
+def Statement (P : PurityFiniteSetting.{u}) {X Y Z : Scheme.{u}}
+    (d e : ℕ) (f : X ⟶ Y) (g : Y ⟶ Z)
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g]
+    [SmoothOfRelativeDimension d f] [SmoothOfRelativeDimension e g]
+    (aZ : Z ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aZ] [QuasiCompact aZ] : Prop :=
+  letI := P.comparedExponent (𝟙 (Spec (.of P.field.k)))
+  ModelStatement P.Coefficient P d e f g aZ
 
 end WeilConjectures.PurityFiniteSetting.DiagonalPasting

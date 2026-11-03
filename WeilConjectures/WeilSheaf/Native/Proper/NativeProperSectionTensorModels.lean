@@ -10,6 +10,7 @@ import WeilConjectures.WeilSheaf.Native.NativeTwoSidedKFlatRepresentatives
 import WeilConjectures.WeilSheaf.Native.Proper.NativeProperSectionTensorDescent
 import WeilConjectures.WeilSheaf.Native.Proper.NativeProperKFlatPullTensorSquare
 import WeilConjectures.WeilSheaf.Native.NativePullSheafTensor
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SquareComparisonCoherence
 
 /-! # Tensor comparison for normalized native section adjunctions
 
@@ -247,3 +248,33 @@ theorem native_proper_section_tensor_models
       k₀ l p R S O A B C J hR hS rho hrho TZ TY)
 
 end AlgebraicGeometry.ProEtaleWeilSheaf
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+/-- The canonical pullback tensor comparisons commute with the specified square
+comparison on the underlying condensed derived categories. For a Frobenius square,
+this is the tensor compatibility used to put Weil structures on pullback and on the
+projection composite.
+
+Source: latest blueprint, lem-fix-weil-operations.proof.md, paragraph 2 and final
+paragraph (blueprint: lem-sf-condensed-proper-section-tensor-models).
+Proof: the pullback tensorators are the existing signed K-flat total comparisons.
+Their compatibility with composition identifies each boundary with the tensorator
+for the composite pullback. Equality transport across the commuting square respects
+tensor. Cancel the two inverse compositors. This gives the square on all derived
+objects, including zero objects and empty schemes, without section realizations. -/
+theorem native_proper_section_tensor_models
+    {X Y X' Y' : Scheme.{u}} {p : X ⟶ Y} {g : Y' ⟶ Y}
+    {p' : X' ⟶ Y'} {g' : X' ⟶ X} (sq : CommSq g' p' p g)
+    (M N : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))) :
+    L((p')^*⟦Λ⟧).map (((leftDerivedUpperStarTensor Λ g).app M).app N) ≫
+        ((leftDerivedUpperStarTensor Λ p').app _).app _ ≫
+        ((pullbackSquareComparison Λ sq).hom.app M ⊗ₘ
+          (pullbackSquareComparison Λ sq).hom.app N) =
+      (pullbackSquareComparison Λ sq).hom.app (M ⊗ N) ≫
+        L((g')^*⟦Λ⟧).map (((leftDerivedUpperStarTensor Λ p).app M).app N) ≫
+        ((leftDerivedUpperStarTensor Λ g').app _).app _ := by
+  exact pullbackSquareComparison_tensor Λ sq M N
+
+end AlgebraicGeometry.ProEtale.CondensedRing

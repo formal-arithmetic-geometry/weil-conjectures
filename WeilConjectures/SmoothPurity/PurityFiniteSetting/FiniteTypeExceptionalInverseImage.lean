@@ -100,6 +100,22 @@ theorem noetherian (P : PurityFiniteSetting.{u}) {T : Scheme.{u}}
   have : CompactSpace T := QuasiCompact.compactSpace_of_compactSpace a
   exact ⟨⟩
 
+/-- The coefficient tensor unit is concentrated in degree zero and hence bounded below.
+Source: blueprint def-weil-exceptional-inverse-image, constant coefficient object
+(blueprint: def-weil-exceptional-inverse-image).
+Proof: the derived tensor unit is the constant coefficient sheaf in degree zero;
+its negative cohomology vanishes. -/
+theorem unitPlus (P : PurityFiniteSetting.{u}) (T : Scheme.{u}) :
+    _root_.DerivedCategory.TStructure.t.plus
+      (𝟙_ (_root_.DerivedCategory
+        (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} P.Coefficient)))) := by
+  refine ⟨0, ?_⟩
+  change _root_.DerivedCategory.TStructure.t.IsGE
+    (_root_.DerivedCategory.Q.obj
+      ((CochainComplex.singleFunctor
+        (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} P.Coefficient)) 0).obj (𝟙_ _))) 0
+  infer_instance
+
 /-- The actual finite-level constructible exceptional functor, with its required
 bounded-below interface supplied from the finite-type field setting.
 Source: blueprint def-weil-exceptional-inverse-image, finite-level displayed definition

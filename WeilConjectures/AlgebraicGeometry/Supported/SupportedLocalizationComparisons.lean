@@ -160,6 +160,24 @@ noncomputable def supportTensorFirstSquareIso
     supportDerivedTensorIso E Q (supportPullbackSquareIso E h p p' a hp K)
       (supportPullbackProjectionIso E h q q' hq L)
 
+/-- Tensor the two projection-square comparisons for restriction in the second factor.
+Source: Tag 0F1E (blueprint: def-pur-supported-localization-comparisons). -/
+noncomputable def supportTensorSecondSquareIso
+    {P Q X Y Y' : Scheme.{u}} (h : Q ⟶ P) (p : P ⟶ X) (q : P ⟶ Y)
+    (p' : Q ⟶ X) (q' : Q ⟶ Y') (a : Y' ⟶ Y)
+    (hp : h ≫ p = p') (hq : h ≫ q = q' ≫ a)
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology E))
+    (L : DerivedCategory (Sheaf Y.smallEtaleTopology E)) :
+    (upperStar E h).mapDerivedCategory.obj
+        (((derivedTensor E P).obj ((upperStar E p).leftDerivedFunctor.obj K)).obj
+          ((upperStar E q).leftDerivedFunctor.obj L)) ≅
+      ((derivedTensor E Q).obj ((upperStar E p').leftDerivedFunctor.obj K)).obj
+        ((upperStar E q').leftDerivedFunctor.obj (((upperStar E a).mapDerivedCategory).obj L)) :=
+  supportExactPullbackTensorIso E h
+      ((upperStar E p).leftDerivedFunctor.obj K) ((upperStar E q).leftDerivedFunctor.obj L) ≪≫
+    supportDerivedTensorIso E Q (supportPullbackProjectionIso E h p p' hp K)
+      (supportPullbackSquareIso E h q q' a hq L)
+
 /-- Canonical exterior-product transport for a projection square with variable schemes.
 Its construction composes the canonical tensor and pullback comparisons before any
 open subscheme is substituted for the variable ambient scheme.
@@ -179,6 +197,26 @@ noncomputable def supportExternalFirstSquareIso
     (supportTensorFirstSquareIso E h (pullback.fst f g) (pullback.snd f g)
       (pullback.fst f' g) (pullback.snd f' g) a hp hq K L)
     (supportedExternalProductIso E f' g ((upperStar E a).mapDerivedCategory.obj K) L)
+
+/-- Canonical exterior-product transport for a projection square with variable schemes.
+Its construction composes the canonical tensor and pullback comparisons before any
+open subscheme is substituted for the variable ambient scheme.
+Source: Tag 0F1E (blueprint: def-pur-supported-localization-comparisons). -/
+noncomputable def supportExternalSecondSquareIso
+    {S X Y Y' : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S)
+    (g' : Y' ⟶ S) (a : Y' ⟶ Y)
+    (h : pullback f g' ⟶ pullback f g)
+    (hp : h ≫ pullback.fst f g = pullback.fst f g')
+    (hq : h ≫ pullback.snd f g = pullback.snd f g' ≫ a)
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology E))
+    (L : DerivedCategory (Sheaf Y.smallEtaleTopology E)) :
+    (upperStar E h).mapDerivedCategory.obj (externalProduct E f g K L) ≅
+      externalProduct E f g' K ((upperStar E a).mapDerivedCategory.obj L) :=
+  supportIsoTransport (upperStar E h).mapDerivedCategory
+    (supportedExternalProductIso E f g K L)
+    (supportTensorSecondSquareIso E h (pullback.fst f g) (pullback.snd f g)
+      (pullback.fst f g') (pullback.snd f g') a hp hq K L)
+    (supportedExternalProductIso E f g' K ((upperStar E a).mapDerivedCategory.obj L))
 
 end
 
@@ -275,6 +313,17 @@ private theorem productComplement {S X Y B D : Scheme.{u}}
   apply TopologicalSpace.Opens.ext
   simp [Scheme.Hom.coe_openComplement, supportedProductImmersion,
     Scheme.Pullback.range_map, Set.compl_inter, Set.preimage_compl]
+
+private theorem intersectionComplement {T B C : Scheme.{u}}
+    (b : B ⟶ T) (c : C ⟶ T) [IsClosedImmersion b] [IsClosedImmersion c] :
+    (supportIntersection b c).openComplement = b.openComplement ⊔ c.openComplement := by
+  apply TopologicalSpace.Opens.ext
+  change (Set.range (pullback.fst b c ≫ b))ᶜ = (Set.range b)ᶜ ∪ (Set.range c)ᶜ
+  rw [Scheme.Pullback.range_fst_comp, Set.compl_inter]
+
+private theorem identityComplement (T : Scheme.{u}) : (𝟙 T : T ⟶ T).openComplement = ⊥ := by
+  apply TopologicalSpace.Opens.ext
+  simp
 
 /-- Complement identity for the product support after open base change.
 Source: Tag 09XP (blueprint: def-pur-supported-localization-comparisons).
@@ -396,6 +445,21 @@ noncomputable def supportedFirstLocalizationThirdIso (A : Type (u + 1)) [CommRin
       c.openComplement.ι).mapDerivedCategory.obj K) L)
     (supportedFirstExternalOpenIso (ModuleCat.{u + 1} A) f g c.openComplement K L)
 
+/-- Intersection of supports commutes with the indicated product support.
+Source: Tag 09XP, affine support calculation
+(blueprint: def-pur-supported-localization-comparisons).
+Proof: both closed complements are the complement of the closed subset cut out by
+the sum of the three extended support ideals on each affine product chart. -/
+theorem supportedFirstIntersection_complement {S X Y B C D : Scheme.{u}}
+    (f : X ⟶ S) (g : Y ⟶ S) (b : B ⟶ X) (c : C ⟶ X) (d : D ⟶ Y)
+    [IsClosedImmersion b] [IsClosedImmersion c] [IsClosedImmersion d] :
+    (supportedProductImmersion f g (supportIntersection b c) d).openComplement =
+      (supportIntersection (supportedProductImmersion f g b d) (supportedProductImmersion f g c
+      (𝟙 Y))).openComplement := by
+  simp [productComplement, intersectionComplement, identityComplement,
+    Scheme.Hom.preimage_sup,
+    sup_assoc, sup_left_comm, sup_comm]
+
 /-- The product map after restricting the Second ambient scheme.
 Source: Tag 0F1E (blueprint: def-pur-supported-localization-comparisons). -/
 noncomputable def supportedSecondOpenMap {S X Y : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S)
@@ -429,6 +493,153 @@ theorem supportedSecondOpenMap_open {S X Y : Scheme.{u}} (f : X ⟶ S) (g : Y �
     (V : Y.Opens) : IsOpenImmersion (supportedSecondOpenMap f g V) := by
   unfold supportedSecondOpenMap
   infer_instance
+
+/-- The canonical external-product comparison for the indicated open product.
+Source: Tag 0F1E (blueprint: def-pur-supported-localization-comparisons). -/
+noncomputable def supportedSecondExternalOpenIso
+    {S X Y : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S) (V : Y.Opens)
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology E))
+    (L : DerivedCategory (Sheaf Y.smallEtaleTopology E)) :
+    (upperStar E (supportedSecondOpenMap f g V)).mapDerivedCategory.obj
+        (externalProduct E f g K L) ≅
+      externalProduct E f (V.ι ≫ g) K ((upperStar E V.ι).mapDerivedCategory.obj L) :=
+  supportExternalSecondSquareIso E f g (V.ι ≫ g) V.ι (supportedSecondOpenMap f g V)
+    (supportedSecondOpenMap_fst f g V) (supportedSecondOpenMap_snd f g V) K L
+
+/-- Complement identity for the product support after open base change.
+Source: Tag 09XP (blueprint: def-pur-supported-localization-comparisons).
+Proof: on affine charts the product support is defined by the sum of the extended
+support ideals. Pulling back to the indicated open restricts those same ideals. -/
+theorem supportedSecondOpenSupport_complement {S X Y B D : Scheme.{u}}
+    (f : X ⟶ S) (g : Y ⟶ S) (b : B ⟶ X) (d : D ⟶ Y)
+    [IsClosedImmersion b] [IsClosedImmersion d] (V : Y.Opens) :
+    (supportedProductImmersion f (V.ι ≫ g) b (supportOnOpen d V)).openComplement =
+      supportedSecondOpenMap f g V ⁻¹ᵁ (supportedProductImmersion f g b d).openComplement := by
+  simp only [productComplement, supportOnOpen_complement, Scheme.Hom.preimage_sup,
+    ← Scheme.Hom.comp_preimage, supportedSecondOpenMap_fst, supportedSecondOpenMap_snd]
+
+/-- Restriction of supported sections on the external product, with its canonical
+external-product pullback comparison. Source: Tags 09XP and 0F1E
+(blueprint: def-pur-supported-localization-comparisons). -/
+noncomputable def supportedSecondExternalRestriction (A : Type (u + 1)) [CommRing A]
+    {S X Y B D : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S) (b : B ⟶ X) (d : D ⟶ Y)
+    [IsClosedImmersion b] [IsClosedImmersion d] (V : Y.Opens)
+    (K : DerivedCategoryModule A X) (L : DerivedCategoryModule A Y) :
+    (supportedSectionsDerived A (supportedProductImmersion f g b d)).obj
+        (externalProduct (ModuleCat.{u + 1} A) f g K L) ⟶
+      (supportedSectionsDerived A (supportedProductImmersion f (V.ι ≫ g) b (supportOnOpen d V))).obj
+        (externalProduct (ModuleCat.{u + 1} A) f (V.ι ≫ g) K ((upperStar
+      (ModuleCat.{u + 1} A) V.ι).mapDerivedCategory.obj
+          L)) :=
+  supportedRestrictionWithComparison A (supportedSecondOpenMap f g V)
+    (supportedProductImmersion f g b d) (supportedProductImmersion f (V.ι ≫ g) b (supportOnOpen d
+      V))
+    (supportedSecondOpenSupport_complement f g b d V)
+    (externalProduct (ModuleCat.{u + 1} A) f g K L) (externalProduct (ModuleCat.{u + 1} A) f (V.ι
+      ≫ g) K ((upperStar (ModuleCat.{u + 1} A) V.ι).mapDerivedCategory.obj L))
+    (supportedSecondExternalOpenIso (ModuleCat.{u + 1} A) f g V K L)
+
+/-- The actual open-product identification is uniquely specified over the product.
+Source: Tag 09XP, affine support identification
+(blueprint: def-pur-supported-localization-comparisons).
+Proof: the inverse image of the closed cut support has open complement the indicated
+open product. The universal property of the open subscheme gives the unique isomorphism. -/
+theorem exists_unique_supportedSecondProductComplementIso {S X Y C : Scheme.{u}}
+    (f : X ⟶ S) (g : Y ⟶ S) (c : C ⟶ Y) [IsClosedImmersion c] :
+    ∃! e : pullback f (c.openComplement.ι ≫ g) ≅ (supportedProductImmersion f g (𝟙 X)
+      c).openComplement,
+      e.hom ≫ (supportedProductImmersion f g (𝟙 X) c).openComplement.ι = supportedSecondOpenMap
+        f g c.openComplement := by
+  let h := supportedSecondOpenMap f g c.openComplement
+  let U := (supportedProductImmersion f g (𝟙 X) c).openComplement
+  have hr : Set.range h = Set.range U.ι := by
+    rw [Scheme.Opens.range_ι]
+    simp [h, U, supportedSecondOpenMap, supportedProductImmersion,
+      Scheme.Pullback.range_map, Scheme.Hom.coe_openComplement, Set.preimage_compl]
+  refine ⟨IsOpenImmersion.isoOfRangeEq h U.ι hr,
+    IsOpenImmersion.isoOfRangeEq_hom_fac h U.ι hr, ?_⟩
+  intro e he
+  apply Iso.ext
+  apply (cancel_mono U.ι).mp
+  exact he.trans (IsOpenImmersion.isoOfRangeEq_hom_fac h U.ι hr).symm
+
+/-- The uniquely specified identification with the open product.
+Source: Tag 09XP (blueprint: def-pur-supported-localization-comparisons). -/
+noncomputable def supportedSecondProductComplementIso {S X Y C : Scheme.{u}}
+    (f : X ⟶ S) (g : Y ⟶ S) (c : C ⟶ Y) [IsClosedImmersion c] :
+    pullback f (c.openComplement.ι ≫ g) ≅ (supportedProductImmersion f g (𝟙 X) c).openComplement :=
+  (exists_unique_supportedSecondProductComplementIso f g c).choose
+
+/-- The product-complement isomorphism lies over the original product.
+Source: Tag 09XP (blueprint: def-pur-supported-localization-comparisons).
+Proof: this is the normalization of the unique open-subscheme isomorphism. -/
+theorem supportedSecondProductComplementIso_over {S X Y C : Scheme.{u}}
+    (f : X ⟶ S) (g : Y ⟶ S) (c : C ⟶ Y) [IsClosedImmersion c] :
+    (supportedSecondProductComplementIso f g c).hom ≫ (supportedProductImmersion f g (𝟙 X)
+      c).openComplement.ι =
+      supportedSecondOpenMap f g c.openComplement := by
+  exact (exists_unique_supportedSecondProductComplementIso f g c).choose_spec.1
+
+/-- Identification of the restricted product support under that open-product isomorphism.
+Source: Tag 09XP (blueprint: def-pur-supported-localization-comparisons).
+Proof: both complements are obtained by restricting the complement of B times D to
+the product open. Apply the complement identity for base change and the over equality. -/
+theorem supportedSecondProductComplement_support {S X Y B C D : Scheme.{u}}
+    (f : X ⟶ S) (g : Y ⟶ S) (b : B ⟶ X) (c : C ⟶ Y) (d : D ⟶ Y)
+    [IsClosedImmersion b] [IsClosedImmersion c] [IsClosedImmersion d] :
+    (supportedProductImmersion f (c.openComplement.ι ≫ g) b (supportOnOpen d
+      c.openComplement)).openComplement =
+      (supportedSecondProductComplementIso f g c).hom ⁻¹ᵁ
+        (supportOnOpen (supportedProductImmersion f g b d) (supportedProductImmersion f g (𝟙 X)
+          c).openComplement).openComplement := by
+  rw [supportOnOpen_complement, ← Scheme.Hom.comp_preimage,
+    supportedSecondProductComplementIso_over, supportedSecondOpenSupport_complement]
+
+/-- The third target term is identified with supported sections on the actual open
+product, using the canonical scheme, support and external-product comparisons.
+Source: Tags 09XP and 0F1E (blueprint: def-pur-supported-localization-comparisons). -/
+noncomputable def supportedSecondLocalizationThirdIso (A : Type (u + 1)) [CommRing A]
+    {S X Y B C D : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S)
+    (b : B ⟶ X) (c : C ⟶ Y) (d : D ⟶ Y)
+    [IsClosedImmersion b] [IsClosedImmersion c] [IsClosedImmersion d]
+    (K : DerivedCategoryModule A X) (L : DerivedCategoryModule A Y) :
+    (supportedSectionsDerived A
+        (supportOnOpen (supportedProductImmersion f g b d) (supportedProductImmersion f g (𝟙 X)
+          c).openComplement)).obj
+        ((upperStar (ModuleCat.{u + 1} A) (supportedProductImmersion f g (𝟙 X)
+      c).openComplement.ι).mapDerivedCategory.obj
+          (externalProduct (ModuleCat.{u + 1} A) f g K L)) ≅
+      (supportedSectionsDerived A (supportedProductImmersion f (c.openComplement.ι ≫ g) b
+        (supportOnOpen d c.openComplement))).obj
+        (externalProduct (ModuleCat.{u + 1} A) f (c.openComplement.ι ≫ g) K
+          ((upperStar (ModuleCat.{u + 1} A) c.openComplement.ι).mapDerivedCategory.obj L)) :=
+  supportedAmbientComparison A (supportedSecondProductComplementIso f g c)
+    (supportOnOpen (supportedProductImmersion f g b d) (supportedProductImmersion f g (𝟙 X)
+      c).openComplement)
+    (supportedProductImmersion f (c.openComplement.ι ≫ g) b (supportOnOpen d c.openComplement))
+    (supportedSecondProductComplement_support f g b c d)
+    (supportedProductImmersion f g (𝟙 X) c).openComplement.ι (supportedSecondOpenMap f g
+      c.openComplement)
+    (supportedSecondProductComplementIso_over f g c).symm
+    (externalProduct (ModuleCat.{u + 1} A) f g K L) (externalProduct (ModuleCat.{u + 1} A) f
+      (c.openComplement.ι ≫ g) K ((upperStar (ModuleCat.{u + 1} A)
+      c.openComplement.ι).mapDerivedCategory.obj L))
+    (supportedSecondExternalOpenIso (ModuleCat.{u + 1} A) f g c.openComplement K L)
+
+/-- Intersection of supports commutes with the indicated product support.
+Source: Tag 09XP, affine support calculation
+(blueprint: def-pur-supported-localization-comparisons).
+Proof: both closed complements are the complement of the closed subset cut out by
+the sum of the three extended support ideals on each affine product chart. -/
+theorem supportedSecondIntersection_complement {S X Y B C D : Scheme.{u}}
+    (f : X ⟶ S) (g : Y ⟶ S) (b : B ⟶ X) (c : C ⟶ Y) (d : D ⟶ Y)
+    [IsClosedImmersion b] [IsClosedImmersion c] [IsClosedImmersion d] :
+    (supportedProductImmersion f g b (supportIntersection d c)).openComplement =
+      (supportIntersection (supportedProductImmersion f g b d) (supportedProductImmersion f g (𝟙
+      X) c)).openComplement := by
+  simp [productComplement, intersectionComplement, identityComplement,
+    Scheme.Hom.preimage_sup,
+    sup_left_comm, sup_comm]
 
 section
 

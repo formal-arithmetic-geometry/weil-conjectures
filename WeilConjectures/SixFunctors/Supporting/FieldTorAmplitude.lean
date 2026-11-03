@@ -35,6 +35,7 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 import WeilConjectures.Algebra.Homology.SmoothPurity.ConstantFieldTensorCohomology
+public import WeilConjectures.SixFunctors.OrdinaryFieldRealization.Condensed.FieldStageCondensedRealization
 
 /-! # Finite Tor amplitude at condensed field coefficients
 
@@ -139,6 +140,85 @@ theorem bounded_field_tor (Y : Scheme.{u}) (A : Type u) [Field A]
   let t := CochainComplex.mapBifunctorSingle₂Iso (curriedTensor C) M P
   exact (ht.of_iso ((HomologicalComplex.homologyFunctor _ _ i).mapIso t)).of_iso
     ((DerivedCategory.homologyFunctorFactors C i).app _)
+
+/-- Bounded constructible complexes over the condensed field `E` or the
+finite-subextension-valued condensed algebraic closure have Tor amplitude in their
+cohomological interval. Consequently every such object has a single finite Tor interval
+for all degree-zero module sheaves, and `Dctf = Dbc` as full subcategories of the same
+ordinary derived category.
+
+The hypotheses on `Y` hold for every standing scheme: finite type over a field gives
+quasi-compactness and local Noetherianity, and separatedness gives quasi-separatedness.
+The statement is also valid for every Noetherian qcqs scheme, without a base field or a
+characteristic restriction.
+
+Source: blueprint latest, sec-proetale-coefficients/sk-prop-integral-criterion,
+`lem-integral-ctf-equals-bc`, clause (2), Local models, Strata and Complexes paragraphs.
+(blueprint: lem-weil-field-tor-amplitude).
+
+Proof: compare the stratified locally finitely presented constructibility predicate with
+finite constant local models on the Noetherian scheme. The condensed ambient realization
+`OrdinaryFieldRealization.Condensed.realization_torAmplitude` applies the field clause of
+`lem-integral-ctf-equals-bc` in precisely the same ordinary derived category and interval.
+Boundedness supplies ordered endpoints independently of a tensor test module. Thus every
+bounded constructible object has finite Tor amplitude. The reverse inclusion is the
+definition of the intersection; morphisms are the ambient derived morphisms. -/
+theorem field_tor_amplitude
+    (ℓ : ℕ) [Fact ℓ.Prime]
+    (Y : Scheme.{u}) [CompactSpace Y] [QuasiSeparatedSpace Y] [IsLocallyNoetherian Y]
+    (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]
+    (hΛ : (∃ E : PadicAlgCl.FiniteIntermediateField ℓ,
+        Λ = Mon.mk (Profinite.continuousMapRingObj E)) ∨
+      Λ = Mon.mk (Profinite.padicAlgClRingObj ℓ)) :
+    (∀ (K : DerivedCategory
+        (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ.X Y)))
+      (a b : ℤ), a ≤ b → boundedConstructible (condensedRingObj Λ.X Y) K →
+      DerivedCategory.homologyConcentratedIn a b K →
+        DerivedCategory.torAmplitudeIn _ a b K) ∧
+    (∀ K, boundedConstructible (condensedRingObj Λ.X Y) K →
+      ∃ a b : ℤ, a ≤ b ∧ DerivedCategory.torAmplitudeIn _ a b K) ∧
+    (boundedConstructible (condensedRingObj Λ.X Y) ⊓
+      DerivedCategory.finiteTorAmplitude _) = boundedConstructible (condensedRingObj Λ.X Y) := by
+  have hcert : CondensedRing.IsEllAdicCoefficient ℓ Λ.X inferInstance := by
+    rcases hΛ with ⟨E, rfl⟩ | rfl
+    · let := PadicAlgCl.normedFieldOfAlgebra ℓ E
+      exact .continuous E
+    · exact .algebraicClosure
+  have hfield :
+      Nonempty (Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℚ_[ℓ])) ∨
+      (∃ E : PadicAlgCl.FiniteIntermediateField ℓ,
+        Nonempty (Λ ≅ Mon.mk (Profinite.continuousMapRingObj E))) ∨
+      Nonempty (Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ℓ)) := by
+    rcases hΛ with ⟨E, rfl⟩ | rfl
+    · exact Or.inr (Or.inl ⟨E, ⟨Iso.refl _⟩⟩)
+    · exact Or.inr (Or.inr ⟨Iso.refl _⟩)
+  have hcmp := (adicConstructibilityPredicateComparison ℓ Y Λ.X hcert).2
+  have hbound (K : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ.X Y)))
+      (a b : ℤ) (hab : a ≤ b) (hK : boundedConstructible (condensedRingObj Λ.X Y) K)
+      (hcoh : DerivedCategory.homologyConcentratedIn a b K) :
+      DerivedCategory.torAmplitudeIn _ a b K := by
+    have hK' : constantModelBoundedConstructible Λ.X Y K := (congrFun hcmp K).mp hK
+    exact OrdinaryFieldRealization.Condensed.realization_torAmplitude ℓ Y Λ hfield
+      ⟨K, hK'⟩ a b hab hcoh
+  have hfinite (K : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ.X Y)))
+      (hK : boundedConstructible (condensedRingObj Λ.X Y) K) :
+      ∃ a b : ℤ, a ≤ b ∧ DerivedCategory.torAmplitudeIn _ a b K := by
+    obtain ⟨⟨a, ha⟩, ⟨b, hb⟩⟩ := hK.1
+    have ha' : K.IsGE (min a b) :=
+      (DerivedCategory.isGE_iff K _).2 fun q hq ↦
+        (DerivedCategory.isGE_iff K a).1 ha q (lt_of_lt_of_le hq (min_le_left _ _))
+    exact ⟨min a b, b, min_le_right _ _,
+      hbound K (min a b) b (min_le_right _ _) hK ⟨ha', hb⟩⟩
+  refine ⟨hbound, hfinite, ?_⟩
+  funext K
+  apply propext
+  constructor
+  · exact And.left
+  · intro hK
+    obtain ⟨a, b, _, ht⟩ := hfinite K hK
+    exact ⟨hK, a, b, ht⟩
 
 end DiscreteField
 

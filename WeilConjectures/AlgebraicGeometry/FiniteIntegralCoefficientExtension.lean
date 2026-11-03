@@ -17,6 +17,7 @@ import WeilConjectures.NumberTheory.Padics.LocalFieldIntegralBasis
 import WeilConjectures.CategoryTheory.SheafTensor
 import WeilConjectures.CategoryTheory.ModuleObjects.Abelian
 import WeilConjectures.CategoryTheory.Monoidal.Mod.Limits
+public import WeilConjectures.CategoryTheory.ModuleObjects.ProEtaleCoefficients.FiniteFreeScalarCoordinates
 
 /-!
 # Exactness and countable products for integral coefficient extension
@@ -75,6 +76,30 @@ theorem finiteIntegralCoefficientExtension_exact_products
           (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) T),
         IsIso (piComparison
           (Mod.extendScalars (coefficientMap (finiteCoefficientIntegersPointMap ℓ h) T)) M)) := by
-  sorry
+  classical
+  let φ := coefficientMap (finiteCoefficientIntegersPointMap ℓ h) T
+  let R := condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) T
+  let S := condensedRingObj (Profinite.padicIntegersRingObj ℓ F.1) T
+  let C := Mod.extendScalars φ
+  have hfree := cartesianCoefficients_finiteFree.{u} ℓ h
+  have hlimits : PreservesFiniteLimits C := (hfree.2.2 T).1
+  obtain ⟨b⟩ := hfree.1
+  obtain ⟨e, _⟩ := hfree.2.1 b
+  let α : C ⋙ Mod.comap φ ≅
+      Functor.const (Discrete (Fin (finiteCoefficientDegree ℓ h))) ⋙ lim :=
+    NatIso.ofComponents (Mod.finiteCoordinateIso (e T))
+      (fun f ↦ Mod.finiteCoordinateIso_naturality (e T) f)
+  have hproducts : PreservesLimitsOfShape (Discrete ℕ) (C ⋙ Mod.comap φ) :=
+    preservesLimitsOfShape_of_natIso α.symm
+  have hproducts' : PreservesLimitsOfShape (Discrete ℕ) (C ⋙ Mod.forget S) := by
+    exact inferInstanceAs
+      (PreservesLimitsOfShape (Discrete ℕ) ((C ⋙ Mod.comap φ) ⋙ Mod.forget R))
+  have hproducts'' : PreservesLimitsOfShape (Discrete ℕ) C :=
+    preservesLimitsOfShape_of_reflects_of_preserves C (Mod.forget S)
+  refine ⟨inferInstance, ?_, ?_⟩
+  · intro K hK
+    exact hK.map_of_exact C
+  · intro M
+    exact inferInstanceAs (IsIso (piComparison C M))
 
 end AlgebraicGeometry.ProEtale

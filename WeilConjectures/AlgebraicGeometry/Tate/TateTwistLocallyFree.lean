@@ -21,6 +21,8 @@ import WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorIso
 import WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicCoefficientTwistsUnrestricted
 import WeilConjectures.SixFunctors.Completed.CompletedTensorScalarLinearity
 import WeilConjectures.CategoryTheory.ScalarLocalization.SemilinearScalarLocalization
+public import WeilConjectures.AlgebraicGeometry.Native.NativeSignedLine
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 
 /-! # Tate twists are well defined and locally free of rank one
 
@@ -199,6 +201,48 @@ private theorem tateQbarInverse
     (intrinsicQbarCoefficientTwist D ℓ hD X Ω (-(n : ℤ)))
     (ha _ _).some (ha _ _).some hu.some e
     (pullbackTensorCommonBraiding ℓ Ω X _ _ ≪≫ e)
+
+/-- Local rank-one bases, duality, cancellation and the prescribed inverse tensor functors
+for an actual signed family of modules over the pulled-back condensed coefficient ring.
+Source: latest blueprint det-def-sp-tate-twist-locally-free, clause (3).
+(blueprint: det-def-sp-tate-twist-locally-free). -/
+structure CondensedTateLineProperties
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u})
+    (T : ℤ → Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X)) : Prop where
+  /-- A rank-one basis after a pro-etale cover. -/
+  locallyTrivial : ∀ m : ℤ, ∃ 𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage X,
+    ∀ i : 𝒰.I₀, Nonempty
+      (((upperStar Ab.{u + 1} (𝒰.f i)).mapMod (condensedRingObj Λ X)).obj (T m) ≅ 𝟙_ _)
+  /-- The family consists of locally free modules. -/
+  locallyFree : ∀ m : ℤ, IsLocallyFree (condensedRingObj Λ X) (T m)
+  /-- Each member is invertible. -/
+  invertible : ∀ m : ℤ, IsInvertible (T m)
+  /-- The opposite member is its internal dual. -/
+  dual : ∀ m : ℤ, Nonempty ((ihom (T m)).obj (𝟙_ _) ≅ T (-m))
+  /-- Opposite members cancel. -/
+  cancel : ∀ m : ℤ, Nonempty (T m ⊗ T (-m) ≅ 𝟙_ _)
+  /-- The inverse functor is precisely tensor with the opposite line in degree zero. -/
+  equivalence : ∀ m : ℤ,
+    ∃ e : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+        (condensedRingObj Λ X)) ≌
+      DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+        (condensedRingObj Λ X)),
+      e.functor = tensorRight ((DerivedCategory.singleFunctor _ 0).obj (T m)) ∧
+      e.inverse = tensorRight ((DerivedCategory.singleFunctor _ 0).obj (T (-m)))
+
+private theorem nativeTwistFiniteness_properties
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u})
+    (T : ℤ → Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj Λ X))
+    (h : CondensedRing.NativeTwistFiniteness Λ X T) :
+    CondensedTateLineProperties Λ X T := by
+  obtain ⟨L, rfl, h⟩ := h
+  refine ⟨h.locallyTrivial, h.locallyFree, ?_, h.dual, h.cancel, h.equivalence⟩
+  intro m
+  exact (isInvertible_iff_of_braided _).2 ⟨_, h.cancel m⟩
 
 /-- One common covering trivializes the compatible root generators and all coefficient
 lines; Kummer transitions induce the canonical A-linear isomorphisms; every signed twist

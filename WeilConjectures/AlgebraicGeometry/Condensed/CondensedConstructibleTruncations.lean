@@ -215,6 +215,35 @@ def ConstructibleTruncationCompatibility
   ∀ i : ℤ, Nonempty (constructibleTruncationCohomology t i ⋙ F ≅
     F ⋙ constructibleTruncationCohomology s i)
 
+private theorem compatibility_of_tExact
+    {C : Type uC} [Category.{vC} C] [Preadditive C] [HasZeroObject C] [HasShift C ℤ]
+    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] [IsTriangulated C]
+    {B : Type uB} [Category.{vB} B] [Preadditive B] [HasZeroObject B] [HasShift B ℤ]
+    [∀ n : ℤ, (shiftFunctor B n).Additive] [Pretriangulated B] [IsTriangulated B]
+    (t : TStructure C) (s : TStructure B) (ht : ∀ K, t.bounded K)
+    (hs : ∀ K, s.bounded K) (F : C ⥤ B)
+    [F.CommShift ℤ] [F.IsTriangulated] [F.IsTExact t s] :
+    ConstructibleTruncationCompatibility t s F := by
+  have ht' : t.bounded = ⊤ := top_unique (fun K _ ↦ ht K)
+  have hs' : s.bounded = ⊤ := top_unique (fun K _ ↦ hs K)
+  constructor
+  · intro m
+    have h := t.texact_truncation_comparison.{uC, vC, uB, vB, uB, vB} s ht' hs' F m
+    exact ⟨⟨F.eTruncLTIso t s (m + 1 : ℤ), fun K ↦ (h.1 K).1,
+      fun a ha ↦ h.2.1 a ha⟩,
+      ⟨F.eTruncGEIso t s m, fun K ↦ (h.1 K).2, fun a ha ↦ h.2.2.1 a ha⟩⟩
+  · intro i
+    exact ⟨Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft _ (F.commShiftIso i) ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight
+        (Functor.associator _ _ _ ≪≫
+          Functor.isoWhiskerLeft _ (F.eTruncGEIso t s i) ≪≫
+          (Functor.associator _ _ _).symm ≪≫
+          Functor.isoWhiskerRight (F.eTruncLTIso t s (i + 1 : ℤ)) _ ≪≫
+          Functor.associator _ _ _) _ ≪≫
+      Functor.associator _ _ _⟩
+
 end WeilConjectures
 
 namespace AlgebraicGeometry.ProEtale
@@ -355,6 +384,63 @@ private theorem ordinary_exists [(boundedConstructible R).IsTriangulated] :
   obtain ⟨ht, t, h⟩ := restricted_standard (IsConstructibleModuleObject R)
   exact ⟨t, h⟩
 
+private theorem constructible_abelian
+    (hk : ∀ (M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) (f : M ⟶ N),
+      IsConstructibleModuleObject R M → IsConstructibleModuleObject R N →
+      IsConstructibleModuleObject R (kernel f) ∧
+      IsConstructibleModuleObject R (cokernel f))
+    (he : ∀ S : ShortComplex (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R),
+      S.ShortExact → IsConstructibleModuleObject R S.X₁ →
+      IsConstructibleModuleObject R S.X₃ → IsConstructibleModuleObject R S.X₂) :
+    Nonempty (Abelian (ObjectProperty.FullSubcategory (IsConstructibleModuleObject R))) := by
+  let P : ObjectProperty _ := IsConstructibleModuleObject R
+  have : P.ContainsZero := constructible_zero_class R
+  have : P.IsClosedUnderIsomorphisms := ⟨fun e h ↦ h.of_iso e⟩
+  have : P.IsClosedUnderKernels := ⟨by
+    rintro _ ⟨f, k, h, hMN⟩
+    exact P.prop_of_iso ((kernelIsKernel f).conePointUniqueUpToIso h)
+      (hk _ _ f hMN.1 hMN.2).1⟩
+  have : P.IsClosedUnderCokernels := ⟨by
+    rintro _ ⟨f, k, h, hMN⟩
+    exact P.prop_of_iso ((cokernelIsCokernel f).coconePointUniqueUpToIso h)
+      (hk _ _ f hMN.1 hMN.2).2⟩
+  have : P.IsClosedUnderExtensions := ⟨he _⟩
+  have : P.IsClosedUnderBinaryProducts := .mk' (by
+    rintro _ ⟨D, hD⟩
+    exact P.prop_of_iso ((biprod.isoProd _ _) ≪≫
+      (HasLimit.isoOfNatIso (diagramIsoPair D)).symm)
+      (P.prop_biprod (hD ⟨.left⟩) (hD ⟨.right⟩)))
+  have : P.IsClosedUnderFiniteProducts := .mk'
+  exact ⟨inferInstance⟩
+
+/-- Standard truncations and bounded t-structures on the ordinary derived categories
+of finite-extension and algebraic-closure condensed modules, with the abelian constructible
+categories as hearts. Source: current blueprint prop-constructible-truncations, first paragraph
+(blueprint: prop-constructible-truncations).
+
+Proof: canonical truncations retain the original homology in their surviving degrees and
+have zero homology elsewhere. Thus they preserve bounded constructibility and induce the
+standard bounded t-structure. The fully faithful single functor identifies the heart with
+constructible module objects. The field-coefficient Serre lemmas supply kernel, cokernel
+and extension closure, giving the abelian full subcategory, also on the empty scheme. -/
+theorem condensedConstructibleTruncations_exists
+    (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X] :
+    (∀ E : PadicAlgCl.FiniteIntermediateField ℓ,
+      (∃ t : TStructure (BoundedConstructible (padicSubfieldRingObj X ℓ E)),
+        OrdinaryConstructibleTruncations _ t) ∧
+      Nonempty (Abelian (ObjectProperty.FullSubcategory
+        (IsConstructibleModuleObject (padicSubfieldRingObj X ℓ E))))) ∧
+    (∃ t : TStructure (BoundedConstructible (padicAlgClRingObj X ℓ)),
+      OrdinaryConstructibleTruncations _ t) ∧
+    Nonempty (Abelian (ObjectProperty.FullSubcategory
+      (IsConstructibleModuleObject (padicAlgClRingObj X ℓ)))) := by
+  constructor
+  · intro E
+    obtain ⟨hk, he⟩ := isConstructibleModuleObject_serre_padicSubfield X ℓ E
+    exact ⟨ordinary_exists _, constructible_abelian _ hk he⟩
+  · obtain ⟨hk, he⟩ := isConstructibleModuleObject_serre_padicAlgCl X ℓ
+    exact ⟨ordinary_exists _, constructible_abelian _ hk he⟩
+
 /-- The restriction of an ambient functor commutes with the standard truncations and
 cohomology by the counit and unit characterizations. Source: current blueprint
 prop-constructible-truncations, scalar and automorphism sentences
@@ -367,6 +453,53 @@ def OrdinaryConstructibleExchange
       OrdinaryConstructibleTruncations R t → OrdinaryConstructibleTruncations S s →
       WeilConjectures.ConstructibleTruncationCompatibility t s
         ((boundedConstructible S).lift ((boundedConstructible R).ι ⋙ G) hG)
+
+private theorem exchange_of_exact_iso
+    (F : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R ⥤
+      Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) S)
+    [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    (G : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R) ⥤
+      DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) S))
+    (e : G ≅ F.mapDerivedCategory)
+    (hG : ∀ K : BoundedConstructible R, boundedConstructible S (G.obj K.obj)) :
+    OrdinaryConstructibleExchange R S G := by
+  let : G.CommShift ℤ := Functor.CommShift.ofIso e.symm ℤ
+  have : NatTrans.CommShift e.symm.hom ℤ := Functor.CommShift.ofIso_compatibility e.symm ℤ
+  have : G.IsTriangulated := Functor.isTriangulated_of_iso e.symm
+  refine ⟨hG, fun t s ht hs ↦ ?_⟩
+  let H := (boundedConstructible S).lift ((boundedConstructible R).ι ⋙ G) hG
+  have : H.IsTExact t s := by
+    constructor
+    · intro K n hK
+      apply (hs.1 _ n).mpr
+      have h : K.obj.IsLE n := (ht.1 _ n).mp hK
+      have h' := F.isLE_mapDerivedCategory_obj K.obj n
+      exact DerivedCategory.TStructure.t.isLE_of_iso (e.app K.obj).symm n
+    · intro K n hK
+      apply (hs.2.1 _ n).mpr
+      have h : K.obj.IsGE n := (ht.2.1 _ n).mp hK
+      have h' := F.isGE_mapDerivedCategory_obj K.obj n
+      exact DerivedCategory.TStructure.t.isGE_of_iso (e.app K.obj).symm n
+  exact WeilConjectures.compatibility_of_tExact t s ht.2.2.1 hs.2.2.1 H
+
+/-- Actual derived pullback commutes with standard constructible truncations and cohomology.
+Source: current blueprint prop-constructible-truncations, automorphism sentence
+(blueprint: prop-constructible-truncations).
+
+Proof: exact module pullback has its total left derived functor canonically isomorphic
+to termwise pullback. Pulling back the stratification and finite-presentation covers
+preserves constructibility; exactness preserves bounds. The restriction is t-exact. -/
+theorem condensedConstructibleTruncations_pullback
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [(boundedConstructible (condensedRingObj Λ X)).IsTriangulated]
+    [(boundedConstructible (condensedRingObj Λ Y)).IsTriangulated] :
+    OrdinaryConstructibleExchange (condensedRingObj Λ Y) (condensedRingObj Λ X)
+      (CondensedRing.upperStar Λ f).leftDerivedFunctor := by
+  exact exchange_of_exact_iso _ _ (CondensedRing.upperStar Λ f) _
+    (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ f)
+    (fun K ↦ CondensedRing.boundedConstructible_leftDerivedUpperStar_obj_of_scheme
+      Λ f K.obj K.property)
 
 omit [IsCommMonObj R] in
 end Ordinary

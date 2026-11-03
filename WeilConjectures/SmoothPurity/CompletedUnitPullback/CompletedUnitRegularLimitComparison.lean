@@ -9,6 +9,7 @@ public import WeilConjectures.SmoothPurity.CompletedUnitPullback.CompletedUnitPu
 public import WeilConjectures.SmoothPurity.IntegralOnSlice.DerivedCompleteOnSlices
 import WeilConjectures.SmoothPurity.CompletedUnitPullback.CompletedUnitRegularSequenceNormalized
 import WeilConjectures.SmoothPurity.CompletedUnitPullback.CompletedUnitRegularSequenceLimit
+public import WeilConjectures.AlgebraicGeometry.Completed.CompletedCondensedCoefficients
 
 /-! # The regular completed unit and its coefficient-system limit comparison
 
@@ -35,40 +36,63 @@ universe u
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The regular completed coefficient has a normalized derived limit comparison.
+/-- The pulled-back condensed integer ring is the limit of its finite constant
+quotient rings, with its specified reductions and a unique normalized comparison.
 
-Proof: use the normalized strict scalar unit on the regular single complex.  Its
-finite multiplication isomorphisms and section formulas identify every quotient
-with the supplied `b`; the transition identities assemble these maps into a
-cone over the coefficient tower.  The strict-unit quasi-isomorphism and its Roos
-triangle identify the cone point with the completed regular object, while the
-normalized evaluation calculus transports the cone to `coefficientSequenceLimit`.
-The projection equation is the finite adjunction transpose of the same quotient
-map.  The construction is valid for the empty scheme and for exponent zero.
+Source: latest blueprint, `sk-prop-sfb-qlbar-colimit-x`, first display.
+Proof: the integral condensed comparison supplies a limiting cone and natural finite
+constant identifications. Their transition equations give an isomorphism of the
+quotient diagrams. Postcompose the limiting cone with that isomorphism. Its legs
+are the old legs followed by the finite identifications, so associativity gives
+the prescribed reduction equations. Limit extensionality makes any two normalized
+comparisons equal. This works for the empty scheme and starts at positive exponent one.
 (blueprint: lem-pur-completed-unit-regular-limit-comparison). -/
-theorem regularLimitComparisonData (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
-    (W : Scheme.{u})
-    (b : ∀ n : ℕ, (coefficientSequenceEvaluation l E W n).obj (systemUnit l E W) ≅
-      SheafOfModules.unit (integralCoefficientSheaf l E W n))
-    (hb : ∀ (n : ℕ) (V : W.ProEtᵒᵖ)
-      (x : ((coefficientSequenceEvaluation l E W n).obj (systemUnit l E W)).val.obj V),
-      HEq ((b n).hom.val.app V x) x) :
-    ∃ c : integralConstantCoefficientObject l E W ≅
-        (coefficientSequenceLimit l E W).obj (systemObject l E W),
-      IsNormalizedCoefficientSequence l E W (systemObject l E W) ∧
-      IntegralOnSlice.IsComplete l E W none (integralConstantCoefficientObject l E W) ∧
-      ∀ n : ℕ,
-        c.hom ≫ (coefficientSequenceProjection l E W n).app (systemObject l E W) ≫
-            (coefficientFiniteDerivedRestriction l E W n).map
-              (evaluationSingle l E W n).hom ≫
-                (coefficientFiniteDerivedRestriction l E W n).map
-                  ((DerivedCategory.singleFunctor _ 0).map (b n).hom) =
-          (coefficientFiniteAdjunction l E W n).unit.app
-              (integralConstantCoefficientObject l E W) ≫
-            (coefficientFiniteDerivedRestriction l E W n).map
-              (constantCoefficientReductionMap l E W n) := by
-  obtain ⟨c, hc⟩ := regularSequenceLimitComparison l E D hl W b hb
-  exact ⟨c, regularSequenceNormalized l E W b hb,
-    (integralConstantCoefficient_constructible l E W D hl).2.2.1, hc⟩
+theorem regularLimitComparisonData (W : Scheme.{u}) (l : ℕ) [Fact l.Prime]
+    (E : PadicAlgCl.FiniteIntermediateField l) (π : PadicAlgCl.integers l E)
+    (hπ : Ideal.span {π} = IsLocalRing.maximalIdeal (PadicAlgCl.integers l E)) :
+    ∃ k : ∀ n : ℕ, completedCoefficient W
+        (Profinite.continuousMapRingSheaf (completedResidue l E π n)) ≅
+          completedConstantRing W (completedResidue l E π n),
+      (∀ n, completedCoefficientMap W (completedResidueTransition l E π n) ≫ (k n).hom =
+        (k (n + 1)).hom ≫ completedConstantMap W
+          (Ideal.Quotient.factorPow (Ideal.span {π}) (Nat.le_succ (n + 1)))) ∧
+      ∃ (c : Cone (Functor.ofOpSequence
+          (X := fun n ↦ completedConstantRing W (completedResidue l E π n))
+          (fun n ↦ completedConstantMap W
+            (Ideal.Quotient.factorPow (Ideal.span {π}) (Nat.le_succ (n + 1))))))
+        (e : completedCoefficient W (Profinite.padicIntegersCondensedRing l E) ≅ c.pt),
+        Nonempty (IsLimit c) ∧
+        (∀ n, e.hom ≫ c.π.app (op n) =
+          completedCoefficientMap W (completedReduction l E π n) ≫ (k n).hom) ∧
+        ∀ e' : completedCoefficient W (Profinite.padicIntegersCondensedRing l E) ≅ c.pt,
+          (∀ n, e'.hom ≫ c.π.app (op n) =
+            completedCoefficientMap W (completedReduction l E π n) ≫ (k n).hom) → e' = e := by
+  obtain ⟨⟨c, e, he, ⟨hc⟩⟩, _, k, hk⟩ := completedCondensedIntegral W l E π hπ
+  let F := Functor.ofOpSequence
+    (X := fun n ↦ completedCoefficient W
+      (Profinite.continuousMapRingSheaf (completedResidue l E π n)))
+    (fun n ↦ completedCoefficientMap W (completedResidueTransition l E π n))
+  let G := Functor.ofOpSequence
+    (X := fun n ↦ completedConstantRing W (completedResidue l E π n))
+    (fun n ↦ completedConstantMap W
+      (Ideal.Quotient.factorPow (Ideal.span {π}) (Nat.le_succ (n + 1))))
+  let β : F ⟶ G := NatTrans.ofOpSequence (fun n ↦ (k n).hom) (fun n ↦ by
+    simpa only [F, G, Functor.ofOpSequence_map_homOfLE_succ] using hk n)
+  have hβ : ∀ n, IsIso (β.app n) := fun n ↦ by
+    change IsIso ((k n.unop).hom)
+    infer_instance
+  have : IsIso β := NatIso.isIso_of_isIso_app β
+  let c' := (Cone.postcompose β).obj c
+  have hc' : IsLimit c' := (IsLimit.postcomposeHomEquiv (asIso β) c).symm hc
+  have hnorm (n : ℕ) : e.hom ≫ c'.π.app (op n) =
+      completedCoefficientMap W (completedReduction l E π n) ≫ (k n).hom := by
+    change e.hom ≫ (c.π.app (op n) ≫ (k n).hom) = _
+    rw [← Category.assoc, he n]
+  refine ⟨k, hk, c', e, ⟨hc'⟩, hnorm, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  apply hc'.hom_ext
+  intro n
+  exact (he' n.unop).trans (hnorm n.unop).symm
 
 end WeilConjectures.CompletedUnitPullback

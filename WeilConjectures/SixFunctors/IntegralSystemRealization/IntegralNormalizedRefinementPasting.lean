@@ -9,6 +9,8 @@ public import WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralNorm
 public import WeilConjectures.SixFunctors.IntegralSystemRealization.Refinement.IntegralRefinementDiagramAdmissibility
 public import WeilConjectures.SmoothPurity.Qcqs.QcqsCompactSupportRealization
 import WeilConjectures.SixFunctors.IntegralSystemRealization.Refinement.IntegralRefinementTransposeRealization
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Compactification.CompactificationRefinementLocalizing
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.IntegralResidueDerivedMonoidal
 
 /-! # Pasting of the prescribed normalized integral refinement maps
 
@@ -301,3 +303,71 @@ theorem integralNormalizedRefinementPasting
 
 end Pasting
 end WeilConjectures.IntegralSystemRealization
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+/-- Prescribed identity-on-open refinement maps are canonical and satisfy pasting.
+Source: current blueprint `det-sf-comp-coherence-refinement`, clauses (1)--(3).
+(blueprint: lem-sfb-prescribed-refinement-pasting).
+
+Proof: the open adjunction identifies a prescribed map with its transpose. The
+normalization makes this transpose the inverse of the canonical restriction
+isomorphism, so uniqueness identifies the map with `localizingRefinementMap`.
+Substitute this equality into the canonical invertibility, identity and transitivity
+laws. Only invertibility needs membership in Loc(Dctf); identity and transitivity
+hold for every unbounded input. Empty opens, zero inputs and identity refinements
+are included in the same uniqueness argument. No coefficient evaluation is used. -/
+theorem integralNormalizedRefinementPasting
+    (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
+    (p : ℕ) [CharP k p] (hp : 0 < p) (hpℓ : p ≠ ℓ)
+    (hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ)
+    {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
+    [IsSeparated (X ↘ Spec (.of k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
+    [IsSeparated (Y ↘ Spec (.of k))]
+    (f : X ⟶ Y) [f.IsOver (Spec (.of k))]
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    (b : ∀ (c d : Compactification.DenseBoundaryCompactification f) (r : d ⟶ c)
+      (K : DerivedCategory
+        (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))),
+      (openImmersionLowerShriek Λ c.obj.obj.obj.i).mapDerivedCategory.obj K ⟶
+        (lowerStar Λ r.hom.hom.hom.hom).rightDerivedFunctor.obj
+          ((openImmersionLowerShriek Λ d.obj.obj.obj.i).mapDerivedCategory.obj K))
+    (hnormalized : ∀ (c d : Compactification.DenseBoundaryCompactification f)
+      (r : d ⟶ c) (K : DerivedCategory
+        (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))),
+      (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ c.obj.obj.obj.i).unit.app K ≫
+          (upperStar Λ c.obj.obj.obj.i).mapDerivedCategory.map (b c d r K) ≫
+            (refinementTheta Λ r.hom K).hom = 𝟙 K) :
+    (∀ (c d : Compactification.DenseBoundaryCompactification f) (r : d ⟶ c) K,
+      b c d r K = localizingRefinementMap Λ r.hom K) ∧
+    (∀ (c d : Compactification.DenseBoundaryCompactification f) (r : d ⟶ c) K,
+      localizingClosureProEtale Λ X K → IsIso (b c d r K)) ∧
+    (∀ (c : Compactification.DenseBoundaryCompactification f) K,
+      b c c (𝟙 c) K ≫
+          (refinementDerivedLowerStarId Λ c.obj.obj.obj.Z).hom.app
+            ((openImmersionLowerShriek Λ c.obj.obj.obj.i).mapDerivedCategory.obj K) = 𝟙 _) ∧
+    (∀ (c d e : Compactification.DenseBoundaryCompactification f)
+      (r : d ⟶ c) (s : e ⟶ d) K,
+      b c e (s ≫ r) K ≫
+          (refinementDerivedLowerStarComp Λ s.hom.hom.hom.hom r.hom.hom.hom.hom).hom.app
+            ((openImmersionLowerShriek Λ e.obj.obj.obj.i).mapDerivedCategory.obj K) =
+        b c d r K ≫ (lowerStar Λ r.hom.hom.hom.hom).rightDerivedFunctor.map
+          (b d e s K)) := by
+  have laws := localizingRefinement_coherence Λ ℓ k p hp hpℓ hΛ f
+  have hcanonical (c d : Compactification.DenseBoundaryCompactification f)
+      (r : d ⟶ c) K : b c d r K = localizingRefinementMap Λ r.hom K :=
+    (laws.1 c d r K (b c d r K)).mp (hnormalized c d r K)
+  refine ⟨hcanonical, ?_, ?_, ?_⟩
+  · intro c d r K hK
+    rw [hcanonical]
+    exact laws.2.1 c d r K hK
+  · intro c K
+    rw [hcanonical]
+    exact laws.2.2.1 c K
+  · intro c d e r s K
+    simp only [hcanonical]
+    exact laws.2.2.2 c d e r s K
+
+end AlgebraicGeometry.ProEtale.CondensedRing

@@ -704,7 +704,15 @@ theorem nativeIntegralCoefficient_heart
   have hm := stratifiedModels_of_iso X (pbcIntegralDatum l E)
     ((SheafOfModules.restrictScalars
       (integralDetailedCoefficientComparison X l E).hom).mapIso counit.symm) hN
-  have hconst := (ProEtale.integralSectionLocalModels l E X M).mpr hm
+  have hsieve := hm
+  have hconst := (ProEtale.integralSectionLocalModels
+    (ProEtale.DerivedNakayama.integerRing l E) X M).mpr (by
+      rcases hsieve with ⟨s, hs⟩
+      refine ⟨s, fun i ↦ ?_⟩
+      rcases hs i with ⟨V, hV, hv⟩
+      refine ⟨V, hV, fun U f hf ↦ ?_⟩
+      exact (ProEtale.integralSectionMemberModels l E (s.immersion i) U M).mpr
+        (hv U f hf))
   have hqc : CompactSpace X ∧ QuasiSeparatedSpace X := ⟨inferInstance, inferInstance⟩
   rw [ProEtale.IsConstantModelConstructible, if_pos hqc] at hconst
   have hM := ProEtale.constructible_of_finiteConstantStratified _ X M hconst

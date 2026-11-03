@@ -194,6 +194,21 @@ private theorem exact_mate
     (Functor.exactSquare_fac d) (NatTrans.mapHomologicalComplex b.hom (.up ℤ)) hι K
   exact hc.trans (Functor.exactSquare_fac b K).symm
 
+private theorem exact_unit_isIso
+    {C D : Type v} [Category.{h} C] [Category.{h} D] [Abelian C] [Abelian D]
+    [HasDerivedCategory.{w} C] [HasDerivedCategory.{w} D]
+    {F : C ⥤ D} {G : D ⥤ C} [F.Additive] [G.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    (a : F ⊣ G) [IsIso a.unit] : IsIso (exactDerivedAdjunction a).unit := by
+  have hf := (exactDerivedAdjunction a).fullyFaithfulLOfCompIsoId
+    ((Functor.mapDerivedCategoryCompIso F G).symm ≪≫
+      Functor.mapDerivedCategoryNatIso (asIso a.unit).symm ≪≫
+        Functor.mapDerivedCategoryIdIso C)
+  have := hf.full
+  have := hf.faithful
+  exact (exactDerivedAdjunction a).unit_isIso_of_L_fully_faithful
+
 private theorem exact_base_change
     {B B' C C' : Type*} [Category* B] [Category* B'] [Category* C] [Category* C']
     [Abelian B] [Abelian B'] [Abelian C] [Abelian C']
@@ -298,6 +313,109 @@ def derivedImmersionOpenExtensionComparison (A : Type (u + 1)) [CommRing A] [Fin
     Functor.mapDerivedCategoryNatIso
       (openImmersionLowerShriekComparisonUpperStarIso (ModuleCat.{u + 1} A) j) ≪≫
         Functor.mapDerivedCategoryCompIso _ _
+
+/-- The exact derived etale open adjunction, with its localized ordinary unit and counit.
+Source: Stacks Tag 015F
+(blueprint: lem-sf-derived-immersion-comparison-normalization). -/
+abbrev derivedImmersionOpenEtaleAdjunction (A : Type (u + 1)) [CommRing A]
+    {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :=
+  SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction
+    (Etale.openImmersionLowerShriekAdjunction (ModuleCat.{u + 1} A) j)
+
+/-- The exact derived pro-etale open adjunction, localized with the same normalization.
+Source: Stacks Tag 015F
+(blueprint: lem-sf-derived-immersion-comparison-normalization). -/
+abbrev derivedImmersionOpenProEtaleAdjunction (A : Type (u + 1)) [CommRing A]
+    {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :=
+  SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction
+    (openImmersionLowerShriekAdjunction (ModuleCat.{u + 1} A) j)
+
+/-- The canonical open comparisons respect units and counits on the unbounded derived
+categories. The invertible units identify the restricted extension comparison with the
+identity. Source: blueprint finite-duality site-comparison proof, paragraph 2;
+Stacks Tags 09AF, 0F70 and 015F
+(blueprint: lem-sf-derived-immersion-comparison-normalization).
+
+Proof:
+1. Comparison, both restrictions and both extensions by zero are exact. Apply the
+exact-functor localization to their canonical sheaf comparisons.
+2. The sheaf unit equation is `openComparison_unit_normalization` (Tag 09AF).
+3. Transpose C_X(e_M) after the inverse open comparison. Naturality of the pullback
+comparison and the etale triangle identity give a_M as its transpose. The inverse
+transpose is e'_M after j_!(a_M), giving the sheaf counit equation.
+4. Exact derived adjunctions localize these units and counits. Exact transformation
+pasting localizes both sheaf equations, with the displayed canonical compositors.
+5. The etale open unit is invertible, as is its termwise inverse after localization.
+The unit equation then makes the pro-etale unit at C_U L invertible. Cancelling the
+units says precisely that the restriction of o_j is the identity. The canonical
+pullback comparisons carry their identity and composition identifications through
+localization; the same argument covers identity and empty immersions. -/
+theorem derivedImmersionOpen_normalization (A : Type (u + 1)) [CommRing A] [Finite A]
+    {U X : Scheme.{u}} [IsLocallyNoetherian X] [CompactSpace X]
+    (j : U ⟶ X) [IsOpenImmersion j] :
+    (∀ L : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)),
+      (comparisonUpperStar (ModuleCat.{u + 1} A) U).mapDerivedCategory.map
+          ((derivedImmersionOpenEtaleAdjunction A j).unit.app L) ≫
+        (derivedImmersionOpenPullbackComparison A j).hom.app
+          ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapDerivedCategory.obj L) ≫
+        (openImmersionRestriction (ModuleCat.{u + 1} A) j).mapDerivedCategory.map
+          ((derivedImmersionOpenExtensionComparison A j).hom.app L) =
+      (derivedImmersionOpenProEtaleAdjunction A j).unit.app
+        ((comparisonUpperStar (ModuleCat.{u + 1} A) U).mapDerivedCategory.obj L)) ∧
+    (∀ M : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)),
+      (derivedImmersionOpenExtensionComparison A j).hom.app
+          ((Etale.openImmersionRestriction (ModuleCat.{u + 1} A) j).mapDerivedCategory.obj M) ≫
+        (openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapDerivedCategory.map
+          ((derivedImmersionOpenPullbackComparison A j).hom.app M) ≫
+        (derivedImmersionOpenProEtaleAdjunction A j).counit.app
+          ((comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory.obj M) =
+      (comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory.map
+        ((derivedImmersionOpenEtaleAdjunction A j).counit.app M)) ∧
+    (∀ L : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)),
+      IsIso ((derivedImmersionOpenEtaleAdjunction A j).unit.app L) ∧
+      IsIso ((derivedImmersionOpenProEtaleAdjunction A j).unit.app
+        ((comparisonUpperStar (ModuleCat.{u + 1} A) U).mapDerivedCategory.obj L))) := by
+  let B := ModuleCat.{u + 1} A
+  let e := Etale.openImmersionLowerShriekAdjunction B j
+  let d := openImmersionLowerShriekAdjunction B j
+  let a := openComparisonRestrictionIso A j
+  let o := openImmersionLowerShriekComparisonUpperStarIso B j
+  have hb F : d.unit.app ((comparisonUpperStar B U).obj F) ≫
+      (openImmersionRestriction B j).map (o.inv.app F) =
+        (comparisonUpperStar B U).map (e.unit.app F) ≫ a.hom.app _ := by
+    apply (cancel_mono ((openImmersionRestriction B j).map (o.hom.app F))).mp
+    simp only [Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app]
+    exact ((openComparison_unit_normalization A j).2 F).symm
+  have hm := CategoryTheory.exact_mate e d a o.symm hb
+  have ho : (Functor.mapDerivedCategorySquareIso o.symm).hom =
+      (derivedImmersionOpenExtensionComparison A j).inv := by
+    simp only [Functor.mapDerivedCategorySquareIso, derivedImmersionOpenExtensionComparison,
+      Iso.trans_hom, Iso.trans_inv, Iso.symm_hom, Iso.symm_inv,
+      Functor.mapDerivedCategoryNatIso_symm, Category.assoc, o, B]
+  rw [ho] at hm
+  change ((mateEquiv (derivedImmersionOpenEtaleAdjunction A j)
+    (derivedImmersionOpenProEtaleAdjunction A j)).symm
+    (TwoSquare.mk _ _ _ _ (derivedImmersionOpenPullbackComparison A j).hom)).natTrans =
+      (derivedImmersionOpenExtensionComparison A j).inv at hm
+  refine ⟨?_, ?_, ?_⟩
+  · intro L
+    have hu := unit_mateEquiv_symm (derivedImmersionOpenEtaleAdjunction A j)
+      (derivedImmersionOpenProEtaleAdjunction A j)
+      (TwoSquare.mk _ _ _ _ (derivedImmersionOpenPullbackComparison A j).hom) L
+    dsimp only [CategoryTheory.Functor.id_obj] at hu
+    rw [congr_app hm L] at hu
+    rw [reassoc_of% hu, ← Functor.map_comp]
+    simp
+  · intro M
+    have hc := mateEquiv_counit_symm (derivedImmersionOpenEtaleAdjunction A j)
+      (derivedImmersionOpenProEtaleAdjunction A j)
+      (TwoSquare.mk _ _ _ _ (derivedImmersionOpenPullbackComparison A j).hom) M
+    rw [congr_app hm _] at hc
+    rw [hc, Iso.hom_inv_id_app_assoc]
+  · intro L
+    have := CategoryTheory.exact_unit_isIso e
+    have := CategoryTheory.exact_unit_isIso d
+    exact ⟨inferInstance, inferInstance⟩
 
 /-- Etale closed direct image is exact; left exactness is already supplied by its
 right-adjoint structure. Source: Stacks Tags 04CA and 08M3

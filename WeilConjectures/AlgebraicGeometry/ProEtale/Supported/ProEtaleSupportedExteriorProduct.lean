@@ -214,12 +214,58 @@ private meta def supportedStructureCongr : Nat → MVarId → TacticM Unit
       else
         g.assign (← synthInstance ty)
 
+private theorem normalization_derivedTensor_obj (T : Scheme.{u})
+    (M N : DerivedCategory (Sheaf (Scheme.ProEt.topology T) C)) :
+    ((derivedTensor C T).obj M).obj N = M ⊗ N := rfl
+
 attribute [-instance] supportedSheaf_isMonoidal supportedSheaf_monoidalPreadditive
   supportedSheaf_isMonoidalGeneric supportedSheaf_monoidalPreadditiveGeneric
   supportedSheaf_smallColimitsGeneric supportedSheaf_intColimitsGeneric in
 private theorem normalization_tensorHom_eq (T : Scheme.{u})
     (S M N : DerivedCategory (Sheaf (Scheme.ProEt.topology T) C)) :
     (S ⟶ M ⊗ N) = (S ⟶ ((derivedTensor C T).obj M).obj N) := rfl
+
+private theorem normalization_externalProduct_def {B X Y : Scheme.{u}} (f : X ⟶ B) (g : Y ⟶ B)
+    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) C))
+    (L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) C)) :
+    (upperStar C (pullback.fst f g)).leftDerivedFunctor.obj K ⊗
+      (upperStar C (pullback.snd f g)).leftDerivedFunctor.obj L =
+        externalProduct C f g K L := by
+  unfold externalProduct
+  run_tac do
+    for g in ← Lean.Elab.Tactic.getGoals do supportedStructureCongr 40 g
+    Lean.Elab.Tactic.setGoals []
+
+private theorem normalization_external_full {B X Y : Scheme.{u}} (f : X ⟶ B) (g : Y ⟶ B)
+    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) C))
+    (L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) C)) :
+    ((derivedTensor C (pullback f g)).obj
+      ((upperStar C (pullback.fst f g)).leftDerivedFunctor.obj K)).obj
+      ((upperStar C (pullback.snd f g)).leftDerivedFunctor.obj L) =
+        externalProduct C f g K L := by
+  exact (normalization_derivedTensor_obj C (pullback f g) _ _).trans
+    (normalization_externalProduct_def C f g K L)
+
+/-- Identify the explicit tensor-bifunctor presentation with the existing external
+product. This named equality avoids repeatedly unfolding its monoidal instance.
+Source: blueprint supported exterior product
+(blueprint: def-pur-proetale-supported-exterior-product).
+Proof: unfold the existing external product and derived tensor bifunctor. Both
+expressions tensor the same two derived projection inverse images; the monoidal
+structure is the existing one and its proof fields agree by proof irrelevance. -/
+theorem supportedExternalProduct_eq
+    (A : Type (u + 1)) [CommRing A] {B X Y : Scheme.{u}}
+    (f : X ⟶ B) (g : Y ⟶ B)
+    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)))
+    (L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} A))) :
+    ((derivedTensor (ModuleCat.{u + 1} A) (pullback f g)).obj
+      ((upperStar (ModuleCat.{u + 1} A) (pullback.fst f g)).leftDerivedFunctor.obj K)).obj
+      ((upperStar (ModuleCat.{u + 1} A) (pullback.snd f g)).leftDerivedFunctor.obj L) =
+        externalProduct (ModuleCat.{u + 1} A) f g K L := by
+  refine Eq.mp ?_ (normalization_external_full (ModuleCat.{u + 1} A) f g K L)
+  run_tac do
+    for g in ← Lean.Elab.Tactic.getGoals do supportedStructureCongr 40 g
+    Lean.Elab.Tactic.setGoals []
 
 attribute [-instance] supportedSheaf_isMonoidal supportedSheaf_monoidalPreadditive
   supportedSheaf_isMonoidalGeneric supportedSheaf_monoidalPreadditiveGeneric
@@ -1392,5 +1438,80 @@ noncomputable def supportedCoefficientTensorDerived
           ((supportedSecondCoefficients A f g j).mapDerivedCategory.obj N) :=
   (cast (supportedCoefficientTensorDerivedHom_tensor A f g i j)
     (exists_unique_supportedCoefficientTensorDerived A f g i j).choose) M N
+
+/-- Pull back the supported evaluation counit along the first projection, retaining
+all exact-functor and total-derived pullback comparisons.
+Source: blueprint `def-pur-supported-exterior-product`, evaluation construction
+(blueprint: def-pur-proetale-supported-exterior-product). -/
+noncomputable def supportedFirstEvaluation
+    (A : Type (u + 1)) [CommRing A] [Finite A] {B X Y Z : Scheme.{u}}
+    (f : X ⟶ B) (g : Y ⟶ B) (i : Z ⟶ X) [IsClosedImmersion i] [IsLocallyNoetherian X]
+    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A))) :=
+  (Functor.mapDerivedCategoryCompIso (supportedCoefficients A i)
+      (upperStar (ModuleCat.{u + 1} A) (pullback.fst f g))).hom.app
+        ((supportedSectionsDerived A i).obj K) ≫
+    (upperStar (ModuleCat.{u + 1} A) (pullback.fst f g)).mapDerivedCategory.map
+      ((supportedCoefficientDerivedAdjunction A i).counit.app K) ≫
+    (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A)
+      (pullback.fst f g)).inv.app K
+
+/-- Pull back the supported evaluation counit along the second projection.
+Source: blueprint `def-pur-supported-exterior-product`, evaluation construction
+(blueprint: def-pur-proetale-supported-exterior-product). -/
+noncomputable def supportedSecondEvaluation
+    (A : Type (u + 1)) [CommRing A] [Finite A] {B X Y W : Scheme.{u}}
+    (f : X ⟶ B) (g : Y ⟶ B) (j : W ⟶ Y) [IsClosedImmersion j] [IsLocallyNoetherian Y]
+    (L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} A))) :=
+  (Functor.mapDerivedCategoryCompIso (supportedCoefficients A j)
+      (upperStar (ModuleCat.{u + 1} A) (pullback.snd f g))).hom.app
+        ((supportedSectionsDerived A j).obj L) ≫
+    (upperStar (ModuleCat.{u + 1} A) (pullback.snd f g)).mapDerivedCategory.map
+      ((supportedCoefficientDerivedAdjunction A j).counit.app L) ≫
+    (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A)
+      (pullback.snd f g)).inv.app L
+
+/-- The supported exterior product: the adjoint of the coefficient tensor comparison
+followed by the tensor of the two supported evaluation counits.
+Source: blueprint `def-pur-supported-exterior-product`, supported-section construction
+(blueprint: def-pur-proetale-supported-exterior-product). The comparison is normalized on every
+cochain bidegree, so this is the actual supported section pairing. In the bounded-below
+case the total support functor agrees with injective support resolutions. -/
+noncomputable def supportedExteriorProduct
+    (A : Type (u + 1)) [CommRing A] [Finite A] {B X Y Z W : Scheme.{u}}
+    (f : X ⟶ B) (g : Y ⟶ B) (i : Z ⟶ X) (j : W ⟶ Y)
+    [IsClosedImmersion i] [IsClosedImmersion j]
+    [IsLocallyNoetherian X] [IsLocallyNoetherian Y] [IsLocallyNoetherian (pullback f g)]
+    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)))
+    (L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} A))) :
+    (supportedSectionsDerived A i).obj K ⊗ (supportedSectionsDerived A j).obj L ⟶
+      (supportedSectionsDerived A (Etale.supportedProductImmersion f g i j)).obj
+        (externalProduct (ModuleCat.{u + 1} A) f g K L) :=
+  ((supportedCoefficientDerivedAdjunction A (Etale.supportedProductImmersion f g i j)).homEquiv _ _
+    (supportedCoefficientTensorDerived A f g i j
+        ((supportedSectionsDerived A i).obj K) ((supportedSectionsDerived A j).obj L) ≫
+      supportedDerivedTensorMap A (pullback f g)
+        (supportedFirstEvaluation A f g i K) (supportedSecondEvaluation A f g j L))) ≫
+    (supportedSectionsDerived A (Etale.supportedProductImmersion f g i j)).map
+      (eqToHom (supportedExternalProduct_eq A f g K L))
+
+/-- The actual pro-etale supported exterior product over a field. The locally
+Noetherian property required by closed direct image follows from finite type over
+the field and is installed from that theorem, without an additional hypothesis.
+Source: blueprint `lem-pur-kunneth-supported`, pro-etale realization clause
+(blueprint: def-pur-proetale-supported-exterior-product). -/
+noncomputable def supportedExteriorProductOverField
+    (A : Type (u + 1)) [CommRing A] [Finite A] (k : Type u) [Field k]
+    {X Y Z W : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of k))
+    (g : Y ⟶ Spec (CommRingCat.of k))
+    [LocallyOfFiniteType f] [LocallyOfFiniteType g]
+    (i : Z ⟶ X) (j : W ⟶ Y) [IsClosedImmersion i] [IsClosedImmersion j]
+    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)))
+    (L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} A))) :
+    (supportedSectionsDerived A i).obj K ⊗ (supportedSectionsDerived A j).obj L ⟶
+      (supportedSectionsDerived A (Etale.supportedProductImmersion f g i j)).obj
+        (externalProduct (ModuleCat.{u + 1} A) f g K L) :=
+  letI : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f
+  letI : IsLocallyNoetherian Y := LocallyOfFiniteType.isLocallyNoetherian g
+  supportedExteriorProduct A f g i j K L
 
 end AlgebraicGeometry.ProEtale

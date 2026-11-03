@@ -303,6 +303,75 @@ theorem isIso_specialization (N : ℕ) (hN : 0 < N)
   unfold specialization
   infer_instance
 
+private theorem sectionExceptionalComparison_eq
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {B B' : Scheme.{u}} {d : ℕ} {P : ExceptionalSectionPair B d}
+    {P' : ExceptionalSectionPair B' d} {v : B' ⟶ B}
+    (e : ExceptionalSectionChange P P' v) :
+    sectionExceptionalComparison A e = sectionMap A P.map P'.map v e.upper e.square
+      P.sect P'.sect e.section_comm := by
+  simp only [sectionExceptionalComparison, sectionCoherencePullbackIso, sectionMap,
+    Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv, Category.assoc]
+
+private def sectionFamily {V S : Scheme.{u}} [IsNoetherian S]
+    (d : ℕ) (g : V ⟶ S) [SmoothOfRelativeDimension d g] [IsSeparated g]
+    [QuasiCompact g] [HasCompactification g] (s : S ⟶ V) [IsClosedImmersion s]
+    (hs : s ≫ g = 𝟙 S) [Geometry d g s] : ExceptionalSectionFamily S d := by
+  have hpb := Scheme.Hom.isPullback_normalConeToDeformationSpace g s
+  have : SmoothOfRelativeDimension d (Scheme.Hom.normalConeProj g s) := by
+    have := smoothOfRelativeDimension_isStableUnderBaseChange (n := d)
+    exact MorphismProperty.of_isPullback hpb inferInstance
+  have : IsSeparated (Scheme.Hom.normalConeProj g s) :=
+    MorphismProperty.of_isPullback (P := @IsSeparated) hpb inferInstance
+  have : IsClosedImmersion (s.deformationSpaceSection ≫
+      Scheme.Hom.deformationSpaceProj g s) :=
+    (Scheme.Hom.deformationSpaceSection_deformationSpaceProj hs) ▸ inferInstance
+  have : IsClosedImmersion s.deformationSpaceSection :=
+    IsClosedImmersion.of_comp _ (Scheme.Hom.deformationSpaceProj g s)
+  let ambient : ExceptionalSectionPair (AffineSpace (ULift.{u} (Fin 1)) S) d := {
+    total := s.ker.deformationSpace
+    map := Scheme.Hom.deformationSpaceProj g s
+    sect := s.deformationSpaceSection
+    section_map := Scheme.Hom.deformationSpaceSection_deformationSpaceProj hs }
+  let one : ExceptionalSectionPair S d := {
+    total := V
+    map := g
+    sect := s
+    section_map := hs }
+  let zero : ExceptionalSectionPair S d := {
+    total := s.ker.normalCone
+    map := Scheme.Hom.normalConeProj g s
+    sect := s.normalConeZeroSection
+    section_map := Scheme.Hom.normalConeZeroSection_normalConeProj hs }
+  refine { ambient := ambient, fibre := fun t ↦ match t with
+             | false => zero
+             | true => one
+           restriction := ?_ }
+  intro t
+  cases t
+  · exact {
+      upper := s.ker.normalConeToDeformationSpace
+      square := hpb
+      section_comm := Scheme.Hom.normalConeZeroSection_comp_normalConeToDeformationSpace }
+  · exact {
+      upper := Scheme.Hom.deformationSpaceOneFibre g s
+      square := Scheme.Hom.isPullback_deformationSpaceOneFibre g s
+      section_comm := Scheme.Hom.comp_deformationSpaceOneFibre hs }
+
+private theorem sectionFamily_normalized_iff
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {V S : Scheme.{u}} [IsNoetherian S]
+    (d : ℕ) (g : V ⟶ S) [SmoothOfRelativeDimension d g] [IsSeparated g]
+    [QuasiCompact g] [HasCompactification g] (s : S ⟶ V) [IsClosedImmersion s]
+    (hs : s ≫ g = 𝟙 S) [Geometry d g s]
+    (κ : family A g s ≅ (ordinaryFinitePullback A
+      (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)).obj (sectionInvariant A g s)) :
+    (sectionFamily d g s hs).IsNormalized A κ ↔ Normalized A g s hs κ := by
+  simp only [ExceptionalSectionFamily.IsNormalized, ExceptionalSectionFamily.fibreMap,
+    sectionExceptionalComparison_eq, sectionFamily, exceptionalFamilyPoint, Normalized,
+    atOne, Bool.false_eq_true, ↓reduceIte]
+  rfl
+
 private theorem sectionPullback_endpoint
     (A : Type (u + 1)) [CommRing A]
     {B B' X X' : Scheme.{u}} (v : B' ⟶ B) (i : B ⟶ X) (i' : B' ⟶ X')
@@ -353,6 +422,40 @@ def etaleSectionMap (A : Type (u + 1)) [CommRing A] [Finite A]
     (upperStar (ModuleCat.{u + 1} A) s').leftDerivedFunctor.map
       ((leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) h).hom.app _ ≫
         (locality A h f).hom.app (𝟙_ _))
+
+private theorem sectionLocality_eq (A : Type (u + 1)) [CommRing A] [Finite A]
+    {U X S : Scheme.{u}} [IsNoetherian U] [IsNoetherian X] [IsNoetherian S]
+    (h : U ⟶ X) [Etale h] [IsSeparated h] [LocallyOfFiniteType h] [QuasiCompact h]
+    (f : X ⟶ S) [HasCompactification f] (f' : U ⟶ S) [HasCompactification f']
+    (w : h ≫ f = f') (s : S ⟶ X) (s' : S ⟶ U) (hs : s' ≫ h = s) :
+    ((leftDerivedUpperStarComp (ModuleCat.{u + 1} A) s' h s hs.symm).app _).hom ≫
+      (ordinaryFinitePullback A s').map
+        (sectionStructuralLocalityIso A h f f' w).hom =
+      etaleSectionMap A h f f' w s s' hs := by
+  subst f'
+  let E := existsUnique_etaleAmbientAdjointLocalityIso A h f
+    (HasCompactification.compactification f) (HasCompactification.compactification (h ≫ f))
+    (rightDerivedUpperShriek A f)
+    (rightDerivedUpperShriek A (h ≫ f))
+    (rightDerivedUpperShriekAdjunction A f)
+    (rightDerivedUpperShriekAdjunction A (h ≫ f))
+  have he : Classical.choose E = E.exists.choose :=
+    (E.choose_spec.2 _ E.exists.choose_spec).symm
+  simp only [sectionStructuralLocalityIso, Iso.trans_hom, Iso.app_hom,
+    etaleSectionMap, locality, Functor.map_comp, he]
+  rfl
+
+private theorem sectionExceptionalLocality_eq
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {B : Scheme.{u}} [IsNoetherian B] {d : ℕ} {P P' : ExceptionalSectionPair B d}
+    (e : ExceptionalSectionEtaleMap P P') :
+    (sectionExceptionalLocalityIso A e).hom =
+      etaleSectionMap A e.upper P.map P'.map e.map_comm
+        P.sect P'.sect e.section_comm := by
+  dsimp only [sectionExceptionalLocalityIso, Iso.trans_hom, Functor.mapIso_hom,
+    Iso.app_hom]
+  exact sectionLocality_eq A e.upper P.map P'.map e.map_comm
+    P.sect P'.sect e.section_comm
 
 attribute [local irreducible] rightDerivedLowerShriek
   rightDerivedUpperShriekAdjunction

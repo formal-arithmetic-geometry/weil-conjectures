@@ -55,6 +55,15 @@ def realization (b : Base l E) (T : Scheme.{u})
   letI := b.realizationAdditive T
   (b.realization T).mapDerivedCategory
 
+/-- The existing Dctf predicate transported through the sectionwise derived equivalence.
+This retains both independent uniform intervals and every finite-level constructibility
+condition, and adds no cartesian condition.
+Source: blueprint paragraph (3), Dctf inputs
+(blueprint: lem-sp-tower-compact-support-projection-formula). -/
+def constructibleTor (b : Base l E) (T : Scheme.{u})
+    (A : SpCoefficientTowersAbelian l E T) (C : D l E T) : Prop :=
+  spConstructibleTorTowers l E T A ((realization l E b T A).inverse.obj C)
+
 /-- The proper counit transpose, formed before any finite-level test or Tor hypothesis.
 Source: blueprint paragraph (3), pi_p
 (blueprint: lem-sp-tower-compact-support-projection-formula). -/

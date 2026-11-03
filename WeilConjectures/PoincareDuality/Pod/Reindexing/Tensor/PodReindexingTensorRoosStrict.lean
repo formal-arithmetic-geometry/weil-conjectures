@@ -8,6 +8,7 @@ module
 public import WeilConjectures.PoincareDuality.PodCompletedTensorReindex.PodCompletionTensorNormalization
 import WeilConjectures.PoincareDuality.Pod.Tensor.PodTensorRoosRepresentativeSquare
 import WeilConjectures.SmoothPurity.Sf.SfDerivedCompleteLegacyComparison
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedPullbackTensorComparison
 
 /-! # Strict Roos realization for normalized tensor reindexing -/
 
@@ -84,6 +85,19 @@ private theorem comparison_cancel {C : Type*} [Category C] {A B S R Z : C}
     apply (cancel_mono b).1
     simpa only [Category.assoc, Iso.hom_inv_id_assoc] using hs.trans h
 
+/-- Transporting a tensor comparison through isomorphisms preserves its normalization.
+Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5.
+Proof: cancel the two inverse comparison isomorphisms and the invertible final arrow.
+This is the categorical cancellation argument of the previous representative proof.
+(blueprint: lem-pod-tensor-comparison-cancel). -/
+theorem podTensorComparison_cancel
+    {C D : Type*} [Category C] [Category D] {P Q P' Q' : C} {A R Z : D}
+    (F : C × C ⥤ D) (f : P ≅ P') (g : Q ≅ Q') (e : F.obj (P', Q') ≅ R)
+    (a : A ⟶ F.obj (P, Q)) (r : A ⟶ R) (b : F.obj (P, Q) ⟶ Z) [hb : IsIso b]
+    (c : A ⟶ Z) (hs : r ≫ e.inv ≫ F.map (Prod.mkHom f.inv g.inv) ≫ b = c) :
+    HEq r (a ≫ F.map (Prod.mkHom f.hom g.hom) ≫ e.hom) ↔ c = a ≫ b := by
+  exact comparison_cancel (F.mapIso (Iso.prod f g)) e a r b c hs
+
 private theorem tensor_comparison_cancel
     {C D : Type*} [Category C] [Category D] {P Q P' Q' : C} {A R Z : D}
     (F : C × C ⥤ D) (f : P ≅ P') (g : Q ≅ Q') (e : F.obj (P', Q') ≅ R)
@@ -158,53 +172,35 @@ private theorem representative_equivalence
     ((integralCompletedTensorComparison l E X).app
       ((podGoodReindex l E g D).obj P,(podGoodReindex l E g D).obj Q)) a r B c hs
 
-/-- The strict Roos equation is equivalent to the canonical equation on good
-representatives. No naturality of the independently supplied derived tensor family
-is assumed, so the conclusion concerns actual localized representatives only.
+/-- For arbitrary commutative condensed coefficients, a derived pullback/tensor
+comparison satisfies the total-complex normalization precisely when it is the canonical
+comparison. Naturality in both variables is part of the normalization.
 
-Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5;
-Stacks 07A4 and 0941 (blueprint: lem-pod-reindexing-tensor-roos-model-iff-canonical).
+Source: blueprint prop-pod-dual-tate-data-compatibility, Steps 1 and 5, using
+its def-weil-derived-pullback-tensor-hom on the current coefficient model.
+(blueprint: lem-pod-reindexing-tensor-roos-model-iff-canonical).
 
-Proof: the representative square identifies the localized strict Roos arrow,
-transported through the two representative comparisons and the completion maps,
-with the canonical completed tensor arrow. The completion maps on constructible
-inputs are invertible by CompleteUnit. Cancel their tensor and the representative
-comparison to obtain the equivalence, independently for each pair of representatives.
-
-STATEMENT-DISPUTED: the old generator and tower naturality laws do not
-constrain T.tensor. In particular they cannot imply the global Canonical equation.
-The repaired statement identifies exactly the equation needed by the parent.
--/
+Proof: the canonical family satisfies the representative square by its defining
+specification. The uniqueness theorem for that specification identifies every normalized
+family with it; conversely substitute that equality. The specification is on whole
+complexes before localization, so no faithfulness of finite evaluation is used.
+Zero complexes and empty schemes are included in the same uniqueness theorem. -/
 theorem podReindexingTensorRoosNormalization_model_iff_canonical
-    {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
-    [∀ x : X, Invertible (l : X.residueField x)]
-    [∀ y : Y, Invertible (l : Y.residueField y)]
-    (D : PodCompletionReindex l E g) (hD : PodCompletionReindex.Laws l E g D)
-    (T : PodCompletedTensorReindex l E g D)
-    (hgen : PodCompletedTensorReindex.Generators l E g D T) :
-    PodCompletedTensorReindex.Model l E g D T ↔
-      ∀ (P Q : (integralOperationsGoodComplex l E Y).FullSubcategory)
-        (hP : sfIntegralConstructible l E Y (DerivedCategory.Q.obj P.obj))
-        (hQ : sfIntegralConstructible l E Y (DerivedCategory.Q.obj Q.obj)),
-        (podOrdinaryToCompleted l E g D).app
-            ((integralCompletedTensor l E Y).obj
-              (DerivedCategory.Q.obj P.obj, DerivedCategory.Q.obj Q.obj)) ≫
-            ((canonicalIntegralPullbackTensor l E g ⟨_,hP⟩ ⟨_,hQ⟩).hom).hom =
-          (T.tensor ⟨_,hP⟩ ⟨_,hQ⟩).hom ≫
-            (integralCompletedTensor l E X).map
-              (Prod.mkHom
-                ((podOrdinaryToCompleted l E g D).app (DerivedCategory.Q.obj P.obj))
-                ((podOrdinaryToCompleted l E g D).app (DerivedCategory.Q.obj Q.obj))) := by
-  have : (isoReductionIntegralInverse l E g).Additive :=
-    isoSectionwiseModuleInverseImage_additive.{u, u} g (isoReductionCompletedMap l E g).hom
-  have : PreservesFiniteLimits (isoReductionIntegralInverse l E g) :=
-    isoSectionwiseModuleInverseImage_limits.{u, u} g (isoReductionCompletedMap l E g).hom
-  have : PreservesFiniteColimits (isoReductionIntegralInverse l E g) :=
-    isoSectionwiseModuleInverseImage_colimits.{u, u} g (isoReductionCompletedMap l E g).hom
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ]
+    {X Y : AlgebraicGeometry.Scheme.{u}} (g : X ⟶ Y)
+    (T : AlgebraicGeometry.ProEtale.CondensedRing.SupportDerivedTensorComparisonFamily Λ g) :
+    AlgebraicGeometry.ProEtale.CondensedRing.SupportDerivedTensorNormalization Λ g T ↔
+      T = AlgebraicGeometry.ProEtale.CondensedRing.supportDerivedTensorComparison Λ g := by
+  let h := AlgebraicGeometry.ProEtale.CondensedRing.existsUnique_supportDerivedTensorComparison
+    Λ g
+  have hc : AlgebraicGeometry.ProEtale.CondensedRing.SupportDerivedTensorNormalization Λ g
+      (AlgebraicGeometry.ProEtale.CondensedRing.supportDerivedTensorComparison Λ g) :=
+    h.exists.choose_spec
   constructor
-  · intro h P Q hP hQ
-    exact (representative_equivalence l E g D hD T hgen P Q hP hQ).mp (h P Q hP hQ)
-  · intro h P Q hP hQ
-    exact (representative_equivalence l E g D hD T hgen P Q hP hQ).mpr (h P Q hP hQ)
+  · intro hT
+    exact h.unique hT hc
+  · intro hT
+    simpa only [hT] using hc
 
 end WeilConjectures

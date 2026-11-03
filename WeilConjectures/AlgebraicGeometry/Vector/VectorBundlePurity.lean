@@ -184,6 +184,7 @@ import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 import WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
 import WeilConjectures.SixFunctors.Etale.Derived.CoefficientsShift
+public import WeilConjectures.ProperBaseChange.RingedTopoiDerivedPullback
 
 /-!
 # Vector-bundle purity before smooth orientation
@@ -252,6 +253,38 @@ def vectorBundlePurityAdjunction (A : Type (u + 1)) [CommRing A] [Finite A]
   letI : LocallyOfFiniteType (VectorBundleZeroSection.π S d M) :=
     (vectorIntegration_geometry S d M).2.1
   rightDerivedUpperShriekAdjunction A (VectorBundleZeroSection.π S d M)
+
+/-- The object pi^*K(d)[2d], with the prescribed ordered tensor of shifted finite Tate
+lines used by the integration definition. Pullback is the recorded exact inverse image.
+Source: blueprint vector-bundle purity, displayed source of gamma
+(blueprint: thm-amb-vector-bundle-purity). -/
+def vectorBundlePurityTwistedPullback (A : Type (u + 1)) [CommRing A] (N : ℕ)
+    (hA : (N : A) = 0) (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)
+    (M : SheafOfModules.{u} S.ringCatSheaf) [M.IsFiniteLocallyFreeOfRank d]
+    (K : DerivedCategoryModule A S) :=
+  ((derivedTensor (ModuleCat.{u + 1} A) (VectorBundleZeroSection.scheme S d M)).obj
+    ((ordinaryFinitePullback A (VectorBundleZeroSection.π S d M)).obj K)).obj
+      (vectorIntegrationCoefficient A N hA S d M)
+
+/-- The actual compactified tensor projection map, with K first. The middle map is
+proper projection followed by the inverse open-extension tensor comparison. Both outer
+maps are the canonical signed tensor symmetries, as in the recorded proper formula.
+Source: Stacks Tag 0GL1 and Tag 0GL5; blueprint vector-bundle purity, proof step 4
+(blueprint: thm-amb-vector-bundle-purity). -/
+def vectorBundlePurityProjectionMap (A : Type (u + 1)) [CommRing A] (N : ℕ)
+    (hA : (N : A) = 0) (S : Scheme.{u}) [IsNoetherian S] (d : ℕ)
+    (M : SheafOfModules.{u} S.ringCatSheaf) [M.IsFiniteLocallyFreeOfRank d]
+    (K : DerivedCategoryModule A S) :
+    ((derivedTensor (ModuleCat.{u + 1} A) S).obj K).obj
+        (vectorIntegrationSource A N hA S d M) ⟶
+      (vectorBundlePurityLower A S d M).obj
+        (vectorBundlePurityTwistedPullback A N hA S d M K) :=
+  letI : IsAffineHom (VectorBundleZeroSection.π S d M) :=
+    (vectorIntegration_geometry S d M).1
+  letI : LocallyOfFiniteType (VectorBundleZeroSection.π S d M) :=
+    (vectorIntegration_geometry S d M).2.1
+  compactProjectionMapCoeffFirst A (VectorBundleZeroSection.π S d M) K
+    (vectorIntegrationCoefficient A N hA S d M)
 
 /-- Positive-level finiteness, reused through the existing sheaf-universe lift.
 Source: finite-coefficient notation and def-weil-l-adic-coefficient-extension, clause 4

@@ -113,6 +113,20 @@ private lemma constantUnit_global
   erw [hx, hz]
   exact constantUnit_terminal C i M
 
+private theorem globalPullback_eq (A : Type (u + 1)) [CommRing A]
+    {T S : Scheme.{u}} (h : S ⟶ T)
+    (K : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) :
+    globalSectionsUpperStarMap (ModuleCat.{u + 1} A) h K =
+      (Sheaf.Γ T.smallEtaleTopology (ModuleCat.{u + 1} A)).map
+        ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) h).unit.app K) ≫
+      (lowerStarCompGlobalSectionsIso (ModuleCat.{u + 1} A) h).hom.app
+        ((upperStar (ModuleCat.{u + 1} A) h).obj K) := by
+  dsimp only [lowerStarCompGlobalSectionsIso, Iso.trans_hom, NatTrans.comp_app,
+    Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, Iso.symm_hom]
+  erw [(Sheaf.ΓNatIsoSheafSections T.smallEtaleTopology (ModuleCat.{u + 1} A)
+    terminalIsTerminal).hom.naturality_assoc]
+  rfl
+
 private theorem globalSectionsUpperStarMap_naturality (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} (m : X ⟶ Y)
     {F F' : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A)} (k : F ⟶ F') :
@@ -153,5 +167,87 @@ private theorem globalSectionsUpperStarMap_naturality (A : Type (u + 1)) [CommRi
     eK.inv.app _ ≫ (Sheaf.Γ X.smallEtaleTopology (ModuleCat.{u + 1} A)).map
         ((upperStar (ModuleCat.{u + 1} A) m).map k) at hk
   rw [hk]
+
+private theorem constantAdjunct_pullback (A : Type (u + 1)) [CommRing A]
+    {T S : Scheme.{u}} (h : S ⟶ T) (M : ModuleCat.{u + 1} A)
+    (K : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))
+    (t : (constantSheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)).obj M ⟶ K) :
+    (constantSheafΓAdj S.smallEtaleTopology (ModuleCat.{u + 1} A)).homEquiv _ _
+        ((Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} A) h).inv.app M ≫
+          (upperStar (ModuleCat.{u + 1} A) h).map t) =
+    (constantSheafΓAdj T.smallEtaleTopology (ModuleCat.{u + 1} A)).homEquiv _ _ t ≫
+      globalSectionsUpperStarMap (ModuleCat.{u + 1} A) h K := by
+  let C := ModuleCat.{u + 1} A
+  let ax := constantSheafΓAdj T.smallEtaleTopology C
+  let az := constantSheafΓAdj S.smallEtaleTopology C
+  let H := upperStar C h
+  let γ := lowerStarCompGlobalSectionsIso C h
+  let e := Scheme.upperStarConstantSheafIso C h
+  have hu : ax.unit.app M ≫ globalSectionsUpperStarMap C h
+      ((constantSheaf T.smallEtaleTopology C).obj M) ≫
+      (Sheaf.Γ S.smallEtaleTopology C).map (e.hom.app M) = az.unit.app M := by
+    rw [globalPullback_eq]
+    have hg := γ.hom.naturality (e.hom.app M)
+    dsimp only [Functor.comp_map] at hg
+    erw [Category.assoc, ← hg, ← Functor.map_comp_assoc]
+    exact constantUnit_global C h M
+  have hu' : az.unit.app M ≫ (Sheaf.Γ S.smallEtaleTopology C).map (e.inv.app M) =
+      ax.unit.app M ≫ globalSectionsUpperStarMap C h
+        ((constantSheaf T.smallEtaleTopology C).obj M) := by
+    rw [← hu]
+    simp only [Category.assoc, ← Functor.map_comp, Iso.hom_inv_id_app]
+    erw [CategoryTheory.Functor.map_id, Category.comp_id]
+  change az.unit.app M ≫ (Sheaf.Γ S.smallEtaleTopology C).map (e.inv.app M ≫ H.map t) =
+    (ax.unit.app M ≫ (Sheaf.Γ T.smallEtaleTopology C).map t) ≫
+      globalSectionsUpperStarMap C h K
+  rw [Functor.map_comp, ← Category.assoc, hu', Category.assoc]
+  simpa only [Category.assoc] using congrArg (fun v ↦ ax.unit.app M ≫ v)
+    (globalSectionsUpperStarMap_naturality A h t).symm
+
+/-- The ordinary support-restriction mate preserves the closed-coefficient quotient.
+Source: Stacks Tag 09XP, coefficient restriction calculation of
+lem-pur-supported-product-localization, step 11.
+(blueprint: lem-pur-supported-coefficient-open-mate-quotient).
+Proof: apply the normalized supported-coefficient adjunction on the open scheme.
+The unit formula for mates turns its transpose into the old adjunction unit followed
+by support restriction. The latter is defined by the kernel inclusion and the actual
+pullback of global sections. The normalization of constant-sheaf inverse image carries
+the old constant adjunct to the new one. The old supported adjunction normalization
+then identifies it with the pulled-back closed quotient. Injectivity of the constant
+adjunction Hom equivalence gives the equality. No flatness or nonempty-support
+assumption is needed, and the argument includes empty opens and zero modules. -/
+theorem supportedCoefficientOpenMate_quotient (A : Type (u + 1)) [CommRing A]
+    {T S B D : Scheme.{u}} (h : S ⟶ T) [IsOpenImmersion h]
+    (b : B ⟶ T) (d : D ⟶ S) [IsClosedImmersion b] [IsClosedImmersion d]
+    (hd : d.openComplement = h ⁻¹ᵁ b.openComplement) (M : ModuleCat.{u + 1} A) :
+    supportedCoefficientQuotient A d M ≫
+      (supportCoefficientMate (supportedCoefficientAdjunction A b)
+        (supportedCoefficientAdjunction A d) (upperStar (ModuleCat.{u + 1} A) h)
+        (supportTransport A h b d hd)).app M =
+    (Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} A) h).inv.app M ≫
+      (upperStar (ModuleCat.{u + 1} A) h).map (supportedCoefficientQuotient A b M) := by
+  let adj := supportedCoefficientAdjunction A b
+  let adj' := supportedCoefficientAdjunction A d
+  let H := upperStar (ModuleCat.{u + 1} A) h
+  let r := supportTransport A h b d hd
+  have hn := (exists_unique_supportedCoefficientAdjunction A d).choose_spec.1 M
+    (H.obj ((supportedCoefficients A b).obj M))
+    (adj'.homEquiv _ _ ((supportCoefficientMate adj adj' H r).app M))
+  erw [Equiv.symm_apply_apply] at hn
+  erw [supportMate_unit] at hn
+  rw [hn, Category.assoc]
+  erw [(exists_unique_supportTransport A h b d hd).choose_spec.1]
+  apply (constantSheafΓAdj S.smallEtaleTopology (ModuleCat.{u + 1} A)).homEquiv _ _ |>.injective
+  rw [Equiv.apply_symm_apply, constantAdjunct_pullback]
+  have hb := (exists_unique_supportedCoefficientAdjunction A b).choose_spec.1 M
+    ((supportedCoefficients A b).obj M) (adj.unit.app M)
+  have hid : (adj.homEquiv M ((supportedCoefficients A b).obj M)).symm (adj.unit.app M) =
+      𝟙 _ := by
+    apply (adj.homEquiv _ _).injective
+    erw [Equiv.apply_symm_apply, Adjunction.homEquiv_apply,
+      CategoryTheory.Functor.map_id, Category.comp_id]
+  erw [hid, Category.comp_id] at hb
+  rw [hb, Equiv.apply_symm_apply]
+  exact (Category.assoc _ _ _).symm
 
 end AlgebraicGeometry.Etale

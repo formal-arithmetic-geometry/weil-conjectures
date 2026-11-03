@@ -131,6 +131,26 @@ private theorem intrinsic_bc_iff_etale_origin
   · rintro ⟨G, hG, ⟨e⟩⟩
     exact ⟨⟨G, hG⟩, ⟨e⟩⟩
 
+private noncomputable def intrinsic_compact_support_comparison
+    (A : Type u) [CommRing A] [Finite A] {X Y : Scheme.{u}} {f : X ⟶ Y}
+    (c : Compactification f) :
+    (sfIntrinsicDerivedEquivalence X A).functor ⋙ sfIntrinsicCompactSupport c A ≅
+      ProEtale.rightDerivedLowerShriekOfCompactification
+        (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) c ⋙
+        (sfIntrinsicDerivedEquivalence Y A).functor := by
+  let EX := sfIntrinsicModuleEquivalence X A
+  let EZ := sfIntrinsicModuleEquivalence c.Z A
+  let J := ProEtale.openImmersionLowerShriek
+    (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) c.i
+  let o : EX.functor ⋙ sfIntrinsicExtensionByZero c.i A ≅ J ⋙ EZ.functor :=
+    EX.funInvIdAssoc (J ⋙ EZ.functor)
+  let od := (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
+    Functor.mapDerivedCategoryNatIso o ≪≫ Functor.mapDerivedCategoryCompIso _ _
+  exact (Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerRight od _ ≪≫ Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft _ (sfIntrinsicDerivedDirectImageComparison c.g A) ≪≫
+    (Functor.associator _ _ _).symm
+
 private theorem coefficient_has_invertible_exponent
     (K₀ : Type u) [Field K₀] (hl : IsUnit (l : K₀)) (n : ℕ) (_hn : 1 ≤ n) :
     HasInvertibleExponent (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))
@@ -163,6 +183,47 @@ private theorem coefficient_has_invertible_exponent
     simpa only [Nat.cast_pow] using hkill
   · have hu := (hl.pow n).map (Scheme.ΓSpecIso (.of K₀)).inv.hom
     simpa only [map_pow, map_natCast, Nat.cast_pow] using hu
+
+private theorem etale_bc_iff
+    (A : Type (u + 1)) [CommRing A] [Finite A] (T : Scheme.{u})
+    (G : Etale.DerivedCategoryModule A T) :
+    Etale.DerivedCategory.isBoundedConstructible A T G ↔
+      Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} A) T G := by
+  constructor
+  · rintro ⟨hc, a, b, _, hab⟩
+    exact ⟨⟨⟨a, (DerivedCategory.isGE_iff G a).2 fun i hi ↦ hab i (Or.inl hi)⟩,
+      ⟨b, (DerivedCategory.isLE_iff G b).2 fun i hi ↦ hab i (Or.inr hi)⟩⟩,
+      fun i ↦ (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).1 (hc i)⟩
+  · rintro ⟨⟨⟨a, ha⟩, ⟨b, hb⟩⟩, hc⟩
+    refine ⟨fun i ↦ (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).2 (hc i),
+      min a b, max a b, min_le_max, fun i hi ↦ ?_⟩
+    rcases hi with hi | hi
+    · exact (DerivedCategory.isGE_iff G a).1 ha i (hi.trans_le (min_le_left _ _))
+    · exact (DerivedCategory.isLE_iff G b).1 hb i ((le_max_right _ _).trans_lt hi)
+
+private theorem intrinsic_bc_realization_iff
+    (n : ℕ) (hn : 1 ≤ n) (T : Scheme.{u})
+    (L : DerivedCategory (Sheaf (ProEt.topology T)
+      (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))))) :
+    letI := Padic.finite_coefficientExtensionRing l E n hn
+    intrinsicFiniteTorsionConstructible l E n hn T
+      ((sfIntrinsicDerivedEquivalence T (Padic.coefficientExtensionRing l E n)).functor.obj L) ↔
+      ProEtale.DerivedCategory.boundedConstructible
+        (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))) T L := by
+  have := Padic.finite_coefficientExtensionRing l E n hn
+  let A := Padic.coefficientExtensionRing l E n
+  let F := sfIntrinsicDerivedEquivalence T A
+  let C := ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) T
+  let r : C.mapDerivedCategory ⋙ F.functor ≅
+      ProEtale.finiteCoefficientIntrinsicDerivedComparison T A :=
+    (Functor.mapDerivedCategoryCompIso C (sfIntrinsicModuleEquivalence T A).functor).symm
+  rw [intrinsic_bc_iff_etale_origin l E n hn]
+  constructor
+  · rintro ⟨G, hG, ⟨e⟩⟩
+    refine ⟨G, (etale_bc_iff _ _ G).1 hG, ⟨?_⟩⟩
+    exact F.fullyFaithfulFunctor.preimageIso ((r.app G) ≪≫ e)
+  · rintro ⟨G, hG, ⟨e⟩⟩
+    exact ⟨G, (etale_bc_iff _ _ G).2 hG, ⟨(r.app G).symm ≪≫ F.functor.mapIso e⟩⟩
 
 private theorem intrinsic_bc_iso
     (n : ℕ) (hn : 1 ≤ n) (T : Scheme.{u})

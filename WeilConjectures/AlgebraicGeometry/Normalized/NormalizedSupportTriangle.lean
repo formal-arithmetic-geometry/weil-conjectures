@@ -23,6 +23,17 @@ import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+public import Mathlib.Algebra.Homology.DerivedCategory.KInjective
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+public import WeilConjectures.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
+public import WeilConjectures.SixFunctors.OpenClosed.Exact
 
 /-!
 # Canonically normalized support localization
@@ -952,6 +963,60 @@ noncomputable def normalizedSupportTriangle (A : Type (u + 1)) [CommRing A]
     ((supportOpenDerivedComparison A b c.openComplement).inv.app K ≫
       (supportLocalizationBoundary A b c).app K)
 
+/-- The normalized triangle is distinguished and specializes to the recorded D+ triangle.
+Source: Tag 09XP (blueprint: lem-pur-support-restriction-triangle).
+Proof: compute all three functors on a termwise injective K-injective resolution. The
+boundary normalization identifies this triangle with the short exact complex triangle,
+which is distinguished. Bounded-below injective resolutions give the earlier D+ form
+through rightDerivedFunctorPlusCompatibility and exact open inverse image. -/
+theorem normalizedSupportTriangle_distinguished (A : Type (u + 1)) [CommRing A]
+    {T B C : Scheme.{u}} (b : B ⟶ T) (c : C ⟶ T)
+    [IsClosedImmersion b] [IsClosedImmersion c]
+    (K : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))) :
+    normalizedSupportTriangle A b c K.obj ∈ distTriang (DerivedCategory (ModuleCat.{u + 1} A)) := by
+  let F := supportedEtaleSections A T (supportIntersection b c).openComplement
+  let G := supportedEtaleSections A T b.openComplement
+  let H := supportOpenComposite A b c.openComplement
+  let a := Functor.rightDerivedFunctorNatTrans (supportInclusion A b c)
+  let r := Functor.rightDerivedFunctorNatTrans
+    (supportOpenRestriction A b c.openComplement)
+  let δ := supportLocalizationBoundary A b c
+  let R := DerivedCategory.Plus.injectiveModel K
+  have hQ : Triangle.mk (a.app (DerivedCategory.Q.obj R.I))
+      (r.app (DerivedCategory.Q.obj R.I)) (δ.app (DerivedCategory.Q.obj R.I)) ∈
+        distTriang (DerivedCategory (ModuleCat.{u + 1} A)) := by
+    refine isomorphic_distinguished _
+      (DerivedCategory.triangleOfSES_distinguished
+        (supportLocalizationComplex_shortExact A b c R.I)) _
+      (Triangle.isoMk _ _ (F.rightDerivedFunctorObjQIso R.I)
+        (G.rightDerivedFunctorObjQIso R.I) (H.rightDerivedFunctorObjQIso R.I) ?_ ?_ ?_)
+    · exact Functor.rightDerivedFunctorNatTrans_app_Q_obj _ R.I
+    · exact Functor.rightDerivedFunctorNatTrans_app_Q_obj _ R.I
+    · exact (exists_unique_supportLocalizationBoundary A b c).choose_spec.1 R.I
+  have hK : Triangle.mk (a.app K.obj) (r.app K.obj) (δ.app K.obj) ∈
+      distTriang (DerivedCategory (ModuleCat.{u + 1} A)) := by
+    refine isomorphic_distinguished _ hQ _
+      (Triangle.isoMk _ _ (F.rightDerivedFunctor.mapIso R.iso.symm)
+        (G.rightDerivedFunctor.mapIso R.iso.symm)
+        (H.rightDerivedFunctor.mapIso R.iso.symm) ?_ ?_ ?_)
+    · exact (a.naturality R.iso.inv).symm
+    · exact (r.naturality R.iso.inv).symm
+    · exact (δ.naturality R.iso.inv).symm
+  refine isomorphic_distinguished _ hK _
+    (Triangle.isoMk _ _ (Iso.refl _) (Iso.refl _)
+      ((supportOpenDerivedComparison A b c.openComplement).symm.app K.obj) ?_ ?_ ?_)
+  · change a.app K.obj ≫ 𝟙 _ = 𝟙 _ ≫ a.app K.obj
+    simp only [Category.comp_id, Category.id_comp]
+  · change (r.app K.obj ≫ (supportOpenDerivedComparison A b c.openComplement).hom.app K.obj) ≫
+      (supportOpenDerivedComparison A b c.openComplement).inv.app K.obj =
+        𝟙 _ ≫ r.app K.obj
+    simp only [Category.assoc, Iso.hom_inv_id_app, Category.comp_id, Category.id_comp]
+  · change ((supportOpenDerivedComparison A b c.openComplement).inv.app K.obj ≫
+      δ.app K.obj) ≫ (𝟙 _)⟦(1 : ℤ)⟧' =
+        (supportOpenDerivedComparison A b c.openComplement).inv.app K.obj ≫ δ.app K.obj
+    rw [(shiftFunctor (DerivedCategory (ModuleCat.{u + 1} A)) (1 : ℤ)).map_id]
+    exact Category.comp_id _
+
 /-- The uniquely normalized ordinary supported transport.
 Source: Tag 09XP (blueprint: lem-pur-support-restriction-triangle). -/
 noncomputable def supportTransport (A : Type (u + 1)) [CommRing A]
@@ -1031,5 +1096,14 @@ theorem derivedSupportTransport_isIso (A : Type (u + 1)) [CommRing A]
   change IsIso (Functor.rightDerivedFunctorNatTrans (supportTransport A h b d hd) ≫
     (supportTransportComparison A h d).hom)
   infer_instance
+
+/-- Support invariance uses equality of open complements of the two closed supports.
+Source: Tag 09XP (blueprint: lem-pur-support-restriction-triangle). -/
+noncomputable def derivedSupportCongruence (A : Type (u + 1)) [CommRing A]
+    {T B D : Scheme.{u}} (b : B ⟶ T) (d : D ⟶ T)
+    [IsClosedImmersion b] [IsClosedImmersion d] (hd : b.openComplement = d.openComplement) :
+    supportedSectionsDerived A b ≅ supportedSectionsDerived A d :=
+  Functor.rightDerivedFunctorNatIso
+    (eqToIso (congrArg (supportedEtaleSections A T) hd))
 
 end AlgebraicGeometry.Etale

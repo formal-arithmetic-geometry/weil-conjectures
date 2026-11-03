@@ -170,6 +170,7 @@ import WeilConjectures.SmoothPurity.Pur.PurNormalizedReconstructionAdjunctionCal
 import WeilConjectures.SmoothPurity.Sf.SfDerivedCompleteLegacyComparison
 
 public import WeilConjectures.PoincareDuality.Derived.DerivedAutomorphismHomEvaluationContinuationB
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.WeaklyEtaleIhom
 
 /-! # Internal Hom and evaluation under coefficient-site isomorphisms
 
@@ -477,3 +478,122 @@ theorem derivedAutomorphismHomEvaluation
     exact ⟨e, fun _ ↦ rfl⟩
 
 end WeilConjectures
+
+namespace CategoryTheory.Functor.LaxMonoidal
+
+/-- Uncurried form of the canonical closed comparison. Its naturality uses the
+mate's naturality in the second variable and precomposition in the first.
+Source: current blueprint prop-pod-dual-tate-data-compatibility, Steps 1--2.
+(blueprint: def-sf-adic-closed-reindexing-maps). -/
+def podUncurriedHomComparison (F : C ⥤ D) [F.LaxMonoidal] :
+    Functor.uncurry.obj MonoidalClosed.internalHom ⋙ F ⟶
+      F.op.prod F ⋙ Functor.uncurry.obj MonoidalClosed.internalHom where
+  app P := (ihomComparison F P.1.unop).natTrans.app P.2
+  naturality {P Q} f := by
+    change F.map ((pre f.1.unop).app P.2 ≫ (ihom Q.1.unop).map f.2) ≫
+        (ihomComparison F Q.1.unop).natTrans.app Q.2 =
+      (ihomComparison F P.1.unop).natTrans.app P.2 ≫
+        (pre (F.map f.1.unop)).app (F.obj P.2) ≫
+        (ihom (F.obj Q.1.unop)).map (F.map f.2)
+    rw [F.map_comp, Category.assoc]
+    rw [show F.map ((ihom Q.1.unop).map f.2) ≫
+        (ihomComparison F Q.1.unop).natTrans.app Q.2 =
+      (ihomComparison F Q.1.unop).natTrans.app P.2 ≫
+        (ihom (F.obj Q.1.unop)).map (F.map f.2) from
+      (ihomComparison F Q.1.unop).natTrans.naturality f.2]
+    rw [← Category.assoc, map_pre_app_comp_ihomComparison_app]
+    simp only [Category.assoc]
+
+/-- Pullback preserves transposition for every tensor map, by the evaluation mate
+identity and naturality of the tensorator.
+Source: current blueprint fix-lem-tensor-adjunction.proof.md, Step 1.
+(blueprint: def-sf-integral-completion-transpose). -/
+theorem podMapCurry (F : C ⥤ D) [F.LaxMonoidal] (M L N : C) (b : M ⊗ L ⟶ N) :
+    F.map (MonoidalClosed.curry b) ≫ (ihomComparison F M).natTrans.app N =
+      MonoidalClosed.curry (μ F M L ≫ F.map b) := by
+  apply uncurry_injective
+  rw [uncurry_natural_left, uncurry_eq, ihomComparison_ev, μ_natural_right_assoc,
+    ← F.map_comp, ← uncurry_eq, uncurry_curry, uncurry_curry]
+
+/-- Automorphism pullback gives the evaluation-defined natural internal-Hom isomorphism
+for every commutative condensed ring and all unbounded inputs. Its tensor-Hom mate
+is the specified tensorator followed by pullback of evaluation.
+Source: current blueprint def-weil-derived-pullback-tensor-hom and
+prop-pod-dual-tate-data-compatibility, Steps 1--2.
+(blueprint: lem-pod-condensed-automorphism-hom-evaluation).
+Proof: an isomorphism is weakly etale. The existing weakly-etale derived closed
+comparison theorem makes every component invertible. Assemble these components using
+NatIso.ofComponents, as in the previous proof. The mate's counit equation is precisely
+the evaluation equation; its curry characterization is the transposition equation. -/
+theorem derivedAutomorphismHomEvaluation {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
+    ∃ e : podCondensedInternalHom Λ Y ⋙ L((g)^*⟦Λ⟧) ≅
+        (L((g)^*⟦Λ⟧).op.prod L((g)^*⟦Λ⟧)) ⋙ podCondensedInternalHom Λ X,
+      (∀ M N, e.hom.app (op M, N) = podCondensedHomComparison Λ g M N) ∧
+      (∀ M N,
+        L((g)^*⟦Λ⟧).obj M ◁ e.hom.app (op M, N) ≫
+            podCondensedEvaluation Λ X (L((g)^*⟦Λ⟧).obj M) (L((g)^*⟦Λ⟧).obj N) =
+          Functor.LaxMonoidal.μ L((g)^*⟦Λ⟧) M _ ≫
+            L((g)^*⟦Λ⟧).map (podCondensedEvaluation Λ Y M N)) ∧
+      (∀ M L N (b : M ⊗ L ⟶ N),
+        L((g)^*⟦Λ⟧).map (podCondensedTranspose Λ Y M L N b) ≫ e.hom.app (op M, N) =
+          podCondensedTranspose Λ X (L((g)^*⟦Λ⟧).obj M) (L((g)^*⟦Λ⟧).obj L)
+            (L((g)^*⟦Λ⟧).obj N) (Functor.LaxMonoidal.μ L((g)^*⟦Λ⟧) M L ≫
+              L((g)^*⟦Λ⟧).map b)) := by
+  have hi (M N) : IsIso (podCondensedHomComparison Λ g M N) := by
+    have := isIso_ihomComparison_leftDerivedUpperStar_of_weaklyEtale Λ g M
+    exact NatIso.isIso_app_of_isIso _ N
+  let e : podCondensedInternalHom Λ Y ⋙ L((g)^*⟦Λ⟧) ≅
+      (L((g)^*⟦Λ⟧).op.prod L((g)^*⟦Λ⟧)) ⋙ podCondensedInternalHom Λ X :=
+    NatIso.ofComponents
+      (fun P ↦ @asIso _ _ _ _ (podCondensedHomComparison Λ g P.1.unop P.2) (hi _ _))
+      (fun f ↦ (podCondensedHomComparisonNat Λ g).naturality f)
+  refine ⟨e, fun _ _ ↦ rfl, ?_, ?_⟩
+  · intro M N
+    exact Functor.LaxMonoidal.ihomComparison_ev L((g)^*⟦Λ⟧) M N
+  · intro M L N b
+    exact Functor.LaxMonoidal.podMapCurry L((g)^*⟦Λ⟧) M L N b
+
+/-- The evaluation-defined comparison is natural in both arguments, before restricting
+any constructible subcategory. Source: current blueprint derived operations and
+prop-pod-dual-tate-data-compatibility, Steps 1--2.
+(blueprint: def-sf-adic-closed-reindexing-maps).
+Proof: naturality in the second argument is naturality of the mate transformation;
+naturality in the first is the precomposition identity for that same mate. Compose
+the two equalities using the uncurried internal-Hom functor's map formula. -/
+def podCondensedHomComparisonNat {X Y : Scheme.{u}} (g : X ⟶ Y) :
+    podCondensedInternalHom Λ Y ⋙ L((g)^*⟦Λ⟧) ⟶
+      (L((g)^*⟦Λ⟧).op.prod L((g)^*⟦Λ⟧)) ⋙ podCondensedInternalHom Λ X :=
+  Functor.LaxMonoidal.podUncurriedHomComparison L((g)^*⟦Λ⟧)
+
+/-- Pullback of internal Hom is the mate of the specified derived tensorator.
+Source: current blueprint prop-pod-dual-tate-data-compatibility, Steps 1--2.
+(blueprint: def-sf-adic-closed-reindexing-maps). -/
+def podCondensedHomComparison {X Y : Scheme.{u}} (g : X ⟶ Y)
+    (M N : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj Λ Y))) :=
+  (Functor.LaxMonoidal.ihomComparison L((g)^*⟦Λ⟧) M).natTrans.app N
+
+/-- Evaluation is the counit of the native derived tensor-Hom adjunction.
+Source: current blueprint prop-pod-dual-tate-data-compatibility, Step 2.
+(blueprint: def-pod-partial-closed-interfaces). -/
+def podCondensedEvaluation (W : Scheme.{u})
+    (M N : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology W) Ab.{u + 1})
+      (condensedRingObj Λ W))) :=
+  (derivedTensorHomAdjunction Λ M).counit.app N
+
+/-- Transposition is the existing derived tensor-Hom adjunction. In particular the
+integral condensed ring uses this same adjunction.
+Source: current blueprint fix-lem-tensor-adjunction.proof.md, Step 1.
+(blueprint: def-sf-integral-completion-transpose). -/
+def podCondensedTranspose (W : Scheme.{u})
+    (M L N : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology W) Ab.{u + 1})
+      (condensedRingObj Λ W))) :=
+  (derivedTensorHomAdjunction Λ M).homEquiv L N
+
+/-- The native internal Hom on all pairs, without a restriction on its arguments.
+Source: current blueprint def-weil-derived-pullback-tensor-hom.
+(blueprint: def-pod-partial-closed-interfaces). -/
+def podCondensedInternalHom (W : Scheme.{u}) :=
+  Functor.uncurry.obj (derivedHom Λ W)
+
+end CategoryTheory.Functor.LaxMonoidal

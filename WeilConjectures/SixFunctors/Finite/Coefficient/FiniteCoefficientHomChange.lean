@@ -26,6 +26,7 @@ import WeilConjectures.SixFunctors.Finite.Hom.FiniteHomSiteHomInvertible
 import all WeilConjectures.CategoryTheory.Ringed.RingedScalarTensorMonoidal
 import all WeilConjectures.SixFunctors.Finite.Hom.FiniteHomTensorAssociatorModel
 public import WeilConjectures.SixFunctors.Finite.Hom.FiniteHomEtaleIso
+public import WeilConjectures.SixFunctors.FiniteHomSiteTensorNaturalEqualityLegacy
 
 /-! # Finite coefficient change for internal Hom
 
@@ -1076,7 +1077,7 @@ theorem finiteCoefficient_derivedHom_change
             ((coefFiniteHomSiteIso l E X h).hom.app M)) := by
     intro K M
     have hKM := congrArg (fun z ↦ z.app (K, M))
-      (finiteHomSiteTensorNaturalEquality l E X h)
+      (finiteHomSiteTensorNaturalEquality_legacy l E X h)
     exact finiteChange_inverseSquare ((finiteIntrinsicClosed l E X m).tensor)
       ((coefFiniteHomSiteIso l E X h).app
         ((finiteHomEtaleClosed l E X n).tensor.obj (K, M)))

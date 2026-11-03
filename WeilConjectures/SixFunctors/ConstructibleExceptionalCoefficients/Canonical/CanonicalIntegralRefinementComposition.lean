@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Canonical.CanonicalIntegralRefinement
 import WeilConjectures.SixFunctors.IntegralSystemRealization.Refinement.IntegralRefinementCompositionPastingProjection
 import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Normalized.NormalizedIntegralRefinementBridge
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Compactification.CompactificationRefinementLocalizing
 
 /-! # Composition of canonical integral refinements -/
 
@@ -62,3 +63,30 @@ theorem canonicalIntegralRefinementComposition
   with_reducible exact h
 
 end WeilConjectures.ConstructibleExceptionalCoefficients
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+/-- The canonical refinement maps compose under the specified derived direct-image
+compositor, for every unbounded complex.
+Source: latest blueprint, det-sf-comp-coherence-refinement, clause (3).
+(blueprint: lem-sfb-canonical-refinement-composition).
+Proof: apply the open adjunction's injective hom equivalence to both maps. Postcompose
+with the two invertible restriction comparisons. Restriction-mate pasting identifies
+the composite comparison, and naturality and the three unit normalization equations
+identify both restrictions. This is the composition calculation already proved in
+CompactificationRefinementLocalizing; no localizing membership or density is needed
+for this calculation. -/
+theorem canonicalIntegralRefinementComposition
+    {X Y : Scheme.{u}} {f : X ⟶ Y}
+    {c d e : Compactification.BoundaryCompactification f} (r : d ⟶ c) (s : e ⟶ d)
+    (K : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) :
+    localizingRefinementMap Λ (s ≫ r) K ≫
+        (refinementDerivedLowerStarComp Λ s.hom.hom.hom r.hom.hom.hom).hom.app
+          ((openImmersionLowerShriek Λ e.obj.obj.i).mapDerivedCategory.obj K) =
+      localizingRefinementMap Λ r K ≫
+        (lowerStar Λ r.hom.hom.hom).rightDerivedFunctor.map
+          (localizingRefinementMap Λ s K) := by
+  exact localizingRefinementMap_comp Λ r s K
+
+end AlgebraicGeometry.ProEtale.CondensedRing

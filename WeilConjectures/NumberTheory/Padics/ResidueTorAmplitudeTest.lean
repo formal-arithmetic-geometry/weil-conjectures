@@ -57,4 +57,17 @@ private theorem derivedTensor_eq_curriedTensor
     derivedTensor A T = curriedTensor (_root_.DerivedCategory (Sheaf T.smallEtaleTopology A)) :=
   rfl
 
+private theorem homology_bounds {C : Type*} [Category C] [Abelian C]
+    [HasDerivedCategory C] (L : _root_.DerivedCategory C) (a b : ℤ) :
+    _root_.DerivedCategory.homologyConcentratedIn a b L ↔
+      ∀ i : ℤ, i < a ∨ b < i →
+        IsZero ((_root_.DerivedCategory.homologyFunctor C i).obj L) := by
+  constructor
+  · rintro ⟨hlo, hhi⟩ i (hi | hi)
+    · exact (_root_.DerivedCategory.isGE_iff L a).1 hlo i hi
+    · exact (_root_.DerivedCategory.isLE_iff L b).1 hhi i hi
+  · intro h
+    exact ⟨(_root_.DerivedCategory.isGE_iff L a).2 (fun i hi ↦ h i (.inl hi)),
+      (_root_.DerivedCategory.isLE_iff L b).2 (fun i hi ↦ h i (.inr hi))⟩
+
 end AlgebraicGeometry.Etale
