@@ -32,6 +32,15 @@ abbrev Ring := pthRootAlgebra n r R t
 
 abbrev root (i : Fin r) : Ring t n := Ideal.Quotient.mk _ (MvPolynomial.X i)
 
+@[simp] theorem root_pow (i : Fin r) : root t n i ^ n = algebraMap R (Ring t n) (t i) := by
+  have h := Ideal.Quotient.eq_zero_iff_mem.mpr
+    (Ideal.subset_span ⟨i, rfl⟩ : MvPolynomial.X i ^ n - MvPolynomial.C (t i) ∈
+      Ideal.span (Set.range (fun j : Fin r ↦
+        MvPolynomial.X j ^ n - MvPolynomial.C (t j))))
+  change Ideal.Quotient.mk _ (MvPolynomial.X i) ^ n =
+    Ideal.Quotient.mk _ (MvPolynomial.C (t i))
+  simpa only [map_sub, map_pow, sub_eq_zero] using h
+
 def lift {S : Type v} [CommRing S] [Algebra R S]
     (x : Fin r → S) (hx : ∀ i, x i ^ n = algebraMap R S (t i)) : Ring t n →ₐ[R] S :=
   Ideal.Quotient.liftₐ _ (MvPolynomial.aeval x) (by
@@ -48,5 +57,10 @@ def lift {S : Type v} [CommRing S] [Algebra R S]
   apply Ideal.Quotient.algHom_ext R
   apply MvPolynomial.algHom_ext
   exact h
+
+/-- Divisibility induces the canonical power substitution. -/
+def transition (m : ℕ) (h : n ∣ m) : Ring t n →ₐ[R] Ring t m :=
+  lift t n (fun i ↦ root t m i ^ (m / n)) (fun i ↦ by
+    rw [← pow_mul, Nat.div_mul_cancel h, root_pow])
 
 end Algebra.ParameterRoot

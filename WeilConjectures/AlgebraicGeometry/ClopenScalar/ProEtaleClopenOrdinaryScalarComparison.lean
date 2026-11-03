@@ -253,6 +253,123 @@ private theorem oldScalarBackIso_natural
             (changeOfRingsHom φ₀ M g) := by
   exact oldScalarBackHom_natural (J₀ := J₀) F φ₀ g
 
+private def presentedBackComparison
+    {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
+    (p : Presentations.{t, u} X) (q : Presentations.{t, u} Y)
+    {R S : Sheaf (topology X) CommRingCat.{max u (t + 1)}} (a : R ⟶ S) :
+    res j R ⋙ ext (q ((rings j).map a)) ≅ ext (p a) ⋙ res j S := by
+  classical
+  let : HasWeakSheafify (topology X) AddCommGrpCat.{max u (t + 1)} :=
+    (sheafify.{t, u} X).isRightAdjoint
+  let : HasWeakSheafify (topology Y) AddCommGrpCat.{max u (t + 1)} :=
+    (sheafify.{t, u} Y).isRightAdjoint
+  let F := MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale j)
+  have : F.IsContinuous (topology Y) (topology X) :=
+    isContinuous_overMap (inferInstance : WeaklyEtale j)
+  have : F.IsCocontinuous (topology Y) (topology X) :=
+    isCocontinuous_overMap (inferInstance : WeaklyEtale j)
+  let back {R S : Sheaf (topology X) CommRingCat.{max u (t + 1)}} (a : R ⟶ S)
+      (M : Mods.{t, u} R) :
+      ((res j R ⋙ ext (q ((rings j).map a))).obj M) ≅
+        ((ext (p a) ⋙ res j S).obj M) :=
+    eqToIso ((q ((rings j).map a)).obj_eq ((res j R).obj M)) ≪≫
+      oldScalarBackIso (J₀ := topology Y) F a M ≪≫
+        (res j S).mapIso (eqToIso ((p a).obj_eq M).symm)
+  let c {R S : Sheaf (topology X) CommRingCat.{max u (t + 1)}} (a : R ⟶ S) :
+      res j R ⋙ ext (q ((rings j).map a)) ≅ ext (p a) ⋙ res j S :=
+    NatIso.ofComponents (back a) (by
+      intro M N g
+      dsimp only [back, Iso.trans_hom, Functor.mapIso_hom, eqToIso.hom]
+      let hqM := (q ((rings j).map a)).obj_eq ((res j R).obj M)
+      let hqN := (q ((rings j).map a)).obj_eq ((res j R).obj N)
+      change (q ((rings j).map a)).ordinary.map ((res j R).map g) ≫
+          eqToHom hqN ≫
+          (oldScalarBackIso (J₀ := topology Y) F a N).hom ≫
+          (res j S).map (eqToHom ((p a).obj_eq N).symm) =
+        (eqToHom hqM ≫
+          (oldScalarBackIso (J₀ := topology Y) F a M).hom ≫
+          (res j S).map (eqToHom ((p a).obj_eq M).symm)) ≫
+            (res j S).map ((p a).ordinary.map g)
+      rw [(q ((rings j).map a)).map_eq, (p a).map_eq]
+      have h := oldScalarBackIso_natural (J₀ := topology Y) F a g
+      simp only [Functor.map_comp, Category.assoc, eqToHom_trans_assoc,
+        eqToHom_refl, Category.id_comp]
+      simp only [← Functor.map_comp_assoc, eqToHom_trans_assoc, eqToHom_refl,
+        Category.id_comp]
+      have ht := congrArg (fun z ↦ eqToHom hqM ≫ z ≫
+        (res j S).map (eqToHom ((p a).obj_eq N).symm)) h
+      dsimp only [moduleRestrictionF, res, ClopenLocalization.restriction,
+        clopenModuleRestriction, pullRing, rings, clopenTensorRings, F] at ht ⊢
+      simpa only [Category.assoc] using ht)
+  exact c a
+
+/-- Ordinary scalar extension commutes with clopen restriction, preserving pure tensors.
+Source: Stacks Project, sites-modules.tex, Tag 03EL, and sites-cohomology.tex, Tag 06YY.
+(blueprint: lem-pur-clopen-ordinary-scalar-comparison).
+
+Proof: restrict the sheafification unit of the sectionwise scalar tensor presheaf
+along composition with j. This functor is cocontinuous, so it preserves local
+bijectivity of that unit. Sectionwise tensor after composition is the same tensor
+presheaf over the restricted rings. Both module sheaves are therefore
+sheafifications of this one presheaf. Their universal properties give inverse
+linear maps, natural in the input module, whose composites are identities by
+uniqueness of sheafification. Transport through the object and map equations of
+p and q. The defining unit equation gives the displayed pure tensor formula.
+This argument includes empty component sites and zero coefficient rings. -/
+theorem clopen_ordinary_scalar_comparison
+    {X Y : Scheme.{t}} (j : Y ⟶ X) [IsOpenImmersion j]
+    (p : Presentations.{t, u} X) (q : Presentations.{t, u} Y) :
+    ∃ c : ∀ {R S : Sheaf (topology X) CommRingCat.{max u (t + 1)}} (a : R ⟶ S),
+        ext (p a) ⋙ res j S ≅ res j R ⋙ ext (q ((rings j).map a)),
+      ∀ {R S : Sheaf (topology X) CommRingCat.{max u (t + 1)}} (a : R ⟶ S)
+        (M : Mods.{t, u} R) (U : Y.ProEtᵒᵖ)
+        (s : ((rings j).obj S).obj.obj U) (x : ((res j R).obj M).val.obj U),
+        ((c a).hom.app M).val.app U
+          (sectionTensor (p a) M
+            ((MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale j)).op.obj U) s x) =
+          sectionTensor (q ((rings j).map a)) ((res j R).obj M) U s x := by
+  classical
+  let : HasWeakSheafify (topology X) AddCommGrpCat.{max u (t + 1)} :=
+    (sheafify.{t, u} X).isRightAdjoint
+  let : HasWeakSheafify (topology Y) AddCommGrpCat.{max u (t + 1)} :=
+    (sheafify.{t, u} Y).isRightAdjoint
+  let F := MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale j)
+  have : F.IsContinuous (topology Y) (topology X) :=
+    isContinuous_overMap (inferInstance : WeaklyEtale j)
+  have : F.IsCocontinuous (topology Y) (topology X) :=
+    isCocontinuous_overMap (inferInstance : WeaklyEtale j)
+  let c {R S : Sheaf (topology X) CommRingCat.{max u (t + 1)}} (a : R ⟶ S) :=
+    presentedBackComparison j @p @q a
+  refine ⟨fun a ↦ (c a).symm, ?_⟩
+  intro R S a M U s x
+  have hb : ((c a).hom.app M).val.app U
+      (sectionTensor (q ((rings j).map a)) ((res j R).obj M) U s x) =
+        sectionTensor (p a) M (F.op.obj U) s x := by
+    dsimp only [c]
+    unfold presentedBackComparison
+    dsimp only [NatIso.ofComponents_hom_app, Iso.trans_hom,
+      Functor.mapIso_hom, eqToIso.hom, sectionTensor]
+    let hq := (q ((rings j).map a)).obj_eq ((res j R).obj M)
+    have hc := congrArg (fun f ↦ f.val.app U
+      (pure ((rings j).map a) ((res j R).obj M) U s x))
+        (eqToHom_trans hq.symm hq)
+    simp only [SheafOfModules.comp_val, PresheafOfModules.comp_app,
+      ModuleCat.comp_apply, eqToHom_refl, SheafOfModules.id_val,
+      PresheafOfModules.id_app, ModuleCat.id_apply] at hc
+    change ((res j S).map (eqToHom ((p a).obj_eq M).symm)).val.app U
+      ((oldScalarBackIso (J₀ := topology Y) F a M).hom.val.app U
+        ((eqToHom hq).val.app U ((eqToHom hq.symm).val.app U
+          (pure ((rings j).map a) ((res j R).obj M) U s x)))) = _
+    rw [hc]
+    exact congrArg (fun z ↦ ((res j S).map
+      (eqToHom ((p a).obj_eq M).symm)).val.app U z)
+      (oldScalarBackIso_pure (J₀ := topology Y) F a M U s x)
+  have hh := congrArg (fun z ↦ ((c a).inv.app M).val.app U z) hb
+  have hi := congrArg (fun f ↦ f.val.app U
+    (sectionTensor (q ((rings j).map a)) ((res j R).obj M) U s x))
+    ((c a).hom_inv_id_app M)
+  exact hh.symm.trans hi
+
 attribute [local irreducible] oldScalarBackIso
 
 end OrdinaryRestriction

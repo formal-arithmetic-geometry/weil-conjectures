@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Bounded.BoundedConstructibleTowerSupplement
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Tensor.ProEtaleTensorPullbackModels
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChangeAdjunctionSupplement
 
 /-! # Normalization of exact derived coefficient pullback
 
@@ -161,7 +162,7 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 /-- The canonical ordinary restriction/pullback comparison with base identity removed. -/
 def ordinaryPullback :
-    proEtaleRingModulePullback f R S c ⋙ pbcRestrict c.hom ≅
+    proEtaleRingModulePullback f R S c ⋙ proEtaleRingRestrictScalars c.hom ≅
       proEtaleRingModulePullback f R
         ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R) (Iso.refl _) :=
   (asIso (proEtaleRingRestrictionPullbackInv f R R
@@ -172,7 +173,7 @@ def ordinaryPullback :
 /-- Its termwise comparison on cochain complexes. -/
 def complexPullback :
     (proEtaleRingModulePullback f R S c).mapHomologicalComplex (.up ℤ) ⋙
-        (pbcRestrict c.hom).mapHomologicalComplex (.up ℤ) ≅
+        (proEtaleRingRestrictScalars c.hom).mapHomologicalComplex (.up ℤ) ≅
       (proEtaleRingModulePullback f R
         ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R)
         (Iso.refl _)).mapHomologicalComplex (.up ℤ) :=
@@ -189,7 +190,7 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 /-- Exact derived restriction along the identity, identified with the identity functor.
 Source: functoriality of exact derived functors; Stacks Tag 07A6. -/
-def identityRestriction : pbcDerivedRestrict (𝟙 R) ≅
+def identityRestriction : (proEtaleRingRestrictScalars (𝟙 R)).mapDerivedCategory ≅
     𝟭 (DerivedCategory (proEtaleRingModules Y R)) :=
   Functor.mapDerivedCategoryNatIso (Iso.refl _) ≪≫
     Functor.mapDerivedCategoryIdIso (proEtaleRingModules Y R)
@@ -197,7 +198,7 @@ def identityRestriction : pbcDerivedRestrict (𝟙 R) ≅
 /-- The canonical pullback comparison, with identity restriction on the base removed.
 Source: Stacks Tags 0D6D and 07A6. -/
 def pullback :
-    proEtaleRingDerivedPullback f R S c ⋙ pbcDerivedRestrict c.hom ≅
+    proEtaleRingDerivedPullback f R S c ⋙ (proEtaleRingRestrictScalars c.hom).mapDerivedCategory ≅
       proEtaleRingDerivedPullback f R
         ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R) (Iso.refl _) :=
   proEtaleRingRestrictionDerivedPullback f R R
@@ -234,15 +235,15 @@ theorem pullback_factors {X Y : Scheme.{u}} (f : X ⟶ Y)
         (proEtaleRingDerivedPullbackFactors f R
           ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R)
           (Iso.refl _)).hom.app P =
-      (pbcDerivedRestrict c.hom).map
+      ((proEtaleRingRestrictScalars c.hom).mapDerivedCategory).map
           ((proEtaleRingDerivedPullbackFactors f R S c).hom.app P) ≫
-        (pbcRestrict c.hom).mapDerivedCategoryFactors.hom.app
+        (proEtaleRingRestrictScalars c.hom).mapDerivedCategoryFactors.hom.app
           (((proEtaleRingModulePullback f R S c).mapHomologicalComplex (.up ℤ)).obj P) ≫
         DerivedCategory.Q.map ((CoefficientTensorChain.complexPullback f R S c).hom.app P) := by
   let L := proEtaleRingModulePullback f R S c
   let M := proEtaleRingModulePullback f R
     ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R) (Iso.refl _)
-  let U := pbcRestrict c.hom
+  let U := proEtaleRingRestrictScalars c.hom
   let e : L ⋙ U ≅ (𝟭 (proEtaleRingModules Y R)) ⋙ M :=
     (asIso (proEtaleRingRestrictionPullbackInv f R R
     ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R) S
@@ -284,12 +285,13 @@ theorem pullback_pair_factors {X Y : Scheme.{u}} (f : X ⟶ Y)
         ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R) (Iso.refl _)).hom.app P)
         ((proEtaleRingDerivedPullbackFactors f R
           ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R) (Iso.refl _)).hom.app Q) =
-    ((pbcDerivedRestrict c.hom).prod (pbcDerivedRestrict c.hom)).map
+    (((proEtaleRingRestrictScalars c.hom).mapDerivedCategory).prod
+      ((proEtaleRingRestrictScalars c.hom).mapDerivedCategory)).map
       (Prod.mkHom ((proEtaleRingDerivedPullbackFactors f R S c).hom.app P)
         ((proEtaleRingDerivedPullbackFactors f R S c).hom.app Q)) ≫
-      Prod.mkHom ((pbcRestrict c.hom).mapDerivedCategoryFactors.hom.app
+      Prod.mkHom ((proEtaleRingRestrictScalars c.hom).mapDerivedCategoryFactors.hom.app
         (((proEtaleRingModulePullback f R S c).mapHomologicalComplex (.up ℤ)).obj P))
-        ((pbcRestrict c.hom).mapDerivedCategoryFactors.hom.app
+        ((proEtaleRingRestrictScalars c.hom).mapDerivedCategoryFactors.hom.app
           (((proEtaleRingModulePullback f R S c).mapHomologicalComplex (.up ℤ)).obj Q)) ≫
       Prod.mkHom (DerivedCategory.Q.map
         ((CoefficientTensorChain.complexPullback f R S c).hom.app P))

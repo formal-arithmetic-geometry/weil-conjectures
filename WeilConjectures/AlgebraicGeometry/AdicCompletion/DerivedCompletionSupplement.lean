@@ -176,6 +176,17 @@ private theorem unitProduct_oneSubShift (X : Scheme.{u})
   simp [oneSubShift, towerTransitionEndomorphism, towerProductShift, unitProduct,
     levelUnit_step]
 
+/-- A compatible tower of finite-coefficient complexes is normalized when the actual
+transition-induced derived reduction comparisons are invertible. Successive comparisons
+suffice: compose their adjunction mates to get every longer reduction identity.
+This imposes no ordinary-tensor condition on the cohomology sheaves.
+Source: blueprint, definition of normalized tower (blueprint: sk-def-pe-derived-completion). -/
+def IsNormalized (M : ∀ n : ℕ, FiniteDerived l E X n)
+    (t : ∀ n : ℕ, M (n + 1) ⟶ (finiteRestrict l E X n).obj (M n)) : Prop :=
+  ∀ n : ℕ, IsIso
+    (((Mod.derivedExtendMapDerivedCategoryAdjunction (transition l E X n)).homEquiv
+      (M (n + 1)) (M n)).symm (t n))
+
 end AlgebraicGeometry.ProEtale.AdicCompletion
 
 namespace AlgebraicGeometry.ProEtale

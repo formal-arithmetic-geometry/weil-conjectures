@@ -8,6 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.AdicCompletion.DerivedCompletionSupplement
 public import WeilConjectures.AlgebraicGeometry.Condensed.CondensedConstantConstructibilitySupplement
 public import Mathlib.AlgebraicGeometry.Noetherian
+public import WeilConjectures.AlgebraicGeometry.Integral.Finite.IntegralFiniteConstructibility
+public import WeilConjectures.AlgebraicGeometry.Integral.Finite.IntegralFiniteReductionRange
 
 /-!
 # Constructibility of all reductions from the first
@@ -89,6 +91,41 @@ theorem integralCriterionReductions (l : ℕ) [Fact l.Prime]
         ∀ (n : ℕ) (q : ℤ), q < r ∨ s < q →
           IsZero ((DerivedCategory.homologyFunctor _ q).obj
             ((AdicCompletion.derivedReduction l E X n).obj K))) := by
+  sorry
+
+/-- A derived-complete integral complex is bounded constructible exactly when all
+positive reductions are bounded constructible in one common cohomological interval.
+Source: literature/blueprint/latest/blueprint/part-six-operations/
+  sec-reduction-finite-coefficients/sec-proper-direct-image/
+  sk-thm-sfb-proper-base-change/sk-prop-integral-criterion-reductions.md,
+  final sentence of the statement (blueprint: det-prop-integral-criterion-reductions).
+
+Proof (DAG step 4): If the reductions satisfy condition (2), index zero gives a
+bounded constructible first reduction. The reverse internal integral criterion,
+together with the assumed derived completeness, gives bounded constructibility
+of K over the condensed integer ring. Conversely, apply bounded Postnikov
+devissage to the property that first derived reduction is bounded constructible.
+It is invariant under isomorphisms, holds for zero, is closed under extensions
+by exactness of derived extension of scalars and triangulatedness of finite
+bounded constructibility, and commutes with shifts. For a constructible integral
+module in degree zero, the finite-model sheaf quotient theorem at exponent one
+gives this property; Noetherian X supplies its qcqs hypothesis. Devissage gives
+condition (1) for K, and integralCriterionReductions then gives condition (2).
+This uses the reverse integral criterion, not the forward criterion which
+already cites this node. -/
+theorem integralCriterionReductions_integral (l : ℕ) [Fact l.Prime]
+    (E : Type u) [Field E] [Algebra (Padic l) E]
+    [FiniteDimensional (Padic l) E] (X : Scheme.{u}) [IsNoetherian X]
+    (K : DerivedCategory (AdicCompletion.Modules l E X))
+    (hK : IsDerivedComplete l E X K) :
+    constantModelBoundedConstructible (DerivedNakayama.integerRing l E) X K ↔
+      (∀ n : ℕ, constantModelBoundedConstructible
+        (DerivedNakayama.quotientRing l E (n + 1)) X
+        ((AdicCompletion.derivedReduction l E X n).obj K)) ∧
+      ∃ r s : ℤ, r ≤ s ∧
+        ∀ (n : ℕ) (q : ℤ), q < r ∨ s < q →
+          IsZero ((DerivedCategory.homologyFunctor _ q).obj
+            ((AdicCompletion.derivedReduction l E X n).obj K)) := by
   sorry
 
 end AlgebraicGeometry.ProEtale

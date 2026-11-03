@@ -92,7 +92,27 @@ theorem IsLisse.isPunctuallyPure_and_finitePart_of_finrank_eq_one
           Set.range (fun g : W.geometric => ρ.detCharacter g) ∧
         (∀ w : W.carrier,
           ρ.detCharacter w = ε w * (ρ.detCharacter s) ^ (W.deg w).toAdd) := by
-  sorry
+  let D : Monodromy.DegreeDatum W.carrier :=
+    { deg := W.deg
+      surjective_deg := W.deg_surjective
+      degreeOneElement := s
+      deg_degreeOneElement := hs }
+  constructor
+  · have hpure := IsLisse.isPunctuallyPure_of_finrank_eq_one W l ρ ι hrank hρ
+    have hweight := W.frobeniusWeight_eq_of_deg_eq_one ρ.detCharacter
+      hρ.continuous_detCharacter ι hs
+    rw [hweight]
+    simpa only [Representation.coe_detCharacter_apply] using hpure
+  · refine ⟨D.finitePart ρ.detCharacter, D.finitePart_degreeOneElement _, ?_, ?_⟩
+    · rw [D.range_finitePart]
+      ext a
+      constructor
+      · rintro ⟨g, hg, rfl⟩
+        exact ⟨⟨g, hg⟩, rfl⟩
+      · rintro ⟨g, rfl⟩
+        exact ⟨g, g.property, rfl⟩
+    · intro w
+      exact DFunLike.congr_fun (D.eq_finitePart_mul_degreeCharacter ρ.detCharacter) w
 
 end WeilGroup
 

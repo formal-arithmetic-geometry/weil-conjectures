@@ -180,6 +180,18 @@ variable {C : Type c} [Category.{v} C] [EssentiallySmall.{r} C]
   (J : GrothendieckTopology C)
   (B : ℕ → Sheaf J CommRingCat.{r}) (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)
 
+/-- The sequence-site realization of strict systems used by the recorded model.
+Source: Zheng, Construction 4.1, p. 21; Stacks 0940
+(blueprint: lem-pur-sequence-site-completion-projection).
+
+`def-coef-semilinear-system-models` defines `Systems` as these very module sheaves.
+Thus the canonical equivalence in this realization is the identity on the actual
+objects, horizontal restrictions, scalar actions and morphisms. -/
+def completionSystemEquivalence :
+    Mod.{c, v, r} (coefficientSequenceTopology J) (systemRing.{c, v, r} J B τ) ≌
+      Systems.{c, v, r} J B τ :=
+  CategoryTheory.Equivalence.refl
+
 /-- The underlying sheaf of sets of the existing module category.
 Source: Stacks 03D1 and 03D6
 (blueprint: lem-pur-sequence-site-completion-projection). -/
@@ -187,6 +199,13 @@ abbrev completionUnderlying (R : Sheaf J CommRingCat.{r}) :
     Mod.{c, v, r} J R ⥤ Sheaf J (Type r) :=
   SheafOfModules.toSheaf (ring.{c, v, r} J R) ⋙
     sheafCompose J (forget AddCommGrpCat.{r})
+
+/-- The existing ordinary localization, with the recorded size instance explicit.
+Source: Stacks 05RU and 06YY
+(blueprint: lem-pur-sequence-site-completion-projection). -/
+abbrev completionLocalization (R : Sheaf J CommRingCat.{r}) :
+    CochainComplex (Mod.{c, v, r} J R) ℤ ⥤ D.{c, v, r} J R :=
+  @DerivedCategory.Q (Mod.{c, v, r} J R) _ _ (hasDerived.{c, v, r} J R)
 
 /-- A sheafified pure scalar-extension tensor, in the dependency's actual ordinary model.
 Source: Stacks 03CZ and 06YY

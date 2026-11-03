@@ -80,4 +80,67 @@ private theorem transition_square
     Iso.inv_hom_id, id_tensorHom_id, Category.comp_id]
   exact h.symm
 
+/-- The scalar-association and restricted-transition tensor squares for modules.
+Source: Stacks 03EL, change of rings and the tensor pullback comparison.
+(blueprint: lem-pur-module-tensor-coefficient-equations).
+
+Proof: for the first equation use generalized pure tensors with outside
+scalar s' and original generators x,y. The source coefficient scalar can
+be moved outside by balancing, using d.square and d.inverseImageMap_graph.
+The defining IsScalarAssociation equation fixes kappa on those generators.
+Both routes send s' tensor ((x tensor y) tensor 1) to
+((1 tensor x) tensor s') tensor ((1 tensor y) tensor 1).
+For the second equation, expand transitionModule as the extension unit
+followed by restricted inverse scalar association. The extension unit sends
+x to 1 tensor x. The restrictionTensorModule is the adjunction mate of
+the extension comparison followed by its two counits; the triangle identity
+therefore makes its pure-tensor formula x tensor y mapped to x tensor y.
+Both routes send s tensor (x tensor y) to
+(bar(s) tensor (x tensor 1)) tensor (1 tensor (y tensor 1)).
+These are equal S-linear maps after the indicated scalar restriction.
+The tensor universal property, scalar-extension linearity and sheafification
+extend both equations from generators to all sections. No inverse to the
+transition is used; quotient maps and zero coefficient rings are included. -/
+theorem cochainModuleTensorCoefficients (f : RingedPullback R S) (k : Comparison f)
+    (d : CoefficientSquare f) (k' : Comparison (changed f d)) :
+    (∀ M N : Modules R,
+      (changed f d).L.map ((extensionComparison d.sourceMap).mu M N).hom ≫
+          (k'.mu ((extensionFunctor d.sourceMap).obj M)
+            ((extensionFunctor d.sourceMap).obj N)).hom ≫
+          ((scalarAssociation f k d k').hom.app M ⊗ₘ
+            (scalarAssociation f k d k').hom.app N) =
+        (scalarAssociation f k d k').hom.app (M ⊗ N) ≫
+          (extensionFunctor d.targetMap).map (k.mu M N).hom ≫
+          ((extensionComparison d.targetMap).mu (f.L.obj M) (f.L.obj N)).hom) ∧
+    (∀ M N : Modules R,
+      (k.mu M N).hom ≫
+          ((transitionModule f k d k').app M ⊗ₘ (transitionModule f k d k').app N) ≫
+          restrictionTensorModule d.targetMap
+            ((changed f d).L.obj ((extensionFunctor d.sourceMap).obj M))
+            ((changed f d).L.obj ((extensionFunctor d.sourceMap).obj N)) =
+        (transitionModule f k d k').app (M ⊗ N) ≫ (restrictionFunctor d.targetMap).map
+          ((changed f d).L.map ((extensionComparison d.sourceMap).mu M N).hom ≫
+            (k'.mu ((extensionFunctor d.sourceMap).obj M)
+              ((extensionFunctor d.sourceMap).obj N)).hom)) := by
+  have h := cochainModuleTensorExtensionCoefficient f k d k'
+  refine ⟨h, ?_⟩
+  intro M N
+  let b := scalarAssociation f k d k'
+  simpa only [transitionModule, NatTrans.comp_app, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app, Functor.comp_obj, restrictionTensorModule,
+    b, Iso.app_inv, Functor.id_obj] using
+    transition_square (extensionFunctor d.targetMap) (restrictionFunctor d.targetMap)
+      (extensionAdjunction d.targetMap)
+      (fun X Y ↦ ((extensionComparison d.targetMap).mu X Y).hom)
+      (extensionComparison d.targetMap).naturality
+      (f.L.obj M) (f.L.obj N) (f.L.obj (M ⊗ N))
+      ((changed f d).L.obj ((extensionFunctor d.sourceMap).obj M))
+      ((changed f d).L.obj ((extensionFunctor d.sourceMap).obj N))
+      ((changed f d).L.obj ((extensionFunctor d.sourceMap).obj (M ⊗ N)))
+      (b.app M) (b.app N) (b.app (M ⊗ N)) (k.mu M N).hom
+      ((changed f d).L.map ((extensionComparison d.sourceMap).mu M N).hom ≫
+        (k'.mu ((extensionFunctor d.sourceMap).obj M)
+          ((extensionFunctor d.sourceMap).obj N)).hom)
+      (by simpa only [b, Category.assoc, Iso.app_hom] using h M N)
+
 end CategoryTheory.CochainPullback

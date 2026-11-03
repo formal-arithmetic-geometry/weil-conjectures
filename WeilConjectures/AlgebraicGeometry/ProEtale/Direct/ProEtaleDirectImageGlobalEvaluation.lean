@@ -57,12 +57,76 @@ private noncomputable local instance (priority := 5000) globalEvaluation_locally
     (ProEt.topology X).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
   WeilConjectures.integralCoefficientAbLocallyBijective.{u, u} X
 
+/-- The recorded tensor-unit-normalized adjunction, with the right functor written
+as the sectionwise constant-module direct image used at finite level.
+Source: Stacks, modules on sites, lemma-adjoint-push-pull-modules
+(blueprint: lem-pur-proetale-direct-image-global-evaluation). -/
+def proEtaleOrdinaryModuleAdjunction (A : Type u) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    proEtaleConstantRingPullback A f ⊣ proEtaleConstantModuleDirectImage f A :=
+  (proEtaleConstantRingAdjunction A f).ofNatIsoRight (proEtaleUnitLerayDirectImageIso A f)
+
+/-- The ordinary derived adjunction on the exact finite-coefficient presentation.
+Source: Stacks Tag 0DVC (blueprint: lem-pur-proetale-direct-image-global-evaluation). -/
+def proEtaleOrdinaryDerivedAdjunction (A : Type u) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    proEtaleConstantRingDerivedPullback A f ⊣ proEtaleConstantDerivedDirectImage f A :=
+  (proEtaleOrdinaryModuleAdjunction A f).mapDerivedCategoryRightDerivedAdjunction
+
+/-- The canonical finite composition comparison in ordinary constant-ring modules.
+It is the conjugate of the published inverse-image composition isomorphism, through
+exactly the derived adjunctions of the finite direct image; thus it is the canonical
+ringed-topos comparison of Tag 0D6E, with orientation R(gf)_* -> Rg_* Rf_*.
+Source: Stacks Tag 0D6E (blueprint: lem-pur-proetale-direct-image-global-evaluation). -/
+def proEtaleOrdinaryDirectImageComposition (A : Type u) [CommRing A] [Finite A]
+    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
+    proEtaleConstantDerivedDirectImage (f ≫ g) A ≅
+      proEtaleConstantDerivedDirectImage f A ⋙ proEtaleConstantDerivedDirectImage g A :=
+  conjugateIsoEquiv (proEtaleOrdinaryDerivedAdjunction A (f ≫ g))
+    ((proEtaleOrdinaryDerivedAdjunction A g).comp (proEtaleOrdinaryDerivedAdjunction A f))
+    (proEtaleConstantRingPullbackComposition f g A)
+
 /-- Finiteness of the conventions' coefficient ring, supplied by its published quotient
 construction. Source: blueprint def-pur-conventions, A = O_E/(varpi^n)
 (blueprint: lem-pur-proetale-direct-image-global-evaluation). -/
 instance purityGlobalEvaluation_finiteRing (P : WeilConjectures.PurityFiniteSetting.{u}) :
     Finite P.Ring :=
   Padic.finite_coefficientExtensionRing P.coefficients.l P.extension P.level P.level_pos
+
+/-- Derived final-object evaluation in the same localization universes as the published
+unit--Leray construction. Source: Stacks Tag 0D6H
+(blueprint: lem-pur-proetale-direct-image-global-evaluation). -/
+abbrev proEtaleGlobalEvaluationSections (A : Type u) [CommRing A] [Finite A]
+    (X : Scheme.{u}) :=
+  @Functor.rightDerivedFunctor.{u+2,u+2,u+1,u+1,u+2,u+1} _ _ _ _ _ _
+    (proEtaleRingModules_hasDerivedCategory X (proEtaleConstantRing X A))
+    (HasDerivedCategory.ofIsGrothendieckAbelian.{u + 1} _)
+    (proEtaleUnitLeraySections A X) inferInstance
+    (proEtaleRingModules_hasKInjectiveResolutions X (proEtaleConstantRing X A))
+
+/-- The canonical K-injective evaluation isomorphism in those fixed localization universes.
+Source: Stacks Tag 070Y (blueprint: lem-pur-proetale-direct-image-global-evaluation). -/
+abbrev proEtaleGlobalEvaluationSectionsObj (A : Type u) [CommRing A] [Finite A]
+    (X : Scheme.{u})
+    (J : CochainComplex (proEtaleRingModules X (proEtaleConstantRing X A)) ℤ)
+    [J.IsKInjective] :=
+  @Functor.rightDerivedFunctorObjQIso.{u+2,u+2,u+1,u+1,u+2,u+1} _ _ _ _ _ _
+    (proEtaleRingModules_hasDerivedCategory X (proEtaleConstantRing X A))
+    (HasDerivedCategory.ofIsGrothendieckAbelian.{u + 1} _)
+    (proEtaleRingModules_hasKInjectiveResolutions X (proEtaleConstantRing X A))
+    (proEtaleUnitLeraySections A X) inferInstance J inferInstance
+
+/-- The finite direct image on K-injectives, using its published standard localization.
+Source: Stacks Tag 070Y (blueprint: lem-pur-proetale-direct-image-global-evaluation). -/
+abbrev proEtaleGlobalEvaluationImageObj (A : Type u) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (J : CochainComplex (proEtaleRingModules X (proEtaleConstantRing X A)) ℤ)
+    [J.IsKInjective] :=
+  @Functor.rightDerivedFunctorObjQIso.{u+2,u+2,u+1,u+1,u+2,u+2} _ _ _ _ _ _
+    (proEtaleRingModules_hasDerivedCategory X (proEtaleConstantRing X A))
+    (proEtaleRingModules_hasDerivedCategory Y (proEtaleConstantRing Y A))
+    (proEtaleRingModules_hasKInjectiveResolutions X (proEtaleConstantRing X A))
+    (proEtaleConstantModuleDirectImage f A) inferInstance J inferInstance
 
 /-- The published terminal-object comparison, written for the actual finite direct image.
 Source: Stacks Tag 0D6H (blueprint: lem-pur-proetale-direct-image-global-evaluation). -/
@@ -73,6 +137,29 @@ def proEtaleGlobalEvaluationTerminal (A : Type u) [CommRing A] [Finite A]
   isoWhiskerRight (proEtaleUnitLerayDirectImageIso A f).symm
     (proEtaleUnitLeraySections A Y) ≪≫ proEtaleUnitLerayTerminalIso A f
 
+/-- The canonical comparison, derived from evaluation at the final object. The universal
+right-derived compositor fixes the comparison on K-injectives and all derived morphisms.
+Source: Stacks Tags 0D6H and 0D6E
+(blueprint: lem-pur-proetale-direct-image-global-evaluation). -/
+def proEtaleGlobalEvaluation (A : Type u) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    proEtaleConstantDerivedDirectImage f A ⋙
+        (proEtaleGlobalEvaluationSections A Y) ≅
+      (proEtaleGlobalEvaluationSections A X) :=
+  letI := proEtaleRingModules_hasKInjectiveResolutions X (proEtaleConstantRing X A)
+  letI := proEtaleRingModules_hasKInjectiveResolutions Y (proEtaleConstantRing Y A)
+  Functor.rightDerivedFunctorCompIso' (proEtaleConstantModuleDirectImage f A)
+    (proEtaleUnitLeraySections A Y) (proEtaleGlobalEvaluationTerminal A f)
+
+/-- The natural isomorphism on precisely D^+(X_proet,A), with every derived morphism.
+Source: Stacks Tag 0D6H (blueprint: lem-pur-proetale-direct-image-global-evaluation). -/
+def proEtaleGlobalEvaluationPlus (A : Type u) [CommRing A] [Finite A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) :=
+  isoWhiskerLeft (@DerivedCategory.Plus.ι
+    (proEtaleRingModules X (proEtaleConstantRing X A)) _ _
+    (proEtaleRingModules_hasDerivedCategory X (proEtaleConstantRing X A)))
+    (proEtaleGlobalEvaluation A f)
+
 /-- The normalized identity inverse image. The source theorem specifies every section
 of its module comparison, its termwise extension, and its localization, so the extracted
 isomorphism is determined by that normalization rather than by bare existence.
@@ -82,6 +169,64 @@ def proEtaleGlobalEvaluationPullbackId (A : Type u) [CommRing A] [Finite A]
     (X : Scheme.{u}) : proEtaleConstantRingDerivedPullback A (𝟙 X) ≅ 𝟭 _ :=
   (proEtaleDerivedPullback_identity X A).choose_spec.2.2.choose_spec.2.choose_spec.2.2
     |>.choose_spec.2.choose
+
+/-- The canonical identity direct-image comparison is the mate of the section-normalized
+identity inverse image, for the same ordinary adjunction as the composition comparison.
+Source: Stacks Tag 0D6E (blueprint: lem-pur-proetale-direct-image-global-evaluation). -/
+def proEtaleGlobalEvaluationDirectImageId (A : Type u) [CommRing A] [Finite A]
+    (X : Scheme.{u}) : proEtaleConstantDerivedDirectImage (𝟙 X) A ≅ 𝟭 _ :=
+  conjugateIsoEquiv (proEtaleOrdinaryDerivedAdjunction A (𝟙 X)) (Adjunction.id)
+    (proEtaleGlobalEvaluationPullbackId A X).symm
+
+private theorem globalEvaluation_obj
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    [Abelian C] [Abelian D] [Abelian E]
+    [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
+    [Abelian.HasKInjectiveResolutions C] [Abelian.HasKInjectiveResolutions D]
+    (F : C ⥤ D) (G : D ⥤ E) {H : C ⥤ E}
+    [F.Additive] [G.Additive] [H.Additive] [F.PreservesKInjectiveComplexes]
+    (e : F ⋙ G ≅ H) (J : CochainComplex C ℤ) [J.IsKInjective] :
+    (Functor.rightDerivedFunctorCompIso' F G e).hom.app (DerivedCategory.Q.obj J) =
+      G.rightDerivedFunctor.map (F.rightDerivedFunctorObjQIso J).hom ≫
+        (G.rightDerivedFunctorObjQIso
+          ((F.mapHomologicalComplex (.up ℤ)).obj J)).hom ≫
+        DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex e.hom (.up ℤ)).app J) ≫
+        (H.rightDerivedFunctorObjQIso J).inv := by
+  let K := (HomotopyCategory.quotient _ (.up ℤ)).obj J
+  have h := NatTrans.congr_app (unitLerayFac e) K
+  have hi : (Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) (.up ℤ)).inv.app K =
+      𝟙 _ := by
+    have h' := Iso.inv_hom_id_app
+      (Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) (.up ℤ)) K
+    erw [Functor.mapHomotopyCategoryCompIso_refl_hom_app, Category.comp_id] at h'
+    exact h'
+  have : IsIso (G.rightDerivedFunctorUnit.app ((F.mapHomotopyCategory (.up ℤ)).obj K)) :=
+    inferInstanceAs (IsIso (G.rightDerivedFunctorUnit.app
+      ((HomotopyCategory.quotient _ (.up ℤ)).obj
+        ((F.mapHomologicalComplex (.up ℤ)).obj J))))
+  dsimp only [Functor.rightDerivedFunctorCompUnit, NatTrans.comp_app,
+    Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_hom_app,
+    Functor.associator_inv_app] at h
+  rw [hi] at h
+  erw [DerivedCategory.Qh.map_id] at h
+  repeat erw [Category.id_comp] at h
+  repeat erw [Category.comp_id] at h
+  simp only [Category.assoc] at h
+  simp only [Functor.rightDerivedFunctorObjQIso, Iso.trans_hom, Iso.trans_inv,
+    Iso.symm_hom, Iso.symm_inv, Iso.app_hom, Iso.app_inv, Functor.mapIso_hom,
+    Functor.mapIso_inv, DerivedCategory.quotientCompQhIso,
+    HomologicalComplexUpToQuasiIso.quotientCompQhIso, Quotient.lift.isLift_hom,
+    Quotient.lift.isLift_inv, asIso_hom, asIso_inv]
+  repeat erw [CategoryTheory.Functor.map_id]
+  repeat erw [Category.id_comp]
+  repeat erw [Category.comp_id]
+  rw [← cancel_epi (G.rightDerivedFunctor.map (F.rightDerivedFunctorUnit.app K))]
+  dsimp only [K]
+  rw [← Functor.map_comp_assoc, IsIso.hom_inv_id]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp]
+  rw [← cancel_epi (G.rightDerivedFunctorUnit.app ((F.mapHomotopyCategory (.up ℤ)).obj K))]
+  erw [IsIso.hom_inv_id_assoc]
+  exact h
 
 section MateTransport
 variable {C D E : Type*} [Category C] [Category D] [Category E]
@@ -306,6 +451,22 @@ private theorem derivedIdentity
   rw [← G.rightDerivedFunctor.map_comp, ← G.rightDerivedFunctor.map_comp]
   exact G.rightDerivedFunctor.congr_map (d.hom.naturality i.inv).symm
 
+private theorem directIso_hom {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (A : Type u) [CommRing A] [Finite A]
+    (M : proEtaleRingModules X (proEtaleConstantRing X A)) (W : Y.ProEtᵒᵖ)
+    (m : M.val.obj ((proEtaleBaseChange f).op.obj W)) :
+    ((proEtaleUnitLerayDirectImageIso A f).hom.app M).val.app W m = m :=
+  by
+  rfl
+
+private theorem directIso_inv {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (A : Type u) [CommRing A] [Finite A]
+    (M : proEtaleRingModules X (proEtaleConstantRing X A)) (W : Y.ProEtᵒᵖ)
+    (m : ((proEtaleConstantModuleDirectImage f A).obj M).val.obj W) :
+    ((proEtaleUnitLerayDirectImageIso A f).inv.app M).val.app W m = m :=
+  by
+  rfl
+
 attribute [local irreducible] proEtaleUnitLerayDirectImageIso
 
 section SectionRealization
@@ -509,6 +670,515 @@ private theorem sectionDirectImageIso_normalization {X Y : Scheme.{u}} (f : X �
       (congrArg (fun h ↦ h.val.app ((proEtaleBaseChange f).op.obj W))
         ((sfIntrinsicModuleEquivalence X A).counitIso.inv_hom_id_app M))
       (show M.val.obj ((proEtaleBaseChange f).op.obj W) from r)
+
+private theorem terminal_eq {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    proEtaleGlobalEvaluationTerminal A f =
+      isoWhiskerRight (sectionDirectImageIso A f)
+          (Sheaf.Γ (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1, u} A))) ≪≫
+        isoWhiskerLeft (sfIntrinsicModuleEquivalence X A).inverse
+          (proEtaleUnitLerayFixedTerminalIso A f) := by
+  apply Iso.ext
+  apply NatTrans.ext
+  funext M
+  simp only [proEtaleGlobalEvaluationTerminal, proEtaleUnitLerayTerminalIso,
+    sectionDirectImageIso, Iso.trans_hom, NatTrans.comp_app,
+    Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app, Iso.symm_hom,
+    Equivalence.funInvIdAssoc_hom_app, Functor.rightUnitor_hom_app,
+    Functor.map_comp, Category.assoc]
+  rw [← (proEtaleUnitLeraySections A Y).map_comp_assoc,
+    Iso.inv_hom_id_app, CategoryTheory.Functor.map_id, Category.id_comp]
+  simp only [Functor.associator_hom_app, proEtaleUnitLeraySections, Functor.comp_map]
+  let Γ := Sheaf.Γ (ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1, u} A))
+  let N := (sfIntrinsicModuleEquivalence X A).inverse.obj M
+  let F := ProEtale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) f
+  erw [Γ.map_id (((F ⋙ (sfIntrinsicModuleEquivalence Y A).functor) ⋙
+    (sfIntrinsicModuleEquivalence Y A).inverse).obj N), Γ.map_id (F.obj N)]
+  rfl
+
+private def globalSectionRealization (X : Scheme.{u})
+    (M : proEtaleRingModules X (proEtaleConstantRing X A))
+    (m : (proEtaleUnitLeraySections A X).obj M) :
+    M.val.obj (op (⊤_ X.ProEt)) :=
+  sectionRealization A X M _
+    ((Sheaf.ΓNatIsoSheafSections (ProEt.topology X)
+      (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) terminalIsTerminal).hom.app
+        ((sfIntrinsicModuleEquivalence X A).inverse.obj M) m)
+
+private theorem globalSectionRealization_bijective (X : Scheme.{u})
+    (M : proEtaleRingModules X (proEtaleConstantRing X A)) :
+    Function.Bijective (globalSectionRealization A X M) :=
+  (sectionRealization_bijective A X M _).comp
+    (ConcreteCategory.bijective_of_isIso
+      ((Sheaf.ΓNatIsoSheafSections (ProEt.topology X)
+        (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) terminalIsTerminal).hom.app
+          ((sfIntrinsicModuleEquivalence X A).inverse.obj M)))
+
+private theorem globalSectionRealization_naturality (X : Scheme.{u})
+    {M N : proEtaleRingModules X (proEtaleConstantRing X A)} (f : M ⟶ N)
+    (m : (proEtaleUnitLeraySections A X).obj M) :
+    globalSectionRealization A X N ((proEtaleUnitLeraySections A X).map f m) =
+      f.val.app (op (⊤_ X.ProEt)) (globalSectionRealization A X M m) := by
+  unfold globalSectionRealization
+  have hn := ConcreteCategory.congr_hom
+    ((Sheaf.ΓNatIsoSheafSections (ProEt.topology X)
+      (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) terminalIsTerminal).hom.naturality
+        ((sfIntrinsicModuleEquivalence X A).inverse.map f)) m
+  simp only [CategoryTheory.comp_apply] at hn
+  erw [hn]
+  exact sectionRealization_naturality A X f _ _
+
+private theorem terminal_normalization {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (M : proEtaleRingModules X (proEtaleConstantRing X A))
+    (m : (proEtaleUnitLeraySections A Y).obj
+      ((proEtaleConstantModuleDirectImage f A).obj M)) :
+    globalSectionRealization A X M ((proEtaleGlobalEvaluationTerminal A f).hom.app M m) =
+      M.val.map (PreservesTerminal.iso (proEtaleBaseChange f)).inv.op
+        (globalSectionRealization A Y ((proEtaleConstantModuleDirectImage f A).obj M) m) := by
+  have hΓ : (proEtaleGlobalEvaluationTerminal A f).hom.app M ≫
+      (Sheaf.ΓNatIsoSheafSections (ProEt.topology X)
+        (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) terminalIsTerminal).hom.app
+          ((sfIntrinsicModuleEquivalence X A).inverse.obj M) =
+      (Sheaf.ΓNatIsoSheafSections (ProEt.topology Y)
+        (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) terminalIsTerminal).hom.app
+          ((sfIntrinsicModuleEquivalence Y A).inverse.obj
+            ((proEtaleConstantModuleDirectImage f A).obj M)) ≫
+        ((sectionDirectImageIso A f).hom.app M).hom.app (op (⊤_ Y.ProEt)) ≫
+          ((sfIntrinsicModuleEquivalence X A).inverse.obj M).obj.map
+            (PreservesTerminal.iso (proEtaleBaseChange f)).inv.op := by
+    rw [terminal_eq]
+    simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+      Functor.isoWhiskerLeft_hom, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+      proEtaleUnitLerayFixedTerminalIso, NatIso.ofComponents_hom_app,
+      Iso.symm_hom, Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
+    rw [reassoc_of% ((Sheaf.ΓNatIsoSheafSections (ProEt.topology Y)
+      (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) terminalIsTerminal).hom.naturality
+        ((sectionDirectImageIso A f).hom.app M))]
+    rfl
+  unfold globalSectionRealization
+  have hv := ConcreteCategory.congr_hom hΓ m
+  simp only [CategoryTheory.comp_apply] at hv
+  erw [hv]
+  erw [sectionRealization_restrict, sectionDirectImageIso_normalization]
+  rfl
+
+private theorem terminal_composition {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    (d : proEtaleConstantModuleDirectImage f A ⋙ proEtaleConstantModuleDirectImage g A ≅
+      proEtaleConstantModuleDirectImage (f ≫ g) A)
+    (hd : ∀ (M : proEtaleRingModules X (proEtaleConstantRing X A)) (W : Z.ProEtᵒᵖ)
+      (m : ((proEtaleConstantModuleDirectImage f A ⋙
+        proEtaleConstantModuleDirectImage g A).obj M).val.obj W),
+      (d.hom.app M).val.app W m =
+        M.val.map ((MorphismProperty.Over.pullbackComp f g).hom.app W.unop).op m)
+    (M : proEtaleRingModules X (proEtaleConstantRing X A)) :
+    (proEtaleUnitLeraySections A Z).map (d.hom.app M) ≫
+        (proEtaleGlobalEvaluationTerminal A (f ≫ g)).hom.app M =
+      (proEtaleGlobalEvaluationTerminal A g).hom.app
+          ((proEtaleConstantModuleDirectImage f A).obj M) ≫
+        (proEtaleGlobalEvaluationTerminal A f).hom.app M := by
+  ext m
+  apply (globalSectionRealization_bijective A X M).injective
+  change globalSectionRealization A X M
+      ((proEtaleGlobalEvaluationTerminal A (f ≫ g)).hom.app M
+        ((proEtaleUnitLeraySections A Z).map (d.hom.app M) m)) =
+    globalSectionRealization A X M
+      ((proEtaleGlobalEvaluationTerminal A f).hom.app M
+        ((proEtaleGlobalEvaluationTerminal A g).hom.app _ m))
+  rw [terminal_normalization, globalSectionRealization_naturality, hd,
+    terminal_normalization, terminal_normalization]
+  change M.val.map (PreservesTerminal.iso (proEtaleBaseChange (f ≫ g))).inv.op
+      (M.val.map ((MorphismProperty.Over.pullbackComp f g).hom.app (⊤_ Z.ProEt)).op _) =
+    M.val.map (PreservesTerminal.iso (proEtaleBaseChange f)).inv.op
+      (M.val.map ((proEtaleBaseChange f).map
+        (PreservesTerminal.iso (proEtaleBaseChange g)).inv).op _)
+  rw [← M.val.map_comp_apply, ← M.val.map_comp_apply, ← op_comp, ← op_comp]
+  have ht : (PreservesTerminal.iso (proEtaleBaseChange (f ≫ g))).inv ≫
+      (MorphismProperty.Over.pullbackComp f g).hom.app (⊤_ Z.ProEt) =
+      (PreservesTerminal.iso (proEtaleBaseChange f)).inv ≫
+        (proEtaleBaseChange f).map (PreservesTerminal.iso (proEtaleBaseChange g)).inv :=
+    ((terminalIsTerminal.isTerminalObj (proEtaleBaseChange g)).isTerminalObj
+      (proEtaleBaseChange f)).hom_ext _ _
+  rw [ht]
+  rfl
+
+private def globalEvaluation_moduleComp (A : Type u) [CommRing A] [Finite A]
+    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
+    proEtaleConstantModuleDirectImage f A ⋙ proEtaleConstantModuleDirectImage g A ≅
+      proEtaleConstantModuleDirectImage (f ≫ g) A :=
+  isoWhiskerRight (proEtaleUnitLerayDirectImageIso A f).symm
+      (proEtaleConstantModuleDirectImage g A) ≪≫
+    isoWhiskerLeft (proEtaleConstantRingPushforward A f)
+      (proEtaleUnitLerayDirectImageIso A g).symm ≪≫
+    (proEtaleConstantRingModulePullbackComposition f g A).choose_spec.choose ≪≫
+    proEtaleUnitLerayDirectImageIso A (f ≫ g)
+
+private theorem globalEvaluation_moduleComp_mate (A : Type u) [CommRing A] [Finite A]
+    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
+    (globalEvaluation_moduleComp A f g).hom =
+      conjugateEquiv ((proEtaleOrdinaryModuleAdjunction A g).comp
+        (proEtaleOrdinaryModuleAdjunction A f))
+        (proEtaleOrdinaryModuleAdjunction A (f ≫ g))
+        (proEtaleConstantRingModulePullbackComposition f g A).choose.hom := by
+  rw [proEtaleOrdinaryModuleAdjunction, proEtaleOrdinaryModuleAdjunction,
+    proEtaleOrdinaryModuleAdjunction, mateTransport]
+  have h := congrArg Iso.hom
+    (proEtaleConstantRingModulePullbackComposition f g A).choose_spec.choose_spec.2
+  simp only [conjugateIsoEquiv_apply_hom] at h
+  simp only [globalEvaluation_moduleComp, Iso.trans_hom, Iso.symm_hom,
+    Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom]
+  rw [h]
+
+private theorem globalEvaluation_derivedComp (A : Type u) [CommRing A] [Finite A]
+    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
+    (Functor.rightDerivedFunctorCompIso' (proEtaleConstantModuleDirectImage f A)
+      (proEtaleConstantModuleDirectImage g A) (globalEvaluation_moduleComp A f g)).hom =
+      (proEtaleOrdinaryDirectImageComposition A f g).inv := by
+  have h := Adjunction.rightDerivedFunctorCompIso'_hom_eq_conjugateEquiv
+    (proEtaleOrdinaryModuleAdjunction A f) (proEtaleOrdinaryModuleAdjunction A g)
+    (proEtaleOrdinaryModuleAdjunction A (f ≫ g)) (globalEvaluation_moduleComp A f g)
+    (proEtaleConstantRingModulePullbackComposition f g A).choose
+    (globalEvaluation_moduleComp_mate A f g)
+  rw [← proEtaleConstantRingPullbackComposition_eq_mapModuleComparison] at h
+  exact h
+
+private theorem directImage_map_sections (A : Type u) [CommRing A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y)
+    {M N : proEtaleRingModules X (proEtaleConstantRing X A)} (a : M ⟶ N)
+    (W : Y.ProEtᵒᵖ) (m : M.val.obj ((proEtaleBaseChange f).op.obj W)) :
+    (((proEtaleConstantModuleDirectImage f A).map a).val.app W) m =
+      a.val.app ((proEtaleBaseChange f).op.obj W) m := rfl
+
+private theorem globalEvaluation_moduleComp_section (A : Type u) [CommRing A] [Finite A]
+    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    (M : proEtaleRingModules X (proEtaleConstantRing X A)) (W : Z.ProEtᵒᵖ)
+    (m : ((proEtaleConstantModuleDirectImage f A ⋙
+      proEtaleConstantModuleDirectImage g A).obj M).val.obj W) :
+    ((globalEvaluation_moduleComp A f g).hom.app M).val.app W m =
+      M.val.map ((MorphismProperty.Over.pullbackComp f g).hom.app W.unop).op m := by
+  dsimp only [globalEvaluation_moduleComp, Iso.trans_hom, NatTrans.comp_app,
+    Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app, Iso.symm_hom]
+  simp only [SheafOfModules.comp_val, PresheafOfModules.comp_app,
+    CategoryTheory.comp_apply]
+  rw [directIso_hom (f ≫ g) A M W]
+  erw [directIso_inv g A ((proEtaleConstantRingPushforward A f).obj M) W]
+  have hm := directImage_map_sections A g
+    ((proEtaleUnitLerayDirectImageIso A f).inv.app M) W m
+  erw [hm]
+  erw [directIso_inv f A M ((proEtaleBaseChange g).op.obj W)]
+  exact (proEtaleConstantRingModulePullbackComposition f g A).choose_spec.choose_spec.1
+    M W.unop m
+
+private theorem concreteComposition (A : Type u) [CommRing A] [Finite A]
+    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    (K : proEtaleDerivedCategory X A) :
+    (proEtaleGlobalEvaluation A (f ≫ g)).hom.app K =
+      (proEtaleGlobalEvaluationSections A Z).map
+          ((proEtaleOrdinaryDirectImageComposition A f g).hom.app K) ≫
+        (proEtaleGlobalEvaluation A g).hom.app
+          ((proEtaleConstantDerivedDirectImage f A).obj K) ≫
+        (proEtaleGlobalEvaluation A f).hom.app K := by
+  have h := derivedComp (proEtaleConstantModuleDirectImage f A)
+    (proEtaleConstantModuleDirectImage g A) (proEtaleUnitLeraySections A Z)
+    (proEtaleConstantModuleDirectImage (f ≫ g) A)
+    (proEtaleUnitLeraySections A Y) (proEtaleUnitLeraySections A X)
+    (globalEvaluation_moduleComp A f g) (proEtaleGlobalEvaluationTerminal A g)
+    (proEtaleGlobalEvaluationTerminal A f) (proEtaleGlobalEvaluationTerminal A (f ≫ g))
+    (terminal_composition A f g (globalEvaluation_moduleComp A f g)
+      (globalEvaluation_moduleComp_section A f g))
+  rw [globalEvaluation_derivedComp] at h
+  have hh := congr_app h K
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    Functor.associator_hom_app, Category.id_comp] at hh
+  change (proEtaleGlobalEvaluationSections A Z).map
+      ((proEtaleOrdinaryDirectImageComposition A f g).inv.app K) ≫
+      (proEtaleGlobalEvaluation A (f ≫ g)).hom.app K =
+    (proEtaleGlobalEvaluation A g).hom.app
+      ((proEtaleConstantDerivedDirectImage f A).obj K) ≫
+      (proEtaleGlobalEvaluation A f).hom.app K at hh
+  rw [← hh, ← (proEtaleGlobalEvaluationSections A Z).map_comp_assoc,
+    Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.id_comp]
+
+private theorem globalEvaluation_identityUnit (A : Type u) [CommRing A] [Finite A]
+    (X : Scheme.{u})
+    (eM : proEtaleIdentityTransportedInverseImage X A ≅ 𝟭 _)
+    (heM : ∀ (M : proEtaleRingModules X (proEtaleConstantRing X A)) (U : X.ProEt)
+      (m : M.val.obj (op U)),
+      (eM.inv.app M).val.app (op U) m = proEtaleIdentityModuleCoprojection X A M U m)
+    (α : proEtaleConstantRingPullback A (𝟙 X) ≅ 𝟭 _)
+    (hα : ∀ (M : proEtaleRingModules X (proEtaleConstantRing X A)) (U : X.ProEtᵒᵖ)
+      (m : M.val.obj U), (α.inv.app M).val.app U m =
+        proEtaleIdentityPullbackTmul X A M U ((eM.inv.app M).val.app U m) 1) :
+    whiskerRight (proEtaleOrdinaryModuleAdjunction A (𝟙 X)).unit
+        (proEtaleUnitLeraySections A X) ≫
+      whiskerLeft (proEtaleConstantRingPullback A (𝟙 X))
+        (proEtaleGlobalEvaluationTerminal A (𝟙 X)).hom ≫
+      whiskerRight α.hom (proEtaleUnitLeraySections A X) = 𝟙 _ := by
+  have hu (M : proEtaleRingModules X (proEtaleConstantRing X A)) (U : X.ProEt)
+      (m : M.val.obj (op U)) :
+      ((proEtaleConstantRingPullback A (𝟙 X)).obj M).val.map
+          ((MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ X).inv.app U).op
+          (((proEtaleOrdinaryModuleAdjunction A (𝟙 X)).unit.app M).val.app (op U) m) =
+        (α.inv.app M).val.app (op U) m := by
+    let p := MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ X
+    let N := (proEtaleModuleInverseImage (𝟙 X) (proEtaleConstantRing X A)).obj M
+    let z := ((SheafOfModules.pullbackPushforwardAdjunction
+      (proEtaleModelRingUnit (𝟙 X) (proEtaleConstantRing X A))).unit.app
+        ((proEtaleModuleToModel ((sheafCompose (ProEt.topology X)
+          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+            (proEtaleConstantRing X A))).obj M)).val.app (AsSmall.up.op.obj (op U)) m
+    have hz : N.val.map (p.hom.app U).op ((eM.inv.app M).val.app (op U) m) = z := by
+      rw [heM]
+      change N.val.map (p.hom.app U).op (N.val.map (p.inv.app U).op z) = z
+      rw [← N.val.map_comp_apply, ← op_comp, p.hom_inv_id_app, op_id]
+      exact ConcreteCategory.congr_hom (N.val.map_id _) z
+    have hn := PresheafOfModules.naturality_apply (eM.inv.app M).val
+      (p.hom.app U).op m
+    have hη : ((proEtaleOrdinaryModuleAdjunction A (𝟙 X)).unit.app M).val.app (op U) m =
+        (α.inv.app M).val.app (op ((proEtaleBaseChange (𝟙 X)).obj U))
+          (M.val.map (p.hom.app U).op m) := by
+      have hsz : (eM.inv.app M).val.app (op ((proEtaleBaseChange (𝟙 X)).obj U))
+          (M.val.map (p.hom.app U).op m) = z := by
+        exact hn.trans hz
+      rw [hα]
+      change _ = proEtaleIdentityPullbackTmul X A M _
+        ((eM.inv.app M).val.app (op ((proEtaleBaseChange (𝟙 X)).obj U))
+          (M.val.map (p.hom.app U).op m)) 1
+      rw [hsz]
+      change ((proEtaleUnitLerayDirectImageIso A (𝟙 X)).hom.app
+          ((proEtaleConstantRingPullback A (𝟙 X)).obj M)).val.app (op U)
+          (((proEtaleConstantRingAdjunction A (𝟙 X)).unit.app M).val.app (op U) m) = _
+      rw [directIso_hom]
+      exact proEtaleRingModuleAdjunction_normalized (𝟙 X)
+        (proEtaleConstantRing X A) (proEtaleConstantRing X A)
+        (proEtaleConstantRingComparison (𝟙 X) A) M U m
+    rw [hη]
+    have hnat := PresheafOfModules.naturality_apply (α.inv.app M).val
+      (p.inv.app U).op (M.val.map (p.hom.app U).op m)
+    exact hnat.symm.trans (by
+      change (α.inv.app M).val.app (op U)
+        (M.val.map (p.inv.app U).op (M.val.map (p.hom.app U).op m)) = _
+      rw [← M.val.map_comp_apply, ← op_comp, p.inv_hom_id_app, op_id]
+      exact congrArg (fun x ↦ (α.inv.app M).val.app (op U) x)
+        (ConcreteCategory.congr_hom (M.val.map_id _) m))
+  apply NatTrans.ext
+  funext M
+  ext m
+  apply (globalSectionRealization_bijective A X M).injective
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    NatTrans.id_app, CategoryTheory.comp_apply, CategoryTheory.id_apply]
+  erw [globalSectionRealization_naturality, terminal_normalization,
+    globalSectionRealization_naturality]
+  have hp : (PreservesTerminal.iso (proEtaleBaseChange (𝟙 X))).inv =
+      (MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ X).inv.app (⊤_ X.ProEt) :=
+    (terminalIsTerminal.isTerminalObj (proEtaleBaseChange (𝟙 X))).hom_ext _ _
+  erw [hp, hu]
+  have hh := ConcreteCategory.congr_hom
+    (congrArg (fun f ↦ f.val.app (op (⊤_ X.ProEt))) (α.inv_hom_id_app M))
+    (globalSectionRealization A X M m)
+  change (α.hom.app M).val.app (op (⊤_ X.ProEt))
+      ((α.inv.app M).val.app (op (⊤_ X.ProEt)) (globalSectionRealization A X M m)) = _
+  change (α.hom.app M).val.app (op (⊤_ X.ProEt))
+      ((α.inv.app M).val.app (op (⊤_ X.ProEt)) (globalSectionRealization A X M m)) = _ at hh
+  exact hh
+
+private theorem concreteIdentity (A : Type u) [CommRing A] [Finite A]
+    (X : Scheme.{u}) :
+    (proEtaleGlobalEvaluation A (𝟙 X)).hom =
+      whiskerRight (proEtaleGlobalEvaluationDirectImageId A X).hom
+        (proEtaleGlobalEvaluationSections A X) := by
+  let hM := (proEtaleDerivedPullback_identity X A).choose_spec.2.2
+  let eM := hM.choose
+  let hα := hM.choose_spec.2
+  let α := hα.choose
+  let hb := hα.choose_spec.2.2
+  let b := hb.choose
+  let hγ := hb.choose_spec.2
+  have hβ (I : CochainComplex (proEtaleRingModules X (proEtaleConstantRing X A)) ℤ) :
+      (proEtaleGlobalEvaluationPullbackId A X).hom.app (DerivedCategory.Q.obj I) =
+        (proEtaleConstantRingPullback A (𝟙 X)).mapDerivedCategoryFactors.hom.app I ≫
+          DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex α.hom (.up ℤ)).app I) := by
+    have hi : b.hom.app I =
+        (NatTrans.mapHomologicalComplex α.hom (.up ℤ)).app I := by
+      ext n : 1
+      exact hb.choose_spec.1 I n
+    have hh := hγ.choose_spec I
+    rw [hi] at hh
+    exact hh
+  exact derivedIdentity _ _ _ (proEtaleOrdinaryModuleAdjunction A (𝟙 X))
+    (proEtaleGlobalEvaluationTerminal A (𝟙 X)) α
+    (proEtaleGlobalEvaluationPullbackId A X) hβ
+    (globalEvaluation_identityUnit A X eM hM.choose_spec.1 α hα.choose_spec.2.1)
+
+/-- The comparison is the identity of final-object section complexes, through the
+canonical K-injective identifications. Source: Stacks Tags 0D6H and 070Y
+(blueprint: lem-pur-proetale-direct-image-global-evaluation).
+
+Proof: specialize the canonical right-derived compositor factorization to the
+K-injective complex J. Both derived units are invertible because the direct image
+preserves K-injectives. Cancel them and identify the factors with the published
+K-injective evaluation isomorphisms. -/
+theorem proEtaleDirectImageGlobalEvaluation (f : T ⟶ Y)
+    (J : CochainComplex (proEtaleRingModules T (proEtaleConstantRing T A)) ℤ)
+    [J.IsKInjective] (_hJ : ∃ a : ℤ, J.IsStrictlyGE a) :
+    (proEtaleGlobalEvaluation A f).hom.app (DerivedCategory.Q.obj J) =
+      (proEtaleGlobalEvaluationSections A Y).map
+          (proEtaleGlobalEvaluationImageObj A f J).hom ≫
+        ((proEtaleGlobalEvaluationSectionsObj A Y)
+          (((proEtaleConstantModuleDirectImage f A).mapHomologicalComplex
+            (.up ℤ)).obj J)).hom ≫
+        DerivedCategory.Q.map
+          ((NatTrans.mapHomologicalComplex
+            (proEtaleGlobalEvaluationTerminal A f).hom (.up ℤ)).app J) ≫
+        ((proEtaleGlobalEvaluationSectionsObj A T) J).inv := by
+  let := proEtaleRingModules_hasKInjectiveResolutions T (proEtaleConstantRing T A)
+  let := proEtaleRingModules_hasKInjectiveResolutions Y (proEtaleConstantRing Y A)
+  exact globalEvaluation_obj (proEtaleConstantModuleDirectImage f A)
+    (proEtaleUnitLeraySections A Y) (proEtaleGlobalEvaluationTerminal A f) J
+
+/-- Compatibility with the specified derived shift comparisons, on D^+.
+Source: Stacks Tag 05SU (blueprint: lem-pur-proetale-direct-image-global-evaluation).
+Proof: shift a bounded-below K-injective representative J by n. Shifts preserve
+K-injectivity since Hom(M,J[n]) = Hom(M[-n],J) for acyclic M. Evaluation and direct
+image act termwise, so both differentials acquire exactly the same factor (-1)^n.
+The preceding resolution normalization and its transition naturality identify this
+calculation with the already specified derived-functor shift comparisons. -/
+theorem proEtaleDirectImageGlobalEvaluation_shift (f : T ⟶ Y)
+    (L : @DerivedCategory.Plus (proEtaleRingModules T (proEtaleConstantRing T A))
+      _ _ (proEtaleRingModules_hasDerivedCategory T (proEtaleConstantRing T A)))
+    (n : ℤ) :
+    ((proEtaleConstantDerivedDirectImage f A ⋙
+        (proEtaleGlobalEvaluationSections A Y)).commShiftIso n).hom.app
+          L.obj ≫ (shiftFunctor _ n).map ((proEtaleGlobalEvaluation A f).hom.app L.obj) =
+      (proEtaleGlobalEvaluation A f).hom.app (L.obj⟦n⟧) ≫
+        ((proEtaleGlobalEvaluationSections A T).commShiftIso n).hom.app
+          L.obj := by
+  let := proEtaleRingModules_hasKInjectiveResolutions T (proEtaleConstantRing T A)
+  let := proEtaleRingModules_hasKInjectiveResolutions Y (proEtaleConstantRing Y A)
+  have := CategoryTheory.canonical_unit_commShift
+    (proEtaleConstantModuleDirectImage f A)
+  have := CategoryTheory.canonical_unit_commShift (proEtaleUnitLeraySections A Y)
+  have := CategoryTheory.canonical_unit_commShift (proEtaleUnitLeraySections A T)
+  have h := Functor.commShift_rightDerivedFunctorCompIso'_hom
+    (proEtaleConstantModuleDirectImage f A) (proEtaleUnitLeraySections A Y)
+    (proEtaleGlobalEvaluationTerminal A f)
+  let : NatTrans.CommShift (proEtaleGlobalEvaluation A f).hom ℤ := h
+  exact NatTrans.shift_app_comm (proEtaleGlobalEvaluation A f).hom n L.obj
+
+/-- The final-object comparison agrees with the canonical direct-image compositor.
+Source: Stacks Tag 0D6E (blueprint: lem-pur-proetale-direct-image-global-evaluation).
+Proof: the normalized module direct-image compositor acts by fibre-product restriction.
+The two terminal restrictions agree by uniqueness of arrows to the terminal object.
+The universal right-derived compositor transports this equality to derived functors.
+The module-comparison localization theorem and adjunction conjugation identify its
+compositor with the inverse of the specified ordinary direct-image comparison. -/
+theorem proEtaleDirectImageGlobalEvaluation_comp (f : T ⟶ Y) (g : Y ⟶ W)
+    (L : @DerivedCategory.Plus (proEtaleRingModules T (proEtaleConstantRing T A))
+      _ _ (proEtaleRingModules_hasDerivedCategory T (proEtaleConstantRing T A))) :
+    (proEtaleGlobalEvaluation A (f ≫ g)).hom.app L.obj =
+      (proEtaleGlobalEvaluationSections A W).map
+          ((proEtaleOrdinaryDirectImageComposition A f g).hom.app L.obj) ≫
+        (proEtaleGlobalEvaluation A g).hom.app
+          ((proEtaleConstantDerivedDirectImage f A).obj L.obj) ≫
+        (proEtaleGlobalEvaluation A f).hom.app L.obj := by
+  exact concreteComposition A f g L.obj
+
+/-- Identity normalization, after the canonical identity direct-image identification.
+Source: Stacks Tag 0D6E (blueprint: lem-pur-proetale-direct-image-global-evaluation).
+Proof: the published coprojection and tensor-unit formulas show that the ordinary
+unit, terminal evaluation and identity inverse-image comparison compose to the identity.
+The unit-Leray chain formula on K-injectives identifies the derived comparison with
+the mate of the same localized identity comparison; naturality extends to all objects. -/
+theorem proEtaleDirectImageGlobalEvaluation_id
+    (L : @DerivedCategory.Plus (proEtaleRingModules T (proEtaleConstantRing T A))
+      _ _ (proEtaleRingModules_hasDerivedCategory T (proEtaleConstantRing T A))) :
+    (proEtaleGlobalEvaluation A (𝟙 T)).hom.app L.obj =
+      (proEtaleGlobalEvaluationSections A T).map
+        ((proEtaleGlobalEvaluationDirectImageId A T).hom.app L.obj) := by
+  exact congr_app (concreteIdentity A T) L.obj
+
+/-- The open-unit composite is restriction, including its resolution map. This equation
+uses an arbitrary K-injective resolution of j^*I, so it characterizes the actual derived
+restriction without assuming inverse image preserves K-injectives.
+Source: Stacks Tags 0DVC and 09BN
+(blueprint: lem-pur-proetale-direct-image-global-evaluation).
+Proof: cancel the direct-image identification and its inverse in the transported
+ordinary unit followed by terminal evaluation. This gives exactly the published
+unit-Leray section unit. Apply the existing unit-Leray chain formula to I, H and v.
+Its representative formula is the asserted equality, without another resolution. -/
+theorem proEtaleDirectImageGlobalEvaluation_open
+    {U : Scheme.{u}} (j : U ⟶ T) [IsOpenImmersion j]
+    (I : CochainComplex (proEtaleRingModules T (proEtaleConstantRing T A)) ℤ)
+    (H : CochainComplex (proEtaleRingModules U (proEtaleConstantRing U A)) ℤ)
+    [I.IsKInjective] [H.IsKInjective]
+    (_hI : ∃ a : ℤ, I.IsStrictlyGE a) (_hH : ∃ a : ℤ, H.IsStrictlyGE a)
+    (v : ((proEtaleConstantRingPullback A j).mapHomologicalComplex (.up ℤ)).obj I ⟶ H)
+    [QuasiIso v] :
+    (proEtaleGlobalEvaluationSections A T).map
+        ((proEtaleOrdinaryDerivedAdjunction A j).unit.app (DerivedCategory.Q.obj I)) ≫
+      (proEtaleGlobalEvaluation A j).hom.app
+        ((proEtaleConstantRingDerivedPullback A j).obj (DerivedCategory.Q.obj I)) ≫
+      (proEtaleGlobalEvaluationSections A U).map
+        ((proEtaleConstantRingPullback A j).mapDerivedCategoryFactors.hom.app I ≫
+          DerivedCategory.Q.map v) =
+    ((proEtaleGlobalEvaluationSectionsObj A T) I).hom ≫
+      DerivedCategory.Q.map
+        ((NatTrans.mapHomologicalComplex (proEtaleUnitLeraySectionUnit A j)
+          (.up ℤ)).app I ≫
+          ((proEtaleUnitLeraySections A U).mapHomologicalComplex (.up ℤ)).map v) ≫
+      ((proEtaleGlobalEvaluationSectionsObj A U) H).inv := by
+  let := proEtaleRingModules_hasKInjectiveResolutions T (proEtaleConstantRing T A)
+  let := proEtaleRingModules_hasKInjectiveResolutions U (proEtaleConstantRing U A)
+  have hunit :
+      whiskerRight (proEtaleOrdinaryModuleAdjunction A j).unit
+          (proEtaleUnitLeraySections A T) ≫
+        whiskerLeft (proEtaleConstantRingPullback A j)
+          (proEtaleGlobalEvaluationTerminal A j).hom =
+      proEtaleUnitLeraySectionUnit A j := by
+    apply NatTrans.ext
+    funext M
+    simp only [proEtaleOrdinaryModuleAdjunction, proEtaleGlobalEvaluationTerminal,
+      proEtaleUnitLeraySectionUnit, Adjunction.ofNatIsoRight_unit,
+      Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerRight_hom, NatTrans.comp_app,
+      Functor.whiskerRight_app, Functor.whiskerLeft_app]
+    rw [CategoryTheory.Functor.map_comp, Category.assoc]
+    rw [← (proEtaleUnitLeraySections A T).map_comp_assoc
+      ((proEtaleUnitLerayDirectImageIso A j).hom.app _)
+      ((proEtaleUnitLerayDirectImageIso A j).inv.app _), Iso.hom_inv_id_app]
+    erw [CategoryTheory.Functor.map_id, Category.id_comp]
+  have h := unitLerayChain (proEtaleOrdinaryModuleAdjunction A j)
+    (proEtaleGlobalEvaluationTerminal A j) I H v
+  rw [hunit] at h
+  exact h.symm
+
+/-- The third arrow is identified with its given sign and the given shift comparison.
+Together with naturality at the first two arrows, this identifies the global-sections
+triangles, in particular for a support-localization triangle.
+Source: Stacks Tags 0D6H and 05SU
+(blueprint: lem-pur-proetale-direct-image-global-evaluation).
+Proof: use naturality of ell at the triangle's actual third morphism d. Apply the shift
+compatibility above to its first vertex B. Substitution gives the displayed square,
+whose shifted comparison is ell_B[1]. The first two squares are ordinary naturality.
+The derived functors are triangulated, so this compares the distinguished triangles
+with their existing third arrows, rather than choosing new connecting morphisms. -/
+theorem proEtaleDirectImageGlobalEvaluation_third (f : T ⟶ Y)
+    (B D : @DerivedCategory.Plus (proEtaleRingModules T (proEtaleConstantRing T A))
+      _ _ (proEtaleRingModules_hasDerivedCategory T (proEtaleConstantRing T A)))
+    (d : D.obj ⟶ B.obj⟦(1 : ℤ)⟧) :
+    (proEtaleGlobalEvaluationSections A Y).map
+        ((proEtaleConstantDerivedDirectImage f A).map d) ≫
+      ((proEtaleConstantDerivedDirectImage f A ⋙
+        (proEtaleGlobalEvaluationSections A Y)).commShiftIso (1 : ℤ)).hom.app
+          B.obj ≫
+      (shiftFunctor _ (1 : ℤ)).map ((proEtaleGlobalEvaluation A f).hom.app B.obj) =
+    (proEtaleGlobalEvaluation A f).hom.app D.obj ≫
+      (proEtaleGlobalEvaluationSections A T).map d ≫
+      ((proEtaleGlobalEvaluationSections A T).commShiftIso (1 : ℤ)).hom.app
+        B.obj := by
+  rw [proEtaleDirectImageGlobalEvaluation_shift A f B (1 : ℤ)]
+  simpa only [Functor.comp_map, Category.assoc] using
+    (reassoc_of% ((proEtaleGlobalEvaluation A f).hom.naturality d))
+      (((proEtaleGlobalEvaluationSections A T).commShiftIso (1 : ℤ)).hom.app B.obj)
 
 end SectionRealization
 

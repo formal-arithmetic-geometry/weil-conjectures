@@ -33,6 +33,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafi
 public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
 import WeilConjectures.AlgebraicGeometry.Completed.Koszul.CompletedKoszulQuotientComparison
 import all WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientDatumSupplement
+public import WeilConjectures.AlgebraicGeometry.AdicCompletion.DerivedCompletionSupplement
 
 /-! # Reconstruction in the actual completed coefficient presentation
 
@@ -576,53 +577,52 @@ private theorem reconstructionLimit_transport
   · change (E.inv ≫ δ) ≫ (shiftFunctor C (1 : ℤ)).map (𝟙 L) = E.inv ≫ δ
     rw [CategoryTheory.Functor.map_id, Category.comp_id]
 
-/-- An intrinsically complete object is a Roos limit of its actual quotient reductions.
-Source: blueprint order 1270, Koszul reconstruction; Stacks Tags 091N and 0DVC.
+/-- A derived complete internal module complex has the canonical reduction units as the
+first arrow of its reduction Roos triangle.
+
+Source: latest blueprint, `def-pe-derived-complete`, canonical completion map;
+`fix-prop-adjunctions`, units and counits of derived adjunctions.
 (blueprint: lem-weil-pbc-actual-completed-reduction-reconstruction).
 
-Proof: choose a K-flat representative in the constant completed-ring presentation
-used to define intrinsic completeness. The completed Koszul reduction Roos triangle
-identifies its intrinsic completion with the derived limit of its strict quotient
-tower. The completeness hypothesis makes the completion map invertible, so transport
-that triangle's first vertex to the given object. Transport the coefficient ring
-along pbcCompletedComparison. This exact equivalence preserves countable products,
-so it preserves the Roos triangle. At each finite level the normalized constant
-quotient comparison identifies the transported tower with the actual quotient
-extension followed by scalar restriction. The tensor-unit normalization makes the
-adjacent square commute: both adjuncts are the direct quotient unit. The product of
-these level isomorphisms conjugates the transition endomorphisms. Transporting the
-two product vertices therefore gives the displayed distinguished Roos triangle.
-No bound, constructibility, flatness, or choice of a limit functor is needed. -/
+Proof: choose the K-flat representative in the completeness certificate. The native
+augmented Roos comparison gives its reduction limit triangle and identifies the
+composite of the completion map with its first arrow as the product of the scalar
+adjunction units. Completeness makes this completion map invertible. Transport the
+first vertex of that distinguished triangle across this isomorphism, leaving both
+product vertices fixed. This retains the actual unit map, not only a limit object.
+No constructibility, boundedness, or flatness assumption on the object is used. -/
+theorem pbc_actual_completed_reduction_reconstruction_normalized
+    (K : DerivedCategory (AdicCompletion.Modules l E X))
+    (hK : IsDerivedComplete l E X K)
+    [HasProduct (AdicCompletion.integralLevel l E X K)] :
+    ∃ δ : (∏ᶜ (AdicCompletion.integralLevel l E X K)) ⟶ K⟦(1 : ℤ)⟧,
+      IsDerivedLimitTriangle (AdicCompletion.integralStep l E X K) K
+        (Pi.lift (fun n ↦ (Mod.derivedExtendMapDerivedCategoryAdjunction
+          (AdicCompletion.quotient l E X n)).unit.app K)) δ := by
+  obtain ⟨P, hP, ⟨eP⟩, hη⟩ := hK
+  let := hη
+  obtain ⟨p, δ, hδ, hunit⟩ := AdicCompletion.roos_isDerivedLimit l E X K P hP eP
+  let e := eP.symm ≪≫ asIso (DerivedCategory.Q.map (AdicCompletion.augmentation l E X P))
+  refine ⟨δ ≫ (shiftFunctor _ (1 : ℤ)).map e.inv, ?_⟩
+  apply Pretriangulated.isomorphic_distinguished _ hδ _
+  exact Pretriangulated.Triangle.isoMk _ _ e (Iso.refl _) (Iso.refl _)
+    (by simpa [e, AdicCompletion.completionMap] using hunit.symm) (by simp) (by simp)
+
+/-- A derived complete object is a derived limit of its canonical quotient reductions,
+with each finite level restricted to the original pulled-back condensed coefficients.
+
+Source: latest blueprint, `def-pe-derived-complete`; `fix-prop-adjunctions`.
+(blueprint: lem-weil-pbc-actual-completed-reduction-reconstruction).
+
+Proof: the normalized reconstruction triangle has exactly the canonical quotient
+transition as its second arrow. Retain its specified unit-product first arrow and
+its connecting morphism as witnesses for the derived-limit predicate. -/
 theorem pbc_actual_completed_reduction_reconstruction
-    [HasCountableProducts (PbcCompletedDerived T d)]
-    (K : PbcCompletedDerived T d) (hK : PbcIsIntrinsicallyComplete T d K) :
-    let M : ℕᵒᵖ ⥤ PbcCompletedDerived T d :=
-    Functor.ofOpSequence
-        (X := fun n ↦ (pbcDerivedRestrict (pbcAdicProjection T d n)).obj
-          ((pbcCompletedReduction T d n).obj K))
-        (fun n ↦ (pbcDerivedRestrict (pbcAdicProjection T d (n + 1))).map
-          (pbcReductionTransition (pbcAdicProjection T d (n + 1))
-            (pbcAdicQuotient T d (n + 1) n (Nat.le_succ n)) (pbcAdicProjection T d n)
-            (pbcAdicProjection_comp T d (n + 1) n (Nat.le_succ n)) K) ≫
-          (pbcDerivedRestrictComp (pbcAdicProjection T d (n + 1))
-            (pbcAdicQuotient T d (n + 1) n (Nat.le_succ n)) (pbcAdicProjection T d n)
-            (pbcAdicProjection_comp T d (n + 1) n (Nat.le_succ n))).hom.app
-              ((pbcCompletedReduction T d n).obj K))
-    IsDerivedLimit
-      (K := fun n ↦ M.obj (op n))
-      (fun n ↦ M.map (homOfLE (Nat.le_succ n)).op) K := by
-  dsimp only
-  simp only [Functor.ofOpSequence_obj, Functor.ofOpSequence_map_homOfLE_succ]
-  obtain ⟨s, b, hb, C, eC, hC⟩ := hK
-  have : HasCountableProducts
-      (reductionDerivedCategory T (completedReductionCoefficient T d)) :=
-    inferInstanceAs (HasCountableProducts (PbcCompletedDerived T d))
-  apply reconstructionLimit_transport _ _ K
-    (reconstructionStrictLimit T d K s b hb C eC hC)
-    (fun n ↦ (asIso (completedReductionEvaluation T d n)).app K)
-  intro n
-  simpa only [reconstructionStrictStep, reconstructionStep, completedTowerDerivedStep,
-    NatTrans.comp_app, Functor.whiskerLeft_app, Iso.app_hom, asIso_hom, Category.assoc] using
-      congr_app (reconstructionStep_comparison T d n) K
+    (K : DerivedCategory (AdicCompletion.Modules l E X))
+    (hK : IsDerivedComplete l E X K)
+    [HasProduct (AdicCompletion.integralLevel l E X K)] :
+    IsDerivedLimit (AdicCompletion.integralStep l E X K) K := by
+  obtain ⟨δ, hδ⟩ := pbc_actual_completed_reduction_reconstruction_normalized l E X K hK
+  exact ⟨_, δ, hδ⟩
 
 end AlgebraicGeometry.Scheme

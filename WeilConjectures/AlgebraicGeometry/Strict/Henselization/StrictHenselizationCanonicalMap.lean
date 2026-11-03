@@ -240,4 +240,16 @@ theorem strictHenselizationMap_existsUnique
     simp only [Category.assoc, reassoc_of% (hba x), hba (x ≫ f)]
     exact (Category.comp_id h).symm
 
+/-- The defining structural square of the canonical map.
+Source: Stacks Project, Tags 04HX and 04GU
+(blueprint: lem-weil-pbc-strict-henselization-functoriality).
+Proof: take the structural-square component of the property of the unique witness in
+strictHenselizationMap_existsUnique. -/
+theorem strictHenselizationMap_over
+    {X S : Scheme.{u}} (f : X ⟶ S) {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
+    (x : Spec (.of Ω) ⟶ X) :
+    strictHenselizationMap f x ≫ strictHenselizationStructuralMap (x ≫ f) =
+      strictHenselizationStructuralMap x ≫ f := by
+  exact (Classical.choose_spec (strictHenselizationMap_existsUnique f x)).1.1
+
 end AlgebraicGeometry.Scheme

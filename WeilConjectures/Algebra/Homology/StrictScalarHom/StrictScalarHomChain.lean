@@ -313,6 +313,14 @@ structure Data {R S : Sheaf J CommRingCat.{max c v u}} (φ : R ⟶ S) where
       extension.complex.map (homMap.{c, v, u} a b) ≫ sigma P' A' N' q' =
         sigma P A N q ≫ homMap.{c, v, u} (extension.complex.map a) w
 
+/-- The canonical Hom comparison for a coefficient change is sigma with q the identity.
+Source: Stacks 03CZ, 0A8X (blueprint: lem-sfb-hom-scalar-chain-identification). -/
+def Data.homComparison {R S : Sheaf J CommRingCat.{max c v u}} {φ : R ⟶ S}
+    (D : Data.{c, v, u} φ) (P A : Complex.{c, v, u} R) :
+    D.extension.complex.obj (homComplex (R := R) P A) ⟶
+      homComplex (R := S) (D.extension.complex.obj P) (D.extension.complex.obj A) :=
+  D.sigma P A (D.extension.complex.obj A) (𝟙 _)
+
 /-- The canonical extension identification and restriction mate for a commuting
 square of coefficient sheaves, both pinned by local tensor generators.
 Source: Stacks 03CZ, 03CY (blueprint: lem-sfb-hom-scalar-chain-identification). -/

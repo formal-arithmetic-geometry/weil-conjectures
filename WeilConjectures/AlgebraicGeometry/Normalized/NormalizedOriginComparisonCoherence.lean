@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Normalized.NormalizedOriginScalarComparisons
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictScalars
+public import WeilConjectures.AlgebraicGeometry.ProperBaseChange.WitnessCompatibility
 
 /-!
 # Coherence of comparison with quotient scalar extension
@@ -343,5 +344,82 @@ private theorem comparisonScalarComp (T : Scheme.{u})
   simp only [Iso.hom_inv_id_app_assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id_app]
   dsimp only [Functor.comp_obj]
   rw [CategoryTheory.Functor.map_id, Category.id_comp, Category.comp_id]
+
+/-- The inverse comparison mate respects the canonical scalar unit and the canonical
+three-level scalar-extension associator. This concerns arbitrary ambient etale objects;
+there is no boundedness, constructibility, origin, or tower hypothesis.
+
+Source: Stacks Tags 06YY and 07A4; the coefficient refinement of Tag 09B1,
+Steps 1--2 of lem-weil-pbc-normalized-etale-origin-witnesses
+(blueprint: lem-weil-pbc-normalized-origin-comparison-coherence).
+
+Proof: first work with ordinary module sheaves. Identity scalar restriction and
+composition of scalar restrictions have identity underlying section maps. By definition,
+pbcComparisonRestrict is the conjugate under restriction/coextension adjunctions of the
+sectionwise commutation of comparison direct image with coextension. Transpose its unit
+and composition diagrams. The coextension unit sends an element to its scalar-action
+map, and its counit evaluates a map at 1. The unit diagram consequently evaluates the
+scalar-action map at 1. Both paths in the composition diagram evaluate the same nested
+scalar-action maps; they agree by associativity of the scalar action. This proves the
+ordinary comparison diagrams with identity and composite scalar restriction.
+
+Comparison inverse image and scalar restriction are exact. Apply them degree by degree
+to complexes and localize at quasi-isomorphisms. The commuting diagrams induce the
+corresponding derived diagrams; uniqueness of localized natural transformations identifies
+their comparisons with pbcDerivedComparisonRestrict, the derived identity-restriction
+comparison, and derivedRestrictScalarsCompIso. Finally transpose the derived diagrams
+through scalar-extension/restriction adjunctions. Mates preserve horizontal pasting
+(mateEquiv_hcomp), and conjugation preserves composition and whiskering. The mates of
+identity restriction and composite restriction are exactly normalizedOriginQuotientUnit
+and normalizedOriginQuotientComp. The comparison mate is pbcComparisonReductionMap by
+its definition. Its invertibility is already supplied by WitnessCompatibility. Evaluate
+these transposed diagrams at K and cancel the invertible comparison maps. This gives the
+two displayed equations for their inverses. Repeated indices and zero quotient rings
+satisfy the same unit and scalar-action identities; no quotient-flatness is used. -/
+theorem normalizedOriginComparisonCoherence (T : Scheme.{u})
+    {A : Type (u + 1)} [CommRing A] (d : Scheme.AdicCoefficientDatum A) :
+    (∀ (n : ℕ) (K : PbcWitnessEtale T d n),
+    (comparisonUpperStar (ModuleCat.{u + 1} (PbcQuotient d n)) T).mapDerivedCategory.map
+        ((normalizedOriginScalarUnit T.smallEtaleTopology
+        (pbcWitnessQuotientMap d n n (le_refl n))
+        (Scheme.adicQuotientMap_id d.ideal ⟨n + 1, Nat.succ_pos n⟩)).hom.app K) =
+      (pbcComparisonReduction T (pbcWitnessQuotientMap d n n (le_refl n))).inv.app K ≫
+        (normalizedOriginScalarUnit (Scheme.ProEt.topology T)
+        (pbcWitnessQuotientMap d n n (le_refl n))
+        (Scheme.adicQuotientMap_id d.ideal ⟨n + 1, Nat.succ_pos n⟩)).hom.app
+          ((comparisonUpperStar (ModuleCat.{u + 1} (PbcQuotient d n)) T).mapDerivedCategory.obj
+            K)) ∧
+    (∀ (k m n : ℕ) (hnm : n ≤ m) (hmk : m ≤ k) (K : PbcWitnessEtale T d k),
+    (comparisonUpperStar (ModuleCat.{u + 1} (PbcQuotient d n)) T).mapDerivedCategory.map
+        ((pbcFixedScalarExtensionComp T.smallEtaleTopology
+        (pbcWitnessQuotientMap d k m hmk)
+        (pbcWitnessQuotientMap d m n hnm)
+        (pbcWitnessQuotientMap d k n (hnm.trans hmk))
+        (Scheme.adicQuotientMap_comp d.ideal ⟨k + 1, Nat.succ_pos k⟩
+          ⟨m + 1, Nat.succ_pos m⟩ ⟨n + 1, Nat.succ_pos n⟩
+          (Nat.add_le_add_right hnm 1) (Nat.add_le_add_right hmk 1)).symm).hom.app K) ≫
+      (pbcComparisonReduction T (pbcWitnessQuotientMap d k n (hnm.trans hmk))).inv.app K =
+    (pbcComparisonReduction T (pbcWitnessQuotientMap d m n hnm)).inv.app
+        ((pbcFixedScalarExtension T.smallEtaleTopology (pbcWitnessQuotientMap d k m hmk)).obj K) ≫
+      (pbcFixedScalarExtension (Scheme.ProEt.topology T) (pbcWitnessQuotientMap d m n hnm)).map
+        ((pbcComparisonReduction T (pbcWitnessQuotientMap d k m hmk)).inv.app K) ≫
+      (pbcFixedScalarExtensionComp (Scheme.ProEt.topology T)
+        (pbcWitnessQuotientMap d k m hmk)
+        (pbcWitnessQuotientMap d m n hnm)
+        (pbcWitnessQuotientMap d k n (hnm.trans hmk))
+        (Scheme.adicQuotientMap_comp d.ideal ⟨k + 1, Nat.succ_pos k⟩
+          ⟨m + 1, Nat.succ_pos m⟩ ⟨n + 1, Nat.succ_pos n⟩
+          (Nat.add_le_add_right hnm 1) (Nat.add_le_add_right hmk 1)).symm).hom.app
+        ((comparisonUpperStar (ModuleCat.{u + 1} (PbcQuotient d k)) T).mapDerivedCategory.obj
+          K)) := by
+  constructor
+  · intro n K
+    exact comparisonScalarUnit T _
+      (Scheme.adicQuotientMap_id d.ideal ⟨n + 1, Nat.succ_pos n⟩) K
+  · intro k m n hnm hmk K
+    exact comparisonScalarComp T _ _ _
+      (Scheme.adicQuotientMap_comp d.ideal ⟨k + 1, Nat.succ_pos k⟩
+        ⟨m + 1, Nat.succ_pos m⟩ ⟨n + 1, Nat.succ_pos n⟩
+        (Nat.add_le_add_right hnm 1) (Nat.add_le_add_right hmk 1)).symm K
 
 end AlgebraicGeometry.ProEtale

@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.ProperBaseChange.WitnessCompatibility
 public import WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientDatumSupplement
+public import WeilConjectures.AlgebraicGeometry.PbcFixedScalarExtension
+public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionSupplement
 
 /-!
 # Canonical unit and reassociation for quotient scalar extensions
@@ -51,13 +53,51 @@ def normalizedOriginScalarUnit
     (Functor.mapDerivedCategoryNatIso (normalizedOriginRestrictionUnit J φ hφ) ≪≫
       Functor.mapDerivedCategoryIdIso _)
 
-/-- Direct quotient scalar extension, in the published fixed-ring presentation.
-Source: Stacks 06YY and 09B1, coefficient refinement
+/-- The actual map `A_{E,m} → A_{E,n}`, induced by the identity on the valuation ring.
+The exponent is positive, with `n = 1` the first finite quotient.
+Source: blueprint `prop-coef-integral-dualizing`, proof, reductions
+(blueprint: def-weil-pbc-normalized-origin-scalar-comparisons). -/
+def normalizedOriginQuotientMap (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E]
+    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+    (m n : ℕ+) (h : n ≤ m) :
+    Padic.coefficientExtensionRing l E m →+* Padic.coefficientExtensionRing l E n :=
+  Ideal.Quotient.factor (Ideal.pow_le_pow_right h)
+
+/-- The normalized identity unit on the actual positive finite coefficient quotient.
+Source: blueprint `prop-coef-integral-dualizing`, proof, scalar adjunction
+(blueprint: def-weil-pbc-normalized-origin-scalar-comparisons). -/
+def normalizedOriginQuotientUnit
+    {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
+    (J : GrothendieckTopology C) (l : ℕ) [Fact l.Prime]
+    (E : Type (u + 1)) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+    (n : ℕ+) :
+    pbcFixedScalarExtension J (normalizedOriginQuotientMap l E n n (le_refl n)) ≅ 𝟭 _ :=
+  normalizedOriginScalarUnit J _ Ideal.Quotient.factor_eq
+
+/-- The normalized compositor for three actual positive quotient levels, including ties.
+Source: blueprint `prop-coef-integral-dualizing`, proof, successive reductions
+(blueprint: def-weil-pbc-normalized-origin-scalar-comparisons). -/
+def normalizedOriginQuotientComp
+    {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
+    (J : GrothendieckTopology C) (l : ℕ) [Fact l.Prime]
+    (E : Type (u + 1)) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+    (k m n : ℕ+) (hnm : n ≤ m) (hmk : m ≤ k) :
+    pbcFixedScalarExtension J (normalizedOriginQuotientMap l E k m hmk) ⋙
+        pbcFixedScalarExtension J (normalizedOriginQuotientMap l E m n hnm) ≅
+      pbcFixedScalarExtension J (normalizedOriginQuotientMap l E k n (hnm.trans hmk)) :=
+  pbcFixedScalarExtensionComp J _ _ _
+    (Ideal.Quotient.factor_comp (Ideal.pow_le_pow_right hmk)
+      (Ideal.pow_le_pow_right hnm)).symm
+
+/-- Scalar extension along the actual quotient map on any essentially small site.
+In particular, substituting the small etale or pro-etale topology gives both site instances.
+Source: blueprint `prop-coef-integral-dualizing`, proof, reductions and scalar adjunction
 (blueprint: def-weil-pbc-normalized-origin-scalar-comparisons). -/
 abbrev normalizedOriginReduction
     {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
-    (J : GrothendieckTopology C) {A : Type (u + 1)} [CommRing A]
-    (d : Scheme.AdicCoefficientDatum A) (m n : ℕ) (h : n ≤ m) :=
-  pbcFixedScalarExtension J (pbcWitnessQuotientMap d m n h)
+    (J : GrothendieckTopology C) (l : ℕ) [Fact l.Prime]
+    (E : Type (u + 1)) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+    (m n : ℕ+) (h : n ≤ m) :=
+  pbcFixedScalarExtension J (normalizedOriginQuotientMap l E m n h)
 
 end AlgebraicGeometry.ProEtale

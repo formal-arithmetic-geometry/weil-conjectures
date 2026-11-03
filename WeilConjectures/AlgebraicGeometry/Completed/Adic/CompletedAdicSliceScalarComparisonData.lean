@@ -56,6 +56,7 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 import Mathlib.RingTheory.Flat.CategoryTheory
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsPull
 
 /-! # Universal data for the completed adic slice comparison
 
@@ -74,47 +75,33 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] finitePerfectModelsAbLocallyBijective
 
 set_option linter.defProp false in
-/-- The universal ordinary and derived scalar-extension witness on the slice.
-Its object and map equations determine ordinary tensor extension, while its
-counit determines the derived functor.  Source: Stacks Tag 06YY.
-(blueprint: lem-weil-pbc-completed-adic-slice-scalar-comparison).
--/
+/-- The canonical scalar adjunction on the slice for the pulled-back condensed map.
+Source: det-def-sfb-coefficient-change, det-def-sfb-change-of-scalars.
+(blueprint: def-weil-pbc-completed-adic-slice-scalar-extension). -/
 def completedAdicSliceChangeData (X : Scheme.{t}) (U : X.ProEt)
-    {R S : Sheaf (ProEt.topology X) CommRingCat.{t + 1}} (f : R ⟶ S) :=
-  letI : EssentiallySmall.{t + 1} (Over U) := essentiallySmallSelf.{0, t, t + 1} _
-  letI := HasDerivedCategory.standard (SheafOfModules.{t + 1}
-    ((sheafCompose ((ProEt.topology X).over U)
-      (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj (R.over U)))
-  letI := HasDerivedCategory.standard (SheafOfModules.{t + 1}
-    ((sheafCompose ((ProEt.topology X).over U)
-      (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj (S.over U)))
-  SheafOfModules.derivedChangeOfRingsIndependentCoefficients
-    (((ProEt.topology X).overPullback CommRingCat.{t + 1} U).map f)
+    (a : Λ ⟶ Λ') [IsMonHom a] :=
+  Mod.extendRestrictAdjunction (coefficientMap a U.left)
 
-/-- Ordinary scalar extension along the coefficient map restricted to the slice.
-Source: Stacks Tag 06YY.
-(blueprint: lem-weil-pbc-completed-adic-slice-scalar-comparison).
--/
-def completedAdicSliceChange (X : Scheme.{t}) (U : X.ProEt)
-    {R S : Sheaf (ProEt.topology X) CommRingCat.{t + 1}} (f : R ⟶ S) :=
-  (completedAdicSliceChangeData X U f).choose
+/-- Ordinary extension of scalars along `a_U : Λ_U ⟶ Λ'_U`.
+Source: det-def-sfb-coefficient-change, det-def-sfb-change-of-scalars.
+(blueprint: def-weil-pbc-completed-adic-slice-scalar-extension). -/
+abbrev completedAdicSliceChange (X : Scheme.{t}) (U : X.ProEt)
+    (a : Λ ⟶ Λ') [IsMonHom a] :=
+  Mod.extendScalars (coefficientMap a U.left)
 
-/-- The chosen slice scalar-extension witness is additive.
-Source: Stacks Tag 06YY.
-(blueprint: lem-weil-pbc-completed-adic-slice-scalar-comparison).
--/
+/-- The ordinary slice scalar extension is additive, as a left adjoint between
+preadditive module categories. Source: det-def-sfb-change-of-scalars.
+(blueprint: def-weil-pbc-completed-adic-slice-scalar-extension-additive). -/
 instance completedAdicSliceChange_additive (X : Scheme.{t}) (U : X.ProEt)
-    {R S : Sheaf (ProEt.topology X) CommRingCat.{t + 1}} (f : R ⟶ S) :
-    (completedAdicSliceChange X U f).Additive :=
-  (completedAdicSliceChangeData X U f).choose_spec.choose_spec.choose_spec.choose
+    (a : Λ ⟶ Λ') [IsMonHom a] : (completedAdicSliceChange X U a).Additive :=
+  inferInstanceAs (Mod.extendScalars (coefficientMap a U.left)).Additive
 
-/-- The total left derived scalar-extension functor on the slice.
-Source: Stacks Tag 06YY.
-(blueprint: lem-weil-pbc-completed-adic-slice-scalar-comparison).
--/
-def completedAdicSliceDerivedChange (X : Scheme.{t}) (U : X.ProEt)
-    {R S : Sheaf (ProEt.topology X) CommRingCat.{t + 1}} (f : R ⟶ S) :=
-  (completedAdicSliceChangeData X U f).choose_spec.choose_spec.choose_spec.choose_spec.2.2.choose
+/-- Total left derived extension along the actual condensed coefficient map on `U`.
+Source: det-def-sfb-derived-extension-of-scalars.
+(blueprint: def-weil-pbc-completed-adic-slice-scalar-extension). -/
+abbrev completedAdicSliceDerivedChange (X : Scheme.{t}) (U : X.ProEt)
+    (a : Λ ⟶ Λ') [IsMonHom a] :=
+  (completedAdicSliceChange X U a).leftDerivedFunctor
 
 attribute [local irreducible] completedAdicChangeData completedAdicSliceChangeData
 
@@ -374,67 +361,20 @@ private theorem sliceChangeMap (X : Scheme.{t}) (U : X.ProEt)
       eqToHom (sliceChangeObj X U f N).symm :=
   (sliceChangeExistence X U f).choose_spec.choose_spec.choose a
 
-/-- Ordinary scalar extension commutes with restriction to the pro-etale slice.
-The proof is the presheaf tensor comparison followed by the sheafification
-universal property.  This is the ordinary (underived) step in the derived
-comparison theorem.
-Source: Stacks Project, sites-cohomology.tex, Tags 06YY and 0D6D.
-(blueprint: lem-weil-pbc-completed-adic-slice-scalar-comparison-underived).
--/
+/-- Ordinary scalar extension commutes with inverse image to the pro-etale slice.
+Source: sk-prop-sfb-cartesian-coefficients, det-def-sfb-coefficient-change.
+Proof: the coefficient square commutes by naturality of inverse image from the point.
+Restriction of scalars therefore commutes with direct image. Conjugating this
+isomorphism under the two scalar adjunctions and the two geometric adjunctions
+produces the displayed isomorphism; this is the published ordinary `pullIso`.
+(blueprint: lem-weil-pbc-completed-adic-slice-scalar-comparison-underived). -/
 theorem completedAdic_slice_scalarComparison_underived (X : Scheme.{t}) (U : X.ProEt)
-    {R S : Sheaf (ProEt.topology X) CommRingCat.{t + 1}} (f : R ⟶ S) :
+    (a : Λ ⟶ Λ') [IsMonHom a] :
     Nonempty
-      ((SheafOfModules.overFunctor
-          ((sheafCompose (ProEt.topology X)
-            (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj R) U ⋙
-          completedAdicSliceChange X U f) ≅
-        (completedAdicChange X f ⋙ SheafOfModules.overFunctor
-          ((sheafCompose (ProEt.topology X)
-            (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj S) U)) := by
-  let O_S := (sheafCompose (ProEt.topology X)
-    (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj S
-  let A := PresheafOfModules.sheafification (R := O_S) (𝟙 _)
-  let AU := PresheafOfModules.sheafification (R := O_S.over U) (𝟙 _)
-  let n := scalarNormalizationIso f (completedAdicChange X f)
-    (globalChangeObj X f) (fun a ↦ globalChangeMap X f a)
-  let nU := scalarNormalizationIso (sliceCoefficientMap X U f)
-    (completedAdicSliceChange X U f)
-    (sliceChangeObj X U f) (fun a ↦ sliceChangeMap X U f a)
-  have hI (M : SheafOfModules.{t + 1}
-      ((sheafCompose (ProEt.topology X)
-        (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj R)) :
-      IsIso (overSheafificationMap O_S U
-        (SheafOfModules.changeOfRingsPresheaf.{t, t + 1, t + 1} f M)) :=
-    overSheafificationMap_isIso O_S U _
-  refine ⟨isoWhiskerLeft _ nU ≪≫ ?_ ≪≫
-    isoWhiskerRight n.symm (SheafOfModules.overFunctor O_S U)⟩
-  refine NatIso.ofComponents (fun M ↦
-    AU.mapIso (scalarOverPresheafIso X U f M) ≪≫
-      asIso (overSheafificationMap O_S U
-        (SheafOfModules.changeOfRingsPresheaf.{t, t + 1, t + 1} f M))) ?_
-  intro M N a
-  have hp : scalarPresheafMap (sliceCoefficientMap X U f) (a.over U) ≫
-        (scalarOverPresheafIso X U f N).hom =
-      (scalarOverPresheafIso X U f M).hom ≫
-        (PresheafOfModules.pushforward (F := Over.forget U) (𝟙 _)).map
-          (scalarPresheafMap f a) := by
-    ext V x
-    rfl
-  change AU.map (scalarPresheafMap (sliceCoefficientMap X U f) (a.over U)) ≫
-      (AU.map (scalarOverPresheafIso X U f N).hom ≫ overSheafificationMap O_S U _) =
-    (AU.map (scalarOverPresheafIso X U f M).hom ≫ overSheafificationMap O_S U _) ≫
-      (A.map (scalarPresheafMap f a)).over U
-  rw [← Category.assoc, ← AU.map_comp, hp, AU.map_comp, Category.assoc]
-  calc
-    _ = AU.map (scalarOverPresheafIso X U f M).hom ≫
-        (overSheafificationMap O_S U _ ≫ (A.map (scalarPresheafMap f a)).over U) :=
-      congrArg (fun k ↦ AU.map (scalarOverPresheafIso X U f M).hom ≫ k)
-        (overSheafificationMap_naturality O_S U (scalarPresheafMap f a))
-    _ = _ := (Category.assoc _ _ _).symm
+      ((CondensedRing.upperStar Λ U.hom ⋙ completedAdicSliceChange X U a) ≅
+        (Mod.extendScalars (coefficientMap a X) ⋙ CondensedRing.upperStar Λ' U.hom)) :=
+  ⟨CondensedRing.pullIso a U.hom⟩
 
--- A counit invertible on a resolving class is universal.  Compare it with
--- the existing resolving-class construction, then detect the comparison on
--- the localization images of the resolving objects.
 private theorem leftDerived_of_resolving
     {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B]
     [HasDerivedCategory A] [HasDerivedCategory B]
@@ -554,124 +494,60 @@ attribute [local irreducible] completedAdicChange completedAdicDerivedChange
   HasDerivedCategory.standard Functor.mapDerivedCategory
   CochainComplex.IsKFlatIndependentCoefficients SheafOfModules.monoidalCategory
 
-/-- Both derived composites are left derived functors of their ordinary composites.
-The composite of exact slice restriction with derived slice extension, and the
-composite of derived extension with exact slice restriction, each carry a counit to
-the localized ordinary composite exhibiting it as a left derived functor along the
-quasi-isomorphisms.
-Source: Stacks Project, sites-cohomology.tex, Tags 06YY, 0G7E and 0D6D.
-Proof: every complex of R-modules has a flat-term K-flat resolution, and slice
-restriction is exact and carries K-flat complexes to K-flat complexes (pullback by
-the localization morphism of ringed topoi, Tag 0G7E). The universal counits of both
-derived scalar extensions are invertible on K-flat complexes and their ordinary
-extensions preserve quasi-isomorphisms between K-flat complexes. Hence both ordinary
-composites send quasi-isomorphisms between K-flat complexes to isomorphisms, both
-derived composites are computed on K-flat representatives, and the induced counits
-are isomorphisms there; a functor with this property is a left derived functor, by
-the universal property of the localization restricted to K-flat complexes.
-(blueprint: lem-weil-pbc-completed-adic-slice-scalar-comparison-derived-data).
--/
+/-- Both composites on condensed module objects derive the corresponding ordinary
+composites. No flatness of the coefficient change is required.
+Source: sk-prop-sfb-cartesian-coefficients; Stacks Tags 06YY and 0D6D.
+Proof: scalar extension followed by the exact inverse image carries the usual
+composite counit and is universal by exact postcomposition. The published arbitrary
+coefficient-change theorem identifies it with inverse image followed by derived
+scalar extension. Transport the first counit's universal property along that
+isomorphism and the ordinary scalar comparison to obtain the second counit.
+Transport of the universal property is precisely invariance of right Kan extensions
+under isomorphisms, so both counits are universal on the entire unbounded category.
+(blueprint: lem-weil-pbc-completed-adic-slice-scalar-comparison-derived-data). -/
 theorem completedAdic_slice_scalarComparison_derived_data (X : Scheme.{t}) (U : X.ProEt)
-    {R S : Sheaf (ProEt.topology X) CommRingCat.{t + 1}} (f : R ⟶ S) :
-    let O_R := (sheafCompose (ProEt.topology X)
-      (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj R
-    let O_S := (sheafCompose (ProEt.topology X)
-      (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj S
-    let A := SheafOfModules O_R
-    letI : (SheafOfModules.overFunctor O_R U).Additive := by
-      exact (ringedOverFunctor_exactGeneral O_R U).1
-    letI : (SheafOfModules.overFunctor O_S U).Additive := by
-      exact (ringedOverFunctor_exactGeneral O_S U).1
-    letI : (completedAdicChange X f).Additive := completedAdicChange_additive X f
-    letI : (completedAdicSliceChange X U f).Additive :=
-      completedAdicSliceChange_additive X U f
-    letI : HasDerivedCategory A := HasDerivedCategory.standard _
-    letI : HasDerivedCategory (SheafOfModules O_S) := HasDerivedCategory.standard _
-    letI : HasDerivedCategory (SheafOfModules (O_R.over U)) :=
-      HasDerivedCategory.standard _
-    letI : HasDerivedCategory (SheafOfModules (O_S.over U)) :=
-      HasDerivedCategory.standard _
-    letI : HasDerivedCategory
-        (SheafOfModules.{t + 1}
-          (SheafOfModules.derivedChangeRingIndependentCoefficients.{t + 1, t + 1, t}
-            ((ProEt.topology X).over U)
-            (((ProEt.topology X).overPullback CommRingCat.{t + 1} U).obj S))) :=
-      HasDerivedCategory.standard _
-    let Q_A := DerivedCategory.Qh (C := A)
-    let F := completedAdicDerivedChange X f
-    let F_U := completedAdicSliceDerivedChange X U f
-    let L_U := ringedDerivedRestrictionGeneral O_R U ⋙ F_U
-    let L := F ⋙ ringedDerivedRestrictionGeneral O_S U
-    let G_U :=
-      ((SheafOfModules.overFunctor O_R U ⋙ completedAdicSliceChange X U f).mapHomotopyCategory
-        (.up ℤ)) ⋙ DerivedCategory.Qh
-    let G :=
-      ((completedAdicChange X f ⋙ SheafOfModules.overFunctor O_S U).mapHomotopyCategory
-        (.up ℤ)) ⋙ DerivedCategory.Qh
-    ∃ (α : Q_A ⋙ L_U ⟶ G_U) (α' : Q_A ⋙ L ⟶ G),
-      L_U.IsLeftDerivedFunctor α (HomotopyCategory.quasiIso A (.up ℤ)) ∧
-      L.IsLeftDerivedFunctor α' (HomotopyCategory.quasiIso A (.up ℤ)) := by
-  let : EssentiallySmall.{t + 1} X.ProEt := essentiallySmallSelf.{0, t, t + 1} _
-  let : EssentiallySmall.{t + 1} (Over U) := essentiallySmallSelf.{0, t, t + 1} _
-  let O_R := (sheafCompose (ProEt.topology X)
-    (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj R
-  let O_S := (sheafCompose (ProEt.topology X)
-    (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj S
-  let A := SheafOfModules.{t + 1} O_R
-  let B := SheafOfModules.{t + 1} O_S
-  let AU := sliceModules X U R
-  let BU := sliceModules X U S
-  let : HasDerivedCategory A := HasDerivedCategory.standard _
-  let : HasDerivedCategory B := HasDerivedCategory.standard _
-  let : HasDerivedCategory AU := sliceModulesDerived X U R
-  let : HasDerivedCategory BU := sliceModulesDerived X U S
-  let ER := SheafOfModules.overFunctor O_R U
-  let ES := SheafOfModules.overFunctor O_S U
-  have : ER.Additive := (ringedOverFunctor_exactGeneral O_R U).1
-  have : ES.Additive := (ringedOverFunctor_exactGeneral O_S U).1
-  have : PreservesFiniteLimits ER := (ringedOverFunctor_exactGeneral O_R U).2.1
-  have : PreservesFiniteColimits ER := (ringedOverFunctor_exactGeneral O_R U).2.2
-  have : PreservesFiniteLimits ES := (ringedOverFunctor_exactGeneral O_S U).2.1
-  have : PreservesFiniteColimits ES := (ringedOverFunctor_exactGeneral O_S U).2.2
-  let E := completedAdicChange X f
-  let EU := completedAdicSliceChange X U f
-  have : E.Additive := completedAdicChange_additive X f
-  have : EU.Additive := completedAdicSliceChange_additive X U f
-  let F := completedAdicDerivedChange X f
-  let FU := completedAdicSliceDerivedChange X U f
-  let ε := reductionDerivedCounit X f
-  let εU := sliceCounit X U f
-  let P : Set (HomotopyCategory A (.up ℤ)) :=
-    {K | ∃ T : CochainComplex A ℤ, T.IsKFlatIndependentCoefficients (R := R) ∧
-      (HomotopyCategory.quotient A (.up ℤ)).obj T = K}
-  have hres (K : HomotopyCategory A (.up ℤ)) :
-      ∃ (K' : HomotopyCategory A (.up ℤ)) (s : K' ⟶ K),
-        K' ∈ P ∧ HomotopyCategory.quasiIso A (.up ℤ) s := by
-    obtain ⟨T, rfl⟩ := HomotopyCategory.quotient_obj_surjective K
-    obtain ⟨T', s, hT', _, hs, _⟩ :=
-      CochainComplex.exists_isKFlatResolutionIndependentCoefficients (R := R) T
-    exact ⟨_, (HomotopyCategory.quotient A (.up ℤ)).map s, ⟨T', hT', rfl⟩,
-      (HomotopyCategory.quotient_map_mem_quasiIso_iff s).2 hs⟩
-  have hε : ∀ K ∈ P, IsIso (ε.app K) := by
-    intro K hK
-    obtain ⟨T, hT, hK⟩ := hK
-    have hi : IsIso (ε.app ((HomotopyCategory.quotient A (.up ℤ)).obj T)) :=
-      globalCounit_isIso X f T hT
-    exact hK ▸ hi
-  have hεU : ∀ K ∈ P,
-      IsIso (εU.app ((ER.mapHomotopyCategory (.up ℤ)).obj K)) := by
-    rintro _ ⟨T, hT, rfl⟩
-    have hTU := (SheafOfModules.ringedSite_restriction_exact_kflat.{t + 1, t, t + 1}
-      (ProEt.topology X) R U).2.2 T hT
-    let TU : CochainComplex (sliceModules X U R) ℤ :=
-      (ER.mapHomologicalComplex (.up ℤ)).obj T
-    have hi := sliceCounit_isIso X U f TU hTU
-    let e : (ER.mapHomotopyCategory (.up ℤ)).obj
-        ((HomotopyCategory.quotient A (.up ℤ)).obj T) ≅
-        (HomotopyCategory.quotient (sliceModules X U R) (.up ℤ)).obj TU :=
-      ((ER.mapHomotopyCategoryFactors (.up ℤ)).app T) ≪≫ eqToIso (by rfl)
-    exact (NatTrans.isIso_app_iff_of_iso εU e).2 hi
-  have h := scalarDerived_composites E EU ER ES F FU ε εU P hres hε hεU
-  exact h
+    (a : Λ ⟶ Λ') [IsMonHom a] :
+    let A := Mod (Sheaf (ProEt.topology X) Ab.{t + 1}) (condensedRingObj Λ X)
+    let ER := CondensedRing.upperStar Λ U.hom
+    let ES := CondensedRing.upperStar Λ' U.hom
+    let E := Mod.extendScalars (coefficientMap a X)
+    let EU := completedAdicSliceChange X U a
+    let LU := ER.mapDerivedCategory ⋙ completedAdicSliceDerivedChange X U a
+    let L := E.leftDerivedFunctor ⋙ ES.mapDerivedCategory
+    let GU := (ER ⋙ EU).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh
+    let G := (E ⋙ ES).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh
+    ∃ (αU : DerivedCategory.Qh (C := A) ⋙ LU ⟶ GU)
+      (α : DerivedCategory.Qh (C := A) ⋙ L ⟶ G),
+      LU.IsLeftDerivedFunctor αU (HomotopyCategory.quasiIso A (.up ℤ)) ∧
+        L.IsLeftDerivedFunctor α (HomotopyCategory.quasiIso A (.up ℤ)) := by
+  let ER := CondensedRing.upperStar Λ U.hom
+  let ES := CondensedRing.upperStar Λ' U.hom
+  let E := Mod.extendScalars (coefficientMap a X)
+  let EU := completedAdicSliceChange X U a
+  let α := Functor.leftDerivedFunctorCompMapDerivedCategoryRightCounit E ES
+  let d : ER.mapDerivedCategory ⋙ EU.leftDerivedFunctor ≅
+      E.leftDerivedFunctor ⋙ ES.mapDerivedCategory :=
+    Functor.isoWhiskerRight
+      (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ U.hom).symm _ ≪≫
+    CondensedRing.derivedUpperStarExtendScalarsIso a U.hom ≪≫
+    Functor.isoWhiskerLeft _
+      (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ' U.hom)
+  obtain ⟨e₀⟩ := completedAdic_slice_scalarComparison_underived X U a
+  let e := Functor.isoWhiskerRight
+    { hom := NatTrans.mapHomotopyCategory e₀.hom (.up ℤ)
+      inv := NatTrans.mapHomotopyCategory e₀.inv (.up ℤ)
+      hom_inv_id := by
+        rw [← NatTrans.mapHomotopyCategory_comp, e₀.hom_inv_id,
+          NatTrans.mapHomotopyCategory_id]
+      inv_hom_id := by
+        rw [← NatTrans.mapHomotopyCategory_comp, e₀.inv_hom_id,
+          NatTrans.mapHomotopyCategory_id] } DerivedCategory.Qh
+  let αU := Functor.whiskerLeft DerivedCategory.Qh d.hom ≫ α ≫ e.inv
+  refine ⟨αU, α, ?_, inferInstance⟩
+  rw [Functor.isLeftDerivedFunctor_iff_isRightKanExtension]
+  apply (Functor.isRightKanExtension_iff_of_iso₂ αU α e d ?_).2
+    (Functor.IsLeftDerivedFunctor.isRightKanExtension _ α
+      (HomotopyCategory.quasiIso _ (.up ℤ)))
+  simp [αU]
 
 end AlgebraicGeometry.Scheme

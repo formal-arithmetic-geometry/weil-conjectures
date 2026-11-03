@@ -74,4 +74,14 @@ noncomputable def sfIntrinsicSectionsWithSupport {U T : Scheme.{u}} (j : U ⟶ T
   map_id N := equalizer.hom_ext (by simp)
   map_comp φ ψ := equalizer.hom_ext (by simp)
 
+/-- The closed support functor is the closed inverse image of the kernel of the open unit.
+For a closed i and complementary open j it is i!_0 N = i* ker(N → j* j* N).
+Source: Weil blueprint, order 1858; Stacks 09AH
+(blueprint: def-exc-proetale-sections-with-support). -/
+noncomputable def sfIntrinsicClosedUpperShriek {Z U T : Scheme.{u}}
+    (i : Z ⟶ T) (j : U ⟶ T) (A : Type u) [CommRing A] [Finite A] :
+    proEtaleRingModules T (proEtaleConstantRing T A) ⥤
+      proEtaleRingModules Z (proEtaleConstantRing Z A) :=
+  sfIntrinsicSectionsWithSupport j A ⋙ sfConstantModulePullback i A
+
 end AlgebraicGeometry.Scheme

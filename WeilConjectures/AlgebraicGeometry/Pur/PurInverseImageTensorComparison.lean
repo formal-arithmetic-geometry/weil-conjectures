@@ -29,4 +29,20 @@ private theorem tensorSection_eq {X : Scheme.{u}}
       AlgebraicGeometry.ProEtaleTensorComparison.pure F G V s t := by
   rfl
 
+private theorem secondMap_id {Z : Scheme.{u}}
+    {R : Sheaf (ProEt.topology Z) CommRingCat.{u + 1}}
+    (F G : SheafOfModules.{u + 1} ((sheafCompose (ProEt.topology Z)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)) :
+    SheafOfModules.siteSheafTensorSecondMap F (𝟙 G) = 𝟙 _ := by
+  have h : SheafOfModules.siteTensorSecondMap F.val (𝟙 G.val) = 𝟙 _ := by
+    ext U : 1
+    apply ModuleCat.hom_ext
+    apply TensorProduct.ext'
+    intro x y
+    rfl
+  have hf : (𝟙 G : G ⟶ G).val = 𝟙 G.val := rfl
+  dsimp only [SheafOfModules.siteSheafTensorSecondMap]
+  rw [hf, h]
+  exact CategoryTheory.Functor.map_id _ _
+
 end AlgebraicGeometry.Scheme

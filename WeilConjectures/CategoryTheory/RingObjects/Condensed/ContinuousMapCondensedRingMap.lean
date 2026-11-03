@@ -86,4 +86,19 @@ theorem isMonHom_continuousMapRingObjMapOfUniverse :
   exact Sheaf.isMonHom_sheafCompose_map (coherentTopology Profinite.{u})
     (continuousMapRingSheafMapOfUniverse φ hφ)
 
+/-- Postcomposition respects composition of continuous ring homomorphisms.
+Source: blueprint `def-sfb-continuous-map-condensed-ring-map.md`, composition clause
+(blueprint: def-sfb-continuous-map-condensed-ring-map).
+
+Proof: at every S and a, (ψ ∘ φ) ∘ a = ψ ∘ (φ ∘ a). The component ring maps
+therefore equal those of the composite sheaf morphism. Equality is componentwise.
+The forgetful functor keeps these components and preserves composition, so the
+same identity holds for the underlying ring-object morphisms. -/
+theorem continuousMapRingSheafMapOfUniverse_comp {T'' : Type v} [TopologicalSpace T'']
+    [Ring T''] [IsTopologicalRing T''] (ψ : T' →+* T'') (hψ : Continuous ψ) :
+    continuousMapRingSheafMapOfUniverse.{u, v} (ψ.comp φ) (hψ.comp hφ) =
+      continuousMapRingSheafMapOfUniverse φ hφ ≫
+        continuousMapRingSheafMapOfUniverse ψ hψ := by
+  rfl
+
 end Profinite

@@ -42,7 +42,7 @@ pro-étale derived category is left complete. For every representing complex, th
 quotient-family map into the strict sequential Roos model of its truncation tower becomes
 an isomorphism in the derived category.
 
-Proof: (1) [def-pe-postnikov-comparison] supplies the canonical strict Postnikov tower,
+Proof: (1) [det-pe-left-complete-iso] supplies the canonical strict Postnikov tower,
 its quotient-family/zero-coordinate comparison, and the strict Roos model. (2)
 [det-pe-left-complete-iso] proves that comparison is a quasi-isomorphism for every scheme,
 ring sheaf, and unbounded complex. (3) [def-weil-abstract-derived-category] localizes
@@ -56,7 +56,6 @@ theorem left_complete (X : Scheme.{t})
       (CategoryTheory.ringedSiteModules.{max u (t + 1)} R) ℤ) :
     IsIso (DerivedCategory.Q.map
       (AlgebraicGeometry.Scheme.ProEt.postnikovComparison K)) := by
-  have := left_complete_quasiIso X R K
-  infer_instance
+  exact (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).2 (left_complete_quasiIso X R K)
 
 end AlgebraicGeometry.Scheme.ProEt

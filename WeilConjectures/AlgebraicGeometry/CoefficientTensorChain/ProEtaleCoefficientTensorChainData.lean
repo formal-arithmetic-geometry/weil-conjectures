@@ -156,7 +156,7 @@ theorem restriction_tensor_chain_square (o : SheafOfModules.RingIsoTensorTranspo
             (proEtaleTensorPullbackTotalIso f R
               ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R)
               (Iso.refl _) P Q).inv =
-          ((pbcRestrict c.hom).mapHomologicalComplex (.up ℤ)).map
+          ((proEtaleRingRestrictScalars c.hom).mapHomologicalComplex (.up ℤ)).map
               (proEtaleTensorPullbackTotalIso f R S c P Q).inv ≫
             (tensorIso f R S c o).hom.app
               (((proEtaleRingModulePullback f R S c).mapHomologicalComplex (.up ℤ)).obj P,
@@ -165,7 +165,7 @@ theorem restriction_tensor_chain_square (o : SheafOfModules.RingIsoTensorTranspo
               (Prod.mkHom ((complexPullback f R S c).hom.app P)
                 ((complexPullback f R S c).hom.app Q)) := by
   intro P Q
-  let U := pbcRestrict c.hom
+  let U := proEtaleRingRestrictScalars c.hom
   have : U.IsEquivalence := by
     change (SheafOfModules.scalarRestriction c.hom).IsEquivalence
     rw [← o.functor_eq]
@@ -201,7 +201,7 @@ theorem restriction_tensor_localized_square
     DerivedCategory.Q.map ((complexPullback f R S c).hom.app ((total Y R).obj (P, Q))) ≫
       DerivedCategory.Q.map (proEtaleTensorPullbackTotalIso f R
         ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R) (Iso.refl _) P Q).inv =
-    DerivedCategory.Q.map (((pbcRestrict c.hom).mapHomologicalComplex (.up ℤ)).map
+    DerivedCategory.Q.map (((proEtaleRingRestrictScalars c.hom).mapHomologicalComplex (.up ℤ)).map
       (proEtaleTensorPullbackTotalIso f R S c P Q).inv) ≫
       DerivedCategory.Q.map ((tensorIso f R S c o).hom.app
         (((proEtaleRingModulePullback f R S c).mapHomologicalComplex (.up ℤ)).obj P,

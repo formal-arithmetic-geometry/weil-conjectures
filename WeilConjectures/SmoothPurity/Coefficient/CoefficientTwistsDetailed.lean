@@ -297,6 +297,14 @@ theorem integralCoefficientTwist_constructible (m : ℤ) :
   subst i
   exact ⟨le_rfl, le_rfl⟩
 
+/-- The rational twist is the image in the raw scalar localization.
+Source: blueprint order 1505 (blueprint: def-coefficient-twists-detailed). -/
+def rationalCoefficientTwist (m : ℤ) :
+    rationalConstructibleCategory D ℓ hℓ E S :=
+  (rationalConstructibleLocalization D ℓ hℓ E S).obj
+    ⟨integralCoefficientTwist D ℓ hℓ E S m,
+      integralCoefficientTwist_constructible D ℓ hℓ E S m⟩
+
 /-- The coefficient line as a module sheaf, for every integer exponent.
 Source: blueprint order 1505 (blueprint: def-coefficient-twists-detailed). -/
 abbrev integralTwistLine (m : ℤ) : integralTowerModules ℓ E S :=
@@ -626,6 +634,39 @@ def twistSheafScalarComparison (m : ℤ) :
     integralSheafTwist ℓ E S m ⋙ integralOrdinaryScalar ℓ E L ι S ≅
       integralOrdinaryScalar ℓ E L ι S ⋙ integralSheafTwist ℓ L S m :=
   (twistSheafScalarComparison_existsUnique ℓ E S L ι m).exists.choose
+
+/-- The rational Tate line is compatible with every finite coefficient extension.
+Source: blueprint order 1505 (blueprint: def-coefficient-twists-detailed).
+Proof: the integer Tate line is the same roots-of-unity limit for both fields.
+Associativity of sheafified tensor identifies extension of its O_E tensor with its
+O_L tensor, and likewise their tensor powers. Duals commute with scalar extension
+because the lines are finite locally free. On the complete rank-one objects the
+completed scalar extension is ordinary tensor. Apply rationalization to these
+canonical comparisons, including at exponent zero. -/
+theorem rationalCoefficientTwist_scalarExtension
+    (L : Type u) [Field L] [Algebra (Padic ℓ) L]
+    [FiniteDimensional (Padic ℓ) L] (ι : E →ₐ[Padic ℓ] L) (m : ℤ) :
+    Nonempty
+      ((rationalScalarExtension D ℓ hℓ E S L ι).obj
+        (rationalCoefficientTwist D ℓ hℓ E S m) ≅
+          rationalCoefficientTwist D ℓ hℓ L S m) := by
+  let e : (integralOrdinaryDerivedScalar ℓ E L ι S).obj
+        (integralCoefficientTwist D ℓ hℓ E S m) ≅
+      integralCoefficientTwist D ℓ hℓ L S m :=
+    ((integralOrdinaryScalar ℓ E L ι S).mapDerivedCategorySingleFunctor 0).app
+        (integralTwistLine ℓ E S m) ≪≫
+      (DerivedCategory.singleFunctor _ 0).mapIso (twistLineScalarIso ℓ E S L ι m)
+  let e' : (integralConstructibleScalarExtension D ℓ hℓ E L ι S).obj
+        ⟨integralCoefficientTwist D ℓ hℓ E S m,
+          integralCoefficientTwist_constructible D ℓ hℓ E S m⟩ ≅
+      ⟨integralCoefficientTwist D ℓ hℓ L S m,
+        integralCoefficientTwist_constructible D ℓ hℓ L S m⟩ :=
+    (boundedConstructibleDerivedCompleteIntegral D ℓ hℓ L S).isoMk e
+  have hcomparison :=
+    (rationalOrdinaryComparison D ℓ hℓ E S L ι).app
+      (rationalCoefficientTwist D ℓ hℓ E S m)
+  exact ⟨hcomparison.symm ≪≫
+    (rationalConstructibleLocalization D ℓ hℓ L S).mapIso e'⟩
 
 end ScalarComparison
 

@@ -35,6 +35,10 @@ import WeilConjectures.AlgebraicGeometry.Completed.Koszul.CompletedKoszulQuotien
 import all WeilConjectures.AlgebraicGeometry.Completed.Constant.CompletedConstantCoefficientEquivalence
 import all WeilConjectures.AlgebraicGeometry.Completed.CompletedQuotientUnitNormalization
 import all WeilConjectures.AlgebraicGeometry.Completed.CompletedRlimFunctor
+public import WeilConjectures.AlgebraicGeometry.AdicCompletion.DerivedCompletionSupplement
+public import WeilConjectures.AlgebraicGeometry.ProEtale.RepleteAddCommGrp
+public import WeilConjectures.CategoryTheory.ModuleObjects.SequentialLimitEpi
+public import WeilConjectures.CategoryTheory.Triangulated.DerivedCountableProductsExistence
 
 /-! # The normalized quotient Roos triangle on explicit Koszul completion
 
@@ -253,5 +257,54 @@ private theorem actualFiberToStrict
 attribute [local irreducible] productTransport
 
 end Presentation
+
+end AlgebraicGeometry.Scheme
+
+namespace AlgebraicGeometry.Scheme
+
+/-- Before imposing completeness, the explicit completion has the normalized
+Roos triangle of the canonical derived quotient reductions.
+
+Source: current blueprint def-pe-derived-complete and def-weil-derived-limit,
+refining fix-prop-adjunctions; Stacks Project, Tag 08TC.
+(blueprint: lem-weil-pbc-completed-koszul-reduction-roos-triangle).
+
+Proof: repleteness gives exact countable products of internal modules, hence
+countable products in their derived category. On a K-flat representative P,
+ordinary tensor reduction computes the canonical derived quotient reductions.
+The published roos_isDerivedLimit theorem transports the mapping-cocone triangle
+through these unit-compatible level comparisons. Compose its product-unit equation
+with the nth product projection. This is the old argument's final normalization,
+now directly in the pulled-back condensed coefficient category. The canonical
+completion model and augmentation are those of AdicCompletion, without a change
+of coefficient rings or a new choice of completion. The argument includes P=0,
+the empty scheme, and positive level one. No completeness, boundedness, flatness
+of the finite quotient, or constructibility assumption is made on K. -/
+theorem completedKoszulReductionRoosTriangle
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u})
+    (K : DerivedCategory (AdicCompletion.Modules l E X))
+    (P : CochainComplex (AdicCompletion.Modules l E X) ℤ)
+    (hP : (HomologicalComplex.quasiIso (AdicCompletion.Modules l E X) (.up ℤ)).kFlat P)
+    (e : DerivedCategory.Q.obj P ≅ K) :
+    ∃ hp : HasProduct (AdicCompletion.integralLevel l E X K),
+      letI := hp
+      ∃ (p : DerivedCategory.Q.obj (AdicCompletion.roos l E X P) ⟶
+          ∏ᶜ (AdicCompletion.integralLevel l E X K))
+        (δ : ∏ᶜ (AdicCompletion.integralLevel l E X K) ⟶
+          (DerivedCategory.Q.obj (AdicCompletion.roos l E X P))⟦(1 : ℤ)⟧),
+        IsDerivedLimitTriangle (AdicCompletion.integralStep l E X K) _ p δ ∧
+          ∀ n : ℕ, AdicCompletion.completionMap l E X K P e ≫ p ≫
+            Pi.π (AdicCompletion.integralLevel l E X K) n =
+              (Mod.derivedExtendMapDerivedCategoryAdjunction
+                (AdicCompletion.quotient l E X n)).unit.app K := by
+  let : CountableAB4Star (AdicCompletion.Modules l E X) :=
+    .of_epi_π_app_zero (Mod.epiπAppZeroOfEpi
+      Scheme.ProEt.epi_π_app_zero_of_epi_addCommGrpCat)
+  let := derivedCategory_hasCountableProducts (AdicCompletion.Modules l E X)
+  obtain ⟨p, δ, hδ, hp⟩ := AdicCompletion.roos_isDerivedLimit l E X K P hP e
+  refine ⟨inferInstance, p, δ, hδ, fun n ↦ ?_⟩
+  have hn := congrArg (fun z ↦ z ≫ Pi.π (AdicCompletion.integralLevel l E X K) n) hp
+  simpa only [Category.assoc, Pi.lift_π] using hn
 
 end AlgebraicGeometry.Scheme

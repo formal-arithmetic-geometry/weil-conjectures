@@ -191,6 +191,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChange
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.ClosedImmersion
 
 /-!
 # Construction of the affine-space counit trace
@@ -704,5 +705,20 @@ def affineTraceRightBaseChange (A : Type (u + 1)) [CommRing A] (N : ℕ)
     (fun d K ↦ affineTraceLineRightBaseChange A N hA t (affineTraceMap f d)
       (affineTraceProjectiveInvertible N (affineTraceTower S d)
         (affineTraceInvertible N S hS d)) K) d K
+
+/-- Recursion equation for the coordinate adjunction.
+Source: blueprint sk-prop-an, Step 6 (blueprint: def-amb-affine-trace-construction). -/
+theorem affineTraceAdjunction_succ (A : Type (u + 1)) [CommRing A]
+    (N : ℕ) (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
+    (D : ∀ (T : Scheme.{u}) [IsNoetherian T] (hT : IsUnit (N : Γ(T, ⊤))),
+      OrdinaryFiniteP1Datum A N hA t T hT)
+    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) (d : ℕ) :
+    affineTraceAdjunction A N hA t D S hS (d + 1) =
+      affineTraceComposeAdjunction
+        (affineTraceLineAdjunction A N hA t (affineTraceTower S d)
+          (affineTraceInvertible N S hS d) (@D _ (affineTraceNoetherian S d) _))
+        (affineTraceAdjunction A N hA t D S hS d) := by
+  unfold affineTraceAdjunction affineTraceAdjunctionTower
+  rfl
 
 end AlgebraicGeometry.Etale

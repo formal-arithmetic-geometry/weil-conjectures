@@ -177,7 +177,7 @@ private theorem ordinary_inverse_square
     (M N : proEtaleRingModules Y R) :
     (ordinaryPullback f R S c).inv.app
         (((proEtaleOrdinaryTensor Y R).obj M).obj N) ≫
-        (pbcRestrict c.hom).map (proEtaleOrdinaryTensorPullback f R S c M N).hom ≫
+        (proEtaleRingRestrictScalars c.hom).map (proEtaleOrdinaryTensorPullback f R S c M N).hom ≫
         o.monoidal.toMonoidal.toOplaxMonoidal.δ
           ((proEtaleRingModulePullback f R S c).obj M)
           ((proEtaleRingModulePullback f R S c).obj N) =
@@ -249,7 +249,7 @@ theorem ordinary_square
       (J := ProEt.topology X)
       (R := (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R) (S := S) c)
     (M N : proEtaleRingModules Y R) :
-    (pbcRestrict c.hom).map (proEtaleOrdinaryTensorPullback f R S c M N).inv ≫
+    (proEtaleRingRestrictScalars c.hom).map (proEtaleOrdinaryTensorPullback f R S c M N).inv ≫
         (ordinaryPullback f R S c).hom.app
           (((proEtaleOrdinaryTensor Y R).obj M).obj N) =
       o.monoidal.toMonoidal.toOplaxMonoidal.δ
@@ -265,7 +265,7 @@ theorem ordinary_square
   let := SheafOfModules.monoidalCategory
     ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R)
   exact invert_square
-    ((pbcRestrict c.hom).mapIso (proEtaleOrdinaryTensorPullback f R S c M N))
+    ((proEtaleRingRestrictScalars c.hom).mapIso (proEtaleOrdinaryTensorPullback f R S c M N))
     ((ordinaryPullback f R S c).app _)
     (proEtaleOrdinaryTensorPullback f R
       ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R) (Iso.refl _) M N)
@@ -284,7 +284,7 @@ private theorem ordinary_bifunctor_square
       (J := ProEt.topology X)
       (R := (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R) (S := S) c)
     (M N : proEtaleRingModules Y R) :
-    (pbcRestrict c.hom).map (proEtaleOrdinaryTensorPullback f R S c M N).inv ≫
+    (proEtaleRingRestrictScalars c.hom).map (proEtaleOrdinaryTensorPullback f R S c M N).inv ≫
         (ordinaryPullback f R S c).hom.app
           (((proEtaleOrdinaryTensor Y R).obj M).obj N) =
       o.monoidal.toMonoidal.toOplaxMonoidal.δ
@@ -293,7 +293,8 @@ private theorem ordinary_bifunctor_square
         ((proEtaleOrdinaryTensor X
           ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R)).map
             ((ordinaryPullback f R S c).hom.app M)).app
-              ((pbcRestrict c.hom).obj ((proEtaleRingModulePullback f R S c).obj N)) ≫
+              ((proEtaleRingRestrictScalars c.hom).obj
+                ((proEtaleRingModulePullback f R S c).obj N)) ≫
         ((proEtaleOrdinaryTensor X
           ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R)).obj
             ((proEtaleRingModulePullback f R

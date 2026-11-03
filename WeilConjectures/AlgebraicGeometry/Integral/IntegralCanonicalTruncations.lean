@@ -81,6 +81,7 @@ import Mathlib.CategoryTheory.Monoidal.Preadditive
 import WeilConjectures.Algebra.Homology.Ringed.RingedTensorCohomologicalBounds
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ScalarTensorComparisonOfUniverses
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUniverses
+public import WeilConjectures.AlgebraicGeometry.ActualCompletedReductionReconstructionLegacy
 /-! # Integral canonical truncations and their conditional tower computation
 
 Source: blueprint, smooth base change, order 1430; Stacks Tags 0118 and 08J5
@@ -770,9 +771,9 @@ theorem pbc_integral_truncations
       ((pbc_torCompatible_iff_flat_cohomology T l E K).mp _hTor q)
   have hmem := pbcIntegralCanonicalTruncations_mem T l E K m
   have hmem' := pbcIntegralCanonicalTruncations_mem T l E K (m + 1)
-  have hLE := pbc_actual_completed_reduction_reconstruction T d
+  have hLE := pbc_actual_completed_reduction_reconstruction_legacy T d
     ((t.truncLE m).obj K.obj) hmem.1.1
-  have hGE := pbc_actual_completed_reduction_reconstruction T d
+  have hGE := pbc_actual_completed_reduction_reconstruction_legacy T d
     ((t.truncGE (m + 1)).obj K.obj) hmem'.2.1
   let ML := pbcCanonicalReductionDiagram T d ((t.truncLE m).obj K.obj)
   let MU := pbcCanonicalReductionDiagram T d ((t.truncGE (m + 1)).obj K.obj)

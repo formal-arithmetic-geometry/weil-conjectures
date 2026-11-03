@@ -106,7 +106,75 @@ theorem determinantWeightSet_operations
           {T : Multiset ℝ | T ≤ W.rankDetWeightMultiset l ρ ι ∧ T.card = r} ∧
       {a : ℝ | a ∈ W.detWeightMultiset l ρ.dual ι} =
         Set.image (fun a : ℝ ↦ -a) {a : ℝ | a ∈ W.detWeightMultiset l ρ ι} := by
-  sorry
+  classical
+  have _ := hr
+  have _ := (inferInstance : Nontrivial V')
+  have hdet (U S : Subrepresentation (ρ.tprod ρ')) :
+      (S.subquotient U).HasFiniteGeometricDet W.deg :=
+    (hasFiniteGeometricDet_and_detWeight_eq ι ((hρ.tprod hρ').subquotient S U)).1
+  refine ⟨?_, ?_, ?_⟩
+  · ext a
+    constructor
+    · intro ha
+      obtain ⟨U, S, hirr, rfl⟩ := (mem_detWeightMultiset_iff ι).1 ha
+      obtain ⟨UV, SV, UE, SE, -, -, hV, hE, -, -, heq⟩ :=
+        Representation.exists_detWeight_eq_add_of_subquotient_tprod
+          (weightCharacter ι (Nat.card K)) W.deg W.frobeniusLift ρ ρ'
+          (fun U S _ ↦ (hasFiniteGeometricDet_and_detWeight_eq ι
+            (hρ.subquotient S U)).1)
+          (fun U S _ ↦ (hasFiniteGeometricDet_and_detWeight_eq ι
+            (hρ'.subquotient S U)).1) hirr (hdet U S)
+      refine ⟨_, (mem_detWeightMultiset_iff ι).2 ⟨UV, SV, hV, rfl⟩,
+        _, (mem_detWeightMultiset_iff ι).2 ⟨UE, SE, hE, rfl⟩, ?_⟩
+      simpa only [← detWeight_eq_detWeight_weightCharacter] using heq.symm
+    · rintro ⟨a, ha, b, hb, rfl⟩
+      obtain ⟨UV, SV, hV, rfl⟩ := (mem_detWeightMultiset_iff ι).1 ha
+      obtain ⟨UE, SE, hE, rfl⟩ := (mem_detWeightMultiset_iff ι).1 hb
+      obtain ⟨U, S, -, hirr, heq⟩ :=
+        Representation.exists_isIrreducible_subquotient_tprod_detWeight_eq_add
+          (weightCharacter ι (Nat.card K)) W.deg W.frobeniusLift hV hE
+          (hasFiniteGeometricDet_and_detWeight_eq ι (hρ.subquotient SV UV)).1
+          (hasFiniteGeometricDet_and_detWeight_eq ι (hρ'.subquotient SE UE)).1
+          (fun U S _ ↦ hdet U S)
+      exact (mem_detWeightMultiset_iff ι).2 ⟨U, S, hirr, by
+        simpa only [← detWeight_eq_detWeight_weightCharacter] using heq⟩
+  · obtain ⟨hfwd, hbwd⟩ := detWeight_subquotient_exteriorPower ι hρ r
+    ext a
+    constructor
+    · intro ha
+      obtain ⟨U, S, hirr, rfl⟩ := (mem_detWeightMultiset_iff ι).1 ha
+      obtain ⟨T, hT, hc, heq⟩ := hfwd U S hirr
+      exact ⟨T, ⟨hT, hc⟩, heq.symm⟩
+    · rintro ⟨T, ⟨hT, hc⟩, rfl⟩
+      obtain ⟨U, S, hirr, heq⟩ := hbwd T hT hc
+      exact (mem_detWeightMultiset_iff ι).2 ⟨U, S, hirr, heq⟩
+  · have hdual {X : Type u} [AddCommGroup X] [Module (PadicAlgCl l) X]
+        [FiniteDimensional (PadicAlgCl l) X]
+        (σ : Representation (PadicAlgCl l) W.carrier X) :
+        W.detWeight l σ.dual ι = -W.detWeight l σ ι := by
+      have hd : LinearMap.det (σ.dual W.frobeniusLift) =
+          (LinearMap.det (σ W.frobeniusLift))⁻¹ := by
+        rw [Representation.dual_apply, ← LinearMap.dualMap_def, LinearMap.det_dualMap,
+          ← Representation.coe_detCharacter_apply, map_inv, Units.val_inv_eq_inv_val,
+          Representation.coe_detCharacter_apply]
+      rw [detWeight, detWeight, hd, Subspace.dual_finrank_eq, frobeniusWeight_inv, neg_div]
+    let s := ρ.exists_compositionSeries.some
+    let c := ρ.dual.exists_compositionSeries.some
+    obtain ⟨e, he⟩ := s.exists_equiv_dual c
+    change {a : ℝ | a ∈ (Finset.univ : Finset (Fin c.length)).val.map
+        (fun j ↦ W.detWeight l (c.factor j) ι)} =
+      Set.image (fun a : ℝ ↦ -a)
+        {a : ℝ | a ∈ (Finset.univ : Finset (Fin s.length)).val.map
+          (fun i ↦ W.detWeight l (s.factor i) ι)}
+    ext a
+    simp only [Set.mem_ofPred_eq, Multiset.mem_map, Finset.mem_univ_val, true_and,
+      Set.mem_image]
+    constructor
+    · rintro ⟨j, rfl⟩
+      exact ⟨_, ⟨e j, rfl⟩, by rw [← detWeight_of_equiv ι (he j).some, hdual]⟩
+    · rintro ⟨b, ⟨i, rfl⟩, rfl⟩
+      obtain ⟨j, rfl⟩ := e.surjective i
+      exact ⟨j, by rw [← detWeight_of_equiv ι (he j).some, hdual]⟩
 
 end WeilGroup
 end AlgebraicGeometry

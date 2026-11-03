@@ -8,6 +8,11 @@ public import WeilConjectures.AlgebraicGeometry.IntegralConstantModelRealization
 public import WeilConjectures.AlgebraicGeometry.IntegralModelsStacksData
 import all WeilConjectures.AlgebraicGeometry.IntegralConstantModelHeartClosure
 import WeilConjectures.AlgebraicGeometry.IntegralSectionLocalModels
+public import WeilConjectures.AlgebraicGeometry.CompletedConstantConstructibility
+public import WeilConjectures.AlgebraicGeometry.Integral.Constant.IntegralConstantModelHeartClosureSupplement
+public import WeilConjectures.AlgebraicGeometry.Integral.Constant.IntegralConstantModelRealizationSupplement
+public import WeilConjectures.AlgebraicGeometry.IntegralCompletedConstantModelTransport
+public import WeilConjectures.AlgebraicGeometry.IntegralSectionMemberModels
 
 /-! # Finite constant models under integral realization
 
@@ -33,9 +38,25 @@ private theorem absolute_iff (l : ℕ) [Fact l.Prime]
           (Scheme.pbcCompletedComparison X (Scheme.pbcIntegralDatum l E)).hom).obj
           ((SheafOfModules.restrictScalars
             (Scheme.integralDetailedCoefficientComparison X l E).hom).obj
-            ((integralSectionFunctor l E X).obj N))) :=
-  (integralSectionLocalModels l E X N).trans
+            ((integralSectionFunctor l E X).obj N))) := by
+  refine (integralSectionLocalModels (DerivedNakayama.integerRing l E) X N).trans ?_
+  refine Iff.trans ?_
     (Scheme.completedConstantModelTransport X (Scheme.pbcIntegralDatum l E) _)
+  apply exists_congr
+  intro s
+  apply forall_congr'
+  intro i
+  apply exists_congr
+  intro V
+  apply and_congr_right
+  intro hV
+  apply forall_congr'
+  intro U
+  apply forall_congr'
+  intro f
+  apply imp_congr_right
+  intro hf
+  exact integralSectionMemberModels l E (s.immersion i) U N
 
 /-- The fixed section-action realization identifies finite constant local models.
 Source: Bhatt--Scholze, Definition 6.8.10, and the coefficient comparison in

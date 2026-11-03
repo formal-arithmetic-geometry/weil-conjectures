@@ -315,6 +315,21 @@ def actualCompletedProjection
     (restrictedComparison l E f n).hom.app K ≫
     (restrictedReduction l E Y n).map ((derivedIso l E f).inv.app K)
 
+/-- The right mate of the identity-on-constant-towers inverse-image comparison.
+Source: localization Step 6, Step 4
+(blueprint: lem-sf-immersion-completed-pullback-comparison). -/
+def rlimComparison
+    (M : DerivedCategory (pbcTowers X (pbcAdicCompletion X (pbcIntegralDatum l E)))) :
+    ((pbcIntegralDatum l E).pull f).obj
+        ((completedRlim X ((pbcIntegralDatum l E).completedRing X)).obj M) ⟶
+      (completedRlim Y ((pbcIntegralDatum l E).completedRing Y)).obj
+        (((pbcIntegralDatum l E).towerPull f).obj M) :=
+  ((pbcIntegralDatum l E).constantRlimAdjunction Y).unit.app _ ≫
+    (completedRlim Y ((pbcIntegralDatum l E).completedRing Y)).map
+      (((pbcIntegralDatum l E).derivedConstantPullbackIso f).inv.app _ ≫
+        ((pbcIntegralDatum l E).towerPull f).map
+          (((pbcIntegralDatum l E).constantRlimAdjunction X).counit.app M))
+
 /-- The ordinary module inverse image with canonical completed coefficients.
 Source: localization Step 6, Step 1
 (blueprint: lem-sf-immersion-completed-pullback-comparison). -/

@@ -58,6 +58,16 @@ set_option backward.isDefEq.respectTransparency false
 attribute [local irreducible] Functor.leftDerivedFunctor Functor.rightDerivedFunctor
   Functor.mapDerivedCategory upperStar lowerStar
 
+/-- The constant free rank-one coefficient sheaf used to represent sections.
+Source: Stacks Tag 072W and blueprint Step 3
+(blueprint: lem-pur-relative-kummer-exchange-generators). -/
+noncomputable abbrev generic_kummerExchangeConstant (C : Type u') [Category.{u + 1} C] [Abelian C]
+    [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]
+    [SymmetricCategory C] [MonoidalClosed C] [Abelian.HasFunctorialFlatResolution C]
+    (M : C)
+    (T : Scheme.{u}) : Sheaf T.smallEtaleTopology C :=
+  (constantSheaf T.smallEtaleTopology C).obj M
+
 private theorem adjunct_mate
     {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]
     {L : C ⥤ D} {R : D ⥤ C} {L' : E ⥤ F} {R' : F ⥤ E}
@@ -93,6 +103,13 @@ private theorem shifted_adjunct_mate
   rw [Functor.map_comp, Category.assoc, hs]
   rw [← Category.assoc, adjunct_mate]
   rw [← Category.assoc, ← adj'.homEquiv_naturality_right, Category.assoc]
+
+/-- The constant free rank-one coefficient sheaf used to represent sections.
+Source: Stacks Tag 072W and blueprint Step 3
+(blueprint: lem-pur-relative-kummer-exchange-generators). -/
+noncomputable abbrev kummerExchangeConstant (A : Type (u + 1)) [CommRing A]
+    (T : Scheme.{u}) :=
+  generic_kummerExchangeConstant (ModuleCat.{u + 1} A) (ModuleCat.of A A) T
 
 set_option backward.isDefEq.respectTransparency true
 

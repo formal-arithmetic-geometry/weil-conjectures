@@ -246,6 +246,13 @@ def tateUnit {T T' : Scheme.{u}} (h : T' ⟶ T) (R : Type u) [CommRing R]
   ((proEtaleRingModuleAdjunction h (proEtaleConstantRing T R) (proEtaleConstantRing T' R)
     (asIso (proEtaleCoefficientInverseImageMap h R))).unit.app M).val.app (op U) x
 
+/-- The constant-ring unit on sections, before extending the module scalars.
+Source: Stacks Tag 09A5 (blueprint: lem-pur-tate-inverse-limit-base-change). -/
+def tateRingUnit {T T' : Scheme.{u}} (h : T' ⟶ T) (A : Type u) [CommRing A]
+    (U : T.ProEt) (a : (proEtaleConstantRing T A).obj.obj (op U)) :
+    (proEtaleConstantRing T' A).obj.obj (op ((proEtaleBaseChange h).obj U)) :=
+  (proEtaleCoefficientDirectImageMap h A).hom.app (op U) a
+
 private def tensorUnit {T : Scheme.{u}} {R A : Type u} [CommRing R] [CommRing A]
     (a : R →+* A) (M : tateModules T R) :
     M ⟶ (tateRestrict T a).obj (tateTensor T a M) :=
@@ -256,6 +263,43 @@ private theorem tensorUnit_apply {T : Scheme.{u}} {R A : Type u}
     (U : T.ProEt) (x : M.val.obj (op U)) :
     (tensorUnit a M).val.app (op U) x = tateTmul a M U 1 x := by
   rfl
+
+private theorem constantDirectMap_naturality {T T' : Scheme.{u}} (h : T' ⟶ T)
+    {R A : Type u} [CommRing R] [CommRing A] (φ : R →+* A) :
+    tateConstantMap T φ ≫ proEtaleCoefficientDirectImageMap h A =
+      proEtaleCoefficientDirectImageMap h R ≫
+        (proEtaleSheafDirectImage h CommRingCat.{u + 1}).map (tateConstantMap T' φ) := by
+  apply ((sheafificationAdjunction (ProEt.topology T)
+    CommRingCat.{u + 1}).homEquiv _ _).injective
+  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
+  change toSheafify _ _ ≫ (tateConstantMap T φ).hom ≫
+    (proEtaleCoefficientDirectImageMap h A).hom =
+      toSheafify _ _ ≫ (proEtaleCoefficientDirectImageMap h R).hom ≫ _
+  change toSheafify (ProEt.topology T)
+    ((Functor.const T.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1, u} R))) ≫
+      sheafifyMap (ProEt.topology T)
+    ((Functor.const T.ProEtᵒᵖ).map
+      (CommRingCat.ofHom (ULift.ringEquiv.{u, u + 1}.symm.toRingHom.comp
+        (φ.comp ULift.ringEquiv.{u, u + 1}.toRingHom)))) ≫ _ = _
+  rw [← Category.assoc, ← toSheafify_naturality, Category.assoc]
+  have hr (B : Type u) [CommRing B] :
+      toSheafify (ProEt.topology T) ((Functor.const T.ProEtᵒᵖ).obj
+        (CommRingCat.of (ULift.{u + 1, u} B))) ≫
+          (proEtaleCoefficientDirectImageMap h B).hom =
+        Functor.whiskerLeft (proEtaleBaseChange h).op
+          (toSheafify (ProEt.topology T') ((Functor.const T'.ProEtᵒᵖ).obj
+            (CommRingCat.of (ULift.{u + 1, u} B)))) :=
+    ((sheafificationAdjunction (ProEt.topology T)
+      CommRingCat.{u + 1}).homEquiv _ _).apply_symm_apply _
+  rw [hr A, ← Category.assoc, hr R]
+  let f : (Functor.const T'.ProEtᵒᵖ).obj
+      (CommRingCat.of (ULift.{u + 1, u} R)) ⟶
+      (Functor.const T'.ProEtᵒᵖ).obj (CommRingCat.of (ULift.{u + 1, u} A)) :=
+    (Functor.const T'.ProEtᵒᵖ).map
+      (CommRingCat.ofHom ((ULift.ringEquiv : ULift.{u + 1, u} A ≃+* A).symm.toRingHom.comp
+        (φ.comp (ULift.ringEquiv : ULift.{u + 1, u} R ≃+* R).toRingHom)))
+  have hn := toSheafify_naturality (ProEt.topology T') f
+  exact congrArg (fun t ↦ Functor.whiskerLeft (proEtaleBaseChange h).op t) hn
 
 attribute [local irreducible] tensorUnit
 

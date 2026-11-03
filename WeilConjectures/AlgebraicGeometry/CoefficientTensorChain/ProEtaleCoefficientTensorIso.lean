@@ -108,9 +108,9 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 def tensorIso (o : SheafOfModules.RingIsoTensorTransport
     (J := ProEt.topology X)
     (R := (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R) (S := S) c) :
-    total X S ⋙ (pbcRestrict c.hom).mapHomologicalComplex (.up ℤ) ≅
-      (((pbcRestrict c.hom).mapHomologicalComplex (.up ℤ)).prod
-        ((pbcRestrict c.hom).mapHomologicalComplex (.up ℤ))) ⋙
+    total X S ⋙ (proEtaleRingRestrictScalars c.hom).mapHomologicalComplex (.up ℤ) ≅
+      (((proEtaleRingRestrictScalars c.hom).mapHomologicalComplex (.up ℤ)).prod
+        ((proEtaleRingRestrictScalars c.hom).mapHomologicalComplex (.up ℤ))) ⋙
         total X ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R) :=
   NatIso.ofComponents (fun Z ↦ o.totalIso Z.1 Z.2)
     (fun v ↦ tensorIso_naturality f R S c o _ _ v)
@@ -127,13 +127,13 @@ theorem tensorIso_summand
       (R := (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R) (S := S) c)
     (P Q : CochainComplex (proEtaleRingModules X S) ℤ)
     (a b n : ℤ) (h : a + b = n) :
-    (pbcRestrict c.hom).map
+    (proEtaleRingRestrictScalars c.hom).map
         (CochainComplex.ιMapBifunctor P Q (proEtaleOrdinaryTensor X S) a b n h) ≫
         ((tensorIso f R S c o).hom.app (P, Q)).f n =
       o.monoidal.toMonoidal.toOplaxMonoidal.δ (P.X a) (Q.X b) ≫
         CochainComplex.ιMapBifunctor
-          (((pbcRestrict c.hom).mapHomologicalComplex (.up ℤ)).obj P)
-          (((pbcRestrict c.hom).mapHomologicalComplex (.up ℤ)).obj Q)
+          (((proEtaleRingRestrictScalars c.hom).mapHomologicalComplex (.up ℤ)).obj P)
+          (((proEtaleRingRestrictScalars c.hom).mapHomologicalComplex (.up ℤ)).obj Q)
           (proEtaleOrdinaryTensor X ((proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R))
           a b n h := by
   simpa only [tensorIso, NatIso.ofComponents_hom_app] using o.total_summand P Q a b n h

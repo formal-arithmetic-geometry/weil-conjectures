@@ -15,6 +15,7 @@ public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
 public import Mathlib.CategoryTheory.Linear.Basic
 import all WeilConjectures.AlgebraicGeometry.Pbc.PbcScalarExtension
 import all WeilConjectures.AlgebraicGeometry.Finite.FiniteStagePairCategory
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit
 
 /-! # Scalar multiplication on finite-stage morphism classes
 
@@ -486,6 +487,33 @@ Source: blueprint order 1311 (blueprint: def-weil-pbc-qbar-category). -/
 instance pbcQbarLinear : Linear Qbar (pbcQbarCategory l Qbar T) :=
   StageSystem.qbarPairLinear l Qbar (pbcScalarSystem l Qbar T hDim.out hInv.out)
     (pbcQbarScalarCompatible l Qbar T)
+
+/-- The proper-base-change specialization of the existing condensed coefficient category.
+No choice of a coefficient representative is part of an object.
+Source: `def-sfb-dcons-qlbar` (blueprint: def-weil-pbc-qbar-category). -/
+abbrev pbcQbarCategory_condensed := ProEtale.PadicAlgClConstructible T l
+
+/-- Inclusion in the ordinary derived category of condensed coefficient modules.
+Source: `det-def-sfb-bounded-constructible` (blueprint: def-weil-pbc-qbar-category). -/
+abbrev pbcQbarInclusion_condensed :=
+  (ProEtale.boundedConstructible (ProEtale.padicAlgClRingObj T l)).ι
+
+/-- Morphisms are exactly the ambient derived morphisms.
+Source: `det-def-sfb-bounded-constructible` (blueprint: def-weil-pbc-qbar-category).
+Proof: the inclusion of a full subcategory is fully faithful. -/
+def pbcQbarHomEquiv_condensed (K L : pbcQbarCategory_condensed l T) :
+    (K ⟶ L) ≃ ((pbcQbarInclusion_condensed l T).obj K ⟶ (pbcQbarInclusion_condensed l T).obj L) :=
+  (ProEtale.boundedConstructible (ProEtale.padicAlgClRingObj T l)).fullyFaithfulι.homEquiv
+
+/-- The triangulation is inherited from the ambient derived category.
+Source: `det-cor-coefficient-heart-ii-triangulated`
+(blueprint: def-weil-pbc-qbar-category).
+Proof: bounded constructibility over the condensed algebraic closure is a
+triangulated object property on a topologically noetherian scheme; the full
+subcategory therefore inherits its triangulation. -/
+theorem pbcQbarTriangulated_condensed [IsNoetherian T] :
+    IsTriangulated (pbcQbarCategory_condensed l T) := by
+  infer_instance
 
 end QbarCoefficients
 end AlgebraicGeometry.Scheme

@@ -134,6 +134,14 @@ variable {U' U Z' Z : Scheme.{u}} {g' : U' ⟶ U} {j' : U' ⟶ Z'} {j : U ⟶ Z}
 
 variable [WeaklyEtale j] [WeaklyEtale j']
 
+/-- The henselian lift viewed over the original scheme through an affine open chart.
+Source: blueprint `det-sf-open-closed-pullback-limits`, clause (1), using the lift of
+`def-exc-closed-site-lift` (blueprint: det-sf-open-closed-pullback-limits). -/
+def closedSiteLiftOver {X : Scheme.{u}} (A : Type u) [CommRing A] (I : Ideal A)
+    (a : Spec (.of A) ⟶ X) [IsOpenImmersion a]
+    (V : (Spec (.of (A ⧸ I))).AffineProEt) : X.ProEt :=
+  ProEt.mk (((toProEt (Spec (.of A))).obj ((closedSiteLift A I).obj V)).hom ≫ a)
+
 private instance localPullbackMapContinuous :
     (MorphismProperty.Over.pullback @WeaklyEtale ⊤ g' ⋙
     MorphismProperty.Over.map ⊤ (inferInstance : @WeaklyEtale _ _ j')).IsContinuous

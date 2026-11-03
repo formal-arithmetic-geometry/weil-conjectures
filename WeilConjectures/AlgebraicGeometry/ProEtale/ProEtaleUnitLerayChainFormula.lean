@@ -104,6 +104,12 @@ noncomputable def proEtaleUnitLerayTerminalIso {X Y : Scheme.{u}} (h : X ⟶ Y) 
     isoWhiskerLeft (sfIntrinsicModuleEquivalence X A).inverse
       (proEtaleUnitLerayFixedTerminalIso A h)
 
+/-- The unit on section complexes, degree by degree, with its canonical terminal comparison.
+Source: Stacks Tags 07A6 and 08J6 (blueprint: lem-trf-proetale-unit-leray-chain-formula). -/
+noncomputable def proEtaleUnitLeraySectionUnit {X Y : Scheme.{u}} (h : X ⟶ Y) :=
+  whiskerRight (proEtaleConstantRingAdjunction A h).unit (proEtaleUnitLeraySections A Y) ≫
+    whiskerLeft (proEtaleConstantRingPullback A h) (proEtaleUnitLerayTerminalIso A h).hom
+
 section UnitLerayCalculation
 
 variable {C D E : Type*} [Category* C] [Category* D] [Category* E]

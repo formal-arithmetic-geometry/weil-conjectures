@@ -297,6 +297,55 @@ private def restrictionIso :
     ext V x
     rfl
 
+/-- The comparison square persists for any localization of the specified termwise
+model inverse image. Source: Stacks Tag 09AL
+(blueprint: lem-ctf-finite-comparison-model-realization).
+
+Proof: the model pullback is exact. Localize the preceding square of exact functors.
+The supplied factorization identifies D with the exact-functor localization by the
+fully faithful universal property of the localization Q. -/
+theorem finiteComparisonModelDerivedSquare :
+    letI : HasDerivedCategory.{u + 2} (ConstantCompletion.Mod (ConstantCompletion.constant
+        (Scheme.smallModelComparisonEtaleTopology.{u, u + 1} X) A)) :=
+      HasDerivedCategory.standard _
+    letI : HasDerivedCategory.{u + 2} (ConstantCompletion.Mod (ConstantCompletion.constant
+        (Scheme.coefficientProEtaleModelTopology.{u, u + 1} X) A)) :=
+      HasDerivedCategory.standard _
+    ∀ D : ConstantCompletion.D (ConstantCompletion.constant
+        (Scheme.smallModelComparisonEtaleTopology.{u, u + 1} X) A) ⥤
+          ConstantCompletion.D (ConstantCompletion.constant
+            (Scheme.coefficientProEtaleModelTopology.{u, u + 1} X) A),
+      Nonempty (ConstantCompletion.Q _ ⋙ D ≅
+        constructibleComparisonComplexPullback.{u, u + 1} X A ⋙ ConstantCompletion.Q _) →
+      Nonempty ((finiteComparisonEtaleModelRealization X A).mapDerivedCategory ⋙
+          (comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory ≅
+        D ⋙ (finiteComparisonProEtaleModelRealization X A).mapDerivedCategory) := by
+  let : HasDerivedCategory.{u + 2} (ConstantCompletion.Mod (ConstantCompletion.constant
+      (Scheme.smallModelComparisonEtaleTopology.{u, u + 1} X) A)) :=
+    HasDerivedCategory.standard _
+  let : HasDerivedCategory.{u + 2} (ConstantCompletion.Mod (ConstantCompletion.constant
+      (Scheme.coefficientProEtaleModelTopology.{u, u + 1} X) A)) :=
+    HasDerivedCategory.standard _
+  intro D ⟨eD⟩
+  let L := constructibleComparisonPullback.{u, u + 1} X A
+  have : PreservesFiniteLimits L := (constructibleComparisonPullback_exact_faithful X A).1
+  have : L.Additive := Functor.additive_of_preserves_binary_products L
+  have : PreservesFiniteColimits L := inferInstance
+  let Q := ConstantCompletion.Q (ConstantCompletion.constant
+    (Scheme.smallModelComparisonEtaleTopology.{u, u + 1} X) A)
+  let W := HomologicalComplex.quasiIso
+    (ConstantCompletion.Mod (ConstantCompletion.constant
+      (Scheme.smallModelComparisonEtaleTopology.{u, u + 1} X) A)) (.up ℤ)
+  let T := constructibleComparisonComplexPullback.{u, u + 1} X A ⋙ ConstantCompletion.Q _
+  let : Localization.Lifting Q W T D := ⟨eD⟩
+  let : Localization.Lifting Q W T L.mapDerivedCategory := ⟨L.mapDerivedCategoryFactors⟩
+  let e : L.mapDerivedCategory ≅ D :=
+    Localization.liftNatIso Q W T T L.mapDerivedCategory D (Iso.refl _)
+  obtain ⟨h⟩ := finiteComparisonModelPullbackSquare X A
+  exact ⟨Functor.mapDerivedCategorySquareIso h.symm ≪≫
+    Functor.isoWhiskerRight e
+      (finiteComparisonProEtaleModelRealization X A).mapDerivedCategory⟩
+
 end ConstantScalars
 end CategoryTheory
 

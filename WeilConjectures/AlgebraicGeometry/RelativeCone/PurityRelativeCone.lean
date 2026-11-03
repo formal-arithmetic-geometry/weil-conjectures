@@ -1434,7 +1434,7 @@ theorem relativeConeSupportComparison (T : Scheme.{u}) {Z : Scheme.{u}}
       (P : RelativeCone.System (Scheme.ProEt.topology T)
         (fun {V _} f ↦ IsOpenImmersion f.left ∧ Etale V.hom))
       (e : ∀ q : ℕ, relativeCohomology T (Scheme.Etale.mk i.openComplement.ι) I q ≅
-        supportCohomology i q F),
+        supportCohomologyValue i q F),
       Nonempty (RelativeCone.TopologyComparison T E P) ∧
       ∀ q : ℕ, (e q).hom =
         ((E.realization (supportRestrictionArrow i)
