@@ -133,6 +133,15 @@ theorem cbcProperOpenAlpha_app_eq_alphaApp {V W S T : Scheme.{t}} (k : V ⟶ W) 
         cbcJCongr d (pullback.lift_fst k r h))
       ((d.pullComp (ProEtale.StrictTower.squareLift k r p i h) (pullback.snd p i)).symm ≪≫
         eqToIso (congrArg (fun f ↦ d.pull f) (pullback.lift_snd k r h))) x := by
-  sorry
+  -- `refine` takes all the data from the goal, so that the kernel never compares
+  -- differently elaborated components of a concrete natural transformation.
+  rw [cbcProperOpenAlpha_eq_absAlpha]
+  refine ProperOpenTransport.absAlpha_app_eq_alphaApp_of_eq _ _ _ _ _ _ ?_ _ ?_ _ _ _ _ _
+  · intro y
+    have := cbcBetaInvNat_isIso d (pullback.snd p i) (pullback.fst p i) i p
+      pullback.condition.symm (IsPullback.of_hasPullback p i).flip
+    rw [cbcBeta_hom, ProperOpenTransport.inv_betaInvNat_app]
+  · have := cbcOpenToPush_isIso d (ProEtale.StrictTower.squareLift k r p i h)
+    exact cbcClopenProjection_eq d (ProEtale.StrictTower.squareLift k r p i h)
 
 end AlgebraicGeometry.Scheme
