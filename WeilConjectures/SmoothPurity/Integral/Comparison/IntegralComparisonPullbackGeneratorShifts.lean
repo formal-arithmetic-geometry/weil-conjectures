@@ -11,6 +11,7 @@ public import WeilConjectures.FourierTransform.IntegralCompletedComparison.Integ
 import all WeilConjectures.TraceFormula.Integral.IntegralComparisonRealizationModels
 import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSupplement
 import all WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
+public import WeilConjectures.PoincareDuality.IntegralPullbackStrictFiniteGenerators
 
 /-! # Shift compatibility on the finite pullback generators -/
 
@@ -242,7 +243,7 @@ theorem integralComparisonPullbackGenerator_shift {X Y : Scheme.{u}} (f : X ⟶ 
     change 𝟙 _ ≫ (Z.X (i + r)).map (homOfLE (Nat.le_succ n)).op =
       (Z.X (i + r)).map (homOfLE (Nat.le_succ n)).op ≫ 𝟙 _
     simp only [Category.id_comp, Category.comp_id]
-  let := RoosShift.commShift K
+  let : (K ⋙ integralOperationsRoosFunctor).CommShift ℤ := RoosShift.commShift K
   let := c
   let := integralComparisonSequenceRoosShift l E X
   have hsource :

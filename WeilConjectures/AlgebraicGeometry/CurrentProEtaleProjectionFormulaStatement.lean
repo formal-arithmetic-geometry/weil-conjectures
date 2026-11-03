@@ -39,6 +39,11 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.AlgebraicGeometry.ProEtaleCoefficients.LocalizingClosureCtfEqualsBc
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.IntegralProperProjectionFormula
 public import WeilConjectures.SixFunctors.Supporting.ModCondensedCachedInstances
+public import WeilConjectures.PoincareDuality.CurrentProEtaleProjection.CurrentProEtaleProjectionFormula
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ProjectionFormula
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntegralProjectionFormulaLocalizing
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperProjectionFormulaField
 
 /-! # The pro-etale projection formula statement
 
@@ -97,7 +102,7 @@ Proof (node sk-thm-sf-pf-proetale, source sk-thm-sf-pf-proetale.proof.md):
    retained origin isomorphisms `wK.iso`, `wL.iso` gives the assertion for `K, L`.
 5. The remaining conjuncts are the direct condensed results sk-thm-sf-pf-adic (`O_E`) and
    sk-thm-sf-pf-field (`E`, `Qbar_l`) on their stated domains; no etale transport.
-The theorem is a stage-2 statement and has proof `sorry`.
+The proof below follows these steps through the landed comparison and finite proper results.
 -/
 theorem hasProjectionFormula_of_constructibleFiniteTor_statement
     (ell : ℕ) [Fact ell.Prime] {k : Type u} [Field k]
@@ -180,6 +185,59 @@ theorem hasProjectionFormula_of_constructibleFiniteTor_statement
             (Profinite.padicAlgClRingObj ell) Y.left N →
           IsIso (moduleObjectProjectionMap
             (Profinite.padicAlgClRingObj ell) p.left M N)) := by
-  sorry
+  have : Fact (ringChar k ≠ ell) := ⟨hkl⟩
+  refine ⟨?_, ?_, ?_⟩
+  · intro A _ _ hA K L wK wL hK hL tK tL
+    have hbK : _root_.DerivedCategory.TStructure.t.bounded wK.complex.obj := by
+      obtain ⟨a, b, _, h⟩ := hK.2
+      exact ⟨⟨a, (_root_.DerivedCategory.isGE_iff _ a).2
+        (fun i hi ↦ h i (Or.inl hi))⟩,
+        ⟨b, (_root_.DerivedCategory.isLE_iff _ b).2
+          (fun i hi ↦ h i (Or.inr hi))⟩⟩
+    obtain ⟨a, b, ht⟩ := tL
+    have htE := Etale.DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn.mp ht
+    have hML := Etale.plus_derivedTensor_leftDerivedUpperStar c.g
+      ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i).bounded_mapDerivedCategory_obj
+        hbK) htE
+    have := Etale.isIso_rightDerivedLowerStarProjectionMap_of_finite A c.g
+    have hPF : IsIso
+        (((projectionMapOfCompactification (ModuleCat.{u + 1} A) c).app K.obj).app
+          L.obj) :=
+      hasProjectionFormulaOfCompactification_of_comparison c wK.iso wL.iso hbK hML
+        inferInstance
+    have htP : DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} A) Y.left a b
+        L.obj :=
+      (DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} A) Y.left a b).prop_of_iso
+        wL.iso ((DerivedCategory.torAmplitudeIn_mapDerivedCategory_iff a b
+          wL.complex.obj).2 htE)
+    have hS : _root_.DerivedCategory.TStructure.t.plus
+        (((derivedTensorRightDerivedLowerShriek (ModuleCat.{u + 1} A) c).obj
+          K.obj).obj L.obj) := by
+      rw [derivedTensorRightDerivedLowerShriek_obj_obj]
+      obtain ⟨r, hr⟩ := K.property
+      have : K.obj.IsGE r := hr
+      have := (openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i).isGE_mapDerivedCategory_obj
+        K.obj r
+      have : ((rightDerivedLowerShriekOfCompactification
+          (ModuleCat.{u + 1} A) c).obj K.obj).IsGE r :=
+        Functor.isGE_rightDerivedFunctor_obj _ _ r
+      exact ⟨r + a, _root_.DerivedCategory.isGE_tensor_of_torAmplitudeGE_right
+        (_root_.DerivedCategory.torAmplitudeGE_of_torAmplitudeIn htP) _ r⟩
+    have := hPF
+    refine ⟨hS, _root_.DerivedCategory.TStructure.t.plus.prop_of_iso
+      (asIso (((projectionMapOfCompactification (ModuleCat.{u + 1} A) c).app
+        K.obj).app L.obj)) hS, ?_⟩
+    exact (ObjectProperty.isIso_hom_iff _).mp hPF
+  · intro E
+    constructor
+    · intro p _ M N hM hN
+      exact isIso_integral_projection_formula_localizing ell E k p M N hM hN
+    · intro p _ M N hM hN
+      exact (projectionFormulaField ell
+        (Profinite.continuousMapRingObj E.1)
+        (Or.inl ⟨E, ⟨Iso.refl _⟩⟩)).2 p M N hM hN
+  · intro p _ M N hM hN
+    exact (projectionFormulaField ell (Profinite.padicAlgClRingObj ell)
+      (Or.inr ⟨Iso.refl _⟩)).2 p M N hM hN
 
 end AlgebraicGeometry.ProEtale

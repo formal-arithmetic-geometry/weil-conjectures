@@ -8,6 +8,8 @@ module
 public import WeilConjectures.SmoothPurity.CondensedTwConventions.CondensedTwConventions
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CohomologyTransport.CondensedGeometricFrobeniusTransport
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FinitelyPresentedStalk
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CondensedIsomorphismSquareExchange
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocallyFreeTensor
 
 /-! # Geometric Frobenius on condensed constant cohomology
 
@@ -38,6 +40,25 @@ open CondensedRing
 namespace FrobeniusAction
 
 variable (T : CondensedTwConventions.{u})
+
+private theorem exchangeRight_eq_mate
+    {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
+    {L : C ⥤ D} {R : D ⥤ C} {L' : C' ⥤ D'} {R' : D' ⥤ C'}
+    (adj : L ⊣ R) (adj' : L' ⊣ R') {G : C ⥤ C'} {G' : D ⥤ D'}
+    (θ : G ⋙ L' ≅ L ⋙ G') :
+    Adjunction.exchangeRight adj adj' θ = (mateEquiv adj adj' θ.hom).natTrans := by
+  ext M
+  simp [Adjunction.exchangeRight_app, mateEquiv]
+
+private theorem ordinary_isIso
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ]
+    {X Y X' Y' : Scheme.{u}} (h : X' ⟶ X) (a' : X' ⟶ Y')
+    (a : X ⟶ Y) (b : Y' ⟶ Y) [IsIso h] [IsIso b]
+    (w : h ≫ a = a' ≫ b) : IsIso (CohomologyTransport.ordinary Λ h a' a b w) := by
+  unfold CohomologyTransport.ordinary
+  rw [exchangeRight_eq_mate]
+  exact (condensed_isomorphism_square_exchange (Mon.mk Λ) (CommSq.mk w)).2.2.2.2.2.2
 
 /-- The published geometric Frobenius square of the specified finite-field model.
 It includes the actual projection equality, without a postponed square proof.
@@ -99,7 +120,10 @@ Proof: the regular module has its one-stratum finite constant model and the degr
 single complex is bounded constructible. -/
 theorem boundedCoefficient_mem :
     ProEtale.boundedConstructible T.coefficientRing T.coefficientObject := by
-  sorry
+  exact CondensedRing.boundedConstructible_singleFunctor_obj
+    (Profinite.padicAlgClRingObj T.ell) T.geometricBaseChange.left 0 _
+    (isLocallyFree_tensorUnit (Profinite.padicAlgClRingObj T.ell)
+      T.geometricBaseChange.left).isConstructibleModuleObject
 
 /-- The regular coefficient object, with its bounded-constructibility proof.
 Source: latest blueprint, constant coefficients in construction step 3
@@ -150,7 +174,16 @@ and make this independent of that choice. Step 4
 composes the invertible transport with the image of the coefficient isomorphism;
 the inverse is the reverse composite of their inverses. -/
 theorem end_isIso : IsIso (ordinaryEnd T) ∧ IsIso (compactEnd T) := by
-  sorry
+  let : IsIso
+      (CohomologyTransport.ordinary (Profinite.padicAlgClRingObj T.ell)
+        (schemeAut T).hom T.geometricBaseChange.hom T.geometricBaseChange.hom
+        (pointAut T).hom (geometry T).comm) :=
+    ordinary_isIso _ _ _ _ _ _
+  constructor
+  · dsimp only [ordinaryEnd]
+    infer_instance
+  · dsimp only [compactEnd]
+    infer_instance
 
 /-- The pair of specified derived Frobenius automorphisms before taking homology.
 Source: latest blueprint, both induced automorphisms, construction step 4

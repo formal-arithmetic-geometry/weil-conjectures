@@ -10,6 +10,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Cohomolo
 public import WeilConjectures.SmoothPurity.FiniteFieldDatum.SchemeFrobenius
 public import WeilConjectures.TraceFormula.FrobeniusIterate
 public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitude
+public import WeilConjectures.Compactification.FiniteFieldDatum.TraceFormulaSchemeFrobeniusGeometry
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CohomologyTransport.CondensedFrobeniusGeometry
 
 /-!
 # Finite strict Weil complexes
@@ -54,7 +56,7 @@ structure FiniteStrictWeilComplex (F : WeilConjectures.FiniteFieldDatum.{u})
     (Mod (Sheaf (Scheme.ProEt.topology (F.geometricFiber Y₀).left) Ab.{u + 1})
       (condensedRingObj (finiteCoefficient ell E n) (F.geometricFiber Y₀).left)) carrier.obj
   φ : (L (finiteCoefficient ell E n)
-    (geometricFrobeniusGeometry F Y₀).h.hom).obj carrier.obj ≅ carrier.obj
+    (condensedFrobeniusGeometry F Y₀).h.hom).obj carrier.obj ≅ carrier.obj
 
 namespace FiniteStrictWeilComplex
 
@@ -70,7 +72,7 @@ sec-lefschetz-verdier/sec-frobenius/sk-def-sf-weil-complexes/def-trf-strict-weil
 (blueprint: def-trf-strict-weil-complex). -/
 @[ext] structure Hom (K J : FiniteStrictWeilComplex F Y₀ ell E n hn) where
   hom : K.carrier.obj ⟶ J.carrier.obj
-  comm : (L (finiteCoefficient ell E n) (geometricFrobeniusGeometry F Y₀).h.hom).map hom ≫
+  comm : (L (finiteCoefficient ell E n) (condensedFrobeniusGeometry F Y₀).h.hom).map hom ≫
     J.φ.hom = K.φ.hom ≫ hom
 
 /-- The category of finite strict pairs, with the usual identities and composition.

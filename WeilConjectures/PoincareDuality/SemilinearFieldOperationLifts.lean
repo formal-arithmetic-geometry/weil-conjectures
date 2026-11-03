@@ -19,6 +19,17 @@ public import WeilConjectures.PoincareDuality.PullbackIdentitiesScalarExtension
 public import WeilConjectures.TraceFormula.Integral.IntegralPullbackComposition
 import WeilConjectures.CategoryTheory.SixFunctors.MateIsoAlongEquivalences
 import WeilConjectures.DeligneLaumon.IsomorphismFieldTransport
+public import Mathlib.CategoryTheory.Limits.HasLimits
+public import Mathlib.Logic.Small.Defs
+public import WeilConjectures.CategoryTheory.CofilteredIsoComparison
+public import WeilConjectures.Compactification.Cofiltered
+public import WeilConjectures.Mathlib.CategoryTheory.Endofunctor.Algebra
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleUpperStar
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactificationReindexing.CondensedCompactificationReindexing
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarShift
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.BaseChange
+public import WeilConjectures.SmoothPurity.FiniteFieldDatum.FrobeniusDetailed
 
 /-! # Semilinear Frobenius transport and field-operation lifts
 
@@ -47,6 +58,50 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Endofunctor AlgebraicGe
 open CategoryTheory.SuppliedExchangeProjection
 open scoped TensorProduct
 namespace WeilConjectures
+
+/-- Pullback on the original permitted pairs, with their original witnesses.
+Source: lem-fix-weil-operations.proof.md, paragraph 1
+(blueprint: lem-pod-semilinear-field-operation-lifts). -/
+def podHomPairPullback {C : Type a} [Category.{b} C] (P : C ⥤ C)
+    (J : ObjectProperty (Cᵒᵖ × C))
+    (hJ : ∀ K : J.FullSubcategory, J ((P.op.prod P).obj K.obj)) :
+    J.FullSubcategory ⥤ J.FullSubcategory :=
+  J.lift (J.ι ⋙ P.op.prod P) hJ
+
+/-- Restrict the given comparison to the original preserved input and output domains.
+This uses precisely the supplied preservation proofs and the full-subcategory inclusion.
+Source: lem-fix-weil-operations.proof.md, paragraph 1, stated operation domains
+(blueprint: lem-pod-semilinear-field-operation-lifts). -/
+def podRestrictedCovariantComparison
+    {C : Type a} {B : Type b} [Category.{c} C] [Category.{d} B]
+    {P : C ⥤ C} {Q : B ⥤ B} (F : C ⥤ B) (α : F ⋙ Q ≅ P ⋙ F)
+    (I : ObjectProperty C) (J : ObjectProperty B)
+    (hP : ∀ K : I.FullSubcategory, I (P.obj K.obj))
+    (hQ : ∀ K : J.FullSubcategory, J (Q.obj K.obj))
+    (hF : ∀ K : I.FullSubcategory, J (F.obj K.obj)) :
+    J.lift (I.ι ⋙ F) hF ⋙ J.lift (J.ι ⋙ Q) hQ ≅
+      I.lift (I.ι ⋙ P) hP ⋙ J.lift (I.ι ⋙ F) hF :=
+  NatIso.ofComponents (fun K ↦ J.isoMk (α.app K.obj))
+    (fun t ↦ by
+      apply ObjectProperty.hom_ext
+      exact α.hom.naturality t.hom)
+
+/-- The rule for any of the three covariant operations is functorial. This formal
+calculation applies to its specified comparison without changing that comparison.
+Source: blueprint prop-weil-operations, proof sentence 1, node proof step 6
+(blueprint: lem-pod-semilinear-field-operation-lifts).
+Proof: the comparison followed by F(theta) is invertible. Naturality of alpha and
+u theta_K = theta_L P(u) give the displayed intertwining equation. The existing
+IsoAlgebra transport uses F(u), so identities, composition and forgetting are those
+of F. This applies to pullback, ordinary image and compact-support image alike. -/
+theorem pod_covariant_field_operation_lift
+    {C : Type a} {B : Type b} [Category.{c} C] [Category.{d} B]
+    {P : C ⥤ C} {Q : B ⥤ B} (F : C ⥤ B) (α : F ⋙ Q ≅ P ⋙ F) :
+    PodCovariantWeilLiftSpec F α := by
+  refine ⟨rfl, fun K ↦ ⟨rfl, IsoAlgebra.mapOfNatIso_obj_str α K⟩, ?_⟩
+  intro K L u
+  refine ⟨rfl, ?_⟩
+  exact ((IsoAlgebra.mapOfNatIso α).map u).hom.h.symm
 
 /-- The tensor lift uses the existing product of fixed pairs and the existing
 transport. Source: blueprint prop-weil-operations, proof sentence 1
@@ -87,13 +142,13 @@ def PodHomWeilLiftSpec
     {C : Type a} [Category.{b} C] (P : C ⥤ C) (J : ObjectProperty (Cᵒᵖ × C))
     (H : J.FullSubcategory ⥤ C)
     (hJ : ∀ K : J.FullSubcategory, J ((P.op.prod P).obj K.obj))
-    (κ : H ⋙ P ≅ podPairPullback P J J hJ ⋙ H) : Prop :=
+    (κ : H ⋙ P ≅ podHomPairPullback P J hJ ⋙ H) : Prop :=
   ∃ L : (podWeilHomPairs P J).FullSubcategory ⥤ IsoAlgebra P,
     L ⋙ IsoAlgebra.forget P = podWeilHomPairForget P J ⋙ H ∧
     (∀ K : (podWeilHomPairs P J).FullSubcategory,
       HEq (L.obj K).str.hom
         (κ.hom.app ((podWeilHomPairForget P J).obj K) ≫
-          H.map (X := (podPairPullback P J J hJ).obj
+          H.map (X := (podHomPairPullback P J hJ).obj
               ((podWeilHomPairForget P J).obj K))
             (Y := (podWeilHomPairForget P J).obj K)
             (ObjectProperty.homMk
@@ -119,7 +174,7 @@ theorem pod_tensor_hom_field_operation_lifts
     (μ : T ⋙ P ≅ P.prod P ⋙ T) (J : ObjectProperty (Cᵒᵖ × C))
     (H : J.FullSubcategory ⥤ C)
     (hJ : ∀ K : J.FullSubcategory, J ((P.op.prod P).obj K.obj))
-    (κ : H ⋙ P ≅ podPairPullback P J J hJ ⋙ H) :
+    (κ : H ⋙ P ≅ podHomPairPullback P J hJ ⋙ H) :
     PodTensorWeilLiftSpec P T μ ∧ PodHomWeilLiftSpec P J H hJ κ := by
   constructor
   · refine ⟨rfl, ?_, fun _ _ _ _ _ _ ↦ rfl⟩
@@ -129,7 +184,7 @@ theorem pod_tensor_hom_field_operation_lifts
   · let R : (IsoAlgebra P)ᵒᵖ × IsoAlgebra P ⥤ IsoAlgebra (P.op.prod P) :=
       (IsoAlgebra.opFunctor.prod (𝟭 (IsoAlgebra P))) ⋙ IsoAlgebra.prod
     let A : (podWeilHomPairs P J).FullSubcategory ⥤
-        IsoAlgebra (podPairPullback P J J hJ) :=
+        IsoAlgebra (podHomPairPullback P J hJ) :=
       { obj := fun K ↦ IsoAlgebra.mk ((podWeilHomPairForget P J).obj K)
           (J.isoMk (R.obj K.obj).str)
         map := fun u ↦ ObjectProperty.homMk
@@ -142,6 +197,84 @@ theorem pod_tensor_hom_field_operation_lifts
       rfl
     · intro K K' u
       rfl
+
+/-- The evaluation-defined internal-Hom comparison, natural in both variables.
+Source: lem-fix-weil-operations.proof.md, paragraph 1; the monoidal equivalence
+comparison of lem-pur-monoidal-equivalence-hom-comparison
+(blueprint: lem-pod-semilinear-field-operation-lifts). -/
+def podClosedHomComparison :
+    Functor.uncurry.obj MonoidalClosed.internalHom ⋙ P ≅
+      P.op.prod P ⋙ Functor.uncurry.obj MonoidalClosed.internalHom :=
+  NatIso.ofComponents (fun KL ↦ Functor.Monoidal.ihomObjIso P KL.1.unop KL.2)
+    (fun {KL KL'} t ↦ by
+      change P.map ((MonoidalClosed.pre t.1.unop).app KL.2 ≫
+          (ihom KL'.1.unop).map t.2) ≫
+            (Functor.LaxMonoidal.ihomComparison P KL'.1.unop).natTrans.app KL'.2 =
+        (Functor.LaxMonoidal.ihomComparison P KL.1.unop).natTrans.app KL.2 ≫
+          (MonoidalClosed.pre (P.map t.1.unop)).app (P.obj KL.2) ≫
+            (ihom (P.obj KL'.1.unop)).map (P.map t.2)
+      have hn := (Functor.LaxMonoidal.ihomComparison P KL'.1.unop).natTrans.naturality t.2
+      dsimp only [Functor.comp_map] at hn
+      rw [P.map_comp, Category.assoc, hn]
+      rw [← Category.assoc,
+        Functor.LaxMonoidal.map_pre_app_comp_ihomComparison_app, Category.assoc])
+
+/-- The canonical tensor comparison, with its two-variable naturality.
+Source: lem-fix-weil-operations.proof.md, paragraph 1
+(blueprint: lem-pod-semilinear-field-operation-lifts). -/
+def podClosedTensorComparison :
+    Functor.uncurry.obj (curriedTensor C) ⋙ P ≅
+      P.prod P ⋙ Functor.uncurry.obj (curriedTensor C) :=
+  NatIso.ofComponents (fun KL ↦ (Functor.Monoidal.μIso P KL.1 KL.2).symm)
+    (fun t ↦ by
+      simp [Functor.uncurry, curriedTensor])
+
+/-- Ordinary bounded-constructible pullback for any scheme map, including semilinear maps.
+Source: lem-fix-weil-operations.proof.md, paragraph 1
+(blueprint: lem-pod-semilinear-field-operation-lifts). -/
+def podConstructiblePullback {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    ProEtale.BoundedConstructible (condensedRingObj Λ Y) ⥤
+      ProEtale.BoundedConstructible (condensedRingObj Λ X) :=
+  (ProEtale.boundedConstructible _).lift
+    ((ProEtale.boundedConstructible _).ι ⋙ P Λ f)
+    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj_of_scheme Λ f K.obj K.property)
+
+/-- The restricted pullback has exactly the ambient pullback after inclusion.
+Source: lem-fix-weil-operations.proof.md, paragraph 1, preserved constructible domains
+(blueprint: lem-pod-semilinear-field-operation-lifts). -/
+def podConstructiblePullbackInclusion {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    podConstructiblePullback Λ f ⋙ (boundedConstructible (condensedRingObj Λ X)).ι ≅
+      (boundedConstructible (condensedRingObj Λ Y)).ι ⋙ P Λ f :=
+  Iso.refl _
+
+/-- The actual inverse scheme map induces the inverse equivalence on bounded
+constructible complexes, with no field-linearity or absolute separatedness assumption.
+Source: lem-fix-weil-operations.proof.md, paragraph 1
+(blueprint: lem-pod-semilinear-field-operation-lifts). -/
+def podConstructibleEquivalence (T : Scheme.{u}) (g : T ≅ T) :
+    ProEtale.BoundedConstructible (condensedRingObj Λ T) ≌
+      ProEtale.BoundedConstructible (condensedRingObj Λ T) :=
+  CategoryTheory.Equivalence.mk (podConstructiblePullback Λ g.hom)
+    (podConstructiblePullback Λ g.inv)
+    (NatIso.ofComponents
+      (fun K ↦ (ProEtale.boundedConstructible _).isoMk
+        (((leftDerivedUpperStarComp Λ g.inv g.hom).symm ≪≫
+          eqToIso (congrArg (P Λ) g.inv_hom_id) ≪≫ leftDerivedUpperStarId Λ T).symm.app
+            K.obj))
+      (fun t ↦ by
+        apply ObjectProperty.hom_ext
+        exact (((leftDerivedUpperStarComp Λ g.inv g.hom).symm ≪≫
+          eqToIso (congrArg (P Λ) g.inv_hom_id) ≪≫ leftDerivedUpperStarId Λ T).symm.hom.naturality
+            t.hom)))
+    (NatIso.ofComponents
+      (fun K ↦ (ProEtale.boundedConstructible _).isoMk
+        (((leftDerivedUpperStarComp Λ g.hom g.inv).symm ≪≫
+          eqToIso (congrArg (P Λ) g.hom_inv_id) ≪≫ leftDerivedUpperStarId Λ T).app K.obj))
+      (fun t ↦ by
+        apply ObjectProperty.hom_ext
+        exact (((leftDerivedUpperStarComp Λ g.hom g.inv).symm ≪≫
+          eqToIso (congrArg (P Λ) g.hom_inv_id) ≪≫ leftDerivedUpperStarId Λ T).hom.naturality
+            t.hom)))
 
 section CompositionElaboration
 set_option backward.isDefEq.respectTransparency true
@@ -269,74 +402,50 @@ def PodRationalFrobeniusTransportSpec
     (fun [_s : (sfWeilFrobeniusPullback D l hl T₀ E).CommShift ℤ] ↦
       (sfWeilFrobeniusPullback D l hl T₀ E).IsTriangulated) (_s := s)
 
-/-- Both coefficient stages use the actual inverse scheme map, and their underlying
-pullbacks are exact equivalences. Tensor and Hom comparisons below are fixed to
-the recorded canonical transport maps, rather than arbitrary isomorphisms.
-Source: blueprint prop-weil-operations, sentence 1, node proof steps 2--3 and 7--8
+/-- Exact transport by a scheme automorphism on the ordinary condensed module category.
+Both inverse equations use the actual inverse scheme map and the native compositors.
+Tensor and Hom use the canonical monoidal and evaluation comparisons.
+Source: lem-fix-weil-operations.proof.md, paragraph 1
 (blueprint: lem-pod-semilinear-field-operation-lifts). -/
-def PodFieldOperationTransportSpec
-    (E : Type u) [Field E] [_root_.Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
-    (Ω : Type v) [Field Ω] [_root_.Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] : Prop :=
-  letI := fun x ↦ sfWeilPrimeInvertible D l hl T₀ x
-  PodRationalFrobeniusTransportSpec D l hl T₀ E ∧
-  (sfCommonStageWeilFrobeniusPullback D l hl T₀ Ω).IsEquivalence ∧
-  (∃ ε : sfCommonStageWeilFrobeniusPullback D l hl T₀ Ω ⋙
-      commonStageDerivedPullback l Ω (D.geometricFrobenius T₀).inv ≅ 𝟭 _,
-    ∀ A : AlgebraicallyClosedCoefficients.Index l Ω,
-      ∃ δ : sfWeilFrobeniusPullback D l hl T₀
-          (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω A) ⋙
-        rationalDerivedPullback l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω A)
-          (D.geometricFrobenius T₀).inv ≅ 𝟭 _,
-        ∀ K : GeneralAlgebraicallyClosedCoefficients.Stage l Ω (D.geometricFiber T₀).left A,
-          HEq (ε.hom.app ((GeneralAlgebraicallyClosedCoefficients.inclusion A).obj K))
-            ((GeneralAlgebraicallyClosedCoefficients.inclusion A).map (δ.hom.app K))) ∧
-  Nonempty (commonStageDerivedPullback l Ω (D.geometricFrobenius T₀).inv ⋙
-    sfCommonStageWeilFrobeniusPullback D l hl T₀ Ω ≅ 𝟭 _) ∧
-  (∃ s : (sfCommonStageWeilFrobeniusPullback D l hl T₀ Ω).CommShift ℤ,
-    (fun [_s : (sfCommonStageWeilFrobeniusPullback D l hl T₀ Ω).CommShift ℤ] ↦
-      (sfCommonStageWeilFrobeniusPullback D l hl T₀ Ω).IsTriangulated) (_s := s)) ∧
-  (∃ μ : rationalDerivedTensor l E (D.geometricFiber T₀).left ⋙
-        sfWeilFrobeniusPullback D l hl T₀ E ≅
-      (sfWeilFrobeniusPullback D l hl T₀ E).prod
-        (sfWeilFrobeniusPullback D l hl T₀ E) ⋙
-          rationalDerivedTensor l E (D.geometricFiber T₀).left,
-    (∀ K L, μ.app (K, L) =
-      canonicalRationalPullbackTensor l E (D.geometricFrobenius T₀).hom K L) ∧
-    PodTensorWeilLiftSpec (sfWeilFrobeniusPullback D l hl T₀ E)
-      (rationalDerivedTensor l E (D.geometricFiber T₀).left) μ) ∧
-  (∃ μ : commonStageDerivedTensor l Ω (D.geometricFiber T₀).left ⋙
-        sfCommonStageWeilFrobeniusPullback D l hl T₀ Ω ≅
-      (sfCommonStageWeilFrobeniusPullback D l hl T₀ Ω).prod
-        (sfCommonStageWeilFrobeniusPullback D l hl T₀ Ω) ⋙
-          commonStageDerivedTensor l Ω (D.geometricFiber T₀).left,
-    (∀ K L, μ.app (K, L) =
-      canonicalCommonStagePullbackTensor l Ω (D.geometricFrobenius T₀).hom K L) ∧
-    PodTensorWeilLiftSpec (sfCommonStageWeilFrobeniusPullback D l hl T₀ Ω)
-      (commonStageDerivedTensor l Ω (D.geometricFiber T₀).left) μ) ∧
-  (∃ κ : rationalDerivedInternalHom l E (D.geometricFiber T₀).left ⋙
-        sfWeilFrobeniusPullback D l hl T₀ E ≅
-      podPairPullback (sfWeilFrobeniusPullback D l hl T₀ E)
-        (constructibleRationalHomPairs l E (D.geometricFiber T₀).left)
-        (constructibleRationalHomPairs l E (D.geometricFiber T₀).left)
-        (podRationalPairs_pullback l E (D.geometricFrobenius T₀).hom) ⋙
-          rationalDerivedInternalHom l E (D.geometricFiber T₀).left,
-    (∀ K, κ.hom.app K = podRationalHomComparison l E (D.geometricFrobenius T₀).hom K) ∧
-    PodHomWeilLiftSpec (sfWeilFrobeniusPullback D l hl T₀ E)
-      (constructibleRationalHomPairs l E (D.geometricFiber T₀).left)
-      (rationalDerivedInternalHom l E (D.geometricFiber T₀).left)
-      (podRationalPairs_pullback l E (D.geometricFrobenius T₀).hom) κ) ∧
-  ∃ κ : commonStageDerivedInternalHom l Ω (D.geometricFiber T₀).left ⋙
-        sfCommonStageWeilFrobeniusPullback D l hl T₀ Ω ≅
-      podPairPullback (sfCommonStageWeilFrobeniusPullback D l hl T₀ Ω)
-        (commonStageHomPairs l Ω (D.geometricFiber T₀).left)
-        (commonStageHomPairs l Ω (D.geometricFiber T₀).left)
-        (podCommonPairs_pullback l Ω (D.geometricFrobenius T₀).hom) ⋙
-          commonStageDerivedInternalHom l Ω (D.geometricFiber T₀).left,
-    (∀ K, κ.hom.app K = podCommonHomComparison l Ω (D.geometricFrobenius T₀).hom K) ∧
-    PodHomWeilLiftSpec (sfCommonStageWeilFrobeniusPullback D l hl T₀ Ω)
-      (commonStageHomPairs l Ω (D.geometricFiber T₀).left)
-      (commonStageDerivedInternalHom l Ω (D.geometricFiber T₀).left)
-      (podCommonPairs_pullback l Ω (D.geometricFrobenius T₀).hom) κ
+def PodFieldOperationTransportSpec (T : Scheme.{u}) (g : T ≅ T) : Prop :=
+  (P Λ g.hom).IsEquivalence ∧
+  (podConstructiblePullback Λ g.hom).IsEquivalence ∧
+  Nonempty (P Λ g.hom ⋙ P Λ g.inv ≅ 𝟭 (D Λ T)) ∧
+  Nonempty (P Λ g.inv ⋙ P Λ g.hom ≅ 𝟭 (D Λ T)) ∧
+  Nonempty (P Λ g.hom ≅ (upperStar Λ g.hom).mapDerivedCategory) ∧
+  (P Λ g.hom).IsTriangulated ∧
+  PodTensorWeilLiftSpec (P Λ g.hom) (Functor.uncurry.obj (curriedTensor (D Λ T)))
+    (podClosedTensorComparison (P Λ g.hom)) ∧
+  ∀ (J : ObjectProperty ((D Λ T)ᵒᵖ × D Λ T))
+    (hJ : ∀ K : J.FullSubcategory, J (((P Λ g.hom).op.prod (P Λ g.hom)).obj K.obj)),
+    PodHomWeilLiftSpec (P Λ g.hom) J
+      (J.ι ⋙ Functor.uncurry.obj MonoidalClosed.internalHom) hJ
+      (Functor.isoWhiskerLeft J.ι (podClosedHomComparison (P Λ g.hom)))
+
+/-- Scheme-isomorphism transport preserves the explicit tensor and Hom formulas.
+Source: lem-fix-weil-operations.proof.md, paragraph 1
+(blueprint: lem-pod-semilinear-field-operation-lifts).
+Proof: the native exact inverse image is an equivalence and its total derived functor
+is termwise transport. Compose the inverse compositor with the identity comparison
+for each inverse equation. Apply the general pair calculation to the canonical
+monoidal tensorator and the evaluation transpose; restrict the latter to J. -/
+theorem pod_field_transport (T : Scheme.{u}) (g : T ≅ T) :
+    PodFieldOperationTransportSpec Λ T g := by
+  refine ⟨inferInstance, (podConstructibleEquivalence Λ T g).isEquivalence_functor, ?_, ?_,
+    ⟨leftDerivedUpperStarIsoMapDerivedCategory Λ g.hom⟩, inferInstance, ?_, ?_⟩
+  · exact ⟨(leftDerivedUpperStarComp Λ g.inv g.hom).symm ≪≫
+      eqToIso (congrArg (P Λ) g.inv_hom_id) ≪≫ leftDerivedUpperStarId Λ T⟩
+  · exact ⟨(leftDerivedUpperStarComp Λ g.hom g.inv).symm ≪≫
+      eqToIso (congrArg (P Λ) g.hom_inv_id) ≪≫ leftDerivedUpperStarId Λ T⟩
+  · refine ⟨rfl, ?_, fun _ _ _ _ _ _ ↦ rfl⟩
+    intro K L
+    simp only [Functor.comp_obj, IsoAlgebra.mapOfNatIso_obj_str,
+      IsoAlgebra.prod_obj_carrier, IsoAlgebra.prod_obj_str]
+  · intro J hJ
+    exact (pod_tensor_hom_field_operation_lifts (P Λ g.hom) _
+      (podClosedTensorComparison (P Λ g.hom)) J
+      (J.ι ⋙ Functor.uncurry.obj MonoidalClosed.internalHom) hJ
+      (Functor.isoWhiskerLeft J.ι (podClosedHomComparison (P Λ g.hom)))).2
 
 attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
   scalarReductionExistence scalarReductionDerivedExistence commonStageTensorComparison
@@ -344,142 +453,337 @@ attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-private theorem pod_field_transport
-    (E : Type u) [Field E] [_root_.Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
-    (Ω : Type v) [Field Ω] [_root_.Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] :
-    PodFieldOperationTransportSpec D l hl T₀ E Ω := by
-  let i := fun x ↦ sfWeilPrimeInvertible D l hl T₀ x
-  let : ∀ x : (D.geometricFiber T₀).left,
-      Invertible (l : (D.geometricFiber T₀).left.residueField x) := i
-  let : (D.geometricFiber T₀).left.Over (Spec (.of D.k)) :=
-    ⟨(D.geometricFiber T₀).hom⟩
-  let : LocallyOfFiniteType ((D.geometricFiber T₀).left ↘ Spec (.of D.k)) := by
-    exact inferInstanceAs (LocallyOfFiniteType
-      (pullback.snd T₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))))
-  let : QuasiCompact ((D.geometricFiber T₀).left ↘ Spec (.of D.k)) := by
-    exact inferInstanceAs (QuasiCompact
-      (pullback.snd T₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))))
-  let : IsIso (D.geometricFrobenius T₀).hom := (D.geometricFrobenius T₀).isIso_hom
-  obtain ⟨iX, iY, H⟩ := isomorphismFieldTransport D l hl Ω
-    (D.geometricFrobenius T₀).hom
-  have hiX : iX = i := Subsingleton.elim _ _
-  have hiY : iY = i := Subsingleton.elim _ _
-  cases hiX
-  cases hiY
-  obtain ⟨hX, hY, hE, _, S, R, _, ⟨U⟩, ⟨V⟩⟩ := H
-  obtain ⟨A⟩ := (hE E).1
-  obtain ⟨B⟩ := (hE E).2
-  have ht := isomorphismIntegralDerivedPullback_termwise l E
-    (D.geometricFrobenius T₀).hom
-  obtain ⟨h, ht, _⟩ := ht
-  have hrat : PodRationalFrobeniusTransportSpec D l hl T₀ E := by
-    unfold PodRationalFrobeniusTransportSpec
-    dsimp only [sfWeilFrobeniusPullback]
-    rw [← IsIso.Iso.inv_hom (D.geometricFrobenius T₀)]
-    refine ⟨⟨A.epsilon, ?_⟩, ?_, ⟨h, ht⟩, inferInstance, inferInstance,
-      inferInstance, (podCompletedInverseImage_equivalence l E
-        (D.geometricFrobenius T₀).hom).1, A.rationalEquivalence,
-      ⟨A.epsilon, A.rationalEpsilon, ?_, A.rational_epsilon_formula⟩, ?_,
-      ⟨A.rationalShift, A.rationalExact⟩⟩
-    · intro K
-      exact A.epsilon_formula K
-    · simpa only [IsIso.inv_inv, IsIso.Iso.inv_hom] using Nonempty.intro B.epsilon
-    · intro K
-      exact A.epsilon_formula K
-    · simpa only [IsIso.inv_inv, IsIso.Iso.inv_hom, sfWeilFrobeniusPullback] using
-        Nonempty.intro B.rationalEpsilon
-  have tensor := derivedPullbackTensorIso l E (D.geometricFrobenius T₀).hom 0 Ω
-  obtain ⟨μ, hμ⟩ := tensor.2.2.2.2.2.2.1
-  obtain ⟨ν, hν⟩ := tensor.2.2.2.2.2.2.2.1
-  have homs := derivedAutomorphismHomEvaluation l E (D.geometricFrobenius T₀).hom 0 Ω
-  obtain ⟨κ, hκ⟩ := homs.2.2.1
-  obtain ⟨ρ, hρ⟩ := homs.2.2.2.1
-  unfold PodFieldOperationTransportSpec
-  dsimp only [sfWeilFrobeniusPullback, sfCommonStageWeilFrobeniusPullback]
-  rw [← IsIso.Iso.inv_hom (D.geometricFrobenius T₀)]
-  refine ⟨hrat, U.equivalence, ⟨U.epsilon, ?_⟩, ?_, ⟨U.shift, U.exact⟩,
-    ⟨μ, hμ, ?_⟩, ⟨ν, hν, ?_⟩, ⟨κ, hκ, ?_⟩, ⟨ρ, hρ, ?_⟩⟩
-  · intro L
-    refine ⟨(S L).rationalEpsilon, ?_⟩
-    intro K
-    exact U.epsilon_formula ((GeneralAlgebraicallyClosedCoefficients.inclusion L).obj K)
-  · simpa only [IsIso.inv_inv, IsIso.Iso.inv_hom,
-      sfCommonStageWeilFrobeniusPullback] using Nonempty.intro V.epsilon
-  · exact (pod_tensor_hom_field_operation_lifts _ _ μ _ _ _ κ).1
-  · exact (pod_tensor_hom_field_operation_lifts _ _ ν _ _ _ ρ).1
-  · exact (pod_tensor_hom_field_operation_lifts _ _ μ _ _ _ κ).2
-  · exact (pod_tensor_hom_field_operation_lifts _ _ ν _ _ _ ρ).2
-
-/-- Semilinear Frobenius geometry, exact field transport, and the canonical tensor
-and internal-Hom lifts on both models. The covariant lifts, including the specified
-Ex_* and Ex_!, are `pod_supplied_field_operation_lifts`; their explicit object and
-arrow calculation is `pod_covariant_field_operation_lift`.
-Source: blueprint main-20261015, prop-weil-operations.proof.md, sentence 1
+/-- The native pullback and ordinary direct-image comparisons lift to Weil pairs.
+The comparison for direct image is the actual adjunction mate Ex_*.
+Source: lem-fix-weil-operations.proof.md, paragraph 1
 (blueprint: lem-pod-semilinear-field-operation-lifts).
+Proof: pullback uses the inverse native square compositor. Pullback by both horizontal
+scheme isomorphisms is an equivalence, so the mate itself is invertible. Apply the
+explicit covariant calculation to the two canonical comparisons. -/
+theorem pod_actual_pullback_field_lifts
+    {X Y : Scheme.{u}} (gX : X ≅ X) (gY : Y ≅ Y) (f : X ⟶ Y)
+    (w : gX.hom ≫ f = f ≫ gY.hom) :
+    PodCovariantWeilLiftSpec (P Λ f) (pullbackSquareComparison Λ (CommSq.mk w)).symm ∧
+    ∃ β : R Λ f ⋙ P Λ gY.hom ≅ P Λ gX.hom ⋙ R Λ f,
+      β.hom = baseChangeMap Λ (CommSq.mk w) ∧
+      PodCovariantWeilLiftSpec (R Λ f) β := by
+  have : IsIso (baseChangeMap Λ (CommSq.mk w)) :=
+    Adjunction.isIso_exchangeRight_of_isEquivalence
+      (derivedUpperStarLowerStarAdjunction Λ f)
+      (derivedUpperStarLowerStarAdjunction Λ f)
+      (pullbackSquareComparison Λ (CommSq.mk w))
+  exact ⟨pod_covariant_field_operation_lift _ _,
+    asIso (baseChangeMap Λ (CommSq.mk w)), rfl, pod_covariant_field_operation_lift _ _⟩
 
-Proof (the original nine steps, with existing field-transport records reused):
-1. Apply lem-weil-frobenius-square-cartesian to the geometric scalar extension.
-The upper structure map is g_T followed by a_T. Commutativity and f being over k
-make the left vertical arrow a map between precisely those restructured corners;
-no k-linearity of g_T is asserted, including when a model is nonseparated.
-2. The exact inverse-image equivalence on completed modules identifies integral
-pullback with termwise transport (lem-weil-proetale-isomorphism-inverse-image and
-lem-weil-isomorphism-derived-pullback). Compose lambda for g and its inverse
-with the inverse-image counit to obtain the normalized epsilon and its reverse.
-3. Localize the integral inverse equations linearly on Hom tensor E. At common
-stages represent an arrow over one finite field. Scalar compatibility of the
-inverse identities (lem-pod-pullback-identities-scalar-extension) and the specified
-operation scalar comparisons turn its naturality square into that finite-stage
-square. Identity extensions and tower cocycles preserve its class. Exactness
-comes from the exact module transport, integral triangles and common-stage triangles.
-4. For pullback compose the inverse compositor for (g_X,f) with that for (f,g_Y).
-Integral composition is lem-pod-integral-pullback-composition; its scalar equation
-descends to rational and common stages, with the same comparison on every arrow.
-5. The mate of its inverse is exactly Ex_* of def-exchange-projection. Horizontal
-equivalences make it invertible by lem-weil-mate-iso-along-equivalences. For Ex_!,
-the proper mate is invertible by the same argument; compose it with the supplied
-open comparison and the compactification identifications on the preserved domain.
-6. The covariant calculation is pod_covariant_field_operation_lift. Applying it
-to those comparisons gives pod_supplied_field_operation_lifts, with the actual
-supplied-domain units, counits, compactification and coefficient normalizations.
-7. The canonical tensor comparison is lem-pur-derived-pullback-tensor-iso.
-Tensoring the two structure maps after it gives the tensor lift and its arrow law.
-8. Lem-pod-derived-automorphism-hom-evaluation supplies the evaluation-defined Hom
-comparison, natural on exactly the permitted pairs. Apply the inverse structure
-in the first variable and the forward structure in the second. The inverse
-intertwining equation and comparison naturality give the Hom arrow law.
-9. The forgetful equalities retain every original object and arrow. Finite-Tor
-field categories equal the bounded constructible categories by definition.
-Any previously imposed site-perfect first-variable subdomain remains a restriction
-of the same permitted-pair functor. No new constructibility or triangulation
-of fixed pairs is inferred. -/
-theorem semilinearFieldOperationLifts
-    (X₀ Y₀ : Over (Spec (.of D.k₀)))
+/-- The native compact-support lift uses the stipulated proper/open exchange, for every
+supplied automorphism diagram of the chosen compactification.
+Source: lem-fix-weil-operations.proof.md, paragraph 1
+(blueprint: lem-pod-semilinear-field-operation-lifts).
+Proof: the proper mate and the specified open comparison are invertible. Their
+compactification composite is therefore invertible. Apply the covariant arrow
+calculation to that same composite, without selecting a different comparison. -/
+theorem pod_supplied_field_operation_lifts
+    {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
+    (gX : X ≅ X) (gY : Y ≅ Y) (s : Square c c gX.hom gY.hom)
+    [IsIso s.middle] (w : gX.hom ≫ f = f ≫ gY.hom) :
+    ∃ γ : F Λ c ⋙ P Λ gY.hom ≅ P Λ gX.hom ⋙ F Λ c,
+      γ.hom = squareExchange Λ s ∧ PodCovariantWeilLiftSpec (F Λ c) γ := by
+  have : IsIso (squareExchange Λ s) := (square_isIso Λ s (CommSq.mk w)).2
+  exact ⟨asIso (squareExchange Λ s), rfl, pod_covariant_field_operation_lift _ _⟩
+
+/-- Transport a compactification along both actual scheme automorphisms.
+Its middle scheme is unchanged; its open and proper maps change explicitly.
+Source: lem-fix-weil-operations.proof.md, paragraph 1
+(blueprint: lem-pod-semilinear-field-operation-lifts). -/
+def podTransportCompactification {X Y : Scheme.{u}} {f : X ⟶ Y}
+    (c : Compactification f) (gX : X ≅ X) (gY : Y ≅ Y)
+    (w : gX.hom ≫ f = f ≫ gY.hom) : Compactification f where
+  Z := c.Z
+  g := c.g ≫ gY.inv
+  i := gX.hom ≫ c.i
+  comm := by
+    calc
+      f = (f ≫ gY.hom) ≫ gY.inv := by simp
+      _ = (gX.hom ≫ f) ≫ gY.inv := by rw [w]
+      _ = _ := by
+        simpa only [Category.assoc] using
+          congrArg (fun h : X ⟶ Y ↦ (gX.hom ≫ h) ≫ gY.inv) c.comm
+  isProper := inferInstance
+  isOpenImmersion := inferInstance
+
+/-- The transported compactification has a canonical isomorphism square to the original.
+Source: lem-fix-weil-operations.proof.md, paragraph 1
+(blueprint: lem-pod-semilinear-field-operation-lifts). -/
+def podTransportCompactificationSquare {X Y : Scheme.{u}} {f : X ⟶ Y}
+    (c : Compactification f) (gX : X ≅ X) (gY : Y ≅ Y)
+    (w : gX.hom ≫ f = f ≫ gY.hom) :
+    Square c (podTransportCompactification c gX gY w) gX.hom gY.hom where
+  middle := 𝟙 c.Z
+  openSquare := by
+    change IsPullback gX.hom (gX.hom ≫ c.i) c.i (𝟙 c.Z)
+    exact IsPullback.of_horiz_isIso ⟨by simp⟩
+  properSquare := ⟨by simp [podTransportCompactification]⟩
+
+/-- Return the proper/open exchange to the chosen compactification using the
+specified constructible common-refinement comparison. No automorphism of the
+chosen middle scheme is assumed.
+Source: lem-fix-weil-operations.proof.md, paragraph 1
+(blueprint: lem-pod-semilinear-field-operation-lifts). -/
+@[irreducible] def podReindexedCompactComparison {X Y : Scheme.{u}} {f : X ⟶ Y}
+    (c : Compactification f) (gX : X ≅ X) (gY : Y ≅ Y)
+    (w : gX.hom ≫ f = f ≫ gY.hom)
+    (τ : (boundedConstructible (condensedRingObj Λ X)).ι ⋙
+        F Λ (podTransportCompactification c gX gY w) ≅
+      (boundedConstructible (condensedRingObj Λ X)).ι ⋙ F Λ c) :
+    ((boundedConstructible (condensedRingObj Λ X)).ι ⋙ F Λ c) ⋙ P Λ gY.hom ≅
+      podConstructiblePullback Λ gX.hom ⋙
+        ((boundedConstructible (condensedRingObj Λ X)).ι ⋙ F Λ c) := by
+  let s := podTransportCompactificationSquare c gX gY w
+  have : IsIso s.middle := by
+    change IsIso (𝟙 c.Z)
+    infer_instance
+  have : IsIso (squareExchange Λ s) := (square_isIso Λ s (CommSq.mk w)).2
+  let I := (boundedConstructible (condensedRingObj Λ X)).ι
+  let P₀ := podConstructiblePullback Λ gX.hom
+  let c' := podTransportCompactification c gX gY w
+  exact Functor.associator I (F Λ c) (P Λ gY.hom) ≪≫
+    Functor.isoWhiskerLeft I (asIso (squareExchange Λ s)) ≪≫
+    (Functor.associator I (P Λ gX.hom) (F Λ c')).symm ≪≫
+    Functor.isoWhiskerRight (podConstructiblePullbackInclusion Λ gX.hom).symm (F Λ c') ≪≫
+    Functor.associator P₀ I (F Λ c') ≪≫ Functor.isoWhiskerLeft P₀ τ
+
+/-- The ambient native refinement diagram, with its existing functor laws.
+Source: lem-fix-weil-operations.proof.md, paragraph 1, common refinements
+(blueprint: lem-pod-semilinear-field-operation-lifts).
+The explicit native laws avoid rebuilding their derived-category components. -/
+def podAmbientCompactificationDiagram {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    (Compactification f)ᵒᵖ ⥤ (D Λ X ⥤ D Λ Y) where
+  obj c := F Λ c.unop
+  map r := refinement Λ r.unop
+  map_id c := (refinement_id_comp Λ c.unop
+    (Compactification.Refinement.id c.unop) (Compactification.Refinement.id c.unop)).1
+  map_comp {c₁ _c₂ _c₃} r t := (refinement_id_comp Λ c₁.unop t.unop r.unop).2
+
+/-- Restrict the native diagram to the original bounded inputs by whiskering.
+Source: lem-fix-weil-operations.proof.md, paragraph 1, common refinements
+(blueprint: lem-pod-semilinear-field-operation-lifts). -/
+def podCompactificationDiagram {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    (Compactification f)ᵒᵖ ⥤
+      (BoundedConstructible (condensedRingObj Λ X) ⥤ D Λ Y) :=
+  podAmbientCompactificationDiagram Λ f ⋙
+    (Functor.whiskeringLeft (BoundedConstructible (condensedRingObj Λ X))
+      (D Λ X) (D Λ Y)).obj (boundedConstructible (condensedRingObj Λ X)).ι
+
+/-- The comparison data type, with the native ambient functors kept folded.
+Source: lem-fix-weil-operations.proof.md, paragraph 1
+(blueprint: lem-pod-semilinear-field-operation-lifts). -/
+def PodCompactificationComparisonFamily {X Y : Scheme.{u}} (f : X ⟶ Y) :=
+  ∀ c₁ c₂ : Compactification f,
+    (podCompactificationDiagram Λ f).obj (op c₁) ≅
+      (podCompactificationDiagram Λ f).obj (op c₂)
+
+/-- The four native common-refinement clauses, stated through the native diagram.
+Its objects are the original bounded-input compactification functors, and its maps
+are precisely the restricted native refinement transformations.
+Source: lem-fix-weil-operations.proof.md, paragraph 1
+(blueprint: lem-pod-semilinear-field-operation-lifts). -/
+def PodCompactificationComparisonCoherence {X Y : Scheme.{u}} {f : X ⟶ Y}
+    (τ : PodCompactificationComparisonFamily Λ f) : Prop :=
+  (∀ (c₁ c₂ d : Compactification f) (h₁ : d ⟶ c₁)
+      (h₂ : d ⟶ c₂) (K : BoundedConstructible (condensedRingObj Λ X)),
+    (τ c₁ c₂).hom.app K ≫ ((podCompactificationDiagram Λ f).map h₂.op).app K =
+      ((podCompactificationDiagram Λ f).map h₁.op).app K) ∧
+  (∀ c : Compactification f, τ c c = Iso.refl _) ∧
+  (∀ c₁ c₂ c₃ : Compactification f, τ c₁ c₂ ≪≫ τ c₂ c₃ = τ c₁ c₃) ∧
+  ∀ σ : PodCompactificationComparisonFamily Λ f,
+    (∀ (c₁ c₂ d : Compactification f) (h₁ : d ⟶ c₁)
+        (h₂ : d ⟶ c₂) (K : BoundedConstructible (condensedRingObj Λ X)),
+      (σ c₁ c₂).hom.app K ≫ ((podCompactificationDiagram Λ f).map h₂.op).app K =
+        ((podCompactificationDiagram Λ f).map h₁.op).app K) → σ = τ
+
+private theorem podRestrictedMapIsIso {C B : Type*} [Category* C] [Category* B]
+    (I : ObjectProperty C) {F G : C ⥤ B} (α : F ⟶ G)
+    (h : ∀ K, I K → IsIso (α.app K)) : IsIso (Functor.whiskerLeft I.ι α) := by
+  have : ∀ K : I.FullSubcategory,
+      IsIso ((Functor.whiskerLeft I.ι α).app K) := fun K ↦ h K.obj K.property
+  exact @NatIso.isIso_of_isIso_app _ _ _ _ _ _ _ this
+
+/-- Rational refinement is invertible on the original bounded constructible inputs.
+Source: the native rational refinement theorem, with no new hypotheses
+(blueprint: lem-pod-semilinear-field-operation-lifts).
+Proof: apply native refinement invertibility to every component; natural
+transformations with invertible components are invertible. -/
+theorem podCompactificationDiagram_map_isIso (ℓ : ℕ) [Fact ℓ.Prime]
+    (hΛ : Mon.mk Λ = Mon.mk (Profinite.padicAlgClRingObj.{u} ℓ) ∨
+      ∃ E : PadicAlgCl.FiniteIntermediateField ℓ,
+        Mon.mk Λ = Mon.mk (Profinite.continuousMapRingObj.{u} E.1))
+    (k : Type u) [Field k] [Fact (ringChar k ≠ ℓ)]
+    {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
+    (f : X ⟶ Y) [f.IsOver (Spec (.of k))]
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] {c₁ c₂ : Compactification f}
+    (r : c₁ ⟶ c₂) : IsIso ((podCompactificationDiagram Λ f).map r.op) := by
+  exact podRestrictedMapIsIso (boundedConstructible (condensedRingObj Λ X)) (refinement Λ r)
+    (fun K hK ↦ rational_refinement_isIso Λ ℓ hΛ k r K hK)
+
+/-- Construct the normalized comparison through a genuine common refinement.
+The cofiltered compactification category is proved in the source library; inverse
+refinement maps are uniquely determined by native rational refinement invertibility.
+Source: lem-fix-weil-operations.proof.md, paragraph 1, common refinements
+(blueprint: lem-pod-semilinear-field-operation-lifts). -/
+@[irreducible] def podCanonicalCompactificationComparison (ℓ : ℕ) [Fact ℓ.Prime]
+    (hΛ : Mon.mk Λ = Mon.mk (Profinite.padicAlgClRingObj.{u} ℓ) ∨
+      ∃ E : PadicAlgCl.FiniteIntermediateField ℓ,
+        Mon.mk Λ = Mon.mk (Profinite.continuousMapRingObj.{u} E.1))
+    (k : Type u) [Field k] [Fact (ringChar k ≠ ℓ)]
+    {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
+    (f : X ⟶ Y) [f.IsOver (Spec (.of k))]
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] :
+    PodCompactificationComparisonFamily Λ f :=
+  cofilteredIsoComparison (podCompactificationDiagram Λ f)
+    (fun r ↦ podCompactificationDiagram_map_isIso Λ ℓ hΛ k f r)
+
+private theorem podCofilteredComparisonCoherent
+    {C A B : Type*} [Category* C] [Category* A] [Category* B]
+    [IsCofilteredOrEmpty C] (H : Cᵒᵖ ⥤ (A ⥤ B))
+    (hH : ∀ {i j : C} (r : i ⟶ j), IsIso (H.map r.op)) :
+    (∀ (i j d : C) (u : d ⟶ i) (v : d ⟶ j) (K : A),
+      (cofilteredIsoComparison H hH i j).hom.app K ≫ (H.map v.op).app K =
+        (H.map u.op).app K) ∧
+    (∀ i, cofilteredIsoComparison H hH i i = Iso.refl _) ∧
+    (∀ i j k, cofilteredIsoComparison H hH i j ≪≫
+      cofilteredIsoComparison H hH j k = cofilteredIsoComparison H hH i k) ∧
+    ∀ σ : ∀ i j, H.obj (op i) ≅ H.obj (op j),
+      (∀ (i j d : C) (u : d ⟶ i) (v : d ⟶ j) (K : A),
+        (σ i j).hom.app K ≫ (H.map v.op).app K = (H.map u.op).app K) →
+      σ = cofilteredIsoComparison H hH := by
+  refine ⟨?_, cofilteredIsoComparison_refl H hH,
+    cofilteredIsoComparison_trans H hH, ?_⟩
+  · intro i j d u v K
+    exact congrArg (fun α : H.obj (op i) ⟶ H.obj (op d) ↦ α.app K)
+      (cofilteredIsoComparison_normalized H hH u v)
+  · intro σ hσ
+    apply cofilteredIsoComparison_unique H hH σ
+    intro i j d u v
+    apply NatTrans.ext
+    funext K
+    exact hσ i j d u v K
+
+/-- The constructed family has normalization, identity, cocycle and uniqueness.
+Source: lem-fix-weil-operations.proof.md, paragraph 1, common refinements
+(blueprint: lem-pod-semilinear-field-operation-lifts).
+Proof: normalization is common-refinement cancellation. Apply it to identity
+cones and a cone over three compactifications for identity and cocycle. Cancel
+an invertible refinement to prove uniqueness of every normalized family. -/
+theorem podCanonicalCompactificationComparison_coherent (ℓ : ℕ) [Fact ℓ.Prime]
+    (hΛ : Mon.mk Λ = Mon.mk (Profinite.padicAlgClRingObj.{u} ℓ) ∨
+      ∃ E : PadicAlgCl.FiniteIntermediateField ℓ,
+        Mon.mk Λ = Mon.mk (Profinite.continuousMapRingObj.{u} E.1))
+    (k : Type u) [Field k] [Fact (ringChar k ≠ ℓ)]
+    {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
+    (f : X ⟶ Y) [f.IsOver (Spec (.of k))]
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] :
+    PodCompactificationComparisonCoherence Λ
+      (podCanonicalCompactificationComparison Λ ℓ hΛ k f) := by
+  unfold PodCompactificationComparisonCoherence podCanonicalCompactificationComparison
+  exact podCofilteredComparisonCoherent (podCompactificationDiagram Λ f)
+    (fun r ↦ podCompactificationDiagram_map_isIso Λ ℓ hΛ k f r)
+
+/-- The normalized family exists with all four clauses on precisely the native domain.
+Source: lem-fix-weil-operations.proof.md, paragraph 1
+(blueprint: lem-pod-semilinear-field-operation-lifts).
+Proof: take the constructed cofiltered comparison and its proved coherence. -/
+theorem pod_compactification_comparison_family_exists (ℓ : ℕ) [Fact ℓ.Prime]
+    (hΛ : Mon.mk Λ = Mon.mk (Profinite.padicAlgClRingObj.{u} ℓ) ∨
+      ∃ E : PadicAlgCl.FiniteIntermediateField ℓ,
+        Mon.mk Λ = Mon.mk (Profinite.continuousMapRingObj.{u} E.1))
+    (k : Type u) [Field k] [Fact (ringChar k ≠ ℓ)]
+    {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
+    (f : X ⟶ Y) [f.IsOver (Spec (.of k))]
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] :
+    ∃ τ : PodCompactificationComparisonFamily Λ f,
+      PodCompactificationComparisonCoherence Λ τ :=
+  ⟨podCanonicalCompactificationComparison Λ ℓ hΛ k f,
+    podCanonicalCompactificationComparison_coherent Λ ℓ hΛ k f⟩
+
+/-- The native rational compact-support lift for any chosen compactification.
+Its comparison is fixed to the existing normalized common-refinement family;
+its normalization, identity and cocycle remain those of that native family.
+The scheme automorphisms may be semilinear and the models need not be separated.
+Source: lem-fix-weil-operations.proof.md, paragraph 1
+(blueprint: lem-pod-semilinear-field-operation-lifts).
+Proof: replace (i,p) by (g_X i,p g_Y inverse). The identity on its middle
+scheme gives an isomorphism square, so its specified proper/open exchange is
+invertible. The unique normalized native comparison returns to the chosen
+compactification on the original bounded constructible inputs. Compose that
+comparison, whiskered by constructible pullback, with the exchange. Apply the
+proved covariant calculation to this very composite. -/
+theorem pod_reindexed_compact_field_lift (ℓ : ℕ) [Fact ℓ.Prime]
+    (hΛ : Mon.mk Λ = Mon.mk (Profinite.padicAlgClRingObj.{u} ℓ) ∨
+      ∃ E : PadicAlgCl.FiniteIntermediateField ℓ,
+        Mon.mk Λ = Mon.mk (Profinite.continuousMapRingObj.{u} E.1))
+    (k : Type u) [Field k] [Fact (ringChar k ≠ ℓ)]
+    {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))]
+    (f : X ⟶ Y) [f.IsOver (Spec (.of k))]
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    (c : Compactification f) (gX : X ≅ X) (gY : Y ≅ Y)
+    (w : gX.hom ≫ f = f ≫ gY.hom) :
+    PodCovariantWeilLiftSpec
+      ((boundedConstructible (condensedRingObj Λ X)).ι ⋙ F Λ c)
+      (podReindexedCompactComparison Λ c gX gY w
+        (podCanonicalCompactificationComparison Λ ℓ hΛ k f
+          (podTransportCompactification c gX gY w) c)) := by
+  exact pod_covariant_field_operation_lift
+    (P := podConstructiblePullback Λ gX.hom) (Q := P Λ gY.hom)
+    ((boundedConstructible (condensedRingObj Λ X)).ι ⋙ F Λ c)
+    (podReindexedCompactComparison Λ c gX gY w
+      (podCanonicalCompactificationComparison Λ ℓ hΛ k f
+        (podTransportCompactification c gX gY w) c))
+
+/-- Semilinear Frobenius geometry and exact native condensed field transport.
+No linearity over the algebraic closure is imposed on the Frobenius automorphisms.
+The covariant operation comparisons are `pod_actual_pullback_field_lifts` and
+`pod_reindexed_compact_field_lift`; tensor and restricted Hom are included in the
+transport specifications, retaining their canonical comparisons.
+Source: lem-fix-weil-operations.proof.md, paragraph 1
+(blueprint: lem-pod-semilinear-field-operation-lifts).
+Proof: the Cartesian Frobenius-square theorem supplies the square and commutativity.
+The equation of structure maps follows from that commutativity and the fact that the
+base-changed f is over the algebraic closure. Apply exact scheme-isomorphism transport
+separately to the two geometric Frobenii. -/
+theorem semilinearFieldOperationLifts (D₀ : FiniteFieldDatum.{u})
+    (X₀ Y₀ : Over (Spec (.of D₀.k₀)))
     [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]
-    [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]
-    (f₀ : X₀ ⟶ Y₀) [IsSeparated f₀.left]
-    [LocallyOfFiniteType f₀.left] [QuasiCompact f₀.left]
-    (E : Type u) [Field E] [_root_.Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
-    (Ω : Type v) [Field Ω] [_root_.Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] :
-    IsPullback (D.geometricFrobenius X₀).hom
-      ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map f₀).left
-      ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map f₀).left
-      (D.geometricFrobenius Y₀).hom ∧
-    ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map f₀).left ≫
-        (D.geometricFrobenius Y₀).hom ≫ (D.geometricFiber Y₀).hom =
-      (D.geometricFrobenius X₀).hom ≫ (D.geometricFiber X₀).hom ∧
-    PodFieldOperationTransportSpec D l hl X₀ E Ω ∧
-    PodFieldOperationTransportSpec D l hl Y₀ E Ω := by
-  have hgeom := D.frobenius_square_cartesian X₀ Y₀ f₀
-  refine ⟨hgeom.2.2.2.2.2.1, ?_, pod_field_transport D l hl X₀ E Ω,
-    pod_field_transport D l hl Y₀ E Ω⟩
-  have hc : (D.geometricFrobenius X₀).hom ≫
-      ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map f₀).left =
-      ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map f₀).left ≫
-        (D.geometricFrobenius Y₀).hom := hgeom.2.2.2.2.1
+    [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] (f₀ : X₀ ⟶ Y₀) :
+    IsPullback (D₀.geometricFrobenius X₀).hom
+      ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D₀.k₀ D₀.k)))).map f₀).left
+      ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D₀.k₀ D₀.k)))).map f₀).left
+      (D₀.geometricFrobenius Y₀).hom ∧
+    ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D₀.k₀ D₀.k)))).map f₀).left ≫
+        (D₀.geometricFrobenius Y₀).hom ≫ (D₀.geometricFiber Y₀).hom =
+      (D₀.geometricFrobenius X₀).hom ≫ (D₀.geometricFiber X₀).hom ∧
+    PodFieldOperationTransportSpec Λ (D₀.geometricFiber X₀).left
+      (D₀.geometricFrobenius X₀) ∧
+    PodFieldOperationTransportSpec Λ (D₀.geometricFiber Y₀).left
+      (D₀.geometricFrobenius Y₀) := by
+  have hgeom := D₀.frobenius_square_cartesian X₀ Y₀ f₀
+  refine ⟨hgeom.2.2.2.2.2.1, ?_, pod_field_transport Λ _ _, pod_field_transport Λ _ _⟩
+  have hc : (D₀.geometricFrobenius X₀).hom ≫
+      ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D₀.k₀ D₀.k)))).map f₀).left =
+      ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D₀.k₀ D₀.k)))).map f₀).left ≫
+        (D₀.geometricFrobenius Y₀).hom := hgeom.2.2.2.2.1
   rw [← Category.assoc, ← hc, Category.assoc]
   congr 1
   exact ((Over.pullback (Spec.map (CommRingCat.ofHom
-    (algebraMap D.k₀ D.k)))).map f₀).w
+    (algebraMap D₀.k₀ D₀.k)))).map f₀).w
 
 end WeilConjectures
