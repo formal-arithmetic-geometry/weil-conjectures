@@ -61,11 +61,27 @@ Source: latest blueprint, trace-function convention (blueprint: def-wf-l2-norm).
   let f := closedOperator D l X₀ M x i.toRingHom hi
   (traceOfPower f r).down
 
+/-- The squared rational-point trace sum, with closed-point multiplicity d.
+For m=0 use zero; changing this one index has no effect on the limsup.
+Source: latest blueprint, first displayed formula (blueprint: def-wf-l2-norm). -/
+def traceEnergy (iota : PadicAlgCl l →+* ℂ) (M : WeilModule D l X₀) (m : ℕ) : ℝ :=
+  if m = 0 then 0 else
+    ∑ᶠ x : {x : X₀.left // x ∈ closedPoints X₀.left},
+      if localClosedPointDegree D X₀ x ∣ m then
+        (localClosedPointDegree D X₀ x : ℝ) *
+          ‖iota (closedPowerTrace D l X₀ M x (m / localClosedPointDegree D X₀ x))‖ ^ 2
+      else 0
+
 /-- The displayed extended-real supremum; ENNReal limsup permits infinite growth.
 Source: latest blueprint, second displayed formula (blueprint: def-wf-l2-norm). -/
 def weightOfEnergy (q : ℕ) (energy : ℕ → ℝ) : EReal :=
   ⨆ (β : ℝ) (_ : 0 < limsup (fun m : ℕ ↦ ENNReal.ofReal
     (energy m / (q : ℝ) ^ ((m : ℝ) * (β + 1)))) atTop), (β : EReal)
+
+/-- The L² parameter of a Weil sheaf with actual condensed coefficients.
+Source: latest blueprint, supremum formula (blueprint: def-wf-l2-norm). -/
+def l2Weight (iota : PadicAlgCl l →+* ℂ) (M : WeilModule D l X₀) : EReal :=
+  weightOfEnergy D.q (traceEnergy D l X₀ iota M)
 
 /-- Cohomology of a bounded constructible complex with its canonical induced Weil structure.
 This accepts a Weil pair in the underlying derived category, without a derived-Weil lift.

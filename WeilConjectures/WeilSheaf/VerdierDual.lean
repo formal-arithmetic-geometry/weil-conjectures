@@ -12,6 +12,21 @@ public import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
 public import WeilConjectures.WeilSheaf.TateTwist
 import WeilConjectures.WeilSheaf.Bidual
 import WeilConjectures.WeilSheaf.DerivedHomSingleResolution
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.CategoryTheory.Adjunction.Restrict
+public import WeilConjectures.Algebra.Homology.HomotopyCategory.KInjectives.KInjectiveReplacementTriangulated
+public import WeilConjectures.Algebra.Homology.SixFunctors.BifunctorHomHomotopyExactSupplement
+public import WeilConjectures.AlgebraicGeometry.Adic.AdicLisseBidualInvertible
+public import WeilConjectures.AlgebraicGeometry.Compact.CompactSupportBrownConstructibility
+public import WeilConjectures.AlgebraicGeometry.ConstantModelTorAmplitude
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.CondensedWeilPair.CondensedWeilPair
+public import WeilConjectures.SixFunctors.AdicQbarRealization.AdicQbarRealizationLegacyCompatibility
+public import WeilConjectures.SixFunctors.NativeBidualRealization.StructuralBidualInvertible
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.StrictWeilCondensed.CondensedVerdierWeilEquivariance
+public import WeilConjectures.WeilSheaf.Native.NativeGeometricHomComparison
+public import WeilConjectures.WeilSheaf.SixFunctors.WeilCompactStructureTensorComparison
+public import WeilConjectures.WeilSheaf.SmoothPurity.SmoothDualizingCohomology
+public import WeilConjectures.WeilSheaf.SmoothPurity.SmoothDualizingConcentration
 
 /-!
 # The exceptional inverse image and the Verdier dual of Weil complexes
@@ -291,6 +306,121 @@ lemma verdierDual_obj_obj (K : (WeilComplex k₀ l X)ᵒᵖ) :
     ((verdierDual k₀ l X).obj K).obj =
       (ProEtaleWeilSheaf.derivedHom k₀ l X (dualizingComplex k₀ l X).obj).obj (op K.unop.obj) :=
   rfl
+
+private theorem native_bidual_iso
+    (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] [Fact (l ≠ D.p)]
+    (T : WeilConjectures.NativeExceptionalForgetful.Space D)
+    [HasUpperShriek D.k₀ l (T.base.left ↘ Spec (CommRingCat.of D.k₀))] :
+    Nonempty (𝟭 (WeilConjectures.NativeExceptionalForgetful.W D l T) ≅
+      (verdierDual D.k₀ l T.base.left).rightOp ⋙ verdierDual D.k₀ l T.base.left) := by
+  classical
+  obtain ⟨R⟩ := WeilConjectures.AdicQbarRealization.adic_qbar_constructible_realization_legacy
+    D l (Fact.out : l ≠ D.p)
+  obtain ⟨P⟩ := WeilConjectures.NativeExceptionalForgetful.native_exceptional_forgetful D l R
+  obtain ⟨N⟩ := WeilConjectures.NativeSectionClosed.native_section_closed_forgetful D l R T
+  obtain ⟨S⟩ : Nonempty (WeilConjectures.NativeExceptionalForgetful.StructuralSystem D l T) := by
+    let : (Spec (CommRingCat.of D.k)).Over (Spec (CommRingCat.of D.k)) := specOverSpec
+    exact @WeilConjectures.ConstructibleExceptionalCoefficients.exists_system.{u, 0}
+      l _ (PadicAlgCl l) _ _ _ D (Fact.out : l ≠ D.p)
+      _ _ _ _ _ _ _ _ _ _ _ _ _
+  let c := HasCompactification.compactification
+    (WeilConjectures.NativeExceptionalForgetful.geometric D T).base.hom
+    (hf := hasCompactification_of_over (k₀ := D.k)
+      (WeilConjectures.NativeExceptionalForgetful.geometric D T).base.hom)
+  have : HasUpperShriek D.k₀ l
+      (WeilConjectures.NativeDualRealization.structureMap D T).left := by
+    change HasUpperShriek D.k₀ l (T.base.left ↘ Spec (CommRingCat.of D.k₀))
+    infer_instance
+  let A : WeilConjectures.NativeDualRealization.Datum D l R T :=
+    { exceptional := P
+      system := S
+      compactification := c
+      right := upperShriek (k₀ := D.k₀) (l := l)
+        (WeilConjectures.NativeDualRealization.structureMap D T).left
+      adjunction := derivedLowerShriekUpperShriekAdjunction (k₀ := D.k₀) (l := l)
+        (WeilConjectures.NativeDualRealization.structureMap D T).left
+      closed := N }
+  let m := N.native.homModels.nativeModel (dualizingComplex D.k₀ l T.base.left).obj
+  have h : WeilConjectures.NativeBidualRealization.Closed D l R T A := by
+    intro K
+    exact (objectProperty D.k₀ l T.base.left).prop_of_iso (m.symm.app (op K.obj))
+      (objectProperty_derivedHom_dualizingComplex D.k₀ l K)
+  let H := WeilConjectures.NativeBidualRealization.dualX D l R T A h
+  obtain ⟨q, delta, _, _, he, _⟩ :=
+    WeilConjectures.NativeBidualRealization.bidual_evaluation_realization D l R T A h
+  have hreflect : (WeilConjectures.NativeExceptionalForgetful.U D l R T).ReflectsIsomorphisms :=
+    by
+      let : HasDerivedCategory.{u + 2}
+          (WeilConjectures.AdicQbarRealization.modules l
+            (WeilConjectures.NativeExceptionalForgetful.geometric D T).base.left
+            (R.data (WeilConjectures.NativeExceptionalForgetful.geometric D T)).realization) :=
+        HasDerivedCategory.standard _
+      let efield :=
+        (IsAlgClosure.equiv D.k₀ D.k (AlgebraicClosure D.k₀)).toRingEquiv.toCommRingCatIso
+      have : IsIso (CommRingCat.ofHom
+          (IsAlgClosure.equiv D.k₀ D.k (AlgebraicClosure D.k₀)).toRingHom) := efield.isIso_hom
+      have : IsIso (WeilConjectures.NativeExceptionalForgetful.closureMap D T) := by
+        unfold WeilConjectures.NativeExceptionalForgetful.closureMap
+        infer_instance
+      let G := ProEtale.adicLowerStar l
+        (WeilConjectures.NativeExceptionalForgetful.closureMap D T)
+      have : G.IsEquivalence := ProEtale.isEquivalence_adicLowerStar _ _
+      have : G.rightDerivedFunctor.IsEquivalence :=
+        Functor.isEquivalence_of_iso G.rightDerivedFunctorIsoMapDerivedCategory.symm
+      let V := WeilConjectures.AdicQbarRealization.sectionFunctor l
+        (WeilConjectures.NativeExceptionalForgetful.geometric D T).base.left
+        (R.data (WeilConjectures.NativeExceptionalForgetful.geometric D T)).realization
+      have : V.IsEquivalence :=
+        (R.data (WeilConjectures.NativeExceptionalForgetful.geometric D T)).presentation
+      have : V.Additive :=
+        (R.data
+          (WeilConjectures.NativeExceptionalForgetful.geometric D T)).realization.sectionsAdditive
+      have : (ProEtaleWeilSheaf.nativeForget D.k₀ l T.base.left).ReflectsIsomorphisms :=
+        (ProEtaleWeilSheaf.native_closed_forgetful D.k₀ l T.base.left).2.1
+      have : Functor.ReflectsIsomorphisms
+          (WeilComplex.forget (k₀ := D.k₀) (l := l) (X := T.base.left)) := by
+        change (ObjectProperty.ι (objectProperty D.k₀ l T.base.left) ⋙
+          ProEtaleWeilSheaf.nativeForget D.k₀ l T.base.left).ReflectsIsomorphisms
+        infer_instance
+      have : Functor.IsEquivalence
+          (WeilConjectures.AdicQbarRealization.sectionDerived l
+            (WeilConjectures.NativeExceptionalForgetful.geometric D T).base.left
+            (R.data (WeilConjectures.NativeExceptionalForgetful.geometric D T)).realization) := by
+        change V.mapDerivedCategory.IsEquivalence
+        infer_instance
+      unfold WeilConjectures.NativeExceptionalForgetful.U
+      infer_instance
+  have := hreflect
+  have hi (K : WeilComplex D.k₀ l T.base.left) : IsIso (delta.app K) := by
+    have := WeilConjectures.NativeBidualRealization.isIso_commonBidual D l R T A q
+      ((WeilConjectures.NativeDualRealization.model D l R T A).obj K)
+    have hi' : IsIso ((WeilConjectures.NativeDualRealization.counit D l R T A K).hom ≫
+        (WeilConjectures.NativeExceptionalForgetful.U D l R T).map (delta.app K) ≫
+          (WeilConjectures.NativeBidualRealization.secondComparison D l R T A q h K).hom) := by
+      rw [he K]
+      infer_instance
+    have := IsIso.of_isIso_comp_left
+      (WeilConjectures.NativeDualRealization.counit D l R T A K).hom
+      ((WeilConjectures.NativeExceptionalForgetful.U D l R T).map (delta.app K) ≫
+        (WeilConjectures.NativeBidualRealization.secondComparison D l R T A q h K).hom)
+    have := IsIso.of_isIso_comp_right
+      ((WeilConjectures.NativeExceptionalForgetful.U D l R T).map (delta.app K))
+      (WeilConjectures.NativeBidualRealization.secondComparison D l R T A q h K).hom
+    exact isIso_of_reflects_iso (delta.app K)
+      (WeilConjectures.NativeExceptionalForgetful.U D l R T)
+  have : ∀ K, IsIso (delta.app K) := hi
+  have : IsIso delta := NatIso.isIso_of_isIso_app delta
+  have : (ObjectProperty.ι (objectProperty D.k₀ l T.base.left)).Full :=
+    (objectProperty D.k₀ l T.base.left).fullyFaithfulι.full
+  have : (ObjectProperty.ι (objectProperty D.k₀ l T.base.left)).Faithful :=
+    (objectProperty D.k₀ l T.base.left).fullyFaithfulι.faithful
+  let e : H ≅ verdierDual D.k₀ l T.base.left :=
+    Functor.fullyFaithfulCancelRight (ObjectProperty.ι (objectProperty D.k₀ l T.base.left))
+      (Functor.isoWhiskerLeft (ObjectProperty.ι (objectProperty D.k₀ l T.base.left)).op m)
+  let e' : H.rightOp ≅ (verdierDual D.k₀ l T.base.left).rightOp :=
+    Functor.isoWhiskerLeft (CategoryTheory.opOp _) (NatIso.op e.symm)
+  exact ⟨asIso delta ≪≫ Functor.isoWhiskerLeft H.rightOp e ≪≫
+    Functor.isoWhiskerRight e' (verdierDual D.k₀ l T.base.left)⟩
 
 /-- **Verdier biduality** (blueprint: `det-pd-biduality-coefficients`, "evaluation and biduality
 descend, giving a natural isomorphism `K ≅ D_{X,ℚ̄_ℓ} D_{X,ℚ̄_ℓ} K`"). -/
@@ -601,6 +731,19 @@ theorem nonempty_tensorLisse_dual_iso_derivedHom (P : WeilSheaf k₀ l X) (hP : 
   let e' := (WeilSheaf.objectProperty k₀ l X).ι.mapIso e
   let h := (ProEtaleWeilSheaf.ihomBifunctor k₀ l X).mapIso e'.op
   exact ⟨(Functor.rightDerivedFunctorNatIso h).app N.obj ≪≫ d.symm⟩
+
+/-- Naturality of `β : 𝟭 ⟶ Gᵒᵖ ⋙ G`, transported to a square whose corners and edges are only
+known up to definitional equality (stated by `rfl`-proved equalities and `HEq`s, for an abstract
+`G`, so that applying it never compares a concrete `G` with another functor). -/
+private theorem natTrans_rightOp_comp_naturality_transport {C : Type*} [Category C]
+    (G : Cᵒᵖ ⥤ C) (β : 𝟭 C ⟶ G.rightOp ⋙ G) {X Y Z₁ Z₂ : C} (f : X ⟶ Y)
+    (aL : Y ⟶ Z₂) (aK : X ⟶ Z₁) (m : Z₁ ⟶ Z₂)
+    (h₁ : Z₁ = G.obj (op (G.obj (op X)))) (h₂ : Z₂ = G.obj (op (G.obj (op Y))))
+    (hL : HEq aL (β.app Y)) (hK : HEq aK (β.app X)) (hm : HEq m (G.map (G.map f.op).op)) :
+    f ≫ aL = aK ≫ m := by
+  subst h₁ h₂
+  rw [eq_of_heq hL, eq_of_heq hK, eq_of_heq hm]
+  exact β.naturality f
 
 end Lisse
 

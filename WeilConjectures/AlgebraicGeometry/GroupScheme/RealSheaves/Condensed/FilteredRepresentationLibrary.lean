@@ -8,6 +8,8 @@ module
 public import WeilConjectures.RepresentationTheory.CompositionFactors
 public import WeilConjectures.RepresentationTheory.ExteriorPowerFiltration
 public import WeilConjectures.RepresentationTheory.Dual
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.RealSheaves.Condensed.CommonGradedRepresentationFactors
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.RealSheaves.Condensed.FilteredRepresentationFactors
 
 /-!
 # Tensor and exterior powers of filtered Weil representations
@@ -153,6 +155,102 @@ theorem filteredRepresentationLibrary
           Function.Bijective c →
             ∃ a : k, a ≠ 0 ∧
               c = algebraMap k (Representation.IntertwiningMap σ σ) a)) := by
-  sorry
+  classical
+  have ht := s.hasGradedPieces_tprod s'
+  have hext := s.hasGradedPieces_exteriorPower r
+  have hs : Representation.HasGradedPieces s.semisimplification
+      (fun i : Fin s.length ↦ Representation.EquivTo (s.factor i)) := by
+    refine (Representation.hasGradedPieces_of_monotone
+      (fun i : Fin (s.length + 1) ↦ Representation.directSumFiltration
+        (fun j ↦ s.factor j) i)
+      (Fin.monotone_iff_le_succ.2 fun i ↦
+        Representation.directSumFiltration_le_succ _ i)
+      (Representation.directSumFiltration_zero _)
+      (Representation.directSumFiltration_eq_top _)).mono ?_
+    exact fun i {_} {_} {_} _ hi ↦
+      hi.trans (Representation.directSumFiltrationEquiv (fun j ↦ s.factor j) i).symm
+  have hs' : Representation.HasGradedPieces s'.semisimplification
+      (fun i : Fin s'.length ↦ Representation.EquivTo (s'.factor i)) := by
+    refine (Representation.hasGradedPieces_of_monotone
+      (fun i : Fin (s'.length + 1) ↦ Representation.directSumFiltration
+        (fun j ↦ s'.factor j) i)
+      (Fin.monotone_iff_le_succ.2 fun i ↦
+        Representation.directSumFiltration_le_succ _ i)
+      (Representation.directSumFiltration_zero _)
+      (Representation.directSumFiltration_eq_top _)).mono ?_
+    exact fun i {_} {_} {_} _ hi ↦
+      hi.trans (Representation.directSumFiltrationEquiv (fun j ↦ s'.factor j) i).symm
+  have hts : Representation.HasGradedPieces
+      (s.semisimplification.tprod s'.semisimplification)
+      (fun p : Fin s.length × Fin s'.length ↦
+        Representation.EquivTo ((s.factor p.1).tprod (s'.factor p.2))) := by
+    have h := (hs.tprod_right s'.semisimplification).trans
+      (R := fun i j ↦ Representation.EquivTo ((s.factor i).tprod (s'.factor j)))
+      (fun _ _ ↦ Representation.isInvariant_equivTo _)
+      (fun i {_} {_} {_} _ hi ↦ (hs'.tprod_left (s.factor i)).of_equiv
+        (fun _ ↦ Representation.isInvariant_equivTo _) hi.equiv.symm)
+    exact h.reindex (Equiv.sigmaEquivProd _ _)
+  have hes : Representation.HasGradedPieces (s.semisimplification.exteriorPower r)
+      (fun n : {n : Fin s.length → ℕ // ∑ i, n i = r} ↦
+        Representation.EquivTo
+          (Representation.piTprodExteriorPower (fun i ↦ s.factor i) n.1)) := by
+    refine (Representation.hasGradedPieces_exteriorPower_of_monotone s.length
+      s.semisimplification
+      (fun i : Fin (s.length + 1) ↦ Representation.directSumFiltration
+        (fun j ↦ s.factor j) i)
+      (Fin.monotone_iff_le_succ.2 fun i ↦
+        Representation.directSumFiltration_le_succ _ i)
+      (Representation.directSumFiltration_zero _)
+      (Representation.directSumFiltration_eq_top _) r).mono ?_
+    exact fun n {_} {_} {_} _ hn ↦ hn.trans
+      (Representation.Equiv.piTprodExteriorPowerCongr
+        (fun i ↦ (Representation.directSumFiltrationEquiv (fun j ↦ s.factor j) i).symm)
+        (fun _ ↦ rfl))
+  have htc := commonGradedRepresentationFactors
+    (fun p : Fin s.length × Fin s'.length ↦ (s.factor p.1).tprod (s'.factor p.2)) ht hts
+  have hfin : ∀ n : {n : Fin s.length → ℕ // ∑ i, n i = r},
+      FiniteDimensional k (⨂[k] i,
+        ⋀[k]^(n.1 i)
+          ((s.series i.succ).toSubmodule ⧸
+            (s.series i.castSucc).toSubmodule.comap
+              (s.series i.succ).toSubmodule.subtype)) := by
+    intro n
+    exact Module.Finite.of_basis (Basis.piTensorProduct fun i ↦
+      Module.finBasis k (⋀[k]^(n.1 i)
+        ((s.series i.succ).toSubmodule ⧸
+          (s.series i.castSucc).toSubmodule.comap
+            (s.series i.succ).toSubmodule.subtype)))
+  have hec := commonGradedRepresentationFactors
+    (fun n : {n : Fin s.length → ℕ // ∑ i, n i = r} ↦
+      Representation.piTprodExteriorPower (fun i ↦ s.factor i) n.1) hext hes
+  refine ⟨⟨ρ.exists_compositionSeries, ρ'.exists_compositionSeries⟩, ht, hext,
+    ?_, ?_, ?_, Representation.CompositionSeries.jordanHolder,
+    Representation.CompositionSeries.jordanHolder, htc.1, hec.1, htc.2, hec.2, ?_, ?_⟩
+  · intro n hn
+    exact (Representation.nontrivial_piTensorProduct_exteriorPower_iff n.1).2 hn
+  · intro t c
+    obtain ⟨e, he⟩ := filteredRepresentationFactors
+      (fun p : Fin s.length × Fin s'.length ↦
+        (s.factor p.1).tprod (s'.factor p.2)) ht t c
+    exact ⟨e, he.2⟩
+  · intro t c
+    obtain ⟨e, he⟩ := filteredRepresentationFactors
+      (fun n : {n : Fin s.length → ℕ // ∑ i, n i = r} ↦
+        Representation.piTprodExteriorPower (fun i ↦ s.factor i) n.1) hext t c
+    exact ⟨e, he.2⟩
+  · intro X _ _ σ ι Y _ _ τ h
+    exact h.dual
+  · intro X _ _ _ σ hσ
+    have := hσ
+    refine ⟨fun c ↦ Representation.IsIrreducible.bijective_or_eq_zero c, ?_⟩
+    intro c hc
+    obtain ⟨a, ha⟩ :=
+      Representation.IsIrreducible.algebraMap_intertwiningMap_bijective_of_isAlgClosed.2 c
+    refine ⟨a, ?_, ha.symm⟩
+    intro hzero
+    have hc0 : c = 0 := by simpa [hzero] using ha.symm
+    have : Subsingleton X := ⟨fun x y ↦ hc.1 (by simp [hc0])⟩
+    have := hσ.nontrivial
+    exact false_of_nontrivial_of_subsingleton X
 
 end RealSheaves.Condensed

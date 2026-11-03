@@ -156,6 +156,15 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condense
 public import WeilConjectures.AlgebraicGeometry.IntegralCtfEqualsBc
 public import WeilConjectures.Algebra.Homology.ExtensionKFlatQuasiIso
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsRegularEnd
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import WeilConjectures.SixFunctors.FrobeniusSquareExchange.FrobeniusSquareExchange
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.AdmissibleTensorConstructibility
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntTensorProjection
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixCtf
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixFiniteGeneration
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixNonfiniteGeneration
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixPerfectExtension
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixTensorComparison
 
 /-! # Native Frobenius transport and coefficient reduction
 
@@ -221,7 +230,19 @@ theorem sectionAction_compatible {B B' : ScalarSixRing.{u}} (a : B ⟶ B')
         ((sectionAction B' X) (MonObj.Γ.map (R := B.X) (S := B'.X) a.hom.hom b)).unop ≫
           (Mod.extendScalarsObjRegularIso
             (coefficientMap (Λ := B.X) (Λ' := B'.X) a.hom.hom X)).inv := by
-  sorry
+  intro b
+  have hs : MonObj.Γ.map (coefficientMap (Λ := B.X) (Λ' := B'.X) a.hom.hom X)
+        (condensedRingScalarSections B.X X b) =
+      condensedRingScalarSections B'.X X
+        (MonObj.Γ.map (R := B.X) (S := B'.X) a.hom.hom b) := by
+    ext1
+    simp only [MonObj.Γ.map_hom, condensedRingScalarSections,
+      MonObj.Γ.mapFunctor_hom, Functor.map_comp, Category.assoc]
+  change _ ≫ (Mod.extendScalars _).map
+      (Mod.regularEndRingHom (condensedRingScalarSections B.X X b)) =
+    Mod.regularEndRingHom (condensedRingScalarSections B'.X X
+      (MonObj.Γ.map (R := B.X) (S := B'.X) a.hom.hom b)) ≫ _
+  rw [Mod.extendScalarsObjRegularIso_inv_comp_map, hs]
 
 set_option maxHeartbeats 800000 in
 -- Elaborating the native scalar-section comparison requires the full derived interfaces.
@@ -250,7 +271,8 @@ objects and maps of the two module-valued functors agree; the remaining fields a
 theorem pointSections_eq_native (D : FiniteFieldDatum.{u}) (B : ScalarSixRing.{u}) :
     condensedRingCoefficientSections B.X (Spec (.of D.k)) =
       NativeCondensedPoint.sections B.X D.k := by
-  sorry
+  unfold condensedRingCoefficientSections NativeCondensedPoint.sections coyonedaSections
+  congr 2
 
 attribute [local instance] ModuleCat.extendScalars_preservesKFlatQuasiIso
 

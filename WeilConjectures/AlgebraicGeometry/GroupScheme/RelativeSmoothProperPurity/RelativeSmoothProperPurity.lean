@@ -9,6 +9,13 @@ public import Mathlib.Algebra.CharP.CharAndCard
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.NativeL2.L2NativePunctualWeights
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.RelativeCurve.RelativeCurvePunctual
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperLowerShriek
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.RelativeSmoothProperPurity.ProperDirectImageUpperWeight
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.RelativeSmoothProperPurity.RelativeProperComparisonWeil
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.RelativeSmoothProperPurity.SmoothProperLisseCohomology
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.RelativeSmoothProperPurity.SmoothProperReciprocalWeight
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
+public import WeilConjectures.CategoryTheory.Preadditive.FinitePowerCokernel
+public import WeilConjectures.PointCount
 
 /-!
 # Relative smooth-proper purity
@@ -105,6 +112,90 @@ end Lifts
 end RelativeSmoothProperPurity
 
 open CondensedRing
+
+private lemma lowerStar_negative
+    (M : Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ell) X.left))
+    (hK : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ell) X.left)
+      ((DerivedCategory.singleFunctor _ 0).obj M))
+    (i : ℤ) (hi : i < 0) :
+    IsZero ((DerivedCategory.homologyFunctor _ i).obj
+      (((boundedConstructibleLowerStar ell f).obj
+        ⟨(DerivedCategory.singleFunctor _ 0).obj M, hK⟩).obj)) := by
+  have := Functor.isGE_rightDerivedFunctor_obj_singleFunctor
+    (lowerStar (Profinite.padicAlgClRingObj ell) f.left) M
+  have hz : IsZero ((DerivedCategory.homologyFunctor _ i).obj
+      ((lowerStar (Profinite.padicAlgClRingObj ell) f.left).rightDerivedFunctor.obj
+        ((DerivedCategory.singleFunctor _ 0).obj M))) :=
+    DerivedCategory.isZero_of_isGE _ 0 i hi
+  exact hz.of_iso
+    ((DerivedCategory.homologyFunctor _ i).mapIso
+      ((boundedConstructibleLowerStarCompatibility ell f).app
+        ⟨(DerivedCategory.singleFunctor _ 0).obj M, hK⟩))
+
+private theorem map_weil_morphism {C E : Type*} [Category* C] [Category* E]
+    {P : C ⥤ C} {Q : E ⥤ E} {H : C ⥤ E} (e : H ⋙ Q ≅ P ⋙ H)
+    (M N : Endofunctor.IsoAlgebra P) (a : M.carrier ⟶ N.carrier)
+    (ha : P.map a ≫ N.str.hom = M.str.hom ≫ a) :
+    Q.map (H.map a) ≫ ((Endofunctor.IsoAlgebra.mapOfNatIso e).obj N).str.hom =
+      ((Endofunctor.IsoAlgebra.mapOfNatIso e).obj M).str.hom ≫ H.map a := by
+  let f : M ⟶ N := ⟨⟨a, ha⟩⟩
+  exact ((Endofunctor.IsoAlgebra.mapOfNatIso e).map f).hom.h
+
+private theorem closed_eigenvalue_ne_zero (D : FiniteFieldDatum.{u}) (ell : ℕ)
+    [Fact ell.Prime] (X₀ : Over (Spec (.of D.k₀)))
+    [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]
+    (M : NativeL2.WeilModule D ell X₀)
+    (x : {x : X₀.left // x ∈ closedPoints X₀.left})
+    (j : X₀.left.residueField x.val →+* D.k)
+    (hj : j.comp (X₀.hom.residueFieldAlgebraMap x.val) = algebraMap D.k₀ D.k)
+    (α : ULift.{u + 1} (PadicAlgCl ell))
+    (hα : Module.End.HasEigenvalue (NativeL2.closedOperator D ell X₀ M x j hj).hom α) :
+    α.down ≠ 0 := by
+  obtain ⟨v, hv⟩ := hα.exists_hasEigenvector
+  intro hzero
+  have ha : α = 0 := ULift.ext _ _ hzero
+  have he := hv.apply_eq_smul
+  rw [ha, zero_smul] at he
+  have hIso : IsIso (NativeL2.closedOperator D ell X₀ M x j hj) := by
+    unfold NativeL2.closedOperator NativeCondensedModule.operator
+    infer_instance
+  exact hv.2 ((asIso (NativeL2.closedOperator D ell X₀ M x j hj)).toLinearEquiv.injective
+    (he.trans (map_zero _).symm))
+
+private theorem norm_eq_of_inverse_bound {K : Type*} [Field K]
+    (ι : K →+* ℂ) (α : K) (hα : α ≠ 0) (q : ℝ) (hq : 0 < q) (v : ℝ)
+    (hu : ‖ι α‖ ≤ q ^ (v / 2))
+    (hl : ‖ι α⁻¹‖ ≤ q ^ (-v / 2)) : ‖ι α‖ = q ^ (v / 2) := by
+  have hn : 0 < ‖ι α‖ := norm_pos_iff.mpr ((map_ne_zero ι).2 hα)
+  have hp : 0 < q ^ (v / 2) := Real.rpow_pos_of_pos hq _
+  have he : -v / 2 = -(v / 2) := by ring
+  rw [map_inv₀, norm_inv, he, Real.rpow_neg hq.le] at hl
+  exact le_antisymm hu ((inv_le_inv₀ hn hp).mp hl)
+
+private lemma lisse_of_isZero (ell : ℕ) [Fact ell.Prime] {X : Scheme.{u}}
+    {M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+      (condensedRingObj (Profinite.padicAlgClRingObj ell) X)}
+    (hM : IsZero M) : IsLisseCoefficientModule (Profinite.padicAlgClRingObj ell) M := by
+  exact (isLocallyFree_iff M).1
+    (isLocallyFree_of_isFree ⟨0, ⟨hM.iso (isZero_biproduct_fin_zero _)⟩⟩)
+
+private lemma pure_of_isZero (D : FiniteFieldDatum.{u}) (ell : ℕ) [Fact ell.Prime]
+    (X₀ : Over (Spec (.of D.k₀)))
+    [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]
+    (M : NativeL2.WeilModule D ell X₀) (hM : IsZero M.carrier)
+    (ι : PadicAlgCl ell →+* ℂ) (w : ℝ) : NativeL2.Pure D ell X₀ M ι w := by
+  intro x j hj α hα
+  have : (NativeCondensedModule.pointSections ell D.k).Additive := by
+    unfold NativeCondensedModule.pointSections
+    infer_instance
+  have hF : IsZero (NativeCondensedModule.fibre ell D M.carrier
+      (NativeCondensedModule.localClosedPoint D X₀ x j hj)) :=
+    (NativeCondensedModule.pointSections ell D.k).map_isZero
+      ((upperStar (Profinite.padicAlgClRingObj ell) _).map_isZero hM)
+  have := ModuleCat.subsingleton_of_isZero hF
+  obtain ⟨v, hv⟩ := hα.exists_hasEigenvector
+  exact (hv.2 (Subsingleton.elim v 0)).elim
 
 /-- Relative smooth-proper purity for the pulled-back condensed Qbar coefficients.
 

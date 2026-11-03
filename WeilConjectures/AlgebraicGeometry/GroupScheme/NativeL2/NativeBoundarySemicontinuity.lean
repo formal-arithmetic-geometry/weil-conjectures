@@ -8,6 +8,15 @@ module
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.NativeL2.RealWeights
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.NativeL2.NativeL2MiddleImage
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
+public import Mathlib.Algebra.Order.Archimedean.Real.Basic
+public import Mathlib.Analysis.Complex.Polynomial.Basic
+public import Mathlib.Analysis.Normed.Ring.InfiniteSum
+public import Mathlib.Analysis.SpecialFunctions.Log.Basic
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.NativeL2.NativeBoundaryAnalyticComparison
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.NativeL2.NativeMiddleTensorPowerEigenvalue
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.NativeL2.NativeTensorPunctualWeights
+public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Weights
+public import WeilConjectures.Mathlib.Analysis.Analytic.ConvergenceRadius
 
 /-! # Boundary semicontinuity of punctual weights
 
@@ -27,6 +36,39 @@ universe u
 open CategoryTheory AlgebraicGeometry AlgebraicGeometry.ProEtale
 
 namespace WeilConjectures.NativeL2
+
+private theorem middleWeilImage_hasPunctualWeightsAtMost_add_two
+    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
+    {U₀ X₀ : Over (Spec (.of D.k₀))}
+    [LocallyOfFiniteType U₀.hom] [QuasiCompact U₀.hom]
+    [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] [IsSeparated X₀.hom]
+    [SmoothOfRelativeDimension 1 X₀.hom] [GeometricallyConnected X₀.hom]
+    (j₀ : U₀ ⟶ X₀) [IsOpenImmersion j₀.left] [IsDominant j₀.left]
+    (M : WeilModule D l U₀)
+    (hM : IsLisseCoefficientModule (Profinite.padicAlgClRingObj l) M.carrier)
+    (ι : PadicAlgCl l →+* ℂ) (a : ℝ)
+    (ha : HasPunctualWeightsAtMost D l U₀ M ι a) :
+    HasPunctualWeightsAtMost D l X₀ (middleWeilImage D l j₀ M) ι (a + 2) := by
+  intro x i hi α hα
+  obtain ⟨N, C, L, hidentity, hdisc⟩ :=
+    middleLocalFactor_analyticComparison D l hl j₀ M hM ι a ha x i hi
+  have hnonzero (z : ℂ) (hz : ‖z‖ < (D.q : ℝ) ^ (-(a / 2 + 1))) :
+      (middleLocalFactor D l hl j₀ M hM x i hi ι).eval z ≠ 0 := by
+    obtain ⟨hL, hC, hsum⟩ := hdisc z hz
+    exact PowerSeries.boundary_polynomial_ne_zero _ N C L z hidentity hL hC hsum
+  obtain ⟨hd, hcard⟩ := closedPoint_cardinality D x
+  have hq : 1 < D.q := by
+    rw [← D.card_base]
+    exact (Finite.one_lt_card_iff_nontrivial (α := D.k₀)).mpr inferInstance
+  have hα0 : α.down ≠ 0 := by
+    intro hz
+    exact eigenvalue_ne_zero D l j₀ M x i hi α hα (by
+      apply ULift.ext
+      exact hz)
+  have hbound := PowerSeries.boundary_weight_le_add_two_of_no_zero
+    ι D.q _ hq hd α.down hα0 a (middleLocalFactor D l hl j₀ M hM x i hi ι)
+    (middleLocalFactor_factor D l hl j₀ M hM x i hi ι α hα) hnonzero
+  rwa [← hcard] at hbound
 
 /-- Ordinary middle extension preserves a punctual upper bound at every closed point.
 Source: latest blueprint, sk-p-real-semi, statement and complete proof
@@ -70,6 +112,20 @@ theorem middleWeilImage_hasPunctualWeightsAtMost
     (ι : PadicAlgCl l →+* ℂ) (a : ℝ)
     (_ha : HasPunctualWeightsAtMost D l U₀ M ι a) :
     HasPunctualWeightsAtMost D l X₀ (middleWeilImage D l j₀ M) ι a := by
-  sorry
+  have : IsSeparated U₀.hom := by
+    rw [← j₀.w]
+    infer_instance
+  intro x i hi α hα
+  apply weight_le_of_all_pow_weight_le ι (Nat.card (X₀.left.residueField x.val))
+    α.down a 2
+  intro k hk
+  obtain ⟨n, rfl⟩ := Nat.exists_eq_succ_of_ne_zero (Nat.ne_of_gt hk)
+  have hLis := (positiveWeilTensorPower_properties D l U₀ M _hM n).1
+  have hweights := positiveWeilTensorPower_hasPunctualWeightsAtMost
+    D l _hl U₀ M _hM ι a _ha n
+  have heigen := middleWeilImage_tensorPower_hasEigenvalue
+    D l _hl j₀ M _hM x i hi α hα n
+  exact middleWeilImage_hasPunctualWeightsAtMost_add_two
+    D l _hl j₀ _ hLis ι _ hweights x i hi _ heigen
 
 end WeilConjectures.NativeL2

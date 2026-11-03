@@ -6,6 +6,17 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.CondensedWeilPointFlags.CondensedPointWeilFlagsStatement
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.CondensedWeilPointFlags.CondensedPointClosedGeometry
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.CondensedWeilPointFlags.CondensedPointFreeConstructible
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.CondensedWeilPointFlags.CondensedPointFreeWeilAutomorphism
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.CondensedWeilPointFlags.CondensedPointWeilMatrixCalculus
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.CondensedWeilPointFlags.CondensedPointWeilPullbackMatrix
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.CondensedWeilPointFlags.CondensedPointWeilScalarSpectrum
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.CondensedWeilPointFlags.CondensedPointWeilTriangularFlag
+public import WeilConjectures.DeligneLaumon.CondensedWeilPointFlags.WeilFlagBlockEquations
+public import WeilConjectures.DeligneLaumon.CondensedWeilPointFlags.WeilFlagCoordinateSplitting
+public import WeilConjectures.DeligneLaumon.CondensedWeilPointFlags.WeilFlagLeadingBlocks
+public import WeilConjectures.DeligneLaumon.CondensedWeilPointFlags.WeilFlagTriangularBasis
 
 /-! # Constructible native condensed Weil flags from matrix data
 
@@ -89,6 +100,41 @@ theorem flag_filtration_data_embedding (D : FiniteFieldDatum.{u}) (l : ℕ) [Fac
             (fun _ _ ↦ (alpha : PadicAlgCl l)) ∧
           NativeL2.Pure D l (pointModel D) (cokernel (f j)) iota
             (2 * Real.logb (D.q : ℝ) ‖iota (alpha : PadicAlgCl l)‖) := by
-  sorry
+  classical
+  have : IsAlgClosed (PadicAlgCl l) := IsAlgClosure.isAlgClosed ℚ_[l]
+  obtain ⟨basis, hupper, hdiag⟩ := exists_triangular_basis_units d A
+  have hblocks := leading_blocks_isUnit
+    (LinearMap.toMatrix basis basis A.toLinearMap) hupper hdiag
+  obtain ⟨hbij, hcomp, hid, hiso⟩ := point_matrix_calculus D l
+  have blockWeil : ∀ (j : ℕ) (hj : j ≤ d),
+      ∃ (N : NativeL2.WeilModule D l (pointModel D)) (b : N.carrier ≅ free D l j),
+        frobeniusMatrix D l N b = (LinearMap.toMatrix basis basis A.toLinearMap).submatrix
+          (Fin.castLE hj) (Fin.castLE hj) := by
+    intro j hj
+    obtain ⟨t, ht⟩ := hiso j _ (hblocks j hj)
+    exact ⟨freeWeilObject D l j t, Iso.refl _, (freeWeilObject_matrix D l j t).trans ht⟩
+  obtain ⟨G, f, hzero, hlast, hfree, hmono, hquot⟩ := triangular_basis_flag D l _hl M d e A
+    _hA basis hupper hdiag hblocks
+    (leading_block_equations _ hupper) coordinate_split_equations blockWeil hbij hcomp hid
+    (fun a b f ↦ point_pullback_matrix_fixed D l _ f)
+  refine ⟨G, f, hzero, hlast, ?_, hfree, hmono, ?_⟩
+  · intro j
+    obtain ⟨b⟩ := hfree j
+    exact point_free_constructible D l j.val (G j).carrier b
+  · intro j
+    obtain ⟨alpha, b, _, hb⟩ := hquot j
+    refine ⟨point_free_constructible D l 1 _ b, alpha, b, hb, ?_⟩
+    intro x i hi beta hbeta
+    have heigen := scalar_matrix_local_eigenvalue D l _hl (cokernel (f j))
+      alpha b hb x i hi beta hbeta
+    rw [heigen, (point_closed_geometry D x).1]
+    have hq : 1 < D.q := by
+      rw [D.cardinality_eq]
+      exact one_lt_pow₀ D.prime.one_lt (by have := D.exponent_pos; omega : D.a ≠ 0)
+    have hqr : (1 : ℝ) < D.q := by exact_mod_cast hq
+    have ha : 0 < ‖iota (alpha : PadicAlgCl l)‖ :=
+      norm_pos_iff.mpr ((map_ne_zero iota).mpr (Units.ne_zero alpha))
+    rw [mul_div_cancel_left₀ _ (by norm_num : (2 : ℝ) ≠ 0)]
+    exact (Real.rpow_logb (by linarith) (ne_of_gt hqr) ha).symm
 
 end WeilConjectures.CondensedWeilPointFlags

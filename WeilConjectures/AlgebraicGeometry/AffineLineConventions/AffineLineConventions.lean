@@ -60,6 +60,25 @@ def IsLisse {D : WeilConjectures.FiniteFieldDatum.{u}} {l : ℕ} [Fact l.Prime]
     (F : WeilSheaf D l U₀) : Prop :=
   IsLisseCoefficientModule (Profinite.padicAlgClRingObj l) F.obj.carrier
 
+/-- The upper-bound variant of punctual purity: every eigenvalue `α` of the local geometric
+Frobenius at every closed point `x` (for every lift of its residue field to `k`) satisfies
+`|ι α| ≤ q_x^{w/2}`.  This is the displayed purity condition of
+`WeilConjectures.NativeL2.Pure` with equality replaced by `≤`, a direct pointwise
+definition; it is not the filtration notion `WeilConjectures.NativeL2.Mixed`.
+Pure of weight `w` is `WeilConjectures.NativeL2.Pure D l U₀ F.obj ι w`.
+Source: `rem-dl-a1-conventions.md`, weight paragraph.
+(blueprint: sk-d-dl-a1-setup). -/
+def HasPunctualWeightsAtMost {D : WeilConjectures.FiniteFieldDatum.{u}} {l : ℕ}
+    [Fact l.Prime] {U₀ : Over (Spec (.of D.k₀))} [LocallyOfFiniteType U₀.hom] [QuasiCompact U₀.hom]
+    (F : WeilSheaf D l U₀) (iota : PadicAlgCl l →+* ℂ) (w : ℝ) : Prop :=
+  ∀ (x : {x : U₀.left // x ∈ closedPoints U₀.left})
+    (i : U₀.left.residueField x.val →+* D.k)
+    (hi : i.comp (U₀.hom.residueFieldAlgebraMap x.val) = algebraMap D.k₀ D.k)
+    (α : ULift.{u + 1} (PadicAlgCl l)),
+    Module.End.HasEigenvalue
+        (WeilConjectures.NativeL2.closedOperator D l U₀ F.obj x i hi).hom α →
+      ‖iota α.down‖ ≤ (Nat.card (U₀.left.residueField x.val) : ℝ) ^ (w / 2)
+
 /-- Geometric constancy: on every connected open of the geometric fibre, the underlying
 condensed module is a finite direct sum of the coefficient unit.  The Weil structure is
 retained by `F`, so its Frobenius module can remain nontrivial.

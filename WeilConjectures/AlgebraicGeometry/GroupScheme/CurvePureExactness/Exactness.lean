@@ -75,7 +75,19 @@ therefore gives the square, with no geometric finiteness hypothesis. -/
 theorem frobeniusSquare {X₀ Y₀ : Over (Spec (.of D.k₀))} (f₀ : X₀ ⟶ Y₀) :
     CommSq (frobenius D X₀).hom (geometricMap D f₀)
       (geometricMap D f₀) (frobenius D Y₀).hom := by
-  sorry
+  let := Fintype.ofFinite D.k₀
+  refine ⟨?_⟩
+  apply pullback.hom_ext
+  · simp only [Category.assoc, geometricMap, Over.pullback_map_left, pullback.lift_fst]
+    simp only [← Category.assoc, frobenius]
+    rw [(D.galoisMap_projections _ _).1]
+    rw [Category.assoc, (D.galoisMap_projections _ _).1]
+    simp only [pullback.lift_fst]
+  · simp only [Category.assoc, geometricMap, Over.pullback_map_left, pullback.lift_snd]
+    simp only [frobenius]
+    rw [(D.galoisMap_projections _ _).2]
+    rw [(D.galoisMap_projections _ _).2]
+    rw [← Category.assoc, pullback.lift_snd]
 
 /-- Ordinary direct image with its canonical Frobenius base-change mate. On finite-type
 models its objects are exactly NativeL2.middleWeilImage, with the same carrier and maps.

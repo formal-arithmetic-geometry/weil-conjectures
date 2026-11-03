@@ -15,6 +15,8 @@ public import WeilConjectures.AlgebraicGeometry.CondensedFourierKernel
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.CondensedRealified.CondensedRealifiedKernel
 public import WeilConjectures.DeligneLaumon.CondensedWeil.CondensedOpenClosedLocalizationMapsCore
 public import WeilConjectures.AlgebraicGeometry.CondensedGenericWeil.ConstituentNonexceptional
+public import WeilConjectures.AlgebraicGeometry.CondensedFourierPerverse.ZeroExtensionComparisonBounds
+public import WeilConjectures.AlgebraicGeometry.CondensedFourierPerverse.ZeroExtensionComparisonStructural
 
 /-!
 # Zero-extension comparison for the condensed Fourier--Deligne transform
@@ -232,6 +234,10 @@ theorem zeroExtensionComparison
     ∃ C : CondensedFourierCorrection D l j₀ j₁ M M' ψ c,
       IsLisseCoefficientModule (Profinite.padicAlgClRingObj l) C.seq.X₁.carrier ∧
       HasClosedOperatorWeightsAtMost D l C.seq.X₁ ι w := by
-  sorry
+  obtain ⟨C, hC⟩ := zeroExtensionComparison_structural D l hℓ ψ hψ j₀ j₁ M hM0
+    hMsimple hne M' c hFT ι hw
+  obtain ⟨hl, hwC⟩ := zeroExtensionComparison_bounds D l hℓ ψ hψ j₀ j₁ M hM0
+    hMsimple hne M' c hFT ι hw C hC
+  exact ⟨C, hl, hwC⟩
 
 end AlgebraicGeometry.ProEtale.CondensedFourierPerverse

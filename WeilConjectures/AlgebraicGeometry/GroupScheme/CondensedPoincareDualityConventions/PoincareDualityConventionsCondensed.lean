@@ -23,6 +23,14 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatib
 public import WeilConjectures.AlgebraicGeometry.Completed.CompletedCondensedCoefficients
 public import WeilConjectures.NumberTheory.Padics.FiniteCoefficientFields
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit
+public import WeilConjectures.AlgebraicGeometry.CondensedGeometricPoint.CondensedGeometricPointPerfectGeneral
+public import WeilConjectures.AlgebraicGeometry.FiniteCoefficientDescentTwoColimitStatement
+public import WeilConjectures.AlgebraicGeometry.IntegralCtfEqualsBc
+public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect.LocalRing
+public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect.PerfectCohomologyAssembly
+public import WeilConjectures.CategoryTheory.DerivedCategory.ProperBaseChange.ScalarPerfectCohomologyAndPidModels
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMapGlobalSections
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.PadicAlgClGlobalSections
 
 /-! # Condensed Poincare duality conventions
 
@@ -369,7 +377,34 @@ theorem nonfiniteCategoriesAgree (P : CondensedPoincareDualityConventions.{u})
     ((constantModelBoundedConstructible ((P.presentation c).obj P.ell) P.s ⊓
         DerivedCategory.finiteTorAmplitude _) =
       constantModelBoundedConstructible ((P.presentation c).obj P.ell) P.s) := by
-  sorry
+  have hx : QuasiCompact P.structureMap := by
+    change QuasiCompact (pullback.snd P.X₀.hom _)
+    infer_instance
+  have hs : IsSeparated P.structureMap := by
+    change IsSeparated (pullback.snd P.X₀.hom _)
+    infer_instance
+  let : P.X.Over P.s := ⟨P.structureMap⟩
+  have : CompactSpace P.X := QuasiCompact.compactSpace_of_compactSpace P.structureMap
+  have : QuasiSeparatedSpace P.X := quasiSeparatedSpace_of_quasiSeparated P.structureMap
+  have hΛ :
+      Nonempty (Mon.mk ((P.presentation c).obj P.ell) ≅
+        Mon.mk (Profinite.continuousMapRingObj ℤ_[P.ell])) ∨
+      Nonempty (Mon.mk ((P.presentation c).obj P.ell) ≅
+        Mon.mk (Profinite.continuousMapRingObj ℚ_[P.ell])) ∨
+      (∃ E : PadicAlgCl.FiniteIntermediateField P.ell,
+        Nonempty (Mon.mk ((P.presentation c).obj P.ell) ≅
+          Mon.mk (Profinite.padicIntegersRingObj P.ell E)) ∨
+        Nonempty (Mon.mk ((P.presentation c).obj P.ell) ≅
+          Mon.mk (Profinite.continuousMapRingObj E))) ∨
+      Nonempty (Mon.mk ((P.presentation c).obj P.ell) ≅
+        Mon.mk (Profinite.padicAlgClRingObj P.ell)) := by
+    cases c with
+    | finite => exact (_hc rfl).elim
+    | integral => exact Or.inr (Or.inr (Or.inl ⟨P.extension, Or.inl ⟨Iso.refl _⟩⟩))
+    | rational => exact Or.inr (Or.inr (Or.inl ⟨P.extension, Or.inr ⟨Iso.refl _⟩⟩))
+    | qbar => exact Or.inr (Or.inr (Or.inr ⟨Iso.refl _⟩))
+  exact ⟨(integral_ctf_equals_bc P.ell P.X _ hΛ).2.2.2,
+    (integral_ctf_equals_bc P.ell P.s _ hΛ).2.2.2⟩
 
 /-- Point evaluation identifies the geometrically defined Dctf with perfect
 scalar complexes, preserving the canonical tensor, unit and closed comparison.
@@ -384,7 +419,114 @@ No equivalence is substituted into the definition of the point category. -/
 theorem pointPerfect (P : CondensedPoincareDualityConventions.{u})
     (c : PoincareCoefficient) :
     CondensedGeometricPoint.Statement ((P.presentation c).obj P.ell) P.datum.k := by
-  sorry
+  let : IsAlgClosed P.datum.k := IsAlgClosure.isAlgClosed P.datum.k₀
+  let : Fintype P.datum.k₀ := Fintype.ofFinite P.datum.k₀
+  let : Fact P.datum.p.Prime := ⟨P.datum.prime⟩
+  let : CharP P.datum.k₀ P.datum.p := charP_of_card_eq_prime_pow
+    (by simpa only [Nat.card_eq_fintype_card] using
+      P.datum.card_base.trans P.datum.cardinality_eq)
+  let : CharP P.datum.k P.datum.p :=
+    charP_of_injective_algebraMap' P.datum.k₀ P.datum.p
+  apply CondensedGeometricPoint.condensed_geometric_point_perfect_general
+    _ P.datum.k P.ell P.datum.p P.different.symm
+  refine ⟨P.ell, inferInstance, ?_⟩
+  cases c with
+  | finite =>
+      let A := Padic.coefficientExtensionRing P.ell P.extension P.level
+      let : TopologicalSpace A := ⊥
+      let : DiscreteTopology A := ⟨rfl⟩
+      refine Or.inl ⟨A, inferInstance,
+        Padic.finite_coefficientExtensionRing P.ell P.extension P.level P.level_pos,
+        inferInstance, inferInstance, inferInstance, ?_, ⟨Iso.refl _⟩⟩
+      refine ⟨P.level, ?_⟩
+      have h := coefficientFiniteTwist_annihilator P.ell P.extension (P.level - 1)
+      rw [Nat.sub_add_cancel P.level_pos] at h
+      simpa only [Nat.sub_add_cancel P.level_pos, Nat.cast_pow] using h
+  | integral => exact Or.inr (Or.inr (Or.inr
+      (Or.inl ⟨P.extension, ⟨Iso.refl _⟩⟩)))
+  | rational => exact Or.inr (Or.inr (Or.inr
+      (Or.inr (Or.inl ⟨P.extension, ⟨Iso.refl _⟩⟩))))
+  | qbar => exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr ⟨Iso.refl _⟩))))
+
+private theorem continuousScalar_bijective (A : Type) [CommRing A]
+    [TopologicalSpace A] [IsTopologicalRing A] :
+    Function.Bijective (Profinite.continuousMapConstRingHom.{u} A) := by
+  refine ⟨?_, Profinite.continuousMapConstRingHom_surjective A⟩
+  intro a b hab
+  have h := congrArg (fun x ↦ Functor.LaxMonoidal.ε
+    (sheafToPresheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) ≫
+      (sheafToPresheaf _ _).map x.hom) hab
+  dsimp only [Profinite.continuousMapConstRingHom] at h
+  have ha := Sheaf.ε_comp_ringHomΓSheafCompose_hom
+    (J := coherentTopology Profinite.{u})
+    (S := Profinite.continuousMapRingSheaf A)
+    (φ := Profinite.continuousMapConstSectionRingHom A)
+    (hφ := fun _ _ ↦ rfl) a
+  have hb := Sheaf.ε_comp_ringHomΓSheafCompose_hom
+    (J := coherentTopology Profinite.{u})
+    (S := Profinite.continuousMapRingSheaf A)
+    (φ := Profinite.continuousMapConstSectionRingHom A)
+    (hφ := fun _ _ ↦ rfl) b
+  rw [ha, hb] at h
+  have h' := congrArg (fun f ↦ (f.app (Opposite.op (Profinite.of PUnit.{u + 1}))).hom
+    (ULift.up 1)) h
+  have he := congrArg (fun x ↦ x.down PUnit.unit) h'
+  dsimp [Functor.ringHomΓCompForget₂, AddMonoidHom.mulRight, AddEquiv.ulift, Equiv.ulift,
+    Profinite.continuousMapConstSectionRingHom, Profinite.continuousMapRingPresheaf] at he
+  change ((1 : ℤ) : A) * a = ((1 : ℤ) : A) * b at he
+  simpa using he
+
+private theorem qbarScalar_bijective (ell : ℕ) [Fact ell.Prime] :
+    Function.Bijective (Profinite.PadicAlgCl.constRingHom.{u} ell) := by
+  refine ⟨?_, Profinite.PadicAlgCl.constRingHom_surjective ell⟩
+  intro a b hab
+  have h := congrArg (fun x ↦ Functor.LaxMonoidal.ε
+    (sheafToPresheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) ≫
+      (sheafToPresheaf _ _).map x.hom) hab
+  dsimp only [Profinite.PadicAlgCl.constRingHom] at h
+  have ha := Sheaf.ε_comp_ringHomΓSheafCompose_hom
+    (J := coherentTopology Profinite.{u})
+    (S := Profinite.padicAlgClCondensedRing ell)
+    (φ := Profinite.PadicAlgCl.constSectionRingHom ell)
+    (hφ := fun _ _ ↦ rfl) a
+  have hb := Sheaf.ε_comp_ringHomΓSheafCompose_hom
+    (J := coherentTopology Profinite.{u})
+    (S := Profinite.padicAlgClCondensedRing ell)
+    (φ := Profinite.PadicAlgCl.constSectionRingHom ell)
+    (hφ := fun _ _ ↦ rfl) b
+  rw [ha, hb] at h
+  have h' := congrArg (fun f ↦ (f.app (Opposite.op (Profinite.of PUnit.{u + 1}))).hom
+    (ULift.up 1)) h
+  have he := congrArg (fun x ↦ x.down.val PUnit.unit) h'
+  dsimp [Functor.ringHomΓCompForget₂, AddMonoidHom.mulRight, AddEquiv.ulift, Equiv.ulift,
+    Profinite.PadicAlgCl.constSectionRingHom, Profinite.padicAlgClRingPresheaf] at he
+  change (1 : PadicAlgCl ell) * a = (1 : PadicAlgCl ell) * b at he
+  simpa using he
+
+private theorem pid_scalar_description (R : Type (u + 1)) [CommRing R] [IsDomain R]
+    [IsPrincipalIdealRing R] [HasDerivedCategory.{u + 1} (ModuleCat.{u + 1} R)]
+    (C : DerivedCategory (ModuleCat.{u + 1} R)) :
+    DerivedCategory.IsPerfectRingComplex C ↔ boundedFiniteCoefficientComplex R C := by
+  constructor
+  · intro h
+    exact ⟨DerivedCategory.IsPerfect.bounded h, DerivedCategory.IsPerfect.finite_homology h⟩
+  · intro h
+    apply DerivedCategory.isPerfectRingComplex_of_perfect_cohomology C
+    · obtain ⟨⟨a, ha⟩, ⟨b, hb⟩⟩ := h.1
+      have : C.IsGE a := ha
+      have : C.IsLE b := hb
+      refine ⟨a, b, fun i hi ↦ ?_⟩
+      rcases hi with hi | hi
+      · exact DerivedCategory.isZero_of_isGE C a i hi
+      · exact DerivedCategory.isZero_of_isLE C b i hi
+    · intro i
+      let M := (DerivedCategory.homologyFunctor (ModuleCat.{u + 1} R) i).obj C
+      have : Module.Finite R M := h.2 i
+      have : Module.FinitePresentation R M := Module.finitePresentation_of_finite R M
+      obtain ⟨r, v, hv⟩ := Module.Finite.exists_fin' R M
+      obtain ⟨_, _, _, _, _, hperfect, _⟩ :=
+        (DerivedCategory.scalar_perfect_cohomology_and_pid_models R).2 M r v hv
+      exact hperfect
 
 /-- The finite, integral and field scalar descriptions of the point categories.
 Source: point paragraph of def-pod-conventions (blueprint: def-pod-conventions).
@@ -403,7 +545,51 @@ theorem pointScalarDescription (P : CondensedPoincareDualityConventions.{u})
       DerivedCategory.IsPerfectRingComplex C ↔
         boundedFiniteCoefficientComplex (MonObj.Γ ((P.presentation c).obj P.ell)) C ∧
           (c = .finite → DerivedCategory.finiteTorAmplitude _ C) := by
-  sorry
+  let := HasDerivedCategory.ofIsGrothendieckAbelian
+    (ModuleCat.{u + 1} (MonObj.Γ ((P.presentation c).obj P.ell)))
+  intro C
+  cases c with
+  | finite =>
+      let A := Padic.coefficientExtensionRing P.ell P.extension P.level
+      let : TopologicalSpace A := ⊥
+      let : DiscreteTopology A := ⟨rfl⟩
+      have : Finite A :=
+        Padic.finite_coefficientExtensionRing P.ell P.extension P.level P.level_pos
+      have : IsNoetherianRing (MonObj.Γ ((P.presentation .finite).obj P.ell)) :=
+        isNoetherianRing_of_surjective A _ (Profinite.continuousMapConstRingHom A)
+          (continuousScalar_bijective A).2
+      constructor
+      · intro h
+        exact ⟨⟨DerivedCategory.IsPerfect.bounded h,
+          DerivedCategory.IsPerfect.finite_homology h⟩,
+          fun _ ↦ DerivedCategory.IsPerfect.finiteTorAmplitude h⟩
+      · rintro ⟨h, htor⟩
+        exact DerivedCategory.isPerfect_of_finiteTorAmplitude h.1 h.2 (htor rfl)
+  | integral =>
+      let A := PadicAlgCl.integers P.ell P.extension
+      let e := RingEquiv.ofBijective (Profinite.continuousMapConstRingHom.{u} A)
+        (continuousScalar_bijective A)
+      have : IsDomain (MonObj.Γ ((P.presentation .integral).obj P.ell)) :=
+        e.symm.toMulEquiv.isDomain A
+      have : IsPrincipalIdealRing (MonObj.Γ ((P.presentation .integral).obj P.ell)) :=
+        IsPrincipalIdealRing.of_surjective e.toRingHom e.surjective
+      simpa using pid_scalar_description _ C
+  | rational =>
+      let e := RingEquiv.ofBijective (Profinite.continuousMapConstRingHom.{u} P.extension)
+        (continuousScalar_bijective P.extension)
+      have : IsDomain (MonObj.Γ ((P.presentation .rational).obj P.ell)) :=
+        e.symm.toMulEquiv.isDomain P.extension
+      have : IsPrincipalIdealRing (MonObj.Γ ((P.presentation .rational).obj P.ell)) :=
+        IsPrincipalIdealRing.of_surjective e.toRingHom e.surjective
+      simpa using pid_scalar_description _ C
+  | qbar =>
+      let e := RingEquiv.ofBijective (Profinite.PadicAlgCl.constRingHom.{u} P.ell)
+        (qbarScalar_bijective P.ell)
+      have : IsDomain (MonObj.Γ ((P.presentation .qbar).obj P.ell)) :=
+        e.symm.toMulEquiv.isDomain (PadicAlgCl P.ell)
+      have : IsPrincipalIdealRing (MonObj.Γ ((P.presentation .qbar).obj P.ell)) :=
+        IsPrincipalIdealRing.of_surjective e.toRingHom e.surjective
+      simpa using pid_scalar_description _ C
 
 /-- Each Qbar point object descends to one finite coefficient extension.
 Source: point paragraph of def-pod-conventions, sk-thm-sfb-qlbar-two-colimit (2)
@@ -418,7 +604,25 @@ theorem pointFiniteDescent (P : CondensedPoincareDualityConventions.{u})
     ∃ E : PadicAlgCl.FiniteIntermediateField P.ell,
       ∃ L : (Coefficient.rational E).ctf P.ell P.s,
         Nonempty ((derivedExtendScalarsToPadicAlgCl P.s P.ell E).obj L.obj ≅ K.obj) := by
-  sorry
+  let : IsAlgClosed P.datum.k := IsAlgClosure.isAlgClosed P.datum.k₀
+  have hchar : ringChar P.datum.k ≠ P.ell := by
+    intro h
+    have hu := primeUnit P.datum P.ell P.different
+    have hz : (P.ell : P.datum.k) = 0 := by
+      rw [← h]
+      exact (ringChar.spec P.datum.k (ringChar P.datum.k)).2 dvd_rfl
+    exact hu.ne_zero hz
+  obtain ⟨E, L, e⟩ :=
+    (finiteCoefficientDescentTwoColimitStatement P.ell P.datum.k hchar
+      (Or.inr inferInstance) P.s).2 ⟨K.obj, K.property.1⟩
+  have htor := (integral_ctf_equals_bc P.ell P.s
+    (Mon.mk (Profinite.continuousMapRingObj E))
+    (Or.inr (Or.inr (Or.inl ⟨E, Or.inr ⟨Iso.refl _⟩⟩)))).2.2.2
+  refine ⟨E, ⟨L.obj, ?_⟩, e⟩
+  change (constantModelBoundedConstructible (Profinite.continuousMapRingObj E) P.s ⊓
+    DerivedCategory.finiteTorAmplitude _) L.obj
+  rw [htor]
+  exact L.property
 
 end CondensedPoincareDualityConventions
 end WeilConjectures

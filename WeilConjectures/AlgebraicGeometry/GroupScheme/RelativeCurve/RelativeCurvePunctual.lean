@@ -28,6 +28,8 @@ import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
 import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Exact
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CondensedOrdinaryCompactCohomology
+public import WeilConjectures.AlgebraicGeometry.AffineGeometricComponentsFiniteExtension
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.DerivedConstructibleLowerShriek
 
 /-! # Punctual bounds for a relative affine curve
 
@@ -175,5 +177,20 @@ def exchange (h₀ : U₀ ⟶ Y₀) (c₀ : Compactification h₀.left) :
         Functor.mapDerivedCategoryNatIso (openExchange l c.i aU aZ hj) ≪≫
         Functor.mapDerivedCategoryCompIso _ _) _ ≪≫
     Functor.associator _ _ _
+
+/-- R^i h_! of the actual condensed Weil module, with its induced cohomology structure.
+The carrier is H^i of the compactification composite applied to F in degree zero.
+Source: the statement and first proof step, canonical direct-image Weil structure
+(blueprint: lem-zl-relative-curve-punctual). -/
+@[irreducible] def higherShriek (h₀ : U₀ ⟶ Y₀) (c₀ : Compactification h₀.left)
+    (F : NativeL2.WeilModule D l U₀) (i : ℕ) : NativeL2.WeilModule D l Y₀ :=
+  let Λ := Profinite.padicAlgClRingObj.{u} l
+  let F₀ := (CategoryTheory.Endofunctor.IsoAlgebra.mapOfNatIso
+    ((upperStar Λ (D.geometricFrobenius U₀).hom).mapDerivedCategorySingleFunctor 0)).obj F
+  let R₀ := (CategoryTheory.Endofunctor.IsoAlgebra.mapOfNatIso
+    (exchange D l h₀ c₀)).obj F₀
+  (CategoryTheory.Endofunctor.IsoAlgebra.mapOfNatIso
+    ((upperStar Λ (D.geometricFrobenius Y₀).hom).mapDerivedCategoryHomologyFunctorIso
+      (i : ℤ))).obj R₀
 
 end WeilConjectures.RelativeCurve

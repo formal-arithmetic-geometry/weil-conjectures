@@ -46,6 +46,13 @@ theorem embeddingPoint_native_return (D : FiniteFieldDatum.{u})
       NativeCondensedModule.localPositivePower
         (NativeCondensedModule.frobeniusPointIso D).hom (n - 1) ≫
           embeddingPoint D Y₀ n hn x iota hι := by
-  sorry
+  have hp {X : Scheme.{u}} (g : X ⟶ X) (m : ℕ) :
+      NativeCondensedModule.localPositivePower g m = localPositivePower g m := by
+    induction m with
+    | zero => rfl
+    | succ m ih =>
+      simp only [NativeCondensedModule.localPositivePower, localPositivePower, ih]
+  simp only [hp]
+  exact embeddingPoint_return D Y₀ n hn x iota hι
 
 end WeilConjectures.ConstantStalkLocalUnitPoint

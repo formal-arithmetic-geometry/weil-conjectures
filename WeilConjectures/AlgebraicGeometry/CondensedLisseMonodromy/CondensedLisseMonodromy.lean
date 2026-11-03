@@ -66,6 +66,7 @@ import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Basic
 import WeilConjectures.AlgebraicGeometry.FundamentalGroup.LocallyConstantEquivalenceExtension
 import WeilConjectures.Mathlib.CategoryTheory.Galois.Prorepresentability
 import Mathlib.AlgebraicGeometry.Noetherian
+public import WeilConjectures.AlgebraicGeometry.IsRegularScheme
 
 /-! # Condensed lisse monodromy, with finite-level normalization
 
@@ -96,6 +97,11 @@ open AlgebraicGeometry AlgebraicGeometry.Scheme
 open scoped TensorProduct CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.CondensedLisseMonodromy
+
+/-- The same algebraic closure in the module-value universe, using only a size lift.
+Source: the coefficient convention of `thm-lisse-qlbar-representations`.
+(blueprint: lem-a1-condensed-lisse-monodromy). -/
+abbrev Coeff (l : ℕ) [Fact l.Prime] := ULift.{u + 1} (PadicAlgCl l)
 
 /-- The full category of locally finite free modules over precisely p_X^* Qbar_l.
 Source: `sk-lem-coefficient-heart`, introductory lisse clause.
@@ -262,6 +268,106 @@ def Model.inclusion (l : ℕ) [Fact l.Prime] {X : Scheme.{u}} {L : Lisse l X}
     M.rationalization.hom.hom ≫
       Mod.extendUnitHom (padicSubfieldRingObjToPadicAlgCl X l M.E) M.rational ≫
         M.scalarExtension.hom.hom
+
+/-- The specified projection of an actual integral geometric fibre to its finite etale fibre.
+Source: `thm-lisse-qlbar-representations` (1).
+(blueprint: lem-a1-condensed-lisse-monodromy). -/
+def Model.projection (l : ℕ) [Fact l.Prime] {X : Scheme.{u}} {L : Lisse l X}
+    (M : Model l X L) {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
+    (x : Spec (.of Ω) ⟶ X) (n : ℕ) :
+    (abFibre x).obj M.integral.X ⟶
+      (pointSmallEtale x).ulift.{u + 1}.sheafFiber.obj (M.diagram.obj (op n)) :=
+  (abFibre x).map (eqToHom M.completion_point.symm ≫ M.completion.π.app (op n)) ≫
+    ((M.normalization n).point Ω x).hom
+
+/-- Pointwise classical comparison and its specified actual fibre identifications.
+Source: `thm-lisse-qlbar-representations`, theorem, and
+`cor-galois-lisse-representations` (2).
+(blueprint: lem-a1-condensed-lisse-monodromy). -/
+structure Comparison (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
+    [IsNoetherian X] [X.IsSeparated] [∀ z : X, Invertible (l : X.residueField z)] where
+  classicalPaths : AdicFibrePathTransport l X (Coeff.{u} l)
+  equivalence : Lisse l X ≌ LisseAlgebraicSheaf l X (Coeff.{u} l)
+  /-- Exactness refers also to the inherited sheaf exact structure. -/
+  preadditive : Preadditive (LisseAlgebraicSheaf l X (Coeff.{u} l))
+  additive : @Functor.Additive _ _ _ _ _ preadditive equivalence.functor
+  limits : PreservesFiniteLimits equivalence.functor
+  colimits : PreservesFiniteColimits equivalence.functor
+  fibreIso : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X),
+    equivalence.functor ⋙ lisseAlgebraicFiberFunctor l X x (Coeff.{u} l) ≅ fibre l x
+  sheafExact : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X)
+    (A B C : Lisse l X) (f : A ⟶ B) (g : B ⟶ C),
+    imageSubobject f.hom = kernelSubobject g.hom →
+      imageSubobject ((fibre l x).map f) = kernelSubobject ((fibre l x).map g)
+  /-- The tensor structure on the full subcategory is the ambient module tensor. -/
+  monoidal : MonoidalCategory (Lisse l X)
+  inclusionMonoidal : @Functor.Monoidal (Lisse l X) _ monoidal (Modules l X) _ _
+    (ObjectProperty.ι _)
+  classicalMonoidal : MonoidalCategory (LisseAlgebraicSheaf l X (Coeff.{u} l))
+  tensorFormula : ∀ A B : Lisse l X,
+    (@MonoidalCategory.tensorObj _ _ monoidal.toMonoidalCategoryStruct A B).obj =
+      (Mod.tensorLeft B.obj).obj A.obj
+  unitFormula : (@MonoidalCategory.tensorUnit _ _ monoidal.toMonoidalCategoryStruct).obj =
+    Mod.regular (condensedRingObj (Profinite.padicAlgClRingObj l) X)
+  classicalTensorFormula : ∀ A B : LisseAlgebraicSheaf l X (Coeff.{u} l),
+    @MonoidalCategory.tensorObj _ _ classicalMonoidal.toMonoidalCategoryStruct A B =
+      lisseAlgebraicTensor l X (Coeff.{u} l) A B
+  classicalUnitFormula :
+    @MonoidalCategory.tensorUnit _ _ classicalMonoidal.toMonoidalCategoryStruct =
+    lisseAlgebraicUnit l X (Coeff.{u} l)
+  monoidalComparison : @Functor.Monoidal _ _ monoidal _ _ classicalMonoidal
+    equivalence.functor
+  fibreMonoidal : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X),
+    @Functor.Monoidal (Lisse l X) _ monoidal _ _ _ (fibre l x)
+  classicalFibreMonoidal : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω]
+    (x : Spec (.of Ω) ⟶ X),
+    @Functor.Monoidal (LisseAlgebraicSheaf l X (Coeff.{u} l)) _ classicalMonoidal
+      _ _ _ (lisseAlgebraicFiberFunctor l X x (Coeff.{u} l))
+  fibreIsoMonoidal : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω]
+    (x : Spec (.of Ω) ⟶ X),
+    @NatTrans.IsMonoidal _ _ monoidal _ _ _ _ _ (fibreIso Ω x).hom
+      (@Functor.LaxMonoidal.comp _ _ monoidal _ _ classicalMonoidal _ _ _
+        equivalence.functor (lisseAlgebraicFiberFunctor l X x (Coeff.{u} l))
+        monoidalComparison.toLaxMonoidal (classicalFibreMonoidal Ω x).toLaxMonoidal)
+      (fibreMonoidal Ω x).toLaxMonoidal
+
+/-- Its actual classical fibre identification, with the published object equality inserted.
+Source: the actual-fibre formula of `def-pod-lisse-l-adic-sheaves`.
+(blueprint: lem-a1-condensed-lisse-monodromy). -/
+def Comparison.beta (l : ℕ) [Fact l.Prime] {X : Scheme.{u}}
+    [IsNoetherian X] [X.IsSeparated] [∀ z : X, Invertible (l : X.residueField z)]
+    (C : Comparison l X) {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
+    (x : Spec (.of Ω) ⟶ X) (L : Lisse l X) :
+    (fibre l x).obj L ≃ₗ[Coeff.{u} l]
+      lisseAlgebraicFiber l X (Coeff.{u} l) x (C.equivalence.functor.obj L) :=
+  ((C.fibreIso Ω x).symm.app L ≪≫
+    eqToIso (lisseAlgebraicFiberFunctor_obj l X x (Coeff.{u} l)
+      (C.equivalence.functor.obj L))).toLinearEquiv
+
+/-- The canonical finite-set path, including geometric points with different fields.
+Source: the finite-cover stalk transport of `def-galois-fibre-functor`.
+(blueprint: lem-a1-condensed-lisse-monodromy). -/
+def flcPath {X : Scheme.{u}} {Ω Ω' : Type u}
+    [Field Ω] [IsAlgClosed Ω] [Field Ω'] [IsAlgClosed Ω']
+    {x : Spec (.of Ω) ⟶ X} {y : Spec (.of Ω') ⟶ X}
+    (τ : FiniteEtale.fiber x ≅ FiniteEtale.fiber y) : flcFiber x ≅ flcFiber y :=
+  NatIso.ofComponents (fun F ↦ (FiniteLocallyConstant.transport x y τ F).toIso)
+    (fun f ↦ ConcreteCategory.hom_ext _ _ fun v ↦
+      (FiniteLocallyConstant.sheafFiber_map_transport x y τ f v).symm)
+
+/-- Transport on the displayed condensed fibre, obtained from the normalized classical path.
+Source: finite-path normalization in `def-wf-fundamental-representation`.
+(blueprint: lem-a1-condensed-lisse-monodromy). -/
+def Comparison.path (l : ℕ) [Fact l.Prime] {X : Scheme.{u}}
+    [IsNoetherian X] [X.IsSeparated] [∀ z : X, Invertible (l : X.residueField z)]
+    (C : Comparison l X) {Ω Ω' : Type u}
+    [Field Ω] [IsAlgClosed Ω] [Field Ω'] [IsAlgClosed Ω']
+    {x : Spec (.of Ω) ⟶ X} {y : Spec (.of Ω') ⟶ X}
+    (τ : FiniteEtale.fiber x ≅ FiniteEtale.fiber y)
+    (L : Lisse l X) : (fibre l x).obj L ≃ₗ[Coeff.{u} l] (fibre l y).obj L :=
+  ((C.fibreIso Ω x).symm.app L ≪≫
+    (C.classicalPaths.algebraic.map x y (flcPath τ)).app (C.equivalence.functor.obj L) ≪≫
+      (C.fibreIso Ω' y).app L).toLinearEquiv
 
 attribute [instance] Context.noetherian Context.absoluteSeparated Context.invertible
 

@@ -8,6 +8,10 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.StrictWeilCondensed.StrictWeilCondensed
 public import WeilConjectures.AlgebraicGeometry.Condensed.CondensedDerivedTensorComparisonSupplement
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsPull
+public import WeilConjectures.AlgebraicGeometry.PurityTransport.TransportGeometry
+public import WeilConjectures.CategoryTheory.Endofunctor.StrictPairTensor
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.StrictWeilCondensed.StrictWeilTateFiniteness
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.StrictWeilCondensed.StrictWeilTateScalarLine
 
 /-! # Tate twists and finite scalar extension for condensed strict Weil complexes
 
@@ -61,11 +65,7 @@ def scalarFrobenius {X : Scheme.{u}} (g : X ≅ X)
     finiteCoefficientDerivedExtension X ell h ⋙ action ((Coefficient.rational F).obj ell) g ≅
       action ((Coefficient.rational E).obj ell) g ⋙
         finiteCoefficientDerivedExtension X ell h :=
-  Functor.isoWhiskerLeft _
-      (leftDerivedUpperStarIsoMapDerivedCategory ((Coefficient.rational F).obj ell) g.hom).symm
-    ≪≫ (derivedUpperStarExtendScalarsIso (Profinite.padicSubfieldRingObjMap ell h) g.hom).symm
-    ≪≫ Functor.isoWhiskerRight
-      (leftDerivedUpperStarIsoMapDerivedCategory ((Coefficient.rational E).obj ell) g.hom) _
+  tateScalarComparison ell g h
 
 /-- Finite scalar extension on strict pairs. The existing fixed-pair transport
 sends (K, phi) to (BK, c_K followed by B(phi)) and h to B(h).
@@ -92,6 +92,52 @@ def TwistFormula {X : Scheme.{u}} (g : X ≅ X)
     HEq (T.map h).hom.f (h.hom.f ⊗ₘ 𝟙 (derivedTateLine ell c X m))) ∧
   (∀ K : Ambient ell c g,
     Small ell c X K.carrier → Small ell c X (T.obj K).carrier)
+
+/-- The ambient tensor functor, constructed without any geometric finiteness assertion. -/
+private def twistFunctor {X : Scheme.{u}} (g : X ≅ X)
+    [∀ x : X, Invertible (ell : X.residueField x)] (c : Coefficient ell) (m : ℤ) :
+    Ambient ell c g ⥤ Ambient ell c g :=
+  CategoryTheory.Endofunctor.IsoAlgebra.tensorWith
+    (action (c.obj ell) g) (tateDatum ell c g m)
+
+/-- The functor formulas and Small preservation are independent of scalar comparison. -/
+private theorem twistFormula_tensor {X : Scheme.{u}} (g : X ≅ X)
+    [∀ x : X, Invertible (ell : X.residueField x)] (c : Coefficient ell) (m : ℤ) :
+    TwistFormula ell g c m (twistFunctor ell g c m) := by
+  refine ⟨(fun K ↦ ⟨rfl, ?_⟩), (fun K L h ↦ HEq.rfl), ?_⟩
+  · apply heq_of_eq
+    exact CategoryTheory.Endofunctor.IsoAlgebra.tensorRight_obj_str _ _ K
+  · intro K hK
+    exact (tate_finiteness ell X).1 c m K.carrier hK
+
+/-- The equivariant scalar line lifts through the proved categorical tensor comparison. -/
+private theorem twist_scalar {X : Scheme.{u}} (g : X ≅ X)
+    [∀ x : X, Invertible (ell : X.residueField x)]
+    {E F : PadicAlgCl.FiniteIntermediateField ell} (h : E ≤ F) (m : ℤ) :
+    Nonempty (twistFunctor ell g (.rational E) m ⋙ scalarExtension ell g h ≅
+      scalarExtension ell g h ⋙ twistFunctor ell g (.rational F) m) := by
+  exact CategoryTheory.Endofunctor.IsoAlgebra.tensorRightScalarIso_nonempty
+    (finiteCoefficientDerivedExtension X ell h) (scalarFrobenius ell g h)
+    (tateDatum ell (.rational E) g m) (tateDatum ell (.rational F) g m)
+    (tate_scalar_line ell g h m)
+
+/-- Assemble the formulas, scalar preservation and scalar comparison. -/
+private theorem compatibility_of_invertible {X : Scheme.{u}} (g : X ≅ X)
+    [∀ x : X, Invertible (ell : X.residueField x)] :
+    ∃ T : (c : Coefficient ell) → ℤ → Ambient ell c g ⥤ Ambient ell c g,
+      (∀ (c : Coefficient ell) (m : ℤ), TwistFormula ell g c m (T c m)) ∧
+      (∀ (E F : PadicAlgCl.FiniteIntermediateField ell) (h : E ≤ F),
+        ∀ K : Ambient ell (.rational E) g,
+          Small ell (.rational E) X K.carrier →
+            Small ell (.rational F) X ((scalarExtension ell g h).obj K).carrier) ∧
+      (∀ (E F : PadicAlgCl.FiniteIntermediateField ell) (h : E ≤ F) (m : ℤ),
+        Nonempty (T (.rational E) m ⋙ scalarExtension ell g h ≅
+          scalarExtension ell g h ⋙ T (.rational F) m)) := by
+  refine ⟨twistFunctor ell g, twistFormula_tensor ell g, ?_, ?_⟩
+  · intro E F h K hK
+    exact (tate_finiteness ell X).2 E F h K.carrier hK
+  · intro E F h m
+    exact twist_scalar ell g h m
 
 /-- Every signed root-normalized Tate twist is a functor of strict Weil pairs,
 and it commutes naturally with every finite intermediate coefficient extension.
@@ -150,6 +196,16 @@ theorem compatibility (D : WeilConjectures.FiniteFieldDatum.{u})
             Nonempty (T (.rational E) m ⋙ scalarExtension ell (modelFrobenius D X₀) h ≅
               scalarExtension ell (modelFrobenius D X₀) h ⋙ T (.rational F) m)))
         (i := hInv) := by
-  sorry
+  let X : Scheme.{u} :=
+    pullback X₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))
+  let π : X ⟶ Spec (.of D.k) :=
+    pullback.snd X₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))
+  let hInv : ∀ x : X, Invertible (ell : X.residueField x) := fun x ↦
+    (show IsUnit (ell : X.residueField x) by
+      simpa only [map_natCast] using
+        (primeUnit D ell hEll).map (π.residueFieldAlgebraMap x)).invertible
+  refine ⟨hInv, ?_⟩
+  let := hInv
+  exact compatibility_of_invertible ell (modelFrobenius D X₀)
 
 end AlgebraicGeometry.ProEtale.CondensedRing.StrictWeilTateCompatibility

@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.NativeCondensedWeil.NativeCondensedWeilReality
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.NativeL2.L2NativePunctualWeights
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Weights
+public import WeilConjectures.AlgebraicGeometry.GroupScheme.NativeL2.NativeComplexUpperWeights
 
 /-! # Local weights and reality
 
@@ -102,6 +103,120 @@ theorem real_iff_conjugation (M : WeilModule D l X₀) (ι : PadicAlgCl l →+* 
           (fun α ↦ ι α.down)).map (starRingEnd ℂ)) =
           (LinearMap.toMatrix b b (closedOperator D l X₀ M x i hi).hom).charpoly.roots.map
             (fun α ↦ ι α.down) := by
+  sorry
+
+/-- A constructible Weil sheaf is iota-mixed when it has a finite filtration by
+constructible Weil subsheaves whose successive quotients are punctually pure, of
+possibly different real weights. A zero quotient is pure of every weight.
+Source: latest blueprint, sk-d-real-weights, mixedness sentence
+(blueprint: sk-d-real-weights). -/
+def IsMixed (M : WeilModule D l X₀) (ι : PadicAlgCl l →+* ℂ) : Prop :=
+  ∃ (n : ℕ) (G : Fin (n + 1) → WeilModule D l X₀)
+    (φ : ∀ i : Fin n, G i.castSucc ⟶ G i.succ),
+    (∀ i, IsConstantModelConstructible (Profinite.padicAlgClRingObj l)
+      (D.geometricFiber X₀).left (G i).carrier) ∧
+    IsZero (G 0) ∧ Nonempty (G (Fin.last n) ≅ M) ∧ (∀ i, Mono (φ i)) ∧
+      ∀ i : Fin n, ∃ v : ℝ, Pure D l X₀ (cokernel (φ i)) ι v
+
+/-- A bounded Weil complex is pure of weight w when every nonzero cohomology sheaf,
+with its induced Weil structure, is punctually pure of weight w+n in degree n.
+Boundedness and constructibility are imposed by callers, as for the recorded upper
+bound. Source: latest blueprint, sk-d-real-weights, purity of a complex
+(blueprint: sk-d-real-weights). -/
+def complexIsPure
+    (K : IsoAlgebra (CondensedRing.StrictWeilCondensed.action (Profinite.padicAlgClRingObj l)
+      (CondensedRing.StrictWeilCondensed.modelFrobenius D X₀)))
+    (ι : PadicAlgCl l →+* ℂ) (w : ℝ) : Prop :=
+  ∀ n : ℤ, ¬ IsZero (complexWeilCohomology D l X₀ K n) →
+    Pure D l X₀ (complexWeilCohomology D l X₀ K n) ι (w + (n : ℝ))
+
+/-- Mixedness is the existence of some upper weight bound.
+Source: latest blueprint, sk-d-real-weights, mixedness and weights-at-most sentences
+(blueprint: sk-d-real-weights).
+Proof: a filtration witnessing the bound w is a mixedness filtration. Conversely, a
+mixedness filtration has finitely many quotient weights; their maximum, or zero for
+the empty filtration, bounds them, so the same filtration witnesses Mixed. -/
+theorem isMixed_iff_exists_mixed (M : WeilModule D l X₀) (ι : PadicAlgCl l →+* ℂ) :
+    IsMixed D l X₀ M ι ↔ ∃ w : ℝ, Mixed D l X₀ M ι w := by
+  sorry
+
+/-- The punctual bound in logarithmic form is the modulus bound of the blueprint.
+Source: latest blueprint, sk-d-real-weights, punctual-weights sentence
+(blueprint: sk-d-real-weights).
+Proof: the local operator is a composite of isomorphisms, so each eigenvalue is nonzero
+and its image has positive norm. The residue cardinality is at least two, so its
+logarithm is positive. Multiply the logarithmic inequality by log(q_x)/2 and
+exponentiate, and reverse these steps for the converse. -/
+theorem hasPunctualWeightsAtMost_iff_modulus (M : WeilModule D l X₀)
+    (ι : PadicAlgCl l →+* ℂ) (w : ℝ) :
+    HasPunctualWeightsAtMost D l X₀ M ι w ↔
+      ∀ (x : {x : X₀.left // x ∈ closedPoints X₀.left})
+        (i : X₀.left.residueField x.val →+* D.k)
+        (hi : i.comp (X₀.hom.residueFieldAlgebraMap x.val) = algebraMap D.k₀ D.k)
+        (α : ULift.{u + 1} (PadicAlgCl l)),
+        Module.End.HasEigenvalue (closedOperator D l X₀ M x i hi).hom α →
+          ‖ι α.down‖ ≤ (Nat.card (X₀.left.residueField x.val) : ℝ) ^ (w / 2) := by
+  sorry
+
+/-- A zero Weil sheaf is punctually pure of every weight.
+Source: latest blueprint, sk-d-real-weights, zero objects satisfy every bound
+(blueprint: sk-d-real-weights).
+Proof: every stalk of a zero sheaf is zero, so its local operator has no eigenvalue. -/
+theorem pure_of_isZero (M : WeilModule D l X₀) (hM : IsZero M)
+    (ι : PadicAlgCl l →+* ℂ) (w : ℝ) : Pure D l X₀ M ι w := by
+  sorry
+
+/-- A zero Weil sheaf has every punctual bound.
+Source: latest blueprint, sk-d-real-weights, zero objects satisfy every bound
+(blueprint: sk-d-real-weights).
+Proof: every stalk of a zero sheaf is zero, so its local operator has no eigenvalue. -/
+theorem hasPunctualWeightsAtMost_of_isZero (M : WeilModule D l X₀) (hM : IsZero M)
+    (ι : PadicAlgCl l →+* ℂ) (w : ℝ) : HasPunctualWeightsAtMost D l X₀ M ι w := by
+  sorry
+
+/-- A zero Weil sheaf is mixed of weights at most w for every w.
+Source: latest blueprint, sk-d-real-weights, zero objects satisfy every bound
+(blueprint: sk-d-real-weights).
+Proof: take the filtration of length zero, whose only term is the zero sheaf itself.
+The zero sheaf is constructible, and there are no quotients to check. -/
+theorem mixed_of_isZero (M : WeilModule D l X₀) (hM : IsZero M)
+    (ι : PadicAlgCl l →+* ℂ) (w : ℝ) : Mixed D l X₀ M ι w := by
+  sorry
+
+/-- A zero Weil complex has weights at most w for every w.
+Source: latest blueprint, sk-d-real-weights, zero objects satisfy every bound
+(blueprint: sk-d-real-weights).
+Proof: the cohomology functors are additive, so every cohomology sheaf of a zero
+complex is zero, with zero Weil structure; apply the zero-sheaf case in each degree. -/
+theorem complexMixedOfWeightsAtMost_of_isZero
+    (K : IsoAlgebra (CondensedRing.StrictWeilCondensed.action (Profinite.padicAlgClRingObj l)
+      (CondensedRing.StrictWeilCondensed.modelFrobenius D X₀)))
+    (hK : IsZero K.carrier) (ι : PadicAlgCl l →+* ℂ) (w : ℝ) :
+    complexMixedOfWeightsAtMost D l X₀ K ι w := by
+  sorry
+
+/-- A zero Weil complex is pure of every weight.
+Source: latest blueprint, sk-d-real-weights, zero objects satisfy every bound
+(blueprint: sk-d-real-weights).
+Proof: every cohomology sheaf of a zero complex is zero, so no degree is constrained. -/
+theorem complexIsPure_of_isZero
+    (K : IsoAlgebra (CondensedRing.StrictWeilCondensed.action (Profinite.padicAlgClRingObj l)
+      (CondensedRing.StrictWeilCondensed.modelFrobenius D X₀)))
+    (hK : IsZero K.carrier) (ι : PadicAlgCl l →+* ℂ) (w : ℝ) :
+    complexIsPure D l X₀ K ι w := by
+  sorry
+
+/-- At a point of degree d, with residue cardinality q^d, an eigenvalue has iota-weight w
+exactly when its complex modulus is q^(dw/2).
+Source: latest blueprint, sk-d-real-weights, first display
+(blueprint: sk-d-real-weights).
+Proof: the image of a nonzero eigenvalue has positive norm, and log(q^d)=d*log(q) is
+positive for q>1 and d>0. The defining quotient equals w exactly when log of the norm
+is d*w*log(q)/2; exponentiate, and take logarithms for the converse. -/
+theorem frobeniusWeight_eq_iff_norm {E : Type v} [Field E] (ι : E →+* ℂ) (q d : ℕ)
+    (hq : 1 < q) (hd : 0 < d) (α : E) (hα : α ≠ 0) (w : ℝ) :
+    WeilGroup.frobeniusWeight ι (q ^ d) α = w ↔
+      ‖ι α‖ = (q : ℝ) ^ ((d : ℝ) * w / 2) := by
   sorry
 
 end WeilConjectures.NativeL2
