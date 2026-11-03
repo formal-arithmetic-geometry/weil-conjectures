@@ -28,6 +28,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits MonoidalCategory AlgebraicGeometry
 open scoped CategoryTheory.Functor
 namespace WeilConjectures.PurityFiniteSetting
+open AlgebraicGeometry.Etale
 
 variable {A B : Type (u + 1)} [CommRing A] [CommRing B]
 

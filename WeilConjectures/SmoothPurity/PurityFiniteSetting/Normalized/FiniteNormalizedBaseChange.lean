@@ -17,6 +17,7 @@ set_option synthInstance.maxSize 2048
 universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory AlgebraicGeometry
 namespace WeilConjectures.PurityFiniteSetting
+open AlgebraicGeometry.Etale
 
 attribute [local instance high] SymmetricCategory.toBraidedCategory
 attribute [local instance 20000] Etale.sheafBraidedCategory
