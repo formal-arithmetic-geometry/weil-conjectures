@@ -90,7 +90,7 @@ theorem cartierChern_hom_transport
   simp only [ShiftedHom.map, Category.assoc, Nat.cast_ofNat] at hh'
   simp only [← Category.assoc, Iso.hom_inv_id_app, Category.id_comp] at hh'
   refine ⟨k, hclass, ?_⟩
-  simp only [Etale.cartierKummerMap, twistDerived, Iso.trans_hom, Iso.app_hom,
+  simp only [Etale.finiteCartierKummerMap, twistDerived, Iso.trans_hom, Iso.app_hom,
     Functor.mapIso_hom, Functor.map_comp, Category.assoc, comparison, geoP1Comparison,
     Scheme.finiteEtaleTateTwist] at hh' ⊢
   with_reducible_and_instances

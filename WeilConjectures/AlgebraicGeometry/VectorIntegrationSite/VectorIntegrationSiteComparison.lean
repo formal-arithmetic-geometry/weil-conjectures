@@ -206,9 +206,9 @@ def ProjectiveCompatibility (S : Scheme.{u}) [IsNoetherian S]
         (linePlus l E n r hA (ProjectiveLine S))).hom ≫
       projectiveTrace l E n S hS hI r hA =
       (comparison (Scheme.finiteTateCoefficient l E n) S).map
-        (Etale.projectiveLineTrace (l ^ (r + 1))
+        (Etale.projectiveLineTraceDatum (l ^ (r + 1))
           (pow_pos (Fact.out : l.Prime).pos _) _ hA S
-          (by simpa only [Nat.cast_pow] using hS.pow (r + 1)))) ∧
+          (by simpa only [Nat.cast_pow] using hS.pow (r + 1))).trace) ∧
     projectiveH l E n S hS hI r hA ≫ projectiveTrace l E n S hS hI r hA =
       𝟙 (unit (Scheme.finiteTateCoefficient l E n) S)
 
@@ -323,7 +323,7 @@ theorem projectiveComparison (S : Scheme.{u}) [IsNoetherian S]
       ext <;> simp only [biprod.inl_desc_assoc, biprod.inr_desc_assoc,
         biprod.inl_desc, biprod.inr_desc, hu, hh]
   refine ⟨hb, ?_, ?_⟩
-  · unfold projectiveTrace geoP1Trace Etale.projectiveLineTrace
+  · unfold projectiveTrace geoP1Trace Etale.OrdinaryFiniteP1Datum.trace
     let := projectiveB_isIso l E n S hS hI r hA
     apply (cancel_epi ((comparison A S).map D.decomposition.hom)).mp
     rw [reassoc_of% hb]

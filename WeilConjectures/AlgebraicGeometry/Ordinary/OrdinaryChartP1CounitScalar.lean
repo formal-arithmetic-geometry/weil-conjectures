@@ -107,8 +107,8 @@ private theorem datum_trace_scalar
     (projectiveLineTraceDatum N hN B hB S hS)
   rw [ordinaryChartShiftedLineScalarEq φ N hN]
   have h := VectorTraceScalar.projective_trace_square N hN φ hA hB S hS
-  simpa only [VectorTraceScalar.projective, projectiveLineTrace,
-    OrdinaryFiniteP1Datum.trace, Category.assoc] using h
+  simpa only [VectorTraceScalar.projective, OrdinaryFiniteP1Datum.trace, Category.assoc]
+    using h
 
 /-- Unbounded scalar compatibility of the normalized projective-line counit.
 Source: blueprint smooth-purity reduction, Charts.

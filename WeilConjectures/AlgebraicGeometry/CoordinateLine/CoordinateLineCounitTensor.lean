@@ -418,7 +418,7 @@ private theorem projection_counit
     (projection_naturality_wrapped A q
       (open_line_restriction A N hA B) K) hd
   simpa -implicitDefEqProofs only [Etale.ordinaryFiniteProjection,
-    Etale.projectiveLineTrace,
+    Etale.OrdinaryFiniteP1Datum.trace,
     Etale.ordinaryFiniteTensor, Etale.ordinaryFinitePullback,
     Etale.affineTraceOpenLeft, Functor.comp_obj, Functor.id_obj,
     j, q, J, Q, L, V, D, Category.assoc] using hn
