@@ -870,7 +870,8 @@ theorem isIso_projectionMate_localizing_finiteExtension
         constantModelBoundedConstructible Λ T (K ⊗ M) := by
     intro K M hK hM
     simpa only [derivedTensor, curriedTensor_obj_obj] using
-      (tensorClosureRational ℓ (ringChar k) (Fact.out : (ringChar k).Prime).pos
+      (constantModelBoundedConstructible_derivedTensor ℓ (ringChar k)
+        (Fact.out : (ringChar k).Prime).pos
         Fact.out (T ↘ Spec (.of k)) Λ (Or.inl ⟨F, ⟨e⟩⟩)).1 K M hK hM
   apply projection_localizing_of_interfaces Λ p (hbc X) (hbc Y) (hctf X) (hctf Y)
     hp hpull (htensor X) (htensor Y) ?_ A B hA hB
@@ -1030,7 +1031,8 @@ theorem isIso_projectionMate_localizing_padicAlgCl
         constantModelBoundedConstructible Λ T (K ⊗ M) := by
     intro K M hK hM
     simpa only [derivedTensor, curriedTensor_obj_obj] using
-      (tensorClosureRational ℓ (ringChar k) (Fact.out : (ringChar k).Prime).pos
+      (constantModelBoundedConstructible_derivedTensor ℓ (ringChar k)
+      (Fact.out : (ringChar k).Prime).pos
       Fact.out (T ↘ Spec (.of k)) Λ (Or.inr ⟨Iso.refl _⟩)).1 K M hK hM
   apply projection_localizing_of_interfaces Λ p (hbc X) (hbc Y) (hctf X) (hctf Y)
     hp hpull (htensor X) (htensor Y) ?_ A B hA hB

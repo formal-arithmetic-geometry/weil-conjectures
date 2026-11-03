@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Local.Diago
 import all WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalTraceComparisonLimitIsos
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Completed.CompletedCoefficientRealization
 import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.Trace.DiagonalTraceFinitePushUnitSeed
-import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalCompleteScalarRestriction
+import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalCompleteScalarRestrictionCore
 import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Completed.DiagonalCompletedLineComplete
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Completed.DiagonalCompletedRealizedUnitTransport
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.DiagonalCanonicalUnitPush
@@ -68,7 +68,7 @@ private theorem baseChern_lift (l : ℕ) [Fact l.Prime]
   let P : ObjectProperty (DerivedCategory (DiagonalCompleted l S)) := fun M ↦
     ∀ V : DerivedCategory (DiagonalMod l S),
       IsIso (l • 𝟙 V) → Subsingleton (V ⟶ F.obj M)
-  obtain ⟨ff⟩ := DiagonalTrace.diagonalCompleteScalarRestriction l S
+  obtain ⟨ff⟩ := DiagonalTrace.diagonalCompleteScalarRestrictionCore l S
   let U := SheafOfModules.unit (Scheme.purTwistRing S (Scheme.purTwistZlCompletion S l))
   have hunit := DiagonalTrace.diagonalCompletedLine_complete l S U
     ((SheafOfModules.isInvertible_iff_isFiniteLocallyFreeOfRank_one U).mp inferInstance)
@@ -231,7 +231,7 @@ private theorem base_factor_completed (l : ℕ) [Fact l.Prime]
     infer_instance
   let C : ObjectProperty (DerivedCategory (DiagonalCompleted l S)) := fun A ↦
     ∀ V : DerivedCategory (DiagonalMod l S), IsIso (l • 𝟙 V) → Subsingleton (V ⟶ F.obj A)
-  obtain ⟨ff⟩ := DiagonalTrace.diagonalCompleteScalarRestriction l S
+  obtain ⟨ff⟩ := DiagonalTrace.diagonalCompleteScalarRestrictionCore l S
   let A : C.FullSubcategory := ⟨_, line_complete l S hS⟩
   let B : C.FullSubcategory := ⟨_, pushLine_complete l f hX p⟩
   obtain ⟨b, hb⟩ := ff.map_surjective (X := A) (Y := B) (kS ≫ p.LS.R.map J ≫ inv kX)

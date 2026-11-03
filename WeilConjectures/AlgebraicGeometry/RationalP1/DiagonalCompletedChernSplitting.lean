@@ -141,7 +141,7 @@ theorem completed_chern_splitting
   -- Lift only on the full subcategory of derived-complete objects.
   let P : ObjectProperty (DerivedCategory (DiagonalCompleted l S)) := fun M ↦
     ∀ V : DerivedCategory (DiagonalMod l S), IsIso (l • 𝟙 V) → Subsingleton (V ⟶ G.obj M)
-  obtain ⟨ff⟩ := DiagonalTrace.diagonalCompleteScalarRestriction l S
+  obtain ⟨ff⟩ := DiagonalTrace.diagonalCompleteScalarRestrictionCore l S
   have hSfree := (Scheme.pur_twist_sheaf_locally_free.{u, u} S l E).2.1.2.1
   have hV₀ := DiagonalTrace.diagonalCompletedLine_complete l S _ hSfree
   have hV : P ((DiagonalTrace.completedLine l S) ⟦(2 : ℤ)⟧) := by

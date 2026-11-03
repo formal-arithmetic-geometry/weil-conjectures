@@ -160,7 +160,7 @@ theorem integralComplementFiniteness
     QuasiCompact.compactSpace_of_compactSpace (U ↘ Spec (.of k))
   have : IsNoetherian U := ⟨⟩
   intro K hK
-  have hJ := (integralModelsOperations ℓ E).1 j K hK
+  have hJ := (integralModels_operations ℓ E).1 j K hK
   have hΛ :
       Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℤ_[ℓ])) ∨
       Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℚ_[ℓ])) ∨
