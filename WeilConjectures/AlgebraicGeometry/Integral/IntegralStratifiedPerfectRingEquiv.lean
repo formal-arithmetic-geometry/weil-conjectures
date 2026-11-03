@@ -10,14 +10,12 @@ public import WeilConjectures.AlgebraicGeometry.IntegralStratifiedPerfectModels
 public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum
 public import WeilConjectures.AlgebraicGeometry.Pbc.PbcUniformReductionProfile
 
-/-! # Stratified perfect models under isomorphisms of coefficient data
+/-! # Completed coefficients under isomorphisms of coefficient data
 
 A ring isomorphism `φ : A ≃+* A'` carrying the ideal of one adic coefficient datum onto the
-ideal of another identifies all finite quotients, hence the quotient coefficient sheaves,
-their limit and the completed module categories. Every construction entering the bounded
-constructible complete category and the stratified-perfect property is natural in the pair
-(ring, ideal), so the implication from completeness with a uniform reduction profile to
-stratified perfect models transports.
+ideal of another identifies all finite quotients, hence the quotient coefficient sheaves and
+their limit. Restriction of scalars along this completed isomorphism transports completed
+derived objects, intrinsic completeness and the uniform reduction profile.
 
 Source: Bhatt--Scholze, Proposition 6.6.11 (auxiliary; not a blueprint node).
 -/
@@ -177,43 +175,6 @@ theorem AdicCoefficientDatum.transport_uniformReductionProfile (T : Scheme.{u})
     PbcUniformReductionProfile T d' ((d.transportDerived d' φ hφ T).obj K) := by
   sorry
 
-/-- Stratified perfect models descend along the transport of coefficient data.
-Source: Bhatt--Scholze, Proposition 6.6.11 (auxiliary; not a blueprint node).
-Proof: restriction of scalars along the completed isomorphism commutes with inverse image
-along each stratum map and with slice restriction. The completed constant realization is
-the left adjoint of global sections with constant scalar action; the completed isomorphism
-is compatible with the constant scalars, so by uniqueness of adjoints it identifies the
-realization of an `A'`-complex with the transported realization of its restriction along
-`φ`. Restriction along `φ` preserves bounded finite-projective complexes. Reflect the
-local isomorphisms along the restriction equivalence on each slice. -/
-theorem AdicCoefficientDatum.isIntegralStratifiedPerfect_of_transport (T : Scheme.{u})
-    (K : PbcCompletedDerived T d)
-    (hK : IsIntegralStratifiedPerfect T d' ((d.transportDerived d' φ hφ T).obj K)) :
-    IsIntegralStratifiedPerfect T d K := by
-  sorry
-
 end RingEquiv
-
-/-- The implication "intrinsically complete with a uniform reduction profile implies
-stratified perfect" is invariant under isomorphisms of adic coefficient data.
-Source: Bhatt--Scholze, Proposition 6.6.11 (auxiliary; not a blueprint node).
-Proof: φ induces ring isomorphisms `A/I^(n+1) ≃ A'/I'^(n+1)` compatible with all quotient
-maps, hence an isomorphism of the finite coefficient sheaves of continuous component
-functions, of their quotient system and of its limit, compatible with the level
-projections. Restriction of scalars along it transports completeness and the uniform
-reduction profile; the hypothesis for `d'` gives stratified perfect models of the
-transported object, and these descend to `K`. -/
-theorem isIntegralStratifiedPerfect_of_ringEquiv (T : Scheme.{u})
-    {A A' : Type (u + 1)} [CommRing A] [CommRing A']
-    (d : AdicCoefficientDatum A) (d' : AdicCoefficientDatum A')
-    (φ : A ≃+* A') (hφ : d.ideal.map φ = d'.ideal)
-    (h' : ∀ K' : PbcCompletedDerived T d', PbcIsIntrinsicallyComplete T d' K' →
-      PbcUniformReductionProfile T d' K' → IsIntegralStratifiedPerfect T d' K')
-    (K : PbcCompletedDerived T d) (hc : PbcIsIntrinsicallyComplete T d K)
-    (hp : PbcUniformReductionProfile T d K) :
-    IsIntegralStratifiedPerfect T d K :=
-  d.isIntegralStratifiedPerfect_of_transport d' φ hφ T K
-    (h' _ (d.transport_intrinsicallyComplete d' φ hφ T K hc)
-      (d.transport_uniformReductionProfile d' φ hφ T K hp))
 
 end AlgebraicGeometry.Scheme

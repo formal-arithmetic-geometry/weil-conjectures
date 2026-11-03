@@ -1,10 +1,27 @@
+/-
+Copyright (c) 2026 Bin Wu. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Bin Wu
+-/
 module
 
 public import WeilConjectures.AlgebraicGeometry.Integral.IntegralStratifiedPerfectRingEquiv
 public import WeilConjectures.AlgebraicGeometry.Integral.IntegralUniformCoefficient
 import all WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSupplement
+import all WeilConjectures.AlgebraicGeometry.Integral.Residue.IntegralResidueStratumLift
+import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChangeAdjunctionSupplement
 import all WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientDatumCompletedSupplement
 import all WeilConjectures.AlgebraicGeometry.Completed.Adic.CompletedAdicCoefficientDatumSupplement
+
+/-! # Descent of stratified perfect models along isomorphisms of coefficient data
+
+The completed constant realization is left adjoint to global sections with the constant
+scalar action, so it commutes with restriction of scalars along the completed isomorphism
+induced by a datum isomorphism. With the pullback and slice compatibilities of restriction
+of scalars, stratified perfect models of a transported object descend.
+
+Source: Bhatt--Scholze, Proposition 6.6.11 (auxiliary; not a blueprint node).
+-/
 
 @[expose] public noncomputable section
 
@@ -15,16 +32,20 @@ set_option synthInstance.maxSize 4096
 
 universe u
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
+attribute [-instance] AlgebraicGeometry.ProEtale.surjectiveTower_wEqualsLocallyBijective
+attribute [-instance] AlgebraicGeometry.ProEtale.surjectiveTower_hasSheafify
+attribute [-instance] WeilConjectures.integralCoefficientAbSheafify
+attribute [-instance] WeilConjectures.integralCoefficientAbLocallyBijective
 
-private local instance fixedSmall (T : AlgebraicGeometry.Scheme.{u}) :
+private local instance (priority := 100000) fixedSmall (T : AlgebraicGeometry.Scheme.{u}) :
     CategoryTheory.EssentiallySmall.{u + 1} T.ProEt :=
   CategoryTheory.essentiallySmallSelf.{0} _
 
-private noncomputable local instance fixedSheafify (T : AlgebraicGeometry.Scheme.{u}) :
+private noncomputable local instance (priority := 100000) fixedSheafify (T : AlgebraicGeometry.Scheme.{u}) :
     CategoryTheory.HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology T) AddCommGrpCat.{u + 1} :=
   WeilConjectures.integralCoefficientAbSheafify.{u, 0} T
 
-private local instance fixedLocallyBijective (T : AlgebraicGeometry.Scheme.{u}) :
+private local instance (priority := 100000) fixedLocallyBijective (T : AlgebraicGeometry.Scheme.{u}) :
     (AlgebraicGeometry.Scheme.ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
   WeilConjectures.integralCoefficientAbLocallyBijective.{u, 0} T
 
@@ -32,6 +53,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
+/-- The level constant comparison is the sheafified constants map.
+(auxiliary; not a blueprint node). -/
 theorem pbcLevelConstantComparison_hom_eq (T : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :
     (pbcLevelConstantComparison T d n).hom =
@@ -44,6 +67,8 @@ theorem pbcLevelConstantComparison_hom_eq (T : Scheme.{u})
   ext U b
   exact (pbcLevelConstantComparison_exists T d n).exists.choose_spec U b
 
+/-- Level constant comparisons are natural in the quotient ring.
+(auxiliary; not a blueprint node). -/
 theorem pbcLevelConstantComparison_naturality (T : Scheme.{u})
     {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (dA : AdicCoefficientDatum A) (dB : AdicCoefficientDatum B) (n : ℕ)
@@ -59,6 +84,8 @@ theorem pbcLevelConstantComparison_naturality (T : Scheme.{u})
   rw [← Functor.map_comp, ← Functor.map_comp]
   congr 1
 
+/-- The completed scalar map followed by a level projection is the constant quotient map.
+(auxiliary; not a blueprint node). -/
 theorem pbcCompletedScalar_projection (T : Scheme.{u})
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (n : ℕ) :
     pbcCompletedScalar T d ≫ pbcAdicProjection T d n =
@@ -81,6 +108,8 @@ variable {A A' : Type (u + 1)} [CommRing A] [CommRing A']
   (d : AdicCoefficientDatum A) (d' : AdicCoefficientDatum A')
   (φ : A ≃+* A') (hφ : d.ideal.map φ = d'.ideal)
 
+/-- The completed isomorphism is compatible with the constant scalars.
+(auxiliary; not a blueprint node). -/
 theorem AdicCoefficientDatum.completionIso_scalar (T : Scheme.{u}) :
     pbcCompletedScalar T d ≫ (d.completionIso d' φ hφ T).hom =
       (constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).map
@@ -102,7 +131,8 @@ theorem AdicCoefficientDatum.completionIso_scalar (T : Scheme.{u}) :
 end RingEquiv
 section Adjunctions
 
-/-- Restriction along the identity, normalized on underlying sections. -/
+/-- Restriction along the identity, normalized on underlying sections.
+(auxiliary; not a blueprint node). -/
 def pbcRestrictIdIso {T : Scheme.{u}}
     (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) :
     pbcRestrict (𝟙 R) ≅ 𝟭 (pbcModules T R) :=
@@ -113,7 +143,8 @@ def pbcRestrictIdIso {T : Scheme.{u}}
         (fun {U V} f ↦ by ext x; rfl)))
       (fun f ↦ by ext U x; rfl)
 
-/-- Restriction along a ring sheaf isomorphism is an equivalence. -/
+/-- Restriction along a ring sheaf isomorphism is an equivalence.
+(auxiliary; not a blueprint node). -/
 def pbcRestrictEquivalence {T : Scheme.{u}}
     {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (e : R ≅ S) :
     pbcModules T S ≌ pbcModules T R :=
@@ -263,7 +294,10 @@ private def constantModuleTransportIso (T : Scheme.{u}) (Tm : T.ProEt) (hT : IsT
   (conjugateIsoEquiv (adj₁.comp (adjG.comp adj₃)) adjG').symm
     (globalSectionsIso d d' φ hφ T Tm).symm
 
-/-- The completed constant realization commutes with the transport of coefficient data. -/
+/-- The completed constant realization commutes with the transport of coefficient data.
+(auxiliary; not a blueprint node).
+Proof: both sides are left adjoints; their right adjoints are global sections over a
+terminal object, with constant scalar actions identified by the completed isomorphism. -/
 theorem integralConstantDerived_transport (T : Scheme.{u})
     (P : completedConstantDerived (ModuleCat.{u + 1} A')) :
     letI := HasDerivedCategory.standard (ModuleCat.{u + 1} A)
@@ -283,5 +317,115 @@ theorem integralConstantDerived_transport (T : Scheme.{u})
     Functor.isoWhiskerLeft _ (Functor.mapDerivedCategoryCompIso _ _)).app P⟩
 
 end ConstantTransport
+section PerfectTransport
+
+variable {A A' : Type (u + 1)} [CommRing A] [CommRing A'] (φ : A ≃+* A')
+
+/-- Restriction along a ring isomorphism preserves perfect complexes.
+(auxiliary; not a blueprint node). -/
+theorem isPerfectRingComplex_restrictScalars
+    (P : completedConstantDerived (ModuleCat.{u + 1} A'))
+    (hP : @DerivedCategory.IsPerfectRingComplex A' _
+      (HasDerivedCategory.standard (ModuleCat.{u + 1} A')) P) :
+    letI := HasDerivedCategory.standard (ModuleCat.{u + 1} A)
+    letI := HasDerivedCategory.standard (ModuleCat.{u + 1} A')
+    DerivedCategory.IsPerfectRingComplex
+      ((ModuleCat.restrictScalars φ.toRingHom).mapDerivedCategory.obj P) := by
+  letI := HasDerivedCategory.standard (ModuleCat.{u + 1} A)
+  letI := HasDerivedCategory.standard (ModuleCat.{u + 1} A')
+  obtain ⟨Q, a, b, ha, hb, hproj, ⟨e⟩⟩ := hP
+  let F := ModuleCat.restrictScalars.{u + 1} φ.toRingHom
+  refine ⟨(F.mapHomologicalComplex _).obj Q, a, b, ?_, ?_, fun i ↦ ?_,
+    ⟨F.mapDerivedCategory.mapIso e ≪≫ F.mapDerivedCategoryFactors.app Q⟩⟩
+  · rw [CochainComplex.isStrictlyGE_iff] at ha ⊢
+    exact fun i hi ↦ F.map_isZero (ha i hi)
+  · rw [CochainComplex.isStrictlyLE_iff] at hb ⊢
+    exact fun i hi ↦ F.map_isZero (hb i hi)
+  · obtain ⟨h₁, h₂⟩ := hproj i
+    letI i₁ : RingHomInvPair (φ.symm.toRingHom : A' →+* A) (φ.toRingHom : A →+* A') :=
+      { comp_eq := by ext x; exact φ.apply_symm_apply x
+        comp_eq₂ := by ext x; exact φ.symm_apply_apply x }
+    letI i₂ : RingHomInvPair (φ.toRingHom : A →+* A') (φ.symm.toRingHom : A' →+* A) :=
+      { comp_eq := by ext x; exact φ.symm_apply_apply x
+        comp_eq₂ := by ext x; exact φ.apply_symm_apply x }
+    let e₂ : Q.X i ≃ₛₗ[φ.symm.toRingHom] F.obj (Q.X i) :=
+      { toFun := fun x ↦ x
+        invFun := fun x ↦ x
+        map_add' := fun _ _ ↦ rfl
+        map_smul' := fun a x ↦ by
+          change a • x = φ (φ.symm a) • x
+          rw [φ.apply_symm_apply]
+        left_inv := fun _ ↦ rfl
+        right_inv := fun _ ↦ rfl }
+    exact ⟨Module.Projective.of_equiv e₂, Module.Finite.of_surjective e₂.toLinearMap
+      e₂.surjective⟩
+
+end PerfectTransport
+section Descent
+
+variable {A A' : Type (u + 1)} [CommRing A] [CommRing A']
+  (d : AdicCoefficientDatum A) (d' : AdicCoefficientDatum A')
+  (φ : A ≃+* A') (hφ : d.ideal.map φ = d'.ideal)
+
+private def pullbackTransportIso {T S : Scheme.{u}} (g : S ⟶ T) (K : PbcCompletedDerived T d) :
+    (adicTowerPullback g (pbcAdicCompletion T d')).obj ((d.transportDerived d' φ hφ T).obj K) ≅
+      (pbcDerivedRestrict ((adicTowerInverseImage g).map (d.completionIso d' φ hφ T).inv)).obj
+        ((adicTowerPullback g (pbcAdicCompletion T d)).obj K) :=
+  ((proEtaleRingRestrictionDerivedPullback g (pbcAdicCompletion T d') (pbcAdicCompletion T d)
+    ((adicTowerInverseImage g).obj (pbcAdicCompletion T d'))
+    ((adicTowerInverseImage g).obj (pbcAdicCompletion T d))
+    (d.completionIso d' φ hφ T).inv
+    ((adicTowerInverseImage g).map (d.completionIso d' φ hφ T).inv)
+    (Iso.refl _) (Iso.refl _) (by simp)).app K).symm
+
+/-- Stratified perfect models descend along the transport of coefficient data.
+Source: Bhatt--Scholze, Proposition 6.6.11 (auxiliary; not a blueprint node).
+Proof: restriction of scalars along the completed isomorphism commutes with inverse image
+along each stratum map and with slice restriction. The completed constant realization of an
+`A'`-complex is the transported realization of its restriction along `φ`, which is still
+perfect. Reflect the local isomorphisms along the restriction equivalence on each slice. -/
+theorem AdicCoefficientDatum.isIntegralStratifiedPerfect_of_transport (T : Scheme.{u})
+    (K : PbcCompletedDerived T d)
+    (hK : IsIntegralStratifiedPerfect T d' ((d.transportDerived d' φ hφ T).obj K)) :
+    IsIntegralStratifiedPerfect T d K := by
+  letI := HasDerivedCategory.standard (ModuleCat.{u + 1} A)
+  letI := HasDerivedCategory.standard (ModuleCat.{u + 1} A')
+  obtain ⟨s, hs⟩ := hK
+  refine ⟨s, fun i ↦ ?_⟩
+  obtain ⟨V, hV, hw⟩ := hs i
+  refine ⟨V, hV, fun U f hf ↦ ?_⟩
+  obtain ⟨P', hP', ⟨j⟩⟩ := hw U f hf
+  let P := (ModuleCat.restrictScalars φ.toRingHom).mapDerivedCategory.obj P'
+  refine ⟨P, isPerfectRingComplex_restrictScalars φ P' hP', ?_⟩
+  let g := s.immersion i
+  let e := (adicTowerInverseImage g).mapIso (d.completionIso d' φ hφ T)
+  obtain ⟨k⟩ := integralConstantDerived_transport d d' φ hφ T P'
+  apply sliceCoefficient_reflects (s.domain i) e U
+  let B := (adicLisseForget (s.domain i)).obj ((adicTowerInverseImage g).obj
+    (pbcAdicCompletion T d'))
+  exact ⟨(sliceRestrictionIso (s.domain i) B U (pullbackTransportIso d d' φ hφ g K)).symm ≪≫ j ≪≫
+    sliceRestrictionIso (s.domain i) B U
+      ((adicTowerPullback g (pbcAdicCompletion T d')).mapIso k ≪≫
+        pullbackTransportIso d d' φ hφ g ((integralConstantDerived T d).obj P))⟩
+
+end Descent
+/-- The implication "intrinsically complete with a uniform reduction profile implies
+stratified perfect" is invariant under isomorphisms of adic coefficient data.
+Source: Bhatt--Scholze, Proposition 6.6.11 (auxiliary; not a blueprint node).
+Proof: restriction of scalars along the completed isomorphism transports completeness and
+the uniform reduction profile; the hypothesis for `d'` gives stratified perfect models of the
+transported object, and these descend. -/
+theorem isIntegralStratifiedPerfect_of_ringEquiv (T : Scheme.{u})
+    {A A' : Type (u + 1)} [CommRing A] [CommRing A']
+    (d : AdicCoefficientDatum A) (d' : AdicCoefficientDatum A')
+    (φ : A ≃+* A') (hφ : d.ideal.map φ = d'.ideal)
+    (h' : ∀ K' : PbcCompletedDerived T d', PbcIsIntrinsicallyComplete T d' K' →
+      PbcUniformReductionProfile T d' K' → IsIntegralStratifiedPerfect T d' K')
+    (K : PbcCompletedDerived T d) (hc : PbcIsIntrinsicallyComplete T d K)
+    (hp : PbcUniformReductionProfile T d K) :
+    IsIntegralStratifiedPerfect T d K :=
+  d.isIntegralStratifiedPerfect_of_transport d' φ hφ T K
+    (h' _ (d.transport_intrinsicallyComplete d' φ hφ T K hc)
+      (d.transport_uniformReductionProfile d' φ hφ T K hp))
 
 end AlgebraicGeometry.Scheme
