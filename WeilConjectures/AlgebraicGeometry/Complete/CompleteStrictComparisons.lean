@@ -8,9 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Complete.CompleteProperOpenGamma
 public import WeilConjectures.AlgebraicGeometry.Strict.Tower.StrictTowerExchangeMateNormalization
 public import WeilConjectures.CategoryTheory.Adjunction.ProperOpenTransport
-public import WeilConjectures.AlgebraicGeometry.Completed.Open.CompletedOpenEndpointLimitTransport
-public import WeilConjectures.AlgebraicGeometry.StrictTower.ScalarRestrictionOpenSupport
-public import WeilConjectures.AlgebraicGeometry.Complete.CompleteStrictReductionComposition
+import WeilConjectures.AlgebraicGeometry.Complete.CompleteStrictReductionComposition
 import all WeilConjectures.AlgebraicGeometry.Strict.Tower.StrictTowerExchangeMateNormalization
 import all WeilConjectures.AlgebraicGeometry.Completed.Open.CompletedOpenEndpointLimitTransport
 import all WeilConjectures.AlgebraicGeometry.StrictTower.ScalarRestrictionOpenSupport
@@ -38,7 +36,6 @@ universe t u
 open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace CategoryTheory
-
 
 /-- The mate of a horizontally pasted square of isomorphisms is invertible when the mates of
 the two pieces are. -/
@@ -74,7 +71,6 @@ theorem mateEquiv_isIso_of_paste {A B C D E F : Type*} [Category A] [Category B]
     infer_instance
   exact NatIso.isIso_of_isIso_app _
 
-
 /-- Morphism algebra deriving the comparison of a square from the comparisons of its two
 composites. -/
 theorem Functor.map_comp_eq_of_comp {C D : Type*} [Category C] [Category D] (F : C ⥤ D)
@@ -97,7 +93,6 @@ theorem Functor.map_comp_eq_of_comp {C D : Type*} [Category C] [Category D] (F :
   rw [ht, Category.assoc, F.map_comp, Category.assoc, ← F.map_comp_assoc, ← F.map_comp_assoc,
     Category.assoc, ha, F.map_comp, F.map_id, Category.comp_id, ← Category.assoc, hs]
   simp
-
 
 /-- Morphism algebra combining the reduction and restriction composition coherences. -/
 theorem Functor.strictPull_comp_algebra {T S S' : Type*} [Category T] [Category S]
@@ -207,7 +202,6 @@ theorem restrictScalars_openExtension_counit_isIso
         (eB.counitIso.app N).symm ≪≫ (hB.app (eB.inverse.obj N)).symm
   exact (moduleJAdj B j).isIso_counit_app_of_iso t
 
-
 /-- Open extension of constant-coefficient modules has invertible unit. -/
 theorem moduleJAdj_unit_isIso {B : Type (u + 1)} [CommRing B] {U X : Scheme.{u}}
     (j : U ⟶ X) [IsOpenImmersion j] : IsIso (moduleJAdj.{u} B j).unit := by
@@ -265,7 +259,6 @@ def cbcStrictPull {U V : Scheme.{t}} (f : U ⟶ V) :
     Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerLeft (completedReductionTower V d) (exchangeResPull d f) ≪≫
     (Functor.associator _ _ _).symm
-
 
 theorem cbcStrictPull_hom_app {U V : Scheme.{t}} (f : U ⟶ V) (M : d.derived V) :
     (cbcStrictPull d f).hom.app M =
@@ -438,7 +431,7 @@ theorem cbcStrictPush_isIso {X Y : Scheme.{t}} (f : X ⟶ Y) :
 
 /-- Restriction to constant coefficients commutes with ordinary open extension.
 Source: Stacks 03DI (blueprint: thm-cbc-complete-proetale). -/
-theorem exchangeOpen_isIso {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j] :
+private theorem exchangeOpen_isIso {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j] :
     IsIso (ProperOpenTransport.openComparison (cbcEndpointOpenAdj d j)
       (ProEtale.StrictTower.moduleJAdj A j) (exchangeOrdinaryResPull d j)) := by
   obtain ⟨hfull, hfaith⟩ := cbcEndpointOpen_fullFaithful d j
@@ -454,7 +447,7 @@ theorem exchangeOpen_isIso {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j] 
 
 /-- Restriction to constant coefficients commutes with open extension of derived strict
 towers. Source: Stacks 03DI (blueprint: thm-cbc-complete-proetale). -/
-def exchangeTowerOpenIso {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j] :
+private def exchangeTowerOpenIso {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j] :
     exchangeTowerRes d U ⋙ ProEtale.StrictTower.J A j ≅
       cbcTowerDerived (cbcEndpointOpen d j) ⋙ exchangeTowerRes d X :=
   have := exchangeOpen_isIso d j
