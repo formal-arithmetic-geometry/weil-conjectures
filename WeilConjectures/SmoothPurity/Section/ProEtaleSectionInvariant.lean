@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.EtaleCohomology.Purity.Smooth.DeformationIso
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionInvariantBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ComparisonUpperStar
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Duality
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomComparison
@@ -20,14 +20,14 @@ coefficients beyond finiteness is needed for the definition.
 
 The pro-étale exceptional inverse image is `Rg^! = ν_V^* ∘ g^× ∘ Rν_{B,*}`, so the pro-étale
 section invariant is, canonically, the comparison pullback `ν_B^*` of the étale one
-(`AlgebraicGeometry.ProEtale.sectionInvariantIso`): `Rν_* Λ_B = Λ_B` and `ν^*` commutes with
-derived pullbacks. Every construction with étale section invariants transports along this
+(`AlgebraicGeometry.ProEtale.sectionInvariantComparisonIso`): `Rν_* Λ_B = Λ_B` and `ν^*` commutes
+with derived pullbacks. Every construction with étale section invariants transports along this
 identification; this file does so for base change.
 
 ## Main definitions
 
 - `AlgebraicGeometry.ProEtale.sectionInvariant`: the pro-étale section invariant.
-- `AlgebraicGeometry.ProEtale.sectionInvariantIso`: `𝒞(g, s) ≅ ν_B^* 𝒞_ét(g, s)`.
+- `AlgebraicGeometry.ProEtale.sectionInvariantComparisonIso`: `𝒞(g, s) ≅ ν_B^* 𝒞_ét(g, s)`.
 - `AlgebraicGeometry.ProEtale.sectionInvariantBaseChangeIso`: `Lg^* 𝒞(f, s) ≅ 𝒞(f', s')` in a
   cartesian square, transported from `AlgebraicGeometry.Etale.sectionInvariantBaseChangeIso`.
 -/
@@ -60,7 +60,8 @@ noncomputable def sectionInvariant {V B : Scheme.{u}} (g : V ⟶ B) [HasCompacti
 `𝒞(g, s) ≅ ν_B^* 𝒞_ét(g, s)`: by definition `ω_g = ν_V^* g^× Rν_{B,*} Λ_B`, and
 `Rν_{B,*} Λ_B ≅ Λ_B` (`AlgebraicGeometry.ProEtale.rightDerivedComparisonLowerStarUnitIso`) and
 `Ls^* ν_V^* ≅ ν_B^* Ls^*` (`AlgebraicGeometry.ProEtale.derivedComparisonUpperStarUpperStarIso`). -/
-noncomputable def sectionInvariantIso {V B : Scheme.{u}} (g : V ⟶ B) [HasCompactification g]
+noncomputable def sectionInvariantComparisonIso {V B : Scheme.{u}} (g : V ⟶ B)
+    [HasCompactification g]
     (s : B ⟶ V) :
     sectionInvariant Λ g s ≅
       (comparisonUpperStar (ModuleCat.{u + 1} Λ) B).mapDerivedCategory.obj
@@ -92,11 +93,11 @@ noncomputable def sectionInvariantBaseChangeIso (sq : IsPullback g' f' f g)
     (ProEtale.upperStar (ModuleCat.{u + 1} Λ) g).leftDerivedFunctor.obj (sectionInvariant Λ f s) ≅
       sectionInvariant Λ f' s' :=
   (ProEtale.upperStar (ModuleCat.{u + 1} Λ) g).leftDerivedFunctor.mapIso
-      (sectionInvariantIso Λ f s) ≪≫
+      (sectionInvariantComparisonIso Λ f s) ≪≫
     (derivedComparisonUpperStarUpperStarIso (ModuleCat.{u + 1} Λ) g).app _ ≪≫
     (comparisonUpperStar (ModuleCat.{u + 1} Λ) Y').mapDerivedCategory.mapIso
       (Etale.sectionInvariantBaseChangeIso Λ sq s s' hs) ≪≫
-    (sectionInvariantIso Λ f' s').symm
+    (sectionInvariantComparisonIso Λ f' s').symm
 
 end BaseChange
 

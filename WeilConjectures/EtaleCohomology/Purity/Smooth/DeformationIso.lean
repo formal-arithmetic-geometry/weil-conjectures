@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Deformation
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionInvariantBaseChange
 
 /-!
 # The DNC isomorphism as data
@@ -31,8 +32,6 @@ coordinates. This file makes the isomorphism and its ingredients into definition
 In the list below, `DeformationToNormalConeData` abbreviates
 `AlgebraicGeometry.Scheme.Hom.DeformationToNormalConeData`.
 
-- `AlgebraicGeometry.Etale.sectionInvariantBaseChangeIso`: `Lg^* 𝒞(f, s) ≅ 𝒞(f', s')` in a
-  cartesian square.
 - `DeformationToNormalConeData.oneFibreIso`, `DeformationToNormalConeData.zeroFibreIso`: the
   fibres of the family object at `t = 1` and `t = 0`.
 - `DeformationToNormalConeData.familyObjectIso`: the normalized constancy comparison `κ`.
@@ -60,42 +59,6 @@ namespace AlgebraicGeometry
 
 open Scheme
 
-namespace Etale
-
-variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
-
-section BaseChange
-
-variable {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
-  [HasCompactification f] [HasCompactification f'] [QuasiCompact f']
-
-/-- Blueprint `lem-pur-dnc-section-geometry` (1): *base change of section invariants.* In a
-cartesian square `g' ≫ f = f' ≫ g` whose base change map of dualizing complexes
-`Lg'^* ω_f ⟶ ω_{f'}` is invertible, and for sections `s` of `f` and `s'` of `f'` with
-`s' ≫ g' = g ≫ s`,
-
-`Lg^* 𝒞(f, s) = Lg^* Ls^* ω_f ≅ Ls'^* Lg'^* ω_f ≅ Ls'^* ω_{f'} = 𝒞(f', s')`. -/
-noncomputable def sectionInvariantBaseChangeIso (sq : IsPullback g' f' f g)
-    [IsIso (dualizingComplexBaseChangeMap Λ sq)] (s : Y ⟶ X) (s' : Y' ⟶ X')
-    (hs : s' ≫ g' = g ≫ s) :
-    (L((g)^*[ModuleCat.{u + 1} Λ])).obj (sectionInvariant Λ f s) ≅ sectionInvariant Λ f' s' :=
-  ((leftDerivedUpperStarComp _ g s).app _).symm ≪≫
-    (leftDerivedUpperStarComp _ s' g' (g ≫ s) hs.symm).app _ ≪≫
-    (L((s')^*[ModuleCat.{u + 1} Λ])).mapIso (asIso (dualizingComplexBaseChangeMap Λ sq))
-
-/-- Blueprint `sk-prop-cohsm` (c): for `f` smooth of relative dimension `d`, the base change map
-of dualizing complexes `Lg'^* ω_f ⟶ ω_{f'}` is an isomorphism. -/
-theorem isIso_dualizingComplexBaseChangeMap_of_smoothOfRelativeDimension [QuasiSeparatedSpace Y]
-    [HasInvertibleExponent Λ X] (d : ℕ) [SmoothOfRelativeDimension d f]
-    (sq : IsPullback g' f' f g) : IsIso (dualizingComplexBaseChangeMap Λ sq) := by
-  rw [isIso_dualizingComplexBaseChangeMap_iff]
-  have := isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension Λ f d sq
-  infer_instance
-
-end BaseChange
-
-end Etale
-
 namespace Scheme.Hom.DeformationToNormalConeData
 
 open _root_.AlgebraicGeometry.Etale
@@ -108,7 +71,6 @@ section Fibres
 
 variable [QuasiSeparatedSpace B]
 
-include D in
 /-- The base change map of `ω_{g̃}` along a cartesian square over `𝔸¹_B` is invertible, `g̃`
 being smooth. -/
 theorem isIso_dualizingComplexBaseChangeMap {X' Y' : Scheme.{u}} {v : Y' ⟶ 𝔸(ULift.{u} (Fin 1); B)}
@@ -154,7 +116,7 @@ noncomputable def familyObjectIso
   (D.existsUnique_familyObject_iso Λ aB θ).exists.choose
 
 /-- The constancy comparison restricts to `θ` at `t = 1`. -/
-theorem familyObjectIso_hom_restrict
+theorem leftDerivedUpperStar_map_familyObjectIso_hom_comp
     (θ : (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) B)^*[ModuleCat.{u + 1} Λ])).obj
       (D.familyObject Λ) ≅ sectionInvariant Λ g s) :
     (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) B)^*[ModuleCat.{u + 1} Λ])).map
@@ -173,7 +135,8 @@ theorem eq_familyObjectIso
       (leftDerivedUpperStarCompSectionIso _ _ _
         (AffineSpace.oneSection_comp_over (ULift.{u} (Fin 1)) B)).hom.app _ = θ.hom) :
     κ = D.familyObjectIso Λ aB θ :=
-  (D.existsUnique_familyObject_iso Λ aB θ).unique hκ (D.familyObjectIso_hom_restrict Λ aB θ)
+  (D.existsUnique_familyObject_iso Λ aB θ).unique hκ
+    (D.leftDerivedUpperStar_map_familyObjectIso_hom_comp Λ aB θ)
 
 variable [HasCompactification N.proj]
 
@@ -219,7 +182,7 @@ theorem leftDerivedUpperStar_mapIso_sectionInvariantIsoOfFibreIso
   have hθ₁ : θ₁ = (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) B)^*[ModuleCat.{u + 1} Λ])).mapIso
       κ ≪≫ (leftDerivedUpperStarCompSectionIso _ _ _
         (AffineSpace.oneSection_comp_over (ULift.{u} (Fin 1)) B)).app _ :=
-    Iso.ext (D.familyObjectIso_hom_restrict Λ aB θ₁).symm
+    Iso.ext (D.leftDerivedUpperStar_map_familyObjectIso_hom_comp Λ aB θ₁).symm
   let θ₀' := (L((AffineSpace.zeroSection (ULift.{u} (Fin 1)) B)^*[ModuleCat.{u + 1} Λ])).mapIso
       κ ≪≫ (leftDerivedUpperStarCompSectionIso _ _ _
         (AffineSpace.zeroSection_comp_over (ULift.{u} (Fin 1)) B)).app (sectionInvariant Λ g s)

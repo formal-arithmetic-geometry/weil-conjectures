@@ -15952,6 +15952,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionPoin
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionProduct
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionReduction
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionInvariant
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionInvariantBaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionInvariantCtf
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionInvariantTwist
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionThomFrames

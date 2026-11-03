@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.Coordinates
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.NormalCone
 public import WeilConjectures.EtaleCohomology.TateTwist.Normalized
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.DeformationIso
 public import WeilConjectures.SmoothPurity.Section.ProEtaleSectionInvariant
 
 /-!
@@ -24,14 +25,14 @@ DNC isomorphism `𝒞(g, s) ≅ 𝒞(π_N, 0_N)` (blueprint `sk-thm-dnc`, `thm-p
 
 ## Implementation notes
 
-The pro-étale section invariants are the comparison pullbacks `ν^*` of the étale ones
-(`AlgebraicGeometry.ProEtale.sectionInvariantIso`), canonically. Every datum of this file is the
-image under `ν^*` of the corresponding étale datum of
+The pro-étale section invariants are the comparison pullbacks `ν^*` of the étale ones,
+canonically (`AlgebraicGeometry.ProEtale.sectionInvariantComparisonIso`). Every datum of this
+file is the image under `ν^*` of the corresponding étale datum of
 `WeilConjectures.EtaleCohomology.Purity.Smooth.DeformationIso`, read through these
 identifications; so its properties are those of the étale datum. In particular the DNC
 isomorphism restricts along every base change `u : B' ⟶ B` to the image of the restricted étale
-DNC isomorphism (`leftDerivedUpperStar_map_proEtaleSectionInvariantIso`), which is the identity
-of the standard object in every system of coordinates
+DNC isomorphism (`leftDerivedUpperStar_map_proEtaleSectionInvariantIso_hom`), which is the
+identity of the standard object in every system of coordinates
 (`leftDerivedUpperStar_mapIso_sectionInvariantIsoOfFibreIso`).
 
 The Tate twist datum is the genuine one, `Λ(1) = μₙ ⊗ Λ`, which is normalized
@@ -109,27 +110,27 @@ noncomputable def proEtaleZeroFibreIso [HasCompactification N.proj] [QuasiCompac
   sectionInvariantBaseChangeIso Λ D.isPullback_zeroFibre D.sect N.zeroSection D.comp_zeroFibre
 
 /-- The fibre identification at `t = 1` is the image under `ν^*` of the étale one. -/
-theorem proEtaleOneFibreIso_eq [HasCompactification g] [QuasiCompact g] :
+theorem proEtaleOneFibreIso_eq_comparison [HasCompactification g] [QuasiCompact g] :
     D.proEtaleOneFibreIso Λ =
       (ProEtale.upperStar (ModuleCat.{u + 1} Λ)
           (AffineSpace.oneSection (ULift.{u} (Fin 1)) B)).leftDerivedFunctor.mapIso
-        (ProEtale.sectionInvariantIso Λ D.proj D.sect) ≪≫
+        (ProEtale.sectionInvariantComparisonIso Λ D.proj D.sect) ≪≫
       (derivedComparisonUpperStarUpperStarIso (ModuleCat.{u + 1} Λ) _).app _ ≪≫
       (comparisonUpperStar (ModuleCat.{u + 1} Λ) B).mapDerivedCategory.mapIso
         (D.oneFibreIso Λ) ≪≫
-      (ProEtale.sectionInvariantIso Λ g s).symm :=
+      (ProEtale.sectionInvariantComparisonIso Λ g s).symm :=
   rfl
 
 /-- The fibre identification at `t = 0` is the image under `ν^*` of the étale one. -/
-theorem proEtaleZeroFibreIso_eq [HasCompactification N.proj] [QuasiCompact N.proj] :
+theorem proEtaleZeroFibreIso_eq_comparison [HasCompactification N.proj] [QuasiCompact N.proj] :
     D.proEtaleZeroFibreIso Λ =
       (ProEtale.upperStar (ModuleCat.{u + 1} Λ)
           (AffineSpace.zeroSection (ULift.{u} (Fin 1)) B)).leftDerivedFunctor.mapIso
-        (ProEtale.sectionInvariantIso Λ D.proj D.sect) ≪≫
+        (ProEtale.sectionInvariantComparisonIso Λ D.proj D.sect) ≪≫
       (derivedComparisonUpperStarUpperStarIso (ModuleCat.{u + 1} Λ) _).app _ ≪≫
       (comparisonUpperStar (ModuleCat.{u + 1} Λ) B).mapDerivedCategory.mapIso
         (D.zeroFibreIso Λ) ≪≫
-      (ProEtale.sectionInvariantIso Λ N.proj N.zeroSection).symm :=
+      (ProEtale.sectionInvariantComparisonIso Λ N.proj N.zeroSection).symm :=
   rfl
 
 omit [QuasiSeparatedSpace B]
@@ -148,13 +149,13 @@ noncomputable def proEtaleFamilyObjectIso :
         (ProEtale.sectionInvariant Λ g s) :=
   have := quasiSeparatedSpace_of_quasiSeparated aB
   have : QuasiCompact g := MorphismProperty.of_isPullback D.isPullback_oneFibre inferInstance
-  ProEtale.sectionInvariantIso Λ D.proj D.sect ≪≫
+  ProEtale.sectionInvariantComparisonIso Λ D.proj D.sect ≪≫
     (comparisonUpperStar (ModuleCat.{u + 1} Λ) _).mapDerivedCategory.mapIso
       (D.familyObjectIso Λ aB (D.oneFibreIso Λ)) ≪≫
     ((derivedComparisonUpperStarUpperStarIso (ModuleCat.{u + 1} Λ) _).app _).symm ≪≫
     (ProEtale.upperStar (ModuleCat.{u + 1} Λ)
         (𝔸(ULift.{u} (Fin 1); B) ↘ B)).leftDerivedFunctor.mapIso
-      (ProEtale.sectionInvariantIso Λ g s).symm
+      (ProEtale.sectionInvariantComparisonIso Λ g s).symm
 
 variable [HasCompactification N.proj]
 
@@ -164,10 +165,10 @@ variable [HasCompactification N.proj]
 restriction to `t = 0` of the constancy comparison normalized at `t = 1`. -/
 noncomputable def proEtaleSectionInvariantIso :
     ProEtale.sectionInvariant Λ g s ≅ ProEtale.sectionInvariant Λ N.proj N.zeroSection :=
-  ProEtale.sectionInvariantIso Λ g s ≪≫
+  ProEtale.sectionInvariantComparisonIso Λ g s ≪≫
     (comparisonUpperStar (ModuleCat.{u + 1} Λ) B).mapDerivedCategory.mapIso
       (D.sectionInvariantIso Λ aB) ≪≫
-    (ProEtale.sectionInvariantIso Λ N.proj N.zeroSection).symm
+    (ProEtale.sectionInvariantComparisonIso Λ N.proj N.zeroSection).symm
 
 /-- Blueprint `thm-pur-dnc-invariance`: *compatibility with base change.* Along every
 `u : B' ⟶ B` the pro-étale DNC isomorphism restricts to the image under `ν^*` of the restricted
@@ -175,18 +176,18 @@ noncomputable def proEtaleSectionInvariantIso :
 `𝒞 ≅ ν^* 𝒞_ét`. The restricted étale DNC isomorphism is the identity of the standard object in
 every system of coordinates over `B'`
 (`leftDerivedUpperStar_mapIso_sectionInvariantIsoOfFibreIso`). -/
-theorem leftDerivedUpperStar_map_proEtaleSectionInvariantIso {B' : Scheme.{u}} (u : B' ⟶ B) :
+theorem leftDerivedUpperStar_map_proEtaleSectionInvariantIso_hom {B' : Scheme.{u}} (u : B' ⟶ B) :
     (ProEtale.upperStar (ModuleCat.{u + 1} Λ) u).leftDerivedFunctor.map
         (D.proEtaleSectionInvariantIso Λ aB).hom =
       (ProEtale.upperStar (ModuleCat.{u + 1} Λ) u).leftDerivedFunctor.map
-          (ProEtale.sectionInvariantIso Λ g s).hom ≫
+          (ProEtale.sectionInvariantComparisonIso Λ g s).hom ≫
         (derivedComparisonUpperStarUpperStarIso (ModuleCat.{u + 1} Λ) u).hom.app _ ≫
         (comparisonUpperStar (ModuleCat.{u + 1} Λ) B').mapDerivedCategory.map
           ((Etale.upperStar (ModuleCat.{u + 1} Λ) u).leftDerivedFunctor.map
             (D.sectionInvariantIso Λ aB).hom) ≫
         (derivedComparisonUpperStarUpperStarIso (ModuleCat.{u + 1} Λ) u).inv.app _ ≫
         (ProEtale.upperStar (ModuleCat.{u + 1} Λ) u).leftDerivedFunctor.map
-          (ProEtale.sectionInvariantIso Λ N.proj N.zeroSection).inv := by
+          (ProEtale.sectionInvariantComparisonIso Λ N.proj N.zeroSection).inv := by
   have h := (derivedComparisonUpperStarUpperStarIso (ModuleCat.{u + 1} Λ) u).hom.naturality
     (D.sectionInvariantIso Λ aB).hom
   simp only [Functor.comp_obj, Functor.comp_map] at h
@@ -231,8 +232,8 @@ field on which the characteristic of the finite coefficient ring `Λ` is inverti
 pro-étale section invariant of `(g, s)` is isomorphic to that of the normal cone
 `π_N : N_s = Spec (⨁ I^r / I^{r+1}) ⟶ B` with its zero section, through the deformation
 `D_s V = Spec_V 𝒪_V[t, I t⁻¹]` (`AlgebraicGeometry.Scheme.Hom.deformationToNormalConeData`).
-The projection `π_N` is compactifiable by
-`AlgebraicGeometry.Scheme.Hom.hasCompactification_normalConeProj`. -/
+The compactifiability hypotheses hold by Nagata's theorem, see
+`AlgebraicGeometry.Scheme.Hom.hasCompactification_normalConeProj` for `π_N`. -/
 theorem nonempty_iso_sectionInvariant_normalConeProj (d : ℕ)
     (g : V ⟶ B) [SmoothOfRelativeDimension d g] [IsSeparated g] [QuasiCompact g]
     [HasCompactification g] (s : B ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 B)

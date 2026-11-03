@@ -5,9 +5,9 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Cohomological.CohomologicalSmoothnessFiniteComparison
 public import WeilConjectures.SmoothPurity.PurityFiniteSetting.Section.PuritySectionInvariant
 public import WeilConjectures.SmoothPurity.Section.ProEtaleDeformation
+import WeilConjectures.AlgebraicGeometry.Cohomological.CohomologicalSmoothnessFiniteComparison
 
 /-! # DNC invariance of the section invariant in the finite purity setting
 

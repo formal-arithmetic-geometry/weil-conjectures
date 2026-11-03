@@ -17,9 +17,12 @@ chart `u_i = x_i / t` the deformation space `D_s V` is étale over `𝔸^d_{𝔸
 constructions of `WeilConjectures.AlgebraicGeometry.DeformationToNormalCone`, this gives the
 deformation datum of blueprint `sk-lem-geometry`.
 
-## Main statements
+## Main definitions
 
 - `AlgebraicGeometry.Scheme.Hom.deformationToNormalConeData`
+
+## Main statements
+
 - `AlgebraicGeometry.Scheme.Hom.nonempty_deformationToNormalConeData`
 -/
 
@@ -318,11 +321,11 @@ theorem exists_etale_coordinates_deformationSpace (d : ℕ) (g : V ⟶ B)
 
 /-- Blueprint `sk-lem-geometry`: Geometry of the deformation of a section
 
-**Existence of the deformation to the normal cone.** Let `g : V ⟶ B` be smooth of pure
-relative dimension `d` with a closed section `s`, and let `N_s ⟶ B` be the normal cone of `s`
-(`AlgebraicGeometry.Scheme.Hom.normalConeData`) with its zero section. Then the deformation
-datum of `AlgebraicGeometry.Scheme.Hom.DeformationToNormalConeData` exists, with fibre `N_s`
-over `t = 0`: the deformation space is the relative spectrum `D_s V = Spec_V 𝒪_V[t, I t⁻¹]` of the
+**The deformation to the normal cone.** Let `g : V ⟶ B` be smooth of pure relative
+dimension `d` with a closed section `s`, and let `N_s ⟶ B` be the normal cone of `s`
+(`AlgebraicGeometry.Scheme.Hom.normalConeData`) with its zero section. This is the deformation
+datum of `AlgebraicGeometry.Scheme.Hom.DeformationToNormalConeData` with fibre `N_s` over
+`t = 0`: the deformation space is the relative spectrum `D_s V = Spec_V 𝒪_V[t, I t⁻¹]` of the
 extended Rees algebra of the ideal `I` of `s`. Its fibre over `t = 1` is `V` and over `t = 0` the
 normal cone, over the punctured line it is `V ×_B 𝔾_{m,B}`, and `g̃` is smooth of relative
 dimension `d`. As `g` is separated and quasi-compact over a quasi-compact quasi-separated base,
