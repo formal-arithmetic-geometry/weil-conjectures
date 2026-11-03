@@ -423,6 +423,15 @@ private abbrev CompletedShriekPastingData.pComp
     (K : CompletedShriekPastingData.{u} Obj R₀ J₀) {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z) (fg : X ⟶ Z) (e : f ≫ g = fg) := K.2.1 f g fg e
 
+private abbrev CompletedShriekPastingData.rId
+    (K : CompletedShriekPastingData.{u} Obj R₀ J₀) (X : Scheme.{u}) := K.1 X
+
+private abbrev CompletedShriekPastingData.jCompNamed
+    (K : CompletedShriekPastingData.{u} Obj R₀ J₀) {X Y Z : Scheme.{u}}
+    (f : X ⟶ Y) (g : Y ⟶ Z) (fg : X ⟶ Z)
+    [IsOpenImmersion f] [IsOpenImmersion g] [IsOpenImmersion fg]
+    (e : f ≫ g = fg) := K.2.2.1 f g fg e
+
 private abbrev CompletedShriekPastingData.gamma
     (K : CompletedShriekPastingData.{u} Obj R₀ J₀) {V W S T : Scheme.{u}}
     (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
