@@ -4,10 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Claude
 -/
 module
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfShape
-public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfShape
 
 
 /-!

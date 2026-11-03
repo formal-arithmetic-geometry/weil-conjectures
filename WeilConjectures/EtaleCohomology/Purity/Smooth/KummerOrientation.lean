@@ -10,8 +10,8 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerBaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SupportedClassMapRestriction
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionComp
 public import WeilConjectures.SixFunctors.Etale.Derived.CupProductCoherence
-public import WeilConjectures.AlgebraicGeometry.AffineSpace.ZeroSectionComplement
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineRelative
+public import WeilConjectures.AlgebraicGeometry.AffineSpace.ZeroSectionComplement
 
 /-!
 # The global orientation of the zero section of the affine line

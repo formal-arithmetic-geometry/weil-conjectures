@@ -5,10 +5,14 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructible
+public import WeilConjectures.TraceFormula.Additivity
 public import WeilConjectures.TraceFormula.Specialization.DefectExchangeSquares
 public import WeilConjectures.TraceFormula.Specialization.DeformationModelFactor
 public import WeilConjectures.TraceFormula.Specialization.NearbyFiniteness
+public import WeilConjectures.TraceFormula.Specialization.NearbyProperExchange
 public import WeilConjectures.TraceFormula.Specialization.NearbySmoothExchange
+public import WeilConjectures.TraceFormula.Specialization.NormalizePrecoherent
 public import WeilConjectures.TraceFormula.Specialization.TraitModelInstances
 
 /-!

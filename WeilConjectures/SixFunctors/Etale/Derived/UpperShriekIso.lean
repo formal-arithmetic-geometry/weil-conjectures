@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Shriek
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 
 
 /-!

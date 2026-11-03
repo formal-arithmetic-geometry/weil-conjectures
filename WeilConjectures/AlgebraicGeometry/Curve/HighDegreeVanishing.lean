@@ -15,9 +15,9 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.Comparison
 public import WeilConjectures.PointCount
-public import Mathlib.Order.CompletePartialOrder
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomology
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
+public import Mathlib.Order.CompletePartialOrder
 
 /-!
 # Étale cohomology of curves in degrees at least three

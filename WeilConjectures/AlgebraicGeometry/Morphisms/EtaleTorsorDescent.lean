@@ -9,8 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.FiniteEtaleFiniteLocallyConstant
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 public import WeilConjectures.AlgebraicGeometry.Sites.PointFunctions
 public import Mathlib.CategoryTheory.Sites.LocalSite
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 /-!
 # Torsors under a finite constant sheaf are representable

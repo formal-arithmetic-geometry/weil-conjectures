@@ -10,10 +10,10 @@ public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.FullyFaithful
 public import WeilConjectures.AlgebraicGeometry.Curve.HighDegreeVanishing
 public import WeilConjectures.AlgebraicGeometry.FunctionFieldLimit
 public import WeilConjectures.AlgebraicGeometry.Sites.SectionContinuity
-public import Mathlib.Order.CompletePartialOrder
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
-public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
 public import WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomology
+public import WeilConjectures.AlgebraicGeometry.Curve.Assertions
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
+public import Mathlib.Order.CompletePartialOrder
 
 /-!
 # Comparing the cohomology of a curve with that of its generic point

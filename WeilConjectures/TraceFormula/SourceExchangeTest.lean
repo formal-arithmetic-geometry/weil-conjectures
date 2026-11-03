@@ -5,14 +5,15 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.Adjunction.MateComp
-public import WeilConjectures.TraceFormula.ClassTest
 public import WeilConjectures.TraceFormula.TraceClass
+public import WeilConjectures.TraceFormula.ClassTest
+public import WeilConjectures.CategoryTheory.Adjunction.MateComp
+public import WeilConjectures.TraceFormula.ProperCompatibilitySupport
 public import WeilConjectures.TraceFormula.SupportedClass
-public import WeilConjectures.TraceFormula.ShriekTrace
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.StalkLowerStarProj
-public import WeilConjectures.TraceFormula.ProperCompatibilityExchange
 public import WeilConjectures.CategoryTheory.Adjunction.ConjugateComp
+public import WeilConjectures.TraceFormula.ProperCompatibilityExchange
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.StalkLowerStarProj
+public import WeilConjectures.TraceFormula.ShriekTrace
 
 /-!
 

@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.ProperFlatCechModel
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteSections
+public import WeilConjectures.AlgebraicGeometry.Cohomology.ProperFinite
 public import WeilConjectures.AlgebraicGeometry.Modules.FiniteFreeComplex
 
 /-!

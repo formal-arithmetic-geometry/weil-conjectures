@@ -6,10 +6,10 @@ Authors: Claude
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Field
-public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteSections
-public import WeilConjectures.AlgebraicGeometry.Modules.FiniteFreeComplex
 public import WeilConjectures.AlgebraicGeometry.FlatModelFiniteFreeShortening
+public import WeilConjectures.AlgebraicGeometry.Modules.FiniteFreeComplex
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteSections
+public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Field
 
 /-!
 # Finiteness and vanishing of coherent cohomology over a field

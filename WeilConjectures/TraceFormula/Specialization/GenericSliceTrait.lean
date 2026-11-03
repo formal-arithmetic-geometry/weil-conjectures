@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.TraceFormula.Specialization.AffineSpaceSliceCartesian
 public import WeilConjectures.TraceFormula.Specialization.AffineSpaceSliceModel
+public import WeilConjectures.SixFunctors.NearbyCycles.CartesianModelWeaklyEtale
 public import WeilConjectures.TraceFormula.Specialization.SliceTrait
 
 /-!

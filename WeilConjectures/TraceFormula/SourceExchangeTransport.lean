@@ -5,10 +5,10 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.Monoidal.Closed.ExceptionalHom
-public import WeilConjectures.PoincareDuality.ProjectionFormula
-public import WeilConjectures.TraceFormula.ClassTest
 public import WeilConjectures.TraceFormula.ProperKunneth
+public import WeilConjectures.TraceFormula.ClassTest
+public import WeilConjectures.PoincareDuality.ProjectionFormula
+public import WeilConjectures.CategoryTheory.Monoidal.Closed.ExceptionalHom
 
 /-!
 

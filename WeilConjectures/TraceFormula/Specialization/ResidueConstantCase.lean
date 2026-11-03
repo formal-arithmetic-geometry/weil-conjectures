@@ -5,10 +5,12 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenClosedTriangle
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ResidueFieldTransport
 public import WeilConjectures.TraceFormula.Specialization.ResidueConstantThickOrigin
-public import WeilConjectures.TraceFormula.Specialization.GenericDivisorGenericPoint
-public import WeilConjectures.TraceFormula.Specialization.GenericDivisorLisse
 public import WeilConjectures.AlgebraicGeometry.DVRStalkLocalEquation
+public import WeilConjectures.TraceFormula.Specialization.GenericDivisorLisse
+public import WeilConjectures.TraceFormula.Specialization.GenericDivisorGenericPoint
 
 /-!
 

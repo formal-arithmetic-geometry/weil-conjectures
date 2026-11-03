@@ -9,11 +9,11 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.ConstructibleTorsio
 public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
 public import WeilConjectures.SixFunctors.Etale.Derived.AlgClosedField
 import WeilConjectures.SixFunctors.Etale.Derived.Point
-public import WeilConjectures.AlgebraicGeometry.AffineSpace.PuncturedLine
-public import WeilConjectures.SixFunctors.Etale.Derived.GeometricPoint
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.KunnethMap
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Linear
 public import WeilConjectures.CategoryTheory.DerivedCategory.HomSingleProjective
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Linear
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.KunnethMap
+public import WeilConjectures.SixFunctors.Etale.Derived.GeometricPoint
+public import WeilConjectures.AlgebraicGeometry.AffineSpace.PuncturedLine
 
 /-!
 # Detecting generators of direct images at geometric points

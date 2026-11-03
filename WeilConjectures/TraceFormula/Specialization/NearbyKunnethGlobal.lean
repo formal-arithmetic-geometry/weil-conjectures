@@ -7,10 +7,13 @@ module
 
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethGeneric
 public import WeilConjectures.SixFunctors.NearbyCycles.KunnethProper
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleUpperStar
 public import WeilConjectures.TraceFormula.Specialization.NearbyProperExchange
 public import WeilConjectures.TraceFormula.OrdinaryKunnethGlobalSections
 public import WeilConjectures.TraceFormula.Specialization.TraitInstances
 public import WeilConjectures.TraceFormula.Specialization.TraitProduct
+public import WeilConjectures.Tactic.ExactModProofs
 
 /-!
 

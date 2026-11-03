@@ -10,6 +10,7 @@ public import WeilConjectures.TraceFormula.Specialization.GenericSliceTraitDVR
 public import WeilConjectures.TraceFormula.Specialization.GenericSliceTraitUniversal
 public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationFunctoriality
 public import WeilConjectures.TraceFormula.Specialization.TraitChangeInvariance
+public import WeilConjectures.TraceFormula.Specialization.SliceTraitResidue
 
 /-!
 
