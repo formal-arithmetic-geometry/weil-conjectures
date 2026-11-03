@@ -8,7 +8,9 @@ module
 public import WeilConjectures.AlgebraicGeometry.Strict.Tower.StrictTowerRealizationComparisons
 public import WeilConjectures.AlgebraicGeometry.Completed.CompletedRingStrictFiniteExchange
 import WeilConjectures.AlgebraicGeometry.Completed.Open.CompletedOpenExchangeTransportLemma
-import WeilConjectures.AlgebraicGeometry.Completed.Open.CompletedOpenExchangeLimitCore
+import WeilConjectures.AlgebraicGeometry.Completed.Open.CompletedOpenExchangeTransport
+import WeilConjectures.AlgebraicGeometry.Completed.CompletedTowerPullbackSupplement
+import WeilConjectures.AlgebraicGeometry.Completed.CompletedStrictOpenExchange
 
 /-! Normalization of completed open exchange by the simultaneous strict exchange.
 Source: Stacks Tags 03DI and 091N; the finite-exchange and final-limit paragraphs.

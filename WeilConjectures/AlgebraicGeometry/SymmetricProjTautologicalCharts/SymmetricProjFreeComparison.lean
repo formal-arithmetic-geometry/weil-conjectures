@@ -64,7 +64,9 @@ theorem free_compatibility_of_normalized_quotient (S : Scheme.{u}) (E : S.Module
     [E.IsQuasicoherent] (D : ProjectiveBundleQuotientGeometry.TautologicalQuotient E) :
     ProjectiveBundleQuotientGeometry.HasFreeCompatibility D := by
   intro r b
-  obtain ⟨eRel, hRel, hAffine⟩ := exists_ordered_relative_comparison S E r b
+  let eRel := orderedRelativeComparison b
+  have hRel := orderedRelativeComparison_hom_π b
+  have hAffine := orderedRelativeComparison_affineFreeComparison b
   obtain ⟨θ, hθ, _⟩ :=
     RelativeProjectiveSpace.existsUnique_freeProjectiveBundleBaseChangeSpace S r
   obtain ⟨t, ht⟩ := exists_ordered_twist_comparison S E D r b eRel hRel hAffine θ

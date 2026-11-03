@@ -270,7 +270,7 @@ theorem diagonalTrace_full_normalization_of_kInjective
         DerivedCategory.Q.map
           ((NatTrans.mapHomologicalComplex ordinary.hom (.up ℤ)).app P) ≫
         RG.η.app ((U.mapHomologicalComplex (.up ℤ)).obj P) := by
-  obtain ⟨s⟩ := squareOfAcyclic F G U V (canonicalDiagonalRightDerived F) RG ordinary hacyc
+  let s := squareOfAcyclic F G U V (canonicalDiagonalRightDerived F) RG ordinary hacyc
   have hs (I : CochainComplex A ℤ) [I.IsKInjective] :
       s.iso.hom.app (DerivedCategory.Q.obj I) = e.hom.app (DerivedCategory.Q.obj I) := by
     apply (cancel_mono (RG.R.map (U.mapDerivedCategoryFactors.hom.app I))).mp

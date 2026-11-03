@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.DerivedFiberBetti
 import WeilConjectures.AlgebraicGeometry.Affine.AffineFreeResidueSectionsCohomology
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
+import all WeilConjectures.AlgebraicGeometry.Residue.ResidueRankModelDifferential
 
 /-! # Minimality of affine models at a residue point
 Source: Stacks Project, Tags 0BCD and 0BF2.
@@ -20,46 +21,6 @@ universe v
 open CategoryTheory CategoryTheory.Limits
 open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme
-
-private theorem finite_rank_scalarExtension
-    {A κ : Type v} [CommRing A] [Field κ] (ρ : A →+* κ)
-    (M : ModuleCat.{v} A) (n : ℕ) (e : M ≃ₗ[A] (ULift.{v} (Fin n) → A)) :
-    Module.Finite κ ((ModuleCat.extendScalars ρ).obj M) ∧
-      Module.finrank κ ((ModuleCat.extendScalars ρ).obj M) = n := by
-  have : Module.Free A M := Module.Free.of_equiv e.symm
-  have : Module.Finite A M := Module.Finite.equiv e.symm
-  let := ρ.toAlgebra
-  have : Nontrivial A := ρ.domain_nontrivial
-  constructor
-  · change Module.Finite κ (TensorProduct A κ M)
-    infer_instance
-  · change Module.finrank κ (TensorProduct A κ M) = n
-    rw [Module.finrank_baseChange, e.finrank_eq]
-    simp
-
-private theorem differential_zero_of_equal_dimensions
-    {κ : Type v} [Field κ] (C : CochainComplex (ModuleCat.{v} κ) ℤ)
-    (hfinite : ∀ j : ℤ, Module.Finite κ (C.X j))
-    (hhomfinite : ∀ j : ℤ, Module.Finite κ (C.homology j))
-    (hdim : ∀ j : ℤ, Module.finrank κ (C.homology j) = Module.finrank κ (C.X j)) :
-    ∀ i j : ℤ, C.d i j = 0 := by
-  intro i j
-  have : Module.Finite κ (C.X i) := hfinite i
-  have hi := (ModuleCat.mono_iff_injective (C.iCycles i)).mp inferInstance
-  have hp := (ModuleCat.epi_iff_surjective (C.homologyπ i)).mp inferInstance
-  have : Module.Finite κ (C.cycles i) := Module.Finite.of_injective (C.iCycles i).hom hi
-  have : Module.Finite κ (C.homology i) :=
-    hhomfinite i
-  have hrank : Module.finrank κ (C.cycles i) = Module.finrank κ (C.X i) :=
-    Nat.le_antisymm (LinearMap.finrank_le_finrank_of_injective hi) (by
-      rw [← hdim i]
-      exact LinearMap.finrank_le_finrank_of_surjective hp)
-  have hsurj : Function.Surjective (C.iCycles i).hom :=
-    (LinearMap.injective_iff_surjective_of_finrank_eq_finrank hrank).mp hi
-  have : Epi (C.iCycles i) := (ModuleCat.epi_iff_surjective _).mpr hsurj
-  apply (cancel_epi (C.iCycles i)).mp
-  rw [CategoryTheory.Limits.comp_zero]
-  exact C.iCycles_d i j
 
 /-- A free affine model whose term ranks are its residue Betti numbers is minimal at w.
 Source: Stacks Project, Tags 0BCD and 0BF2, the minimal source complex.

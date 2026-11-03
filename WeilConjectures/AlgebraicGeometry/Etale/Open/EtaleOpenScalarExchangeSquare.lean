@@ -123,7 +123,7 @@ unit equations for scalar balancing and open base change compute both transposes
 The scalar pullback cube, obtained by localization and mates of the ordinary
 restriction-of-scalars cube, identifies them. This argument imposes no boundedness
 or finiteness on the input or coefficients. -/
-theorem etaleOpenScalarExchangeSquare
+theorem properOpenCoefficientOpenInverse_baseChange
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {U' U T' T : Scheme.{u}} {h : U' ⟶ U} {j' : U' ⟶ T'}
     {j : U ⟶ T} {g : T' ⟶ T} [IsOpenImmersion j] [IsOpenImmersion j']

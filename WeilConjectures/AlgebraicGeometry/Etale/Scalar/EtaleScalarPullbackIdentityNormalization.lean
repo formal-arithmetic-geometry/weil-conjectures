@@ -121,7 +121,7 @@ lem-pur-derived-change-of-rings, to obtain the third conjunct on K-flat represen
 each equality along that isomorphism, and cancellation gives the equality at every object.
 Conjugating by the identity comparisons now gives identity transformations. Neither
 boundedness nor flatness of B over A is used. -/
-theorem etaleScalarPullbackIdentityNormalization
+theorem leftDerivedUpperStarId_scalarExtension_normalization
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) (T : Scheme.{u}) :
     (∀ E : DerivedCategoryModule A T,

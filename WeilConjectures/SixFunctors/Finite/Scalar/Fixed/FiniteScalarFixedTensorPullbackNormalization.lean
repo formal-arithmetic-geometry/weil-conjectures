@@ -11,6 +11,7 @@ public import WeilConjectures.SixFunctors.Finite.Scalar.FiniteScalarPullbackRepr
 public import WeilConjectures.SixFunctors.Finite.Scalar.FiniteScalarComplexTensorPullback
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Monoidal
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarProjComparison
+import all WeilConjectures.AlgebraicGeometry.SectionDerivedRepresentativeSquare
 
 /-! # Fixed-scalar tensor pullback on complexes
 
@@ -62,76 +63,6 @@ private theorem cancelTensorators
   simpa only [Category.assoc, ← F.map_comp_assoc, IsIso.hom_inv_id,
     F.map_id, Category.id_comp, IsIso.inv_hom_id, Category.comp_id] using h
 
-private theorem tensorator_Q_generic
-    {C : Type*} [Category.{u + 1} C] [Abelian C] [IsGrothendieckAbelian.{u + 1} C]
-    [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
-    [Abelian.HasFunctorialFlatResolution C] (P Q : CochainComplex C ℤ) :
-    Functor.LaxMonoidal.μ DerivedCategory.Q P Q =
-      ((DerivedCategory.quotientCompQhIso C).inv.app P ⊗ₘ
-        (DerivedCategory.quotientCompQhIso C).inv.app Q) ≫
-      Functor.LaxMonoidal.μ DerivedCategory.Qh
-        ((HomotopyCategory.quotient C (.up ℤ)).obj P)
-        ((HomotopyCategory.quotient C (.up ℤ)).obj Q) ≫
-      (DerivedCategory.quotientCompQhIso C).hom.app (P ⊗ Q) := by
-  unfold Functor.LaxMonoidal.μ
-  unfold DerivedCategory.laxMonoidalQ
-  unfold inferInstance
-  unfold DerivedCategory.instLaxMonoidalCochainComplexIntQ_weilConjectures
-  unfold Functor.LaxMonoidal.ofIso
-  dsimp only
-  rw [Functor.LaxMonoidal.comp_μ]
-  change (_ ⊗ₘ _) ≫ (_ ≫ (DerivedCategory.Qh (C := C)).map (𝟙 _)) ≫ _ = _
-  rw [(DerivedCategory.Qh (C := C)).map_id, Category.comp_id]
-  rfl
-
-private theorem tensorator_Q_strict {C : Type*} [Category.{u + 1} C] [Abelian C]
-    [IsGrothendieckAbelian.{u + 1} C] [MonoidalCategory C] [MonoidalPreadditive C]
-    [MonoidalClosed C] [BraidedCategory C] [Abelian.HasFunctorialFlatResolution C]
-    (P Q : CochainComplex C ℤ) :
-    Functor.LaxMonoidal.μ DerivedCategory.Q P Q =
-      Functor.LaxMonoidal.μ DerivedCategory.Qh
-        ((HomotopyCategory.quotient _ _).obj P)
-        ((HomotopyCategory.quotient _ _).obj Q) := by
-  rw [tensorator_Q_generic]
-  change (𝟙 _ ⊗ₘ 𝟙 _) ≫ _ ≫ 𝟙 _ = _
-  simp only [id_tensorHom_id, Category.id_comp, Category.comp_id]
-
-private theorem cochain_tensor_comparison
-    {C₁ C₂ : Type*} [Category.{u + 1} C₁] [Category.{u + 1} C₂]
-    [Abelian C₁] [Abelian C₂]
-    [IsGrothendieckAbelian.{u + 1} C₁] [IsGrothendieckAbelian.{u + 1} C₂]
-    [MonoidalCategory C₁] [MonoidalCategory C₂]
-    [MonoidalPreadditive C₁] [MonoidalPreadditive C₂]
-    [MonoidalClosed C₁] [MonoidalClosed C₂] [BraidedCategory C₁] [BraidedCategory C₂]
-    [Abelian.HasFunctorialFlatResolution C₁] [Abelian.HasFunctorialFlatResolution C₂]
-    (G : C₁ ⥤ C₂) [G.Additive] [G.PreservesKFlatQuasiIso]
-    [G.PreservesFlat] [G.IsLeftAdjoint] [G.Monoidal]
-    (P Q : CochainComplex C₁ ℤ) :
-    ((G.leftDerivedTensorComparison.app (DerivedCategory.Q.obj P)).app
-        (DerivedCategory.Q.obj Q)) ≫
-      (G.leftDerivedFunctorCounit.app ((HomotopyCategory.quotient _ _).obj P) ⊗ₘ
-        G.leftDerivedFunctorCounit.app ((HomotopyCategory.quotient _ _).obj Q)) ≫
-      Functor.LaxMonoidal.μ DerivedCategory.Q
-        ((G.mapHomologicalComplex (.up ℤ)).obj P)
-        ((G.mapHomologicalComplex (.up ℤ)).obj Q) =
-    G.leftDerivedFunctor.map (Functor.LaxMonoidal.μ DerivedCategory.Q P Q) ≫
-      G.leftDerivedFunctorCounit.app ((HomotopyCategory.quotient _ _).obj (P ⊗ Q)) ≫
-      DerivedCategory.Q.map
-        (((Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans (.up ℤ) G).app P).app Q) := by
-  erw [tensorator_Q_strict ((G.mapHomologicalComplex (.up ℤ)).obj P)
-      ((G.mapHomologicalComplex (.up ℤ)).obj Q),
-    tensorator_Q_strict P Q]
-  let δ := ((Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans (.up ℤ) G).app P).app Q
-  have hδ := DerivedCategory.quotientCompQhIso_hom_naturality δ
-  change DerivedCategory.Qh.map ((HomotopyCategory.quotient _ _).map δ) ≫ 𝟙 _ =
-    𝟙 _ ≫ DerivedCategory.Q.map δ at hδ
-  simp only [Category.comp_id, Category.id_comp] at hδ
-  have h := G.leftDerivedTensorComparison_app_app_comp_tensorHom
-    ((HomotopyCategory.quotient _ _).obj P) ((HomotopyCategory.quotient _ _).obj Q)
-  rw [Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans_app_app] at h
-  erw [hδ] at h
-  exact h
-
 private theorem exact_factors_eq_counit
     {C D : Type*} [Category.{u + 1} C] [Category.{u + 1} D]
     [Abelian C] [Abelian D]
@@ -172,8 +103,10 @@ private theorem uncurry_tensor_map
     {C : Type*} [Category C] [MonoidalCategory C]
     {P Q P' Q' : C} (f : P ⟶ P') (g : Q ⟶ Q') :
     (uncurry.obj (curriedTensor C)).map (Prod.mkHom f g) = f ⊗ₘ g := by
-  simp only [uncurry_obj_map, curriedTensor_obj_map, curriedTensor_map_app, tensorHom_def]
+  simp only [uncurry_obj_map, curriedTensor_obj_map, curriedTensor_map_app,
+    MonoidalCategory.tensorHom_def]
 
+open AlgebraicGeometry.ProEtale.ModuleRingedComparison in
 private theorem representative_normalization
     {C D : Type*} [Category.{u + 1} C] [Category.{u + 1} D]
     [Abelian C] [Abelian D]
@@ -218,7 +151,8 @@ private theorem representative_normalization
     (Functor.LaxMonoidal.μ DerivedCategory.Q
       ((L.mapHomologicalComplex (.up ℤ)).obj P)
       ((L.mapHomologicalComplex (.up ℤ)).obj Q)) _ _ _ _
-    (cochain_tensor_comparison L P Q)
+    (DerivedRepresentativeSquare.cochain_tensor_comparison
+      L P Q)
 
 /-- The native fixed-coefficient pullback comparison satisfies the representative equation.
 Source: Stacks Tag 07A4, the defining left-derived tensor square.

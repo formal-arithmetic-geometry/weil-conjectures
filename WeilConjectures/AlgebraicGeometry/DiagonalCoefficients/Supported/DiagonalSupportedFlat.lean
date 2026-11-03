@@ -6,7 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Coefficient.DiagonalCoefficientCategory
-import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafClosedLocalization
+import all WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafClosedLocalization
 import WeilConjectures.AlgebraicGeometry.ProEtaleAbelianClosedSupport
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 import Mathlib.Algebra.Category.Grp.AB
@@ -32,51 +32,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.DiagonalCoefficients
-
-private theorem abZeroDetect
-    {X U Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X)
-    [IsOpenImmersion j] [QuasiCompact j] (hU : Set.range j = (Set.range i)ᶜ)
-    (F : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-    (hi : IsZero ((upperStar Ab.{u + 1} i).obj F))
-    (hj : IsZero ((upperStar Ab.{u + 1} j).obj F)) : IsZero F := by
-  have := abelian_closed_support i j hU F hj
-  exact ((lowerStar Ab.{u + 1} i).map_isZero hi).of_iso
-    (asIso ((upperStarLowerStarAdjunction Ab.{u + 1} i).unit.app F))
-private theorem modZeroDetect
-    {X U Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X)
-    [IsOpenImmersion j] [QuasiCompact j] (hU : Set.range j = (Set.range i)ᶜ)
-    (B : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj B]
-    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) B)
-    (hi : IsZero ((ringSheafInverseImage i B).obj M))
-    (hj : IsZero ((ringSheafInverseImage j B).obj M)) : IsZero M := by
-  have h := abZeroDetect i j hU M.X ((Mod.forget _).map_isZero hi)
-    ((Mod.forget _).map_isZero hj)
-  apply (IsZero.iff_id_eq_zero _).2
-  apply (Mod.forget _).map_injective
-  exact h.eq_of_src _ _
-
-private theorem modIsoDetect
-    {X U Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X)
-    [IsOpenImmersion j] [QuasiCompact j] (hU : Set.range j = (Set.range i)ᶜ)
-    (B : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj B]
-    {M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) B} (φ : M ⟶ N)
-    [IsIso ((ringSheafInverseImage i B).map φ)]
-    [IsIso ((ringSheafInverseImage j B).map φ)] : IsIso φ := by
-  have hker : ∀ {T : Scheme.{u}} (f : T ⟶ X)
-      [IsIso ((ringSheafInverseImage f B).map φ)],
-      IsZero ((ringSheafInverseImage f B).obj (kernel φ)) := fun f _ ↦
-    (isZero_kernel_of_mono ((ringSheafInverseImage f B).map φ)).of_iso
-      (PreservesKernel.iso _ φ)
-  have hcoker : ∀ {T : Scheme.{u}} (f : T ⟶ X)
-      [IsIso ((ringSheafInverseImage f B).map φ)],
-      IsZero ((ringSheafInverseImage f B).obj (cokernel φ)) := fun f _ ↦
-    (isZero_cokernel_of_epi ((ringSheafInverseImage f B).map φ)).of_iso
-      (PreservesCokernel.iso _ φ)
-  have : Mono φ := Preadditive.mono_of_isZero_kernel _
-    (modZeroDetect i j hU B _ (hker i) (hker j))
-  have : Epi φ := Preadditive.epi_of_isZero_cokernel _
-    (modZeroDetect i j hU B _ (hcoker i) (hcoker j))
-  exact isIso_of_mono_of_epi φ
 
 private theorem flat_of_closed_open_restrictions
     {Z U X : Scheme.{u}}

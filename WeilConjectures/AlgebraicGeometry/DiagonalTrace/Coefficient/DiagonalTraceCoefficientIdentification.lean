@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Diagonal.DiagonalTowerTraceModels
 import Mathlib.RingTheory.Ideal.Quotient.Operations
 import Mathlib.CategoryTheory.Whiskering
+import all WeilConjectures.AlgebraicGeometry.SpTowerClasses.TowerForgetEvaluation
 
 /-! # The finite coefficient-unit identification -/
 
@@ -66,20 +67,6 @@ private theorem coefficientMap_iso (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) (n 
     exact inferInstanceAs (IsIso e.toCommRingCatIso.hom)
   exact Functor.map_isIso (constantSheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1})
     (CommRingCat.ofHom f)
-
-private theorem transport_addHom {A B A' B' : AddCommGrpCat.{u + 1}}
-    (eA : A = A') (eB : B = B') (f : A ⟶ B) (g : A' ⟶ B')
-    (h : HEq f.hom g.hom) : f ≫ eqToHom eB = eqToHom eA ≫ g := by
-  subst A'
-  subst B'
-  have h' := eq_of_heq h
-  simp only [eqToHom_refl, Category.comp_id, Category.id_comp]
-  exact AddCommGrpCat.hom_ext h'
-
-private theorem transport_element {A B : AddCommGrpCat.{u + 1}} (e : A = B)
-    (x : A) (y : B) (h : HEq x y) : (eqToHom e) x = y := by
-  subst B
-  exact eq_of_heq h
 
 private theorem coefficient_vertical (T : Scheme.{u})
     (B : ℕᵒᵖ ⥤ Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1})
@@ -184,28 +171,28 @@ these comparisons form a tower isomorphism. Each map preserves one, which gives
 the displayed equation after transporting by the section equality of r.
 The argument includes the first positive level and the zero sheaf on an empty
 site. No completed projection or root module enters the construction. -/
-theorem exists_diagonalTraceCoefficientIdentification (l : ℕ) [Fact l.Prime]
+@[no_expose] def diagonalTraceCoefficientIdentification (l : ℕ) [Fact l.Prime]
     (T : Scheme.{u}) (r : Restriction l (ULift.{u} (Padic l)) T) :
-    ∃ e : r.F.obj (coefficient T (Arings l (ULift.{u} (Padic l)) T)) ⋙
-        diagonalForget l T ≅
+    r.F.obj (coefficient T (Arings l (ULift.{u} (Padic l)) T)) ⋙ diagonalForget l T ≅
       Scheme.purTwistZlTower T l ⋙
         sheafCompose (Scheme.ProEt.topology T)
           ((forget₂ CommRingCat.{u + 1} RingCat.{u + 1}) ⋙
-            forget₂ RingCat.{u + 1} AddCommGrpCat.{u + 1}),
-      ∀ (n : ℕ) (U : T.ProEtᵒᵖ)
-        (x : ((r.F.obj (coefficient T (Arings l (ULift.{u} (Padic l)) T))).obj
-          (op n)).obj.obj U),
-        HEq x (1 : (SpTowerClasses.systemRing l (ULift.{u} (Padic l)) T).obj.obj
-          (op (n, U.unop))) →
-        (e.hom.app (op n)).hom.app U x =
-          (1 : (Scheme.purTwistFiniteRing T l n).obj.obj U) := by
-  let F := sheafCompose (Scheme.ProEt.topology T)
-    ((forget₂ CommRingCat.{u + 1} RingCat.{u + 1}) ⋙
-      forget₂ RingCat.{u + 1} AddCommGrpCat.{u + 1})
-  let e := coefficientUnderlyingIso l T r ≪≫
-    Functor.isoWhiskerRight (coefficientRingIso l T).symm F
-  refine ⟨e, ?_⟩
-  intro n U x hx
+            forget₂ RingCat.{u + 1} AddCommGrpCat.{u + 1}) :=
+  coefficientUnderlyingIso l T r ≪≫
+    Functor.isoWhiskerRight (coefficientRingIso l T).symm
+      (sheafCompose (Scheme.ProEt.topology T)
+        ((forget₂ CommRingCat.{u + 1} RingCat.{u + 1}) ⋙
+          forget₂ RingCat.{u + 1} AddCommGrpCat.{u + 1}))
+
+/-- The coefficient identification sends the unit section to the unit section. -/
+theorem diagonalTraceCoefficientIdentification_hom_app_hom_app_eq_one (l : ℕ) [Fact l.Prime]
+    (T : Scheme.{u}) (r : Restriction l (ULift.{u} (Padic l)) T) (n : ℕ) (U : T.ProEtᵒᵖ)
+    (x : ((r.F.obj (coefficient T (Arings l (ULift.{u} (Padic l)) T))).obj
+      (op n)).obj.obj U)
+    (hx : HEq x (1 : (SpTowerClasses.systemRing l (ULift.{u} (Padic l)) T).obj.obj
+      (op (n, U.unop)))) :
+    ((diagonalTraceCoefficientIdentification l T r).hom.app (op n)).hom.app U x =
+      (1 : (Scheme.purTwistFiniteRing T l n).obj.obj U) := by
   have hx' : (coefficientLevelIso l T r n).hom.hom.app U x =
       (1 : ((Arings l (ULift.{u} (Padic l)) T).obj (op n)).obj.obj U) := by
     exact transport_element

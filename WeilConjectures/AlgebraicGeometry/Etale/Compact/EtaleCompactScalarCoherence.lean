@@ -995,7 +995,7 @@ Step 8 proves proper composition by counit mate pasting and open composition by 
 transposes. Step 9 applies properOpenComparison_coefficient_refinement to M and Q M in D+,
 then proper composition and common-refinement coherence give the displayed comparison
 for every pair of compactifications. No flatness or Tor bound is used. -/
-theorem etaleCompactScalarCoherence
+theorem compactScalarMap_coherence
     [Finite A] [Finite B] (φ : A →+* B)
     {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y]
     (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
@@ -1032,7 +1032,7 @@ theorem etaleCompactScalarCoherence
     have hn := (scalarMate φ c.g).naturality (compactOpenProjection A c K M)
     dsimp only [Functor.comp_map] at hn
     have ho := (lowerStar (ModuleCat.{u + 1} B) c.g).rightDerivedFunctor.congr_map
-      (etaleOpenScalarProjection φ c K M)
+      (compactOpenProjection_scalarExtension φ c K M)
     simp only [Functor.map_comp] at ho
     have hp := etaleDirectScalarProjection φ c.g K (J.obj M)
     simp only [Functor.map_comp] at hp
@@ -1064,7 +1064,7 @@ result to the chosen compactifications. For the outer compactification this is v
 because F_f M and Q F_f M are bounded below: use bounded-below injective resolutions,
 exact open extension, and Q F_f M = F_f Q M from the scalar isomorphism. This is exactly
 the specified normalized composition equation, with no claim that arbitrary Q preserves D+. -/
-theorem etaleCompactScalarComposition
+theorem compactScalarChosenMap_comp
     [Finite A] [Finite B] (φ : A →+* B)
     {X Y Z : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] [IsNoetherian Z]
     (f : X ⟶ Y) (g : Y ⟶ Z)

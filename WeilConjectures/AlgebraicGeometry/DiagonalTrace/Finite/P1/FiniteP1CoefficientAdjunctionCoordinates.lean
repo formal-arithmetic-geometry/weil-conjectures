@@ -99,10 +99,8 @@ theorem finiteP1_coefficient_adjunction_coordinates
   let hS' : IsUnit ((l ^ (n + 1) : ℕ) : Γ(S, ⊤)) := by
     simpa only [Nat.cast_pow] using hS.pow (n + 1)
   have hX := finiteP1_unitOnPullback (l ^ (n + 1)) f hS'
-  let cX := Classical.choice
-    (SpTowerP1.finiteP1_coefficient_coordinates_exists l E n X hX)
-  let cS := Classical.choice
-    (SpTowerP1.finiteP1_coefficient_coordinates_exists l E n S hS')
+  let cX := SpTowerP1.finiteP1CoefficientCoordinates l E n X hX
+  let cS := SpTowerP1.finiteP1CoefficientCoordinates l E n S hS'
   let F := (Scheme.sfIntrinsicModuleEquivalence S
     (SpTowerShriek.R l E n)).functor.mapDerivedCategory
   let H := finiteOverRealization l E n e
