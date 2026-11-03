@@ -56,7 +56,7 @@ complexes detects isomorphisms. No separatedness is required.
 Proof, following the node and Bhatt--Scholze, Section 6.4:
 1. The finite-type assumptions make `T` Noetherian. Grothendieck abelianness gives
    local smallness, and `derived_hasCoproducts` gives the required coproduct universe.
-2. `compactObjects_isThick` and `etaleThickGeneration` reduce compactness to the
+2. `compactObjects_isThick` and `boundedConstructible_induction` reduce compactness to the
    finite locally constant flat stratum objects. Flatness passes to geometric fibres
    through `Point.flat_sheafFiber_obj`; `uliftSheafFiberIso` aligns the universes.
    `lem-pur-etale-lisse-stratum-compact` proves these generators compact.
@@ -114,7 +114,7 @@ theorem finiteRing_compactGenerators
         (∃ a b : ℤ, a ≤ b ∧ DerivedCategory.hasTorAmplitudeIn C T a b K) →
       IsCompactObject K := by
     intro K hK
-    apply etaleThickGeneration T C P ?_ K hK.1 hK.2
+    apply boundedConstructible_induction T C P ?_ K hK.1 hK.2
     rintro K ⟨str, i, j, hj, L, heq, hL, hflat, ⟨e⟩⟩
     have := hj
     have := hL
