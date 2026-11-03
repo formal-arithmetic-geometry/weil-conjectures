@@ -483,6 +483,41 @@ theorem reductionTowerPullbackIso_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y
     erw [reductionIso_level d f ((stratumModulePull d g).obj M) n]
     rfl
 
+
+/-- The completed derived pullback compositor is the localization of an ordinary module
+compositor whose conjugate is the fibre-product pasting map on sections.
+Source: Stacks Tag 0D6D (blueprint: thm-cbc-complete-proetale). -/
+theorem AdicCoefficientDatum.pullComp_eq_triangle {X Y Z : Scheme.{u}} (f : X ⟶ Y)
+    (g : Y ⟶ Z) :
+    ∃ κ : stratumModulePull d (f ≫ g) ≅ stratumModulePull d g ⋙ stratumModulePull d f,
+      d.pullComp f g = Functor.mapDerivedCategoryTriangleIso' κ ∧
+      ∀ (N : proEtaleRingModules X (d.completedRing X)) (U : Z.ProEt)
+        (m : ((proEtaleRingModuleDirectImage f (d.completedRing Y) (d.completedRing X)
+            (d.integralRingIso f) ⋙ proEtaleRingModuleDirectImage g (d.completedRing Z)
+              (d.completedRing Y) (d.integralRingIso g)).obj N).val.obj (Opposite.op U)),
+        ((conjugateEquiv ((proEtaleRingModuleAdjunction g (d.completedRing Z)
+              (d.completedRing Y) (d.integralRingIso g)).comp
+            (proEtaleRingModuleAdjunction f (d.completedRing Y) (d.completedRing X)
+              (d.integralRingIso f)))
+            (proEtaleRingModuleAdjunction (f ≫ g) (d.completedRing Z) (d.completedRing X)
+              (d.integralRingIso (f ≫ g))) κ.hom).app N).val.app (Opposite.op U) m =
+          N.val.map ((MorphismProperty.Over.pullbackComp f g).hom.app U).op m := by
+  obtain ⟨_, _, _, _, _, _, dS, hdS, _⟩ := proEtaleRingDerivedPullbackComposition f g
+    (d.completedRing Z) (d.completedRing Y) (d.completedRing X) (d.integralRingIso g)
+    (d.integralRingIso f) (d.integralRingIso (f ≫ g)) (d.integralRingIso_comp f g)
+  refine ⟨(Adjunction.leftAdjointCompIso
+    (proEtaleRingModuleAdjunction g (d.completedRing Z) (d.completedRing Y)
+      (d.integralRingIso g))
+    (proEtaleRingModuleAdjunction f (d.completedRing Y) (d.completedRing X)
+      (d.integralRingIso f))
+    (proEtaleRingModuleAdjunction (f ≫ g) (d.completedRing Z) (d.completedRing X)
+      (d.integralRingIso (f ≫ g))) dS).symm, ?_, ?_⟩
+  · exact proEtaleCanonicalDerivedPullback_normalization f g (d.completedRing Z)
+      (d.completedRing Y) (d.completedRing X) (d.integralRingIso g) (d.integralRingIso f)
+      (d.integralRingIso (f ≫ g)) (d.integralRingIso_comp f g).symm dS hdS
+  · intro N U m
+    rw [Iso.symm_hom, Adjunction.conjugateEquiv_leftAdjointCompIso_inv]
+    exact hdS N U m
 end ReductionComposition
 
 end AlgebraicGeometry.Scheme
