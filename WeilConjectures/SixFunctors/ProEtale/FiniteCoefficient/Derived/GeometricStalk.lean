@@ -68,9 +68,9 @@ Let `Λ` be a finite local ring (for instance `Λ = A_{E,n}`), `M ∈ D^b_{ctf}(
 `ȳ : Spec Ω ⟶ Y` a geometric point. Then the geometric stalk `M_ȳ` is quasi-isomorphic to a
 bounded complex of finite free `Λ`-modules. Indeed `M ≅ ν^* G` with `G` bounded constructible on
 `Y_ét`; `G` has finite Tor amplitude since `ν^*` detects Tor amplitude
-(`AlgebraicGeometry.ProEtale.DerivedCategory.torAmplitudeIn_of_mapDerivedCategory`); and `M_ȳ`
-is the étale geometric stalk of `G`, to which `AlgebraicGeometry.Etale.exists_free_geometricStalk`
-applies. -/
+(`ProEtale.DerivedCategory.torAmplitudeIn_of_mapDerivedCategory_comparisonUpperStar`); and
+`M_ȳ` is the étale geometric stalk of `G`, to which
+`AlgebraicGeometry.Etale.exists_free_geometricStalk` applies. -/
 theorem exists_free_geometricStalk [Finite Λ] [IsLocalRing Λ] (y : Spec (.of Ω) ⟶ Y)
     (M : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ)))
     (hM : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y M) :
@@ -80,7 +80,7 @@ theorem exists_free_geometricStalk [Finite Λ] [IsLocalRing Λ] (y : Spec (.of �
   obtain ⟨hbc, a, b, hta⟩ := hM
   obtain ⟨G, hG, ⟨e⟩⟩ := (DerivedCategory.boundedConstructible_iff _ _ M).1 hbc
   have hGt : Etale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b G :=
-    DerivedCategory.torAmplitudeIn_of_mapDerivedCategory Λ
+    DerivedCategory.torAmplitudeIn_of_mapDerivedCategory_comparisonUpperStar Λ
       ((DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) Y a b).prop_of_iso e.symm hta)
   obtain ⟨P, a', b', h₁, h₂, hP, ⟨e'⟩⟩ :=
     Etale.exists_free_geometricStalk Λ y G ⟨hG, a, b, hGt⟩

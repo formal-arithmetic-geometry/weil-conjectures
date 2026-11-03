@@ -33,6 +33,9 @@ public import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import WeilConjectures.AlgebraicGeometry.HenselianConnectedness
+import WeilConjectures.RingTheory.HenselianOfEtaleNeighbourhoodSection
+import WeilConjectures.Mathlib.CategoryTheory.Sites.Subcanonical
 
 /-! # Stein connectedness over a closed-specializing pro-etale test
 
@@ -79,6 +82,72 @@ theorem proper_test_closed_fibre_connectedness
     let z := (pullback.fst p i).closedComplement
     let P := (proEtaleBaseChange p).obj W
     ∀ C : Set P.left, IsClosed C → IsIrreducible C →
-      IsConnected (C ∩ P.hom ⁻¹' Set.range z) := by sorry
+      IsConnected (C ∩ P.hom ⁻¹' Set.range z) := by
+  intro z P C hC hCirr
+  let X := W.left
+  let R := Γ(X, ⊤)
+  let Z : Set (Spec R) :=
+    X.isoSpec.hom '' Set.range (pullback.fst W.hom i.closedComplement)
+  have hZ : IsClosed Z := by
+    refine (X.isoSpec.hom.homeomorph.isClosedMap _ ?_)
+    exact (pullback.fst W.hom i.closedComplement).isClosedEmbedding.isClosed_range
+  let I : Ideal R := PrimeSpectrum.vanishingIdeal Z
+  have hIZ : PrimeSpectrum.zeroLocus (I : Set R) = Z := by
+    rw [PrimeSpectrum.zeroLocus_vanishingIdeal_eq_closure, hZ.closure_eq]
+  have : HenselianRing R I := by
+    apply Algebra.henselianRing_of_etale_surjective_zeroLocus_section
+    intro A' _ _ _ hsurj
+    let φ : Spec (.of A') ⟶ Spec R := Spec.map (CommRingCat.ofHom (algebraMap R A'))
+    have : Etale φ := HasRingHomProperty.Spec_iff.mpr (RingHom.etale_algebraMap.mpr ‹_›)
+    let g : Spec (.of A') ⟶ X := φ ≫ X.isoSpec.inv
+    have : Surjective g := by
+      refine ⟨fun x ↦ ?_⟩
+      obtain ⟨y, hy⟩ := hspecializes x
+      have hmem : (pullback.fst W.hom i.closedComplement) y ∈ Set.range g := by
+        have hy' : X.isoSpec.hom ((pullback.fst W.hom i.closedComplement) y) ∈
+            PrimeSpectrum.zeroLocus (I : Set R) := hIZ ▸ ⟨_, ⟨y, rfl⟩, rfl⟩
+        obtain ⟨q', hq'⟩ := hsurj _ hy'
+        have hφq : φ q' = X.isoSpec.hom ((pullback.fst W.hom i.closedComplement) y) := hq'
+        refine ⟨q', ?_⟩
+        change (φ ≫ X.isoSpec.inv) q' = _
+        rw [Scheme.Hom.comp_apply, hφq]
+        change (X.isoSpec.hom ≫ X.isoSpec.inv) _ = _
+        simp
+      exact hy.mem_open g.isOpenMap.isOpen_range hmem
+    let V : D.ProEt := ProEt.mk (g ≫ W.hom)
+    let f : V ⟶ W := MorphismProperty.Over.homMk g
+    have hf : Sieve.generate (Presieve.singleton f) ∈ ProEt.topology D W := by
+      apply Precoverage.generate_mem_toGrothendieck
+      change (Presieve.singleton f).map (ProEt.forget D ⋙ Over.forget D) ∈
+        Scheme.proetalePrecoverage W.left
+      rw [Presieve.map_singleton]
+      exact Scheme.Hom.singleton_mem_propQCPrecoverage (P := @WeaklyEtale) (f := g)
+        inferInstance
+    obtain ⟨s, hs⟩ := GrothendieckTopology.exists_comp_eq_id_of_surjective_app.{u + 1} f hf hW
+    have hs' : s.left ≫ g = 𝟙 X := congrArg (fun k : W ⟶ W ↦ k.left) hs
+    let σ := Spec.preimage (X.isoSpec.inv ≫ s.left)
+    have hσ : CommRingCat.ofHom (algebraMap R A') ≫ σ = 𝟙 R := by
+      apply Spec.map_injective
+      simp only [Spec.map_comp, σ, Spec.map_preimage]
+      have hφ : φ = g ≫ X.isoSpec.hom := by simp [g]
+      have h : (X.isoSpec.inv ≫ s.left) ≫ φ = 𝟙 _ := by
+        rw [hφ, Category.assoc, reassoc_of% hs', Category.id_comp, Iso.inv_hom_id]
+      exact h.trans (Spec.map_id _).symm
+    exact ⟨{ toRingHom := σ.hom, commutes' := fun r ↦ congrArg (fun k ↦ k.hom r) hσ }⟩
+  let q : P.left ⟶ X := pullback.fst W.hom p
+  have hset : P.hom ⁻¹' Set.range z =
+      (q ≫ X.isoSpec.hom) ⁻¹' PrimeSpectrum.zeroLocus (I : Set R) := by
+    ext x
+    have hcond : W.hom (q x) = p (P.hom x) := by
+      change (q ≫ W.hom) x = (pullback.snd W.hom p ≫ p) x
+      rw [pullback.condition]
+      rfl
+    have hinj : Function.Injective X.isoSpec.hom := X.isoSpec.hom.homeomorph.injective
+    rw [Set.mem_preimage, Set.mem_preimage, hIZ, Scheme.Hom.comp_apply, hinj.mem_set_image]
+    simp only [z, Scheme.Hom.range_closedComplement, Scheme.Pullback.range_fst, Set.mem_preimage,
+      Set.mem_compl_iff, hcond]
+    exact Iff.rfl
+  rw [hset]
+  exact (q ≫ X.isoSpec.hom).isConnected_inter_preimage_zeroLocus I hC hCirr
 
 end AlgebraicGeometry.Scheme
