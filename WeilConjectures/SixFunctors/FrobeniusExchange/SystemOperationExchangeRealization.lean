@@ -1345,9 +1345,9 @@ theorem compactRealization_existsUnique (c : Compactification f) :
   -- objectwise (the relevant `lim¹` of finite `Ext⁻¹` groups can be nonzero).
   sorry
 
-/-- Uniqueness of the projection-normalized identification, given that each value of
-`compactImage` is derived complete and that the shifted Hom groups from the recorded Rf_!
-into its finite restricted reductions are finite. Over a finite field `K₀` the finiteness is
+/-- Uniqueness of the projection-normalized identification, given that the shifted Hom groups from the recorded Rf_!
+into its finite restricted reductions are finite. Derived completeness of the target holds since it is isomorphic to a
+constructible object. Over a finite field `K₀` the finiteness is
 the finiteness of étale cohomology of constructible complexes (SGA 4½, Th. finitude); over an
 arbitrary field it can fail, which is why `compactRealization_existsUnique` is open.
 Source: Stacks, Lemma map-into-Rlim
@@ -1357,8 +1357,6 @@ composite of the inverse reduction evaluation, the operation reduction and the f
 evaluation, which is invertible since the reduction of `τ` is. Reductions detect maps into a
 derived-complete object with finite shifted reduction Hom groups. -/
 theorem compactRealization_unique_of_finite (c : Compactification f)
-    (hQ : ∀ K : sfIntegralConstructibleCategory l E X,
-      IsSfDerivedComplete l E Y ((compactImage l E f c).obj K.obj))
     (hfin : ∀ (K : sfIntegralConstructibleCategory l E X) (n : ℕ), Finite
       (((sfCompactSupportFiniteIntegralFunctor l K₀ hl c E).obj K).obj⟦(1 : ℤ)⟧ ⟶
         (sfDerivedReductionRestricted l E Y n).obj ((compactImage l E f c).obj K.obj)))
@@ -1367,8 +1365,13 @@ theorem compactRealization_unique_of_finite (c : Compactification f)
       (sfIntegralConstructible l E X).ι ⋙ compactImage l E f c)
     (hτ : CompactRealizationSpec l E K₀ hl f c τ)
     (hτ' : CompactRealizationSpec l E K₀ hl f c τ') : τ' = τ := by
+  have := sfIntegralConstructible_isClosedUnderIsomorphisms l E Y
+  obtain ⟨σ, -⟩ := compactRealization_exists l E K₀ hl f c
   ext K
-  refine derivedComplete_finiteReduction_ext l E Y (hQ K) (hfin K) _ _ fun n ↦ ?_
+  have hQ : IsSfDerivedComplete l E Y ((compactImage l E f c).obj K.obj) :=
+    ((sfIntegralConstructible l E Y).prop_of_iso (σ.app K)
+      ((sfCompactSupportFiniteIntegralFunctor l K₀ hl c E).obj K).property).1
+  refine derivedComplete_finiteReduction_ext l E Y hQ (hfin K) _ _ fun n ↦ ?_
   have h := hτ K n
   have h' := hτ' K n
   rw [← h] at h'
