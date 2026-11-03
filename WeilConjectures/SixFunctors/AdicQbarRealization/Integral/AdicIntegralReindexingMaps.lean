@@ -32,6 +32,7 @@ namespace WeilConjectures.AdicQbarRealization
 variable (l : ℕ) [Fact l.Prime]
 
 attribute [local irreducible] scalarSquareIso
+attribute [-instance] isoReductionSiteSmall
 
 private theorem completed_presentation_natural
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
