@@ -68,6 +68,10 @@ import WeilConjectures.AlgebraicGeometry.Smooth.SmoothExceptionalBaseChange
 import WeilConjectures.AlgebraicGeometry.Compact.CompactSupportFiniteTorsion
 import WeilConjectures.AlgebraicGeometry.Vector.VectorBundlePurity
 import WeilConjectures.Compactification.NagataCompactification
+public import WeilConjectures.AlgebraicGeometry.FiniteSmoothPurity.FiniteSectionIntegratedSpecialization
+public import WeilConjectures.AlgebraicGeometry.FiniteSmoothPurity.FiniteSmoothAdjunctionGeneralBase
+public import WeilConjectures.AlgebraicGeometry.Reduction.ReductionExceptionalConservativity
+public import WeilConjectures.AlgebraicGeometry.SpTowerGluing.SmoothPurityTowerGlobalChartAdjunction
 
 /-!
 # Finite evaluation of the actual tower diagonal and deformation diagram
@@ -365,6 +369,29 @@ def deltaTower (D : Data.{u})
     (η : (inverseImage D (i₀ D)).obj (family D) ≅ normal D) : C D ≅ normal D :=
   s₀ ≪≫ (inverseImage D (i₀ D)).mapIso κ.symm ≪≫ η
 
+private theorem inverse_integration_evaluation (D : Data.{u}) (U : Evaluations D)
+    (sq : NormalSquare D) (hq : ∀ n : ℕ, IsIso (integration_n D sq n))
+    (u : tate D ≅ normal D)
+    (hu : ∀ n : ℕ,
+      vTate D U n ≫ (ev D D.X n).map u.hom ≫ vNormal D U n =
+        (nu D n D.X).map (integration_n D sq n)) :
+    ∀ n : ℕ, (ev D D.X n).map u.inv =
+      vNormal D U n ≫ (nu D n D.X).map (q_n D sq n (hq n)) ≫ vTate D U n := by
+  intro n
+  have := hq n
+  have : IsIso (vTate D U n) := tate_word_isIso D U n D.d
+  apply (cancel_epi ((ev D D.X n).map u.hom)).1
+  apply (cancel_epi (vTate D U n)).1
+  calc
+    _ = vTate D U n := by
+      rw [← Functor.map_comp, Iso.hom_inv_id, (ev D D.X n).map_id]
+      exact Category.comp_id _
+    _ = (nu D n D.X).map (integration_n D sq n) ≫
+        (nu D n D.X).map (q_n D sq n (hq n)) ≫ vTate D U n := by
+      simp only [q_n, ← Functor.map_comp_assoc, IsIso.hom_inv_id]
+      rw [(nu D n D.X).map_id, Category.id_comp]
+    _ = _ := by rw [← hu n]; simp only [Category.assoc]
+
 /-- Finite evaluation of the actual tower diagonal/DNC/integration diagram.
 The displayed laws characterize the tower maps against canonical finite constructions;
 none of the finite beta, delta, q or v maps is caller-supplied.
@@ -416,6 +443,23 @@ theorem tower_diagonal_finite_evaluation (D : Data.{u}) :
     ∃ θ : (inverseImage D (AffineSpace.oneSection (ULift.{u} (Fin 1)) D.X)).obj
       (family D) ≅ C D,
     ∃ q : normal D ≅ tate D, EvaluationLaws D U sq hq finiteκ β κ s₀ s₁ η θ q := by
-  sorry
+  classical
+  obtain ⟨sq, hq, _hβ, hκ⟩ := finite_foundations D
+  choose finiteκ hfinite _hunique using hκ
+  obtain ⟨U, β, κ, s₀, s₁, η, θ, laws⟩ := section_diagram D finiteκ hfinite
+  obtain ⟨u, hu⟩ := integration_diagram D U sq
+  refine ⟨U, sq, hq, finiteκ, β, κ, s₀, s₁, η, θ, u.symm, ?_⟩
+  exact
+    { finite_normalized := hfinite
+      beta_evaluation := laws.beta_evaluation
+      kappa_evaluation := laws.kappa_evaluation
+      zero_section := laws.zero_section
+      one_section := laws.one_section
+      zero_fibre := laws.zero_fibre
+      one_fibre := laws.one_fibre
+      normalized_at_one := laws.normalized_at_one
+      delta_evaluation := specialization_evaluation D U finiteκ κ s₀ η
+        laws.kappa_evaluation laws.zero_section laws.zero_fibre
+      q_evaluation := inverse_integration_evaluation D U sq hq u hu }
 
 end AlgebraicGeometry.ProEtale.TowerDiagonalFiniteEvaluation

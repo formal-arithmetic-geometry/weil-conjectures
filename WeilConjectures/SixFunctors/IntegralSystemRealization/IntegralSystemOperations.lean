@@ -25,6 +25,16 @@ public import WeilConjectures.Compactification.RefinementCategory
 public import WeilConjectures.SmoothPurity.PurCompactSupport.IntegralCompactSupportCoefficientData
 public import WeilConjectures.SmoothPurity.Completed.CompletedPullbackTensorComparison
 public import WeilConjectures.AlgebraicGeometry.Sf.SfCompactSupportRestrictionOfScalars
+public import Mathlib.CategoryTheory.Adjunction.CompositionIso
+public import Mathlib.CategoryTheory.Adjunction.Restrict
+public import WeilConjectures.AlgebraicGeometry.Condensed.CondensedConstantConstructibilitySupplement
+public import WeilConjectures.AlgebraicGeometry.Sf.SfFullCohomologicalDimension
+public import WeilConjectures.Compactification.Defs
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedModuleDerivedPushpull
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerStarComp
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionProjection
 
 /-! # IntegralSystemOperations
 
@@ -48,18 +58,9 @@ namespace IntegralSystemRealization
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The recorded unbounded category of strict semilinear systems.
-Source: Stacks 0941 (blueprint: def-sf-integral-system-operations). -/
-abbrev System (W : Scheme.{u}) := coefficientSequenceDerived l E W
-
 /-- The recorded completed-coefficient derived category.
 Source: Stacks 0941 (blueprint: def-sf-integral-system-operations). -/
 abbrev Integral (W : Scheme.{u}) := DerivedCategory (scalarReductionSource l E W)
-
-/-- Exact inverse image on the actual sequence site, with its canonical quotient actions.
-Source: Stacks 0941, 03D2
-(blueprint: def-sf-integral-system-operations). -/
-abbrev pull {X Y : Scheme.{u}} (f : X ⟶ Y) := pullbackTensorSequenceDerived l E f
 
 /-- The fixed reconstruction adjunction and its K-flat normalized tensor models.
 Source: Stacks 0941, 07A6
@@ -279,13 +280,6 @@ def Compositors.openComp {o : Operations l E} (c : Compositors l E o)
   Adjunction.leftAdjointCompIso (o.extension j).adj (o.extension k).adj
     (o.extension (j ≫ k)).adj (c.pullComp j k).symm
 
-/-- The inverse-image comparison around a commutative square.
-Source: Stacks 07A7 (blueprint: def-sf-integral-system-operations). -/
-def Compositors.square {o : Operations l E} (c : Compositors l E o)
-    {U V W Z : Scheme.{u}} (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)
-    (h : k ≫ p = r ≫ i) : pull l E i ⋙ pull l E r ≅ pull l E p ⋙ pull l E k :=
-  (c.pullComp r i).symm ≪≫ eqToIso (congrArg (pull l E) h.symm) ≪≫ c.pullComp k p
-
 /-- The left side of the open projection comparison.
 Source: Stacks 0E8I (blueprint: def-sf-integral-system-operations). -/
 def openTensorLeft (o : Operations l E) {U X : Scheme.{u}} (j : U ⟶ X)
@@ -411,6 +405,35 @@ of quasi-compactness against the separated proper factor. Source: Stacks 01K5
 abbrev compactOpenQuasiCompact {X Y : Scheme.{u}} {f : X ⟶ Y}
     (d : Compactification f) (h : QuasiCompact f) : QuasiCompact d.i :=
   @QuasiCompact.of_comp X d.Z Y d.i d.g (d.comm ▸ h) inferInstance
+
+/-- The inverse-image comparison around a commutative square uses only the canonical
+compositors and equality transport.
+Source: latest blueprint def-weil-pbc-adjunction-conjugate
+(blueprint: def-strict-coefficient-system-operation-data). -/
+def Compositors.square {U V W Z : Scheme.{u}}
+    (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)
+    (h : k ≫ p = r ≫ i) : pull Λ i ⋙ pull Λ r ≅ pull Λ p ⋙ pull Λ k :=
+  (Compositors.pullComp Λ r i).symm ≪≫ eqToIso (congrArg (pull Λ) h.symm) ≪≫
+    Compositors.pullComp Λ k p
+
+/-- The pullback compositor is the derived image of the coefficient-compatible one.
+Source: latest blueprint prop-sfb-module-left-derived-upper-star-comp
+(blueprint: def-strict-coefficient-system-operation-data). -/
+def Compositors.pullComp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
+    pull Λ (f ≫ g) ≅ pull Λ g ⋙ pull Λ f :=
+  leftDerivedUpperStarComp Λ f g
+
+/-- Total derived inverse image, computed on K-flat resolutions.
+Source: latest blueprint det-def-sfb-module-derived-pushpull
+(blueprint: def-strict-coefficient-system-operation-data). -/
+abbrev pull {X Y : Scheme.{u}} (f : X ⟶ Y) : System Λ Y ⥤ System Λ X :=
+  moduleObjectDerivedPullback Λ f
+
+/-- The ordinary module derived category used to define cohomology.
+Source: latest blueprint d-real-cohom, first display
+(blueprint: def-strict-coefficient-system-operation-data). -/
+abbrev System (X : Scheme.{u}) :=
+  DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
 
 end IntegralSystemRealization
 end WeilConjectures

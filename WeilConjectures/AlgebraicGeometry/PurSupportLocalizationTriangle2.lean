@@ -74,6 +74,7 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 import WeilConjectures.AlgebraicGeometry.Comparison.ComparisonDirectImage
 import WeilConjectures.AlgebraicGeometry.Support.SupportComparisonPullbackCoherence
+public import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 
 /-!
 # The intrinsic support-localization triangle and its finite exceptional comparison
@@ -168,7 +169,11 @@ theorem purSupportLocalizationTriangleCoreRest
         ∃ δ, ∃ e : supportTriangle s j hcomp P.Ring K r hI ≅
           purSupportAdjunctionTriangle s j P.Ring adj (DerivedCategory.Q.obj K.obj) δ,
           DerivedCategory.Q.map r.map ≫ e.hom.hom₂ = 𝟙 _) := by
-  sorry
+  letI : IsNoetherian X := isNoetherian_of_locallyOfFiniteType
+    (X ↘ Spec (.of P.field.k))
+  refine ⟨purSupportLocalizationTriangleMeaningCore P.Ring s j hcomp,
+    purSupportLocalizationTriangleBoundedBelowCore P s j hcomp, ?_⟩
+  exact purSupportLocalizationTriangleDistinguishedCore P.Ring s j hcomp hS a0 adj
 
 /-- The finite exceptional comparison and its uniqueness on etale-origin inputs, for any
 derived adjunction between closed direct image and the support functor.
@@ -252,7 +257,12 @@ theorem purSupportLocalizationTriangleExceptional
               e.hom.hom₁ =
                   (sfConstantModuleDirectImage s P.Ring).rightDerivedFunctor.map (α.hom.app B) ∧
                 e.hom.hom₂ = 𝟙 _ ∧ e.hom.hom₃ = 𝟙 _ ) := by
-  sorry
+  obtain ⟨α, hα⟩ :=
+    purSupportLocalizationTriangleExceptionalCounitCore P s j hcomp adj
+  refine ⟨α, ⟨hα, ?_⟩, ?_⟩
+  · exact purSupportLocalizationTriangleExceptionalTriangleCore P s j hcomp adj α hα
+  · intro α' hα'
+    exact purSupportLocalizationTriangleExceptionalUniqueCore P s j hcomp adj α α' hα hα'.1
 
 end AlgebraicGeometry.Scheme
 end
