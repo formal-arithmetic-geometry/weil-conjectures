@@ -13,6 +13,9 @@ import all WeilConjectures.PoincareDuality.Derived.DerivedPullbackTensorFiniteCo
 import all WeilConjectures.SmoothPurity.Pullback.PullbackTensorReductionCalculus
 import WeilConjectures.SmoothPurity.Integral.IntegralSystemReductionFullyFaithful
 import WeilConjectures.SmoothPurity.CompletedOperations.NormalizedCompletedOperationModels
+import all WeilConjectures.SmoothPurity.Rational.RationalTensorStageCoherence
+import WeilConjectures.CategoryTheory.BilinearCoefficientDescent.StageTensorAssociator
+import WeilConjectures.SmoothPurity.Rational.RationalAssociatorScalarExtensionSquare
 
 /-! # Common-stage normalized tensor associator
 

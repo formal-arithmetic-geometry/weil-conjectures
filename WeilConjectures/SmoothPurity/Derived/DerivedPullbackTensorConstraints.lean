@@ -16,6 +16,9 @@ import WeilConjectures.SmoothPurity.Pur.PurNormalizedReconstructionAdjunctionCal
 import WeilConjectures.SmoothPurity.Supporting.Coefficient.ConstantCoefficientObjectsConstructible
 import WeilConjectures.SmoothPurity.Sf.SfDerivedCompleteLegacyComparison
 import WeilConjectures.AlgebraicGeometry.ProEtale.Bounded.ProEtaleBoundedConstructibleTriangulated
+import all WeilConjectures.SmoothPurity.Rational.RationalTensorStageCoherence
+import WeilConjectures.CategoryTheory.StageSystem.IsoOfTransport
+import WeilConjectures.SmoothPurity.Integral.IntegralUnitScalarExtension
 
 /-! # Normalized higher pullback tensor constraints
 
