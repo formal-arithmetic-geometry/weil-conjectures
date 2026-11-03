@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Local.DiagonalLocalChernRealization
 public import WeilConjectures.AlgebraicGeometry.RationalP1.Scalar.RationalP1ScalarChernMaps
 import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Finite.Trace.DiagonalTraceFinitePushUnitSeed
-import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalCompleteScalarRestriction
+import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalCompleteScalarRestrictionCore
 import WeilConjectures.AlgebraicGeometry.DiagonalTrace.Completed.DiagonalCompletedLineComplete
 import WeilConjectures.AlgebraicGeometry.Pur.PurTwistSheafLocallyFree
 import WeilConjectures.AlgebraicGeometry.DiagonalCoefficients.Completed.DiagonalCompletedRealizedUnitTransport
@@ -109,7 +109,7 @@ private theorem completed_map_injective'
   let P : ObjectProperty (DerivedCategory (DiagonalCompleted l S)) := fun M ↦
     ∀ V : DerivedCategory (DiagonalMod l S),
       IsIso (l • 𝟙 V) → Subsingleton (V ⟶ F.obj M)
-  obtain ⟨ff⟩ := DiagonalTrace.diagonalCompleteScalarRestriction l S
+  obtain ⟨ff⟩ := DiagonalTrace.diagonalCompleteScalarRestrictionCore l S
   let U := SheafOfModules.unit
     (Scheme.purTwistRing S (Scheme.purTwistZlCompletion S l))
   have hunit := DiagonalTrace.diagonalCompletedLine_complete l S U

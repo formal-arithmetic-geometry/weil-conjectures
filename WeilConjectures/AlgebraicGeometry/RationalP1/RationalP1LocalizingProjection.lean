@@ -117,7 +117,7 @@ private theorem selected_projection_isIso
       cases c with
       | none => exact Or.inr ⟨Iso.refl _⟩
       | some E => exact Or.inl ⟨E, ⟨Iso.refl _⟩⟩
-    exact (tensorClosureRational l p (Fact.out : p.Prime).pos hpl
+    exact (constantModelBoundedConstructible_derivedTensor l p (Fact.out : p.Prime).pos hpl
       (T ↘ Spec (.of k)) Λ hc).1 A B hA hB
   apply (projection_localizing_of_interfaces Λ f (hbc X) (hbc S) (hctf X) (hctf S)
     hp (pullback_bounded_constructible Λ f (pullback_constructible Λ f))

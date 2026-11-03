@@ -51,7 +51,7 @@ theorem diagonalCompletedLocalChern_lift (l : ℕ) [Fact l.Prime]
   let P : ObjectProperty (DerivedCategory (DiagonalCompleted l X)) := fun M ↦
     ∀ V : DerivedCategory (DiagonalMod l X),
       IsIso (l • 𝟙 V) → Subsingleton (V ⟶ F.obj M)
-  obtain ⟨ff⟩ := diagonalCompleteScalarRestriction l X
+  obtain ⟨ff⟩ := diagonalCompleteScalarRestrictionCore l X
   let U := SheafOfModules.unit (Scheme.purTwistRing X (Scheme.purTwistZlCompletion X l))
   have hunit := diagonalCompletedLine_complete l X U
     ((SheafOfModules.isInvertible_iff_isFiniteLocallyFreeOfRank_one U).mp inferInstance)

@@ -6,7 +6,7 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.RationalP1.Scalar.RationalP1ScalarChernMaps
-import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalCompleteScalarRestriction
+import WeilConjectures.AlgebraicGeometry.DiagonalTrace.DiagonalCompleteScalarRestrictionCore
 import all WeilConjectures.AlgebraicGeometry.DiagonalTrace.Completed.DiagonalCompletedLineCompleteAux
 import all WeilConjectures.AlgebraicGeometry.DiagonalTrace.Presentation.DiagonalCompletedChernLift
 
@@ -116,7 +116,7 @@ theorem completedChernNormalized_unique
   let P : ObjectProperty (DerivedCategory (DiagonalCompleted l S)) := fun M ↦
     ∀ V : DerivedCategory (DiagonalMod l S),
       IsIso (l • 𝟙 V) → Subsingleton (V ⟶ F.obj M)
-  obtain ⟨ff⟩ := diagonalCompleteScalarRestriction l S
+  obtain ⟨ff⟩ := diagonalCompleteScalarRestrictionCore l S
   have hline₀ := completed_line_complete l X
   let adjShift : shiftFunctor (DerivedCategory (DiagonalMod l X)) (-2 : ℤ) ⊣
       shiftFunctor (DerivedCategory (DiagonalMod l X)) (2 : ℤ) :=

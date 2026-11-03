@@ -131,7 +131,7 @@ theorem completedCoefficientRealization_exists (l : ℕ) [Fact l.Prime]
     (X : Scheme.{u}) [IsNoetherian X] (hX : IsUnit (l : Γ(X, ⊤))) :
     Nonempty (CompletedRealization l X) := by
   obtain ⟨e, he, _⟩ := completedCoefficientRingComparison_existsUnique l X
-  obtain ⟨roots⟩ := diagonalIntegralRoots_exists l X (bottomField l)
+  obtain ⟨roots⟩ := Nonempty.intro (diagonalIntegralRoots l X (bottomField l))
   obtain ⟨s, hs⟩ := completedCoefficientRootLineComparison_exists l X hX e he roots
   let R := condensedRingObj (Profinite.continuousMapRingObj.{u} ℤ_[l]) X
   let E := InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u}
