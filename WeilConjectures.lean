@@ -23268,6 +23268,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CupGrade
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CurrentTrace.CurrentSixFunctorKunnethMaps
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CurrentVerdierExchange.CondensedVerdierExchange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.DncInvariance.PurityDncInvarianceStage2
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.DncInvariance.PurityDncInvarianceStage22
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.DncSectionInvariantStatement
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.EllAdic.EllAdicBoundedTriangulated
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.EllAdic.EllAdicCondensedCoefficient
