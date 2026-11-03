@@ -208,6 +208,7 @@ import all Mathlib.Logic.Small.Defs
 import all WeilConjectures.Compactification.Defs
 import WeilConjectures.AlgebraicGeometry.Modules.AffineHom
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
+import WeilConjectures.AlgebraicGeometry.Etale.EtaleCoordinateDifferentialBasis
 
 /-! # Normalized diagonal/DNC assemblies on affine coordinate charts
 
@@ -227,6 +228,62 @@ set_option backward.isDefEq.respectTransparency.types true
 universe u v w
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory AlgebraicGeometry
 open scoped CategoryTheory.Functor
+
+namespace AlgebraicGeometry.PurityNormalBundle
+
+open Opposite
+
+variable {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem augmentation_inclusion :
+    (ConormalGradedAlgebra.presentation i).inclusion 1 ≫
+      (commAlgebraSheafModuleFunctor Z.sheaf).map
+        (ConormalGradedAlgebra.augmentation i) = 0 := by
+  let adj := (Scheme.Modules.exists_tensorPullbackAdjunction i).choose
+  apply (adj.homEquiv (ConormalGradedAlgebra.power i 1) _).injective
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro U
+  ext a
+  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
+  change (ConormalGradedAlgebra.augmentation i).right.hom.app (op (i ⁻¹ᵁ U.unop))
+    (ConormalGradedAlgebra.homogeneousClass i _ _ 1 U.unop a) = 0
+  have h := (ConormalGradedAlgebra.presentation i).augmentation.exists.choose_spec
+  simpa only [ConormalGradedAlgebra.augmentation, Nat.one_ne_zero, ↓reduceIte] using
+    h 1 U.unop a
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem augmentation_comparison :
+    ConormalGradedAlgebra.symmetricComparison i ≫ augmentationToBase i =
+      VectorBundleZeroSection.augmentationToBase Z (ConormalGradedAlgebra.piece i 1) := by
+  apply ExistsUnique.unique (exists_quasiCoherentSymmetricAlgebra_core Z
+    (ConormalGradedAlgebra.piece i 1)
+    (((VectorBundleZeroSection.antiEquivalence Z).functor.obj
+      (op (VectorBundleZeroSection.baseObject Z))).obj) 0)
+  · intro U a
+    change (augmentationToBase i).right.hom.app (op U)
+      ((ConormalGradedAlgebra.symmetricComparison i).right.hom.app (op U)
+        ((SymmetricAlgebraSheaf.inclusion _).val.app (op U) a)) = 0
+    dsimp only [ConormalGradedAlgebra.symmetricComparison]
+    rw [(ConormalGradedAlgebra.presentation i).symmetricComparison.exists.choose_spec]
+    have h := congrArg (fun q ↦ q.val.app (op U) a) (augmentation_inclusion i)
+    change (((VectorBundleZeroSection.antiEquivalence Z).functor.obj
+      (op (VectorBundleZeroSection.baseObject Z))).obj.hom.hom.app (op U))
+        ((ConormalGradedAlgebra.augmentation i).right.hom.app (op U)
+          (((ConormalGradedAlgebra.presentation i).inclusion 1).val.app (op U) a)) = 0
+    change (ConormalGradedAlgebra.augmentation i).right.hom.app (op U)
+      (((ConormalGradedAlgebra.presentation i).inclusion 1).val.app (op U) a) = 0 at h
+    rw [h, map_zero]
+  · exact (exists_quasiCoherentSymmetricAlgebra_core Z
+      (ConormalGradedAlgebra.piece i 1)
+      (((VectorBundleZeroSection.antiEquivalence Z).functor.obj
+        (op (VectorBundleZeroSection.baseObject Z))).obj) 0).exists.choose_spec
+
+end AlgebraicGeometry.PurityNormalBundle
+
 namespace WeilConjectures.PurityFiniteSetting
 
 attribute [local instance] Sheaf.monoidalCategory Sheaf.braidedCategory
@@ -691,6 +748,50 @@ theorem chartOrientation_open_baseChange (P : PurityFiniteSetting.{u})
         (P.chartOrdinaryOrientation d h (v ≫ aY)).hom := by
   sorry
 
+/-- The actual diagonal normal cone is the symmetric total space of the diagonal
+conormal module, including the empty regular sequence when d=0. Thus it is the
+relative tangent bundle, rather than a separately chosen rank-d bundle.
+Source: chart proof, Step 2 (blueprint: lem-pur-diagonal-dnc-chart-normalization).
+
+Proof: apply centred smooth-section coordinates to the first projection and its
+diagonal. The coordinate ideal is a regular sequence of length d, including
+length zero. Its degree-one classes give the conormal frame and its homogeneous
+monomials identify Sym(I/I^2) with the associated graded algebra. Relative Spec
+of this canonical comparison, composed with the homogeneous-normalized Rees
+comparison, identifies the actual normal cone and preserves augmentation. -/
+theorem chartDiagonalNormalBundle {U V : Scheme.{u}} [IsNoetherian U]
+    (d : ℕ) (h : U ⟶ V) [IsSeparated h] [SmoothOfRelativeDimension d h]
+    [QuasiCompact h] :
+    (ConormalGradedAlgebra.piece (pullback.diagonal h) 1).IsFiniteLocallyFreeOfRank d ∧
+      IsIso (ConormalGradedAlgebra.symmetricComparison (pullback.diagonal h)) := by
+  have := SmoothOfRelativeDimension.smooth d h
+  have H := SmoothSectionCentredCoordinates.exists_centred_coordinates d
+    (pullback.fst h h) (pullback.diagonal h) (pullback.diagonal_fst h)
+  exact H.2.2
+
+/-- Pullback of the compared coefficient unit, with the canonical monoidal map.
+Source: chart proof, Step 4 (blueprint: lem-pur-diagonal-dnc-chart-normalization). -/
+def chartUnitPullback (P : PurityFiniteSetting.{u}) {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    (P.smoothPurityPullback f).obj
+      ((ProEtale.comparisonUpperStar
+        (ModuleCat.{u + 1} P.Coefficient) Y).mapDerivedCategory.obj
+          (Etale.ordinaryFiniteUnit P.Coefficient Y)) ≅
+      𝟙_ (_root_.DerivedCategory
+        (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} P.Coefficient))) :=
+  let unitPullback (A : Type (u + 1)) [CommRing A] [Finite A]
+      {S T : Scheme.{u}} (g : S ⟶ T) :
+      (ProEtale.upperStar (ModuleCat.{u + 1} A) g).mapDerivedCategory.obj
+        ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) T).mapDerivedCategory.obj
+          (Etale.ordinaryFiniteUnit A T)) ≅
+        𝟙_ (_root_.DerivedCategory
+          (Sheaf (Scheme.ProEt.topology S) (ModuleCat.{u + 1} A))) :=
+    (ProEtale.upperStar (ModuleCat.{u + 1} A) g).mapDerivedCategory.mapIso
+        (projectionUnitRaw A T) ≪≫
+      (ProEtale.leftDerivedUpperStarIsoMapDerivedCategory
+        (ModuleCat.{u + 1} A) g).symm.app _ ≪≫
+      ProEtale.leftDerivedUpperStarUnitIso (ModuleCat.{u + 1} A) g
+  unitPullback P.Coefficient f
+
 attribute [local irreducible] chartUnitPullback projectionUnitRaw
 attribute [local irreducible] Sheaf.monoidalCategory
   _root_.DerivedCategory.monoidalCategoryOfMonoidalClosedBraidedCategory
@@ -725,16 +826,198 @@ def chartDiagonalDualizingStanding (P : PurityFiniteSetting.{u}) {X Y : Scheme.{
 set_option synthInstance.maxSize 2048 in
 attribute [local semireducible] chartUnitPullback Sheaf.monoidalCategory
   _root_.DerivedCategory.monoidalCategoryOfMonoidalClosedBraidedCategory in
+/-- Ordered affine space is smooth of its coordinate dimension.
+Source: chart proof, Step 1 (blueprint: lem-pur-diagonal-dnc-chart-normalization).
+
+Proof: transport projection_smooth through the coordinate-preserving isomorphism
+between the two ordered affine towers. It is the identity at zero; at a
+successor both towers adjoin the same final polynomial variable. -/
+theorem chartTraceProjection_smooth (B : Scheme.{u}) (r : ℕ) :
+    SmoothOfRelativeDimension r (affineTraceProjection B r) := by
+  induction r with
+  | zero =>
+      change SmoothOfRelativeDimension 0 (𝟙 B)
+      infer_instance
+  | succ r ih =>
+      have : SmoothOfRelativeDimension 1
+          (AffineSpace PUnit.{u + 1} (affineTraceTower B r) ↘ affineTraceTower B r) := by
+        simpa only [Nat.card_unique] using
+          (AffineSpace.smoothOfRelativeDimension_over PUnit.{u + 1} (affineTraceTower B r))
+      have := smoothOfRelativeDimension_comp
+        (AffineSpace PUnit.{u + 1} (affineTraceTower B r) ↘ affineTraceTower B r)
+        (affineTraceProjection B r) (n := 1) (m := r)
+      simpa only [affineTraceTower, affineTraceProjection, Nat.add_comm] using this
+
 set_option backward.isDefEq.respectTransparency false in
+private theorem chartProjectionOrientation_inv (P : PurityFiniteSetting.{u})
+    (B : Scheme.{u}) [IsAffine B] (aB : B ⟶ Spec (.of P.field.k))
+    [LocallyOfFiniteType aB] [QuasiCompact aB] (r : ℕ)
+    (t : Etale.OrdinaryFiniteTwistTransport P.Coefficient P.diagonalExponent
+      P.diagonalExponent_annihilates)
+    (D : ∀ (T : Scheme.{u}) [IsNoetherian T]
+      (hT : IsUnit (P.diagonalExponent : Γ(T, ⊤))),
+      Etale.OrdinaryFiniteP1Datum P.Coefficient P.diagonalExponent
+        P.diagonalExponent_annihilates t T hT) :
+    let := P.noetherian aB
+    let := chartTraceProjection_smooth B r
+    (P.chartOrdinaryOrientation r (affineTraceProjection B r) aB).inv =
+      P.diagonalAffineMate t D B (P.diagonalExponent_isUnit aB) r := by
+  let := P.noetherian aB
+  let := affineTraceNoetherian B r
+  let := chartTraceProjection_smooth B r
+  let := Dnc.compactifiable P (affineTraceProjection B r) aB
+  let N := Etale.canonicalEtaleCompactSupportNormalization P.Coefficient
+  have hn := (P.chartOrdinaryOrientation_spec r (affineTraceProjection B r) aB).1
+    t D N (affineTraceTower B r) (𝟙 _) (𝟙 _) rfl
+  simp only [diagonalDualizingCongr, eqToIso_refl, Iso.refl_hom,
+    Category.comp_id, Iso.hom_inv_id_assoc] at hn
+  have he := (cancel_mono
+    (P.diagonalEtaleLocality N (𝟙 _) (affineTraceProjection B r)).hom).mp hn
+  let e := Etale.leftDerivedUpperStarId
+    (ModuleCat.{u + 1} P.Coefficient) (affineTraceTower B r)
+  let : (Etale.ordinaryFinitePullback P.Coefficient
+      (𝟙 (affineTraceTower B r))).Faithful := Functor.Faithful.of_iso e.symm
+  exact Functor.map_injective _ he
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 attribute [local irreducible] VectorBundleZeroSection.antiEquivalence
 
+/-- Relative Spec of the canonical symmetric comparison, followed by the normalized
+Rees comparison, from the actual cone to its conormal vector bundle. Its homogeneous
+normalization fixes every ideal class, so it contains no arbitrary bundle automorphism.
+Source: chart proof, Step 2 (blueprint: lem-pur-diagonal-dnc-chart-normalization). -/
+def chartNormalModelRaw {U V : Scheme.{u}} [IsNoetherian U]
+    (d : ℕ) (h : U ⟶ V) [IsSeparated h] [SmoothOfRelativeDimension d h]
+    [QuasiCompact h] :
+    letI := (chartDiagonalNormalBundle d h).1
+    (pullback.diagonal h).ker.normalCone ≅ VectorBundleZeroSection.scheme U d
+      (ConormalGradedAlgebra.piece (pullback.diagonal h) 1) :=
+  letI := (chartDiagonalNormalBundle d h).1
+  let e : VectorBundleZeroSection.algebraObject U d
+        (ConormalGradedAlgebra.piece (pullback.diagonal h) 1) ≅
+      PurityNormalBundle.algebraObject (pullback.diagonal h) :=
+    ObjectProperty.isoMk _ (@asIso _ _ _ _
+      (ConormalGradedAlgebra.symmetricComparison (pullback.diagonal h))
+      (chartDiagonalNormalBundle d h).2)
+  let eOver := (ObjectProperty.ι (fun Y : Over U ↦ IsAffineHom Y.hom)).mapIso
+    (((VectorBundleZeroSection.antiEquivalence U).inverse.mapIso e).unop)
+  (Etale.FiniteSmoothPurity.reesConeComparison_exists (pullback.diagonal h)).choose ≪≫
+    (Over.forget U).mapIso eOver
+
 attribute [local irreducible] chartNormalModelRaw
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+/-- The conormal vector-bundle model exists for the actual diagonal normal cone,
+with its actual projection and zero section. This makes the preceding universal
+presentation equation nonvacuous also in rank zero.
+Source: chart proof, Step 2 (blueprint: lem-pur-diagonal-dnc-chart-normalization).
+
+Proof: take the inverse of chartNormalModelRaw. Its specified value gives uniqueness.
+chartDiagonalNormalBundle gives finite local freeness and invertibility
+of the canonical symmetric comparison. Apply the relative Spec anti-equivalence
+and compose with the homogeneous-normalized Rees comparison. Both algebra maps
+preserve constants and augmentation, so projection and zero commute. Their
+coordinate formulas identify this with the differential normal-bundle map. -/
+theorem chartNormal_model_exists {U V : Scheme.{u}} [IsNoetherian U]
+    (d : ℕ) (h : U ⟶ V) [IsSeparated h] [SmoothOfRelativeDimension d h]
+    [QuasiCompact h] :
+    letI := (chartDiagonalNormalBundle d h).1
+    ∃! e : VectorBundleZeroSection.scheme U d
+        (ConormalGradedAlgebra.piece (pullback.diagonal h) 1) ≅
+          (pullback.diagonal h).ker.normalCone,
+      e = (chartNormalModelRaw d h).symm ∧
+      e.hom ≫ Scheme.Hom.normalConeProj (pullback.fst h h) (pullback.diagonal h) =
+        VectorBundleZeroSection.π U d (ConormalGradedAlgebra.piece (pullback.diagonal h) 1) ∧
+      VectorBundleZeroSection.zero U d (ConormalGradedAlgebra.piece (pullback.diagonal h) 1) ≫
+        e.hom = (pullback.diagonal h).normalConeZeroSection := by
+  let := (chartDiagonalNormalBundle d h).1
+  let := (chartDiagonalNormalBundle d h).2
+  let δ := pullback.diagonal h
+  let E := VectorBundleZeroSection.antiEquivalence U
+  let A := VectorBundleZeroSection.algebraObject U d (ConormalGradedAlgebra.piece δ 1)
+  let B := PurityNormalBundle.algebraObject δ
+  let e : A ≅ B := ObjectProperty.isoMk _
+    (asIso (ConormalGradedAlgebra.symmetricComparison δ))
+  let eOver := (ObjectProperty.ι (fun Y : Over U ↦ IsAffineHom Y.hom)).mapIso
+    ((E.inverse.mapIso e).unop)
+  let j := (Over.forget U).mapIso eOver
+  have hjp : j.hom ≫ VectorBundleZeroSection.π U d
+      (ConormalGradedAlgebra.piece δ 1) = PurityNormalBundle.projection δ :=
+    Over.w eOver.hom
+  have ha : E.inverse.map e.inv ≫
+      E.functor.preimage ((E.counitIso.app A).hom ≫
+        ObjectProperty.homMk (VectorBundleZeroSection.augmentationToBase U
+          (ConormalGradedAlgebra.piece δ 1))) =
+      E.functor.preimage ((E.counitIso.app B).hom ≫
+        ObjectProperty.homMk (PurityNormalBundle.augmentationToBase δ)) := by
+    apply E.functor.map_injective
+    simp only [Functor.map_comp, Functor.map_preimage]
+    have hn := E.counitIso.hom.naturality e.inv
+    dsimp only [Functor.comp_map, Functor.id_map] at hn
+    refine ((Category.assoc _ _ _).symm.trans
+      ((congrArg (fun q ↦ q ≫ _) hn).trans (Category.assoc _ _ _))).trans ?_
+    apply congrArg (fun q ↦ (E.counitIso.app B).hom ≫ q)
+    apply ObjectProperty.hom_ext
+    change inv (ConormalGradedAlgebra.symmetricComparison δ) ≫
+      VectorBundleZeroSection.augmentationToBase U (ConormalGradedAlgebra.piece δ 1) = _
+    rw [← PurityNormalBundle.augmentation_comparison δ, IsIso.inv_hom_id_assoc]
+    all_goals rfl
+  have hjz : VectorBundleZeroSection.zero U d
+      (ConormalGradedAlgebra.piece δ 1) ≫ j.inv = PurityNormalBundle.zeroSection δ :=
+    congrArg (fun q ↦ q.unop.hom.left) ha
+  have hR := (Etale.FiniteSmoothPurity.reesConeComparison_exists δ).choose_spec
+  have hp : (chartNormalModelRaw d h).hom ≫
+      VectorBundleZeroSection.π U d (ConormalGradedAlgebra.piece δ 1) =
+      Scheme.Hom.normalConeProj (pullback.fst h h) δ := by
+    unfold chartNormalModelRaw
+    change (Etale.FiniteSmoothPurity.reesConeComparison_exists δ).choose.hom ≫
+      j.hom ≫ _ = _
+    rw [hjp, hR.1]
+    exact Scheme.Hom.purityNormalProjection_eq δ (pullback.fst h h)
+      (pullback.diagonal_fst h)
+  have hz : δ.normalConeZeroSection ≫ (chartNormalModelRaw d h).hom =
+      VectorBundleZeroSection.zero U d (ConormalGradedAlgebra.piece δ 1) := by
+    unfold chartNormalModelRaw
+    change δ.normalConeZeroSection ≫
+      (Etale.FiniteSmoothPurity.reesConeComparison_exists δ).choose.hom ≫ j.hom = _
+    rw [← Category.assoc, hR.2.1, ← hjz, Category.assoc, Iso.inv_hom_id,
+      Category.comp_id]
+  refine ⟨(chartNormalModelRaw d h).symm, ⟨rfl, ?_, ?_⟩, fun _ he ↦ he.1⟩
+  · change (chartNormalModelRaw d h).inv ≫ _ = _
+    exact (Iso.inv_comp_eq _).mpr hp.symm
+  · change _ ≫ (chartNormalModelRaw d h).inv = _
+    exact (Iso.comp_inv_eq _).mpr hz.symm
+
+
+
+
+/-- The affine counit mate is invertible at every finite coefficient stage.
+Source: chart proof, Step 4; projection-purity-agreement
+(blueprint: lem-pur-diagonal-dnc-chart-normalization).
+
+Proof: chartGamma_counit_normalization identifies the realization of this mate
+with the existing ordered comparison at the unit. Projection-purity-agreement
+identifies that map with inverse smooth orientation. Finite site comparison
+reflects isomorphisms on the bounded-below etale objects, giving the assertion. -/
+theorem chartAffineMate_isIso (P : PurityFiniteSetting.{u})
+    (B : Scheme.{u}) [IsAffine B] (aB : B ⟶ Spec (.of P.field.k))
+    [LocallyOfFiniteType aB] [QuasiCompact aB] (r : ℕ)
+    (t : Etale.OrdinaryFiniteTwistTransport P.Coefficient P.diagonalExponent
+      P.diagonalExponent_annihilates)
+    (D : ∀ (T : Scheme.{u}) [IsNoetherian T]
+      (hT : IsUnit (P.diagonalExponent : Γ(T, ⊤))),
+      Etale.OrdinaryFiniteP1Datum P.Coefficient P.diagonalExponent
+        P.diagonalExponent_annihilates t T hT) :
+    letI := P.noetherian aB
+    IsIso (P.diagonalAffineMate t D B (P.diagonalExponent_isUnit aB) r) := by
+  let := P.noetherian aB
+  let := chartTraceProjection_smooth B r
+  rw [← chartProjectionOrientation_inv P B aB r t D]
+  infer_instance
+
 /-- Gamma in the ordinary-etale coefficient presentation, with its actual
 ordered-counit hom. Source: chart proof, Step 4
 (blueprint: lem-pur-diagonal-dnc-chart-normalization). -/
@@ -812,6 +1095,113 @@ attribute [local irreducible] Scheme.Modules.tensorPullback Scheme.Modules.tenso
   Scheme.Hom.relativeDifferentials Scheme.Hom.relativeDifferentialsDerivation
   ConormalGradedAlgebra.piece
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+/-- The degree-one identification defining N_Delta = T_(U/V). Its normalization
+is [y(a)-x(a)] -> da, so its symmetric relative Spec is the canonical tangent
+identification used in the normal model, with the same sign as chart differences.
+Source: chart proof, Step 2 (blueprint: lem-pur-diagonal-dnc-chart-normalization).
+
+Proof: on the affine tensor-product ring the diagonal ideal is the kernel of
+multiplication. The universal derivation sends a to the class of 1 tensor a
+minus a tensor 1. Its universal property identifies I/I^2 with the relative
+Kahler module; these classes generate and their relations are additivity and
+the Leibniz rule. Sheafify this affine identification. Under the canonical
+associated-graded comparison the representative of the same difference has
+exactly this class. This gives the stated iso and normalization; generation by
+the differentials gives uniqueness. Taking symmetric algebras and relative Spec
+identifies the cone with Spec Sym(Omega), preserving projection and augmentation.
+The empty affine scheme and the empty rank-zero list cause no exception. -/
+theorem chartDiagonalConormal_differentials {U V : Scheme.{u}} [IsAffine U] [IsAffine V]
+    (h : U ⟶ V) [IsSeparated h] :
+    ∃! e : ConormalGradedAlgebra.piece (pullback.diagonal h) 1 ≅ h.relativeDifferentials,
+      ∀ a : Γ(U, ⊤),
+        ∃ b : (ConormalGradedAlgebra.power (pullback.diagonal h) 1).val.obj
+            (Opposite.op ⊤),
+          (ConormalGradedAlgebra.powerInclusion (pullback.diagonal h) 1).val.app
+              (Opposite.op ⊤) b =
+            (pullback.snd h h).appTop a - (pullback.fst h h).appTop a ∧
+          e.hom.val.app (Opposite.op ((pullback.diagonal h) ⁻¹ᵁ ⊤))
+              (ConormalGradedAlgebra.representative (pullback.diagonal h) 1 ⊤ b) =
+            h.relativeDifferentials.val.map (homOfLE le_top).op
+              (h.relativeDifferentialsDerivation.d (X := Opposite.op ⊤) a) := by
+  obtain ⟨ω, hω⟩ := ChartNormalDifferential.differenceIdentification h
+  refine ⟨ω.symm, ?_, ?_⟩
+  · intro a
+    let δ := pullback.diagonal h
+    let φ := SheafOfModules.unitToPushforwardObjUnit δ.toRingCatSheafHom
+    let c := (pullback.snd h h).appTop a - (pullback.fst h h).appTop a
+    have hc : (SheafOfModules.evaluation (pullback h h).ringCatSheaf
+        (Opposite.op ⊤)).map φ c = 0 := by
+      change δ.appTop c = 0
+      dsimp only [c]
+      rw [map_sub]
+      apply sub_eq_zero.mpr
+      have he : (pullback.snd h h).appTop ≫ δ.appTop =
+          (pullback.fst h h).appTop ≫ δ.appTop := by
+        rw [← Scheme.Hom.comp_appTop, ← Scheme.Hom.comp_appTop]
+        simp only [δ, pullback.diagonal_snd, pullback.diagonal_fst]
+      exact ConcreteCategory.congr_hom he a
+    have hc' : c ∈ Set.range ((SheafOfModules.evaluation (pullback h h).ringCatSheaf
+        (Opposite.op ⊤)).map (kernel.ι φ)) := by
+      rw [Scheme.Modules.range_map_kernelι]
+      exact hc
+    obtain ⟨c', hc'⟩ := hc'
+    obtain ⟨k, hk⟩ := ChartNormalDifferential.idealKernelIso δ
+    let b := k.inv.app ⊤ c'
+    have hki : k.inv ≫ δ.ker.toModulesι = kernel.ι φ := by
+      rw [← hk, Iso.inv_hom_id_assoc]
+    have hb : (ConormalGradedAlgebra.powerInclusion δ 1).val.app
+        (Opposite.op ⊤) b = c :=
+      (congrArg (fun q ↦ q.app ⊤ c') hki).trans hc'
+    have hb' : (ConormalGradedAlgebra.powerInclusion (pullback.diagonal h) 1).val.app
+        (Opposite.op ⊤) b =
+        (pullback.snd h h).appLE ⊤ ⊤ le_top a -
+          (pullback.fst h h).appLE ⊤ ⊤ le_top a := by
+      simpa only [Scheme.Hom.appLE, Scheme.Hom.appTop, Scheme.Hom.preimage_top,
+        homOfLE_refl, op_id, CategoryTheory.Functor.map_id, Category.comp_id] using hb
+    refine ⟨b, ?_, ?_⟩
+    · simpa only [Scheme.Hom.appLE, Scheme.Hom.appTop, Scheme.Modules.Hom.app,
+        Scheme.Hom.preimage_top, homOfLE_refl,
+        op_id, CategoryTheory.Functor.map_id, Category.comp_id] using hb'
+    · have hn := hω ⊤ ⊤ le_top le_top le_top a b hb'
+      simp only [Scheme.Hom.preimage_top, homOfLE_refl, op_id,
+        PresheafOfModules.map_id, ModuleCat.restrictScalarsId'_inv_app,
+        ModuleCat.restrictScalarsId'App_inv_apply] at hn ⊢
+      change ω.inv.val.app (Opposite.op ⊤) _ = h.relativeDifferentialsDerivation.d a
+      rw [← hn]
+      exact ConcreteCategory.congr_hom
+        (congrArg (fun f ↦ f.val.app (Opposite.op ⊤)) ω.hom_inv_id) _
+  · intro e he
+    apply Iso.ext
+    apply (cancel_epi ω.hom).mp
+    apply (h.relativeDifferentialsHomEquiv _).injective
+    apply Scheme.Modules.derivation_ext_of_isAffine
+    intro a
+    obtain ⟨b, hb, he⟩ := he a
+    have hb' : (ConormalGradedAlgebra.powerInclusion (pullback.diagonal h) 1).val.app
+        (Opposite.op ⊤) b =
+        (pullback.snd h h).appLE ⊤ ⊤ le_top a -
+          (pullback.fst h h).appLE ⊤ ⊤ le_top a := by
+      simpa only [Scheme.Hom.appLE, Scheme.Hom.appTop, Scheme.Modules.Hom.app,
+        Scheme.Hom.preimage_top, homOfLE_refl,
+        op_id, CategoryTheory.Functor.map_id, Category.comp_id] using hb
+    have hn := hω ⊤ ⊤ le_top le_top le_top a b hb'
+    simp only [Scheme.Hom.preimage_top, homOfLE_refl, op_id,
+      PresheafOfModules.map_id, ModuleCat.restrictScalarsId'_inv_app,
+        ModuleCat.restrictScalarsId'App_inv_apply] at hn he
+    change e.hom.val.app (Opposite.op ⊤)
+        (ω.hom.val.app (Opposite.op ⊤) (h.relativeDifferentialsDerivation.d a)) =
+      ω.inv.val.app (Opposite.op ⊤)
+        (ω.hom.val.app (Opposite.op ⊤) (h.relativeDifferentialsDerivation.d a))
+    rw [hn]
+    exact he.trans (by
+      rw [← hn]
+      exact (ConcreteCategory.congr_hom
+        (congrArg (fun f ↦ f.val.app (Opposite.op ⊤)) ω.hom_inv_id) _).symm)
+
+
+
 end
 
 section
@@ -833,24 +1223,333 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+/-- The ordered differential frame induced by an etale coordinate chart. Combined
+with chartDiagonalConormal_differentials and the canonical symmetric comparison,
+its relative Spec is N_h = O_U^d with the specified normal-coordinate basis.
+Source: chart proof, Step 2 (blueprint: lem-pur-diagonal-dnc-chart-normalization).
+
+Proof: the etale transitivity sequence identifies Omega_U/V with pullback of
+the differentials of affine d-space. The latter is free on the ordered dx_i.
+The universal derivation commutes with pullback, giving exactly this generator
+formula. The free-sheaf universal property makes the normalized map unique;
+etale-local invertibility makes it an isomorphism. At d=0 both differential
+modules are zero and the unique map is their identity. -/
+theorem chartCoordinateDifferentialFrame {U V : Scheme.{u}} [IsAffine U] [IsAffine V]
+    (d : ℕ) (h : U ⟶ V) (u : U ⟶ AffineSpace (ULift.{u} (Fin d)) V)
+    [Etale u] (w : u ≫ (AffineSpace (ULift.{u} (Fin d)) V ↘ V) = h) :
+    ∃! e : SheafOfModules.free (R := U.ringCatSheaf) (ULift.{u} (Fin d)) ≅
+        h.relativeDifferentials,
+      ∀ i : ULift.{u} (Fin d),
+        e.hom.val.app (Opposite.op ⊤)
+            ((SheafOfModules.ιFree (R := U.ringCatSheaf) i).val.app (Opposite.op ⊤)
+              (1 : U.ringCatSheaf.obj.obj (Opposite.op ⊤))) =
+          h.relativeDifferentialsDerivation.d (X := Opposite.op ⊤)
+            (u.appTop (AffineSpace.coord V i)) := by
+  classical
+  have : SmoothOfRelativeDimension d
+      (AffineSpace (ULift.{u} (Fin d)) V ↘ V) := by
+    simpa only [Nat.card_ulift, Nat.card_fin] using
+      (AffineSpace.smoothOfRelativeDimension_over (ULift.{u} (Fin d)) V)
+  have : SmoothOfRelativeDimension d h := by
+    rw [← w]
+    simpa only [Nat.zero_add] using
+      (smoothOfRelativeDimension_comp (n := 0) (m := d) u
+        (AffineSpace (ULift.{u} (Fin d)) V ↘ V))
+  have : h.relativeDifferentials.IsFiniteLocallyFreeOfRank d :=
+    h.isFiniteLocallyFreeOfRank_relativeDifferentials d
+  have : h.relativeDifferentials.IsLocallyFree :=
+    SheafOfModules.IsFiniteLocallyFreeOfRank.isLocallyFree h.relativeDifferentials d
+  obtain ⟨e, he⟩ :=
+    AlgebraicGeometry.DiagonalDifferenceReesFrame.coordinate_differential_frame d h u w
+  refine ⟨e, he, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  apply SheafOfModules.free_hom_ext
+  intro i
+  apply Scheme.Modules.hom_ext_of_isAffine
+  intro x
+  change e'.hom.val.app (Opposite.op ⊤)
+      ((SheafOfModules.ιFree i).val.app (Opposite.op ⊤) x) =
+    e.hom.val.app (Opposite.op ⊤)
+      ((SheafOfModules.ιFree i).val.app (Opposite.op ⊤) x)
+  change U.ringCatSheaf.obj.obj (Opposite.op ⊤) at x
+  have hx : x = x • (1 : U.ringCatSheaf.obj.obj (Opposite.op ⊤)) := by simp
+  rw [hx]
+  simp only [map_smul]
+  exact congrArg (fun y ↦ x • y) ((he' i).trans (he i).symm)
+
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+/-- The conormal model with its value fixed by relative Spec and homogeneous Rees
+coordinates. The equality in chartNormal_model_exists determines the selected object.
+Source: chart proof, Step 2 (blueprint: lem-pur-diagonal-dnc-chart-normalization). -/
+def chartNormalModel {U V : Scheme.{u}} [IsNoetherian U]
+    (d : ℕ) (h : U ⟶ V) [IsSeparated h] [SmoothOfRelativeDimension d h]
+    [QuasiCompact h] :
+    letI := (chartDiagonalNormalBundle d h).1
+    VectorBundleZeroSection.scheme U d
+      (ConormalGradedAlgebra.piece (pullback.diagonal h) 1) ≅
+        (pullback.diagonal h).ker.normalCone :=
+  (chartNormal_model_exists d h).exists.choose
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+/-- The ordered conormal frame: dx_i is carried back along [y(a)-x(a)] -> da.
+Both isomorphisms are uniquely determined by their displayed generator formulas.
+Source: chart proof, Step 2 (blueprint: lem-pur-diagonal-dnc-chart-normalization). -/
+def chartConormalFrame {U V : Scheme.{u}} [IsAffine U] [IsAffine V]
+    (d : ℕ) (h : U ⟶ V) [IsSeparated h]
+    (u : U ⟶ AffineSpace (ULift.{u} (Fin d)) V) [Etale u]
+    (w : u ≫ (AffineSpace (ULift.{u} (Fin d)) V ↘ V) = h) :
+    SheafOfModules.free (R := U.ringCatSheaf) (ULift.{u} (Fin d)) ≅
+      ConormalGradedAlgebra.piece (pullback.diagonal h) 1 :=
+  (chartCoordinateDifferentialFrame d h u w).exists.choose ≪≫
+    (chartDiagonalConormal_differentials h).exists.choose.symm
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+/-- Degree-one functions on Spec Sym(I/I²) in the ordered conormal frame.
+This is homOfVector of the symmetric-algebra generators, not a chosen scheme iso.
+Source: chart proof, Step 2 (blueprint: lem-pur-diagonal-dnc-chart-normalization). -/
+def chartConormalCoordinateMap {U V : Scheme.{u}} [IsAffine U] [IsAffine V]
+    [IsNoetherian U] (d : ℕ) (h : U ⟶ V) [IsSeparated h]
+    [SmoothOfRelativeDimension d h] [QuasiCompact h]
+    (u : U ⟶ AffineSpace (ULift.{u} (Fin d)) V) [Etale u]
+    (w : u ≫ (AffineSpace (ULift.{u} (Fin d)) V ↘ V) = h) :
+    letI := (chartDiagonalNormalBundle d h).1
+    VectorBundleZeroSection.scheme U d
+      (ConormalGradedAlgebra.piece (pullback.diagonal h) 1) ⟶
+        AffineSpace (ULift.{u} (Fin d)) U :=
+  letI := (chartDiagonalNormalBundle d h).1
+  AffineSpace.homOfVector
+    (VectorBundleZeroSection.π U d (ConormalGradedAlgebra.piece (pullback.diagonal h) 1))
+    fun i ↦ (VectorBundleZeroSection.algebraIso U d
+      (ConormalGradedAlgebra.piece (pullback.diagonal h) 1)).hom.right.hom.app (Opposite.op ⊤)
+        ((SymmetricAlgebraSheaf.inclusion
+          (ConormalGradedAlgebra.piece (pullback.diagonal h) 1)).val.app (Opposite.op ⊤)
+            ((chartConormalFrame d h u w).hom.val.app (Opposite.op ⊤)
+              ((SheafOfModules.ιFree (R := U.ringCatSheaf) i).val.app (Opposite.op ⊤)
+                (1 : U.ringCatSheaf.obj.obj (Opposite.op ⊤)))))
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+/-- Actual normal-cone coordinates: the canonical conormal model followed by the
+ordered differential frame. In particular no arbitrary zero-preserving bundle map occurs.
+Source: chart proof, Step 2 (blueprint: lem-pur-diagonal-dnc-chart-normalization). -/
+def chartNormalCoordinateMap {U V : Scheme.{u}} [IsAffine U] [IsAffine V]
+    [IsNoetherian U] (d : ℕ) (h : U ⟶ V) [IsSeparated h]
+    [SmoothOfRelativeDimension d h] [QuasiCompact h]
+    (u : U ⟶ AffineSpace (ULift.{u} (Fin d)) V) [Etale u]
+    (w : u ≫ (AffineSpace (ULift.{u} (Fin d)) V ↘ V) = h) :
+    (pullback.diagonal h).ker.normalCone ⟶ AffineSpace (ULift.{u} (Fin d)) U :=
+  (chartNormalModel d h).inv ≫ chartConormalCoordinateMap d h u w
+
 attribute [local irreducible] chartNormalModel chartConormalFrame
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+private theorem framedVectorCoordinates {S : Scheme.{u}} [IsAffine S] [IsNoetherian S]
+    (d : ℕ) (F : S.Modules) [F.IsFiniteLocallyFreeOfRank d]
+    (e : SheafOfModules.free (R := S.ringCatSheaf) (ULift.{u} (Fin d)) ≅ F) :
+    let c := AffineSpace.homOfVector (VectorBundleZeroSection.π S d F) fun i ↦
+      (VectorBundleZeroSection.algebraIso S d F).hom.right.hom.app (Opposite.op ⊤)
+        ((SymmetricAlgebraSheaf.inclusion F).val.app (Opposite.op ⊤)
+          (e.hom.val.app (Opposite.op ⊤)
+            ((SheafOfModules.ιFree (R := S.ringCatSheaf) i).val.app (Opposite.op ⊤)
+              (1 : Γ(S, ⊤)))))
+    IsIso c ∧ VectorBundleZeroSection.zero S d F ≫ c =
+      AffineSpace.zeroSection (ULift.{u} (Fin d)) S := by
+  classical
+  let I := ULift.{u} (Fin d)
+  let R : Type u := Γ(S, ⊤)
+  let X := VectorBundleZeroSection.scheme S d F
+  let π := VectorBundleZeroSection.π S d F
+  let A : S.affineOpens := ⟨⊤, isAffineOpen_top S⟩
+  let b := (Pi.basisFun R I).map
+    (SheafOfModules.sectionsLinearEquivOfIsoFree e.symm (Opposite.op ⊤)).symm
+  have hb (i : I) : b i = e.hom.val.app (Opposite.op ⊤)
+      ((SheafOfModules.ιFree (R := S.ringCatSheaf) i).val.app (Opposite.op ⊤)
+        (1 : Γ(S, ⊤))) := by
+    simp only [b, Module.Basis.map_apply, Pi.basisFun_apply]
+    change e.hom.val.app (Opposite.op ⊤)
+      (∑ j : I, (SheafOfModules.ιFree (R := S.ringCatSheaf) j).val.app
+        (Opposite.op ⊤) ((Pi.single i 1 : I → R) j)) = _
+    congr 1
+    rw [Finset.sum_eq_single i]
+    · simp
+    · intro j _ hj
+      simp [Ne.symm hj]
+    · simp
+  let φ := CommRingCat.ofHom (SymmetricAlgebra.equivMvPolynomial b).symm.toRingHom
+  let m := X.topIso.inv ≫ VectorBundleZeroSection.affineChart S d F A ≫
+    Spec.map φ ≫ (AffineSpace.SpecIso I (.of R)).inv ≫ AffineSpace.map I A.2.fromSpec
+  have hc : CommRingCat.ofHom (MvPolynomial.C : R →+* _) ≫ φ =
+      CommRingCat.ofHom (algebraMap R (SymmetricAlgebraSheaf.sections F (Opposite.op ⊤))) := by
+    apply CommRingCat.hom_ext
+    exact RingHom.ext (SymmetricAlgebra.equivMvPolynomial b).symm.commutes
+  have hm : m = AffineSpace.homOfVector π (fun i ↦
+      (VectorBundleZeroSection.algebraIso S d F).hom.right.hom.app (Opposite.op ⊤)
+        ((SymmetricAlgebraSheaf.inclusion F).val.app (Opposite.op ⊤)
+          (e.hom.val.app (Opposite.op ⊤)
+            ((SheafOfModules.ιFree (R := S.ringCatSheaf) i).val.app
+              (Opposite.op ⊤) (1 : Γ(S, ⊤)))))) := by
+    apply AffineSpace.hom_ext
+    · dsimp only [m]
+      simp only [Category.assoc, AffineSpace.map_over, AffineSpace.SpecIso_inv_over_assoc,
+        ← Spec.map_comp_assoc]
+      rw [hc]
+      dsimp only [I]
+      rw [AffineSpace.homOfVector_over]
+      change X.topIso.inv ≫ VectorBundleZeroSection.affineChart S d F A ≫
+        Spec.map (CommRingCat.ofHom (algebraMap R
+          (SymmetricAlgebraSheaf.sections F (Opposite.op ⊤)))) ≫ A.2.fromSpec = π
+      have hh := congrArg (fun q ↦ X.topIso.inv ≫ q ≫ (⊤ : S.Opens).ι)
+        (VectorBundleZeroSection.affineChart_spec S d F A).2.1
+      simpa only [A, Scheme.Hom.preimage_top, Category.assoc,
+        IsAffineOpen.isoSpec_inv_ι, morphismRestrict_ι,
+        Scheme.toIso_inv_ι_assoc] using hh
+    · intro i
+      dsimp only [m]
+      simp only [Scheme.Hom.comp_appTop, CommRingCat.comp_apply,
+        AffineSpace.map_appTop_coord]
+      rw [AffineSpace.SpecIso_inv_appTop_coord]
+      have hn := CategoryTheory.congr_fun (Scheme.ΓSpecIso_inv_naturality φ)
+        (MvPolynomial.X i)
+      change (Scheme.ΓSpecIso (.of (SymmetricAlgebraSheaf.sections F
+          (Opposite.op ⊤)))).inv ((SymmetricAlgebra.equivMvPolynomial b).symm
+            (MvPolynomial.X i)) = (Spec.map φ).appTop
+              ((Scheme.ΓSpecIso (.of (MvPolynomial I R))).inv (MvPolynomial.X i)) at hn
+      rw [← hn, SymmetricAlgebra.equivMvPolynomial_symm_X]
+      have hh := VectorBundleZeroSection.affineChart_appTop S d F A
+        (SymmetricAlgebra.ι R _ (b i))
+      change (VectorBundleZeroSection.affineChart S d F A).appTop
+        ((Scheme.ΓSpecIso (.of (SymmetricAlgebraSheaf.sections F (Opposite.op ⊤)))).inv
+          (SymmetricAlgebra.ι R _ (b i))) = _ at hh
+      refine (congrArg (fun x ↦ X.topIso.inv.appTop x) hh).trans ?_
+      rw [hb]
+      change X.topIso.inv.appTop ((⊤ : X.Opens).topIso.inv _) = _
+      rw [AffineSpace.homOfVector_appTop_coord]
+      have ht : (⊤ : X.Opens).topIso.inv ≫ X.topIso.inv.appTop = 𝟙 _ := by
+        have hi : (⊤ : X.Opens).ι.appTop = (⊤ : X.Opens).topIso.inv := by
+          simp only [Scheme.Opens.ι_appTop, Scheme.Opens.topIso_inv]
+          congr 1
+        rw [← hi, ← Scheme.Hom.comp_appTop, Scheme.toIso_inv_ι]
+        rfl
+      exact ConcreteCategory.congr_hom ht _
+  let : IsIso (VectorBundleZeroSection.affineChart S d F A) :=
+    (VectorBundleZeroSection.affineChart_spec S d F A).1
+  let : IsIso φ := (RingEquiv.toCommRingCatIso
+    (SymmetricAlgebra.equivMvPolynomial b).symm.toRingEquiv).isIso_hom
+  let : IsIso A.2.fromSpec := by
+    change IsIso (isAffineOpen_top S).fromSpec
+    rw [IsAffineOpen.fromSpec_top]
+    infer_instance
+  constructor
+  · rw [← hm]
+    infer_instance
+  apply AffineSpace.hom_ext
+  · simp only [Category.assoc, AffineSpace.homOfVector_over,
+      (VectorBundleZeroSection.zero_spec S d F).1, AffineSpace.zeroSection_over]
+  · intro i
+    simp only [Scheme.Hom.comp_appTop, CommRingCat.comp_apply,
+      AffineSpace.homOfVector_appTop_coord, AffineSpace.zeroSection_appTop_coord]
+    have hz := VectorBundleZeroSection.zero_pullback S d F (⊤ : S.Opens)
+    have hz' := ConcreteCategory.congr_hom hz
+      ((SymmetricAlgebraSheaf.inclusion F).val.app (Opposite.op ⊤)
+        (e.hom.val.app (Opposite.op ⊤)
+          ((SheafOfModules.ιFree (R := S.ringCatSheaf) i).val.app (Opposite.op ⊤)
+            (1 : Γ(S, ⊤)))))
+    have h0 := (VectorBundleZeroSection.augmentation_spec S F).1 ⊤
+      (e.hom.val.app (Opposite.op ⊤)
+        ((SheafOfModules.ιFree (R := S.ringCatSheaf) i).val.app (Opposite.op ⊤)
+          (1 : Γ(S, ⊤))))
+    have hh := hz'.trans h0
+    simp only [Scheme.Hom.appLE, Scheme.Hom.preimage_top,
+      homOfLE_refl, op_id, S.presheaf.map_id, Category.comp_id,
+      CommRingCat.comp_apply] at hh
+    exact hh
+
+
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+private theorem chartConormalCoordinates_spec {U V : Scheme.{u}} [IsAffine U] [IsAffine V]
+    [IsNoetherian U] (d : ℕ) (h : U ⟶ V) [IsSeparated h]
+    [SmoothOfRelativeDimension d h] [QuasiCompact h]
+    (u : U ⟶ AffineSpace (ULift.{u} (Fin d)) V) [Etale u]
+    (w : u ≫ (AffineSpace (ULift.{u} (Fin d)) V ↘ V) = h) :
+    let := (chartDiagonalNormalBundle d h).1
+    IsIso (chartConormalCoordinateMap d h u w) ∧
+      VectorBundleZeroSection.zero U d (ConormalGradedAlgebra.piece
+        (pullback.diagonal h) 1) ≫ chartConormalCoordinateMap d h u w =
+        AffineSpace.zeroSection (ULift.{u} (Fin d)) U := by
+  let := (chartDiagonalNormalBundle d h).1
+  exact framedVectorCoordinates d (ConormalGradedAlgebra.piece
+    (pullback.diagonal h) 1) (chartConormalFrame d h u w)
+
 attribute [local irreducible] chartConormalCoordinateMap chartNormalCoordinateMap
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+/-- The constructed coordinates identify projection and zero, including the empty frame.
+Source: chart proof, Step 2 (blueprint: lem-pur-diagonal-dnc-chart-normalization).
+
+Proof: chartNormal_model_exists identifies the selected model with the relative Spec of
+Sym(I/I²) -> gr(I), normalized by a -> a/t on Rees charts. The conormal-differential iso
+and chartCoordinateDifferentialFrame give the ordered degree-one generators. On each
+frame Sym is the polynomial algebra, so homOfVector is invertible. The degree-zero
+structure map gives the projection equality, and augmentation kills every generator,
+giving the zero equality. For d=0 this is the empty polynomial algebra and identity. -/
+theorem chartNormalCoordinateMap_spec {U V : Scheme.{u}} [IsAffine U] [IsAffine V]
+    [IsNoetherian U] (d : ℕ) (h : U ⟶ V) [IsSeparated h]
+    [SmoothOfRelativeDimension d h] [QuasiCompact h]
+    (u : U ⟶ AffineSpace (ULift.{u} (Fin d)) V) [Etale u]
+    (w : u ≫ (AffineSpace (ULift.{u} (Fin d)) V ↘ V) = h) :
+    IsIso (chartNormalCoordinateMap d h u w) ∧
+    chartNormalCoordinateMap d h u w ≫ (AffineSpace (ULift.{u} (Fin d)) U ↘ U) =
+      Scheme.Hom.normalConeProj (pullback.fst h h) (pullback.diagonal h) ∧
+    (pullback.diagonal h).normalConeZeroSection ≫ chartNormalCoordinateMap d h u w =
+      AffineSpace.zeroSection (ULift.{u} (Fin d)) U := by
+  let := (chartDiagonalNormalBundle d h).1
+  have hc := chartConormalCoordinates_spec d h u w
+  let : IsIso (chartConormalCoordinateMap d h u w) := hc.1
+  have hm := (chartNormal_model_exists d h).exists.choose_spec
+  have hmdef : chartNormalModel d h = (chartNormal_model_exists d h).exists.choose := by
+    unfold chartNormalModel
+    rfl
+  rw [← hmdef] at hm
+  have hp : (chartNormalModel d h).inv ≫
+      VectorBundleZeroSection.π U d (ConormalGradedAlgebra.piece (pullback.diagonal h) 1) =
+      Scheme.Hom.normalConeProj (pullback.fst h h) (pullback.diagonal h) :=
+    (Iso.inv_comp_eq _).mpr hm.2.1.symm
+  have hz : (pullback.diagonal h).normalConeZeroSection ≫ (chartNormalModel d h).inv =
+      VectorBundleZeroSection.zero U d (ConormalGradedAlgebra.piece (pullback.diagonal h) 1) :=
+    (Iso.comp_inv_eq _).mpr hm.2.2.symm
+  have hi : IsIso (chartNormalCoordinateMap d h u w) := by
+    unfold chartNormalCoordinateMap
+    infer_instance
+  constructor
+  · exact hi
+  constructor
+  · unfold chartNormalCoordinateMap
+    rw [Category.assoc]
+    change (chartNormalModel d h).inv ≫
+      (chartConormalCoordinateMap d h u w ≫
+        (AffineSpace (ULift.{u} (Fin d)) U ↘ U)) = _
+    have ho : chartConormalCoordinateMap d h u w ≫
+        (AffineSpace (ULift.{u} (Fin d)) U ↘ U) =
+        VectorBundleZeroSection.π U d
+          (ConormalGradedAlgebra.piece (pullback.diagonal h) 1) :=
+      by
+        unfold chartConormalCoordinateMap
+        exact AffineSpace.homOfVector_over _ _
+    rw [ho]
+    exact hp
+  · unfold chartNormalCoordinateMap
+    change _ ≫ (chartNormalModel d h).inv ≫ chartConormalCoordinateMap d h u w = _
+    rw [← Category.assoc, hz]
+    exact hc.2
+
 /-- Canonical restriction of a section invariant through an etale map over its base.
 The map is the normalized exceptional-adjunction mate pulled back to the section,
 with the two pullback-composition constraints explicitly included.
@@ -940,6 +1639,48 @@ def chartSourceCoordinateComparison (P : PurityFiniteSetting.{u})
             (chartCoordinateDifferences_over d h u O)
             (AffineSpace.zeroSection (ULift.{u} (Fin d)) U) s
             (sq.w.trans (Category.id_comp _))).symm)
+
+/-- Normal coordinates on the actual normal-section invariant, using the conormal
+model and the ordered differential frame, followed by normalized etale locality.
+Source: chart proof, Steps 2 and 3
+(blueprint: lem-pur-diagonal-dnc-chart-normalization). -/
+def chartNormalCoordinateComparison (P : PurityFiniteSetting.{u})
+    {U V : Scheme.{u}} [IsAffine U] [IsAffine V]
+    (d : ℕ) (h : U ⟶ V) [IsSeparated h] [LocallyOfFiniteType h] [QuasiCompact h]
+    [SmoothOfRelativeDimension d h]
+    (aV : V ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aV] [QuasiCompact aV]
+    (u : U ⟶ AffineSpace (ULift.{u} (Fin d)) V) [Etale u]
+    (w : u ≫ (AffineSpace (ULift.{u} (Fin d)) V ↘ V) = h)
+    (N : Etale.EtaleCompactSupportNormalization P.Coefficient) :
+    Dnc.normalSection P d (pullback.fst h h) (h ≫ aV) (pullback.diagonal h)
+        (pullback.diagonal_fst h) ≅
+      (ProEtale.comparisonUpperStar
+        (ModuleCat.{u + 1} P.Coefficient) U).mapDerivedCategory.obj
+          (P.chartStandardSection U d (h ≫ aV)) :=
+  letI := P.noetherian (h ≫ aV)
+  letI : SmoothOfRelativeDimension d
+      (Scheme.Hom.normalConeProj (pullback.fst h h) (pullback.diagonal h)) :=
+    (Scheme.Hom.normalConeData d (pullback.diagonal_fst h)).smoothOfRelativeDimension_proj
+  letI := Dnc.normalQuasiCompact d (pullback.fst h h)
+    (pullback.diagonal h) (pullback.diagonal_fst h)
+  letI := Dnc.normalCompactifiable P d (pullback.fst h h) (h ≫ aV)
+    (pullback.diagonal h) (pullback.diagonal_fst h)
+  letI := P.noetherian
+    (Scheme.Hom.normalConeProj (pullback.fst h h) (pullback.diagonal h) ≫ (h ≫ aV))
+  letI := Dnc.compactifiable P (AffineSpace (ULift.{u} (Fin d)) U ↘ U) (h ≫ aV)
+  letI := P.noetherian ((AffineSpace (ULift.{u} (Fin d)) U ↘ U) ≫ (h ≫ aV))
+  letI := (chartNormalCoordinateMap_spec d h u w).1
+  Dnc.normalComparison P d (pullback.fst h h) (h ≫ aV) (pullback.diagonal h)
+      (pullback.diagonal_fst h) ≪≫
+    (ProEtale.comparisonUpperStar
+      (ModuleCat.{u + 1} P.Coefficient) U).mapDerivedCategory.mapIso
+        (P.chartSectionEtaleRestriction N (chartNormalCoordinateMap d h u w)
+          (AffineSpace (ULift.{u} (Fin d)) U ↘ U)
+          (Scheme.Hom.normalConeProj (pullback.fst h h) (pullback.diagonal h))
+          (chartNormalCoordinateMap_spec d h u w).2.1
+          (AffineSpace.zeroSection (ULift.{u} (Fin d)) U)
+          (pullback.diagonal h).normalConeZeroSection
+          (chartNormalCoordinateMap_spec d h u w).2.2).symm
 
 attribute [local irreducible] chartSourceCoordinateComparison chartNormalCoordinateComparison
 
