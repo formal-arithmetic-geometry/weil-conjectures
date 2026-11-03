@@ -40,7 +40,40 @@ Remaining input: this is not proved here. It is equivalent, through the corepres
 short complexes of `exists_closedCech_corepresentingShortComplex`, to the exactness of
 `closedAffineCech_open_restriction_exact` (the closed-fibre half being formal), and it
 implies vanishing of the higher pro-étale cohomology of `i^* I` on affine objects of the
-closed fibre. -/
+closed fibre.
+
+Status of the remaining input. Taking `B` affine, `P = 𝟙`, `V = T^h` (the henselization of
+an affine `T` over the closed fibre) and the single cover `W^h → T^h` for a weakly
+contractible affine cover `W → T`, the statement is equivalent to
+`H^q(T, i^* I) = 0` for `q ≥ 1`, all affine `T` and all injective `I`. Here `H^q` is derived
+pro-étale cohomology. It is the pro-étale form of Gabber's affine analogue of proper base
+change, but for arbitrary injective sheaves, which need not come from the étale site. With
+`L` the left adjoint of `i^*` on module sheaves, this is `L_q (Λ[T]) = 0`. The stalk of
+`L_q (Λ[T])` at a geometric point `x` of the open complement is the `q`-th homology of the
+simplicial set of `x`-points of `v W_•`. Here `W_•` is a hypercover of `T` by weakly
+contractible affines and `v` is `closedSiteLift`, which gives the henselization. The
+henselization `v` preserves covers but not fibre products: `v (T₁ ×_T T₂)` is the
+henselization of `v T₁ ×_{v T} v T₂`, not the product itself. So this simplicial set is not a
+hypercover, and its acyclicity is a genuine geometric statement. It is not available in this
+library and may be false when the closed fibre has dimension at least `2`. The following
+routes fail: `i^*` preserving injectives, the evaluation formula `(i^* F)(T) = F(v T)` for
+affine `T` that are not weakly contractible, and Čech arguments on the cover `{v T_a}`.
+
+Further analysis, with no counterexample found. If every term of the Čech nerve of `U` on the
+closed fibre is weakly contractible, the Čech complex is `Hom(Λ[v Č_•], I)`. So exactness for
+all injective `I` is equivalent to acyclicity in positive degrees of the free complex
+`Λ[v Č_•]`. At a geometric point `x` of the open complement its stalk is `Λ` on the discrete
+sets of `x`-points of `v Č_•`. Gabber's theorem for étale injectives gives only a profinite
+version: when the terms of `v Č_•` are cofiltered limits of étale `B`-schemes, the colimit over
+finite étale levels of the cohomology of the finite fibre sets vanishes. If the normalized nerve
+has dimension at most `1`, this rules out discrete cycles. An example is a cover by the two local
+rings of a semilocal Bézout domain whose fraction field is algebraically closed. Such covers
+therefore give no counterexample. In general the gap between the profinite and discrete
+statements is the phenomenon of `proper_closed_lift_local_chains_nhds`: points joined by limits
+of finite chains need not be joined by a finite chain. For a nodal loop `N` in the closed fibre
+this should make the left adjoint of `i^*` on sheaves of sets differ from `h_{v N}` at a
+geometric point (a failure in degree `0`). No cover was found that turns this into a failure in
+positive degree. -/
 theorem exactAt_closedCechCoefficientFunctor_obj_of_injective
     (A : Type u) [CommRing A] [Finite A] {B O : Scheme.{u}}
     (b : O ⟶ B) [IsOpenImmersion b] [QuasiCompact b]
