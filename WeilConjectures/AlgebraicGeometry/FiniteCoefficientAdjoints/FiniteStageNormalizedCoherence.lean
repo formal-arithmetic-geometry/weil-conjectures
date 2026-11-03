@@ -348,7 +348,7 @@ private theorem projection_refinement
     let β := Etale.rightDerivedLowerShriekOfCompactificationIso B c d
     let O := (rnu A X).obj K.obj
     let θ := Etale.FiniteSmoothPurity.originReductionMap φ X K.obj
-    have hs := (Etale.etaleCompactScalarCoherence φ f c).2.2 d
+    have hs := (Etale.compactScalarMap_coherence φ f c).2.2 d
       (coherenceOrigin A X K).complex
       ⟨⟨(Etale.scalarExtension φ X).obj O,
         qc.etale_tensor_bound K (coherenceOrigin A X K)⟩, rfl⟩
