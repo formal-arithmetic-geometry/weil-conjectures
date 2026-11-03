@@ -190,6 +190,25 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Hom
 public import WeilConjectures.AlgebraicGeometry.Native.NativeHomSourceShiftData
 public import WeilConjectures.AlgebraicGeometry.Native.NativeDerivedHomSignedExact
+public import WeilConjectures.AlgebraicGeometry.CondensedDerivedTensorShifts
+public import WeilConjectures.AlgebraicGeometry.Finite.Coefficient.FiniteCoefficientDescentTwoColimit
+public import WeilConjectures.AlgebraicGeometry.LocallyConstantPerfectComplex
+public import WeilConjectures.AlgebraicGeometry.Open.OpenImmersionLocalizing
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Open.ProEtaleOpenClosedSequenceRingSheaf
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.AdmissibleTensorConstructibility
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CtfLocallyClosedPerfectGeneration
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteProperBaseChange
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntTensorProjection
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.IntegralProperProjectionFormula
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Proper.ProperBaseChangeRational
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Proper.ProperProjectionFormulaBounded
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixCtf
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixFiniteGeneration
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixNonfiniteGeneration
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixPerfectExtension
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixTensorComparison
 
 set_option linter.style.longLine false
 
@@ -447,12 +466,222 @@ theorem dualizingExchangeMap_isIso
     IsIso (dualizingExchangeMap ell k hk Λ hΛ f K hp) := by
   sorry
 
+private theorem pointwise_admissible_projection
+    (ell : ℕ) [Fact ell.Prime] (k : Type u) [Field k]
+    [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ell)]
+    {X Y : Over (Spec (.of k))}
+    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+    (p : X ⟶ Y) [IsProper p.left]
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    (hΛ : IsLocalizingAdmissibleCoefficient ell Λ)
+    (K : ConstantModelConstructibleFiniteTor Λ X.left)
+    (M : ConstantModelConstructibleFiniteTor Λ Y.left) :
+    IsIso (moduleObjectProjectionMap Λ p.left K.obj M.obj) := by
+  classical
+  have : LocallyOfFiniteType (X.left ↘ Spec (.of k)) :=
+    inferInstanceAs (LocallyOfFiniteType X.hom)
+  have : QuasiCompact (X.left ↘ Spec (.of k)) := inferInstanceAs (QuasiCompact X.hom)
+  have : IsSeparated (X.left ↘ Spec (.of k)) := inferInstanceAs (IsSeparated X.hom)
+  have : LocallyOfFiniteType (Y.left ↘ Spec (.of k)) :=
+    inferInstanceAs (LocallyOfFiniteType Y.hom)
+  have : QuasiCompact (Y.left ↘ Spec (.of k)) := inferInstanceAs (QuasiCompact Y.hom)
+  have : IsSeparated (Y.left ↘ Spec (.of k)) := inferInstanceAs (IsSeparated Y.hom)
+  let E₀ : PadicAlgCl.FiniteIntermediateField ell := ⟨⊥, inferInstance⟩
+  obtain ⟨_, _, _, _, _, _, _, _, qIso, zIso, _⟩ :=
+    Profinite.base_coefficient_condensed_identification.{u} ell
+  have integral (E : PadicAlgCl.FiniteIntermediateField ell)
+      (K : ConstantModelConstructibleFiniteTor (Profinite.padicIntegersRingObj ell E) X.left)
+      (M : ConstantModelConstructibleFiniteTor (Profinite.padicIntegersRingObj ell E) Y.left) :
+      IsIso (moduleObjectProjectionMap (Profinite.padicIntegersRingObj ell E)
+        p.left K.obj M.obj) :=
+    (integralProperProjectionFormula ell E k p.left).1 K.obj M.obj K.property.1 M.property.1
+  have rational (E : PadicAlgCl.FiniteIntermediateField ell)
+      (K : ConstantModelConstructibleFiniteTor (Profinite.continuousMapRingObj E) X.left)
+      (M : ConstantModelConstructibleFiniteTor (Profinite.continuousMapRingObj E) Y.left) :
+      IsIso (moduleObjectProjectionMap (Profinite.continuousMapRingObj E)
+        p.left K.obj M.obj) := by
+    have hX := ((finiteCoefficientDescentTwoColimit k (ringChar k) ell
+      (Fact.out : (ringChar k).Prime).pos Fact.out X.left).2.2.2.1 E).1
+    have hY := ((finiteCoefficientDescentTwoColimit k (ringChar k) ell
+      (Fact.out : (ringChar k).Prime).pos Fact.out Y.left).2.2.2.1 E).1
+    exact isIso_properProjectionMap_boundedConstructible_rational ell p
+      (Mon.mk (Profinite.continuousMapRingObj E)) (Or.inl ⟨E, rfl⟩) K.obj M.obj
+      ((congrFun hX _).mp K.property.1) ((congrFun hY _).mp M.property.1)
+  have closure
+      (K : ConstantModelConstructibleFiniteTor (Profinite.padicAlgClRingObj ell) X.left)
+      (M : ConstantModelConstructibleFiniteTor (Profinite.padicAlgClRingObj ell) Y.left) :
+      IsIso (moduleObjectProjectionMap (Profinite.padicAlgClRingObj ell)
+        p.left K.obj M.obj) := by
+    have hX := (finiteCoefficientDescentTwoColimit k (ringChar k) ell
+      (Fact.out : (ringChar k).Prime).pos Fact.out X.left).2.2.2.2.1.1
+    have hY := (finiteCoefficientDescentTwoColimit k (ringChar k) ell
+      (Fact.out : (ringChar k).Prime).pos Fact.out Y.left).2.2.2.2.1.1
+    exact isIso_properProjectionMap_boundedConstructible_rational ell p
+      (Mon.mk (Profinite.padicAlgClRingObj ell)) (Or.inr rfl) K.obj M.obj
+      ((congrFun hX _).mp K.property.1) ((congrFun hY _).mp M.property.1)
+  rcases hΛ with h | h | h | h | h | h
+  · obtain ⟨A, _, _, _, _, hfin, hA, ⟨e⟩⟩ := h
+    have : Finite A := hfin
+    exact pointwise_projection_coefficientIso e ell k p
+      (pointwise_finite_projection ell k p A hA) K M
+  · obtain ⟨e⟩ := h
+    exact pointwise_projection_coefficientIso (e ≪≫ zIso) ell k p (integral E₀) K M
+  · obtain ⟨e⟩ := h
+    exact pointwise_projection_coefficientIso (e ≪≫ qIso) ell k p (rational E₀) K M
+  · obtain ⟨E, ⟨e⟩⟩ := h
+    exact pointwise_projection_coefficientIso e ell k p (rational E) K M
+  · obtain ⟨E, ⟨e⟩⟩ := h
+    exact pointwise_projection_coefficientIso e ell k p (integral E) K M
+  · obtain ⟨e⟩ := h
+    exact pointwise_projection_coefficientIso e ell k p closure K M
+
+private theorem pointwise_finite_projection
+    (ell : ℕ) [Fact ell.Prime] (k : Type u) [Field k]
+    [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ell)]
+    {X Y : Over (Spec (.of k))}
+    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+    (p : X ⟶ Y) [IsProper p.left]
+    (A : Type) [CommRing A] [Finite A] [TopologicalSpace A] [DiscreteTopology A]
+    [IsTopologicalRing A] (hA : ∃ n : ℕ, ∀ a : A, (ell ^ n) • a = 0)
+    (K : ConstantModelConstructibleFiniteTor (Profinite.continuousMapRingObj A) X.left)
+    (M : ConstantModelConstructibleFiniteTor (Profinite.continuousMapRingObj A) Y.left) :
+    IsIso (moduleObjectProjectionMap (Profinite.continuousMapRingObj A) p.left K.obj M.obj) := by
+  classical
+  let B := ULift.{u} A
+  let : TopologicalSpace B := ⊥
+  let : DiscreteTopology B := ⟨rfl⟩
+  let e : A ≃+* B := ULift.ringEquiv.symm
+  let h : Profinite.continuousMapRingSheaf.{u} A ⟶
+      Profinite.continuousCoefficientRingSheaf B :=
+    ⟨{ app := fun S ↦ RingCat.ofHom
+        (ULift.ringEquiv.symm.toRingHom.comp
+          ((e.toRingHom.compLeftContinuous S.unop continuous_of_discreteTopology).comp
+            ULift.ringEquiv.toRingHom))
+       naturality := by intros; rfl }⟩
+  let v : Profinite.continuousCoefficientRingSheaf B ⟶
+      Profinite.continuousMapRingSheaf.{u} A :=
+    ⟨{ app := fun S ↦ RingCat.ofHom
+        (ULift.ringEquiv.symm.toRingHom.comp
+          ((e.symm.toRingHom.compLeftContinuous S.unop continuous_of_discreteTopology).comp
+            ULift.ringEquiv.toRingHom))
+       naturality := by intros; rfl }⟩
+  let eR : Profinite.continuousMapRingSheaf.{u} A ≅
+      Profinite.continuousCoefficientRingSheaf B :=
+    { hom := h
+      inv := v
+      hom_inv_id := by
+        ext S g
+        apply ULift.ext
+        apply ContinuousMap.ext
+        intro x
+        exact e.symm_apply_apply _
+      inv_hom_id := by
+        ext S g
+        apply ULift.ext
+        apply ContinuousMap.ext
+        intro x
+        exact e.apply_symm_apply _ }
+  let e' := (sheafCompose (coherentTopology Profinite.{u})
+    (forget₂ RingCat.{u + 1} Ab.{u + 1})).mapIso eR
+  have : IsMonHom e'.hom := Sheaf.isMonHom_sheafCompose_map _ eR.hom
+  let eb : Mon.mk (Profinite.continuousMapRingObj A) ≅
+      Mon.mk (FiniteDiscreteOrdinary.coefficient B) := Mon.mkIso' e'
+  have hB : ∃ n : ℕ, (ell ^ n : ℕ) • (1 : B) = 0 := by
+    obtain ⟨n, hn⟩ := hA
+    refine ⟨n, ?_⟩
+    apply ULift.ext
+    exact hn 1
+  let E (T : Scheme.{u}) := (FiniteDiscreteOrdinary.encoding_exists B T).some
+  exact (finiteProperBaseChange_of_coefficientIso
+    (Profinite.continuousMapRingObj A) B eb E ell hB k X Y p).2.2 K M
+
+private theorem pointwise_projection_coefficientIso
+    {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
+    [MonObj R] [IsCommMonObj R] [MonObj S] [IsCommMonObj S]
+    (e : Mon.mk R ≅ Mon.mk S)
+    (ell : ℕ) [Fact ell.Prime] (k : Type u) [Field k]
+    [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ell)]
+    {X Y : Over (Spec (.of k))}
+    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+    (p : X ⟶ Y)
+    (h : ∀ (K : ConstantModelConstructibleFiniteTor S X.left)
+      (M : ConstantModelConstructibleFiniteTor S Y.left),
+      IsIso (moduleObjectProjectionMap S p.left K.obj M.obj))
+    (K : ConstantModelConstructibleFiniteTor R X.left)
+    (M : ConstantModelConstructibleFiniteTor R Y.left) :
+    IsIso (moduleObjectProjectionMap R p.left K.obj M.obj) := by
+  have : IsIso e.hom.hom := inferInstanceAs (IsIso ((Mon.forget _).map e.hom))
+  apply projection_isIso_of_coefficientIso e.hom.hom ell k p K.obj M.obj
+  exact h ⟨_, pointwise_ctf_scalar e X.left K⟩ ⟨_, pointwise_ctf_scalar e Y.left M⟩
+
+private theorem pointwise_ctf_scalar
+    {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
+    [MonObj R] [IsCommMonObj R] [MonObj S] [IsCommMonObj S]
+    (e : Mon.mk R ≅ Mon.mk S) (T : Scheme.{u})
+    (K : ConstantModelConstructibleFiniteTor R T) :
+    (constantModelBoundedConstructible S T ⊓ _root_.DerivedCategory.finiteTorAmplitude _)
+      ((internalScalarExtension e.hom.hom T).obj K.obj) := by
+  have : IsIso e.hom.hom := inferInstanceAs (IsIso ((Mon.forget _).map e.hom))
+  have : IsIso (coefficientMap e.hom.hom T) := by
+    dsimp [coefficientMap]
+    infer_instance
+  have : (Mod.comap (asIso (coefficientMap e.hom.hom T)).inv).IsEquivalence :=
+    (inferInstance :
+      (Mod.comapEquivalenceOfIsIso (coefficientMap e.hom.hom T)).inverse.IsEquivalence)
+  have : (Mod.extendScalars (coefficientMap e.hom.hom T)).IsEquivalence :=
+    Functor.isEquivalence_of_iso (Mod.extendScalarsIsoComapInv _).symm
+  have hi : inv (coefficientMap e.hom.hom T) = coefficientMap e.inv.hom T := by
+    apply IsIso.inv_eq_of_hom_inv_id
+    rw [← coefficientMap_comp]
+    change coefficientMap ((Mon.forget _).map (e.hom ≫ e.inv)) T = _
+    rw [Iso.hom_inv_id]
+    exact coefficientMap_id T
+  let ed : internalScalarExtension e.hom.hom T ≅
+      (Mod.comap (D := Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
+        (coefficientMap e.inv.hom T)).mapDerivedCategory :=
+    (Mod.extendScalars (coefficientMap e.hom.hom T)).leftDerivedFunctorIsoMapDerivedCategory ≪≫
+      Functor.mapDerivedCategoryNatIso
+        (Mod.extendScalarsIsoComapInv (coefficientMap e.hom.hom T) ≪≫ Mod.comapCongr hi)
+  have : (constantModelBoundedConstructible S T).IsClosedUnderIsomorphisms :=
+    (constantModelConstructibleFiniteTor_wellDefined S T).2.1
+  exact ObjectProperty.prop_of_iso _ (ed.app K.obj).symm
+    (constantModelCtf_coefficientIso e T K)
+
+private theorem pointwise_proper_projection_eq
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (K : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)))
+    (M : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))) :
+    properProjectionMorphism Λ f K M = moduleObjectProjectionMap Λ f K M := by
+  unfold properProjectionMorphism moduleObjectProjectionMap moduleObjectProjectionData
+  rw [Adjunction.rightAdjointProjectionMap_app_app]
+  unfold Adjunction.projectionMorphism
+  rw [pointwise_native_delta]
+  rfl
+
+private theorem pointwise_native_delta
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+    {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (K M : DerivedCategory
+      (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))) :
+    Functor.OplaxMonoidal.δ L((f)^*⟦Λ⟧) K M =
+      ((leftDerivedUpperStarTensor Λ f).app K).app M := by
+  rfl
+
 /-- The exceptional projection component is invertible on constructible finite-Tor inputs.
 Source: `sk-thm-sf-tensor-hom`, proof paragraph invoking the exceptional projection
 formula (blueprint: sk-thm-sf-tensor-hom).
-Proof: compactify f; the open-immersion projection formula and the proper projection
-formula are isomorphisms on constructible finite-Tor inputs. Their composite is the
-published exceptional projection morphism. -/
+Proof: use the canonical compactification f = p j. Extension by zero preserves the
+constructible finite-Tor input. Identify the native proper projection arrow with the
+module-object projection map, and apply the finite, integral or rational proper projection
+formula after the explicit coefficient-isomorphism transports. The open projection
+isomorphism, its proper pushforward and the proper projection isomorphism compose to the
+specified exceptional projection morphism. -/
 theorem exceptionalProjectionApp_isIso
     (ell : ℕ) [Fact ell.Prime] (k : Type u) [Field k]
     [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ell)]
@@ -465,7 +694,26 @@ theorem exceptionalProjectionApp_isIso
     (f : X ⟶ Y) [IsSeparated f.left] [LocallyOfFiniteType f.left]
     [QuasiCompact f.left] (K : Ctf Λ X.left) (L : Ctf Λ Y.left) :
     IsIso (exceptionalProjectionApp ell k hk Λ hΛ f K L) := by
-  sorry
+  letI : X.left.Over (Spec (.of k)) := ⟨X.hom⟩
+  letI : Y.left.Over (Spec (.of k)) := ⟨Y.hom⟩
+  letI : f.left.IsOver (Spec (.of k)) := ⟨f.w⟩
+  have : LocallyOfFiniteType (X.left ↘ Spec (.of k)) := ‹LocallyOfFiniteType X.hom›
+  have : QuasiCompact (X.left ↘ Spec (.of k)) := ‹QuasiCompact X.hom›
+  have : IsSeparated (X.left ↘ Spec (.of k)) := ‹IsSeparated X.hom›
+  have : LocallyOfFiniteType (Y.left ↘ Spec (.of k)) := ‹LocallyOfFiniteType Y.hom›
+  have : QuasiCompact (Y.left ↘ Spec (.of k)) := ‹QuasiCompact Y.hom›
+  have : IsSeparated (Y.left ↘ Spec (.of k)) := ‹IsSeparated Y.hom›
+  let c := compactificationOverField f
+  have hK := (openImmersionLowerShriek_localizing ell k (ringChar k)
+    (Fact.out : (ringChar k).Prime).pos (Fact.out : ringChar k ≠ ell) Λ hΛ c.i).1 K
+  have hp := pointwise_admissible_projection ell k c.overG Λ hΛ ⟨_, hK⟩ L
+  have : IsIso (properProjectionMorphism Λ c.g
+      ((openImmersionLowerShriek Λ c.i).mapDerivedCategory.obj K.obj) L.obj) := by
+    rw [pointwise_proper_projection_eq]
+    exact hp
+  change IsIso (exceptionalProjectionMorphismOfCompactification Λ c K.obj L.obj)
+  unfold exceptionalProjectionMorphismOfCompactification
+  infer_instance
 
 /-- The proper compact-support comparison used in the bidual mate.
 Source: proper compact-support/direct-image comparison in `det-prop-sf-cbc`;
@@ -524,7 +772,23 @@ theorem homExchange_preserves_evaluation
         (P.map (show T ⟶ S.obj L from ObjectProperty.homMk t)).hom ≫
         ((ctfExceptionalAdjunction Λ ell k hcd f hΛ).counit.app L).hom =
       evaluationMap Λ (P.obj K).obj L.obj := by
-  sorry
+  dsimp only
+  unfold homExchangeMap
+  simp only [Equiv.symm_apply_apply]
+  let adj := ctfExceptionalAdjunction Λ ell k
+    (exceptionalCurrentFieldCD ell k hk) f hΛ
+  let p := homProjectionApp ell k hk Λ hΛ f K L
+  letI : IsIso p := hp
+  let ev := evaluationMap Λ
+    ((ctfLowerShriek Λ ell k (exceptionalCurrentFieldCD ell k hk) f hΛ).obj K).obj L.obj
+  have h := (adj.homEquiv
+    (ctfTensorObject ell k hk Λ hΛ f K (ctfHomInput ell k hk Λ hΛ f K L)) L
+      ).symm_apply_apply (ObjectProperty.homMk (inv p ≫ ev))
+  rw [Adjunction.homEquiv_counit] at h
+  change p ≫ _ = ev
+  calc
+    _ = p ≫ (inv p ≫ ev) := congrArg (fun q ↦ p ≫ q.hom) h
+    _ = ev := by simp only [IsIso.hom_inv_id_assoc]
 
 /-- The two naturality squares of the canonical mate, contravariant in K and covariant in L.
 Source: `sk-thm-sf-tensor-hom`, Complement (blueprint: sk-thm-sf-tensor-hom).

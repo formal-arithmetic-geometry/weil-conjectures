@@ -279,6 +279,20 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ClosedIm
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixTensorComparison
 
 public import WeilConjectures.SixFunctors.ScalarOpenCompositorCoherence
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Open.ProEtaleOpenClosedSequenceRingSheaf
+public import WeilConjectures.AlgebraicGeometry.PurityCoefficientChange.CondensedPurityCoefficientCoherenceData
+public import WeilConjectures.AlgebraicGeometry.PurityCoefficientChange.CondensedPurityIdentityGenerators
+public import WeilConjectures.AlgebraicGeometry.PurityCoefficientChange.CondensedPurityScalarCoordinates
+public import WeilConjectures.AlgebraicGeometry.PurityCoefficientChange.CondensedPuritySourceCoherence
+public import WeilConjectures.AlgebraicGeometry.PurityCoefficientChange.CondensedPurityTateFrobenius
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.AdmissibleTensorConstructibility
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntTensorProjection
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixCtf
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixFiniteGeneration
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixNonfiniteGeneration
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixPerfectExtension
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixTensorHom
 
 /-! # Purity, counit and smooth trace under change of condensed coefficients
 
@@ -371,6 +385,80 @@ Source: Tate Frobenius sentence, proof Steps 7--8
 (blueprint: lem-pur-condensed-purity-coefficient-change). -/
 def FrobeniusCompatible (P : Coordinates.{u} ell) : Prop :=
   TateUnitInvertible ell D ∧ TateScalarFrobenius ell D P ∧ TatePullbackFrobenius ell D
+
+private theorem trace_square {C C' E E' : Type*}
+    [Category C] [Category C'] [Category E] [Category E']
+    (F : C ⥤ E) (F' : C' ⥤ E') (TX : C ⥤ C') (TY : E ⥤ E')
+    (b : F ⋙ TY ⟶ TX ⋙ F') {M N : C} {M' N' : C'} {K : E}
+    (g : M ⟶ N) (g' : M' ⟶ N') (r : TX.obj M ⟶ M') (c : TX.obj N ⟶ N')
+    (e : F.obj N ⟶ K) (e' : F'.obj N' ⟶ TY.obj K)
+    (he : TY.map e = b.app N ≫ F'.map c ≫ e')
+    (hg : TX.map g ≫ c = r ≫ g') :
+    TY.map (F.map g ≫ e) = b.app M ≫ F'.map r ≫ (F'.map g' ≫ e') := by
+  rw [TY.map_comp, he]
+  have hn := b.naturality g
+  change TY.map (F.map g) ≫ b.app N = b.app M ≫ F'.map (TX.map g) at hn
+  calc
+    _ = (TY.map (F.map g) ≫ b.app N) ≫ (F'.map c ≫ e') := by
+      simp only [Category.assoc]
+    _ = b.app M ≫ F'.map (TX.map g ≫ c) ≫ e' := by
+      rw [hn, F'.map_comp]
+      simp only [Category.assoc]
+    _ = _ := by rw [hg, F'.map_comp]; simp only [Category.assoc]
+
+private theorem trace_before_purity {C C' E E' : Type*}
+    [Category C] [Category C'] [Category E] [Category E']
+    (F : C ⥤ E) (F' : C' ⥤ E') (TX : C ⥤ C') (TY : E ⥤ E')
+    (b : F ⋙ TY ⟶ TX ⋙ F') {M N : C} {M' N' : C'} {K : E}
+    (g : M ⟶ N) (_g' : M' ⟶ N') (_r : TX.obj M ⟶ M') (c : TX.obj N ⟶ N')
+    (e : F.obj N ⟶ K) (e' : F'.obj N' ⟶ TY.obj K)
+    (he : TY.map e = b.app N ≫ F'.map c ≫ e') :
+    TY.map (F.map g ≫ e) = b.app M ≫ F'.map (TX.map g ≫ c) ≫ e' := by
+  rw [TY.map_comp, he, F'.map_comp]
+  have hn := b.naturality g
+  change TY.map (F.map g) ≫ b.app N = b.app M ≫ F'.map (TX.map g) at hn
+  simpa only [Category.assoc] using
+    congrArg (fun f ↦ f ≫ F'.map c ≫ e') hn
+
+private theorem purity_square_of_trace {C C' E E' : Type*}
+    [Category C] [Category C'] [Category E] [Category E']
+    (F : C ⥤ E) (F' : C' ⥤ E') (R' : E' ⥤ C') (adj' : F' ⊣ R')
+    (TX : C ⥤ C') (TY : E ⥤ E') (b : F ⋙ TY ⟶ TX ⋙ F')
+    {M N : C} {M' : C'} {K : E}
+    (g : M ⟶ N) (g' : M' ⟶ R'.obj (TY.obj K))
+    (r : TX.obj M ⟶ M') (c : TX.obj N ⟶ R'.obj (TY.obj K))
+    (e : F.obj N ⟶ K) [IsIso (b.app M)]
+    (he : TY.map e = b.app N ≫ F'.map c ≫ adj'.counit.app (TY.obj K))
+    (ht : TY.map (F.map g ≫ e) =
+      b.app M ≫ F'.map r ≫ F'.map g' ≫ adj'.counit.app (TY.obj K)) :
+    TX.map g ≫ c = r ≫ g' := by
+  apply (adj'.homEquiv _ _).symm.injective
+  simp only [Adjunction.homEquiv_counit]
+  apply (cancel_epi (b.app M)).mp
+  calc
+    _ = TY.map (F.map g ≫ e) :=
+      (trace_before_purity F F' TX TY b g g' r c e _ he).symm
+    _ = _ := by rw [ht, F'.map_comp]; simp only [Category.assoc]
+
+/-- Assemble the purity, counit, trace and naturality equations from scalar
+compatibility and invertibility of the fixed source comparison.
+Source: coefficient-change proof Steps 1--7
+(blueprint: lem-pur-condensed-purity-coefficient-change).
+Proof: obtain the purity equation by the preceding adjunction calculation, the
+counit equation directly from the mate identity, and the trace equation by their
+composition. Naturality is that of the fixed scalar tensor and pullback maps. -/
+private theorem equations_of_scalarCompatible (A : AdjunctionFamily ell D)
+    (hA : ScalarCompatible ell D A) (P : Coordinates.{u} ell)
+    (hP : IdentityCoherent ell D hEll P) : Equations ell D hEll A P := by
+  intro c c' a ha s R S
+  constructor
+  · intro K
+    have hp := purity_equation_of_scalarCompatible ell D hEll A hA P hP a ha s R S K
+    exact ⟨sourceMap_isIso_of_scalarCompatible ell D hEll A hA P hP a ha s R S K,
+      hp, exceptionalMap_counit ell D hEll a ha s R S K,
+      trace_coefficient_equation ell D hEll A P a ha s R S K hp⟩
+  · intro K L v
+    exact sourceMap_naturality ell D P a ha s K.obj L.obj v.hom
 
 /-- The canonical purity family has the stated purity, counit and smooth-trace
 coefficient equations, Tate Frobenius compatibility, and identity/composition laws.

@@ -18,6 +18,22 @@ public import WeilConjectures.SixFunctors.Etale.Derived.PointFiber
 public import WeilConjectures.AlgebraicGeometry.Finite.Coefficient.FiniteCoefficientDescentTwoColimit
 public import WeilConjectures.CategoryTheory.InternalSectionTensorComparison
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
+public import Mathlib.Analysis.Normed.Group.Ultra
+public import WeilConjectures.AlgebraicGeometry.CondensedGeometricPoint.IntrinsicCondensedCoefficientPoint
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.PointTensorReduction.NativeIntegralPointTensor
+import WeilConjectures.SixFunctors.PointFibreDerivedTensorBasic
+import WeilConjectures.CategoryTheory.DerivedCategory.Picard.DerivedTensorSecondFactorFunctor
+import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
+import WeilConjectures.Algebra.Homology.SixFunctors.OrdinaryDerivedChangeOfRings
+import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
+import WeilConjectures.Algebra.Homology.SixFunctors.OrdinaryDerivedChangeOfRings
+import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
+import WeilConjectures.Algebra.Homology.HomotopyCategory.BraidedCochainNormalization
+import WeilConjectures.Algebra.Homology.Ringed.RingedDerivedTensorNativeSupplement
+import WeilConjectures.Algebra.Homology.ExtensionKFlatQuasiIso
+import WeilConjectures.Algebra.Homology.KFlatModuleBaseChange
+import WeilConjectures.FromJoel.CategoryTheory.Localization.DerivabilityStructure.Derives
+import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 
 /-! # Integral point-fibre scalar coherence
 
@@ -141,4 +157,100 @@ set_option maxHeartbeats 2000000 in
 -- The site tensor comparison has large derived-category instance arguments.
 set_option synthInstance.maxHeartbeats 100000 in
 -- Elaborating the native point tensor and its localization involves large site instances.
+end AlgebraicGeometry.ProEtale.CondensedRing.PointTensorReduction
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing.PointTensorReduction
+
+private theorem native_map_comp (ell : ℕ) [Fact ell.Prime]
+    (E : PadicAlgCl.FiniteIntermediateField ell) (π : PadicAlgCl.integers ell E)
+    (qcont : ∀ n : ℕ,
+      @Continuous (PadicAlgCl.integers ell E)
+        (PadicAlgCl.integers ell E ⧸ (Ideal.span ({π} : Set _)) ^ (n + 1))
+        inferInstance ⊥ (Ideal.Quotient.mk _))
+    (m n : ℕ) (h : n ≤ m) :
+    nativeMapOf.{u} ell E π qcont m ≫ finiteCoefficientMap ell E π h =
+      nativeMapOf ell E π qcont n := by
+  rfl
+
+private theorem finite_map_id (ell : ℕ) [Fact ell.Prime]
+    (E : PadicAlgCl.FiniteIntermediateField ell) (π : PadicAlgCl.integers ell E)
+    (n : ℕ) : finiteCoefficientMap.{u} ell E π (m := n) (n := n) (le_refl n) = 𝟙 _ := by
+  let A := PadicAlgCl.integers ell E ⧸ (Ideal.span ({π} : Set _)) ^ (n + 1)
+  let : TopologicalSpace A := ⊥
+  let : DiscreteTopology A := ⟨rfl⟩
+  have hq : Ideal.Quotient.factorPow (Ideal.span ({π} : Set _))
+      (Nat.add_le_add_right (le_refl n) 1) = RingHom.id _ := by
+    apply RingHom.ext
+    intro x
+    obtain ⟨a, rfl⟩ := Ideal.Quotient.mk_surjective x
+    rfl
+  apply CommMon.hom_ext
+  apply Sheaf.hom_ext
+  apply NatTrans.ext
+  funext S
+  apply AddCommGrpCat.ext
+  intro x
+  apply ULift.ext
+  change (⟨_, _⟩ : C(S.unop, _)) = x.down
+  apply ContinuousMap.ext
+  intro y
+  exact congrArg (fun f ↦ f (x.down y)) hq
+
+private theorem scalar_map_comp {A B C : ScalarSixRing.{u}} (a : A ⟶ B) (b : B ⟶ C) :
+    (scalarMap b).comp (scalarMap a) = scalarMap (a ≫ b) := by
+  rfl
+
+private theorem scalar_map_id (A : ScalarSixRing.{u}) : scalarMap (𝟙 A) = RingHom.id _ := by
+  rfl
+
+private theorem quotient_mk_continuous (ell : ℕ) [Fact ell.Prime]
+    (E : PadicAlgCl.FiniteIntermediateField ell) (π : PadicAlgCl.integers ell E)
+    (hπ : Ideal.span ({π} : Set (PadicAlgCl.integers ell E)) =
+      IsLocalRing.maximalIdeal (PadicAlgCl.integers ell E)) (n : ℕ) :
+    @Continuous (PadicAlgCl.integers ell E)
+      (PadicAlgCl.integers ell E ⧸ (Ideal.span ({π} : Set _)) ^ (n + 1))
+      inferInstance ⊥ (Ideal.Quotient.mk _) := by
+  let := PadicAlgCl.normedFieldOfAlgebra ell E
+  let := PadicAlgCl.isUltrametricDist_ofAlgebra ell E
+  have hπ0 : π ≠ 0 := by
+    intro h
+    apply PadicAlgCl.maximalIdeal_integers_ne_bot ell E
+    rw [← hπ, h]
+    simp
+  let A := PadicAlgCl.integers ell E ⧸ (Ideal.span ({π} : Set _)) ^ (n + 1)
+  let : TopologicalSpace A := ⊥
+  let : DiscreteTopology A := ⟨rfl⟩
+  have hπE : (π : E) ≠ 0 := fun h ↦ hπ0 (Subtype.ext h)
+  have hr : 0 < ‖(π : E)‖ ^ (n + 1) := pow_pos (norm_pos_iff.mpr hπE) _
+  have heq (x y : PadicAlgCl.integers ell E) :
+      Ideal.Quotient.mk ((Ideal.span ({π} : Set _)) ^ (n + 1)) x =
+        Ideal.Quotient.mk ((Ideal.span ({π} : Set _)) ^ (n + 1)) y ↔
+      ‖(x : E) - y‖ ≤ ‖(π : E)‖ ^ (n + 1) := by
+    rw [← sub_eq_zero, ← map_sub, Ideal.Quotient.eq_zero_iff_mem,
+      Ideal.span_singleton_pow, Ideal.mem_span_singleton']
+    constructor
+    · rintro ⟨a, ha⟩
+      have hval := congrArg Subtype.val ha
+      change (a : E) * (π : E) ^ (n + 1) = (x : E) - y at hval
+      rw [← hval, norm_mul, norm_pow]
+      exact mul_le_of_le_one_left (by positivity) a.property
+    · intro h
+      refine ⟨⟨((x : E) - y) / (π : E) ^ (n + 1), ?_⟩, Subtype.ext ?_⟩
+      · change ‖((x : E) - y) / (π : E) ^ (n + 1)‖₊ ≤ 1
+        rw [← NNReal.coe_le_coe, coe_nnnorm, norm_div, norm_pow, NNReal.coe_one]
+        exact div_le_one_of_le₀ h hr.le
+      · change ((x : E) - y) / (π : E) ^ (n + 1) * (π : E) ^ (n + 1) =
+          (x : E) - y
+        exact div_mul_cancel₀ _ (pow_ne_zero _ hπE)
+  refine continuous_discrete_rng.mpr fun q ↦ ?_
+  obtain ⟨x, rfl⟩ := Ideal.Quotient.mk_surjective q
+  have hf : (Ideal.Quotient.mk ((Ideal.span ({π} : Set _)) ^ (n + 1))) ⁻¹'
+        {Ideal.Quotient.mk _ x} =
+      Subtype.val ⁻¹' Metric.closedBall (x : E) (‖(π : E)‖ ^ (n + 1)) := by
+    ext y
+    simpa only [Set.mem_preimage, Set.mem_singleton_iff, Metric.mem_closedBall,
+      dist_eq_norm] using heq y x
+  rw [hf]
+  exact (IsUltrametricDist.isOpen_closedBall _ hr.ne').preimage continuous_subtype_val
+
 end AlgebraicGeometry.ProEtale.CondensedRing.PointTensorReduction

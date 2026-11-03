@@ -210,6 +210,17 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.M
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactSupportComposition.CondensedCompactSupportComposition
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CondensedArbitraryPullback
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.DetSfCompBaseChangeDefs
+public import WeilConjectures.AlgebraicGeometry.LocallyConstantPerfectComplex
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Open.ProEtaleOpenClosedSequenceRingSheaf
+public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.AdmissibleTensorConstructibility
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CtfLocallyClosedPerfectGeneration
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntTensorProjection
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixCtf
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixFiniteGeneration
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixNonfiniteGeneration
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixPerfectExtension
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixTensorComparison
 
 /-! # Weil equivariance of duality on the current condensed strict Weil model
 
@@ -362,7 +373,27 @@ theorem canonicalSupportExchangeComponent_naturality (ell : ℕ) [Fact ell.Prime
           (smallAction Λ.X g ⋙
             ctfLowerShriek Λ.X ell D.k
               (BaseFieldFiniteCD.of_isAlgClosed ell D.k) f hΛ).map fKL := by
-  sorry
+  let I := (dctfPred Λ.X X.left).ι
+  let V : ConstantModelConstructibleFiniteTor Λ.X X.left ⥤
+      (localizingClosureProEtale Λ.X X.left).FullSubcategory :=
+    (localizingClosureProEtale Λ.X X.left).lift
+      (I ⋙ CompactificationReindexing.P Λ.X g.hom) (fun K ↦ by
+        let LK : (localizingClosureProEtale Λ.X X.left).FullSubcategory :=
+          ⟨K.obj, A.source_mem K.obj K.property⟩
+        simpa [I, CompactificationReindexing.P] using hg.localizing LK)
+  let F := CompactificationReindexing.F Λ.X (compactificationOverField f)
+  let q :=
+    Functor.isoWhiskerLeft (I ⋙ F)
+        (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ.X h.hom).symm ≪≫
+      Functor.isoWhiskerLeft I B ≪≫ Functor.isoWhiskerLeft V τ ≪≫
+      Functor.isoWhiskerRight
+        (Functor.isoWhiskerLeft I
+          (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ.X g.hom)) F
+  intro K L fKL
+  apply ObjectProperty.hom_ext
+  simpa [canonicalSupportExchangeComponent, ctfLowerShriek, smallAction, q, I, V, F,
+    ObjectProperty.lift, action]
+    using q.hom.naturality fKL
 
 /-- The normalized proper/open exchange in exact Frobenius-action coordinates.
 It is the explicit composite of the native `squareExchange` on the transported

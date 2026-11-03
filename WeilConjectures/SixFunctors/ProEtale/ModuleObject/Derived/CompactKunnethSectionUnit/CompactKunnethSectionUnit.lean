@@ -14,6 +14,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactKunnethSectionUnit.CompactKunnethClosedExchange
 import WeilConjectures.PoincareDuality.ProjectionFormula
 import Mathlib.CategoryTheory.CommSq
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CondensedCoefficientUnit
 
 /-!
 # Normalization of compact Künneth on closed sections
@@ -54,6 +55,30 @@ noncomputable def sectionMap {datum : WeilConjectures.FiniteFieldDatum.{u}}
       (by rw [Category.assoc, hs, Category.comp_id, Category.id_comp]))
     (by
       rw [← d.q.hom.w, ← Category.assoc, d.cartesian.lift_snd, Category.id_comp]))
+
+/-- The tensor unit belongs to the localizing domain of the coherent compositor.
+Source: blueprint `lem-pur-compact-kunneth-section-unit`, proof Step 1.
+Proof: the constant rank-one coefficient module in degree zero is constructible and
+has Tor amplitude [0,0]; the generating constructible finite-Tor subcategory lies
+in its localizing closure.
+(blueprint: lem-pur-compact-kunneth-section-unit). -/
+theorem unit_localizing (Λ : ScalarSixRing.{u}) {k : Type u} [Field k]
+    (B : SepFinType k) :
+    AlgebraicGeometry.ProEtale.localizingClosureProEtale Λ.X B.obj.left
+      (𝟙_ (CompactificationReindexing.D Λ.X B.obj.left)) := by
+  letI : CompactSpace B.obj.left := QuasiCompact.compactSpace_of_compactSpace B.obj.hom
+  letI : QuasiSeparatedSpace B.obj.left := quasiSeparatedSpace_of_quasiSeparated B.obj.hom
+  intro P hP hS
+  apply hS
+  exact condensedCoefficientUnit_mem Λ.X B.obj.left
+
+/-- The unit, bundled in the already defined localizing subcategory.
+Source: blueprint `lem-pur-compact-kunneth-section-unit`, proof Step 1.
+(blueprint: lem-pur-compact-kunneth-section-unit). -/
+def localizingUnit (Λ : ScalarSixRing.{u}) {k : Type u} [Field k]
+    (B : SepFinType k) :
+    (localizingClosureProEtale Λ.X B.obj.left).FullSubcategory :=
+  ⟨𝟙_ _, unit_localizing Λ B⟩
 
 /-- The first coordinate of the Cartesian lift a is gs.
 Source: blueprint `lem-pur-compact-kunneth-section-unit`, proof Step 1.

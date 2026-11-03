@@ -76,6 +76,8 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactSupportC
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedPullbackCoherence
 import WeilConjectures.Mathlib.CategoryTheory.Functor.Derived.Adjunction
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Proper.ProEtaleProperOpenInterchange
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactSupportComposition.CondensedCompactSupportCompositionData
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.StandingFieldCtfStability
 
 /-! # Native condensed field projection comparison equations
 
@@ -136,7 +138,7 @@ Source: the source proof, Step 5
 Proof: the algebraic closure D.k has ell-cohomological dimension zero. The native
 six-functor stability theorem therefore preserves Dctf under pullback and tensor.
 Apply its pullback clause to L, and its tensor clause to K and that pullback.
-The coefficient isomorphisms in hΛ identify the two prescribed field coefficients;
+The coefficient isomorphisms in hΛ identify the prescribed integral and field coefficients;
 integral_ctf_equals_bc identifies Dctf with Dbc without a completeness condition. -/
 theorem tensor_mem {X Y : SepFinType D.k} (f : X ⟶ Y)
     (K : ConstantModelConstructibleFiniteTor Λ X.obj.left)
@@ -144,7 +146,54 @@ theorem tensor_mem {X Y : SepFinType D.k} (f : X ⟶ Y)
     (constantModelBoundedConstructible Λ X.obj.left ⊓
       DerivedCategory.finiteTorAmplitude _)
       (K.obj ⊗ (moduleObjectDerivedPullback Λ f.hom.left).obj L.obj) := by
-  sorry
+  classical
+  let : Fact D.p.Prime := ⟨D.prime⟩
+  let : Fintype D.k₀ := Fintype.ofFinite D.k₀
+  have hc : Fintype.card D.k₀ = D.p ^ D.a := by
+    simpa only [Nat.card_eq_fintype_card] using D.card_base.trans D.cardinality_eq
+  let : CharP D.k₀ D.p := charP_of_card_eq_prime_pow hc
+  let : CharP D.k D.p := charP_of_injective_algebraMap' D.k₀ D.p
+  let : Fact (ringChar D.k).Prime := ⟨by
+    rw [ringChar.eq D.k D.p]
+    exact D.prime⟩
+  let : Fact (ringChar D.k ≠ ℓ) := ⟨by
+    rw [ringChar.eq D.k D.p]
+    exact hℓp.symm⟩
+  let : IsAlgClosed D.k := IsAlgClosure.isAlgClosed D.k₀
+  have hcoeff : IsLocalizingAdmissibleCoefficient ℓ Λ := by
+    rcases hΛ with h | h
+    · obtain ⟨E, h | h⟩ := h
+      · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inl ⟨E, h⟩))))
+      · exact Or.inr (Or.inr (Or.inr (Or.inl ⟨E, h⟩)))
+    · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr h))))
+  let : X.obj.left.Over (Spec (.of D.k)) := ⟨X.obj.hom⟩
+  let : Y.obj.left.Over (Spec (.of D.k)) := ⟨Y.obj.hom⟩
+  let : f.hom.left.IsOver (Spec (.of D.k)) := ⟨f.hom.w⟩
+  let : LocallyOfFiniteType (X.obj.left ↘ Spec (.of D.k)) :=
+    inferInstanceAs (LocallyOfFiniteType X.obj.hom)
+  let : QuasiCompact (X.obj.left ↘ Spec (.of D.k)) :=
+    inferInstanceAs (QuasiCompact X.obj.hom)
+  let : IsSeparated (X.obj.left ↘ Spec (.of D.k)) :=
+    inferInstanceAs (IsSeparated X.obj.hom)
+  let : LocallyOfFiniteType (Y.obj.left ↘ Spec (.of D.k)) :=
+    inferInstanceAs (LocallyOfFiniteType Y.obj.hom)
+  let : QuasiCompact (Y.obj.left ↘ Spec (.of D.k)) :=
+    inferInstanceAs (QuasiCompact Y.obj.hom)
+  let : IsSeparated (Y.obj.left ↘ Spec (.of D.k)) :=
+    inferInstanceAs (IsSeparated Y.obj.hom)
+  have : IsSeparated (f.hom.left ≫ Y.obj.hom) :=
+    f.hom.w.symm ▸ inferInstanceAs (IsSeparated X.obj.hom)
+  let : IsSeparated f.hom.left := IsSeparated.of_comp f.hom.left Y.obj.hom
+  have : LocallyOfFiniteType (f.hom.left ≫ Y.obj.hom) :=
+    f.hom.w.symm ▸ inferInstanceAs (LocallyOfFiniteType X.obj.hom)
+  let : LocallyOfFiniteType f.hom.left := locallyOfFiniteType_of_comp f.hom.left Y.obj.hom
+  let : CompactSpace X.obj.left := QuasiCompact.compactSpace_of_compactSpace X.obj.hom
+  let : QuasiSeparatedSpace Y.obj.left := quasiSeparatedSpace_of_quasiSeparated Y.obj.hom
+  let : QuasiCompact f.hom.left := inferInstance
+  obtain ⟨hpull, htensor, _⟩ :=
+    constructibleFiniteTor_stability_direct_images_of_finite_or_isAlgClosed ℓ D.k
+      (Or.inr inferInstance) Λ hcoeff f.hom.left
+  exact htensor K.obj _ K.property (hpull L.obj L.property)
 
 /-- The tensor input as an object of the comparison's localizing source.
 Source: the source proof, Step 5

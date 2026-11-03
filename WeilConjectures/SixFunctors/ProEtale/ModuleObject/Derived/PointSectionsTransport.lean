@@ -18,6 +18,14 @@ public import WeilConjectures.AlgebraicGeometry.FlatCohomologyDerivedTensor
 public import WeilConjectures.CategoryTheory.ModuleObjects.RegularEndBijective
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategoryMonoidal
 public import WeilConjectures.CategoryTheory.Abelian.Flat.PreservesFlat
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LineCoefficientMap
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LineCrossProductNaturality
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.PointLineCoordinates
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.PointPerfectEvaluationAgreement
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.PointPullbackTrivializationMonoidal2
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.PointTransportIntertwining
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SingleRealizationIndependence
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SingleRealizationNaturality
 
 /-! # Point sections transport, cup compatibility and degreewise Frobenius
 
@@ -796,6 +804,140 @@ structure PointSectionsTransportData
       (C : pointDerived D Λ) (j : ℤ),
       pointCohomologyCrossProduct D Λ L h C j = pointCohomologyCrossProduct D Λ L h' C j
 
+private theorem point_rho_hom
+    (D : WeilConjectures.FiniteFieldDatum.{u})
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] (C : pointDerived D Λ) :
+    ((pointRhoSectionwise D Λ).app C).hom =
+      (scalarSections D Λ).map ((pointActionTrivialization D Λ).app C).inv := by
+  change 𝟙 _ ≫ (scalarSections D Λ).map
+    ((pointActionTrivialization D Λ).app C).inv = _
+  exact Category.id_comp _
+
+private def point_actual_ordinary_unit_iso
+    (D : WeilConjectures.FiniteFieldDatum.{u})
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] :
+    (CohomologyTransport.sections Λ (pointScheme D)).obj (𝟙_ (pointModules D Λ)) ≅
+      ModuleCat.of (condensedScalarRing Λ) (condensedScalarRing Λ) := by
+  let S := CohomologyTransport.scalarMap Λ (pointScheme D)
+  have hb : Function.Bijective S := by
+    letI := Functor.additive_of_preserves_binary_products (upperStarFromPoint (pointScheme D))
+    exact (InternalAbelianSheafModule.sectionGlobalEval_bijective
+      (Scheme.ProEt.topology (pointScheme D)) (condensedRingObj Λ (pointScheme D))
+      (Scheme.ProEt.mk (𝟙 (pointScheme D)))
+      (MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.WeaklyEtale (pointScheme D))).comp
+      ((InternalAbelianSheafModule.globalMapFunctor_bijective
+        (upperStarFromPoint (pointScheme D)) (Functor.FullyFaithful.ofFullyFaithful _) Λ).comp
+        (InternalAbelianSheafModule.sectionGlobalEquiv (coherentTopology Profinite.{u}) Λ
+          (⊤_ Profinite.{u}) terminalIsTerminal).symm.bijective)
+  let e := RingEquiv.ofBijective S hb
+  exact ModuleCat.restrictScalarsIsoOfEquiv e
+
+private def point_ordinary_unit_iso
+    (D : WeilConjectures.FiniteFieldDatum.{u})
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] :
+    (condensedRingCoefficientSections Λ (pointScheme D)).obj (𝟙_ (pointModules D Λ)) ≅
+      ModuleCat.of (MonObj.Γ Λ) (MonObj.Γ Λ) := by
+  let R := MonObj.Γ Λ
+  let G := condensedRingCoefficientSections Λ (pointScheme D)
+  let U := 𝟙_ (pointModules D Λ)
+  let s := condensedRingScalarSections Λ (pointScheme D)
+  have hb : Function.Bijective s := by
+    letI := Functor.additive_of_preserves_binary_products (upperStarFromPoint (pointScheme D))
+    exact InternalAbelianSheafModule.globalMapFunctor_bijective
+      (upperStarFromPoint (pointScheme D)) (Functor.FullyFaithful.ofFullyFaithful _) Λ
+  let f : R →ₗ[R] G.obj U := LinearMap.toSpanSingleton R (G.obj U) (𝟙 U)
+  have hf : Function.Bijective f := by
+    have he : (fun a ↦ f a) = fun a ↦ Mod.regularEndRingHom (s a) := by
+      funext a
+      change Mod.regularEndRingHom (s a) ≫ 𝟙 U = _
+      exact Category.comp_id _
+    change Function.Bijective (fun a ↦ f a)
+    rw [he]
+    exact Mod.regularEndRingHom_bijective.comp hb
+  exact (LinearEquiv.toModuleIso (LinearEquiv.ofBijective f hf)).symm
+
+private def point_line_module_iso
+    (D : WeilConjectures.FiniteFieldDatum.{u})
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ]
+    (L : pointDerived D Λ) (hL : L ≅ 𝟙_ (pointDerived D Λ)) :
+    pointLineSections D Λ L ≅ ModuleCat.of (MonObj.Γ Λ) (MonObj.Γ Λ) := by
+  let F := condensedRingCoefficientSections Λ (pointScheme D)
+  let U := 𝟙_ (pointModules D Λ)
+  exact (DerivedCategory.homologyFunctor (ModuleCat.{u + 1} (MonObj.Γ Λ)) 0).mapIso
+      ((scalarSections D Λ).mapIso
+          (hL ≪≫ (DerivedCategory.singleFunctorObjUnitIso (pointModules D Λ)).symm) ≪≫
+        (TraceCupPoint.exactComparison Λ D.k).app
+          ((DerivedCategory.singleFunctor (pointModules D Λ) 0).obj U) ≪≫
+        (F.mapDerivedCategorySingleFunctor 0).app U) ≪≫
+    (DerivedCategory.singleFunctorCompHomologyFunctorIso
+      (ModuleCat.{u + 1} (MonObj.Γ Λ)) 0).app (F.obj U) ≪≫ point_ordinary_unit_iso D Λ
+
+private theorem point_cup_natural
+    (D : WeilConjectures.FiniteFieldDatum.{u})
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ]
+    {C C' E E' : pointDerived D Λ} (f : C ⟶ C') (g : E ⟶ E') :
+    ((scalarSections D Λ).map f ⊗ₘ (scalarSections D Λ).map g) ≫
+        TraceCupPoint.tensor Λ D.k C' E' =
+      TraceCupPoint.tensor Λ D.k C E ≫ (scalarSections D Λ).map (f ⊗ₘ g) := by
+  let F := condensedRingCoefficientSections Λ (pointScheme D)
+  letI : F.mapDerivedCategory.LaxMonoidal := (TraceCupPoint.tensorData Λ D.k).derived
+  unfold TraceCupPoint.tensor TraceCupPoint.exactTensor
+  simp only [Category.assoc]
+  rw [tensorHom_comp_tensorHom_assoc,
+    (TraceCupPoint.exactComparison Λ D.k).hom.naturality f,
+    (TraceCupPoint.exactComparison Λ D.k).hom.naturality g,
+    ← tensorHom_comp_tensorHom_assoc,
+    Functor.LaxMonoidal.μ_natural_assoc,
+    (TraceCupPoint.exactComparison Λ D.k).inv.naturality]
+
+private theorem line_single_independent
+    (D : WeilConjectures.FiniteFieldDatum.{u})
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ]
+    (L : pointDerived D Λ) (h h' : L ≅ 𝟙_ (pointDerived D Λ)) :
+    (pointLineSingleIso D Λ L h).hom = (pointLineSingleIso D Λ L h').hom := by
+  let F := condensedRingCoefficientSections Λ (pointScheme D)
+  let U := 𝟙_ (pointModules D Λ)
+  let a (h : L ≅ 𝟙_ (pointDerived D Λ)) :=
+    (scalarSections D Λ).mapIso
+        (h ≪≫ (DerivedCategory.singleFunctorObjUnitIso (pointModules D Λ)).symm) ≪≫
+      (TraceCupPoint.exactComparison Λ D.k).app
+        ((DerivedCategory.singleFunctor (pointModules D Λ) 0).obj U) ≪≫
+      (F.mapDerivedCategorySingleFunctor 0).app U
+  exact single_realization_independent
+    (DerivedCategory.singleFunctor (ModuleCat.{u + 1} (MonObj.Γ Λ)) 0)
+    (DerivedCategory.homologyFunctor (ModuleCat.{u + 1} (MonObj.Γ Λ)) 0)
+    (DerivedCategory.singleFunctorCompHomologyFunctorIso
+      (ModuleCat.{u + 1} (MonObj.Γ Λ)) 0) (a h) (a h')
+
+private theorem line_single_natural
+    (D : WeilConjectures.FiniteFieldDatum.{u})
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ]
+    (L : pointDerived D Λ) (h : L ≅ 𝟙_ (pointDerived D Λ))
+    (f : (scalarSections D Λ).obj L ⟶ (scalarSections D Λ).obj L) :
+    (DerivedCategory.singleFunctor (ModuleCat.{u + 1} (MonObj.Γ Λ)) 0).map
+        ((DerivedCategory.homologyFunctor (ModuleCat.{u + 1} (MonObj.Γ Λ)) 0).map f) ≫
+        (pointLineSingleIso D Λ L h).hom =
+      (pointLineSingleIso D Λ L h).hom ≫ f := by
+  let F := condensedRingCoefficientSections Λ (pointScheme D)
+  let U := 𝟙_ (pointModules D Λ)
+  let a := (scalarSections D Λ).mapIso
+        (h ≪≫ (DerivedCategory.singleFunctorObjUnitIso (pointModules D Λ)).symm) ≪≫
+      (TraceCupPoint.exactComparison Λ D.k).app
+        ((DerivedCategory.singleFunctor (pointModules D Λ) 0).obj U) ≪≫
+      (F.mapDerivedCategorySingleFunctor 0).app U
+  exact single_realization_naturality
+    (DerivedCategory.singleFunctor (ModuleCat.{u + 1} (MonObj.Γ Λ)) 0)
+    (DerivedCategory.homologyFunctor (ModuleCat.{u + 1} (MonObj.Γ Λ)) 0)
+    (DerivedCategory.singleFunctorCompHomologyFunctorIso
+      (ModuleCat.{u + 1} (MonObj.Γ Λ)) 0) a a f
+
 /-- Point sections transport, cup compatibility and degreewise Frobenius.
 Source: Steps 1 and 3 of the cited Frobenius proof
 (blueprint: lem-pod-condensed-point-sections-transport).
@@ -812,6 +954,136 @@ theorem point_sections_transport
     [MonObj Λ] [IsCommMonObj Λ]
     (hΛ : IsAdmissibleCoefficient Λ) :
     Nonempty (PointSectionsTransportData D ell Λ hΛ) := by
-  sorry
+  let ρ := pointRhoSectionwise D Λ
+  have hnat {C E : pointDerived D Λ} (f : C ⟶ E) :
+      (scalarSections D Λ).map f ≫ (ρ.app E).hom =
+        (ρ.app C).hom ≫ (scalarSections D Λ).map ((pointAction D Λ).map f) :=
+    ρ.hom.naturality f
+  let τ := pointActionTrivialization D Λ
+  have hrho (C : pointDerived D Λ) :
+      (ρ.app C).hom = (scalarSections D Λ).map (τ.app C).inv := point_rho_hom D Λ C
+  letI : (pointAction D Λ).Monoidal :=
+    Functor.Monoidal.transport
+      (leftDerivedUpperStarIsoMapDerivedCategory Λ (pointGeometricFrobenius D).hom).symm
+  letI : NatTrans.IsMonoidal τ.hom := point_action_trivialization_monoidal D Λ
+  have hdelta (C E : pointDerived D Λ) :
+      (τ.app (C ⊗ E)).inv ≫ (pointDelta D Λ C E).hom =
+        ((τ.app C).inv ⊗ₘ (τ.app E).inv) := by
+    have ht := NatTrans.IsMonoidal.tensor (τ := τ.inv) C E
+    simpa only [Functor.LaxMonoidal.id_μ, Category.id_comp, pointDelta,
+      Iso.symm_hom, Functor.Monoidal.μIso_inv, Category.assoc,
+      Functor.Monoidal.μ_δ, Category.comp_id, Iso.app_inv] using
+      congrArg (fun t ↦ t ≫ (pointDelta D Λ C E).hom) ht
+  have hcup (C E : pointDerived D Λ) :
+      TraceCupPoint.tensor Λ D.k C E ≫ (ρ.app (C ⊗ E)).hom ≫
+          (scalarSections D Λ).map (pointDelta D Λ C E).hom =
+        ((ρ.app C).hom ⊗ₘ (ρ.app E).hom) ≫
+          TraceCupPoint.tensor Λ D.k ((pointAction D Λ).obj C) ((pointAction D Λ).obj E) := by
+    rw [hrho, ← Functor.map_comp, hdelta, ← point_cup_natural, hrho, hrho]
+  have hstrict := realized_tensor_intertwining (pointAction D Λ) (scalarSections D Λ)
+    (TraceCupPoint.tensor Λ D.k) (point_cup_natural D Λ) ρ.hom
+    (fun C E ↦ (pointDelta D Λ C E).hom) hcup
+  have hline (L : pointDerived D Λ)
+      (hL : L ≅ MonoidalCategoryStruct.tensorUnit (pointDerived D Λ))
+      (φL : (pointAction D Λ).obj L ≅ L)
+      (hφ : φL.hom ≫ hL.hom =
+        (pointAction D Λ).map hL.hom ≫ (pointFrobeniusCoefficientUnit D Λ).hom) :
+      (scalarSections D Λ).map hL.hom ≫
+          ((ρ.app (MonoidalCategoryStruct.tensorUnit (pointDerived D Λ))).hom ≫
+            (scalarSections D Λ).map (pointFrobeniusCoefficientUnit D Λ).hom) =
+        ((ρ.app L).hom ≫ (scalarSections D Λ).map φL.hom) ≫
+          (scalarSections D Λ).map hL.hom := by
+    rw [← Category.assoc, hnat, Category.assoc, ← Functor.map_comp, ← hφ,
+      Functor.map_comp, Category.assoc]
+  refine ⟨{
+    rho := fun C ↦ ρ.app C
+    rho_canonical := fun _ ↦ rfl
+    rho_inverse := fun C ↦ ⟨(ρ.app C).hom_inv_id, (ρ.app C).inv_hom_id⟩
+    rho_natural := fun f ↦ hnat f
+    rho_linear := ?_
+    cup_transport := hcup
+    cup_isIso := fun C E ↦ TraceCupPoint.tensor_isIso Λ D.k C E
+    coefficient_unit := ?_
+    strict_intertwining := fun C E H φC φE φH v hv ↦
+      hstrict C E H φC.hom φE.hom φH.hom v hv
+    strict_intertwining_shifted := fun n {C E H} φC φE φH v hv ↦
+      hstrict _ _ _ φC.hom φE.hom φH.hom v hv
+    perfect_evaluation := ?_
+    rank_one := ?_
+    rank_one_frobenius := hline
+    rank_one_cohomology := ?_
+    cohomology_cross_product := ?_
+    trivialization_independent := ?_
+    cross_product_independent := ?_ }⟩
+  · intro C n
+    simp only [Functor.map_zsmul, CategoryTheory.Functor.map_id, Preadditive.zsmul_comp,
+      Preadditive.comp_zsmul, Category.id_comp, Category.comp_id]
+  · have hu := NatTrans.IsMonoidal.unit (τ := τ.inv)
+    have he : (τ.app (𝟙_ (pointDerived D Λ))).inv ≫
+        (pointFrobeniusCoefficientUnit D Λ).hom = 𝟙 (𝟙_ (pointDerived D Λ)) := by
+      simpa only [Functor.LaxMonoidal.id_ε, Category.id_comp, pointFrobeniusCoefficientUnit,
+        Iso.symm_hom, Functor.Monoidal.εIso_inv, Category.assoc,
+        Functor.Monoidal.ε_η, Category.comp_id, Iso.app_inv] using
+        congrArg (fun t ↦ t ≫ (pointFrobeniusCoefficientUnit D Λ).hom) hu
+    rw [hrho, ← Functor.map_comp, he]
+    simp
+  · letI : Fintype D.k₀ := Fintype.ofFinite _
+    letI : Fact D.p.Prime := ⟨D.prime⟩
+    letI : CharP D.k₀ D.p := charP_of_card_eq_prime_pow
+      (by simpa only [Nat.card_eq_fintype_card] using D.card_base.trans D.cardinality_eq)
+    letI : CharP D.k D.p := charP_of_injective_algebraMap' D.k₀ D.p
+    exact ⟨CondensedGeometricPoint.condensed_geometric_point_perfect_general
+      Λ D.k ell D.p hell.symm hΛ, point_perfect_evaluation_agreement D ell hell Λ hΛ⟩
+  · intro L hL
+    refine ⟨ModuleCat.of (condensedScalarRing Λ) (condensedScalarRing Λ),
+      inferInstance, ⟨Module.Basis.singleton (Fin 1) (condensedScalarRing Λ)⟩, ?_⟩
+    exact ⟨(CohomologyTransport.sections Λ (pointScheme D)).mapIso hL ≪≫
+      point_actual_ordinary_unit_iso D Λ⟩
+  · intro L hL j φL hφ
+    simpa only [Functor.map_comp] using
+      congrArg ((DerivedCategory.homologyFunctor
+        (ModuleCat.{u + 1} (MonObj.Γ Λ)) j).map) (hline L hL φL hφ)
+  · intro L hL C j φC φL
+    let R := MonObj.Γ Λ
+    let H := DerivedCategory.homologyFunctor (ModuleCat.{u + 1} R) j
+    let A := (scalarSections D Λ).obj C
+    let V := pointLineSections D Λ L
+    let e := pointLineSingleIso D Λ L hL
+    let f := (ρ.app C).hom ≫ (scalarSections D Λ).map φC.hom
+    let g := (ρ.app L).hom ≫ (scalarSections D Λ).map φL.hom
+    let k := (ρ.app (C ⊗ L)).hom ≫
+      (scalarSections D Λ).map ((pointDelta D Λ C L ≪≫ tensorIso φC φL).hom)
+    have ht : TraceCupPoint.tensor Λ D.k C L ≫ k =
+        (f ⊗ₘ g) ≫ TraceCupPoint.tensor Λ D.k C L := by
+      dsimp only [k, f, g]
+      simp only [Iso.trans_hom, tensorIso_hom, Functor.map_comp, Category.assoc]
+      rw [reassoc_of% hcup C L]
+      rw [← point_cup_natural D Λ φC.hom φL.hom]
+      simp only [tensorHom_comp_tensorHom_assoc]
+    have hn := line_cross_product_naturality R e e f g
+      ((DerivedCategory.homologyFunctor (ModuleCat.{u + 1} R) 0).map g)
+      (line_single_natural D Λ L hL g) j
+    constructor
+    · haveI := line_coefficient_map_isIso R A V (point_line_module_iso D Λ L hL) j
+      haveI := TraceCupPoint.tensor_isIso Λ D.k C L
+      dsimp only [pointCohomologyCrossProduct]
+      infer_instance
+    · change pointCohomologyCrossProduct D Λ L hL C j ≫ H.map k =
+        (H.map f ⊗ₘ
+          (DerivedCategory.homologyFunctor (ModuleCat.{u + 1} R) 0).map g) ≫
+          pointCohomologyCrossProduct D Λ L hL C j
+      unfold pointCohomologyCrossProduct
+      change (Etale.canonicalCoefficientMap R A V j ≫
+        H.map (A ◁ e.hom) ≫ H.map (TraceCupPoint.tensor Λ D.k C L)) ≫ H.map k = _
+      rw [Category.assoc, Category.assoc, ← H.map_comp, ht, H.map_comp]
+      simpa only [Category.assoc, curriedTensor_obj_map] using
+        (congrArg (fun t ↦ t ≫ H.map (TraceCupPoint.tensor Λ D.k C L)) hn).symm
+  · intro L h h' φ
+    simp only [hrho, ← Functor.map_comp]
+    exact congrArg (scalarSections D Λ).map
+      (point_line_conjugation_independent ((τ.app L).inv ≫ φ.hom) h h')
+  · intro L h h' C j
+    have hh := line_single_independent D Λ L h h'
+    simp only [pointCohomologyCrossProduct, hh]
 
 end AlgebraicGeometry.ProEtale.CondensedRing

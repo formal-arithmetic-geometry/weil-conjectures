@@ -74,6 +74,10 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condense
 public import WeilConjectures.SmoothPurity.PurityConventions.PurityConventions
 public import WeilConjectures.AlgebraicGeometry.SectionReesNoetherianGeometry.SectionReesNoetherianGeometry
 public import WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleLocallyConstantSheafOfUniverses
+public import WeilConjectures.AlgebraicGeometry.LocallyConstantPerfectComplex
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.AdmissibleTensorConstructibility
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CtfLocallyClosedPerfectGeneration
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntTensorProjection
 
 /-!
 # Condensed deformation-to-the-normal-cone section invariant
@@ -150,7 +154,12 @@ hell.symm is the required inequality. Only this proposition-only typing fact is
 postponed, with no chosen object or morphism. -/
 theorem dncCharacteristicNe (D : WeilConjectures.FiniteFieldDatum.{u})
     (ell : ℕ) (hell : ell ≠ D.p) : Fact (ringChar D.k ≠ ell) := by
-  sorry
+  letI : Fintype D.k₀ := Fintype.ofFinite D.k₀
+  letI : Fact D.p.Prime := ⟨D.prime⟩
+  letI : CharP D.k₀ D.p := charP_of_card_eq_prime_pow
+    ((Nat.card_eq_fintype_card (α := D.k₀)).symm.trans (D.card_base.trans D.cardinality_eq))
+  letI : CharP D.k D.p := charP_of_injective_algebraMap' D.k₀ D.p
+  exact ⟨by rw [ringChar.eq D.k D.p]; exact Ne.symm hell⟩
 
 section
 variable (D : WeilConjectures.FiniteFieldDatum.{u})
@@ -239,7 +248,16 @@ theorem dncNormalGeometryFacts
     IsSeparated (Scheme.Hom.normalConeProj g.left s.left) ∧
     LocallyOfFiniteType (Scheme.Hom.normalConeProj g.left s.left) ∧
     QuasiCompact (Scheme.Hom.normalConeProj g.left s.left) := by
-  sorry
+  have hsg : s.left ≫ g.left = 𝟙 B.left := congrArg (fun f ↦ f.left) hs
+  letI := Scheme.Hom.smoothOfRelativeDimension_deformationSpaceProj d g.left s.left hsg
+  letI := SmoothOfRelativeDimension.smooth d
+    (Scheme.Hom.deformationSpaceProj g.left s.left)
+  have sq := Scheme.Hom.isPullback_normalConeToDeformationSpace g.left s.left
+  letI := smoothOfRelativeDimension_isStableUnderBaseChange (n := d)
+  exact ⟨MorphismProperty.of_isPullback (P := @SmoothOfRelativeDimension d) sq inferInstance,
+    MorphismProperty.of_isPullback (P := @IsSeparated) sq inferInstance,
+    MorphismProperty.of_isPullback (P := @LocallyOfFiniteType) sq inferInstance,
+    MorphismProperty.of_isPullback (P := @QuasiCompact) sq inferInstance⟩
 
 /-- The condensed module on the normal cone obtained from the actual normal-cone
 projection and zero section. This is the normal-cone object in the statement.
@@ -396,7 +414,9 @@ theorem dncPulledPair_section_retraction
     (g : V ⟶ B) (s : B ⟶ V) (b : B' ⟶ B)
     (hs : s ≫ g = 𝟙 B) :
     (dncPulledPair D g s b hs).s' ≫ (dncPulledPair D g s b hs).g' = 𝟙 B' := by
-  sorry
+  apply Over.OverMorphism.ext
+  change dncPullbackLift D g s b hs ≫ pullback.snd g.left b.left = 𝟙 B'.left
+  exact pullback.lift_snd _ _ _
 
 /-- The canonical pullback pair inherits the geometric hypotheses needed by the
 recorded DNC and section-invariant definitions.  The conclusion refers to the
@@ -424,7 +444,28 @@ theorem dncPulledPairGeometryFacts
     LocallyOfFiniteType (dncPulledPair D g s b hs).V'.hom ∧
     QuasiCompact (dncPulledPair D g s b hs).V'.hom ∧
     IsClosedImmersion (dncPulledPair D g s b hs).s'.left := by
-  sorry
+  change SmoothOfRelativeDimension d (pullback.snd g.left b.left) ∧
+    IsSeparated (pullback.snd g.left b.left) ∧
+    LocallyOfFiniteType (pullback.snd g.left b.left) ∧
+    QuasiCompact (pullback.snd g.left b.left) ∧
+    IsSeparated (pullback.fst g.left b.left ≫ V.hom) ∧
+    LocallyOfFiniteType (pullback.fst g.left b.left ≫ V.hom) ∧
+    QuasiCompact (pullback.fst g.left b.left ≫ V.hom) ∧
+    IsClosedImmersion (dncPullbackLift D g s b hs)
+  letI := smoothOfRelativeDimension_isStableUnderBaseChange (n := d)
+  have hdim : SmoothOfRelativeDimension d (pullback.snd g.left b.left) :=
+    MorphismProperty.of_isPullback (P := @SmoothOfRelativeDimension d)
+      (IsPullback.of_hasPullback g.left b.left) inferInstance
+  have w : pullback.fst g.left b.left ≫ V.hom =
+      pullback.snd g.left b.left ≫ B'.hom := by
+    rw [← g.w, ← Category.assoc, pullback.condition, Category.assoc, b.w]
+  have hsec : IsClosedImmersion
+      (dncPullbackLift D g s b hs ≫ pullback.snd g.left b.left) := by
+    rw [dncPullbackLift, pullback.lift_snd]
+    infer_instance
+  refine ⟨hdim, inferInstance, inferInstance, inferInstance, ?_, ?_, ?_,
+    IsClosedImmersion.of_comp _ (pullback.snd g.left b.left)⟩
+  all_goals rw [w]; infer_instance
 
 /-- The actual DNC family attached to the canonical pulled pair, using its own
 Rees construction and section invariant.
@@ -475,7 +516,7 @@ noncomputable def dncPulledPairFamily
   letI := H.2.2.2.2.2.2.2
   exact condensedDncFamily D B' pair.V' pair.g' pair.s' ell hell
     (AlgebraicGeometry.ProEtale.DiagonalCoefficients.bottomField ell) n hn Λ
-    (Or.inl hcoeff) hpair
+    (Or.inl hcoeff) d hpair
 
 /-- The section invariant of the pulled pair, with the actual pulled section.
 Source: `literature/blueprint/latest/blueprint/sec-smooth-purity/sk-thm-dnc/_section.md`,
@@ -614,7 +655,59 @@ theorem dncPulledPairSquares
     (Scheme.Hom.normalConeProj g.left s.left) b.left ∧
   Scheme.Hom.normalConeZeroSection pair.s'.left ≫ ν =
     b.left ≫ Scheme.Hom.normalConeZeroSection s.left := by
-  sorry
+  let pair := dncPulledPair D g s b hs
+  let H := dncPulledPairGeometryFacts D d g s hs b
+  letI := H.1
+  letI := H.2.1
+  letI := H.2.2.1
+  letI := H.2.2.2.1
+  letI := H.2.2.2.2.1
+  letI := H.2.2.2.2.2.1
+  letI := H.2.2.2.2.2.2.1
+  letI := H.2.2.2.2.2.2.2
+  have hsg : s.left ≫ g.left = 𝟙 B.left := congrArg (fun f ↦ f.left) hs
+  have w : pair.s'.left ≫ pullback.fst g.left b.left = b.left ≫ s.left :=
+    pullback.lift_fst _ _ _
+  let φ := SectionReesBaseChange.pairMap s.left pair.s'.left
+    (pullback.fst g.left b.left) b.left w
+  let ν := dncNormalPairMap s.left pair.s'.left (pullback.fst g.left b.left) b.left w
+  change IsPullback φ (Scheme.Hom.deformationSpaceProj pair.g'.left pair.s'.left)
+      (Scheme.Hom.deformationSpaceProj g.left s.left) (dncBaseChangeMap D b).left ∧
+    pair.s'.left.deformationSpaceSection ≫ φ =
+      (dncBaseChangeMap D b).left ≫ s.left.deformationSpaceSection ∧
+    IsPullback ν (Scheme.Hom.normalConeProj pair.g'.left pair.s'.left)
+      (Scheme.Hom.normalConeProj g.left s.left) b.left ∧
+    Scheme.Hom.normalConeZeroSection pair.s'.left ≫ ν =
+      b.left ≫ Scheme.Hom.normalConeZeroSection s.left
+  obtain ⟨s', hc, w', he, hp, hcompat, _, ν', hν', hpν⟩ :=
+    SectionReesBaseChange.base_change d g.left s.left hsg b.left
+  have he' : s' = pair.s'.left := he
+  clear he
+  subst s'
+  have htotal : IsPullback φ
+      (Scheme.Hom.deformationSpaceProj pair.g'.left pair.s'.left ≫
+        (AffineSpace (ULift.{u} (Fin 1)) B'.left ↘ B'.left))
+      (Scheme.Hom.deformationSpaceProj g.left s.left ≫
+        (AffineSpace (ULift.{u} (Fin 1)) B.left ↘ B.left)) b.left := by
+    simpa only [φ, pair, dncPulledPair, Over.homMk_left,
+      Scheme.Hom.deformationSpaceProj,
+      Scheme.IdealSheafData.deformationSpaceProj_over',
+      Scheme.IdealSheafData.deformationSpaceProj] using hp
+  have hq := IsPullback.of_bot htotal hcompat.1 (AffineSpace.isPullback_map b.left)
+  letI : IsClosedImmersion s.left.ker.normalConeToDeformationSpace :=
+    MorphismProperty.of_isPullback (P := @IsClosedImmersion)
+      (Scheme.Hom.isPullback_normalConeToDeformationSpace g.left s.left).flip inferInstance
+  have hν : ν' = ν := by
+    apply (cancel_mono s.left.ker.normalConeToDeformationSpace).mp
+    exact hν'.trans
+      (Scheme.IdealSheafData.normalConeMap_normalConeToDeformationSpace _ _ _ _).symm
+  rw [hν] at hpν
+  obtain ⟨μ, _, _, hμ, _, hzero, _⟩ := hcompat.2.2.2
+  have hμν : μ = ν := by
+    apply (cancel_mono s.left.ker.normalConeToDeformationSpace).mp
+    exact hμ.trans
+      (Scheme.IdealSheafData.normalConeMap_normalConeToDeformationSpace _ _ _ _).symm
+  exact ⟨hq, hcompat.2.1, hpν, hμν ▸ hzero⟩
 
 /-- Pullback along the affine-line square, from the two composition isomorphisms
 and the actual equation AffineSpace.map_over.

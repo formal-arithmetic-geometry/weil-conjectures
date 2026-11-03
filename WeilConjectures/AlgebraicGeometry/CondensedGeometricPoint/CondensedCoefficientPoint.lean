@@ -232,6 +232,22 @@ private theorem continuous_scalar_properties
   ⟨isNoetherianRing_of_ringEquiv _ (continuous_scalar_coordinates T).symm,
     fun S _ ↦ continuous_scalar_flat T h S⟩
 
+private theorem residue_scalar_properties
+    (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
+    (π : PadicAlgCl.integers ℓ E) (n : ℕ) :
+    scalar_properties (residueRingObj.{u} ℓ E π n) := by
+  let A := PadicAlgCl.integers ℓ E ⧸ (Ideal.span ({π} : Set _)) ^ n
+  let : TopologicalSpace A := ⊥
+  let : DiscreteTopology A := ⟨rfl⟩
+  apply continuous_scalar_properties A
+  intro S
+  rw [show ContinuousMap.C (α := S) (R := A) (A := A) = algebraMap A C(S, A)
+    from rfl, RingHom.flat_algebraMap_iff]
+  apply Module.Flat.of_linearEquiv
+    (LinearEquiv.ofBijective (LocallyConstant.toContinuousMapLinearMap A) ?_).symm
+  exact ⟨LocallyConstant.toContinuousMap_injective,
+    fun f ↦ ⟨⟨f, (IsLocallyConstant.iff_continuous _).2 f.continuous⟩, rfl⟩⟩
+
 private theorem integers_scalar_properties
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) :
     scalar_properties (Profinite.padicIntegersRingObj.{u} ℓ E) := by

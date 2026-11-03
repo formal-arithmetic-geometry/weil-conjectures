@@ -256,6 +256,19 @@ import Mathlib.AlgebraicGeometry.Morphisms.Separated
 import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
+public import WeilConjectures.AlgebraicGeometry.InternalHomDualTorAmplitude
+public import WeilConjectures.AlgebraicGeometry.LocallyConstantPerfectComplex
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.AdmissibleTensorConstructibility
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactSupportComposition.CondensedCompactSupportCompositionData
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CondensedProperProductTranspose
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CtfLocallyClosedPerfectGeneration
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntTensorProjection
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixCtf
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixFiniteGeneration
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixNonfiniteGeneration
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixPerfectExtension
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixTensorComparison
+public import WeilConjectures.SixFunctors.ScalarOpenCompositorCoherence
 
 /-! # Relative Künneth for ordinary condensed coefficients
 
@@ -304,6 +317,29 @@ structure Diagram (k : Type u) [Field k] where
   q : T ⟶ Y
   cartesian : IsPullback p.hom.left q.hom.left f.hom.left g.hom.left
 
+/-- Compactification models for the four compact-support operations in the displayed
+word. Source: the unit's six-arrow formula (blueprint: sk-thm-sf-kunneth-relative). -/
+structure Models (d : Diagram k) where
+  f : Compactification d.f.hom.left
+  g : Compactification d.g.hom.left
+  q : Compactification d.q.hom.left
+  total : Compactification (d.q.hom.left ≫ d.g.hom.left)
+
+/-- External product on the actual ordinary module-derived categories.
+Source: K boxtimes L in the opening paragraph (blueprint: sk-thm-sf-kunneth-relative). -/
+def exterior (d : Diagram k) (K : CompactificationReindexing.D Λ.X d.X.obj.left)
+    (L : CompactificationReindexing.D Λ.X d.Y.obj.left) :
+    CompactificationReindexing.D Λ.X d.T.obj.left :=
+  (CompactificationReindexing.P Λ.X d.p.hom.left).obj K ⊗
+    (CompactificationReindexing.P Λ.X d.q.hom.left).obj L
+
+/-- The canonical inclusion in the localizing closure, used only to evaluate the
+normalized composition and exchange supplied by their owning dependency.
+Source: composition theorem, restriction to Dctf (blueprint: sk-thm-sf-kunneth-relative). -/
+def localizingObject (X : Scheme.{u}) (K : ConstantModelConstructibleFiniteTor Λ.X X) :
+    (localizingClosureProEtale Λ.X X).FullSubcategory :=
+  ⟨K.obj, fun _P _hP hS ↦ hS K.obj K.property⟩
+
 variable (Λ : ScalarSixRing.{u})
 
 /-- The signed symmetry of the existing native derived tensor structure, with its
@@ -311,5 +347,52 @@ braided structure given explicitly because it is not a global instance upstream.
 Source: the two sigma factors (blueprint: sk-thm-sf-kunneth-relative). -/
 def symmetry (X : Scheme.{u}) (K L : CompactificationReindexing.D Λ.X X) : K ⊗ L ≅ L ⊗ K :=
   @BraidedCategory.braiding _ _ _ (DerivedCategory.braidedCategory' _) K L
+
+/-- The canonical tensor comparison of the native derived pullback.
+Source: monoidality in coherence (iii) (blueprint: sk-thm-sf-kunneth-relative). -/
+def pullTensor {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (K L : CompactificationReindexing.D Λ.X Y) :
+    (CompactificationReindexing.P Λ.X f).obj (K ⊗ L) ≅
+      (CompactificationReindexing.P Λ.X f).obj K ⊗
+        (CompactificationReindexing.P Λ.X f).obj L :=
+  (Functor.Monoidal.μIso (CompactificationReindexing.P Λ.X f) K L).symm
+
+/-- Identify successive pullbacks with the pullback along the specified composite.
+Source: pullback compositors in (ii)--(iii) (blueprint: sk-thm-sf-kunneth-relative). -/
+def pullPath {T U X : Scheme.{u}} (a : T ⟶ U) (p : U ⟶ X) (r : T ⟶ X)
+    (e : a ≫ p = r) (K : CompactificationReindexing.D Λ.X X) :
+    (CompactificationReindexing.P Λ.X a).obj
+        ((CompactificationReindexing.P Λ.X p).obj K) ≅
+      (CompactificationReindexing.P Λ.X r).obj K :=
+  ((leftDerivedUpperStarComp Λ.X a p).app K).symm ≪≫
+    eqToIso (congrArg (fun f ↦ (CompactificationReindexing.P Λ.X f).obj K) e)
+
+/-- Interchange the two factors without changing the chosen realization of the product.
+Its identification with the literal swapped fibre product is its universal property.
+Source: coherence (i) (blueprint: sk-thm-sf-kunneth-relative). -/
+def Diagram.swap (d : Diagram k) : Diagram k where
+  B := d.B
+  X := d.Y
+  Y := d.X
+  T := d.T
+  f := d.g
+  g := d.f
+  p := d.q
+  q := d.p
+  cartesian := d.cartesian.flip
+
+/-- Models for the swapped product, using the same total compactification with the
+commutativity identification. Source: (i) (blueprint: sk-thm-sf-kunneth-relative). -/
+def Models.swap {d : Diagram k} (c : Models d) : Models d.swap where
+  f := c.g
+  g := c.f
+  q := compactificationOverField d.p.hom
+  total := c.total.copy d.cartesian.w
+
+/-- The identity second factor, realized on X itself. Source: (iv)
+(blueprint: sk-thm-sf-kunneth-relative). -/
+def identityDiagram {X B : SepFinType k} (f : X ⟶ B)
+    (s : IsPullback (𝟙 X.obj.left) f.hom.left f.hom.left (𝟙 B.obj.left)) : Diagram k :=
+  ⟨B, X, B, X, f, 𝟙 B, 𝟙 X, f, s⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing.RelativeKunneth

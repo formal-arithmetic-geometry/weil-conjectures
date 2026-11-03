@@ -440,6 +440,15 @@ import WeilConjectures.ProperBaseChange.RingedToposDerivedPushforwardComposition
 import WeilConjectures.AlgebraicGeometry.ProperBasic
 import WeilConjectures.Compactification.CompactificationCategory
 import all WeilConjectures.AlgebraicGeometry.Open.OpenExtensionConstantModelConstructible
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Open.ProEtaleOpenClosedSequenceRingSheaf
+public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.AdmissibleTensorConstructibility
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntTensorProjection
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixCtf
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixFiniteGeneration
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixNonfiniteGeneration
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixPerfectExtension
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ScalarSixTensorHom
 
 /-!
 # Open localization of condensed six-functor constructions
@@ -478,10 +487,20 @@ abbrev Modules (Λ : ScalarSixRing.{u}) (X : Scheme.{u}) :=
 (blueprint: lem-sf-condensed-affine-restriction-locality). -/
 abbrev Ambient (Λ : ScalarSixRing.{u}) (X : Scheme.{u}) := DerivedCategory (Modules Λ X)
 
+/-- The exact inverse image, canonically the total derived pullback. Source: Step 2
+(blueprint: lem-sf-condensed-affine-restriction-locality). -/
+abbrev pull (Λ : ScalarSixRing.{u}) {X Y : Scheme.{u}} (f : X ⟶ Y) :=
+  scalarSixPull Λ f
+
 /-- The recorded total derived module pushforward. Source: Step 2
 (blueprint: lem-sf-condensed-affine-restriction-locality). -/
 abbrev push (Λ : ScalarSixRing.{u}) {X Y : Scheme.{u}} (f : X ⟶ Y) :=
   moduleObjectDerivedPushforward Λ.X f
+
+/-- Exact extension by zero, localized termwise. Source: Step 2
+(blueprint: lem-sf-condensed-affine-restriction-locality). -/
+abbrev extension (Λ : ScalarSixRing.{u}) {X Y : Scheme.{u}} (j : X ⟶ Y)
+    [IsOpenImmersion j] := (openImmersionLowerShriek Λ.X j).mapDerivedCategory
 
 /-- The actual proper/open candidate for compact support. Source: Step 2
 (blueprint: lem-sf-condensed-affine-restriction-locality). -/
@@ -502,6 +521,467 @@ abbrev hom (Λ : ScalarSixRing.{u}) (X : Scheme.{u}) (K L : Ambient Λ X) :=
 (blueprint: lem-sf-condensed-affine-restriction-locality). -/
 abbrev evaluation (Λ : ScalarSixRing.{u}) (X : Scheme.{u}) (K L : Ambient Λ X) :
     K ⊗ hom Λ X K L ⟶ L := (derivedTensorHomAdjunction Λ.X K).counit.app L
+
+/-- The canonical K-flat tensor restriction, transported along exact inverse image.
+Source: Step 2, tensor restriction (blueprint: lem-sf-condensed-affine-restriction-locality). -/
+def tensorRestriction (Λ : ScalarSixRing.{u}) {T Z : Scheme.{u}} (w : T ⟶ Z)
+    (K L : Ambient Λ Z) :
+    (pull Λ w).obj (K ⊗ L) ≅ (pull Λ w).obj K ⊗ (pull Λ w).obj L :=
+  let e := leftDerivedUpperStarIsoMapDerivedCategory Λ.X w
+  (e.app (K ⊗ L)).symm ≪≫
+    ((leftDerivedUpperStarTensorIso Λ.X w).app K).app L ≪≫
+      asIso ((e.app K).hom ⊗ₘ (e.app L).hom)
+
+/-- The canonical Hom restriction is the evaluation transpose. There is no choice of an
+unnormalized isomorphism. Source: Step 2, displayed Hom chain
+(blueprint: lem-sf-condensed-affine-restriction-locality). -/
+def homRestriction (Λ : ScalarSixRing.{u}) {T Z : Scheme.{u}} (w : T ⟶ Z)
+    (K L : Ambient Λ Z) :
+    (pull Λ w).obj (hom Λ Z K L) ⟶
+      hom Λ T ((pull Λ w).obj K) ((pull Λ w).obj L) :=
+  (derivedTensorHomAdjunction Λ.X ((pull Λ w).obj K)).homEquiv _ _
+    ((tensorRestriction Λ w K (hom Λ Z K L)).inv ≫
+      (pull Λ w).map (evaluation Λ Z K L))
+
+/-- The open projection arrow, fixed by the unit and tensor restriction.
+Source: Step 2, projection word (blueprint: lem-sf-condensed-affine-restriction-locality). -/
+def openProjection (Λ : ScalarSixRing.{u}) {X Z : Scheme.{u}} (j : X ⟶ Z)
+    [IsOpenImmersion j] (K : Ambient Λ X) (N : Ambient Λ Z) :
+    (extension Λ j).obj (K ⊗ (pull Λ j).obj N) ⟶ (extension Λ j).obj K ⊗ N :=
+  (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ.X j).homEquiv _ _ |>.symm <|
+    (((derivedOpenImmersionLowerShriekUpperStarAdjunction Λ.X j).unit.app K ⊗ₘ
+      𝟙 ((pull Λ j).obj N)) ≫ (tensorRestriction Λ j ((extension Λ j).obj K) N).inv)
+
+/-- The specified open projection arrow is invertible on the ambient category.
+Source: Step 2, open tensor normalization
+(blueprint: lem-sf-condensed-affine-restriction-locality).
+
+Proof: use K-flat total tensor on the slice site. Restriction of the open projection
+is the identity after the open unit. Off the open, source and target vanish. The
+open/closed conservative pair proves invertibility, with no boundedness hypothesis. -/
+theorem openProjection_isIso (Λ : ScalarSixRing.{u}) {X Z : Scheme.{u}} (j : X ⟶ Z)
+    [IsOpenImmersion j] (K : Ambient Λ X) (N : Ambient Λ Z) :
+    IsIso (openProjection Λ j K N) := by
+  let adj := derivedOpenImmersionLowerShriekUpperStarAdjunction Λ.X j
+  have : IsIso adj.unit := inferInstance
+  have : (extension Λ j).Full := adj.fullyFaithfulLOfIsIsoUnit.full
+  have : (extension Λ j).Faithful := adj.fullyFaithfulLOfIsIsoUnit.faithful
+  have hs : (extension Λ j).essImage ((extension Λ j).obj K ⊗ N) :=
+    tensorObj_mem_essImage_mapDerivedCategory_openImmersionLowerShriek Λ.X j K N
+  have : IsIso (adj.counit.app ((extension Λ j).obj K ⊗ N)) :=
+    adj.isIso_counit_app_iff_mem_essImage.mpr hs
+  unfold openProjection
+  rw [Adjunction.homEquiv_counit]
+  infer_instance
+
+private theorem extension_stratum {T Z W : Scheme.{u}} (w : T ⟶ Z)
+    [IsOpenImmersion w] (g : W ⟶ T)
+    (M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))
+    (h : HasFiniteConstantLocalModel Λ W ((upperStar Λ g).obj M)) :
+    HasFiniteConstantLocalModel Λ W
+      ((upperStar Λ (g ≫ w)).obj ((openImmersionLowerShriek Λ w).obj M)) := by
+  have hu := CondensedRing.open_unit_isIso Λ w
+  let eT := (asIso ((openImmersionLowerShriekUpperStarAdjunction Λ w).unit.app M)).symm
+  exact constant_model_of_iso Λ
+    ((upperStarComp Λ g w).app ((openImmersionLowerShriek Λ w).obj M) ≪≫
+      (upperStar Λ g).mapIso eT) h
+
+/-- A generic finite stratification with constant models witnesses constructibility. -/
+private theorem constructible_from_finite_models {X : Scheme.{u}}
+    [CompactSpace X] [QuasiSeparatedSpace X]
+    (S : Scheme.FiniteLocallyClosedStratification X)
+    (hS : ∀ a : Fin S.n, Topology.IsConstructible (S.stratum a))
+    (N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
+    (hN : ∀ a : Fin S.n, HasFiniteConstantLocalModel Λ (S.domain a)
+      ((upperStar Λ (S.immersion a)).obj N)) :
+    IsConstantModelConstructible Λ X N := by
+  let P : (Y : Scheme.{u}) → (Y ⟶ X) → Prop := fun Y f ↦
+    HasFiniteConstantLocalModel Λ Y ((upperStar Λ f).obj N)
+  exact constant_constructible_of_models Λ N (stratified_of_property P S hS hN)
+
+private theorem extension_complement {T Z : Scheme.{u}} (w : T ⟶ Z)
+    [IsOpenImmersion w]
+    (M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T)) :
+    HasFiniteConstantLocalModel Λ _ ((upperStar Λ w.closedComplement).obj
+      ((openImmersionLowerShriek Λ w).obj M)) := by
+  exact constant_model_of_isZero Λ _ (module_pullback_lowerShriek_isZero Λ w
+    w.closedComplement (by rw [w.range_closedComplement]; exact Set.inter_compl_self _) M)
+
+private theorem extension_stratified {T Z : Scheme.{u}} (w : T ⟶ Z)
+    [IsOpenImmersion w] [IsNoetherian Z]
+    (M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))
+    (S : Scheme.FiniteLocallyClosedStratification T)
+    (hS : ∀ a : Fin S.n, HasFiniteConstantLocalModel Λ (S.domain a)
+      ((upperStar Λ (S.immersion a)).obj M)) :
+    IsConstantModelConstructible Λ Z ((openImmersionLowerShriek Λ w).obj M) := by
+  let N := (openImmersionLowerShriek Λ w).obj M
+  let P : (Y : Scheme.{u}) → (Y ⟶ Z) → Prop := fun Y f ↦
+    HasFiniteConstantLocalModel Λ Y ((upperStar Λ f).obj N)
+  exact constructible_from_finite_models Λ (extendedStratification w S)
+    (fun b ↦ IsLocallyClosed.isConstructible_of_noetherianSpace
+      ((extendedStratification w S).isLocallyClosed_stratum b)) N
+    (extendedStratification_property w S P (extension_complement Λ w M)
+      (fun a ↦ extension_stratum Λ w (S.immersion a) M (hS a)))
+
+/-- Forget constructibility of the strata while retaining any specified local property. -/
+private theorem finite_locally_closed_of_stratification {X : Scheme.{u}}
+    (P : (Y : Scheme.{u}) → (Y ⟶ X) → Prop) (S : Scheme.Stratification X)
+    (hS : ∀ a : Fin S.n, P (S.domain a) (S.immersion a)) :
+    ∃ R : Scheme.FiniteLocallyClosedStratification X,
+      ∀ a : Fin R.n, P (R.domain a) (R.immersion a) := by
+  let R : Scheme.FiniteLocallyClosedStratification X :=
+    { n := S.n
+      stratum := S.stratum
+      isLocallyClosed_stratum := S.isLocallyClosed_stratum
+      iUnion_stratum_eq_univ := S.iUnion_stratum_eq_univ
+      pairwise_disjoint_stratum := S.pairwise_disjoint_stratum
+      domain := S.domain
+      immersion := S.immersion
+      isImmersion := S.isImmersion
+      range_immersion := S.range_immersion }
+  exact ⟨R, hS⟩
+
+private theorem extension_given_stratification {T Z : Scheme.{u}}
+    (w : T ⟶ Z) [IsOpenImmersion w] [IsNoetherian Z]
+    (M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))
+    (S : Scheme.Stratification T)
+    (hS : ∀ a : Fin S.n, HasFiniteConstantLocalModel Λ (S.domain a)
+      ((upperStar Λ (S.immersion a)).obj M)) :
+    IsConstantModelConstructible Λ Z ((openImmersionLowerShriek Λ w).obj M) := by
+  let P : (Y : Scheme.{u}) → (Y ⟶ T) → Prop := fun Y f ↦
+    HasFiniteConstantLocalModel Λ Y ((upperStar Λ f).obj M)
+  obtain ⟨R, hR⟩ := finite_locally_closed_of_stratification P S hS
+  exact extension_stratified Λ w M R hR
+
+private theorem finite_stratified_of_constructible {T : Scheme.{u}}
+    [CompactSpace T] [QuasiSeparatedSpace T]
+    (M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))
+    (hM : IsConstantModelConstructible Λ T M) : IsFiniteConstantStratified Λ T M := by
+  classical
+  simpa only [IsConstantModelConstructible, if_pos
+    (show CompactSpace T ∧ QuasiSeparatedSpace T from ⟨inferInstance, inferInstance⟩)] using hM
+
+private theorem extension_constructible {T Z : Scheme.{u}}
+    (w : T ⟶ Z) [IsOpenImmersion w] [IsNoetherian Z] [CompactSpace T]
+    [QuasiSeparatedSpace T]
+    (M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj Λ T))
+    (hM : IsConstantModelConstructible Λ T M) :
+    IsConstantModelConstructible Λ Z ((openImmersionLowerShriek Λ w).obj M) := by
+  classical
+  obtain ⟨S, hS⟩ := finite_stratified_of_constructible Λ M hM
+  exact extension_given_stratification Λ w M S hS
+
+/-- Restriction preserves the exact bounded-constructible and Tor conditions used below.
+Source: Step 2, finite-stratification and tensor tests
+(blueprint: lem-sf-condensed-affine-restriction-locality).
+
+Proof: intersect the finite strata with the open and restrict their finite constant
+presentations and trivializing covers. Exactness restricts cohomology. For any local
+module, extend by zero and use the K-flat tensor comparison to test the same Tor interval.
+For extension by zero, append the closed complement as a zero stratum and apply the open
+projection formula to the same Tor test. The empty open has only the zero object. -/
+theorem open_preserves_ctf (Λ : ScalarSixRing.{u}) {T Z : Scheme.{u}}
+    (w : T ⟶ Z) [IsOpenImmersion w] [IsNoetherian Z] :
+    (∀ K : Ambient Λ Z, ctf Λ Z K → ctf Λ T ((pull Λ w).obj K)) ∧
+    (∀ K : Ambient Λ T, ctf Λ T K → ctf Λ Z ((extension Λ w).obj K)) := by
+  have : TopologicalSpace.NoetherianSpace T := w.isOpenEmbedding.isInducing.noetherianSpace
+  have : CompactSpace T := inferInstance
+  have : QuasiSeparatedSpace T := inferInstance
+  constructor
+  · intro K hK
+    have hc := pullback_bounded_constructible Λ.X w
+      (fun M hM ↦ pullback_constructible Λ.X w M hM) K hK.1
+    have ht := pullback_tor Λ.X w K hK.2
+    let e := (leftDerivedUpperStarIsoMapDerivedCategory Λ.X w).app K
+    have : (constantModelBoundedConstructible Λ.X T).IsClosedUnderIsomorphisms :=
+      (constantModelConstructibleFiniteTor_wellDefined Λ.X T).2.1
+    have : ObjectProperty.IsClosedUnderIsomorphisms
+        (_root_.DerivedCategory.finiteTorAmplitude (Modules Λ T)) :=
+      (constantModelConstructibleFiniteTor_wellDefined Λ.X T).2.2.2.1
+    exact ⟨ObjectProperty.prop_of_iso _ e hc, ObjectProperty.prop_of_iso _ e ht⟩
+  · intro K hK
+    let F := openImmersionLowerShriek Λ.X w
+    have hi := (constantModelConstructibleFiniteTor_wellDefined Λ.X Z).1
+    have hc : constantModelBoundedConstructible Λ.X Z (F.mapDerivedCategory.obj K) := by
+      refine ⟨F.bounded_mapDerivedCategory_obj hK.1.1, fun q ↦ ?_⟩
+      exact ObjectProperty.prop_of_iso (IsConstantModelConstructible Λ.X Z)
+        ((F.mapDerivedCategoryHomologyFunctorIso q).app K)
+        (extension_constructible Λ.X w _ (hK.1.2 q))
+    obtain ⟨a, b, htor⟩ := hK.2
+    refine ⟨hc, a, b, fun M ↦ ?_⟩
+    let M₀ := (_root_.DerivedCategory.singleFunctor (Modules Λ Z) 0).obj M
+    let e := ((upperStar Λ.X w).mapDerivedCategorySingleFunctor 0).app M
+    have h := F.homologyConcentratedIn_mapDerivedCategory_obj
+      (htor ((upperStar Λ.X w).obj M))
+    have : IsIso (openProjection Λ w K M₀) := openProjection_isIso Λ w K M₀
+    exact (_root_.DerivedCategory.homologyConcentratedIn a b).prop_of_iso
+      (F.mapDerivedCategory.mapIso (((curriedTensor _).obj K).mapIso e).symm ≪≫
+        asIso (openProjection Λ w K M₀)) h
+
+/-- Proof fields for tensor/Hom, direct-image, and successive-open normalization.
+Every arrow is an already specified canonical arrow. Source: Step 2
+(blueprint: lem-sf-condensed-affine-restriction-locality). -/
+structure AmbientAssertions (D : WeilConjectures.FiniteFieldDatum.{u})
+    (Λ : ScalarSixRing.{u}) : Prop where
+  hom_isIso : ∀ {T Z : Scheme.{u}} (w : T ⟶ Z) [IsOpenImmersion w]
+
+    [T.Over (Spec (.of D.k))]
+    [LocallyOfFiniteType (T ↘ Spec (.of D.k))]
+    [QuasiCompact (T ↘ Spec (.of D.k))]
+    [Z.Over (Spec (.of D.k))]
+    [LocallyOfFiniteType (Z ↘ Spec (.of D.k))]
+    [QuasiCompact (Z ↘ Spec (.of D.k))]
+    [w.IsOver (Spec (.of D.k))]
+    (K L : Ambient Λ Z), IsIso (homRestriction Λ w K L)
+  hom_naturality : ∀ {T Z : Scheme.{u}} (w : T ⟶ Z) [IsOpenImmersion w]
+    [T.Over (Spec (.of D.k))]
+    [LocallyOfFiniteType (T ↘ Spec (.of D.k))]
+    [QuasiCompact (T ↘ Spec (.of D.k))]
+    [Z.Over (Spec (.of D.k))]
+    [LocallyOfFiniteType (Z ↘ Spec (.of D.k))]
+    [QuasiCompact (Z ↘ Spec (.of D.k))]
+    [w.IsOver (Spec (.of D.k))]
+    {K K' L L' : Ambient Λ Z} (a : K' ⟶ K) (b : L ⟶ L'),
+    (pull Λ w).map (((derivedHom Λ.X Z).map a.op).app L ≫
+        ((derivedHom Λ.X Z).obj (op K')).map b) ≫ homRestriction Λ w K' L' =
+      homRestriction Λ w K L ≫
+        ((derivedHom Λ.X T).map ((pull Λ w).map a).op).app ((pull Λ w).obj L) ≫
+        ((derivedHom Λ.X T).obj (op ((pull Λ w).obj K'))).map ((pull Λ w).map b)
+  hom_successive : ∀ {W T Z : Scheme.{u}} (a : W ⟶ T) (b : T ⟶ Z)
+    [IsOpenImmersion a] [IsOpenImmersion b]
+    [W.Over (Spec (.of D.k))]
+    [LocallyOfFiniteType (W ↘ Spec (.of D.k))]
+    [QuasiCompact (W ↘ Spec (.of D.k))]
+    [T.Over (Spec (.of D.k))]
+    [LocallyOfFiniteType (T ↘ Spec (.of D.k))]
+    [QuasiCompact (T ↘ Spec (.of D.k))]
+    [Z.Over (Spec (.of D.k))]
+    [LocallyOfFiniteType (Z ↘ Spec (.of D.k))]
+    [QuasiCompact (Z ↘ Spec (.of D.k))]
+    [a.IsOver (Spec (.of D.k))]
+    [b.IsOver (Spec (.of D.k))]
+    (K L : Ambient Λ Z),
+    (scalarSixPullComp Λ a b).hom.app (hom Λ Z K L) ≫
+        (pull Λ a).map (homRestriction Λ b K L) ≫
+        homRestriction Λ a ((pull Λ b).obj K) ((pull Λ b).obj L) =
+      homRestriction Λ (a ≫ b) K L ≫
+        ((derivedHom Λ.X W).map ((scalarSixPullComp Λ a b).inv.app K).op).app
+          ((pull Λ (a ≫ b)).obj L) ≫
+        ((derivedHom Λ.X W).obj (op ((pull Λ a).obj ((pull Λ b).obj K)))).map
+          ((scalarSixPullComp Λ a b).hom.app L)
+  tensor_successive : ∀ {W T Z : Scheme.{u}} (a : W ⟶ T) (b : T ⟶ Z)
+    [IsOpenImmersion a] [IsOpenImmersion b]
+    [W.Over (Spec (.of D.k))]
+    [LocallyOfFiniteType (W ↘ Spec (.of D.k))]
+    [QuasiCompact (W ↘ Spec (.of D.k))]
+    [T.Over (Spec (.of D.k))]
+    [LocallyOfFiniteType (T ↘ Spec (.of D.k))]
+    [QuasiCompact (T ↘ Spec (.of D.k))]
+    [Z.Over (Spec (.of D.k))]
+    [LocallyOfFiniteType (Z ↘ Spec (.of D.k))]
+    [QuasiCompact (Z ↘ Spec (.of D.k))]
+    [a.IsOver (Spec (.of D.k))]
+    [b.IsOver (Spec (.of D.k))]
+    (K L : Ambient Λ Z),
+    (scalarSixPullComp Λ a b).hom.app (K ⊗ L) ≫
+        (pull Λ a).map (tensorRestriction Λ b K L).hom ≫
+        (tensorRestriction Λ a ((pull Λ b).obj K) ((pull Λ b).obj L)).hom =
+      (tensorRestriction Λ (a ≫ b) K L).hom ≫
+        ((scalarSixPullComp Λ a b).hom.app K ⊗ₘ
+          (scalarSixPullComp Λ a b).hom.app L)
+  direct : ∀ {X Y X' V : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ V}
+    {u : X' ⟶ X} {v : V ⟶ Y} [IsOpenImmersion u] [IsOpenImmersion v]
+    [X.Over (Spec (.of D.k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of D.k))]
+    [QuasiCompact (X ↘ Spec (.of D.k))]
+    [Y.Over (Spec (.of D.k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))]
+    [QuasiCompact (Y ↘ Spec (.of D.k))]
+    [X'.Over (Spec (.of D.k))]
+    [LocallyOfFiniteType (X' ↘ Spec (.of D.k))]
+    [QuasiCompact (X' ↘ Spec (.of D.k))]
+    [V.Over (Spec (.of D.k))]
+    [LocallyOfFiniteType (V ↘ Spec (.of D.k))]
+    [QuasiCompact (V ↘ Spec (.of D.k))]
+    [f.IsOver (Spec (.of D.k))]
+    [f'.IsOver (Spec (.of D.k))]
+    [u.IsOver (Spec (.of D.k))]
+    [v.IsOver (Spec (.of D.k))]
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    (sq : IsPullback u f' f v), DirectImageRestrictionNormalized Λ.X sq.toCommSq
+  direct_unit : ∀ {X Y X' V : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ V}
+    {u : X' ⟶ X} {v : V ⟶ Y} [IsOpenImmersion u] [IsOpenImmersion v]
+    [X.Over (Spec (.of D.k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of D.k))]
+    [QuasiCompact (X ↘ Spec (.of D.k))]
+    [Y.Over (Spec (.of D.k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))]
+    [QuasiCompact (Y ↘ Spec (.of D.k))]
+    [X'.Over (Spec (.of D.k))]
+    [LocallyOfFiniteType (X' ↘ Spec (.of D.k))]
+    [QuasiCompact (X' ↘ Spec (.of D.k))]
+    [V.Over (Spec (.of D.k))]
+    [LocallyOfFiniteType (V ↘ Spec (.of D.k))]
+    [QuasiCompact (V ↘ Spec (.of D.k))]
+    [f.IsOver (Spec (.of D.k))]
+    [f'.IsOver (Spec (.of D.k))]
+    [u.IsOver (Spec (.of D.k))]
+    [v.IsOver (Spec (.of D.k))]
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    (sq : IsPullback u f' f v) (N : Ambient Λ Y),
+    (pull Λ v).map ((RootCoordinateFace.adjunction Λ.X f).unit.app N) ≫
+        (derivedDirectImageOpenRestriction Λ.X sq.toCommSq).app ((pull Λ f).obj N) =
+      (RootCoordinateFace.adjunction Λ.X f').unit.app ((pull Λ v).obj N) ≫
+        (push Λ f').map ((derivedOpenCoherencePullbackSquare Λ.X sq.toCommSq).hom.app N)
+  direct_counit : ∀ {X Y X' V : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ V}
+    {u : X' ⟶ X} {v : V ⟶ Y} [IsOpenImmersion u] [IsOpenImmersion v]
+    [X.Over (Spec (.of D.k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of D.k))]
+    [QuasiCompact (X ↘ Spec (.of D.k))]
+    [Y.Over (Spec (.of D.k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))]
+    [QuasiCompact (Y ↘ Spec (.of D.k))]
+    [X'.Over (Spec (.of D.k))]
+    [LocallyOfFiniteType (X' ↘ Spec (.of D.k))]
+    [QuasiCompact (X' ↘ Spec (.of D.k))]
+    [V.Over (Spec (.of D.k))]
+    [LocallyOfFiniteType (V ↘ Spec (.of D.k))]
+    [QuasiCompact (V ↘ Spec (.of D.k))]
+    [f.IsOver (Spec (.of D.k))]
+    [f'.IsOver (Spec (.of D.k))]
+    [u.IsOver (Spec (.of D.k))]
+    [v.IsOver (Spec (.of D.k))]
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    (sq : IsPullback u f' f v) (K : Ambient Λ X),
+    (pull Λ f').map ((derivedDirectImageOpenRestriction Λ.X sq.toCommSq).app K) ≫
+        (RootCoordinateFace.adjunction Λ.X f').counit.app ((pull Λ u).obj K) =
+      (derivedOpenCoherencePullbackSquare Λ.X sq.toCommSq).hom.app ((push Λ f).obj K) ≫
+        (pull Λ u).map ((RootCoordinateFace.adjunction Λ.X f).counit.app K)
+  direct_successive : ∀ {X Y X' V X'' W : Scheme.{u}}
+    {f : X ⟶ Y} {f' : X' ⟶ V} {f'' : X'' ⟶ W}
+    {u : X' ⟶ X} {v : V ⟶ Y} {u' : X'' ⟶ X'} {v' : W ⟶ V}
+    [IsOpenImmersion u] [IsOpenImmersion v]
+    [IsOpenImmersion u'] [IsOpenImmersion v']
+    [X.Over (Spec (.of D.k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of D.k))]
+    [QuasiCompact (X ↘ Spec (.of D.k))]
+    [Y.Over (Spec (.of D.k))]
+    [LocallyOfFiniteType (Y ↘ Spec (.of D.k))]
+    [QuasiCompact (Y ↘ Spec (.of D.k))]
+    [X'.Over (Spec (.of D.k))]
+    [LocallyOfFiniteType (X' ↘ Spec (.of D.k))]
+    [QuasiCompact (X' ↘ Spec (.of D.k))]
+    [V.Over (Spec (.of D.k))]
+    [LocallyOfFiniteType (V ↘ Spec (.of D.k))]
+    [QuasiCompact (V ↘ Spec (.of D.k))]
+    [X''.Over (Spec (.of D.k))]
+    [LocallyOfFiniteType (X'' ↘ Spec (.of D.k))]
+    [QuasiCompact (X'' ↘ Spec (.of D.k))]
+    [W.Over (Spec (.of D.k))]
+    [LocallyOfFiniteType (W ↘ Spec (.of D.k))]
+    [QuasiCompact (W ↘ Spec (.of D.k))]
+    [f.IsOver (Spec (.of D.k))]
+    [f'.IsOver (Spec (.of D.k))]
+    [f''.IsOver (Spec (.of D.k))]
+    [u.IsOver (Spec (.of D.k))]
+    [v.IsOver (Spec (.of D.k))]
+    [u'.IsOver (Spec (.of D.k))]
+    [v'.IsOver (Spec (.of D.k))]
+    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+    (sq : IsPullback u f' f v) (sq' : IsPullback u' f'' f' v'),
+    DirectImageSuccessiveRestriction Λ.X sq.toCommSq sq'.toCommSq
+
+/-- Finite-cover locality, phrased for existing ambient arrows. Source: Step 2,
+finite open tests (blueprint: lem-sf-condensed-affine-restriction-locality). -/
+def CoverAssertions (D : WeilConjectures.FiniteFieldDatum.{u}) (Λ : ScalarSixRing.{u}) : Prop :=
+  ∀ (Z : WeilConjectures.SixFunctorSpace D) (I : Type u) [Finite I]
+    (V : I → Scheme.{u}) (w : ∀ i : I, V i ⟶ Z.obj.left)
+    [∀ i : I, IsOpenImmersion (w i)]
+    (_cover : ∀ z : Z.obj.left, ∃ (i : I) (x : V i), (w i).base x = z),
+    (∀ K : Ambient Λ Z.obj.left,
+      ctf Λ Z.obj.left K ↔ ∀ i : I, ctf Λ (V i) ((pull Λ (w i)).obj K)) ∧
+    (∀ {K L : Ambient Λ Z.obj.left} (a : K ⟶ L),
+      (∀ i : I, IsIso ((pull Λ (w i)).map a)) → IsIso a)
+
+/-- Open restriction of internal Hom, K-flat tensor and derived direct image, with the
+normalized unit/counit and successive-open equations (`AmbientAssertions`).
+Source: latest blueprint fix-lem-tensor-adjunction.proof.md, Step 2 and coefficient paragraph;
+steps 1--3 and 13 of the plan of `condensedAffineRestrictionLocality`.
+
+Proof (plan): Cartesian coefficients identify module inverse image with exact inverse image,
+and the open slice comparison with localized adjunction gives exact `j_! ⊣ j^*` with its unit
+and counit. The open adjunction, closedness and the open projection formula give the Hom chain
+`Hom(T, w^*H) ≅ Hom(w_!T, H) ≅ … ≅ Hom(T, RHom(w^*K, w^*L))`; Yoneda turns it into the
+inverse of `homRestriction`, natural in `K`, `L`. For `Rf_*` restrict a K-injective
+representative; the sectionwise comparison is the canonical derived open-restriction
+normalization, and its counit equation (hence its unit equation) descends. Successive opens
+give the same sections after the fibre-product identifications; mate pasting propagates this
+to the tensor, Hom and direct-image words.
+(blueprint: lem-sf-condensed-affine-restriction-locality-ambient-aux) -/
+theorem condensedAffineRestrictionLocality_ambient_aux
+    (D : WeilConjectures.FiniteFieldDatum.{u}) (ell : ℕ) [Fact ell.Prime]
+    (_hell : ell ≠ D.p)
+    (E : Type u) [Field E] [Algebra (Padic ell) E] [FiniteDimensional (Padic ell) E]
+    (n : ℕ) (_hn : 1 ≤ n) (Λ : ScalarSixRing.{u})
+    (_hΛ : Nonempty (Mon.mk Λ.X ≅ Mon.mk (properOpenFiniteCoefficient ell E n)) ∨
+      Nonempty (Mon.mk Λ.X ≅ Mon.mk (properOpenIntegralCoefficient ell E)) ∨
+      Nonempty (Mon.mk Λ.X ≅ Mon.mk (properOpenFieldCoefficient ell E)) ∨
+      Nonempty (Mon.mk Λ.X ≅ Mon.mk (Profinite.padicAlgClRingObj ell))) :
+    AmbientAssertions D Λ := by
+  sorry
+
+/-- Open restriction of the scalar-change comparisons for the listed coefficient maps,
+invertibility of the compact-support scalar map on ctf objects and restriction of the
+exceptional scalar transpose (`ScalarAssertions`).
+Source: latest blueprint fix-lem-tensor-adjunction.proof.md, Step 2 and coefficient paragraph;
+steps 9--12 of the plan of `condensedAffineRestrictionLocality`.
+
+Proof (plan): on restricted K-flat resolutions, balancing identifies the scalar/tensor word
+with its restriction; the scalar/Hom map is the transpose of `S(ev)`, so its square commutes
+by adjunction injectivity. The direct-image scalar map is the unit/counit word of the
+mate-coherence node; restricting its factors and mate pasting gives its square, and with the
+unit-normalized open factor the compact-support map `γ^c`, including its refinement
+equation. Over finitely many affine opens of `Y` each compactification is separated, so the
+separated scalar theorem inverts `γ` chartwise and cover reflection inverts `γ^c` globally.
+Restricting the `γ⁻¹`/counit transpose defining `β` and adjunction injectivity give the
+exceptional square. Uses the ambient, support and cover components.
+(blueprint: lem-sf-condensed-affine-restriction-locality-scalar-aux) -/
+theorem condensedAffineRestrictionLocality_scalar_aux
+    (D : WeilConjectures.FiniteFieldDatum.{u}) (ell : ℕ) [Fact ell.Prime]
+    (_hell : ell ≠ D.p)
+    (E : Type u) [Field E] [Algebra (Padic ell) E] [FiniteDimensional (Padic ell) E]
+    (n : ℕ) (_hn : 1 ≤ n) (Λ : ScalarSixRing.{u})
+    (_hΛ : Nonempty (Mon.mk Λ.X ≅ Mon.mk (properOpenFiniteCoefficient ell E n)) ∨
+      Nonempty (Mon.mk Λ.X ≅ Mon.mk (properOpenIntegralCoefficient ell E)) ∨
+      Nonempty (Mon.mk Λ.X ≅ Mon.mk (properOpenFieldCoefficient ell E)) ∨
+      Nonempty (Mon.mk Λ.X ≅ Mon.mk (Profinite.padicAlgClRingObj ell))) :
+    ScalarAssertions D ell Λ := by
+  sorry
+
+/-- Finite open-cover locality of `D^b_ctf` membership and of invertibility of an existing
+arrow (`CoverAssertions`).
+Source: latest blueprint fix-lem-tensor-adjunction.proof.md, Step 2 and coefficient paragraph;
+steps 4--5 and 13 of the plan of `condensedAffineRestrictionLocality`.
+
+Proof (plan): finite-type schemes are Noetherian. Choose a common cohomology interval and
+refine the local strata `S_ia` to `S_ia ∩ (Z_i \ ⋃_{j<i} Z_j)`; restricting the finite constant
+local models gives global bounded constructibility, and the converse restricts a global
+stratification (`open_preserves_ctf`). For Tor amplitude choose a common interval, test with
+degree-zero modules through `tensorRestriction`, and in the converse extend local test modules
+by zero using `openProjection_isIso`; the empty cover uses `[0,0]`. Isomorphism detection is the
+open-cover reflection theorem applied to the cone, through exact cohomology.
+(blueprint: lem-sf-condensed-affine-restriction-locality-cover-aux) -/
+theorem condensedAffineRestrictionLocality_cover_aux
+    (D : WeilConjectures.FiniteFieldDatum.{u}) (ell : ℕ) [Fact ell.Prime]
+    (_hell : ell ≠ D.p)
+    (E : Type u) [Field E] [Algebra (Padic ell) E] [FiniteDimensional (Padic ell) E]
+    (n : ℕ) (_hn : 1 ≤ n) (Λ : ScalarSixRing.{u})
+    (_hΛ : Nonempty (Mon.mk Λ.X ≅ Mon.mk (properOpenFiniteCoefficient ell E n)) ∨
+      Nonempty (Mon.mk Λ.X ≅ Mon.mk (properOpenIntegralCoefficient ell E)) ∨
+      Nonempty (Mon.mk Λ.X ≅ Mon.mk (properOpenFieldCoefficient ell E)) ∨
+      Nonempty (Mon.mk Λ.X ≅ Mon.mk (Profinite.padicAlgClRingObj ell))) :
+    CoverAssertions D Λ := by
+  sorry
 
 set_option maxHeartbeats 1600000 in
 -- Keep the canonical functor and module instances during elaboration.

@@ -12,6 +12,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.Free
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.MonoidalModule
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactificationReindexing.CondensedCompactificationReindexing
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactKunnethSectionUnit.CompactKunnethSectionModels
 
 /-!
 # Normalization of compact Künneth on closed sections
@@ -234,8 +235,6 @@ private theorem directExchange_transport
   exact isIso_app_of_nativeIdentity Λ X (baseChangeMap Λ sq.toCommSq) K
     (directExchange_transport_atId Λ sq K h)
 
--- These private proof definitions retain the exact inferred native functor instances.
--- Reconstructing their result types independently causes kernel normalization timeouts.
 set_option warn.classDefReducibility false in
 set_option linter.defProp false in
 set_option warn.classDefReducibility false in

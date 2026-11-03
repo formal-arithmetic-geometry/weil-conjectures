@@ -268,6 +268,41 @@ theorem directFrobeniusPointSectionsEvaluation_isIso
     exact isIso_of_reflects_iso _ (forget₂ (ModuleCat (condensedScalarRing Λ)) Ab)
   exact NatIso.isIso_of_isIso_app _
 
+/-- The canonical point-section comparison, the inverse of the explicit linear
+point-adjunction unit at the singleton followed by the inverse final-object map.
+Its data is fixed by `directFrobeniusPointSectionsEvaluation`; only the proof of
+invertibility is postponed.
+Source: Bhatt--Scholze, Examples 4.1.10 and 4.2.11;
+(blueprint: def-weil-frobenius-point-transport). -/
+noncomputable def directFrobeniusPointSectionsEvaluationIso
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ]
+    [IsCommMonObj Λ] (k : Type u) [Field k] [IsAlgClosed k] :
+    ((upperStarFromPoint (Spec (.of k))).mapMod Λ).asEquivalence.functor ⋙
+        CondensedRing.CohomologyTransport.sections Λ (Spec (.of k)) ≅
+      CondensedRing.Evaluation.sections (coherentTopology Profinite.{u}) Λ
+        (⊤_ Profinite.{u}) := by
+  letI := directFrobeniusPointSectionsEvaluation_isIso Λ k
+  exact (asIso (directFrobeniusPointSectionsEvaluation Λ k)).symm
+
+/-- Canonical heart-fibre/sections natural isomorphism.  It is obtained by whiskering
+`directFrobeniusPointSectionsEvaluationIso` with the inverse point equivalence and then
+using its counit; hence it is fixed by the point adjunction.
+Source: the point-topos unit and site comparison above; (blueprint:
+ def-weil-frobenius-point-transport). -/
+noncomputable def directFrobeniusHeartSectionsIso
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ]
+    [IsCommMonObj Λ] (k : Type u) [Field k] [IsAlgClosed k] :
+    AlgebraicGeometry.ProEtale.CondensedGeometricPoint.heartFiber Λ k ≅
+      CondensedRing.CohomologyTransport.sections Λ (Spec (.of k)) := by
+  let e := ((upperStarFromPoint (Spec (.of k))).mapMod Λ).asEquivalence
+  let a := directFrobeniusPointSectionsEvaluationIso Λ k
+  let b := Functor.associator e.inverse e.functor
+      (CondensedRing.CohomologyTransport.sections Λ (Spec (.of k))) ≪≫
+    Functor.isoWhiskerLeft e.inverse a
+  exact b.symm ≪≫ Functor.isoWhiskerRight e.counitIso
+    (CondensedRing.CohomologyTransport.sections Λ (Spec (.of k))) ≪≫
+    Functor.leftUnitor _
+
 /-- The direct condensed derived pullback along geometric Frobenius.
 
 Source: the direct upper-star construction in the blueprint

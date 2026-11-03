@@ -43,6 +43,9 @@ import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
 import Mathlib.RingTheory.Flat.EquationalCriterion
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.TraceCupPoint.CondensedPointTensorDataExists
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.TraceCupPoint.CondensedPointTensorDataUnique
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.FinitePointSectionsExact
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.TraceCupPoint.CondensedPointTensorLeftInverse
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.TraceCupPoint.CondensedPointTensorRightInverse
 
 /-! # Normalized tensor on exact geometric-point sections
 
@@ -140,5 +143,38 @@ def tensor (M N : DerivedCategory
     (fiber Λ k).obj M ⊗ (fiber Λ k).obj N ⟶ (fiber Λ k).obj (M ⊗ N) :=
   ((exactComparison Λ k).hom.app M ⊗ₘ (exactComparison Λ k).hom.app N) ≫
     exactTensor Λ k M N ≫ (exactComparison Λ k).inv.app (M ⊗ N)
+
+/-- Exact point sections preserve relative tensor, with the specified comparison.
+Source: Stacks 07A4 and 03EL (blueprint: def-pod-condensed-point-tensor).
+Proof: final-point evaluation identifies sheafification with evaluation. Thus the
+ordinary section tensor is invertible. The signed total comparison is invertible and
+sends flat-term K-flat models to such models. Localizing its inverse proves the claim. -/
+theorem tensor_isIso (M N : DerivedCategory
+    (Mod (Sheaf (Scheme.ProEt.topology (Spec (.of k))) Ab.{u + 1})
+      (condensedRingObj Λ (Spec (.of k))))) : IsIso (tensor Λ k M N) := by
+  have hd : ∀ (P Q : Mod (Sheaf (Scheme.ProEt.topology (Spec (.of k))) Ab.{u + 1})
+      (condensedRingObj Λ (Spec (.of k))))
+      (x : (condensedRingCoefficientSections Λ (Spec (.of k))).obj P)
+      (y : (condensedRingCoefficientSections Λ (Spec (.of k))).obj Q),
+      ((tensorData Λ k).ordinary.μ P Q).hom (x ⊗ₜ[Γ Λ] y) =
+        (λ_ _).inv ≫ (x ⊗ₘ y) := by
+    unfold tensorData
+    exact (tensorData_existsUnique Λ k).choose_spec.1
+  obtain ⟨l, hl⟩ := tensorData_tensor_left_inverse
+    Λ k (tensorData Λ k) hd M N
+  obtain ⟨r, hr⟩ := tensorData_tensor_right_inverse
+    Λ k (tensorData Λ k) hd M N
+  have hEq : l = r := by
+    calc
+      l = l ≫ 𝟙 _ := (Category.comp_id _).symm
+      _ = l ≫ ((tensorData Λ k).derived.μ M N ≫ r) :=
+        congrArg (fun q => l ≫ q) hr.symm
+      _ = (l ≫ (tensorData Λ k).derived.μ M N) ≫ r :=
+        (Category.assoc _ _ _).symm
+      _ = 𝟙 _ ≫ r := congrArg (fun q => q ≫ r) hl
+      _ = r := Category.id_comp _
+  let : IsIso ((tensorData Λ k).derived.μ M N) := ⟨⟨r, hr, by simpa [hEq] using hl⟩⟩
+  unfold tensor exactTensor
+  infer_instance
 
 end AlgebraicGeometry.ProEtale.CondensedRing.TraceCupPoint
