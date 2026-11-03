@@ -13194,6 +13194,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.MateCompose
 public import WeilConjectures.CategoryTheory.Adjunction.MateCounitIsIso
 public import WeilConjectures.CategoryTheory.Adjunction.MateCube
 public import WeilConjectures.CategoryTheory.Adjunction.MateFixedSquare
+public import WeilConjectures.CategoryTheory.Adjunction.MateHomBasis
 public import WeilConjectures.CategoryTheory.Adjunction.MateIterated
 public import WeilConjectures.CategoryTheory.Adjunction.MateOfNatIsoLeft
 public import WeilConjectures.CategoryTheory.Adjunction.MatePasting
@@ -22807,6 +22808,7 @@ public import WeilConjectures.SmoothPurity.Sf.SfNormalizedInputTransition
 public import WeilConjectures.SmoothPurity.Sf.SfQbarLocalizationShiftDescent
 public import WeilConjectures.SmoothPurity.Sf.SfRationalDirectImageCoefficientCompatibility
 public import WeilConjectures.SmoothPurity.Sf.SfRationalScalarExactOfIntegral
+public import WeilConjectures.SmoothPurity.Sf.SfRationalScalarExtensionHomBasis
 public import WeilConjectures.SmoothPurity.Sf.SfRationalizationKaroubi
 public import WeilConjectures.SmoothPurity.Sf.SfSupportTransitionPresentation
 public import WeilConjectures.SmoothPurity.SfAlgebraicallyClosedCoefficients.SfAlgebraicallyClosedCoefficients
