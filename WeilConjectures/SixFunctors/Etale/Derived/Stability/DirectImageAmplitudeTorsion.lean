@@ -6,9 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.CoproductsOfHomologyProperty
-public import WeilConjectures.ConstructibleSheaf.RestrictScalars
-public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageAmplitude
-public import WeilConjectures.SixFunctors.Etale.Derived.RestrictScalarsLowerStarSingle
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.QuotientCoefficients
 
 /-!
 # Amplitude of the direct image of complexes killed by an integer

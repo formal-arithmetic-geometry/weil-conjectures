@@ -11,6 +11,7 @@ public import WeilConjectures.SixFunctors.NearbyCycles.TraitChangeSplitMono
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.IntegralModelAmbient
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.FiniteComparison.EtaleOrigin
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralReductionConstructible
+public import WeilConjectures.TraceFormula.Specialization.TraitChangeInvariance
 
 /-!
 # The averaging splitting (M2) on the generic slice trait

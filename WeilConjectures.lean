@@ -7357,7 +7357,6 @@ public import WeilConjectures.AlgebraicGeometry.Modules.DeterminantWedgeQuotient
 public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
 public import WeilConjectures.AlgebraicGeometry.Modules.DifferentialsSections
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
-public import WeilConjectures.AlgebraicGeometry.Modules.DualDefs
 public import WeilConjectures.AlgebraicGeometry.Modules.DualFiniteFreeQuotientEmbedding
 public import WeilConjectures.AlgebraicGeometry.Modules.DualLocalEvaluation
 public import WeilConjectures.AlgebraicGeometry.Modules.DualMapLocalRetraction
@@ -18185,7 +18184,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.RefinementLowerShriekPro
 public import WeilConjectures.SixFunctors.Etale.Derived.RestrictScalars
 public import WeilConjectures.SixFunctors.Etale.Derived.RestrictScalarsLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.RestrictScalarsLowerStarHomology
-public import WeilConjectures.SixFunctors.Etale.Derived.RestrictScalarsLowerStarSingle
 public import WeilConjectures.SixFunctors.Etale.Derived.RestrictScalarsTensor
 public import WeilConjectures.SixFunctors.Etale.Derived.RestrictScalarsTorAmplitude
 public import WeilConjectures.SixFunctors.Etale.Derived.RestrictionGenerization
